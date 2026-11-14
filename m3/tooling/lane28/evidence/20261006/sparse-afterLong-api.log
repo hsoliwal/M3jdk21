@@ -1,0 +1,44 @@
+Compiled from "M3LongLane28.java"
+public final class jdk.internal.mindex.M3LongLane28 {
+  public jdk.internal.mindex.M3LongLane28();
+    descriptor: ()V
+
+  public long get(int);
+    descriptor: (I)J
+
+  public void set(int, long);
+    descriptor: (IJ)V
+
+  public long getAndSet(int, long);
+    descriptor: (IJ)J
+
+  public long addAndGet(int, long);
+    descriptor: (IJ)J
+
+  public void clear(int);
+    descriptor: (I)V
+
+  public boolean isBlockAllocated(int);
+    descriptor: (I)Z
+
+  public int allocatedRegionCount();
+    descriptor: ()I
+
+  public int allocatedBlockCount();
+    descriptor: ()I
+
+  public long payloadBytes();
+    descriptor: ()J
+
+  public void fill(int, int, long);
+    descriptor: (IIJ)V
+
+  public void copyTo(int, long[], int, int);
+    descriptor: (I[JII)V
+
+  public void copyFrom(long[], int, int, int);
+    descriptor: ([JIII)V
+
+  public void copyFrom(jdk.internal.mindex.M3LongLane28, int, int, int);
+    descriptor: (Ljdk/internal/mindex/M3LongLane28;III)V
+}

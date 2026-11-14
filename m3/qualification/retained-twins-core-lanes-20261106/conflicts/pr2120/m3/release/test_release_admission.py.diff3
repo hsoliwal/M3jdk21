@@ -1,0 +1,759 @@
+<<<<<<< live
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
+||||||| base
+=======
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
+>>>>>>> retained
+# SPDX-License-Identifier: Apache-2.0
+"""Real-Git regression fixtures for fail-closed product release admission.
+
+The positive evidence below is deliberately synthetic. It proves receipt
+validation only; it is never a release, JDK/JNI, benchmark or recipe receipt.
+"""
+from __future__ import annotations
+
+import contextlib
+import hashlib
+import importlib.util
+<<<<<<< live
+import io
+||||||| base
+=======
+import hashlib
+>>>>>>> retained
+import json
+<<<<<<< live
+import shutil
+import subprocess
+||||||| base
+=======
+import subprocess
+import sys
+>>>>>>> retained
+import tempfile
+import unittest
+from pathlib import Path
+from unittest.mock import patch
+
+MODULE_PATH = Path(__file__).with_name("verify_release_admission.py")
+spec = importlib.util.spec_from_file_location("m3_release_admission", MODULE_PATH)
+release = importlib.util.module_from_spec(spec)
+assert spec.loader is not None
+spec.loader.exec_module(release)
+
+
+class ReleaseAdmissionUnitTest(unittest.TestCase):
+    def test_unique_json_rejects_duplicates(self):
+        with self.assertRaises(ValueError):
+            json.loads('{"a":1,"a":2}', object_pairs_hook=release.unique_object)
+
+    def test_contract_priority_is_exact(self):
+        contract = json.loads((Path(__file__).with_name("release-contract.json")).read_text())
+        self.assertEqual(release.EXPECTED_PRIORITY, contract["priority_order"])
+
+    def test_unqualified_claims_remain_not_claimed(self):
+        contract = json.loads((Path(__file__).with_name("release-contract.json")).read_text())
+        for key in release.UNQUALIFIED_CLAIMS:
+            self.assertEqual("NOT_CLAIMED", contract["current_claims"][key])
+
+    def test_default_evidence_location_matches_visible_queue_contract(self):
+        contract = json.loads((Path(__file__).with_name("release-contract.json")).read_text())
+        self.assertEqual(release.DEFAULT_EVIDENCE, contract["execution_evidence"]["default_manifest"])
+        self.assertEqual(release.DEFAULT_EVIDENCE, "m3/release/queue/current/evidence.json")
+
+    def test_sha256_is_stable(self):
+        with tempfile.TemporaryDirectory() as td:
+            path = Path(td) / "x"
+            path.write_bytes(b"m3\n")
+            self.assertEqual(
+                "3831561589b9de83145d35aebf9d2b55a9843a09e8b7754bedd56173e25b3aa6",
+                release.sha256(path),
+            )
+
+
+<<<<<<< live
+class ReleaseEvidenceGitTest(unittest.TestCase):
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory(prefix="m3-release-test-")
+        self.addCleanup(self.tmp.cleanup)
+        self.root = Path(self.tmp.name) / "repository"
+        self.root.mkdir()
+        self.git("init", "-q")
+        self.write("upstream.txt", "synthetic upstream\n")
+        self.commit("synthetic upstream")
+        upstream = self.git("rev-parse", "HEAD")
+        self.contract = json.loads(Path(__file__).with_name("release-contract.json").read_text())
+        self.contract["release"]["upstream_baseline"] = upstream
+        # these fixtures test receipt integrity; the standalone rule has its own fixture below
+        self.contract.setdefault("standalone", {})["required_for_release"] = False
+        self.write("m3/release/release-contract.json", json.dumps(self.contract))
+        self.write(".gitignore", "/target/\n")
+        self.write("m3/release/queue/.gitignore", "/current/\n")
+        self.write("M3-SYNEXIA-NOTICE.md", "This notice does not relicense\n"
+                   "OpenJDK or JDK-derived source code as Apache-2.0.")
+        self.write("M3-SYNEXIA-RIGHTS.md", "All ownership and all rights not expressly granted by the applicable license")
+        self.write("M3-SYNEXIA-AUTHORS.md", "Synthetic rights fixture; not a product notice")
+        self.write("LICENSE-M3-APACHE-2.0.txt", "Synthetic license fixture")
+        self.write("m3/README.md", "does **not** modify `java.lang.String`\n"
+                   "No speedup, complete compatibility, or full jtreg pass is claimed.")
+        self.write("m3/release/README.md", "Synthetic release fixture")
+        self.write("m3/release/BENCHMARK_AND_COMPATIBILITY_SPEC.md", "No benchmark result")
+        self.write("src/example.java", "class Example {}\n")
+        mapping = {
+            "schema": 1,
+            "porting_invariant": {"receiving_sequence": {
+                "order": release.EXPECTED_RECEIVING_ORDER, "active_phase": "STRING"}},
+            "migration": {"records": [{"id": "fixture.owner", "targets": []}]},
+        }
+        self.write(release.NAME_MAP, json.dumps(mapping))
+        self.repin_queue()
+        self.commit("synthetic release tree")
+        self.evidence_dir = Path(self.tmp.name) / "evidence"
+        self.evidence_dir.mkdir()
+        self.manifest = self.evidence_dir / "evidence.json"
+        self.evidence = {
+            "schema": release.EVIDENCE_SCHEMA,
+            "source_commit": self.git("rev-parse", "HEAD"),
+            "source_tree": self.git("rev-parse", "HEAD^{tree}"),
+            "gates": [],
+        }
+        for ident in self.contract["mandatory_release_gates"]:
+            artifact = self.evidence_dir / (ident + ".log")
+            artifact.write_text("SYNTHETIC VALIDATOR FIXTURE ONLY " + ident + "\n")
+            gate = {
+                "id": ident, "status": "PASS", "exit_code": 0,
+                "owner_repository": release.PRODUCT_REPOSITORY,
+                "command": ["synthetic-fixture", ident],
+                "environment": {"os": "fixture-os", "architecture": "fixture-arch", "toolchain": "fixture-toolchain"},
+                "artifacts": [{"path": artifact.name, "sha256": release.sha256(artifact)}],
+            }
+            if ident == "M3_MAVEN_CONTROL_REACTOR":
+                gate["canonical_recipe"] = {
+                    "repository": release.PRODUCT_REPOSITORY, "commit": "1" * 40,
+                    "recipe_id": "synthetic.fixture.only",
+                }
+            self.evidence["gates"].append(gate)
+
+    def write(self, path, text):
+        file = self.root / path
+        file.parent.mkdir(parents=True, exist_ok=True)
+        file.write_text(text, encoding="utf-8")
+
+    def git(self, *args):
+        return subprocess.check_output(
+            ["git", "-C", str(self.root), "-c", "user.name=Release Fixture",
+             "-c", "user.email=release-fixture@example.invalid", *args],
+            text=True, stderr=subprocess.PIPE).strip()
+
+    def commit(self, message):
+        self.git("add", ".")
+        self.git("commit", "-qm", message)
+
+    def repin_queue(self):
+        raw = (self.root / release.NAME_MAP).read_bytes()
+        blob = hashlib.sha1(b"blob " + str(len(raw)).encode("ascii") + b"\0" + raw).hexdigest()
+        self.write(release.NAME_PLAN, json.dumps({
+            "schema": "M3JDK21_NAME_CONTRACT_PLAN_V1", "authority": release.NAME_MAP,
+            "authority_blob": blob, "operations": [{
+                "mapping_id": "fixture.owner", "state": "QUEUED", "kind": "FORMAT_ONLY",
+                "before_type": "com.m3.Fixture", "after_type": "com.m3.Fixture",
+                "reason": "Excluded synthetic candidate; no product naming change is admitted.",
+            }],
+        }))
+
+    def save_evidence(self):
+        self.manifest.write_text(json.dumps(self.evidence), encoding="utf-8")
+
+    def result(self, release_mode=True):
+        self.save_evidence()
+        return release.validate(self.root, release_mode, self.manifest)
+
+    def assert_blocked(self, result, name=None):
+        self.assertFalse(result["release_ready"], result)
+        if name:
+            self.assertIn(name, {b["name"] for b in result["blockers"]}, result)
+
+    def test_missing_all_execution_evidence_never_reports_ready(self):
+        for mode in (False, True):
+            with self.subTest(release=mode):
+                result = release.validate(self.root, mode, self.manifest)
+                self.assertTrue(result["policy_valid"], result)
+                self.assert_blocked(result, "evidence.manifest")
+                pending = [q for q in result["queue"] if q["id"].startswith("gate:")]
+                self.assertEqual(len(pending), len(self.contract["mandatory_release_gates"]))
+
+    def test_complete_current_synthetic_receipts_validate(self):
+        result = self.result()
+        self.assertTrue(result["policy_valid"], result)
+        self.assertTrue(result["release_ready"], result)
+        queued = [q for q in result["queue"] if q["id"].startswith("naming:")]
+        self.assertEqual(len(queued), 1)
+        self.assertEqual(queued[0]["state"], "QUEUED")
+        self.assertFalse(queued[0]["blocking"])
+        self.assertEqual(result["source_commit"], self.git("rev-parse", "HEAD"))
+
+    def test_missing_one_mandatory_gate_is_not_a_pass(self):
+        removed = self.evidence["gates"].pop()
+        self.assert_blocked(self.result(), "gate:" + removed["id"])
+
+    def test_stale_commit_and_tree_are_refused(self):
+        for key in ("source_commit", "source_tree"):
+            old = self.evidence[key]
+            self.evidence[key] = "a" * 40
+            with self.subTest(field=key):
+                self.assert_blocked(self.result(), "evidence.manifest")
+            self.evidence[key] = old
+
+    def test_dirty_tracked_source_is_refused(self):
+        self.write("src/example.java", "class Changed {}\n")
+        self.assert_blocked(self.result(), "git.clean_source")
+
+    def test_untracked_source_is_refused(self):
+        # Git must return NUL-delimited filenames: newline quoting cannot hide a source.
+        self.write("src/extra\nquoted.java", "class Extra {}\n")
+        self.assert_blocked(self.result(), "git.clean_source")
+
+    def test_untracked_generated_reports_do_not_dirty_source(self):
+        self.write("target/m3-release-proof/generated.json", "{}\n")
+        self.write("m3/release/queue/current/admission.json", "{}\n")
+        self.assertTrue(self.result()["release_ready"])
+
+    def test_default_manifest_in_visible_queue_is_consumed(self):
+        self.save_evidence()
+        destination = self.root / release.DEFAULT_EVIDENCE
+        shutil.copytree(self.evidence_dir, destination.parent)
+        result = release.validate(self.root, True)
+        self.assertTrue(result["release_ready"], result)
+        self.assertEqual(result["evidence_manifest"], str(destination))
+
+    def test_failed_or_noninteger_exit_is_refused(self):
+        entry = self.evidence["gates"][0]
+        for status, code in (("FAIL", 1), ("PENDING", 0), ("PASS", 2), ("PASS", False), ("PASS", "0")):
+            entry["status"], entry["exit_code"] = status, code
+            with self.subTest(status=status, exit=code):
+                self.assert_blocked(self.result(), "gate:" + entry["id"])
+
+    def test_command_and_environment_are_required(self):
+        entry = self.evidence["gates"][0]
+        for field, value in (("command", []), ("environment", {})):
+            old = entry[field]
+            entry[field] = value
+            with self.subTest(field=field):
+                self.assert_blocked(self.result(), "gate:" + entry["id"])
+            entry[field] = old
+
+    def test_missing_artifact_and_digest_mismatch_are_refused(self):
+        entry = self.evidence["gates"][0]
+        artifact = entry["artifacts"][0]
+        file = self.evidence_dir / artifact["path"]
+        file.write_text("changed bytes")
+        self.assert_blocked(self.result(), "gate:" + entry["id"])
+        file.unlink()
+        self.assert_blocked(self.result(), "gate:" + entry["id"])
+
+    def test_artifact_traversal_absolute_and_alias_paths_are_refused(self):
+        entry = self.evidence["gates"][0]
+        for path in ("../outside.log", "/tmp/outside.log", "./log", "logs//x", "logs/../x", "a\\b", "a\nx"):
+            entry["artifacts"][0]["path"] = path
+            with self.subTest(path=path):
+                self.assert_blocked(self.result(), "gate:" + entry["id"])
+
+    def test_artifact_and_manifest_symlinks_are_refused(self):
+        entry = self.evidence["gates"][0]
+        artifact = self.evidence_dir / entry["artifacts"][0]["path"]
+        alias = self.evidence_dir / "alias.log"
+        alias.symlink_to(artifact.name)
+        old = entry["artifacts"][0]["path"]
+        entry["artifacts"][0]["path"] = alias.name
+        self.assert_blocked(self.result(), "gate:" + entry["id"])
+        entry["artifacts"][0]["path"] = old
+        self.save_evidence()
+        alias_manifest = self.evidence_dir / "alias.json"
+        alias_manifest.symlink_to(self.manifest.name)
+        self.assert_blocked(release.validate(self.root, True, alias_manifest), "evidence.manifest")
+
+    def test_duplicate_and_unknown_gate_records_are_refused(self):
+        self.evidence["gates"].append(dict(self.evidence["gates"][0]))
+        self.assert_blocked(self.result(), "evidence.manifest")
+        self.evidence["gates"][-1]["id"] = "NOT_A_REQUIRED_GATE"
+        self.assert_blocked(self.result(), "evidence.manifest")
+
+    def test_malformed_duplicate_nonfinite_and_wrong_json_shapes_are_refused(self):
+        for content in ("{", '{"schema":1,"schema":2}', '{"schema":NaN}', "[]", "null"):
+            self.manifest.write_text(content)
+            with self.subTest(content=content):
+                self.assert_blocked(release.validate(self.root, True, self.manifest), "evidence.manifest")
+
+    def test_missing_required_boundary_file_is_reported_without_crash(self):
+        (self.root / "m3/README.md").unlink()
+        self.assert_blocked(self.result(), "file:m3/README.md")
+
+    def test_malformed_contract_is_reported_without_crash(self):
+        self.write("m3/release/release-contract.json", "[]")
+        self.assert_blocked(self.result(), "contract.read")
+
+    def test_gate_removal_from_contract_cannot_manufacture_readiness(self):
+        self.contract["mandatory_release_gates"] = []
+        self.write("m3/release/release-contract.json", json.dumps(self.contract))
+        self.assert_blocked(self.result(), "contract.mandatory_gates")
+
+    def test_maven_gate_owner_and_recipe_identity_are_required(self):
+        # standalone (2026-10-31): another repository can neither own the gate nor supply its recipe
+        other = "example/another-repository"
+        entry = next(g for g in self.evidence["gates"] if g["id"] == release.MAVEN_GATE)
+        entry["owner_repository"] = other
+        self.assert_blocked(self.result(), "gate:" + release.MAVEN_GATE)
+        entry["owner_repository"] = release.PRODUCT_REPOSITORY
+        entry["canonical_recipe"]["repository"] = other
+        self.assert_blocked(self.result(), "gate:" + release.MAVEN_GATE)
+        del entry["canonical_recipe"]
+        self.assert_blocked(self.result(), "gate:" + release.MAVEN_GATE)
+
+    def test_contract_naming_another_maven_gate_owner_is_refused(self):
+        self.contract["execution_evidence"]["gate_owners"][release.MAVEN_GATE] = "example/another-repository"
+        self.write("m3/release/release-contract.json", json.dumps(self.contract))
+        self.assert_blocked(self.result(), "contract.recipe_owner")
+
+    def test_contract_delegating_any_other_gate_to_another_repository_is_refused(self):
+        # review of #2236: the owner rule covers every gate, not only the Maven gate; the delegating contract is
+        # amended into the single release commit and the evidence re-pinned, so the delegation is the only change
+        other = "example/another-repository"
+        ident = next(g for g in self.contract["mandatory_release_gates"] if g != release.MAVEN_GATE)
+        self.contract["execution_evidence"]["gate_owners"][ident] = other
+        self.write("m3/release/release-contract.json", json.dumps(self.contract))
+        self.git("add", ".")
+        self.git("commit", "--amend", "-qm", "synthetic release tree delegating " + ident)
+        self.evidence["source_commit"] = self.git("rev-parse", "HEAD")
+        self.evidence["source_tree"] = self.git("rev-parse", "HEAD^{tree}")
+        entry = next(g for g in self.evidence["gates"] if g["id"] == ident)
+        for owner, expected in ((other, {"contract.recipe_owner", "gate:" + ident}),
+                                (release.PRODUCT_REPOSITORY, {"contract.recipe_owner"})):
+            entry["owner_repository"] = owner
+            with self.subTest(evidence_owner=owner):
+                result = self.result()
+                self.assertFalse(result["policy_valid"], result)
+                self.assertFalse(result["release_ready"], result)
+                self.assertEqual(expected, {b["name"] for b in result["blockers"]}, result)
+
+    def test_retained_legacy_recipe_sources_remain_visible_holds(self):
+        self.write("m3/recipes/apply.py", "# synthetic legacy recipe fixture\n")
+        self.git("add", ".")
+        self.git("commit", "--amend", "-qm", "synthetic legacy tree")
+        self.evidence["source_commit"] = self.git("rev-parse", "HEAD")
+        self.evidence["source_tree"] = self.git("rev-parse", "HEAD^{tree}")
+        result = self.result()
+        self.assertTrue(result["policy_valid"], result)
+        self.assert_blocked(result, "legacy_recipe_custody")
+        row = next(q for q in result["queue"] if q["id"] == "legacy_recipe_custody")
+        self.assertEqual(row["state"], "HOLD")
+        self.assertEqual(row["paths"], ["m3/recipes/apply.py"])
+
+    def test_name_queue_map_drift_and_self_promotion_are_refused(self):
+        plan = json.loads((self.root / release.NAME_PLAN).read_text())
+        plan["authority_blob"] = "a" * 40
+        self.write(release.NAME_PLAN, json.dumps(plan))
+        self.assert_blocked(self.result(), "name_queue")
+        self.repin_queue()
+        plan = json.loads((self.root / release.NAME_PLAN).read_text())
+        plan["operations"][0]["state"] = "QUALIFIED"
+        self.write(release.NAME_PLAN, json.dumps(plan))
+        self.assert_blocked(self.result(), "name_queue")
+
+    def test_existing_single_fork_commit_requirement_is_preserved(self):
+        self.write("next.txt", "another commit\n")
+        self.commit("synthetic successor")
+        self.evidence["source_commit"] = self.git("rev-parse", "HEAD")
+        self.evidence["source_tree"] = self.git("rev-parse", "HEAD^{tree}")
+        for mode in (False, True):
+            with self.subTest(release=mode):
+                self.assert_blocked(self.result(mode), "git.single_release_commit")
+
+    def test_standalone_rule_refuses_release_while_the_contract_needs_another_repository(self):
+        # the contract still names another repository as the M3_MAVEN_CONTROL_REACTOR owner: not standalone
+        self.contract["standalone"]["required_for_release"] = True
+        self.write("m3/release/release-contract.json", json.dumps(self.contract))
+        self.repin_queue()
+        self.commit("enforce the standalone rule")
+        self.evidence["source_commit"] = self.git("rev-parse", "HEAD")
+        self.evidence["source_tree"] = self.git("rev-parse", "HEAD^{tree}")
+        result = self.result(True)
+        self.assert_blocked(result, "standalone.no_external_repo_dependency")
+        detail = next(b["detail"] for b in result["blockers"] if b["name"] == "standalone.no_external_repo_dependency")
+        self.assertIn("D_REPO_REF=", detail)
+
+    def test_cli_distinguishes_policy_pass_from_release_acceptance_and_writes_queue(self):
+        report = Path(self.tmp.name) / "reports" / "admission.json"
+        queue = report.with_name("QUEUE.md")
+        args = ["--root", str(self.root), "--evidence", str(self.manifest),
+                "--json-out", str(report), "--queue-out", str(queue)]
+        with contextlib.redirect_stdout(io.StringIO()):
+            self.assertEqual(release.main(args), 0)
+            self.assertEqual(release.main(args + ["--release"]), 1)
+        self.assertFalse(json.loads(report.read_text())["release_ready"])
+        text = queue.read_text()
+        self.assertIn("M3JDK21 release queue", text)
+        self.assertIn("PENDING", text)
+        self.assertIn("QUEUED", text)
+        self.assertIn(self.git("rev-parse", "HEAD"), text)
+
+
+||||||| base
+=======
+class ReleaseEvidenceUnitTest(unittest.TestCase):
+    """Synthetic proof packs test admission mechanics, never platform qualification."""
+
+    HEAD = "a" * 40
+    TREE = "b" * 40
+    PLATFORM = "linux-x64"
+
+    def setUp(self):
+        self.temp = tempfile.TemporaryDirectory()
+        self.addCleanup(self.temp.cleanup)
+        self.root = Path(self.temp.name) / "repo"
+        self.root.mkdir()
+        for relative in release.REQUIRED_FILES:
+            path = self.root / relative
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_text("synthetic test fixture\n", encoding="utf-8")
+        self.contract_path = self.root / "m3/release/release-contract.json"
+        (self.root / "m3/release/verify_release_admission.py").write_bytes(MODULE_PATH.read_bytes())
+        self.contract = json.loads(MODULE_PATH.with_name("release-contract.json").read_text())
+        self.save_contract()
+        (self.root / "M3-SYNEXIA-NOTICE.md").write_text(
+            "This notice does not relicense\nOpenJDK or JDK-derived source code as Apache-2.0.\n")
+        (self.root / "M3-SYNEXIA-RIGHTS.md").write_text(
+            "All ownership and all rights not expressly granted by the applicable license\n")
+        (self.root / "m3/README.md").write_text(
+            "does **not** modify `java.lang.String`\n"
+            "No speedup, complete compatibility, or full jtreg pass is claimed.\n")
+        mapping = self.root / "m3/docs/name-mapping.json"
+        mapping.parent.mkdir()
+        mapping.write_text(json.dumps({"porting_invariant": {"receiving_sequence": {
+            "order": release.EXPECTED_RECEIVING_ORDER, "active_phase": "STRING"}}}))
+        self.pack = Path(self.temp.name) / "synthetic-proof"
+        self.pack.mkdir()
+        artifact = self.pack / "synthetic-image.txt"
+        artifact.write_text("SYNTHETIC TEST IMAGE, NOT A JDK BUILD\n")
+        self.data = {
+            "schema": "M3_RELEASE_EVIDENCE_V1", "source_commit": self.HEAD,
+            "source_tree": self.TREE, "platform": self.PLATFORM,
+            "artifacts": [{"path": artifact.name, "sha256": release.sha256(artifact)}],
+            "gates": [],
+        }
+        for name in release.EXPECTED_RELEASE_GATES:
+            proof = self.pack / (name + ".log")
+            proof.write_text("SYNTHETIC RECEIPT FIXTURE: " + name + "\n")
+            self.data["gates"].append({
+                "name": name, "status": "PASS", "exit_code": 0, "tests_run": 1,
+                "command": ["fixture-only", name], "environment": {"runner": "synthetic"},
+                "proofs": [{"path": proof.name, "sha256": release.sha256(proof)}],
+            })
+        self.manifest = self.pack / "evidence.json"
+
+    def save_contract(self):
+        self.contract_path.write_text(json.dumps(self.contract), encoding="utf-8")
+
+    def fake_git(self, root, *args):
+        if args == ("rev-parse", "HEAD"):
+            return self.HEAD
+        if args == ("rev-parse", "HEAD^{tree}"):
+            return self.TREE
+        if args == ("merge-base", "HEAD", self.contract["release"]["upstream_baseline"]):
+            return self.contract["release"]["upstream_baseline"]
+        if args == ("status", "--porcelain=v1", "--untracked-files=no"):
+            return ""
+        if args == ("ls-files", "--others", "-z"):
+            return ""
+        if len(args) == 4 and args[:3] == ("ls-tree", "HEAD", "--"):
+            raw = (self.root / args[3]).read_bytes()
+            blob = hashlib.sha1(b"blob " + str(len(raw)).encode() + b"\0" + raw).hexdigest()
+            return f"100644 blob {blob}\t{args[3]}"
+        raise AssertionError("unexpected git command: " + repr(args))
+
+    def inspect(self, *, evidence=True, release_mode=True, platform=PLATFORM):
+        self.manifest.write_text(json.dumps(self.data), encoding="utf-8")
+        with patch.object(release, "git", side_effect=self.fake_git):
+            return release.validate(self.root, release_mode=release_mode,
+                                    evidence=self.manifest if evidence else None,
+                                    platform=platform)
+
+    def assertBlocked(self, result, expected=None):
+        self.assertFalse(result["release_ready"])
+        self.assertTrue(result["blockers"], result)
+        if expected:
+            self.assertTrue(any(expected in row["name"] for row in result["blockers"]), result)
+
+    def test_source_only_development_never_claims_release_ready(self):
+        result = self.inspect(evidence=False, release_mode=False)
+        self.assertTrue(result["source_admissible"], result)
+        self.assertFalse(result["release_ready"])
+        self.assertFalse(result["blockers"])
+
+    def test_release_requires_gate_evidence(self):
+        self.assertBlocked(self.inspect(evidence=False), "evidence.required")
+
+    def test_complete_synthetic_pack_is_admitted_only_for_its_exact_scope(self):
+        result = self.inspect()
+        self.assertTrue(result["release_ready"], result)
+        self.assertEqual(self.PLATFORM, result["platform"])
+        self.assertEqual("LOCAL_PROOF_PACK_INTEGRITY_NOT_REMOTE_ATTESTATION", result["admission_scope"])
+        self.assertFalse(self.inspect(release_mode=False)["release_ready"])
+
+    def test_receipt_commands_remain_opaque_data(self):
+        marker = self.pack / "must-not-execute"
+        self.data["gates"][0]["command"] = [sys.executable, "-c", f"open({str(marker)!r}, 'w').close()"]
+        self.assertTrue(self.inspect()["release_ready"])
+        self.assertFalse(marker.exists())
+
+    def test_every_missing_gate_blocks(self):
+        original = list(self.data["gates"])
+        for index in range(len(original)):
+            with self.subTest(gate=original[index]["name"]):
+                self.data["gates"] = original[:index] + original[index + 1:]
+                self.assertBlocked(self.inspect())
+
+    def test_every_failed_skipped_pending_or_unknown_gate_blocks(self):
+        for gate in self.data["gates"]:
+            for status in ("FAIL", "SKIP", "PENDING", "UNKNOWN", "pass", None):
+                with self.subTest(gate=gate["name"], status=status):
+                    gate["status"] = status
+                    self.assertBlocked(self.inspect(), "evidence.gate:")
+            gate["status"] = "PASS"
+
+    def test_duplicate_unknown_and_nonobject_gates_block(self):
+        original = self.data["gates"][0]
+        for replacement in (self.data["gates"][1], {"name": "UNKNOWN"}, None, []):
+            with self.subTest(replacement=replacement):
+                self.data["gates"][0] = replacement
+                self.assertBlocked(self.inspect())
+        self.data["gates"][0] = original
+
+    def test_zero_or_noninteger_test_counts_block_every_test_gate(self):
+        for gate in self.data["gates"]:
+            if gate["name"] not in release.TEST_GATES:
+                continue
+            for count in (0, -1, True, "1", None):
+                with self.subTest(gate=gate["name"], count=count):
+                    gate["tests_run"] = count
+                    self.assertBlocked(self.inspect())
+            gate["tests_run"] = 1
+
+    def test_nonzero_or_boolean_exit_code_blocks(self):
+        for code in (1, -1, True, False, "0", None):
+            with self.subTest(code=code):
+                self.data["gates"][0]["exit_code"] = code
+                self.assertBlocked(self.inspect())
+
+    def test_empty_command_environment_or_proofs_block(self):
+        gate = self.data["gates"][0]
+        for key, values in {"command": [[], "cmd", [""]],
+                            "environment": [{}, {"runner": ""}, []],
+                            "proofs": [[], [None], "log"]}.items():
+            original = gate[key]
+            for value in values:
+                with self.subTest(key=key, value=value):
+                    gate[key] = value
+                    self.assertBlocked(self.inspect())
+            gate[key] = original
+
+    def test_stale_commit_tree_or_platform_blocks(self):
+        for key in ("source_commit", "source_tree", "platform"):
+            original = self.data[key]
+            self.data[key] = "different"
+            self.assertBlocked(self.inspect())
+            self.data[key] = original
+        for platform in (None, "../linux", "linux-x64/extra", "linux--x64", "macos-arm64"):
+            self.assertBlocked(self.inspect(platform=platform))
+
+    def test_each_proof_hash_is_checked(self):
+        for gate in self.data["gates"]:
+            original = gate["proofs"][0]["sha256"]
+            gate["proofs"][0]["sha256"] = "0" * 64
+            self.assertBlocked(self.inspect())
+            gate["proofs"][0]["sha256"] = original
+
+    def test_missing_empty_changed_or_duplicate_product_artifact_blocks(self):
+        original = list(self.data["artifacts"])
+        for artifacts in ([], original * 2, [{"path": "missing", "sha256": "0" * 64}]):
+            self.data["artifacts"] = artifacts
+            self.assertBlocked(self.inspect())
+        self.data["artifacts"] = original
+        (self.pack / original[0]["path"]).write_bytes(b"")
+        self.assertBlocked(self.inspect())
+        (self.pack / original[0]["path"]).write_bytes(b"changed image")
+        self.assertBlocked(self.inspect())
+
+    def test_unsafe_paths_and_symlinks_block(self):
+        proof = self.data["gates"][0]["proofs"][0]
+        original = proof["path"]
+        for path in ("../outside.log", "/absolute.log", "a/../b", "./log", "a//b", "a\\b", ""):
+            with self.subTest(path=path):
+                proof["path"] = path
+                self.assertBlocked(self.inspect())
+        proof["path"] = "linked.log"
+        (self.pack / "linked.log").symlink_to(self.pack / original)
+        self.assertBlocked(self.inspect())
+
+    def test_manifest_schema_unknown_fields_and_duplicates_block(self):
+        self.data["extra"] = "unrecognized"
+        self.assertBlocked(self.inspect())
+        del self.data["extra"]
+        self.data["schema"] = "other"
+        self.assertBlocked(self.inspect())
+        self.manifest.write_text('{"schema":"a","schema":"b"}')
+        with patch.object(release, "git", side_effect=self.fake_git):
+            self.assertBlocked(release.validate(self.root, True, self.manifest, self.PLATFORM))
+
+    def test_oversized_manifest_and_proof_block(self):
+        self.manifest.write_bytes(b" " * (release.MAX_EVIDENCE_BYTES + 1))
+        with patch.object(release, "git", side_effect=self.fake_git):
+            self.assertBlocked(release.validate(self.root, True, self.manifest, self.PLATFORM))
+        proof = self.pack / self.data["gates"][0]["proofs"][0]["path"]
+        with proof.open("wb") as stream:
+            stream.truncate(release.MAX_PROOF_BYTES + 1)
+        self.assertBlocked(self.inspect())
+
+    def test_contract_cannot_remove_or_duplicate_mandatory_gates(self):
+        original = self.contract["mandatory_release_gates"]
+        for gates in ([], original[:-1], original + [original[0]]):
+            self.contract["mandatory_release_gates"] = gates
+            self.save_contract()
+            self.assertBlocked(self.inspect(), "contract.mandatory_release_gates")
+
+    def test_malformed_contract_and_missing_boundary_file_fail_closed(self):
+        self.contract_path.write_text("[]")
+        self.assertBlocked(self.inspect(), "contract.read")
+        self.contract_path.write_text("{")
+        self.assertBlocked(self.inspect(), "contract.read")
+        self.save_contract()
+        (self.root / "M3-SYNEXIA-NOTICE.md").unlink()
+        self.assertBlocked(self.inspect(), "file:")
+
+    def test_dirty_tracked_source_blocks(self):
+        def dirty(root, *args):
+            return " M changed.java" if args[0] == "status" else self.fake_git(root, *args)
+        self.manifest.write_text(json.dumps(self.data))
+        with patch.object(release, "git", side_effect=dirty):
+            self.assertBlocked(release.validate(self.root, True, self.manifest, self.PLATFORM), "git.worktree")
+
+    def initialize_source_checkout(self):
+        def command(*args):
+            return subprocess.check_output(["git", "-C", str(self.root), *args], text=True,
+                                           stderr=subprocess.STDOUT).strip()
+        command("init", "--quiet")
+        command("config", "user.name", "Synthetic Test")
+        command("config", "user.email", "synthetic@example.invalid")
+        command("config", "commit.gpgsign", "false")
+        command("config", "core.autocrlf", "false")
+        command("add", ".")
+        command("commit", "--quiet", "-m", "synthetic baseline")
+        self.contract["release"]["upstream_baseline"] = command("rev-parse", "HEAD")
+        self.save_contract()
+        command("add", ".")
+        command("commit", "--quiet", "-m", "append release contract")
+        (self.root / "follow-up.txt").write_text("append, never squash\n")
+        command("add", ".")
+        command("commit", "--quiet", "-m", "append follow-up")
+        self.data["source_commit"] = command("rev-parse", "HEAD")
+        self.data["source_tree"] = command("rev-parse", "HEAD^{tree}")
+        self.manifest.write_text(json.dumps(self.data))
+        return command
+
+    def test_append_only_history_with_multiple_commits_is_accepted(self):
+        self.initialize_source_checkout()
+        result = release.validate(self.root, True, self.manifest, self.PLATFORM)
+        self.assertTrue(result["release_ready"], result)
+        cli = [sys.executable, "-B", str(MODULE_PATH), "--root", str(self.root)]
+        admitted = subprocess.run(cli + ["--release", "--evidence", str(self.manifest),
+                                        "--platform", self.PLATFORM], capture_output=True, text=True)
+        self.assertEqual(0, admitted.returncode, admitted.stdout + admitted.stderr)
+        refused = subprocess.run(cli + ["--release"], capture_output=True, text=True)
+        self.assertEqual(1, refused.returncode, refused.stdout + refused.stderr)
+        development = subprocess.run(cli, capture_output=True, text=True)
+        self.assertEqual(0, development.returncode)
+        self.assertFalse(json.loads(development.stdout)["release_ready"])
+        (self.root / "M3-SYNEXIA-NOTICE.md").write_text("invalid notice")
+        invalid_source = subprocess.run(cli, capture_output=True, text=True)
+        self.assertEqual(1, invalid_source.returncode, invalid_source.stdout + invalid_source.stderr)
+
+    def test_cli_outputs_cannot_overwrite_inputs_or_alias_each_other(self):
+        self.initialize_source_checkout()
+        image = self.pack / self.data["artifacts"][0]["path"]
+        proof = self.pack / self.data["gates"][0]["proofs"][0]["path"]
+        alias = self.pack / "image-hardlink.txt"
+        alias.hardlink_to(image)
+        symlink = self.pack / "image-symlink.txt"
+        symlink.symlink_to(image)
+        cli = [sys.executable, "-B", str(MODULE_PATH), "--root", str(self.root),
+               "--release", "--evidence", str(self.manifest), "--platform", self.PLATFORM]
+        for flag in ("--json-out", "--sha256-out"):
+            for path in (image, proof, self.manifest, alias, symlink, self.root / "M3-SYNEXIA-NOTICE.md"):
+                with self.subTest(flag=flag, path=path.name):
+                    before = path.read_bytes()
+                    result = subprocess.run(cli + [flag, str(path)], capture_output=True, text=True)
+                    self.assertEqual(1, result.returncode, result.stdout + result.stderr)
+                    self.assertFalse(json.loads(result.stdout)["release_ready"])
+                    self.assertEqual(before, path.read_bytes())
+        same = self.pack / "same-output.json"
+        result = subprocess.run(cli + ["--json-out", str(same), "--sha256-out", str(same)],
+                                capture_output=True, text=True)
+        self.assertEqual(1, result.returncode)
+        self.assertFalse(same.exists())
+        inside = self.root / "new-admission.json"
+        result = subprocess.run(cli + ["--json-out", str(inside)], capture_output=True, text=True)
+        self.assertEqual(1, result.returncode)
+        self.assertFalse(inside.exists())
+        result_file, checksum_file = self.pack / "admission.json", self.pack / "SHA256SUMS"
+        result = subprocess.run(cli + ["--json-out", str(result_file), "--sha256-out", str(checksum_file)],
+                                capture_output=True, text=True)
+        self.assertEqual(0, result.returncode, result.stdout + result.stderr)
+        self.assertTrue(json.loads(result_file.read_text())["release_ready"])
+        self.assertTrue(checksum_file.read_text())
+
+    def test_untracked_and_ignored_source_files_block_release(self):
+        command = self.initialize_source_checkout()
+        source = self.root / "src/Injected.java"
+        source.parent.mkdir()
+        source.write_text("class Injected {}")
+        self.assertBlocked(release.validate(self.root, True, self.manifest, self.PLATFORM), "git.untracked_source")
+        source.unlink()
+        (self.root / ".gitignore").write_text("src/Injected.java\n")
+        command("add", ".gitignore")
+        command("commit", "--quiet", "-m", "synthetic ignored source witness")
+        source.write_text("class Injected {}")
+        self.data["source_commit"] = command("rev-parse", "HEAD")
+        self.data["source_tree"] = command("rev-parse", "HEAD^{tree}")
+        self.manifest.write_text(json.dumps(self.data))
+        self.assertBlocked(release.validate(self.root, True, self.manifest, self.PLATFORM), "git.untracked_source")
+
+    def test_tracked_symlink_boundary_inputs_block_release(self):
+        command = self.initialize_source_checkout()
+        original = self.contract_path.read_bytes()
+        external = self.pack / "external-contract.json"
+        external.write_bytes(original)
+        self.contract_path.unlink()
+        self.contract_path.symlink_to(external)
+        command("add", ".")
+        command("commit", "--quiet", "-m", "synthetic symlink witness")
+        self.data["source_commit"] = command("rev-parse", "HEAD")
+        self.data["source_tree"] = command("rev-parse", "HEAD^{tree}")
+        self.manifest.write_text(json.dumps(self.data))
+        self.assertBlocked(release.validate(self.root, True, self.manifest, self.PLATFORM), "git.input:m3/release/release-contract.json")
+
+    def test_boundary_blob_drift_and_verifier_identity_block(self):
+        original = self.fake_git
+        def stale_blob(root, *args):
+            value = original(root, *args)
+            if args[:3] == ("ls-tree", "HEAD", "--"):
+                return "100644 blob " + "0" * 40 + "\t" + args[3]
+            return value
+        self.manifest.write_text(json.dumps(self.data))
+        with patch.object(release, "git", side_effect=stale_blob):
+            self.assertBlocked(release.validate(self.root, True, self.manifest, self.PLATFORM), "git.input:")
+        (self.root / "m3/release/verify_release_admission.py").write_text("different verifier\n")
+        self.assertBlocked(self.inspect(), "git.verifier_identity")
+
+
+>>>>>>> retained
+if __name__ == "__main__":
+    unittest.main()

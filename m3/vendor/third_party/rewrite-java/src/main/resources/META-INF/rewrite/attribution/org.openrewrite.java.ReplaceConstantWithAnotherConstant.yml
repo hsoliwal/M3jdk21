@@ -1,0 +1,13 @@
+---
+type: "specs.openrewrite.org/v1beta/attribution"
+recipeName: "org.openrewrite.java.ReplaceConstantWithAnotherConstant"
+contributors:
+- name: "srmalkan"
+  email: "smitmalkan99@gmail.com"
+  lineCount: 87
+- name: "Knut Wannheden"
+  email: "knut@moderne.io"
+  lineCount: 53
+- name: "Jonathan Schnéider"
+  email: "jkschneider@gmail.com"
+  lineCount: 8

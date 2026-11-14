@@ -1,0 +1,33 @@
+{
+  "inode": 304600,
+  "sha256": "650edd59a206376776dcae28a3c54364d6a96200f02fc1b2896db9f2e2250e27",
+  "ids": [
+    "-7067731747743465470",
+    "-7067731747743465470"
+  ],
+  "maps": [
+    [
+      [
+        "MAP",
+        "7fa38d447000-7fa38d448000",
+        "r--s",
+        "00000000",
+        "00:1b",
+        "304600",
+        "/workspace/m3-integration-results/shared-two-process.bin"
+      ]
+    ],
+    [
+      [
+        "MAP",
+        "7f7e87a6f000-7f7e87a70000",
+        "r--s",
+        "00000000",
+        "00:1b",
+        "304600",
+        "/workspace/m3-integration-results/shared-two-process.bin"
+      ]
+    ]
+  ],
+  "unlink_gc_retained": true
+}

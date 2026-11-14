@@ -1,0 +1,79 @@
+{
+  "schema": "M3_LIB_INTAKE_NAME_MAPPING_V1",
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors (M3 modifications)",
+  "license": "0BSD <>; original notices retained",
+  "product": "M3JDK21",
+  "intake_mode": "LIB_INTAKE_TO_JMOD_V2",
+  "target_module": "jdk.m3.xz",
+  "target_path": "m3/vendor/third_party-m3/relocated/xz",
+  "canonical_recipe": "m3/tooling/lib-intake/lib_intake.sh (pattern LIB_INTAKE_TO_JMOD v2)",
+  "canonical_recipe_owners": [
+    "org.openrewrite.java.ChangePackage (recursive=false, longest first; boundary-checked form of com.synexia M3BoundaryCheckedPackageRenameRecipe)"
+  ],
+  "source_path": "m3/vendor/third_party/xz",
+  "source_coordinate": "org.tukaani:xz:1.10-m3-source-1",
+  "source_version": "1.10-m3-source-1",
+  "source_license_origin": "https://raw.githubusercontent.com/tukaani-project/xz-java/v1.10/COPYING",
+  "source_packages": [
+    "org.tukaani.xz"
+  ],
+  "runtime_packages": [
+    "com.m3.lib.xz"
+  ],
+  "intake_dependencies": "-",
+  "qualification_receipt": "m3/tooling/lib-intake/runs/xz/STAGES.tsv",
+  "relocation_map": "m3/tooling/lib-intake/runs/xz/RELOCATION_MAP.tsv",
+  "legal_notice": "m3/vendor/third_party-m3/relocated/xz",
+  "mappings": [
+    {
+      "source": "org.tukaani.xz and subpackages",
+      "target": "com.m3.lib.xz and subpackages",
+      "role": "relocated donor API in the optional jdk.m3.xz JMOD; type names retained"
+    },
+    {
+      "source": "org.tukaani.xz.rangecoder",
+      "target": "com.m3.lib.xz.rangecoder",
+      "role": "package (ChangePackage)"
+    },
+    {
+      "source": "org.tukaani.xz.common",
+      "target": "com.m3.lib.xz.common",
+      "role": "package (ChangePackage)"
+    },
+    {
+      "source": "org.tukaani.xz.simple",
+      "target": "com.m3.lib.xz.simple",
+      "role": "package (ChangePackage)"
+    },
+    {
+      "source": "org.tukaani.xz.check",
+      "target": "com.m3.lib.xz.check",
+      "role": "package (ChangePackage)"
+    },
+    {
+      "source": "org.tukaani.xz.delta",
+      "target": "com.m3.lib.xz.delta",
+      "role": "package (ChangePackage)"
+    },
+    {
+      "source": "org.tukaani.xz.index",
+      "target": "com.m3.lib.xz.index",
+      "role": "package (ChangePackage)"
+    },
+    {
+      "source": "org.tukaani.xz.lzma",
+      "target": "com.m3.lib.xz.lzma",
+      "role": "package (ChangePackage)"
+    },
+    {
+      "source": "org.tukaani.xz.lz",
+      "target": "com.m3.lib.xz.lz",
+      "role": "package (ChangePackage)"
+    },
+    {
+      "source": "org.tukaani.xz",
+      "target": "com.m3.lib.xz",
+      "role": "package (ChangePackage)"
+    }
+  ]
+}

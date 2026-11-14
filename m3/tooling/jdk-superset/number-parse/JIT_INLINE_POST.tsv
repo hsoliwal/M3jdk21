@@ -1,0 +1,56 @@
+method	bytes	own_max_tier	compiles	osr_compiles	c2_inlined	c1_inlined	c2_failures	c1_failures
+jdk.internal.math.FloatingDecimal$ASCIIToBinaryBuffer::<init>	26	4	5	0	12	10	-	-
+jdk.internal.math.FloatingDecimal$ASCIIToBinaryBuffer::doubleValue	1194	4	14	6	0	0	java.lang.invoke.LambdaForm$DMH/0x00000001000c1400::invokeInterface>hot method too big=15; jdkConverterValue>hot method too big=28	-
+jdk.internal.math.FloatingDecimal$ASCIIToBinaryBuffer::floatValue	1084	4	12	0	0	0	java.lang.invoke.LambdaForm$DMH/0x00000001000c2800::invokeInterface>hot method too big=15; jdkConverterValue>hot method too big=25	-
+jdk.internal.math.FloatingDecimal$ASCIIToBinaryConverter::doubleValue	0	-	0	0	0	0	java.lang.invoke.LambdaForm$DMH/0x00000001000c1400::invokeInterface>virtual call=8; parseDouble>virtual call=17	no static binding=20; not static or statically bindable=15
+jdk.internal.math.FloatingDecimal$ASCIIToBinaryConverter::floatValue	0	-	0	0	0	0	java.lang.invoke.LambdaForm$DMH/0x00000001000c2800::invokeInterface>virtual call=7; jdkConverterValue>virtual call=16; parseFloat>virtual call=10	no static binding=18; not static or statically bindable=9
+jdk.internal.math.FloatingDecimal$PreparedASCIIToBinaryBuffer::<init>	15	4	6	0	3	6	parseHexString>NodeCountInliningCutoff=3	-
+jdk.internal.math.FloatingDecimal$PreparedASCIIToBinaryBuffer::doubleValue	5	1	3	0	28	0	-	-
+jdk.internal.math.FloatingDecimal$PreparedASCIIToBinaryBuffer::floatValue	5	1	3	0	25	0	-	-
+jdk.internal.math.FloatingDecimal::getHexDigit	42	4	6	0	12	0	-	callee is too large=24
+jdk.internal.math.FloatingDecimal::parseDouble	31	4	16	0	9	0	java.lang.Double::parseDouble>already compiled into a big method=6	callee is too large=10; callee uses too much stack=8
+jdk.internal.math.FloatingDecimal::parseFloat	32	4	12	0	4	0	java.lang.Float::parseFloat>already compiled into a big method=5	callee is too large=9; callee uses too much stack=3
+jdk.internal.math.FloatingDecimal::parseHexString	1373	4	12	0	0	0	readJavaFormatString>hot method too big=3; readJavaFormatString>too big=3	callee is too large=10
+jdk.internal.math.FloatingDecimal::readJavaFormatString	808	4	18	4	0	0	java.lang.invoke.LambdaForm$DMH/0x00000001000c7800::invokeStatic>hot method too big=30; jdkConverterValue>already compiled into a medium method=14; jdkConverterValue>hot method too big=53; jdkConverterValue>too big=2; parseDouble>already compiled into a medium method=7; parseDouble>too big=10; parseFloat>already compiled into a medium method=10	callee is too large=27; inlining prohibited by policy=32
+jdk.internal.math.FloatingDecimal::stripLeadingZeros	54	4	6	0	12	0	-	callee is too large=18
+jdk.internal.math.M3AbstractFloatValueParser::packedIndex	9	4	6	0	89	12	-	-
+jdk.internal.math.M3AbstractJavaFloatingPointBitsFromCharSequence::parseDecFloatLiteral	261	4	13	3	18	0	parseFloatingPointLiteral>already compiled into a big method=15; parseFloatingPointLiteral>already compiled into a medium method=1; parseFloatingPointLiteral>too big=2	callee is too large=5; inlining prohibited by policy=5
+jdk.internal.math.M3AbstractJavaFloatingPointBitsFromCharSequence::parseExponentNumber	145	4	6	0	46	0	-	callee is too large=3
+jdk.internal.math.M3AbstractJavaFloatingPointBitsFromCharSequence::parseFloatingPointLiteral	194	4	21	0	25	0	parseFloat>already compiled into a big method=2	callee is too large=14
+jdk.internal.math.M3AbstractJavaFloatingPointBitsFromCharSequence::parseHexFloatLiteral	316	4	9	1	8	0	parseFloatingPointLiteral>already compiled into a big method=7; parseFloatingPointLiteral>too big=3	callee is too large=10
+jdk.internal.math.M3AbstractJavaFloatingPointBitsFromCharSequence::parseLiteralTail	63	4	6	0	43	0	-	callee is too large=9
+jdk.internal.math.M3AbstractJavaFloatingPointBitsFromCharSequence::parseNaNOrInfinity	228	-	0	0	0	0	-	callee is too large=10
+jdk.internal.math.M3AbstractJavaFloatingPointBitsFromCharSequence::skipWhitespace	25	4	6	0	82	13	-	-
+jdk.internal.math.M3AbstractJavaFloatingPointBitsFromCharSequence::valueOfFloatLiteral	0	-	0	0	0	0	-	no static binding=9
+jdk.internal.math.M3AbstractJavaFloatingPointBitsFromCharSequence::valueOfHexLiteral	0	-	0	0	0	0	-	no static binding=3
+jdk.internal.math.M3AbstractJavaFloatingPointBitsFromCharSequence::valueOfTruncatedDecFloatLiteral	118	4	9	3	1	0	parseDecFloatLiteral>too big=4	callee is too large=6
+jdk.internal.math.M3AbstractJavaFloatingPointBitsFromCharSequence::valueOfTruncatedHexLiteral	115	-	0	0	0	0	-	callee is too large=3
+jdk.internal.math.M3AbstractNumberParser::charAt	17	4	6	0	232	32	parseFloatingPointLiteral>low call site frequency=15	-
+jdk.internal.math.M3AbstractNumberParser::checkBounds	26	4	6	0	36	10	-	-
+jdk.internal.math.M3AbstractNumberParser::lookupHex	17	4	6	0	15	3	-	-
+jdk.internal.math.M3FastDoubleMath::clingerFastPath	25	-	0	0	48	6	tryDecToDoubleWithFastAlgorithm>low call site frequency=12	-
+jdk.internal.math.M3FastDoubleMath::fastScalb	14	4	6	0	19	0	-	callee uses too much stack=3
+jdk.internal.math.M3FastDoubleMath::isClingerFastPath	28	4	5	0	60	6	-	-
+jdk.internal.math.M3FastDoubleMath::tryDecFloatToDoubleTruncated	119	4	12	0	32	0	-	callee is too large=6
+jdk.internal.math.M3FastDoubleMath::tryDecToDoubleWithEiselLemire	212	4	12	0	60	0	-	callee is too large=6
+jdk.internal.math.M3FastDoubleMath::tryDecToDoubleWithFastAlgorithm	35	4	12	0	54	0	-	callee uses too much stack=18
+jdk.internal.math.M3FastDoubleMath::tryHexFloatToDoubleTruncated	84	4	6	0	16	0	-	callee is too large=3
+jdk.internal.math.M3FastDoubleMath::unsignedToDouble	22	4	6	0	19	0	-	callee uses too much stack=6
+jdk.internal.math.M3FastDoubleSwar::tryToParseEightHexDigits	114	4	6	0	15	0	-	callee is too large=3
+jdk.internal.math.M3FastDoubleSwar::tryToParseEightHexDigitsUtf16	74	4	6	0	18	0	-	callee is too large=3
+jdk.internal.math.M3FastDoubleSwar::tryToParseEightHexDigitsUtf8	163	4	6	0	21	0	-	callee is too large=3
+jdk.internal.math.M3FastFloatMath::clingerFastPath	25	3	1	0	53	6	tryDecToFloatWithFastAlgorithm>low call site frequency=1	-
+jdk.internal.math.M3FastFloatMath::fastScalb	13	3	3	0	14	3	-	-
+jdk.internal.math.M3FastFloatMath::isClingerFastPath	28	4	6	0	53	6	tryDecToFloatWithFastAlgorithm>low call site frequency=1	-
+jdk.internal.math.M3FastFloatMath::tryDecFloatToFloatTruncated	112	4	12	0	30	0	-	callee is too large=6
+jdk.internal.math.M3FastFloatMath::tryDecToFloatWithEiselLemire	211	4	12	0	53	0	tryDecToFloatWithFastAlgorithm>too big=1	callee is too large=6
+jdk.internal.math.M3FastFloatMath::tryDecToFloatWithFastAlgorithm	35	4	12	0	48	0	tryDecFloatToFloatTruncated>already compiled into a medium method=6	callee uses too much stack=18
+jdk.internal.math.M3FastFloatMath::tryHexFloatToFloatTruncated	78	4	6	0	11	0	-	callee is too large=3
+jdk.internal.math.M3FastFloatMath::unsignedToFloat	22	4	6	0	14	0	-	callee uses too much stack=6
+jdk.internal.math.M3FastIntegerMath::unsignedMultiplyHigh	86	4	6	0	125	0	-	callee is too large=12
+jdk.internal.math.M3JavaDoubleBitsFromCharSequence::jdkConverterValue	22	4	5	0	26	9	valueOfFloatLiteral>low call site frequency=22	-
+jdk.internal.math.M3JavaDoubleBitsFromCharSequence::valueOfFloatLiteral	38	4	12	0	26	0	valueOfTruncatedDecFloatLiteral>already compiled into a big method=6	-
+jdk.internal.math.M3JavaDoubleBitsFromCharSequence::valueOfHexLiteral	40	4	6	0	13	0	-	-
+jdk.internal.math.M3JavaFloatBitsFromCharSequence::jdkConverterValue	22	3	3	0	41	9	-	-
+jdk.internal.math.M3JavaFloatBitsFromCharSequence::valueOfFloatLiteral	39	4	12	0	24	0	-	-
+jdk.internal.math.M3JavaFloatBitsFromCharSequence::valueOfHexLiteral	39	4	6	0	8	0	-	-

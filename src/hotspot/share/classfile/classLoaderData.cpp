@@ -178,6 +178,11 @@ ClassLoaderData::ClassLoaderData(Handle h_class_loader, bool has_class_mirror_ho
   NOT_PRODUCT(_dependency_count = 0); // number of class loader dependencies
 
   JFR_ONLY(INIT_ID(this);)
+
+  // SapMachine 2023-07-04: Vitals
+  if (EnableVitals) {
+      sapmachine_vitals::counters::inc_cld_count(has_class_mirror_holder);
+  }
 }
 
 ClassLoaderData::ChunkedHandleList::~ChunkedHandleList() {
@@ -558,9 +563,6 @@ void ClassLoaderData::initialize_holder(Handle loader_or_mirror) {
 void ClassLoaderData::remove_class(Klass* scratch_class) {
   assert_locked_or_safepoint(ClassLoaderDataGraph_lock);
 
-  // Adjust global class iterator.
-  ClassLoaderDataGraph::adjust_saved_class(scratch_class);
-
   Klass* prev = nullptr;
   for (Klass* k = _klasses; k != nullptr; k = k->next_link()) {
     if (k == scratch_class) {
@@ -602,7 +604,7 @@ void ClassLoaderData::unload() {
   free_deallocate_list_C_heap_structures();
 
   // Clean up class dependencies and tell serviceability tools
-  // these classes are unloading.  Must be called
+  // these classes are unloading.  This must be called
   // after erroneous classes are released.
   classes_do(InstanceKlass::unload_class);
 
@@ -620,9 +622,6 @@ void ClassLoaderData::unload() {
   if (_jmethod_ids != nullptr) {
     Method::clear_jmethod_ids(this);
   }
-
-  // Clean up global class iterator for compiler
-  ClassLoaderDataGraph::adjust_saved_class(this);
 }
 
 ModuleEntryTable* ClassLoaderData::modules() {
@@ -1009,7 +1008,11 @@ void ClassLoaderData::print_on(outputStream* out) const {
     _holder.print_on(out);
     out->print_cr("");
   }
-  out->print_cr(" - class loader        " INTPTR_FORMAT, p2i(_class_loader.ptr_raw()));
+  if (!_unloading) {
+    out->print_cr(" - class loader        " INTPTR_FORMAT, p2i(_class_loader.peek()));
+  } else {
+    out->print_cr(" - class loader        <unloading, oop is bad>");
+  }
   out->print_cr(" - metaspace           " INTPTR_FORMAT, p2i(_metaspace));
   out->print_cr(" - unloading           %s", _unloading ? "true" : "false");
   out->print_cr(" - class mirror holder %s", _has_class_mirror_holder ? "true" : "false");

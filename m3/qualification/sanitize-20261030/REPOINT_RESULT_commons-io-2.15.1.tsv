@@ -1,0 +1,2 @@
+consumer	before	after	gate	javac_errors	javac_warnings	module_gate	files_dropped	bytes_dropped	proof_mentions	proof_blocking	verdict
+m3/vendor/third_party/commons-compress-1.26.0	commons-io-2.15.1 (2.15.1-m3-source-1)	commons-io-2.18.0 (2.18.0-m3-source-1)	javac --release 21 -Xlint:all: commons-io-2.18.0 then commons-compress-1.26.0 src/main/java + versions overlays on its classes	656	541	FAIL	266	2097111	11	0	PASS

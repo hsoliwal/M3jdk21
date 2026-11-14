@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='utf-8'?>
+<hotspot_log version="160 1" process="59045" time_ms="1791205333425"><vm_version>
+<name>
+OpenJDK 64-Bit Server VM
+</name>
+<release>
+21-internal-adhoc.runner.M3jdk21
+</release>
+<info>
+OpenJDK 64-Bit Server VM (fastdebug 21-internal-adhoc.runner.M3jdk21) for linux-amd64 JRE (21-internal-adhoc.runner.M3jdk21), built on 2026-10-05T12:36:18Z by "runner" with gcc 13.3.0
+</info>
+</vm_version>
+<vm_arguments>
+<args>
+-Xmx256m -ea -esa -Xcheck:jni -XX:-CreateCoredumpOnCrash -XX:TieredStopAtLevel=1 -Xbatch -XX:CompileThreshold=100 -XX:+UnlockDiagnosticVMOptions -XX:+LogCompilation -XX:LogFile=/home/runner/work/M3jdk21/M3jdk21/m3/tooling/lane28/target/image/c1-compilation.xml --add-exports=java.base/jdk.internal.mindex=ALL-UNNAMED --add-opens=java.base/jdk.internal.mindex=ALL-UNNAMED </args>
+<command>
+M3Lane28Test
+</command>
+<launcher>
+SUN_STANDARD
+</launcher>
+<properties>
+java.vm.specification.name=Java Virtual Machine Specification
+java.vm.version=21-internal-adhoc.runner.M3jdk21
+java.vm.name=OpenJDK 64-Bit Server VM
+jdk.debug=fastdebug
+sun.boot.library.path=/home/runner/work/M3jdk21/M3jdk21/build/linux-x86_64-server-fastdebug/images/jdk/lib
+java.library.path=/usr/java/packages/lib:/usr/lib64:/lib64:/lib:/usr/lib
+java.home=/home/runner/work/M3jdk21/M3jdk21/build/linux-x86_64-server-fastdebug/images/jdk
+java.class.path=/home/runner/work/M3jdk21/M3jdk21/m3/tooling/lane28/target/image/classes
+java.vm.info=mixed mode, sharing
+java.vm.specification.vendor=Oracle Corporation
+java.vm.specification.version=21
+java.vm.vendor=Oracle Corporation
+sun.java.command=M3Lane28Test
+sun.java.launcher=SUN_STANDARD
+</properties>
+</vm_arguments>
+<tty><nmethod compile_id="348" compile_kind="osr" compiler="c1" level="1" entry="0x00007f478c690240" size="5824" address="0x00007f478c68fe10" relocation_offset="368" insts_offset="1072" stub_offset="3912" scopes_data_offset="4024" scopes_pcs_offset="4632" dependencies_offset="5704" nul_chk_table_offset="5712" metadata_offset="4016" method="jdk.internal.mindex.M3BitLane28 prepareCounts ()V" bytes="167" count="1" backedge_count="1024" iicount="1" stamp="0.422" />
+</tty><hotspot_log_done stamp="1.130" />
+</hotspot_log>

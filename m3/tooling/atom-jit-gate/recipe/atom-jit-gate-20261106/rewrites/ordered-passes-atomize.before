@@ -1,0 +1,6 @@
+        var analysis = M3FileAtomizer.analyzeWithPackage(
+                module, path, source, MAX_FILE_BYTES);
+        if (analysis.atoms().isEmpty()) {
+            throw new IllegalArgumentException("no executable declaration atoms");
+        }
+        return new Atomized(path, M3Hash.sha256(source), analysis.atoms());

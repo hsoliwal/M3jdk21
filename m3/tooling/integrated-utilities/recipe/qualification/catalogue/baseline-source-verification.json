@@ -1,0 +1,175 @@
+{
+  "baseline": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
+  "candidate_source_observations": [
+    {
+      "api": "java.util.Collections",
+      "evidence": "DECLARATION_TOKENS_ONLY_NOT_SIGNATURE_OR_RUNTIME_CONFORMANCE",
+      "missing_candidate_method_tokens": [
+        "filteredCollection",
+        "filteredList",
+        "filteredSet",
+        "filteredSortedSet",
+        "filteredNavigableSet",
+        "filteredDeque",
+        "filteredMap",
+        "filteredSortedMap",
+        "filteredNavigableMap",
+        "sortedList",
+        "filteredSnapshot",
+        "sortedSnapshot",
+        "filteredSortedSnapshot"
+      ],
+      "package_declaration": true,
+      "public_declaration": true,
+      "sha256": "7dcb1bde18923274518b747ad4e65e3019046ca7742714ead678c615d99499ba",
+      "source_observed": false,
+      "source_path": "src/java.base/share/classes/java/util/Collections.java"
+    },
+    {
+      "api": "java.util.stream.Streams",
+      "evidence": "DECLARATION_TOKENS_ONLY_NOT_SIGNATURE_OR_RUNTIME_CONFORMANCE",
+      "missing_candidate_method_tokens": [
+        "stream",
+        "zip"
+      ],
+      "package_declaration": true,
+      "public_declaration": false,
+      "sha256": "8b385ad8883b73423c90a2c3132700f3669dfe145916a8c38a4a93702ff379de",
+      "source_observed": false,
+      "source_path": "src/java.base/share/classes/java/util/stream/Streams.java"
+    },
+    {
+      "api": "java.lang.reflect.Reflection",
+      "reason": "candidate source is not available in this source view",
+      "source_observed": false
+    },
+    {
+      "api": "java.io.IOUtils",
+      "reason": "candidate source is not available in this source view",
+      "source_observed": false
+    }
+  ],
+  "catalogue_decisions": 22,
+  "core_owning_modules": [
+    "java.base",
+    "java.net.http",
+    "java.sql",
+    "java.sql.rowset"
+  ],
+  "core_pinned_unique_source_paths": 133,
+  "families": 31,
+  "generated_api_templates": 4,
+  "internal_candidate_observations": [
+    {
+      "owner": "java.util.M3CollectionViews",
+      "reason": "candidate source is not available in this source view",
+      "source_observed": false
+    },
+    {
+      "owner": "java.util.M3CollectionMasks",
+      "reason": "candidate source is not available in this source view",
+      "source_observed": false
+    },
+    {
+      "owner": "java.util.M3CollectionMasks.selected0",
+      "reason": "candidate source is not available in this source view",
+      "source_observed": false
+    }
+  ],
+  "module_wide_coverage": {
+    "additional_aspect_groups": 19,
+    "additional_representative_public_types": 255,
+    "non_module_source_roots": [
+      "src/demo",
+      "src/hotspot",
+      "src/utils"
+    ],
+    "platform_specific_modules": [
+      "jdk.crypto.mscapi"
+    ],
+    "receiving_sequence_advanced": false,
+    "runtime_qualified": false,
+    "scope": "ALL_PINNED_SOURCE_MODULES_WITH_REPRESENTATIVE_API_OWNERS_NOT_ALL_TYPES_OR_METHODS",
+    "source_modules": 70,
+    "total_representative_public_types": 366,
+    "unqualified_exported_packages": 227
+  },
+  "owning_modules": [
+    "java.base",
+    "java.compiler",
+    "java.datatransfer",
+    "java.desktop",
+    "java.instrument",
+    "java.logging",
+    "java.management",
+    "java.management.rmi",
+    "java.naming",
+    "java.net.http",
+    "java.prefs",
+    "java.rmi",
+    "java.scripting",
+    "java.se",
+    "java.security.jgss",
+    "java.security.sasl",
+    "java.smartcardio",
+    "java.sql",
+    "java.sql.rowset",
+    "java.transaction.xa",
+    "java.xml",
+    "java.xml.crypto",
+    "jdk.accessibility",
+    "jdk.attach",
+    "jdk.charsets",
+    "jdk.compiler",
+    "jdk.crypto.cryptoki",
+    "jdk.crypto.ec",
+    "jdk.crypto.mscapi",
+    "jdk.dynalink",
+    "jdk.editpad",
+    "jdk.hotspot.agent",
+    "jdk.httpserver",
+    "jdk.incubator.vector",
+    "jdk.internal.ed",
+    "jdk.internal.jvmstat",
+    "jdk.internal.le",
+    "jdk.internal.opt",
+    "jdk.internal.vm.ci",
+    "jdk.internal.vm.compiler",
+    "jdk.internal.vm.compiler.management",
+    "jdk.jartool",
+    "jdk.javadoc",
+    "jdk.jcmd",
+    "jdk.jconsole",
+    "jdk.jdeps",
+    "jdk.jdi",
+    "jdk.jdwp.agent",
+    "jdk.jfr",
+    "jdk.jlink",
+    "jdk.jpackage",
+    "jdk.jshell",
+    "jdk.jsobject",
+    "jdk.jstatd",
+    "jdk.localedata",
+    "jdk.management",
+    "jdk.management.agent",
+    "jdk.management.jfr",
+    "jdk.naming.dns",
+    "jdk.naming.rmi",
+    "jdk.net",
+    "jdk.nio.mapmode",
+    "jdk.random",
+    "jdk.sctp",
+    "jdk.security.auth",
+    "jdk.security.jgss",
+    "jdk.unsupported",
+    "jdk.unsupported.desktop",
+    "jdk.xml.dom",
+    "jdk.zipfs"
+  ],
+  "performance_qualified": false,
+  "pinned_unique_source_paths": 454,
+  "public_api_sources": 111,
+  "receiving_sequence_advanced": false,
+  "result": "BASELINE_SOURCE_COVERAGE_VERIFIED",
+  "runtime_qualified": false
+}

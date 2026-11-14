@@ -1,0 +1,13 @@
+field	value
+jep	474
+title	ZGC: Generational Mode by Default
+upstream_issue	JDK-8326957
+upstream_commit	4ba74475d44831c1fe49359458163cd1567e9619
+upstream_parent	7ce4a13c0a891e606480e138f4025ffa328a18b3
+target_release	23
+baseline_release	21
+baseline_commit	890adb6410dab4606a4f26a942aed02fb2f55387
+implementation_paths	7
+product_paths	4
+test_paths	3
+promotion	NOT_AUTHORIZED

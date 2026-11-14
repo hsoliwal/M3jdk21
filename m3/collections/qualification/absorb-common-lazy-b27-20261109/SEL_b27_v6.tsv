@@ -1,0 +1,6 @@
+class	module	status	target
+AlertException	synexia-common	ELIGIBLE	jdk.internal.m3.collections.AlertException
+BatchProcessor	synexia-common	ELIGIBLE	jdk.internal.m3.collections.BatchProcessor
+ICoalescingBuffer	synexia-common	ELIGIBLE	jdk.internal.m3.collections.ICoalescingBuffer
+ISequenceBarrier	synexia-common	ELIGIBLE	jdk.internal.m3.collections.ISequenceBarrier
+IWaitStrategy	synexia-common	ELIGIBLE	jdk.internal.m3.collections.IWaitStrategy

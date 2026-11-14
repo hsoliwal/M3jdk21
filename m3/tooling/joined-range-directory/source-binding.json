@@ -1,0 +1,324 @@
+{
+  "schema": "M3_JOINED_RANGE_DIRECTORY_SOURCE_BINDING_V1",
+  "repository": "hsoliwal/com.synexia",
+  "receiverRepository": "hsoliwal/M3jdk21",
+  "sourceCommit": "ae86c0be9712e6ef01bac1e04367cf29b4bcb9cc",
+  "admissionCommit": "ec4309cde9a5311347aab535b1cee4a2be442742",
+  "sdkTree": "2086a6175e8b573fa340a3458eaa382f11b3378d",
+  "sdkFiles": 34,
+  "runtimeApplied": false,
+  "phaseAdvanced": false,
+  "files": [
+    {
+      "sourcePath": "m3-openrewrite-recipes/tasks/joined-range-directory-20261020/sdk/FOSS_REUSE_DECISION.tsv",
+      "targetPath": "m3/tooling/joined-range-directory/sdk/FOSS_REUSE_DECISION.tsv",
+      "gitBlob": "e31a7b6d0dc67f9920f5a156fdb77fee3e7b7fed",
+      "bytes": 467,
+      "sha256": "ddc98a639fae88397fdacab61501c4f6ea2e677fd6033655ba1b04095c283610"
+    },
+    {
+      "sourcePath": "m3-openrewrite-recipes/tasks/joined-range-directory-20261020/sdk/README.md",
+      "targetPath": "m3/tooling/joined-range-directory/sdk/README.md",
+      "gitBlob": "002a9c1814184ac276c971bdb5dec164ec0eba33",
+      "bytes": 1528,
+      "sha256": "c7d01c9fd9a97eb6d9a8824a1b2a30f470616e05cf513d07d3558acedf277c93"
+    },
+    {
+      "sourcePath": "m3-openrewrite-recipes/tasks/joined-range-directory-20261020/sdk/THIRD_PARTY_NOTICES.md",
+      "targetPath": "m3/tooling/joined-range-directory/sdk/THIRD_PARTY_NOTICES.md",
+      "gitBlob": "70c29b10e5d06f66bfdf8759ef37dd1c4b9f4b0c",
+      "bytes": 836,
+      "sha256": "014ae516720b317b4f3dbdaadabd191dae817f2fad060fc3dc0d7f0547de5b0c"
+    },
+    {
+      "sourcePath": "m3-openrewrite-recipes/tasks/joined-range-directory-20261020/sdk/pinned-engine/jdk/internal/m3/rewrite/M3JoinedRangeDirectoryInverseRecipe.java",
+      "targetPath": "m3/tooling/joined-range-directory/sdk/pinned-engine/jdk/internal/m3/rewrite/M3JoinedRangeDirectoryInverseRecipe.java",
+      "gitBlob": "b240cab07421e29e5a043ceec160bb135bf37830",
+      "bytes": 766,
+      "sha256": "daa3f280095188b6adf0ccb0d2bf50b8d19ad37537f0d95af2e89126a04c31e8"
+    },
+    {
+      "sourcePath": "m3-openrewrite-recipes/tasks/joined-range-directory-20261020/sdk/pinned-engine/jdk/internal/m3/rewrite/M3JoinedRangeDirectoryRecipe.java",
+      "targetPath": "m3/tooling/joined-range-directory/sdk/pinned-engine/jdk/internal/m3/rewrite/M3JoinedRangeDirectoryRecipe.java",
+      "gitBlob": "438822c0ff4d65f640736813369f2b01e60a1716",
+      "bytes": 755,
+      "sha256": "a79157d717eff4b6245f429631403d486985c61ba213feb4f0080351993bc23d"
+    },
+    {
+      "sourcePath": "m3-openrewrite-recipes/tasks/joined-range-directory-20261020/sdk/pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinManifest.java",
+      "targetPath": "m3/tooling/joined-range-directory/sdk/pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinManifest.java",
+      "gitBlob": "78d5fb68f13872164973a8918cc7886c5f548bca",
+      "bytes": 10964,
+      "sha256": "c874b5d4b5fe8886d53763ab91d050f431c4b7c09d3fe34d58680231ccb1cf7e"
+    },
+    {
+      "sourcePath": "m3-openrewrite-recipes/tasks/joined-range-directory-20261020/sdk/pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinRecipe.java",
+      "targetPath": "m3/tooling/joined-range-directory/sdk/pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinRecipe.java",
+      "gitBlob": "2ec479b8609459a28fdfd8a7a7d63cc44e919f00",
+      "bytes": 5187,
+      "sha256": "300a520ec9d273922d1edbdf5442e5faf825c47e8e3df7febf4baa2f39945401"
+    },
+    {
+      "sourcePath": "m3-openrewrite-recipes/tasks/joined-range-directory-20261020/sdk/pom.xml",
+      "targetPath": "m3/tooling/joined-range-directory/sdk/pom.xml",
+      "gitBlob": "059259ca746466389cccac4094c3d664b0d79e6d",
+      "bytes": 2678,
+      "sha256": "5b3f3f04f9539178d43ffa75068366d8ff1c037e25f67c2d31aa3bdb6e0ede1e"
+    },
+    {
+      "sourcePath": "m3-openrewrite-recipes/tasks/joined-range-directory-20261020/sdk/src/main/resources/META-INF/rewrite/joined-range-directory-20261020.yml",
+      "targetPath": "m3/tooling/joined-range-directory/sdk/src/main/resources/META-INF/rewrite/joined-range-directory-20261020.yml",
+      "gitBlob": "d474c6e10789ccdce4fbbd6ff2b6e88123778510",
+      "bytes": 698,
+      "sha256": "1af81d3fab3c7a48265f89b40843f305fac624787e38dc747ebfbe52dd046d04"
+    },
+    {
+      "sourcePath": "m3-openrewrite-recipes/tasks/joined-range-directory-20261020/sdk/src/test/java/jdk/internal/m3/rewrite/M3JoinedRangeDirectoryRecipeTest.java",
+      "targetPath": "m3/tooling/joined-range-directory/sdk/src/test/java/jdk/internal/m3/rewrite/M3JoinedRangeDirectoryRecipeTest.java",
+      "gitBlob": "2ebe04b3558514ab910601832465f00b0b3913f7",
+      "bytes": 15923,
+      "sha256": "27f41922bbd811e5022e1d3b2206004b663fbaf0eb63b15820272c552c5b209e"
+    },
+    {
+      "sourcePath": "m3-openrewrite-recipes/tasks/joined-range-directory-20261020/sdk/verify.py",
+      "targetPath": "m3/tooling/joined-range-directory/sdk/verify.py",
+      "gitBlob": "295c81a0c3c22b96939eac194ddb8f1d5bc13faa",
+      "bytes": 24815,
+      "sha256": "7c5678f076cac7abce3fbc469a78b230a4caf0af70589ef90b072e2e95539063"
+    },
+    {
+      "sourcePath": "m3-openrewrite-recipes/tasks/joined-range-directory-20261020/sdk/src/main/resources/jdk/internal/m3/rewrite/joined-range-directory-20261020/forward/before/m3/core/src/jdk/m3/text/JoinedM3StringPiece.java",
+      "targetPath": "m3/tooling/joined-range-directory/sdk/src/main/resources/jdk/internal/m3/rewrite/joined-range-directory-20261020/forward/before/m3/core/src/jdk/m3/text/JoinedM3StringPiece.java",
+      "gitBlob": "5022e9811ce9391671c794446c7772569cfd369f",
+      "bytes": 2634,
+      "sha256": "1655c02a61577f8aebed59b94c92701be835c4c7ebaf80efa3c71271a4bd75d7"
+    },
+    {
+      "sourcePath": "m3-openrewrite-recipes/tasks/joined-range-directory-20261020/sdk/src/main/resources/jdk/internal/m3/rewrite/joined-range-directory-20261020/forward/out/m3/core/src/jdk/m3/text/JoinedM3StringPiece.java",
+      "targetPath": "m3/tooling/joined-range-directory/sdk/src/main/resources/jdk/internal/m3/rewrite/joined-range-directory-20261020/forward/out/m3/core/src/jdk/m3/text/JoinedM3StringPiece.java",
+      "gitBlob": "367ea06512321bb511fd9bbb772842ce313e69dc",
+      "bytes": 2919,
+      "sha256": "c1c2ed959d7dff0cc2625b2008a55438a6a1313b4c58943f596e2ab7f44836a8"
+    },
+    {
+      "sourcePath": "m3-openrewrite-recipes/tasks/joined-range-directory-20261020/sdk/src/main/resources/jdk/internal/m3/rewrite/joined-range-directory-20261020/forward/before/m3/core/src/jdk/m3/text/LocalM3Arena.java",
+      "targetPath": "m3/tooling/joined-range-directory/sdk/src/main/resources/jdk/internal/m3/rewrite/joined-range-directory-20261020/forward/before/m3/core/src/jdk/m3/text/LocalM3Arena.java",
+      "gitBlob": "025ce8014cba8a36a9e496bb0a56faef57cf0968",
+      "bytes": 1975,
+      "sha256": "e9573e7f04a875eb7bda7d3554a57653ebd655f66ac67be724b366092e76afc4"
+    },
+    {
+      "sourcePath": "m3-openrewrite-recipes/tasks/joined-range-directory-20261020/sdk/src/main/resources/jdk/internal/m3/rewrite/joined-range-directory-20261020/forward/out/m3/core/src/jdk/m3/text/LocalM3Arena.java",
+      "targetPath": "m3/tooling/joined-range-directory/sdk/src/main/resources/jdk/internal/m3/rewrite/joined-range-directory-20261020/forward/out/m3/core/src/jdk/m3/text/LocalM3Arena.java",
+      "gitBlob": "025ce8014cba8a36a9e496bb0a56faef57cf0968",
+      "bytes": 1975,
+      "sha256": "e9573e7f04a875eb7bda7d3554a57653ebd655f66ac67be724b366092e76afc4"
+    },
+    {
+      "sourcePath": "m3-openrewrite-recipes/tasks/joined-range-directory-20261020/sdk/src/main/resources/jdk/internal/m3/rewrite/joined-range-directory-20261020/forward/before/m3/core/src/jdk/m3/text/LocalM3StringPiece.java",
+      "targetPath": "m3/tooling/joined-range-directory/sdk/src/main/resources/jdk/internal/m3/rewrite/joined-range-directory-20261020/forward/before/m3/core/src/jdk/m3/text/LocalM3StringPiece.java",
+      "gitBlob": "387ae5e0c656177f1df663fd5029d4b31ba2fa00",
+      "bytes": 2115,
+      "sha256": "77fd1cbeae4dc20a4c23497102cb7c44ec14adbdd6bbf328326957515a7858ad"
+    },
+    {
+      "sourcePath": "m3-openrewrite-recipes/tasks/joined-range-directory-20261020/sdk/src/main/resources/jdk/internal/m3/rewrite/joined-range-directory-20261020/forward/out/m3/core/src/jdk/m3/text/LocalM3StringPiece.java",
+      "targetPath": "m3/tooling/joined-range-directory/sdk/src/main/resources/jdk/internal/m3/rewrite/joined-range-directory-20261020/forward/out/m3/core/src/jdk/m3/text/LocalM3StringPiece.java",
+      "gitBlob": "387ae5e0c656177f1df663fd5029d4b31ba2fa00",
+      "bytes": 2115,
+      "sha256": "77fd1cbeae4dc20a4c23497102cb7c44ec14adbdd6bbf328326957515a7858ad"
+    },
+    {
+      "sourcePath": "m3-openrewrite-recipes/tasks/joined-range-directory-20261020/sdk/src/main/resources/jdk/internal/m3/rewrite/joined-range-directory-20261020/forward/before/m3/core/src/jdk/m3/text/M3StringPiece.java",
+      "targetPath": "m3/tooling/joined-range-directory/sdk/src/main/resources/jdk/internal/m3/rewrite/joined-range-directory-20261020/forward/before/m3/core/src/jdk/m3/text/M3StringPiece.java",
+      "gitBlob": "62506fb9b3cff0e6f24e856648528db58c45b92b",
+      "bytes": 767,
+      "sha256": "7ed45335bea7dc1107d4c28ca505ad334c845685f099af0df3e3112c411a7755"
+    },
+    {
+      "sourcePath": "m3-openrewrite-recipes/tasks/joined-range-directory-20261020/sdk/src/main/resources/jdk/internal/m3/rewrite/joined-range-directory-20261020/forward/out/m3/core/src/jdk/m3/text/M3StringPiece.java",
+      "targetPath": "m3/tooling/joined-range-directory/sdk/src/main/resources/jdk/internal/m3/rewrite/joined-range-directory-20261020/forward/out/m3/core/src/jdk/m3/text/M3StringPiece.java",
+      "gitBlob": "62506fb9b3cff0e6f24e856648528db58c45b92b",
+      "bytes": 767,
+      "sha256": "7ed45335bea7dc1107d4c28ca505ad334c845685f099af0df3e3112c411a7755"
+    },
+    {
+      "sourcePath": "m3-openrewrite-recipes/tasks/joined-range-directory-20261020/sdk/src/main/resources/jdk/internal/m3/rewrite/joined-range-directory-20261020/forward/before/m3/core/src/jdk/m3/text/StorageIdentity.java",
+      "targetPath": "m3/tooling/joined-range-directory/sdk/src/main/resources/jdk/internal/m3/rewrite/joined-range-directory-20261020/forward/before/m3/core/src/jdk/m3/text/StorageIdentity.java",
+      "gitBlob": "8cd2ae86bee8f04f0d69709eed12897ff5c6a71c",
+      "bytes": 494,
+      "sha256": "f6897d5ddd7f39cc0d94bdc1b4db8b695b1946bc65672fb6c0408fa110c1b354"
+    },
+    {
+      "sourcePath": "m3-openrewrite-recipes/tasks/joined-range-directory-20261020/sdk/src/main/resources/jdk/internal/m3/rewrite/joined-range-directory-20261020/forward/out/m3/core/src/jdk/m3/text/StorageIdentity.java",
+      "targetPath": "m3/tooling/joined-range-directory/sdk/src/main/resources/jdk/internal/m3/rewrite/joined-range-directory-20261020/forward/out/m3/core/src/jdk/m3/text/StorageIdentity.java",
+      "gitBlob": "8cd2ae86bee8f04f0d69709eed12897ff5c6a71c",
+      "bytes": 494,
+      "sha256": "f6897d5ddd7f39cc0d94bdc1b4db8b695b1946bc65672fb6c0408fa110c1b354"
+    },
+    {
+      "sourcePath": "m3-openrewrite-recipes/tasks/joined-range-directory-20261020/sdk/src/main/resources/jdk/internal/m3/rewrite/joined-range-directory-20261020/forward/manifest.tsv",
+      "targetPath": "m3/tooling/joined-range-directory/sdk/src/main/resources/jdk/internal/m3/rewrite/joined-range-directory-20261020/forward/manifest.tsv",
+      "gitBlob": "5f91bb42f21f529bb7167add5012228487c2ac12",
+      "bytes": 950,
+      "sha256": "b19215750f6ce3a16603232b8463776f77fd41fc8c313e62a0be7cdc7104353c"
+    },
+    {
+      "sourcePath": "m3-openrewrite-recipes/tasks/joined-range-directory-20261020/sdk/src/main/resources/jdk/internal/m3/rewrite/joined-range-directory-20261020/inverse/before/m3/core/src/jdk/m3/text/JoinedM3StringPiece.java",
+      "targetPath": "m3/tooling/joined-range-directory/sdk/src/main/resources/jdk/internal/m3/rewrite/joined-range-directory-20261020/inverse/before/m3/core/src/jdk/m3/text/JoinedM3StringPiece.java",
+      "gitBlob": "367ea06512321bb511fd9bbb772842ce313e69dc",
+      "bytes": 2919,
+      "sha256": "c1c2ed959d7dff0cc2625b2008a55438a6a1313b4c58943f596e2ab7f44836a8"
+    },
+    {
+      "sourcePath": "m3-openrewrite-recipes/tasks/joined-range-directory-20261020/sdk/src/main/resources/jdk/internal/m3/rewrite/joined-range-directory-20261020/inverse/out/m3/core/src/jdk/m3/text/JoinedM3StringPiece.java",
+      "targetPath": "m3/tooling/joined-range-directory/sdk/src/main/resources/jdk/internal/m3/rewrite/joined-range-directory-20261020/inverse/out/m3/core/src/jdk/m3/text/JoinedM3StringPiece.java",
+      "gitBlob": "5022e9811ce9391671c794446c7772569cfd369f",
+      "bytes": 2634,
+      "sha256": "1655c02a61577f8aebed59b94c92701be835c4c7ebaf80efa3c71271a4bd75d7"
+    },
+    {
+      "sourcePath": "m3-openrewrite-recipes/tasks/joined-range-directory-20261020/sdk/src/main/resources/jdk/internal/m3/rewrite/joined-range-directory-20261020/inverse/before/m3/core/src/jdk/m3/text/LocalM3Arena.java",
+      "targetPath": "m3/tooling/joined-range-directory/sdk/src/main/resources/jdk/internal/m3/rewrite/joined-range-directory-20261020/inverse/before/m3/core/src/jdk/m3/text/LocalM3Arena.java",
+      "gitBlob": "025ce8014cba8a36a9e496bb0a56faef57cf0968",
+      "bytes": 1975,
+      "sha256": "e9573e7f04a875eb7bda7d3554a57653ebd655f66ac67be724b366092e76afc4"
+    },
+    {
+      "sourcePath": "m3-openrewrite-recipes/tasks/joined-range-directory-20261020/sdk/src/main/resources/jdk/internal/m3/rewrite/joined-range-directory-20261020/inverse/out/m3/core/src/jdk/m3/text/LocalM3Arena.java",
+      "targetPath": "m3/tooling/joined-range-directory/sdk/src/main/resources/jdk/internal/m3/rewrite/joined-range-directory-20261020/inverse/out/m3/core/src/jdk/m3/text/LocalM3Arena.java",
+      "gitBlob": "025ce8014cba8a36a9e496bb0a56faef57cf0968",
+      "bytes": 1975,
+      "sha256": "e9573e7f04a875eb7bda7d3554a57653ebd655f66ac67be724b366092e76afc4"
+    },
+    {
+      "sourcePath": "m3-openrewrite-recipes/tasks/joined-range-directory-20261020/sdk/src/main/resources/jdk/internal/m3/rewrite/joined-range-directory-20261020/inverse/before/m3/core/src/jdk/m3/text/LocalM3StringPiece.java",
+      "targetPath": "m3/tooling/joined-range-directory/sdk/src/main/resources/jdk/internal/m3/rewrite/joined-range-directory-20261020/inverse/before/m3/core/src/jdk/m3/text/LocalM3StringPiece.java",
+      "gitBlob": "387ae5e0c656177f1df663fd5029d4b31ba2fa00",
+      "bytes": 2115,
+      "sha256": "77fd1cbeae4dc20a4c23497102cb7c44ec14adbdd6bbf328326957515a7858ad"
+    },
+    {
+      "sourcePath": "m3-openrewrite-recipes/tasks/joined-range-directory-20261020/sdk/src/main/resources/jdk/internal/m3/rewrite/joined-range-directory-20261020/inverse/out/m3/core/src/jdk/m3/text/LocalM3StringPiece.java",
+      "targetPath": "m3/tooling/joined-range-directory/sdk/src/main/resources/jdk/internal/m3/rewrite/joined-range-directory-20261020/inverse/out/m3/core/src/jdk/m3/text/LocalM3StringPiece.java",
+      "gitBlob": "387ae5e0c656177f1df663fd5029d4b31ba2fa00",
+      "bytes": 2115,
+      "sha256": "77fd1cbeae4dc20a4c23497102cb7c44ec14adbdd6bbf328326957515a7858ad"
+    },
+    {
+      "sourcePath": "m3-openrewrite-recipes/tasks/joined-range-directory-20261020/sdk/src/main/resources/jdk/internal/m3/rewrite/joined-range-directory-20261020/inverse/before/m3/core/src/jdk/m3/text/M3StringPiece.java",
+      "targetPath": "m3/tooling/joined-range-directory/sdk/src/main/resources/jdk/internal/m3/rewrite/joined-range-directory-20261020/inverse/before/m3/core/src/jdk/m3/text/M3StringPiece.java",
+      "gitBlob": "62506fb9b3cff0e6f24e856648528db58c45b92b",
+      "bytes": 767,
+      "sha256": "7ed45335bea7dc1107d4c28ca505ad334c845685f099af0df3e3112c411a7755"
+    },
+    {
+      "sourcePath": "m3-openrewrite-recipes/tasks/joined-range-directory-20261020/sdk/src/main/resources/jdk/internal/m3/rewrite/joined-range-directory-20261020/inverse/out/m3/core/src/jdk/m3/text/M3StringPiece.java",
+      "targetPath": "m3/tooling/joined-range-directory/sdk/src/main/resources/jdk/internal/m3/rewrite/joined-range-directory-20261020/inverse/out/m3/core/src/jdk/m3/text/M3StringPiece.java",
+      "gitBlob": "62506fb9b3cff0e6f24e856648528db58c45b92b",
+      "bytes": 767,
+      "sha256": "7ed45335bea7dc1107d4c28ca505ad334c845685f099af0df3e3112c411a7755"
+    },
+    {
+      "sourcePath": "m3-openrewrite-recipes/tasks/joined-range-directory-20261020/sdk/src/main/resources/jdk/internal/m3/rewrite/joined-range-directory-20261020/inverse/before/m3/core/src/jdk/m3/text/StorageIdentity.java",
+      "targetPath": "m3/tooling/joined-range-directory/sdk/src/main/resources/jdk/internal/m3/rewrite/joined-range-directory-20261020/inverse/before/m3/core/src/jdk/m3/text/StorageIdentity.java",
+      "gitBlob": "8cd2ae86bee8f04f0d69709eed12897ff5c6a71c",
+      "bytes": 494,
+      "sha256": "f6897d5ddd7f39cc0d94bdc1b4db8b695b1946bc65672fb6c0408fa110c1b354"
+    },
+    {
+      "sourcePath": "m3-openrewrite-recipes/tasks/joined-range-directory-20261020/sdk/src/main/resources/jdk/internal/m3/rewrite/joined-range-directory-20261020/inverse/out/m3/core/src/jdk/m3/text/StorageIdentity.java",
+      "targetPath": "m3/tooling/joined-range-directory/sdk/src/main/resources/jdk/internal/m3/rewrite/joined-range-directory-20261020/inverse/out/m3/core/src/jdk/m3/text/StorageIdentity.java",
+      "gitBlob": "8cd2ae86bee8f04f0d69709eed12897ff5c6a71c",
+      "bytes": 494,
+      "sha256": "f6897d5ddd7f39cc0d94bdc1b4db8b695b1946bc65672fb6c0408fa110c1b354"
+    },
+    {
+      "sourcePath": "m3-openrewrite-recipes/tasks/joined-range-directory-20261020/sdk/src/main/resources/jdk/internal/m3/rewrite/joined-range-directory-20261020/inverse/manifest.tsv",
+      "targetPath": "m3/tooling/joined-range-directory/sdk/src/main/resources/jdk/internal/m3/rewrite/joined-range-directory-20261020/inverse/manifest.tsv",
+      "gitBlob": "9b39bbf73cfb77451bf7cfa9a7853f36c267c6c6",
+      "bytes": 950,
+      "sha256": "18e4462a2e47a5189434e433477f237c8bf0f05c056d41084351c4aa790f1ea4"
+    },
+    {
+      "sourcePath": "m3-openrewrite-recipes/tasks/joined-range-directory-20261020/sdk/pins.json",
+      "targetPath": "m3/tooling/joined-range-directory/sdk/pins.json",
+      "gitBlob": "d84bc2076d32aea9a6b52fec02823e1cf87a60d7",
+      "bytes": 10006,
+      "sha256": "23864f46ba9f56ed8813ba532f702bac00784008f77ac6b41f708d76f243b49b"
+    },
+    {
+      "sourcePath": "m3-openrewrite-recipes/tasks/joined-range-directory-20261020/hosted/qualify.py",
+      "targetPath": "m3/tooling/joined-range-directory/qualify.py",
+      "gitBlob": "0ef48b291d60a12d4ca7747e14ec664ee90797d4",
+      "bytes": 20530,
+      "sha256": "adb7a9d421bda1ff99f3fd28130a84a835af99fc8fce1809211aa6ebed0d5ca5"
+    },
+    {
+      "sourcePath": "m3-openrewrite-recipes/tasks/joined-fresh-owned-ranges-20261020/integration/hosted/qualification.yml",
+      "targetPath": ".github/workflows/m3-joined-range-directory.yml",
+      "gitBlob": "56e9c85aef568ffda0168f250858abf05425480f",
+      "bytes": 40911,
+      "sha256": "849d51f8ddcb6a9696a11199827e6359e3e363f27276ab635c235729fd34b51b"
+    },
+    {
+      "sourcePath": "m3-openrewrite-recipes/tasks/joined-range-directory-20261020/verification/qualify.py",
+      "targetPath": "m3/tooling/joined-range-directory/runtime/qualify.py",
+      "gitBlob": "1a1411c816881c4f04fd94c3f45c02d6d8ee890e",
+      "bytes": 17994,
+      "sha256": "e981d6f87cccd44a80aff62f8cab747a046e01883ad9b883e4d692dedc7484f1"
+    },
+    {
+      "sourcePath": "m3-openrewrite-recipes/tasks/joined-range-directory-20261020/verification/M3JoinedRangeProof.java",
+      "targetPath": "m3/tooling/joined-range-directory/runtime/M3JoinedRangeProof.java",
+      "gitBlob": "1c94cc5985fefa0b06821c179f8887626987f9c3",
+      "bytes": 12007,
+      "sha256": "de6e00562ce5802d8dbebf6483e3661171175ea5845c21183617f199188f22a5"
+    },
+    {
+      "sourcePath": "m3-openrewrite-recipes/tasks/joined-range-directory-20261020/verification/BUILD_INPUTS.json",
+      "targetPath": "m3/tooling/joined-range-directory/runtime/BUILD_INPUTS.json",
+      "gitBlob": "a68332b1d66d744d557b094ab20e252135219952",
+      "bytes": 14938,
+      "sha256": "fa3b327c4ab23e9e7f251f4bb9a04bb4f7148113ec65e01708a020fc12da15d6"
+    }
+  ],
+  "receiverOriginalOwners": [
+    {
+      "path": "m3/core/src/jdk/m3/text/JoinedM3StringPiece.java",
+      "role": "REPLACE",
+      "gitBlob": "5022e9811ce9391671c794446c7772569cfd369f",
+      "bytes": 2634,
+      "sha256": "1655c02a61577f8aebed59b94c92701be835c4c7ebaf80efa3c71271a4bd75d7"
+    },
+    {
+      "path": "m3/core/src/jdk/m3/text/M3StringPiece.java",
+      "role": "KEEP",
+      "gitBlob": "62506fb9b3cff0e6f24e856648528db58c45b92b",
+      "bytes": 767,
+      "sha256": "7ed45335bea7dc1107d4c28ca505ad334c845685f099af0df3e3112c411a7755"
+    },
+    {
+      "path": "m3/core/src/jdk/m3/text/LocalM3StringPiece.java",
+      "role": "KEEP",
+      "gitBlob": "387ae5e0c656177f1df663fd5029d4b31ba2fa00",
+      "bytes": 2115,
+      "sha256": "77fd1cbeae4dc20a4c23497102cb7c44ec14adbdd6bbf328326957515a7858ad"
+    },
+    {
+      "path": "m3/core/src/jdk/m3/text/LocalM3Arena.java",
+      "role": "KEEP",
+      "gitBlob": "025ce8014cba8a36a9e496bb0a56faef57cf0968",
+      "bytes": 1975,
+      "sha256": "e9573e7f04a875eb7bda7d3554a57653ebd655f66ac67be724b366092e76afc4"
+    },
+    {
+      "path": "m3/core/src/jdk/m3/text/StorageIdentity.java",
+      "role": "KEEP",
+      "gitBlob": "8cd2ae86bee8f04f0d69709eed12897ff5c6a71c",
+      "bytes": 494,
+      "sha256": "f6897d5ddd7f39cc0d94bdc1b4db8b695b1946bc65672fb6c0408fa110c1b354"
+    }
+  ],
+  "receiverOriginalBuildInputs": 58
+}

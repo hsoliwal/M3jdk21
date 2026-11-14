@@ -1,0 +1,96 @@
+cmake_minimum_required(VERSION 3.20)
+project(m3_precompute LANGUAGES C)
+
+find_package(JNI REQUIRED)
+
+add_library(m3_precompute SHARED
+  src/m3_precompute_signals.c
+  src/m3_precompute_signals_jni.c
+  src/m3_derivative_regex.c
+  src/m3_derivative_regex_jni.c)
+
+target_include_directories(m3_precompute
+  PRIVATE ${JNI_INCLUDE_DIRS}
+  PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
+target_compile_features(m3_precompute PRIVATE c_std_11)
+
+if(MSVC)
+  target_compile_options(m3_precompute PRIVATE /W4 /WX)
+else()
+  target_compile_options(m3_precompute PRIVATE
+    -Wall -Wextra -Werror -Wconversion -Wshadow -Wpedantic)
+endif()
+
+file(GENERATE
+  OUTPUT "${CMAKE_BINARY_DIR}/native-path-$<CONFIG>.txt"
+  CONTENT "$<TARGET_FILE:m3_precompute>")
+
+include(CTest)
+if(BUILD_TESTING)
+  add_executable(m3_precompute_signal_checks
+    tests/m3_precompute_signals_checks.c
+    src/m3_precompute_signals.c)
+  target_include_directories(m3_precompute_signal_checks
+    PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
+  target_compile_features(m3_precompute_signal_checks PRIVATE c_std_11)
+  if(MSVC)
+    target_compile_options(m3_precompute_signal_checks PRIVATE /W4 /WX)
+  else()
+    target_compile_options(m3_precompute_signal_checks PRIVATE
+      -Wall -Wextra -Werror -Wconversion -Wshadow -Wpedantic)
+  endif()
+  add_test(NAME m3_precompute_signal_checks COMMAND m3_precompute_signal_checks)
+  add_executable(m3_derivative_regex_checks
+    tests/m3_derivative_regex_checks.c
+    src/m3_derivative_regex.c)
+  target_include_directories(m3_derivative_regex_checks PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
+  target_compile_features(m3_derivative_regex_checks PRIVATE c_std_11)
+  if(MSVC)
+    target_compile_options(m3_derivative_regex_checks PRIVATE /W4 /WX)
+  else()
+    target_compile_options(m3_derivative_regex_checks PRIVATE
+      -Wall -Wextra -Werror -Wconversion -Wshadow -Wpedantic)
+  endif()
+  add_test(NAME m3_derivative_regex_checks COMMAND m3_derivative_regex_checks)
+
+endif()
+
+# Synexia precompute planner kernels join the module's JNI library (recipe m3/ports/precompute/recipe/planner-native-20261107):
+# Java_jdk_m3_precompute_M3NativePrecomputeOps_{nativeAbiVersion,lookupPairsNative,tupleLookupAbiVersionNative,
+# lookupTuplesNative}: coarse batch lookups over one frozen tuple index, every borrowed array released before returning,
+# nothing published on a refused shape; M3NativePrecomputeOps keeps the Java path as the semantic oracle.
+target_sources(m3_precompute PRIVATE
+  src/m3_precompute_pair_jni.c
+  src/m3_precompute_tuple_jni.c)
+
+# Checked numeric codebook batches share the existing optional precompute library.
+target_sources(m3_precompute PRIVATE
+  src/m3_ncm_codebook.c
+  src/m3_ncm_codebook_jni.c)
+target_compile_features(m3_precompute PRIVATE c_std_17)
+
+if(MSVC)
+  set_source_files_properties(src/m3_ncm_codebook.c
+    PROPERTIES COMPILE_OPTIONS "/fp:strict")
+else()
+  set_source_files_properties(src/m3_ncm_codebook.c
+    PROPERTIES COMPILE_OPTIONS "-fno-fast-math;-ffp-contract=off")
+endif()
+
+if(BUILD_TESTING)
+  add_executable(m3_ncm_codebook_checks
+    tests/m3_ncm_codebook_checks.c
+    src/m3_ncm_codebook.c)
+  target_include_directories(m3_ncm_codebook_checks
+    PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
+  target_compile_features(m3_ncm_codebook_checks PRIVATE c_std_17)
+  if(MSVC)
+    target_compile_options(m3_ncm_codebook_checks PRIVATE /W4 /WX /fp:strict)
+  else()
+    target_compile_options(m3_ncm_codebook_checks PRIVATE
+      -Wall -Wextra -Werror -Wconversion -Wshadow -Wpedantic
+      -fno-fast-math -ffp-contract=off)
+    target_link_libraries(m3_ncm_codebook_checks PRIVATE m)
+  endif()
+  add_test(NAME m3_ncm_codebook_checks COMMAND m3_ncm_codebook_checks)
+endif()

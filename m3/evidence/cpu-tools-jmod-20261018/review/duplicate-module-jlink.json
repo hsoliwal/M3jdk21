@@ -1,0 +1,37 @@
+{
+  "status": "SHADOW_CONFIRMED",
+  "selected_output": "OLD_SOURCE_JDK",
+  "scope": "Tiny standalone jlink module-path-order witness; product source and source JDK untouched.",
+  "commands": [
+    {
+      "label": "source-jdk-compile",
+      "exit_code": 0,
+      "output": ""
+    },
+    {
+      "label": "source-jdk-jmod",
+      "exit_code": 0,
+      "output": ""
+    },
+    {
+      "label": "candidate-compile",
+      "exit_code": 0,
+      "output": ""
+    },
+    {
+      "label": "candidate-jmod",
+      "exit_code": 0,
+      "output": ""
+    },
+    {
+      "label": "link-source-first",
+      "exit_code": 0,
+      "output": ""
+    },
+    {
+      "label": "execute-linked",
+      "exit_code": 0,
+      "output": "OLD_SOURCE_JDK\n"
+    }
+  ]
+}

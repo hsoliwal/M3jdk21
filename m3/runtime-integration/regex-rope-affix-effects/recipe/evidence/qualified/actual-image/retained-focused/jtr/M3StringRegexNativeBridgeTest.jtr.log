@@ -1,0 +1,263 @@
+#Test Results (version 2)
+#Sat Oct 17 04:02:02 CST 2026
+#-----testdescription-----
+$file=/workspace/scratch/edcb3bae74f7/regex-work/runtime/fixture/source/test/jdk/java/lang/String/M3StringRegexNativeBridgeTest.java
+$root=/workspace/scratch/edcb3bae74f7/regex-work/runtime/fixture/source/test/jdk
+keywords=othervm native
+run=USER_SPECIFIED main/native/othervm -Xcheck\:jni M3StringRegexNativeBridgeTest\nUSER_SPECIFIED main/native/othervm -Xint -Xcheck\:jni M3StringRegexNativeBridgeTest\nUSER_SPECIFIED main/native/othervm -XX\:+UnlockExperimentalVMOptions -XX\:+UseM3StringStorage -Xcheck\:jni M3StringRegexNativeBridgeTest\n
+source=M3StringRegexNativeBridgeTest.java
+title=Verify JNI UTF-16 String shadows and regex parity over joined and sliced M3-backed text
+
+#-----environment-----
+
+#-----testresult-----
+description=file\:/workspace/scratch/edcb3bae74f7/regex-work/runtime/fixture/source/test/jdk/java/lang/String/M3StringRegexNativeBridgeTest.java
+elapsed=10050 0\:00\:10.050
+end=Sat Oct 17 04\:02\:02 CST 2026
+environment=regtest
+execStatus=Passed. Execution successful
+harnessLoaderMode=Classpath Loader
+harnessVariety=Full Bundle
+hostname=296846eabe80
+javatestOS=Linux 6.18.55 (amd64)
+javatestVersion=6.0-ea+b24-2026-10-05-${BUILT_FROM_COMMIT}
+jtregVersion=jtreg 7.3.1 dev 0
+script=com.sun.javatest.regtest.exec.RegressionScript
+sections=script_messages build compile main build main build main
+start=Sat Oct 17 04\:01\:52 CST 2026
+test=java/lang/String/M3StringRegexNativeBridgeTest.java
+testJDK=/tmp/m3jdk21-product-build/images/jdk
+testJDK_OS=[name\:Linux,arch\:amd64,version\:6.18.55,family\:linux,simple_arch\:x64,simple_version\:6.18,processors\:2,maxMemory\:8589934592,maxSwap\:0]
+testJDK_os.arch=amd64
+testJDK_os.name=Linux
+testJDK_os.version=6.18.55
+totalTime=10051
+user.name=root
+work=/workspace/scratch/edcb3bae74f7/regex-work/runtime/actual-image/retained-focused/work/java/lang/String
+
+#section:script_messages
+----------messages:(4/271)----------
+JDK under test: /tmp/m3jdk21-product-build/images/jdk
+openjdk version "21-internal" 2023-09-19
+OpenJDK Runtime Environment (fastdebug build 21-internal-adhoc.root.m3-string)
+OpenJDK 64-Bit Server VM (fastdebug build 21-internal-adhoc.root.m3-string, mixed mode, sharing)
+
+#section:build
+----------messages:(7/248)----------
+command: build M3StringRegexNativeBridgeTest
+reason: Named class compiled on demand
+started: Sat Oct 17 04:01:52 CST 2026
+Test directory:
+  compile: M3StringRegexNativeBridgeTest
+finished: Sat Oct 17 04:01:54 CST 2026
+elapsed time (seconds): 1.673
+result: Passed. Build successful
+
+#section:compile
+----------messages:(6/315)----------
+command: compile /workspace/scratch/edcb3bae74f7/regex-work/runtime/fixture/source/test/jdk/java/lang/String/M3StringRegexNativeBridgeTest.java
+reason: .class file out of date or does not exist
+started: Sat Oct 17 04:01:52 CST 2026
+Mode: othervm
+finished: Sat Oct 17 04:01:54 CST 2026
+elapsed time (seconds): 1.672
+----------configuration:(5/403)----------
+javac compilation environment
+  source path: /workspace/scratch/edcb3bae74f7/regex-work/runtime/fixture/source/test/jdk/java/lang/String
+  class path:  /workspace/scratch/edcb3bae74f7/regex-work/runtime/fixture/source/test/jdk/java/lang/String
+               /workspace/scratch/edcb3bae74f7/regex-work/runtime/actual-image/retained-focused/work/classes/java/lang/String/M3StringRegexNativeBridgeTest.d
+
+----------rerun:(28/2424)*----------
+cd /workspace/scratch/edcb3bae74f7/regex-work/runtime/actual-image/retained-focused/work/java/lang/String/M3StringRegexNativeBridgeTest && \\
+HOME=/root \\
+LANG=C.UTF-8 \\
+LC_ALL=C.UTF-8 \\
+LC_CTYPE=C.UTF-8 \\
+PATH=/bin:/usr/bin:/usr/sbin \\
+TZ=America/Mexico_City \\
+    /tmp/m3jdk21-product-build/images/jdk/bin/javac \\
+        -J-Xmx512m \\
+        -J-XX:ActiveProcessorCount=2 \\
+        -J-Dtest.vm.opts='-Xmx512m -XX:ActiveProcessorCount=2' \\
+        -J-Dtest.tool.vm.opts='-J-Xmx512m -J-XX:ActiveProcessorCount=2' \\
+        -J-Dtest.compiler.opts= \\
+        -J-Dtest.java.opts= \\
+        -J-Dtest.jdk=/tmp/m3jdk21-product-build/images/jdk \\
+        -J-Dcompile.jdk=/tmp/m3jdk21-product-build/images/jdk \\
+        -J-Dtest.timeout.factor=2.0 \\
+        -J-Dtest.nativepath=/workspace/scratch/edcb3bae74f7/regex-work/runtime/actual-image/native \\
+        -J-Dtest.root=/workspace/scratch/edcb3bae74f7/regex-work/runtime/fixture/source/test/jdk \\
+        -J-Dtest.name=java/lang/String/M3StringRegexNativeBridgeTest.java \\
+        -J-Dtest.file=/workspace/scratch/edcb3bae74f7/regex-work/runtime/fixture/source/test/jdk/java/lang/String/M3StringRegexNativeBridgeTest.java \\
+        -J-Dtest.src=/workspace/scratch/edcb3bae74f7/regex-work/runtime/fixture/source/test/jdk/java/lang/String \\
+        -J-Dtest.src.path=/workspace/scratch/edcb3bae74f7/regex-work/runtime/fixture/source/test/jdk/java/lang/String \\
+        -J-Dtest.classes=/workspace/scratch/edcb3bae74f7/regex-work/runtime/actual-image/retained-focused/work/classes/java/lang/String/M3StringRegexNativeBridgeTest.d \\
+        -J-Dtest.class.path=/workspace/scratch/edcb3bae74f7/regex-work/runtime/actual-image/retained-focused/work/classes/java/lang/String/M3StringRegexNativeBridgeTest.d \\
+        -d /workspace/scratch/edcb3bae74f7/regex-work/runtime/actual-image/retained-focused/work/classes/java/lang/String/M3StringRegexNativeBridgeTest.d \\
+        -sourcepath /workspace/scratch/edcb3bae74f7/regex-work/runtime/fixture/source/test/jdk/java/lang/String \\
+        -classpath /workspace/scratch/edcb3bae74f7/regex-work/runtime/fixture/source/test/jdk/java/lang/String:/workspace/scratch/edcb3bae74f7/regex-work/runtime/actual-image/retained-focused/work/classes/java/lang/String/M3StringRegexNativeBridgeTest.d /workspace/scratch/edcb3bae74f7/regex-work/runtime/fixture/source/test/jdk/java/lang/String/M3StringRegexNativeBridgeTest.java
+----------System.out:(0/0)----------
+----------System.err:(0/0)----------
+result: Passed. Compilation successful
+
+#section:main
+----------messages:(6/296)----------
+command: main -Xcheck:jni M3StringRegexNativeBridgeTest
+reason: User specified action: run main/native/othervm -Xcheck:jni M3StringRegexNativeBridgeTest 
+started: Sat Oct 17 04:01:54 CST 2026
+Mode: othervm [/othervm specified]
+finished: Sat Oct 17 04:01:55 CST 2026
+elapsed time (seconds): 0.804
+----------configuration:(0/0)----------
+----------System.out:(1/48)----------
+M3_STRING_REGEX_NATIVE_BRIDGE_PASS checks=39845
+----------System.err:(1/15)----------
+STATUS:Passed.
+----------rerun:(30/2448)*----------
+cd /workspace/scratch/edcb3bae74f7/regex-work/runtime/actual-image/retained-focused/work/java/lang/String/M3StringRegexNativeBridgeTest && \\
+HOME=/root \\
+LANG=C.UTF-8 \\
+LC_ALL=C.UTF-8 \\
+LC_CTYPE=C.UTF-8 \\
+PATH=/bin:/usr/bin:/usr/sbin \\
+TZ=America/Mexico_City \\
+LD_LIBRARY_PATH=/workspace/scratch/edcb3bae74f7/regex-work/runtime/actual-image/native \\
+CLASSPATH=/workspace/scratch/edcb3bae74f7/regex-work/runtime/actual-image/retained-focused/work/classes/java/lang/String/M3StringRegexNativeBridgeTest.d:/workspace/scratch/edcb3bae74f7/regex-work/runtime/fixture/source/test/jdk/java/lang/String:/tmp/m3-toolchain/jtreg-7.3.1+1/jtreg/lib/jtreg.jar \\
+    /tmp/m3jdk21-product-build/images/jdk/bin/java \\
+        -Dtest.vm.opts='-Xmx512m -XX:ActiveProcessorCount=2' \\
+        -Dtest.tool.vm.opts='-J-Xmx512m -J-XX:ActiveProcessorCount=2' \\
+        -Dtest.compiler.opts= \\
+        -Dtest.java.opts= \\
+        -Dtest.jdk=/tmp/m3jdk21-product-build/images/jdk \\
+        -Dcompile.jdk=/tmp/m3jdk21-product-build/images/jdk \\
+        -Dtest.timeout.factor=2.0 \\
+        -Dtest.nativepath=/workspace/scratch/edcb3bae74f7/regex-work/runtime/actual-image/native \\
+        -Dtest.root=/workspace/scratch/edcb3bae74f7/regex-work/runtime/fixture/source/test/jdk \\
+        -Dtest.name=java/lang/String/M3StringRegexNativeBridgeTest.java \\
+        -Dtest.file=/workspace/scratch/edcb3bae74f7/regex-work/runtime/fixture/source/test/jdk/java/lang/String/M3StringRegexNativeBridgeTest.java \\
+        -Dtest.src=/workspace/scratch/edcb3bae74f7/regex-work/runtime/fixture/source/test/jdk/java/lang/String \\
+        -Dtest.src.path=/workspace/scratch/edcb3bae74f7/regex-work/runtime/fixture/source/test/jdk/java/lang/String \\
+        -Dtest.classes=/workspace/scratch/edcb3bae74f7/regex-work/runtime/actual-image/retained-focused/work/classes/java/lang/String/M3StringRegexNativeBridgeTest.d \\
+        -Dtest.class.path=/workspace/scratch/edcb3bae74f7/regex-work/runtime/actual-image/retained-focused/work/classes/java/lang/String/M3StringRegexNativeBridgeTest.d \\
+        -Xmx512m \\
+        -XX:ActiveProcessorCount=2 \\
+        -Djava.library.path=/workspace/scratch/edcb3bae74f7/regex-work/runtime/actual-image/native \\
+        -Xcheck:jni \\
+        com.sun.javatest.regtest.agent.MainWrapper /workspace/scratch/edcb3bae74f7/regex-work/runtime/actual-image/retained-focused/work/java/lang/String/M3StringRegexNativeBridgeTest.d/main.0.jta
+result: Passed. Execution successful
+
+#section:build
+----------messages:(5/189)----------
+command: build M3StringRegexNativeBridgeTest
+reason: Named class compiled on demand
+started: Sat Oct 17 04:01:55 CST 2026
+finished: Sat Oct 17 04:01:55 CST 2026
+elapsed time (seconds): 0.0
+result: Passed. All files up to date
+
+#section:main
+----------messages:(6/308)----------
+command: main -Xint -Xcheck:jni M3StringRegexNativeBridgeTest
+reason: User specified action: run main/native/othervm -Xint -Xcheck:jni M3StringRegexNativeBridgeTest 
+started: Sat Oct 17 04:01:55 CST 2026
+Mode: othervm [/othervm specified]
+finished: Sat Oct 17 04:01:57 CST 2026
+elapsed time (seconds): 2.808
+----------configuration:(0/0)----------
+----------System.out:(1/48)----------
+M3_STRING_REGEX_NATIVE_BRIDGE_PASS checks=39845
+----------System.err:(1/15)----------
+STATUS:Passed.
+----------rerun:(31/2465)*----------
+cd /workspace/scratch/edcb3bae74f7/regex-work/runtime/actual-image/retained-focused/work/java/lang/String/M3StringRegexNativeBridgeTest && \\
+HOME=/root \\
+LANG=C.UTF-8 \\
+LC_ALL=C.UTF-8 \\
+LC_CTYPE=C.UTF-8 \\
+PATH=/bin:/usr/bin:/usr/sbin \\
+TZ=America/Mexico_City \\
+LD_LIBRARY_PATH=/workspace/scratch/edcb3bae74f7/regex-work/runtime/actual-image/native \\
+CLASSPATH=/workspace/scratch/edcb3bae74f7/regex-work/runtime/actual-image/retained-focused/work/classes/java/lang/String/M3StringRegexNativeBridgeTest.d:/workspace/scratch/edcb3bae74f7/regex-work/runtime/fixture/source/test/jdk/java/lang/String:/tmp/m3-toolchain/jtreg-7.3.1+1/jtreg/lib/jtreg.jar \\
+    /tmp/m3jdk21-product-build/images/jdk/bin/java \\
+        -Dtest.vm.opts='-Xmx512m -XX:ActiveProcessorCount=2' \\
+        -Dtest.tool.vm.opts='-J-Xmx512m -J-XX:ActiveProcessorCount=2' \\
+        -Dtest.compiler.opts= \\
+        -Dtest.java.opts= \\
+        -Dtest.jdk=/tmp/m3jdk21-product-build/images/jdk \\
+        -Dcompile.jdk=/tmp/m3jdk21-product-build/images/jdk \\
+        -Dtest.timeout.factor=2.0 \\
+        -Dtest.nativepath=/workspace/scratch/edcb3bae74f7/regex-work/runtime/actual-image/native \\
+        -Dtest.root=/workspace/scratch/edcb3bae74f7/regex-work/runtime/fixture/source/test/jdk \\
+        -Dtest.name=java/lang/String/M3StringRegexNativeBridgeTest.java \\
+        -Dtest.file=/workspace/scratch/edcb3bae74f7/regex-work/runtime/fixture/source/test/jdk/java/lang/String/M3StringRegexNativeBridgeTest.java \\
+        -Dtest.src=/workspace/scratch/edcb3bae74f7/regex-work/runtime/fixture/source/test/jdk/java/lang/String \\
+        -Dtest.src.path=/workspace/scratch/edcb3bae74f7/regex-work/runtime/fixture/source/test/jdk/java/lang/String \\
+        -Dtest.classes=/workspace/scratch/edcb3bae74f7/regex-work/runtime/actual-image/retained-focused/work/classes/java/lang/String/M3StringRegexNativeBridgeTest.d \\
+        -Dtest.class.path=/workspace/scratch/edcb3bae74f7/regex-work/runtime/actual-image/retained-focused/work/classes/java/lang/String/M3StringRegexNativeBridgeTest.d \\
+        -Xmx512m \\
+        -XX:ActiveProcessorCount=2 \\
+        -Djava.library.path=/workspace/scratch/edcb3bae74f7/regex-work/runtime/actual-image/native \\
+        -Xint \\
+        -Xcheck:jni \\
+        com.sun.javatest.regtest.agent.MainWrapper /workspace/scratch/edcb3bae74f7/regex-work/runtime/actual-image/retained-focused/work/java/lang/String/M3StringRegexNativeBridgeTest.d/main.1.jta
+result: Passed. Execution successful
+
+#section:build
+----------messages:(5/189)----------
+command: build M3StringRegexNativeBridgeTest
+reason: Named class compiled on demand
+started: Sat Oct 17 04:01:57 CST 2026
+finished: Sat Oct 17 04:01:57 CST 2026
+elapsed time (seconds): 0.0
+result: Passed. All files up to date
+
+#section:main
+----------messages:(6/410)----------
+command: main -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage -Xcheck:jni M3StringRegexNativeBridgeTest
+reason: User specified action: run main/native/othervm -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage -Xcheck:jni M3StringRegexNativeBridgeTest 
+started: Sat Oct 17 04:01:57 CST 2026
+Mode: othervm [/othervm specified]
+finished: Sat Oct 17 04:02:02 CST 2026
+elapsed time (seconds): 4.757
+----------configuration:(0/0)----------
+----------System.out:(1/48)----------
+M3_STRING_REGEX_NATIVE_BRIDGE_PASS checks=39845
+----------System.err:(1/15)----------
+STATUS:Passed.
+----------rerun:(32/2527)*----------
+cd /workspace/scratch/edcb3bae74f7/regex-work/runtime/actual-image/retained-focused/work/java/lang/String/M3StringRegexNativeBridgeTest && \\
+HOME=/root \\
+LANG=C.UTF-8 \\
+LC_ALL=C.UTF-8 \\
+LC_CTYPE=C.UTF-8 \\
+PATH=/bin:/usr/bin:/usr/sbin \\
+TZ=America/Mexico_City \\
+LD_LIBRARY_PATH=/workspace/scratch/edcb3bae74f7/regex-work/runtime/actual-image/native \\
+CLASSPATH=/workspace/scratch/edcb3bae74f7/regex-work/runtime/actual-image/retained-focused/work/classes/java/lang/String/M3StringRegexNativeBridgeTest.d:/workspace/scratch/edcb3bae74f7/regex-work/runtime/fixture/source/test/jdk/java/lang/String:/tmp/m3-toolchain/jtreg-7.3.1+1/jtreg/lib/jtreg.jar \\
+    /tmp/m3jdk21-product-build/images/jdk/bin/java \\
+        -Dtest.vm.opts='-Xmx512m -XX:ActiveProcessorCount=2' \\
+        -Dtest.tool.vm.opts='-J-Xmx512m -J-XX:ActiveProcessorCount=2' \\
+        -Dtest.compiler.opts= \\
+        -Dtest.java.opts= \\
+        -Dtest.jdk=/tmp/m3jdk21-product-build/images/jdk \\
+        -Dcompile.jdk=/tmp/m3jdk21-product-build/images/jdk \\
+        -Dtest.timeout.factor=2.0 \\
+        -Dtest.nativepath=/workspace/scratch/edcb3bae74f7/regex-work/runtime/actual-image/native \\
+        -Dtest.root=/workspace/scratch/edcb3bae74f7/regex-work/runtime/fixture/source/test/jdk \\
+        -Dtest.name=java/lang/String/M3StringRegexNativeBridgeTest.java \\
+        -Dtest.file=/workspace/scratch/edcb3bae74f7/regex-work/runtime/fixture/source/test/jdk/java/lang/String/M3StringRegexNativeBridgeTest.java \\
+        -Dtest.src=/workspace/scratch/edcb3bae74f7/regex-work/runtime/fixture/source/test/jdk/java/lang/String \\
+        -Dtest.src.path=/workspace/scratch/edcb3bae74f7/regex-work/runtime/fixture/source/test/jdk/java/lang/String \\
+        -Dtest.classes=/workspace/scratch/edcb3bae74f7/regex-work/runtime/actual-image/retained-focused/work/classes/java/lang/String/M3StringRegexNativeBridgeTest.d \\
+        -Dtest.class.path=/workspace/scratch/edcb3bae74f7/regex-work/runtime/actual-image/retained-focused/work/classes/java/lang/String/M3StringRegexNativeBridgeTest.d \\
+        -Xmx512m \\
+        -XX:ActiveProcessorCount=2 \\
+        -Djava.library.path=/workspace/scratch/edcb3bae74f7/regex-work/runtime/actual-image/native \\
+        -XX:+UnlockExperimentalVMOptions \\
+        -XX:+UseM3StringStorage \\
+        -Xcheck:jni \\
+        com.sun.javatest.regtest.agent.MainWrapper /workspace/scratch/edcb3bae74f7/regex-work/runtime/actual-image/retained-focused/work/java/lang/String/M3StringRegexNativeBridgeTest.d/main.2.jta
+result: Passed. Execution successful
+
+
+test result: Passed. Execution successful

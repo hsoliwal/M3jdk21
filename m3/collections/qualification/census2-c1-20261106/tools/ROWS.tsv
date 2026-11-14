@@ -1,0 +1,7 @@
+leaf	crate	post	pre	owner
+P2-057	m3-long-pathmask-bridge-20261018	synexia-openrewrite-recipes/recipe-crates/m3-long-pathmask-bridge-20261018/candidates/m3/collections/src/main/java/com/m3/collections/M3LongIndexPathMasks.java	synexia-openrewrite-recipes/recipe-crates/m3-long-pathmask-bridge-20261018/baseline/m3/collections/src/main/java/com/m3/collections/M3LongIndexPathMasks.java	m3/collections/src/main/java/jdk/m3/collections/M3LongIndexPathMasks.java
+P2-058	m3-linked-clear-switch-20261019	synexia-openrewrite-recipes/crates/m3-linked-clear-switch-20261019/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-linked-clear-switch-20261019/M3LinkedHashMap.java.txt	-	m3/collections/src/main/java/jdk/m3/collections/M3LinkedHashMap.java
+P2-059	m3-linked-clear-switch-20261019	synexia-openrewrite-recipes/crates/m3-linked-clear-switch-20261019/inputs/M3OrderedSlotMap.java.txt	-	m3/collections/src/main/java/jdk/m3/collections/M3OrderedSlotMap.java
+P2-060	m3-linked-clear-switch-20261019	synexia-openrewrite-recipes/crates/m3-linked-clear-switch-20261019/inputs/M3SlotArrays.java.txt	-	m3/collections/src/main/java/jdk/m3/collections/M3SlotArrays.java
+P2-061	m3-linked-clear-switch-20261019	synexia-openrewrite-recipes/crates/m3-linked-clear-switch-20261019/inputs/M3SlotMap.java.txt	-	m3/collections/src/main/java/jdk/m3/collections/M3SlotMap.java
+P2-062	m3-linked-clear-switch-20261019	synexia-openrewrite-recipes/crates/m3-linked-clear-switch-20261019/inputs/M3SlotSpliterators.java.txt	-	m3/collections/src/main/java/jdk/m3/collections/M3SlotSpliterators.java

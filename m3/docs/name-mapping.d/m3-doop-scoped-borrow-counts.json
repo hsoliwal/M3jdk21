@@ -1,0 +1,14 @@
+{
+  "schema": "M3_NAME_MAPPING_FRAGMENT_V1",
+  "note": "Additive String→arrays→collections discipline; target remains collection proving-ground, not java.lang.Object/HotSpot global RC promotion.",
+  "mappings": [
+    {
+      "source": "com.synexia.m3.residency.M3NativeLeaseCounter / M3BorrowUseFacts / M3ReferenceCounted",
+      "source_recipe": "com.synexia.m3.Jdk21DoopBorrowCounts20261016",
+      "source_review": "https://github.com/hsoliwal/com.synexia/pull/11912",
+      "target": "com.m3.collections.M3ObjectResidency (existing target) + M3SlotAllocator28 + M3IntLane28",
+      "status": "candidate: cooperative DOOP borrow counts; full M3JDK/reactor/runtime qualification PENDING",
+      "target_rule": "NO new global refcount, Java object header, GC or JNI ABI; only explicitly retained projection-use handles, generation-safe, parent-owned primitive counts; retirement requires opt-in escape contract"
+    }
+  ]
+}

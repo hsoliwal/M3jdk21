@@ -1,0 +1,752 @@
+{
+  "schema": "synexia.fc0.root-package-readback/1",
+  "status": "PASS",
+  "extractedFiles": 1235,
+  "pairedFiles": 71,
+  "pairedBytes": 17023319,
+  "prior338PathsDisjoint": true,
+  "consumerQualified": false,
+  "receivingOutcome": {
+    "consumerQualified": false,
+    "files": [
+      {
+        "bytes": 140380,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/base-refresh-20261006-0443/native/fc0-supplemental-bindings-v1/FULL-27-CONTROLS.json",
+        "sha256": "cae5b88fa656e199bf60c4c7ccc4c8822a7f19d5080764fd6319e03368b4a37b"
+      },
+      {
+        "bytes": 22136,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/base-refresh-20261006-0443/native/fc0-supplemental-bindings-v1/HANDOFF.json",
+        "sha256": "910526229544bf0f1278744a80378a12c5fc94a007ec91063ebbffefd92ed730"
+      },
+      {
+        "bytes": 320764,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/base-refresh-20261006-0443/native/fc0-supplemental-bindings-v1/MIGRATION-PYTHON-BINDING.json",
+        "sha256": "387ef4bb049c945aa67d8aa2496c5fadc4d3909e6da24615a5591ce2032d2010"
+      },
+      {
+        "bytes": 71261,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/base-refresh-20261006-0443/native/fc0-supplemental-bindings-v1/PATTERN-BINDINGS-v2.json",
+        "sha256": "4dceda21ea9ea15d4f6dcef5913edb7fc59f42c7d5f4c5a99b1958d7a8ec3930"
+      },
+      {
+        "bytes": 85951,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/base-refresh-20261006-0443/native/fc0-supplemental-bindings-v1/PATTERN-BINDINGS-v3.json",
+        "sha256": "e7996e21a29d4aee5b79fa67fb616a8d1b00660b158d5216483efdb61a4a343b"
+      },
+      {
+        "bytes": 7907,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/base-refresh-20261006-0443/native/fc0-supplemental-bindings-v1/PATTERN-BINDINGS.json",
+        "sha256": "6b8c340b9cd3d68eb2a71e6c6ed66934e9df6f9e3418e580ce959cd69deaeb84"
+      },
+      {
+        "bytes": 16226,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/base-refresh-20261006-0443/native/fc0-supplemental-bindings-v1/build_full_declaration.py",
+        "sha256": "bfc2224d270c4c764e92fd7deb6b92c94ee0bb8c432d52216672b66766f9937c"
+      },
+      {
+        "bytes": 120942,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/base-refresh-20261006-0443/native/fc0-supplemental-bindings-v1/gatherer-review/DECLARATION.json",
+        "sha256": "ec83f7f3ceb93c466cb741a260e1c82203765d47584fcc0bdee8deeb0a53d21e"
+      },
+      {
+        "bytes": 54411,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/base-refresh-20261006-0443/native/fc0-supplemental-bindings-v1/profile-review/DECLARATION.json",
+        "sha256": "a5b583677f45cea1df3559bba3bc9355f3e01819e49234bd367ecb8719cdfb16"
+      },
+      {
+        "bytes": 9955,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/publication-design/followup-c0-check-authoring-v1/m3-check/independent-review-v1/REVIEW.json",
+        "sha256": "a432ed1f986db235ab18b3de91df192e8c1bfc66e3f111d495d2e51fb398614b"
+      },
+      {
+        "bytes": 22961,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup-preparation/authoring/CLI-PREDICATES-c0-primary-v1.json",
+        "sha256": "d0d400e8883e4ed7c07a415e9fbe39a84a914365d76e41cceb25738c38c53a67"
+      },
+      {
+        "bytes": 1720,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup-preparation/authoring/MATERIALIZATION-HANDOFF-v1.json",
+        "sha256": "5d8000f5577c23ee4d4fc8a0d9e6770c95fe01403f8312d678b097d206cf24d0"
+      },
+      {
+        "bytes": 3864,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup-preparation/authoring/MATERIALIZATION-PLAN-v1.json",
+        "sha256": "b9bbe7aadaa7481484fd0050f76f25ef7744ac56ca1358c5040ffa9a394f2512"
+      },
+      {
+        "bytes": 1519,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup-preparation/authoring/PRIMARY-CAPTURE-SOURCE-PRESERVATION-v1.json",
+        "sha256": "02621d0280a642b5630b24802eb449b6d1b40c32e875fe8eea59071153128e56"
+      },
+      {
+        "bytes": 647,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup-preparation/authoring/PRIMARY-COMMAND-PRESERVATION-v1.json",
+        "sha256": "4b8b88bf17edcc9ff58ad1192895d4aa1561f21fd0c6a81d7120bc18d17fac21"
+      },
+      {
+        "bytes": 4082,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup-preparation/authoring/PRIMARY-FINAL-DECLARATION-READBACK-v1.json",
+        "sha256": "05ad54dc14ff372cf8552ca51ac517d72056a68f687f9b3ed36871f436dfa886"
+      },
+      {
+        "bytes": 3643,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup-preparation/authoring/PRIMARY-HANDOFF-v1.json",
+        "sha256": "9d324126739420b9851f41320543af4f09864e63991b6d85bbccea9b6bd8e2b8"
+      },
+      {
+        "bytes": 2310,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup-preparation/authoring/PRIMARY-OBLIGATIONS-v1.json",
+        "sha256": "2f7d2894e827c6cd3e2f275063f96240fb1b293c3fb9594ebb186a9b296bb198"
+      },
+      {
+        "bytes": 139908,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup-preparation/authoring/RECEIVER-PRIMARY-PLAN-v1.json",
+        "sha256": "bb26f58be8abf9e429ba0f8510d9bf8955036b91ffa7c4b6daacc4dd38f62822"
+      },
+      {
+        "bytes": 6171,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup-preparation/authoring/ROOT-DECISION-v1.json",
+        "sha256": "3d5c5e85b975338368793ffd9291015a80cae5fec5942b4395054f3009e19239"
+      },
+      {
+        "bytes": 2014,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup-preparation/authoring/STAGER-HANDOFF-v1.json",
+        "sha256": "50460560fff67d1e134ec2323ddff80f6db4cec07c3131816921587f56fd6be9"
+      },
+      {
+        "bytes": 7340,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup-preparation/authoring/STAGING-SPEC-v1.json",
+        "sha256": "bfd1f95bd299636d797e37f752a2551bd9ceebb87767092b122f8a37bf6ce69d"
+      },
+      {
+        "bytes": 11201,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup-preparation/authoring/emit_selection_v1.py",
+        "sha256": "38a91808638eca0ff2183fbbdabf3a2c11b1f7e4a0dad5e1823a2954f143c4f6"
+      },
+      {
+        "bytes": 38509,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup-preparation/authoring/stage_receiver_current_c0_followup_v1.py",
+        "sha256": "1485f89729e8f476a7a48037783eedfbd5d8d26f67f5e6841ce1837c8859baac"
+      },
+      {
+        "bytes": 70838,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup-preparation/capture-authoring/receiver_capture_current_c0_followup_primary_v1.py",
+        "sha256": "08d4343ced6a3d02e0fcf3c7c0bf95aade621b17cf8f47cd3da2df2167e766c4"
+      },
+      {
+        "bytes": 871,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup-preparation/receiving-selection-v1/BOUNDARY.json",
+        "sha256": "b0e0f4652c006314c7883db81b340ea1726674c63d15746fb5aed4cb3b7b38b7"
+      },
+      {
+        "bytes": 1264,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup-preparation/root-stage-v1/RECEIPT.json",
+        "sha256": "2316172c263178742509426902bb36dfa9bc10157c40ea7b496baf5a15a80fc4"
+      },
+      {
+        "bytes": 0,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup-preparation/root-stage-v1/stderr.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "bytes": 265,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup-preparation/root-stage-v1/stdout.log",
+        "sha256": "7be36c1d74a60ca1f6293073956388b6b085c9a2c2b8057fa2b32975205bf01a"
+      },
+      {
+        "bytes": 8745,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup-preparation/root_materialize_current_c0_followup_v1.py",
+        "sha256": "01ad0970d4a068c09421a86c4c463fb4a21ca7b6b52c6330a120f82aa64d521b"
+      },
+      {
+        "bytes": 458057,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup-preparation/selection-v1/CURRENT-SELECTION.json",
+        "sha256": "00919e02a1e1861a8a625e75b0c7473dc6578a35b895a790f6121dc6455520f3"
+      },
+      {
+        "bytes": 3523,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup-preparation/selection-v1/STAGES.json",
+        "sha256": "e0f312633be82754ff4d7c42d5bb8455ae7270dcfcf8ab1acd74fb992c93f4c7"
+      },
+      {
+        "bytes": 1729,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup-preparation/tool-copy-authoring-v1/COMMAND.json",
+        "sha256": "f25af863f0d24de1db29501243264b143a4ac4af59bd044619d680c1dbb09b1a"
+      },
+      {
+        "bytes": 2234162,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup-preparation/tool-copy-authoring-v1/COPY-RESULT.json",
+        "sha256": "5373d98423a98b0402157c6d8a0bb9845b1e1c7920eda5fd1be3c88422ddaaff"
+      },
+      {
+        "bytes": 2233872,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup-preparation/tool-copy-authoring-v1/SOURCE.json",
+        "sha256": "f0643bbb79b7a6d7ec7e7d7ed97f780554cc480322ef15013d1f03bd878dc07b"
+      },
+      {
+        "bytes": 4942,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup-preparation/tool-copy-authoring-v1/copy_runtime.py",
+        "sha256": "bf6c5dbeb02feeef46262ee55e743232757c34fe745e37869ac6fde33b5e234c"
+      },
+      {
+        "bytes": 1259225,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup/ROOT-READBACK.json",
+        "sha256": "7759d98e78a2437f4eafa1c8b7187d4279aac2ba82547f6d7e222a38f0d3632c"
+      },
+      {
+        "bytes": 1721263,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup/STAGING.json",
+        "sha256": "610970eb8f49482809e781ee7f49d9361b192c9f7e6b42b9a024fd82d75fb6be"
+      },
+      {
+        "bytes": 1363,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup/materialization-v1/ADMISSION.json",
+        "sha256": "a58ce5328128dde68719122ef5ababdec4af99bfae7f9825a1fc53c6b1b8bf4a"
+      },
+      {
+        "bytes": 459,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup/materialization-v1/ROOT-READBACK.json",
+        "sha256": "024c7b204167930d7b6c4071d1a508694649bc55899d8919c699bed47b0b7a7d"
+      },
+      {
+        "bytes": 2886,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup/materialization-v1/command.json",
+        "sha256": "c1227790beca51b2447d0aaa743a354d2d987503b85c1b4b455c9c198d51f817"
+      },
+      {
+        "bytes": 1200779,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup/materialization-v1/source-after.json",
+        "sha256": "b78919a4f9da8c771002b036e839f76b3d998f5aac1b8873ac4a19ced7305f91"
+      },
+      {
+        "bytes": 1200779,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup/materialization-v1/source-before.json",
+        "sha256": "b78919a4f9da8c771002b036e839f76b3d998f5aac1b8873ac4a19ced7305f91"
+      },
+      {
+        "bytes": 0,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup/materialization-v1/stderr.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "bytes": 8852,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup/materialization-v1/stdout.log",
+        "sha256": "cc71f9cca24540b2affdcb1cb366eef098305d5e46480ff8cdf61e02e5d62997"
+      },
+      {
+        "bytes": 3109,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup/primary-observation-v1/PREPARED.json",
+        "sha256": "1120b5f43749f3fd5031f1586552cc8a74ab278bda92e834d8d75abb346ebd3c"
+      },
+      {
+        "bytes": 32991,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup/primary-observation-v1/RESULT.json",
+        "sha256": "fcbf7e041a1465babc525f4a7c9743a5d4f57cb43a1c4bd065d3e90fbdcd1a51"
+      },
+      {
+        "bytes": 29660,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup/primary-observation-v1/ROOT-READBACK.json",
+        "sha256": "6b10497060ad4f2413890a4f5cffef11150d7a2160116a6c92d0cae591a4a6c9"
+      },
+      {
+        "bytes": 267459,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup/primary-observation-v1/cache-before.json",
+        "sha256": "f9cdeed4c76c2292e8719e5914e3dde399552f1661b01cb7bb2280f21ae06048"
+      },
+      {
+        "bytes": 267459,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup/primary-observation-v1/chain/01-dag-install-prerequisite/cache-after.json",
+        "sha256": "f9cdeed4c76c2292e8719e5914e3dde399552f1661b01cb7bb2280f21ae06048"
+      },
+      {
+        "bytes": 2817,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup/primary-observation-v1/chain/01-dag-install-prerequisite/receipt.json",
+        "sha256": "ee84521a77a0ec9c1476d246400bf726678e4ab6289c4cdfcf94b6d7c0fb92a5"
+      },
+      {
+        "bytes": 340128,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup/primary-observation-v1/chain/01-dag-install-prerequisite/reports.json",
+        "sha256": "88dbe27874d8075bcb00a150d2bd3d1c145ae92d6d3c5a13adc9f83116e4164f"
+      },
+      {
+        "bytes": 233922,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup/primary-observation-v1/chain/01-dag-install-prerequisite/reports/m3/tooling/migration-recipes/target/jacoco.exec",
+        "sha256": "5a7d91c359763292049c759e9d62a2dd0a72bba1f733e72bcc645eeb0c6bb426"
+      },
+      {
+        "bytes": 21328,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup/primary-observation-v1/chain/01-dag-install-prerequisite/reports/m3/tooling/migration-recipes/target/surefire-reports/TEST-com.m3.rewrite.InstallIndexStringCompatibilityTest.xml",
+        "sha256": "eb98aba0cc35191efc99dee4a8e3ee546db6171201efbc92d6ec9609610c0026"
+      },
+      {
+        "bytes": 21618,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup/primary-observation-v1/chain/01-dag-install-prerequisite/reports/m3/tooling/migration-recipes/target/surefire-reports/TEST-com.m3.rewrite.M3A3DeclarativeDeliveryRecipeTest.xml",
+        "sha256": "eb3e8ecd2028b9b9cec5026c3aa031c8cb55584d400670bd1f273d610c439040"
+      },
+      {
+        "bytes": 21238,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup/primary-observation-v1/chain/01-dag-install-prerequisite/reports/m3/tooling/migration-recipes/target/surefire-reports/TEST-com.m3.rewrite.M3A3LabDeliveryRecipeTest.xml",
+        "sha256": "4564237cd0c8895f35f48733fc012540f30b59726588e0bb4d63068fc66929da"
+      },
+      {
+        "bytes": 21263,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup/primary-observation-v1/chain/01-dag-install-prerequisite/reports/m3/tooling/migration-recipes/target/surefire-reports/TEST-com.m3.rewrite.M3A3LevenshteinEvidenceClosureRecipeTest.xml",
+        "sha256": "6e738dfb8179369ecd37cdb626653d99963d08b5c0bfc409a3efe7bc9acfa05d"
+      },
+      {
+        "bytes": 21261,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup/primary-observation-v1/chain/01-dag-install-prerequisite/reports/m3/tooling/migration-recipes/target/surefire-reports/TEST-com.m3.rewrite.M3A3MasteryReceiptDeliveryRecipeTest.xml",
+        "sha256": "e2c8bd56094179d09bdbb01ff7e5815078f61f833f88570f676caac6e547e555"
+      },
+      {
+        "bytes": 21254,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup/primary-observation-v1/chain/01-dag-install-prerequisite/reports/m3/tooling/migration-recipes/target/surefire-reports/TEST-com.m3.rewrite.M3A3MasteryReceiptWorkflowRecipeTest.xml",
+        "sha256": "ef33b0b74de78a575e6f453602c6ce9d79e5c7a0ed1c728250243f27d918d8e8"
+      },
+      {
+        "bytes": 21174,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup/primary-observation-v1/chain/01-dag-install-prerequisite/reports/m3/tooling/migration-recipes/target/surefire-reports/TEST-com.m3.rewrite.M3A3MasteryV6DeliveryTest.xml",
+        "sha256": "0394424377af9df9b31aeb12c90ff9afffa28cc555a5050d5012f30345f4f5d3"
+      },
+      {
+        "bytes": 21233,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup/primary-observation-v1/chain/01-dag-install-prerequisite/reports/m3/tooling/migration-recipes/target/surefire-reports/TEST-com.m3.rewrite.M3A3MasteryWorkflowRecipeTest.xml",
+        "sha256": "8eed01213737ff418fd202c653095d39d44ce5139e41da1ac127363e3a3c3e56"
+      },
+      {
+        "bytes": 21264,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup/primary-observation-v1/chain/01-dag-install-prerequisite/reports/m3/tooling/migration-recipes/target/surefire-reports/TEST-com.m3.rewrite.M3A3RegexMemoryLabDeliveryRecipeTest.xml",
+        "sha256": "3428353eed516217732df83ec6975b892ffd894ca44dff6274b4e9018b8c2d7b"
+      },
+      {
+        "bytes": 21251,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup/primary-observation-v1/chain/01-dag-install-prerequisite/reports/m3/tooling/migration-recipes/target/surefire-reports/TEST-com.m3.rewrite.M3A3RegexMemoryWorkflowRecipeTest.xml",
+        "sha256": "d90a2d1a323f9ca37544227b611262c637c3262293cbfcde47b5aa6ee1841991"
+      },
+      {
+        "bytes": 21203,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup/primary-observation-v1/chain/01-dag-install-prerequisite/reports/m3/tooling/migration-recipes/target/surefire-reports/TEST-com.m3.rewrite.M3ImportAdmissionTest.xml",
+        "sha256": "c5ce446efa767fad57c0a75db5843e796862c630a9748619eded33c79a13f653"
+      },
+      {
+        "bytes": 21261,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup/primary-observation-v1/chain/01-dag-install-prerequisite/reports/m3/tooling/migration-recipes/target/surefire-reports/TEST-com.m3.rewrite.M3Java21ConvergenceAdmissionTest.xml",
+        "sha256": "f13954d31e5f4115bf921e71cbe77e9d0155077830c406b3db004ba8b071486a"
+      },
+      {
+        "bytes": 22054,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup/primary-observation-v1/chain/01-dag-install-prerequisite/reports/m3/tooling/migration-recipes/target/surefire-reports/TEST-com.m3.rewrite.M3Java21ConvergenceRecipeTest.xml",
+        "sha256": "7a5be76cfc430ac0461f37f595f04ee15eddd1b57ee70e9b1dd337589333540d"
+      },
+      {
+        "bytes": 21270,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup/primary-observation-v1/chain/01-dag-install-prerequisite/reports/m3/tooling/migration-recipes/target/surefire-reports/TEST-com.m3.rewrite.M3Java21DeclarativeConvergenceTest.xml",
+        "sha256": "e8043d43a3f31712a5701c831684cd5d5f8c20a259e989201c480dbe4f8da419"
+      },
+      {
+        "bytes": 21391,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup/primary-observation-v1/chain/01-dag-install-prerequisite/reports/m3/tooling/migration-recipes/target/surefire-reports/TEST-com.m3.rewrite.a3.M3A3AlgorithmCatalogueRecipeTest.xml",
+        "sha256": "2c9106089c95278229c7ed01dcf0a8ba83f3226660785428e1d3587ae0df7064"
+      },
+      {
+        "bytes": 21248,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup/primary-observation-v1/chain/01-dag-install-prerequisite/reports/m3/tooling/migration-recipes/target/surefire-reports/TEST-com.m3.rewrite.a3.M3A3MasteryV6RecipeTest.xml",
+        "sha256": "a307ab4d52e426688a4ba24a7c3af8163b7fd0e1dd4d6190029e173ad5fd25e5"
+      },
+      {
+        "bytes": 22127,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup/primary-observation-v1/chain/01-dag-install-prerequisite/reports/m3/tooling/migration-recipes/target/surefire-reports/TEST-com.m3.rewrite.a3.M3A3SerialFileWorkRecipeTest.xml",
+        "sha256": "7278f95d2d8d73b9d2efa6bdc00a7c4a270c86437c1c3d85742b87c63b6369ed"
+      },
+      {
+        "bytes": 21554,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup/primary-observation-v1/chain/01-dag-install-prerequisite/reports/m3/tooling/migration-recipes/target/surefire-reports/TEST-com.m3.rewrite.atom.JccReceivingFixtureTest.xml",
+        "sha256": "251b7240095e059d5283707313069fe86004a8f25f3b143424ed9ae666f8be09"
+      },
+      {
+        "bytes": 21224,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup/primary-observation-v1/chain/01-dag-install-prerequisite/reports/m3/tooling/migration-recipes/target/surefire-reports/TEST-com.m3.rewrite.atom.M3AtomCommentRecipeTest.xml",
+        "sha256": "7388a3b97f453d2f2e0973d20f11fa35ecba3d23a4819eb4666b21ec19973129"
+      },
+      {
+        "bytes": 22004,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup/primary-observation-v1/chain/01-dag-install-prerequisite/reports/m3/tooling/migration-recipes/target/surefire-reports/TEST-com.m3.rewrite.atom.M3AtomCoverageClosureTest.xml",
+        "sha256": "97bbf077416dd5a3500e723153f0d177907da6909fbf2f69aea79321d9a7a413"
+      },
+      {
+        "bytes": 21735,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup/primary-observation-v1/chain/01-dag-install-prerequisite/reports/m3/tooling/migration-recipes/target/surefire-reports/TEST-com.m3.rewrite.atom.M3AtomDefensiveBranchTest.xml",
+        "sha256": "046e1264d4935716db713cfeba08a91112615bcf4b5345aa54a4f43b6fc8cfc8"
+      },
+      {
+        "bytes": 21547,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup/primary-observation-v1/chain/01-dag-install-prerequisite/reports/m3/tooling/migration-recipes/target/surefire-reports/TEST-com.m3.rewrite.atom.M3AtomizePureIntReturnRecipeTest.xml",
+        "sha256": "040de708a66523ac3fa7554d755f2c0bb9e7edc13a742aba39dd0cc1fd2a7eb4"
+      },
+      {
+        "bytes": 21255,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup/primary-observation-v1/chain/01-dag-install-prerequisite/reports/m3/tooling/migration-recipes/target/surefire-reports/TEST-com.m3.rewrite.atom.M3DocumentationContractTest.xml",
+        "sha256": "d7a24c48f8cc9f63edf78b796edc74846eafb51a1c3201a3a9da6801f8790928"
+      },
+      {
+        "bytes": 21848,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup/primary-observation-v1/chain/01-dag-install-prerequisite/reports/m3/tooling/migration-recipes/target/surefire-reports/TEST-com.m3.rewrite.atom.M3IntRecipeProjectTest.xml",
+        "sha256": "e34be4177f2375a320c7f91fe28bb8712730ada25f39e2cbd0f41035e8bb4a28"
+      },
+      {
+        "bytes": 21472,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup/primary-observation-v1/chain/01-dag-install-prerequisite/reports/m3/tooling/migration-recipes/target/surefire-reports/TEST-com.m3.rewrite.atom.M3IntSpectrumTest.xml",
+        "sha256": "739dd5689ab6ec4187941b111e6cde7023baed701e080b5d5cea7b97b2161f4d"
+      },
+      {
+        "bytes": 21439,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup/primary-observation-v1/chain/01-dag-install-prerequisite/reports/m3/tooling/migration-recipes/target/surefire-reports/TEST-com.m3.rewrite.atom.M3InventoryPureIntAtomCandidatesTest.xml",
+        "sha256": "09462c9e2d9b27721c52978953d7db9cb2ca40c69d2aadd90618ba36dadac934"
+      },
+      {
+        "bytes": 21240,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup/primary-observation-v1/chain/01-dag-install-prerequisite/reports/m3/tooling/migration-recipes/target/surefire-reports/TEST-com.m3.rewrite.atom.M3PatternMarkerTest.xml",
+        "sha256": "44ff4ed2635f0f9da02e9b1c0cde0a73fd7f41545578b30872ca908421f502eb"
+      },
+      {
+        "bytes": 21540,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup/primary-observation-v1/chain/01-dag-install-prerequisite/reports/m3/tooling/migration-recipes/target/surefire-reports/TEST-com.m3.rewrite.atom.M3PureIntConvergenceRecipeTest.xml",
+        "sha256": "088de1f1414c7dce954404522b06af185a61f7ee98cc20570ecfcf8693521a58"
+      },
+      {
+        "bytes": 21388,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup/primary-observation-v1/chain/01-dag-install-prerequisite/reports/m3/tooling/migration-recipes/target/surefire-reports/TEST-com.m3.rewrite.atom.M3RepositoryCorpusTest.xml",
+        "sha256": "ccc51d56ec29dab10bc4d3cfd6d2245dafac51a674c9876e292e36395ed36a1f"
+      },
+      {
+        "bytes": 21310,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup/primary-observation-v1/chain/01-dag-install-prerequisite/reports/m3/tooling/migration-recipes/target/surefire-reports/TEST-com.m3.rewrite.backport.A3KitTest.xml",
+        "sha256": "cd920cfd8f480fdeb6eef0c1b779519771c3f20658f8f7d1eee26f98b0a7ed38"
+      },
+      {
+        "bytes": 21343,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup/primary-observation-v1/chain/01-dag-install-prerequisite/reports/m3/tooling/migration-recipes/target/surefire-reports/TEST-com.m3.rewrite.backport.ClassVerTest.xml",
+        "sha256": "b8932489eb9f5eaef812e22fa4bc7b092e5f352dd4337989dd43e71d26ea15e7"
+      },
+      {
+        "bytes": 21375,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup/primary-observation-v1/chain/01-dag-install-prerequisite/reports/m3/tooling/migration-recipes/target/surefire-reports/TEST-com.m3.rewrite.backport.ClosureRecipeTest.xml",
+        "sha256": "6eb0d2c4ea12347af3526533daf366869a3997b803667917655f295a79038627"
+      },
+      {
+        "bytes": 22432,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup/primary-observation-v1/chain/01-dag-install-prerequisite/reports/m3/tooling/migration-recipes/target/surefire-reports/TEST-com.m3.rewrite.backport.DbRecipeTest.xml",
+        "sha256": "c66273826aff830b2b8beedf60351e7a692d434de4436a778c4059ebd5496869"
+      },
+      {
+        "bytes": 22089,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup/primary-observation-v1/chain/01-dag-install-prerequisite/reports/m3/tooling/migration-recipes/target/surefire-reports/TEST-com.m3.rewrite.backport.DescriptorRecipeTest.xml",
+        "sha256": "5796456538d3d583bfa857ea0608973ba72e96ba1761685817061ab2671cf69c"
+      },
+      {
+        "bytes": 21474,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup/primary-observation-v1/chain/01-dag-install-prerequisite/reports/m3/tooling/migration-recipes/target/surefire-reports/TEST-com.m3.rewrite.backport.GateTest.xml",
+        "sha256": "b0734277399be22afbcea68387128f16df28ec2c8475a42ede9ab58a42a8ea48"
+      },
+      {
+        "bytes": 22036,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup/primary-observation-v1/chain/01-dag-install-prerequisite/reports/m3/tooling/migration-recipes/target/surefire-reports/TEST-com.m3.rewrite.backport.JccHandoffTest.xml",
+        "sha256": "60214e91f1d34e89cab0da05ec49c23d81be9b124af1e5fe33b136551cce87de"
+      },
+      {
+        "bytes": 22677,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup/primary-observation-v1/chain/01-dag-install-prerequisite/reports/m3/tooling/migration-recipes/target/surefire-reports/TEST-com.m3.rewrite.backport.JccSourceFinalHandoffTest.xml",
+        "sha256": "cf5737b25d253e84bec56a098465c658d6eedc1e056c7ca00909970fd93da6bc"
+      },
+      {
+        "bytes": 22894,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup/primary-observation-v1/chain/01-dag-install-prerequisite/reports/m3/tooling/migration-recipes/target/surefire-reports/TEST-com.m3.rewrite.backport.JccSourceRecoveryHandoffTest.xml",
+        "sha256": "7239f2888c28a7c402aaee4fb68cfa17fd2fd0f2be5bb3dc9725f7770764e0b0"
+      },
+      {
+        "bytes": 21189,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup/primary-observation-v1/chain/01-dag-install-prerequisite/reports/m3/tooling/migration-recipes/target/surefire-reports/TEST-com.m3.rewrite.backport.JniTest.xml",
+        "sha256": "5cae3882f2d55986bcac8d7f377ea7236b8d97e053cb83c5271e803923fd9457"
+      },
+      {
+        "bytes": 21297,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup/primary-observation-v1/chain/01-dag-install-prerequisite/reports/m3/tooling/migration-recipes/target/surefire-reports/TEST-com.m3.rewrite.backport.KitTest.xml",
+        "sha256": "ce7b6082adee5a2890d442a9751a517502abdff7e66acfa6356df1772734864c"
+      },
+      {
+        "bytes": 21106,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup/primary-observation-v1/chain/01-dag-install-prerequisite/reports/m3/tooling/migration-recipes/target/surefire-reports/TEST-com.m3.rewrite.backport.M3A3NativeJniLaneRecipeTest.xml",
+        "sha256": "a9fca49bb21ded81851fd1a493bd8a0c0b6c61bb398f6e599dedeaf65fbfd9b5"
+      },
+      {
+        "bytes": 21424,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup/primary-observation-v1/chain/01-dag-install-prerequisite/reports/m3/tooling/migration-recipes/target/surefire-reports/TEST-com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipeTest.xml",
+        "sha256": "1adaceabef5943bae244ebeae2611b9566a282a3242b207ad9e589492b0c6db1"
+      },
+      {
+        "bytes": 21409,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup/primary-observation-v1/chain/01-dag-install-prerequisite/reports/m3/tooling/migration-recipes/target/surefire-reports/TEST-com.m3.rewrite.backport.M3Jdk8347112BackportRecipeTest.xml",
+        "sha256": "19236f0339abe16bb68b50d283904e0fddaaa661535df11be002b9cf2370ca92"
+      },
+      {
+        "bytes": 21409,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup/primary-observation-v1/chain/01-dag-install-prerequisite/reports/m3/tooling/migration-recipes/target/surefire-reports/TEST-com.m3.rewrite.backport.M3Jdk8364182BackportRecipeTest.xml",
+        "sha256": "6478b3ebdc46ee49640f48f73128ddb15b2c6542a3f4909cedd8bffd8493affe"
+      },
+      {
+        "bytes": 21454,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup/primary-observation-v1/chain/01-dag-install-prerequisite/reports/m3/tooling/migration-recipes/target/surefire-reports/TEST-com.m3.rewrite.backport.M3Jdk8367584JfrOptionsHelpBackportRecipeTest.xml",
+        "sha256": "eddb98701bbcf4e28972e0c424afe36aa73eda48cf1260b04411466076d5e17f"
+      },
+      {
+        "bytes": 21457,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup/primary-observation-v1/chain/01-dag-install-prerequisite/reports/m3/tooling/migration-recipes/target/surefire-reports/TEST-com.m3.rewrite.backport.M3Jdk8368692PasswordSystemInBackportRecipeTest.xml",
+        "sha256": "651762ade57b6a7b236ca4d59ef06befd527cc725d90e94ddff11dc1b19fd80a"
+      },
+      {
+        "bytes": 21543,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup/primary-observation-v1/chain/01-dag-install-prerequisite/reports/m3/tooling/migration-recipes/target/surefire-reports/TEST-com.m3.rewrite.backport.M3Jdk8374808BackportRecipeTest.xml",
+        "sha256": "9cb228959e3dbc80831fd767146c1be5c90a5a318b43f24185c9b45b0eb334bd"
+      },
+      {
+        "bytes": 21618,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup/primary-observation-v1/chain/01-dag-install-prerequisite/reports/m3/tooling/migration-recipes/target/surefire-reports/TEST-com.m3.rewrite.backport.M3JdkExecutionFollowthroughRecipeTest.xml",
+        "sha256": "47f0daad03106290098cc360fac8cb0d6c1dc9822ee08ee250e0ebbeb02f1081"
+      },
+      {
+        "bytes": 21847,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup/primary-observation-v1/chain/01-dag-install-prerequisite/reports/m3/tooling/migration-recipes/target/surefire-reports/TEST-com.m3.rewrite.backport.M3Jep458BackportRecipeTest.xml",
+        "sha256": "5fc0ff1f0683afbde4a5adffb737d720a858efd1ac667df674d7becafb2bd9d2"
+      },
+      {
+        "bytes": 21781,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup/primary-observation-v1/chain/01-dag-install-prerequisite/reports/m3/tooling/migration-recipes/target/surefire-reports/TEST-com.m3.rewrite.backport.M3Jep485StreamGatherersBackportRecipeTest.xml",
+        "sha256": "cd3211fae5aab81bf1fc748ff4744f3a32e8c2755a3f91855f77607ea7b2cf38"
+      },
+      {
+        "bytes": 21291,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup/primary-observation-v1/chain/01-dag-install-prerequisite/reports/m3/tooling/migration-recipes/target/surefire-reports/TEST-com.m3.rewrite.backport.M3StringCanonicalDagMasterRepairRecipeTest.xml",
+        "sha256": "e65ff5ae9dffdd143e340b80a754ca4248a816f4800fe2460141ba8f77eac01c"
+      },
+      {
+        "bytes": 31245,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup/primary-observation-v1/chain/01-dag-install-prerequisite/reports/m3/tooling/migration-recipes/target/surefire-reports/TEST-com.m3.rewrite.backport.M3StringHistoryConvergenceRecipeTest.xml",
+        "sha256": "f16ef77ed38a0773810a9413ab3295c2a1527fce65b3ed32f4f32deae6e96127"
+      },
+      {
+        "bytes": 21688,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup/primary-observation-v1/chain/01-dag-install-prerequisite/reports/m3/tooling/migration-recipes/target/surefire-reports/TEST-com.m3.rewrite.backport.M3VerbatimJavaPairRecipeTest.xml",
+        "sha256": "6d95de1e1a9395190fca796179ca3fb4ca786034cc50aa99d6ada27584f32c4c"
+      },
+      {
+        "bytes": 21827,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup/primary-observation-v1/chain/01-dag-install-prerequisite/reports/m3/tooling/migration-recipes/target/surefire-reports/TEST-com.m3.rewrite.backport.MapFactsRecipeTest.xml",
+        "sha256": "cb6319a6eecd2aec0fb6f38a7dfe89a8b8c1ff948ee6d493fbccc154dcb2dc8b"
+      },
+      {
+        "bytes": 21679,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup/primary-observation-v1/chain/01-dag-install-prerequisite/reports/m3/tooling/migration-recipes/target/surefire-reports/TEST-com.m3.rewrite.backport.MapGuardRecipeTest.xml",
+        "sha256": "50e8a3dbcd9b7606dafef4c584fd899fcbf06d4dab7144a60843398290732986"
+      },
+      {
+        "bytes": 21952,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup/primary-observation-v1/chain/01-dag-install-prerequisite/reports/m3/tooling/migration-recipes/target/surefire-reports/TEST-com.m3.rewrite.backport.MapUtfRecipeTest.xml",
+        "sha256": "29faebcc0973e295328b191c9ab2f58510c15410c88254efd6837201c1a57e92"
+      },
+      {
+        "bytes": 21363,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup/primary-observation-v1/chain/01-dag-install-prerequisite/reports/m3/tooling/migration-recipes/target/surefire-reports/TEST-com.m3.rewrite.backport.VersionRecipeTest.xml",
+        "sha256": "9f4564b41e62b04ac9e187fc0eea51090c8495ad750e92232b8c2034e9256619"
+      },
+      {
+        "bytes": 21389,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup/primary-observation-v1/chain/01-dag-install-prerequisite/reports/m3/tooling/migration-recipes/target/surefire-reports/TEST-com.m3.rewrite.scope.M3RecipeScopeDeclarationTest.xml",
+        "sha256": "866f4bdd00deb228893a9372859cad3d142cc673a7aea710dcbb2e09a0ab1145"
+      },
+      {
+        "bytes": 21477,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup/primary-observation-v1/chain/01-dag-install-prerequisite/reports/m3/tooling/migration-recipes/target/surefire-reports/TEST-com.m3.rewrite.scope.M3ScopeContractTest.xml",
+        "sha256": "a74749fbe2a29fc9e11970ec07038afdf15b14d8f16b6c010e88c6ae7222083a"
+      },
+      {
+        "bytes": 21678,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup/primary-observation-v1/chain/01-dag-install-prerequisite/reports/m3/tooling/migration-recipes/target/surefire-reports/TEST-com.m3.rewrite.scope.M3ScopeCoverageClosureTest.xml",
+        "sha256": "0d123240136d222cf88479c15c016b79a16dbfc0c2e31923e7b798b331ae06ec"
+      },
+      {
+        "bytes": 21116,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup/primary-observation-v1/chain/01-dag-install-prerequisite/reports/m3/tooling/migration-recipes/target/surefire-reports/TEST-com.m3.rewrite.scope.M3ScopeDefensiveBranchTest.xml",
+        "sha256": "12447f7da55b960f60050adbea34ba80a3e956a0840cc6ed0f72802b45448f0d"
+      },
+      {
+        "bytes": 21547,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup/primary-observation-v1/chain/01-dag-install-prerequisite/reports/m3/tooling/migration-recipes/target/surefire-reports/TEST-com.m3.rewrite.semantic.M3SemanticHashRecipeTest.xml",
+        "sha256": "1e501ff39232089a2c44eb504ac5b0cd1598fcbc63cb0dbeb34d832e6cab1ffd"
+      },
+      {
+        "bytes": 21261,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup/primary-observation-v1/chain/01-dag-install-prerequisite/reports/m3/tooling/migration-recipes/target/surefire-reports/TEST-com.synexia.rewrite.M3DocumentJavadocContractRecipeTest.xml",
+        "sha256": "2fcf4dddd5182000979507fd473297ab66a8181405d9694c648b4c6342774963"
+      },
+      {
+        "bytes": 21425,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup/primary-observation-v1/chain/01-dag-install-prerequisite/reports/m3/tooling/migration-recipes/target/surefire-reports/TEST-com.synexia.rewrite.M3MIndexJniNewStringAdmissionRecipeTest.xml",
+        "sha256": "937608a8f3c370ca4a57de9fc30682c312dfe08aced731993acb136e7e77d1c5"
+      },
+      {
+        "bytes": 21480,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup/primary-observation-v1/chain/01-dag-install-prerequisite/reports/m3/tooling/migration-recipes/target/surefire-reports/TEST-com.synexia.rewrite.M3MIndexJoinedCharsViewRecipeTest.xml",
+        "sha256": "02b24079b3058753184900b047dde01b52c9be71e6c10bc97bd08bf86c94a456"
+      },
+      {
+        "bytes": 21426,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup/primary-observation-v1/chain/01-dag-install-prerequisite/reports/m3/tooling/migration-recipes/target/surefire-reports/TEST-com.synexia.rewrite.M3MIndexStringBulkCharBoundaryRecipeTest.xml",
+        "sha256": "691ff98bd595aeee68508a003ec52ae3f18d5f01f50afce81671bf4d94e5f669"
+      },
+      {
+        "bytes": 21237,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup/primary-observation-v1/chain/01-dag-install-prerequisite/reports/m3/tooling/migration-recipes/target/surefire-reports/TEST-com.synexia.rewrite.M3ScopeLiteralRepairRecipeTest.xml",
+        "sha256": "db3ab916f3fc454720a0d74732707090d01fc9a92e6c618b573335f6f0ad849a"
+      },
+      {
+        "bytes": 210,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup/primary-observation-v1/chain/01-dag-install-prerequisite/stderr.log",
+        "sha256": "9ddf3781b5e43a87b1d67caac2bc4b251f9ce8d77c509c8369129f4b0359fd55"
+      },
+      {
+        "bytes": 27179,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup/primary-observation-v1/chain/01-dag-install-prerequisite/stdout.log",
+        "sha256": "2cebe3a3879609d3a5366c7d9dd06a68d85f7c02a9a4081756f1f8440bbe89d3"
+      },
+      {
+        "bytes": 2496,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup/primary-observation-v1/config.json",
+        "sha256": "171849e8995ba48367294c0152874bed8eef08875635e228c4db3957e84baf05"
+      },
+      {
+        "bytes": 526,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup/primary-observation-v1/git-before.json",
+        "sha256": "f0f3df65cb0dc1f18b72cbe07ca6244c070b58433f4726ebce79cf955ad01443"
+      },
+      {
+        "bytes": 72046,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup/primary-observation-v1/inputs.json",
+        "sha256": "f4da66b5b9260b5c27c4fa7e9db8c4619f54c73640ea8336a87ed1e75adaaec1"
+      },
+      {
+        "bytes": 351,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup/primary-observation-v1/launchers-before.json",
+        "sha256": "25bce04cea28c26aee5cf1b31cf0c80a3544e8f200378a527e7671c29da739cf"
+      },
+      {
+        "bytes": 948361,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup/primary-observation-v1/sources.json",
+        "sha256": "a3b85f1403340edddd26dc9b8ea6a0997d5bb10b2a57d161524cd6bafc8114c7"
+      },
+      {
+        "bytes": 1782732,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup/primary-observation-v1/tools-before.json",
+        "sha256": "b999a0ba173c75ef6339151f92553501250680ad98ac25449a0012cd72e52528"
+      },
+      {
+        "bytes": 2306764,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-preparation/authoring/CURRENT-CONTEXT-v2.json",
+        "sha256": "674bd0433e53242c7b9d8f91491ab73bbe1ddf4cccb409519c4df463d1abd2c3"
+      },
+      {
+        "bytes": 1483117,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-preparation/authoring/HISTORICAL-RETENTION-v1.json",
+        "sha256": "83b2f2cc9e7b87ffb2aaa21d10ad7b6485455565904b1f5465d34bcb53fd23bb"
+      },
+      {
+        "bytes": 5411,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-preparation/authoring/REQUIRED-DELIVERY-SOURCES-v1.json",
+        "sha256": "190da366b4302b5557eb94fa6dc05d89da9ab1576f82a6b2aa24c73d8dc2e85b"
+      },
+      {
+        "bytes": 1702447,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0/STAGING.json",
+        "sha256": "88b02c6dc1e0d312ea3780665174841d117e43f6ed5b2333e5d34e7c8732a008"
+      },
+      {
+        "bytes": 2760,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0/materialization-v1/command.json",
+        "sha256": "69c225f203805b38dd5f4a76828f80cf8d339b53a1b8603f4cc29998e1017f70"
+      },
+      {
+        "bytes": 1200002,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0/materialization-v1/source-after.json",
+        "sha256": "6d2526323c2851f6ebc8e2dbfd01de1a4a52c0fea87e02ab0a69233ee6e87298"
+      },
+      {
+        "bytes": 1200002,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0/materialization-v1/source-before.json",
+        "sha256": "6d2526323c2851f6ebc8e2dbfd01de1a4a52c0fea87e02ab0a69233ee6e87298"
+      },
+      {
+        "bytes": 0,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0/materialization-v1/stderr.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "bytes": 8699,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0/materialization-v1/stdout.log",
+        "sha256": "9c966898caabd5417db0bd49a1b7b8dc7b11f630edd946c6d2273777ee86abc0"
+      },
+      {
+        "bytes": 32077,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0/primary-observation-v1/RESULT.json",
+        "sha256": "78195f460e0c2d58d4736660dab3e3244c16c3b42ac644e065833969ced8e466"
+      },
+      {
+        "bytes": 6160,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/workspace-recovery-v1/git-base-c0/RESULT.json",
+        "sha256": "9f9f7008d8b922325fe8fab43d4c18705b26311abd91526914ea98a67683441e"
+      }
+    ],
+    "materializationEvidence": [
+      {
+        "bytes": 2886,
+        "field": "materializationCommandReceipt",
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup/materialization-v1/command.json",
+        "sha256": "c1227790beca51b2447d0aaa743a354d2d987503b85c1b4b455c9c198d51f817"
+      },
+      {
+        "bytes": 8852,
+        "field": "materializationReceipt",
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup/materialization-v1/stdout.log",
+        "sha256": "cc71f9cca24540b2affdcb1cb366eef098305d5e46480ff8cdf61e02e5d62997"
+      }
+    ],
+    "observationScope": "PRIMARY_ONLY",
+    "observedBooleans": {
+      "allAdmittedGroupsQualified": false,
+      "bridgeGroupQualified": false,
+      "canonicalProductionApplied": false,
+      "canonicalPromotionAuthorized": false,
+      "consumerQualified": false,
+      "fullOpenJdkBuildQualified": false,
+      "fullReceiverQualified": false,
+      "hostedWorkflowExecuted": false,
+      "jep458BlockedSpecificationObserved": false,
+      "jep458HostedWorkflowQualified": false,
+      "jep458ProjectionQualified": false,
+      "materializedInputsQualified": false,
+      "positiveCliGroupsQualified": false,
+      "preparedInputFixedPointObserved": true,
+      "primaryGroupQualified": false,
+      "strictCanonicalAdmission": false,
+      "testsCountedOnlyFromActualReports": true
+    },
+    "qualificationNotInferredByPackaging": true,
+    "reportedSchema": "m3.ci8891.receiver-capture-result/8-primary",
+    "reportedStatus": "PRIMARY_ONLY_STOP",
+    "status": "ACTUAL_TERMINAL_RETAINED",
+    "terminal": {
+      "bytes": 32991,
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup/primary-observation-v1/RESULT.json",
+      "sha256": "fcbf7e041a1465babc525f4a7c9743a5d4f57cb43a1c4bd065d3e90fbdcd1a51"
+    }
+  }
+}

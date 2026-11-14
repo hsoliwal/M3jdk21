@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright 2026 Hitesh Soliwal. SPDX-License-Identifier: Apache-2.0 -->
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.m3</groupId>
+  <artifactId>retained-capability-audit</artifactId>
+  <version>0.1.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
+
+  <properties>
+    <m3.repo>${project.basedir}/../..</m3.repo>
+    <m3.retentionCommit>0000000000000000000000000000000000000000</m3.retentionCommit>
+    <m3.retentionCatalogue>m3/history/RETAINED_CAPABILITIES.tsv</m3.retentionCatalogue>
+    <m3.output>${java.io.tmpdir}/m3-retained-capability-audit</m3.output>
+    <m3.python>python3</m3.python>
+  </properties>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <version>3.6.4</version>
+        <executions>
+          <execution>
+            <id>retention-contract-tests</id>
+            <phase>test</phase>
+            <goals><goal>exec</goal></goals>
+            <configuration>
+              <executable>${m3.python}</executable>
+              <workingDirectory>${project.basedir}</workingDirectory>
+              <arguments>
+                <argument>-B</argument>
+                <argument>-m</argument>
+                <argument>unittest</argument>
+                <argument>-v</argument>
+                <argument>test_retention.py</argument>
+              </arguments>
+            </configuration>
+          </execution>
+          <execution>
+            <id>retained-capability-audit</id>
+            <phase>verify</phase>
+            <goals><goal>exec</goal></goals>
+            <configuration>
+              <executable>${m3.python}</executable>
+              <workingDirectory>${project.basedir}</workingDirectory>
+              <arguments>
+                <argument>-B</argument>
+                <argument>retention.py</argument>
+                <argument>--repo</argument>
+                <argument>${m3.repo}</argument>
+                <argument>--commit</argument>
+                <argument>${m3.retentionCommit}</argument>
+                <argument>--catalogue</argument>
+                <argument>${m3.retentionCatalogue}</argument>
+                <argument>--output</argument>
+                <argument>${m3.output}</argument>
+                <argument>--require-no-missing</argument>
+              </arguments>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+</project>

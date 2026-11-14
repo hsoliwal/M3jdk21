@@ -1,0 +1,5 @@
+Supplier.java:51:15: compiler.warn.proc.messager: no @param for monitor
+Supplier.java:51:15: compiler.warn.proc.messager: no @return
+- compiler.err.warnings.and.werror
+1 error
+2 warnings

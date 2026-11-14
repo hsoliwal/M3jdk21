@@ -1,0 +1,191 @@
+{
+  "format": "m3-wrapper-convergence-public-handoff-1",
+  "canonical_repository": "hsoliwal/com.synexia",
+  "canonical_source_commit": "528aaf79cfae79c5dbfe7c307340329d320e8c44",
+  "canonical_publication_parent": "140c263a90f9803b9c46103c63355a286e0515f0",
+  "canonical_crate_path": "m3-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018",
+  "canonical_commit_requirement": "Actual published canonical source commit; recipe/copy identities remain separately hash-pinned.",
+  "target_repository": "hsoliwal/M3JDK21",
+  "original_catalogue_base": "0d73745d7203123533dce8f8fb264ba2746f6d2d",
+  "tested_integration_base": "f29b0afe7ad253cc0562bc8dfdd48fc1acec710e",
+  "census_scope": "Exact pinned production-source census under m3/collections/src/main; excludes later master revisions, tests, optional interop, qualification mirrors and java.base.",
+  "census": {
+    "original": {
+      "owners": 139,
+      "java": 129,
+      "c": 10,
+      "scoped_wrapper_source_reads": 5,
+      "inventory_only": 134
+    },
+    "tested_f29": {
+      "owners": 143,
+      "java": 133,
+      "c": 10,
+      "unchanged_from_original": 131,
+      "changed_from_original": 8,
+      "added_since_original": 4,
+      "removed_since_original": 0,
+      "overlay_scoped_source_reads": 10,
+      "overlay_external_wrapper_reviews": 2,
+      "overlay_inventory_only": 131
+    }
+  },
+  "accepted_production_atoms": [
+    {
+      "pass_id": "readonly-iterator",
+      "series_part": "WRAPPER_PR",
+      "source_path": "m3/collections/src/main/java/jdk/m3/collections/M3FilteredLists.java",
+      "preimage_sha256": "f1e3e21c37cbe084ef6b9446b86293d5039cd9b2bc6c1bf86d63a86793e3b8d5",
+      "postimage_sha256": "bb0ff9a8008521576530b0cea64d00b4f22e6e4b8424b8e5df7f416a6a8b6051",
+      "contract_effect_boundary": "Explicit defect correction: remove always refuses with UnsupportedOperationException; hasNext/next/forEachRemaining retain the prior cursor read path and effects; one additional wrapper per traversal; no speed claim"
+    },
+    {
+      "pass_id": "stable-order-groups",
+      "series_part": "INDEX_JNI_COMPANION_PR",
+      "source_path": "m3/collections/src/main/java/jdk/m3/collections/M3LongIndexProjection.java",
+      "preimage_sha256": "6be07c18dbbbe9ae259ff85821bb3f4ec666fddd820b0950f4115c4256f45deb",
+      "postimage_sha256": "bf601d711667e1078ca30246da6fa89b43d7ed951a3179e0a161365526581959",
+      "contract_effect_boundary": "Reverse equal-value groups while copying each group forward; retain duplicate physical occurrence order and current address-kernel loads; unknown-order stable merge remains; O(n) traversal and one result int array for the admitted opposite-order path"
+    },
+    {
+      "pass_id": "native-row-suffix",
+      "series_part": "INDEX_JNI_COMPANION_PR",
+      "source_path": "m3/collections/src/main/native/collections/m3_index_mask_window.c",
+      "preimage_sha256": "e57a418a183326d17cd117bcb81c2ddd49202b8195778f38a06b970c1058f16d",
+      "postimage_sha256": "3361cebc637103be73d7928e61b69ecc7fd6899abd4f8078019c39dfce6b3960",
+      "contract_effect_boundary": "Read row IDs from next+first_match and index local values by i-first_match; preserve current state reads, output batching, cursor, validation and both exports; no additional JNI calls or storage"
+    }
+  ],
+  "review_series": [
+    {
+      "part": 1,
+      "label": "WRAPPER_PR",
+      "production_passes": [
+        "readonly-iterator"
+      ],
+      "verification_passes": [
+        "wrapper-contract-v2",
+        "wrapper-junit-v2"
+      ],
+      "isolated_scope_tests": 232,
+      "isolated_scope_suites": 78,
+      "inherited_comparator_failure_retained": true
+    },
+    {
+      "part": 2,
+      "label": "INDEX_JNI_COMPANION_PR",
+      "depends_on": "WRAPPER_PR",
+      "production_passes": [
+        "stable-order-groups",
+        "native-row-suffix"
+      ],
+      "verification_passes": [
+        "index-contract",
+        "index-resource-probe",
+        "index-junit",
+        "native-region-proof"
+      ],
+      "scope_note": "The full-series index/JNI changes and their verification owners are supplied in this companion PR."
+    }
+  ],
+  "canonical_sdk_qualification": {
+    "passes": 12,
+    "tests": 60,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "pass_ids": [
+      "fixture-java",
+      "fixture-text",
+      "readonly-iterator",
+      "stable-order-groups",
+      "native-row-suffix",
+      "index-contract",
+      "index-resource-probe",
+      "index-junit",
+      "native-region-proof",
+      "wrapper-contract-v2",
+      "wrapper-junit-v2",
+      "invariant-policy"
+    ],
+    "pass_manifest_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/SDK_QUALIFIED_PASSES.tsv",
+    "pass_manifest_sha256": "8367e21361918e8837be808d8130c1828d4cf10d89cc3f4c6b4df672d15a43bb"
+  },
+  "public_host_portability": {
+    "passes": [
+      "fixture-java",
+      "fixture-text"
+    ],
+    "tests": 10,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "public_copied_sources": 61,
+    "existing_public_engine_sources": 4,
+    "exact_sdk_binding_rows_per_fixture": 14,
+    "summary_sha256": "57d9297f14c8162207f7c9d525bf5dd7ffafc840441b299cedc0f853fa93599d",
+    "evidence_manifest_sha256": "72974a4cafd34aabf3d0394c4ff18777d95e4869b927f643910577b46c2eb57f",
+    "scope": "Additional execution of the two fixture lanes; does not increase the twelve canonical pass count."
+  },
+  "complete_series_module_qualification": {
+    "source_state_sha256": "7786b891d0fc2d2b7f19613538d9ba275b215d6dc2833c83dd44b8c3f7b8984e",
+    "java": {
+      "tests": 233,
+      "suites": 79,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "receipt_sha256": "ea48c7ed54e109028347c8108a73375c0473e95b28c2b19397150fe2c649f6fb"
+    },
+    "native_enabled": {
+      "tests": 233,
+      "suites": 79,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "check_jni": true,
+      "receipt_sha256": "372bf9670f4357c12e2fd3c2554fba17fd8dc9b937e1cbc09b478c187ec06477"
+    },
+    "scope": "Separate executions of the same owning-module test definitions at the recorded complete-series source state.",
+    "auxiliary_suite_note": "Latest Java-mode auxiliary suite hashes were overwritten by native reporting; Java command/count/raw logs and the native detail remain retained. Earlier per-file artifacts remain unchanged."
+  },
+  "existing_public_engine": {
+    "canonical_source_commit": "98368e107f4a205d852ef958cd48c1ee633219b1",
+    "owner_root": "m3/arrays/qualification/empty-segments-20261017/recipe-custody/sdk-owner",
+    "maven_owner_property": "recipe.owner.root",
+    "override_requirement": "Resolve owner_root against the repository root to an absolute path and pass -Drecipe.owner.root=<absolute-path>.",
+    "new_engine_source_copies": 0,
+    "new_production_runtime_dependency": false,
+    "engine_sources_manifest": "m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/ENGINE_SOURCES.tsv",
+    "engine_sources_manifest_sha256": "61e6229847829b8351a0ae9b685ce7e00403c504d976a31ff029068a3ab5c9c5"
+  },
+  "copy_custody": {
+    "catalogue_files": 31,
+    "canonical_copy_manifest": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/CANONICAL_COPY_MANIFEST.tsv",
+    "canonical_copy_manifest_sha256": "64b2c9bd37f0c98a5cfa4314dc4a372e4b0de61a0efafd8adcf4aa6315af22b4",
+    "canonical_copies_checksum_sha256": "80e4ddff41be3ce01fd5490f52da5754b7e9a37bc2b6b68b8caa64fd3e9e292f",
+    "recipe_source_files": 61,
+    "recipe_copy_manifest": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/RECIPE_CUSTODY_COPY_MANIFEST.tsv",
+    "recipe_copy_manifest_sha256": "e6d04cd533217759d0602929326155d53c8164da8ddaaa53e3ba02107cc1e50b",
+    "original_owner_catalogue_sha256": "644f170f3857f8391cd0554c82e06b0980c6e600f115c22843310703e0029022",
+    "integration_owner_census_sha256": "caaf1684b3e6db0d8e1304672a2fd30dce260f145b1eb8da1e25d247a85ba7a9",
+    "index_candidate_catalogue_sha256": "1fa3f63d01d9b9f0f10a0c20a85a377f42ed30892730587111435b3566869f72",
+    "source_catalogue_rows_modified": false
+  },
+  "unresolved_wrapper_findings": [
+    "Bounded-navigation comparator exception identity; the runtime map witness fails before the mutable assertion, whose counterpart is separately source-reviewed.",
+    "Lawful interior-null navigation.",
+    "Ordinary read-only iterator predicate work.",
+    "Backing fail-fast behavior of the ordinary read-only iterator."
+  ],
+  "current_acceptance_path": "m3/collections/qualification/wrapper-convergence-20261018/ACCEPTANCE.json",
+  "public_evidence_root": "m3/collections/qualification/wrapper-convergence-20261018/evidence",
+  "attribution_path": "m3/collections/qualification/wrapper-convergence-20261018/THIRD_PARTY_NOTICES.md",
+  "publication_exclusions": [
+    "Ignored recipe-host/target outputs",
+    "Toolchain archives and binaries",
+    "Unqualified original wrapper v1 packets"
+  ],
+  "documentation_assembly_scope": "Exact metadata/document copies and authored overview only; no new compilation or test execution for this documentation task.",
+  "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12289"
+}

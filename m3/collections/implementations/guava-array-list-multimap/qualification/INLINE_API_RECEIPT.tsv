@@ -1,0 +1,13 @@
+schema	m3-guava-listmultimap-source-closure-1
+canonical	hsoliwal/com.synexia:m3/inline-guava-listmultimap-api-recipe-20261027
+recipe	com.synexia.m3.InlineGuavaListMultimapApi20261027
+donor	google/guava:v33.4.8
+first_party_implementation	com.m3.collections.guava.M3ArrayListMultimap
+indexed_storage	Object[]_keys_segments;int[]_hashes_index_counts_before_after;long[]_live
+interfaces	Multimap;ListMultimap;Multiset;Multiset.Entry
+api_method_descriptors	SOURCE_PRESERVED
+test_only_oracle	com.google.guava:guava:33.4.8-jre
+runtime_vendor_dependencies	NONE_PENDING_EXACT_HEAD
+source_manifest	synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-inline-guava-listmultimap-api-20261027/manifest.tsv
+cross_module_duplicate_type	Multiset_IN_GUAVA_HASH_MULTISET_MODULE;DO_NOT_COLOAD
+full_guava_or_five_provider_closure	NOT_QUALIFIED

@@ -1,0 +1,8 @@
+{
+  "publisher": "https://builds.shipilev.net/jtreg/",
+  "archive_url": "https://builds.shipilev.net/jtreg/jtreg-7.3.1+1.zip",
+  "publisher_sha1": "9e42d94f017ecaf5bb43da67d9a51f33ce7ba31c",
+  "observed_sha256": "a2a9d6da566adf2c190b7c802ce5f7a895acca5bea8983f1674d9a24904e9a25",
+  "bytes": 9317887,
+  "path": "/tmp/m3-toolchain/jtreg-7.3.1+1"
+}

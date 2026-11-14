@@ -637,6 +637,15 @@ PhaseStringOpts::PhaseStringOpts(PhaseGVN* gvn):
 
   assert(OptimizeStringConcat, "shouldn't be here");
 
+  if (UseM3StringStorage) {
+    // Legacy C2 StringConcat fusion reads constant String.value and constructs the
+    // result by storing only String.value/coder. M3-backed Strings use an empty
+    // value sentinel plus canonical M3String owner/coordinate, so that transform
+    // would silently lose canonical state. Keep the Java/M3 concat path until a
+    // dedicated M3 C2 lowering constructs M3String owners and coordinates.
+    return;
+  }
+
   // Collect the types needed to talk about the various slices of memory
   byte_adr_idx = C->get_alias_index(TypeAryPtr::BYTES);
 
@@ -988,12 +997,21 @@ bool StringConcat::validate_control_flow() {
         continue;
       }
 
-      // A test which leads to an uncommon trap which should be safe.
-      // Later this trap will be converted into a trap that restarts
+      // A test which leads to an uncommon trap. It is safe to convert the trap
+      // into a trap that restarts at the beginning as long as its test does not
+      // depend on intermediate results of the candidate chain.
       // at the beginning.
       if (otherproj->outcnt() == 1) {
         CallStaticJavaNode* call = otherproj->unique_out()->isa_CallStaticJava();
         if (call != nullptr && call->_name != nullptr && strcmp(call->_name, "uncommon_trap") == 0) {
+          // First check for dependency on a toString that is going away during stacked concats.
+          if (_multiple &&
+              ((v1->is_Proj() && is_SB_toString(v1->in(0)) && ctrl_path.member(v1->in(0))) ||
+               (v2->is_Proj() && is_SB_toString(v2->in(0)) && ctrl_path.member(v2->in(0))))) {
+            // iftrue -> if -> bool -> cmpp -> resproj -> tostring
+            fail = true;
+            break;
+          }
           // control flow leads to uct so should be ok
           _uncommon_traps.push(call);
           ctrl_path.push(call);

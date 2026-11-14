@@ -1,0 +1,29 @@
+openjdk version "21.0.12.1" 2026-08-18
+javac master-donor rc=0 classes=96 errors=0 warnings=69
+javac harness-master-donor rc=0 classes=2 errors=0 warnings=0
+javac master-relocated rc=0 classes=88 errors=0 warnings=72
+javac harness-master-relocated rc=0 classes=1 errors=0 warnings=0
+javac branch-donor rc=0 classes=96 errors=0 warnings=69
+javac harness-branch-donor rc=0 classes=2 errors=0 warnings=0
+javac branch-relocated rc=0 classes=88 errors=0 warnings=72
+javac harness-branch-relocated rc=0 classes=1 errors=0 warnings=0
+donor seed 1: 100000 samples; lines 100001/100001; differing 54951; round=false 0; log lines with a false 0
+donor seed 2: 100000 samples; lines 100001/100001; differing 54947; round=false 0; log lines with a false 0
+donor seed 3: 100000 samples; lines 100001/100001; differing 55006; round=false 0; log lines with a false 0
+relocated seed 1: 100000 samples; lines 100001/100001; differing 54951; round=false 0; log lines with a false 0
+relocated seed 2: 100000 samples; lines 100001/100001; differing 54947; round=false 0; log lines with a false 0
+relocated seed 3: 100000 samples; lines 100001/100001; differing 55006; round=false 0; log lines with a false 0
+# master -> branch outcome of the differing parse calls (count master branch):
+ 329802 UnsupportedOperationException IllegalArgumentException
+      6 UnsupportedOperationException NullPointerException (null input)
+# differing lines whose round trip or histogram log differs: 0
+master size=16 encode ns/call=21.0 decode ns/call=19.8
+master size=256 encode ns/call=50.4 decode ns/call=45.0
+master size=4096 encode ns/call=733.0 decode ns/call=704.6
+master size=65536 encode ns/call=14044.4 decode ns/call=12791.0
+master sink 145d97b00
+branch size=16 encode ns/call=15.8 decode ns/call=18.7
+branch size=256 encode ns/call=49.3 decode ns/call=42.3
+branch size=4096 encode ns/call=835.8 decode ns/call=709.5
+branch size=65536 encode ns/call=13505.1 decode ns/call=13043.4
+branch sink 145d97b00

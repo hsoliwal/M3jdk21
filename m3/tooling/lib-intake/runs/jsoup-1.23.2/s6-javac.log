@@ -1,0 +1,303 @@
+H:\m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\module-info.java:3: warning: [module] module name component m3 should avoid terminal digits
+module jdk.m3.jsoup {
+          ^
+H:\m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\Connection.java:584: warning: [exports] class Nullable in module org.jspecify is not indirectly exported using 'requires transitive'
+        @Nullable String header(String name);
+         ^
+H:\m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\Connection.java:659: warning: [exports] class Nullable in module org.jspecify is not indirectly exported using 'requires transitive'
+        @Nullable String cookie(String name);
+         ^
+H:\m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\Connection.java:703: warning: [exports] class Nullable in module org.jspecify is not indirectly exported using 'requires transitive'
+        @Nullable Proxy proxy();
+         ^
+H:\m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\Connection.java:710: warning: [exports] class Nullable in module org.jspecify is not indirectly exported using 'requires transitive'
+        Request proxy(@Nullable Proxy proxy);
+                       ^
+H:\m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\Connection.java:791: warning: [exports] class Nullable in module org.jspecify is not indirectly exported using 'requires transitive'
+        @Nullable SSLSocketFactory sslSocketFactory();
+         ^
+H:\m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\Connection.java:811: warning: [exports] class Nullable in module org.jspecify is not indirectly exported using 'requires transitive'
+        @Nullable
+         ^
+H:\m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\Connection.java:854: warning: [exports] class Nullable in module org.jspecify is not indirectly exported using 'requires transitive'
+        Request requestBody(@Nullable String body);
+                             ^
+H:\m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\Connection.java:860: warning: [exports] class Nullable in module org.jspecify is not indirectly exported using 'requires transitive'
+        @Nullable String requestBody();
+         ^
+H:\m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\Connection.java:918: warning: [exports] class Nullable in module org.jspecify is not indirectly exported using 'requires transitive'
+        default Request auth(@Nullable RequestAuthenticator authenticator)  {
+                              ^
+H:\m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\Connection.java:927: warning: [exports] class Nullable in module org.jspecify is not indirectly exported using 'requires transitive'
+        @Nullable
+         ^
+H:\m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\Connection.java:954: warning: [exports] class Nullable in module org.jspecify is not indirectly exported using 'requires transitive'
+        @Nullable String charset();
+         ^
+H:\m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\Connection.java:967: warning: [exports] class Nullable in module org.jspecify is not indirectly exported using 'requires transitive'
+        @Nullable String contentType();
+         ^
+H:\m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\Connection.java:1110: warning: [exports] class Nullable in module org.jspecify is not indirectly exported using 'requires transitive'
+        @Nullable InputStream inputStream();
+         ^
+H:\m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\Connection.java:1131: warning: [exports] class Nullable in module org.jspecify is not indirectly exported using 'requires transitive'
+        @Nullable String contentType();
+         ^
+H:\m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\Connection.java:130: warning: [exports] class Nullable in module org.jspecify is not indirectly exported using 'requires transitive'
+    Connection proxy(@Nullable Proxy proxy);
+                      ^
+H:\m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\Connection.java:308: warning: [exports] class Nullable in module org.jspecify is not indirectly exported using 'requires transitive'
+    @Nullable KeyVal data(String key);
+     ^
+H:\m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\Connection.java:464: warning: [exports] class Nullable in module org.jspecify is not indirectly exported using 'requires transitive'
+    default Connection auth(@Nullable RequestAuthenticator authenticator) {
+                             ^
+H:\m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\parser\Parser.java:39: warning: [exports] class TreeBuilder in module jdk.m3.jsoup is not accessible to clients that require this module
+    public Parser(TreeBuilder treeBuilder) {
+                  ^
+H:\m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\parser\Parser.java:105: warning: [exports] class Nullable in module org.jspecify is not indirectly exported using 'requires transitive'
+    public List<Node> parseFragmentInput(String fragment, @Nullable Element context, String baseUri) {
+                                                           ^
+H:\m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\parser\Parser.java:118: warning: [exports] class Nullable in module org.jspecify is not indirectly exported using 'requires transitive'
+    public List<Node> parseFragmentInput(Reader fragment, @Nullable Element context, String baseUri) {
+                                                           ^
+H:\m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\parser\Parser.java:132: warning: [exports] class TreeBuilder in module jdk.m3.jsoup is not accessible to clients that require this module
+    public TreeBuilder getTreeBuilder() {
+           ^
+H:\m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\helper\RequestAuthenticator.java:23: warning: [exports] class Nullable in module org.jspecify is not indirectly exported using 'requires transitive'
+    @Nullable
+     ^
+H:\m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\nodes\Node.java:92: warning: [cast] redundant cast to Element
+            && ((Element) parentNode).elementIs(normalName, namespace);
+                ^
+H:\m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\nodes\Node.java:446: warning: [cast] redundant cast to Element
+        Element context = parentNode instanceof Element ? (Element) parentNode : null;
+                                                          ^
+H:\m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\nodes\Node.java:463: warning: [cast] redundant cast to Element
+            parentNode != null && parentNode instanceof Element ? (Element) parentNode :
+                                                                  ^
+H:\m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\nodes\Node.java:331: warning: [exports] class Nullable in module org.jspecify is not indirectly exported using 'requires transitive'
+    public @Nullable Node parent() {
+            ^
+H:\m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\nodes\Node.java:341: warning: [exports] class Nullable in module org.jspecify is not indirectly exported using 'requires transitive'
+    public @Nullable Element parentElement() {
+            ^
+H:\m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\nodes\Node.java:349: warning: [exports] class Nullable in module org.jspecify is not indirectly exported using 'requires transitive'
+    public @Nullable final Node parentNode() {
+            ^
+H:\m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\nodes\Node.java:368: warning: [exports] class Nullable in module org.jspecify is not indirectly exported using 'requires transitive'
+    public @Nullable Document ownerDocument() {
+            ^
+H:\m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\nodes\Node.java:509: warning: [exports] class Nullable in module org.jspecify is not indirectly exported using 'requires transitive'
+    public @Nullable Node unwrap() {
+            ^
+H:\m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\nodes\Node.java:683: warning: [exports] class Nullable in module org.jspecify is not indirectly exported using 'requires transitive'
+    public @Nullable Node nextSibling() {
+            ^
+H:\m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\nodes\Node.java:701: warning: [exports] class Nullable in module org.jspecify is not indirectly exported using 'requires transitive'
+    public @Nullable Node previousSibling() {
+            ^
+H:\m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\nodes\Node.java:736: warning: [exports] class Nullable in module org.jspecify is not indirectly exported using 'requires transitive'
+    public @Nullable Node firstChild() {
+            ^
+H:\m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\nodes\Node.java:748: warning: [exports] class Nullable in module org.jspecify is not indirectly exported using 'requires transitive'
+    public @Nullable Node lastChild() {
+            ^
+H:\m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\nodes\Node.java:791: warning: [exports] class Nullable in module org.jspecify is not indirectly exported using 'requires transitive'
+    public @Nullable Element nextElementSibling() {
+            ^
+H:\m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\nodes\Node.java:805: warning: [exports] class Nullable in module org.jspecify is not indirectly exported using 'requires transitive'
+    public @Nullable Element previousElementSibling() {
+            ^
+H:\m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\nodes\Node.java:988: warning: [exports] class Nullable in module org.jspecify is not indirectly exported using 'requires transitive'
+    public boolean equals(@Nullable Object o) {
+                           ^
+H:\m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\nodes\Node.java:1010: warning: [exports] class Nullable in module org.jspecify is not indirectly exported using 'requires transitive'
+    public boolean hasSameValue(@Nullable Object o) {
+                                 ^
+H:\m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\nodes\Node.java:1069: warning: [exports] class Nullable in module org.jspecify is not indirectly exported using 'requires transitive'
+    protected Node doClone(@Nullable Node parent) {
+                            ^
+H:\m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\nodes\Element.java:328: warning: [cast] redundant cast to Element
+        return (Element) parentNode;
+               ^
+H:\m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\nodes\Element.java:2169: warning: [serial] serializable class NodeList has no definition of serialVersionUID
+    static final class NodeList extends ArrayList<Node> {
+                 ^
+H:\m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\nodes\Element.java:83: warning: [exports] class Nullable in module org.jspecify is not indirectly exported using 'requires transitive'
+    public Element(Tag tag, @Nullable String baseUri, @Nullable Attributes attributes) {
+                             ^
+H:\m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\nodes\Element.java:83: warning: [exports] class Nullable in module org.jspecify is not indirectly exported using 'requires transitive'
+    public Element(Tag tag, @Nullable String baseUri, @Nullable Attributes attributes) {
+                                                       ^
+H:\m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\nodes\Element.java:98: warning: [exports] class Nullable in module org.jspecify is not indirectly exported using 'requires transitive'
+    public Element(Tag tag, @Nullable String baseUri) {
+                             ^
+H:\m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\nodes\Element.java:305: warning: [exports] class Nullable in module org.jspecify is not indirectly exported using 'requires transitive'
+    @Nullable public Attribute attribute(String key) {
+     ^
+H:\m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\nodes\Element.java:326: warning: [exports] class Nullable in module org.jspecify is not indirectly exported using 'requires transitive'
+    @Override @Nullable
+               ^
+H:\m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\nodes\Element.java:574: warning: [exports] class Nullable in module org.jspecify is not indirectly exported using 'requires transitive'
+    public @Nullable Element selectFirst(String cssQuery) {
+            ^
+H:\m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\nodes\Element.java:586: warning: [exports] class Nullable in module org.jspecify is not indirectly exported using 'requires transitive'
+    public @Nullable Element selectFirst(Evaluator evaluator) {
+            ^
+H:\m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\nodes\Element.java:679: warning: [exports] class Nullable in module org.jspecify is not indirectly exported using 'requires transitive'
+    public @Nullable <T extends Node> T selectFirstNode(String cssQuery, Class<T> type) {
+            ^
+H:\m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\nodes\Element.java:692: warning: [exports] class Nullable in module org.jspecify is not indirectly exported using 'requires transitive'
+    public @Nullable <T extends Node> T selectFirstNode(Evaluator evaluator, Class<T> type) {
+            ^
+H:\m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\nodes\Element.java:742: warning: [exports] class Nullable in module org.jspecify is not indirectly exported using 'requires transitive'
+    public @Nullable Element closest(String cssQuery) {
+            ^
+H:\m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\nodes\Element.java:753: warning: [exports] class Nullable in module org.jspecify is not indirectly exported using 'requires transitive'
+    public @Nullable Element closest(Evaluator evaluator) {
+            ^
+H:\m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\nodes\Element.java:1247: warning: [exports] class Nullable in module org.jspecify is not indirectly exported using 'requires transitive'
+    public @Nullable Element firstElementChild() {
+            ^
+H:\m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\nodes\Element.java:1263: warning: [exports] class Nullable in module org.jspecify is not indirectly exported using 'requires transitive'
+    public @Nullable Element lastElementChild() {
+            ^
+H:\m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\nodes\Element.java:1294: warning: [exports] class Nullable in module org.jspecify is not indirectly exported using 'requires transitive'
+    public @Nullable Element getElementById(String id) {
+            ^
+H:\m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\nodes\Element.java:2099: warning: [exports] class Nullable in module org.jspecify is not indirectly exported using 'requires transitive'
+    protected Element doClone(@Nullable Node parent) {
+                               ^
+H:\m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\nodes\Document.java:103: warning: [exports] class Nullable in module org.jspecify is not indirectly exported using 'requires transitive'
+    public @Nullable DocumentType documentType() {
+            ^
+H:\m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\nodes\Element.java:88: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+        if (!StringUtil.isBlank(baseUri)) this.setBaseUri(baseUri);
+                                                         ^
+H:\m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\internal\Normalizer.java:11: warning: [missing-explicit-ctor] class Normalizer in exported package com.m3.lib.jsoup.internal declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.jsoup
+public final class Normalizer {
+             ^
+H:\m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\nodes\LeafNode.java:52: warning: [exports] class Nullable in module org.jspecify is not indirectly exported using 'requires transitive'
+    @Override @Nullable
+               ^
+H:\m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\select\Selector.java:288: warning: [serial] serializable class SelectorParseException has no definition of serialVersionUID
+    public static class SelectorParseException extends IllegalStateException {
+                  ^
+H:\m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\select\Selector.java:220: warning: [exports] class Nullable in module org.jspecify is not indirectly exported using 'requires transitive'
+    public static @Nullable Element selectFirst(String cssQuery, Element root) {
+                   ^
+H:\m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\select\Selector.java:233: warning: [exports] class Nullable in module org.jspecify is not indirectly exported using 'requires transitive'
+    public static @Nullable Element selectFirst(String cssQuery, Iterable<Element> roots) {
+                   ^
+H:\m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\parser\StreamParser.java:107: warning: [exports] class Nullable in module org.jspecify is not indirectly exported using 'requires transitive'
+    public StreamParser parseFragment(Reader input, @Nullable Element context, String baseUri) {
+                                                     ^
+H:\m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\parser\StreamParser.java:121: warning: [exports] class Nullable in module org.jspecify is not indirectly exported using 'requires transitive'
+    public StreamParser parseFragment(String input, @Nullable Element context, String baseUri) {
+                                                     ^
+H:\m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\parser\StreamParser.java:219: warning: [exports] class Nullable in module org.jspecify is not indirectly exported using 'requires transitive'
+    public @Nullable Element selectFirst(String query) throws IOException {
+            ^
+H:\m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\parser\StreamParser.java:249: warning: [exports] class Nullable in module org.jspecify is not indirectly exported using 'requires transitive'
+    public @Nullable Element selectFirst(Evaluator eval) throws IOException {
+            ^
+H:\m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\parser\StreamParser.java:282: warning: [exports] class Nullable in module org.jspecify is not indirectly exported using 'requires transitive'
+    public @Nullable Element selectNext(String query) throws IOException {
+            ^
+H:\m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\parser\StreamParser.java:312: warning: [exports] class Nullable in module org.jspecify is not indirectly exported using 'requires transitive'
+    public @Nullable Element selectNext(Evaluator eval) throws IOException {
+            ^
+H:\m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\internal\StringUtil.java:19: warning: [missing-explicit-ctor] class StringUtil in exported package com.m3.lib.jsoup.internal declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.jsoup
+public final class StringUtil {
+             ^
+H:\m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\internal\StringUtil.java:306: warning: [deprecation] URL(URL,String) in URL has been deprecated
+        URL url = new URL(base, relUrl);
+                  ^
+H:\m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\internal\StringUtil.java:311: warning: [deprecation] URL(String,String,int,String) in URL has been deprecated
+        URL resolved = new URL(url.getProtocol(), url.getHost(), url.getPort(), fixedFile);
+                       ^
+H:\m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\internal\StringUtil.java:326: warning: [deprecation] URL(String) in URL has been deprecated
+            URL base = new URL(baseUrl);
+                       ^
+H:\m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\internal\StringUtil.java:331: warning: [deprecation] URL(String) in URL has been deprecated
+                URL abs = new URL(relUrl);
+                          ^
+H:\m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\internal\StringUtil.java:151: warning: [exports] class Nullable in module org.jspecify is not indirectly exported using 'requires transitive'
+    public static boolean isBlank(@Nullable String string) {
+                                   ^
+H:\m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\select\Evaluator.java:451: warning: [missing-explicit-ctor] class AllElements in exported package com.m3.lib.jsoup.select declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.jsoup
+    public static final class AllElements extends Evaluator {
+                        ^
+H:\m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\select\Evaluator.java:531: warning: [missing-explicit-ctor] class IsLastChild in exported package com.m3.lib.jsoup.select declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.jsoup
+    public static final class IsLastChild extends Evaluator {
+                        ^
+H:\m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\select\Evaluator.java:709: warning: [missing-explicit-ctor] class IsFirstChild in exported package com.m3.lib.jsoup.select declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.jsoup
+    public static final class IsFirstChild extends Evaluator {
+                        ^
+H:\m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\select\Evaluator.java:727: warning: [missing-explicit-ctor] class IsRoot in exported package com.m3.lib.jsoup.select declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.jsoup
+    public static final class IsRoot extends Evaluator {
+                        ^
+H:\m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\select\Evaluator.java:744: warning: [missing-explicit-ctor] class IsOnlyChild in exported package com.m3.lib.jsoup.select declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.jsoup
+    public static final class IsOnlyChild extends Evaluator {
+                        ^
+H:\m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\select\Evaluator.java:756: warning: [missing-explicit-ctor] class IsOnlyOfType in exported package com.m3.lib.jsoup.select declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.jsoup
+    public static final class IsOnlyOfType extends Evaluator {
+                        ^
+H:\m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\select\Evaluator.java:779: warning: [missing-explicit-ctor] class IsEmpty in exported package com.m3.lib.jsoup.select declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.jsoup
+    public static final class IsEmpty extends Evaluator {
+                        ^
+H:\m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\parser\TagSet.java:107: warning: [exports] class Nullable in module org.jspecify is not indirectly exported using 'requires transitive'
+    public @Nullable Tag get(String tagName, String namespace) {
+            ^
+H:\m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\nodes\Attributes.java:45: warning: [missing-explicit-ctor] class Attributes in exported package com.m3.lib.jsoup.nodes declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.jsoup
+public class Attributes implements Iterable<Attribute>, Cloneable {
+       ^
+H:\m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\nodes\Attributes.java:151: warning: [exports] class Nullable in module org.jspecify is not indirectly exported using 'requires transitive'
+    @Nullable public Attribute attribute(String key) {
+     ^
+H:\m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\nodes\Attributes.java:170: warning: [exports] class Nullable in module org.jspecify is not indirectly exported using 'requires transitive'
+    public Attributes add(String key, @Nullable String value) {
+                                       ^
+H:\m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\nodes\Attributes.java:188: warning: [exports] class Nullable in module org.jspecify is not indirectly exported using 'requires transitive'
+    public Attributes put(String key, @Nullable String value) {
+                                       ^
+H:\m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\nodes\Attributes.java:232: warning: [exports] class Nullable in module org.jspecify is not indirectly exported using 'requires transitive'
+    @Nullable
+     ^
+H:\m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\nodes\Attributes.java:248: warning: [exports] class Nullable in module org.jspecify is not indirectly exported using 'requires transitive'
+    public Attributes userData(String key, @Nullable Object value) {
+                                            ^
+H:\m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\nodes\Attributes.java:621: warning: [exports] class Nullable in module org.jspecify is not indirectly exported using 'requires transitive'
+    public boolean equals(@Nullable Object o) {
+                           ^
+H:\m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\nodes\Attribute.java:38: warning: [exports] class Nullable in module org.jspecify is not indirectly exported using 'requires transitive'
+    public Attribute(String key, @Nullable String value) {
+                                  ^
+H:\m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\nodes\Attribute.java:48: warning: [exports] class Nullable in module org.jspecify is not indirectly exported using 'requires transitive'
+    public Attribute(String key, @Nullable String val, @Nullable Attributes parent) {
+                                  ^
+H:\m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\nodes\Attribute.java:48: warning: [exports] class Nullable in module org.jspecify is not indirectly exported using 'requires transitive'
+    public Attribute(String key, @Nullable String val, @Nullable Attributes parent) {
+                                                        ^
+H:\m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\nodes\Attribute.java:106: warning: [exports] class Nullable in module org.jspecify is not indirectly exported using 'requires transitive'
+    @Override public String setValue(@Nullable String val) {
+                                      ^
+H:\m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\nodes\Attribute.java:205: warning: [exports] class Nullable in module org.jspecify is not indirectly exported using 'requires transitive'
+    protected static void html(String key, @Nullable String val, Appendable accum, Document.OutputSettings out) throws IOException {
+                                            ^
+H:\m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\nodes\Attribute.java:316: warning: [exports] class Nullable in module org.jspecify is not indirectly exported using 'requires transitive'
+    protected static boolean shouldCollapseAttribute(final String key, @Nullable final String val, final Document.OutputSettings out) {
+                                                                        ^
+H:\m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\nodes\Attribute.java:329: warning: [exports] class Nullable in module org.jspecify is not indirectly exported using 'requires transitive'
+    public boolean equals(@Nullable Object o) { // note parent not considered
+                           ^
+H:\m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\parser\Tag.java:57: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+        this(tagName, ParseSettings.normalName(tagName), namespace);
+            ^
+H:\m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\parser\Tag.java:76: warning: [this-escape] previous possible 'this' escape happens here via invocation
+        setParserOptions();
+                        ^
+Note: Some input files additionally use or override a deprecated API.
+100 warnings
+only showing the first 100 warnings, of 194 total; use -Xmaxwarns if you would like to see more

@@ -1,0 +1,511 @@
+# SPDX-License-Identifier: Apache-2.0
+# The 508 lost lines of the scope rows (ATOM_VERDICTS.tsv, normalised), re-tested on the base, master c33045ec7c3 (now), on master 33541216b2cd and on its state before #2641 (b8fb8956aaac^1); side_blob = the PR-side blob that carried the line.
+n	merge	file	side_blob	line	enclosing	now	master_33541216b2cd	before_2641	text
+1	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	978	requestedEntry	ABSENT	ABSENT	ABSENT	private Entry<K, V> requestedEntry(M3TreeMap<K, V> owner, int slot) {
+1	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	980	requestedEntry	ABSENT	ABSENT	ABSENT	return slot < 0 ? null : new SimpleImmutableEntry<>(owner.keyAt(slot), owner.valueAt(slot));
+1	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	983	requestedEntry	ABSENT	ABSENT	ABSENT	private K requestedKey(M3TreeMap<K, V> owner, int slot) {
+1	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	987	requestedEntry	EXACT_ELSEWHERE	EXACT_ELSEWHERE	EXACT_ELSEWHERE	@Override public Entry<K, V> lowerEntry(K key) {
+1	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	989	requestedEntry	ABSENT	ABSENT	ABSENT	return owner == null ? seek(source.lowerEntry(key), false)
+1	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	990	requestedEntry	ABSENT	ABSENT	ABSENT	: requestedEntry(owner, visibleNear(owner, key, -2));
+1	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	992	requestedEntry	FUZZY	FUZZY	FUZZY	@Override public K lowerKey(K key) {
+1	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	994	requestedEntry	ABSENT	ABSENT	ABSENT	return owner == null ? keyOf(lowerEntry(key)) : requestedKey(owner, visibleNear(owner, key, -2));
+1	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	996	requestedEntry	EXACT_ELSEWHERE	EXACT_ELSEWHERE	EXACT_ELSEWHERE	@Override public Entry<K, V> floorEntry(K key) {
+1	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	998	requestedEntry	ABSENT	ABSENT	ABSENT	return owner == null ? seek(source.floorEntry(key), false)
+1	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	999	requestedEntry	ABSENT	ABSENT	ABSENT	: requestedEntry(owner, visibleNear(owner, key, -1));
+1	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	1001	requestedEntry	FUZZY	FUZZY	FUZZY	@Override public K floorKey(K key) {
+1	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	1003	requestedEntry	ABSENT	ABSENT	ABSENT	return owner == null ? keyOf(floorEntry(key)) : requestedKey(owner, visibleNear(owner, key, -1));
+1	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	1005	requestedEntry	EXACT_ELSEWHERE	EXACT_ELSEWHERE	EXACT_ELSEWHERE	@Override public Entry<K, V> ceilingEntry(K key) {
+1	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	1007	requestedEntry	ABSENT	ABSENT	ABSENT	return owner == null ? seek(source.ceilingEntry(key), true)
+1	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	1008	requestedEntry	ABSENT	ABSENT	ABSENT	: requestedEntry(owner, visibleNear(owner, key, 1));
+1	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	1010	requestedEntry	FUZZY	FUZZY	FUZZY	@Override public K ceilingKey(K key) {
+1	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	1012	requestedEntry	ABSENT	ABSENT	ABSENT	return owner == null ? keyOf(ceilingEntry(key)) : requestedKey(owner, visibleNear(owner, key, 1));
+1	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	1014	requestedEntry	EXACT_ELSEWHERE	EXACT_ELSEWHERE	EXACT_ELSEWHERE	@Override public Entry<K, V> higherEntry(K key) {
+1	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	1016	requestedEntry	ABSENT	ABSENT	ABSENT	return owner == null ? seek(source.higherEntry(key), true)
+1	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	1017	requestedEntry	ABSENT	ABSENT	ABSENT	: requestedEntry(owner, visibleNear(owner, key, 2));
+1	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	1019	requestedEntry	FUZZY	FUZZY	FUZZY	@Override public K higherKey(K key) {
+1	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	1021	requestedEntry	ABSENT	ABSENT	ABSENT	return owner == null ? keyOf(higherEntry(key)) : requestedKey(owner, visibleNear(owner, key, 2));
+1	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	1023	requestedEntry	EXACT_ELSEWHERE	EXACT_ELSEWHERE	EXACT_ELSEWHERE	@Override public Entry<K, V> firstEntry() {
+1	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	1025	requestedEntry	ABSENT	ABSENT	ABSENT	return owner == null ? seek(source.firstEntry(), true)
+1	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	1026	requestedEntry	ABSENT	ABSENT	ABSENT	: requestedEntry(owner, visibleEnd(owner, true));
+1	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	1028	requestedEntry	EXACT_ELSEWHERE	EXACT_ELSEWHERE	EXACT_ELSEWHERE	@Override public Entry<K, V> lastEntry() {
+1	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	1030	requestedEntry	ABSENT	ABSENT	ABSENT	return owner == null ? seek(source.lastEntry(), false)
+1	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	1031	requestedEntry	ABSENT	ABSENT	ABSENT	: requestedEntry(owner, visibleEnd(owner, false));
+1	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	1037	requestedEntry	ABSENT	ABSENT	ABSENT	int slot = visibleEnd(owner, true);
+1	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	962	visibleNear	ABSENT	ABSENT	ABSENT	private int visibleNear(M3TreeMap<K, V> owner, K key, int relation) {
+1	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	963	visibleNear	ABSENT	ABSENT	ABSENT	int slot = owner.nearIndexedSlot(key, relation);
+1	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	964	visibleNear	ABSENT	ABSENT	ABSENT	while (slot >= 0 && !visibleSlot(owner, slot)) {
+1	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	965	visibleNear	ABSENT	ABSENT	ABSENT	slot = relation < 0 ? owner.previousIndexedSlot(slot) : owner.nextSlot(slot);
+1	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	970	visibleNear	ABSENT	ABSENT	ABSENT	private int visibleEnd(M3TreeMap<K, V> owner, boolean first) {
+1	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	1056	pollFirstEntry	FUZZY	FUZZY	FUZZY	@Override public Entry<K, V> pollFirstEntry() {
+1	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	1057	pollFirstEntry	ABSENT	ABSENT	ABSENT	return slotOwner() == null ? poll(entryCursor()) : pollIndexed(true);
+1	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	1059	pollFirstEntry	FUZZY	FUZZY	FUZZY	@Override public Entry<K, V> pollLastEntry() {
+1	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	1060	pollFirstEntry	ABSENT	ABSENT	ABSENT	return slotOwner() == null ? poll(descendingMap().entrySet().iterator()) : pollIndexed(false);
+1	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	1062	pollFirstEntry	FUZZY	FUZZY	FUZZY	private Entry<K, V> pollIndexed(boolean first) {
+1	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	1064	pollFirstEntry	ABSENT	ABSENT	ABSENT	int slot = visibleEnd(owner, first);
+1	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	1066	pollFirstEntry	FUZZY	FUZZY	FUZZY	Entry<K, V> result = requestedEntry(owner, slot);
+1	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	1067	pollFirstEntry	ABSENT	ABSENT	ABSENT	owner.remove(owner.keyAt(slot));
+1	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	352	first	ABSENT	ABSENT	ABSENT	int slot = edge(owner, true);
+1	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	353	first	ABSENT	ABSENT	ABSENT	if (slot < 0) throw new NoSuchElementException();
+1	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	354	first	ABSENT	ABSENT	ABSENT	return owner.keyAt(slot);
+1	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	1048	lastKey	ABSENT	ABSENT	ABSENT	int slot = visibleEnd(owner, false);
+4	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	90	indexed	ABSENT	ABSENT	ABSENT	private M3TreeMap<E, ?> indexed() {
+4	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	91	indexed	ABSENT	ABSENT	ABSENT	return source instanceof M3TreeSet<?> m3
+4	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	92	indexed	ABSENT	ABSENT	ABSENT	? ((M3TreeSet<E>) m3).indexedOwner() : null;
+4	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	95	indexed	ABSENT	ABSENT	ABSENT	private int edge(M3TreeMap<E, ?> owner, boolean first) {
+4	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	96	indexed	ABSENT	ABSENT	ABSENT	int slot = first ? owner.firstSlot() : owner.lastSlot();
+4	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	97	indexed	ABSENT	ABSENT	ABSENT	while (slot >= 0 && !predicate.test(owner.keyAt(slot))) {
+4	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	98	indexed	FUZZY	FUZZY	ABSENT	slot = first ? owner.nextSlot(slot) : owner.previousIndexedSlot(slot);
+4	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	100	indexed	EXACT_ELSEWHERE	EXACT_ELSEWHERE	EXACT_ELSEWHERE	return slot;
+4	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	106	indexed	ABSENT	ABSENT	ABSENT	M3TreeMap<E, ?> owner = indexed();
+4	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	108	indexed	FUZZY	FUZZY	FUZZY	if (owner != null) {
+4	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	109	indexed	ABSENT	ABSENT	ABSENT	for (int slot = owner.firstSlot(); slot >= 0; slot = owner.nextSlot(slot)) {
+4	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	110	indexed	ABSENT	ABSENT	ABSENT	if (predicate.test(owner.keyAt(slot))) count++;
+4	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	463	slotOwner	EXACT	EXACT	ABSENT	private M3TreeMap<K, V> slotOwner() {
+4	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	464	slotOwner	FUZZY	FUZZY	ABSENT	return source instanceof M3TreeMap<?, ?> m3 ? (M3TreeMap<K, V>) m3 : null;
+4	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	467	slotOwner	ABSENT	ABSENT	ABSENT	private boolean visibleSlot(M3TreeMap<K, V> owner, int slot) {
+4	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	468	slotOwner	EXACT	EXACT	ABSENT	return predicate.test(owner.keyAt(slot), owner.valueAt(slot));
+4	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	886	IndexedEntryCursor	FUZZY	FUZZY	FUZZY	private final class IndexedEntryCursor implements Iterator<Entry<K, V>> {
+4	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	887	IndexedEntryCursor	FUZZY	FUZZY	ABSENT	private final M3TreeMap<K, V> owner;
+4	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	888	IndexedEntryCursor	ABSENT	ABSENT	ABSENT	private int next;
+4	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	889	IndexedEntryCursor	EXACT	EXACT	EXACT_ELSEWHERE	private int expected;
+4	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	894	IndexedEntryCursor	FUZZY	FUZZY	ABSENT	IndexedEntryCursor(M3TreeMap<K, V> owner) {
+4	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	895	IndexedEntryCursor	EXACT	EXACT	EXACT_ELSEWHERE	this.owner = owner;
+4	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	897	IndexedEntryCursor	ABSENT	ABSENT	ABSENT	next = owner.firstSlot();
+4	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	901	IndexedEntryCursor	ABSENT	ABSENT	ABSENT	if (expected != owner.revision()) throw new ConcurrentModificationException();
+4	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	695	hasNext	EXACT	EXACT	ABSENT	if (prepared) return true;
+4	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	696	hasNext	FUZZY	FUZZY	ABSENT	while (next >= 0) {
+4	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	697	hasNext	ABSENT	ABSENT	ABSENT	boolean visible = visibleSlot(owner, next);
+4	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	703	hasNext	ABSENT	ABSENT	ABSENT	next = owner.nextSlot(next);
+4	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	706	hasNext	EXACT	EXACT	EXACT_ELSEWHERE	return false;
+4	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	709	hasNext	EXACT_ELSEWHERE	EXACT_ELSEWHERE	EXACT_ELSEWHERE	@Override public V next() {
+4	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	711	hasNext	ABSENT	ABSENT	ABSENT	int slot = next;
+4	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	712	hasNext	ABSENT	ABSENT	ABSENT	next = owner.nextSlot(slot);
+4	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	715	hasNext	ABSENT	ABSENT	ABSENT	lastKey = owner.keyAt(slot);
+4	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	717	hasNext	ABSENT	ABSENT	ABSENT	V result = owner.valueAt(slot);
+4	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	586	putAll	ABSENT	ABSENT	ABSENT	int existingSlot = owner == null ? -1 : owner.findSlot(key);
+4	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	587	putAll	FUZZY	FUZZY	FUZZY	Entry<K, V> existing = owner == null ? storedEntry(key) : null;
+4	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	589	putAll	ABSENT	ABSENT	ABSENT	if (existingSlot >= 0) {
+4	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	590	putAll	ABSENT	ABSENT	ABSENT	effective = owner.keyAt(existingSlot);
+4	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	591	putAll	FUZZY	FUZZY	FUZZY	} else if (existing != null) {
+4	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	597	putAll	FUZZY	FUZZY	FUZZY	newRepresentatives = new M3TreeMap<>(source.comparator());
+4	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	546	put	ABSENT	ABSENT	ABSENT	K effective = slot < 0 ? key : owner.keyAt(slot);
+4	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	550	put	ABSENT	ABSENT	ABSENT	V prior = null;
+4	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	551	put	EXACT_ELSEWHERE	EXACT_ELSEWHERE	EXACT_ELSEWHERE	if (slot >= 0) {
+4	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	552	put	ABSENT	ABSENT	ABSENT	V old = owner.valueAt(slot);
+4	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	553	put	ABSENT	ABSENT	ABSENT	if (predicate.test(effective, old)) prior = old;
+4	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	180	removeIf	ABSENT	ABSENT	ABSENT	for (int slot = owner.firstSlot(); slot >= 0;) {
+4	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	181	removeIf	ABSENT	ABSENT	ABSENT	int next = owner.nextSlot(slot);
+4	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	182	removeIf	ABSENT	ABSENT	ABSENT	E value = owner.keyAt(slot);
+4	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	187	removeIf	ABSENT	ABSENT	ABSENT	slot = next;
+4	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	486	size	EXACT	EXACT	ABSENT	M3TreeMap<K, V> owner = slotOwner();
+4	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	490	size	ABSENT	ABSENT	ABSENT	if (visibleSlot(owner, slot)) count++;
+4	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	523	hasVisibleKey	ABSENT	ABSENT	ABSENT	int slot = owner.findSlot(key);
+4	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	524	hasVisibleKey	ABSENT	ABSENT	ABSENT	return slot >= 0 && visibleSlot(owner, slot);
+4	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	535	get	ABSENT	ABSENT	ABSENT	V value = owner.valueAt(slot);
+4	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	536	get	ABSENT	ABSENT	ABSENT	return predicate.test(owner.keyAt(slot), value) ? value : null;
+4	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	616	putAll	ABSENT	ABSENT	ABSENT	for (int i = 0; i < admittedKeys.size(); i++) {
+4	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	617	putAll	ABSENT	ABSENT	ABSENT	owner.put(admittedKeys.get(i), admittedValues.get(i));
+4	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	725	remove	ABSENT	ABSENT	ABSENT	owner.remove(lastKey);
+4	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	728	remove	ABSENT	ABSENT	ABSENT	lastKey = null;
+4	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	502	isEmpty	ABSENT	ABSENT	ABSENT	if (visibleSlot(owner, slot)) return false;
+4	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	628	remove	ABSENT	ABSENT	ABSENT	return slot >= 0 && visibleSlot(owner, slot) ? owner.remove(key) : null;
+4	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	638	clear	ABSENT	ABSENT	ABSENT	if (visibleSlot(owner, slot)) owner.remove(owner.keyAt(slot));
+4	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	928	next	FUZZY	FUZZY	FUZZY	return new LiveEntry(lastKey);
+9	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	744	indexedNeighbor	ABSENT	ABSENT	ABSENT	private int indexedNeighbor(M3TreeMap<K, V> owner, K query,
+9	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	745	indexedNeighbor	EXACT_ELSEWHERE	EXACT_ELSEWHERE	EXACT_ELSEWHERE	boolean forward, boolean inclusive) {
+9	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	746	indexedNeighbor	ABSENT	ABSENT	ABSENT	int relation = forward ? (inclusive ? 1 : 2) : (inclusive ? -1 : -2);
+9	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	749	indexedNeighbor	ABSENT	ABSENT	ABSENT	slot = forward ? owner.nextSlot(slot) : owner.previousIndexedSlot(slot);
+9	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	753	indexedNeighbor	ABSENT	ABSENT	ABSENT	private Entry<K, V> indexedEntry(M3TreeMap<K, V> owner, int slot) {
+9	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	754	indexedNeighbor	ABSENT	ABSENT	ABSENT	return slot < 0 ? null : new SimpleImmutableEntry<>(owner.keyAt(slot), owner.valueAt(slot));
+9	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	756	indexedNeighbor	FUZZY	FUZZY	FUZZY	private K indexedKey(M3TreeMap<K, V> owner, int slot) {
+9	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	759	indexedNeighbor	ABSENT	ABSENT	ABSENT	private K boundKey(K key, boolean forward, boolean inclusive) {
+9	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	762	indexedNeighbor	ABSENT	ABSENT	ABSENT	return indexedKey(owner, indexedNeighbor(owner, key, forward, inclusive));
+9	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	764	indexedNeighbor	ABSENT	ABSENT	ABSENT	return keyOf(boundedEntry(key, forward, inclusive));
+9	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	453	indexed	ABSENT	ABSENT	ABSENT	protected final M3TreeMap<K, V> indexed() {
+9	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	454	indexed	ABSENT	ABSENT	ABSENT	return sorted instanceof M3TreeMap<?, ?> m3 ? (M3TreeMap<K, V>) m3 : null;
+9	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	456	indexed	ABSENT	ABSENT	ABSENT	protected final boolean visibleSlot(M3TreeMap<K, V> owner, int slot) {
+9	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	457	indexed	EXACT_ELSEWHERE	EXACT_ELSEWHERE	ABSENT	return predicate.test(owner.keyAt(slot), owner.valueAt(slot));
+9	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	459	indexed	ABSENT	ABSENT	ABSENT	protected final int boundarySlot(M3TreeMap<K, V> owner, boolean first) {
+9	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	461	indexed	ABSENT	ABSENT	ABSENT	while (slot >= 0 && !visibleSlot(owner, slot)) {
+9	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	811	lowerKey	FUZZY	FUZZY	FUZZY	@Override public K lowerKey(K key) { return boundKey(key, false, false); }
+9	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	815	lowerKey	ABSENT	ABSENT	ABSENT	@Override public K floorKey(K key) { return boundKey(key, false, true); }
+9	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	819	lowerKey	FUZZY	FUZZY	FUZZY	@Override public K ceilingKey(K key) { return boundKey(key, true, true); }
+9	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	823	lowerKey	ABSENT	ABSENT	ABSENT	@Override public K higherKey(K key) { return boundKey(key, true, false); }
+9	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	826	lowerKey	ABSENT	ABSENT	ABSENT	return owner == null ? firstVisible(nav.entrySet().iterator())
+9	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	827	lowerKey	ABSENT	ABSENT	ABSENT	: indexedEntry(owner, boundarySlot(owner, true));
+9	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	831	lowerKey	ABSENT	ABSENT	ABSENT	return owner == null ? firstVisible(nav.descendingMap().entrySet().iterator())
+9	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	832	lowerKey	ABSENT	ABSENT	ABSENT	: indexedEntry(owner, boundarySlot(owner, false));
+9	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	834	lowerKey	ABSENT	ABSENT	ABSENT	@Override public K firstKey() { return super.firstKey(); }
+9	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	835	lowerKey	ABSENT	ABSENT	ABSENT	@Override public K lastKey() { return super.lastKey(); }
+9	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	736	storedKey	ABSENT	ABSENT	ABSENT	if (owner != null) return owner.keyAt(owner.findSlot(key));
+9	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	785	boundedEntry	ABSENT	ABSENT	ABSENT	return indexedEntry(owner, indexedNeighbor(owner, query, forward, inclusive));
+10	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	643	containsValue	EXACT_ELSEWHERE	EXACT_ELSEWHERE	EXACT_ELSEWHERE	@Override public boolean containsValue(Object value) {
+10	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	645	containsValue	ABSENT	ABSENT	ABSENT	if (owner == null) return super.containsValue(value);
+10	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	647	containsValue	ABSENT	ABSENT	ABSENT	V stored = owner.valueAt(slot);
+10	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	648	containsValue	ABSENT	ABSENT	ABSENT	if (predicate.test(owner.keyAt(slot), stored) && Objects.equals(value, stored))
+10	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	653	containsValue	ABSENT	ABSENT	ABSENT	@Override public void forEach(BiConsumer<? super K, ? super V> consumer) {
+10	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	654	containsValue	EXACT_ELSEWHERE	EXACT_ELSEWHERE	EXACT_ELSEWHERE	Objects.requireNonNull(consumer, "consumer");
+10	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	656	containsValue	ABSENT	ABSENT	ABSENT	if (owner == null) { super.forEach(consumer); return; }
+10	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	661	containsValue	ABSENT	ABSENT	ABSENT	if (predicate.test(key, value)) consumer.accept(key, value);
+10	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	665	containsValue	EXACT_ELSEWHERE	EXACT_ELSEWHERE	EXACT_ELSEWHERE	@Override public int hashCode() {
+10	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	667	containsValue	ABSENT	ABSENT	ABSENT	if (owner == null) return super.hashCode();
+10	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	668	containsValue	EXACT_ELSEWHERE	EXACT_ELSEWHERE	EXACT_ELSEWHERE	int hash = 0;
+10	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	673	containsValue	ABSENT	ABSENT	ABSENT	hash += Objects.hashCode(key) ^ Objects.hashCode(value);
+10	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	675	containsValue	EXACT_ELSEWHERE	EXACT_ELSEWHERE	EXACT_ELSEWHERE	return hash;
+10	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	677	containsValue	EXACT_ELSEWHERE	EXACT_ELSEWHERE	EXACT_ELSEWHERE	@Override public boolean equals(Object other) {
+10	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	678	containsValue	ABSENT	ABSENT	ABSENT	if (this == other) return true;
+10	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	680	containsValue	ABSENT	ABSENT	ABSENT	if (owner == null) return super.equals(other);
+10	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	681	containsValue	ABSENT	ABSENT	ABSENT	if (!(other instanceof Map<?, ?> map) || map.size() != size()) return false;
+10	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	687	containsValue	ABSENT	ABSENT	ABSENT	&& (!Objects.equals(value, map.get(key))
+10	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	688	containsValue	ABSENT	ABSENT	ABSENT	|| value == null && !map.containsKey(key))) return false;
+10	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	690	containsValue	EXACT_ELSEWHERE	EXACT_ELSEWHERE	EXACT_ELSEWHERE	} catch (ClassCastException | NullPointerException ex) {
+10	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	695	containsValue	EXACT_ELSEWHERE	EXACT_ELSEWHERE	EXACT_ELSEWHERE	@Override public String toString() {
+10	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	697	containsValue	ABSENT	ABSENT	ABSENT	if (owner == null) return super.toString();
+10	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	698	containsValue	ABSENT	ABSENT	ABSENT	StringBuilder builder = new StringBuilder("{");
+10	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	699	containsValue	ABSENT	ABSENT	ABSENT	boolean comma = false;
+10	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	703	containsValue	ABSENT	ABSENT	ABSENT	if (!predicate.test(key, value)) continue;
+10	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	704	containsValue	ABSENT	ABSENT	ABSENT	if (comma) builder.append(", ");
+10	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	705	containsValue	ABSENT	ABSENT	ABSENT	comma = true;
+10	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	706	containsValue	ABSENT	ABSENT	ABSENT	builder.append(key == this ? "(this Map)" : key).append('=')
+10	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	707	containsValue	ABSENT	ABSENT	ABSENT	.append(value == this ? "(this Map)" : value);
+10	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	709	containsValue	ABSENT	ABSENT	ABSENT	return builder.append('}').toString();
+10	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	247	edge	ABSENT	ABSENT	ABSENT	private int edge(M3TreeMap<E, ?> owner, boolean first) {
+10	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	248	edge	ABSENT	ABSENT	ABSENT	int slot = first ? owner.firstSlot() : owner.lastSlot();
+10	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	249	edge	ABSENT	ABSENT	ABSENT	while (slot >= 0 && !predicate.test(owner.keyAt(slot))) {
+10	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	250	edge	ABSENT	ABSENT	ABSENT	slot = first ? owner.nextSlot(slot) : owner.previousIndexedSlot(slot);
+10	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	252	edge	EXACT_ELSEWHERE	EXACT_ELSEWHERE	EXACT_ELSEWHERE	return slot;
+10	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	257	edge	FUZZY	FUZZY	ABSENT	M3TreeMap<E, ?> owner = indexed();
+10	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	258	edge	ABSENT	ABSENT	ABSENT	if (owner == null) return super.size();
+10	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	260	edge	ABSENT	ABSENT	ABSENT	for (int slot = owner.firstSlot(); slot >= 0; slot = owner.nextSlot(slot)) {
+10	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	261	edge	ABSENT	ABSENT	ABSENT	if (predicate.test(owner.keyAt(slot))) count++;
+10	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	267	edge	ABSENT	ABSENT	ABSENT	return owner == null ? super.isEmpty() : edge(owner, true) < 0;
+10	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	271	edge	ABSENT	ABSENT	ABSENT	return owner == null ? super.iterator() : slotCursor(owner, false);
+10	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	275	edge	ABSENT	ABSENT	ABSENT	if (owner != null) {
+10	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	276	edge	FUZZY	FUZZY	FUZZY	int slot = owner.findSlot(value);
+10	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	277	edge	ABSENT	ABSENT	ABSENT	return slot >= 0 && predicate.test(owner.keyAt(slot));
+10	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	524	iterator	FUZZY	FUZZY	FUZZY	private final int expected = owner.revision();
+10	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	525	iterator	FUZZY	FUZZY	FUZZY	private int next = owner.firstSlot();
+10	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	528	iterator	ABSENT	ABSENT	ABSENT	if (expected != owner.revision()) throw new ConcurrentModificationException();
+10	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	532	iterator	EXACT_ELSEWHERE	EXACT_ELSEWHERE	ABSENT	if (prepared) return true;
+10	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	533	iterator	FUZZY	FUZZY	FUZZY	while (next >= 0) {
+10	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	534	iterator	ABSENT	ABSENT	ABSENT	boolean visible = visibleSlot(owner, next);
+10	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	540	iterator	ABSENT	ABSENT	ABSENT	next = owner.nextSlot(next);
+10	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	297	first	ABSENT	ABSENT	ABSENT	int slot = edge(owner, true);
+10	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	298	first	ABSENT	ABSENT	ABSENT	if (slot < 0) throw new NoSuchElementException();
+10	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	299	first	ABSENT	ABSENT	ABSENT	return owner.keyAt(slot);
+10	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	301	first	FUZZY	FUZZY	FUZZY	return iterator().next();
+10	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	306	first	ABSENT	ABSENT	ABSENT	int slot = edge(owner, false);
+10	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	547	next	ABSENT	ABSENT	ABSENT	int slot = next;
+10	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	548	next	FUZZY	FUZZY	FUZZY	next = owner.nextSlot(slot);
+10	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	551	next	ABSENT	ABSENT	ABSENT	Entry<K, V> result = new SimpleImmutableEntry<>(
+10	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	552	next	ABSENT	ABSENT	ABSENT	owner.keyAt(slot), owner.valueAt(slot));
+10	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	468	size	ABSENT	ABSENT	ABSENT	M3TreeMap<K, V> owner = indexed();
+10	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	471	size	ABSENT	ABSENT	ABSENT	for (int slot = owner.firstSlot(); slot >= 0; slot = owner.nextSlot(slot))
+10	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	472	size	ABSENT	ABSENT	ABSENT	if (visibleSlot(owner, slot)) count++;
+10	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	509	get	EXACT_ELSEWHERE	EXACT_ELSEWHERE	EXACT_ELSEWHERE	if (slot < 0) return null;
+10	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	510	get	ABSENT	ABSENT	ABSENT	V value = owner.valueAt(slot);
+10	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	511	get	FUZZY	FUZZY	ABSENT	return predicate.test(owner.keyAt(slot), value) ? value : null;
+10	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	499	containsKey	FUZZY	FUZZY	FUZZY	int slot = owner.findSlot(key);
+10	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	500	containsKey	ABSENT	ABSENT	ABSENT	return slot >= 0 && visibleSlot(owner, slot);
+10	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	628	next	EXACT_ELSEWHERE	EXACT_ELSEWHERE	EXACT_ELSEWHERE	@Override public V next() {
+10	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	634	next	ABSENT	ABSENT	ABSENT	V result = owner.valueAt(slot);
+10	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	481	isEmpty	ABSENT	ABSENT	ABSENT	if (owner != null) return boundarySlot(owner, true) < 0;
+10	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	492	storedKey	ABSENT	ABSENT	ABSENT	if (owner != null) return owner.keyAt(owner.findSlot(query));
+10	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	578	firstKey	ABSENT	ABSENT	ABSENT	int slot = boundarySlot(owner, true);
+10	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	589	lastKey	ABSENT	ABSENT	ABSENT	int slot = boundarySlot(owner, false);
+11	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	777	replaceAll	ABSENT	ABSENT	ABSENT	if (!predicate.test(key, old)) continue;
+11	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	779	replaceAll	ABSENT	ABSENT	ABSENT	V value = action.apply(key, old);
+11	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	783	replaceAll	EXACT_ELSEWHERE	EXACT_ELSEWHERE	EXACT_ELSEWHERE	put(key, value);
+11	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	789	replaceAll	FUZZY	FUZZY	ABSENT	if (owner == null) return super.hashCode();
+11	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	790	replaceAll	EXACT_ELSEWHERE	EXACT_ELSEWHERE	EXACT_ELSEWHERE	int hash = 0;
+11	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	794	replaceAll	EXACT_ELSEWHERE	EXACT_ELSEWHERE	EXACT_ELSEWHERE	if (predicate.test(key, value)) {
+11	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	795	replaceAll	ABSENT	ABSENT	ABSENT	hash += Objects.hashCode(key) ^ Objects.hashCode(value);
+11	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	798	replaceAll	EXACT_ELSEWHERE	EXACT_ELSEWHERE	EXACT_ELSEWHERE	return hash;
+11	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	802	replaceAll	ABSENT	ABSENT	ABSENT	if (other == this) return true;
+11	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	804	replaceAll	FUZZY	FUZZY	ABSENT	if (owner == null) return super.equals(other);
+11	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	805	replaceAll	ABSENT	ABSENT	ABSENT	if (!(other instanceof Map<?, ?> map) || map.size() != size()) return false;
+11	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	810	replaceAll	ABSENT	ABSENT	ABSENT	if (!predicate.test(key, value)) continue;
+11	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	811	replaceAll	ABSENT	ABSENT	ABSENT	if (!Objects.equals(value, map.get(key))
+11	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	812	replaceAll	ABSENT	ABSENT	ABSENT	|| value == null && !map.containsKey(key)) {
+11	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	816	replaceAll	ABSENT	ABSENT	ABSENT	} catch (ClassCastException | NullPointerException ignored) {
+11	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	822	replaceAll	EXACT_ELSEWHERE	EXACT_ELSEWHERE	EXACT_ELSEWHERE	@Override public String toString() {
+11	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	824	replaceAll	FUZZY	FUZZY	ABSENT	if (owner == null) return super.toString();
+11	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	825	replaceAll	ABSENT	ABSENT	ABSENT	StringBuilder out = new StringBuilder("{");
+11	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	826	replaceAll	ABSENT	ABSENT	ABSENT	boolean comma = false;
+11	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	831	replaceAll	ABSENT	ABSENT	ABSENT	if (comma) out.append(", ");
+11	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	832	replaceAll	ABSENT	ABSENT	ABSENT	comma = true;
+11	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	833	replaceAll	ABSENT	ABSENT	ABSENT	out.append(key == this ? "(this Map)" : key).append('=')
+11	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	834	replaceAll	ABSENT	ABSENT	ABSENT	.append(value == this ? "(this Map)" : value);
+11	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	836	replaceAll	ABSENT	ABSENT	ABSENT	return out.append('}').toString();
+11	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	841	replaceAll	ABSENT	ABSENT	ABSENT	if (owner != null) return new IndexedEntryCursor(owner);
+11	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	735	forEach	EXACT_ELSEWHERE	EXACT_ELSEWHERE	EXACT_ELSEWHERE	@Override public void forEach(BiConsumer<? super K, ? super V> action) {
+11	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	736	forEach	EXACT_ELSEWHERE	EXACT_ELSEWHERE	EXACT_ELSEWHERE	Objects.requireNonNull(action, "action");
+11	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	738	forEach	FUZZY	FUZZY	FUZZY	if (owner == null) {
+11	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	739	forEach	FUZZY	FUZZY	FUZZY	for (Entry<K, V> entry : entrySet()) {
+11	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	740	forEach	ABSENT	ABSENT	ABSENT	action.accept(entry.getKey(), entry.getValue());
+11	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	744	forEach	EXACT_ELSEWHERE	EXACT_ELSEWHERE	EXACT_ELSEWHERE	int expected = owner.revision();
+11	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	746	forEach	EXACT_ELSEWHERE	EXACT_ELSEWHERE	EXACT_ELSEWHERE	K key = owner.keyAt(slot);
+11	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	748	forEach	ABSENT	ABSENT	ABSENT	if (predicate.test(key, value)) action.accept(key, value);
+11	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	749	forEach	ABSENT	ABSENT	ABSENT	if (owner.revision() != expected) throw new ConcurrentModificationException();
+11	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	753	forEach	EXACT_ELSEWHERE	EXACT_ELSEWHERE	EXACT_ELSEWHERE	@Override public boolean containsValue(Object value) {
+11	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	755	forEach	FUZZY	FUZZY	ABSENT	if (owner == null) return super.containsValue(value);
+11	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	758	forEach	ABSENT	ABSENT	ABSENT	V stored = owner.valueAt(slot);
+11	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	759	forEach	ABSENT	ABSENT	ABSENT	if (predicate.test(key, stored) && Objects.equals(value, stored)) return true;
+11	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	764	forEach	ABSENT	ABSENT	ABSENT	@Override public void replaceAll(
+11	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	765	forEach	ABSENT	ABSENT	ABSENT	BiFunction<? super K, ? super V, ? extends V> action) {
+11	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	770	forEach	ABSENT	ABSENT	ABSENT	entry.setValue(action.apply(entry.getKey(), entry.getValue()));
+11	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	673	values	EXACT	EXACT	EXACT_ELSEWHERE	@Override public Collection<V> values() {
+11	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	675	values	EXACT	EXACT	ABSENT	if (owner == null) return super.values();
+11	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	676	values	EXACT	EXACT	EXACT_ELSEWHERE	return new AbstractCollection<>() {
+11	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	679	values	EXACT	EXACT	EXACT_ELSEWHERE	@Override public Iterator<V> iterator() {
+11	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	682	values	ABSENT	ABSENT	ABSENT	private int next = owner.firstSlot();
+11	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	683	values	EXACT_ELSEWHERE	EXACT_ELSEWHERE	EXACT_ELSEWHERE	private K lastKey;
+11	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	688	values	ABSENT	ABSENT	ABSENT	if (expected != owner.revision()) {
+13	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	200	indexed	ABSENT	ABSENT	ABSENT	protected final M3TreeMap<E, ?> indexed() {
+13	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	201	indexed	ABSENT	ABSENT	ABSENT	return sorted instanceof M3TreeSet<?> owned
+13	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	202	indexed	ABSENT	ABSENT	ABSENT	? ((M3TreeSet<E>) owned).indexedOwner() : null;
+13	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	206	indexed	ABSENT	ABSENT	ABSENT	protected final Iterator<E> slotCursor(M3TreeMap<E, ?> owner, boolean reverse) {
+13	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	208	indexed	ABSENT	ABSENT	ABSENT	private final int epoch = owner.revision();
+13	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	209	indexed	ABSENT	ABSENT	ABSENT	private int pending = reverse ? owner.lastSlot() : owner.firstSlot();
+13	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	210	indexed	EXACT_ELSEWHERE	EXACT_ELSEWHERE	EXACT_ELSEWHERE	private boolean prepared;
+13	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	213	indexed	EXACT_ELSEWHERE	EXACT_ELSEWHERE	EXACT_ELSEWHERE	private void check() {
+13	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	214	indexed	ABSENT	ABSENT	ABSENT	if (epoch != owner.revision()) throw new ConcurrentModificationException();
+13	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	216	indexed	EXACT_ELSEWHERE	EXACT_ELSEWHERE	EXACT_ELSEWHERE	private void prepare() {
+13	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	217	indexed	EXACT_ELSEWHERE	EXACT_ELSEWHERE	EXACT_ELSEWHERE	check();
+13	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	218	indexed	EXACT_ELSEWHERE	EXACT_ELSEWHERE	EXACT_ELSEWHERE	if (prepared || exhausted) return;
+13	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	219	indexed	EXACT_ELSEWHERE	EXACT_ELSEWHERE	FUZZY	while (pending >= 0) {
+13	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	220	indexed	ABSENT	ABSENT	ABSENT	E value = owner.keyAt(pending);
+13	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	221	indexed	ABSENT	ABSENT	ABSENT	boolean visible = predicate.test(value);
+13	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	223	indexed	EXACT_ELSEWHERE	EXACT_ELSEWHERE	ABSENT	if (visible) {
+13	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	224	indexed	EXACT_ELSEWHERE	EXACT_ELSEWHERE	EXACT_ELSEWHERE	prepared = true;
+13	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	227	indexed	ABSENT	ABSENT	ABSENT	pending = reverse ? owner.previousIndexedSlot(pending)
+13	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	228	indexed	ABSENT	ABSENT	ABSENT	: owner.nextSlot(pending);
+13	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	233	indexed	EXACT_ELSEWHERE	EXACT_ELSEWHERE	EXACT_ELSEWHERE	@Override public boolean hasNext() { prepare(); return prepared; }
+13	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	236	indexed	EXACT_ELSEWHERE	EXACT_ELSEWHERE	ABSENT	int slot = pending;
+13	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	237	indexed	ABSENT	ABSENT	ABSENT	E result = owner.keyAt(slot);
+13	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	238	indexed	ABSENT	ABSENT	ABSENT	pending = reverse ? owner.previousIndexedSlot(slot) : owner.nextSlot(slot);
+13	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	240	indexed	EXACT_ELSEWHERE	EXACT_ELSEWHERE	EXACT_ELSEWHERE	prepared = false;
+13	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	385	lower	ABSENT	ABSENT	ABSENT	return owner == null ? navigate(nav.lower(e), e, false, false)
+13	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	386	lower	ABSENT	ABSENT	ABSENT	: indexedBound(owner, e, -2);
+13	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	390	lower	ABSENT	ABSENT	ABSENT	return owner == null ? navigate(nav.floor(e), e, false, true)
+13	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	391	lower	ABSENT	ABSENT	ABSENT	: indexedBound(owner, e, -1);
+13	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	395	lower	ABSENT	ABSENT	ABSENT	return owner == null ? navigate(nav.ceiling(e), e, true, true)
+13	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	396	lower	ABSENT	ABSENT	ABSENT	: indexedBound(owner, e, 1);
+13	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	400	lower	ABSENT	ABSENT	ABSENT	return owner == null ? navigate(nav.higher(e), e, true, false)
+13	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	401	lower	ABSENT	ABSENT	ABSENT	: indexedBound(owner, e, 2);
+13	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	404	lower	ABSENT	ABSENT	ABSENT	if (indexed() != null) return super.first();
+13	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	410	lower	ABSENT	ABSENT	ABSENT	if (indexed() != null) return super.last();
+13	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	422	descendingIterator	ABSENT	ABSENT	ABSENT	return owner == null ? filtered(nav.descendingSet().iterator(), predicate)
+13	55721ff8920b	M3FilteredViews.java	a6d82d9a076f	423	descendingIterator	ABSENT	ABSENT	ABSENT	: slotCursor(owner, true);
+16	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	210	cursor	ABSENT	ABSENT	ABSENT	private int expected = owner.revision();
+16	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	211	cursor	ABSENT	ABSENT	ABSENT	private int pending = descending ? owner.lastSlot() : owner.firstSlot();
+16	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	212	cursor	FUZZY	FUZZY	ABSENT	private int lastReturned = -1;
+16	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	216	cursor	EXACT_ELSEWHERE	EXACT_ELSEWHERE	EXACT_ELSEWHERE	private void check() {
+16	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	217	cursor	ABSENT	ABSENT	ABSENT	if (expected != owner.revision())
+16	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	218	cursor	EXACT_ELSEWHERE	EXACT_ELSEWHERE	EXACT_ELSEWHERE	throw new ConcurrentModificationException();
+16	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	221	cursor	EXACT	EXACT	EXACT_ELSEWHERE	check();
+16	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	223	cursor	EXACT	EXACT	ABSENT	while (pending >= 0) {
+16	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	224	cursor	ABSENT	ABSENT	ABSENT	boolean visible = predicate.test(owner.keyAt(pending));
+16	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	226	cursor	EXACT	EXACT	ABSENT	if (visible) {
+16	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	230	cursor	ABSENT	ABSENT	ABSENT	pending = descending ? owner.previousIndexedSlot(pending)
+16	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	231	cursor	ABSENT	ABSENT	ABSENT	: owner.nextSlot(pending);
+16	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	239	next	EXACT	EXACT	ABSENT	int slot = pending;
+16	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	240	next	ABSENT	ABSENT	ABSENT	E result = owner.keyAt(slot);
+16	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	241	next	ABSENT	ABSENT	ABSENT	pending = descending ? owner.previousIndexedSlot(slot)
+16	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	242	next	ABSENT	ABSENT	ABSENT	: owner.nextSlot(slot);
+16	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	245	next	ABSENT	ABSENT	ABSENT	lastReturned = slot;
+16	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	246	next	EXACT	EXACT	EXACT_ELSEWHERE	return result;
+16	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	250	next	ABSENT	ABSENT	ABSENT	if (lastReturned < 0)
+16	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	251	next	FUZZY	FUZZY	FUZZY	throw new IllegalStateException("next required");
+16	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	252	next	ABSENT	ABSENT	ABSENT	owner.eraseAt(lastReturned);
+16	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	253	next	FUZZY	FUZZY	ABSENT	expected = owner.revision();
+16	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	254	next	ABSENT	ABSENT	ABSENT	lastReturned = -1;
+16	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	371	pollFirst	FUZZY	FUZZY	FUZZY	@Override public E pollFirst() {
+16	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	373	pollFirst	ABSENT	ABSENT	ABSENT	if (owner == null) return poll(iterator());
+16	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	375	pollFirst	EXACT_ELSEWHERE	EXACT_ELSEWHERE	EXACT_ELSEWHERE	if (slot < 0) return null;
+16	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	380	pollFirst	FUZZY	FUZZY	FUZZY	@Override public E pollLast() {
+16	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	382	pollFirst	ABSENT	ABSENT	ABSENT	if (owner == null) return poll(descendingIterator());
+16	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	317	bounded	ABSENT	ABSENT	ABSENT	int relation = forward ? (inclusive ? 1 : 2) : (inclusive ? -1 : -2);
+16	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	318	bounded	ABSENT	ABSENT	ABSENT	int slot = owner.nearIndexedSlot(query, relation);
+16	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	320	bounded	FUZZY	FUZZY	ABSENT	slot = forward ? owner.nextSlot(slot) : owner.previousIndexedSlot(slot);
+16	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	322	bounded	ABSENT	ABSENT	ABSENT	return slot < 0 ? null : owner.keyAt(slot);
+16	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	128	contains	ABSENT	ABSENT	ABSENT	int slot = owner.findSlot(value);
+16	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	129	contains	ABSENT	ABSENT	ABSENT	return slot >= 0 && predicate.test(owner.keyAt(slot));
+16	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	164	remove	ABSENT	ABSENT	ABSENT	if (slot < 0 || !predicate.test(owner.keyAt(slot))) return false;
+16	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	165	remove	ABSENT	ABSENT	ABSENT	owner.eraseAt(slot);
+16	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	120	isEmpty	ABSENT	ABSENT	ABSENT	if (owner != null) return edge(owner, true) < 0;
+16	55721ff8920b	M3MutableFilteredViews.java	883195b9b194	363	last	ABSENT	ABSENT	ABSENT	int slot = edge(owner, false);
+17	6d0e9f5461e6	M3IndexedListSnapshot.java	2caf4faf78ea	211	filteredJava	ABSENT	ABSENT	ABSENT	System.arraycopy(positions, from, admitted, 0, length);
+17	6d0e9f5461e6	M3IndexedListSnapshot.java	2caf4faf78ea	212	filteredJava	ABSENT	ABSENT	ABSENT	} else if (count != 0) {
+17	6d0e9f5461e6	M3IndexedListSnapshot.java	2caf4faf78ea	215	filteredJava	ABSENT	ABSENT	ABSENT	if (selected[i] != 0) admitted[written++] = positions[from + i];
+17	6d0e9f5461e6	M3FilteredViews.java	d299c9dc3853	371	firstVisible	FUZZY	FUZZY	FUZZY	E item = cursor.next();
+17	6d0e9f5461e6	M3FilteredViews.java	d299c9dc3853	372	firstVisible	FUZZY	FUZZY	FUZZY	if (predicate.test(item)) return item;
+17	6d0e9f5461e6	M3FilteredViews.java	d299c9dc3853	450	isEmpty	FUZZY	FUZZY	FUZZY	for (Entry<K, V> item : sorted.entrySet()) {
+17	6d0e9f5461e6	M3FilteredViews.java	d299c9dc3853	451	isEmpty	ABSENT	ABSENT	ABSENT	if (predicate.test(item.getKey(), item.getValue())) return false;
+17	6d0e9f5461e6	M3IndexedListSnapshot.java	2caf4faf78ea	200	filteredJava	ABSENT	ABSENT	ABSENT	byte[] selected = new byte[length];
+17	6d0e9f5461e6	M3IndexedListSnapshot.java	2caf4faf78ea	204	filteredJava	ABSENT	ABSENT	ABSENT	selected[i] = 1;
+17	6d0e9f5461e6	M3LinkedList.java	3bdfb1e3d9e9	173	clear	FUZZY	FUZZY	FUZZY	Arrays.fill(storage.values, 0, storage.used, null);
+17	6d0e9f5461e6	M3LinkedList.java	3bdfb1e3d9e9	174	clear	ABSENT	ABSENT	ABSENT	Arrays.fill(storage.liveMask, 0, ((storage.used - 1) >>> 6) + 1, 0L);
+17	6d0e9f5461e6	M3PrimitiveFilteredSequences.java	37a142b8a015	114	count	FUZZY	FUZZY	FUZZY	private static int count(M3LongIterator it, LongPredicate predicate) {
+17	6d0e9f5461e6	M3PrimitiveFilteredSequences.java	37a142b8a015	117	count	ABSENT	ABSENT	ABSENT	if (predicate.test(it.nextLong())) result++;
+17	6d0e9f5461e6	M3FilteredViews.java	d299c9dc3853	196	isEmpty	ABSENT	ABSENT	ABSENT	for (E item : source) if (predicate.test(item)) return false;
+17	6d0e9f5461e6	M3KeyedParallelismPlan.java	e800b5e3f3a1	174	put	FUZZY	FUZZY	FUZZY	if (queue.offer(value)) {
+17	6d0e9f5461e6	M3PrimitiveFilteredSequences.java	37a142b8a015	184	size	FUZZY	FUZZY	FUZZY	@Override public int size() { return count(source.iterator(), predicate); }
+17	6d0e9f5461e6	m3_index_mask_compactor.c	8486355cbf46	24	m3_count_window	FUZZY	FUZZY	FUZZY	jint state_offset, jint length, jint mask);
+17	6d0e9f5461e6	m3_index_mask_compactor.c	8486355cbf46	26	m3_count_window	ABSENT	ABSENT	ABSENT	static int m3_verify_empty(JNIEnv *env, jbyteArray states,
+17	6d0e9f5461e6	m3_index_mask_compactor.c	8486355cbf46	28	m3_count_window	FUZZY	FUZZY	FUZZY	jint observed = m3_count_window(env, states, state_offset, length, mask);
+17	6d0e9f5461e6	m3_index_mask_compactor.c	8486355cbf46	29	m3_count_window	FUZZY	FUZZY	FUZZY	if (observed < 0) return 0;
+17	6d0e9f5461e6	m3_index_mask_compactor.c	8486355cbf46	30	m3_count_window	ABSENT	ABSENT	ABSENT	if (observed != 0) {
+17	6d0e9f5461e6	m3_index_mask_compactor.c	8486355cbf46	57	m3_select_range	ABSENT	ABSENT	ABSENT	if (count == 0) {
+17	6d0e9f5461e6	m3_index_mask_compactor.c	8486355cbf46	58	m3_select_range	ABSENT	ABSENT	ABSENT	return m3_verify_empty(env, states, 0, n, required_mask) ? result : NULL;
+17	6d0e9f5461e6	m3_index_mask_compactor.c	8486355cbf46	357	-	ABSENT	ABSENT	ABSENT	if (kept == 0) {
+17	6d0e9f5461e6	m3_index_mask_compactor.c	8486355cbf46	358	-	ABSENT	ABSENT	ABSENT	return m3_verify_empty(env, states, state_offset, length, mask) ? result : NULL;
+19	082b54fa4ab7	M3LongIndexPathMasks.java	4031e69e1e8e	37	select	EXACT	ABSENT	ABSENT	return M3IndexPathMasks.selectLongJava(rows, physicalOffsets, statePlanes,
+19	082b54fa4ab7	M3LongIndexPathMasks.java	4031e69e1e8e	39	select	EXACT	ABSENT	ABSENT	} catch (ConcurrentModificationException changed) {
+19	082b54fa4ab7	M3IndexPathMasks.java	850d08927242	309	anyStageImpossible	ABSENT	ABSENT	ABSENT	private static boolean anyStageImpossible(int[] required, int[] forbidden) {
+19	082b54fa4ab7	M3IndexPathMasks.java	850d08927242	311	anyStageImpossible	ABSENT	ABSENT	ABSENT	if ((required[stage] & forbidden[stage]) != 0) return true;
+19	082b54fa4ab7	M3IndexPathMasks.java	850d08927242	313	anyStageImpossible	EXACT_ELSEWHERE	EXACT_ELSEWHERE	EXACT_ELSEWHERE	return false;
+19	082b54fa4ab7	M3IndexPathMasks.java	850d08927242	317	anyStageImpossible	ABSENT	ABSENT	ABSENT	private static boolean allStagesAdmit(int[] required, int[] forbidden) {
+19	082b54fa4ab7	M3IndexPathMasks.java	850d08927242	319	anyStageImpossible	FUZZY	FUZZY	FUZZY	if (required[stage] != 0 || forbidden[stage] != 0) return false;
+19	082b54fa4ab7	M3FilteredViews.java	40bde7b1fea3	134	seek	ABSENT	ABSENT	ABSENT	if (anchorOwner(owner)) {
+19	082b54fa4ab7	M3FilteredViews.java	40bde7b1fea3	137	seek	ABSENT	ABSENT	ABSENT	return seekFromAnchor(source, predicate, owner, element, inclusive, descending);
+19	082b54fa4ab7	M3FilteredViews.java	40bde7b1fea3	139	seek	ABSENT	ABSENT	ABSENT	NavigableSet<E> range = descending
+19	082b54fa4ab7	M3FilteredViews.java	40bde7b1fea3	140	seek	ABSENT	ABSENT	ABSENT	? source.headSet(element, inclusive) : source.tailSet(element, inclusive);
+19	082b54fa4ab7	M3FilteredViews.java	40bde7b1fea3	146	seek	ABSENT	ABSENT	ABSENT	private static <E> E seekFromAnchor(NavigableSet<E> source, Predicate<? super E> predicate,
+19	082b54fa4ab7	M3FilteredViews.java	40bde7b1fea3	147	seek	ABSENT	ABSENT	ABSENT	NavigableSet<E> owner, E element, boolean inclusive, boolean descending) {
+19	082b54fa4ab7	M3FilteredViews.java	40bde7b1fea3	152	seek	ABSENT	ABSENT	ABSENT	NavigableSet<E> range = descending ? source.headSet(anchor, true) : source.tailSet(anchor, true);
+19	082b54fa4ab7	M3FilteredViews.java	40bde7b1fea3	163	anchorOwner	ABSENT	ABSENT	ABSENT	private static boolean anchorOwner(Object source) {
+19	082b54fa4ab7	M3FilteredViews.java	40bde7b1fea3	164	anchorOwner	ABSENT	ABSENT	ABSENT	Class<?> type = source.getClass();
+19	082b54fa4ab7	M3FilteredViews.java	40bde7b1fea3	165	anchorOwner	ABSENT	ABSENT	ABSENT	if (type == TreeSet.class || type == ConcurrentSkipListSet.class
+19	082b54fa4ab7	M3FilteredViews.java	40bde7b1fea3	166	anchorOwner	ABSENT	ABSENT	ABSENT	|| type == TreeMap.class || type == ConcurrentSkipListMap.class
+19	082b54fa4ab7	M3FilteredViews.java	40bde7b1fea3	167	anchorOwner	ABSENT	ABSENT	ABSENT	|| type == M3TreeSet.class || type == M3TreeMap.class) return true;
+19	082b54fa4ab7	M3FilteredViews.java	40bde7b1fea3	168	anchorOwner	ABSENT	ABSENT	ABSENT	Class<?> enclosing = type.getEnclosingClass();
+19	082b54fa4ab7	M3FilteredViews.java	40bde7b1fea3	169	anchorOwner	ABSENT	ABSENT	ABSENT	return enclosing == TreeMap.class || enclosing == ConcurrentSkipListMap.class;
+19	082b54fa4ab7	M3FilteredViews.java	40bde7b1fea3	191	requiresRangeQuery	ABSENT	ABSENT	ABSENT	private static <E> boolean requiresRangeQuery(NavigableSet<E> source) {
+19	082b54fa4ab7	M3FilteredViews.java	40bde7b1fea3	194	requiresRangeQuery	ABSENT	ABSENT	ABSENT	source = ((NavigableSetView<E>) view).nav;
+19	082b54fa4ab7	M3FilteredViews.java	40bde7b1fea3	196	requiresRangeQuery	ABSENT	ABSENT	ABSENT	source = ((M3FilteredNavigableSet<E>) view).navigationOwner();
+19	082b54fa4ab7	M3FilteredViews.java	40bde7b1fea3	198	requiresRangeQuery	ABSENT	ABSENT	ABSENT	return M3MutableFilteredViews.navigationOwner(source) != source;
+19	082b54fa4ab7	M3FilteredViews.java	40bde7b1fea3	547	navigate	ABSENT	ABSENT	ABSENT	NavigableSet<E> owner = navigationOwner(nav);
+19	082b54fa4ab7	M3FilteredViews.java	40bde7b1fea3	548	navigate	ABSENT	ABSENT	ABSENT	if (owner != nav && anchorOwner(owner)) {
+19	082b54fa4ab7	M3FilteredViews.java	40bde7b1fea3	549	navigate	ABSENT	ABSENT	ABSENT	if (requiresRangeQuery(nav)) checkQuery(owner.comparator(), query);
+19	082b54fa4ab7	M3FilteredViews.java	40bde7b1fea3	550	navigate	ABSENT	ABSENT	ABSENT	return seekFromAnchor(nav, predicate, owner, query, inclusive, !forward);
+19	082b54fa4ab7	M3FilteredViews.java	40bde7b1fea3	552	navigate	ABSENT	ABSENT	ABSENT	E candidate = forward ? (inclusive ? nav.ceiling(query) : nav.higher(query))
+19	082b54fa4ab7	M3FilteredViews.java	40bde7b1fea3	553	navigate	ABSENT	ABSENT	ABSENT	: (inclusive ? nav.floor(query) : nav.lower(query));
+19	082b54fa4ab7	M3FilteredViews.java	40bde7b1fea3	558	navigate	FUZZY	FUZZY	FUZZY	while (remaining.hasNext()) {
+19	082b54fa4ab7	M3FilteredViews.java	40bde7b1fea3	559	navigate	FUZZY	FUZZY	FUZZY	E next = remaining.next();
+19	082b54fa4ab7	M3FilteredViews.java	40bde7b1fea3	560	navigate	FUZZY	FUZZY	FUZZY	if (predicate.test(next)) return next;
+19	082b54fa4ab7	M3IndexPathMasks.java	850d08927242	326	selectJava	EXACT_ELSEWHERE	EXACT_ELSEWHERE	EXACT_ELSEWHERE	if (count == 0) return new int[0];
+19	082b54fa4ab7	M3IndexPathMasks.java	850d08927242	329	selectJava	ABSENT	ABSENT	ABSENT	if (anyStageImpossible(required, forbidden)) return new int[0];
+19	082b54fa4ab7	M3IndexPathMasks.java	850d08927242	332	selectJava	ABSENT	ABSENT	ABSENT	if (allStagesAdmit(required, forbidden)) {
+19	082b54fa4ab7	M3IndexPathMasks.java	850d08927242	335	selectJava	EXACT_ELSEWHERE	EXACT_ELSEWHERE	EXACT_ELSEWHERE	for (int i = 0; i < count; i++, at += stride) {
+19	082b54fa4ab7	M3IndexPathMasks.java	850d08927242	336	selectJava	FUZZY	FUZZY	FUZZY	selected[i] = rows[(int) at];
+19	082b54fa4ab7	M3FilteredViews.java	40bde7b1fea3	589	lower	FUZZY	FUZZY	FUZZY	return navigate(e, false, false);
+19	082b54fa4ab7	M3FilteredViews.java	40bde7b1fea3	592	lower	FUZZY	FUZZY	FUZZY	return navigate(e, false, true);
+19	082b54fa4ab7	M3FilteredViews.java	40bde7b1fea3	595	lower	FUZZY	FUZZY	FUZZY	return navigate(e, true, true);
+19	082b54fa4ab7	M3FilteredViews.java	40bde7b1fea3	598	lower	FUZZY	FUZZY	FUZZY	return navigate(e, true, false);
+19	082b54fa4ab7	M3IndexPathMasks.java	850d08927242	98	firstMatchingIndex	EXACT_ELSEWHERE	EXACT_ELSEWHERE	EXACT_ELSEWHERE	if (count == 0) return -1;
+19	082b54fa4ab7	M3IndexPathMasks.java	850d08927242	101	firstMatchingIndex	ABSENT	ABSENT	ABSENT	if (anyStageImpossible(requiredMasks, forbiddenMasks)) return -1;
+19	082b54fa4ab7	M3IndexPathMasks.java	850d08927242	104	firstMatchingIndex	ABSENT	ABSENT	ABSENT	if (allStagesAdmit(requiredMasks, forbiddenMasks)) return first;
+19	082b54fa4ab7	M3IndexPathMasks.java	850d08927242	174	scanWindow	ABSENT	ABSENT	ABSENT	if (backend == Backend.JAVA && allStagesAdmit(requiredMasks, forbiddenMasks)) {
+19	082b54fa4ab7	M3IndexPathMasks.java	850d08927242	175	scanWindow	FUZZY	FUZZY	FUZZY	int admitted = Math.min(limit, count - next);
+19	082b54fa4ab7	M3IndexPathMasks.java	850d08927242	177	scanWindow	ABSENT	ABSENT	ABSENT	for (int i = 0; i < admitted; i++, logical += stride) {
+19	082b54fa4ab7	M3IndexPathMasks.java	850d08927242	366	selectLongJava	ABSENT	ABSENT	ABSENT	if (count == 0 || anyStageImpossible(required, forbidden)) return new long[0];
+19	082b54fa4ab7	M3IndexPathMasks.java	850d08927242	368	selectLongJava	EXACT_ELSEWHERE	EXACT_ELSEWHERE	EXACT_ELSEWHERE	long[] selected = new long[count];
+19	082b54fa4ab7	M3IndexPathMasks.java	850d08927242	370	selectLongJava	ABSENT	ABSENT	ABSENT	for (int i = 0; i < count; i++, at += stride) selected[i] = rows[(int) at];
+19	082b54fa4ab7	M3FilteredViews.java	40bde7b1fea3	78	filterEntries	FUZZY	FUZZY	FUZZY	return new SortedMapView<>(source, predicate);
+19	082b54fa4ab7	M3FilteredViews.java	40bde7b1fea3	83	filterEntries	FUZZY	FUZZY	FUZZY	return new NavigableMapView<>(source, predicate);
+19	082b54fa4ab7	M3IndexPathMasks.java	850d08927242	185	scanWindow	ABSENT	ABSENT	ABSENT	output[outputOffset + i] = orderedRows[(int) logical];
+19	082b54fa4ab7	M3IndexPathMasks.java	850d08927242	187	scanWindow	ABSENT	ABSENT	ABSENT	return packWindow(next + admitted, admitted);
+19	082b54fa4ab7	M3IndexPathMasks.java	850d08927242	263	validateShape	EXACT	ABSENT	ABSENT	return validateShape(rows.length, positions, planes, required, forbidden,
+19	082b54fa4ab7	M3IndexPathMasks.java	850d08927242	267	validateShape	EXACT	FUZZY	FUZZY	private static int validateShape(int rowSize, int[] positions,
+19	082b54fa4ab7	M3FilteredViews.java	40bde7b1fea3	312	size	EXACT	EXACT	ABSENT	if (iterationView(source) == null) {
+19	082b54fa4ab7	M3IndexPathMasks.java	850d08927242	247	validateGeometry	EXACT	FUZZY	FUZZY	int physicalCapacity = validateShape(rowSize, positions, planes, required,
+27	1633da209622	m3_index_mask_compactor.c	eaeef1c565dd	24	m3_admit_chunk	ABSENT	ABSENT	ABSENT	static jsize m3_admit_chunk(JNIEnv *env, jbyteArray states, jsize offset,
+27	1633da209622	m3_index_mask_compactor.c	eaeef1c565dd	25	m3_admit_chunk	ABSENT	ABSENT	ABSENT	jsize chunk, jint mask, jbyte *ordinals, jsize *first, jsize *span) {
+27	1633da209622	m3_index_mask_compactor.c	eaeef1c565dd	28	m3_admit_chunk	FUZZY	FUZZY	FUZZY	if (mask == 0) return chunk;
+27	1633da209622	m3_index_mask_compactor.c	eaeef1c565dd	29	m3_admit_chunk	FUZZY	FUZZY	FUZZY	(*env)->GetByteArrayRegion(env, states, offset, chunk, ordinals);
+27	1633da209622	m3_index_mask_compactor.c	eaeef1c565dd	31	m3_admit_chunk	ABSENT	ABSENT	ABSENT	unsigned char *positions = (unsigned char *)ordinals;
+27	1633da209622	m3_index_mask_compactor.c	eaeef1c565dd	34	m3_admit_chunk	FUZZY	FUZZY	FUZZY	unsigned int bits = (unsigned int)(unsigned char)ordinals[i];
+27	1633da209622	m3_index_mask_compactor.c	eaeef1c565dd	35	m3_admit_chunk	FUZZY	FUZZY	FUZZY	if ((bits & (unsigned int)mask) == (unsigned int)mask) {
+27	1633da209622	m3_index_mask_compactor.c	eaeef1c565dd	36	m3_admit_chunk	ABSENT	ABSENT	ABSENT	positions[accepted++] = (unsigned char)i;
+27	1633da209622	m3_index_mask_compactor.c	eaeef1c565dd	39	m3_admit_chunk	ABSENT	ABSENT	ABSENT	if (accepted != 0) {
+27	1633da209622	m3_index_mask_compactor.c	eaeef1c565dd	45	m3_admit_chunk	ABSENT	ABSENT	ABSENT	return accepted;
+27	1633da209622	M3FilteredViews.java	2dac3e40eb72	142	sortedOwner	FUZZY	FUZZY	FUZZY	private static <E> SortedSet<E> sortedOwner(Collection<E> source) {
+27	1633da209622	M3FilteredViews.java	2dac3e40eb72	143	sortedOwner	ABSENT	ABSENT	ABSENT	Collection<E> owner = source;
+27	1633da209622	M3FilteredViews.java	2dac3e40eb72	145	sortedOwner	ABSENT	ABSENT	ABSENT	if (owner instanceof SortedSet<?> sorted) return (SortedSet<E>) sorted;
+27	1633da209622	M3FilteredViews.java	2dac3e40eb72	146	sortedOwner	ABSENT	ABSENT	ABSENT	if (owner.getClass() == SetView.class) {
+27	1633da209622	M3FilteredViews.java	2dac3e40eb72	147	sortedOwner	ABSENT	ABSENT	ABSENT	owner = ((SetView<E>) owner).view.source;
+27	1633da209622	M3FilteredViews.java	2dac3e40eb72	148	sortedOwner	ABSENT	ABSENT	ABSENT	} else if (owner.getClass() == CollectionView.class) {
+27	1633da209622	M3FilteredViews.java	2dac3e40eb72	149	sortedOwner	ABSENT	ABSENT	ABSENT	owner = ((CollectionView<E>) owner).source;
+27	1633da209622	m3_index_mask_compactor.c	eaeef1c565dd	71	m3_select_range	ABSENT	ABSENT	ABSENT	jsize first_admitted, span;
+27	1633da209622	m3_index_mask_compactor.c	eaeef1c565dd	72	m3_select_range	ABSENT	ABSENT	ABSENT	jsize accepted = m3_admit_chunk(env, states, offset, chunk, required_mask,
+27	1633da209622	m3_index_mask_compactor.c	eaeef1c565dd	73	m3_select_range	ABSENT	ABSENT	ABSENT	marks, &first_admitted, &span);
+27	1633da209622	m3_index_mask_compactor.c	eaeef1c565dd	74	m3_select_range	FUZZY	FUZZY	FUZZY	if (accepted < 0) return NULL;
+27	1633da209622	m3_index_mask_compactor.c	eaeef1c565dd	80	m3_select_range	FUZZY	FUZZY	FUZZY	(*env)->GetIntArrayRegion(env, rows, first + offset + first_admitted,
+27	1633da209622	m3_index_mask_compactor.c	eaeef1c565dd	81	m3_select_range	ABSENT	ABSENT	ABSENT	span, row_ids);
+27	1633da209622	m3_index_mask_compactor.c	eaeef1c565dd	85	m3_select_range	ABSENT	ABSENT	ABSENT	row_ids[i] = row_ids[(jsize)(unsigned char)marks[i] - first_admitted];
+27	1633da209622	m3_index_mask_compactor.c	eaeef1c565dd	371	-	ABSENT	ABSENT	ABSENT	jsize batch = m3_admit_chunk(env, states, state_offset + position, chunk,
+27	1633da209622	m3_index_mask_compactor.c	eaeef1c565dd	372	-	ABSENT	ABSENT	ABSENT	mask, marks, &first_admitted, &span);
+27	1633da209622	m3_index_mask_compactor.c	eaeef1c565dd	373	-	FUZZY	FUZZY	FUZZY	if (batch < 0) return NULL;
+27	1633da209622	m3_index_mask_compactor.c	eaeef1c565dd	379	-	ABSENT	ABSENT	ABSENT	(*env)->GetIntArrayRegion(env, rows, row_offset + position + first_admitted,
+27	1633da209622	m3_index_mask_compactor.c	eaeef1c565dd	380	-	ABSENT	ABSENT	ABSENT	span, values);
+27	1633da209622	m3_index_mask_compactor.c	eaeef1c565dd	383	-	FUZZY	FUZZY	FUZZY	for (jsize i = 0; i < batch; i++) {
+27	1633da209622	m3_index_mask_compactor.c	eaeef1c565dd	384	-	ABSENT	ABSENT	ABSENT	values[i] = values[(jsize)(unsigned char)marks[i] - first_admitted];
+27	1633da209622	M3FilteredViews.java	2dac3e40eb72	159	visibleMember	ABSENT	ABSENT	ABSENT	SortedSet<E> sorted = sortedOwner(source);
+27	1633da209622	M3FilteredViews.java	2dac3e40eb72	160	visibleMember	ABSENT	ABSENT	ABSENT	if (sorted != null) {
+27	1633da209622	M3FilteredViews.java	2dac3e40eb72	162	visibleMember	ABSENT	ABSENT	ABSENT	if (sorted instanceof NavigableSet<?> nav) {
+27	1633da209622	M3FilteredViews.java	2dac3e40eb72	164	visibleMember	ABSENT	ABSENT	ABSENT	@SuppressWarnings("unchecked") NavigableSet<E> navigable = (NavigableSet<E>) nav;
+27	1633da209622	M3FilteredViews.java	2dac3e40eb72	165	visibleMember	FUZZY	FUZZY	FUZZY	return predicate.test(navigable.ceiling(alias));
+27	1633da209622	m3_index_mask_compactor.c	eaeef1c565dd	428	-	FUZZY	FUZZY	FUZZY	(*env)->GetLongArrayRegion(env, rows, row_offset + position + first_admitted,
+35	09ff95dd6cf3	M3FilteredViews.java	ad4ebf2f6ccc	450	isEmpty	FUZZY	FUZZY	FUZZY	if (predicate.test(candidate.getKey(), candidate.getValue())) return false;
+35	09ff95dd6cf3	m3_index_mask_compactor.c	795a55d3b864	22	m3_selected_span	FUZZY	FUZZY	FUZZY	static jsize m3_selected_span(const jbyte *marks, jsize length, jint mask, jsize *end) {
+35	09ff95dd6cf3	m3_index_mask_compactor.c	795a55d3b864	25	m3_selected_span	FUZZY	FUZZY	FUZZY	if (mask == 0) return first;
+35	09ff95dd6cf3	m3_index_mask_compactor.c	795a55d3b864	26	m3_selected_span	ABSENT	ABSENT	ABSENT	while (first < length && (((unsigned char) marks[first] & (unsigned int) mask) != (unsigned int) mask)) first++;
+35	09ff95dd6cf3	m3_index_mask_compactor.c	795a55d3b864	27	m3_selected_span	ABSENT	ABSENT	ABSENT	if (first == length) { *end = first; return first; }
+35	09ff95dd6cf3	m3_index_mask_compactor.c	795a55d3b864	28	m3_selected_span	ABSENT	ABSENT	ABSENT	while (*end > first && (((unsigned char) marks[*end - 1] & (unsigned int) mask) != (unsigned int) mask)) (*end)--;
+35	09ff95dd6cf3	m3_index_mask_compactor.c	795a55d3b864	59	m3_select_range	ABSENT	ABSENT	ABSENT	jsize stop;
+35	09ff95dd6cf3	m3_index_mask_compactor.c	795a55d3b864	60	m3_select_range	FUZZY	FUZZY	FUZZY	jsize begin = m3_selected_span(marks, chunk, required_mask, &stop);
+35	09ff95dd6cf3	m3_index_mask_compactor.c	795a55d3b864	61	m3_select_range	ABSENT	ABSENT	ABSENT	if (begin == stop) { offset += chunk; continue; }
+35	09ff95dd6cf3	m3_index_mask_compactor.c	795a55d3b864	62	m3_select_range	FUZZY	FUZZY	FUZZY	(*env)->GetIntArrayRegion(env, rows, first + offset + begin, stop - begin, row_ids);
+35	09ff95dd6cf3	m3_index_mask_compactor.c	795a55d3b864	65	m3_select_range	FUZZY	FUZZY	FUZZY	for (jsize i = begin; i < stop; i++) {
+35	09ff95dd6cf3	m3_index_mask_compactor.c	795a55d3b864	68	m3_select_range	FUZZY	FUZZY	FUZZY	row_ids[accepted++] = row_ids[i - begin];
+35	09ff95dd6cf3	m3_index_mask_compactor.c	795a55d3b864	363	-	FUZZY	FUZZY	FUZZY	jsize begin = m3_selected_span(marks, chunk, mask, &stop);
+35	09ff95dd6cf3	m3_index_mask_compactor.c	795a55d3b864	364	-	ABSENT	ABSENT	ABSENT	if (begin == stop) { position += chunk; continue; }
+35	09ff95dd6cf3	m3_index_mask_compactor.c	795a55d3b864	365	-	FUZZY	FUZZY	FUZZY	(*env)->GetIntArrayRegion(env, rows, row_offset + position + begin, stop - begin, values);
+35	09ff95dd6cf3	m3_index_mask_compactor.c	795a55d3b864	367	-	ABSENT	ABSENT	ABSENT	jsize batch = stop - begin;
+35	09ff95dd6cf3	m3_index_mask_compactor.c	795a55d3b864	373	-	FUZZY	FUZZY	FUZZY	if ((flags & (unsigned int)mask) == (unsigned int)mask) values[batch++] = values[i - begin];
+35	09ff95dd6cf3	m3_index_mask_compactor.c	795a55d3b864	420	-	FUZZY	FUZZY	FUZZY	(*env)->GetLongArrayRegion(env, rows, row_offset + position + begin, stop - begin, values);
+42	082b54fa4ab7	M3FilteredViews.java	40bde7b1fea3	617	descendingIterator	ABSENT	ABSENT	ABSENT	if (!(nav instanceof NavigableSetView<?>)) {
+42	082b54fa4ab7	M3FilteredViews.java	40bde7b1fea3	623	descendingIterator	FUZZY	FUZZY	FUZZY	NavigableSetView<E> layer = this;
+42	082b54fa4ab7	M3FilteredViews.java	40bde7b1fea3	624	descendingIterator	FUZZY	FUZZY	FUZZY	NavigableSet<E> backing;
+42	082b54fa4ab7	M3FilteredViews.java	40bde7b1fea3	627	descendingIterator	FUZZY	FUZZY	FUZZY	backing = layer.nav;
+42	082b54fa4ab7	M3FilteredViews.java	40bde7b1fea3	628	descendingIterator	ABSENT	ABSENT	ABSENT	if (!(backing instanceof NavigableSetView<?> nested)) break;
+42	082b54fa4ab7	M3FilteredViews.java	40bde7b1fea3	630	descendingIterator	ABSENT	ABSENT	ABSENT	NavigableSetView<E> inner = (NavigableSetView<E>) nested;
+42	082b54fa4ab7	M3FilteredViews.java	40bde7b1fea3	633	descendingIterator	ABSENT	ABSENT	ABSENT	Collection<E> descending = backing.descendingSet();
+42	082b54fa4ab7	M3FilteredViews.java	40bde7b1fea3	635	descendingIterator	ABSENT	ABSENT	ABSENT	descending = new CollectionView<>(descending, filters.get(index));
+42	082b54fa4ab7	M3FilteredViews.java	40bde7b1fea3	637	descendingIterator	ABSENT	ABSENT	ABSENT	return descending.iterator();
+43	92805fd23aed	M3FilteredLists.java	2e51db70400b	431	add	ABSENT	ABSENT	ABSENT	boolean empty = checkForComodification();
+43	92805fd23aed	M3FilteredLists.java	2e51db70400b	433	add	ABSENT	ABSENT	ABSENT	if (empty) {
+43	92805fd23aed	M3FilteredLists.java	2e51db70400b	438	add	ABSENT	ABSENT	ABSENT	iterator.add(value);
+43	92805fd23aed	M3FilteredLists.java	2e51db70400b	441	add	ABSENT	ABSENT	ABSENT	} catch (ConcurrentModificationException invalidated) {
+43	92805fd23aed	M3FilteredLists.java	2e51db70400b	443	add	ABSENT	ABSENT	ABSENT	throw invalidated;
+43	92805fd23aed	M3FilteredLists.java	2e51db70400b	387	checkForComodification	EXACT_ELSEWHERE	EXACT_ELSEWHERE	EXACT_ELSEWHERE	} catch (NoSuchElementException empty) {
+43	92805fd23aed	M3FilteredLists.java	2e51db70400b	388	checkForComodification	ABSENT	ABSENT	ABSENT	if (lastPhysical >= 0) {
+43	92805fd23aed	M3FilteredLists.java	2e51db70400b	389	checkForComodification	ABSENT	ABSENT	ABSENT	throw new ConcurrentModificationException("delivered element disappeared");
+43	92805fd23aed	M3FilteredLists.java	2e51db70400b	394	checkForComodification	EXACT_ELSEWHERE	EXACT_ELSEWHERE	EXACT_ELSEWHERE	return false;
+51	df07b3e26d77	M3FilteredViews.java	f6c134f78327	515	hasNext	ABSENT	ABSENT	ABSENT	while (next >= 0 && !visibleSlot(owner, next)) next = owner.nextSlot(next);
+51	df07b3e26d77	M3FilteredViews.java	f6c134f78327	516	hasNext	ABSENT	ABSENT	ABSENT	return next >= 0;
+51	df07b3e26d77	M3FilteredViews.java	f6c134f78327	522	hasNext	ABSENT	ABSENT	ABSENT	return new SimpleImmutableEntry<>(owner.keyAt(slot), owner.valueAt(slot));
+51	df07b3e26d77	M3FilteredViews.java	f6c134f78327	589	next	ABSENT	ABSENT	ABSENT	return owner.valueAt(slot);
+52	082b54fa4ab7	M3FilteredViews.java	40bde7b1fea3	700	contains	FUZZY	FUZZY	FUZZY	if (!(candidate instanceof Entry<?, ?> entry)) return false;
+52	082b54fa4ab7	M3FilteredViews.java	40bde7b1fea3	703	contains	ABSENT	ABSENT	ABSENT	return sorted.entrySet().contains(candidate)
+52	082b54fa4ab7	M3FilteredViews.java	40bde7b1fea3	704	contains	ABSENT	ABSENT	ABSENT	&& SortedMapView.this.containsKey(entry.getKey());
+56	df07b3e26d77	M3MutableFilteredViews.java	92bc7b2fe188	690	hasNext	ABSENT	ABSENT	ABSENT	while (next >= 0 && !visibleSlot(owner, next)) {
+56	df07b3e26d77	M3MutableFilteredViews.java	92bc7b2fe188	693	hasNext	ABSENT	ABSENT	ABSENT	return next >= 0;
+57	e4884a80fa01	M3FilteredViews.java	e62837e29d6e	542	navigate	FUZZY	FUZZY	FUZZY	if (candidate == null && !nullIsAnchor(nav, query, inclusive, !forward)) return null;
+57	e4884a80fa01	M3FilteredViews.java	e62837e29d6e	546	navigate	ABSENT	ABSENT	ABSENT	Iterator<E> selected = filtered(remaining, predicate);
+61	441062541647	M3FilteredViews.java	a5f22ba8a49c	243	nullIsCandidate	ABSENT	ABSENT	ABSENT	int direction = order.compare(forward ? nav.last() : nav.first(), query);
+63	df07b3e26d77	M3FilteredViews.java	f6c134f78327	220	prepare	EXACT_ELSEWHERE	EXACT_ELSEWHERE	EXACT_ELSEWHERE	if (predicate.test(value)) {
+64	df07b3e26d77	M3MutableFilteredViews.java	92bc7b2fe188	224	prepare	ABSENT	ABSENT	ABSENT	if (predicate.test(owner.keyAt(pending))) {
+65	df07b3e26d77	M3MutableFilteredViews.java	92bc7b2fe188	702	next	ABSENT	ABSENT	ABSENT	return owner.valueAt(slot);
+66	082b54fa4ab7	M3FilteredViews.java	40bde7b1fea3	324	isEmpty	ABSENT	ABSENT	ABSENT	if (iterationView(source) != null) return !iterator().hasNext();

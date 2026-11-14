@@ -1,0 +1,3 @@
+src/java.base/share/classes/jdk/internal/mindex/MIndexMappedStringBacking.java	b038fff642ab35aa2cf749d3ac81c3559ff8f6fc59a723fd2a5212654f4ba651	323bca7d4452e3e58f5c5941b586c33825becc2593b853b51df86db9d820e25b	00-Backing.java.txt
+test/jdk/java/lang/String/MapFactsTest.java	ABSENT	c5d856acc3fa5b7b636894d1dd18b087c1d8e1a450fcbef0821e87b969d185c2	02-MapFactsTest.java.txt
+test/jdk/java/lang/String/MapUtfTest.java	ABSENT	56df66547663793a8eeec761480fbd9c7cffa441a3db70b3ae9aa700cb28e051	01-MapUtfTest.java.txt

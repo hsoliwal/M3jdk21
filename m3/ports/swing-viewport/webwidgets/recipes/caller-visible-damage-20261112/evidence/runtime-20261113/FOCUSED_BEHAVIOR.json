@@ -1,0 +1,57 @@
+{
+  "schema": "m3.executed-focused-behavior/v1",
+  "sourceHead": "41dbfee857379dc7eaee961d37332dc89b83f37d",
+  "sourceChanges": "None during test execution",
+  "controllerSHA256": "8f0d049a9ff44612f45d78710b09e48738ec773d15a28bfb81e40394a77d4427",
+  "runner": {
+    "name": "JUnit Platform Console standalone1.10.1",
+    "sha256": "b42eaa53d13576d17db5fb8b280722a6ae9e36daf95f4262bc6e96d4cb20725f",
+    "hostedIdentityEquivalent": false
+  },
+  "caller7": {
+    "status": "PASS",
+    "counts": {
+      "found": 7,
+      "successful": 7,
+      "failed": 0,
+      "skipped": 0,
+      "aborted": 0
+    },
+    "receipt": "0b1b5422d67486a687f214c9d2f1d288bd58725bd1cec6adc1cf727de9f90588"
+  },
+  "originalCore4": {
+    "status": "PASS",
+    "counts": {
+      "found": 4,
+      "successful": 4,
+      "failed": 0,
+      "skipped": 0,
+      "aborted": 0
+    },
+    "receipt": "11d1958280c8b1f3147d5c6c4f485e8c4825dc845761ddcd877064b1cae7ee56"
+  },
+  "unchangedOracle18": {
+    "fixtureSHA256": "ba22b2bf42b059ab93d906383d52c16b96be6f2cdbd3e49bade4ed3d473e8522",
+    "passed": 12,
+    "failed": 6,
+    "assertionFailures": 3,
+    "missingMethodErrors": 3,
+    "skipped": 0,
+    "aborted": 0,
+    "exitCode": 1,
+    "receiptSHA256": "d26dcd461ca8ab2288aed479155fcaf17a355a53ec8eef216e62834ccf7ef109",
+    "failures": [
+      "damageNeverLosesAcceptedRepresentableUnion",
+      "damageNeverSilentlyDropsAcceptedEndpointRectangles",
+      "wideDamageAcceptsEveryPositiveIntSingleton",
+      "wideDamageDrainPreservesNullPartialFailureAndResetOrder",
+      "wideDamageRetainsOversizedUnionAfterLegacyProjectionFailure",
+      "wideDamagePermutationAndWrappedZeroAreaRemainNonempty"
+    ]
+  },
+  "nativeOutcome": "All4 jobs terminal, all owned handles closed, postGuardError null",
+  "fullPublicSuite": "NOT_RUN; exact458-source closure prepared, memory guard holds compiler",
+  "nativeScreenJniPerformancePlatform": "NOT_RUN by these headless tests",
+  "generationCalls": 0,
+  "productionPromotion": false
+}

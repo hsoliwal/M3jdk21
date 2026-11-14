@@ -1,0 +1,22 @@
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
+# SPDX-License-Identifier: Apache-2.0
+eclipse_family	jdk_runtime_owner	candidate_source	status	required_gate
+core-runtime-jobs	java.util.concurrent/ProgressJob/M3EclipseJobs	eclipse.platform runtime/jobs	PARTIAL_REUSE	Job scheduling rules, families, join/priority, cancellation
+resources-builders-markers	M3File/M3FS/ChangeJournal	eclipse.platform resources	PARTIAL_REUSE	Workspace transaction and resource delta order
+efs-provider	m3/eclipse/filesystem M3EclipseFileStore	Eclipse EFS/M3FS JNI	THIS_PR_CANDIDATE	Real JNI EFS JUnit, provider/URI semantics, copy/delete cancellation
+SWT-GTK-Cocoa-Win32	Original SWT intrinsic control owners	eclipse.platform.swt	RECIPE_CANDIDATES	Native ABI, disposal, accessibility/IME, pixel tests
+JFace-viewers	Parent-owned M3 arrays/masks, JFace originals	eclipse.platform.ui JFace	RECIPE_CANDIDATES	Selection/reentrancy/Comparator/viewer identity
+Problems-ProjectExplorer	M3WindowPlan/ChangeJournal/marker arrays	eclipse.platform.ui workbench	RECIPE_CANDIDATES	UI frame, native viewport, delta and resource ownership
+E4-workbench-CSS	JDK services plus original E4 model	eclipse.platform.ui bundles	NOT_QUALIFIED	E4 DI/lifecycle/style/event order
+editor-text-search	M3String/M3File/M3Search	eclipse.platform.ui/Platform Text/Lucene	NOT_QUALIFIED	UTF16 offsets, partitioning, undo/regex, search parity
+JDT-core-ECJ	M3AST/javac + JDT original	eclipse.jdt.core	NOT_QUALIFIED	AST/bindings, compiler diagnostics and builder parity
+JDT-UI-refactoring	M3AST/M3File originals	eclipse.jdt.ui	NOT_QUALIFIED	LTK changes, transactions, rename/undo
+debug-launch-JDI	JDK concurrent/tools originals	eclipse.jdt.debug and platform debug	NOT_QUALIFIED	JDI/JDWP, process/launch lifecycle
+PDE-plugins-features	M3AST/M3Build + Eclipse PDE originals	initiative31-eclipse.pde	NOT_QUALIFIED	Extension model, Tycho, exported APIs
+Equinox-OSGi-services	Original Equinox/OSGi runtime	Equinox fork and aggregator upstream Gitlink	NOT_QUALIFIED	OSGi TCK, bundle wiring, classloaders and native launch
+p2-provisioning	M3FS/M3Build with original p2 semantics	Equinox.p2 upstream Gitlink	NOT_QUALIFIED	Install/update transaction, repository metadata, rollback
+Maven-Tycho-build	M3Build/M3File incremental graphs	Maven fork + Eclipse release aggregator	NOT_QUALIFIED	Reactor/profile/effective POM/p2/OSGi target-platform parity
+EMF-observables	M3 compact parent-owned arrays	org.eclipse.emf optional donor	NOT_QUALIFIED	Notifications/containment/serialization/adapters
+Team-EGit-compare	M3File/M3AST/M3String	Eclipse team + egit	NOT_QUALIFIED	Provider identity, history, merge and compare semantics
+help-UA-forms-terminal	M3UI/M3Search/M3File	Eclipse Platform UA/help/terminal	NOT_QUALIFIED	OSGi services, UI/IO/Unicode and accessibility
+releng-products-sites	M3Build exact DAG receipts	eclipse.platform.releng.aggregator	NOT_QUALIFIED	12 Gitlinks/17 reactor families, Tycho, p2 product site install

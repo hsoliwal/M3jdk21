@@ -1,0 +1,5 @@
+module	suite	test	kind	observed
+tooling/migration-recipes	com.synexia.rewrite.M3MIndexJniNewStringAdmissionRecipeTest	reviewedPostimageIsAlreadyFixedPoint	failure	Failed to parse sources or run recipe
+tooling/migration-recipes	com.synexia.rewrite.M3MIndexJniNewStringAdmissionRecipeTest	appliesExactStringOwnerAndReachesFixedPoint	failure	Failed to parse sources or run recipe
+tooling/migration-recipes	com.synexia.rewrite.M3MIndexStringBulkCharBoundaryRecipeTest	reviewedPostimageIsAlreadyFixedPoint	error	LST contains missing or invalid type information
+tooling/migration-recipes	com.synexia.rewrite.M3MIndexStringBulkCharBoundaryRecipeTest	appliesExactJdkOwnerAndReachesFixedPoint	error	LST contains missing or invalid type information

@@ -237,6 +237,7 @@ class LibraryCallKit : public GraphKit {
   bool inline_native_setCurrentThread();
 
   bool inline_native_scopedValueCache();
+  const Type* scopedValueCache_type();
   Node* scopedValueCache_helper();
   bool inline_native_setScopedValueCache();
 
@@ -277,6 +278,8 @@ class LibraryCallKit : public GraphKit {
   void arraycopy_move_allocation_here(AllocateArrayNode* alloc, Node* dest, JVMState* saved_jvms_before_guards, int saved_reexecute_sp,
                                       uint new_idx);
 
+  bool inline_array_sort();
+  bool inline_array_partition();
   typedef enum { LS_get_add, LS_get_set, LS_cmp_swap, LS_cmp_swap_weak, LS_cmp_exchange } LoadStoreKind;
   bool inline_unsafe_load_store(BasicType type,  LoadStoreKind kind, AccessKind access_kind);
   bool inline_unsafe_fence(vmIntrinsics::ID id);
@@ -287,7 +290,7 @@ class LibraryCallKit : public GraphKit {
   bool inline_bitshuffle_methods(vmIntrinsics::ID id);
   bool inline_compare_unsigned(vmIntrinsics::ID id);
   bool inline_divmod_methods(vmIntrinsics::ID id);
-  bool inline_reference_get();
+  bool inline_reference_get0();
   bool inline_reference_refersTo0(bool is_phantom);
   bool inline_Class_cast();
   bool inline_aescrypt_Block(vmIntrinsics::ID id);
@@ -300,10 +303,23 @@ class LibraryCallKit : public GraphKit {
   Node* get_key_start_from_aescrypt_object(Node* aescrypt_object);
   bool inline_ghash_processBlocks();
   bool inline_chacha20Block();
+  bool inline_kyberNtt();
+  bool inline_kyberInverseNtt();
+  bool inline_kyberNttMult();
+  bool inline_kyberAddPoly_2();
+  bool inline_kyberAddPoly_3();
+  bool inline_kyber12To16();
+  bool inline_kyberBarrettReduce();
+  bool inline_dilithiumAlmostNtt();
+  bool inline_dilithiumAlmostInverseNtt();
+  bool inline_dilithiumNttMult();
+  bool inline_dilithiumMontMulByConstant();
+  bool inline_dilithiumDecomposePoly();
   bool inline_base64_encodeBlock();
   bool inline_base64_decodeBlock();
   bool inline_poly1305_processBlocks();
   bool inline_digestBase_implCompress(vmIntrinsics::ID id);
+  bool inline_double_keccak();
   bool inline_digestBase_implCompressMB(int predicate);
   bool inline_digestBase_implCompressMB(Node* digestBaseObj, ciInstanceKlass* instklass,
                                         BasicType elem_type, address stubAddr, const char *stubName,

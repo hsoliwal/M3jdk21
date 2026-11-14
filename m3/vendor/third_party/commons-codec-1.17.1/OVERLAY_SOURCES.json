@@ -1,0 +1,27 @@
+{
+  "donor": "commons-codec-1.17.1",
+  "m3_overlays": [
+    {
+      "base_repository": "m3/vendor/third_party/commons-codec-1.17.1/upstream-excluded/org/apache/commons/codec/digest/PureJavaCrc32.java",
+      "base_sha256": "c79b6539ba30914edb0df377ff30edc17dffc362f485ac618e932d218a8542e7",
+      "overlay": "CHECKSUMS_TO_JDK v1",
+      "recipe": "m3/tooling/jdk-superset/hashing/tools/checksums_to_jdk.py",
+      "recipe_sha256": "35cbfacaa45b45ddd7e90ee56cd56859c99d644c427ca3617e6c0d6aec7e7769",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/java/org/apache/commons/codec/digest/PureJavaCrc32.java",
+      "sha256": "7b2f86b9469aaf62a181ada4792517c734f1de1276cefcaf81d72164a9677d5f",
+      "upstream": "org/apache/commons/codec/digest/PureJavaCrc32.java"
+    },
+    {
+      "base_repository": "m3/vendor/third_party/commons-codec-1.17.1/upstream-excluded/org/apache/commons/codec/digest/PureJavaCrc32C.java",
+      "base_sha256": "b36d35c67d976d9f3ea394482238613ef1139934f173482b3f80d4a27e493059",
+      "overlay": "CHECKSUMS_TO_JDK v1",
+      "recipe": "m3/tooling/jdk-superset/hashing/tools/checksums_to_jdk.py",
+      "recipe_sha256": "35cbfacaa45b45ddd7e90ee56cd56859c99d644c427ca3617e6c0d6aec7e7769",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/java/org/apache/commons/codec/digest/PureJavaCrc32C.java",
+      "sha256": "f04f63ca24128a76e7ae5f9dc82775c0451ac4216c1de62dfff4ccd54ef53dfa",
+      "upstream": "org/apache/commons/codec/digest/PureJavaCrc32C.java"
+    }
+  ],
+  "overlay": "CHECKSUMS_TO_JDK v1",
+  "recipe": "m3/tooling/jdk-superset/hashing/tools/checksums_to_jdk.py"
+}

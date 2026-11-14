@@ -70,7 +70,7 @@ public class TestLinkTagletWithModule extends JavadocTester {
                 "m2/com.m2.lib");
 
         checkExit(Exit.OK);
-        checkOutput("m3/com/m3/app/App.html", true,
+        checkOutput("m3/jdk/m3/app/App.html", true,
                 """
                     <div class="block"><a href="../../../../m1/module-summary.html"><code>m1</code></a>
                      <a href="../../../../m1/module-summary.html"><code>m1</code></a>
@@ -102,7 +102,7 @@ public class TestLinkTagletWithModule extends JavadocTester {
                 "-link", "../" + out1.getFileName());
 
         checkExit(Exit.OK);
-        checkOutput("m3/com/m3/app/App.html", true,
+        checkOutput("m3/jdk/m3/app/App.html", true,
                 """
                     <div class="block"><a href="../../../../../out1/m1/module-summary.html" class="external-link"><code>m1</code></a>
                      <a href="../../../../../out1/m1/module-summary.html" class="external-link"><code>m1</code></a>
@@ -192,10 +192,10 @@ public class TestLinkTagletWithModule extends JavadocTester {
                     }""")
                 .write(src);
         new ModuleBuilder(tb, "m3")
-                .exports("com.m3.app")
+                .exports("jdk.m3.app")
                 .requires("m1")
                 .classes("""
-                    package com.m3.app;\s
+                    package jdk.m3.app;\s
                     public class App{
                     /**
                      * {@link m1}

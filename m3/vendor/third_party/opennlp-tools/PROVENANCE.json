@@ -1,0 +1,15 @@
+{
+  "schema": "M3_FULL_TOOL_SOURCE_1",
+  "tool": "Apache OpenNLP Tools",
+  "version": "2.4.0",
+  "upstream_commit": "8c586ddebd84db4d66582aab3a885bf02c75e41f",
+  "sources_jar_sha256": "0b9bfe0298079e76a4bdf43fca101d2b0fa211374fe66cd2f292a4e76fc41d34",
+  "resource_jar_sha256": "8ce704fa24867a2103a310a1fed17fbc7563fca8e6e6cd63c9e3865008ca946c",
+  "sources_jar": "https://repo.maven.apache.org/maven2/org/apache/opennlp/opennlp-tools/2.4.0/opennlp-tools-2.4.0-sources.jar",
+  "java_files": 729,
+  "unique_original_files": 742,
+  "source_modifications": "NONE; M3 changes are executed recipe overlays outside this donor tree.",
+  "metadata": "SOURCE_FILES.json binds all original bytes; filtered opennlp.version comes from the exact published binary, its original template is retained.",
+  "license": "Retain original Apache LICENSE/NOTICE and embedded third-party notices; no blanket relicensing.",
+  "test_authority": "Selected upstream tests plus source/CLI/model/index proof in synexia-openrewrite-recipes/crates/m3-nlp-search; full upstream suites remain pending."
+}

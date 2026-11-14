@@ -70,12 +70,14 @@
 #include "runtime/task.hpp"
 #include "runtime/threads.hpp"
 #include "runtime/timer.hpp"
+#include "runtime/trimNativeHeap.hpp"
 #include "runtime/vmOperations.hpp"
 #include "runtime/vmThread.hpp"
 #include "runtime/vm_version.hpp"
 #include "sanitizers/leak.hpp"
 #include "services/memTracker.hpp"
 #include "utilities/dtrace.hpp"
+#include "utilities/events.hpp"
 #include "utilities/globalDefinitions.hpp"
 #include "utilities/macros.hpp"
 #include "utilities/vmError.hpp"
@@ -95,6 +97,11 @@
 #if INCLUDE_JVMCI
 #include "jvmci/jvmci.hpp"
 #endif
+
+// SapMachine 2019-09-01: Vitals
+#include "runtime/globals.hpp"
+#include "vitals/vitals.hpp"
+
 
 GrowableArray<Method*>* collected_profiled_methods;
 
@@ -332,6 +339,15 @@ void print_statistics() {
     MetaspaceUtils::print_basic_report(tty, 0);
   }
 
+  // SapMachine 2019-09-01: Vitals
+  if (DumpVitalsAtExit) {
+    sapmachine_vitals::dump_reports();
+  }
+  if (PrintVitalsAtExit) {
+    tty->print_cr("Vitals:");
+    sapmachine_vitals::print_report(tty);
+  }
+
   ThreadsSMRSupport::log_statistics();
 }
 
@@ -380,6 +396,14 @@ void print_statistics() {
     MetaspaceUtils::print_basic_report(tty, 0);
   }
 
+  // SapMachine 2019-09-01: Vitals
+  if (DumpVitalsAtExit) {
+    sapmachine_vitals::dump_reports();
+  }
+  if (PrintVitalsAtExit) {
+    sapmachine_vitals::print_report(tty);
+  }
+
   ThreadsSMRSupport::log_statistics();
 }
 
@@ -393,6 +417,8 @@ void before_exit(JavaThread* thread, bool halt) {
   #define BEFORE_EXIT_RUNNING 1
   #define BEFORE_EXIT_DONE    2
   static jint volatile _before_exit_status = BEFORE_EXIT_NOT_RUN;
+
+  Events::log(thread, "Before exit entered");
 
   // Note: don't use a Mutex to guard the entire before_exit(), as
   // JVMTI post_thread_end_event and post_vm_death_event will run native code.
@@ -477,6 +503,8 @@ void before_exit(JavaThread* thread, bool halt) {
   StatSampler::disengage();
   StatSampler::destroy();
 
+  NativeHeapTrimmer::cleanup();
+
   // Stop concurrent GC threads
   Universe::heap()->stop();
 
@@ -530,6 +558,11 @@ void before_exit(JavaThread* thread, bool halt) {
       tty->print_cr("ERROR: fail_cnt=" SIZE_FORMAT, fail_cnt);
       guarantee(fail_cnt == 0, "unexpected StringTable verification failures");
     }
+  }
+
+  // SapMachine 2021-09-01: shutdown vitals thread
+  if (EnableVitals) {
+    sapmachine_vitals::cleanup();
   }
 
   #undef BEFORE_EXIT_NOT_RUN

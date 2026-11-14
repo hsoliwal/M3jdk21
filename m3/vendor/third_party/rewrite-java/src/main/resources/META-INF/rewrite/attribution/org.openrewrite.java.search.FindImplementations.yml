@@ -1,0 +1,16 @@
+---
+type: "specs.openrewrite.org/v1beta/attribution"
+recipeName: "org.openrewrite.java.search.FindImplementations"
+contributors:
+- name: "Kun Li"
+  email: "kun@moderne.io"
+  lineCount: 4
+- name: "Sam Snyder"
+  email: "sam@moderne.io"
+  lineCount: 11
+- name: "Kevin Carpenter™️"
+  email: "kevin@moderne.io"
+  lineCount: 2
+- name: "Jonathan Schnéider"
+  email: "jkschneider@gmail.com"
+  lineCount: 2

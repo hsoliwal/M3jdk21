@@ -1,0 +1,83 @@
+package @WPKG@;
+
+import java.util.Arrays;
+
+import @PKG@.M3WebPaint;
+import org.eclipse.swt.accessibility.ACC;
+import org.eclipse.swt.graphics.Color;
+import org.eclipse.swt.graphics.Device;
+import org.eclipse.swt.graphics.Font;
+
+/**
+ * Per-widget colour and font cache of {@link M3WebCanvas} (pattern M3P-CORE-1): packed int keys in
+ * parallel arrays, linear lookup over a handful of entries, everything disposed with the widget.
+ */
+//FLLDCIM: DOOP — int keys, lazy resource handles, parent-owned
+final class M3WebCanvasCache {
+	private static final String[] ROLE_NAMES = { "button", "link", "checkbox", "radio", "slider", "tab", "tablist", "progressbar", "dialog",
+			"tooltip", "menu", "menuitem", "toolbar", "list", "listitem", "grid", "tree", "img", "status", "alert", "textbox", "combobox",
+			"group", "separator", "document" };
+	private static final int[] ROLES = { ACC.ROLE_PUSHBUTTON, ACC.ROLE_LINK, ACC.ROLE_CHECKBUTTON, ACC.ROLE_RADIOBUTTON, ACC.ROLE_SLIDER,
+			ACC.ROLE_TABITEM, ACC.ROLE_TABFOLDER, ACC.ROLE_PROGRESSBAR, ACC.ROLE_DIALOG, ACC.ROLE_TOOLTIP, ACC.ROLE_MENU, ACC.ROLE_MENUITEM,
+			ACC.ROLE_TOOLBAR, ACC.ROLE_LIST, ACC.ROLE_LISTITEM, ACC.ROLE_TABLE, ACC.ROLE_TREE, ACC.ROLE_GRAPHIC, ACC.ROLE_STATUSBAR,
+			ACC.ROLE_ALERT, ACC.ROLE_TEXT, ACC.ROLE_COMBOBOX, ACC.ROLE_GROUP, ACC.ROLE_SEPARATOR, ACC.ROLE_DOCUMENT };
+	private final Device device;
+	private int[] rgbs = new int[16], fontKeys = new int[4];
+	private Color[] colors = new Color[16];
+	private Font[] fonts = new Font[4];
+	private int nc, nf;
+
+	M3WebCanvasCache(Device device) {
+		this.device = device;
+	}
+
+	Color color(int rgb) {
+		for (int i = 0; i < nc; i++) {
+			if (rgbs[i] == rgb) {
+				return colors[i];
+			}
+		}
+		if (nc == colors.length) {
+			colors = Arrays.copyOf(colors, nc * 2);
+			rgbs = Arrays.copyOf(rgbs, nc * 2);
+		}
+		rgbs[nc] = rgb;
+		colors[nc] = new Color(device, rgb >> 16 & 255, rgb >> 8 & 255, rgb & 255);
+		return colors[nc++];
+	}
+
+	Font font(Font base, int style) {
+		int key = style & (0xff | M3WebPaint.BOLD | M3WebPaint.MONO);
+		for (int i = 0; i < nf; i++) {
+			if (fontKeys[i] == key) {
+				return fonts[i];
+			}
+		}
+		if (nf == fonts.length) {
+			fonts = Arrays.copyOf(fonts, nf * 2);
+			fontKeys = Arrays.copyOf(fontKeys, nf * 2);
+		}
+		fontKeys[nf] = key;
+		fonts[nf] = new Font(device, M3WebCanvas.scaled(base, key & 0xff, key));
+		return fonts[nf++];
+	}
+
+	void dispose() {
+		for (int i = 0; i < nc; i++) {
+			colors[i].dispose();
+		}
+		for (int i = 0; i < nf; i++) {
+			fonts[i].dispose();
+		}
+		nc = nf = 0;
+	}
+
+	static int accRole(String role) {
+		for (int i = 0; i < ROLE_NAMES.length; i++) {
+			if (ROLE_NAMES[i].equals(role)) {
+				return ROLES[i];
+			}
+		}
+		return ACC.ROLE_CLIENT_AREA;
+	}
+}

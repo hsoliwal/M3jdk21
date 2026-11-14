@@ -1,0 +1,9 @@
+{"stage": "inventory", "target": "677437be295b23f7ccf7409be287008944d0e8b0", "donor": "f26ca8d8025ff820b8ffe751b6db6c1cc67baa97", "status": "SOURCE_AND_HISTORY_PINNED"}
+{"stage": "contract", "document": "CONTRACT.md", "status": "SEALED_BEFORE_IMPLEMENTATION"}
+{"stage": "trial-01", "status": "REFUSED_MANIFEST_ORDER", "evidence": "evidence/rejected-manifest-order"}
+{"stage": "trial-02", "status": "SDK_PASS_BASELINE_WARNING_STOP", "evidence": "evidence/rejected-baseline-warning"}
+{"stage": "trial-03", "status": "RESUME_FROM_HASH_VERIFIED_SDK_STAGE_THEN_RUNTIME_PASS", "evidence": "evidence/superseded-whole-range-lower-bound"}
+{"stage": "trial-04", "status": "FINAL_RECIPE_RUNTIME_MEASUREMENT_PASS", "evidence": "evidence/final-runtime"}
+{"stage": "current-engine-reconciliation", "source": "4565392487bf83b55a3031a26ea1a61b1b526b3c", "evidence": "evidence/engine-evolution", "final_sdk_receipt": "evidence/SDK_CURRENT.log"}
+{"stage": "qualification-scope", "status": "DRAFT_FULL_IMAGE_PLATFORM_JTREG_REACTOR_PENDING"}
+{"stage": "final-current-sdk", "status": "SIX_TESTS_PASS_FIVE_OUTPUT_HASHES_IDENTICAL", "publication_receipt": "Recorded externally after Git readback; unpopulated temporary placeholder removed before custody inventory"}

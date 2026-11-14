@@ -1,0 +1,709 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ------------------------< m3.intake:classgraph >------------------------
+[INFO] Building classgraph 4.8.165-m3-source-1
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- rewrite:5.23.1:runNoFork (default-cli) @ classgraph ---
+[INFO] Using active recipe(s) [com.synexia.m3.intake.Relocate]
+[INFO] Using active styles(s) []
+[INFO] Validating active recipes...
+[INFO] Project [classgraph] Resolving Poms...
+[INFO] Project [classgraph] Parsing source files
+[INFO] Running recipe(s)...
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\io\github\classgraph\AnnotationClassRef.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\AnnotationClassRef.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.types, newPackageName=com.m3.lib.classgraph.nonapi.types, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=io.github.classgraph, newPackageName=com.m3.lib.classgraph, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\io\github\classgraph\AnnotationEnumValue.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\AnnotationEnumValue.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=io.github.classgraph, newPackageName=com.m3.lib.classgraph, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\io\github\classgraph\AnnotationInfo.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\AnnotationInfo.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.reflection, newPackageName=com.m3.lib.classgraph.nonapi.reflection, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.utils, newPackageName=com.m3.lib.classgraph.nonapi.utils, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=io.github.classgraph, newPackageName=com.m3.lib.classgraph, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\io\github\classgraph\AnnotationInfoList.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\AnnotationInfoList.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.utils, newPackageName=com.m3.lib.classgraph.nonapi.utils, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=io.github.classgraph, newPackageName=com.m3.lib.classgraph, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\io\github\classgraph\AnnotationParameterValue.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\AnnotationParameterValue.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.utils, newPackageName=com.m3.lib.classgraph.nonapi.utils, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=io.github.classgraph, newPackageName=com.m3.lib.classgraph, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\io\github\classgraph\AnnotationParameterValueList.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\AnnotationParameterValueList.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.utils, newPackageName=com.m3.lib.classgraph.nonapi.utils, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=io.github.classgraph, newPackageName=com.m3.lib.classgraph, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\io\github\classgraph\ArrayClassInfo.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\ArrayClassInfo.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.utils, newPackageName=com.m3.lib.classgraph.nonapi.utils, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=io.github.classgraph, newPackageName=com.m3.lib.classgraph, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\io\github\classgraph\ArrayTypeSignature.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\ArrayTypeSignature.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.types, newPackageName=com.m3.lib.classgraph.nonapi.types, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=io.github.classgraph, newPackageName=com.m3.lib.classgraph, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\io\github\classgraph\BaseTypeSignature.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\BaseTypeSignature.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.types, newPackageName=com.m3.lib.classgraph.nonapi.types, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=io.github.classgraph, newPackageName=com.m3.lib.classgraph, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\io\github\classgraph\Classfile.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\Classfile.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.fileslice.reader, newPackageName=com.m3.lib.classgraph.nonapi.fileslice.reader, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.concurrency, newPackageName=com.m3.lib.classgraph.nonapi.concurrency, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.scanspec, newPackageName=com.m3.lib.classgraph.nonapi.scanspec, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.types, newPackageName=com.m3.lib.classgraph.nonapi.types, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.utils, newPackageName=com.m3.lib.classgraph.nonapi.utils, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=io.github.classgraph, newPackageName=com.m3.lib.classgraph, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\io\github\classgraph\ClassGraph.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\ClassGraph.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.concurrency, newPackageName=com.m3.lib.classgraph.nonapi.concurrency, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.reflection, newPackageName=com.m3.lib.classgraph.nonapi.reflection, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.classpath, newPackageName=com.m3.lib.classgraph.nonapi.classpath, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.scanspec, newPackageName=com.m3.lib.classgraph.nonapi.scanspec, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.utils, newPackageName=com.m3.lib.classgraph.nonapi.utils, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=io.github.classgraph, newPackageName=com.m3.lib.classgraph, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\io\github\classgraph\ClassGraphClassLoader.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\ClassGraphClassLoader.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.classpath, newPackageName=com.m3.lib.classgraph.nonapi.classpath, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.scanspec, newPackageName=com.m3.lib.classgraph.nonapi.scanspec, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.utils, newPackageName=com.m3.lib.classgraph.nonapi.utils, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=io.github.classgraph, newPackageName=com.m3.lib.classgraph, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\io\github\classgraph\ClassGraphException.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\ClassGraphException.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=io.github.classgraph, newPackageName=com.m3.lib.classgraph, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\io\github\classgraph\ClassInfo.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\ClassInfo.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.reflection, newPackageName=com.m3.lib.classgraph.nonapi.reflection, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.scanspec, newPackageName=com.m3.lib.classgraph.nonapi.scanspec, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.types, newPackageName=com.m3.lib.classgraph.nonapi.types, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.utils, newPackageName=com.m3.lib.classgraph.nonapi.utils, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.json, newPackageName=com.m3.lib.classgraph.nonapi.json, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=io.github.classgraph, newPackageName=com.m3.lib.classgraph, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\io\github\classgraph\ClassInfoList.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\ClassInfoList.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.scanspec, newPackageName=com.m3.lib.classgraph.nonapi.scanspec, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.utils, newPackageName=com.m3.lib.classgraph.nonapi.utils, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=io.github.classgraph, newPackageName=com.m3.lib.classgraph, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\io\github\classgraph\ClassMemberInfo.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\ClassMemberInfo.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.scanspec, newPackageName=com.m3.lib.classgraph.nonapi.scanspec, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.utils, newPackageName=com.m3.lib.classgraph.nonapi.utils, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=io.github.classgraph, newPackageName=com.m3.lib.classgraph, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\io\github\classgraph\ClasspathElement.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\ClasspathElement.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.concurrency, newPackageName=com.m3.lib.classgraph.nonapi.concurrency, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.scanspec, newPackageName=com.m3.lib.classgraph.nonapi.scanspec, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.utils, newPackageName=com.m3.lib.classgraph.nonapi.utils, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=io.github.classgraph, newPackageName=com.m3.lib.classgraph, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\io\github\classgraph\ClasspathElementDir.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\ClasspathElementDir.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.classloaderhandler, newPackageName=com.m3.lib.classgraph.nonapi.classloaderhandler, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.fastzipfilereader, newPackageName=com.m3.lib.classgraph.nonapi.fastzipfilereader, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.fileslice.reader, newPackageName=com.m3.lib.classgraph.nonapi.fileslice.reader, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.concurrency, newPackageName=com.m3.lib.classgraph.nonapi.concurrency, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.fileslice, newPackageName=com.m3.lib.classgraph.nonapi.fileslice, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.scanspec, newPackageName=com.m3.lib.classgraph.nonapi.scanspec, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.utils, newPackageName=com.m3.lib.classgraph.nonapi.utils, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=io.github.classgraph, newPackageName=com.m3.lib.classgraph, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\io\github\classgraph\ClasspathElementModule.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\ClasspathElementModule.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.fastzipfilereader, newPackageName=com.m3.lib.classgraph.nonapi.fastzipfilereader, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.fileslice.reader, newPackageName=com.m3.lib.classgraph.nonapi.fileslice.reader, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.concurrency, newPackageName=com.m3.lib.classgraph.nonapi.concurrency, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.recycler, newPackageName=com.m3.lib.classgraph.nonapi.recycler, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.scanspec, newPackageName=com.m3.lib.classgraph.nonapi.scanspec, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.utils, newPackageName=com.m3.lib.classgraph.nonapi.utils, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=io.github.classgraph, newPackageName=com.m3.lib.classgraph, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\io\github\classgraph\ClasspathElementZip.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\ClasspathElementZip.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.classloaderhandler, newPackageName=com.m3.lib.classgraph.nonapi.classloaderhandler, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.fastzipfilereader, newPackageName=com.m3.lib.classgraph.nonapi.fastzipfilereader, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.fileslice.reader, newPackageName=com.m3.lib.classgraph.nonapi.fileslice.reader, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.concurrency, newPackageName=com.m3.lib.classgraph.nonapi.concurrency, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.scanspec, newPackageName=com.m3.lib.classgraph.nonapi.scanspec, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.utils, newPackageName=com.m3.lib.classgraph.nonapi.utils, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=io.github.classgraph, newPackageName=com.m3.lib.classgraph, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\io\github\classgraph\ClassRefOrTypeVariableSignature.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\ClassRefOrTypeVariableSignature.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=io.github.classgraph, newPackageName=com.m3.lib.classgraph, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\io\github\classgraph\ClassRefTypeSignature.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\ClassRefTypeSignature.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.types, newPackageName=com.m3.lib.classgraph.nonapi.types, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=io.github.classgraph, newPackageName=com.m3.lib.classgraph, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\io\github\classgraph\ClassTypeSignature.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\ClassTypeSignature.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.types, newPackageName=com.m3.lib.classgraph.nonapi.types, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.utils, newPackageName=com.m3.lib.classgraph.nonapi.utils, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=io.github.classgraph, newPackageName=com.m3.lib.classgraph, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\io\github\classgraph\CloseableByteBuffer.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\CloseableByteBuffer.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=io.github.classgraph, newPackageName=com.m3.lib.classgraph, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\io\github\classgraph\FieldInfo.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\FieldInfo.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.scanspec, newPackageName=com.m3.lib.classgraph.nonapi.scanspec, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.types, newPackageName=com.m3.lib.classgraph.nonapi.types, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.utils, newPackageName=com.m3.lib.classgraph.nonapi.utils, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=io.github.classgraph, newPackageName=com.m3.lib.classgraph, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\io\github\classgraph\FieldInfoList.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\FieldInfoList.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.utils, newPackageName=com.m3.lib.classgraph.nonapi.utils, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=io.github.classgraph, newPackageName=com.m3.lib.classgraph, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\io\github\classgraph\GraphvizDotfileGenerator.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\GraphvizDotfileGenerator.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.scanspec, newPackageName=com.m3.lib.classgraph.nonapi.scanspec, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.utils, newPackageName=com.m3.lib.classgraph.nonapi.utils, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=io.github.classgraph, newPackageName=com.m3.lib.classgraph, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\io\github\classgraph\HasName.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\HasName.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=io.github.classgraph, newPackageName=com.m3.lib.classgraph, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\io\github\classgraph\HierarchicalTypeSignature.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\HierarchicalTypeSignature.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=io.github.classgraph, newPackageName=com.m3.lib.classgraph, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\io\github\classgraph\InfoList.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\InfoList.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=io.github.classgraph, newPackageName=com.m3.lib.classgraph, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\io\github\classgraph\MappableInfoList.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\MappableInfoList.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=io.github.classgraph, newPackageName=com.m3.lib.classgraph, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\io\github\classgraph\MethodInfo.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\MethodInfo.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.types, newPackageName=com.m3.lib.classgraph.nonapi.types, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.utils, newPackageName=com.m3.lib.classgraph.nonapi.utils, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=io.github.classgraph, newPackageName=com.m3.lib.classgraph, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\io\github\classgraph\MethodInfoList.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\MethodInfoList.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.utils, newPackageName=com.m3.lib.classgraph.nonapi.utils, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=io.github.classgraph, newPackageName=com.m3.lib.classgraph, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\io\github\classgraph\MethodParameterInfo.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\MethodParameterInfo.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.scanspec, newPackageName=com.m3.lib.classgraph.nonapi.scanspec, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.utils, newPackageName=com.m3.lib.classgraph.nonapi.utils, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=io.github.classgraph, newPackageName=com.m3.lib.classgraph, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\io\github\classgraph\MethodTypeSignature.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\MethodTypeSignature.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.types, newPackageName=com.m3.lib.classgraph.nonapi.types, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.utils, newPackageName=com.m3.lib.classgraph.nonapi.utils, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=io.github.classgraph, newPackageName=com.m3.lib.classgraph, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\io\github\classgraph\ModuleInfo.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\ModuleInfo.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.utils, newPackageName=com.m3.lib.classgraph.nonapi.utils, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=io.github.classgraph, newPackageName=com.m3.lib.classgraph, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\io\github\classgraph\ModuleInfoList.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\ModuleInfoList.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=io.github.classgraph, newPackageName=com.m3.lib.classgraph, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\io\github\classgraph\ModulePathInfo.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\ModulePathInfo.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.reflection, newPackageName=com.m3.lib.classgraph.nonapi.reflection, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.utils, newPackageName=com.m3.lib.classgraph.nonapi.utils, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=io.github.classgraph, newPackageName=com.m3.lib.classgraph, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\io\github\classgraph\ModuleReaderProxy.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\ModuleReaderProxy.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.reflection, newPackageName=com.m3.lib.classgraph.nonapi.reflection, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=io.github.classgraph, newPackageName=com.m3.lib.classgraph, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\io\github\classgraph\ModuleRef.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\ModuleRef.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.reflection, newPackageName=com.m3.lib.classgraph.nonapi.reflection, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.utils, newPackageName=com.m3.lib.classgraph.nonapi.utils, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=io.github.classgraph, newPackageName=com.m3.lib.classgraph, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\io\github\classgraph\ObjectTypedValueWrapper.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\ObjectTypedValueWrapper.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.utils, newPackageName=com.m3.lib.classgraph.nonapi.utils, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=io.github.classgraph, newPackageName=com.m3.lib.classgraph, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\io\github\classgraph\PackageInfo.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\PackageInfo.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.scanspec, newPackageName=com.m3.lib.classgraph.nonapi.scanspec, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.utils, newPackageName=com.m3.lib.classgraph.nonapi.utils, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=io.github.classgraph, newPackageName=com.m3.lib.classgraph, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\io\github\classgraph\PackageInfoList.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\PackageInfoList.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=io.github.classgraph, newPackageName=com.m3.lib.classgraph, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\io\github\classgraph\PotentiallyUnmodifiableList.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\PotentiallyUnmodifiableList.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=io.github.classgraph, newPackageName=com.m3.lib.classgraph, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\io\github\classgraph\ReferenceTypeSignature.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\ReferenceTypeSignature.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.types, newPackageName=com.m3.lib.classgraph.nonapi.types, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=io.github.classgraph, newPackageName=com.m3.lib.classgraph, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\io\github\classgraph\Resource.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\Resource.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.fileslice.reader, newPackageName=com.m3.lib.classgraph.nonapi.fileslice.reader, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.utils, newPackageName=com.m3.lib.classgraph.nonapi.utils, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=io.github.classgraph, newPackageName=com.m3.lib.classgraph, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\io\github\classgraph\ResourceList.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\ResourceList.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.utils, newPackageName=com.m3.lib.classgraph.nonapi.utils, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=io.github.classgraph, newPackageName=com.m3.lib.classgraph, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\io\github\classgraph\Scanner.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\Scanner.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.fastzipfilereader, newPackageName=com.m3.lib.classgraph.nonapi.fastzipfilereader, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.concurrency, newPackageName=com.m3.lib.classgraph.nonapi.concurrency, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.reflection, newPackageName=com.m3.lib.classgraph.nonapi.reflection, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.classpath, newPackageName=com.m3.lib.classgraph.nonapi.classpath, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.scanspec, newPackageName=com.m3.lib.classgraph.nonapi.scanspec, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.utils, newPackageName=com.m3.lib.classgraph.nonapi.utils, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=io.github.classgraph, newPackageName=com.m3.lib.classgraph, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\io\github\classgraph\ScanResult.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\ScanResult.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.fastzipfilereader, newPackageName=com.m3.lib.classgraph.nonapi.fastzipfilereader, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.concurrency, newPackageName=com.m3.lib.classgraph.nonapi.concurrency, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.reflection, newPackageName=com.m3.lib.classgraph.nonapi.reflection, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.classpath, newPackageName=com.m3.lib.classgraph.nonapi.classpath, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.scanspec, newPackageName=com.m3.lib.classgraph.nonapi.scanspec, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.utils, newPackageName=com.m3.lib.classgraph.nonapi.utils, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.json, newPackageName=com.m3.lib.classgraph.nonapi.json, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=io.github.classgraph, newPackageName=com.m3.lib.classgraph, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\io\github\classgraph\ScanResultObject.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\ScanResultObject.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.utils, newPackageName=com.m3.lib.classgraph.nonapi.utils, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=io.github.classgraph, newPackageName=com.m3.lib.classgraph, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\io\github\classgraph\TypeArgument.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\TypeArgument.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.types, newPackageName=com.m3.lib.classgraph.nonapi.types, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=io.github.classgraph, newPackageName=com.m3.lib.classgraph, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\io\github\classgraph\TypeParameter.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\TypeParameter.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.types, newPackageName=com.m3.lib.classgraph.nonapi.types, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=io.github.classgraph, newPackageName=com.m3.lib.classgraph, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\io\github\classgraph\TypeSignature.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\TypeSignature.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.types, newPackageName=com.m3.lib.classgraph.nonapi.types, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.utils, newPackageName=com.m3.lib.classgraph.nonapi.utils, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=io.github.classgraph, newPackageName=com.m3.lib.classgraph, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\io\github\classgraph\TypeVariableSignature.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\TypeVariableSignature.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.types, newPackageName=com.m3.lib.classgraph.nonapi.types, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=io.github.classgraph, newPackageName=com.m3.lib.classgraph, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\nonapi\io\github\classgraph\classloaderhandler\AntClassLoaderHandler.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\nonapi\classloaderhandler\AntClassLoaderHandler.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.classloaderhandler, newPackageName=com.m3.lib.classgraph.nonapi.classloaderhandler, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.reflection, newPackageName=com.m3.lib.classgraph.nonapi.reflection, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.classpath, newPackageName=com.m3.lib.classgraph.nonapi.classpath, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.scanspec, newPackageName=com.m3.lib.classgraph.nonapi.scanspec, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.utils, newPackageName=com.m3.lib.classgraph.nonapi.utils, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\nonapi\io\github\classgraph\classloaderhandler\ClassGraphClassLoaderHandler.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\nonapi\classloaderhandler\ClassGraphClassLoaderHandler.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.classloaderhandler, newPackageName=com.m3.lib.classgraph.nonapi.classloaderhandler, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.classpath, newPackageName=com.m3.lib.classgraph.nonapi.classpath, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.scanspec, newPackageName=com.m3.lib.classgraph.nonapi.scanspec, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.utils, newPackageName=com.m3.lib.classgraph.nonapi.utils, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=io.github.classgraph, newPackageName=com.m3.lib.classgraph, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\nonapi\io\github\classgraph\classloaderhandler\ClassLoaderHandler.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\nonapi\classloaderhandler\ClassLoaderHandler.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.classloaderhandler, newPackageName=com.m3.lib.classgraph.nonapi.classloaderhandler, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\nonapi\io\github\classgraph\classloaderhandler\ClassLoaderHandlerRegistry.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\nonapi\classloaderhandler\ClassLoaderHandlerRegistry.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.classloaderhandler, newPackageName=com.m3.lib.classgraph.nonapi.classloaderhandler, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.classpath, newPackageName=com.m3.lib.classgraph.nonapi.classpath, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.scanspec, newPackageName=com.m3.lib.classgraph.nonapi.scanspec, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.utils, newPackageName=com.m3.lib.classgraph.nonapi.utils, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\nonapi\io\github\classgraph\classloaderhandler\CxfContainerClassLoaderHandler.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\nonapi\classloaderhandler\CxfContainerClassLoaderHandler.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.classloaderhandler, newPackageName=com.m3.lib.classgraph.nonapi.classloaderhandler, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.reflection, newPackageName=com.m3.lib.classgraph.nonapi.reflection, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.classpath, newPackageName=com.m3.lib.classgraph.nonapi.classpath, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.scanspec, newPackageName=com.m3.lib.classgraph.nonapi.scanspec, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.utils, newPackageName=com.m3.lib.classgraph.nonapi.utils, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\nonapi\io\github\classgraph\classloaderhandler\EquinoxClassLoaderHandler.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\nonapi\classloaderhandler\EquinoxClassLoaderHandler.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.classloaderhandler, newPackageName=com.m3.lib.classgraph.nonapi.classloaderhandler, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.reflection, newPackageName=com.m3.lib.classgraph.nonapi.reflection, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.classpath, newPackageName=com.m3.lib.classgraph.nonapi.classpath, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.scanspec, newPackageName=com.m3.lib.classgraph.nonapi.scanspec, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.utils, newPackageName=com.m3.lib.classgraph.nonapi.utils, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\nonapi\io\github\classgraph\classloaderhandler\EquinoxContextFinderClassLoaderHandler.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\nonapi\classloaderhandler\EquinoxContextFinderClassLoaderHandler.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.classloaderhandler, newPackageName=com.m3.lib.classgraph.nonapi.classloaderhandler, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.reflection, newPackageName=com.m3.lib.classgraph.nonapi.reflection, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.classpath, newPackageName=com.m3.lib.classgraph.nonapi.classpath, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.scanspec, newPackageName=com.m3.lib.classgraph.nonapi.scanspec, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.utils, newPackageName=com.m3.lib.classgraph.nonapi.utils, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\nonapi\io\github\classgraph\classloaderhandler\FallbackClassLoaderHandler.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\nonapi\classloaderhandler\FallbackClassLoaderHandler.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.classloaderhandler, newPackageName=com.m3.lib.classgraph.nonapi.classloaderhandler, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.reflection, newPackageName=com.m3.lib.classgraph.nonapi.reflection, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.classpath, newPackageName=com.m3.lib.classgraph.nonapi.classpath, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.scanspec, newPackageName=com.m3.lib.classgraph.nonapi.scanspec, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.utils, newPackageName=com.m3.lib.classgraph.nonapi.utils, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\nonapi\io\github\classgraph\classloaderhandler\FelixClassLoaderHandler.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\nonapi\classloaderhandler\FelixClassLoaderHandler.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.classloaderhandler, newPackageName=com.m3.lib.classgraph.nonapi.classloaderhandler, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.reflection, newPackageName=com.m3.lib.classgraph.nonapi.reflection, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.classpath, newPackageName=com.m3.lib.classgraph.nonapi.classpath, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.scanspec, newPackageName=com.m3.lib.classgraph.nonapi.scanspec, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.utils, newPackageName=com.m3.lib.classgraph.nonapi.utils, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\nonapi\io\github\classgraph\classloaderhandler\JBossClassLoaderHandler.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\nonapi\classloaderhandler\JBossClassLoaderHandler.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.classloaderhandler, newPackageName=com.m3.lib.classgraph.nonapi.classloaderhandler, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.reflection, newPackageName=com.m3.lib.classgraph.nonapi.reflection, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.classpath, newPackageName=com.m3.lib.classgraph.nonapi.classpath, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.scanspec, newPackageName=com.m3.lib.classgraph.nonapi.scanspec, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.utils, newPackageName=com.m3.lib.classgraph.nonapi.utils, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\nonapi\io\github\classgraph\classloaderhandler\JPMSClassLoaderHandler.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\nonapi\classloaderhandler\JPMSClassLoaderHandler.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.classloaderhandler, newPackageName=com.m3.lib.classgraph.nonapi.classloaderhandler, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.reflection, newPackageName=com.m3.lib.classgraph.nonapi.reflection, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.classpath, newPackageName=com.m3.lib.classgraph.nonapi.classpath, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.scanspec, newPackageName=com.m3.lib.classgraph.nonapi.scanspec, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.utils, newPackageName=com.m3.lib.classgraph.nonapi.utils, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\nonapi\io\github\classgraph\classloaderhandler\OSGiDefaultClassLoaderHandler.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\nonapi\classloaderhandler\OSGiDefaultClassLoaderHandler.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.classloaderhandler, newPackageName=com.m3.lib.classgraph.nonapi.classloaderhandler, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.reflection, newPackageName=com.m3.lib.classgraph.nonapi.reflection, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.classpath, newPackageName=com.m3.lib.classgraph.nonapi.classpath, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.scanspec, newPackageName=com.m3.lib.classgraph.nonapi.scanspec, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.utils, newPackageName=com.m3.lib.classgraph.nonapi.utils, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\nonapi\io\github\classgraph\classloaderhandler\ParentLastDelegationOrderTestClassLoaderHandler.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\nonapi\classloaderhandler\ParentLastDelegationOrderTestClassLoaderHandler.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.classloaderhandler, newPackageName=com.m3.lib.classgraph.nonapi.classloaderhandler, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.reflection, newPackageName=com.m3.lib.classgraph.nonapi.reflection, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.classpath, newPackageName=com.m3.lib.classgraph.nonapi.classpath, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.scanspec, newPackageName=com.m3.lib.classgraph.nonapi.scanspec, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.utils, newPackageName=com.m3.lib.classgraph.nonapi.utils, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\nonapi\io\github\classgraph\classloaderhandler\PlexusClassWorldsClassRealmClassLoaderHandler.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\nonapi\classloaderhandler\PlexusClassWorldsClassRealmClassLoaderHandler.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.classloaderhandler, newPackageName=com.m3.lib.classgraph.nonapi.classloaderhandler, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.reflection, newPackageName=com.m3.lib.classgraph.nonapi.reflection, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.classpath, newPackageName=com.m3.lib.classgraph.nonapi.classpath, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.scanspec, newPackageName=com.m3.lib.classgraph.nonapi.scanspec, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.utils, newPackageName=com.m3.lib.classgraph.nonapi.utils, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\nonapi\io\github\classgraph\classloaderhandler\QuarkusClassLoaderHandler.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\nonapi\classloaderhandler\QuarkusClassLoaderHandler.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.classloaderhandler, newPackageName=com.m3.lib.classgraph.nonapi.classloaderhandler, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.reflection, newPackageName=com.m3.lib.classgraph.nonapi.reflection, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.classpath, newPackageName=com.m3.lib.classgraph.nonapi.classpath, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.scanspec, newPackageName=com.m3.lib.classgraph.nonapi.scanspec, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.utils, newPackageName=com.m3.lib.classgraph.nonapi.utils, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\nonapi\io\github\classgraph\classloaderhandler\SpringBootRestartClassLoaderHandler.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\nonapi\classloaderhandler\SpringBootRestartClassLoaderHandler.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.classloaderhandler, newPackageName=com.m3.lib.classgraph.nonapi.classloaderhandler, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.classpath, newPackageName=com.m3.lib.classgraph.nonapi.classpath, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.scanspec, newPackageName=com.m3.lib.classgraph.nonapi.scanspec, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.utils, newPackageName=com.m3.lib.classgraph.nonapi.utils, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\nonapi\io\github\classgraph\classloaderhandler\TomcatWebappClassLoaderBaseHandler.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\nonapi\classloaderhandler\TomcatWebappClassLoaderBaseHandler.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.classloaderhandler, newPackageName=com.m3.lib.classgraph.nonapi.classloaderhandler, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.reflection, newPackageName=com.m3.lib.classgraph.nonapi.reflection, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.classpath, newPackageName=com.m3.lib.classgraph.nonapi.classpath, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.scanspec, newPackageName=com.m3.lib.classgraph.nonapi.scanspec, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.utils, newPackageName=com.m3.lib.classgraph.nonapi.utils, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\nonapi\io\github\classgraph\classloaderhandler\UnoOneJarClassLoaderHandler.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\nonapi\classloaderhandler\UnoOneJarClassLoaderHandler.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.classloaderhandler, newPackageName=com.m3.lib.classgraph.nonapi.classloaderhandler, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.reflection, newPackageName=com.m3.lib.classgraph.nonapi.reflection, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.classpath, newPackageName=com.m3.lib.classgraph.nonapi.classpath, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.scanspec, newPackageName=com.m3.lib.classgraph.nonapi.scanspec, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.utils, newPackageName=com.m3.lib.classgraph.nonapi.utils, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\nonapi\io\github\classgraph\classloaderhandler\URLClassLoaderHandler.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\nonapi\classloaderhandler\URLClassLoaderHandler.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.classloaderhandler, newPackageName=com.m3.lib.classgraph.nonapi.classloaderhandler, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.classpath, newPackageName=com.m3.lib.classgraph.nonapi.classpath, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.scanspec, newPackageName=com.m3.lib.classgraph.nonapi.scanspec, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.utils, newPackageName=com.m3.lib.classgraph.nonapi.utils, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\nonapi\io\github\classgraph\classloaderhandler\WeblogicClassLoaderHandler.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\nonapi\classloaderhandler\WeblogicClassLoaderHandler.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.classloaderhandler, newPackageName=com.m3.lib.classgraph.nonapi.classloaderhandler, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.reflection, newPackageName=com.m3.lib.classgraph.nonapi.reflection, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.classpath, newPackageName=com.m3.lib.classgraph.nonapi.classpath, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.scanspec, newPackageName=com.m3.lib.classgraph.nonapi.scanspec, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.utils, newPackageName=com.m3.lib.classgraph.nonapi.utils, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\nonapi\io\github\classgraph\classloaderhandler\WebsphereLibertyClassLoaderHandler.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\nonapi\classloaderhandler\WebsphereLibertyClassLoaderHandler.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.classloaderhandler, newPackageName=com.m3.lib.classgraph.nonapi.classloaderhandler, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.reflection, newPackageName=com.m3.lib.classgraph.nonapi.reflection, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.classpath, newPackageName=com.m3.lib.classgraph.nonapi.classpath, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.scanspec, newPackageName=com.m3.lib.classgraph.nonapi.scanspec, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.utils, newPackageName=com.m3.lib.classgraph.nonapi.utils, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\nonapi\io\github\classgraph\classloaderhandler\WebsphereTraditionalClassLoaderHandler.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\nonapi\classloaderhandler\WebsphereTraditionalClassLoaderHandler.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.classloaderhandler, newPackageName=com.m3.lib.classgraph.nonapi.classloaderhandler, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.reflection, newPackageName=com.m3.lib.classgraph.nonapi.reflection, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.classpath, newPackageName=com.m3.lib.classgraph.nonapi.classpath, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.scanspec, newPackageName=com.m3.lib.classgraph.nonapi.scanspec, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.utils, newPackageName=com.m3.lib.classgraph.nonapi.utils, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\nonapi\io\github\classgraph\classpath\CallStackReader.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\nonapi\classpath\CallStackReader.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.reflection, newPackageName=com.m3.lib.classgraph.nonapi.reflection, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.classpath, newPackageName=com.m3.lib.classgraph.nonapi.classpath, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.utils, newPackageName=com.m3.lib.classgraph.nonapi.utils, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\nonapi\io\github\classgraph\classpath\ClassLoaderFinder.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\nonapi\classpath\ClassLoaderFinder.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.reflection, newPackageName=com.m3.lib.classgraph.nonapi.reflection, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.classpath, newPackageName=com.m3.lib.classgraph.nonapi.classpath, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.scanspec, newPackageName=com.m3.lib.classgraph.nonapi.scanspec, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.utils, newPackageName=com.m3.lib.classgraph.nonapi.utils, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\nonapi\io\github\classgraph\classpath\ClassLoaderOrder.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\nonapi\classpath\ClassLoaderOrder.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.classloaderhandler, newPackageName=com.m3.lib.classgraph.nonapi.classloaderhandler, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.reflection, newPackageName=com.m3.lib.classgraph.nonapi.reflection, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.classpath, newPackageName=com.m3.lib.classgraph.nonapi.classpath, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.utils, newPackageName=com.m3.lib.classgraph.nonapi.utils, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=io.github.classgraph, newPackageName=com.m3.lib.classgraph, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\nonapi\io\github\classgraph\classpath\ClasspathFinder.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\nonapi\classpath\ClasspathFinder.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.classloaderhandler, newPackageName=com.m3.lib.classgraph.nonapi.classloaderhandler, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.reflection, newPackageName=com.m3.lib.classgraph.nonapi.reflection, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.classpath, newPackageName=com.m3.lib.classgraph.nonapi.classpath, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.scanspec, newPackageName=com.m3.lib.classgraph.nonapi.scanspec, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.utils, newPackageName=com.m3.lib.classgraph.nonapi.utils, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=io.github.classgraph, newPackageName=com.m3.lib.classgraph, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\nonapi\io\github\classgraph\classpath\ClasspathOrder.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\nonapi\classpath\ClasspathOrder.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.classloaderhandler, newPackageName=com.m3.lib.classgraph.nonapi.classloaderhandler, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.reflection, newPackageName=com.m3.lib.classgraph.nonapi.reflection, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.classpath, newPackageName=com.m3.lib.classgraph.nonapi.classpath, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.scanspec, newPackageName=com.m3.lib.classgraph.nonapi.scanspec, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.utils, newPackageName=com.m3.lib.classgraph.nonapi.utils, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=io.github.classgraph, newPackageName=com.m3.lib.classgraph, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\nonapi\io\github\classgraph\classpath\ModuleFinder.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\nonapi\classpath\ModuleFinder.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.reflection, newPackageName=com.m3.lib.classgraph.nonapi.reflection, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.classpath, newPackageName=com.m3.lib.classgraph.nonapi.classpath, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.scanspec, newPackageName=com.m3.lib.classgraph.nonapi.scanspec, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.utils, newPackageName=com.m3.lib.classgraph.nonapi.utils, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=io.github.classgraph, newPackageName=com.m3.lib.classgraph, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\nonapi\io\github\classgraph\classpath\SystemJarFinder.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\nonapi\classpath\SystemJarFinder.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.classpath, newPackageName=com.m3.lib.classgraph.nonapi.classpath, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.utils, newPackageName=com.m3.lib.classgraph.nonapi.utils, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\nonapi\io\github\classgraph\concurrency\AutoCloseableExecutorService.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\nonapi\concurrency\AutoCloseableExecutorService.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.concurrency, newPackageName=com.m3.lib.classgraph.nonapi.concurrency, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\nonapi\io\github\classgraph\concurrency\InterruptionChecker.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\nonapi\concurrency\InterruptionChecker.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.concurrency, newPackageName=com.m3.lib.classgraph.nonapi.concurrency, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\nonapi\io\github\classgraph\concurrency\SimpleThreadFactory.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\nonapi\concurrency\SimpleThreadFactory.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.concurrency, newPackageName=com.m3.lib.classgraph.nonapi.concurrency, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\nonapi\io\github\classgraph\concurrency\SingletonMap.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\nonapi\concurrency\SingletonMap.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.concurrency, newPackageName=com.m3.lib.classgraph.nonapi.concurrency, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.utils, newPackageName=com.m3.lib.classgraph.nonapi.utils, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\nonapi\io\github\classgraph\concurrency\WorkQueue.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\nonapi\concurrency\WorkQueue.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.concurrency, newPackageName=com.m3.lib.classgraph.nonapi.concurrency, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.utils, newPackageName=com.m3.lib.classgraph.nonapi.utils, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\nonapi\io\github\classgraph\fastzipfilereader\FastZipEntry.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\nonapi\fastzipfilereader\FastZipEntry.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.fastzipfilereader, newPackageName=com.m3.lib.classgraph.nonapi.fastzipfilereader, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.fileslice.reader, newPackageName=com.m3.lib.classgraph.nonapi.fileslice.reader, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.fileslice, newPackageName=com.m3.lib.classgraph.nonapi.fileslice, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.utils, newPackageName=com.m3.lib.classgraph.nonapi.utils, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\nonapi\io\github\classgraph\fastzipfilereader\LogicalZipFile.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\nonapi\fastzipfilereader\LogicalZipFile.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.fastzipfilereader, newPackageName=com.m3.lib.classgraph.nonapi.fastzipfilereader, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.fileslice.reader, newPackageName=com.m3.lib.classgraph.nonapi.fileslice.reader, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.fileslice, newPackageName=com.m3.lib.classgraph.nonapi.fileslice, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.utils, newPackageName=com.m3.lib.classgraph.nonapi.utils, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\nonapi\io\github\classgraph\fastzipfilereader\NestedJarHandler.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\nonapi\fastzipfilereader\NestedJarHandler.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.fastzipfilereader, newPackageName=com.m3.lib.classgraph.nonapi.fastzipfilereader, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.concurrency, newPackageName=com.m3.lib.classgraph.nonapi.concurrency, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.reflection, newPackageName=com.m3.lib.classgraph.nonapi.reflection, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.fileslice, newPackageName=com.m3.lib.classgraph.nonapi.fileslice, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.recycler, newPackageName=com.m3.lib.classgraph.nonapi.recycler, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.scanspec, newPackageName=com.m3.lib.classgraph.nonapi.scanspec, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.utils, newPackageName=com.m3.lib.classgraph.nonapi.utils, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=io.github.classgraph, newPackageName=com.m3.lib.classgraph, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\nonapi\io\github\classgraph\fastzipfilereader\PhysicalZipFile.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\nonapi\fastzipfilereader\PhysicalZipFile.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.fastzipfilereader, newPackageName=com.m3.lib.classgraph.nonapi.fastzipfilereader, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.fileslice, newPackageName=com.m3.lib.classgraph.nonapi.fileslice, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.utils, newPackageName=com.m3.lib.classgraph.nonapi.utils, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\nonapi\io\github\classgraph\fastzipfilereader\ZipFileSlice.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\nonapi\fastzipfilereader\ZipFileSlice.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.fastzipfilereader, newPackageName=com.m3.lib.classgraph.nonapi.fastzipfilereader, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.fileslice, newPackageName=com.m3.lib.classgraph.nonapi.fileslice, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.scanspec, newPackageName=com.m3.lib.classgraph.nonapi.scanspec, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\nonapi\io\github\classgraph\fileslice\ArraySlice.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\nonapi\fileslice\ArraySlice.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.fastzipfilereader, newPackageName=com.m3.lib.classgraph.nonapi.fastzipfilereader, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.fileslice.reader, newPackageName=com.m3.lib.classgraph.nonapi.fileslice.reader, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.fileslice, newPackageName=com.m3.lib.classgraph.nonapi.fileslice, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\nonapi\io\github\classgraph\fileslice\FileSlice.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\nonapi\fileslice\FileSlice.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.fastzipfilereader, newPackageName=com.m3.lib.classgraph.nonapi.fastzipfilereader, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.fileslice.reader, newPackageName=com.m3.lib.classgraph.nonapi.fileslice.reader, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.fileslice, newPackageName=com.m3.lib.classgraph.nonapi.fileslice, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.scanspec, newPackageName=com.m3.lib.classgraph.nonapi.scanspec, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.utils, newPackageName=com.m3.lib.classgraph.nonapi.utils, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=io.github.classgraph, newPackageName=com.m3.lib.classgraph, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\nonapi\io\github\classgraph\fileslice\PathSlice.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\nonapi\fileslice\PathSlice.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.fastzipfilereader, newPackageName=com.m3.lib.classgraph.nonapi.fastzipfilereader, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.fileslice.reader, newPackageName=com.m3.lib.classgraph.nonapi.fileslice.reader, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.fileslice, newPackageName=com.m3.lib.classgraph.nonapi.fileslice, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.utils, newPackageName=com.m3.lib.classgraph.nonapi.utils, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=io.github.classgraph, newPackageName=com.m3.lib.classgraph, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\nonapi\io\github\classgraph\fileslice\reader\ClassfileReader.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\nonapi\fileslice\reader\ClassfileReader.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.fileslice.reader, newPackageName=com.m3.lib.classgraph.nonapi.fileslice.reader, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.fileslice, newPackageName=com.m3.lib.classgraph.nonapi.fileslice, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.utils, newPackageName=com.m3.lib.classgraph.nonapi.utils, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=io.github.classgraph, newPackageName=com.m3.lib.classgraph, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\nonapi\io\github\classgraph\fileslice\reader\RandomAccessArrayReader.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\nonapi\fileslice\reader\RandomAccessArrayReader.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.fileslice.reader, newPackageName=com.m3.lib.classgraph.nonapi.fileslice.reader, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.utils, newPackageName=com.m3.lib.classgraph.nonapi.utils, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\nonapi\io\github\classgraph\fileslice\reader\RandomAccessByteBufferReader.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\nonapi\fileslice\reader\RandomAccessByteBufferReader.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.fileslice.reader, newPackageName=com.m3.lib.classgraph.nonapi.fileslice.reader, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.utils, newPackageName=com.m3.lib.classgraph.nonapi.utils, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\nonapi\io\github\classgraph\fileslice\reader\RandomAccessFileChannelReader.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\nonapi\fileslice\reader\RandomAccessFileChannelReader.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.fileslice.reader, newPackageName=com.m3.lib.classgraph.nonapi.fileslice.reader, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.utils, newPackageName=com.m3.lib.classgraph.nonapi.utils, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\nonapi\io\github\classgraph\fileslice\reader\RandomAccessReader.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\nonapi\fileslice\reader\RandomAccessReader.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.fileslice.reader, newPackageName=com.m3.lib.classgraph.nonapi.fileslice.reader, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\nonapi\io\github\classgraph\fileslice\reader\SequentialReader.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\nonapi\fileslice\reader\SequentialReader.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.fileslice.reader, newPackageName=com.m3.lib.classgraph.nonapi.fileslice.reader, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\nonapi\io\github\classgraph\fileslice\Slice.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\nonapi\fileslice\Slice.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.fastzipfilereader, newPackageName=com.m3.lib.classgraph.nonapi.fastzipfilereader, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.fileslice.reader, newPackageName=com.m3.lib.classgraph.nonapi.fileslice.reader, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.fileslice, newPackageName=com.m3.lib.classgraph.nonapi.fileslice, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.utils, newPackageName=com.m3.lib.classgraph.nonapi.utils, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=io.github.classgraph, newPackageName=com.m3.lib.classgraph, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\nonapi\io\github\classgraph\json\ClassFieldCache.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\nonapi\json\ClassFieldCache.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.reflection, newPackageName=com.m3.lib.classgraph.nonapi.reflection, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.json, newPackageName=com.m3.lib.classgraph.nonapi.json, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\nonapi\io\github\classgraph\json\ClassFields.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\nonapi\json\ClassFields.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.reflection, newPackageName=com.m3.lib.classgraph.nonapi.reflection, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.json, newPackageName=com.m3.lib.classgraph.nonapi.json, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=io.github.classgraph, newPackageName=com.m3.lib.classgraph, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\nonapi\io\github\classgraph\json\FieldTypeInfo.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\nonapi\json\FieldTypeInfo.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.json, newPackageName=com.m3.lib.classgraph.nonapi.json, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\nonapi\io\github\classgraph\json\Id.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\nonapi\json\Id.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.json, newPackageName=com.m3.lib.classgraph.nonapi.json, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\nonapi\io\github\classgraph\json\JSONArray.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\nonapi\json\JSONArray.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.json, newPackageName=com.m3.lib.classgraph.nonapi.json, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\nonapi\io\github\classgraph\json\JSONDeserializer.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\nonapi\json\JSONDeserializer.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.reflection, newPackageName=com.m3.lib.classgraph.nonapi.reflection, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.types, newPackageName=com.m3.lib.classgraph.nonapi.types, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.json, newPackageName=com.m3.lib.classgraph.nonapi.json, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\nonapi\io\github\classgraph\json\JSONObject.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\nonapi\json\JSONObject.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.json, newPackageName=com.m3.lib.classgraph.nonapi.json, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\nonapi\io\github\classgraph\json\JSONParser.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\nonapi\json\JSONParser.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.types, newPackageName=com.m3.lib.classgraph.nonapi.types, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.json, newPackageName=com.m3.lib.classgraph.nonapi.json, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\nonapi\io\github\classgraph\json\JSONReference.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\nonapi\json\JSONReference.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.json, newPackageName=com.m3.lib.classgraph.nonapi.json, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\nonapi\io\github\classgraph\json\JSONSerializer.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\nonapi\json\JSONSerializer.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.reflection, newPackageName=com.m3.lib.classgraph.nonapi.reflection, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.utils, newPackageName=com.m3.lib.classgraph.nonapi.utils, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.json, newPackageName=com.m3.lib.classgraph.nonapi.json, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\nonapi\io\github\classgraph\json\JSONUtils.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\nonapi\json\JSONUtils.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.reflection, newPackageName=com.m3.lib.classgraph.nonapi.reflection, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.json, newPackageName=com.m3.lib.classgraph.nonapi.json, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\nonapi\io\github\classgraph\json\ParameterizedTypeImpl.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\nonapi\json\ParameterizedTypeImpl.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.json, newPackageName=com.m3.lib.classgraph.nonapi.json, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\nonapi\io\github\classgraph\json\ReferenceEqualityKey.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\nonapi\json\ReferenceEqualityKey.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.json, newPackageName=com.m3.lib.classgraph.nonapi.json, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\nonapi\io\github\classgraph\json\TypeResolutions.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\nonapi\json\TypeResolutions.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.json, newPackageName=com.m3.lib.classgraph.nonapi.json, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\nonapi\io\github\classgraph\recycler\RecycleOnClose.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\nonapi\recycler\RecycleOnClose.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.recycler, newPackageName=com.m3.lib.classgraph.nonapi.recycler, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\nonapi\io\github\classgraph\recycler\Recycler.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\nonapi\recycler\Recycler.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.recycler, newPackageName=com.m3.lib.classgraph.nonapi.recycler, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\nonapi\io\github\classgraph\recycler\Resettable.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\nonapi\recycler\Resettable.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.recycler, newPackageName=com.m3.lib.classgraph.nonapi.recycler, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\nonapi\io\github\classgraph\reflection\JVMDriverReflectionDriver.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\nonapi\reflection\JVMDriverReflectionDriver.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.reflection, newPackageName=com.m3.lib.classgraph.nonapi.reflection, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\nonapi\io\github\classgraph\reflection\NarcissusReflectionDriver.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\nonapi\reflection\NarcissusReflectionDriver.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.reflection, newPackageName=com.m3.lib.classgraph.nonapi.reflection, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\nonapi\io\github\classgraph\reflection\ReflectionDriver.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\nonapi\reflection\ReflectionDriver.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.concurrency, newPackageName=com.m3.lib.classgraph.nonapi.concurrency, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.reflection, newPackageName=com.m3.lib.classgraph.nonapi.reflection, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.utils, newPackageName=com.m3.lib.classgraph.nonapi.utils, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\nonapi\io\github\classgraph\reflection\ReflectionUtils.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\nonapi\reflection\ReflectionUtils.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.reflection, newPackageName=com.m3.lib.classgraph.nonapi.reflection, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=io.github.classgraph, newPackageName=com.m3.lib.classgraph, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\nonapi\io\github\classgraph\reflection\StandardReflectionDriver.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\nonapi\reflection\StandardReflectionDriver.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.reflection, newPackageName=com.m3.lib.classgraph.nonapi.reflection, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\nonapi\io\github\classgraph\scanspec\AcceptReject.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\nonapi\scanspec\AcceptReject.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.scanspec, newPackageName=com.m3.lib.classgraph.nonapi.scanspec, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.utils, newPackageName=com.m3.lib.classgraph.nonapi.utils, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\nonapi\io\github\classgraph\scanspec\ScanSpec.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\nonapi\scanspec\ScanSpec.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.scanspec, newPackageName=com.m3.lib.classgraph.nonapi.scanspec, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.utils, newPackageName=com.m3.lib.classgraph.nonapi.utils, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=io.github.classgraph, newPackageName=com.m3.lib.classgraph, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\nonapi\io\github\classgraph\types\ParseException.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\nonapi\types\ParseException.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.types, newPackageName=com.m3.lib.classgraph.nonapi.types, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\nonapi\io\github\classgraph\types\Parser.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\nonapi\types\Parser.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.types, newPackageName=com.m3.lib.classgraph.nonapi.types, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.json, newPackageName=com.m3.lib.classgraph.nonapi.json, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\nonapi\io\github\classgraph\types\TypeUtils.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\nonapi\types\TypeUtils.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.types, newPackageName=com.m3.lib.classgraph.nonapi.types, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\nonapi\io\github\classgraph\utils\Assert.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\nonapi\utils\Assert.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.utils, newPackageName=com.m3.lib.classgraph.nonapi.utils, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\nonapi\io\github\classgraph\utils\CollectionUtils.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\nonapi\utils\CollectionUtils.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.utils, newPackageName=com.m3.lib.classgraph.nonapi.utils, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\nonapi\io\github\classgraph\utils\FastPathResolver.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\nonapi\utils\FastPathResolver.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.utils, newPackageName=com.m3.lib.classgraph.nonapi.utils, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\nonapi\io\github\classgraph\utils\FileUtils.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\nonapi\utils\FileUtils.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.reflection, newPackageName=com.m3.lib.classgraph.nonapi.reflection, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.utils, newPackageName=com.m3.lib.classgraph.nonapi.utils, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\nonapi\io\github\classgraph\utils\JarUtils.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\nonapi\utils\JarUtils.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.fastzipfilereader, newPackageName=com.m3.lib.classgraph.nonapi.fastzipfilereader, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.scanspec, newPackageName=com.m3.lib.classgraph.nonapi.scanspec, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.utils, newPackageName=com.m3.lib.classgraph.nonapi.utils, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\nonapi\io\github\classgraph\utils\LogNode.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\nonapi\utils\LogNode.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.classpath, newPackageName=com.m3.lib.classgraph.nonapi.classpath, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.utils, newPackageName=com.m3.lib.classgraph.nonapi.utils, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=io.github.classgraph, newPackageName=com.m3.lib.classgraph, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\nonapi\io\github\classgraph\utils\ProxyingInputStream.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\nonapi\utils\ProxyingInputStream.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.utils, newPackageName=com.m3.lib.classgraph.nonapi.utils, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\nonapi\io\github\classgraph\utils\StringUtils.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\nonapi\utils\StringUtils.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.utils, newPackageName=com.m3.lib.classgraph.nonapi.utils, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\nonapi\io\github\classgraph\utils\URLPathEncoder.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\nonapi\utils\URLPathEncoder.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.utils, newPackageName=com.m3.lib.classgraph.nonapi.utils, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\nonapi\io\github\classgraph\utils\VersionFinder.java to m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\nonapi\utils\VersionFinder.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=nonapi.io.github.classgraph.utils, newPackageName=com.m3.lib.classgraph.nonapi.utils, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=io.github.classgraph, newPackageName=com.m3.lib.classgraph, recursive=false}
+[WARNING] Please review and commit the results.
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  22.990 s
+[INFO] Finished at: 2026-10-31T07:26:29+05:30
+[INFO] ------------------------------------------------------------------------

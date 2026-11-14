@@ -1,0 +1,52 @@
+{
+  "schema": "M3_LLM_RECEIVER_V1",
+  "status": "COMPONENT_VERIFIED_PENDING_M3JDK_PRODUCT_ADMISSION",
+  "source_repository": "hsoliwal/com.synexia",
+  "source_revision": "2ab439480ecb0643615e85b42def954dbf3b5627",
+  "historical_native_revision": "eccdbf349196ffd771abb8dac20f1fbb0c081966",
+  "target_repository": "hsoliwal/M3jdk21",
+  "target_base": "4bd7f5b2b1414d1f607ceab28a498e3889020701",
+  "module": "com.m3.llm",
+  "recipe": "m3jdk-llm-summary-20261029",
+  "source_provenance_sha256": "70584250ef46f13768559f287f70afd797cbf862ab16586e0f398d7e3d2173b7",
+  "production_java_owners": 43,
+  "browser_runtime_modules": 4,
+  "runtime_dependencies": [
+    "java.base",
+    "jdk.httpserver"
+  ],
+  "third_party_runtime_dependencies": [],
+  "gates": {
+    "actual_openrewrite_sdk": "PASS",
+    "target_maven_verify": "PASS",
+    "node_fixture_tests": "PASS",
+    "named_module_linked_image": "PASS",
+    "source_built_m3jdk_image": "NOT_RUN",
+    "live_chrome_or_model": "NOT_RUN",
+    "windows_gpu": "NOT_RUN",
+    "comparative_performance": "NOT_MEASURED",
+    "name_contract": "PASS",
+    "jar_licence_and_browser_assets": "PASS"
+  },
+  "authority": "Candidate outputs preserve source; no model truth or broader JDK phase promotion is claimed.",
+  "verification": {
+    "java_toolchain": "21.0.8+9",
+    "node_toolchain": "24.22.1",
+    "source_package_migration_files": 60,
+    "openrewrite_tests": 10,
+    "target_junit": {
+      "tests": 39,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "browser_subtests": 25,
+    "projection_groups": 14,
+    "projection_assertions": 1184,
+    "native_synthetic_lifecycle_checks": 63,
+    "real_model_calls": 0,
+    "image_kind": "jlink image built from stock JDK21; source-built M3JDK admission not established",
+    "recipe_drift_and_replay": "Every target path tested for drift, duplicate/collision refusal, fixed point and mixed-state convergence",
+    "jar_sha256": "2459c5488b5a8343315c08d6d4b88767fbe21e07a4d2b8a8cfe125e967f34e13"
+  }
+}

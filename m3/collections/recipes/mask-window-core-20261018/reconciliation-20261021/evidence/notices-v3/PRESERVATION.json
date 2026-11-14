@@ -1,0 +1,134 @@
+[
+  {
+    "file": "M3IndexMaskCompactor.java",
+    "signature": "public static long[] selectLong(long[] orderedRows, byte[] rowStates,\n            int requiredMask, int excludedMask)",
+    "body_sha256": "902eebd40488657875d27e542e655ab42c72933c82a42720743ec89e1056bea9",
+    "status": "BYTE_IDENTICAL"
+  },
+  {
+    "file": "M3IndexMaskCompactor.java",
+    "signature": "public static int[] selectPositions(byte[] rowStates, int requiredMask, Backend backend)",
+    "body_sha256": "060df2f336aece5371f7ac4bb6915078760fbd4159a1ebdc6e8d09db064c50df",
+    "status": "BYTE_IDENTICAL"
+  },
+  {
+    "file": "M3IndexMaskCompactor.java",
+    "signature": "public static int[] selectPositions(byte[] rowStates, int requiredMask,\n            int excludedMask, Backend backend)",
+    "body_sha256": "ec88c806871944f66ca00f9ddee3713c8752fef7b14900beaf8e3e942ec0c19b",
+    "status": "BYTE_IDENTICAL"
+  },
+  {
+    "file": "M3IndexMaskCompactor.java",
+    "signature": "public static int selectedCount(byte[] rowStates, int requiredMask, int excludedMask)",
+    "body_sha256": "fb4b25e6f65b0c64b2a94d9588856c4c31e15d90beec42a2f348d3f93fbee339",
+    "status": "BYTE_IDENTICAL"
+  },
+  {
+    "file": "M3IndexMaskCompactor.java",
+    "signature": "private static int countSelected(byte[] states, int requiredMask, int excludedMask)",
+    "body_sha256": "f83e5067d957f7f6779e50289f680e437dc1a922917f795f93babbdf7f3c5621",
+    "status": "BYTE_IDENTICAL"
+  },
+  {
+    "file": "M3IndexMaskCompactor.java",
+    "signature": "static boolean matches(byte state, int requiredMask)",
+    "body_sha256": "a5a1368c20b8a87015397189ad676a0a529429ec7ef270b7fe93a36e84209df3",
+    "status": "BYTE_IDENTICAL"
+  },
+  {
+    "file": "M3IndexMaskCompactor.java",
+    "signature": "static boolean matches(byte state, int requiredMask, int excludedMask)",
+    "body_sha256": "4924864ccaf93e83b8d5efc9df8f080a44866125ad6f836d84faafd5ae7f9a3d",
+    "status": "BYTE_IDENTICAL"
+  },
+  {
+    "file": "M3IndexMaskCompactor.java",
+    "signature": "static int[] selectPositionsJava(byte[] rowStates, int requiredMask)",
+    "body_sha256": "a4c31af9cfd4c108b07c089858014a1632b2f5cf11ff99afe6362690a4821390",
+    "status": "BYTE_IDENTICAL"
+  },
+  {
+    "file": "M3IndexMaskCompactor.java",
+    "signature": "static int[] selectPositionsJava(byte[] rowStates, int requiredMask, int excludedMask)",
+    "body_sha256": "d8b2da3d6e279152d2d607b0eefb2e9d4f9481132416914d0723f3107be43420",
+    "status": "BYTE_IDENTICAL"
+  },
+  {
+    "file": "M3IndexMaskCompactor.java",
+    "signature": "private static int[] identityPositions(int length)",
+    "body_sha256": "cb43590012a59753220e135a6f63a76e638ddb809c28d9fc2a3c1aaa636112d1",
+    "status": "BYTE_IDENTICAL"
+  },
+  {
+    "file": "M3IndexMaskCompactor.java",
+    "signature": "private static final class NativeLibrary",
+    "body_sha256": "9217c6f4336fd4fdc404c3b056af36b43c09f29c6b655546fe0d3efe1a48cce8",
+    "status": "BYTE_IDENTICAL"
+  },
+  {
+    "file": "M3IndexMaskCompactor.java",
+    "signature": "private static final class NativePositions",
+    "body_sha256": "f3689f097ce08bc6a58732dc8ea34db870c9bf7e3a1ce2bbf9a031113eed64bd",
+    "status": "BYTE_IDENTICAL"
+  },
+  {
+    "file": "M3IndexMaskCompactor.java",
+    "signature": "private static final class NativePositionMasks",
+    "body_sha256": "9319884eda9e60ff75065c25a8eabd1106318e7af4bd2e956ecce20dbdb1ad64",
+    "status": "BYTE_IDENTICAL"
+  },
+  {
+    "file": "M3IndexMaskCompactor.java",
+    "signature": "private static final class NativeRange",
+    "body_sha256": "efdea50b418835e8f7bad60fca46829b3778e08b762c448a3a5eae6759f7fe69",
+    "status": "BYTE_IDENTICAL"
+  },
+  {
+    "file": "m3_index_mask_compactor.c",
+    "signature": "static void m3_throw_state_drift(",
+    "body_sha256": "518df1079e990fafe33bfc748a411f1c9b4b923a454bc70f54eae048023996bc",
+    "status": "BYTE_IDENTICAL"
+  },
+  {
+    "file": "m3_index_mask_compactor.c",
+    "signature": "static void m3_bad_window(",
+    "body_sha256": "c36d8a1c7644734b01f7d5399f73c4724abae43d90197571a22a639dc8b18036",
+    "status": "BYTE_IDENTICAL"
+  },
+  {
+    "file": "m3_index_mask_compactor.c",
+    "signature": "static int m3_window_valid(",
+    "body_sha256": "a4ad5d93ba6eca5ff13b509df10552c2d17d367a2b27c8d61d974982927cca20",
+    "status": "BYTE_IDENTICAL"
+  },
+  {
+    "file": "m3_index_mask_compactor.c",
+    "signature": "static jint m3_count_window(",
+    "body_sha256": "4e5b26da7c5c6d98d8477f7b115b21479c62fae8ac1d1e02b72195932a8c349a",
+    "status": "BYTE_IDENTICAL"
+  },
+  {
+    "file": "m3_index_mask_compactor.c",
+    "signature": "Java_com_m3_collections_M3IndexMaskCompactor_positionsAbiNative(",
+    "body_sha256": "002413ad50fac5f69eb4b73dc52cad01846f3d403b294ba1d46c3756938f5a50",
+    "status": "BYTE_IDENTICAL"
+  },
+  {
+    "file": "m3_index_mask_compactor.c",
+    "signature": "Java_com_m3_collections_M3IndexMaskCompactor_selectPositionsNative(",
+    "body_sha256": "f30b7f7151cc2596eb856ed745ea349305846aaadb9e7cf59979cf71411e73f9",
+    "status": "BYTE_IDENTICAL"
+  },
+  {
+    "file": "m3_index_mask_compactor.c",
+    "signature": "Java_com_m3_collections_M3IndexMaskCompactor_positionsMasksAbiNative(",
+    "body_sha256": "002413ad50fac5f69eb4b73dc52cad01846f3d403b294ba1d46c3756938f5a50",
+    "status": "BYTE_IDENTICAL"
+  },
+  {
+    "file": "m3_index_mask_compactor.c",
+    "signature": "Java_com_m3_collections_M3IndexMaskCompactor_selectPositionsMasksNative(",
+    "body_sha256": "b27dae06fb42de620811c6ce7e89752efe8958ea940a14ff7be1b691fc842d76",
+    "status": "BYTE_IDENTICAL"
+  }
+]

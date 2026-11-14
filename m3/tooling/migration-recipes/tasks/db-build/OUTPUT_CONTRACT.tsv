@@ -1,0 +1,9 @@
+artifact	purpose
+DESIGN.md	Typed-copy contract and local adapter role
+TASK_PACKET.json	Explicit scope, locks and verification order
+STATUS.tsv	Observed versus pending states
+FINAL_REPORT.md	Changes, actual gates and limits
+RUN_CONTEXT.tsv	Pinned source and execution context
+PROVENANCE.tsv	Source and artifact identities
+VERIFY_CONTRACT.tsv	Separate compile/test/coverage obligations
+OUTPUT_CONTRACT.tsv	This artifact contract

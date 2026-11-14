@@ -1,0 +1,8 @@
+    //FLLDCIM: RELOCATE - the donor's one-shot hash(byte[], seed) is the owner's existing API, M3LongHashFunction.xx(seed).hashBytes (no second kernel, no second facade)
+    private static long oneShot(byte[] data, long seed) {
+        return M3LongHashFunction.xx(seed).hashBytes(data);
+    }
+
+    private static long oneShot(byte[] data) {
+        return oneShot(data, M3XxHash64Streaming.DEFAULT_SEED);
+    }

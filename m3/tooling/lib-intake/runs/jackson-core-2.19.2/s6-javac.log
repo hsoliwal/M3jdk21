@@ -1,0 +1,223 @@
+H:\m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\module-info.java:3: warning: [module] module name component m3 should avoid terminal digits
+module jdk.m3.core {
+          ^
+H:\m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\util\RecyclerPool.java:189: warning: [missing-explicit-ctor] class NonRecyclingPoolBase in exported package com.m3.lib.core.util declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.core
+    abstract class NonRecyclingPoolBase<P extends WithPool<P>> implements RecyclerPool<P>
+             ^
+H:\m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\Base64Variants.java:33: warning: [missing-explicit-ctor] class Base64Variants in exported package com.m3.lib.core declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.core
+public final class Base64Variants
+             ^
+H:\m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\TokenStreamFactory.java:20: warning: [missing-explicit-ctor] class TokenStreamFactory in exported package com.m3.lib.core declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.core
+public abstract class TokenStreamFactory
+                ^
+H:\m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\JsonFactory.java:279: warning: [serial] non-transient instance field of a serializable class declared with a non-serializable type
+    protected ObjectCodec _objectCodec;
+                          ^
+H:\m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\JsonFactory.java:329: warning: [serial] non-transient instance field of a serializable class declared with a non-serializable type
+    protected final List<JsonGeneratorDecorator> _generatorDecorators;
+                                                 ^
+H:\m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\JsonFactory.java:338: warning: [serial] non-transient instance field of a serializable class declared with a non-serializable type
+    protected SerializableString _rootValueSeparator = DEFAULT_ROOT_VALUE_SEPARATOR;
+                                 ^
+H:\m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\JsonFactory.java:384: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+        _rootCharSymbols = CharsToNameCanonicalizer.createRoot(this);
+                                                               ^
+H:\m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\JsonFactory.java:417: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+        _rootCharSymbols = CharsToNameCanonicalizer.createRoot(this);
+                                                               ^
+H:\m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\JsonFactory.java:448: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+        _rootCharSymbols = CharsToNameCanonicalizer.createRoot(this);
+                                                               ^
+H:\m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\JsonFactory.java:479: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+        _rootCharSymbols = CharsToNameCanonicalizer.createRoot(this);
+                                                               ^
+H:\m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\sym\CharsToNameCanonicalizer.java:117: warning: [exports] class TableInfo in module jdk.m3.core is not accessible to clients that require this module
+    protected final AtomicReference<TableInfo> _tableInfo;
+                                    ^
+H:\m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\sym\CharsToNameCanonicalizer.java:171: warning: [exports] class Bucket in module jdk.m3.core is not accessible to clients that require this module
+    protected Bucket[] _buckets;
+              ^
+H:\m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\sym\ByteQuadsCanonicalizer.java:79: warning: [exports] class TableInfo in module jdk.m3.core is not accessible to clients that require this module
+    protected final AtomicReference<TableInfo> _tableInfo;
+                                    ^
+H:\m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\sym\ByteQuadsCanonicalizer.java:834: warning: [fallthrough] possible fall-through into case
+        case 7:
+        ^
+H:\m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\sym\ByteQuadsCanonicalizer.java:836: warning: [fallthrough] possible fall-through into case
+        case 6:
+        ^
+H:\m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\sym\ByteQuadsCanonicalizer.java:838: warning: [fallthrough] possible fall-through into case
+        case 5:
+        ^
+H:\m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\sym\ByteQuadsCanonicalizer.java:840: warning: [fallthrough] possible fall-through into case
+        case 4: // always at least 4
+        ^
+H:\m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\TreeCodec.java:11: warning: [missing-explicit-ctor] class TreeCodec in exported package com.m3.lib.core declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.core
+public abstract class TreeCodec
+                ^
+H:\m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\io\CharacterEscapes.java:13: warning: [missing-explicit-ctor] class CharacterEscapes in exported package com.m3.lib.core.io declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.core
+public abstract class CharacterEscapes
+                ^
+H:\m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\io\InputDecorator.java:11: warning: [missing-explicit-ctor] class InputDecorator in exported package com.m3.lib.core.io declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.core
+public abstract class InputDecorator
+                ^
+H:\m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\io\OutputDecorator.java:12: warning: [missing-explicit-ctor] class OutputDecorator in exported package com.m3.lib.core.io declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.core
+public abstract class OutputDecorator
+                ^
+H:\m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\util\RequestPayload.java:22: warning: [serial] non-transient instance field of a serializable class declared with a non-serializable type
+    protected CharSequence _payloadAsText;
+                           ^
+H:\m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\JsonPointer.java:958: warning: [serial] serializable class Serialization has no definition of serialVersionUID
+    static class Serialization implements Externalizable
+           ^
+H:\m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\type\ResolvedType.java:14: warning: [missing-explicit-ctor] class ResolvedType in exported package com.m3.lib.core.type declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.core
+public abstract class ResolvedType
+                ^
+H:\m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\JsonpCharacterEscapes.java:15: warning: [missing-explicit-ctor] class JsonpCharacterEscapes in exported package com.m3.lib.core declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.core
+public class JsonpCharacterEscapes extends CharacterEscapes
+       ^
+H:\m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\base\GeneratorBase.java:122: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+                ? DupDetector.rootDetector(this) : null;
+                                           ^
+H:\m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\base\ParserBase.java:272: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+                ? DupDetector.rootDetector(this) : null;
+                                           ^
+H:\m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\io\CharTypes.java:5: warning: [missing-explicit-ctor] class CharTypes in exported package com.m3.lib.core.io declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.core
+public final class CharTypes
+             ^
+H:\m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\io\NumberInput.java:16: warning: [missing-explicit-ctor] class NumberInput in exported package com.m3.lib.core.io declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.core
+public final class NumberInput
+             ^
+H:\m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\io\NumberInput.java:80: warning: [fallthrough] possible fall-through into case
+        case 8:
+        ^
+H:\m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\io\NumberInput.java:82: warning: [fallthrough] possible fall-through into case
+        case 7:
+        ^
+H:\m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\io\NumberInput.java:84: warning: [fallthrough] possible fall-through into case
+        case 6:
+        ^
+H:\m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\io\NumberInput.java:86: warning: [fallthrough] possible fall-through into case
+        case 5:
+        ^
+H:\m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\io\NumberInput.java:88: warning: [fallthrough] possible fall-through into case
+        case 4:
+        ^
+H:\m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\io\NumberInput.java:90: warning: [fallthrough] possible fall-through into case
+        case 3:
+        ^
+H:\m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\io\NumberInput.java:92: warning: [fallthrough] possible fall-through into case
+        case 2:
+        ^
+H:\m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\io\NumberOutput.java:6: warning: [missing-explicit-ctor] class NumberOutput in exported package com.m3.lib.core.io declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.core
+public final class NumberOutput
+             ^
+H:\m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\io\schubfach\FloatToDecimal.java:426: warning: [lossy-conversions] implicit cast from long to int in compound assignment is possibly lossy
+        f *= pow10(H - len);
+                  ^
+H:\m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\json\PackageVersion.java:12: warning: [missing-explicit-ctor] class PackageVersion in exported package com.m3.lib.core.json declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.core
+public final class PackageVersion implements Versioned {
+             ^
+H:\m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\json\ReaderBasedJsonParser.java:406: warning: [fallthrough] possible fall-through into case
+            case ID_NUMBER_INT:
+            ^
+H:\m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\json\ReaderBasedJsonParser.java:429: warning: [fallthrough] possible fall-through into case
+            case ID_NUMBER_INT:
+            ^
+H:\m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\json\ReaderBasedJsonParser.java:453: warning: [fallthrough] possible fall-through into case
+            case ID_NUMBER_INT:
+            ^
+H:\m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\json\ReaderBasedJsonParser.java:741: warning: [fallthrough] possible fall-through into case
+        case 't':
+        ^
+H:\m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\json\ReaderBasedJsonParser.java:2018: warning: [fallthrough] possible fall-through into case
+        case ',':
+        ^
+H:\m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\json\UTF8DataInputJsonParser.java:305: warning: [fallthrough] possible fall-through into case
+            case ID_NUMBER_INT:
+            ^
+H:\m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\json\UTF8DataInputJsonParser.java:352: warning: [fallthrough] possible fall-through into case
+            case ID_NUMBER_INT:
+            ^
+H:\m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\json\UTF8DataInputJsonParser.java:810: warning: [fallthrough] possible fall-through into case
+        case '0':
+        ^
+H:\m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\json\UTF8DataInputJsonParser.java:2093: warning: [fallthrough] possible fall-through into case
+        case ',':
+        ^
+H:\m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\json\UTF8DataInputJsonParser.java:2106: warning: [fallthrough] possible fall-through into case
+        case '}':
+        ^
+H:\m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\json\UTF8DataInputJsonParser.java:2110: warning: [fallthrough] possible fall-through into case
+        case '\'':
+        ^
+H:\m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\json\UTF8JsonGenerator.java:125: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+        boolean escapeSlash = isEnabled(JsonWriteFeature.ESCAPE_FORWARD_SLASHES.mappedFeature());
+                                       ^
+H:\m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\json\UTF8JsonGenerator.java:155: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+        boolean escapeSlash = isEnabled(JsonWriteFeature.ESCAPE_FORWARD_SLASHES.mappedFeature());
+                                       ^
+H:\m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\json\UTF8StreamJsonParser.java:449: warning: [fallthrough] possible fall-through into case
+            case ID_NUMBER_INT:
+            ^
+H:\m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\json\UTF8StreamJsonParser.java:474: warning: [fallthrough] possible fall-through into case
+            case ID_NUMBER_INT:
+            ^
+H:\m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\json\UTF8StreamJsonParser.java:499: warning: [fallthrough] possible fall-through into case
+            case ID_NUMBER_INT:
+            ^
+H:\m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\json\UTF8StreamJsonParser.java:2704: warning: [fallthrough] possible fall-through into case
+        case ',':
+        ^
+H:\m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\json\UTF8StreamJsonParser.java:2716: warning: [fallthrough] possible fall-through into case
+        case '}':
+        ^
+H:\m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\json\UTF8StreamJsonParser.java:2720: warning: [fallthrough] possible fall-through into case
+        case '\'':
+        ^
+H:\m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\json\WriterBasedJsonGenerator.java:114: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+        boolean escapeSlash = isEnabled(JsonWriteFeature.ESCAPE_FORWARD_SLASHES.mappedFeature());
+                                       ^
+H:\m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\json\async\NonBlockingUtf8JsonParserBase.java:374: warning: [fallthrough] possible fall-through into case
+        case MINOR_NUMBER_EXPONENT_DIGITS:
+        ^
+H:\m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\json\async\NonBlockingUtf8JsonParserBase.java:384: warning: [fallthrough] possible fall-through into case
+        case MINOR_COMMENT_CLOSING_ASTERISK:
+        ^
+H:\m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\json\async\NonBlockingUtf8JsonParserBase.java:388: warning: [fallthrough] possible fall-through into case
+        case MINOR_COMMENT_CPP:
+        ^
+H:\m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\json\async\NonBlockingUtf8JsonParserBase.java:897: warning: [fallthrough] possible fall-through into case
+        case ',':
+        ^
+H:\m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\json\async\NonBlockingUtf8JsonParserBase.java:909: warning: [fallthrough] possible fall-through into case
+        case INT_RCURLY:
+        ^
+H:\m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\sym\NameN.java:79: warning: [fallthrough] possible fall-through into case
+        case 7:
+        ^
+H:\m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\sym\NameN.java:81: warning: [fallthrough] possible fall-through into case
+        case 6:
+        ^
+H:\m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\sym\NameN.java:83: warning: [fallthrough] possible fall-through into case
+        case 5:
+        ^
+H:\m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\sym\NameN.java:85: warning: [fallthrough] possible fall-through into case
+        case 4:
+        ^
+H:\m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\util\BufferRecyclers.java:18: warning: [missing-explicit-ctor] class BufferRecyclers in exported package com.m3.lib.core.util declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.core
+public class BufferRecyclers
+       ^
+H:\m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\util\DefaultPrettyPrinter.java:502: warning: [missing-explicit-ctor] class NopIndenter in exported package com.m3.lib.core.util declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.core
+    public static class NopIndenter
+                  ^
+H:\m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\util\DefaultPrettyPrinter.java:519: warning: [missing-explicit-ctor] class FixedSpaceIndenter in exported package com.m3.lib.core.util declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.core
+    public static class FixedSpaceIndenter extends NopIndenter
+                  ^
+H:\m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\util\InternalJacksonUtil.java:8: warning: [missing-explicit-ctor] class InternalJacksonUtil in exported package com.m3.lib.core.util declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.core
+public abstract class InternalJacksonUtil {
+                ^
+H:\m3-scratch\lib-intake\batch\jackson-core-2.19.2\proj\src\main\java\com\m3\lib\core\util\JsonRecyclerPools.java:17: warning: [missing-explicit-ctor] class JsonRecyclerPools in exported package com.m3.lib.core.util declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.core
+public final class JsonRecyclerPools
+             ^
+74 warnings

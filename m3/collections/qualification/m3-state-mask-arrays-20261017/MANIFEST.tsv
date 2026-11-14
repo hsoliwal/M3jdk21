@@ -1,0 +1,5 @@
+target_path	sha256	origin	status
+m3/collections/src/main/java/jdk/m3/collections/M3StateMaskArrays.java	2b6ce389b732a6f1a88164ce97f7d5b9fa5582c7e0ed5c87a585ceaeb25566b4	Canonical Synexia m3-state-mask-arrays-20261017 template	GENERATED
+m3/collections/src/test/java/jdk/m3/collections/M3StateMaskArraysSelfTest.java	c9c7f9c175c4a8f77b20e10a3cdb7ae38287208117df1f683fb931dfb83eb34e	Canonical Synexia m3-state-mask-arrays-20261017 template	GENERATED
+m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskCompactor.java	git-blob:240bbfb62ca949bfbd8abb0061cccad6630f7888	M3JDK21 master existing selected owner	UNCHANGED
+m3/collections/src/main/native/collections/m3_index_mask_compactor.c	git-blob:22782ee02b06b4404b5c87fd15f10f4e8e9749ea	M3JDK21 master existing selected JNI backend	UNCHANGED

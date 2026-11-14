@@ -1,0 +1,25 @@
+{
+  "argv": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3.12",
+    "/workspace/scratch/5809f5dce3dd/continuation-20261006/m3-checkout/m3/migration/intake-20261005/current-752-ci/cih-producer-portable/package_evidence.py",
+    "extract",
+    "--bundle",
+    "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/packaging-authoring-v1/bundle",
+    "--output",
+    "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/packaging-authoring-v1/extracted"
+  ],
+  "cwd": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/packaging-authoring-v1",
+  "id": "extract",
+  "exitCode": 0,
+  "elapsedSeconds": 0.3877592086791992,
+  "stdout": {
+    "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/packaging-authoring-v1/root-execution-v1/extract/stdout.log",
+    "bytes": 769,
+    "sha256": "4c44f2ed68a2a79ea2e83148483895344fbaf0eecf1519d24a301cf605b7777f"
+  },
+  "stderr": {
+    "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/packaging-authoring-v1/root-execution-v1/extract/stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+}

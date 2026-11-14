@@ -1,0 +1,185 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] -----------------------< m3.intake:HdrHistogram >-----------------------
+[INFO] Building HdrHistogram 2.1.12-m3-source-1
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- rewrite:5.23.1:runNoFork (default-cli) @ HdrHistogram ---
+[INFO] Using active recipe(s) [com.synexia.m3.intake.Relocate]
+[INFO] Using active styles(s) []
+[INFO] Validating active recipes...
+[INFO] Project [HdrHistogram] Resolving Poms...
+[INFO] Project [HdrHistogram] Parsing source files
+[INFO] Running recipe(s)...
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\org\HdrHistogram\AbstractHistogram.java to m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\com\m3\lib\hdrhistogram\AbstractHistogram.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.HdrHistogram, newPackageName=com.m3.lib.hdrhistogram, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\org\HdrHistogram\AbstractHistogramIterator.java to m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\com\m3\lib\hdrhistogram\AbstractHistogramIterator.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.HdrHistogram, newPackageName=com.m3.lib.hdrhistogram, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\org\HdrHistogram\AllValuesIterator.java to m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\com\m3\lib\hdrhistogram\AllValuesIterator.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.HdrHistogram, newPackageName=com.m3.lib.hdrhistogram, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\org\HdrHistogram\AtomicHistogram.java to m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\com\m3\lib\hdrhistogram\AtomicHistogram.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.HdrHistogram, newPackageName=com.m3.lib.hdrhistogram, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\org\HdrHistogram\Base64Helper.java to m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\com\m3\lib\hdrhistogram\Base64Helper.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.HdrHistogram, newPackageName=com.m3.lib.hdrhistogram, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\org\HdrHistogram\ConcurrentDoubleHistogram.java to m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\com\m3\lib\hdrhistogram\ConcurrentDoubleHistogram.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.HdrHistogram, newPackageName=com.m3.lib.hdrhistogram, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\org\HdrHistogram\ConcurrentHistogram.java to m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\com\m3\lib\hdrhistogram\ConcurrentHistogram.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.HdrHistogram, newPackageName=com.m3.lib.hdrhistogram, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\org\HdrHistogram\DoubleAllValuesIterator.java to m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\com\m3\lib\hdrhistogram\DoubleAllValuesIterator.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.HdrHistogram, newPackageName=com.m3.lib.hdrhistogram, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\org\HdrHistogram\DoubleHistogram.java to m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\com\m3\lib\hdrhistogram\DoubleHistogram.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.HdrHistogram, newPackageName=com.m3.lib.hdrhistogram, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\org\HdrHistogram\DoubleHistogramIterationValue.java to m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\com\m3\lib\hdrhistogram\DoubleHistogramIterationValue.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.HdrHistogram, newPackageName=com.m3.lib.hdrhistogram, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\org\HdrHistogram\DoubleLinearIterator.java to m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\com\m3\lib\hdrhistogram\DoubleLinearIterator.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.HdrHistogram, newPackageName=com.m3.lib.hdrhistogram, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\org\HdrHistogram\DoubleLogarithmicIterator.java to m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\com\m3\lib\hdrhistogram\DoubleLogarithmicIterator.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.HdrHistogram, newPackageName=com.m3.lib.hdrhistogram, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\org\HdrHistogram\DoublePercentileIterator.java to m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\com\m3\lib\hdrhistogram\DoublePercentileIterator.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.HdrHistogram, newPackageName=com.m3.lib.hdrhistogram, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\org\HdrHistogram\DoubleRecordedValuesIterator.java to m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\com\m3\lib\hdrhistogram\DoubleRecordedValuesIterator.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.HdrHistogram, newPackageName=com.m3.lib.hdrhistogram, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\org\HdrHistogram\DoubleRecorder.java to m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\com\m3\lib\hdrhistogram\DoubleRecorder.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.HdrHistogram, newPackageName=com.m3.lib.hdrhistogram, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\org\HdrHistogram\DoubleValueRecorder.java to m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\com\m3\lib\hdrhistogram\DoubleValueRecorder.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.HdrHistogram, newPackageName=com.m3.lib.hdrhistogram, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\org\HdrHistogram\EncodableHistogram.java to m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\com\m3\lib\hdrhistogram\EncodableHistogram.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.HdrHistogram, newPackageName=com.m3.lib.hdrhistogram, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\org\HdrHistogram\Histogram.java to m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\com\m3\lib\hdrhistogram\Histogram.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.HdrHistogram, newPackageName=com.m3.lib.hdrhistogram, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\org\HdrHistogram\HistogramIterationValue.java to m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\com\m3\lib\hdrhistogram\HistogramIterationValue.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.HdrHistogram, newPackageName=com.m3.lib.hdrhistogram, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\org\HdrHistogram\HistogramLogProcessor.java to m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\com\m3\lib\hdrhistogram\HistogramLogProcessor.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.HdrHistogram, newPackageName=com.m3.lib.hdrhistogram, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\org\HdrHistogram\HistogramLogReader.java to m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\com\m3\lib\hdrhistogram\HistogramLogReader.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.HdrHistogram, newPackageName=com.m3.lib.hdrhistogram, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\org\HdrHistogram\HistogramLogScanner.java to m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\com\m3\lib\hdrhistogram\HistogramLogScanner.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.HdrHistogram, newPackageName=com.m3.lib.hdrhistogram, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\org\HdrHistogram\HistogramLogWriter.java to m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\com\m3\lib\hdrhistogram\HistogramLogWriter.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.HdrHistogram, newPackageName=com.m3.lib.hdrhistogram, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\org\HdrHistogram\IntCountsHistogram.java to m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\com\m3\lib\hdrhistogram\IntCountsHistogram.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.HdrHistogram, newPackageName=com.m3.lib.hdrhistogram, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\org\HdrHistogram\LinearIterator.java to m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\com\m3\lib\hdrhistogram\LinearIterator.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.HdrHistogram, newPackageName=com.m3.lib.hdrhistogram, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\org\HdrHistogram\LogarithmicIterator.java to m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\com\m3\lib\hdrhistogram\LogarithmicIterator.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.HdrHistogram, newPackageName=com.m3.lib.hdrhistogram, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\org\HdrHistogram\package-info.java to m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\com\m3\lib\hdrhistogram\package-info.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.HdrHistogram, newPackageName=com.m3.lib.hdrhistogram, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\org\HdrHistogram\packedarray\AbstractPackedArrayContext.java to m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\com\m3\lib\hdrhistogram\packedarray\AbstractPackedArrayContext.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.HdrHistogram.packedarray, newPackageName=com.m3.lib.hdrhistogram.packedarray, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\org\HdrHistogram\packedarray\AbstractPackedLongArray.java to m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\com\m3\lib\hdrhistogram\packedarray\AbstractPackedLongArray.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.HdrHistogram.packedarray, newPackageName=com.m3.lib.hdrhistogram.packedarray, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\org\HdrHistogram\packedarray\ConcurrentPackedArrayContext.java to m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\com\m3\lib\hdrhistogram\packedarray\ConcurrentPackedArrayContext.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.HdrHistogram.packedarray, newPackageName=com.m3.lib.hdrhistogram.packedarray, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\org\HdrHistogram\packedarray\ConcurrentPackedLongArray.java to m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\com\m3\lib\hdrhistogram\packedarray\ConcurrentPackedLongArray.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.HdrHistogram.packedarray, newPackageName=com.m3.lib.hdrhistogram.packedarray, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.HdrHistogram, newPackageName=com.m3.lib.hdrhistogram, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\org\HdrHistogram\packedarray\IterationValue.java to m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\com\m3\lib\hdrhistogram\packedarray\IterationValue.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.HdrHistogram.packedarray, newPackageName=com.m3.lib.hdrhistogram.packedarray, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\org\HdrHistogram\packedarray\PackedArrayContext.java to m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\com\m3\lib\hdrhistogram\packedarray\PackedArrayContext.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.HdrHistogram.packedarray, newPackageName=com.m3.lib.hdrhistogram.packedarray, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\org\HdrHistogram\packedarray\PackedArrayRecorder.java to m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\com\m3\lib\hdrhistogram\packedarray\PackedArrayRecorder.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.HdrHistogram.packedarray, newPackageName=com.m3.lib.hdrhistogram.packedarray, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.HdrHistogram, newPackageName=com.m3.lib.hdrhistogram, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\org\HdrHistogram\packedarray\PackedArraySingleWriterRecorder.java to m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\com\m3\lib\hdrhistogram\packedarray\PackedArraySingleWriterRecorder.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.HdrHistogram.packedarray, newPackageName=com.m3.lib.hdrhistogram.packedarray, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.HdrHistogram, newPackageName=com.m3.lib.hdrhistogram, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\org\HdrHistogram\packedarray\PackedLongArray.java to m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\com\m3\lib\hdrhistogram\packedarray\PackedLongArray.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.HdrHistogram.packedarray, newPackageName=com.m3.lib.hdrhistogram.packedarray, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\org\HdrHistogram\packedarray\ResizeException.java to m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\com\m3\lib\hdrhistogram\packedarray\ResizeException.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.HdrHistogram.packedarray, newPackageName=com.m3.lib.hdrhistogram.packedarray, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\org\HdrHistogram\PackedConcurrentDoubleHistogram.java to m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\com\m3\lib\hdrhistogram\PackedConcurrentDoubleHistogram.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.HdrHistogram, newPackageName=com.m3.lib.hdrhistogram, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\org\HdrHistogram\PackedConcurrentHistogram.java to m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\com\m3\lib\hdrhistogram\PackedConcurrentHistogram.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.HdrHistogram.packedarray, newPackageName=com.m3.lib.hdrhistogram.packedarray, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.HdrHistogram, newPackageName=com.m3.lib.hdrhistogram, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\org\HdrHistogram\PackedDoubleHistogram.java to m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\com\m3\lib\hdrhistogram\PackedDoubleHistogram.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.HdrHistogram, newPackageName=com.m3.lib.hdrhistogram, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\org\HdrHistogram\PackedHistogram.java to m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\com\m3\lib\hdrhistogram\PackedHistogram.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.HdrHistogram.packedarray, newPackageName=com.m3.lib.hdrhistogram.packedarray, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.HdrHistogram, newPackageName=com.m3.lib.hdrhistogram, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\org\HdrHistogram\PercentileIterator.java to m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\com\m3\lib\hdrhistogram\PercentileIterator.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.HdrHistogram, newPackageName=com.m3.lib.hdrhistogram, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\org\HdrHistogram\RecordedValuesIterator.java to m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\com\m3\lib\hdrhistogram\RecordedValuesIterator.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.HdrHistogram, newPackageName=com.m3.lib.hdrhistogram, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\org\HdrHistogram\Recorder.java to m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\com\m3\lib\hdrhistogram\Recorder.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.HdrHistogram, newPackageName=com.m3.lib.hdrhistogram, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\org\HdrHistogram\ShortCountsHistogram.java to m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\com\m3\lib\hdrhistogram\ShortCountsHistogram.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.HdrHistogram, newPackageName=com.m3.lib.hdrhistogram, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\org\HdrHistogram\SingleWriterDoubleRecorder.java to m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\com\m3\lib\hdrhistogram\SingleWriterDoubleRecorder.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.HdrHistogram, newPackageName=com.m3.lib.hdrhistogram, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\org\HdrHistogram\SingleWriterRecorder.java to m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\com\m3\lib\hdrhistogram\SingleWriterRecorder.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.HdrHistogram, newPackageName=com.m3.lib.hdrhistogram, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\org\HdrHistogram\SynchronizedDoubleHistogram.java to m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\com\m3\lib\hdrhistogram\SynchronizedDoubleHistogram.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.HdrHistogram, newPackageName=com.m3.lib.hdrhistogram, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\org\HdrHistogram\SynchronizedHistogram.java to m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\com\m3\lib\hdrhistogram\SynchronizedHistogram.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.HdrHistogram, newPackageName=com.m3.lib.hdrhistogram, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\org\HdrHistogram\ValueRecorder.java to m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\com\m3\lib\hdrhistogram\ValueRecorder.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.HdrHistogram, newPackageName=com.m3.lib.hdrhistogram, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\org\HdrHistogram\Version.java to m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\com\m3\lib\hdrhistogram\Version.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.HdrHistogram, newPackageName=com.m3.lib.hdrhistogram, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\org\HdrHistogram\WriterReaderPhaser.java to m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\com\m3\lib\hdrhistogram\WriterReaderPhaser.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.HdrHistogram, newPackageName=com.m3.lib.hdrhistogram, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\org\HdrHistogram\ZigZagEncoding.java to m3-scratch\lib-intake\batch\HdrHistogram\proj\src\main\java\com\m3\lib\hdrhistogram\ZigZagEncoding.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.HdrHistogram, newPackageName=com.m3.lib.hdrhistogram, recursive=false}
+[WARNING] Please review and commit the results.
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  10.552 s
+[INFO] Finished at: 2026-10-31T06:22:06+05:30
+[INFO] ------------------------------------------------------------------------

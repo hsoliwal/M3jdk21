@@ -1,0 +1,9 @@
+# SPDX-License-Identifier: Apache-2.0
+# Relocation map of recipe/csr-index-20261106/relocate.py (recipe RELOCATE_CSR_INDEX v1). Donor: hsoliwal/com.synexia develop 64652588f0d4c23b1f6e0411090b2a796325ae0e (CSR owner commit 8e2eb4d42bf 2026-11-04, oracle commit dde0ba6e4e5 2026-11-04).
+# FILE rows: donor path (donor repository root) -> target path (module root m3/arrays). PACKAGE rows: donor package -> target package. TYPE rows: donor type -> target type (M3 naming). EXTERNAL rows: third-party packages the donor imports, kept as they are (declared closure; none here: java.util only).
+kind	donor	target	note
+FILE	synexia-mat-value/src/main/java/com/synexia/matvalue/MatCsrIndex.java	src/main/java/jdk/m3/arrays/M3CsrIndex.java	immutable CSR relation row -> contiguous references: fromOwners (direct, no staging arrays), Builder (staged, kept as the independent oracle path); java.util.Arrays/Objects only
+FILE	synexia-mat-value/src/test/java/com/synexia/matvalue/MatCsrDirectContract.java	src/test/java/jdk/m3/arrays/M3CsrIndexContract.java	exact oracle main: invalid inputs, boundary rows 0..257, 1,600 seeded rounds (uniform/skewed/ordered owners), immutable concurrent readers; prints MAT_CSR_DIRECT_CHECKS=7329532 RESULT=PASS
+PACKAGE	com.synexia.matvalue	jdk.m3.arrays	the donor lived in the MAT value module; the receiver is the existing m3/arrays module (jdk.m3.arrays, exported by module jdk.m3.arrays)
+TYPE	MatCsrIndex	M3CsrIndex	Mat* -> M3* (type names M3*, plan row C:/m3-superset/conv/plans/collections-arrays.tsv rank 3)
+TYPE	MatCsrDirectContract	M3CsrIndexContract	oracle named after the owner it proves

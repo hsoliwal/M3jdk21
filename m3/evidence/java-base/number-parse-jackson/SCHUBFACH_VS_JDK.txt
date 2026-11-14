@@ -1,0 +1,3 @@
+seed 1 schubfach-vs-jdk samples=30000016 diffs=0
+seed 2 schubfach-vs-jdk samples=30000016 diffs=0
+seed 3 schubfach-vs-jdk samples=30000016 diffs=0

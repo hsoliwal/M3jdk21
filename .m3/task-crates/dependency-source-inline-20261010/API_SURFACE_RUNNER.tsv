@@ -1,0 +1,10 @@
+donor	published_classes	built_classes	identical_classes	missing_classes	built_only_classes	real_published_only_lines	real_built_only_lines	verdict	diff	compiler_artifact_lines	view	published_class_versions	built_class_versions	resources_published	resources_missing	resources_differ	resources_built_only
+annotations-24.1.0	59	59	59	0	0	0	0	IDENTICAL	annotations-24.1.0.base.tsv	0	base	{52=59}	{52=59}	0	0	0	2
+fastdoubleparser-1.0.0	42	41	41	0	0	0	0	EQUIVALENT_MODULO_COMPILER	fastdoubleparser-1.0.0.mr21.tsv	1	mr21	{52=39,55=1,65=2}	{65=41}	3	0	0	0
+jackson-annotations-2.16.1	72	71	71	0	0	0	0	EQUIVALENT_MODULO_COMPILER	jackson-annotations-2.16.1.base.tsv	1	base	{50=72}	{52=71}	2	0	0	0
+jackson-core-2.16.1	205	160	160	0	0	0	0	DIFFERS_RESOURCES	jackson-core-2.16.1.base.tsv	11	base	{52=205}	{65=160}	6	4	0	3
+jackson-databind-2.16.1	750	730	719	0	0	0	0	EQUIVALENT_MODULO_COMPILER	jackson-databind-2.16.1.base.tsv	34	base	{52=750}	{65=730}	3	0	0	1
+slf4j-api-1.7.36	32	35	32	0	3	0	0	DIFFERS_MEMBERS	slf4j-api-1.7.36.base.tsv	0	base	{49=32}	{52=35}	0	0	0	6
+slf4j-api-2.0.12	51	51	51	0	0	0	0	IDENTICAL	slf4j-api-2.0.12.base.tsv	0	base	{52=51}	{52=51}	1	0	0	3
+slf4j-api-2.0.9	48	48	48	0	0	0	0	IDENTICAL	slf4j-api-2.0.9.base.tsv	0	base	{52=48}	{52=48}	1	0	0	3
+slf4j-simple-2.0.13	6	6	6	0	0	0	0	IDENTICAL	slf4j-simple-2.0.13.base.tsv	0	base	{52=6}	{52=6}	2	0	0	0

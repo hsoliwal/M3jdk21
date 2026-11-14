@@ -1,0 +1,7 @@
+# SPDX-License-Identifier: Apache-2.0
+# RECIPE_MEMORY.tsv - append-only lesson memory of recipe trie-core-20261107 (INDEXSTRING_RELOCATE_IX1): one row per lesson.
+date	recipe	version	lesson	evidence
+2026-11-07	relocate.py	v1	re.search with a ^ anchor needs re.M; without it the package-site check refused a valid donor as drift	first run REFUSE MIndexTrieNavigation: rule site '^package ...' absent
+2026-11-07	relocate.py	v1	jdk.m3.collections.M3ProgressMonitor has no static noop(); the donor's IProgressMonitor.noop() becomes new M3DefaultProgressMonitor() (rules_v2.tsv row 3 of the m3/search leaves)	javac: cannot find symbol noop
+2026-11-07	gate.sh	v2	Windows javac reads @list files of S:/ paths, not MSYS /s/ paths; the work dir is converted with cygpath -m first	v1 run: javac rc=2 with 0 errors and ClassNotFoundException for every main
+2026-11-07	closure.py	v1	the word-break plan's closure through MIndexString is 356 classes (3.4 MB); MIndexTrieNavigation alone is 2 (with the edit-distance plan, mapped to the M3JDK owner), so the trie core lands first	closure.py src MIndexWordBreakPlan / MIndexTrieNavigation

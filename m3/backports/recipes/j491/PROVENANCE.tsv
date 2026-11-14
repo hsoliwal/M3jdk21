@@ -1,0 +1,11 @@
+kind	reference	use
+jep	JEP491 Synchronize Virtual Threads without Pinning	feature authority
+anchor	JDK-8338383@78b80150e009745b8f28d36c3836f18ad0ca921f	exact implementation patch
+parent	8a2a75e56de4497da48f43b3be3eb71bf3ef75ab	upstream patch preimage
+followup	JDK-8344247@f636674889f925d4feb9a8d2be811e66f9b3a0ac	monitor-state reconciliation
+followup	JDK-8346120@fbbc7c35f422294090b8c7a02a19ab2fb67c7070	JFR pin-event reconciliation
+followup	JDK-8345543@7a6ff9206a0a4d116dec542819d51daa558d200d	JVMTI StopThread reconciliation
+followup	JDK-8346792@b9b62a02488ee9c1a5a7a9ede87505781dfc0f73	JVMTI thread-state reconciliation
+followup	JDK-8349689@88b4a906d2c520ce6a7b21adc5e709067e520cdd	native-test metadata reconciliation
+substrate	generate_recipe_crates.py	retained snapshot generator;not misused for intervening-history patching
+substrate	commit_patch_atoms.py	exact parent-to-commit target-side patch candidates

@@ -1,0 +1,11 @@
+item	state	evidence	limit
+mapped-owner	IMPLEMENTED_LOCAL_PROVEN	after-test.log;after-interpreter.log	One existing java.base owner; full VM not rebuilt
+preimage	PINNED	INVENTORY.tsv;PROVENANCE.tsv	Exact existing owner/interface/test/workflow blobs
+baseline-defects	REPRODUCED	before-text.log;before-byte.log;before-fd.log	Two OOME paths plus failed-open descriptor leak
+strict-compilation	PASS	after-compile.log;test-compile.log	Both actual owners and both actual test sources
+API	UNCHANGED	before-api.txt;after-api.txt	Three public/protected descriptor surfaces compared
+runtime	PASS_78_EACH	after-test.log;after-interpreter.log	Assertion counts, not JUnit counts or coverage
+recipe	AUTHORED_NOT_RUN	MapGuardRecipeTest.java	Five real OpenRewrite/JUnit cases supplied
+coverage99	NOT_MEASURED	Original POMs unchanged	No gate changed or passing percentage inferred
+workflow	ADDITIVE_TEST_SELECTION	Existing mapped-backing workflow	No changed permissions/actions/build options
+product	NOT_COMPLETE	ACTION_QUEUE.tsv	Full JDK build/jtreg/native and broader tasks still require execution

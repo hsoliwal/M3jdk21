@@ -1,0 +1,21 @@
+stem	category	evidence
+M3FileCensus3Test	JUNIT_SUREFIRE	@Test=3 main=0
+M3FileRetainedContractsTest	JUNIT_SUREFIRE	@Test=2 main=0
+M3FileScopeTest	JUNIT_SUREFIRE	@Test=4 main=0
+M3GrammarTest	JUNIT_SUREFIRE	@Test=1 main=0
+M3PageableTreeDonorDifferentialTest	JUNIT_SUREFIRE	@Test=6 main=0
+M3FileEncodedEditsContract	MAIN_CALLED_BY_JUNIT	M3FileRetainedContractsTest.java:15 M3FileEncodedEditsContract.main; marker M3_FILE_ENCODED_EDITS_PASS in surefire log
+M3FileTextCoordinatesContract	MAIN_CALLED_BY_JUNIT	M3FileRetainedContractsTest.java:20 M3FileTextCoordinatesContract.main; marker M3_FILE_TEXT_COORDINATES_PASS
+M3GrammarContract	MAIN_CALLED_BY_JUNIT	M3GrammarTest.java:12 M3GrammarContract.main; marker M3_GRAMMAR_PASS
+InMemoryPageableTree	FIXTURE_NO_ENTRYPOINT	donor fixture, @Test=0 main=0 (pageable-tree-donor-verify-20261107/PROVENANCE.tsv)
+PageableTreePaths	FIXTURE_NO_ENTRYPOINT	donor fixture, @Test=0 main=0 (pageable-tree-donor-verify-20261107/PROVENANCE.tsv)
+PageableTreeSession	FIXTURE_NO_ENTRYPOINT	donor fixture, @Test=0 main=0 (pageable-tree-donor-verify-20261107/PROVENANCE.tsv)
+PageableTreeSource	FIXTURE_NO_ENTRYPOINT	donor fixture, @Test=0 main=0 (pageable-tree-donor-verify-20261107/PROVENANCE.tsv)
+PageableTreeWalker	FIXTURE_NO_ENTRYPOINT	donor fixture, @Test=0 main=0 (pageable-tree-donor-verify-20261107/PROVENANCE.tsv)
+StaleTreeCursorException	FIXTURE_NO_ENTRYPOINT	donor fixture, @Test=0 main=0 (pageable-tree-donor-verify-20261107/PROVENANCE.tsv)
+TreeCursor	FIXTURE_NO_ENTRYPOINT	donor fixture, @Test=0 main=0 (pageable-tree-donor-verify-20261107/PROVENANCE.tsv)
+TreeNode	FIXTURE_NO_ENTRYPOINT	donor fixture, @Test=0 main=0 (pageable-tree-donor-verify-20261107/PROVENANCE.tsv)
+TreePage	FIXTURE_NO_ENTRYPOINT	donor fixture, @Test=0 main=0 (pageable-tree-donor-verify-20261107/PROVENANCE.tsv)
+TreePageRequest	FIXTURE_NO_ENTRYPOINT	donor fixture, @Test=0 main=0 (pageable-tree-donor-verify-20261107/PROVENANCE.tsv)
+TreeProgressMonitor	FIXTURE_NO_ENTRYPOINT	donor fixture, @Test=0 main=0 (pageable-tree-donor-verify-20261107/PROVENANCE.tsv)
+VisibleTreeWindow	FIXTURE_NO_ENTRYPOINT	donor fixture, @Test=0 main=0 (pageable-tree-donor-verify-20261107/PROVENANCE.tsv)

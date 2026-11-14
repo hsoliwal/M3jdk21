@@ -1,0 +1,19 @@
+{
+  "repository": "hsoliwal/com.synexia",
+  "commit": "3713f70c1f97f1801da43e933296b48af55a7871",
+  "files": {
+    "synexia-indexstring/src/main/java/com/synexia/indexstring/FrozenChars.java": "88a85b35a7c5c6d84b23fa734254c11e4492ecf87ed0c93b6f730ddbec7d15ba",
+    "synexia-indexstring/src/main/java/com/synexia/indexstring/FrozenBytes.java": "db46ea5bd16183568d71552375f9ee61c29966902a14f5b15b70d8dd825fb17d",
+    "synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexJoinedChars.java": "d5b791084476b7283c21a1368a9c424afcb84ddb0fe0b6dcc39f1b9cd43ad9d4",
+    "synexia-indexstring/src/main/java/com/synexia/indexstring/FrozenByteInterner.java": "8f350411381abdf7069f8fab1ee239b4cfce05faa5d1f73204e98e377cad82ea",
+    "synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexJoinedStorageIntern.java": "f3b9336099b2e9d362ec75f24fbcdb544ee51443148bb136c16c8d38a8b6200a",
+    "synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexNativeJoinedChars.java": "7e490d86a10eb2a2a58f14ab2a5516acdcf44d429cb2dbfea97ba8025678e12b",
+    "synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexNativeJoinedBytes.java": "9d2e0e2867972a11ae8701f411fb81e0b8f03705b178d3731f8c150583da14bf",
+    "synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexString.java": "8746ba093df2180201afeb19534b71d549d8397b0a392f5236ae61a761404b31",
+    "synexia-indexstring-compiler/src/main/java/com/synexia/indexstring/compiler/MatIndexStringSafeLowerer.java": "999b4309b5e1badf54b37c1ead6102bfa5e3de9acbbc84057dfa216ce7736394",
+    "synexia-indexstring-compiler/src/main/java/com/synexia/indexstring/compiler/MatIndexStringLoweringPlan.java": "15eac76e7870677e12a74c74ed3b33d10adc283fd8ad975e4920720c92dad921",
+    "synexia-indexstring-compiler/src/main/java/com/synexia/indexstring/compiler/MatIndexStringLoweringExecutionVerifier.java": "251cf223f945145fc430b84a748fe1bafbbfe3f3c8549096df72fa62d7db2ad3"
+  },
+  "absent_prior_owner": "synexia-indexstring/src/main/java/com/synexia/indexstring/LocalM3StringPiece.java",
+  "tests_rerun": false
+}

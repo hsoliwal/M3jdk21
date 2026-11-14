@@ -1,0 +1,296 @@
+{
+  "schema": "m3-object-adapter-received-result/v1",
+  "product_baseline": "ce005d25b29fb6246e013bffb462afd5ed070362",
+  "api": "public <T> T java.lang.Object.toAdapter(Class<T> clazz)",
+  "recipe": "com.synexia.m3.ObjectAdapterContract20261102",
+  "recipe_repository": "https://github.com/hsoliwal/com.synexia",
+  "recipe_path": "synexia-openrewrite-recipes/recipe-crates/m3-object-adapter-contract-20261102",
+  "recipe_pr": "https://github.com/hsoliwal/com.synexia/pull/14941",
+  "recipe_commit": "99f4d878925dc887e07cb142e75bb767fa4c5c33",
+  "recipe_commit_note": "Published authoring commit integrated with live develop6f54420; fresh SDK qualification preserved exact generated Java/C bytes. All22 authoring files read back exactly.",
+  "sdk_result_receipt_sha256": "04d6d23e59a779fd6b1c48c028db817d9a1459832678386ef9b6e18b9ca133bb",
+  "execution_receipt_sha256": "5205e58effaf7c5714b098ad613f24c325b2d82210ddeb5c337a83a89454ae99",
+  "outputs": [
+    {
+      "path": "test/jdk/java/lang/Object/ObjectAdapterNativeTest.java",
+      "sha256": "8756fd3a5d071e6add12d9368b18c668e57badba734a4f8dab1223005f70e0d8",
+      "bytes": 21280
+    },
+    {
+      "path": "test/jdk/java/lang/Object/libObjectAdapterNativeTest.c",
+      "sha256": "d6e6f79621de06f1ef35e805af6c7ccd82692f8ec41899f6d3b51b55a0a9e21f",
+      "bytes": 5127
+    }
+  ],
+  "received_compilation_and_runtime": [
+    {
+      "name": "compile-java",
+      "argv": [
+        "/tmp/m3-source-build/images/jdk/bin/javac",
+        "-Xlint:all",
+        "-Werror",
+        "-h",
+        "/workspace/scratch/0027f9eece7a/evidence/received/headers",
+        "-d",
+        "/workspace/scratch/0027f9eece7a/evidence/received/classes",
+        "/workspace/scratch/0027f9eece7a/M3jdk21-work/test/jdk/java/lang/Object/ObjectAdapterNativeTest.java"
+      ],
+      "cwd": "/workspace/scratch/0027f9eece7a/M3jdk21-work",
+      "exit_code": 0,
+      "seconds": 1.729,
+      "log": "logs/compile-java.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_stderr": ""
+    },
+    {
+      "name": "compile-c",
+      "argv": [
+        "gcc",
+        "-std=c17",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-fPIC",
+        "-shared",
+        "-I/tmp/m3-source-build/images/jdk/include",
+        "-I/tmp/m3-source-build/images/jdk/include/linux",
+        "-I/workspace/scratch/0027f9eece7a/evidence/received/headers",
+        "-include",
+        "ObjectAdapterNativeTest.h",
+        "/workspace/scratch/0027f9eece7a/M3jdk21-work/test/jdk/java/lang/Object/libObjectAdapterNativeTest.c",
+        "-o",
+        "/workspace/scratch/0027f9eece7a/evidence/received/native/libObjectAdapterNativeTest.so"
+      ],
+      "cwd": "/workspace/scratch/0027f9eece7a/M3jdk21-work",
+      "exit_code": 0,
+      "seconds": 0.166,
+      "log": "logs/compile-c.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_stderr": ""
+    },
+    {
+      "name": "run-default-disabled",
+      "argv": [
+        "/tmp/m3-source-build/images/jdk/bin/java",
+        "-Xcheck:jni",
+        "-Djdk.m3.objectEvents.enabled=false",
+        "-Djava.library.path=/workspace/scratch/0027f9eece7a/evidence/received/native",
+        "-cp",
+        "/workspace/scratch/0027f9eece7a/evidence/received/classes",
+        "ObjectAdapterNativeTest",
+        "disabled"
+      ],
+      "cwd": "/workspace/scratch/0027f9eece7a/M3jdk21-work",
+      "exit_code": 0,
+      "seconds": 0.218,
+      "log": "logs/run-default-disabled.log",
+      "log_sha256": "cd509919523a8e4a346a3f192bbc64f4e5d0140b353e868a7f8044e3674b0822",
+      "stdout_stderr": "ObjectAdapterNativeTest passed: 666 assertions, 61440 repeated JNI calls, observation disabled\n"
+    },
+    {
+      "name": "run-default-enabled",
+      "argv": [
+        "/tmp/m3-source-build/images/jdk/bin/java",
+        "-Xcheck:jni",
+        "-Djdk.m3.objectEvents.enabled=true",
+        "-Djava.library.path=/workspace/scratch/0027f9eece7a/evidence/received/native",
+        "-cp",
+        "/workspace/scratch/0027f9eece7a/evidence/received/classes",
+        "ObjectAdapterNativeTest",
+        "enabled"
+      ],
+      "cwd": "/workspace/scratch/0027f9eece7a/M3jdk21-work",
+      "exit_code": 0,
+      "seconds": 0.215,
+      "log": "logs/run-default-enabled.log",
+      "log_sha256": "06438fdc7600a93d65d0f3549e7534bcfd8c987c132d98d67b05f2e1f6e28e51",
+      "stdout_stderr": "ObjectAdapterNativeTest passed: 666 assertions, 61440 repeated JNI calls, observation enabled\n"
+    },
+    {
+      "name": "run-xint-disabled",
+      "argv": [
+        "/tmp/m3-source-build/images/jdk/bin/java",
+        "-Xcheck:jni",
+        "-Xint",
+        "-Djdk.m3.objectEvents.enabled=false",
+        "-Djava.library.path=/workspace/scratch/0027f9eece7a/evidence/received/native",
+        "-cp",
+        "/workspace/scratch/0027f9eece7a/evidence/received/classes",
+        "ObjectAdapterNativeTest",
+        "disabled"
+      ],
+      "cwd": "/workspace/scratch/0027f9eece7a/M3jdk21-work",
+      "exit_code": 0,
+      "seconds": 0.265,
+      "log": "logs/run-xint-disabled.log",
+      "log_sha256": "cd509919523a8e4a346a3f192bbc64f4e5d0140b353e868a7f8044e3674b0822",
+      "stdout_stderr": "ObjectAdapterNativeTest passed: 666 assertions, 61440 repeated JNI calls, observation disabled\n"
+    },
+    {
+      "name": "run-xint-enabled",
+      "argv": [
+        "/tmp/m3-source-build/images/jdk/bin/java",
+        "-Xcheck:jni",
+        "-Xint",
+        "-Djdk.m3.objectEvents.enabled=true",
+        "-Djava.library.path=/workspace/scratch/0027f9eece7a/evidence/received/native",
+        "-cp",
+        "/workspace/scratch/0027f9eece7a/evidence/received/classes",
+        "ObjectAdapterNativeTest",
+        "enabled"
+      ],
+      "cwd": "/workspace/scratch/0027f9eece7a/M3jdk21-work",
+      "exit_code": 0,
+      "seconds": 0.266,
+      "log": "logs/run-xint-enabled.log",
+      "log_sha256": "06438fdc7600a93d65d0f3549e7534bcfd8c987c132d98d67b05f2e1f6e28e51",
+      "stdout_stderr": "ObjectAdapterNativeTest passed: 666 assertions, 61440 repeated JNI calls, observation enabled\n"
+    },
+    {
+      "name": "run-xcomp-disabled",
+      "argv": [
+        "/tmp/m3-source-build/images/jdk/bin/java",
+        "-Xcheck:jni",
+        "-Xcomp",
+        "-Xbatch",
+        "-XX:-TieredCompilation",
+        "-Djdk.m3.objectEvents.enabled=false",
+        "-Djava.library.path=/workspace/scratch/0027f9eece7a/evidence/received/native",
+        "-cp",
+        "/workspace/scratch/0027f9eece7a/evidence/received/classes",
+        "ObjectAdapterNativeTest",
+        "disabled"
+      ],
+      "cwd": "/workspace/scratch/0027f9eece7a/M3jdk21-work",
+      "exit_code": 0,
+      "seconds": 9.029,
+      "log": "logs/run-xcomp-disabled.log",
+      "log_sha256": "cd509919523a8e4a346a3f192bbc64f4e5d0140b353e868a7f8044e3674b0822",
+      "stdout_stderr": "ObjectAdapterNativeTest passed: 666 assertions, 61440 repeated JNI calls, observation disabled\n"
+    },
+    {
+      "name": "run-xcomp-enabled",
+      "argv": [
+        "/tmp/m3-source-build/images/jdk/bin/java",
+        "-Xcheck:jni",
+        "-Xcomp",
+        "-Xbatch",
+        "-XX:-TieredCompilation",
+        "-Djdk.m3.objectEvents.enabled=true",
+        "-Djava.library.path=/workspace/scratch/0027f9eece7a/evidence/received/native",
+        "-cp",
+        "/workspace/scratch/0027f9eece7a/evidence/received/classes",
+        "ObjectAdapterNativeTest",
+        "enabled"
+      ],
+      "cwd": "/workspace/scratch/0027f9eece7a/M3jdk21-work",
+      "exit_code": 0,
+      "seconds": 10.24,
+      "log": "logs/run-xcomp-enabled.log",
+      "log_sha256": "06438fdc7600a93d65d0f3549e7534bcfd8c987c132d98d67b05f2e1f6e28e51",
+      "stdout_stderr": "ObjectAdapterNativeTest passed: 666 assertions, 61440 repeated JNI calls, observation enabled\n"
+    }
+  ],
+  "runtime_totals": {
+    "modes": 6,
+    "assertions_per_mode": 666,
+    "repeated_jni_calls_per_mode": 61440,
+    "assertions": 3996,
+    "repeated_jni_calls": 368640
+  },
+  "baseline_stages": [
+    {
+      "stage": "compile-existing-object-tests",
+      "exit_code": 0,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "stage": "compile-unchanged-progress-with-existing-warning",
+      "exit_code": 0,
+      "log_sha256": "c0486e51fe85c28461f4b67a400f82d6f01a4758c39f8ef33778a22a06e4ec30"
+    },
+    {
+      "stage": "compile-existing-native",
+      "exit_code": 0,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "stage": "existing-adapter-default",
+      "exit_code": 0,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "stage": "existing-adapter-interpreted",
+      "exit_code": 0,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "stage": "existing-progress",
+      "exit_code": 0,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "stage": "existing-object-disabled",
+      "exit_code": 0,
+      "log_sha256": "b97c9cf5af54dee326e36936bd8e83b65098432b6af95847f3b485c41d78861e"
+    },
+    {
+      "stage": "existing-native-disabled",
+      "exit_code": 0,
+      "log_sha256": "34fc0db5a53565f2827b139f020b1e7369e4aec3f78dfb4a668e4b71f06c4c94"
+    },
+    {
+      "stage": "existing-object-enabled",
+      "exit_code": 0,
+      "log_sha256": "847dd8910bf05a3b5a7e9c74245eb53c97c8c5a9edd2f0597dc084d58df77567"
+    },
+    {
+      "stage": "existing-native-enabled",
+      "exit_code": 0,
+      "log_sha256": "b111d8879492aa5d45e006db81c9dc1d93964a0c4b36565b79618fe7a399eb05"
+    }
+  ],
+  "baseline_lint_note": "Existing M3AdapterProgress has an unused-resource try lint warning. It was compiled unchanged with lint enabled without Werror, then its runtime passed; all other selected baseline Java and C compilation used warnings as errors.",
+  "negative_dispatch_check": {
+    "observed_exit_code": 1,
+    "assertion": "CALL_OBJECT virtual override"
+  },
+  "recipe_qualification": {
+    "tests": 1,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "postimage_target_root": true,
+    "engine_source_revision": "6f54420f3d716f6ec3ba480fb45514833a73128a"
+  },
+  "source_identity": "SOURCE_IMAGE_IDENTITY.json",
+  "repository_naming_gate": {
+    "command": [
+      "python3",
+      "m3/tooling/name-contract/check.py"
+    ],
+    "cwd": "/workspace/scratch/0027f9eece7a/M3jdk21-work",
+    "exit_code": 2,
+    "stdout_stderr": "M3JDK21_NAME_RECEIVER_REFUSED: companion relation source hash drift: src/java.base/share/classes/java/util/Arrays.java (sha256)\n",
+    "refused_owner": "src/java.base/share/classes/java/util/Arrays.java",
+    "owner_equals_committed_HEAD": true,
+    "owner_sha256": "0ba39f0b1a0be0c1e8040f778253ea41b5342f34b39786be64988f8b31d12c73",
+    "disposition": "Existing companion-map source seal differs from the unchanged committed Arrays.java. No map or runtime source changes were made for this test-only change."
+  },
+  "unrun": [
+    "jtreg harness",
+    "new full JDK build",
+    "Windows/macOS",
+    "full repository/release qualification",
+    "installed libjava notification export qualification",
+    "performance benchmark"
+  ],
+  "runtime_source_changes": 0,
+  "scope_note": "Existing image; pertinent source/blob readback and image hashes, not a new reproducible full-source build",
+  "public_name_path_correction": {
+    "initial_run": "https://github.com/hsoliwal/M3jdk21/actions/runs/41398824081",
+    "initial_failure": "Four new dated compatibility receipt paths violate stable public naming.",
+    "resolved_path": "m3/qualification/object-adapter",
+    "test_source_changes": 0
+  }
+}

@@ -1,0 +1,198 @@
+package @WPKG@.adapter;
+
+import java.awt.Component;
+import java.awt.Rectangle;
+
+import javax.swing.JComboBox;
+import javax.swing.JComponent;
+import javax.swing.JList;
+import javax.swing.JProgressBar;
+import javax.swing.JScrollBar;
+import javax.swing.JScrollPane;
+import javax.swing.JSlider;
+import javax.swing.JSpinner;
+import javax.swing.JTabbedPane;
+import javax.swing.JTable;
+import javax.swing.JTree;
+import javax.swing.SpinnerNumberModel;
+import javax.swing.text.JTextComponent;
+
+/**
+ * The closed set of Swing measure kinds (pattern M3P-ADAPTER-1, spec/ADAPTER_KINDS.tsv), same contract as the SWT
+ * kinds: row kinds read counts, row heights and the first row of the visible rect; bounded kinds (children, tabs)
+ * read component or tab bounds; SURFACE and PLANE are one item covering the host. No kind creates cell objects.
+ */
+//FLLDCIM: DOOP — int answers from the component's own model and geometry; no per-row objects
+public enum M3ViewportKind implements M3ViewportMeasure {
+	/** JTable rows. */
+	TABLE(false) {
+		@Override public int count(Object w, JComponent h) { return ((JTable) h).getRowCount(); }
+		@Override public int extent(Object w, JComponent h) { return Math.max(1, ((JTable) h).getRowHeight()); }
+		@Override public int first(Object w, JComponent h) { return Math.max(0, ((JTable) h).rowAtPoint(h.getVisibleRect().getLocation())); }
+	},
+	/** JTree rows (expanded view rows). */
+	TREE(false) {
+		@Override public int count(Object w, JComponent h) { return ((JTree) h).getRowCount(); }
+		@Override public int extent(Object w, JComponent h) { Rectangle r = ((JTree) h).getRowBounds(0); return Math.max(1, r == null ? ((JTree) h).getRowHeight() : r.height); }
+		@Override public int first(Object w, JComponent h) { return Math.max(0, ((JTree) h).getClosestRowForLocation(0, h.getVisibleRect().y)); }
+	},
+	/** JList rows (also a JList over an M3VirtualListModel). */
+	LIST(false) {
+		@Override public int count(Object w, JComponent h) { return ((JList<?>) h).getModel().getSize(); }
+		@Override public int extent(Object w, JComponent h) { Rectangle r = ((JList<?>) h).getCellBounds(0, 0); return Math.max(1, r == null ? 1 : r.height); }
+		@Override public int first(Object w, JComponent h) { return Math.max(0, ((JList<?>) h).locationToIndex(h.getVisibleRect().getLocation())); }
+	},
+	/** Text lines of a JTextComponent. */
+	TEXT(false) {
+		@Override public int count(Object w, JComponent h) { return ((JTextComponent) h).getDocument().getDefaultRootElement().getElementCount(); }
+		@Override public int extent(Object w, JComponent h) { return Math.max(1, h.getFontMetrics(h.getFont()).getHeight()); }
+		@Override public int first(Object w, JComponent h) { return Math.min(count(w, h) - 1, h.getVisibleRect().y / extent(w, h)); }
+	},
+	/** Vertical scroll bar units of a JScrollPane: the unit extent is the viewport over the visible amount. */
+	SCROLL(false) {
+		@Override public int count(Object w, JComponent h) { JScrollBar b = bar(h); return b.getMaximum() - b.getMinimum(); }
+		@Override public int extent(Object w, JComponent h) { return Math.max(1, h.getHeight() / Math.max(1, bar(h).getVisibleAmount())); }
+		@Override public int first(Object w, JComponent h) { JScrollBar b = bar(h); return b.getValue() - b.getMinimum(); }
+	},
+	/** JComboBox drop-down rows; an item redraw damages the field. */
+	COMBO(false) {
+		@Override public int count(Object w, JComponent h) { return ((JComboBox<?>) h).getItemCount(); }
+		@Override public int extent(Object w, JComponent h) { return Math.max(1, h.getFontMetrics(h.getFont()).getHeight() + 4); }
+		@Override public int first(Object w, JComponent h) { return 0; }
+		@Override public int viewport(Object w, JComponent h) { return ((JComboBox<?>) h).getMaximumRowCount() * extent(w, h); }
+		@Override public void rect(Object w, JComponent h, int item, int[] out) { SURFACE.rect(w, h, item >= 0 && item < count(w, h) ? 0 : 1, out); }
+	},
+	/** Value positions of JSlider, JProgressBar and a number JSpinner; an item redraw damages the surface. */
+	RANGE(false) {
+		@Override public int count(Object w, JComponent h) { int[] r = range(h); return r[1] - r[0] + 1; }
+		@Override public int extent(Object w, JComponent h) { return Math.max(1, h.getWidth() / Math.max(1, count(w, h))); }
+		@Override public int first(Object w, JComponent h) { int[] r = range(h); return r[2] - r[0]; }
+		@Override public int visible(Object w, JComponent h) { return Math.min(1, count(w, h)); }
+		@Override public int viewport(Object w, JComponent h) { return h.getWidth(); }
+		@Override public void rect(Object w, JComponent h, int item, int[] out) { SURFACE.rect(w, h, item >= 0 && item < count(w, h) ? 0 : 1, out); }
+	},
+	/** Tab headers of a JTabbedPane. */
+	TABS(true) {
+		@Override public int count(Object w, JComponent h) { return ((JTabbedPane) h).getTabCount(); }
+		@Override Rectangle bounds(Object w, JComponent h, int i) { Rectangle r = ((JTabbedPane) h).getBoundsAt(i); return r == null ? new Rectangle() : r; }
+	},
+	/** Child components of a container (panels, tool bars, split panes, pop-up menus, focus cycles, layouts). */
+	CHILDREN(true) {
+		@Override public int count(Object w, JComponent h) { return h.getComponentCount(); }
+		@Override Rectangle bounds(Object w, JComponent h, int i) { Component c = h.getComponent(i); return c.getBounds(); }
+	},
+	/** One surface: the host's bounds at the origin. */
+	SURFACE(false),
+	/** One plane over the host (root pane of a dialog, UI defaults, tray status). */
+	PLANE(false);
+
+	private final boolean bounded;
+
+	M3ViewportKind(boolean bounded) {
+		this.bounded = bounded;
+	}
+
+	/** Item count of the one-item kinds. */
+	@Override
+	public int count(Object w, JComponent h) {
+		return 1;
+	}
+
+	/** Row kinds override; bounded kinds average their item extents; one-item kinds span the viewport. */
+	@Override
+	public int extent(Object w, JComponent h) {
+		int n = count(w, h);
+		if (!bounded || n == 0) {
+			return Math.max(1, viewport(w, h));
+		}
+		long sum = 0;
+		for (int i = 0; i < n; i++) {
+			sum += axis(bounds(w, h, i));
+		}
+		return (int) Math.max(1, sum / n);
+	}
+
+	@Override
+	public int first(Object w, JComponent h) {
+		for (int i = 0, n = bounded ? count(w, h) : 0; i < n; i++) {
+			if (shown(h, bounds(w, h, i))) {
+				return i;
+			}
+		}
+		return 0;
+	}
+
+	@Override
+	public int visible(Object w, JComponent h) {
+		if (bounded) {
+			int v = 0;
+			for (int i = first(w, h), n = count(w, h); i < n && shown(h, bounds(w, h, i)); i++) {
+				v++;
+			}
+			return v;
+		}
+		int e = extent(w, h), n = count(w, h) - first(w, h);
+		return Math.max(0, Math.min(n, (viewport(w, h) + e - 1) / e));
+	}
+
+	@Override
+	public int viewport(Object w, JComponent h) {
+		Rectangle vr = h.getVisibleRect();
+		return Math.max(0, bounded && horizontal() ? vr.width : vr.height);
+	}
+
+	@Override
+	public void rect(Object w, JComponent h, int item, int[] out) {
+		Rectangle vr = h.getVisibleRect();
+		if (bounded || count(w, h) == 1) {
+			Rectangle b = item < 0 || item >= count(w, h) ? new Rectangle() : bounded ? bounds(w, h, item) : new Rectangle(0, 0, h.getWidth(), h.getHeight());
+			box(out, b.x, b.y, b.width, b.height);
+			return;
+		}
+		int f = first(w, h), e = extent(w, h);
+		boolean shown = item >= f && item < f + visible(w, h);
+		box(out, 0, shown ? vr.y + (item - f) * e : 0, shown ? h.getWidth() : 0, shown ? e : 0);
+	}
+
+	/** Item bounds of the bounded kinds. */
+	Rectangle bounds(Object w, JComponent h, int i) {
+		throw new UnsupportedOperationException(name());
+	}
+
+	/** Tabs lay their headers along x (top placement); child lists follow y. */
+	boolean horizontal() {
+		return this == TABS;
+	}
+
+	private int axis(Rectangle b) {
+		return horizontal() ? b.width : b.height;
+	}
+
+	private static boolean shown(JComponent h, Rectangle b) {
+		return b.width > 0 && b.height > 0 && b.intersects(h.getVisibleRect());
+	}
+
+	private static void box(int[] out, int x, int y, int w, int h) {
+		out[0] = x;
+		out[1] = y;
+		out[2] = w;
+		out[3] = h;
+	}
+
+	/** The vertical bar of a scroll pane host, else null. */
+	static JScrollBar bar(JComponent h) {
+		return h instanceof JScrollPane s ? s.getVerticalScrollBar() : null;
+	}
+
+	/** {minimum, maximum, value} of the value components. */
+	static int[] range(JComponent h) {
+		if (h instanceof JSlider s) {
+			return new int[] { s.getMinimum(), s.getMaximum(), s.getValue() };
+		} else if (h instanceof JProgressBar p) {
+			return new int[] { p.getMinimum(), p.getMaximum(), p.getValue() };
+		}
+		SpinnerNumberModel m = (SpinnerNumberModel) ((JSpinner) h).getModel();
+		int lo = ((Number) m.getMinimum()).intValue();
+		return new int[] { lo, ((Number) m.getMaximum()).intValue(), m.getNumber().intValue() };
+	}
+}

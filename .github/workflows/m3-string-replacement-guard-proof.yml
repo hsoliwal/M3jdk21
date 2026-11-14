@@ -1,0 +1,102 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright 2026 Hitesh Soliwal and contributors
+name: M3 String replacement guard proof
+on:
+  push:
+    branches: ['m3/string-replacement-guard-20261012']
+    paths:
+      - '.github/workflows/m3-string-replacement-guard-proof.yml'
+      - 'm3/runtime-integration/**'
+      - 'm3/vendor/m3/m3-openrewrite-recipes/**'
+      - 'src/java.base/share/classes/java/lang/String.java'
+      - '.github/workflows/mindex-string-backing.yml'
+      - 'm3/docs/m3-mindex-precompute-inventory.tsv'
+      - 'm3/docs/m3-runtime-invariants.tsv'
+      - 'm3/docs/m3-string-precompute-port-map.tsv'
+      - 'm3/docs/m3-string-recipe-authority.tsv'
+      - 'm3/docs/name-mapping.json'
+      - 'm3/docs/string-precompute-completeness.tsv'
+      - 'm3/history/licenses/**'
+      - 'm3/history/string-literal-replacement-lineage.tsv'
+      - 'm3/history/string-literal-replacement-notice.md'
+      - 'src/hotspot/share/cds/archiveHeapWriter.cpp'
+      - 'src/hotspot/share/classfile/javaClasses.inline.hpp'
+      - 'src/hotspot/share/classfile/stringTable.cpp'
+      - 'src/hotspot/share/classfile/vmClassMacros.hpp'
+      - 'src/hotspot/share/classfile/vmSymbols.hpp'
+      - 'src/hotspot/share/gc/shared/stringdedup/stringDedupTable.cpp'
+      - 'src/hotspot/share/opto/stringopts.cpp'
+      - 'src/java.base/share/classes/java/lang/AbstractStringBuilder.java'
+      - 'src/java.base/share/classes/java/lang/M3FrozenLexiconIndex.java'
+      - 'src/java.base/share/classes/java/lang/M3String*.java'
+      - 'src/java.base/share/classes/java/util/regex/**'
+      - 'src/java.base/share/classes/jdk/internal/mindex/**'
+      - 'src/java.base/share/native/libjava/String.c'
+      - 'test/jdk/java/lang/String/M3StringRegexReplacementTest.java'
+  pull_request:
+    paths:
+      - '.github/workflows/m3-string-replacement-guard-proof.yml'
+      - 'm3/runtime-integration/**'
+      - 'm3/vendor/m3/m3-openrewrite-recipes/**'
+      - 'src/java.base/share/classes/java/lang/String.java'
+      - '.github/workflows/mindex-string-backing.yml'
+      - 'm3/docs/m3-mindex-precompute-inventory.tsv'
+      - 'm3/docs/m3-runtime-invariants.tsv'
+      - 'm3/docs/m3-string-precompute-port-map.tsv'
+      - 'm3/docs/m3-string-recipe-authority.tsv'
+      - 'm3/docs/name-mapping.json'
+      - 'm3/docs/string-precompute-completeness.tsv'
+      - 'm3/history/licenses/**'
+      - 'm3/history/string-literal-replacement-lineage.tsv'
+      - 'm3/history/string-literal-replacement-notice.md'
+      - 'src/hotspot/share/cds/archiveHeapWriter.cpp'
+      - 'src/hotspot/share/classfile/javaClasses.inline.hpp'
+      - 'src/hotspot/share/classfile/stringTable.cpp'
+      - 'src/hotspot/share/classfile/vmClassMacros.hpp'
+      - 'src/hotspot/share/classfile/vmSymbols.hpp'
+      - 'src/hotspot/share/gc/shared/stringdedup/stringDedupTable.cpp'
+      - 'src/hotspot/share/opto/stringopts.cpp'
+      - 'src/java.base/share/classes/java/lang/AbstractStringBuilder.java'
+      - 'src/java.base/share/classes/java/lang/M3FrozenLexiconIndex.java'
+      - 'src/java.base/share/classes/java/lang/M3String*.java'
+      - 'src/java.base/share/classes/java/util/regex/**'
+      - 'src/java.base/share/classes/jdk/internal/mindex/**'
+      - 'src/java.base/share/native/libjava/String.c'
+      - 'test/jdk/java/lang/String/M3StringRegexReplacementTest.java'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  route-regressions:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install pinned workflow parser
+        run: python3 -m pip install --disable-pip-version-check --no-input PyYAML==6.0.3
+      - name: Verify retained historical custody without recipe execution
+        run: sha256sum -c m3/runtime-integration/string-replacement-guard-sha256.txt
+      - name: Verify executed target source and test custody
+        run: sha256sum --strict -c m3/runtime-integration/string-replacement-target-sha256.txt
+      - name: Run target-owned pool, cursor and workflow contracts
+        run: |
+          python3 m3/runtime-integration/test_string_pool_precompute.py
+          python3 m3/runtime-integration/test_string_cursor_and_ingress.py
+          python3 m3/runtime-integration/test_string_workflow_contract.py
+      - name: Run replacement route mutation tests on exact String source
+        run: python3 m3/runtime-integration/test_string_replacement_routes.py
+      - name: Run complete M3 String source invariants without bypass
+        run: python3 m3/runtime-integration/check-m3string-invariants.py

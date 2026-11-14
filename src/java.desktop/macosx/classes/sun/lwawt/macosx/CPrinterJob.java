@@ -45,6 +45,7 @@ import javax.print.attribute.standard.MediaPrintableArea;
 import javax.print.attribute.standard.MediaSize;
 import javax.print.attribute.standard.MediaSizeName;
 import javax.print.attribute.standard.PageRanges;
+import javax.print.attribute.standard.Sides;
 import javax.print.attribute.Attribute;
 
 import sun.java2d.*;
@@ -305,20 +306,9 @@ public final class CPrinterJob extends RasterPrinterJob {
             validateDestination(destinationAttr);
         }
 
-        /* Get the range of pages we are to print. If the
-         * last page to print is unknown, then we print to
-         * the end of the document. Note that firstPage
-         * and lastPage are 0 based page indices.
-         */
-
+        // Note that firstPage is 0 based page index.
         int firstPage = getFirstPage();
-        int lastPage = getLastPage();
-        if(lastPage == Pageable.UNKNOWN_NUMBER_OF_PAGES) {
-            int totalPages = mDocument.getNumberOfPages();
-            if (totalPages != Pageable.UNKNOWN_NUMBER_OF_PAGES) {
-                lastPage = mDocument.getNumberOfPages() - 1;
-            }
-        }
+        int totalPages = mDocument.getNumberOfPages();
 
         try {
             synchronized (this) {
@@ -350,7 +340,7 @@ public final class CPrinterJob extends RasterPrinterJob {
                     try {
                         // Fire off the print rendering loop on the AppKit thread, and don't have
                         //  it wait and block this thread.
-                        if (printLoop(false, firstPage, lastPage)) {
+                        if (printLoop(false, firstPage, totalPages)) {
                             // Start a secondary loop on EDT until printing operation is finished or cancelled
                             printingLoop.enter();
                         }
@@ -364,14 +354,13 @@ public final class CPrinterJob extends RasterPrinterJob {
                     onEventThread = false;
 
                     try {
-                        printLoop(true, firstPage, lastPage);
+                        printLoop(true, firstPage, totalPages);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
                 }
                 if (++loopi < prMembers.length) {
                      firstPage = prMembers[loopi][0]-1;
-                     lastPage = prMembers[loopi][1] -1;
                 }
             }  while (loopi < prMembers.length);
         } finally {
@@ -621,7 +610,7 @@ public final class CPrinterJob extends RasterPrinterJob {
         }
     }
 
-    private native boolean printLoop(boolean waitUntilDone, int firstPage, int lastPage) throws PrinterException;
+    private native boolean printLoop(boolean waitUntilDone, int firstPage, int totalPages) throws PrinterException;
 
     private PageFormat getPageFormat(int pageIndex) {
         // This is called from the native side.
@@ -682,6 +671,24 @@ public final class CPrinterJob extends RasterPrinterJob {
                     page.getImageableWidth(),
                     page.getImageableHeight());
         return pageFormatArea;
+    }
+
+    private int getSides() {
+        return (this.sidesAttr == null) ? -1 : this.sidesAttr.getValue();
+    }
+
+    private void setSides(int sides) {
+        if (attributes == null) {
+            return;
+        }
+
+        final Sides[] sidesTable = new Sides[] {Sides.ONE_SIDED, Sides.TWO_SIDED_LONG_EDGE, Sides.TWO_SIDED_SHORT_EDGE};
+
+        if (sides >= 0 && sides < sidesTable.length) {
+            Sides s = sidesTable[sides];
+            attributes.add(s);
+            this.sidesAttr = s;
+        }
     }
 
     private boolean cancelCheck() {

@@ -1,0 +1,5 @@
+packet_id	atom_id	scope	scope_promotion_approved	work_ref	depends_on
+jep-523-g1-default	gc-config-default-policy	FILE	false	openrewrite:M3Jep523BackportRecipe#text	
+jep-523-g1-default	default-gc-jtreg	FILE	false	openrewrite:M3Jep523BackportRecipe#java	
+jep-523-g1-default	hotspot-gc-default-join	MODULE	true	composition:jep523	gc-config-default-policy,default-gc-jtreg
+jep-523-g1-default	focused-verification	MODULE	false	verify:hotspot-build-jtreg-fallback	hotspot-gc-default-join

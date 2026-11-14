@@ -1,0 +1,46 @@
+<!-- SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project -->
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+
+# Borrowed source and notices
+
+This SDK directly imports these existing Synexia files verbatim:
+
+- M3GpuToolJoinRecipe.java, Git blob 2ec479b8609459a28fdfd8a7a7d63cc44e919f00.
+- M3GpuToolJoinManifest.java, Git blob 78d5fb68f13872164973a8918cc7886c5f548bca.
+- pom.xml, Git blob 059259ca746466389cccac4094c3d664b0d79e6d.
+
+They retain their Apache-2.0 SPDX notices and Maven coordinates. They are reused
+through current StateRelation SDK tree a52ab91c9d023e9bc30bb2396e7599a305caf5e8;
+no new rewrite engine, manifest parser or native harness is introduced.
+
+The five authentic receiver source bodies pinned in ADMISSION.json remain the
+complete before fixtures. Four complete out fixtures remain identical. The
+only changed out fixture, M3StateRelation.c, preserves all original copyright,
+Apache-2.0 and M3 adaptation notices. The original C is also retained as the
+complete inverse payload. Historical C Git blob
+e6a10286f64052cb948de1dbcc43aaaa1d33db1e is unchanged and remains a non-target
+refusal fixture.
+
+The sparse-bit atom is adapted from owned Java MIndexStateRelation.applyRowsUntil,
+Git blob bc5eb2bf64eaacb85011c50749f8b02b7608f4f4 at Synexia commit
+21292109b474dde0ef66ce1b33ab1c8b54eb6324, Apache-2.0. The fixed64 compiler builtin
+is used through its API; no GCC/Clang source, CRoaring helper/header, mimalloc
+code, LeetCode, HackerRank or GeeksforGeeks implementation is copied. Donor
+inventory bb4958be148665085f5bb923e56d7d6bccb8b141 and pre-code admission
+5d2d2c39120c7a779e2beb06f0af19cb7364e253 record the accepted and rejected fits.
+
+The JUnit and counter/XML/physical-closure verifier adapt the existing
+StateRelation source-custody test 2ed4da274c8cdbf10da9140f3ff4fffd3f7d1d73 and
+verifier c176eaf274572385d286ad4bed014c1c9b4d1257, Apache-2.0. Their provenance
+includes prior lexical and text-metadata custody SDKs; the two original provider
+files and Maven POM remain byte-for-byte unchanged.
+
+No new third-party implementation or dependency is introduced. Retaining the
+owned component license does not establish compatibility of every possible
+whole-JDK distribution. License text: https://www.apache.org/licenses/LICENSE-2.0
+
+Adaptive successor authoring reuses those same owned atoms and providers under
+pre-code admission 16fe92372d86a157094ba973bbd8f347c1a6707e. The rejected default C
+03a2273ec4a8521c78bfb746aed71a873d65182e is retained verbatim in rejected/M3StateRelation.c.txt
+as a non-target regression fixture, with its original Apache-2.0 notices. No
+additional implementation donor, dependency or license grant is introduced.

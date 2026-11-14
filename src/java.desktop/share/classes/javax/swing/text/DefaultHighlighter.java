@@ -605,7 +605,9 @@ public class DefaultHighlighter extends LayeredHighlighter {
         public synchronized void run() {
             if (component != null) {
                 TextUI mapper = component.getUI();
-                if (mapper != null && lastDoc == component.getDocument()) {
+                // nobody sees the component: no modelToView and repaint per range; showing it repaints it whole //FLLDCIM: MARK — every-widget DefaultHighlighter H
+                if (mapper != null && lastDoc == component.getDocument()
+                        && !isHidden(component)) {
                     // the Document should be the same to properly
                     // display highlights
                     int len = p0.size();
@@ -621,6 +623,19 @@ public class DefaultHighlighter extends LayeredHighlighter {
 
             // release reference
             lastDoc = null;
+        }
+
+        /**
+         * Returns true when the component is not showing or its frame is
+         * iconified (an iconified frame is still showing).
+         */
+        private static boolean isHidden(JTextComponent c) {
+            if (!c.isShowing()) {
+                return true;
+            }
+            Window window = SwingUtilities.getWindowAncestor(c);
+            return window instanceof Frame frame
+                    && (frame.getExtendedState() & Frame.ICONIFIED) != 0;
         }
 
         /**

@@ -1,0 +1,51 @@
+// NOTICE: declaration generated from the published META-INF/versions/9/module-info.class (class version 53); the published sources jar
+// carries no module-info.java (upstream generates the descriptor in its build). No other content.
+module org.apache.commons.compress {
+    requires static dec;
+    requires java.logging;
+    requires org.apache.commons.lang3;
+    requires static org.tukaani.xz;
+    requires static com.github.luben.zstd_jni;
+    requires java.desktop;
+    requires org.apache.commons.codec;
+    requires org.apache.commons.io;
+    requires static org.objectweb.asm;
+    exports org.apache.commons.compress;
+    exports org.apache.commons.compress.archivers;
+    exports org.apache.commons.compress.archivers.ar;
+    exports org.apache.commons.compress.archivers.arj;
+    exports org.apache.commons.compress.archivers.cpio;
+    exports org.apache.commons.compress.archivers.dump;
+    exports org.apache.commons.compress.archivers.examples;
+    exports org.apache.commons.compress.archivers.jar;
+    exports org.apache.commons.compress.archivers.sevenz;
+    exports org.apache.commons.compress.archivers.tar;
+    exports org.apache.commons.compress.archivers.zip;
+    exports org.apache.commons.compress.changes;
+    exports org.apache.commons.compress.compressors;
+    exports org.apache.commons.compress.compressors.brotli;
+    exports org.apache.commons.compress.compressors.bzip2;
+    exports org.apache.commons.compress.compressors.deflate;
+    exports org.apache.commons.compress.compressors.deflate64;
+    exports org.apache.commons.compress.compressors.gzip;
+    exports org.apache.commons.compress.compressors.lz4;
+    exports org.apache.commons.compress.compressors.lz77support;
+    exports org.apache.commons.compress.compressors.lzma;
+    exports org.apache.commons.compress.compressors.lzw;
+    exports org.apache.commons.compress.compressors.pack200;
+    exports org.apache.commons.compress.compressors.snappy;
+    exports org.apache.commons.compress.compressors.xz;
+    exports org.apache.commons.compress.compressors.z;
+    exports org.apache.commons.compress.compressors.zstandard;
+    exports org.apache.commons.compress.harmony;
+    exports org.apache.commons.compress.harmony.archive.internal.nls;
+    exports org.apache.commons.compress.harmony.pack200;
+    exports org.apache.commons.compress.harmony.unpack200;
+    exports org.apache.commons.compress.harmony.unpack200.bytecode;
+    exports org.apache.commons.compress.harmony.unpack200.bytecode.forms;
+    exports org.apache.commons.compress.java.util.jar;
+    exports org.apache.commons.compress.parallel;
+    exports org.apache.commons.compress.utils;
+    uses org.apache.commons.compress.archivers.ArchiveStreamProvider;
+    uses org.apache.commons.compress.compressors.CompressorStreamProvider;
+}

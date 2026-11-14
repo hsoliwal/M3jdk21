@@ -97,4 +97,29 @@ public interface Function<T, R> {
     static <T> Function<T, T> identity() {
         return t -> t;
     }
+
+    /**
+     * Applies this function with a borrowed monitor scoped to the call.
+     * The previous binding is restored on exit and the monitor is not completed.
+     *
+     * @param value the input argument
+     * @param monitor the borrowed monitor
+     * @return the function result
+     * @throws NullPointerException if {@code monitor} is {@code null}
+     * @throws java.util.concurrent.CancellationException if cancellation is
+     *         observed before or after this operation
+     */
+    @SuppressWarnings("try")
+    default R apply(T value, java.util.concurrent.ProgressMonitor monitor) {
+        java.util.Objects.requireNonNull(monitor, "monitor");
+        final java.util.concurrent.ProgressMonitors.Scope scope =
+                java.util.concurrent.ProgressMonitors.bind(monitor);
+        try (scope) {
+            monitor.checkCancelled();
+            R result = apply(value);
+            monitor.checkCancelled();
+            return result;
+        }
+    }
+
 }

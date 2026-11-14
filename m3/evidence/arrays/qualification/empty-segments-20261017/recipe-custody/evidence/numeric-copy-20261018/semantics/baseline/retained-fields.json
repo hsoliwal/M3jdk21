@@ -1,0 +1,128 @@
+{
+  "com.m3.arrays.M3Arrays$ByteJoin": [
+    [
+      "private final com.m3.arrays.M3ByteArrayView[] segments;",
+      "descriptor: [Lcom/m3/arrays/M3ByteArrayView;"
+    ],
+    [
+      "private final int[] ends;",
+      "descriptor: [I"
+    ],
+    [
+      "private final int length;",
+      "descriptor: I"
+    ]
+  ],
+  "com.m3.arrays.M3Arrays$ByteSlice": [
+    [
+      "private final com.m3.arrays.M3ByteArrayView source;",
+      "descriptor: Lcom/m3/arrays/M3ByteArrayView;"
+    ]
+  ],
+  "com.m3.arrays.M3Arrays$ByteSnapshot": [
+    [
+      "private final byte[] data;",
+      "descriptor: [B"
+    ]
+  ],
+  "com.m3.arrays.M3Arrays$CharJoin": [
+    [
+      "private final com.m3.arrays.M3Utf16ArrayView[] segments;",
+      "descriptor: [Lcom/m3/arrays/M3Utf16ArrayView;"
+    ],
+    [
+      "private final int[] ends;",
+      "descriptor: [I"
+    ],
+    [
+      "private final int length;",
+      "descriptor: I"
+    ],
+    [
+      "private final com.m3.arrays.M3Utf16Facts facts;",
+      "descriptor: Lcom/m3/arrays/M3Utf16Facts;"
+    ]
+  ],
+  "com.m3.arrays.M3Arrays$CharSlice": [
+    [
+      "private final com.m3.arrays.M3Utf16ArrayView source;",
+      "descriptor: Lcom/m3/arrays/M3Utf16ArrayView;"
+    ],
+    [
+      "private final com.m3.arrays.M3Utf16Facts facts;",
+      "descriptor: Lcom/m3/arrays/M3Utf16Facts;"
+    ]
+  ],
+  "com.m3.arrays.M3Arrays$CharSnapshot": [
+    [
+      "private final char[] data;",
+      "descriptor: [C"
+    ],
+    [
+      "private final com.m3.arrays.M3Utf16Facts facts;",
+      "descriptor: Lcom/m3/arrays/M3Utf16Facts;"
+    ]
+  ],
+  "com.m3.arrays.M3Arrays$IntJoin": [
+    [
+      "private final com.m3.arrays.M3IntArrayView[] segments;",
+      "descriptor: [Lcom/m3/arrays/M3IntArrayView;"
+    ],
+    [
+      "private final int[] ends;",
+      "descriptor: [I"
+    ],
+    [
+      "private final int length;",
+      "descriptor: I"
+    ]
+  ],
+  "com.m3.arrays.M3Arrays$IntSlice": [
+    [
+      "private final com.m3.arrays.M3IntArrayView source;",
+      "descriptor: Lcom/m3/arrays/M3IntArrayView;"
+    ]
+  ],
+  "com.m3.arrays.M3Arrays$IntSnapshot": [
+    [
+      "private final int[] data;",
+      "descriptor: [I"
+    ]
+  ],
+  "com.m3.arrays.M3Arrays$LongJoin": [
+    [
+      "private final com.m3.arrays.M3LongArrayView[] segments;",
+      "descriptor: [Lcom/m3/arrays/M3LongArrayView;"
+    ],
+    [
+      "private final int[] ends;",
+      "descriptor: [I"
+    ],
+    [
+      "private final int length;",
+      "descriptor: I"
+    ]
+  ],
+  "com.m3.arrays.M3Arrays$LongSlice": [
+    [
+      "private final com.m3.arrays.M3LongArrayView source;",
+      "descriptor: Lcom/m3/arrays/M3LongArrayView;"
+    ]
+  ],
+  "com.m3.arrays.M3Arrays$LongSnapshot": [
+    [
+      "private final long[] data;",
+      "descriptor: [J"
+    ]
+  ],
+  "com.m3.arrays.M3Arrays$SliceBase": [
+    [
+      "final int start;",
+      "descriptor: I"
+    ],
+    [
+      "final int length;",
+      "descriptor: I"
+    ]
+  ]
+}

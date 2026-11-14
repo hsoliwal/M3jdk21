@@ -1,0 +1,16 @@
+field	value
+jep	493
+classification	COMPATIBLE_TOOLING
+default_java21	OPT_IN
+upstream_commit	2ec358082f0896480bdbfcb289b4ba2bff0dd828
+donor_tag	jdk-24+36
+selected_paths	47
+generator	m3/backports/generate_recipe_crates.py
+executor	m3/backports/materialize_generated_crates.py
+crate_size	1
+include_text	true
+file_atom_scope	FILE
+feature_scope	MULTI_MODULE
+branch_product_mutation	false
+ci_materialization	EPHEMERAL_ONLY
+promotion	NOT_AUTHORIZED

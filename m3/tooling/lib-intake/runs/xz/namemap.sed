@@ -1,0 +1,1 @@
+s/org\.tukaani\.xz([^A-Za-z0-9_$]|$)/com.m3.lib.xz\1/g;s#org/tukaani/xz([^A-Za-z0-9_$]|$)#com/m3/lib/xz\1#g;

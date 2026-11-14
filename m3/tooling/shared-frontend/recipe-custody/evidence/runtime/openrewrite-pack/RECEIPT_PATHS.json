@@ -1,0 +1,62 @@
+[
+  {
+    "original_path": "/workspace/scratch/13309be96b09/ast-work/rewrite-pack-sdk-proof/QUALIFICATION_RECEIPT.json",
+    "retained_path": "QUALIFICATION_RECEIPT.json",
+    "sha256": "12e9ea7a9fae94342458f4b47179a793c7f010ff643035ebb52da669f78eef59",
+    "bytes": 4440
+  },
+  {
+    "original_path": "/workspace/scratch/13309be96b09/ast-work/rewrite-pack-sdk-proof/RUNTIME_QUALIFICATION_RECEIPT.json",
+    "retained_path": "RUNTIME_QUALIFICATION_RECEIPT.json",
+    "sha256": "5a8448c60bd4cc390cc4f4cf6e1a1acd2a6d440d41f31a8cdff9d90e423f4a16",
+    "bytes": 18191
+  },
+  {
+    "original_path": "/workspace/scratch/13309be96b09/ast-work/rewrite-pack-sdk-proof/commands.json",
+    "retained_path": "commands.json",
+    "sha256": "7ba7664ed4dc90042dc9d98d4f38bede73248d9e19e1f8daf026870eb495dae6",
+    "bytes": 9373
+  },
+  {
+    "original_path": "/workspace/scratch/13309be96b09/ast-work/rewrite-pack-sdk-proof/runtime-maven.log",
+    "retained_path": "runtime-maven.txt",
+    "sha256": "04237c48e0f5022fcd58ce678ce31fc077420447da3990644b320d57e6cc90e8",
+    "bytes": 2784
+  },
+  {
+    "original_path": "/workspace/scratch/13309be96b09/ast-work/rewrite-pack-sdk-proof/pack-contracts.log",
+    "retained_path": "pack-contracts.txt",
+    "sha256": "a497e7b051c69f0f554f54a038e8b090a624cef07b8dca2ebefdbd8172f3e0b9",
+    "bytes": 1599
+  },
+  {
+    "original_path": "/workspace/scratch/13309be96b09/ast-work/rewrite-pack-sdk-proof/jdeps-modules.log",
+    "retained_path": "jdeps-modules.txt",
+    "sha256": "00c0e398715a906b262b163fe8aeb80aff76acefde8acbbe4d4788f9c7ab5e41",
+    "bytes": 121
+  },
+  {
+    "original_path": "/workspace/scratch/13309be96b09/ast-work/rewrite-pack-sdk-proof/assemble.log",
+    "retained_path": "assemble.txt",
+    "sha256": "7b31b024f1d15dad0362fe22f9fc5870b2207303e4b70152bcf9f6f69fcc6262",
+    "bytes": 122
+  },
+  {
+    "original_path": "/workspace/scratch/13309be96b09/ast-work/rewrite-pack-sdk-proof/openrewrite-lock.json",
+    "retained_path": "openrewrite-lock.json",
+    "sha256": "a847e6c9c8f89a1d0c9be9aaf047d3ffa64a65fb33d4ec7dcabfa08d8d1619a8",
+    "bytes": 67998
+  },
+  {
+    "original_path": "/workspace/scratch/13309be96b09/ast-work/rewrite-pack-sdk-proof/distribution/RUNTIME_INVENTORY.json",
+    "retained_path": "RUNTIME_INVENTORY.json",
+    "sha256": "a83c1fc2a0f846eba72033b430425ae760230682f76954cbfdfd74ccdebd4c0e",
+    "bytes": 45876
+  },
+  {
+    "original_path": "/workspace/scratch/13309be96b09/ast-work/rewrite-pack-sdk-proof/runtime/surefire-reports/TEST-org.m3jdk.tooling.rewrite.M3RewriteRuntimeTest.xml",
+    "retained_path": "TEST-M3RewriteRuntimeTest.xml",
+    "sha256": "21dfb8995a4f2b27e7347948c2b9eb7b02feb2cd852020d6b12a8352a1991fc5",
+    "bytes": 18971
+  }
+]

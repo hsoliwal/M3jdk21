@@ -1,0 +1,48 @@
+{
+  "schema": "M3_FINAL_SDK_BINDING_V1",
+  "license": {
+    "SPDX-FileCopyrightText": "2026 Hitesh Soliwal and Contributors to the Synexia Project",
+    "SPDX-License-Identifier": "Apache-2.0"
+  },
+  "direct_local_byte_readback": [
+    {
+      "relative_path": "src/java.base/share/classes/java/lang/M3String.java",
+      "sha256": "7d3afcfb6565325e822acdf70532817526e95641be89ad192711570549535580",
+      "bytes": 55652,
+      "candidate3_path": "/dev/shm/m3-rope-proof-5c4ab305aedb/recipe-candidate3/src/java.base/share/classes/java/lang/M3String.java",
+      "candidate4_path": "/dev/shm/m3-rope-proof-5c4ab305aedb/recipe-candidate4/src/java.base/share/classes/java/lang/M3String.java",
+      "byte_equal": true
+    },
+    {
+      "relative_path": "test/jdk/java/lang/String/M3StringPathCursorTest.java",
+      "sha256": "8989a34dd9295a11f9af8c14f4c47062bb1f5cd1573ec0a86c6cce82714420bc",
+      "bytes": 24177,
+      "candidate3_path": "/dev/shm/m3-rope-proof-5c4ab305aedb/recipe-candidate3/test/jdk/java/lang/String/M3StringPathCursorTest.java",
+      "candidate4_path": "/dev/shm/m3-rope-proof-5c4ab305aedb/recipe-candidate4/test/jdk/java/lang/String/M3StringPathCursorTest.java",
+      "byte_equal": true
+    },
+    {
+      "relative_path": "m3/runtime-integration/rope-navigation-20261018/M3StringCursorBenchmark.java",
+      "sha256": "bfb53263c24edc292788f8852109477714b1db1fdd4af8691a77cbb3bb631ba2",
+      "bytes": 6658,
+      "candidate3_path": "/dev/shm/m3-rope-proof-5c4ab305aedb/recipe-candidate3/m3/runtime-integration/rope-navigation-20261018/M3StringCursorBenchmark.java",
+      "candidate4_path": "/dev/shm/m3-rope-proof-5c4ab305aedb/recipe-candidate4/m3/runtime-integration/rope-navigation-20261018/M3StringCursorBenchmark.java",
+      "byte_equal": true
+    }
+  ],
+  "runtime_execution_source": "recipe-candidate3",
+  "final_combined_sdk_output": "recipe-candidate4",
+  "reuse_of_candidate3_execution_evidence": "All three M3 runtime/test/benchmark bytes match directly; candidate4 changes only separately qualified canonical MIndex targets. The actual-owner closure uses the same pinned baseline for unchanged M3 source dependencies.",
+  "candidate3": {
+    "manifest_sha256": "c9c65035763807caea3fe09eeedce2f6b0880a470eaa7c62836eef711e5fe138",
+    "target_bindings_sha256": "c06051a9da7e2ced390505010a8b504d8068a162bd264cd4a55016fef8c446b5",
+    "combined_output_root": "6b06f2661c40bc67520dc4d842e9537c40c35e786c7180da744939fe7873ef08"
+  },
+  "candidate4": {
+    "manifest_sha256": "ff3c54aa4e2f8fa5d1d3316c033c83773a1d6994b8f3e0e1f55c678fa704042c",
+    "target_bindings_sha256": "c06051a9da7e2ced390505010a8b504d8068a162bd264cd4a55016fef8c446b5",
+    "combined_output_root": "ab1629a12c5f39c52f66c167b82ffe5baa4c9d0c82e3df6e3b343e5e3fb35a8c"
+  },
+  "both_m3_per_repo_output_root": "8696e7e18a6f2d96ff290122093b2ffd884d892c34b6f202c5dd070eeb011658",
+  "sdk_identifiers_provenance": "Reported by the actual SDK emission owner; direct M3 byte comparison independently repeated by this evidence builder. SDK test receipts live in the separate runtime recipe evidence."
+}

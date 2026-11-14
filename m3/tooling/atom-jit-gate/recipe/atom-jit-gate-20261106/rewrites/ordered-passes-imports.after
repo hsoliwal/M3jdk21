@@ -1,0 +1,27 @@
+import java.io.IOException;
+import java.io.UncheckedIOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.time.Duration;
+import java.util.Comparator;
+import java.util.HexFormat;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+import jdk.m3.tooling.atoms.M3AtomCensus;
+import jdk.m3.tooling.atoms.contract.M3AtomKind;
+import jdk.m3.tooling.atoms.contract.M3AtomRecord;
+
+/**
+ * Read-only OpenJDK FILE atom -> actual HotSpot JIT -> pattern review -> JIT retest.
+ *
+ * <p>The atoms and their patterns come from the M3 atom census ({@code m3/tooling/atom-census}, {@code --semantic}):
+ * its closed catalogue pattern and the exact source digest of each executable Java atom. The census carries no
+ * contract/structure/logic projection, so the donor's projection-recurrence states are not produced here.</p>
+ */

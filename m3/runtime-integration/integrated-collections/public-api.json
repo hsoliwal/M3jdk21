@@ -1,0 +1,23 @@
+{
+  "comparison": "EXACT_COMPILED_PREIMAGE_PUBLIC_PROTECTED_API_SUPERSET",
+  "base_commit": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
+  "missing": [],
+  "added": [
+    "public static <E> java.util.Collection<E> filteredCollection(java.util.Collection<E>, java.util.function.Predicate<? super E>);",
+    "public static <E> java.util.Deque<E> filteredDeque(java.util.Deque<E>, java.util.function.Predicate<? super E>);",
+    "public static <E> java.util.List<E> filteredList(java.util.List<E>, java.util.function.Predicate<? super E>);",
+    "public static <E> java.util.List<E> filteredSnapshot(java.util.Collection<? extends E>, java.util.function.Predicate<? super E>);",
+    "public static <E> java.util.List<E> filteredSortedSnapshot(java.util.Collection<? extends E>, java.util.function.Predicate<? super E>, java.util.Comparator<? super E>);",
+    "public static <E> java.util.List<E> sortedList(java.util.List<? extends E>, java.util.Comparator<? super E>);",
+    "public static <E> java.util.List<E> sortedSnapshot(java.util.Collection<? extends E>, java.util.Comparator<? super E>);",
+    "public static <E> java.util.NavigableSet<E> filteredNavigableSet(java.util.NavigableSet<E>, java.util.function.Predicate<? super E>);",
+    "public static <E> java.util.Set<E> filteredSet(java.util.Set<E>, java.util.function.Predicate<? super E>);",
+    "public static <E> java.util.SortedSet<E> filteredSortedSet(java.util.SortedSet<E>, java.util.function.Predicate<? super E>);",
+    "public static <K, V> java.util.Map<K, V> filteredMap(java.util.Map<K, V>, java.util.function.BiPredicate<? super K, ? super V>);",
+    "public static <K, V> java.util.NavigableMap<K, V> filteredNavigableMap(java.util.NavigableMap<K, V>, java.util.function.BiPredicate<? super K, ? super V>);",
+    "public static <K, V> java.util.SortedMap<K, V> filteredSortedMap(java.util.SortedMap<K, V>, java.util.function.BiPredicate<? super K, ? super V>);"
+  ],
+  "base_api_rows": 75,
+  "post_api_rows": 88,
+  "existing_implementation_bytes": "all old method bodies and headers preserved by insertion only; AST comparison follows"
+}

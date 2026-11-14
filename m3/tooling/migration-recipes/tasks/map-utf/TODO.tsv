@@ -1,0 +1,32 @@
+priority	packet	work	state	remaining_gate
+P0	BUILD	Full native image and focused/tier jtreg	NOT_CLOSED_HERE	Full matched checkout, boot JDK and native build prerequisites; not replaced by subset patch
+P0	RECIPE	Maven/OpenRewrite/JUnit acceptance	NOT_CLOSED_HERE	Run all existing and new recipe suites; fix actual old failures without exclusions
+P0	MAP-UTF	Text projection leaf product acceptance	NOT_CLOSED_HERE	Runtime subset passes; independent recipe, coverage, jtreg and platform gates remain
+P0	WP-00	Whole-source inventory and dependency graph	NOT_CLOSED_HERE	Pinned complete src/test/generated/native closure; classify every tracked item
+P0	WP-01	Mapping authority reconciliation	NOT_CLOSED_HERE	Retain and reconcile m3/docs/name-mapping.json; no competing registry
+P1	WP-02	Bootstrap primitive foundation	NOT_CLOSED_HERE	Overflow, ownership, lifetime, exact source recipes and allocation proof
+P1	WP-10	Explicit text Route A	NOT_CLOSED_HERE	Retain all UTF16/slice/join/regex/encoding and owner/interner contracts
+P1	WP-11	Compiler lowering Route B	NOT_CLOSED_HERE	Typed safe sites, evaluation order, exception/identity refusal, fixed point
+P0	WP-12	Ordinary String Route C	NOT_CLOSED_HERE	Matched String/VM/JNI/GC/JIT/CDS consumer closure; not satisfied by a wrapper
+P1	WP-20	Immutable collections	NOT_CLOSED_HERE	Null/duplicate/order/hash/serialization/copy-versus-view contracts
+P1	WP-21	ArrayList/reference arrays	NOT_CLOSED_HERE	All mutation/view/iterator/clone/serialization contracts
+P1	WP-22	Hash collections	NOT_CLOSED_HERE	Distinct identity/weak/order/legacy/concurrency ownership rules
+P1	WP-23	Ordered/navigation collections	NOT_CLOSED_HERE	Comparator/view/entry/iterator/serialization/complexity proof
+P1	WP-24	Deque/queue/heap	NOT_CLOSED_HERE	Null/order/removal/growth/iterator/serialization contracts
+P1	WP-25	Copy-on-write collections	NOT_CLOSED_HERE	Snapshot lifetime, atomic publication and mutation contracts
+P0	WP-26	Concurrent collections	NOT_CLOSED_HERE	JMM, linearization, progress, resize and memory-model stress
+P1	WP-30	Streams and spliterators	NOT_CLOSED_HERE	Laziness/order/short-circuit/close/parallel characteristics
+P1	WP-40	Path and I/O/NIO	NOT_CLOSED_HERE	Provider/platform semantics, partial operations, mapped lifetimes
+P1	WP-41	Networking	NOT_CLOSED_HERE	Cache/socket/selector/error/platform/security behavior
+P1	WP-50	Compiler AST/symbol/index	NOT_CLOSED_HERE	Attribution/diagnostics/processing/plugins/incremental invalidation
+P1	WP-51	Reflection/invoke/classloading/modules	NOT_CLOSED_HERE	Weak/hidden lifetime, linkage, loader namespace and module rules
+P0	WP-60	VM layout and collectors	NOT_CLOSED_HERE	Tracing/barriers/reference processing/SA per supported collector
+P0	WP-61	Interpreter/JIT/intrinsics	NOT_CLOSED_HERE	Tier transitions, deopt, representation assumptions and JVMCI
+P0	WP-62	JNI/JVMTI/FFM/native	NOT_CLOSED_HERE	ABI, pin/release, modified UTF8, direct buffers, native platforms
+P0	WP-63	CDS/serviceability/JFR	NOT_CLOSED_HERE	Archives, loaders, dumps, SA and diagnostic tools
+P1	WP-70	Security/crypto	NOT_CLOSED_HERE	Security-specific review; retain baseline unless bounded proof
+P1	WP-80	Remaining modules individually	NOT_CLOSED_HERE	No catch-all completion; inventory every owner
+P1	BACKPORTS	Compatible JEP/JBS and non-JEP absorption	NOT_CLOSED_HERE	Existing backport/A3 catalogue and owners; exact donor/source/test binding
+P1	DB-PARSER	Database and parser integration	NOT_CLOSED_HERE	Existing DB/UnicodeX/parser owners; old green receipts do not certify new trees
+P1	NAMING-IOP	M3 names, pattern roles and coverage	NOT_CLOSED_HERE	Short new API names, migration mappings and measured >=99% required gates
+P2	PACKS	JavaFX and framework packs	NOT_CLOSED_HERE	Retain existing programme obligations after verified foundation

@@ -1,0 +1,125 @@
+{
+  "source_receipt_sha256": "c49c23fd5ec3fc02ad0c3332e16fe4b0f8c9ea4bfab296ad013c726bc226823d",
+  "files": [
+    {
+      "relative": "org/ow2/asm/asm/9.3/asm-9.3.jar",
+      "bytes": 122176,
+      "sha256": "1263369b59e29c943918de11d6d6152e2ec6085ce63e5710516f8c67d368e4bc",
+      "prior_sha256": null
+    },
+    {
+      "relative": "org/ow2/asm/asm/9.3/asm-9.3.pom",
+      "bytes": 2368,
+      "sha256": "8eac07e29f8aea83a8156d7b29fa368f6ebf3becfb209c9a1ac36abd906123e0",
+      "prior_sha256": "8eac07e29f8aea83a8156d7b29fa368f6ebf3becfb209c9a1ac36abd906123e0"
+    },
+    {
+      "relative": "org/ow2/asm/asm/9.3/asm-9.3.jar.sha1",
+      "bytes": 40,
+      "sha256": "4eef3562bb6faa1d6f1e6ff9914fd0e47008ea3691d9ba9e46cebf23c3d95e94",
+      "prior_sha256": null
+    },
+    {
+      "relative": "org/ow2/asm/asm/9.3/asm-9.3.pom.sha1",
+      "bytes": 40,
+      "sha256": "22024110d7a7af81e00414fce5999b1aefe948408e02131e863b39001a2b772d",
+      "prior_sha256": "22024110d7a7af81e00414fce5999b1aefe948408e02131e863b39001a2b772d"
+    },
+    {
+      "relative": "org/ow2/asm/asm/9.3/_remote.repositories",
+      "bytes": 182,
+      "sha256": "1ed3813b9c30c0599606873254416a755ce27684fa1e14285131aacb51963471",
+      "prior_sha256": "e1c573c686eadcfb04b2afc1c87836c07e319fae48d73e14d8fbf17ec18958e5"
+    },
+    {
+      "relative": "org/ow2/asm/asm-util/9.3/asm-util-9.3.jar",
+      "bytes": 85682,
+      "sha256": "70f78f291ca0298afdb567fa85c5667869bc3da3914784816413853994962192",
+      "prior_sha256": null
+    },
+    {
+      "relative": "org/ow2/asm/asm-util/9.3/asm-util-9.3.pom",
+      "bytes": 2936,
+      "sha256": "b8fe7815d2a0b5d5ac12ce67bbceeef172567f6743b7db7bd47cd99f123d9939",
+      "prior_sha256": "b8fe7815d2a0b5d5ac12ce67bbceeef172567f6743b7db7bd47cd99f123d9939"
+    },
+    {
+      "relative": "org/ow2/asm/asm-util/9.3/asm-util-9.3.jar.sha1",
+      "bytes": 40,
+      "sha256": "f75b271399c83f37793885c0c5100896ab08ad1fbefe33bf1fe1789d223968a9",
+      "prior_sha256": null
+    },
+    {
+      "relative": "org/ow2/asm/asm-util/9.3/asm-util-9.3.pom.sha1",
+      "bytes": 40,
+      "sha256": "aeb09011249df78b068c99284e9d587a8959cf248d9252f8c92127b441315945",
+      "prior_sha256": "aeb09011249df78b068c99284e9d587a8959cf248d9252f8c92127b441315945"
+    },
+    {
+      "relative": "org/ow2/asm/asm-util/9.3/_remote.repositories",
+      "bytes": 192,
+      "sha256": "b5d3a3e241c0bc22564c85577158493a8de47920b610d2a158cb6f73510d8e38",
+      "prior_sha256": "125f19e04bffca8fe7667d815d5ef950a716310f3b3e0a0bf51b75de305d521a"
+    },
+    {
+      "relative": "org/ow2/asm/asm-tree/9.3/asm-tree-9.3.jar",
+      "bytes": 52669,
+      "sha256": "ae629c2609f39681ef8d140a42a23800464a94f2d23e36d8f25cd10d5e4caff4",
+      "prior_sha256": null
+    },
+    {
+      "relative": "org/ow2/asm/asm-tree/9.3/asm-tree-9.3.pom",
+      "bytes": 2590,
+      "sha256": "c799cae423fb2f85e47ebe18d69d1b9e1fbb11d8e2730f3546870a771f0012c4",
+      "prior_sha256": "c799cae423fb2f85e47ebe18d69d1b9e1fbb11d8e2730f3546870a771f0012c4"
+    },
+    {
+      "relative": "org/ow2/asm/asm-tree/9.3/asm-tree-9.3.jar.sha1",
+      "bytes": 40,
+      "sha256": "53ec74954dd7e69847015fbe160040a472acb1e996fc54520d3d40d1178ed779",
+      "prior_sha256": null
+    },
+    {
+      "relative": "org/ow2/asm/asm-tree/9.3/asm-tree-9.3.pom.sha1",
+      "bytes": 40,
+      "sha256": "9a7551732ac2e79377e9bc1dd7eaea0ad4fc333e88369ef8e833b30827043624",
+      "prior_sha256": "9a7551732ac2e79377e9bc1dd7eaea0ad4fc333e88369ef8e833b30827043624"
+    },
+    {
+      "relative": "org/ow2/asm/asm-tree/9.3/_remote.repositories",
+      "bytes": 192,
+      "sha256": "3f9b2fc8f4f50de9c43853fb019468d07019251da5d97d6dabb463f3cab6dd7b",
+      "prior_sha256": "a05e2a25f483ac9a1a60a7d7d3c9f8d1580ba62665c9ff7b341148ffc7a2ea4c"
+    },
+    {
+      "relative": "org/ow2/asm/asm-analysis/9.3/asm-analysis-9.3.jar",
+      "bytes": 34276,
+      "sha256": "37fd5392bb2cf4c15f202ffefd46d0e92bb34ff848c549f30d426a60d6b29495",
+      "prior_sha256": null
+    },
+    {
+      "relative": "org/ow2/asm/asm-analysis/9.3/asm-analysis-9.3.pom",
+      "bytes": 2619,
+      "sha256": "1e06851b797c372a11cd242ffb8c9781061519209a00e07654ecfae7efaf42af",
+      "prior_sha256": "1e06851b797c372a11cd242ffb8c9781061519209a00e07654ecfae7efaf42af"
+    },
+    {
+      "relative": "org/ow2/asm/asm-analysis/9.3/asm-analysis-9.3.jar.sha1",
+      "bytes": 40,
+      "sha256": "1767d3d65e1ac015e3bb1c31afe62e0b6d28e7417b6cab44ac58e481ed641ab6",
+      "prior_sha256": null
+    },
+    {
+      "relative": "org/ow2/asm/asm-analysis/9.3/asm-analysis-9.3.pom.sha1",
+      "bytes": 40,
+      "sha256": "d10c2859011a8c400129604cd65e5a881ad3bfde3c43e225876d1651cc23e15b",
+      "prior_sha256": "d10c2859011a8c400129604cd65e5a881ad3bfde3c43e225876d1651cc23e15b"
+    },
+    {
+      "relative": "org/ow2/asm/asm-analysis/9.3/_remote.repositories",
+      "bytes": 200,
+      "sha256": "54a9dedbb5691238926a64d01693a41f26da1dab252c835450a4c9a2d8d65e96",
+      "prior_sha256": "1efedc352a732f1af359d9856546f2b9085ca651dfdc70c1638ea87d50fe181c"
+    }
+  ]
+}

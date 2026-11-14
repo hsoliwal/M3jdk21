@@ -1,0 +1,9 @@
+# SPDX-License-Identifier: Apache-2.0
+# Relocation map of recipe/trie-core-20261107/relocate.py (INDEXSTRING_RELOCATE_IX1 v1). Donor: hsoliwal/com.synexia develop 165ceb5a020291e99ebeb89783b88e8a9686ae5c (census2 rows P2-108/P2-056 prerequisite; the word-break plan walks this trie).
+kind	donor	target	note
+FILE	synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexTrieNavigation.java	src/main/java/jdk/internal/m3/indexstring/MIndexTrieNavigation.java	precomputed navigation (parent/depth/rank intervals/descendant lengths) over a frozen literal trie; bounded Levenshtein machine; select/precompute walks
+FILE	synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexLiteralSearchTree.java	src/main/java/jdk/internal/m3/indexstring/MIndexLiteralSearchTree.java	frozen UTF-16 literal trie + Aho-Corasick search (exact/findFirst/visitMatches), image round trip, lazily prepared navigation
+PACKAGE	com.synexia.indexstring	jdk.internal.m3.indexstring	JDK naming rule PKG; receiver m3/ports/indexstring
+TYPE	IProgressMonitor	jdk.m3.collections.M3ProgressMonitor	same rule as the m3/search leaves (relocate_search_v2 rules_v2.tsv); IProgressMonitor.noop() -> new M3DefaultProgressMonitor()
+TYPE	MIndexStringEditDistancePlan	jdk.m3.precompute.M3EditDistancePlan	existing M3JDK owner of a compiled UTF-16 query; the trie uses only compile(CharSequence) and the CharSequence view
+REMOVED	MIndexLiteralSearchTree.exact(MIndexString) findFirst(MIndexString) visitMatches(MIndexString,..) x2	-	token-arena fast paths of the CharSequence overloads; MIndexString has no M3JDK owner (java.lang.M3String is a different design); a String input takes the CharSequence overloads

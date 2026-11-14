@@ -1,0 +1,31 @@
+{
+  "schema": "SYNEXIA_REUSE_PACKET_LOCAL_EVIDENCE_V1",
+  "java": "OpenJDK 21.0.11+10-1-deb13u2-Debian",
+  "compile": "javac --release 21 -Xlint:all -Werror",
+  "compile_result": "PASS",
+  "packet_probe": {
+    "packetIntegrity": "PASS",
+    "assetKinds": 15,
+    "manifestRows": 3,
+    "refusalCases": 50,
+    "openRewriteExecution": "NOT_RUN_BY_THIS_PROBE",
+    "runtimeAdmission": false
+  },
+  "maven_openrewrite_junit": "UNEXECUTED_MAVEN_UNAVAILABLE",
+  "target_materialization": "UNEXECUTED",
+  "full_reactor_jdk_runtime": "UNEXECUTED",
+  "files": {
+    "NOTICE": "da0aac00dff5e0effb49af303fb67d9acb2611533708bbfbd95c05ff54116dfa",
+    "README.md": "fbf916ee02a45f1d6f418f533e190bd85b128e2b6432b1b40072eda2c669dcb4",
+    "SOURCE_PROVENANCE.tsv": "fef1ad3a715677b263525d7abb59d72ba4d8532fe78317629cd5618ccdb6c3c9",
+    "pom.xml": "bc8f5786ccf5a155342f9665cce09c3015b61e073165d2919f5d4adf208920cd",
+    "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/apache-public-reuse-v1/manifest.tsv": "966fba57263e22880b0f41a4f269a23ebf4250fcaa019b6f6a6d8d4bfc53b0ce",
+    "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/apache-public-reuse-v1/policy.properties.txt": "a82ec4f77c36d9bbd526927d567f15b75c03e44f30715cd8030bd996f7c3918b",
+    "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/apache-public-reuse-v1/reuse.md.txt": "f72dc9a3332aafe66a88576b5addf90d628b68046f833e773581c43d0c512756",
+    "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/apache-public-reuse-v1/scope.tsv.txt": "f0c4956693279ffea733c13e504ba3ce83f679aba7af2c714c9f49dfc17b7447",
+    "src/test/java/com/synexia/handoff/ApacheReuseProof.java": "b148b4c2722a2fdf76bd6c9f7f27421c6d2f14cc66c579e1c20875842a98fd8e",
+    "src/test/java/com/synexia/handoff/ApacheReuseRecipeTest.java": "e7c555521008f004388a4769fa2b6615747a85847198fcc812b7e7fda11f1c34"
+  },
+  "source_commit": "f8e19a5ab7b9641c063152b4f2cbf7560c25db25",
+  "unchanged_shared_assets": 5
+}

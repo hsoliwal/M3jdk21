@@ -894,7 +894,7 @@ public class JLabel extends JComponent implements SwingConstants, Accessible
                                int x, int y, int w, int h) {
         // Don't use getDisabledIcon, will trigger creation of icon if icon
         // not set.
-        if (!isShowing() ||
+        if (JComponent.isImageObserverHidden(this) ||
             !SwingUtilities.doesIconReferenceImage(getIcon(), img) &&
             !SwingUtilities.doesIconReferenceImage(disabledIcon, img)) {
 

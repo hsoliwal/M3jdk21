@@ -1,0 +1,2 @@
+src/java.desktop/share/classes/javax/swing/text/GapContent.java	b27db80a09aeaa134937789652d742932e71cd98351fe16afefae115352ac0c2	431ea4c123c70f522539f4be60d3e69d5c5f5c9666d40252526aa0b3221d44ab	GapContent.java.txt
+test/jdk/javax/swing/text/GapContent/GapContentLowerBoundTest.java	ABSENT	6ce17e3278a156ca418060614300c4ea63672e380875f334d965f7bf17738860	GapContentLowerBoundTest.java.txt

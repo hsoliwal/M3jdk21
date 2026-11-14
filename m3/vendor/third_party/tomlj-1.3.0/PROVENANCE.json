@@ -1,0 +1,391 @@
+{
+  "artifact": "tomlj",
+  "automatic_module_name": "org.tomlj",
+  "build": "java",
+  "build_reason": "",
+  "consumers": "synexia-mindex/runtime (explicit pin)",
+  "coordinate": "org.tomlj:tomlj:1.3.0-m3-source-1",
+  "decision": "DIRECT_IMPORT",
+  "delomboked": false,
+  "delomboked_files": 0,
+  "dependencies": [
+    {
+      "artifact": "antlr4-runtime",
+      "form": "source module",
+      "group": "org.antlr",
+      "optional": false,
+      "scope": "compile",
+      "version": "4.13.2-m3-source-1"
+    },
+    {
+      "artifact": "checker-qual",
+      "form": "source module",
+      "group": "org.checkerframework",
+      "optional": false,
+      "scope": "compile",
+      "version": "3.55.1-m3-source-1"
+    }
+  ],
+  "donor": "tomlj-1.3.0",
+  "excluded_from_compilation": [],
+  "files": [
+    {
+      "kind": "unmodified-build-metadata",
+      "repository": "m3/vendor/third_party/tomlj-1.3.0/upstream-excluded/META-INF/MANIFEST.MF",
+      "sha256": "566ad1a80220026d05099562645ce968ff0e7c36cde22634332605bb34cc3eff",
+      "upstream": "META-INF/MANIFEST.MF"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/tomlj-1.3.0/src/main/java/org/tomlj/AccumulatingErrorListener.java",
+      "sha256": "c0e34bfbfee851f4234d9f770850c373d0cf59628831e285195297c32a8f54a9",
+      "upstream": "org/tomlj/AccumulatingErrorListener.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/tomlj-1.3.0/src/main/java/org/tomlj/ArrayVisitor.java",
+      "sha256": "febf9571df98f96afcf21ee46268932ec671cec12a03f5bd2d363632affb1b6f",
+      "upstream": "org/tomlj/ArrayVisitor.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/tomlj-1.3.0/src/main/java/org/tomlj/EmptyTomlArray.java",
+      "sha256": "02b4034f08a7e38d9c6e457dff957fb59073ef4dd5f1e3c63652ca4e4726f48c",
+      "upstream": "org/tomlj/EmptyTomlArray.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/tomlj-1.3.0/src/main/java/org/tomlj/EmptyTomlTable.java",
+      "sha256": "78992e55c99ff26718930a50d0539e9cb790a949b131beb2cab7cc636cef5434",
+      "upstream": "org/tomlj/EmptyTomlTable.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/tomlj-1.3.0/src/main/java/org/tomlj/ErrorReporter.java",
+      "sha256": "4b171876cbf6be540aeab64dcb0001f0a82edc85715ce50a8431db6ee908b2f7",
+      "upstream": "org/tomlj/ErrorReporter.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/tomlj-1.3.0/src/main/java/org/tomlj/InlineTableVisitor.java",
+      "sha256": "34bfb2d643ee8ac3f20a7441b04956aa073ec81b496713984c9337eda27354b6",
+      "upstream": "org/tomlj/InlineTableVisitor.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/tomlj-1.3.0/src/main/java/org/tomlj/JsonOptions.java",
+      "sha256": "44194bcd5654fa15689905b2e5e7d3d5eccb4a541daffce224da089a350e56fb",
+      "upstream": "org/tomlj/JsonOptions.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/tomlj-1.3.0/src/main/java/org/tomlj/JsonSerializer.java",
+      "sha256": "374261472d9376d7b827c4d7ccf2df0b5cb0ed5d80a5e857c057127b1a58d160",
+      "upstream": "org/tomlj/JsonSerializer.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/tomlj-1.3.0/src/main/java/org/tomlj/KeyVisitor.java",
+      "sha256": "d83c423a12382e2cb093e56f8d6d35126b1c8f87847a15e80b97d2f3df2fd72d",
+      "upstream": "org/tomlj/KeyVisitor.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/tomlj-1.3.0/src/main/java/org/tomlj/LineRecoveryStrategy.java",
+      "sha256": "fd702f759737f951b41fc73dc465d5c14fd9bef230e7784b43bbab79ba7d628c",
+      "upstream": "org/tomlj/LineRecoveryStrategy.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/tomlj-1.3.0/src/main/java/org/tomlj/LineVisitor.java",
+      "sha256": "0706e90d723f72eb82c8d21c9fa1d319417829c71d566c3dcfc7a2f154233f9f",
+      "upstream": "org/tomlj/LineVisitor.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/tomlj-1.3.0/src/main/java/org/tomlj/LocalDateVisitor.java",
+      "sha256": "51ba45043e16bbc3051e6d94dce4f6a8cd94754c109227494a832a196e6eb846",
+      "upstream": "org/tomlj/LocalDateVisitor.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/tomlj-1.3.0/src/main/java/org/tomlj/LocalTimeVisitor.java",
+      "sha256": "893c027d82b083d86f4c590e5c1af7556bb3af1e388bdfd48881541a1402d919",
+      "upstream": "org/tomlj/LocalTimeVisitor.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/tomlj-1.3.0/src/main/java/org/tomlj/MutableHomogeneousTomlArray.java",
+      "sha256": "4685169f580974481466d124b7ce3a7e68fcf4763db89292d27e2a1310801134",
+      "upstream": "org/tomlj/MutableHomogeneousTomlArray.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/tomlj-1.3.0/src/main/java/org/tomlj/MutableTomlArray.java",
+      "sha256": "187bf63faf37c5a164f5c9b3c9b8270a1f5404ab605e11dd43bd835d82269437",
+      "upstream": "org/tomlj/MutableTomlArray.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/tomlj-1.3.0/src/main/java/org/tomlj/MutableTomlTable.java",
+      "sha256": "4f8386ca001e9544e4eae9ef4c4361eff57fbba675dfa4b2ffa906bc0ee56f96",
+      "upstream": "org/tomlj/MutableTomlTable.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/tomlj-1.3.0/src/main/java/org/tomlj/ParseTrees.java",
+      "sha256": "3b835d38cd338caef22419b413d340601cdfe503c29ba4999ce9084e4cc034d0",
+      "upstream": "org/tomlj/ParseTrees.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/tomlj-1.3.0/src/main/java/org/tomlj/Parser.java",
+      "sha256": "7a339408ed00ac05bd225c3a24ebd504c52617b70d5029820bf6beb98c05c41b",
+      "upstream": "org/tomlj/Parser.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/tomlj-1.3.0/src/main/java/org/tomlj/QuotedStringVisitor.java",
+      "sha256": "7ec7c28740aebacdc76e8f692d7740a2e90842633b00c71bb4ad5e302a1e650f",
+      "upstream": "org/tomlj/QuotedStringVisitor.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/tomlj-1.3.0/src/main/java/org/tomlj/TokenName.java",
+      "sha256": "21029f15ec9f145dbe90953505be7786eb94e5e001e04aac21e2ae1bcb7c3b8a",
+      "upstream": "org/tomlj/TokenName.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/tomlj-1.3.0/src/main/java/org/tomlj/Toml.java",
+      "sha256": "0cda2bbe95084f6e9e60d79f7abe5b6c17e86c08fd0de5ee425e81caff41618a",
+      "upstream": "org/tomlj/Toml.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/tomlj-1.3.0/src/main/java/org/tomlj/TomlArray.java",
+      "sha256": "3b60e3cbc2c38e86a52bc980b10a00f2bf73e304d0a6a1d11e69b8dd125d7b14",
+      "upstream": "org/tomlj/TomlArray.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/tomlj-1.3.0/src/main/java/org/tomlj/TomlCommand.java",
+      "sha256": "f772bce5afecf403d1f4c34f9572af0e39f1864ba7b47b86fff17000f3800ef8",
+      "upstream": "org/tomlj/TomlCommand.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/tomlj-1.3.0/src/main/java/org/tomlj/TomlInvalidTypeException.java",
+      "sha256": "cb0451dead5ff7256d31d7a827f061d7559257393542151b8d02244e86406039",
+      "upstream": "org/tomlj/TomlInvalidTypeException.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/tomlj-1.3.0/src/main/java/org/tomlj/TomlParseError.java",
+      "sha256": "1c8eb13bcd25e44222207d696e89e777a67e1ce9df3bc0226d1b3562ab9c3203",
+      "upstream": "org/tomlj/TomlParseError.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/tomlj-1.3.0/src/main/java/org/tomlj/TomlParseOptions.java",
+      "sha256": "bd18b0d057e81aebd0c9c33681ea5db8a2193c4fdea53432ed68845b35fcca77",
+      "upstream": "org/tomlj/TomlParseOptions.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/tomlj-1.3.0/src/main/java/org/tomlj/TomlParseResult.java",
+      "sha256": "4e9b26b92cebf1d52834e685796a0785787e909ea75eb1e405e7c182ef0b2b85",
+      "upstream": "org/tomlj/TomlParseResult.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/tomlj-1.3.0/src/main/java/org/tomlj/TomlPosition.java",
+      "sha256": "6cc2d75ccf5fa70d1824efba144a7863b14d4a1866d19319466eafe3be989497",
+      "upstream": "org/tomlj/TomlPosition.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/tomlj-1.3.0/src/main/java/org/tomlj/TomlSerializer.java",
+      "sha256": "2e461f04330ffa28132bf0c53c4587082e74f98888d08951de0e6be38676a4a1",
+      "upstream": "org/tomlj/TomlSerializer.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/tomlj-1.3.0/src/main/java/org/tomlj/TomlTable.java",
+      "sha256": "40ee3cc45caf3feda3b84779bb28157d2ef7d4dbcdeb8db08675ed35c012d495",
+      "upstream": "org/tomlj/TomlTable.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/tomlj-1.3.0/src/main/java/org/tomlj/TomlType.java",
+      "sha256": "33c349f1137d2306eb915125b4b81fcfd99c5aa2ea5d4379870f0e5a4e634e88",
+      "upstream": "org/tomlj/TomlType.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/tomlj-1.3.0/src/main/java/org/tomlj/TomlVersion.java",
+      "sha256": "e3d156ef22da9c1eb7c52e4c2f09bfa0a40013e600d41ffb245544328d84d6fb",
+      "upstream": "org/tomlj/TomlVersion.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/tomlj-1.3.0/src/main/java/org/tomlj/ValueVisitor.java",
+      "sha256": "7e6f49001db0b402f3d8482dcc08851313590393746a090b0ef751bf55ca7a66",
+      "upstream": "org/tomlj/ValueVisitor.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/tomlj-1.3.0/src/main/java/org/tomlj/ZoneOffsetVisitor.java",
+      "sha256": "9b7e90f19e994128b4195868f78cca7b01c1b54d0027796c88f25cbaea370b41",
+      "upstream": "org/tomlj/ZoneOffsetVisitor.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/tomlj-1.3.0/src/main/java/org/tomlj/internal/AbstractTomlLexer.java",
+      "sha256": "5b1e7b0dc2ce2421c022e25c75341ff7c1fe96f9cdd283853f4f807bedd1f9ae",
+      "upstream": "org/tomlj/internal/AbstractTomlLexer.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/tomlj-1.3.0/src/main/java/org/tomlj/internal/AbstractTomlParser.java",
+      "sha256": "c23df20da10fea857a16e624b4a3b5b9dccd4c6c1af1159866de6ba78b5496fd",
+      "upstream": "org/tomlj/internal/AbstractTomlParser.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/tomlj-1.3.0/src/main/java/org/tomlj/internal/AbstractTomlParserRuleContext.java",
+      "sha256": "6043ee75721c5628ad1a0223dce57d7905f01a0e16c7984e928173c598e92ea1",
+      "upstream": "org/tomlj/internal/AbstractTomlParserRuleContext.java"
+    },
+    {
+      "kind": "unmodified-source-only-not-packaged-upstream",
+      "repository": "m3/vendor/third_party/tomlj-1.3.0/upstream-source-only/org/tomlj/internal/TomlLexer.g4",
+      "sha256": "487dff6327d5ef19f04eac0995b973f2fa37c362f8f113b738527132113a25df",
+      "upstream": "org/tomlj/internal/TomlLexer.g4"
+    },
+    {
+      "kind": "unmodified-source-only-not-packaged-upstream",
+      "repository": "m3/vendor/third_party/tomlj-1.3.0/upstream-source-only/org/tomlj/internal/TomlLexer.interp",
+      "sha256": "9f42aa4fcaae17dd6c50d0d925b2bdbcad0197ac0a85a090d378746bcffd51b5",
+      "upstream": "org/tomlj/internal/TomlLexer.interp"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/tomlj-1.3.0/src/main/java/org/tomlj/internal/TomlLexer.java",
+      "sha256": "ba4cf16d59e1ae55befd70400d5a78b74c3c46dfa9f56ff5ad1a16995da2223b",
+      "upstream": "org/tomlj/internal/TomlLexer.java"
+    },
+    {
+      "kind": "unmodified-source-only-not-packaged-upstream",
+      "repository": "m3/vendor/third_party/tomlj-1.3.0/upstream-source-only/org/tomlj/internal/TomlLexer.tokens",
+      "sha256": "9a246fccd9271545c8b5d4a8e7f09ec7c483c3a9406f3946e9be865cbaef5e61",
+      "upstream": "org/tomlj/internal/TomlLexer.tokens"
+    },
+    {
+      "kind": "unmodified-source-only-not-packaged-upstream",
+      "repository": "m3/vendor/third_party/tomlj-1.3.0/upstream-source-only/org/tomlj/internal/TomlParser.g4",
+      "sha256": "09745984c2e776a0ba7684860c4d2d87770acd16b9f23ca84b947ddcbd0da47a",
+      "upstream": "org/tomlj/internal/TomlParser.g4"
+    },
+    {
+      "kind": "unmodified-source-only-not-packaged-upstream",
+      "repository": "m3/vendor/third_party/tomlj-1.3.0/upstream-source-only/org/tomlj/internal/TomlParser.interp",
+      "sha256": "1b9e9c649726ba294cdfbd55fa9bc06c6a9d058f730eb7555d10dfcf9cbf80fc",
+      "upstream": "org/tomlj/internal/TomlParser.interp"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/tomlj-1.3.0/src/main/java/org/tomlj/internal/TomlParser.java",
+      "sha256": "1c4312839512ab5850937893f4d113a469ae771f0c0f4b35fdac614462c04d71",
+      "upstream": "org/tomlj/internal/TomlParser.java"
+    },
+    {
+      "kind": "unmodified-source-only-not-packaged-upstream",
+      "repository": "m3/vendor/third_party/tomlj-1.3.0/upstream-source-only/org/tomlj/internal/TomlParser.tokens",
+      "sha256": "9a246fccd9271545c8b5d4a8e7f09ec7c483c3a9406f3946e9be865cbaef5e61",
+      "upstream": "org/tomlj/internal/TomlParser.tokens"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/tomlj-1.3.0/src/main/java/org/tomlj/internal/TomlParserBaseListener.java",
+      "sha256": "d118d0057f0a5c95ef79cec462efeaa2f005eb696ca28a455fc5fc84af392da5",
+      "upstream": "org/tomlj/internal/TomlParserBaseListener.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/tomlj-1.3.0/src/main/java/org/tomlj/internal/TomlParserBaseVisitor.java",
+      "sha256": "f7f4e750f3ac3a9338979f4d22002e16499430d3d8d05efa1b02da0d6cfd5680",
+      "upstream": "org/tomlj/internal/TomlParserBaseVisitor.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/tomlj-1.3.0/src/main/java/org/tomlj/internal/TomlParserListener.java",
+      "sha256": "92f6650205338460da9849df11f3f2403eab6a73c6a3d3b0dab5a096da005486",
+      "upstream": "org/tomlj/internal/TomlParserListener.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/tomlj-1.3.0/src/main/java/org/tomlj/internal/TomlParserVisitor.java",
+      "sha256": "5dcfc40eb1eb08fec1aa7fa38c5f47cde83335e89a38fd95ebdf8e6c3bc74944",
+      "upstream": "org/tomlj/internal/TomlParserVisitor.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/tomlj-1.3.0/src/main/java/org/tomlj/package-info.java",
+      "sha256": "e8f8bac5c0e1625001f6db17d0fe73c46cc62f5862ccaca890ee88457b5ec47d",
+      "upstream": "org/tomlj/package-info.java"
+    },
+    {
+      "kind": "retained-provenance",
+      "repository": "m3/vendor/third_party/tomlj-1.3.0/UPSTREAM_LICENSE.json",
+      "sha256": "cfa20bf3399b4e1f774d265b6302478b588c4a6cae07e650dedf15fbf35e823d",
+      "upstream": "(fetched: see UPSTREAM_LICENSE.json)"
+    },
+    {
+      "kind": "unmodified-legal-or-build-reference",
+      "repository": "m3/vendor/third_party/tomlj-1.3.0/UPSTREAM_LICENSE.txt",
+      "sha256": "b40930bbcf80744c86c46a12bc9da056641d722716c378f5659b9e555ef833e1",
+      "upstream": "(fetched: see UPSTREAM_LICENSE.json)"
+    },
+    {
+      "kind": "retained-provenance",
+      "repository": "m3/vendor/third_party/tomlj-1.3.0/SOURCES_MANIFEST.tsv",
+      "sha256": "fffa4c2584811322adf02a7718251421007e929882717e5daa88b72f60acad81",
+      "upstream": "(inventory)"
+    },
+    {
+      "kind": "unmodified-legal-or-build-reference",
+      "repository": "m3/vendor/third_party/tomlj-1.3.0/LICENSE",
+      "sha256": "b40930bbcf80744c86c46a12bc9da056641d722716c378f5659b9e555ef833e1",
+      "upstream": "UPSTREAM_LICENSE.txt"
+    }
+  ],
+  "group": "org.tomlj",
+  "kind": "MODULE",
+  "license": "The Apache License, Version 2.0",
+  "license_file": "LICENSE",
+  "modifications": "No upstream source changes; Maven descriptor and provenance files are M3jdk21 composition (Apache-2.0) and do not relicense the donor.",
+  "module_descriptors": [],
+  "multi_release_overlays": {
+    "not_reproduced": [],
+    "releases": []
+  },
+  "native_binaries": 0,
+  "parent": "::",
+  "pom": "https://repo.maven.apache.org/maven2/org/tomlj/tomlj/1.3.0/tomlj-1.3.0.pom",
+  "receipt": {
+    "buildRoot": "476e00b9322c8646c13326e4a2b34c969bee2aa873f8900e33ff8317a6ad44f4",
+    "distributionSha256": "4a73e80ac5b7bceb20bbbd346d31d98d4d721a72c9b3d32639fb3e7d67d9f86b",
+    "lock": "2fef50af3f31bd477baafd162dbd5e42f66032e3368618fc79cb4f9d9c0c41b7",
+    "message": "",
+    "sourceRoot": "18f3b381278b627903691d93f93adb6df0db5f0e1a0b45b4fc771e5a46ec7361",
+    "status": "PASS"
+  },
+  "resources_completed": 0,
+  "sources_jar": "https://repo.maven.apache.org/maven2/org/tomlj/tomlj/1.3.0/tomlj-1.3.0-sources.jar",
+  "sources_jar_sha1": "eb79a789d3489e2fbf0915118653369f26c7593b",
+  "sources_jar_sha256": "a44abc66b0d53f50a76946bdd397d6044b216a19d4aefaf7df8ae28f59d47c64",
+  "status": "PASS",
+  "upstream": "https://github.com/tomlj/tomlj",
+  "version": "1.3.0"
+}

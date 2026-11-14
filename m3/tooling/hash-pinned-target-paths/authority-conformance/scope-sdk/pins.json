@@ -1,0 +1,151 @@
+{
+  "schema": "M3_CANONICAL_SCOPE_BOUNDARY_SDK_INPUTS_V1",
+  "admissionCommit": "24bdaa2c54d7ff2da53f3edfcf068ddd4ffa70f7",
+  "sourceOnly": true,
+  "sourceLineages": {
+    "frozenRecipeInput": {
+      "commit": "f04fbac91a7891e64b77c7b24cef1ab75ec88144",
+      "gitBlob": "d41d6dc93ec0e176f6d215d23e3b6a316a9e4a32"
+    },
+    "branchCanonicalRefusal": {
+      "commit": "24bdaa2c54d7ff2da53f3edfcf068ddd4ffa70f7",
+      "gitBlob": "d24729950508857280ea1b56d4e930f05137ec85"
+    },
+    "publicHistoricalRefusal": {
+      "commit": "0000dd38d8b7ea7d49173c0adee02b08563954c1",
+      "gitBlob": "a993ed2192188729cefeb45d6bcb5e49594e19b0"
+    }
+  },
+  "providers": {
+    "openrewriteAdapter": "2ec479b8609459a28fdfd8a7a7d63cc44e919f00",
+    "manifestKernel": "78d5fb68f13872164973a8918cc7886c5f548bca"
+  },
+  "files": [
+    {
+      "path": "FOSS_REUSE_DECISION.tsv",
+      "gitBlob": "b726a14d3740a49179daeafa4a88ee18f7d818c5",
+      "bytes": 898,
+      "sha256": "f137ca01602b8aad76df2665d29d11b5f753ea1969e6167f931552790fc79360"
+    },
+    {
+      "path": "README.md",
+      "gitBlob": "396c1cda287d1e6e0cb5ef134c39f7d63ae546fb",
+      "bytes": 4604,
+      "sha256": "99b52c8be514fcca76f143e1c07c9e7d8a693f08a621bbe03c39d6694e7b97fc"
+    },
+    {
+      "path": "THIRD_PARTY_NOTICES.md",
+      "gitBlob": "e698243622898952a49dc17c8afbdf1ea9d31ca1",
+      "bytes": 1368,
+      "sha256": "42ed4bc0a8b3f57abe547f50861657f7ecbcb72b821cde1b5a731121f8bbea53"
+    },
+    {
+      "path": "pinned-engine/jdk/internal/m3/rewrite/M3CanonicalScopeBoundaryInverseRecipe.java",
+      "gitBlob": "31d5c785c726f6788cea58c8acc3c3672ddcd8ef",
+      "bytes": 702,
+      "sha256": "16ac75e05658f7490c5c166ac5bbd3833e5425cec63f2e7566b6fcb771985de5"
+    },
+    {
+      "path": "pinned-engine/jdk/internal/m3/rewrite/M3CanonicalScopeBoundaryRecipe.java",
+      "gitBlob": "335e0da907c6a42304812be2bd825ccc3c33f59e",
+      "bytes": 690,
+      "sha256": "79e722442669cff96f872bffc5dd236e1bd4943c283e660637012ea7231ca3f1"
+    },
+    {
+      "path": "pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinManifest.java",
+      "gitBlob": "78d5fb68f13872164973a8918cc7886c5f548bca",
+      "bytes": 10964,
+      "sha256": "c874b5d4b5fe8886d53763ab91d050f431c4b7c09d3fe34d58680231ccb1cf7e"
+    },
+    {
+      "path": "pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinRecipe.java",
+      "gitBlob": "2ec479b8609459a28fdfd8a7a7d63cc44e919f00",
+      "bytes": 5187,
+      "sha256": "300a520ec9d273922d1edbdf5442e5faf825c47e8e3df7febf4baa2f39945401"
+    },
+    {
+      "path": "pom.xml",
+      "gitBlob": "059259ca746466389cccac4094c3d664b0d79e6d",
+      "bytes": 2678,
+      "sha256": "5b3f3f04f9539178d43ffa75068366d8ff1c037e25f67c2d31aa3bdb6e0ede1e"
+    },
+    {
+      "path": "src/main/resources/META-INF/rewrite/canonical-scope-boundary-20261020-inverse.yml",
+      "gitBlob": "c356a5847a9fbceb66beb716e4f46a73811d5cbc",
+      "bytes": 430,
+      "sha256": "567b9ae2b88bf8e9d677b367eca0cd923507a135f179ba682fb6a47faf0bf082"
+    },
+    {
+      "path": "src/main/resources/META-INF/rewrite/canonical-scope-boundary-20261020.yml",
+      "gitBlob": "451b4802fadecbf4a83b922d5bd021adbe6bf69b",
+      "bytes": 418,
+      "sha256": "ad8a32d3bece1d77d5e8b4d32e75df7966fb29df75b12c5c43d2d7056df8573d"
+    },
+    {
+      "path": "src/main/resources/jdk/internal/m3/rewrite/canonical-scope-boundary-20261020/before/m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3EditScope.java",
+      "gitBlob": "274360816db1e44a2f1796a3bc5cdeff6b0ce6db",
+      "bytes": 1052,
+      "sha256": "962d37d62d740c3e8055c365a048ae7ee0479c26a9f6bbfe741e540d6c1134ab"
+    },
+    {
+      "path": "src/main/resources/jdk/internal/m3/rewrite/canonical-scope-boundary-20261020/before/m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3ScopeInference.java",
+      "gitBlob": "d41d6dc93ec0e176f6d215d23e3b6a316a9e4a32",
+      "bytes": 8268,
+      "sha256": "d2cd6bb4d800878b9f512bf436bf4e38cf73b37676235832e1f68840cfe895c0"
+    },
+    {
+      "path": "src/main/resources/jdk/internal/m3/rewrite/canonical-scope-boundary-20261020/inverse/manifest.tsv",
+      "gitBlob": "d156e1c18360bedca6188d736d1716ab6cb5554e",
+      "bytes": 516,
+      "sha256": "e27ea3c529ec2e126828bd5879cfa55f09f345a53544579ff74eb292cb683332"
+    },
+    {
+      "path": "src/main/resources/jdk/internal/m3/rewrite/canonical-scope-boundary-20261020/inverse/out/m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3ScopeInference.java",
+      "gitBlob": "d41d6dc93ec0e176f6d215d23e3b6a316a9e4a32",
+      "bytes": 8268,
+      "sha256": "d2cd6bb4d800878b9f512bf436bf4e38cf73b37676235832e1f68840cfe895c0"
+    },
+    {
+      "path": "src/main/resources/jdk/internal/m3/rewrite/canonical-scope-boundary-20261020/manifest.tsv",
+      "gitBlob": "5809befb48c519ae58bfcdc68ea22889762a85f0",
+      "bytes": 516,
+      "sha256": "2bd1472f0de25ac41dea86806a0c7708d077ce8191aa94748103f7af60d12b68"
+    },
+    {
+      "path": "src/main/resources/jdk/internal/m3/rewrite/canonical-scope-boundary-20261020/out/m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3EditScope.java",
+      "gitBlob": "274360816db1e44a2f1796a3bc5cdeff6b0ce6db",
+      "bytes": 1052,
+      "sha256": "962d37d62d740c3e8055c365a048ae7ee0479c26a9f6bbfe741e540d6c1134ab"
+    },
+    {
+      "path": "src/main/resources/jdk/internal/m3/rewrite/canonical-scope-boundary-20261020/out/m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3ScopeInference.java",
+      "gitBlob": "e9a997b3d7293460d8dae8471aefa4d964edeee3",
+      "bytes": 9179,
+      "sha256": "858e5b5e05b8e3fea57eb30128a2265d0ca3403fa98d44a35addef73c582b078"
+    },
+    {
+      "path": "src/test/java/jdk/internal/m3/rewrite/M3CanonicalScopeBoundaryRecipeTest.java",
+      "gitBlob": "7133de5281428f39905bc5f204aa62d1e3e20385",
+      "bytes": 25457,
+      "sha256": "598b3dfc9318dbf4a2788119d590fe7fd11148e9f276c16286cabe27f9b55ec0"
+    },
+    {
+      "path": "src/test/resources/jdk/internal/m3/rewrite/canonical-scope-boundary-20261020/divergent/M3ScopeInference.java.txt",
+      "gitBlob": "d24729950508857280ea1b56d4e930f05137ec85",
+      "bytes": 7655,
+      "sha256": "13660b59f60ec2941ec19e9bc8964ffd4b04689cdc33cd19711fba14b8da09a4"
+    },
+    {
+      "path": "src/test/resources/jdk/internal/m3/rewrite/canonical-scope-boundary-20261020/historical/M3ScopeInference.java.txt",
+      "gitBlob": "a993ed2192188729cefeb45d6bcb5e49594e19b0",
+      "bytes": 6528,
+      "sha256": "ae8457cdcd062c18b657af499773a9aa870c12c68d5fe19aefebcd85da422200"
+    },
+    {
+      "path": "verify.py",
+      "gitBlob": "ed5762bea01ea3b9e7a87e7abe28ef3222039cf2",
+      "bytes": 26196,
+      "sha256": "d914821e9ee620b315507670da10bb9e2758750ed5ea1040bc3439a0bf1126c8"
+    }
+  ]
+}

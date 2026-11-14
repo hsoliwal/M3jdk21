@@ -1,0 +1,7 @@
+artifact	origin
+M3PureIntConvergenceRecipe	new M3 composite OpenRewrite recipe
+M3PatternizePureIntAtomRecipe	new M3 FILE-local OpenRewrite recipe
+M3DocumentPureIntAtomRecipe	new M3 FILE-local OpenRewrite recipe
+M3AtomizePureIntReturnRecipe	existing M3 recipe on master
+OpenRewrite API checks	openrewrite/rewrite tag v8.17.1 source inspection
+CI runner probe	.github/workflows/m3-ci-probe.yml

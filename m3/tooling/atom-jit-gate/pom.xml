@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<!-- Copyright 2026 Hitesh Soliwal and contributors -->
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.m3</groupId>
+  <artifactId>m3-tooling-atom-jit-gate</artifactId>
+  <version>0.1.0-SNAPSHOT</version>
+  <name>M3JDK :: Tooling :: Atom JIT gate</name>
+  <description>jdk.m3.tooling.atomjit (automatic module org.m3jdk.tooling.atomjit): the per-atom JIT retest gate.
+    Ordered passes ATOMIZE (the M3 atom census, m3/tooling/atom-census) -> JIT (child JVM interpreted vs forced
+    compilation, digest equality plus a PrintCompilation witness) -> PATTERNIZE (census catalogue pattern and exact
+    source digest) -> JIT retest; the serial per-atom phase ledger review (one JDK runtime root per plan); the
+    whole-estate source work-order gate; the installed-image mask JIT probe and the M3IndexMaskCompactor JNI parity
+    probe. Qualification tooling, never product code under src/. Relocated by recipe
+    (recipe/atom-jit-gate-20261106/relocate.py v4, RELOCATION_MAP.tsv, PROVENANCE.tsv) from hsoliwal/com.synexia
+    develop b65df53330e3.</description>
+  <properties>
+    <maven.compiler.release>21</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <atom.census.version>0.1.0-SNAPSHOT</atom.census.version>
+    <junit.artifact.version>5.10.2</junit.artifact.version>
+  </properties>
+  <dependencies>
+    <!-- the atomizer: install it first (mvn -f m3/tooling/atom-census/pom.xml -DskipTests install) -->
+    <dependency>
+      <groupId>jdk.m3.tooling</groupId>
+      <artifactId>m3-atom-census</artifactId>
+      <version>${atom.census.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter</artifactId>
+      <version>${junit.artifact.version}</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.13.0</version>
+        <configuration>
+          <release>21</release>
+          <proc>none</proc>
+          <compilerArgs>
+            <arg>-Xlint:all</arg>
+            <arg>-Werror</arg>
+          </compilerArgs>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>3.2.5</version>
+        <configuration>
+          <!-- classpath tooling like m3/tooling/atom-census (no module descriptor; the jar names its module) -->
+          <useModulePath>false</useModulePath>
+          <trimStackTrace>false</trimStackTrace>
+          <failIfNoTests>true</failIfNoTests>
+          <systemPropertyVariables>
+            <m3.atomjit.patternRules>${project.basedir}/../atom-census/PATTERN_RULES.tsv</m3.atomjit.patternRules>
+          </systemPropertyVariables>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>3.4.2</version>
+        <configuration>
+          <archive>
+            <manifestEntries>
+              <Automatic-Module-Name>org.m3jdk.tooling.atomjit</Automatic-Module-Name>
+            </manifestEntries>
+          </archive>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>

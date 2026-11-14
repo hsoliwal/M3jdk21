@@ -1,0 +1,139 @@
+{
+  "source_templates": {
+    "MIndexRecordComponent": {
+      "sha256": "b340b86517b838f43eed7087477b8f8bed47e19e23b826308e2a81181e49dce5",
+      "git_blob": "17af04a726daa4fcda4aa6bf0abbd6e3a177ba9e",
+      "path": "m3-mindex/class-index/src/main/java/jdk/internal/m3/mindex/classindex/MIndexRecordComponent.java",
+      "license": "Apache-2.0",
+      "adaptation": "See README.md; JDK-owned counterpart"
+    },
+    "MIndexField": {
+      "sha256": "56d18634a23f188db2da23a790412ce393b3223689c2977899b79143043b4e51",
+      "git_blob": "4a41ee9ccca3a1e33514e45f38aa8dff85d7162d",
+      "path": "m3-mindex/class-index/src/main/java/jdk/internal/m3/mindex/classindex/MIndexField.java",
+      "license": "Apache-2.0",
+      "adaptation": "See README.md; JDK-owned counterpart"
+    },
+    "MIndexMemberKind": {
+      "sha256": "196619a117a3783ad02487a3b05d8f22066a3b1667cabbd3cb17d63bba9dd4dc",
+      "git_blob": "f68a9ce030ace43d20c626c3c6f6bf8c54a0ece0",
+      "path": "m3-mindex/class-index/src/main/java/jdk/internal/m3/mindex/classindex/MIndexMemberKind.java",
+      "license": "Apache-2.0",
+      "adaptation": "See README.md; JDK-owned counterpart"
+    },
+    "MIndexClassBoundary": {
+      "sha256": "016db454989437ba213e2af47d0273f70243a2d0bede85f8e79ab8c6772a5150",
+      "git_blob": "e414f8c8b247ea38473d368eadbde3f98702e682",
+      "path": "m3-mindex/class-index/src/main/java/jdk/internal/m3/mindex/classindex/MIndexClassBoundary.java",
+      "license": "Apache-2.0",
+      "adaptation": "See README.md; JDK-owned counterpart"
+    },
+    "MIndexClassIndex": {
+      "sha256": "f169228bd954975a1254204a39e99187e68a99ca09f4f472dcb500349324d987",
+      "git_blob": "eead494947962c5099c6decfbcf546163249164d",
+      "path": "m3-mindex/class-index/src/main/java/jdk/internal/m3/mindex/classindex/MIndexClassIndex.java",
+      "license": "Apache-2.0",
+      "adaptation": "See README.md; JDK-owned counterpart"
+    },
+    "MIndexJvmDescriptor": {
+      "sha256": "3fb76c976a34e1808f42d35cc194ba490316fab8e9d4176c071180aefb362341",
+      "git_blob": "2e8995bd7b5995e908cf8e4f6c80c86244013f6d",
+      "path": "m3-mindex/class-index/src/main/java/jdk/internal/m3/mindex/classindex/MIndexJvmDescriptor.java",
+      "license": "Apache-2.0",
+      "adaptation": "See README.md; JDK-owned counterpart"
+    },
+    "MIndexClass": {
+      "sha256": "6a5e0a7a89a39b8b19d919fee8c781441a7b285e627d2ea723b20cb7e3c0376b",
+      "git_blob": "754a52297ff8c9ce34ffe7c765f8d7c684e693e4",
+      "path": "m3-mindex/class-index/src/main/java/jdk/internal/m3/mindex/classindex/MIndexClass.java",
+      "license": "Apache-2.0",
+      "adaptation": "See README.md; JDK-owned counterpart"
+    },
+    "MIndexVmPrecomputeKey": {
+      "sha256": "424e07da19c2218db8a705776ed2884146637d4325921a06c670afe3c96129e7",
+      "git_blob": "d7eec9579f614ff521683475df3eb5b825159066",
+      "path": "m3-openrewrite-recipes/crates/mindex-vm-runtime/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/mindex-vm-runtime/MIndexVmPrecomputeKey.java.txt",
+      "license": "Apache-2.0",
+      "adaptation": "See README.md; JDK-owned counterpart"
+    },
+    "MIndexVmSession": {
+      "sha256": "867a9ce0fb71162b38a68bd1e3d12b724bd61b15b844197a3b81f32cb4cc18cf",
+      "git_blob": "74f0fa06fc5ddb3417efdac3a8282e5f2488f07e",
+      "path": "m3-openrewrite-recipes/crates/mindex-vm-runtime/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/mindex-vm-runtime/MIndexVmSession.java.txt",
+      "license": "Apache-2.0",
+      "adaptation": "See README.md; JDK-owned counterpart"
+    },
+    "MIndexMemberFlags": {
+      "sha256": "680cf4bd7fb80ee6a760ed0f15220c060e37a1c51cac60821fda6a363ef69154",
+      "git_blob": "34d8b046955d327ef3917da907a71a2fb20743a8",
+      "path": "m3-mindex/class-index/src/main/java/jdk/internal/m3/mindex/classindex/MIndexMemberFlags.java",
+      "license": "Apache-2.0",
+      "adaptation": "See README.md; JDK-owned counterpart"
+    },
+    "MIndexMember": {
+      "sha256": "3acea5d4193a33fd6552e883f862243a23757d74855c51a450fa22ada1c0e350",
+      "git_blob": "ee7b754cd62c9bfccdea84f28c8f036917eb1126",
+      "path": "m3-mindex/class-index/src/main/java/jdk/internal/m3/mindex/classindex/MIndexMember.java",
+      "license": "Apache-2.0",
+      "adaptation": "See README.md; JDK-owned counterpart"
+    },
+    "MIndexClassFlags": {
+      "sha256": "08f2e889d5e35db1a18600db4a9abbd8b6cae0ba67978363d7b1f675c4f38853",
+      "git_blob": "33d406046f18d71c255e3ef130edb7a464260782",
+      "path": "m3-mindex/class-index/src/main/java/jdk/internal/m3/mindex/classindex/MIndexClassFlags.java",
+      "license": "Apache-2.0",
+      "adaptation": "See README.md; JDK-owned counterpart"
+    },
+    "MIndexConstructor": {
+      "sha256": "0f7d1f2c804978e9188dc63d9cfe9127654ad8ebfcaf3995761d77a50a862d61",
+      "git_blob": "5df90a368346a5cd4875119cfbff0d973598effa",
+      "path": "m3-mindex/class-index/src/main/java/jdk/internal/m3/mindex/classindex/MIndexConstructor.java",
+      "license": "Apache-2.0",
+      "adaptation": "See README.md; JDK-owned counterpart"
+    },
+    "MIndexMethod": {
+      "sha256": "47acb7331e94c07ae48662e9b4a0d6e7d5189ea698e7a189c89a31bc306cb85a",
+      "git_blob": "b9bba7c3ada958ff1c2f6227459a78532dcdfd7f",
+      "path": "m3-mindex/class-index/src/main/java/jdk/internal/m3/mindex/classindex/MIndexMethod.java",
+      "license": "Apache-2.0",
+      "adaptation": "See README.md; JDK-owned counterpart"
+    },
+    "MIndexAlgorithm": {
+      "sha256": "9e9c2eb9edfed393379793e634573ea33a87e2220cbfd7f761325fc326a087d7",
+      "git_blob": "0e40bec4b02bde697eba68b9817cc46c566987e2",
+      "path": "m3-mindex/foundation/src/main/java/jdk/internal/m3/mindex/foundation/MIndexAlgorithm.java",
+      "license": "Apache-2.0",
+      "adaptation": "Only lowerBound and upperBound int-lane method bodies inlined into M3CI"
+    }
+  },
+  "legal": {
+    "LICENSE": {
+      "sha256": "1eb85fc97224598dad1852b5d6483bbcf0aa8608790dcc657a5a2a761ae9c8c6",
+      "git_blob": "29f81d812f3e768fa89638d1f72920dbfd1413a8",
+      "source_commit": "e0319c9fce2aabacb07302e806d997ea7e77c50c",
+      "path": "LICENSE"
+    },
+    "NOTICE": {
+      "sha256": "31cec4f2c4936b0e7a71a77847a3c20b0959e119a02ef5cf537f4f707fff9427",
+      "git_blob": "cf6694a1316785ba2aa45394314bbae2e856c7fe",
+      "source_commit": "e0319c9fce2aabacb07302e806d997ea7e77c50c",
+      "path": "NOTICE"
+    }
+  },
+  "schema": 1,
+  "source_repository": "hsoliwal/com.synexia",
+  "source_commit": "7b5d45bea2fce0a042e4b85347c1eb4116846c55",
+  "target_base": "3ec445df10a3e8fc74aa983181f0700ac7bfbcad",
+  "crate": "m3-cb",
+  "scope": "MODULE; reflection snapshot and caller-owned Class bridge; no automatic ClassLoader/JVMTI hook",
+  "recipe_path": "m3/tooling/migration-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+  "recipe_sha256": "b96894a77e5c310addbda72b248ab56fedf8ceb24e5de81fe6e5d090982a4abc",
+  "history_review": {
+    "scope": "Read current pinned owner bodies and source commit metadata; not a complete-history admission",
+    "class_index_commits": [
+      "c25936c56b53313ced464f8741a496472494f16f",
+      "61ec083652f52218bb940dc6892d4c83861e681e",
+      "32cccbadd179d05b0d3a1708088bed9f356a1d79"
+    ]
+  }
+}

@@ -805,4 +805,99 @@ public abstract class InputStream implements Closeable {
         }
         return transferred;
     }
+
+    /**
+     * Performs at most one buffered read with cooperative cancellation.
+     * The borrowed monitor is not completed or closed. Cancellation of a
+     * blocking delegate is observable only when that delegate returns,
+     * unless the underlying stream has its own interruption mechanism.
+     *
+     * @param bytes destination buffer
+     * @param offset destination offset
+     * @param length maximum number of bytes requested
+     * @param monitor caller-owned monitor
+     * @return number of bytes read, or -1 on EOF
+     * @throws IOException if the delegate fails
+     * @throws java.util.concurrent.CancellationException if cancelled
+     */
+    public int readMonitored(byte[] bytes, int offset, int length,
+            java.util.concurrent.ProgressMonitor monitor) throws IOException {
+        Objects.requireNonNull(monitor, "monitor");
+        Objects.checkFromIndexSize(offset, length, bytes.length);
+        monitor.checkCancelled();
+        int count = read(bytes, offset, Math.min(length, DEFAULT_BUFFER_SIZE));
+        if (length > 0 && count == 0) throw new IOException("No progress from InputStream.read");
+        if (count > 0) monitor.worked(count);
+        monitor.checkCancelled();
+        return count;
+    }
+
+    /**
+     * Reads at most {@code length} bytes with a cancellation point between
+     * delegate calls. Each completed read is counted once. This method does
+     * not own or close the stream or its borrowed monitor.
+     *
+     * @param bytes destination buffer
+     * @param offset destination offset
+     * @param length maximum number of bytes
+     * @param monitor caller-owned monitor
+     * @return bytes actually read (possibly zero at EOF)
+     * @throws IOException if a delegate read fails
+     * @throws java.util.concurrent.CancellationException if cancelled
+     */
+    public int readNBytesMonitored(byte[] bytes, int offset, int length,
+            java.util.concurrent.ProgressMonitor monitor) throws IOException {
+        Objects.requireNonNull(monitor, "monitor");
+        Objects.checkFromIndexSize(offset, length, bytes.length);
+        int completed = 0;
+        while (completed < length) {
+            monitor.checkCancelled();
+            int count = read(bytes, offset + completed,
+                    Math.min(length - completed, DEFAULT_BUFFER_SIZE));
+            if (count < 0) break;
+            if (count == 0) throw new IOException("No progress from InputStream.read");
+            if (count > 0) {
+                completed += count;
+                monitor.worked(count);
+            }
+        }
+        monitor.checkCancelled();
+        return completed;
+    }
+
+    /**
+     * Transfers data with cancellation between delegate read/write calls.
+     * Progress counts only whole writes that return successfully; a delegate
+     * reporting a partial write through an exception cannot be measured.
+     * A blocked delegate is not forcibly closed or interrupted.
+     *
+     * @param output destination, never closed by this operation
+     * @param monitor borrowed monitor
+     * @return number of bytes successfully written, saturated at Long.MAX_VALUE
+     * @throws IOException if a delegate fails
+     * @throws java.util.concurrent.CancellationException if cancelled
+     */
+    public long transferToMonitored(OutputStream output,
+            java.util.concurrent.ProgressMonitor monitor) throws IOException {
+        Objects.requireNonNull(output, "output");
+        Objects.requireNonNull(monitor, "monitor");
+        byte[] buffer = new byte[DEFAULT_BUFFER_SIZE];
+        long transferred = 0L;
+        while (true) {
+            monitor.checkCancelled();
+            int count = read(buffer, 0, buffer.length);
+            if (count < 0) break;
+            if (count == 0) throw new IOException("No progress from InputStream.read");
+            if (count > 0) {
+                monitor.checkCancelled();
+                output.write(buffer, 0, count);
+                monitor.worked(count);
+                transferred = count > Long.MAX_VALUE - transferred
+                        ? Long.MAX_VALUE : transferred + count;
+            }
+        }
+        monitor.checkCancelled();
+        return transferred;
+    }
+
 }

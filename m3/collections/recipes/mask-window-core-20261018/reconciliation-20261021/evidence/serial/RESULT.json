@@ -1,0 +1,77 @@
+{
+  "status": "PASS_SELECTED_DIRECT_GATES",
+  "target_base": "1e5056b698fddc9992dc771ee5b1ababc3b53ce9",
+  "source_stages": {
+    "before": {
+      "java": "226b09d8996bf6b2a952c7341495a1f6dfbec13f8bb605996b1c26b93772e29f",
+      "native": "ed13463a6972bd014a861635987e8aa6214bf7516789c4f41d4ec3d69692fe73"
+    },
+    "java": {
+      "java": "d5d41be53c0e24d670c01e3b61eaa16c365b79ea3eae16936e599a81aa3ac59b",
+      "native": "ed13463a6972bd014a861635987e8aa6214bf7516789c4f41d4ec3d69692fe73"
+    },
+    "native": {
+      "java": "d5d41be53c0e24d670c01e3b61eaa16c365b79ea3eae16936e599a81aa3ac59b",
+      "native": "a688c9dde5d8d33df380c9b268fbbffa27046addda056ebc0a26f1fd4b94ac6e"
+    },
+    "test": {
+      "java": "d5d41be53c0e24d670c01e3b61eaa16c365b79ea3eae16936e599a81aa3ac59b",
+      "native": "a688c9dde5d8d33df380c9b268fbbffa27046addda056ebc0a26f1fd4b94ac6e"
+    }
+  },
+  "outputs": {
+    "before": {
+      "native_work": "WORK width=0 pattern=0 row_reads=4 row_elements=1024 state_reads=8 writes=0\nWORK width=0 pattern=1 row_reads=4 row_elements=1024 state_reads=8 writes=1\nWORK width=0 pattern=2 row_reads=4 row_elements=1024 state_reads=8 writes=4\nWORK width=0 pattern=3 row_reads=4 row_elements=1024 state_reads=0 writes=4\nWORK width=1 pattern=0 row_reads=4 row_elements=1024 state_reads=8 writes=0\nWORK width=1 pattern=1 row_reads=4 row_elements=1024 state_reads=8 writes=1\nWORK width=1 pattern=2 row_reads=4 row_elements=1024 state_reads=8 writes=4\nWORK width=1 pattern=3 row_reads=4 row_elements=1024 state_reads=0 writes=4\nNATIVE_PROBE_PASS assertions=7828\n",
+      "java": "M3_MASK_WINDOW_PASS checks=18744 trace=1c6611ecf874e43ecc53e4d746badcb9bb3ad854da3b57a109c949987b61dd87\n",
+      "jni": "M3_MASK_WINDOW_PASS checks=20549 trace=2c45448e20add12d774974ad7ab9ea38274e93b589c1e72bde25873fcb36944a\n",
+      "missing": "M3_MASK_WINDOW_PASS checks=25 trace=04ae8e18032cc5a498b63324c102fed7ba99f27c3b0b3baa15c01e16c2eee8fa\n"
+    },
+    "java": {
+      "native_work": "WORK width=0 pattern=0 row_reads=4 row_elements=1024 state_reads=8 writes=0\nWORK width=0 pattern=1 row_reads=4 row_elements=1024 state_reads=8 writes=1\nWORK width=0 pattern=2 row_reads=4 row_elements=1024 state_reads=8 writes=4\nWORK width=0 pattern=3 row_reads=4 row_elements=1024 state_reads=0 writes=4\nWORK width=1 pattern=0 row_reads=4 row_elements=1024 state_reads=8 writes=0\nWORK width=1 pattern=1 row_reads=4 row_elements=1024 state_reads=8 writes=1\nWORK width=1 pattern=2 row_reads=4 row_elements=1024 state_reads=8 writes=4\nWORK width=1 pattern=3 row_reads=4 row_elements=1024 state_reads=0 writes=4\nNATIVE_PROBE_PASS assertions=7828\n",
+      "java": "M3_MASK_WINDOW_PASS checks=18744 trace=1c6611ecf874e43ecc53e4d746badcb9bb3ad854da3b57a109c949987b61dd87\n",
+      "jni": "M3_MASK_WINDOW_PASS checks=20549 trace=2c45448e20add12d774974ad7ab9ea38274e93b589c1e72bde25873fcb36944a\n",
+      "missing": "M3_MASK_WINDOW_PASS checks=25 trace=04ae8e18032cc5a498b63324c102fed7ba99f27c3b0b3baa15c01e16c2eee8fa\n"
+    },
+    "native": {
+      "native_work": "WORK width=0 pattern=0 row_reads=0 row_elements=0 state_reads=8 writes=0\nWORK width=0 pattern=1 row_reads=1 row_elements=256 state_reads=8 writes=1\nWORK width=0 pattern=2 row_reads=4 row_elements=1024 state_reads=8 writes=4\nWORK width=0 pattern=3 row_reads=4 row_elements=1024 state_reads=0 writes=4\nWORK width=1 pattern=0 row_reads=0 row_elements=0 state_reads=8 writes=0\nWORK width=1 pattern=1 row_reads=1 row_elements=256 state_reads=8 writes=1\nWORK width=1 pattern=2 row_reads=4 row_elements=1024 state_reads=8 writes=4\nWORK width=1 pattern=3 row_reads=4 row_elements=1024 state_reads=0 writes=4\nNATIVE_PROBE_PASS assertions=7198\n",
+      "java": "M3_MASK_WINDOW_PASS checks=18744 trace=1c6611ecf874e43ecc53e4d746badcb9bb3ad854da3b57a109c949987b61dd87\n",
+      "jni": "M3_MASK_WINDOW_PASS checks=20549 trace=2c45448e20add12d774974ad7ab9ea38274e93b589c1e72bde25873fcb36944a\n",
+      "missing": "M3_MASK_WINDOW_PASS checks=25 trace=04ae8e18032cc5a498b63324c102fed7ba99f27c3b0b3baa15c01e16c2eee8fa\n"
+    },
+    "test": {
+      "native_work": "WORK width=0 pattern=0 row_reads=0 row_elements=0 state_reads=8 writes=0\nWORK width=0 pattern=1 row_reads=1 row_elements=256 state_reads=8 writes=1\nWORK width=0 pattern=2 row_reads=4 row_elements=1024 state_reads=8 writes=4\nWORK width=0 pattern=3 row_reads=4 row_elements=1024 state_reads=0 writes=4\nWORK width=1 pattern=0 row_reads=0 row_elements=0 state_reads=8 writes=0\nWORK width=1 pattern=1 row_reads=1 row_elements=256 state_reads=8 writes=1\nWORK width=1 pattern=2 row_reads=4 row_elements=1024 state_reads=8 writes=4\nWORK width=1 pattern=3 row_reads=4 row_elements=1024 state_reads=0 writes=4\nNATIVE_PROBE_PASS assertions=7198\n",
+      "java": "M3_MASK_WINDOW_PASS checks=18744 trace=1c6611ecf874e43ecc53e4d746badcb9bb3ad854da3b57a109c949987b61dd87\n",
+      "jni": "M3_MASK_WINDOW_PASS checks=20549 trace=2c45448e20add12d774974ad7ab9ea38274e93b589c1e72bde25873fcb36944a\n",
+      "missing": "M3_MASK_WINDOW_PASS checks=25 trace=04ae8e18032cc5a498b63324c102fed7ba99f27c3b0b3baa15c01e16c2eee8fa\n"
+    }
+  },
+  "matrix": {
+    "old-java-new-native": "M3_MASK_WINDOW_PASS checks=20549 trace=2c45448e20add12d774974ad7ab9ea38274e93b589c1e72bde25873fcb36944a\n",
+    "new-java-old-native": "M3_MASK_WINDOW_PASS checks=20549 trace=2c45448e20add12d774974ad7ab9ea38274e93b589c1e72bde25873fcb36944a\n",
+    "new-java-pre-positions-native": "M3_MASK_WINDOW_PASS checks=20549 trace=2c45448e20add12d774974ad7ab9ea38274e93b589c1e72bde25873fcb36944a\n"
+  },
+  "public_api": "BYTE_IDENTICAL_JAVAP",
+  "jni_exports": [
+    "Java_com_m3_collections_M3IndexMaskCompactor_positionsAbiNative",
+    "Java_com_m3_collections_M3IndexMaskCompactor_positionsMasksAbiNative",
+    "Java_com_m3_collections_M3IndexMaskCompactor_rangeAbiNative",
+    "Java_com_m3_collections_M3IndexMaskCompactor_selectLongWindowNative",
+    "Java_com_m3_collections_M3IndexMaskCompactor_selectNative",
+    "Java_com_m3_collections_M3IndexMaskCompactor_selectPositionsMasksNative",
+    "Java_com_m3_collections_M3IndexMaskCompactor_selectPositionsNative",
+    "Java_com_m3_collections_M3IndexMaskCompactor_selectRangeNative",
+    "Java_com_m3_collections_M3IndexMaskCompactor_selectWindowNative"
+  ],
+  "partial_states": 8,
+  "prewrite_refusals": 7,
+  "detected_mutants": 2,
+  "fixed_point": "NO_WRITES",
+  "maven": "NOT_INSTALLED_NOT_EXECUTED",
+  "openrewrite_sdk": "NOT_USED_EXACT_SOURCE_REPLAY",
+  "full_module_jdk": "NOT_RUN",
+  "cross_platform": "NOT_RUN",
+  "complete_chat": false,
+  "phase_advanced": false,
+  "candidate_root": "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/candidate",
+  "commands": 105
+}

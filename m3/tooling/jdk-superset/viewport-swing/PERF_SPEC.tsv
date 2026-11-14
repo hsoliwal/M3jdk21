@@ -1,0 +1,81 @@
+pkg	atom	label	route	ops	method_handle
+list	M3PrefixRowOffsets#startOf(int)	row start (getCellBounds)	direct	FAST	virtual M3PrefixRowOffsets.startOf
+list	ref:BasicListUI#getCellBounds	stock row start loop (JDK reference)	reference	SLOW	-
+list	M3PrefixRowOffsets#firstEndingAfter(long)	row holding an offset	direct	FAST	virtual M3PrefixRowOffsets.firstEndingAfter
+list	M3PrefixRowOffsets#rowCount()	rows indexed	direct	FAST	virtual M3PrefixRowOffsets.rowCount
+list	M3PrefixRowOffsets#monotone()	monotone flag	direct	FAST	virtual M3PrefixRowOffsets.monotone
+list	M3PrefixRowOffsets#M3PrefixRowOffsets(int[])	lane build over 8192 heights (per layout)	direct	SLOW	ctor M3PrefixRowOffsets.<init>
+list	M3ListRows#startOf(int)	row start through the UI state	direct	FAST	virtual M3ListRows.startOf
+list	M3ListRows#rowAt(int,int,int,boolean)	location to row (locationToIndex)	direct	FAST	virtual M3ListRows.rowAt
+list	ref:BasicListUI#convertLocationToRow	stock location to row loop (JDK reference)	reference	SLOW	-
+list	M3ListRows#indexes(Object,int[])	gate with the same heights array	direct	FAST	virtual M3ListRows.indexes
+list	M3RowPieces#start(int)	piece start	direct	FAST	virtual M3RowPieces.start
+list	M3RowPieces#length(int)	piece length	direct	FAST	virtual M3RowPieces.length
+list	M3RowPieces#count()	piece count	direct	FAST	virtual M3RowPieces.count
+list	M3RowPieces#size()	row count	direct	FAST	virtual M3RowPieces.size
+list	M3RowPieces#reset(int)	forget the edits	direct	FAST	virtual M3RowPieces.reset
+list	M3RowPieces#insert(int,int)	insert one row after reset(n)	after reset(n)	MEDIUM	virtual M3RowPieces.insert
+list	M3RowPieces#remove(int,int)	remove one row after reset(n)	after reset(n)	MEDIUM	virtual M3RowPieces.remove
+list	M3RowPieces#change(int,int)	change one row after reset(n)	after reset(n)	MEDIUM	virtual M3RowPieces.change
+list	M3RowPieces#split(int)	split a piece after reset(n)	after reset(n)	MEDIUM	virtual M3RowPieces.split
+list	M3ListMeasure#measure(Object,JList<Object>,CellRendererPane)	delta layout of 10^4 rows after one change	after DefaultListModel.set	SLOW	virtual M3ListMeasure.measure
+table	M3SorterLanes#modelIndex(int)	view to model (convertRowIndexToModel)	direct	FAST	virtual M3SorterLanes.modelIndex
+table	ref:TableRowSorter#convertRowIndexToModel	stock view to model (JDK reference)	reference	FAST	-
+table	M3SorterLanes#viewIndex(int)	model to view (convertRowIndexToView)	direct	FAST	virtual M3SorterLanes.viewIndex
+table	ref:TableRowSorter#convertRowIndexToView	stock model to view (JDK reference)	reference	FAST	-
+table	M3SorterLanes#viewRowCount()	view rows	direct	FAST	virtual M3SorterLanes.viewRowCount
+table	M3SorterLanes#transformed()	transformed flag	direct	FAST	virtual M3SorterLanes.transformed
+table	M3SorterLanes#sortLane(int[],int)	sort a lane of 4096 model indices	direct	HEAVY	virtual M3SorterLanes.sortLane
+table	ref:Arrays#sort(Integer[],Comparator)	stock Row sort shape: boxed TimSort (JDK reference)	reference	HEAVY	-
+table	M3SorterLanes#binarySearch(int[],int)	insertion point in the view lane	direct	FAST	virtual M3SorterLanes.binarySearch
+table	M3SparseSizes#getSize(int)	getSize over 10^6 rows, 1024 custom	direct	FAST	virtual M3SparseSizes.getSize
+table	ref:SizeSequence#getSize	stock SizeSequence.getSize (JDK reference)	reference	FAST	-
+table	M3SparseSizes#getPosition(int)	getPosition over 10^6 rows, 1024 custom	direct	FAST	virtual M3SparseSizes.getPosition
+table	ref:SizeSequence#getPosition	stock SizeSequence.getPosition (JDK reference)	reference	FAST	-
+table	M3SparseSizes#getIndex(int)	getIndex over 10^6 rows, 1024 custom	direct	FAST	virtual M3SparseSizes.getIndex
+table	ref:SizeSequence#getIndex	stock SizeSequence.getIndex (JDK reference)	reference	FAST	-
+table	M3SparseSizes#find(int)	find in the sparse index lane	direct	FAST	virtual M3SparseSizes.find
+table	M3SparseSizes#lowerBound(int)	lowerBound in the sparse index lane	direct	FAST	virtual M3SparseSizes.lowerBound
+tree	M3FixedHeightLayoutCache#getPathForRow(int)	row to path	direct	MEDIUM	virtual M3FixedHeightLayoutCache.getPathForRow
+tree	ref:FIXED_STOCK#getPathForRow	stock row to path (JDK reference)	reference	MEDIUM	-
+tree	M3FixedHeightLayoutCache#getRowForPath(TreePath)	path to row (fresh path instances)	direct	MEDIUM	virtual M3FixedHeightLayoutCache.getRowForPath
+tree	ref:FIXED_STOCK#getRowForPath	stock path to row (JDK reference)	reference	MEDIUM	-
+tree	M3FixedHeightLayoutCache#getBounds(TreePath,Rectangle)	bounds of a painted row	direct	MEDIUM	virtual M3FixedHeightLayoutCache.getBounds
+tree	ref:FIXED_STOCK#getBounds	stock bounds (JDK reference)	reference	MEDIUM	-
+tree	M3FixedHeightLayoutCache#getPathClosestTo(int,int)	closest path to y (visible window start)	direct	MEDIUM	virtual M3FixedHeightLayoutCache.getPathClosestTo
+tree	ref:FIXED_STOCK#getPathClosestTo	stock closest path (JDK reference)	reference	MEDIUM	-
+tree	M3FixedHeightLayoutCache#isExpanded(TreePath)	isExpanded of a painted row	direct	MEDIUM	virtual M3FixedHeightLayoutCache.isExpanded
+tree	M3FixedHeightLayoutCache#getExpandedState(TreePath)	getExpandedState of a painted row	direct	MEDIUM	virtual M3FixedHeightLayoutCache.getExpandedState
+tree	M3FixedHeightLayoutCache#getRowCount()	row count	direct	FAST	virtual M3FixedHeightLayoutCache.getRowCount
+tree	M3FixedHeightLayoutCache#getVisibleChildCount(TreePath)	visible rows below a row	direct	MEDIUM	virtual M3FixedHeightLayoutCache.getVisibleChildCount
+tree	M3FixedHeightLayoutCache#getVisiblePathsFrom(TreePath)	start of the visible-path enumeration	direct	MEDIUM	virtual M3FixedHeightLayoutCache.getVisiblePathsFrom
+tree	M3FixedHeightLayoutCache.Visible#nextElement()	nextElement, 40 rows per operation (one paint)	per 40-row walk	SLOW	adapted FIXED_VISIBLE.nextElement
+tree	M3FixedHeightLayoutCache.Visible#hasMoreElements()	hasMoreElements, 40 rows per operation (one paint)	per 40-row walk	SLOW	adapted FIXED_VISIBLE.hasMoreElements
+tree	composite:paintWalk(M3FixedHeightLayoutCache)	BasicTreeUI.paint row walk: closest path + 40 x (next, bounds, state)	composite	SLOW	-
+tree	ref:paintWalk(FIXED_STOCK)	stock paint row walk (JDK reference)	reference	SLOW	-
+tree	M3FixedHeightLayoutCache#mapGet(TreePath)	path map lookup by an equal path	direct	MEDIUM	virtual M3FixedHeightLayoutCache.mapGet
+tree	M3VariableHeightLayoutCache#getPathForRow(int)	row to path	direct	MEDIUM	virtual M3VariableHeightLayoutCache.getPathForRow
+tree	ref:VAR_STOCK#getPathForRow	stock row to path (JDK reference)	reference	MEDIUM	-
+tree	M3VariableHeightLayoutCache#getRowForPath(TreePath)	path to row (fresh path instances)	direct	MEDIUM	virtual M3VariableHeightLayoutCache.getRowForPath
+tree	ref:VAR_STOCK#getRowForPath	stock path to row (JDK reference)	reference	SLOW	-
+tree	M3VariableHeightLayoutCache#getBounds(TreePath,Rectangle)	bounds of a painted row	direct	MEDIUM	virtual M3VariableHeightLayoutCache.getBounds
+tree	ref:VAR_STOCK#getBounds	stock bounds (JDK reference)	reference	MEDIUM	-
+tree	M3VariableHeightLayoutCache#getPathClosestTo(int,int)	closest path to y (visible window start)	direct	MEDIUM	virtual M3VariableHeightLayoutCache.getPathClosestTo
+tree	ref:VAR_STOCK#getPathClosestTo	stock closest path (JDK reference)	reference	MEDIUM	-
+tree	M3VariableHeightLayoutCache#isExpanded(TreePath)	isExpanded of a painted row	direct	MEDIUM	virtual M3VariableHeightLayoutCache.isExpanded
+tree	M3VariableHeightLayoutCache#getExpandedState(TreePath)	getExpandedState of a painted row	direct	MEDIUM	virtual M3VariableHeightLayoutCache.getExpandedState
+tree	M3VariableHeightLayoutCache#getRowCount()	row count	direct	FAST	virtual M3VariableHeightLayoutCache.getRowCount
+tree	M3VariableHeightLayoutCache#getVisibleChildCount(TreePath)	visible rows below a row	direct	MEDIUM	virtual M3VariableHeightLayoutCache.getVisibleChildCount
+tree	M3VariableHeightLayoutCache#getVisiblePathsFrom(TreePath)	start of the visible-path enumeration	direct	MEDIUM	virtual M3VariableHeightLayoutCache.getVisiblePathsFrom
+tree	M3VariableHeightLayoutCache.Visible#nextElement()	nextElement, 40 rows per operation (one paint)	per 40-row walk	SLOW	adapted VAR_VISIBLE.nextElement
+tree	M3VariableHeightLayoutCache.Visible#hasMoreElements()	hasMoreElements, 40 rows per operation (one paint)	per 40-row walk	SLOW	adapted VAR_VISIBLE.hasMoreElements
+tree	composite:paintWalk(M3VariableHeightLayoutCache)	BasicTreeUI.paint row walk: closest path + 40 x (next, bounds, state)	composite	SLOW	-
+tree	ref:paintWalk(VAR_STOCK)	stock paint row walk (JDK reference)	reference	SLOW	-
+tree	M3VariableHeightLayoutCache#mapGet(TreePath)	path map lookup by an equal path	direct	MEDIUM	virtual M3VariableHeightLayoutCache.mapGet
+tree	M3ExpandedState#expandedKeysBelow(TreePath)	expanded keys below a path (1555 keys)	direct	MEDIUM	virtual M3ExpandedState.expandedKeysBelow
+tree	ref:JTree#getExpandedDescendants	stock scan of the whole table (JDK reference)	reference	SLOW	-
+tree	M3ExpandedState#nextCapacity(int)	Hashtable growth rule	direct	FAST	static M3ExpandedState.nextCapacity
+tree	M3ExpandedState#bucketCount()	mirrored bucket count	direct	FAST	virtual M3ExpandedState.bucketCount
+tree	M3VariableHeightLayoutCache#mix(int)	hash mixing of the path map and child index	direct	FAST	static M3VariableHeightLayoutCache.mix
+tree	M3VariableHeightLayoutCache#prefix(int[],int)	Fenwick prefix over 1024 children	direct	FAST	static M3VariableHeightLayoutCache.prefix
+tree	M3VariableHeightLayoutCache#scan(Object[],int,Object)	last equal child among 64	direct	MEDIUM	static M3VariableHeightLayoutCache.scan

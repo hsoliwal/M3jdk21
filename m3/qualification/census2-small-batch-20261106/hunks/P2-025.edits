@@ -1,0 +1,12 @@
+@@@ FILE m3/core/src/jdk/m3/text/SharedRelatedLexemeCatalog.java
+@@@ HUNK P2-025-1
+@@@ OLD
+        }
+        return List.copyOf(relations.subList(first, low));
+    }
+@@@ NEW
+        }
+        //FLLDCIM: MRL - census2 P2-025, crate m3-current-java-engine-qualification-20261101 (m3-related-empty-source-range-20261031, pre 38102366 -> post df379886): an empty range returns List.of()
+        return first == low ? List.of() : List.copyOf(relations.subList(first, low));
+    }
+@@@ END

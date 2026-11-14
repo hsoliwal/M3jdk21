@@ -1,0 +1,151 @@
+diff --git a/m3/tooling/module-packs/cpu-tools/OUTPUT_CONTRACT.tsv b/m3/tooling/module-packs/cpu-tools/OUTPUT_CONTRACT.tsv
+index 4eb96c3..44090b0 100644
+--- a/m3/tooling/module-packs/cpu-tools/OUTPUT_CONTRACT.tsv
++++ b/m3/tooling/module-packs/cpu-tools/OUTPUT_CONTRACT.tsv
+@@ -20,3 +20,4 @@ com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe
+ ${OUT}/BUILD_RECEIPT.json	Authoritative result of that exact build; requires status PASS and all declared gates	Produced by build.py; missing/FAILED is unqualified
+ m3/evidence/cpu-tools-jmod-20261018/**	Published exact recipe, build and qualification receipts; generated tool evidence	Task evidence output; source payload remains sealed
+ ${OUT}/native/libm3textio.so; native-expected/libm3textio.so	Original compiled JNI and separate expected objcopy -g result; JMOD/member/linked hashes and native tool identities in BUILD_RECEIPT.json	Produced by build.py; original JNI C and existing packager unchanged
++${OUT}/java-tmp/**	Scoped transient Java scratch for nested JMOD/jlink/native-strip operations; normalized path recorded in COMMANDS.json	Created by build.py for the packager command only; not a consumer runtime artifact
+diff --git a/m3/tooling/module-packs/cpu-tools/README.md b/m3/tooling/module-packs/cpu-tools/README.md
+index bb5b51b..51c8b05 100644
+--- a/m3/tooling/module-packs/cpu-tools/README.md
++++ b/m3/tooling/module-packs/cpu-tools/README.md
+@@ -145,7 +145,12 @@ com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe
+ byte-hash equality; internal jlink deduplication links are accepted.
+ Every subprocess receives at most 115 seconds plus five seconds of forced
+ process-group cleanup. These build-process limits are separate from the
+-in-process tool execution contracts described below.
++in-process tool execution contracts described below. The packager subprocess
++receives one controlled, quoted `JAVA_TOOL_OPTIONS` property selecting
++`java.io.tmpdir` under the fresh output's `java-tmp` directory. Its nested
++JMOD/jlink tools use that staging space, including native debug stripping;
++other commands retain their sanitized environment and original PATH. The
++normalized temporary directory is recorded in the packager command receipt.
+ 
+ After successful qualification, invoke the linked image directly:
+ 
+diff --git a/m3/tooling/module-packs/cpu-tools/build.py b/m3/tooling/module-packs/cpu-tools/build.py
+index ba6617b..32a4435 100644
+--- a/m3/tooling/module-packs/cpu-tools/build.py
++++ b/m3/tooling/module-packs/cpu-tools/build.py
+@@ -18,6 +18,7 @@ com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe
+ import platform
+ import re
+ import shutil
++import shlex
+ import signal
+ import subprocess
+ import sys
+@@ -214,18 +215,30 @@
+             value = value.replace(original, replacement)
+         return value
+ 
+-    def run(self, label, *arguments):
++    def run(self, label, *arguments, java_tmp_dir=None):
++        environment = self.environment
++        temporary = None
++        if java_tmp_dir is not None:
++            temporary = Path(java_tmp_dir).resolve(strict=True)
++            if not temporary.is_dir():
++                raise ValueError("Java temporary directory required: " + str(temporary))
++            environment = dict(self.environment)
++            # HotSpot parses concatenated quoted argument segments. Quote this
++            # one controlled property; never forward caller-supplied JVM options.
++            environment["JAVA_TOOL_OPTIONS"] = shlex.quote("-Djava.io.tmpdir=" + str(temporary))
+         log = self.output / "logs" / (label + ".log")
+         started = time.monotonic()
+         record = {"label": label, "argv": [self.normalized(arg) for arg in arguments],
+                   "log": log.relative_to(self.output).as_posix(),
+                   "timeout_seconds": COMMAND_SECONDS, "status": "STARTED"}
++        if temporary is not None:
++            record["java_tmp_dir"] = self.normalized(temporary)
+         self.rows.append(record)
+         write_json(self.output / "COMMANDS.json", self.rows)
+         with log.open("wb") as stream:
+             try:
+                 process = subprocess.Popen([str(arg) for arg in arguments], cwd=self.repo,
+-                                           env=self.environment, stdin=subprocess.DEVNULL,
++                                           env=environment, stdin=subprocess.DEVNULL,
+                                            stdout=stream, stderr=subprocess.STDOUT,
+                                            start_new_session=True)
+                 try:
+@@ -309,7 +322,7 @@
+     output = fresh_output(args.out, (jdk, *source_roots, *(path for _, path in legal_roots), owner / "fixtures",
+                                     existing / "native", existing / "fixtures"))
+     output.mkdir(parents=True, exist_ok=False)
+-    for name in ("logs", "modules", "native", "native-expected", "jars", "legal", "test-classes", "test-work"):
++    for name in ("logs", "modules", "native", "native-expected", "jars", "legal", "java-tmp", "test-classes", "test-work"):
+         (output / name).mkdir()
+     command = Commands(output, repo, jdk)
+     # jlink invokes the name objcopy. Keep its exact preflight PATH for every
+@@ -408,7 +421,8 @@
+                     "--image-tsv", image_tsv, "--manifest", manifest, "--layer-root", repo,
+                     "--out", output / "pack", "--legal-notices", output / "legal",
+                     "--native-library", "jdk.m3.io=" + str(output / "native"),
+-                    "--add-modules", "java.se,jdk.compiler,jdk.jlink,jdk.jartool,jdk.jdeps")
++                    "--add-modules", "java.se,jdk.compiler,jdk.jlink,jdk.jartool,jdk.jdeps",
++                    java_tmp_dir=output / "java-tmp")
+         jmods = output / "pack/jmods"
+         if tuple(sorted(path.stem for path in jmods.glob("*.jmod"))) != MODULES:
+             raise ValueError("packager JMOD inventory differs from the twenty admitted modules")
+diff --git a/m3/tooling/module-packs/cpu-tools/fixtures/test_build.py b/m3/tooling/module-packs/cpu-tools/fixtures/test_build.py
+index 87fbdbe..abb26e8 100644
+--- a/m3/tooling/module-packs/cpu-tools/fixtures/test_build.py
++++ b/m3/tooling/module-packs/cpu-tools/fixtures/test_build.py
+@@ -141,6 +141,55 @@ com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe
+         self.assertEqual("PASS", commands.rows[0]["status"])
+         self.assertEqual(64, len(commands.rows[0]["log_sha256"]))
+ 
++    def test_java_tmp_override_quotes_real_path_and_does_not_leak(self):
++        commands = self.commands()
++        before = dict(commands.environment)
++        java_home = before.get("JAVA_HOME")
++        java_from_home = Path(java_home) / "bin" / "java" if java_home else None
++        java = (str(java_from_home) if java_from_home is not None
++                and java_from_home.is_file() and os.access(java_from_home, os.X_OK)
++                else shutil.which("java", path=before.get("PATH", os.defpath)))
++        self.assertIsNotNone(java, "A source-file-capable Java is required for the real probe")
++        staging = self.root / 'java temp \'single\' "double" -Dm3.injected=true'
++        staging.mkdir()
++        source = self.root / "JavaTmpProbe.java"
++        source.write_text("""import java.nio.file.Files;
++import java.nio.file.Path;
++public class JavaTmpProbe {
++    public static void main(String[] args) throws Exception {
++        if (System.getProperty("m3.injected") != null)
++            throw new AssertionError("injected property escaped the quoted path");
++        if (!args[2].equals(System.getenv("PATH")))
++            throw new AssertionError("PATH changed");
++        String actual = System.getProperty("java.io.tmpdir");
++        if ("override".equals(args[0])) {
++            if (!args[1].equals(actual)) throw new AssertionError("temporary property differs: " + actual);
++            Path file = Files.createTempFile("m3-java-tmp-", ".probe");
++            try {
++                if (!file.getParent().toRealPath().equals(Path.of(args[1]).toRealPath()))
++                    throw new AssertionError("real temporary file used the wrong directory");
++            } finally { Files.delete(file); }
++            System.out.println("JAVA_TMP_OVERRIDE_PASS");
++        } else {
++            if (System.getenv("JAVA_TOOL_OPTIONS") != null)
++                throw new AssertionError("per-command environment leaked");
++            if (args[1].equals(actual)) throw new AssertionError("temporary override leaked");
++            System.out.println("JAVA_TMP_NORMAL_PASS");
++        }
++    }
++}
++""", encoding="utf-8")
++        result = commands.run("java-tmp-override", java, source,
++                              "override", str(staging), before.get("PATH", ""), java_tmp_dir=staging)
++        self.assertIn("JAVA_TMP_OVERRIDE_PASS", result)
++        self.assertEqual(commands.normalized(staging), commands.rows[0]["java_tmp_dir"])
++        self.assertEqual(before, commands.environment)
++        normal = commands.run("java-tmp-normal", java, source,
++                              "normal", str(staging), before.get("PATH", ""))
++        self.assertIn("JAVA_TMP_NORMAL_PASS", normal)
++        self.assertNotIn("java_tmp_dir", commands.rows[1])
++        self.assertEqual(before, commands.environment)
++
+     def test_jmod_legal_readback_rejects_missing_or_changed_notice(self):
+         notice = self.root / "NOTICE.txt"
+         notice.write_text("reviewed donor notice", encoding="utf-8")

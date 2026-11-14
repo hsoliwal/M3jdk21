@@ -1,0 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
+# SPDX-License-Identifier: Apache-2.0
+path	template	sha256
+src/main/java/com/synexia/m3/pmem/PmemSourceSlices.java	recipes/templates/PmemSourceSlices.java.tpl	f62545054f75562e3b137d3338bb228595212e6768d11ecc1952d9e909e826c6
+src/test/java/test/PmemSourceSlicesSmokeTest.java	recipes/templates/PmemSourceSlicesSmokeTest.java.tpl	2fe7fe9ba979ddfe2eaffd61645987fafe865579d6bf28da7e028ac2a879e406
+src/test/java/test/PmemSourceSlicesNativeSmokeTest.java	recipes/templates/PmemSourceSlicesNativeSmokeTest.java.tpl	edcea85bf92729ffc25abc2816d8b5f71d4e2b5ee019d6fc135898fe729fce72

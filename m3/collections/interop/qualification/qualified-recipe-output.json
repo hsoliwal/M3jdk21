@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "spdx_license_id": "Apache-2.0",
+  "stage": "QUALIFIED_RECIPE_OUTPUT_SOURCE_RECEIPT",
+  "canonical_repository": "hsoliwal/com.synexia",
+  "canonical_commit": "ce510939bde1be4d6f76f014ef6e92e81bbab05b",
+  "canonical_pr": 11676,
+  "receiver_repository": "hsoliwal/M3jdk21",
+  "receiver_pr": 943,
+  "executed_head": "777ba2b97d15ea2ef2e5ea4340f19c83fd7896bd",
+  "run_id": 38763952509,
+  "job_id": 116522178715,
+  "artifact_id": 11988005108,
+  "artifact_zip_sha256": "89da90b077f4d8612609d7d6326c2d0336220e5ba21a704509fd96ecb39cc28b",
+  "artifact_digest_verified_locally": true,
+  "actual_platform": "Linux aarch64, Temurin 21.0.12.1+1, Maven 3.9.12",
+  "recipe_suite": {"tests": 6, "failures": 0, "errors": 0, "skipped": 0},
+  "runtime_suite": {"tests": 42, "failures": 0, "errors": 0, "skipped": 0},
+  "actual_recipe_generation": "PASS_FIVE_JAVA_LST_POSTIMAGES",
+  "source_promotion": "Use only bytes from authenticated successful workflow artifact; all five SHA-256 and Git blob identities match the sealed recipe postimages",
+  "unchanged_full_core_compile": "PASS",
+  "core_jdeps": "java.base",
+  "production_and_test_compile": "PASS_JAVA21_WARNINGS_AS_ERRORS",
+  "runtime_jar_packaging": "PASS",
+  "observed_core_jar_sha256": "0d85f5bc1121c9519961626a0501083998f9fd8db4b5cec42ecbef4d147e517c",
+  "observed_interop_jar_sha256": "a944183c0eea22b006781a84bfb678009a9d6f8a7b215675501fdb4bd2b89099",
+  "public_surface": {"factories": 18, "collectors": 11},
+  "files": {
+    "M3LibraryCollections.java": "4135be52f0cc847acc58e747a153c63f242c12c799f821e4d24f1de1bec8dd16",
+    "M3LibraryCollectors.java": "be19e93efdd49ce02cd4209aa274a3ea6779a591d4ce9b313bd5a616c22e0b78",
+    "M3SpringMultiValueMap.java": "6e58eea3bcf3fb0af727236b05da83a344459b6896bcfaa0145440a590b2e0a9",
+    "M3LibraryClosureTest.java": "5ece9a369bcf5a223cb163ed0857534600fcd53bcc881f239956be15a4200f40",
+    "M3LibraryCollectionsTest.java": "db377aa16cf2de5a8f49ef273f9b5fc7fb0f1a35ac247339f0556cea086d2d04"
+  },
+  "limits": [
+    "Focused separately built optional Java library, not wholesale JDK replacement or installed M3JDK image.",
+    "No full-library, JNI, performance, dependency-security, serialization or concurrent-owner qualification inferred.",
+    "Spring 6.2.0 single-value bridge retains its documented pinned null-equality anomaly; not universal Map-equality substitution.",
+    "The newer canonical Synexia engine and private-repository full gate retain their separate execution status.",
+    "Preparation receipts in donor-origin.json and earlier qualification files remain historical; this receipt supersedes their pending status only for the exact executed outputs above."
+  ]
+}

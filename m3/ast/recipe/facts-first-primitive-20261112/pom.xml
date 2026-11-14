@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>jdk.m3.ast.recipe</groupId>
+  <artifactId>facts-first-primitive-current-owner-proof</artifactId>
+  <version>20261112-SNAPSHOT</version>
+  <name>Exact current-owner SyntaxIndex Java 21 Maven/JUnit proof crate</name>
+  <properties>
+    <maven.compiler.release>21</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  <dependencies>
+    <!-- Published JUnit, isolated from the product module's curated/unresolved
+         5.10.2-m3-source-1 dependency; do NOT mutate the product POM. -->
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter</artifactId>
+      <version>5.10.2</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+  <build>
+    <!-- Compile the ORIGINAL product owner, never a copied test-only facade. -->
+    <sourceDirectory>${project.basedir}/../../src/main/java</sourceDirectory>
+    <testSourceDirectory>${project.basedir}/../../src/test/java</testSourceDirectory>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.13.0</version>
+        <configuration>
+          <release>21</release>
+          <proc>none</proc>
+          <includes>
+            <include>jdk/m3/ast/SyntaxTree.java</include>
+            <include>jdk/m3/ast/SyntaxIndex.java</include>
+          </includes>
+          <testIncludes>
+            <testInclude>jdk/m3/ast/SyntaxIndexContract.java</testInclude>
+            <testInclude>jdk/m3/ast/SyntaxIndexFactsFirstContract.java</testInclude>
+            <testInclude>jdk/m3/ast/ProbeGuardContract.java</testInclude>
+            <testInclude>jdk/m3/ast/SyntaxIndexFactsFirstTest.java</testInclude>
+          </testIncludes>
+          <compilerArgs>
+            <arg>-Xlint:all</arg>
+            <arg>-Werror</arg>
+          </compilerArgs>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>3.2.5</version>
+        <configuration>
+          <failIfNoTests>true</failIfNoTests>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>

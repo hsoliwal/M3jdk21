@@ -1,0 +1,4 @@
+# JEP 496 exact FIPS203 text-vector crate
+# path	beforeSha256|ABSENT	afterSha256	resource
+test/jdk/sun/security/provider/acvp/data/ML-KEM-encapDecap-FIPS203/internalProjection.json	ABSENT	f88e3911ead5de87a56a7727c5864a1117601b4f7342a4c5b0969a52aff98db9	00-ML-KEM-encapDecap-FIPS203.json.after.txt
+test/jdk/sun/security/provider/acvp/data/ML-KEM-keyGen-FIPS203/internalProjection.json	ABSENT	3012752aa40bc8b23c24c44fb46426c8a13c2d959c62725a7060b30e4279fa0f	01-ML-KEM-keyGen-FIPS203.json.after.txt

@@ -1,0 +1,24 @@
+{
+  "schema": "spring-root-v2-callback-edit",
+  "sourceBeforeSHA256": "a0e658e3b22729b101cef0b64a91164846b1c5a934fcaf4220173f2608859ae7",
+  "sourceAfterSHA256": "d90b72771ab454aa1dd03eb2c5784d7aaffd612736868a66fbe2682c8ab05f7c",
+  "sourceAfterBytes": 31224,
+  "semanticAtomsChanged": [
+    "Table.entrySet.contains",
+    "Table.entrySet.remove",
+    "Table.equals"
+  ],
+  "publicInterfacesChanged": false,
+  "fixturesChanged": false,
+  "storage": {
+    "root": "S:\\codex-work\\m3-collections-next-20261018",
+    "free_bytes": 26181914624,
+    "logical_bytes": 44936753,
+    "cap_bytes": 536870912,
+    "reserve_bytes": 8589934592,
+    "verified_child_temp": "S:\\codex-work\\m3-collections-next-20261018\\temp\\",
+    "C_build_lane": "HELD",
+    "K_temp_lane": "UNAVAILABLE"
+  },
+  "status": "EDITED_PROOFS_PENDING"
+}

@@ -1,0 +1,327 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] -------------------< m3.intake:commons-codec-1.22.1 >-------------------
+[INFO] Building commons-codec-1.22.1 1.22.1-m3-source-1
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- rewrite:5.23.1:runNoFork (default-cli) @ commons-codec-1.22.1 ---
+[INFO] Using active recipe(s) [com.synexia.m3.intake.Relocate]
+[INFO] Using active styles(s) []
+[INFO] Validating active recipes...
+[INFO] Project [commons-codec-1.22.1] Resolving Poms...
+[INFO] Project [commons-codec-1.22.1] Parsing source files
+[WARNING] There were problems parsing some source files, run with --errors to see full stack traces
+[WARNING] There were problems parsing m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\org\apache\commons\codec\language\MatchRatingApproachEncoder.java
+[INFO] Running recipe(s)...
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\org\apache\commons\codec\binary\AbstractBaseNCodecStreamBuilder.java to m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\binary\AbstractBaseNCodecStreamBuilder.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.codec.binary, newPackageName=com.m3.lib.codec.binary, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\org\apache\commons\codec\binary\Base16.java to m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\binary\Base16.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.codec.binary, newPackageName=com.m3.lib.codec.binary, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.codec, newPackageName=com.m3.lib.codec, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\org\apache\commons\codec\binary\Base16InputStream.java to m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\binary\Base16InputStream.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.codec.binary, newPackageName=com.m3.lib.codec.binary, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.codec, newPackageName=com.m3.lib.codec, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\org\apache\commons\codec\binary\Base16OutputStream.java to m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\binary\Base16OutputStream.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.codec.binary, newPackageName=com.m3.lib.codec.binary, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.codec, newPackageName=com.m3.lib.codec, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\org\apache\commons\codec\binary\Base32.java to m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\binary\Base32.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.codec.binary, newPackageName=com.m3.lib.codec.binary, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.codec, newPackageName=com.m3.lib.codec, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\org\apache\commons\codec\binary\Base32InputStream.java to m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\binary\Base32InputStream.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.codec.binary, newPackageName=com.m3.lib.codec.binary, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.codec, newPackageName=com.m3.lib.codec, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\org\apache\commons\codec\binary\Base32OutputStream.java to m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\binary\Base32OutputStream.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.codec.binary, newPackageName=com.m3.lib.codec.binary, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.codec, newPackageName=com.m3.lib.codec, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\org\apache\commons\codec\binary\Base58.java to m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\binary\Base58.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.codec.binary, newPackageName=com.m3.lib.codec.binary, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\org\apache\commons\codec\binary\Base58InputStream.java to m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\binary\Base58InputStream.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.codec.binary, newPackageName=com.m3.lib.codec.binary, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\org\apache\commons\codec\binary\Base58OutputStream.java to m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\binary\Base58OutputStream.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.codec.binary, newPackageName=com.m3.lib.codec.binary, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\org\apache\commons\codec\binary\Base64.java to m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\binary\Base64.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.codec.binary, newPackageName=com.m3.lib.codec.binary, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.codec, newPackageName=com.m3.lib.codec, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\org\apache\commons\codec\binary\Base64InputStream.java to m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\binary\Base64InputStream.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.codec.binary, newPackageName=com.m3.lib.codec.binary, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.codec, newPackageName=com.m3.lib.codec, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\org\apache\commons\codec\binary\Base64OutputStream.java to m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\binary\Base64OutputStream.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.codec.binary, newPackageName=com.m3.lib.codec.binary, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.codec, newPackageName=com.m3.lib.codec, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\org\apache\commons\codec\binary\BaseNCodec.java to m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\binary\BaseNCodec.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.codec.binary, newPackageName=com.m3.lib.codec.binary, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.codec, newPackageName=com.m3.lib.codec, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\org\apache\commons\codec\binary\BaseNCodecInputStream.java to m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\binary\BaseNCodecInputStream.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.codec.binary, newPackageName=com.m3.lib.codec.binary, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\org\apache\commons\codec\binary\BaseNCodecOutputStream.java to m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\binary\BaseNCodecOutputStream.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.codec.binary, newPackageName=com.m3.lib.codec.binary, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\org\apache\commons\codec\binary\BinaryCodec.java to m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\binary\BinaryCodec.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.codec.binary, newPackageName=com.m3.lib.codec.binary, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.codec, newPackageName=com.m3.lib.codec, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\org\apache\commons\codec\binary\CharSequenceUtils.java to m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\binary\CharSequenceUtils.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.codec.binary, newPackageName=com.m3.lib.codec.binary, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\org\apache\commons\codec\binary\Hex.java to m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\binary\Hex.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.codec.binary, newPackageName=com.m3.lib.codec.binary, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.codec, newPackageName=com.m3.lib.codec, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\org\apache\commons\codec\binary\package-info.java to m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\binary\package-info.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.codec.binary, newPackageName=com.m3.lib.codec.binary, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\org\apache\commons\codec\binary\StringUtils.java to m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\binary\StringUtils.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.codec.binary, newPackageName=com.m3.lib.codec.binary, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.codec, newPackageName=com.m3.lib.codec, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\org\apache\commons\codec\BinaryDecoder.java to m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\BinaryDecoder.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.codec, newPackageName=com.m3.lib.codec, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\org\apache\commons\codec\BinaryEncoder.java to m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\BinaryEncoder.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.codec, newPackageName=com.m3.lib.codec, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\org\apache\commons\codec\CharEncoding.java to m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\CharEncoding.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.codec, newPackageName=com.m3.lib.codec, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\org\apache\commons\codec\Charsets.java to m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\Charsets.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.codec, newPackageName=com.m3.lib.codec, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\org\apache\commons\codec\cli\Digest.java to m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\cli\Digest.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.codec.binary, newPackageName=com.m3.lib.codec.binary, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.codec.digest, newPackageName=com.m3.lib.codec.digest, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.codec.cli, newPackageName=com.m3.lib.codec.cli, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\org\apache\commons\codec\cli\package-info.java to m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\cli\package-info.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.codec.cli, newPackageName=com.m3.lib.codec.cli, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\org\apache\commons\codec\CodecPolicy.java to m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\CodecPolicy.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.codec, newPackageName=com.m3.lib.codec, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\org\apache\commons\codec\Decoder.java to m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\Decoder.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.codec, newPackageName=com.m3.lib.codec, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\org\apache\commons\codec\DecoderException.java to m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\DecoderException.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.codec, newPackageName=com.m3.lib.codec, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\org\apache\commons\codec\digest\B64.java to m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\digest\B64.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.codec.digest, newPackageName=com.m3.lib.codec.digest, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\org\apache\commons\codec\digest\Blake3.java to m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\digest\Blake3.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.codec.digest, newPackageName=com.m3.lib.codec.digest, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\org\apache\commons\codec\digest\Crc16.java to m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\digest\Crc16.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.codec.digest, newPackageName=com.m3.lib.codec.digest, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\org\apache\commons\codec\digest\Crypt.java to m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\digest\Crypt.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.codec.digest, newPackageName=com.m3.lib.codec.digest, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\org\apache\commons\codec\digest\DigestUtils.java to m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\digest\DigestUtils.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.codec.binary, newPackageName=com.m3.lib.codec.binary, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.codec.digest, newPackageName=com.m3.lib.codec.digest, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\org\apache\commons\codec\digest\GitIdentifiers.java to m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\digest\GitIdentifiers.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.codec.digest, newPackageName=com.m3.lib.codec.digest, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\org\apache\commons\codec\digest\HmacAlgorithms.java to m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\digest\HmacAlgorithms.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.codec.digest, newPackageName=com.m3.lib.codec.digest, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\org\apache\commons\codec\digest\HmacUtils.java to m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\digest\HmacUtils.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.codec.binary, newPackageName=com.m3.lib.codec.binary, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.codec.digest, newPackageName=com.m3.lib.codec.digest, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\org\apache\commons\codec\digest\Md5Crypt.java to m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\digest\Md5Crypt.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.codec.digest, newPackageName=com.m3.lib.codec.digest, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\org\apache\commons\codec\digest\MessageDigestAlgorithms.java to m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\digest\MessageDigestAlgorithms.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.codec.digest, newPackageName=com.m3.lib.codec.digest, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\org\apache\commons\codec\digest\MurmurHash.java to m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\digest\MurmurHash.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.codec.digest, newPackageName=com.m3.lib.codec.digest, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\org\apache\commons\codec\digest\MurmurHash2.java to m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\digest\MurmurHash2.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.codec.binary, newPackageName=com.m3.lib.codec.binary, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.codec.digest, newPackageName=com.m3.lib.codec.digest, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\org\apache\commons\codec\digest\MurmurHash3.java to m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\digest\MurmurHash3.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.codec.binary, newPackageName=com.m3.lib.codec.binary, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.codec.digest, newPackageName=com.m3.lib.codec.digest, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\org\apache\commons\codec\digest\package-info.java to m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\digest\package-info.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.codec.digest, newPackageName=com.m3.lib.codec.digest, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\org\apache\commons\codec\digest\PureJavaCrc32.java to m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\digest\PureJavaCrc32.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.codec.digest, newPackageName=com.m3.lib.codec.digest, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\org\apache\commons\codec\digest\PureJavaCrc32C.java to m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\digest\PureJavaCrc32C.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.codec.digest, newPackageName=com.m3.lib.codec.digest, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\org\apache\commons\codec\digest\Sha2Crypt.java to m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\digest\Sha2Crypt.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.codec.digest, newPackageName=com.m3.lib.codec.digest, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\org\apache\commons\codec\digest\UnixCrypt.java to m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\digest\UnixCrypt.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.codec.digest, newPackageName=com.m3.lib.codec.digest, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\org\apache\commons\codec\digest\XXHash32.java to m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\digest\XXHash32.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.codec.digest, newPackageName=com.m3.lib.codec.digest, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\org\apache\commons\codec\Encoder.java to m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\Encoder.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.codec, newPackageName=com.m3.lib.codec, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\org\apache\commons\codec\EncoderException.java to m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\EncoderException.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.codec, newPackageName=com.m3.lib.codec, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\org\apache\commons\codec\language\AbstractCaverphone.java to m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\language\AbstractCaverphone.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.codec.language, newPackageName=com.m3.lib.codec.language, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.codec, newPackageName=com.m3.lib.codec, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\org\apache\commons\codec\language\bm\BeiderMorseEncoder.java to m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\language\bm\BeiderMorseEncoder.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.codec.language.bm, newPackageName=com.m3.lib.codec.language.bm, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.codec, newPackageName=com.m3.lib.codec, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\org\apache\commons\codec\language\bm\Lang.java to m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\language\bm\Lang.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.codec.language.bm, newPackageName=com.m3.lib.codec.language.bm, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.codec, newPackageName=com.m3.lib.codec, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\org\apache\commons\codec\language\bm\Languages.java to m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\language\bm\Languages.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.codec.language.bm, newPackageName=com.m3.lib.codec.language.bm, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.codec, newPackageName=com.m3.lib.codec, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\org\apache\commons\codec\language\bm\NameType.java to m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\language\bm\NameType.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.codec.language.bm, newPackageName=com.m3.lib.codec.language.bm, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\org\apache\commons\codec\language\bm\package-info.java to m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\language\bm\package-info.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.codec.language.bm, newPackageName=com.m3.lib.codec.language.bm, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\org\apache\commons\codec\language\bm\PhoneticEngine.java to m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\language\bm\PhoneticEngine.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.codec.language.bm, newPackageName=com.m3.lib.codec.language.bm, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\org\apache\commons\codec\language\bm\ResourceConstants.java to m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\language\bm\ResourceConstants.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.codec.language.bm, newPackageName=com.m3.lib.codec.language.bm, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.codec, newPackageName=com.m3.lib.codec, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\org\apache\commons\codec\language\bm\Rule.java to m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\language\bm\Rule.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.codec.language.bm, newPackageName=com.m3.lib.codec.language.bm, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.codec, newPackageName=com.m3.lib.codec, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\org\apache\commons\codec\language\bm\RuleType.java to m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\language\bm\RuleType.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.codec.language.bm, newPackageName=com.m3.lib.codec.language.bm, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\org\apache\commons\codec\language\Caverphone.java to m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\language\Caverphone.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.codec.language, newPackageName=com.m3.lib.codec.language, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.codec, newPackageName=com.m3.lib.codec, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\org\apache\commons\codec\language\Caverphone1.java to m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\language\Caverphone1.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.codec.language, newPackageName=com.m3.lib.codec.language, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\org\apache\commons\codec\language\Caverphone2.java to m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\language\Caverphone2.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.codec.language, newPackageName=com.m3.lib.codec.language, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\org\apache\commons\codec\language\ColognePhonetic.java to m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\language\ColognePhonetic.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.codec.language, newPackageName=com.m3.lib.codec.language, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.codec, newPackageName=com.m3.lib.codec, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\org\apache\commons\codec\language\DaitchMokotoffSoundex.java to m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\language\DaitchMokotoffSoundex.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.codec.language, newPackageName=com.m3.lib.codec.language, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.codec, newPackageName=com.m3.lib.codec, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\org\apache\commons\codec\language\DoubleMetaphone.java to m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\language\DoubleMetaphone.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.codec.language, newPackageName=com.m3.lib.codec.language, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.codec.binary, newPackageName=com.m3.lib.codec.binary, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.codec, newPackageName=com.m3.lib.codec, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\org\apache\commons\codec\language\Metaphone.java to m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\language\Metaphone.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.codec.language, newPackageName=com.m3.lib.codec.language, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.codec, newPackageName=com.m3.lib.codec, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\org\apache\commons\codec\language\Nysiis.java to m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\language\Nysiis.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.codec.language, newPackageName=com.m3.lib.codec.language, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.codec, newPackageName=com.m3.lib.codec, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\org\apache\commons\codec\language\package-info.java to m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\language\package-info.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.codec.language, newPackageName=com.m3.lib.codec.language, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\org\apache\commons\codec\language\RefinedSoundex.java to m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\language\RefinedSoundex.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.codec.language, newPackageName=com.m3.lib.codec.language, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.codec, newPackageName=com.m3.lib.codec, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\org\apache\commons\codec\language\Soundex.java to m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\language\Soundex.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.codec.language, newPackageName=com.m3.lib.codec.language, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.codec, newPackageName=com.m3.lib.codec, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\org\apache\commons\codec\language\SoundexUtils.java to m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\language\SoundexUtils.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.codec.language, newPackageName=com.m3.lib.codec.language, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.codec, newPackageName=com.m3.lib.codec, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\org\apache\commons\codec\net\BCodec.java to m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\net\BCodec.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.codec.binary, newPackageName=com.m3.lib.codec.binary, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.codec.net, newPackageName=com.m3.lib.codec.net, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.codec, newPackageName=com.m3.lib.codec, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\org\apache\commons\codec\net\package-info.java to m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\net\package-info.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.codec.net, newPackageName=com.m3.lib.codec.net, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\org\apache\commons\codec\net\PercentCodec.java to m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\net\PercentCodec.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.codec.net, newPackageName=com.m3.lib.codec.net, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.codec, newPackageName=com.m3.lib.codec, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\org\apache\commons\codec\net\QCodec.java to m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\net\QCodec.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.codec.net, newPackageName=com.m3.lib.codec.net, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.codec, newPackageName=com.m3.lib.codec, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\org\apache\commons\codec\net\QuotedPrintableCodec.java to m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\net\QuotedPrintableCodec.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.codec.binary, newPackageName=com.m3.lib.codec.binary, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.codec.net, newPackageName=com.m3.lib.codec.net, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.codec, newPackageName=com.m3.lib.codec, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\org\apache\commons\codec\net\RFC1522Codec.java to m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\net\RFC1522Codec.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.codec.binary, newPackageName=com.m3.lib.codec.binary, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.codec.net, newPackageName=com.m3.lib.codec.net, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.codec, newPackageName=com.m3.lib.codec, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\org\apache\commons\codec\net\URLCodec.java to m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\net\URLCodec.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.codec.binary, newPackageName=com.m3.lib.codec.binary, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.codec.net, newPackageName=com.m3.lib.codec.net, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.codec, newPackageName=com.m3.lib.codec, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\org\apache\commons\codec\net\Utils.java to m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\net\Utils.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.codec.net, newPackageName=com.m3.lib.codec.net, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.codec, newPackageName=com.m3.lib.codec, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\org\apache\commons\codec\package-info.java to m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\package-info.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.codec, newPackageName=com.m3.lib.codec, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\org\apache\commons\codec\Resources.java to m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\Resources.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.codec, newPackageName=com.m3.lib.codec, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\org\apache\commons\codec\StringDecoder.java to m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\StringDecoder.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.codec, newPackageName=com.m3.lib.codec, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\org\apache\commons\codec\StringEncoder.java to m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\StringEncoder.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.codec, newPackageName=com.m3.lib.codec, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\org\apache\commons\codec\StringEncoderComparator.java to m3-scratch\lib-intake\batch\commons-codec-1.22.1\proj\src\main\java\com\m3\lib\codec\StringEncoderComparator.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.codec, newPackageName=com.m3.lib.codec, recursive=false}
+[WARNING] Please review and commit the results.
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  15.629 s
+[INFO] Finished at: 2026-10-31T06:27:09+05:30
+[INFO] ------------------------------------------------------------------------

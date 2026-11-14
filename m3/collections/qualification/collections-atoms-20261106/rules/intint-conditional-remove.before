@@ -1,0 +1,6 @@
+    public boolean remove(int key, int expectedValue) {
+        if (!containsKey(key) || getOrDefault(key, 0) != expectedValue) {
+            return false;
+        }
+        return remove(key);
+    }

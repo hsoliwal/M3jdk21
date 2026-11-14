@@ -1,0 +1,3 @@
+# SPDX-License-Identifier: Apache-2.0
+# tree-lanes-port-20261107 (m3/file): anchored insertions into existing owners (apply.py); none in this recipe (no existing owner is modified); the table keeps the replay shape of retained-port-20261107
+file	op	anchor	payload	before_sha256	after_sha256

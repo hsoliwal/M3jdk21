@@ -1,0 +1,6 @@
+com.m3pack.diagnostics
+requires java.base mandated
+requires java.management
+requires jdk.jfr
+contains com.m3.pack.diagnostics
+

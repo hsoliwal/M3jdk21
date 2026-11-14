@@ -1,0 +1,38 @@
+{
+  "schema": "M3JDK21_NAME_AUTHORITY_PIN_RECEIPT_V1",
+  "target_base": "649a735e23a79a4df46e6c61bfcd2fadf156d90d",
+  "target": "m3/tooling/name-contract/name-plan.json",
+  "before_sha256": "49c02fac81f0ba606a871011d60184887e627cf570c5a85fdde11339f564b0bb",
+  "after_sha256": "2b9f076770ca5af818607a18698703951434bf0143ad7d96d39553e43b157979",
+  "authority_map": {
+    "path": "m3/docs/name-mapping.json",
+    "git_blob_sha1": "770f5695a39e03512afa78c55b4e2cf781d1f6a5",
+    "sha256": "d88e04e6b55aa44deb2309f781296648f70fbc104bf3f985178c9c9bb9adafff",
+    "source_commit": "4410625416470b1d002fe4ac3126a730d69a3bdb"
+  },
+  "recipe": {
+    "repository": "hsoliwal/com.synexia",
+    "source_commit": "192eb86b7ba87fd93ba5c4701a31ed65d224a876",
+    "owner": "synexia-openrewrite-recipes/recipes/m3-jackson-jmod-20261018",
+    "dataset": "naming-pin-20261029",
+    "engine": "com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe",
+    "inputs_sha256": "160d403e6c560264352ae333e7931842007a15a898a5a09fb71e281c864bb9b2",
+    "results_sha256": "cdb152138ee9115115661d324f1941243e916f2b807ddf1fe19a3977778fa401"
+  },
+  "executed_checks": {
+    "sdk_tests": 5,
+    "sdk_failures": 0,
+    "receiver_contract_cases": 9,
+    "isolated_naming_gate": "PASS",
+    "fixed_point_changes": 0
+  },
+  "scope": {
+    "migration_records_preserved": 67,
+    "queue_operations_preserved": 4,
+    "authority_map_changed": false,
+    "naming_gate_changed": false,
+    "qualified_jdk_promotions": 0,
+    "product_source_edits": 0
+  },
+  "validation_context": "Naming gate ran over its exact 10-file read closure copied from target_base, with only the qualified plan postimage applied. Full candidate validation is recorded separately by the receiving change."
+}

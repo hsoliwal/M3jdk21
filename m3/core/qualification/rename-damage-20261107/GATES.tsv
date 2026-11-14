@@ -1,0 +1,9 @@
+# SPDX-License-Identifier: Apache-2.0
+# m3/core rename-damage repair (2026-11-07), base master ; WSL Ubuntu, OpenJDK 21, M3JDK=<OpenJDK 21> bash m3/build.sh with the workflow's sparse m3/lexicon inputs.
+gate	command	state	evidence
+1_baseline	bash m3/build.sh on master	FAIL (baseline)	stops at M3NumberSpaceContractTest check 30020 (jit); 7 runs reached
+2_iterations	the same build after each fix	PASS	30020 donor path -> 30034 owner type -> M3TranslationReceiverMapTest check 2 donor path -> LangDexProjectionReceiverTest check 3 donor path -> check 11 m3.records.tsv cells -> FamilyAdmission synexia.m3lex fixture -> FamilyContract family sidecar cells -> rc=0
+3_build	bash m3/build.sh (this change)	PASS	rc=0; 18 programs x 4 modes = 72 runs, each prints its *_PASS checks= marker (BUILD_MARKERS.tsv)
+4_naming	jdk_naming.rewrite_text on the 4 changed Java tests	PASS	fixed point (no rule fires); donor paths are composed from parts so no future rename rewrites them
+5_core_contract	reseal_ccm.py + check_admission.py (m3/tooling/core-contract-matrix)	PASS	CURRENT_INPUTS.json re-pinned for the 6 changed files; ADMISSION_PASS files=61 java=55 programs=18; qualify.py unchanged
+6_scope	compare master...head	PASS	4 m3/core tests, 2 m3/lexicon TSVs, core-contract CURRENT_INPUTS.json, jdk-naming RECIPE_MEMORY row, this directory; no production source

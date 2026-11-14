@@ -1,0 +1,18 @@
+{
+  "schema": "M3_EVIDENCE_INPUT_PREPARATION_REFUSAL_V1",
+  "stage": "Before any output directory or receiving repository write",
+  "helper_sha256": "22d70f12d269aa2a031a02c0dc28197f5c6764ba47f111166fa42d9f247109fd",
+  "command": [
+    "python3",
+    "-B",
+    "feature-final-evidence/prepare_feature_evidence.py",
+    "--workspace",
+    "/workspace/scratch/2b4d1cb957a7",
+    "--output",
+    "/workspace/scratch/2b4d1cb957a7/feature-final-evidence/inputs-v1"
+  ],
+  "exit_code": 1,
+  "exception": "KeyError: exit",
+  "cause": "The two composed receiving schemas use exit_code; the restoration schema uses exit. The authoring verifier assumed one schema.",
+  "next_action": "Fix the authoring verifier to validate each actual schema and rerun; no recorded execution result changes."
+}

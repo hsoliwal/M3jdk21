@@ -1,0 +1,8 @@
+file	header	semantic
+inputs.tsv	input_id\tlogical_name\tkind\tsha256	Content identities; no local absolute paths
+classes.tsv	class_name\tinput_id\tentry\trole\thot_count\tstartup_rank\tsha256\tfeatures	Class disposition and evidence
+features.tsv	owner_class\tfeature\tdetail\tresolved	Conservative dynamic constraints
+profile.tsv	kind\tsymbol\tcount\tfirst_ordinal	Normalized training observations
+semantic-manifest.tsv	sha256\tpath	Hashes of every semantic plan file
+training-manifest.tsv	sha256\tpath	Complete training-output file set
+image-manifest.tsv	sha256\tpath	Complete packaged-image file set

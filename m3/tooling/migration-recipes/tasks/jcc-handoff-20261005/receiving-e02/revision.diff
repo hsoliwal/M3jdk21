@@ -1,0 +1,29 @@
+--- epoch1/m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/atom/JccReceivingFixtureTest.java
++++ epoch2/m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/atom/JccReceivingFixtureTest.java
+@@ -110,12 +110,21 @@
+         Map<String, String> replay = apply(M3PureIntConvergenceRecipe::new, composite);
+         verify(baseline, replay);
+         assertEquals(composite, replay);
+-        var reversed = new LinkedHashMap<String, String>();
++        var ascending = new LinkedHashMap<String, String>();
++        var descending = new LinkedHashMap<String, String>();
++        ORIGINAL.entrySet().stream().sorted(Map.Entry.comparingByKey())
++                .forEach(entry -> ascending.put(entry.getKey(), entry.getValue()));
+         ORIGINAL.entrySet().stream().sorted(Map.Entry.<String, String>comparingByKey().reversed())
+-                .forEach(entry -> reversed.put(entry.getKey(), entry.getValue()));
+-        Map<String, String> reordered = apply(M3PureIntConvergenceRecipe::new, reversed);
+-        verify(baseline, reordered);
+-        assertEquals(composite, reordered);
++                .forEach(entry -> descending.put(entry.getKey(), entry.getValue()));
++        assertEquals(List.of(MATH, OBSERVER), new ArrayList<>(ascending.keySet()));
++        assertEquals(List.of(OBSERVER, MATH), new ArrayList<>(descending.keySet()));
++        assertNotEquals(new ArrayList<>(ascending.keySet()), new ArrayList<>(descending.keySet()));
++        Map<String, String> ascendingResult = apply(M3PureIntConvergenceRecipe::new, ascending);
++        verify(baseline, ascendingResult);
++        Map<String, String> descendingResult = apply(M3PureIntConvergenceRecipe::new, descending);
++        verify(baseline, descendingResult);
++        assertEquals(composite, ascendingResult);
++        assertEquals(ascendingResult, descendingResult);
+     }
+ 
+     @Test

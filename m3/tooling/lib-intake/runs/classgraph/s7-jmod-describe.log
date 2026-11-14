@@ -1,0 +1,18 @@
+jdk.m3.classgraph@4.8.165-m3-source-1
+exports com.m3.lib.classgraph
+exports com.m3.lib.classgraph.nonapi.classloaderhandler
+exports com.m3.lib.classgraph.nonapi.classpath
+exports com.m3.lib.classgraph.nonapi.concurrency
+exports com.m3.lib.classgraph.nonapi.fastzipfilereader
+exports com.m3.lib.classgraph.nonapi.fileslice
+exports com.m3.lib.classgraph.nonapi.fileslice.reader
+exports com.m3.lib.classgraph.nonapi.json
+exports com.m3.lib.classgraph.nonapi.recycler
+exports com.m3.lib.classgraph.nonapi.reflection
+exports com.m3.lib.classgraph.nonapi.scanspec
+exports com.m3.lib.classgraph.nonapi.types
+exports com.m3.lib.classgraph.nonapi.utils
+requires java.base mandated
+requires java.logging
+requires java.xml
+

@@ -1,0 +1,6 @@
+status	admissible	evidence_required	note_required	meaning
+PASS	true	true	false	the named gate executed and its bounded claim passed
+FAIL	false	true	false	the named gate executed and failed
+NOT_RUN	false	false	false	the gate has not executed; absence is explicit, never success
+BLOCKED	false	false	true	the gate could not execute for the stated reason
+NOT_APPLICABLE	true	true	true	a hash-bound disposition proves why the gate cannot apply to this atom

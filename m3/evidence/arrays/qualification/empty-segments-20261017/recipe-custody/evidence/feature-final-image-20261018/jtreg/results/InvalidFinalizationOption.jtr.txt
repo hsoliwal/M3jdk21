@@ -1,0 +1,166 @@
+#Test Results (version 2)
+#Sun Oct 18 14:33:23 JST 2026
+#-----testdescription-----
+$file=/workspace/scratch/2b4d1cb957a7/M3jdk21-feature-current/test/jdk/java/lang/Object/InvalidFinalizationOption.java
+$root=/workspace/scratch/2b4d1cb957a7/M3jdk21-feature-current/test/jdk
+keywords=bug8276422 driver
+library=/test/lib
+run=USER_SPECIFIED driver InvalidFinalizationOption\n
+source=InvalidFinalizationOption.java
+title=Invalid/missing values for the finalization option should be rejected
+
+#-----environment-----
+
+#-----testresult-----
+description=file\:/workspace/scratch/2b4d1cb957a7/M3jdk21-feature-current/test/jdk/java/lang/Object/InvalidFinalizationOption.java
+elapsed=7412 0\:00\:07.412
+end=Sun Oct 18 14\:33\:23 JST 2026
+environment=regtest
+execStatus=Passed. Execution successful
+harnessLoaderMode=Classpath Loader
+harnessVariety=Full Bundle
+hostname=6b896e38bb8d
+javatestOS=Linux 6.18.55 (amd64)
+javatestVersion=6.0-ea+b24-2026-10-05-${BUILT_FROM_COMMIT}
+jtregVersion=jtreg 7.3.1 dev 0
+script=com.sun.javatest.regtest.exec.RegressionScript
+sections=script_messages build compile driver
+start=Sun Oct 18 14\:33\:16 JST 2026
+test=java/lang/Object/InvalidFinalizationOption.java
+testJDK=/workspace/scratch/2b4d1cb957a7/M3jdk21-features/build/m3-feature-fastdebug/images/jdk
+testJDK_OS=[name\:Linux,arch\:amd64,version\:6.18.55,family\:linux,simple_arch\:x64,simple_version\:6.18,processors\:8,maxMemory\:8589934592,maxSwap\:0]
+testJDK_os.arch=amd64
+testJDK_os.name=Linux
+testJDK_os.version=6.18.55
+totalTime=7496
+user.name=root
+work=/workspace/scratch/2b4d1cb957a7/build-proof/feature-jtreg/work/java/lang/Object
+
+#section:script_messages
+----------messages:(7/556)----------
+JDK under test: /workspace/scratch/2b4d1cb957a7/M3jdk21-features/build/m3-feature-fastdebug/images/jdk
+openjdk version "21-internal" 2023-09-19
+OpenJDK Runtime Environment (fastdebug build 21-internal-adhoc.root.M3jdk21-features)
+OpenJDK 64-Bit Server VM (fastdebug build 21-internal-adhoc.root.M3jdk21-features, mixed mode, sharing)
+Library /test/lib; kind: packages
+   source directory: /workspace/scratch/2b4d1cb957a7/M3jdk21-feature-current/test/lib
+   class directory: /workspace/scratch/2b4d1cb957a7/build-proof/feature-jtreg/work/classes/1/test/lib
+
+#section:build
+----------messages:(7/240)----------
+command: build InvalidFinalizationOption
+reason: Named class compiled on demand
+started: Sun Oct 18 14:33:16 JST 2026
+Test directory:
+  compile: InvalidFinalizationOption
+finished: Sun Oct 18 14:33:22 JST 2026
+elapsed time (seconds): 6.494
+result: Passed. Build successful
+
+#section:compile
+----------messages:(6/301)----------
+command: compile /workspace/scratch/2b4d1cb957a7/M3jdk21-feature-current/test/jdk/java/lang/Object/InvalidFinalizationOption.java
+reason: .class file out of date or does not exist
+started: Sun Oct 18 14:33:16 JST 2026
+Mode: othervm
+finished: Sun Oct 18 14:33:22 JST 2026
+elapsed time (seconds): 6.494
+----------configuration:(7/535)----------
+javac compilation environment
+  source path: /workspace/scratch/2b4d1cb957a7/M3jdk21-feature-current/test/jdk/java/lang/Object
+               /workspace/scratch/2b4d1cb957a7/M3jdk21-feature-current/test/lib
+  class path:  /workspace/scratch/2b4d1cb957a7/M3jdk21-feature-current/test/jdk/java/lang/Object
+               /workspace/scratch/2b4d1cb957a7/build-proof/feature-jtreg/work/classes/1/java/lang/Object/InvalidFinalizationOption.d
+               /workspace/scratch/2b4d1cb957a7/build-proof/feature-jtreg/work/classes/1/test/lib
+
+----------rerun:(28/2629)*----------
+cd /workspace/scratch/2b4d1cb957a7/build-proof/feature-jtreg/work/scratch/1 && \\
+HOME=/root \\
+LANG=C.UTF-8 \\
+LC_ALL=C.UTF-8 \\
+LC_CTYPE=C.UTF-8 \\
+PATH=/bin:/usr/bin:/usr/sbin \\
+TZ=Asia/Tokyo \\
+    /workspace/scratch/2b4d1cb957a7/M3jdk21-features/build/m3-feature-fastdebug/images/jdk/bin/javac \\
+        -J-Xmx512m \\
+        -J-Xcheck:jni \\
+        -J-Dm3.stock.jdk=/tmp/m3-toolchain/jdk-21.0.12.1+1 \\
+        -J-Dtest.vm.opts='-Xmx512m -Xcheck:jni -Dm3.stock.jdk=/tmp/m3-toolchain/jdk-21.0.12.1+1' \\
+        -J-Dtest.tool.vm.opts='-J-Xmx512m -J-Xcheck:jni -J-Dm3.stock.jdk=/tmp/m3-toolchain/jdk-21.0.12.1+1' \\
+        -J-Dtest.compiler.opts= \\
+        -J-Dtest.java.opts= \\
+        -J-Dtest.jdk=/workspace/scratch/2b4d1cb957a7/M3jdk21-features/build/m3-feature-fastdebug/images/jdk \\
+        -J-Dcompile.jdk=/workspace/scratch/2b4d1cb957a7/M3jdk21-features/build/m3-feature-fastdebug/images/jdk \\
+        -J-Dtest.timeout.factor=1.0 \\
+        -J-Dtest.root=/workspace/scratch/2b4d1cb957a7/M3jdk21-feature-current/test/jdk \\
+        -J-Dtest.name=java/lang/Object/InvalidFinalizationOption.java \\
+        -J-Dtest.file=/workspace/scratch/2b4d1cb957a7/M3jdk21-feature-current/test/jdk/java/lang/Object/InvalidFinalizationOption.java \\
+        -J-Dtest.src=/workspace/scratch/2b4d1cb957a7/M3jdk21-feature-current/test/jdk/java/lang/Object \\
+        -J-Dtest.src.path=/workspace/scratch/2b4d1cb957a7/M3jdk21-feature-current/test/jdk/java/lang/Object:/workspace/scratch/2b4d1cb957a7/M3jdk21-feature-current/test/lib \\
+        -J-Dtest.classes=/workspace/scratch/2b4d1cb957a7/build-proof/feature-jtreg/work/classes/1/java/lang/Object/InvalidFinalizationOption.d \\
+        -J-Dtest.class.path=/workspace/scratch/2b4d1cb957a7/build-proof/feature-jtreg/work/classes/1/java/lang/Object/InvalidFinalizationOption.d:/workspace/scratch/2b4d1cb957a7/build-proof/feature-jtreg/work/classes/1/test/lib \\
+        -d /workspace/scratch/2b4d1cb957a7/build-proof/feature-jtreg/work/classes/1/java/lang/Object/InvalidFinalizationOption.d \\
+        -sourcepath /workspace/scratch/2b4d1cb957a7/M3jdk21-feature-current/test/jdk/java/lang/Object:/workspace/scratch/2b4d1cb957a7/M3jdk21-feature-current/test/lib \\
+        -classpath /workspace/scratch/2b4d1cb957a7/M3jdk21-feature-current/test/jdk/java/lang/Object:/workspace/scratch/2b4d1cb957a7/build-proof/feature-jtreg/work/classes/1/java/lang/Object/InvalidFinalizationOption.d:/workspace/scratch/2b4d1cb957a7/build-proof/feature-jtreg/work/classes/1/test/lib /workspace/scratch/2b4d1cb957a7/M3jdk21-feature-current/test/jdk/java/lang/Object/InvalidFinalizationOption.java
+----------System.out:(0/0)----------
+----------System.err:(2/198)----------
+Note: /workspace/scratch/2b4d1cb957a7/M3jdk21-feature-current/test/lib/jdk/test/lib/process/ProcessTools.java uses unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+result: Passed. Compilation successful
+
+#section:driver
+----------messages:(6/232)----------
+command: driver InvalidFinalizationOption
+reason: User specified action: run driver InvalidFinalizationOption 
+started: Sun Oct 18 14:33:22 JST 2026
+Mode: othervm
+finished: Sun Oct 18 14:33:23 JST 2026
+elapsed time (seconds): 0.909
+----------configuration:(0/0)----------
+----------System.out:(12/2339)----------
+Command line: [/workspace/scratch/2b4d1cb957a7/M3jdk21-features/build/m3-feature-fastdebug/images/jdk/bin/java -cp /workspace/scratch/2b4d1cb957a7/build-proof/feature-jtreg/work/classes/1/java/lang/Object/InvalidFinalizationOption.d:/workspace/scratch/2b4d1cb957a7/M3jdk21-feature-current/test/jdk/java/lang/Object:/workspace/scratch/2b4d1cb957a7/build-proof/feature-jtreg/work/classes/1/test/lib:/workspace/scratch/2b4d1cb957a7/M3jdk21-feature-current/test/lib:/tmp/m3-toolchain/jtreg/lib/javatest.jar:/tmp/m3-toolchain/jtreg/lib/jtreg.jar --finalization ]
+[2026-10-18T05:33:23.236063732Z] Gathering output for process 551
+[2026-10-18T05:33:23.372676332Z] Waiting for completion for process 551
+[2026-10-18T05:33:23.373001603Z] Waiting for completion finished for process 551
+Command line: [/workspace/scratch/2b4d1cb957a7/M3jdk21-features/build/m3-feature-fastdebug/images/jdk/bin/java -cp /workspace/scratch/2b4d1cb957a7/build-proof/feature-jtreg/work/classes/1/java/lang/Object/InvalidFinalizationOption.d:/workspace/scratch/2b4d1cb957a7/M3jdk21-feature-current/test/jdk/java/lang/Object:/workspace/scratch/2b4d1cb957a7/build-proof/feature-jtreg/work/classes/1/test/lib:/workspace/scratch/2b4d1cb957a7/M3jdk21-feature-current/test/lib:/tmp/m3-toolchain/jtreg/lib/javatest.jar:/tmp/m3-toolchain/jtreg/lib/jtreg.jar --finalization= ]
+[2026-10-18T05:33:23.376697841Z] Gathering output for process 558
+[2026-10-18T05:33:23.382169212Z] Waiting for completion for process 558
+[2026-10-18T05:33:23.385787162Z] Waiting for completion finished for process 558
+Command line: [/workspace/scratch/2b4d1cb957a7/M3jdk21-features/build/m3-feature-fastdebug/images/jdk/bin/java -cp /workspace/scratch/2b4d1cb957a7/build-proof/feature-jtreg/work/classes/1/java/lang/Object/InvalidFinalizationOption.d:/workspace/scratch/2b4d1cb957a7/M3jdk21-feature-current/test/jdk/java/lang/Object:/workspace/scratch/2b4d1cb957a7/build-proof/feature-jtreg/work/classes/1/test/lib:/workspace/scratch/2b4d1cb957a7/M3jdk21-feature-current/test/lib:/tmp/m3-toolchain/jtreg/lib/javatest.jar:/tmp/m3-toolchain/jtreg/lib/jtreg.jar --finalization=azerty ]
+[2026-10-18T05:33:23.388306132Z] Gathering output for process 562
+[2026-10-18T05:33:23.393826229Z] Waiting for completion for process 562
+[2026-10-18T05:33:23.394119475Z] Waiting for completion finished for process 562
+----------System.err:(1/15)----------
+STATUS:Passed.
+----------rerun:(27/2489)*----------
+cd /workspace/scratch/2b4d1cb957a7/build-proof/feature-jtreg/work/scratch/1 && \\
+HOME=/root \\
+LANG=C.UTF-8 \\
+LC_ALL=C.UTF-8 \\
+LC_CTYPE=C.UTF-8 \\
+PATH=/bin:/usr/bin:/usr/sbin \\
+TZ=Asia/Tokyo \\
+CLASSPATH=/workspace/scratch/2b4d1cb957a7/build-proof/feature-jtreg/work/classes/1/java/lang/Object/InvalidFinalizationOption.d:/workspace/scratch/2b4d1cb957a7/M3jdk21-feature-current/test/jdk/java/lang/Object:/workspace/scratch/2b4d1cb957a7/build-proof/feature-jtreg/work/classes/1/test/lib:/workspace/scratch/2b4d1cb957a7/M3jdk21-feature-current/test/lib:/tmp/m3-toolchain/jtreg/lib/javatest.jar:/tmp/m3-toolchain/jtreg/lib/jtreg.jar \\
+    /workspace/scratch/2b4d1cb957a7/M3jdk21-features/build/m3-feature-fastdebug/images/jdk/bin/java \\
+        -Dtest.vm.opts='-Xmx512m -Xcheck:jni -Dm3.stock.jdk=/tmp/m3-toolchain/jdk-21.0.12.1+1' \\
+        -Dtest.tool.vm.opts='-J-Xmx512m -J-Xcheck:jni -J-Dm3.stock.jdk=/tmp/m3-toolchain/jdk-21.0.12.1+1' \\
+        -Dtest.compiler.opts= \\
+        -Dtest.java.opts= \\
+        -Dtest.jdk=/workspace/scratch/2b4d1cb957a7/M3jdk21-features/build/m3-feature-fastdebug/images/jdk \\
+        -Dcompile.jdk=/workspace/scratch/2b4d1cb957a7/M3jdk21-features/build/m3-feature-fastdebug/images/jdk \\
+        -Dtest.timeout.factor=1.0 \\
+        -Dtest.root=/workspace/scratch/2b4d1cb957a7/M3jdk21-feature-current/test/jdk \\
+        -Dtest.name=java/lang/Object/InvalidFinalizationOption.java \\
+        -Dtest.file=/workspace/scratch/2b4d1cb957a7/M3jdk21-feature-current/test/jdk/java/lang/Object/InvalidFinalizationOption.java \\
+        -Dtest.src=/workspace/scratch/2b4d1cb957a7/M3jdk21-feature-current/test/jdk/java/lang/Object \\
+        -Dtest.src.path=/workspace/scratch/2b4d1cb957a7/M3jdk21-feature-current/test/jdk/java/lang/Object:/workspace/scratch/2b4d1cb957a7/M3jdk21-feature-current/test/lib \\
+        -Dtest.classes=/workspace/scratch/2b4d1cb957a7/build-proof/feature-jtreg/work/classes/1/java/lang/Object/InvalidFinalizationOption.d \\
+        -Dtest.class.path=/workspace/scratch/2b4d1cb957a7/build-proof/feature-jtreg/work/classes/1/java/lang/Object/InvalidFinalizationOption.d:/workspace/scratch/2b4d1cb957a7/build-proof/feature-jtreg/work/classes/1/test/lib \\
+        -Xmx512m \\
+        -Xcheck:jni \\
+        -Dm3.stock.jdk=/tmp/m3-toolchain/jdk-21.0.12.1+1 \\
+        com.sun.javatest.regtest.agent.MainWrapper /workspace/scratch/2b4d1cb957a7/build-proof/feature-jtreg/work/java/lang/Object/InvalidFinalizationOption.d/driver.0.jta
+result: Passed. Execution successful
+
+
+test result: Passed. Execution successful

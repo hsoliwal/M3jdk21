@@ -1,0 +1,9 @@
+# path	before	after	template
+src/java.base/share/classes/jdk/internal/mindex/M3Address28.java	ABSENT	dd14fe5384ff92db5c0232ef1fbc68da731ee305dda5b7c22777a3fa4c5e90fa	M3Address28.java.txt
+src/java.base/share/classes/jdk/internal/mindex/M3BitLane28.java	ABSENT	025556c17d0ce7879f63b75d04c30a3b16b6338ff73fa33f4ee49fdb1e196bb8	M3BitLane28.java.txt
+src/java.base/share/classes/jdk/internal/mindex/M3Bits.java	ABSENT	c5d9d2797966a56b9c2ec97908f6b76a0ad370a72cb05edc2a55b62775ba22ab	M3Bits.java.txt
+src/java.base/share/classes/jdk/internal/mindex/M3IntLane28.java	ABSENT	ccb582914275bb00ea885d17b94173f60f65d7cbb2a2543af910de15428f6cda	M3IntLane28.java.txt
+src/java.base/share/classes/jdk/internal/mindex/M3LongLane28.java	ABSENT	89b6fee4b0572a975b48f9cdbf95a732d4601dd8748411732bc79d9e14afb644	M3LongLane28.java.txt
+test/jdk/jdk/internal/mindex/M3Lane28Cost.java	ABSENT	2296066665b8e54238daf2db46329cb0bf29c9ded0182f05bbb8ca2365da99ca	M3Lane28Cost.java.txt
+test/jdk/jdk/internal/mindex/M3Lane28Test.java	ABSENT	a64c0dceb51627a7e4ca1a1a65bfc8bf388a9b8f1b622afca5cf84f320740aa3	M3Lane28Test.java.txt
+test/jdk/jdk/internal/mindex/M3SparseFillTest.java	ABSENT	f560cccbf14e7486b0abddf3783f311d390dbe1b355283f5cc4b2a50ed0b2903	M3SparseFillTest.java.txt

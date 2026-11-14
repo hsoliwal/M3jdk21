@@ -1,0 +1,13 @@
+scope	selected-existing-producer
+callerBehaviour	NOT_RUN
+before	first=2,sameAdditional=0,fresh=0,compiledSources=17
+after	first=2,sameAdditional=0,fresh=0,compiledSources=17
+apiSha256	1b5c52ff10ee74ac4760f5136265e417a0ef36fd03e90248ac7ab6fbbafe9d1d
+fixture18	ba22b2bf42b059ab93d906383d52c16b96be6f2cdbd3e49bade4ed3d473e8522
+productionPromotion	false
+generatedAfter	m3/ports/swing-viewport/src/main/java/jdk/m3/swing/web/model/M3WebLanes.java	70264dc0e1183b6c0dcc82dc998ba027e02f8301072e6b6ae05324ed053805fd
+generatedAfter	m3/ports/swing-viewport/src/test/java/jdk/m3/swing/web/model/M3WebChecks.java	47c58002bd3bb75e8eac6d2cb950a54bd1bb760aa17c57ee9467678b3c868ecd
+strictCompile	PASS
+replayBefore	PASS
+replayAfter	PASS
+apiEqual	PASS

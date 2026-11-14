@@ -1,0 +1,99 @@
+name: Bug Report
+description: Something is not working as expected
+labels: ["type=defect"]
+body:
+  - type: markdown
+    attributes:
+      value: >
+        Thank you for filing a bug report. Please help us identify and resolve the bug by filling
+        out the following fields. Before we begin, please make sure that the bug is still present in
+        the [latest](https://github.com/google/guava/releases/latest) version of Guava available.
+        If it's already fixed in the latest version of Guava, then please just update your Guava
+        version instead.
+
+  - type: input
+    attributes:
+      label: Guava Version
+      description: Which version of Guava are you using?
+      placeholder: e.g., 33.2.1-jre
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Description
+      description: Please describe the issue you encountered.
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Example
+      description: >
+        Please provide a [Short, Self Contained, Correct (Compilable), Example](http://sscce.org/)
+        demonstrating the bug.
+      render: java
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Expected Behavior
+      description: What did you expect to happen?
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Actual Behavior
+      description: What actually happened?
+    validations:
+      required: true
+
+  - type: dropdown
+    attributes:
+      label: Packages
+      description: If this issue is package-specific, then please select the relevant packages.
+      multiple: true
+      options:
+        - jdk.m3.collections.guava.annotations
+        - jdk.m3.collections.guava.base
+        - jdk.m3.collections.guava.cache
+        - jdk.m3.collections.guava.collect
+        - jdk.m3.collections.guava.escape
+        - jdk.m3.collections.guava.eventbus
+        - jdk.m3.collections.guava.graph
+        - jdk.m3.collections.guava.hash
+        - jdk.m3.collections.guava.io
+        - jdk.m3.collections.guava.math
+        - jdk.m3.collections.guava.net
+        - jdk.m3.collections.guava.primitives
+        - jdk.m3.collections.guava.reflect
+        - jdk.m3.collections.guava.testing
+        - jdk.m3.collections.guava.util.concurrent
+
+  - type: dropdown
+    attributes:
+      label: Platforms
+      description: If this issue is platform-specific, then please select the relevant platforms.
+      multiple: true
+      options:
+        - Android
+        - GWT
+        - Java 8
+        - Java 11
+        - Java 17
+        - Java 21
+
+  - type: checkboxes
+    attributes:
+      label: Checklist
+      options:
+        - label: >
+            I agree to follow the
+            [code of conduct](https://github.com/google/.github/blob/master/CODE_OF_CONDUCT.md).
+          required: true
+        - label: >
+            I can reproduce the bug with the
+            [latest](https://github.com/google/guava/releases/latest) version of Guava available.
+          required: true

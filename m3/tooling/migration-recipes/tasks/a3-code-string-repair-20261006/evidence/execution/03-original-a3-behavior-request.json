@@ -1,0 +1,15 @@
+{
+  "argv": [
+    "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/toolchain/apache-maven-3.9.9/bin/mvn",
+    "-o",
+    "-B",
+    "-ntp",
+    "-Dmaven.repo.local=/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/a3-code-string-repair-v01/cache",
+    "-f",
+    "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/a3-code-string-repair-v01/behavior-workspace/m3/tooling/migration-recipes/tasks/jcc-ci-repair-20261006/a3-behavior-verification/pom.xml",
+    "test"
+  ],
+  "cwd": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/a3-code-string-repair-v01/behavior-workspace",
+  "start_utc": "2026-10-06T05:30:11.136955+00:00",
+  "java_home": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/toolchain/jdk-21+35"
+}

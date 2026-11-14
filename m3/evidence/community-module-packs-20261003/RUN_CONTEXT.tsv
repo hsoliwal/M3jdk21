@@ -1,0 +1,13 @@
+key	value
+base_commit	700d4414169164c71807b43fd4d93bf6d50ceeed
+base_tree	c834defd0acd7f0179d0607025214c8dd7cb3134
+execution	bounded-local; workers=1; no distributed execution
+source_root	m3/tooling/module-packs
+authority	LIBRARY_API additive new tool exports; MULTI_MODULE reactor registration
+runtime_test_jdk	OpenJDK 21.0.11+10-1-deb13u2-Debian
+runtime_jdk_home	/usr/lib/jvm/java-21-openjdk-amd64
+runtime_jdk_release_sha256	aafe9b90f727821be100832681e0f96259d2ebd9ce84eb3b7ea826a71cd09356
+product_runtime	NOT_M3JDK21_BUILD
+verify_order	final diff -> syntax/static checks -> strict javac -> Java/Python checks -> image assembly/execution
+Maven	NOT_INSTALLED
+date	2026-10-03

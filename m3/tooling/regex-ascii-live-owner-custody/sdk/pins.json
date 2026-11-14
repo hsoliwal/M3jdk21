@@ -1,0 +1,209 @@
+{
+  "schema": "M3_REGEX_ASCII_LIVE_OWNER_CUSTODY_SDK_INPUTS_V1",
+  "admissionCommit": "e2c397bdf9479a7bcae792ce2523b287273b9c45",
+  "sourceOnly": true,
+  "providers": {
+    "openrewriteAdapter": "2ec479b8609459a28fdfd8a7a7d63cc44e919f00",
+    "manifestKernel": "78d5fb68f13872164973a8918cc7886c5f548bca"
+  },
+  "files": [
+    {
+      "path": "FOSS_REUSE_DECISION.tsv",
+      "gitBlob": "36fbe974864eab6b88b85cc8fc0468f5f47b8e7b",
+      "bytes": 501,
+      "sha256": "320def4377c99ce15b4976bd6c3491471629bb6773fe40af2dbe12c3ae517bdb"
+    },
+    {
+      "path": "README.md",
+      "gitBlob": "754f18b282992cf2ed7e66c7a70cdda58b187005",
+      "bytes": 2579,
+      "sha256": "d76253a0d53ce12b5ed158103a6ff84f5b5d3adf6efbf4e799f76e5a17ec5123"
+    },
+    {
+      "path": "THIRD_PARTY_NOTICES.md",
+      "gitBlob": "bb490f97874f601afecfa62837233035322f781c",
+      "bytes": 979,
+      "sha256": "55e884785878541993f4f4b89ddca0c30f629c821fa376ad42eb3792cfd11c03"
+    },
+    {
+      "path": "pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinManifest.java",
+      "gitBlob": "78d5fb68f13872164973a8918cc7886c5f548bca",
+      "bytes": 10964,
+      "sha256": "c874b5d4b5fe8886d53763ab91d050f431c4b7c09d3fe34d58680231ccb1cf7e"
+    },
+    {
+      "path": "pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinRecipe.java",
+      "gitBlob": "2ec479b8609459a28fdfd8a7a7d63cc44e919f00",
+      "bytes": 5187,
+      "sha256": "300a520ec9d273922d1edbdf5442e5faf825c47e8e3df7febf4baa2f39945401"
+    },
+    {
+      "path": "pinned-engine/jdk/internal/m3/rewrite/M3RegexAsciiLiveOwnerCustodyInverseRecipe.java",
+      "gitBlob": "e658c30b40e10f4dc80a986363ecf6acd8a4bca9",
+      "bytes": 824,
+      "sha256": "89fb0a1c4fbe83fcc91464e8e2fea99a41ebc1a66d57a2e4a676d753d136f70f"
+    },
+    {
+      "path": "pinned-engine/jdk/internal/m3/rewrite/M3RegexAsciiLiveOwnerCustodyRecipe.java",
+      "gitBlob": "b9b79d3680dfb4751e28250f2a6e8afe7fd85993",
+      "bytes": 815,
+      "sha256": "53c8855aa686062babf1fb990d945a3668bfeb8c658f7aca2cd9b249e47c83e7"
+    },
+    {
+      "path": "pom.xml",
+      "gitBlob": "059259ca746466389cccac4094c3d664b0d79e6d",
+      "bytes": 2678,
+      "sha256": "5b3f3f04f9539178d43ffa75068366d8ff1c037e25f67c2d31aa3bdb6e0ede1e"
+    },
+    {
+      "path": "src/main/resources/META-INF/rewrite/regex-ascii-live-owner-custody-20261020.yml",
+      "gitBlob": "aca4c2d7b489cea581cb62f638dce31ac95afedc",
+      "bytes": 777,
+      "sha256": "840abf674390a7bcb95e7f817346223d1236c9661f586d557c9bb070e3117d6d"
+    },
+    {
+      "path": "src/main/resources/jdk/internal/m3/rewrite/regex-ascii-live-owner-custody-20261020/forward/before/.github/workflows/m3-regex-ascii-lexical-receiver.yml",
+      "gitBlob": "43282c4c40dfd5f195fa2b6380d69ff4a7ce2d3c",
+      "bytes": 31096,
+      "sha256": "bdbd1bc5ca99366d70fd358e65140a958865cba13b2f4855c9a1717e46ac9ba8"
+    },
+    {
+      "path": "src/main/resources/jdk/internal/m3/rewrite/regex-ascii-live-owner-custody-20261020/forward/before/m3/tooling/regex-ascii-lexical-receiver/README.md",
+      "gitBlob": "28f4187fd8470dc0d036cb77ec24d471eebb3941",
+      "bytes": 1480,
+      "sha256": "ceff1c2cd62a3ae130c128b9dfa24484500dd2723e73b13e7b7e65458f39b631"
+    },
+    {
+      "path": "src/main/resources/jdk/internal/m3/rewrite/regex-ascii-live-owner-custody-20261020/forward/before/m3/tooling/regex-ascii-lexical-receiver/qualify.py",
+      "gitBlob": "eb47ae9f9343948b0d93e3a01682ff980835587b",
+      "bytes": 12664,
+      "sha256": "22e41fc9095512e956f81b13385611181dd49094bc5c3af924989984651fb0de"
+    },
+    {
+      "path": "src/main/resources/jdk/internal/m3/rewrite/regex-ascii-live-owner-custody-20261020/forward/before/m3/tooling/regex-ascii-lexical-receiver/sdk/pins.json",
+      "gitBlob": "9ac2600209b7bde604b0d73766eedbdf67e8f623",
+      "bytes": 14670,
+      "sha256": "42600dc11919f832c228d12bf45349f2b35dacbed71aea63ba3db21d12486115"
+    },
+    {
+      "path": "src/main/resources/jdk/internal/m3/rewrite/regex-ascii-live-owner-custody-20261020/forward/before/m3/tooling/regex-ascii-lexical-receiver/sdk/verify.py",
+      "gitBlob": "c76938329b5c0a40aaf74319bfd2caecbd2b6795",
+      "bytes": 23045,
+      "sha256": "183191607b11f444e796008a2d0a3071619fe2bc2693925ea83fc26cf0b38b24"
+    },
+    {
+      "path": "src/main/resources/jdk/internal/m3/rewrite/regex-ascii-live-owner-custody-20261020/forward/manifest.tsv",
+      "gitBlob": "1e8a79912f9ba3016a4f5ee2389ec9d5d6fa56b2",
+      "bytes": 1090,
+      "sha256": "e209d2a8438faf473716c32b1fed6129ba8c131df89feb28a52bac3adc4fae79"
+    },
+    {
+      "path": "src/main/resources/jdk/internal/m3/rewrite/regex-ascii-live-owner-custody-20261020/forward/out/.github/workflows/m3-regex-ascii-lexical-receiver.yml",
+      "gitBlob": "543bed1285bb8903db5fb67ac89f6b6cf4183d93",
+      "bytes": 32037,
+      "sha256": "19ab6cb0b70ff4aa9adc33dfb795e98614d7264fed101ff6d9f22a03513c2317"
+    },
+    {
+      "path": "src/main/resources/jdk/internal/m3/rewrite/regex-ascii-live-owner-custody-20261020/forward/out/m3/tooling/regex-ascii-lexical-receiver/README.md",
+      "gitBlob": "d73a374eff026de3557f6163a4094d1c69222355",
+      "bytes": 3145,
+      "sha256": "4a727945cb9fdd54e1719916ed44d09cc88ea23e19c5493f90e0251ff9b16063"
+    },
+    {
+      "path": "src/main/resources/jdk/internal/m3/rewrite/regex-ascii-live-owner-custody-20261020/forward/out/m3/tooling/regex-ascii-lexical-receiver/qualify.py",
+      "gitBlob": "5b733379de482250fb0ef23f62db4dbc62aab455",
+      "bytes": 22838,
+      "sha256": "a30d35dc1db19ef34daa820986749255d9528e36d163ca589e24311b7480cf54"
+    },
+    {
+      "path": "src/main/resources/jdk/internal/m3/rewrite/regex-ascii-live-owner-custody-20261020/forward/out/m3/tooling/regex-ascii-lexical-receiver/sdk/pins.json",
+      "gitBlob": "9ac2600209b7bde604b0d73766eedbdf67e8f623",
+      "bytes": 14670,
+      "sha256": "42600dc11919f832c228d12bf45349f2b35dacbed71aea63ba3db21d12486115"
+    },
+    {
+      "path": "src/main/resources/jdk/internal/m3/rewrite/regex-ascii-live-owner-custody-20261020/forward/out/m3/tooling/regex-ascii-lexical-receiver/sdk/verify.py",
+      "gitBlob": "c76938329b5c0a40aaf74319bfd2caecbd2b6795",
+      "bytes": 23045,
+      "sha256": "183191607b11f444e796008a2d0a3071619fe2bc2693925ea83fc26cf0b38b24"
+    },
+    {
+      "path": "src/main/resources/jdk/internal/m3/rewrite/regex-ascii-live-owner-custody-20261020/inverse/before/.github/workflows/m3-regex-ascii-lexical-receiver.yml",
+      "gitBlob": "543bed1285bb8903db5fb67ac89f6b6cf4183d93",
+      "bytes": 32037,
+      "sha256": "19ab6cb0b70ff4aa9adc33dfb795e98614d7264fed101ff6d9f22a03513c2317"
+    },
+    {
+      "path": "src/main/resources/jdk/internal/m3/rewrite/regex-ascii-live-owner-custody-20261020/inverse/before/m3/tooling/regex-ascii-lexical-receiver/README.md",
+      "gitBlob": "d73a374eff026de3557f6163a4094d1c69222355",
+      "bytes": 3145,
+      "sha256": "4a727945cb9fdd54e1719916ed44d09cc88ea23e19c5493f90e0251ff9b16063"
+    },
+    {
+      "path": "src/main/resources/jdk/internal/m3/rewrite/regex-ascii-live-owner-custody-20261020/inverse/before/m3/tooling/regex-ascii-lexical-receiver/qualify.py",
+      "gitBlob": "5b733379de482250fb0ef23f62db4dbc62aab455",
+      "bytes": 22838,
+      "sha256": "a30d35dc1db19ef34daa820986749255d9528e36d163ca589e24311b7480cf54"
+    },
+    {
+      "path": "src/main/resources/jdk/internal/m3/rewrite/regex-ascii-live-owner-custody-20261020/inverse/before/m3/tooling/regex-ascii-lexical-receiver/sdk/pins.json",
+      "gitBlob": "9ac2600209b7bde604b0d73766eedbdf67e8f623",
+      "bytes": 14670,
+      "sha256": "42600dc11919f832c228d12bf45349f2b35dacbed71aea63ba3db21d12486115"
+    },
+    {
+      "path": "src/main/resources/jdk/internal/m3/rewrite/regex-ascii-live-owner-custody-20261020/inverse/before/m3/tooling/regex-ascii-lexical-receiver/sdk/verify.py",
+      "gitBlob": "c76938329b5c0a40aaf74319bfd2caecbd2b6795",
+      "bytes": 23045,
+      "sha256": "183191607b11f444e796008a2d0a3071619fe2bc2693925ea83fc26cf0b38b24"
+    },
+    {
+      "path": "src/main/resources/jdk/internal/m3/rewrite/regex-ascii-live-owner-custody-20261020/inverse/manifest.tsv",
+      "gitBlob": "7d46c6357fa2a275f283265f177c8018ff75e9f9",
+      "bytes": 1090,
+      "sha256": "cdb320cd4e7ed178341767c6646d041eec1aed4ae68eb15567b7c4c59f24b086"
+    },
+    {
+      "path": "src/main/resources/jdk/internal/m3/rewrite/regex-ascii-live-owner-custody-20261020/inverse/out/.github/workflows/m3-regex-ascii-lexical-receiver.yml",
+      "gitBlob": "43282c4c40dfd5f195fa2b6380d69ff4a7ce2d3c",
+      "bytes": 31096,
+      "sha256": "bdbd1bc5ca99366d70fd358e65140a958865cba13b2f4855c9a1717e46ac9ba8"
+    },
+    {
+      "path": "src/main/resources/jdk/internal/m3/rewrite/regex-ascii-live-owner-custody-20261020/inverse/out/m3/tooling/regex-ascii-lexical-receiver/README.md",
+      "gitBlob": "28f4187fd8470dc0d036cb77ec24d471eebb3941",
+      "bytes": 1480,
+      "sha256": "ceff1c2cd62a3ae130c128b9dfa24484500dd2723e73b13e7b7e65458f39b631"
+    },
+    {
+      "path": "src/main/resources/jdk/internal/m3/rewrite/regex-ascii-live-owner-custody-20261020/inverse/out/m3/tooling/regex-ascii-lexical-receiver/qualify.py",
+      "gitBlob": "eb47ae9f9343948b0d93e3a01682ff980835587b",
+      "bytes": 12664,
+      "sha256": "22e41fc9095512e956f81b13385611181dd49094bc5c3af924989984651fb0de"
+    },
+    {
+      "path": "src/main/resources/jdk/internal/m3/rewrite/regex-ascii-live-owner-custody-20261020/inverse/out/m3/tooling/regex-ascii-lexical-receiver/sdk/pins.json",
+      "gitBlob": "9ac2600209b7bde604b0d73766eedbdf67e8f623",
+      "bytes": 14670,
+      "sha256": "42600dc11919f832c228d12bf45349f2b35dacbed71aea63ba3db21d12486115"
+    },
+    {
+      "path": "src/main/resources/jdk/internal/m3/rewrite/regex-ascii-live-owner-custody-20261020/inverse/out/m3/tooling/regex-ascii-lexical-receiver/sdk/verify.py",
+      "gitBlob": "c76938329b5c0a40aaf74319bfd2caecbd2b6795",
+      "bytes": 23045,
+      "sha256": "183191607b11f444e796008a2d0a3071619fe2bc2693925ea83fc26cf0b38b24"
+    },
+    {
+      "path": "src/test/java/jdk/internal/m3/rewrite/M3RegexAsciiLiveOwnerCustodyRecipeTest.java",
+      "gitBlob": "6de9e251de460305b5e65be33c5134654ec83758",
+      "bytes": 16076,
+      "sha256": "573768d731ec77c9a8451df35e6eac2b3fa0990f69c148a7176fc993f3324603"
+    },
+    {
+      "path": "verify.py",
+      "gitBlob": "51b83df8248ff26528db309f99dea74a25b14f5a",
+      "bytes": 28910,
+      "sha256": "c3cd52d6ded054d6cf8d720fb6181237614889d24e999f21b01e6c45108d4a19"
+    }
+  ]
+}

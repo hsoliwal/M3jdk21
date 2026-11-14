@@ -1,0 +1,106 @@
+{
+  "schema": "M3_LIB_INTAKE_NAME_MAPPING_V1",
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors (M3 modifications)",
+  "license": "upstream LICENSE in legal_notice (https://raw.githubusercontent.com/classgraph/classgraph/classgraph-4.8.165/LICENSE-ClassGraph.txt); original notices retained",
+  "product": "M3JDK21",
+  "intake_mode": "LIB_INTAKE_TO_JMOD_V2",
+  "target_module": "jdk.m3.classgraph",
+  "target_path": "m3/vendor/third_party-m3/relocated/classgraph",
+  "canonical_recipe": "m3/tooling/lib-intake/lib_intake.sh (pattern LIB_INTAKE_TO_JMOD v2)",
+  "canonical_recipe_owners": [
+    "org.openrewrite.java.ChangePackage (recursive=false, longest first; boundary-checked form of com.synexia M3BoundaryCheckedPackageRenameRecipe)"
+  ],
+  "source_path": "m3/vendor/third_party/classgraph",
+  "source_coordinate": "io.github.classgraph:classgraph:4.8.165-m3-source-1",
+  "source_version": "4.8.165-m3-source-1",
+  "source_license_origin": "https://raw.githubusercontent.com/classgraph/classgraph/classgraph-4.8.165/LICENSE-ClassGraph.txt",
+  "source_packages": [
+    "io.github.classgraph",
+    "nonapi.io.github.classgraph"
+  ],
+  "runtime_packages": [
+    "com.m3.lib.classgraph",
+    "com.m3.lib.classgraph.nonapi"
+  ],
+  "intake_dependencies": "-",
+  "qualification_receipt": "m3/tooling/lib-intake/runs/classgraph/STAGES.tsv",
+  "relocation_map": "m3/tooling/lib-intake/runs/classgraph/RELOCATION_MAP.tsv",
+  "legal_notice": "m3/vendor/third_party-m3/relocated/classgraph",
+  "mappings": [
+    {
+      "source": "io.github.classgraph and subpackages",
+      "target": "com.m3.lib.classgraph and subpackages",
+      "role": "relocated donor API in the optional jdk.m3.classgraph JMOD; type names retained"
+    },
+    {
+      "source": "nonapi.io.github.classgraph and subpackages",
+      "target": "com.m3.lib.classgraph.nonapi and subpackages",
+      "role": "relocated donor API in the optional jdk.m3.classgraph JMOD; type names retained"
+    },
+    {
+      "source": "nonapi.io.github.classgraph.classloaderhandler",
+      "target": "com.m3.lib.classgraph.nonapi.classloaderhandler",
+      "role": "package (ChangePackage)"
+    },
+    {
+      "source": "nonapi.io.github.classgraph.fastzipfilereader",
+      "target": "com.m3.lib.classgraph.nonapi.fastzipfilereader",
+      "role": "package (ChangePackage)"
+    },
+    {
+      "source": "nonapi.io.github.classgraph.fileslice.reader",
+      "target": "com.m3.lib.classgraph.nonapi.fileslice.reader",
+      "role": "package (ChangePackage)"
+    },
+    {
+      "source": "nonapi.io.github.classgraph.concurrency",
+      "target": "com.m3.lib.classgraph.nonapi.concurrency",
+      "role": "package (ChangePackage)"
+    },
+    {
+      "source": "nonapi.io.github.classgraph.reflection",
+      "target": "com.m3.lib.classgraph.nonapi.reflection",
+      "role": "package (ChangePackage)"
+    },
+    {
+      "source": "nonapi.io.github.classgraph.classpath",
+      "target": "com.m3.lib.classgraph.nonapi.classpath",
+      "role": "package (ChangePackage)"
+    },
+    {
+      "source": "nonapi.io.github.classgraph.fileslice",
+      "target": "com.m3.lib.classgraph.nonapi.fileslice",
+      "role": "package (ChangePackage)"
+    },
+    {
+      "source": "nonapi.io.github.classgraph.recycler",
+      "target": "com.m3.lib.classgraph.nonapi.recycler",
+      "role": "package (ChangePackage)"
+    },
+    {
+      "source": "nonapi.io.github.classgraph.scanspec",
+      "target": "com.m3.lib.classgraph.nonapi.scanspec",
+      "role": "package (ChangePackage)"
+    },
+    {
+      "source": "nonapi.io.github.classgraph.types",
+      "target": "com.m3.lib.classgraph.nonapi.types",
+      "role": "package (ChangePackage)"
+    },
+    {
+      "source": "nonapi.io.github.classgraph.utils",
+      "target": "com.m3.lib.classgraph.nonapi.utils",
+      "role": "package (ChangePackage)"
+    },
+    {
+      "source": "nonapi.io.github.classgraph.json",
+      "target": "com.m3.lib.classgraph.nonapi.json",
+      "role": "package (ChangePackage)"
+    },
+    {
+      "source": "io.github.classgraph",
+      "target": "com.m3.lib.classgraph",
+      "role": "package (ChangePackage)"
+    }
+  ]
+}

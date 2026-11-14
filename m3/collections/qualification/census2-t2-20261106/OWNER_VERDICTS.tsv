@@ -1,0 +1,9 @@
+# SPDX-License-Identifier: Apache-2.0
+# P2-135 owner probes of differential.sh (2026-11-06, base 5bd70ef520bb): the crate oracles (all PASS on the donor postimages: 5382 / 18 / 17 checks) run on the module filtered-collection owners with the view constructor mapped to <owner>.<factory>(Collection, Predicate) and check() recording instead of throwing; failures normalised (depth/seed/query) and counted. M3FilteredViews (the FilteredViews/FilteredCollectionView lineage owner) passes the contains oracle with the same check count (ALREADY) and lacks the non-ArrayList flat spliterator (HOLD_OWNER_EDIT); M3CollectionViews is recorded for the NEC row only. differential.sh fails when a later run observes anything else.
+owner	proof	verdict	details
+M3FilteredViews	FilteredDeepContainsProof	PASS	M3_FILTERED_DEEP_CONTAINS_PASS checks=5382
+M3FilteredViews	FilteredNonArrayFlatProof	FAIL	1x filtered cardinality remains unknown; 1x linked and array source order preserved; 1x no predicate evaluated during metadata; 1x predicate cardinality is not known; thrown java.util.ConcurrentModificationException
+M3FilteredViews	M3FlatFilterJoinProof	FAIL	1x late predicate evaluation; 1x owner ordering; 1x unsized filtered output; thrown java.util.ConcurrentModificationException
+M3CollectionViews	FilteredDeepContainsProof	FAIL	864x observable predicate calls differ depth=* seed=* query=*
+M3CollectionViews	FilteredNonArrayFlatProof	FAIL	1x filtered cardinality remains unknown; thrown java.util.ConcurrentModificationException
+M3CollectionViews	M3FlatFilterJoinProof	FAIL	1x late predicate evaluation; thrown java.util.ConcurrentModificationException

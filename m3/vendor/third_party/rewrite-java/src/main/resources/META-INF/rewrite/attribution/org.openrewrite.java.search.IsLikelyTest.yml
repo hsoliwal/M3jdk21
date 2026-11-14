@@ -1,0 +1,13 @@
+---
+type: "specs.openrewrite.org/v1beta/attribution"
+recipeName: "org.openrewrite.java.search.IsLikelyTest"
+contributors:
+- name: "Jonathan Leitschuh"
+  email: "jonathan.leitschuh@gmail.com"
+  lineCount: 49
+- name: "Jonathan Schnéider"
+  email: "jkschneider@gmail.com"
+  lineCount: 17
+- name: "Nick McKinney"
+  email: "mckinneynicholas@gmail.com"
+  lineCount: 7

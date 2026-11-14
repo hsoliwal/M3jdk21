@@ -1,0 +1,39 @@
+{
+  "checks": [
+    {
+      "detail": "",
+      "name": "file:M3-SYNEXIA-NOTICE.md",
+      "status": "PASS"
+    },
+    {
+      "detail": "",
+      "name": "file:M3-SYNEXIA-RIGHTS.md",
+      "status": "PASS"
+    },
+    {
+      "detail": "",
+      "name": "file:M3-SYNEXIA-AUTHORS.md",
+      "status": "PASS"
+    },
+    {
+      "detail": "",
+      "name": "file:LICENSE-M3-APACHE-2.0.txt",
+      "status": "PASS"
+    },
+    {
+      "detail": "",
+      "name": "rights.openjdk_boundary",
+      "status": "PASS"
+    },
+    {
+      "detail": "",
+      "name": "rights.reservation",
+      "status": "PASS"
+    }
+  ],
+  "gate": "RIGHTS_AND_LICENSE_BOUNDARY",
+  "missing_checks": [],
+  "source_commit": "1528a255c4773a54d9d89f7448690113e8559f9e",
+  "source_tree": "59ea4931c1c4f5f3782294c74552ad1e3d5fd18f",
+  "status": "PASS"
+}

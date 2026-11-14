@@ -1,0 +1,11 @@
+# Copyright 2026 Hitesh Soliwal and contributors
+# SPDX-License-Identifier: Apache-2.0
+#FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/5ecfe052562cdd1a7a6570068654c7f813fd0f47/synexia-openrewrite-recipes/recipe-crates/m3-pmem-streaming-seal-20261105/DONOR_CATEGORY.tsv blob e8c64cfdc2a1; recipe m3/optane/recipe/pmem-source-image-20261106/relocate.py v3
+category	reference	decision	contract_evidence
+source-read-memory	Synexia PR #15204 M3PmemSourceSlices.readSealed(int,byte[],int)	REUSE_CONCEPT	Preserve 64-bit offset, zero-length lease, byte-exact SHA-256 and caller-owned buffer; no code copied
+exact-first-hit	LeetCode 28	REUSE_EXISTING	Native KMP and first-hit file-relative offsets unchanged
+overlap-count	HackerRank Find a String	NOT_EQUIVALENT	Counts overlapping occurrences rather than first-hit; no source copied
+string-count	HackerRank Sparse Arrays	NOT_EQUIVALENT	Cannot replace per-file immutable SHA evidence with value counts
+KMP	GeeksforGeeks KMP	REUSE_EXISTING	No KMP rewrite; original Java FILE and C17 JNI owners retained
+GitHub-Maven	openrewrite/rewrite Apache-2.0	REUSE_PINNED_INTERNAL	Canonical M3HashPinnedJavaSnapshotRecipe source SHA and fixed-point accepted only on actual SDK execution
+JDK21	java.security.MessageDigest / HexFormat	ADOPT_STANDARD_API	Streaming SHA-256 update with reusable window and exact original source digest

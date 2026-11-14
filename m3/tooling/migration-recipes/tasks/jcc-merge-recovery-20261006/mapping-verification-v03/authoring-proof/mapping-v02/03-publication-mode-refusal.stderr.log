@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping-v02/bind_mapping.py", line 416, in <module>
+    main()
+  File "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping-v02/bind_mapping.py", line 373, in main
+    require(packet["fixture"] == args.fixture_only, "fixture flag/input mismatch")
+  File "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping-v02/bind_mapping.py", line 58, in require
+    raise Refusal(message)
+Refusal: fixture flag/input mismatch

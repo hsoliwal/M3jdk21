@@ -1,0 +1,6 @@
+owner	technical_dependency	usage	status
+M3IndexedTable	com.m3.collections.M3LinkedHashMap	row and column key -> primitive ID directory	REUSE_EXISTING_M3
+M3IndexedTable	com.m3.collections.M3LongLongHashMap	packed row/column int ids -> long physical slot+1	REUSE_EXISTING_M3
+M3IndexedTable	com.m3.collections.M3SlotArrays	capacity growth and Object[] typed fetch	REUSE_EXISTING_M3
+M3IndexedTable.IndexView	com.m3.collections.M3IndexMaskCompactor	int[] state-mask native-required explicit filtering	REUSE_EXISTING_JNI
+M3IndexedTableTest	org.junit.jupiter.api.Test	actual product module JUnit contract	PENDING_REAL_TARGET_CI

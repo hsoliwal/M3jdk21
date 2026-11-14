@@ -1,0 +1,3 @@
+# path	before_sha256	after_sha256	resource
+src/java.base/share/classes/java/lang/M3StringFacts.java	c834e63534db855f06e99bbfdf45caf0ecf36b88f5760bfe7fdaa8bcc355509f	51635a2e8cc407f3f7166389f975442b1bf06857e8b8c548852cbc63eaf636b3	00-M3StringFacts.java.txt
+test/jdk/java/lang/String/M3StringFactsScanWindowTest.java	ABSENT	0fa071d6e1e5c8372f4178d22e9d1d5a37a7f68d062ae511f08841f43bd02642	01-M3StringFactsScanWindowTest.java.txt

@@ -1,0 +1,22 @@
+---
+type: "specs.openrewrite.org/v1beta/attribution"
+recipeName: "org.openrewrite.text.AppendToTextFile"
+contributors:
+- name: "Jonathan Schnéider"
+  email: "jkschneider@gmail.com"
+  lineCount: 68
+- name: "Nick McKinney"
+  email: "mckinneynicholas@gmail.com"
+  lineCount: 61
+- name: "Knut Wannheden"
+  email: "knut@moderne.io"
+  lineCount: 5
+- name: "Sam Snyder"
+  email: "sam@moderne.io"
+  lineCount: 4
+- name: "Kun Li"
+  email: "122563761+kunli2@users.noreply.github.com"
+  lineCount: 1
+- name: "Tim te Beek"
+  email: "tim@moderne.io"
+  lineCount: 1

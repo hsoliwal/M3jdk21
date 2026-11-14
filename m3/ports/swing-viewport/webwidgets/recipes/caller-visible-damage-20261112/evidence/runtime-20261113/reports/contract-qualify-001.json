@@ -1,0 +1,83 @@
+{
+  "after": {
+    "charged": 5544418,
+    "commitAvailable": 26458025984,
+    "kFree": 11126632448,
+    "logical": 5544418,
+    "peak": {
+      "charged": 5544418,
+      "ordinaryLogBytes": 15671
+    },
+    "physicalAvailable": 3779416064,
+    "sFree": 10452422656
+  },
+  "before": {
+    "charged": 5239704,
+    "commitAvailable": 26670985216,
+    "kFree": 11126632448,
+    "logical": 5239704,
+    "peak": {
+      "charged": 5239704,
+      "ordinaryLogBytes": 13262
+    },
+    "physicalAvailable": 5184327680,
+    "sFree": 10452885504
+  },
+  "command": [
+    "C:\\Program Files\\Java\\jdk-21\\bin\\java.exe",
+    "-Xmx256m",
+    "-Duser.home=S:\\codex-work\\ui-caller-runtime-qualification-20261113\\home",
+    "-Djava.io.tmpdir=S:\\codex-work\\ui-caller-runtime-qualification-20261113\\tmp",
+    "-Djava.util.prefs.userRoot=S:\\codex-work\\ui-caller-runtime-qualification-20261113\\home\\prefs",
+    "-Djava.util.prefs.systemRoot=S:\\codex-work\\ui-caller-runtime-qualification-20261113\\home\\system-prefs",
+    "-Dmaven.home=C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14",
+    "-Dmaven.multiModuleProjectDirectory=S:\\codex-work\\ui-caller-runtime-qualification-20261113\\item-damage-contract-recipe",
+    "-Dclassworlds.conf=C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\bin\\m2.conf",
+    "-cp",
+    "C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\boot\\plexus-classworlds-2.9.0.jar",
+    "org.codehaus.plexus.classworlds.launcher.Launcher",
+    "-o",
+    "-B",
+    "-ntp",
+    "-nsu",
+    "-f",
+    "S:\\codex-work\\ui-caller-runtime-qualification-20261113\\item-damage-contract-recipe\\pom.xml",
+    "-Dmaven.repo.local=C:\\Users\\hsoliwal\\.m2\\repository",
+    "-Dm3.caller.receiverRoot=S:\\codex-work\\ui-caller-runtime-qualification-20261113",
+    "-Dm3.caller.recipeRoot=S:\\codex-work\\ui-caller-runtime-qualification-20261113\\item-damage-contract-recipe",
+    "-Dm3.caller.outputRoot=S:\\codex-work\\ui-caller-runtime-qualification-20261113\\contract-qualify-001",
+    "-Dm3.caller.mode=qualify",
+    "verify"
+  ],
+  "controllerSha256": "be85abaee9761affd9c7e4cf7647d7fc91e6cf24a5c47ac2d62fa3b05f95688e",
+  "endedUnix": 1794567460.4682376,
+  "javaSha256": "d27c1a75edf380963c430232e93340eab4bd3694044976cff85421bf163b876c",
+  "job": "contract-qualify-001",
+  "logBytes": 1823,
+  "logSha256": "8ff0fcec360fb80ce1ad0fdefb4c7a96d7b015e48287563cf1e9ad363a8e6c4c",
+  "native": {
+    "all_owned_native_handles_closed": true,
+    "assigned_to_job": true,
+    "cleanup_errors": [],
+    "creation_FILETIME": "134390410478514622",
+    "exitcode": 0,
+    "job_active_processes": 0,
+    "job_handle_closed": true,
+    "job_total_processes": 8,
+    "pid": 13596,
+    "process_handle_closed": true,
+    "resumed": true,
+    "same_handle_wait": 0,
+    "supervisor_error": null,
+    "terminal": true,
+    "termination_requested": false,
+    "thread_handle_closed": true
+  },
+  "pomSha256": "7c69cfd4570fdbc3ba1adc6f9dc9349790e1fed2a7f9119f982d2d0703ec2380",
+  "postGuardError": null,
+  "productionPromotion": false,
+  "schema": "m3.owned-cpu-qualification/v1",
+  "scope": "caller-recipe-runtime-followup",
+  "startedUnix": 1794567447.8495364,
+  "supervisorSha256": "7ca2eb41ba44b69969fc59f53cb333354f42a932ed31eb257c0682e7813c3b9c"
+}

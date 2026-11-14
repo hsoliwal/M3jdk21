@@ -1,0 +1,26 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ----< com.synexia.verification:m3-wrapper-convergence-recipe-proof >----
+[INFO] Building m3-wrapper-convergence-recipe-proof 1
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- surefire:3.2.5:test (default-cli) @ m3-wrapper-convergence-recipe-proof ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running com.synexia.rewrite.M3TaskRecipeTest
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.656 s -- in com.synexia.rewrite.M3TaskRecipeTest
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  1.834 s
+[INFO] Finished at: 2026-10-20T12:38:29+01:00
+[INFO] ------------------------------------------------------------------------

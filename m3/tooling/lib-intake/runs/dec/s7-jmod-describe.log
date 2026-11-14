@@ -1,0 +1,4 @@
+jdk.m3.dec@0.1.2-m3-source-1
+exports com.m3.lib.dec
+requires java.base mandated
+

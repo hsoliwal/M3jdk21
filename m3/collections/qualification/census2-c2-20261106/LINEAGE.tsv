@@ -1,0 +1,628 @@
+leaf	kind	line	ever_on_master	last_present	change_commit	change_date	change_subject
+P2-042	missing	return Multimaps.newListMultimap(new M3LinkedHashMap<>(), M3LinkedList::new);	YES	dc6ff38d1ff	e0b7f1d8373	2026-10-19	merge: additive M3JDK21 PR #1297
+P2-042	missing	return new M3SpringMultiValueMap<>();	YES	47a43f7b153	484119a5e09	2026-10-17	feat(m3 sdk): direct Spring MultiValueMap from M3 indexed arrays, no Spring adapter dispat
+P2-043	missing	return backing.set(sourceIndex, value);	YES	79c588a4293	df6a836b26e	2026-10-27	fix(collections): receive original ListIterator replacement atom from Synexia
+P2-043	missing	E old = backing.remove(physical(index, false));	YES	df6a836b26e	fd633b1d98c	2026-10-28	Superset: merge PR #2024 (fix(collections): preserve ListIterator-supported filtered repla
+P2-043	missing	private boolean lastWasNext;	YES	452dd02e9e2	340bafb58b7	2026-10-21	m3jdk21: receive recipe-sealed filtered cursor primitive state masks
+P2-043	missing	private boolean failed;	YES	452dd02e9e2	340bafb58b7	2026-10-21	m3jdk21: receive recipe-sealed filtered cursor primitive state masks
+P2-043	missing	private boolean nextPrepared, previousPrepared;	YES	452dd02e9e2	340bafb58b7	2026-10-21	m3jdk21: receive recipe-sealed filtered cursor primitive state masks
+P2-043	missing	if (failed) throw new IllegalStateException("filtered List iterator failed");	YES	452dd02e9e2	340bafb58b7	2026-10-21	m3jdk21: receive recipe-sealed filtered cursor primitive state masks
+P2-043	missing	nextPrepared = previousPrepared = false;	YES	452dd02e9e2	340bafb58b7	2026-10-21	m3jdk21: receive recipe-sealed filtered cursor primitive state masks
+P2-043	missing	if (forward && nextPrepared) return nextSteps;	YES	452dd02e9e2	340bafb58b7	2026-10-21	m3jdk21: receive recipe-sealed filtered cursor primitive state masks
+P2-043	missing	if (!forward && previousPrepared) return previousSteps;	YES	452dd02e9e2	340bafb58b7	2026-10-21	m3jdk21: receive recipe-sealed filtered cursor primitive state masks
+P2-043	missing	failed = true;	YES	452dd02e9e2	340bafb58b7	2026-10-21	m3jdk21: receive recipe-sealed filtered cursor primitive state masks
+P2-043	missing	failed = true;	YES	452dd02e9e2	340bafb58b7	2026-10-21	m3jdk21: receive recipe-sealed filtered cursor primitive state masks
+P2-043	missing	nextPrepared = true; nextSteps = match; nextValue = accepted;	YES	452dd02e9e2	340bafb58b7	2026-10-21	m3jdk21: receive recipe-sealed filtered cursor primitive state masks
+P2-043	missing	previousPrepared = true; previousSteps = match; previousValue = accepted;	YES	452dd02e9e2	340bafb58b7	2026-10-21	m3jdk21: receive recipe-sealed filtered cursor primitive state masks
+P2-043	missing	catch (RuntimeException | Error exception) { failed = true; throw exception; }	YES	452dd02e9e2	340bafb58b7	2026-10-21	m3jdk21: receive recipe-sealed filtered cursor primitive state masks
+P2-043	missing	lastWasNext = true;	YES	452dd02e9e2	340bafb58b7	2026-10-21	m3jdk21: receive recipe-sealed filtered cursor primitive state masks
+P2-043	missing	catch (RuntimeException | Error exception) { failed = true; throw exception; }	YES	452dd02e9e2	340bafb58b7	2026-10-21	m3jdk21: receive recipe-sealed filtered cursor primitive state masks
+P2-043	missing	lastWasNext = false;	YES	452dd02e9e2	340bafb58b7	2026-10-21	m3jdk21: receive recipe-sealed filtered cursor primitive state masks
+P2-043	missing	private void checkForComodification() {	NO	-	-	-	never on master history of the owner
+P2-043	missing	iterator.next();	NO	-	-	-	never on master history of the owner
+P2-043	missing	} catch (NoSuchElementException exhausted) {	NO	-	-	-	never on master history of the owner
+P2-043	missing	iterator.previous();	NO	-	-	-	never on master history of the owner
+P2-043	missing	failed = true;	YES	452dd02e9e2	340bafb58b7	2026-10-21	m3jdk21: receive recipe-sealed filtered cursor primitive state masks
+P2-043	missing	checkForComodification();	NO	-	-	-	never on master history of the owner
+P2-043	missing	backing.remove(target);	YES	df6a836b26e	fd633b1d98c	2026-10-28	Superset: merge PR #2024 (fix(collections): preserve ListIterator-supported filtered repla
+P2-043	missing	if (lastWasNext) logical--;	YES	452dd02e9e2	340bafb58b7	2026-10-21	m3jdk21: receive recipe-sealed filtered cursor primitive state masks
+P2-043	missing	checkForComodification();	NO	-	-	-	never on master history of the owner
+P2-043	missing	backing.set(lastPhysical, value);	YES	79c588a4293	df6a836b26e	2026-10-27	fix(collections): receive original ListIterator replacement atom from Synexia
+P2-043	missing	checkForComodification();	NO	-	-	-	never on master history of the owner
+P2-047	missing	private boolean ready;	YES	fce3b06bf18	dc139980bbc	2026-10-21	m3jdk21: receive exact predicate directory and java.base filtered mask cursor
+P2-047	missing	private boolean exhausted;	YES	fce3b06bf18	dc139980bbc	2026-10-21	m3jdk21: receive exact predicate directory and java.base filtered mask cursor
+P2-047	missing	if (ready) return true;	YES	fce3b06bf18	dc139980bbc	2026-10-21	m3jdk21: receive exact predicate directory and java.base filtered mask cursor
+P2-047	missing	if (exhausted) return false;	YES	fce3b06bf18	dc139980bbc	2026-10-21	m3jdk21: receive exact predicate directory and java.base filtered mask cursor
+P2-047	missing	ready = true;	YES	fce3b06bf18	dc139980bbc	2026-10-21	m3jdk21: receive exact predicate directory and java.base filtered mask cursor
+P2-047	missing	exhausted = true;	YES	fce3b06bf18	dc139980bbc	2026-10-21	m3jdk21: receive exact predicate directory and java.base filtered mask cursor
+P2-047	missing	ready = false;	YES	fce3b06bf18	dc139980bbc	2026-10-21	m3jdk21: receive exact predicate directory and java.base filtered mask cursor
+P2-047	missing	for (E item : source) if (predicate.test(item)) count++;	YES	7fbc591ba9c	4b31c7b76cb	2026-10-19	merge: additive M3JDK21 PR #1314
+P2-047	missing	protected final M3TreeMap<E, ?> indexed() {	NO	-	-	-	never on master history of the owner
+P2-047	missing	return sorted instanceof M3TreeSet<?> owned	NO	-	-	-	never on master history of the owner
+P2-047	missing	? ((M3TreeSet<E>) owned).indexedOwner() : null;	NO	-	-	-	never on master history of the owner
+P2-047	missing	protected final Iterator<E> slotCursor(M3TreeMap<E, ?> owner, boolean reverse) {	NO	-	-	-	never on master history of the owner
+P2-047	missing	private final int epoch = owner.revision();	NO	-	-	-	never on master history of the owner
+P2-047	missing	private int pending = reverse ? owner.lastSlot() : owner.firstSlot();	NO	-	-	-	never on master history of the owner
+P2-047	missing	private boolean prepared;	NO	-	-	-	never on master history of the owner
+P2-047	missing	private boolean exhausted;	YES	fce3b06bf18	dc139980bbc	2026-10-21	m3jdk21: receive exact predicate directory and java.base filtered mask cursor
+P2-047	missing	private void check() {	NO	-	-	-	never on master history of the owner
+P2-047	missing	if (epoch != owner.revision()) throw new ConcurrentModificationException();	NO	-	-	-	never on master history of the owner
+P2-047	missing	private void prepare() {	NO	-	-	-	never on master history of the owner
+P2-047	missing	check();	NO	-	-	-	never on master history of the owner
+P2-047	missing	if (prepared || exhausted) return;	NO	-	-	-	never on master history of the owner
+P2-047	missing	while (pending >= 0) {	NO	-	-	-	never on master history of the owner
+P2-047	missing	E value = owner.keyAt(pending);	NO	-	-	-	never on master history of the owner
+P2-047	missing	boolean visible = predicate.test(value);	NO	-	-	-	never on master history of the owner
+P2-047	missing	check();	NO	-	-	-	never on master history of the owner
+P2-047	missing	if (visible) {	NO	-	-	-	never on master history of the owner
+P2-047	missing	prepared = true;	NO	-	-	-	never on master history of the owner
+P2-047	missing	pending = reverse ? owner.previousIndexedSlot(pending)	NO	-	-	-	never on master history of the owner
+P2-047	missing	: owner.nextSlot(pending);	NO	-	-	-	never on master history of the owner
+P2-047	missing	check();	NO	-	-	-	never on master history of the owner
+P2-047	missing	exhausted = true;	YES	fce3b06bf18	dc139980bbc	2026-10-21	m3jdk21: receive exact predicate directory and java.base filtered mask cursor
+P2-047	missing	int slot = pending;	NO	-	-	-	never on master history of the owner
+P2-047	missing	E result = owner.keyAt(slot);	NO	-	-	-	never on master history of the owner
+P2-047	missing	pending = reverse ? owner.previousIndexedSlot(slot) : owner.nextSlot(slot);	NO	-	-	-	never on master history of the owner
+P2-047	missing	check();	NO	-	-	-	never on master history of the owner
+P2-047	missing	prepared = false;	NO	-	-	-	never on master history of the owner
+P2-047	missing	private int edge(M3TreeMap<E, ?> owner, boolean first) {	NO	-	-	-	never on master history of the owner
+P2-047	missing	int slot = first ? owner.firstSlot() : owner.lastSlot();	NO	-	-	-	never on master history of the owner
+P2-047	missing	while (slot >= 0 && !predicate.test(owner.keyAt(slot))) {	NO	-	-	-	never on master history of the owner
+P2-047	missing	slot = first ? owner.nextSlot(slot) : owner.previousIndexedSlot(slot);	NO	-	-	-	never on master history of the owner
+P2-047	missing	return slot;	NO	-	-	-	never on master history of the owner
+P2-047	missing	M3TreeMap<E, ?> owner = indexed();	NO	-	-	-	never on master history of the owner
+P2-047	missing	if (owner == null) return super.size();	NO	-	-	-	never on master history of the owner
+P2-047	missing	for (int slot = owner.firstSlot(); slot >= 0; slot = owner.nextSlot(slot)) {	NO	-	-	-	never on master history of the owner
+P2-047	missing	if (predicate.test(owner.keyAt(slot))) count++;	NO	-	-	-	never on master history of the owner
+P2-047	missing	M3TreeMap<E, ?> owner = indexed();	NO	-	-	-	never on master history of the owner
+P2-047	missing	return owner == null ? super.isEmpty() : edge(owner, true) < 0;	NO	-	-	-	never on master history of the owner
+P2-047	missing	M3TreeMap<E, ?> owner = indexed();	NO	-	-	-	never on master history of the owner
+P2-047	missing	return owner == null ? super.iterator() : slotCursor(owner, false);	NO	-	-	-	never on master history of the owner
+P2-047	missing	M3TreeMap<E, ?> owner = indexed();	NO	-	-	-	never on master history of the owner
+P2-047	missing	if (owner != null) {	NO	-	-	-	never on master history of the owner
+P2-047	missing	int slot = owner.findSlot(value);	NO	-	-	-	never on master history of the owner
+P2-047	missing	return slot >= 0 && predicate.test(owner.keyAt(slot));	NO	-	-	-	never on master history of the owner
+P2-047	missing	M3TreeMap<E, ?> owner = indexed();	NO	-	-	-	never on master history of the owner
+P2-047	missing	if (owner != null) {	NO	-	-	-	never on master history of the owner
+P2-047	missing	int slot = edge(owner, true);	NO	-	-	-	never on master history of the owner
+P2-047	missing	if (slot < 0) throw new NoSuchElementException();	NO	-	-	-	never on master history of the owner
+P2-047	missing	return owner.keyAt(slot);	NO	-	-	-	never on master history of the owner
+P2-047	missing	return iterator().next();	NO	-	-	-	never on master history of the owner
+P2-047	missing	M3TreeMap<E, ?> owner = indexed();	NO	-	-	-	never on master history of the owner
+P2-047	missing	if (owner != null) {	NO	-	-	-	never on master history of the owner
+P2-047	missing	int slot = edge(owner, false);	NO	-	-	-	never on master history of the owner
+P2-047	missing	if (slot < 0) throw new NoSuchElementException();	NO	-	-	-	never on master history of the owner
+P2-047	missing	return owner.keyAt(slot);	NO	-	-	-	never on master history of the owner
+P2-047	missing	M3TreeMap<E, ?> owner = indexed();	NO	-	-	-	never on master history of the owner
+P2-047	missing	if (owner != null) {	NO	-	-	-	never on master history of the owner
+P2-047	missing	int slot = owner.findSlot(value);	NO	-	-	-	never on master history of the owner
+P2-047	missing	return slot >= 0 && predicate.test(owner.keyAt(slot));	NO	-	-	-	never on master history of the owner
+P2-047	missing	private E indexedBound(M3TreeMap<E, ?> owner, E query, int relation) {	NO	-	-	-	never on master history of the owner
+P2-047	missing	int slot = owner.nearIndexedSlot(query, relation);	NO	-	-	-	never on master history of the owner
+P2-047	missing	while (slot >= 0 && !predicate.test(owner.keyAt(slot))) {	NO	-	-	-	never on master history of the owner
+P2-047	missing	slot = relation < 0 ? owner.previousIndexedSlot(slot)	NO	-	-	-	never on master history of the owner
+P2-047	missing	: owner.nextSlot(slot);	NO	-	-	-	never on master history of the owner
+P2-047	missing	return slot < 0 ? null : owner.keyAt(slot);	NO	-	-	-	never on master history of the owner
+P2-047	missing	private E nullCandidate(E query, boolean forward, boolean inclusive) {	YES	588afdd78af	6311c7c8bb3	2026-10-29	fix(collections): receive qualified null navigation and current entry contracts
+P2-047	missing	if (nav.comparator() == null) return null;	YES	588afdd78af	6311c7c8bb3	2026-10-29	fix(collections): receive qualified null navigation and current entry contracts
+P2-047	missing	NavigableSet<E> reverse = nav.descendingSet();	YES	588afdd78af	6311c7c8bb3	2026-10-29	fix(collections): receive qualified null navigation and current entry contracts
+P2-047	missing	if (reverse.comparator() == null) return null;	YES	588afdd78af	6311c7c8bb3	2026-10-29	fix(collections): receive qualified null navigation and current entry contracts
+P2-047	missing	NavigableSet<E> ordered = forward ? nav : reverse;	YES	588afdd78af	6311c7c8bb3	2026-10-29	fix(collections): receive qualified null navigation and current entry contracts
+P2-047	missing	Iterator<E> cursor = ordered.iterator();	YES	588afdd78af	6311c7c8bb3	2026-10-29	fix(collections): receive qualified null navigation and current entry contracts
+P2-047	missing	if (!cursor.hasNext()) return null;	YES	588afdd78af	6311c7c8bb3	2026-10-29	fix(collections): receive qualified null navigation and current entry contracts
+P2-047	missing	Comparator<? super E> order = ordered.comparator();	YES	588afdd78af	6311c7c8bb3	2026-10-29	fix(collections): receive qualified null navigation and current entry contracts
+P2-047	missing	int fromFirst = compareStored(query, cursor.next(), order);	YES	588afdd78af	6311c7c8bb3	2026-10-29	fix(collections): receive qualified null navigation and current entry contracts
+P2-047	missing	if (fromFirst < 0 || (fromFirst == 0 && inclusive)) {	YES	588afdd78af	6311c7c8bb3	2026-10-29	fix(collections): receive qualified null navigation and current entry contracts
+P2-047	missing	return firstVisible(ordered.iterator());	YES	588afdd78af	6311c7c8bb3	2026-10-29	fix(collections): receive qualified null navigation and current entry contracts
+P2-047	missing	int fromLast = compareStored(query, ordered.last(), order);	YES	588afdd78af	6311c7c8bb3	2026-10-29	fix(collections): receive qualified null navigation and current entry contracts
+P2-047	missing	if (fromLast > 0 || (fromLast == 0 && !inclusive)) return null;	YES	588afdd78af	6311c7c8bb3	2026-10-29	fix(collections): receive qualified null navigation and current entry contracts
+P2-047	missing	return firstVisible(ordered.tailSet(query, inclusive).iterator());	YES	588afdd78af	6311c7c8bb3	2026-10-29	fix(collections): receive qualified null navigation and current entry contracts
+P2-047	missing	Iterator<E> selected = M3FilteredViews.filtered(cursor, predicate);	YES	1a6c72ad39e	588afdd78af	2026-10-28	Superset: merge PR #1603 (source conflicts resolved to the candidate the compiler accepts
+P2-047	missing	return selected.hasNext() ? selected.next() : null;	YES	1a6c72ad39e	588afdd78af	2026-10-28	Superset: merge PR #1603 (source conflicts resolved to the candidate the compiler accepts
+P2-047	missing	if (candidate == null) return nullCandidate(query, forward, inclusive);	YES	588afdd78af	6311c7c8bb3	2026-10-29	fix(collections): receive qualified null navigation and current entry contracts
+P2-047	missing	M3TreeMap<E, ?> owner = indexed();	NO	-	-	-	never on master history of the owner
+P2-047	missing	return owner == null ? navigate(nav.lower(e), e, false, false)	NO	-	-	-	never on master history of the owner
+P2-047	missing	: indexedBound(owner, e, -2);	NO	-	-	-	never on master history of the owner
+P2-047	missing	M3TreeMap<E, ?> owner = indexed();	NO	-	-	-	never on master history of the owner
+P2-047	missing	return owner == null ? navigate(nav.floor(e), e, false, true)	NO	-	-	-	never on master history of the owner
+P2-047	missing	: indexedBound(owner, e, -1);	NO	-	-	-	never on master history of the owner
+P2-047	missing	M3TreeMap<E, ?> owner = indexed();	NO	-	-	-	never on master history of the owner
+P2-047	missing	return owner == null ? navigate(nav.ceiling(e), e, true, true)	NO	-	-	-	never on master history of the owner
+P2-047	missing	: indexedBound(owner, e, 1);	NO	-	-	-	never on master history of the owner
+P2-047	missing	M3TreeMap<E, ?> owner = indexed();	NO	-	-	-	never on master history of the owner
+P2-047	missing	return owner == null ? navigate(nav.higher(e), e, true, false)	NO	-	-	-	never on master history of the owner
+P2-047	missing	: indexedBound(owner, e, 2);	NO	-	-	-	never on master history of the owner
+P2-047	missing	if (indexed() != null) return super.first();	NO	-	-	-	never on master history of the owner
+P2-047	missing	if (indexed() != null) return super.last();	NO	-	-	-	never on master history of the owner
+P2-047	missing	M3TreeMap<E, ?> owner = indexed();	NO	-	-	-	never on master history of the owner
+P2-047	missing	return owner == null ? filtered(nav.descendingSet().iterator(), predicate)	NO	-	-	-	never on master history of the owner
+P2-047	missing	: slotCursor(owner, true);	NO	-	-	-	never on master history of the owner
+P2-047	missing	protected final M3TreeMap<K, V> indexed() {	NO	-	-	-	never on master history of the owner
+P2-047	missing	return sorted instanceof M3TreeMap<?, ?> m3 ? (M3TreeMap<K, V>) m3 : null;	NO	-	-	-	never on master history of the owner
+P2-047	missing	protected final boolean visibleSlot(M3TreeMap<K, V> owner, int slot) {	NO	-	-	-	never on master history of the owner
+P2-047	missing	return predicate.test(owner.keyAt(slot), owner.valueAt(slot));	NO	-	-	-	never on master history of the owner
+P2-047	missing	protected final int boundarySlot(M3TreeMap<K, V> owner, boolean first) {	NO	-	-	-	never on master history of the owner
+P2-047	missing	int slot = first ? owner.firstSlot() : owner.lastSlot();	NO	-	-	-	never on master history of the owner
+P2-047	missing	while (slot >= 0 && !visibleSlot(owner, slot)) {	NO	-	-	-	never on master history of the owner
+P2-047	missing	slot = first ? owner.nextSlot(slot) : owner.previousIndexedSlot(slot);	NO	-	-	-	never on master history of the owner
+P2-047	missing	return slot;	NO	-	-	-	never on master history of the owner
+P2-047	missing	M3TreeMap<K, V> owner = indexed();	NO	-	-	-	never on master history of the owner
+P2-047	missing	if (owner != null) {	NO	-	-	-	never on master history of the owner
+P2-047	missing	for (int slot = owner.firstSlot(); slot >= 0; slot = owner.nextSlot(slot))	NO	-	-	-	never on master history of the owner
+P2-047	missing	if (visibleSlot(owner, slot)) count++;	NO	-	-	-	never on master history of the owner
+P2-047	missing	M3TreeMap<K, V> owner = indexed();	NO	-	-	-	never on master history of the owner
+P2-047	missing	if (owner != null) return boundarySlot(owner, true) < 0;	NO	-	-	-	never on master history of the owner
+P2-047	missing	M3TreeMap<K, V> owner = indexed();	NO	-	-	-	never on master history of the owner
+P2-047	missing	if (owner != null) return owner.keyAt(owner.findSlot(query));	NO	-	-	-	never on master history of the owner
+P2-047	missing	M3TreeMap<K, V> owner = indexed();	NO	-	-	-	never on master history of the owner
+P2-047	missing	if (owner != null) {	NO	-	-	-	never on master history of the owner
+P2-047	missing	int slot = owner.findSlot(key);	NO	-	-	-	never on master history of the owner
+P2-047	missing	return slot >= 0 && visibleSlot(owner, slot);	NO	-	-	-	never on master history of the owner
+P2-047	missing	M3TreeMap<K, V> owner = indexed();	NO	-	-	-	never on master history of the owner
+P2-047	missing	if (owner != null) {	NO	-	-	-	never on master history of the owner
+P2-047	missing	int slot = owner.findSlot(key);	NO	-	-	-	never on master history of the owner
+P2-047	missing	if (slot < 0) return null;	NO	-	-	-	never on master history of the owner
+P2-047	missing	V value = owner.valueAt(slot);	NO	-	-	-	never on master history of the owner
+P2-047	missing	return predicate.test(owner.keyAt(slot), value) ? value : null;	NO	-	-	-	never on master history of the owner
+P2-047	missing	M3TreeMap<K, V> owner = indexed();	NO	-	-	-	never on master history of the owner
+P2-047	missing	if (owner != null) {	NO	-	-	-	never on master history of the owner
+P2-047	missing	private final int expected = owner.revision();	NO	-	-	-	never on master history of the owner
+P2-047	missing	private int next = owner.firstSlot();	NO	-	-	-	never on master history of the owner
+P2-047	missing	private boolean prepared;	NO	-	-	-	never on master history of the owner
+P2-047	missing	private void check() {	NO	-	-	-	never on master history of the owner
+P2-047	missing	if (expected != owner.revision()) throw new ConcurrentModificationException();	NO	-	-	-	never on master history of the owner
+P2-047	missing	check();	NO	-	-	-	never on master history of the owner
+P2-047	missing	if (prepared) return true;	NO	-	-	-	never on master history of the owner
+P2-047	missing	while (next >= 0) {	NO	-	-	-	never on master history of the owner
+P2-047	missing	boolean visible = visibleSlot(owner, next);	NO	-	-	-	never on master history of the owner
+P2-047	missing	check();	NO	-	-	-	never on master history of the owner
+P2-047	missing	if (visible) {	NO	-	-	-	never on master history of the owner
+P2-047	missing	prepared = true;	NO	-	-	-	never on master history of the owner
+P2-047	missing	next = owner.nextSlot(next);	NO	-	-	-	never on master history of the owner
+P2-047	missing	check();	NO	-	-	-	never on master history of the owner
+P2-047	missing	int slot = next;	NO	-	-	-	never on master history of the owner
+P2-047	missing	next = owner.nextSlot(slot);	NO	-	-	-	never on master history of the owner
+P2-047	missing	check();	NO	-	-	-	never on master history of the owner
+P2-047	missing	prepared = false;	NO	-	-	-	never on master history of the owner
+P2-047	missing	Entry<K, V> result = new SimpleImmutableEntry<>(	NO	-	-	-	never on master history of the owner
+P2-047	missing	owner.keyAt(slot), owner.valueAt(slot));	NO	-	-	-	never on master history of the owner
+P2-047	missing	check();	NO	-	-	-	never on master history of the owner
+P2-047	missing	M3TreeMap<K, V> owner = indexed();	NO	-	-	-	never on master history of the owner
+P2-047	missing	if (owner != null) {	NO	-	-	-	never on master history of the owner
+P2-047	missing	int slot = boundarySlot(owner, true);	NO	-	-	-	never on master history of the owner
+P2-047	missing	if (slot < 0) throw new NoSuchElementException();	NO	-	-	-	never on master history of the owner
+P2-047	missing	return owner.keyAt(slot);	NO	-	-	-	never on master history of the owner
+P2-047	missing	M3TreeMap<K, V> owner = indexed();	NO	-	-	-	never on master history of the owner
+P2-047	missing	if (owner != null) {	NO	-	-	-	never on master history of the owner
+P2-047	missing	int slot = boundarySlot(owner, false);	NO	-	-	-	never on master history of the owner
+P2-047	missing	if (slot < 0) throw new NoSuchElementException();	NO	-	-	-	never on master history of the owner
+P2-047	missing	return owner.keyAt(slot);	NO	-	-	-	never on master history of the owner
+P2-047	missing	M3TreeMap<K, V> owner = indexed();	NO	-	-	-	never on master history of the owner
+P2-047	missing	if (owner == null) return super.values();	NO	-	-	-	never on master history of the owner
+P2-047	missing	return new AbstractCollection<>() {	NO	-	-	-	never on master history of the owner
+P2-047	missing	private final int expected = owner.revision();	NO	-	-	-	never on master history of the owner
+P2-047	missing	private int next = owner.firstSlot();	NO	-	-	-	never on master history of the owner
+P2-047	missing	private boolean prepared;	NO	-	-	-	never on master history of the owner
+P2-047	missing	private void check() {	NO	-	-	-	never on master history of the owner
+P2-047	missing	if (expected != owner.revision()) throw new ConcurrentModificationException();	NO	-	-	-	never on master history of the owner
+P2-047	missing	check();	NO	-	-	-	never on master history of the owner
+P2-047	missing	if (prepared) return true;	NO	-	-	-	never on master history of the owner
+P2-047	missing	while (next >= 0) {	NO	-	-	-	never on master history of the owner
+P2-047	missing	boolean visible = visibleSlot(owner, next);	NO	-	-	-	never on master history of the owner
+P2-047	missing	check();	NO	-	-	-	never on master history of the owner
+P2-047	missing	if (visible) {	NO	-	-	-	never on master history of the owner
+P2-047	missing	prepared = true;	NO	-	-	-	never on master history of the owner
+P2-047	missing	next = owner.nextSlot(next);	NO	-	-	-	never on master history of the owner
+P2-047	missing	check();	NO	-	-	-	never on master history of the owner
+P2-047	missing	int slot = next;	NO	-	-	-	never on master history of the owner
+P2-047	missing	next = owner.nextSlot(slot);	NO	-	-	-	never on master history of the owner
+P2-047	missing	check();	NO	-	-	-	never on master history of the owner
+P2-047	missing	prepared = false;	NO	-	-	-	never on master history of the owner
+P2-047	missing	V result = owner.valueAt(slot);	NO	-	-	-	never on master history of the owner
+P2-047	missing	check();	NO	-	-	-	never on master history of the owner
+P2-047	missing	M3TreeMap<K, V> owner = indexed();	NO	-	-	-	never on master history of the owner
+P2-047	missing	if (owner == null) return super.containsValue(value);	NO	-	-	-	never on master history of the owner
+P2-047	missing	for (int slot = owner.firstSlot(); slot >= 0; slot = owner.nextSlot(slot)) {	NO	-	-	-	never on master history of the owner
+P2-047	missing	V stored = owner.valueAt(slot);	NO	-	-	-	never on master history of the owner
+P2-047	missing	if (predicate.test(owner.keyAt(slot), stored) && Objects.equals(value, stored))	NO	-	-	-	never on master history of the owner
+P2-047	missing	Objects.requireNonNull(consumer, "consumer");	NO	-	-	-	never on master history of the owner
+P2-047	missing	M3TreeMap<K, V> owner = indexed();	NO	-	-	-	never on master history of the owner
+P2-047	missing	if (owner == null) { super.forEach(consumer); return; }	NO	-	-	-	never on master history of the owner
+P2-047	missing	for (int slot = owner.firstSlot(); slot >= 0; slot = owner.nextSlot(slot)) {	NO	-	-	-	never on master history of the owner
+P2-047	missing	V value = owner.valueAt(slot);	NO	-	-	-	never on master history of the owner
+P2-047	missing	if (predicate.test(key, value)) consumer.accept(key, value);	NO	-	-	-	never on master history of the owner
+P2-047	missing	if (expected != owner.revision()) throw new ConcurrentModificationException();	NO	-	-	-	never on master history of the owner
+P2-047	missing	M3TreeMap<K, V> owner = indexed();	NO	-	-	-	never on master history of the owner
+P2-047	missing	if (owner == null) return super.hashCode();	NO	-	-	-	never on master history of the owner
+P2-047	missing	int hash = 0;	NO	-	-	-	never on master history of the owner
+P2-047	missing	for (int slot = owner.firstSlot(); slot >= 0; slot = owner.nextSlot(slot)) {	NO	-	-	-	never on master history of the owner
+P2-047	missing	V value = owner.valueAt(slot);	NO	-	-	-	never on master history of the owner
+P2-047	missing	if (predicate.test(key, value))	NO	-	-	-	never on master history of the owner
+P2-047	missing	hash += Objects.hashCode(key) ^ Objects.hashCode(value);	NO	-	-	-	never on master history of the owner
+P2-047	missing	return hash;	NO	-	-	-	never on master history of the owner
+P2-047	missing	if (this == other) return true;	NO	-	-	-	never on master history of the owner
+P2-047	missing	M3TreeMap<K, V> owner = indexed();	NO	-	-	-	never on master history of the owner
+P2-047	missing	if (owner == null) return super.equals(other);	NO	-	-	-	never on master history of the owner
+P2-047	missing	if (!(other instanceof Map<?, ?> map) || map.size() != size()) return false;	NO	-	-	-	never on master history of the owner
+P2-047	missing	for (int slot = owner.firstSlot(); slot >= 0; slot = owner.nextSlot(slot)) {	NO	-	-	-	never on master history of the owner
+P2-047	missing	V value = owner.valueAt(slot);	NO	-	-	-	never on master history of the owner
+P2-047	missing	if (predicate.test(key, value)	NO	-	-	-	never on master history of the owner
+P2-047	missing	&& (!Objects.equals(value, map.get(key))	NO	-	-	-	never on master history of the owner
+P2-047	missing	|| value == null && !map.containsKey(key))) return false;	NO	-	-	-	never on master history of the owner
+P2-047	missing	} catch (ClassCastException | NullPointerException ex) {	NO	-	-	-	never on master history of the owner
+P2-047	missing	M3TreeMap<K, V> owner = indexed();	NO	-	-	-	never on master history of the owner
+P2-047	missing	if (owner == null) return super.toString();	NO	-	-	-	never on master history of the owner
+P2-047	missing	StringBuilder builder = new StringBuilder("{");	NO	-	-	-	never on master history of the owner
+P2-047	missing	boolean comma = false;	NO	-	-	-	never on master history of the owner
+P2-047	missing	for (int slot = owner.firstSlot(); slot >= 0; slot = owner.nextSlot(slot)) {	NO	-	-	-	never on master history of the owner
+P2-047	missing	V value = owner.valueAt(slot);	NO	-	-	-	never on master history of the owner
+P2-047	missing	if (!predicate.test(key, value)) continue;	NO	-	-	-	never on master history of the owner
+P2-047	missing	if (comma) builder.append(", ");	NO	-	-	-	never on master history of the owner
+P2-047	missing	comma = true;	NO	-	-	-	never on master history of the owner
+P2-047	missing	builder.append(key == this ? "(this Map)" : key).append('=')	NO	-	-	-	never on master history of the owner
+P2-047	missing	.append(value == this ? "(this Map)" : value);	NO	-	-	-	never on master history of the owner
+P2-047	missing	return builder.append('}').toString();	NO	-	-	-	never on master history of the owner
+P2-047	missing	M3TreeMap<K, V> owner = indexed();	NO	-	-	-	never on master history of the owner
+P2-047	missing	if (owner != null) return owner.keyAt(owner.findSlot(key));	NO	-	-	-	never on master history of the owner
+P2-047	missing	private int indexedNeighbor(M3TreeMap<K, V> owner, K query,	NO	-	-	-	never on master history of the owner
+P2-047	missing	boolean forward, boolean inclusive) {	NO	-	-	-	never on master history of the owner
+P2-047	missing	int relation = forward ? (inclusive ? 1 : 2) : (inclusive ? -1 : -2);	NO	-	-	-	never on master history of the owner
+P2-047	missing	int slot = owner.nearIndexedSlot(query, relation);	NO	-	-	-	never on master history of the owner
+P2-047	missing	while (slot >= 0 && !visibleSlot(owner, slot)) {	NO	-	-	-	never on master history of the owner
+P2-047	missing	slot = forward ? owner.nextSlot(slot) : owner.previousIndexedSlot(slot);	NO	-	-	-	never on master history of the owner
+P2-047	missing	return slot;	NO	-	-	-	never on master history of the owner
+P2-047	missing	private Entry<K, V> indexedEntry(M3TreeMap<K, V> owner, int slot) {	NO	-	-	-	never on master history of the owner
+P2-047	missing	return slot < 0 ? null : new SimpleImmutableEntry<>(owner.keyAt(slot), owner.valueAt(slot));	NO	-	-	-	never on master history of the owner
+P2-047	missing	private K indexedKey(M3TreeMap<K, V> owner, int slot) {	NO	-	-	-	never on master history of the owner
+P2-047	missing	return slot < 0 ? null : owner.keyAt(slot);	NO	-	-	-	never on master history of the owner
+P2-047	missing	private K boundKey(K key, boolean forward, boolean inclusive) {	NO	-	-	-	never on master history of the owner
+P2-047	missing	M3TreeMap<K, V> owner = indexed();	NO	-	-	-	never on master history of the owner
+P2-047	missing	if (owner != null) {	NO	-	-	-	never on master history of the owner
+P2-047	missing	return indexedKey(owner, indexedNeighbor(owner, key, forward, inclusive));	NO	-	-	-	never on master history of the owner
+P2-047	missing	return keyOf(boundedEntry(key, forward, inclusive));	NO	-	-	-	never on master history of the owner
+P2-047	missing	Iterator<Entry<K, V>> selected = M3FilteredViews.filtered(cursor,	YES	1a6c72ad39e	588afdd78af	2026-10-28	Superset: merge PR #1603 (source conflicts resolved to the candidate the compiler accepts
+P2-047	missing	entry -> predicate.test(entry.getKey(), entry.getValue()));	YES	1a6c72ad39e	588afdd78af	2026-10-28	Superset: merge PR #1603 (source conflicts resolved to the candidate the compiler accepts
+P2-047	missing	return selected.hasNext() ? new SimpleImmutableEntry<>(selected.next()) : null;	YES	1a6c72ad39e	588afdd78af	2026-10-28	Superset: merge PR #1603 (source conflicts resolved to the candidate the compiler accepts
+P2-047	missing	M3TreeMap<K, V> owner = indexed();	NO	-	-	-	never on master history of the owner
+P2-047	missing	if (owner != null) {	NO	-	-	-	never on master history of the owner
+P2-047	missing	return indexedEntry(owner, indexedNeighbor(owner, query, forward, inclusive));	NO	-	-	-	never on master history of the owner
+P2-047	missing	Iterator<Entry<K, V>> cursor;	YES	e79d0c62e48	0c0aaf310cf	2026-10-21	Restore M3String array admission and refine integrated collection Java/JNI
+P2-047	missing	cursor = forward ? nav.tailMap(query, inclusive).entrySet().iterator()	YES	e79d0c62e48	0c0aaf310cf	2026-10-21	Restore M3String array admission and refine integrated collection Java/JNI
+P2-047	missing	: nav.headMap(query, inclusive).descendingMap().entrySet().iterator();	YES	e79d0c62e48	0c0aaf310cf	2026-10-21	Restore M3String array admission and refine integrated collection Java/JNI
+P2-047	missing	} catch (IllegalArgumentException outOfRange) {	YES	58242e11904	3145d002770	2026-10-28	Superset: merge PR #1869 (fix(collections): comparator-safe filtered navigation and Java21
+P2-047	missing	M3TreeMap<K, V> owner = indexed();	NO	-	-	-	never on master history of the owner
+P2-047	missing	return owner == null ? firstVisible(nav.entrySet().iterator())	NO	-	-	-	never on master history of the owner
+P2-047	missing	: indexedEntry(owner, boundarySlot(owner, true));	NO	-	-	-	never on master history of the owner
+P2-047	missing	M3TreeMap<K, V> owner = indexed();	NO	-	-	-	never on master history of the owner
+P2-047	missing	return owner == null ? firstVisible(nav.descendingMap().entrySet().iterator())	NO	-	-	-	never on master history of the owner
+P2-047	missing	: indexedEntry(owner, boundarySlot(owner, false));	NO	-	-	-	never on master history of the owner
+P2-048	missing	private M3TreeMap<E, ?> indexed() {	NO	-	-	-	never on master history of the owner
+P2-048	missing	return source instanceof M3TreeSet<?> m3	NO	-	-	-	never on master history of the owner
+P2-048	missing	? ((M3TreeSet<E>) m3).indexedOwner() : null;	NO	-	-	-	never on master history of the owner
+P2-048	missing	private int edge(M3TreeMap<E, ?> owner, boolean first) {	NO	-	-	-	never on master history of the owner
+P2-048	missing	int slot = first ? owner.firstSlot() : owner.lastSlot();	NO	-	-	-	never on master history of the owner
+P2-048	missing	while (slot >= 0 && !predicate.test(owner.keyAt(slot))) {	NO	-	-	-	never on master history of the owner
+P2-048	missing	slot = first ? owner.nextSlot(slot) : owner.previousIndexedSlot(slot);	NO	-	-	-	never on master history of the owner
+P2-048	missing	return slot;	NO	-	-	-	never on master history of the owner
+P2-048	missing	M3TreeMap<E, ?> owner = indexed();	NO	-	-	-	never on master history of the owner
+P2-048	missing	if (owner != null) {	NO	-	-	-	never on master history of the owner
+P2-048	missing	for (int slot = owner.firstSlot(); slot >= 0; slot = owner.nextSlot(slot)) {	NO	-	-	-	never on master history of the owner
+P2-048	missing	if (predicate.test(owner.keyAt(slot))) count++;	NO	-	-	-	never on master history of the owner
+P2-048	missing	M3TreeMap<E, ?> owner = indexed();	NO	-	-	-	never on master history of the owner
+P2-048	missing	if (owner != null) return edge(owner, true) < 0;	NO	-	-	-	never on master history of the owner
+P2-048	missing	M3TreeMap<E, ?> owner = indexed();	NO	-	-	-	never on master history of the owner
+P2-048	missing	if (owner != null) {	NO	-	-	-	never on master history of the owner
+P2-048	missing	int slot = owner.findSlot(value);	NO	-	-	-	never on master history of the owner
+P2-048	missing	return slot >= 0 && predicate.test(owner.keyAt(slot));	NO	-	-	-	never on master history of the owner
+P2-048	missing	M3TreeMap<E, ?> owner = indexed();	NO	-	-	-	never on master history of the owner
+P2-048	missing	if (owner != null) {	NO	-	-	-	never on master history of the owner
+P2-048	missing	int slot = owner.findSlot(value);	NO	-	-	-	never on master history of the owner
+P2-048	missing	if (slot < 0 || !predicate.test(owner.keyAt(slot))) return false;	NO	-	-	-	never on master history of the owner
+P2-048	missing	owner.eraseAt(slot);	NO	-	-	-	never on master history of the owner
+P2-048	missing	M3TreeMap<E, ?> owner = indexed();	NO	-	-	-	never on master history of the owner
+P2-048	missing	if (owner != null) {	NO	-	-	-	never on master history of the owner
+P2-048	missing	for (int slot = owner.firstSlot(); slot >= 0;) {	NO	-	-	-	never on master history of the owner
+P2-048	missing	int next = owner.nextSlot(slot);	NO	-	-	-	never on master history of the owner
+P2-048	missing	E value = owner.keyAt(slot);	NO	-	-	-	never on master history of the owner
+P2-048	missing	owner.eraseAt(slot);	NO	-	-	-	never on master history of the owner
+P2-048	missing	slot = next;	NO	-	-	-	never on master history of the owner
+P2-048	missing	M3TreeMap<E, ?> owner = indexed();	NO	-	-	-	never on master history of the owner
+P2-048	missing	if (owner != null) {	NO	-	-	-	never on master history of the owner
+P2-048	missing	private int expected = owner.revision();	NO	-	-	-	never on master history of the owner
+P2-048	missing	private int pending = descending ? owner.lastSlot() : owner.firstSlot();	NO	-	-	-	never on master history of the owner
+P2-048	missing	private int lastReturned = -1;	NO	-	-	-	never on master history of the owner
+P2-048	missing	private void check() {	NO	-	-	-	never on master history of the owner
+P2-048	missing	if (expected != owner.revision())	NO	-	-	-	never on master history of the owner
+P2-048	missing	throw new ConcurrentModificationException();	NO	-	-	-	never on master history of the owner
+P2-048	missing	check();	NO	-	-	-	never on master history of the owner
+P2-048	missing	while (pending >= 0) {	NO	-	-	-	never on master history of the owner
+P2-048	missing	boolean visible = predicate.test(owner.keyAt(pending));	NO	-	-	-	never on master history of the owner
+P2-048	missing	check();	NO	-	-	-	never on master history of the owner
+P2-048	missing	if (visible) {	NO	-	-	-	never on master history of the owner
+P2-048	missing	pending = descending ? owner.previousIndexedSlot(pending)	NO	-	-	-	never on master history of the owner
+P2-048	missing	: owner.nextSlot(pending);	NO	-	-	-	never on master history of the owner
+P2-048	missing	check();	NO	-	-	-	never on master history of the owner
+P2-048	missing	int slot = pending;	NO	-	-	-	never on master history of the owner
+P2-048	missing	E result = owner.keyAt(slot);	NO	-	-	-	never on master history of the owner
+P2-048	missing	pending = descending ? owner.previousIndexedSlot(slot)	NO	-	-	-	never on master history of the owner
+P2-048	missing	: owner.nextSlot(slot);	NO	-	-	-	never on master history of the owner
+P2-048	missing	check();	NO	-	-	-	never on master history of the owner
+P2-048	missing	lastReturned = slot;	NO	-	-	-	never on master history of the owner
+P2-048	missing	return result;	NO	-	-	-	never on master history of the owner
+P2-048	missing	check();	NO	-	-	-	never on master history of the owner
+P2-048	missing	if (lastReturned < 0)	NO	-	-	-	never on master history of the owner
+P2-048	missing	throw new IllegalStateException("next required");	NO	-	-	-	never on master history of the owner
+P2-048	missing	owner.eraseAt(lastReturned);	NO	-	-	-	never on master history of the owner
+P2-048	missing	expected = owner.revision();	NO	-	-	-	never on master history of the owner
+P2-048	missing	lastReturned = -1;	NO	-	-	-	never on master history of the owner
+P2-048	missing	M3TreeMap<E, ?> owner = indexed();	NO	-	-	-	never on master history of the owner
+P2-048	missing	if (owner != null) {	NO	-	-	-	never on master history of the owner
+P2-048	missing	int relation = forward ? (inclusive ? 1 : 2) : (inclusive ? -1 : -2);	NO	-	-	-	never on master history of the owner
+P2-048	missing	int slot = owner.nearIndexedSlot(query, relation);	NO	-	-	-	never on master history of the owner
+P2-048	missing	while (slot >= 0 && !predicate.test(owner.keyAt(slot))) {	NO	-	-	-	never on master history of the owner
+P2-048	missing	slot = forward ? owner.nextSlot(slot) : owner.previousIndexedSlot(slot);	NO	-	-	-	never on master history of the owner
+P2-048	missing	return slot < 0 ? null : owner.keyAt(slot);	NO	-	-	-	never on master history of the owner
+P2-048	missing	Iterator<E> cursor;	YES	0c24884dcf5	0c0aaf310cf	2026-10-21	Restore M3String array admission and refine integrated collection Java/JNI
+P2-048	missing	cursor = forward ? source.tailSet(query, inclusive).iterator()	YES	0c24884dcf5	0c0aaf310cf	2026-10-21	Restore M3String array admission and refine integrated collection Java/JNI
+P2-048	missing	: source.headSet(query, inclusive).descendingIterator();	YES	0c24884dcf5	0c0aaf310cf	2026-10-21	Restore M3String array admission and refine integrated collection Java/JNI
+P2-048	missing	} catch (IllegalArgumentException outOfRange) {	YES	104f2f46ced	ef0beec8bfb	2026-10-30	fix(collections): restore exact Synexia-qualified mutable comparator result lost in supers
+P2-048	missing	M3TreeMap<E, ?> owner = indexed();	NO	-	-	-	never on master history of the owner
+P2-048	missing	if (owner != null) {	NO	-	-	-	never on master history of the owner
+P2-048	missing	int slot = edge(owner, true);	NO	-	-	-	never on master history of the owner
+P2-048	missing	if (slot < 0) throw new NoSuchElementException();	NO	-	-	-	never on master history of the owner
+P2-048	missing	return owner.keyAt(slot);	NO	-	-	-	never on master history of the owner
+P2-048	missing	M3TreeMap<E, ?> owner = indexed();	NO	-	-	-	never on master history of the owner
+P2-048	missing	if (owner != null) {	NO	-	-	-	never on master history of the owner
+P2-048	missing	int slot = edge(owner, false);	NO	-	-	-	never on master history of the owner
+P2-048	missing	if (slot < 0) throw new NoSuchElementException();	NO	-	-	-	never on master history of the owner
+P2-048	missing	return owner.keyAt(slot);	NO	-	-	-	never on master history of the owner
+P2-048	missing	M3TreeMap<E, ?> owner = indexed();	NO	-	-	-	never on master history of the owner
+P2-048	missing	if (owner == null) return poll(iterator());	NO	-	-	-	never on master history of the owner
+P2-048	missing	int slot = edge(owner, true);	NO	-	-	-	never on master history of the owner
+P2-048	missing	if (slot < 0) return null;	NO	-	-	-	never on master history of the owner
+P2-048	missing	E result = owner.keyAt(slot);	NO	-	-	-	never on master history of the owner
+P2-048	missing	owner.eraseAt(slot);	NO	-	-	-	never on master history of the owner
+P2-048	missing	return result;	NO	-	-	-	never on master history of the owner
+P2-048	missing	M3TreeMap<E, ?> owner = indexed();	NO	-	-	-	never on master history of the owner
+P2-048	missing	if (owner == null) return poll(descendingIterator());	NO	-	-	-	never on master history of the owner
+P2-048	missing	int slot = edge(owner, false);	NO	-	-	-	never on master history of the owner
+P2-048	missing	if (slot < 0) return null;	NO	-	-	-	never on master history of the owner
+P2-048	missing	E result = owner.keyAt(slot);	NO	-	-	-	never on master history of the owner
+P2-048	missing	owner.eraseAt(slot);	NO	-	-	-	never on master history of the owner
+P2-048	missing	return result;	NO	-	-	-	never on master history of the owner
+P2-048	missing	private M3TreeMap<K, V> slotOwner() {	NO	-	-	-	never on master history of the owner
+P2-048	missing	return source instanceof M3TreeMap<?, ?> m3 ? (M3TreeMap<K, V>) m3 : null;	NO	-	-	-	never on master history of the owner
+P2-048	missing	private boolean visibleSlot(M3TreeMap<K, V> owner, int slot) {	NO	-	-	-	never on master history of the owner
+P2-048	missing	return predicate.test(owner.keyAt(slot), owner.valueAt(slot));	NO	-	-	-	never on master history of the owner
+P2-048	missing	M3TreeMap<K, V> owner = slotOwner();	NO	-	-	-	never on master history of the owner
+P2-048	missing	if (owner != null) {	NO	-	-	-	never on master history of the owner
+P2-048	missing	for (int slot = owner.firstSlot(); slot >= 0; slot = owner.nextSlot(slot)) {	NO	-	-	-	never on master history of the owner
+P2-048	missing	if (visibleSlot(owner, slot)) count++;	NO	-	-	-	never on master history of the owner
+P2-048	missing	M3TreeMap<K, V> owner = slotOwner();	NO	-	-	-	never on master history of the owner
+P2-048	missing	if (owner != null) {	NO	-	-	-	never on master history of the owner
+P2-048	missing	for (int slot = owner.firstSlot(); slot >= 0; slot = owner.nextSlot(slot)) {	NO	-	-	-	never on master history of the owner
+P2-048	missing	if (visibleSlot(owner, slot)) return false;	NO	-	-	-	never on master history of the owner
+P2-048	missing	M3TreeMap<K, V> owner = slotOwner();	NO	-	-	-	never on master history of the owner
+P2-048	missing	if (owner != null) {	NO	-	-	-	never on master history of the owner
+P2-048	missing	int slot = owner.findSlot(key);	NO	-	-	-	never on master history of the owner
+P2-048	missing	return slot >= 0 && visibleSlot(owner, slot);	NO	-	-	-	never on master history of the owner
+P2-048	missing	M3TreeMap<K, V> owner = slotOwner();	NO	-	-	-	never on master history of the owner
+P2-048	missing	if (owner != null) {	NO	-	-	-	never on master history of the owner
+P2-048	missing	int slot = owner.findSlot(key);	NO	-	-	-	never on master history of the owner
+P2-048	missing	if (slot < 0) return null;	NO	-	-	-	never on master history of the owner
+P2-048	missing	V value = owner.valueAt(slot);	NO	-	-	-	never on master history of the owner
+P2-048	missing	return predicate.test(owner.keyAt(slot), value) ? value : null;	NO	-	-	-	never on master history of the owner
+P2-048	missing	M3TreeMap<K, V> owner = slotOwner();	NO	-	-	-	never on master history of the owner
+P2-048	missing	if (owner != null) {	NO	-	-	-	never on master history of the owner
+P2-048	missing	int slot = owner.findSlot(key);	NO	-	-	-	never on master history of the owner
+P2-048	missing	K effective = slot < 0 ? key : owner.keyAt(slot);	NO	-	-	-	never on master history of the owner
+P2-048	missing	V prior = null;	NO	-	-	-	never on master history of the owner
+P2-048	missing	if (slot >= 0) {	NO	-	-	-	never on master history of the owner
+P2-048	missing	V old = owner.valueAt(slot);	NO	-	-	-	never on master history of the owner
+P2-048	missing	if (predicate.test(effective, old)) prior = old;	NO	-	-	-	never on master history of the owner
+P2-048	missing	M3TreeMap<K, V> owner = slotOwner();	NO	-	-	-	never on master history of the owner
+P2-048	missing	int existingSlot = owner == null ? -1 : owner.findSlot(key);	NO	-	-	-	never on master history of the owner
+P2-048	missing	Entry<K, V> existing = owner == null ? storedEntry(key) : null;	NO	-	-	-	never on master history of the owner
+P2-048	missing	if (existingSlot >= 0) {	NO	-	-	-	never on master history of the owner
+P2-048	missing	effective = owner.keyAt(existingSlot);	NO	-	-	-	never on master history of the owner
+P2-048	missing	} else if (existing != null) {	NO	-	-	-	never on master history of the owner
+P2-048	missing	newRepresentatives = new M3TreeMap<>(source.comparator());	NO	-	-	-	never on master history of the owner
+P2-048	missing	if (owner != null) {	NO	-	-	-	never on master history of the owner
+P2-048	missing	for (int i = 0; i < admittedKeys.size(); i++) {	NO	-	-	-	never on master history of the owner
+P2-048	missing	owner.put(admittedKeys.get(i), admittedValues.get(i));	NO	-	-	-	never on master history of the owner
+P2-048	missing	M3TreeMap<K, V> owner = slotOwner();	NO	-	-	-	never on master history of the owner
+P2-048	missing	if (owner != null) {	NO	-	-	-	never on master history of the owner
+P2-048	missing	int slot = owner.findSlot(key);	NO	-	-	-	never on master history of the owner
+P2-048	missing	return slot >= 0 && visibleSlot(owner, slot) ? owner.remove(key) : null;	NO	-	-	-	never on master history of the owner
+P2-048	missing	M3TreeMap<K, V> owner = slotOwner();	NO	-	-	-	never on master history of the owner
+P2-048	missing	if (owner != null) {	NO	-	-	-	never on master history of the owner
+P2-048	missing	for (int slot = owner.firstSlot(); slot >= 0;) {	NO	-	-	-	never on master history of the owner
+P2-048	missing	int next = owner.nextSlot(slot);	NO	-	-	-	never on master history of the owner
+P2-048	missing	if (visibleSlot(owner, slot)) owner.remove(owner.keyAt(slot));	NO	-	-	-	never on master history of the owner
+P2-048	missing	slot = next;	NO	-	-	-	never on master history of the owner
+P2-048	missing	M3TreeMap<K, V> owner = slotOwner();	NO	-	-	-	never on master history of the owner
+P2-048	missing	if (owner == null) return super.values();	NO	-	-	-	never on master history of the owner
+P2-048	missing	return new AbstractCollection<>() {	NO	-	-	-	never on master history of the owner
+P2-048	missing	private int expected = owner.revision();	NO	-	-	-	never on master history of the owner
+P2-048	missing	private int next = owner.firstSlot();	NO	-	-	-	never on master history of the owner
+P2-048	missing	private K lastKey;	NO	-	-	-	never on master history of the owner
+P2-048	missing	private void check() {	NO	-	-	-	never on master history of the owner
+P2-048	missing	if (expected != owner.revision()) {	NO	-	-	-	never on master history of the owner
+P2-048	missing	throw new ConcurrentModificationException();	NO	-	-	-	never on master history of the owner
+P2-048	missing	check();	NO	-	-	-	never on master history of the owner
+P2-048	missing	if (prepared) return true;	NO	-	-	-	never on master history of the owner
+P2-048	missing	while (next >= 0) {	NO	-	-	-	never on master history of the owner
+P2-048	missing	boolean visible = visibleSlot(owner, next);	NO	-	-	-	never on master history of the owner
+P2-048	missing	check();	NO	-	-	-	never on master history of the owner
+P2-048	missing	if (visible) {	NO	-	-	-	never on master history of the owner
+P2-048	missing	next = owner.nextSlot(next);	NO	-	-	-	never on master history of the owner
+P2-048	missing	check();	NO	-	-	-	never on master history of the owner
+P2-048	missing	int slot = next;	NO	-	-	-	never on master history of the owner
+P2-048	missing	next = owner.nextSlot(slot);	NO	-	-	-	never on master history of the owner
+P2-048	missing	check();	NO	-	-	-	never on master history of the owner
+P2-048	missing	lastKey = owner.keyAt(slot);	NO	-	-	-	never on master history of the owner
+P2-048	missing	V result = owner.valueAt(slot);	NO	-	-	-	never on master history of the owner
+P2-048	missing	check();	NO	-	-	-	never on master history of the owner
+P2-048	missing	return result;	NO	-	-	-	never on master history of the owner
+P2-048	missing	check();	NO	-	-	-	never on master history of the owner
+P2-048	missing	owner.remove(lastKey);	NO	-	-	-	never on master history of the owner
+P2-048	missing	expected = owner.revision();	NO	-	-	-	never on master history of the owner
+P2-048	missing	lastKey = null;	NO	-	-	-	never on master history of the owner
+P2-048	missing	Objects.requireNonNull(action, "action");	NO	-	-	-	never on master history of the owner
+P2-048	missing	M3TreeMap<K, V> owner = slotOwner();	NO	-	-	-	never on master history of the owner
+P2-048	missing	if (owner == null) {	NO	-	-	-	never on master history of the owner
+P2-048	missing	for (Entry<K, V> entry : entrySet()) {	NO	-	-	-	never on master history of the owner
+P2-048	missing	action.accept(entry.getKey(), entry.getValue());	NO	-	-	-	never on master history of the owner
+P2-048	missing	int expected = owner.revision();	NO	-	-	-	never on master history of the owner
+P2-048	missing	for (int slot = owner.firstSlot(); slot >= 0; slot = owner.nextSlot(slot)) {	NO	-	-	-	never on master history of the owner
+P2-048	missing	K key = owner.keyAt(slot);	NO	-	-	-	never on master history of the owner
+P2-048	missing	V value = owner.valueAt(slot);	NO	-	-	-	never on master history of the owner
+P2-048	missing	if (predicate.test(key, value)) action.accept(key, value);	NO	-	-	-	never on master history of the owner
+P2-048	missing	if (owner.revision() != expected) throw new ConcurrentModificationException();	NO	-	-	-	never on master history of the owner
+P2-048	missing	M3TreeMap<K, V> owner = slotOwner();	NO	-	-	-	never on master history of the owner
+P2-048	missing	if (owner == null) return super.containsValue(value);	NO	-	-	-	never on master history of the owner
+P2-048	missing	for (int slot = owner.firstSlot(); slot >= 0; slot = owner.nextSlot(slot)) {	NO	-	-	-	never on master history of the owner
+P2-048	missing	K key = owner.keyAt(slot);	NO	-	-	-	never on master history of the owner
+P2-048	missing	V stored = owner.valueAt(slot);	NO	-	-	-	never on master history of the owner
+P2-048	missing	if (predicate.test(key, stored) && Objects.equals(value, stored)) return true;	NO	-	-	-	never on master history of the owner
+P2-048	missing	BiFunction<? super K, ? super V, ? extends V> action) {	NO	-	-	-	never on master history of the owner
+P2-048	missing	Objects.requireNonNull(action, "action");	NO	-	-	-	never on master history of the owner
+P2-048	missing	M3TreeMap<K, V> owner = slotOwner();	NO	-	-	-	never on master history of the owner
+P2-048	missing	if (owner == null) {	NO	-	-	-	never on master history of the owner
+P2-048	missing	for (Entry<K, V> entry : entrySet()) {	NO	-	-	-	never on master history of the owner
+P2-048	missing	entry.setValue(action.apply(entry.getKey(), entry.getValue()));	NO	-	-	-	never on master history of the owner
+P2-048	missing	for (int slot = owner.firstSlot(); slot >= 0; slot = owner.nextSlot(slot)) {	NO	-	-	-	never on master history of the owner
+P2-048	missing	K key = owner.keyAt(slot);	NO	-	-	-	never on master history of the owner
+P2-048	missing	V old = owner.valueAt(slot);	NO	-	-	-	never on master history of the owner
+P2-048	missing	if (!predicate.test(key, old)) continue;	NO	-	-	-	never on master history of the owner
+P2-048	missing	int expected = owner.revision();	NO	-	-	-	never on master history of the owner
+P2-048	missing	V value = action.apply(key, old);	NO	-	-	-	never on master history of the owner
+P2-048	missing	if (expected != owner.revision()) {	NO	-	-	-	never on master history of the owner
+P2-048	missing	throw new ConcurrentModificationException();	NO	-	-	-	never on master history of the owner
+P2-048	missing	put(key, value);	NO	-	-	-	never on master history of the owner
+P2-048	missing	M3TreeMap<K, V> owner = slotOwner();	NO	-	-	-	never on master history of the owner
+P2-048	missing	if (owner == null) return super.hashCode();	NO	-	-	-	never on master history of the owner
+P2-048	missing	int hash = 0;	NO	-	-	-	never on master history of the owner
+P2-048	missing	for (int slot = owner.firstSlot(); slot >= 0; slot = owner.nextSlot(slot)) {	NO	-	-	-	never on master history of the owner
+P2-048	missing	K key = owner.keyAt(slot);	NO	-	-	-	never on master history of the owner
+P2-048	missing	V value = owner.valueAt(slot);	NO	-	-	-	never on master history of the owner
+P2-048	missing	if (predicate.test(key, value)) {	NO	-	-	-	never on master history of the owner
+P2-048	missing	hash += Objects.hashCode(key) ^ Objects.hashCode(value);	NO	-	-	-	never on master history of the owner
+P2-048	missing	return hash;	NO	-	-	-	never on master history of the owner
+P2-048	missing	if (other == this) return true;	NO	-	-	-	never on master history of the owner
+P2-048	missing	M3TreeMap<K, V> owner = slotOwner();	NO	-	-	-	never on master history of the owner
+P2-048	missing	if (owner == null) return super.equals(other);	NO	-	-	-	never on master history of the owner
+P2-048	missing	if (!(other instanceof Map<?, ?> map) || map.size() != size()) return false;	NO	-	-	-	never on master history of the owner
+P2-048	missing	for (int slot = owner.firstSlot(); slot >= 0; slot = owner.nextSlot(slot)) {	NO	-	-	-	never on master history of the owner
+P2-048	missing	K key = owner.keyAt(slot);	NO	-	-	-	never on master history of the owner
+P2-048	missing	V value = owner.valueAt(slot);	NO	-	-	-	never on master history of the owner
+P2-048	missing	if (!predicate.test(key, value)) continue;	NO	-	-	-	never on master history of the owner
+P2-048	missing	if (!Objects.equals(value, map.get(key))	NO	-	-	-	never on master history of the owner
+P2-048	missing	|| value == null && !map.containsKey(key)) {	NO	-	-	-	never on master history of the owner
+P2-048	missing	} catch (ClassCastException | NullPointerException ignored) {	NO	-	-	-	never on master history of the owner
+P2-048	missing	M3TreeMap<K, V> owner = slotOwner();	NO	-	-	-	never on master history of the owner
+P2-048	missing	if (owner == null) return super.toString();	NO	-	-	-	never on master history of the owner
+P2-048	missing	StringBuilder out = new StringBuilder("{");	NO	-	-	-	never on master history of the owner
+P2-048	missing	boolean comma = false;	NO	-	-	-	never on master history of the owner
+P2-048	missing	for (int slot = owner.firstSlot(); slot >= 0; slot = owner.nextSlot(slot)) {	NO	-	-	-	never on master history of the owner
+P2-048	missing	K key = owner.keyAt(slot);	NO	-	-	-	never on master history of the owner
+P2-048	missing	V value = owner.valueAt(slot);	NO	-	-	-	never on master history of the owner
+P2-048	missing	if (!predicate.test(key, value)) continue;	NO	-	-	-	never on master history of the owner
+P2-048	missing	if (comma) out.append(", ");	NO	-	-	-	never on master history of the owner
+P2-048	missing	comma = true;	NO	-	-	-	never on master history of the owner
+P2-048	missing	out.append(key == this ? "(this Map)" : key).append('=')	NO	-	-	-	never on master history of the owner
+P2-048	missing	.append(value == this ? "(this Map)" : value);	NO	-	-	-	never on master history of the owner
+P2-048	missing	return out.append('}').toString();	NO	-	-	-	never on master history of the owner
+P2-048	missing	M3TreeMap<K, V> owner = slotOwner();	NO	-	-	-	never on master history of the owner
+P2-048	missing	if (owner != null) return new IndexedEntryCursor(owner);	NO	-	-	-	never on master history of the owner
+P2-048	missing	private final class IndexedEntryCursor implements Iterator<Entry<K, V>> {	NO	-	-	-	never on master history of the owner
+P2-048	missing	private final M3TreeMap<K, V> owner;	NO	-	-	-	never on master history of the owner
+P2-048	missing	private int next;	NO	-	-	-	never on master history of the owner
+P2-048	missing	private int expected;	NO	-	-	-	never on master history of the owner
+P2-048	missing	private K lastKey;	NO	-	-	-	never on master history of the owner
+P2-048	missing	IndexedEntryCursor(M3TreeMap<K, V> owner) {	NO	-	-	-	never on master history of the owner
+P2-048	missing	this.owner = owner;	NO	-	-	-	never on master history of the owner
+P2-048	missing	expected = owner.revision();	NO	-	-	-	never on master history of the owner
+P2-048	missing	next = owner.firstSlot();	NO	-	-	-	never on master history of the owner
+P2-048	missing	private void check() {	NO	-	-	-	never on master history of the owner
+P2-048	missing	if (expected != owner.revision()) throw new ConcurrentModificationException();	NO	-	-	-	never on master history of the owner
+P2-048	missing	check();	NO	-	-	-	never on master history of the owner
+P2-048	missing	if (prepared) return true;	NO	-	-	-	never on master history of the owner
+P2-048	missing	while (next >= 0) {	NO	-	-	-	never on master history of the owner
+P2-048	missing	boolean visible = visibleSlot(owner, next);	NO	-	-	-	never on master history of the owner
+P2-048	missing	check();	NO	-	-	-	never on master history of the owner
+P2-048	missing	if (visible) {	NO	-	-	-	never on master history of the owner
+P2-048	missing	next = owner.nextSlot(next);	NO	-	-	-	never on master history of the owner
+P2-048	missing	check();	NO	-	-	-	never on master history of the owner
+P2-048	missing	int slot = next;	NO	-	-	-	never on master history of the owner
+P2-048	missing	next = owner.nextSlot(slot);	NO	-	-	-	never on master history of the owner
+P2-048	missing	check();	NO	-	-	-	never on master history of the owner
+P2-048	missing	lastKey = owner.keyAt(slot);	NO	-	-	-	never on master history of the owner
+P2-048	missing	return new LiveEntry(lastKey);	NO	-	-	-	never on master history of the owner
+P2-048	missing	check();	NO	-	-	-	never on master history of the owner
+P2-048	missing	owner.remove(lastKey);	NO	-	-	-	never on master history of the owner
+P2-048	missing	expected = owner.revision();	NO	-	-	-	never on master history of the owner
+P2-048	missing	lastKey = null;	NO	-	-	-	never on master history of the owner
+P2-048	missing	private int visibleNear(M3TreeMap<K, V> owner, K key, int relation) {	NO	-	-	-	never on master history of the owner
+P2-048	missing	int slot = owner.nearIndexedSlot(key, relation);	NO	-	-	-	never on master history of the owner
+P2-048	missing	while (slot >= 0 && !visibleSlot(owner, slot)) {	NO	-	-	-	never on master history of the owner
+P2-048	missing	slot = relation < 0 ? owner.previousIndexedSlot(slot) : owner.nextSlot(slot);	NO	-	-	-	never on master history of the owner
+P2-048	missing	return slot;	NO	-	-	-	never on master history of the owner
+P2-048	missing	private int visibleEnd(M3TreeMap<K, V> owner, boolean first) {	NO	-	-	-	never on master history of the owner
+P2-048	missing	int slot = first ? owner.firstSlot() : owner.lastSlot();	NO	-	-	-	never on master history of the owner
+P2-048	missing	while (slot >= 0 && !visibleSlot(owner, slot)) {	NO	-	-	-	never on master history of the owner
+P2-048	missing	slot = first ? owner.nextSlot(slot) : owner.previousIndexedSlot(slot);	NO	-	-	-	never on master history of the owner
+P2-048	missing	return slot;	NO	-	-	-	never on master history of the owner
+P2-048	missing	private Entry<K, V> requestedEntry(M3TreeMap<K, V> owner, int slot) {	NO	-	-	-	never on master history of the owner
+P2-048	missing	return slot < 0 ? null : new SimpleImmutableEntry<>(owner.keyAt(slot), owner.valueAt(slot));	NO	-	-	-	never on master history of the owner
+P2-048	missing	private K requestedKey(M3TreeMap<K, V> owner, int slot) {	NO	-	-	-	never on master history of the owner
+P2-048	missing	return slot < 0 ? null : owner.keyAt(slot);	NO	-	-	-	never on master history of the owner
+P2-048	missing	M3TreeMap<K, V> owner = slotOwner();	NO	-	-	-	never on master history of the owner
+P2-048	missing	return owner == null ? seek(source.lowerEntry(key), false)	NO	-	-	-	never on master history of the owner
+P2-048	missing	: requestedEntry(owner, visibleNear(owner, key, -2));	NO	-	-	-	never on master history of the owner
+P2-048	missing	M3TreeMap<K, V> owner = slotOwner();	NO	-	-	-	never on master history of the owner
+P2-048	missing	return owner == null ? keyOf(lowerEntry(key)) : requestedKey(owner, visibleNear(owner, key, -2));	NO	-	-	-	never on master history of the owner
+P2-048	missing	M3TreeMap<K, V> owner = slotOwner();	NO	-	-	-	never on master history of the owner
+P2-048	missing	return owner == null ? seek(source.floorEntry(key), false)	NO	-	-	-	never on master history of the owner
+P2-048	missing	: requestedEntry(owner, visibleNear(owner, key, -1));	NO	-	-	-	never on master history of the owner
+P2-048	missing	M3TreeMap<K, V> owner = slotOwner();	NO	-	-	-	never on master history of the owner
+P2-048	missing	return owner == null ? keyOf(floorEntry(key)) : requestedKey(owner, visibleNear(owner, key, -1));	NO	-	-	-	never on master history of the owner
+P2-048	missing	M3TreeMap<K, V> owner = slotOwner();	NO	-	-	-	never on master history of the owner
+P2-048	missing	return owner == null ? seek(source.ceilingEntry(key), true)	NO	-	-	-	never on master history of the owner
+P2-048	missing	: requestedEntry(owner, visibleNear(owner, key, 1));	NO	-	-	-	never on master history of the owner
+P2-048	missing	M3TreeMap<K, V> owner = slotOwner();	NO	-	-	-	never on master history of the owner
+P2-048	missing	return owner == null ? keyOf(ceilingEntry(key)) : requestedKey(owner, visibleNear(owner, key, 1));	NO	-	-	-	never on master history of the owner
+P2-048	missing	M3TreeMap<K, V> owner = slotOwner();	NO	-	-	-	never on master history of the owner
+P2-048	missing	return owner == null ? seek(source.higherEntry(key), true)	NO	-	-	-	never on master history of the owner
+P2-048	missing	: requestedEntry(owner, visibleNear(owner, key, 2));	NO	-	-	-	never on master history of the owner
+P2-048	missing	M3TreeMap<K, V> owner = slotOwner();	NO	-	-	-	never on master history of the owner
+P2-048	missing	return owner == null ? keyOf(higherEntry(key)) : requestedKey(owner, visibleNear(owner, key, 2));	NO	-	-	-	never on master history of the owner
+P2-048	missing	M3TreeMap<K, V> owner = slotOwner();	NO	-	-	-	never on master history of the owner
+P2-048	missing	return owner == null ? seek(source.firstEntry(), true)	NO	-	-	-	never on master history of the owner
+P2-048	missing	: requestedEntry(owner, visibleEnd(owner, true));	NO	-	-	-	never on master history of the owner
+P2-048	missing	M3TreeMap<K, V> owner = slotOwner();	NO	-	-	-	never on master history of the owner
+P2-048	missing	return owner == null ? seek(source.lastEntry(), false)	NO	-	-	-	never on master history of the owner
+P2-048	missing	: requestedEntry(owner, visibleEnd(owner, false));	NO	-	-	-	never on master history of the owner
+P2-048	missing	M3TreeMap<K, V> owner = slotOwner();	NO	-	-	-	never on master history of the owner
+P2-048	missing	if (owner != null) {	NO	-	-	-	never on master history of the owner
+P2-048	missing	int slot = visibleEnd(owner, true);	NO	-	-	-	never on master history of the owner
+P2-048	missing	if (slot < 0) throw new NoSuchElementException();	NO	-	-	-	never on master history of the owner
+P2-048	missing	return owner.keyAt(slot);	NO	-	-	-	never on master history of the owner
+P2-048	missing	M3TreeMap<K, V> owner = slotOwner();	NO	-	-	-	never on master history of the owner
+P2-048	missing	if (owner != null) {	NO	-	-	-	never on master history of the owner
+P2-048	missing	int slot = visibleEnd(owner, false);	NO	-	-	-	never on master history of the owner
+P2-048	missing	if (slot < 0) throw new NoSuchElementException();	NO	-	-	-	never on master history of the owner
+P2-048	missing	return owner.keyAt(slot);	NO	-	-	-	never on master history of the owner
+P2-048	missing	return slotOwner() == null ? poll(entryCursor()) : pollIndexed(true);	NO	-	-	-	never on master history of the owner
+P2-048	missing	return slotOwner() == null ? poll(descendingMap().entrySet().iterator()) : pollIndexed(false);	NO	-	-	-	never on master history of the owner
+P2-048	missing	private Entry<K, V> pollIndexed(boolean first) {	NO	-	-	-	never on master history of the owner
+P2-048	missing	M3TreeMap<K, V> owner = slotOwner();	NO	-	-	-	never on master history of the owner
+P2-048	missing	int slot = visibleEnd(owner, first);	NO	-	-	-	never on master history of the owner
+P2-048	missing	if (slot < 0) return null;	NO	-	-	-	never on master history of the owner
+P2-048	missing	Entry<K, V> result = requestedEntry(owner, slot);	NO	-	-	-	never on master history of the owner
+P2-048	missing	owner.remove(owner.keyAt(slot));	NO	-	-	-	never on master history of the owner
+P2-048	missing	return result;	NO	-	-	-	never on master history of the owner
+P2-067	missing	public static String verify() {	YES	e79d0c62e48	6311c7c8bb3	2026-10-29	fix(collections): receive qualified null navigation and current entry contracts
+P2-067	missing	return hash;	YES	e79d0c62e48	6311c7c8bb3	2026-10-29	fix(collections): receive qualified null navigation and current entry contracts
+P2-068	missing	assertEquals("53a3ac80b4ba43ad3df0c2397041513fb02346c2ba2cb2ddebc12b7540329b99",	YES	e79d0c62e48	6311c7c8bb3	2026-10-29	fix(collections): receive qualified null navigation and current entry contracts
+P2-068	missing	M3FirstVisibleAtomContract.verify());	YES	e79d0c62e48	6311c7c8bb3	2026-10-29	fix(collections): receive qualified null navigation and current entry contracts

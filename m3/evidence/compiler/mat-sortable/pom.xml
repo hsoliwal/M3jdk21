@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<!-- Copyright 2026 Hitesh Soliwal and contributors -->
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.m3</groupId>
+  <artifactId>m3-compiler-mat-sortable</artifactId>
+  <version>0.1.0-SNAPSHOT</version>
+  <name>M3JDK :: Compiler Mat Sortable Processor</name>
+  <description>jdk.m3.compiler.matsortable (module org.m3jdk.compiler.matsortable): M3MatSortableProcessor, the opt-in
+    JSR-269 annotation processor of the mat sortables (jdk.m3.collections.M3Sortable, M3SortField, M3SortSignal,
+    M3SortDistance, M3SortDependency, located by canonical name) that writes one deterministic source companion per
+    annotated class or record: schema and order-policy SHA-256 seals, structural declaration facts, compareExact over
+    the declared columns or the primitive signal, exactComparator, primary / signals, the validated domain distance and
+    the ComparisonEvidence receipt. Never mutates the annotated type; java.compiler is a static, compile-time-only
+    module dependency and nothing of m3-collections is needed at compile time. Pure Java 21. Relocated by recipe
+    (recipe/mat-sortable-processor-20261107/relocate.py, RELOCATION_MAP.tsv, PROVENANCE.tsv) from the donor
+    hsoliwal/com.synexia develop 56cbdc631259; the donor's javac contract and the processor oracle run in the test
+    phase against the relocated annotations of m3-collections (test scope).</description>
+  <properties>
+    <maven.compiler.release>21</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <junit.artifact.version>5.11.4</junit.artifact.version>
+  </properties>
+  <dependencies>
+    <dependency>
+      <!-- the fixtures of the contract and of the oracle apply the relocated mat annotations; compile scope needs nothing -->
+      <groupId>com.m3</groupId>
+      <artifactId>m3-collections</artifactId>
+      <version>0.1.0-SNAPSHOT</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter</artifactId>
+      <version>${junit.artifact.version}</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.13.0</version>
+        <configuration>
+          <release>21</release>
+          <proc>none</proc>
+          <compilerArgs>
+            <arg>-Xlint:all</arg>
+            <arg>-Werror</arg>
+          </compilerArgs>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>3.5.4</version>
+        <configuration>
+          <!-- classpath run; the module descriptor is for consumers -->
+          <useModulePath>false</useModulePath>
+          <trimStackTrace>false</trimStackTrace>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>3.4.2</version>
+      </plugin>
+    </plugins>
+  </build>
+</project>

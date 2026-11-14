@@ -1,0 +1,22 @@
+Compiled from "M3IndexPathRank.java"
+public final class com.m3.collections.M3IndexPathRank {
+  public static com.m3.collections.M3IndexPathRank snapshot(int[], int[], int[][], int[], int[], int, int, int);
+  public int sourceSize();
+  public int size();
+  public boolean containsSourceOrdinal(int);
+  public int rank(int);
+  public int selectedSourceOrdinal(int);
+  public int selectedRowId(int);
+  public int[] toArray();
+  public com.m3.collections.M3IndexPathRank$Window window(int, int);
+}
+Compiled from "M3IndexPathRank.java"
+public final class com.m3.collections.M3IndexPathRank$Window {
+  public int sourceSize();
+  public int size();
+  public int rank(int);
+  public int selectedSourceOrdinal(int);
+  public int selectedRowId(int);
+  public com.m3.collections.M3IndexPathRank$Window window(int, int);
+  public int[] toArray();
+}

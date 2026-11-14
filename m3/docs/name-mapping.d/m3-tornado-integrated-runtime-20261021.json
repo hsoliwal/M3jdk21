@@ -1,0 +1,47 @@
+{
+  "schema": "m3-target-module-mapping/1",
+  "product": "M3JDK21",
+  "canonical_recipe": "com.synexia.rewrite.M3Jdk21TornadoIntegratedRuntimeRecipe",
+  "canonical_recipe_repository": "hsoliwal/com.synexia",
+  "canonical_recipe_crate": "synexia-openrewrite-recipes/recipes/m3jdk21-tornado-integration-20261021",
+  "target_baseline": "2779aba3f98f31c324be43f731be7914e1a05935",
+  "source_lock": "m3/runtime-integration/tornado/source-lock.json",
+  "source_owner": "m3/vendor/tornadovm",
+  "target_build_owner": "m3/runtime-integration/tornado/build_runtime.py",
+  "target_image_owner": "m3/tooling/jmod-recipes/tools/jmod_pack.py",
+  "receiving_sequence_advanced": false,
+  "mappings": [
+    {
+      "source": "TornadoVM 7.2.0 API, compiler, runtime and selected backend",
+      "target": "M3JDK21 installed named modules",
+      "modules": ["tornado.api", "tornado.runtime", "tornado.annotation", "tornado.drivers.common", "tornado.drivers.opencl", "tornado.drivers.cuda", "tornado.drivers.metal"],
+      "package_rule": "Retain upstream uk.ac.manchester.tornado API and module names.",
+      "license_rule": "Per-file upstream licenses and notices; no blanket relicensing.",
+      "admission": "SOURCE_BUILD_AND_INSTALLED_IMAGE_GATES_REQUIRED_PER_SELECTED_BACKEND"
+    },
+    {
+      "source": "synexia-tornadovm m3/cpu-gpu provider",
+      "target": "m3/ports/tornadovm-bulk",
+      "module": "jdk.m3.tornado",
+      "owners": ["com.m3.tornado.Rv32iBulkExecutorAdapter", "com.synexia.m3.cpugpu"],
+      "package_rule": "Explicit compatibility exception: retain historical batch/provider class names inside the M3JDK21-owned module to preserve accepted input types and one payload owner.",
+      "external_synexia_runtime_dependency": false,
+      "java_base_depends_on_provider": false,
+      "admission": "EXISTING_API_AND_FULL_CPU_DEVICE_PARITY_REQUIRED"
+    },
+    {
+      "source": "Existing jdk.internal.vm.parallel contracts",
+      "target": "Existing java.base owners unchanged",
+      "admission": "REUSE_EXISTING_SCHEDULER_NO_NEW_GLOBAL_REGISTRY"
+    }
+  ],
+  "configuration": {
+    "java_release": 21,
+    "preview_required": true,
+    "jvmci_required": true,
+    "UseM3StringStorage": false,
+    "no_runtime_download": true,
+    "source_build_required_for_final_target_admission": true
+  },
+  "pending_gates_are_not_passes": true
+}

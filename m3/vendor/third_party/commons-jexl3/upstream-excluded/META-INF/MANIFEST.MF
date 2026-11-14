@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Created-By: Maven Source Plugin 3.2.1
+Specification-Title: Apache Commons JEXL
+Specification-Version: 3.4
+Specification-Vendor: The Apache Software Foundation
+Implementation-Title: Apache Commons JEXL
+Implementation-Version: 3.4.0
+Implementation-Vendor: The Apache Software Foundation
+

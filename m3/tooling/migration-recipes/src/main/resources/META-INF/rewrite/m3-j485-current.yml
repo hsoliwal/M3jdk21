@@ -1,0 +1,35 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: jdk.m3.j485.Current
+displayName: J485 current-tree reconciliation
+description: Guard current Gatherers product owners and reconcile the final Java21-compatible jtreg corpus.
+recipeList:
+  - jdk.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe:
+      crateName: jdk24-j485-cur-01
+  - jdk.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe:
+      crateName: jdk24-j485-cur-02
+  - jdk.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe:
+      crateName: jdk24-j485-cur-03
+  - jdk.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe:
+      crateName: jdk24-j485-cur-04
+  - jdk.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe:
+      crateName: jdk24-j485-cur-05
+  - jdk.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe:
+      crateName: jdk24-j485-cur-06
+  - jdk.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe:
+      crateName: jdk24-j485-cur-07
+  - jdk.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe:
+      crateName: jdk24-j485-cur-08
+  - jdk.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe:
+      crateName: jdk24-j485-cur-09
+  - jdk.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe:
+      crateName: jdk24-j485-cur-10
+  - jdk.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe:
+      crateName: jdk24-j485-cur-11
+  - jdk.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe:
+      crateName: jdk24-j485-cur-12
+  - jdk.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe:
+      crateName: jdk24-j485-cur-13
+  - jdk.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe:
+      crateName: jdk24-j485-cur-14
+  - jdk.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe:
+      crateName: jdk24-j485-cur-15

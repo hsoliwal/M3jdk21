@@ -1,0 +1,254 @@
+{
+  "spdx_file_copyright": "2026 Hitesh Soliwal and Contributors to the Synexia Project",
+  "spdx_license": "GPL-2.0-only",
+  "status": "SCOPED_SOURCE_IMAGE_JNI_JTREG_CDS_PASS_RELEASE_GATES_OPEN",
+  "date_utc": "2026-11-02",
+  "requirement": "public <T> T toAdpater(Class<T> clazz)",
+  "nonfinal": true,
+  "implementation": "return toAdapter(clazz);",
+  "object_vtable_entries": 7,
+  "receiving_parent": "008a84b7e5592888f78e67318a1c08863a517109",
+  "source_build_base": "ce005d25b29fb6246e013bffb462afd5ed070362",
+  "source_inputs": [
+    {
+      "path": "src/java.base/share/classes/java/lang/Object.java",
+      "sha256": "d825f24d0177ed49097b958dbee94a8303a3e03e9343693bb8e81165f8a75040",
+      "git_blob": "3233945b0266cda4db5a964628d5f8b755485380"
+    },
+    {
+      "path": "src/hotspot/share/classfile/classLoader.cpp",
+      "sha256": "2bc21af7465fb483302dc69b1f9934b177f4dae72c59361d275ac8003fbe28af",
+      "git_blob": "81224eef99c64c02d583830ee4b3b2872779e0dd"
+    },
+    {
+      "path": "test/jdk/java/lang/Object/ObjectToAdpaterNativeTest.java",
+      "sha256": "4772c4a02bc1dc5c74b935fc856682d3748abf779b594721a7d8aee177164918",
+      "git_blob": "769da7f368285964e56118ed5010433135aa8682"
+    },
+    {
+      "path": "test/jdk/java/lang/Object/libObjectToAdpaterNativeTest.c",
+      "sha256": "1e53a97c3e0b2a408702638122e0c0e399b5fb16e24a47aa5f42cc8528133f1b",
+      "git_blob": "b58178d1260a0634dc2fae312b91de621ef82062"
+    },
+    {
+      "path": "test/jdk/java/lang/Object/ObjectToAdpaterLegacyBinaryTest.java",
+      "sha256": "6b1171abb2ddb22e2c36d841fbc6979ecb3149400e9ef8201c13fcfe50489e5f",
+      "git_blob": "1e08202532222e77a3ce6e69048b266871b7375e"
+    }
+  ],
+  "authoring": {
+    "repository": "hsoliwal/com.synexia",
+    "historical_parent": "99f4d878925dc887e07cb142e75bb767fa4c5c33",
+    "published_commit": "80b3629d883572012575234b9663abd29a37c82c",
+    "pull_request": "https://github.com/hsoliwal/com.synexia/pull/15542",
+    "crate": "m3-openrewrite-recipes/recipe-crates/m3-object-adapter-contract-20261102",
+    "recipes": [
+      "jdk.internal.m3.ObjectAdpaterVirtualAdmission20261102",
+      "jdk.internal.m3.ObjectAdpaterVirtualContract20261102",
+      "jdk.internal.m3.ObjectAdpaterVirtualMetadata20261102"
+    ],
+    "reusable_recipe_code_received_into_product": false
+  },
+  "sdk": {
+    "engine": "OpenRewrite SDK 8.17.1",
+    "status": "PASS",
+    "admission_outputs": 5,
+    "enhancement_outputs": 5,
+    "metadata_outputs": 4,
+    "fixed_point_changes": 0,
+    "protected_source_owners": [
+      13,
+      18
+    ],
+    "exact_current_run_output_inventories": true,
+    "original_canonical_dataset": "PASS_FINAL_SHARED_HARNESS",
+    "source_refusal": "EXPECTED_REFUSAL_WITH_NO_NEW_OUTPUT",
+    "output_strategy": "Fresh validated run names; existing named output is refused; exact inventories prevent cross-dataset source confusion."
+  },
+  "build": {
+    "status": "PASS",
+    "platform": "Linux x86-64",
+    "configuration": "release/server",
+    "warnings_as_errors": true,
+    "command": [
+      "make",
+      "images",
+      "JOBS=4"
+    ],
+    "archived_src_files_audited": 23505,
+    "changed_runtime_sources": [
+      "src/java.base/share/classes/java/lang/Object.java",
+      "src/hotspot/share/classfile/classLoader.cpp"
+    ],
+    "source_archive_sha256": "254b94ab696277875f0fe50e01933fe3fdb61fe7b4ad41acca19b1c7ddf7ac6e",
+    "baseline_artifacts_reused": true,
+    "complete_images_recreated": true,
+    "version_label_retained_from_baseline": true,
+    "image_sha256": {
+      "bin/java": "a22503da20240d27ded1c283d07bda58d55c0428a1a0cd594608d9faad2fbcd7",
+      "bin/javac": "919ab5dff90be5f996e774b1c2564a84e094f52023e2bdd5410de0897ed72428",
+      "lib/modules": "78bcf89582f2a3258af6c2afa1628689b112c653d90b946e50abc15bebbcaa7f",
+      "lib/server/libjvm.so": "e7a492b434d9f0509abf60d5a8cc8bb95a3ff3705a6a5e6d9a62fc0a3443d0d8",
+      "release": "d1443a13c08c7948e121d21b952649b351ab3f94ffb72a1ea9ee53b4f2d8d8b1",
+      "lib/server/classes.jsa": "f5aff9e221299fb410c0932d3b379606da7170a6804b2add6d2959d50c75106e",
+      "lib/server/classes_nocoops.jsa": "45ca4f1abc8f715aabde22cf8ec71f488f9b84c36b20882b3665d9d99ad64404",
+      "include/jni.h": "99e64ebbe749e6df284f852f11b3c73f6ea97baf15120428f40f887fe0616e61",
+      "include/linux/jni_md.h": "88cb5c33e306900dd35a78d5a439087123b8e91b0986bb5acb42cc9bd2fcc42e"
+    }
+  },
+  "compiler": {
+    "status": "PASS_ACTUAL_CANDIDATE",
+    "java": [
+      "-Xlint:all",
+      "-Werror",
+      "-h"
+    ],
+    "c": [
+      "-std=c17",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-Wconversion",
+      "-Wsign-conversion"
+    ],
+    "generated_header_sha256": "c703f5c8fe706088bad892f13493ae9e43d1c545eb5c0d1a549fa7b0d9e02a98",
+    "native_library_sha256": "06d27ae89f3b53dd73b83fc132615ff3967c91c6e6b2601e2b46c771bb2ce2d2"
+  },
+  "direct_native_runs": {
+    "status": "PASS",
+    "modes": [
+      "default disabled",
+      "default enabled",
+      "interpreter disabled",
+      "interpreter enabled",
+      "forced C2 disabled",
+      "forced C2 enabled"
+    ],
+    "jni_checking": true,
+    "runtime_patch_used": false,
+    "assertions_per_run": 1795,
+    "repeated_jni_calls_per_run": 172032,
+    "total_assertions": 10770,
+    "total_repeated_jni_calls": 1032192
+  },
+  "jtreg": {
+    "status": "PASS",
+    "distribution": "jtreg 8.2.1+1",
+    "tool_archive_sha256": "07d1a51162d5b60c2709fecb5438c7ba9d3d698a9ac7673256e4e6c5364a2201",
+    "tests": 2,
+    "actions": 8,
+    "native_actions": 6,
+    "legacy_actions": 2,
+    "native_assertions": 10770,
+    "legacy_assertions": 24,
+    "native_repeated_jni_calls": 1032192,
+    "counts_separate_from_direct_runs": true
+  },
+  "cds": {
+    "status": "PASS_EXPLICIT_ARCHIVE_USE",
+    "flags": [
+      "-Xshare:on",
+      "-Xlog:cds=info",
+      "-Xcheck:jni",
+      "-Djdk.m3.objectEvents.enabled=true"
+    ],
+    "archive": "lib/server/classes.jsa",
+    "archive_sha256": "f5aff9e221299fb410c0932d3b379606da7170a6804b2add6d2959d50c75106e",
+    "opened_and_static_regions_mapped": true,
+    "assertions": 1795,
+    "repeated_jni_calls": 172032,
+    "nocoops_archive_generated": true,
+    "nocoops_native_execution": "NOT_RUN"
+  },
+  "compatibility": {
+    "positive": [
+      "abstract interface alias implemented by inherited Object method",
+      "previously compiled Java21 public generic subclass alias",
+      "existing public generic subclass source",
+      "generic and typed receiver/array/capability consumers",
+      "both overrides with super.toAdpater virtual canonical dispatch"
+    ],
+    "negative": [
+      "incompatible typed assignment",
+      "raw token rejected by strict warnings only",
+      "matching interface default prohibited by Object method"
+    ],
+    "legacy_classfile_sha256": "4eff8d88c8154820bee15152e0f2cb4791b305cc67b5675b34276310aa568e36",
+    "legacy_binary_recompiled_for_candidate": false,
+    "legacy_extra_forced_c2": "PASS_12_CHECKS",
+    "baseline_red": {
+      "reflection": "EXPECTED_NoSuchMethodException",
+      "full_enhanced_fixture": "EXPECTED_AbstractMethodError_at_first_interface_call"
+    }
+  },
+  "retained_regressions": {
+    "status": "PASS",
+    "owners": [
+      "ObjectAdapterDispatchTest",
+      "M3ObjectTest enabled/disabled",
+      "M3ObjectNativeTest enabled/disabled"
+    ],
+    "native_limit": "Existing M3ObjectNativeTest includes product bridge source; it does not prove installed event-export binding."
+  },
+  "source_verifier": {
+    "status": "PASS",
+    "files": 5,
+    "script": "verify_candidate.py",
+    "sha256": "8e91d051b16c3e7c4daf6b73e6b28dd0c68b4c849a26c9dae7aadcaf7244fbe2",
+    "six_slot_drift": "REFUSED",
+    "missing_legacy_fixture": "REFUSED"
+  },
+  "historical_gates": {
+    "historical_Object_receiver": "EXPECTED_REFUSAL_RETAINED; pinned master Object already differs from the old seal",
+    "full_naming_receiver": "Known unchanged-baseline Arrays companion source-hash refusal remains",
+    "scoped_public_name_diff": "PASS_7_FILES_ZERO_VIOLATIONS",
+    "old_receipt": "RECEIPT.json retained unchanged as source/model-only history"
+  },
+  "donors": {
+    "decision_count": 11,
+    "sources": [
+      "GitHub M3JDK/Equinox",
+      "LeetCode hash-table category and problem706",
+      "HackerRank runtime subtype/reflection categories",
+      "GeeksforGeeks adapter/hashing categories"
+    ],
+    "challenge_solutions_copied": false,
+    "performance": "NOT_MEASURED; no speedup claimed"
+  },
+  "remaining_gates": [
+    "hosted CI on the published commit",
+    "whole JDK tests",
+    "other operating systems and architectures",
+    "all external source/binary compatibility",
+    "separate uncompressed-oop native/CDS execution",
+    "full canonical Synexia ledger",
+    "performance benchmarks"
+  ],
+  "private_receipt_sha256": {
+    "ADMISSION.json": "71408fc951e5f87884bc3f74b30a975184a4d5448fa0a1474915e990161588f9",
+    "ADMISSION_SDK_RESULTS.patch": "419bff2fa08aad552accee1718f03ead55e5d67a2ed26465ba1af92f9e026cca",
+    "ADMISSION_SDK_RESULTS.tsv": "29eb2f3daf6dcd5507c59a06cdff955a89ebde189a1c8d9943a8dbca66f27559",
+    "BUILD.json": "33b69d2499497a75ad0e7695b10f29c86e2ffa6123c2f4ba43d26ec2c11711b8",
+    "COMPATIBILITY.json": "3a777496bd71342b46a61d92712077225a034157cb70214c2484ecc3bb79ec1c",
+    "COMPILE.json": "5d29f6423059fad874efce3ba35b4a9085ad6a2e8f7539496f970eddcb411845",
+    "EXECUTION.json": "9f2093a87384a7e39b973e793bf7fe1e354972ee84b648d6af3c3d462bcacfc7",
+    "JTREG.json": "8af973d1545244e5b4553d9046035271a7598d319340810d1966f4a4e1cad546",
+    "RUNTIME.json": "7ab83a330b455de14b0013992e173a28407d2e50cb9c62139964a54c6909bdb4",
+    "SDK_RESULTS.patch": "7be246cfb0be58db4a3954218d068ea2937f594d77d89a1b11053b782c075ee4",
+    "SDK_RESULTS.tsv": "2fbfaaca5844c75c881c63fdf715fe6932a4236019cd839e46e37e4d0f9e3b11",
+    "SOURCE_GATE.json": "b9f64aa292a69f7619bb0c9dbd1cfe5ff22363f98bdd5e93cb16dfce9c3d11b1",
+    "METADATA.json": "b67e4caafc5c25705c20e25c8c94fdfb10c37e55e70ecf6d4701edaf4fee398a"
+  },
+  "registration": {
+    "status": "PASS_ACTUAL_METADATA_SDK_AND_FOCUSED_PROVENANCE",
+    "outputs": 4,
+    "original_index_members_preserved": 186,
+    "final_index_members": 187,
+    "registry_prefix_preserved_bytes": 597401,
+    "new_owner_rows": 5,
+    "new_shard_paths_checked": 52,
+    "violations": 0,
+    "full_canonical_ledger": "NOT_RUN",
+    "reused_output_name": "EXPECTED_REFUSAL_WITH_PRIOR_OUTPUT_BYTES_PRESERVED"
+  }
+}

@@ -1,0 +1,13 @@
+---
+type: "specs.openrewrite.org/v1beta/attribution"
+recipeName: "org.openrewrite.FindQuarks"
+contributors:
+- name: "Shannon Pamperl"
+  email: "shanman190@gmail.com"
+  lineCount: 42
+- name: "Jonathan Schnéider"
+  email: "jkschneider@gmail.com"
+  lineCount: 7
+- name: "Tim te Beek"
+  email: "tim@moderne.io"
+  lineCount: 1

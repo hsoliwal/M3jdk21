@@ -1,0 +1,6 @@
+# SPDX-License-Identifier: Apache-2.0
+# Census rows of group G5 (leaf L079, crate m3-fork-ring-shapes-20261019) on gate base feae0743e6c25f826d7f289c0b0acca19ff65e62. CircularFifoQueue owner = m3/collections/implementations/commons-collections-4.5.0/src/main/java/jdk/m3/collections/apache/queue/CircularFifoQueue.java (blob 5f94b86a7cf081e93ebfae3719f4f70d0e093b73). The census PARTIAL row (16 hunks, 82 lines, added_present 130/139, LOWCONF_NOPRE) compared the owner with the crate postimage, which the crate itself rejected (verification-receipt.json candidateDisposition REJECTED_PERFORMANCE_REGRESSION); the owner differs from the crate preimage by its own Synexia contiguous-span compaction and Javadoc case fixes.
+leaf	crate	type	status	verdict
+L079	m3-fork-ring-shapes-20261019	CircularFifoQueue	PARTIAL (census)	REJECTED_BY_DONOR: not applied
+L079	m3-fork-ring-shapes-20261019	M3CircularFifoShiftProof	NO_OWNER	PORTED as the fork test oracle (+ WRAP JUnit wrapper)
+L079	m3-fork-ring-shapes-20261019	BoundedCollection	APPLIED_SUPERSET (census)	parse context (crate parse-context.tsv), not a postimage

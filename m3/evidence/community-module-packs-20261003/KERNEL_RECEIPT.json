@@ -1,0 +1,14 @@
+{
+  "java_contract_checks": "M3_MODULE_CHECKS_PASS checks=41",
+  "jdk_release_sha256": "aafe9b90f727821be100832681e0f96259d2ebd9ce84eb3b7ea826a71cd09356",
+  "maven_junit_jacoco": "NOT_RUN",
+  "openrewrite_tests": "NOT_RUN",
+  "source_sha256": {
+    "kernel/src/main/java/com/m3/tools/modulepack/M3ModuleArtifact.java": "0da80eb22f2c356089d7da5c914b3bf939d9723a9aee7708e2de5d79cc117439",
+    "kernel/src/main/java/com/m3/tools/modulepack/M3ModuleGraph.java": "c1fa4ca74d190654fabb662db83a61ab9b0cdf617da5e0806ff96b5d99b015ac",
+    "kernel/src/main/java/com/m3/tools/modulepack/M3ModuleInspector.java": "1c17d2219c6226286208ca6c3b06ea1938dc2b9f7aaced55ba4afd2b5c6b5d32",
+    "kernel/src/main/java/com/m3/tools/modulepack/M3ModuleInventory.java": "f9f7d948de83d875b2e96ade22f9c40b680d972a53b224cdfc509640d855fdb2",
+    "kernel/src/main/java/module-info.java": "f8c4096e7d38dec851e5aae6121dbd160aba89d99a7c2fe09eee57c6e9c084af",
+    "kernel/src/test/java/com/m3/tools/modulepack/M3ModuleChecks.java": "f92b59ec3120111a39bdab9e210050dff55d8668c7732ea0dc4188216d68c60b"
+  }
+}

@@ -1,0 +1,50 @@
+# M3_INTEGRATE product areas (P1): m3/<area> Maven modules whose product code still lives outside src/.
+# The whole area directory is P1: its scripts run next to its pom.xml and src/ (cd "$(dirname "$0")", bare src/...),
+# so splitting a module directory between m3/ and make/m3 would break them. The proposed homes: code parts (src/,
+# test/, tests/, native/, include/, legal/) -> src/<module>, test/jdk; the Maven bridge and the area's records ->
+# make/m3/<area>/ (the area's own move_area.py / move_module_area.py run decides at move time).
+# Areas already moved into src/ (arrays, collections, paradigm, optane, compression) keep only their Maven bridge,
+# which is build glue and follows P2. Columns (tab separated):
+#   area  module  status  reason
+# status HOLD_P1: the target module exists; the area moves with its own move_area.py / move_module_area.py run
+# (package rename where java.base) and gates, one area per PR. HOLD_APPROVAL: the module root does not exist in
+# src/; creating it needs the user's approval (no new module roots without approval, 2026-11-08).
+intern	java.base	HOLD_P1	approved layout 2026-11-08: java.base jdk.internal.m3.* (package jdk.m3.intern -> jdk.internal.m3.intern via move_area.py)
+native	java.base	HOLD_P1	approved layout 2026-11-08: java.base jdk.internal.m3.* (native)
+lexicon	java.base	HOLD_P1	approved layout 2026-11-08: java.base jdk.internal.m3.* (lexicon: receiver, hf-intake, JNI sources, records)
+core	java.base	HOLD_P1	approved layout 2026-11-08: java.base jdk.internal.m3.* (core; descriptor today says jdk.m3.text)
+ports/indexstring	java.base	HOLD_P1	consumer of intern (plan 2026-11-08: intern + ports/indexstring together); jdk.internal.m3.indexstring already names java.base
+runtime-segments	java.base	HOLD_P1	approved layout: runtime-* -> java.base; probes -> test/jdk/jdk/internal/m3, run scripts beside them
+runtime-stage1	java.base	HOLD_P1	approved layout: runtime-* -> java.base; String patch recipe + probes
+fs	jdk.m3.io	HOLD_P1	approved layout 2026-11-08: jdk.m3.io = fs + file + optane (optane done #2859); natives + commons.logging stub need their own gate
+file	jdk.m3.io	HOLD_P1	approved layout 2026-11-08: jdk.m3.io = fs + file + optane; natives; consumers fs, search, nlp-search pins
+algorithms	jdk.m3.collections	HOLD_P1	approved layout 2026-11-08: jdk.m3.collections = collections + arrays + algorithms
+collections/interop	jdk.m3.collections	HOLD_P1	approved layout: collections family
+collections/gc-interop	jdk.m3.collections	HOLD_P1	approved layout: collections family (package jdk.m3.gc needs a fold decision)
+collections/signal-codegen	jdk.m3.collections	HOLD_P1	approved layout: collections family
+collections/pcollections	jdk.m3.collections	HOLD_P1	approved layout: collections family (descriptor jdk.m3.pcollections today)
+ports/collections	jdk.m3.collections	HOLD_P1	collections family (package jdk.m3.util needs a fold decision)
+search	jdk.m3.search	HOLD_APPROVAL	approved layout names jdk.m3.search = search + indexdb + nlp, but src/jdk.m3.search does not exist: new module root
+indexdb	jdk.m3.search	HOLD_APPROVAL	jdk.m3.search does not exist; indexdb is MIGRATION_RESIDUE_NOT_CANONICAL vs jdk.internal.m3.mindex (owner decision)
+compiler	jdk.m3.compiler	HOLD_APPROVAL	approved layout names jdk.m3.compiler = compiler + ast, but src/jdk.m3.compiler does not exist: new module root
+ast	jdk.m3.compiler	HOLD_APPROVAL	jdk.m3.compiler does not exist (jdk.internal.m3.ast part could join java.base)
+llm	jdk.m3.llm	HOLD_APPROVAL	not in the approved layout; new module root
+viewport-core	jdk.m3.viewport	HOLD_APPROVAL	not in the approved layout; new module root (or fold into java.desktop / jdk.m3.graphics: owner decision)
+ports/swing-viewport	jdk.m3.swing	HOLD_APPROVAL	packages jdk.m3.swing.* do not patch Swing (not java.desktop); its own jdk.m3 module does not exist
+ports/jfx-viewport	jdk.m3.desktop	HOLD_APPROVAL	JavaFX bridge; no JDK module owns it
+ports/precompute	jdk.m3.precompute	HOLD_APPROVAL	descriptor-less port; no module root (candidate owner java.base jdk.internal.m3 or jdk.m3.compiler)
+ports/regex-cursor	jdk.m3.regexcursor	HOLD_APPROVAL	no module root (candidate owner java.base java.util.regex in-place integration)
+ports/compiletime	jdk.m3.compiler	HOLD_APPROVAL	jdk.m3.compiler does not exist
+ports/capability-runtime	jdk.m3.runtime.capability	HOLD_APPROVAL	no module root
+ports/parallel	jdk.m3.parallel	HOLD_APPROVAL	no module root (descriptor m3.parallel)
+ports/parallel-bulk	jdk.m3.parallel	HOLD_APPROVAL	no module root
+ports/vcpu	jdk.m3.vcpu	HOLD_APPROVAL	no module root (descriptor m3.vcpu)
+ports/tornadovm-bulk	jdk.m3.tornado	HOLD_APPROVAL	no module root; TornadoVM donor retires in P4
+eclipse/core-runtime	jdk.m3.eclipse	HOLD_APPROVAL	Eclipse substrate; no JDK module owns it
+eclipse/framework	jdk.m3.eclipse	HOLD_APPROVAL	Eclipse substrate; no JDK module owns it
+eclipse/filesystem	jdk.m3.eclipse	HOLD_APPROVAL	Eclipse substrate; no JDK module owns it
+eclipse/optional-jmod	jdk.m3.eclipse	HOLD_APPROVAL	optional Eclipse jmod (descriptor jdk.m3.eclipse.core); no module root
+m3-import	jdk.m3.importer	HOLD_APPROVAL	package jdk.m3.importer (#2851) has no module root
+m3-import/pure-int-recipe-custody	java.base	HOLD_P1	package jdk.internal.m3.rewrite names java.base internals
+lazyobjects	jdk.m3.lazy	HOLD_APPROVAL	package org.m3.runtime.lazy: no module root, non-JDK package name
+mop	jdk.m3.mop	HOLD_APPROVAL	package jdk.m3.mop: no module root

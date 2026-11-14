@@ -1,0 +1,26 @@
+M3 file family (module org.m3jdk.file)
+Copyright 2026 Hitesh Soliwal and contributors
+
+Adapted from hsoliwal/com.synexia Apache-2.0 file, resource, build-delta and
+content-chunk owners by hash-pinned recipes; every donor commit, blob and
+sha256 is recorded in the recipe directories under recipe/ (PROVENANCE.tsv)
+and in qualification/. OpenJDK retains its existing licensing. This separately
+built module does not replace java.nio.file or integrate into java.base.
+
+Third-party attribution
+
+M3ChunkDeltaGenerator.editDistance (recipe/delta-generator-20261106) adapts the
+rolling-row recurrence of Apache Commons Text LevenshteinDistance
+(src/main/java/org/apache/commons/text/similarity/LevenshteinDistance.java at
+fcf5f4838bd59a303043c1b5e3b0b48b36452664), Apache License 2.0. No Commons Text
+code is redistributed and no runtime dependency on Commons Text exists; the
+adapted lines carry their own attribution comment. The upstream NOTICE reads:
+
+    Apache Commons Text
+    Copyright 2014-2026 The Apache Software Foundation
+
+    This product includes software developed at
+    The Apache Software Foundation (https://www.apache.org/).
+
+The upstream LICENSE and NOTICE files are kept verbatim under
+recipe/delta-generator-20261106/donor/.

@@ -1,0 +1,11 @@
+    /** Third phase: the census catalogue pattern and exact source digest per atom; recognition is not equivalence. */
+    public static PatternReviewed patternize(JitChecked tested) {
+        Objects.requireNonNull(tested, "tested");
+        Map<String, String> entries = tested.before.atoms.stream().collect(Collectors.toMap(
+                M3AtomRecord::atomId, atom -> atom.patternId() + ":" + atom.sourceSha256(),
+                (left, right) -> { throw new IllegalStateException("duplicate atom identity"); }));
+        if (entries.size() != tested.before.atoms.size()) {
+            throw new IllegalStateException("duplicate or missing atom identity");
+        }
+        return new PatternReviewed(tested, entries);
+    }

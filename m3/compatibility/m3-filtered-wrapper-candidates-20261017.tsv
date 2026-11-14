@@ -1,0 +1,5 @@
+id	problem_category	synexia_source_pr	receiving_plane	required_semantics	decision
+FILTERED_ERASED_SET	filtered navigable collection erased Set/SortedSet signatures	https://github.com/hsoliwal/com.synexia/pull/11913	M3_GENERAL_COLLECTIONS	source-backed;actual NavigableSet/SortedSet capability;comparator;null	EVIDENCE_ONLY
+FILTERED_SORTED_MAP	live filtered checked synchronized sorted map wrappers and bounded JNI	https://github.com/hsoliwal/com.synexia/pull/11920	M3_GENERAL_COLLECTIONS	read/write contracts;guarded entries;backing map;root monitor;native parity	EVIDENCE_ONLY
+PRIMITIVE_SORTED_SELECTION	primitive filtered and sorted snapshots and late-binding streams	https://github.com/hsoliwal/com.synexia/pull/11911	M3_PRIMITIVE_COLLECTIONS	snapshot versus backed view;mutability;split characteristics;boxed oracle	EVIDENCE_ONLY
+PRIMITIVE_LIVE_FILTER	composable primitive live filtered view	https://github.com/hsoliwal/com.synexia/pull/11903	M3_PRIMITIVE_COLLECTIONS	lazy traversal;mutable predicates;stability;unsized spliterator	EVIDENCE_ONLY

@@ -1,0 +1,7 @@
+order	gate	result
+1	exact inventory/diff	PASS
+2	syntax/whitespace	PASS; full static analysis not implied
+3	real Maven compilation	PASS selected archive module
+4	real JUnit	16 PASS
+5	recipe materialization/fixed point	PASS
+6	complete current reactor/coverage/product	PENDING

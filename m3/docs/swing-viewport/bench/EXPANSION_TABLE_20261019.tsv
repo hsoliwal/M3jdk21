@@ -1,0 +1,29 @@
+# ExpansionTableBench 2026-10-19 on S:, JDK 21.0.9, -XX:+UseSerialGC -Xms256m -Xmx2g; table = every inner node of a fan-out-10 tree as an expanded key (111, 1,111, 11,111 keys, unique components); median of 15 runs, third round reported; stock loops are getExpandedDescendants before isVisible and removeDescendantToggledPaths; m3_index includes its fallback (never taken); heap rows are noisy for the stock table (GC), the index adds about 190 bytes per key
+candidate	keys	scenario	value	unit	note
+stock_loop	111	fresh_expansion	23.80	us	-
+m3_index	111	fresh_expansion	1.00	us	-
+stock_loop	111	re_expansion_11	19.40	us	-
+m3_index	111	re_expansion_11	10.00	us	index order: bucket, then chain stamp
+stock_loop	111	remove_subtree_11	16.60	us	includes re-inserting the subtree
+m3_index	111	remove_subtree_11	15.00	us	includes re-inserting the subtree
+# keys 111: re-expansion fell back to the stock loop 0 times
+stock_loop	111	heap_table	0.00	MB	Hashtable entries (paths shared)
+m3_index	111	heap_table	0.02	MB	Hashtable entries + trie (paths shared)
+stock_loop	1111	fresh_expansion	37.60	us	-
+m3_index	1111	fresh_expansion	0.40	us	-
+stock_loop	1111	re_expansion_111	38.10	us	-
+m3_index	1111	re_expansion_111	22.80	us	index order: bucket, then chain stamp
+stock_loop	1111	remove_subtree_111	120.20	us	includes re-inserting the subtree
+m3_index	1111	remove_subtree_111	70.70	us	includes re-inserting the subtree
+# keys 1111: re-expansion fell back to the stock loop 0 times
+stock_loop	1111	heap_table	-0.02	MB	Hashtable entries (paths shared)
+m3_index	1111	heap_table	0.20	MB	Hashtable entries + trie (paths shared)
+stock_loop	11111	fresh_expansion	755.00	us	-
+m3_index	11111	fresh_expansion	1.60	us	-
+stock_loop	11111	re_expansion_1111	411.40	us	-
+m3_index	11111	re_expansion_1111	169.60	us	index order: bucket, then chain stamp
+stock_loop	11111	remove_subtree_1111	779.10	us	includes re-inserting the subtree
+m3_index	11111	remove_subtree_1111	310.20	us	includes re-inserting the subtree
+# keys 11111: re-expansion fell back to the stock loop 0 times
+stock_loop	11111	heap_table	-0.11	MB	Hashtable entries (paths shared)
+m3_index	11111	heap_table	2.00	MB	Hashtable entries + trie (paths shared)

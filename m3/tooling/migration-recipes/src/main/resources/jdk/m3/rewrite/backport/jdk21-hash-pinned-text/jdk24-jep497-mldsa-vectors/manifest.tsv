@@ -1,0 +1,5 @@
+# JEP 497 reduced FIPS-204 ACVP evidence crate
+# path	beforeSha256|ABSENT	afterSha256	resource
+test/jdk/sun/security/provider/ML_DSA/data/keyGen.json	ABSENT	a436bdd0f50bd12695c886bfbd87247c0a615a84229a74d3e26d50c879248a30	00-keyGen.json.txt
+test/jdk/sun/security/provider/ML_DSA/data/sigGen.json	ABSENT	d0e26b508350a0f8006edb7615ecd2742a672fec03d0287e66519e83c02233d8	01-sigGen.json.txt
+test/jdk/sun/security/provider/ML_DSA/data/sigVer.json	ABSENT	44bd53f6956dfd9e741010aba60e52b11829ecb1139c531f3b24051260f09472	02-sigVer.json.txt

@@ -1,0 +1,768 @@
+{
+  "schema": "M3_COLLECTION_RECEIVER_SCOPED_EVIDENCE_V1",
+  "record_id": "synexia.collections.int-long-conditional-remove",
+  "target_repository": "hsoliwal/M3jdk21",
+  "target_baseline": "b98bf8c065818aac3447be165909e2a013325d9a",
+  "canonical_repository": "hsoliwal/com.synexia",
+  "canonical_source_revision": "c10d88bca18d4f1690dc2484bd6f052eec21c8ca",
+  "canonical_recipe": "com.synexia.rewrite.M3IntLongProductConditionalRemove20261112",
+  "canonical_recipe_path": "synexia-openrewrite-recipes/crates/m3-intint-conditional-remove-20261030",
+  "canonical_manifest": {
+    "repository": "hsoliwal/com.synexia",
+    "commit": "c10d88bca18d4f1690dc2484bd6f052eec21c8ca",
+    "path": "synexia-openrewrite-recipes/crates/m3-intint-conditional-remove-20261030/resources/com/synexia/rewrite/hash-pinned-java/m3-intlong-product-conditional-remove-20261112/manifest.tsv",
+    "sha256": "ec5dcf2910845783e319a489b4027cf30987fcb0971dc51b1f664b6cebad81b9"
+  },
+  "canonical_verification": {
+    "repository": "hsoliwal/com.synexia",
+    "commit": "45f40a8fd3691e33cf5b7c3913375487c2add94b",
+    "path": "synexia-openrewrite-recipes/crates/m3-intint-conditional-remove-20261030/verification/product-intlong/evidence/final/RESULTS.json",
+    "sha256": "0d7241502bde8e3a8ee19ec88d8b91a0038916df00c03edf7fc4267ed4f8b318",
+    "publication": "Published immutable verification evidence; scoped results do not close broader receiving gates."
+  },
+  "canonical_sdk_evidence": {
+    "repository": "hsoliwal/com.synexia",
+    "commit": "c10d88bca18d4f1690dc2484bd6f052eec21c8ca",
+    "path": "synexia-openrewrite-recipes/crates/m3-intint-conditional-remove-20261030/evidence/product-intlong-20261112/sdk-execution.json",
+    "sha256": "c77a8f75da23946280bc5114ff1c1764d5bcbb1f4908b1c85d1d86e644841b45"
+  },
+  "postimages": {
+    "src/jdk.m3.collections/share/classes/jdk/m3/collections/IntLongHashMap.java": "8fd5e67c5b135da4ebac4c87c3d30e3e1b39d6ca0b91c2ad0dd3370d66a9e3e9",
+    "test/jdk/jdk/m3/collections/IntLongHashMapTest.java": "9a5a5ee213108b7676d0cacc84629dbd2113c3705facaafc857de27eb6b97a1f"
+  },
+  "runs": [
+    {
+      "id": "intlong-sdk-emitted-maven",
+      "status": "passed",
+      "exit_code": 0,
+      "command": [
+        "/workspace/scratch/ae237a45f3d0/toolchain/apache-maven-3.9.9/bin/mvn",
+        "-o",
+        "-B",
+        "-ntp",
+        "-f",
+        "/workspace/scratch/f7adbdd86bb3/migration-20261112/synexia/synexia-openrewrite-recipes/crates/m3-intint-conditional-remove-20261030/verification/product-intlong/pom.xml",
+        "-Dmaven.repo.local=/workspace/scratch/f7adbdd86bb3/migration-20261112/maven-closure/m2",
+        "-Dm3.proof.output=/workspace/scratch/f7adbdd86bb3/migration-20261112/synexia/synexia-openrewrite-recipes/crates/m3-intint-conditional-remove-20261030/target/product-intlong-receiver-final",
+        "-Dm3.variant=emitted",
+        "test"
+      ],
+      "stdout_sha256": "7f1fabd8589ae0abc31770b5271f5c96a441b16b131acff0f732d1e5b1e5c680",
+      "inputs": {
+        "src/jdk.m3.collections/share/classes/jdk/m3/collections/IntLongHashMap.java": "8fd5e67c5b135da4ebac4c87c3d30e3e1b39d6ca0b91c2ad0dd3370d66a9e3e9",
+        "src/jdk.m3.collections/share/classes/jdk/m3/collections/IntIterator.java": "dc7b2d8adf35fd6af520ed125b68508eb6eb6a950010f2c4f6d3861a99148b33",
+        "src/jdk.m3.collections/share/classes/jdk/m3/collections/IntLongConsumer.java": "1badc2303270aef4719aec4effabe8031cddc4516e16bdb3abffd8a2e21011a0",
+        "test/jdk/jdk/m3/collections/IntLongHashMapTest.java": "9a5a5ee213108b7676d0cacc84629dbd2113c3705facaafc857de27eb6b97a1f"
+      },
+      "stdout": "[INFO] Scanning for projects...\n[INFO] \n[INFO] ------< com.synexia.verification:m3-intlong-product-native-tests >------\n[INFO] Building m3-intlong-product-native-tests 1\n[INFO]   from pom.xml\n[INFO] --------------------------------[ jar ]---------------------------------\n[INFO] \n[INFO] --- resources:3.3.1:resources (default-resources) @ m3-intlong-product-native-tests ---\n[INFO] skip non existing resourceDirectory /workspace/scratch/f7adbdd86bb3/migration-20261112/synexia/synexia-openrewrite-recipes/crates/m3-intint-conditional-remove-20261030/verification/product-intlong/src/main/resources\n[INFO] \n[INFO] --- compiler:3.13.0:compile (default-compile) @ m3-intlong-product-native-tests ---\n[INFO] Recompiling the module because of changed source code.\n[INFO] Compiling 3 source files with javac [debug release 21] to ../../target/product-intlong-receiver-final/emitted/target/classes\n[INFO] \n[INFO] --- resources:3.3.1:testResources (default-testResources) @ m3-intlong-product-native-tests ---\n[INFO] skip non existing resourceDirectory /workspace/scratch/f7adbdd86bb3/migration-20261112/synexia/synexia-openrewrite-recipes/crates/m3-intint-conditional-remove-20261030/verification/product-intlong/src/test/resources\n[INFO] \n[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ m3-intlong-product-native-tests ---\n[INFO] Recompiling the module because of changed dependency.\n[INFO] Compiling 1 source file with javac [debug release 21] to ../../target/product-intlong-receiver-final/emitted/target/test-classes\n[INFO] \n[INFO] --- surefire:3.2.5:test (default-test) @ m3-intlong-product-native-tests ---\n[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider\n[INFO] \n[INFO] -------------------------------------------------------\n[INFO]  T E S T S\n[INFO] -------------------------------------------------------\n[INFO] Running jdk.m3.collections.IntLongHashMapTest\n[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.255 s -- in jdk.m3.collections.IntLongHashMapTest\n[INFO] \n[INFO] Results:\n[INFO] \n[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0\n[INFO] \n[INFO] ------------------------------------------------------------------------\n[INFO] BUILD SUCCESS\n[INFO] ------------------------------------------------------------------------\n[INFO] Total time:  2.493 s\n[INFO] Finished at: 2026-11-12T13:36:42Z\n[INFO] ------------------------------------------------------------------------\n",
+      "captured_log": "emitted-maven.log",
+      "captured_log_sha256": "7b9d1307fa34e86a991d1fec3935b1361889fffa7c6b206b86f44fe9450a18b0",
+      "scope": "Selected exact receiving-source closure on Java 21; full reactor, installed JDK image, jtreg and production performance remain separate.",
+      "junit": {
+        "tests": 3,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "id": "intlong-sdk-emitted-physical-model",
+      "status": "passed",
+      "exit_code": 0,
+      "command": [
+        "/workspace/scratch/ae237a45f3d0/toolchain/jdk-21.0.13+9/bin/java",
+        "-ea",
+        "-Xverify:all",
+        "-Xmx512m",
+        "-cp",
+        "/workspace/scratch/f7adbdd86bb3/migration-20261112/synexia/synexia-openrewrite-recipes/crates/m3-intint-conditional-remove-20261030/target/product-intlong-receiver-final/oracle-classes",
+        "IntMapConditionalDifferential",
+        "/workspace/scratch/f7adbdd86bb3/migration-20261112/synexia/synexia-openrewrite-recipes/crates/m3-intint-conditional-remove-20261030/target/product-intlong-receiver-final/baseline/target/classes",
+        "/workspace/scratch/f7adbdd86bb3/migration-20261112/synexia/synexia-openrewrite-recipes/crates/m3-intint-conditional-remove-20261030/target/product-intlong-receiver-final/emitted/target/classes",
+        "IntLongHashMap"
+      ],
+      "stdout_sha256": "971c07bafc3a098a7d935b4c38cee21323e9caad2c1b741564aa58e7ab701431",
+      "inputs": {
+        "src/jdk.m3.collections/share/classes/jdk/m3/collections/IntLongHashMap.java": "8fd5e67c5b135da4ebac4c87c3d30e3e1b39d6ca0b91c2ad0dd3370d66a9e3e9",
+        "src/jdk.m3.collections/share/classes/jdk/m3/collections/IntIterator.java": "dc7b2d8adf35fd6af520ed125b68508eb6eb6a950010f2c4f6d3861a99148b33",
+        "src/jdk.m3.collections/share/classes/jdk/m3/collections/IntLongConsumer.java": "1badc2303270aef4719aec4effabe8031cddc4516e16bdb3abffd8a2e21011a0",
+        "test/jdk/jdk/m3/collections/IntLongHashMapTest.java": "9a5a5ee213108b7676d0cacc84629dbd2113c3705facaafc857de27eb6b97a1f"
+      },
+      "stdout": "PASS IntLongHashMap operations=65536 exact_state_checks=65536 matched_conditional_removals=2300 seeds=16\n",
+      "captured_log": "physical-differential.log",
+      "captured_log_sha256": "8c74cd273eaca3b824e71602589f1e8480fb0264f6714fa327048a27ab605bfb",
+      "scope": "Selected exact receiving-source closure on Java 21; full reactor, installed JDK image, jtreg and production performance remain separate.",
+      "baseline_commit": "b98bf8c065818aac3447be165909e2a013325d9a",
+      "baseline_inputs": {
+        "src/jdk.m3.collections/share/classes/jdk/m3/collections/IntLongHashMap.java": "01439d800feee41631fd257e18ceca9b558d0a8dd8fad5686539c90916fe34ab",
+        "src/jdk.m3.collections/share/classes/jdk/m3/collections/IntIterator.java": "dc7b2d8adf35fd6af520ed125b68508eb6eb6a950010f2c4f6d3861a99148b33",
+        "src/jdk.m3.collections/share/classes/jdk/m3/collections/IntLongConsumer.java": "1badc2303270aef4719aec4effabe8031cddc4516e16bdb3abffd8a2e21011a0",
+        "test/jdk/jdk/m3/collections/IntLongHashMapTest.java": "20a584f51bf6795063946ba057e0bf4b59d9aff16dbbd007016e1382f3f42519"
+      },
+      "oracle_sha256": "3e8e1bd70270b6f79ddcfea7c64e75380c84641001cb1a56046d17f0879f2234",
+      "observations": [
+        "PASS IntLongHashMap operations=65536 exact_state_checks=65536 matched_conditional_removals=2300 seeds=16"
+      ]
+    },
+    {
+      "id": "intlong-sdk-emitted-public-api",
+      "status": "passed",
+      "exit_code": 0,
+      "command": [
+        "/workspace/scratch/ae237a45f3d0/toolchain/jdk-21.0.13+9/bin/javap",
+        "-classpath",
+        "/workspace/scratch/f7adbdd86bb3/migration-20261112/synexia/synexia-openrewrite-recipes/crates/m3-intint-conditional-remove-20261030/target/product-intlong-receiver-final/emitted/target/classes",
+        "-public",
+        "-s",
+        "jdk.m3.collections.IntLongHashMap"
+      ],
+      "stdout_sha256": "ffeb50ecdc3fee2317f7e35653223593139108524176782c58fc884790a76392",
+      "inputs": {
+        "src/jdk.m3.collections/share/classes/jdk/m3/collections/IntLongHashMap.java": "8fd5e67c5b135da4ebac4c87c3d30e3e1b39d6ca0b91c2ad0dd3370d66a9e3e9",
+        "src/jdk.m3.collections/share/classes/jdk/m3/collections/IntIterator.java": "dc7b2d8adf35fd6af520ed125b68508eb6eb6a950010f2c4f6d3861a99148b33",
+        "src/jdk.m3.collections/share/classes/jdk/m3/collections/IntLongConsumer.java": "1badc2303270aef4719aec4effabe8031cddc4516e16bdb3abffd8a2e21011a0",
+        "test/jdk/jdk/m3/collections/IntLongHashMapTest.java": "9a5a5ee213108b7676d0cacc84629dbd2113c3705facaafc857de27eb6b97a1f"
+      },
+      "stdout": "Compiled from \"IntLongHashMap.java\"\npublic final class jdk.m3.collections.IntLongHashMap {\n  public jdk.m3.collections.IntLongHashMap();\n    descriptor: ()V\n\n  public jdk.m3.collections.IntLongHashMap(int);\n    descriptor: (I)V\n\n  public static long payloadBytesFor(int);\n    descriptor: (I)J\n\n  public boolean put(int, long);\n    descriptor: (IJ)Z\n\n  public long getOrDefault(int, long);\n    descriptor: (IJ)J\n\n  public boolean containsKey(int);\n    descriptor: (I)Z\n\n  public boolean containsValue(long);\n    descriptor: (J)Z\n\n  public boolean replace(int, long, long);\n    descriptor: (IJJ)Z\n\n  public long addTo(int, long);\n    descriptor: (IJ)J\n\n  public boolean remove(int);\n    descriptor: (I)Z\n\n  public boolean remove(int, long);\n    descriptor: (IJ)Z\n\n  public int size();\n    descriptor: ()I\n\n  public boolean isEmpty();\n    descriptor: ()Z\n\n  public int capacity();\n    descriptor: ()I\n\n  public long payloadBytes();\n    descriptor: ()J\n\n  public void clear();\n    descriptor: ()V\n\n  public void trimToSize();\n    descriptor: ()V\n\n  public void forEach(jdk.m3.collections.IntLongConsumer);\n    descriptor: (Ljdk/m3/collections/IntLongConsumer;)V\n\n  public jdk.m3.collections.IntIterator keyIterator();\n    descriptor: ()Ljdk/m3/collections/IntIterator;\n\n  public int[] keysToArray();\n    descriptor: ()[I\n}\n",
+      "captured_log": "emitted-api.log",
+      "captured_log_sha256": "be19253f968dfce93aeb10d9b027044dc120ac5d42a51889f14272594e297e61",
+      "scope": "Selected exact receiving-source closure on Java 21; full reactor, installed JDK image, jtreg and production performance remain separate.",
+      "comparison": {
+        "identical": true,
+        "baseline_commit": "b98bf8c065818aac3447be165909e2a013325d9a",
+        "baseline_command": [
+          "/workspace/scratch/ae237a45f3d0/toolchain/jdk-21.0.13+9/bin/javap",
+          "-classpath",
+          "/workspace/scratch/f7adbdd86bb3/migration-20261112/synexia/synexia-openrewrite-recipes/crates/m3-intint-conditional-remove-20261030/target/product-intlong-receiver-final/baseline/target/classes",
+          "-public",
+          "-s",
+          "jdk.m3.collections.IntLongHashMap"
+        ],
+        "baseline_stdout_sha256": "ffeb50ecdc3fee2317f7e35653223593139108524176782c58fc884790a76392",
+        "surface": "javap -public -s"
+      }
+    }
+  ],
+  "baseline_observation": {
+    "commit": "b98bf8c065818aac3447be165909e2a013325d9a",
+    "maven": {
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "inputs": {
+      "src/jdk.m3.collections/share/classes/jdk/m3/collections/IntLongHashMap.java": "01439d800feee41631fd257e18ceca9b558d0a8dd8fad5686539c90916fe34ab",
+      "src/jdk.m3.collections/share/classes/jdk/m3/collections/IntIterator.java": "dc7b2d8adf35fd6af520ed125b68508eb6eb6a950010f2c4f6d3861a99148b33",
+      "src/jdk.m3.collections/share/classes/jdk/m3/collections/IntLongConsumer.java": "1badc2303270aef4719aec4effabe8031cddc4516e16bdb3abffd8a2e21011a0",
+      "test/jdk/jdk/m3/collections/IntLongHashMapTest.java": "20a584f51bf6795063946ba057e0bf4b59d9aff16dbbd007016e1382f3f42519"
+    },
+    "command": [
+      "/workspace/scratch/ae237a45f3d0/toolchain/apache-maven-3.9.9/bin/mvn",
+      "-o",
+      "-B",
+      "-ntp",
+      "-f",
+      "/workspace/scratch/f7adbdd86bb3/migration-20261112/synexia/synexia-openrewrite-recipes/crates/m3-intint-conditional-remove-20261030/verification/product-intlong/pom.xml",
+      "-Dmaven.repo.local=/workspace/scratch/f7adbdd86bb3/migration-20261112/maven-closure/m2",
+      "-Dm3.proof.output=/workspace/scratch/f7adbdd86bb3/migration-20261112/synexia/synexia-openrewrite-recipes/crates/m3-intint-conditional-remove-20261030/target/product-intlong-receiver-final",
+      "-Dm3.variant=baseline",
+      "test"
+    ],
+    "captured_log_sha256": "227f97b68aefb721e681587bfc54ea8333da13d986b43523c449a232820a6324"
+  },
+  "recipe_execution": {
+    "testCounts": {
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "qualifiedCases": {
+      "exact_first_pass": 2,
+      "exact_fixed_point": "PASS",
+      "source_orders": 4,
+      "refusal_cases": 11,
+      "partial_pre_post_orders": 2,
+      "independent_workers": 2,
+      "opaque_code_regex_text_block_decoy": "UNCHANGED"
+    },
+    "sdk_version": "8.17.1-synexia-source-1",
+    "sdk_product_junit_sha256": "9b3c4f95607fdabce0a7f12311f325d39bfe7d83883d8c62e146e7266e7262b9"
+  },
+  "intint_rejection": {
+    "disposition": "REJECTED_FOR_PRODUCT",
+    "scope": "Historical matched-remove/reinsert collision regression reproduced; no IntInt product source/test change is included. Diagnostic timing does not establish universal performance.",
+    "recorded_timing_sha256": "dc0e8b933d35170a78a22cdec1b2b15be7b6002f961053228358abdfa8e60b0f",
+    "timing_evidence": {
+      "scope": "Exact prior historical collision generator, table size, warmup, reps and alternating13sample algorithm; package and owner class names adapted. Current exact b98 product versus candidate, 5 fresh JVM forks per map/variant, alternated variant ordering, Java21.0.13+9, fixed256MiB heap, SerialGC. Custom single-host diagnostic; no broad performance admission, no JMH confidence interval.",
+      "historical_rejected_intint_fused_blob": "dd82f75cc8b0bffcce4bdd9a8a26695052c3a626",
+      "raw": [
+        {
+          "map": "IntInt",
+          "variant": "baseline",
+          "fork": 0,
+          "collision_keys": 8,
+          "matched_remove_reinsert_ns": 33,
+          "mismatched_remove_ns": 9
+        },
+        {
+          "map": "IntInt",
+          "variant": "baseline",
+          "fork": 0,
+          "collision_keys": 32,
+          "matched_remove_reinsert_ns": 79,
+          "mismatched_remove_ns": 28
+        },
+        {
+          "map": "IntInt",
+          "variant": "baseline",
+          "fork": 0,
+          "collision_keys": 96,
+          "matched_remove_reinsert_ns": 231,
+          "mismatched_remove_ns": 103
+        },
+        {
+          "map": "IntInt",
+          "variant": "candidate",
+          "fork": 0,
+          "collision_keys": 8,
+          "matched_remove_reinsert_ns": 33,
+          "mismatched_remove_ns": 9
+        },
+        {
+          "map": "IntInt",
+          "variant": "candidate",
+          "fork": 0,
+          "collision_keys": 32,
+          "matched_remove_reinsert_ns": 101,
+          "mismatched_remove_ns": 18
+        },
+        {
+          "map": "IntInt",
+          "variant": "candidate",
+          "fork": 0,
+          "collision_keys": 96,
+          "matched_remove_reinsert_ns": 286,
+          "mismatched_remove_ns": 50
+        },
+        {
+          "map": "IntInt",
+          "variant": "candidate",
+          "fork": 1,
+          "collision_keys": 8,
+          "matched_remove_reinsert_ns": 47,
+          "mismatched_remove_ns": 12
+        },
+        {
+          "map": "IntInt",
+          "variant": "candidate",
+          "fork": 1,
+          "collision_keys": 32,
+          "matched_remove_reinsert_ns": 86,
+          "mismatched_remove_ns": 16
+        },
+        {
+          "map": "IntInt",
+          "variant": "candidate",
+          "fork": 1,
+          "collision_keys": 96,
+          "matched_remove_reinsert_ns": 247,
+          "mismatched_remove_ns": 38
+        },
+        {
+          "map": "IntInt",
+          "variant": "baseline",
+          "fork": 1,
+          "collision_keys": 8,
+          "matched_remove_reinsert_ns": 33,
+          "mismatched_remove_ns": 9
+        },
+        {
+          "map": "IntInt",
+          "variant": "baseline",
+          "fork": 1,
+          "collision_keys": 32,
+          "matched_remove_reinsert_ns": 118,
+          "mismatched_remove_ns": 18
+        },
+        {
+          "map": "IntInt",
+          "variant": "baseline",
+          "fork": 1,
+          "collision_keys": 96,
+          "matched_remove_reinsert_ns": 229,
+          "mismatched_remove_ns": 45
+        },
+        {
+          "map": "IntInt",
+          "variant": "baseline",
+          "fork": 2,
+          "collision_keys": 8,
+          "matched_remove_reinsert_ns": 33,
+          "mismatched_remove_ns": 9
+        },
+        {
+          "map": "IntInt",
+          "variant": "baseline",
+          "fork": 2,
+          "collision_keys": 32,
+          "matched_remove_reinsert_ns": 85,
+          "mismatched_remove_ns": 18
+        },
+        {
+          "map": "IntInt",
+          "variant": "baseline",
+          "fork": 2,
+          "collision_keys": 96,
+          "matched_remove_reinsert_ns": 242,
+          "mismatched_remove_ns": 45
+        },
+        {
+          "map": "IntInt",
+          "variant": "candidate",
+          "fork": 2,
+          "collision_keys": 8,
+          "matched_remove_reinsert_ns": 34,
+          "mismatched_remove_ns": 9
+        },
+        {
+          "map": "IntInt",
+          "variant": "candidate",
+          "fork": 2,
+          "collision_keys": 32,
+          "matched_remove_reinsert_ns": 121,
+          "mismatched_remove_ns": 18
+        },
+        {
+          "map": "IntInt",
+          "variant": "candidate",
+          "fork": 2,
+          "collision_keys": 96,
+          "matched_remove_reinsert_ns": 288,
+          "mismatched_remove_ns": 48
+        },
+        {
+          "map": "IntInt",
+          "variant": "candidate",
+          "fork": 3,
+          "collision_keys": 8,
+          "matched_remove_reinsert_ns": 34,
+          "mismatched_remove_ns": 10
+        },
+        {
+          "map": "IntInt",
+          "variant": "candidate",
+          "fork": 3,
+          "collision_keys": 32,
+          "matched_remove_reinsert_ns": 102,
+          "mismatched_remove_ns": 18
+        },
+        {
+          "map": "IntInt",
+          "variant": "candidate",
+          "fork": 3,
+          "collision_keys": 96,
+          "matched_remove_reinsert_ns": 292,
+          "mismatched_remove_ns": 46
+        },
+        {
+          "map": "IntInt",
+          "variant": "baseline",
+          "fork": 3,
+          "collision_keys": 8,
+          "matched_remove_reinsert_ns": 33,
+          "mismatched_remove_ns": 9
+        },
+        {
+          "map": "IntInt",
+          "variant": "baseline",
+          "fork": 3,
+          "collision_keys": 32,
+          "matched_remove_reinsert_ns": 80,
+          "mismatched_remove_ns": 18
+        },
+        {
+          "map": "IntInt",
+          "variant": "baseline",
+          "fork": 3,
+          "collision_keys": 96,
+          "matched_remove_reinsert_ns": 225,
+          "mismatched_remove_ns": 40
+        },
+        {
+          "map": "IntInt",
+          "variant": "baseline",
+          "fork": 4,
+          "collision_keys": 8,
+          "matched_remove_reinsert_ns": 33,
+          "mismatched_remove_ns": 9
+        },
+        {
+          "map": "IntInt",
+          "variant": "baseline",
+          "fork": 4,
+          "collision_keys": 32,
+          "matched_remove_reinsert_ns": 81,
+          "mismatched_remove_ns": 18
+        },
+        {
+          "map": "IntInt",
+          "variant": "baseline",
+          "fork": 4,
+          "collision_keys": 96,
+          "matched_remove_reinsert_ns": 228,
+          "mismatched_remove_ns": 39
+        },
+        {
+          "map": "IntInt",
+          "variant": "candidate",
+          "fork": 4,
+          "collision_keys": 8,
+          "matched_remove_reinsert_ns": 34,
+          "mismatched_remove_ns": 10
+        },
+        {
+          "map": "IntInt",
+          "variant": "candidate",
+          "fork": 4,
+          "collision_keys": 32,
+          "matched_remove_reinsert_ns": 103,
+          "mismatched_remove_ns": 18
+        },
+        {
+          "map": "IntInt",
+          "variant": "candidate",
+          "fork": 4,
+          "collision_keys": 96,
+          "matched_remove_reinsert_ns": 308,
+          "mismatched_remove_ns": 48
+        },
+        {
+          "map": "IntLong",
+          "variant": "baseline",
+          "fork": 0,
+          "collision_keys": 8,
+          "matched_remove_reinsert_ns": 41,
+          "mismatched_remove_ns": 20
+        },
+        {
+          "map": "IntLong",
+          "variant": "baseline",
+          "fork": 0,
+          "collision_keys": 32,
+          "matched_remove_reinsert_ns": 113,
+          "mismatched_remove_ns": 33
+        },
+        {
+          "map": "IntLong",
+          "variant": "baseline",
+          "fork": 0,
+          "collision_keys": 96,
+          "matched_remove_reinsert_ns": 263,
+          "mismatched_remove_ns": 87
+        },
+        {
+          "map": "IntLong",
+          "variant": "candidate",
+          "fork": 0,
+          "collision_keys": 8,
+          "matched_remove_reinsert_ns": 40,
+          "mismatched_remove_ns": 12
+        },
+        {
+          "map": "IntLong",
+          "variant": "candidate",
+          "fork": 0,
+          "collision_keys": 32,
+          "matched_remove_reinsert_ns": 92,
+          "mismatched_remove_ns": 23
+        },
+        {
+          "map": "IntLong",
+          "variant": "candidate",
+          "fork": 0,
+          "collision_keys": 96,
+          "matched_remove_reinsert_ns": 252,
+          "mismatched_remove_ns": 69
+        },
+        {
+          "map": "IntLong",
+          "variant": "candidate",
+          "fork": 1,
+          "collision_keys": 8,
+          "matched_remove_reinsert_ns": 34,
+          "mismatched_remove_ns": 9
+        },
+        {
+          "map": "IntLong",
+          "variant": "candidate",
+          "fork": 1,
+          "collision_keys": 32,
+          "matched_remove_reinsert_ns": 91,
+          "mismatched_remove_ns": 23
+        },
+        {
+          "map": "IntLong",
+          "variant": "candidate",
+          "fork": 1,
+          "collision_keys": 96,
+          "matched_remove_reinsert_ns": 253,
+          "mismatched_remove_ns": 69
+        },
+        {
+          "map": "IntLong",
+          "variant": "baseline",
+          "fork": 1,
+          "collision_keys": 8,
+          "matched_remove_reinsert_ns": 39,
+          "mismatched_remove_ns": 18
+        },
+        {
+          "map": "IntLong",
+          "variant": "baseline",
+          "fork": 1,
+          "collision_keys": 32,
+          "matched_remove_reinsert_ns": 82,
+          "mismatched_remove_ns": 25
+        },
+        {
+          "map": "IntLong",
+          "variant": "baseline",
+          "fork": 1,
+          "collision_keys": 96,
+          "matched_remove_reinsert_ns": 227,
+          "mismatched_remove_ns": 74
+        },
+        {
+          "map": "IntLong",
+          "variant": "baseline",
+          "fork": 2,
+          "collision_keys": 8,
+          "matched_remove_reinsert_ns": 38,
+          "mismatched_remove_ns": 18
+        },
+        {
+          "map": "IntLong",
+          "variant": "baseline",
+          "fork": 2,
+          "collision_keys": 32,
+          "matched_remove_reinsert_ns": 96,
+          "mismatched_remove_ns": 28
+        },
+        {
+          "map": "IntLong",
+          "variant": "baseline",
+          "fork": 2,
+          "collision_keys": 96,
+          "matched_remove_reinsert_ns": 280,
+          "mismatched_remove_ns": 108
+        },
+        {
+          "map": "IntLong",
+          "variant": "candidate",
+          "fork": 2,
+          "collision_keys": 8,
+          "matched_remove_reinsert_ns": 34,
+          "mismatched_remove_ns": 10
+        },
+        {
+          "map": "IntLong",
+          "variant": "candidate",
+          "fork": 2,
+          "collision_keys": 32,
+          "matched_remove_reinsert_ns": 86,
+          "mismatched_remove_ns": 23
+        },
+        {
+          "map": "IntLong",
+          "variant": "candidate",
+          "fork": 2,
+          "collision_keys": 96,
+          "matched_remove_reinsert_ns": 246,
+          "mismatched_remove_ns": 69
+        },
+        {
+          "map": "IntLong",
+          "variant": "candidate",
+          "fork": 3,
+          "collision_keys": 8,
+          "matched_remove_reinsert_ns": 46,
+          "mismatched_remove_ns": 15
+        },
+        {
+          "map": "IntLong",
+          "variant": "candidate",
+          "fork": 3,
+          "collision_keys": 32,
+          "matched_remove_reinsert_ns": 87,
+          "mismatched_remove_ns": 16
+        },
+        {
+          "map": "IntLong",
+          "variant": "candidate",
+          "fork": 3,
+          "collision_keys": 96,
+          "matched_remove_reinsert_ns": 246,
+          "mismatched_remove_ns": 38
+        },
+        {
+          "map": "IntLong",
+          "variant": "baseline",
+          "fork": 3,
+          "collision_keys": 8,
+          "matched_remove_reinsert_ns": 42,
+          "mismatched_remove_ns": 18
+        },
+        {
+          "map": "IntLong",
+          "variant": "baseline",
+          "fork": 3,
+          "collision_keys": 32,
+          "matched_remove_reinsert_ns": 85,
+          "mismatched_remove_ns": 28
+        },
+        {
+          "map": "IntLong",
+          "variant": "baseline",
+          "fork": 3,
+          "collision_keys": 96,
+          "matched_remove_reinsert_ns": 260,
+          "mismatched_remove_ns": 96
+        },
+        {
+          "map": "IntLong",
+          "variant": "baseline",
+          "fork": 4,
+          "collision_keys": 8,
+          "matched_remove_reinsert_ns": 44,
+          "mismatched_remove_ns": 19
+        },
+        {
+          "map": "IntLong",
+          "variant": "baseline",
+          "fork": 4,
+          "collision_keys": 32,
+          "matched_remove_reinsert_ns": 86,
+          "mismatched_remove_ns": 27
+        },
+        {
+          "map": "IntLong",
+          "variant": "baseline",
+          "fork": 4,
+          "collision_keys": 96,
+          "matched_remove_reinsert_ns": 247,
+          "mismatched_remove_ns": 74
+        },
+        {
+          "map": "IntLong",
+          "variant": "candidate",
+          "fork": 4,
+          "collision_keys": 8,
+          "matched_remove_reinsert_ns": 49,
+          "mismatched_remove_ns": 14
+        },
+        {
+          "map": "IntLong",
+          "variant": "candidate",
+          "fork": 4,
+          "collision_keys": 32,
+          "matched_remove_reinsert_ns": 86,
+          "mismatched_remove_ns": 16
+        },
+        {
+          "map": "IntLong",
+          "variant": "candidate",
+          "fork": 4,
+          "collision_keys": 96,
+          "matched_remove_reinsert_ns": 250,
+          "mismatched_remove_ns": 38
+        }
+      ],
+      "summary": [
+        {
+          "map": "IntInt",
+          "collision_keys": 8,
+          "baseline_matched_remove_reinsert_ns": 33,
+          "baseline_mismatched_remove_ns": 9,
+          "candidate_matched_remove_reinsert_ns": 34,
+          "candidate_mismatched_remove_ns": 10
+        },
+        {
+          "map": "IntInt",
+          "collision_keys": 32,
+          "baseline_matched_remove_reinsert_ns": 81,
+          "baseline_mismatched_remove_ns": 18,
+          "candidate_matched_remove_reinsert_ns": 102,
+          "candidate_mismatched_remove_ns": 18
+        },
+        {
+          "map": "IntInt",
+          "collision_keys": 96,
+          "baseline_matched_remove_reinsert_ns": 229,
+          "baseline_mismatched_remove_ns": 45,
+          "candidate_matched_remove_reinsert_ns": 288,
+          "candidate_mismatched_remove_ns": 48
+        },
+        {
+          "map": "IntLong",
+          "collision_keys": 8,
+          "baseline_matched_remove_reinsert_ns": 41,
+          "baseline_mismatched_remove_ns": 18,
+          "candidate_matched_remove_reinsert_ns": 40,
+          "candidate_mismatched_remove_ns": 12
+        },
+        {
+          "map": "IntLong",
+          "collision_keys": 32,
+          "baseline_matched_remove_reinsert_ns": 86,
+          "baseline_mismatched_remove_ns": 28,
+          "candidate_matched_remove_reinsert_ns": 87,
+          "candidate_mismatched_remove_ns": 23
+        },
+        {
+          "map": "IntLong",
+          "collision_keys": 96,
+          "baseline_matched_remove_reinsert_ns": 260,
+          "baseline_mismatched_remove_ns": 87,
+          "candidate_matched_remove_reinsert_ns": 250,
+          "candidate_mismatched_remove_ns": 69
+        }
+      ]
+    },
+    "canonical_evidence": {
+      "repository": "hsoliwal/com.synexia",
+      "commit": "45f40a8fd3691e33cf5b7c3913375487c2add94b",
+      "path": "synexia-openrewrite-recipes/crates/m3-intint-conditional-remove-20261030/evidence/product-intlong-20261112/historical-timing-replay.json",
+      "sha256": "dc0e8b933d35170a78a22cdec1b2b15be7b6002f961053228358abdfa8e60b0f"
+    }
+  },
+  "remaining_gates": [
+    "Installed M3JDK21 image and jtreg qualification",
+    "Whole-module/reactor and all-platform qualification",
+    "Representative production performance",
+    "Global migration manifest acceptance: existing 40 validator errors remain",
+    "STRING -> arrays -> collections phase unchanged"
+  ],
+  "qualification": "Completed scoped source-component evidence; migration record remains pending.",
+  "canonical_verification_logs": [
+    {
+      "repository": "hsoliwal/com.synexia",
+      "commit": "45f40a8fd3691e33cf5b7c3913375487c2add94b",
+      "path": "synexia-openrewrite-recipes/crates/m3-intint-conditional-remove-20261030/verification/product-intlong/evidence/final/emitted-maven.log",
+      "sha256": "7b9d1307fa34e86a991d1fec3935b1361889fffa7c6b206b86f44fe9450a18b0"
+    },
+    {
+      "repository": "hsoliwal/com.synexia",
+      "commit": "45f40a8fd3691e33cf5b7c3913375487c2add94b",
+      "path": "synexia-openrewrite-recipes/crates/m3-intint-conditional-remove-20261030/verification/product-intlong/evidence/final/physical-differential.log",
+      "sha256": "8c74cd273eaca3b824e71602589f1e8480fb0264f6714fa327048a27ab605bfb"
+    },
+    {
+      "repository": "hsoliwal/com.synexia",
+      "commit": "45f40a8fd3691e33cf5b7c3913375487c2add94b",
+      "path": "synexia-openrewrite-recipes/crates/m3-intint-conditional-remove-20261030/verification/product-intlong/evidence/final/emitted-api.log",
+      "sha256": "be19253f968dfce93aeb10d9b027044dc120ac5d42a51889f14272594e297e61"
+    }
+  ]
+}

@@ -1,0 +1,125 @@
+{
+  "schema": "M3_FOCUSED_ACTUAL_IMAGE_EVIDENCE_V1",
+  "status": "FOCUSED_RUNTIME_PASS_WITH_UNCHANGED_LEGACY_HOLDS",
+  "created_utc": "2026-10-17T10:20:24.195725+00:00",
+  "baseline_revision": "3bbb4712fb20adba1405741db8457164b9f436f5",
+  "sdk_generated_test_sha256": {
+    "test/jdk/java/lang/String/M3StringRegexDpTest.java": "b9bbf14010da526e41d0e78945e728d5e9aa1cab8ccc732a815a9a14a253ee2a",
+    "test/jdk/java/lang/String/M3StringRegexPreparedBatchTest.java": "465e1002df44eb9453b3d6c45670af4b9a9de90e7fc746d9b82a2c85423be0ef"
+  },
+  "manifest_sha256": {
+    "java": "d05609ee1f486274c7e17380fe977b51050a1a3e1c2e5cdebe4f5df019db4903",
+    "text": "654f67f4ccfc86811d707c23d84514f08eb3dd4638e76df333816623c79b08cc"
+  },
+  "sdk_binding_sha256": "da0202c5af6e772edcf45706aa71d2132634ebffc60432ac1532b2f074ee3cd2",
+  "image_and_harness_rechecked_after_tests": true,
+  "suites": {
+    "critical-final": {
+      "status": "PASS",
+      "exit_code": 0,
+      "seconds": 50.369,
+      "tests": {
+        "M3StringRegexDpTest": {
+          "result": "Passed. Execution successful",
+          "reported_counters": [
+            "M3_STRING_REGEX_DP_PASS|checks=56764",
+            "M3_STRING_REGEX_DP_PASS|checks=56764"
+          ]
+        },
+        "M3StringRegexPreparedBatchTest": {
+          "result": "Passed. Execution successful",
+          "reported_counters": [
+            "M3_STRING_REGEX_PREPARED_BATCH_PASS checks=231612 jniRows=46278 cudaRows=0 requested=JNI",
+            "M3_STRING_REGEX_PREPARED_BATCH_PASS checks=231612 jniRows=46278 cudaRows=0 requested=JNI"
+          ]
+        }
+      }
+    },
+    "critical-final-interpreted": {
+      "status": "PASS",
+      "exit_code": 0,
+      "seconds": 45.088,
+      "tests": {
+        "M3StringRegexDpTest": {
+          "result": "Passed. Execution successful",
+          "reported_counters": [
+            "M3_STRING_REGEX_DP_PASS|checks=56764",
+            "M3_STRING_REGEX_DP_PASS|checks=56763"
+          ]
+        }
+      }
+    },
+    "retained-focused": {
+      "status": "FAIL",
+      "exit_code": 2,
+      "seconds": 69.989,
+      "tests": {
+        "M3StringCanonicalDagTest": {
+          "result": "Passed. Execution successful",
+          "reported_counters": []
+        },
+        "M3StringFactsCompositionTest": {
+          "result": "Passed. Execution successful",
+          "reported_counters": []
+        },
+        "M3StringHierarchicalRegexTest": {
+          "result": "Failed. Execution failed: `main' threw exception: java.lang.NoSuchFieldException: RELATION_ACCESS",
+          "reported_counters": []
+        },
+        "M3StringLeafCursorCanonicalTest": {
+          "result": "Passed. Execution successful",
+          "reported_counters": []
+        },
+        "M3StringOwnerRangeLifetimeTest": {
+          "result": "Failed. Execution failed: `main' threw exception: java.lang.AssertionError: nested content",
+          "reported_counters": []
+        },
+        "M3StringRegexEffectsTest": {
+          "result": "Failed. Execution failed: `main' threw exception: java.lang.NoSuchFieldException: caches",
+          "reported_counters": []
+        },
+        "M3StringRegexNativeBridgeTest": {
+          "result": "Passed. Execution successful",
+          "reported_counters": []
+        },
+        "M3StringRegexPowerTest": {
+          "result": "Passed. Execution successful",
+          "reported_counters": []
+        },
+        "M3StringRegexReuseTest": {
+          "result": "Passed. Execution successful",
+          "reported_counters": []
+        },
+        "M3StringRegexRowPrecomputeTest": {
+          "result": "Failed. Execution failed: `main' threw exception: java.lang.AssertionError: M3 regex precompute oracle mismatch #1",
+          "reported_counters": []
+        },
+        "M3StringRegexUtf16Test": {
+          "result": "Passed. Execution successful",
+          "reported_counters": []
+        }
+      }
+    }
+  },
+  "source_contract_status": "PASS_WITH_BASELINE_HOLD",
+  "source_contract_baseline_holds": [
+    {
+      "gate": "full-string-source-invariant",
+      "status": "UNCHANGED_BASELINE_FAILURE",
+      "baseline_commit": "3bbb4712fb20adba1405741db8457164b9f436f5",
+      "diagnostic": "M3_STRING_INVARIANT_FAIL: M3 adaptive BMH/KMP convergence missing: skip256[pattern.charAt(index) & 255] = length - 1 - index;",
+      "candidate_failure_identical": true,
+      "full_string_stage_accepted": false
+    }
+  ],
+  "legacy_fixture_diagnosis": "diagnosis/legacy-fixture-diagnosis/DIAGNOSIS.json",
+  "legacy_tests_modified": false,
+  "required_jtreg_version_modified": false,
+  "product_core_modified_during_fixture_refinements": false,
+  "full_string_stage_accepted": false,
+  "complete_regex_suite": "NOT_RUN; bounded focused selection only",
+  "cuda_device": "NOT_RUN",
+  "product_throughput": "NOT_RUN",
+  "binary_artifacts_included": false,
+  "recording_scope": "Exact text receipts, executed test sources, source inventories, helpers and JTRs; no full fixture tree, classes, native libraries, image or harness jars."
+}

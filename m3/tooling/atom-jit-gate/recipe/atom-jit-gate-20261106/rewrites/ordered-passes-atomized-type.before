@@ -1,0 +1,3 @@
+        private final List<M3FileAtom> atoms;
+
+        private Atomized(String path, String sourceSha256, List<M3FileAtom> atoms) {

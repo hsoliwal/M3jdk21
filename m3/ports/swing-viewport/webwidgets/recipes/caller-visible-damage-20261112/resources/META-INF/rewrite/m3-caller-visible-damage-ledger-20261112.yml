@@ -1,0 +1,18 @@
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.CallerVisibleDamageLedger20261112
+displayName: Record selected visible-damage generator outputs
+description: Update exactly two generated-source ledger rows while retaining every other byte.
+recipeList:
+  - org.openrewrite.text.FindAndReplace:
+      find: "src/main/java/com/m3/swing/web/model/M3WebLanes.java\tcore/M3WebLanes.java.tmpl\t414d5263113ea721782421c13e2c8a2a0b09b49f13ab6118ae6a1dfb6087ff23\n"
+      replace: "src/main/java/jdk/m3/swing/web/model/M3WebLanes.java\tcore/M3WebLanes.java.tmpl\t70264dc0e1183b6c0dcc82dc998ba027e02f8301072e6b6ae05324ed053805fd\n"
+      regex: false
+      caseSensitive: true
+      filePattern: m3/ports/swing-viewport/webwidgets/GENERATED.tsv
+  - org.openrewrite.text.FindAndReplace:
+      find: "src/test/java/com/m3/swing/web/model/M3WebChecks.java\tcore/M3WebChecks.java.tmpl\t6d8e2f8f103858b86418bf279fc4c0957606daaadc1e92aa1b9ebd06167f3d23\n"
+      replace: "src/test/java/jdk/m3/swing/web/model/M3WebChecks.java\tcore/M3WebChecks.java.tmpl\t47c58002bd3bb75e8eac6d2cb950a54bd1bb760aa17c57ee9467678b3c868ecd\n"
+      regex: false
+      caseSensitive: true
+      filePattern: m3/ports/swing-viewport/webwidgets/GENERATED.tsv

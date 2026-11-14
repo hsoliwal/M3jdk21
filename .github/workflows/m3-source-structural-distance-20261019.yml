@@ -1,0 +1,52 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3JDK21 source-time structural distance
+
+on:
+  pull_request:
+    paths:
+      - 'm3/collections/signal-codegen/**'
+      - 'm3/collections/algorithm-catalog/source-signal-distance-20261019.tsv'
+      - '.github/workflows/m3-source-structural-distance-20261019.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  java21-structural-distance:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Source-diff hygiene
+        if: github.event_name == 'pull_request'
+        run: git diff --check "${{ github.event.pull_request.base.sha }}..HEAD"
+      - name: Existing real JSR-269 compiler/source contract
+        run: bash m3/collections/signal-codegen/verify.sh
+      - name: Independent extreme-weight differential contract
+        shell: bash
+        run: |
+          set -euo pipefail
+          work="$(mktemp -d)"
+          trap 'rm -rf "$work"' EXIT
+          owner=m3/collections/signal-codegen/src/main/java/jdk/m3/collections/sortable/StructuralSignals.java
+          contract=m3/collections/signal-codegen/src/test/java/jdk/m3/collections/sortable/StructuralSignalsExtremeWeightsContract.java
+          javac --release 21 -proc:none -Xlint:all -Werror -d "$work" "$owner" "$contract"
+          java -ea -cp "$work" jdk.m3.collections.sortable.StructuralSignalsExtremeWeightsContract
+      - name: Exact Synexia source-postimage custody
+        shell: bash
+        run: |
+          set -euo pipefail
+          printf '%s\n' \
+            '925ab2f5c83e47572cd43fef58deb38285148e1b4190bd5853fa65700288188c  m3/collections/signal-codegen/src/main/java/jdk/m3/collections/sortable/StructuralSignals.java' \
+            'c1a4a5a096faba29c56e062a4732052238bdab828109e38023168a0cb620e00d  m3/collections/signal-codegen/src/test/java/jdk/m3/collections/sortable/StructuralSignalsExtremeWeightsContract.java' | sha256sum -c -

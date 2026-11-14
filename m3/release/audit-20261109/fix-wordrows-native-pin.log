@@ -1,0 +1,20 @@
+# wordrows-native pin repair evidence (2026-11-09)
+# candidate fe51a3c9ff2f (tree 30651922a8b3); WSL2 Ubuntu 24.04 x86_64; cc = gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0
+# JDK: Temurin jdk-21+35 (sha256 82f64c53acaa...); script: the workflow's own qualify step, extracted verbatim
+
+## pin history (git)
+90da00519d500df932bfde60b4b023eb4e6b300f added the job: run-wordrows-proof.sh bytes=958 gitBlob=610c156c8768 sha256=6a1ccfafa954 (consistent)
+c9a1d41baa (JDK naming v2, 2026-11-06) rewrote the script to 952 bytes and resealed gitBlob=09c9dcbd2d09 and sha256=46afcaf3c6fa, but left bytes=958
+current file: bytes=952 gitBlob=09c9dcbd2d090c311b2e90d9ab06ca381435d599 sha256=46afcaf3c6fa678257e159d4045393a05683e8c2f4b5394dbccddd576efbc668
+
+## runs
+== original pins (2ee8d49cf126): python3 -I -S -B <workflow wordrows-native qualify step>
+  File "/mnt/f/m3-scratch/m3jdk-rel/fix2/qualify-wordrows.py", line 12, in sources
+    if found[name]!=pin:raise ValueError("native source drift: "+name)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: native source drift: m3/lexicon/run-wordrows-proof.sh
+exit=1
+== fixed pins (14fe94b4b6df): python3 -I -S -B <workflow wordrows-native qualify step>
+{"status": "PASS_ORIGINAL_WORDROWS_LOADED_JNI_FOUR_MODES", "error": null, "exit": 0}
+exit=0
+4

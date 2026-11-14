@@ -1,0 +1,45 @@
+{
+  "schema": "M3JDK21_STRING_REPRESENTATION_CONSUMERS_INTAKE_V1",
+  "targetRepository": "hsoliwal/M3jdk21",
+  "targetRevision": "985aadda29756c0fe988d7b70c8240d4eb554dc7",
+  "canonicalRecipeRepository": "hsoliwal/com.synexia",
+  "canonicalRecipe": "com.synexia.rewrite.M3Jdk21StringHistoryConvergence",
+  "state": "PENDING_CONSUMER_REVIEW",
+  "consumers": [
+    {
+      "path": "src/java.base/share/classes/java/lang/String.java",
+      "gitBlob": "80d1953d9198eadc54470aba0731262531321875",
+      "sha256": "eed88205feda9f64b03515603e5807e3f83961ddeb99dae4ef84bd2034d6f568",
+      "role": "PUBLIC_STRING_BRIDGE",
+      "reviewState": "INVENTORIED_NOT_BEHAVIORALLY_PROVED"
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/AbstractStringBuilder.java",
+      "gitBlob": "ca697e5da074fabd6368aa79aceb9d40073ca661",
+      "sha256": "a5e7213ca951fab21d6db842804a8abd79e90f924ec672de6c4c455cdebb47d5",
+      "role": "BUILDER_BULK_INTEROP",
+      "reviewState": "INVENTORIED_NOT_BEHAVIORALLY_PROVED"
+    },
+    {
+      "path": "src/java.base/share/native/libjava/String.c",
+      "gitBlob": "69a57659e74c6433491932e64f15bc037e887d81",
+      "sha256": "ee9d9bfa986259600d6fe95e21e3cb904a4f6541ce24c6391bc50715c6a054ef",
+      "role": "JNI_SHADOW_BOUNDARY",
+      "reviewState": "INVENTORIED_NOT_BEHAVIORALLY_PROVED"
+    }
+  ],
+  "requiredNextEvidence": [
+    "recipe-backed complete representation-consumer inventory",
+    "current-master source and receipt replay",
+    "matched-runtime JNI byte/char shadow lifetime tests",
+    "normal, Xint, and tiered execution differential results"
+  ],
+  "claims": {
+    "completeConsumerInventory": "PENDING",
+    "representationBehaviorProved": false,
+    "jniShadowLifetimeProved": false,
+    "javaBaseSourceChangedByThisReceipt": false,
+    "runtimePromotionAuthorized": false
+  },
+  "promotion": "BLOCKED"
+}

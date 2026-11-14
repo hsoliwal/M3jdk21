@@ -1,0 +1,11 @@
+request	status_this_increment	boundary
+Shared actual-javac M3AST and compiler projections	EXISTING_SOURCE_INSPECTED	PR1086 merged; not rebuilt in this increment
+Optional Maven Gradle Ant OpenRewrite build support	EXISTING_SOURCE_INSPECTED_PARTIAL	No new fork/source distribution or JMOD qualification
+Lazy isolated MIndexAST cache and pressure reload	NO_NEW_CHANGE	No general javac-heap bound claimed
+L0 facts atoms L1 file L2 package L3 module L4 project L5 repository	RETAINED_REQUIREMENT	No new hierarchical intake qualification
+M3File Jackson XML object mapping	RETAINED_REQUIREMENT	No parser or object-mapper rewrite in this increment
+Dynamic primitive arrays offsets indices masks	IMPLEMENTED_AND_SELECTED_TESTED	Two existing Java/C product files changed
+Filtered/sorted immutable projection composition	ACTUAL_EXISTING_CONSUMERS_TESTED	No payload-owner replacement
+Live filtered collection/sorted wrappers	UNCHANGED	No live predicate/mutation/comparator contract conversion
+Reusable Maven recipe	DIRECT_JAVA_RECIPE_QUALIFIED	Actual Maven lifecycle unavailable locally
+Whole SDK/JDK receiving	HOLD	No phase advancement; full source-inventory/module/JDK/platform gates pending

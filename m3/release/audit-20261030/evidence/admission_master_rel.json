@@ -1,0 +1,123 @@
+{
+  "blockers": [
+    {
+      "detail": "ahead=15899 parent=0ab28ea86ccb2b7c1997e662d1555ece229c05de",
+      "name": "git.single_release_commit"
+    }
+  ],
+  "checks": [
+    {
+      "detail": "",
+      "name": "file:M3-SYNEXIA-NOTICE.md",
+      "status": "PASS"
+    },
+    {
+      "detail": "",
+      "name": "file:M3-SYNEXIA-RIGHTS.md",
+      "status": "PASS"
+    },
+    {
+      "detail": "",
+      "name": "file:M3-SYNEXIA-AUTHORS.md",
+      "status": "PASS"
+    },
+    {
+      "detail": "",
+      "name": "file:LICENSE-M3-APACHE-2.0.txt",
+      "status": "PASS"
+    },
+    {
+      "detail": "",
+      "name": "file:m3/README.md",
+      "status": "PASS"
+    },
+    {
+      "detail": "",
+      "name": "file:m3/release/release-contract.json",
+      "status": "PASS"
+    },
+    {
+      "detail": "",
+      "name": "file:m3/release/README.md",
+      "status": "PASS"
+    },
+    {
+      "detail": "",
+      "name": "file:m3/release/BENCHMARK_AND_COMPATIBILITY_SPEC.md",
+      "status": "PASS"
+    },
+    {
+      "detail": "",
+      "name": "contract.schema",
+      "status": "PASS"
+    },
+    {
+      "detail": "",
+      "name": "contract.priority_order",
+      "status": "PASS"
+    },
+    {
+      "detail": "",
+      "name": "contract.claim_policy",
+      "status": "PASS"
+    },
+    {
+      "detail": "",
+      "name": "contract.unqualified_claims",
+      "status": "PASS"
+    },
+    {
+      "detail": "",
+      "name": "rights.openjdk_boundary",
+      "status": "PASS"
+    },
+    {
+      "detail": "",
+      "name": "rights.reservation",
+      "status": "PASS"
+    },
+    {
+      "detail": "",
+      "name": "claims.current_string_boundary",
+      "status": "PASS"
+    },
+    {
+      "detail": "",
+      "name": "claims.no_unproved_performance",
+      "status": "PASS"
+    },
+    {
+      "detail": "",
+      "name": "receiving_sequence",
+      "status": "PASS"
+    },
+    {
+      "detail": "890adb6410dab4606a4f26a942aed02fb2f55387",
+      "name": "git.upstream_baseline",
+      "status": "PASS"
+    },
+    {
+      "detail": "5860598b515885ebc2275f6552d9a5a1348fdb15",
+      "name": "git.head",
+      "status": "PASS"
+    },
+    {
+      "detail": "8273f398a4cce73ef7c897305722f590d05a0f80",
+      "name": "git.tree",
+      "status": "PASS"
+    },
+    {
+      "detail": "890adb6410dab4606a4f26a942aed02fb2f55387",
+      "name": "git.merge_base",
+      "status": "PASS"
+    },
+    {
+      "detail": "ahead=15899 parent=0ab28ea86ccb2b7c1997e662d1555ece229c05de",
+      "name": "git.single_release_commit",
+      "status": "BLOCK"
+    }
+  ],
+  "mode": "release",
+  "release_ready": false,
+  "schema": "M3_RELEASE_ADMISSION_RESULT_V1"
+}

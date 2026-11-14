@@ -1,0 +1,9 @@
+mode	batch	runs	atoms	gated_before	gated_after	reasons_before	reasons_after	runs_exit_0
+background	1	3	169	92	50	big=8,hot=82,toobig=2	big=34,medium=8,toobig=8	6/6
+background	2	3	169	102	45	big=12,hot=81,medium=2,toobig=7	big=31,medium=2,toobig=12	6/6
+background	3	3	169	97	46	big=7,hot=81,medium=2,toobig=7	big=34,medium=2,toobig=10	6/6
+background	4	3	169	109	45	big=10,hot=81,medium=6,toobig=12	big=37,toobig=8	6/6
+background	5	3	169	94	42	big=6,hot=81,medium=2,toobig=5	big=28,medium=2,toobig=12	6/6
+xbatch	1	3	169	132	168	hot=75,medium=9,toobig=48	big=69,medium=45,toobig=54	6/6
+xbatch	2	3	169	132	168	hot=75,medium=9,toobig=48	big=69,medium=45,toobig=54	6/6
+xbatch	3	3	169	132	168	hot=75,medium=9,toobig=48	big=69,medium=45,toobig=54	6/6

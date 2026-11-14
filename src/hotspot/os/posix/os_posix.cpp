@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1999, 2023, Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 1999, 2024, Oracle and/or its affiliates. All rights reserved.
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
  *
  * This code is free software; you can redistribute it and/or modify it
@@ -50,6 +50,7 @@
 #include "utilities/vmError.hpp"
 #ifdef AIX
 #include "loadlib_aix.hpp"
+#include "os_aix.hpp"
 #endif
 #ifdef LINUX
 #include "os_linux.hpp"
@@ -104,49 +105,63 @@ static int clock_tics_per_sec = 100;
 size_t os::_os_min_stack_allowed = PTHREAD_STACK_MIN;
 
 // Check core dump limit and report possible place where core can be found
-void os::check_dump_limit(char* buffer, size_t bufferSize) {
+void os::check_core_dump_prerequisites(char* buffer, size_t bufferSize, bool check_only) {
+  stringStream buf(buffer, bufferSize);
   if (!FLAG_IS_DEFAULT(CreateCoredumpOnCrash) && !CreateCoredumpOnCrash) {
-    jio_snprintf(buffer, bufferSize, "CreateCoredumpOnCrash is disabled from command line");
-    VMError::record_coredump_status(buffer, false);
-    return;
-  }
-
-  int n;
-  struct rlimit rlim;
-  bool success;
-
-  char core_path[PATH_MAX];
-  n = get_core_path(core_path, PATH_MAX);
-
-  if (n <= 0) {
-    jio_snprintf(buffer, bufferSize, "core.%d (may not exist)", current_process_id());
-    success = true;
-#ifdef LINUX
-  } else if (core_path[0] == '"') { // redirect to user process
-    jio_snprintf(buffer, bufferSize, "Core dumps may be processed with %s", core_path);
-    success = true;
-#endif
-  } else if (getrlimit(RLIMIT_CORE, &rlim) != 0) {
-    jio_snprintf(buffer, bufferSize, "%s (may not exist)", core_path);
-    success = true;
+    buf.print("CreateCoredumpOnCrash is disabled from command line");
+    VMError::record_coredump_status(buf.freeze(), false);
   } else {
-    switch(rlim.rlim_cur) {
-      case RLIM_INFINITY:
-        jio_snprintf(buffer, bufferSize, "%s", core_path);
-        success = true;
-        break;
-      case 0:
-        jio_snprintf(buffer, bufferSize, "Core dumps have been disabled. To enable core dumping, try \"ulimit -c unlimited\" before starting Java again");
-        success = false;
-        break;
-      default:
-        jio_snprintf(buffer, bufferSize, "%s (max size " UINT64_FORMAT " k). To ensure a full core dump, try \"ulimit -c unlimited\" before starting Java again", core_path, uint64_t(rlim.rlim_cur) / K);
-        success = true;
-        break;
+    struct rlimit rlim;
+    bool success = true;
+    bool warn = true;
+    char core_path[PATH_MAX];
+    if (get_core_path(core_path, PATH_MAX) <= 0) {
+      // In the warning message, let the user know.
+      if (check_only) {
+        buf.print("the core path couldn't be determined. It commonly defaults to ");
+      }
+      buf.print("core.%d%s", current_process_id(), check_only ? "" : " (may not exist)");
+#ifdef LINUX
+    } else if (core_path[0] == '"') { // redirect to user process
+      if (check_only) {
+        buf.print("core dumps may be further processed by the following: ");
+      } else {
+        buf.print("Determined by the following: ");
+      }
+      buf.print("%s", core_path);
+#endif
+    } else if (getrlimit(RLIMIT_CORE, &rlim) != 0) {
+      if (check_only) {
+        buf.print("the rlimit couldn't be determined. If resource limits permit, the core dump will be located at ");
+      }
+      buf.print("%s%s", core_path, check_only ? "" : " (may not exist)");
+    } else {
+      switch(rlim.rlim_cur) {
+        case RLIM_INFINITY:
+          buf.print("%s", core_path);
+          warn = false;
+          break;
+        case 0:
+          buf.print("%s dumps have been disabled. To enable core dumping, try \"ulimit -c unlimited\" before starting Java again", check_only ? "core" : "Core");
+          success = false;
+          break;
+        default:
+          if (check_only) {
+            buf.print("core dumps are constrained ");
+          } else {
+             buf.print( "%s ", core_path);
+          }
+          buf.print( "(max size " UINT64_FORMAT " k). To ensure a full core dump, try \"ulimit -c unlimited\" before starting Java again", uint64_t(rlim.rlim_cur) / K);
+          break;
+      }
+    }
+    const char* result = buf.freeze();
+    if (!check_only) {
+      VMError::record_coredump_status(result, success);
+    } else if (warn) {
+      warning("CreateCoredumpOnCrash specified, but %s", result);
     }
   }
-
-  VMError::record_coredump_status(buffer, success);
 }
 
 int os::get_native_stack(address* stack, int frames, int toSkip) {
@@ -191,6 +206,17 @@ size_t os::lasterror(char *buf, size_t len) {
   ::strncpy(buf, s, n);
   buf[n] = '\0';
   return n;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+// breakpoint support
+
+void os::breakpoint() {
+  BREAKPOINT;
+}
+
+extern "C" void breakpoint() {
+  // use debugger to set breakpoint here
 }
 
 // Return true if user is running as root.
@@ -293,6 +319,7 @@ static char* reserve_mmapped_memory(size_t bytes, char* requested_addr) {
 }
 
 static int util_posix_fallocate(int fd, off_t offset, off_t len) {
+  static_assert(sizeof(off_t) == 8, "Expected Large File Support in this file");
 #ifdef __APPLE__
   fstore_t store = { F_ALLOCATECONTIG, F_PEOFPOSMODE, 0, len };
   // First we try to get a continuous chunk of disk space
@@ -733,34 +760,29 @@ void os::dll_unload(void *lib) {
   if (l_path == nullptr) {
     l_path = "<not available>";
   }
-  int res = ::dlclose(lib);
 
-  if (res == 0) {
+  char ebuf[1024];
+  bool res = os::pd_dll_unload(lib, ebuf, sizeof(ebuf));
+
+  if (res) {
     Events::log_dll_message(nullptr, "Unloaded shared library \"%s\" [" INTPTR_FORMAT "]",
                             l_path, p2i(lib));
     log_info(os)("Unloaded shared library \"%s\" [" INTPTR_FORMAT "]", l_path, p2i(lib));
   } else {
-    const char* error_report = ::dlerror();
-    if (error_report == nullptr) {
-      error_report = "dlerror returned no error description";
-    }
-
     Events::log_dll_message(nullptr, "Attempt to unload shared library \"%s\" [" INTPTR_FORMAT "] failed, %s",
-                            l_path, p2i(lib), error_report);
+                            l_path, p2i(lib), ebuf);
     log_info(os)("Attempt to unload shared library \"%s\" [" INTPTR_FORMAT "] failed, %s",
-                  l_path, p2i(lib), error_report);
+                  l_path, p2i(lib), ebuf);
   }
-  // Update the dll cache
-  AIX_ONLY(LoadedLibraries::reload());
   LINUX_ONLY(os::free(l_pathdup));
 }
 
 jlong os::lseek(int fd, jlong offset, int whence) {
-  return (jlong) BSD_ONLY(::lseek) NOT_BSD(::lseek64)(fd, offset, whence);
+  return (jlong) ::lseek(fd, offset, whence);
 }
 
 int os::ftruncate(int fd, jlong length) {
-   return BSD_ONLY(::ftruncate) NOT_BSD(::ftruncate64)(fd, length);
+   return ::ftruncate(fd, length);
 }
 
 const char* os::get_current_directory(char *buf, size_t buflen) {
@@ -830,6 +852,14 @@ void os::exit(int num) {
 
 void os::_exit(int num) {
   ALLOW_C_FUNCTION(::_exit, ::_exit(num);)
+}
+
+bool os::dont_yield() {
+  return DontYieldALot;
+}
+
+void os::naked_yield() {
+  sched_yield();
 }
 
 // Builds a platform dependent Agent_OnLoad_<lib_name> function name

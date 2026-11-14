@@ -1,0 +1,5 @@
+measurement	variant	rows	value	unit	detail
+tree-restore	treepath-hash-4247	1000000	554.608	ms per restore (median of 5)	600 expanded paths; 199991 items materialized; 112016 KB allocated
+tree-restore	m3-path-trie	1000000	642.048	ms per restore (median of 5)	600 expanded paths; 1000 items materialized; 20291 KB allocated
+tree-restore	treepath-hash-4247	1000000	797.447	ms per restore (median of 5)	600 expanded paths; 199991 items materialized; 101633 KB allocated
+tree-restore	m3-path-trie	1000000	1026.399	ms per restore (median of 5)	600 expanded paths; 1000 items materialized; 20101 KB allocated

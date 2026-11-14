@@ -1,0 +1,43 @@
+{
+  "schema": "m3.full-public-suite-before-after/v1",
+  "sourceHeadBeforeTestContract": "41dbfee857379dc7eaee961d37332dc89b83f37d",
+  "fullSourceInputs": "full-module/FULL_SUITE_INPUTS.json",
+  "sourceManifestSHA256": "bb88e30d2bf58ea0cb1fdf5ea19f79393f9e0f56985b56cd95e0cabfd18e7b00",
+  "compiler": {
+    "productionSources": 307,
+    "productionClasses": 357,
+    "testSources": 151,
+    "testClasses": 192,
+    "diagnostics": 0
+  },
+  "publicBefore": {
+    "found": 375,
+    "successful": 374,
+    "failed": 1,
+    "receipt": "6216f42602ba44a940d58981096eb9fed27723974c49a27d4a2ad69f5d441c79"
+  },
+  "publicAfter": {
+    "found": 375,
+    "successful": 375,
+    "failed": 0,
+    "receipt": "d0dc8022cb18474cc455ceed94b6096922b4d0b231fd166d66eb811d8bbd60b9"
+  },
+  "onlyTestHelperChange": "itemDamage precondition requires positive width and height; every other source byte and all visible-item assertions unchanged",
+  "actualGeneratedHelperSHA256": "47c58002bd3bb75e8eac6d2cb950a54bd1bb760aa17c57ee9467678b3c868ecd",
+  "owningTemplateSHA256": "acf3104ac210791b3490958f804ad9863529a7ab473e9cf50d665ddc09fb2d6e",
+  "ledgerSHA256": "1085e4679fb7624127d08d27bf62a07c5daeff7c0482e47c9b1cbd4072406a8e",
+  "original18FixtureSHA256": "ba22b2bf42b059ab93d906383d52c16b96be6f2cdbd3e49bade4ed3d473e8522",
+  "oracleAfter": {
+    "found": 18,
+    "successful": 12,
+    "failed": 6,
+    "skipped": 0,
+    "aborted": 0,
+    "exitCode": 1,
+    "receipt": "b1aee46360673cdf158fc2de61ef9e2fbf1e376f0893883b6ee3b5f0b1561846"
+  },
+  "limits": "Headless Java Console1.10.1; not hosted1.10.2/native/JNI/platform/performance/full-domain admission",
+  "native": "Every executed job has terminal/all-owned-handles-closed/postGuardError-null receipt except preserved historical resource stops",
+  "generationCalls": 0,
+  "productionPromotion": false
+}

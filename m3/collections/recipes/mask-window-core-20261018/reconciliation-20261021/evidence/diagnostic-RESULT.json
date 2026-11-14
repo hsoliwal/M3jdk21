@@ -1,0 +1,59 @@
+[
+  {
+    "file": "M3IndexMaskCompactor.java",
+    "argv": [
+      "git",
+      "merge-file",
+      "--stdout",
+      "-L",
+      "master-1e5056b",
+      "-L",
+      "merge-base-f29b0af",
+      "-L",
+      "pr1280-05a37a8",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/master/M3IndexMaskCompactor.java",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/original/before/M3IndexMaskCompactor.java",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/original/src/main/resources/m3-mask-window/M3IndexMaskCompactor.java.txt"
+    ],
+    "exit": 1,
+    "conflict_regions": 1
+  },
+  {
+    "file": "m3_index_mask_compactor.c",
+    "argv": [
+      "git",
+      "merge-file",
+      "--stdout",
+      "-L",
+      "master-1e5056b",
+      "-L",
+      "merge-base-f29b0af",
+      "-L",
+      "pr1280-05a37a8",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/master/m3_index_mask_compactor.c",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/original/before/m3_index_mask_compactor.c",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/original/src/main/resources/m3-mask-window/m3_index_mask_compactor.c.txt"
+    ],
+    "exit": 1,
+    "conflict_regions": 1
+  },
+  {
+    "diagnostic": "original_recipe_current_master",
+    "argv": [
+      "/workspace/scratch/6a76dfb8b5f4/toolchains/jdk-21.0.12.1+1/bin/java",
+      "-cp",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/proof-v1/recipe-classes",
+      "com.synexia.rewrite.SealReplay",
+      "apply",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/reconciliation-diagnostics/stale-target",
+      "/workspace/scratch/01c7abe99733/ci-audit/conflict/original/src/main/resources/m3-mask-window"
+    ],
+    "exit": 1,
+    "prewrite_refusal": true,
+    "unchanged": true,
+    "sha256": {
+      "m3/collections/src/main/native/collections/m3_index_mask_compactor.c": "ed13463a6972bd014a861635987e8aa6214bf7516789c4f41d4ec3d69692fe73",
+      "m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskCompactor.java": "226b09d8996bf6b2a952c7341495a1f6dfbec13f8bb605996b1c26b93772e29f"
+    }
+  }
+]

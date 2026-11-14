@@ -1,0 +1,26 @@
+{
+  "schema": "M3_RUNTIME_FACADE_ORIGINAL_CLOSURE_COMPILE_V1",
+  "command": [
+    "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/javac",
+    "-g:none",
+    "-proc:none",
+    "-Xlint:all",
+    "-Xlint:-this-escape",
+    "-Werror",
+    "-Xdoclint:all/protected",
+    "-Xdoclint/package:java.*,javax.*",
+    "--patch-module",
+    "java.base=/workspace/scratch/2b4d1cb957a7/collection-refinement/runtime-facade/pinned-input/src/java.base/share/classes",
+    "-d",
+    "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/runtime-facade-baseline-compile/classes",
+    "/workspace/scratch/2b4d1cb957a7/collection-refinement/runtime-facade/pinned-input/src/java.base/share/classes/java/lang/Runtime.java",
+    "/workspace/scratch/2b4d1cb957a7/collection-refinement/runtime-facade/pinned-input/src/java.base/share/classes/java/util/concurrent/Executor.java",
+    "/workspace/scratch/2b4d1cb957a7/collection-refinement/runtime-facade/pinned-input/src/java.base/share/classes/java/util/concurrent/ExecutorService.java",
+    "/workspace/scratch/2b4d1cb957a7/collection-refinement/runtime-facade/pinned-input/src/java.base/share/classes/java/util/concurrent/ProgressMonitor.java",
+    "/workspace/scratch/2b4d1cb957a7/collection-refinement/runtime-facade/pinned-input/src/java.base/share/classes/java/util/concurrent/ProgressMonitors.java"
+  ],
+  "exit_code": 0,
+  "elapsed_seconds": 3.0432162284851074,
+  "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "source_manifest_sha256": "e918ae76ae503b737b15f9a429d5eaf7a0ed9e7001f00d1d97f3a61724c21ca0"
+}

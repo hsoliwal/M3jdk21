@@ -1,0 +1,8 @@
+# SPDX-License-Identifier: Apache-2.0
+# Census rows of group G6 (leaf L081, crate m3-longmap-merge-loss-20261030) on gate base feae0743e6c25f826d7f289c0b0acca19ff65e62; owner m3/collections/src/main/java/jdk/m3/collections/M3LongLongHashMap.java blob 730d0baebca6 (unchanged up to the push base). Census statuses carried from S:/m3-scratch/eb-conv/census (pins develop ca1aafc4d94f / master 80743e25b9e6); the owner blob is the same at both masters for the rows below.
+leaf	crate	type	census_status	verdict	note
+L081	m3-longmap-merge-loss-20261030	M3LongLongHashMap (manifest postimage)	APPLIED_SUPERSET 8/8	ALREADY	composed postimage present: staged failure-atomic rehash + restored addTo(long,long)
+L081	m3-longmap-merge-loss-20261030	M3LongLongHashMap (history-pr2127 snapshot)	PARTIAL 193/206 LOWCONF_NOPRE	NOT_A_POSTIMAGE	the historical #2127 donor blob the crate composed from; the 13 absent lines are its pre-staged rehash
+L081	m3-longmap-merge-loss-20261030	M3LongLongHashMapAddToTest	APPLIED	ALREADY	-
+L081	m3-longmap-merge-loss-20261030	M3LongMapDeliveryWitness	NO_OWNER	DECLINED	git-subprocess receipt witness of the donor (pinned #2127 merge parents, pre-rename paths), not a jdk.m3.collections owner
+L081	m3-longmap-merge-loss-20261030	M3LongMapRecoverySmoke, M3LongLongMapSharedTrace (crate tests/)	oracle	PORTED (tests)	reproduce the crate figures on the unedited owner

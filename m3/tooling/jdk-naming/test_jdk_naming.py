@@ -1,0 +1,501 @@
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
+# SPDX-License-Identifier: Apache-2.0
+"""Real-Git fixtures for jdk_naming.py: packages, types, constants and paths move to JDK naming; copyright lines,
+links to the hsoliwal/com.synexia repository and lineage files are untouched; a collision refuses the plan; a second
+plan after apply is empty (fixed point)."""
+from __future__ import annotations
+
+import contextlib
+import importlib.util
+import io
+import json
+import re
+import subprocess
+import tempfile
+import unittest
+from pathlib import Path
+
+SPEC = importlib.util.spec_from_file_location("jdk_naming", Path(__file__).with_name("jdk_naming.py"))
+jn = importlib.util.module_from_spec(SPEC)
+SPEC.loader.exec_module(jn)
+
+JAVA = """// Copyright 2026 Synexia contributors
+package com.synexia.m3.x;
+
+import com.synexia.util.SynexiaHelper;
+
+/** See https://github.com/hsoliwal/com.synexia for the donor. */
+public final class SynexiaFoo {
+    static final String TOKEN = System.getenv("SYNEXIA_TOKEN");
+    String tool = "synexia-import";
+}
+"""
+
+
+class JdkNamingTest(unittest.TestCase):
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory()
+        self.root = Path(self.tmp.name)
+        subprocess.run(["git", "init", "-q", str(self.root)], check=True)
+        subprocess.run(["git", "-C", str(self.root), "config", "core.autocrlf", "false"], check=True)
+
+    def tearDown(self):
+        self.tmp.cleanup()
+
+    def put(self, rel, text):
+        path = self.root / rel
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(text, encoding="utf-8", newline="\n")
+        subprocess.run(["git", "-C", str(self.root), "add", rel], check=True)
+
+    def test_rename_moves_and_rewrites_and_reaches_a_fixed_point(self):
+        self.put("m3/src/com/synexia/m3/x/SynexiaFoo.java", JAVA)
+        self.put("m3/synexia-import/run.sh", "export SYNEXIA_HOME=/opt\n")
+        self.put("m3/x/provenance.json", '{"source": "com.synexia.m3.x.SynexiaFoo"}\n')
+        result = jn.plan(self.root)
+        self.assertFalse(result["refusals"])
+        jn.apply(self.root, result)
+        moved = self.root / "m3/src/jdk/internal/m3/x/M3Foo.java"
+        self.assertTrue(moved.is_file())
+        text = moved.read_text(encoding="utf-8")
+        self.assertIn("package jdk.internal.m3.x;", text)
+        self.assertIn("import jdk.internal.m3.util.M3Helper;", text)
+        self.assertIn("public final class M3Foo", text)
+        self.assertIn('getenv("M3_TOKEN")', text)
+        self.assertIn('"m3-import"', text)
+        self.assertIn("// Copyright 2026 Synexia contributors", text)
+        self.assertIn("https://github.com/hsoliwal/com.synexia", text)
+        self.assertTrue((self.root / "m3/m3-import/run.sh").is_file())
+        self.assertIn("M3_HOME", (self.root / "m3/m3-import/run.sh").read_text(encoding="utf-8"))
+        self.assertIn("com.synexia.m3.x.SynexiaFoo", (self.root / "m3/x/provenance.json").read_text(encoding="utf-8"))
+        again = jn.plan(self.root)
+        self.assertEqual((again["moves"], again["rewrites"]), ([], []))
+
+    def test_dependencies_and_group_ids_are_not_renamed(self):
+        self.put("m3/x/pom.xml", "<project><groupId>com.synexia.m3</groupId>\n"
+                 "<dependency><groupId>com.synexia.m3</groupId></dependency>\n</project>\n")
+        self.put(".github/workflows/w.yml", "token: ${{ secrets.SYNEXIA_READ_TOKEN }}\nenv: SYNEXIA_MODE\n")
+        self.put("m3/x/Use.java", "class Use { String p = \"com.synexia.m3\"; }\n")
+        jn.apply(self.root, jn.plan(self.root))
+        pom = (self.root / "m3/x/pom.xml").read_text(encoding="utf-8")
+        self.assertEqual(pom.count("<groupId>com.synexia.m3</groupId>"), 2)
+        workflow = (self.root / ".github/workflows/w.yml").read_text(encoding="utf-8")
+        self.assertIn("secrets.SYNEXIA_READ_TOKEN", workflow)
+        self.assertIn("env: M3_MODE", workflow)
+        self.assertIn('"jdk.internal.m3"', (self.root / "m3/x/Use.java").read_text(encoding="utf-8"))
+
+    def test_kept_spans_leave_the_rest_of_their_line_renamed(self):
+        self.put("m3/x/pom.xml", "<dependency><groupId>com.synexia</groupId><artifactId>synexia-x</artifactId></dependency>\n")
+        self.put("m3/x/Note.java", "// see https://github.com/hsoliwal/com.synexia/blob/x/SynexiaFoo.java; use SynexiaBar\n")
+        jn.apply(self.root, jn.plan(self.root))
+        pom = (self.root / "m3/x/pom.xml").read_text(encoding="utf-8")
+        self.assertIn("<groupId>com.synexia</groupId><artifactId>m3-x</artifactId>", pom)
+        note = (self.root / "m3/x/Note.java").read_text(encoding="utf-8")
+        self.assertIn("https://github.com/hsoliwal/com.synexia/blob/x/SynexiaFoo.java", note)
+        self.assertIn("use M3Bar", note)
+
+    def test_second_pass_folders_uppercase_words_and_com_m3(self):
+        self.put("m3/vendor/synexia/lib/Tool.java", "// the Synexia tool, see vendor/synexia/lib and Synexia-NOTICE\n")
+        self.put("m3/inv/SYNEXIA-LLM-FIRST-2.json", '{"id": "SYNEXIA-LLM-FIRST-2"}\n')
+        self.put("Synexia-NOTICE", "notice\n")
+        self.put("M3-SYNEXIA-NOTICE.md", "notice\n")
+        self.put("m3/collections/src/com/m3/collections/A.java", "package com.m3.collections;\nimport com.m3.arrays.B;\n")
+        self.put("m3/collections/pom.xml", "<project><groupId>com.m3.tooling</groupId></project>\n")
+        jn.apply(self.root, jn.plan(self.root))
+        tool = (self.root / "m3/vendor/m3/lib/Tool.java").read_text(encoding="utf-8")
+        self.assertIn("// the Synexia tool, see vendor/m3/lib and Synexia-NOTICE", tool)
+        self.assertIn('"M3-LLM-FIRST-2"', (self.root / "m3/inv/M3-LLM-FIRST-2.json").read_text(encoding="utf-8"))
+        self.assertTrue((self.root / "Synexia-NOTICE").is_file())
+        self.assertTrue((self.root / "M3-SYNEXIA-NOTICE.md").is_file())
+        self.assertEqual(jn.target_path("m3/x/synexia-openrewrite-recipes/licenses/Synexia-LICENSE"),
+                         "m3/x/m3-openrewrite-recipes/licenses/Synexia-LICENSE")
+        self.assertEqual(jn.rewrite_line("python3 m3/compatibility/check-synexia.py; dependency_on_synexia", {}),
+                         "python3 m3/compatibility/check-m3.py; dependency_on_synexia")
+        moved = (self.root / "m3/collections/src/jdk/m3/collections/A.java").read_text(encoding="utf-8")
+        self.assertIn("package jdk.m3.collections;", moved)
+        self.assertIn("import jdk.m3.arrays.B;", moved)
+        self.assertIn("<groupId>com.m3.tooling</groupId>", (self.root / "m3/collections/pom.xml").read_text(encoding="utf-8"))
+        again = jn.plan(self.root)
+        self.assertEqual((again["moves"], again["rewrites"]), ([], []))
+
+    def test_doubled_m3_prefixes_from_pass_one_collapse(self):
+        self.put(".github/workflows/m3-m3-family.yml", "run: python check_m3_m3_family.py M3_M3_MODE m3-m3-m3-x\n")
+        self.put("m3/x/Note.java", "// the Synexia M3 family, SynexiaM3Owner\n")
+        jn.apply(self.root, jn.plan(self.root))
+        workflow = (self.root / ".github/workflows/m3-family.yml").read_text(encoding="utf-8")
+        self.assertEqual(workflow, "run: python check_m3_family.py M3_MODE m3-x\n")
+        self.assertIn("// the Synexia M3 family, M3Owner", (self.root / "m3/x/Note.java").read_text(encoding="utf-8"))
+        again = jn.plan(self.root)
+        self.assertEqual((again["moves"], again["rewrites"]), ([], []))
+
+    def test_a_moved_file_and_every_reference_to_it_agree(self):
+        self.put("m3/compatibility/check_synexia_full_family.py", "print('ok')\n")
+        self.put("m3/x/AcmeSynexiaOwner.java", "class AcmeSynexiaOwner {}\n")
+        self.put(".github/workflows/w.yml", "run: python m3/compatibility/check_synexia_full_family.py "
+                 "m3/x/AcmeSynexiaOwner.java\n")
+        jn.apply(self.root, jn.plan(self.root))
+        workflow = (self.root / ".github/workflows/w.yml").read_text(encoding="utf-8")
+        for reference in workflow.split()[2:]:
+            self.assertTrue((self.root / reference).is_file(), reference)
+        self.assertIn("class AcmeM3Owner", (self.root / "m3/x/AcmeM3Owner.java").read_text(encoding="utf-8"))
+
+    def test_jni_symbols_headers_and_flattened_paths_follow_the_package(self):
+        line = ("JNIEXPORT jint JNICALL Java_com_synexia_common_collections_SegmentedBits_rank(JNIEnv *env, jclass c);"
+                " #include \"com_synexia_mindex_TextMetadata.h\" Java_com_m3_fs_M3FsNative_open "
+                "diffs/m3-fast-search__src__main__java__com__synexia__m3__search__Problem.java.diff "
+                "no_runtime_dependency_on_com_synexia_repository")
+        self.assertEqual(jn.rewrite_line(line, {}),
+                         "JNIEXPORT jint JNICALL Java_jdk_internal_m3_common_collections_SegmentedBits_rank(JNIEnv *env,"
+                         " jclass c); #include \"jdk_internal_m3_mindex_TextMetadata.h\" Java_jdk_m3_fs_M3FsNative_open "
+                         "diffs/m3-fast-search__src__main__java__jdk__internal__m3__search__Problem.java.diff "
+                         "no_runtime_dependency_on_com_m3_repository")
+
+    def test_the_standard_documents_every_rule_with_a_true_example(self):
+        """Section 5 of NAMING_STANDARD.md is a fixture: each `RULE` | before | after row rewrites as documented, the
+        rule named is among those that fired, and QUICK (the prefilter) admits every documented input."""
+        standard = Path(__file__).with_name("NAMING_STANDARD.md").read_text(encoding="utf-8")
+        section = standard[standard.index("## 5. The rules"):standard.index("## 6.")]
+        rows = re.findall(r"^\| `([A-Z0-9_]+)` \| (.+?) \| (.+?) \|$", section, re.M)
+        documented = {name for name, _b, _a in rows}
+        self.assertEqual(documented, {name for name, _r, _x in jn.TEXT_RULES + jn.PROSE_RULES})
+        for name, befores, afters in rows:
+            for before, after in zip(befores.split(", "), afters.split(", ")):
+                before, after = before.strip("`"), after.strip("`")
+                counts: dict = {}
+                self.assertTrue(jn.QUICK.search(before), (name, before))
+                self.assertEqual(jn.rewrite_line(before, counts), after, name)
+                self.assertIn(name, counts, (name, before))
+
+    def test_dotted_segments_types_in_the_root_package_prefix_literals_and_record_keys(self):
+        line = ('package com.m3.synexia.importer; import com.synexia.M3Planner; p.startsWith("com.synexia.") '
+                'row["synexiaState"] legal/synexia.md "schema": "synexia.recipe-source-custody/1" https://synexia.com/x')
+        self.assertEqual(jn.rewrite_line(line, {}),
+                         'package jdk.m3.importer; import jdk.internal.m3.M3Planner; p.startsWith("com.synexia.") '
+                         'row["synexiaState"] legal/synexia.md "schema": "m3.recipe-source-custody/1" https://synexia.com/x')
+        self.assertEqual(jn.renamed_path("m3/synexia-import/src/main/java/com/m3/synexia/importer/M3ImportPlan.java"),
+                         "m3/m3-import/src/main/java/jdk/m3/importer/M3ImportPlan.java")
+        glued = ("package org.synexia.m3.recipe; lab_com.synexia.rewrite.X recipe\\tcom.synexia.rewrite.Y\\ncom.m3.z.W "
+                 "${m3.synexia.version} m3-tq/synexia.md.txt.before Java_org_synexia_m3_recipe_X_f")
+        self.assertEqual(jn.rewrite_line(glued, {}),
+                         "package jdk.internal.m3.recipe; lab_jdk.internal.m3.rewrite.X recipe\\tjdk.internal.m3.rewrite.Y"
+                         "\\njdk.m3.z.W ${m3.version} m3-tq/synexia.md.txt.before Java_jdk_internal_m3_recipe_X_f")
+        self.assertEqual(jn.renamed_path("src/java.base/share/legal/synexia.md"), "src/java.base/share/legal/synexia.md")
+        self.assertTrue(jn.KEEP_PATH.search("src/java.base/share/legal/synexia.md"))
+
+    def test_a_dotted_segment_before_a_wildcard_or_the_end_of_a_prefix_literal(self):
+        """SEGMENT_DOT_END: fe35ea98841 left rewrite.synexia.* and "rewrite.synexia." (SEGMENT_DOT needs a letter after
+        the dot) while the package moved to rewrite.m3; the donor prefix checks com.synexia. / org.synexia., prose and a
+        path segment ending a literal (not this rule) stay."""
+        line = ('rules.add("com.m3.rewrite.synexia.*"); p.startsWith("jdk.m3.rewrite.synexia.") '
+                'p.startsWith("com.synexia.") p.startsWith("org.synexia.") the donor is synexia. m3/vendor/synexia.')
+        counts: dict = {}
+        self.assertEqual(jn.rewrite_line(line, counts),
+                         'rules.add("jdk.m3.rewrite.m3.*"); p.startsWith("jdk.m3.rewrite.m3.") '
+                         'p.startsWith("com.synexia.") p.startsWith("org.synexia.") the donor is synexia. m3/vendor/synexia.')
+        self.assertEqual(counts.get("SEGMENT_DOT_END"), 2)
+
+    def test_the_product_name_follows_the_per_kind_jdk_style(self):
+        """User decision 2026-10-31: prose M3JDK (comment lines only), types M3Jdk*, constants M3JDK_*, kebab m3jdk-*;
+        the repository name hsoliwal/M3jdk21, PR references and string literals stay."""
+        cases = {
+            "// Adapted for the M3JDK21 M3FS runtime": "// Adapted for the M3JDK 21 M3FS runtime",
+            "# built in M3jdk21; see hsoliwal/M3jdk21 and M3jdk21 #2216": "# built in M3JDK 21; see hsoliwal/M3jdk21 and M3jdk21 #2216",
+            " * M3jdk is standalone; the M3 JDK image": " * M3JDK is standalone; the M3JDK image",
+            'throw new X("M3JDK21 libjava")': 'throw new X("M3JDK21 libjava")',
+            "env: M3_JDK21_REFUSE M3_JDK": "env: M3JDK21_REFUSE M3JDK",
+            "run: tar xf m3-jdk21.tar.gz m3-jdk-proof.yml": "run: tar xf m3jdk21.tar.gz m3jdk-proof.yml",
+            "id: M3-JDK-PORT-1": "id: M3JDK-PORT-1",
+            "class M3Jdk21Handoff": "class M3Jdk21Handoff",
+            "// https://github.com/hsoliwal/M3jdk21/pull/5": "// https://github.com/hsoliwal/M3jdk21/pull/5",
+        }
+        for before, after in cases.items():
+            self.assertEqual(jn.rewrite_line(before, {}), after, before)
+        self.assertEqual(jn.renamed_path(".github/workflows/m3-jdk21-backports.yml"), ".github/workflows/m3jdk21-backports.yml")
+
+    def test_recipe_memory_rows_name_a_recipe_and_a_fixture_that_exist(self):
+        """Preserve historical rows and resolve only the three exact bad guard cells.
+
+        Original recipe-memory events are append-only evidence. Never silently
+        weaken validation or edit their contents to make a CI run green.
+        """
+        here = Path(__file__).parent
+        root = here.parents[2]
+        raw = (here / "RECIPE_MEMORY.tsv").read_text(encoding="utf-8").splitlines()
+        self.assertEqual(raw[0],
+                         "utc\trecipe\ttrigger\tobserved\tcorrection\tcorrected_by\tguard\tlesson")
+        bindings = json.loads((here / "RECIPE_MEMORY_GUARD_BINDINGS.json").read_text(encoding="utf-8"))
+        self.assertEqual("M3_JDK_NAMING_GUARD_BINDINGS_V1", bindings["schema"])
+        entries = bindings["entries"]
+        self.assertEqual(3, len(entries), "only three pinned historical malformed cells exist")
+        corrections = {(item["utc"], item["trigger"]): item for item in entries}
+        self.assertEqual(len(entries), len(corrections), "duplicate correction keys")
+        found = set()
+        sources = {
+            "test_jdk_naming.py": here / "test_jdk_naming.py",
+            "test_reseal.py": here / "test_reseal.py",
+            # guard files of the 2026-11-08 rows (pom_dependents #2829, rename_types v1.7)
+            "test_pom_dependents.py": here / "test_pom_dependents.py",
+            "test_rename_types.py": here / "test_rename_types.py",
+            "test_fold_package.py": here / "test_fold_package.py",
+            "JdkNamingConformanceTest":
+                here / "conformance/src/test/java/jdk/m3/tooling/naming/JdkNamingConformanceTest.java",
+        }
+        for line in raw[1:]:
+            fields = line.split("\t")
+            self.assertEqual(8, len(fields), line[:90])
+            self.assertTrue(all(fields), line[:90])
+            self.assertRegex(fields[0], r"^\d{4}-\d\d-\d\dT\d\d:\d\d:\d\dZ$")
+            self.assertTrue((here / fields[1]).is_file(), fields[1])
+            self.assertTrue(fields[2].startswith("PATTERN:"), fields[2])
+            key = (fields[0], fields[2])
+            binding = corrections.get(key)
+            if binding:
+                self.assertNotIn("#", fields[6],
+                                 "an exact historical malformed field is expected")
+                self.assertEqual(fields[1], binding["recipe"])
+                self.assertEqual(fields[6], binding["original_guard"],
+                                 "historical source changed: review the correction itself")
+                self.assertTrue((root / binding["evidence_path"]).is_file())
+                guards = binding["resolved_guard"].split("; ")
+                found.add(key)
+            else:
+                guards = fields[6].split("; ")
+            for guard in guards:
+                # a guard may carry a trailing note "file#method (how it is used)"; the method must still exist
+                guard = re.sub(r"\s+\([^()]*\)$", "", guard)
+                pieces = guard.split("#")
+                self.assertEqual(2, len(pieces), f"unbound legacy guard: {guard}")
+                file, method = pieces
+                self.assertIn(file, sources, guard)
+                source = sources[file].read_text(encoding="utf-8")
+                if file.endswith(".py"):
+                    self.assertRegex(source, r"(?m)^\s*def " + re.escape(method) + r"\(")
+                else:
+                    self.assertRegex(source, r"\b" + re.escape(method) + r"\s*\(")
+        self.assertEqual(set(corrections), found,
+                         "unnecessary correction or newly unbound guard discovered")
+
+    def test_split_package_file_unify_receipt(self):
+        """Structural name-collision gate, not a substitute for a Maven/JNI run."""
+        root = Path(__file__).resolve().parents[3]
+        path = root / "m3/qualification/file-unify-20261106/NAME_COLLISION.tsv"
+        lines = [x for x in path.read_text(encoding="utf-8").splitlines()
+                 if x and not x.startswith("#")]
+        names = [x.split("\t") for x in lines[1:]]
+        self.assertEqual(4, len(names))
+        # Each family has one donor-mapped survivor and one NIO role rename.
+        expected = {
+            ("M3File", "m3/file", "M3NioFile.java"),
+            ("M3File", "m3/ports/file", "M3File.java"),
+            ("M3FileDelta", "m3/file", "M3NioFileDelta.java"),
+            ("M3FileDelta", "m3/ports/file", "M3FileDelta.java"),
+        }
+        self.assertEqual(expected, {
+            (item[0], item[1], Path(item[3]).name) for item in names
+        })
+        for item in names:
+            self.assertTrue((root / item[3]).is_file(), item[3])
+            self.assertEqual("RENAMED" in item[9], item[1] == "m3/file")
+
+    def test_jvm_residency_descriptor_references(self):
+        """Verify all three current descriptor owners and the JUnit test source."""
+        root = Path(__file__).resolve().parents[3]
+        main = root / "m3/ports/compiletime/src/main/java/jdk/m3/compiletime/M3ItemReferenceScan.java"
+        test = root / "m3/ports/compiletime/src/test/java/jdk/m3/compiletime/M3ItemReferenceScanTest.java"
+        source = main.read_text(encoding="utf-8")
+        self.assertTrue(test.is_file())
+        for name in ("M3Transient", "M3Retains", "M3BehaviourOnly"):
+            self.assertIn('"Ljdk/m3/residency/' + name + ';"', source)
+            self.assertNotIn('"Lcom/m3/residency/' + name + ';"', source)
+
+    def test_core_donor_fact_and_sidecar_receipt(self):
+        """Check the repaired donor fact, target owner and retained build receipt."""
+        root = Path(__file__).resolve().parents[3]
+        test = (root / "m3/core/test/M3NumberSpaceContractTest.java").read_text(encoding="utf-8")
+        gates = (root / "m3/core/qualification/rename-damage-20261107/GATES.tsv").read_text(
+            encoding="utf-8")
+        self.assertIn('String.join("-", "synexia", "dictlang")', test)
+        self.assertIn("jdk.m3.text.M3NumberSpace", test)
+        self.assertIn("m3-number-target-map.tsv", test)
+        self.assertIn("m3-precompute-field-map.tsv", test)
+        self.assertIn("3_build\tbash m3/build.sh (this change)\tPASS", gates)
+        # This is custody of an executed historical result, NOT a present-JDK pass.
+
+    def test_a_code_line_naming_a_license_is_still_renamed(self):
+        self.put("m3/x/Rules.java", "import com.synexia.m3.x.LicenseRule;\n")
+        jn.apply(self.root, jn.plan(self.root))
+        self.assertIn("import jdk.internal.m3.x.LicenseRule;", (self.root / "m3/x/Rules.java").read_text(encoding="utf-8"))
+
+    def test_collision_refuses_the_plan(self):
+        self.put("m3/x/SynexiaBar.java", "class SynexiaBar {}\n")
+        self.put("m3/x/M3Bar.java", "class M3Bar {}\n")
+        result = jn.plan(self.root)
+        self.assertEqual([r[0] for r in result["refusals"]], ["COLLISION"])
+        with self.assertRaises(SystemExit):
+            jn.apply(self.root, result)
+
+    def test_colliding_lineage_files_follow_their_directory_and_keep_their_names(self):
+        image = "m3/vendor/synexia/snapshots/image/"
+        self.put(image + "com.m3.x-jar.log.txt", "built com.m3.x\n")
+        self.put(image + "jdk.m3.x-jar.log.txt", "built jdk.m3.x\n")
+        self.put(image + "com.m3.x-notes.txt", "notes on com.m3.x\n")
+        result = jn.plan(self.root)
+        self.assertEqual(result["refusals"], [])
+        self.assertEqual(sorted(result["moves"]), [
+            (image + "com.m3.x-jar.log.txt", "m3/vendor/m3/snapshots/image/com.m3.x-jar.log.txt"),
+            (image + "com.m3.x-notes.txt", "m3/vendor/m3/snapshots/image/jdk.m3.x-notes.txt"),
+            (image + "jdk.m3.x-jar.log.txt", "m3/vendor/m3/snapshots/image/jdk.m3.x-jar.log.txt")])
+        self.assertEqual([p for p, _c in result["rewrites"]], [image + "com.m3.x-notes.txt"])
+        jn.apply(self.root, result)
+        again = jn.plan(self.root)
+        self.assertEqual((again["moves"], again["rewrites"], again["refusals"]), ([], [], []))
+
+    def commit(self):
+        run = ["git", "-C", str(self.root), "-c", "user.name=t", "-c", "user.email=t@example.com"]
+        subprocess.run(run + ["commit", "-q", "-m", "fixture"], check=True)
+        return subprocess.run(run + ["rev-parse", "HEAD"], check=True, capture_output=True, text=True).stdout.strip()
+
+    def show(self, rev, path):
+        return subprocess.run(["git", "-C", str(self.root), "show", f"{rev}:{path}"], check=True,
+                              capture_output=True).stdout
+
+    def test_a_file_outside_the_checkout_is_absent_even_without_a_synexia_path(self):
+        self.put("m3/x/Use.java", "import com.synexia.util.A;\n")
+        self.commit()
+        subprocess.run(["git", "-C", str(self.root), "update-index", "--skip-worktree", "m3/x/Use.java"], check=True)
+        (self.root / "m3/x/Use.java").unlink()
+        self.assertEqual(jn.plan(self.root)["absent"], ["m3/x/Use.java"])
+
+    def test_tree_mode_renames_blobs_outside_the_checkout_and_keeps_bytes_and_modes(self):
+        self.put("m3/x/Use.java", "import com.synexia.util.A;\r\nclass Use {}\r\n")
+        self.put("m3/synexia-tool/run it.sh", "export SYNEXIA_HOME=/opt\n")
+        subprocess.run(["git", "-C", str(self.root), "update-index", "--chmod=+x", "m3/synexia-tool/run it.sh"], check=True)
+        self.put("m3/x/Plain.java", "class Plain {}\n")
+        base = self.commit()
+        (self.root / "m3/x/Use.java").unlink()  # not checked out: tree mode reads the blob
+        for key, value in (("user.name", "t"), ("user.email", "t@example.com")):
+            subprocess.run(["git", "-C", str(self.root), "config", key, value], check=True)
+        commit = jn.apply_tree(self.root, base, "refs/heads/renamed", "rename")
+        self.assertEqual(self.show(commit, "m3/x/Use.java"), b"import jdk.internal.m3.util.A;\r\nclass Use {}\r\n")
+        self.assertEqual(self.show(commit, "m3/m3-tool/run it.sh"), b"export M3_HOME=/opt\n")
+        tree = subprocess.run(["git", "-C", str(self.root), "ls-tree", "-r", commit], check=True, capture_output=True,
+                              text=True).stdout
+        self.assertIn("100755 blob", next(line for line in tree.splitlines() if line.endswith("run it.sh")))
+        self.assertNotIn("synexia-tool", tree)
+        self.assertIn("m3/x/Plain.java", tree)
+        self.assertEqual(self.show(commit, jn.RENAME_MAP),
+                         b"path_before\tpath_after\nm3/synexia-tool/run it.sh\tm3/m3-tool/run it.sh\n")
+        again = jn.plan_tree(self.root, commit)
+        self.assertEqual((again["moves"], again["rewrites"]), ([], []))
+
+    def test_only_limits_the_plan_to_a_prefix(self):
+        self.put("m3/a/SynexiaA.java", "class SynexiaA {}\n")
+        self.put("m3/b/SynexiaB.java", "class SynexiaB {}\n")
+        result = jn.plan(self.root, ("m3/a/",))
+        self.assertEqual([m[0] for m in result["moves"]], ["m3/a/SynexiaA.java"])
+
+    def test_a_scoped_apply_keeps_the_rename_map_rows_outside_its_scope(self):
+        """apply --tree --only merges RENAME_MAP.tsv (SCOPED_APPLY_PRESERVES_MAP): the rows of the files it selects
+        take this run's targets, every other row stays byte for byte in its place, and a second identical run
+        changes nothing. The scoped apply once wrote its scoped plan alone: #2556 dropped all 32 rows."""
+        for name in ("SynexiaA", "SynexiaC", "Plain"):
+            self.put(f"m3/a/{name}.java", f"class {name} {{}}\n")
+        self.put("m3/b/SynexiaB.java", "class SynexiaB {}\n")
+        rows = [b"path_before\tpath_after",
+                b"m3/b/com/synexia/X.java\tm3/b/jdk/internal/m3/X.java",  # outside: an earlier move
+                b"m3/a/SynexiaA.java\tm3/a/StaleA.java",  # selected and moved: retargeted in place
+                b"m3/b/SynexiaB.java\tm3/b/M3B.java\r",  # outside (its file is not moved by this run), CRLF
+                b"m3/a/Plain.java\tm3/a/M3Plain.java",  # selected, the run keeps the path: the row goes
+                b"m3/a/gone/SynexiaG.java\tm3/a/gone/M3G.java",  # under the prefix, no such file: an earlier move
+                b"m3/c/synexia-tool/run.sh\tm3/c/m3-tool/run.sh"]  # outside
+        (self.root / jn.RENAME_MAP).parent.mkdir(parents=True, exist_ok=True)
+        (self.root / jn.RENAME_MAP).write_bytes(b"\n".join(rows) + b"\n")
+        subprocess.run(["git", "-C", str(self.root), "add", jn.RENAME_MAP], check=True)
+        base = self.commit()
+        for key, value in (("user.name", "t"), ("user.email", "t@example.com")):
+            subprocess.run(["git", "-C", str(self.root), "config", key, value], check=True)
+        scoped = ["apply", "--root", str(self.root), "--only", "m3/a/", "--tree"]
+        with contextlib.redirect_stdout(io.StringIO()):
+            self.assertEqual(jn.main(scoped + [base, "--ref", "refs/heads/scoped"]), 0)
+            self.assertEqual(jn.main(scoped + ["refs/heads/scoped", "--ref", "refs/heads/again"]), 0)
+        first = self.show("refs/heads/scoped", jn.RENAME_MAP)
+        self.assertEqual(first, b"\n".join(rows[:2] + [b"m3/a/SynexiaA.java\tm3/a/M3A.java", rows[3]] + rows[5:]
+                                           + [b"m3/a/SynexiaC.java\tm3/a/M3C.java", b""]))
+        outside = [row for row in first.split(b"\n") if row.startswith((b"m3/b/", b"m3/c/"))]
+        self.assertEqual(outside, [rows[1], rows[3], rows[6]])
+        self.assertEqual(self.show("refs/heads/again", jn.RENAME_MAP), first)
+        trees = [subprocess.run(["git", "-C", str(self.root), "rev-parse", ref + "^{tree}"], check=True,
+                                capture_output=True).stdout for ref in ("refs/heads/scoped", "refs/heads/again")]
+        self.assertEqual(trees[0], trees[1])
+
+    def test_a_service_descriptor_is_text_and_its_provider_names_follow_the_package(self):
+        """META-INF/services/<service> has no suffix: pass 1 renamed the file (the service name) and skipped the
+        provider names inside it as non-text, so javac could not load M3JdkStandardPlugin or M3SourceSignalPlugin
+        (ServiceConfigurationError: Provider com.m3.compiler.standard.M3JdkStandardPlugin not found); the content
+        of a descriptor is in scope, and the name of the file and the names inside it move together."""
+        descriptor = "m3/x/src/main/resources/META-INF/services/com.m3.x.Service"
+        self.put(descriptor, "# comment\ncom.m3.x.Impl\ncom.synexia.x.Other$Inner\n")
+        self.put("m3/x/src/main/resources/META-INF/MANIFEST.MF", "Main-Class: com.m3.x.Impl\n")
+        self.assertTrue(jn.in_scope(descriptor, ()))
+        self.assertFalse(jn.in_scope("m3/x/src/main/resources/META-INF/MANIFEST.MF", ()))
+        result = jn.plan(self.root)
+        self.assertFalse(result["refusals"])
+        self.assertEqual([m[0] for m in result["moves"]], [descriptor])
+        self.assertEqual([r[0] for r in result["rewrites"]], [descriptor])
+        jn.apply(self.root, result)
+        moved = self.root / "m3/x/src/main/resources/META-INF/services/jdk.m3.x.Service"
+        self.assertEqual(moved.read_text(encoding="utf-8"), "# comment\njdk.m3.x.Impl\njdk.internal.m3.x.Other$Inner\n")
+        again = jn.plan(self.root)
+        self.assertEqual((again["moves"], again["rewrites"]), ([], []))
+
+    def test_a_declaration_named_like_a_renamed_package_segment_is_reported(self):
+        """fe35ea98841 renamed com.m3.fs.internal.re2j to jdk.m3.fs.internal.re2j in M3FS.java, where
+        DefaultRegexFallback kept a field named jdk: in an expression the field obscures the package (JLS 6.4.2) and
+        javac failed (M3FS.java:[661,33] cannot find symbol: variable m3). plan reports every such declaration in a
+        Java file it rewrites (SHADOW rows, shadows=N, no refusal), on the checkout and on a tree; a method named jdk,
+        a returned value, a comment line and a file the plan does not rewrite are not reported."""
+        self.assertEqual(jn.PACKAGE_SEGMENTS, ("jdk",))
+        self.put("m3/fs/Fallback.java", "class Fallback {\n    private java.util.regex.Pattern jdk;\n"
+                 "    private com.m3.fs.re2j.Pattern re2;\n    Object jdk() { return jdk; }\n"
+                 "    void f(String jdk, int n) { re2 = com.m3.fs.re2j.Pattern.compile(jdk); }\n"
+                 "    // keep the jdk; prose\n    void g(java.util.List<String> xs) { for (var jdk : xs) {} }\n}\n")
+        self.put("m3/fs/Clean.java", "class Clean { private com.m3.fs.re2j.Pattern re2; }\n")
+        self.put("m3/fs/Untouched.java", "class Untouched { Object jdk; }\n")
+        expected = [("m3/fs/Fallback.java", line, "jdk") for line in (2, 5, 7)]
+        result = jn.plan(self.root)
+        self.assertFalse(result["refusals"])
+        self.assertEqual(result["shadows"], expected)
+        out = io.StringIO()
+        with contextlib.redirect_stdout(out):
+            jn.report(result, str(self.root / "plan.tsv"))
+        self.assertIn(" shadows=3 ", out.getvalue())
+        self.assertIn("SHADOW\tm3/fs/Fallback.java\t2:jdk\n", (self.root / "plan.tsv").read_text(encoding="utf-8"))
+        self.assertEqual(jn.plan_tree(self.root, self.commit())["shadows"], expected)
+
+    def test_naming_keep_rows_have_a_reason_and_leave_their_files_out_of_scope(self):
+        """User decision 2026-11-08: a file that names Synexia/com.m3 on purpose (detector, pin, donor differential,
+        Maven coordinate, lineage id) is an explicit NAMING_KEEP.tsv row with a reason, never a looser rule."""
+        keep = jn.load_keep()
+        self.assertTrue(keep)
+        for path, (kind, reason) in keep.items():
+            self.assertIn(kind, jn.KEEP_CLASSES, path)
+            self.assertTrue(reason.strip(), path)
+            self.assertFalse(jn.in_scope(path, ()), path)
+        self.assertTrue(jn.in_scope("m3/x/src/main/java/a/Live.java", ()))
+        bad = self.root / "NAMING_KEEP.tsv"
+        header = "path\treason_class\treason\n"
+        for text in (header + "x.py\tFAVOURITE\tno\n",              # unknown reason class
+                     header + "x.py\tDETECTOR\t \n",                # blank reason
+                     header + "x.py\tPIN\ta\nx.py\tPIN\tb\n"):      # duplicate path
+            bad.write_text(text, encoding="utf-8")
+            with self.assertRaises(SystemExit):
+                jn.load_keep(bad)
+
+    def test_naming_keep_rows_name_files_of_the_tree(self):
+        """A KEEP row whose file is gone is stale: the list must never outlive its files (full checkout, as in CI)."""
+        root = Path(__file__).resolve().parents[3]
+        missing = [path for path in jn.load_keep() if not (root / path).is_file()]
+        self.assertEqual([], missing, "stale NAMING_KEEP.tsv rows")
+
+if __name__ == "__main__":
+    unittest.main()

@@ -1,0 +1,27 @@
+{
+  "request": {
+    "url": "https://api.github.com/repos/hsoliwal/com.synexia/actions/runs/37422112578/timing"
+  },
+  "response": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Action completed."
+      }
+    ],
+    "structuredContent": {
+      "content": "{\"billable\":{}}",
+      "title": "timing",
+      "modified_date": null,
+      "url": "https://api.github.com/repos/hsoliwal/com.synexia/actions/runs/37422112578/timing",
+      "display_url": "https://api.github.com/repos/hsoliwal/com.synexia/actions/runs/37422112578/timing",
+      "display_title": "timing",
+      "structuredContent": {
+        "title": "timing",
+        "content": "{\"billable\":{}}",
+        "display_url": "https://api.github.com/repos/hsoliwal/com.synexia/actions/runs/37422112578/timing"
+      }
+    },
+    "isError": false
+  }
+}

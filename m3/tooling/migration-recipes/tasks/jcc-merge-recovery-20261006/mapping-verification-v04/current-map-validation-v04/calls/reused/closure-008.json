@@ -1,0 +1,25 @@
+{
+  "request": {
+    "repository_full_name": "hsoliwal/M3jdk21",
+    "path": "m3/migration/evidence/local-20261002-final/prefix-z-normal.log",
+    "ref": "d1b9162cd568108f4c8d82f6b6a03cccfdb91bd2",
+    "encoding": "base64"
+  },
+  "response": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Action completed."
+      }
+    ],
+    "structuredContent": {
+      "content": "UFJFRklYX1pfUEFTUyBjYXNlcz03NzczNSBjaGVja3M9MTU2NDI1NSBzZWVk\nPTB4NEQzMzVBMjEK\n",
+      "encoding": "base64",
+      "sha": "bb620416f7179f62c06f9085b1bd7d560807145d",
+      "display_url": "https://github.com/hsoliwal/M3jdk21/blob/d1b9162cd568108f4c8d82f6b6a03cccfdb91bd2/m3/migration/evidence/local-20261002-final/prefix-z-normal.log",
+      "display_title": "prefix-z-normal.log"
+    },
+    "isError": false
+  }
+}
+

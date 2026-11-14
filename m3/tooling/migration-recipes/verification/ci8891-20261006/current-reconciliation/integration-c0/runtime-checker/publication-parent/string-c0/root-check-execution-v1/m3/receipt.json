@@ -1,0 +1,28 @@
+{
+  "id": "m3",
+  "argv": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3.12",
+    "/workspace/scratch/5809f5dce3dd/continuation-20261006/publication-design/string-c0-check-authoring-v1/m3-check/check_m3_string_DRAFT_v1.py",
+    "--spec",
+    "/workspace/scratch/5809f5dce3dd/continuation-20261006/publication-design/string-c0-final-v1/M3-CHECK-SPEC.json",
+    "--spec-sha256",
+    "0f68411fb6dba4a60b76f530c5acbf5db2531d54739b7ded37875485926ffb06",
+    "--self-sha256",
+    "737197376068a5a9cd5c5b12d0fae92e8b1bf87b253c5c4aea5aa23480bffbb5",
+    "--output",
+    "/workspace/scratch/5809f5dce3dd/continuation-20261006/publication-design/string-c0-final-v1/m3-check-v1"
+  ],
+  "cwd": "/workspace/scratch/5809f5dce3dd/continuation-20261006",
+  "exitCode": 1,
+  "elapsedSeconds": 0.596793324999453,
+  "stdout": {
+    "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/publication-design/string-c0-final-v1/root-check-execution-v1/m3/stdout",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "stderr": {
+    "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/publication-design/string-c0-final-v1/root-check-execution-v1/m3/stderr",
+    "bytes": 1344,
+    "sha256": "0acab43041dc05470e0b4428395ea32dfa211da2c5b2172bcdb5ea83b57fc9e5"
+  }
+}

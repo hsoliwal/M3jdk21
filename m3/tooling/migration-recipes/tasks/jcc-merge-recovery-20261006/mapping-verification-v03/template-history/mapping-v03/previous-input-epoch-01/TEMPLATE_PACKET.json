@@ -1,0 +1,112 @@
+{
+  "canonical_baseline_packet": {
+    "path": "current-map-validation-v03/PACKET.json",
+    "result": "MIGRATION_MANIFEST_VALID completion=INCOMPLETE",
+    "sha256": "26fa8fc702f37748a4532415b253ac2b7b13296b5f61ca23c82c768819a275ad"
+  },
+  "compile_only_status": "PASS",
+  "crate": "jcc-merge-recovery-20261006-mapping-v03",
+  "destination_commit": "c0a14387009aefc7d62bd3268055d526e04f9074",
+  "destination_root_tree": "491bbd80a51483d0710fc12c1bad3a037b385ba0",
+  "excluded_from_delivery": [
+    "compile-check-v01/src/**",
+    "compile-check-v01/classes/**",
+    "__pycache__/**"
+  ],
+  "files": [
+    {
+      "bytes": 52471,
+      "path": "JccMergeMappingRecoveryV03Test.java.in",
+      "sha256": "178637d9f4ff0f5093bf6528b944910304c675c93fb12c48639e1c5ce81f44b6"
+    },
+    {
+      "bytes": 3441,
+      "path": "pom.xml",
+      "sha256": "6808747ea5d7c7f19fdde1cff69e504734c2f23455841fae1d2aded08f4fdcf0"
+    },
+    {
+      "bytes": 626,
+      "path": "m3-jcc-merge-mapping-recovery-v03.yml",
+      "sha256": "6ba1b51479a71577289d10793697967de29161a81adc7283ae7fd98a3aef6ad0"
+    },
+    {
+      "bytes": 14710,
+      "path": "render_template.py",
+      "sha256": "5910bcb28f18602d3d849d1092a3f561e80870616eab4f1863e570cc750a404a"
+    },
+    {
+      "bytes": 8841,
+      "path": "README.md",
+      "sha256": "798c58e422b0415b2550972f1542f5a524cb0cc742a863730f9d1081a70cc3cf"
+    },
+    {
+      "bytes": 6239,
+      "path": "compile-check-v01/receipt.json",
+      "sha256": "1b598d6f5917fb562998bc41cd0e785499fa7786cd8aeaf4930d945abb4d4923"
+    },
+    {
+      "bytes": 0,
+      "path": "compile-check-v01/javac.stdout.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 0,
+      "path": "compile-check-v01/javac.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 3713,
+      "path": "self-review-v01/receipt.json",
+      "sha256": "be516beef38a31b6e1de5555aedad840112cd23431deb38078b4f6ab1d0572a0"
+    },
+    {
+      "bytes": 0,
+      "path": "self-review-v01/renderer-refusal.stdout.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 1031,
+      "path": "self-review-v01/renderer-refusal.stderr.log",
+      "sha256": "89a694a091438441d50974ed455bcec01c0fca928d72331071e7601538df78a8"
+    }
+  ],
+  "input_epoch": {
+    "gates": 20,
+    "non_jcc_records": 50,
+    "ordered_records": 52,
+    "top_level_mappings": 25
+  },
+  "input_epoch_sha256": "2a4878ce5eeeeeccfe216dae36e62faa3e5da06c7baa654e7a43ce3d823c5139",
+  "junit_methods_authored": 13,
+  "junit_methods_executed": 0,
+  "materialized_result_property": "m3.mapping.materialized",
+  "named_recipe": "jdk.m3.rewrite.backport.JccMergeMappingRecoveryV03",
+  "previous_packets_unchanged": [
+    {
+      "files_verified_unchanged": 15,
+      "path": "candidate/mapping/java-template/TEMPLATE_PACKET.json",
+      "sha256": "a5a81bee6c69a796e0cf7632746dff3be5ac56bb11fbaac3424dcba325fcd94b"
+    },
+    {
+      "files_verified_unchanged": 11,
+      "path": "candidate/mapping-v02/java-template/TEMPLATE_PACKET.json",
+      "sha256": "bba43023ead328438b81a397dcb6c646d5c79bfe33555d5a220ef1f985aabcd6"
+    },
+    {
+      "files_verified_unchanged": 113,
+      "path": "current-map-validation/PACKET.json",
+      "sha256": "ac86b7dfedc336871e8a6f79cb340e4717da031c3fea8e3769fc3b7524b98f50"
+    }
+  ],
+  "schema": "m3-jcc-mapping-java-template-packet/3",
+  "scope": "Exact C0 input template, compile-only and fixture-refusal proof. Thirteen controls preserved plus separate module-POM component and intermediate d1 epoch assertions. No JUnit execution or actual operational mapping output until verified source publication is bound.",
+  "separate_source_build_components": 1,
+  "source_commit": "__UNRESOLVED_ACTUAL_SOURCE_COMMIT__",
+  "source_java_owners": 20,
+  "source_jni_owners": 6,
+  "source_laboratory_owners": 14,
+  "source_root_tree": "__UNRESOLVED_ACTUAL_SOURCE_ROOT_TREE__",
+  "status": "FROZEN_PREPARED_ACTUAL_SOURCE_PUBLICATION_REQUIRED",
+  "test_class": "jdk.m3.rewrite.backport.JccMergeMappingRecoveryV03Test",
+  "version": 3
+}

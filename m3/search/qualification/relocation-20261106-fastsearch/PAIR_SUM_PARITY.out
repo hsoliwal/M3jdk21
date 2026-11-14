@@ -1,0 +1,1 @@
+JNI C17/Java parity PASS: 15000 sorted singles, 24576 sorted batch queries, 8000 unsorted singles, 8192 unsorted batch queries (55768 total), with validation and ownership checks (temporary JVM17 smoke gate)

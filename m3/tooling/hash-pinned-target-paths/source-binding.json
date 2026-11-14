@@ -1,0 +1,303 @@
+{
+  "schema": 1,
+  "repository": "hsoliwal/com.synexia",
+  "receiverRepository": "hsoliwal/M3jdk21",
+  "sourceCommit": "fbdb0f7e4ee0721affec405cc8059ac8dda251a9",
+  "admissionCommit": "7948eaa7c2e739aaab4906cfc68c61236811b281",
+  "hostAdmissionCommit": "2827450ce4caac940894d152874e5ca4085629ad",
+  "receiverBase": "d6d76b563050fc13c4fa79bc494edf29f1614b37",
+  "sdkFiles": 31,
+  "files": [
+    {
+      "targetPath": "m3/tooling/hash-pinned-target-paths/sdk/FOSS_REUSE_DECISION.tsv",
+      "sourcePath": "m3-openrewrite-recipes/tasks/hash-pinned-target-paths-20261020/sdk/FOSS_REUSE_DECISION.tsv",
+      "gitBlob": "ed36b7d0093bedd7c9b565f770a370ce9979de21",
+      "bytes": 850,
+      "sha256": "ee163ed2650ba9b731db3671b884a045535efb66c55507182f115f05c80b8bd1"
+    },
+    {
+      "targetPath": "m3/tooling/hash-pinned-target-paths/sdk/pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinManifest.java",
+      "sourcePath": "m3-openrewrite-recipes/tasks/hash-pinned-target-paths-20261020/sdk/pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinManifest.java",
+      "gitBlob": "78d5fb68f13872164973a8918cc7886c5f548bca",
+      "bytes": 10964,
+      "sha256": "c874b5d4b5fe8886d53763ab91d050f431c4b7c09d3fe34d58680231ccb1cf7e"
+    },
+    {
+      "targetPath": "m3/tooling/hash-pinned-target-paths/sdk/pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinRecipe.java",
+      "sourcePath": "m3-openrewrite-recipes/tasks/hash-pinned-target-paths-20261020/sdk/pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinRecipe.java",
+      "gitBlob": "2ec479b8609459a28fdfd8a7a7d63cc44e919f00",
+      "bytes": 5187,
+      "sha256": "300a520ec9d273922d1edbdf5442e5faf825c47e8e3df7febf4baa2f39945401"
+    },
+    {
+      "targetPath": "m3/tooling/hash-pinned-target-paths/sdk/pinned-engine/jdk/internal/m3/rewrite/M3HashPinnedTargetPathsCompatInverseRecipe.java",
+      "sourcePath": "m3-openrewrite-recipes/tasks/hash-pinned-target-paths-20261020/sdk/pinned-engine/jdk/internal/m3/rewrite/M3HashPinnedTargetPathsCompatInverseRecipe.java",
+      "gitBlob": "e01904d2742748908764e36ade972d075e710877",
+      "bytes": 847,
+      "sha256": "6faa0f7cb7c19248e597bdb8f4b70ac6e94d8c4821ad198a674e68e88e2d1c66"
+    },
+    {
+      "targetPath": "m3/tooling/hash-pinned-target-paths/sdk/pinned-engine/jdk/internal/m3/rewrite/M3HashPinnedTargetPathsCompatRecipe.java",
+      "sourcePath": "m3-openrewrite-recipes/tasks/hash-pinned-target-paths-20261020/sdk/pinned-engine/jdk/internal/m3/rewrite/M3HashPinnedTargetPathsCompatRecipe.java",
+      "gitBlob": "63e59ee542938511fb669bab7689569e5ab0ec8f",
+      "bytes": 822,
+      "sha256": "29081dd54fdb68ed6bd39852ec3f3150e479cf1a86a15cbbab47c11b2321a6d0"
+    },
+    {
+      "targetPath": "m3/tooling/hash-pinned-target-paths/sdk/pins.json",
+      "sourcePath": "m3-openrewrite-recipes/tasks/hash-pinned-target-paths-20261020/sdk/pins.json",
+      "gitBlob": "1a6d6c45242f578e422791d330e18e3dfd16f3b0",
+      "bytes": 10269,
+      "sha256": "2877a123586a66fb57ca640dd5f28e5d2c1fcca6c7e6272ce864d02b5142a651"
+    },
+    {
+      "targetPath": "m3/tooling/hash-pinned-target-paths/sdk/pom.xml",
+      "sourcePath": "m3-openrewrite-recipes/tasks/hash-pinned-target-paths-20261020/sdk/pom.xml",
+      "gitBlob": "059259ca746466389cccac4094c3d664b0d79e6d",
+      "bytes": 2678,
+      "sha256": "5b3f3f04f9539178d43ffa75068366d8ff1c037e25f67c2d31aa3bdb6e0ede1e"
+    },
+    {
+      "targetPath": "m3/tooling/hash-pinned-target-paths/sdk/README.md",
+      "sourcePath": "m3-openrewrite-recipes/tasks/hash-pinned-target-paths-20261020/sdk/README.md",
+      "gitBlob": "df6b9d4365009938ac229bb6676f8c4e83e16c6e",
+      "bytes": 1761,
+      "sha256": "4ea9d4f1f1460c52a343e051b4ea33dd04aeb0712d0d43764f5500ab6d67ceaf"
+    },
+    {
+      "targetPath": "m3/tooling/hash-pinned-target-paths/sdk/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-target-paths-20261020/before/m3/tooling/migration-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+      "sourcePath": "m3-openrewrite-recipes/tasks/hash-pinned-target-paths-20261020/sdk/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-target-paths-20261020/before/m3/tooling/migration-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+      "gitBlob": "907f176d32b55d78f13e3756a407f6877f25ca7d",
+      "bytes": 13805,
+      "sha256": "9dc65793cb1f4fb20866f99f4e5d0043d54734aa03cf0fe297c0cadbba2d1c37"
+    },
+    {
+      "targetPath": "m3/tooling/hash-pinned-target-paths/sdk/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-target-paths-20261020/before/m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-object-slot-index-snapshot-20261017/M3ObjectIndexSnapshot.java.txt",
+      "sourcePath": "m3-openrewrite-recipes/tasks/hash-pinned-target-paths-20261020/sdk/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-target-paths-20261020/before/m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-object-slot-index-snapshot-20261017/M3ObjectIndexSnapshot.java.txt",
+      "gitBlob": "30c06855e426425db292c993f6a44e42a1bb15d8",
+      "bytes": 11078,
+      "sha256": "67116969a93d0da9beffafdb36a8310247a206a96d7cb58ffbce3c053e1ad4f1"
+    },
+    {
+      "targetPath": "m3/tooling/hash-pinned-target-paths/sdk/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-target-paths-20261020/before/m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-object-slot-index-snapshot-20261017/M3ObjectSlotIndexSelfTest.java.txt",
+      "sourcePath": "m3-openrewrite-recipes/tasks/hash-pinned-target-paths-20261020/sdk/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-target-paths-20261020/before/m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-object-slot-index-snapshot-20261017/M3ObjectSlotIndexSelfTest.java.txt",
+      "gitBlob": "33a01e6772c3eb93aa6db50a397ccf71ab037fd9",
+      "bytes": 8304,
+      "sha256": "976975d979ffbde17bdf877349d60950da984b5f7207dc9f28ffeff6fe060ff7"
+    },
+    {
+      "targetPath": "m3/tooling/hash-pinned-target-paths/sdk/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-target-paths-20261020/before/m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-object-slot-index-snapshot-20261017/M3ObjectSlotIndexTest.java.txt",
+      "sourcePath": "m3-openrewrite-recipes/tasks/hash-pinned-target-paths-20261020/sdk/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-target-paths-20261020/before/m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-object-slot-index-snapshot-20261017/M3ObjectSlotIndexTest.java.txt",
+      "gitBlob": "8ec4178c0078915472b4f0e5a1674d7656fc9253",
+      "bytes": 362,
+      "sha256": "6f2b492c0be59b4c6d784b3d3be3623d5da69e7217047657c36635852b14d3b7"
+    },
+    {
+      "targetPath": "m3/tooling/hash-pinned-target-paths/sdk/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-target-paths-20261020/before/m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-object-slot-index-snapshot-20261017/M3ObjectSlotStore28.java.txt",
+      "sourcePath": "m3-openrewrite-recipes/tasks/hash-pinned-target-paths-20261020/sdk/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-target-paths-20261020/before/m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-object-slot-index-snapshot-20261017/M3ObjectSlotStore28.java.txt",
+      "gitBlob": "91d5946dd69aeb1ddc8b20ab20b357554fc98e8c",
+      "bytes": 8386,
+      "sha256": "032f837fea2e97b166fc08e7f7601d66e5d31513897a03632a08ec17bcf407bb"
+    },
+    {
+      "targetPath": "m3/tooling/hash-pinned-target-paths/sdk/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-target-paths-20261020/before/m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-object-slot-index-snapshot-20261017/manifest.tsv",
+      "sourcePath": "m3-openrewrite-recipes/tasks/hash-pinned-target-paths-20261020/sdk/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-target-paths-20261020/before/m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-object-slot-index-snapshot-20261017/manifest.tsv",
+      "gitBlob": "9c4321dcba3c8df29910d6413114496fee58ecd1",
+      "bytes": 716,
+      "sha256": "ff8ff72e0f0d03eaeb5f2012a56d3eca6dce0572e2dbe3214c5d3ce2ade31a2c"
+    },
+    {
+      "targetPath": "m3/tooling/hash-pinned-target-paths/sdk/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-target-paths-20261020/before/m3/tooling/migration-recipes/src/test/java/jdk/internal/m3/rewrite/M3ObjectSlotIndexSnapshot20261017RecipeTest.java",
+      "sourcePath": "m3-openrewrite-recipes/tasks/hash-pinned-target-paths-20261020/sdk/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-target-paths-20261020/before/m3/tooling/migration-recipes/src/test/java/jdk/internal/m3/rewrite/M3ObjectSlotIndexSnapshot20261017RecipeTest.java",
+      "gitBlob": "6d3fd39ddeb3ca8fddd0d69ee2345d8b39c0e7f0",
+      "bytes": 3497,
+      "sha256": "3223a170646c0ad111c4319894c231e1ed5690ea0a3ed1cc4d86c3ae0ba14dae"
+    },
+    {
+      "targetPath": "m3/tooling/hash-pinned-target-paths/sdk/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-target-paths-20261020/inverse/manifest.tsv",
+      "sourcePath": "m3-openrewrite-recipes/tasks/hash-pinned-target-paths-20261020/sdk/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-target-paths-20261020/inverse/manifest.tsv",
+      "gitBlob": "884a94de357f35a94f126997008971fa38dcca99",
+      "bytes": 2013,
+      "sha256": "1f67be7b8a07cda0e4746a516df0f637211ee7b99a2bb2ace48015539e84e499"
+    },
+    {
+      "targetPath": "m3/tooling/hash-pinned-target-paths/sdk/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-target-paths-20261020/inverse/out/m3/tooling/migration-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+      "sourcePath": "m3-openrewrite-recipes/tasks/hash-pinned-target-paths-20261020/sdk/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-target-paths-20261020/inverse/out/m3/tooling/migration-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+      "gitBlob": "907f176d32b55d78f13e3756a407f6877f25ca7d",
+      "bytes": 13805,
+      "sha256": "9dc65793cb1f4fb20866f99f4e5d0043d54734aa03cf0fe297c0cadbba2d1c37"
+    },
+    {
+      "targetPath": "m3/tooling/hash-pinned-target-paths/sdk/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-target-paths-20261020/manifest.tsv",
+      "sourcePath": "m3-openrewrite-recipes/tasks/hash-pinned-target-paths-20261020/sdk/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-target-paths-20261020/manifest.tsv",
+      "gitBlob": "71c721dc4abbe61126c32fc3b376ac8e11ea65e8",
+      "bytes": 2013,
+      "sha256": "a5519c55b50da387e76d0b0ce2241cc25f4216eff62734557f0ed72e27051403"
+    },
+    {
+      "targetPath": "m3/tooling/hash-pinned-target-paths/sdk/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-target-paths-20261020/out/m3/tooling/migration-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+      "sourcePath": "m3-openrewrite-recipes/tasks/hash-pinned-target-paths-20261020/sdk/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-target-paths-20261020/out/m3/tooling/migration-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+      "gitBlob": "fa757481cc3a0e5c00c3e91c8f7824b5c10482c0",
+      "bytes": 13981,
+      "sha256": "8c43e01532a256cfc2b8c55bf5ed7e3c9719be6a37b223b0cd93258c823289f4"
+    },
+    {
+      "targetPath": "m3/tooling/hash-pinned-target-paths/sdk/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-target-paths-20261020/out/m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-object-slot-index-snapshot-20261017/M3ObjectIndexSnapshot.java.txt",
+      "sourcePath": "m3-openrewrite-recipes/tasks/hash-pinned-target-paths-20261020/sdk/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-target-paths-20261020/out/m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-object-slot-index-snapshot-20261017/M3ObjectIndexSnapshot.java.txt",
+      "gitBlob": "30c06855e426425db292c993f6a44e42a1bb15d8",
+      "bytes": 11078,
+      "sha256": "67116969a93d0da9beffafdb36a8310247a206a96d7cb58ffbce3c053e1ad4f1"
+    },
+    {
+      "targetPath": "m3/tooling/hash-pinned-target-paths/sdk/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-target-paths-20261020/out/m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-object-slot-index-snapshot-20261017/M3ObjectSlotIndexSelfTest.java.txt",
+      "sourcePath": "m3-openrewrite-recipes/tasks/hash-pinned-target-paths-20261020/sdk/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-target-paths-20261020/out/m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-object-slot-index-snapshot-20261017/M3ObjectSlotIndexSelfTest.java.txt",
+      "gitBlob": "33a01e6772c3eb93aa6db50a397ccf71ab037fd9",
+      "bytes": 8304,
+      "sha256": "976975d979ffbde17bdf877349d60950da984b5f7207dc9f28ffeff6fe060ff7"
+    },
+    {
+      "targetPath": "m3/tooling/hash-pinned-target-paths/sdk/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-target-paths-20261020/out/m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-object-slot-index-snapshot-20261017/M3ObjectSlotIndexTest.java.txt",
+      "sourcePath": "m3-openrewrite-recipes/tasks/hash-pinned-target-paths-20261020/sdk/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-target-paths-20261020/out/m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-object-slot-index-snapshot-20261017/M3ObjectSlotIndexTest.java.txt",
+      "gitBlob": "8ec4178c0078915472b4f0e5a1674d7656fc9253",
+      "bytes": 362,
+      "sha256": "6f2b492c0be59b4c6d784b3d3be3623d5da69e7217047657c36635852b14d3b7"
+    },
+    {
+      "targetPath": "m3/tooling/hash-pinned-target-paths/sdk/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-target-paths-20261020/out/m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-object-slot-index-snapshot-20261017/M3ObjectSlotStore28.java.txt",
+      "sourcePath": "m3-openrewrite-recipes/tasks/hash-pinned-target-paths-20261020/sdk/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-target-paths-20261020/out/m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-object-slot-index-snapshot-20261017/M3ObjectSlotStore28.java.txt",
+      "gitBlob": "91d5946dd69aeb1ddc8b20ab20b357554fc98e8c",
+      "bytes": 8386,
+      "sha256": "032f837fea2e97b166fc08e7f7601d66e5d31513897a03632a08ec17bcf407bb"
+    },
+    {
+      "targetPath": "m3/tooling/hash-pinned-target-paths/sdk/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-target-paths-20261020/out/m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-object-slot-index-snapshot-20261017/manifest.tsv",
+      "sourcePath": "m3-openrewrite-recipes/tasks/hash-pinned-target-paths-20261020/sdk/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-target-paths-20261020/out/m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-object-slot-index-snapshot-20261017/manifest.tsv",
+      "gitBlob": "9c4321dcba3c8df29910d6413114496fee58ecd1",
+      "bytes": 716,
+      "sha256": "ff8ff72e0f0d03eaeb5f2012a56d3eca6dce0572e2dbe3214c5d3ce2ade31a2c"
+    },
+    {
+      "targetPath": "m3/tooling/hash-pinned-target-paths/sdk/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-target-paths-20261020/out/m3/tooling/migration-recipes/src/test/java/jdk/internal/m3/rewrite/M3ObjectSlotIndexSnapshot20261017RecipeTest.java",
+      "sourcePath": "m3-openrewrite-recipes/tasks/hash-pinned-target-paths-20261020/sdk/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-target-paths-20261020/out/m3/tooling/migration-recipes/src/test/java/jdk/internal/m3/rewrite/M3ObjectSlotIndexSnapshot20261017RecipeTest.java",
+      "gitBlob": "6d3fd39ddeb3ca8fddd0d69ee2345d8b39c0e7f0",
+      "bytes": 3497,
+      "sha256": "3223a170646c0ad111c4319894c231e1ed5690ea0a3ed1cc4d86c3ae0ba14dae"
+    },
+    {
+      "targetPath": "m3/tooling/hash-pinned-target-paths/sdk/src/main/resources/META-INF/rewrite/hash-pinned-target-paths-20261020-inverse.yml",
+      "sourcePath": "m3-openrewrite-recipes/tasks/hash-pinned-target-paths-20261020/sdk/src/main/resources/META-INF/rewrite/hash-pinned-target-paths-20261020-inverse.yml",
+      "gitBlob": "23af6bc441256b33a90a1c3af9856001db36dfcc",
+      "bytes": 504,
+      "sha256": "2c3273d747559d4756cb49df36de5fddadb119a610b9fe4a8f383562a0e8ce2b"
+    },
+    {
+      "targetPath": "m3/tooling/hash-pinned-target-paths/sdk/src/main/resources/META-INF/rewrite/hash-pinned-target-paths-20261020.yml",
+      "sourcePath": "m3-openrewrite-recipes/tasks/hash-pinned-target-paths-20261020/sdk/src/main/resources/META-INF/rewrite/hash-pinned-target-paths-20261020.yml",
+      "gitBlob": "5caf0ab21105446912206f1e4026b57488c6dd12",
+      "bytes": 492,
+      "sha256": "7b5e266f805a3a8da289fcc4358f346d5b475789672f30fd153f25d5eb116784"
+    },
+    {
+      "targetPath": "m3/tooling/hash-pinned-target-paths/sdk/src/test/java/jdk/internal/m3/rewrite/M3HashPinnedTargetPathsCompatRecipeTest.java",
+      "sourcePath": "m3-openrewrite-recipes/tasks/hash-pinned-target-paths-20261020/sdk/src/test/java/jdk/internal/m3/rewrite/M3HashPinnedTargetPathsCompatRecipeTest.java",
+      "gitBlob": "4b913e6e0b7c7ae66cf9da8be40ee0565803997d",
+      "bytes": 18047,
+      "sha256": "c27c6f1797a731a0c1c07cded4e9dd62dadc95f1c6bc7408472e01bc147e8283"
+    },
+    {
+      "targetPath": "m3/tooling/hash-pinned-target-paths/sdk/src/test/resources/jdk/internal/m3/rewrite/hash-pinned-target-paths-20261020/canonical-targetPaths.java.txt",
+      "sourcePath": "m3-openrewrite-recipes/tasks/hash-pinned-target-paths-20261020/sdk/src/test/resources/jdk/internal/m3/rewrite/hash-pinned-target-paths-20261020/canonical-targetPaths.java.txt",
+      "gitBlob": "76f5823b7d7cb09acdb8a141447c3d70095ddae2",
+      "bytes": 175,
+      "sha256": "3893325d642587834c12aae6b57722abfea7b60dc6582fbcaaa6d147ae0e34ad"
+    },
+    {
+      "targetPath": "m3/tooling/hash-pinned-target-paths/sdk/THIRD_PARTY_NOTICES.md",
+      "sourcePath": "m3-openrewrite-recipes/tasks/hash-pinned-target-paths-20261020/sdk/THIRD_PARTY_NOTICES.md",
+      "gitBlob": "38913e2d81584a554dc04cb77a3e480203d23941",
+      "bytes": 889,
+      "sha256": "3363cf77a7be0ec49116bf18c7618afd25f86794eb6e250a12ed16ca14ae4452"
+    },
+    {
+      "targetPath": "m3/tooling/hash-pinned-target-paths/sdk/verify.py",
+      "sourcePath": "m3-openrewrite-recipes/tasks/hash-pinned-target-paths-20261020/sdk/verify.py",
+      "gitBlob": "87bf99346e6360462a685e66dc4f6776e2315dcb",
+      "bytes": 25712,
+      "sha256": "33dfab00149dcdcf019723794dd450eccb92d342f4266022aa7ba7f0034570d3"
+    },
+    {
+      "targetPath": "m3/tooling/hash-pinned-target-paths/qualify.py",
+      "sourcePath": "m3-openrewrite-recipes/tasks/hash-pinned-target-paths-20261020/hosted/qualify.py",
+      "gitBlob": "3fdbd0b7382bc07c3c9ca905845dcb824b2a1ae5",
+      "bytes": 17823,
+      "sha256": "05cd44ffef20c84cc9fa2c39ad2ebc4f4cb07d3ca2346f48d29947419b49e040"
+    },
+    {
+      "targetPath": ".github/workflows/m3-hash-pinned-target-paths.yml",
+      "sourcePath": "m3-openrewrite-recipes/tasks/recipe-authority-conformance-20261020/hosted/qualification.yml",
+      "gitBlob": "46ad507db06c8e5d001ef21e8ef9f9294514cebf",
+      "bytes": 36894,
+      "sha256": "0c0fa26bd10a02caddda13d39e66a720c8645df90b99429f37e0633f87347f57"
+    }
+  ],
+  "receiverOriginalOwners": [
+    {
+      "path": "m3/tooling/migration-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+      "gitBlob": "907f176d32b55d78f13e3756a407f6877f25ca7d",
+      "bytes": 13805,
+      "sha256": "9dc65793cb1f4fb20866f99f4e5d0043d54734aa03cf0fe297c0cadbba2d1c37",
+      "role": "REPLACE",
+      "license": "Apache-2.0; original file notices retained"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/test/java/jdk/internal/m3/rewrite/M3ObjectSlotIndexSnapshot20261017RecipeTest.java",
+      "gitBlob": "6d3fd39ddeb3ca8fddd0d69ee2345d8b39c0e7f0",
+      "bytes": 3497,
+      "sha256": "3223a170646c0ad111c4319894c231e1ed5690ea0a3ed1cc4d86c3ae0ba14dae",
+      "role": "KEEP",
+      "license": "Apache-2.0; original file notices retained"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-object-slot-index-snapshot-20261017/M3ObjectIndexSnapshot.java.txt",
+      "gitBlob": "30c06855e426425db292c993f6a44e42a1bb15d8",
+      "bytes": 11078,
+      "sha256": "67116969a93d0da9beffafdb36a8310247a206a96d7cb58ffbce3c053e1ad4f1",
+      "role": "KEEP",
+      "license": "Apache-2.0; original file notices retained"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-object-slot-index-snapshot-20261017/M3ObjectSlotIndexSelfTest.java.txt",
+      "gitBlob": "33a01e6772c3eb93aa6db50a397ccf71ab037fd9",
+      "bytes": 8304,
+      "sha256": "976975d979ffbde17bdf877349d60950da984b5f7207dc9f28ffeff6fe060ff7",
+      "role": "KEEP",
+      "license": "Apache-2.0; original file notices retained"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-object-slot-index-snapshot-20261017/M3ObjectSlotIndexTest.java.txt",
+      "gitBlob": "8ec4178c0078915472b4f0e5a1674d7656fc9253",
+      "bytes": 362,
+      "sha256": "6f2b492c0be59b4c6d784b3d3be3623d5da69e7217047657c36635852b14d3b7",
+      "role": "KEEP",
+      "license": "Apache-2.0; original file notices retained"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-object-slot-index-snapshot-20261017/M3ObjectSlotStore28.java.txt",
+      "gitBlob": "91d5946dd69aeb1ddc8b20ab20b357554fc98e8c",
+      "bytes": 8386,
+      "sha256": "032f837fea2e97b166fc08e7f7601d66e5d31513897a03632a08ec17bcf407bb",
+      "role": "KEEP",
+      "license": "Apache-2.0; original file notices retained"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-object-slot-index-snapshot-20261017/manifest.tsv",
+      "gitBlob": "9c4321dcba3c8df29910d6413114496fee58ecd1",
+      "bytes": 716,
+      "sha256": "ff8ff72e0f0d03eaeb5f2012a56d3eca6dce0572e2dbe3214c5d3ce2ade31a2c",
+      "role": "KEEP",
+      "license": "Apache-2.0; original file notices retained"
+    }
+  ],
+  "runtimeApplied": false,
+  "phaseAdvanced": false
+}

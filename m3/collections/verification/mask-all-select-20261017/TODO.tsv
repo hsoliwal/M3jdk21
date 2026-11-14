@@ -1,0 +1,8 @@
+priority	status	work
+P0	DONE	Source-sealed Synexia recipe pin
+P0	DONE	Test exact source and original JNI target behavior
+P0	PENDING	Publish receiver draft PR
+P0	BLOCKED	Full Maven/OpenRewrite SDK + module reactor
+P0	BLOCKED	Full matched JDK/java.base/jtreg integration
+P1	OPEN	Native/GC/Windows/macOS/ARM platform qualification
+P2	OPEN	JMH cold/warm allocation and throughput comparisons

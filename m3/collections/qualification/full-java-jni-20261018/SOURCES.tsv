@@ -1,0 +1,10 @@
+module	upstream	version	sources_jar_sha256	license	provenance_sha256
+apiguardian-api	https://github.com/apiguardian-team/apiguardian	1.1.2	277a7a4315412817beb6655b324dc7276621e95ebff00b8bf65e17a27b685e2d	The Apache License, Version 2.0	c03045650d5e792b926dc56c738e52946fb44ff1cc212fbb8c2e61e223802429
+junit-jupiter-5.10.2	https://github.com/junit-team/junit5	5.10.2	bd628b06b83b0d8830b53747b7f466beebca12d4808f117660ac06e47af99d1c	Eclipse Public License v2.0	8ccf4180e433160d923d076ff63fb9f6440d71ff3a522422ea338b0d979714ba
+junit-jupiter-api-5.10.2	https://github.com/junit-team/junit5	5.10.2	551e054c2e84b79d087f0410c8e6e3dd3e83ae54129593380d48550da441b5ef	Eclipse Public License v2.0	ec5564e4cdace0c8a0fe173f3502eef24ed8e4989dd49db8086b7c9295a301e4
+junit-jupiter-engine-5.10.2	https://github.com/junit-team/junit5	5.10.2	00ffb37a2d4a1f5ab224c4cf44b2d050b3d132ca650e9c4251605daf9cd6da9b	Eclipse Public License v2.0	fefbe8ed4151302e6a98da3b154a6c7ec58c29206466ddae1cb848e6744a18fb
+junit-jupiter-params-5.10.2	https://github.com/junit-team/junit5	5.10.2	532dce2ef436152405567ea75f076dc908c4d21641224ecc53913c9f09bfb131	Eclipse Public License v2.0	038f44693e10fb9267e130284a4c257418a24277f2d1c14f8dbacf0681f072f0
+junit-platform-commons-1.10.2	https://github.com/junit-team/junit5	1.10.2	e1435cf8f4843619a16c2c1393d39a5170db1376af048a76cdcd7bf9aad72ad6	Eclipse Public License v2.0	122eb73e35664bd56635ea2f5fb81bea474a9537ff7453d3ae0703a15e62698a
+junit-platform-engine-1.10.2	https://github.com/junit-team/junit5	1.10.2	17ac74964fcd82c57130623afe72a99105ca107fc96cb53f169b3a8c9c444c83	Eclipse Public License v2.0	93c618264cefd8b473973a6a4bc87baa2a83b55adeca2555c47a94989096ae1f
+opentest4j	https://github.com/ota4j-team/opentest4j	1.3.0	724a24e3a68267d5ebac9411389a15638a71e50c62448ffa58f59c34d5c1ebb2	The Apache License, Version 2.0	80f1b151283659911db971c9de37bb262c5107014ab5527178288a9ba59d101c
+univocity-parsers	https://github.com/univocity/univocity-parsers	2.9.1	484a48fa4a9587a47893f4a332cbe09c2902091b7a647c5d04258a46166c891b	Apache 2	44e70f89c7a241a65c05f8d5956e1d1301e48292de18b7b32fdb01699c4dd6f7

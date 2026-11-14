@@ -1,0 +1,6 @@
+gate	result
+m3/tooling/m3-image/verify.sh (pipeline postimages + class-edge parser correction; javac -Werror, JNI header and descriptor checks, native build, self-tests)	rc=0: M3_IMAGE_SELF_TEST_OK checks=46; reachability kernel Java checks=5, native checks=10; M3_IMAGE_VERIFY_OK
+class-edges proof stages lint/compile/test/runtime (class-edges-verify-current.py)	all four M3_CLASS_EDGE_STAGE_PASS: public API and JNI headers unchanged; reference additions only; Java = JNI = UBSan closure evidence; before image fails NoClassDefFoundError: Helper, corrected image runs (exit 0, prints 7); closed-world jar Main+Helper+Chain; cache reuse
+class-edges proof as shipped (verify.py)	refused: baseline drift on M3JniReachabilityKernel.java and M3ReachabilityKernel.c (pinned 3ff40f419ba3 / d89dcc65cad1, never committed on com.synexia develop; the committed pipeline faea897b20b6 has 1ad85273d3c9 / 6ad20973841b). The copy above reports these two pins and keeps every other check
+JDK-naming fixed point	0 of 48 in-scope files
+target paths	all 54 NEW on master (m3/tooling/m3-image absent); module stays off the m3 reactor like the other verify.sh tooling modules

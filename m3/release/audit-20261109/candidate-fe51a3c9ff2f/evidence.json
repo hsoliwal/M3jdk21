@@ -1,0 +1,962 @@
+{
+  "gates": [
+    {
+      "artifacts": [
+        {
+          "path": "logs/policy/RIGHTS_AND_LICENSE_BOUNDARY.json",
+          "sha256": "1133e742117bd743708d81f324f6eeb89ba48c2cf3527a0c753217f3714d6334"
+        },
+        {
+          "path": "tools/policy_gate.py",
+          "sha256": "d8b8a6825be8c4f13ac3ef4740b72d5f612aa80182cbbe8ff0555d67251d55fd"
+        }
+      ],
+      "command": [
+        "python3",
+        "-I",
+        "tools/policy_gate.py",
+        "RIGHTS_AND_LICENSE_BOUNDARY",
+        "/mnt/jdkb/repo"
+      ],
+      "environment": {
+        "architecture": "x86_64",
+        "os": "Linux 6.6 (WSL2) Ubuntu 24.04.4 LTS on Windows 11 Home 10.0.26300",
+        "toolchain": "CPython 3.12.3 venv (jsonschema 4.26.0); git 2.43.0"
+      },
+      "exit_code": 0,
+      "id": "RIGHTS_AND_LICENSE_BOUNDARY",
+      "note": "Selected checks of the candidate's own verify_release_admission.validate(release_mode=True).",
+      "owner_repository": "hsoliwal/M3jdk21",
+      "status": "PASS"
+    },
+    {
+      "artifacts": [
+        {
+          "path": "logs/policy/SOURCE_TREE_AND_UPSTREAM_BASELINE.json",
+          "sha256": "d40f006c503dab86813e6840fa50cde972bba387193bec54f14d910c41ea320c"
+        },
+        {
+          "path": "tools/policy_gate.py",
+          "sha256": "d8b8a6825be8c4f13ac3ef4740b72d5f612aa80182cbbe8ff0555d67251d55fd"
+        },
+        {
+          "path": "logs/extract-rawtree-identity-809625db.log",
+          "sha256": "ef49b4e0d53684024a631ca2af36cce60a4c81eb743265d47b56eb6d6fff410e"
+        },
+        {
+          "path": "logs/candidate-commit-api.txt",
+          "sha256": "63435b906b5b8b6c42a50d037786c3694a1ad2d307b3028e73f41c4c9f52737a"
+        },
+        {
+          "path": "logs/contract/source-identity.txt",
+          "sha256": "feabd4f8a3e6c45952aacf6655ea6b14835b8de0fea6cc792abcaf367159b546"
+        },
+        {
+          "path": "tools/rawtree.py",
+          "sha256": "6f89d5ff3bd77a3707514bcbcc174d7b560bec166b912afda7ba1167032fbd6b"
+        }
+      ],
+      "command": [
+        "python3",
+        "-I",
+        "tools/policy_gate.py",
+        "SOURCE_TREE_AND_UPSTREAM_BASELINE",
+        "/mnt/jdkb/repo"
+      ],
+      "environment": {
+        "architecture": "x86_64",
+        "os": "Linux 6.6 (WSL2) Ubuntu 24.04.4 LTS on Windows 11 Home 10.0.26300",
+        "toolchain": "CPython 3.12.3 venv (jsonschema 4.26.0); git 2.43.0"
+      },
+      "exit_code": 0,
+      "id": "SOURCE_TREE_AND_UPSTREAM_BASELINE",
+      "note": "Selected checks of the candidate's own verify_release_admission.validate(release_mode=True).",
+      "owner_repository": "hsoliwal/M3jdk21",
+      "status": "PASS"
+    },
+    {
+      "artifacts": [
+        {
+          "path": "logs/policy/RELEASE_CLAIMS_VALIDATION.json",
+          "sha256": "a44cf821700a54f3ff71791d710d79c95f56371cceaea298e7c355a90ef16f3c"
+        },
+        {
+          "path": "tools/policy_gate.py",
+          "sha256": "d8b8a6825be8c4f13ac3ef4740b72d5f612aa80182cbbe8ff0555d67251d55fd"
+        }
+      ],
+      "command": [
+        "python3",
+        "-I",
+        "tools/policy_gate.py",
+        "RELEASE_CLAIMS_VALIDATION",
+        "/mnt/jdkb/repo"
+      ],
+      "environment": {
+        "architecture": "x86_64",
+        "os": "Linux 6.6 (WSL2) Ubuntu 24.04.4 LTS on Windows 11 Home 10.0.26300",
+        "toolchain": "CPython 3.12.3 venv (jsonschema 4.26.0); git 2.43.0"
+      },
+      "exit_code": 0,
+      "id": "RELEASE_CLAIMS_VALIDATION",
+      "note": "Selected checks of the candidate's own verify_release_admission.validate(release_mode=True).",
+      "owner_repository": "hsoliwal/M3jdk21",
+      "status": "PASS"
+    },
+    {
+      "artifacts": [
+        {
+          "path": "logs/foundation-build.log",
+          "sha256": "bdcdefbad227a4882074ecba833a746b1afe544fd88dda075531dcb7b94978fb"
+        },
+        {
+          "path": "logs/foundation-extra.log",
+          "sha256": "13c0c49feef3827efd11fc19fe9062a4084054c523a89969f9465aba232156b2"
+        },
+        {
+          "path": "logs/foundation-compat.log",
+          "sha256": "d2133e8b8679bb310db0dc6c6685f31cb72b2b7b99dafd22b0e62cff42a01164"
+        },
+        {
+          "path": "logs/foundation-shared-mapping.log",
+          "sha256": "88cfb26262c3e5f4d7061ff3c490103a0ac3566d0ba3405d052c3519f329ac72"
+        },
+        {
+          "path": "logs/foundation-raw-logs/compile.log",
+          "sha256": "f9b58edc9f85b77ced4df4b1e9187ed2667ce4e00c0a3ff6fec9fa5656956c26"
+        },
+        {
+          "path": "logs/foundation-raw-logs/dictionary-frequency-contract-c2.log",
+          "sha256": "87413724d8e481a87b268664c76364f091a38950f998ac357e7bdcffff4f9daf"
+        },
+        {
+          "path": "logs/foundation-raw-logs/dictionary-frequency-contract-int.log",
+          "sha256": "87413724d8e481a87b268664c76364f091a38950f998ac357e7bdcffff4f9daf"
+        },
+        {
+          "path": "logs/foundation-raw-logs/dictionary-frequency-contract-jit.log",
+          "sha256": "87413724d8e481a87b268664c76364f091a38950f998ac357e7bdcffff4f9daf"
+        },
+        {
+          "path": "logs/foundation-raw-logs/dictionary-frequency-contract-nocompact.log",
+          "sha256": "87413724d8e481a87b268664c76364f091a38950f998ac357e7bdcffff4f9daf"
+        },
+        {
+          "path": "logs/foundation-raw-logs/extra-core-compile.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "logs/foundation-raw-logs/extra-corpus-manifest-c2.log",
+          "sha256": "94214fdb3e93cf01c4ba25f932daacf6842a3ee0e95cc99187d3c4a498b8224c"
+        },
+        {
+          "path": "logs/foundation-raw-logs/extra-corpus-manifest-int.log",
+          "sha256": "94214fdb3e93cf01c4ba25f932daacf6842a3ee0e95cc99187d3c4a498b8224c"
+        },
+        {
+          "path": "logs/foundation-raw-logs/extra-corpus-manifest-jit.log",
+          "sha256": "94214fdb3e93cf01c4ba25f932daacf6842a3ee0e95cc99187d3c4a498b8224c"
+        },
+        {
+          "path": "logs/foundation-raw-logs/extra-corpus-manifest-nocompact.log",
+          "sha256": "94214fdb3e93cf01c4ba25f932daacf6842a3ee0e95cc99187d3c4a498b8224c"
+        },
+        {
+          "path": "logs/foundation-raw-logs/extra-payload-field-pattern.log",
+          "sha256": "c6e5cfacd3831b7b39d3f6c8fdcab02fc5db57887b2a5d9d92025b3c17728572"
+        },
+        {
+          "path": "logs/foundation-raw-logs/extra-rope-text-index-c2.log",
+          "sha256": "8c3720b9afb221c7ddfdaa84614c46408a557db992b5fc213583072e45d546b5"
+        },
+        {
+          "path": "logs/foundation-raw-logs/extra-rope-text-index-int.log",
+          "sha256": "8c3720b9afb221c7ddfdaa84614c46408a557db992b5fc213583072e45d546b5"
+        },
+        {
+          "path": "logs/foundation-raw-logs/extra-rope-text-index-jit.log",
+          "sha256": "8c3720b9afb221c7ddfdaa84614c46408a557db992b5fc213583072e45d546b5"
+        },
+        {
+          "path": "logs/foundation-raw-logs/extra-rope-text-index-nocompact.log",
+          "sha256": "8c3720b9afb221c7ddfdaa84614c46408a557db992b5fc213583072e45d546b5"
+        },
+        {
+          "path": "logs/foundation-raw-logs/extra-word-rows-contract.log",
+          "sha256": "0c22a74c0f01e9b58124afd7de19e499217350080273adb25aafc8fd420414d5"
+        },
+        {
+          "path": "logs/foundation-raw-logs/grammar-support-c2.log",
+          "sha256": "821532f92105c537a0af3604cb473d6d3728ee896a1c499cdea2c7061bb97d3d"
+        },
+        {
+          "path": "logs/foundation-raw-logs/grammar-support-int.log",
+          "sha256": "821532f92105c537a0af3604cb473d6d3728ee896a1c499cdea2c7061bb97d3d"
+        },
+        {
+          "path": "logs/foundation-raw-logs/grammar-support-jit.log",
+          "sha256": "821532f92105c537a0af3604cb473d6d3728ee896a1c499cdea2c7061bb97d3d"
+        },
+        {
+          "path": "logs/foundation-raw-logs/grammar-support-nocompact.log",
+          "sha256": "821532f92105c537a0af3604cb473d6d3728ee896a1c499cdea2c7061bb97d3d"
+        },
+        {
+          "path": "logs/foundation-raw-logs/instance-index-c2.log",
+          "sha256": "73070de0fc8499086498581bace61410f94da9f32cb104054377f9f286d5698f"
+        },
+        {
+          "path": "logs/foundation-raw-logs/instance-index-int.log",
+          "sha256": "73070de0fc8499086498581bace61410f94da9f32cb104054377f9f286d5698f"
+        },
+        {
+          "path": "logs/foundation-raw-logs/instance-index-jit.log",
+          "sha256": "73070de0fc8499086498581bace61410f94da9f32cb104054377f9f286d5698f"
+        },
+        {
+          "path": "logs/foundation-raw-logs/instance-index-nocompact.log",
+          "sha256": "73070de0fc8499086498581bace61410f94da9f32cb104054377f9f286d5698f"
+        },
+        {
+          "path": "logs/foundation-raw-logs/langdex-receiver-c2.log",
+          "sha256": "635e044e5d179aba45304ae4e1eebde8d55226bf14bfcc01dda298eacec2a7d7"
+        },
+        {
+          "path": "logs/foundation-raw-logs/langdex-receiver-int.log",
+          "sha256": "635e044e5d179aba45304ae4e1eebde8d55226bf14bfcc01dda298eacec2a7d7"
+        },
+        {
+          "path": "logs/foundation-raw-logs/langdex-receiver-jit.log",
+          "sha256": "635e044e5d179aba45304ae4e1eebde8d55226bf14bfcc01dda298eacec2a7d7"
+        },
+        {
+          "path": "logs/foundation-raw-logs/langdex-receiver-nocompact.log",
+          "sha256": "635e044e5d179aba45304ae4e1eebde8d55226bf14bfcc01dda298eacec2a7d7"
+        },
+        {
+          "path": "logs/foundation-raw-logs/langdex-source-envelope-c2.log",
+          "sha256": "e5991207a6b2932580fd6ab27ac468825f62a0be1d18be3e995aa06c2640849a"
+        },
+        {
+          "path": "logs/foundation-raw-logs/langdex-source-envelope-int.log",
+          "sha256": "e5991207a6b2932580fd6ab27ac468825f62a0be1d18be3e995aa06c2640849a"
+        },
+        {
+          "path": "logs/foundation-raw-logs/langdex-source-envelope-jit.log",
+          "sha256": "e5991207a6b2932580fd6ab27ac468825f62a0be1d18be3e995aa06c2640849a"
+        },
+        {
+          "path": "logs/foundation-raw-logs/langdex-source-envelope-nocompact.log",
+          "sha256": "e5991207a6b2932580fd6ab27ac468825f62a0be1d18be3e995aa06c2640849a"
+        },
+        {
+          "path": "logs/foundation-raw-logs/m3-family-admission-c2.log",
+          "sha256": "2b1e0d3ce8de7d1842e7e1d4b603c1efbbb860d2342d4237f81eb7228f2173a3"
+        },
+        {
+          "path": "logs/foundation-raw-logs/m3-family-admission-int.log",
+          "sha256": "2b1e0d3ce8de7d1842e7e1d4b603c1efbbb860d2342d4237f81eb7228f2173a3"
+        },
+        {
+          "path": "logs/foundation-raw-logs/m3-family-admission-jit.log",
+          "sha256": "2b1e0d3ce8de7d1842e7e1d4b603c1efbbb860d2342d4237f81eb7228f2173a3"
+        },
+        {
+          "path": "logs/foundation-raw-logs/m3-family-admission-nocompact.log",
+          "sha256": "2b1e0d3ce8de7d1842e7e1d4b603c1efbbb860d2342d4237f81eb7228f2173a3"
+        },
+        {
+          "path": "logs/foundation-raw-logs/m3-family-contract-c2.log",
+          "sha256": "25bb534cc96abe57e5aa70d50dee8555fd4aeae0538861dd43e4dc39924865ed"
+        },
+        {
+          "path": "logs/foundation-raw-logs/m3-family-contract-int.log",
+          "sha256": "25bb534cc96abe57e5aa70d50dee8555fd4aeae0538861dd43e4dc39924865ed"
+        },
+        {
+          "path": "logs/foundation-raw-logs/m3-family-contract-jit.log",
+          "sha256": "25bb534cc96abe57e5aa70d50dee8555fd4aeae0538861dd43e4dc39924865ed"
+        },
+        {
+          "path": "logs/foundation-raw-logs/m3-family-contract-nocompact.log",
+          "sha256": "25bb534cc96abe57e5aa70d50dee8555fd4aeae0538861dd43e4dc39924865ed"
+        },
+        {
+          "path": "logs/foundation-raw-logs/m3-family-sidecar-c2.log",
+          "sha256": "68aa1ed5b1f19c6bfd846019b48d449b75fa0047836bf2dcc8c6ea07190701cf"
+        },
+        {
+          "path": "logs/foundation-raw-logs/m3-family-sidecar-int.log",
+          "sha256": "68aa1ed5b1f19c6bfd846019b48d449b75fa0047836bf2dcc8c6ea07190701cf"
+        },
+        {
+          "path": "logs/foundation-raw-logs/m3-family-sidecar-jit.log",
+          "sha256": "68aa1ed5b1f19c6bfd846019b48d449b75fa0047836bf2dcc8c6ea07190701cf"
+        },
+        {
+          "path": "logs/foundation-raw-logs/m3-family-sidecar-nocompact.log",
+          "sha256": "68aa1ed5b1f19c6bfd846019b48d449b75fa0047836bf2dcc8c6ea07190701cf"
+        },
+        {
+          "path": "logs/foundation-raw-logs/m3-payload-c2.log",
+          "sha256": "c9b97235afbeb06d5822d0fae1f5110ff6aedf6b64385c4e5b8ef19b7e3d05ca"
+        },
+        {
+          "path": "logs/foundation-raw-logs/m3-payload-int.log",
+          "sha256": "c9b97235afbeb06d5822d0fae1f5110ff6aedf6b64385c4e5b8ef19b7e3d05ca"
+        },
+        {
+          "path": "logs/foundation-raw-logs/m3-payload-jit.log",
+          "sha256": "c9b97235afbeb06d5822d0fae1f5110ff6aedf6b64385c4e5b8ef19b7e3d05ca"
+        },
+        {
+          "path": "logs/foundation-raw-logs/m3-payload-nocompact.log",
+          "sha256": "c9b97235afbeb06d5822d0fae1f5110ff6aedf6b64385c4e5b8ef19b7e3d05ca"
+        },
+        {
+          "path": "logs/foundation-raw-logs/m3-payload-release-c2.log",
+          "sha256": "b85eef99230a3ffc214cc6f80f21fd3ec153a557f3f4961b2bdc21247e94527c"
+        },
+        {
+          "path": "logs/foundation-raw-logs/m3-payload-release-int.log",
+          "sha256": "b85eef99230a3ffc214cc6f80f21fd3ec153a557f3f4961b2bdc21247e94527c"
+        },
+        {
+          "path": "logs/foundation-raw-logs/m3-payload-release-jit.log",
+          "sha256": "b85eef99230a3ffc214cc6f80f21fd3ec153a557f3f4961b2bdc21247e94527c"
+        },
+        {
+          "path": "logs/foundation-raw-logs/m3-payload-release-nocompact.log",
+          "sha256": "b85eef99230a3ffc214cc6f80f21fd3ec153a557f3f4961b2bdc21247e94527c"
+        },
+        {
+          "path": "logs/foundation-raw-logs/m3-receiver-c2.log",
+          "sha256": "43ffc06bb7077c0f41fc7936b4a832a93f51bea7fce0191d576131fd1d00015e"
+        },
+        {
+          "path": "logs/foundation-raw-logs/m3-receiver-int.log",
+          "sha256": "43ffc06bb7077c0f41fc7936b4a832a93f51bea7fce0191d576131fd1d00015e"
+        },
+        {
+          "path": "logs/foundation-raw-logs/m3-receiver-jit.log",
+          "sha256": "43ffc06bb7077c0f41fc7936b4a832a93f51bea7fce0191d576131fd1d00015e"
+        },
+        {
+          "path": "logs/foundation-raw-logs/m3-receiver-nocompact.log",
+          "sha256": "43ffc06bb7077c0f41fc7936b4a832a93f51bea7fce0191d576131fd1d00015e"
+        },
+        {
+          "path": "logs/foundation-raw-logs/m3-si-unit-c2.log",
+          "sha256": "49bf038d9c6030851aafba981c43515ca679af2619aa9642123d0c067f2bbfd9"
+        },
+        {
+          "path": "logs/foundation-raw-logs/m3-si-unit-int.log",
+          "sha256": "49bf038d9c6030851aafba981c43515ca679af2619aa9642123d0c067f2bbfd9"
+        },
+        {
+          "path": "logs/foundation-raw-logs/m3-si-unit-jit.log",
+          "sha256": "49bf038d9c6030851aafba981c43515ca679af2619aa9642123d0c067f2bbfd9"
+        },
+        {
+          "path": "logs/foundation-raw-logs/m3-si-unit-nocompact.log",
+          "sha256": "49bf038d9c6030851aafba981c43515ca679af2619aa9642123d0c067f2bbfd9"
+        },
+        {
+          "path": "logs/foundation-raw-logs/m3-warm-lookup-c2.log",
+          "sha256": "8a28b28675e549be60901d9e9a0b284d7e7187772b2d6a04166040386ce674d7"
+        },
+        {
+          "path": "logs/foundation-raw-logs/m3-warm-lookup-int.log",
+          "sha256": "8a28b28675e549be60901d9e9a0b284d7e7187772b2d6a04166040386ce674d7"
+        },
+        {
+          "path": "logs/foundation-raw-logs/m3-warm-lookup-jit.log",
+          "sha256": "8a28b28675e549be60901d9e9a0b284d7e7187772b2d6a04166040386ce674d7"
+        },
+        {
+          "path": "logs/foundation-raw-logs/m3-warm-lookup-nocompact.log",
+          "sha256": "8a28b28675e549be60901d9e9a0b284d7e7187772b2d6a04166040386ce674d7"
+        },
+        {
+          "path": "logs/foundation-raw-logs/number-contract-c2.log",
+          "sha256": "f80e99ad7dc4e2163675b3488dcf310ff2598e30342fe737074c17f12dbf2eca"
+        },
+        {
+          "path": "logs/foundation-raw-logs/number-contract-int.log",
+          "sha256": "f80e99ad7dc4e2163675b3488dcf310ff2598e30342fe737074c17f12dbf2eca"
+        },
+        {
+          "path": "logs/foundation-raw-logs/number-contract-jit.log",
+          "sha256": "f80e99ad7dc4e2163675b3488dcf310ff2598e30342fe737074c17f12dbf2eca"
+        },
+        {
+          "path": "logs/foundation-raw-logs/number-contract-nocompact.log",
+          "sha256": "f80e99ad7dc4e2163675b3488dcf310ff2598e30342fe737074c17f12dbf2eca"
+        },
+        {
+          "path": "logs/foundation-raw-logs/number-space-c2.log",
+          "sha256": "16ea3dbaf3f0145575314a343707059e89fe2926261a574634c2e15c5ed4c79a"
+        },
+        {
+          "path": "logs/foundation-raw-logs/number-space-int.log",
+          "sha256": "16ea3dbaf3f0145575314a343707059e89fe2926261a574634c2e15c5ed4c79a"
+        },
+        {
+          "path": "logs/foundation-raw-logs/number-space-jit.log",
+          "sha256": "16ea3dbaf3f0145575314a343707059e89fe2926261a574634c2e15c5ed4c79a"
+        },
+        {
+          "path": "logs/foundation-raw-logs/number-space-nocompact.log",
+          "sha256": "16ea3dbaf3f0145575314a343707059e89fe2926261a574634c2e15c5ed4c79a"
+        },
+        {
+          "path": "logs/foundation-raw-logs/test-c2.log",
+          "sha256": "b3be64fd998ebfac7d10de3e597fa58966bb29867cb3f7e603b4f99a34e295d4"
+        },
+        {
+          "path": "logs/foundation-raw-logs/test-int.log",
+          "sha256": "b3be64fd998ebfac7d10de3e597fa58966bb29867cb3f7e603b4f99a34e295d4"
+        },
+        {
+          "path": "logs/foundation-raw-logs/test-jit.log",
+          "sha256": "b3be64fd998ebfac7d10de3e597fa58966bb29867cb3f7e603b4f99a34e295d4"
+        },
+        {
+          "path": "logs/foundation-raw-logs/test-nocompact.log",
+          "sha256": "b3be64fd998ebfac7d10de3e597fa58966bb29867cb3f7e603b4f99a34e295d4"
+        },
+        {
+          "path": "logs/foundation-raw-logs/translation-receiver-map-c2.log",
+          "sha256": "50775b44117befb35c73e052cd72ca5284d1485524518ad5e7472682fe41e121"
+        },
+        {
+          "path": "logs/foundation-raw-logs/translation-receiver-map-int.log",
+          "sha256": "50775b44117befb35c73e052cd72ca5284d1485524518ad5e7472682fe41e121"
+        },
+        {
+          "path": "logs/foundation-raw-logs/translation-receiver-map-jit.log",
+          "sha256": "50775b44117befb35c73e052cd72ca5284d1485524518ad5e7472682fe41e121"
+        },
+        {
+          "path": "logs/foundation-raw-logs/translation-receiver-map-nocompact.log",
+          "sha256": "50775b44117befb35c73e052cd72ca5284d1485524518ad5e7472682fe41e121"
+        },
+        {
+          "path": "logs/foundation-raw-logs/typed-precompute-c2.log",
+          "sha256": "9028d9009ea6699e55fbd6b2875e628143df223acc2965a359cf63ad7ec20fe3"
+        },
+        {
+          "path": "logs/foundation-raw-logs/typed-precompute-int.log",
+          "sha256": "9028d9009ea6699e55fbd6b2875e628143df223acc2965a359cf63ad7ec20fe3"
+        },
+        {
+          "path": "logs/foundation-raw-logs/typed-precompute-jit.log",
+          "sha256": "9028d9009ea6699e55fbd6b2875e628143df223acc2965a359cf63ad7ec20fe3"
+        },
+        {
+          "path": "logs/foundation-raw-logs/typed-precompute-nocompact.log",
+          "sha256": "9028d9009ea6699e55fbd6b2875e628143df223acc2965a359cf63ad7ec20fe3"
+        },
+        {
+          "path": "logs/contract/core-test-wiring.json",
+          "sha256": "7c859ac71743d29157b788be1618bebe0808deb48e4131c5584e4f2e249be776"
+        },
+        {
+          "path": "logs/contract/test-wiring.log",
+          "sha256": "7c859ac71743d29157b788be1618bebe0808deb48e4131c5584e4f2e249be776"
+        },
+        {
+          "path": "logs/gates-m3-toolchain.log",
+          "sha256": "51f4c3832c7599cf1f714d2e201bb3f143e1e36aada011f98e2b830675af4fa3"
+        },
+        {
+          "path": "tools/gates-m3.sh",
+          "sha256": "16bef87f7636416b27ae87a79fbe65489daf74373078e0c8f3786feb3b6f1614"
+        }
+      ],
+      "command": [
+        "bash",
+        "tools/gates-m3.sh"
+      ],
+      "environment": {
+        "architecture": "x86_64",
+        "os": "Linux 6.6 (WSL2) Ubuntu 24.04.4 LTS on Windows 11 Home 10.0.26300",
+        "toolchain": "Temurin jdk-21+35 (sha256 82f64c53acaa045370d6762ebd7441b74e6fda14b464d54d1ff8ca941ec069e6)"
+      },
+      "exit_code": 1,
+      "id": "M3_FOUNDATION_TESTS",
+      "note": "Steps of m3-first-release-admission.yml job foundation; check-m3.py exits 1 (stale fixture path, fix PR #2893).",
+      "owner_repository": "hsoliwal/M3jdk21",
+      "status": "FAIL"
+    },
+    {
+      "artifacts": [
+        {
+          "path": "logs/precompute-java.log",
+          "sha256": "efa2f0c8c77f442187d13fcccdcaba8d92c8291dcd663611d1b4ae56d8b1b6c5"
+        },
+        {
+          "path": "logs/precompute-java-reports/surefire-reports/TEST-jdk.m3.precompute.CodeTextSignalsTest.xml",
+          "sha256": "e60c44b3cc4bdaa6964dd0ac6948124d2c9b81c1ecd6720fd4b7ecdf7fd4d106"
+        },
+        {
+          "path": "logs/precompute-java-reports/surefire-reports/TEST-jdk.m3.precompute.CpuToolPrecomputeTest.xml",
+          "sha256": "8c2ac698ed4d69c0fcb3c6c9ac6fe031ca322398ac3348ee87bddff223e993fa"
+        },
+        {
+          "path": "logs/precompute-java-reports/surefire-reports/TEST-jdk.m3.precompute.DistanceFrontierTest.xml",
+          "sha256": "2033969f675d59466fff56a525fee7e91419879f99d765fe0c5f7f9971a367a7"
+        },
+        {
+          "path": "logs/precompute-java-reports/surefire-reports/TEST-jdk.m3.precompute.EditDistancePlanBitParallelTest.xml",
+          "sha256": "16dc925ebb862e0473fd0c2890cca4c284c94e88eef77072c92cb87a5f59b741"
+        },
+        {
+          "path": "logs/precompute-java-reports/surefire-reports/TEST-jdk.m3.precompute.EditDistancePlanBoundaryTest.xml",
+          "sha256": "87cc041cd5c0a82ca77bb6b30719cca2a4fb68a3f322cd4e85d386e4389f9d9d"
+        },
+        {
+          "path": "logs/precompute-java-reports/surefire-reports/TEST-jdk.m3.precompute.EditDistancePlanProofTest.xml",
+          "sha256": "8e6284be51be2a621b251a40d8bed4f6503f1c052122821e4f6e1b1342fb1d1a"
+        },
+        {
+          "path": "logs/precompute-java-reports/surefire-reports/TEST-jdk.m3.precompute.EditDistancePlanTest.xml",
+          "sha256": "d07ef6bdba3abafbb2fc4c5b87090dea18c8239028a1f6818076955c200133d4"
+        },
+        {
+          "path": "logs/precompute-java-reports/surefire-reports/TEST-jdk.m3.precompute.FrozenLongTupleIndexPairRegressionTest.xml",
+          "sha256": "f71bd28240ee36aa71e2bddf7e5cc35855d653fb1498ddbf0d0e56b3e52118d4"
+        },
+        {
+          "path": "logs/precompute-java-reports/surefire-reports/TEST-jdk.m3.precompute.IndexPrecomputeConsumerProfilesReferenceTest.xml",
+          "sha256": "e084519d687a7ad93477e1ee07bfda984d31260bfddd076ab5c5dae0b1763569"
+        },
+        {
+          "path": "logs/precompute-java-reports/surefire-reports/TEST-jdk.m3.precompute.IndexPrecomputeConsumerProfilesTest.xml",
+          "sha256": "dc32ed2e698345aa4e6d984799a46422592557787c8b5ce081a2b6e774ff070d"
+        },
+        {
+          "path": "logs/precompute-java-reports/surefire-reports/TEST-jdk.m3.precompute.IndexPrecomputeDependencyImageTest.xml",
+          "sha256": "0692d74d37d098fbbe005aa42e107e38b2414bc10b8b5dd8a2c53164e3ce9983"
+        },
+        {
+          "path": "logs/precompute-java-reports/surefire-reports/TEST-jdk.m3.precompute.IndexPrecomputeMultipassCompilerTest.xml",
+          "sha256": "1b27ec3d74281a79a11552b1d09c2ae4b5f5c60829dde51bd9a221eda4625107"
+        },
+        {
+          "path": "logs/precompute-java-reports/surefire-reports/TEST-jdk.m3.precompute.IndexPrecomputePlannerCycleTest.xml",
+          "sha256": "f66a6950002e1b3d24e9be17cbf7a7c5df4c07e5bd76e1a9b5004c47abc9ab68"
+        },
+        {
+          "path": "logs/precompute-java-reports/surefire-reports/TEST-jdk.m3.precompute.IndexPrecomputePlannerReferenceTest.xml",
+          "sha256": "a6caa984cf72e098f6fe11f9e4667967d0bdee3044fccc06c61d69e8d66e17b6"
+        },
+        {
+          "path": "logs/precompute-java-reports/surefire-reports/TEST-jdk.m3.precompute.LcsPlanProofTest.xml",
+          "sha256": "902c1bcff12f2883f01ab13816057e225cef74684f0ca4e95c52ac5ba2423003"
+        },
+        {
+          "path": "logs/precompute-java-reports/surefire-reports/TEST-jdk.m3.precompute.LcsPlanTest.xml",
+          "sha256": "274008cacd946d73f61a42715cd8bad7054059dca7b9e143c3f53495b7769001"
+        },
+        {
+          "path": "logs/precompute-java-reports/surefire-reports/TEST-jdk.m3.precompute.MeasuredRopeAppleScenarioTest.xml",
+          "sha256": "b004cd979986d1c62cd760d34391201ba11d4ed3ec6f174fc39665ebc50ebb94"
+        },
+        {
+          "path": "logs/precompute-java-reports/surefire-reports/TEST-jdk.m3.precompute.MeasuredRopeTest.xml",
+          "sha256": "774c52672f32e982bdc61a6fbeb317a41b35c03076b8368b641400422e189146"
+        },
+        {
+          "path": "logs/precompute-java-reports/surefire-reports/TEST-jdk.m3.precompute.NativeParityTest.xml",
+          "sha256": "174cc2622680003a3b400c9d1dd4b67141861bec810de98bb2655c8f5919b2f3"
+        },
+        {
+          "path": "logs/precompute-java-reports/surefire-reports/TEST-jdk.m3.precompute.RegexDerivativeEffectsBridgeTest.xml",
+          "sha256": "c850f6b4d85214f54920cbf6c51bbdd062b1db210103eba10dc49ead03557c87"
+        },
+        {
+          "path": "logs/precompute-java-reports/surefire-reports/TEST-jdk.m3.precompute.RegexDerivativeTest.xml",
+          "sha256": "c6a0780394ee9dcc90638289eb28669b255c3be1dbe8ca97eee9322dd84ab6f2"
+        },
+        {
+          "path": "logs/precompute-java-reports/surefire-reports/TEST-jdk.m3.precompute.RegexDfaEffectsPortTest.xml",
+          "sha256": "2a3482704ee481f93937f8447afd1c72bc08a73d9a45031043462f3aa9dcd9c2"
+        },
+        {
+          "path": "logs/precompute-java-reports/surefire-reports/TEST-jdk.m3.precompute.RegexOracleHarnessTest.xml",
+          "sha256": "7bf5d31218c6f182a801fdb6d4e4d1737cc130ff1c9d6090f650d235c14f59e7"
+        },
+        {
+          "path": "logs/precompute-java-reports/surefire-reports/TEST-jdk.m3.precompute.RegexShapeTest.xml",
+          "sha256": "903d81da281167f2f161177ea50291193c3857bdc940c18fe28a6e515877a7f6"
+        },
+        {
+          "path": "logs/precompute-java-reports/surefire-reports/TEST-jdk.m3.precompute.RegexStringSignalsTest.xml",
+          "sha256": "3959514e3f0816f18960ed7a58a4af278b74610c2a08234a74764a0f15a9d6b9"
+        },
+        {
+          "path": "logs/precompute-java-reports/surefire-reports/TEST-jdk.m3.precompute.RegexStringTrialImageTest.xml",
+          "sha256": "3256a8b1dd93b5cfc21ef46e3796aadc2e8cec0d949034c68d52851a3754b40f"
+        },
+        {
+          "path": "logs/precompute-java-reports/surefire-reports/TEST-jdk.m3.precompute.SimilarityBatchTest.xml",
+          "sha256": "3e6b4d6c0954ff368b5cde7ae87b7064d10d0eaaaacbdfba93aaf2141f9c3251"
+        },
+        {
+          "path": "logs/precompute-java-reports/surefire-reports/TEST-jdk.m3.precompute.SparseUtf16StitchedReferenceTest.xml",
+          "sha256": "ac422eb711cabec9e019411a983674a180f8400235a1e749e541c5d587bbc15a"
+        },
+        {
+          "path": "logs/precompute-java-reports/surefire-reports/TEST-jdk.m3.precompute.SparseUtf16StitchedTest.xml",
+          "sha256": "bf3566d049c59e7ebf1b6569721646cc4d6af4aa7eab57f5ab9ed36479aff723"
+        },
+        {
+          "path": "logs/precompute-java-reports/surefire-reports/TEST-jdk.m3.precompute.TextSignalsTest.xml",
+          "sha256": "db5ad186def7591e7d02e63595a82ed52446e3b522b46b5bd90926de137ad82a"
+        },
+        {
+          "path": "logs/precompute-java-reports/surefire-reports/TEST-jdk.m3.precompute.TokenRegexTest.xml",
+          "sha256": "e1d2ad46912aa8e981563e1880b5a0e090b757408df712207be9b72134258308"
+        },
+        {
+          "path": "logs/precompute-java-reports/surefire-reports/TEST-jdk.m3.precompute.Utf16GlobProofTest.xml",
+          "sha256": "d57fc52a13f1ad7e424977618988683160b6bf2151e452138af44a2170b5b0a7"
+        },
+        {
+          "path": "logs/precompute-java-reports/surefire-reports/TEST-jdk.m3.precompute.Utf16GlobTest.xml",
+          "sha256": "bfbde01b1e0ba18668f2eb17ca79e439fb510bb3cb6f3c3e3a369a2270d5d434"
+        },
+        {
+          "path": "tools/gates-m3.sh",
+          "sha256": "16bef87f7636416b27ae87a79fbe65489daf74373078e0c8f3786feb3b6f1614"
+        }
+      ],
+      "command": [
+        "mvn",
+        "-B",
+        "-ntp",
+        "-f",
+        "m3/ports/precompute/pom.xml",
+        "test"
+      ],
+      "environment": {
+        "architecture": "x86_64",
+        "os": "Linux 6.6 (WSL2) Ubuntu 24.04.4 LTS on Windows 11 Home 10.0.26300",
+        "toolchain": "Temurin jdk-21+35 (sha256 82f64c53acaa045370d6762ebd7441b74e6fda14b464d54d1ff8ca941ec069e6); Apache Maven 3.9.14"
+      },
+      "exit_code": 0,
+      "id": "PRECOMPUTE_JAVA_DIFFERENTIAL",
+      "note": "125 tests, 0 failures, 0 errors, 2 skipped.",
+      "owner_repository": "hsoliwal/M3jdk21",
+      "status": "PASS"
+    },
+    {
+      "artifacts": [
+        {
+          "path": "logs/precompute-native.log",
+          "sha256": "8799aaf0559a35106828108fd83bace2d6cb260bc7b4030f030eb17570b2688e"
+        },
+        {
+          "path": "logs/precompute-native-reports/surefire-reports/TEST-jdk.m3.precompute.CodeTextSignalsTest.xml",
+          "sha256": "5d333f1eb85d5d3be1814a31829cd654e2096a140e986b98cfc671f888cab9c3"
+        },
+        {
+          "path": "logs/precompute-native-reports/surefire-reports/TEST-jdk.m3.precompute.CpuToolPrecomputeTest.xml",
+          "sha256": "74d66b2b48ad3b62e7e3b564f57ba9e7adb91b06dac764fa50a25ad4982b73f5"
+        },
+        {
+          "path": "logs/precompute-native-reports/surefire-reports/TEST-jdk.m3.precompute.DistanceFrontierTest.xml",
+          "sha256": "ab2bda3fbe37eec814a3922a636387b191a7065660859392656082c84e0246f7"
+        },
+        {
+          "path": "logs/precompute-native-reports/surefire-reports/TEST-jdk.m3.precompute.EditDistancePlanBitParallelTest.xml",
+          "sha256": "6785e7185d4da5dc2cd58f802943b8d2bd635bd1e0c3fbb29f76186f50ccc3f3"
+        },
+        {
+          "path": "logs/precompute-native-reports/surefire-reports/TEST-jdk.m3.precompute.EditDistancePlanBoundaryTest.xml",
+          "sha256": "607e8caf4eacaccab5585d1f1c48ecec35a7f06de2908c253ac8d2a2cf002577"
+        },
+        {
+          "path": "logs/precompute-native-reports/surefire-reports/TEST-jdk.m3.precompute.EditDistancePlanProofTest.xml",
+          "sha256": "00fa25550c9b17e0c66217168951f7727f3bcbcd1bfc2421dc23aa8df724f675"
+        },
+        {
+          "path": "logs/precompute-native-reports/surefire-reports/TEST-jdk.m3.precompute.EditDistancePlanTest.xml",
+          "sha256": "ee3b0c1f81295836d43877172e084bb3631d73febe1b8501ce5ef66124656dcf"
+        },
+        {
+          "path": "logs/precompute-native-reports/surefire-reports/TEST-jdk.m3.precompute.FrozenLongTupleIndexPairRegressionTest.xml",
+          "sha256": "4808068ecdd96d503ca408ad66252d7aab7c7fef26ac830196ff4173da7f15bd"
+        },
+        {
+          "path": "logs/precompute-native-reports/surefire-reports/TEST-jdk.m3.precompute.IndexPrecomputeConsumerProfilesReferenceTest.xml",
+          "sha256": "a8d5b0dd35cb0d276dc14772d904c1265c611df67506ece52c27b211aeb7feff"
+        },
+        {
+          "path": "logs/precompute-native-reports/surefire-reports/TEST-jdk.m3.precompute.IndexPrecomputeConsumerProfilesTest.xml",
+          "sha256": "2c759cb6879de2dd1414b6879acbce76a3fc32078a7ef2646c920172ff2109c8"
+        },
+        {
+          "path": "logs/precompute-native-reports/surefire-reports/TEST-jdk.m3.precompute.IndexPrecomputeDependencyImageTest.xml",
+          "sha256": "4bc34608119c46406ae65674cade09891cb11c8badd88f6313231d8304661a3c"
+        },
+        {
+          "path": "logs/precompute-native-reports/surefire-reports/TEST-jdk.m3.precompute.IndexPrecomputeMultipassCompilerTest.xml",
+          "sha256": "6cd60e82a47f6769ebb762c78ef31aeb1511551c73ecb971565c1e66d1499f45"
+        },
+        {
+          "path": "logs/precompute-native-reports/surefire-reports/TEST-jdk.m3.precompute.IndexPrecomputePlannerCycleTest.xml",
+          "sha256": "8b012829f8ecde4e91bf45e8519435b2f94b7922da38e42058bae0e2273459c4"
+        },
+        {
+          "path": "logs/precompute-native-reports/surefire-reports/TEST-jdk.m3.precompute.IndexPrecomputePlannerReferenceTest.xml",
+          "sha256": "513d08c28f579b020b1391e0a1045cb6d813a5eb6355f6450d15439e60c5a5f0"
+        },
+        {
+          "path": "logs/precompute-native-reports/surefire-reports/TEST-jdk.m3.precompute.LcsPlanProofTest.xml",
+          "sha256": "04869b8f1ae89a92f09f24fce09b91dab21a0172e24ba2666682dc1b4033be3b"
+        },
+        {
+          "path": "logs/precompute-native-reports/surefire-reports/TEST-jdk.m3.precompute.LcsPlanTest.xml",
+          "sha256": "da7e39ee64e549a69bcc0ef21d8ab01681fd5a25d4e16fea825d08b4f7c34a7d"
+        },
+        {
+          "path": "logs/precompute-native-reports/surefire-reports/TEST-jdk.m3.precompute.MeasuredRopeAppleScenarioTest.xml",
+          "sha256": "7395faad5b03784d487d771dc6a9426ac39efbee522e6d0a3da05edc5626e1b7"
+        },
+        {
+          "path": "logs/precompute-native-reports/surefire-reports/TEST-jdk.m3.precompute.MeasuredRopeTest.xml",
+          "sha256": "e203ca455069911137e7708be0c54fedbff11edc4bb2f3de91ae718ed3bee306"
+        },
+        {
+          "path": "logs/precompute-native-reports/surefire-reports/TEST-jdk.m3.precompute.NativeParityTest.xml",
+          "sha256": "b6bed6cc21da5ea4793b301867cfd41c5a12261ffd1c41090a48ed02ebee0c37"
+        },
+        {
+          "path": "logs/precompute-native-reports/surefire-reports/TEST-jdk.m3.precompute.RegexDerivativeEffectsBridgeTest.xml",
+          "sha256": "4581c5dd649af179a02fc00eab79f0a7c0903a225691b666dc041e9a1d8d07a3"
+        },
+        {
+          "path": "logs/precompute-native-reports/surefire-reports/TEST-jdk.m3.precompute.RegexDerivativeTest.xml",
+          "sha256": "e82a960695e86e44b5ab716d129dd7b6c11bfa116a0b0117bf5d637c22ada379"
+        },
+        {
+          "path": "logs/precompute-native-reports/surefire-reports/TEST-jdk.m3.precompute.RegexDfaEffectsPortTest.xml",
+          "sha256": "b0aa599dc8da82a7d66f1a539f4d78451d5be13bf897c79b80c1b8ab47bc67a4"
+        },
+        {
+          "path": "logs/precompute-native-reports/surefire-reports/TEST-jdk.m3.precompute.RegexOracleHarnessTest.xml",
+          "sha256": "68f7304c54ab89e2e2e74a1920739f9c5a69164d856474ac747e05f57afabc41"
+        },
+        {
+          "path": "logs/precompute-native-reports/surefire-reports/TEST-jdk.m3.precompute.RegexShapeTest.xml",
+          "sha256": "5b1683a9771cdab01aa17ac3ebb51ff52132ce3209292f61353e43ac9926f72c"
+        },
+        {
+          "path": "logs/precompute-native-reports/surefire-reports/TEST-jdk.m3.precompute.RegexStringSignalsTest.xml",
+          "sha256": "0ab565fc63f31a49c463897d19322ed37b8136f4c5fe53a04f39badd6a62a2df"
+        },
+        {
+          "path": "logs/precompute-native-reports/surefire-reports/TEST-jdk.m3.precompute.RegexStringTrialImageTest.xml",
+          "sha256": "27beeb9075d429f830392e6c7a1dfc4f61697ad9852b9475d7640db5e80b7652"
+        },
+        {
+          "path": "logs/precompute-native-reports/surefire-reports/TEST-jdk.m3.precompute.SimilarityBatchTest.xml",
+          "sha256": "e55d2e001731d1548f6eb037228629e7944b2fea86a3b562044ad597eaad463f"
+        },
+        {
+          "path": "logs/precompute-native-reports/surefire-reports/TEST-jdk.m3.precompute.SparseUtf16StitchedReferenceTest.xml",
+          "sha256": "28e6b73179766ccb5ca3b31b4e903c72cc91f8b3e8ff2a6d7717a54bfab40cdc"
+        },
+        {
+          "path": "logs/precompute-native-reports/surefire-reports/TEST-jdk.m3.precompute.SparseUtf16StitchedTest.xml",
+          "sha256": "3e5df005699c868b0fc0d803f871ae3937b6738f1681e4ebd045244d333e06cb"
+        },
+        {
+          "path": "logs/precompute-native-reports/surefire-reports/TEST-jdk.m3.precompute.TextSignalsTest.xml",
+          "sha256": "961908881286a678a13960f6769292d103ba7ce3322dba603263d91bf2c512c4"
+        },
+        {
+          "path": "logs/precompute-native-reports/surefire-reports/TEST-jdk.m3.precompute.TokenRegexTest.xml",
+          "sha256": "8733a3bbf6713fb91f55ad9704a248ff0ea82b4393cfe41f6b139f1f9097ada0"
+        },
+        {
+          "path": "logs/precompute-native-reports/surefire-reports/TEST-jdk.m3.precompute.Utf16GlobProofTest.xml",
+          "sha256": "e942c70db18d95030b5428682de0db3faace2c24e8d1af4130c99dea70c9113d"
+        },
+        {
+          "path": "logs/precompute-native-reports/surefire-reports/TEST-jdk.m3.precompute.Utf16GlobTest.xml",
+          "sha256": "523cae12abb10a0b90648999aa8900ae0ecf138ed2159ec1d288324f677f0242"
+        },
+        {
+          "path": "logs/wordrows-native-jni.log",
+          "sha256": "b64396491ba2f909e1d8a866212a2f6f515d0fe07c955b43f0166b73970a377c"
+        },
+        {
+          "path": "logs/collections-native-cmake.log",
+          "sha256": "6fd90c3aa373020863dc0284a86973f2c7f2089d624ab381ad21b1ea6d29454e"
+        },
+        {
+          "path": "logs/collections-native-mvn.log",
+          "sha256": "5db9319d0459a6d973b70c79a7feb46f16bb003050a54d239e494e05c1d322cb"
+        },
+        {
+          "path": "logs/arrays-install.log",
+          "sha256": "faff847bb0fce81ef2e836c16cc37f6cbb2fd8da8c41e2591e513dba240e3a3c"
+        },
+        {
+          "path": "tools/gates-m3.sh",
+          "sha256": "16bef87f7636416b27ae87a79fbe65489daf74373078e0c8f3786feb3b6f1614"
+        },
+        {
+          "path": "tools/gates-coll.sh",
+          "sha256": "7f06b3cffe02c35a98a08f40a1d0bc7df4a80dd27b37891bca67b281e3a6069b"
+        }
+      ],
+      "command": [
+        "mvn",
+        "-B",
+        "-ntp",
+        "-f",
+        "m3/ports/precompute/pom.xml",
+        "-Pnative",
+        "test"
+      ],
+      "environment": {
+        "architecture": "x86_64",
+        "os": "Linux 6.6 (WSL2) Ubuntu 24.04.4 LTS on Windows 11 Home 10.0.26300",
+        "toolchain": "Temurin jdk-21+35 (sha256 82f64c53acaa045370d6762ebd7441b74e6fda14b464d54d1ff8ca941ec069e6); Apache Maven 3.9.14; gcc 13.3.0; cmake 3.28"
+      },
+      "exit_code": 0,
+      "id": "PRECOMPUTE_JNI_NATIVE_PARITY",
+      "note": "precompute -Pnative 125/0; word-row JNI 4 modes checks=96 JNI=true; collections -Pm3-collections-native 2854 run, 0 failures, 1 skipped.",
+      "owner_repository": "hsoliwal/M3jdk21",
+      "status": "PASS"
+    },
+    {
+      "artifacts": [
+        {
+          "path": "logs/coverage/jacoco.xml",
+          "sha256": "613399bb6369266a200f51d501086c8f34978edb23aa8d539ab5afe4b69dd93f"
+        },
+        {
+          "path": "logs/coverage/jacoco.csv",
+          "sha256": "df7c5c9fd2bbd7726d037bb9fca6da0d4b216034022477bc2ef1e690b316b5d7"
+        },
+        {
+          "path": "logs/coverage/jacoco.exec",
+          "sha256": "c513b858cc4fa087f116d7e501e8e9b112f5e9f9a74702575d2cb804651bd3bb"
+        },
+        {
+          "path": "logs/coverage/coverage-build.log",
+          "sha256": "4543cc2b927cda26e2b52aff6d528a2f865118edc96d9e3a9d502f4b9dd70900"
+        },
+        {
+          "path": "logs/coverage/coverage-extra.log",
+          "sha256": "1326958e4b64164792defc8baf30e77b53c96bb794d144afb5c326bfd8f9bf98"
+        },
+        {
+          "path": "logs/coverage/coverage-report.log",
+          "sha256": "83a608b8eb71f5d199d2dbc50290e5b7dc2f0d47939143369ea1ad336814397e"
+        },
+        {
+          "path": "tools/gates-coverage.sh",
+          "sha256": "2a590852599718781b2c2df6b66edbea698cb6d07252699d36d842ad6d2bbb1a"
+        }
+      ],
+      "command": [
+        "bash",
+        "tools/gates-coverage.sh"
+      ],
+      "environment": {
+        "architecture": "x86_64",
+        "os": "Linux 6.6 (WSL2) Ubuntu 24.04.4 LTS on Windows 11 Home 10.0.26300",
+        "toolchain": "Temurin jdk-21+35 (sha256 82f64c53acaa045370d6762ebd7441b74e6fda14b464d54d1ff8ca941ec069e6); JaCoCo 0.8.12 agent and CLI"
+      },
+      "exit_code": 0,
+      "id": "M3_CHANGED_ATOM_COVERAGE",
+      "note": "Measured jdk.m3.text only: line 2359/3279 (71.9%), branch 1200/2224 (54.0%); no reviewed complete changed-atom inventory; below the 90% line and branch minimum.",
+      "owner_repository": "hsoliwal/M3jdk21",
+      "status": "FAIL"
+    },
+    {
+      "artifacts": [
+        {
+          "path": "logs/jdk-configure.log",
+          "sha256": "83bf556274f1de37f72559a25dd5e84894e1558c7b7decd872c5ee2bf222f410"
+        },
+        {
+          "path": "logs/jdk-make-images.log",
+          "sha256": "745839d007cbd75a4e60fb5a070bb23d82b694b69a4c4054ccb4d1d956788afc"
+        },
+        {
+          "path": "logs/jdk-build-driver.log",
+          "sha256": "a30ed411c7dec743f9b753a9f5e3057519d057c6c994533ca6adc15812bf64c1"
+        },
+        {
+          "path": "logs/jdk-nonascii-java-sources.txt",
+          "sha256": "6e5d75181cbb036939c729bbfa1b818c6faeae81d40ac37ee21460caec932404"
+        },
+        {
+          "path": "tools/jdk-build.sh",
+          "sha256": "57473c1bb408a919c272493027f3db39d8688be36bdc360b28ca1cecb432651a"
+        },
+        {
+          "path": "tools/wslmount.sh",
+          "sha256": "0424317971a3b259f6ce80d7e7bcae18e48de008e1c5f26ce9bab889974ad378"
+        }
+      ],
+      "command": [
+        "bash",
+        "tools/jdk-build.sh"
+      ],
+      "environment": {
+        "architecture": "x86_64",
+        "os": "Linux 6.6 (WSL2) Ubuntu 24.04.4 LTS on Windows 11 Home 10.0.26300",
+        "toolchain": "GNU Make 4.3; gcc 13.3.0 (Ubuntu 24.04); boot JDK OpenJDK 21.0.12.1 (Ubuntu); autoconf 2.71; jtreg 8.2.1 (builds.shipilev.net, sha1 c6d8720241eb)"
+      },
+      "exit_code": 2,
+      "id": "OPENJDK_SANITY_MATRIX",
+      "note": "Source-built linux-x64 image of the exact candidate tree: configure exit 0; make images exit 2 in java.base (javac -encoding ascii: 83 unmappable-character errors in 16 jdk/internal/math/M3*.java). No image, so no jtreg tier1/sanity subset ran on the candidate. Other platforms of the main.yml matrix were not run (Actions queued). Fix PR #2899; next blocker jdk.m3.collections doclint (42 errors).",
+      "owner_repository": "hsoliwal/M3jdk21",
+      "status": "FAIL"
+    },
+    {
+      "artifacts": [
+        {
+          "path": "SHA256SUMS",
+          "sha256": "1b99dc685364883fe9e4b5f9ee462e3c9dbc9506c261e88e3e72a1c15971c6ef"
+        },
+        {
+          "path": "logs/proof-pack-check.log",
+          "sha256": "c2d9073c5be0ab6c2c0bfc3b2a76b06cbb908a150589cfc640dd400d68380f50"
+        },
+        {
+          "path": "tools/assemble_evidence.py",
+          "sha256": "0cc0569ff2100c69547e2dfcbbbdd44906c8dc57c7341a701a38e5f83b1eafc7"
+        }
+      ],
+      "command": [
+        "python3",
+        "-I",
+        "tools/assemble_evidence.py"
+      ],
+      "environment": {
+        "architecture": "x86_64",
+        "os": "Linux 6.6 (WSL2) Ubuntu 24.04.4 LTS on Windows 11 Home 10.0.26300",
+        "toolchain": "CPython 3.12 hashlib SHA-256"
+      },
+      "exit_code": 0,
+      "id": "PROOF_PACK_SHA256",
+      "note": "SHA256SUMS covers 2228 pack files (all but evidence.json, admission outputs and the still-running diagnostic jtreg/build logs, which are not receipts); re-read check: 0 mismatches.",
+      "owner_repository": "hsoliwal/M3jdk21",
+      "status": "PASS"
+    }
+  ],
+  "produced": "2026-11-09",
+  "producer": "local WSL2 runs; GitHub Actions queued (PENDING)",
+  "schema": "M3_RELEASE_EVIDENCE_V1",
+  "source_commit": "fe51a3c9ff2f09140be4348e24caa0b8bd9fd18c",
+  "source_tree": "30651922a8b3c8b7f80cb89dc04fc5ab5069f50d"
+}

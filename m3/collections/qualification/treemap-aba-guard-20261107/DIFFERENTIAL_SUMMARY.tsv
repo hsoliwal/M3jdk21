@@ -1,0 +1,24 @@
+# SPDX-License-Identifier: Apache-2.0
+# Summary of differential.sh on base 05789961c767 (owners = #2641 head b8fb8956aaac) vs this leaf's head, JDK 21, real-pom classes: FilteredViewsOwnerDifferential 4000 scenarios from seed 20261106 (oracle of filtered-views-owner-20261106), FilteredViewsTreeMapRepro, M3TreeMapReentrantLookupSelfTest report. base.out sha256 d9494e8d617528db0718172f9a579acaff0e801c3d0b3dbd153c50f08512d2f7 (57320 lines; = the #2641 head output recorded in ../filtered-views-owner-20261106/DIFFERENTIAL_SUMMARY.tsv), head.out sha256 0f1ff73b1330bacae8a526e3008d402eca2e1baf6367361acf0c7c4ebb5b6542 (57320 lines), DIFFERENTIAL.tsv sha256 3fcfd1a90b595ea9b271a55f3a81ac55ab575d80e9b8d1679f5d8ac467bb39fd (199 differing lines in 128 scenarios, 0 UNCLASSIFIED, 0 in JDK-owner scenarios; classes in classify.py; regenerate with differential.sh). Owners damaged at the end: base 0, head 0. Failed cursor (re)opens on head: 0. Repro (base -> head): R2 get with a clearing bounded comparator returned -> CME; R4 remove(k,v) and replace with a clearing comparator returned -> CME; verify valid on both sides.
+count	operation	class
+13	cursor.hasNext	ABA
+19	cursor.hasNext	FOLLOW(ABA)
+19	cursor.next	ABA
+12	cursor.next	FOLLOW(ABA)
+4	cursor.remove	FOLLOW(ABA)
+10	end	FOLLOW(ABA)
+15	open	ABA_START
+18	owner.mutate	ABA
+1	owner.mutate	ABA_START
+3	owner.mutate	FOLLOW(ABA)
+8	reopen	FOLLOW(ABA)
+27	view.first	ABA
+4	view.first	FOLLOW(ABA)
+12	view.isEmpty	ABA
+4	view.isEmpty	FOLLOW(ABA)
+23	view.size	ABA
+7	view.size	FOLLOW(ABA)
+# first example line pair per class (scenario step, base || head)
+example	ABA	s15 t2	s15 t2 view.first -> !ConcurrentModificationException | pred=[6] cmp=18 | src=M3 view=mutable cursor=descIterator ext=1 pm=0 cm=1 || s15 t2 view.first -> !ConcurrentModificationException | pred=[6] cmp=13 | src=M3 view=mutable cursor=descIterator ext=1 pm=0 cm=1
+example	FOLLOW(ABA)	s61 t3	s61 t3 cursor.hasNext -> !ConcurrentModificationException | pred=[] cmp=0 | src=M3 view=mutable cursor=iterator ext=1 pm=1 cm=1 || s61 t3 cursor.hasNext -> !ConcurrentModificationException | pred=[] cmp=0 | src=M3 view=mutable cursor=iterator ext=0 pm=1 cm=1
+example	ABA_START	s336 t0	s336 t0 open -> opened | pred=[] cmp=58 | src=M3 view=readonly cursor=values ext=0 pm=0 cm=1 || s336 t0 open -> opened | pred=[] cmp=55 | src=M3 view=readonly cursor=values ext=0 pm=0 cm=1

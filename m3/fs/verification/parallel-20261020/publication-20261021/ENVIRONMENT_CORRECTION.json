@@ -1,0 +1,24 @@
+{
+  "schema": "M3_PUBLICATION_HARNESS_CORRECTION_V1",
+  "date": "2026-10-21",
+  "atom": "Native filename encoding of the FS136 verification process",
+  "pattern": "Use an installed UTF-8 native locale for existing Unicode-path fixtures; do not alter the product or weaken filename assertions.",
+  "trigger": "The ASCII C locale caused localNamesPreserveUnicodePercentAndSpaces to fail in Path.resolve before product execution. The other 135 tests passed.",
+  "root_cause_status": "OBSERVED",
+  "root_cause": "sun.jnu.encoding and native.encoding were ANSI_X3.4-1968 under C and UTF-8 under C.UTF-8, while file.encoding alone was UTF-8 in both.",
+  "change": "Change only the verification environment LC_ALL from C to C.UTF-8.",
+  "production_or_test_source_change": false,
+  "failed_record": {
+    "path": "failed-ascii/RESULTS.json",
+    "sha256": "91e2b911152ab704038e7e4210536129f992fcba7c0cc8bb6bdc6ecaa41d9e24",
+    "status": "FAIL"
+  },
+  "successful_record": {
+    "path": "fresh/RESULTS.json",
+    "sha256": "38efa52bd167f6fda979aaf1ee9befb7234ef8f5aa38bc42fdbb9f81f88cc1f6",
+    "junit_successful": 136
+  },
+  "diagnostic": "failed-ascii/locale-diagnostic.json",
+  "refusal": "Replay refuses source/dependency drift and existing output paths. The historical failure remains unchanged.",
+  "scope": "Verification harness environment; no product recipe correction, public API change, whole-JDK acceptance, or permission grant."
+}

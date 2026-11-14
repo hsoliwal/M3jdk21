@@ -1,0 +1,4 @@
+# case	diagnostic-sha256	diagnostic
+duplicate-source	c788247558370fbbac24f66675ef037b41335feaf067803ba3fa30129e336b2f	java.lang.IllegalStateException: duplicate target: m3/collections/algorithm-catalog/stable-order-restoration-20261020/DISCOVERY.json\n
+post-scan-drift	5613e5fcc3ad5b4ebcd8dadab68af2aa863597cad2e105f70e0ebf1e9c5cb657	org.openrewrite.internal.RecipeRunException: java.lang.IllegalStateException: target changed after scan: m3/collections/algorithm-catalog/stable-order-restoration-20261020/DISCOVERY.json\njava.lang.IllegalStateException: target changed after scan: m3/collections/algorithm-catalog/stable-order-restoration-20261020/DISCOVERY.json\n
+source-drift	ce53dd4827f083a4b6a95927b822ea44547f5468e64000fb71c877ac2c9c2d84	java.lang.IllegalStateException: source drift: m3/collections/algorithm-catalog/stable-order-restoration-20261020/DISCOVERY.json\n

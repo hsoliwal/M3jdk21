@@ -1,0 +1,82 @@
+{
+  "after": {
+    "charged": 5557285,
+    "commitAvailable": 23489961984,
+    "kFree": 11126632448,
+    "logical": 5557285,
+    "peak": {
+      "charged": 5557285,
+      "ordinaryLogBytes": 15782
+    },
+    "physicalAvailable": 16313311232,
+    "sFree": 10452099072
+  },
+  "before": {
+    "charged": 5557174,
+    "commitAvailable": 26205700096,
+    "kFree": 11126632448,
+    "logical": 5557174,
+    "peak": {
+      "charged": 5557174,
+      "ordinaryLogBytes": 15671
+    },
+    "physicalAvailable": 7335215104,
+    "sFree": 10452283392
+  },
+  "classBytes": 0,
+  "classCount": 0,
+  "classManifestSha256": null,
+  "command": [
+    "C:\\Program Files\\Java\\jdk-21\\bin\\java.exe",
+    "-Xmx256m",
+    "-XX:+UseSerialGC",
+    "-XX:ActiveProcessorCount=2",
+    "-XX:ReservedCodeCacheSize=32m",
+    "-Djava.io.tmpdir=S:\\codex-work\\ui-caller-runtime-qualification-20261113\\tmp",
+    "-Duser.home=S:\\codex-work\\ui-caller-runtime-qualification-20261113\\home",
+    "-Djava.util.prefs.userRoot=S:\\codex-work\\ui-caller-runtime-qualification-20261113\\home\\prefs",
+    "-Djava.util.prefs.systemRoot=S:\\codex-work\\ui-caller-runtime-qualification-20261113\\home\\system-prefs",
+    "-Djava.awt.headless=true",
+    "-cp",
+    "S:\\codex-work\\ui-caller-runtime-qualification-20261113\\contract-qualify-001\\candidate-classes;S:\\codex-work\\ui-caller-runtime-qualification-20261113\\full-suite-output\\main;S:\\codex-work\\ui-caller-runtime-qualification-20261113\\full-suite-output\\test;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\platform\\junit-platform-console-standalone\\1.10.1\\junit-platform-console-standalone-1.10.1.jar",
+    "jdk.m3.swing.testkit.M3JUnitLauncher",
+    "--scan",
+    "S:\\codex-work\\ui-caller-runtime-qualification-20261113\\full-suite-output\\test"
+  ],
+  "controllerSha256": "3ff968458791fbfdfb104083e76dd3aa087b76acaf1e998dc378577edaeda7c6",
+  "counts": {
+    "failed": 0,
+    "found": 375,
+    "successful": 375
+  },
+  "endedUnix": 1794567511.202912,
+  "job": "full-suite-003",
+  "logBytes": 111,
+  "logSha256": "fd150fc2350e8c4eccb8bcd09bb542c38f30fe37128690f4458c5d6ce6361b57",
+  "native": {
+    "all_owned_native_handles_closed": true,
+    "assigned_to_job": true,
+    "cleanup_errors": [],
+    "creation_FILETIME": "134390410840747774",
+    "exitcode": 0,
+    "job_active_processes": 0,
+    "job_handle_closed": true,
+    "job_total_processes": 2,
+    "pid": 51092,
+    "process_handle_closed": true,
+    "resumed": true,
+    "same_handle_wait": 0,
+    "supervisor_error": null,
+    "terminal": true,
+    "termination_requested": false,
+    "thread_handle_closed": true
+  },
+  "postGuardError": null,
+  "productionPromotion": false,
+  "runner": "Repository M3JUnitLauncher with Console standalone1.10.1 libraries; distinct from hosted vendored1.10.2",
+  "runnerSha256": "b42eaa53d13576d17db5fb8b280722a6ae9e36daf95f4262bc6e96d4cb20725f",
+  "schema": "m3.owned-cpu-qualification/v1",
+  "sourceCount": 458,
+  "sourceManifestSha256": "bb88e30d2bf58ea0cb1fdf5ea19f79393f9e0f56985b56cd95e0cabfd18e7b00",
+  "startedUnix": 1794567484.0724149
+}

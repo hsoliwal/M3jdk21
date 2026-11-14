@@ -1,0 +1,370 @@
+{
+  "status": "LOCAL_FINITE_CONTRACTS_QUALIFIED__DRAFT_REVIEW",
+  "parent_commit": "4598bfc398d3024e7ea67e42034e857a53a1b378",
+  "sources": [
+    {
+      "path": "m3/collections/implementations/apache/src/main/java/jdk/m3/collections/apache/M3AbstractListValuedMap.java",
+      "sha256": "fc9a03a963e2ae8e2b3dd116d575c3cdb976f3bba9326bede088a4cdafaa4f2a",
+      "bytes": 8715
+    },
+    {
+      "path": "m3/collections/implementations/apache/src/main/java/jdk/m3/collections/apache/M3AbstractMultiValuedMap.java",
+      "sha256": "68ea6bee03da4976eb237f08d6773b68a001bd44f3573abccc5a3aa3fbf3bc55",
+      "bytes": 33602
+    },
+    {
+      "path": "m3/collections/implementations/apache/src/main/java/jdk/m3/collections/apache/M3AbstractSetValuedMap.java",
+      "sha256": "de9479635c91bd64b7570733a5074fd99b0e9db9a8bbf09b39c5a3ef0fe0e48a",
+      "bytes": 4278
+    },
+    {
+      "path": "m3/collections/implementations/apache/src/main/java/jdk/m3/collections/apache/M3ApacheAbstractCollectionDecorator.java",
+      "sha256": "0162d5aa74289bddf338476ff6718dbe9e87d709c090d3368d36d63ab44ab552",
+      "bytes": 6209
+    },
+    {
+      "path": "m3/collections/implementations/apache/src/main/java/jdk/m3/collections/apache/M3ApacheAbstractEmptyIterator.java",
+      "sha256": "07d4669871f03ee4eef42048ff2b8c7ebafd354d2cbbd124156d1f3ec63658f9",
+      "bytes": 3766
+    },
+    {
+      "path": "m3/collections/implementations/apache/src/main/java/jdk/m3/collections/apache/M3ApacheAbstractEmptyMapIterator.java",
+      "sha256": "9420a4449dc48c0acb6a4da1e868f3954b65f7c0690b24497a59f56b6cb02566",
+      "bytes": 2255
+    },
+    {
+      "path": "m3/collections/implementations/apache/src/main/java/jdk/m3/collections/apache/M3ApacheAbstractIteratorDecorator.java",
+      "sha256": "511609c336f077ea9c8fc372deec65f7c4e3d8e76af7802272ce5fe8d9011693",
+      "bytes": 1795
+    },
+    {
+      "path": "m3/collections/implementations/apache/src/main/java/jdk/m3/collections/apache/M3ApacheAbstractKeyValue.java",
+      "sha256": "0f8f4cdc9620a44e2077106d678d2f646f03a167682e18eff83075cbbd48d51f",
+      "bytes": 2836
+    },
+    {
+      "path": "m3/collections/implementations/apache/src/main/java/jdk/m3/collections/apache/M3ApacheAbstractMapEntry.java",
+      "sha256": "6e22c364227f324e209b9db2fcf72152c47bfd353a0c3a0b2856978d94307ae5",
+      "bytes": 3099
+    },
+    {
+      "path": "m3/collections/implementations/apache/src/main/java/jdk/m3/collections/apache/M3ApacheAbstractMultiSet.java",
+      "sha256": "e300b7c016556a6d32ac7496db55644a97239b6118fb1f311383e686f0225069",
+      "bytes": 14604
+    },
+    {
+      "path": "m3/collections/implementations/apache/src/main/java/jdk/m3/collections/apache/M3ApacheAbstractMultiSetDecorator.java",
+      "sha256": "e1b5fc1c588060ea818e3266ef12fbd5098b2c7e5145643d979489633f4974ac",
+      "bytes": 3085
+    },
+    {
+      "path": "m3/collections/implementations/apache/src/main/java/jdk/m3/collections/apache/M3ApacheAbstractSerializableSetDecorator.java",
+      "sha256": "fe5c83b599a9132eef9420fa9326d22af19f5ba61b9c73f455bfe4afde020f94",
+      "bytes": 2653
+    },
+    {
+      "path": "m3/collections/implementations/apache/src/main/java/jdk/m3/collections/apache/M3ApacheAbstractSetDecorator.java",
+      "sha256": "1beae08bdadad1f08b1622c13bc875ed1ae4edf64d8222da94401968ad72e61e",
+      "bytes": 2302
+    },
+    {
+      "path": "m3/collections/implementations/apache/src/main/java/jdk/m3/collections/apache/M3ApacheAbstractUntypedIteratorDecorator.java",
+      "sha256": "0c1be9f3076d3a68afb5089a3a48c3213a80730c0c917c9c74b5479828920f06",
+      "bytes": 2281
+    },
+    {
+      "path": "m3/collections/implementations/apache/src/main/java/jdk/m3/collections/apache/M3ApacheCollectionUtils.java",
+      "sha256": "f425474837caeeeaf266463b1f959be1c293de25da8577c235fef0d2637157d7",
+      "bytes": 1796
+    },
+    {
+      "path": "m3/collections/implementations/apache/src/main/java/jdk/m3/collections/apache/M3ApacheEmptyIterator.java",
+      "sha256": "a858e07e766d1a3c5b33860ad532ea6794b4071cd3daad7eca35003919657228",
+      "bytes": 2705
+    },
+    {
+      "path": "m3/collections/implementations/apache/src/main/java/jdk/m3/collections/apache/M3ApacheEmptyMapIterator.java",
+      "sha256": "d9543d4d9bae571118ae75ef7cc33873ccdd631132e54764084450478faee394",
+      "bytes": 1976
+    },
+    {
+      "path": "m3/collections/implementations/apache/src/main/java/jdk/m3/collections/apache/M3ApacheIteratorChain.java",
+      "sha256": "3d32f5711640c7c041d338a278b7a5b75e8ede4b6783e119adddee5f8a34a457",
+      "bytes": 10170
+    },
+    {
+      "path": "m3/collections/implementations/apache/src/main/java/jdk/m3/collections/apache/M3ApacheIteratorUtils.java",
+      "sha256": "4a09d728aa720d8d53a7067d46f05a1e9acec0b36296fa484473e68be07a1695",
+      "bytes": 1608
+    },
+    {
+      "path": "m3/collections/implementations/apache/src/main/java/jdk/m3/collections/apache/M3ApacheLazyIteratorChain.java",
+      "sha256": "d44921e7c04bdb2b72e799e98ddfdda690c4e665dbc24dd01e535034099d173c",
+      "bytes": 5936
+    },
+    {
+      "path": "m3/collections/implementations/apache/src/main/java/jdk/m3/collections/apache/M3ApacheListUtils.java",
+      "sha256": "9480dc84967ab74f4aedea07aed54cfdd0716036a0b2d58b187c08f84b8a77aa",
+      "bytes": 2203
+    },
+    {
+      "path": "m3/collections/implementations/apache/src/main/java/jdk/m3/collections/apache/M3ApacheSetUtils.java",
+      "sha256": "2c2434f5b72c830bfbc271518b85fa82327edceda4f74f50f528ac618d8b5672",
+      "bytes": 1844
+    },
+    {
+      "path": "m3/collections/implementations/apache/src/main/java/jdk/m3/collections/apache/M3ApacheTransformIterator.java",
+      "sha256": "20f4b0ba50954a1cb99816261aedfecd554c4ece927364c56c4dadf2bed73705",
+      "bytes": 4685
+    },
+    {
+      "path": "m3/collections/implementations/apache/src/main/java/jdk/m3/collections/apache/M3ApacheUnmodifiableIterator.java",
+      "sha256": "a05f69dffcd2eb019a26db01eb8c59bf62f810efc50f3c3083ecd39749219c46",
+      "bytes": 2838
+    },
+    {
+      "path": "m3/collections/implementations/apache/src/main/java/jdk/m3/collections/apache/M3ApacheUnmodifiableMapEntry.java",
+      "sha256": "a953b6d129fdd9f4db9000300a49a5bec9e46022a763b6b2ea42c035b0e7cf78",
+      "bytes": 2793
+    },
+    {
+      "path": "m3/collections/implementations/apache/src/main/java/jdk/m3/collections/apache/M3ApacheUnmodifiableMultiSet.java",
+      "sha256": "e21efb44ec141ec4fe0f1c3c58b9bc227ffafc41d183a9bae587c2334ec2c1d2",
+      "bytes": 5709
+    },
+    {
+      "path": "m3/collections/implementations/apache/src/main/java/jdk/m3/collections/apache/M3ApacheUnmodifiableSet.java",
+      "sha256": "80ce4dbf9bd4366e0f903fe8ce616ea1ca38a0d5dee9256a1e6f2518dff38daa",
+      "bytes": 3686
+    },
+    {
+      "path": "m3/collections/implementations/apache/src/main/java/jdk/m3/collections/apache/M3LinkedHashSetGroup.java",
+      "sha256": "5ed36b2010fe34630889a54a7d0024c9caf533195fd7e0ced6a0b241137138c1",
+      "bytes": 4327
+    },
+    {
+      "path": "m3/collections/implementations/apache/src/main/java/jdk/m3/collections/apache/M3ListValuedMap.java",
+      "sha256": "fdbe4ed21b7dff9a31a98ddfb2ff615819c43231da65a4d3d98e70d2a0695664",
+      "bytes": 5675
+    },
+    {
+      "path": "m3/collections/implementations/apache/src/main/java/jdk/m3/collections/apache/M3SetValuedMap.java",
+      "sha256": "608edffec1b33c9719f09eb4637e3b980d75fa2ea486f874863c16b3b048b720",
+      "bytes": 5335
+    },
+    {
+      "path": "m3/collections/implementations/apache/src/test/java/ApacheM3MultiValueCandidateProbe.java",
+      "sha256": "c17c697e00c273f5a14b45fa1ce8352781f5ce3e4476263955ff5da4d3a2e1d4",
+      "bytes": 39782
+    },
+    {
+      "path": "m3/collections/implementations/apache/src/test/java/jdk/m3/collections/apache/M3MultiValuedMapSelfTest.java",
+      "sha256": "3715acc08fed0d5f8defeaa7b27df76a36f41fce6ffe9467269eb513520f1698",
+      "bytes": 15821
+    },
+    {
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3CollectionSdk.java",
+      "sha256": "e4f05110dd6aaebcfb4f6a6d45d1ff0d8f5b50cc154f6372337d09877b62e83f",
+      "bytes": 7020
+    }
+  ],
+  "provider": {
+    "artifact": "org.apache.commons:commons-collections4:4.5.0",
+    "basename": "commons-collections4-4.5.0.jar",
+    "bytes": 898652,
+    "sha256": "00f93263c267be201b8ae521b44a7137271b16688435340bf629db1bac0a5845"
+  },
+  "runtime_summary": {
+    "suite": "M3_OWNED_APACHE_MULTIVALUED_MAP",
+    "checks": 558923,
+    "pairedOperations": 10000,
+    "randomOperations": 10000,
+    "independentLawChecks": 508527,
+    "ownedFailures": 0,
+    "scope": "10000 canonical-reference random ops; own wire; no complete concrete epoch, subclass, performance or malformed-stream parity"
+  },
+  "candidate65_summary": {
+    "summary": "APACHE_MULTIVALUE_CANDIDATE_SAME65_PROBE",
+    "source": "apache/commons-collections@7f7fb0244abc940a2e9dd28b67508c0483a58c3e",
+    "cases": 65,
+    "operations": 401,
+    "groups": {
+      "absent": 10,
+      "detach": 8,
+      "counted-keys": 6,
+      "mapIterator": 4,
+      "flattened-views": 2,
+      "nulls-copies": 2,
+      "capacities": 10,
+      "epochs": 4,
+      "indexed": 5,
+      "aliases": 3,
+      "defaults": 8,
+      "set-values": 3
+    },
+    "apiLawWitnesses": 609,
+    "apiLawFailures": 0,
+    "fixtureFailures": 0,
+    "listProviderArtifact": "current-classes",
+    "setProviderArtifact": "current-classes",
+    "implementationVersion": null,
+    "candidates": 2,
+    "admission": "FINITE_API_LAWS_ONLY",
+    "scope": "Runtime observations when executed; hypotheses and API-law witnesses are separate."
+  },
+  "executions": [
+    {
+      "name": "apache-multivalue-preimage-compile-01",
+      "mode": "apache-multivalue-preimage-compile",
+      "passed": true,
+      "exit_code": 0,
+      "child_terminal": true,
+      "inputs_unchanged": true,
+      "offline": true,
+      "elapsed_seconds": 1.0940000000045984,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "log_bytes": 0,
+      "started_utc": "2026-10-17T16:22:48.018956+00:00"
+    },
+    {
+      "name": "apache-multivalue-preimage-01",
+      "mode": "apache-multivalue-preimage",
+      "passed": true,
+      "exit_code": 0,
+      "child_terminal": true,
+      "inputs_unchanged": true,
+      "offline": true,
+      "elapsed_seconds": 0.4529999999940628,
+      "log_sha256": "ff989c6c067aced6817c03c203cec67564ecea89e0ba1dc9b8acc89f094a0e01",
+      "log_bytes": 454423,
+      "started_utc": "2026-10-17T16:22:51.912538+00:00"
+    },
+    {
+      "name": "apache-multivalue-02",
+      "mode": "apache-multivalue",
+      "passed": false,
+      "exit_code": 1,
+      "child_terminal": true,
+      "inputs_unchanged": true,
+      "offline": true,
+      "elapsed_seconds": 1.6719999999986612,
+      "log_sha256": "95d2ef3fd541b646b243cfa6877fb5d20fb894eddfe5a3065106390dc02ee903",
+      "log_bytes": 502,
+      "started_utc": "2026-10-18T00:27:09.718455+00:00"
+    },
+    {
+      "name": "apache-multivalue-current-core-01",
+      "mode": "apache-multivalue-current-core",
+      "passed": false,
+      "exit_code": 1,
+      "child_terminal": true,
+      "inputs_unchanged": true,
+      "offline": true,
+      "elapsed_seconds": 2.4689999999973224,
+      "log_sha256": "f22882d027f94cdb23631188b621abef045cf97620a6c7d10ea073d908cbf60e",
+      "log_bytes": 1153,
+      "started_utc": "2026-10-18T00:31:46.296391+00:00"
+    },
+    {
+      "name": "apache-multivalue-current-02",
+      "mode": "apache-multivalue-current",
+      "passed": false,
+      "exit_code": 1,
+      "child_terminal": true,
+      "inputs_unchanged": true,
+      "offline": true,
+      "elapsed_seconds": 0.5,
+      "log_sha256": "71cd2b49a2678c188dbec2f633c72aefbeb46cf583f87f38f20c82e7fb2bdf9d",
+      "log_bytes": 728,
+      "started_utc": "2026-10-18T00:36:13.194414+00:00"
+    },
+    {
+      "name": "apache-multivalue-refined-core-01",
+      "mode": "apache-multivalue-refined-core",
+      "passed": true,
+      "exit_code": 0,
+      "child_terminal": true,
+      "inputs_unchanged": true,
+      "offline": true,
+      "elapsed_seconds": 2.686999999998079,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "log_bytes": 0,
+      "started_utc": "2026-10-18T00:32:38.091687+00:00"
+    },
+    {
+      "name": "apache-multivalue-current-compile-03",
+      "mode": "apache-multivalue-current-compile",
+      "passed": true,
+      "exit_code": 0,
+      "child_terminal": true,
+      "inputs_unchanged": true,
+      "offline": true,
+      "elapsed_seconds": 1.4530000000086147,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "log_bytes": 0,
+      "started_utc": "2026-10-18T00:36:53.584742+00:00"
+    },
+    {
+      "name": "apache-multivalue-current-03",
+      "mode": "apache-multivalue-current",
+      "passed": true,
+      "exit_code": 0,
+      "child_terminal": true,
+      "inputs_unchanged": true,
+      "offline": true,
+      "elapsed_seconds": 1.5,
+      "log_sha256": "58a2e0ca0e87b434b76d36f3d5abd9d05506bbd6f78f1edf1d8d0f5d22d5fc9d",
+      "log_bytes": 970,
+      "started_utc": "2026-10-18T00:36:55.571126+00:00"
+    },
+    {
+      "name": "apache-multivalue-current-candidate-02",
+      "mode": "apache-multivalue-current-candidate",
+      "passed": true,
+      "exit_code": 0,
+      "child_terminal": true,
+      "inputs_unchanged": true,
+      "offline": true,
+      "elapsed_seconds": 0.6089999999967404,
+      "log_sha256": "8b84c8a40bd94f83bfff5ac361194ec47bb05525a0c8897126da2f8ac25cc532",
+      "log_bytes": 448229,
+      "started_utc": "2026-10-18T00:36:56.450814+00:00"
+    },
+    {
+      "name": "apache-multivalue-recipe-03",
+      "mode": "apache-multivalue-recipe",
+      "passed": true,
+      "exit_code": 0,
+      "child_terminal": true,
+      "inputs_unchanged": true,
+      "offline": true,
+      "elapsed_seconds": 7.73399999999674,
+      "log_sha256": "9160e23f38ed6be9b62edfa21f15c402f7584929353db8b79922fdd3835bd5a3",
+      "log_bytes": 2420,
+      "started_utc": "2026-10-18T00:38:19.265085+00:00"
+    }
+  ],
+  "production_scope": {
+    "new_concrete_multimaps": 2,
+    "new_detached_set_shape": 1,
+    "owned_production_files": 30,
+    "public_API": "ListValuedMap/SetValuedMap/MultiValuedMap and read-only MultiSet view; five constructor forms; list trimToSize",
+    "source_changed_core_files": 1,
+    "core_duplicate_declarations_removed": 2,
+    "full_core_compiled_sources": 128
+  },
+  "storage": "All collection payload owners are existing M3 arrays/indexes; returned API entry/tuple objects and transient descriptors allowed.",
+  "review": {
+    "before_code_source_agents": "Primary contract/helper/owner fit only; command-disabled; root supplied runtime facts.",
+    "final_source_review": "Root author review only; independent final review pending; no hosted CI assertion."
+  },
+  "limits": [
+    "Full five-library goal active and incomplete",
+    "No new JNI collection body in this PR; prior native mask work is separate",
+    "Two actual concrete ArrayList/subList boundaries not admitted",
+    "Own class/wire identity; not provider reflection/subclassing compatibility",
+    "Positive directory/set capacities are hints using M3 growth; no identical allocation or exception-message claim",
+    "No equal-distinct randomized corpus, malformed-stream parity, concurrency/JMM or measured performance claim"
+  ],
+  "canonical_receiving": "V2 installer32 sources; exact two-file V1->V2 successor; separate exact SDK prerequisite. Immutable V1 retained as historical custody, not current runtime admission."
+}

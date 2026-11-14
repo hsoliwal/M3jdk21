@@ -1,0 +1,108 @@
+{
+  "scope": "ACTUAL_UNCHANGED_READ_ONLY_SOURCE_SEAL_GATES_ON_PINNED_1603_INPUTS",
+  "snapshot_git_blob_checks": 33,
+  "commands": [
+    {
+      "gate": "mask-selection-20261016",
+      "repository": "hsoliwal/M3jdk21",
+      "revision": "7c0d2493edbf93ac5cb726667ce83046d3519e3e",
+      "source_snapshot_scope": "Exact complete file inputs for this read-only source-seal gate only; not a whole target checkout",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "-I",
+        "-S",
+        "-B",
+        "/workspace/scratch/213cc9f26139/continuation/catalogue/target-inventory-20261021/source/m3/collections/qualification/verify_mask_selection.py"
+      ],
+      "cwd": "/workspace/scratch/213cc9f26139/continuation/catalogue/target-inventory-20261021/source",
+      "exit_code": 1,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "4fb9946be1824f66dce3af0bb91be9c924f3d365e42c2a3cf3711d852ae5cba9",
+      "observed_diagnostic": "source identity drift: m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskCompactor.java"
+    },
+    {
+      "gate": "position-selection-20261018",
+      "repository": "hsoliwal/M3jdk21",
+      "revision": "7c0d2493edbf93ac5cb726667ce83046d3519e3e",
+      "source_snapshot_scope": "Exact complete file inputs for this read-only source-seal gate only; not a whole target checkout",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "-I",
+        "-S",
+        "-B",
+        "/workspace/scratch/213cc9f26139/continuation/catalogue/target-inventory-20261021/source/m3/collections/qualification/m3-index-mask-position-selection-20261018/verify.py"
+      ],
+      "cwd": "/workspace/scratch/213cc9f26139/continuation/catalogue/target-inventory-20261021/source",
+      "exit_code": 1,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "cc575fbe094b8475d3eea5ed51021bf6a9f00cb3e678aab451437d69789f8742",
+      "observed_diagnostic": "Traceback (most recent call last):\n  File \"/workspace/scratch/213cc9f26139/continuation/catalogue/target-inventory-20261021/source/m3/collections/qualification/m3-index-mask-position-selection-20261018/verify.py\", line 18, in <module>\n    assert actual == expected, f\"{path}: SHA-256 drift {actual}\"\n           ^^^^^^^^^^^^^^^^^^\nAssertionError: /workspace/scratch/213cc9f26139/continuation/catalogue/target-inventory-20261021/source/m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskCompactor.java: SHA-256 drift 226b09d8996bf6b2a952c7341495a1f6dfbec13f8bb605996b1c26b93772e29f"
+    }
+  ],
+  "source_differences": [
+    {
+      "gate": "mask-selection-20261016",
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskCompactor.java",
+      "expected_sha256": "8c1aaba72372c6caecfa35d4121a0b518888d64933bef428a8e61c15b3a746d9",
+      "actual_sha256": "226b09d8996bf6b2a952c7341495a1f6dfbec13f8bb605996b1c26b93772e29f",
+      "matches": false
+    },
+    {
+      "gate": "mask-selection-20261016",
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3LongArrayDeque.java",
+      "expected_sha256": "cc87514c9499477dd435e512881ecb045356b99f65d212866ee2d32fb3795a84",
+      "actual_sha256": "dece9461086e026b3183e8f2e67dfb7f8b173228b5f65ff5169df87d9a86ae4a",
+      "matches": false
+    },
+    {
+      "gate": "mask-selection-20261016",
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3LongArrayList.java",
+      "expected_sha256": "290a9037d22957983080b63bbf32d50286fc71a2a2e2a8ff1a6d16239617838c",
+      "actual_sha256": "bd06a2d6c5a0df86fc402be506c0eb6a6656fa9e8ea93c1f49b906152358464f",
+      "matches": false
+    },
+    {
+      "gate": "mask-selection-20261016",
+      "path": "m3/collections/src/test/java/jdk/m3/collections/M3IndexMaskCompactorSelfTest.java",
+      "expected_sha256": "86eb2c9a436aac6f6e5b99f5c275636ca272d849dd08aa07f8796271167c63a1",
+      "actual_sha256": "5ae3d26cf58d0fff37bff398e73ee4f3b3e44212b56c046c3690fc8f58538f0f",
+      "matches": false
+    },
+    {
+      "gate": "mask-selection-20261016",
+      "path": "m3/collections/src/test/java/jdk/m3/collections/M3IndexMaskCompactorTest.java",
+      "expected_sha256": "7a2c4fd2efd054ce17daa33eb9b60e481441b4c1d3eed4b45036cf446bf345ba",
+      "actual_sha256": "7a2c4fd2efd054ce17daa33eb9b60e481441b4c1d3eed4b45036cf446bf345ba",
+      "matches": true
+    },
+    {
+      "gate": "mask-selection-20261016",
+      "path": "m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+      "expected_sha256": "ec1091ae700abede90db95bb04924ad2ea0eb53432e4ef91f5049227c3d25dcb",
+      "actual_sha256": "fb907640aa9615ce28c61bb802da39e6cb16030b9f95aad266aa6c68531b4074",
+      "matches": false
+    },
+    {
+      "gate": "position-selection-20261018",
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3CountedBag.java",
+      "expected_sha256": "ffd6a7340fd60377443252fc52954d740bc758edea4d0778877531cf63976bad",
+      "actual_sha256": "ffd6a7340fd60377443252fc52954d740bc758edea4d0778877531cf63976bad",
+      "matches": true
+    },
+    {
+      "gate": "position-selection-20261018",
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskCompactor.java",
+      "expected_sha256": "e8b8c5e455d4b46bb85b5c4ee6c8234643ca6e10f8314a468f455a80067a7f7d",
+      "actual_sha256": "226b09d8996bf6b2a952c7341495a1f6dfbec13f8bb605996b1c26b93772e29f",
+      "matches": false
+    },
+    {
+      "gate": "position-selection-20261018",
+      "path": "m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+      "expected_sha256": "8610e9fcedcc8eb698acbf3161bca8ea7d16194e61c66915f9e25fe47aae27f7",
+      "actual_sha256": "fb907640aa9615ce28c61bb802da39e6cb16030b9f95aad266aa6c68531b4074",
+      "matches": false
+    }
+  ],
+  "donation_and_full_module_gates": "NOT_EXECUTED; source inspection only"
+}

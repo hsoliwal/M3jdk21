@@ -1,0 +1,151 @@
+# Copyright 2026 Hitesh Soliwal and contributors
+# SPDX-License-Identifier: Apache-2.0
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.openrewrite.viewport.M3SwingTableRowHeights
+displayName: JTable keeps its custom row heights in sparse stores when m3.swing.viewport is set
+description: >-
+  M3JDK Swing viewport leaf 8 (m3/docs/swing-viewport/DESIGN.md section 15). Stock JTable keeps custom row heights
+  in two dense SizeSequences, rowModel in view order and SortManager.modelRowSizes in model order, 4n bytes each.
+  With the property set the same two stores are sun.swing.table.M3SparseSizes, holding only the rows whose height
+  differs from the default: m3RowSizes beside rowModel and SortManager.m3ModelSizes beside modelRowSizes, with the
+  stock lifecycle mirrored at every site that reads, writes or drops the stock pair. Serialization throws as the
+  stock does with custom heights (SizeSequence is not serializable, upstream defect D8). Default off: m3Sizes false keeps every stock line. Applied by M3PerFileApply; a
+  second pass must report UNCHANGED.
+recipeList:
+  - com.synexia.openrewrite.viewport.M3AddMemberIfMissing:
+      declaringClasses: [javax.swing.JTable]
+      memberName: m3Sizes
+      beforeMethod: JTable
+      memberSource: "    /** Whether custom row heights live in sparse stores ({@code sun.swing.table.M3SparseSizes}); set again on deserialization. */\n    private transient boolean m3Sizes = sun.swing.table.M3SparseSizes.ENABLED;"
+  - com.synexia.openrewrite.viewport.M3AddMemberIfMissing:
+      declaringClasses: [javax.swing.JTable]
+      memberName: m3RowSizes
+      beforeMethod: JTable
+      memberSource: "    /** The sparse rowModel: the view rows whose height differs from rowHeight; null while rowModel would be null. */\n    private transient sun.swing.table.M3SparseSizes m3RowSizes;"
+  - com.synexia.openrewrite.viewport.M3AddMemberIfMissing:
+      declaringClasses: [javax.swing.JTable$SortManager, javax.swing.JTable.SortManager]
+      memberName: m3ModelSizes
+      beforeMethod: SortManager
+      memberSource: "        /** The sparse modelRowSizes: the model rows whose height differs from rowHeight; null while modelRowSizes would be null. */\n        private sun.swing.table.M3SparseSizes m3ModelSizes;"
+  - com.synexia.openrewrite.viewport.M3InsertStatements:
+      declaringClasses: [javax.swing.JTable]
+      methodName: setRowHeight
+      parameterCount: 2
+      anchor: "getRowModel().setSize(row, rowHeight);"
+      position: BEFORE
+      statements: "        if (m3Sizes) {\n            if (m3RowSizes == null) {\n                m3RowSizes = new sun.swing.table.M3SparseSizes(getRowCount(), getRowHeight());\n            }\n            m3RowSizes.setSize(row, rowHeight);\n            if (sortManager != null) {\n                sortManager.setViewRowHeight(row, rowHeight);\n            }\n            resizeAndRepaint();\n            return;\n        }"
+  - com.synexia.openrewrite.viewport.M3InsertStatements:
+      declaringClasses: [javax.swing.JTable]
+      methodName: getRowHeight
+      parameterCount: 1
+      position: METHOD_START
+      statements: "        if (m3RowSizes != null) {\n            return m3RowSizes.getSize(row);\n        }"
+  - com.synexia.openrewrite.viewport.M3InsertStatements:
+      declaringClasses: [javax.swing.JTable]
+      methodName: rowAtPoint
+      parameterCount: 1
+      anchor: "int result = (rowModel == null) ?  y/getRowHeight() : rowModel.getIndex(y);"
+      position: AFTER
+      statements: "        if (m3RowSizes != null) {\n            result = m3RowSizes.getIndex(y);\n        }"
+  - com.synexia.openrewrite.viewport.M3InsertStatements:
+      declaringClasses: [javax.swing.JTable]
+      methodName: getCellRect
+      parameterCount: 3
+      anchor: "r.y = (rowModel == null) ? row * r.height : rowModel.getPosition(row);"
+      position: AFTER
+      statements: "            if (m3RowSizes != null) {\n                r.y = m3RowSizes.getPosition(row);\n            }"
+  - com.synexia.openrewrite.viewport.M3InsertStatements:
+      declaringClasses: [javax.swing.JTable]
+      methodName: setRowHeight
+      parameterCount: 1
+      anchor: "rowModel = null;"
+      position: AFTER
+      statements: "        m3RowSizes = null;\n        if (sortManager != null) {\n            sortManager.m3ModelSizes = null;\n        }"
+  - com.synexia.openrewrite.viewport.M3InsertStatements:
+      declaringClasses: [javax.swing.JTable]
+      methodName: tableChanged
+      parameterCount: 1
+      anchor: "rowModel = null;"
+      position: AFTER
+      statements: "            m3RowSizes = null;"
+  - com.synexia.openrewrite.viewport.M3InsertStatements:
+      declaringClasses: [javax.swing.JTable]
+      methodName: tableChanged
+      parameterCount: 1
+      anchor: "if (rowModel != null) {"
+      position: BEFORE
+      statements: "        if (m3RowSizes != null) {\n            repaint();\n        }"
+  - com.synexia.openrewrite.viewport.M3InsertStatements:
+      declaringClasses: [javax.swing.JTable]
+      methodName: tableChanged
+      parameterCount: 1
+      anchor: "if (end != Integer.MAX_VALUE) {"
+      position: AFTER
+      statements: "        if (end == Integer.MAX_VALUE) {\n            m3RowSizes = null;\n        }"
+  - com.synexia.openrewrite.viewport.M3InsertStatements:
+      declaringClasses: [javax.swing.JTable]
+      methodName: tableRowsInserted
+      parameterCount: 1
+      anchor: "if (rowModel != null) {"
+      position: BEFORE
+      statements: "        if (m3RowSizes != null) {\n            m3RowSizes.insertEntries(start, length, getRowHeight());\n        }"
+  - com.synexia.openrewrite.viewport.M3InsertStatements:
+      declaringClasses: [javax.swing.JTable]
+      methodName: tableRowsDeleted
+      parameterCount: 1
+      anchor: "if (rowModel != null) {"
+      position: BEFORE
+      statements: "        if (m3RowSizes != null) {\n            m3RowSizes.removeEntries(start, deletedCount);\n        }"
+  - com.synexia.openrewrite.viewport.M3InsertStatements:
+      declaringClasses: [javax.swing.JTable]
+      methodName: getScrollableBlockIncrement
+      parameterCount: 3
+      anchor: "if (null == rowModel && SwingConstants.VERTICAL == orientation) {"
+      position: BEFORE
+      statements: "        if (m3RowSizes != null) {\n            // the stock shortcut below is for uniform rows only\n            return direction < 0 ? getPreviousBlockIncrement(visibleRect, orientation)\n                    : getNextBlockIncrement(visibleRect, orientation);\n        }"
+  - com.synexia.openrewrite.viewport.M3InsertStatements:
+      declaringClasses: [javax.swing.JTable]
+      methodName: writeObject
+      parameterCount: 1
+      position: METHOD_START
+      statements: "        if (m3RowSizes != null) {\n            // as the stock: rowModel, a SizeSequence, is not serializable (upstream defect D8)\n            throw new java.io.NotSerializableException(\"javax.swing.SizeSequence\");\n        }"
+  - com.synexia.openrewrite.viewport.M3InsertStatements:
+      declaringClasses: [javax.swing.JTable]
+      methodName: readObject
+      parameterCount: 1
+      position: METHOD_START
+      statements: "        m3Sizes = sun.swing.table.M3SparseSizes.ENABLED;"
+  - com.synexia.openrewrite.viewport.M3InsertStatements:
+      declaringClasses: [javax.swing.JTable$SortManager, javax.swing.JTable.SortManager]
+      methodName: setViewRowHeight
+      parameterCount: 2
+      position: METHOD_START
+      statements: "            if (m3Sizes) {\n                if (m3ModelSizes == null) {\n                    m3ModelSizes = new sun.swing.table.M3SparseSizes(getModel().getRowCount(), getRowHeight());\n                }\n                m3ModelSizes.setSize(convertRowIndexToModel(viewIndex), rowHeight);\n                return;\n            }"
+  - com.synexia.openrewrite.viewport.M3InsertStatements:
+      declaringClasses: [javax.swing.JTable$SortManager, javax.swing.JTable.SortManager]
+      methodName: allChanged
+      parameterCount: 0
+      anchor: "modelRowSizes = null;"
+      position: AFTER
+      statements: "            m3ModelSizes = null;"
+  - com.synexia.openrewrite.viewport.M3InsertStatements:
+      declaringClasses: [javax.swing.JTable$SortManager, javax.swing.JTable.SortManager]
+      methodName: processChange
+      parameterCount: 3
+      anchor: "if (change.allRowsChanged) {"
+      position: BEFORE
+      statements: "                if (change.allRowsChanged) {\n                    m3ModelSizes = null;\n                    m3RowSizes = null;\n                } else if (m3ModelSizes != null) {\n                    if (change.type == TableModelEvent.INSERT) {\n                        m3ModelSizes.insertEntries(change.startModelIndex,\n                                change.endModelIndex - change.startModelIndex + 1, getRowHeight());\n                    } else if (change.type == TableModelEvent.DELETE) {\n                        m3ModelSizes.removeEntries(change.startModelIndex,\n                                change.endModelIndex - change.startModelIndex + 1);\n                    }\n                }"
+  - com.synexia.openrewrite.viewport.M3InsertStatements:
+      declaringClasses: [javax.swing.JTable$SortManager, javax.swing.JTable.SortManager]
+      methodName: setViewRowHeightsFromModel
+      parameterCount: 0
+      position: METHOD_START
+      statements: "            if (m3ModelSizes != null) {\n                m3RowSizes = m3ModelSizes.inViewOrder(getRowCount(), getRowHeight(), sorter);\n                return;\n            }"
+  - com.synexia.openrewrite.viewport.M3InsertStatements:
+      declaringClasses: [javax.swing.JTable]
+      methodName: setRowSorter
+      parameterCount: 1
+      anchor: "rowModel = null;"
+      position: AFTER
+      statements: "        m3RowSizes = null;"

@@ -1,0 +1,55 @@
+{
+  "inputs": [
+    {
+      "copy": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/retention-candidate/verification-v01/runtime/retention.py",
+      "sha256": "ccd63d4e05f51e816548ad9da4e5a0ce880a9cf90b1fd0dfe80b04f30f7d8a14",
+      "source": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/retention-candidate/retention.py.txt"
+    },
+    {
+      "copy": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/retention-candidate/verification-v01/runtime/test_retention.py",
+      "sha256": "6d11c5ff5d429daca053775a7b8eae9cbe89c3498c3b33c4f0f576c36b2b91c3",
+      "source": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/retention-candidate/test_retention.py.txt"
+    },
+    {
+      "copy": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/retention-candidate/verification-v01/runtime/git_graph.py",
+      "sha256": "842d5f66297bfb0081a053dabf24ff9d6ca5f6a7823d0639a19cda1a23bc4881",
+      "source": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/files/current/m3/history/git_graph.py"
+    },
+    {
+      "copy": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/retention-candidate/verification-v01/runtime/retention-pom.xml",
+      "sha256": "b4f00263594158b47e76ccb34000095f46bc3f66a69151304fe7b544dad6ca15",
+      "source": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/retention-candidate/retention-pom.xml.txt"
+    },
+    {
+      "sha256": "f60cd12f2a0b1530f022c4aa9f98d48647a136328be7b67dd117cd08d1081300",
+      "source": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/retention-candidate/workflow.yml.txt"
+    },
+    {
+      "sha256": "8918e530b22f7960db1a3918a5685978fd9fc14ed35338faefb224d935d7f5c0",
+      "source": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/retention-candidate/README.md.txt"
+    },
+    {
+      "sha256": "ce32ca8ab6d20a970ba4271a2dd517b5184d6211e3a86a94cf0c28bf6b56dfd6",
+      "source": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/retention-candidate/verify_candidate.py"
+    }
+  ],
+  "legacy_helpers_exact": [
+    "safe_path",
+    "tsv",
+    "blob",
+    "load_capabilities",
+    "load_manifest",
+    "write"
+  ],
+  "legacy_inspect_body_exact": true,
+  "original_tests_exact": [
+    "test_drift_is_review_and_missing_is_explicit",
+    "test_exact_retention_is_deterministic",
+    "test_invalid_manifest_and_catalogue_fail_closed",
+    "test_manifest_is_read_from_exact_commit_not_worktree",
+    "test_write_is_deterministic_and_refuses_existing_output"
+  ],
+  "test_methods": 36,
+  "workflow_shell_sha256": "2f8900e48fdcd325a10e4294a647de06165af999760939cd94fce47e0e0bd965",
+  "xml_parse": "PASS"
+}

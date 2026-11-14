@@ -1,0 +1,8 @@
+## SPDX-License-Identifier: Apache-2.0 OR EPL-2.0
+## Copyright (c) 2026 Synexia, Hitesh Soliwal (hsoliwal@gmail.com) and others
+## optional label
+## Every member row (forEachMember): ${expected}, the reflective oracle (or a second snapshot), equals ${receiver}.${atom}(member).
+## label: optional trailing assertion-message argument, written with its leading comma (", d.toString()").
+${setup}
+forEachMember((member, d) -> assertEquals(${expected}, ${receiver}.${atom}(member)${label}));
+${extra}

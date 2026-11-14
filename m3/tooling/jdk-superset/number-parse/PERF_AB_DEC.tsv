@@ -1,0 +1,771 @@
+# SPDX-License-Identifier: Apache-2.0 OR EPL-2.0
+# Copyright (c) 2026 Synexia, Hitesh Soliwal (hsoliwal@gmail.com) and others
+round	variant	atom	ns_per_op_atom	ns_per_op_reference	speedup
+1	pre	M3JavaDoubleBitsFromCharSequence	50.73	214.72	4.23
+1	pre	M3JavaFloatBitsFromCharSequence	92.34	105.52	1.14
+1	pre	M3JavaDoubleBitsFromByteArray	35.16	214.72	6.11
+1	pre	M3JavaFloatBitsFromByteArray	86.84	105.52	1.21
+1	pre	Double.parseDouble (wiring)	48.30	214.72	4.45
+1	pre	Float.parseFloat (wiring)	86.35	105.52	1.22
+1	pre	M3FastDoubleSwar.isEightDigits	0.97	1.99	2.06
+1	pre	M3FastDoubleSwar.readLongBE	3.80	4.25	1.12
+1	pre	M3FastIntegerMath.unsignedMultiplyHigh	0.00	1.64	81925.00
+1	pre	M3FastDoubleMath.tryDecToDoubleWithFastAlgorithm	4.84	173.45	35.87
+1	pre	M3FastFloatMath.tryDecToFloatWithFastAlgorithm	5.07	71.26	14.05
+1	pre	M3FftMultiplier.multiply (400k-bit operands)	2323200.00	6148500.00	2.65
+1	post	M3JavaDoubleBitsFromCharSequence	48.38	214.35	4.43
+1	post	M3JavaFloatBitsFromCharSequence	77.91	95.78	1.23
+1	post	M3JavaDoubleBitsFromByteArray	36.55	214.35	5.86
+1	post	M3JavaFloatBitsFromByteArray	80.51	95.78	1.19
+1	post	Double.parseDouble (wiring)	46.35	214.35	4.62
+1	post	Float.parseFloat (wiring)	82.88	95.78	1.16
+1	post	M3FastDoubleSwar.isEightDigits	0.91	1.79	1.97
+1	post	M3FastDoubleSwar.readLongBE	4.19	4.01	0.96
+1	post	M3FastIntegerMath.unsignedMultiplyHigh	0.00	1.40	70040.00
+1	post	M3FastDoubleMath.tryDecToDoubleWithFastAlgorithm	4.16	101.64	24.41
+1	post	M3FastFloatMath.tryDecToFloatWithFastAlgorithm	4.73	71.35	15.10
+1	post	M3FftMultiplier.multiply (400k-bit operands)	2429500.00	5527000.00	2.27
+2	post	M3JavaDoubleBitsFromCharSequence	47.94	218.06	4.55
+2	post	M3JavaFloatBitsFromCharSequence	90.59	95.40	1.05
+2	post	M3JavaDoubleBitsFromByteArray	35.40	218.06	6.16
+2	post	M3JavaFloatBitsFromByteArray	82.85	95.40	1.15
+2	post	Double.parseDouble (wiring)	48.48	218.06	4.50
+2	post	Float.parseFloat (wiring)	95.73	95.40	1.00
+2	post	M3FastDoubleSwar.isEightDigits	0.97	1.95	2.02
+2	post	M3FastDoubleSwar.readLongBE	4.33	3.99	0.92
+2	post	M3FastIntegerMath.unsignedMultiplyHigh	0.00	1.51	Infinity
+2	post	M3FastDoubleMath.tryDecToDoubleWithFastAlgorithm	4.38	98.65	22.53
+2	post	M3FastFloatMath.tryDecToFloatWithFastAlgorithm	5.78	82.27	14.24
+2	post	M3FftMultiplier.multiply (400k-bit operands)	2545200.00	5859000.00	2.30
+2	pre	M3JavaDoubleBitsFromCharSequence	54.47	209.25	3.84
+2	pre	M3JavaFloatBitsFromCharSequence	88.40	102.06	1.15
+2	pre	M3JavaDoubleBitsFromByteArray	32.57	209.25	6.42
+2	pre	M3JavaFloatBitsFromByteArray	77.06	102.06	1.32
+2	pre	Double.parseDouble (wiring)	48.11	209.25	4.35
+2	pre	Float.parseFloat (wiring)	88.83	102.06	1.15
+2	pre	M3FastDoubleSwar.isEightDigits	1.12	2.09	1.87
+2	pre	M3FastDoubleSwar.readLongBE	4.46	4.26	0.96
+2	pre	M3FastIntegerMath.unsignedMultiplyHigh	0.00	1.69	84682.00
+2	pre	M3FastDoubleMath.tryDecToDoubleWithFastAlgorithm	4.50	113.01	25.11
+2	pre	M3FastFloatMath.tryDecToFloatWithFastAlgorithm	4.74	68.75	14.51
+2	pre	M3FftMultiplier.multiply (400k-bit operands)	3287600.00	6272300.00	1.91
+3	pre	M3JavaDoubleBitsFromCharSequence	52.65	232.41	4.41
+3	pre	M3JavaFloatBitsFromCharSequence	91.03	102.43	1.13
+3	pre	M3JavaDoubleBitsFromByteArray	38.42	232.41	6.05
+3	pre	M3JavaFloatBitsFromByteArray	81.41	102.43	1.26
+3	pre	Double.parseDouble (wiring)	51.43	232.41	4.52
+3	pre	Float.parseFloat (wiring)	95.92	102.43	1.07
+3	pre	M3FastDoubleSwar.isEightDigits	1.04	1.95	1.88
+3	pre	M3FastDoubleSwar.readLongBE	4.40	3.64	0.83
+3	pre	M3FastIntegerMath.unsignedMultiplyHigh	0.00	1.63	81644.00
+3	pre	M3FastDoubleMath.tryDecToDoubleWithFastAlgorithm	4.75	105.45	22.18
+3	pre	M3FastFloatMath.tryDecToFloatWithFastAlgorithm	5.15	69.04	13.42
+3	pre	M3FftMultiplier.multiply (400k-bit operands)	2181100.00	6044000.00	2.77
+3	post	M3JavaDoubleBitsFromCharSequence	46.43	241.66	5.20
+3	post	M3JavaFloatBitsFromCharSequence	93.33	102.42	1.10
+3	post	M3JavaDoubleBitsFromByteArray	37.62	241.66	6.42
+3	post	M3JavaFloatBitsFromByteArray	78.05	102.42	1.31
+3	post	Double.parseDouble (wiring)	50.69	241.66	4.77
+3	post	Float.parseFloat (wiring)	87.27	102.42	1.17
+3	post	M3FastDoubleSwar.isEightDigits	0.91	2.06	2.26
+3	post	M3FastDoubleSwar.readLongBE	4.39	4.14	0.94
+3	post	M3FastIntegerMath.unsignedMultiplyHigh	0.00	1.65	82642.00
+3	post	M3FastDoubleMath.tryDecToDoubleWithFastAlgorithm	4.61	126.68	27.45
+3	post	M3FastFloatMath.tryDecToFloatWithFastAlgorithm	5.15	63.63	12.36
+3	post	M3FftMultiplier.multiply (400k-bit operands)	1956200.00	6265700.00	3.20
+4	post	M3JavaDoubleBitsFromCharSequence	49.45	218.29	4.41
+4	post	M3JavaFloatBitsFromCharSequence	97.52	103.08	1.06
+4	post	M3JavaDoubleBitsFromByteArray	42.62	218.29	5.12
+4	post	M3JavaFloatBitsFromByteArray	85.15	103.08	1.21
+4	post	Double.parseDouble (wiring)	47.77	218.29	4.57
+4	post	Float.parseFloat (wiring)	96.71	103.08	1.07
+4	post	M3FastDoubleSwar.isEightDigits	1.04	2.04	1.95
+4	post	M3FastDoubleSwar.readLongBE	4.34	4.14	0.95
+4	post	M3FastIntegerMath.unsignedMultiplyHigh	0.00	1.67	83731.00
+4	post	M3FastDoubleMath.tryDecToDoubleWithFastAlgorithm	4.62	102.95	22.28
+4	post	M3FastFloatMath.tryDecToFloatWithFastAlgorithm	5.30	64.26	12.13
+4	post	M3FftMultiplier.multiply (400k-bit operands)	3138600.00	6174100.00	1.97
+4	pre	M3JavaDoubleBitsFromCharSequence	42.40	212.18	5.00
+4	pre	M3JavaFloatBitsFromCharSequence	97.58	98.70	1.01
+4	pre	M3JavaDoubleBitsFromByteArray	41.01	212.18	5.17
+4	pre	M3JavaFloatBitsFromByteArray	80.12	98.70	1.23
+4	pre	Double.parseDouble (wiring)	53.91	212.18	3.94
+4	pre	Float.parseFloat (wiring)	96.55	98.70	1.02
+4	pre	M3FastDoubleSwar.isEightDigits	1.20	2.19	1.83
+4	pre	M3FastDoubleSwar.readLongBE	4.46	4.63	1.04
+4	pre	M3FastIntegerMath.unsignedMultiplyHigh	0.00	1.65	82626.00
+4	pre	M3FastDoubleMath.tryDecToDoubleWithFastAlgorithm	4.97	152.93	30.77
+4	pre	M3FastFloatMath.tryDecToFloatWithFastAlgorithm	6.10	67.34	11.05
+4	pre	M3FftMultiplier.multiply (400k-bit operands)	2137200.00	6065500.00	2.84
+5	pre	M3JavaDoubleBitsFromCharSequence	48.24	225.19	4.67
+5	pre	M3JavaFloatBitsFromCharSequence	99.58	108.17	1.09
+5	pre	M3JavaDoubleBitsFromByteArray	39.31	225.19	5.73
+5	pre	M3JavaFloatBitsFromByteArray	86.63	108.17	1.25
+5	pre	Double.parseDouble (wiring)	54.42	225.19	4.14
+5	pre	Float.parseFloat (wiring)	92.68	108.17	1.17
+5	pre	M3FastDoubleSwar.isEightDigits	0.94	2.12	2.24
+5	pre	M3FastDoubleSwar.readLongBE	4.22	4.39	1.04
+5	pre	M3FastIntegerMath.unsignedMultiplyHigh	0.00	1.58	Infinity
+5	pre	M3FastDoubleMath.tryDecToDoubleWithFastAlgorithm	5.54	106.36	19.19
+5	pre	M3FastFloatMath.tryDecToFloatWithFastAlgorithm	5.17	74.91	14.49
+5	pre	M3FftMultiplier.multiply (400k-bit operands)	1923700.00	6526600.00	3.39
+5	post	M3JavaDoubleBitsFromCharSequence	48.38	219.79	4.54
+5	post	M3JavaFloatBitsFromCharSequence	92.46	113.00	1.22
+5	post	M3JavaDoubleBitsFromByteArray	37.25	219.79	5.90
+5	post	M3JavaFloatBitsFromByteArray	85.89	113.00	1.32
+5	post	Double.parseDouble (wiring)	51.19	219.79	4.29
+5	post	Float.parseFloat (wiring)	95.37	113.00	1.18
+5	post	M3FastDoubleSwar.isEightDigits	1.03	2.24	2.18
+5	post	M3FastDoubleSwar.readLongBE	4.14	4.51	1.09
+5	post	M3FastIntegerMath.unsignedMultiplyHigh	0.00	1.64	81969.00
+5	post	M3FastDoubleMath.tryDecToDoubleWithFastAlgorithm	4.27	117.26	27.49
+5	post	M3FastFloatMath.tryDecToFloatWithFastAlgorithm	4.99	60.92	12.21
+5	post	M3FftMultiplier.multiply (400k-bit operands)	2970200.00	5917000.00	1.99
+6	post	M3JavaDoubleBitsFromCharSequence	49.08	222.34	4.53
+6	post	M3JavaFloatBitsFromCharSequence	93.15	105.93	1.14
+6	post	M3JavaDoubleBitsFromByteArray	40.66	222.34	5.47
+6	post	M3JavaFloatBitsFromByteArray	88.06	105.93	1.20
+6	post	Double.parseDouble (wiring)	46.21	222.34	4.81
+6	post	Float.parseFloat (wiring)	88.60	105.93	1.20
+6	post	M3FastDoubleSwar.isEightDigits	1.07	2.09	1.94
+6	post	M3FastDoubleSwar.readLongBE	4.49	4.22	0.94
+6	post	M3FastIntegerMath.unsignedMultiplyHigh	0.00	1.59	79632.00
+6	post	M3FastDoubleMath.tryDecToDoubleWithFastAlgorithm	5.18	117.36	22.64
+6	post	M3FastFloatMath.tryDecToFloatWithFastAlgorithm	5.01	69.87	13.94
+6	post	M3FftMultiplier.multiply (400k-bit operands)	2228300.00	5949900.00	2.67
+6	pre	M3JavaDoubleBitsFromCharSequence	57.50	226.93	3.95
+6	pre	M3JavaFloatBitsFromCharSequence	93.78	107.36	1.14
+6	pre	M3JavaDoubleBitsFromByteArray	40.58	226.93	5.59
+6	pre	M3JavaFloatBitsFromByteArray	82.82	107.36	1.30
+6	pre	Double.parseDouble (wiring)	47.13	226.93	4.81
+6	pre	Float.parseFloat (wiring)	93.47	107.36	1.15
+6	pre	M3FastDoubleSwar.isEightDigits	1.04	1.89	1.81
+6	pre	M3FastDoubleSwar.readLongBE	4.64	4.17	0.90
+6	pre	M3FastIntegerMath.unsignedMultiplyHigh	0.00	1.45	Infinity
+6	pre	M3FastDoubleMath.tryDecToDoubleWithFastAlgorithm	5.06	106.23	21.00
+6	pre	M3FastFloatMath.tryDecToFloatWithFastAlgorithm	4.85	69.73	14.37
+6	pre	M3FftMultiplier.multiply (400k-bit operands)	2197300.00	6534500.00	2.97
+7	pre	M3JavaDoubleBitsFromCharSequence	51.06	231.30	4.53
+7	pre	M3JavaFloatBitsFromCharSequence	87.88	110.10	1.25
+7	pre	M3JavaDoubleBitsFromByteArray	37.30	231.30	6.20
+7	pre	M3JavaFloatBitsFromByteArray	84.47	110.10	1.30
+7	pre	Double.parseDouble (wiring)	51.97	231.30	4.45
+7	pre	Float.parseFloat (wiring)	87.49	110.10	1.26
+7	pre	M3FastDoubleSwar.isEightDigits	1.04	1.99	1.91
+7	pre	M3FastDoubleSwar.readLongBE	4.20	4.67	1.11
+7	pre	M3FastIntegerMath.unsignedMultiplyHigh	0.00	1.60	Infinity
+7	pre	M3FastDoubleMath.tryDecToDoubleWithFastAlgorithm	4.51	106.17	23.57
+7	pre	M3FastFloatMath.tryDecToFloatWithFastAlgorithm	4.99	75.84	15.19
+7	pre	M3FftMultiplier.multiply (400k-bit operands)	2256300.00	5729100.00	2.54
+7	post	M3JavaDoubleBitsFromCharSequence	62.87	220.94	3.51
+7	post	M3JavaFloatBitsFromCharSequence	124.71	99.63	0.80
+7	post	M3JavaDoubleBitsFromByteArray	40.82	220.94	5.41
+7	post	M3JavaFloatBitsFromByteArray	90.45	99.63	1.10
+7	post	Double.parseDouble (wiring)	56.65	220.94	3.90
+7	post	Float.parseFloat (wiring)	114.47	99.63	0.87
+7	post	M3FastDoubleSwar.isEightDigits	1.04	2.04	1.96
+7	post	M3FastDoubleSwar.readLongBE	4.79	4.20	0.88
+7	post	M3FastIntegerMath.unsignedMultiplyHigh	0.00	1.47	Infinity
+7	post	M3FastDoubleMath.tryDecToDoubleWithFastAlgorithm	5.20	116.38	22.37
+7	post	M3FastFloatMath.tryDecToFloatWithFastAlgorithm	4.84	72.09	14.88
+7	post	M3FftMultiplier.multiply (400k-bit operands)	1959000.00	5942300.00	3.03
+8	post	M3JavaDoubleBitsFromCharSequence	53.37	228.24	4.28
+8	post	M3JavaFloatBitsFromCharSequence	85.69	105.78	1.23
+8	post	M3JavaDoubleBitsFromByteArray	39.16	228.24	5.83
+8	post	M3JavaFloatBitsFromByteArray	92.45	105.78	1.14
+8	post	Double.parseDouble (wiring)	49.05	228.24	4.65
+8	post	Float.parseFloat (wiring)	87.67	105.78	1.21
+8	post	M3FastDoubleSwar.isEightDigits	1.04	2.04	1.96
+8	post	M3FastDoubleSwar.readLongBE	4.39	4.25	0.97
+8	post	M3FastIntegerMath.unsignedMultiplyHigh	0.00	1.54	Infinity
+8	post	M3FastDoubleMath.tryDecToDoubleWithFastAlgorithm	4.65	105.42	22.67
+8	post	M3FastFloatMath.tryDecToFloatWithFastAlgorithm	5.30	72.89	13.77
+8	post	M3FftMultiplier.multiply (400k-bit operands)	3124600.00	6618000.00	2.12
+8	pre	M3JavaDoubleBitsFromCharSequence	55.84	222.53	3.99
+8	pre	M3JavaFloatBitsFromCharSequence	96.54	118.15	1.22
+8	pre	M3JavaDoubleBitsFromByteArray	41.07	222.53	5.42
+8	pre	M3JavaFloatBitsFromByteArray	95.49	118.15	1.24
+8	pre	Double.parseDouble (wiring)	53.48	222.53	4.16
+8	pre	Float.parseFloat (wiring)	100.55	118.15	1.17
+8	pre	M3FastDoubleSwar.isEightDigits	0.98	2.06	2.11
+8	pre	M3FastDoubleSwar.readLongBE	4.52	4.41	0.97
+8	pre	M3FastIntegerMath.unsignedMultiplyHigh	0.00	1.63	81574.00
+8	pre	M3FastDoubleMath.tryDecToDoubleWithFastAlgorithm	4.50	103.30	22.97
+8	pre	M3FastFloatMath.tryDecToFloatWithFastAlgorithm	5.01	68.69	13.72
+8	pre	M3FftMultiplier.multiply (400k-bit operands)	2086500.00	8656500.00	4.15
+9	pre	M3JavaDoubleBitsFromCharSequence	50.43	234.94	4.66
+9	pre	M3JavaFloatBitsFromCharSequence	84.79	103.85	1.22
+9	pre	M3JavaDoubleBitsFromByteArray	37.54	234.94	6.26
+9	pre	M3JavaFloatBitsFromByteArray	84.57	103.85	1.23
+9	pre	Double.parseDouble (wiring)	46.50	234.94	5.05
+9	pre	Float.parseFloat (wiring)	85.25	103.85	1.22
+9	pre	M3FastDoubleSwar.isEightDigits	1.01	1.93	1.91
+9	pre	M3FastDoubleSwar.readLongBE	4.09	4.20	1.03
+9	pre	M3FastIntegerMath.unsignedMultiplyHigh	0.00	1.67	Infinity
+9	pre	M3FastDoubleMath.tryDecToDoubleWithFastAlgorithm	4.92	92.90	18.88
+9	pre	M3FastFloatMath.tryDecToFloatWithFastAlgorithm	4.63	65.50	14.14
+9	pre	M3FftMultiplier.multiply (400k-bit operands)	2012200.00	5811700.00	2.89
+9	post	M3JavaDoubleBitsFromCharSequence	48.84	222.40	4.55
+9	post	M3JavaFloatBitsFromCharSequence	87.66	96.75	1.10
+9	post	M3JavaDoubleBitsFromByteArray	36.71	222.40	6.06
+9	post	M3JavaFloatBitsFromByteArray	82.62	96.75	1.17
+9	post	Double.parseDouble (wiring)	55.07	222.40	4.04
+9	post	Float.parseFloat (wiring)	88.99	96.75	1.09
+9	post	M3FastDoubleSwar.isEightDigits	0.99	2.02	2.04
+9	post	M3FastDoubleSwar.readLongBE	4.38	4.22	0.96
+9	post	M3FastIntegerMath.unsignedMultiplyHigh	0.00	1.51	75504.00
+9	post	M3FastDoubleMath.tryDecToDoubleWithFastAlgorithm	4.67	102.05	21.84
+9	post	M3FastFloatMath.tryDecToFloatWithFastAlgorithm	5.07	64.67	12.75
+9	post	M3FftMultiplier.multiply (400k-bit operands)	2096700.00	6048300.00	2.88
+10	post	M3JavaDoubleBitsFromCharSequence	51.99	226.10	4.35
+10	post	M3JavaFloatBitsFromCharSequence	95.96	106.06	1.11
+10	post	M3JavaDoubleBitsFromByteArray	37.03	226.10	6.11
+10	post	M3JavaFloatBitsFromByteArray	88.89	106.06	1.19
+10	post	Double.parseDouble (wiring)	54.84	226.10	4.12
+10	post	Float.parseFloat (wiring)	99.66	106.06	1.06
+10	post	M3FastDoubleSwar.isEightDigits	1.04	2.12	2.04
+10	post	M3FastDoubleSwar.readLongBE	4.29	4.14	0.96
+10	post	M3FastIntegerMath.unsignedMultiplyHigh	0.00	1.66	Infinity
+10	post	M3FastDoubleMath.tryDecToDoubleWithFastAlgorithm	4.50	98.26	21.84
+10	post	M3FastFloatMath.tryDecToFloatWithFastAlgorithm	4.73	68.68	14.52
+10	post	M3FftMultiplier.multiply (400k-bit operands)	2933800.00	8364400.00	2.85
+10	pre	M3JavaDoubleBitsFromCharSequence	57.14	192.67	3.37
+10	pre	M3JavaFloatBitsFromCharSequence	88.63	100.45	1.13
+10	pre	M3JavaDoubleBitsFromByteArray	38.43	192.67	5.01
+10	pre	M3JavaFloatBitsFromByteArray	94.04	100.45	1.07
+10	pre	Double.parseDouble (wiring)	51.00	192.67	3.78
+10	pre	Float.parseFloat (wiring)	91.05	100.45	1.10
+10	pre	M3FastDoubleSwar.isEightDigits	0.95	2.03	2.14
+10	pre	M3FastDoubleSwar.readLongBE	4.23	4.07	0.96
+10	pre	M3FastIntegerMath.unsignedMultiplyHigh	0.00	1.29	64703.00
+10	pre	M3FastDoubleMath.tryDecToDoubleWithFastAlgorithm	4.26	89.26	20.93
+10	pre	M3FastFloatMath.tryDecToFloatWithFastAlgorithm	4.50	62.20	13.83
+10	pre	M3FftMultiplier.multiply (400k-bit operands)	2294800.00	5788300.00	2.52
+11	pre	M3JavaDoubleBitsFromCharSequence	48.39	216.71	4.48
+11	pre	M3JavaFloatBitsFromCharSequence	86.83	93.83	1.08
+11	pre	M3JavaDoubleBitsFromByteArray	37.26	216.71	5.82
+11	pre	M3JavaFloatBitsFromByteArray	79.33	93.83	1.18
+11	pre	Double.parseDouble (wiring)	43.20	216.71	5.02
+11	pre	Float.parseFloat (wiring)	89.96	93.83	1.04
+11	pre	M3FastDoubleSwar.isEightDigits	0.98	1.92	1.95
+11	pre	M3FastDoubleSwar.readLongBE	3.88	3.87	1.00
+11	pre	M3FastIntegerMath.unsignedMultiplyHigh	0.00	1.48	Infinity
+11	pre	M3FastDoubleMath.tryDecToDoubleWithFastAlgorithm	4.38	94.01	21.46
+11	pre	M3FastFloatMath.tryDecToFloatWithFastAlgorithm	5.48	68.94	12.57
+11	pre	M3FftMultiplier.multiply (400k-bit operands)	2085400.00	5989900.00	2.87
+11	post	M3JavaDoubleBitsFromCharSequence	46.33	214.54	4.63
+11	post	M3JavaFloatBitsFromCharSequence	86.96	98.63	1.13
+11	post	M3JavaDoubleBitsFromByteArray	36.63	214.54	5.86
+11	post	M3JavaFloatBitsFromByteArray	80.93	98.63	1.22
+11	post	Double.parseDouble (wiring)	52.87	214.54	4.06
+11	post	Float.parseFloat (wiring)	82.96	98.63	1.19
+11	post	M3FastDoubleSwar.isEightDigits	1.00	1.96	1.96
+11	post	M3FastDoubleSwar.readLongBE	4.30	4.36	1.01
+11	post	M3FastIntegerMath.unsignedMultiplyHigh	0.00	1.59	79257.00
+11	post	M3FastDoubleMath.tryDecToDoubleWithFastAlgorithm	4.38	121.72	27.81
+11	post	M3FastFloatMath.tryDecToFloatWithFastAlgorithm	5.15	70.27	13.64
+11	post	M3FftMultiplier.multiply (400k-bit operands)	1904700.00	5873300.00	3.08
+12	post	M3JavaDoubleBitsFromCharSequence	51.62	231.39	4.48
+12	post	M3JavaFloatBitsFromCharSequence	98.71	105.05	1.06
+12	post	M3JavaDoubleBitsFromByteArray	36.42	231.39	6.35
+12	post	M3JavaFloatBitsFromByteArray	75.66	105.05	1.39
+12	post	Double.parseDouble (wiring)	47.06	231.39	4.92
+12	post	Float.parseFloat (wiring)	95.82	105.05	1.10
+12	post	M3FastDoubleSwar.isEightDigits	1.01	2.12	2.09
+12	post	M3FastDoubleSwar.readLongBE	4.16	4.43	1.06
+12	post	M3FastIntegerMath.unsignedMultiplyHigh	0.00	1.58	Infinity
+12	post	M3FastDoubleMath.tryDecToDoubleWithFastAlgorithm	4.75	114.06	24.00
+12	post	M3FastFloatMath.tryDecToFloatWithFastAlgorithm	5.11	73.59	14.41
+12	post	M3FftMultiplier.multiply (400k-bit operands)	2713600.00	5874800.00	2.16
+12	pre	M3JavaDoubleBitsFromCharSequence	51.06	226.02	4.43
+12	pre	M3JavaFloatBitsFromCharSequence	91.15	110.73	1.21
+12	pre	M3JavaDoubleBitsFromByteArray	39.54	226.02	5.72
+12	pre	M3JavaFloatBitsFromByteArray	96.64	110.73	1.15
+12	pre	Double.parseDouble (wiring)	48.32	226.02	4.68
+12	pre	Float.parseFloat (wiring)	86.91	110.73	1.27
+12	pre	M3FastDoubleSwar.isEightDigits	1.02	2.02	1.98
+12	pre	M3FastDoubleSwar.readLongBE	4.05	3.83	0.95
+12	pre	M3FastIntegerMath.unsignedMultiplyHigh	0.00	1.52	Infinity
+12	pre	M3FastDoubleMath.tryDecToDoubleWithFastAlgorithm	4.68	100.37	21.43
+12	pre	M3FastFloatMath.tryDecToFloatWithFastAlgorithm	4.50	66.65	14.82
+12	pre	M3FftMultiplier.multiply (400k-bit operands)	1954900.00	5812900.00	2.97
+13	pre	M3JavaDoubleBitsFromCharSequence	48.86	211.93	4.34
+13	pre	M3JavaFloatBitsFromCharSequence	85.61	99.70	1.16
+13	pre	M3JavaDoubleBitsFromByteArray	36.06	211.93	5.88
+13	pre	M3JavaFloatBitsFromByteArray	79.65	99.70	1.25
+13	pre	Double.parseDouble (wiring)	45.50	211.93	4.66
+13	pre	Float.parseFloat (wiring)	91.17	99.70	1.09
+13	pre	M3FastDoubleSwar.isEightDigits	0.94	1.95	2.08
+13	pre	M3FastDoubleSwar.readLongBE	4.41	4.03	0.91
+13	pre	M3FastIntegerMath.unsignedMultiplyHigh	0.00	1.75	87409.00
+13	pre	M3FastDoubleMath.tryDecToDoubleWithFastAlgorithm	4.77	100.06	20.99
+13	pre	M3FastFloatMath.tryDecToFloatWithFastAlgorithm	5.44	69.49	12.77
+13	pre	M3FftMultiplier.multiply (400k-bit operands)	1866500.00	6037000.00	3.23
+13	post	M3JavaDoubleBitsFromCharSequence	52.56	205.53	3.91
+13	post	M3JavaFloatBitsFromCharSequence	91.06	97.98	1.08
+13	post	M3JavaDoubleBitsFromByteArray	37.44	205.53	5.49
+13	post	M3JavaFloatBitsFromByteArray	89.19	97.98	1.10
+13	post	Double.parseDouble (wiring)	55.79	205.53	3.68
+13	post	Float.parseFloat (wiring)	101.36	97.98	0.97
+13	post	M3FastDoubleSwar.isEightDigits	1.01	2.04	2.03
+13	post	M3FastDoubleSwar.readLongBE	4.16	4.08	0.98
+13	post	M3FastIntegerMath.unsignedMultiplyHigh	0.00	1.68	Infinity
+13	post	M3FastDoubleMath.tryDecToDoubleWithFastAlgorithm	4.50	108.67	24.17
+13	post	M3FastFloatMath.tryDecToFloatWithFastAlgorithm	5.00	67.43	13.48
+13	post	M3FftMultiplier.multiply (400k-bit operands)	1994200.00	5982500.00	3.00
+14	post	M3JavaDoubleBitsFromCharSequence	54.58	238.82	4.38
+14	post	M3JavaFloatBitsFromCharSequence	95.17	108.64	1.14
+14	post	M3JavaDoubleBitsFromByteArray	39.79	238.82	6.00
+14	post	M3JavaFloatBitsFromByteArray	87.06	108.64	1.25
+14	post	Double.parseDouble (wiring)	52.05	238.82	4.59
+14	post	Float.parseFloat (wiring)	94.20	108.64	1.15
+14	post	M3FastDoubleSwar.isEightDigits	0.94	1.87	1.99
+14	post	M3FastDoubleSwar.readLongBE	4.40	4.30	0.98
+14	post	M3FastIntegerMath.unsignedMultiplyHigh	0.00	1.46	Infinity
+14	post	M3FastDoubleMath.tryDecToDoubleWithFastAlgorithm	4.72	98.47	20.86
+14	post	M3FastFloatMath.tryDecToFloatWithFastAlgorithm	5.13	67.70	13.21
+14	post	M3FftMultiplier.multiply (400k-bit operands)	2112900.00	5773900.00	2.73
+14	pre	M3JavaDoubleBitsFromCharSequence	51.80	213.69	4.13
+14	pre	M3JavaFloatBitsFromCharSequence	83.67	91.70	1.10
+14	pre	M3JavaDoubleBitsFromByteArray	38.29	213.69	5.58
+14	pre	M3JavaFloatBitsFromByteArray	84.21	91.70	1.09
+14	pre	Double.parseDouble (wiring)	42.41	213.69	5.04
+14	pre	Float.parseFloat (wiring)	82.72	91.70	1.11
+14	pre	M3FastDoubleSwar.isEightDigits	1.01	1.92	1.90
+14	pre	M3FastDoubleSwar.readLongBE	4.61	4.30	0.93
+14	pre	M3FastIntegerMath.unsignedMultiplyHigh	0.00	1.67	83708.00
+14	pre	M3FastDoubleMath.tryDecToDoubleWithFastAlgorithm	5.96	111.87	18.77
+14	pre	M3FastFloatMath.tryDecToFloatWithFastAlgorithm	7.08	74.42	10.52
+14	pre	M3FftMultiplier.multiply (400k-bit operands)	2249800.00	6090900.00	2.71
+15	pre	M3JavaDoubleBitsFromCharSequence	50.15	213.47	4.26
+15	pre	M3JavaFloatBitsFromCharSequence	93.86	93.84	1.00
+15	pre	M3JavaDoubleBitsFromByteArray	41.26	213.47	5.17
+15	pre	M3JavaFloatBitsFromByteArray	96.31	93.84	0.97
+15	pre	Double.parseDouble (wiring)	49.88	213.47	4.28
+15	pre	Float.parseFloat (wiring)	82.43	93.84	1.14
+15	pre	M3FastDoubleSwar.isEightDigits	0.97	1.90	1.96
+15	pre	M3FastDoubleSwar.readLongBE	4.31	4.11	0.95
+15	pre	M3FastIntegerMath.unsignedMultiplyHigh	0.00	1.62	80886.00
+15	pre	M3FastDoubleMath.tryDecToDoubleWithFastAlgorithm	4.44	102.88	23.18
+15	pre	M3FastFloatMath.tryDecToFloatWithFastAlgorithm	5.12	62.53	12.21
+15	pre	M3FftMultiplier.multiply (400k-bit operands)	2549500.00	5912600.00	2.32
+15	post	M3JavaDoubleBitsFromCharSequence	50.87	216.80	4.26
+15	post	M3JavaFloatBitsFromCharSequence	86.20	104.93	1.22
+15	post	M3JavaDoubleBitsFromByteArray	35.75	216.80	6.06
+15	post	M3JavaFloatBitsFromByteArray	82.79	104.93	1.27
+15	post	Double.parseDouble (wiring)	59.36	216.80	3.65
+15	post	Float.parseFloat (wiring)	85.43	104.93	1.23
+15	post	M3FastDoubleSwar.isEightDigits	1.01	1.97	1.94
+15	post	M3FastDoubleSwar.readLongBE	4.14	4.30	1.04
+15	post	M3FastIntegerMath.unsignedMultiplyHigh	0.00	1.55	Infinity
+15	post	M3FastDoubleMath.tryDecToDoubleWithFastAlgorithm	4.37	107.15	24.53
+15	post	M3FastFloatMath.tryDecToFloatWithFastAlgorithm	5.27	66.32	12.59
+15	post	M3FftMultiplier.multiply (400k-bit operands)	3228900.00	5439500.00	1.68
+16	post	M3JavaDoubleBitsFromCharSequence	51.18	203.11	3.97
+16	post	M3JavaFloatBitsFromCharSequence	93.33	103.46	1.11
+16	post	M3JavaDoubleBitsFromByteArray	35.40	203.11	5.74
+16	post	M3JavaFloatBitsFromByteArray	79.59	103.46	1.30
+16	post	Double.parseDouble (wiring)	51.01	203.11	3.98
+16	post	Float.parseFloat (wiring)	91.83	103.46	1.13
+16	post	M3FastDoubleSwar.isEightDigits	1.00	2.06	2.06
+16	post	M3FastDoubleSwar.readLongBE	3.98	3.86	0.97
+16	post	M3FastIntegerMath.unsignedMultiplyHigh	0.00	1.50	75172.00
+16	post	M3FastDoubleMath.tryDecToDoubleWithFastAlgorithm	4.60	98.02	21.31
+16	post	M3FastFloatMath.tryDecToFloatWithFastAlgorithm	4.73	61.47	12.99
+16	post	M3FftMultiplier.multiply (400k-bit operands)	2060300.00	5418900.00	2.63
+16	pre	M3JavaDoubleBitsFromCharSequence	45.38	208.85	4.60
+16	pre	M3JavaFloatBitsFromCharSequence	88.03	101.04	1.15
+16	pre	M3JavaDoubleBitsFromByteArray	35.50	208.85	5.88
+16	pre	M3JavaFloatBitsFromByteArray	83.73	101.04	1.21
+16	pre	Double.parseDouble (wiring)	48.34	208.85	4.32
+16	pre	Float.parseFloat (wiring)	87.30	101.04	1.16
+16	pre	M3FastDoubleSwar.isEightDigits	0.94	1.81	1.94
+16	pre	M3FastDoubleSwar.readLongBE	3.87	3.75	0.97
+16	pre	M3FastIntegerMath.unsignedMultiplyHigh	0.00	1.34	66882.00
+16	pre	M3FastDoubleMath.tryDecToDoubleWithFastAlgorithm	3.79	89.44	23.60
+16	pre	M3FastFloatMath.tryDecToFloatWithFastAlgorithm	4.87	62.08	12.76
+16	pre	M3FftMultiplier.multiply (400k-bit operands)	2781900.00	5662200.00	2.04
+17	pre	M3JavaDoubleBitsFromCharSequence	47.46	213.41	4.50
+17	pre	M3JavaFloatBitsFromCharSequence	83.74	96.99	1.16
+17	pre	M3JavaDoubleBitsFromByteArray	35.31	213.41	6.04
+17	pre	M3JavaFloatBitsFromByteArray	81.93	96.99	1.18
+17	pre	Double.parseDouble (wiring)	45.64	213.41	4.68
+17	pre	Float.parseFloat (wiring)	79.85	96.99	1.21
+17	pre	M3FastDoubleSwar.isEightDigits	0.91	1.99	2.18
+17	pre	M3FastDoubleSwar.readLongBE	4.64	3.86	0.83
+17	pre	M3FastIntegerMath.unsignedMultiplyHigh	0.00	1.69	84408.00
+17	pre	M3FastDoubleMath.tryDecToDoubleWithFastAlgorithm	4.19	96.83	23.13
+17	pre	M3FastFloatMath.tryDecToFloatWithFastAlgorithm	4.72	72.60	15.37
+17	pre	M3FftMultiplier.multiply (400k-bit operands)	3018000.00	6055600.00	2.01
+17	post	M3JavaDoubleBitsFromCharSequence	43.32	210.75	4.86
+17	post	M3JavaFloatBitsFromCharSequence	86.21	91.01	1.06
+17	post	M3JavaDoubleBitsFromByteArray	36.05	210.75	5.85
+17	post	M3JavaFloatBitsFromByteArray	72.26	91.01	1.26
+17	post	Double.parseDouble (wiring)	43.00	210.75	4.90
+17	post	Float.parseFloat (wiring)	84.58	91.01	1.08
+17	post	M3FastDoubleSwar.isEightDigits	0.93	1.80	1.92
+17	post	M3FastDoubleSwar.readLongBE	3.58	3.35	0.94
+17	post	M3FastIntegerMath.unsignedMultiplyHigh	0.00	1.36	68045.00
+17	post	M3FastDoubleMath.tryDecToDoubleWithFastAlgorithm	3.96	92.76	23.43
+17	post	M3FastFloatMath.tryDecToFloatWithFastAlgorithm	5.12	61.61	12.04
+17	post	M3FftMultiplier.multiply (400k-bit operands)	1987300.00	5771600.00	2.90
+18	post	M3JavaDoubleBitsFromCharSequence	40.68	192.48	4.73
+18	post	M3JavaFloatBitsFromCharSequence	83.73	91.96	1.10
+18	post	M3JavaDoubleBitsFromByteArray	35.33	192.48	5.45
+18	post	M3JavaFloatBitsFromByteArray	72.75	91.96	1.26
+18	post	Double.parseDouble (wiring)	43.13	192.48	4.46
+18	post	Float.parseFloat (wiring)	74.99	91.96	1.23
+18	post	M3FastDoubleSwar.isEightDigits	0.93	1.91	2.04
+18	post	M3FastDoubleSwar.readLongBE	3.66	4.03	1.10
+18	post	M3FastIntegerMath.unsignedMultiplyHigh	0.00	1.45	Infinity
+18	post	M3FastDoubleMath.tryDecToDoubleWithFastAlgorithm	3.87	86.48	22.35
+18	post	M3FastFloatMath.tryDecToFloatWithFastAlgorithm	4.62	63.89	13.83
+18	post	M3FftMultiplier.multiply (400k-bit operands)	2489300.00	5939600.00	2.39
+18	pre	M3JavaDoubleBitsFromCharSequence	47.25	201.88	4.27
+18	pre	M3JavaFloatBitsFromCharSequence	80.60	92.60	1.15
+18	pre	M3JavaDoubleBitsFromByteArray	42.19	201.88	4.78
+18	pre	M3JavaFloatBitsFromByteArray	76.53	92.60	1.21
+18	pre	Double.parseDouble (wiring)	48.04	201.88	4.20
+18	pre	Float.parseFloat (wiring)	86.74	92.60	1.07
+18	pre	M3FastDoubleSwar.isEightDigits	1.03	1.93	1.88
+18	pre	M3FastDoubleSwar.readLongBE	4.04	3.76	0.93
+18	pre	M3FastIntegerMath.unsignedMultiplyHigh	0.00	1.47	73621.00
+18	pre	M3FastDoubleMath.tryDecToDoubleWithFastAlgorithm	5.27	108.34	20.57
+18	pre	M3FastFloatMath.tryDecToFloatWithFastAlgorithm	4.99	69.24	13.89
+18	pre	M3FftMultiplier.multiply (400k-bit operands)	2822800.00	5789100.00	2.05
+19	pre	M3JavaDoubleBitsFromCharSequence	46.21	215.89	4.67
+19	pre	M3JavaFloatBitsFromCharSequence	95.93	91.96	0.96
+19	pre	M3JavaDoubleBitsFromByteArray	34.91	215.89	6.18
+19	pre	M3JavaFloatBitsFromByteArray	86.08	91.96	1.07
+19	pre	Double.parseDouble (wiring)	48.96	215.89	4.41
+19	pre	Float.parseFloat (wiring)	96.65	91.96	0.95
+19	pre	M3FastDoubleSwar.isEightDigits	1.00	2.04	2.05
+19	pre	M3FastDoubleSwar.readLongBE	4.53	4.26	0.94
+19	pre	M3FastIntegerMath.unsignedMultiplyHigh	0.00	1.43	71381.00
+19	pre	M3FastDoubleMath.tryDecToDoubleWithFastAlgorithm	4.51	99.89	22.13
+19	pre	M3FastFloatMath.tryDecToFloatWithFastAlgorithm	5.20	64.28	12.36
+19	pre	M3FftMultiplier.multiply (400k-bit operands)	1968300.00	5214500.00	2.65
+19	post	M3JavaDoubleBitsFromCharSequence	47.67	216.95	4.55
+19	post	M3JavaFloatBitsFromCharSequence	84.71	90.48	1.07
+19	post	M3JavaDoubleBitsFromByteArray	33.78	216.95	6.42
+19	post	M3JavaFloatBitsFromByteArray	80.02	90.48	1.13
+19	post	Double.parseDouble (wiring)	43.99	216.95	4.93
+19	post	Float.parseFloat (wiring)	84.00	90.48	1.08
+19	post	M3FastDoubleSwar.isEightDigits	0.83	1.79	2.15
+19	post	M3FastDoubleSwar.readLongBE	4.28	3.64	0.85
+19	post	M3FastIntegerMath.unsignedMultiplyHigh	0.00	1.38	69150.00
+19	post	M3FastDoubleMath.tryDecToDoubleWithFastAlgorithm	3.62	95.74	26.48
+19	post	M3FastFloatMath.tryDecToFloatWithFastAlgorithm	4.50	64.49	14.35
+19	post	M3FftMultiplier.multiply (400k-bit operands)	1786300.00	5932100.00	3.32
+20	post	M3JavaDoubleBitsFromCharSequence	47.87	202.53	4.23
+20	post	M3JavaFloatBitsFromCharSequence	85.16	102.18	1.20
+20	post	M3JavaDoubleBitsFromByteArray	42.34	202.53	4.78
+20	post	M3JavaFloatBitsFromByteArray	81.04	102.18	1.26
+20	post	Double.parseDouble (wiring)	49.69	202.53	4.08
+20	post	Float.parseFloat (wiring)	85.71	102.18	1.19
+20	post	M3FastDoubleSwar.isEightDigits	0.89	1.89	2.12
+20	post	M3FastDoubleSwar.readLongBE	3.83	3.90	1.02
+20	post	M3FastIntegerMath.unsignedMultiplyHigh	0.00	1.34	67187.00
+20	post	M3FastDoubleMath.tryDecToDoubleWithFastAlgorithm	4.19	96.77	23.12
+20	post	M3FastFloatMath.tryDecToFloatWithFastAlgorithm	4.72	64.33	13.62
+20	post	M3FftMultiplier.multiply (400k-bit operands)	1849400.00	6011300.00	3.25
+20	pre	M3JavaDoubleBitsFromCharSequence	49.63	204.89	4.13
+20	pre	M3JavaFloatBitsFromCharSequence	87.09	106.17	1.22
+20	pre	M3JavaDoubleBitsFromByteArray	36.33	204.89	5.64
+20	pre	M3JavaFloatBitsFromByteArray	83.37	106.17	1.27
+20	pre	Double.parseDouble (wiring)	52.55	204.89	3.90
+20	pre	Float.parseFloat (wiring)	83.34	106.17	1.27
+20	pre	M3FastDoubleSwar.isEightDigits	0.96	1.98	2.07
+20	pre	M3FastDoubleSwar.readLongBE	4.42	4.35	0.98
+20	pre	M3FastIntegerMath.unsignedMultiplyHigh	0.00	1.44	Infinity
+20	pre	M3FastDoubleMath.tryDecToDoubleWithFastAlgorithm	4.27	120.45	28.22
+20	pre	M3FastFloatMath.tryDecToFloatWithFastAlgorithm	4.61	68.95	14.95
+20	pre	M3FftMultiplier.multiply (400k-bit operands)	2970300.00	5922800.00	1.99
+21	pre	M3JavaDoubleBitsFromCharSequence	42.78	211.74	4.95
+21	pre	M3JavaFloatBitsFromCharSequence	92.22	98.68	1.07
+21	pre	M3JavaDoubleBitsFromByteArray	37.06	211.74	5.71
+21	pre	M3JavaFloatBitsFromByteArray	83.80	98.68	1.18
+21	pre	Double.parseDouble (wiring)	53.99	211.74	3.92
+21	pre	Float.parseFloat (wiring)	90.70	98.68	1.09
+21	pre	M3FastDoubleSwar.isEightDigits	1.09	1.90	1.74
+21	pre	M3FastDoubleSwar.readLongBE	4.38	4.02	0.92
+21	pre	M3FastIntegerMath.unsignedMultiplyHigh	0.00	1.46	72972.00
+21	pre	M3FastDoubleMath.tryDecToDoubleWithFastAlgorithm	4.02	104.25	25.91
+21	pre	M3FastFloatMath.tryDecToFloatWithFastAlgorithm	5.18	75.26	14.53
+21	pre	M3FftMultiplier.multiply (400k-bit operands)	1929800.00	5593300.00	2.90
+21	post	M3JavaDoubleBitsFromCharSequence	48.98	214.33	4.38
+21	post	M3JavaFloatBitsFromCharSequence	94.83	101.43	1.07
+21	post	M3JavaDoubleBitsFromByteArray	36.36	214.33	5.89
+21	post	M3JavaFloatBitsFromByteArray	91.20	101.43	1.11
+21	post	Double.parseDouble (wiring)	55.03	214.33	3.90
+21	post	Float.parseFloat (wiring)	87.28	101.43	1.16
+21	post	M3FastDoubleSwar.isEightDigits	0.99	2.16	2.19
+21	post	M3FastDoubleSwar.readLongBE	4.37	3.86	0.88
+21	post	M3FastIntegerMath.unsignedMultiplyHigh	0.00	1.60	Infinity
+21	post	M3FastDoubleMath.tryDecToDoubleWithFastAlgorithm	4.16	99.55	23.92
+21	post	M3FastFloatMath.tryDecToFloatWithFastAlgorithm	4.60	62.05	13.50
+21	post	M3FftMultiplier.multiply (400k-bit operands)	2953700.00	5712200.00	1.93
+22	post	M3JavaDoubleBitsFromCharSequence	62.25	221.55	3.56
+22	post	M3JavaFloatBitsFromCharSequence	89.86	102.86	1.14
+22	post	M3JavaDoubleBitsFromByteArray	41.92	221.55	5.29
+22	post	M3JavaFloatBitsFromByteArray	85.45	102.86	1.20
+22	post	Double.parseDouble (wiring)	51.28	221.55	4.32
+22	post	Float.parseFloat (wiring)	93.21	102.86	1.10
+22	post	M3FastDoubleSwar.isEightDigits	0.97	2.09	2.15
+22	post	M3FastDoubleSwar.readLongBE	4.55	3.80	0.83
+22	post	M3FastIntegerMath.unsignedMultiplyHigh	0.00	1.54	Infinity
+22	post	M3FastDoubleMath.tryDecToDoubleWithFastAlgorithm	4.50	100.27	22.29
+22	post	M3FastFloatMath.tryDecToFloatWithFastAlgorithm	4.74	69.91	14.76
+22	post	M3FftMultiplier.multiply (400k-bit operands)	2537600.00	6066800.00	2.39
+22	pre	M3JavaDoubleBitsFromCharSequence	48.45	216.52	4.47
+22	pre	M3JavaFloatBitsFromCharSequence	99.64	98.87	0.99
+22	pre	M3JavaDoubleBitsFromByteArray	38.64	216.52	5.60
+22	pre	M3JavaFloatBitsFromByteArray	90.69	98.87	1.09
+22	pre	Double.parseDouble (wiring)	47.97	216.52	4.51
+22	pre	Float.parseFloat (wiring)	86.94	98.87	1.14
+22	pre	M3FastDoubleSwar.isEightDigits	1.02	2.09	2.05
+22	pre	M3FastDoubleSwar.readLongBE	4.54	4.50	0.99
+22	pre	M3FastIntegerMath.unsignedMultiplyHigh	0.00	1.58	Infinity
+22	pre	M3FastDoubleMath.tryDecToDoubleWithFastAlgorithm	4.83	102.82	21.31
+22	pre	M3FastFloatMath.tryDecToFloatWithFastAlgorithm	4.90	68.13	13.91
+22	pre	M3FftMultiplier.multiply (400k-bit operands)	2024700.00	5990500.00	2.96
+23	pre	M3JavaDoubleBitsFromCharSequence	49.40	213.85	4.33
+23	pre	M3JavaFloatBitsFromCharSequence	82.31	102.18	1.24
+23	pre	M3JavaDoubleBitsFromByteArray	35.54	213.85	6.02
+23	pre	M3JavaFloatBitsFromByteArray	83.29	102.18	1.23
+23	pre	Double.parseDouble (wiring)	44.84	213.85	4.77
+23	pre	Float.parseFloat (wiring)	81.70	102.18	1.25
+23	pre	M3FastDoubleSwar.isEightDigits	0.93	1.79	1.92
+23	pre	M3FastDoubleSwar.readLongBE	4.04	4.27	1.06
+23	pre	M3FastIntegerMath.unsignedMultiplyHigh	0.00	1.44	71970.00
+23	pre	M3FastDoubleMath.tryDecToDoubleWithFastAlgorithm	4.76	103.15	21.65
+23	pre	M3FastFloatMath.tryDecToFloatWithFastAlgorithm	4.63	65.65	14.19
+23	pre	M3FftMultiplier.multiply (400k-bit operands)	2121800.00	5891000.00	2.78
+23	post	M3JavaDoubleBitsFromCharSequence	52.31	235.94	4.51
+23	post	M3JavaFloatBitsFromCharSequence	88.94	104.74	1.18
+23	post	M3JavaDoubleBitsFromByteArray	39.54	235.94	5.97
+23	post	M3JavaFloatBitsFromByteArray	92.41	104.74	1.13
+23	post	Double.parseDouble (wiring)	53.55	235.94	4.41
+23	post	Float.parseFloat (wiring)	121.87	104.74	0.86
+23	post	M3FastDoubleSwar.isEightDigits	1.08	2.12	1.96
+23	post	M3FastDoubleSwar.readLongBE	4.11	4.30	1.05
+23	post	M3FastIntegerMath.unsignedMultiplyHigh	0.00	1.65	82448.00
+23	post	M3FastDoubleMath.tryDecToDoubleWithFastAlgorithm	4.63	120.73	26.06
+23	post	M3FastFloatMath.tryDecToFloatWithFastAlgorithm	4.96	61.87	12.48
+23	post	M3FftMultiplier.multiply (400k-bit operands)	2383900.00	6064500.00	2.54
+24	post	M3JavaDoubleBitsFromCharSequence	50.37	278.40	5.53
+24	post	M3JavaFloatBitsFromCharSequence	98.79	114.73	1.16
+24	post	M3JavaDoubleBitsFromByteArray	39.12	278.40	7.12
+24	post	M3JavaFloatBitsFromByteArray	88.87	114.73	1.29
+24	post	Double.parseDouble (wiring)	50.77	278.40	5.48
+24	post	Float.parseFloat (wiring)	88.89	114.73	1.29
+24	post	M3FastDoubleSwar.isEightDigits	1.03	2.10	2.03
+24	post	M3FastDoubleSwar.readLongBE	4.30	4.10	0.95
+24	post	M3FastIntegerMath.unsignedMultiplyHigh	0.00	1.58	Infinity
+24	post	M3FastDoubleMath.tryDecToDoubleWithFastAlgorithm	5.63	108.02	19.19
+24	post	M3FastFloatMath.tryDecToFloatWithFastAlgorithm	4.84	72.59	15.00
+24	post	M3FftMultiplier.multiply (400k-bit operands)	3199200.00	5870200.00	1.83
+24	pre	M3JavaDoubleBitsFromCharSequence	47.32	238.20	5.03
+24	pre	M3JavaFloatBitsFromCharSequence	93.89	98.70	1.05
+24	pre	M3JavaDoubleBitsFromByteArray	36.96	238.20	6.44
+24	pre	M3JavaFloatBitsFromByteArray	82.17	98.70	1.20
+24	pre	Double.parseDouble (wiring)	48.73	238.20	4.89
+24	pre	Float.parseFloat (wiring)	92.87	98.70	1.06
+24	pre	M3FastDoubleSwar.isEightDigits	0.95	2.04	2.14
+24	pre	M3FastDoubleSwar.readLongBE	4.05	4.07	1.00
+24	pre	M3FastIntegerMath.unsignedMultiplyHigh	0.00	1.55	Infinity
+24	pre	M3FastDoubleMath.tryDecToDoubleWithFastAlgorithm	4.52	107.20	23.70
+24	pre	M3FastFloatMath.tryDecToFloatWithFastAlgorithm	5.02	69.19	13.80
+24	pre	M3FftMultiplier.multiply (400k-bit operands)	2410000.00	5948700.00	2.47
+25	pre	M3JavaDoubleBitsFromCharSequence	52.89	211.57	4.00
+25	pre	M3JavaFloatBitsFromCharSequence	109.57	102.42	0.93
+25	pre	M3JavaDoubleBitsFromByteArray	51.26	211.57	4.13
+25	pre	M3JavaFloatBitsFromByteArray	93.14	102.42	1.10
+25	pre	Double.parseDouble (wiring)	50.89	211.57	4.16
+25	pre	Float.parseFloat (wiring)	87.89	102.42	1.17
+25	pre	M3FastDoubleSwar.isEightDigits	1.06	2.08	1.96
+25	pre	M3FastDoubleSwar.readLongBE	4.47	4.07	0.91
+25	pre	M3FastIntegerMath.unsignedMultiplyHigh	0.00	1.54	76779.00
+25	pre	M3FastDoubleMath.tryDecToDoubleWithFastAlgorithm	4.71	102.13	21.69
+25	pre	M3FastFloatMath.tryDecToFloatWithFastAlgorithm	5.24	67.01	12.79
+25	pre	M3FftMultiplier.multiply (400k-bit operands)	2924100.00	6014400.00	2.06
+25	post	M3JavaDoubleBitsFromCharSequence	48.64	223.22	4.59
+25	post	M3JavaFloatBitsFromCharSequence	97.05	105.72	1.09
+25	post	M3JavaDoubleBitsFromByteArray	39.97	223.22	5.58
+25	post	M3JavaFloatBitsFromByteArray	93.67	105.72	1.13
+25	post	Double.parseDouble (wiring)	52.98	223.22	4.21
+25	post	Float.parseFloat (wiring)	94.36	105.72	1.12
+25	post	M3FastDoubleSwar.isEightDigits	1.07	1.99	1.86
+25	post	M3FastDoubleSwar.readLongBE	4.16	4.54	1.09
+25	post	M3FastIntegerMath.unsignedMultiplyHigh	0.00	1.51	75558.00
+25	post	M3FastDoubleMath.tryDecToDoubleWithFastAlgorithm	5.05	110.68	21.90
+25	post	M3FastFloatMath.tryDecToFloatWithFastAlgorithm	5.29	67.04	12.67
+25	post	M3FftMultiplier.multiply (400k-bit operands)	1865600.00	5700500.00	3.06
+26	post	M3JavaDoubleBitsFromCharSequence	50.73	205.72	4.06
+26	post	M3JavaFloatBitsFromCharSequence	92.12	100.79	1.09
+26	post	M3JavaDoubleBitsFromByteArray	32.76	205.72	6.28
+26	post	M3JavaFloatBitsFromByteArray	79.84	100.79	1.26
+26	post	Double.parseDouble (wiring)	49.76	205.72	4.13
+26	post	Float.parseFloat (wiring)	94.22	100.79	1.07
+26	post	M3FastDoubleSwar.isEightDigits	1.01	2.04	2.02
+26	post	M3FastDoubleSwar.readLongBE	4.49	4.38	0.98
+26	post	M3FastIntegerMath.unsignedMultiplyHigh	0.00	1.59	Infinity
+26	post	M3FastDoubleMath.tryDecToDoubleWithFastAlgorithm	4.66	111.77	24.00
+26	post	M3FastFloatMath.tryDecToFloatWithFastAlgorithm	5.01	66.08	13.19
+26	post	M3FftMultiplier.multiply (400k-bit operands)	3115900.00	6343000.00	2.04
+26	pre	M3JavaDoubleBitsFromCharSequence	55.21	229.62	4.16
+26	pre	M3JavaFloatBitsFromCharSequence	94.15	109.68	1.16
+26	pre	M3JavaDoubleBitsFromByteArray	39.68	229.62	5.79
+26	pre	M3JavaFloatBitsFromByteArray	88.70	109.68	1.24
+26	pre	Double.parseDouble (wiring)	49.66	229.62	4.62
+26	pre	Float.parseFloat (wiring)	92.17	109.68	1.19
+26	pre	M3FastDoubleSwar.isEightDigits	1.04	2.02	1.95
+26	pre	M3FastDoubleSwar.readLongBE	4.53	4.26	0.94
+26	pre	M3FastIntegerMath.unsignedMultiplyHigh	0.00	1.59	79682.00
+26	pre	M3FastDoubleMath.tryDecToDoubleWithFastAlgorithm	4.78	168.06	35.16
+26	pre	M3FastFloatMath.tryDecToFloatWithFastAlgorithm	5.16	84.90	16.45
+26	pre	M3FftMultiplier.multiply (400k-bit operands)	3412300.00	6718000.00	1.97
+27	pre	M3JavaDoubleBitsFromCharSequence	62.04	237.85	3.83
+27	pre	M3JavaFloatBitsFromCharSequence	122.19	142.68	1.17
+27	pre	M3JavaDoubleBitsFromByteArray	49.34	237.85	4.82
+27	pre	M3JavaFloatBitsFromByteArray	89.29	142.68	1.60
+27	pre	Double.parseDouble (wiring)	57.92	237.85	4.11
+27	pre	Float.parseFloat (wiring)	98.43	142.68	1.45
+27	pre	M3FastDoubleSwar.isEightDigits	1.00	2.03	2.02
+27	pre	M3FastDoubleSwar.readLongBE	4.42	4.41	1.00
+27	pre	M3FastIntegerMath.unsignedMultiplyHigh	0.00	1.62	81036.00
+27	pre	M3FastDoubleMath.tryDecToDoubleWithFastAlgorithm	4.74	110.05	23.23
+27	pre	M3FastFloatMath.tryDecToFloatWithFastAlgorithm	4.98	71.65	14.38
+27	pre	M3FftMultiplier.multiply (400k-bit operands)	2122100.00	6610700.00	3.12
+27	post	M3JavaDoubleBitsFromCharSequence	53.92	243.46	4.52
+27	post	M3JavaFloatBitsFromCharSequence	89.41	106.37	1.19
+27	post	M3JavaDoubleBitsFromByteArray	41.48	243.46	5.87
+27	post	M3JavaFloatBitsFromByteArray	97.84	106.37	1.09
+27	post	Double.parseDouble (wiring)	51.55	243.46	4.72
+27	post	Float.parseFloat (wiring)	91.77	106.37	1.16
+27	post	M3FastDoubleSwar.isEightDigits	1.05	2.13	2.03
+27	post	M3FastDoubleSwar.readLongBE	4.34	4.37	1.01
+27	post	M3FastIntegerMath.unsignedMultiplyHigh	0.00	1.61	80531.00
+27	post	M3FastDoubleMath.tryDecToDoubleWithFastAlgorithm	4.44	110.79	24.94
+27	post	M3FastFloatMath.tryDecToFloatWithFastAlgorithm	5.01	69.35	13.85
+27	post	M3FftMultiplier.multiply (400k-bit operands)	2205900.00	6103600.00	2.77
+28	post	M3JavaDoubleBitsFromCharSequence	54.24	218.70	4.03
+28	post	M3JavaFloatBitsFromCharSequence	100.29	104.68	1.04
+28	post	M3JavaDoubleBitsFromByteArray	41.69	218.70	5.25
+28	post	M3JavaFloatBitsFromByteArray	87.84	104.68	1.19
+28	post	Double.parseDouble (wiring)	61.04	218.70	3.58
+28	post	Float.parseFloat (wiring)	101.47	104.68	1.03
+28	post	M3FastDoubleSwar.isEightDigits	1.06	2.29	2.16
+28	post	M3FastDoubleSwar.readLongBE	4.45	4.19	0.94
+28	post	M3FastIntegerMath.unsignedMultiplyHigh	0.00	1.58	79146.00
+28	post	M3FastDoubleMath.tryDecToDoubleWithFastAlgorithm	4.36	121.61	27.88
+28	post	M3FastFloatMath.tryDecToFloatWithFastAlgorithm	5.27	75.44	14.31
+28	post	M3FftMultiplier.multiply (400k-bit operands)	2055900.00	6432100.00	3.13
+28	pre	M3JavaDoubleBitsFromCharSequence	52.53	234.15	4.46
+28	pre	M3JavaFloatBitsFromCharSequence	102.89	113.51	1.10
+28	pre	M3JavaDoubleBitsFromByteArray	39.45	234.15	5.94
+28	pre	M3JavaFloatBitsFromByteArray	90.36	113.51	1.26
+28	pre	Double.parseDouble (wiring)	52.81	234.15	4.43
+28	pre	Float.parseFloat (wiring)	89.50	113.51	1.27
+28	pre	M3FastDoubleSwar.isEightDigits	0.98	2.14	2.19
+28	pre	M3FastDoubleSwar.readLongBE	4.55	4.16	0.91
+28	pre	M3FastIntegerMath.unsignedMultiplyHigh	0.00	1.52	75944.00
+28	pre	M3FastDoubleMath.tryDecToDoubleWithFastAlgorithm	4.77	101.09	21.20
+28	pre	M3FastFloatMath.tryDecToFloatWithFastAlgorithm	5.26	71.65	13.61
+28	pre	M3FftMultiplier.multiply (400k-bit operands)	2373700.00	6352500.00	2.68
+29	pre	M3JavaDoubleBitsFromCharSequence	47.90	220.66	4.61
+29	pre	M3JavaFloatBitsFromCharSequence	99.56	106.33	1.07
+29	pre	M3JavaDoubleBitsFromByteArray	38.67	220.66	5.71
+29	pre	M3JavaFloatBitsFromByteArray	95.55	106.33	1.11
+29	pre	Double.parseDouble (wiring)	59.26	220.66	3.72
+29	pre	Float.parseFloat (wiring)	95.26	106.33	1.12
+29	pre	M3FastDoubleSwar.isEightDigits	1.29	2.10	1.63
+29	pre	M3FastDoubleSwar.readLongBE	4.75	4.31	0.91
+29	pre	M3FastIntegerMath.unsignedMultiplyHigh	0.00	1.57	78274.00
+29	pre	M3FastDoubleMath.tryDecToDoubleWithFastAlgorithm	4.49	102.73	22.87
+29	pre	M3FastFloatMath.tryDecToFloatWithFastAlgorithm	4.90	64.28	13.11
+29	pre	M3FftMultiplier.multiply (400k-bit operands)	3253800.00	6638100.00	2.04
+29	post	M3JavaDoubleBitsFromCharSequence	51.37	220.13	4.28
+29	post	M3JavaFloatBitsFromCharSequence	97.46	109.90	1.13
+29	post	M3JavaDoubleBitsFromByteArray	39.56	220.13	5.57
+29	post	M3JavaFloatBitsFromByteArray	90.67	109.90	1.21
+29	post	Double.parseDouble (wiring)	54.26	220.13	4.06
+29	post	Float.parseFloat (wiring)	92.84	109.90	1.18
+29	post	M3FastDoubleSwar.isEightDigits	1.04	1.98	1.91
+29	post	M3FastDoubleSwar.readLongBE	4.52	4.18	0.92
+29	post	M3FastIntegerMath.unsignedMultiplyHigh	0.00	1.66	Infinity
+29	post	M3FastDoubleMath.tryDecToDoubleWithFastAlgorithm	5.13	106.08	20.70
+29	post	M3FastFloatMath.tryDecToFloatWithFastAlgorithm	5.26	70.18	13.34
+29	post	M3FftMultiplier.multiply (400k-bit operands)	3103400.00	6302500.00	2.03
+30	post	M3JavaDoubleBitsFromCharSequence	47.56	243.58	5.12
+30	post	M3JavaFloatBitsFromCharSequence	88.40	110.74	1.25
+30	post	M3JavaDoubleBitsFromByteArray	38.48	243.58	6.33
+30	post	M3JavaFloatBitsFromByteArray	87.56	110.74	1.26
+30	post	Double.parseDouble (wiring)	51.04	243.58	4.77
+30	post	Float.parseFloat (wiring)	93.97	110.74	1.18
+30	post	M3FastDoubleSwar.isEightDigits	1.04	2.03	1.95
+30	post	M3FastDoubleSwar.readLongBE	4.24	4.03	0.95
+30	post	M3FastIntegerMath.unsignedMultiplyHigh	0.00	1.51	75720.00
+30	post	M3FastDoubleMath.tryDecToDoubleWithFastAlgorithm	4.70	105.85	22.51
+30	post	M3FastFloatMath.tryDecToFloatWithFastAlgorithm	5.10	75.61	14.82
+30	post	M3FftMultiplier.multiply (400k-bit operands)	2188800.00	5829800.00	2.66
+30	pre	M3JavaDoubleBitsFromCharSequence	45.17	220.54	4.88
+30	pre	M3JavaFloatBitsFromCharSequence	94.98	106.10	1.12
+30	pre	M3JavaDoubleBitsFromByteArray	36.02	220.54	6.12
+30	pre	M3JavaFloatBitsFromByteArray	85.34	106.10	1.24
+30	pre	Double.parseDouble (wiring)	50.92	220.54	4.33
+30	pre	Float.parseFloat (wiring)	88.73	106.10	1.20
+30	pre	M3FastDoubleSwar.isEightDigits	0.98	1.96	2.00
+30	pre	M3FastDoubleSwar.readLongBE	4.21	4.26	1.01
+30	pre	M3FastIntegerMath.unsignedMultiplyHigh	0.00	1.57	78655.00
+30	pre	M3FastDoubleMath.tryDecToDoubleWithFastAlgorithm	4.50	99.62	22.15
+30	pre	M3FastFloatMath.tryDecToFloatWithFastAlgorithm	4.59	63.81	13.89
+30	pre	M3FftMultiplier.multiply (400k-bit operands)	2259500.00	5662400.00	2.51
+31	pre	M3JavaDoubleBitsFromCharSequence	51.90	213.53	4.11
+31	pre	M3JavaFloatBitsFromCharSequence	94.09	145.29	1.54
+31	pre	M3JavaDoubleBitsFromByteArray	38.87	213.53	5.49
+31	pre	M3JavaFloatBitsFromByteArray	85.05	145.29	1.71
+31	pre	Double.parseDouble (wiring)	48.17	213.53	4.43
+31	pre	Float.parseFloat (wiring)	92.55	145.29	1.57
+31	pre	M3FastDoubleSwar.isEightDigits	1.01	2.00	1.98
+31	pre	M3FastDoubleSwar.readLongBE	4.20	4.33	1.03
+31	pre	M3FastIntegerMath.unsignedMultiplyHigh	0.00	1.51	75373.00
+31	pre	M3FastDoubleMath.tryDecToDoubleWithFastAlgorithm	4.74	91.60	19.31
+31	pre	M3FastFloatMath.tryDecToFloatWithFastAlgorithm	5.04	64.61	12.81
+31	pre	M3FftMultiplier.multiply (400k-bit operands)	3367000.00	5453700.00	1.62
+31	post	M3JavaDoubleBitsFromCharSequence	47.52	214.58	4.52
+31	post	M3JavaFloatBitsFromCharSequence	84.45	100.90	1.19
+31	post	M3JavaDoubleBitsFromByteArray	35.90	214.58	5.98
+31	post	M3JavaFloatBitsFromByteArray	80.71	100.90	1.25
+31	post	Double.parseDouble (wiring)	50.68	214.58	4.23
+31	post	Float.parseFloat (wiring)	83.94	100.90	1.20
+31	post	M3FastDoubleSwar.isEightDigits	0.92	2.00	2.16
+31	post	M3FastDoubleSwar.readLongBE	4.26	3.70	0.87
+31	post	M3FastIntegerMath.unsignedMultiplyHigh	0.00	1.58	Infinity
+31	post	M3FastDoubleMath.tryDecToDoubleWithFastAlgorithm	4.52	100.04	22.12
+31	post	M3FastFloatMath.tryDecToFloatWithFastAlgorithm	5.06	65.57	12.96
+31	post	M3FftMultiplier.multiply (400k-bit operands)	2027900.00	6312900.00	3.11
+32	post	M3JavaDoubleBitsFromCharSequence	51.02	214.59	4.21
+32	post	M3JavaFloatBitsFromCharSequence	81.86	99.14	1.21
+32	post	M3JavaDoubleBitsFromByteArray	38.17	214.59	5.62
+32	post	M3JavaFloatBitsFromByteArray	89.60	99.14	1.11
+32	post	Double.parseDouble (wiring)	46.98	214.59	4.57
+32	post	Float.parseFloat (wiring)	117.12	99.14	0.85
+32	post	M3FastDoubleSwar.isEightDigits	1.15	2.11	1.83
+32	post	M3FastDoubleSwar.readLongBE	4.50	4.26	0.95
+32	post	M3FastIntegerMath.unsignedMultiplyHigh	0.00	1.59	79630.00
+32	post	M3FastDoubleMath.tryDecToDoubleWithFastAlgorithm	4.51	108.79	24.11
+32	post	M3FastFloatMath.tryDecToFloatWithFastAlgorithm	7.25	66.78	9.21
+32	post	M3FftMultiplier.multiply (400k-bit operands)	2065300.00	5923700.00	2.87
+32	pre	M3JavaDoubleBitsFromCharSequence	54.32	215.12	3.96
+32	pre	M3JavaFloatBitsFromCharSequence	89.82	114.56	1.28
+32	pre	M3JavaDoubleBitsFromByteArray	37.04	215.12	5.81
+32	pre	M3JavaFloatBitsFromByteArray	84.96	114.56	1.35
+32	pre	Double.parseDouble (wiring)	55.47	215.12	3.88
+32	pre	Float.parseFloat (wiring)	99.73	114.56	1.15
+32	pre	M3FastDoubleSwar.isEightDigits	1.07	2.22	2.08
+32	pre	M3FastDoubleSwar.readLongBE	4.21	4.53	1.07
+32	pre	M3FastIntegerMath.unsignedMultiplyHigh	0.00	1.60	79858.00
+32	pre	M3FastDoubleMath.tryDecToDoubleWithFastAlgorithm	4.97	104.83	21.10
+32	pre	M3FastFloatMath.tryDecToFloatWithFastAlgorithm	5.27	66.37	12.59
+32	pre	M3FftMultiplier.multiply (400k-bit operands)	2461200.00	6147800.00	2.50

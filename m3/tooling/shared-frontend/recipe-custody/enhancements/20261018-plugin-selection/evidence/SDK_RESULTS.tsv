@@ -1,0 +1,6 @@
+# OpenRewrite SDK Results; no template-copy materialization
+src/jdk.compiler/share/classes/com/sun/source/util/M3AST.java	6a8bccb501a516cca779e71e24ef814ca40825faf92fed744e48f65ad4c1d854	0c451956dbaa3cffcdd5e05705501c192b913048a7afd7562982aef584c9d37a
+src/jdk.compiler/share/classes/com/sun/tools/javac/m3/M3ASTPC.java	8b426b59796942253765c0fe45725d4b3e0f3640a3dffe4ec3d8c44413109bb3	3e43390b9d9df94da9943b101c809f1bdc4c1039e825976b2cda72acb8c56b28
+test/langtools/tools/javac/m3/M3ASTPluginSelectionTest.java	ABSENT	34efbf105a3a3c7f37a6d67d11e480abd7c4ef84bef1992892613c94b28625b7
+m3/docs/name-mapping.d/m3-ast-plugin-selection-20261018.json	ABSENT	1a6a9ba3fcdfd8072ff00e10c7e6692be2f1b152cad81277c263382a860cae10
+m3/tooling/shared-frontend/plugin-selection/README.md	ABSENT	c9baac52f80f27657e677de8ce993a114bc6c7f26bcf68d82723977ff4b57d03

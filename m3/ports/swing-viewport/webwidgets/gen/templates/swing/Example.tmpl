@@ -1,0 +1,25 @@
+package @WPKG@.examples;
+
+import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
+
+import @PKG@.M3@C@Api;
+import @WPKG@.M3@C@;
+
+/** Example: an M3 @CONCEPT@ with its sample items (family @FAM@), Swing side. */
+public final class M3@C@Example {
+	private M3@C@Example() {
+	}
+
+	public static void main(String[] args) {
+		SwingUtilities.invokeLater(() -> {
+			JFrame frame = new JFrame("M3 @CONCEPT@");
+			M3@C@ widget = new M3@C@();
+			widget.api().load(M3@C@Api.SAMPLE);
+			frame.add(widget);
+			frame.setSize(480, 320);
+			frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+			frame.setVisible(true);
+		});
+	}
+}

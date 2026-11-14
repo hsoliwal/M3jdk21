@@ -1,0 +1,85 @@
+#!/usr/bin/env python3
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
+# SPDX-License-Identifier: Apache-2.0
+# Modified 2026 by Hitesh Soliwal and contributors: preserve exact historical receipt pins and account for the second approved additive row.
+"""Verify source-sealed generation-safe object-state projection and denial cases."""
+import tempfile
+import unittest
+from pathlib import Path
+from m3_object_state_offset_receipt import (
+    EXPECTED, ROOT, RECEIPT, approved_successor, include_successor, sha256,
+)
+
+
+# Exact immutable successor receipt; this unit test does not admit current owners.
+HISTORICAL_SUCCESSOR = (
+    ('m3/collections/src/main/java/jdk/m3/collections/M3ObjectStateSlots28.java', '8e1f38cace3a7e96e94707e06a25fc8fe2bf4a7315ac0ed11de1e8249a3e3c88', 'c8c8b273da8d20ace83148230c62f63e03f92efa2cf880f935f9fae8dcdd3bc2'),
+    ('m3/collections/src/test/java/jdk/m3/collections/M3ObjectStateSlots28SelfTest.java', 'e28893fb6734437cee712554f350fa173a3189a500feb64c80c678ca046e2f7b', '450df1026701f89ed870536e9284c766a3bd99409c0ac54d5f22462c2da4ca89'),
+)
+
+
+# The rows above stay byte-identical history. The files themselves moved on: CURATE_E E2 (#2848) dropped the redundant
+# M3 prefix and the JDK module move (#2849) gave them their home in src/jdk.m3.collections and test/jdk. The existence
+# check follows each file to that home; nothing in the receipt changes.
+CURRENT_HOME = {
+    'm3/collections/src/main/java/jdk/m3/collections/M3ObjectStateSlots28.java':
+        'src/jdk.m3.collections/share/classes/jdk/m3/collections/ObjectStateSlots28.java',
+    'm3/collections/src/test/java/jdk/m3/collections/M3ObjectStateSlots28SelfTest.java':
+        'test/jdk/jdk/m3/collections/ObjectStateSlots28SelfTest.java',
+}
+
+
+class ObjectStateOffsetReceivingTest(unittest.TestCase):
+    def test_exact_two_java_postimages_and_unmodified_historical_rows(self):
+        approved = approved_successor()
+        self.assertEqual(2, len(approved))
+        self.assertEqual(HISTORICAL_SUCCESSOR, EXPECTED)
+        self.assertEqual(
+            "de3504abbbefb2c67cf94c0ad61974ffbce3339ac4f4f530443e1af82635f9a4",
+            sha256(RECEIPT))
+        older = [("m3/collections/old.java", "a" * 64)]
+        result = include_successor(older)
+        self.assertEqual(older, result[:1])
+        self.assertEqual({row[0] for row in EXPECTED}, {p for p, _ in result[1:]})
+        for path, before, after in EXPECTED:
+            self.assertEqual(after, dict(result)[path])
+            home = ROOT / CURRENT_HOME.get(path, path)
+            self.assertTrue(home.is_file())
+            self.assertFalse(home.is_symlink())
+
+    def test_preimage_must_match_if_historical_row_already_exists(self):
+        approved = approved_successor()
+        target, before, after = EXPECTED[0]
+        expected = [(target, after), (EXPECTED[1][0], EXPECTED[1][2])]
+        self.assertEqual(expected, include_successor([(target, before)], approved))
+        with self.assertRaises(ValueError):
+            include_successor([(target, "0" * 64)], approved)
+        with self.assertRaises(ValueError):
+            include_successor([(target, before), (target, before)], approved)
+
+    def test_tampering_missing_reordering_duplicate_refuses(self):
+        contents = RECEIPT.read_text(encoding="utf-8")
+        with tempfile.TemporaryDirectory() as directory:
+            file = Path(directory) / "receipt.tsv"
+            for changed in (
+                contents.replace(EXPECTED[0][1], "0" * 64, 1),
+                contents + contents.splitlines()[0] + "\n",
+                "\n".join(reversed(contents.strip().splitlines())) + "\n",
+                contents.replace("\t", " ", 1),
+            ):
+                file.write_text(changed, encoding="utf-8")
+                with self.assertRaises(ValueError):
+                    approved_successor(file)
+            with self.assertRaises(ValueError):
+                approved_successor(Path(directory) / "missing.tsv")
+
+    def test_symlinked_receipt_refuses(self):
+        with tempfile.TemporaryDirectory() as directory:
+            alias = Path(directory) / "receipt.tsv"
+            alias.symlink_to(RECEIPT)
+            with self.assertRaises(ValueError):
+                approved_successor(alias)
+
+
+if __name__ == "__main__":
+    unittest.main()

@@ -1,0 +1,11 @@
+field	value
+repository	hsoliwal/M3jdk21
+parent	b53f0f6379d2285e68d4cfe888eb5f4bfbaa4e1a
+parent_pr	95
+workers	1
+shards	1
+mode	apply-to-candidate
+platform	Linux amd64
+runtime	Debian OpenJDK21.0.11+10-1-deb13u2-Debian
+full_checkout_build	false
+canonical_promotion	false

@@ -1,0 +1,110 @@
+HASH_DRIFT	a3-mastery-receipt	A3M.java.after	pinned=78eb9fd91688	actual=a808a8c25caf
+MISSING_TEMPLATE	m3-full-delivery-a3	SynexiaImportPlan.java	renamed_candidate=M3ImportPlan.java
+MISSING_TEMPLATE	m3-full-delivery-a3	SynexiaImportPlanCli.java	renamed_candidate=M3ImportPlanCli.java
+MISSING_TEMPLATE	m3-full-delivery-a3	SynexiaImporter.java	renamed_candidate=M3Importer.java
+MISSING_TEMPLATE	m3-full-delivery-a3	SynexiaImportPlanTest.java	renamed_candidate=M3ImportPlanTest.java
+HASH_DRIFT	m3-long-tree-set	01-M3LongTreeSetTest.java.txt	pinned=088e41d28929	actual=36c5deea43b5
+HASH_DRIFT	m3jdk21-filtered-list-mutation-20261018	M3FilteredListMutationProof.java.txt	pinned=2647764e9066	actual=d38097999a64
+HASH_DRIFT	m3jdk21-filtered-list-mutation-20261018	M3FilteredListMutationTest.java.txt	pinned=ebd9ee4a1cc4	actual=12bce00b5a2e
+HASH_DRIFT	jdk24-jep496-mlkem	01-ML_KEM_Impls.java.after.txt	pinned=2d09330fe7ef	actual=651797d44214
+HASH_DRIFT	jdk24-jep496-mlkem	02-SunJCE.java.after.txt	pinned=cc503a32494a	actual=4dd69b0a21dd
+HASH_DRIFT	jdk24-jep496-mlkem	03-NamedParameterSpec.java.after.txt	pinned=21bbaae150f6	actual=94f7dfa39c66
+HASH_DRIFT	jdk24-jep496-mlkem	04-SHA3Parallel.java.after.txt	pinned=1b057311201a	actual=855758a47f84
+HASH_DRIFT	jdk24-jep496-mlkem	05-KnownOIDs.java.after.txt	pinned=c9fa4d8ae96d	actual=e4b61ecd0e6a
+HASH_DRIFT	jdk24-jep496-mlkem	06-MLKEMKnownAnswer.java.after.txt	pinned=c47761417da0	actual=9021d7180bf1
+HASH_DRIFT	jdk24-jep496-mlkem-vectors	00-ML-KEM-encapDecap-FIPS203.json.after.txt	pinned=f88e3911ead5	actual=4b5afd6c7075
+HASH_DRIFT	jdk24-jep496-mlkem-vectors	01-ML-KEM-keyGen-FIPS203.json.after.txt	pinned=3012752aa40b	actual=0fdca41ed30f
+MISSING_TEMPLATE	m3-a3-receiver-main-authority	01-M3A3SynexiaReceiverAuthorityTest.java.txt	renamed_candidate=01-M3A3M3ReceiverAuthorityTest.java.txt
+MISSING_TEMPLATE	m3-handoff-v2-integrity	00-M3SynexiaHandoffGuardRecipe.java.txt	renamed_candidate=-
+MISSING_TEMPLATE	m3-handoff-v2-integrity	01-M3SynexiaHandoffReceiverTest.java.txt	renamed_candidate=-
+MISSING_TEMPLATE	m3-handoff-v2-integrity	02-M3SynexiaHandoffV2IntegrityRecipeTest.java.txt	renamed_candidate=-
+MISSING_TEMPLATE	m3-handoff-v2-receiver	00-M3SynexiaHandoffGuardRecipe.java.txt	renamed_candidate=-
+MISSING_TEMPLATE	m3-handoff-v2-receiver	01-M3SynexiaHandoffReceiverTest.java.txt	renamed_candidate=-
+MISSING_TEMPLATE	m3-handoff-v2-receiver	02-M3SynexiaHandoffV2ReceiverRecipeTest.java.txt	renamed_candidate=-
+HASH_DRIFT	m3-tornado-provider-upgrade	Rv32iBulkExecutorAdapterTest.java.txt	pinned=68f0d8571558	actual=33377e6f2d07
+HASH_DRIFT	a3-code-string-repair-20261006	after-00-A3RegexMatrix.java.txt	pinned=19f7e3fb8c5f	actual=390b104205f2
+HASH_DRIFT	a3-code-string-repair-20261006	after-01-A3RegexMatrix.java.after.txt	pinned=19f7e3fb8c5f	actual=390b104205f2
+HASH_DRIFT	jcc-handoff-20261005	01-jcc-source-handoff.md.txt	pinned=fff2e02f72c0	actual=542d385b66a5
+HASH_DRIFT	jcc-handoff-20261005	after00-name-mapping.json.txt	pinned=536af76dd7b7	actual=7e602d2b69d9
+HASH_DRIFT	jcc-handoff-20261005	03-root-coverage-obligations.tsv.txt	pinned=cba3b3315df6	actual=e62739a6a3d7
+HASH_DRIFT	jcc-handoff-20261005	02-source-destination-bindings.json.txt	pinned=cdb5d7f4a074	actual=7c33fcbd897d
+HASH_DRIFT	jcc-merge-recovery-20261006-history-01	history-0005.txt	pinned=59ed76969f86	actual=937a3ff43e20
+HASH_DRIFT	jcc-merge-recovery-20261006-history-01	history-0007.txt	pinned=59c4c970ac75	actual=46c3ccdba0ce
+HASH_DRIFT	jcc-merge-recovery-20261006-history-01	history-0008.txt	pinned=536af76dd7b7	actual=7e602d2b69d9
+HASH_DRIFT	jcc-merge-recovery-20261006-history-01	history-0009.txt	pinned=fff2e02f72c0	actual=672bc3623515
+HASH_DRIFT	jcc-merge-recovery-20261006-history-01	history-0010.txt	pinned=cdb5d7f4a074	actual=7c33fcbd897d
+HASH_DRIFT	jcc-merge-recovery-20261006-history-01	history-0011.txt	pinned=cba3b3315df6	actual=d71fe586c531
+HASH_DRIFT	jcc-merge-recovery-20261006-history-01	history-0015.txt	pinned=d5e18258027f	actual=4f7717b945d6
+HASH_DRIFT	jcc-merge-recovery-20261006-history-01	history-0017.txt	pinned=1c4eedbf3f15	actual=1dc547e46f37
+HASH_DRIFT	jcc-merge-recovery-20261006-history-01	history-0019.txt	pinned=59ed76969f86	actual=937a3ff43e20
+HASH_DRIFT	jcc-merge-recovery-20261006-history-01	history-0021.txt	pinned=59c4c970ac75	actual=46c3ccdba0ce
+HASH_DRIFT	jcc-merge-recovery-20261006-history-01	history-0026.txt	pinned=75a3f9129133	actual=18c87bd6c257
+HASH_DRIFT	jcc-merge-recovery-20261006-history-01	history-0032.txt	pinned=5b2544383f9e	actual=89b4bc793db1
+HASH_DRIFT	jcc-merge-recovery-20261006-history-01	history-0055.txt	pinned=c4a5d6a265b1	actual=6ac78670b73b
+HASH_DRIFT	jcc-merge-recovery-20261006-history-01	history-0060.txt	pinned=7d075ad45d51	actual=f266e1fe13e6
+HASH_DRIFT	jcc-merge-recovery-20261006-history-01	history-0065.txt	pinned=8b54e4e6bd75	actual=947ad03ab9c3
+HASH_DRIFT	jcc-merge-recovery-20261006-history-01	history-0072.txt	pinned=7c02e8a1c50d	actual=bbc31e62add2
+HASH_DRIFT	jcc-merge-recovery-20261006-history-01	history-0074.txt	pinned=61d7ebff5060	actual=222bbc45421d
+HASH_DRIFT	jcc-merge-recovery-20261006-history-01	history-0084.txt	pinned=7f5f0c54cbac	actual=43c77d11ddac
+HASH_DRIFT	jcc-merge-recovery-20261006-history-01	history-0086.txt	pinned=276087c23b14	actual=573bb9a6b80c
+HASH_DRIFT	jcc-merge-recovery-20261006-history-01	history-0089.txt	pinned=b0f10b47bfa6	actual=1113f0fc1d86
+HASH_DRIFT	jcc-merge-recovery-20261006-history-01	history-0090.txt	pinned=1c2597b94843	actual=e6022eef9342
+HASH_DRIFT	jcc-merge-recovery-20261006-history-01	history-0092.txt	pinned=307c01ac0648	actual=2d2c9ec240f8
+HASH_DRIFT	jcc-merge-recovery-20261006-history-01	history-0099.txt	pinned=0abd6ddcbe96	actual=b1cc0201de41
+HASH_DRIFT	jcc-merge-recovery-20261006-history-01	history-0100.txt	pinned=7f5f0c54cbac	actual=43c77d11ddac
+HASH_DRIFT	jcc-merge-recovery-20261006-history-01	history-0121.txt	pinned=b96baa62d081	actual=68337e734a53
+HASH_DRIFT	jcc-merge-recovery-20261006-history-01	history-0124.txt	pinned=6e39cc123a01	actual=dfc7d2f5fbd5
+HASH_DRIFT	jcc-merge-recovery-20261006-history-01	history-0127.txt	pinned=b8c31ba4c3c6	actual=435b808e4643
+HASH_DRIFT	jcc-merge-recovery-20261006-history-01	history-0128.txt	pinned=7e13c28978bf	actual=a97e6f0b7627
+HASH_DRIFT	jcc-merge-recovery-20261006-history-01	history-0129.txt	pinned=eaf45a8f5199	actual=b93a69d21f92
+HASH_DRIFT	jcc-merge-recovery-20261006-history-01	history-0130.txt	pinned=f7949116d828	actual=c6adb50c268f
+HASH_DRIFT	jcc-merge-recovery-20261006-history-01	history-0131.txt	pinned=29e476534bd7	actual=43b30f3ac991
+HASH_DRIFT	jcc-merge-recovery-20261006-history-01	history-0132.txt	pinned=bea94459b67c	actual=3dac78435d69
+HASH_DRIFT	jcc-merge-recovery-20261006-history-01	history-0133.txt	pinned=e569931153bf	actual=989a8af2ca95
+HASH_DRIFT	jcc-merge-recovery-20261006-history-01	history-0136.txt	pinned=557f5751a5dc	actual=66736d033269
+HASH_DRIFT	jcc-merge-recovery-20261006-history-01	history-0137.txt	pinned=c98fdec1b73b	actual=6f61a66c1a74
+HASH_DRIFT	jcc-merge-recovery-20261006-history-01	history-0138.txt	pinned=448f91365fa5	actual=10dfec4389df
+HASH_DRIFT	jcc-merge-recovery-20261006-history-01	history-0139.txt	pinned=6fafbf96fcaa	actual=acc3d3db765e
+HASH_DRIFT	jcc-merge-recovery-20261006-history-01	history-0140.txt	pinned=8dadc9f70a6a	actual=98dd93594425
+HASH_DRIFT	jcc-merge-recovery-20261006-history-01	history-0142.txt	pinned=193f9fe97c86	actual=9e8b5e7189af
+HASH_DRIFT	jcc-merge-recovery-20261006-history-01	history-0143.txt	pinned=016fa414afbd	actual=8d893a043d9f
+HASH_DRIFT	jcc-merge-recovery-20261006-history-01	history-0144.txt	pinned=e5fb893d0f42	actual=be257701d414
+HASH_DRIFT	jcc-merge-recovery-20261006-history-01	history-0179.txt	pinned=0138e46f2087	actual=f2f553bcf14a
+HASH_DRIFT	jcc-merge-recovery-20261006-history-01	history-0202.txt	pinned=c4a5d6a265b1	actual=6ac78670b73b
+HASH_DRIFT	jcc-merge-recovery-20261006-history-01	history-0211.txt	pinned=1f4ac9825d97	actual=ac53a7d15a27
+HASH_DRIFT	jcc-merge-recovery-20261006-history-01	history-0226.txt	pinned=936730925c53	actual=c048fa8c7688
+HASH_DRIFT	jcc-merge-recovery-20261006-history-01	history-0228.txt	pinned=20fd857cb007	actual=e5ca38761ff8
+HASH_DRIFT	jcc-merge-recovery-20261006-history-01	history-0231.txt	pinned=17af04df1ca7	actual=9519b8e2ed14
+HASH_DRIFT	jcc-merge-recovery-20261006-history-01	history-0249.txt	pinned=c670df37826a	actual=a473dce12fbc
+HASH_DRIFT	jcc-merge-recovery-20261006-history-01	history-0253.txt	pinned=8391f552328d	actual=83765e3b7fe7
+HASH_DRIFT	jcc-merge-recovery-20261006-history-02	history-0060.txt	pinned=52d1f09a46c1	actual=17c91890bba1
+HASH_DRIFT	jcc-merge-recovery-20261006-history-02	history-0061.txt	pinned=e8ff8e792861	actual=52bfe5644ec4
+HASH_DRIFT	jcc-merge-recovery-20261006-history-02	history-0075.txt	pinned=97680e799c6b	actual=68c214350780
+HASH_DRIFT	jcc-merge-recovery-20261006-history-02	history-0077.txt	pinned=be0f51039422	actual=16ac7545c73d
+HASH_DRIFT	jcc-merge-recovery-20261006-history-02	history-0082.txt	pinned=4e5b2bce3756	actual=0d1c3961fe96
+HASH_DRIFT	jcc-merge-recovery-20261006-history-02	history-0083.txt	pinned=1e879a75f8b6	actual=2c91e54d21b1
+HASH_DRIFT	jcc-merge-recovery-20261006-history-02	history-0103.txt	pinned=9270a6b40989	actual=a08f1ee6c368
+HASH_DRIFT	jcc-merge-recovery-20261006-history-02	history-0106.txt	pinned=d6109ae25334	actual=d30c86f30539
+HASH_DRIFT	jcc-merge-recovery-20261006-history-02	history-0107.txt	pinned=b21708f3c453	actual=4ea615b4c310
+HASH_DRIFT	jcc-merge-recovery-20261006-history-02	history-0123.txt	pinned=d67c30dc7750	actual=a641c9b5d1d5
+HASH_DRIFT	jcc-merge-recovery-20261006-history-02	history-0125.txt	pinned=8bc22ad6293d	actual=dc5d97b7bc6c
+HASH_DRIFT	jcc-merge-recovery-20261006-history-02	history-0141.txt	pinned=0138e46f2087	actual=f2f553bcf14a
+HASH_DRIFT	jcc-merge-recovery-20261006-history-02	history-0164.txt	pinned=c4a5d6a265b1	actual=6ac78670b73b
+HASH_DRIFT	jcc-merge-recovery-20261006-history-02	history-0169.txt	pinned=1f4ac9825d97	actual=ac53a7d15a27
+HASH_DRIFT	jcc-merge-recovery-20261006-history-02	history-0171.txt	pinned=df6713ad19ce	actual=5920cde8754a
+HASH_DRIFT	jcc-merge-recovery-20261006-mapping-v03	after-03.txt	pinned=0cba435844da	actual=36a5132bc14b
+HASH_DRIFT	jcc-merge-recovery-20261006-mapping-v04	after-01.txt	pinned=975d986ae588	actual=8b09942b2191
+HASH_DRIFT	jcc-merge-recovery-20261006-mapping-v04	after-03.txt	pinned=0cba435844da	actual=36a5132bc14b
+HASH_DRIFT	jcc-merge-recovery-20261006-mapping-v04	after-02.txt	pinned=73b3b5bd60ef	actual=d8c0ec5c0cda
+HASH_DRIFT	jcc-source-final-handoff-20261005	after01-jcc-source-handoff.md.txt	pinned=59ed76969f86	actual=1bb96fe78e8d
+HASH_DRIFT	jcc-source-final-handoff-20261005	after03-root-coverage-obligations.tsv.txt	pinned=59c4c970ac75	actual=b363256d2116
+HASH_DRIFT	jcc-source-recovery-handoff-20261005	after01-jcc-source-handoff.md.txt	pinned=d5e18258027f	actual=6b641928841d
+HASH_DRIFT	jcc-source-recovery-handoff-20261005	after03-root-coverage-obligations.tsv.txt	pinned=1c4eedbf3f15	actual=7e133bd49446
+MISSING_TEMPLATE	m3-a3-canonical-merge-pin-text	01-SYNEXIA_RECIPE_RECEIVER.md.txt	renamed_candidate=-
+MISSING_TEMPLATE	m3-a3-portable-mastery-gate-text	01-SYNEXIA_RECIPE_RECEIVER.md.txt	renamed_candidate=-
+HASH_DRIFT	m3-array-substrate-v1	05-provenance.json.txt	pinned=8b8d9cc733e5	actual=584df6c63810
+MISSING_TEMPLATE	m3-array-substrate-v1	13-synexia-array-port-map.tsv.txt	renamed_candidate=-
+MISSING_TEMPLATE	m3-full-delivery-a3-doc	synexia-full-delivery-a3.md	renamed_candidate=-
+MISSING_TEMPLATE	m3-full-precompute-second-pass	04-synexia-mindex-precompute-inventory.tsv.txt	renamed_candidate=-
+MISSING_TEMPLATE	m3-full-precompute-second-pass	05-synexia-string-precompute-port-map.tsv.txt	renamed_candidate=-
+PIN_AUDIT crates=232 crates_with_findings=23

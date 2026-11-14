@@ -1,0 +1,3 @@
+file	before	after	reason
+m3/ports/precompute/src/test/java/jdk/m3/precompute/IndexPrecomputePlannerReferenceTest.java	IndexPrecomputePlannerDump.class.getPackageName(), "M3",	IndexPrecomputePlannerDump.class.getPackageName(), "",	the dump composes class names as prefix + name; relocated types no longer carry M3
+m3/ports/precompute/src/test/java/jdk/m3/precompute/IndexPrecomputePlannerCycleTest.java	IndexPrecomputePlannerDump.class.getPackageName(), "M3",	IndexPrecomputePlannerDump.class.getPackageName(), "",	the dump composes class names as prefix + name; relocated types no longer carry M3

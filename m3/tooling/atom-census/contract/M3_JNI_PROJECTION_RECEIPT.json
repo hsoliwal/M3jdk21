@@ -1,0 +1,61 @@
+{
+  "schema": "M3_SYNEXIA_JNI_PROJECTION_RECEIVER/1",
+  "source_repository": "hsoliwal/com.synexia",
+  "source_pr": 15140,
+  "source_recipe_commit": "46f99fa6fb4278435016d6b9cf60ac726372f8f2",
+  "receiver_repository": "hsoliwal/M3jdk21",
+  "receiver_parent": "115b8ae427c2e3ff4e124583e79c7ac0b2c78e17",
+  "invariants": {
+    "jdk_product_java_apis_changed": false,
+    "jdk_native_source_changed": false,
+    "jni_abi_changed": false,
+    "legacy_census_output_changed": false,
+    "existing_semantic_output_changed": false,
+    "opt_in_mode": "--jni",
+    "native_export_status": "CANDIDATE_ONLY"
+  },
+  "targets": [
+    {
+      "path": "m3/tooling/atom-census/src/main/java/jdk/m3/tooling/atoms/M3AtomCensus.java",
+      "pre": "1f1019d4ba95fe80b2533526eeb3d2f564ce475f20bf816274e85b44898a7baa",
+      "post": "9c9945fe350c5c256badf8c3d0e360ac55090dbda6052f89d2352947bf573260"
+    },
+    {
+      "path": "m3/tooling/atom-census/src/main/java/jdk/m3/tooling/atoms/M3JniDeclarationProjection.java",
+      "pre": "ABSENT",
+      "post": "7fca3f19c385582a1078a05ba916932a320799850766e3dd2bfaf2eb9ff731a4"
+    },
+    {
+      "path": "m3/tooling/atom-census/src/test/java/jdk/m3/tooling/atoms/M3JniDeclarationProjectionSelfTest.java",
+      "pre": "ABSENT",
+      "post": "d41893478a4ef0b454362ce9dc46c8d4bd4043b6c5cfac9d66a904b23e6e1ea7"
+    },
+    {
+      "path": "m3/tooling/atom-census/src/test/java/jdk/m3/tooling/atoms/M3JniDeclarationProjectionTest.java",
+      "pre": "ABSENT",
+      "post": "27c10ce99e288c924d190d12e8d6702a628ae620be0c91c290459ac0b00440b0"
+    },
+    {
+      "path": "m3/tooling/atom-census/contract/JNI_DECLARATION_PROJECTION_V1.md",
+      "pre": "ABSENT",
+      "post": "9e2831bae2e58b92e8f6e26dc60c84e67e3e7c74c554cb2618b182d7bd2382e2"
+    },
+    {
+      "path": "m3/tooling/atom-census/verify-jni-projection.sh",
+      "pre": "ABSENT",
+      "post": "8e45457f6f6be9e673b15019387d8570405d461d2a6ca384f106aa12aec9ac81"
+    }
+  ],
+  "verification": {
+    "sha256_preimage": "PASS",
+    "postimages_git_blobs": "PASS",
+    "java21_lint_compile": "PASS_LOCAL",
+    "semantic_selftest_154": "PASS_LOCAL",
+    "jni_decl_selftest_53": "PASS_LOCAL",
+    "jni_c17_3_modes": "PASS_LOCAL",
+    "maven_openrewrite": "NOT_RUN",
+    "hosted_junit": "NOT_RUN",
+    "product_m3jdk21": "NOT_RUN"
+  },
+  "merge_state": "DRAFT_HOLD"
+}

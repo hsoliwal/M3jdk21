@@ -1,0 +1,211 @@
+// Copyright 2026 Hitesh Soliwal and contributors
+// SPDX-License-Identifier: Apache-2.0
+package jdk.m3.arrays;
+
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.Objects;
+import java.util.Spliterator;
+import java.util.Spliterators;
+import java.util.function.IntConsumer;
+import java.util.stream.IntStream;
+import java.util.stream.StreamSupport;
+
+/** Immutable finite-universe bitmap. */
+//FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/64652588f0d4c23b1f6e0411090b2a796325ae0e/synexia-mat-value/src/main/java/com/synexia/matvalue/MatBits.java blob 961054762a02; recipe m3/arrays/recipe/posting-index-20261106/relocate.py v2
+public final class SelectionBits {
+    private final int size;
+    private final long[] words;
+
+    public SelectionBits(int size) {
+        if (size < 0) throw new IllegalArgumentException("negative bit size");
+        this.size = size;
+        this.words = new long[wordsFor(size)];
+    }
+
+    private SelectionBits(int size, long[] words) {
+        Objects.requireNonNull(words, "words");
+        int expectedWords = wordsFor(size);
+        if (words.length != expectedWords) {
+            throw new IllegalArgumentException("bitmap word count does not match universe");
+        }
+        this.size = size;
+        this.words = words.clone();
+        maskTail(this.words, size);
+    }
+
+    public static Builder builder(int size) { return new Builder(size); }
+    /**
+     * Returns a selection over a {@code size}-bit universe from a copy of {@code words}: bit {@code i} is
+     * {@code words[i >>> 6]} bit {@code i & 63}, and bits at or past {@code size} are cleared.
+     *
+     * @throws IllegalArgumentException if {@code words.length != wordsFor(size)}
+     */
+    public static SelectionBits ofWords(int size, long[] words) { return new SelectionBits(size, words); }
+
+    public int size() { return size; }
+    public long payloadBytes() { return 8L * words.length; }
+
+    public boolean get(int index) {
+        Objects.checkIndex(index, size);
+        return (words[index >>> 6] & (1L << (index & 63))) != 0;
+    }
+
+    public int cardinality() {
+        int count = 0;
+        for (long word : words) count += Long.bitCount(word);
+        return count;
+    }
+
+    public boolean isEmpty() {
+        for (long word : words) if (word != 0L) return false;
+        return true;
+    }
+
+    /**
+     * Returns the first set row at or after fromIndex, or -1.
+     *
+     * <p>Jumps word-to-word and bit-to-bit; it never scans zero rows individually.</p>
+     */
+    public int nextSetBit(int fromIndex) {
+        if (fromIndex < 0) throw new IndexOutOfBoundsException("negative fromIndex");
+        if (fromIndex >= size) return -1;
+        int wordIndex = fromIndex >>> 6;
+        long word = words[wordIndex] & (-1L << (fromIndex & 63));
+        while (true) {
+            if (word != 0L) {
+                int row = (wordIndex << 6) + Long.numberOfTrailingZeros(word);
+                return row < size ? row : -1;
+            }
+            if (++wordIndex >= words.length) return -1;
+            word = words[wordIndex];
+        }
+    }
+
+    public boolean intersects(SelectionBits other) {
+        Objects.requireNonNull(other, "other");
+        if (size != other.size) throw new IllegalArgumentException("different universes");
+        for (int i = 0; i < words.length; i++) {
+            if ((words[i] & other.words[i]) != 0L) return true;
+        }
+        return false;
+    }
+
+    public int[] toIntArray() {
+        int[] result = new int[cardinality()];
+        int cursor = 0;
+        for (int row = nextSetBit(0); row >= 0; row = nextSetBit(row + 1)) {
+            result[cursor++] = row;
+        }
+        return result;
+    }
+
+    /**
+     * Sorted primitive scan over set bits. Empty words are skipped in one step;
+     * no predicate is evaluated for unset rows. The immutable word owner is
+     * not copied or retained through a per-bit Java object.
+     */
+    public IntStream setBits() {
+        Spliterator.OfInt cursor = new Spliterators.AbstractIntSpliterator(
+                size, Spliterator.ORDERED | Spliterator.SORTED
+                        | Spliterator.DISTINCT | Spliterator.NONNULL | Spliterator.IMMUTABLE) {
+            private int wordIndex = -1;
+            private long pending;
+
+            @Override
+            public boolean tryAdvance(IntConsumer action) {
+                Objects.requireNonNull(action, "action");
+                while (pending == 0L) {
+                    if (++wordIndex >= words.length) return false;
+                    pending = words[wordIndex];
+                }
+                int row = (wordIndex << 6) + Long.numberOfTrailingZeros(pending);
+                pending &= pending - 1L;
+                action.accept(row);
+                return true;
+            }
+
+            @Override
+            public Comparator<? super Integer> getComparator() {
+                return null;
+            }
+        };
+        return StreamSupport.intStream(cursor, false);
+    }
+
+    public SelectionBits and(SelectionBits other) { return binary(other, 0); }
+    public SelectionBits or(SelectionBits other) { return binary(other, 1); }
+    public SelectionBits xor(SelectionBits other) { return binary(other, 2); }
+    public SelectionBits andNot(SelectionBits other) { return binary(other, 3); }
+
+    public SelectionBits not() {
+        long[] result = words.clone();
+        for (int i = 0; i < result.length; i++) result[i] = ~result[i];
+        maskTail(result, size);
+        return new SelectionBits(size, result);
+    }
+
+    /** Returns bitmap word {@code index} (bits {@code 64 * index} to {@code 64 * index + 63}). */
+    public long word(int index) { return words[Objects.checkIndex(index, words.length)]; }
+    /** Returns the number of bitmap words, {@code wordsFor(size())}. */
+    public int wordCount() { return words.length; }
+    /** Returns a copy of the bitmap words; {@link #ofWords(int, long[])} accepts it back. */
+    public long[] wordsCopy() { return words.clone(); }
+
+    private SelectionBits binary(SelectionBits other, int operation) {
+        Objects.requireNonNull(other, "other");
+        if (size != other.size) throw new IllegalArgumentException("different universes");
+        long[] result = new long[words.length];
+        for (int i = 0; i < words.length; i++) {
+            result[i] = switch (operation) {
+                case 0 -> words[i] & other.words[i];
+                case 1 -> words[i] | other.words[i];
+                case 2 -> words[i] ^ other.words[i];
+                case 3 -> words[i] & ~other.words[i];
+                default -> throw new IllegalStateException();
+            };
+        }
+        return new SelectionBits(size, result);
+    }
+
+    /**
+     * Returns ceil(size / 64), the word count of a {@code size}-bit universe, without overflow.
+     *
+     * @throws IllegalArgumentException if {@code size} is negative
+     */
+    public static int wordsFor(int size) {
+        if (size < 0) throw new IllegalArgumentException("negative bit size");
+        return (size >>> 6) + ((size & 63) == 0 ? 0 : 1);
+    }
+
+    private static void maskTail(long[] words, int size) {
+        int rem = size & 63;
+        if (words.length > 0 && rem != 0) words[words.length - 1] &= (1L << rem) - 1L;
+    }
+
+    public static final class Builder {
+        private final int size;
+        private final long[] words;
+
+        private Builder(int size) {
+            if (size < 0) throw new IllegalArgumentException("negative bit size");
+            this.size = size;
+            this.words = new long[wordsFor(size)];
+        }
+
+        public Builder set(int index) {
+            Objects.checkIndex(index, size);
+            words[index >>> 6] |= 1L << (index & 63);
+            return this;
+        }
+
+        public Builder set(int index, boolean value) {
+            Objects.checkIndex(index, size);
+            long mask = 1L << (index & 63);
+            if (value) words[index >>> 6] |= mask; else words[index >>> 6] &= ~mask;
+            return this;
+        }
+
+        public SelectionBits build() { return new SelectionBits(size, words); }
+    }
+}

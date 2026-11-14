@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>jdk.m3.ast.recipe</groupId>
+  <artifactId>m3ast-first-lookup-performance-admission</artifactId>
+  <version>20261112-SNAPSHOT</version>
+  <name>Exact M3AST Facts.first setup-inclusive performance evidence</name>
+  <artifactId>facts-first-performance-admission</artifactId>
+  <version>20261112-SNAPSHOT</version>
+  <name>Exact owner Java21 Facts.first cost profile; no product mutation</name>
+  <properties>
+    <maven.compiler.release>21</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  <build>
+    <sourceDirectory>${project.basedir}/../../src/main/java</sourceDirectory>
+    <testSourceDirectory>${project.basedir}/../../src/test/java</testSourceDirectory>
+    <!-- The current product owner is compiled, not copied or adapted. -->
+    <sourceDirectory>${project.basedir}/../../src/main/java</sourceDirectory>
+    <testSourceDirectory>${project.basedir}/src/test/java</testSourceDirectory>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.13.0</version>
+        <configuration>
+          <release>21</release><proc>none</proc>
+          <release>21</release>
+          <proc>none</proc>
+          <includes>
+            <include>jdk/m3/ast/SyntaxTree.java</include>
+            <include>jdk/m3/ast/SyntaxIndex.java</include>
+          </includes>
+          <testIncludes>
+            <testInclude>jdk/m3/ast/FactsFirstPerformanceProof.java</testInclude>
+            <testInclude>jdk/m3/ast/FactsFirstPerformanceAdmission.java</testInclude>
+          </testIncludes>
+          <compilerArgs>
+            <arg>-Xlint:all</arg><arg>-Werror</arg>
+          </compilerArgs>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <version>3.5.0</version>
+        <executions>
+          <execution>
+            <id>setup-inclusive-current-owner-proof</id>
+            <phase>verify</phase><goals><goal>java</goal></goals>
+            <configuration>
+              <mainClass>jdk.m3.ast.FactsFirstPerformanceProof</mainClass>
+              <classpathScope>test</classpathScope>
+            <id>source-locked-performance-and-parity-profile</id>
+            <phase>verify</phase><goals><goal>java</goal></goals>
+            <configuration>
+              <mainClass>jdk.m3.ast.FactsFirstPerformanceAdmission</mainClass>
+              <classpathScope>test</classpathScope>
+              <arguments>
+                <argument>${project.basedir}/../../src/main/java/jdk/m3/ast/SyntaxIndex.java</argument>
+              </arguments>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+</project>

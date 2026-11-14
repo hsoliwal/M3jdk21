@@ -1,0 +1,27 @@
+Selected raw log outputs. Full logs and original JSON receipts accompany the conversation export.
+=== kernel-final.log SHA256=d3952e2ac89f8eed3bb9ba305acae16d9399d90ae38c53c74bbf79ad8d65bd02 ===
+M3_MODULE_CHECKS_PASS checks=41
+
+=== password-readback.log SHA256=f66f1078f7cfeaa803f6b833e9eea301a20b67b73a869c7cf022b85497096fcb ===
+M3_PASSWORD_BACKPORT_PASS fresh_vms=28
+
+=== proof-developer-final4/developer-proof/logs/java.log SHA256=17de61945e6f9c22c4e010e25fbd08a97742dae02cff215636cc2526201eafc6 ===
+M3_DEVELOPER_FIXTURE_PASS
+
+=== proof-developer-final4/developer-proof/logs/linked-run.log SHA256=17de61945e6f9c22c4e010e25fbd08a97742dae02cff215636cc2526201eafc6 ===
+M3_DEVELOPER_FIXTURE_PASS
+
+=== proof-developer-final4/developer-proof/logs/native-launcher.log SHA256=17de61945e6f9c22c4e010e25fbd08a97742dae02cff215636cc2526201eafc6 ===
+M3_DEVELOPER_FIXTURE_PASS
+
+=== maven-final-attempt.log SHA256=27d4359a125950209afbcf88fca3ec06eec95eb4fc9d6fac94c0c3dd8e0641ab ===
+bash: line 19: mvn: command not found
+EXIT=127
+
+=== network-final-attempt.log SHA256=420bc3a4e9891794f715bbc5edb4a67d94fb93c49ba05fa18cad4da80bddf258 ===
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0curl: (6) Could not resolve host: repo.maven.apache.org
+EXIT=6
+

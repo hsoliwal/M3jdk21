@@ -1,0 +1,20 @@
+PASS M3LongAddressKernelSelfTest checks=321298 native=false
+M3_MASK_OFFSET_PROJECTION_PASS checks=28615 seed=5562870565234366513
+PASS M3_INDEX_MASK_WINDOW checks=15298 native=false
+PASS M3IndexMaskWindowRecoverySelfTest checks=7526 JNI=false
+INDEX_ORDER_WINDOW_PASS native=false maskPairs=65536 windows=67914 checks=2990400 observations=e15c399b7be3d8c0fbd38bc6e2cd4c63b93bb0b95d1272bce9acdcc7bec5445b
+
+Test run finished after 2255 ms
+[         6 containers found      ]
+[         0 containers skipped    ]
+[         6 containers started    ]
+[         0 containers aborted    ]
+[         6 containers successful ]
+[         0 containers failed     ]
+[         5 tests found           ]
+[         0 tests skipped         ]
+[         5 tests started         ]
+[         0 tests aborted         ]
+[         5 tests successful      ]
+[         0 tests failed          ]
+

@@ -1,0 +1,10 @@
+artifact	purpose
+STATUS.tsv	Executed versus blocked gate states
+FINAL_REPORT.md	Delta and limits
+RUN_CONTEXT.tsv	Pinned scope/environment
+PROVENANCE.tsv	Existing owners and catalogue source
+VERIFY_CONTRACT.tsv	Verification and promotion requirements
+OUTPUT_CONTRACT.tsv	Evidence index
+INVENTORY.tsv	Exact before/after identities
+RAW_RESULTS.log	Selected raw local outputs
+ACTION_QUEUE.tsv	Remaining work

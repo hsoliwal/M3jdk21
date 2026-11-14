@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022, Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2022, 2023, Oracle and/or its affiliates. All rights reserved.
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
  *
  * This code is free software; you can redistribute it and/or modify it
@@ -37,10 +37,14 @@ import java.nio.charset.Charset;
 import java.util.Arrays;
 import java.util.Formatter;
 import java.util.Objects;
+import java.util.Optional;
+import java.util.concurrent.atomic.AtomicReference;
 
 import jdk.internal.access.SharedSecrets;
+import jdk.internal.util.StaticProperty;
 import sun.nio.cs.StreamDecoder;
 import sun.nio.cs.StreamEncoder;
+import sun.nio.cs.UTF_8;
 
 /**
  * JdkConsole implementation based on the platform's TTY.
@@ -92,7 +96,55 @@ public final class JdkConsoleImpl implements JdkConsole {
     }
 
     @Override
-    public char[] readPassword(String fmt, Object ... args) {
+    public char[] readPassword(String format, Object ... args) {
+        return readPassword0(false, format, args);
+    }
+
+    // These two methods are intended for sun.security.util.Password, so tools like keytool can
+    // use JdkConsoleImpl even when standard output is redirected. The Password class should first
+    // check if `System.console()` returns a Console instance and use it if available. Otherwise,
+    // it should call this method to obtain a JdkConsoleImpl. This ensures only one Console
+    // instance exists in the Java runtime.
+    private static final AtomicReference<Optional<JdkConsoleImpl>> INSTANCE = new AtomicReference<>();
+    public static Optional<JdkConsoleImpl> passwordConsole() {
+         Optional<JdkConsoleImpl> result = INSTANCE.get();
+         if (result != null) {
+             return result;
+         }
+
+         synchronized (JdkConsoleImpl.class) {
+             result = INSTANCE.get();
+             if (result != null) {
+                 return result;
+             }
+
+            // If there's already a proper console, throw an exception
+            if (System.console() != null) {
+                throw new IllegalStateException("Can't create a dedicated password " +
+                    "console since a real console already exists");
+            }
+
+            // If stdin is NOT redirected, return an Optional containing a JdkConsoleImpl
+            // instance, otherwise an empty Optional.
+            result = SharedSecrets.getJavaIOAccess().isStdinTty() ?
+                Optional.of(
+                    new JdkConsoleImpl(
+                        UTF_8.INSTANCE)) :
+                Optional.empty();
+
+            INSTANCE.set(result);
+            return result;
+        }
+    }
+
+    // Dedicated entry for sun.security.util.Password when stdout is redirected.
+    // This method strictly avoids producing any output by using noNewLine = true
+    // and an empty format string.
+    public char[] readPasswordNoNewLine() {
+        return readPassword0(true, "");
+    }
+
+    private char[] readPassword0(boolean noNewLine, String fmt, Object ... args) {
         char[] passwd = null;
         synchronized (writeLock) {
             synchronized(readLock) {
@@ -119,10 +171,23 @@ public final class JdkConsoleImpl implements JdkConsole {
                         else
                             ioe.addSuppressed(x);
                     }
-                    if (ioe != null)
+                    if (ioe != null) {
+                        if (passwd != null) {
+                            Arrays.fill(passwd, ' ');
+                        }
+                        try {
+                            if (reader instanceof LineReader lr) {
+                                lr.zeroOut();
+                            }
+                        } catch (IOException x) {
+                            // ignore
+                        }
                         throw ioe;
+                    }
                 }
-                pw.println();
+                if (!noNewLine) {
+                    pw.println();
+                }
             }
         }
         return passwd;
@@ -195,6 +260,9 @@ public final class JdkConsoleImpl implements JdkConsole {
             System.arraycopy(rcb, 0, b, 0, len);
             if (zeroOut) {
                 Arrays.fill(rcb, 0, len, ' ');
+                if (reader instanceof LineReader lr) {
+                    lr.zeroOut();
+                }
             }
         }
         return b;
@@ -227,6 +295,11 @@ public final class JdkConsoleImpl implements JdkConsole {
             cb = new char[1024];
             nextChar = nChars = 0;
             leftoverLF = false;
+        }
+        public void zeroOut() throws IOException {
+            if (in instanceof StreamDecoder sd) {
+                sd.fillZeroToPosition();
+            }
         }
         public void close () {}
         public boolean ready() throws IOException {

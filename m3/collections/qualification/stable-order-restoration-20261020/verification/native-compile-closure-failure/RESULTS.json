@@ -1,0 +1,167 @@
+{
+  "commands": [
+    {
+      "argv": [
+        "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/toolchain/jdk21/bin/java",
+        "-version"
+      ],
+      "cwd": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020",
+      "elapsed_seconds": 0.03,
+      "exit": 0,
+      "name": "java-version",
+      "stderr": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/native/java-version.stderr.log",
+      "stderr_sha256": "5b4412738541184e84f6b2d7520d4f4a7c2a455f60650491464c61adcbbbdeb0",
+      "stdout": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/native/java-version.stdout.log",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "argv": [
+        "/usr/bin/gcc",
+        "--version"
+      ],
+      "cwd": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020",
+      "elapsed_seconds": 0.003,
+      "exit": 0,
+      "name": "gcc-version",
+      "stderr": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/native/gcc-version.stderr.log",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/native/gcc-version.stdout.log",
+      "stdout_sha256": "cc08f972264fd3ba58abb3ebc6337013b225be267c91d2df9f29f066284fe2b6"
+    },
+    {
+      "argv": [
+        "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/toolchain/jdk21/bin/javac",
+        "--release",
+        "21",
+        "-Xlint:all",
+        "-Werror",
+        "-sourcepath",
+        "",
+        "-h",
+        "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/native/headers",
+        "-d",
+        "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/native/header-classes",
+        "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/collections/src/main/java/jdk/m3/collections/M3LongIndexProjection.java",
+        "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/collections/src/main/java/jdk/m3/collections/M3LongAddressKernel.java",
+        "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskCompactor.java",
+        "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskWindow.java"
+      ],
+      "cwd": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020",
+      "elapsed_seconds": 0.894,
+      "exit": 0,
+      "name": "jni-headers",
+      "stderr": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/native/jni-headers.stderr.log",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/native/jni-headers.stdout.log",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "argv": [
+        "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/toolchain/jdk21/bin/javac",
+        "--release",
+        "21",
+        "-Xlint:all",
+        "-Werror",
+        "-sourcepath",
+        "",
+        "-cp",
+        "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/generated/classes",
+        "-d",
+        "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/native/proof-classes",
+        "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/baseline/m3/collections/src/test/java/jdk/m3/collections/M3IndexMaskCompactorSelfTest.java",
+        "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/baseline/m3/collections/src/test/java/jdk/m3/collections/M3IndexMaskWindowSelfTest.java",
+        "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/baseline/m3/collections/src/test/java/jdk/m3/collections/M3IndexMaskWindowRecoverySelfTest.java",
+        "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/baseline/m3/collections/src/test/java/jdk/m3/collections/M3LongAddressKernelSelfTest.java",
+        "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/native/proof-src/jdk/m3/collections/M3NativeIndexRangeSelfTest.java",
+        "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/collections/src/test/java/jdk/m3/collections/M3IndexOrderWindowContract.java"
+      ],
+      "cwd": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020",
+      "elapsed_seconds": 1.101,
+      "exit": 1,
+      "name": "proof-javac",
+      "stderr": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/native/proof-javac.stderr.log",
+      "stderr_sha256": "da07db6ae29c11398831b2d43b3a627945a107ff5f4a1079604f40d215e5786e",
+      "stdout": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/native/proof-javac.stdout.log",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "error": "RuntimeError: proof-javac failed; see its saved stdout/stderr",
+  "finished_utc": "2026-10-20T11:29:25.628507+00:00",
+  "generated_java_receipt": {
+    "path": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/generated/RESULTS.json",
+    "sha256": "b340533c2d863a7bcd83830b1b84ba39c2b0eff10ef54b2a4cda85535af89fb6"
+  },
+  "header_derivative_classes_match_generated": true,
+  "header_derivative_classes_on_runtime_classpath": false,
+  "immutable_git_custody": [
+    {
+      "git_blob": "f6471f52b0c001def6319542f01729620b0600ee",
+      "local_path": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/native/native-sources/m3_index_mask_compactor.c",
+      "path": "m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+      "sha256": "ed13463a6972bd014a861635987e8aa6214bf7516789c4f41d4ec3d69692fe73",
+      "tree": "985d672bf250aa090b2399d626f0e3e1b541135d"
+    },
+    {
+      "git_blob": "baa23467163a0e9344fe3c1d78dcc87cb707fd56",
+      "local_path": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/native/native-sources/m3_index_mask_window.c",
+      "path": "m3/collections/src/main/native/collections/m3_index_mask_window.c",
+      "sha256": "9ed1244ef90a72845d580b8919c670760434a81cf6dfc48f3aecbc8483726c02",
+      "tree": "985d672bf250aa090b2399d626f0e3e1b541135d"
+    },
+    {
+      "git_blob": "9f68bba46827db2cb53bdb597042829358663f91",
+      "local_path": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/native/native-sources/m3_long_address_kernel.c",
+      "path": "m3/collections/src/main/native/collections/m3_long_address_kernel.c",
+      "sha256": "ba2e8a66c23bffa52e1b9e20eb9f1e890fb41ee13891dae0ed8d48cd6069f5ba",
+      "tree": "985d672bf250aa090b2399d626f0e3e1b541135d"
+    },
+    {
+      "git_blob": "6eeb08136b1851f78254f9628ceba460ccfe1f4f",
+      "local_path": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/native/native-sources/m3_mask_window_regions.c",
+      "path": "m3/collections/src/test/native/m3_mask_window_regions.c",
+      "sha256": "0b56e30eeda0022644fd6dd9448ccc3689aa7f05e515d5a4087dc0ed02fb4ec2",
+      "tree": "985d672bf250aa090b2399d626f0e3e1b541135d"
+    },
+    {
+      "git_blob": "04118b92da5dff2c6ea802af9bd20a87d60bf933",
+      "local_path": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/native/native-sources/m3_mask_window_spans.c",
+      "path": "m3/collections/src/test/native/m3_mask_window_spans.c",
+      "sha256": "f54d8b3cf3160791605dc5b7fc1eb8868e371d5f711b1df280af80a99f08af66",
+      "tree": "985d672bf250aa090b2399d626f0e3e1b541135d"
+    },
+    {
+      "git_blob": "30623123bd49d8522cbcc4a7f9e74fef4be24d38",
+      "local_path": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/native/proof-src/jdk/m3/collections/M3NativeIndexRangeSelfTest.java",
+      "path": "m3/collections/src/test/java/jdk/m3/collections/M3NativeIndexRangeSelfTest.java",
+      "sha256": "a0baec5fc1ce1930346ed8bcfa129a2c2f8d73431873ab905a9393fe62a31ae9",
+      "tree": "985d672bf250aa090b2399d626f0e3e1b541135d"
+    }
+  ],
+  "java_release": "IMPLEMENTOR=\"Eclipse Adoptium\"\nIMPLEMENTOR_VERSION=\"Temurin-21.0.12.1+1\"\nJAVA_RUNTIME_VERSION=\"21.0.12.1+1-LTS\"\nJAVA_VERSION=\"21.0.12.1\"\nJAVA_VERSION_DATE=\"2026-08-18\"\nLIBC=\"gnu\"\nMODULES=\"java.base java.compiler java.datatransfer java.xml java.prefs java.desktop java.instrument java.logging java.management java.security.sasl java.naming java.rmi java.management.rmi java.net.http java.scripting java.security.jgss java.transaction.xa java.sql java.sql.rowset java.xml.crypto java.se java.smartcardio jdk.accessibility jdk.internal.jvmstat jdk.attach jdk.charsets jdk.internal.opt jdk.zipfs jdk.compiler jdk.crypto.ec jdk.crypto.cryptoki jdk.dynalink jdk.internal.ed jdk.editpad jdk.hotspot.agent jdk.httpserver jdk.incubator.vector jdk.internal.le jdk.internal.vm.ci jdk.internal.vm.compiler jdk.internal.vm.compiler.management jdk.jartool jdk.javadoc jdk.jcmd jdk.management jdk.management.agent jdk.jconsole jdk.jdeps jdk.jdwp.agent jdk.jdi jdk.jfr jdk.jlink jdk.jpackage jdk.jshell jdk.jsobject jdk.jstatd jdk.localedata jdk.management.jfr jdk.naming.dns jdk.naming.rmi jdk.net jdk.nio.mapmode jdk.random jdk.sctp jdk.security.auth jdk.security.jgss jdk.unsupported jdk.unsupported.desktop jdk.xml.dom\"\nOS_ARCH=\"x86_64\"\nOS_NAME=\"Linux\"\nSOURCE=\".:git:1c417fbfc2f7\"\nBUILD_SOURCE=\"git:e6ba7dec3d07654074559310376a3ae89da5f4ac\"\nBUILD_SOURCE_REPO=\"https://github.com/adoptium/temurin-build.git\"\nSOURCE_REPO=\"https://github.com/adoptium/jdk21u.git\"\nFULL_VERSION=\"21.0.12.1+1-LTS\"\nSEMANTIC_VERSION=\"21.0.12.1+1\"\nBUILD_INFO=\"OS: Linux Version: 6.8.0-1064-azure\"\nJVM_VARIANT=\"Hotspot\"\nJVM_VERSION=\"21.0.12.1+1-LTS\"\nIMAGE_TYPE=\"JDK\"\n",
+  "native_source_changes": false,
+  "production_classes": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/generated/classes",
+  "production_overlays": false,
+  "production_sources": {
+    "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskCompactor.java": "226b09d8996bf6b2a952c7341495a1f6dfbec13f8bb605996b1c26b93772e29f",
+    "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskWindow.java": "268f039e623166f1cf5b957ea8284b25e14558ad6ea43b917b379386bd437508",
+    "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/collections/src/main/java/jdk/m3/collections/M3LongAddressKernel.java": "8fa3ebd0a31e78aa2c763c9ab99955e419f8573a9687d3e817e913c0ed48d8ed",
+    "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/collections/src/main/java/jdk/m3/collections/M3LongIndexProjection.java": "bf601d711667e1078ca30246da6fa89b43d7ed951a3179e0a161365526581959"
+  },
+  "proof_sources": {
+    "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/baseline/m3/collections/src/test/java/jdk/m3/collections/M3IndexMaskCompactorSelfTest.java": "5ae3d26cf58d0fff37bff398e73ee4f3b3e44212b56c046c3690fc8f58538f0f",
+    "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/baseline/m3/collections/src/test/java/jdk/m3/collections/M3IndexMaskWindowRecoverySelfTest.java": "2e5308ef6e0430be378c0905c13f219aa7c938cb26cf55ea5241043de57b78da",
+    "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/baseline/m3/collections/src/test/java/jdk/m3/collections/M3IndexMaskWindowSelfTest.java": "1992ce76877dee09bc449b7adb6e0f429b7286c446caa47b02b4c29e62c4eddc",
+    "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/baseline/m3/collections/src/test/java/jdk/m3/collections/M3LongAddressKernelSelfTest.java": "2911a84541befb99ca69caaba66579af9abaedcc760eb49f8edf880836b98e81",
+    "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/native/proof-src/jdk/m3/collections/M3NativeIndexRangeSelfTest.java": "a0baec5fc1ce1930346ed8bcfa129a2c2f8d73431873ab905a9393fe62a31ae9",
+    "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/collections/src/test/java/jdk/m3/collections/M3IndexOrderWindowContract.java": "7c1c055ec9a58a9c807fc05be3ec4a83b0a411729f41c259e3180d1e45262b94"
+  },
+  "runtime_checks": [],
+  "scope": "Four admitted/current Java owners, three unchanged native C owners, existing finite contract and JNI fixtures; not a whole-module or whole-JDK gate",
+  "sdk_receipt": {
+    "path": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/sdk/RESULTS.json",
+    "sha256": "12bb10c44e837ef30aef11cfdbe98962b7f415af40f619ea7d405f0e88d2574f"
+  },
+  "source_built_m3jdk21": "NOT_RUN",
+  "started_utc": "2026-10-20T11:29:23.563288+00:00",
+  "status": "FAIL"
+}

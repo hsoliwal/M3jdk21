@@ -1,0 +1,7 @@
+# Resume the pending descriptor repair through the actual recipe
+
+The earlier uploaded descriptor patch was never published. Its full actual target preimage has now been compared byte-for-byte with PR114: Git blob f4b4144f104eb4816cb80a44c136fa90b8114dc4 is unchanged. Import only its reviewed recipe templates, configuration and retained eight tests, not stale earlier verification claims. Current write tools and recovered Maven are now available.
+
+The private implementation of M3Descriptor.type manually converts Class.getName and is wrong for hidden-class descriptors. Reuse Objects.requireNonNull(type, "type").descriptorString() from the Java21 Class contract. Preserve all member signatures and ordinary-class results; hidden-class result corrections are explicitly the intended bug fix. This is not an arbitrary all-input equivalence claim.
+
+Use the existing M3Jdk21HashPinnedSnapshotRecipe with crate jdk22-descriptor, exact pre/post seals and ABSENT runtime-test admission. Add a source-bound test that reads the actual checked-out owner, runs that same recipe, and writes only a target/ candidate. Only those emitted and hash-checked outputs may be copied into the approved product/test paths. Compile and run the actual layout-independent internal class under a stock Java21 java.base patch, never transplant modified java.lang.String into an unmatched JVM. Full native image and jtreg remain separate gates.

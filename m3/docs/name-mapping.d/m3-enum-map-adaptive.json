@@ -1,0 +1,27 @@
+{
+  "schema": "M3_NAME_MAPPING_FRAGMENT_V1",
+  "note": "Fragment for the serial manifest reducer; name-mapping.json untouched by this leaf.",
+  "mappings": [
+    {
+      "source": "com.synexia.primitives.AdaptiveEnumPrimitiveMap (d5b56584; 8ce54c12 before the header-only commit b1b66529904)",
+      "source_commit": "origin/develop 296323958b1",
+      "target": "com.m3.collections.M3AdaptiveEnumLongMap",
+      "status": "implemented-locally-verified; proving ground; runtime PENDING_LINUX",
+      "target_rule": "ADAPT; single long value lane; sparse backing M3IntLongHashMap, dense backing M3EnumLongMap; byte-cost switch rule and compact re-choice kept; ordinal iteration order kept in both modes (donor sparse mode is slot order); JDK EnumMap key contract"
+    },
+    {
+      "source": "com.synexia.primitives.IntLongHashMap (538b997d; fb7419a4 before the headers)",
+      "source_commit": "origin/develop 296323958b1",
+      "target": "com.m3.collections.M3IntLongHashMap",
+      "status": "implemented-locally-verified; proving ground; runtime PENDING_LINUX",
+      "target_rule": "ADAPT; shape of M3IntIntHashMap (DenseHash inlined, modCount fail-fast, M3IntIterator keys); payloadBytesFor(int) added"
+    },
+    {
+      "source": "com.m3.collections.M3IntIntConsumer (int-lanes leaf, #402 re-applied as #427)",
+      "source_commit": "b2095ba8ff",
+      "target": "com.m3.collections.M3IntLongConsumer",
+      "status": "int-to-long mirror",
+      "target_rule": "same contract per lane"
+    }
+  ]
+}

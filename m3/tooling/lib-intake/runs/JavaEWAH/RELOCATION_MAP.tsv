@@ -1,0 +1,6 @@
+old	new	status
+com.googlecode.javaewah.datastructure	com.m3.collections.ewah.datastructure	MOVE
+com.googlecode.javaewah32.symmetric	com.m3.collections.ewah32.symmetric	MOVE
+com.googlecode.javaewah.symmetric	com.m3.collections.ewah.symmetric	MOVE
+com.googlecode.javaewah32	com.m3.collections.ewah32	MOVE
+com.googlecode.javaewah	com.m3.collections.ewah	MOVE

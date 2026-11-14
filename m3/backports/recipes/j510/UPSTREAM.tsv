@@ -1,0 +1,8 @@
+order	jbs	commit	role	disposition
+1	JDK-8331008	2a1ae0ff89a8ac364206b09059d9dc884adcc5ac	JEP478 preview KDF implementation	ABSORB_BASE
+2	JDK-8343772	2c7bea1cb2acd768e57f460440228fee914255a6	KDF.getInstance delayed-provider/TCK correction	ABSORB_FIX
+3	JDK-8347289	db7fa6a2c65d11e5bd790073d345f37b5ec356b6	Non-extractable PRK delayed-provider correction	ABSORB_FIX
+4	JDK-8353888	079fccfa9a03b890e698c52c689dea0f19f8fbee	JEP510 final graduation	ABSORB_FINAL
+5	JDK-8370082	012b4eb6cea6e1756a589a6c17a805867ed60686	Intermediate secret cleanup including HKDF	ABSORB_SECURITY_FIX
+6	JDK-8377914	79456110fb6dd11ef19e9637c6f40ee7ce329481	HKDFParameterSpec documentation corrections	ABSORB_DOC_FIX
+X	JDK-8353578	4c0a0ab6bc765c46d2c4b8320418d30abee24a91	Refactor existing TLS/DHKEM callers onto KDF API	SEPARATE_CANDIDATE

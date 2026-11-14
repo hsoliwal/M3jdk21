@@ -1,0 +1,11 @@
+field	value
+repository	hsoliwal/M3jdk21
+baseline	7aaeca8683b8bb0958e02906a180a4a5ed95c036
+date	2026-10-04
+mode	feature-branch-candidate
+workers	1
+shard_count	1
+java	Debian OpenJDK 21.0.11+10-1-deb13u2-Debian
+platform	Linux amd64
+modified_m3jdk21_runtime	false
+canonical_writes	false

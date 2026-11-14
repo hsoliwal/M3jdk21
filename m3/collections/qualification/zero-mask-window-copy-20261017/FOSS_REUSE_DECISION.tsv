@@ -1,0 +1,4 @@
+capability	donor	decision	fit	proof
+zero-mask-window-copy	existing M3IndexMaskCompactor count/selection identity	ADAPT	validated zero-mask copies every row in original order	real JVM JNI + positive/original-negative counted read probe
+source-java-snapshot	canonical M3HashPinnedJavaSnapshotRecipe	DIRECT_IMPORT	exact donor bytes; Apache-2.0	complete YAML activation and fresh-byte replay
+source-text-snapshot	canonical Synexia M3HashPinnedTextSnapshotRecipe	DIRECT_IMPORT	exact donor bytes; Apache-2.0	complete YAML activation and fresh-byte replay

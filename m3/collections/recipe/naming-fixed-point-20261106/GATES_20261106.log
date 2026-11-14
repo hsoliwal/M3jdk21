@@ -1,0 +1,19 @@
+# gate log summary (full logs on S:/m3-scratch/eb-conv/naming/, not committed)
+## mvn -f m3/collections/pom.xml -DskipTests package (JDK 21.0.9, Maven 3.9.14)
+2026-11-06T10:02:20Z
+Java version: 21.0.9, vendor: Oracle Corporation, runtime: C:\Program Files\Java\jdk-21
+arrays_install_exit=0
+2026-11-06T10:02:26Z
+[INFO] BUILD SUCCESS
+[INFO] Total time:  14.604 s
+collections_package_exit=0
+2026-11-06T10:02:42Z
+## jdk_naming apply --only m3/collections/ then plan
+2026-11-06T09:59:22Z
+JDK_NAMING moves=0 rewrites=10 refusals=0 absent=0 CONST=10 KEBAB=10 PKG_PATH=10
+FIXED_POINT moves=0 rewrites=0
+apply_exit=0
+2026-11-06T09:59:35Z
+JDK_NAMING moves=0 rewrites=0 refusals=0 absent=0 
+plan_after_exit=0
+2026-11-06T09:59:41Z

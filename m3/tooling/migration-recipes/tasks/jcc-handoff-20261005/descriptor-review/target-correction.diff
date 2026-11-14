@@ -1,0 +1,32 @@
+--- M3Descriptor.f745.java
++++ M3Descriptor.java
+@@ -12,24 +12,12 @@
+     private M3Descriptor() {
+     }
+ 
++    /**
++     * Returns the VM-owned descriptor spelling, including non-nominal hidden classes.
++     * This does not make a hidden type name resolvable or portable between VM sessions.
++     */
+     public static String type(Class<?> type) {
+-        Class<?> checked = Objects.requireNonNull(type, "type");
+-        if (checked.isPrimitive()) {
+-            if (checked == void.class) return "V";
+-            if (checked == boolean.class) return "Z";
+-            if (checked == byte.class) return "B";
+-            if (checked == char.class) return "C";
+-            if (checked == short.class) return "S";
+-            if (checked == int.class) return "I";
+-            if (checked == long.class) return "J";
+-            if (checked == float.class) return "F";
+-            if (checked == double.class) return "D";
+-            throw new AssertionError("unknown primitive type: " + checked);
+-        }
+-        if (checked.isArray()) {
+-            return checked.getName().replace('.', '/');
+-        }
+-        return "L" + checked.getName().replace('.', '/') + ";";
++        return Objects.requireNonNull(type, "type").descriptorString();
+     }
+ 
+     public static String field(Field field) {

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.m3</groupId>
+  <artifactId>caller-item-damage-contract-20261113</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  <name>Selected caller producer qualification and apply</name>
+  <dependencies>
+    <dependency>
+      <groupId>org.openrewrite</groupId>
+      <artifactId>rewrite-core</artifactId>
+      <version>8.17.1</version>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <version>2.0.9</version>
+      <scope>runtime</scope>
+    </dependency>
+  </dependencies>
+  <build>
+    <directory>${m3.caller.outputRoot}/maven-controller</directory>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-enforcer-plugin</artifactId>
+        <version>3.6.3</version>
+        <executions><execution>
+          <id>validate-selected-producer-inputs</id><phase>validate</phase>
+          <goals><goal>enforce</goal></goals>
+          <configuration><fail>true</fail><rules>
+            <requireJavaVersion><version>[21,22)</version></requireJavaVersion>
+            <requireProperty><property>m3.caller.receiverRoot</property><regex>(?:[A-Za-z]:[\\/].*|/.*|\\\\.+)</regex><regexMessage>m3.caller.receiverRoot must be an absolute path</regexMessage></requireProperty>
+            <requireProperty><property>m3.caller.recipeRoot</property><regex>(?:[A-Za-z]:[\\/].*|/.*|\\\\.+)</regex><regexMessage>m3.caller.recipeRoot must be an absolute path</regexMessage></requireProperty>
+            <requireProperty><property>m3.caller.outputRoot</property><regex>(?:[A-Za-z]:[\\/].*|/.*|\\\\.+)</regex><regexMessage>m3.caller.outputRoot must be an absolute path</regexMessage></requireProperty>
+            <requireProperty><property>m3.caller.mode</property><regex>qualify|apply</regex></requireProperty>
+            <requireFilesDontExist><files><file>${m3.caller.outputRoot}</file></files><message>Use a fresh outputRoot; retained results are never reused.</message></requireFilesDontExist>
+          </rules></configuration>
+        </execution></executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-antrun-plugin</artifactId>
+        <version>3.2.0</version>
+        <executions><execution>
+          <id>selected-producer-and-result-check</id><phase>test</phase>
+          <goals><goal>run</goal></goals>
+          <configuration><target>
+<mkdir dir="${m3.caller.outputRoot}/maven-controller/tmp"/>
+<mkdir dir="${m3.caller.outputRoot}/maven-controller/jshell-home"/>
+<mkdir dir="${project.build.outputDirectory}"/>
+<path id="contract.classpath"><path refid="maven.runtime.classpath"/></path>
+<property name="contract.cp" refid="contract.classpath"/>
+<exec executable="${java.home}/bin/jshell" inputstring="" timeout="120000" failonerror="true" failifexecutionfails="true" output="${m3.caller.outputRoot}/jshell.stdout.log" error="${m3.caller.outputRoot}/jshell.stderr.log">
+<arg value="-J-Xmx256m"/><arg value="-R-Xmx256m"/>
+<arg value="-J-Djava.io.tmpdir=${m3.caller.outputRoot}/maven-controller/tmp"/>
+<arg value="-J-Duser.home=${m3.caller.outputRoot}/maven-controller/jshell-home"/>
+<arg value="-J-Djava.util.prefs.userRoot=${m3.caller.outputRoot}/maven-controller/jshell-home/prefs"/>
+<arg value="-J-Djava.util.prefs.systemRoot=${m3.caller.outputRoot}/maven-controller/jshell-home/system-prefs"/>
+<arg value="-R-Djava.io.tmpdir=${m3.caller.outputRoot}/maven-controller/tmp"/>
+<arg value="-R-Duser.home=${m3.caller.outputRoot}/maven-controller/jshell-home"/>
+<arg value="-R-Djava.util.prefs.userRoot=${m3.caller.outputRoot}/maven-controller/jshell-home/prefs"/>
+<arg value="-R-Djava.util.prefs.systemRoot=${m3.caller.outputRoot}/maven-controller/jshell-home/system-prefs"/>
+<arg value="-R-Dm3.caller.receiverRoot=${m3.caller.receiverRoot}"/>
+<arg value="-R-Dm3.caller.recipeRoot=${m3.caller.recipeRoot}"/>
+<arg value="-R-Dm3.caller.outputRoot=${m3.caller.outputRoot}"/>
+<arg value="--class-path"/><arg value="${contract.cp}"/>
+<arg value="--no-startup"/><arg value="--feedback"/><arg value="silent"/>
+<arg value="--add-modules"/><arg value="jdk.compiler,jdk.jdeps"/>
+<arg value="${m3.caller.recipeRoot}/validation/contract.jsh"/>
+</exec>
+<loadfile property="contract.pass" srcFile="${m3.caller.outputRoot}/PASS.sentinel" encoding="UTF-8"/>
+<condition property="contract.pass.valid"><equals arg1="${contract.pass}" arg2="M3_CALLER_ITEM_DAMAGE_CONTRACT_PASS&#10;sourceSha256=47c58002bd3bb75e8eac6d2cb950a54bd1bb760aa17c57ee9467678b3c868ecd&#10;" trim="false" casesensitive="true"/></condition>
+<fail unless="contract.pass.valid">Missing exact item-damage contract completion proof.</fail>
+</target></configuration>
+        </execution></executions>
+      </plugin>
+    </plugins>
+  </build>
+</project>

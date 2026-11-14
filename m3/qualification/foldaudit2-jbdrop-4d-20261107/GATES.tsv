@@ -1,0 +1,7 @@
+gate	result	note
+javac_patch_module	rc=0 errors=0 owner_warnings=0	JDK 21.0.9 --patch-module java.base=<master share/classes + restored M3StringAtom, GathererOp>; -Xlint:all,-serial,-deprecation,-removal,-this-escape
+mingw_werror	master rc=0, restored rc=0	M3ObjectMetrics.c, gcc -std=c11 -Wall -Wextra -Werror -shared, win32 JNI/JVMTI headers
+wsl_werror	master rc=0 exports=1, restored rc=0 exports=1	gate-wsl.sh, Ubuntu 24.04 gcc 13.3
+om_probe	20,000 calls: sizes 16,24,56,40,24,48 and sum 693304 on both; committed growth master 9 MB, restored 0 MB; wall master 3,070 ms, restored 276 ms	OmProbe.java, stock JDK 21 with jdk.internal.m3.M3ObjectMetrics patched and -Djdk.m3.native.path=<dll>
+gather_size	expand, shrink and expand+sorted identical on master and restored	GatherSize.java; GathererOp clears SIZED, so no stock-VM sink observes the old begin(size); kept as a defensive fix
+merge_cleanliness	3 RESTORE files = git merge-file output with rc=0 onto master	master blobs equal tw/<n>.ours at master 1d13daa5a16b; no java.base change on master since

@@ -1,0 +1,22 @@
+{
+  "command": [
+    "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/javac",
+    "-Xlint:all",
+    "-Werror",
+    "--add-modules",
+    "java.management,jdk.management",
+    "--add-reads",
+    "java.base=java.management",
+    "--add-reads",
+    "java.base=jdk.management",
+    "--patch-module",
+    "java.base=/dev/shm/m3jdk21-work/collection-classes:/dev/shm/m3jdk21-work/mask-candidates/test/jdk/java/util/Collections",
+    "-d",
+    "/dev/shm/m3jdk21-work/mask-candidates/qualification/collection-benchmark-classes",
+    "/dev/shm/m3jdk21-work/mask-candidates/test/jdk/java/util/Collections/M3CollectionViewsBenchmark.java"
+  ],
+  "exit_code": 0,
+  "stdout": "",
+  "stderr": "",
+  "source_sha256": "1ac002cd6862ffbdd1574ec7afc2270c0298e20bf47916ffe3a54e2d53bb742a"
+}

@@ -1,0 +1,7 @@
+SnapshotDiffTest	jdk.internal.m3.collections.SnapshotDiffTest
+PackedSemanticMachineTest	jdk.internal.m3.collections.packed.PackedSemanticMachineTest
+PackedSemanticRepairRegressionTest	jdk.internal.m3.collections.packed.PackedSemanticRepairRegressionTest
+PackedSemanticStorageInvariantTest	jdk.internal.m3.collections.packed.PackedSemanticStorageInvariantTest
+PackedU8Test	jdk.internal.m3.collections.packed.PackedU8Test
+CoreOpsTest	jdk.internal.m3.collections.CoreOpsTest
+DigestOpsTest	jdk.internal.m3.collections.DigestOpsTest

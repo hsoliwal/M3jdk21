@@ -1,0 +1,21 @@
+# SPDX-License-Identifier: Apache-2.0 OR EPL-2.0
+# Copyright (c) 2026 Synexia, Hitesh Soliwal (hsoliwal@gmail.com) and others
+alternation	scope	variant	double_ns	float_ns
+1	all	stock	872.06	880.03
+1	all	route	1470.35	1406.24
+1	all	exact	760.65	1314.82
+1	tohex	stock	306.72	287.28
+1	tohex	route	449.13	416.80
+1	tohex	exact	59.49	253.26
+2	all	stock	899.33	889.65
+2	all	route	1553.47	1427.35
+2	all	exact	645.33	1063.47
+2	tohex	stock	296.58	261.48
+2	tohex	route	326.94	318.08
+2	tohex	exact	55.60	205.52
+3	all	stock	817.59	774.40
+3	all	route	1313.00	1169.15
+3	all	exact	667.70	1059.96
+3	tohex	stock	238.99	263.78
+3	tohex	route	304.28	302.39
+3	tohex	exact	61.44	200.43

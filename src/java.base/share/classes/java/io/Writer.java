@@ -463,4 +463,39 @@ public abstract class Writer implements Appendable, Closeable, Flushable {
      */
     public abstract void close() throws IOException;
 
+
+    /**
+     * Writes bounded UTF-16 chunks, checking cancellation between calls.
+     * The borrowed monitor and writer remain caller-owned. Completed writes
+     * are credited once; a partially completed failing write cannot be
+     * measured exactly by this API.
+     *
+     * @param chars input characters
+     * @param offset source offset
+     * @param length number of characters
+     * @param monitor borrowed monitor
+     * @throws IOException on delegate failure
+     * @throws java.util.concurrent.CancellationException if cancelled
+     */
+    public void writeMonitored(char[] chars, int offset, int length,
+            java.util.concurrent.ProgressMonitor monitor) throws IOException {
+        Objects.requireNonNull(monitor, "monitor");
+        Objects.checkFromIndexSize(offset, length, chars.length);
+        monitor.checkCancelled();
+        if (length == 0) {
+            write(chars, offset, 0);
+            monitor.checkCancelled();
+            return;
+        }
+        int written = 0;
+        while (written < length) {
+            monitor.checkCancelled();
+            int count = Math.min(length - written, 8192);
+            write(chars, offset + written, count);
+            written += count;
+            monitor.worked(count);
+        }
+        monitor.checkCancelled();
+    }
+
 }

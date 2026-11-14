@@ -1,0 +1,49 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3AST first-fact source-exact Java21 performance admission
+
+on:
+  pull_request:
+    branches: [master]
+    paths:
+      - 'm3/ast/src/test/java/jdk/m3/ast/FactsFirstPerformanceProof.java'
+      - 'm3/ast/recipe/facts-first-performance-20261112/**'
+      - '.github/workflows/m3ast-first-lookup-performance-20261112.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  strict-java21-current-owner:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@cf277c60eb25467037889841efdb72551f06f6c3
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Exact source seal, correctness, and setup-inclusive benchmark
+        shell: bash
+        run: |
+          set -euo pipefail
+          sh m3/ast/recipe/facts-first-performance-20261112/verify.sh
+
+  isolated-maven-performance-proof:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@cf277c60eb25467037889841efdb72551f06f6c3
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Maven 21 current product source + benchmark verification
+        shell: bash
+        run: |
+          set -euo pipefail
+          mvn -B -ntp -f m3/ast/recipe/facts-first-performance-20261112/pom.xml verify

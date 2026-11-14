@@ -1,0 +1,3 @@
+old	new	status
+org.HdrHistogram.packedarray	com.m3.lib.hdrhistogram.packedarray	MOVE
+org.HdrHistogram	com.m3.lib.hdrhistogram	MOVE

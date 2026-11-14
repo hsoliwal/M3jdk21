@@ -1,0 +1,27 @@
+{
+  "schema": "m3-synexia-receiver-receipt-v1",
+  "source_repository": "hsoliwal/com.synexia",
+  "source_branch": "m3/string-literal-matches-recipe-20261008",
+  "source_recipe": "com.synexia.rewrite.M3Jdk21StringLiteralMatches",
+  "source_task_crate": "synexia-m3-recipe/task-crates/m3jdk21-string-literal-matches-20261008.yaml",
+  "donor_commit": "f66c68f3afb8634c6c03479ed3d6ecdc44196456",
+  "target_repository": "hsoliwal/M3jdk21",
+  "target_branch": "m3/string-literal-matches-receiver-20261008",
+  "target_preimage_sha256": "2454e7eb7cfd2609d2fdc5c93436ea03088b2313513a64ec5951e2709eedbf2f",
+  "target_postimage_sha256": "e65f83860028d0a587071d89f6c48680736a365c6b018372e82805cf013fed07",
+  "runtime_dependency_on_synexia": false,
+  "semantic_rules": [
+    "ordinary literals only",
+    "backslash always falls back to Pattern",
+    "all JDK visible metacharacters fall back to Pattern",
+    "null and invalid regex exception behavior remains Pattern-compatible",
+    "regex syntax ownership stays out of M3String"
+  ],
+  "verification": {
+    "source_checker": "m3/runtime-integration/check-m3string-literal-matches.py",
+    "jtreg": "test/jdk/java/lang/String/M3StringLiteralMatchesTest.java",
+    "jdk_build": "NOT_RUN",
+    "jtreg_run": "NOT_RUN",
+    "synexia_maven_recipe_test": "NOT_RUN"
+  }
+}

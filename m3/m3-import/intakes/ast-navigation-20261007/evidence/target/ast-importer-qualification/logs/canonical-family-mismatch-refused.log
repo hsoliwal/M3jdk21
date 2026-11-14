@@ -1,0 +1,5 @@
+Exception in thread "main" java.lang.IllegalArgumentException: M3Index category cannot claim IndexString family
+	at com.m3.synexia.importer.SynexiaCanonicalFamilyPolicy.requireCategoryFamily(SynexiaCanonicalFamilyPolicy.java:110)
+	at com.m3.synexia.importer.SynexiaImportManifest$Entry.<init>(SynexiaImportManifest.java:133)
+	at com.m3.synexia.importer.SynexiaImportManifest.parse(SynexiaImportManifest.java:83)
+	at com.m3.synexia.importer.SynexiaImportCli.main(SynexiaImportCli.java:18)

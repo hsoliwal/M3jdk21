@@ -1,0 +1,8 @@
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: jdk.m3.rewrite.backport.M3A3ReceiptProof
+displayName: Repair A3 canonical Synexia receipt proof
+description: Removes the stale legacy recipe-id assertion after A3 adopts the pinned Synexia canonical FILE convergence recipe.
+recipeList:
+  - jdk.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe:
+      crateName: m3-a3-receipt-id-proof

@@ -1,0 +1,9 @@
+gate	status	condition
+source identity	PASS	Current complete recipe src tree and POM matched GitHub before edits
+diff	PASS	Only declared test/configuration/docs/resources
+manifest checks	PASS	All active manifests parse and exact output hashes match
+Java syntax	PASS	Seven candidate Java files; no type-attribution assertion
+JUnit and OpenRewrite	PENDING	No deleted tests or disabled type/serialization flags
+coverage	PENDING	Do not change thresholds, includes or denominator to force success
+JEP458 materialization	PENDING	All26 output hashes retained; descriptor is explicit PlainText plus separate javac syntax probe
+product build and jtreg	NOT_RUN	Required to certify actual JDK functionality

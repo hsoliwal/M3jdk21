@@ -1,0 +1,14 @@
+{
+  "command": [
+    "java",
+    "-Xmx256m",
+    "-Xcheck:jni",
+    "--patch-module",
+    "java.base=/workspace/scratch/48c1329dbda8/m3jdk-collections-20261019/trial-01/java-mask/classes:/workspace/scratch/48c1329dbda8/m3jdk-collections-20261019/trial-01/java-mask/boot-classes",
+    "-Xint",
+    "java.util.M3CollectionDenseTest",
+    "java"
+  ],
+  "exit": 0,
+  "log_sha256": "891c142982d86afdadb30125d54edb5dc39ad8392886115c145cfff8d3eb4f89"
+}

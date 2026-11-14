@@ -1,0 +1,235 @@
+{
+  "schema": "m3-current-map-validation-receipt-closure/1",
+  "selected_test_ids": [
+    "prefix-z-interpreter",
+    "prefix-z-normal"
+  ],
+  "matched_runs": 2,
+  "closure_paths": [
+    {
+      "path": "m3/algorithms/src/jdk/m3/algorithm/M3PrefixZ.java",
+      "references": [
+        {
+          "role": "receipt-input",
+          "test_id": "prefix-z-interpreter",
+          "expected_sha256": "5f936a3c6e69ca487eff6a0665ada01546750d9d87ce85ee50a337a4236233d0"
+        },
+        {
+          "role": "receipt-input",
+          "test_id": "prefix-z-normal",
+          "expected_sha256": "5f936a3c6e69ca487eff6a0665ada01546750d9d87ce85ee50a337a4236233d0"
+        }
+      ]
+    },
+    {
+      "path": "m3/algorithms/test/PrefixZContractTest.java",
+      "references": [
+        {
+          "role": "receipt-input",
+          "test_id": "prefix-z-interpreter",
+          "expected_sha256": "42dab983d9ab5feb4dddd374997c550af27e879c48240598398926b73faf6b49"
+        },
+        {
+          "role": "receipt-input",
+          "test_id": "prefix-z-normal",
+          "expected_sha256": "42dab983d9ab5feb4dddd374997c550af27e879c48240598398926b73faf6b49"
+        }
+      ]
+    },
+    {
+      "path": "m3/algorithms/test/ViewInteropContractTest.java",
+      "references": [
+        {
+          "role": "receipt-input",
+          "test_id": "prefix-z-interpreter",
+          "expected_sha256": "ff9b39ee4b483cd65d7d641a2eba852044d0527a84f2987d592dc106e313d63b"
+        },
+        {
+          "role": "receipt-input",
+          "test_id": "prefix-z-normal",
+          "expected_sha256": "ff9b39ee4b483cd65d7d641a2eba852044d0527a84f2987d592dc106e313d63b"
+        }
+      ]
+    },
+    {
+      "path": "m3/core/src/jdk/m3/text/JoinedM3StringPiece.java",
+      "references": [
+        {
+          "role": "receipt-input",
+          "test_id": "prefix-z-interpreter",
+          "expected_sha256": "1655c02a61577f8aebed59b94c92701be835c4c7ebaf80efa3c71271a4bd75d7"
+        },
+        {
+          "role": "receipt-input",
+          "test_id": "prefix-z-normal",
+          "expected_sha256": "1655c02a61577f8aebed59b94c92701be835c4c7ebaf80efa3c71271a4bd75d7"
+        }
+      ]
+    },
+    {
+      "path": "m3/core/src/jdk/m3/text/LocalM3Arena.java",
+      "references": [
+        {
+          "role": "receipt-input",
+          "test_id": "prefix-z-interpreter",
+          "expected_sha256": "e9573e7f04a875eb7bda7d3554a57653ebd655f66ac67be724b366092e76afc4"
+        },
+        {
+          "role": "receipt-input",
+          "test_id": "prefix-z-normal",
+          "expected_sha256": "e9573e7f04a875eb7bda7d3554a57653ebd655f66ac67be724b366092e76afc4"
+        }
+      ]
+    },
+    {
+      "path": "m3/core/src/jdk/m3/text/LocalM3StringPiece.java",
+      "references": [
+        {
+          "role": "receipt-input",
+          "test_id": "prefix-z-interpreter",
+          "expected_sha256": "77fd1cbeae4dc20a4c23497102cb7c44ec14adbdd6bbf328326957515a7858ad"
+        },
+        {
+          "role": "receipt-input",
+          "test_id": "prefix-z-normal",
+          "expected_sha256": "77fd1cbeae4dc20a4c23497102cb7c44ec14adbdd6bbf328326957515a7858ad"
+        }
+      ]
+    },
+    {
+      "path": "m3/core/src/jdk/m3/text/M3StringPiece.java",
+      "references": [
+        {
+          "role": "receipt-input",
+          "test_id": "prefix-z-interpreter",
+          "expected_sha256": "7ed45335bea7dc1107d4c28ca505ad334c845685f099af0df3e3112c411a7755"
+        },
+        {
+          "role": "receipt-input",
+          "test_id": "prefix-z-normal",
+          "expected_sha256": "7ed45335bea7dc1107d4c28ca505ad334c845685f099af0df3e3112c411a7755"
+        }
+      ]
+    },
+    {
+      "path": "m3/core/src/jdk/m3/text/StorageIdentity.java",
+      "references": [
+        {
+          "role": "receipt-input",
+          "test_id": "prefix-z-interpreter",
+          "expected_sha256": "f6897d5ddd7f39cc0d94bdc1b4db8b695b1946bc65672fb6c0408fa110c1b354"
+        },
+        {
+          "role": "receipt-input",
+          "test_id": "prefix-z-normal",
+          "expected_sha256": "f6897d5ddd7f39cc0d94bdc1b4db8b695b1946bc65672fb6c0408fa110c1b354"
+        }
+      ]
+    },
+    {
+      "path": "m3/migration/evidence/local-20261002-final/prefix-z-interpreter.log",
+      "references": [
+        {
+          "role": "receipt-stdout",
+          "test_id": "prefix-z-interpreter",
+          "expected_sha256": "67eee524a18f5dcbb9793a54c338504293fbc8a8f01baba714029966c02ae780"
+        }
+      ]
+    },
+    {
+      "path": "m3/migration/evidence/local-20261002-final/prefix-z-normal.log",
+      "references": [
+        {
+          "role": "receipt-stdout",
+          "test_id": "prefix-z-normal",
+          "expected_sha256": "67eee524a18f5dcbb9793a54c338504293fbc8a8f01baba714029966c02ae780"
+        }
+      ]
+    },
+    {
+      "path": "m3/migration/pinned-dependencies.json",
+      "references": [
+        {
+          "role": "receipt-input",
+          "test_id": "prefix-z-interpreter",
+          "expected_sha256": "3e1365e45d01177a1e1b4793c208e1f6c5d2547a21c22a0521b73e012ffcfd6e"
+        },
+        {
+          "role": "receipt-input",
+          "test_id": "prefix-z-normal",
+          "expected_sha256": "3e1365e45d01177a1e1b4793c208e1f6c5d2547a21c22a0521b73e012ffcfd6e"
+        }
+      ]
+    },
+    {
+      "path": "m3/migration/run-tests.py",
+      "references": [
+        {
+          "role": "receipt-input",
+          "test_id": "prefix-z-interpreter",
+          "expected_sha256": "491041a68163a6a6c53908f685d1bee3153c782d150057d7235a3d4dc61c00dd"
+        },
+        {
+          "role": "receipt-input",
+          "test_id": "prefix-z-normal",
+          "expected_sha256": "491041a68163a6a6c53908f685d1bee3153c782d150057d7235a3d4dc61c00dd"
+        }
+      ]
+    },
+    {
+      "path": "m3/migration/src/jdk/m3/migration/ExactFileRecipe.java",
+      "references": [
+        {
+          "role": "receipt-input",
+          "test_id": "prefix-z-interpreter",
+          "expected_sha256": "d094fc40909639119828b78f5f1635c51263e6aa177a159ac05de7ee8b8871ee"
+        },
+        {
+          "role": "receipt-input",
+          "test_id": "prefix-z-normal",
+          "expected_sha256": "d094fc40909639119828b78f5f1635c51263e6aa177a159ac05de7ee8b8871ee"
+        }
+      ]
+    },
+    {
+      "path": "m3/migration/test/RecipeContractTest.java",
+      "references": [
+        {
+          "role": "receipt-input",
+          "test_id": "prefix-z-interpreter",
+          "expected_sha256": "4720a7d949654c5fcc536703b272c31d8b38d9ef7b9b0d5bd4309e63daaac745"
+        },
+        {
+          "role": "receipt-input",
+          "test_id": "prefix-z-normal",
+          "expected_sha256": "4720a7d949654c5fcc536703b272c31d8b38d9ef7b9b0d5bd4309e63daaac745"
+        }
+      ]
+    }
+  ],
+  "unique_closure_paths": 14,
+  "additional_paths": [
+    "m3/algorithms/test/PrefixZContractTest.java",
+    "m3/algorithms/test/ViewInteropContractTest.java",
+    "m3/core/src/jdk/m3/text/JoinedM3StringPiece.java",
+    "m3/core/src/jdk/m3/text/LocalM3Arena.java",
+    "m3/core/src/jdk/m3/text/LocalM3StringPiece.java",
+    "m3/core/src/jdk/m3/text/M3StringPiece.java",
+    "m3/core/src/jdk/m3/text/StorageIdentity.java",
+    "m3/migration/evidence/local-20261002-final/prefix-z-interpreter.log",
+    "m3/migration/evidence/local-20261002-final/prefix-z-normal.log",
+    "m3/migration/pinned-dependencies.json",
+    "m3/migration/run-tests.py",
+    "m3/migration/src/jdk/m3/migration/ExactFileRecipe.java",
+    "m3/migration/test/RecipeContractTest.java"
+  ],
+  "ignored_unselected_receipt_runs": [
+    "javac21",
+    "view-interop-normal",
+    "view-interop-interpreter",
+    "exact-recipe-contract",
+    "migration-validator",
+    "stock-string-surface"
+  ],
+  "scope": "Only input and stdout paths of the two runs selected by the current map; no commands executed."
+}

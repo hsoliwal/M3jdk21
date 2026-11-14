@@ -1,0 +1,9 @@
+{
+  "stage": "COMPILE",
+  "generated_headers_identical": {
+    "com_m3_collections_M3IndexMaskCompactor.h": "60284925265d8ec7300dcb1a97436db82ca29b18e902f8fb5835f0a9b933537e",
+    "com_m3_collections_M3IndexMaskWindow.h": "8a98ee9e6da71b86ffe84223fc0c09ab2e206f1f4ae1e49320e234206d172c11",
+    "com_m3_collections_M3LongAddressKernel.h": "688b0b0ff74d311c1f805e64bfc408bac33e21fd42512daae4d12355406c8279"
+  },
+  "exported_JNI_names_and_symbol_types_unchanged": true
+}

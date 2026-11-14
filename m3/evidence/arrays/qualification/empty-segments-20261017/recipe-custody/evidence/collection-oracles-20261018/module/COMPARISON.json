@@ -1,0 +1,62 @@
+{
+  "schema": "M3_COLLECTION_ORACLE_FRESH_MODULE_COMPARISON_V1",
+  "baseline": "0efc1719ca5766aead09f4f7c49f5067975bd946",
+  "datasets": [
+    "m3jdk21-progress-percent",
+    "m3jdk21-collection-oracles"
+  ],
+  "before_tests": 225,
+  "before_failures": 4,
+  "after_tests": 226,
+  "after_failures": 0,
+  "after_errors": 0,
+  "after_skipped": 0,
+  "retained_original_suites": 72,
+  "original_test_counts_unchanged": true,
+  "new_suites": [
+    "com.m3.collections.M3ProgressAdaptersPercentageTest"
+  ],
+  "new_suite_reason": "separately qualified M3 progress percentage regression",
+  "affected_suites": {
+    "com.m3.collections.M3StoredRepresentativeTest": {
+      "before": {
+        "tests": 1,
+        "failures": 1,
+        "errors": 0,
+        "skipped": 0
+      },
+      "after": {
+        "tests": 1,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    "com.m3.collections.M3LongTreeSetTest": {
+      "before": {
+        "tests": 7,
+        "failures": 3,
+        "errors": 0,
+        "skipped": 0
+      },
+      "after": {
+        "tests": 7,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    }
+  },
+  "production_owners_unchanged": {
+    "m3/collections/src/main/java/jdk/m3/collections/M3LongTreeSet.java": "557f860336582b3f38e4179a3d22c77f41cb17251334fc74fed993c0b1b9fb0c",
+    "m3/collections/src/main/java/jdk/m3/collections/M3LongSortedViews.java": "61ab2775b943a40d393a1f553b667a5463f2755a1c5697c60499e5c3cbaeee8e",
+    "m3/collections/src/main/java/jdk/m3/collections/M3FilteredViews.java": "372e40bf4e12f0dd7a614388786ed7c9c7d92d848bdd63de099b9f7176657dba"
+  },
+  "owning_pom_unchanged_sha256": "98f6315a27af070fba3d372427b74cec51812ee096940a02d8a4d679eb508064",
+  "sdk_input_sha256": "7994125b72e94a5b1dc90bfad98f9bed9ad8b3ec6aac6df742c4a5428f8e5d77",
+  "sdk_result_sha256": "bb8b783d2d5c56ba2d02ac75a47e85ce404a5ddd3270f3baa16c64e07c9e31c5",
+  "scope": "three M3 collection owners retained exactly; percentage owner is a separate recipe and is identified in the module receipt",
+  "module_receipt_sha256": "c2c812459b403fb15deee4545a88d8078c07d0b6f1f153d7b0debcf31bc6611f",
+  "original_failure_receipt_sha256": "206aae4a4174909e897c445a7b4cdb5347cc5e9dfb04c2c6698efaf9364305bc",
+  "status": "PASS"
+}

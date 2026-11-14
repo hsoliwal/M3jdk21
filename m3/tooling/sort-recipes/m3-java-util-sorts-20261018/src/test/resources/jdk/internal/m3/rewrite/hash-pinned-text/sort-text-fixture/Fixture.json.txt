@@ -1,0 +1,1 @@
+{"code":"for (;;) { return 999; }","literal":"regex \\bword\\b"}

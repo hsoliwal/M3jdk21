@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<!-- Copyright 2026 Hitesh Soliwal and contributors -->
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.m3</groupId>
+  <artifactId>m3-optane</artifactId>
+  <version>0.1.0-SNAPSHOT</version>
+  <name>M3JDK :: Optane</name>
+  <description>Maven control bridge org.m3jdk.optane over the jdk.m3.io product sources: Memory Mode planning (MemoryModeProfile, ScanPlan,
+    ProgressMonitor), mapped-read advice (MappedReadAdvice, optional Linux JNI library m3optane) and the fail-closed,
+    file-backed persistent-memory region family PmemSdk, PmemRegion, PmemMapping, PmemTransfer, PmemSearch
+    (FILE backend in pure Java; POSIX and optional PMDK backends through the JNI library m3pmemsdk, C17, Linux). Java
+    21, no runtime dependency outside java.base. The JNI libraries under src/jdk.m3.io/share/native/libm3optane
+    are built by make/m3/optane/CMakeLists.txt or the product module's ordinary JDK native build phase
+    (option M3_OPTANE_PMDK, default OFF: libpmem2 is never required and never shipped) and loaded at run time through
+    System.loadLibrary; every FILE path is exact without them. Historical PMem relocation provenance from
+    hsoliwal/com.synexia m3-pmem-sdk remains under recipe/pmem-region-core-20261106; current recipe authoring and
+    execution belong to Synexia. The JUnit oracles run in the test phase (the native lanes only with the
+    profile m3-optane-native and the library on java.library.path).</description>
+  <properties>
+    <maven.compiler.release>21</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <junit.artifact.version>5.11.4</junit.artifact.version>
+    <!-- directory holding libm3pmemsdk.so (and libm3optane.so); the CMake project's build directory -->
+    <m3.optane.library.path>${project.build.directory}/native</m3.optane.library.path>
+    <!-- the native lanes of the donor oracles: the 19 POSIX atoms, the KMP prefix test and the three FILE-oracle
+         methods that also open a POSIX region; excluded (surefire test filter, the only parameter that takes method
+         patterns) unless the profile m3-optane-native supplies the library; the source-slices oracles
+         (recipe/pmem-source-image-20261106) map POSIX regions only -->
+    <!-- PmemAcceleratorJUnitTest (recipe/pmem-accelerator-20261107) needs libm3pmemaccel.so: native profile only -->
+    <m3.optane.test.filter>!PmemAcceleratorJUnitTest, !PmemAtomCorrectnessJUnitTest, !PmemNativeKmpPrefix32JUnitTest, !PmemSourceSlicesJUnitTest, !PmemSourceSlicesLifecycleJUnitTest, !PmemFileBackendJUnitTest#randomizedSearchTransferAndNativeDifferential+overlappingMemmoveAliasesAndFileToFile+pathReplacementDoesNotBypassAliasRefusal</m3.optane.test.filter>
+    <!-- the oracles write sparse files above 2 GiB (NTFS fills the gap): temporary files go next to the build output,
+         never to the system temporary directory; implicit exceptions keep their messages (no fast throw), so the
+         replay digests of the dump drivers are reproducible -->
+    <m3.optane.surefire.argLine>-XX:-OmitStackTraceInFastThrow -Djava.io.tmpdir=${project.build.directory} -Djava.library.path=${m3.optane.library.path}</m3.optane.surefire.argLine>
+  </properties>
+  <dependencies>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter</artifactId>
+      <version>${junit.artifact.version}</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+  <build>
+    <plugins>
+      <!-- MOVE_TO_JDK_MODULE v3 (keep-pom mode, m3/tooling/jdk-naming/move_module_area.py): the sources live in the
+           JDK module src/jdk.m3.io and the tests in test/jdk; this pom keeps its own configuration and adds them. -->
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>build-helper-maven-plugin</artifactId>
+        <version>3.6.1</version>
+        <executions>
+          <execution>
+            <id>jdk-module-sources</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>add-source</goal>
+            </goals>
+            <configuration>
+              <sources>
+                <source>${project.basedir}/../../src/jdk.m3.io/share/classes/jdk/internal/m3/optane</source>
+                <source>${project.basedir}/../../src/jdk.m3.io/share/classes/jdk/m3/optane</source>
+              </sources>
+            </configuration>
+          </execution>
+          <execution>
+            <id>jdk-module-test-sources</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>add-test-source</goal>
+            </goals>
+            <configuration>
+              <sources>
+                <source>${project.basedir}/../../test/jdk/jdk/internal/m3/optane</source>
+                <source>${project.basedir}/../../test/jdk/jdk/m3/optane</source>
+              </sources>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.13.0</version>
+        <configuration>
+          <release>21</release>
+          <proc>none</proc>
+          <compilerArgs>
+            <!-- every lint, warnings are errors: the same gate as m3/optane/verify.sh before the family arrived -->
+            <arg>-Xlint:all</arg>
+            <arg>-Werror</arg>
+          </compilerArgs>
+        </configuration>
+        <executions>
+          <execution>
+            <id>default-testCompile</id>
+            <configuration>
+              <!-- the donor oracles are classpath code in the owners' package (the donor ran them on the classpath
+                   of its named module too); surefire runs them on the classpath as well -->
+              <useModulePath>false</useModulePath>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>3.5.4</version>
+        <configuration>
+          <useModulePath>false</useModulePath>
+          <trimStackTrace>false</trimStackTrace>
+          <argLine>${m3.optane.surefire.argLine}</argLine>
+          <test>${m3.optane.test.filter}</test>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>3.4.2</version>
+      </plugin>
+    </plugins>
+  </build>
+  <profiles>
+    <profile>
+      <!-- the native lanes (Linux, all three JNI libraries built by make/m3/optane/CMakeLists.txt into
+           ${m3.optane.library.path}): mvn -Pm3-optane-native -Dm3.optane.library.path=DIR -f m3/optane/pom.xml test -->
+      <id>m3-optane-native</id>
+      <properties>
+        <m3.optane.test.filter>*Test</m3.optane.test.filter>
+        <m3.optane.surefire.argLine>-Xcheck:jni -XX:-OmitStackTraceInFastThrow -Dpmem.streaming.native=true -Dpmem.source.reuse.native=true -Dpmem.gram.native=true -Dpmem.corpus.selected.native=true -Dpmem.corpus.native=true -Dpmem.accelerator.native=true -Djava.io.tmpdir=${project.build.directory} -Djava.library.path=${m3.optane.library.path}</m3.optane.surefire.argLine>
+      </properties>
+    </profile>
+    <profile>
+      <!-- the JMOD/jlink verifier (verify.sh: javac, C17 JNI on Linux, jar, jmod, jlink, linked-image contracts);
+           it was the module's whole build before the family arrived and needs a full JDK 21 with jmods -->
+      <id>m3-optane-jmod</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>exec-maven-plugin</artifactId>
+            <version>3.1.0</version>
+            <executions>
+              <execution>
+                <id>java-jni-jmod-contracts</id>
+                <phase>verify</phase>
+                <goals>
+                  <goal>exec</goal>
+                </goals>
+                <configuration>
+                  <executable>bash</executable>
+                  <arguments>
+                    <argument>${project.basedir}/verify.sh</argument>
+                  </arguments>
+                  <environmentVariables>
+                    <M3_OPTANE_BUILD>${project.build.directory}/verified</M3_OPTANE_BUILD>
+                  </environmentVariables>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
+</project>

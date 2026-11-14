@@ -1,0 +1,33 @@
+{
+  "schema": "m3-single-file-put-validation-before/v1",
+  "status": "ADMITTED_FOR_ORIGINAL_FIRST_REFINEMENT_NOT_IMPLEMENTED",
+  "taskCapBytes": 196608,
+  "preimage": {
+    "path": "S:\\codex-work\\m3-collections-next-20261018\\m3-tree-lookup-validation-20261018\\src\\main\\java\\com\\m3\\collections\\M3TreeMap.java",
+    "bytes": 27724,
+    "sha256": "21dc9a2eed607c55b1ff4d49ffef5e19b3bac43b591b62e13191791cabbc3b41"
+  },
+  "targetBaseCommit": "f19934e045f7e0f896704940a786106153ad4dc2",
+  "owner": "M3TreeMap.put only",
+  "problem": "Four frozen current Eclipse reverse-comparator prefix cases reveal redundant key-self comparisons during ordinary insertion",
+  "failureReceipt": {
+    "path": "S:\\codex-work\\m3-collections-next-20261018\\ec-current-owner-public-delta-independent-20261019\\RESULT.json",
+    "bytes": 13714,
+    "sha256": "3f33eb2c5cd9abebd4e427b8998202e18fdb3389552e048c06ba2ae73a4f5b72"
+  },
+  "intendedBehavior": "Keep first-key validation and bounded/lazy behavior; ordinary nonempty root insertion compares against visited keys without a preliminary callback",
+  "publicInterfacesUnchanged": true,
+  "newArchitecture": false,
+  "candidateEditBlockedUntil": "New actual JDK21 ORIGINAL put calibration sealed",
+  "excluded": "No red-black/AVL shape equivalence claim; no singleton stale iterator shim; no peak-performance claim; no JNI ABI changes",
+  "storageBefore": {
+    "root": "S:\\codex-work\\m3-collections-next-20261018",
+    "free_bytes": 22605438976,
+    "logical_bytes": 533018717,
+    "cap_bytes": 536870912,
+    "reserve_bytes": 8589934592,
+    "verified_child_temp": "S:\\codex-work\\m3-collections-next-20261018\\temp\\",
+    "C_build_lane": "HELD",
+    "K_temp_lane": "UNAVAILABLE"
+  }
+}

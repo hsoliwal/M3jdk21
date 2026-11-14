@@ -1,0 +1,73 @@
+{
+  "schema": "M3_ORIGINAL_MAPPING_PROVIDER_RECEIVER_BINDING_V1",
+  "repository": "hsoliwal/com.synexia",
+  "sourceCommit": "f44400ead6a4c65e9bb9fc371a5b1c2deecc9c6b",
+  "sourcePullRequest": 12264,
+  "sourcePath": "m3-openrewrite-recipes/recipes/m3-original-mapping-provider-20261017/sdk",
+  "receiverCorePath": "m3/migration/original-provider-20261017/sdk",
+  "moduleGitTree": "0d2225996145946737eb5f06f19bed2ffe4b825b",
+  "pinsSha256": "0904fb6218a179edba6e148a612a9cf411b2da672f3cde7d06abed7195bd1adc",
+  "workflowSha256": "cf50454866b05d902ce6712b3152ee1f8217298cd0755b30838e048ba7783742",
+  "workflowGitBlob": "7c4771e658aebf110aa184c7a289e623ac7e3118",
+  "receiverBase": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
+  "originalCanonicalPreimageGitBlob": "986147e2df24ef25076d451c49782d8e7e354a11",
+  "canonicalRecipePostimageGitBlob": "1a441d86ddd17b0d51ba32b9cbf82a2b421a623c",
+  "runtimeApplied": false,
+  "phaseAdvanced": false,
+  "previousQualifiedBinding": {
+    "sourceCommit": "525e0c3704f8c4b4d9eef54799d1b4c947e37b5f",
+    "moduleGitTree": "638520715ffb00255639cb1e6667494bab729b53",
+    "pinsSha256": "75f37d1093f5fd3d657de32bcab672f725f6391b4c59910aece1c2ff238951d7",
+    "workflowGitBlob": "edad663b2e4a51e22a5e25954df237192e5b8d08",
+    "receiverQualifiedHead": "924b88d8979ac5f904c88e7c33d7cec2e2917e3e",
+    "run": 39099435918
+  },
+  "frozenPre": {
+    "manifestSha256": "643d49f323068e6d4efc30726f7b80bf5c954c17259a32a623d3d792809517de",
+    "files": 55,
+    "bytes": 795367
+  },
+  "candidateExecution": "QUALIFIED_RECIPE_OUTPUTS_RECEIVED; POST_CHECKOUT_HEAD_NOT_RUN",
+  "canonicalProductionMapApplied": true,
+  "dataOutputScope": "DRAFT_BRANCH_ONLY; DEFAULT_UNPROMOTED; JDK_RUNTIME_NOT_APPLIED",
+  "dataOutputs": [
+    {
+      "path": "m3/docs/name-mapping.json",
+      "gitBlob": "1a441d86ddd17b0d51ba32b9cbf82a2b421a623c",
+      "sha256": "1c396776ac7313695609384b5ad3abc98f15f4bde48af3bb26915f933d098663",
+      "bytes": 441047,
+      "kind": "CHANGE"
+    },
+    {
+      "path": "m3/migration/provider/python312-linux-x86_64/bootstrap.py",
+      "gitBlob": "ae3b685d8f3731ad38ba59135a9c399c0a416d20",
+      "sha256": "3875e91c82afd6712a3cc50f76cd7f317721839f69870c4c7dce0cfe8f455a34",
+      "bytes": 42501,
+      "kind": "ADD"
+    },
+    {
+      "path": "m3/migration/provider/python312-linux-x86_64/previous-name-mapping.json",
+      "gitBlob": "d3d454d9a7891585d665f58b404989820ea751a4",
+      "sha256": "15629167d5f6d5f6999225a4ebd9b16b56943477c27701259048ac670d232fc4",
+      "bytes": 399438,
+      "kind": "ADD"
+    },
+    {
+      "path": "m3/migration/provider/python312-linux-x86_64/test_bootstrap.py",
+      "gitBlob": "537e6701ebde8e064d69425c5dd144df614577d3",
+      "sha256": "301727f395b772328c7e311fd0a7562deeb1ad938c9f4d4f0fc912eb83c39456",
+      "bytes": 29770,
+      "kind": "ADD"
+    },
+    {
+      "path": "m3/migration/provider/python312-linux-x86_64/wheels.lock.json",
+      "gitBlob": "4a14a37652fc32b5251c9e99387e737b21852ebd",
+      "sha256": "808e9471ebab14659401fd592538df7b0096c166c3410014e43d21747918af50",
+      "bytes": 10099,
+      "kind": "ADD"
+    }
+  ],
+  "qualifiedRecipeHead": "613e5ff4385146ee0326ca4a5820fd11bed793e1",
+  "qualifiedRun": 39102078256,
+  "qualificationEvidenceSourceCommit": "4a36a64840c3aaa795e15a909dd3885ea64a5b2a"
+}

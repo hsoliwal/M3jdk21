@@ -1,0 +1,11 @@
+java/lang/String/M3StringCanonicalDagTest.java         Passed. Execution successful
+java/lang/String/M3StringFactsCompositionTest.java     Passed. Execution successful
+java/lang/String/M3StringHierarchicalRegexTest.java    Failed. Execution failed: `main' threw exception: java.lang.NoSuchFieldException: RELATION_ACCESS
+java/lang/String/M3StringLeafCursorCanonicalTest.java  Passed. Execution successful
+java/lang/String/M3StringOwnerRangeLifetimeTest.java   Failed. Execution failed: `main' threw exception: java.lang.AssertionError: nested content
+java/lang/String/M3StringRegexEffectsTest.java         Failed. Execution failed: `main' threw exception: java.lang.NoSuchFieldException: caches
+java/lang/String/M3StringRegexNativeBridgeTest.java    Passed. Execution successful
+java/lang/String/M3StringRegexPowerTest.java           Passed. Execution successful
+java/lang/String/M3StringRegexReuseTest.java           Passed. Execution successful
+java/lang/String/M3StringRegexRowPrecomputeTest.java   Failed. Execution failed: `main' threw exception: java.lang.AssertionError: M3 regex precompute oracle mismatch #1
+java/lang/String/M3StringRegexUtf16Test.java           Passed. Execution successful

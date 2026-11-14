@@ -1,0 +1,7 @@
+final class java.util.concurrent.ProgressMonitors$WeightedChild implements java.util.concurrent.ProgressMonitor {
+  public void worked(long);
+  public void message(java.lang.String);
+  public boolean isCancelled();
+  public void cancel();
+  public void done();
+}

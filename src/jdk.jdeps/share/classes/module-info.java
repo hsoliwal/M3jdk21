@@ -65,5 +65,6 @@ module jdk.jdeps {
 
     provides java.util.spi.ToolProvider with
         com.sun.tools.javap.Main.JavapToolProvider,
-        com.sun.tools.jdeps.Main.JDepsToolProvider;
+        com.sun.tools.jdeps.Main.JDepsToolProvider,
+        com.sun.tools.jdeps.M3BuildClassDeps;
 }

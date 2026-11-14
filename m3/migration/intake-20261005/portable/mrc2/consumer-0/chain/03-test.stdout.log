@@ -1,0 +1,36 @@
+{"stage": "test", "commandIndex": 1, "executable": "/workspace/scratch/5809f5dce3dd/provider-superset-20261005/toolchain/apache-maven-3.9.9/bin/mvn"}
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ---< com.synexia.verification:mre-lab-current-candidate-v4-20261005 >---
+[INFO] Building Canonical M3 recipe mastery Lab qualification 1.0.0
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- surefire:3.2.5:test (default-cli) @ mre-lab-current-candidate-v4-20261005 ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running com.synexia.rewrite.M3RecipeMasteryLiveSupersetTest
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.283 s -- in com.synexia.rewrite.M3RecipeMasteryLiveSupersetTest
+[INFO] Running com.synexia.rewrite.M3ClosureCompatibilityTest
+[INFO] Tests run: 13, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 8.758 s -- in com.synexia.rewrite.M3ClosureCompatibilityTest
+[INFO] Running com.synexia.rewrite.M3RecipeMasteryIsolationTest
+[INFO] Tests run: 18, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 20.91 s -- in com.synexia.rewrite.M3RecipeMasteryIsolationTest
+[INFO] Running com.synexia.rewrite.M3RecipeConvergenceLabControlFlowTest
+M3_PRECOMPUTE domain=16 entries=16 warmBaselineOperations=120 warmCandidateOperations=16 coldPreparationIncluded=false runtimeSpeedupClaim=false
+M3_CANONICAL_CONTROL_CORPUS projects=36 inputsPerProbe=9 passLimit=6
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 20.50 s -- in com.synexia.rewrite.M3RecipeConvergenceLabControlFlowTest
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 39, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  55.102 s
+[INFO] Finished at: 2026-10-05T12:34:47+02:00
+[INFO] ------------------------------------------------------------------------
+{"status": "ACTUAL_SUREFIRE_REPORTS", "totals": {"tests": 39, "failures": 0, "errors": 0, "skipped": 0}, "suites": {"com.synexia.rewrite.M3ClosureCompatibilityTest": {"counts": {"tests": 13, "failures": 0, "errors": 0, "skipped": 0}, "report": "TEST-com.synexia.rewrite.M3ClosureCompatibilityTest.xml", "sha256": "f3cc4675fda6a9b6788c1f95df4894a9e61af58e61bbb797f35176f549b17dff"}, "com.synexia.rewrite.M3RecipeConvergenceLabControlFlowTest": {"counts": {"tests": 5, "failures": 0, "errors": 0, "skipped": 0}, "report": "TEST-com.synexia.rewrite.M3RecipeConvergenceLabControlFlowTest.xml", "sha256": "47510f3681df9f55c486a3e127ecfe9b8eb2236eff9cb894f7996f472a11644f"}, "com.synexia.rewrite.M3RecipeMasteryIsolationTest": {"counts": {"tests": 18, "failures": 0, "errors": 0, "skipped": 0}, "report": "TEST-com.synexia.rewrite.M3RecipeMasteryIsolationTest.xml", "sha256": "4387c678877b5e72faed27a12e728863b0088970ba8ac01f66e23b51b8c6a62c"}, "com.synexia.rewrite.M3RecipeMasteryLiveSupersetTest": {"counts": {"tests": 3, "failures": 0, "errors": 0, "skipped": 0}, "report": "TEST-com.synexia.rewrite.M3RecipeMasteryLiveSupersetTest.xml", "sha256": "17d4037ad9d45dff4d6288a8db4e79142462abc594218b123994428dfb6f064d"}}}

@@ -1,0 +1,529 @@
+TYPE	jdk.m3.precompute.M3CodeTextSignalBatch	jdk.m3.precompute.CodeTextSignalBatch
+TYPE	jdk.m3.precompute.M3CodeTextSignalBatchJava	jdk.m3.precompute.CodeTextSignalBatchJava
+TYPE	jdk.m3.precompute.M3CodeTextSignalBatchNative	jdk.m3.precompute.CodeTextSignalBatchNative
+TYPE	jdk.m3.precompute.M3CodeTextSignals	jdk.m3.precompute.CodeTextSignals
+TYPE	jdk.m3.precompute.M3CodeTextSignalsTest	jdk.m3.precompute.CodeTextSignalsTest
+TYPE	jdk.m3.precompute.M3CpuToolImage	jdk.m3.precompute.CpuToolImage
+TYPE	jdk.m3.precompute.M3CpuToolImageCompiler	jdk.m3.precompute.CpuToolImageCompiler
+TYPE	jdk.m3.precompute.M3CpuToolNativeSignals	jdk.m3.precompute.CpuToolNativeSignals
+TYPE	jdk.m3.precompute.M3CpuToolPlan	jdk.m3.precompute.CpuToolPlan
+TYPE	jdk.m3.precompute.M3CpuToolPrecomputeSelfTest	jdk.m3.precompute.CpuToolPrecomputeSelfTest
+TYPE	jdk.m3.precompute.M3CpuToolPrecomputeTest	jdk.m3.precompute.CpuToolPrecomputeTest
+TYPE	jdk.m3.precompute.M3CpuToolRuntime	jdk.m3.precompute.CpuToolRuntime
+TYPE	jdk.m3.precompute.M3DistanceFrontierTest	jdk.m3.precompute.DistanceFrontierTest
+TYPE	jdk.m3.precompute.M3EditDistancePlan	jdk.m3.precompute.EditDistancePlan
+TYPE	jdk.m3.precompute.M3EditDistancePlanBitParallelTest	jdk.m3.precompute.EditDistancePlanBitParallelTest
+TYPE	jdk.m3.precompute.M3EditDistancePlanBoundaryTest	jdk.m3.precompute.EditDistancePlanBoundaryTest
+TYPE	jdk.m3.precompute.M3EditDistancePlanOracle	jdk.m3.precompute.EditDistancePlanOracle
+TYPE	jdk.m3.precompute.M3EditDistancePlanProofTest	jdk.m3.precompute.EditDistancePlanProofTest
+TYPE	jdk.m3.precompute.M3EditDistancePlanTest	jdk.m3.precompute.EditDistancePlanTest
+TYPE	jdk.m3.precompute.M3FrozenLongTupleIndex	jdk.m3.precompute.FrozenLongTupleIndex
+TYPE	jdk.m3.precompute.M3FrozenLongTupleIndexPairRegressionTest	jdk.m3.precompute.FrozenLongTupleIndexPairRegressionTest
+TYPE	jdk.m3.precompute.M3Histogram	jdk.m3.precompute.Histogram
+TYPE	jdk.m3.precompute.M3IndexPrecomputeAccelerator	jdk.m3.precompute.IndexPrecomputeAccelerator
+TYPE	jdk.m3.precompute.M3IndexPrecomputeAccelerators	jdk.m3.precompute.IndexPrecomputeAccelerators
+TYPE	jdk.m3.precompute.M3IndexPrecomputeCandidate	jdk.m3.precompute.IndexPrecomputeCandidate
+TYPE	jdk.m3.precompute.M3IndexPrecomputeCapability	jdk.m3.precompute.IndexPrecomputeCapability
+TYPE	jdk.m3.precompute.M3IndexPrecomputeConsumerProfiles	jdk.m3.precompute.IndexPrecomputeConsumerProfiles
+TYPE	jdk.m3.precompute.M3IndexPrecomputeConsumerProfilesDump	jdk.m3.precompute.IndexPrecomputeConsumerProfilesDump
+TYPE	jdk.m3.precompute.M3IndexPrecomputeConsumerProfilesOracle	jdk.m3.precompute.IndexPrecomputeConsumerProfilesOracle
+TYPE	jdk.m3.precompute.M3IndexPrecomputeConsumerProfilesReferenceTest	jdk.m3.precompute.IndexPrecomputeConsumerProfilesReferenceTest
+TYPE	jdk.m3.precompute.M3IndexPrecomputeConsumerProfilesTest	jdk.m3.precompute.IndexPrecomputeConsumerProfilesTest
+TYPE	jdk.m3.precompute.M3IndexPrecomputeDependencyImage	jdk.m3.precompute.IndexPrecomputeDependencyImage
+TYPE	jdk.m3.precompute.M3IndexPrecomputeDependencyImageTest	jdk.m3.precompute.IndexPrecomputeDependencyImageTest
+TYPE	jdk.m3.precompute.M3IndexPrecomputeFacet	jdk.m3.precompute.IndexPrecomputeFacet
+TYPE	jdk.m3.precompute.M3IndexPrecomputeFacetGroup	jdk.m3.precompute.IndexPrecomputeFacetGroup
+TYPE	jdk.m3.precompute.M3IndexPrecomputeKernel	jdk.m3.precompute.IndexPrecomputeKernel
+TYPE	jdk.m3.precompute.M3IndexPrecomputeManifest	jdk.m3.precompute.IndexPrecomputeManifest
+TYPE	jdk.m3.precompute.M3IndexPrecomputeManifestImage	jdk.m3.precompute.IndexPrecomputeManifestImage
+TYPE	jdk.m3.precompute.M3IndexPrecomputeMultipassCompiler	jdk.m3.precompute.IndexPrecomputeMultipassCompiler
+TYPE	jdk.m3.precompute.M3IndexPrecomputeMultipassCompilerTest	jdk.m3.precompute.IndexPrecomputeMultipassCompilerTest
+TYPE	jdk.m3.precompute.M3IndexPrecomputePlan	jdk.m3.precompute.IndexPrecomputePlan
+TYPE	jdk.m3.precompute.M3IndexPrecomputePlanner	jdk.m3.precompute.IndexPrecomputePlanner
+TYPE	jdk.m3.precompute.M3IndexPrecomputePlannerCycleTest	jdk.m3.precompute.IndexPrecomputePlannerCycleTest
+TYPE	jdk.m3.precompute.M3IndexPrecomputePlannerDump	jdk.m3.precompute.IndexPrecomputePlannerDump
+TYPE	jdk.m3.precompute.M3IndexPrecomputePlannerReferenceTest	jdk.m3.precompute.IndexPrecomputePlannerReferenceTest
+TYPE	jdk.m3.precompute.M3IndexPrecomputeProvider	jdk.m3.precompute.IndexPrecomputeProvider
+TYPE	jdk.m3.precompute.M3IndexPrecomputeProviders	jdk.m3.precompute.IndexPrecomputeProviders
+TYPE	jdk.m3.precompute.M3IndexPrecomputeReceipt	jdk.m3.precompute.IndexPrecomputeReceipt
+TYPE	jdk.m3.precompute.M3IndexPrecomputeRecommendation	jdk.m3.precompute.IndexPrecomputeRecommendation
+TYPE	jdk.m3.precompute.M3IndexPrecomputeSnapshot	jdk.m3.precompute.IndexPrecomputeSnapshot
+TYPE	jdk.m3.precompute.M3IndexPrecomputeSnapshotBuilder	jdk.m3.precompute.IndexPrecomputeSnapshotBuilder
+TYPE	jdk.m3.precompute.M3IndexPrecomputeSource	jdk.m3.precompute.IndexPrecomputeSource
+TYPE	jdk.m3.precompute.M3IndexPrecomputeWorkload	jdk.m3.precompute.IndexPrecomputeWorkload
+TYPE	jdk.m3.precompute.M3JavaIndexPrecomputeAccelerator	jdk.m3.precompute.JavaIndexPrecomputeAccelerator
+TYPE	jdk.m3.precompute.M3JniIndexPrecomputeAccelerator	jdk.m3.precompute.JniIndexPrecomputeAccelerator
+TYPE	jdk.m3.precompute.M3LcsPlan	jdk.m3.precompute.LcsPlan
+TYPE	jdk.m3.precompute.M3LcsPlanOracle	jdk.m3.precompute.LcsPlanOracle
+TYPE	jdk.m3.precompute.M3LcsPlanProofTest	jdk.m3.precompute.LcsPlanProofTest
+TYPE	jdk.m3.precompute.M3LcsPlanTest	jdk.m3.precompute.LcsPlanTest
+TYPE	jdk.m3.precompute.M3LiteralBatchCandidate	jdk.m3.precompute.LiteralBatchCandidate
+TYPE	jdk.m3.precompute.M3LongTupleIndexImage	jdk.m3.precompute.LongTupleIndexImage
+TYPE	jdk.m3.precompute.M3LongTupleIndexView	jdk.m3.precompute.LongTupleIndexView
+TYPE	jdk.m3.precompute.M3MeasuredRope	jdk.m3.precompute.MeasuredRope
+TYPE	jdk.m3.precompute.M3MeasuredRopeAppleScenarioTest	jdk.m3.precompute.MeasuredRopeAppleScenarioTest
+TYPE	jdk.m3.precompute.M3MeasuredRopeTest	jdk.m3.precompute.MeasuredRopeTest
+TYPE	jdk.m3.precompute.M3NativeParityTest	jdk.m3.precompute.NativeParityTest
+TYPE	jdk.m3.precompute.M3NativePrecomputeOps	jdk.m3.precompute.NativePrecomputeOps
+TYPE	jdk.m3.precompute.M3PatternQueryDifferential	jdk.m3.precompute.PatternQueryDifferential
+TYPE	jdk.m3.precompute.M3PrecomputeHashes	jdk.m3.precompute.PrecomputeHashes
+TYPE	jdk.m3.precompute.M3Progress	jdk.m3.precompute.Progress
+TYPE	jdk.m3.precompute.M3ProofCapture	jdk.m3.precompute.ProofCapture
+TYPE	jdk.m3.precompute.M3RegexDerivative	jdk.m3.precompute.RegexDerivative
+TYPE	jdk.m3.precompute.M3RegexDerivativeEffectsBridgeTest	jdk.m3.precompute.RegexDerivativeEffectsBridgeTest
+TYPE	jdk.m3.precompute.M3RegexDerivativeNative	jdk.m3.precompute.RegexDerivativeNative
+TYPE	jdk.m3.precompute.M3RegexDerivativeTest	jdk.m3.precompute.RegexDerivativeTest
+TYPE	jdk.m3.precompute.M3RegexDfaEffects	jdk.m3.precompute.RegexDfaEffects
+TYPE	jdk.m3.precompute.M3RegexDfaEffectsIndexProof	jdk.m3.precompute.RegexDfaEffectsIndexProof
+TYPE	jdk.m3.precompute.M3RegexDfaEffectsPortTest	jdk.m3.precompute.RegexDfaEffectsPortTest
+TYPE	jdk.m3.precompute.M3RegexDfaEffectsProof	jdk.m3.precompute.RegexDfaEffectsProof
+TYPE	jdk.m3.precompute.M3RegexOracleCorpus	jdk.m3.precompute.RegexOracleCorpus
+TYPE	jdk.m3.precompute.M3RegexOracleHarness	jdk.m3.precompute.RegexOracleHarness
+TYPE	jdk.m3.precompute.M3RegexOracleHarnessTest	jdk.m3.precompute.RegexOracleHarnessTest
+TYPE	jdk.m3.precompute.M3RegexPredicateAlphabet	jdk.m3.precompute.RegexPredicateAlphabet
+TYPE	jdk.m3.precompute.M3RegexShape	jdk.m3.precompute.RegexShape
+TYPE	jdk.m3.precompute.M3RegexShapeTest	jdk.m3.precompute.RegexShapeTest
+TYPE	jdk.m3.precompute.M3RegexStringSignals	jdk.m3.precompute.RegexStringSignals
+TYPE	jdk.m3.precompute.M3RegexStringSignalsTest	jdk.m3.precompute.RegexStringSignalsTest
+TYPE	jdk.m3.precompute.M3RegexStringTrialImage	jdk.m3.precompute.RegexStringTrialImage
+TYPE	jdk.m3.precompute.M3RegexStringTrialImageTest	jdk.m3.precompute.RegexStringTrialImageTest
+TYPE	jdk.m3.precompute.M3RopeArena	jdk.m3.precompute.RopeArena
+TYPE	jdk.m3.precompute.M3RopeMeasure	jdk.m3.precompute.RopeMeasure
+TYPE	jdk.m3.precompute.M3RopeMeasures	jdk.m3.precompute.RopeMeasures
+TYPE	jdk.m3.precompute.M3RopeMetric	jdk.m3.precompute.RopeMetric
+TYPE	jdk.m3.precompute.M3SimilarityBatch	jdk.m3.precompute.SimilarityBatch
+TYPE	jdk.m3.precompute.M3SimilarityBatchJava	jdk.m3.precompute.SimilarityBatchJava
+TYPE	jdk.m3.precompute.M3SimilarityBatchNative	jdk.m3.precompute.SimilarityBatchNative
+TYPE	jdk.m3.precompute.M3SimilarityBatchTest	jdk.m3.precompute.SimilarityBatchTest
+TYPE	jdk.m3.precompute.M3SimilarityPrecompute	jdk.m3.precompute.SimilarityPrecompute
+TYPE	jdk.m3.precompute.M3SparseUtf16LiteralPlan	jdk.m3.precompute.SparseUtf16LiteralPlan
+TYPE	jdk.m3.precompute.M3SparseUtf16Stitched	jdk.m3.precompute.SparseUtf16Stitched
+TYPE	jdk.m3.precompute.M3SparseUtf16StitchedDump	jdk.m3.precompute.SparseUtf16StitchedDump
+TYPE	jdk.m3.precompute.M3SparseUtf16StitchedOracle	jdk.m3.precompute.SparseUtf16StitchedOracle
+TYPE	jdk.m3.precompute.M3SparseUtf16StitchedReferenceTest	jdk.m3.precompute.SparseUtf16StitchedReferenceTest
+TYPE	jdk.m3.precompute.M3SparseUtf16StitchedTest	jdk.m3.precompute.SparseUtf16StitchedTest
+TYPE	jdk.m3.precompute.M3TextMetrics	jdk.m3.precompute.TextMetrics
+TYPE	jdk.m3.precompute.M3TextSignals	jdk.m3.precompute.TextSignals
+TYPE	jdk.m3.precompute.M3TextSignalsTest	jdk.m3.precompute.TextSignalsTest
+TYPE	jdk.m3.precompute.M3TokenRegex	jdk.m3.precompute.TokenRegex
+TYPE	jdk.m3.precompute.M3TokenRegexTest	jdk.m3.precompute.TokenRegexTest
+TYPE	jdk.m3.precompute.M3Utf16AtomsDump	jdk.m3.precompute.Utf16AtomsDump
+TYPE	jdk.m3.precompute.M3Utf16Glob	jdk.m3.precompute.Utf16Glob
+TYPE	jdk.m3.precompute.M3Utf16GlobOracle	jdk.m3.precompute.Utf16GlobOracle
+TYPE	jdk.m3.precompute.M3Utf16GlobProofTest	jdk.m3.precompute.Utf16GlobProofTest
+TYPE	jdk.m3.precompute.M3Utf16GlobTest	jdk.m3.precompute.Utf16GlobTest
+TYPE	jdk.m3.regexcursor.M3AsciiRootAllocationProof	jdk.m3.regexcursor.AsciiRootAllocationProof
+TYPE	jdk.m3.regexcursor.M3AsciiRootMicrobench	jdk.m3.regexcursor.AsciiRootMicrobench
+TYPE	jdk.m3.regexcursor.M3AsciiRootPrecomputeProof	jdk.m3.regexcursor.AsciiRootPrecomputeProof
+TYPE	jdk.m3.regexcursor.M3AsciiRootPrecomputeTest	jdk.m3.regexcursor.AsciiRootPrecomputeTest
+TYPE	jdk.m3.regexcursor.M3CharSequenceCursor	jdk.m3.regexcursor.CharSequenceCursor
+TYPE	jdk.m3.regexcursor.M3ChunkCursor	jdk.m3.regexcursor.ChunkCursor
+TYPE	jdk.m3.regexcursor.M3ChunkCursorTest	jdk.m3.regexcursor.ChunkCursorTest
+TYPE	jdk.m3.regexcursor.M3CompleteTokenProjectionProof	jdk.m3.regexcursor.CompleteTokenProjectionProof
+TYPE	jdk.m3.regexcursor.M3CompleteTokenProjectionTest	jdk.m3.regexcursor.CompleteTokenProjectionTest
+TYPE	jdk.m3.regexcursor.M3CursorBoundaryTest	jdk.m3.regexcursor.CursorBoundaryTest
+TYPE	jdk.m3.regexcursor.M3CursorCharSequence	jdk.m3.regexcursor.CursorCharSequence
+TYPE	jdk.m3.regexcursor.M3CursorDfa	jdk.m3.regexcursor.CursorDfa
+TYPE	jdk.m3.regexcursor.M3CursorEngineTest	jdk.m3.regexcursor.CursorEngineTest
+TYPE	jdk.m3.regexcursor.M3CursorFacts	jdk.m3.regexcursor.CursorFacts
+TYPE	jdk.m3.regexcursor.M3CursorLiteralSearch	jdk.m3.regexcursor.CursorLiteralSearch
+TYPE	jdk.m3.regexcursor.M3CursorLiteralSearchTest	jdk.m3.regexcursor.CursorLiteralSearchTest
+TYPE	jdk.m3.regexcursor.M3CursorMatcher	jdk.m3.regexcursor.CursorMatcher
+TYPE	jdk.m3.regexcursor.M3CursorNfa	jdk.m3.regexcursor.CursorNfa
+TYPE	jdk.m3.regexcursor.M3CursorPikeVm	jdk.m3.regexcursor.CursorPikeVm
+TYPE	jdk.m3.regexcursor.M3CursorProbe	jdk.m3.regexcursor.CursorProbe
+TYPE	jdk.m3.regexcursor.M3CursorRegex	jdk.m3.regexcursor.CursorRegex
+TYPE	jdk.m3.regexcursor.M3CursorRegexTest	jdk.m3.regexcursor.CursorRegexTest
+TYPE	jdk.m3.regexcursor.M3GrammarCompleteCursorProof	jdk.m3.regexcursor.GrammarCompleteCursorProof
+TYPE	jdk.m3.regexcursor.M3GrammarCompleteCursorTest	jdk.m3.regexcursor.GrammarCompleteCursorTest
+TYPE	jdk.m3.regexcursor.M3GrammarTokenProjection	jdk.m3.regexcursor.GrammarTokenProjection
+TYPE	jdk.m3.regexcursor.M3GrammarTokenProjectionNativeProof	jdk.m3.regexcursor.GrammarTokenProjectionNativeProof
+TYPE	jdk.m3.regexcursor.M3GrammarTokenProjectionProof	jdk.m3.regexcursor.GrammarTokenProjectionProof
+TYPE	jdk.m3.regexcursor.M3GrammarTokenProjectionTest	jdk.m3.regexcursor.GrammarTokenProjectionTest
+TYPE	jdk.m3.regexcursor.M3RegexAst	jdk.m3.regexcursor.RegexAst
+TYPE	jdk.m3.regexcursor.M3RegexCursorDifferentialTest	jdk.m3.regexcursor.RegexCursorDifferentialTest
+TYPE	jdk.m3.regexcursor.M3RegexCursorFixtures	jdk.m3.regexcursor.RegexCursorFixtures
+TYPE	jdk.m3.regexcursor.M3RegexLiterals	jdk.m3.regexcursor.RegexLiterals
+TYPE	jdk.m3.regexcursor.M3RegexMasteryCorpus	jdk.m3.regexcursor.RegexMasteryCorpus
+TYPE	jdk.m3.regexcursor.M3RegexRefusal	jdk.m3.regexcursor.RegexRefusal
+TYPE	jdk.m3.regexcursor.M3RegexSubsetParser	jdk.m3.regexcursor.RegexSubsetParser
+TYPE	jdk.m3.regexcursor.M3RegexSyntax	jdk.m3.regexcursor.RegexSyntax
+TYPE	jdk.m3.regexcursor.M3RopeAtom	jdk.m3.regexcursor.RopeAtom
+TYPE	jdk.m3.regexcursor.M3RopeOwner	jdk.m3.regexcursor.RopeOwner
+TYPE	jdk.m3.regexcursor.M3RopeString	jdk.m3.regexcursor.RopeString
+TYPE	jdk.m3.regexcursor.M3RopeTuple	jdk.m3.regexcursor.RopeTuple
+TYPE	jdk.m3.regexcursor.M3StaticGrammarLexicon	jdk.m3.regexcursor.StaticGrammarLexicon
+TYPE	jdk.m3.regexcursor.M3StaticGrammarLexiconNativeProof	jdk.m3.regexcursor.StaticGrammarLexiconNativeProof
+TYPE	jdk.m3.regexcursor.M3StaticGrammarLexiconProof	jdk.m3.regexcursor.StaticGrammarLexiconProof
+TYPE	jdk.m3.regexcursor.M3StaticGrammarLexiconTest	jdk.m3.regexcursor.StaticGrammarLexiconTest
+TYPE	jdk.m3.regexcursor.M3StringCursor	jdk.m3.regexcursor.StringCursor
+TYPE	jdk.m3.regexcursor.M3TokenBorrowedGateTest	jdk.m3.regexcursor.TokenBorrowedGateTest
+TYPE	jdk.m3.regexcursor.M3TokenCursor	jdk.m3.regexcursor.TokenCursor
+TYPE	jdk.m3.regexcursor.M3TokenCursorMultiLaneBench	jdk.m3.regexcursor.TokenCursorMultiLaneBench
+TYPE	jdk.m3.regexcursor.M3TokenCursorMultiLaneProof	jdk.m3.regexcursor.TokenCursorMultiLaneProof
+TYPE	jdk.m3.regexcursor.M3TokenCursorMultiLaneTest	jdk.m3.regexcursor.TokenCursorMultiLaneTest
+TYPE	jdk.m3.regexcursor.M3TokenCursorSeekLocalityBench	jdk.m3.regexcursor.TokenCursorSeekLocalityBench
+TYPE	jdk.m3.regexcursor.M3TokenCursorSeekLocalityProof	jdk.m3.regexcursor.TokenCursorSeekLocalityProof
+TYPE	jdk.m3.regexcursor.M3TokenCursorSeekLocalityTest	jdk.m3.regexcursor.TokenCursorSeekLocalityTest
+TYPE	jdk.m3.regexcursor.M3TokenCursorSingleLaneProof	jdk.m3.regexcursor.TokenCursorSingleLaneProof
+TYPE	jdk.m3.regexcursor.M3TokenCursorSingleLaneTest	jdk.m3.regexcursor.TokenCursorSingleLaneTest
+TYPE	jdk.m3.regexcursor.M3TokenPattern	jdk.m3.regexcursor.TokenPattern
+TYPE	jdk.m3.regexcursor.M3TokenPatternParser	jdk.m3.regexcursor.TokenPatternParser
+TYPE	jdk.m3.regexcursor.M3TokenPatternTest	jdk.m3.regexcursor.TokenPatternTest
+TYPE	jdk.m3.regexcursor.M3UnitClasses	jdk.m3.regexcursor.UnitClasses
+EDIT	.github/workflows/m3-seek-verification-order-20261102.yml
+EDIT	m3/ports/indexstring/README.md
+EDIT	m3/ports/indexstring/src/main/java/jdk/internal/m3/indexstring/MIndexTrieNavigation.java
+EDIT	m3/ports/precompute/PROVENANCE.tsv
+EDIT	m3/ports/precompute/src/main/java/jdk/m3/precompute/M3CodeTextSignalBatch.java
+EDIT	m3/ports/precompute/src/main/java/jdk/m3/precompute/M3CodeTextSignalBatchJava.java
+EDIT	m3/ports/precompute/src/main/java/jdk/m3/precompute/M3CodeTextSignalBatchNative.java
+EDIT	m3/ports/precompute/src/main/java/jdk/m3/precompute/M3CodeTextSignals.java
+EDIT	m3/ports/precompute/src/main/java/jdk/m3/precompute/M3CpuToolImage.java
+EDIT	m3/ports/precompute/src/main/java/jdk/m3/precompute/M3CpuToolImageCompiler.java
+EDIT	m3/ports/precompute/src/main/java/jdk/m3/precompute/M3CpuToolNativeSignals.java
+EDIT	m3/ports/precompute/src/main/java/jdk/m3/precompute/M3CpuToolPlan.java
+EDIT	m3/ports/precompute/src/main/java/jdk/m3/precompute/M3CpuToolRuntime.java
+EDIT	m3/ports/precompute/src/main/java/jdk/m3/precompute/M3EditDistancePlan.java
+EDIT	m3/ports/precompute/src/main/java/jdk/m3/precompute/M3FrozenLongTupleIndex.java
+EDIT	m3/ports/precompute/src/main/java/jdk/m3/precompute/M3Histogram.java
+EDIT	m3/ports/precompute/src/main/java/jdk/m3/precompute/M3IndexPrecomputeAccelerator.java
+EDIT	m3/ports/precompute/src/main/java/jdk/m3/precompute/M3IndexPrecomputeAccelerators.java
+EDIT	m3/ports/precompute/src/main/java/jdk/m3/precompute/M3IndexPrecomputeCandidate.java
+EDIT	m3/ports/precompute/src/main/java/jdk/m3/precompute/M3IndexPrecomputeCapability.java
+EDIT	m3/ports/precompute/src/main/java/jdk/m3/precompute/M3IndexPrecomputeConsumerProfiles.java
+EDIT	m3/ports/precompute/src/main/java/jdk/m3/precompute/M3IndexPrecomputeDependencyImage.java
+EDIT	m3/ports/precompute/src/main/java/jdk/m3/precompute/M3IndexPrecomputeFacet.java
+EDIT	m3/ports/precompute/src/main/java/jdk/m3/precompute/M3IndexPrecomputeFacetGroup.java
+EDIT	m3/ports/precompute/src/main/java/jdk/m3/precompute/M3IndexPrecomputeKernel.java
+EDIT	m3/ports/precompute/src/main/java/jdk/m3/precompute/M3IndexPrecomputeManifest.java
+EDIT	m3/ports/precompute/src/main/java/jdk/m3/precompute/M3IndexPrecomputeManifestImage.java
+EDIT	m3/ports/precompute/src/main/java/jdk/m3/precompute/M3IndexPrecomputeMultipassCompiler.java
+EDIT	m3/ports/precompute/src/main/java/jdk/m3/precompute/M3IndexPrecomputePlan.java
+EDIT	m3/ports/precompute/src/main/java/jdk/m3/precompute/M3IndexPrecomputePlanner.java
+EDIT	m3/ports/precompute/src/main/java/jdk/m3/precompute/M3IndexPrecomputeProvider.java
+EDIT	m3/ports/precompute/src/main/java/jdk/m3/precompute/M3IndexPrecomputeProviders.java
+EDIT	m3/ports/precompute/src/main/java/jdk/m3/precompute/M3IndexPrecomputeReceipt.java
+EDIT	m3/ports/precompute/src/main/java/jdk/m3/precompute/M3IndexPrecomputeRecommendation.java
+EDIT	m3/ports/precompute/src/main/java/jdk/m3/precompute/M3IndexPrecomputeSnapshot.java
+EDIT	m3/ports/precompute/src/main/java/jdk/m3/precompute/M3IndexPrecomputeSnapshotBuilder.java
+EDIT	m3/ports/precompute/src/main/java/jdk/m3/precompute/M3IndexPrecomputeSource.java
+EDIT	m3/ports/precompute/src/main/java/jdk/m3/precompute/M3IndexPrecomputeWorkload.java
+EDIT	m3/ports/precompute/src/main/java/jdk/m3/precompute/M3JavaIndexPrecomputeAccelerator.java
+EDIT	m3/ports/precompute/src/main/java/jdk/m3/precompute/M3JniIndexPrecomputeAccelerator.java
+EDIT	m3/ports/precompute/src/main/java/jdk/m3/precompute/M3LcsPlan.java
+EDIT	m3/ports/precompute/src/main/java/jdk/m3/precompute/M3LiteralBatchCandidate.java
+EDIT	m3/ports/precompute/src/main/java/jdk/m3/precompute/M3LongTupleIndexImage.java
+EDIT	m3/ports/precompute/src/main/java/jdk/m3/precompute/M3LongTupleIndexView.java
+EDIT	m3/ports/precompute/src/main/java/jdk/m3/precompute/M3MeasuredRope.java
+EDIT	m3/ports/precompute/src/main/java/jdk/m3/precompute/M3NativePrecomputeOps.java
+EDIT	m3/ports/precompute/src/main/java/jdk/m3/precompute/M3PrecomputeHashes.java
+EDIT	m3/ports/precompute/src/main/java/jdk/m3/precompute/M3Progress.java
+EDIT	m3/ports/precompute/src/main/java/jdk/m3/precompute/M3RegexDerivative.java
+EDIT	m3/ports/precompute/src/main/java/jdk/m3/precompute/M3RegexDerivativeNative.java
+EDIT	m3/ports/precompute/src/main/java/jdk/m3/precompute/M3RegexDfaEffects.java
+EDIT	m3/ports/precompute/src/main/java/jdk/m3/precompute/M3RegexOracleCorpus.java
+EDIT	m3/ports/precompute/src/main/java/jdk/m3/precompute/M3RegexOracleHarness.java
+EDIT	m3/ports/precompute/src/main/java/jdk/m3/precompute/M3RegexPredicateAlphabet.java
+EDIT	m3/ports/precompute/src/main/java/jdk/m3/precompute/M3RegexShape.java
+EDIT	m3/ports/precompute/src/main/java/jdk/m3/precompute/M3RegexStringSignals.java
+EDIT	m3/ports/precompute/src/main/java/jdk/m3/precompute/M3RegexStringTrialImage.java
+EDIT	m3/ports/precompute/src/main/java/jdk/m3/precompute/M3RopeArena.java
+EDIT	m3/ports/precompute/src/main/java/jdk/m3/precompute/M3RopeMeasure.java
+EDIT	m3/ports/precompute/src/main/java/jdk/m3/precompute/M3RopeMeasures.java
+EDIT	m3/ports/precompute/src/main/java/jdk/m3/precompute/M3RopeMetric.java
+EDIT	m3/ports/precompute/src/main/java/jdk/m3/precompute/M3SimilarityBatch.java
+EDIT	m3/ports/precompute/src/main/java/jdk/m3/precompute/M3SimilarityBatchJava.java
+EDIT	m3/ports/precompute/src/main/java/jdk/m3/precompute/M3SimilarityBatchNative.java
+EDIT	m3/ports/precompute/src/main/java/jdk/m3/precompute/M3SimilarityPrecompute.java
+EDIT	m3/ports/precompute/src/main/java/jdk/m3/precompute/M3SparseUtf16LiteralPlan.java
+EDIT	m3/ports/precompute/src/main/java/jdk/m3/precompute/M3SparseUtf16Stitched.java
+EDIT	m3/ports/precompute/src/main/java/jdk/m3/precompute/M3TextMetrics.java
+EDIT	m3/ports/precompute/src/main/java/jdk/m3/precompute/M3TextSignals.java
+EDIT	m3/ports/precompute/src/main/java/jdk/m3/precompute/M3TokenRegex.java
+EDIT	m3/ports/precompute/src/main/java/jdk/m3/precompute/M3Utf16Glob.java
+EDIT	m3/ports/precompute/src/main/native/src/m3_derivative_regex_jni.c
+EDIT	m3/ports/precompute/src/main/native/src/m3_precompute_pair_jni.c
+EDIT	m3/ports/precompute/src/main/native/src/m3_precompute_signals_jni.c
+EDIT	m3/ports/precompute/src/main/native/src/m3_precompute_tuple_jni.c
+EDIT	m3/ports/precompute/src/test/java/jdk/m3/precompute/M3CodeTextSignalsTest.java
+EDIT	m3/ports/precompute/src/test/java/jdk/m3/precompute/M3CpuToolPrecomputeSelfTest.java
+EDIT	m3/ports/precompute/src/test/java/jdk/m3/precompute/M3CpuToolPrecomputeTest.java
+EDIT	m3/ports/precompute/src/test/java/jdk/m3/precompute/M3DistanceFrontierTest.java
+EDIT	m3/ports/precompute/src/test/java/jdk/m3/precompute/M3EditDistancePlanBitParallelTest.java
+EDIT	m3/ports/precompute/src/test/java/jdk/m3/precompute/M3EditDistancePlanBoundaryTest.java
+EDIT	m3/ports/precompute/src/test/java/jdk/m3/precompute/M3EditDistancePlanOracle.java
+EDIT	m3/ports/precompute/src/test/java/jdk/m3/precompute/M3EditDistancePlanProofTest.java
+EDIT	m3/ports/precompute/src/test/java/jdk/m3/precompute/M3EditDistancePlanTest.java
+EDIT	m3/ports/precompute/src/test/java/jdk/m3/precompute/M3FrozenLongTupleIndexPairRegressionTest.java
+EDIT	m3/ports/precompute/src/test/java/jdk/m3/precompute/M3IndexPrecomputeConsumerProfilesDump.java
+EDIT	m3/ports/precompute/src/test/java/jdk/m3/precompute/M3IndexPrecomputeConsumerProfilesOracle.java
+EDIT	m3/ports/precompute/src/test/java/jdk/m3/precompute/M3IndexPrecomputeConsumerProfilesReferenceTest.java
+EDIT	m3/ports/precompute/src/test/java/jdk/m3/precompute/M3IndexPrecomputeConsumerProfilesTest.java
+EDIT	m3/ports/precompute/src/test/java/jdk/m3/precompute/M3IndexPrecomputeDependencyImageTest.java
+EDIT	m3/ports/precompute/src/test/java/jdk/m3/precompute/M3IndexPrecomputeMultipassCompilerTest.java
+EDIT	m3/ports/precompute/src/test/java/jdk/m3/precompute/M3IndexPrecomputePlannerCycleTest.java
+EDIT	m3/ports/precompute/src/test/java/jdk/m3/precompute/M3IndexPrecomputePlannerDump.java
+EDIT	m3/ports/precompute/src/test/java/jdk/m3/precompute/M3IndexPrecomputePlannerReferenceTest.java
+EDIT	m3/ports/precompute/src/test/java/jdk/m3/precompute/M3LcsPlanOracle.java
+EDIT	m3/ports/precompute/src/test/java/jdk/m3/precompute/M3LcsPlanProofTest.java
+EDIT	m3/ports/precompute/src/test/java/jdk/m3/precompute/M3LcsPlanTest.java
+EDIT	m3/ports/precompute/src/test/java/jdk/m3/precompute/M3MeasuredRopeAppleScenarioTest.java
+EDIT	m3/ports/precompute/src/test/java/jdk/m3/precompute/M3MeasuredRopeTest.java
+EDIT	m3/ports/precompute/src/test/java/jdk/m3/precompute/M3NativeParityTest.java
+EDIT	m3/ports/precompute/src/test/java/jdk/m3/precompute/M3PatternQueryDifferential.java
+EDIT	m3/ports/precompute/src/test/java/jdk/m3/precompute/M3ProofCapture.java
+EDIT	m3/ports/precompute/src/test/java/jdk/m3/precompute/M3RegexDerivativeEffectsBridgeTest.java
+EDIT	m3/ports/precompute/src/test/java/jdk/m3/precompute/M3RegexDerivativeTest.java
+EDIT	m3/ports/precompute/src/test/java/jdk/m3/precompute/M3RegexDfaEffectsIndexProof.java
+EDIT	m3/ports/precompute/src/test/java/jdk/m3/precompute/M3RegexDfaEffectsPortTest.java
+EDIT	m3/ports/precompute/src/test/java/jdk/m3/precompute/M3RegexDfaEffectsProof.java
+EDIT	m3/ports/precompute/src/test/java/jdk/m3/precompute/M3RegexOracleHarnessTest.java
+EDIT	m3/ports/precompute/src/test/java/jdk/m3/precompute/M3RegexShapeTest.java
+EDIT	m3/ports/precompute/src/test/java/jdk/m3/precompute/M3RegexStringSignalsTest.java
+EDIT	m3/ports/precompute/src/test/java/jdk/m3/precompute/M3RegexStringTrialImageTest.java
+EDIT	m3/ports/precompute/src/test/java/jdk/m3/precompute/M3SimilarityBatchTest.java
+EDIT	m3/ports/precompute/src/test/java/jdk/m3/precompute/M3SparseUtf16StitchedDump.java
+EDIT	m3/ports/precompute/src/test/java/jdk/m3/precompute/M3SparseUtf16StitchedOracle.java
+EDIT	m3/ports/precompute/src/test/java/jdk/m3/precompute/M3SparseUtf16StitchedReferenceTest.java
+EDIT	m3/ports/precompute/src/test/java/jdk/m3/precompute/M3SparseUtf16StitchedTest.java
+EDIT	m3/ports/precompute/src/test/java/jdk/m3/precompute/M3TextSignalsTest.java
+EDIT	m3/ports/precompute/src/test/java/jdk/m3/precompute/M3TokenRegexTest.java
+EDIT	m3/ports/precompute/src/test/java/jdk/m3/precompute/M3Utf16AtomsDump.java
+EDIT	m3/ports/precompute/src/test/java/jdk/m3/precompute/M3Utf16GlobOracle.java
+EDIT	m3/ports/precompute/src/test/java/jdk/m3/precompute/M3Utf16GlobProofTest.java
+EDIT	m3/ports/precompute/src/test/java/jdk/m3/precompute/M3Utf16GlobTest.java
+EDIT	m3/ports/precompute/verify_regex_string_v2.py
+EDIT	m3/ports/regex-cursor/src/main/java/jdk/m3/regexcursor/M3CharSequenceCursor.java
+EDIT	m3/ports/regex-cursor/src/main/java/jdk/m3/regexcursor/M3ChunkCursor.java
+EDIT	m3/ports/regex-cursor/src/main/java/jdk/m3/regexcursor/M3CursorCharSequence.java
+EDIT	m3/ports/regex-cursor/src/main/java/jdk/m3/regexcursor/M3CursorDfa.java
+EDIT	m3/ports/regex-cursor/src/main/java/jdk/m3/regexcursor/M3CursorFacts.java
+EDIT	m3/ports/regex-cursor/src/main/java/jdk/m3/regexcursor/M3CursorLiteralSearch.java
+EDIT	m3/ports/regex-cursor/src/main/java/jdk/m3/regexcursor/M3CursorMatcher.java
+EDIT	m3/ports/regex-cursor/src/main/java/jdk/m3/regexcursor/M3CursorNfa.java
+EDIT	m3/ports/regex-cursor/src/main/java/jdk/m3/regexcursor/M3CursorPikeVm.java
+EDIT	m3/ports/regex-cursor/src/main/java/jdk/m3/regexcursor/M3CursorProbe.java
+EDIT	m3/ports/regex-cursor/src/main/java/jdk/m3/regexcursor/M3CursorRegex.java
+EDIT	m3/ports/regex-cursor/src/main/java/jdk/m3/regexcursor/M3GrammarTokenProjection.java
+EDIT	m3/ports/regex-cursor/src/main/java/jdk/m3/regexcursor/M3RegexAst.java
+EDIT	m3/ports/regex-cursor/src/main/java/jdk/m3/regexcursor/M3RegexLiterals.java
+EDIT	m3/ports/regex-cursor/src/main/java/jdk/m3/regexcursor/M3RegexRefusal.java
+EDIT	m3/ports/regex-cursor/src/main/java/jdk/m3/regexcursor/M3RegexSubsetParser.java
+EDIT	m3/ports/regex-cursor/src/main/java/jdk/m3/regexcursor/M3RegexSyntax.java
+EDIT	m3/ports/regex-cursor/src/main/java/jdk/m3/regexcursor/M3RopeAtom.java
+EDIT	m3/ports/regex-cursor/src/main/java/jdk/m3/regexcursor/M3RopeOwner.java
+EDIT	m3/ports/regex-cursor/src/main/java/jdk/m3/regexcursor/M3RopeString.java
+EDIT	m3/ports/regex-cursor/src/main/java/jdk/m3/regexcursor/M3RopeTuple.java
+EDIT	m3/ports/regex-cursor/src/main/java/jdk/m3/regexcursor/M3StaticGrammarLexicon.java
+EDIT	m3/ports/regex-cursor/src/main/java/jdk/m3/regexcursor/M3StringCursor.java
+EDIT	m3/ports/regex-cursor/src/main/java/jdk/m3/regexcursor/M3TokenCursor.java
+EDIT	m3/ports/regex-cursor/src/main/java/jdk/m3/regexcursor/M3TokenPattern.java
+EDIT	m3/ports/regex-cursor/src/main/java/jdk/m3/regexcursor/M3TokenPatternParser.java
+EDIT	m3/ports/regex-cursor/src/main/java/jdk/m3/regexcursor/M3UnitClasses.java
+EDIT	m3/ports/regex-cursor/src/test/java/jdk/m3/regexcursor/M3AsciiRootAllocationProof.java
+EDIT	m3/ports/regex-cursor/src/test/java/jdk/m3/regexcursor/M3AsciiRootMicrobench.java
+EDIT	m3/ports/regex-cursor/src/test/java/jdk/m3/regexcursor/M3AsciiRootPrecomputeProof.java
+EDIT	m3/ports/regex-cursor/src/test/java/jdk/m3/regexcursor/M3AsciiRootPrecomputeTest.java
+EDIT	m3/ports/regex-cursor/src/test/java/jdk/m3/regexcursor/M3ChunkCursorTest.java
+EDIT	m3/ports/regex-cursor/src/test/java/jdk/m3/regexcursor/M3CompleteTokenProjectionProof.java
+EDIT	m3/ports/regex-cursor/src/test/java/jdk/m3/regexcursor/M3CompleteTokenProjectionTest.java
+EDIT	m3/ports/regex-cursor/src/test/java/jdk/m3/regexcursor/M3CursorBoundaryTest.java
+EDIT	m3/ports/regex-cursor/src/test/java/jdk/m3/regexcursor/M3CursorEngineTest.java
+EDIT	m3/ports/regex-cursor/src/test/java/jdk/m3/regexcursor/M3CursorLiteralSearchTest.java
+EDIT	m3/ports/regex-cursor/src/test/java/jdk/m3/regexcursor/M3CursorRegexTest.java
+EDIT	m3/ports/regex-cursor/src/test/java/jdk/m3/regexcursor/M3GrammarCompleteCursorProof.java
+EDIT	m3/ports/regex-cursor/src/test/java/jdk/m3/regexcursor/M3GrammarCompleteCursorTest.java
+EDIT	m3/ports/regex-cursor/src/test/java/jdk/m3/regexcursor/M3GrammarTokenProjectionNativeProof.java
+EDIT	m3/ports/regex-cursor/src/test/java/jdk/m3/regexcursor/M3GrammarTokenProjectionProof.java
+EDIT	m3/ports/regex-cursor/src/test/java/jdk/m3/regexcursor/M3GrammarTokenProjectionTest.java
+EDIT	m3/ports/regex-cursor/src/test/java/jdk/m3/regexcursor/M3RegexCursorDifferentialTest.java
+EDIT	m3/ports/regex-cursor/src/test/java/jdk/m3/regexcursor/M3RegexCursorFixtures.java
+EDIT	m3/ports/regex-cursor/src/test/java/jdk/m3/regexcursor/M3RegexMasteryCorpus.java
+EDIT	m3/ports/regex-cursor/src/test/java/jdk/m3/regexcursor/M3StaticGrammarLexiconNativeProof.java
+EDIT	m3/ports/regex-cursor/src/test/java/jdk/m3/regexcursor/M3StaticGrammarLexiconProof.java
+EDIT	m3/ports/regex-cursor/src/test/java/jdk/m3/regexcursor/M3StaticGrammarLexiconTest.java
+EDIT	m3/ports/regex-cursor/src/test/java/jdk/m3/regexcursor/M3TokenBorrowedGateTest.java
+EDIT	m3/ports/regex-cursor/src/test/java/jdk/m3/regexcursor/M3TokenCursorMultiLaneBench.java
+EDIT	m3/ports/regex-cursor/src/test/java/jdk/m3/regexcursor/M3TokenCursorMultiLaneProof.java
+EDIT	m3/ports/regex-cursor/src/test/java/jdk/m3/regexcursor/M3TokenCursorMultiLaneTest.java
+EDIT	m3/ports/regex-cursor/src/test/java/jdk/m3/regexcursor/M3TokenCursorSeekLocalityBench.java
+EDIT	m3/ports/regex-cursor/src/test/java/jdk/m3/regexcursor/M3TokenCursorSeekLocalityProof.java
+EDIT	m3/ports/regex-cursor/src/test/java/jdk/m3/regexcursor/M3TokenCursorSeekLocalityTest.java
+EDIT	m3/ports/regex-cursor/src/test/java/jdk/m3/regexcursor/M3TokenCursorSingleLaneProof.java
+EDIT	m3/ports/regex-cursor/src/test/java/jdk/m3/regexcursor/M3TokenCursorSingleLaneTest.java
+EDIT	m3/ports/regex-cursor/src/test/java/jdk/m3/regexcursor/M3TokenPatternTest.java
+EDIT	m3/ports/regex-cursor/src/test/native/M3StaticGrammarLexiconJni.c
+MOVE	m3/ports/precompute/src/main/java/jdk/m3/precompute/M3CodeTextSignalBatch.java	m3/ports/precompute/src/main/java/jdk/m3/precompute/CodeTextSignalBatch.java
+MOVE	m3/ports/precompute/src/main/java/jdk/m3/precompute/M3CodeTextSignalBatchJava.java	m3/ports/precompute/src/main/java/jdk/m3/precompute/CodeTextSignalBatchJava.java
+MOVE	m3/ports/precompute/src/main/java/jdk/m3/precompute/M3CodeTextSignalBatchNative.java	m3/ports/precompute/src/main/java/jdk/m3/precompute/CodeTextSignalBatchNative.java
+MOVE	m3/ports/precompute/src/main/java/jdk/m3/precompute/M3CodeTextSignals.java	m3/ports/precompute/src/main/java/jdk/m3/precompute/CodeTextSignals.java
+MOVE	m3/ports/precompute/src/main/java/jdk/m3/precompute/M3CpuToolImage.java	m3/ports/precompute/src/main/java/jdk/m3/precompute/CpuToolImage.java
+MOVE	m3/ports/precompute/src/main/java/jdk/m3/precompute/M3CpuToolImageCompiler.java	m3/ports/precompute/src/main/java/jdk/m3/precompute/CpuToolImageCompiler.java
+MOVE	m3/ports/precompute/src/main/java/jdk/m3/precompute/M3CpuToolNativeSignals.java	m3/ports/precompute/src/main/java/jdk/m3/precompute/CpuToolNativeSignals.java
+MOVE	m3/ports/precompute/src/main/java/jdk/m3/precompute/M3CpuToolPlan.java	m3/ports/precompute/src/main/java/jdk/m3/precompute/CpuToolPlan.java
+MOVE	m3/ports/precompute/src/main/java/jdk/m3/precompute/M3CpuToolRuntime.java	m3/ports/precompute/src/main/java/jdk/m3/precompute/CpuToolRuntime.java
+MOVE	m3/ports/precompute/src/main/java/jdk/m3/precompute/M3EditDistancePlan.java	m3/ports/precompute/src/main/java/jdk/m3/precompute/EditDistancePlan.java
+MOVE	m3/ports/precompute/src/main/java/jdk/m3/precompute/M3FrozenLongTupleIndex.java	m3/ports/precompute/src/main/java/jdk/m3/precompute/FrozenLongTupleIndex.java
+MOVE	m3/ports/precompute/src/main/java/jdk/m3/precompute/M3Histogram.java	m3/ports/precompute/src/main/java/jdk/m3/precompute/Histogram.java
+MOVE	m3/ports/precompute/src/main/java/jdk/m3/precompute/M3IndexPrecomputeAccelerator.java	m3/ports/precompute/src/main/java/jdk/m3/precompute/IndexPrecomputeAccelerator.java
+MOVE	m3/ports/precompute/src/main/java/jdk/m3/precompute/M3IndexPrecomputeAccelerators.java	m3/ports/precompute/src/main/java/jdk/m3/precompute/IndexPrecomputeAccelerators.java
+MOVE	m3/ports/precompute/src/main/java/jdk/m3/precompute/M3IndexPrecomputeCandidate.java	m3/ports/precompute/src/main/java/jdk/m3/precompute/IndexPrecomputeCandidate.java
+MOVE	m3/ports/precompute/src/main/java/jdk/m3/precompute/M3IndexPrecomputeCapability.java	m3/ports/precompute/src/main/java/jdk/m3/precompute/IndexPrecomputeCapability.java
+MOVE	m3/ports/precompute/src/main/java/jdk/m3/precompute/M3IndexPrecomputeConsumerProfiles.java	m3/ports/precompute/src/main/java/jdk/m3/precompute/IndexPrecomputeConsumerProfiles.java
+MOVE	m3/ports/precompute/src/main/java/jdk/m3/precompute/M3IndexPrecomputeDependencyImage.java	m3/ports/precompute/src/main/java/jdk/m3/precompute/IndexPrecomputeDependencyImage.java
+MOVE	m3/ports/precompute/src/main/java/jdk/m3/precompute/M3IndexPrecomputeFacet.java	m3/ports/precompute/src/main/java/jdk/m3/precompute/IndexPrecomputeFacet.java
+MOVE	m3/ports/precompute/src/main/java/jdk/m3/precompute/M3IndexPrecomputeFacetGroup.java	m3/ports/precompute/src/main/java/jdk/m3/precompute/IndexPrecomputeFacetGroup.java
+MOVE	m3/ports/precompute/src/main/java/jdk/m3/precompute/M3IndexPrecomputeKernel.java	m3/ports/precompute/src/main/java/jdk/m3/precompute/IndexPrecomputeKernel.java
+MOVE	m3/ports/precompute/src/main/java/jdk/m3/precompute/M3IndexPrecomputeManifest.java	m3/ports/precompute/src/main/java/jdk/m3/precompute/IndexPrecomputeManifest.java
+MOVE	m3/ports/precompute/src/main/java/jdk/m3/precompute/M3IndexPrecomputeManifestImage.java	m3/ports/precompute/src/main/java/jdk/m3/precompute/IndexPrecomputeManifestImage.java
+MOVE	m3/ports/precompute/src/main/java/jdk/m3/precompute/M3IndexPrecomputeMultipassCompiler.java	m3/ports/precompute/src/main/java/jdk/m3/precompute/IndexPrecomputeMultipassCompiler.java
+MOVE	m3/ports/precompute/src/main/java/jdk/m3/precompute/M3IndexPrecomputePlan.java	m3/ports/precompute/src/main/java/jdk/m3/precompute/IndexPrecomputePlan.java
+MOVE	m3/ports/precompute/src/main/java/jdk/m3/precompute/M3IndexPrecomputePlanner.java	m3/ports/precompute/src/main/java/jdk/m3/precompute/IndexPrecomputePlanner.java
+MOVE	m3/ports/precompute/src/main/java/jdk/m3/precompute/M3IndexPrecomputeProvider.java	m3/ports/precompute/src/main/java/jdk/m3/precompute/IndexPrecomputeProvider.java
+MOVE	m3/ports/precompute/src/main/java/jdk/m3/precompute/M3IndexPrecomputeProviders.java	m3/ports/precompute/src/main/java/jdk/m3/precompute/IndexPrecomputeProviders.java
+MOVE	m3/ports/precompute/src/main/java/jdk/m3/precompute/M3IndexPrecomputeReceipt.java	m3/ports/precompute/src/main/java/jdk/m3/precompute/IndexPrecomputeReceipt.java
+MOVE	m3/ports/precompute/src/main/java/jdk/m3/precompute/M3IndexPrecomputeRecommendation.java	m3/ports/precompute/src/main/java/jdk/m3/precompute/IndexPrecomputeRecommendation.java
+MOVE	m3/ports/precompute/src/main/java/jdk/m3/precompute/M3IndexPrecomputeSnapshot.java	m3/ports/precompute/src/main/java/jdk/m3/precompute/IndexPrecomputeSnapshot.java
+MOVE	m3/ports/precompute/src/main/java/jdk/m3/precompute/M3IndexPrecomputeSnapshotBuilder.java	m3/ports/precompute/src/main/java/jdk/m3/precompute/IndexPrecomputeSnapshotBuilder.java
+MOVE	m3/ports/precompute/src/main/java/jdk/m3/precompute/M3IndexPrecomputeSource.java	m3/ports/precompute/src/main/java/jdk/m3/precompute/IndexPrecomputeSource.java
+MOVE	m3/ports/precompute/src/main/java/jdk/m3/precompute/M3IndexPrecomputeWorkload.java	m3/ports/precompute/src/main/java/jdk/m3/precompute/IndexPrecomputeWorkload.java
+MOVE	m3/ports/precompute/src/main/java/jdk/m3/precompute/M3JavaIndexPrecomputeAccelerator.java	m3/ports/precompute/src/main/java/jdk/m3/precompute/JavaIndexPrecomputeAccelerator.java
+MOVE	m3/ports/precompute/src/main/java/jdk/m3/precompute/M3JniIndexPrecomputeAccelerator.java	m3/ports/precompute/src/main/java/jdk/m3/precompute/JniIndexPrecomputeAccelerator.java
+MOVE	m3/ports/precompute/src/main/java/jdk/m3/precompute/M3LcsPlan.java	m3/ports/precompute/src/main/java/jdk/m3/precompute/LcsPlan.java
+MOVE	m3/ports/precompute/src/main/java/jdk/m3/precompute/M3LiteralBatchCandidate.java	m3/ports/precompute/src/main/java/jdk/m3/precompute/LiteralBatchCandidate.java
+MOVE	m3/ports/precompute/src/main/java/jdk/m3/precompute/M3LongTupleIndexImage.java	m3/ports/precompute/src/main/java/jdk/m3/precompute/LongTupleIndexImage.java
+MOVE	m3/ports/precompute/src/main/java/jdk/m3/precompute/M3LongTupleIndexView.java	m3/ports/precompute/src/main/java/jdk/m3/precompute/LongTupleIndexView.java
+MOVE	m3/ports/precompute/src/main/java/jdk/m3/precompute/M3MeasuredRope.java	m3/ports/precompute/src/main/java/jdk/m3/precompute/MeasuredRope.java
+MOVE	m3/ports/precompute/src/main/java/jdk/m3/precompute/M3NativePrecomputeOps.java	m3/ports/precompute/src/main/java/jdk/m3/precompute/NativePrecomputeOps.java
+MOVE	m3/ports/precompute/src/main/java/jdk/m3/precompute/M3PrecomputeHashes.java	m3/ports/precompute/src/main/java/jdk/m3/precompute/PrecomputeHashes.java
+MOVE	m3/ports/precompute/src/main/java/jdk/m3/precompute/M3Progress.java	m3/ports/precompute/src/main/java/jdk/m3/precompute/Progress.java
+MOVE	m3/ports/precompute/src/main/java/jdk/m3/precompute/M3RegexDerivative.java	m3/ports/precompute/src/main/java/jdk/m3/precompute/RegexDerivative.java
+MOVE	m3/ports/precompute/src/main/java/jdk/m3/precompute/M3RegexDerivativeNative.java	m3/ports/precompute/src/main/java/jdk/m3/precompute/RegexDerivativeNative.java
+MOVE	m3/ports/precompute/src/main/java/jdk/m3/precompute/M3RegexDfaEffects.java	m3/ports/precompute/src/main/java/jdk/m3/precompute/RegexDfaEffects.java
+MOVE	m3/ports/precompute/src/main/java/jdk/m3/precompute/M3RegexOracleCorpus.java	m3/ports/precompute/src/main/java/jdk/m3/precompute/RegexOracleCorpus.java
+MOVE	m3/ports/precompute/src/main/java/jdk/m3/precompute/M3RegexOracleHarness.java	m3/ports/precompute/src/main/java/jdk/m3/precompute/RegexOracleHarness.java
+MOVE	m3/ports/precompute/src/main/java/jdk/m3/precompute/M3RegexPredicateAlphabet.java	m3/ports/precompute/src/main/java/jdk/m3/precompute/RegexPredicateAlphabet.java
+MOVE	m3/ports/precompute/src/main/java/jdk/m3/precompute/M3RegexShape.java	m3/ports/precompute/src/main/java/jdk/m3/precompute/RegexShape.java
+MOVE	m3/ports/precompute/src/main/java/jdk/m3/precompute/M3RegexStringSignals.java	m3/ports/precompute/src/main/java/jdk/m3/precompute/RegexStringSignals.java
+MOVE	m3/ports/precompute/src/main/java/jdk/m3/precompute/M3RegexStringTrialImage.java	m3/ports/precompute/src/main/java/jdk/m3/precompute/RegexStringTrialImage.java
+MOVE	m3/ports/precompute/src/main/java/jdk/m3/precompute/M3RopeArena.java	m3/ports/precompute/src/main/java/jdk/m3/precompute/RopeArena.java
+MOVE	m3/ports/precompute/src/main/java/jdk/m3/precompute/M3RopeMeasure.java	m3/ports/precompute/src/main/java/jdk/m3/precompute/RopeMeasure.java
+MOVE	m3/ports/precompute/src/main/java/jdk/m3/precompute/M3RopeMeasures.java	m3/ports/precompute/src/main/java/jdk/m3/precompute/RopeMeasures.java
+MOVE	m3/ports/precompute/src/main/java/jdk/m3/precompute/M3RopeMetric.java	m3/ports/precompute/src/main/java/jdk/m3/precompute/RopeMetric.java
+MOVE	m3/ports/precompute/src/main/java/jdk/m3/precompute/M3SimilarityBatch.java	m3/ports/precompute/src/main/java/jdk/m3/precompute/SimilarityBatch.java
+MOVE	m3/ports/precompute/src/main/java/jdk/m3/precompute/M3SimilarityBatchJava.java	m3/ports/precompute/src/main/java/jdk/m3/precompute/SimilarityBatchJava.java
+MOVE	m3/ports/precompute/src/main/java/jdk/m3/precompute/M3SimilarityBatchNative.java	m3/ports/precompute/src/main/java/jdk/m3/precompute/SimilarityBatchNative.java
+MOVE	m3/ports/precompute/src/main/java/jdk/m3/precompute/M3SimilarityPrecompute.java	m3/ports/precompute/src/main/java/jdk/m3/precompute/SimilarityPrecompute.java
+MOVE	m3/ports/precompute/src/main/java/jdk/m3/precompute/M3SparseUtf16LiteralPlan.java	m3/ports/precompute/src/main/java/jdk/m3/precompute/SparseUtf16LiteralPlan.java
+MOVE	m3/ports/precompute/src/main/java/jdk/m3/precompute/M3SparseUtf16Stitched.java	m3/ports/precompute/src/main/java/jdk/m3/precompute/SparseUtf16Stitched.java
+MOVE	m3/ports/precompute/src/main/java/jdk/m3/precompute/M3TextMetrics.java	m3/ports/precompute/src/main/java/jdk/m3/precompute/TextMetrics.java
+MOVE	m3/ports/precompute/src/main/java/jdk/m3/precompute/M3TextSignals.java	m3/ports/precompute/src/main/java/jdk/m3/precompute/TextSignals.java
+MOVE	m3/ports/precompute/src/main/java/jdk/m3/precompute/M3TokenRegex.java	m3/ports/precompute/src/main/java/jdk/m3/precompute/TokenRegex.java
+MOVE	m3/ports/precompute/src/main/java/jdk/m3/precompute/M3Utf16Glob.java	m3/ports/precompute/src/main/java/jdk/m3/precompute/Utf16Glob.java
+MOVE	m3/ports/precompute/src/test/java/jdk/m3/precompute/M3CodeTextSignalsTest.java	m3/ports/precompute/src/test/java/jdk/m3/precompute/CodeTextSignalsTest.java
+MOVE	m3/ports/precompute/src/test/java/jdk/m3/precompute/M3CpuToolPrecomputeSelfTest.java	m3/ports/precompute/src/test/java/jdk/m3/precompute/CpuToolPrecomputeSelfTest.java
+MOVE	m3/ports/precompute/src/test/java/jdk/m3/precompute/M3CpuToolPrecomputeTest.java	m3/ports/precompute/src/test/java/jdk/m3/precompute/CpuToolPrecomputeTest.java
+MOVE	m3/ports/precompute/src/test/java/jdk/m3/precompute/M3DistanceFrontierTest.java	m3/ports/precompute/src/test/java/jdk/m3/precompute/DistanceFrontierTest.java
+MOVE	m3/ports/precompute/src/test/java/jdk/m3/precompute/M3EditDistancePlanBitParallelTest.java	m3/ports/precompute/src/test/java/jdk/m3/precompute/EditDistancePlanBitParallelTest.java
+MOVE	m3/ports/precompute/src/test/java/jdk/m3/precompute/M3EditDistancePlanBoundaryTest.java	m3/ports/precompute/src/test/java/jdk/m3/precompute/EditDistancePlanBoundaryTest.java
+MOVE	m3/ports/precompute/src/test/java/jdk/m3/precompute/M3EditDistancePlanOracle.java	m3/ports/precompute/src/test/java/jdk/m3/precompute/EditDistancePlanOracle.java
+MOVE	m3/ports/precompute/src/test/java/jdk/m3/precompute/M3EditDistancePlanProofTest.java	m3/ports/precompute/src/test/java/jdk/m3/precompute/EditDistancePlanProofTest.java
+MOVE	m3/ports/precompute/src/test/java/jdk/m3/precompute/M3EditDistancePlanTest.java	m3/ports/precompute/src/test/java/jdk/m3/precompute/EditDistancePlanTest.java
+MOVE	m3/ports/precompute/src/test/java/jdk/m3/precompute/M3FrozenLongTupleIndexPairRegressionTest.java	m3/ports/precompute/src/test/java/jdk/m3/precompute/FrozenLongTupleIndexPairRegressionTest.java
+MOVE	m3/ports/precompute/src/test/java/jdk/m3/precompute/M3IndexPrecomputeConsumerProfilesDump.java	m3/ports/precompute/src/test/java/jdk/m3/precompute/IndexPrecomputeConsumerProfilesDump.java
+MOVE	m3/ports/precompute/src/test/java/jdk/m3/precompute/M3IndexPrecomputeConsumerProfilesOracle.java	m3/ports/precompute/src/test/java/jdk/m3/precompute/IndexPrecomputeConsumerProfilesOracle.java
+MOVE	m3/ports/precompute/src/test/java/jdk/m3/precompute/M3IndexPrecomputeConsumerProfilesReferenceTest.java	m3/ports/precompute/src/test/java/jdk/m3/precompute/IndexPrecomputeConsumerProfilesReferenceTest.java
+MOVE	m3/ports/precompute/src/test/java/jdk/m3/precompute/M3IndexPrecomputeConsumerProfilesTest.java	m3/ports/precompute/src/test/java/jdk/m3/precompute/IndexPrecomputeConsumerProfilesTest.java
+MOVE	m3/ports/precompute/src/test/java/jdk/m3/precompute/M3IndexPrecomputeDependencyImageTest.java	m3/ports/precompute/src/test/java/jdk/m3/precompute/IndexPrecomputeDependencyImageTest.java
+MOVE	m3/ports/precompute/src/test/java/jdk/m3/precompute/M3IndexPrecomputeMultipassCompilerTest.java	m3/ports/precompute/src/test/java/jdk/m3/precompute/IndexPrecomputeMultipassCompilerTest.java
+MOVE	m3/ports/precompute/src/test/java/jdk/m3/precompute/M3IndexPrecomputePlannerCycleTest.java	m3/ports/precompute/src/test/java/jdk/m3/precompute/IndexPrecomputePlannerCycleTest.java
+MOVE	m3/ports/precompute/src/test/java/jdk/m3/precompute/M3IndexPrecomputePlannerDump.java	m3/ports/precompute/src/test/java/jdk/m3/precompute/IndexPrecomputePlannerDump.java
+MOVE	m3/ports/precompute/src/test/java/jdk/m3/precompute/M3IndexPrecomputePlannerReferenceTest.java	m3/ports/precompute/src/test/java/jdk/m3/precompute/IndexPrecomputePlannerReferenceTest.java
+MOVE	m3/ports/precompute/src/test/java/jdk/m3/precompute/M3LcsPlanOracle.java	m3/ports/precompute/src/test/java/jdk/m3/precompute/LcsPlanOracle.java
+MOVE	m3/ports/precompute/src/test/java/jdk/m3/precompute/M3LcsPlanProofTest.java	m3/ports/precompute/src/test/java/jdk/m3/precompute/LcsPlanProofTest.java
+MOVE	m3/ports/precompute/src/test/java/jdk/m3/precompute/M3LcsPlanTest.java	m3/ports/precompute/src/test/java/jdk/m3/precompute/LcsPlanTest.java
+MOVE	m3/ports/precompute/src/test/java/jdk/m3/precompute/M3MeasuredRopeAppleScenarioTest.java	m3/ports/precompute/src/test/java/jdk/m3/precompute/MeasuredRopeAppleScenarioTest.java
+MOVE	m3/ports/precompute/src/test/java/jdk/m3/precompute/M3MeasuredRopeTest.java	m3/ports/precompute/src/test/java/jdk/m3/precompute/MeasuredRopeTest.java
+MOVE	m3/ports/precompute/src/test/java/jdk/m3/precompute/M3NativeParityTest.java	m3/ports/precompute/src/test/java/jdk/m3/precompute/NativeParityTest.java
+MOVE	m3/ports/precompute/src/test/java/jdk/m3/precompute/M3PatternQueryDifferential.java	m3/ports/precompute/src/test/java/jdk/m3/precompute/PatternQueryDifferential.java
+MOVE	m3/ports/precompute/src/test/java/jdk/m3/precompute/M3ProofCapture.java	m3/ports/precompute/src/test/java/jdk/m3/precompute/ProofCapture.java
+MOVE	m3/ports/precompute/src/test/java/jdk/m3/precompute/M3RegexDerivativeEffectsBridgeTest.java	m3/ports/precompute/src/test/java/jdk/m3/precompute/RegexDerivativeEffectsBridgeTest.java
+MOVE	m3/ports/precompute/src/test/java/jdk/m3/precompute/M3RegexDerivativeTest.java	m3/ports/precompute/src/test/java/jdk/m3/precompute/RegexDerivativeTest.java
+MOVE	m3/ports/precompute/src/test/java/jdk/m3/precompute/M3RegexDfaEffectsIndexProof.java	m3/ports/precompute/src/test/java/jdk/m3/precompute/RegexDfaEffectsIndexProof.java
+MOVE	m3/ports/precompute/src/test/java/jdk/m3/precompute/M3RegexDfaEffectsPortTest.java	m3/ports/precompute/src/test/java/jdk/m3/precompute/RegexDfaEffectsPortTest.java
+MOVE	m3/ports/precompute/src/test/java/jdk/m3/precompute/M3RegexDfaEffectsProof.java	m3/ports/precompute/src/test/java/jdk/m3/precompute/RegexDfaEffectsProof.java
+MOVE	m3/ports/precompute/src/test/java/jdk/m3/precompute/M3RegexOracleHarnessTest.java	m3/ports/precompute/src/test/java/jdk/m3/precompute/RegexOracleHarnessTest.java
+MOVE	m3/ports/precompute/src/test/java/jdk/m3/precompute/M3RegexShapeTest.java	m3/ports/precompute/src/test/java/jdk/m3/precompute/RegexShapeTest.java
+MOVE	m3/ports/precompute/src/test/java/jdk/m3/precompute/M3RegexStringSignalsTest.java	m3/ports/precompute/src/test/java/jdk/m3/precompute/RegexStringSignalsTest.java
+MOVE	m3/ports/precompute/src/test/java/jdk/m3/precompute/M3RegexStringTrialImageTest.java	m3/ports/precompute/src/test/java/jdk/m3/precompute/RegexStringTrialImageTest.java
+MOVE	m3/ports/precompute/src/test/java/jdk/m3/precompute/M3SimilarityBatchTest.java	m3/ports/precompute/src/test/java/jdk/m3/precompute/SimilarityBatchTest.java
+MOVE	m3/ports/precompute/src/test/java/jdk/m3/precompute/M3SparseUtf16StitchedDump.java	m3/ports/precompute/src/test/java/jdk/m3/precompute/SparseUtf16StitchedDump.java
+MOVE	m3/ports/precompute/src/test/java/jdk/m3/precompute/M3SparseUtf16StitchedOracle.java	m3/ports/precompute/src/test/java/jdk/m3/precompute/SparseUtf16StitchedOracle.java
+MOVE	m3/ports/precompute/src/test/java/jdk/m3/precompute/M3SparseUtf16StitchedReferenceTest.java	m3/ports/precompute/src/test/java/jdk/m3/precompute/SparseUtf16StitchedReferenceTest.java
+MOVE	m3/ports/precompute/src/test/java/jdk/m3/precompute/M3SparseUtf16StitchedTest.java	m3/ports/precompute/src/test/java/jdk/m3/precompute/SparseUtf16StitchedTest.java
+MOVE	m3/ports/precompute/src/test/java/jdk/m3/precompute/M3TextSignalsTest.java	m3/ports/precompute/src/test/java/jdk/m3/precompute/TextSignalsTest.java
+MOVE	m3/ports/precompute/src/test/java/jdk/m3/precompute/M3TokenRegexTest.java	m3/ports/precompute/src/test/java/jdk/m3/precompute/TokenRegexTest.java
+MOVE	m3/ports/precompute/src/test/java/jdk/m3/precompute/M3Utf16AtomsDump.java	m3/ports/precompute/src/test/java/jdk/m3/precompute/Utf16AtomsDump.java
+MOVE	m3/ports/precompute/src/test/java/jdk/m3/precompute/M3Utf16GlobOracle.java	m3/ports/precompute/src/test/java/jdk/m3/precompute/Utf16GlobOracle.java
+MOVE	m3/ports/precompute/src/test/java/jdk/m3/precompute/M3Utf16GlobProofTest.java	m3/ports/precompute/src/test/java/jdk/m3/precompute/Utf16GlobProofTest.java
+MOVE	m3/ports/precompute/src/test/java/jdk/m3/precompute/M3Utf16GlobTest.java	m3/ports/precompute/src/test/java/jdk/m3/precompute/Utf16GlobTest.java
+MOVE	m3/ports/regex-cursor/src/main/java/jdk/m3/regexcursor/M3CharSequenceCursor.java	m3/ports/regex-cursor/src/main/java/jdk/m3/regexcursor/CharSequenceCursor.java
+MOVE	m3/ports/regex-cursor/src/main/java/jdk/m3/regexcursor/M3ChunkCursor.java	m3/ports/regex-cursor/src/main/java/jdk/m3/regexcursor/ChunkCursor.java
+MOVE	m3/ports/regex-cursor/src/main/java/jdk/m3/regexcursor/M3CursorCharSequence.java	m3/ports/regex-cursor/src/main/java/jdk/m3/regexcursor/CursorCharSequence.java
+MOVE	m3/ports/regex-cursor/src/main/java/jdk/m3/regexcursor/M3CursorDfa.java	m3/ports/regex-cursor/src/main/java/jdk/m3/regexcursor/CursorDfa.java
+MOVE	m3/ports/regex-cursor/src/main/java/jdk/m3/regexcursor/M3CursorFacts.java	m3/ports/regex-cursor/src/main/java/jdk/m3/regexcursor/CursorFacts.java
+MOVE	m3/ports/regex-cursor/src/main/java/jdk/m3/regexcursor/M3CursorLiteralSearch.java	m3/ports/regex-cursor/src/main/java/jdk/m3/regexcursor/CursorLiteralSearch.java
+MOVE	m3/ports/regex-cursor/src/main/java/jdk/m3/regexcursor/M3CursorMatcher.java	m3/ports/regex-cursor/src/main/java/jdk/m3/regexcursor/CursorMatcher.java
+MOVE	m3/ports/regex-cursor/src/main/java/jdk/m3/regexcursor/M3CursorNfa.java	m3/ports/regex-cursor/src/main/java/jdk/m3/regexcursor/CursorNfa.java
+MOVE	m3/ports/regex-cursor/src/main/java/jdk/m3/regexcursor/M3CursorPikeVm.java	m3/ports/regex-cursor/src/main/java/jdk/m3/regexcursor/CursorPikeVm.java
+MOVE	m3/ports/regex-cursor/src/main/java/jdk/m3/regexcursor/M3CursorProbe.java	m3/ports/regex-cursor/src/main/java/jdk/m3/regexcursor/CursorProbe.java
+MOVE	m3/ports/regex-cursor/src/main/java/jdk/m3/regexcursor/M3CursorRegex.java	m3/ports/regex-cursor/src/main/java/jdk/m3/regexcursor/CursorRegex.java
+MOVE	m3/ports/regex-cursor/src/main/java/jdk/m3/regexcursor/M3GrammarTokenProjection.java	m3/ports/regex-cursor/src/main/java/jdk/m3/regexcursor/GrammarTokenProjection.java
+MOVE	m3/ports/regex-cursor/src/main/java/jdk/m3/regexcursor/M3RegexAst.java	m3/ports/regex-cursor/src/main/java/jdk/m3/regexcursor/RegexAst.java
+MOVE	m3/ports/regex-cursor/src/main/java/jdk/m3/regexcursor/M3RegexLiterals.java	m3/ports/regex-cursor/src/main/java/jdk/m3/regexcursor/RegexLiterals.java
+MOVE	m3/ports/regex-cursor/src/main/java/jdk/m3/regexcursor/M3RegexRefusal.java	m3/ports/regex-cursor/src/main/java/jdk/m3/regexcursor/RegexRefusal.java
+MOVE	m3/ports/regex-cursor/src/main/java/jdk/m3/regexcursor/M3RegexSubsetParser.java	m3/ports/regex-cursor/src/main/java/jdk/m3/regexcursor/RegexSubsetParser.java
+MOVE	m3/ports/regex-cursor/src/main/java/jdk/m3/regexcursor/M3RegexSyntax.java	m3/ports/regex-cursor/src/main/java/jdk/m3/regexcursor/RegexSyntax.java
+MOVE	m3/ports/regex-cursor/src/main/java/jdk/m3/regexcursor/M3RopeAtom.java	m3/ports/regex-cursor/src/main/java/jdk/m3/regexcursor/RopeAtom.java
+MOVE	m3/ports/regex-cursor/src/main/java/jdk/m3/regexcursor/M3RopeOwner.java	m3/ports/regex-cursor/src/main/java/jdk/m3/regexcursor/RopeOwner.java
+MOVE	m3/ports/regex-cursor/src/main/java/jdk/m3/regexcursor/M3RopeString.java	m3/ports/regex-cursor/src/main/java/jdk/m3/regexcursor/RopeString.java
+MOVE	m3/ports/regex-cursor/src/main/java/jdk/m3/regexcursor/M3RopeTuple.java	m3/ports/regex-cursor/src/main/java/jdk/m3/regexcursor/RopeTuple.java
+MOVE	m3/ports/regex-cursor/src/main/java/jdk/m3/regexcursor/M3StaticGrammarLexicon.java	m3/ports/regex-cursor/src/main/java/jdk/m3/regexcursor/StaticGrammarLexicon.java
+MOVE	m3/ports/regex-cursor/src/main/java/jdk/m3/regexcursor/M3StringCursor.java	m3/ports/regex-cursor/src/main/java/jdk/m3/regexcursor/StringCursor.java
+MOVE	m3/ports/regex-cursor/src/main/java/jdk/m3/regexcursor/M3TokenCursor.java	m3/ports/regex-cursor/src/main/java/jdk/m3/regexcursor/TokenCursor.java
+MOVE	m3/ports/regex-cursor/src/main/java/jdk/m3/regexcursor/M3TokenPattern.java	m3/ports/regex-cursor/src/main/java/jdk/m3/regexcursor/TokenPattern.java
+MOVE	m3/ports/regex-cursor/src/main/java/jdk/m3/regexcursor/M3TokenPatternParser.java	m3/ports/regex-cursor/src/main/java/jdk/m3/regexcursor/TokenPatternParser.java
+MOVE	m3/ports/regex-cursor/src/main/java/jdk/m3/regexcursor/M3UnitClasses.java	m3/ports/regex-cursor/src/main/java/jdk/m3/regexcursor/UnitClasses.java
+MOVE	m3/ports/regex-cursor/src/test/java/jdk/m3/regexcursor/M3AsciiRootAllocationProof.java	m3/ports/regex-cursor/src/test/java/jdk/m3/regexcursor/AsciiRootAllocationProof.java
+MOVE	m3/ports/regex-cursor/src/test/java/jdk/m3/regexcursor/M3AsciiRootMicrobench.java	m3/ports/regex-cursor/src/test/java/jdk/m3/regexcursor/AsciiRootMicrobench.java
+MOVE	m3/ports/regex-cursor/src/test/java/jdk/m3/regexcursor/M3AsciiRootPrecomputeProof.java	m3/ports/regex-cursor/src/test/java/jdk/m3/regexcursor/AsciiRootPrecomputeProof.java
+MOVE	m3/ports/regex-cursor/src/test/java/jdk/m3/regexcursor/M3AsciiRootPrecomputeTest.java	m3/ports/regex-cursor/src/test/java/jdk/m3/regexcursor/AsciiRootPrecomputeTest.java
+MOVE	m3/ports/regex-cursor/src/test/java/jdk/m3/regexcursor/M3ChunkCursorTest.java	m3/ports/regex-cursor/src/test/java/jdk/m3/regexcursor/ChunkCursorTest.java
+MOVE	m3/ports/regex-cursor/src/test/java/jdk/m3/regexcursor/M3CompleteTokenProjectionProof.java	m3/ports/regex-cursor/src/test/java/jdk/m3/regexcursor/CompleteTokenProjectionProof.java
+MOVE	m3/ports/regex-cursor/src/test/java/jdk/m3/regexcursor/M3CompleteTokenProjectionTest.java	m3/ports/regex-cursor/src/test/java/jdk/m3/regexcursor/CompleteTokenProjectionTest.java
+MOVE	m3/ports/regex-cursor/src/test/java/jdk/m3/regexcursor/M3CursorBoundaryTest.java	m3/ports/regex-cursor/src/test/java/jdk/m3/regexcursor/CursorBoundaryTest.java
+MOVE	m3/ports/regex-cursor/src/test/java/jdk/m3/regexcursor/M3CursorEngineTest.java	m3/ports/regex-cursor/src/test/java/jdk/m3/regexcursor/CursorEngineTest.java
+MOVE	m3/ports/regex-cursor/src/test/java/jdk/m3/regexcursor/M3CursorLiteralSearchTest.java	m3/ports/regex-cursor/src/test/java/jdk/m3/regexcursor/CursorLiteralSearchTest.java
+MOVE	m3/ports/regex-cursor/src/test/java/jdk/m3/regexcursor/M3CursorRegexTest.java	m3/ports/regex-cursor/src/test/java/jdk/m3/regexcursor/CursorRegexTest.java
+MOVE	m3/ports/regex-cursor/src/test/java/jdk/m3/regexcursor/M3GrammarCompleteCursorProof.java	m3/ports/regex-cursor/src/test/java/jdk/m3/regexcursor/GrammarCompleteCursorProof.java
+MOVE	m3/ports/regex-cursor/src/test/java/jdk/m3/regexcursor/M3GrammarCompleteCursorTest.java	m3/ports/regex-cursor/src/test/java/jdk/m3/regexcursor/GrammarCompleteCursorTest.java
+MOVE	m3/ports/regex-cursor/src/test/java/jdk/m3/regexcursor/M3GrammarTokenProjectionNativeProof.java	m3/ports/regex-cursor/src/test/java/jdk/m3/regexcursor/GrammarTokenProjectionNativeProof.java
+MOVE	m3/ports/regex-cursor/src/test/java/jdk/m3/regexcursor/M3GrammarTokenProjectionProof.java	m3/ports/regex-cursor/src/test/java/jdk/m3/regexcursor/GrammarTokenProjectionProof.java
+MOVE	m3/ports/regex-cursor/src/test/java/jdk/m3/regexcursor/M3GrammarTokenProjectionTest.java	m3/ports/regex-cursor/src/test/java/jdk/m3/regexcursor/GrammarTokenProjectionTest.java
+MOVE	m3/ports/regex-cursor/src/test/java/jdk/m3/regexcursor/M3RegexCursorDifferentialTest.java	m3/ports/regex-cursor/src/test/java/jdk/m3/regexcursor/RegexCursorDifferentialTest.java
+MOVE	m3/ports/regex-cursor/src/test/java/jdk/m3/regexcursor/M3RegexCursorFixtures.java	m3/ports/regex-cursor/src/test/java/jdk/m3/regexcursor/RegexCursorFixtures.java
+MOVE	m3/ports/regex-cursor/src/test/java/jdk/m3/regexcursor/M3RegexMasteryCorpus.java	m3/ports/regex-cursor/src/test/java/jdk/m3/regexcursor/RegexMasteryCorpus.java
+MOVE	m3/ports/regex-cursor/src/test/java/jdk/m3/regexcursor/M3StaticGrammarLexiconNativeProof.java	m3/ports/regex-cursor/src/test/java/jdk/m3/regexcursor/StaticGrammarLexiconNativeProof.java
+MOVE	m3/ports/regex-cursor/src/test/java/jdk/m3/regexcursor/M3StaticGrammarLexiconProof.java	m3/ports/regex-cursor/src/test/java/jdk/m3/regexcursor/StaticGrammarLexiconProof.java
+MOVE	m3/ports/regex-cursor/src/test/java/jdk/m3/regexcursor/M3StaticGrammarLexiconTest.java	m3/ports/regex-cursor/src/test/java/jdk/m3/regexcursor/StaticGrammarLexiconTest.java
+MOVE	m3/ports/regex-cursor/src/test/java/jdk/m3/regexcursor/M3TokenBorrowedGateTest.java	m3/ports/regex-cursor/src/test/java/jdk/m3/regexcursor/TokenBorrowedGateTest.java
+MOVE	m3/ports/regex-cursor/src/test/java/jdk/m3/regexcursor/M3TokenCursorMultiLaneBench.java	m3/ports/regex-cursor/src/test/java/jdk/m3/regexcursor/TokenCursorMultiLaneBench.java
+MOVE	m3/ports/regex-cursor/src/test/java/jdk/m3/regexcursor/M3TokenCursorMultiLaneProof.java	m3/ports/regex-cursor/src/test/java/jdk/m3/regexcursor/TokenCursorMultiLaneProof.java
+MOVE	m3/ports/regex-cursor/src/test/java/jdk/m3/regexcursor/M3TokenCursorMultiLaneTest.java	m3/ports/regex-cursor/src/test/java/jdk/m3/regexcursor/TokenCursorMultiLaneTest.java
+MOVE	m3/ports/regex-cursor/src/test/java/jdk/m3/regexcursor/M3TokenCursorSeekLocalityBench.java	m3/ports/regex-cursor/src/test/java/jdk/m3/regexcursor/TokenCursorSeekLocalityBench.java
+MOVE	m3/ports/regex-cursor/src/test/java/jdk/m3/regexcursor/M3TokenCursorSeekLocalityProof.java	m3/ports/regex-cursor/src/test/java/jdk/m3/regexcursor/TokenCursorSeekLocalityProof.java
+MOVE	m3/ports/regex-cursor/src/test/java/jdk/m3/regexcursor/M3TokenCursorSeekLocalityTest.java	m3/ports/regex-cursor/src/test/java/jdk/m3/regexcursor/TokenCursorSeekLocalityTest.java
+MOVE	m3/ports/regex-cursor/src/test/java/jdk/m3/regexcursor/M3TokenCursorSingleLaneProof.java	m3/ports/regex-cursor/src/test/java/jdk/m3/regexcursor/TokenCursorSingleLaneProof.java
+MOVE	m3/ports/regex-cursor/src/test/java/jdk/m3/regexcursor/M3TokenCursorSingleLaneTest.java	m3/ports/regex-cursor/src/test/java/jdk/m3/regexcursor/TokenCursorSingleLaneTest.java
+MOVE	m3/ports/regex-cursor/src/test/java/jdk/m3/regexcursor/M3TokenPatternTest.java	m3/ports/regex-cursor/src/test/java/jdk/m3/regexcursor/TokenPatternTest.java

@@ -196,6 +196,7 @@ class outputStream;
   LOG_TAG(timer) \
   LOG_TAG(tlab) \
   LOG_TAG(tracking) \
+  LOG_TAG(trimnative) /* trim native heap */ \
   LOG_TAG(unload) /* Trace unloading of classes */ \
   LOG_TAG(unmap) \
   LOG_TAG(unshareable) \
@@ -204,6 +205,7 @@ class outputStream;
   LOG_TAG(valuebasedclasses) \
   LOG_TAG(verification) \
   LOG_TAG(verify) \
+  LOG_TAG(vitals) /* SapMachine 2022-06-01: Vitals */ \
   LOG_TAG(vmmutex) \
   LOG_TAG(vmoperation) \
   LOG_TAG(vmthread) \

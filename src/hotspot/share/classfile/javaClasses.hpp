@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1997, 2023, Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 1997, 2024, Oracle and/or its affiliates. All rights reserved.
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
  *
  * This code is free software; you can redistribute it and/or modify it
@@ -54,6 +54,7 @@ class java_lang_Object : AllStatic {
 class java_lang_String : AllStatic {
  private:
   static int _value_offset;
+  static int _m3_offset;
   static int _hash_offset;
   static int _hashIsZero_offset;
   static int _coder_offset;
@@ -100,8 +101,10 @@ class java_lang_String : AllStatic {
   static Handle create_from_platform_dependent_str(const char* str, TRAPS);
 
   static void set_compact_strings(bool value);
+  static void set_m3_joined_strings(bool value);
 
   static int value_offset() { CHECK_INIT(_value_offset); }
+  static int m3_storage_offset() { CHECK_INIT(_m3_offset); }
   static int coder_offset() { CHECK_INIT(_coder_offset); }
 
   static inline void set_value_raw(oop string, typeArrayOop buffer);
@@ -123,6 +126,11 @@ class java_lang_String : AllStatic {
   // Accessors
   static inline typeArrayOop value(oop java_string);
   static inline typeArrayOop value_no_keepalive(oop java_string);
+  static inline oop m3_storage(oop java_string);
+  static inline oop m3_storage_no_keepalive(oop java_string);
+  static inline bool is_m3_joined(oop java_string);
+  static inline jchar char_at(oop java_string, int index);
+  static void copy_chars(oop java_string, int start, int len, jchar* destination);
   static inline bool hash_is_set(oop string);
   static inline bool is_latin1(oop java_string);
   static inline bool deduplication_forbidden(oop java_string);
@@ -197,6 +205,57 @@ class java_lang_String : AllStatic {
   friend class StringTable;
 };
 
+/**
+ * VM access to java.lang.M3String and its canonical owner graph.
+ *
+ * M3String itself is exactly owner + packed range coordinate. Payload arrays are
+ * not part of this layout. Atom owners address native/mapped bytes; immediate owners
+ * carry their whole short text in one packed long; tuple owners
+ * retain only child M3String coordinates.
+ */
+class java_lang_M3String : AllStatic {
+ private:
+  static int _owner_offset;
+  static int _value_offset;
+
+  static int _owner_kind_offset;
+  static int _owner_length_offset;
+  static int _owner_coder_offset;
+  static int _owner_javaHash_offset;
+  static int _owner_facts_offset;
+  static int _facts_utf8Length_offset;
+  static int _facts_modifiedUtf8Length_offset;
+
+  static int _atom_address_offset;
+  static int _atom_storageWidth_offset;
+  static int _atom_bigEndian_offset;
+
+  static int _tuple_left_offset;
+  static int _tuple_right_offset;
+
+  static int _immediate_words_offset;
+  static int _immediate_slot_offset;
+
+  static void copy_owner_chars(
+      oop owner, int start, int len, jchar* destination);
+
+ public:
+  static void compute_offsets();
+  static void serialize_offsets(SerializeClosure* f) NOT_CDS_RETURN;
+
+  static inline oop owner(oop value);
+  static inline jlong coordinate(oop value);
+  static inline int start(oop value);
+  static inline int length(oop value);
+  static inline int owner_length(oop value);
+  static inline jbyte coder(oop value);
+  static inline jint java_hash(oop value);
+  static inline int utf8_length_if_precomputed(oop value);
+  static inline jchar char_at(oop value, int index);
+  // Unit of a packed java.lang.M3StringImmediate value (same layout as the Java owner).
+  static inline jchar immediate_char_at(jlong packed, int index);
+  static void copy_chars(oop value, int start, int len, jchar* destination);
+};
 
 // Interface to java.lang.Class objects
 
@@ -208,6 +267,7 @@ class java_lang_String : AllStatic {
   macro(java_lang_Class, protection_domain,      object_signature,  false) \
   macro(java_lang_Class, signers,                object_signature,  false) \
   macro(java_lang_Class, source_file,            object_signature,  false) \
+  macro(java_lang_Class, init_lock,              object_signature,  false)
 
 class java_lang_Class : AllStatic {
   friend class VMStructs;
@@ -224,6 +284,7 @@ class java_lang_Class : AllStatic {
   static int _static_oop_field_count_offset;
 
   static int _protection_domain_offset;
+  static int _init_lock_offset;
   static int _signers_offset;
   static int _class_loader_offset;
   static int _module_offset;
@@ -238,6 +299,7 @@ class java_lang_Class : AllStatic {
   static GrowableArray<Klass*>* _fixup_mirror_list;
   static GrowableArray<Klass*>* _fixup_module_field_list;
 
+  static void set_init_lock(oop java_class, oop init_lock);
   static void set_protection_domain(oop java_class, oop protection_domain);
   static void set_class_loader(oop java_class, oop class_loader);
   static void set_component_mirror(oop java_class, oop comp_mirror);
@@ -290,6 +352,10 @@ class java_lang_Class : AllStatic {
 
   // Support for embedded per-class oops
   static oop  protection_domain(oop java_class);
+  static oop  init_lock(oop java_class);
+  static void clear_init_lock(oop java_class) {
+    set_init_lock(java_class, nullptr);
+  }
   static oop  component_mirror(oop java_class);
   static objArrayOop  signers(oop java_class);
   static void set_signers(oop java_class, objArrayOop signers);
@@ -519,20 +585,22 @@ class java_lang_VirtualThread : AllStatic {
   JFR_ONLY(static int _jfr_epoch_offset;)
  public:
   enum {
-    NEW          = 0,
-    STARTED      = 1,
-    RUNNABLE     = 2,
-    RUNNING      = 3,
-    PARKING      = 4,
-    PARKED       = 5,
-    PINNED       = 6,
-    YIELDING     = 7,
-    TERMINATED   = 99,
+    NEW           = 0,
+    STARTED       = 1,
+    RUNNING       = 2,
+    PARKING       = 3,
+    PARKED        = 4,
+    PINNED        = 5,
+    TIMED_PARKING = 6,
+    TIMED_PARKED  = 7,
+    TIMED_PINNED  = 8,
+    UNPARKED      = 9,
+    YIELDING      = 10,
+    YIELDED       = 11,
+    TERMINATED    = 99,
 
-    // can be suspended from scheduling when unmounted
-    SUSPENDED    = 1 << 8,
-    RUNNABLE_SUSPENDED = (RUNNABLE | SUSPENDED),
-    PARKED_SUSPENDED   = (PARKED | SUSPENDED)
+    // additional state bits
+    SUSPENDED    = 1 << 8,   // suspended when unmounted
   };
 
   static void compute_offsets();
@@ -591,12 +659,14 @@ class java_lang_Throwable: AllStatic {
   static void set_backtrace(oop throwable, oop value);
   static int depth(oop throwable);
   static void set_depth(oop throwable, int value);
-  static int get_detailMessage_offset() { CHECK_INIT(_detailMessage_offset); }
   // Message
+  static int get_detailMessage_offset() { CHECK_INIT(_detailMessage_offset); }
   static oop message(oop throwable);
-  static oop cause(oop throwable);
+  static const char* message_as_utf8(oop throwable);
   static void set_message(oop throwable, oop value);
-  static Symbol* detail_message(oop throwable);
+
+  static oop cause(oop throwable);
+
   static void print_stack_element(outputStream *st, Method* method, int bci);
 
   static void compute_offsets();
@@ -1357,13 +1427,17 @@ class java_lang_invoke_MethodType: AllStatic {
 
 
 // Interface to java.lang.invoke.CallSite objects
+#define CALLSITE_INJECTED_FIELDS(macro) \
+  macro(java_lang_invoke_CallSite, vmdependencies, intptr_signature, false) \
+  macro(java_lang_invoke_CallSite, last_cleanup, long_signature, false)
 
 class java_lang_invoke_CallSite: AllStatic {
   friend class JavaClasses;
 
 private:
   static int _target_offset;
-  static int _context_offset;
+  static int _vmdependencies_offset;
+  static int _last_cleanup_offset;
 
   static void compute_offsets();
 
@@ -1374,7 +1448,7 @@ public:
   static void         set_target(          oop site, oop target);
   static void         set_target_volatile( oop site, oop target);
 
-  static oop context_no_keepalive(oop site);
+  static DependencyContext vmdependencies(oop call_site);
 
   // Testers
   static bool is_subclass(Klass* klass) {
@@ -1384,7 +1458,6 @@ public:
 
   // Accessors for code generation:
   static int target_offset()  { CHECK_INIT(_target_offset); }
-  static int context_offset() { CHECK_INIT(_context_offset); }
 };
 
 // Interface to java.lang.invoke.ConstantCallSite objects
@@ -1405,35 +1478,6 @@ public:
   // Testers
   static bool is_subclass(Klass* klass) {
     return klass->is_subclass_of(vmClasses::ConstantCallSite_klass());
-  }
-  static bool is_instance(oop obj);
-};
-
-// Interface to java.lang.invoke.MethodHandleNatives$CallSiteContext objects
-
-#define CALLSITECONTEXT_INJECTED_FIELDS(macro) \
-  macro(java_lang_invoke_MethodHandleNatives_CallSiteContext, vmdependencies, intptr_signature, false) \
-  macro(java_lang_invoke_MethodHandleNatives_CallSiteContext, last_cleanup, long_signature, false)
-
-class DependencyContext;
-
-class java_lang_invoke_MethodHandleNatives_CallSiteContext : AllStatic {
-  friend class JavaClasses;
-
-private:
-  static int _vmdependencies_offset;
-  static int _last_cleanup_offset;
-
-  static void compute_offsets();
-
-public:
-  static void serialize_offsets(SerializeClosure* f) NOT_CDS_RETURN;
-  // Accessors
-  static DependencyContext vmdependencies(oop context);
-
-  // Testers
-  static bool is_subclass(Klass* klass) {
-    return klass->is_subclass_of(vmClasses::Context_klass());
   }
   static bool is_instance(oop obj);
 };

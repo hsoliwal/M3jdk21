@@ -35,6 +35,7 @@ import java.awt.Dimension;
 import java.awt.FocusTraversalPolicy;
 import java.awt.Font;
 import java.awt.FontMetrics;
+import java.awt.Frame;
 import java.awt.Graphics;
 import java.awt.Insets;
 import java.awt.KeyboardFocusManager;
@@ -442,6 +443,21 @@ public abstract class JComponent extends Container implements Serializable,
                 comp.compWriteObjectNotify();
             }
         });
+    }
+
+    /*
+     * True when an image observer must stop taking animation frames because
+     * nobody can see the component: it is not showing, or its frame is
+     * iconified (isShowing() still answers true for an iconified frame).
+     * Painting the component again re-registers the observer.
+     */
+    static boolean isImageObserverHidden(Component c) {
+        if (!c.isShowing()) {
+            return true;
+        }
+        Window window = SwingUtilities.getWindowAncestor(c);
+        return window instanceof Frame frame //FLLDCIM: MARK — every-widget animated icon H
+                && (frame.getExtendedState() & Frame.ICONIFIED) != 0;
     }
 
     static Graphics safelyGetGraphics(Component c) {
@@ -4177,6 +4193,10 @@ public abstract class JComponent extends Container implements Serializable,
             }
         }
         clientPropertyChanged(key, oldValue, value);
+        //FLLDCIM: L6 - M3 redraw-suspend construction flag (TARGET_OWNED_PORT)
+        if (RepaintManager.M3_REDRAW_SUSPENDED.equals(key)) {
+            RepaintManager.m3RedrawChanged(this, oldValue, value);
+        }
         firePropertyChange(key.toString(), oldValue, value);
     }
 

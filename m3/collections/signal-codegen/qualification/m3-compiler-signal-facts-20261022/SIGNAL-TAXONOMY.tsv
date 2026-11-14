@@ -1,0 +1,24 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright 2026 Hitesh Soliwal and contributors.
+# Family-level inventory: availability means a bounded source-time fact, NOT complete semantics.
+family	source	current_owner	produced_now	validity_rule	exactness	future_recipe_or_gate
+IDENTITY	javac Elements	SortableProcessor package/class hashed tokens	PARTIAL	structuralSignals token lanes	Hash-collision-prone hints, not canonical identity	Stable compiler symbol identities and source-version owner
+LEXICAL	M3String+compiler names	SortableProcessor field/method signature hashes	PARTIAL	Existing six token lanes	Hash hints only, no full n-gram lexicon	M3String canonical token/UTF-16 graph
+STRUCTURAL	javac Elements	M3CompilerFacts FIELDS/METHODS/CONSTRUCTORS	YES	MODEL_FACTS known	Exact declared counts for observed TypeElement	Superclass depth and AST shape recipe
+TYPE	javac type bindings	M3CompilerFacts interfaces/type hash tokens/parameters/throws	PARTIAL	MODEL_FACTS known	Interfaces and parameter counts exact; type-token count hash-derived	JDT/compiler type binding graph
+DEPENDENCY_RELATIONSHIP	javac Trees	M3CompilerFacts local call site and resolved-token hints	PARTIAL	AST source-path required	Local syntax counts exact; distinct hashes approximate	Canonical resolved call graph with caller/fan-in and transitive closure
+BEHAVIORAL	javac syntax	M3CompilerFacts synchronized/throw sites	PARTIAL	AST source-path required	Site counts do not prove purity, effects, synchronization behavior	Side-effect CFG/data-flow proof recipe
+CONTROL_FLOW	javac AST	M3CompilerFacts if/switch/loop/conditional/try/catch/return	PARTIAL	AST source-path required	Syntactic counts exact for owned root, cyclomatic complexity not certified	CFG normalized complexity producer
+DATA_FLOW	AST+CFG SSA	Not manufactured by this producer	NO	UNKNOWN	Read/write/alias/escape remain unproved	Compiler dataflow/escape analysis
+MEMORY	static allocation AST vs actual heap	M3CompilerFacts NEW_EXPRESSIONS syntax only	PARTIAL	AST known; runtime cost UNKNOWN	Allocation syntax count not allocated bytes/object footprint	HotSpot allocation and retained heap profiling
+LIFETIME	DOOP object residency	Not manufactured here	NO	UNKNOWN	Transient/recyclable/viewport identity requires owner policy	DOOP parent-owned object state plan
+LOCALITY	M3 arrays offsets indexes	M3 collection index owners, not this producer	NO	UNKNOWN	Source-distance is not storage/cache locality	Array stride, access region, backend cache probes
+PERFORMANCE	JFR/JIT/profiler	Not manufactured here	NO	UNKNOWN	Runtime frequency latency/cache misses not known at compile time	Versioned profiling and JIT counters
+SEMANTIC	Domain policy	M3CompilerFacts caller-supplied compareBy/project	POLICY_ONLY	Only selected known feature values	Score never proves domain equality/intent	Domain-certified ordering/verification rule
+TEMPORAL	Object/time measurements	Not manufactured here	NO	UNKNOWN	Age, recency, modification frequency need versioned clocks	Runtime timestamp/event ledger
+RELIABILITY	Recipe proof/custody	Synexia Maven OpenRewrite/JUnit and provenance	EXTERNAL_RECEIPT	PASS/FAIL/HOLD/NOT_RUN	A self-reported numerical confidence cannot promote code	Compiler/JUnit/JNI/ABI confidence calibration
+EVOLUTION	Git DAG history	Existing Synexia PR/history ledger	PARTIAL	Commit/version source pinned	Change frequency and regression risk not inferred from one file	Git source/atom history classifier
+COMPILER_OPTIMIZATION	JIT+static constraints	Only syntax/count hints today	NO	UNKNOWN	Inlining/vectorization/JNI benefit unproved	Compiler IR and measured resource oracle
+PRECOMPUTATION	Known constants/string/regex	Existing M3 regex/AST source-time recipes	EXISTING_OWNER	Scope + contract + source hash	Safe only with deterministic inputs/invalidation	Compose with M3RegexString and exact source seals
+DISTANCE	Weighted projected numeric hints	M3ProgressiveSignalEvidence/StructuralSignals	EXISTING_OWNER	Certified bounds or canonical fallback	Lexical ranks are not semantic metrics; unknown bounds cannot prune	Proof-certified lower/upper pruning recipe
+JNI_ACCELERATION	Primitive arrays + native peer	M3SignalOrderNative existing JNI C kernel	EXISTING_OWNER	NATIVE_REQUIRED and actual -Xcheck:jni	Transfer/call overhead and CPU gain require measurement	JNI batch/intensity/ownership profiling

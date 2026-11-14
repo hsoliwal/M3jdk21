@@ -1,0 +1,9 @@
+category	reference	decision	contract_reason
+exact-first-hit	LeetCode #28 Find the Index of the First Occurrence	REUSE_FIRST_PARTY	First byte occurrence and source-relative offsets remain owned by original PMEMSDK Java/JNI KMP
+distinct-intersection	LeetCode #349 Intersection of Two Arrays	CATEGORY_ONLY	Presence of multiple different gram keys is a necessary-condition set intersection; no multiplicity semantics
+multiset-intersection	LeetCode #350 Intersection of Two Arrays II	REJECT_DROP_IN	Multiset counts differ from distinct-required byte-pair membership
+overlap-count	HackerRank Find a String	REFERENCE_ONLY	Counts overlapping occurrences, not first-hit
+exact-string-frequency	HackerRank Sparse Arrays	REJECT_DROP_IN	String frequency is not per-file binary substring matching
+sorted-intersection	GeeksforGeeks Common elements in three sorted arrays	CATEGORY_ONLY	Sorted-list intersection is a problem shape, not JNI implementation code
+jni-kmp	Synexia PmemSearch/PmemSourceImage at ef1e2d9cb70a20ff650bfa47d63617f4ddcad722	REUSE_APACHE_2	Original native symbol and KMP owner unchanged
+github-donor	TheAlgorithms/Java	REVIEW_ONLY	No source/solution copied; exact revision and license pin required for future adoption

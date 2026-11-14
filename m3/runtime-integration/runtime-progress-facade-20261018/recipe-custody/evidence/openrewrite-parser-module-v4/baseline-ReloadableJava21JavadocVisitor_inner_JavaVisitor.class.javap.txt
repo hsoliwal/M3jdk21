@@ -1,0 +1,962 @@
+Classfile /workspace/scratch/2b4d1cb957a7/collection-refinement/proof/openrewrite-parser-module-v4/baseline/rewrite-java-21/target/classes/org/openrewrite/java/isolated/ReloadableJava21JavadocVisitor$JavaVisitor.class
+  Last modified Oct 18, 2026; size 9679 bytes
+  SHA-256 checksum 63ec35450e05057a069c61816e5f1418da497eb16015d78a507f6465faf49aed
+  Compiled from "ReloadableJava21JavadocVisitor.java"
+class org.openrewrite.java.isolated.ReloadableJava21JavadocVisitor$JavaVisitor extends com.sun.source.util.TreeScanner<org.openrewrite.java.tree.J, org.openrewrite.java.tree.Space>
+  minor version: 0
+  major version: 65
+  flags: (0x0020) ACC_SUPER
+  this_class: #2                          // org/openrewrite/java/isolated/ReloadableJava21JavadocVisitor$JavaVisitor
+  super_class: #8                         // com/sun/source/util/TreeScanner
+  interfaces: 0, fields: 1, methods: 12, attributes: 4
+Constant pool:
+    #1 = Fieldref           #2.#3         // org/openrewrite/java/isolated/ReloadableJava21JavadocVisitor$JavaVisitor.this$0:Lorg/openrewrite/java/isolated/ReloadableJava21JavadocVisitor;
+    #2 = Class              #4            // org/openrewrite/java/isolated/ReloadableJava21JavadocVisitor$JavaVisitor
+    #3 = NameAndType        #5:#6         // this$0:Lorg/openrewrite/java/isolated/ReloadableJava21JavadocVisitor;
+    #4 = Utf8               org/openrewrite/java/isolated/ReloadableJava21JavadocVisitor$JavaVisitor
+    #5 = Utf8               this$0
+    #6 = Utf8               Lorg/openrewrite/java/isolated/ReloadableJava21JavadocVisitor;
+    #7 = Methodref          #8.#9         // com/sun/source/util/TreeScanner."<init>":()V
+    #8 = Class              #10           // com/sun/source/util/TreeScanner
+    #9 = NameAndType        #11:#12       // "<init>":()V
+   #10 = Utf8               com/sun/source/util/TreeScanner
+   #11 = Utf8               <init>
+   #12 = Utf8               ()V
+   #13 = Class              #14           // com/sun/tools/javac/tree/JCTree$JCFieldAccess
+   #14 = Utf8               com/sun/tools/javac/tree/JCTree$JCFieldAccess
+   #15 = Fieldref           #13.#16       // com/sun/tools/javac/tree/JCTree$JCFieldAccess.selected:Lcom/sun/tools/javac/tree/JCTree$JCExpression;
+   #16 = NameAndType        #17:#18       // selected:Lcom/sun/tools/javac/tree/JCTree$JCExpression;
+   #17 = Utf8               selected
+   #18 = Utf8               Lcom/sun/tools/javac/tree/JCTree$JCExpression;
+   #19 = Fieldref           #20.#21       // org/openrewrite/java/tree/Space.EMPTY:Lorg/openrewrite/java/tree/Space;
+   #20 = Class              #22           // org/openrewrite/java/tree/Space
+   #21 = NameAndType        #23:#24       // EMPTY:Lorg/openrewrite/java/tree/Space;
+   #22 = Utf8               org/openrewrite/java/tree/Space
+   #23 = Utf8               EMPTY
+   #24 = Utf8               Lorg/openrewrite/java/tree/Space;
+   #25 = Methodref          #2.#26        // org/openrewrite/java/isolated/ReloadableJava21JavadocVisitor$JavaVisitor.scan:(Lcom/sun/source/tree/Tree;Ljava/lang/Object;)Ljava/lang/Object;
+   #26 = NameAndType        #27:#28       // scan:(Lcom/sun/source/tree/Tree;Ljava/lang/Object;)Ljava/lang/Object;
+   #27 = Utf8               scan
+   #28 = Utf8               (Lcom/sun/source/tree/Tree;Ljava/lang/Object;)Ljava/lang/Object;
+   #29 = Class              #30           // org/openrewrite/java/tree/Expression
+   #30 = Utf8               org/openrewrite/java/tree/Expression
+   #31 = String             #32           // .
+   #32 = Utf8               .
+   #33 = Methodref          #34.#35       // org/openrewrite/java/isolated/ReloadableJava21JavadocVisitor.sourceBefore:(Ljava/lang/String;)Ljava/util/List;
+   #34 = Class              #36           // org/openrewrite/java/isolated/ReloadableJava21JavadocVisitor
+   #35 = NameAndType        #37:#38       // sourceBefore:(Ljava/lang/String;)Ljava/util/List;
+   #36 = Utf8               org/openrewrite/java/isolated/ReloadableJava21JavadocVisitor
+   #37 = Utf8               sourceBefore
+   #38 = Utf8               (Ljava/lang/String;)Ljava/util/List;
+   #39 = Fieldref           #34.#40       // org/openrewrite/java/isolated/ReloadableJava21JavadocVisitor.cursor:I
+   #40 = NameAndType        #41:#42       // cursor:I
+   #41 = Utf8               cursor
+   #42 = Utf8               I
+   #43 = Fieldref           #13.#44       // com/sun/tools/javac/tree/JCTree$JCFieldAccess.name:Lcom/sun/tools/javac/util/Name;
+   #44 = NameAndType        #45:#46       // name:Lcom/sun/tools/javac/util/Name;
+   #45 = Utf8               name
+   #46 = Utf8               Lcom/sun/tools/javac/util/Name;
+   #47 = Methodref          #48.#49       // com/sun/tools/javac/util/Name.toString:()Ljava/lang/String;
+   #48 = Class              #50           // com/sun/tools/javac/util/Name
+   #49 = NameAndType        #51:#52       // toString:()Ljava/lang/String;
+   #50 = Utf8               com/sun/tools/javac/util/Name
+   #51 = Utf8               toString
+   #52 = Utf8               ()Ljava/lang/String;
+   #53 = Methodref          #54.#55       // java/lang/String.length:()I
+   #54 = Class              #56           // java/lang/String
+   #55 = NameAndType        #57:#58       // length:()I
+   #56 = Utf8               java/lang/String
+   #57 = Utf8               length
+   #58 = Utf8               ()I
+   #59 = Class              #60           // org/openrewrite/java/tree/J$FieldAccess
+   #60 = Utf8               org/openrewrite/java/tree/J$FieldAccess
+   #61 = InterfaceMethodref #62.#63       // org/openrewrite/Tree.randomId:()Ljava/util/UUID;
+   #62 = Class              #64           // org/openrewrite/Tree
+   #63 = NameAndType        #65:#66       // randomId:()Ljava/util/UUID;
+   #64 = Utf8               org/openrewrite/Tree
+   #65 = Utf8               randomId
+   #66 = Utf8               ()Ljava/util/UUID;
+   #67 = Fieldref           #68.#69       // org/openrewrite/marker/Markers.EMPTY:Lorg/openrewrite/marker/Markers;
+   #68 = Class              #70           // org/openrewrite/marker/Markers
+   #69 = NameAndType        #23:#71       // EMPTY:Lorg/openrewrite/marker/Markers;
+   #70 = Utf8               org/openrewrite/marker/Markers
+   #71 = Utf8               Lorg/openrewrite/marker/Markers;
+   #72 = Class              #73           // org/openrewrite/java/tree/J$Identifier
+   #73 = Utf8               org/openrewrite/java/tree/J$Identifier
+   #74 = Methodref          #75.#76       // java/util/Collections.emptyList:()Ljava/util/List;
+   #75 = Class              #77           // java/util/Collections
+   #76 = NameAndType        #78:#79       // emptyList:()Ljava/util/List;
+   #77 = Utf8               java/util/Collections
+   #78 = Utf8               emptyList
+   #79 = Utf8               ()Ljava/util/List;
+   #80 = Methodref          #72.#81       // org/openrewrite/java/tree/J$Identifier."<init>":(Ljava/util/UUID;Lorg/openrewrite/java/tree/Space;Lorg/openrewrite/marker/Markers;Ljava/util/List;Ljava/lang/String;Lorg/openrewrite/java/tree/JavaType;Lorg/openrewrite/java/tree/JavaType$Variable;)V
+   #81 = NameAndType        #11:#82       // "<init>":(Ljava/util/UUID;Lorg/openrewrite/java/tree/Space;Lorg/openrewrite/marker/Markers;Ljava/util/List;Ljava/lang/String;Lorg/openrewrite/java/tree/JavaType;Lorg/openrewrite/java/tree/JavaType$Variable;)V
+   #82 = Utf8               (Ljava/util/UUID;Lorg/openrewrite/java/tree/Space;Lorg/openrewrite/marker/Markers;Ljava/util/List;Ljava/lang/String;Lorg/openrewrite/java/tree/JavaType;Lorg/openrewrite/java/tree/JavaType$Variable;)V
+   #83 = Methodref          #84.#85       // org/openrewrite/java/tree/JLeftPadded.build:(Ljava/lang/Object;)Lorg/openrewrite/java/tree/JLeftPadded;
+   #84 = Class              #86           // org/openrewrite/java/tree/JLeftPadded
+   #85 = NameAndType        #87:#88       // build:(Ljava/lang/Object;)Lorg/openrewrite/java/tree/JLeftPadded;
+   #86 = Utf8               org/openrewrite/java/tree/JLeftPadded
+   #87 = Utf8               build
+   #88 = Utf8               (Ljava/lang/Object;)Lorg/openrewrite/java/tree/JLeftPadded;
+   #89 = Fieldref           #34.#90       // org/openrewrite/java/isolated/ReloadableJava21JavadocVisitor.typeMapping:Lorg/openrewrite/java/isolated/ReloadableJava21TypeMapping;
+   #90 = NameAndType        #91:#92       // typeMapping:Lorg/openrewrite/java/isolated/ReloadableJava21TypeMapping;
+   #91 = Utf8               typeMapping
+   #92 = Utf8               Lorg/openrewrite/java/isolated/ReloadableJava21TypeMapping;
+   #93 = Methodref          #94.#95       // org/openrewrite/java/isolated/ReloadableJava21TypeMapping.type:(Lcom/sun/source/tree/Tree;)Lorg/openrewrite/java/tree/JavaType;
+   #94 = Class              #96           // org/openrewrite/java/isolated/ReloadableJava21TypeMapping
+   #95 = NameAndType        #97:#98       // type:(Lcom/sun/source/tree/Tree;)Lorg/openrewrite/java/tree/JavaType;
+   #96 = Utf8               org/openrewrite/java/isolated/ReloadableJava21TypeMapping
+   #97 = Utf8               type
+   #98 = Utf8               (Lcom/sun/source/tree/Tree;)Lorg/openrewrite/java/tree/JavaType;
+   #99 = Methodref          #59.#100      // org/openrewrite/java/tree/J$FieldAccess."<init>":(Ljava/util/UUID;Lorg/openrewrite/java/tree/Space;Lorg/openrewrite/marker/Markers;Lorg/openrewrite/java/tree/Expression;Lorg/openrewrite/java/tree/JLeftPadded;Lorg/openrewrite/java/tree/JavaType;)V
+  #100 = NameAndType        #11:#101      // "<init>":(Ljava/util/UUID;Lorg/openrewrite/java/tree/Space;Lorg/openrewrite/marker/Markers;Lorg/openrewrite/java/tree/Expression;Lorg/openrewrite/java/tree/JLeftPadded;Lorg/openrewrite/java/tree/JavaType;)V
+  #101 = Utf8               (Ljava/util/UUID;Lorg/openrewrite/java/tree/Space;Lorg/openrewrite/marker/Markers;Lorg/openrewrite/java/tree/Expression;Lorg/openrewrite/java/tree/JLeftPadded;Lorg/openrewrite/java/tree/JavaType;)V
+  #102 = InterfaceMethodref #103.#104     // com/sun/source/tree/IdentifierTree.getName:()Ljavax/lang/model/element/Name;
+  #103 = Class              #105          // com/sun/source/tree/IdentifierTree
+  #104 = NameAndType        #106:#107     // getName:()Ljavax/lang/model/element/Name;
+  #105 = Utf8               com/sun/source/tree/IdentifierTree
+  #106 = Utf8               getName
+  #107 = Utf8               ()Ljavax/lang/model/element/Name;
+  #108 = InterfaceMethodref #109.#49      // javax/lang/model/element/Name.toString:()Ljava/lang/String;
+  #109 = Class              #110          // javax/lang/model/element/Name
+  #110 = Utf8               javax/lang/model/element/Name
+  #111 = Class              #112          // com/sun/tools/javac/tree/JCTree$JCPrimitiveTypeTree
+  #112 = Utf8               com/sun/tools/javac/tree/JCTree$JCPrimitiveTypeTree
+  #113 = Methodref          #111.#49      // com/sun/tools/javac/tree/JCTree$JCPrimitiveTypeTree.toString:()Ljava/lang/String;
+  #114 = Fieldref           #111.#115     // com/sun/tools/javac/tree/JCTree$JCPrimitiveTypeTree.typetag:Lcom/sun/tools/javac/code/TypeTag;
+  #115 = NameAndType        #116:#117     // typetag:Lcom/sun/tools/javac/code/TypeTag;
+  #116 = Utf8               typetag
+  #117 = Utf8               Lcom/sun/tools/javac/code/TypeTag;
+  #118 = Methodref          #94.#119      // org/openrewrite/java/isolated/ReloadableJava21TypeMapping.primitive:(Lcom/sun/tools/javac/code/TypeTag;)Lorg/openrewrite/java/tree/JavaType$Primitive;
+  #119 = NameAndType        #120:#121     // primitive:(Lcom/sun/tools/javac/code/TypeTag;)Lorg/openrewrite/java/tree/JavaType$Primitive;
+  #120 = Utf8               primitive
+  #121 = Utf8               (Lcom/sun/tools/javac/code/TypeTag;)Lorg/openrewrite/java/tree/JavaType$Primitive;
+  #122 = InterfaceMethodref #123.#124     // com/sun/source/tree/ArrayTypeTree.getType:()Lcom/sun/source/tree/Tree;
+  #123 = Class              #125          // com/sun/source/tree/ArrayTypeTree
+  #124 = NameAndType        #126:#127     // getType:()Lcom/sun/source/tree/Tree;
+  #125 = Utf8               com/sun/source/tree/ArrayTypeTree
+  #126 = Utf8               getType
+  #127 = Utf8               ()Lcom/sun/source/tree/Tree;
+  #128 = Class              #129          // org/openrewrite/java/tree/TypeTree
+  #129 = Utf8               org/openrewrite/java/tree/TypeTree
+  #130 = Methodref          #2.#131       // org/openrewrite/java/isolated/ReloadableJava21JavadocVisitor$JavaVisitor.whitespace:()Lorg/openrewrite/java/tree/Space;
+  #131 = NameAndType        #132:#133     // whitespace:()Lorg/openrewrite/java/tree/Space;
+  #132 = Utf8               whitespace
+  #133 = Utf8               ()Lorg/openrewrite/java/tree/Space;
+  #134 = Fieldref           #34.#135      // org/openrewrite/java/isolated/ReloadableJava21JavadocVisitor.source:Ljava/lang/String;
+  #135 = NameAndType        #136:#137     // source:Ljava/lang/String;
+  #136 = Utf8               source
+  #137 = Utf8               Ljava/lang/String;
+  #138 = String             #139          // [
+  #139 = Utf8               [
+  #140 = Methodref          #54.#141      // java/lang/String.startsWith:(Ljava/lang/String;I)Z
+  #141 = NameAndType        #142:#143     // startsWith:(Ljava/lang/String;I)Z
+  #142 = Utf8               startsWith
+  #143 = Utf8               (Ljava/lang/String;I)Z
+  #144 = String             #145          // ]
+  #145 = Utf8               ]
+  #146 = Methodref          #34.#147      // org/openrewrite/java/isolated/ReloadableJava21JavadocVisitor.sourceBeforeAsString:(Ljava/lang/String;)Ljava/lang/String;
+  #147 = NameAndType        #148:#149     // sourceBeforeAsString:(Ljava/lang/String;)Ljava/lang/String;
+  #148 = Utf8               sourceBeforeAsString
+  #149 = Utf8               (Ljava/lang/String;)Ljava/lang/String;
+  #150 = Methodref          #20.#151      // org/openrewrite/java/tree/Space.build:(Ljava/lang/String;Ljava/util/List;)Lorg/openrewrite/java/tree/Space;
+  #151 = NameAndType        #87:#152      // build:(Ljava/lang/String;Ljava/util/List;)Lorg/openrewrite/java/tree/Space;
+  #152 = Utf8               (Ljava/lang/String;Ljava/util/List;)Lorg/openrewrite/java/tree/Space;
+  #153 = Methodref          #84.#154      // org/openrewrite/java/tree/JLeftPadded.withBefore:(Lorg/openrewrite/java/tree/Space;)Lorg/openrewrite/java/tree/JLeftPadded;
+  #154 = NameAndType        #155:#156     // withBefore:(Lorg/openrewrite/java/tree/Space;)Lorg/openrewrite/java/tree/JLeftPadded;
+  #155 = Utf8               withBefore
+  #156 = Utf8               (Lorg/openrewrite/java/tree/Space;)Lorg/openrewrite/java/tree/JLeftPadded;
+  #157 = InterfaceMethodref #128.#158     // org/openrewrite/java/tree/TypeTree.withPrefix:(Lorg/openrewrite/java/tree/Space;)Lorg/openrewrite/java/tree/J;
+  #158 = NameAndType        #159:#160     // withPrefix:(Lorg/openrewrite/java/tree/Space;)Lorg/openrewrite/java/tree/J;
+  #159 = Utf8               withPrefix
+  #160 = Utf8               (Lorg/openrewrite/java/tree/Space;)Lorg/openrewrite/java/tree/J;
+  #161 = Class              #162          // org/openrewrite/java/tree/J$ArrayType
+  #162 = Utf8               org/openrewrite/java/tree/J$ArrayType
+  #163 = Methodref          #161.#164     // org/openrewrite/java/tree/J$ArrayType."<init>":(Ljava/util/UUID;Lorg/openrewrite/java/tree/Space;Lorg/openrewrite/marker/Markers;Lorg/openrewrite/java/tree/TypeTree;Ljava/util/List;Lorg/openrewrite/java/tree/JLeftPadded;Lorg/openrewrite/java/tree/JavaType;)V
+  #164 = NameAndType        #11:#165      // "<init>":(Ljava/util/UUID;Lorg/openrewrite/java/tree/Space;Lorg/openrewrite/marker/Markers;Lorg/openrewrite/java/tree/TypeTree;Ljava/util/List;Lorg/openrewrite/java/tree/JLeftPadded;Lorg/openrewrite/java/tree/JavaType;)V
+  #165 = Utf8               (Ljava/util/UUID;Lorg/openrewrite/java/tree/Space;Lorg/openrewrite/marker/Markers;Lorg/openrewrite/java/tree/TypeTree;Ljava/util/List;Lorg/openrewrite/java/tree/JLeftPadded;Lorg/openrewrite/java/tree/JavaType;)V
+  #166 = Methodref          #167.#168     // org/openrewrite/internal/StringUtils.indexOfNextNonWhitespace:(ILjava/lang/String;)I
+  #167 = Class              #169          // org/openrewrite/internal/StringUtils
+  #168 = NameAndType        #170:#171     // indexOfNextNonWhitespace:(ILjava/lang/String;)I
+  #169 = Utf8               org/openrewrite/internal/StringUtils
+  #170 = Utf8               indexOfNextNonWhitespace
+  #171 = Utf8               (ILjava/lang/String;)I
+  #172 = Methodref          #20.#173      // org/openrewrite/java/tree/Space.format:(Ljava/lang/String;II)Lorg/openrewrite/java/tree/Space;
+  #173 = NameAndType        #174:#175     // format:(Ljava/lang/String;II)Lorg/openrewrite/java/tree/Space;
+  #174 = Utf8               format
+  #175 = Utf8               (Ljava/lang/String;II)Lorg/openrewrite/java/tree/Space;
+  #176 = Fieldref           #34.#177      // org/openrewrite/java/isolated/ReloadableJava21JavadocVisitor.javaVisitor:Lcom/sun/source/util/TreeScanner;
+  #177 = NameAndType        #178:#179     // javaVisitor:Lcom/sun/source/util/TreeScanner;
+  #178 = Utf8               javaVisitor
+  #179 = Utf8               Lcom/sun/source/util/TreeScanner;
+  #180 = InterfaceMethodref #181.#124     // com/sun/source/tree/ParameterizedTypeTree.getType:()Lcom/sun/source/tree/Tree;
+  #181 = Class              #182          // com/sun/source/tree/ParameterizedTypeTree
+  #182 = Utf8               com/sun/source/tree/ParameterizedTypeTree
+  #183 = Methodref          #8.#26        // com/sun/source/util/TreeScanner.scan:(Lcom/sun/source/tree/Tree;Ljava/lang/Object;)Ljava/lang/Object;
+  #184 = Class              #185          // org/openrewrite/java/tree/NameTree
+  #185 = Utf8               org/openrewrite/java/tree/NameTree
+  #186 = Class              #187          // java/util/ArrayList
+  #187 = Utf8               java/util/ArrayList
+  #188 = InterfaceMethodref #181.#189     // com/sun/source/tree/ParameterizedTypeTree.getTypeArguments:()Ljava/util/List;
+  #189 = NameAndType        #190:#79      // getTypeArguments:()Ljava/util/List;
+  #190 = Utf8               getTypeArguments
+  #191 = InterfaceMethodref #192.#193     // java/util/List.size:()I
+  #192 = Class              #194          // java/util/List
+  #193 = NameAndType        #195:#58      // size:()I
+  #194 = Utf8               java/util/List
+  #195 = Utf8               size
+  #196 = Methodref          #186.#197     // java/util/ArrayList."<init>":(I)V
+  #197 = NameAndType        #11:#198      // "<init>":(I)V
+  #198 = Utf8               (I)V
+  #199 = Methodref          #34.#200      // org/openrewrite/java/isolated/ReloadableJava21JavadocVisitor.whitespaceBeforeAsString:()Ljava/lang/String;
+  #200 = NameAndType        #201:#52      // whitespaceBeforeAsString:()Ljava/lang/String;
+  #201 = Utf8               whitespaceBeforeAsString
+  #202 = InterfaceMethodref #192.#203     // java/util/List.get:(I)Ljava/lang/Object;
+  #203 = NameAndType        #204:#205     // get:(I)Ljava/lang/Object;
+  #204 = Utf8               get
+  #205 = Utf8               (I)Ljava/lang/Object;
+  #206 = Class              #207          // com/sun/source/tree/Tree
+  #207 = Utf8               com/sun/source/tree/Tree
+  #208 = Methodref          #209.#210     // org/openrewrite/java/tree/JRightPadded.build:(Ljava/lang/Object;)Lorg/openrewrite/java/tree/JRightPadded;
+  #209 = Class              #211          // org/openrewrite/java/tree/JRightPadded
+  #210 = NameAndType        #87:#212      // build:(Ljava/lang/Object;)Lorg/openrewrite/java/tree/JRightPadded;
+  #211 = Utf8               org/openrewrite/java/tree/JRightPadded
+  #212 = Utf8               (Ljava/lang/Object;)Lorg/openrewrite/java/tree/JRightPadded;
+  #213 = String             #214          // >
+  #214 = Utf8               >
+  #215 = String             #216          // ,
+  #216 = Utf8               ,
+  #217 = Methodref          #209.#218     // org/openrewrite/java/tree/JRightPadded.withAfter:(Lorg/openrewrite/java/tree/Space;)Lorg/openrewrite/java/tree/JRightPadded;
+  #218 = NameAndType        #219:#220     // withAfter:(Lorg/openrewrite/java/tree/Space;)Lorg/openrewrite/java/tree/JRightPadded;
+  #219 = Utf8               withAfter
+  #220 = Utf8               (Lorg/openrewrite/java/tree/Space;)Lorg/openrewrite/java/tree/JRightPadded;
+  #221 = InterfaceMethodref #192.#222     // java/util/List.add:(Ljava/lang/Object;)Z
+  #222 = NameAndType        #223:#224     // add:(Ljava/lang/Object;)Z
+  #223 = Utf8               add
+  #224 = Utf8               (Ljava/lang/Object;)Z
+  #225 = Class              #226          // org/openrewrite/java/tree/J$ParameterizedType
+  #226 = Utf8               org/openrewrite/java/tree/J$ParameterizedType
+  #227 = Methodref          #228.#229     // org/openrewrite/java/tree/JContainer.build:(Ljava/util/List;)Lorg/openrewrite/java/tree/JContainer;
+  #228 = Class              #230          // org/openrewrite/java/tree/JContainer
+  #229 = NameAndType        #87:#231      // build:(Ljava/util/List;)Lorg/openrewrite/java/tree/JContainer;
+  #230 = Utf8               org/openrewrite/java/tree/JContainer
+  #231 = Utf8               (Ljava/util/List;)Lorg/openrewrite/java/tree/JContainer;
+  #232 = Methodref          #225.#233     // org/openrewrite/java/tree/J$ParameterizedType."<init>":(Ljava/util/UUID;Lorg/openrewrite/java/tree/Space;Lorg/openrewrite/marker/Markers;Lorg/openrewrite/java/tree/NameTree;Lorg/openrewrite/java/tree/JContainer;Lorg/openrewrite/java/tree/JavaType;)V
+  #233 = NameAndType        #11:#234      // "<init>":(Ljava/util/UUID;Lorg/openrewrite/java/tree/Space;Lorg/openrewrite/marker/Markers;Lorg/openrewrite/java/tree/NameTree;Lorg/openrewrite/java/tree/JContainer;Lorg/openrewrite/java/tree/JavaType;)V
+  #234 = Utf8               (Ljava/util/UUID;Lorg/openrewrite/java/tree/Space;Lorg/openrewrite/marker/Markers;Lorg/openrewrite/java/tree/NameTree;Lorg/openrewrite/java/tree/JContainer;Lorg/openrewrite/java/tree/JavaType;)V
+  #235 = Methodref          #2.#236       // org/openrewrite/java/isolated/ReloadableJava21JavadocVisitor$JavaVisitor.visitParameterizedType:(Lcom/sun/source/tree/ParameterizedTypeTree;Lorg/openrewrite/java/tree/Space;)Lorg/openrewrite/java/tree/J;
+  #236 = NameAndType        #237:#238     // visitParameterizedType:(Lcom/sun/source/tree/ParameterizedTypeTree;Lorg/openrewrite/java/tree/Space;)Lorg/openrewrite/java/tree/J;
+  #237 = Utf8               visitParameterizedType
+  #238 = Utf8               (Lcom/sun/source/tree/ParameterizedTypeTree;Lorg/openrewrite/java/tree/Space;)Lorg/openrewrite/java/tree/J;
+  #239 = Methodref          #2.#240       // org/openrewrite/java/isolated/ReloadableJava21JavadocVisitor$JavaVisitor.visitArrayType:(Lcom/sun/source/tree/ArrayTypeTree;Lorg/openrewrite/java/tree/Space;)Lorg/openrewrite/java/tree/J;
+  #240 = NameAndType        #241:#242     // visitArrayType:(Lcom/sun/source/tree/ArrayTypeTree;Lorg/openrewrite/java/tree/Space;)Lorg/openrewrite/java/tree/J;
+  #241 = Utf8               visitArrayType
+  #242 = Utf8               (Lcom/sun/source/tree/ArrayTypeTree;Lorg/openrewrite/java/tree/Space;)Lorg/openrewrite/java/tree/J;
+  #243 = Methodref          #2.#244       // org/openrewrite/java/isolated/ReloadableJava21JavadocVisitor$JavaVisitor.visitPrimitiveType:(Lcom/sun/source/tree/PrimitiveTypeTree;Lorg/openrewrite/java/tree/Space;)Lorg/openrewrite/java/tree/J;
+  #244 = NameAndType        #245:#246     // visitPrimitiveType:(Lcom/sun/source/tree/PrimitiveTypeTree;Lorg/openrewrite/java/tree/Space;)Lorg/openrewrite/java/tree/J;
+  #245 = Utf8               visitPrimitiveType
+  #246 = Utf8               (Lcom/sun/source/tree/PrimitiveTypeTree;Lorg/openrewrite/java/tree/Space;)Lorg/openrewrite/java/tree/J;
+  #247 = Methodref          #2.#248       // org/openrewrite/java/isolated/ReloadableJava21JavadocVisitor$JavaVisitor.visitIdentifier:(Lcom/sun/source/tree/IdentifierTree;Lorg/openrewrite/java/tree/Space;)Lorg/openrewrite/java/tree/J;
+  #248 = NameAndType        #249:#250     // visitIdentifier:(Lcom/sun/source/tree/IdentifierTree;Lorg/openrewrite/java/tree/Space;)Lorg/openrewrite/java/tree/J;
+  #249 = Utf8               visitIdentifier
+  #250 = Utf8               (Lcom/sun/source/tree/IdentifierTree;Lorg/openrewrite/java/tree/Space;)Lorg/openrewrite/java/tree/J;
+  #251 = Methodref          #2.#252       // org/openrewrite/java/isolated/ReloadableJava21JavadocVisitor$JavaVisitor.visitMemberSelect:(Lcom/sun/source/tree/MemberSelectTree;Lorg/openrewrite/java/tree/Space;)Lorg/openrewrite/java/tree/J;
+  #252 = NameAndType        #253:#254     // visitMemberSelect:(Lcom/sun/source/tree/MemberSelectTree;Lorg/openrewrite/java/tree/Space;)Lorg/openrewrite/java/tree/J;
+  #253 = Utf8               visitMemberSelect
+  #254 = Utf8               (Lcom/sun/source/tree/MemberSelectTree;Lorg/openrewrite/java/tree/Space;)Lorg/openrewrite/java/tree/J;
+  #255 = Utf8               (Lorg/openrewrite/java/isolated/ReloadableJava21JavadocVisitor;)V
+  #256 = Utf8               Code
+  #257 = Utf8               LineNumberTable
+  #258 = Utf8               LocalVariableTable
+  #259 = Utf8               this
+  #260 = Utf8               Lorg/openrewrite/java/isolated/ReloadableJava21JavadocVisitor$JavaVisitor;
+  #261 = Utf8               MethodParameters
+  #262 = Utf8               node
+  #263 = Utf8               Lcom/sun/source/tree/MemberSelectTree;
+  #264 = Utf8               fmt
+  #265 = Utf8               fieldAccess
+  #266 = Utf8               Lcom/sun/tools/javac/tree/JCTree$JCFieldAccess;
+  #267 = Utf8               Lorg/openrewrite/java/tree/Expression;
+  #268 = Utf8               Lcom/sun/source/tree/IdentifierTree;
+  #269 = Utf8               Lorg/openrewrite/java/tree/JavaType;
+  #270 = Utf8               Lcom/sun/source/tree/PrimitiveTypeTree;
+  #271 = Utf8               primitiveType
+  #272 = Utf8               Lcom/sun/tools/javac/tree/JCTree$JCPrimitiveTypeTree;
+  #273 = Utf8               dimension
+  #274 = Utf8               Lorg/openrewrite/java/tree/JLeftPadded;
+  #275 = Utf8               Lcom/sun/source/tree/ArrayTypeTree;
+  #276 = Utf8               elemType
+  #277 = Utf8               Lorg/openrewrite/java/tree/TypeTree;
+  #278 = Utf8               saveCursor
+  #279 = Utf8               before
+  #280 = Utf8               LocalVariableTypeTable
+  #281 = Utf8               Lorg/openrewrite/java/tree/JLeftPadded<Lorg/openrewrite/java/tree/Space;>;
+  #282 = Utf8               StackMapTable
+  #283 = Utf8               nextNonWhitespace
+  #284 = Utf8               space
+  #285 = Utf8               after
+  #286 = Utf8               expression
+  #287 = Utf8               Lorg/openrewrite/java/tree/JRightPadded;
+  #288 = Utf8               i
+  #289 = Utf8               Lcom/sun/source/tree/ParameterizedTypeTree;
+  #290 = Utf8               id
+  #291 = Utf8               Lorg/openrewrite/java/tree/NameTree;
+  #292 = Utf8               expressions
+  #293 = Utf8               Ljava/util/List;
+  #294 = Utf8               argsSize
+  #295 = Utf8               Lorg/openrewrite/java/tree/JRightPadded<Lorg/openrewrite/java/tree/Expression;>;
+  #296 = Utf8               Ljava/util/List<Lorg/openrewrite/java/tree/JRightPadded<Lorg/openrewrite/java/tree/Expression;>;>;
+  #297 = Utf8               (Lcom/sun/source/tree/ParameterizedTypeTree;Ljava/lang/Object;)Ljava/lang/Object;
+  #298 = Utf8               (Lcom/sun/source/tree/ArrayTypeTree;Ljava/lang/Object;)Ljava/lang/Object;
+  #299 = Utf8               (Lcom/sun/source/tree/PrimitiveTypeTree;Ljava/lang/Object;)Ljava/lang/Object;
+  #300 = Utf8               (Lcom/sun/source/tree/IdentifierTree;Ljava/lang/Object;)Ljava/lang/Object;
+  #301 = Utf8               (Lcom/sun/source/tree/MemberSelectTree;Ljava/lang/Object;)Ljava/lang/Object;
+  #302 = Utf8               Signature
+  #303 = Utf8               Lcom/sun/source/util/TreeScanner<Lorg/openrewrite/java/tree/J;Lorg/openrewrite/java/tree/Space;>;
+  #304 = Utf8               SourceFile
+  #305 = Utf8               ReloadableJava21JavadocVisitor.java
+  #306 = Utf8               NestHost
+  #307 = Utf8               InnerClasses
+  #308 = Utf8               JavaVisitor
+  #309 = Class              #310          // com/sun/tools/javac/tree/JCTree
+  #310 = Utf8               com/sun/tools/javac/tree/JCTree
+  #311 = Utf8               JCFieldAccess
+  #312 = Class              #313          // com/sun/tools/javac/tree/JCTree$JCExpression
+  #313 = Utf8               com/sun/tools/javac/tree/JCTree$JCExpression
+  #314 = Utf8               JCExpression
+  #315 = Class              #316          // org/openrewrite/java/tree/J
+  #316 = Utf8               org/openrewrite/java/tree/J
+  #317 = Utf8               FieldAccess
+  #318 = Utf8               Identifier
+  #319 = Class              #320          // org/openrewrite/java/tree/JavaType$Variable
+  #320 = Utf8               org/openrewrite/java/tree/JavaType$Variable
+  #321 = Class              #322          // org/openrewrite/java/tree/JavaType
+  #322 = Utf8               org/openrewrite/java/tree/JavaType
+  #323 = Utf8               Variable
+  #324 = Utf8               JCPrimitiveTypeTree
+  #325 = Class              #326          // org/openrewrite/java/tree/JavaType$Primitive
+  #326 = Utf8               org/openrewrite/java/tree/JavaType$Primitive
+  #327 = Utf8               Primitive
+  #328 = Utf8               ArrayType
+  #329 = Utf8               ParameterizedType
+{
+  final org.openrewrite.java.isolated.ReloadableJava21JavadocVisitor this$0;
+    descriptor: Lorg/openrewrite/java/isolated/ReloadableJava21JavadocVisitor;
+    flags: (0x1010) ACC_FINAL, ACC_SYNTHETIC
+
+  org.openrewrite.java.isolated.ReloadableJava21JavadocVisitor$JavaVisitor(org.openrewrite.java.isolated.ReloadableJava21JavadocVisitor);
+    descriptor: (Lorg/openrewrite/java/isolated/ReloadableJava21JavadocVisitor;)V
+    flags: (0x0000)
+    Code:
+      stack=2, locals=2, args_size=2
+         0: aload_0
+         1: aload_1
+         2: putfield      #1                  // Field this$0:Lorg/openrewrite/java/isolated/ReloadableJava21JavadocVisitor;
+         5: aload_0
+         6: invokespecial #7                  // Method com/sun/source/util/TreeScanner."<init>":()V
+         9: return
+      LineNumberTable:
+        line 1120: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0      10     0  this   Lorg/openrewrite/java/isolated/ReloadableJava21JavadocVisitor$JavaVisitor;
+            0      10     1 this$0   Lorg/openrewrite/java/isolated/ReloadableJava21JavadocVisitor;
+    MethodParameters:
+      Name                           Flags
+      <no name>                      final mandated
+
+  public org.openrewrite.java.tree.J visitMemberSelect(com.sun.source.tree.MemberSelectTree, org.openrewrite.java.tree.Space);
+    descriptor: (Lcom/sun/source/tree/MemberSelectTree;Lorg/openrewrite/java/tree/Space;)Lorg/openrewrite/java/tree/J;
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=15, locals=5, args_size=3
+         0: aload_1
+         1: checkcast     #13                 // class com/sun/tools/javac/tree/JCTree$JCFieldAccess
+         4: astore_3
+         5: aload_0
+         6: aload_3
+         7: getfield      #15                 // Field com/sun/tools/javac/tree/JCTree$JCFieldAccess.selected:Lcom/sun/tools/javac/tree/JCTree$JCExpression;
+        10: getstatic     #19                 // Field org/openrewrite/java/tree/Space.EMPTY:Lorg/openrewrite/java/tree/Space;
+        13: invokevirtual #25                 // Method scan:(Lcom/sun/source/tree/Tree;Ljava/lang/Object;)Ljava/lang/Object;
+        16: checkcast     #29                 // class org/openrewrite/java/tree/Expression
+        19: astore        4
+        21: aload_0
+        22: getfield      #1                  // Field this$0:Lorg/openrewrite/java/isolated/ReloadableJava21JavadocVisitor;
+        25: ldc           #31                 // String .
+        27: invokevirtual #33                 // Method org/openrewrite/java/isolated/ReloadableJava21JavadocVisitor.sourceBefore:(Ljava/lang/String;)Ljava/util/List;
+        30: pop
+        31: aload_0
+        32: getfield      #1                  // Field this$0:Lorg/openrewrite/java/isolated/ReloadableJava21JavadocVisitor;
+        35: dup
+        36: getfield      #39                 // Field org/openrewrite/java/isolated/ReloadableJava21JavadocVisitor.cursor:I
+        39: aload_3
+        40: getfield      #43                 // Field com/sun/tools/javac/tree/JCTree$JCFieldAccess.name:Lcom/sun/tools/javac/util/Name;
+        43: invokevirtual #47                 // Method com/sun/tools/javac/util/Name.toString:()Ljava/lang/String;
+        46: invokevirtual #53                 // Method java/lang/String.length:()I
+        49: iadd
+        50: putfield      #39                 // Field org/openrewrite/java/isolated/ReloadableJava21JavadocVisitor.cursor:I
+        53: new           #59                 // class org/openrewrite/java/tree/J$FieldAccess
+        56: dup
+        57: invokestatic  #61                 // InterfaceMethod org/openrewrite/Tree.randomId:()Ljava/util/UUID;
+        60: aload_2
+        61: getstatic     #67                 // Field org/openrewrite/marker/Markers.EMPTY:Lorg/openrewrite/marker/Markers;
+        64: aload         4
+        66: new           #72                 // class org/openrewrite/java/tree/J$Identifier
+        69: dup
+        70: invokestatic  #61                 // InterfaceMethod org/openrewrite/Tree.randomId:()Ljava/util/UUID;
+        73: getstatic     #19                 // Field org/openrewrite/java/tree/Space.EMPTY:Lorg/openrewrite/java/tree/Space;
+        76: getstatic     #67                 // Field org/openrewrite/marker/Markers.EMPTY:Lorg/openrewrite/marker/Markers;
+        79: invokestatic  #74                 // Method java/util/Collections.emptyList:()Ljava/util/List;
+        82: aload_3
+        83: getfield      #43                 // Field com/sun/tools/javac/tree/JCTree$JCFieldAccess.name:Lcom/sun/tools/javac/util/Name;
+        86: invokevirtual #47                 // Method com/sun/tools/javac/util/Name.toString:()Ljava/lang/String;
+        89: aconst_null
+        90: aconst_null
+        91: invokespecial #80                 // Method org/openrewrite/java/tree/J$Identifier."<init>":(Ljava/util/UUID;Lorg/openrewrite/java/tree/Space;Lorg/openrewrite/marker/Markers;Ljava/util/List;Ljava/lang/String;Lorg/openrewrite/java/tree/JavaType;Lorg/openrewrite/java/tree/JavaType$Variable;)V
+        94: invokestatic  #83                 // Method org/openrewrite/java/tree/JLeftPadded.build:(Ljava/lang/Object;)Lorg/openrewrite/java/tree/JLeftPadded;
+        97: aload_0
+        98: getfield      #1                  // Field this$0:Lorg/openrewrite/java/isolated/ReloadableJava21JavadocVisitor;
+       101: getfield      #89                 // Field org/openrewrite/java/isolated/ReloadableJava21JavadocVisitor.typeMapping:Lorg/openrewrite/java/isolated/ReloadableJava21TypeMapping;
+       104: aload_1
+       105: invokevirtual #93                 // Method org/openrewrite/java/isolated/ReloadableJava21TypeMapping.type:(Lcom/sun/source/tree/Tree;)Lorg/openrewrite/java/tree/JavaType;
+       108: invokespecial #99                 // Method org/openrewrite/java/tree/J$FieldAccess."<init>":(Ljava/util/UUID;Lorg/openrewrite/java/tree/Space;Lorg/openrewrite/marker/Markers;Lorg/openrewrite/java/tree/Expression;Lorg/openrewrite/java/tree/JLeftPadded;Lorg/openrewrite/java/tree/JavaType;)V
+       111: areturn
+      LineNumberTable:
+        line 1124: 0
+        line 1125: 5
+        line 1126: 21
+        line 1127: 31
+        line 1128: 53
+        line 1130: 70
+        line 1133: 79
+        line 1134: 86
+        line 1130: 94
+        line 1135: 105
+        line 1128: 111
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0     112     0  this   Lorg/openrewrite/java/isolated/ReloadableJava21JavadocVisitor$JavaVisitor;
+            0     112     1  node   Lcom/sun/source/tree/MemberSelectTree;
+            0     112     2   fmt   Lorg/openrewrite/java/tree/Space;
+            5     107     3 fieldAccess   Lcom/sun/tools/javac/tree/JCTree$JCFieldAccess;
+           21      91     4 selected   Lorg/openrewrite/java/tree/Expression;
+
+  public org.openrewrite.java.tree.J visitIdentifier(com.sun.source.tree.IdentifierTree, org.openrewrite.java.tree.Space);
+    descriptor: (Lcom/sun/source/tree/IdentifierTree;Lorg/openrewrite/java/tree/Space;)Lorg/openrewrite/java/tree/J;
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=9, locals=5, args_size=3
+         0: aload_1
+         1: invokeinterface #102,  1          // InterfaceMethod com/sun/source/tree/IdentifierTree.getName:()Ljavax/lang/model/element/Name;
+         6: invokeinterface #108,  1          // InterfaceMethod javax/lang/model/element/Name.toString:()Ljava/lang/String;
+        11: astore_3
+        12: aload_0
+        13: getfield      #1                  // Field this$0:Lorg/openrewrite/java/isolated/ReloadableJava21JavadocVisitor;
+        16: dup
+        17: getfield      #39                 // Field org/openrewrite/java/isolated/ReloadableJava21JavadocVisitor.cursor:I
+        20: aload_3
+        21: invokevirtual #53                 // Method java/lang/String.length:()I
+        24: iadd
+        25: putfield      #39                 // Field org/openrewrite/java/isolated/ReloadableJava21JavadocVisitor.cursor:I
+        28: aload_0
+        29: getfield      #1                  // Field this$0:Lorg/openrewrite/java/isolated/ReloadableJava21JavadocVisitor;
+        32: getfield      #89                 // Field org/openrewrite/java/isolated/ReloadableJava21JavadocVisitor.typeMapping:Lorg/openrewrite/java/isolated/ReloadableJava21TypeMapping;
+        35: aload_1
+        36: invokevirtual #93                 // Method org/openrewrite/java/isolated/ReloadableJava21TypeMapping.type:(Lcom/sun/source/tree/Tree;)Lorg/openrewrite/java/tree/JavaType;
+        39: astore        4
+        41: new           #72                 // class org/openrewrite/java/tree/J$Identifier
+        44: dup
+        45: invokestatic  #61                 // InterfaceMethod org/openrewrite/Tree.randomId:()Ljava/util/UUID;
+        48: aload_2
+        49: getstatic     #67                 // Field org/openrewrite/marker/Markers.EMPTY:Lorg/openrewrite/marker/Markers;
+        52: invokestatic  #74                 // Method java/util/Collections.emptyList:()Ljava/util/List;
+        55: aload_3
+        56: aload         4
+        58: aconst_null
+        59: invokespecial #80                 // Method org/openrewrite/java/tree/J$Identifier."<init>":(Ljava/util/UUID;Lorg/openrewrite/java/tree/Space;Lorg/openrewrite/marker/Markers;Ljava/util/List;Ljava/lang/String;Lorg/openrewrite/java/tree/JavaType;Lorg/openrewrite/java/tree/JavaType$Variable;)V
+        62: areturn
+      LineNumberTable:
+        line 1140: 0
+        line 1141: 12
+        line 1142: 28
+        line 1143: 41
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0      63     0  this   Lorg/openrewrite/java/isolated/ReloadableJava21JavadocVisitor$JavaVisitor;
+            0      63     1  node   Lcom/sun/source/tree/IdentifierTree;
+            0      63     2   fmt   Lorg/openrewrite/java/tree/Space;
+           12      51     3  name   Ljava/lang/String;
+           41      22     4  type   Lorg/openrewrite/java/tree/JavaType;
+
+  public org.openrewrite.java.tree.J visitPrimitiveType(com.sun.source.tree.PrimitiveTypeTree, org.openrewrite.java.tree.Space);
+    descriptor: (Lcom/sun/source/tree/PrimitiveTypeTree;Lorg/openrewrite/java/tree/Space;)Lorg/openrewrite/java/tree/J;
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=9, locals=5, args_size=3
+         0: aload_1
+         1: checkcast     #111                // class com/sun/tools/javac/tree/JCTree$JCPrimitiveTypeTree
+         4: astore_3
+         5: aload_3
+         6: invokevirtual #113                // Method com/sun/tools/javac/tree/JCTree$JCPrimitiveTypeTree.toString:()Ljava/lang/String;
+         9: astore        4
+        11: aload_0
+        12: getfield      #1                  // Field this$0:Lorg/openrewrite/java/isolated/ReloadableJava21JavadocVisitor;
+        15: dup
+        16: getfield      #39                 // Field org/openrewrite/java/isolated/ReloadableJava21JavadocVisitor.cursor:I
+        19: aload         4
+        21: invokevirtual #53                 // Method java/lang/String.length:()I
+        24: iadd
+        25: putfield      #39                 // Field org/openrewrite/java/isolated/ReloadableJava21JavadocVisitor.cursor:I
+        28: new           #72                 // class org/openrewrite/java/tree/J$Identifier
+        31: dup
+        32: invokestatic  #61                 // InterfaceMethod org/openrewrite/Tree.randomId:()Ljava/util/UUID;
+        35: aload_2
+        36: getstatic     #67                 // Field org/openrewrite/marker/Markers.EMPTY:Lorg/openrewrite/marker/Markers;
+        39: invokestatic  #74                 // Method java/util/Collections.emptyList:()Ljava/util/List;
+        42: aload         4
+        44: aload_0
+        45: getfield      #1                  // Field this$0:Lorg/openrewrite/java/isolated/ReloadableJava21JavadocVisitor;
+        48: getfield      #89                 // Field org/openrewrite/java/isolated/ReloadableJava21JavadocVisitor.typeMapping:Lorg/openrewrite/java/isolated/ReloadableJava21TypeMapping;
+        51: aload_3
+        52: getfield      #114                // Field com/sun/tools/javac/tree/JCTree$JCPrimitiveTypeTree.typetag:Lcom/sun/tools/javac/code/TypeTag;
+        55: invokevirtual #118                // Method org/openrewrite/java/isolated/ReloadableJava21TypeMapping.primitive:(Lcom/sun/tools/javac/code/TypeTag;)Lorg/openrewrite/java/tree/JavaType$Primitive;
+        58: aconst_null
+        59: invokespecial #80                 // Method org/openrewrite/java/tree/J$Identifier."<init>":(Ljava/util/UUID;Lorg/openrewrite/java/tree/Space;Lorg/openrewrite/marker/Markers;Ljava/util/List;Ljava/lang/String;Lorg/openrewrite/java/tree/JavaType;Lorg/openrewrite/java/tree/JavaType$Variable;)V
+        62: areturn
+      LineNumberTable:
+        line 1148: 0
+        line 1149: 5
+        line 1150: 11
+        line 1151: 28
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0      63     0  this   Lorg/openrewrite/java/isolated/ReloadableJava21JavadocVisitor$JavaVisitor;
+            0      63     1  node   Lcom/sun/source/tree/PrimitiveTypeTree;
+            0      63     2   fmt   Lorg/openrewrite/java/tree/Space;
+            5      58     3 primitiveType   Lcom/sun/tools/javac/tree/JCTree$JCPrimitiveTypeTree;
+           11      52     4  name   Ljava/lang/String;
+
+  public org.openrewrite.java.tree.J visitArrayType(com.sun.source.tree.ArrayTypeTree, org.openrewrite.java.tree.Space);
+    descriptor: (Lcom/sun/source/tree/ArrayTypeTree;Lorg/openrewrite/java/tree/Space;)Lorg/openrewrite/java/tree/J;
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=10, locals=7, args_size=3
+         0: aload_0
+         1: aload_1
+         2: invokeinterface #122,  1          // InterfaceMethod com/sun/source/tree/ArrayTypeTree.getType:()Lcom/sun/source/tree/Tree;
+         7: getstatic     #19                 // Field org/openrewrite/java/tree/Space.EMPTY:Lorg/openrewrite/java/tree/Space;
+        10: invokevirtual #25                 // Method scan:(Lcom/sun/source/tree/Tree;Ljava/lang/Object;)Ljava/lang/Object;
+        13: checkcast     #128                // class org/openrewrite/java/tree/TypeTree
+        16: astore_3
+        17: aload_0
+        18: getfield      #1                  // Field this$0:Lorg/openrewrite/java/isolated/ReloadableJava21JavadocVisitor;
+        21: getfield      #39                 // Field org/openrewrite/java/isolated/ReloadableJava21JavadocVisitor.cursor:I
+        24: istore        4
+        26: aload_0
+        27: invokevirtual #130                // Method whitespace:()Lorg/openrewrite/java/tree/Space;
+        30: astore        5
+        32: aload_0
+        33: getfield      #1                  // Field this$0:Lorg/openrewrite/java/isolated/ReloadableJava21JavadocVisitor;
+        36: getfield      #134                // Field org/openrewrite/java/isolated/ReloadableJava21JavadocVisitor.source:Ljava/lang/String;
+        39: ldc           #138                // String [
+        41: aload_0
+        42: getfield      #1                  // Field this$0:Lorg/openrewrite/java/isolated/ReloadableJava21JavadocVisitor;
+        45: getfield      #39                 // Field org/openrewrite/java/isolated/ReloadableJava21JavadocVisitor.cursor:I
+        48: invokevirtual #140                // Method java/lang/String.startsWith:(Ljava/lang/String;I)Z
+        51: ifeq          95
+        54: aload_0
+        55: getfield      #1                  // Field this$0:Lorg/openrewrite/java/isolated/ReloadableJava21JavadocVisitor;
+        58: dup
+        59: getfield      #39                 // Field org/openrewrite/java/isolated/ReloadableJava21JavadocVisitor.cursor:I
+        62: iconst_1
+        63: iadd
+        64: putfield      #39                 // Field org/openrewrite/java/isolated/ReloadableJava21JavadocVisitor.cursor:I
+        67: aload_0
+        68: getfield      #1                  // Field this$0:Lorg/openrewrite/java/isolated/ReloadableJava21JavadocVisitor;
+        71: ldc           #144                // String ]
+        73: invokevirtual #146                // Method org/openrewrite/java/isolated/ReloadableJava21JavadocVisitor.sourceBeforeAsString:(Ljava/lang/String;)Ljava/lang/String;
+        76: invokestatic  #74                 // Method java/util/Collections.emptyList:()Ljava/util/List;
+        79: invokestatic  #150                // Method org/openrewrite/java/tree/Space.build:(Ljava/lang/String;Ljava/util/List;)Lorg/openrewrite/java/tree/Space;
+        82: invokestatic  #83                 // Method org/openrewrite/java/tree/JLeftPadded.build:(Ljava/lang/Object;)Lorg/openrewrite/java/tree/JLeftPadded;
+        85: aload         5
+        87: invokevirtual #153                // Method org/openrewrite/java/tree/JLeftPadded.withBefore:(Lorg/openrewrite/java/tree/Space;)Lorg/openrewrite/java/tree/JLeftPadded;
+        90: astore        6
+        92: goto          112
+        95: aload_0
+        96: getfield      #1                  // Field this$0:Lorg/openrewrite/java/isolated/ReloadableJava21JavadocVisitor;
+        99: iload         4
+       101: putfield      #39                 // Field org/openrewrite/java/isolated/ReloadableJava21JavadocVisitor.cursor:I
+       104: aload_3
+       105: aload_2
+       106: invokeinterface #157,  2          // InterfaceMethod org/openrewrite/java/tree/TypeTree.withPrefix:(Lorg/openrewrite/java/tree/Space;)Lorg/openrewrite/java/tree/J;
+       111: areturn
+       112: new           #161                // class org/openrewrite/java/tree/J$ArrayType
+       115: dup
+       116: invokestatic  #61                 // InterfaceMethod org/openrewrite/Tree.randomId:()Ljava/util/UUID;
+       119: aload_2
+       120: getstatic     #67                 // Field org/openrewrite/marker/Markers.EMPTY:Lorg/openrewrite/marker/Markers;
+       123: aload_3
+       124: aconst_null
+       125: aload         6
+       127: aload_0
+       128: getfield      #1                  // Field this$0:Lorg/openrewrite/java/isolated/ReloadableJava21JavadocVisitor;
+       131: getfield      #89                 // Field org/openrewrite/java/isolated/ReloadableJava21JavadocVisitor.typeMapping:Lorg/openrewrite/java/isolated/ReloadableJava21TypeMapping;
+       134: aload_1
+       135: invokevirtual #93                 // Method org/openrewrite/java/isolated/ReloadableJava21TypeMapping.type:(Lcom/sun/source/tree/Tree;)Lorg/openrewrite/java/tree/JavaType;
+       138: invokespecial #163                // Method org/openrewrite/java/tree/J$ArrayType."<init>":(Ljava/util/UUID;Lorg/openrewrite/java/tree/Space;Lorg/openrewrite/marker/Markers;Lorg/openrewrite/java/tree/TypeTree;Ljava/util/List;Lorg/openrewrite/java/tree/JLeftPadded;Lorg/openrewrite/java/tree/JavaType;)V
+       141: areturn
+      LineNumberTable:
+        line 1156: 0
+        line 1158: 17
+        line 1159: 26
+        line 1161: 32
+        line 1162: 54
+        line 1163: 67
+        line 1165: 95
+        line 1166: 104
+        line 1169: 112
+        line 1170: 116
+        line 1176: 135
+        line 1169: 141
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+           92       3     6 dimension   Lorg/openrewrite/java/tree/JLeftPadded;
+            0     142     0  this   Lorg/openrewrite/java/isolated/ReloadableJava21JavadocVisitor$JavaVisitor;
+            0     142     1  node   Lcom/sun/source/tree/ArrayTypeTree;
+            0     142     2   fmt   Lorg/openrewrite/java/tree/Space;
+           17     125     3 elemType   Lorg/openrewrite/java/tree/TypeTree;
+           26     116     4 saveCursor   I
+           32     110     5 before   Lorg/openrewrite/java/tree/Space;
+          112      30     6 dimension   Lorg/openrewrite/java/tree/JLeftPadded;
+      LocalVariableTypeTable:
+        Start  Length  Slot  Name   Signature
+           92       3     6 dimension   Lorg/openrewrite/java/tree/JLeftPadded<Lorg/openrewrite/java/tree/Space;>;
+          112      30     6 dimension   Lorg/openrewrite/java/tree/JLeftPadded<Lorg/openrewrite/java/tree/Space;>;
+      StackMapTable: number_of_entries = 2
+        frame_type = 254 /* append */
+          offset_delta = 95
+          locals = [ class org/openrewrite/java/tree/TypeTree, int, class org/openrewrite/java/tree/Space ]
+        frame_type = 252 /* append */
+          offset_delta = 16
+          locals = [ class org/openrewrite/java/tree/JLeftPadded ]
+
+  private org.openrewrite.java.tree.Space whitespace();
+    descriptor: ()Lorg/openrewrite/java/tree/Space;
+    flags: (0x0002) ACC_PRIVATE
+    Code:
+      stack=3, locals=3, args_size=1
+         0: aload_0
+         1: getfield      #1                  // Field this$0:Lorg/openrewrite/java/isolated/ReloadableJava21JavadocVisitor;
+         4: getfield      #39                 // Field org/openrewrite/java/isolated/ReloadableJava21JavadocVisitor.cursor:I
+         7: aload_0
+         8: getfield      #1                  // Field this$0:Lorg/openrewrite/java/isolated/ReloadableJava21JavadocVisitor;
+        11: getfield      #134                // Field org/openrewrite/java/isolated/ReloadableJava21JavadocVisitor.source:Ljava/lang/String;
+        14: invokestatic  #166                // Method org/openrewrite/internal/StringUtils.indexOfNextNonWhitespace:(ILjava/lang/String;)I
+        17: istore_1
+        18: iload_1
+        19: aload_0
+        20: getfield      #1                  // Field this$0:Lorg/openrewrite/java/isolated/ReloadableJava21JavadocVisitor;
+        23: getfield      #39                 // Field org/openrewrite/java/isolated/ReloadableJava21JavadocVisitor.cursor:I
+        26: if_icmpne     33
+        29: getstatic     #19                 // Field org/openrewrite/java/tree/Space.EMPTY:Lorg/openrewrite/java/tree/Space;
+        32: areturn
+        33: aload_0
+        34: getfield      #1                  // Field this$0:Lorg/openrewrite/java/isolated/ReloadableJava21JavadocVisitor;
+        37: getfield      #134                // Field org/openrewrite/java/isolated/ReloadableJava21JavadocVisitor.source:Ljava/lang/String;
+        40: aload_0
+        41: getfield      #1                  // Field this$0:Lorg/openrewrite/java/isolated/ReloadableJava21JavadocVisitor;
+        44: getfield      #39                 // Field org/openrewrite/java/isolated/ReloadableJava21JavadocVisitor.cursor:I
+        47: iload_1
+        48: invokestatic  #172                // Method org/openrewrite/java/tree/Space.format:(Ljava/lang/String;II)Lorg/openrewrite/java/tree/Space;
+        51: astore_2
+        52: aload_0
+        53: getfield      #1                  // Field this$0:Lorg/openrewrite/java/isolated/ReloadableJava21JavadocVisitor;
+        56: iload_1
+        57: putfield      #39                 // Field org/openrewrite/java/isolated/ReloadableJava21JavadocVisitor.cursor:I
+        60: aload_2
+        61: areturn
+      LineNumberTable:
+        line 1181: 0
+        line 1182: 18
+        line 1183: 29
+        line 1185: 33
+        line 1186: 52
+        line 1187: 60
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0      62     0  this   Lorg/openrewrite/java/isolated/ReloadableJava21JavadocVisitor$JavaVisitor;
+           18      44     1 nextNonWhitespace   I
+           52      10     2 space   Lorg/openrewrite/java/tree/Space;
+      StackMapTable: number_of_entries = 1
+        frame_type = 252 /* append */
+          offset_delta = 33
+          locals = [ int ]
+
+  public org.openrewrite.java.tree.J visitParameterizedType(com.sun.source.tree.ParameterizedTypeTree, org.openrewrite.java.tree.Space);
+    descriptor: (Lcom/sun/source/tree/ParameterizedTypeTree;Lorg/openrewrite/java/tree/Space;)Lorg/openrewrite/java/tree/J;
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=9, locals=10, args_size=3
+         0: aload_0
+         1: getfield      #1                  // Field this$0:Lorg/openrewrite/java/isolated/ReloadableJava21JavadocVisitor;
+         4: getfield      #176                // Field org/openrewrite/java/isolated/ReloadableJava21JavadocVisitor.javaVisitor:Lcom/sun/source/util/TreeScanner;
+         7: aload_1
+         8: invokeinterface #180,  1          // InterfaceMethod com/sun/source/tree/ParameterizedTypeTree.getType:()Lcom/sun/source/tree/Tree;
+        13: getstatic     #19                 // Field org/openrewrite/java/tree/Space.EMPTY:Lorg/openrewrite/java/tree/Space;
+        16: invokevirtual #183                // Method com/sun/source/util/TreeScanner.scan:(Lcom/sun/source/tree/Tree;Ljava/lang/Object;)Ljava/lang/Object;
+        19: checkcast     #184                // class org/openrewrite/java/tree/NameTree
+        22: astore_3
+        23: new           #186                // class java/util/ArrayList
+        26: dup
+        27: aload_1
+        28: invokeinterface #188,  1          // InterfaceMethod com/sun/source/tree/ParameterizedTypeTree.getTypeArguments:()Ljava/util/List;
+        33: invokeinterface #191,  1          // InterfaceMethod java/util/List.size:()I
+        38: invokespecial #196                // Method java/util/ArrayList."<init>":(I)V
+        41: astore        4
+        43: aload_0
+        44: getfield      #1                  // Field this$0:Lorg/openrewrite/java/isolated/ReloadableJava21JavadocVisitor;
+        47: dup
+        48: getfield      #39                 // Field org/openrewrite/java/isolated/ReloadableJava21JavadocVisitor.cursor:I
+        51: iconst_1
+        52: iadd
+        53: putfield      #39                 // Field org/openrewrite/java/isolated/ReloadableJava21JavadocVisitor.cursor:I
+        56: aload_1
+        57: invokeinterface #188,  1          // InterfaceMethod com/sun/source/tree/ParameterizedTypeTree.getTypeArguments:()Ljava/util/List;
+        62: invokeinterface #191,  1          // InterfaceMethod java/util/List.size:()I
+        67: istore        5
+        69: iconst_0
+        70: istore        6
+        72: iload         6
+        74: iload         5
+        76: if_icmpge     201
+        79: aload_0
+        80: getfield      #1                  // Field this$0:Lorg/openrewrite/java/isolated/ReloadableJava21JavadocVisitor;
+        83: invokevirtual #199                // Method org/openrewrite/java/isolated/ReloadableJava21JavadocVisitor.whitespaceBeforeAsString:()Ljava/lang/String;
+        86: invokestatic  #74                 // Method java/util/Collections.emptyList:()Ljava/util/List;
+        89: invokestatic  #150                // Method org/openrewrite/java/tree/Space.build:(Ljava/lang/String;Ljava/util/List;)Lorg/openrewrite/java/tree/Space;
+        92: astore        7
+        94: aload_0
+        95: getfield      #1                  // Field this$0:Lorg/openrewrite/java/isolated/ReloadableJava21JavadocVisitor;
+        98: getfield      #176                // Field org/openrewrite/java/isolated/ReloadableJava21JavadocVisitor.javaVisitor:Lcom/sun/source/util/TreeScanner;
+       101: aload_1
+       102: invokeinterface #188,  1          // InterfaceMethod com/sun/source/tree/ParameterizedTypeTree.getTypeArguments:()Ljava/util/List;
+       107: iload         6
+       109: invokeinterface #202,  2          // InterfaceMethod java/util/List.get:(I)Ljava/lang/Object;
+       114: checkcast     #206                // class com/sun/source/tree/Tree
+       117: aload         7
+       119: invokevirtual #183                // Method com/sun/source/util/TreeScanner.scan:(Lcom/sun/source/tree/Tree;Ljava/lang/Object;)Ljava/lang/Object;
+       122: checkcast     #29                 // class org/openrewrite/java/tree/Expression
+       125: invokestatic  #208                // Method org/openrewrite/java/tree/JRightPadded.build:(Ljava/lang/Object;)Lorg/openrewrite/java/tree/JRightPadded;
+       128: astore        8
+       130: iload         6
+       132: iload         5
+       134: iconst_1
+       135: isub
+       136: if_icmpne     159
+       139: aload_0
+       140: getfield      #1                  // Field this$0:Lorg/openrewrite/java/isolated/ReloadableJava21JavadocVisitor;
+       143: ldc           #213                // String >
+       145: invokevirtual #146                // Method org/openrewrite/java/isolated/ReloadableJava21JavadocVisitor.sourceBeforeAsString:(Ljava/lang/String;)Ljava/lang/String;
+       148: invokestatic  #74                 // Method java/util/Collections.emptyList:()Ljava/util/List;
+       151: invokestatic  #150                // Method org/openrewrite/java/tree/Space.build:(Ljava/lang/String;Ljava/util/List;)Lorg/openrewrite/java/tree/Space;
+       154: astore        9
+       156: goto          176
+       159: aload_0
+       160: getfield      #1                  // Field this$0:Lorg/openrewrite/java/isolated/ReloadableJava21JavadocVisitor;
+       163: ldc           #215                // String ,
+       165: invokevirtual #146                // Method org/openrewrite/java/isolated/ReloadableJava21JavadocVisitor.sourceBeforeAsString:(Ljava/lang/String;)Ljava/lang/String;
+       168: invokestatic  #74                 // Method java/util/Collections.emptyList:()Ljava/util/List;
+       171: invokestatic  #150                // Method org/openrewrite/java/tree/Space.build:(Ljava/lang/String;Ljava/util/List;)Lorg/openrewrite/java/tree/Space;
+       174: astore        9
+       176: aload         8
+       178: aload         9
+       180: invokevirtual #217                // Method org/openrewrite/java/tree/JRightPadded.withAfter:(Lorg/openrewrite/java/tree/Space;)Lorg/openrewrite/java/tree/JRightPadded;
+       183: astore        8
+       185: aload         4
+       187: aload         8
+       189: invokeinterface #221,  2          // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+       194: pop
+       195: iinc          6, 1
+       198: goto          72
+       201: new           #225                // class org/openrewrite/java/tree/J$ParameterizedType
+       204: dup
+       205: invokestatic  #61                 // InterfaceMethod org/openrewrite/Tree.randomId:()Ljava/util/UUID;
+       208: aload_2
+       209: getstatic     #67                 // Field org/openrewrite/marker/Markers.EMPTY:Lorg/openrewrite/marker/Markers;
+       212: aload_3
+       213: aload         4
+       215: invokestatic  #227                // Method org/openrewrite/java/tree/JContainer.build:(Ljava/util/List;)Lorg/openrewrite/java/tree/JContainer;
+       218: aload_0
+       219: getfield      #1                  // Field this$0:Lorg/openrewrite/java/isolated/ReloadableJava21JavadocVisitor;
+       222: getfield      #89                 // Field org/openrewrite/java/isolated/ReloadableJava21JavadocVisitor.typeMapping:Lorg/openrewrite/java/isolated/ReloadableJava21TypeMapping;
+       225: aload_1
+       226: invokevirtual #93                 // Method org/openrewrite/java/isolated/ReloadableJava21TypeMapping.type:(Lcom/sun/source/tree/Tree;)Lorg/openrewrite/java/tree/JavaType;
+       229: invokespecial #232                // Method org/openrewrite/java/tree/J$ParameterizedType."<init>":(Ljava/util/UUID;Lorg/openrewrite/java/tree/Space;Lorg/openrewrite/marker/Markers;Lorg/openrewrite/java/tree/NameTree;Lorg/openrewrite/java/tree/JContainer;Lorg/openrewrite/java/tree/JavaType;)V
+       232: areturn
+      LineNumberTable:
+        line 1192: 0
+        line 1193: 23
+        line 1194: 43
+        line 1195: 56
+        line 1196: 69
+        line 1197: 79
+        line 1198: 94
+        line 1200: 130
+        line 1201: 139
+        line 1203: 159
+        line 1205: 176
+        line 1206: 185
+        line 1196: 195
+        line 1208: 201
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+          156       3     9 after   Lorg/openrewrite/java/tree/Space;
+           94     101     7 space   Lorg/openrewrite/java/tree/Space;
+          130      65     8 expression   Lorg/openrewrite/java/tree/JRightPadded;
+          176      19     9 after   Lorg/openrewrite/java/tree/Space;
+           72     129     6     i   I
+            0     233     0  this   Lorg/openrewrite/java/isolated/ReloadableJava21JavadocVisitor$JavaVisitor;
+            0     233     1  node   Lcom/sun/source/tree/ParameterizedTypeTree;
+            0     233     2   fmt   Lorg/openrewrite/java/tree/Space;
+           23     210     3    id   Lorg/openrewrite/java/tree/NameTree;
+           43     190     4 expressions   Ljava/util/List;
+           69     164     5 argsSize   I
+      LocalVariableTypeTable:
+        Start  Length  Slot  Name   Signature
+          130      65     8 expression   Lorg/openrewrite/java/tree/JRightPadded<Lorg/openrewrite/java/tree/Expression;>;
+           43     190     4 expressions   Ljava/util/List<Lorg/openrewrite/java/tree/JRightPadded<Lorg/openrewrite/java/tree/Expression;>;>;
+      StackMapTable: number_of_entries = 4
+        frame_type = 255 /* full_frame */
+          offset_delta = 72
+          locals = [ class org/openrewrite/java/isolated/ReloadableJava21JavadocVisitor$JavaVisitor, class com/sun/source/tree/ParameterizedTypeTree, class org/openrewrite/java/tree/Space, class org/openrewrite/java/tree/NameTree, class java/util/List, int, int ]
+          stack = []
+        frame_type = 253 /* append */
+          offset_delta = 86
+          locals = [ class org/openrewrite/java/tree/Space, class org/openrewrite/java/tree/JRightPadded ]
+        frame_type = 252 /* append */
+          offset_delta = 16
+          locals = [ class org/openrewrite/java/tree/Space ]
+        frame_type = 255 /* full_frame */
+          offset_delta = 24
+          locals = [ class org/openrewrite/java/isolated/ReloadableJava21JavadocVisitor$JavaVisitor, class com/sun/source/tree/ParameterizedTypeTree, class org/openrewrite/java/tree/Space, class org/openrewrite/java/tree/NameTree, class java/util/List, int ]
+          stack = []
+
+  public java.lang.Object visitParameterizedType(com.sun.source.tree.ParameterizedTypeTree, java.lang.Object);
+    descriptor: (Lcom/sun/source/tree/ParameterizedTypeTree;Ljava/lang/Object;)Ljava/lang/Object;
+    flags: (0x1041) ACC_PUBLIC, ACC_BRIDGE, ACC_SYNTHETIC
+    Code:
+      stack=3, locals=3, args_size=3
+         0: aload_0
+         1: aload_1
+         2: aload_2
+         3: checkcast     #20                 // class org/openrewrite/java/tree/Space
+         6: invokevirtual #235                // Method visitParameterizedType:(Lcom/sun/source/tree/ParameterizedTypeTree;Lorg/openrewrite/java/tree/Space;)Lorg/openrewrite/java/tree/J;
+         9: areturn
+      LineNumberTable:
+        line 1120: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0      10     0  this   Lorg/openrewrite/java/isolated/ReloadableJava21JavadocVisitor$JavaVisitor;
+    MethodParameters:
+      Name                           Flags
+      <no name>                      synthetic
+      <no name>                      synthetic
+
+  public java.lang.Object visitArrayType(com.sun.source.tree.ArrayTypeTree, java.lang.Object);
+    descriptor: (Lcom/sun/source/tree/ArrayTypeTree;Ljava/lang/Object;)Ljava/lang/Object;
+    flags: (0x1041) ACC_PUBLIC, ACC_BRIDGE, ACC_SYNTHETIC
+    Code:
+      stack=3, locals=3, args_size=3
+         0: aload_0
+         1: aload_1
+         2: aload_2
+         3: checkcast     #20                 // class org/openrewrite/java/tree/Space
+         6: invokevirtual #239                // Method visitArrayType:(Lcom/sun/source/tree/ArrayTypeTree;Lorg/openrewrite/java/tree/Space;)Lorg/openrewrite/java/tree/J;
+         9: areturn
+      LineNumberTable:
+        line 1120: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0      10     0  this   Lorg/openrewrite/java/isolated/ReloadableJava21JavadocVisitor$JavaVisitor;
+    MethodParameters:
+      Name                           Flags
+      <no name>                      synthetic
+      <no name>                      synthetic
+
+  public java.lang.Object visitPrimitiveType(com.sun.source.tree.PrimitiveTypeTree, java.lang.Object);
+    descriptor: (Lcom/sun/source/tree/PrimitiveTypeTree;Ljava/lang/Object;)Ljava/lang/Object;
+    flags: (0x1041) ACC_PUBLIC, ACC_BRIDGE, ACC_SYNTHETIC
+    Code:
+      stack=3, locals=3, args_size=3
+         0: aload_0
+         1: aload_1
+         2: aload_2
+         3: checkcast     #20                 // class org/openrewrite/java/tree/Space
+         6: invokevirtual #243                // Method visitPrimitiveType:(Lcom/sun/source/tree/PrimitiveTypeTree;Lorg/openrewrite/java/tree/Space;)Lorg/openrewrite/java/tree/J;
+         9: areturn
+      LineNumberTable:
+        line 1120: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0      10     0  this   Lorg/openrewrite/java/isolated/ReloadableJava21JavadocVisitor$JavaVisitor;
+    MethodParameters:
+      Name                           Flags
+      <no name>                      synthetic
+      <no name>                      synthetic
+
+  public java.lang.Object visitIdentifier(com.sun.source.tree.IdentifierTree, java.lang.Object);
+    descriptor: (Lcom/sun/source/tree/IdentifierTree;Ljava/lang/Object;)Ljava/lang/Object;
+    flags: (0x1041) ACC_PUBLIC, ACC_BRIDGE, ACC_SYNTHETIC
+    Code:
+      stack=3, locals=3, args_size=3
+         0: aload_0
+         1: aload_1
+         2: aload_2
+         3: checkcast     #20                 // class org/openrewrite/java/tree/Space
+         6: invokevirtual #247                // Method visitIdentifier:(Lcom/sun/source/tree/IdentifierTree;Lorg/openrewrite/java/tree/Space;)Lorg/openrewrite/java/tree/J;
+         9: areturn
+      LineNumberTable:
+        line 1120: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0      10     0  this   Lorg/openrewrite/java/isolated/ReloadableJava21JavadocVisitor$JavaVisitor;
+    MethodParameters:
+      Name                           Flags
+      <no name>                      synthetic
+      <no name>                      synthetic
+
+  public java.lang.Object visitMemberSelect(com.sun.source.tree.MemberSelectTree, java.lang.Object);
+    descriptor: (Lcom/sun/source/tree/MemberSelectTree;Ljava/lang/Object;)Ljava/lang/Object;
+    flags: (0x1041) ACC_PUBLIC, ACC_BRIDGE, ACC_SYNTHETIC
+    Code:
+      stack=3, locals=3, args_size=3
+         0: aload_0
+         1: aload_1
+         2: aload_2
+         3: checkcast     #20                 // class org/openrewrite/java/tree/Space
+         6: invokevirtual #251                // Method visitMemberSelect:(Lcom/sun/source/tree/MemberSelectTree;Lorg/openrewrite/java/tree/Space;)Lorg/openrewrite/java/tree/J;
+         9: areturn
+      LineNumberTable:
+        line 1120: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0      10     0  this   Lorg/openrewrite/java/isolated/ReloadableJava21JavadocVisitor$JavaVisitor;
+    MethodParameters:
+      Name                           Flags
+      <no name>                      synthetic
+      <no name>                      synthetic
+}
+Signature: #303                         // Lcom/sun/source/util/TreeScanner<Lorg/openrewrite/java/tree/J;Lorg/openrewrite/java/tree/Space;>;
+SourceFile: "ReloadableJava21JavadocVisitor.java"
+NestHost: class org/openrewrite/java/isolated/ReloadableJava21JavadocVisitor
+InnerClasses:
+  #308= #2 of #34;                        // JavaVisitor=class org/openrewrite/java/isolated/ReloadableJava21JavadocVisitor$JavaVisitor of class org/openrewrite/java/isolated/ReloadableJava21JavadocVisitor
+  public static #311= #13 of #309;        // JCFieldAccess=class com/sun/tools/javac/tree/JCTree$JCFieldAccess of class com/sun/tools/javac/tree/JCTree
+  public static abstract #314= #312 of #309; // JCExpression=class com/sun/tools/javac/tree/JCTree$JCExpression of class com/sun/tools/javac/tree/JCTree
+  public static final #317= #59 of #315;  // FieldAccess=class org/openrewrite/java/tree/J$FieldAccess of class org/openrewrite/java/tree/J
+  public static final #318= #72 of #315;  // Identifier=class org/openrewrite/java/tree/J$Identifier of class org/openrewrite/java/tree/J
+  public static #323= #319 of #321;       // Variable=class org/openrewrite/java/tree/JavaType$Variable of class org/openrewrite/java/tree/JavaType
+  public static #324= #111 of #309;       // JCPrimitiveTypeTree=class com/sun/tools/javac/tree/JCTree$JCPrimitiveTypeTree of class com/sun/tools/javac/tree/JCTree
+  public static final #327= #325 of #321; // Primitive=class org/openrewrite/java/tree/JavaType$Primitive of class org/openrewrite/java/tree/JavaType
+  public static final #328= #161 of #315; // ArrayType=class org/openrewrite/java/tree/J$ArrayType of class org/openrewrite/java/tree/J
+  public static final #329= #225 of #315; // ParameterizedType=class org/openrewrite/java/tree/J$ParameterizedType of class org/openrewrite/java/tree/J

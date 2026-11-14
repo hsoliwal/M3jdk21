@@ -1,0 +1,16 @@
+artifact	purpose	state
+STATUS.tsv	Executed status and scope limits	PRESENT
+FINAL_REPORT.md	Human execution summary	PRESENT
+RUN_CONTEXT.tsv	Exact runtime and source context	PRESENT
+PROVENANCE.tsv	Donor/input custody	PRESENT
+VERIFY_CONTRACT.tsv	Mandatory gates and failures	PRESENT
+OUTPUT_CONTRACT.tsv	This checklist	PRESENT
+TODO.tsv	31 original tasks plus5 concrete continuations	PRESENT
+JUNIT.tsv	All55 actual suite summaries	PRESENT
+FAILURES.tsv	Four retained failing test cases	PRESENT
+COVERAGE.tsv	Actual JaCoCo counters	PRESENT
+SOURCE_SEALS.tsv	Code/template/source identities	PRESENT
+EVIDENCE_SHA256.tsv	Raw log/report hashes in downloadable evidence bundle	PRESENT
+LAB_COUNTS.tsv;LAB_PROJECT.tsv	Generated corpus and source seals	PRESENT
+verify-descriptor.sh	Reproducible actual descriptor runtime experiment	PRESENT
+CI run details	Observed separately after publication	NOT_A_PASS_CLAIM

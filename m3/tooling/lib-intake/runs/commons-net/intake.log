@@ -1,0 +1,11 @@
+LIB_INTAKE commons-net S0_VIEW PASS java=180 packages=20 resources=2 overlays=none upstream_descriptor=yes
+LIB_INTAKE commons-net S1_RELOCATE PASS map=org.apache.commons.net=com.m3.lib.net packages_moved=20 old_dirs_left=0 text_completed_files=10 parse_fallback_files=1 resources_moved=0 meta_mapped=0
+LIB_INTAKE commons-net S1b_BCP PASS java_equal_after_name_map=180 resources_byte_equal=2 differing=0
+LIB_INTAKE commons-net S2_RESIDUE PASS residue=0 (every kind) slash_form_files=0
+LIB_INTAKE commons-net S3_ATOMIZE PASS atoms=3181 KNOWN_PATTERN=310 UNPROVEN_LEAF=2067 UNKNOWN_PATTERN=804
+LIB_INTAKE commons-net S4_CONSOLIDATE PASS owner_contract_atoms=174 (proposal queue)
+LIB_INTAKE commons-net S5_REFACTOR_BASELINE PASS METHOD_15=161 LOOP=98 CONST_HOIST=77 (ratchet: MOP passes may only lower these)
+LIB_INTAKE commons-net S6_MODULE PASS module=jdk.m3.net requires=java.base exports=20 javac_warnings=58
+LIB_INTAKE commons-net S7_JMOD_IMAGE PASS jmod=285314B image_modules=6 smoke='loaded=176 failed=0'
+LIB_INTAKE commons-net S8_LAYER PASS files=186 layer=m3/vendor/third_party-m3/relocated/commons-net
+LIB_INTAKE_DONE commons-net jdk.m3.net H:/m3-scratch/lib-intake/batch/commons-net/jmods/jdk.m3.net.jmod

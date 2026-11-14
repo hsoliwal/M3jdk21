@@ -1,0 +1,2 @@
+# path	before_sha256	after_sha256	resource
+src/java.base/share/classes/java/util/regex/Pattern.java	8cbd439235c592ecc98eb2a26f8494108c18a6521e715431ca1bec6db1e0b170	d2828f7a76ae172204abe56cdf4e9df4b5fc0133bb65936b4e82aa9f7b9d105f	00-Pattern.java.txt

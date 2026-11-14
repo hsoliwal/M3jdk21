@@ -1,0 +1,60 @@
+# SPDX-License-Identifier: Apache-2.0
+# Gate 7 of FILE_UNIFY v2: files that still name m3/ports/file or m3-ports-file on the branch (git grep --cached, m3/backports/file* excluded), with the reason they stay.
+file	lines	class
+m3/collections/recipe/immutable-pools-20261106/README.md	1	HISTORICAL: evidence, receipts, ledgers or a past run's gate script citing commits/runs at the time
+m3/collections/recipe/immutable-pools-20261106/RELOCATION_MAP.tsv	1	HISTORICAL: evidence, receipts, ledgers or a past run's gate script citing commits/runs at the time
+m3/compiler/lifetime-slots/GATES.tsv	1	HISTORICAL: evidence, receipts, ledgers or a past run's gate script citing commits/runs at the time
+m3/compiler/lifetime-slots/README.md	1	HISTORICAL: evidence, receipts, ledgers or a past run's gate script citing commits/runs at the time
+m3/docs/name-mapping.d/m3-file-nlp-search.json	1	HASH_PINNED: nlp-search input lock / sealed recipe custody (sha256 per path; no tool re-seals it; the lock already drifted on master, m3/qualification/ci-repair-20261031/C5); re-seal with the module-pack owner
+m3/file/pom.xml	2	THIS_LEAF: FLLDCIM anchor naming the absorbed preimage (m3/ports/file blob)
+m3/file/qualification/m3fmt-shared-lexicon-20261021/RECEIPT.md	1	HISTORICAL: evidence, receipts, ledgers or a past run's gate script citing commits/runs at the time
+m3/file/recipe/delta-generator-20261106/GATES.tsv	1	HISTORICAL: evidence, receipts, ledgers or a past run's gate script citing commits/runs at the time
+m3/file/recipe/delta-generator-20261106/README.md	1	HISTORICAL: evidence, receipts, ledgers or a past run's gate script citing commits/runs at the time
+m3/file/recipe/delta-generator-20261106/RECIPE_MEMORY.tsv	1	HISTORICAL: evidence, receipts, ledgers or a past run's gate script citing commits/runs at the time
+m3/file/src/main/java/module-info.java	2	THIS_LEAF: FLLDCIM anchor naming the absorbed preimage (m3/ports/file blob)
+m3/nlp/GATES.tsv	2	HISTORICAL: evidence, receipts, ledgers or a past run's gate script citing commits/runs at the time
+m3/ports/indexstring/README.md	1	HISTORICAL: evidence, receipts, ledgers or a past run's gate script citing commits/runs at the time
+m3/ports/indexstring/recipe/character-flags-20261106/GATES.tsv	2	HISTORICAL: evidence, receipts, ledgers or a past run's gate script citing commits/runs at the time
+m3/ports/indexstring/recipe/character-flags-20261106/README.md	2	HISTORICAL: evidence, receipts, ledgers or a past run's gate script citing commits/runs at the time
+m3/ports/indexstring/recipe/character-flags-20261106/RECIPE_MEMORY.tsv	2	HISTORICAL: evidence, receipts, ledgers or a past run's gate script citing commits/runs at the time
+m3/ports/indexstring/recipe/character-flags-20261106/RELOCATION_MAP.tsv	1	HISTORICAL: evidence, receipts, ledgers or a past run's gate script citing commits/runs at the time
+m3/qualification/ci-repair-20261031/C5-pin-drift-and-runner-env.tsv	1	HISTORICAL: evidence, receipts, ledgers or a past run's gate script citing commits/runs at the time
+m3/qualification/file-unify-20261106/EDITS.tsv	4	THIS_LEAF: recipe, ledgers and records (old paths are their inputs)
+m3/qualification/file-unify-20261106/GATES.tsv	7	THIS_LEAF: recipe, ledgers and records (old paths are their inputs)
+m3/qualification/file-unify-20261106/MOVES.tsv	94	THIS_LEAF: recipe, ledgers and records (old paths are their inputs)
+m3/qualification/file-unify-20261106/NAME_COLLISION.tsv	2	THIS_LEAF: recipe, ledgers and records (old paths are their inputs)
+m3/qualification/file-unify-20261106/README.md	8	THIS_LEAF: recipe, ledgers and records (old paths are their inputs)
+m3/qualification/file-unify-20261106/REMAINING_REFS.tsv	2	THIS_LEAF: recipe, ledgers and records (old paths are their inputs)
+m3/qualification/file-unify-20261106/templates/module-info.java	2	THIS_LEAF: recipe, ledgers and records (old paths are their inputs)
+m3/qualification/file-unify-20261106/templates/pom.xml	2	THIS_LEAF: recipe, ledgers and records (old paths are their inputs)
+m3/qualification/file-unify-20261106/unify.py	39	THIS_LEAF: recipe, ledgers and records (old paths are their inputs)
+m3/qualification/master-landing-20261028/retained-variants/pr1616/m3/recipes/runtime-convergence-20261020/evidence/final-review/UPSTREAM_SCOPE_20261020.md	1	HISTORICAL: evidence, receipts, ledgers or a past run's gate script citing commits/runs at the time
+m3/qualification/master-landing-20261028/retained-variants/pr1616/m3/recipes/runtime-convergence-20261020/provenance/RECEIVING_PARENT_UPDATE_20261020.json	83	HISTORICAL: evidence, receipts, ledgers or a past run's gate script citing commits/runs at the time
+m3/qualification/progress-monitor-unify-20261106/DESIGN.md	13	HISTORICAL: evidence, receipts, ledgers or a past run's gate script citing commits/runs at the time
+m3/qualification/progress-monitor-unify-20261106/GATES.tsv	7	HISTORICAL: evidence, receipts, ledgers or a past run's gate script citing commits/runs at the time
+m3/qualification/progress-monitor-unify-20261106/PLAN.tsv	8	HISTORICAL: evidence, receipts, ledgers or a past run's gate script citing commits/runs at the time
+m3/qualification/progress-monitor-unify-20261106/README.md	5	HISTORICAL: evidence, receipts, ledgers or a past run's gate script citing commits/runs at the time
+m3/qualification/progress-monitor-unify-20261106/RECIPE_MEMORY.tsv	1	HISTORICAL: evidence, receipts, ledgers or a past run's gate script citing commits/runs at the time
+m3/qualification/progress-monitor-unify-20261106/unify.py	14	HISTORICAL: evidence, receipts, ledgers or a past run's gate script citing commits/runs at the time
+m3/qualification/progress-monitor-unify-20261106/verify.sh	4	HISTORICAL: evidence, receipts, ledgers or a past run's gate script citing commits/runs at the time
+m3/qualification/superset-merge-20261021/RECEIVING.tsv	3	HISTORICAL: evidence, receipts, ledgers or a past run's gate script citing commits/runs at the time
+m3/qualification/superset-merge-20261021/REPAIR_RECEIPTS_1621.tsv	3	HISTORICAL: evidence, receipts, ledgers or a past run's gate script citing commits/runs at the time
+m3/release/audit-20261030/COMPILE_BLOCKERS.tsv	2	HISTORICAL: evidence, receipts, ledgers or a past run's gate script citing commits/runs at the time
+m3/release/audit-20261030/compile_master.log	1	HISTORICAL: evidence, receipts, ledgers or a past run's gate script citing commits/runs at the time
+m3/release/audit-20261030/compile_superset.log	1	HISTORICAL: evidence, receipts, ledgers or a past run's gate script citing commits/runs at the time
+m3/release/audit-20261030/evidence/compile_audit.py	1	HISTORICAL: evidence, receipts, ledgers or a past run's gate script citing commits/runs at the time
+m3/search/qualification/relocation-20261106-bmh-cancellation/search_gate.sh	3	HISTORICAL: a past run's gate script or result (#2550, #2562) that put both source roots on -sourcepath
+m3/search/qualification/relocation-20261106-native/gate2.sh	1	HISTORICAL: evidence, receipts, ledgers or a past run's gate script citing commits/runs at the time
+m3/search/qualification/relocation-20261106-reduce/RESULT.md	1	HISTORICAL: a past run's gate script or result (#2550, #2562) that put both source roots on -sourcepath
+m3/search/qualification/relocation-20261106-reduce/leaf5_gate.sh	3	HISTORICAL: a past run's gate script or result (#2550, #2562) that put both source roots on -sourcepath
+m3/tooling/jdk-naming/RECIPE_MEMORY.tsv	1	HISTORICAL: evidence, receipts, ledgers or a past run's gate script citing commits/runs at the time
+m3/tooling/migration-recipes/tasks/m3file-byte-event-fact-20261021/fixed-point-repair-20261021/original-sdk-tests.log	2	HISTORICAL: evidence, receipts, ledgers or a past run's gate script citing commits/runs at the time
+m3/tooling/migration-recipes/tasks/m3string-leaf-cursor-20261021/fixed-point-repair-20261021/original-sdk-tests.log	2	HISTORICAL: evidence, receipts, ledgers or a past run's gate script citing commits/runs at the time
+m3/tooling/module-packs/nlp-search/INPUTS.json	182	HASH_PINNED: nlp-search input lock / sealed recipe custody (sha256 per path; no tool re-seals it; the lock already drifted on master, m3/qualification/ci-repair-20261031/C5); re-seal with the module-pack owner
+m3/tooling/module-packs/nlp-search/recipe-custody/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/manifest.tsv	80	HASH_PINNED: nlp-search input lock / sealed recipe custody (sha256 per path; no tool re-seals it; the lock already drifted on master, m3/qualification/ci-repair-20261031/C5); re-seal with the module-pack owner
+m3/tooling/module-packs/nlp-search/recipe-custody/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/0000-m3sdk-jmod-receiver.yml.txt	1	HASH_PINNED: nlp-search input lock / sealed recipe custody (sha256 per path; no tool re-seals it; the lock already drifted on master, m3/qualification/ci-repair-20261031/C5); re-seal with the module-pack owner
+m3/tooling/module-packs/nlp-search/recipe-custody/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/0001-m3-file-nlp-search.json.txt	1	HASH_PINNED: nlp-search input lock / sealed recipe custody (sha256 per path; no tool re-seals it; the lock already drifted on master, m3/qualification/ci-repair-20261031/C5); re-seal with the module-pack owner
+m3/tooling/module-packs/nlp-search/recipe-custody/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/0013-INPUTS.json.txt	168	HASH_PINNED: nlp-search input lock / sealed recipe custody (sha256 per path; no tool re-seals it; the lock already drifted on master, m3/qualification/ci-repair-20261031/C5); re-seal with the module-pack owner
+m3/tooling/module-packs/nlp-search/recipe-custody/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/0020-README.md.txt	2	HASH_PINNED: nlp-search input lock / sealed recipe custody (sha256 per path; no tool re-seals it; the lock already drifted on master, m3/qualification/ci-repair-20261031/C5); re-seal with the module-pack owner
+m3/tooling/module-packs/nlp-search/recipe-custody/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/0022-build.py.txt	3	HASH_PINNED: nlp-search input lock / sealed recipe custody (sha256 per path; no tool re-seals it; the lock already drifted on master, m3/qualification/ci-repair-20261031/C5); re-seal with the module-pack owner
+m3/tooling/module-packs/nlp-search/recipe-custody/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/manifest.tsv	3	HASH_PINNED: nlp-search input lock / sealed recipe custody (sha256 per path; no tool re-seals it; the lock already drifted on master, m3/qualification/ci-repair-20261031/C5); re-seal with the module-pack owner

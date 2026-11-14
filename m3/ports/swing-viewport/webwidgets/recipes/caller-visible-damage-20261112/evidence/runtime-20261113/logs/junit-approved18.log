@@ -1,0 +1,81 @@
+
+Failures (6):
+  JUnit Jupiter:M3ViewportCoreApiTest:damageNeverLosesAcceptedRepresentableUnion()
+    MethodSource [className = 'jdk.m3.swing.viewport.M3ViewportCoreApiTest', methodName = 'damageNeverLosesAcceptedRepresentableUnion', methodParameterTypes = '']
+    => org.opentest4j.AssertionFailedError: array contents differ at index [2], expected: <11> but was: <1>
+       org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+       org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+       org.junit.jupiter.api.AssertArrayEquals.failArraysNotEqual(AssertArrayEquals.java:440)
+       org.junit.jupiter.api.AssertArrayEquals.assertArrayEquals(AssertArrayEquals.java:241)
+       org.junit.jupiter.api.AssertArrayEquals.assertArrayEquals(AssertArrayEquals.java:87)
+       org.junit.jupiter.api.AssertArrayEquals.assertArrayEquals(AssertArrayEquals.java:83)
+       org.junit.jupiter.api.Assertions.assertArrayEquals(Assertions.java:1281)
+       jdk.m3.swing.viewport.M3ViewportCoreApiTest.damageNeverLosesAcceptedRepresentableUnion(M3ViewportCoreApiTest.java:148)
+       java.base/java.lang.reflect.Method.invoke(Method.java:580)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+       [...]
+  JUnit Jupiter:M3ViewportCoreApiTest:damageNeverSilentlyDropsAcceptedEndpointRectangles()
+    MethodSource [className = 'jdk.m3.swing.viewport.M3ViewportCoreApiTest', methodName = 'damageNeverSilentlyDropsAcceptedEndpointRectangles', methodParameterTypes = '']
+    => org.opentest4j.AssertionFailedError: expected: <false> but was: <true>
+       org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+       org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+       org.junit.jupiter.api.AssertFalse.failNotFalse(AssertFalse.java:63)
+       org.junit.jupiter.api.AssertFalse.assertFalse(AssertFalse.java:36)
+       org.junit.jupiter.api.AssertFalse.assertFalse(AssertFalse.java:31)
+       org.junit.jupiter.api.Assertions.assertFalse(Assertions.java:231)
+       jdk.m3.swing.viewport.M3ViewportCoreApiTest.damageNeverSilentlyDropsAcceptedEndpointRectangles(M3ViewportCoreApiTest.java:106)
+       java.base/java.lang.reflect.Method.invoke(Method.java:580)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+  JUnit Jupiter:M3ViewportCoreApiTest:wideDamageAcceptsEveryPositiveIntSingleton()
+    MethodSource [className = 'jdk.m3.swing.viewport.M3ViewportCoreApiTest', methodName = 'wideDamageAcceptsEveryPositiveIntSingleton', methodParameterTypes = '']
+    => org.opentest4j.AssertionFailedError: expected: <false> but was: <true>
+       org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+       org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+       org.junit.jupiter.api.AssertFalse.failNotFalse(AssertFalse.java:63)
+       org.junit.jupiter.api.AssertFalse.assertFalse(AssertFalse.java:36)
+       org.junit.jupiter.api.AssertFalse.assertFalse(AssertFalse.java:31)
+       org.junit.jupiter.api.Assertions.assertFalse(Assertions.java:231)
+       jdk.m3.swing.viewport.M3ViewportCoreApiTest.wideDamageAcceptsEveryPositiveIntSingleton(M3ViewportCoreApiTest.java:294)
+       java.base/java.lang.reflect.Method.invoke(Method.java:580)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+  JUnit Jupiter:M3ViewportCoreApiTest:wideDamageDrainPreservesNullPartialFailureAndResetOrder()
+    MethodSource [className = 'jdk.m3.swing.viewport.M3ViewportCoreApiTest', methodName = 'wideDamageDrainPreservesNullPartialFailureAndResetOrder', methodParameterTypes = '']
+    => java.lang.NoSuchMethodException: jdk.m3.swing.viewport.M3ViewportDamage.takeWide([J)
+       java.base/java.lang.Class.getMethod(Class.java:2397)
+       jdk.m3.swing.viewport.M3ViewportCoreApiTest.wideDamageDrainPreservesNullPartialFailureAndResetOrder(M3ViewportCoreApiTest.java:378)
+       java.base/java.lang.reflect.Method.invoke(Method.java:580)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+  JUnit Jupiter:M3ViewportCoreApiTest:wideDamageRetainsOversizedUnionAfterLegacyProjectionFailure()
+    MethodSource [className = 'jdk.m3.swing.viewport.M3ViewportCoreApiTest', methodName = 'wideDamageRetainsOversizedUnionAfterLegacyProjectionFailure', methodParameterTypes = '']
+    => java.lang.NoSuchMethodException: jdk.m3.swing.viewport.M3ViewportDamage.takeWide([J)
+       java.base/java.lang.Class.getMethod(Class.java:2397)
+       jdk.m3.swing.viewport.M3ViewportCoreApiTest.wideDamageRetainsOversizedUnionAfterLegacyProjectionFailure(M3ViewportCoreApiTest.java:318)
+       java.base/java.lang.reflect.Method.invoke(Method.java:580)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+  JUnit Jupiter:M3ViewportCoreApiTest:wideDamagePermutationAndWrappedZeroAreaRemainNonempty()
+    MethodSource [className = 'jdk.m3.swing.viewport.M3ViewportCoreApiTest', methodName = 'wideDamagePermutationAndWrappedZeroAreaRemainNonempty', methodParameterTypes = '']
+    => java.lang.NoSuchMethodException: jdk.m3.swing.viewport.M3ViewportDamage.takeWide([J)
+       java.base/java.lang.Class.getMethod(Class.java:2397)
+       jdk.m3.swing.viewport.M3ViewportCoreApiTest.wideDamagePermutationAndWrappedZeroAreaRemainNonempty(M3ViewportCoreApiTest.java:431)
+       java.base/java.lang.reflect.Method.invoke(Method.java:580)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+Test run finished after 231 ms
+[         4 containers found      ]
+[         0 containers skipped    ]
+[         4 containers started    ]
+[         0 containers aborted    ]
+[         4 containers successful ]
+[         0 containers failed     ]
+[        18 tests found           ]
+[         0 tests skipped         ]
+[        18 tests started         ]
+[         0 tests aborted         ]
+[        12 tests successful      ]
+[         6 tests failed          ]
+

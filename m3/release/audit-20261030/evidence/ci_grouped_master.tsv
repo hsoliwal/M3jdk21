@@ -1,0 +1,20 @@
+ref	workflow	runs	last_status	last_conclusion	last_created	last_run_id	streak	last_sha	event	url
+master	M3 merged recipe atom preservation	100	completed	success	2026-10-29T17:00:48Z	40917174844	0	5860598b5158	push	https://github.com/hsoliwal/M3jdk21/actions/runs/40917174844
+master	M3 observable filtered and sorted indexed views Java21	131	completed	success	2026-10-29T17:00:48Z	40917174630	0	5860598b5158	push	https://github.com/hsoliwal/M3jdk21/actions/runs/40917174630
+master	M3 original mapping provider and reconciliation	13	completed	failure	2026-10-29T17:00:48Z	40917174727	13	5860598b5158	push	https://github.com/hsoliwal/M3jdk21/actions/runs/40917174727
+master	M3 retained capability audit	228	completed	success	2026-10-29T17:00:48Z	40917174641	0	5860598b5158	push	https://github.com/hsoliwal/M3jdk21/actions/runs/40917174641
+master	M3 Synexia intake policy	20	completed	failure	2026-10-29T17:00:48Z	40917174857	20	5860598b5158	push	https://github.com/hsoliwal/M3jdk21/actions/runs/40917174857
+master	M3 collection contracts	105	completed	failure	2026-10-29T13:39:59Z	40884023095	105	052ebcf7a263	push	https://github.com/hsoliwal/M3jdk21/actions/runs/40884023095
+master	M3JDK21 Backport Recipe DAG	15	completed	failure	2026-10-29T13:10:53Z	40879580255	15	ce42f8ee575a	push	https://github.com/hsoliwal/M3jdk21/actions/runs/40879580255
+master	M3JDK21 single-source layered shadow I/O	14	completed	success	2026-10-29T08:50:10Z	40845017512	0	8f12d0727dff	push	https://github.com/hsoliwal/M3jdk21/actions/runs/40845017512
+master	M3File reverse impact Java21	12	completed	success	2026-10-29T08:50:10Z	40845017412	0	8f12d0727dff	push	https://github.com/hsoliwal/M3jdk21/actions/runs/40845017412
+master	M3File native delta and build-impact Java21	12	completed	success	2026-10-29T08:50:10Z	40845017455	0	8f12d0727dff	push	https://github.com/hsoliwal/M3jdk21/actions/runs/40845017455
+master	M3File move candidates and source recipes	10	completed	success	2026-10-29T08:50:10Z	40845017474	0	8f12d0727dff	push	https://github.com/hsoliwal/M3jdk21/actions/runs/40845017474
+master	M3 object residency pressure contract	1	completed	success	2026-10-28T13:49:00Z	40699913855	0	2028b1fb5f42	push	https://github.com/hsoliwal/M3jdk21/actions/runs/40699913855
+master	M3JDK21 tokenizer source-built image and jtreg	1	completed	failure	2026-10-28T13:48:59Z	40699913527	1	2028b1fb5f42	push	https://github.com/hsoliwal/M3jdk21/actions/runs/40699913527
+master	.github/workflows/main.yml	7	completed	failure	2026-10-27T12:06:41Z	40501206433	7	51de1f76e8b6	push	https://github.com/hsoliwal/M3jdk21/actions/runs/40501206433
+master	M3JDK String owner-coordinate runtime	1	completed	failure	2026-10-27T04:52:21Z	40452112040	1	05e947be6fe9	workflow_dispatch	https://github.com/hsoliwal/M3jdk21/actions/runs/40452112040
+master	M3 A3 absorption proof	13	completed	failure	2026-10-25T03:40:45Z	40159100017	13	15f1f76227bc	push	https://github.com/hsoliwal/M3jdk21/actions/runs/40159100017
+master	M3 state mask histogram Java21 JNI source proof	3	completed	failure	2026-10-24T12:44:22Z	40095175626	3	b35759a36ecd	push	https://github.com/hsoliwal/M3jdk21/actions/runs/40095175626
+master	M3 OpenRewrite recipe proof	11	completed	failure	2026-10-21T05:25:56Z	39549514829	11	52a279e78a2e	push	https://github.com/hsoliwal/M3jdk21/actions/runs/39549514829
+master	M3File delta Java21 contract	3	completed	failure	2026-10-21T04:49:02Z	39546100228	2	a7be4ace0380	push	https://github.com/hsoliwal/M3jdk21/actions/runs/39546100228

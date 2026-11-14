@@ -1,0 +1,52 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ---------------< org.m3jdk.tooling:m3-openrewrite-tool >----------------
+[INFO] Building M3 shared-compiler OpenRewrite Java recipe tool 1.0-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ m3-openrewrite-tool ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/13309be96b09/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/target/m3jdk21-openrewrite-tool/candidate/m3/tooling/shared-frontend/openrewrite-tool/src/main/resources
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ m3-openrewrite-tool ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 1 source file with javac [debug target 21] to ../../../../../../../../../../../ast-work/rewrite-tool-sdk-proof/classes
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ m3-openrewrite-tool ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/13309be96b09/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/target/m3jdk21-openrewrite-tool/candidate/m3/tooling/shared-frontend/openrewrite-tool/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ m3-openrewrite-tool ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 1 source file with javac [debug target 21] to ../../../../../../../../../../../ast-work/rewrite-tool-sdk-proof/test-classes
+[INFO] 
+[INFO] --- surefire:3.2.5:test (default-test) @ m3-openrewrite-tool ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running org.m3jdk.tooling.rewrite.M3RewriteToolTest
+SLF4J(W): No SLF4J providers were found.
+SLF4J(W): Defaulting to no-operation (NOP) logger implementation
+SLF4J(W): See https://www.slf4j.org/codes.html#noProviders for further details.
+[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 12.00 s -- in org.m3jdk.tooling.rewrite.M3RewriteToolTest
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] 
+[INFO] --- jar:3.4.1:jar (default-jar) @ m3-openrewrite-tool ---
+[INFO] Building jar: /workspace/scratch/13309be96b09/ast-work/rewrite-tool-sdk-proof/m3-openrewrite-tool-1.0-SNAPSHOT.jar
+[INFO] 
+[INFO] --- dependency:3.8.1:build-classpath (resolved-runtime-classpath) @ m3-openrewrite-tool ---
+[INFO] Wrote classpath file '/workspace/scratch/13309be96b09/ast-work/rewrite-tool-sdk-proof/runtime-classpath.txt'.
+[INFO] 
+[INFO] --- dependency:3.8.1:list (resolved-runtime-coordinates) @ m3-openrewrite-tool ---
+[INFO] Can't extract module name from rewrite-java-21-8.17.1.jar: rewrite.java.21: Invalid module name: '21' is not a Java identifier
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  15.666 s
+[INFO] Finished at: 2026-10-17T05:14:42-06:00
+[INFO] ------------------------------------------------------------------------

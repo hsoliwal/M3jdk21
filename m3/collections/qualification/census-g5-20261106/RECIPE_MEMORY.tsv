@@ -1,0 +1,4 @@
+# SPDX-License-Identifier: Apache-2.0
+date	recipe	version	lesson	evidence
+2026-11-06	census	-	read the crate's verification receipt before porting a postimage: a candidate the donor rejected (candidateDisposition REJECTED_*) is never applied, but its independent oracle ("run unchanged against baseline and delivery") is still worth relocating as a test of the owner	census-g5-20261106: CircularFifoQueue hunk not applied; M3CircularFifoShiftProof passes on the owner with the receipt's check count
+2026-11-06	differential	-	when the donor package's dependency closure lives only in a fork on the host, compile the donor side with -sourcepath over the fork sources re-packaged into the donor package (sed of the package prefix): javac pulls only the closure it needs	census-g5-20261106 differential.sh: 359 fork sources re-packaged, 3 runs in 41 s

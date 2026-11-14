@@ -1,0 +1,41 @@
+package @WPKG@;
+
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+
+import org.junit.internal.TextListener;
+import org.junit.runner.JUnitCore;
+import org.junit.runner.Result;
+
+/**
+ * JUnit 4 entry point of the desktop runs (pattern M3P-CORE-1): reads the test class names from a file, so the
+ * hidden-desktop command line stays short however many tests the generator emits.
+ */
+public final class M3WebTestMain {
+	/** Prints NOT_RUN for a test whose assumption failed (a Nebula bundle that is not on the test class path). */
+	static final class NotRun extends org.junit.runner.notification.RunListener {
+		@Override
+		public void testAssumptionFailure(org.junit.runner.notification.Failure failure) {
+			System.out.println("NOT_RUN " + failure.getDescription().getClassName() + " " + failure.getMessage());
+		}
+	}
+
+	private M3WebTestMain() {
+	}
+
+	public static void main(String[] args) throws IOException, ClassNotFoundException {
+		java.util.List<Class<?>> classes = new java.util.ArrayList<>();
+		for (String name : Files.readAllLines(Path.of(args[0]), StandardCharsets.UTF_8)) {
+			if (!name.isBlank()) {
+				classes.add(Class.forName(name.trim()));
+			}
+		}
+		JUnitCore core = new JUnitCore();
+		core.addListener(new TextListener(System.out));
+		core.addListener(new NotRun());
+		Result result = core.run(classes.toArray(Class<?>[]::new));
+		System.exit(result.wasSuccessful() ? 0 : 1);
+	}
+}

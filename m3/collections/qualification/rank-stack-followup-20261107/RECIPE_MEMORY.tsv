@@ -1,0 +1,6 @@
+# SPDX-License-Identifier: Apache-2.0
+# RECIPE_MEMORY.tsv - append-only lesson memory of qualification/rank-stack-followup-20261107 (PINNED_EDITS v1): one row per lesson, appended in the same commit as the correction.
+date	recipe	version	lesson	evidence
+2026-11-07	PINNED_EDITS	v1	pin a follow-up edit of recipe-restored code on the restoring recipe's output blob (pre-image) and record the post-image: the restoring recipe's --check then reports exactly those files as changed, and the chain restore -> edit stays reproducible	pre a32f003a6807 = add_rows.py RBN result; pre 284248c40cc2 = RESTORED_FILES.tsv blob of M3RankBatchIntoContract
+2026-11-07	PINNED_EDITS	v1	before adding an availability probe, reuse the owner's own per-export pattern (volatile X_ABI_MISSING + catch UnsatisfiedLinkError once): it is already allocation-free on the hot path and keeps one fallback idiom per owner	M3LongRankBatchNative: 13 existing flags; 3 added
+2026-11-07	PINNED_EDITS	v1	a stale restored test probe is fixed by keeping its intent (an invalid mode is still rejected) and adding the positive case the later commit introduced, citing that commit; deleting the probe would lose the rejection check	M3RankBatchIntoContract.nativeInvalid: mode 0 -> mode 3, plus mode-0 lower-bound assertion (efa61222bcc)

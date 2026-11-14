@@ -1,0 +1,260 @@
+// SPDX-License-Identifier: Apache-2.0
+package com.synexia.unicodex.langdex;
+
+import java.nio.file.Path;
+import java.util.Arrays;
+import java.util.Objects;
+
+/**
+ * Optional JNI acceleration for primitive LangDex concept/profile operations.
+ *
+ * <p>The public contract is identical with or without JNI. Native code receives
+ * primitive arrays only; Java Strings never cross the hot JNI boundary.</p>
+ */
+public final class LangDexNativeKernels {
+    private static final boolean AVAILABLE = loadNative();
+
+    private LangDexNativeKernels() {}
+
+    public static boolean available() {
+        return AVAILABLE;
+    }
+
+    /**
+     * Returns the equal range [start,end) packed into one long
+     * ({@code start << 32 | end}). The input must be sorted ascending.
+     */
+    public static long equalRange(long[] sortedConceptIds, long conceptId) {
+        Objects.requireNonNull(sortedConceptIds, "sortedConceptIds");
+        LangDexConcept.validateId(conceptId);
+        return AVAILABLE
+                ? nativeEqualRange(sortedConceptIds, conceptId)
+                : javaEqualRange(sortedConceptIds, conceptId);
+    }
+
+    /**
+     * Filters already-compiled profile columns. Subject hierarchy matching stays
+     * in Java because it depends on the caller's frozen taxonomy.
+     * Inputs must remain unchanged during the call. The native implementation uses bounded
+     * region copies and two passes; this compatibility API still allocates its returned array.
+     */
+    public static int[] matchingPositions(
+            long[] lexicalMasks,
+            long[] semanticMasks,
+            int[] confidencePermille,
+            long requiredLexicalMask,
+            long requiredSemanticMask,
+            int minimumConfidencePermille) {
+        requireProfileColumns(
+                lexicalMasks, semanticMasks, confidencePermille, minimumConfidencePermille);
+        return AVAILABLE
+                ? nativeMatchingPositions(
+                        lexicalMasks,
+                        semanticMasks,
+                        confidencePermille,
+                        requiredLexicalMask,
+                        requiredSemanticMask,
+                        minimumConfidencePermille)
+                : javaMatchingPositions(
+                        lexicalMasks,
+                        semanticMasks,
+                        confidencePermille,
+                        requiredLexicalMask,
+                        requiredSemanticMask,
+                        minimumConfidencePermille);
+    }
+
+    /**
+     * Counts matching rows in {@code [fromInclusive, toExclusive)} without a result array.
+     *
+     * <p>A zero required mask is unrestricted; otherwise any overlapping bit matches. Both
+     * classes must match and confidence is inclusive. This is the scalar Java path even when
+     * JNI is available. Inputs must not be modified during the call. Subject and feature
+     * constraints remain the semantic runtime's responsibility.</p>
+     */
+    public static int countMatchingPositions(
+            long[] lexicalMasks,
+            long[] semanticMasks,
+            int[] confidencePermille,
+            int fromInclusive,
+            int toExclusive,
+            long requiredLexicalMask,
+            long requiredSemanticMask,
+            int minimumConfidencePermille) {
+        requireProfileColumns(
+                lexicalMasks, semanticMasks, confidencePermille, minimumConfidencePermille);
+        Objects.checkFromToIndex(fromInclusive, toExclusive, lexicalMasks.length);
+        return selectMatchingPositions(
+                lexicalMasks, semanticMasks, confidencePermille, fromInclusive, toExclusive,
+                requiredLexicalMask, requiredSemanticMask, minimumConfidencePermille, null, 0);
+    }
+
+    /**
+     * Writes absolute matching row positions, in ascending order, into caller-owned storage.
+     * Returns the number written; elements outside that written prefix remain unchanged.
+     *
+     * <p>The destination must have room for the entire input range starting at
+     * {@code destinationOffset}, even when fewer rows match. It must not be the confidence
+     * array. All argument checks precede writes. Thus an invalid range, mask threshold,
+     * capacity or alias cannot leave a partial result. Zero masks and confidence thresholds
+     * have exactly the semantics of {@link #countMatchingPositions}.</p>
+     *
+     * <p>This scalar Java operation allocates no result or scratch arrays. The caller owns
+     * the destination and must keep all inputs stable for the duration of the call. Independent
+     * readers may share frozen input columns but require independent destinations. Chunk a
+     * large query by ranges rather than allocating an input-sized scratch array.</p>
+     */
+    public static int matchingPositionsInto(
+            long[] lexicalMasks,
+            long[] semanticMasks,
+            int[] confidencePermille,
+            int fromInclusive,
+            int toExclusive,
+            long requiredLexicalMask,
+            long requiredSemanticMask,
+            int minimumConfidencePermille,
+            int[] destination,
+            int destinationOffset) {
+        requireProfileColumns(
+                lexicalMasks, semanticMasks, confidencePermille, minimumConfidencePermille);
+        Objects.checkFromToIndex(fromInclusive, toExclusive, lexicalMasks.length);
+        Objects.requireNonNull(destination, "destination");
+        if (destination == confidencePermille) {
+            throw new IllegalArgumentException("destination must not alias confidencePermille");
+        }
+        Objects.checkFromIndexSize(
+                destinationOffset, toExclusive - fromInclusive, destination.length);
+        return selectMatchingPositions(
+                lexicalMasks, semanticMasks, confidencePermille, fromInclusive, toExclusive,
+                requiredLexicalMask, requiredSemanticMask, minimumConfidencePermille,
+                destination, destinationOffset);
+    }
+
+    public static int rangeStart(long packedRange) {
+        return (int) (packedRange >>> 32);
+    }
+
+    public static int rangeEnd(long packedRange) {
+        return (int) packedRange;
+    }
+
+    /** Bitwise distance primitive used by semantic/stem first-pass indexes. */
+    public static int hammingDistance(long left, long right) {
+        return AVAILABLE ? nativeHammingDistance(left, right) : Long.bitCount(left ^ right);
+    }
+
+    static long javaEqualRange(long[] values, long key) {
+        int start = lowerBound(values, key);
+        int end = upperBound(values, key, start);
+        return pack(start, end);
+    }
+
+    static int[] javaMatchingPositions(
+            long[] lexicalMasks,
+            long[] semanticMasks,
+            int[] confidencePermille,
+            long requiredLexicalMask,
+            long requiredSemanticMask,
+            int minimumConfidencePermille) {
+        int[] scratch = new int[lexicalMasks.length];
+        int count = selectMatchingPositions(
+                lexicalMasks, semanticMasks, confidencePermille, 0, lexicalMasks.length,
+                requiredLexicalMask, requiredSemanticMask, minimumConfidencePermille, scratch, 0);
+        return Arrays.copyOf(scratch, count);
+    }
+
+    private static void requireProfileColumns(
+            long[] lexicalMasks, long[] semanticMasks, int[] confidencePermille,
+            int minimumConfidencePermille) {
+        Objects.requireNonNull(lexicalMasks, "lexicalMasks");
+        Objects.requireNonNull(semanticMasks, "semanticMasks");
+        Objects.requireNonNull(confidencePermille, "confidencePermille");
+        if (lexicalMasks.length != semanticMasks.length
+                || lexicalMasks.length != confidencePermille.length) {
+            throw new IllegalArgumentException("profile columns must have equal length");
+        }
+        if (minimumConfidencePermille < 0 || minimumConfidencePermille > 1000) {
+            throw new IllegalArgumentException(
+                    "minimumConfidencePermille must be in [0,1000]");
+        }
+    }
+
+    private static int selectMatchingPositions(
+            long[] lexicalMasks, long[] semanticMasks, int[] confidencePermille,
+            int fromInclusive, int toExclusive, long requiredLexicalMask,
+            long requiredSemanticMask, int minimumConfidencePermille,
+            int[] destination, int destinationOffset) {
+        int count = 0;
+        for (int index = fromInclusive; index < toExclusive; index++) {
+            boolean lexical = requiredLexicalMask == 0L
+                    || (lexicalMasks[index] & requiredLexicalMask) != 0L;
+            boolean semantic = requiredSemanticMask == 0L
+                    || (semanticMasks[index] & requiredSemanticMask) != 0L;
+            if (lexical && semantic && confidencePermille[index] >= minimumConfidencePermille) {
+                if (destination != null) destination[destinationOffset + count] = index;
+                count++;
+            }
+        }
+        return count;
+    }
+
+    private static int lowerBound(long[] values, long key) {
+        int low = 0;
+        int high = values.length;
+        while (low < high) {
+            int mid = (low + high) >>> 1;
+            if (values[mid] < key) {
+                low = mid + 1;
+            } else {
+                high = mid;
+            }
+        }
+        return low;
+    }
+
+    private static int upperBound(long[] values, long key, int low) {
+        int high = values.length;
+        while (low < high) {
+            int mid = (low + high) >>> 1;
+            if (values[mid] <= key) {
+                low = mid + 1;
+            } else {
+                high = mid;
+            }
+        }
+        return low;
+    }
+
+    private static long pack(int start, int end) {
+        return ((long) start << 32) | (end & 0xffff_ffffL);
+    }
+
+    private static boolean loadNative() {
+        if (Boolean.getBoolean("synexia.langdex.native.disable")) {
+            return false;
+        }
+        try {
+            String explicit = System.getProperty("synexia.langdex.native.path");
+            if (explicit != null && !explicit.isBlank()) {
+                System.load(Path.of(explicit).toAbsolutePath().toString());
+            } else {
+                System.loadLibrary("synexia_langdex");
+            }
+            return true;
+        } catch (LinkageError | RuntimeException unavailable) {
+            return false;
+        }
+    }
+
+    private static native int nativeHammingDistance(long left, long right);
+    private static native long nativeEqualRange(
+            long[] sortedConceptIds, long conceptId);
+
+    private static native int[] nativeMatchingPositions(
+            long[] lexicalMasks,
+            long[] semanticMasks,
+            int[] confidencePermille,
+            long requiredLexicalMask,
+            long requiredSemanticMask,
+            int minimumConfidencePermille);
+}

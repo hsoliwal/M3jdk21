@@ -1,0 +1,95 @@
+{
+  "schema": "M3JDK21_CI_RECEIVER_RECEIPT_V1",
+  "copyright": "2026 Hitesh Soliwal and contributors",
+  "license": "Apache-2.0",
+  "canonical_repository": "hsoliwal/com.synexia",
+  "source_recipe_revision": "a9985228717b1decf21b152075da0019df2854d4",
+  "source_recipe_identities": [
+    "com.synexia.m3.Jdk21DesktopCi20261029",
+    "com.synexia.m3.Jdk21DesktopCiActions20261029"
+  ],
+  "canonical_evidence_path": "synexia-openrewrite-recipes/recipe-crates/m3jdk21-desktop-ci-20261029",
+  "target_baseline": "669a949d192345acefcfc5e9bb0b3724174d270c",
+  "donor": "openjdk/jdk21u@ccb06ed8ec75927d88ff859a9198a7ea72f698b6",
+  "status": "CANDIDATE_BUILD_CONFIGURATION_REPAIR",
+  "execution_lane": "MAVEN_OPENREWRITE_SDK",
+  "local_proof": {
+    "tests": 23,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "fixed_point": "PASS",
+    "drift_refusal": "PASS",
+    "yaml_contract_files": 13,
+    "actionlint_core_workflows": 6
+  },
+  "hosted_builds_and_jtreg": "NOT_RUN",
+  "platform_release": "NOT_RELEASED",
+  "outputs": [
+    {
+      "path": ".github/actions/do-build/action.yml",
+      "before_sha256": "cbeeca33d23c2d19423d44e83385b0eaa08e38df634ebe03944a65214ec94789",
+      "after_sha256": "97bac5fc8abebd83e5a02513ce385671da00d3bd5d92bc53048d88a625ca5e58"
+    },
+    {
+      "path": ".github/actions/get-bootjdk/action.yml",
+      "before_sha256": "1c1b50b7cd70d7217f271320a954649ca7ea65855df6d227eb7607d5a5a25f1c",
+      "after_sha256": "fc726432a84ec0881fe0cb8c0d2369ccbb0cfb9a57c31770cc7b08c5c8205891"
+    },
+    {
+      "path": ".github/actions/get-bundles/action.yml",
+      "before_sha256": "3ae2e7a4136c693ebf387cd862462f242785df9672eee7361d44d00ee37bc399",
+      "after_sha256": "1eea32382dcf5e971f180b589f712246ffd377b9ab2741aef6a201cef128b078"
+    },
+    {
+      "path": ".github/actions/get-gtest/action.yml",
+      "before_sha256": "4f1b6d635bd1c25d069e39f249cd22162b157c140e210ca817fab7699a2c9000",
+      "after_sha256": "a2358f7e16220166a3f990635e959447e579a8287e87232974422ac80470b531"
+    },
+    {
+      "path": ".github/actions/get-jtreg/action.yml",
+      "before_sha256": "6f6d9096b4640f210aa89f7bc4b05bbc8e8de5869383de67a36eb915a4b5ebd0",
+      "after_sha256": "11d0bfdbafd988c384aca09ef4786123dfe86bbdce4d4415e9e75ef5d3f1cba2"
+    },
+    {
+      "path": ".github/actions/get-msys2/action.yml",
+      "before_sha256": "a6860f9cd68eb92ce4b32c0b3082a22c9888a7cf075386538e3699b552f3565e",
+      "after_sha256": "4600fe34c8e7c499600cfc396052fa0732cbac104513de33224c1b58bd9d4043"
+    },
+    {
+      "path": ".github/actions/upload-bundles/action.yml",
+      "before_sha256": "c1aac32bc122887d5f7f90847887524f9ab874bcd072846e1f86c880a35df604",
+      "after_sha256": "ee13619a199bf444b1a8a2226f5950d41d1c13402c0185587485fa7dc063de5b"
+    },
+    {
+      "path": ".github/workflows/build-cross-compile.yml",
+      "before_sha256": "81f15e88efb83c0967f14ee90d82ff26019ef7d28dd3f1804792b7707dbf0adb",
+      "after_sha256": "e23808f614893453ff1db06c2634f1f728411e7cfdd26f02c9cacced3d1a50f2"
+    },
+    {
+      "path": ".github/workflows/build-linux.yml",
+      "before_sha256": "167f03e62609359ed9d56bb66efeeea832ec2eada02c5ae1577854cc9c6dd7cc",
+      "after_sha256": "b209b4a239935740a3862c004f169f20fdd0ca56a012a3116325ebf1eb94f0bd"
+    },
+    {
+      "path": ".github/workflows/build-macos.yml",
+      "before_sha256": "add7664ffa0aa71365719217b207854cb33485db266130cd1ff7640c36250eba",
+      "after_sha256": "c7f95a8b125488633b452e34701872877038f05df04b2e49246c43e00f4e1bd1"
+    },
+    {
+      "path": ".github/workflows/build-windows.yml",
+      "before_sha256": "d72dc367d1cba62716475cca62a1b19c7f884c98040d160bf0c88ffff5a1dc3c",
+      "after_sha256": "4709db657246ae9bbe22f146b00651c3af1e7e76ef37ac99debc7cefc9b2a3dd"
+    },
+    {
+      "path": ".github/workflows/main.yml",
+      "before_sha256": "077630022be354c322f5c0be3d3f18b2f0d61f15f045195402803d220d34e4a7",
+      "after_sha256": "06fec695d6d1bcd2b1698c3115ca9c312c269248e612b1187afa5fc71665d648"
+    },
+    {
+      "path": ".github/workflows/test.yml",
+      "before_sha256": "e4401b7bdeffbda21fdc0eacec62644350c3593189767461c063bd2bb802fa06",
+      "after_sha256": "b5370e56b4abb7086135ecbddb082ad43b305596ec212f325d81c762dab2a3c4"
+    }
+  ]
+}

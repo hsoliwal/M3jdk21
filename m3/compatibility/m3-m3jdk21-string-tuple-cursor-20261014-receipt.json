@@ -1,0 +1,89 @@
+{
+  "schema": "M3JDK21_SYNEXIA_RECEIPT_ONLY_CLOSURE_V1",
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "receivedLicense": "Apache-2.0",
+  "evidenceOnly": true,
+  "claim": "Receipt is EVIDENCE of pre-existing pinned-master content and its Synexia canonical unit. It receives nothing, changes no source, advances no phase, and asserts no runtime result.",
+  "canonicalSource": {
+    "repository": "hsoliwal/com.synexia",
+    "branch": "develop",
+    "pullRequest": "UNVERIFIED",
+    "commit": "11c94feb18155a53cc213708c353791132edc4a7",
+    "pinRef": "refs/m3run/synexia-develop-20261017",
+    "recipe": "UNVERIFIED",
+    "crate": "m3jdk21-string-tuple-cursor-20261014",
+    "unitKind": "RECIPE_DIR",
+    "unitPath": "synexia-openrewrite-recipes/recipes/m3jdk21-string-tuple-cursor-20261014",
+    "unitTreeSha": "c4f523a627b92c72c173d522347161eb6a1ea53a",
+    "mechanics": "Composite-native M3JDK21 UTF-16 streaming (README title)",
+    "donors": [
+      {
+        "path": "synexia-openrewrite-recipes/recipes/m3jdk21-string-tuple-cursor-20261014/README.md",
+        "blob": "6f39c5a9282d",
+        "target": "M3StringTuple, M3String",
+        "mechanics": "unit contract"
+      },
+      {
+        "path": "synexia-openrewrite-recipes/recipes/m3jdk21-string-tuple-cursor-20261014/manifest.tsv",
+        "blob": "f90a41abad50",
+        "target": "M3StringTuple, M3String",
+        "mechanics": "sha256 manifest; M3StringStreamsTest.java MATCHES master, M3String.java DRIFTED, see residue"
+      },
+      {
+        "path": "synexia-openrewrite-recipes/recipes/m3jdk21-string-tuple-cursor-20261014/pom.xml",
+        "blob": "0056d5c89fc9",
+        "target": "M3StringTuple, M3String",
+        "mechanics": "build+recipe declaration"
+      },
+      {
+        "path": "synexia-openrewrite-recipes/recipes/m3jdk21-string-tuple-cursor-20261014/CONTRACT.md",
+        "blob": "becee361aa0c",
+        "target": "M3StringTuple, M3String",
+        "mechanics": "unit contract detail"
+      }
+    ],
+    "license": "Apache-2.0 first-party"
+  },
+  "target": {
+    "repository": "hsoliwal/M3jdk21",
+    "base": "970a34350ebdf6a3f1c5ff5acc8445d0f3515f55",
+    "pinRef": "refs/m3run/m3jdk21-master-20261017",
+    "owners": [
+      "M3StringTuple",
+      "M3String"
+    ]
+  },
+  "runtimeDependencyOnSynexia": false,
+  "publicJdkReplacement": false,
+  "targets": [
+    {
+      "path": "src/java.base/share/classes/java/lang/M3StringTuple.java",
+      "blob": "0d4cfb75317e",
+      "before": "PREEXISTING",
+      "after": "0788834635dee7c22e94b92fc7d1b42bdc42c7b1d8948efabc4e94062173d4b9"
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/M3String.java",
+      "blob": "35ed998540e0",
+      "before": "PREEXISTING",
+      "after": "cd1192e27c981da03aeae2385d3d54ad31d912f043cf8c7dfba18c7b9106b728",
+      "note": "MANIFEST_DRIFT: unit manifest after-sha256 88716098c89b..., master differs"
+    },
+    {
+      "path": "test/jdk/java/lang/String/M3StringStreamsTest.java",
+      "blob": "4d19e74a9afe",
+      "before": "PREEXISTING",
+      "after": "c88c81567600a3e1b181a0168af33406e98d109e9043b80d27ac2c719ced00ec",
+      "note": "MANIFEST_MATCH: equals unit manifest after-sha256"
+    }
+  ],
+  "residue": "DRIFT: M3String.java master sha256 cd1192e27c98... != manifest after-sha256 88716098c89b... (master evolved past the seal); M3StringStreamsTest.java after-sha256 matches master; owner M3StringTuple itself is unpinned by the unit; RE_SEAL_REQUIRED: unit has no hash-pinned manifest covering the pinned-master content of its owner file(s); a successor hash-pinned recipe must seal master content before any phase advance",
+  "unverifiedFields": [
+    "pullRequest",
+    "recipe",
+    "ownerAssociation(M3StringTuple)=TOKEN_MATCH(tuple-cursor)"
+  ],
+  "gates": {
+    "evidenceOnly": "NOT_RUN: no build, no recipe execution, no tests; ls-tree + git show sha256 only (run RCPT-receipt-only-closure 2026-10-18)"
+  }
+}

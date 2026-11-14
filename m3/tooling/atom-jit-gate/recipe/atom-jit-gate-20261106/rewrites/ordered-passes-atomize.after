@@ -1,0 +1,6 @@
+        List<M3AtomRecord> atoms = census(module, path, source,
+                Objects.requireNonNull(patternRules, "patternRules"));
+        if (atoms.isEmpty()) {
+            throw new IllegalArgumentException("no executable declaration atoms");
+        }
+        return new Atomized(path, sha256(source), atoms);

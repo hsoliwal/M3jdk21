@@ -1,0 +1,4 @@
+category	old_strategy	selected_strategy	complexity	preserved_semantics	provenance
+BOUNDED_FILTERED_NAVIGATION	try subMap/headMap/tailMap then blanket IAE fallback	owner ceiling/floor/higher/lower Entry then exclusive iterator	O(log n + skipped)	user comparator error propagation; bounded query behavior; null mapping; stored representative	JDK21 NavigableMap + first-party M3FilteredViews; no donor code
+OWNER_PRIMITIVE_M3_RANGE	owner.rangeOrNull	UNMODIFIED	owner-defined	M3TreeMap direct index + bounded fallback	M3JDK21 original owner
+ALGORITHMS	LeetCode binary search, HackerRank BST, GeeksforGeeks range search	CATEGORY_ONLY	N/A	code not copied	problem taxonomy, license review prior to any actual donor adoption
