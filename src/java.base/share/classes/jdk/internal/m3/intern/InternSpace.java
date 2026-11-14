@@ -18,7 +18,7 @@ import java.util.Objects;
  * Freeze before publishing or archiving a space. This is an explicit Java core,
  * not transparent HotSpot/JDK object interning or an OS-wide dictionary.</p>
  */
-//FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/fd9a233680b43197eb8c5745a729c342ca56c4e2/synexia-common/src/main/java/com/synexia/common/intern/M3InternSpace.java blob 0c06c4dfab78; recipe m3/intern/recipe/intern-space-20261106/relocate.py v4
+//FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/fd9a233680b43197eb8c5745a729c342ca56c4e2/synexia-common/src/main/java/com/synexia/common/intern/M3InternSpace.java blob 0c06c4dfab78; recipe make/m3/intern/recipe/intern-space-20261106/relocate.py v4
 public final class InternSpace {
     /** Explicit constructor: the exported module package lint (missing-explicit-ctor) refuses the default one. */
     public InternSpace() { }

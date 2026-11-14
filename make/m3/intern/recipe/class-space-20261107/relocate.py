@@ -5,7 +5,7 @@
 
 Copies every FILE row of RELOCATION_MAP.tsv (next to this script) from a donor git tree (--donor-git DIR at
 --donor-rev REV) into the module (--module DIR, default: the grandparent of this recipe directory,
-m3/intern).
+make/m3/intern).
 
 Java files (.java): rewrites only (1) the leading license header, replaced by the M3JDK header: consecutive
 '// SPDX/Copyright' lines and block comments ('/*', never a '/**' doc comment) that carry an SPDX tag, single-line
@@ -78,7 +78,7 @@ from pathlib import Path
 RECIPE = "relocate.py"
 VERSION = "v1"
 RECIPE_DIR = Path(__file__).resolve().parent
-RECIPE_PATH = "m3/intern/recipe/" + RECIPE_DIR.name + "/" + RECIPE
+RECIPE_PATH = "make/m3/intern/recipe/" + RECIPE_DIR.name + "/" + RECIPE
 DONOR_REPO = "hsoliwal/com.synexia"
 DONOR_BLOB_URL = "https://github.com/" + DONOR_REPO + "/blob/"
 MAP_NAME = "RELOCATION_MAP.tsv"
@@ -394,7 +394,7 @@ def main(argv=None) -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument("--donor-git", required=True, help="donor git directory (a blobless clone is enough)")
     parser.add_argument("--donor-rev", required=True, help="donor revision (commit, FETCH_HEAD, branch)")
-    parser.add_argument("--module", default=str(RECIPE_DIR.parent.parent), help="module root (default m3/intern)")
+    parser.add_argument("--module", default=str(RECIPE_DIR.parent.parent), help="module root (default make/m3/intern)")
     parser.add_argument("--check", action="store_true", help="write nothing; exit 1 when a run would change a file")
     args = parser.parse_args(argv)
     try:

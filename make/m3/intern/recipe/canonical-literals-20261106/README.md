@@ -1,6 +1,6 @@
 <!-- SPDX-License-Identifier: Apache-2.0 -->
 <!-- Copyright 2026 Hitesh Soliwal and contributors -->
-# m3/intern: canonical typed literal pool (leaf canonical-literals-20261106)
+# make/m3/intern: canonical typed literal pool (leaf canonical-literals-20261106)
 
 `jdk.m3.intern.M3CanonicalLiteralPool` in module `org.m3jdk.intern` (Maven `com.m3:m3-intern:0.1.0-SNAPSHOT`, Java 21,
 `java.base` only). Leaf of the M3JDK convergence programme: plan `C:/m3-superset/conv/plans/native-compiler-openjdk.tsv`
@@ -49,7 +49,7 @@ Alternatives (all NO_FIT): `java.lang.M3StringPool` is the one VM-wide weak M3St
 kinds, no int handles, package-private in `java.base`); `jdk.internal.mindex.M3PrimitiveIdentity` is a (kind, raw bits)
 key function without a store or handles (not exported by `java.base`; its identity rule agrees with the pool's, kind
 numbers differ); `jdk.internal.mindex.M3PrimitiveFixedArena` projects an immutable compile-time image at a fixed
-address. None of the three exists in the stock JDK 21 that builds `m3/intern`. Placement (P1): `m3/intern`, next to its
+address. None of the three exists in the stock JDK 21 that builds `make/m3/intern`. Placement (P1): `make/m3/intern`, next to its
 owner; no `java.base` consumer exists, so the plan's `jdk.internal.mindex` placement is not taken and
 `m3/compiler/literals` is not needed.
 
@@ -64,7 +64,7 @@ owner; no `java.base` consumer exists, so the plan's `jdk.internal.mindex` place
 | recipe | `relocate.py` v5 (`RELOCATE_CANONICAL_LITERALS`, derived from `../intern-space-20261106/relocate.py` v4, itself from `m3/arrays/recipe/bitmatrix-20261106/relocate.py` v3): REPO, CLOSURE, CLOSURE_PATH and REWRITE rows and the `declared_rewrites` provenance column added |
 | map | `RELOCATION_MAP.tsv`: 1 REPO, 1 CLOSURE, 13 CLOSURE_PATH, 2 FILE, 1 PACKAGE, 3 TYPE (2 identity, 1 dependency), 1 EXTERNAL (JUnit 5), 8 REWRITE, 9 PIN, 11 OMIT |
 | provenance | `PROVENANCE.tsv`: `body_match=FALSE`, `body_match_renamed=TRUE` for both files (`declared_rewrites` 3 and 5): read back from disk, every byte that is not a declared row equals the donor's |
-| naming | `python -I make/m3/tooling/jdk-naming/jdk_naming.py apply --root . --only m3/intern/` (files staged first): 0 moves, 0 rewrites, 0 refusals |
+| naming | `python -I make/m3/tooling/jdk-naming/jdk_naming.py apply --root . --only make/m3/intern/` (files staged first): 0 moves, 0 rewrites, 0 refusals |
 
 REWRITE rows (the adapter, nothing else):
 
@@ -113,7 +113,7 @@ run short. No `System.out` (the driver prints through `FileDescriptor.out`, LF l
 | Step | Command |
 |---|---|
 | relocate | `python -I recipe/canonical-literals-20261106/relocate.py --donor-git <clone> --donor-rev b259ec9f5606... [--check]` |
-| compile, test, jar | `JAVA_HOME=<JDK 21> mvn -B -ntp -f m3/intern/pom.xml package` (`-Xlint:all -Werror`; 17 tests) |
+| compile, test, jar | `JAVA_HOME=<JDK 21> mvn -B -ntp -f make/m3/intern/pom.xml package` (`-Xlint:all -Werror`; 17 tests) |
 | differential | `bash recipe/canonical-literals-20261106/differential.sh <donor clone> <scratch> <maven repo> [random operations]` after `package` |
 | all gates | `bash recipe/canonical-literals-20261106/verify.sh <donor clone> <scratch> <maven repo> [base rev]` |
 

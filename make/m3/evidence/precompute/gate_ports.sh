@@ -1,6 +1,6 @@
 #!/bin/bash
 # gate_ports.sh <tree> <out> : m3/ports/precompute, m3/ports/regex-cursor and their consumer m3/ports/indexstring (with
-# m3/intern built from source as its dependency) on a host JDK 21: javac main + test per module, then the JUnit console
+# make/m3/intern built from source as its dependency) on a host JDK 21: javac main + test per module, then the JUnit console
 # over each module's test classes. One summary line per module, so two trees can be compared.
 set -u
 T=$1; O=$2; rm -rf "$O"; mkdir -p "$O"
@@ -22,7 +22,7 @@ run() {  # <name> <classpath> [props]
     --scan-class-path "$O/$n/test" --disable-banner --details=summary > "$O/$n/junit.log" 2>&1
   echo "$n junit $(grep -E 'tests (found|successful|failed|skipped|aborted)' "$O/$n/junit.log" | tr -s ' []' ' ' | tr '\n' ' ')"
 }
-build intern "$T/m3/intern" ""
+build intern "$T/make/m3/intern" ""
 build precompute "$T/m3/ports/precompute" ""
 build regexcursor "$T/m3/ports/regex-cursor" ""
 build indexstring "$T/m3/ports/indexstring" "$COLL:$O/precompute/main:$O/intern/main"

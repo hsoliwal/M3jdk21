@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Copyright 2026 Hitesh Soliwal and contributors
 # SPDX-License-Identifier: Apache-2.0
-# Differential gate of recipe class-space-20261107 (after mvn package of m3/intern; JAVA_HOME = JDK 21).
+# Differential gate of recipe class-space-20261107 (after mvn package of make/m3/intern; JAVA_HOME = JDK 21).
 # (a) The donor closure (every Java FILE row of RELOCATION_MAP.tsv except the JUnit tests) is compiled from the donor
 #     git tree with javac --release 21 -g -proc:none -Xlint:all -Werror (-g as Maven compiles the module: two oracles
 #     use a compiled class file of the family as their fixture); each donor oracle main and its relocated twin must

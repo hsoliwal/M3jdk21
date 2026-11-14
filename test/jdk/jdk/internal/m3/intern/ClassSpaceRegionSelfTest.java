@@ -19,7 +19,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 
 /** Independent baseline vs region differential oracle; no JDK intern semantics modified. */
-//FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/d5ad5090d87ef8477a56317e60ac0d29c65029f7/synexia-openrewrite-recipes/recipe-crates/m3-classspace-region-intern-20261030/src/test/java/com/synexia/m3/classspace/M3ClassSpaceRegionSelfTest.java blob 8739275e04fe; recipe m3/intern/recipe/class-space-20261107/relocate.py v1
+//FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/d5ad5090d87ef8477a56317e60ac0d29c65029f7/synexia-openrewrite-recipes/recipe-crates/m3-classspace-region-intern-20261030/src/test/java/com/synexia/m3/classspace/M3ClassSpaceRegionSelfTest.java blob 8739275e04fe; recipe make/m3/intern/recipe/class-space-20261107/relocate.py v1
 public final class ClassSpaceRegionSelfTest {
     private static long assertions;
 

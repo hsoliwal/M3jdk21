@@ -5,7 +5,7 @@ package jdk.internal.m3.intern;
 import org.junit.jupiter.api.Test;
 
 /** Standalone Maven JUnit 5 adapter; production mutation remains guarded by recipe seals. */
-//FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/d5ad5090d87ef8477a56317e60ac0d29c65029f7/synexia-openrewrite-recipes/recipe-crates/m3-classspace-atomic-batch-20261030/src/test/java/com/synexia/m3/classspace/M3ClassSpaceAtomicBatchJUnitTest.java blob ef317504a3ab; recipe m3/intern/recipe/class-space-20261107/relocate.py v1
+//FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/d5ad5090d87ef8477a56317e60ac0d29c65029f7/synexia-openrewrite-recipes/recipe-crates/m3-classspace-atomic-batch-20261030/src/test/java/com/synexia/m3/classspace/M3ClassSpaceAtomicBatchJUnitTest.java blob ef317504a3ab; recipe make/m3/intern/recipe/class-space-20261107/relocate.py v1
 final class ClassSpaceAtomicBatchJUnitTest {
     @Test void allContracts() throws Exception {
         ClassSpaceAtomicBatchSelfTest.main(new String[0]);

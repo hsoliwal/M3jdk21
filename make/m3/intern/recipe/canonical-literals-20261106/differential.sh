@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 # Copyright 2026 Hitesh Soliwal and contributors
 # SPDX-License-Identifier: Apache-2.0
-# Gates 2-4 of recipe canonical-literals-20261106 against the donor tree (run after mvn package of m3/intern).
+# Gates 2-4 of recipe canonical-literals-20261106 against the donor tree (run after mvn package of make/m3/intern).
 #   donor test  the donor pool with its own dependency closure (the CLOSURE commit of RELOCATION_MAP.tsv: the CLOSURE_PATH
 #               SOURCE roots on javac -sourcepath, the JAR / PROCESSOR paths of the local Maven repository) and the donor
 #               M3CanonicalLiteralPoolTest compiled from that tree; the JUnit Platform console (LAUNCHER) runs it: 10/10
-#   dump        M3CanonicalLiteralPoolDump (test scope of m3/intern) compiled a second time for the donor with its package
+#   dump        M3CanonicalLiteralPoolDump (test scope of make/m3/intern) compiled a second time for the donor with its package
 #               line set to the donor package and the SIDE lines below replaced (each must occur exactly once); donor and
 #               relocated dumps byte-identical under the default JIT and under -Xint (four runs, RUN_LIMIT seconds each),
 #               every run TOTAL failures=0 (handle relation = reference-key relation, payload read-back = references)

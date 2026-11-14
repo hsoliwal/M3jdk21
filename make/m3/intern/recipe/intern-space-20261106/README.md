@@ -1,6 +1,6 @@
 <!-- SPDX-License-Identifier: Apache-2.0 -->
 <!-- Copyright 2026 Hitesh Soliwal and contributors -->
-# m3/intern: owner-scoped primitive intern space (leaf intern-space-20261106)
+# make/m3/intern: owner-scoped primitive intern space (leaf intern-space-20261106)
 
 Module `org.m3jdk.intern` (package `jdk.m3.intern`), Maven coordinates `com.m3:m3-intern:0.1.0-SNAPSHOT`, Java 21,
 `java.base` only; a default module of `make/m3/pom.xml` after `collections`. Leaf of the M3JDK convergence programme
@@ -49,7 +49,7 @@ NEC (a human decides equivalence, nothing overwritten):
 
 ## Module decision
 
-A new module `m3/intern`, not `m3/collections`: the canonical pools live in `m3/collections`, but the family is not
+A new module `make/m3/intern`, not `m3/collections`: the canonical pools live in `m3/collections`, but the family is not
 pool-shaped. It is an owner-scoped primitive handle space with its own wire format, digest container and path trie,
 it explicitly refuses Java object interning, needs nothing from `jdk.m3.collections`, and its package-private seam
 (`TupleStore.scopedMember`, used by the trie) wants a package of its own rather than the crowded collections package
@@ -66,7 +66,7 @@ that session com-synexia-63 is consolidating right now. The module adds one `<mo
 | recipe | `relocate.py` v4 (`RELOCATE_INTERN_SPACE`, derived from `m3/arrays/recipe/bitmatrix-20261106/relocate.py` v3): `python -I relocate.py --donor-git <clone> --donor-rev fd9a233680b4... [--check]` |
 | map | `RELOCATION_MAP.tsv`: 18 `FILE`, 1 `PACKAGE` (donor package -> `jdk.m3.intern`), 18 `TYPE` (identity), 1 `EXTERNAL` (JUnit 5), 2 `LITERAL` (the chunk-match proof's `Class.forName` names of the private arenas), 4 `CTOR`, 7 `PIN`, 9 `OMIT` |
 | provenance | `PROVENANCE.tsv`: donor commit, blob, sha256, target sha256, `body_match`, `body_match_renamed`, `declared_drops`, `declared_ctors` per file |
-| naming | `python -I make/m3/tooling/jdk-naming/jdk_naming.py apply --root . --only m3/intern/` (files staged first: the tool reads `git ls-files`): 0 moves, 0 rewrites, 0 refusals |
+| naming | `python -I make/m3/tooling/jdk-naming/jdk_naming.py apply --root . --only make/m3/intern/` (files staged first: the tool reads `git ls-files`): 0 moves, 0 rewrites, 0 refusals |
 
 Lineage (sha256 prefixes; the donor's hash-pinned stage manifests `m3-intern-*-2026103x/manifest.tsv`):
 
@@ -122,7 +122,7 @@ No `System.out` and no `null` return in main code (the proof mains print their f
 
 | Step | Command |
 |---|---|
-| compile, test, jar | `JAVA_HOME=<JDK 21> mvn -B -ntp -f m3/intern/pom.xml package` (`-Xlint:all -Werror`, `proc none`; surefire 3.5.4 runs the 7 donor JUnit wrappers, each calling its proof's `run()`) |
+| compile, test, jar | `JAVA_HOME=<JDK 21> mvn -B -ntp -f make/m3/intern/pom.xml package` (`-Xlint:all -Werror`, `proc none`; surefire 3.5.4 runs the 7 donor JUnit wrappers, each calling its proof's `run()`) |
 | from the control reactor | `mvn -f make/m3/pom.xml -pl intern package` |
 | proofs | `java -cp target/classes;target/test-classes jdk.m3.intern.M3Intern<Name>Proof` (prints `PASS checks=N`) |
 | differential | `bash recipe/intern-space-20261106/differential.sh <donor clone> <rev> <scratch> [operations]` after `package` |

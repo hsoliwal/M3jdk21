@@ -12,7 +12,7 @@ import java.nio.ByteOrder;
 import org.junit.jupiter.api.Test;
 
 /** Each public admission atom has its own JUnit test and shared-domain invariants. */
-//FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/b259ec9f5606b9066231874ef06a3d27b4073e89/synexia-indexstring/src/test/java/com/synexia/indexstring/M3CanonicalLiteralPoolTest.java blob 094348daebc7; recipe m3/intern/recipe/canonical-literals-20261106/relocate.py v5
+//FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/b259ec9f5606b9066231874ef06a3d27b4073e89/synexia-indexstring/src/test/java/com/synexia/indexstring/M3CanonicalLiteralPoolTest.java blob 094348daebc7; recipe make/m3/intern/recipe/canonical-literals-20261106/relocate.py v5
 final class CanonicalLiteralPoolTest {
   private static final int FLOAT_NAN_A = 0x7fc00001;
   private static final int FLOAT_NAN_B = 0x7fc00002;

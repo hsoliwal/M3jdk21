@@ -19,7 +19,7 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicReference;
 
 /** No external dependencies: bounded correctness, corruption, mmap and checked-JNI oracle. */
-//FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/d5ad5090d87ef8477a56317e60ac0d29c65029f7/synexia-openrewrite-recipes/recipe-crates/m3-classspace-immutable-archive-20261030/src/test/java/com/synexia/m3/classspace/M3ClassSpaceArchiveSelfTest.java blob e8a8f2c771af; recipe m3/intern/recipe/class-space-20261107/relocate.py v1
+//FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/d5ad5090d87ef8477a56317e60ac0d29c65029f7/synexia-openrewrite-recipes/recipe-crates/m3-classspace-immutable-archive-20261030/src/test/java/com/synexia/m3/classspace/M3ClassSpaceArchiveSelfTest.java blob e8a8f2c771af; recipe make/m3/intern/recipe/class-space-20261107/relocate.py v1
 public final class ClassSpaceArchiveSelfTest {
     private static long assertions;
     private static final LongAdder threadAssertions = new LongAdder();

@@ -14,7 +14,7 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicReference;
 
 /** Standalone Java 21 behavioral proof; also invoked from the module's JUnit bridge. */
-//FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/fd9a233680b43197eb8c5745a729c342ca56c4e2/synexia-common/src/test/java/com/synexia/common/intern/M3InternSpaceProof.java blob 39f66fc2a137; recipe m3/intern/recipe/intern-space-20261106/relocate.py v4
+//FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/fd9a233680b43197eb8c5745a729c342ca56c4e2/synexia-common/src/test/java/com/synexia/common/intern/M3InternSpaceProof.java blob 39f66fc2a137; recipe make/m3/intern/recipe/intern-space-20261106/relocate.py v4
 public final class InternSpaceProof {
     private static long checks;
 

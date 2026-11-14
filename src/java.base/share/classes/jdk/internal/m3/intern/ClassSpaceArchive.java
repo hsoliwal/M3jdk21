@@ -23,7 +23,7 @@ import java.util.Objects;
  * concatenated payload bytes, and SHA-256 of all preceding archive bytes. Big endian.
  * Indexes are ordinal-preserving, contiguous, non-overlapping and bounded.
  */
-//FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/d5ad5090d87ef8477a56317e60ac0d29c65029f7/synexia-openrewrite-recipes/recipe-crates/m3-class-space-canonical-images-20261030/src/main/java/com/synexia/m3/classspace/M3ClassSpaceArchive.java blob bb3eb9e9869a; recipe m3/intern/recipe/class-space-20261107/relocate.py v1
+//FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/d5ad5090d87ef8477a56317e60ac0d29c65029f7/synexia-openrewrite-recipes/recipe-crates/m3-class-space-canonical-images-20261030/src/main/java/com/synexia/m3/classspace/M3ClassSpaceArchive.java blob bb3eb9e9869a; recipe make/m3/intern/recipe/class-space-20261107/relocate.py v1
 final class ClassSpaceArchive {
     private static final byte[] MAGIC = {'M','3','C','S','I','M','G','1'};
     private static final int VERSION = 1;

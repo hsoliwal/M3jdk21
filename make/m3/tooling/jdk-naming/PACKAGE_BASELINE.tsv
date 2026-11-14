@@ -238,7 +238,7 @@ ROOT	m3/eclipse/optional-jmod	REAL
 ROOT	m3/file	REAL
 ROOT	m3/fs	REAL
 ROOT	m3/indexdb	REAL
-ROOT	m3/intern	REAL
+ROOT	make/m3/intern	REAL
 ROOT	m3/lazyobjects	LOOSE
 ROOT	m3/lexicon/hf-intake	REAL
 ROOT	m3/lexicon/receiver	REAL

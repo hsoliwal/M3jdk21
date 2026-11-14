@@ -21,7 +21,7 @@ import java.util.Objects;
  * retained in this store. Owners must bound its lifetime; this prototype does not implement
  * HotSpot class unloading or cross-process sharing.
  */
-//FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/d5ad5090d87ef8477a56317e60ac0d29c65029f7/synexia-openrewrite-recipes/recipe-crates/m3-class-space-canonical-images-20261030/src/main/java/com/synexia/m3/classspace/M3ClassSpace.java blob 9ca0f183b6f4; recipe m3/intern/recipe/class-space-20261107/relocate.py v1
+//FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/d5ad5090d87ef8477a56317e60ac0d29c65029f7/synexia-openrewrite-recipes/recipe-crates/m3-class-space-canonical-images-20261030/src/main/java/com/synexia/m3/classspace/M3ClassSpace.java blob 9ca0f183b6f4; recipe make/m3/intern/recipe/class-space-20261107/relocate.py v1
 public final class ClassSpace {
     static final int SHA256_BYTES = 32;
     private static final int DEFAULT_LIMIT_BYTES = 64 * 1024 * 1024;

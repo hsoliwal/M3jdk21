@@ -20,7 +20,7 @@ import java.util.Objects;
  * SHA-256 detects accidental/tampered bytes, not authorship or authentication.
  * Immutable archives are intentionally materialized in bounded Java memory.
  */
-//FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/fd9a233680b43197eb8c5745a729c342ca56c4e2/synexia-common/src/main/java/com/synexia/common/intern/M3InternArchiveGuard.java blob 9bb73f2f1d70; recipe m3/intern/recipe/intern-space-20261106/relocate.py v4
+//FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/fd9a233680b43197eb8c5745a729c342ca56c4e2/synexia-common/src/main/java/com/synexia/common/intern/M3InternArchiveGuard.java blob 9bb73f2f1d70; recipe make/m3/intern/recipe/intern-space-20261106/relocate.py v4
 public final class InternArchiveGuard {
     private static final int MAGIC = 0x4d334947; // M3IG
     private static final int VERSION = 1;

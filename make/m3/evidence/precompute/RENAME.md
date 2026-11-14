@@ -21,7 +21,7 @@ dump that builds class names as prefix + name, and now pass `""`.
 
 | Module | Before | After |
 |---|---|---|
-| m3/intern (dependency) javac main + test | rc=0 / rc=0 | identical |
+| make/m3/intern (dependency) javac main + test | rc=0 / rc=0 | identical |
 | m3/ports/precompute javac main + test; JUnit | rc=0; 125 found, 123 pass, 2 aborted | identical |
 | m3/ports/regex-cursor javac main + test; JUnit | rc=0; 54/54 | identical |
 | m3/ports/indexstring (consumer) javac main + test | rc=0 | identical |

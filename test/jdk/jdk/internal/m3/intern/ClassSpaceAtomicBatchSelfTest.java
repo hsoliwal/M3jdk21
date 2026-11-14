@@ -17,7 +17,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /** Executed Java21 oracle, independent of JUnit, with no production side effects. */
-//FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/d5ad5090d87ef8477a56317e60ac0d29c65029f7/synexia-openrewrite-recipes/recipe-crates/m3-classspace-atomic-batch-20261030/src/test/java/com/synexia/m3/classspace/M3ClassSpaceAtomicBatchSelfTest.java blob 07bd7aa4a4ce; recipe m3/intern/recipe/class-space-20261107/relocate.py v1
+//FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/d5ad5090d87ef8477a56317e60ac0d29c65029f7/synexia-openrewrite-recipes/recipe-crates/m3-classspace-atomic-batch-20261030/src/test/java/com/synexia/m3/classspace/M3ClassSpaceAtomicBatchSelfTest.java blob 07bd7aa4a4ce; recipe make/m3/intern/recipe/class-space-20261107/relocate.py v1
 public final class ClassSpaceAtomicBatchSelfTest {
     private static long assertions;
 

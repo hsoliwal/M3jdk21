@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: Apache-2.0
 component	source	license	decision	reason
 MIndexClassPool family (8 types)	hsoliwal/com.synexia synexia-indexstring type package (first party)	Apache-2.0	ADAPT	text pool mapped to the existing jdk.m3.intern.M3InternSpace; no third-party code
-M3InternSpace	M3JDK m3/intern (existing)	Apache-2.0	REUSE	one interner, no second text pool
-M3ClassSpace	M3JDK m3/intern (existing)	Apache-2.0	NEC_RECORDED	class-file byte images (#2646) vs class metadata (names, members, hashes) here; different contracts, nothing merged
+M3InternSpace	M3JDK make/m3/intern (existing)	Apache-2.0	REUSE	one interner, no second text pool
+M3ClassSpace	M3JDK make/m3/intern (existing)	Apache-2.0	NEC_RECORDED	class-file byte images (#2646) vs class metadata (names, members, hashes) here; different contracts, nothing merged

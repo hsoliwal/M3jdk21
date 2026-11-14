@@ -14,7 +14,7 @@ import java.util.Objects;
  * <p>Tuple kinds are domain-separated. The caller assigns stable resolution scope
  * identifiers and MUST NOT recycle them while cached type handles are live.</p>
  */
-//FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/fd9a233680b43197eb8c5745a729c342ca56c4e2/synexia-common/src/main/java/com/synexia/common/intern/M3InternShapes.java blob af98b1c63deb; recipe m3/intern/recipe/intern-space-20261106/relocate.py v4
+//FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/fd9a233680b43197eb8c5745a729c342ca56c4e2/synexia-common/src/main/java/com/synexia/common/intern/M3InternShapes.java blob af98b1c63deb; recipe make/m3/intern/recipe/intern-space-20261106/relocate.py v4
 public final class InternShapes {
     private static final int TYPE = 0x4d335459;   // M3TY, existing internType kind
     private static final int METHOD = 0x4d334d54; // M3MT

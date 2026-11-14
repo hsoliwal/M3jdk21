@@ -248,7 +248,7 @@ m3/eclipse/optional-jmod	REAL	2	2	2
 m3/file	REAL	123	2	122
 m3/fs	REAL	365	35	41
 m3/indexdb	REAL	21	2	21
-m3/intern	REAL	8	1	8
+make/m3/intern	REAL	8	1	8
 m3/lazyobjects	LOOSE	1	1	0
 m3/lexicon/hf-intake	REAL	1	1	1
 m3/lexicon/receiver	REAL	24	1	24

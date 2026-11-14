@@ -12,7 +12,7 @@ import java.util.Arrays;
 import java.util.Random;
 
 /** Strict, standalone Java 21 pinned-mapping safety oracle. */
-//FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/d5ad5090d87ef8477a56317e60ac0d29c65029f7/synexia-openrewrite-recipes/recipe-crates/m3-classspace-pinned-mapped-20261030/src/test/java/com/synexia/m3/classspace/M3ClassSpacePinnedMappedSelfTest.java blob 70f37ddf7728; recipe m3/intern/recipe/class-space-20261107/relocate.py v1
+//FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/d5ad5090d87ef8477a56317e60ac0d29c65029f7/synexia-openrewrite-recipes/recipe-crates/m3-classspace-pinned-mapped-20261030/src/test/java/com/synexia/m3/classspace/M3ClassSpacePinnedMappedSelfTest.java blob 70f37ddf7728; recipe make/m3/intern/recipe/class-space-20261107/relocate.py v1
 public final class ClassSpacePinnedMappedSelfTest {
     private static long assertions;
     private ClassSpacePinnedMappedSelfTest() { }

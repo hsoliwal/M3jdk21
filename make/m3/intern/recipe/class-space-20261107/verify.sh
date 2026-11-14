@@ -3,12 +3,12 @@
 # SPDX-License-Identifier: Apache-2.0
 # Runs every gate of recipe class-space-20261107 in order and prints one line per gate (see GATES.tsv):
 #   recipe     relocate.py --check is a fixed point (changed=0 provenance=UNCHANGED)
-#   1          mvn clean package of m3/intern on JDK 21 (-Xlint:all -Werror on main and test sources), 0 [WARNING] lines
+#   1          mvn clean package of make/m3/intern on JDK 21 (-Xlint:all -Werror on main and test sources), 0 [WARNING] lines
 #   2          the class-space oracles ran in the test phase with their figures, surefire totals
 #   3          differential.sh: donor closure vs relocated classes byte-identical (oracle outputs, dump default and
 #              -Xint, JNI lane, allocation bytes), fault replay, mutants refused, javap identical
 #   untouched  (with a base revision) every class file the module built at the base is byte-identical in this build
-#   naming     jdk_naming.py apply --only m3/intern/ reports 0 moves, 0 rewrites, 0 refusals (new files staged first)
+#   naming     jdk_naming.py apply --only make/m3/intern/ reports 0 moves, 0 rewrites, 0 refusals (new files staged first)
 # Every JVM gets -Djava.io.tmpdir=<scratch>/tmp (surefire through -DargLine, Maven through MAVEN_OPTS).
 # usage: JAVA_HOME=<JDK 21> verify.sh <donor-git-dir> <donor-rev> <scratch-dir> [maven-repo-local [maven-repo-local-tail [base-rev]]]
 set -uo pipefail
@@ -24,10 +24,10 @@ export MAVEN_OPTS="${MAVEN_OPTS:-} -Djava.io.tmpdir=$TMPDIR_JVM"
 status=PASS
 gate() { local name=$1 verdict=$2; shift 2; echo "GATE $name $verdict $*"; [ "$verdict" = PASS ] || [ "$verdict" = SKIP ] || status=FAIL; }
 
-out=$(python -I "$RECIPE_DIR/relocate.py" --donor-git "$DONOR_GIT" --donor-rev "$REV" --module "$ROOT/m3/intern" --check 2>&1 | tail -1)
+out=$(python -I "$RECIPE_DIR/relocate.py" --donor-git "$DONOR_GIT" --donor-rev "$REV" --module "$ROOT/make/m3/intern" --check 2>&1 | tail -1)
 case "$out" in *"changed=0 provenance=UNCHANGED"*) gate recipe PASS "$out" ;; *) gate recipe FAIL "$out" ;; esac
 
-(cd "$ROOT" && mvn "${MVN_COMMON[@]}" -f "$ROOT/m3/intern/pom.xml" clean package > "$SCRATCH/mvn-package.log" 2>&1)
+(cd "$ROOT" && mvn "${MVN_COMMON[@]}" -f "$ROOT/make/m3/intern/pom.xml" clean package > "$SCRATCH/mvn-package.log" 2>&1)
 warnings=$(grep -c '^\[WARNING\]' "$SCRATCH/mvn-package.log"); warnings=${warnings:-0}
 if grep -q "BUILD SUCCESS" "$SCRATCH/mvn-package.log" && ! grep -qE "^\[ERROR\]" "$SCRATCH/mvn-package.log" && [ "$warnings" = 0 ]; then
     gate 1_package_lint_werror PASS "BUILD SUCCESS, [WARNING] lines=$warnings log=$SCRATCH/mvn-package.log"
@@ -35,7 +35,7 @@ else
     gate 1_package_lint_werror FAIL "[WARNING] lines=$warnings log=$SCRATCH/mvn-package.log"; grep -E "ERROR|FAIL" "$SCRATCH/mvn-package.log" | head -20
 fi
 figures=$(grep -E "^(M3ClassSpace Java21 self-test PASS|M3ClassFileAtoms PASS|M3_(REGION_INTERN|CLASS_BATCH_ATOMIC|CLASSSPACE_ARCHIVE|PINNED_MAPPED|SNAPSHOT_SCOPED|ARCHIVE_COPYTO)_PASS|M3_ARCHIVE_FREEZE_PARITY)" "$SCRATCH/mvn-package.log" | tr -d '\r' | tr '\n' ' ')
-surefire=$(python -I - "$ROOT/m3/intern/target/surefire-reports" <<'EOF'
+surefire=$(python -I - "$ROOT/make/m3/intern/target/surefire-reports" <<'EOF'
 import glob, re, sys
 t = f = e = s = 0
 for p in glob.glob(sys.argv[1] + "/TEST-*.xml"):
@@ -56,19 +56,19 @@ fi
 
 if [ -n "$BASE" ]; then
     rm -rf "$SCRATCH/base"; mkdir -p "$SCRATCH/base"
-    git -C "$ROOT" archive "$BASE" m3/intern | tar -x -C "$SCRATCH/base"
-    (cd "$SCRATCH/base" && mvn "${MVN_COMMON[@]}" -DskipTests -f m3/intern/pom.xml clean package > "$SCRATCH/base-package.log" 2>&1)
+    git -C "$ROOT" archive "$BASE" make/m3/intern | tar -x -C "$SCRATCH/base"
+    (cd "$SCRATCH/base" && mvn "${MVN_COMMON[@]}" -DskipTests -f make/m3/intern/pom.xml clean package > "$SCRATCH/base-package.log" 2>&1)
     same=0; different=0
     while IFS= read -r cls; do
-        if cmp -s "$SCRATCH/base/m3/intern/target/classes/$cls" "$ROOT/m3/intern/target/classes/$cls"; then same=$((same + 1)); else different=$((different + 1)); echo "untouched DIFFERENT $cls"; fi
+        if cmp -s "$SCRATCH/base/m3/intern/target/classes/$cls" "$ROOT/make/m3/intern/target/classes/$cls"; then same=$((same + 1)); else different=$((different + 1)); echo "untouched DIFFERENT $cls"; fi
     done < <(cd "$SCRATCH/base/m3/intern/target/classes" && find . -name '*.class' | sed 's#^\./##' | sort)
-    added=$(cd "$ROOT/m3/intern/target/classes" && find . -name '*.class' | sed 's#^\./##' | sort | comm -13 <(cd "$SCRATCH/base/m3/intern/target/classes" && find . -name '*.class' | sed 's#^\./##' | sort) - | tr '\n' ' ')
+    added=$(cd "$ROOT/make/m3/intern/target/classes" && find . -name '*.class' | sed 's#^\./##' | sort | comm -13 <(cd "$SCRATCH/base/m3/intern/target/classes" && find . -name '*.class' | sed 's#^\./##' | sort) - | tr '\n' ' ')
     if [ "$different" = 0 ] && [ "$same" -gt 0 ]; then gate untouched PASS "base=$BASE identical=$same different=0 added: $added"; else gate untouched FAIL "identical=$same different=$different"; fi
 else
     gate untouched SKIP "no base revision given"
 fi
 
-naming=$(cd "$ROOT" && python -I make/m3/tooling/jdk-naming/jdk_naming.py apply --root . --only m3/intern/ 2>&1 | grep -E "^(JDK_NAMING|REFUSED)" | tail -1)
+naming=$(cd "$ROOT" && python -I make/m3/tooling/jdk-naming/jdk_naming.py apply --root . --only make/m3/intern/ 2>&1 | grep -E "^(JDK_NAMING|REFUSED)" | tail -1)
 case "$naming" in *"moves=0 rewrites=0 refusals=0"*) gate naming PASS "$naming" ;; *) gate naming FAIL "$naming" ;; esac
 echo "VERIFY $status"
 [ "$status" = PASS ]

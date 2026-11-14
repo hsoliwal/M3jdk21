@@ -12,7 +12,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import org.junit.jupiter.api.Test;
 
 /** Exact-byte and SHA-256 reset regression; a finite test is not equivalence proof. */
-//FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/d5ad5090d87ef8477a56317e60ac0d29c65029f7/synexia-openrewrite-recipes/recipe-crates/m3-classspace-sha256-batch-20261030/src/test/java/com/synexia/m3/classspace/M3Sha256BatchReuseJUnitTest.java blob 62ab659cdf3c; recipe m3/intern/recipe/class-space-20261107/relocate.py v1
+//FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/d5ad5090d87ef8477a56317e60ac0d29c65029f7/synexia-openrewrite-recipes/recipe-crates/m3-classspace-sha256-batch-20261030/src/test/java/com/synexia/m3/classspace/M3Sha256BatchReuseJUnitTest.java blob 62ab659cdf3c; recipe make/m3/intern/recipe/class-space-20261107/relocate.py v1
 class Sha256BatchReuseJUnitTest {
     @Test void repeatedProviderResetsAndStableOrdinals() throws Exception {
         byte[] source = {7, 8, 7, 8};

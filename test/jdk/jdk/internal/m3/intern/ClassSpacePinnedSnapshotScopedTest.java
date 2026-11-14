@@ -11,7 +11,7 @@ import java.nio.file.StandardOpenOption;
 import java.util.Arrays;
 
 /** Minimal independently runnable acceptance oracle for the named source recipe. */
-//FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/d5ad5090d87ef8477a56317e60ac0d29c65029f7/synexia-openrewrite-recipes/recipe-crates/m3-classspace-pinned-snapshot-20261030/src/test/java/com/synexia/m3/classspace/M3ClassSpacePinnedSnapshotScopedTest.java blob 81e0a128693c; recipe m3/intern/recipe/class-space-20261107/relocate.py v1
+//FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/d5ad5090d87ef8477a56317e60ac0d29c65029f7/synexia-openrewrite-recipes/recipe-crates/m3-classspace-pinned-snapshot-20261030/src/test/java/com/synexia/m3/classspace/M3ClassSpacePinnedSnapshotScopedTest.java blob 81e0a128693c; recipe make/m3/intern/recipe/class-space-20261107/relocate.py v1
 public final class ClassSpacePinnedSnapshotScopedTest {
     private static long assertions;
     private ClassSpacePinnedSnapshotScopedTest() { }

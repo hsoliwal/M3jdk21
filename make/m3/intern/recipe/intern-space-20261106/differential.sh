@@ -3,7 +3,7 @@
 # SPDX-License-Identifier: Apache-2.0
 # Gates 2-4 of recipe intern-space-20261106 against the donor tree. The donor family (the four main FILE rows) and its
 # seven proof mains (the Proof FILE rows) are compiled from the donor git tree with javac --release 21 -Xlint:all
-# -Werror; M3InternSpaceDump (test scope of m3/intern) is compiled a second time with its package line set to the
+# -Werror; M3InternSpaceDump (test scope of make/m3/intern) is compiled a second time with its package line set to the
 # donor package of the map, so both sides replay one source. Then:
 #   proofs   each donor proof main and its relocation print the same line (PASS checks=N), default JIT and -Xint
 #   dump     the seeded dump (100,000 operations by default) of the donor and of the relocated classes is

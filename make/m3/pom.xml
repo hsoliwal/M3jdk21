@@ -25,7 +25,7 @@
     <module>../../m3/arrays</module>
     <module>../../m3/collections</module>
     <module>../../m3/paradigm</module>
-    <module>../../m3/intern</module>
+    <module>intern</module>
     <module>../../m3/file</module>
     <module>../../m3/compiler</module>
     <module>../../m3/ports/collections</module>

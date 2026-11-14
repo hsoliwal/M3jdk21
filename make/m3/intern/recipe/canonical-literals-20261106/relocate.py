@@ -5,7 +5,7 @@
 
 Copies every FILE row of RELOCATION_MAP.tsv (next to this script) from a donor git tree (--donor-git DIR at
 --donor-rev REV, which must resolve to the commit of the REPO row) into the module (--module DIR, default: the
-grandparent of this recipe directory, m3/intern).
+grandparent of this recipe directory, make/m3/intern).
 
 Java files only. Rewrites only (1) the leading license header (a block comment holding an SPDX line, or // header
 lines), replaced by the M3JDK header, (2) the package line, through the PACKAGE rows, (3) import lines of mapped
@@ -44,7 +44,7 @@ is absent or ambiguous, a LITERAL row whose donor token is absent from every FIL
 absent, ambiguous or already declares a constructor, a REWRITE row whose occurrence count differs, a PIN row whose
 count differs (or is zero), a --donor-rev other than the REPO commit, or a FILE blob that differs at the CLOSURE commit.
 
-Derived from m3/intern/recipe/intern-space-20261106/relocate.py v4 (RELOCATE_INTERN_SPACE, PR #2549), itself derived
+Derived from make/m3/intern/recipe/intern-space-20261106/relocate.py v4 (RELOCATE_INTERN_SPACE, PR #2549), itself derived
 from m3/arrays/recipe/bitmatrix-20261106/relocate.py v3 (RELOCATE_BIT_MATRIX, PR #2515): the REPO, CLOSURE,
 CLOSURE_PATH and REWRITE rows and the declared_rewrites provenance column added (the donor repository is read from the
 REPO row, no longer a constant); everything else unchanged.
@@ -63,7 +63,7 @@ from pathlib import Path
 RECIPE = "relocate.py"
 VERSION = "v5"
 RECIPE_DIR = Path(__file__).resolve().parent
-RECIPE_PATH = "m3/intern/recipe/" + RECIPE_DIR.name + "/" + RECIPE
+RECIPE_PATH = "make/m3/intern/recipe/" + RECIPE_DIR.name + "/" + RECIPE
 GITHUB = "https://github.com/"
 MAP_NAME = "RELOCATION_MAP.tsv"
 PROVENANCE_NAME = "PROVENANCE.tsv"
@@ -374,7 +374,7 @@ def main(argv=None) -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument("--donor-git", required=True, help="donor git directory (a blobless clone is enough)")
     parser.add_argument("--donor-rev", required=True, help="donor revision (pin the commit sha, not FETCH_HEAD)")
-    parser.add_argument("--module", default=str(RECIPE_DIR.parent.parent), help="module root (default m3/intern)")
+    parser.add_argument("--module", default=str(RECIPE_DIR.parent.parent), help="module root (default make/m3/intern)")
     parser.add_argument("--check", action="store_true", help="write nothing; exit 1 when a run would change a file")
     args = parser.parse_args(argv)
     try:

@@ -7,7 +7,7 @@ import java.lang.management.ManagementFactory;
 import java.util.Random;
 
 /** Diagnostic only: allocation and time; no acceptance thresholds or claimed speedup. */
-//FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/d5ad5090d87ef8477a56317e60ac0d29c65029f7/synexia-openrewrite-recipes/recipe-crates/m3-classspace-archive-copyto-20261030/proof/M3ArchiveAllocationProbe.java blob 08099fc6af36; recipe m3/intern/recipe/class-space-20261107/relocate.py v1
+//FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/d5ad5090d87ef8477a56317e60ac0d29c65029f7/synexia-openrewrite-recipes/recipe-crates/m3-classspace-archive-copyto-20261030/proof/M3ArchiveAllocationProbe.java blob 08099fc6af36; recipe make/m3/intern/recipe/class-space-20261107/relocate.py v1
 public final class ArchiveAllocationProbe {
     private ArchiveAllocationProbe() { }
 

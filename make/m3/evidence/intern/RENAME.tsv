@@ -96,56 +96,56 @@ EDIT	m3/intern/src/test/java/jdk/m3/intern/M3InternSpaceTest.java
 EDIT	m3/intern/src/test/java/jdk/m3/intern/M3InternTrieScalarProof.java
 EDIT	m3/intern/src/test/java/jdk/m3/intern/M3InternTrieScalarTest.java
 EDIT	m3/intern/src/test/java/jdk/m3/intern/M3Sha256BatchReuseJUnitTest.java
-EDIT	m3/intern/src/test/native/m3_class_space_native.c
-EDIT	m3/intern/src/test/native/m3_classspace_archive_native.c
+EDIT	test/jdk/jdk/internal/m3/intern/native/m3_class_space_native.c
+EDIT	test/jdk/jdk/internal/m3/intern/native/m3_classspace_archive_native.c
 EDIT	m3/ports/indexstring/README.md
 EDIT	m3/ports/indexstring/src/main/java/jdk/internal/m3/indexstring/type/MIndexClassPool.java
-MOVE	m3/intern/src/main/java/jdk/m3/intern/M3CanonicalLiteralPool.java	m3/intern/src/main/java/jdk/m3/intern/CanonicalLiteralPool.java
-MOVE	m3/intern/src/main/java/jdk/m3/intern/M3ClassFileAtoms.java	m3/intern/src/main/java/jdk/m3/intern/ClassFileAtoms.java
-MOVE	m3/intern/src/main/java/jdk/m3/intern/M3ClassSpace.java	m3/intern/src/main/java/jdk/m3/intern/ClassSpace.java
-MOVE	m3/intern/src/main/java/jdk/m3/intern/M3ClassSpaceArchive.java	m3/intern/src/main/java/jdk/m3/intern/ClassSpaceArchive.java
-MOVE	m3/intern/src/main/java/jdk/m3/intern/M3InternArchiveGuard.java	m3/intern/src/main/java/jdk/m3/intern/InternArchiveGuard.java
-MOVE	m3/intern/src/main/java/jdk/m3/intern/M3InternPathTrie.java	m3/intern/src/main/java/jdk/m3/intern/InternPathTrie.java
-MOVE	m3/intern/src/main/java/jdk/m3/intern/M3InternShapes.java	m3/intern/src/main/java/jdk/m3/intern/InternShapes.java
-MOVE	m3/intern/src/main/java/jdk/m3/intern/M3InternSpace.java	m3/intern/src/main/java/jdk/m3/intern/InternSpace.java
-MOVE	m3/intern/src/test/java/jdk/m3/intern/M3ArchiveAllocationProbe.java	m3/intern/src/test/java/jdk/m3/intern/ArchiveAllocationProbe.java
-MOVE	m3/intern/src/test/java/jdk/m3/intern/M3ArchiveCopyToJUnitTest.java	m3/intern/src/test/java/jdk/m3/intern/ArchiveCopyToJUnitTest.java
-MOVE	m3/intern/src/test/java/jdk/m3/intern/M3ArchiveCopyToSelfTest.java	m3/intern/src/test/java/jdk/m3/intern/ArchiveCopyToSelfTest.java
-MOVE	m3/intern/src/test/java/jdk/m3/intern/M3ArchiveFreezeParitySelfTest.java	m3/intern/src/test/java/jdk/m3/intern/ArchiveFreezeParitySelfTest.java
-MOVE	m3/intern/src/test/java/jdk/m3/intern/M3CanonicalLiteralPoolDump.java	m3/intern/src/test/java/jdk/m3/intern/CanonicalLiteralPoolDump.java
-MOVE	m3/intern/src/test/java/jdk/m3/intern/M3CanonicalLiteralPoolTest.java	m3/intern/src/test/java/jdk/m3/intern/CanonicalLiteralPoolTest.java
-MOVE	m3/intern/src/test/java/jdk/m3/intern/M3ClassFileAtomsJUnitTest.java	m3/intern/src/test/java/jdk/m3/intern/ClassFileAtomsJUnitTest.java
-MOVE	m3/intern/src/test/java/jdk/m3/intern/M3ClassFileAtomsSelfTest.java	m3/intern/src/test/java/jdk/m3/intern/ClassFileAtomsSelfTest.java
-MOVE	m3/intern/src/test/java/jdk/m3/intern/M3ClassSpaceArchiveJUnitTest.java	m3/intern/src/test/java/jdk/m3/intern/ClassSpaceArchiveJUnitTest.java
-MOVE	m3/intern/src/test/java/jdk/m3/intern/M3ClassSpaceArchiveNative.java	m3/intern/src/test/java/jdk/m3/intern/ClassSpaceArchiveNative.java
-MOVE	m3/intern/src/test/java/jdk/m3/intern/M3ClassSpaceArchiveSelfTest.java	m3/intern/src/test/java/jdk/m3/intern/ClassSpaceArchiveSelfTest.java
-MOVE	m3/intern/src/test/java/jdk/m3/intern/M3ClassSpaceAtomicBatchJUnitTest.java	m3/intern/src/test/java/jdk/m3/intern/ClassSpaceAtomicBatchJUnitTest.java
-MOVE	m3/intern/src/test/java/jdk/m3/intern/M3ClassSpaceAtomicBatchSelfTest.java	m3/intern/src/test/java/jdk/m3/intern/ClassSpaceAtomicBatchSelfTest.java
-MOVE	m3/intern/src/test/java/jdk/m3/intern/M3ClassSpaceDifferentialDump.java	m3/intern/src/test/java/jdk/m3/intern/ClassSpaceDifferentialDump.java
-MOVE	m3/intern/src/test/java/jdk/m3/intern/M3ClassSpaceJUnitTest.java	m3/intern/src/test/java/jdk/m3/intern/ClassSpaceJUnitTest.java
-MOVE	m3/intern/src/test/java/jdk/m3/intern/M3ClassSpaceNative.java	m3/intern/src/test/java/jdk/m3/intern/ClassSpaceNative.java
-MOVE	m3/intern/src/test/java/jdk/m3/intern/M3ClassSpacePinnedMappedJUnitTest.java	m3/intern/src/test/java/jdk/m3/intern/ClassSpacePinnedMappedJUnitTest.java
-MOVE	m3/intern/src/test/java/jdk/m3/intern/M3ClassSpacePinnedMappedSelfTest.java	m3/intern/src/test/java/jdk/m3/intern/ClassSpacePinnedMappedSelfTest.java
-MOVE	m3/intern/src/test/java/jdk/m3/intern/M3ClassSpacePinnedSnapshotJUnitTest.java	m3/intern/src/test/java/jdk/m3/intern/ClassSpacePinnedSnapshotJUnitTest.java
-MOVE	m3/intern/src/test/java/jdk/m3/intern/M3ClassSpacePinnedSnapshotScopedTest.java	m3/intern/src/test/java/jdk/m3/intern/ClassSpacePinnedSnapshotScopedTest.java
-MOVE	m3/intern/src/test/java/jdk/m3/intern/M3ClassSpaceRegionJUnitTest.java	m3/intern/src/test/java/jdk/m3/intern/ClassSpaceRegionJUnitTest.java
-MOVE	m3/intern/src/test/java/jdk/m3/intern/M3ClassSpaceRegionSelfTest.java	m3/intern/src/test/java/jdk/m3/intern/ClassSpaceRegionSelfTest.java
-MOVE	m3/intern/src/test/java/jdk/m3/intern/M3ClassSpaceSelfTest.java	m3/intern/src/test/java/jdk/m3/intern/ClassSpaceSelfTest.java
-MOVE	m3/intern/src/test/java/jdk/m3/intern/M3GrowthFaultProbe.java	m3/intern/src/test/java/jdk/m3/intern/GrowthFaultProbe.java
-MOVE	m3/intern/src/test/java/jdk/m3/intern/M3GrowthSafetyJUnitTest.java	m3/intern/src/test/java/jdk/m3/intern/GrowthSafetyJUnitTest.java
-MOVE	m3/intern/src/test/java/jdk/m3/intern/M3InternArchiveGuardProof.java	m3/intern/src/test/java/jdk/m3/intern/InternArchiveGuardProof.java
-MOVE	m3/intern/src/test/java/jdk/m3/intern/M3InternArchiveGuardTest.java	m3/intern/src/test/java/jdk/m3/intern/InternArchiveGuardTest.java
-MOVE	m3/intern/src/test/java/jdk/m3/intern/M3InternChunkMatchProof.java	m3/intern/src/test/java/jdk/m3/intern/InternChunkMatchProof.java
-MOVE	m3/intern/src/test/java/jdk/m3/intern/M3InternChunkMatchTest.java	m3/intern/src/test/java/jdk/m3/intern/InternChunkMatchTest.java
-MOVE	m3/intern/src/test/java/jdk/m3/intern/M3InternPathTrieProof.java	m3/intern/src/test/java/jdk/m3/intern/InternPathTrieProof.java
-MOVE	m3/intern/src/test/java/jdk/m3/intern/M3InternPathTrieTest.java	m3/intern/src/test/java/jdk/m3/intern/InternPathTrieTest.java
-MOVE	m3/intern/src/test/java/jdk/m3/intern/M3InternShapesProof.java	m3/intern/src/test/java/jdk/m3/intern/InternShapesProof.java
-MOVE	m3/intern/src/test/java/jdk/m3/intern/M3InternShapesTest.java	m3/intern/src/test/java/jdk/m3/intern/InternShapesTest.java
-MOVE	m3/intern/src/test/java/jdk/m3/intern/M3InternSnapshotProof.java	m3/intern/src/test/java/jdk/m3/intern/InternSnapshotProof.java
-MOVE	m3/intern/src/test/java/jdk/m3/intern/M3InternSnapshotTest.java	m3/intern/src/test/java/jdk/m3/intern/InternSnapshotTest.java
-MOVE	m3/intern/src/test/java/jdk/m3/intern/M3InternSpaceDump.java	m3/intern/src/test/java/jdk/m3/intern/InternSpaceDump.java
-MOVE	m3/intern/src/test/java/jdk/m3/intern/M3InternSpaceProof.java	m3/intern/src/test/java/jdk/m3/intern/InternSpaceProof.java
-MOVE	m3/intern/src/test/java/jdk/m3/intern/M3InternSpaceTest.java	m3/intern/src/test/java/jdk/m3/intern/InternSpaceTest.java
-MOVE	m3/intern/src/test/java/jdk/m3/intern/M3InternTrieScalarProof.java	m3/intern/src/test/java/jdk/m3/intern/InternTrieScalarProof.java
-MOVE	m3/intern/src/test/java/jdk/m3/intern/M3InternTrieScalarTest.java	m3/intern/src/test/java/jdk/m3/intern/InternTrieScalarTest.java
-MOVE	m3/intern/src/test/java/jdk/m3/intern/M3Sha256BatchReuseJUnitTest.java	m3/intern/src/test/java/jdk/m3/intern/Sha256BatchReuseJUnitTest.java
+MOVE	m3/intern/src/main/java/jdk/m3/intern/M3CanonicalLiteralPool.java	src/java.base/share/classes/jdk/internal/m3/intern/CanonicalLiteralPool.java
+MOVE	m3/intern/src/main/java/jdk/m3/intern/M3ClassFileAtoms.java	src/java.base/share/classes/jdk/internal/m3/intern/ClassFileAtoms.java
+MOVE	m3/intern/src/main/java/jdk/m3/intern/M3ClassSpace.java	src/java.base/share/classes/jdk/internal/m3/intern/ClassSpace.java
+MOVE	m3/intern/src/main/java/jdk/m3/intern/M3ClassSpaceArchive.java	src/java.base/share/classes/jdk/internal/m3/intern/ClassSpaceArchive.java
+MOVE	m3/intern/src/main/java/jdk/m3/intern/M3InternArchiveGuard.java	src/java.base/share/classes/jdk/internal/m3/intern/InternArchiveGuard.java
+MOVE	m3/intern/src/main/java/jdk/m3/intern/M3InternPathTrie.java	src/java.base/share/classes/jdk/internal/m3/intern/InternPathTrie.java
+MOVE	m3/intern/src/main/java/jdk/m3/intern/M3InternShapes.java	src/java.base/share/classes/jdk/internal/m3/intern/InternShapes.java
+MOVE	m3/intern/src/main/java/jdk/m3/intern/M3InternSpace.java	src/java.base/share/classes/jdk/internal/m3/intern/InternSpace.java
+MOVE	m3/intern/src/test/java/jdk/m3/intern/M3ArchiveAllocationProbe.java	test/jdk/jdk/internal/m3/intern/ArchiveAllocationProbe.java
+MOVE	m3/intern/src/test/java/jdk/m3/intern/M3ArchiveCopyToJUnitTest.java	test/jdk/jdk/internal/m3/intern/ArchiveCopyToJUnitTest.java
+MOVE	m3/intern/src/test/java/jdk/m3/intern/M3ArchiveCopyToSelfTest.java	test/jdk/jdk/internal/m3/intern/ArchiveCopyToSelfTest.java
+MOVE	m3/intern/src/test/java/jdk/m3/intern/M3ArchiveFreezeParitySelfTest.java	test/jdk/jdk/internal/m3/intern/ArchiveFreezeParitySelfTest.java
+MOVE	m3/intern/src/test/java/jdk/m3/intern/M3CanonicalLiteralPoolDump.java	test/jdk/jdk/internal/m3/intern/CanonicalLiteralPoolDump.java
+MOVE	m3/intern/src/test/java/jdk/m3/intern/M3CanonicalLiteralPoolTest.java	test/jdk/jdk/internal/m3/intern/CanonicalLiteralPoolTest.java
+MOVE	m3/intern/src/test/java/jdk/m3/intern/M3ClassFileAtomsJUnitTest.java	test/jdk/jdk/internal/m3/intern/ClassFileAtomsJUnitTest.java
+MOVE	m3/intern/src/test/java/jdk/m3/intern/M3ClassFileAtomsSelfTest.java	test/jdk/jdk/internal/m3/intern/ClassFileAtomsSelfTest.java
+MOVE	m3/intern/src/test/java/jdk/m3/intern/M3ClassSpaceArchiveJUnitTest.java	test/jdk/jdk/internal/m3/intern/ClassSpaceArchiveJUnitTest.java
+MOVE	m3/intern/src/test/java/jdk/m3/intern/M3ClassSpaceArchiveNative.java	test/jdk/jdk/internal/m3/intern/ClassSpaceArchiveNative.java
+MOVE	m3/intern/src/test/java/jdk/m3/intern/M3ClassSpaceArchiveSelfTest.java	test/jdk/jdk/internal/m3/intern/ClassSpaceArchiveSelfTest.java
+MOVE	m3/intern/src/test/java/jdk/m3/intern/M3ClassSpaceAtomicBatchJUnitTest.java	test/jdk/jdk/internal/m3/intern/ClassSpaceAtomicBatchJUnitTest.java
+MOVE	m3/intern/src/test/java/jdk/m3/intern/M3ClassSpaceAtomicBatchSelfTest.java	test/jdk/jdk/internal/m3/intern/ClassSpaceAtomicBatchSelfTest.java
+MOVE	m3/intern/src/test/java/jdk/m3/intern/M3ClassSpaceDifferentialDump.java	test/jdk/jdk/internal/m3/intern/ClassSpaceDifferentialDump.java
+MOVE	m3/intern/src/test/java/jdk/m3/intern/M3ClassSpaceJUnitTest.java	test/jdk/jdk/internal/m3/intern/ClassSpaceJUnitTest.java
+MOVE	m3/intern/src/test/java/jdk/m3/intern/M3ClassSpaceNative.java	test/jdk/jdk/internal/m3/intern/ClassSpaceNative.java
+MOVE	m3/intern/src/test/java/jdk/m3/intern/M3ClassSpacePinnedMappedJUnitTest.java	test/jdk/jdk/internal/m3/intern/ClassSpacePinnedMappedJUnitTest.java
+MOVE	m3/intern/src/test/java/jdk/m3/intern/M3ClassSpacePinnedMappedSelfTest.java	test/jdk/jdk/internal/m3/intern/ClassSpacePinnedMappedSelfTest.java
+MOVE	m3/intern/src/test/java/jdk/m3/intern/M3ClassSpacePinnedSnapshotJUnitTest.java	test/jdk/jdk/internal/m3/intern/ClassSpacePinnedSnapshotJUnitTest.java
+MOVE	m3/intern/src/test/java/jdk/m3/intern/M3ClassSpacePinnedSnapshotScopedTest.java	test/jdk/jdk/internal/m3/intern/ClassSpacePinnedSnapshotScopedTest.java
+MOVE	m3/intern/src/test/java/jdk/m3/intern/M3ClassSpaceRegionJUnitTest.java	test/jdk/jdk/internal/m3/intern/ClassSpaceRegionJUnitTest.java
+MOVE	m3/intern/src/test/java/jdk/m3/intern/M3ClassSpaceRegionSelfTest.java	test/jdk/jdk/internal/m3/intern/ClassSpaceRegionSelfTest.java
+MOVE	m3/intern/src/test/java/jdk/m3/intern/M3ClassSpaceSelfTest.java	test/jdk/jdk/internal/m3/intern/ClassSpaceSelfTest.java
+MOVE	m3/intern/src/test/java/jdk/m3/intern/M3GrowthFaultProbe.java	test/jdk/jdk/internal/m3/intern/GrowthFaultProbe.java
+MOVE	m3/intern/src/test/java/jdk/m3/intern/M3GrowthSafetyJUnitTest.java	test/jdk/jdk/internal/m3/intern/GrowthSafetyJUnitTest.java
+MOVE	m3/intern/src/test/java/jdk/m3/intern/M3InternArchiveGuardProof.java	test/jdk/jdk/internal/m3/intern/InternArchiveGuardProof.java
+MOVE	m3/intern/src/test/java/jdk/m3/intern/M3InternArchiveGuardTest.java	test/jdk/jdk/internal/m3/intern/InternArchiveGuardTest.java
+MOVE	m3/intern/src/test/java/jdk/m3/intern/M3InternChunkMatchProof.java	test/jdk/jdk/internal/m3/intern/InternChunkMatchProof.java
+MOVE	m3/intern/src/test/java/jdk/m3/intern/M3InternChunkMatchTest.java	test/jdk/jdk/internal/m3/intern/InternChunkMatchTest.java
+MOVE	m3/intern/src/test/java/jdk/m3/intern/M3InternPathTrieProof.java	test/jdk/jdk/internal/m3/intern/InternPathTrieProof.java
+MOVE	m3/intern/src/test/java/jdk/m3/intern/M3InternPathTrieTest.java	test/jdk/jdk/internal/m3/intern/InternPathTrieTest.java
+MOVE	m3/intern/src/test/java/jdk/m3/intern/M3InternShapesProof.java	test/jdk/jdk/internal/m3/intern/InternShapesProof.java
+MOVE	m3/intern/src/test/java/jdk/m3/intern/M3InternShapesTest.java	test/jdk/jdk/internal/m3/intern/InternShapesTest.java
+MOVE	m3/intern/src/test/java/jdk/m3/intern/M3InternSnapshotProof.java	test/jdk/jdk/internal/m3/intern/InternSnapshotProof.java
+MOVE	m3/intern/src/test/java/jdk/m3/intern/M3InternSnapshotTest.java	test/jdk/jdk/internal/m3/intern/InternSnapshotTest.java
+MOVE	m3/intern/src/test/java/jdk/m3/intern/M3InternSpaceDump.java	test/jdk/jdk/internal/m3/intern/InternSpaceDump.java
+MOVE	m3/intern/src/test/java/jdk/m3/intern/M3InternSpaceProof.java	test/jdk/jdk/internal/m3/intern/InternSpaceProof.java
+MOVE	m3/intern/src/test/java/jdk/m3/intern/M3InternSpaceTest.java	test/jdk/jdk/internal/m3/intern/InternSpaceTest.java
+MOVE	m3/intern/src/test/java/jdk/m3/intern/M3InternTrieScalarProof.java	test/jdk/jdk/internal/m3/intern/InternTrieScalarProof.java
+MOVE	m3/intern/src/test/java/jdk/m3/intern/M3InternTrieScalarTest.java	test/jdk/jdk/internal/m3/intern/InternTrieScalarTest.java
+MOVE	m3/intern/src/test/java/jdk/m3/intern/M3Sha256BatchReuseJUnitTest.java	test/jdk/jdk/internal/m3/intern/Sha256BatchReuseJUnitTest.java

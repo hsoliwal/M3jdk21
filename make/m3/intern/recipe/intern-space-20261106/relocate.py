@@ -4,7 +4,7 @@
 """Relocation recipe RELOCATE_INTERN_SPACE v4 (recipe-first port, never by hand).
 
 Copies every FILE row of RELOCATION_MAP.tsv (next to this script) from a donor git tree (--donor-git DIR at
---donor-rev REV) into the module (--module DIR, default: the grandparent of this recipe directory, m3/intern).
+--donor-rev REV) into the module (--module DIR, default: the grandparent of this recipe directory, make/m3/intern).
 
 Java files only. Rewrites only (1) the leading license header (a block comment holding an SPDX line, or // header
 lines), replaced by the M3JDK header, (2) the package line, through the PACKAGE rows, (3) import lines of mapped
@@ -50,7 +50,7 @@ from pathlib import Path
 RECIPE = "relocate.py"
 VERSION = "v4"
 RECIPE_DIR = Path(__file__).resolve().parent
-RECIPE_PATH = "m3/intern/recipe/" + RECIPE_DIR.name + "/" + RECIPE
+RECIPE_PATH = "make/m3/intern/recipe/" + RECIPE_DIR.name + "/" + RECIPE
 DONOR_REPO = "hsoliwal/com.synexia"
 DONOR_BLOB_URL = "https://github.com/" + DONOR_REPO + "/blob/"
 MAP_NAME = "RELOCATION_MAP.tsv"
@@ -308,7 +308,7 @@ def main(argv=None) -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument("--donor-git", required=True, help="donor git directory (a blobless clone is enough)")
     parser.add_argument("--donor-rev", required=True, help="donor revision (pin the commit sha, not FETCH_HEAD)")
-    parser.add_argument("--module", default=str(RECIPE_DIR.parent.parent), help="module root (default m3/intern)")
+    parser.add_argument("--module", default=str(RECIPE_DIR.parent.parent), help="module root (default make/m3/intern)")
     parser.add_argument("--check", action="store_true", help="write nothing; exit 1 when a run would change a file")
     args = parser.parse_args(argv)
     try:

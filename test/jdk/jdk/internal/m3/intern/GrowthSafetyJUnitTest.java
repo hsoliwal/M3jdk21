@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 /** Java21 regression of ordinary owner growth; generated OOME fixtures run separately. */
-//FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/d5ad5090d87ef8477a56317e60ac0d29c65029f7/synexia-openrewrite-recipes/recipe-crates/m3-classspace-failure-atomic-growth-20261030/src/test/java/com/synexia/m3/classspace/M3GrowthSafetyJUnitTest.java blob 6a26956cbbca; recipe m3/intern/recipe/class-space-20261107/relocate.py v1
+//FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/d5ad5090d87ef8477a56317e60ac0d29c65029f7/synexia-openrewrite-recipes/recipe-crates/m3-classspace-failure-atomic-growth-20261030/src/test/java/com/synexia/m3/classspace/M3GrowthSafetyJUnitTest.java blob 6a26956cbbca; recipe make/m3/intern/recipe/class-space-20261107/relocate.py v1
 class GrowthSafetyJUnitTest {
     @Test void serialAndHashBucketGrowthKeepsStableIds() {
         ClassSpace store = new ClassSpace(1024 * 1024);

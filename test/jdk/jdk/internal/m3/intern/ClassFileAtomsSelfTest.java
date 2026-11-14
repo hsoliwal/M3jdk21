@@ -25,7 +25,7 @@ import javax.tools.StandardJavaFileManager;
 import javax.tools.ToolProvider;
 
 /** Java 21/compiler/JNI oracle; standalone and deliberately without a test runtime dependency. */
-//FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/d5ad5090d87ef8477a56317e60ac0d29c65029f7/synexia-openrewrite-recipes/recipe-crates/m3-class-space-symbol-atoms-20261030/src/test/java/com/synexia/m3/classspace/M3ClassFileAtomsSelfTest.java blob 0fbe1f42f03a; recipe m3/intern/recipe/class-space-20261107/relocate.py v1
+//FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/d5ad5090d87ef8477a56317e60ac0d29c65029f7/synexia-openrewrite-recipes/recipe-crates/m3-class-space-symbol-atoms-20261030/src/test/java/com/synexia/m3/classspace/M3ClassFileAtomsSelfTest.java blob 0fbe1f42f03a; recipe make/m3/intern/recipe/class-space-20261107/relocate.py v1
 public final class ClassFileAtomsSelfTest {
     private static int checks;
 

@@ -4,7 +4,7 @@
 Census pass 2, leaves **P2-119** (crate `m3-classspace-failure-atomic-growth-20261030`: `M3ClassSpace`,
 `M3GrowthSafetyJUnitTest`, `M3GrowthFaultProbe`) and **P2-126** (crate `m3-classspace-canonical-open-20261030`:
 `M3ClassSpaceArchive`, `M3ClassSpaceArchiveSelfTest`): the class-space family of the first-party donor
-`hsoliwal/com.synexia` (develop `d5ad5090d87e`), relocated into the existing owner module `m3/intern`
+`hsoliwal/com.synexia` (develop `d5ad5090d87e`), relocated into the existing owner module `make/m3/intern`
 (module `org.m3jdk.intern`, exported package `jdk.m3.intern`), recipe-first and byte-for-byte.
 
 | Owner | Kind | Contract |
@@ -19,7 +19,7 @@ None of them is a class loader, HotSpot `Klass` table, CDS archive or class-equi
 ## Decisions ([DECISION.tsv](DECISION.tsv))
 
 * What a class space is: an interning contract over class-image and symbol bytes, not a CDS-like archive (D0).
-* Owner: `m3/intern` already owns owner-scoped exact-byte interning and its SHA-256 archive container, so the family
+* Owner: `make/m3/intern` already owns owner-scoped exact-byte interning and its SHA-256 archive container, so the family
   joins it instead of a new `m3/classspace` module (D1); no `java.base` consumer (D2). `M3InternSpace.ByteStore` and
   `M3InternArchiveGuard` share the shape but not the contract (budget, SHA-256 lane, failure atomicity, batch
   admission, wire format): equivalence is not decided, both are kept side by side (NEC, D4 / D5).
@@ -59,9 +59,9 @@ None of them is a class loader, HotSpot `Klass` table, CDS archive or class-equi
 ## Run
 
 ```sh
-python -I m3/intern/recipe/class-space-20261107/relocate.py --donor-git <com.synexia clone> \
+python -I make/m3/intern/recipe/class-space-20261107/relocate.py --donor-git <com.synexia clone> \
     --donor-rev d5ad5090d87ef8477a56317e60ac0d29c65029f7 [--check]
-JAVA_HOME=<JDK 21> bash m3/intern/recipe/class-space-20261107/verify.sh <com.synexia clone> \
+JAVA_HOME=<JDK 21> bash make/m3/intern/recipe/class-space-20261107/verify.sh <com.synexia clone> \
     d5ad5090d87ef8477a56317e60ac0d29c65029f7 <scratch> [maven-repo-local [tail [base-rev]]]
 ```
 

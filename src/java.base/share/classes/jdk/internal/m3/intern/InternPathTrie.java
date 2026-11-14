@@ -22,7 +22,7 @@ import java.util.Objects;
  * new segments or paths are refused; use {@link #findExisting(String...)} for
  * an explicitly read-only lookup on a frozen space.</p>
  */
-//FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/fd9a233680b43197eb8c5745a729c342ca56c4e2/synexia-common/src/main/java/com/synexia/common/intern/M3InternPathTrie.java blob a1a834294f37; recipe m3/intern/recipe/intern-space-20261106/relocate.py v4
+//FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/fd9a233680b43197eb8c5745a729c342ca56c4e2/synexia-common/src/main/java/com/synexia/common/intern/M3InternPathTrie.java blob a1a834294f37; recipe make/m3/intern/recipe/intern-space-20261106/relocate.py v4
 public final class InternPathTrie {
     private static final int ROOT_KIND = 0x4d335052; // M3PR
     private static final int NODE_KIND = 0x4d33504e; // M3PN

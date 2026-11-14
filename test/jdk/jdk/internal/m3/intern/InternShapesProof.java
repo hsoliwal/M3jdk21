@@ -11,7 +11,7 @@ import java.util.BitSet;
 import java.util.Random;
 
 /** Executable Java21 differential assertions independent of Maven dependencies. */
-//FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/fd9a233680b43197eb8c5745a729c342ca56c4e2/synexia-common/src/test/java/com/synexia/common/intern/M3InternShapesProof.java blob d8c71200fb17; recipe m3/intern/recipe/intern-space-20261106/relocate.py v4
+//FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/fd9a233680b43197eb8c5745a729c342ca56c4e2/synexia-common/src/test/java/com/synexia/common/intern/M3InternShapesProof.java blob d8c71200fb17; recipe make/m3/intern/recipe/intern-space-20261106/relocate.py v4
 public final class InternShapesProof {
     private static int checks;
     private InternShapesProof() { }

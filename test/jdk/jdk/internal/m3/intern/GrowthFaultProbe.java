@@ -6,7 +6,7 @@ import java.lang.reflect.Field;
 import java.util.Arrays;
 
 /** Runs against throw-instrumented *temporary source*, never a production class. */
-//FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/d5ad5090d87ef8477a56317e60ac0d29c65029f7/synexia-openrewrite-recipes/recipe-crates/m3-classspace-failure-atomic-growth-20261030/src/test/java/com/synexia/m3/classspace/M3GrowthFaultProbe.java blob 39b2d45b0b97; recipe m3/intern/recipe/class-space-20261107/relocate.py v1
+//FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/d5ad5090d87ef8477a56317e60ac0d29c65029f7/synexia-openrewrite-recipes/recipe-crates/m3-classspace-failure-atomic-growth-20261030/src/test/java/com/synexia/m3/classspace/M3GrowthFaultProbe.java blob 39b2d45b0b97; recipe make/m3/intern/recipe/class-space-20261107/relocate.py v1
 public final class GrowthFaultProbe {
     private GrowthFaultProbe() { }
 

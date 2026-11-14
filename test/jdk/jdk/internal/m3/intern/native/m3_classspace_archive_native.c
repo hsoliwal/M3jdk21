@@ -1,7 +1,7 @@
 /* Copyright 2026 Hitesh Soliwal and contributors
  * SPDX-License-Identifier: Apache-2.0
  */
-//FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/d5ad5090d87ef8477a56317e60ac0d29c65029f7/synexia-openrewrite-recipes/recipe-crates/m3-classspace-immutable-archive-20261030/m3_classspace_archive_native.c blob 26e0b4772a4e; recipe m3/intern/recipe/class-space-20261107/relocate.py v1
+//FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/d5ad5090d87ef8477a56317e60ac0d29c65029f7/synexia-openrewrite-recipes/recipe-crates/m3-classspace-immutable-archive-20261030/m3_classspace_archive_native.c blob 26e0b4772a4e; recipe make/m3/intern/recipe/class-space-20261107/relocate.py v1
 #include "jdk_internal_m3_intern_ClassSpaceArchiveNative.h"
 #include <stdint.h>
 #include <stddef.h>

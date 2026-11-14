@@ -20,7 +20,7 @@ import java.util.Objects;
  * <p>The scanner checks envelope lengths and grammar; it does not claim JVM verification.
  * Files larger than 16 MiB are not candidates for this bounded precompute lane.
  */
-//FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/d5ad5090d87ef8477a56317e60ac0d29c65029f7/synexia-openrewrite-recipes/recipe-crates/m3-class-space-canonical-images-20261030/src/main/java/com/synexia/m3/classspace/M3ClassFileAtoms.java blob 731992dea85f; recipe m3/intern/recipe/class-space-20261107/relocate.py v1
+//FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/d5ad5090d87ef8477a56317e60ac0d29c65029f7/synexia-openrewrite-recipes/recipe-crates/m3-class-space-canonical-images-20261030/src/main/java/com/synexia/m3/classspace/M3ClassFileAtoms.java blob 731992dea85f; recipe make/m3/intern/recipe/class-space-20261107/relocate.py v1
 public final class ClassFileAtoms {
     private static final int MAX_BYTES = 16 * 1024 * 1024;
     private static final byte[] DOMAIN = {

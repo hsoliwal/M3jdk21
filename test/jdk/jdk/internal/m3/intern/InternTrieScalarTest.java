@@ -4,7 +4,7 @@ package jdk.internal.m3.intern;
 
 import org.junit.jupiter.api.Test;
 
-//FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/fd9a233680b43197eb8c5745a729c342ca56c4e2/synexia-common/src/test/java/com/synexia/common/intern/M3InternTrieScalarTest.java blob 07fc0fd21492; recipe m3/intern/recipe/intern-space-20261106/relocate.py v4
+//FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/fd9a233680b43197eb8c5745a729c342ca56c4e2/synexia-common/src/test/java/com/synexia/common/intern/M3InternTrieScalarTest.java blob 07fc0fd21492; recipe make/m3/intern/recipe/intern-space-20261106/relocate.py v4
 final class InternTrieScalarTest {
     @Test void scopedScalarAccessAndPathParity() throws Exception {
         InternTrieScalarProof.run();
