@@ -33,7 +33,7 @@ RESIDUE = Path(__file__).with_name("m3-canonical-residue-gitblobs.tsv")
 HEX40 = re.compile(r"[0-9a-f]{40}")
 # SHA-256 of each record (LF bytes); re-pin after a reviewed record change
 LEDGER_SHA256 = "391d44d771de8b3ddf1b5d6f70a587adf3361e19d19b94e450b2f8da5af84dd4"
-RESIDUE_SHA256 = "7e385345277bfcef27347e4df9a7f75a383758acfbe570421e1d73cfab147a5e"
+RESIDUE_SHA256 = "d7eab4ab8a1c9182de9e91918eff3ff7d7ccc7bca4cd6fd60c81186da66d1ec4"
 PIN_SHA256 = "6675f11687f8db693b739852937e843a78a7576c1f859383e53423bc851ce07a"
 NO_LINEAGE = "-"
 # The home pin was re-bound on 2026-10-18 (11d59e663574, recipe source custody) to a donor revision that no family row
@@ -74,8 +74,8 @@ PIN_HEADER = ["schema", "canonical_repository", "canonical_revision", "canonical
 # Closed residue directories: every Java file under them must be a residue row. Scope refreshed 2026-11-13: the atom
 # directory is gone; the target adapters (M3Java21ConvergenceRecipe, a3/) are frozen as adapter rows of the ownership
 # ledger and their two unrecorded neighbours are ABSORB rows of m3/release/LEGACY_RECIPE_CUSTODY_LEDGER.tsv (blob-pinned
-# there); m3/indexdb is a live module that received 12 files since the freeze, so its 8 residue rows stay pinned by blob
-# but the directory is no longer a closed set.
+# there). m3/indexdb is a live module: every file in it is a residue row pinned by blob, and the recipe-home twins
+# (test_m3_recipe_home_policy.py, M3RecipeHomePolicyTest) close it with the policy ledger's adapter exclusion.
 RESIDUE_DIRS = (MIGRATION_JAVA + "jdk/m3/rewrite/semantic",)
 
 
