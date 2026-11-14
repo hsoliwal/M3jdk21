@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: Apache-2.0
 cmake_minimum_required(VERSION 3.20)
-project(m3_llm_ncm LANGUAGES CXX)
+project(m3_llm_ncm LANGUAGES C CXX)
 
 find_package(JNI REQUIRED)
 
@@ -37,4 +37,31 @@ if(M3_NCM_TESTS)
     endif()
   endif()
   add_test(NAME m3_ncm_kernel COMMAND m3_ncm_kernel_test)
+endif()
+
+# Binary64 offset-batch codebook entry for jdk.m3.precompute.NativePrecomputeOps
+# (ncmCodebookAbiVersionNative, nearestNcmCodesNative), moved from the m3_precompute
+# library so that m3_ncm is the only NCM native library.
+target_sources(m3_ncm PRIVATE src/m3_ncm_codebook.c src/m3_ncm_codebook_jni.c)
+target_compile_features(m3_ncm PRIVATE c_std_17)
+if(NOT MSVC)
+  target_link_libraries(m3_ncm PRIVATE m)
+endif()
+file(GENERATE
+  OUTPUT "${CMAKE_BINARY_DIR}/m3_ncm-path-$<CONFIG>.txt"
+  CONTENT "$<TARGET_FILE:m3_ncm>")
+
+if(M3_NCM_TESTS)
+  add_executable(m3_ncm_codebook_checks tests/m3_ncm_codebook_checks.c src/m3_ncm_codebook.c)
+  target_include_directories(m3_ncm_codebook_checks PRIVATE include)
+  target_compile_features(m3_ncm_codebook_checks PRIVATE c_std_17)
+  if(MSVC)
+    target_compile_options(m3_ncm_codebook_checks PRIVATE /W4 /WX /fp:strict)
+  else()
+    target_compile_options(m3_ncm_codebook_checks PRIVATE
+      -Wall -Wextra -Werror -Wconversion -Wshadow -Wpedantic
+      -fno-fast-math -ffp-contract=off)
+    target_link_libraries(m3_ncm_codebook_checks PRIVATE m)
+  endif()
+  add_test(NAME m3_ncm_codebook_checks COMMAND m3_ncm_codebook_checks)
 endif()

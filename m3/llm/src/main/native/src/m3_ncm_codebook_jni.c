@@ -56,7 +56,7 @@ Java_jdk_m3_precompute_NativePrecomputeOps_nearestNcmCodesNative(
   }
   jsize vector_length = (*env)->GetArrayLength(env, vectors_array);
   jsize codebook_length = (*env)->GetArrayLength(env, codebook_array);
-  m3_ncm_status status = m3_ncm_validate_layout((size_t) vector_length,
+  m3_ncm_status status = m3_ncm_codebook_validate_layout((size_t) vector_length,
       vector_offset, rows, (size_t) codebook_length, codebook_offset, code_count,
       dimensions, rows < 0 ? 0 : (size_t) rows);
   if (status != M3_NCM_OK) {
@@ -83,7 +83,7 @@ Java_jdk_m3_precompute_NativePrecomputeOps_nearestNcmCodesNative(
     if (output == NULL) goto cleanup;
   }
 
-  status = m3_ncm_nearest(vectors, (size_t) vector_length, vector_offset, rows,
+  status = m3_ncm_codebook_nearest(vectors, (size_t) vector_length, vector_offset, rows,
       codebook, (size_t) codebook_length, codebook_offset, code_count, dimensions,
       (int32_t *) output, (size_t) rows);
 

@@ -5,6 +5,15 @@
 #include <float.h>
 #include <math.h>
 
+/* MinGW's isfinite macro dispatches on sizeof through a float branch that trips
+ * -Wfloat-conversion under the owner's -Werror; the GCC/Clang builtin has the
+ * same C99 classification semantics. */
+#if defined(__GNUC__) || defined(__clang__)
+#define M3_NCM_ISFINITE(x) __builtin_isfinite(x)
+#else
+#define M3_NCM_ISFINITE(x) isfinite(x)
+#endif
+
 #ifdef __FAST_MATH__
 #error "NCM codebook parity requires strict floating-point compilation"
 #endif
@@ -27,7 +36,7 @@ static int range_fits(size_t length, int32_t offset, int32_t rows, int32_t dimen
   return (size_t) rows <= (length - (size_t) offset) / (size_t) dimensions;
 }
 
-m3_ncm_status m3_ncm_validate_layout(
+m3_ncm_status m3_ncm_codebook_validate_layout(
     size_t vector_length, int32_t vector_offset, int32_t rows,
     size_t codebook_length, int32_t codebook_offset, int32_t code_count,
     int32_t dimensions, size_t output_length) {
@@ -41,11 +50,11 @@ m3_ncm_status m3_ncm_validate_layout(
   return M3_NCM_OK;
 }
 
-m3_ncm_status m3_ncm_nearest(
+m3_ncm_status m3_ncm_codebook_nearest(
     const double *vectors, size_t vector_length, int32_t vector_offset, int32_t rows,
     const double *codebook, size_t codebook_length, int32_t codebook_offset,
     int32_t code_count, int32_t dimensions, int32_t *output, size_t output_length) {
-  m3_ncm_status status = m3_ncm_validate_layout(vector_length, vector_offset, rows,
+  m3_ncm_status status = m3_ncm_codebook_validate_layout(vector_length, vector_offset, rows,
       codebook_length, codebook_offset, code_count, dimensions, output_length);
   if (status != M3_NCM_OK) return status;
   if ((rows > 0 && (vectors == NULL || output == NULL))
@@ -55,10 +64,10 @@ m3_ncm_status m3_ncm_nearest(
   const size_t vector_span = (size_t) rows * dimension_count;
   const size_t codebook_span = (size_t) code_count * dimension_count;
   for (size_t i = 0; i < vector_span; i++) {
-    if (!isfinite(vectors[(size_t) vector_offset + i])) return M3_NCM_NONFINITE_INPUT;
+    if (!M3_NCM_ISFINITE(vectors[(size_t) vector_offset + i])) return M3_NCM_NONFINITE_INPUT;
   }
   for (size_t i = 0; i < codebook_span; i++) {
-    if (!isfinite(codebook[(size_t) codebook_offset + i])) return M3_NCM_NONFINITE_INPUT;
+    if (!M3_NCM_ISFINITE(codebook[(size_t) codebook_offset + i])) return M3_NCM_NONFINITE_INPUT;
   }
 
   size_t vector_base = (size_t) vector_offset;
@@ -73,7 +82,7 @@ m3_ncm_status m3_ncm_nearest(
         m3_ncm_intermediate square = difference * difference;
         distance = distance + square;
       }
-      if (!isfinite(distance)) return M3_NCM_DISTANCE_OVERFLOW;
+      if (!M3_NCM_ISFINITE(distance)) return M3_NCM_DISTANCE_OVERFLOW;
       if (distance < best_distance) {
         best_distance = distance;
         best_code = code;
