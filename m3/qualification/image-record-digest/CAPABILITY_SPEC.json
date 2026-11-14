@@ -1,0 +1,18 @@
+{
+  "schema": "M3_TYPED_ATOM_CAPABILITY_V1",
+  "pattern": "CONSTRUCTOR_LOCAL_DIGEST_REUSE_WITH_PRIVATE_TABLE_COPY_V1",
+  "owner": "m3/core/src/jdk/m3/text/SharedLexiconImage.java",
+  "input": "Previously sealed version1/2 M3LEX001 byte view and bounded records",
+  "output": "Same checksummed metadata and immutable private record digest table",
+  "mechanism": "Lazy method-local SHA256 engine +32-byte scratch; existing per-record validation, recordBytes update and System.arraycopy into private table; final whole-image seal check remains.",
+  "invariants": [
+    "Exact source format/version/directory/order/hash/checksum and JavaUTF16 semantics",
+    "No fields/API/non-constructor bytecode changes",
+    "Provider output retention cannot mutate the published recordDigests array",
+    "Zero records keep2whole-image engines and no record engine",
+    "Default MessageDigestSpi fallback remains compatible; allocation claim depends on measured provider",
+    "No global/thread-local cache, lifetime owner, native implementation or collection storage change"
+  ],
+  "qualification": "Executed68JUnit(8recipe+4*15product),224measurements. Bothversions/all65536units/131072unit-versioncases;256seededimages/5200rows;retaining/direct/defaultSPI/noSHAproviders;corruption/mutation/concurrent64. Actual directBuffer constructor only;full filesystem main/JDK/JNI/platform not run.",
+  "generationCalls": 0
+}
