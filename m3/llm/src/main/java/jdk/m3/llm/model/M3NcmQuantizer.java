@@ -4,11 +4,15 @@
  * SPDX-License-Identifier: Apache-2.0 AND MIT
  * Modified 2026-11-14: Java scalar adaptation with immutable primitive storage,
  * explicit numerical semantics, source namespaces and optional validated JNI.
+ * Completion: bounded frozen-model checkpoints and next-concept input reconstruction.
  * Donor: HazyResearch/ncm@c70274273f489abc73832b2b98584a8483b6b203,
- * models/quant.py. Retain native/NCM_DONOR_NOTICE.md with distributions.
+ * models/quant.py. Retain src/main/native/NCM_DONOR_NOTICE.md with distributions.
  */
 package jdk.m3.llm.model;
 
+import java.nio.BufferUnderflowException;
+import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.security.MessageDigest;
@@ -47,6 +51,14 @@ public final class M3NcmQuantizer {
 
     private static final String SEMANTICS = "M3-NCM-RVQ/1;f32;distance-f64-ordered;"
             + "area-floorceil;linear-halfpixel-edge;conv-same-zero;tie-lowest-code";
+
+    // Portable envelope; the body is exactly the existing codebookRoot preimage.
+    private static final long CHECKPOINT_MAGIC = 0x4d334e434d435000L; // M3NCMCP + NUL
+    private static final int CHECKPOINT_VERSION = 1;
+    private static final int CHECKPOINT_HEADER_BYTES = 20;
+    private static final int CHECKPOINT_BODY_FIXED_BYTES = 40;
+    private static final int IDENTITY_RESIDUAL = 0;
+    private static final int BLEND_CONVOLUTION = 1;
 
     private final int fullLength;
     private final int channels;
@@ -149,6 +161,209 @@ public final class M3NcmQuantizer {
                 codebooks, kernelSize, residualRatios, convolutionWeights, convolutionBias, backend);
     }
 
+    /**
+     * Encodes this frozen model in the portable M3 NCM checkpoint version 1 format.
+     * The body contains the numerical semantics, dimensions, codebooks and residual
+     * transform, with raw float bits preserved. Backend choice is not serialized.
+     * This is a model-specific payload for existing artifact/checkpoint stores, not
+     * a PyTorch or Safetensors importer. Only identity and blend Conv1d are supported.
+     *
+     * <p>The nonnegative budget bounds the complete encoded byte array, including
+     * its header. Admission precedes allocation. This method allocates one result
+     * byte array; object headers and fixed-size digest/encoding state are excluded.
+     */
+    public byte[] checkpointBytes(long maxBytes) {
+        long payloadBytes = 4L * (levels.length + (long) sizes.length + books.length
+                + (long) ratios.length + weights.length + biases.length);
+        long encodedBytes = CHECKPOINT_HEADER_BYTES + CHECKPOINT_BODY_FIXED_BYTES
+                + (long) SEMANTICS.length() + payloadBytes;
+        if (maxBytes < 0 || encodedBytes > maxBytes || encodedBytes > Integer.MAX_VALUE) {
+            throw new IllegalArgumentException("checkpoint exceeds the supplied byte budget or array limit");
+        }
+        byte[] result = new byte[(int) encodedBytes];
+        ByteBuffer output = ByteBuffer.wrap(result).order(ByteOrder.BIG_ENDIAN);
+        output.putLong(CHECKPOINT_MAGIC).putInt(CHECKPOINT_VERSION);
+        output.putInt(kernelSize == 0 ? IDENTITY_RESIDUAL : BLEND_CONVOLUTION);
+        output.putInt(result.length - CHECKPOINT_HEADER_BYTES);
+        output.putInt(SEMANTICS.length());
+        for (int i = 0; i < SEMANTICS.length(); i++) output.put((byte) SEMANTICS.charAt(i));
+        output.putInt(fullLength).putInt(channels).putInt(kernelSize);
+        putInts(output, levels);
+        putInts(output, sizes);
+        putFloats(output, books);
+        putFloats(output, ratios);
+        putFloats(output, weights);
+        putFloats(output, biases);
+        return result;
+    }
+
+    /**
+     * Restores a frozen model only when the entire bounded payload validates and
+     * its semantic SHA-256 equals the supplied lowercase codebook root. Version 1
+     * accepts identity or blend Conv1d only; other architectures/semantics refuse.
+     * No library is loaded, inference performed or filesystem state changed.
+     *
+     * <p>The budget bounds encoded bytes, not heap usage. The input is snapshotted
+     * after budget admission. Full geometry, finite values, exact EOF and the root
+     * are checked before model-array allocation. If E is encoded bytes, P is the
+     * six arrays' payload bytes and N is the level count, additional peak primitive
+     * payload is bounded by E + 2P + 8(N+1): snapshot, decoded arrays, constructor
+     * copies and two offset arrays. This excludes the caller's input, object headers
+     * and fixed-size state. Caller mutation during the snapshot is unsupported.
+     */
+    public static M3NcmQuantizer fromCheckpoint(
+            byte[] checkpoint, String expectedCodebookRoot, long maxBytes, Backend backend) {
+        Objects.requireNonNull(checkpoint, "checkpoint");
+        Objects.requireNonNull(backend, "backend");
+        if (expectedCodebookRoot == null || !expectedCodebookRoot.matches("[0-9a-f]{64}")) {
+            throw new IllegalArgumentException("expectedCodebookRoot must be a lowercase SHA-256");
+        }
+        if (maxBytes < 0 || checkpoint.length > maxBytes
+                || checkpoint.length < CHECKPOINT_HEADER_BYTES) {
+            throw new IllegalArgumentException("checkpoint exceeds budget or is shorter than its header");
+        }
+        byte[] snapshot = checkpoint.clone();
+        ByteBuffer input = ByteBuffer.wrap(snapshot).order(ByteOrder.BIG_ENDIAN);
+        try {
+            validateCheckpoint(input);
+        } catch (BufferUnderflowException truncated) {
+            throw new IllegalArgumentException("truncated checkpoint", truncated);
+        }
+        try {
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            digest.update(snapshot, CHECKPOINT_HEADER_BYTES,
+                    snapshot.length - CHECKPOINT_HEADER_BYTES);
+            if (!HexFormat.of().formatHex(digest.digest()).equals(expectedCodebookRoot)) {
+                throw new IllegalArgumentException("checkpoint does not match expected codebook root");
+            }
+        } catch (NoSuchAlgorithmException impossible) {
+            throw new AssertionError("SHA-256 is required by Java", impossible);
+        }
+        input.position(CHECKPOINT_HEADER_BYTES + Integer.BYTES + SEMANTICS.length());
+        int fullLength = input.getInt();
+        int channels = input.getInt();
+        int kernelSize = input.getInt();
+        int[] levels = readInts(input);
+        int[] sizes = readInts(input);
+        float[] books = readFloats(input);
+        float[] ratios = readFloats(input);
+        float[] weights = readFloats(input);
+        float[] biases = readFloats(input);
+        M3NcmQuantizer result = new M3NcmQuantizer(fullLength, channels, levels,
+                sizes, books, kernelSize, ratios, weights, biases, backend);
+        if (!result.root.equals(expectedCodebookRoot)) {
+            throw new AssertionError("validated checkpoint and model identity disagree");
+        }
+        return result;
+    }
+
+    private static void validateCheckpoint(ByteBuffer input) {
+        if (input.getLong() != CHECKPOINT_MAGIC || input.getInt() != CHECKPOINT_VERSION) {
+            throw new IllegalArgumentException("unsupported checkpoint magic or version");
+        }
+        int architecture = input.getInt();
+        if (architecture != IDENTITY_RESIDUAL && architecture != BLEND_CONVOLUTION) {
+            throw new IllegalArgumentException("unsupported checkpoint residual architecture");
+        }
+        if (input.getInt() != input.remaining()) {
+            throw new IllegalArgumentException("checkpoint body length does not match exact input length");
+        }
+        if (input.getInt() != SEMANTICS.length()) {
+            throw new IllegalArgumentException("unsupported checkpoint numerical semantics");
+        }
+        for (int i = 0; i < SEMANTICS.length(); i++) {
+            if (input.get() != (byte) SEMANTICS.charAt(i)) {
+                throw new IllegalArgumentException("unsupported checkpoint numerical semantics");
+            }
+        }
+        int fullLength = input.getInt();
+        int channels = input.getInt();
+        int kernelSize = input.getInt();
+        if (fullLength <= 0 || channels <= 0) {
+            throw new IllegalArgumentException("checkpoint requires positive dimensions");
+        }
+        product(fullLength, channels);
+        if ((architecture == IDENTITY_RESIDUAL && kernelSize != 0)
+                || (architecture == BLEND_CONVOLUTION
+                    && (kernelSize <= 0 || (kernelSize & 1) == 0))) {
+            throw new IllegalArgumentException("checkpoint residual architecture and kernel disagree");
+        }
+        int levelCount = checkedCount(input);
+        if (levelCount == 0 || levelCount == Integer.MAX_VALUE) {
+            throw new IllegalArgumentException("checkpoint requires nonempty bounded levels");
+        }
+        int previous = 0;
+        int totalCodes = 0;
+        for (int i = 0; i < levelCount; i++) {
+            int length = input.getInt();
+            if (length <= 0 || length < previous || length > fullLength) {
+                throw new IllegalArgumentException("invalid checkpoint level length");
+            }
+            previous = length;
+            totalCodes = sum(totalCodes, length);
+        }
+        if (previous != fullLength || checkedCount(input) != levelCount) {
+            throw new IllegalArgumentException("checkpoint levels and codebooks do not match shape");
+        }
+        int bookValues = 0;
+        for (int i = 0; i < levelCount; i++) {
+            int size = input.getInt();
+            if (size <= 0) throw new IllegalArgumentException("checkpoint codebook must be nonempty");
+            bookValues = sum(bookValues, product(size, channels));
+        }
+        validateFloatArray(input, bookValues, false);
+        int ratioCount = kernelSize == 0 ? 0 : levelCount;
+        int biasCount = kernelSize == 0 ? 0 : product(levelCount, channels);
+        int weightCount = kernelSize == 0 ? 0 : product(biasCount, product(channels, kernelSize));
+        validateFloatArray(input, ratioCount, true);
+        validateFloatArray(input, weightCount, false);
+        validateFloatArray(input, biasCount, false);
+        if (input.hasRemaining()) throw new IllegalArgumentException("trailing checkpoint data");
+    }
+
+    private static int checkedCount(ByteBuffer input) {
+        int count = input.getInt();
+        if (count < 0 || count > input.remaining() / Integer.BYTES) {
+            throw new IllegalArgumentException("checkpoint array count exceeds bounded payload");
+        }
+        return count;
+    }
+
+    private static void validateFloatArray(ByteBuffer input, int expectedCount, boolean ratio) {
+        if (checkedCount(input) != expectedCount) {
+            throw new IllegalArgumentException("checkpoint float array does not match shape");
+        }
+        for (int i = 0; i < expectedCount; i++) {
+            float value = Float.intBitsToFloat(input.getInt());
+            if (!Float.isFinite(value) || (ratio && (value < 0.0f || value > 1.0f))) {
+                throw new IllegalArgumentException("checkpoint contains nonfinite or out-of-range weights");
+            }
+        }
+    }
+
+    private static void putInts(ByteBuffer output, int[] values) {
+        output.putInt(values.length);
+        for (int value : values) output.putInt(value);
+    }
+
+    private static void putFloats(ByteBuffer output, float[] values) {
+        output.putInt(values.length);
+        for (float value : values) output.putInt(Float.floatToRawIntBits(value));
+    }
+
+    // These second-pass readers run only on the fully validated immutable snapshot.
+    private static int[] readInts(ByteBuffer input) {
+        int[] result = new int[input.getInt()];
+        for (int i = 0; i < result.length; i++) result[i] = input.getInt();
+        return result;
+    }
+
+    private static float[] readFloats(ByteBuffer input) {
+        float[] result = new float[input.getInt()];
+        for (int i = 0; i < result.length; i++) result[i] = Float.intBitsToFloat(input.getInt());
+        return result;
+    }
+
     /** Loads exactly the caller-selected native library; load and ABI failures propagate. */
     public static void loadNative(Path library) {
         M3NcmNative.load(library);
@@ -216,15 +431,60 @@ public final class M3NcmQuantizer {
         if (completedLevels < 0 || completedLevels > levels.length) {
             throw new IllegalArgumentException("completedLevels outside quantizer");
         }
+        return reconstructValues(codes.copyCodes(), completedLevels);
+    }
+
+    /**
+     * Returns the cumulative reconstruction after the specified completed levels,
+     * area-pooled to the next level's resolution, in position-major/channel-minor
+     * order. The count must be in [1, levelCount()-1]; no next scale exists at either
+     * endpoint. This is a numerical input to a separate next-concept model, not a
+     * prediction from such a model. Returned arrays are caller owned.
+     */
+    public float[] nextLevelInput(M3NcmCodes codes, int completedLevels) {
+        validateCodes(codes);
+        if (completedLevels <= 0 || completedLevels >= levels.length) {
+            throw new IllegalArgumentException("completedLevels must precede an existing next level");
+        }
+        return downsample(reconstructValues(codes.copyCodes(), completedLevels),
+                levels[completedLevels]);
+    }
+
+    /**
+     * Concatenates next-level inputs in increasing level order, following the donor's
+     * idx_to_ncm_input boundary. Output contains channels * sum(levelLengths[1:])
+     * floats; overflow is refused before vector allocation. A one-level model returns
+     * an empty array after validating codes. One cumulative pass shares completed work
+     * between scales and never evaluates a final-level contribution that is not used.
+     */
+    public float[] nextConceptInputs(M3NcmCodes codes) {
+        validateCodes(codes);
+        int count = product(levelOffsets[levels.length] - levels[0], channels);
+        if (count == 0) return new float[0];
+        float[] result = new float[count];
         int[] values = codes.copyCodes();
-        float[] result = new float[vectorLength];
-        for (int level = 0; level < completedLevels; level++) {
-            float[] contribution = contribution(values, level, levelOffsets[level]);
-            for (int i = 0; i < result.length; i++) {
-                result[i] = finiteResult((double) result[i] + contribution[i]);
-            }
+        float[] cumulative = new float[vectorLength];
+        int outputOffset = 0;
+        for (int completed = 1; completed < levels.length; completed++) {
+            accumulate(cumulative, values, completed - 1);
+            float[] next = downsample(cumulative, levels[completed]);
+            System.arraycopy(next, 0, result, outputOffset, next.length);
+            outputOffset += next.length;
         }
         return result;
+    }
+
+    private float[] reconstructValues(int[] values, int completedLevels) {
+        float[] result = new float[vectorLength];
+        for (int level = 0; level < completedLevels; level++) accumulate(result, values, level);
+        return result;
+    }
+
+    private void accumulate(float[] cumulative, int[] values, int level) {
+        float[] contribution = contribution(values, level, levelOffsets[level]);
+        for (int i = 0; i < cumulative.length; i++) {
+            cumulative[i] = finiteResult((double) cumulative[i] + contribution[i]);
+        }
     }
 
     private void validateCodes(M3NcmCodes codes) {

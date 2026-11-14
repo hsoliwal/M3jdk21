@@ -55,6 +55,13 @@ int main() {
     require(m3_ncm_nearest(query, 1, 1, 1, infinite_book, 1, 1, out, 1) == 2,
             "infinity refused");
     require(out[0] == -77, "validation never mutates output");
+    const float zero_vector[] = {0, 0, 0};
+    const float late_nan[] = {0, 0, 0, 100, 0, std::numeric_limits<float>::quiet_NaN()};
+    require(m3_ncm_nearest(zero_vector, 3, 1, 3, late_nan, 6, 2, out, 1) == 2
+            && out[0] == -77, "zero-distance pruning cannot bypass codebook validation");
+    const float partial_tie[] = {1, 0, 0, 0, 1, 0, 0, 0, 0.5F};
+    require(m3_ncm_nearest(zero_vector, 3, 1, 3, partial_tie, 9, 3, out, 1) == 0
+            && out[0] == 2, "a pruned equal partial sum cannot hide a later better code");
     const float extremes[] = {-std::numeric_limits<float>::max(), std::numeric_limits<float>::max()};
     require(m3_ncm_nearest(extremes + 1, 1, 1, 1, extremes, 2, 2, out, 1) == 0
             && out[0] == 1, "finite extreme values avoid float distance overflow");

@@ -77,6 +77,17 @@ public final class ModuleImageMain {
         require(codes.matches(modelInput, quantizer.codebookRoot()), "version-qualified code binding");
         require(java.util.Arrays.equals(new float[] {2, 3}, quantizer.reconstruct(codes)),
                 "residual quantization primitive in named module");
+        byte[] checkpoint = quantizer.checkpointBytes(4096);
+        M3NcmQuantizer restored = M3NcmQuantizer.fromCheckpoint(checkpoint,
+                quantizer.codebookRoot(), 4096, M3NcmQuantizer.Backend.JAVA);
+        require(java.util.Arrays.equals(checkpoint, restored.checkpointBytes(4096)),
+                "canonical checkpoint bytes survive restore in named module");
+        require(codes.equals(restored.encode(modelInput, new float[] {2, 3})),
+                "checkpoint restore preserves numerical code identity");
+        require(java.util.Arrays.equals(new float[] {2, 2}, restored.nextLevelInput(codes, 1)),
+                "completed concepts supply the next level input");
+        require(java.util.Arrays.equals(new float[] {2, 2}, restored.nextConceptInputs(codes)),
+                "next-concept concatenation in named module");
         M3SystemOneSchema schema = M3SystemOneSchema.compile(List.of(
                 new M3SystemOneSchema.NoulQuestion("supported", null, "source supports", "source does not support")));
         M3ModelInput prepared = new M3SystemOneRequest("caller-model", exactModelSource, schema)
@@ -88,13 +99,13 @@ public final class ModuleImageMain {
         boolean nativeExecuted = args.length == 1;
         if (nativeExecuted) {
             M3NcmQuantizer.loadNative(Path.of(args[0]));
-            M3NcmQuantizer nativeQuantizer = M3NcmQuantizer.of(2, 1, new int[] {1, 2},
-                    new int[] {2, 2}, new float[] {0, 2, 0, 1}, M3NcmQuantizer.Backend.NATIVE);
+            M3NcmQuantizer nativeQuantizer = M3NcmQuantizer.fromCheckpoint(checkpoint,
+                    quantizer.codebookRoot(), 4096, M3NcmQuantizer.Backend.NATIVE);
             require(codes.equals(nativeQuantizer.encode(modelInput, new float[] {2, 3})),
                     "JNI numerical result agrees in named module");
         }
         System.out.println("M3_LLM_IMAGE_PASS module=jdk.m3.llm thirdPartyRuntimeDependencies=0 modelCalls=0"
-                + " ncmPrimitive=true systemOneStructure=true ncmNative=" + nativeExecuted);
+                + " ncmPrimitive=true checkpoint=true nextConceptInput=true systemOneStructure=true ncmNative=" + nativeExecuted);
     }
 
     private static void require(boolean condition, String description) {

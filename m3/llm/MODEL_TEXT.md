@@ -88,7 +88,7 @@ var prepared = request.prepare(modelSha256, tokenizerSha256, contextSha256);
 
 ## Residual vector quantization
 
-The independently implemented primitive follows the public multilevel
+The Java scalar adaptation follows the public multilevel
 residual-codebook design reviewed in
 [`HazyResearch/ncm`](https://github.com/HazyResearch/ncm/tree/c70274273f489abc73832b2b98584a8483b6b203).
 See [the donor notice](src/main/native/NCM_DONOR_NOTICE.md) for the pinned
@@ -139,6 +139,47 @@ headers, digest Strings, exact text and temporary work. The explicit code
 admission budget uses that same narrow accounting. It is not a whole-process
 or heap-memory limit. Array inputs must not be mutated concurrently while a
 factory or operation is copying them.
+
+## Bounded quantizer checkpoints and next-concept inputs
+
+`checkpointBytes(maxBytes)` exports the complete supported quantizer state.
+`fromCheckpoint(bytes, expectedCodebookRoot, maxBytes, backend)` validates and
+restores it. The canonical big-endian format preserves the numerical semantics,
+geometry, codebooks, residual ratios, weights and biases, including raw signed-zero
+bits. A versioned envelope identifies the plain or residual-Conv1d architecture.
+Backend choice remains outside model identity. Canonical Synexia and portable M3
+owners intentionally share this wire format and codebook-root algorithm.
+
+The decoder rejects unsupported versions/architectures, malformed lengths,
+nonfinite state, inconsistent dimensions, trailing/truncated data and an unexpected
+codebook root before allocating decoded model arrays. `maxBytes` bounds encoded
+bytes, not the process heap. Restore additionally uses a bounded snapshot plus
+decoded and immutable-owned arrays; its precise primitive accounting is in the API
+Javadoc. The caller must not concurrently mutate the bytes during the initial copy.
+Store the returned bytes through the application's existing artifact/checkpoint
+owner; the quantizer adds no filesystem store or automatic model download.
+
+```java
+byte[] checkpoint = quantizer.checkpointBytes(4096);
+var restored = M3NcmQuantizer.fromCheckpoint(checkpoint,
+    quantizer.codebookRoot(), 4096, M3NcmQuantizer.Backend.JAVA);
+float[] nextLevel = restored.nextLevelInput(codes, 1); // [2, 2] for the fixture above
+float[] modelInputs = restored.nextConceptInputs(codes);
+```
+
+`nextLevelInput` accepts `1 <= completedLevels < levelCount`. It accumulates the
+completed residual contributions and area-pools that reconstruction to the next
+level. `nextConceptInputs` concatenates these arrays in level order with one
+cumulative pass; a single-level quantizer returns an empty array. This is the
+pinned NCM donor's next-concept input boundary. The transformer, tokenizer and
+trained encoder/decoder remain separate requirements.
+
+Nearest-code search now prunes a later candidate when its nonnegative partial
+squared distance reaches the best distance. Ties still select the smallest code,
+and a zero-distance winner can finish its row. Full finite-value validation runs
+first, so an early exit cannot hide an invalid later component. Both Java and C++
+are checked independently against the unpruned ordered-double algorithm. Worst-case
+complexity remains O(rows * codebookSize * channels); no measured speedup is claimed.
 
 ## Optional JNI backend
 

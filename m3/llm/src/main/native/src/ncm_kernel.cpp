@@ -46,10 +46,18 @@ extern "C" int m3_ncm_nearest(
                         - static_cast<double>(codebook[code_base + channel]);
                 const double square = difference * difference;
                 distance = distance + square;
+                // Finite squared terms are nonnegative; later codes lose ties.
+                // Validation above still covers every component of every code.
+                if (distance >= best_distance) {
+                    break;
+                }
             }
             if (distance < best_distance) {
                 best_distance = distance;
                 best = code;
+                if (best_distance == 0.0) {
+                    break;
+                }
             }
         }
         output[row] = static_cast<int>(best);

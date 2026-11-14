@@ -38,6 +38,10 @@ final class M3NcmNative {
      * Scalar oracle: squared Euclidean distance accumulated in ascending channel order
      * using binary64 multiplication and addition. Exact ties select the smallest code
      * index; signed zeros compare equal. Neither input is changed or retained.
+     * All used components are validated before search. Later candidates stop once
+     * their nonnegative partial sum reaches the incumbent distance: subsequent
+     * additions cannot lower that sum, and a later code loses every exact tie.
+     * A zero-distance winner also ends the row search after that full validation.
      */
     static int[] nearestJava(float[] vectors, int rows, int channels,
                              float[] codebooks, int offset, int size) {
@@ -55,10 +59,16 @@ final class M3NcmNative {
                             - (double) codebooks[codeBase + channel];
                     double square = difference * difference;
                     distance = distance + square;
+                    if (distance >= bestDistance) {
+                        break;
+                    }
                 }
                 if (distance < bestDistance) {
                     bestDistance = distance;
                     best = code;
+                    if (bestDistance == 0.0) {
+                        break;
+                    }
                 }
             }
             selected[row] = best;
