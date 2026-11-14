@@ -43,3 +43,8 @@ jobs:
           bash make/m3/compression/test-java-base.sh \
             "$HOME/.m2/repository/org/junit/platform/junit-platform-console-standalone/1.11.4/junit-platform-console-standalone-1.11.4.jar" \
             "$RUNNER_TEMP/m3-compression"
+      - name: intern (jdk.internal.m3.intern)
+        run: |
+          bash make/m3/intern/test-java-base.sh \
+            "$HOME/.m2/repository/org/junit/platform/junit-platform-console-standalone/1.11.4/junit-platform-console-standalone-1.11.4.jar" \
+            "$RUNNER_TEMP/m3-intern"
