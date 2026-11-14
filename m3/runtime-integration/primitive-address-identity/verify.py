@@ -14,7 +14,11 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[3]
 BASE = ROOT / 'src/java.base/share/classes/jdk/internal/mindex'
-COMPILER = ROOT / 'src/jdk.compiler/share/classes/com/sun/tools/javac/m3'
+COMPILER_ROOT = ROOT / 'src/jdk.compiler/share/classes'
+COMPILER = COMPILER_ROOT / 'com/sun/tools/javac/m3'
+# The image compiler is an M3AST consumer; M3AST binds to the M3 javac hooks in JavaCompiler. A stock JDK 21
+# jdk.compiler is patched with exactly that M3-owned source surface, never with the whole source tree.
+COMPILER_SURFACE = ('com/sun/source/util/M3AST.java', 'com/sun/tools/javac/main/JavaCompiler.java')
 TEST = ROOT / 'test/jdk/jdk/internal/mindex'
 NATIVE = ROOT / 'src/java.base/linux/native/libjava/M3PrimitiveFixedArena.c'
 
@@ -42,16 +46,22 @@ def main():
     if not shutil.which('javac') or not shutil.which('java'):
         raise RuntimeError('a Java 21 javac and java are required')
     version = subprocess.run(['java', '-version'], capture_output=True, text=True).stderr
-    if not re.search(r'"21\.', version):
+    # A GA build reports version "21" (jdk-21+35), an update "21.0.N": both are Java 21.
+    if not re.search(r'version "21(?:[."+-])', version):
         raise RuntimeError('Java 21 is required (found ' + version.splitlines()[0] + ')')
     with tempfile.TemporaryDirectory(prefix='m3-primitive-') as work:
         work = Path(work)
         for name in ('base', 'compiler', 'test'): (work / name).mkdir()
+        compiler_src = work / 'compiler-src'
+        for relative in (*COMPILER_SURFACE, *(f'com/sun/tools/javac/m3/{p.name}' for p in sorted(COMPILER.glob('*.java')))):
+            target = compiler_src / relative
+            target.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copyfile(COMPILER_ROOT / relative, target)
         run('javac', '-Xlint:all', '-Werror', '--patch-module', f'java.base={BASE}',
             '-d', work / 'base', *(BASE / f for f in (
                 'M3PrimitiveIdentity.java', 'M3PrimitiveImage.java', 'M3PrimitiveFixedArena.java')))
-        run('javac', '-Xlint:all', '-Werror', '--patch-module', f'jdk.compiler={COMPILER}',
-            '-d', work / 'compiler', COMPILER / 'M3PrimitiveImageCompiler.java')
+        run('javac', '-Xlint:all', '-Werror', '--patch-module', f'jdk.compiler={compiler_src}',
+            '-d', work / 'compiler', compiler_src / 'com/sun/tools/javac/m3/M3PrimitiveImageCompiler.java')
         run('javac', '-Xlint:all', '-Werror', '--patch-module', f'java.base={work / "base"}',
             '--add-exports', 'java.base/jdk.internal.mindex=ALL-UNNAMED',
             '-d', work / 'test', TEST / 'M3PrimitiveIdentityTest.java',
