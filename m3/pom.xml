@@ -68,7 +68,7 @@
     <!-- //FLLDCIM: MRL - reactor-wiring-20261107 lane37: ports/jfx-viewport WIRED (gate gate-ports-jfx-viewport, GATES.tsv) -->
     <module>ports/jfx-viewport</module>
     <!-- //FLLDCIM: MRL - reactor-wiring-20261107 lane37: history WIRED (gate gate-history, GATES.tsv) -->
-    <module>history</module>
+    <!-- //FLLDCIM: MRL - clean output rule 2026-11-14: history moved out (m3jdk21-workspace/m3/history); module unwired -->
     <!-- //FLLDCIM: MRL - reactor-wiring-20261107 lane37: ast WIRED (gate gate-ast, GATES.tsv) -->
     <module>ast</module>
     <!-- //FLLDCIM: MRL - reactor-wiring-20261107 lane37: ports/parallel-bulk WIRED (gate gate-ports-parallel-bulk, GATES.tsv) -->
