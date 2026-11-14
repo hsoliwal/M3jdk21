@@ -157,9 +157,16 @@ public final class M3LangDexSourceEnvelope {
     private static void requireCanonicalLong(String value, boolean nullable) throws IOException {
         if (nullable && NULL_VALUE.equals(value)) return;
         try {
-            long parsed = Long.parseLong(value);
-            if (!Long.toString(parsed).equals(value)) {
+            Long.parseLong(value);
+            int start = value.charAt(0) == '-' ? 1 : 0;
+            if (value.charAt(start) == '0' && (start != 0 || value.length() != 1)) {
                 throw new IOException("LangDex integer is not canonical decimal");
+            }
+            for (int at = start; at < value.length(); at++) {
+                char digit = value.charAt(at);
+                if (digit < '0' || digit > '9') {
+                    throw new IOException("LangDex integer is not canonical decimal");
+                }
             }
         } catch (NumberFormatException invalid) {
             throw new IOException("LangDex integer is outside canonical signed-64-bit range", invalid);

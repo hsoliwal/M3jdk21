@@ -1,0 +1,20 @@
+{
+  "schema": "M3_CANONICAL_RECIPE_BINDING_V1",
+  "repository": "hsoliwal/com.synexia",
+  "commit": "fe763f135ebde000f0c6a497e4bc9386cb72c9ec",
+  "pullRequest": 17327,
+  "recipe": "com.synexia.rewrite.M3LangDexEnvelopeNumericGrammar",
+  "crate": "synexia-openrewrite-recipes/recipe-crates/langdex-envelope-numeric-grammar",
+  "descriptor": "synexia-openrewrite-recipes/src/main/resources/META-INF/rewrite/m3-langdex-envelope-numeric-grammar.yml",
+  "sourceBefore": "b3f2291429429c62825a292bd5b7f618046bed27",
+  "sourceAfter": "23af38f9a8c7d954ee4a17af5dc0abaacda101c6",
+  "qualifications": {
+    "scope": "5ff8895859af54c407e172101f51200a46513c1b",
+    "writableJava": "860ec7c78a1adcd4ca9f55a03cab53bfd842805b",
+    "currentHostReplay": "f513290301fcdd20c2f21de6ac7cf34b16a4cd3c",
+    "runtime": "0148057cb3c8277f99c785a482837657def53229"
+  },
+  "canonicalCpu": "ad3a43edf5937f36bc3d6bf2e3985340c256ebda",
+  "canonicalTree": "7c81b8648acdc54f270e391eab54cfa40c7cb4f0",
+  "policy": "Executable Maven/OpenRewrite recipes remain in the canonical Synexia donor. This passive binding preserves receiver/source/test identities."
+}

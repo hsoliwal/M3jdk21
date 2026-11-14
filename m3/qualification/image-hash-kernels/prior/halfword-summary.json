@@ -1,0 +1,454 @@
+{
+  "schema": "M3_IMAGE_HASH_HALFWORD_QUALIFICATION_V1",
+  "status": "PASS",
+  "recipeTests": 7,
+  "productJUnitExecutions": 64,
+  "sourceBefore": {
+    "bytes": 15062,
+    "sha256": "c67fff80500a51457cbf171cfeb15cbf91562bac05614a3958e11985b4775028",
+    "gitBlob": "570a22f733499729bdc0fe48813f755e52ebe963"
+  },
+  "sourceAfter": {
+    "bytes": 15057,
+    "sha256": "5663bea7cfaaab23eb2ea918e96c3b18fabc5e185f10790fb8cbb8accda29aa3",
+    "gitBlob": "e4806099b01dbd27f22c60c3f3108dadc14aea07"
+  },
+  "comparison": {
+    "hash/short": {
+      "before": {
+        "medianNanosPerCall": 86.424,
+        "medianBytesPerCall": 0,
+        "perProcess": [
+          {
+            "nanos": 85.6295,
+            "bytes": 0
+          },
+          {
+            "nanos": 86.5385,
+            "bytes": 0
+          }
+        ],
+        "samples": 14
+      },
+      "after": {
+        "medianNanosPerCall": 63.414500000000004,
+        "medianBytesPerCall": 0,
+        "perProcess": [
+          {
+            "nanos": 62.199,
+            "bytes": 0
+          },
+          {
+            "nanos": 64.5645,
+            "bytes": 0
+          }
+        ],
+        "samples": 14
+      }
+    },
+    "hash/identifier": {
+      "before": {
+        "medianNanosPerCall": 110.5575,
+        "medianBytesPerCall": 0,
+        "perProcess": [
+          {
+            "nanos": 111.434,
+            "bytes": 0
+          },
+          {
+            "nanos": 108.7475,
+            "bytes": 0
+          }
+        ],
+        "samples": 14
+      },
+      "after": {
+        "medianNanosPerCall": 133.812,
+        "medianBytesPerCall": 0,
+        "perProcess": [
+          {
+            "nanos": 128.501,
+            "bytes": 0
+          },
+          {
+            "nanos": 134.6835,
+            "bytes": 0
+          }
+        ],
+        "samples": 14
+      }
+    },
+    "hash/long-multilingual": {
+      "before": {
+        "medianNanosPerCall": 303.0855,
+        "medianBytesPerCall": 0,
+        "perProcess": [
+          {
+            "nanos": 314.745,
+            "bytes": 0
+          },
+          {
+            "nanos": 289.721,
+            "bytes": 0
+          }
+        ],
+        "samples": 14
+      },
+      "after": {
+        "medianNanosPerCall": 361.51075000000003,
+        "medianBytesPerCall": 0,
+        "perProcess": [
+          {
+            "nanos": 354.575,
+            "bytes": 0
+          },
+          {
+            "nanos": 380.7215,
+            "bytes": 0
+          }
+        ],
+        "samples": 14
+      }
+    },
+    "open-constructor/0": {
+      "before": {
+        "medianNanosPerCall": 16050,
+        "medianBytesPerCall": 1448,
+        "perProcess": [
+          {
+            "nanos": 16595,
+            "bytes": 1448
+          },
+          {
+            "nanos": 9615,
+            "bytes": 1448
+          }
+        ],
+        "samples": 14
+      },
+      "after": {
+        "medianNanosPerCall": 17790,
+        "medianBytesPerCall": 1448,
+        "perProcess": [
+          {
+            "nanos": 18385,
+            "bytes": 1448
+          },
+          {
+            "nanos": 17195,
+            "bytes": 1448
+          }
+        ],
+        "samples": 14
+      }
+    },
+    "open-constructor/64": {
+      "before": {
+        "medianNanosPerCall": 123940,
+        "medianBytesPerCall": 37448,
+        "perProcess": [
+          {
+            "nanos": 110030,
+            "bytes": 37448
+          },
+          {
+            "nanos": 128205,
+            "bytes": 37448
+          }
+        ],
+        "samples": 14
+      },
+      "after": {
+        "medianNanosPerCall": 120010,
+        "medianBytesPerCall": 37448,
+        "perProcess": [
+          {
+            "nanos": 120440,
+            "bytes": 37448
+          },
+          {
+            "nanos": 119580,
+            "bytes": 37448
+          }
+        ],
+        "samples": 14
+      }
+    },
+    "open-constructor/4096": {
+      "before": {
+        "medianNanosPerCall": 3755066.666666667,
+        "medianBytesPerCall": 1899848,
+        "perProcess": [
+          {
+            "nanos": 4045766.6666666665,
+            "bytes": 1899848
+          },
+          {
+            "nanos": 3696866.6666666665,
+            "bytes": 1899848
+          }
+        ],
+        "samples": 14
+      },
+      "after": {
+        "medianNanosPerCall": 3791716.6666666665,
+        "medianBytesPerCall": 1899848,
+        "perProcess": [
+          {
+            "nanos": 3884166.6666666665,
+            "bytes": 1899848
+          },
+          {
+            "nanos": 3726966.6666666665,
+            "bytes": 1899848
+          }
+        ],
+        "samples": 14
+      }
+    },
+    "open-constructor/16384": {
+      "before": {
+        "medianNanosPerCall": 15873183.333333332,
+        "medianBytesPerCall": 7601480,
+        "perProcess": [
+          {
+            "nanos": 16494000,
+            "bytes": 7601480
+          },
+          {
+            "nanos": 13265033.333333334,
+            "bytes": 7601480
+          }
+        ],
+        "samples": 14
+      },
+      "after": {
+        "medianNanosPerCall": 14546933.333333334,
+        "medianBytesPerCall": 7601480,
+        "perProcess": [
+          {
+            "nanos": 14559833.333333334,
+            "bytes": 7601480
+          },
+          {
+            "nanos": 14088133.333333334,
+            "bytes": 7601480
+          }
+        ],
+        "samples": 14
+      }
+    }
+  },
+  "storage": {
+    "readOnlyFInputBudgetBytes": 571469824,
+    "readOnlyFBaselineReceipt": "1091e30d98c3d7ed72c0a5c1d9c49e994895fd11",
+    "fFreshAllocationAudit": "NOT_COMPLETED_TIMEOUT_90S_PRIOR_PHASE",
+    "sBefore": 0,
+    "sAfter": 0,
+    "capBytes": 571473920,
+    "reserveBytes": 8589934592,
+    "sFree": 9876738048,
+    "peakObservedTaskAllocations": [
+      571469824
+    ],
+    "retainedBuildFiles": 0
+  },
+  "runs": [
+    {
+      "mode": "before",
+      "passed": 16,
+      "evidence": {
+        "vmCompilation": {
+          "BackgroundCompilation": "false",
+          "CICompilerCount": "2"
+        },
+        "firstImageConstruction": {
+          "nanos": 605703200,
+          "preparedFixture": true,
+          "endToEndColdJvm": false,
+          "records": 16384,
+          "bytes": 8659504
+        },
+        "finalImageMutationRefused": true,
+        "executedReadCounts": {
+          "tailUnits": 24,
+          "byteReads": 1008,
+          "records": 19,
+          "units": 504,
+          "fullLanes": 120,
+          "shortReads": 0
+        },
+        "providerAcquisitionCountsPreserved": true,
+        "validationBeforeProviderFault": true,
+        "allUtf16Units": 65536,
+        "emptyRecordAndZeroRecord": true,
+        "numberIds": 10001,
+        "apiAndFieldFingerprint": "c61b9780c57d399c990507cdd64d0fbfd46a9a5a99ef0e99bb76f30d8cedb69c",
+        "nonHashMethodsFingerprint": "994d5bf620554ea24c051b739c500651c2ed4972e91e2886899c286fb611ef07",
+        "hashBytecodeShape": [
+          0,
+          2,
+          0
+        ],
+        "packedDistinctStrings": 5141,
+        "gapVariants": 4,
+        "maxTestLength": 129
+      }
+    },
+    {
+      "mode": "after",
+      "passed": 16,
+      "evidence": {
+        "vmCompilation": {
+          "BackgroundCompilation": "false",
+          "CICompilerCount": "2"
+        },
+        "firstImageConstruction": {
+          "bytes": 8659816,
+          "nanos": 599709600,
+          "preparedFixture": true,
+          "endToEndColdJvm": false,
+          "records": 16384
+        },
+        "finalImageMutationRefused": true,
+        "executedReadCounts": {
+          "tailUnits": 24,
+          "byteReads": 0,
+          "records": 19,
+          "units": 504,
+          "fullLanes": 120,
+          "shortReads": 504
+        },
+        "providerAcquisitionCountsPreserved": true,
+        "validationBeforeProviderFault": true,
+        "allUtf16Units": 65536,
+        "emptyRecordAndZeroRecord": true,
+        "numberIds": 10001,
+        "apiAndFieldFingerprint": "c61b9780c57d399c990507cdd64d0fbfd46a9a5a99ef0e99bb76f30d8cedb69c",
+        "nonHashMethodsFingerprint": "994d5bf620554ea24c051b739c500651c2ed4972e91e2886899c286fb611ef07",
+        "hashBytecodeShape": [
+          1,
+          0,
+          1
+        ],
+        "packedDistinctStrings": 5141,
+        "gapVariants": 4,
+        "maxTestLength": 129
+      }
+    },
+    {
+      "mode": "after",
+      "passed": 16,
+      "evidence": {
+        "vmCompilation": {
+          "CICompilerCount": "2",
+          "BackgroundCompilation": "false"
+        },
+        "firstImageConstruction": {
+          "endToEndColdJvm": false,
+          "preparedFixture": true,
+          "nanos": 614200800,
+          "bytes": 8659816,
+          "records": 16384
+        },
+        "finalImageMutationRefused": true,
+        "executedReadCounts": {
+          "byteReads": 0,
+          "tailUnits": 24,
+          "shortReads": 504,
+          "fullLanes": 120,
+          "units": 504,
+          "records": 19
+        },
+        "providerAcquisitionCountsPreserved": true,
+        "validationBeforeProviderFault": true,
+        "allUtf16Units": 65536,
+        "emptyRecordAndZeroRecord": true,
+        "numberIds": 10001,
+        "apiAndFieldFingerprint": "c61b9780c57d399c990507cdd64d0fbfd46a9a5a99ef0e99bb76f30d8cedb69c",
+        "nonHashMethodsFingerprint": "994d5bf620554ea24c051b739c500651c2ed4972e91e2886899c286fb611ef07",
+        "hashBytecodeShape": [
+          1,
+          0,
+          1
+        ],
+        "packedDistinctStrings": 5141,
+        "gapVariants": 4,
+        "maxTestLength": 129
+      }
+    },
+    {
+      "mode": "before",
+      "passed": 16,
+      "evidence": {
+        "vmCompilation": {
+          "BackgroundCompilation": "false",
+          "CICompilerCount": "2"
+        },
+        "firstImageConstruction": {
+          "records": 16384,
+          "bytes": 8659504,
+          "nanos": 611098900,
+          "preparedFixture": true,
+          "endToEndColdJvm": false
+        },
+        "finalImageMutationRefused": true,
+        "executedReadCounts": {
+          "records": 19,
+          "units": 504,
+          "fullLanes": 120,
+          "shortReads": 0,
+          "tailUnits": 24,
+          "byteReads": 1008
+        },
+        "providerAcquisitionCountsPreserved": true,
+        "validationBeforeProviderFault": true,
+        "allUtf16Units": 65536,
+        "emptyRecordAndZeroRecord": true,
+        "numberIds": 10001,
+        "apiAndFieldFingerprint": "c61b9780c57d399c990507cdd64d0fbfd46a9a5a99ef0e99bb76f30d8cedb69c",
+        "nonHashMethodsFingerprint": "994d5bf620554ea24c051b739c500651c2ed4972e91e2886899c286fb611ef07",
+        "hashBytecodeShape": [
+          0,
+          2,
+          0
+        ],
+        "packedDistinctStrings": 5141,
+        "gapVariants": 4,
+        "maxTestLength": 129
+      }
+    }
+  ],
+  "stages": [
+    {
+      "stage": "recipe",
+      "exit": 0,
+      "reaped": true,
+      "seconds": 9.61
+    },
+    {
+      "stage": "before-0",
+      "exit": 0,
+      "reaped": true,
+      "seconds": 34.625
+    },
+    {
+      "stage": "after-1",
+      "exit": 0,
+      "reaped": true,
+      "seconds": 34.078
+    },
+    {
+      "stage": "after-2",
+      "exit": 0,
+      "reaped": true,
+      "seconds": 34.547
+    },
+    {
+      "stage": "before-3",
+      "exit": 0,
+      "reaped": true,
+      "seconds": 33.703
+    }
+  ]
+}

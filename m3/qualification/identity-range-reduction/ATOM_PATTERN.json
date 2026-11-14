@@ -1,0 +1,25 @@
+{
+  "schema": "M3_TYPED_PRIVATE_ATOM_PATTERN_V1",
+  "owner": "m3/core/src/jdk/m3/text/SharedLexiconCatalog.java",
+  "sourceBefore": {
+    "bytes": 44362,
+    "sha256": "4f3241c045253d15e96dd8163c4c9171acc96b8852f92c1512349cadbadca5d6",
+    "gitBlob": "a0cbbcedebc00cf886a611aff193ae8f47301e92"
+  },
+  "sourceAfter": {
+    "bytes": 44599,
+    "sha256": "ac3c5c3741f81322a02c15d0091f34e728d812a96a77b4dc9830ce963dd94a7c",
+    "gitBlob": "bb6c0eb0b5ea0dd134e2377dfa83dc85ee6f060e"
+  },
+  "spanBefore": {
+    "startLine": 870,
+    "endLine": 881
+  },
+  "signature": "private static int identitySlot(String sourceId, String recordId, int length)",
+  "inputDomain": "String references (Objects.hashCode semantics), positive int capacity1..Integer.MAX_VALUE; public callers retain their existing null/admission checks",
+  "output": "Initial slot in[0,length)",
+  "effects": "Pure primitive arithmetic; no allocation, callback, mutation or retained reference",
+  "pattern": "M3_UNSIGNED_HIGH_PRODUCT_RANGE_V1",
+  "preserved": "Fastutilmix,2Ncapacity,linearprobe/wrap,fullsourceidentity equality,fields/API/lifetime; no persistedbucketlayout",
+  "proof": "f66ec8beb9b13ec281bcda839774abb96dd017038b6cd98eee7274bbe385b9b6"
+}

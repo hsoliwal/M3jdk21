@@ -256,6 +256,88 @@ jobs:
             /src/java.base/share/native/libjava/M3BitLane28.c
             /src/java.base/share/native/libjava/M3StateRelation.c
             /src/java.base/share/native/libjava/m3_state_relation.h
+      # The 2026-10-17 qualification pins exact file images. Its receiver proof is replayed at the last commit
+      # where this workflow passed on master (run 39205217384), with that commit's own SDK and sparse list;
+      # see m3/migration/original-provider-20261017/README.md.
+      - name: Frozen qualified-commit checkout for the receiver replay
+        env:
+          M3_PROOF_ROOT: ${{ runner.temp }}/m3-original-provider-${{ github.run_id }}-${{ github.run_attempt }}
+          M3_SOURCE_ROOT: ${{ github.workspace }}/m3-original-provider-source
+          TMPDIR: ${{ runner.temp }}/m3-original-provider-${{ github.run_id }}-${{ github.run_attempt }}/tmp
+          TEMP: ${{ runner.temp }}/m3-original-provider-${{ github.run_id }}-${{ github.run_attempt }}/tmp
+          TMP: ${{ runner.temp }}/m3-original-provider-${{ github.run_id }}-${{ github.run_attempt }}/tmp
+          XDG_CACHE_HOME: ${{ runner.temp }}/m3-original-provider-${{ github.run_id }}-${{ github.run_attempt }}/cache
+          XDG_CONFIG_HOME: ${{ runner.temp }}/m3-original-provider-${{ github.run_id }}-${{ github.run_attempt }}/config
+          XDG_DATA_HOME: ${{ runner.temp }}/m3-original-provider-${{ github.run_id }}-${{ github.run_attempt }}/data
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          path: m3-original-provider-frozen
+          ref: bf7fcc7b2c5bb39577539b169470677f857e1d8b
+          fetch-depth: 1
+          fetch-tags: false
+          lfs: false
+          submodules: false
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /.gitattributes
+            /.github/workflows/m3-original-mapping-provider-qualification.yml
+            /m3/migration/original-provider-20261017/
+            /m3/algorithms/src/com/m3/algorithm/M3PrefixZ.java
+            /m3/algorithms/test/PrefixZContractTest.java
+            /m3/algorithms/test/ViewInteropContractTest.java
+            /m3/core/src/com/m3/text/JoinedM3StringPiece.java
+            /m3/core/src/com/m3/text/LocalM3Arena.java
+            /m3/core/src/com/m3/text/LocalM3StringPiece.java
+            /m3/core/src/com/m3/text/M3StringPiece.java
+            /m3/core/src/com/m3/text/StorageIdentity.java
+            /m3/docs/name-mapping.json
+            /m3/docs/name-mapping.schema.json
+            /m3/migration/evidence/local-20261002-final/prefix-z-interpreter.log
+            /m3/migration/evidence/local-20261002-final/prefix-z-normal.log
+            /m3/migration/evidence/local-20261002-final/receipt.json
+            /m3/migration/migration.py
+            /m3/migration/pinned-dependencies.json
+            /m3/migration/recipes/prefix-z-v1.tsv
+            /m3/migration/requirements.txt
+            /m3/migration/run-tests.py
+            /m3/migration/src/com/m3/migration/ExactFileRecipe.java
+            /m3/migration/test/RecipeContractTest.java
+            /m3/migration/test/test_migration.py
+            /m3/tooling/cb/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-cb/manifest.tsv
+            /m3/tooling/lane28/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-lane28/manifest.tsv
+            /m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-descriptor/manifest.tsv
+            /m3/tooling/mr/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-mr/manifest.tsv
+            /m3/tooling/tq/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-tq/manifest.tsv
+            /m3/tooling/vi/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-vi/manifest.tsv
+            /src/java.base/share/classes/java/util/regex/Matcher.java
+            /src/java.base/share/classes/jdk/internal/mindex/M3Address28.java
+            /src/java.base/share/classes/jdk/internal/mindex/M3BitLane28.java
+            /src/java.base/share/classes/jdk/internal/mindex/M3Bits.java
+            /src/java.base/share/classes/jdk/internal/mindex/M3Boundary.java
+            /src/java.base/share/classes/jdk/internal/mindex/M3CB.java
+            /src/java.base/share/classes/jdk/internal/mindex/M3CI.java
+            /src/java.base/share/classes/jdk/internal/mindex/M3Class.java
+            /src/java.base/share/classes/jdk/internal/mindex/M3ClassFlags.java
+            /src/java.base/share/classes/jdk/internal/mindex/M3Constructor.java
+            /src/java.base/share/classes/jdk/internal/mindex/M3Descriptor.java
+            /src/java.base/share/classes/jdk/internal/mindex/M3DotStarRelations.java
+            /src/java.base/share/classes/jdk/internal/mindex/M3Field.java
+            /src/java.base/share/classes/jdk/internal/mindex/M3IntLane28.java
+            /src/java.base/share/classes/jdk/internal/mindex/M3LongLane28.java
+            /src/java.base/share/classes/jdk/internal/mindex/M3Member.java
+            /src/java.base/share/classes/jdk/internal/mindex/M3MemberFlags.java
+            /src/java.base/share/classes/jdk/internal/mindex/M3MemberKind.java
+            /src/java.base/share/classes/jdk/internal/mindex/M3Method.java
+            /src/java.base/share/classes/jdk/internal/mindex/M3PC.java
+            /src/java.base/share/classes/jdk/internal/mindex/M3RecordComponent.java
+            /src/java.base/share/classes/jdk/internal/mindex/M3Release.java
+            /src/java.base/share/classes/jdk/internal/mindex/M3StateRelation.java
+            /src/java.base/share/classes/jdk/internal/mindex/M3TQ.java
+            /src/java.base/share/classes/jdk/internal/mindex/M3VI.java
+            /src/java.base/share/native/libjava/M3BitLane28.c
+            /src/java.base/share/native/libjava/M3StateRelation.c
+            /src/java.base/share/native/libjava/m3_state_relation.h
       - name: Qualify recipe and genuine original validator under storage supervision
         shell: bash
         env:
@@ -271,6 +353,8 @@ jobs:
           M3_PYTHON: ${{ steps.preflight.outputs.python }}
           M3_PYTHON_BIN: ${{ steps.preflight.outputs.python-bin }}
           EXPECTED_SOURCE_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+          M3_FROZEN_ROOT: ${{ github.workspace }}/m3-original-provider-frozen
+          M3_FROZEN_SHA: bf7fcc7b2c5bb39577539b169470677f857e1d8b
           GIT_OPTIONAL_LOCKS: '0'
           GIT_NO_LAZY_FETCH: '1'
           GIT_TERMINAL_PROMPT: '0'
@@ -282,12 +366,13 @@ jobs:
           reserve,cap=8*1024**3,512*1024**2
           root=pathlib.Path(os.environ["M3_PROOF_ROOT"])
           source=pathlib.Path(os.environ["M3_SOURCE_ROOT"])
+          frozen=pathlib.Path(os.environ["M3_FROZEN_ROOT"])
           sdk=source/"m3/migration/original-provider-20261017/sdk"
           start=time.monotonic()
           def traversal_error(error):raise RuntimeError("storage census failed") from error
           def gate(limit=480*1024**2):
               used=0
-              for base in (pathlib.Path(os.environ["RUNNER_TEMP"]),source):
+              for base in (pathlib.Path(os.environ["RUNNER_TEMP"]),source,frozen):
                   if not base.is_dir() or base.is_symlink():raise RuntimeError("missing/redirected storage")
                   for folder,names,files in os.walk(base,followlinks=False,onerror=traversal_error):
                       for name in names+files:
@@ -304,6 +389,8 @@ jobs:
           gate()
           head=getgit("rev-parse","HEAD")
           if head!=os.environ["EXPECTED_SOURCE_SHA"] or not re.fullmatch("[0-9a-f]{40}",head):raise RuntimeError("checkout is not exact candidate head")
+          frozen_head=subprocess.check_output(["git","rev-parse","HEAD"],cwd=frozen,text=True,timeout=15).strip()
+          if frozen_head!=os.environ["M3_FROZEN_SHA"] or not re.fullmatch("[0-9a-f]{40}",frozen_head):raise RuntimeError("frozen checkout is not the qualified commit")
           binding=json.loads((source/"m3/migration/original-provider-20261017/source-binding.json").read_bytes())
           if binding["repository"]!="hsoliwal/com.synexia" or binding["receiverCorePath"]!="m3/migration/original-provider-20261017/sdk":raise RuntimeError("canonical owner drift")
           if not re.fullmatch("[0-9a-f]{40}",binding["sourceCommit"]):raise RuntimeError("missing canonical commit")
@@ -363,17 +450,18 @@ jobs:
           bootstrap=overlay/"m3/migration/provider/python312-linux-x86_64/bootstrap.py"
           settings=root/"home/.m2"
           try:
-              run("closed-sdk-source-and-current-target-custody",py+[str(sdk/"verify.py"),"--self-test","--receiver",str(source)])
+              run("closed-sdk-source-custody",py+[str(sdk/"verify.py"),"--self-test"])
+              run("qualified-commit-sdk-and-target-custody",py+[str(frozen/"m3/migration/original-provider-20261017/sdk/verify.py"),"--self-test","--receiver",str(frozen)])
               run("actual-maven-openrewrite-sdk",["mvn","-B","-ntp","-s",str(settings/"settings.xml"),"-gs",str(settings/"global-settings.xml"),"-Dmaven.repo.local="+str(root/"m2"),"-f",str(sdk/"pom.xml"),"-Dm3.build.root="+str(build),"-Dm3.output.root="+str(overlay),"-Dm3.baseline.root="+str(baseline),"verify"])
-              run("named-sdk-and-exact-emission-receipt",py+[str(sdk/"verify.py"),"--report",str(build/"surefire-reports/TEST-jdk.m3.rewrite.backport.M3OriginalCliProviderRecipeTest.xml"),"--emitted",str(overlay),"--receiver",str(source),"--baseline-root",str(baseline),"--receipt",str(root/"recipe-execution.json"),"--run-id",runid])
+              run("named-sdk-and-exact-emission-receipt",py+[str(sdk/"verify.py"),"--report",str(build/"surefire-reports/TEST-jdk.m3.rewrite.backport.M3OriginalCliProviderRecipeTest.xml"),"--emitted",str(overlay),"--baseline-root",str(baseline),"--receipt",str(root/"recipe-execution.json"),"--run-id",runid])
               run("provider-stdlib-boundary-tests",py+[str(bootstrap),"--self-test","--output",str(root/"provider-boundaries"),"--lock",str(bootstrap.with_name("wheels.lock.json"))])
               try:
                   run("genuine-provider-and-unchanged-original-cli",py+[str(bootstrap),"--root",str(overlay),"--baseline-root",str(baseline),"--output",str(root/"provider"),"--lock",str(bootstrap.with_name("wheels.lock.json"))],360)
               finally:
-                  run("post-provider-frozen-pre-custody",py+[str(sdk/"verify.py"),"--report",str(build/"surefire-reports/TEST-jdk.m3.rewrite.backport.M3OriginalCliProviderRecipeTest.xml"),"--emitted",str(overlay),"--receiver",str(source),"--baseline-root",str(baseline),"--receipt",str(root/"recipe-after-provider.json"),"--run-id",runid])
+                  run("post-provider-frozen-pre-custody",py+[str(sdk/"verify.py"),"--report",str(build/"surefire-reports/TEST-jdk.m3.rewrite.backport.M3OriginalCliProviderRecipeTest.xml"),"--emitted",str(overlay),"--baseline-root",str(baseline),"--receipt",str(root/"recipe-after-provider.json"),"--run-id",runid])
               pre=json.loads((root/"recipe-execution.json").read_bytes())["frozenPreBaseline"]
               after=json.loads((root/"recipe-after-provider.json").read_bytes())["frozenPreBaseline"]
-              if pre!=after or pre.get("files")!=55 or pre.get("bytes")!=795620 or pre.get("manifestSha256")!="e0ec50d7f1608180e1fe831d137e26d51e691606b85379a1a38c12d064c702f5" or pre.get("root")!=str(baseline) or pre.get("independentOfInstalledPost") is not True:raise RuntimeError("frozen PRE before/after provider closure drift")
+              if pre!=after or pre.get("files")!=55 or pre.get("bytes")!=795367 or pre.get("manifestSha256")!="643d49f323068e6d4efc30726f7b80bf5c954c17259a32a623d3d792809517de" or pre.get("root")!=str(baseline) or pre.get("independentOfInstalledPost") is not True:raise RuntimeError("frozen PRE before/after provider closure drift")
               # Exact bootstrap receipt shape is checked below after provider implementation freezes.
               provider_receipt_path=root/"provider"/"provider-receipt.json"
               provider=json.loads(provider_receipt_path.read_bytes())

@@ -209,6 +209,28 @@ public final class LangDexProjectionReceiverTest {
                 StandardCharsets.UTF_8);
     }
 
+    private static void verifyPayload(M3PrecomputePayload payload) {
+        check(payload.fieldNames().equals(new TreeSet<>(EXPECTED_FIELDS)));
+        check(payload.canonicalJson().equals(PAYLOAD));
+        check(payload.requireLong("langdex_concept_id") == 701L);
+        check(payload.requireInt("langdex_confidence_permille") == 1000);
+        check(payload.requireInt("langdex_evidence_mask") == 1073741825);
+        check(payload.requireInt("langdex_feature_bits") == Integer.MAX_VALUE);
+        check(payload.requireInt("langdex_flags") == 65535);
+        check(payload.requireLong("langdex_frequency") == 123456789L);
+        check(payload.requireLong("langdex_lexical_class_mask") == 4611686018427387905L);
+        check(payload.requireInt("langdex_lexical_profile_confidence_permille") == 735);
+        check(payload.requireInt("langdex_lexical_profile_evidence_mask") == 17);
+        check(payload.requireInt("langdex_lexical_profile_feature_bits") == 4660);
+        check(payload.requireLong("langdex_lexical_profile_lexical_class_mask") == 12L);
+        check(payload.requireLong("langdex_semantic_class_mask") == 2305843009213693953L);
+        M3PrecomputePayload legacy = M3PrecomputePayload.parse(LEGACY_PAYLOAD);
+        check(legacy.fieldNames().equals(new TreeSet<>(REQUIRED_FIELDS)));
+        check(legacy.field("langdex_lexical_profile_feature_bits").isEmpty());
+        check(payload.requireInt("langdex_subject_id") == 17);
+        check(payload.requireLong("langdex_target_lexeme_id") == 70002L);
+    }
+
     public static void main(String[] args) throws Exception {
         verifyManifestAndFieldMap();
         Path directory = Files.createTempDirectory("m3-langdex-receiver-");
@@ -231,25 +253,7 @@ public final class LangDexProjectionReceiverTest {
 
                 M3PrecomputePayload payload =
                         catalog.findPrecomputePayload(SOURCE_ID, RECORD_ID).orElseThrow();
-                check(payload.fieldNames().equals(new TreeSet<>(EXPECTED_FIELDS)));
-                check(payload.canonicalJson().equals(PAYLOAD));
-                check(payload.requireLong("langdex_concept_id") == 701L);
-                check(payload.requireInt("langdex_confidence_permille") == 1000);
-                check(payload.requireInt("langdex_evidence_mask") == 1073741825);
-                check(payload.requireInt("langdex_feature_bits") == Integer.MAX_VALUE);
-                check(payload.requireInt("langdex_flags") == 65535);
-                check(payload.requireLong("langdex_frequency") == 123456789L);
-                check(payload.requireLong("langdex_lexical_class_mask") == 4611686018427387905L);
-                check(payload.requireInt("langdex_lexical_profile_confidence_permille") == 735);
-                check(payload.requireInt("langdex_lexical_profile_evidence_mask") == 17);
-                check(payload.requireInt("langdex_lexical_profile_feature_bits") == 4660);
-                check(payload.requireLong("langdex_lexical_profile_lexical_class_mask") == 12L);
-                check(payload.requireLong("langdex_semantic_class_mask") == 2305843009213693953L);
-                M3PrecomputePayload legacy = M3PrecomputePayload.parse(LEGACY_PAYLOAD);
-                check(legacy.fieldNames().equals(new TreeSet<>(REQUIRED_FIELDS)));
-                check(legacy.field("langdex_lexical_profile_feature_bits").isEmpty());
-                check(payload.requireInt("langdex_subject_id") == 17);
-                check(payload.requireLong("langdex_target_lexeme_id") == 70002L);
+                verifyPayload(payload);
                 check(catalog.findPrecomputePayload(SOURCE_ID, RECORD_ID).orElseThrow() == payload);
                 check(catalog.findPrecomputePayload(SOURCE_ID, "70002").isEmpty());
 

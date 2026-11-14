@@ -19,19 +19,19 @@ class HandoffLineageTests(TestCase):
         self.addCleanup(self.temporary.cleanup)
         self.root = Path(self.temporary.name)
         self.sources = [
-            "m3/collections/src/main/java/jdk/m3/collections/M3ObservableList.java",
-            "m3/collections/src/test/java/jdk/m3/collections/M3ObservableIndexedViewsContract.java",
             "m3/file/src/main/java/jdk/m3/file/M3FileMoveCandidates.java",
             verifier.EVOLVED_OWNER,
             "m3/file/src/test/java/jdk/m3/file/M3FileMoveCandidatesContract.java",
+            "src/jdk.m3.collections/share/classes/jdk/internal/m3/collections/ObservableList.java",
+            "test/jdk/jdk/m3/collections/ObservableIndexedViewsContract.java",
         ]
         # Bind synthetic source bodies to the real immutable historical recipe IDs.
         recipes = (
-            "com.synexia.m3.M3ObservableIndexedViews20261021",
-            "com.synexia.m3.M3ObservableIndexedViews20261021",
             "com.synexia.m3.M3FileMoveCandidates20261021",
             "com.synexia.m3.M3ResourceLocksConstructor20261022",
             "com.synexia.m3.M3FileMoveCandidates20261021",
+            "com.synexia.m3.M3ObservableIndexedViews20261021",
+            "com.synexia.m3.M3ObservableIndexedViews20261021",
         )
         self.original_history_blob = verifier.HISTORY_BLOB
         self.old_bytes = b"class OriginalResourceLocks {}\n"

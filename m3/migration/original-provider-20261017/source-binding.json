@@ -5,10 +5,10 @@
   "sourcePullRequest": 12264,
   "sourcePath": "m3-openrewrite-recipes/recipes/m3-original-mapping-provider-20261017/sdk",
   "receiverCorePath": "m3/migration/original-provider-20261017/sdk",
-  "moduleGitTree": "c93b25915d57178bec19458ba9ddc34383d92639",
-  "pinsSha256": "0392e66f35721a0abfabe4a2500e0305bbb9b6b1cc78a7db342fb6bde3278ed5",
-  "workflowSha256": "6f6b465d4b020229c24eed25fe718b0c8768089d1a6b9c85d65de807afba2bbf",
-  "workflowGitBlob": "2f764d5dbe04dd44430d6e49bd2dc123bfd90153",
+  "moduleGitTree": "0d2225996145946737eb5f06f19bed2ffe4b825b",
+  "pinsSha256": "041479224c0e2d0209195007a8ea93f5acb4c62cd8700b34231721723a4e90b9",
+  "workflowSha256": "cf50454866b05d902ce6712b3152ee1f8217298cd0755b30838e048ba7783742",
+  "workflowGitBlob": "7c4771e658aebf110aa184c7a289e623ac7e3118",
   "receiverBase": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
   "originalCanonicalPreimageGitBlob": "986147e2df24ef25076d451c49782d8e7e354a11",
   "canonicalRecipePostimageGitBlob": "1a441d86ddd17b0d51ba32b9cbf82a2b421a623c",
@@ -23,9 +23,9 @@
     "run": 39099435918
   },
   "frozenPre": {
-    "manifestSha256": "e0ec50d7f1608180e1fe831d137e26d51e691606b85379a1a38c12d064c702f5",
+    "manifestSha256": "643d49f323068e6d4efc30726f7b80bf5c954c17259a32a623d3d792809517de",
     "files": 55,
-    "bytes": 795620
+    "bytes": 795367
   },
   "candidateExecution": "QUALIFIED_RECIPE_OUTPUTS_RECEIVED; POST_CHECKOUT_HEAD_NOT_RUN",
   "canonicalProductionMapApplied": true,

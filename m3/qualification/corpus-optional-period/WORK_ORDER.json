@@ -1,0 +1,54 @@
+{
+  "schema": "M3_CORPUS_ABSENT_PERIOD_WORK_ORDER_V1",
+  "status": "UNPROVEN_CANDIDATES",
+  "generationCalls": 0,
+  "contracts": {
+    "artifact": "null period normalizes to empty stored value; explicit empty/blank/newline period remains rejected",
+    "wire": "Header/20column schema/canonical bytes/root and all present-field validation unchanged",
+    "delta": "Reader maps only the exact empty period wire column to constructor null; required column still required",
+    "ownerAdmission": "Register only exact inventoried m3/core/src/jdk/m3/text/M3LanguageCorpusManifest.java; retain adjacent/case/path refusals"
+  },
+  "steps": [
+    {
+      "id": "scope",
+      "owner": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3ScopeInference.java",
+      "before": "6c68651b3c8f4bbbc7b1955e575f435da731fc7a",
+      "atomBefore": "            case \"m3/core/src/jdk/m3/text/M3LangDexSourceEnvelope.java\" -> true;\n",
+      "atomAfter": "            case \"m3/core/src/jdk/m3/text/M3LangDexSourceEnvelope.java\" -> true;\n            case \"m3/core/src/jdk/m3/text/M3LanguageCorpusManifest.java\" -> true;\n",
+      "afterResource": "candidateScope"
+    },
+    {
+      "id": "java",
+      "owner": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+      "before": "761980021499f9339883de544a48a274cad68371",
+      "atomBefore": "            case \"m3/core/src/jdk/m3/text/M3LangDexSourceEnvelope.java\" -> true;\n",
+      "atomAfter": "            case \"m3/core/src/jdk/m3/text/M3LangDexSourceEnvelope.java\" -> true;\n            case \"m3/core/src/jdk/m3/text/M3LanguageCorpusManifest.java\" -> true;\n",
+      "afterResource": "candidateJava"
+    },
+    {
+      "id": "corpus",
+      "owner": "m3/core/src/jdk/m3/text/M3LanguageCorpusManifest.java",
+      "before": "6b69503a79fb084d1143c8c11519853f1f596ec1",
+      "atomBefore": "            decode(fields[19])));",
+      "atomAfter": "            fields[19].isEmpty() ? null : decode(fields[19])));",
+      "afterResource": "candidateCorpus"
+    }
+  ],
+  "reuse": {
+    "classification": "ADAPT_EXISTING_OWNER_AND_WRAP_EXISTING_RECIPE",
+    "license": "Apache-2.0 existing notices retained",
+    "donors": [
+      "M3LanguageCorpusManifest constructor/canonical/read at6b69503...",
+      "M3CorpusSourceReceipt ede467... and ProjectionDigest9bcb58...",
+      "Existing refusal653daf... and full incumbent mainfaf4a65...",
+      "M3HashPinnedJavaSnapshotRecipe761980.../M3ScopeInference6c686..."
+    ],
+    "selection": "Restore the existing optional-period representation at reader boundary, rather than change constructor acceptance or wire format"
+  },
+  "proof": {
+    "baseline": "Real public of/writeNew/read with null period; expect two focused RED tests before change",
+    "positive": "All5 planes nullable; mixed absent/present; present Unicode/whitespace-preserving periods; constructor and malformed/canonical refusals; exact root bytes; full original main and5 write-free incumbent methods",
+    "recipe": "Exact AST replay/fixedpoint/drift/refusals, one owner at a time; old/scope-only/full admission and neighbor rejection",
+    "limits": "One4096B fixture allocation at a time, Sroute545MiB8GiBreserve, explicit private JVM PerfData flags; no Unicode metadata-domain decision, no downloaded corpus/JNI/performance/platform claim"
+  }
+}

@@ -45,6 +45,19 @@ or release. It is listed in the TSV and summary under its own kind and never cou
   P_POLICY      a D_REPO_REF line whose exact text is listed for its file in STANDALONE_POLICY.tsv, in a file with no
                 NETWORK_CAPABILITY and no other counted donor reference; a file that fetches, checks out or builds
                 from the donor counts every line, and an edited line counts again.
+NAMING LINEAGE (2026-11-10): the naming recipe (m3/tooling/jdk-naming) renames every Synexia identifier and path, but
+never the bare word Synexia (it names the donor in attribution and lineage, and every file carries a Synexia attribution
+header) nor a donor identity (renaming one would make a lineage statement false). Such names are reported under their
+own kinds and never counted as names:
+  A_ATTRIBUTION an N_NAME line whose every Synexia name is the bare word "Synexia" in prose (in a Python file, inside a
+                comment or a string; elsewhere, the line's text) or the license class SYNEXIA_FIRST_PARTY[_APACHE2_V<n>]
+                (a license identity of the public-target policy).
+  L_LINEAGE     (a) every N_NAME / N_PATH finding under LINEAGE_PATHS (pinned lineage kept under donor names);
+                (b) an N_NAME line whose every Synexia name is attribution or a donor identity: com.synexia[.<pkg>]
+                    that is no groupId a live pom of this repository produces and no live package directory, or a
+                    synexia-* / synexia_* name that no live tracked path carries.
+                An identifier (SynexiaX, SYNEXIA_X), a com.synexia groupId this repository builds (the module groupId
+                and coordinate rows of maven_findings) and a live synexia path stay N_NAME / N_PATH.
 D_CHECKOUT, D_SECRET and D_MAVEN are never lineage outside the archive, and never policy. The baseline (STANDALONE_BASELINE.tsv) pins
 the count per kind: development mode fails when a kind grows; release mode fails unless every DEPENDENCY kind is 0.
 Only the exact structured canonical Maven receipt owner in release-contract.json is passive metadata; other
@@ -71,7 +84,21 @@ from pathlib import Path
 DEPENDENCY_KINDS = ("D_CHECKOUT", "D_SECRET", "D_MAVEN", "D_REPO_REF")
 NAMING_KINDS = ("N_PACKAGE", "N_PATH", "N_NAME")
 KINDS = DEPENDENCY_KINDS + NAMING_KINDS
-LINEAGE_KINDS = ("L_ARCHIVE", "L_PROVENANCE", "L_SEALED")
+LINEAGE_KINDS = ("L_ARCHIVE", "L_PROVENANCE", "L_SEALED", "L_LINEAGE")
+ATTRIBUTION_KINDS = ("A_ATTRIBUTION",)
+# Every Synexia name of a line, a donor package with its dotted tail (com.synexia.common.collections).
+N_TOKEN = re.compile(r"\bSynexia\w*|\bSYNEXIA_\w+|\bsynexia[-_]\w+|\bcom\.synexia(?:\.[A-Za-z_]\w*)*")
+LICENSE_CLASS = re.compile(r"SYNEXIA_FIRST_PARTY(?:_APACHE2_V\d+)?")
+# Pinned lineage kept under donor names (decision 2026-11-10): every naming finding under these paths is L_LINEAGE.
+LINEAGE_PATHS = (
+    # recipe crate pinned by its CANONICAL_MIRROR.tsv, MIRROR_INPUTS_AFTER.json and program-precompute handoff
+    "m3/runtime-integration/regex-rope-affix-effects/",
+    # hash-pinned before/after snapshots of the donor's synexia.md (the backport recipes' text pins)
+    "m3/tooling/cb/integration/synexia.md.after",
+    "m3/tooling/cb/integration/synexia.md.before",
+    "m3/tooling/lane28/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-lane28/synexia.md.txt.before",
+    "m3/tooling/tq/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq/synexia.md.txt.before",
+)
 # the donor repository, the one identity this check looks for (m3/tooling/standalone/LINEAGE_SOURCES.tsv: lineage only)
 DONOR = "hsoliwal/com.synexia"
 BASELINE = "m3/release/STANDALONE_BASELINE.tsv"
@@ -345,6 +372,76 @@ def lineage_lines(path: str, text: str) -> set[int]:
     return found
 
 
+def is_lineage_path(path: str) -> bool:
+    return any(path == p or p.endswith("/") and path.startswith(p) for p in LINEAGE_PATHS)
+
+
+def prose_spans(text: str) -> list[tuple[tuple[int, int], tuple[int, int]]]:
+    """Comment and string spans of a Python text, as ((row, col), (row, col)). A text that does not tokenize (a
+    fragment kept as a recipe fixture) keeps only its whole-line comments as prose."""
+    kinds = {tokenize.COMMENT, tokenize.STRING, getattr(tokenize, "FSTRING_MIDDLE", tokenize.STRING)}
+    try:
+        return [(t.start, t.end) for t in tokenize.generate_tokens(io.StringIO(text).readline) if t.type in kinds]
+    except (tokenize.TokenError, SyntaxError, ValueError):
+        return [((n, len(line) - len(line.lstrip())), (n, len(line))) for n, line in enumerate(text.splitlines(), 1)
+                if line.lstrip().startswith("#")]
+
+
+QUOTED = re.compile(r"""(["'])[^"'\n]*\1""")
+
+
+def in_prose(line: str, number: int, start: int, end: int, spans, quoted: bool = False) -> bool:
+    """The name sits in prose: inside a Python comment or string (spans), in the text of a non-Python line (spans None;
+    with quoted, only inside a quoted value of that line)."""
+    if spans is not None:
+        return any(a <= (number, start) and (number, end) <= b for a, b in spans)
+    return not quoted or any(m.start() < start and end < m.end() for m in QUOTED.finditer(line))
+
+
+def name_tokens(line: str, number: int, spans) -> list[tuple[str, str]] | None:
+    """[(class, name)] of the Synexia names of an N_NAME line: "A" for the bare word in prose or a license class, "L"
+    for a donor identity (com.synexia[.pkg], synexia-* / synexia_*, or a quoted SYNEXIA_* data value such as a donor
+    schema or classification the records pin); None when one of them is an identifier, a bare word in code or an
+    unquoted SYNEXIA_* constant (a naming leftover). spans: the prose of a Python file; None for other files."""
+    names = []
+    for match in N_TOKEN.finditer(line):
+        name, start, end = match.group(0), match.start(), match.end()
+        if name == "Synexia" and in_prose(line, number, start, end, spans):
+            names.append(("A", name))
+        elif LICENSE_CLASS.fullmatch(name):
+            names.append(("A", name))
+        elif name.startswith("com.synexia") or name.startswith(("synexia-", "synexia_")):
+            names.append(("L", name))
+        elif name.startswith("SYNEXIA_") and in_prose(line, number, start, end, spans, quoted=True):
+            names.append(("L", name))
+        else:
+            return None
+    return names or None
+
+
+def live_names(paths: list[str], poms: dict) -> set[str]:
+    """The Synexia names this repository itself carries outside the archive and LINEAGE_PATHS: the com.synexia groupIds
+    its poms produce, its com.synexia package directories and its synexia path segments. A donor identity is a name
+    outside this set."""
+    names = {own[0] for own, _refs in map(pom_coordinates, (t for p, t in poms.items() if not is_lineage_path(p)))
+             if own and own[0].startswith("com.synexia")}
+    for path in paths:
+        if is_archive(path) or is_lineage_path(path) or "synexia" not in path.lower():
+            continue
+        parts = path.split("/")[:-1]
+        names.update(p.lower() for p in parts if "synexia" in p.lower())
+        if "com/synexia/" in path + "/":
+            start = parts.index("synexia") - 1 if "synexia" in parts else 0
+            names.update(".".join(parts[start:end]) for end in range(start + 2, len(parts) + 1))
+    return names
+
+
+def is_live(name: str, live: set[str]) -> bool:
+    if name.startswith("com.synexia"):
+        return name in live
+    return any(segment.startswith(name.lower()) for segment in live)
+
+
 def tracked(root: Path, rev: str | None = None) -> list[str]:
     command = ["ls-files", "-z"] if rev is None else ["ls-tree", "-r", "-z", "--name-only", "--full-tree", rev]
     out = subprocess.run(["git", "-C", str(root), *command], check=True, capture_output=True).stdout
@@ -556,7 +653,7 @@ def scan(root: Path, rev: str | None = None) -> dict:
     texts = tree_texts(root, rev, present) if rev is not None else worktree_texts(root, present)
     sealed_files = read_lineage_files(root, rev)
     policy_rows = read_policy_rows(root, rev)
-    findings, poms, archived_poms, sealed = [], {}, {}, set()
+    findings, poms, archived_poms, sealed, names = [], {}, {}, set(), []
     unmatched = {path: sorted(lines) for path, lines in policy_rows.items()}
     for path, text, blob in texts:
         found = scan_text(path, text)
@@ -565,6 +662,10 @@ def scan(root: Path, rev: str | None = None) -> dict:
             sealed.add(path)
         if path in policy_rows:
             found, unmatched[path] = as_policy(text, policy_rows[path], found)
+        if not is_archive(path) and any(k == "N_NAME" and n for k, _p, n, _t in found):
+            lines, spans = text.splitlines(), prose_spans(text) if path.endswith(".py") else None
+            names += [(len(findings) + i, name_tokens(lines[n - 1], n, spans))
+                      for i, (k, _p, n, _t) in enumerate(found) if k == "N_NAME" and n]
         findings += as_archive(found) if is_archive(path) else found
         if is_pom(path):
             (archived_poms if is_archive(path) else poms)[path] = text
@@ -573,16 +674,25 @@ def scan(root: Path, rev: str | None = None) -> dict:
     unscoped = [("N_PATH", p, 0, p) for p in paths if "synexia" in p.lower() and not in_scope(p) and not is_doc(p)
                 and not is_self(p)]
     findings += [f for f in unscoped if not is_archive(f[1])] + as_archive([f for f in unscoped if is_archive(f[1])])
-    counts = {kind: 0 for kind in KINDS + LINEAGE_KINDS + POLICY_KINDS}
+    live = live_names(paths, poms)
+    for index, classes in names:  # naming lineage: attribution and donor identities are not names to rename
+        if classes is not None and not any(c == "L" and is_live(name, live) for c, name in classes):
+            kind, p, n, t = findings[index]
+            findings[index] = ("L_LINEAGE" if any(c == "L" for c, _ in classes) else "A_ATTRIBUTION", p, n, kind + " " + t)
+    findings = [("L_LINEAGE", p, n, k + " " + t) if k in NAMING_KINDS and is_lineage_path(p) else (k, p, n, t)
+                for k, p, n, t in findings]
+    counts = {kind: 0 for kind in KINDS + LINEAGE_KINDS + POLICY_KINDS + ATTRIBUTION_KINDS}
     for kind, *_ in findings:
         counts[kind] += 1
     lineage = {kind: counts.pop(kind) for kind in LINEAGE_KINDS}
     policy = {kind: counts.pop(kind) for kind in POLICY_KINDS}
+    attribution = {kind: counts.pop(kind) for kind in ATTRIBUTION_KINDS}
     # listed files that are not sealed here (edited, missing, not checked out or network-capable): their lines count
     stale = sorted(set(sealed_files) - sealed)
     not_policy = [f"{path}: {line}" for path, lines in sorted(unmatched.items()) for line in lines]
-    return {"counts": counts, "lineage": lineage, "policy": policy, "findings": findings, "scanned": len(present),
-            "unscanned": len(scoped) - len(present), "lineage_not_sealed": stale, "policy_not_matched": not_policy}
+    return {"counts": counts, "lineage": lineage, "policy": policy, "attribution": attribution, "findings": findings,
+            "scanned": len(present), "unscanned": len(scoped) - len(present), "lineage_not_sealed": stale,
+            "policy_not_matched": not_policy}
 
 
 def read_baseline(root: Path, rev: str | None = None) -> dict | None:
@@ -609,6 +719,7 @@ def verdict(result: dict, baseline: dict | None, release: bool) -> tuple[str, st
     summary = " ".join(f"{k}={counts[k]}" for k in KINDS) + f" scanned={result['scanned']} unscanned={result['unscanned']}"
     summary += "".join(f" {k}={v}" for k, v in result.get("lineage", {}).items())
     summary += "".join(f" {k}={v}" for k, v in result.get("policy", {}).items())
+    summary += "".join(f" {k}={v}" for k, v in result.get("attribution", {}).items())
     if baseline is None:
         return "BLOCK", "no baseline " + BASELINE + "; " + summary
     grown = [f"{k} {baseline.get(k, 0)}->{counts[k]}" for k in KINDS if counts[k] > baseline.get(k, 0)]

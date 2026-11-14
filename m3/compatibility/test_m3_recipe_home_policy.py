@@ -1,4 +1,7 @@
 # SPDX-License-Identifier: Apache-2.0
+"""Recipe-home policy records. The records are lineage: they keep the donor's own names (schema labels, donor recipe
+classes and artifacts, donor paths) and the pre-rename spelling of wildcard surfaces, so the expectations below spell
+them as the records do; live paths of this repository are spelled as they are now."""
 from __future__ import annotations
 
 import csv
@@ -25,7 +28,7 @@ class M3RecipeHomePolicyTest(unittest.TestCase):
         ]
         self.assertEqual(7, len(retired))
         for row in retired:
-            self.assertIn("/jdk/m3/rewrite/atom/", row["legacy_path"])
+            self.assertIn("/com/m3/rewrite/atom/", row["legacy_path"])
             self.assertFalse((ROOT.parent / row["legacy_path"]).exists(), row["legacy_path"])
             self.assertTrue((ROOT.parent / row["canonical_path"]).is_file(), row["canonical_path"])
 
@@ -45,7 +48,7 @@ class M3RecipeHomePolicyTest(unittest.TestCase):
 
         pending = [
             row for row in rows
-            if row["state"].startswith("M3_CANONICAL_PENDING_MERGE")
+            if row["state"].startswith("SYNEXIA_CANONICAL_PENDING_MERGE")
         ]
         self.assertEqual(8, len(pending))
         self.assertEqual(
@@ -64,14 +67,14 @@ class M3RecipeHomePolicyTest(unittest.TestCase):
         for row in pending:
             self.assertEqual(
                 "700cc1765c959a85b5a05249e2c2a08c571616ca",
-                row["m3_revision"],
+                row["synexia_revision"],
             )
             self.assertTrue(
                 row["canonical_path"].startswith(
-                    "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/"
+                    "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/"
                 )
             )
-            self.assertEqual(40, len(row["m3_git_blob"]))
+            self.assertEqual(40, len(row["synexia_git_blob"]))
             self.assertFalse(
                 (ROOT.parent / row["canonical_path"]).exists(),
                 "pending external canonical path must not masquerade as local borrowed custody",
@@ -86,14 +89,14 @@ class M3RecipeHomePolicyTest(unittest.TestCase):
         self.assertEqual(23, len(rows))
         self.assertEqual(23, len({row["local_surface"] for row in rows}))
         for row in rows:
-            self.assertEqual("M3JDK21_M3_RECIPE_HOME_V1", row["schema"])
+            self.assertEqual("M3JDK21_SYNEXIA_RECIPE_HOME_V1", row["schema"])
             self.assertEqual("hsoliwal/com.synexia", row["canonical_repository"])
             self.assertEqual("hsoliwal/M3jdk21", row["target_repository"])
             self.assertEqual("Apache-2.0", row["license"])
 
         by_surface = {row["local_surface"]: row for row in rows}
         for surface in (
-            "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/semantic/**",
+            "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/semantic/**",
             "m3/indexdb/**",
         ):
             self.assertEqual(
@@ -103,33 +106,33 @@ class M3RecipeHomePolicyTest(unittest.TestCase):
             )
             self.assertEqual("true", by_surface[surface]["handoff_required"])
 
-        a3_surface = "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/a3/**"
+        a3_surface = "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/a3/**"
         self.assertEqual("RECEIVER_ADAPTER_ONLY", by_surface[a3_surface]["disposition"])
         self.assertEqual(
-            "jdk.internal.m3.rewrite.M3Jdk21A3AlgorithmCatalogueRecipe;"
-            "jdk.internal.m3.rewrite.M3Jdk21A3SerialFileWorkRecipe",
+            "com.synexia.rewrite.M3Jdk21A3AlgorithmCatalogueRecipe;"
+            "com.synexia.rewrite.M3Jdk21A3SerialFileWorkRecipe",
             by_surface[a3_surface]["canonical_owner"],
         )
         self.assertEqual("true", by_surface[a3_surface]["handoff_required"])
 
         self.assertEqual(
-            "jdk.internal.m3.rewrite.semantic.M3SemanticHashRecipe",
+            "com.synexia.rewrite.semantic.M3SemanticHashRecipe",
             by_surface[
-                "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/semantic/**"
+                "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/semantic/**"
             ]["canonical_owner"],
         )
 
         scope_expectations = {
             "M3EditScope.java":
-                ("RECEIVER_ADAPTER_ONLY", "jdk.internal.m3.rewrite.M3EditScope", "true"),
+                ("RECEIVER_ADAPTER_ONLY", "com.synexia.rewrite.M3EditScope", "true"),
             "M3ScopeInference.java":
-                ("TARGET_PRODUCT_ADAPTER", "jdk.internal.m3.rewrite.M3ScopeInference", "true"),
+                ("TARGET_PRODUCT_ADAPTER", "com.synexia.rewrite.M3ScopeInference", "true"),
             "M3ContractMode.java":
-                ("RECEIVER_ADAPTER_ONLY", "jdk.internal.m3.rewrite.M3ContractMode", "true"),
+                ("RECEIVER_ADAPTER_ONLY", "com.synexia.rewrite.M3ContractMode", "true"),
             "M3RecipeScopePolicy.java":
-                ("TARGET_PRODUCT_ADAPTER", "jdk.internal.m3.rewrite.M3RecipeScopePolicy", "true"),
+                ("TARGET_PRODUCT_ADAPTER", "com.synexia.rewrite.M3RecipeScopePolicy", "true"),
             "M3RecipeScopeRegistry.java":
-                ("TARGET_PRODUCT_ADAPTER", "jdk.internal.m3.rewrite.M3RecipeScopeRegistry", "true"),
+                ("TARGET_PRODUCT_ADAPTER", "com.synexia.rewrite.M3RecipeScopeRegistry", "true"),
         }
         for file_name, expected in scope_expectations.items():
             surface = (
@@ -148,7 +151,7 @@ class M3RecipeHomePolicyTest(unittest.TestCase):
             ]["disposition"],
         )
         self.assertEqual(
-            "jdk.internal.m3.rewrite.M3A3RegexMemoryLab",
+            "com.synexia.rewrite.M3A3RegexMemoryLab",
             by_surface[
                 "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-a3-regex-memory-lab.yml"
             ]["canonical_owner"],
@@ -166,7 +169,7 @@ class M3RecipeHomePolicyTest(unittest.TestCase):
             ]["disposition"],
         )
         self.assertEqual(
-            "jdk.internal.m3.rewrite.M3JdkHandoff",
+            "com.synexia.rewrite.M3JdkHandoff",
             by_surface[
                 "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-jni-newstring-admission.yml"
             ]["canonical_owner"],
@@ -175,13 +178,13 @@ class M3RecipeHomePolicyTest(unittest.TestCase):
         self.assertEqual(
             "JDK_TARGET_SPECIFIC",
             by_surface[
-                "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/**"
+                "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/**"
             ]["disposition"],
         )
         self.assertEqual(
             "false",
             by_surface[
-                "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/**"
+                "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/**"
             ]["handoff_required"],
         )
 
@@ -192,9 +195,9 @@ class M3RecipeHomePolicyTest(unittest.TestCase):
 
         expected = {
             "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/M3Java21ConvergenceCatalog.java":
-                ("RECEIVER_ADAPTER_ONLY", "jdk.internal.m3.rewrite.M3Jdk21FileConvergenceRecipe"),
+                ("RECEIVER_ADAPTER_ONLY", "com.synexia.rewrite.M3Jdk21FileConvergenceRecipe"),
             "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/M3Java21ConvergenceRecipe.java":
-                ("RECEIVER_ADAPTER_ONLY", "jdk.internal.m3.rewrite.M3Jdk21FileConvergenceRecipe"),
+                ("RECEIVER_ADAPTER_ONLY", "com.synexia.rewrite.M3Jdk21FileConvergenceRecipe"),
         }
         for surface, (disposition, owner) in expected.items():
             self.assertEqual(disposition, rows[surface]["disposition"])
@@ -206,7 +209,7 @@ class M3RecipeHomePolicyTest(unittest.TestCase):
         ]
         self.assertEqual("RECEIVER_ADAPTER_ONLY", compatibility["disposition"])
         self.assertEqual(
-            "com.synexia:m3-m3index-jdk-bridge",
+            "com.synexia:synexia-m3index-jdk-bridge",
             compatibility["canonical_owner"],
         )
 
@@ -218,28 +221,24 @@ class M3RecipeHomePolicyTest(unittest.TestCase):
         frozen = {row["path"]: row for row in rows}
         self.assertEqual(11, len(frozen))
 
-        actual: set[str] = set()
-        for directory in (
-            "tooling/migration-recipes/src/main/java/jdk/m3/rewrite/atom",
-            "tooling/migration-recipes/src/main/java/jdk/m3/rewrite/semantic",
-            "indexdb/src/main/java/com/m3",
-        ):
-            start = ROOT / directory
-            if start.is_dir():
-                actual.update(
-                    "m3/" + path.relative_to(ROOT).as_posix()
-                    for path in start.rglob("*.java")
-                    if path.is_file()
-                )
-
-        self.assertEqual(set(frozen), actual)
+        # The semantic directory is the one closed residue set (check_m3_recipe_ownership.RESIDUE_DIRS): the atom
+        # directory is gone, and m3/indexdb is a live module that received files since the freeze, so its 8 rows are
+        # pinned by blob below without closing the directory.
+        start = ROOT / "tooling/migration-recipes/src/main/java/jdk/m3/rewrite/semantic"
+        actual = {
+            "m3/" + path.relative_to(ROOT).as_posix()
+            for path in start.rglob("*.java")
+            if path.is_file()
+        }
+        self.assertEqual({path for path in frozen if "/rewrite/semantic/" in path}, actual)
+        self.assertEqual(8, sum(path.startswith("m3/indexdb/") for path in frozen))
 
         for relative, row in frozen.items():
             self.assertEqual("MIGRATION_RESIDUE_NOT_CANONICAL", row["disposition"])
             self.assertEqual("Apache-2.0", row["license"])
             self.assertTrue(
-                row["canonical_m3_owner"].startswith("com.synexia")
-                or row["canonical_m3_owner"].startswith("synexia-")
+                row["canonical_synexia_owner"].startswith("com.synexia")
+                or row["canonical_synexia_owner"].startswith("synexia-")
             )
             path = ROOT.parent / relative
             data = path.read_bytes()
@@ -255,7 +254,7 @@ class M3RecipeHomePolicyTest(unittest.TestCase):
         a3 = rows["m3/tooling/a3/src/main/java/jdk/m3/a3/A3Lab.java"]
         self.assertEqual("TARGET_PROOF_CONSUMER", a3["disposition"])
         self.assertEqual(
-            "jdk.internal.m3.rewrite.M3PureIntConvergenceRecipe",
+            "com.synexia.rewrite.M3PureIntConvergenceRecipe",
             a3["canonical_owner"],
         )
         self.assertEqual("true", a3["handoff_required"])
@@ -267,7 +266,7 @@ class M3RecipeHomePolicyTest(unittest.TestCase):
             / "src"
             / "main"
             / "java"
-            / "com"
+            / "jdk"
             / "m3"
             / "a3"
             / "A3Lab.java"
@@ -289,15 +288,15 @@ class M3RecipeHomePolicyTest(unittest.TestCase):
             encoding="utf-8"
         )
         for owner in (
-            "M3PureIntAtomizeRecipe",
-            "M3PureIntInventoryRecipe",
-            "M3PureIntPatternizeRecipe",
-            "M3PureIntDocumentationRecipe",
-            "M3PureIntConvergenceRecipe",
+            "com.synexia.rewrite.M3PureIntAtomizeRecipe",
+            "com.synexia.rewrite.M3PureIntInventoryRecipe",
+            "com.synexia.rewrite.M3PureIntPatternizeRecipe",
+            "com.synexia.rewrite.M3PureIntDocumentationRecipe",
+            "com.synexia.rewrite.M3PureIntConvergenceRecipe",
         ):
-            self.assertIn(f"jdk.internal.m3.rewrite.{owner}", catalogue)
-        self.assertNotIn("jdk.internal.m3.rewrite.atom.", catalogue)
-        self.assertNotIn("jdk.m3.rewrite.atom.", catalogue)
+            self.assertIn(owner, catalogue)
+        for retired in ("com.synexia.rewrite.atom.", "com.m3.rewrite.atom.", "jdk.internal.m3.rewrite.atom.", "jdk.m3.rewrite.atom."):
+            self.assertNotIn(retired, catalogue)
 
 
     def test_canonical_home_pin_binds_exact_m3_manifest(self) -> None:
@@ -306,16 +305,16 @@ class M3RecipeHomePolicyTest(unittest.TestCase):
 
         self.assertEqual(1, len(rows))
         row = rows[0]
-        self.assertEqual("M3JDK21_M3_RECIPE_HOME_PIN_V1", row["schema"])
+        self.assertEqual("M3JDK21_SYNEXIA_RECIPE_HOME_PIN_V1", row["schema"])
         self.assertEqual("hsoliwal/com.synexia", row["canonical_repository"])
         self.assertRegex(row["canonical_revision"], r"^[0-9a-f]{40}$")
         self.assertEqual(
-            "m3-openrewrite-recipes/CANONICAL_RECIPE_HOME.tsv",
+            "synexia-openrewrite-recipes/CANONICAL_RECIPE_HOME.tsv",
             row["canonical_manifest_path"],
         )
         self.assertRegex(row["canonical_manifest_git_blob"], r"^[0-9a-f]{40}$")
         self.assertEqual(
-            "docs/M3-SCALE/invariants/M3-PUBLIC-TARGET-CONVERGENCE-1.json",
+            "docs/M3-SCALE/invariants/SYNEXIA-PUBLIC-TARGET-CONVERGENCE-1.json",
             row["convergence_invariant_path"],
         )
         self.assertRegex(row["convergence_invariant_git_blob"], r"^[0-9a-f]{40}$")
@@ -359,11 +358,11 @@ class M3RecipeHomePolicyTest(unittest.TestCase):
             rows = {row["local_surface"]: row for row in csv.DictReader(handle, delimiter="\t")}
 
         self.assertEqual(
-            "com.synexia:m3-m3index-db",
+            "com.synexia:synexia-m3index-db",
             rows["m3/indexdb/**"]["canonical_owner"],
         )
         self.assertEqual(
-            "com.synexia:m3-m3index-jdk-bridge",
+            "com.synexia:synexia-m3index-jdk-bridge",
             rows["m3/ports/**"]["canonical_owner"],
         )
 

@@ -21,6 +21,8 @@ WORKFLOWS = ROOT / '.github/workflows'
 MOVE = 'm3-file-move-candidates-20261021.yml'
 SHADOW = 'm3-file-shadow-stream-20261020.yml'
 LAYERED = 'm3-native-shadow-stream-progress-20261020.yml'
+DELTA = 'm3-file-delta-20261020.yml'
+IMPACT = 'm3-file-build-impact-20261020.yml'
 
 
 def workflow(name):
@@ -154,12 +156,16 @@ class FileWorkflowWiringTest(unittest.TestCase):
 
     def test_complete_dependencies_follow_actual_module_edges(self):
         file_descriptor = (FILE / 'src/main/java/module-info.java').read_text(encoding='utf-8')
-        collection_descriptor = (ROOT / 'm3/collections/src/main/java/module-info.java').read_text(encoding='utf-8')
+        collection_descriptor = (ROOT / 'src/jdk.m3.collections/share/classes/module-info.java').read_text(
+            encoding='utf-8')
         self.assertIn('requires transitive jdk.m3.collections;', file_descriptor)
-        self.assertIn('requires transitive jdk.m3.arrays;', collection_descriptor)
+        self.assertIn('module jdk.m3.collections {', collection_descriptor)
+        self.assertIn('exports jdk.m3.arrays;', collection_descriptor)
+        self.assertIn('exports jdk.m3.arrays.packed;', collection_descriptor)
         builder = (FILE / 'compile-dependencies.sh').read_text(encoding='utf-8')
-        self.assertIn('for family in arrays collections; do', builder)
-        self.assertIn('find "$repo/m3/$family/src/main/java"', builder)
+        self.assertIn('for module in jdk.m3.collections; do', builder)
+        self.assertIn('find "$repo/src/$module/share/classes"', builder)
+        self.assertNotIn('m3/$family/src/main/java', builder)
         self.assertIn('-print0', builder)
         self.assertIn('LC_ALL=C sort -z', builder)
         self.assertIn('mapfile -d', builder)
@@ -170,8 +176,7 @@ class FileWorkflowWiringTest(unittest.TestCase):
         for name in (MOVE, SHADOW, LAYERED):
             with self.subTest(workflow=name):
                 text = workflow(name)
-                self.assertEqual(text.count("'m3/arrays/**'"), text.count("'m3/file/**'"))
-                self.assertEqual(text.count("'m3/collections/**'"), text.count("'m3/file/**'"))
+                self.assertEqual(text.count("'src/jdk.m3.collections/**'"), text.count("'m3/file/**'"))
                 self.assertIn('bash m3/file/compile-dependencies.sh "$JAVA_HOME" "$deps"', text)
                 self.assertIn('github.event.pull_request.head.sha || github.sha', text)
                 self.assertIn('--module-path', text)
@@ -179,6 +184,16 @@ class FileWorkflowWiringTest(unittest.TestCase):
                 self.assertIn('python3 -m unittest discover -s m3/file -p test_workflow_wiring.py -v', text)
         for name in (MOVE, SHADOW):
             self.assertIn('--module-path "$deps"', workflow(name))
+
+    def test_verify_only_workflows_build_and_pass_dependencies(self):
+        # org.m3jdk.file requires transitive jdk.m3.collections, so verify.py needs the built dependency module path.
+        for name in (DELTA, IMPACT):
+            with self.subTest(workflow=name):
+                text = workflow(name)
+                self.assertEqual(text.count("'src/jdk.m3.collections/**'"), text.count("'m3/file/**'"))
+                self.assertIn('github.event.pull_request.head.sha || github.sha', text)
+                self.assertIn('bash m3/file/compile-dependencies.sh "$JAVA_HOME" "$deps"', text)
+                self.assertIn('python3 m3/file/verify.py --java-home "$JAVA_HOME" --module-path "$deps"', text)
 
     def test_layered_workflow_keeps_complete_host_and_image_contracts(self):
         text = workflow(LAYERED)

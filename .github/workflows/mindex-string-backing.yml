@@ -90,7 +90,25 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  # Upstream OpenJDK shape: one job builds the pinned JTReg and uploads it; consumers download it
+  # with get-jtreg into a fresh workspace. Building and downloading in the same job extracts over
+  # the read-only (chmod a-w) jtreg.jar/bin files the build just produced and always fails.
+  jtreg:
+    name: Build pinned repository JTReg
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+          sparse-checkout: |
+            .github
+            make/conf/github-actions.conf
+      - name: Build pinned repository JTReg for this run
+        uses: ./.github/actions/build-jtreg
+
   jdk-backing:
+    needs: jtreg
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -134,6 +152,9 @@ jobs:
         run: python3 m3/runtime-integration/check-m3string-byte-source-needle.py
       - name: Check mixed canonical literal replacement receiver
         run: python3 m3/runtime-integration/check-m3string-mixed-literal-replace.py
+      - name: Install the source-built OpenRewrite and JUnit closure
+        # *-m3-source-1 coordinates are built from m3/vendor/third_party; no registry publishes them.
+        run: bash m3/m3-import/pure-int-recipe-custody/install.sh "$GITHUB_WORKSPACE" --dependencies-only
       - name: Prove immutable Matcher fact reuse
         run: mvn -B -ntp -f m3/tooling/mr/pom.xml test
       - name: Verify current M3 String concat length and updated jtreg contract
@@ -148,9 +169,16 @@ jobs:
           distribution: temurin
           java-version: '20'
       - name: Install build prerequisites
-        run: sudo apt-get update && sudo apt-get install -y autoconf
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends autoconf make pkg-config zip unzip zlib1g-dev \
+            libasound2-dev libcups2-dev libfontconfig1-dev libfreetype6-dev \
+            libx11-dev libxext-dev libxrender-dev libxrandr-dev libxtst-dev libxt-dev
+      - name: Get repository JTReg
+        id: jtreg
+        uses: ./.github/actions/get-jtreg
       - name: Configure
-        run: bash configure --with-debug-level=fastdebug --with-jvm-variants=server
+        run: bash configure --with-debug-level=fastdebug --with-jvm-variants=server --with-jtreg="${{ steps.jtreg.outputs.path }}"
       - name: Build java.base
         run: make java.base-java-only
       - name: Build matching runtime image
@@ -176,6 +204,7 @@ jobs:
 
   string-key-comparison-runtime:
     name: Focused String key comparison on matched VM
+    needs: jtreg
     runs-on: ubuntu-22.04
     timeout-minutes: 120
     env:
@@ -193,8 +222,6 @@ jobs:
         uses: ./.github/actions/get-bootjdk
         with:
           platform: linux-x64
-      - name: Build pinned repository JTReg for this run
-        uses: ./.github/actions/build-jtreg
       - name: Get repository JTReg
         id: jtreg
         uses: ./.github/actions/get-jtreg

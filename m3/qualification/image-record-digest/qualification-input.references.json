@@ -1,0 +1,299 @@
+{
+  "schema": "M3_SEALED_INPUT_REFERENCES_V1",
+  "sealedInputGitBlob": "f94086426035a265562171a063c4fb4bfe09f8aa",
+  "serialization": "Compact ASCII JSON preserving insertion order, no final LF.",
+  "sourceAccess": "All source-bearing inputs resolve inside this crate. Existing Java21/Maven/47 pinned JARs/RAM compiler/Snappy artifact remain host prerequisites.",
+  "input": {
+    "driver": {
+      "kind": "crate-resource-utf8",
+      "path": "bootstrap/M3LexiconCpuProof.java"
+    },
+    "pom": {
+      "kind": "crate-resource-utf8",
+      "path": "bootstrap/pom.xml"
+    },
+    "jars": {
+      "C:\\Users\\hsoliwal\\.m2\\repository\\org\\yaml\\snakeyaml\\2.2\\snakeyaml-2.2.jar": "1467931448a0817696ae2805b7b8b20bfb082652bf9c4efaed528930dc49389b",
+      "C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-java\\8.17.1\\rewrite-java-8.17.1.jar": "32a3b27c0eafeb44c776500ae1378efdfb79d490a6afd7b58be07c6c0d6c55ff",
+      "C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-core\\8.17.1\\rewrite-core-8.17.1.jar": "d7c07f91ab085a39bf1b40d7f2a7796a52619aaeefeca1481435e685aa663efa",
+      "C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\core\\jackson-databind\\2.16.1\\jackson-databind-2.16.1.jar": "baf8a8ebee8f45ef68cdd5e2dd3923b3e296c0937b96ec0b4806aa3a31bccd1d",
+      "C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\core\\jackson-core\\2.16.1\\jackson-core-2.16.1.jar": "f5f8ef90609e64fec82eb908e497dc7d81b2eb983fe509b870292a193cde4dfb",
+      "C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\dataformat\\jackson-dataformat-smile\\2.16.1\\jackson-dataformat-smile-2.16.1.jar": "3767744f2e37e6e672c3a98174e68567907d18ea5c451b203a19e7b0ad934354",
+      "C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\module\\jackson-module-parameter-names\\2.16.1\\jackson-module-parameter-names-2.16.1.jar": "9b333e7e69053807f42a9d92fc1e5da405938ecc4683146b8b1eb9c6967fea8e",
+      "C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\datatype\\jackson-datatype-jsr310\\2.16.1\\jackson-datatype-jsr310-2.16.1.jar": "6281970682a8da3ddbac54bb203c9badf1c26f507f3ecaa48ef10318579bc9ad",
+      "C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\tools\\java-object-diff\\1.0.1\\java-object-diff-1.0.1.jar": "8dcf0381d306c5223cea4c0acb84afd5691ec6eb41e0b6a36dda288a0c7ec4dc",
+      "C:\\Users\\hsoliwal\\.m2\\repository\\io\\quarkus\\gizmo\\gizmo\\1.0.11.Final\\gizmo-1.0.11.Final.jar": "a54bfbb6dcce9298134595b3cd1df961bc732468825f26ee5296f2b5f88c0b99",
+      "C:\\Users\\hsoliwal\\.m2\\repository\\org\\jboss\\jandex\\2.4.2.Final\\jandex-2.4.2.Final.jar": "3f2ce55c7d71e744581488dc5105806aa8084c08e6e916a019bab8f8698994f0",
+      "C:\\Users\\hsoliwal\\.m2\\repository\\net\\java\\dev\\jna\\jna-platform\\5.14.0\\jna-platform-5.14.0.jar": "ae4caceb3840730c2537f9b7fb55a01baba580286b4122951488bcee558c2449",
+      "C:\\Users\\hsoliwal\\.m2\\repository\\net\\java\\dev\\jna\\jna\\5.14.0\\jna-5.14.0.jar": "34ed1e1f27fa896bca50dbc4e99cf3732967cec387a7a0d5e3486c09673fe8c6",
+      "C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\commons\\commons-compress\\1.26.0\\commons-compress-1.26.0.jar": "051aceb8bbcc62d0f5b2b8ac72c53767f9c59bfbd050151e65bef6f51c8ed9c9",
+      "C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-yaml\\8.17.1\\rewrite-yaml-8.17.1.jar": "0203cc3b08f519975ed2dc2d20091f0b8e0ab20f72016871c05e50feb49e5a13",
+      "C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-xml\\8.17.1\\rewrite-xml-8.17.1.jar": "89e9568e9e48bd2d3fbce5d9d23d1a828a54c97442590f8f77624cafb095785f",
+      "C:\\Users\\hsoliwal\\.m2\\repository\\io\\micrometer\\micrometer-core\\1.9.17\\micrometer-core-1.9.17.jar": "c350cfdc76c08356f12a60e840f2dbeaeea7540712d58b54becd6c302a86147a",
+      "C:\\Users\\hsoliwal\\.m2\\repository\\org\\hdrhistogram\\HdrHistogram\\2.1.12\\HdrHistogram-2.1.12.jar": "9b47fbae444feaac4b7e04f0ea294569e4bc282bc69d8c2ce2ac3f23577281e2",
+      "C:\\Users\\hsoliwal\\.m2\\repository\\org\\latencyutils\\LatencyUtils\\2.0.3\\LatencyUtils-2.0.3.jar": "a32a9ffa06b2f4e01c5360f8f9df7bc5d9454a5d373cd8f361347fa5a57165ec",
+      "C:\\Users\\hsoliwal\\.m2\\repository\\org\\jetbrains\\annotations\\24.1.0\\annotations-24.1.0.jar": "27a770dc7ce50500918bb8c3c0660c98290630ec796b5e3cf6b90f403b3033c6",
+      "C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\core\\jackson-annotations\\2.16.1\\jackson-annotations-2.16.1.jar": "a4730771e6a495dd3793a42cdb8ce6bddb96c77e15f40c98fd8d9a7ae09e7286",
+      "C:\\Users\\hsoliwal\\.m2\\repository\\org\\antlr\\antlr4-runtime\\4.11.1\\antlr4-runtime-4.11.1.jar": "e06c6553c1ccc14d36052ec4b0fc6f13b808cf957b5b1dc3f61bf401996ada59",
+      "C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\commons\\commons-text\\1.11.0\\commons-text-1.11.0.jar": "2acf30a070b19163d5a480eae411a281341e870020e3534c6d5d4c8472739e30",
+      "C:\\Users\\hsoliwal\\.m2\\repository\\io\\github\\classgraph\\classgraph\\4.8.165\\classgraph-4.8.165.jar": "5258d9218fc6413f4d14218a5a6e784528e349f60f48883b77de74bb478ebafd",
+      "C:\\Users\\hsoliwal\\.m2\\repository\\org\\xerial\\snappy\\snappy-java\\1.1.10.5\\snappy-java-1.1.10.5.jar": "0f3f1857ed33116583f480b4df5c0218836c47bfbc9c6221c0d73f356decf37b",
+      "C:\\Users\\hsoliwal\\.m2\\repository\\io\\github\\fastfilter\\fastfilter\\1.0.2\\fastfilter-1.0.2.jar": "38f8824d07c8c932fa50cc0175f32c0fff2fafb3913cd2f9571ac349c9631149",
+      "C:\\Users\\hsoliwal\\.m2\\repository\\org\\ow2\\asm\\asm\\9.6\\asm-9.6.jar": "3c6fac2424db3d4a853b669f4e3d1d9c3c552235e19a319673f887083c2303a1",
+      "C:\\Users\\hsoliwal\\.m2\\repository\\org\\ow2\\asm\\asm-util\\9.6\\asm-util-9.6.jar": "c635a7402f4aa9bf66b2f4230cea62025a0fe1cd63e8729adefc9b1994fac4c3",
+      "C:\\Users\\hsoliwal\\.m2\\repository\\org\\ow2\\asm\\asm-tree\\9.6\\asm-tree-9.6.jar": "c43ecf17b539c777e15da7b5b86553b377e2d39a683de6285567d5283888e7ef",
+      "C:\\Users\\hsoliwal\\.m2\\repository\\org\\ow2\\asm\\asm-analysis\\9.6\\asm-analysis-9.6.jar": "d92832d7c37edc07c60e2559ac6118b31d642e337a6671edcb7ba9fae68edbbb",
+      "C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-java-21\\8.17.1\\rewrite-java-21-8.17.1.jar": "7e654435905cf6afb9e659185773de0b75e4282c8e30c916ad15fd16b0fba9f4",
+      "C:\\Users\\hsoliwal\\.m2\\repository\\org\\opentest4j\\opentest4j\\1.3.0\\opentest4j-1.3.0.jar": "48e2df636cab6563ced64dcdff8abb2355627cb236ef0bf37598682ddf742f1b",
+      "C:\\Users\\hsoliwal\\.m2\\repository\\org\\apiguardian\\apiguardian-api\\1.1.2\\apiguardian-api-1.1.2.jar": "b509448ac506d607319f182537f0b35d71007582ec741832a1f111e5b5b70b38",
+      "C:\\Users\\hsoliwal\\.m2\\repository\\org\\slf4j\\slf4j-simple\\2.0.13\\slf4j-simple-2.0.13.jar": "3153fe1d689cffb94f1530b58470c306685ba68844de8857116e3b6ebb81d9f7",
+      "C:\\Users\\hsoliwal\\.m2\\repository\\org\\slf4j\\slf4j-api\\2.0.13\\slf4j-api-2.0.13.jar": "e7c2a48e8515ba1f49fa637d57b4e2f590b3f5bd97407ac699c3aa5efb1204a9",
+      "C:\\Users\\hsoliwal\\.m2\\repository\\org\\projectlombok\\lombok\\1.18.30\\lombok-1.18.30.jar": "14151b47582d570b4de16a147ece3bdbd19ace4aee5bde3a5578c87db9ecb998",
+      "C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\commons\\commons-lang3\\3.17.0\\commons-lang3-3.17.0.jar": "6ee731df5c8e5a2976a1ca023b6bb320ea8d3539fbe64c8a1d5cb765127c33b4",
+      "C:\\Users\\hsoliwal\\.m2\\repository\\commons-io\\commons-io\\2.17.0\\commons-io-2.17.0.jar": "4aa4ca48f3dfd30b78220b7881d8cb93eac4093ec94361b6befa9487998a550b",
+      "C:\\Users\\hsoliwal\\.m2\\repository\\commons-codec\\commons-codec\\1.17.1\\commons-codec-1.17.1.jar": "f9f6cb103f2ddc3c99a9d80ada2ae7bf0685111fd6bffccb72033d1da4e6ff23",
+      "C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\commons\\commons-csv\\1.12.0\\commons-csv-1.12.0.jar": "e11a33d65e5f2e92769c0b13c548e0c2da01e37c1581417ea3fd7d5d9474fee6",
+      "C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter\\5.11.4\\junit-jupiter-5.11.4.jar": "aa880e4afba87d447357e4c1fc098c5cb1d200cb9403496c00d3b35a5bd0e8db",
+      "C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter-api\\5.11.4\\junit-jupiter-api-5.11.4.jar": "ab83ef9e51ac4597d59d26b4b58812129550e2f579a404c8af7d09f5ce5b4293",
+      "C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter-params\\5.11.4\\junit-jupiter-params-5.11.4.jar": "02a6e015de7ce94ac7f256e7fa05b8091dea861fe79a555a7993313d0f6c7d96",
+      "C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter-engine\\5.11.4\\junit-jupiter-engine-5.11.4.jar": "cdf8ac59f3fad774ca738ad03890950eeb91833ef0e8908753177edd26f1581c",
+      "C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\platform\\junit-platform-commons\\1.11.4\\junit-platform-commons-1.11.4.jar": "9edd969b0d0670c54105bc91ae79bd1c6f503e12115faba82073b84c86bbc334",
+      "C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\platform\\junit-platform-engine\\1.11.4\\junit-platform-engine-1.11.4.jar": "b1dd998f64f9acadc15966d9cd3d08074662677b3e390f0a38fcbf0bb4c72330",
+      "C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\platform\\junit-platform-launcher\\1.11.4\\junit-platform-launcher-1.11.4.jar": "d7430bd029e7fcced53ee445e4d2d1a8a1e043ea4c4df43b6335a857f79761ae"
+    },
+    "recipeSources": {
+      "com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe": {
+        "content": {
+          "kind": "crate-resource-utf8",
+          "path": "bootstrap/recipe-engine/M3HashPinnedJavaSnapshotRecipe.java"
+        },
+        "sha": "761980021499f9339883de544a48a274cad68371"
+      },
+      "com.synexia.rewrite.M3ScopeInference": {
+        "content": {
+          "kind": "crate-resource-utf8",
+          "path": "bootstrap/recipe-engine/M3ScopeInference.java"
+        },
+        "sha": "6c68651b3c8f4bbbc7b1955e575f435da731fc7a"
+      },
+      "com.synexia.rewrite.M3EditScope": {
+        "content": {
+          "kind": "crate-resource-utf8",
+          "path": "bootstrap/recipe-engine/M3EditScope.java"
+        },
+        "sha": "5e4cf8ea8df34090b5a17494ace72ab907161b9c"
+      },
+      "com.synexia.rewrite.M3ResourceEnvelope": {
+        "content": {
+          "kind": "crate-resource-utf8",
+          "path": "bootstrap/recipe-engine/M3ResourceEnvelope.java"
+        },
+        "sha": "1b0b84ab1dd08aab4c8edb5835bd00615d0cf908"
+      },
+      "com.synexia.rewrite.M3ImageDigestRecipeTest": {
+        "content": {
+          "kind": "crate-resource-utf8",
+          "path": "recipe-test/M3ImageDigestRecipeTest.java"
+        }
+      },
+      "com.synexia.rewrite.M3ImageDigestRecipeQualification": {
+        "content": {
+          "kind": "crate-resource-utf8",
+          "path": "recipe-test/M3ImageDigestRecipeQualification.java"
+        }
+      }
+    },
+    "target": "m3/core/src/jdk/m3/text/SharedLexiconImage.java",
+    "preimage": {
+      "kind": "crate-resource-utf8",
+      "path": "recipe-resources/SharedLexiconImage.java.before"
+    },
+    "candidate": {
+      "kind": "crate-resource-utf8",
+      "path": "recipe-resources/SharedLexiconImage.java.txt"
+    },
+    "atomBefore": {
+      "kind": "crate-resource-utf8",
+      "path": "recipe-resources/atom-before.txt"
+    },
+    "atomAfter": {
+      "kind": "crate-resource-utf8",
+      "path": "recipe-resources/atom-after.txt"
+    },
+    "existingTests": {
+      "SharedLexiconImageContractTest": {
+        "sha": "95ec4b513970d95d1560db5725063284ab423e0e",
+        "content": {
+          "kind": "crate-resource-utf8",
+          "path": "incumbent-tests/SharedLexiconImageContractTest.java"
+        }
+      }
+    },
+    "referenceSource": {
+      "kind": "crate-resource-utf8",
+      "path": "reference-src/jdk/m3/text/SharedLexiconImageReference.java"
+    },
+    "reuseGate": {
+      "schema": "M3_IMAGE_DIGEST_REUSE_DECISION_V2",
+      "status": "INVENTORIED_BEFORE_CANDIDATE",
+      "owner": {
+        "repo": "hsoliwal/M3jdk21",
+        "revision": "778cd3eac266974e7b5155e79838f74ee516b535",
+        "path": "m3/core/src/jdk/m3/text/SharedLexiconImage.java",
+        "blob": "570a22f733499729bdc0fe48813f755e52ebe963"
+      },
+      "category": "precompute/immutable-lexicon-admission/batched-SHA256",
+      "reuse": [
+        {
+          "owner": "Existing SharedLexiconImage",
+          "classification": "REUSE",
+          "mechanism": "Existing per-record recordDigests parallel byte lane, recordBytes view, range/hash/order validation, whole-image seals and no-SHA256 refusal. Keep public methods/fields/format/storage unchanged."
+        },
+        {
+          "repo": "openjdk/jdk",
+          "revision": "890adb6410dab4606a4f26a942aed02fb2f55387",
+          "paths": [
+            {
+              "path": "src/java.base/share/classes/java/security/MessageDigest.java",
+              "blob": "36c92df556e072d922e0e635964f71132bc1f0b3"
+            },
+            {
+              "path": "src/java.base/share/classes/java/security/MessageDigestSpi.java",
+              "blob": "ff37569876f7baf220b6e0a069bbf39b804ba5c9"
+            },
+            {
+              "path": "src/java.base/share/classes/sun/security/provider/DigestBase.java",
+              "blob": "dbe59396ac0b62527f544f18bdb60545e4f3ad38"
+            }
+          ],
+          "license": "GPL-2.0-with-classpath-exception",
+          "classification": "DIRECT_USE_PLATFORM_API",
+          "mechanism": "MessageDigest digest(output,offset,len) resets completed state. Reuse one constructor-local engine and bounded32-byte scratch, then copy with the existing System.arraycopy into private recordDigests. Default SPI fallback remains valid and may allocate. No GPL implementation copied."
+        }
+      ],
+      "typedAtom": {
+        "inputs": "Previously sealed version1/2 M3LEX001 mapped byte view and bounded directory records",
+        "output": "Identical provider-isolated record SHA256 table; one constructor-local32-byte scratch receives provider output, existing System.arraycopy publishes a separate private table lane.",
+        "effects": "Constructor-local computation only. No changed lookup storage/API/lifetime, global/static/thread-local cache, final field or native owner. SHA providers never receive the published recordDigests array.",
+        "proof": "Maven/OpenRewrite exact-source replay, original contract image/seal oracle retained, actual constructor run against direct ByteBuffer subtype compatible with MappedByteBuffer; exhaustive UTF16/record/ordering/range/hash/corruption/provider cases, concurrent independent construction, source/API/non-constructor bytecode fingerprints and measured startup allocation/timing. No filesystem/map syscall/full suite claim without an actual run."
+      },
+      "generationCalls": 0,
+      "agentFindings": {
+        "headerSurface": "Potential metadata wrapper allocation source sites; no runtime proof. Existing R232 Optional experiment not reopened.",
+        "precomputeConsumers": "No proven avoidable full-array clone caller in 8-read bounded inspected surface; preserve defensive-copy tests."
+      },
+      "selection": "QUALIFY_CONSTRUCTOR_LOCAL_REUSE_WITH_PRIVATE_TABLE_ISOLATION",
+      "counterexample": {
+        "input": "0661eccb09eca7993a8ea5ded7e2202bbb37c87c",
+        "receipt": "d0a15aca68faa29e42cdd76b19ab1ddf93f9b001",
+        "sha256": "5a32c4d53eba1eac5c8f3e920c1421ee6249739266a9afbc9c1e3a7b1b4556e4",
+        "rejectedSource": {
+          "bytes": 15533,
+          "sha256": "26cbf4a95c578ade0e60b18f9939f50560adf504da31131535593cf5ae4bd328",
+          "gitBlob": "5aa4bf85b5f90a5a457d3f6692767d7d71e06961"
+        },
+        "oldCandidateCorrectnessTests": 64,
+        "newOwnershipProbe": "Original1passed; direct-table candidate1failed with provider-retention private-table assertion; expected refusal observed in two fresh JVMs. Not admitted."
+      }
+    },
+    "reuseGateBlob": "4674da9d45603708cde4589964f354308f56c55c",
+    "runAuthorization": {
+      "proposal": "158e58ed717f2590eccf5edb99825e37e2b9e448",
+      "userReply": "call_94bbc71f8ad04ca1a7327c84782f16fc: Approve S routing; same cap",
+      "capBytes": 571473920,
+      "reserveBytes": 8589934592,
+      "plannedTransientAllocationBytes": 4096,
+      "oldR217FilesystemPacket": "NOT_RUN"
+    },
+    "readOnlyBudgetBaseline": {
+      "receiptBlob": "1091e30d98c3d7ed72c0a5c1d9c49e994895fd11",
+      "receiptWrapper": {
+        "schema": "M3_ZLIB_UTF8_RECEIPT_V1",
+        "uncompressedBytes": 31283,
+        "uncompressedSha256": "54ffe30cf4919db672b4fcf9a366ace980dd171e00281493b566bc27aa26b2b7",
+        "payload": "78daed3d0d73dbb88e7f85e379379bce8b1491d4a7f7ba73699abca69734b97cecee4ddde9502465ab91259f24e7e3edf4bf1f48ca8e94c4d93871fae66eed4e6d1124011004404804953f7a151fc931ebf57b87f4ebf6c9c9f67f7f3d3e39fa75fffdee095cecee1decffe3c3d9d75f716fb357d5ac9e56d0f278fbf414caa59c14650d80cf7fa8baa184aa6fec925909cbb298f10b68334945af4f6940dccd1e2b8797d0b8b7d31f0c8ecb6258b2f17b56b3c1808f0a5e64ac9637834196c683c1985dca7c30601306cc59ba64513bb2b13b18c429d48c2f739b8f0510b00af5f54e7de5f544fd24f0b507247821e4b57555941780555ea7bcc8ad710a54eb14ae88437cec503c185423564a61b1b264379690152fd3495d9495698231190cbee5a935298b22190ce0e79be4355c1463fb7a9c298aef3587b692879d159c656f4fefd007e1e4b555cbf1a4c58b1e5649080c4a75b546928907d1d9354bb3b7cb8ca964f9505a7c5a968aeeff4c59962629d7adf410d448e6343777fa5be7952cabad515564e915cbb6ec31d952f5550a92b859cc949d0ef3a294db9770cde2344beb9bb730fb95d45de4b5e436cc7af576d0b37e87a9e4177d10e5a087a06c3121ac6222f3eaad521a3b6695dcd2571930ff76fbe0c03afff469fb70f7bd69fffbef7d0bb83c9665a2b5660efc20d9e4fd743c39ca8fa6f5517228c7c0f26e591665d3667ced61329e77d0557b6926979ea551f55596e557d0e97f9b801086739433168e593d5a1e2b74b647302989c1f75e0b212dec7a3c1169b9343e5d63304d6156ed51317ec650a1d38c9d699ed6f6b7e924ad019b9ad3a9d2237bc24ab07399d9326771268599f8a653510eed6b59a6a02755ce26931b1b0c1bba807c96d163d50eb8bcaeada2643c935629793a91731d6e8df5618a3983c19bb2856df8e758be7478c2bdd0720337862fe15ab188a1c86312385242bdb44c173d1322cb0c096e4829f7a5cd452984b197c1000cc65894b198c100d8190c6ed818ea00d7853497c426adb20545fb1b2b7f5e02a5b298525e953019aa565f588acfc120b47160e32ed432c09550e160e9f7a928e8f25478311e0c1256814a5d2bc17c83e5a252cec910698a96004b07872f94e4b0afc8deadb14cc5ea499bd25db27ab4ab23a9469114e598d5dd911998558dc14d3d3cf6768b1532342ec4346b49c1942d65eb6309ad2d6550d57d961e6eb76249d537933bbaa120d6b7aaa4d879584cad06cb3373df14eaa2c82a45012cab8855206089340147846dc790ee56581abe04c9b4180c60b92e2fa6d06e98fe735ccc7f342a6cefa5b9eaa981561bb6ecc0bec545a5c792832f56d273c11b35d80dd06ac196c09ecbda4802664d5eaae889e92f6b02319ed2dbc1c08350ce76ba50cb005740a88b7f69b45a3a26f6d40a392ef26a7e011e603c29a5921cb689af88dcadb14cc54a7cae5936eefa5cbd78acd0b35f3f44e4fa393494fe8e535e16da0bb4af1b878a55181fdcabb00c7cd9d18c44394aab5adf4b0c061f44f9e1b644d4724fba50cb009725a3ee4d727e03718fb2fe03533a372502334dbb404bc396b64759c7254b95aeb13c2f6a1d0b29022ef0ec74809681ad7ed1eb12bee34f3b0c3ccb97b2bccecae6c7b5ca695ea710660e5ce5c3f05db865c02b335c15462afdc3b86db43ab834c025d57c98d6a329dcacf28c551528d764d4bd766db01edf6b03ad06b6ec984c5cab2347884a67bf4dd867c25adbeb80ad19f4998352aa92a499b6e1f6b512136983f412b47c147b0550568d9bafc8f6f59505172f426529136de153c59723ad4b295b4855f1e548192caa37555ab510cf40cf42bee8bec02278c1ad01c12f58436a59d5eeb7ee3506a7e7b44196862c6fc1e910422091b2bc53b0e0daa83bb907d7fabeb41a5659a2f8d63f56958e2726da86988a76a19601be08bfe6be8b5c31fe3ccccd63a8ac18c785ba876e7e410aa14d9d19c06aca2bf3a1ead10c704f95da3877c096812eb728e9eecaf1b4afc91df4696191e7e2564f10f8bd226eeca103b6f0b3ac6171a4585d6a4aa41324569796812d1d1fa8e730ea473f8869cad6bce8a935ccbd03b60c74a5a48c223f4c4e29f46b90d4f795d522aaa6f65508cb7c98e672116153fb32c2b7374506f7fc7668ae4fb843fb6ebd095e564e7d36f005c49b91bf0eed8c4d7330a97221f5598316fde6a172554c4b6e1e42c2baa77e7ec056c0213d30487726d3635567ebc84c511fd5f5a4bfb58589f25ee0e8fb5e885d7fcb713197326604c7b1eb1112f99ee3112924a654e2c8dfeaeca3684cd89791748390f9891fbad4f3b81f70e170c1b9c471e84711218e8c098985f01d874b11872e6024c48b819cd048be890b7b4c6d3dc0ca3ea4dbea0258be4c852cffabb34da09bbf7418703b3ccd6a13a8f67a9b3df590564dc6884d2b7b5c7c2bfaea7972f3e479924d41a9fa54c50c1adefbb2d903e77a21eb7d0121455adff4fa7ff4e21b082e7a7dd7c338daecc19411cfeff55f2c1fe00e82df77591103321912467c2f7212e270c64316cb98baa11fc6dcc5614013e93b49e839bdefc08156b963b87153dc7525ace5fb09047a295bac63401cb458f729119c88c08b80b3904721e358b8ae74812d87b24446cc11aee7c611b0ce03dfc16a1c32e02177a3d8a51dd643194a40e74b5f86b143a2c80d48e2610238e398f889e3badc77c344b1be90d93308dfda0cd3d0755a0cf340043e8fe35800fe204c308e1337f62409994b132776fd8450c1e3248ec30883ae081fe6c0f563ec784cf85d5953cca91a3e26a117481e33cac284e320f113816196e2008356c128ef31fc98feb6b8a7a1efb6991791f48583230aea4a80649088183496e128f4210c886227912177bc9011ca0467847b7e4412ca48184b2fec300f6db528022f912c90127b3e0d43e251110a1e51465d1910cf91bdefc03d380990aaa3764ed9448a5ebf2ea712c0199b54529c4af0204269b64d28309c1543b5d79a82fe0b349da08fdbbf6e7f3d3b3a3af87a747cb67ff4e9b48fd4ded3dff58e585aa93d9853edbf0ee518dddd2e338059e914ecedac507b6083fcf3fea7bda32fe894c3ed7d9a0f113858d478b6cab6ed41396fd2bab42cebdf112c40767593c3a8987d0977a833d1f7c7d4ea7852f59c1e5077f721d12f80a485f2dd34cd542bf4b4deb8d515a1a42cc6a8d991edb2f9e8e7b3ea83befc59336ba1109072532d8f8536844c9872793c4bdfa0ff78e2601a12af3ed78a88326d544e7394a4795a8d801e4b209641248c1084586a7868f62130c779cd60a52f2b508c692e0cfc4bb799d36e565da41350ee079a75b055352beb079b75b0b1b858d0ac8b6d0a5ebeaa9269f628b6848118c44343f090ba63ed0cf2e1919a66ad413e86ad35c8c7b0b506f928b6db413e86ad35c8db66eaff03091edba7a7680cebb1de826fdaec1c9f7f3dd93efcba737478bc7fb06b1a9945ae7a4b917e9aa5ae96b0b3a77edaeee07cffe03d3a3ddfd9d93d3d7d5d526745cd32a41e39f641adecd00d50d5aade9bdb49dd472a10b430b6303dc3619ff87deafcddf1e0fb9558ece975e081f007bb016e473f1e4e1ce67a3ec382cbc0a709c42ed21322169e90328938e66ec8184db82bfd80fa9825046288d0c5842634ea2c6ab07261c1e24040a4e3479e0ff108f57d95c513c59eebc00a29858725558bda6dea4f9109b3eb07219b9ca5fe78d4a5fe3af5679dfab34efd59a7feac537fd6a93febd49f75eacf3af5679dfab34efd59a7feac537fd6a93febd49f75eacf3af5679dfab34efd59a7feac537fd6a93febd49f75eacf5f3bf5a7b38ff22f4bfdc9e490f19b5524ffb4302d3321662694ccc7fadea5bb95d14c8be3cd7685e8d76664fa99ed3ad5689d6ab44e35eae33f4b35a276e447eb54a375aad10f4d35c2c4fb0ba71a052b4d350a569a6ae43c2dd528f8b35423f57f0f2aa71003a08de04d5f0110fa780eb11cfa6842e8fe9d45a0af1ea2b332ad8afc442a3156bbd78cd7273a8aa8b6795954d501cb657594249504480e7e0c5655b19f4fa675b5f1c6d040e850d6a3429ceab5127dd68fe03e413c85dea29f1e5d857eda4463dd75d6fa650ccdd11dcf76c6ce6e26200e40fcd39719af6f7f41f3c407fb3caf80992a49a53848f30b9dadd0473fa5798d16326ee7fa6747b32acfeb04fb1b1cecf5f3974d041d3751a7005f6f7e9ad186cf52684d4d23de374fc2c2dbfdcff38bbcb8ca919999272150d362ab7cb3b2de994fc6b311bd50c11e217b3f8bc52e6592c1c2661b71d9697e595cc88da6a49a4118ed3c82443dbf342338488177582b77191f6ddc42340e88effc552279dc4227d3384bf989ca30fa34cd3210d0ee7852dffc0a0b8cd0cbcb690d72d7527d05735c82fadaf656647bcbccf8da3e400a106c7dccd3f7690963bb95d27f4a39a9f6ebeae80a5c4f32ad58b603a142f93a76f20c2efe42f672ab00800f68c852a538ccb4d188cc74fbc07291c96d1d0915e5df0cca59b15158e78751da58dcc1682921deea6deef185f919eabe7612aaf55e73b2ef0333beb3d15d70af87acd63bbee93f8d7b956396d7297f8df0f6798cac97d6152dadcfd483b50155a0761a760a17bfa5b928ae660f6d8fe17e539697b2fa0818418ae09bdea9dbecd7309fe7b0b1369e1519cfb374606d3a02baa439af35bcd2a1bc115e750a84b21d754ee35d518f8cc040784713e57d586670bc8215bd90a375e0ba0e5c970f5c5f6a066b4752740432db1683a0858f1ac7ab1fa7ed8ca6f905c80f70a9bd582d4f56a6f235d6e397b2b45e9b57b436bf5837feff9bd7fda3d8bbbf1fefee9cedbeffbafd6effebc9eedef9e9f681399adde44f40afdd6b2eb56c412f503d2a251368d01bb354a56cdc17c83e48c2ecfa9db17228eb7977bd4353b3faf99efea9ae1de3f0cd43d49e31791ac5fd741b35fa8d87b370fac4087b874d2b29507cd36f09695b6f2a80301aab7dda8cdc8ee5c9d90186c30754fa07cd8043fff533f07f73a88a4de510d34c965b3a03619adbfa18986ecced592e9a7d0822688ec7023e55d0d8dcd07d36b6729ab73011277c3626333f7354989a68ebf3eec9c9d1c917044bc6188489e6a77b9b5d5d9d8ea192a84c92abdde41cea61dabb66ac738fd24730e96a2e904a3c0163bb4aeb11623992c6ba30dad8850a74c9b2a984e2dc93c27016d1786fd21b0ca96276fc58ee378a8336ee36d0c3a39ef702e40b90128fde45da492dbb15cae1ac04c81ac9426820d5f09b4a8d306c34637508dde720bc8bc5f59c05c233af0030697333e1e9349a630d3a64391bce8f884b85712eca079a194524fea3c4c0854a7ec33379eb2b14def9cc88e65212b4d1a9307a40c2d5607f10397e19eb72316a82c96ba1c681fb22d44c7bdbbf398ef310f6c07b09f2bf61e5f11ee4da274be8a4ea5fedce5cd9695db25a0e6fee99f782666672a3579b006f69d40733d0a13e65ad6d090c28d6366552e7d0c68246cda2e8fd709a015d9664dc74afd27c984913dac21274aa8b674db1c308da78b8d22ce3f4d9633ed57954ad69bc57d3096c179198e9992eb47c4907de8448784598f09fc8bdd3433e82c7799c239ea5b66ebe0317b7ea3e83681c118e9e8e43142a3cb98b8284ded3518c1f42e0046d04cf8b3ad193c3ce1999c7c34db4f0cef4eeb23dc9e435fce8272257459989ea36b03b985d18c86e3e623987b06b635ed1c42dde2ad0df437b5f419643ab66eb378810554cb8033def12a0fe0a08dc438acdf2f7daef2cdbdbde3f383fd9fda1ef2cf38368997796b9affaceb2d99dc59ec90ead0b347312c302985eee60c69d3467b83d6932c69f96efdc5f7c7fb3ec2d0bb27e419f3fc86c82f097f630dbd76705aaa444f548a2649a652a2b975f2095f920519168b8465f6da252aad3ee48bb2c435bd55a125550e023bb8df6a4dd76aa1649d3f8f7a6b196b17e1593212b643c1da2ac18822c87f62266f78a128d8b52a23437af9451c2617131ad5b8c2225bb495155a9c25e15999621f00f760877d7483f84d2e32db2acb852acc13299c27a59f5dbc4669243cd69227e955ea433870e2a0137b27902920637b625d26a92b19badc3ed5f773f6dddc651ea694dfb19d6e297e311ecd2d6398c28c28c8511c13e8d3d2e48c408f5a913263288442c021a8824e44182a328e6dc75b9c3b013721c46010b58243be7305c3f4a3c68eeb9cca154062e8ea5e73a549020f1b92b29f7dd98e3a0f7fdfb1775fe4267972ae6967a5db2eaa01eff357f531338d0f9e2bdbea70e2a559534974697f54b659bd46e7d9d152a26eaf5f57bb9be6ff6963cacd522de00e6e4835bf2ce2df9e061f2ead0893a8d52dde435bb565817be08700c9a73e5bbad0b7dae6bc8b90a31d43be5aa5abce558fd2152eb3796e9b7effd26afc1b6f4d5440a9d2061c04a75f50b010d65abc833fd2abb7df86a9146eaac4235187cd46f538000419f984f739e4d855cb6fd6000da4f89ea760d5f9a1375accc1cdaea6867e8b4dfdde87b38f4402d032f0a089684f03871641c07a04cd277a324c48983a9e3c60c27be9b24b12b434e7cf59151d43de24462ee3a128731f6a5cf404f99243ce011097d07b4327193d84982d0efb5df476cceff2890d946989d306b36155abc47aed7663d819893088f520a3cc52c0a61109e174491c348c2890cc38462e2084f78cc73a84b05f3451c6109e3f0439f74584f644429969827b17af92473c38885108c0acc5de661e90b0e4b190b149fcd46459b3537689f1b737810cb004417f81cacdd03a98830644c100eeb498c3d19701980171041a20ea9c50ca8ba89883deaf991d7156a9870e9259804d40d481cc2d8988c899bb8947a4eec387ee240af589fd153af559465fb4c984bda122352f230205e8479c012d7e198b224f01c4c9298383289430a2c8b9844c489782443f56a4f11058107b20def9c1d74933076232724320e30c6318d62376458781e26d4c16190304e45622456ca0f777923c46ffb49e9c2d4791ea351c87d89454c639ff832013c9e4368c28016d00bc089f004bca78c804d0f2830eef88cba1de6008df09910d2550ac02341290922181c0d5d2e5c16b821f19843f479b50a6e92f56b44ffe825ef242c4770e905187c6da8fe74703583299fb3ad0e1175ab1b10d472367967c6a6ea030a52d44e5865843415a117461175bd48cdcb5e29012dc4f03e769dc8532f2b9d48767114eb1ee28c5517db59d6eca3a8bf753c27fb45b1cd8b89f2921e9ae6e03053b51588947740b377f79b93323fa340ede5a9854aed8ca1d9eb397514bb657cacf5fee0006dbfdbd7f1893a38f333840f650a91ce0e326e0ce9f76822e5cc36515eccb02063a6081c262b6f90b93d86b57d068648eb325547ed80968d3e152a821253c06b3c93da71cc878a1ca084c57f02eb7fa2fc9cada653e6d21ccddd8101c1f89defff0b9b12139d"
+      },
+      "allocatedBytes": 571469824,
+      "scope": "Charge the unchanged read-only F input footprint at the sealed R230 allocation. This is a budget charge, not a fresh F allocation audit. No F output is permitted; new build output remains S-only and monitored under the same545MiBcap. All consumed F/C cache inputs/driver/POM are hash-pinned; existingimage read-only and before/after verified."
+    },
+    "workOrder": {
+      "schema": "M3_IMAGE_RECORD_DIGEST_WORK_ORDER_V2",
+      "scope": "One existing constructor atom. Lazy local SHA256+32-byte scratch reuse; copy into published table. Preserve count0 path and first-record validation order, all formats/fields/API/storage/lifetime/native owners. Retaining provider regression included.",
+      "generationCalls": 0
+    },
+    "qa": {
+      "kind": "crate-resource-utf8",
+      "path": "proof-src/M3ImageDigestQualification.java"
+    },
+    "sources": {
+      "jdk.m3.text.M3StringPiece": {
+        "content": {
+          "kind": "crate-resource-utf8",
+          "path": "production-before/M3StringPiece.java"
+        },
+        "sha": "62506fb9b3cff0e6f24e856648528db58c45b92b"
+      },
+      "jdk.m3.text.JoinedM3StringPiece": {
+        "content": {
+          "kind": "crate-resource-utf8",
+          "path": "production-before/JoinedM3StringPiece.java"
+        },
+        "sha": "765d43267bb22a3650b622c01cb29b550e1deb01"
+      },
+      "jdk.m3.text.LocalM3StringPiece": {
+        "content": {
+          "kind": "crate-resource-utf8",
+          "path": "production-before/LocalM3StringPiece.java"
+        },
+        "sha": "387ae5e0c656177f1df663fd5029d4b31ba2fa00"
+      },
+      "jdk.m3.text.LocalM3Arena": {
+        "content": {
+          "kind": "crate-resource-utf8",
+          "path": "production-before/LocalM3Arena.java"
+        },
+        "sha": "025ce8014cba8a36a9e496bb0a56faef57cf0968"
+      },
+      "jdk.m3.text.StorageIdentity": {
+        "content": {
+          "kind": "crate-resource-utf8",
+          "path": "production-before/StorageIdentity.java"
+        },
+        "sha": "8cd2ae86bee8f04f0d69709eed12897ff5c6a71c"
+      },
+      "jdk.m3.text.SharedLexiconImage": {
+        "sha": "570a22f733499729bdc0fe48813f755e52ebe963",
+        "content": {
+          "kind": "crate-resource-utf8",
+          "path": "production-before/SharedLexiconImage.java"
+        }
+      }
+    },
+    "performanceJvmArgs": [
+      "-Xbatch",
+      "-XX:CICompilerCount=2"
+    ],
+    "code": {
+      "kind": "crate-resource-utf8",
+      "path": "qualification.py"
+    },
+    "priorRun": {
+      "input": "2f161cbd239bb3a39e61b711c6e34c8c592551ef",
+      "receipt": "3a5ad970ea1018ff12ab0158c372d5cc0380d82b",
+      "status": "REFERENCE_NAMESPACE_COMPILE_REFUSAL",
+      "reason": "Reference relocated across package-private LocalM3Arena.owned boundary. Rename original class within same package instead; no production change."
+    },
+    "priorQualifiedCandidate": {
+      "input": "934bc9085496513b61182c822d937c355c8c1c3c",
+      "receipt": "c8387f262655898b10dbd43d5391bdb13a5c5a62",
+      "sourceAfter": {
+        "bytes": 15533,
+        "sha256": "26cbf4a95c578ade0e60b18f9939f50560adf504da31131535593cf5ae4bd328",
+        "gitBlob": "5aa4bf85b5f90a5a457d3f6692767d7d71e06961"
+      },
+      "status": "REJECTED_AFTER_NEW_OWNERSHIP_COUNTEREXAMPLE",
+      "probeInput": "0661eccb09eca7993a8ea5ded7e2202bbb37c87c",
+      "probeReceipt": "d0a15aca68faa29e42cdd76b19ab1ddf93f9b001"
+    }
+  }
+}
