@@ -1,0 +1,212 @@
+{
+  "schema": "M3_INSTANCE_UTF8_COMPARATOR_QUALIFICATION_R246",
+  "status": "PASS",
+  "failure": null,
+  "reports": [
+    {
+      "stage": "instance-baseline",
+      "pid": 10668,
+      "packetIdentity": {
+        "bytes": 53316,
+        "sha256": "7d28aeb4776eb3d8f4f69e63242b1aa76d5571c876b6ad2b3dee9ae70f1b655a",
+        "gitBlob": "aeb0dedc019fe4cbd41b4d421dbc9b0c7cc9c3c2"
+      },
+      "exit": 0,
+      "reaped": true,
+      "elapsedSeconds": 4.203,
+      "logIdentity": {
+        "bytes": 1043,
+        "sha256": "ae9fb68bfc9e027b0ada8e8d1ea21fb3d67f15bb670f533a709650a8a8fa1e43",
+        "gitBlob": "e0fb16a48b3a0e0645f0ec1f7af1775729f357ad"
+      }
+    },
+    {
+      "stage": "instance-registration",
+      "pid": 9528,
+      "packetIdentity": {
+        "bytes": 131326,
+        "sha256": "496d57a23c0d800bee2f363b0c7d6a3f4b81e75bb9c6120a628b3cee19597116",
+        "gitBlob": "bb8fcb7df9869dcf842e475f272c25341ae62a2f"
+      },
+      "exit": 0,
+      "reaped": true,
+      "elapsedSeconds": 7.64,
+      "logIdentity": {
+        "bytes": 947,
+        "sha256": "f02c910b314b52870fa3e4474442d0c6251fe3813d6cfacbcacac6d44981c404",
+        "gitBlob": "8b2c8a6b3885464347eb8cdeeea53131eca202f6"
+      }
+    },
+    {
+      "stage": "instance-owner-replay",
+      "pid": 11744,
+      "packetIdentity": {
+        "bytes": 131574,
+        "sha256": "3059468d9d55c7c3da5677c77da8a7427949a2b185f1156c79185507088e60d2",
+        "gitBlob": "dab62e54b9868deb503f01bcbe26cce8a36e0dbf"
+      },
+      "exit": 0,
+      "reaped": true,
+      "elapsedSeconds": 6.203,
+      "logIdentity": {
+        "bytes": 947,
+        "sha256": "0b3d1c83ea1ff4cb213fcc119f4adbeb132453d6cb82b1a8d7c0ab685b4abc5e",
+        "gitBlob": "98ab290e274a6e5e492c979907533ca0fe8ba5e6"
+      }
+    },
+    {
+      "stage": "instance-after",
+      "pid": 42888,
+      "packetIdentity": {
+        "bytes": 53704,
+        "sha256": "9b7383970457432a097111e6fc39d1721d6869e2e587a749c74c8aaa472b2234",
+        "gitBlob": "ca59b4013e39366b5353fbdc5720eae8bcddad8d"
+      },
+      "exit": 0,
+      "reaped": true,
+      "elapsedSeconds": 3.61,
+      "logIdentity": {
+        "bytes": 1043,
+        "sha256": "12654357823a60c307a6d05031435e8b550b11043fed0ef40c0d664ca27037d1",
+        "gitBlob": "8d4509b6f2e94fc78384406bfdb0c97f28f1788d"
+      }
+    }
+  ],
+  "results": [
+    {
+      "M3InstanceIndexPrecomputeEdgeContractTest": 59,
+      "M3InstanceIndexPrecomputeTest": 25,
+      "aborted": 0,
+      "encodingComparisons": 1408801,
+      "failed": 0,
+      "failures": [],
+      "found": 5,
+      "javaVersion": "21.0.9+7-LTS-338",
+      "measurements": {
+        "compareAllocatedBytes": [
+          5000000,
+          5000000,
+          5000000,
+          5000000,
+          5000000
+        ],
+        "compareNanos": [
+          3484400,
+          3465100,
+          2626100,
+          3133200,
+          1852700
+        ],
+        "lookupAllocatedBytes": [
+          33300456,
+          33300456,
+          33300456,
+          33300456,
+          33300456
+        ],
+        "lookupNanos": [
+          21062000,
+          20205900,
+          18631000,
+          20687800,
+          13537000
+        ],
+        "queriesPerRoundPerOperation": 20000
+      },
+      "mode": "before",
+      "passed": 5,
+      "skipped": 0
+    },
+    {
+      "aborted": 0,
+      "failed": 0,
+      "failures": [],
+      "found": 3,
+      "metrics": {
+        "registrationOwnersChanged": 1
+      },
+      "passed": 3,
+      "skipped": 0,
+      "tag": "registration",
+      "generatedIdentity": {
+        "bytes": 15342,
+        "sha256": "52e86e205f8eca51404167cbf3452f34470e0143e3d1e97ceae2c0d33186097c",
+        "gitBlob": "70fb6baf9d5772950e2f16017f320ceee48de397"
+      }
+    },
+    {
+      "aborted": 0,
+      "failed": 0,
+      "failures": [],
+      "found": 3,
+      "metrics": {
+        "indexOwnersChanged": 1
+      },
+      "passed": 3,
+      "skipped": 0,
+      "tag": "index",
+      "generatedIdentity": {
+        "bytes": 9984,
+        "sha256": "fc2d6bf85df01fec9fb7149e357f5f3160f1e2ec747ff663f8be9a11d63548ca",
+        "gitBlob": "d63ab6113aaaaca413e4657ab5a50b1a67f6ed37"
+      }
+    },
+    {
+      "M3InstanceIndexPrecomputeEdgeContractTest": 59,
+      "M3InstanceIndexPrecomputeTest": 25,
+      "aborted": 0,
+      "encodingComparisons": 1408801,
+      "failed": 0,
+      "failures": [],
+      "found": 5,
+      "javaVersion": "21.0.9+7-LTS-338",
+      "measurements": {
+        "compareAllocatedBytes": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "compareNanos": [
+          1467000,
+          1014800,
+          843200,
+          1702700,
+          1129100
+        ],
+        "lookupAllocatedBytes": [
+          6262472,
+          6262472,
+          6262472,
+          6262472,
+          6262472
+        ],
+        "lookupNanos": [
+          12045800,
+          24651900,
+          39697700,
+          12475400,
+          11570900
+        ],
+        "queriesPerRoundPerOperation": 20000
+      },
+      "mode": "after",
+      "passed": 5,
+      "skipped": 0
+    }
+  ],
+  "storage": {
+    "before": 0,
+    "after": 0,
+    "readOnlyFBytes": 571469824,
+    "cap": 571473920,
+    "reserve": 8589934592,
+    "free": 10926833664,
+    "peaks": [
+      571473920
+    ]
+  },
+  "generationCalls": 0,
+  "scope": "Existing Java instance-name index comparator only; actual generated owner, original tests, unchanged public API and storage. Encoding oracle includes malformed UTF-16; no new native code or ABI/platform proof. Allocation/timing are fixed-round local observations, not global speedup claims."
+}

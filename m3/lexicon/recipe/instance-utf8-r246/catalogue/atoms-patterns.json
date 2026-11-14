@@ -1,0 +1,58 @@
+{
+  "schema": "M3_INSTANCE_UTF8_ATOMS_PATTERNS_R246",
+  "version": 1,
+  "owner": "m3/core/src/jdk/m3/text/M3InstanceIndexPrecompute.java",
+  "atoms": [
+    {
+      "id": "scalar-stream-order",
+      "law": "Unsigned UTF-8 byte lexicographic order equals Unicode scalar order for well-formed scalars; consume the original UTF-16 stream without allocating encoded arrays."
+    },
+    {
+      "id": "replacement-compatibility",
+      "law": "Each unpaired surrogate is compared as '?' to retain the existing String.getBytes(UTF_8) replacement behavior. A valid pair consumes two units."
+    },
+    {
+      "id": "prefix-order",
+      "law": "After all compared scalars agree, the exhausted input sorts before a remaining suffix; return only -1, 0 or 1 like the old comparator."
+    },
+    {
+      "id": "name-identity-and-lifetime",
+      "law": "Keep all original source/revision/fingerprint/normalization fields, immutable public views, rejection behavior and reverse-view ordering."
+    },
+    {
+      "id": "exact-path-registration",
+      "law": "Admit exactly M3InstanceIndexPrecompute.java through existing hash-pinned AST recipe; neighbors, traversal, duplicate/missing/drifted source refuse."
+    }
+  ],
+  "patterns": [
+    {
+      "id": "M3.UTF8_ORDER_WITHOUT_ENCODING",
+      "version": 1
+    },
+    {
+      "id": "M3.HASH_PINNED_AST_SELF_REPLAY",
+      "version": 1
+    }
+  ],
+  "generation": {
+    "calls": 0,
+    "classification": "Bounded private implementation maintenance under existing API; no new runtime owner. New-runtime generation lane remains held while Chrome local AI is unavailable."
+  },
+  "agents": {
+    "count": 2,
+    "writes": 0,
+    "lanes": [
+      "UnicodeX JNI stable-input parity and ownership source review",
+      "wire/projection/catalog identity distinction source review"
+    ]
+  },
+  "tests": {
+    "recipeJUnit": 6,
+    "newBehaviorJUnit": 5,
+    "behaviorStages": 2,
+    "encodingComparisonsPerStage": 1408801,
+    "unchangedContractChecksPerStage": 84
+  },
+  "measurements": "Fixed rounds on Java21.0.9 Windows, not a statistical or cross-platform performance guarantee; public lookup still allocates.",
+  "globalGoal": "ACTIVE"
+}

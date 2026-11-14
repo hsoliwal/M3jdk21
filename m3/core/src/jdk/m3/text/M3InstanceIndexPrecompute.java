@@ -3,7 +3,6 @@
  */
 package jdk.m3.text;
 
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -245,16 +244,20 @@ public final class M3InstanceIndexPrecompute {
     }
 
     private static int compareUtf8(String left, String right) {
-        byte[] leftBytes = left.getBytes(StandardCharsets.UTF_8);
-        byte[] rightBytes = right.getBytes(StandardCharsets.UTF_8);
-        int limit = Math.min(leftBytes.length, rightBytes.length);
-        for (int index = 0; index < limit; index++) {
-            int leftValue = leftBytes[index] & 0xff;
-            int rightValue = rightBytes[index] & 0xff;
-            if (leftValue != rightValue) {
-                return Integer.compare(leftValue, rightValue);
-            }
+        int leftIndex = 0;
+        int rightIndex = 0;
+        while (leftIndex < left.length() && rightIndex < right.length()) {
+            int leftPoint = left.codePointAt(leftIndex);
+            int rightPoint = right.codePointAt(rightIndex);
+            leftIndex += Character.charCount(leftPoint);
+            rightIndex += Character.charCount(rightPoint);
+            // String.getBytes(UTF_8) replaces each unpaired surrogate with '?'.
+            if (leftPoint >= Character.MIN_SURROGATE
+                    && leftPoint <= Character.MAX_SURROGATE) leftPoint = '?';
+            if (rightPoint >= Character.MIN_SURROGATE
+                    && rightPoint <= Character.MAX_SURROGATE) rightPoint = '?';
+            if (leftPoint != rightPoint) return Integer.compare(leftPoint, rightPoint);
         }
-        return Integer.compare(leftBytes.length, rightBytes.length);
+        return Integer.compare(left.length() - leftIndex, right.length() - rightIndex);
     }
 }

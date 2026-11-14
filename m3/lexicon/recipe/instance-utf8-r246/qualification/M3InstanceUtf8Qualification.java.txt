@@ -1,0 +1,173 @@
+// Copyright 2026 Hitesh Soliwal, Synexia. SPDX-License-Identifier: Apache-2.0
+package jdk.m3.text;
+
+import java.lang.management.ManagementFactory;
+import java.net.*;
+import java.nio.charset.StandardCharsets;
+import java.util.*;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.*;
+import org.junit.platform.launcher.core.*;
+import org.junit.platform.launcher.listeners.*;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.platform.engine.discovery.DiscoverySelectors.selectClass;
+
+public final class M3InstanceUtf8Qualification {
+    private static Comparator<String> comparator;
+    private static long comparisons;
+    private static volatile long sink;
+
+    @BeforeAll @SuppressWarnings("unchecked")
+    static void originalOwnerComparator() throws Exception {
+        var field = M3InstanceIndexPrecompute.class.getDeclaredField("UTF8_ORDER");
+        field.setAccessible(true);
+        comparator = (Comparator<String>) field.get(null);
+    }
+
+    static int reference(String left, String right) {
+        byte[] a = left.getBytes(StandardCharsets.UTF_8);
+        byte[] b = right.getBytes(StandardCharsets.UTF_8);
+        for (int i = 0; i < Math.min(a.length, b.length); i++) {
+            int order = Integer.compare(a[i] & 255, b[i] & 255);
+            if (order != 0) return order;
+        }
+        return Integer.compare(a.length, b.length);
+    }
+
+    static void same(String left, String right) {
+        int want = reference(left, right);
+        int got = comparator.compare(left, right);
+        comparisons++;
+        if (want != got) throw new AssertionError("unsigned UTF-8 comparator mismatch");
+    }
+
+    @Test void everyUtf16UnitAgainstEncodingBoundaries() {
+        String[] pivots = {"", "?", "\u007f", "\u0080", "\u07ff", "\u0800", "\ue000", "\ufffd", "\ud800\udc00", "\udbff\udfff"};
+        for (int value = 0; value <= 0xffff; value++) {
+            String input = String.valueOf((char) value);
+            for (String pivot : pivots) { same(input, pivot); same(pivot, input); }
+        }
+    }
+
+    @Test void exhaustiveShortMalformedAndSupplementaryCombinations() {
+        char[] alphabet = {0, '?', 'A', 'a', 0x7f, 0x80, 0x7ff, 0x800, 0xd7ff, 0xd800, 0xdbff, 0xdc00, 0xdfff, 0xe000, 0xffff};
+        List<String> values = new ArrayList<>(); values.add("");
+        for (char a : alphabet) { values.add(String.valueOf(a)); for (char b : alphabet) values.add(new String(new char[] {a, b})); }
+        for (String left : values) for (String right : values) same(left, right);
+        assertEquals(0, comparator.compare("\ud800", "?"));
+        assertEquals(0, comparator.compare("\ud800\ud800", "??"));
+        assertTrue(comparator.compare("\ufffd", "\ud800\udc00") < 0);
+    }
+
+    @Test void seededLongAndSharedPrefixInputs() {
+        Random random = new Random(0x246c0deL);
+        for (int sample = 0; sample < 20000; sample++) {
+            char[] left = new char[random.nextInt(65)], right = new char[random.nextInt(65)];
+            for (int i = 0; i < left.length; i++) left[i] = (char) random.nextInt(65536);
+            for (int i = 0; i < right.length; i++) right[i] = (char) random.nextInt(65536);
+            same(new String(left), new String(right));
+            String common = "\u6f22\ud83d\ude00".repeat(sample & 15);
+            same(common + new String(left), common + new String(right));
+        }
+    }
+
+    @Test void publicNameAndMetadataViewsKeepOriginalOrderingAndIdentity() {
+        String[] names = {"Alice", "\u00c9lodie", "\u0391\u03b8\u03ae\u03bd\u03b1", "\u041c\u043e\u0441\u043a\u0432\u0430", "\u6771\u4eac", "\ue000", "\ufffd", "\ud83d\ude00"};
+        Map<String, M3InstanceIndexPrecompute.InstanceRecord> records = new LinkedHashMap<>();
+        TreeMap<String, M3InstanceIndexPrecompute.InstanceRecord> expected = new TreeMap<>(M3InstanceUtf8Qualification::reference);
+        TreeMap<String, String> metadata = new TreeMap<>(M3InstanceUtf8Qualification::reference);
+        for (String name : names) metadata.put(name, "fixture");
+        for (String name : names) {
+            var record = new M3InstanceIndexPrecompute.InstanceRecord(name, M3InstanceIndexPrecompute.InstanceType.PERSON, 7, metadata);
+            String key = M3InstanceIndexPrecompute.normalizedInstanceName(name);
+            records.put(key, record); expected.put(key, record);
+        }
+        var index = new M3InstanceIndexPrecompute("s", "r", "f", "ascii-v1", Set.of(7L), records);
+        assertEquals(new ArrayList<>(expected.keySet()), new ArrayList<>(index.recordsByName().keySet()));
+        for (String name : names) {
+            var record = index.findByName(name);
+            assertSame(expected.get(M3InstanceIndexPrecompute.normalizedInstanceName(name)), record);
+            assertEquals(new ArrayList<>(metadata.keySet()), new ArrayList<>(record.metadata().keySet()));
+        }
+        // Preserve the pre-existing reverse-view copy's natural UTF-16 ordering.
+        List<String> reverse = new ArrayList<>(records.keySet()); reverse.sort(Comparator.naturalOrder());
+        assertEquals(reverse, new ArrayList<>(index.namesByConceptX().get(7L)));
+        assertEquals(reverse, index.instancesOf(7L).stream().map(r -> M3InstanceIndexPrecompute.normalizedInstanceName(r.nameUtf8())).toList());
+        assertTrue(index.appliesTo("s", "r", "f", "ascii-v1"));
+        assertFalse(index.appliesTo("s", "r2", "f", "ascii-v1"));
+        records.clear(); metadata.clear(); assertEquals(names.length, index.size());
+        assertThrows(UnsupportedOperationException.class, () -> index.recordsByName().clear());
+        assertThrows(UnsupportedOperationException.class, () -> index.namesByConceptX().get(7L).clear());
+    }
+
+    @Test void nullAndMalformedPublicInputsRetainRefusalKinds() {
+        assertThrows(NullPointerException.class, () -> comparator.compare(null, "a"));
+        assertThrows(NullPointerException.class, () -> comparator.compare("", null));
+        assertThrows(IllegalArgumentException.class, () -> M3InstanceIndexPrecompute.normalizedInstanceName("\ud800"));
+        assertThrows(IllegalArgumentException.class, () -> M3InstanceIndexPrecompute.normalizedInstanceName("\udc00"));
+        assertThrows(IllegalArgumentException.class, () -> new M3InstanceIndexPrecompute.InstanceRecord("bad\ud800", M3InstanceIndexPrecompute.InstanceType.PLACE, 7, Map.of()));
+    }
+
+    static long compareLoop(int count, String[] a, String[] b) {
+        long result = 0;
+        for (int i = 0; i < count; i++) result += comparator.compare(a[i & 63], b[i & 63]);
+        sink = result; return result;
+    }
+
+    static long lookupLoop(int count, M3InstanceIndexPrecompute index, String[] queries) {
+        long result = 0;
+        for (int i = 0; i < count; i++) result += index.findByName(queries[i & 63]).instanceOfX();
+        sink = result; return result;
+    }
+
+    static Map<String, Object> measure() {
+        String[] a = new String[64], b = new String[64], queries = new String[64];
+        Map<String, M3InstanceIndexPrecompute.InstanceRecord> records = new LinkedHashMap<>();
+        for (int i = 0; i < 64; i++) {
+            String prefix = ("instance" + "\u6f22\ud83d\ude00".repeat(i & 7));
+            a[i] = prefix + "a"; b[i] = prefix + "b"; queries[i] = prefix + i;
+            records.put(queries[i], new M3InstanceIndexPrecompute.InstanceRecord(queries[i], M3InstanceIndexPrecompute.InstanceType.PERSON, 7, Map.of()));
+        }
+        var index = new M3InstanceIndexPrecompute("s", "r", "f", "n", Set.of(7L), records);
+        compareLoop(40000, a, b); lookupLoop(40000, index, queries);
+        var out = new TreeMap<String, Object>(); out.put("queriesPerRoundPerOperation", 20000);
+        var bean = (com.sun.management.ThreadMXBean) ManagementFactory.getThreadMXBean();
+        if (!bean.isThreadAllocatedMemorySupported()) { out.put("allocation", "NOT_SUPPORTED"); return out; }
+        bean.setThreadAllocatedMemoryEnabled(true); long thread = Thread.currentThread().threadId();
+        long[] compareBytes = new long[5], lookupBytes = new long[5], compareNanos = new long[5], lookupNanos = new long[5];
+        for (int round = 0; round < 5; round++) {
+            long allocated = bean.getThreadAllocatedBytes(thread), start = System.nanoTime();
+            long result = compareLoop(20000, a, b);
+            compareNanos[round] = System.nanoTime() - start; compareBytes[round] = bean.getThreadAllocatedBytes(thread) - allocated;
+            if (result != -20000) throw new AssertionError("comparison checksum");
+            allocated = bean.getThreadAllocatedBytes(thread); start = System.nanoTime();
+            result = lookupLoop(20000, index, queries);
+            lookupNanos[round] = System.nanoTime() - start; lookupBytes[round] = bean.getThreadAllocatedBytes(thread) - allocated;
+            if (result != 140000) throw new AssertionError("lookup checksum");
+        }
+        out.put("compareAllocatedBytes", compareBytes); out.put("lookupAllocatedBytes", lookupBytes);
+        out.put("compareNanos", compareNanos); out.put("lookupNanos", lookupNanos);
+        return out;
+    }
+
+    public static void main(String[] args) throws Exception {
+        var listener = new SummaryGeneratingListener(); var launcher = LauncherFactory.create();
+        launcher.registerTestExecutionListeners(listener);
+        launcher.execute(LauncherDiscoveryRequestBuilder.request().selectors(selectClass(M3InstanceUtf8Qualification.class)).build());
+        var summary = listener.getSummary(); var failures = new ArrayList<String>();
+        summary.getFailures().forEach(f -> failures.add(f.getException().toString()));
+        var out = new TreeMap<String, Object>();
+        out.put("mode", args[1]); out.put("found", summary.getTestsFoundCount()); out.put("passed", summary.getTestsSucceededCount());
+        out.put("failed", summary.getTestsFailedCount()); out.put("aborted", summary.getTestsAbortedCount()); out.put("skipped", summary.getTestsSkippedCount()); out.put("failures", failures); out.put("encodingComparisons", comparisons);
+        for (String name : List.of("M3InstanceIndexPrecomputeTest", "M3InstanceIndexPrecomputeEdgeContractTest")) {
+            Class<?> test = Class.forName(name); test.getMethod("main", String[].class).invoke(null, (Object) new String[0]);
+            var checks = test.getDeclaredField("checks"); checks.setAccessible(true); out.put(name, checks.getInt(null));
+        }
+        out.put("measurements", measure()); out.put("javaVersion", System.getProperty("java.runtime.version"));
+        var connection = (HttpURLConnection) URI.create(args[0]).toURL().openConnection(); connection.setDoOutput(true); connection.setRequestMethod("POST");
+        byte[] bytes = new ObjectMapper().writeValueAsBytes(out); connection.setFixedLengthStreamingMode(bytes.length);
+        try (var stream = connection.getOutputStream()) { stream.write(bytes); }
+        if (connection.getResponseCode() != 204) throw new AssertionError("receipt refused"); connection.disconnect();
+        if (summary.getTestsSucceededCount() != 5 || summary.getTestsFailedCount() != 0) throw new AssertionError(out);
+    }
+}

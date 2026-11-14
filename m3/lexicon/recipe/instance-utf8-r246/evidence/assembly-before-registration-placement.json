@@ -1,0 +1,14 @@
+{
+  "schema": "M3_INSTANCE_UTF8_PACKET_ASSEMBLY_R246",
+  "checker": "Unchanged R245 readable packet assembly CPU checker",
+  "receipt": {
+    "schema": "M3_FIXED_LIFETIME_PACKET_ASSEMBLY_R245",
+    "status": "PASS",
+    "files": 28,
+    "reconstructedConfigSha256": "da2798ed5bd984b4fcf5e0a8c0b320527b1e8078b1e2c971ff30458d100094ae",
+    "resourceRefsVerified": true,
+    "pythonSyntax": true,
+    "pomSyntax": true,
+    "writes": 0
+  }
+}

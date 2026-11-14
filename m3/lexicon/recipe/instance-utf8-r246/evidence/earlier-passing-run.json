@@ -1,0 +1,7 @@
+{
+  "schema": "M3_INSTANCE_SAME_OWNER_EARLIER_RUN_R246",
+  "status": "PASS",
+  "qualificationBlob": "ff055e302c6189c728b53387b2d91e3621de5085",
+  "expandedSha256": "0c0b28afffd3f1198616e6137fb044401ddd062a79f7c3ebf5b55a92567b9335",
+  "reason": "Recipe exact-path registration subsequently moved to independent anchors; owner postimage unchanged. Final evidence/qualification.json supersedes this run."
+}

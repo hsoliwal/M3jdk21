@@ -300,6 +300,7 @@ public final class M3Jdk21HashPinnedSnapshotRecipe
                 || !(value.startsWith("src/")
                         || value.startsWith("test/")
                         || value.startsWith("m3/ports/")
+                        || value.equals("m3/core/src/jdk/m3/text/M3InstanceIndexPrecompute.java")
                         || value.startsWith(".m3/openrewrite-recipes/src/main/java/")
                         || value.startsWith(".m3/openrewrite-recipes/src/test/java/")
                         || value.startsWith("m3/tooling/migration-recipes/src/main/java/")
@@ -325,7 +326,8 @@ public final class M3Jdk21HashPinnedSnapshotRecipe
         if (!jdkJavaPath(value) || value.startsWith("src/") || value.startsWith("test/")) {
             return false;
         }
-        return value.startsWith(
+        return value.equals("m3/core/src/jdk/m3/text/M3InstanceIndexPrecompute.java")
+                || value.startsWith(
                         "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/")
                 || value.startsWith(
                         "m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/")

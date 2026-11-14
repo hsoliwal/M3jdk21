@@ -1,0 +1,4 @@
+capability	classification	owner	revision	fit_evidence	license	decision
+instance-name-unsigned-utf8-order	ADAPT_IDEA	ICU UTF16.StringComparator.compareCaseSensitive	049e0d6a420629ac7db77256987d083a563287b5;blob6326a83b56b0e21c345c8ec03cd384ca0d6d03f2	Code-point ordering avoids encoded arrays; ICU raw surrogate ordering differs from current JDK UTF-8 replacement and must not be copied blindly	Unicode-3.0	ADMITTED_1408801_ENCODING_COMPARISONS_AND_MEASURED_ALLOCATION_REDUCTION
+utf8-malformed-replacement	DIRECT_REUSE	StandardCharsets.UTF_8 / String.getBytes	Java21 actual qualification toolchain	Existing encoder is independent reference for all UTF-16 inputs; preserved replacement policy	JDK runtime, no source copied	REFERENCE_ORACLE
+bounded-source-replay	DIRECT_REUSE	M3Jdk21HashPinnedSnapshotRecipe	40f543e413c245c900d6502a27645d05735a6ebd	Self-replay exact existing instance-index path registration before owner replacement	Apache-2.0	NO_BROAD_CORE_PATH_ADMISSION

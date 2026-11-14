@@ -1,0 +1,9 @@
+{
+  "schema": "M3_EXACT_REGISTRATION_COMPOSITION_R246",
+  "status": "PASS",
+  "meaning": "Deterministic edits at independent exact anchors compose to identical source in either order. This is not a Git merge, full union build or source-drift bypass.",
+  "baseBlob": "40f543e413c245c900d6502a27645d05735a6ebd",
+  "leftThenRightSha256": "99e2ffa2b52ab4902fec7498def1ecfc48d9359e65d18dce9dff27d6ecfb846d",
+  "rightThenLeftSha256": "99e2ffa2b52ab4902fec7498def1ecfc48d9359e65d18dce9dff27d6ecfb846d",
+  "executedUnionBuild": false
+}
