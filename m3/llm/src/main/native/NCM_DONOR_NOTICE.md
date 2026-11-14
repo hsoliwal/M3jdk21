@@ -85,15 +85,18 @@ linear resize, three-tap Phi transform and tied-codebook logit batches are a
 numerical translation of `models/quant.py` and `models/next_concept.py` at the
 reviewed commit above, received from hsoliwal/com.synexia#17414 (canonical
 source `d7564cadc43864f0c9c94a7129b2e0fdfa089218`) through M3jdk21 #3033. Its
-nearest-code entry has no separate kernel: it calls `m3_ncm_nearest`, so it
-inherits the ordered binary64 distance and lowest-index tie rule described
-above. On the pinned parity corpus it returns the same codes as the received
-FP32 expanded-norm kernel; near-tie inputs can select differently.
+nearest-code entry calls `m3_ncm_nearest_expanded_f32`, the second entry of the
+same `ncm_kernel.cpp` (sharing layout and finiteness validation with
+`m3_ncm_nearest`): the donor's FP32 expanded-norm distance
+`(rowNorm + codeNorm) - 2 * dot` with channel-ascending binary32 sums and the
+lowest index on exact ties, in the operation order of `M3NcmOps.nearest`, so
+native and `Mode.JAVA` select the same codes. `NcmNativeOpsNearestParityTest`
+pins a general and a near-tie corpus to the received kernel's outputs.
 
 Modified 2026-11-14 by Hitesh Soliwal and Contributors to the Synexia Project:
 moved the received C17 JNI (`m3/llm/native/ncm_jni.c`, library `m3_llm_ncm`)
 into this C++20 target under the same strict warning and floating-point flags,
-routed nearest-code selection to the shared kernel, and loaded the library from
+moved nearest-code selection into the shared kernel file, and loaded the library from
 `-Dm3.ncm.library` or `System.loadLibrary("m3_ncm")`. Tied scores use libc
 `exp` against Java `StrictMath.exp` with the `2e-5` parity tolerance.
 

@@ -18,10 +18,10 @@ import java.util.Objects;
  * built from {@code m3/llm/src/main/native}, which also serves {@code M3NcmQuantizer}.
  * The library is loaded from the absolute path in {@code -Dm3.ncm.library} when that
  * property is set, otherwise by {@code System.loadLibrary("m3_ncm")}.
- * {@code nearest} delegates to the shared {@code m3_ncm_nearest} kernel (binary64
- * ordered differences, lowest index on exact ties). It agrees with the FP32
- * expanded-norm {@link M3NcmOps#nearest(float[], int, float[])} on the pinned parity
- * corpus; near-tie inputs can select a different code than {@link Mode#JAVA}.
+ * {@code nearest} uses the owner kernel's FP32 expanded-norm entry
+ * {@code m3_ncm_nearest_expanded_f32}, in the operation order of
+ * {@link M3NcmOps#nearest(float[], int, float[])}, so native and {@link Mode#JAVA}
+ * select the same codes.
  */
 public final class M3NcmNativeOps {
     /** Backend choice is observable through availability and required-mode refusal. */

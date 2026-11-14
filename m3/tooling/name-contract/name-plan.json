@@ -1,7 +1,7 @@
 {
   "schema": "M3JDK21_NAME_CONTRACT_PLAN_V1",
   "authority": "m3/docs/name-mapping.json",
-  "authority_blob": "59ec9e015ee5b25a21cfcc4314f78ecce801adad",
+  "authority_blob": "e660d6269904e230ece20ebb24b0e4fb14691192",
   "operations": [
     {
       "mapping_id": "synexia.counterpart.MIndexClass",

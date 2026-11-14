@@ -7,7 +7,8 @@
  * NCM native owner (library m3_ncm). Resize, Phi and tied-logit batches translate
  * HazyResearch/ncm models/quant.py and models/next_concept.py at
  * c70274273f489abc73832b2b98584a8483b6b203; see NCM_DONOR_NOTICE.md for the MIT
- * notice. Nearest-code selection delegates to the shared m3_ncm_nearest kernel.
+ * notice. Nearest-code selection calls the owner kernel's FP32 expanded-norm entry
+ * m3_ncm_nearest_expanded_f32 (ncm_kernel.cpp), bit-identical to M3NcmOps.nearest.
  * Flat FP32 CPU batches; no retained JNI references or native allocations.
  */
 #include <jni.h>
@@ -87,11 +88,12 @@ JNIEXPORT jintArray JNICALL JNI_NAME(nearestNative)(
         invalid(env); release(env, &e); release(env, &x); return nullptr;
     }
     int *selected = static_cast<int *>(allocate(env, r, sizeof(int)));
-    jint *transfer = selected == nullptr ? nullptr : static_cast<jint *>(allocate(env, r, sizeof(jint)));
+    float *norms = selected == nullptr ? nullptr : static_cast<float *>(allocate(env, v, sizeof(float)));
+    jint *transfer = norms == nullptr ? nullptr : static_cast<jint *>(allocate(env, r, sizeof(jint)));
     if (transfer != nullptr) {
-        // Shared owner kernel: validates shape and finiteness, lowest index on exact ties.
-        const int status = m3_ncm_nearest(x.data, static_cast<size_t>(x.size), r, c,
-                e.data, static_cast<size_t>(e.size), v, selected, r);
+        // FP32 expanded-norm entry of the owner kernel: bit-identical to M3NcmOps.nearest.
+        const int status = m3_ncm_nearest_expanded_f32(x.data, static_cast<size_t>(x.size), r, c,
+                e.data, static_cast<size_t>(e.size), v, norms, v, selected, r);
         if (status != 0) invalid(env);
         else {
             for (size_t i = 0; i < r; i++) transfer[i] = static_cast<jint>(selected[i]);
@@ -99,6 +101,7 @@ JNIEXPORT jintArray JNICALL JNI_NAME(nearestNative)(
             if (result != nullptr) env->SetIntArrayRegion(result, 0, static_cast<jsize>(r), transfer);
         }
     }
+    std::free(norms);
     std::free(transfer); std::free(selected); release(env, &e); release(env, &x); return result;
 }
 

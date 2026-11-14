@@ -197,7 +197,8 @@ The shared library is `libm3_ncm.so` on Linux, `libm3_ncm.dylib` on macOS or
 `m3_ncm.dll` on Windows, subject to the chosen generator's output directories.
 This is the only NCM native library: the same target also carries the
 `jdk.m3.llm.projection.M3NcmNativeOps` resize, Phi and tied-logit primitives, and
-their nearest-code entry calls the same `m3_ncm_nearest` kernel. `M3NcmNativeOps`
+their nearest-code entry uses the kernel's FP32 expanded-norm entry
+`m3_ncm_nearest_expanded_f32`, matching `M3NcmOps.nearest` bit for bit. `M3NcmNativeOps`
 loads it at class initialization from `-Dm3.ncm.library` when set, otherwise with
 `System.loadLibrary("m3_ncm")`; `-Dm3.llm.ncm.disableNative=true` keeps it Java-only.
 There are no implied platform qualification results from this build recipe.

@@ -101,6 +101,18 @@ int main() {
             require(selected[row] == expected, "independent extended-precision bounded oracle");
         }
     }
+    // FP32 expanded-norm entry: same layout statuses, overflow status 3, lowest index on ties.
+    float norms[3] = {0.0F, 0.0F, 0.0F};
+    const float tie_books[] = {1.0F, -1.0F, 2.0F};
+    require(m3_ncm_nearest_expanded_f32(zero_vector, 1, 1, 1, tie_books, 3, 3, norms, 3, out, 1) == 0
+            && out[0] == 0, "expanded-norm lowest index on an exact tie");
+    require(m3_ncm_nearest_expanded_f32(query, 1, 1, 1, books, 2, 2, norms, 1, out, 1) == 1,
+            "expanded-norm scratch size is checked");
+    require(m3_ncm_nearest_expanded_f32(nan_query, 1, 1, 1, books, 2, 2, norms, 2, out, 1) == 2,
+            "expanded-norm nonfinite input");
+    const float huge[] = {3.0e38F};
+    require(m3_ncm_nearest_expanded_f32(huge, 1, 1, 1, huge, 1, 1, norms, 1, out, 1) == 3,
+            "expanded-norm overflow is refused");
     std::puts("NCM C ABI oracle: 1200 randomized cases and boundary cases passed");
     return 0;
 }

@@ -17213,7 +17213,7 @@
         "id": "m3.llm.ncm-native-ops",
         "kind": "adapter",
         "status": "implemented-tested",
-        "reason": "Canonical SDK emitted and hash-verified this additive component candidate; Java 21 and C17/C++20 JNI component suites passed. Installed source-built M3JDK and new-source promotion remain HOLD. Optional coarse CPU JNI operations mirror the Java numerical owner. JAVA, AUTO and NATIVE_REQUIRED are observable; required mode refuses an absent ABI. The JNI is part of the single jdk.m3.llm NCM native owner (m3/llm/src/main/native, library m3_ncm, loaded from -Dm3.ncm.library or System.loadLibrary(\"m3_ncm\")); nearest delegates to the shared m3_ncm_nearest kernel and is pinned to the received kernel on a fixed parity corpus. No Synexia loader or runtime artifact.",
+        "reason": "Canonical SDK emitted and hash-verified this additive component candidate; Java 21 and C17/C++20 JNI component suites passed. Installed source-built M3JDK and new-source promotion remain HOLD. Optional coarse CPU JNI operations mirror the Java numerical owner. JAVA, AUTO and NATIVE_REQUIRED are observable; required mode refuses an absent ABI. The JNI is part of the single jdk.m3.llm NCM native owner (m3/llm/src/main/native, library m3_ncm, loaded from -Dm3.ncm.library or System.loadLibrary(\"m3_ncm\")); nearest uses the kernel's FP32 expanded-norm entry m3_ncm_nearest_expanded_f32, identical to Mode.JAVA and pinned to the received kernel on general and near-tie parity corpora. No Synexia loader or runtime artifact.",
         "sources": [
           {
             "repo": "hsoliwal/com.synexia",
@@ -17273,8 +17273,8 @@
               "jdk.m3.llm.projection.M3NcmNativeOps$Mode :: public static jdk.m3.llm.projection.M3NcmNativeOps$Mode[] values();",
               "jdk.m3.llm.projection.M3NcmNativeOps$Mode :: public static jdk.m3.llm.projection.M3NcmNativeOps$Mode valueOf(java.lang.String);"
             ],
-            "sha256": "78960650ebb0fa9d6643961071adae462812372f19a49ddcb7714aa056eaa14c",
-            "git_blob_sha1": "83d8fc4ef0fc32f8add0aa2475f626ac3e6e2df4",
+            "sha256": "e29ac16d16578ada65edecf7bd324979c21b56619b78774c16668ea65d00061d",
+            "git_blob_sha1": "16c1b7d270d1436af5e6438eaed8a8b277dd7bc8",
             "fingerprint": null,
             "revision_role": "candidate",
             "visibility": "public"
@@ -17286,8 +17286,8 @@
             "path": "m3/llm/src/main/native/src/ncm_projection_jni.cpp",
             "symbol": null,
             "signatures": [],
-            "sha256": "27db3c84554011229346f31a2e8dcf55109d8b2fb6289a0f8c711d36a4e133df",
-            "git_blob_sha1": "d80186d0d1716d7abd2fe922a9dc7d3f5b88220c",
+            "sha256": "4d22625ca7820eb027ba5a0a7c0c1a7f623b9e565f99acb22ac3df4067ebf341",
+            "git_blob_sha1": "d977c54b06ff8b846f72b71e407dd11500755db9",
             "fingerprint": null,
             "revision_role": "candidate"
           }
