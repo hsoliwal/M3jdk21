@@ -143,7 +143,7 @@ class M3RecipeHomePolicyTest(unittest.TestCase):
             rows = list(csv.DictReader(handle, delimiter="\t"))
 
         # The three A3/JNI receiver rows were admitted after the original 16-row freeze; the A3Lab
-        # row left with m3/tooling/a3 for com.synexia (clean output rule, 2026-11-14).
+        # row left with m3/tooling/a3 (clean output rule, 2026-11-14).
         # Keep exact cardinality and reject duplicate surfaces; do not relax ownership rules.
         self.assertEqual(22, len(rows))
         self.assertEqual(22, len({row["local_surface"] for row in rows}))
