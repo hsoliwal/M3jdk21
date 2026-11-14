@@ -1,7 +1,0 @@
-type: specs.openrewrite.org/v1beta/recipe
-name: com.synexia.m3.M3InstanceUtf8OwnerAdmissionR234
-displayName: Admit exact proper-name comparator owner
-description: Qualified R234 exact snapshot; preserves contracts and refuses source drift.
-recipeList:
-  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
-      crateName: m3-instance-utf8-owner-admission
