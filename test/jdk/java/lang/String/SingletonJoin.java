@@ -11,6 +11,42 @@
  * @run main/othervm -ea -XX:-CompactStrings SingletonJoin
  * @run main/othervm -ea -Xbatch -XX:-TieredCompilation SingletonJoin
  */
+
+/*
+ * @test id=G1
+ * @summary Singleton join backing reuse under heap verification with the G1 collector
+ * @requires vm.gc.G1
+ * @modules java.base/java.lang:open
+ * @run main/othervm -ea -Xmx256m -XX:+UnlockDiagnosticVMOptions -XX:+VerifyBeforeGC -XX:+VerifyAfterGC
+ *                   -XX:+UseG1GC -XX:+UseStringDeduplication -Dm3.checkBacking=false SingletonJoin
+ */
+
+/*
+ * @test id=Serial
+ * @summary Singleton join backing reuse under heap verification with the Serial collector
+ * @requires vm.gc.Serial
+ * @modules java.base/java.lang:open
+ * @run main/othervm -ea -Xmx256m -XX:+UnlockDiagnosticVMOptions -XX:+VerifyBeforeGC -XX:+VerifyAfterGC
+ *                   -XX:+UseSerialGC -Dm3.checkBacking=false SingletonJoin
+ */
+
+/*
+ * @test id=Z
+ * @summary Singleton join backing reuse under heap verification with the Z collector
+ * @requires vm.gc.Z
+ * @modules java.base/java.lang:open
+ * @run main/othervm -ea -Xmx256m -XX:+UnlockDiagnosticVMOptions -XX:+VerifyBeforeGC -XX:+VerifyAfterGC
+ *                   -XX:+UseZGC -Dm3.checkBacking=false SingletonJoin
+ */
+
+/*
+ * @test id=Shenandoah
+ * @summary Singleton join backing reuse under heap verification with the Shenandoah collector
+ * @requires vm.gc.Shenandoah
+ * @modules java.base/java.lang:open
+ * @run main/othervm -ea -Xmx256m -XX:+UnlockDiagnosticVMOptions -XX:+VerifyBeforeGC -XX:+VerifyAfterGC
+ *                   -XX:+UseShenandoahGC -Dm3.checkBacking=false SingletonJoin
+ */
 import java.lang.reflect.Field;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
