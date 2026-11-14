@@ -199,7 +199,15 @@ public final class M3PrecomputePayload {
                 case '\r' -> out.append("\\r");
                 case '\t' -> out.append("\\t");
                 default -> {
-                    if (current < 0x20 || current > 0x7f) out.append(String.format("\\u%04x", (int) current));
+                    if (current < 0x20 || current > 0x7f) {
+                        // Jackson's nibble-emission pattern; retain M3's lowercase escape policy.
+                        String hex = "0123456789abcdef";
+                        out.append("\\u")
+                                .append(hex.charAt(current >>> 12))
+                                .append(hex.charAt((current >>> 8) & 0xf))
+                                .append(hex.charAt((current >>> 4) & 0xf))
+                                .append(hex.charAt(current & 0xf));
+                    }
                     else out.append(current);
                 }
             }
