@@ -1,0 +1,79 @@
+{
+  "after": {
+    "charged": 2496913,
+    "commitAvailable": 39634239488,
+    "kFree": 11119153152,
+    "logical": 2496913,
+    "peak": {
+      "charged": 2496913,
+      "ordinaryLogBytes": 5906
+    },
+    "physicalAvailable": 13768224768,
+    "sFree": 10469711872
+  },
+  "before": {
+    "charged": 2478130,
+    "commitAvailable": 39791243264,
+    "kFree": 11119284224,
+    "logical": 2478130,
+    "peak": {
+      "charged": 2478130,
+      "ordinaryLogBytes": 5906
+    },
+    "physicalAvailable": 14900056064,
+    "sFree": 10469732352
+  },
+  "command": [
+    "C:\\Program Files\\Java\\jdk-21\\bin\\javac.exe",
+    "-J-Xmx128m",
+    "-J-XX:+UseSerialGC",
+    "-J-XX:ActiveProcessorCount=2",
+    "-J-Djava.io.tmpdir=S:\\codex-work\\ui-caller-runtime-qualification-20261113\\tmp",
+    "-J-Duser.home=S:\\codex-work\\ui-caller-runtime-qualification-20261113\\home",
+    "--release",
+    "21",
+    "-proc:none",
+    "-implicit:none",
+    "-encoding",
+    "UTF-8",
+    "-classpath",
+    "S:\\codex-work\\ui-caller-runtime-qualification-20261113\\qualify-001\\selected-producer\\after-classes;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\platform\\junit-platform-console-standalone\\1.10.1\\junit-platform-console-standalone-1.10.1.jar",
+    "-sourcepath",
+    "S:\\codex-work\\ui-caller-runtime-qualification-20261113\\qualify-001\\selected-producer\\empty-classpath",
+    "-Xlint:all",
+    "-Werror",
+    "-d",
+    "S:\\codex-work\\ui-caller-runtime-qualification-20261113\\oracle-tests\\classes",
+    "S:\\codex-work\\ui-caller-runtime-qualification-20261113\\oracle-src\\M3ViewportCoreApiTest.java"
+  ],
+  "controllerSha256": "8f0d049a9ff44612f45d78710b09e48738ec773d15a28bfb81e40394a77d4427",
+  "counts": {},
+  "endedUnix": 1794562244.9520006,
+  "job": "compile-oracle",
+  "logBytes": 0,
+  "logSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "native": {
+    "all_owned_native_handles_closed": true,
+    "assigned_to_job": true,
+    "cleanup_errors": [],
+    "creation_FILETIME": "134390358430940981",
+    "exitcode": 0,
+    "job_active_processes": 0,
+    "job_handle_closed": true,
+    "job_total_processes": 2,
+    "pid": 60776,
+    "process_handle_closed": true,
+    "resumed": true,
+    "same_handle_wait": 0,
+    "supervisor_error": null,
+    "terminal": true,
+    "termination_requested": false,
+    "thread_handle_closed": true
+  },
+  "postGuardError": null,
+  "productionPromotion": false,
+  "runner": "JUnit Platform Console standalone1.10.1; distinct from hosted vendored1.10.2",
+  "runnerSha256": "b42eaa53d13576d17db5fb8b280722a6ae9e36daf95f4262bc6e96d4cb20725f",
+  "schema": "m3.owned-cpu-qualification/v1",
+  "startedUnix": 1794562243.0915291
+}

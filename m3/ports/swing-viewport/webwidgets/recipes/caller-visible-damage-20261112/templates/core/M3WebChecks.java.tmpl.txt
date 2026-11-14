@@ -313,7 +313,7 @@ public final class M3WebChecks {
 
 	/** D: an item change damages exactly its rect (plus the 3 px focus ring margin), clipped to the widget. */
 	static void itemDamage(M3WebModel m) {
-		if (m.count() == 0 || m.itemRect(0, 2) == 0) {
+		if (m.count() == 0 || m.itemRect(0, 2) <= 0 || m.itemRect(0, 3) <= 0) {
 			return;
 		}
 		int[] d = new int[4];

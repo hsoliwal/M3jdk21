@@ -1,0 +1,73 @@
+{
+  "after": {
+    "charged": 5047051,
+    "commitAvailable": 27265781760,
+    "kFree": 11126632448,
+    "logical": 5047051,
+    "peak": {
+      "charged": 5047051,
+      "ordinaryLogBytes": 12326
+    },
+    "physicalAvailable": 4380295168,
+    "sFree": 10459471872
+  },
+  "before": {
+    "charged": 4561512,
+    "commitAvailable": 27256520704,
+    "kFree": 11126632448,
+    "logical": 4561512,
+    "peak": {
+      "charged": 4561512,
+      "ordinaryLogBytes": 12326
+    },
+    "physicalAvailable": 4660887552,
+    "sFree": 10460450816
+  },
+  "classBytes": 464882,
+  "classCount": 192,
+  "classManifestSha256": "13503124718333c395b65491f1043f9eddb000a4f6647f9e851fe9f623dcf276",
+  "command": [
+    "C:\\Program Files\\Java\\jdk-21\\bin\\javac.exe",
+    "-J-Xmx512m",
+    "-J-XX:+UseSerialGC",
+    "-J-XX:ActiveProcessorCount=2",
+    "-J-XX:ReservedCodeCacheSize=32m",
+    "-J-Djava.io.tmpdir=S:\\codex-work\\ui-caller-runtime-qualification-20261113\\tmp",
+    "-J-Duser.home=S:\\codex-work\\ui-caller-runtime-qualification-20261113\\home",
+    "-J-Djava.util.prefs.userRoot=S:\\codex-work\\ui-caller-runtime-qualification-20261113\\home\\prefs",
+    "-J-Djava.util.prefs.systemRoot=S:\\codex-work\\ui-caller-runtime-qualification-20261113\\home\\system-prefs",
+    "@S:\\codex-work\\ui-caller-runtime-qualification-20261113\\tests-001.javac.args"
+  ],
+  "controllerSha256": "fb256fb732affa054a9bbcb57bb1921d807dd3bdec06c49e10681311b093717b",
+  "counts": {},
+  "endedUnix": 1794567042.921295,
+  "job": "full-tests-001",
+  "logBytes": 0,
+  "logSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "native": {
+    "all_owned_native_handles_closed": true,
+    "assigned_to_job": true,
+    "cleanup_errors": [],
+    "creation_FILETIME": "134390406357879548",
+    "exitcode": 0,
+    "job_active_processes": 0,
+    "job_handle_closed": true,
+    "job_total_processes": 2,
+    "pid": 40036,
+    "process_handle_closed": true,
+    "resumed": true,
+    "same_handle_wait": 0,
+    "supervisor_error": null,
+    "terminal": true,
+    "termination_requested": false,
+    "thread_handle_closed": true
+  },
+  "postGuardError": null,
+  "productionPromotion": false,
+  "runner": "Repository M3JUnitLauncher with Console standalone1.10.1 libraries; distinct from hosted vendored1.10.2",
+  "runnerSha256": "b42eaa53d13576d17db5fb8b280722a6ae9e36daf95f4262bc6e96d4cb20725f",
+  "schema": "m3.owned-cpu-qualification/v1",
+  "sourceCount": 151,
+  "sourceManifestSha256": "bb88e30d2bf58ea0cb1fdf5ea19f79393f9e0f56985b56cd95e0cabfd18e7b00",
+  "startedUnix": 1794567035.7861638
+}

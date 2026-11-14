@@ -1,0 +1,81 @@
+{
+  "after": {
+    "charged": 5083549,
+    "commitAvailable": 27554467840,
+    "kFree": 11126632448,
+    "logical": 5083549,
+    "peak": {
+      "charged": 5083549,
+      "ordinaryLogBytes": 12326
+    },
+    "physicalAvailable": 1957302272,
+    "sFree": 10459312128
+  },
+  "before": {
+    "charged": 5083549,
+    "commitAvailable": 27606048768,
+    "kFree": 11126632448,
+    "logical": 5083549,
+    "peak": {
+      "charged": 5083549,
+      "ordinaryLogBytes": 12326
+    },
+    "physicalAvailable": 3339333632,
+    "sFree": 10459402240
+  },
+  "classBytes": 0,
+  "classCount": 0,
+  "classManifestSha256": null,
+  "command": [
+    "C:\\Program Files\\Java\\jdk-21\\bin\\java.exe",
+    "-Xmx768m",
+    "-XX:+UseSerialGC",
+    "-XX:ActiveProcessorCount=2",
+    "-XX:ReservedCodeCacheSize=32m",
+    "-Djava.io.tmpdir=S:\\codex-work\\ui-caller-runtime-qualification-20261113\\tmp",
+    "-Duser.home=S:\\codex-work\\ui-caller-runtime-qualification-20261113\\home",
+    "-Djava.util.prefs.userRoot=S:\\codex-work\\ui-caller-runtime-qualification-20261113\\home\\prefs",
+    "-Djava.util.prefs.systemRoot=S:\\codex-work\\ui-caller-runtime-qualification-20261113\\home\\system-prefs",
+    "-Djava.awt.headless=true",
+    "-cp",
+    "S:\\codex-work\\ui-caller-runtime-qualification-20261113\\full-suite-output\\main;S:\\codex-work\\ui-caller-runtime-qualification-20261113\\full-suite-output\\test;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\platform\\junit-platform-console-standalone\\1.10.1\\junit-platform-console-standalone-1.10.1.jar",
+    "jdk.m3.swing.testkit.M3JUnitLauncher",
+    "--scan",
+    "S:\\codex-work\\ui-caller-runtime-qualification-20261113\\full-suite-output\\test"
+  ],
+  "controllerSha256": "fb256fb732affa054a9bbcb57bb1921d807dd3bdec06c49e10681311b093717b",
+  "counts": {},
+  "endedUnix": 1794567059.1096847,
+  "job": "full-suite-001",
+  "logBytes": 0,
+  "logSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "native": {
+    "all_owned_native_handles_closed": true,
+    "assigned_to_job": true,
+    "cleanup_errors": [],
+    "creation_FILETIME": "134390406473572114",
+    "error_phase": "supervisor-check",
+    "exitcode": 125,
+    "job_active_processes": 0,
+    "job_handle_closed": true,
+    "job_total_processes": 2,
+    "pid": 15192,
+    "primary_traceback": "Traceback (most recent call last):\n  File \"S:\\codex-work\\storage-recovery-20261013\\native-process-cwd-recipe-20261016\\templates\\OwnedJobSupervisor.py\", line 152, in run_owned\n    check()\n  File \"S:\\codex-work\\ui-caller-runtime-qualification-20261113\\RUN_FULL_SUITE.py\", line 43, in check\n    assert m.availPhys>=1610612736 and m.availPageFile>=8858370048,json.dumps({'memoryReserve':'FAIL','physicalAvailable':m.availPhys,'commitAvailable':m.availPageFile})\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: {\"memoryReserve\": \"FAIL\", \"physicalAvailable\": 1481089024, \"commitAvailable\": 26662068224}\n",
+    "process_handle_closed": true,
+    "resumed": true,
+    "same_handle_wait": 0,
+    "supervisor_error": "AssertionError: {\"memoryReserve\": \"FAIL\", \"physicalAvailable\": 1481089024, \"commitAvailable\": 26662068224}",
+    "terminal": true,
+    "terminate_job_succeeded": true,
+    "termination_requested": true,
+    "thread_handle_closed": true
+  },
+  "postGuardError": null,
+  "productionPromotion": false,
+  "runner": "Repository M3JUnitLauncher with Console standalone1.10.1 libraries; distinct from hosted vendored1.10.2",
+  "runnerSha256": "b42eaa53d13576d17db5fb8b280722a6ae9e36daf95f4262bc6e96d4cb20725f",
+  "schema": "m3.owned-cpu-qualification/v1",
+  "sourceCount": 458,
+  "sourceManifestSha256": "bb88e30d2bf58ea0cb1fdf5ea19f79393f9e0f56985b56cd95e0cabfd18e7b00",
+  "startedUnix": 1794567047.3559608
+}
