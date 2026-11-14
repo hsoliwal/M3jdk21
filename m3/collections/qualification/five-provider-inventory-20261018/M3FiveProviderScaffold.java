@@ -24,8 +24,11 @@ import java.lang.reflect.TypeVariable;
 import java.lang.reflect.WildcardType;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.nio.file.LinkOption;
+import java.security.MessageDigest;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.HexFormat;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -267,7 +270,31 @@ public final class M3FiveProviderScaffold {
     }
 
     // ---------------------------------------------------------------- scaffold
+
+    /**
+     * Prevent generator-driven loss of an M3-owned collection implementation.
+     * The source seal is the original all-throw scaffold. An absent file is
+     * allowed in fresh staging trees; any different existing file is protected.
+     * This preflight runs BEFORE the generator writes any other output.
+     */
+    static void refuseStaticBucketSourceLoss(final Path impl) throws Exception {
+        final Path source = impl.resolve(
+                "apache-static-bucket-map/src/main/java/jdk/m3/collections/apache/M3StaticBucketMap.java");
+        if (!Files.exists(source, LinkOption.NOFOLLOW_LINKS)) {
+            return;
+        }
+        if (!Files.isRegularFile(source, LinkOption.NOFOLLOW_LINKS)) {
+            throw new IllegalStateException("M3_STATICBUCKET_SOURCE_NOT_REGULAR");
+        }
+        final String sha = HexFormat.of().formatHex(
+                MessageDigest.getInstance("SHA-256").digest(Files.readAllBytes(source)));
+        if (!sha.equals("cf234c06d00ee1a106ec3c79d5516df5bae95b71fe84c1bfbb9ceef197991647")) {
+            throw new IllegalStateException("M3_STATICBUCKET_OWNED_SOURCE_REGEN_REFUSED");
+        }
+    }
+
     static void scaffold(Path q, Path impl) throws Exception {
+        refuseStaticBucketSourceLoss(impl);
         Map<String, Map<String, String>> providers = new HashMap<>();
         for (Map<String, String> p : read(q.resolve("PROVIDERS.tsv"))) { providers.putIfAbsent(p.get("lib"), p); }
         Map<String, Map<String, String>> plans = index(read(q.resolve("STORAGE_PLANS.tsv")), "family");
