@@ -20,6 +20,8 @@
 #  questions.
 #
 
+# Modified 2026-11-14: select the existing native hierarchy smoke test in tier1.
+
 ###############################################################################
 #
 # All tests
@@ -56,6 +58,7 @@ tier1_part3 = \
     java/nio/Buffer \
     com/sun/crypto/provider/Cipher \
     jdk/classfile \
+    jdk/m3/llm/test/NcmHierarchyImageTest.java \
     sun/nio/cs/ISO8859x.java
 
 # When adding tests to tier2, make sure they end up in one of the tier2_partX groups
