@@ -77,6 +77,26 @@ undefined-behavior sanitizers on supported non-MSVC toolchains. JVM JNI parity
 is a separate JUnit invocation using the explicit `m3.ncm.library`
 system property and `-Xcheck:jni`.
 
+## Projection primitives in the same native owner
+
+`ncm_projection_jni.cpp` serves `jdk.m3.llm.projection.M3NcmNativeOps` from this
+library (`m3_ncm`); there is no second NCM native library. Its area/half-pixel
+linear resize, three-tap Phi transform and tied-codebook logit batches are a
+numerical translation of `models/quant.py` and `models/next_concept.py` at the
+reviewed commit above, received from hsoliwal/com.synexia#17414 (canonical
+source `d7564cadc43864f0c9c94a7129b2e0fdfa089218`) through M3jdk21 #3033. Its
+nearest-code entry has no separate kernel: it calls `m3_ncm_nearest`, so it
+inherits the ordered binary64 distance and lowest-index tie rule described
+above. On the pinned parity corpus it returns the same codes as the received
+FP32 expanded-norm kernel; near-tie inputs can select differently.
+
+Modified 2026-11-14 by Hitesh Soliwal and Contributors to the Synexia Project:
+moved the received C17 JNI (`m3/llm/native/ncm_jni.c`, library `m3_llm_ncm`)
+into this C++20 target under the same strict warning and floating-point flags,
+routed nearest-code selection to the shared kernel, and loaded the library from
+`-Dm3.ncm.library` or `System.loadLibrary("m3_ncm")`. Tied scores use libc
+`exp` against Java `StrictMath.exp` with the `2e-5` parity tolerance.
+
 ## Upstream MIT notice
 
 MIT License

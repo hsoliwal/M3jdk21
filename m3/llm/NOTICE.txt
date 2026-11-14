@@ -12,3 +12,8 @@ The adapted Java quantizer retains Apache-2.0 AND MIT notices; the full MIT
 permission and modification statement are in META-INF/NCM_DONOR_NOTICE.md
 (packaged from src/main/native/NCM_DONOR_NOTICE.md). No donor model weights,
 training data, Python framework or third-party inference runtime are included.
+
+The jdk.m3.llm.projection NCM operations (M3NcmOps, M3NcmHierarchy and the
+M3NcmNativeOps JNI primitives in the same m3_ncm native library) translate the
+same donor files at the same commit under the same MIT notice; their Java
+sources retain the full MIT text inline.

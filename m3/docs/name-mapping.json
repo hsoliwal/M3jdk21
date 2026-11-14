@@ -16625,12 +16625,12 @@
         "tests": [
           {
             "id": "m3.llm.jev-ncm.component-20261114",
-            "receipt": "m3/llm/JEV_NCM_RECEIVER_RECEIPT.json"
+            "receipt": "hsoliwal/com.synexia@develop:synexia-openrewrite-recipes/crates/m3-jev-ncm-20261114/RECEIPT.json"
           }
         ],
         "provenance": {
           "license": "Apache-2.0",
-          "publication": "Public result-only component candidate from the canonical private recipe; exact emitted files and retained notices are listed in m3/llm/JEV_NCM_PROVENANCE.json.",
+          "publication": "Public result-only component candidate from the canonical private recipe; exact emitted files and retained notices are recorded with the canonical crate (hsoliwal/com.synexia synexia-openrewrite-recipes/crates/m3-jev-ncm-20261114); the first receiver records (m3/llm/JEV_NCM_PROVENANCE.json, m3/llm/JEV_NCM_RECEIVER_RECEIPT.json) were withdrawn from the public tree and remain at M3jdk21 commit eb33bbe48566fd4a363012a05e881f1b1fdff04a. MIT notices travel in the Java sources and META-INF/NCM_DONOR_NOTICE.md.",
           "copied_code": true,
           "donor_boundary": "Portable Synexia canonical source. Jev-style result shapes are an abstract API reference; no Jev source, weights, model, tokenizer, training or service was copied."
         },
@@ -16851,12 +16851,12 @@
         "tests": [
           {
             "id": "m3.llm.jev-ncm.component-20261114",
-            "receipt": "m3/llm/JEV_NCM_RECEIVER_RECEIPT.json"
+            "receipt": "hsoliwal/com.synexia@develop:synexia-openrewrite-recipes/crates/m3-jev-ncm-20261114/RECEIPT.json"
           }
         ],
         "provenance": {
           "license": "Apache-2.0",
-          "publication": "Public result-only component candidate from the canonical private recipe; exact emitted files and retained notices are listed in m3/llm/JEV_NCM_PROVENANCE.json.",
+          "publication": "Public result-only component candidate from the canonical private recipe; exact emitted files and retained notices are recorded with the canonical crate (hsoliwal/com.synexia synexia-openrewrite-recipes/crates/m3-jev-ncm-20261114); the first receiver records (m3/llm/JEV_NCM_PROVENANCE.json, m3/llm/JEV_NCM_RECEIVER_RECEIPT.json) were withdrawn from the public tree and remain at M3jdk21 commit eb33bbe48566fd4a363012a05e881f1b1fdff04a. MIT notices travel in the Java sources and META-INF/NCM_DONOR_NOTICE.md.",
           "copied_code": true,
           "donor_boundary": "Portable Synexia canonical source. Jev-style result shapes are an abstract API reference; no Jev source, weights, model, tokenizer, training or service was copied."
         },
@@ -17014,12 +17014,12 @@
         "tests": [
           {
             "id": "m3.llm.jev-ncm.component-20261114",
-            "receipt": "m3/llm/JEV_NCM_RECEIVER_RECEIPT.json"
+            "receipt": "hsoliwal/com.synexia@develop:synexia-openrewrite-recipes/crates/m3-jev-ncm-20261114/RECEIPT.json"
           }
         ],
         "provenance": {
           "license": "MIT",
-          "publication": "Public result-only component candidate from the canonical private recipe; exact emitted files and retained notices are listed in m3/llm/JEV_NCM_PROVENANCE.json.",
+          "publication": "Public result-only component candidate from the canonical private recipe; exact emitted files and retained notices are recorded with the canonical crate (hsoliwal/com.synexia synexia-openrewrite-recipes/crates/m3-jev-ncm-20261114); the first receiver records (m3/llm/JEV_NCM_PROVENANCE.json, m3/llm/JEV_NCM_RECEIVER_RECEIPT.json) were withdrawn from the public tree and remain at M3jdk21 commit eb33bbe48566fd4a363012a05e881f1b1fdff04a. MIT notices travel in the Java sources and META-INF/NCM_DONOR_NOTICE.md.",
           "copied_code": true,
           "donor_boundary": "NCM numerical translation derives from HazyResearch/ncm models/quant.py and models/next_concept.py at c70274273f489abc73832b2b98584a8483b6b203. Preserve donor MIT notices. No model weights, tokenizer, training corpus, PyTorch runtime or full NCM inference implementation is shipped."
         },
@@ -17179,12 +17179,12 @@
         "tests": [
           {
             "id": "m3.llm.jev-ncm.component-20261114",
-            "receipt": "m3/llm/JEV_NCM_RECEIVER_RECEIPT.json"
+            "receipt": "hsoliwal/com.synexia@develop:synexia-openrewrite-recipes/crates/m3-jev-ncm-20261114/RECEIPT.json"
           }
         ],
         "provenance": {
           "license": "MIT",
-          "publication": "Public result-only component candidate from the canonical private recipe; exact emitted files and retained notices are listed in m3/llm/JEV_NCM_PROVENANCE.json.",
+          "publication": "Public result-only component candidate from the canonical private recipe; exact emitted files and retained notices are recorded with the canonical crate (hsoliwal/com.synexia synexia-openrewrite-recipes/crates/m3-jev-ncm-20261114); the first receiver records (m3/llm/JEV_NCM_PROVENANCE.json, m3/llm/JEV_NCM_RECEIVER_RECEIPT.json) were withdrawn from the public tree and remain at M3jdk21 commit eb33bbe48566fd4a363012a05e881f1b1fdff04a. MIT notices travel in the Java sources and META-INF/NCM_DONOR_NOTICE.md.",
           "copied_code": true,
           "donor_boundary": "NCM numerical translation derives from HazyResearch/ncm models/quant.py and models/next_concept.py at c70274273f489abc73832b2b98584a8483b6b203. Preserve donor MIT notices. No model weights, tokenizer, training corpus, PyTorch runtime or full NCM inference implementation is shipped."
         },
@@ -17213,7 +17213,7 @@
         "id": "m3.llm.ncm-native-ops",
         "kind": "adapter",
         "status": "implemented-tested",
-        "reason": "Canonical SDK emitted and hash-verified this additive component candidate; Java 21 and C17/C++20 JNI component suites passed. Installed source-built M3JDK and new-source promotion remain HOLD. Optional coarse CPU JNI operations mirror the Java numerical owner. JAVA, AUTO and NATIVE_REQUIRED are observable; required mode refuses an absent ABI. Public loading uses target-local m3_llm_ncm, with no Synexia loader or runtime artifact.",
+        "reason": "Canonical SDK emitted and hash-verified this additive component candidate; Java 21 and C17/C++20 JNI component suites passed. Installed source-built M3JDK and new-source promotion remain HOLD. Optional coarse CPU JNI operations mirror the Java numerical owner. JAVA, AUTO and NATIVE_REQUIRED are observable; required mode refuses an absent ABI. The JNI is part of the single jdk.m3.llm NCM native owner (m3/llm/src/main/native, library m3_ncm, loaded from -Dm3.ncm.library or System.loadLibrary(\"m3_ncm\")); nearest delegates to the shared m3_ncm_nearest kernel and is pinned to the received kernel on a fixed parity corpus. No Synexia loader or runtime artifact.",
         "sources": [
           {
             "repo": "hsoliwal/com.synexia",
@@ -17273,8 +17273,8 @@
               "jdk.m3.llm.projection.M3NcmNativeOps$Mode :: public static jdk.m3.llm.projection.M3NcmNativeOps$Mode[] values();",
               "jdk.m3.llm.projection.M3NcmNativeOps$Mode :: public static jdk.m3.llm.projection.M3NcmNativeOps$Mode valueOf(java.lang.String);"
             ],
-            "sha256": "b6bacbd249535ab560c5cf48c6b74471c8d7c08c7ec872120f02531413d1fe17",
-            "git_blob_sha1": "275a7e71b6472e5ef5cf0aff2e93247b3440b05e",
+            "sha256": "78960650ebb0fa9d6643961071adae462812372f19a49ddcb7714aa056eaa14c",
+            "git_blob_sha1": "83d8fc4ef0fc32f8add0aa2475f626ac3e6e2df4",
             "fingerprint": null,
             "revision_role": "candidate",
             "visibility": "public"
@@ -17283,11 +17283,11 @@
             "repo": "hsoliwal/M3jdk21",
             "commit": null,
             "module": "jdk.m3.llm",
-            "path": "m3/llm/native/ncm_jni.c",
+            "path": "m3/llm/src/main/native/src/ncm_projection_jni.cpp",
             "symbol": null,
             "signatures": [],
-            "sha256": "2147a95b1e93a9d6c23fa9732c71f47fca7449901c8d2545ea499cb85b0cfd6b",
-            "git_blob_sha1": "c3468b7377fe192603edfd41a8ec8b9b6fca44cf",
+            "sha256": "27db3c84554011229346f31a2e8dcf55109d8b2fb6289a0f8c711d36a4e133df",
+            "git_blob_sha1": "d80186d0d1716d7abd2fe922a9dc7d3f5b88220c",
             "fingerprint": null,
             "revision_role": "candidate"
           }
@@ -17349,12 +17349,12 @@
         "tests": [
           {
             "id": "m3.llm.jev-ncm.component-20261114",
-            "receipt": "m3/llm/JEV_NCM_RECEIVER_RECEIPT.json"
+            "receipt": "hsoliwal/com.synexia@develop:synexia-openrewrite-recipes/crates/m3-jev-ncm-20261114/RECEIPT.json"
           }
         ],
         "provenance": {
           "license": "Apache-2.0 AND MIT",
-          "publication": "Public result-only component candidate from the canonical private recipe; exact emitted files and retained notices are listed in m3/llm/JEV_NCM_PROVENANCE.json.",
+          "publication": "Public result-only component candidate from the canonical private recipe; exact emitted files and retained notices are recorded with the canonical crate (hsoliwal/com.synexia synexia-openrewrite-recipes/crates/m3-jev-ncm-20261114); the first receiver records (m3/llm/JEV_NCM_PROVENANCE.json, m3/llm/JEV_NCM_RECEIVER_RECEIPT.json) were withdrawn from the public tree and remain at M3jdk21 commit eb33bbe48566fd4a363012a05e881f1b1fdff04a. MIT notices travel in the Java sources and META-INF/NCM_DONOR_NOTICE.md.",
           "copied_code": true,
           "donor_boundary": "NCM numerical translation derives from HazyResearch/ncm models/quant.py and models/next_concept.py at c70274273f489abc73832b2b98584a8483b6b203. Preserve donor MIT notices. No model weights, tokenizer, training corpus, PyTorch runtime or full NCM inference implementation is shipped."
         },
@@ -17375,7 +17375,20 @@
         },
         "lineage": {
           "previous_sources": [],
-          "previous_targets": [],
+          "previous_targets": [
+            {
+              "repo": "hsoliwal/M3jdk21",
+              "commit": "eb33bbe48566fd4a363012a05e881f1b1fdff04a",
+              "module": "jdk.m3.llm",
+              "path": "m3/llm/native/ncm_jni.c",
+              "symbol": null,
+              "signatures": [],
+              "sha256": "2147a95b1e93a9d6c23fa9732c71f47fca7449901c8d2545ea499cb85b0cfd6b",
+              "git_blob_sha1": "c3468b7377fe192603edfd41a8ec8b9b6fca44cf",
+              "fingerprint": null,
+              "revision_role": "pinned"
+            }
+          ],
           "supersedes": []
         },
         "source_state": "experimental"
@@ -17508,12 +17521,12 @@
         "tests": [
           {
             "id": "m3.llm.jev-ncm.component-20261114",
-            "receipt": "m3/llm/JEV_NCM_RECEIVER_RECEIPT.json"
+            "receipt": "hsoliwal/com.synexia@develop:synexia-openrewrite-recipes/crates/m3-jev-ncm-20261114/RECEIPT.json"
           }
         ],
         "provenance": {
           "license": "Apache-2.0",
-          "publication": "Public result-only component candidate from the canonical private recipe; exact emitted files and retained notices are listed in m3/llm/JEV_NCM_PROVENANCE.json.",
+          "publication": "Public result-only component candidate from the canonical private recipe; exact emitted files and retained notices are recorded with the canonical crate (hsoliwal/com.synexia synexia-openrewrite-recipes/crates/m3-jev-ncm-20261114); the first receiver records (m3/llm/JEV_NCM_PROVENANCE.json, m3/llm/JEV_NCM_RECEIVER_RECEIPT.json) were withdrawn from the public tree and remain at M3jdk21 commit eb33bbe48566fd4a363012a05e881f1b1fdff04a. MIT notices travel in the Java sources and META-INF/NCM_DONOR_NOTICE.md.",
           "copied_code": true,
           "donor_boundary": "Portable Synexia canonical source. Jev-style result shapes are an abstract API reference; no Jev source, weights, model, tokenizer, training or service was copied."
         },

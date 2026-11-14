@@ -2,6 +2,8 @@
 // SPDX-License-Identifier: Apache-2.0
 package jdk.m3.llm.projection;
 
+import java.nio.file.InvalidPathException;
+import java.nio.file.Path;
 import java.util.Objects;
 
 /** Coarse, bounded JNI batches for the explicit NCM numerical profile.
@@ -11,6 +13,15 @@ import java.util.Objects;
  * The Java validation budget limits admitted work and result/scratch dimensions.
  * JNI may copy input arrays, and native scratch temporarily coexists with the Java
  * result; VM-dependent peak native memory is a separate qualification measure.
+ *
+ * <p>The JNI lives in the single jdk.m3.llm NCM native owner, library {@code m3_ncm}
+ * built from {@code m3/llm/src/main/native}, which also serves {@code M3NcmQuantizer}.
+ * The library is loaded from the absolute path in {@code -Dm3.ncm.library} when that
+ * property is set, otherwise by {@code System.loadLibrary("m3_ncm")}.
+ * {@code nearest} delegates to the shared {@code m3_ncm_nearest} kernel (binary64
+ * ordered differences, lowest index on exact ties). It agrees with the FP32
+ * expanded-norm {@link M3NcmOps#nearest(float[], int, float[])} on the pinned parity
+ * corpus; near-tie inputs can select a different code than {@link Mode#JAVA}.
  */
 public final class M3NcmNativeOps {
     /** Backend choice is observable through availability and required-mode refusal. */
@@ -22,9 +33,13 @@ public final class M3NcmNativeOps {
     private static boolean load() {
         if (Boolean.getBoolean("m3.llm.ncm.disableNative")) return false;
         try {
-            System.loadLibrary("m3_llm_ncm");
+            String library = System.getProperty("m3.ncm.library");
+            if (library == null) System.loadLibrary("m3_ncm");
+            else System.load(Path.of(library).toAbsolutePath().normalize().toString());
             return abiVersionNative() == 1;
-        } catch (UnsatisfiedLinkError | SecurityException absentFeature) { return false; }
+        } catch (UnsatisfiedLinkError | SecurityException | InvalidPathException absentFeature) {
+            return false;
+        }
     }
 
     public static boolean available() { return AVAILABLE; }

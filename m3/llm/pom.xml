@@ -17,7 +17,7 @@
   <build>
     <resources>
       <resource><directory>browser/web</directory><targetPath>jdk/m3/llm/browser</targetPath></resource>
-      <resource><directory>.</directory><targetPath>META-INF</targetPath><includes><include>LICENSE</include><include>NOTICE</include><include>NOTICE.txt</include><include>NCM-MIT-LICENSE.txt</include></includes></resource>
+      <resource><directory>.</directory><targetPath>META-INF</targetPath><includes><include>LICENSE</include><include>NOTICE</include><include>NOTICE.txt</include></includes></resource>
       <resource><directory>src/main/native</directory><targetPath>META-INF</targetPath><includes><include>NCM_DONOR_NOTICE.md</include></includes></resource>
     </resources>
     <plugins>
