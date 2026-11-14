@@ -129,6 +129,19 @@ class RefsTest(unittest.TestCase):
         self.assertEqual(text, src.replace("parents[3]", "parents[4]").replace('"m3/release', '"make/m3/release'))
         self.rw.fixture = False
 
+    def test_synthetic_tree_tests_follow_the_rule_table(self):
+        src = ('import tempfile\nput(root, "m3/optional/pom.xml")\nput(root, "m3/fs/src/X.java")\n'
+               'put(root, "m3/pom.xml")\n')
+        self.assertTrue(mi.synthetic_test("m3/release/test_x.py", src))
+        self.assertFalse(mi.synthetic_test("m3/tooling/jdk-naming/test_jdk_naming.py", src))
+        rules = {"m3/optional/pom.xml": "make/m3/optional/pom.xml"}
+        self.rw.rule_of = lambda p: rules.get(p, p)
+        self.rw.synthetic = True
+        text, _ = self.run_text("m3/release/test_x.py", "make/m3/release/test_x.py", src)
+        self.assertEqual(text, 'import tempfile\nput(root, "make/m3/optional/pom.xml")\nput(root, "m3/fs/src/X.java")\n'
+                               'put(root, "make/m3/pom.xml")\n')
+        self.rw.synthetic = False
+
     def test_protected_corpus(self):
         self.assertTrue(mi.skip_content("m3/tooling/jdk-naming/NAMING_RULES.tsv"))
         self.assertTrue(mi.skip_content("make/m3/tooling/jdk-naming/RENAME_MAP.tsv"))

@@ -363,14 +363,22 @@ def split_trail(tok: str):
 
 
 class Rewriter:
-    def __init__(self, pm: PathMap):
+    def __init__(self, pm: PathMap, rule_of=None):
         self.pm = pm
         self.fixture = False
+        self.synthetic = False  # a test that builds a tree in a temporary directory (set per file)
+        self.rule_of = rule_of  # unknown m3/ path -> where the rule table would put it in this phase
 
     def map_root(self, token: str):
         core, trail = split_trail(token)
         slash = core.endswith("/")
-        new = self.pm.new_of(core)
+        if self.synthetic and self.rule_of and "/" in core.rstrip("/") and not self.pm.known(core) \
+                and not re.search(r"[*?{}$]", core):
+            # a synthetic fixture path: the tool under test sees the new layout, so the path goes where the rule table
+            # would put a real file of that name (m3/optional/pom.xml -> make/m3/optional/pom.xml; m3/core/... stays)
+            new = self.rule_of(core.rstrip("/"))
+        else:
+            new = self.pm.new_of(core)
         if new is None:
             return None
         return new + ("/" if slash and not new.endswith("/") else "") + trail
@@ -494,9 +502,9 @@ class Rewriter:
             if len(seps) != 1:
                 return m.group(0)
             old = "/".join(["m3", *comps])
-            if not self.pm.known(old):
+            if not self.pm.known(old) and not (self.synthetic and self.rule_of):
                 return m.group(0)
-            new = self.pm.new_of(old)
+            new = self.pm.new_of(old) if self.pm.known(old) else self.rule_of(old)
             if new is None:
                 where.append(("SPLIT", old))
                 return m.group(0)
@@ -671,6 +679,26 @@ def file_roots(text: str) -> set:
         roots = grown
 
 
+TEST_NAME = re.compile(r"(?:^|/)(?:test_[^/]*\.py|[^/]*_test\.py)$")
+TEMP_TREE = re.compile(r"tempfile|TemporaryDirectory|mkdtemp|tmp_path")
+
+
+def synthetic_test(path: str, text: str) -> bool:
+    """A Python test that builds a synthetic repository in a temporary directory (and is not a PROTECT fixture)."""
+    return bool(TEST_NAME.search(path)) and bool(TEMP_TREE.search(text)) and not fixture_test(path)
+
+
+def rule_lookup(rules_path: Path, areas_path: Path, phases: set, statuses: set):
+    """unknown m3/ path -> its target when the rule table moves such a path in this phase, else the path itself."""
+    rules = read_tsv(rules_path)
+    areas = area_rules(read_tsv(areas_path))
+
+    def rule_of(path: str) -> str:
+        target, _rid, phase, status, _reason = classify(path, rules, areas)
+        return target if phase in phases and status in statuses and target != "RETIRE" else path
+    return rule_of
+
+
 def fixture_test(path: str, text: str = "") -> bool:
     """PROTECT.tsv fixture rows: tests whose m3/... literals are inputs of a recorded transformation."""
     return any(r.search(path) for r in PROTECTED["fixture"])
@@ -702,7 +730,8 @@ def cmd_refs(args) -> int:
     new_entries = tree_entries(args.repo, args.rev)
     modes = {p: m for p, m, _s in new_entries}
     todo = [(p, s) for p, _m, s in new_entries if back.get(p, p) not in retired and not skip_content(back.get(p, p))]
-    rw, findings, changed = Rewriter(pm), [], {}
+    phases, statuses = set(args.phase.split(",")), set(args.status.split(","))
+    rw, findings, changed = Rewriter(pm, rule_lookup(HERE / "RULES.tsv", HERE / "AREAS.tsv", phases, statuses)), [], {}
     for i, data in enumerate(blobs(args.repo, [s for _p, s in todo])):
         if i % 10000 == 0:
             print(f"refs {i}/{len(todo)}", file=sys.stderr, flush=True)
@@ -716,6 +745,7 @@ def cmd_refs(args) -> int:
         text = data.decode("utf-8", "surrogateescape")
         where: list = []
         rw.fixture = fixture_test(path_old, text)
+        rw.synthetic = synthetic_test(path_old, text)
         new = rw.text(path_old, path_new, text, where)
         findings.extend(f"{kind}\t{path_new}\t{tok}" for kind, tok in where)
         if new != text:
