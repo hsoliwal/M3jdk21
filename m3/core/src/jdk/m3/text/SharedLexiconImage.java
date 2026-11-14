@@ -56,6 +56,7 @@ public final class SharedLexiconImage {
         // Reuse one engine only within this constructor's record batch.
         MessageDigest recordDigest = null;
         byte[] recordDigestBytes = null;
+        ByteBuffer recordView = null;
         // Snapshot metadata and record checksums before publishing this image owner.
         for (int i = 0; i < count; i++) {
             int entry = HEADER + i * directoryBytes;
@@ -71,8 +72,12 @@ public final class SharedLexiconImage {
                 try { recordDigest = MessageDigest.getInstance("SHA-256"); }
                 catch (NoSuchAlgorithmException impossible) { throw new AssertionError(impossible); }
                 recordDigestBytes = new byte[32];
+                recordView = mapping.asReadOnlyBuffer();
             }
-            recordDigest.update(recordBytes(i));
+            int recordBegin = payloadOffset + offset * Character.BYTES;
+            recordView.rewind().limit(recordBegin + length * Character.BYTES)
+                    .position(recordBegin);
+            recordDigest.update(recordView);
             try { recordDigest.digest(recordDigestBytes, 0, 32); }
             catch (DigestException impossible) { throw new AssertionError(impossible); }
             System.arraycopy(recordDigestBytes, 0, recordDigests, i * 32, 32);

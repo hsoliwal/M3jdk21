@@ -1,0 +1,15 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.rewrite.M3ImageRecordWindowReuseR238
+displayName: Reuse a local read-only lexicon record window
+description: Replay the qualified constructor window atom with exact drift refusal.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-image-record-window
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.rewrite.M3ImageAdmissionPrecomputeR238
+displayName: Compose qualified lexicon image admission precompute
+description: Apply local digest and private scratch copy, then local read-only record windows.
+recipeList:
+  - com.synexia.rewrite.M3ImageRecordDigestReuseR237
+  - com.synexia.rewrite.M3ImageRecordWindowReuseR238

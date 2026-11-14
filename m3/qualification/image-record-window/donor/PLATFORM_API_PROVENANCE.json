@@ -1,0 +1,36 @@
+[
+  {
+    "classification": "REUSE",
+    "owner": "Existing SharedLexiconImage",
+    "mechanism": "Validated directory offset/length locals,read-only buffer views already used by digestImage,constructor-local digest/scratch and private-table System.arraycopy from qualified R237. No new fields/storage/lifetime owner."
+  },
+  {
+    "classification": "DIRECT_USE_PLATFORM_API",
+    "repository": "openjdk/jdk",
+    "commit": "890adb6410dab4606a4f26a942aed02fb2f55387",
+    "sources": [
+      {
+        "path": "src/java.base/share/classes/java/nio/Buffer.java",
+        "blob": "7bfcbea9639d7a510d1b74626d015a04a872c71f"
+      },
+      {
+        "path": "src/java.base/share/classes/java/nio/X-Buffer.java.template",
+        "blob": "0120ed421c5df8dd4d58a5d155bbbb465ceb748a"
+      },
+      {
+        "path": "src/java.base/share/classes/java/security/MessageDigest.java",
+        "blob": "36c92df556e072d922e0e635964f71132bc1f0b3"
+      },
+      {
+        "path": "src/java.base/share/classes/java/security/MessageDigestSpi.java",
+        "blob": "ff37569876f7baf220b6e0a069bbf39b804ba5c9"
+      },
+      {
+        "path": "src/java.base/share/classes/sun/security/jca/JCAUtil.java",
+        "blob": "9afc4ca12c0cbfdfc55261a148c81eecaa141d63"
+      }
+    ],
+    "license": "GPL-2.0-with-classpath-exception",
+    "mechanism": "One independent read-only view. Rewind sets position0/mark-1 without restoring limit to capacity;limit(validatedEnd) thenposition(validatedBegin) supports allforward/backwards/empty ranges. MessageDigest consumes remaining bytes;private output-table copy retained. Direct platform API invocation,no GPLcode copy."
+  }
+]
