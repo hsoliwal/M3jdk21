@@ -1,0 +1,7 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: jdk.m3.lexicon.PrecomputeCanonicalR243
+displayName: M3Lexicons Java 21 precompute wire text
+description: Replays the qualified Python exporter from an exact preimage and preserves the existing Java payload contract.
+recipeList:
+  - jdk.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe:
+      crateName: precompute-canonical-r243
