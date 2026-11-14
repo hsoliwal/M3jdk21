@@ -142,10 +142,11 @@ class M3RecipeHomePolicyTest(unittest.TestCase):
         with POLICY.open(encoding="utf-8", newline="") as handle:
             rows = list(csv.DictReader(handle, delimiter="\t"))
 
-        # The three A3/JNI receiver rows were admitted after the original 16-row freeze.
+        # The three A3/JNI receiver rows were admitted after the original 16-row freeze; the A3Lab
+        # row left with m3/tooling/a3 (clean output rule, 2026-11-14).
         # Keep exact cardinality and reject duplicate surfaces; do not relax ownership rules.
-        self.assertEqual(23, len(rows))
-        self.assertEqual(23, len({row["local_surface"] for row in rows}))
+        self.assertEqual(22, len(rows))
+        self.assertEqual(22, len({row["local_surface"] for row in rows}))
         for row in rows:
             self.assertEqual("M3JDK21_SYNEXIA_RECIPE_HOME_V1", row["schema"])
             self.assertEqual("hsoliwal/com.synexia", row["canonical_repository"])
@@ -320,58 +321,6 @@ class M3RecipeHomePolicyTest(unittest.TestCase):
 
     def assert_residue_set_closed(self, repository: Path, policy: list[dict[str, str]], frozen: set[str]) -> None:
         self.assertEqual(frozen, reusable_residue_paths(repository, policy), "unlisted or retired reusable residue")
-
-    def test_a3_mastery_and_catalogue_resolve_to_m3_recipe_owners(self) -> None:
-        with POLICY.open(encoding="utf-8", newline="") as handle:
-            rows = {row["local_surface"]: row for row in csv.DictReader(handle, delimiter="\t")}
-
-        a3 = rows["m3/tooling/a3/src/main/java/jdk/m3/a3/A3Lab.java"]
-        self.assertEqual("TARGET_PROOF_CONSUMER", a3["disposition"])
-        self.assertEqual(
-            "com.synexia.rewrite.M3PureIntConvergenceRecipe",
-            a3["canonical_owner"],
-        )
-        self.assertEqual("true", a3["handoff_required"])
-
-        lab = (
-            ROOT
-            / "tooling"
-            / "a3"
-            / "src"
-            / "main"
-            / "java"
-            / "jdk"
-            / "m3"
-            / "a3"
-            / "A3Lab.java"
-        ).read_text(encoding="utf-8")
-        self.assertIn(
-            "import jdk.internal.m3.rewrite.M3PureIntAtomizeRecipe;", lab
-        )
-        self.assertIn(
-            "import jdk.internal.m3.rewrite.M3PureIntPatternizeRecipe;", lab
-        )
-        self.assertNotIn(
-            "import jdk.m3.rewrite.atom.M3AtomizePureIntReturnRecipe;", lab
-        )
-        self.assertNotIn(
-            "import jdk.m3.rewrite.atom.M3PatternizePureIntAtomRecipe;", lab
-        )
-
-        catalogue = (ROOT / "tooling" / "recipe-catalogue.tsv").read_text(
-            encoding="utf-8"
-        )
-        for owner in (
-            "com.synexia.rewrite.M3PureIntAtomizeRecipe",
-            "com.synexia.rewrite.M3PureIntInventoryRecipe",
-            "com.synexia.rewrite.M3PureIntPatternizeRecipe",
-            "com.synexia.rewrite.M3PureIntDocumentationRecipe",
-            "com.synexia.rewrite.M3PureIntConvergenceRecipe",
-        ):
-            self.assertIn(owner, catalogue)
-        for retired in ("com.synexia.rewrite.atom.", "com.m3.rewrite.atom.", "jdk.internal.m3.rewrite.atom.", "jdk.m3.rewrite.atom."):
-            self.assertNotIn(retired, catalogue)
-
 
     def test_canonical_home_pin_binds_exact_m3_manifest(self) -> None:
         with PIN.open(encoding="utf-8", newline="") as handle:
