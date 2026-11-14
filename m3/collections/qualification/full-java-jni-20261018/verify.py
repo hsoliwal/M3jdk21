@@ -112,13 +112,22 @@ LIBRARIES = {'m3_disjoint_index': {'sources': ['collections/m3_disjoint_index.c'
  'm3_mat_row': {'sources': ['collections/mat_int_row_jni.c'],
                 'owners': ['jdk.internal.m3.collections.mat.MatIntRowKernel'],
                 'requires': None},
+ 'm3_mat_bitmatrix': {'sources': ['collections/mat_bit_matrix.c'],
+                       'owners': ['jdk.internal.m3.collections.mat.MatBitMatrix'],
+                       'requires': None},
  'm3_packed_int_width': {'sources': ['collections/packed_int_width.c'],
                          'owners': ['jdk.internal.m3.collections.packed.PackedIntNative'],
                          'requires': None}}
 
+_completed_commands = []
+
+
 def run(args):
     print('+ ' + ' '.join(map(str, args)), flush=True)
-    subprocess.run(list(map(str, args)), cwd=ROOT, check=True)
+    command = list(map(str, args))
+    completed = subprocess.run(command, cwd=ROOT, check=True)
+    _completed_commands.append({'argv': list(command), 'cwd': str(ROOT),
+                                'returncode': completed.returncode})
 
 def sha(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
@@ -147,6 +156,7 @@ def reports(mode):
 def main():
     OUT.mkdir(parents=True, exist_ok=True)
     (OUT / 'PROOF.json').unlink(missing_ok=True)  # Never leave a prior PASS after a failed rerun.
+    _completed_commands.clear()
     for name in ('headers', 'classes', 'fixture-classes', 'native', 'missing'):
         path = OUT / name
         if path.exists(): shutil.rmtree(path)
@@ -247,6 +257,8 @@ def main():
               '-o', gather_fixture])
     run([gather_fixture])
     native_properties = [
+        '-Dm3.matmatrix.native.path=' + str(OUT / 'native/libm3_mat_bitmatrix.so'),
+        '-Dm3.bitmatrix.requireNative=true',
         '-Dm3.counted.native=' + str(OUT / 'native/libm3_count_lanes.so'),
         '-Dm3.totals.native=' + str(OUT / 'native/libm3_count_totals.so'),
         '-Dm3.native.path=' + str(OUT / 'native/libm3_collections_packed.so'),
@@ -257,6 +269,7 @@ def main():
     common = ['-Xmx768m', '-XX:ActiveProcessorCount=2', '-Xcheck:jni', array_native_option,
               '-Dm3.collections.signal.native=true']
     results = {}
+    configured_jvm_profiles = {}
     for mode, required in [('java', 'false'), ('native', 'true')]:
         library = OUT / ('native' if mode == 'native' else 'missing')
         vm = common + ['-Djava.library.path=' + str(library),
@@ -267,20 +280,42 @@ def main():
             vm += native_properties
         old_reports = MODULE / 'target/surefire-reports'
         if old_reports.exists(): shutil.rmtree(old_reports)
+        command_index = len(_completed_commands)
         maven(MODULE / 'pom.xml', '-Dtest=*', '-DargLine=' + ' '.join(vm), '-DfailIfNoTests=true', 'verify')
+        configured_jvm_profiles[mode] = {
+            'vm_args': list(vm), 'completed_command_index': command_index}
         results[mode] = reports(mode)
     jar = MODULE / 'target/m3-collections-0.1.0-SNAPSHOT.jar'
     with zipfile.ZipFile(jar) as archive:
         expected_classes = {str(p.relative_to(OUT / 'classes')) for p in (OUT / 'classes').rglob('*.class')}
         actual_classes = {name for name in archive.namelist() if name.endswith('.class')}
         if expected_classes != actual_classes: raise RuntimeError('Packaged class inventory differs from fresh compilation')
-        for name in ('LICENSE', 'NOTICE', 'provenance.json', 'm3-donation.json', 'name-mapping.json', 'M3-DONATION-NOTICE.txt', 'NETBEANS-NOTICE.txt'):
-            if archive.read('META-INF/' + name) != (MODULE / name).read_bytes():
-                raise RuntimeError('Packaged module legal/provenance bytes differ: ' + name)
+        # The POM's current product owners are authoritative; NOTICE is not a source owner.
+        packaged_resources = {
+            'META-INF/LICENSE': MODULE / 'LICENSE',
+            'META-INF/provenance.json': MODULE / 'provenance.json',
+            'META-INF/m3-donation.json': MODULE / 'm3-donation.json',
+            'META-INF/name-mapping.json': MODULE / 'name-mapping.json',
+            'META-INF/M3-DONATION-NOTICE.txt': MODULE / 'M3-DONATION-NOTICE.txt',
+            'META-INF/NETBEANS-NOTICE.txt': MODULE / 'NETBEANS-NOTICE.txt',
+            'META-INF/m3collections.md': ROOT / 'src/jdk.m3.collections/share/legal/m3collections.md',
+            'jdk/m3/collections/M3_SDK_FAMILY_CATALOG.tsv':
+                ROOT / 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3_SDK_FAMILY_CATALOG.tsv',
+        }
+        packaged_names = archive.namelist()
+        for name, source in packaged_resources.items():
+            if packaged_names.count(name) != 1 or archive.read(name) != source.read_bytes():
+                raise RuntimeError('Packaged module resource missing, duplicate or drifted: ' + name)
+        test_resource_root = ROOT / 'test/jdk/jdk/m3/collections/resources'
+        test_resources = {path.relative_to(test_resource_root).as_posix()
+                          for path in test_resource_root.rglob('*') if path.is_file()}
+        leaked_test_resources = sorted(test_resources.intersection(packaged_names))
+        if leaked_test_resources:
+            raise RuntimeError('Test resources leaked into product jar: ' + repr(leaked_test_resources))
     runtime_modules = subprocess.check_output(
         [JAVA / 'bin/jdeps', '--module-path', array_jar, '--print-module-deps', jar],
         text=True).strip()
-    if runtime_modules != 'jdk.m3.arrays,java.base':
+    if sorted(runtime_modules.split(',')) != ['java.base', 'jdk.m3.arrays']:
         raise RuntimeError('Unexpected JPMS dependency closure: ' + runtime_modules)
     cp = os.pathsep.join(map(str, (MODULE / 'target/classes',
                                    MODULE / 'target/test-classes', array_jar)))
@@ -319,11 +354,20 @@ def main():
     proof = {'status': 'PASS_OWNING_COLLECTION_JAVA_AND_JNI', 'head_sha': head,
              'scope': 'independent m3/collections; no JDK phase or challenge-corpus promotion',
              'owning_test_selection': '-Dtest=* overrides default includes/excludes',
-             'native_host_properties': 'existing m3-collections-native POM bindings, native mode only',
+             'native_host_properties': 'existing native bindings plus explicit MatBitMatrix provider and required gate, native mode only',
              'worktree_dirty': bool(subprocess.check_output(['git', 'status', '--porcelain', '--untracked-files=no'], cwd=ROOT)),
              'jar_sha256': sha(jar), 'jar_classes': len(expected_classes), 'runtime_modules': runtime_modules,
              'java_sources': len(sources), 'test_sources': len(tests), 'junit': results,
              'source_dependencies': dependency_proof, 'native_libraries': sorted(LIBRARIES),
+             'native_library_artifacts': {
+                 name: {'path': (OUT / 'native' / ('lib' + name + '.so')).relative_to(ROOT).as_posix(),
+                        'sha256': sha(OUT / 'native' / ('lib' + name + '.so'))}
+                 for name in sorted(LIBRARIES)},
+             'arrays_native_artifact': {
+                 'path': array_native.relative_to(ROOT).as_posix(), 'sha256': sha(array_native)},
+             'completed_commands': list(_completed_commands),
+             'configured_jvm_profiles': configured_jvm_profiles,
+             'jvm_profile_evidence': 'configured -DargLine vectors bound to successful Maven argv; Surefire child argv not observed',
              'explicit_native_contracts': [name.rsplit('.', 1)[-1] for name, _ in contracts],
              'explicit_native_contract_binaries': [name for name, _ in contracts],
              'native': 'generated headers; C17 strict; fatal UBSan; actual -Xcheck:jni',

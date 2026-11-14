@@ -4,6 +4,7 @@ package jdk.m3.collections;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -143,6 +144,166 @@ final class SegmentedLaneBulkContractTest {
         int[] count = {0};
         rows.forEachLive(handle -> assertEquals(output[++count[0]], rows.get(handle, 0)));
         assertEquals(rows.size(), count[0]);
+    }
+
+    @Test void requiredNativeLongPagesAreZeroedAtEveryBoundary() {
+        int[] slots = {0, 4095, 4096, (1 << 20) - 1, 1 << 20, Address28.MAX_SLOT};
+        for (int slot : slots) {
+            LongLane28 lane = new LongLane28();
+            lane.set(slot, Long.MIN_VALUE);
+            assertTrue(jdk.m3.arrays.ArrayNative.isLoaded());
+            assertEquals(1, lane.allocatedRegionCount());
+            assertEquals(1, lane.allocatedBlockCount());
+            assertEquals(32768, lane.payloadBytes());
+            long[] page = new long[Address28.VALUES_PER_BLOCK];
+            int first = slot & ~Address28.OFFSET_MASK;
+            lane.copyTo(first, page, 0, page.length);
+            for (int i = 0; i < page.length; i++)
+                assertEquals(first + i == slot ? Long.MIN_VALUE : 0, page[i]);
+            lane.set(first, Long.MAX_VALUE);
+            lane.clear(slot);
+            assertEquals(1, lane.allocatedBlockCount());
+            assertEquals(1, lane.allocatedRegionCount());
+        }
+    }
+
+    @Test void requiredNativeLongImportsAndExportsStayDetached() {
+        LongLane28 lane = new LongLane28();
+        long[] source = {Long.MIN_VALUE, 0, Long.MAX_VALUE};
+        lane.copyFrom(source, 0, 4095, source.length);
+        source[0] = 71;
+        long[] output = new long[3];
+        lane.copyTo(4095, output, 0, output.length);
+        assertArrayEquals(new long[] {Long.MIN_VALUE, 0, Long.MAX_VALUE}, output);
+        output[2] = 19;
+        assertEquals(Long.MAX_VALUE, lane.get(4097));
+        assertEquals(2, lane.allocatedBlockCount());
+        lane.copyFrom(lane, 4095, 4096, 3);
+        lane.copyTo(4096, output, 0, output.length);
+        assertArrayEquals(new long[] {Long.MIN_VALUE, 0, Long.MAX_VALUE}, output);
+        lane.copyFrom(lane, 4096, 4095, 3);
+        lane.copyTo(4095, output, 0, output.length);
+        assertArrayEquals(new long[] {Long.MIN_VALUE, 0, Long.MAX_VALUE}, output);
+    }
+
+    @Test void requiredNativeLongArithmeticFailurePreservesThePage() {
+        LongLane28 lane = new LongLane28();
+        lane.set(0, Long.MAX_VALUE);
+        assertThrows(ArithmeticException.class, () -> lane.addAndGet(0, 1));
+        assertEquals(Long.MAX_VALUE, lane.get(0));
+        assertEquals(Long.MAX_VALUE, lane.getAndSet(0, Long.MIN_VALUE));
+        assertThrows(ArithmeticException.class, () -> lane.addAndGet(0, -1));
+        assertEquals(Long.MIN_VALUE, lane.get(0));
+        assertEquals(1, lane.allocatedBlockCount());
+    }
+
+    @Test void requiredNativeLongColdZerosAndMissingProviderInFreshVm() throws Exception {
+        runLongLaneChild("missing");
+    }
+
+    @Test void requiredNativeLongSilentNullNeverPublishesAPageInFreshVm() throws Exception {
+        runLongLaneChild("silent-null");
+    }
+
+    private static void runLongLaneChild(String mode) throws Exception {
+        java.nio.file.Path log = java.nio.file.Files.createTempFile("m3-long-page-", ".log");
+        var args = new java.util.ArrayList<String>();
+        args.add(java.nio.file.Path.of(System.getProperty("java.home"), "bin", "java").toString());
+        args.addAll(java.util.List.of("-Xms16m", "-Xmx64m", "-Xcheck:jni", "-ea",
+                "-XX:-UsePerfData", "-XX:-HeapDumpOnOutOfMemoryError",
+                "-XX:-CreateCoredumpOnCrash", "-XX:ErrorFile=NUL",
+                "-Djava.io.tmpdir=" + System.getProperty("java.io.tmpdir")));
+        if (mode.equals("silent-null")) {
+            String provider = System.getProperty("m3.arrays.native.path");
+            assertNotNull(provider, "silent-null JNI case requires the configured actual provider");
+            var fixture = java.nio.file.Path.of(provider).getParent().resolve(
+                    System.mapLibraryName("m3_array_allocation_null_fixture"));
+            args.add("-Dm3.arrays.native.path=" + fixture);
+        }
+        args.add("-cp");
+        String classpath = System.getProperty("surefire.test.class.path");
+        if (classpath == null || classpath.isBlank()) {
+            var entries = new java.util.LinkedHashSet<>(java.util.Arrays.asList(
+                    System.getProperty("java.class.path").split(
+                    java.util.regex.Pattern.quote(java.io.File.pathSeparator), -1)));
+            for (Class<?> type : new Class<?>[] {LongLane28.class,
+                    SegmentedLaneBulkContractTest.class, jdk.m3.arrays.ArrayNative.class}) {
+                var source = type.getProtectionDomain().getCodeSource();
+                if (source != null && source.getLocation() != null
+                        && source.getLocation().getProtocol().equals("file"))
+                    entries.add(java.nio.file.Path.of(source.getLocation().toURI()).toString());
+            }
+            classpath = String.join(java.io.File.pathSeparator, entries);
+        }
+        args.add(classpath);
+        args.add(SegmentedLaneBulkContractTest.class.getName());
+        args.add(mode);
+        Process process = new ProcessBuilder(args).redirectErrorStream(true)
+                .redirectOutput(log.toFile()).start();
+        try {
+            assertTrue(process.waitFor(30, java.util.concurrent.TimeUnit.SECONDS), "long-page child timed out");
+            String output = java.nio.file.Files.readString(log);
+            assertEquals(0, process.exitValue(), output);
+            assertEquals("PASS long-lane " + mode, output.strip());
+        } finally {
+            if (process.isAlive()) process.destroyForcibly();
+            java.nio.file.Files.deleteIfExists(log);
+        }
+    }
+
+    /** Fresh-process failure discriminator; reuses the supplied JNI null fixture. */
+    public static void main(String[] args) {
+        assertEquals(1, args.length);
+        assertTrue(args[0].equals("missing") || args[0].equals("silent-null"));
+        assertTrue(!jdk.m3.arrays.ArrayNative.isLoaded());
+        boolean missing = args[0].equals("missing");
+        if (missing) System.clearProperty("m3.arrays.native.path");
+        LongLane28 empty = new LongLane28();
+        assertEquals(0, empty.get(0));
+        empty.set(0, 0);
+        empty.clear(Address28.MAX_SLOT);
+        assertEquals(0, empty.getAndSet(4096, 0));
+        assertEquals(0, empty.addAndGet(1 << 20, 0));
+        empty.fill(0, Address28.MAX_SLOTS, 0);
+        empty.copyFrom(new long[4100], 0, 4094, 4100);
+        empty.copyFrom(new LongLane28(), 0, 0, Address28.MAX_SLOTS);
+        empty.fill(Address28.MAX_SLOTS, Address28.MAX_SLOTS, 1);
+        empty.copyFrom(new long[0], 0, Address28.MAX_SLOTS, 0);
+        empty.copyTo(Address28.MAX_SLOTS, new long[0], 0, 0);
+        assertThrows(IndexOutOfBoundsException.class, () -> empty.set(-1, 1));
+        assertThrows(IndexOutOfBoundsException.class, () -> empty.set(Address28.MAX_SLOTS, 0));
+        assertThrows(IndexOutOfBoundsException.class, () -> empty.fill(-1, 1, 1));
+        assertThrows(NullPointerException.class, () -> empty.copyFrom((long[]) null, 0, 0, 0));
+        assertEquals(0, empty.allocatedRegionCount());
+        assertEquals(0, empty.allocatedBlockCount());
+        assertEquals(0, empty.payloadBytes());
+        assertTrue(!jdk.m3.arrays.ArrayNative.isLoaded());
+        Class<? extends Throwable> failure = missing ? UnsatisfiedLinkError.class : OutOfMemoryError.class;
+        for (int slot : new int[] {0, 4095, 4096, (1 << 20) - 1, 1 << 20, Address28.MAX_SLOT}) {
+            for (int operation = 0; operation < 5; operation++) {
+                LongLane28 lane = new LongLane28();
+                int selected = operation;
+                org.junit.jupiter.api.function.Executable write = () -> {
+                    switch (selected) {
+                        case 0 -> lane.set(slot, 1);
+                        case 1 -> lane.getAndSet(slot, 1);
+                        case 2 -> lane.addAndGet(slot, 1);
+                        case 3 -> lane.fill(slot, slot + 1, 1);
+                        case 4 -> lane.copyFrom(new long[] {1}, 0, slot, 1);
+                        default -> throw new AssertionError(selected);
+                    }
+                };
+                assertThrows(failure, write);
+                assertThrows(failure, write);
+                assertEquals(0, lane.get(slot));
+                assertTrue(!lane.isBlockAllocated(slot));
+                assertEquals(1, lane.allocatedRegionCount(), "retain existing directory-first publication");
+                assertEquals(0, lane.allocatedBlockCount());
+                assertEquals(0, lane.payloadBytes());
+            }
+        }
+        assertEquals(!missing, jdk.m3.arrays.ArrayNative.isLoaded());
+        System.out.println("PASS long-lane " + args[0]);
     }
 
 }

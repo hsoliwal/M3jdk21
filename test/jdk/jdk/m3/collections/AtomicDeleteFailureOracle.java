@@ -25,6 +25,11 @@ public final class AtomicDeleteFailureOracle {
     private static void check(boolean ok, String reason) {
         checks++; if (!ok) throw new AssertionError(reason);
     }
+    private static byte[] snapshot(PackedSlotStates states) {
+        byte[] result = new byte[states.length()];
+        for (int i = 0; i < result.length; i++) result[i] = states.get(i);
+        return result;
+    }
     public static void main(String[] args) {
         checks=0;
         for (boolean conditional:new boolean[]{false,true}) {
@@ -37,16 +42,16 @@ public final class AtomicDeleteFailureOracle {
             setInt(of,map,map.capacity());
             setInt(sz,map,map.size()+1);
             long[] keys=(long[])get(kf,map), values=(long[])get(vf,map);
-            byte[] states=(byte[])get(sf,map);
-            long[] priorKeys=keys.clone(), priorValues=values.clone(); byte[] priorStates=states.clone();
+            PackedSlotStates states=(PackedSlotStates)get(sf,map);
+            long[] priorKeys=keys.clone(), priorValues=values.clone(); byte[] priorStates=snapshot(states);
             int oldSize=getInt(sz,map), oldOcc=getInt(of,map), oldEpoch=getInt(mod,map);
             LongIterator cursor=map.keyIterator();
             try { if(conditional)map.remove(5L,15L); else map.remove(5L); throw new AssertionError("expected staged failure"); }
             catch (IllegalStateException expected) { checks++; }
-            check(get(kf,map)==keys&&get(vf,map)==values&&get(sf,map)==states,"owner array identity");
+            check(get(kf,map)==keys&&get(vf,map)==values&&get(sf,map)==states ,"owner lane identity");
             check(Arrays.equals(keys,priorKeys),"keys preserved");
             check(Arrays.equals(values,priorValues),"values preserved");
-            check(Arrays.equals(states,priorStates),"states preserved");
+            check(Arrays.equals(snapshot(states),priorStates),"states preserved");
             check(getInt(sz,map)==oldSize&&getInt(of,map)==oldOcc&&getInt(mod,map)==oldEpoch,"counts and epoch preserved");
             check(map.containsKey(5)&&map.getOrDefault(5,-1)==15L,"failed deletion still present");
             try { cursor.hasNext(); checks++; }

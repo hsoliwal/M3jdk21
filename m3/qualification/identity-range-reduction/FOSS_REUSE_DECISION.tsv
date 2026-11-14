@@ -1,2 +1,0 @@
-capability	classification	repository	revision	path	license	fit	proof
-source-identity-range	PORT	lemire/fastrange	a70431b21c943506f2bf790693502160d274b939	fastrange.h/fastrange32	Apache-2.0	positive32bitrangemapping;existingmix+2Nstoragekept	f66ec8beb9b13ec281bcda839774abb96dd017038b6cd98eee7274bbe385b9b6

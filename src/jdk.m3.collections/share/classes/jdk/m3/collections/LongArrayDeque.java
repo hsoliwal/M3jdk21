@@ -143,34 +143,62 @@ public final class LongArrayDeque implements LongDeque {
 
     @Override
     public boolean contains(long value) {
-        for (int i = 0; i < size; i++) {
-            if (elements[physicalIndex(i)] == value) {
-                return true;
-            }
-        }
-        return false;
+        return firstOccurrenceIndex(value) >= 0;
     }
 
     @Override
     public boolean removeFirstOccurrence(long value) {
-        for (int i = 0; i < size; i++) {
-            if (elements[physicalIndex(i)] == value) {
-                removeLogicalIndex(i);
-                return true;
-            }
+        int logical = firstOccurrenceIndex(value);
+        if (logical < 0) {
+            return false;
         }
-        return false;
+        removeLogicalIndex(logical);
+        return true;
     }
 
     @Override
     public boolean removeLastOccurrence(long value) {
-        for (int i = size - 1; i >= 0; i--) {
-            if (elements[physicalIndex(i)] == value) {
-                removeLogicalIndex(i);
-                return true;
+        int logical = lastOccurrenceIndex(value);
+        if (logical < 0) {
+            return false;
+        }
+        removeLogicalIndex(logical);
+        return true;
+    }
+
+    /**
+     * Scan the two physical live spans in logical encounter order, without
+     * a masked address calculation for every primitive comparison.
+     */
+    private int firstOccurrenceIndex(long value) {
+        int first = Math.min(size, elements.length - head);
+        for (int i = 0; i < first; i++) {
+            if (elements[head + i] == value) {
+                return i;
             }
         }
-        return false;
+        for (int i = 0, second = size - first; i < second; i++) {
+            if (elements[i] == value) {
+                return first + i;
+            }
+        }
+        return -1;
+    }
+
+    /** Reverse encounter order across the wrapped low span, then high. */
+    private int lastOccurrenceIndex(long value) {
+        int first = Math.min(size, elements.length - head);
+        for (int i = size - first - 1; i >= 0; i--) {
+            if (elements[i] == value) {
+                return first + i;
+            }
+        }
+        for (int i = first - 1; i >= 0; i--) {
+            if (elements[head + i] == value) {
+                return i;
+            }
+        }
+        return -1;
     }
 
     /**
@@ -251,8 +279,10 @@ public final class LongArrayDeque implements LongDeque {
         if (size == 0) {
             return;
         }
-        for (int i = 0; i < size; i++) {
-            elements[physicalIndex(i)] = 0L;
+        int first = Math.min(size, elements.length - head);
+        Arrays.fill(elements, head, head + first, 0L);
+        if (first < size) {
+            Arrays.fill(elements, 0, size - first, 0L);
         }
         head = 0;
         size = 0;
@@ -313,15 +343,43 @@ public final class LongArrayDeque implements LongDeque {
     }
 
     private void removeLogicalIndex(int logicalIndex) {
+        int capacity = elements.length;
         if (logicalIndex < (size >> 1)) {
-            for (int i = logicalIndex; i > 0; i--) {
-                elements[physicalIndex(i)] = elements[physicalIndex(i - 1)];
+            // Move the shorter front prefix right by one logical slot. Keep
+            // the existing head rather than flattening the ring or allocating.
+            int high = capacity - head;
+            if (logicalIndex < high) {
+                System.arraycopy(elements, head, elements, head + 1, logicalIndex);
+            } else {
+                int low = logicalIndex - high;
+                if (low != 0) {
+                    System.arraycopy(elements, 0, elements, 1, low);
+                }
+                elements[0] = elements[capacity - 1];
+                if (high > 1) {
+                    System.arraycopy(elements, head, elements, head + 1, high - 1);
+                }
             }
             elements[head] = 0L;
-            head = (head + 1) & mask();
+            head = (head + 1) & (capacity - 1);
         } else {
-            for (int i = logicalIndex; i < size - 1; i++) {
-                elements[physicalIndex(i)] = elements[physicalIndex(i + 1)];
+            // Move the shorter tail suffix left by one logical slot. The
+            // boundary element is saved before moving the wrapped low span.
+            int start = (head + logicalIndex) & (capacity - 1);
+            int moved = size - logicalIndex - 1;
+            if (start + moved < capacity) {
+                System.arraycopy(elements, start + 1, elements, start, moved);
+            } else {
+                int high = capacity - start - 1;
+                long boundary = elements[0];
+                if (high != 0) {
+                    System.arraycopy(elements, start + 1, elements, start, high);
+                }
+                elements[capacity - 1] = boundary;
+                int low = moved - (capacity - start);
+                if (low != 0) {
+                    System.arraycopy(elements, 1, elements, 0, low);
+                }
             }
             elements[physicalIndex(size - 1)] = 0L;
         }

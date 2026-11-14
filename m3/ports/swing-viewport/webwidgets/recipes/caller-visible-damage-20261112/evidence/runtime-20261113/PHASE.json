@@ -1,0 +1,19 @@
+{
+  "schema": "m3.bounded-qualification-phase/v1",
+  "scope": "caller-recipe-runtime-followup",
+  "createdDate": "2026-11-13",
+  "root": "S:/codex-work/ui-caller-runtime-qualification-20261113",
+  "capBytes": 33554432,
+  "reserveBytes": 8589934592,
+  "closeoutReserveBytes": 131072,
+  "ordinaryLogCapBytes": 65536,
+  "totalLogsCapBytes": 1048576,
+  "standingAuthority": "S:/codex-work/DEVELOPMENT_CONTROL.md; distinct bounded followup within 512MiB standing maximum",
+  "previousFPhaseMoved": false,
+  "previousChargesReset": false,
+  "offline": true,
+  "sourceReceiver": "hsoliwal/M3jdk21@778cd3eac266974e7b5155e79838f74ee516b535",
+  "sourceCanonical": "hsoliwal/com.synexia@b3e975ae0749db17aa700c6cf2ff90155cb0553b",
+  "generationCalls": 0,
+  "productionPromotion": false
+}

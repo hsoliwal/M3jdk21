@@ -6,6 +6,7 @@ from __future__ import annotations
 
 import csv
 import hashlib
+import tempfile
 import unittest
 import xml.etree.ElementTree as ET
 from pathlib import Path
@@ -14,6 +15,63 @@ ROOT = Path(__file__).resolve().parents[1]
 POLICY = ROOT / "compatibility" / "m3-recipe-home-policy.tsv"
 PIN = ROOT / "compatibility" / "m3-recipe-home-pin.tsv"
 RESIDUE = ROOT / "compatibility" / "m3-canonical-residue-gitblobs.tsv"
+
+# The closed residue walk, the same as residueCandidatePaths in the Java twin (M3RecipeHomePolicyTest).
+MIGRATION_JAVA = "m3/tooling/migration-recipes/src/main/java/"
+RESIDUE_WALK_FILES = (
+    MIGRATION_JAVA + "jdk/m3/rewrite/M3Java21ConvergenceCatalog.java",
+    MIGRATION_JAVA + "jdk/m3/rewrite/M3Java21ConvergenceRecipe.java",
+)
+RESIDUE_WALK_DIRS = (
+    MIGRATION_JAVA + "jdk/m3/rewrite/scope",
+    MIGRATION_JAVA + "jdk/m3/rewrite/atom",
+    MIGRATION_JAVA + "jdk/m3/rewrite/semantic",
+    MIGRATION_JAVA + "jdk/m3/rewrite/a3",
+    "m3/indexdb/src/main/java",
+)
+# Policy-ledger dispositions that keep a walked file out of the residue manifest: it is an adapter.
+ADAPTER_DISPOSITIONS = frozenset({"RECEIVER_ADAPTER_ONLY", "TARGET_PRODUCT_ADAPTER"})
+
+
+def load_policy() -> list[dict[str, str]]:
+    with POLICY.open(encoding="utf-8", newline="") as handle:
+        return list(csv.DictReader(handle, delimiter="\t"))
+
+
+def policy_surface_matches(surface: str, path: str) -> bool:
+    """PolicyRow.matches of the Java twin: wildcard surfaces keep the spelling recorded before the rename."""
+    if surface.endswith("/**"):
+        prefix = surface[:-2].replace("/com/m3/rewrite/synexia/", "/jdk/m3/rewrite/m3/")
+        return path.startswith(prefix.replace("/com/m3/rewrite/", "/jdk/m3/rewrite/"))
+    return surface == path
+
+
+def residue_candidate_paths(repository: Path) -> set[str]:
+    """Every file the closed residue check walks: the two convergence files and five directories."""
+    result = {exact for exact in RESIDUE_WALK_FILES if (repository / exact).is_file()}
+    for directory in RESIDUE_WALK_DIRS:
+        start = repository / directory
+        if start.is_dir():
+            result.update(
+                path.relative_to(repository).as_posix() for path in start.rglob("*.java") if path.is_file()
+            )
+    return result
+
+
+def reusable_residue_paths(repository: Path, policy: list[dict[str, str]]) -> set[str]:
+    """The walked files the residue manifest must list: every candidate except those whose policy rows all carry an
+    adapter disposition."""
+    result = set()
+    for path in residue_candidate_paths(repository):
+        matches = [row for row in policy if policy_surface_matches(row["local_surface"], path)]
+        if not (matches and all(row["disposition"] in ADAPTER_DISPOSITIONS for row in matches)):
+            result.add(path)
+    return result
+
+
+def touch(path: Path) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_bytes(b"")
 
 
 class M3RecipeHomePolicyTest(unittest.TestCase):
@@ -217,21 +275,12 @@ class M3RecipeHomePolicyTest(unittest.TestCase):
         with RESIDUE.open(encoding="utf-8", newline="") as handle:
             rows = list(csv.DictReader(handle, delimiter="\t"))
 
-        self.assertEqual(11, len(rows))
+        self.assertTrue(rows)
         frozen = {row["path"]: row for row in rows}
-        self.assertEqual(11, len(frozen))
+        self.assertEqual(len(rows), len(frozen), "duplicate residue rows")
 
-        # The semantic directory is the one closed residue set (check_m3_recipe_ownership.RESIDUE_DIRS): the atom
-        # directory is gone, and m3/indexdb is a live module that received files since the freeze, so its 8 rows are
-        # pinned by blob below without closing the directory.
-        start = ROOT / "tooling/migration-recipes/src/main/java/jdk/m3/rewrite/semantic"
-        actual = {
-            "m3/" + path.relative_to(ROOT).as_posix()
-            for path in start.rglob("*.java")
-            if path.is_file()
-        }
-        self.assertEqual({path for path in frozen if "/rewrite/semantic/" in path}, actual)
-        self.assertEqual(8, sum(path.startswith("m3/indexdb/") for path in frozen))
+        # Same walk and the same ledger-based adapter exclusion as the Java twin.
+        self.assert_residue_set_closed(ROOT.parent, load_policy(), set(frozen))
 
         for relative, row in frozen.items():
             self.assertEqual("MIGRATION_RESIDUE_NOT_CANONICAL", row["disposition"])
@@ -246,6 +295,31 @@ class M3RecipeHomePolicyTest(unittest.TestCase):
                 f"blob {len(data)}\0".encode("ascii") + data
             ).hexdigest()
             self.assertEqual(row["git_blob_sha1"], actual_blob, relative)
+
+    def test_planted_unlisted_non_adapter_file_fails_the_residue_set(self) -> None:
+        policy = load_policy()
+        with RESIDUE.open(encoding="utf-8", newline="") as handle:
+            frozen = {row["path"] for row in csv.DictReader(handle, delimiter="\t")}
+        walked = residue_candidate_paths(ROOT.parent)
+
+        # One plant under a residue surface of the policy ledger, one under no policy row at all.
+        for planted in (
+            "m3/indexdb/src/main/java/jdk/m3/indexdb/M3PlantedUnlistedResidue.java",
+            MIGRATION_JAVA + "jdk/m3/rewrite/scope/M3PlantedUnlistedResidue.java",
+        ):
+            with self.subTest(planted=planted), tempfile.TemporaryDirectory() as scratch:
+                mirror = Path(scratch)
+                for path in walked:
+                    touch(mirror / path)
+                self.assert_residue_set_closed(mirror, policy, frozen)
+
+                touch(mirror / planted)
+                with self.assertRaises(AssertionError) as caught:
+                    self.assert_residue_set_closed(mirror, policy, frozen)
+                self.assertIn(planted, str(caught.exception))
+
+    def assert_residue_set_closed(self, repository: Path, policy: list[dict[str, str]], frozen: set[str]) -> None:
+        self.assertEqual(frozen, reusable_residue_paths(repository, policy), "unlisted or retired reusable residue")
 
     def test_a3_mastery_and_catalogue_resolve_to_m3_recipe_owners(self) -> None:
         with POLICY.open(encoding="utf-8", newline="") as handle:

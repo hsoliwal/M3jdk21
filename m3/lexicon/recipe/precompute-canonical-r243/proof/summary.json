@@ -1,0 +1,56 @@
+{
+  "schema": "M3_PRECOMPUTE_CANONICAL_R243_SUMMARY_V1",
+  "status": "PASS",
+  "sourceBase": "7409479266ddb37c29182550e6354665066d9ff6",
+  "publicationBase": "ab6ef923dca4d32e1f003db71a800138911b5ffa",
+  "reboundSourcePinsUnchanged": true,
+  "inputPins": {
+    "exporter": {
+      "bytes": 32352,
+      "sha256": "9104057d264523ae55080634c5ddb23071a2d5a35d8f9c947879545ff41df052",
+      "gitBlob": "86aa8215d1e720655d43e3a78541c949905194f7"
+    },
+    "afterExporter": {
+      "bytes": 34586,
+      "sha256": "4da17cdb737e8a1665b5b5253ba4e4f6dc00113aeadfad2de3c445e20551194f",
+      "gitBlob": "f2659b96c499b364dcafb9a9b9554da95c4d6598"
+    },
+    "pythonTest": {
+      "bytes": 4148,
+      "sha256": "b0b812ce7457fd25c76f88723ecfb9dd16b802b9fced448ef751848d29e3e71f",
+      "gitBlob": "ee8ce9bb39dd667f655873aada0083432fc39324"
+    },
+    "recipe": {
+      "bytes": 12355,
+      "sha256": "2102795eec6a55c6e7564ada0fa439cdf0d98e4c1fc395b2d5d52e1f88890283",
+      "gitBlob": "73779dee8c80a0913b88fff17637ed3f44b33ea3"
+    }
+  },
+  "junitPassed": 7,
+  "pythonPassed": 7,
+  "finiteDoubleCases": 28092,
+  "payloadCases": 272,
+  "storage": {
+    "before": 0,
+    "after": 0,
+    "readOnlyFBytes": 571469824,
+    "cap": 571473920,
+    "reserve": 8589934592,
+    "free": 10926833664,
+    "peaks": [
+      571473920
+    ]
+  },
+  "fullReceiptBlob": "20064a392408044cfffaf3beca957164ec0eebfd",
+  "baselineReceiptBlob": "1b2b1fdc28d8c91361f98c2e0b673707e2e31c4d",
+  "baselineCanonicalTextMismatches": 7,
+  "scope": "One Python exporter owner. Existing Java canonical payload and JNI untouched; full reactor/catalogue filesystem/native/platform tests NOT_RUN.",
+  "generationCalls": 0,
+  "chromeGenerationLane": "HELD_NO_CONNECTED_BROWSER; no generation required for bounded existing-owner maintenance",
+  "replayAssembly": {
+    "status": "PASS",
+    "exactInputReconstruction": true,
+    "driftRefusal": true,
+    "readOnlyInputFiles": 13
+  }
+}

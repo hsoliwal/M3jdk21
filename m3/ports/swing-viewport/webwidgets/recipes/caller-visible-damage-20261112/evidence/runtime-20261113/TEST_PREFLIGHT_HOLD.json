@@ -1,0 +1,37 @@
+{
+  "schema": "m3.preflight-hold/v1",
+  "status": "NOT_RUN",
+  "scope": "JUnit requests refused before owned Java process creation",
+  "requiredCommitAvailable": 8858370048,
+  "requests": [
+    {
+      "job": "caller7",
+      "toolChunk": "1cfc89",
+      "physicalAvailable": 10130878464,
+      "commitAvailable": 1139261440
+    },
+    {
+      "job": "public4",
+      "toolChunk": "e57626",
+      "physicalAvailable": 7002484736,
+      "commitAvailable": 975966208
+    },
+    {
+      "job": "compile-oracle",
+      "toolChunk": "fcc8db",
+      "physicalAvailable": 3798552576,
+      "commitAvailable": 1976344576
+    },
+    {
+      "job": "caller7",
+      "toolChunk": "d5146e",
+      "physicalAvailable": 6086881280,
+      "commitAvailable": 1936388096
+    }
+  ],
+  "oracleFixtureUnchanged": true,
+  "counts": "UNKNOWN; no JUnit execution/discovery occurred",
+  "reserveWaived": false,
+  "foreignProcessesStopped": false,
+  "productionPromotion": false
+}

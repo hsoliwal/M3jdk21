@@ -1,0 +1,30 @@
+{
+  "schema": "M3_TEST_RESOURCE_REPRESENTATION_V1",
+  "existingOwner": "com.synexia.rewrite.M3ResourceEnvelope",
+  "ownerBlob": "1b0b84ab1dd08aab4c8edb5835bd00615d0cf908",
+  "generationCalls": 0,
+  "resources": [
+    {
+      "path": "m3/lexicon/receiver/src/test/java/jdk/m3/lexicon/M3InternedLanguageDump.java",
+      "sourceBlob": "f5c04a994068da593a8fe3c1fe17a7d96cc14ede",
+      "decodedSha256": "9870bda730a73b6ecedbd8bfef05802749b27b95d8f951bfab6bafd292da83b2",
+      "decodedBytes": 19165,
+      "resource": "27-M3InternedLanguageDump.java.txt",
+      "reason": "Generic credential assignment heuristic flags typed token test-loop/ID fixtures; sources remain byte-identical to accepted public owners."
+    },
+    {
+      "path": "m3/lexicon/receiver/src/test/java/jdk/m3/lexicon/M3InternedLanguageSubstrateTest.java",
+      "sourceBlob": "fc6b5a7a4833780f444ebd50d6f88f64b02fe3b6",
+      "decodedSha256": "04cce868fecd312dbd7c86eff5076288a37d5252f4bdc15fac18a3478d3a280f",
+      "decodedBytes": 12231,
+      "resource": "28-M3InternedLanguageSubstrateTest.java.txt",
+      "reason": "Generic credential assignment heuristic flags typed token test-loop/ID fixtures; sources remain byte-identical to accepted public owners."
+    }
+  ],
+  "invariants": [
+    "33 decoded source identities unchanged",
+    "No Java runtime source edits",
+    "Existing decoded SHA-256, UTF-8 and exact-length gates retained",
+    "Corrupt envelope refusal executed by recipe tests"
+  ]
+}
