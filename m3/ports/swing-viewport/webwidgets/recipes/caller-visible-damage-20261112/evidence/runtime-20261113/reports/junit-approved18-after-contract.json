@@ -1,0 +1,83 @@
+{
+  "after": {
+    "charged": 5574424,
+    "commitAvailable": 22757687296,
+    "kFree": 11126632448,
+    "logical": 5574424,
+    "peak": {
+      "charged": 5574424,
+      "ordinaryLogBytes": 22202
+    },
+    "physicalAvailable": 12757237760,
+    "sFree": 10451881984
+  },
+  "before": {
+    "charged": 5568004,
+    "commitAvailable": 22768861184,
+    "kFree": 11126632448,
+    "logical": 5568004,
+    "peak": {
+      "charged": 5568004,
+      "ordinaryLogBytes": 15782
+    },
+    "physicalAvailable": 13008695296,
+    "sFree": 10451894272
+  },
+  "command": [
+    "C:\\Program Files\\Java\\jdk-21\\bin\\java.exe",
+    "-Xmx128m",
+    "-XX:+UseSerialGC",
+    "-XX:ActiveProcessorCount=2",
+    "-XX:ReservedCodeCacheSize=32m",
+    "-Djava.awt.headless=true",
+    "-Duser.home=S:\\codex-work\\ui-caller-runtime-qualification-20261113\\home",
+    "-Djava.io.tmpdir=S:\\codex-work\\ui-caller-runtime-qualification-20261113\\tmp",
+    "-cp",
+    "S:\\codex-work\\ui-caller-runtime-qualification-20261113\\oracle-tests\\classes;S:\\codex-work\\ui-caller-runtime-qualification-20261113\\contract-qualify-001\\candidate-classes;S:\\codex-work\\ui-caller-runtime-qualification-20261113\\focused-tests\\classes;S:\\codex-work\\ui-caller-runtime-qualification-20261113\\qualify-001\\selected-producer\\after-classes;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\platform\\junit-platform-console-standalone\\1.10.1\\junit-platform-console-standalone-1.10.1.jar",
+    "org.junit.platform.console.ConsoleLauncher",
+    "execute",
+    "--disable-banner",
+    "--disable-ansi-colors",
+    "--details=summary",
+    "--fail-if-no-tests",
+    "--select-class",
+    "jdk.m3.swing.viewport.M3ViewportCoreApiTest"
+  ],
+  "controllerSha256": "77b7be56d056c1222142aeb4784bd2f620be55c66aaaf7494a3693a1aa467113",
+  "counts": {
+    "aborted": 0,
+    "failed": 6,
+    "found": 18,
+    "skipped": 0,
+    "started": 18,
+    "successful": 12
+  },
+  "endedUnix": 1794567528.6346722,
+  "job": "approved18-after-contract",
+  "logBytes": 6420,
+  "logSha256": "0f5634c08459bea8264a921862e4d2c012bc999748e1d2245ed65f7cb49cf9b5",
+  "native": {
+    "all_owned_native_handles_closed": true,
+    "assigned_to_job": true,
+    "cleanup_errors": [],
+    "creation_FILETIME": "134390411278034209",
+    "exitcode": 1,
+    "job_active_processes": 0,
+    "job_handle_closed": true,
+    "job_total_processes": 2,
+    "pid": 23852,
+    "process_handle_closed": true,
+    "resumed": true,
+    "same_handle_wait": 0,
+    "supervisor_error": null,
+    "terminal": true,
+    "termination_requested": false,
+    "thread_handle_closed": true
+  },
+  "postGuardError": null,
+  "productionPromotion": false,
+  "runner": "JUnit Platform Console standalone1.10.1; distinct from hosted vendored1.10.2",
+  "runnerSha256": "b42eaa53d13576d17db5fb8b280722a6ae9e36daf95f4262bc6e96d4cb20725f",
+  "schema": "m3.owned-cpu-qualification/v1",
+  "startedUnix": 1794567527.8017514
+}

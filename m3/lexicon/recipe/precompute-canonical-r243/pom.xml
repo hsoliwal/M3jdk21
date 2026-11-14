@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright 2026 Hitesh Soliwal, Synexia. SPDX-License-Identifier: Apache-2.0 -->
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.synexia.qualification</groupId>
+  <artifactId>m3-precompute-canonical-contract</artifactId>
+  <version>1</version>
+  <packaging>pom</packaging>
+  <build><plugins><plugin>
+    <groupId>org.codehaus.mojo</groupId>
+    <artifactId>exec-maven-plugin</artifactId>
+    <version>3.3.0</version>
+    <configuration><executable>${java.home}/bin/java</executable></configuration>
+    <executions><execution>
+      <id>qualify-precompute-canonical</id><phase>test</phase><goals><goal>exec</goal></goals>
+    </execution></executions>
+  </plugin></plugins></build>
+</project>

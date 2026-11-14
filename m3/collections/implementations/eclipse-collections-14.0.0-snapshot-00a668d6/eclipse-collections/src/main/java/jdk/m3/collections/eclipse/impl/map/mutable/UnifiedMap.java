@@ -2958,7 +2958,44 @@ public class UnifiedMap<K, V> extends AbstractMutableMap<K, V>
 
         public boolean containsEntry(Entry<?, ?> entry)
         {
-            return this.getEntry(entry) != null;
+            K key = (K) entry.getKey();
+            V value = (V) entry.getValue();
+            int index = UnifiedMap.this.index(key);
+
+            // Preserve the lookup snapshots across user equality callbacks.
+            Object cur = UnifiedMap.this.table[index];
+            Object curValue = UnifiedMap.this.table[index + 1];
+            if (cur == CHAINED_KEY)
+            {
+                return this.chainContainsEntry((Object[]) curValue, key, value);
+            }
+            if (cur == null)
+            {
+                return false;
+            }
+            return UnifiedMap.this.nonNullTableObjectEquals(cur, key)
+                    && UnifiedMap.nullSafeEquals(value, curValue);
+        }
+
+        private boolean chainContainsEntry(Object[] chain, K key, V value)
+        {
+            for (int i = 0; i < chain.length; i += 2)
+            {
+                Object cur = chain[i];
+                if (cur == null)
+                {
+                    return false;
+                }
+                if (UnifiedMap.this.nonNullTableObjectEquals(cur, key))
+                {
+                    Object curValue = chain[i + 1];
+                    if (UnifiedMap.nullSafeEquals(value, curValue))
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
         }
 
         private Entry<K, V> getEntry(Entry<?, ?> entry)

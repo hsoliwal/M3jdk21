@@ -1,0 +1,37 @@
+{
+  "schema": "m3.focused-test-compilation/v1",
+  "status": "PASS_COMPILATION_ONLY",
+  "report": "reports/junit-compile-focused.json",
+  "reportSHA256": "61fe1cafc0ba7f43cfdc93d1ae2ae3d77cc29d10de7c9f61722e4150df456904",
+  "classFiles": {
+    "bytes": 11341,
+    "count": 3,
+    "files": [
+      {
+        "bytes": 4027,
+        "path": "focused-tests/classes/jdk/m3/swing/viewport/M3ViewportCoreApiTest.class",
+        "sha256": "ba6ae80e275881e4e70a9dfdc1554d0ca686450d5bf78848759857785549f297"
+      },
+      {
+        "bytes": 4920,
+        "path": "focused-tests/classes/jdk/m3/swing/web/model/M3CollectionChecks.class",
+        "sha256": "a1bf5a88a47d19167109875cb35dc4c3d53da21b6df0001bf9d38b66031ffdb5"
+      },
+      {
+        "bytes": 2394,
+        "path": "focused-tests/classes/jdk/m3/swing/web/model/M3CollectionModesTest.class",
+        "sha256": "06011772ea2a8c85c9b60cc6ffcca10bb94a41467467edf35349b6db16946202"
+      }
+    ]
+  },
+  "inputs": {
+    "M3CollectionChecksGitBlob": "7ba909a78c939ec98b20f112071e22d968c666df",
+    "M3CollectionModesTestGitBlob": "dd16cfb926f417c37a3bd487fa49f011477d1e72",
+    "M3ViewportCoreApiTestGitBlob": "4fec2e89d210e7fff6b780e4810e910dea7da6c5"
+  },
+  "applicationClasses": "Exact selected-producer qualify-001 after-classes; seventeen-source strict closure",
+  "junitJarSHA256": "b42eaa53d13576d17db5fb8b280722a6ae9e36daf95f4262bc6e96d4cb20725f",
+  "runner": "JUnit Platform Console standalone1.10.1; does not prove hosted vendored1.10.2 compatibility",
+  "testExecutions": "NOT_RUN",
+  "productionPromotion": false
+}

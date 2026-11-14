@@ -1,0 +1,6 @@
+gate	command	outcome	comments
+scanner-jit	java -ea LongDequeRingScanOracle	PASS 1390536 checks	original scalar vs exact two-span algorithm
+scanner-interpreter	java -ea -Xint LongDequeRingScanOracle --quick	PASS 37800 checks	small exhaustive and duplicates
+shift-jit	java -ea LongDequeRingSpanOracle	PASS 6688180 checks	previous source step maintained
+shift-interpreter	java -ea -Xint LongDequeRingSpanOracle --quick	PASS 104924 checks	previous step preserved
+jdk-module-junit	LongArrayDequeRingSpanTest	NOT EXECUTED	whole module/JUnit build unavailable locally

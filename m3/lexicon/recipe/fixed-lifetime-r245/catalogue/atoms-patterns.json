@@ -1,0 +1,81 @@
+{
+  "schema": "M3_BEHAVIOR_ATOMS_PATTERNS_R245",
+  "version": 1,
+  "owners": {
+    "mapping": "m3/core/src/jdk/m3/text/M3FixedAddressMapping.java",
+    "recipe": "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedSnapshotRecipe.java"
+  },
+  "atoms": [
+    {
+      "id": "exact-verified-unpublished-range",
+      "inputs": [
+        "raw direct buffer",
+        "requested address",
+        "length"
+      ],
+      "law": "Cleanup is permitted only after the existing exact address/capacity checks establish ownership."
+    },
+    {
+      "id": "admission-failure-release",
+      "inputs": [
+        "owned address",
+        "length",
+        "original RuntimeException or Error"
+      ],
+      "law": "Digest/read-only-view and private Image-construction failure releases unpublished range and rethrows original throwable; cleanup failure suppressed without replacing primary."
+    },
+    {
+      "id": "existing-mismatch-order",
+      "law": "Existing mismatch branch retains cleanup-before-IOException precedence."
+    },
+    {
+      "id": "published-image-lifetime",
+      "law": "Successful process-lifetime owners are never released; IMAGES.put is outside speculative failure cleanup because insertion may have published before throwing."
+    },
+    {
+      "id": "exact-recipe-target",
+      "law": "Only the explicit M3FixedAddressMapping path is newly admitted by both recipe path predicates; neighbors and traversal remain refused."
+    },
+    {
+      "id": "unicode-range-filter",
+      "law": "Zero masks unrestricted; nonzero masks use any-overlap independently; confidence lower bound inclusive; sorted absolute rows into caller-owned destination."
+    },
+    {
+      "id": "unicode-source-identity",
+      "law": "Keep original IDs, source revision, canonical schema and canonical bytes; do not substitute plain canonical SHA for domain-separated identity digest."
+    }
+  ],
+  "patterns": [
+    {
+      "id": "M3.EXACT_UNPUBLISHED_NATIVE_RELEASE",
+      "version": 1,
+      "classification": "ADAPT_EXISTING_OWNER"
+    },
+    {
+      "id": "M3.HASH_PINNED_AST_SELF_REPLAY",
+      "version": 1,
+      "classification": "DIRECT_REUSE"
+    },
+    {
+      "id": "M3.CALLER_OWNED_RANGE_OUTPUT",
+      "version": 1,
+      "classification": "QUALIFIED_DONOR_NOT_PORTED"
+    }
+  ],
+  "generation": {
+    "calls": 0,
+    "reason": "Bounded maintenance under existing API contract; new runtime generation remains held while Chrome local Prompt API is unavailable."
+  },
+  "agentEvidence": {
+    "agents": 3,
+    "mode": "read-only",
+    "writes": 0,
+    "lanes": [
+      "native ownership/error ordering",
+      "exact recipe registration",
+      "UnicodeX donor inventory"
+    ]
+  },
+  "externalCorpusAdmission": "NOT_RUN",
+  "publication": "Separate Synexia convergence packet and M3JDK runtime replacement; public API/native layout unchanged."
+}

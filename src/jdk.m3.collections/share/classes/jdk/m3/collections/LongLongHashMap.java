@@ -27,7 +27,7 @@ public final class LongLongHashMap {
 
     private long[] keys;
     private long[] values;
-    private byte[] states;
+    private PackedSlotStates states;
     private int size;
     private int occupied;
     private int modCount;
@@ -43,7 +43,7 @@ public final class LongLongHashMap {
         int capacity = capacityFor(expectedSize);
         keys = new long[capacity];
         values = new long[capacity];
-        states = new byte[capacity];
+        states = new PackedSlotStates(capacity);
     }
 
     /** Puts a value and returns true only when a new key was inserted. */
@@ -83,7 +83,7 @@ public final class LongLongHashMap {
      * rehash invalidates the discovered coordinate and requires a probe of the new lanes.
      */
     private void insertAbsent(int index, long key, long value) {
-        if (states[index] == EMPTY && needsGrowth(occupied + 1, keys.length)) {
+        if (states.get(index) == EMPTY && needsGrowth(occupied + 1, keys.length)) {
             if (keys.length >= (1 << 30)) {
                 throw new IllegalStateException("maximum hash-table capacity reached");
             }
@@ -92,10 +92,10 @@ public final class LongLongHashMap {
         }
         keys[index] = key;
         values[index] = value;
-        if (states[index] == EMPTY) {
+        if (states.get(index) == EMPTY) {
             occupied++;
         }
-        states[index] = USED;
+        states.set(index, USED);
         size++;
         modCount++;
     }
@@ -106,7 +106,7 @@ public final class LongLongHashMap {
         int index = mix(key) & mask;
         int firstDeleted = -1;
         for (;;) {
-            byte state = states[index];
+            byte state = states.get(index);
             if (state == EMPTY) {
                 return ~(firstDeleted >= 0 ? firstDeleted : index);
             }
@@ -132,8 +132,8 @@ public final class LongLongHashMap {
     public boolean containsValue(long value) {
         // An empty map cannot contain a value; skip the backing-capacity scan.
         if (size == 0) return false;
-        for (int i = 0; i < states.length; i++) {
-            if (states[i] == USED && values[i] == value) {
+        for (int i = 0; i < states.length(); i++) {
+            if (states.get(i) == USED && values[i] == value) {
                 return true;
             }
         }
@@ -185,7 +185,7 @@ public final class LongLongHashMap {
         }
         Arrays.fill(keys, 0L);
         Arrays.fill(values, 0L);
-        Arrays.fill(states, EMPTY);
+        states.clear();
         size = 0;
         occupied = 0;
         modCount++;
@@ -209,8 +209,8 @@ public final class LongLongHashMap {
     public void forEach(LongLongConsumer consumer) {
         Objects.requireNonNull(consumer, "consumer");
         int expectedModCount = modCount;
-        for (int i = 0; i < states.length; i++) {
-            if (states[i] == USED) {
+        for (int i = 0; i < states.length(); i++) {
+            if (states.get(i) == USED) {
                 consumer.accept(keys[i], values[i]);
                 checkForComodification(expectedModCount);
             }
@@ -233,10 +233,10 @@ public final class LongLongHashMap {
             @Override
             public long nextLong() {
                 checkForComodification(expectedModCount);
-                while (cursor < states.length && states[cursor] != USED) {
+                while (cursor < states.length() && states.get(cursor) != USED) {
                     cursor++;
                 }
-                if (cursor >= states.length) {
+                if (cursor >= states.length()) {
                     throw new NoSuchElementException();
                 }
                 emitted++;
@@ -248,8 +248,8 @@ public final class LongLongHashMap {
     public long[] keysToArray() {
         long[] result = new long[size];
         int cursor = 0;
-        for (int i = 0; i < states.length; i++) {
-            if (states[i] == USED) {
+        for (int i = 0; i < states.length(); i++) {
+            if (states.get(i) == USED) {
                 result[cursor++] = keys[i];
             }
         }
@@ -268,13 +268,13 @@ public final class LongLongHashMap {
             compactWithout(index, nextSize);
             return;
         }
-        states[index] = DELETED;
+        states.set(index, DELETED);
         keys[index] = 0L;
         values[index] = 0L;
         size = nextSize;
         modCount++;
         if (nextSize == 0) {
-            Arrays.fill(states, EMPTY);
+            states.clear();
             occupied = 0;
         }
     }
@@ -284,10 +284,10 @@ public final class LongLongHashMap {
         int capacity = keys.length;
         long[] nextKeys = new long[capacity];
         long[] nextValues = new long[capacity];
-        byte[] nextStates = new byte[capacity];
+        PackedSlotStates nextStates = new PackedSlotStates(capacity);
         int copied = 0;
-        for (int i = 0; i < states.length; i++) {
-            if (i != removedIndex && states[i] == USED) {
+        for (int i = 0; i < states.length(); i++) {
+            if (i != removedIndex && states.get(i) == USED) {
                 insertRehashed(keys[i], values[i], nextKeys, nextValues, nextStates);
                 copied++;
             }
@@ -307,7 +307,7 @@ public final class LongLongHashMap {
         int mask = keys.length - 1;
         int index = mix(key) & mask;
         for (;;) {
-            byte state = states[index];
+            byte state = states.get(index);
             if (state == EMPTY) {
                 return -1;
             }
@@ -322,10 +322,10 @@ public final class LongLongHashMap {
         int capacity = tableSizeFor(Math.max(MIN_CAPACITY, requestedCapacity));
         long[] nextKeys = new long[capacity];
         long[] nextValues = new long[capacity];
-        byte[] nextStates = new byte[capacity];
+        PackedSlotStates nextStates = new PackedSlotStates(capacity);
         int copied = 0;
-        for (int i = 0; i < states.length; i++) {
-            if (states[i] == USED) {
+        for (int i = 0; i < states.length(); i++) {
+            if (states.get(i) == USED) {
                 insertRehashed(keys[i], values[i], nextKeys, nextValues, nextStates);
                 copied++;
             }
@@ -340,15 +340,15 @@ public final class LongLongHashMap {
     }
 
     private static void insertRehashed(long key, long value,
-            long[] keys, long[] values, byte[] states) {
+            long[] keys, long[] values, PackedSlotStates states) {
         int mask = keys.length - 1;
         int index = mix(key) & mask;
-        while (states[index] == USED) {
+        while (states.get(index) == USED) {
             index = (index + 1) & mask;
         }
         keys[index] = key;
         values[index] = value;
-        states[index] = USED;
+        states.set(index, USED);
     }
 
     private static int capacityFor(int expectedSize) {

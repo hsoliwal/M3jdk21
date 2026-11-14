@@ -1,0 +1,214 @@
+{
+  "schema_version": 1,
+  "classification": "PASSIVE_EXECUTED_POSTIMAGE_RECEIPT",
+  "canonical_repository": "hsoliwal/com.synexia",
+  "canonical_revision": "1d152df0927323dc2e70ebfd002ad02c57cf8e94",
+  "canonical_pull_request": "https://github.com/hsoliwal/com.synexia/pull/17399",
+  "recipe_id": "com.synexia.m3.ModelTextJdk20261114",
+  "recipe_sdk": "OpenRewrite 8.90.4",
+  "target_repository": "hsoliwal/M3jdk21",
+  "validated_source_base": "778cd3eac266974e7b5155e79838f74ee516b535",
+  "compatible_publication_parent": "706855521c4a320d17d419b23dc672aa53887556",
+  "unchanged_base_module_tree": "c0ce141909ee90a037a317a06491db0657f6e988",
+  "source_receipts": [
+    {
+      "path": "synexia-openrewrite-recipes/crates/m3-model-text-jdk-20261114/evidence/m3-model-text-jdk-20261114-java.tsv",
+      "sha256": "58848ac05332dedc747127c72007d3af84ede99b9a84aad7be754fd135506f78"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/crates/m3-model-text-jdk-20261114/evidence/m3-model-text-jdk-20261114-text.tsv",
+      "sha256": "98a3fd95ee5c6e5b49bb3b08e99af779e64ec52d4d98e42017f743490071d99c"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/crates/m3-model-text-jdk-20261114/evidence/executed/RESULT.json",
+      "sha256": "127a55912c861f9abf2b49c01863a82561adf1ef1ab613621f84610820878597"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/crates/m3-model-text-jdk-20261114/evidence/head-compatibility/RESULT.json",
+      "sha256": "5e79ea166f139813a1b50edcafa533d9c6af55a0199845609875900aabd3e827"
+    }
+  ],
+  "execution": {
+    "sdk_qualification_tests": 6,
+    "materialized_product_files": 23,
+    "active_module_source_files": 96,
+    "maven_clean_verify": {
+      "tests": 70,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "explicit_jni_tests": 6,
+      "jni_check": "-Xcheck:jni"
+    },
+    "native_ctest": {
+      "tests": 1,
+      "failures": 0
+    },
+    "packaged_notices_byte_exact": 4,
+    "linked_image": {
+      "runtime": "Temurin 21.0.13+9 Linux x86-64",
+      "java_pass": true,
+      "jni_pass": true,
+      "module_requires": [
+        "java.base",
+        "jdk.httpserver"
+      ],
+      "source_built_m3jdk": false
+    }
+  },
+  "donor": {
+    "repository": "HazyResearch/ncm",
+    "revision": "c70274273f489abc73832b2b98584a8483b6b203",
+    "quantizer_blob": "8262ab80e782ff6e59a60ee59cff58eb0c2ec804",
+    "license_blob": "8c9c7f4ff5fc026b93c55dcce141d142bd3b650c",
+    "notice": "m3/llm/src/main/native/NCM_DONOR_NOTICE.md",
+    "scope": "Java scalar residual-VQ adaptation; original JNI nearest-code kernel; no pretrained checkpoint claim"
+  },
+  "outputs": [
+    {
+      "path": "m3/llm/src/main/java/jdk/m3/llm/model/M3ModelInput.java",
+      "preimage_sha256_or_absent": "ABSENT",
+      "postimage_sha256": "b294d317f7e73497cd4cf808d0668bde45e7abd743d88e017cf73793614894fa",
+      "source_kind": "java"
+    },
+    {
+      "path": "m3/llm/src/main/java/jdk/m3/llm/model/M3NcmCodes.java",
+      "preimage_sha256_or_absent": "ABSENT",
+      "postimage_sha256": "ee3a1f3a56205699ee7e5447816dcddbf422bf7d9d081e9054d7f723007ce1a1",
+      "source_kind": "java"
+    },
+    {
+      "path": "m3/llm/src/main/java/jdk/m3/llm/model/M3NcmNative.java",
+      "preimage_sha256_or_absent": "ABSENT",
+      "postimage_sha256": "fd0bbf95b1d5fadc51f4060ff7304d300d7fc7673ec3105fec471e89872ab7eb",
+      "source_kind": "java"
+    },
+    {
+      "path": "m3/llm/src/main/java/jdk/m3/llm/model/M3NcmQuantizer.java",
+      "preimage_sha256_or_absent": "ABSENT",
+      "postimage_sha256": "da5ba8ad1fb913e9fc87fb47d89a965ed399141b45a5b42237e303bec7c7d0b3",
+      "source_kind": "java"
+    },
+    {
+      "path": "m3/llm/src/main/java/jdk/m3/llm/model/M3SystemOneRequest.java",
+      "preimage_sha256_or_absent": "ABSENT",
+      "postimage_sha256": "97c4c3ae80d994d532009f6f1e035ede84796795898f8f71c134f8fef5911fc8",
+      "source_kind": "java"
+    },
+    {
+      "path": "m3/llm/src/main/java/jdk/m3/llm/model/M3SystemOneSchema.java",
+      "preimage_sha256_or_absent": "ABSENT",
+      "postimage_sha256": "bad6de543827f99b57bd9bec1a63fafaf095c676c6ce4ad8f4f1d61812cc5c2b",
+      "source_kind": "java"
+    },
+    {
+      "path": "m3/llm/src/main/java/module-info.java",
+      "preimage_sha256_or_absent": "70d6d657568ef76b0d0a6db5fc39035589b111f928108f130ad40d6a6c41f2e3",
+      "postimage_sha256": "620058b55abcd1de30d409f8f1585719600e40e676473645e815cfb375846f51",
+      "source_kind": "java"
+    },
+    {
+      "path": "m3/llm/src/test/java/jdk/m3/llm/model/M3ModelInputTest.java",
+      "preimage_sha256_or_absent": "ABSENT",
+      "postimage_sha256": "07fe170982f65176c9fd3b69c37843811d48f83aa89df8e1f1405656e2de73f8",
+      "source_kind": "java"
+    },
+    {
+      "path": "m3/llm/src/test/java/jdk/m3/llm/model/M3NcmCodesTest.java",
+      "preimage_sha256_or_absent": "ABSENT",
+      "postimage_sha256": "7999cfcb40f963fc9d3b88008f549bb4a10ffc0fe92b061f8901c7db57933411",
+      "source_kind": "java"
+    },
+    {
+      "path": "m3/llm/src/test/java/jdk/m3/llm/model/M3NcmNativeTest.java",
+      "preimage_sha256_or_absent": "ABSENT",
+      "postimage_sha256": "7e7591a33c6a2fae4ffe193c44a87fc781be1fced3efc1fac72ad475d2cbdab1",
+      "source_kind": "java"
+    },
+    {
+      "path": "m3/llm/src/test/java/jdk/m3/llm/model/M3NcmQuantizerTest.java",
+      "preimage_sha256_or_absent": "ABSENT",
+      "postimage_sha256": "492333b50ac272e10a0b9514a05b3c3f18c38b4dec1e3c7b9aefbbfd8557d793",
+      "source_kind": "java"
+    },
+    {
+      "path": "m3/llm/src/test/java/jdk/m3/llm/model/M3SystemOneTest.java",
+      "preimage_sha256_or_absent": "ABSENT",
+      "postimage_sha256": "284e921efbc5c593c215195955cec1fb8ee43797737de1b66ec2598e85c809cd",
+      "source_kind": "java"
+    },
+    {
+      "path": "m3/llm/src/test/java/jdk/m3/llm/test/ModuleImageMain.java",
+      "preimage_sha256_or_absent": "03cd032613503b2ba1deff8daf59544774eeb2f214e055299e740172a46a4899",
+      "postimage_sha256": "9cc045fa704791e815eb3fd6b564a19b3c07aaa8c5b05020edb5532f14263676",
+      "source_kind": "java"
+    },
+    {
+      "path": "m3/llm/MODEL_TEXT.md",
+      "preimage_sha256_or_absent": "ABSENT",
+      "postimage_sha256": "da92a48c9dc98f1e1ed9c411b43e4527c4a48457f21f306c0475a71557bf63ac",
+      "source_kind": "text"
+    },
+    {
+      "path": "m3/llm/NOTICE.txt",
+      "preimage_sha256_or_absent": "ABSENT",
+      "postimage_sha256": "3281c7c56bf32da3b12972c52f8286be33fd8b7434ea12c353372d72b692a4c1",
+      "source_kind": "text"
+    },
+    {
+      "path": "m3/llm/README.md",
+      "preimage_sha256_or_absent": "4dba0f3ff500b9960e43475d6f9d0a92dfad42ae14ff5a9c5edbee85f101b9a3",
+      "postimage_sha256": "0bea9992e49a6bb73656223f79fcb1a8fcc61aa64883017b364c6c08e2f0540b",
+      "source_kind": "text"
+    },
+    {
+      "path": "m3/llm/pom.xml",
+      "preimage_sha256_or_absent": "327c1019f0fcf2d72f8a9879e2e3994eb64e53c35a5cac1c2c547b4a200384dd",
+      "postimage_sha256": "9fe71e1fdd1fb30215aea640cc1ba1d85c71d91ec54a588f7158fc7412eab0a8",
+      "source_kind": "text"
+    },
+    {
+      "path": "m3/llm/src/main/native/CMakeLists.txt",
+      "preimage_sha256_or_absent": "ABSENT",
+      "postimage_sha256": "c2bf9fbd2c22134cd3ec83089d07707b6c81601c9f671161762ae6862f527d4e",
+      "source_kind": "text"
+    },
+    {
+      "path": "m3/llm/src/main/native/NCM_DONOR_NOTICE.md",
+      "preimage_sha256_or_absent": "ABSENT",
+      "postimage_sha256": "6c377c81e9af85ba243f8fa355e1d825cffe31649daa1a4cec84e7830b04576f",
+      "source_kind": "text"
+    },
+    {
+      "path": "m3/llm/src/main/native/include/m3_ncm_kernel.h",
+      "preimage_sha256_or_absent": "ABSENT",
+      "postimage_sha256": "d0be9c5afd3d84e54113912b5d19b78830ff21a1aefa05ae92cf527752e5e7b2",
+      "source_kind": "text"
+    },
+    {
+      "path": "m3/llm/src/main/native/src/ncm_jni.cpp",
+      "preimage_sha256_or_absent": "ABSENT",
+      "postimage_sha256": "1a64aa960870283ae5a0ca33a1cc225a6f6696cad3c25f77b470a61ea88aa459",
+      "source_kind": "text"
+    },
+    {
+      "path": "m3/llm/src/main/native/src/ncm_kernel.cpp",
+      "preimage_sha256_or_absent": "ABSENT",
+      "postimage_sha256": "86e1cbea706baf12baef45429a7aad137b19e59b92dff9b1a6eb345e4be1ee32",
+      "source_kind": "text"
+    },
+    {
+      "path": "m3/llm/src/main/native/tests/ncm_kernel_test.cpp",
+      "preimage_sha256_or_absent": "ABSENT",
+      "postimage_sha256": "b74f78ccb9e2181529429195efc2f15c8009dbb9df15a4ac1425b756763e9ebf",
+      "source_kind": "text"
+    }
+  ],
+  "remaining_gates": [
+    "Source-built M3JDK/HotSpot/jtreg and mandatory product release reactor",
+    "Full canonical historical provenance-ledger set and named M3ResultOnlyHandoffGate",
+    "Live Jev calls; trained NCM encoder/decoder/generator/checkpoint qualification",
+    "Unexecuted platforms, GPU and performance benchmarks"
+  ],
+  "receipt_is_execution_code": false
+}

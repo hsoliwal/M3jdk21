@@ -1,0 +1,94 @@
+// SPDX-License-Identifier: Apache-2.0
+// Copyright 2026 Synexia
+package com.synexia.unicodex.varint;
+
+import java.io.ByteArrayInputStream;
+import java.io.EOFException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.math.BigInteger;
+import java.nio.ByteBuffer;
+import java.util.Objects;
+
+/**
+ * Bounded, shortest-form unsigned LEB128 for transport boundaries. Uses the same
+ * seven-bit groups as the existing memory VarInt primitives, without an ambiguous
+ * raw-byte escape. Arbitrary precision is representation, not unbounded resources.
+ * Sequential loops here implement byte-stream state, not collection transforms.
+ */
+public final class CanonicalVarInt {
+    public static final int MAX_IDENTIFIER_BYTES = 4096;
+
+    private CanonicalVarInt() { }
+
+    public static int encodedSize(BigInteger value) {
+        Objects.requireNonNull(value, "value");
+        if (value.signum() < 0) throw new IllegalArgumentException("Negative symbol identifier");
+        return Math.max(1, (int) ((value.bitLength() + 6L) / 7));
+    }
+
+    public static byte[] encode(BigInteger value, int maxBytes) {
+        checkLimit(maxBytes);
+        int size = encodedSize(value);
+        if (size > maxBytes) throw new IllegalArgumentException("Identifier byte budget exceeded");
+        byte[] result = new byte[size];
+        BigInteger remaining = value;
+        for (int i = 0; i < size; i++) {
+            int group = remaining.intValue() & 127;
+            result[i] = (byte) (group | (i + 1 < size ? 128 : 0));
+            remaining = remaining.shiftRight(7);
+        }
+        return result;
+    }
+
+    public static void write(OutputStream output, BigInteger value, int maxBytes) throws IOException {
+        Objects.requireNonNull(output, "output").write(encode(value, maxBytes));
+    }
+
+    /** Consumes exactly one integer; EOF, oversized and nonminimal encodings fail closed. */
+    public static BigInteger read(InputStream input, int maxBytes) throws IOException {
+        Objects.requireNonNull(input, "input");
+        checkLimit(maxBytes);
+        BigInteger result = BigInteger.ZERO;
+        for (int i = 0; i < maxBytes; i++) {
+            int next = input.read();
+            if (next < 0) throw new EOFException("Truncated unsigned LEB128");
+            int group = next & 127;
+            result = result.or(BigInteger.valueOf(group).shiftLeft(i * 7));
+            if ((next & 128) == 0) {
+                if (i > 0 && group == 0) throw new IOException("Noncanonical unsigned LEB128");
+                return result;
+            }
+        }
+        throw new IOException("Identifier byte budget exceeded");
+    }
+
+    /** Transactional cursor: the caller's buffer position changes only on success. */
+    public static BigInteger read(ByteBuffer input, int maxBytes) throws IOException {
+        Objects.requireNonNull(input, "input");
+        checkLimit(maxBytes);
+        ByteBuffer cursor = input.duplicate();
+        InputStream adapter = new InputStream() {
+            @Override public int read() { return cursor.hasRemaining() ? cursor.get() & 255 : -1; }
+        };
+        BigInteger value = read(adapter, maxBytes);
+        input.position(cursor.position());
+        return value;
+    }
+
+    /** Decodes exactly one integer, rejecting trailing bytes. */
+    public static BigInteger decode(byte[] bytes, int maxBytes) throws IOException {
+        Objects.requireNonNull(bytes, "bytes");
+        ByteArrayInputStream input = new ByteArrayInputStream(bytes);
+        BigInteger value = read(input, maxBytes);
+        if (input.available() != 0) throw new IOException("Trailing integer bytes");
+        return value;
+    }
+
+    private static void checkLimit(int maxBytes) {
+        if (maxBytes < 1 || maxBytes > MAX_IDENTIFIER_BYTES) {
+            throw new IllegalArgumentException("Identifier limit must be 1.." + MAX_IDENTIFIER_BYTES);
+        }
+    }
+}

@@ -148,8 +148,47 @@ public final class LongLongTreeMap implements LongLongSortedMap {
         if (from == 0 && to == sourceKeys.length) {
             return putAllSorted(sourceKeys, sourceValues);
         }
-        return putAllSorted(Arrays.copyOfRange(sourceKeys, from, to),
-                Arrays.copyOfRange(sourceValues, from, to));
+        if (from == to) {
+            return 0;
+        }
+        // Ordinary detached caller lanes can be merged by two offsets,
+        // avoiding two temporary arrays and their allocation/GC cost.
+        // Preserve the historical copied-window behavior if reflection
+        // supplied one of our own mutable backing arrays.
+        if (sourceKeys == keys || sourceKeys == values
+                || sourceValues == keys || sourceValues == values) {
+            return putAllSorted(Arrays.copyOfRange(sourceKeys, from, to),
+                    Arrays.copyOfRange(sourceValues, from, to));
+        }
+        int before = size;
+        int unique = 0;
+        int added = 0;
+        int existing = 0;
+        for (int i = from; i < to; i++) {
+            long key = sourceKeys[i];
+            if (i > from && key < sourceKeys[i - 1]) {
+                throw new IllegalArgumentException("source keys must be sorted");
+            }
+            if (i == from || key != sourceKeys[i - 1]) {
+                unique++;
+                while (existing < before && keys[existing] < key) {
+                    existing++;
+                }
+                if (existing == before || keys[existing] != key) {
+                    added++;
+                }
+            }
+        }
+        long required = (long) before + unique;
+        if (required > Integer.MAX_VALUE) {
+            throw new OutOfMemoryError("required array size too large");
+        }
+        int capacity = Math.max(keys.length, (int) required);
+        mergeSortedBackward(sourceKeys, sourceValues, from, to, before + added, capacity);
+        if (added != 0) {
+            modCount++;
+        }
+        return added;
     }
 
     //FLLDCIM: MRL - primitive-method-gaps G2 keyAt/valueAt/indexOfKey (donor LongLongSortedMap, blob 5b0e75813d6c)
@@ -406,6 +445,12 @@ public final class LongLongTreeMap implements LongLongSortedMap {
 
     private void mergeSortedBackward(long[] sourceKeys, long[] sourceValues,
             int newSize, int capacity) {
+        mergeSortedBackward(sourceKeys, sourceValues, 0, sourceKeys.length, newSize, capacity);
+    }
+
+    /** Merge the checked input window directly, without pairwise slice copies. */
+    private void mergeSortedBackward(long[] sourceKeys, long[] sourceValues,
+            int from, int to, int newSize, int capacity) {
         long[] mergedKeys = keys;
         long[] mergedValues = values;
         if (capacity > keys.length) {
@@ -414,9 +459,9 @@ public final class LongLongTreeMap implements LongLongSortedMap {
             mergedValues = new long[capacity];
         }
         int left = size - 1;
-        int right = sourceKeys.length - 1;
+        int right = to - 1;
         int write = newSize - 1;
-        while (right >= 0) {
+        while (right >= from) {
             long incoming = sourceKeys[right];
             long value = sourceValues[right];
             // The unprocessed union contains the existing prefix, so write >= left.
@@ -431,7 +476,7 @@ public final class LongLongTreeMap implements LongLongSortedMap {
             mergedValues[write--] = value;
             do {
                 right--;
-            } while (right >= 0 && sourceKeys[right] == incoming);
+            } while (right >= from && sourceKeys[right] == incoming);
         }
         // With reused lanes the remaining existing prefix is already in its final positions.
         if (mergedKeys != keys && left >= 0) {
