@@ -1,7 +1,0 @@
-# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
-# SPDX-License-Identifier: Apache-2.0
-category	atom	contract	status
-Set/algebra tools	M3SortedIntSetNative.intersection	Signed sorted unique set, identical JNI ABI; skew-aware adaptive search	SOURCE_SEALED_SINGLE_C_REPLACEMENT
-Search/index engines	M3SortedIntSetNative/intersection0 private native atom	Monotone exponential probes with exact binary verification	SOURCE_SEALED_C17_CANDIDATE
-Verification tools	M3SortedIntSetNativeSkewOracle	Java/JNI parity, detached outputs, symmetry and boundary vectors	SOURCE_SEALED_TEST_FIXTURE
-Verification tools	m3_sorted_set_kernel_oracle.c	Exhaustive finite reference and counted skew regression	SOURCE_SEALED_TEST_FIXTURE

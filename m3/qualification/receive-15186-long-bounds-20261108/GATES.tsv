@@ -1,6 +1,0 @@
-gate	result
-m3/tooling/search/verify-long-bounds.sh	rc=0: native preconditions checks=4; M3_SORTED_LONG_BOUNDS_TEST checks=2286177 (was 668444) java=PASS native_jni=PASS in -Xint, C1 and tiered; M3_LONG_JNI_HOST state=PASS
-m3/tooling/search/verify.sh (int bounds, unchanged sources)	rc=0: M3_HOST_JNI_PROOF state=PASS
-mutant: direct-mapped memo hit without exact key compare	rejected: C17/JNI lower/upper mismatch
-mutant: set-associative memo hit without exact key compare	rejected: C17/JNI lower/upper mismatch
-JDK-naming fixed point	0 of 12 in-scope files

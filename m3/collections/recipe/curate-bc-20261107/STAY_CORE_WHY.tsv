@@ -1,4 +1,0 @@
-M3ObjectRangeMap	moved range.ObjectRangeMap breaks coupling: jdk.m3.collections.M3SlotArrays is not public in jdk.m3.collections; c
-M3PrimitiveBigArray	core M3PrimitiveBigHashMap needs it in its package: jdk.m3.collections.packed.BigArray.Factory is not public in 
-M3PrimitiveBigList	moved packed.BigList breaks coupling: equalBits(long,long) is not public in jdk.m3.collections.PrimitiveKind
-M3LongLongRangeMap	core M3LongLongRangeMapAtomicGrowthTest needs it in its package: jdk.m3.collections.range.LongLongRangeMap.BackingCopier is n
