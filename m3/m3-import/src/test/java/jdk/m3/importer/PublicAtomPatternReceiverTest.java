@@ -40,7 +40,7 @@ final class PublicAtomPatternReceiverTest {
         assertTrue(verify.contains("-Xlint:all"));
         assertTrue(verify.contains("-Werror"));
         assertTrue(verify.contains("jdk-a3-recipe-export.tsv"));
-        assertTrue(verify.contains("b691460aebcd458f5d5fb0d508b4a4a05ef8d6c5"));
+        assertTrue(verify.contains("aef65e14e548b36ac5135207fd1fee2fc4e5c893"));
         assertTrue(verify.contains("PUBLIC_A3_EXPORT_SOURCE_DRIFT"));
         assertTrue(verify.contains("a3ExportFiles"));
         assertFalse(verify.contains("rewrite-maven-plugin"));

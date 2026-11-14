@@ -7,7 +7,7 @@ Canonical owner:
 - repository: `hsoliwal/com.synexia`
 - canonical merged commit: `a062661e91e769a00c2d027e1f04a7a0c8f9dc28` (Synexia PR #9599)
 - artifact: `com.synexia:synexia-jdk-a3-recipes:1.0.0-SNAPSHOT`
-- canonical export manifest Git blob: `b691460aebcd458f5d5fb0d508b4a4a05ef8d6c5`
+- export manifest Git blob: `aef65e14e548b36ac5135207fd1fee2fc4e5c893` (M3JDK mirror manifest, rows re-pinned to the mirror's JDK class names and paths on 2026-11-14; was `b691460aebcd458f5d5fb0d508b4a4a05ef8d6c5`)
 - canonical convergence source Git blob: `7dc6cea0a969a1bd094e324c47a1bb724b5ff1dc`
 - portable mastery verifier Git blob: `ec03c17a24d455a0c535e18069e85dd85f1a065a`
 

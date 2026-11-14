@@ -88,7 +88,7 @@ jobs:
           eabca39453edaebc5b7f0e9aaaf12b900ba181e21dc5c8a08640abc7f0d0b6f7  src/main/java/jdk/internal/m3/rewrite/atom/M3PatternizePureIntAtomRecipe.java
           32b98c2eafaa8e4231dcded464a88f1560cebc71fb39d5d28934482af61b0043  src/main/java/jdk/internal/m3/rewrite/atom/M3PureIntAtomEligibility.java
           a6587bcc76d05b006757f8ded6da2c7d46bb23b521e2030b8b9d657b6a31cdf8  src/main/java/jdk/internal/m3/rewrite/atom/M3PureIntConvergenceRecipe.java
-          11c3ddd89c939a0689eda812d497b279d6f792326fcd82096ea0317f10721ea8  src/main/resources/META-INF/m3/jdk-a3-recipe-export.tsv
+          2470fa652697645b0895b42eeca8c75e8df79e8f8637210a82bb2b20f4759303  src/main/resources/META-INF/m3/jdk-a3-recipe-export.tsv
           b2cceacde86886a6339ff1df9dcfb267bee589e23e800864b5507dea603a1f72  src/test/java/jdk/internal/m3/rewrite/M3JdkA3RecipeExportTest.java
           120e5cf7fa921edfdd4da13d755af70b47d8d6d0adc4fef70233a42a7d3250a5  src/test/java/jdk/internal/m3/rewrite/M3RecipeMasteryPortableReceiptTest.java
           01916ea53538347cbd5e582626ae665825f94cdeda75de272318f58f2bd10c40  src/test/java/jdk/internal/m3/rewrite/atom/M3AtomCoverageClosureTest.java

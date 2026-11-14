@@ -30,7 +30,7 @@ final class A3RecipeHome {
     static final String EXPORT_MANIFEST =
             "META-INF/m3/jdk-a3-recipe-export.tsv";
     static final String EXPORT_MANIFEST_GIT_BLOB =
-            "b691460aebcd458f5d5fb0d508b4a4a05ef8d6c5";
+            "aef65e14e548b36ac5135207fd1fee2fc4e5c893";
     static final String CONVERGENCE_SOURCE_GIT_BLOB =
             "7dc6cea0a969a1bd094e324c47a1bb724b5ff1dc";
     static final String PORTABLE_MASTERY_SOURCE_GIT_BLOB =

@@ -22,7 +22,7 @@ class A3RecipeHomeTest {
                 "jdk.internal.m3.rewrite.M3RecipeMasteryPortableReceipt",
                 A3RecipeHome.PORTABLE_MASTERY_CLASS);
         assertEquals(
-                "b691460aebcd458f5d5fb0d508b4a4a05ef8d6c5",
+                "aef65e14e548b36ac5135207fd1fee2fc4e5c893",
                 A3RecipeHome.EXPORT_MANIFEST_GIT_BLOB);
         assertEquals(
                 "ec03c17a24d455a0c535e18069e85dd85f1a065a",
