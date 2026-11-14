@@ -1,0 +1,12 @@
+{
+  "status": "READ_VERIFIED_PINNED_JAR_IN_RAM",
+  "jarSha256": "f5f8ef90609e64fec82eb908e497dc7d81b2eb983fe509b870292a193cde4dfb",
+  "entries": [
+    "META-INF/NOTICE",
+    "META-INF/FastDoubleParser-NOTICE"
+  ],
+  "sourceCommit": "249716c8c2b141e4cab646f9d161fda0da97ae03",
+  "sourceRootNotice": "ABSENT at checked root and src/main/resources/META-INF; executable dependency contains preserved notices",
+  "noJarRedistributed": true,
+  "noNativeOrFastDoubleParserSourceAdapted": true
+}

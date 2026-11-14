@@ -9,4 +9,5 @@ module jdk.m3.llm {
     exports jdk.m3.llm.extract;
     exports jdk.m3.llm.summary;
     exports jdk.m3.llm.projection;
+    exports jdk.m3.llm.model;
 }

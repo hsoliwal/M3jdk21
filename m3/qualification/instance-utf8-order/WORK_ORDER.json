@@ -1,0 +1,83 @@
+{
+  "schema": "M3_INSTANCE_UTF8_WORK_ORDER_V1",
+  "scope": "Serial exact owner admission then one private comparator; immutable/public APIs and legacy malformed/null fallback preserved.",
+  "generationCalls": 0,
+  "gate": {
+    "schema": "M3_INSTANCE_UTF8_COMPARATOR_REUSE_V1",
+    "repository": "hsoliwal/M3jdk21",
+    "revision": "778cd3eac266974e7b5155e79838f74ee516b535",
+    "owner": "m3/core/src/jdk/m3/text/M3InstanceIndexPrecompute.java",
+    "blob": "c4a499d6ef46e38ed5f12b0789683cae53309964",
+    "classification": "ADAPT_LUCENE_UNICODE_UTF8_ORDER_WITH_LEGACY_FALLBACK",
+    "donor": {
+      "repository": "apache/lucene-solr",
+      "commit": "17dee71932c683e345508113523e764c3e4c80fa",
+      "tagObject": "3f3496d2b87c9bf0827172b6dcd9e77e21209990",
+      "path": "lucene/core/src/java/org/apache/lucene/util/CharsRef.java",
+      "blob": "3c2a62d17b9ebb96045eebff7db1e0de75574ec0",
+      "license": "Apache-2.0",
+      "fit": "UTF16/codepoint comparison reproduces unsignedUTF8 byte order for validUnicode, avoiding temporary encoded arrays. Use standardString.codePointAt; original byte comparator remains fallback for encountered malformedunits/null.",
+      "limits": "Do not wrapStringinCharsRef, which copies chararrays. Lucene malformedUTF16 order is not equivalent to String.getBytes replacement semantics; only validUnicode signs use donor oracle."
+    },
+    "existingOwners": {
+      "validation": "Existing validateName/validateUtf8 refuses malformed stored names, unchanged.",
+      "boundary": "Public recordsByName/metadata/reverse-name set queries bypass validateName; preserve malformed query replacement aliases and null behavior."
+    },
+    "algorithmAtom": {
+      "inputs": "twoString operands supplied by existing UTF8_ORDER comparator",
+      "output": "exact -1/0/1 legacy UTF8 ordering result, or legacy null failure",
+      "effects": "No added fields/cache/storage; valid decision path uses scalar reads, encoded fallback unchanged; public API/normalization/validation/ownership/lifetime/TreeMap shapes unchanged."
+    },
+    "recipeStages": [
+      {
+        "owner": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+        "change": "One exact migratedowner admission case for M3InstanceIndexPrecompute. Use incumbent MavenSource-admitted recipe to transform canonical engine itself, execute replay/fixedpoint/refusal; adjacent paths remain refused."
+      },
+      {
+        "owner": "m3/core/src/jdk/m3/text/M3InstanceIndexPrecompute.java",
+        "change": "Use stage1 qualified engine output, exact private comparator before/after snapshots. No broadened source roots."
+      }
+    ],
+    "tests": {
+      "existing": [
+        "875cc39d069dbb5095fa8fc1ef9892352200e676",
+        "1647d2a6e21b61f9b3e5c389914111ffda7faea9"
+      ],
+      "new": [
+        "UTF8 byte oracle exactsign vs allUTF16unit/edge/randomstrings including malformed",
+        "validUnicode Lucene oracle",
+        "public rawmap/get/contains and reverseSet malformed aliases/null/empty behavior",
+        "construction order/refusals/snapshots/ASCII normalization unchanged",
+        "actual comparator encoded-array count, API/non-comparator fingerprint, realpublic lookup allocation/timing"
+      ],
+      "noClaims": "No fullJDK/JNI/newdatasetadmission/platform qualification."
+    },
+    "alternativeInventory": {
+      "arrayCounts": "Existing accessors verified, no concrete caller identified in boundedsearch; no invented rewrite.",
+      "payload": "M3PrecomputePayload already uses owned record fields for private array reads, preserve publicdefensivecopies."
+    },
+    "generationCalls": 0,
+    "status": "INVENTORIED_BEFORE_CANDIDATE",
+    "scope": "Bounded maintenance under existing comparator contract; exact owner registry update plus one comparator owner, serially qualified."
+  },
+  "gateBlob": "05d09ba34eb7b801c0f0466f48907baef36e85ca",
+  "failures": [
+    {
+      "input": "6c6f03bc4f086f0670725d38cfcff30d3c8fd1bf",
+      "receipt": "620d23236ef4e88fd6a76307331fa5a27d40b744",
+      "sha256": "09a042db7a8a6f668b45741009994d2e7685ef6cbecb9784c52b2872e978156d",
+      "status": "REGISTRY8_AND_PRODUCT8_RECIPE_PASS_BASELINE_QA11_OF13_THEN_STOPPED",
+      "rootCause": "Test model incorrectly expected UTF8 ordering/null comparator on reverse-name snapshot sets; current TreeSet(Collection) uses UTF16 natural order. Preserve incumbent public behavior, correct test oracle and add direct null-message cases. Production candidate/registry unchanged.",
+      "productionChanged": false
+    },
+    {
+      "input": "ab0c1d93a82124bc73b60e6ab8aec89ceafb96a9",
+      "receipt": "948fa0499709211213e3868234f6c707f9feb83d",
+      "sha256": "529f5cbc2305e43073b2066d74f6012dc4d43c698cd940aba1c188cf94ae4941",
+      "status": "RECIPES16_PASS_BASELINE13_OF14_STOPPED",
+      "rootCause": "Raw public-view oracle compared implementation-specific implicit NPE detail against a different comparator call site. Java21 NPE.getMessage permits implementation-specific detail ornull. Compare guaranteed exception class in generic view outcomes, keep explicit owner diagnostics in incumbenttests, record direct details, and execute exact operand encoding order1/1/2.",
+      "reference": "https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/NullPointerException.html#getMessage()",
+      "candidateUnchanged": true
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+category	operation	candidate	selection	proof	limits
+serialization/canonical-json	binary64_wire_text	CPython repr + format + Java21 presentation	WRAP installed standard library; no conversion engine port	28092 finite patterns exact against Java21	Not exhaustive; CPython3.12.6 Windows qualified
+serialization/canonical-json	quoted_string_tokens	Complete quoted-token isolation and complete JSON-escape matching	Preserve literal backslash-u text; emit raw DEL as existing Java does	272 payloads and Python escape/value tests	Existing Java schema unchanged
+transformation/hash-pinned-text	one-owner replacement	Existing M3Jdk21HashPinnedTextSnapshotRecipe	DIRECT_REUSE	4 JUnit tests; exact generated SHA; fixed point and refusals	Current preimage only
+lexicon/admission	unsupported shapes	Existing Java receiver	Preserve refusal; do not widen schema	JUnit negative cases	Hierarchy import not implemented by this slice

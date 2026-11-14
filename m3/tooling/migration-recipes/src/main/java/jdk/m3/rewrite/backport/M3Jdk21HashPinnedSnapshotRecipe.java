@@ -305,7 +305,9 @@ public final class M3Jdk21HashPinnedSnapshotRecipe
                         || value.startsWith("m3/tooling/migration-recipes/src/main/java/")
                         || value.startsWith("m3/tooling/migration-recipes/src/test/java/")
                         || value.startsWith("m3/tooling/a3/src/main/java/")
-                        || value.startsWith("m3/tooling/a3/src/test/java/"))
+                        || value.startsWith("m3/tooling/a3/src/test/java/")
+                        // One existing exact-address owner; neighboring core paths stay unregistered.
+                        || value.equals("m3/core/src/jdk/m3/text/M3FixedAddressMapping.java"))
                 || !value.endsWith(".java")
                 || value.indexOf('\\') >= 0
                 || value.length() > 4096) {
@@ -334,7 +336,8 @@ public final class M3Jdk21HashPinnedSnapshotRecipe
                 || value.startsWith(
                         ".m3/openrewrite-recipes/src/main/java/jdk/internal/m3/bootstrap/")
                 || value.startsWith(
-                        ".m3/openrewrite-recipes/src/test/java/jdk/internal/m3/bootstrap/");
+                        ".m3/openrewrite-recipes/src/test/java/jdk/internal/m3/bootstrap/")
+                || value.equals("m3/core/src/jdk/m3/text/M3FixedAddressMapping.java");
     }
 
     private static String normalized(Path path) {

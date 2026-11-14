@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright 2026 Hitesh Soliwal, Synexia. SPDX-License-Identifier: Apache-2.0 -->
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+<modelVersion>4.0.0</modelVersion><groupId>com.synexia.verification</groupId>
+<artifactId>m3-shared-array-binding-qualification</artifactId><version>1</version><packaging>pom</packaging>
+<build><plugins><plugin><groupId>org.codehaus.mojo</groupId><artifactId>exec-maven-plugin</artifactId><version>3.3.0</version>
+<executions><execution><id>qualify-shared-array-binding</id><phase>test</phase><goals><goal>exec</goal></goals></execution></executions>
+<configuration><executable>${java.home}/bin/java</executable><inheritIo>true</inheritIo><arguments>
+<argument>-Xcheck:jni</argument><argument>-XX:-UsePerfData</argument><argument>-XX:ErrorFile=${m3.test.temp}/hs_err_pid%p.log</argument><argument>--enable-preview</argument><argument>-Xmx768m</argument><argument>-Djunit.jupiter.execution.parallel.enabled=false</argument>
+<argument>-cp</argument><argument>${env.M3_RUNTIME_CLASSPATH}</argument>
+<argument>-Dorg.xerial.snappy.lib.path=F:/codex-work/lexicon-migration-20261031/code-text-oracle-recipe/proof/temp</argument>
+<argument>-Dorg.xerial.snappy.lib.name=snappy-1.1.10-6e0cfc58-474b-47d4-bdb8-4cb270ee6e0e-snappyjava.dll</argument><argument>-Duser.home=${m3.proof.root}/home</argument>
+<argument>-Djava.io.tmpdir=${m3.test.temp}</argument><argument>--source</argument><argument>21</argument>
+<argument>${project.basedir}/M3ReceiverPatternTransitionProof.java</argument>
+<argument>${m3.input.url}</argument><argument>${m3.packet.sha256}</argument>
+<argument>${m3.native.library}</argument>
+</arguments></configuration></plugin></plugins></build></project>

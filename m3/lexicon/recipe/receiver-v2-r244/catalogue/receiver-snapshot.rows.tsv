@@ -1,0 +1,4 @@
+category	operation	selected_pattern	proof	limits
+source-reproducibility/current-namespace	Versioned receiver replay	Existing hash-pinned Java AST snapshot	33 exact accepted sources; current/rebuilt fixed points	No runtime redesign
+source-reproducibility/legacy-drift	Historical v1 replay	Preserve historical recipe and add v2	V1 generates16 parallel legacy owners against current tree	V1 remains valid only for its pinned historical target
+precompute/composition	Case-Liang, regex transfer and token composition	Unchanged accepted receiver implementations	19 JUnit + five Java proof mains; 5243818 reported main checks	Native/platform/full hierarchy NOT_RUN

@@ -1,0 +1,4 @@
+capability	donor	license	classification	fit
+nonempty-item-test-precondition	hsoliwal/M3jdk21@41dbfee857379dc7eaee961d37332dc89b83f37d M3WebLanes.damageItem and M3WebChecks.itemDamage	Apache-2.0 OR EPL-2.0	BOUNDED_TEST_MAINTENANCE	Make the test require positive width and height before demanding visible damage; retain every assertion for nonempty items; no production logic or original18 changes
+selected-helper-emission	hsoliwal/M3jdk21 M3WebGen.java SHA0ea3cf99fb09e346774715f69f1b47565ade39c2121a5e470565b2d55401a150	Apache-2.0 OR EPL-2.0	DIRECT_IMPORT	Invoke existing selected emit once; generated Java is not handpatched; fresh replay writes0
+sealed-template-and-ledger-update	org.openrewrite.text.FindAndReplace8.17.1	Apache-2.0	DIRECT_IMPORT	Exact literal/case-sensitive/file-pattern replacement, pinned full before/after bytes and zero replay; reuse existing slf4j-api2.0.9 runtime closure

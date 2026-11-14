@@ -1,0 +1,31 @@
+{
+  "schema": "M3_TYPED_ATOM_CAPABILITY_V1",
+  "pattern": "SEGMENT_BLOOM_REJECT_BOUNDED_STRING_SCAN_V1",
+  "owner": "m3/core/src/jdk/m3/text/M3BigString.java",
+  "sourceBefore": "485099044c7576c3fc934d22097da07dfd0330e1",
+  "atoms": [
+    {
+      "id": "M3BigString.indexOf.dispatch",
+      "input": "receiver+CharSequence+long from",
+      "condition": "after incumbent bounds/presence preflight, immutableString length1",
+      "output": "existing long range-relative index",
+      "fallback": "entire original KMP source, arbitrary callback order preserved"
+    },
+    {
+      "id": "M3BigString.indexOfSingleUnit",
+      "input": "validated UTF16 char target + normalized range-relative from",
+      "composition": "Locate and read the first valid code unit -> existing chunk directory FILTER by chunkBloom -> bounded String kernel or immutable-piece reads, skipping that first unit -> first match FOLD",
+      "effects": "no new fields, retained arrays, caches, nodes, flattening or normalization"
+    }
+  ],
+  "invariants": [
+    "exact UTF16 code-unit answers under all chunk/view splits",
+    "Bloom absence only rejects; collisions remain exact",
+    "single-unit search never materializes text",
+    "StringBuilder and scripted CharSequence callbacks retain their schedule",
+    "source, field/API and unrelated method identities stay bound",
+    "one-owner source snapshot replay fixed point and source drift refusal"
+  ],
+  "proofScope": "Executed V3:83 JUnit executions (3*9 recipe,4*14 product),96 unchanged main checks +1083 pinned streaming-window checks per JVM separately. V1/V2 retained and rejected for measured early-hit regressions. No full streaming filesystem suite, JDK reactor/native or platform claim.",
+  "generationCalls": 0
+}
