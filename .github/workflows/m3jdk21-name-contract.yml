@@ -110,6 +110,9 @@ jobs:
             m3/collections/implementations/guava-33.4.8/android/guava/src/jdk/m3/collections/guava/collect/CompactHashMap.java
             m3/collections/implementations/guava-33.4.8/guava/src/jdk/m3/collections/guava/collect/CompactHashMap.java
             src/jdk.m3.io/share/classes/jdk/m3/optane/PmemCheckpoint.java
+            m3/ports/precompute/src/main/java/jdk/m3/precompute/NcmCodebook.java
+            m3/ports/precompute/src/main/java/jdk/m3/precompute/NativePrecomputeOps.java
+            m3/llm/src/main/native/**
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'

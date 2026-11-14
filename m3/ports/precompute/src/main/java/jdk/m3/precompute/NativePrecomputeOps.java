@@ -37,9 +37,13 @@ public final class NativePrecomputeOps {
     }
     TUPLES_AVAILABLE = tuples;
     boolean ncmCodebook = false;
-    if (loaded) {
-      try { ncmCodebook = ncmCodebookAbiVersionNative() == 1; }
-      catch (UnsatisfiedLinkError oldLibrary) { ncmCodebook = false; }
+    if (!Boolean.getBoolean("m3.precompute.disableNative")) {
+      try {
+        loadNcmLibrary();
+        ncmCodebook = ncmCodebookAbiVersionNative() == 1;
+      } catch (IOException | InvalidPathException | UnsatisfiedLinkError absentOrOlder) {
+        ncmCodebook = false;
+      }
     }
     NCM_CODEBOOK_AVAILABLE = ncmCodebook;
   }
@@ -59,6 +63,27 @@ public final class NativePrecomputeOps {
       return;
     }
     System.loadLibrary("m3_precompute");
+  }
+
+  /**
+   * NCM codebook batches live in the single jdk.m3.llm NCM native owner (library
+   * m3_ncm, built from m3/llm/src/main/native), not in m3_precompute. The configured
+   * path is authoritative; a failed optional load keeps the Java oracle.
+   */
+  private static void loadNcmLibrary() throws IOException {
+    String explicit = System.getProperty("m3.ncm.library");
+    if (explicit != null && !explicit.isBlank()) {
+      System.load(Path.of(explicit).toAbsolutePath().normalize().toString());
+      return;
+    }
+    String pathFile = System.getProperty("m3.ncm.library.pathFile");
+    if (pathFile != null && !pathFile.isBlank()) {
+      String path = Files.readString(Path.of(pathFile)).strip();
+      if (path.isEmpty()) throw new IOException("empty NCM native path file");
+      System.load(Path.of(path).toAbsolutePath().normalize().toString());
+      return;
+    }
+    System.loadLibrary("m3_ncm");
   }
 
   private NativePrecomputeOps() {}
@@ -155,7 +180,7 @@ public final class NativePrecomputeOps {
   public static boolean ncmCodebookAvailable() { return NCM_CODEBOOK_AVAILABLE; }
 
   /**
-   * Checked batched nearest-code assignment using the existing native loader.
+   * Checked batched nearest-code assignment using the NCM native owner library m3_ncm.
    * Java remains the semantic oracle; no input array is modified or retained.
    * See {@link NcmCodebook#nearestJava} for the full shape and overflow contract.
    */

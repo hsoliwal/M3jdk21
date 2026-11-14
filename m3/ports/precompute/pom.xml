@@ -127,6 +127,57 @@
                 </configuration>
               </execution>
               <execution>
+                <id>configure-native-ncm-owner</id>
+                <phase>generate-test-resources</phase>
+                <goals>
+                  <goal>exec</goal>
+                </goals>
+                <configuration>
+                  <executable>cmake</executable>
+                  <arguments>
+                    <argument>-S</argument>
+                    <argument>${project.basedir}/../../llm/src/main/native</argument>
+                    <argument>-B</argument>
+                    <argument>${project.build.directory}/ncm-native</argument>
+                    <argument>-DCMAKE_BUILD_TYPE=Release</argument>
+                    <argument>-DM3_NCM_TESTS=ON</argument>
+                  </arguments>
+                </configuration>
+              </execution>
+              <execution>
+                <id>build-native-ncm-owner</id>
+                <phase>process-test-resources</phase>
+                <goals>
+                  <goal>exec</goal>
+                </goals>
+                <configuration>
+                  <executable>cmake</executable>
+                  <arguments>
+                    <argument>--build</argument>
+                    <argument>${project.build.directory}/ncm-native</argument>
+                    <argument>--config</argument>
+                    <argument>Release</argument>
+                  </arguments>
+                </configuration>
+              </execution>
+              <execution>
+                <id>test-native-ncm-owner</id>
+                <phase>process-test-resources</phase>
+                <goals>
+                  <goal>exec</goal>
+                </goals>
+                <configuration>
+                  <executable>ctest</executable>
+                  <arguments>
+                    <argument>--test-dir</argument>
+                    <argument>${project.build.directory}/ncm-native</argument>
+                    <argument>--output-on-failure</argument>
+                    <argument>-C</argument>
+                    <argument>Release</argument>
+                  </arguments>
+                </configuration>
+              </execution>
+              <execution>
                 <id>test-native-precompute</id>
                 <phase>process-test-resources</phase>
                 <goals>
@@ -153,6 +204,7 @@
               <useModulePath>false</useModulePath>
               <systemPropertyVariables>
                 <m3.precompute.native.pathFile>${project.build.directory}/native/native-path-Release.txt</m3.precompute.native.pathFile>
+                <m3.ncm.library.pathFile>${project.build.directory}/ncm-native/m3_ncm-path-Release.txt</m3.ncm.library.pathFile>
                 <m3.precompute.requireNcmNative>true</m3.precompute.requireNcmNative>
               </systemPropertyVariables>
             </configuration>

@@ -183,6 +183,13 @@ complexity remains O(rows * codebookSize * channels); no measured speedup is cla
 
 ## Optional JNI backend
 
+`m3/llm/src/main/native` is the single NCM native owner (library `m3_ncm`). Besides
+the float nearest-code kernel used here, it carries the binary64 offset-batch
+codebook entry `m3_ncm_codebook_nearest` for `jdk.m3.precompute.NativePrecomputeOps`
+(moved from the `m3_precompute` library); that class loads the library from
+`-Dm3.ncm.library`, `-Dm3.ncm.library.pathFile` or `System.loadLibrary("m3_ncm")`.
+The build writes the produced library path to `m3_ncm-path-<config>.txt`.
+
 Build with Java21 headers, a C++20 compiler and CMake 3.20 or newer. From the
 repository root, with `JAVA_HOME` set to the selected Java21 installation:
 

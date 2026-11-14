@@ -6,6 +6,11 @@
 #include <stddef.h>
 #include <stdint.h>
 
+/* Binary64 offset-batch entry of the single jdk.m3.llm NCM native owner (library
+ * m3_ncm), serving jdk.m3.precompute.NativePrecomputeOps. Moved here from the
+ * m3_precompute library; symbols carry the m3_ncm_codebook_ prefix so they do not
+ * collide with the float entries in m3_ncm_kernel.h. */
+
 typedef enum {
   M3_NCM_OK = 0,
   M3_NCM_INVALID_ARGUMENT = 1,
@@ -15,7 +20,7 @@ typedef enum {
 } m3_ncm_status;
 
 /* Check shape, offsets, lengths and multiplication bounds without reading payloads. */
-m3_ncm_status m3_ncm_validate_layout(
+m3_ncm_status m3_ncm_codebook_validate_layout(
     size_t vector_length, int32_t vector_offset, int32_t rows,
     size_t codebook_length, int32_t codebook_offset, int32_t code_count,
     int32_t dimensions, size_t output_length);
@@ -40,7 +45,7 @@ m3_ncm_status m3_ncm_validate_layout(
  * This is a checked numerical vector-quantization primitive, not a learned model
  * or an exact text-storage codec. Codebook/checkpoint/level identity is external.
  */
-m3_ncm_status m3_ncm_nearest(
+m3_ncm_status m3_ncm_codebook_nearest(
     const double *vectors, size_t vector_length, int32_t vector_offset, int32_t rows,
     const double *codebook, size_t codebook_length, int32_t codebook_offset,
     int32_t code_count, int32_t dimensions, int32_t *output, size_t output_length);
