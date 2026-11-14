@@ -288,13 +288,13 @@ class M3RecipeHomePolicyTest(unittest.TestCase):
             encoding="utf-8"
         )
         for owner in (
-            "M3PureIntAtomizeRecipe",
-            "M3PureIntInventoryRecipe",
-            "M3PureIntPatternizeRecipe",
-            "M3PureIntDocumentationRecipe",
-            "M3PureIntConvergenceRecipe",
+            "com.synexia.rewrite.M3PureIntAtomizeRecipe",
+            "com.synexia.rewrite.M3PureIntInventoryRecipe",
+            "com.synexia.rewrite.M3PureIntPatternizeRecipe",
+            "com.synexia.rewrite.M3PureIntDocumentationRecipe",
+            "com.synexia.rewrite.M3PureIntConvergenceRecipe",
         ):
-            self.assertIn(f"com.synexia.rewrite.{owner}", catalogue)
+            self.assertIn(owner, catalogue)
         for retired in ("com.synexia.rewrite.atom.", "com.m3.rewrite.atom.", "jdk.internal.m3.rewrite.atom.", "jdk.m3.rewrite.atom."):
             self.assertNotIn(retired, catalogue)
 
