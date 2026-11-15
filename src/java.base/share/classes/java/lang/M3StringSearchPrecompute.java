@@ -270,6 +270,159 @@ final class M3StringSearchPrecompute {
         }
     }
 
+    /**
+     * Exact search of a flat needle over canonical text. The bridge has already checked the
+     * non-empty needle, range and optional facts. Sparse candidates and early matches use no
+     * prefix table. Dense failed comparisons switch to the existing KMP algorithm shape with
+     * one bounded, invocation-local table; the needle is neither interned nor retained.
+     */
+    static int indexOf(M3String source, String pattern, int fromIndex, int endIndex) {
+        int patternLength = pattern.length();
+        int maximumStart = endIndex - patternLength;
+        M3String.CodeUnitCursor units = flatSearchCursor(source, endIndex - fromIndex);
+        char first = pattern.charAt(0);
+        long failedComparisonWork = 0L;
+        int failedCandidates = 0;
+        boolean watching = patternLength > 1 && patternLength <= MAX_PATTERN_UNITS;
+        for (int candidate = fromIndex; candidate <= maximumStart; candidate++) {
+            if (sourceUnit(source, units, candidate) != first) continue;
+            int matched = 1;
+            while (matched < patternLength
+                    && sourceUnit(source, units, candidate + matched) == pattern.charAt(matched)) {
+                matched++;
+            }
+            if (matched == patternLength) return candidate;
+            if (watching) {
+                failedComparisonWork += matched;
+                if (++failedCandidates >= DENSE_CANDIDATES
+                        && failedComparisonWork
+                                > patternLength + 2L * (candidate - fromIndex + 1)) {
+                    int[] prefix = flatPrefix(pattern, false);
+                    if (prefix == null) {
+                        watching = false;
+                    } else {
+                        // Starts through candidate have been ruled out. Restart with no matched
+                        // prefix at the next start so overlaps are still considered exactly.
+                        return flatKmp(source, pattern, units, prefix, candidate + 1, endIndex);
+                    }
+                }
+            }
+        }
+        return -1;
+    }
+
+    /** Exact reverse counterpart; maximumStart is a validated candidate start, not an end. */
+    static int lastIndexOf(M3String source, String pattern, int maximumStart) {
+        int patternLength = pattern.length();
+        int last = patternLength - 1;
+        M3String.CodeUnitCursor units =
+                flatSearchCursor(source, maximumStart + patternLength);
+        char lastUnit = pattern.charAt(last);
+        long failedComparisonWork = 0L;
+        int failedCandidates = 0;
+        boolean watching = patternLength > 1 && patternLength <= MAX_PATTERN_UNITS;
+        for (int candidate = maximumStart; candidate >= 0; candidate--) {
+            int end = candidate + last;
+            if (sourceUnit(source, units, end) != lastUnit) continue;
+            int matched = 1;
+            while (matched < patternLength
+                    && sourceUnit(source, units, end - matched) == pattern.charAt(last - matched)) {
+                matched++;
+            }
+            if (matched == patternLength) return candidate;
+            if (watching) {
+                failedComparisonWork += matched;
+                if (++failedCandidates >= DENSE_CANDIDATES
+                        && failedComparisonWork
+                                > patternLength + 2L * (maximumStart - candidate + 1)) {
+                    int[] prefix = flatPrefix(pattern, true);
+                    if (prefix == null) {
+                        watching = false;
+                    } else {
+                        // Every candidate at or above this one failed. The next possible match
+                        // ends one code unit earlier, even when adjacent candidates overlap.
+                        return flatReverseKmp(source, pattern, units, prefix, end - 1);
+                    }
+                }
+            }
+        }
+        return -1;
+    }
+
+    /**
+     * A tuple cursor amortizes leaf lookup over a nontrivial scan. Scalar owners and short
+     * ranges keep their allocation-free reads. Cursor allocation is optional, as is the table.
+     */
+    private static M3String.CodeUnitCursor flatSearchCursor(M3String source, int scanUnits) {
+        if (scanUnits < 64 || !(source.owner() instanceof M3StringTuple)) return null;
+        try {
+            return new M3String.CodeUnitCursor(source);
+        } catch (OutOfMemoryError unavailable) {
+            return null;
+        }
+    }
+
+    private static char sourceUnit(
+            M3String source, M3String.CodeUnitCursor units, int index) {
+        return units == null ? source.charAt(index) : units.at(index);
+    }
+
+    /** Bounded failure links only; no byte/char copy or reference to the flat needle survives. */
+    private static int[] flatPrefix(String pattern, boolean reverse) {
+        int length = pattern.length();
+        if (length < 2 || length > MAX_PATTERN_UNITS) return null;
+        int[] prefix;
+        try {
+            prefix = new int[length];
+        } catch (OutOfMemoryError unavailable) {
+            // Exact scalar/cursor search remains available under metadata allocation pressure.
+            return null;
+        }
+        for (int index = 1; index < length; index++) {
+            int matched = prefix[index - 1];
+            char unit = pattern.charAt(reverse ? length - 1 - index : index);
+            while (matched > 0
+                    && unit != pattern.charAt(reverse ? length - 1 - matched : matched)) {
+                matched = prefix[matched - 1];
+            }
+            if (unit == pattern.charAt(reverse ? length - 1 - matched : matched)) matched++;
+            prefix[index] = matched;
+        }
+        return prefix;
+    }
+
+    private static int flatKmp(
+            M3String source, String pattern, M3String.CodeUnitCursor units,
+            int[] prefix, int fromIndex, int endIndex) {
+        int patternLength = pattern.length();
+        int matched = 0;
+        for (int index = fromIndex; index < endIndex; index++) {
+            char unit = sourceUnit(source, units, index);
+            while (matched > 0 && unit != pattern.charAt(matched)) {
+                matched = prefix[matched - 1];
+            }
+            if (unit == pattern.charAt(matched)) matched++;
+            if (matched == patternLength) return index - patternLength + 1;
+        }
+        return -1;
+    }
+
+    private static int flatReverseKmp(
+            M3String source, String pattern, M3String.CodeUnitCursor units,
+            int[] prefix, int scanStart) {
+        int last = pattern.length() - 1;
+        int matched = 0;
+        for (int index = scanStart; index >= 0; index--) {
+            char unit = sourceUnit(source, units, index);
+            while (matched > 0 && unit != pattern.charAt(last - matched)) {
+                matched = prefix[matched - 1];
+            }
+            if (unit == pattern.charAt(last - matched)) matched++;
+            if (matched > last) return index;
+        }
+        return -1;
+    }
+
     static int indexOf(
             M3String source,
             M3String pattern,
