@@ -17598,6 +17598,426 @@
           "supersedes": []
         },
         "source_state": "experimental"
+      },
+      {
+        "id": "m3.text.module-source-layout",
+        "kind": "pending",
+        "status": "pending",
+        "reason": "Establish exact current source custody before relocating the existing independent jdk.m3.text module to the OpenJDK source layout. This inventory does not perform a type rename, copy source or admit a runtime module.",
+        "sources": [
+          {
+            "repo": "hsoliwal/M3JDK21",
+            "commit": "66b7d96509adb59aa0404a4d0cf97d77461c5d13",
+            "module": "jdk.m3.text",
+            "path": "m3/core/src/jdk/m3/text/JoinedM3StringPiece.java",
+            "symbol": "jdk.m3.text.JoinedM3StringPiece",
+            "signatures": [],
+            "sha256": "c715036aa450d3e46e22bcdd0cae9d34d593b18db79953438d988a6b2be390b2",
+            "git_blob_sha1": "765d43267bb22a3650b622c01cb29b550e1deb01",
+            "fingerprint": null,
+            "revision_role": "pinned",
+            "tracking_ref": "refs/heads/master"
+          },
+          {
+            "repo": "hsoliwal/M3JDK21",
+            "commit": "66b7d96509adb59aa0404a4d0cf97d77461c5d13",
+            "module": "jdk.m3.text",
+            "path": "m3/core/src/jdk/m3/text/LexiconTool.java",
+            "symbol": "jdk.m3.text.LexiconTool",
+            "signatures": [],
+            "sha256": "fb3b3a4db8bb699a326d9e2b1114ed04089400294349f97bde0ce6b73e1aa51c",
+            "git_blob_sha1": "daee29e96b6a6b5906b4603358a1ebd03a802337",
+            "fingerprint": null,
+            "revision_role": "pinned",
+            "tracking_ref": "refs/heads/master"
+          },
+          {
+            "repo": "hsoliwal/M3JDK21",
+            "commit": "66b7d96509adb59aa0404a4d0cf97d77461c5d13",
+            "module": "jdk.m3.text",
+            "path": "m3/core/src/jdk/m3/text/LocalM3Arena.java",
+            "symbol": "jdk.m3.text.LocalM3Arena",
+            "signatures": [],
+            "sha256": "e9573e7f04a875eb7bda7d3554a57653ebd655f66ac67be724b366092e76afc4",
+            "git_blob_sha1": "025ce8014cba8a36a9e496bb0a56faef57cf0968",
+            "fingerprint": null,
+            "revision_role": "pinned",
+            "tracking_ref": "refs/heads/master"
+          },
+          {
+            "repo": "hsoliwal/M3JDK21",
+            "commit": "66b7d96509adb59aa0404a4d0cf97d77461c5d13",
+            "module": "jdk.m3.text",
+            "path": "m3/core/src/jdk/m3/text/LocalM3StringPiece.java",
+            "symbol": "jdk.m3.text.LocalM3StringPiece",
+            "signatures": [],
+            "sha256": "77fd1cbeae4dc20a4c23497102cb7c44ec14adbdd6bbf328326957515a7858ad",
+            "git_blob_sha1": "387ae5e0c656177f1df663fd5029d4b31ba2fa00",
+            "fingerprint": null,
+            "revision_role": "pinned",
+            "tracking_ref": "refs/heads/master"
+          },
+          {
+            "repo": "hsoliwal/M3JDK21",
+            "commit": "66b7d96509adb59aa0404a4d0cf97d77461c5d13",
+            "module": "jdk.m3.text",
+            "path": "m3/core/src/jdk/m3/text/M3BigString.java",
+            "symbol": "jdk.m3.text.M3BigString",
+            "signatures": [],
+            "sha256": "2d29e49a52b01fcbb87103d88489c5c20623ee93c577296e2bef748336acb7d8",
+            "git_blob_sha1": "44c0a75daabfd13fc85ca881a4708d7523072937",
+            "fingerprint": null,
+            "revision_role": "pinned",
+            "tracking_ref": "refs/heads/master"
+          },
+          {
+            "repo": "hsoliwal/M3JDK21",
+            "commit": "66b7d96509adb59aa0404a4d0cf97d77461c5d13",
+            "module": "jdk.m3.text",
+            "path": "m3/core/src/jdk/m3/text/M3CorpusProjectionDigest.java",
+            "symbol": "jdk.m3.text.M3CorpusProjectionDigest",
+            "signatures": [],
+            "sha256": "ae0220e4bb05d7cadb660e2b2ac1fe0dc53b1d0cdce9bcc7b1d38254be2be920",
+            "git_blob_sha1": "9bcb58b3c095385833f2e119187fe3aa4441a7c9",
+            "fingerprint": null,
+            "revision_role": "pinned",
+            "tracking_ref": "refs/heads/master"
+          },
+          {
+            "repo": "hsoliwal/M3JDK21",
+            "commit": "66b7d96509adb59aa0404a4d0cf97d77461c5d13",
+            "module": "jdk.m3.text",
+            "path": "m3/core/src/jdk/m3/text/M3CorpusSourceReceipt.java",
+            "symbol": "jdk.m3.text.M3CorpusSourceReceipt",
+            "signatures": [],
+            "sha256": "355b97daf18ff3e65ca686ab7a952f075510ad7154c7ba865173f8161fcac0f1",
+            "git_blob_sha1": "ede467da0e7b2e06f74642cd3932263144bdc82d",
+            "fingerprint": null,
+            "revision_role": "pinned",
+            "tracking_ref": "refs/heads/master"
+          },
+          {
+            "repo": "hsoliwal/M3JDK21",
+            "commit": "66b7d96509adb59aa0404a4d0cf97d77461c5d13",
+            "module": "jdk.m3.text",
+            "path": "m3/core/src/jdk/m3/text/M3FixedAddressMapping.java",
+            "symbol": "jdk.m3.text.M3FixedAddressMapping",
+            "signatures": [],
+            "sha256": "c9cdbcd2f7bff529a45e32fb0c26e8868a3de1cb20287b9046bd3dee9174519f",
+            "git_blob_sha1": "9110a1a45bf7293144771865300abdaeecd581fb",
+            "fingerprint": null,
+            "revision_role": "pinned",
+            "tracking_ref": "refs/heads/master"
+          },
+          {
+            "repo": "hsoliwal/M3JDK21",
+            "commit": "66b7d96509adb59aa0404a4d0cf97d77461c5d13",
+            "module": "jdk.m3.text",
+            "path": "m3/core/src/jdk/m3/text/M3GvasLiteralImage.java",
+            "symbol": "jdk.m3.text.M3GvasLiteralImage",
+            "signatures": [],
+            "sha256": "b05c40b8999993dfec75afa646ba4fac421258f0b611ab01956b878226574a3f",
+            "git_blob_sha1": "10f0f669d5658e088e8835702df0676535c1f01d",
+            "fingerprint": null,
+            "revision_role": "pinned",
+            "tracking_ref": "refs/heads/master"
+          },
+          {
+            "repo": "hsoliwal/M3JDK21",
+            "commit": "66b7d96509adb59aa0404a4d0cf97d77461c5d13",
+            "module": "jdk.m3.text",
+            "path": "m3/core/src/jdk/m3/text/M3InstanceIndexPrecompute.java",
+            "symbol": "jdk.m3.text.M3InstanceIndexPrecompute",
+            "signatures": [],
+            "sha256": "a40be1c52aa7dd71755abe81ca5ad42fd2376569205ad015195b85dca9863d42",
+            "git_blob_sha1": "6f9f14312e18e8ffa0a310801278bed846cd0d34",
+            "fingerprint": null,
+            "revision_role": "pinned",
+            "tracking_ref": "refs/heads/master"
+          },
+          {
+            "repo": "hsoliwal/M3JDK21",
+            "commit": "66b7d96509adb59aa0404a4d0cf97d77461c5d13",
+            "module": "jdk.m3.text",
+            "path": "m3/core/src/jdk/m3/text/M3LangDexSourceEnvelope.java",
+            "symbol": "jdk.m3.text.M3LangDexSourceEnvelope",
+            "signatures": [],
+            "sha256": "2d9039187fcedad8abae0cc56b1d43e9b6f76884b3fffc0808d4340f006e380f",
+            "git_blob_sha1": "23af38f9a8c7d954ee4a17af5dc0abaacda101c6",
+            "fingerprint": null,
+            "revision_role": "pinned",
+            "tracking_ref": "refs/heads/master"
+          },
+          {
+            "repo": "hsoliwal/M3JDK21",
+            "commit": "66b7d96509adb59aa0404a4d0cf97d77461c5d13",
+            "module": "jdk.m3.text",
+            "path": "m3/core/src/jdk/m3/text/M3LanguageCorpusManifest.java",
+            "symbol": "jdk.m3.text.M3LanguageCorpusManifest",
+            "signatures": [],
+            "sha256": "767f692b3b2fa0cf7685ebe7b34b8c9faa0bcc487c58b706226e748d9944b374",
+            "git_blob_sha1": "490629cef8b41c7e1bc667d8d15867872151863d",
+            "fingerprint": null,
+            "revision_role": "pinned",
+            "tracking_ref": "refs/heads/master"
+          },
+          {
+            "repo": "hsoliwal/M3JDK21",
+            "commit": "66b7d96509adb59aa0404a4d0cf97d77461c5d13",
+            "module": "jdk.m3.text",
+            "path": "m3/core/src/jdk/m3/text/M3LanguageGrammarSupport.java",
+            "symbol": "jdk.m3.text.M3LanguageGrammarSupport",
+            "signatures": [],
+            "sha256": "f2f6f8dcb6b0a0c91569a9eee0ea199c0e77a24594033534351408b2c8ccfff3",
+            "git_blob_sha1": "0ac0ecb7d4abe99f5c3b7a21e0099e05a92bb168",
+            "fingerprint": null,
+            "revision_role": "pinned",
+            "tracking_ref": "refs/heads/master"
+          },
+          {
+            "repo": "hsoliwal/M3JDK21",
+            "commit": "66b7d96509adb59aa0404a4d0cf97d77461c5d13",
+            "module": "jdk.m3.text",
+            "path": "m3/core/src/jdk/m3/text/M3LexiconPrecompute.java",
+            "symbol": "jdk.m3.text.M3LexiconPrecompute",
+            "signatures": [],
+            "sha256": "c4b5e2c9951b30098fbe4c3266471ed3259af414dd984d27d815cd8313ef6918",
+            "git_blob_sha1": "2bd1893b5c5f33734155851f319992d297ce99dd",
+            "fingerprint": null,
+            "revision_role": "pinned",
+            "tracking_ref": "refs/heads/master"
+          },
+          {
+            "repo": "hsoliwal/M3JDK21",
+            "commit": "66b7d96509adb59aa0404a4d0cf97d77461c5d13",
+            "module": "jdk.m3.text",
+            "path": "m3/core/src/jdk/m3/text/M3NumberSpace.java",
+            "symbol": "jdk.m3.text.M3NumberSpace",
+            "signatures": [],
+            "sha256": "53b3263bf2f7297888f7ba70ac8fc8bb817e5b08fb5cca53a542c3c73e85f014",
+            "git_blob_sha1": "3eea18fd6bc596fb7cb05dffc53f183702aac41d",
+            "fingerprint": null,
+            "revision_role": "pinned",
+            "tracking_ref": "refs/heads/master"
+          },
+          {
+            "repo": "hsoliwal/M3JDK21",
+            "commit": "66b7d96509adb59aa0404a4d0cf97d77461c5d13",
+            "module": "jdk.m3.text",
+            "path": "m3/core/src/jdk/m3/text/M3PrecomputePayload.java",
+            "symbol": "jdk.m3.text.M3PrecomputePayload",
+            "signatures": [],
+            "sha256": "cc411214638e324094b93f8fea2c565c8bb94810fc1f22a2d76f56c686d8bade",
+            "git_blob_sha1": "1750c895576b351f014980c07a7a4a032cc8c418",
+            "fingerprint": null,
+            "revision_role": "pinned",
+            "tracking_ref": "refs/heads/master"
+          },
+          {
+            "repo": "hsoliwal/M3JDK21",
+            "commit": "66b7d96509adb59aa0404a4d0cf97d77461c5d13",
+            "module": "jdk.m3.text",
+            "path": "m3/core/src/jdk/m3/text/M3RopeTextIndex.java",
+            "symbol": "jdk.m3.text.M3RopeTextIndex",
+            "signatures": [],
+            "sha256": "d78d4f2f7d23c0a1927d86c8f059749cbb7d3a11e7d5152aae26135effb9f34a",
+            "git_blob_sha1": "73d7ae9ec7fa3680d1389aabf4e65beb0018ef15",
+            "fingerprint": null,
+            "revision_role": "pinned",
+            "tracking_ref": "refs/heads/master"
+          },
+          {
+            "repo": "hsoliwal/M3JDK21",
+            "commit": "66b7d96509adb59aa0404a4d0cf97d77461c5d13",
+            "module": "jdk.m3.text",
+            "path": "m3/core/src/jdk/m3/text/M3StringPiece.java",
+            "symbol": "jdk.m3.text.M3StringPiece",
+            "signatures": [],
+            "sha256": "7ed45335bea7dc1107d4c28ca505ad334c845685f099af0df3e3112c411a7755",
+            "git_blob_sha1": "62506fb9b3cff0e6f24e856648528db58c45b92b",
+            "fingerprint": null,
+            "revision_role": "pinned",
+            "tracking_ref": "refs/heads/master"
+          },
+          {
+            "repo": "hsoliwal/M3JDK21",
+            "commit": "66b7d96509adb59aa0404a4d0cf97d77461c5d13",
+            "module": "jdk.m3.text",
+            "path": "m3/core/src/jdk/m3/text/M3WordRows.java",
+            "symbol": "jdk.m3.text.M3WordRows",
+            "signatures": [],
+            "sha256": "d79d6ab8396271548b4adc2ef5393425ff8b98f5b9b7fc8a7a39d4fc0294c765",
+            "git_blob_sha1": "651c03f6b1a1e672ac97e2d0830473bcfc06207b",
+            "fingerprint": null,
+            "revision_role": "pinned",
+            "tracking_ref": "refs/heads/master"
+          },
+          {
+            "repo": "hsoliwal/M3JDK21",
+            "commit": "66b7d96509adb59aa0404a4d0cf97d77461c5d13",
+            "module": "jdk.m3.text",
+            "path": "m3/core/src/jdk/m3/text/M3WordRowsNative.java",
+            "symbol": "jdk.m3.text.M3WordRowsNative",
+            "signatures": [],
+            "sha256": "b81a8520792794a5256137c1c47960b10930237904907d4c8d0a4980386a00e5",
+            "git_blob_sha1": "a68f0d75eaae64707cf6d073a2b50f89c5dfdc78",
+            "fingerprint": null,
+            "revision_role": "pinned",
+            "tracking_ref": "refs/heads/master"
+          },
+          {
+            "repo": "hsoliwal/M3JDK21",
+            "commit": "66b7d96509adb59aa0404a4d0cf97d77461c5d13",
+            "module": "jdk.m3.text",
+            "path": "m3/core/src/jdk/m3/text/SharedLexiconCatalog.java",
+            "symbol": "jdk.m3.text.SharedLexiconCatalog",
+            "signatures": [],
+            "sha256": "ac3c5c3741f81322a02c15d0091f34e728d812a96a77b4dc9830ce963dd94a7c",
+            "git_blob_sha1": "bb6c0eb0b5ea0dd134e2377dfa83dc85ee6f060e",
+            "fingerprint": null,
+            "revision_role": "pinned",
+            "tracking_ref": "refs/heads/master"
+          },
+          {
+            "repo": "hsoliwal/M3JDK21",
+            "commit": "66b7d96509adb59aa0404a4d0cf97d77461c5d13",
+            "module": "jdk.m3.text",
+            "path": "m3/core/src/jdk/m3/text/SharedLexiconFamilySidecarCatalog.java",
+            "symbol": "jdk.m3.text.SharedLexiconFamilySidecarCatalog",
+            "signatures": [],
+            "sha256": "c6dbfb86e076388c923f8aa2c05b37b799474bb51bb84da0e26dea477edbadc8",
+            "git_blob_sha1": "8dd76c1d5911dbf4b4b786098c1223fcdbb57b63",
+            "fingerprint": null,
+            "revision_role": "pinned",
+            "tracking_ref": "refs/heads/master"
+          },
+          {
+            "repo": "hsoliwal/M3JDK21",
+            "commit": "66b7d96509adb59aa0404a4d0cf97d77461c5d13",
+            "module": "jdk.m3.text",
+            "path": "m3/core/src/jdk/m3/text/SharedLexiconImage.java",
+            "symbol": "jdk.m3.text.SharedLexiconImage",
+            "signatures": [],
+            "sha256": "ea7bd90f6efe3705df3d39f9d749c9b3db238be768cbe399a2ebdc2268828f00",
+            "git_blob_sha1": "4c8e6f8b173a84afa67d85abb04823386dbc363b",
+            "fingerprint": null,
+            "revision_role": "pinned",
+            "tracking_ref": "refs/heads/master"
+          },
+          {
+            "repo": "hsoliwal/M3JDK21",
+            "commit": "66b7d96509adb59aa0404a4d0cf97d77461c5d13",
+            "module": "jdk.m3.text",
+            "path": "m3/core/src/jdk/m3/text/SharedLexiconPrecomputeCatalog.java",
+            "symbol": "jdk.m3.text.SharedLexiconPrecomputeCatalog",
+            "signatures": [],
+            "sha256": "0070b77d77a802f328dfd0a2cadc7559f3c3928025cee68d8cfd39a2cbac2018",
+            "git_blob_sha1": "85a779d00a7b9e99ae56bf278c730c1626995f57",
+            "fingerprint": null,
+            "revision_role": "pinned",
+            "tracking_ref": "refs/heads/master"
+          },
+          {
+            "repo": "hsoliwal/M3JDK21",
+            "commit": "66b7d96509adb59aa0404a4d0cf97d77461c5d13",
+            "module": "jdk.m3.text",
+            "path": "m3/core/src/jdk/m3/text/StorageIdentity.java",
+            "symbol": "jdk.m3.text.StorageIdentity",
+            "signatures": [],
+            "sha256": "f6897d5ddd7f39cc0d94bdc1b4db8b695b1946bc65672fb6c0408fa110c1b354",
+            "git_blob_sha1": "8cd2ae86bee8f04f0d69709eed12897ff5c6a71c",
+            "fingerprint": null,
+            "revision_role": "pinned",
+            "tracking_ref": "refs/heads/master"
+          },
+          {
+            "repo": "hsoliwal/M3JDK21",
+            "commit": "66b7d96509adb59aa0404a4d0cf97d77461c5d13",
+            "module": "jdk.m3.text",
+            "path": "m3/core/src/module-info.java",
+            "symbol": null,
+            "signatures": [],
+            "sha256": "7a6e9eecdc3153219b6e222332e00b4cffb2a9e3b55bfaeb9c87e9a29ba009f2",
+            "git_blob_sha1": "bdd278210a498e2665620c02413b1e658c79370e",
+            "fingerprint": null,
+            "revision_role": "pinned",
+            "tracking_ref": "refs/heads/master"
+          }
+        ],
+        "targets": [],
+        "owner": "Existing jdk.m3.text source owners; module descriptor retains module identity",
+        "identity": {
+          "namespace": "Retain jdk.m3.text, every current type name and all owner-local lexicon, generation and coordinate identities.",
+          "generation": "Inventory only; no runtime generation, ID translation or storage ownership change."
+        },
+        "contract": {
+          "differences": [],
+          "compatibility_obligations": [
+            "Preserve all 104 existing mapping records, including historical P0 references and synexia.lexicons.related-source-range.",
+            "Keep the four queued type-name operations unchanged; repin only their canonical authority blob.",
+            "Before relocation, reverify the complete 27-source closure, exact bytes, package/module declarations and existing target custody.",
+            "Relocation, build callers, legal payloads, native libraries and image/runtime admission require separate executed proofs."
+          ],
+          "public_surface": []
+        },
+        "format": {
+          "schema": null,
+          "abi": null,
+          "bootstrap": "Existing experimental module jdk.m3.text exports jdk.m3.text; no java.base or java.lang.String replacement is admitted."
+        },
+        "dependencies": [
+          {
+            "id": "synexia.lexicons.related-source-range",
+            "resolution": "pending",
+            "reason": "Its existing target supplies the remaining source of the 27-file module closure. Preserve its donor pins, owner and lineage; qualify any later placement under its existing ID."
+          }
+        ],
+        "materialization": {
+          "admission": "No new targets, source copies or runtime admission. The record pins existing source bytes for future recipe preconditions.",
+          "joins": "No change to existing segmented text, offsets, identities or lifetime behavior.",
+          "outputs": "Canonical mapping metadata only; prospective src/jdk.m3.text target paths are not claimed.",
+          "cached_facts": "All lexicon/precompute implementations and their existing cached facts remain at their current source coordinates."
+        },
+        "recipe": {
+          "id": "com.synexia.rewrite.M3TextSourceInventorymappingR285",
+          "version": "1.0.0",
+          "path": null,
+          "sha256": null,
+          "canonical_repository": "hsoliwal/com.synexia",
+          "canonical_path": "synexia-openrewrite-recipes/recipe-crates/m3-text-source-inventory-r285-20261115",
+          "preconditions": [
+            "Exact pinned 104-record mapping and name-plan preimages.",
+            "Twenty-six pinned source artifacts plus the unchanged related-source-range target exactly cover the 27 current module sources.",
+            "Run the canonical hash-pinned text recipes serially for mapping and authority pin; reject drift and duplicate source coordinates."
+          ],
+          "rollback": "Revert only this pending inventory record and its paired authority-blob repin; no product source move has occurred."
+        },
+        "tests": [],
+        "provenance": {
+          "license": "Per-file notices retained: Apache-2.0; M3NumberSpace additionally retains the tools4j shortstring MIT notice. Existing Guava attribution remains required.",
+          "publication": "This record publishes source coordinates and hashes only. No unrelated private source, corpus data or new license grant.",
+          "copied_code": false,
+          "donor_boundary": "Existing M3JDK21 experimental text module; Synexia remains the converged donor and canonical recipe/evidence owner. This inventory does not replace existing donor mappings."
+        },
+        "sync": {
+          "source_revision": "66b7d96509adb59aa0404a4d0cf97d77461c5d13",
+          "target_revision": "66b7d96509adb59aa0404a4d0cf97d77461c5d13",
+          "direction": "traceability-only",
+          "target_adaptations": [],
+          "pending": [
+            "Execute and receive the complete path-only source relocation with old/new endpoint lineage.",
+            "Qualify all changed build and proof callers and preserve their historical receipts.",
+            "Qualify module legal, native platform and full JDK image/runtime gates before any implementation promotion."
+          ],
+          "conflicts": []
+        },
+        "lineage": {
+          "previous_sources": [],
+          "previous_targets": [],
+          "supersedes": []
+        },
+        "source_state": "experimental",
+        "observation": "Twenty-five current type owners and module-info.java are source-only inventory. SharedRelatedLexemeCatalog remains owned by synexia.lexicons.related-source-range. Existing historical source references, especially m3.p0-view-dependencies, are unchanged. This record establishes a stable inventory ID, not relocation semantics or a completed migration."
       }
     ]
   },
