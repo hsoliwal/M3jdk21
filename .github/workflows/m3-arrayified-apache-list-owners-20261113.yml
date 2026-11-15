@@ -74,10 +74,11 @@ jobs:
         run: |
           set -euo pipefail
           build="$RUNNER_TEMP/m3jdk-collection-array-owners"
-          jmod create --class-path "$build/classes" "$build/jdk.m3.collections.jmod"
-          jmod describe "$build/jdk.m3.collections.jmod" | tee "$build/jmod-describe.txt"
+          mkdir -p "$build/jmods"
+          jmod create --class-path "$build/classes" "$build/jmods/jdk.m3.collections.jmod"
+          jmod describe "$build/jmods/jdk.m3.collections.jmod" | tee "$build/jmod-describe.txt"
           grep -Eq 'exports +jdk\.m3\.collections\.apache' "$build/jmod-describe.txt"
-          jlink --module-path "$JAVA_HOME/jmods:$build" --add-modules jdk.m3.collections \
+          jlink --module-path "$JAVA_HOME/jmods:$build/jmods" --add-modules jdk.m3.collections \
             --output "$build/image" --strip-debug --no-header-files --no-man-pages
           "$build/image/bin/java" --list-modules | grep -Eq '^jdk[.]m3[.]collections(@|$)'
           for test in ArrayLinkedListContract ArrayTreeListContract ArrayStackContract; do
