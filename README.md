@@ -18,6 +18,21 @@ M3 String · Regex and precompute · Lean collections · JNI/native boundaries �
 > [!IMPORTANT]
 > **A laboratory, not a marketing benchmark.** M3JDK21 is an OpenJDK-derived experimental Java 21 product/runtime tree. Design targets, branches, and candidate optimizations are **not** proof of compatibility, release readiness, or faster execution. Only reproducible builds, regression results, and measured comparisons qualify a claim. Upstream licenses and the [M3/Synexia provenance boundary](M3-SYNEXIA-NOTICE.md) remain authoritative.
 
+## Fork compatibility contract for Swing and AWT
+
+M3JDK21 is an optimized, backward-compatible superset of its original OpenJDK 21
+baseline. This contract includes Swing and AWT in `java.desktop`: existing
+`javax.swing` and `java.awt` public APIs, class names, source and binary usage,
+observable behavior, and extension hooks must remain compatible. Existing
+fork-specific APIs, features and optimizations are part of the supported
+superset and must also be preserved when changes are integrated.
+
+Compatibility is directional: original Java 21 applications must keep working
+on the fork, while stock OpenJDK is not required to implement fork extensions.
+SwingX and SWT keep their own inherited APIs and contracts; this relationship
+does not make those toolkits interchangeable. Release qualification must cover
+both the original contracts and additional fork behavior on the built runtime.
+
 ## Start here
 
 **The problem:** modern Java workloads repeatedly scan, copy, allocate, hash, parse, and reconstruct information that may already have a safe reusable representation.
