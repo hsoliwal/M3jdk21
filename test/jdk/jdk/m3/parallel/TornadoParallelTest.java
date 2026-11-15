@@ -352,8 +352,8 @@ public final class TornadoParallelTest {
     private static void imageIdentity() throws ClassNotFoundException {
         inImage(Backend.class, "m3.parallel");
         inImage(Plan.class, "m3.parallel");
-        inImage(M3ParallelIntAddProvider.class, "jdk.m3.tornado");
-        inImage(M3ParallelBitCountProvider.class, "jdk.m3.tornado");
+        inImage(M3ParallelIntAddProvider.class, "m3.parallel.bulk.provider");
+        inImage(M3ParallelBitCountProvider.class, "m3.parallel.bulk.provider");
         inImage(BulkScheduler.class, "java.base");
         inImage(Class.forName("jdk.internal.m3.tornado.parallel.TornadoBackendProvider"), "jdk.m3.tornado");
         inImage(Class.forName("uk.ac.manchester.tornado.api.TornadoExecutionPlan"), "tornado.api");

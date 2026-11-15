@@ -6,7 +6,6 @@ package jdk.m3.parallel.bulk;
 import jdk.m3.parallel.Backend;
 import jdk.m3.parallel.Grid1D;
 import jdk.m3.parallel.IntBuffer;
-import jdk.m3.parallel.JavaKernel;
 import jdk.m3.parallel.JavaKernels;
 import jdk.m3.parallel.KernelId;
 import jdk.m3.parallel.Plan;
@@ -27,26 +26,19 @@ import jdk.internal.vm.parallel.BulkTask;
  * including negative values interpreted as 32-bit two's-complement patterns. It neither
  * mutates the input nor infers source semantics from a bitmap count. The CPU reference
  * remains the exact oracle, and explicit accelerator requests cannot silently fall back.</p>
+ *
+ * <p>This compatibility adapter exposes the JDK-internal bulk contract. Callers using that contract must explicitly
+ * obtain access to {@code java.base/jdk.internal.vm.parallel}; the public {@code m3.parallel} launch API needs no
+ * internal-package access.</p>
  */
+@SuppressWarnings("exports") // Existing adapter ABI intentionally includes the qualified JDK-internal SPI.
 public final class M3ParallelBitCountProvider implements BulkExecutorProvider {
     public static final String OPERATION_ID = "m3.parallel.int-bitcount.v1";
     public static final String INPUT = "bits";
     public static final String OUTPUT = "counts";
     public static final int MAX_ITEMS = 1 << 18;
 
-    private static final KernelId KERNEL = KernelId.of(OPERATION_ID);
-    private static final JavaKernel JAVA_ORACLE = (index, buffers) -> {
-        if (buffers.length != 2) {
-            throw new IllegalArgumentException("bitcount needs two int lanes");
-        }
-        if (index < buffers[1].length()) {
-            buffers[1].set(index, Integer.bitCount(buffers[0].get(index)));
-        }
-    };
-
-    static {
-        JavaKernels.register(KERNEL, JAVA_ORACLE);
-    }
+    private static final KernelId KERNEL = JavaKernels.intBitCount();
 
     private final Backend backend;
     private final String providerId;
@@ -66,7 +58,7 @@ public final class M3ParallelBitCountProvider implements BulkExecutorProvider {
     }
 
     public static M3ParallelBitCountProvider requiredAccelerator() {
-        return new M3ParallelBitCountProvider(Backend.select(Backend.Policy.ACCELERATOR));
+        return new M3ParallelBitCountProvider(Backend.select(Backend.Policy.ACCELERATOR, KERNEL));
     }
 
     @Override

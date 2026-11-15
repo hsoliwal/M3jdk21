@@ -265,6 +265,8 @@ module java.base {
         jdk.incubator.vector,
         jdk.jfr,
         jdk.unsupported;
+    exports jdk.internal.vm.parallel to
+        m3.parallel.bulk.provider;
     exports jdk.internal.vm.vector to
         jdk.incubator.vector;
     exports jdk.internal.util.xml to

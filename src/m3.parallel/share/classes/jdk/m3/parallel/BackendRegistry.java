@@ -17,7 +17,6 @@ import java.util.ServiceConfigurationError;
 import java.util.ServiceLoader;
 import java.util.Set;
 import java.util.TreeMap;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -26,7 +25,6 @@ final class BackendRegistry {
     static final Backend REFERENCE = new Backend(Backend.REFERENCE_ID, new ReferenceProvider(),
             EnumSet.of(Backend.Capability.REFERENCE, Backend.Capability.CPU, Backend.Capability.MULTI_THREADED), 0);
 
-    private static final Pattern ID = Pattern.compile("[a-z0-9][a-z0-9._-]{0,63}");
     private static final int MAX_LOAD_FAILURES = 64;
     private static final Comparator<Backend> PREFERENCE = Comparator.comparingInt(Backend::score).reversed()
             .thenComparing(backend -> !backend.isReference())
@@ -34,6 +32,7 @@ final class BackendRegistry {
 
     private static final Map<String, Probe> PROBES;
     private static final Map<String, Backend> AVAILABLE;
+    private static final List<Backend> PREFERRED;
 
     static {
         Map<String, Probe> probes = new TreeMap<>();
@@ -45,6 +44,7 @@ final class BackendRegistry {
         byId.forEach((id, providers) -> admit(id, providers, probes, available));
         PROBES = Collections.unmodifiableMap(probes);
         AVAILABLE = Collections.unmodifiableMap(available);
+        PREFERRED = Stream.concat(Stream.of(REFERENCE), available.values().stream()).sorted(PREFERENCE).toList();
     }
 
     private BackendRegistry() {
@@ -77,6 +77,18 @@ final class BackendRegistry {
             case ACCELERATOR -> AVAILABLE.values().stream().min(PREFERENCE)
                     .orElseThrow(() -> new IllegalStateException("no accelerator backend available: " + PROBES));
         };
+    }
+
+    static Backend select(Backend.Policy policy, KernelId kernel) {
+        Stream<Backend> candidates = switch (policy) {
+            case REFERENCE -> Stream.of(REFERENCE);
+            case BEST -> PREFERRED.stream();
+            case ACCELERATOR -> PREFERRED.stream().filter(backend -> !backend.isReference());
+        };
+        return candidates.filter(backend -> backend.supports(kernel))
+                .findFirst()
+                .orElseThrow(() -> new IllegalStateException(
+                        "no " + policy + " backend supports kernel " + kernel));
     }
 
     private static List<BackendProvider> loadProviders(Map<String, Probe> probes) {
@@ -112,7 +124,7 @@ final class BackendRegistry {
         String key = "invalid:" + provider.getClass().getName();
         try {
             String id = provider.id();
-            if (id == null || !ID.matcher(id).matches()) {
+            if (!Backend.validProviderId(id)) {
                 probes.put(key, Probe.unavailable("invalid backend id: " + id));
                 return Optional.empty();
             }
