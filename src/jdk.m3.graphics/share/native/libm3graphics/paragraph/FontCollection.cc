@@ -1,0 +1,117 @@
+#include "jdk_m3_graphics_paragraph_M3FontCollection.h"
+#include <iostream>
+#include <jni.h>
+#include <optional>
+#include "../interop.hh"
+#include "SkRefCnt.h"
+#include "FontCollection.h"
+
+using namespace std;
+using namespace skia::textlayout;
+
+extern "C" JNIEXPORT jlong JNICALL Java_jdk_m3_graphics_paragraph_M3FontCollection__1nMake
+  (JNIEnv* env, jclass jclass) {
+    FontCollection* ptr = new FontCollection();
+    return reinterpret_cast<jlong>(ptr);
+}
+
+extern "C" JNIEXPORT jlong JNICALL Java_jdk_m3_graphics_paragraph_M3FontCollection__1nGetFontManagersCount
+  (JNIEnv* env, jclass jclass, jlong ptr) {
+    FontCollection* instance = reinterpret_cast<FontCollection*>(static_cast<uintptr_t>(ptr));
+    return instance->getFontManagersCount();
+}
+
+extern "C" JNIEXPORT jlong JNICALL Java_jdk_m3_graphics_paragraph_M3FontCollection__1nSetAssetFontManager
+  (JNIEnv* env, jclass jclass, jlong ptr, jlong fontManagerPtr) {
+    FontCollection* instance = reinterpret_cast<FontCollection*>(static_cast<uintptr_t>(ptr));
+    SkFontMgr* fontManager = reinterpret_cast<SkFontMgr*>(static_cast<uintptr_t>(fontManagerPtr));
+    instance->setAssetFontManager(sk_ref_sp(fontManager));
+    return ptr;
+}
+
+extern "C" JNIEXPORT jlong JNICALL Java_jdk_m3_graphics_paragraph_M3FontCollection__1nSetDynamicFontManager
+  (JNIEnv* env, jclass jclass, jlong ptr, jlong fontManagerPtr) {
+    FontCollection* instance = reinterpret_cast<FontCollection*>(static_cast<uintptr_t>(ptr));
+    SkFontMgr* fontManager = reinterpret_cast<SkFontMgr*>(static_cast<uintptr_t>(fontManagerPtr));
+    instance->setDynamicFontManager(sk_ref_sp(fontManager));
+    return ptr;
+}
+
+extern "C" JNIEXPORT jlong JNICALL Java_jdk_m3_graphics_paragraph_M3FontCollection__1nSetTestFontManager
+  (JNIEnv* env, jclass jclass, jlong ptr, jlong fontManagerPtr) {
+    FontCollection* instance = reinterpret_cast<FontCollection*>(static_cast<uintptr_t>(ptr));
+    SkFontMgr* fontManager = reinterpret_cast<SkFontMgr*>(static_cast<uintptr_t>(fontManagerPtr));
+    instance->setTestFontManager(sk_ref_sp(fontManager));
+    return ptr;
+}
+
+extern "C" JNIEXPORT jlong JNICALL Java_jdk_m3_graphics_paragraph_M3FontCollection__1nSetDefaultFontManager
+  (JNIEnv* env, jclass jclass, jlong ptr, jlong fontManagerPtr, jstring defaultFamilyNameStr) {
+    FontCollection* instance = reinterpret_cast<FontCollection*>(static_cast<uintptr_t>(ptr));
+    SkFontMgr* fontManager = reinterpret_cast<SkFontMgr*>(static_cast<uintptr_t>(fontManagerPtr));
+
+    std::optional<SkString> defaultFamilyName = skString(env, defaultFamilyNameStr);
+    if (defaultFamilyName) {
+        instance->setDefaultFontManager(sk_ref_sp(fontManager), defaultFamilyName->c_str());
+    } else {
+        instance->setDefaultFontManager(sk_ref_sp(fontManager));
+    }
+    return ptr;
+}
+
+extern "C" JNIEXPORT jlong JNICALL Java_jdk_m3_graphics_paragraph_M3FontCollection__1nGetFallbackManager
+  (JNIEnv* env, jclass jclass, jlong ptr) {
+    FontCollection* instance = reinterpret_cast<FontCollection*>(static_cast<uintptr_t>(ptr));
+    return reinterpret_cast<jlong>(instance->getFallbackManager().release());
+}
+
+extern "C" JNIEXPORT jlongArray JNICALL Java_jdk_m3_graphics_paragraph_M3FontCollection__1nFindTypefaces
+  (JNIEnv* env, jclass jclass, jlong ptr, jobjectArray familyNamesArray, jint fontStyle) {
+    FontCollection* instance = reinterpret_cast<FontCollection*>(static_cast<uintptr_t>(ptr));
+    vector<SkString> familyNames = skStringVector(env, familyNamesArray);
+    vector<sk_sp<SkTypeface>> found = instance->findTypefaces(familyNames, skija::FontStyle::fromJava(fontStyle));
+    vector<jlong> res(found.size());
+    for (int i = 0; i < found.size(); ++i)
+        res[i] = reinterpret_cast<jlong>(found[i].release());
+
+    jlongArray resArray = env->NewLongArray((jsize) found.size());
+    env->SetLongArrayRegion(resArray, 0, (jsize) found.size(), res.data());
+    return resArray;
+}
+
+extern "C" JNIEXPORT jlong JNICALL Java_jdk_m3_graphics_paragraph_M3FontCollection__1nDefaultFallbackChar
+  (JNIEnv* env, jclass jclass, jlong ptr, jint unicode, jint fontStyle, jstring locale, jobject fontArgumentsObj) {
+    FontCollection* instance = reinterpret_cast<FontCollection*>(static_cast<uintptr_t>(ptr));
+
+    optional<SkFontArguments> fontArgs;
+    if (fontArgumentsObj == nullptr) {
+      return reinterpret_cast<jlong>(instance->defaultFallback(unicode, skija::FontStyle::fromJava(fontStyle), *skString(env, locale), fontArgs).release());
+    }
+
+    fontArgs = skija::FontArguments::toSkFontArguments(env, fontArgumentsObj);
+    jlong result = reinterpret_cast<jlong>(instance->defaultFallback(unicode, skija::FontStyle::fromJava(fontStyle), *skString(env, locale), fontArgs).release());
+    skija::FontArguments::freeSkFontArguments(fontArgs.value());
+    return result;
+}
+
+extern "C" JNIEXPORT jlong JNICALL Java_jdk_m3_graphics_paragraph_M3FontCollection__1nDefaultFallback
+  (JNIEnv* env, jclass jclass, jlong ptr) {
+    FontCollection* instance = reinterpret_cast<FontCollection*>(static_cast<uintptr_t>(ptr));
+    return reinterpret_cast<jlong>(instance->defaultFallback().release());
+}
+
+extern "C" JNIEXPORT jlong JNICALL Java_jdk_m3_graphics_paragraph_M3FontCollection__1nSetEnableFallback
+  (JNIEnv* env, jclass jclass, jlong ptr, jboolean value) {
+    FontCollection* instance = reinterpret_cast<FontCollection*>(static_cast<uintptr_t>(ptr));
+    if (value)
+        instance->enableFontFallback();
+    else
+        instance->disableFontFallback();
+    return ptr;
+}
+
+extern "C" JNIEXPORT jlong JNICALL Java_jdk_m3_graphics_paragraph_M3FontCollection__1nGetParagraphCache
+  (JNIEnv* env, jclass jclass, jlong ptr) {
+    FontCollection* instance = reinterpret_cast<FontCollection*>(static_cast<uintptr_t>(ptr));
+    return reinterpret_cast<jlong>(instance->getParagraphCache());
+}

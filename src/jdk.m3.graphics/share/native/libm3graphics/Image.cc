@@ -1,0 +1,227 @@
+#include "jdk_m3_graphics_M3Image.h"
+#include <iostream>
+#include <jni.h>
+#include "include/core/SkBitmap.h"
+#include "include/core/SkData.h"
+#include "include/core/SkImage.h"
+#include "include/core/SkImageFilter.h"
+#include "include/core/SkShader.h"
+#include "include/gpu/ganesh/GrBackendSurface.h"
+#include "include/gpu/ganesh/GrDirectContext.h"
+#include "include/gpu/ganesh/GrRecordingContext.h"
+#include "include/gpu/ganesh/SkImageGanesh.h"
+#include "include/gpu/ganesh/gl/GrGLBackendSurface.h"
+#include "include/gpu/ganesh/gl/GrGLTypes.h"
+#include "interop.hh"
+
+extern JavaVM* gJavaVM;
+
+extern "C" JNIEXPORT jlong JNICALL Java_jdk_m3_graphics_M3Image__1nAdoptTextureFrom
+  (JNIEnv* env, jclass jclass, jlong contextPtr, jlong backendTexturePtr, jint surfaceOrigin, jint colorType) {
+    GrDirectContext* context = reinterpret_cast<GrDirectContext*>(static_cast<uintptr_t>(contextPtr));
+    GrBackendTexture* backendTexture = reinterpret_cast<GrBackendTexture*>(static_cast<uintptr_t>(backendTexturePtr));
+    sk_sp<SkImage> image = SkImages::AdoptTextureFrom(static_cast<GrRecordingContext*>(context),
+                                                      *backendTexture,
+                                                      static_cast<GrSurfaceOrigin>(surfaceOrigin),
+                                                      static_cast<SkColorType>(colorType));
+    return reinterpret_cast<jlong>(image.release());
+}
+
+static void skija_texture_release_proxy(SkImages::ReleaseContext context) {
+    if (!context) return;
+    jobject releaseProc = static_cast<jobject>(context);
+    JNIScope scope(1);
+    if (!scope.env) return;
+    if (jclass runnableClass = scope.env->FindClass("java/lang/Runnable")) {
+        jmethodID runMethod = scope.env->GetMethodID(runnableClass, "run", "()V");
+        if (runMethod) {
+            scope.env->CallVoidMethod(releaseProc, runMethod);
+            if (scope.env->ExceptionCheck()) scope.env->ExceptionClear();
+        }
+    } else if (scope.env->ExceptionCheck()) {
+        scope.env->ExceptionClear();
+    }
+    scope.env->DeleteGlobalRef(releaseProc);
+}
+
+extern "C" JNIEXPORT jlong JNICALL Java_jdk_m3_graphics_M3Image__1nBorrowTextureFrom
+  (JNIEnv* env, jclass clazz, jlong contextPtr, jlong backendTexturePtr, jint surfaceOrigin, jint colorType, jint alphaType, jlong colorSpacePtr, jobject releaseProc) {
+    GrRecordingContext* context = reinterpret_cast<GrRecordingContext*>(static_cast<uintptr_t>(contextPtr));
+    GrBackendTexture* backendTexture = reinterpret_cast<GrBackendTexture*>(static_cast<uintptr_t>(backendTexturePtr));
+    SkColorSpace* colorSpace = reinterpret_cast<SkColorSpace*>(static_cast<uintptr_t>(colorSpacePtr));
+    SkImages::TextureReleaseProc cReleaseProc = nullptr;
+    SkImages::ReleaseContext cReleaseContext = nullptr;
+    if (releaseProc != nullptr) {
+        cReleaseProc = skija_texture_release_proxy;
+        cReleaseContext = env->NewGlobalRef(releaseProc);
+    }
+    sk_sp<SkImage> image = SkImages::BorrowTextureFrom(static_cast<GrRecordingContext*>(context),
+                                                       *backendTexture,
+                                                       static_cast<GrSurfaceOrigin>(surfaceOrigin),
+                                                       static_cast<SkColorType>(colorType),
+                                                       static_cast<SkAlphaType>(alphaType),
+                                                       sk_ref_sp<SkColorSpace>(colorSpace),
+                                                       cReleaseProc,
+                                                       cReleaseContext);
+    if (!image && cReleaseContext != nullptr) {
+        env->DeleteGlobalRef(static_cast<jobject>(cReleaseContext));
+    }
+    return reinterpret_cast<jlong>(image.release());
+}
+
+extern "C" JNIEXPORT jlong JNICALL Java_jdk_m3_graphics_M3Image__1nMakeRasterFromBytes
+  (JNIEnv* env, jclass jclass, jint width, jint height, jint colorType, jint alphaType, jlong colorSpacePtr, jbyteArray bytesArr, jlong rowBytes) {
+    SkColorSpace* colorSpace = reinterpret_cast<SkColorSpace*>(static_cast<uintptr_t>(colorSpacePtr));
+    SkImageInfo imageInfo = SkImageInfo::Make(width,
+                                              height,
+                                              static_cast<SkColorType>(colorType),
+                                              static_cast<SkAlphaType>(alphaType),
+                                              sk_ref_sp<SkColorSpace>(colorSpace));
+    void* bytes = env->GetPrimitiveArrayCritical(bytesArr, 0);
+    sk_sp<SkImage> image = SkImages::RasterFromPixmapCopy(SkPixmap(imageInfo, bytes, rowBytes));
+    env->ReleasePrimitiveArrayCritical(bytesArr, bytes, 0);
+    return reinterpret_cast<jlong>(image.release());
+}
+
+extern "C" JNIEXPORT jlong JNICALL Java_jdk_m3_graphics_M3Image__1nMakeRasterFromData
+  (JNIEnv* env, jclass jclass, jint width, jint height, jint colorType, jint alphaType, jlong colorSpacePtr, jlong dataPtr, jlong rowBytes) {
+    SkColorSpace* colorSpace = reinterpret_cast<SkColorSpace*>(static_cast<uintptr_t>(colorSpacePtr));
+    SkImageInfo imageInfo = SkImageInfo::Make(width,
+                                              height,
+                                              static_cast<SkColorType>(colorType),
+                                              static_cast<SkAlphaType>(alphaType),
+                                              sk_ref_sp<SkColorSpace>(colorSpace));
+    SkData* data = reinterpret_cast<SkData*>(static_cast<uintptr_t>(dataPtr));
+    sk_sp<SkImage> image = SkImages::RasterFromData(imageInfo, sk_ref_sp(data), rowBytes);
+    return reinterpret_cast<jlong>(image.release());
+}
+
+extern "C" JNIEXPORT jlong JNICALL Java_jdk_m3_graphics_M3Image__1nMakeRasterFromBitmap
+  (JNIEnv* env, jclass jclass, jlong bitmapPtr) {
+    SkBitmap* bitmap = reinterpret_cast<SkBitmap*>(static_cast<uintptr_t>(bitmapPtr));
+    sk_sp<SkImage> image = SkImages::RasterFromBitmap(*bitmap);
+    return reinterpret_cast<jlong>(image.release());
+}
+
+extern "C" JNIEXPORT jlong JNICALL Java_jdk_m3_graphics_M3Image__1nMakeRasterFromPixmap
+  (JNIEnv* env, jclass jclass, jlong pixmapPtr) {
+    SkPixmap* pixmap = reinterpret_cast<SkPixmap*>(static_cast<uintptr_t>(pixmapPtr));
+    sk_sp<SkImage> image = SkImages::RasterFromPixmap(*pixmap, nullptr, nullptr);
+    return reinterpret_cast<jlong>(image.release());
+}
+
+extern "C" JNIEXPORT jlong JNICALL Java_jdk_m3_graphics_M3Image__1nMakeDeferredFromEncodedBytes
+  (JNIEnv* env, jclass jclass, jbyteArray encodedArray) {
+    jsize encodedLen = env->GetArrayLength(encodedArray);
+    jbyte* encoded = env->GetByteArrayElements(encodedArray, 0);
+    sk_sp<SkData> encodedData = SkData::MakeWithCopy(encoded, encodedLen);
+    env->ReleaseByteArrayElements(encodedArray, encoded, 0);
+
+    sk_sp<SkImage> image = SkImages::DeferredFromEncodedData(encodedData);
+
+    return reinterpret_cast<jlong>(image.release());
+}
+
+extern "C" JNIEXPORT jobject JNICALL Java_jdk_m3_graphics_M3Image__1nGetImageInfo
+  (JNIEnv* env, jclass jclass, jlong ptr) {
+    SkImage* instance = reinterpret_cast<SkImage*>(static_cast<uintptr_t>(ptr));
+    return skija::ImageInfo::toJava(env, instance->imageInfo());
+}
+
+extern "C" JNIEXPORT jlong JNICALL Java_jdk_m3_graphics_M3Image__1nMakeShader
+  (JNIEnv* env, jclass jclass, jlong ptr, jint tmx, jint tmy, jlong sampling, jfloatArray localMatrixArr) {
+    SkImage* instance = reinterpret_cast<SkImage*>(static_cast<uintptr_t>(ptr));
+    std::unique_ptr<SkMatrix> localMatrix = skMatrix(env, localMatrixArr);
+    sk_sp<SkShader> shader = instance->makeShader(static_cast<SkTileMode>(tmx), static_cast<SkTileMode>(tmy), skija::SamplingMode::unpack(sampling), localMatrix.get());
+    return reinterpret_cast<jlong>(shader.release());
+}
+
+extern "C" JNIEXPORT jobject JNICALL Java_jdk_m3_graphics_M3Image__1nPeekPixels
+  (JNIEnv* env, jclass jclass, jlong ptr) {
+    SkImage* instance = reinterpret_cast<SkImage*>(static_cast<uintptr_t>(ptr));
+    SkPixmap pixmap;
+    if (instance->peekPixels(&pixmap))
+        return env->NewDirectByteBuffer(pixmap.writable_addr(), pixmap.rowBytes() * pixmap.height());
+    else
+        return nullptr;
+}
+
+extern "C" JNIEXPORT jboolean JNICALL Java_jdk_m3_graphics_M3Image__1nPeekPixelsToPixmap
+  (JNIEnv* env, jclass jclass, jlong ptr, jlong pixmapPtr) {
+    SkImage* instance = reinterpret_cast<SkImage*>(static_cast<uintptr_t>(ptr));
+    SkPixmap* pixmap = reinterpret_cast<SkPixmap*>(static_cast<uintptr_t>(pixmapPtr));
+    return instance->peekPixels(pixmap);
+}
+
+extern "C" JNIEXPORT jboolean JNICALL Java_jdk_m3_graphics_M3Image__1nReadPixelsBitmap
+  (JNIEnv* env, jclass jclass, jlong ptr, jlong contextPtr, jlong bitmapPtr, jint srcX, jint srcY, jboolean cache) {
+    SkImage* instance = reinterpret_cast<SkImage*>(static_cast<uintptr_t>(ptr));
+    GrDirectContext* context = reinterpret_cast<GrDirectContext*>(static_cast<uintptr_t>(contextPtr));
+    SkBitmap* bitmap = reinterpret_cast<SkBitmap*>(static_cast<uintptr_t>(bitmapPtr));
+    auto cachingHint = cache ? SkImage::CachingHint::kAllow_CachingHint : SkImage::CachingHint::kDisallow_CachingHint;
+    return instance->readPixels(context, bitmap->info(), bitmap->getPixels(), bitmap->pixmap().rowBytes(), srcX, srcY, cachingHint);
+}
+
+extern "C" JNIEXPORT jboolean JNICALL Java_jdk_m3_graphics_M3Image__1nReadPixelsPixmap
+  (JNIEnv* env, jclass jclass, jlong ptr, jlong pixmapPtr, jint srcX, jint srcY, jboolean cache) {
+    SkImage* instance = reinterpret_cast<SkImage*>(static_cast<uintptr_t>(ptr));
+    SkPixmap* pixmap = reinterpret_cast<SkPixmap*>(static_cast<uintptr_t>(pixmapPtr));
+    auto cachingHint = cache ? SkImage::CachingHint::kAllow_CachingHint : SkImage::CachingHint::kDisallow_CachingHint;
+    return instance->readPixels(*pixmap, srcX, srcY, cachingHint);
+}
+
+extern "C" JNIEXPORT jboolean JNICALL Java_jdk_m3_graphics_M3Image__1nScalePixels
+  (JNIEnv* env, jclass jclass, jlong ptr, jlong pixmapPtr, jlong samplingOptions, jboolean cache) {
+    SkImage* instance = reinterpret_cast<SkImage*>(static_cast<uintptr_t>(ptr));
+    SkPixmap* pixmap = reinterpret_cast<SkPixmap*>(static_cast<uintptr_t>(pixmapPtr));
+    auto cachingHint = cache ? SkImage::CachingHint::kAllow_CachingHint : SkImage::CachingHint::kDisallow_CachingHint;
+    return instance->scalePixels(*pixmap, skija::SamplingMode::unpack(samplingOptions), cachingHint);
+}
+
+extern "C" JNIEXPORT jlong JNICALL Java_jdk_m3_graphics_M3Image__1nMakeScaled
+  (JNIEnv* env, jclass jclass, jlong ptr, jint width, jint height, jint colorType, jint alphaType, jlong colorSpacePtr, jlong samplingOptions) {
+    SkImage* instance = reinterpret_cast<SkImage*>(static_cast<uintptr_t>(ptr));
+    SkColorSpace* colorSpace = reinterpret_cast<SkColorSpace*>(static_cast<uintptr_t>(colorSpacePtr));
+    SkImageInfo imageInfo = SkImageInfo::Make(width,
+                                              height,
+                                              static_cast<SkColorType>(colorType),
+                                              static_cast<SkAlphaType>(alphaType),
+                                              sk_ref_sp<SkColorSpace>(colorSpace));
+    sk_sp<SkImage> image = instance->makeScaled(imageInfo, skija::SamplingMode::unpack(samplingOptions));
+    return image ? ptrToJlong(image.release()) : 0;
+}
+
+extern "C" JNIEXPORT jlong JNICALL Java_jdk_m3_graphics_M3Image__1nMakeSubset
+  (JNIEnv* env, jclass jclass, jlong ptr, jlong contextPtr, jint subsetL, jint subsetT, jint subsetR, jint subsetB) {
+    SkImage* instance = reinterpret_cast<SkImage*>(static_cast<uintptr_t>(ptr));
+    GrDirectContext* context = reinterpret_cast<GrDirectContext*>(static_cast<uintptr_t>(contextPtr));
+    SkIRect subset = SkIRect::MakeLTRB(subsetL, subsetT, subsetR, subsetB);
+    SkRecorder* recorder = context ? context->asRecorder() : nullptr;
+    sk_sp<SkImage> image = instance->makeSubset(recorder, subset, SkImage::RequiredProperties());
+    return image ? ptrToJlong(image.release()) : 0;
+}
+
+extern "C" JNIEXPORT jobject JNICALL Java_jdk_m3_graphics_M3Image__1nMakeWithFilter
+  (JNIEnv* env, jclass jclass, jlong srcPtr, jlong filterPtr, jint subsetL, jint subsetT, jint subsetR, jint subsetB, jint clipBoundsL, jint clipBoundsT, jint clipBoundsR, jint clipBoundsB) {
+    SkImage* src = reinterpret_cast<SkImage*>(static_cast<uintptr_t>(srcPtr));
+    SkImageFilter* filter = reinterpret_cast<SkImageFilter*>(static_cast<uintptr_t>(filterPtr));
+    SkIRect subset = SkIRect::MakeLTRB(subsetL, subsetT, subsetR, subsetB);
+    SkIRect clipBounds = SkIRect::MakeLTRB(clipBoundsL, clipBoundsT, clipBoundsR, clipBoundsB);
+    SkIRect outSubset;
+    SkIPoint offset;
+    sk_sp<SkImage> image = SkImages::MakeWithFilter(sk_ref_sp<SkImage>(src), filter, subset, clipBounds, &outSubset, &offset);
+    return image ? skija::ImageWithFilterResult::make(env, image.release(), outSubset, offset) : nullptr;
+}
+
+extern "C" JNIEXPORT jobject JNICALL Java_jdk_m3_graphics_M3Image__1nMakeWithFilterContext
+  (JNIEnv* env, jclass jclass, jlong contextPtr, jlong srcPtr, jlong filterPtr, jint subsetL, jint subsetT, jint subsetR, jint subsetB, jint clipBoundsL, jint clipBoundsT, jint clipBoundsR, jint clipBoundsB) {
+    GrRecordingContext* context = reinterpret_cast<GrRecordingContext*>(static_cast<uintptr_t>(contextPtr));
+    SkImage* src = reinterpret_cast<SkImage*>(static_cast<uintptr_t>(srcPtr));
+    SkImageFilter* filter = reinterpret_cast<SkImageFilter*>(static_cast<uintptr_t>(filterPtr));
+    SkIRect subset = SkIRect::MakeLTRB(subsetL, subsetT, subsetR, subsetB);
+    SkIRect clipBounds = SkIRect::MakeLTRB(clipBoundsL, clipBoundsT, clipBoundsR, clipBoundsB);
+    SkIRect outSubset;
+    SkIPoint offset;
+    sk_sp<SkImage> image = SkImages::MakeWithFilter(context, sk_ref_sp<SkImage>(src), filter, subset, clipBounds, &outSubset, &offset);
+    return image ? skija::ImageWithFilterResult::make(env, image.release(), outSubset, offset) : nullptr;
+}

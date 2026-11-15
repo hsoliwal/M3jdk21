@@ -1,0 +1,20 @@
+#include "jdk_m3_graphics_M3ShadowUtils.h"
+#include "interop.hh"
+#include <jni.h>
+#include "SkShadowUtils.h"
+#include "SkPoint3.h"
+
+extern "C" JNIEXPORT void JNICALL Java_jdk_m3_graphics_M3ShadowUtils__1nDrawShadow
+  (JNIEnv* env, jclass jclass, jlong canvasPtr, jlong pathPtr, jfloat zPlaneX, jfloat zPlaneY, jfloat zPlaneZ,
+        jfloat lightPosX, jfloat lightPosY, jfloat lightPosZ, jfloat lightRadius, jint ambientColor, jint spotColor, jint flags) {
+    SkCanvas* canvas = reinterpret_cast<SkCanvas*>(static_cast<uintptr_t>(canvasPtr));
+    SkPath* path = reinterpret_cast<SkPath*>(static_cast<uintptr_t>(pathPtr));
+    SkShadowUtils::DrawShadow(canvas, *path, {zPlaneX, zPlaneY, zPlaneZ}, {lightPosX, lightPosY, lightPosZ}, lightRadius, ambientColor, spotColor, flags);
+}
+
+extern "C" JNIEXPORT jintArray JNICALL Java_jdk_m3_graphics_M3ShadowUtils__1nComputeTonalColor
+  (JNIEnv* env, jclass jclass, jint ambientColor, jint spotColor) {
+    std::vector<SkColor> colors(2);
+    SkShadowUtils::ComputeTonalColors(ambientColor, spotColor, &colors[0], &colors[1]);
+    return javaIntArray(env, colors);
+}

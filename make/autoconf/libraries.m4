@@ -31,6 +31,7 @@ m4_include([lib-ffi.m4])
 m4_include([lib-fontconfig.m4])
 m4_include([lib-freetype.m4])
 m4_include([lib-hsdis.m4])
+m4_include([lib-skia.m4])
 m4_include([lib-std.m4])
 m4_include([lib-x11.m4])
 
@@ -125,6 +126,7 @@ AC_DEFUN_ONCE([LIB_SETUP_LIBRARIES],
   LIB_SETUP_FONTCONFIG
   LIB_SETUP_FREETYPE
   LIB_SETUP_HSDIS
+  LIB_SETUP_SKIA
   LIB_SETUP_LIBFFI
   LIB_SETUP_MISC_LIBS
   LIB_SETUP_X11
