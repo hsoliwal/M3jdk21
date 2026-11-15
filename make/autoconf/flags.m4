@@ -206,21 +206,29 @@ AC_DEFUN_ONCE([FLAGS_SETUP_USER_SUPPLIED_FLAGS],
 # Param 1 - Optional prefix to all variables. (e.g BUILD_)
 AC_DEFUN([FLAGS_SETUP_SYSROOT_FLAGS],
 [
+  m4_if([$1], [BUILD_], [
+    FLAGS_SYSROOT_OS=$OPENJDK_BUILD_OS
+    FLAGS_SYSROOT_TOOLCHAIN_PATH=$BUILD_DEVKIT_TOOLCHAIN_PATH
+  ], [
+    FLAGS_SYSROOT_OS=$OPENJDK_TARGET_OS
+    FLAGS_SYSROOT_TOOLCHAIN_PATH=$DEVKIT_TOOLCHAIN_PATH
+  ])
+
   if test "x[$]$1SYSROOT" != "x"; then
     if test "x$TOOLCHAIN_TYPE" = xgcc; then
       $1SYSROOT_CFLAGS="--sysroot=[$]$1SYSROOT"
       $1SYSROOT_LDFLAGS="--sysroot=[$]$1SYSROOT"
     elif test "x$TOOLCHAIN_TYPE" = xclang; then
-      if test "x$OPENJDK_TARGET_OS" = "xlinux"; then
-        # -isysroot has no effect on linux
+      if test "x$FLAGS_SYSROOT_OS" = "xlinux" || test "x$FLAGS_SYSROOT_OS" = "xandroid"; then
+        # -isysroot has no effect on Linux or Android.
         # https://bugs.llvm.org/show_bug.cgi?id=11503
         $1SYSROOT_CFLAGS="--sysroot=[$]$1SYSROOT"
         $1SYSROOT_LDFLAGS="--sysroot=[$]$1SYSROOT"
-        if test -d "$DEVKIT_TOOLCHAIN_PATH"; then
+        if test "x$FLAGS_SYSROOT_OS" = "xlinux" && test -d "$FLAGS_SYSROOT_TOOLCHAIN_PATH"; then
           # In devkits, gcc is not located in the sysroot.
           # use --gcc-toolchain to let clang find the gcc installation.
-          $1SYSROOT_CFLAGS="[$]$1SYSROOT_CFLAGS --gcc-toolchain=$DEVKIT_TOOLCHAIN_PATH/.."
-          $1SYSROOT_LDFLAGS="[$]$1SYSROOT_LDFLAGS --gcc-toolchain=$DEVKIT_TOOLCHAIN_PATH/.."
+          $1SYSROOT_CFLAGS="[$]$1SYSROOT_CFLAGS --gcc-toolchain=$FLAGS_SYSROOT_TOOLCHAIN_PATH/.."
+          $1SYSROOT_LDFLAGS="[$]$1SYSROOT_LDFLAGS --gcc-toolchain=$FLAGS_SYSROOT_TOOLCHAIN_PATH/.."
         fi
       else
         $1SYSROOT_CFLAGS="-isysroot [$]$1SYSROOT"
@@ -229,7 +237,7 @@ AC_DEFUN([FLAGS_SETUP_SYSROOT_FLAGS],
     fi
   fi
 
-  if test "x$OPENJDK_TARGET_OS" = xmacosx; then
+  if test "x$FLAGS_SYSROOT_OS" = xmacosx || test "x$FLAGS_SYSROOT_OS" = xios; then
     # We also need -iframework<path>/System/Library/Frameworks
     $1SYSROOT_CFLAGS="[$]$1SYSROOT_CFLAGS -iframework [$]$1SYSROOT/System/Library/Frameworks"
     $1SYSROOT_LDFLAGS="[$]$1SYSROOT_LDFLAGS -iframework [$]$1SYSROOT/System/Library/Frameworks"
@@ -297,6 +305,7 @@ AC_DEFUN_ONCE([FLAGS_PRE_TOOLCHAIN],
   EXTRA_LDFLAGS="$MACHINE_FLAG $USER_LDFLAGS"
   EXTRA_ASFLAGS="$USER_ASFLAGS"
 
+  AC_SUBST(MACHINE_FLAG)
   AC_SUBST(EXTRA_CFLAGS)
   AC_SUBST(EXTRA_CXXFLAGS)
   AC_SUBST(EXTRA_LDFLAGS)

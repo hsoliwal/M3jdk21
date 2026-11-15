@@ -43,12 +43,15 @@ idea:
 compile-commands:
 	+$(MAKE) -f TestCompileCommands.gmk $(TEST_SUBTARGET)
 
+native-static-libs:
+	+$(MAKE) -f TestNativeStaticLibs.gmk $(TEST_SUBTARGET)
+
 configure:
 	$(BASH) $(TOPDIR)/test/make/autoconf/test-configure.sh \
 	    "$(AUTOCONF)" "$(TOPDIR)" "$(TEST_SUPPORT_DIR)"
 
 TARGETS += make-base java-compilation copy-files fix-deps-file idea \
-    compile-commands configure
+    compile-commands configure native-static-libs
 
 all: $(TARGETS)
 

@@ -1010,6 +1010,19 @@ int NetworkPerformanceInterface::NetworkPerformance::network_utilization(Network
   ifaddrs* addresses;
   ifaddrs* cur_address;
 
+#if defined(__ANDROID__) && __ANDROID_API__ < 24
+  // An API-21 binary can run on a newer Android release. Use the real libc
+  // enumeration APIs when both are available, preserving the complete list
+  // and its matching deallocator. Older runtimes report unavailable counters.
+  typedef int (*GetIfAddrs)(ifaddrs**);
+  typedef void (*FreeIfAddrs)(ifaddrs*);
+  GetIfAddrs getifaddrs = CAST_TO_FN_PTR(GetIfAddrs, dlsym(RTLD_DEFAULT, "getifaddrs"));
+  FreeIfAddrs freeifaddrs = CAST_TO_FN_PTR(FreeIfAddrs, dlsym(RTLD_DEFAULT, "freeifaddrs"));
+  if (getifaddrs == nullptr || freeifaddrs == nullptr) {
+    return OS_ERR;
+  }
+#endif
+
   if (getifaddrs(&addresses) != 0) {
     return OS_ERR;
   }

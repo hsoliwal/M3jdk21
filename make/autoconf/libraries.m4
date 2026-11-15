@@ -42,8 +42,9 @@ m4_include([lib-tests.m4])
 AC_DEFUN_ONCE([LIB_DETERMINE_DEPENDENCIES],
 [
   # Check if X11 is needed
-  if test "x$OPENJDK_TARGET_OS" = xwindows || test "x$OPENJDK_TARGET_OS" = xmacosx; then
-    # No X11 support on windows or macosx
+  if test "x$OPENJDK_TARGET_OS" = xwindows || test "x$OPENJDK_TARGET_OS" = xmacosx \
+      || test "x$OPENJDK_TARGET_OS" = xios || test "x$OPENJDK_TARGET_OS" = xandroid; then
+    # These platforms do not use an X11 window system.
     NEEDS_LIB_X11=false
   else
     # All other instances need X11, even if building headless only, libawt still
@@ -52,8 +53,9 @@ AC_DEFUN_ONCE([LIB_DETERMINE_DEPENDENCIES],
   fi
 
   # Check if fontconfig is needed
-  if test "x$OPENJDK_TARGET_OS" = xwindows || test "x$OPENJDK_TARGET_OS" = xmacosx; then
-    # No fontconfig support on windows or macosx
+  if test "x$OPENJDK_TARGET_OS" = xwindows || test "x$OPENJDK_TARGET_OS" = xmacosx \
+      || test "x$OPENJDK_TARGET_OS" = xios; then
+    # Apple platforms and Windows use their own font systems.
     NEEDS_LIB_FONTCONFIG=false
   else
     # All other instances need fontconfig, even if building headless only,
@@ -139,7 +141,8 @@ AC_DEFUN_ONCE([LIB_SETUP_LIBRARIES],
   BASIC_JVM_LIBS="$LIBM"
 
   # Dynamic loading library
-  if test "x$OPENJDK_TARGET_OS" = xlinux || test "x$OPENJDK_TARGET_OS" = xaix; then
+  if test "x$OPENJDK_TARGET_OS" = xlinux || test "x$OPENJDK_TARGET_OS" = xaix \
+      || test "x$OPENJDK_TARGET_OS" = xandroid; then
     BASIC_JVM_LIBS="$BASIC_JVM_LIBS $LIBDL"
   fi
 

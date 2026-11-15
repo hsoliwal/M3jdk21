@@ -1,5 +1,6 @@
 /*
  * Copyright (c) 2013, 2023, Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2026, Hitesh Soliwal and Contributors to the Synexia Project.
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
  *
  * This code is free software; you can redistribute it and/or modify it
@@ -33,6 +34,10 @@
 #include <limits.h>
 
 #include "childproc.h"
+
+#ifdef __ANDROID__
+#include <paths.h>
+#endif
 
 const char * const *parentPathv;
 
@@ -225,7 +230,11 @@ execve_as_traditional_shell_script(const char *file,
     while (*end != NULL)
         ++end;
     memmove(argv+2, argv+1, (end-argv) * sizeof(*end));
+#ifdef __ANDROID__
+    argv[0] = _PATH_BSHELL;
+#else
     argv[0] = "/bin/sh";
+#endif
     argv[1] = file;
     execve(argv[0], (char **) argv, (char **) envp);
     /* Can't even exec /bin/sh?  Big trouble, but let's soldier on... */

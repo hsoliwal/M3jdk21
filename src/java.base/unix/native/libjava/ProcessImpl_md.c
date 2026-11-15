@@ -1,5 +1,6 @@
 /*
  * Copyright (c) 1995, 2024, Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2026, Hitesh Soliwal and Contributors to the Synexia Project.
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
  *
  * This code is free software; you can redistribute it and/or modify it
@@ -45,6 +46,10 @@
 #include <string.h>
 
 #include <spawn.h>
+
+#ifdef __ANDROID__
+#include <paths.h>
+#endif
 
 #include "childproc.h"
 
@@ -230,7 +235,11 @@ xmalloc(JNIEnv *env, size_t size)
 static const char*
 defaultPath(void)
 {
+#ifdef __ANDROID__
+    return _PATH_DEFPATH;
+#else
     return ":/bin:/usr/bin";
+#endif
 }
 
 static const char*
@@ -434,6 +443,7 @@ copyPipe(int from[2], int to[2])
     to[1] = from[1];
 }
 
+#if !defined(__ANDROID__) || __ANDROID_API__ >= 28
 /* arg is an array of pointers to 0 terminated strings. array is terminated
  * by a null element.
  *
@@ -478,6 +488,7 @@ static int copystrings(char *buf, int offset, const char * const *arg) {
     }
     return offset+count;
 }
+#endif
 
 /**
  * We are unusually paranoid; use of vfork is
@@ -528,6 +539,7 @@ forkChild(ChildStuff *c) {
     return resultPid;
 }
 
+#if !defined(__ANDROID__) || __ANDROID_API__ >= 28
 static pid_t
 spawnChild(JNIEnv *env, jobject process, ChildStuff *c, const char *helperpath) {
     pid_t resultPid;
@@ -645,6 +657,7 @@ spawnChild(JNIEnv *env, jobject process, ChildStuff *c, const char *helperpath) 
      * via the statement below */
     return resultPid;
 }
+#endif
 
 /*
  * Start a child process running function childProcess.
@@ -660,8 +673,10 @@ startChild(JNIEnv *env, jobject process, ChildStuff *c, const char *helperpath) 
       #endif
       case MODE_FORK:
         return forkChild(c);
+#if !defined(__ANDROID__) || __ANDROID_API__ >= 28
       case MODE_POSIX_SPAWN:
         return spawnChild(env, process, c, helperpath);
+#endif
       default:
         return -1;
     }
@@ -688,6 +703,14 @@ Java_java_lang_ProcessImpl_forkAndExec(JNIEnv *env,
     const char *pargBlock = NULL;
     const char *penvBlock = NULL;
     ChildStuff *c;
+
+#if defined(__ANDROID__) && __ANDROID_API__ < 28
+    /* Bionic gained posix_spawn in API 28. Reuse the existing fork/exec
+     * protocol, including its error pipe, before selecting the handshake. */
+    if (mode == MODE_POSIX_SPAWN) {
+        mode = MODE_FORK;
+    }
+#endif
 
     in[0] = in[1] = out[0] = out[1] = err[0] = err[1] = fail[0] = fail[1] = -1;
     childenv[0] = childenv[1] = -1;

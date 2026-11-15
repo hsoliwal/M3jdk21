@@ -46,6 +46,7 @@
 #include "vitals/vitals_internals.hpp"
 
 #include <unistd.h>
+#include <fcntl.h>
 #include <spawn.h>
 #include <sys/types.h>
 #include <sys/wait.h>
@@ -508,6 +509,7 @@ public:
 // cleanup depends on successful initialization.
 // Helper structures for posix_spawn_file_actions_t and posix_spawnattr_t where
 // cleanup depends on successful initialization.
+#if !defined(__ANDROID__) || __ANDROID_API__ >= 28
 struct PosixSpawnFileActions {
   posix_spawn_file_actions_t v;
   const bool ok;
@@ -521,13 +523,57 @@ struct PosixSpawnAttr {
   PosixSpawnAttr() : ok(::posix_spawnattr_init(&v) == 0) {}
   ~PosixSpawnAttr() { ok && ::posix_spawnattr_destroy(&v); }
 };
+#endif
 
 // Call jcmd. If outFile and errFile are not Null, redirect stdout and stderr, otherwise
 // print both stdout and stderr to VMs stderr.
 // Returns true if command was executed successfully and exitcode was 0, false otherwise.
 // If command failed, err_msg will contain an error string.
 static bool spawn_command(const char** argv, const char* outFile, const char* errFile, stringStream* err_msg) {
-
+#if defined(__ANDROID__) && __ANDROID_API__ < 28
+  // Preserve vitals command execution and its file actions when Bionic has no
+  // posix_spawn. Prepare everything before fork; the child uses only
+  // async-signal-safe system calls until execve or _exit.
+  assert(outFile == NULL || errFile != NULL, "Require both");
+  char** env = os::get_environ();
+  pid_t child_pid = ::fork();
+  if (child_pid == -1) {
+    err_msg->print("fork failed (%s)", os::strerror(errno));
+    return false;
+  }
+  if (child_pid == 0) {
+    if (outFile != NULL) {
+      int out_fd = ::open(outFile, O_WRONLY | O_CREAT | O_TRUNC, 0664);
+      if (out_fd == -1 || ::dup2(out_fd, STDOUT_FILENO) == -1) {
+        ::_exit(127);
+      }
+      if (out_fd != STDOUT_FILENO) {
+        ::close(out_fd);
+      }
+      int err_fd = ::open(errFile, O_WRONLY | O_CREAT | O_TRUNC, 0664);
+      if (err_fd == -1 || ::dup2(err_fd, STDERR_FILENO) == -1) {
+        ::_exit(127);
+      }
+      if (err_fd != STDERR_FILENO) {
+        ::close(err_fd);
+      }
+    } else if (::dup2(STDERR_FILENO, STDOUT_FILENO) == -1) {
+      ::_exit(127);
+    }
+    ::execve(argv[0], (char* const*)argv, env);
+    ::_exit(127);
+  }
+  int status;
+  pid_t waited;
+  do {
+    waited = ::waitpid(child_pid, &status, 0);
+  } while (waited == -1 && errno == EINTR);
+  bool rc = waited != -1 && WIFEXITED(status) && WEXITSTATUS(status) == 0;
+  if (!rc) {
+    err_msg->print("Command failed or crashed");
+  }
+  return rc;
+#else
   // I want vfork, but use posix_spawn, since vfork() is becoming obsolete and compilers
   // will warn. Its also safer, and with modern glibcs it is as cheap as vfork.
   PosixSpawnFileActions fa;
@@ -572,6 +618,7 @@ static bool spawn_command(const char** argv, const char* outFile, const char* er
   }
 
   return rc;
+#endif
 }
 
 // Calls a single jcmd via posix_spawn. Output is written to <report-dir>/<command name>-<pid>-<spike>-<percentage>

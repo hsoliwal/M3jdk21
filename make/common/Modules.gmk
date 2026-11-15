@@ -85,6 +85,11 @@ TOP_SRC_DIRS += \
     #
 
 SRC_SUBDIRS += $(OPENJDK_TARGET_OS)/classes
+ifeq ($(call isTargetOs, android), true)
+  SRC_SUBDIRS += linux/classes
+else ifeq ($(call isTargetOs, ios), true)
+  SRC_SUBDIRS += macosx/classes
+endif
 ifneq ($(OPENJDK_TARGET_OS), $(OPENJDK_TARGET_OS_TYPE))
   SRC_SUBDIRS += $(OPENJDK_TARGET_OS_TYPE)/classes
 endif

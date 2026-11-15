@@ -58,6 +58,7 @@
 
 #include <dirent.h>
 #include <dlfcn.h>
+#include <fcntl.h>
 #include <grp.h>
 #include <locale.h>
 #include <netdb.h>
@@ -75,7 +76,9 @@
 #include <sys/wait.h>
 #include <time.h>
 #include <unistd.h>
+#ifndef __ANDROID__
 #include <utmpx.h>
+#endif
 
 #ifdef __APPLE__
   #include <crt_externs.h>
@@ -480,6 +483,10 @@ void os::Posix::print_load_average(outputStream* st) {
 // unfortunately it does not work on macOS and Linux because the utx chain has no entry
 // for reboot at least on my test machines
 void os::Posix::print_uptime_info(outputStream* st) {
+#ifdef __ANDROID__
+  // Android uses the existing Linux uptime implementation, not utmpx.
+  os::Linux::print_uptime_info(st);
+#else
   int bootsec = -1;
   int currsec = time(nullptr);
   struct utmpx* ent;
@@ -494,6 +501,7 @@ void os::Posix::print_uptime_info(outputStream* st) {
   if (bootsec != -1) {
     os::print_dhm(st, "OS uptime:", (long) (currsec-bootsec));
   }
+#endif
 }
 
 static void print_rlimit(outputStream* st, const char* msg,
@@ -1953,20 +1961,67 @@ int os::fork_and_exec(const char* cmd) {
   const char* argv[4] = {"sh", "-c", cmd, nullptr};
   pid_t pid = -1;
   char** env = os::get_environ();
+#ifdef __ANDROID__
+  const char* shell = "/system/bin/sh";
+#else
+  const char* shell = "/bin/sh";
+#endif
+  int exec_error = 0;
+#if defined(__ANDROID__) && __ANDROID_API__ < 28
+  // Bionic exposes posix_spawn only from API 28. Use the established fork/exec
+  // path on older systems. The close-on-exec pipe reports an exec failure to
+  // the parent without allocating memory or taking VM locks in the child.
+  int error_pipe[2];
+  if (::pipe2(error_pipe, O_CLOEXEC) != 0) {
+    return -1;
+  }
+  pid = ::fork();
+  if (pid < 0) {
+    ::close(error_pipe[0]);
+    ::close(error_pipe[1]);
+    return -1;
+  }
+  if (pid == 0) {
+    ::close(error_pipe[0]);
+    ::execve(shell, (char* const*)argv, env);
+    int child_error = errno;
+    ssize_t written;
+    do {
+      written = ::write(error_pipe[1], &child_error, sizeof(child_error));
+    } while (written < 0 && errno == EINTR);
+    ::_exit(127);
+  }
+  ::close(error_pipe[1]);
+  ssize_t received;
+  do {
+    received = ::read(error_pipe[0], &exec_error, sizeof(exec_error));
+  } while (received < 0 && errno == EINTR);
+  if (received < 0) {
+    exec_error = errno;
+  } else if (received != 0 && received != (ssize_t)sizeof(exec_error)) {
+    exec_error = EIO;
+  }
+  ::close(error_pipe[0]);
+  int rc = 0;
+#else
   // Note: cast is needed because posix_spawn() requires - for compatibility with ancient
   // C-code - a non-const argv/envp pointer array. But it is fine to hand in literal
   // strings and just cast the constness away. See also ProcessImpl_md.c.
-  int rc = ::posix_spawn(&pid, "/bin/sh", nullptr, nullptr, (char**) argv, env);
+  int rc = ::posix_spawn(&pid, shell, nullptr, nullptr, (char**) argv, env);
+#endif
   if (rc == 0) {
     int status;
     // Wait for the child process to exit.  This returns immediately if
     // the child has already exited. */
     while (::waitpid(pid, &status, 0) < 0) {
       switch (errno) {
-      case ECHILD: return 0;
+      case ECHILD: return exec_error == 0 ? 0 : -1;
       case EINTR: break;
       default: return -1;
       }
+    }
+    if (exec_error != 0) {
+      return -1;
     }
     if (WIFEXITED(status)) {
       // The child exited normally; get its exit code.

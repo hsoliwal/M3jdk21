@@ -1,5 +1,6 @@
 /*
  * Copyright (c) 2008, 2023, Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2026, Hitesh Soliwal and contributors. All rights reserved.
  * Modified 2026-11-15 by Hitesh Soliwal and contributors: preserve the POSIX
  * error-string ABI when compiling against Android Bionic.
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
@@ -25,6 +26,14 @@
  * questions.
  */
 
+/* Bionic's GNU strerror_r returns char* at API 23 and later. Select its
+ * POSIX declaration before system headers so getErrorString retains its
+ * int status, caller-owned buffer and existing native ABI on Android.
+ */
+#if defined(__ANDROID__) && defined(_GNU_SOURCE)
+#undef _GNU_SOURCE
+#endif
+
 #include <errno.h>
 #include <string.h>
 
@@ -33,6 +42,7 @@
 #include "jni_util.h"
 #include "dlfcn.h"
 
+#if defined(LINUX) && !defined(__ANDROID__) && (defined(_GNU_SOURCE) || \
 #if defined(__BIONIC__)
 /*
  * Bionic keeps the POSIX function at the strerror_r symbol. With GNU features

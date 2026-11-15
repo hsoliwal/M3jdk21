@@ -1,6 +1,8 @@
 /*
  * Copyright (c) 2008, 2023, Oracle and/or its affiliates. All rights reserved.
  * Modified 2026-11-15: preserve Bionic integer typedefs in the private statx layout.
+ * Copyright (c) 2026, Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2026, Hitesh Soliwal and Contributors to the Synexia Project.
  * Modified 2026-11-15: use Android futimens for descriptor timestamps when futimesat is absent.
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
  *
@@ -28,6 +30,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <limits.h>
+#include <stdint.h>
 #include <fcntl.h>
 #include <dirent.h>
 #include <unistd.h>
@@ -197,6 +200,91 @@ struct my_statx
     _result = _cmd; \
   } while((_result == NULL) && (errno == EINTR)); \
 } while(0)
+
+#if defined(__ANDROID__) && __ANDROID_API__ < 24
+/*
+ * Bionic added the reentrant group APIs in API 24. Earlier releases return
+ * thread-local records from getgrgid/getgrnam. Copy every referenced string
+ * and the member vector before returning to JNI, which may reenter native
+ * code and reuse that thread-local storage.
+ */
+static int copyGroupString(const char* source, char** target,
+                           char** next, size_t* remaining) {
+    if (source == NULL) {
+        *target = NULL;
+        return 0;
+    }
+    size_t length = strnlen(source, *remaining);
+    if (length == *remaining) {
+        return ERANGE;
+    }
+    memcpy(*next, source, length + 1);
+    *target = *next;
+    *next += length + 1;
+    *remaining -= length + 1;
+    return 0;
+}
+
+static int copyGroupRecord(const struct group* source, struct group* target,
+                           char* buffer, size_t size, struct group** result) {
+    struct group copy = {0};
+    char* next = buffer;
+    size_t remaining = size;
+    copy.gr_gid = source->gr_gid;
+
+    if (source->gr_mem != NULL) {
+        size_t count = 0;
+        while (source->gr_mem[count] != NULL) {
+            if (count >= size / sizeof(char*) ||
+                count == SIZE_MAX / sizeof(char*) - 1) {
+                return ERANGE;
+            }
+            count++;
+        }
+        size_t padding = (_Alignof(char*) - (uintptr_t)buffer % _Alignof(char*))
+                         % _Alignof(char*);
+        size_t pointers = (count + 1) * sizeof(char*);
+        if (padding > size || pointers > size - padding) {
+            return ERANGE;
+        }
+        copy.gr_mem = (char**)(buffer + padding);
+        next += padding + pointers;
+        remaining -= padding + pointers;
+        for (size_t i = 0; i < count; i++) {
+            if (copyGroupString(source->gr_mem[i], &copy.gr_mem[i],
+                                &next, &remaining) != 0) {
+                return ERANGE;
+            }
+        }
+        copy.gr_mem[count] = NULL;
+    }
+    if (copyGroupString(source->gr_name, &copy.gr_name, &next, &remaining) != 0 ||
+        copyGroupString(source->gr_passwd, &copy.gr_passwd, &next, &remaining) != 0) {
+        return ERANGE;
+    }
+    *target = copy;
+    *result = target;
+    return 0;
+}
+
+static int androidGetGroup(const char* name, gid_t gid, struct group* target,
+                           char* buffer, size_t size, struct group** result) {
+    int savedErrno = errno;
+    errno = 0;
+    *result = NULL;
+    struct group* source = name == NULL ? getgrgid(gid) : getgrnam(name);
+    int status = source == NULL ? errno
+                 : copyGroupRecord(source, target, buffer, size, result);
+    errno = savedErrno;
+    return status;
+}
+
+#define getgrgid_r(gid, group, buffer, size, result) \
+    androidGetGroup(NULL, gid, group, buffer, size, result)
+#define getgrnam_r(name, group, buffer, size, result) \
+    androidGetGroup(name, 0, group, buffer, size, result)
+#endif
+
 
 static jfieldID attrs_st_mode;
 static jfieldID attrs_st_ino;
@@ -404,6 +492,11 @@ Java_sun_nio_fs_UnixNativeDispatcher_init(JNIEnv* env, jclass this)
 #endif
 
     /* supports futimes or futimesat, futimens, and/or lutimes */
+    int futimesAvailable = my_futimesat_func != NULL;
+#ifdef __ANDROID__
+    /* Bionic omits futimesat, but futimens can update the same descriptor. */
+    futimesAvailable = futimesAvailable || my_futimens_func != NULL;
+#endif
 
     int supports_futimes = (my_futimesat_func != NULL);
 #ifdef __ANDROID__
@@ -415,6 +508,7 @@ Java_sun_nio_fs_UnixNativeDispatcher_init(JNIEnv* env, jclass this)
     capabilities |= sun_nio_fs_UnixNativeDispatcher_SUPPORTS_FUTIMES;
     capabilities |= sun_nio_fs_UnixNativeDispatcher_SUPPORTS_LUTIMES;
 #else
+    if (futimesAvailable)
     if (supports_futimes)
         capabilities |= sun_nio_fs_UnixNativeDispatcher_SUPPORTS_FUTIMES;
     if (my_lutimes_func != NULL)
@@ -427,6 +521,7 @@ Java_sun_nio_fs_UnixNativeDispatcher_init(JNIEnv* env, jclass this)
 
     if (my_openat64_func != NULL &&  my_fstatat64_func != NULL &&
         my_unlinkat_func != NULL && my_renameat_func != NULL &&
+        futimesAvailable && my_fdopendir_func != NULL)
         supports_futimes && my_fdopendir_func != NULL)
     {
         capabilities |= sun_nio_fs_UnixNativeDispatcher_SUPPORTS_OPENAT;
@@ -934,6 +1029,12 @@ Java_sun_nio_fs_UnixNativeDispatcher_futimes0(JNIEnv* env, jclass this, jint fil
         RESTARTABLE((*my_futimesat_func)(filedes, NULL, &times[0]), err);
 #ifdef __ANDROID__
     } else if (my_futimens_func != NULL) {
+        struct timespec nanos[2];
+        nanos[0].tv_sec = times[0].tv_sec;
+        nanos[0].tv_nsec = times[0].tv_usec * 1000;
+        nanos[1].tv_sec = times[1].tv_sec;
+        nanos[1].tv_nsec = times[1].tv_usec * 1000;
+        RESTARTABLE((*my_futimens_func)(filedes, &nanos[0]), err);
         struct timespec times2[2];
         times2[0].tv_sec = times[0].tv_sec;
         times2[0].tv_nsec = times[0].tv_usec * 1000;
@@ -1301,28 +1402,47 @@ Java_sun_nio_fs_UnixNativeDispatcher_getpwuid(JNIEnv* env, jclass this, jint uid
 {
     jbyteArray result = NULL;
     int buflen;
-    char* pwbuf;
+    int retry;
 
-    /* allocate buffer for password record */
+    /* initial size of buffer for password record */
     buflen = (int)sysconf(_SC_GETPW_R_SIZE_MAX);
     if (buflen == -1)
         buflen = ENT_BUF_SIZE;
-    pwbuf = (char*)malloc(buflen);
-    if (pwbuf == NULL) {
-        JNU_ThrowOutOfMemoryError(env, "native heap");
-    } else {
+
+    do {
         struct passwd pwent;
         struct passwd* p = NULL;
         int res = 0;
 
-        errno = 0;
-        RESTARTABLE(getpwuid_r((uid_t)uid, &pwent, pwbuf, (size_t)buflen, &p), res);
+        char* pwbuf = (char*)malloc(buflen);
+        if (pwbuf == NULL) {
+            JNU_ThrowOutOfMemoryError(env, "native heap");
+            return NULL;
+        }
 
+        errno = 0;
+        res = getpwuid_r((uid_t)uid, &pwent, pwbuf, (size_t)buflen, &p);
+        /* Preserve legacy -1/errno providers as well as POSIX status codes. */
+        if (res < 0)
+            res = errno;
+        retry = 0;
         if (res != 0 || p == NULL || p->pw_name == NULL || *(p->pw_name) == '\0') {
             /* not found or error */
-            if (errno == 0)
-                errno = ENOENT;
-            throwUnixException(env, errno);
+            if (res == EINTR) {
+                /* interrupted - repeat the call */
+                retry = 1;
+            } else if (res == ERANGE) {
+                /* insufficient buffer size so need larger buffer */
+                if (buflen > INT_MAX - ENT_BUF_SIZE) {
+                    JNU_ThrowOutOfMemoryError(env, "native heap");
+                } else {
+                    buflen += ENT_BUF_SIZE;
+                    retry = 1;
+                }
+            } else {
+                /* lookup by uid: not found is treated as an error */
+                throwUnixException(env, res != 0 ? res : ENOENT);
+            }
         } else {
             jsize len = strlen(p->pw_name);
             result = (*env)->NewByteArray(env, len);
@@ -1330,8 +1450,10 @@ Java_sun_nio_fs_UnixNativeDispatcher_getpwuid(JNIEnv* env, jclass this, jint uid
                 (*env)->SetByteArrayRegion(env, result, 0, len, (jbyte*)(p->pw_name));
             }
         }
+
         free(pwbuf);
-    }
+
+    } while (retry);
 
     return result;
 }
@@ -1361,19 +1483,27 @@ Java_sun_nio_fs_UnixNativeDispatcher_getgrgid(JNIEnv* env, jclass this, jint gid
         }
 
         errno = 0;
-        RESTARTABLE(getgrgid_r((gid_t)gid, &grent, grbuf, (size_t)buflen, &g), res);
-
+        res = getgrgid_r((gid_t)gid, &grent, grbuf, (size_t)buflen, &g);
+        /* Preserve legacy -1/errno providers as well as POSIX status codes. */
+        if (res < 0)
+            res = errno;
         retry = 0;
         if (res != 0 || g == NULL || g->gr_name == NULL || *(g->gr_name) == '\0') {
             /* not found or error */
-            if (errno == ERANGE) {
-                /* insufficient buffer size so need larger buffer */
-                buflen += ENT_BUF_SIZE;
+            if (res == EINTR) {
+                /* interrupted - repeat the call */
                 retry = 1;
+            } else if (res == ERANGE) {
+                /* insufficient buffer size so need larger buffer */
+                if (buflen > INT_MAX - ENT_BUF_SIZE) {
+                    JNU_ThrowOutOfMemoryError(env, "native heap");
+                } else {
+                    buflen += ENT_BUF_SIZE;
+                    retry = 1;
+                }
             } else {
-                if (errno == 0)
-                    errno = ENOENT;
-                throwUnixException(env, errno);
+                /* lookup by gid: not found is treated as an error */
+                throwUnixException(env, res != 0 ? res : ENOENT);
             }
         } else {
             jsize len = strlen(g->gr_name);
@@ -1395,37 +1525,57 @@ Java_sun_nio_fs_UnixNativeDispatcher_getpwnam0(JNIEnv* env, jclass this,
     jlong nameAddress)
 {
     jint uid = -1;
-    int buflen;
-    char* pwbuf;
+    int buflen, retry;
 
-    /* allocate buffer for password record */
+    /* initial size of buffer for password record */
     buflen = (int)sysconf(_SC_GETPW_R_SIZE_MAX);
     if (buflen == -1)
         buflen = ENT_BUF_SIZE;
-    pwbuf = (char*)malloc(buflen);
-    if (pwbuf == NULL) {
-        JNU_ThrowOutOfMemoryError(env, "native heap");
-    } else {
+
+    do {
         struct passwd pwent;
         struct passwd* p = NULL;
         int res = 0;
+        char* pwbuf;
         const char* name = (const char*)jlong_to_ptr(nameAddress);
 
-        errno = 0;
-        RESTARTABLE(getpwnam_r(name, &pwent, pwbuf, (size_t)buflen, &p), res);
+        pwbuf = (char*)malloc(buflen);
+        if (pwbuf == NULL) {
+            JNU_ThrowOutOfMemoryError(env, "native heap");
+            return -1;
+        }
 
+        errno = 0;
+        res = getpwnam_r(name, &pwent, pwbuf, (size_t)buflen, &p);
+        /* Preserve legacy -1/errno providers as well as POSIX status codes. */
+        if (res < 0)
+            res = errno;
+        retry = 0;
         if (res != 0 || p == NULL || p->pw_name == NULL || *(p->pw_name) == '\0') {
             /* not found or error */
-            if (errno != 0 && errno != ENOENT && errno != ESRCH &&
-                errno != EBADF && errno != EPERM)
-            {
-                throwUnixException(env, errno);
+            if (res == EINTR) {
+                /* interrupted - repeat the call */
+                retry = 1;
+            } else if (res == ERANGE) {
+                /* insufficient buffer size so need larger buffer */
+                if (buflen > INT_MAX - ENT_BUF_SIZE) {
+                    JNU_ThrowOutOfMemoryError(env, "native heap");
+                } else {
+                    buflen += ENT_BUF_SIZE;
+                    retry = 1;
+                }
+            } else if (res != 0 && res != ENOENT && res != ESRCH &&
+                       res != EBADF && res != EPERM) {
+                throwUnixException(env, res);
             }
+            /* res == 0 or a tolerated not-found code: leave uid == -1 */
         } else {
             uid = p->pw_uid;
         }
+
         free(pwbuf);
-    }
+
+    } while (retry);
 
     return uid;
 }
@@ -1456,22 +1606,29 @@ Java_sun_nio_fs_UnixNativeDispatcher_getgrnam0(JNIEnv* env, jclass this,
         }
 
         errno = 0;
-        RESTARTABLE(getgrnam_r(name, &grent, grbuf, (size_t)buflen, &g), res);
-
+        res = getgrnam_r(name, &grent, grbuf, (size_t)buflen, &g);
+        /* Preserve legacy -1/errno providers as well as POSIX status codes. */
+        if (res < 0)
+            res = errno;
         retry = 0;
         if (res != 0 || g == NULL || g->gr_name == NULL || *(g->gr_name) == '\0') {
             /* not found or error */
-            if (errno != 0 && errno != ENOENT && errno != ESRCH &&
-                errno != EBADF && errno != EPERM)
-            {
-                if (errno == ERANGE) {
-                    /* insufficient buffer size so need larger buffer */
+            if (res == EINTR) {
+                /* interrupted - repeat the call */
+                retry = 1;
+            } else if (res == ERANGE) {
+                /* insufficient buffer size so need larger buffer */
+                if (buflen > INT_MAX - ENT_BUF_SIZE) {
+                    JNU_ThrowOutOfMemoryError(env, "native heap");
+                } else {
                     buflen += ENT_BUF_SIZE;
                     retry = 1;
-                } else {
-                    throwUnixException(env, errno);
                 }
+            } else if (res != 0 && res != ENOENT && res != ESRCH &&
+                       res != EBADF && res != EPERM) {
+                throwUnixException(env, res);
             }
+            /* res == 0 or a tolerated not-found code: leave gid == -1 */
         } else {
             gid = g->gr_gid;
         }

@@ -146,9 +146,8 @@
 // for timer info max values which include all bits
 #define ALL_64_BITS CONST64(0xFFFFFFFFFFFFFFFF)
 
-#ifdef MUSL_LIBC
-// dlvsym is not a part of POSIX
-// and musl libc doesn't implement it.
+#if defined(MUSL_LIBC) || (defined(__ANDROID__) && __ANDROID_API__ < 24)
+// dlvsym is not part of POSIX. It is absent from musl and Android before API 24.
 static void *dlvsym(void *handle,
                     const char *symbol,
                     const char *version) {
@@ -595,6 +594,11 @@ void os::init_system_properties_values() {
 // detecting pthread library
 
 void os::Linux::libpthread_init() {
+#ifdef __ANDROID__
+  // Bionic provides pthreads in libc and has no GNU confstr version keys.
+  os::Linux::set_libc_version("Bionic");
+  os::Linux::set_libpthread_version("Bionic pthreads");
+#else
   // Save glibc and pthread version strings.
 #if !defined(_CS_GNU_LIBC_VERSION) || \
     !defined(_CS_GNU_LIBPTHREAD_VERSION)
@@ -619,6 +623,7 @@ void os::Linux::libpthread_init() {
   confstr(_CS_GNU_LIBPTHREAD_VERSION, str, n);
   os::Linux::set_libpthread_version(str);
 #endif
+#endif // __ANDROID__
 }
 
 /////////////////////////////////////////////////////////////////////////////
@@ -1935,6 +1940,7 @@ const char* os::Linux::dll_path(void* lib) {
     l_path = lmap->l_name;
   }
 #endif
+  // Bionic has no dlinfo. The unload logger already handles an unknown path.
   return l_path;
 }
 
@@ -3956,6 +3962,14 @@ bool os::Linux::hugetlbfs_sanity_check(bool warn, size_t page_size) {
 }
 
 bool os::Linux::shm_hugetlbfs_sanity_check(bool warn, size_t page_size) {
+#if defined(__ANDROID__) && __ANDROID_API__ < 26
+  // The NDK exposes System V shared memory only from API 26. Leave the normal
+  // mmap and HugeTLBFS allocation paths available at earlier API levels.
+  if (warn) {
+    warning("System V shared memory is unavailable before Android API 26.");
+  }
+  return false;
+#else
   // Try to create a large shared memory segment.
   int shmid = shmget(IPC_PRIVATE, page_size, SHM_HUGETLB|IPC_CREAT|SHM_R|SHM_W);
   if (shmid == -1) {
@@ -3977,6 +3991,7 @@ bool os::Linux::shm_hugetlbfs_sanity_check(bool warn, size_t page_size) {
   // Managed to create a segment, now delete it.
   shmctl(shmid, IPC_RMID, nullptr);
   return true;
+#endif
 }
 
 // From the coredump_filter documentation:
@@ -4234,6 +4249,7 @@ void os::large_page_init() {
     shm_warning_format(str " (error = %d)", err);  \
   } while (0)
 
+#if !defined(__ANDROID__) || __ANDROID_API__ >= 26
 static char* shmat_with_alignment(int shmid, size_t bytes, size_t alignment) {
   assert(is_aligned(bytes, alignment), "Must be divisible by the alignment");
 
@@ -4308,8 +4324,15 @@ static char* shmat_large_pages(int shmid, size_t bytes, size_t alignment, char* 
   }
 }
 
+#endif // System V shared memory API availability
+
 char* os::Linux::reserve_memory_special_shm(size_t bytes, size_t alignment,
                                             char* req_addr, bool exec) {
+#if defined(__ANDROID__) && __ANDROID_API__ < 26
+  // setup_large_page_type rejects UseSHM on this API level. A failed optional
+  // reservation must remain a failure, allowing the caller's normal fallback.
+  return nullptr;
+#else
   // "exec" is passed in but not used.  Creating the shared image for
   // the code cache doesn't have an SHM_X executable permission to check.
   assert(UseLargePages && UseSHM, "only for SHM large pages");
@@ -4354,6 +4377,7 @@ char* os::Linux::reserve_memory_special_shm(size_t bytes, size_t alignment,
   shmctl(shmid, IPC_RMID, nullptr);
 
   return addr;
+#endif
 }
 
 static void log_on_commit_special_failure(char* req_addr, size_t bytes,
@@ -4480,8 +4504,13 @@ char* os::pd_reserve_memory_special(size_t bytes, size_t alignment, size_t page_
 }
 
 bool os::Linux::release_memory_special_shm(char* base, size_t bytes) {
+#if defined(__ANDROID__) && __ANDROID_API__ < 26
+  // No System V allocation can have succeeded through this implementation.
+  return false;
+#else
   // detaching the SHM segment will also delete it, see reserve_memory_special_shm()
   return shmdt(base) == 0;
+#endif
 }
 
 bool os::Linux::release_memory_special_huge_tlbfs(char* base, size_t bytes) {
@@ -4757,8 +4786,10 @@ void os::init(void) {
 
   check_pax();
 
-  // Check the availability of MADV_POPULATE_WRITE.
-  FLAG_SET_DEFAULT(UseMadvPopulateWrite, (::madvise(0, 0, MADV_POPULATE_WRITE) == 0));
+  // Check the availability of MADV_POPULATE_WRITE without touching memory.
+  // Bionic requires a non-null address even for a zero-length madvise probe.
+  void* probe_address = align_down((void*)&dummy, page_size);
+  FLAG_SET_DEFAULT(UseMadvPopulateWrite, (::madvise(probe_address, 0, MADV_POPULATE_WRITE) == 0));
 
   os::Posix::init();
 }
@@ -5550,7 +5581,20 @@ bool os::is_thread_cpu_time_supported() {
 // Linux doesn't yet have a (official) notion of processor sets,
 // so just return the system wide load average.
 int os::loadavg(double loadavg[], int nelem) {
+#if defined(__ANDROID__) && __ANDROID_API__ < 29
+  if (nelem < 0) return -1;
+  if (nelem > 3) nelem = 3;
+
+  struct sysinfo si;
+  if (sysinfo(&si) == -1) return -1;
+
+  for (int i = 0; i < nelem; ++i) {
+    loadavg[i] = (double)(si.loads[i]) / (double)(1 << SI_LOAD_SHIFT);
+  }
+  return nelem;
+#else
   return ::getloadavg(loadavg, nelem);
+#endif
 }
 
 // Get the default path to the core file
