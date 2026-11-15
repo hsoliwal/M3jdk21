@@ -3,5 +3,6 @@ Bundle-ManifestVersion: 2
 Bundle-SymbolicName: com.m3.collections
 Bundle-Version: 0.1.0
 Bundle-RequiredExecutionEnvironment: JavaSE-21
-Export-Package: com.m3.collections
+Import-Package: jdk.m3.arrays,jdk.m3.arrays.packed
+Export-Package: jdk.m3.collections
 

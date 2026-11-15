@@ -102,4 +102,30 @@
       </plugin>
     </plugins>
   </build>
+  <profiles>
+    <profile>
+      <id>eclipse-osgi</id>
+      <build><plugins><plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>3.4.2</version>
+        <executions><execution>
+          <id>attach-osgi-bundle</id>
+          <phase>package</phase><goals><goal>jar</goal></goals>
+          <configuration>
+            <classifier>osgi</classifier>
+            <archive>
+              <manifestEntries>
+                <Bundle-ManifestVersion>2</Bundle-ManifestVersion>
+                <Bundle-SymbolicName>jdk.m3.arrays</Bundle-SymbolicName>
+                <Bundle-Version>0.1.0</Bundle-Version>
+                <Bundle-RequiredExecutionEnvironment>JavaSE-21</Bundle-RequiredExecutionEnvironment>
+                <Export-Package>jdk.m3.arrays,jdk.m3.arrays.packed</Export-Package>
+              </manifestEntries>
+            </archive>
+          </configuration>
+        </execution></executions>
+      </plugin></plugins></build>
+    </profile>
+  </profiles>
 </project>
