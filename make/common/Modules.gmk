@@ -71,6 +71,16 @@ ifeq ($(call isTargetOs, windows macosx linux), false)
   MODULES_FILTER += jdk.jpackage
 endif
 
+# The optional TornadoVM owner is compiled by tornado-parallel-image unless its
+# compatibility API, runtime and complete owner are supplied as imported classes.
+ifeq ($(and $(strip $(IMPORT_MODULES_CLASSES)), \
+    $(wildcard $(IMPORT_MODULES_CLASSES)/tornado.api/module-info.class), \
+    $(wildcard $(IMPORT_MODULES_CLASSES)/m3.parallel/module-info.class), \
+    $(wildcard $(IMPORT_MODULES_CLASSES)/tornado.runtime/module-info.class), \
+    $(wildcard $(IMPORT_MODULES_CLASSES)/jdk.m3.tornado/module-info.class)), )
+  MODULES_FILTER += jdk.m3.tornado
+endif
+
 ################################################################################
 # Module list macros
 
