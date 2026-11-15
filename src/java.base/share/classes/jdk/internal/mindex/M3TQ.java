@@ -1,7 +1,9 @@
 // SPDX-License-Identifier: Apache-2.0
+// SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
 // Copyright 2026 Hitesh Soliwal and contributors.
 // Modified 2026: primitive query staging and immutable fact-key sharing.
 // Modified 2026-10-21: adaptive gallop for dense prepared containment.
+// Modified 2026-11-15: one-pass exact-query preparation and owned sorted key adoption.
 package jdk.internal.mindex;
 
 import java.util.ArrayList;
@@ -40,11 +42,13 @@ public final class M3TQ {
   // use bounded intrinsic searches or one scan, never sorting all subject trigrams.
   private final ScanPlan scanPlan;
 
+  // Every caller transfers a freshly prepared sorted unique key plane, or an
+  // immutable empty plane. Public exports remain defensive copies; composition
+  // copies operand keys into its own staging plane before sorting or compacting.
   private M3TQ(
       Op op, long[] trigrams, List<M3TQ> subqueries) {
     this.op = Objects.requireNonNull(op, "op");
-    this.trigrams = Objects.requireNonNull(trigrams, "trigrams").clone();
-    Arrays.sort(this.trigrams);
+    this.trigrams = Objects.requireNonNull(trigrams, "trigrams");
     this.subqueries = List.copyOf(Objects.requireNonNull(subqueries, "subqueries"));
     // Flat queries already own sorted immutable keys. Only compound queries
     // need a separate bounded DNF directory; do not retain duplicate flat keys.
@@ -712,17 +716,18 @@ public final class M3TQ {
 
   static long[] uniqueTrigrams(CharSequence value) {
     Objects.requireNonNull(value, "value");
-    if (value.length() < 3) return new long[0];
-    long[] keys = new long[value.length() - 2];
-    for (int i = 0; i < keys.length; i++) {
-      keys[i] = trigram(value.charAt(i), value.charAt(i + 1), value.charAt(i + 2));
+    int length = value.length();
+    if (length < 3) return new long[0];
+    long[] keys = new long[length - 2];
+    long window = 0L;
+    // The production caller supplies an immutable String. Reuse the rolling
+    // preparation atom from scanFacts without retaining or copying its spelling.
+    for (int index = 0; index < length; index++) {
+      window = ((window << 16) | value.charAt(index)) & 0xffffffffffffL;
+      if (index >= 2) keys[index - 2] = window;
     }
     Arrays.sort(keys);
-    int unique = 1;
-    for (int i = 1; i < keys.length; i++) {
-      if (keys[i] != keys[unique - 1]) keys[unique++] = keys[i];
-    }
-    return Arrays.copyOf(keys, unique);
+    return compactFactKeys(keys);
   }
 
   @Override
