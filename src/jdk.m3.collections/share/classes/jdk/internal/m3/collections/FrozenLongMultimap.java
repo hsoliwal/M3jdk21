@@ -4,107 +4,160 @@
  */
 package jdk.internal.m3.collections;
 
+import java.util.Arrays;
+import java.util.Objects;
+import jdk.m3.collections.LongIntHashMap;
 import jdk.m3.collections.LongLongConsumer;
 
 /**
- * M3 five-library superset scaffold {@code FrozenLongMultimap}: API group {@code FROZEN_LONG_MULTIMAP} over arrays and state masks.
+ * Immutable primitive multimap with stable key grouping and packed value runs.
  *
- * <p>Provider lineage (LIBRARY_API_MATRIX.tsv, run 20261017-m3-to-public/LIB-SUPERSET):
- * <ul>
- *   <li>GUAVA ImmutableListMultimap/ImmutableSetMultimap: frozen multimap; builder; UOE mutate [license Apache-2.0; NEW_OWNER (LS3); priority P1; matrix owner PROPOSED:FrozenMultimap lanes]</li>
- * </ul>
+ * <p>Keys retain first-occurrence order; each key's values retain their input
+ * order, including duplicates. A prefix-offset lane maps a key ordinal to its
+ * half-open value run. The existing primitive hash owner provides key-to-ordinal
+ * lookup, without a collection, box or node per key/value. Input and returned
+ * arrays are never retained as externally mutable backing storage.
  *
- * <p>DOOP mapping: lane kind LONG; lanes {@code long[] keyLane;int[] valueOffsetLane;long[] valueLane}; offset scheme CSR: key ordinal -&gt; [valueOffset[k], valueOffset[k+1]); state-mask bits FROZEN; stored nodes NONE; API entry objects TRANSIENT_FACADE (transient facades over slots, never the stored representation); matrix note: frozen key lane + offsets lane + packed values lane (CSR layout) / FROZEN=1; occupancy ALL.
- *
- * <p>Status: SCAFFOLD. Every public atom throws {@link NotYetReceived} until this owner is received through a hash-pinned Synexia recipe with its own
- * provider oracle (never inferred from another provider). Not a {@code java.util} replacement.
+ * <p>This is the existing primitive CSR API, not a Guava interface replacement.
+ * It accepts all long bit patterns and has no JNI or external runtime dependency.
  */
 public final class FrozenLongMultimap {
-    /** State-mask bit {@code FROZEN} (per-slot state word, bit 0). */
-    static final long STATE_FROZEN = 1L << 0;
+    static final long STATE_FROZEN = 1L;
+    private final long[] keyLane;
+    private final int[] valueOffsetLane;
+    private final long[] valueLane;
+    private final long[] stateMaskWords;
+    private final LongIntHashMap keyOrdinals;
+    private final int size;
 
-    /** Storage lane {@code keyLane}: dynamic primitive/reference array lane. */
-    private long[] keyLane = new long[0];
-    /** Storage lane {@code valueOffsetLane}: dynamic primitive/reference array lane. */
-    private int[] valueOffsetLane = new int[0];
-    /** Storage lane {@code valueLane}: dynamic primitive/reference array lane. */
-    private long[] valueLane = new long[0];
-    /** Per-slot state words (FROZEN); one bit set per slot and state. */
-    private long[] stateMaskWords = new long[0];
-    /** Live slot count. */
-    private int size;
-
-    /** Creates an empty scaffold owner; lanes grow by copy once received. */
+    /** Creates a valid immutable empty multimap. */
     public FrozenLongMultimap() {
+        this(new long[0], new int[] {0}, new long[0], new LongIntHashMap(0));
     }
 
-    /** Reports the declared state-mask bits and lanes for ledgers; never allocates per element. */
+    private FrozenLongMultimap(long[] keys, int[] offsets, long[] values,
+            LongIntHashMap ordinals) {
+        keyLane = keys;
+        valueOffsetLane = offsets;
+        valueLane = values;
+        keyOrdinals = ordinals;
+        size = values.length;
+        stateMaskWords = new long[(int) (((long) keys.length + 63) >>> 6)];
+        Arrays.fill(stateMaskWords, -1L);
+        if ((keys.length & 63) != 0) {
+            stateMaskWords[stateMaskWords.length - 1] = (1L << (keys.length & 63)) - 1;
+        }
+    }
+
+    /** Retained compatibility descriptor; it does not describe admission status. */
     public static String scaffoldDescriptor() {
         return "M3FrozenLongMultimap|FROZEN_LONG_MULTIMAP|LONG|FROZEN|long[] keyLane;int[] valueOffsetLane;long[] valueLane";
     }
 
-    /** Guava ImmutableListMultimap.copyOf (pairs) (scaffold: not yet received). */
+    /**
+     * Copies parallel pair arrays into stable key groups using counting/prefix
+     * offsets. Expected linear work with suitable hashes; all temporary arrays
+     * and the new owner remain unpublished until construction completes.
+     */
     public static FrozenLongMultimap copyOf(long[] keys, long[] values) {
-        throw new NotYetReceived("M3FrozenLongMultimap.copyOf");
+        Objects.requireNonNull(keys, "keys");
+        Objects.requireNonNull(values, "values");
+        if (keys.length != values.length) {
+            throw new IllegalArgumentException("key/value array lengths differ");
+        }
+        if (keys.length == 0) {
+            return new FrozenLongMultimap();
+        }
+        LongIntHashMap ordinals = new LongIntHashMap(0);
+        long[] encountered = new long[keys.length];
+        int[] counts = new int[keys.length];
+        int distinct = 0;
+        for (long key : keys) {
+            int ordinal = ordinals.getOrDefault(key, -1);
+            if (ordinal < 0) {
+                ordinal = distinct++;
+                encountered[ordinal] = key;
+                ordinals.put(key, ordinal);
+            }
+            counts[ordinal]++;
+        }
+        // One extra cell holds the terminal prefix boundary.
+        if (distinct == Integer.MAX_VALUE) {
+            throw new OutOfMemoryError("FrozenLongMultimap offset capacity exhausted");
+        }
+        int[] offsets = new int[distinct + 1];
+        for (int i = 0; i < distinct; i++) {
+            offsets[i + 1] = offsets[i] + counts[i];
+        }
+        int[] next = Arrays.copyOf(offsets, distinct);
+        long[] packedValues = new long[values.length];
+        for (int i = 0; i < keys.length; i++) {
+            int ordinal = ordinals.get(keys[i]);
+            packedValues[next[ordinal]++] = values[i];
+        }
+        return new FrozenLongMultimap(Arrays.copyOf(encountered, distinct),
+                offsets, packedValues, ordinals);
     }
 
-    /** Multimap.size (pairs) (scaffold: not yet received). */
-    public int size() {
-        throw new NotYetReceived("M3FrozenLongMultimap.size");
-    }
+    public int size() { return size; }
+    public int keyCount() { return keyLane.length; }
 
-    /** Multimap.keySet().size (scaffold: not yet received). */
-    public int keyCount() {
-        throw new NotYetReceived("M3FrozenLongMultimap.keyCount");
-    }
-
-    /** Multimap.containsKey (scaffold: not yet received). */
     public boolean containsKey(long key) {
-        throw new NotYetReceived("M3FrozenLongMultimap.containsKey");
+        return keyOrdinals.containsKey(key);
     }
 
-    /** Multimap.containsEntry (scaffold: not yet received). */
     public boolean containsEntry(long key, long value) {
-        throw new NotYetReceived("M3FrozenLongMultimap.containsEntry");
+        int ordinal = keyOrdinals.getOrDefault(key, -1);
+        if (ordinal < 0) {
+            return false;
+        }
+        for (int i = valueOffsetLane[ordinal]; i < valueOffsetLane[ordinal + 1]; i++) {
+            if (valueLane[i] == value) {
+                return true;
+            }
+        }
+        return false;
     }
 
-    /** Multimap.get(key).size (scaffold: not yet received). */
     public int valueCount(long key) {
-        throw new NotYetReceived("M3FrozenLongMultimap.valueCount");
+        int ordinal = keyOrdinals.getOrDefault(key, -1);
+        return ordinal < 0 ? 0 : valueOffsetLane[ordinal + 1] - valueOffsetLane[ordinal];
     }
 
-    /** CSR key ordinal (scaffold: not yet received). */
     public long keyAt(int keyOrdinal) {
-        throw new NotYetReceived("M3FrozenLongMultimap.keyAt");
+        return keyLane[Objects.checkIndex(keyOrdinal, keyLane.length)];
     }
 
-    /** CSR offset lane (scaffold: not yet received). */
+    /** Includes the terminal boundary at {@code keyCount()}, equal to {@code size()}. */
     public int valueOffsetAt(int keyOrdinal) {
-        throw new NotYetReceived("M3FrozenLongMultimap.valueOffsetAt");
+        return valueOffsetLane[Objects.checkIndex(keyOrdinal, valueOffsetLane.length)];
     }
 
-    /** CSR value lane (scaffold: not yet received). */
     public long valueAt(int valueOrdinal) {
-        throw new NotYetReceived("M3FrozenLongMultimap.valueAt");
+        return valueLane[Objects.checkIndex(valueOrdinal, valueLane.length)];
     }
 
-    /** Multimap.get (copy of run) (scaffold: not yet received). */
     public long[] get(long key) {
-        throw new NotYetReceived("M3FrozenLongMultimap.get");
+        int ordinal = keyOrdinals.getOrDefault(key, -1);
+        return ordinal < 0 ? new long[0] : Arrays.copyOfRange(valueLane,
+                valueOffsetLane[ordinal], valueOffsetLane[ordinal + 1]);
     }
 
-    /** Multimap.forEach (scaffold: not yet received). */
+    /** Traverses groups in key encounter order, then each key's value encounter order. */
     public void forEach(LongLongConsumer action) {
-        throw new NotYetReceived("M3FrozenLongMultimap.forEach");
+        Objects.requireNonNull(action, "action");
+        for (int key = 0; key < keyLane.length; key++) {
+            for (int value = valueOffsetLane[key]; value < valueOffsetLane[key + 1]; value++) {
+                action.accept(keyLane[key], valueLane[value]);
+            }
+        }
     }
 
-    /** UOE contract once received (scaffold: not yet received). */
     public boolean put(long key, long value) {
-        throw new NotYetReceived("M3FrozenLongMultimap.put");
+        throw new UnsupportedOperationException("immutable multimap");
     }
 
-    /** UOE contract once received (scaffold: not yet received). */
     public long[] removeAll(long key) {
-        throw new NotYetReceived("M3FrozenLongMultimap.removeAll");
+        throw new UnsupportedOperationException("immutable multimap");
     }
 }

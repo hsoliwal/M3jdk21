@@ -4,102 +4,232 @@
  */
 package jdk.internal.m3.collections;
 
+import java.util.Arrays;
+import java.util.ConcurrentModificationException;
+import java.util.Objects;
+import jdk.m3.collections.LongIntHashMap;
 import jdk.m3.collections.LongLongConsumer;
 
 /**
- * M3 five-library superset scaffold {@code LinkedLongMultimap}: API group {@code LINKED_LONG_MULTIMAP} over arrays and state masks.
+ * Primitive long multimap with per-key and global insertion order.
  *
- * <p>Provider lineage (LIBRARY_API_MATRIX.tsv, run 20261017-m3-to-public/LIB-SUPERSET):
- * <ul>
- *   <li>GUAVA LinkedListMultimap: per-key and global linked iteration order [license Apache-2.0; NEW_OWNER(extension; base IN_FLIGHT); priority P2; matrix owner PROPOSED:order-lane extension of multimap owner]</li>
- * </ul>
+ * <p>The existing primitive hash owner indexes keys to their first occurrence.
+ * Payload and topology remain in this owner's primitive lanes; there is no
+ * object, collection, boxed key or entry per mapping or distinct key. Removing
+ * a key clears and recycles all of its slots. Every long is a valid key/value.
  *
- * <p>DOOP mapping: lane kind LONG; lanes {@code long[] keyLane;long[] valueLane;int[] globalPrevLane;int[] globalNextLane;int[] keyPrevLane;int[] keyNextLane;int[] hashIndexLane}; offset scheme slot + dual link lanes (global and per-key); state-mask bits OCCUPIED,DELETED; stored nodes NONE; API entry objects TRANSIENT_FACADE (transient facades over slots, never the stored representation); matrix note: dual link lanes (global+per-key) / occupancy mask.
- *
- * <p>Status: SCAFFOLD. Every public atom throws {@link NotYetReceived} until this owner is received through a hash-pinned Synexia recipe with its own
- * provider oracle (never inferred from another provider). Not a {@code java.util} replacement.
+ * <p>Returned arrays are detached snapshots. Traversal calls the supplied
+ * primitive consumer directly and detects structural changes by that callback.
+ * This owner is not thread-safe and does not implement Guava's live-view API.
+ * The insertion-order algorithm shares the existing {@link PackedSlotLinkAtoms}
+ * rather than storing or manufacturing linked nodes.
  */
 public final class LinkedLongMultimap {
-    /** State-mask bit {@code OCCUPIED} (per-slot state word, bit 0). */
-    static final long STATE_OCCUPIED = 1L << 0;
-    /** State-mask bit {@code DELETED} (per-slot state word, bit 1). */
-    static final long STATE_DELETED = 1L << 1;
+    static final long STATE_OCCUPIED = 1L;
+    static final long STATE_DELETED = 2L;
+    private static final int NONE = -1;
+    private static final int MAX_CAPACITY = Integer.MAX_VALUE - 8;
 
-    /** Storage lane {@code keyLane}: dynamic primitive/reference array lane. */
+    private final LongIntHashMap headByKey = new LongIntHashMap(0);
     private long[] keyLane = new long[0];
-    /** Storage lane {@code valueLane}: dynamic primitive/reference array lane. */
     private long[] valueLane = new long[0];
-    /** Storage lane {@code globalPrevLane}: dynamic primitive/reference array lane. */
     private int[] globalPrevLane = new int[0];
-    /** Storage lane {@code globalNextLane}: dynamic primitive/reference array lane. */
     private int[] globalNextLane = new int[0];
-    /** Storage lane {@code keyPrevLane}: dynamic primitive/reference array lane. */
     private int[] keyPrevLane = new int[0];
-    /** Storage lane {@code keyNextLane}: dynamic primitive/reference array lane. */
     private int[] keyNextLane = new int[0];
-    /** Storage lane {@code hashIndexLane}: dynamic primitive/reference array lane. */
+    /** At an active key head: its tail. At a free slot: the next free slot. */
     private int[] hashIndexLane = new int[0];
-    /** Per-slot state words (OCCUPIED,DELETED); one bit set per slot and state. */
+    /** Two bits per physical slot: unused, occupied or deleted. */
     private long[] stateMaskWords = new long[0];
-    /** Live slot count. */
     private int size;
+    private int used;
+    private int first = NONE;
+    private int last = NONE;
+    private int free = NONE;
+    private int modCount;
 
-    /** Creates an empty scaffold owner; lanes grow by copy once received. */
-    public LinkedLongMultimap() {
-    }
+    public LinkedLongMultimap() { }
 
-    /** Reports the declared state-mask bits and lanes for ledgers; never allocates per element. */
+    /** Retained compatibility descriptor; it does not describe admission status. */
     public static String scaffoldDescriptor() {
         return "M3LinkedLongMultimap|LINKED_LONG_MULTIMAP|LONG|OCCUPIED,DELETED|long[] keyLane;long[] valueLane;int[] globalPrevLane;int[] globalNextLane;int[] keyPrevLane;int[] keyNextLane;int[] hashIndexLane";
     }
 
-    /** LinkedListMultimap.put (long lanes) (scaffold: not yet received). */
+    /** Appends an occurrence, including a duplicate pair, to both encounter orders. */
     public boolean put(long key, long value) {
-        throw new NotYetReceived("M3LinkedLongMultimap.put");
+        if (size == MAX_CAPACITY) {
+            throw new OutOfMemoryError("LinkedLongMultimap capacity exhausted");
+        }
+        int keyHead = headByKey.getOrDefault(key, NONE);
+        int row = free != NONE ? free : used;
+        if (free == NONE) {
+            ensureCapacity(row + 1);
+        }
+        // The only remaining fallible allocation is the primitive key directory.
+        // Publish no live slot or link until that insertion has succeeded.
+        if (keyHead == NONE) {
+            headByKey.put(key, row);
+        }
+        if (free != NONE) {
+            free = hashIndexLane[row];
+        } else {
+            used++;
+        }
+        keyLane[row] = key;
+        valueLane[row] = value;
+        hashIndexLane[row] = NONE;
+        long global = PackedSlotLinkAtoms.linkLast(
+                globalPrevLane, globalNextLane, first, last, row);
+        first = PackedSlotLinkAtoms.first(global);
+        last = PackedSlotLinkAtoms.last(global);
+        if (keyHead == NONE) {
+            keyHead = row;
+            keyPrevLane[row] = NONE;
+            keyNextLane[row] = NONE;
+        } else {
+            PackedSlotLinkAtoms.linkLast(keyPrevLane, keyNextLane,
+                    keyHead, hashIndexLane[keyHead], row);
+        }
+        hashIndexLane[keyHead] = row;
+        setState(row, STATE_OCCUPIED);
+        size++;
+        modCount++;
+        return true;
     }
 
-    /** LinkedListMultimap.get (copy of per-key order) (scaffold: not yet received). */
+    /** Returns a detached copy in per-key insertion order, or an empty array. */
     public long[] get(long key) {
-        throw new NotYetReceived("M3LinkedLongMultimap.get");
+        int head = headByKey.getOrDefault(key, NONE);
+        int count = 0;
+        for (int row = head; row != NONE; row = keyNextLane[row]) {
+            count++;
+        }
+        long[] copy = new long[count];
+        for (int row = head, index = 0; row != NONE; row = keyNextLane[row]) {
+            copy[index++] = valueLane[row];
+        }
+        return copy;
     }
 
-    /** LinkedListMultimap.removeAll (scaffold: not yet received). */
+    /** Removes a complete key chain and returns its detached encounter-order values. */
     public long[] removeAll(long key) {
-        throw new NotYetReceived("M3LinkedLongMultimap.removeAll");
+        int head = headByKey.getOrDefault(key, NONE);
+        long[] removed = get(key); // allocate before changing the live owner
+        if (head == NONE) {
+            return removed;
+        }
+        headByKey.remove(key);
+        for (int row = head; row != NONE; ) {
+            int next = keyNextLane[row];
+            long endpoints = PackedSlotLinkAtoms.unlink(
+                    globalPrevLane, globalNextLane, first, last, row);
+            first = PackedSlotLinkAtoms.first(endpoints);
+            last = PackedSlotLinkAtoms.last(endpoints);
+            keyLane[row] = 0L;
+            valueLane[row] = 0L;
+            globalPrevLane[row] = globalNextLane[row] = NONE;
+            keyPrevLane[row] = keyNextLane[row] = NONE;
+            hashIndexLane[row] = free;
+            free = row;
+            setState(row, STATE_DELETED);
+            row = next;
+        }
+        size -= removed.length;
+        modCount++;
+        return removed;
     }
 
-    /** Multimap.containsKey (scaffold: not yet received). */
     public boolean containsKey(long key) {
-        throw new NotYetReceived("M3LinkedLongMultimap.containsKey");
+        return headByKey.containsKey(key);
     }
 
-    /** Multimap.containsEntry (scaffold: not yet received). */
     public boolean containsEntry(long key, long value) {
-        throw new NotYetReceived("M3LinkedLongMultimap.containsEntry");
+        for (int row = headByKey.getOrDefault(key, NONE);
+                row != NONE; row = keyNextLane[row]) {
+            if (valueLane[row] == value) {
+                return true;
+            }
+        }
+        return false;
     }
 
-    /** Multimap.keySet (first-insert order) (scaffold: not yet received). */
+    /** Distinct keys ordered by their first live occurrence in global order. */
     public long[] keysToArray() {
-        throw new NotYetReceived("M3LinkedLongMultimap.keysToArray");
+        long[] keys = new long[headByKey.size()];
+        int index = 0;
+        for (int row = first; row != NONE; row = globalNextLane[row]) {
+            if (keyPrevLane[row] == NONE) {
+                keys[index++] = keyLane[row];
+            }
+        }
+        return keys;
     }
 
-    /** entries in global insertion order (scaffold: not yet received). */
+    /** Direct primitive traversal; callback mutation throws after its side effect. */
     public void forEach(LongLongConsumer action) {
-        throw new NotYetReceived("M3LinkedLongMultimap.forEach");
+        Objects.requireNonNull(action, "action");
+        int expected = modCount;
+        for (int row = first; row != NONE; row = globalNextLane[row]) {
+            action.accept(keyLane[row], valueLane[row]);
+            if (modCount != expected) {
+                throw new ConcurrentModificationException();
+            }
+        }
     }
 
-    /** Multimap.size (scaffold: not yet received). */
-    public int size() {
-        throw new NotYetReceived("M3LinkedLongMultimap.size");
-    }
+    public int size() { return size; }
+    public boolean isEmpty() { return size == 0; }
 
-    /** Multimap.isEmpty (scaffold: not yet received). */
-    public boolean isEmpty() {
-        throw new NotYetReceived("M3LinkedLongMultimap.isEmpty");
-    }
-
-    /** Multimap.clear (scaffold: not yet received). */
+    /** Clears live values and reusable metadata while retaining allocated capacity. */
     public void clear() {
-        throw new NotYetReceived("M3LinkedLongMultimap.clear");
+        if (used == 0) {
+            return;
+        }
+        Arrays.fill(keyLane, 0, used, 0L);
+        Arrays.fill(valueLane, 0, used, 0L);
+        Arrays.fill(globalPrevLane, 0, used, 0);
+        Arrays.fill(globalNextLane, 0, used, 0);
+        Arrays.fill(keyPrevLane, 0, used, 0);
+        Arrays.fill(keyNextLane, 0, used, 0);
+        Arrays.fill(hashIndexLane, 0, used, 0);
+        Arrays.fill(stateMaskWords, 0L);
+        headByKey.clear();
+        size = used = 0;
+        first = last = free = NONE;
+        modCount++;
+    }
+
+    private void setState(int row, long state) {
+        int word = row >>> 5;
+        int shift = (row & 31) << 1;
+        stateMaskWords[word] = (stateMaskWords[word] & ~(3L << shift))
+                | (state << shift);
+    }
+
+    /** Stage every lane before publishing a larger capacity. */
+    private void ensureCapacity(int required) {
+        if (required <= keyLane.length) {
+            return;
+        }
+        int capacity = (int) Math.min(MAX_CAPACITY,
+                Math.max(required, Math.max(8L,
+                        (long) keyLane.length + (keyLane.length >>> 1) + 1)));
+        long[] keys = Arrays.copyOf(keyLane, capacity);
+        long[] values = Arrays.copyOf(valueLane, capacity);
+        int[] globalPrevious = Arrays.copyOf(globalPrevLane, capacity);
+        int[] globalNext = Arrays.copyOf(globalNextLane, capacity);
+        int[] keyPrevious = Arrays.copyOf(keyPrevLane, capacity);
+        int[] keyNext = Arrays.copyOf(keyNextLane, capacity);
+        int[] indexes = Arrays.copyOf(hashIndexLane, capacity);
+        long[] states = Arrays.copyOf(stateMaskWords,
+                (int) (((long) capacity + 31) >>> 5));
+        keyLane = keys;
+        valueLane = values;
+        globalPrevLane = globalPrevious;
+        globalNextLane = globalNext;
+        keyPrevLane = keyPrevious;
+        keyNextLane = keyNext;
+        hashIndexLane = indexes;
+        stateMaskWords = states;
     }
 }
