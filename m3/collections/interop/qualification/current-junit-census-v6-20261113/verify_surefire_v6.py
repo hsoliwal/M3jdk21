@@ -21,7 +21,7 @@ SOURCE = PREFIX + "current-source-successors-v4-20261031/verify_source_v4.py"
 PINS = {V4: "f3995e0ff372fae238062de29dfa56ac08ab4a95",
         XML: "91a438127d48fac9b32104a1e98f1a3eb18bdc5d",
         V5: "b40def5f81537592ae00ac416ad12aa2f40b1ef0",
-        SOURCE: "f405a14690a3ab181bb5c021ca27b09258c74e65"}
+        SOURCE: "94bdb67080e0d6b0ee722286ee40d392e8eee41e"}
 HISTORY = (
  ("runtime-junit-census-20261022/receipts/expected-00.tsv", "56bca22881cd0e8ad6b90c3b5582ddbd5ae0ef7d"),
  ("runtime-junit-census-20261022/receipts/expected-01.tsv", "e1e57850ac92df6e36743561044e134375aa128f"),

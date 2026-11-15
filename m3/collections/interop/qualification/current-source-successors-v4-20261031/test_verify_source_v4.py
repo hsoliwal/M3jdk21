@@ -88,7 +88,7 @@ class InteropV4HistoricalSuccessionTest(unittest.TestCase):
         self.assertEqual(gate.LATER_ADDITIONS | {r[0] for r in gate.EXPECTED},
                          {r[0] for r in rows if r[3] == "ABSENT"})
         self.assertEqual(4, sum(r[6] == "NAMESPACE_TYPE_NAMES_AND_COMMENTS" for r in rows))
-        self.assertEqual(4, sum(r[6] == "QUALIFIED_SOURCE_SUCCESSOR" for r in rows))
+        self.assertEqual(5, sum(r[6] == "QUALIFIED_SOURCE_SUCCESSOR" for r in rows))
 
     def test_historical_and_current_authorities_are_not_conflated(self):
         self.assertEqual("48226ca99a17b81deb1848a8e80b15f166819e81", gate.V3_RECEIPT_BLOB)
