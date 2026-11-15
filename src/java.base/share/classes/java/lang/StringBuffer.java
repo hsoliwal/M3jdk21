@@ -688,8 +688,7 @@ import jdk.internal.vm.annotation.IntrinsicCandidate;
     @Override
     public int lastIndexOf(String str) {
         // Note, synchronization achieved via invocations of other StringBuffer methods
-        m3EnsureFlat();
-        return lastIndexOf(str, count);
+        return lastIndexOf(str, Integer.MAX_VALUE);
     }
 
     /**

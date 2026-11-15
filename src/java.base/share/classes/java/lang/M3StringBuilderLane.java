@@ -9,7 +9,7 @@ import jdk.internal.util.ArraysSupport;
 import static java.lang.String.LATIN1;
 import static java.lang.String.UTF16;
 
-//FLLDCIM: R5-BUILDER \u2014 composite lane first cut (pieces + flat chunks; flatten on read/edit)
+//FLLDCIM: R5-BUILDER \u2014 composite lane (pieces + flat chunks; bounded search/reverse)
 /**
  * Composite lane of an {@link AbstractStringBuilder}: appended M3 Strings are kept as pieces
  * (references to the caller's immutable String plus a packed range) instead of being copied into
@@ -20,6 +20,8 @@ import static java.lang.String.UTF16;
  * in order; piece {@code i} sits logically just before flat offset {@code flatAt[i]}. Flat appends
  * (chars, numbers, short Strings) therefore run the stock code unchanged. Indexed code-unit and
  * code-point readers translate positions through {@code logicalEnd} without copying piece text.
+ * Search reads these coordinates without materializing them, and reverse publishes immutable
+ * bounded chunks only after the complete replacement lane has been staged successfully.
  * Other readers and editors call {@link #flatten}, which materializes the logical content into a
  * buffer of the capacity the stock builder would have had ({@link #virtualCapacity}) and detaches
  * the lane, or read a detached copy ({@link #detached}, {@link #copyOut}) when they must not mutate
@@ -37,6 +39,8 @@ final class M3StringBuilderLane {
     static final int LIFT_UNITS = 64;
     /** A range must cover at least 1/PIN_RATIO of its source String (pool-bounds rule). */
     static final int PIN_RATIO = 8;
+    /** Upper bound on transient UTF-16 scratch and each immutable chunk emitted by reverse. */
+    private static final int REVERSE_CHUNK_UNITS = 1024;
 
     /** Some piece is UTF16-coded (its content may still be Latin-1 when it is a range). */
     private static final int UTF16_PIECE = 1;
@@ -141,6 +145,158 @@ final class M3StringBuilderLane {
         return flatCoder == LATIN1
                 ? (char) (flat[index] & 0xff)
                 : StringUTF16.getChar(flat, index);
+    }
+
+    /**
+     * Exact UTF-16 search without changing the builder. An existing composed owner uses the
+     * canonical search/precompute owner; otherwise two-way matching needs constant scratch,
+     * including for needles too large for bounded precompute. Admission refusal is immaterial.
+     */
+    int indexOf(byte[] flat, byte flatCoder, int flatCount, String needle, int fromIndex,
+            boolean backwards) {
+        int needleLength = needle.length(); // Preserve null validation even for an empty source.
+        int length = flatCount + units;
+        int start;
+        if (backwards) {
+            start = Math.min(fromIndex, length - needleLength);
+            if (start < 0) return -1;
+            if (needleLength == 0) return start;
+        } else {
+            start = Math.max(0, fromIndex);
+            if (needleLength == 0) return Math.min(start, length);
+            if (start > length - needleLength) return -1;
+        }
+        M3String cached = composed;
+        if (cached != null && composedFlat == flatCount && composedPieces == pieces) {
+            return backwards
+                    ? M3StringPrecomputeBridge.lastIndexOf(cached, needle, start)
+                    : M3StringPrecomputeBridge.indexOf(cached, needle, start, length);
+        }
+        int first = backwards ? length - needleLength - start : start;
+        int found = twoWay(flat, flatCoder, length, needle, first, backwards);
+        return found < 0 || !backwards ? found : length - needleLength - found;
+    }
+
+    /** A maximal suffix and its period, packed as (critical position, period). */
+    private static long factor(String needle, boolean backwards, boolean oppositeOrder) {
+        int length = needle.length();
+        int suffix = -1;
+        int candidate = 0;
+        int offset = 1;
+        int period = 1;
+        while (offset < length - candidate) {
+            char next = needleUnit(needle, candidate + offset, backwards);
+            char previous = needleUnit(needle, suffix + offset, backwards);
+            if (next == previous) {
+                if (offset == period) {
+                    candidate += period;
+                    offset = 1;
+                } else {
+                    offset++;
+                }
+            } else if ((next < previous) != oppositeOrder) {
+                candidate += offset;
+                offset = 1;
+                period = candidate - suffix;
+            } else {
+                suffix = candidate;
+                candidate = suffix + 1;
+                offset = period = 1;
+            }
+        }
+        return ((long) (suffix + 1) << Integer.SIZE) | (period & 0xffff_ffffL);
+    }
+
+    private static char needleUnit(String needle, int index, boolean backwards) {
+        return needle.charAt(backwards ? needle.length() - 1 - index : index);
+    }
+
+    private char searchUnit(byte[] flat, byte flatCoder, int length, int index,
+            boolean backwards) {
+        return charAt(flat, flatCoder, backwards ? length - 1 - index : index);
+    }
+
+    /** Crochemore-Perrin critical factorization: linear unit comparisons, constant scratch. */
+    private int twoWay(byte[] flat, byte flatCoder, int length, String needle, int first,
+            boolean backwards) {
+        int size = needle.length();
+        long normal = factor(needle, backwards, false);
+        long opposite = factor(needle, backwards, true);
+        long selected = (normal >>> Integer.SIZE) >= (opposite >>> Integer.SIZE)
+                ? normal : opposite;
+        int critical = (int) (selected >>> Integer.SIZE);
+        int period = (int) selected;
+        boolean periodic = period <= size - critical;
+        for (int index = 0; periodic && index < critical; index++) {
+            periodic = needleUnit(needle, index, backwards)
+                    == needleUnit(needle, index + period, backwards);
+        }
+        if (!periodic) period = Math.max(critical - 1, size - critical) + 1;
+
+        int memory = 0;
+        int position = first;
+        int limit = length - size;
+        while (position <= limit) {
+            int index = Math.max(critical, memory);
+            while (index < size && needleUnit(needle, index, backwards)
+                    == searchUnit(flat, flatCoder, length, position + index, backwards)) {
+                index++;
+            }
+            int shift;
+            if (index < size) {
+                shift = index - critical + 1;
+                memory = 0;
+            } else {
+                index = critical;
+                while (index > memory && needleUnit(needle, index - 1, backwards)
+                        == searchUnit(flat, flatCoder, length, position + index - 1, backwards)) {
+                    index--;
+                }
+                if (index <= memory) return position;
+                shift = period;
+                memory = periodic ? size - period : 0;
+            }
+            // Avoid overflow at the maximum legal StringBuilder length.
+            if (shift > limit - position) return -1;
+            position += shift;
+        }
+        return -1;
+    }
+
+    /**
+     * Reverse UTF-16 exactly as AbstractStringBuilder: existing high/low pairs stay together;
+     * unpaired units may form new pairs. Only one bounded scratch array is used. Each emitted
+     * String snapshots that scratch even when native admission declines. All allocations finish
+     * before publication, so a failure leaves the original builder and its payload untouched.
+     * This copies every logical unit; it does not allocate a whole-builder flat shadow.
+     */
+    void reverse(AbstractStringBuilder builder) {
+        int length = builder.count + units;
+        if (length < 2) return;
+        M3StringBuilderLane replacement = new M3StringBuilderLane(virtualCapacity);
+        replacement.state = state | (builder.coder == UTF16 ? UTF16_PIECE : 0);
+        char[] chunk = new char[Math.min(REVERSE_CHUNK_UNITS, length)];
+        int used = 0;
+        int index = length;
+        while (index > 0) {
+            char last = charAt(builder.value, builder.coder, --index);
+            boolean pair = Character.isLowSurrogate(last) && index > 0
+                    && Character.isHighSurrogate(charAt(builder.value, builder.coder, index - 1));
+            int needed = pair ? 2 : 1;
+            if (used > chunk.length - needed) {
+                String text = new String(chunk, 0, used);
+                replacement.push(text, 0, used, 0, builder.coder);
+                used = 0;
+            }
+            if (pair) chunk[used++] = charAt(builder.value, builder.coder, --index);
+            chunk[used++] = last;
+        }
+        if (used != 0) {
+            String text = new String(chunk, 0, used);
+            replacement.push(text, 0, used, 0, builder.coder);
+        }
+        builder.count = 0;
+        builder.m3Lane = replacement;
     }
 
     /** Stock capacity growth for a flat-buffer minimum, applied to the logical length. */
@@ -273,10 +429,8 @@ final class M3StringBuilderLane {
         return pieces;
     }
 
-    // M3NotYetReceived: piece-table middle edits (insert/delete/replace/setCharAt/reverse) over the
+    // M3NotYetReceived: piece-table middle edits (insert/delete/replace/setCharAt) over the
     //   lanes; donor naotsugu/piecetable PieceTableImpl (Apache-2.0, PORT). First cut: flatten.
-    // M3NotYetReceived: indexOf/lastIndexOf over pieces through the composite search gates
-    //   (S2 G25). First cut: flatten.
     // M3NotYetReceived: eager admission of the pending flat chunk at a chunk threshold.
     // M3NotYetReceived: append(AbstractStringBuilder) transfers the source pieces instead of copying.
 }

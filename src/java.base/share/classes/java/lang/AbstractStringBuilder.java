@@ -1636,7 +1636,10 @@ abstract sealed class AbstractStringBuilder implements Appendable, CharSequence
      *          or {@code -1} if there is no such occurrence.
      */
     public int indexOf(String str, int fromIndex) {
-        m3EnsureFlat(); // M3NotYetReceived: composite search gates over pieces (S2 G25)
+        M3StringBuilderLane lane = m3Lane;
+        if (lane != null) {
+            return lane.indexOf(value, coder, count, str, fromIndex, false);
+        }
         return String.indexOf(value, coder, count, str, fromIndex);
     }
 
@@ -1656,8 +1659,7 @@ abstract sealed class AbstractStringBuilder implements Appendable, CharSequence
      *          or {@code -1} if there is no such occurrence.
      */
     public int lastIndexOf(String str) {
-        m3EnsureFlat();
-        return lastIndexOf(str, count);
+        return lastIndexOf(str, length());
     }
 
     /**
@@ -1678,7 +1680,10 @@ abstract sealed class AbstractStringBuilder implements Appendable, CharSequence
      *          or {@code -1} if there is no such occurrence.
      */
     public int lastIndexOf(String str, int fromIndex) {
-        m3EnsureFlat();
+        M3StringBuilderLane lane = m3Lane;
+        if (lane != null) {
+            return lane.indexOf(value, coder, count, str, fromIndex, true);
+        }
         return String.lastIndexOf(value, coder, count, str, fromIndex);
     }
 
@@ -1705,7 +1710,11 @@ abstract sealed class AbstractStringBuilder implements Appendable, CharSequence
      * @return  a reference to this object.
      */
     public AbstractStringBuilder reverse() {
-        m3EnsureFlat(); // M3NotYetReceived: piece-table reverse
+        M3StringBuilderLane lane = m3Lane;
+        if (lane != null) {
+            lane.reverse(this);
+            return this;
+        }
         byte[] val = this.value;
         int count = this.count;
         int n = count - 1;
