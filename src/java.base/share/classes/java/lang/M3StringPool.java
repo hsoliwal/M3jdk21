@@ -1,5 +1,6 @@
 /*
  * Copyright (c) 2026, Hitesh Soliwal. All rights reserved.
+ * Modified 2026-11-15: share canonical immediate owners for eligible single-unit admission.
  * GPLv2 with the Classpath exception.
  */
 package java.lang;
@@ -510,8 +511,9 @@ final class M3StringPool {
     }
 
     /**
-     * Single-unit lane: bounded by construction (at most 65,536 distinct atoms, 128 KiB), so it is
-     * accounted but never refused; the callers inside M3String compositions rely on a non-null result.
+     * Single-unit lane: bounded by construction (at most 65,536 native atoms, 128 KiB), so its
+     * native form is accounted but never refused. Eligible Latin-1 units reuse the same immediate
+     * owners as array admission, without native payload. Compositions rely on a non-null result.
      */
     static M3String internUnit(char unit) {
         Lexicon active = lexicon;
@@ -524,6 +526,11 @@ final class M3StringPool {
                 String.COMPACT_STRINGS && StringLatin1.canEncode(unit)
                         ? String.LATIN1
                         : String.UTF16;
+        if (IMMEDIATE_STRINGS && coder == String.LATIN1) {
+            long packed = M3StringImmediate.TAG_LATIN1
+                    | (1L << M3StringImmediate.LATIN1_LENGTH_SHIFT) | unit;
+            return M3String.whole(M3StringImmediate.of(packed));
+        }
         int byteLength = 1 << coder;
         long hash64 = mix64(0x9e3779b97f4a7c15L ^ coder ^ Integer.toUnsignedLong(byteLength));
         hash64 = mix64(hash64 ^ unit);

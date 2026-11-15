@@ -39,7 +39,12 @@ public final class M3RX7Codec {
 
     /** Decode exact version-7 bytes after taking an independent bounded snapshot. */
     public static M3RX7Image.Precomputed decodePrecomputed(byte[] encoded) {
-        byte[] bytes = Objects.requireNonNull(encoded, "encoded").clone();
+        // Modified 2026-11-15: reject invalid byte geometry before the defensive copy.
+        Objects.requireNonNull(encoded, "encoded");
+        if (encoded.length < HEADER_BYTES || encoded.length > MAX_EXECUTION_BYTES) {
+            throw new IllegalArgumentException("RX7 v7 image byte geometry");
+        }
+        byte[] bytes = encoded.clone();
         return decodePrecomputed(ByteBuffer.wrap(bytes));
     }
 

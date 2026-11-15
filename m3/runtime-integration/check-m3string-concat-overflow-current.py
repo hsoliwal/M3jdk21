@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 # SPDX-License-Identifier: Apache-2.0
 # Copyright 2026 Hitesh Soliwal and contributors.
+# Modified 2026-11-15: reconcile canonical Pool and workflow qualification seals.
 """Fail-closed current-tree JDK21 M3 String concat size-limit and jtreg handoff proof.
 
 This is a read-only target receiver proof, not a new canonical recipe engine.
@@ -17,11 +18,11 @@ POOL = "src/java.base/share/classes/java/lang/M3StringPool.java"
 JTREG = "test/jdk/java/lang/String/M3StringConcatLengthOverflowTest.java"
 WORKFLOW = ".github/workflows/mindex-string-backing.yml"
 DIGESTS = {
-    POOL: "3ebe07554c2ad5a9018e5c11e0b944611e2cede43b70094afbcee6db16b2feb6",
+    POOL: "f88617254d47f00ee66f9ed41d6d723336d7c1f64c20cab3e64e0a9a914798f6",
     JTREG: "a07590946ce9330772bb30a21dc35f1f1da0b87b671fdcf30c8630db33a91ac3",
-    WORKFLOW: "91beb0a47d7dcb51a2b8f09fd73a441b5187fbdeb8498eebbae33218790ee72a",
+    WORKFLOW: "1f0841caaa895f304e9034146ba32d4f0e42f2ea973434cef7700b28dd1da410",
 }
-JTREG_SELECTORS = 48
+JTREG_SELECTORS = 53
 GUARD = (
     "if ((long) left.length() + right.length() > Integer.MAX_VALUE) {\n"
     '            throw new OutOfMemoryError("Required length exceeds implementation limit");\n'

@@ -9,6 +9,16 @@
  * @run main/othervm -Xint -Xcheck:jni M3RX7CodecTest
  */
 
+// Modified 2026-11-15: cover pre-copy geometry and the inclusive RX7 image limit.
+/*
+ * @test id=byteArrayBounds
+ * @summary Reject oversized RX7 images before copying while preserving the inclusive limit
+ * @requires vm.gc.G1
+ * @modules java.base/jdk.internal.mindex
+ * @run main/othervm -Xmx128m -XX:+UseG1GC M3RX7CodecTest oversized
+ * @run main/othervm -Xmx256m -XX:+UseG1GC M3RX7CodecTest limit
+ */
+
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.nio.ByteBuffer;
@@ -29,9 +39,42 @@ public class M3RX7CodecTest {
     private static final int V4 = 4;
     private static final int V5 = 5;
     private static final int V7 = 7;
+    private static final int MAX_IMAGE_BYTES = 64 * 1024 * 1024;
+    private static volatile byte[] oversizedInput;
     private static int checks;
 
     public static void main(String[] args) throws Exception {
+        if (args.length != 0) {
+            check(args.length == 1, "one bounded-memory mode");
+            if (args[0].equals("oversized")) {
+                // One input fits this VM; an attempted whole-array clone does not.
+                oversizedInput = new byte[MAX_IMAGE_BYTES + 1];
+                expectMessage(IllegalArgumentException.class, "RX7 v7 image byte geometry",
+                        () -> M3RX7Codec.decodePrecomputed(oversizedInput));
+                check(oversizedInput.length == MAX_IMAGE_BYTES + 1, "input remains caller-owned");
+            } else if (args[0].equals("limit")) {
+                for (int length : new int[] {MAX_IMAGE_BYTES - 1, MAX_IMAGE_BYTES}) {
+                    byte[] atLimit = new byte[length];
+                    // Bad magic proves the byte geometry admitted both inclusive boundaries.
+                    expectMessage(IllegalArgumentException.class, "RX7 image magic",
+                            () -> M3RX7Codec.decodePrecomputed(atLimit));
+                }
+            } else {
+                throw new AssertionError("unknown bounded-memory mode " + args[0]);
+            }
+            System.out.println("M3RX7CodecTest " + args[0] + " checks=" + checks + " PASS");
+            return;
+        }
+        expectMessage(NullPointerException.class, "encoded",
+                () -> M3RX7Codec.decodePrecomputed((byte[]) null));
+        expectMessage(NullPointerException.class, "encoded",
+                () -> M3RX7Codec.decodePrecomputed((ByteBuffer) null));
+        for (int length : new int[] {0, 1, 43}) {
+            expectMessage(IllegalArgumentException.class, "RX7 v7 image byte geometry",
+                    () -> M3RX7Codec.decodePrecomputed(new byte[length]));
+        }
+        expectMessage(IllegalArgumentException.class, "RX7 image magic",
+                () -> M3RX7Codec.decodePrecomputed(new byte[44]));
         byte[] wire = v7("ab+", false, goodTransitions(), new byte[] {0, 0, 1});
         String root = sha256(wire);
 
@@ -281,6 +324,18 @@ public class M3RX7CodecTest {
             action.run();
         } catch (Throwable thrown) {
             if (type.isInstance(thrown)) return;
+            throw new AssertionError("wrong refusal " + thrown, thrown);
+        }
+        throw new AssertionError("missing refusal " + type.getName());
+    }
+
+    private static void expectMessage(Class<? extends Throwable> type, String message,
+            Throwing action) throws Exception {
+        checks++;
+        try {
+            action.run();
+        } catch (Throwable thrown) {
+            if (type.isInstance(thrown) && message.equals(thrown.getMessage())) return;
             throw new AssertionError("wrong refusal " + thrown, thrown);
         }
         throw new AssertionError("missing refusal " + type.getName());

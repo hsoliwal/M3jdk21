@@ -1,4 +1,6 @@
+// SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
 // SPDX-License-Identifier: Apache-2.0
+// Modified 2026-11-15: account for unrelated M3 owners and fill the actual native lane.
 /*
  * @test
  * @summary Pool bounds: the VM-local native byte budget is reserved at admission and released
@@ -17,6 +19,7 @@
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
+import java.lang.ref.Reference;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.nio.charset.StandardCharsets;
@@ -24,6 +27,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 import java.util.function.BooleanSupplier;
 
@@ -54,6 +58,12 @@ public class M3StringPoolBoundsTest {
     private static Field lexiconFailureReported;
     private static Field owner;
     private static Field stringM3;
+    private static Map<?, ?> localOwners;
+    private static Field bucketValues;
+    private static Field retainedBytes;
+    private static Field released;
+    private static Method atomBytes;
+    private static Method atomEquals;
 
     /** Strong holds that must not live in any test frame (the back-pressure proof drops them). */
     private static Object hold;
@@ -99,6 +109,16 @@ public class M3StringPoolBoundsTest {
         flagOn = (boolean) accessible(m3.getDeclaredField("ready")).get(null);
         maxLocalBytes = (long) accessible(pool.getDeclaredField("MAX_LOCAL_BYTES")).get(null);
         maxRetainedTuples = (long) accessible(pool.getDeclaredField("MAX_RETAINED_TUPLES")).get(null);
+        Class<?> atom = Class.forName("java.lang.M3StringAtom");
+        Class<?> bucket = Class.forName("java.lang.M3StringPool$LocalBucket");
+        Class<?> reference = Class.forName("java.lang.M3StringPool$LocalRef");
+        localOwners = (Map<?, ?>) accessible(pool.getDeclaredField("LOCAL")).get(null);
+        bucketValues = accessible(bucket.getDeclaredField("values"));
+        retainedBytes = accessible(reference.getDeclaredField("retainedBytes"));
+        released = accessible(reference.getDeclaredField("released"));
+        atomBytes = accessible(atom.getDeclaredMethod("nativePayloadBytes"));
+        atomEquals = accessible(atom.getDeclaredMethod("contentEquals",
+                char[].class, int.class, int.class, byte.class));
     }
 
     /** Property parsing and the effective bounds (MaxDirectMemorySize semantics). */
@@ -161,14 +181,18 @@ public class M3StringPoolBoundsTest {
 
         armSlowPath();
         long started = System.nanoTime();
-        Object refused = intern(latin1Chars(0x5232, length));
+        char[] refusedSource = latin1Chars(0x5232, length);
+        Object refused = intern(refusedSource);
         long elapsedMillis = (System.nanoTime() - started) / 1_000_000L;
         check(refused == null, "over budget: admission refused with null, not thrown");
-        check(bytes() == afterHold, "a refused admission leaves the accounting untouched");
+        checkRefusedAccounting(afterHold, length, refusedSource,
+                "a refused admission leaves the accounting untouched");
         check(nextSlowReserveNanos.getLong(null) - System.nanoTime() > 0L, "a failed cycle arms the hold-off");
         System.out.println("refusal: GC-assisted cycle refused after " + elapsedMillis + " ms");
-        check(intern(latin1Chars(0x5233, length)) == null, "held off: refused again without a cycle");
-        check(bytes() == afterHold, "held-off refusal leaves the accounting untouched");
+        char[] heldOffSource = latin1Chars(0x5233, length);
+        check(intern(heldOffSource) == null, "held off: refused again without a cycle");
+        checkRefusedAccounting(afterHold, length, heldOffSource,
+                "held-off refusal leaves the accounting untouched");
         check(internUnit.invoke(null, 'é') != null, "the unit lane never refuses");
 
         Object oversized = intern(latin1Chars(0x5234, (int) Math.min(Integer.MAX_VALUE - 8L, maxLocalBytes + 1L)));
@@ -181,6 +205,62 @@ public class M3StringPoolBoundsTest {
         checkDelta(bytes() - before, length, "the reclaimed bytes were handed to the new atom");
         admitted = null;
         check(gcUntil(() -> bytesQuiet() <= before + (flagOn ? NOISE : 0L)), "refusal proof cleaned up");
+    }
+
+    /**
+     * The M3-on VM may admit unrelated JVM method-descriptor Strings during reference
+     * processing. A refused spelling must add no owner or untracked reservation, while
+     * the live held atom keeps its exact allocation. The M3-off lane retains the
+     * original strict total-byte equality; neither lane uses a noise tolerance here.
+     */
+    private static void checkRefusedAccounting(
+            long previousBytes, int heldBytes, char[] refusedSource, String message) throws Exception {
+        if (!flagOn) {
+            check(bytes() == previousBytes, message);
+            return;
+        }
+        Object heldOwner = owner.get(hold);
+        check((long) atomBytes.invoke(heldOwner) == heldBytes,
+                "held owner keeps its exact native allocation");
+        long lastCounter = -1L;
+        long lastSum = -1L;
+        for (int attempt = 0; attempt < 100; attempt++) {
+            long before = bytes();
+            long sum = 0L;
+            int heldReferences = 0;
+            for (Object bucket : localOwners.values()) {
+                synchronized (bucket) {
+                    for (Object entry : (List<?>) bucketValues.get(bucket)) {
+                        if (released.getBoolean(entry)) continue;
+                        long allocation = retainedBytes.getLong(entry);
+                        sum = Math.addExact(sum, allocation);
+                        Object atom = ((Reference<?>) entry).get();
+                        if (atom == heldOwner) {
+                            heldReferences++;
+                            check(allocation == heldBytes,
+                                    "held reference accounts its exact native bytes");
+                        }
+                        if (atom != null) {
+                            check(!(boolean) atomEquals.invoke(atom,
+                                            refusedSource, 0, refusedSource.length, (byte) 0),
+                                    "refused spelling retains no native owner");
+                            Reference.reachabilityFence(atom);
+                        }
+                    }
+                }
+            }
+            long after = bytes();
+            lastCounter = after;
+            lastSum = sum;
+            if (before == after && sum == after) {
+                check(heldReferences == 1, "held owner has one live native accounting record");
+                check(sum <= maxLocalBytes, "all retained native bytes remain within the budget");
+                return;
+            }
+            Thread.yield();
+        }
+        throw new AssertionError("native accounting does not match retained owners: "
+                + lastCounter + " vs " + lastSum);
     }
 
     /** Beyond the cap a composition still forms a correct tuple, just without canonical retention. */
@@ -343,8 +423,15 @@ public class M3StringPoolBoundsTest {
         int seed = 0x6000;
         for (int size : new int[] {1 << 20, 1 << 16, 1 << 12, 256, 16, 4}) {
             for (int attempts = 0; attempts < 64; attempts++) {
-                Object junk = intern(latin1Chars(seed++, size));
+                // Short Latin-1 text is immediate and reserves no native bytes.
+                // Two non-Latin-1 units keep the final four-byte filler in the native lane.
+                char[] payload = size == 4
+                        ? new char[] {'\u0100', (char) seed++}
+                        : latin1Chars(seed++, size);
+                Object junk = intern(payload);
                 if (junk == null) break;
+                check((long) atomBytes.invoke(owner.get(junk)) == size,
+                        "budget filler has the exact native byte size");
                 HOLDS.add(junk);
             }
         }
