@@ -61,7 +61,7 @@ jobs:
         run: |
           set -euo pipefail
           test "$(git hash-object src/jdk.m3.collections/share/classes/jdk/m3/collections/apache/M3NodeCachingLinkedList.java)" = "0639e6a9a0f4ef6c8d697ae1fa90f7a9542d15b9"
-          test "$(git hash-object src/jdk.m3.collections/share/classes/jdk/m3/collections/apache/M3TreeList.java)" = "9da0a6ad147c423a0cfa718a8159890cc2c25977"
+          test "$(git hash-object src/jdk.m3.collections/share/classes/jdk/m3/collections/apache/M3TreeList.java)" = "ab861ce0c29d53080b54117414a4ba8486b1c58e"
           test "$(git hash-object src/jdk.m3.collections/share/classes/jdk/m3/collections/apache/M3ArrayStack.java)" = "fc253468efae015e37bfd68ad0195e106e8222f5"
           build="$RUNNER_TEMP/m3jdk-collection-array-owners"
           mkdir -p "$build/javadoc"
