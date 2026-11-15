@@ -75,6 +75,32 @@ static uint64_t m3_mask_window(jlong bits, jint index, jint first_word,
     return word;
 }
 
+/* Peel the two window boundaries once. Interior words have no clipping
+ * work; population, JNI read order and bounded scratch remain unchanged. */
+static jint m3_mask_block_population(const jlong *input, jint block, jsize length,
+                                     jint first_word, jint last_word,
+                                     jint from, jint to) {
+    jint count = 0;
+    jint offset = 0;
+    jsize limit = length;
+    if (block == first_word) {
+        count += m3_mask_population(m3_mask_window(input[0], block,
+                first_word, last_word, from, to));
+        offset = 1;
+    }
+    if (block + length - 1 == last_word) {
+        limit--;
+    }
+    for (; offset < limit; offset++) {
+        count += m3_mask_population((uint64_t)input[offset]);
+    }
+    if (offset < length) {
+        count += m3_mask_population(m3_mask_window(input[offset], block + offset,
+                first_word, last_word, from, to));
+    }
+    return count;
+}
+
 JNIEXPORT jintArray JNICALL
 Java_java_util_M3CollectionMasks_selected0(JNIEnv *env, jclass type,
                                           jlongArray words, jint from, jint to) {
@@ -113,18 +139,13 @@ Java_java_util_M3CollectionMasks_selected0(JNIEnv *env, jclass type,
         jint remaining = last_word - block + 1;
         jsize length = remaining < M3_MASK_WORD_CHUNK
                 ? remaining : M3_MASK_WORD_CHUNK;
-        jint offset;
         (*env)->GetLongArrayRegion(env, words, block, length, input);
         if ((*env)->ExceptionCheck(env)) {
             return NULL;
         }
-        for (offset = 0; offset < length; offset++) {
-            uint64_t word = m3_mask_window(input[offset], block + offset,
-                    first_word, last_word, from, to);
-            /* Each selected position lies in an int-sized half-open window,
-             * so the count cannot overflow a jint. */
-            count += m3_mask_population(word);
-        }
+        /* Every selected position lies in an int-sized half-open window. */
+        count += m3_mask_block_population(input, block, length,
+                first_word, last_word, from, to);
         block += length;
     }
 
@@ -143,15 +164,12 @@ Java_java_util_M3CollectionMasks_selected0(JNIEnv *env, jclass type,
             jint remaining = last_word - block + 1;
             jsize length = remaining < M3_MASK_WORD_CHUNK
                     ? remaining : M3_MASK_WORD_CHUNK;
-            jint offset;
             (*env)->GetLongArrayRegion(env, words, block, length, input);
             if ((*env)->ExceptionCheck(env)) {
                 return NULL;
             }
-            for (offset = 0; offset < length; offset++) {
-                observed += m3_mask_population(m3_mask_window(input[offset],
-                        block + offset, first_word, last_word, from, to));
-            }
+            observed += m3_mask_block_population(input, block, length,
+                    first_word, last_word, from, to);
             block += length;
         }
         if (observed != count) {

@@ -346,6 +346,16 @@ public class EnumMap<K extends Enum<K>, V> extends AbstractMap<K, V>
                 throw new ClassCastException(em.keyType + " != " + keyType);
             }
 
+            if (em.size == 0)
+                return;
+            if (size == 0) {
+                // Retain the destination array so existing views and weak
+                // iterators observe the same storage, including null values.
+                System.arraycopy(em.vals, 0, vals, 0, vals.length);
+                size = em.size;
+                return;
+            }
+
             for (int i = 0; i < keyUniverse.length; i++) {
                 Object emValue = em.vals[i];
                 if (emValue != null) {

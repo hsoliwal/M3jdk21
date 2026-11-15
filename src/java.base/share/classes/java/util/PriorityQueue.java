@@ -1,4 +1,5 @@
 /*
+ * Copyright (c) 2026, Hitesh Soliwal and contributors.
  * Copyright (c) 2003, 2019, Oracle and/or its affiliates. All rights reserved.
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
  *
@@ -948,10 +949,25 @@ public class PriorityQueue<E> extends AbstractQueue<E>
                 setBit(deathRow, i - beg);
         if (modCount != expectedModCount)
             throw new ConcurrentModificationException();
+        // A single removal leaves a contiguous suffix that can be moved in bulk.
+        boolean single = end - beg >= Long.SIZE && deathRow[0] == 1L;
+        if (single) {
+            for (int word = 1; word < deathRow.length; word++) {
+                if (deathRow[word] != 0L) {
+                    single = false;
+                    break;
+                }
+            }
+        }
         int w = beg;
-        for (i = beg; i < end; i++)
-            if (isClear(deathRow, i - beg))
-                es[w++] = es[i];
+        if (single) {
+            System.arraycopy(es, beg + 1, es, beg, end - beg - 1);
+            w = end - 1;
+        } else {
+            for (i = beg; i < end; i++)
+                if (isClear(deathRow, i - beg))
+                    es[w++] = es[i];
+        }
         for (i = size = w; i < end; i++)
             es[i] = null;
         heapify();

@@ -525,6 +525,29 @@ public class IdentityHashMap<K,V>
         if (n > size)
             resize(capacity(n)); // conservatively pre-expand
 
+        // Subclasses may expose a different entrySet; only the exact owner
+        // can transfer directly from its canonical alternating key/value array.
+        if (m.getClass() == IdentityHashMap.class) {
+            IdentityHashMap<?, ?> source = (IdentityHashMap<?, ?>) m;
+            int expectedModCount = source.modCount;
+            Object[] sourceTable = source.table;
+            for (int i = 0; i < sourceTable.length; i += 2) {
+                Object key = sourceTable[i];
+                if (key != null) {
+                    // Match iterator.next(): check only when another mapping
+                    // remains, including after a destination put callback.
+                    if (source.modCount != expectedModCount)
+                        throw new ConcurrentModificationException();
+                    @SuppressWarnings("unchecked")
+                    K k = (K) unmaskNull(key);
+                    @SuppressWarnings("unchecked")
+                    V value = (V) sourceTable[i + 1];
+                    put(k, value);
+                }
+            }
+            return;
+        }
+
         for (Entry<? extends K, ? extends V> e : m.entrySet())
             put(e.getKey(), e.getValue());
     }
