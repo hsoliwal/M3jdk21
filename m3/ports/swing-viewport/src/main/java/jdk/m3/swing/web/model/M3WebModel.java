@@ -183,7 +183,7 @@ public abstract class M3WebModel extends M3WebView {
 			return;
 		}
 		emit(p);
-		if (focus >= 0 && focus < count && (widgetFlags & FOCUS) != 0) {
+		if (focus >= 0 && focus < count && (widgetFlags & FOCUS) != 0 && (flags[focus] & HIDDEN) == 0) {
 			int b = focus * 4;
 			p.roundLine(rects[b] - 2, rects[b + 1] - 2, rects[b + 2] + 4, rects[b + 3] + 4, radius() + 2, theme.slot(M3WebTheme.ACCENT));
 		}
