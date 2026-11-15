@@ -1,6 +1,8 @@
 /*
  * Copyright (c) 2008, 2023, Oracle and/or its affiliates. All rights reserved.
  * Copyright (c) 2026, Hitesh Soliwal and contributors. All rights reserved.
+ * Modified 2026-11-15 by Hitesh Soliwal and contributors: preserve the POSIX
+ * error-string ABI when compiling against Android Bionic.
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
  *
  * This code is free software; you can redistribute it and/or modify it
@@ -41,6 +43,17 @@
 #include "dlfcn.h"
 
 #if defined(LINUX) && !defined(__ANDROID__) && (defined(_GNU_SOURCE) || \
+#if defined(__BIONIC__)
+/*
+ * Bionic keeps the POSIX function at the strerror_r symbol. With GNU features
+ * enabled since API 23, string.h redirects strerror_r to __gnu_strerror_r,
+ * whose pointer result would change getErrorString's integer status contract.
+ */
+#if defined(__USE_GNU) && __ANDROID_API__ >= 23
+extern int posix_strerror_r(int, char *, size_t) __asm__("strerror_r");
+#define strerror_r(a, b, c) posix_strerror_r((a), (b), (c))
+#endif
+#elif defined(LINUX) && (defined(_GNU_SOURCE) || \
          (defined(_POSIX_C_SOURCE) && _POSIX_C_SOURCE < 200112L \
              && defined(_XOPEN_SOURCE) && _XOPEN_SOURCE < 600))
 extern int __xpg_strerror_r(int, char *, size_t);

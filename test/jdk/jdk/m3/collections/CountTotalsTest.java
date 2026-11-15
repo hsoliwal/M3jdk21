@@ -22,7 +22,12 @@ final class CountTotalsTest {
         String library = System.getProperty("m3.totals.native");
         if (library == null && Boolean.getBoolean("m3.test.native.required")) fail("native verification is required, never skipped");
         nativeLoaded = library != null;
-        if (nativeLoaded) System.load(library);
+        if (nativeLoaded) {
+            String countedLibrary = System.getProperty("m3.counted.native");
+            assertNotNull(countedLibrary, "CountTotalsTest requires the real m3.counted.native library");
+            System.load(countedLibrary);
+            System.load(library);
+        }
     }
     @Test void bagTotalsMatchMaterializedAlgebraAndIndependentFrequencyOracle() {
         for (int seed = 0; seed < 32; seed++) {

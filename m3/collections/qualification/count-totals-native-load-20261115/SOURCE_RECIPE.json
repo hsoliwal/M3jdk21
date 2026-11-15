@@ -1,0 +1,42 @@
+{
+  "schema": "m3.count-totals-source-recipe-reference/v1",
+  "canonical": {
+    "repository": "hsoliwal/com.synexia",
+    "commit": "3de8e93f06012cc5b2ec022a0f48f8b3c632f340",
+    "PR": 17262,
+    "crate": "synexia-openrewrite-recipes/recipe-crates/count-totals-native-load-20261113",
+    "resource": "src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-count-totals-native-load-20261113/000-CountTotalsTest.java.txt",
+    "recipeClass": "com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe",
+    "crateName": "m3-count-totals-native-load-20261113"
+  },
+  "target": {
+    "path": "test/jdk/jdk/m3/collections/CountTotalsTest.java",
+    "beforeGitBlob": "32aec61f979a98d0af3e93939dcb3c35b29f371a",
+    "afterGitBlob": "a6b81748ff0337e56f1a15f993246c1383adb8ed",
+    "afterSHA256": "e092c7160e4b8f6791c26e95f018c5ee23099a1db181b088073d7b9bdb477cf6"
+  },
+  "historicalProofs": {
+    "Maven": {
+      "gitBlob": "9f649e2c0b9ddc3009eb48ecd013b995041ca39e",
+      "status": "PASS_9_RECIPE_CONTRACTS"
+    },
+    "freshReplay": {
+      "gitBlob": "08d974bb9bfd01d8b5bc4a6398153187b5932f57",
+      "status": "PASS_25_INPUTS_UNCHANGED_9_CONTRACTS"
+    },
+    "nativeMatrix": {
+      "gitBlob": "286f0b3c769da124438b5f29f29293f8d65291fd",
+      "scope": "Nine Windows JVM cases against its pinned source closure only"
+    }
+  },
+  "currentQualification": {
+    "receiverBase": "01ba37e384edd4b26fd649983b592a9ebcde3545",
+    "runtime": "NOT_RUN",
+    "LongLongHashMapChanged": true,
+    "installedSourceCustody": "SEALED_SUCCESSOR_TRANSITION_PENDING_KEEP_GUARD",
+    "note": "The exact recipe output is reused. Historical native results do not qualify the current changed map closure.",
+    "selectedInputsVsPriorMaster": "12 of12 unchanged; historical map/CMake differences remain"
+  },
+  "phaseAdvance": false,
+  "sourceGenerationCalls": 0
+}

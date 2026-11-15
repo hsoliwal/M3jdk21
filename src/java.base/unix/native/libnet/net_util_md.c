@@ -1,6 +1,8 @@
 /*
  * Copyright (c) 1997, 2023, Oracle and/or its affiliates. All rights reserved.
  * Copyright (c) 2026, Hitesh Soliwal and contributors. All rights reserved.
+ * Modified 2026-11-15 by Hitesh Soliwal and contributors: detect IPv6 on
+ * Android without requiring access to restricted procfs network files.
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
  *
  * This code is free software; you can redistribute it and/or modify it
@@ -131,6 +133,7 @@ jint  IPv6_supported()
      * Don't need to parse the line - we just need an indication.
      * Android applications cannot rely on access to /proc/net. The socket
      * and API probes still determine whether IPv6 is usable on Android.
+     * Android restricts access to /proc/net; use the socket and API probes.
      */
 #if defined(__linux__) && !defined(__ANDROID__)
     {

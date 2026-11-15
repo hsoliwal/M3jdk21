@@ -3,6 +3,7 @@
  * Modified 2026-11-15: preserve Bionic integer typedefs in the private statx layout.
  * Copyright (c) 2026, Oracle and/or its affiliates. All rights reserved.
  * Copyright (c) 2026, Hitesh Soliwal and Contributors to the Synexia Project.
+ * Modified 2026-11-15: use Android futimens for descriptor timestamps when futimesat is absent.
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
  *
  * This code is free software; you can redistribute it and/or modify it
@@ -497,11 +498,18 @@ Java_sun_nio_fs_UnixNativeDispatcher_init(JNIEnv* env, jclass this)
     futimesAvailable = futimesAvailable || my_futimens_func != NULL;
 #endif
 
+    int supports_futimes = (my_futimesat_func != NULL);
+#ifdef __ANDROID__
+    // Android has futimens before futimesat (API 26).
+    supports_futimes |= (my_futimens_func != NULL);
+#endif
+
 #ifdef _ALLBSD_SOURCE
     capabilities |= sun_nio_fs_UnixNativeDispatcher_SUPPORTS_FUTIMES;
     capabilities |= sun_nio_fs_UnixNativeDispatcher_SUPPORTS_LUTIMES;
 #else
     if (futimesAvailable)
+    if (supports_futimes)
         capabilities |= sun_nio_fs_UnixNativeDispatcher_SUPPORTS_FUTIMES;
     if (my_lutimes_func != NULL)
         capabilities |= sun_nio_fs_UnixNativeDispatcher_SUPPORTS_LUTIMES;
@@ -514,6 +522,7 @@ Java_sun_nio_fs_UnixNativeDispatcher_init(JNIEnv* env, jclass this)
     if (my_openat64_func != NULL &&  my_fstatat64_func != NULL &&
         my_unlinkat_func != NULL && my_renameat_func != NULL &&
         futimesAvailable && my_fdopendir_func != NULL)
+        supports_futimes && my_fdopendir_func != NULL)
     {
         capabilities |= sun_nio_fs_UnixNativeDispatcher_SUPPORTS_OPENAT;
     }
@@ -1026,6 +1035,12 @@ Java_sun_nio_fs_UnixNativeDispatcher_futimes0(JNIEnv* env, jclass this, jint fil
         nanos[1].tv_sec = times[1].tv_sec;
         nanos[1].tv_nsec = times[1].tv_usec * 1000;
         RESTARTABLE((*my_futimens_func)(filedes, &nanos[0]), err);
+        struct timespec times2[2];
+        times2[0].tv_sec = times[0].tv_sec;
+        times2[0].tv_nsec = times[0].tv_usec * 1000;
+        times2[1].tv_sec = times[1].tv_sec;
+        times2[1].tv_nsec = times[1].tv_usec * 1000;
+        RESTARTABLE((*my_futimens_func)(filedes, &times2[0]), err);
 #endif
     } else {
         JNU_ThrowInternalError(env, "my_futimesat_func is NULL");

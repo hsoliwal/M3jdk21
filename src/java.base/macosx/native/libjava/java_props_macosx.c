@@ -21,6 +21,9 @@
  * Please contact Oracle, 500 Oracle Parkway, Redwood Shores, CA 94065 USA
  * or visit www.oracle.com if you need additional information or have any
  * questions.
+ *
+ * Modified 2026-11-15 by Hitesh Soliwal and Contributors to the Synexia
+ * Project: validate Apple locale conversion and bound region completion.
  */
 
 #include <sys/socket.h>
@@ -93,8 +96,11 @@ char *getMacOSXLocale(int cat) {
                 languageString + langStrLen - hyphenPos == 5) { // ISO639-ScriptCode, e.g., "en-Latn"
                 CFLocaleRef cflocale = CFLocaleCopyCurrent();
                 if (cflocale != NULL) {
-                    CFStringGetCString(CFLocaleGetIdentifier(cflocale),
-                                   localeString, LOCALEIDLENGTH, CFStringGetSystemEncoding());
+                    if (!CFStringGetCString(CFLocaleGetIdentifier(cflocale),
+                                   localeString, LOCALEIDLENGTH, CFStringGetSystemEncoding())) {
+                        CFRelease(cflocale);
+                        return NULL;
+                    }
                     char *underscorePos = strrchr(localeString, '_');
                     char *region = NULL;
 
@@ -103,8 +109,14 @@ char *getMacOSXLocale(int cat) {
                     }
 
                     if (region != NULL) {
-                        strcat(languageString, "-");
-                        strcat(languageString, region);
+                        size_t regionLength = strlen(region);
+                        if (regionLength == 0 ||
+                            regionLength >= sizeof(languageString) - (size_t)langStrLen - 1) {
+                            CFRelease(cflocale);
+                            return NULL;
+                        }
+                        languageString[langStrLen] = '-';
+                        memcpy(languageString + langStrLen + 1, region, regionLength + 1);
                     }
                     CFRelease(cflocale);
                 }
@@ -140,7 +152,8 @@ char *getMacOSXLocale(int cat) {
         if (rmAt != NULL) {
             *rmAt = '\0';
         }
-        return strdup(convertToPOSIXLocale(retVal));
+        const char *posixLocale = convertToPOSIXLocale(retVal);
+        return posixLocale == NULL ? NULL : strdup(posixLocale);
     }
 
     return NULL;
@@ -163,7 +176,7 @@ char *getMacOSXLocale(int cat) {
 const char * convertToPOSIXLocale(const char* src) {
     char* scriptRegion = strchr(src, '-');
     if (scriptRegion != NULL) {
-        int length = strlen(scriptRegion);
+        size_t length = strlen(scriptRegion);
         char* region = strchr(scriptRegion + 1, '-');
         char* atMark = NULL;
 
@@ -172,11 +185,43 @@ const char * convertToPOSIXLocale(const char* src) {
             region = strchr(scriptRegion + 1, '_');
         }
 
+        // Validate the complete shape before mutating or moving any characters.
+        // CoreFoundation data is external metadata, including on failure paths.
+        int regionLength = 0;
+        const char *regionCode = NULL;
+        if (length == 3 || length == 4) {
+            regionCode = scriptRegion + 1;
+            regionLength = (int)length - 1;
+        } else if (length == 5 || length == 8 || length == 9) {
+            for (int i = 1; i <= 4; i++) {
+                char c = scriptRegion[i];
+                if (!((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z'))) {
+                    return NULL;
+                }
+            }
+            if (length != 5) {
+                if (region != scriptRegion + 5) {
+                    return NULL;
+                }
+                regionCode = region + 1;
+                regionLength = (int)length - 6;
+            }
+        } else {
+            return NULL;
+        }
+        for (int i = 0; i < regionLength; i++) {
+            char c = regionCode[i];
+            if (regionLength == 2 ?
+                !((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z')) :
+                !(c >= '0' && c <= '9')) {
+                return NULL;
+            }
+        }
+
         *scriptRegion = '_';
         if (length > 5) {
             // Region and script both exist.
             char tmpScript[4];
-            int regionLength = length - 6;
             atMark = scriptRegion + 1 + regionLength;
             memcpy(tmpScript, scriptRegion + 1, 4);
             memmove(scriptRegion + 1, region + 1, regionLength);
