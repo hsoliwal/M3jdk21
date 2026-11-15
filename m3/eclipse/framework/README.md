@@ -6,7 +6,7 @@ This is an **additive, read-only indexed forwarding layer**, not a full rewrite 
 framework. Original Eclipse extension/OSGi/resources services retain authority, identity,
 extension execution, notifications, classloaders, bundle lifecycle, and workspace semantics.
 
-The existing `com.m3.collections` owners provide the implementation mechanics:
+The existing `jdk.m3.collections` owners provide the implementation mechanics:
 `M3ObjectStateSlots28` for compact state masks, `M3SlotAllocator28` for generation-safe
 physical positions, `M3LongArrayList` for parent/handle offset planes,
 `M3LongLongHashMap` for primitive ID-to-handle lookup, and existing dense array
@@ -24,25 +24,33 @@ factories for references. No per-element map Entry or alternative scheduler is i
 - `M3EclipseIndexedSnapshot<T>`: shared internal primitive handle/reference bridge.
   Nothing here owns a second object graph or Eclipse runtime service.
 
-## Build & verification (Java21)
+## Build from a fork (JDK 21)
+From the repository root, use the existing Maven reactor:
 ```sh
-mvn -B -f m3/eclipse/framework/recipe/pom.xml test
-mvn -B -f m3/eclipse/framework/pom.xml verify
+mvn -B -ntp -f m3/pom.xml -pl :m3-eclipse-framework-forward -am -Peclipse-osgi -DforkCount=1 -DreuseForks=true clean verify
 ```
-Install `com.m3:m3-collections:0.1.0-SNAPSHOT` first, or run the exact-head workflow,
-which compiles the existing unchanged core and installs a thin Maven artifact.
+Maven builds arrays, collections and the Eclipse forwarder in dependency order.
+The two provider builds attach an `osgi` classifier; their ordinary modular
+JARs retain their original coordinates and contents. The forwarder is already
+an OSGi bundle. Install the two classified bundles and the forwarder in an Eclipse
+runtime that supplies Core Resources, Core Runtime, Equinox Registry and OSGi.
+One reusable Surefire JVM per project bounds parallelism. There is no local
+installation or nested Maven invocation. An offline build needs a prepared cache.
 
-Source files are byte-identical to eight SHA-256-sealed ABSENT-before templates in
-canonical Synexia recipe `com.synexia.rewrite.M3EclipseFrameworkIndexForward`,
-`hsoliwal/com.synexia#12154`. Two JUnit test classes cover 6 families of
-adversarial cases, including bundle ID zero, Long.MAX_VALUE, duplicate bundle IDs,
-extension invalidation, bounded delta walks, cycles and a 2049-node deep delta.
-The isolated Java21 stub-API run passed all six tests. **Real Eclipse/M3 Maven
-build and OSGi runtime proof are separate, mandatory gates**; no unexecuted
-GitHub Actions job establishes qualification.
+For Spring Dynamic Modules or Eclipse Gemini Blueprint, provision a compatible
+extender and its dependencies in the framework. A Spring application bundle
+imports the exported package or service API through OSGi. Keep its manifest,
+`META-INF/spring/` or `OSGI-INF/blueprint/` descriptors and bundle class loader.
+Neither a classifier nor an XML descriptor starts a Spring application context.
+JMODs are link-time inputs for explicit JPMS modules. Keep OSGi bundle JARs as
+deployment units; do not rename a bundle JAR to .jmod or flatten an extender into
+the application. The optional Eclipse image has its own existing JDK build and
+link verification in `m3/eclipse/optional-jmod/`.
 
 ## Provenance and upstream contracts
-**OSGi integration:** `M3EclipseRuntimeActivator` registers an `M3EclipseRuntimeServices` implementation through BundleContext and unregisters it once at stop. The host supplies Eclipse services and controls bundle lifetimes. The generated OSGi manifest imports `com.m3.collections`, so that package must be exported by a separately installed M3 collections bundle; the exact-head workflow builds a manifest-wrapped OSGi candidate for that dependency. Source/JUnit tests do not establish actual Equinox resolution or plugin activation.\n\nOriginal Synexia core Eclipse mechanics and pluginify adapter are donor evidence.
+**OSGi integration:** `M3EclipseRuntimeActivator` registers an `M3EclipseRuntimeServices` implementation through BundleContext and unregisters it once at stop. The host supplies Eclipse services and controls bundle lifetimes. The generated OSGi manifest imports `jdk.m3.collections`, so that package must be exported by a separately installed M3 collections bundle; the Maven profile attaches the OSGi provider artifact. Source/JUnit tests do not establish actual Equinox resolution or plugin activation.
+
+Original Synexia core Eclipse mechanics and pluginify adapter are donor evidence.
 Synexia first-party recipe/source is Apache-2.0; Eclipse supplied APIs remain
 EPL-2.0 and OSGi interfaces retain their original Apache-2.0 licensing.
 No Eclipse source has been copied into the generated adapter. JDK API surface
