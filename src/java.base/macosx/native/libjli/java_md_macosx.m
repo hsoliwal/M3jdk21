@@ -1,6 +1,8 @@
 /*
  * Copyright (c) 2012, 2022, Oracle and/or its affiliates. All rights reserved.
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
+ * Modified 2026-11-15 by Hitesh Soliwal and contributors: static JNI
+ * invocation linkage and iOS launcher platform isolation.
  *
  * This code is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License version 2 only, as
@@ -39,19 +41,23 @@
 
 #include "manifest_info.h"
 
+#ifndef __IOS__
 /* Support Cocoa event loop on the main thread */
 #include <Cocoa/Cocoa.h>
 #include <objc/objc-runtime.h>
 #include <objc/objc-auto.h>
+#endif
 
 #include <errno.h>
 #include <spawn.h>
 #include <unistd.h>
 
+#ifndef __IOS__
 struct NSAppArgs {
     int argc;
     char **argv;
 };
+#endif
 
 #define JVM_DLL "libjvm.dylib"
 #define JAVA_DLL "libjava.dylib"
@@ -273,7 +279,11 @@ JLI_SetPreferredJVM(const char *prefJVM) {
     sPreferredJVMType = strdup(prefJVM);
 }
 
+#ifdef __IOS__
+static jboolean awtLoaded = JNI_FALSE;
+#else
 static BOOL awtLoaded = NO;
+#endif
 static pthread_mutex_t awtLoaded_mutex = PTHREAD_MUTEX_INITIALIZER;
 static pthread_cond_t  awtLoaded_cv = PTHREAD_COND_INITIALIZER;
 
@@ -281,11 +291,16 @@ JNIEXPORT void JNICALL
 JLI_NotifyAWTLoaded()
 {
     pthread_mutex_lock(&awtLoaded_mutex);
+#ifdef __IOS__
+    awtLoaded = JNI_TRUE;
+#else
     awtLoaded = YES;
+#endif
     pthread_cond_signal(&awtLoaded_cv);
     pthread_mutex_unlock(&awtLoaded_mutex);
 }
 
+#ifndef __IOS__
 static int (*main_fptr)(int argc, char **argv) = NULL;
 
 /*
@@ -359,6 +374,7 @@ static void MacOSXStartup(int argc, char *argv[]) {
 
     ParkEventLoop();
 }
+#endif
 
 void
 CreateExecutionEnvironment(int *pargc, char ***pargv,
@@ -369,8 +385,10 @@ CreateExecutionEnvironment(int *pargc, char ***pargv,
     SetExecname(*pargv);
 
     char * jvmtype    = NULL;
+#ifndef __IOS__
     int  argc         = *pargc;
     char **argv       = *pargv;
+#endif
 
     /* Find out where the JRE is that we will be using. */
     if (!GetJREPath(jrepath, so_jrepath, JNI_FALSE) ) {
@@ -397,12 +415,14 @@ CreateExecutionEnvironment(int *pargc, char ***pargv,
         exit(4);
     }
 
+#ifndef __IOS__
     /*
      * Mac OS X requires the Cocoa event loop to be run on the "main"
      * thread. Spawn off a new thread to run main() and pass
      * this thread off to the Cocoa event loop.
      */
     MacOSXStartup(argc, argv);
+#endif
 
     /*
      * we seem to have everything we need
@@ -450,13 +470,21 @@ GetJVMPath(const char *jrepath, const char *jvmtype,
 static jboolean
 GetJREPath(char *path, jint pathsize, jboolean speculative)
 {
+#ifdef STATIC_BUILD
+    if (path == NULL || pathsize <= 0) {
+        return JNI_FALSE;
+    }
+#endif
     char libjava[MAXPATHLEN];
 
     if (GetApplicationHome(path, pathsize)) {
         /* Is JRE co-located with the application? */
 #ifdef STATIC_BUILD
         char jvm_cfg[MAXPATHLEN];
-        JLI_Snprintf(jvm_cfg, sizeof(jvm_cfg), "%s/lib/jvm.cfg", path);
+        int length = JLI_Snprintf(jvm_cfg, sizeof(jvm_cfg), "%s/lib/jvm.cfg", path);
+        if (length < 0 || length >= (int)sizeof(jvm_cfg)) {
+            return JNI_FALSE;
+        }
         if (access(jvm_cfg, F_OK) == 0) {
             return JNI_TRUE;
         }
@@ -472,7 +500,14 @@ GetJREPath(char *path, jint pathsize, jboolean speculative)
             return JNI_FALSE;
         }
         /* Does the app ship a private JRE in <apphome>/jre directory? */
+#ifdef STATIC_BUILD
+        int private_length = JLI_Snprintf(libjava, sizeof(libjava), "%s/jre/lib/" JAVA_DLL, path);
+        if (private_length < 0 || private_length >= (int)sizeof(libjava)) {
+            return JNI_FALSE;
+        }
+#else
         JLI_Snprintf(libjava, sizeof(libjava), "%s/jre/lib/" JAVA_DLL, path);
+#endif
         if (access(libjava, F_OK) == 0) {
             JLI_StrCat(path, "/jre");
             JLI_TraceLauncher("JRE path is %s\n", path);
@@ -482,27 +517,62 @@ GetJREPath(char *path, jint pathsize, jboolean speculative)
 
     /* try to find ourselves instead */
     Dl_info selfInfo;
-    dladdr(&GetJREPath, &selfInfo);
-
 #ifdef STATIC_BUILD
+    if (dladdr(&GetJREPath, &selfInfo) == 0 || selfInfo.dli_fname == NULL) {
+        return JNI_FALSE;
+    }
     char jvm_cfg[MAXPATHLEN];
-    char *p = NULL;
-    strncpy(jvm_cfg, selfInfo.dli_fname, MAXPATHLEN);
-    p = strrchr(jvm_cfg, '/'); *p = '\0';
+    size_t source_length = strnlen(selfInfo.dli_fname, sizeof(jvm_cfg));
+    if (source_length == sizeof(jvm_cfg)) {
+        return JNI_FALSE;
+    }
+    memcpy(jvm_cfg, selfInfo.dli_fname, source_length + 1);
+    char *p = strrchr(jvm_cfg, '/');
+    if (p == NULL) {
+        return JNI_FALSE;
+    }
+    *p = '\0';
     p = strrchr(jvm_cfg, '/');
+    if (p == NULL) {
+        return JNI_FALSE;
+    }
     if (strcmp(p, "/.") == 0) {
-      *p = '\0';
-      p = strrchr(jvm_cfg, '/'); *p = '\0';
+        *p = '\0';
+        p = strrchr(jvm_cfg, '/');
+        if (p == NULL) {
+            return JNI_FALSE;
+        }
     }
-    else *p = '\0';
-    strncpy(path, jvm_cfg, pathsize);
-    strncat(jvm_cfg, "/lib/jvm.cfg", MAXPATHLEN);
+    *p = '\0';
+    size_t home_length = (size_t)(p - jvm_cfg);
+    const char config_suffix[] = "/lib/jvm.cfg";
+    if (home_length >= (size_t)pathsize ||
+            home_length > sizeof(jvm_cfg) - sizeof(config_suffix)) {
+        return JNI_FALSE;
+    }
+    memcpy(path, jvm_cfg, home_length + 1);
+    memcpy(jvm_cfg + home_length, config_suffix, sizeof(config_suffix));
     if (access(jvm_cfg, F_OK) == 0) {
-      return JNI_TRUE;
+        return JNI_TRUE;
     }
-#endif
 
+    /* realpath has no destination-size argument: copy only after checking. */
+    char *resolved = realpath(selfInfo.dli_fname, NULL);
+    if (resolved == NULL) {
+        return JNI_FALSE;
+    }
+    size_t resolved_length = strlen(resolved);
+    if (resolved_length >= (size_t)pathsize) {
+        free(resolved);
+        return JNI_FALSE;
+    }
+    memcpy(path, resolved, resolved_length + 1);
+    free(resolved);
+    char *realPathToSelf = path;
+#else
+    dladdr(&GetJREPath, &selfInfo);
     char *realPathToSelf = realpath(selfInfo.dli_fname, path);
+#endif
     if (realPathToSelf != path) {
         return JNI_FALSE;
     }
@@ -528,7 +598,7 @@ GetJREPath(char *path, jint pathsize, jboolean speculative)
     // in ../Home.
     const char altLastPathComponent[] = "/MacOS/libjli.dylib";
     size_t sizeOfAltLastPathComponent = sizeof(altLastPathComponent) - 1;
-    if (pathLen < sizeOfLastPathComponent) {
+    if (pathLen < sizeOfAltLastPathComponent) {
         return JNI_FALSE;
     }
 
@@ -548,15 +618,16 @@ GetJREPath(char *path, jint pathsize, jboolean speculative)
 jboolean
 LoadJavaVM(const char *jvmpath, InvocationFunctions *ifn)
 {
-    void *libjvm;
-
     JLI_TraceLauncher("JVM path is %s\n", jvmpath);
 
-#ifndef STATIC_BUILD
-    libjvm = dlopen(jvmpath, RTLD_NOW + RTLD_GLOBAL);
+#ifdef STATIC_BUILD
+    /* Keep the linked invocation entry points reachable without dynamic exports. */
+    ifn->CreateJavaVM = JNI_CreateJavaVM;
+    ifn->GetDefaultJavaVMInitArgs = JNI_GetDefaultJavaVMInitArgs;
+    ifn->GetCreatedJavaVMs = JNI_GetCreatedJavaVMs;
+    return JNI_TRUE;
 #else
-    libjvm = dlopen(NULL, RTLD_FIRST);
-#endif
+    void *libjvm = dlopen(jvmpath, RTLD_NOW + RTLD_GLOBAL);
     if (libjvm == NULL) {
         JLI_ReportErrorMessage(DLL_ERROR1, __LINE__);
         JLI_ReportErrorMessage(DLL_ERROR2, jvmpath, dlerror());
@@ -585,6 +656,7 @@ LoadJavaVM(const char *jvmpath, InvocationFunctions *ifn)
     }
 
     return JNI_TRUE;
+#endif
 }
 
 /*
@@ -940,6 +1012,7 @@ int
 JVMInit(InvocationFunctions* ifn, jlong threadStackSize,
                  int argc, char **argv,
                  int mode, char *what, int ret) {
+#ifndef __IOS__
     if (sameThread) {
         JLI_TraceLauncher("In same thread\n");
         // need to block this thread against the main thread
@@ -970,6 +1043,9 @@ JVMInit(InvocationFunctions* ifn, jlong threadStackSize,
     } else {
         return ContinueInNewThread(ifn, threadStackSize, argc, argv, mode, what, ret);
     }
+#else
+    return ContinueInNewThread(ifn, threadStackSize, argc, argv, mode, what, ret);
+#endif
 }
 
 /*

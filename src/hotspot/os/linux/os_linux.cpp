@@ -1,6 +1,7 @@
 /*
  * Copyright (c) 1999, 2024, Oracle and/or its affiliates. All rights reserved.
  * Copyright (c) 2015, 2024 SAP SE. All rights reserved.
+ * Modified 2026-11-15: respect Android native-loader API and symbol-version capabilities.
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
  *
  * This code is free software; you can redistribute it and/or modify it
@@ -1924,14 +1925,16 @@ void * os::Linux::dll_load_in_vmthread(const char *filename, char *ebuf,
 }
 
 const char* os::Linux::dll_path(void* lib) {
-  struct link_map *lmap;
   const char* l_path = nullptr;
   assert(lib != nullptr, "dll_path parameter must not be null");
 
+#ifndef __ANDROID__
+  struct link_map *lmap;
   int res_dli = ::dlinfo(lib, RTLD_DI_LINKMAP, &lmap);
   if (res_dli == 0) {
     l_path = lmap->l_name;
   }
+#endif
   return l_path;
 }
 
@@ -3294,17 +3297,26 @@ extern "C" JNIEXPORT void numa_error(char *where) { }
 // Handle request to load libnuma symbol version 1.1 (API v1). If it fails
 // load symbol from base version instead.
 void* os::Linux::libnuma_dlsym(void* handle, const char *name) {
+#if defined(__ANDROID__) && __ANDROID_API__ < 24
+  return dlsym(handle, name);
+#else
   void *f = dlvsym(handle, name, "libnuma_1.1");
   if (f == nullptr) {
     f = dlsym(handle, name);
   }
   return f;
+#endif
 }
 
 // Handle request to load libnuma symbol version 1.2 (API v2) only.
 // Return null if the symbol is not defined in this particular version.
 void* os::Linux::libnuma_v2_dlsym(void* handle, const char* name) {
+#if defined(__ANDROID__) && __ANDROID_API__ < 24
+  // Without dlvsym, an exact v2 symbol version cannot be established.
+  return nullptr;
+#else
   return dlvsym(handle, name, "libnuma_1.2");
+#endif
 }
 
 // Check numa dependent syscalls
@@ -3325,6 +3337,11 @@ static bool numa_syscall_check() {
 }
 
 bool os::Linux::libnuma_init() {
+#if defined(__ANDROID__) && __ANDROID_API__ < 24
+  // Initialization invokes v2 functions and needs exact symbol versions.
+  // Refuse before loading libnuma or publishing any function pointers.
+  return false;
+#endif
   // Requires sched_getcpu() and numa dependent syscalls support
   if ((sched_getcpu() != -1) && numa_syscall_check()) {
     void *handle = dlopen("libnuma.so.1", RTLD_LAZY);

@@ -1,5 +1,7 @@
 /*
  * Copyright (c) 2008, 2023, Oracle and/or its affiliates. All rights reserved.
+ * Modified 2026-11-15: preserve Bionic integer typedefs in the private statx layout.
+ * Modified 2026-11-15: use Android futimens for descriptor timestamps when futimesat is absent.
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
  *
  * This code is free software; you can redistribute it and/or modify it
@@ -79,7 +81,7 @@
 // by defining binary compatible statx structs in this file and
 // not relying on included headers.
 
-#ifndef __GLIBC__
+#if !defined(__BIONIC__) && !defined(__GLIBC__)
 // Alpine doesn't know these types, define them
 typedef unsigned int       __uint32_t;
 typedef unsigned short     __uint16_t;
@@ -403,11 +405,17 @@ Java_sun_nio_fs_UnixNativeDispatcher_init(JNIEnv* env, jclass this)
 
     /* supports futimes or futimesat, futimens, and/or lutimes */
 
+    int supports_futimes = (my_futimesat_func != NULL);
+#ifdef __ANDROID__
+    // Android has futimens before futimesat (API 26).
+    supports_futimes |= (my_futimens_func != NULL);
+#endif
+
 #ifdef _ALLBSD_SOURCE
     capabilities |= sun_nio_fs_UnixNativeDispatcher_SUPPORTS_FUTIMES;
     capabilities |= sun_nio_fs_UnixNativeDispatcher_SUPPORTS_LUTIMES;
 #else
-    if (my_futimesat_func != NULL)
+    if (supports_futimes)
         capabilities |= sun_nio_fs_UnixNativeDispatcher_SUPPORTS_FUTIMES;
     if (my_lutimes_func != NULL)
         capabilities |= sun_nio_fs_UnixNativeDispatcher_SUPPORTS_LUTIMES;
@@ -419,7 +427,7 @@ Java_sun_nio_fs_UnixNativeDispatcher_init(JNIEnv* env, jclass this)
 
     if (my_openat64_func != NULL &&  my_fstatat64_func != NULL &&
         my_unlinkat_func != NULL && my_renameat_func != NULL &&
-        my_futimesat_func != NULL && my_fdopendir_func != NULL)
+        supports_futimes && my_fdopendir_func != NULL)
     {
         capabilities |= sun_nio_fs_UnixNativeDispatcher_SUPPORTS_OPENAT;
     }
@@ -922,11 +930,21 @@ Java_sun_nio_fs_UnixNativeDispatcher_futimes0(JNIEnv* env, jclass this, jint fil
 #ifdef _ALLBSD_SOURCE
     RESTARTABLE(futimes(filedes, &times[0]), err);
 #else
-    if (my_futimesat_func == NULL) {
+    if (my_futimesat_func != NULL) {
+        RESTARTABLE((*my_futimesat_func)(filedes, NULL, &times[0]), err);
+#ifdef __ANDROID__
+    } else if (my_futimens_func != NULL) {
+        struct timespec times2[2];
+        times2[0].tv_sec = times[0].tv_sec;
+        times2[0].tv_nsec = times[0].tv_usec * 1000;
+        times2[1].tv_sec = times[1].tv_sec;
+        times2[1].tv_nsec = times[1].tv_usec * 1000;
+        RESTARTABLE((*my_futimens_func)(filedes, &times2[0]), err);
+#endif
+    } else {
         JNU_ThrowInternalError(env, "my_futimesat_func is NULL");
         return;
     }
-    RESTARTABLE((*my_futimesat_func)(filedes, NULL, &times[0]), err);
 #endif
     if (err == -1) {
         throwUnixException(env, errno);

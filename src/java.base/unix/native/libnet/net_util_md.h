@@ -1,5 +1,6 @@
 /*
  * Copyright (c) 1997, 2022, Oracle and/or its affiliates. All rights reserved.
+ * Modified 2026-11-15: include complete Internet socket address types on Android.
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
  *
  * This code is free software; you can redistribute it and/or modify it
@@ -26,6 +27,9 @@
 #ifndef NET_UTILS_MD_H
 #define NET_UTILS_MD_H
 
+#ifdef __ANDROID__
+#include <netinet/in.h>
+#endif
 #include <netdb.h>
 #include <poll.h>
 #include <sys/socket.h>
