@@ -19,6 +19,8 @@
 // bounded contiguous-span compaction of the existing array-owned ring.
 // Modified 2026 by Hitesh Soliwal and Contributors to the Synexia Project:
 // export exact-owner ring spans without an intermediate iterator.
+// Modified 2026 by Hitesh Soliwal and Synexia contributors: direct cursor callback traversal.
+// Modified 2026 by Hitesh Soliwal and Synexia contributors: converge guarded ring bulk and cursor algorithms.
 package jdk.m3.collections.apache.queue;
 
 import java.io.IOException;
@@ -27,11 +29,14 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.lang.reflect.Array;
 import java.util.AbstractCollection;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.Objects;
+import java.util.function.Consumer;
 import java.util.Queue;
 
 import jdk.m3.collections.apache.BoundedCollection;
@@ -129,6 +134,19 @@ public class CircularFifoQueue<E> extends AbstractCollection<E>
     public boolean add(final E element) {
         Objects.requireNonNull(element, "element");
 
+        // An exact CircularFifoQueue owns its ring without subclass hooks.
+        // In the full state, start == end. Replacing that one slot and
+        // advancing both cursors preserves the original physical layout,
+        // without clearing and rewriting the evicted reference.
+        // Retain virtual isAtFullCapacity()/remove() for every subclass.
+        if (full && getClass() == CircularFifoQueue.class) {
+            final int next = increment(end);
+            elements[end] = element;
+            start = next;
+            end = next;
+            return true;
+        }
+
         if (isAtFullCapacity()) {
             remove();
         }
@@ -144,6 +162,169 @@ public class CircularFifoQueue<E> extends AbstractCollection<E>
         }
 
         return true;
+    }
+
+    /**
+     * Bulk insert for an exact ArrayList source. The ring retains only its final
+     * capacity worth of elements, so an oversized batch need not write entries
+     * that would be immediately evicted. No temporary array is allocated.
+     *
+     * <p>All unknown collections and subclasses use the inherited iterator
+     * protocol. A null element preserves the original successful-prefix writes
+     * before the original exception, rather than claiming atomic failure.
+     * This class remains intentionally unsynchronized.</p>
+     *
+     * @param values elements to add, in encounter order
+     * @return true if at least one element was inserted
+     */
+    @Override
+    public boolean addAll(final Collection<? extends E> values) {
+        if (getClass() != CircularFifoQueue.class || values == null
+                || values.getClass() != ArrayList.class) {
+            return super.addAll(values);
+        }
+        final ArrayList<? extends E> input = (ArrayList<? extends E>) values;
+        final int count = input.size();
+        if (count == 0) {
+            return false;
+        }
+
+        // Preserve inherited addAll's partial mutation on the first null.
+        // The exact ArrayList.get implementation has no overridable callbacks.
+        for (int index = 0; index < count; index++) {
+            if (input.get(index) == null) {
+                for (int accepted = 0; accepted < index; accepted++) {
+                    add(input.get(accepted));
+                }
+                throw new NullPointerException("element");
+            }
+        }
+
+        // Recreate the *physical* ring positions of count serial add calls.
+        // Only the final min(count, capacity) writes can remain observable.
+        final int retained = Math.min(count, maxElements);
+        final int firstSource = count - retained;
+        int physical = (int) (((long) end + firstSource) % maxElements);
+        for (int index = firstSource; index < count; index++) {
+            elements[physical] = input.get(index);
+            if (++physical == maxElements) {
+                physical = 0;
+            }
+        }
+        final int nextEnd = (int) (((long) end + count) % maxElements);
+        final boolean saturated = count >= maxElements - size();
+        if (saturated) {
+            start = nextEnd;
+        }
+        end = nextEnd;
+        full = saturated;
+        return true;
+    }
+
+    /**
+     * Compact a callback-free membership selection through the existing ring.
+     * Arbitrary payloads, collections and subclasses retain serial iterator removal.
+     *
+     * @return the removed count, or -1 when inherited dispatch is required
+     */
+    private int filterMembership(final Collection<?> membership, final boolean retain) {
+        if (getClass() != CircularFifoQueue.class || membership == null
+                || membership.getClass() != HashSet.class) {
+            return -1;
+        }
+        final int count = size();
+        if (count < 256) {
+            return -1;
+        }
+        int cursor = start;
+        int firstRemoved = -1;
+        int lastRemoved = -1;
+        int firstRemovedSlot = -1;
+        int removed = 0;
+        for (int i = 0; i < count; i++) {
+            final Object value = elements[cursor];
+            if (value == null || (value.getClass() != Integer.class
+                    && value.getClass() != Long.class && value.getClass() != String.class)) {
+                return -1;
+            }
+            // Only final scalar queries reach the exact HashSet here.
+            // Reject an unknown payload before invoking any of its methods.
+            if (membership.contains(value) != retain) {
+                if (firstRemoved == -1) {
+                    firstRemoved = i;
+                    firstRemovedSlot = cursor;
+                }
+                lastRemoved = i;
+                removed++;
+            }
+            cursor = increment(cursor);
+        }
+        if (removed == 0) {
+            return 0;
+        }
+        // Nothing has been mutated until every query is known to be callback-free.
+        if (removed == lastRemoved + 1) {
+            start = clearRingSpan(start, removed);
+            full = false;
+            return removed;
+        }
+        if (removed == count - firstRemoved) {
+            clearRingSpan(firstRemovedSlot, removed);
+            end = firstRemovedSlot;
+            full = false;
+            return removed;
+        }
+        int write = start;
+        int firstKept = -1;
+        cursor = start;
+        for (int i = 0; i < count; i++) {
+            final E value = elements[cursor];
+            if (membership.contains(value) == retain) {
+                if (firstKept == -1) {
+                    // Serial leading removals advance start rather than shifting.
+                    firstKept = cursor;
+                    write = cursor;
+                }
+                if (write != cursor) {
+                    elements[write] = value;
+                    elements[cursor] = null;
+                }
+                write = increment(write);
+            } else {
+                elements[cursor] = null;
+            }
+            cursor = increment(cursor);
+        }
+        start = firstKept;
+        end = write;
+        full = false;
+        return removed;
+    }
+
+    /** Clear at most two physical spans and return the following ring coordinate. */
+    private int clearRingSpan(final int first, final int length) {
+        final int untilWrap = maxElements - first;
+        if (length < untilWrap) {
+            Arrays.fill(elements, first, first + length, null);
+            return first + length;
+        }
+        Arrays.fill(elements, first, maxElements, null);
+        Arrays.fill(elements, 0, length - untilWrap, null);
+        return length - untilWrap;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public boolean removeAll(final Collection<?> collection) {
+        final int removed = filterMembership(collection, false);
+        return removed < 0 ? super.removeAll(collection) : removed != 0;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public boolean retainAll(final Collection<?> collection) {
+        final int removed = filterMembership(collection, true);
+        return removed < 0 ? super.retainAll(collection) : removed != 0;
     }
 
     /**
@@ -166,16 +347,54 @@ public class CircularFifoQueue<E> extends AbstractCollection<E>
     }
 
     /**
+     * Checks the live ring in iterator order without constructing an iterator.
+     *
+     * <p>The local cursor deliberately follows the existing iterator's
+     * full-ring and dynamic-end rules. In particular, the candidate's
+     * {@code equals} method runs after advancing the local cursor, so a
+     * reentrant modification has the same subsequent traversal behavior as
+     * the inherited {@link AbstractCollection#contains(Object)}.
+     * Subclasses retain inherited dispatch through their own iterators.</p>
+     *
+     * @param candidate the object to find, possibly null
+     * @return whether the FIFO sequence contains the object
+     */
+    @Override
+    public boolean contains(final Object candidate) {
+        if (getClass() != CircularFifoQueue.class) {
+            return super.contains(candidate);
+        }
+        int cursor = start;
+        boolean first = full;
+        while (first || cursor != end) {
+            first = false;
+            final E element = elements[cursor];
+            cursor = increment(cursor);
+            if (candidate == null ? element == null : candidate.equals(element)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
      * Copies live elements in encounter order using the ring's contiguous spans.
      *
      * @param array the destination array
      * @param size the number of live elements
      */
     private void copyToArray(final Object[] array, final int size) {
-        final int firstLength = Math.min(size, maxElements - start);
-        System.arraycopy(elements, start, array, 0, firstLength);
-        if (firstLength < size) {
-            System.arraycopy(elements, 0, array, firstLength, size - firstLength);
+        if (size == 0) {
+            return;
+        }
+        if (size == 1) {
+            array[0] = elements[start];
+            return;
+        }
+        final int firstSpan = Math.min(size, maxElements - start);
+        System.arraycopy(elements, start, array, 0, firstSpan);
+        if (firstSpan < size) {
+            System.arraycopy(elements, 0, array, firstSpan, size - firstSpan);
         }
     }
 
@@ -199,6 +418,31 @@ public class CircularFifoQueue<E> extends AbstractCollection<E>
             throw new NoSuchElementException("queue is empty");
         }
         return peek();
+    }
+
+    /**
+     * Performs an action in FIFO order using the ring's primitive cursor.
+     * Subclasses retain their iterator dispatch and the traversal observes
+     * callback changes with the same dynamic-end rules as the iterator.
+     *
+     * @param action the action to perform for each element
+     * @throws NullPointerException if the action is null
+     */
+    @Override
+    public void forEach(final Consumer<? super E> action) {
+        Objects.requireNonNull(action);
+        if (getClass() != CircularFifoQueue.class) {
+            super.forEach(action);
+            return;
+        }
+        int cursor = start;
+        boolean first = full;
+        while (first || cursor != end) {
+            first = false;
+            final int returned = cursor;
+            cursor = increment(cursor);
+            action.accept(elements[returned]);
+        }
     }
 
     /**
@@ -387,6 +631,44 @@ public class CircularFifoQueue<E> extends AbstractCollection<E>
         } else {
             end = size;
         }
+    }
+
+    /**
+     * Removes the first matching ring element without allocating an iterator.
+     *
+     * <p>The physical cursor and the removal path reproduce the inherited
+     * AbstractCollection iterator algorithm, including candidate-equals
+     * callback timing, the head fast path, and contiguous suffix shifts.
+     * Subclasses retain their iterator-based removal contract.</p>
+     *
+     * @param candidate the value to remove, possibly null
+     * @return true if a matching element was found
+     */
+    @Override
+    public boolean remove(final Object candidate) {
+        if (getClass() != CircularFifoQueue.class) {
+            return super.remove(candidate);
+        }
+        int cursor = start;
+        boolean first = full;
+        while (first || cursor != end) {
+            first = false;
+            final int returned = cursor;
+            cursor = increment(cursor);
+            final E element = elements[returned];
+            if (candidate == null ? element == null : candidate.equals(element)) {
+                if (returned == start) {
+                    remove();
+                } else {
+                    shiftSuffixTowardRemovedSlot(returned);
+                    end = decrement(end);
+                    elements[end] = null;
+                    full = false;
+                }
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
