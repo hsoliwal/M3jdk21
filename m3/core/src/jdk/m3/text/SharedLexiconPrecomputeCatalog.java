@@ -134,6 +134,9 @@ public final class SharedLexiconPrecomputeCatalog {
     }
 
     public static final class Builder {
+        /** Creates an empty precompute catalog builder. */
+        public Builder() { }
+
         private final Map<TranslationIdentity, M3LexiconPrecompute.TranslationProjection> translations = new HashMap<>();
         private final Map<SpellScope, M3LexiconPrecompute.SpellIndex> spellIndexes = new HashMap<>();
         private final Map<TokenRange, M3LexiconPrecompute.TokenHashPrecompute> tokenHashes = new HashMap<>();
