@@ -188,7 +188,7 @@ AC_DEFUN([TOOLCHAIN_SETUP_FILENAME_PATTERNS],
     STATIC_LIBRARY='lib[$]1.a'
     OBJ_SUFFIX='.o'
     EXECUTABLE_SUFFIX=''
-    if test "x$OPENJDK_TARGET_OS" = xmacosx; then
+    if test "x$OPENJDK_TARGET_OS" = xmacosx || test "x$OPENJDK_TARGET_OS" = xios; then
       # For full static builds, we're overloading the SHARED_LIBRARY
       # variables in order to limit the amount of changes required.
       # It would be better to remove SHARED and just use LIBRARY and
@@ -649,6 +649,77 @@ AC_DEFUN(TOOLCHAIN_VERIFY_LINK_BINARY,
     AC_MSG_RESULT([yes])
   fi
 ])
+# Verify mobile compiler identity without executing target binaries. The compiler
+# wrapper or explicit compiler flags own the architecture and deployment level.
+AC_DEFUN([TOOLCHAIN_CHECK_MOBILE_COMPILER],
+[
+  AC_LANG_PUSH([$1])
+  AC_MSG_CHECKING([whether the $1 compiler matches the mobile target])
+  if test "x$OPENJDK_TARGET_OS" = xandroid; then
+    AC_COMPILE_IFELSE([AC_LANG_SOURCE([[
+      #include <android/api-level.h>
+      #if !defined(__ANDROID__) || !defined(__ANDROID_API__)
+      #error Android NDK target required
+      #endif
+      #if !defined($MOBILE_CPU_DEFINE)
+      #error Mobile target architecture mismatch
+      #endif
+      int mobile_target;
+    ]])], [AC_MSG_RESULT([yes])],
+        [AC_MSG_ERROR([The $1 compiler must target Android $OPENJDK_TARGET_CPU with an explicit API level])])
+    AC_COMPUTE_INT([MOBILE_COMPILER_LEVEL], [__ANDROID_API__], [],
+        [AC_MSG_ERROR([Cannot determine Android API level from the $1 compiler])])
+  else
+    AC_COMPILE_IFELSE([AC_LANG_SOURCE([[
+      #include <TargetConditionals.h>
+      #if !defined(__APPLE__) || !TARGET_OS_IOS
+      #error iOS SDK target required
+      #endif
+      #if !defined($MOBILE_CPU_DEFINE)
+      #error Mobile target architecture mismatch
+      #endif
+      int mobile_target;
+    ]])], [AC_MSG_RESULT([yes])],
+        [AC_MSG_ERROR([The $1 compiler must target iOS $OPENJDK_TARGET_CPU with an iOS SDK])])
+    AC_COMPUTE_INT([MOBILE_COMPILER_LEVEL], [__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__], [],
+        [AC_MSG_ERROR([Cannot determine iOS deployment target from the $1 compiler])])
+  fi
+  AC_LANG_POP([$1])
+])
+
+AC_DEFUN([TOOLCHAIN_CHECK_MOBILE_TARGET],
+[
+  OPENJDK_TARGET_ANDROID_API=
+  OPENJDK_TARGET_IOS_DEPLOYMENT_TARGET=
+  if test "x$OPENJDK_TARGET_OS" = xandroid || test "x$OPENJDK_TARGET_OS" = xios; then
+    if test "x$TOOLCHAIN_TYPE" != xclang; then
+      AC_MSG_ERROR([Mobile targets require a Clang toolchain])
+    fi
+    case "$OPENJDK_TARGET_CPU" in
+      aarch64) MOBILE_CPU_DEFINE=__aarch64__ ;;
+      arm)     MOBILE_CPU_DEFINE=__arm__ ;;
+      x86_64)  MOBILE_CPU_DEFINE=__x86_64__ ;;
+      x86)     MOBILE_CPU_DEFINE=__i386__ ;;
+      *) AC_MSG_ERROR([Unsupported mobile CPU $OPENJDK_TARGET_CPU]) ;;
+    esac
+    TOOLCHAIN_CHECK_MOBILE_COMPILER([C])
+    MOBILE_C_LEVEL=$MOBILE_COMPILER_LEVEL
+    TOOLCHAIN_CHECK_MOBILE_COMPILER([C++])
+    if test "x$MOBILE_C_LEVEL" != "x$MOBILE_COMPILER_LEVEL"; then
+      AC_MSG_ERROR([C and C++ mobile deployment targets differ])
+    fi
+    if test "x$OPENJDK_TARGET_OS" = xandroid; then
+      OPENJDK_TARGET_ANDROID_API=$MOBILE_COMPILER_LEVEL
+      AC_MSG_NOTICE([Android API level selected by the compilers: $OPENJDK_TARGET_ANDROID_API])
+    else
+      OPENJDK_TARGET_IOS_DEPLOYMENT_TARGET=$MOBILE_COMPILER_LEVEL
+      AC_MSG_NOTICE([iOS deployment target selected by the compilers: $OPENJDK_TARGET_IOS_DEPLOYMENT_TARGET])
+    fi
+  fi
+  AC_SUBST(OPENJDK_TARGET_ANDROID_API)
+  AC_SUBST(OPENJDK_TARGET_IOS_DEPLOYMENT_TARGET)
+])
+
 # Detect the core components of the toolchain, i.e. the compilers (CC and CXX),
 # preprocessor (CPP and CXXCPP), the linker (LD), the assembler (AS) and the
 # archiver (AR). Verify that the compilers are correct according to the
@@ -665,6 +736,8 @@ AC_DEFUN_ONCE([TOOLCHAIN_DETECT_TOOLCHAIN_CORE],
   TOOLCHAIN_FIND_COMPILER([CXX], [C++], $TOOLCHAIN_CXX_BINARY)
   # Now that we have resolved CXX ourself, let autoconf have its go at it
   AC_PROG_CXX([$CXX])
+
+  TOOLCHAIN_CHECK_MOBILE_TARGET
 
   # This is the compiler version number on the form X.Y[.Z]
   AC_SUBST(CC_VERSION_NUMBER)

@@ -1167,9 +1167,9 @@ define SetupNativeCompilationBody
       $1_LD_OBJ_ARG := `cat $$($1_OBJ_FILE_LIST)`
     endif
 
-    # If we are building static library, 'AR' on macosx may not support @-file.
+    # Apple's archiver may not support @-files for static libraries.
     ifeq ($$($1_TYPE), STATIC_LIBRARY)
-      ifeq ($(call isTargetOs, macosx), true)
+      ifeq ($(call isTargetOs, macosx ios), true)
         $1_LD_OBJ_ARG := `cat $$($1_OBJ_FILE_LIST)`
       endif
     endif
@@ -1197,8 +1197,8 @@ define SetupNativeCompilationBody
   endif
 
   ifeq ($$($1_TYPE), STATIC_LIBRARY)
-    # Include partial linking when building the static library with clang on linux.
-    ifeq ($(call isTargetOs, linux), true)
+    # Include partial linking for static ELF libraries built with Clang.
+    ifeq ($(call isTargetOs, linux android), true)
       ifneq ($(findstring $(TOOLCHAIN_TYPE), clang), )
         $1_ENABLE_PARTIAL_LINKING := true
       endif

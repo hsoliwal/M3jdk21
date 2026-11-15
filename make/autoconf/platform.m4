@@ -198,6 +198,14 @@ AC_DEFUN([PLATFORM_EXTRACT_VARS_FROM_CPU],
 AC_DEFUN([PLATFORM_EXTRACT_VARS_FROM_OS],
 [
   case "$1" in
+    *android*)
+      VAR_OS=android
+      VAR_OS_TYPE=unix
+      ;;
+    *ios*)
+      VAR_OS=ios
+      VAR_OS_TYPE=unix
+      ;;
     *linux*)
       VAR_OS=linux
       VAR_OS_TYPE=unix
@@ -238,6 +246,9 @@ AC_DEFUN([PLATFORM_EXTRACT_VARS_FROM_OS],
 AC_DEFUN([PLATFORM_EXTRACT_VARS_FROM_LIBC],
 [
   case "$1" in
+    *android*)
+      VAR_LIBC=bionic
+      ;;
     *linux*-musl)
       VAR_LIBC=musl
       ;;
@@ -531,8 +542,10 @@ AC_DEFUN([PLATFORM_SETUP_LEGACY_VARS_HELPER],
   # Convert openjdk platform names to hotspot names
 
   HOTSPOT_$1_OS=${OPENJDK_$1_OS}
-  if test "x$OPENJDK_$1_OS" = xmacosx; then
+  if test "x$OPENJDK_$1_OS" = xmacosx || test "x$OPENJDK_$1_OS" = xios; then
     HOTSPOT_$1_OS=bsd
+  elif test "x$OPENJDK_$1_OS" = xandroid; then
+    HOTSPOT_$1_OS=linux
   fi
   AC_SUBST(HOTSPOT_$1_OS)
 
@@ -598,11 +611,13 @@ AC_DEFUN([PLATFORM_SETUP_LEGACY_VARS_HELPER],
   AC_SUBST(HOTSPOT_$1_LIBC)
 
   # For historical reasons, the OS include directories have odd names.
-  OPENJDK_$1_OS_INCLUDE_SUBDIR="$OPENJDK_TARGET_OS"
-  if test "x$OPENJDK_TARGET_OS" = "xwindows"; then
+  OPENJDK_$1_OS_INCLUDE_SUBDIR="$OPENJDK_$1_OS"
+  if test "x$OPENJDK_$1_OS" = "xwindows"; then
     OPENJDK_$1_OS_INCLUDE_SUBDIR="win32"
-  elif test "x$OPENJDK_TARGET_OS" = "xmacosx"; then
+  elif test "x$OPENJDK_$1_OS" = "xmacosx" || test "x$OPENJDK_$1_OS" = "xios"; then
     OPENJDK_$1_OS_INCLUDE_SUBDIR="darwin"
+  elif test "x$OPENJDK_$1_OS" = "xandroid"; then
+    OPENJDK_$1_OS_INCLUDE_SUBDIR="linux"
   fi
   AC_SUBST(OPENJDK_$1_OS_INCLUDE_SUBDIR)
 ])
@@ -620,6 +635,12 @@ AC_DEFUN([PLATFORM_SET_RELEASE_FILE_OS_VALUES],
   fi
   if test "x$OPENJDK_TARGET_OS" = "xaix"; then
     RELEASE_FILE_OS_NAME="AIX"
+  fi
+  if test "x$OPENJDK_TARGET_OS" = "xandroid"; then
+    RELEASE_FILE_OS_NAME="Android"
+  fi
+  if test "x$OPENJDK_TARGET_OS" = "xios"; then
+    RELEASE_FILE_OS_NAME="iOS"
   fi
   RELEASE_FILE_OS_ARCH=${OPENJDK_TARGET_CPU}
   RELEASE_FILE_LIBC=${OPENJDK_TARGET_LIBC}

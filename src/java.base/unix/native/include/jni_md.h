@@ -1,5 +1,6 @@
 /*
  * Copyright (c) 1996, 2020, Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2026, Hitesh Soliwal and Contributors to the Synexia Project.
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
  *
  * This code is free software; you can redistribute it and/or modify it
@@ -32,7 +33,7 @@
 
 #ifndef JNIEXPORT
   #if (defined(__GNUC__) && ((__GNUC__ > 4) || (__GNUC__ == 4) && (__GNUC_MINOR__ > 2))) || __has_attribute(visibility)
-    #ifdef ARM
+    #if defined(ARM) && (!defined(__clang__) || __has_attribute(externally_visible))
       #define JNIEXPORT     __attribute__((externally_visible,visibility("default")))
     #else
       #define JNIEXPORT     __attribute__((visibility("default")))
@@ -43,7 +44,7 @@
 #endif
 
 #if (defined(__GNUC__) && ((__GNUC__ > 4) || (__GNUC__ == 4) && (__GNUC_MINOR__ > 2))) || __has_attribute(visibility)
-  #ifdef ARM
+  #if defined(ARM) && (!defined(__clang__) || __has_attribute(externally_visible))
     #define JNIIMPORT     __attribute__((externally_visible,visibility("default")))
   #else
     #define JNIIMPORT     __attribute__((visibility("default")))

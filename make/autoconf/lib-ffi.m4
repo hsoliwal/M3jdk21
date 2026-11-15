@@ -134,7 +134,10 @@ AC_DEFUN_ONCE([LIB_SETUP_LIBFFI],
     if test "x${ENABLE_LIBFFI_BUNDLING}" = "xtrue"; then
       AC_MSG_CHECKING([for libffi lib file location])
       if test "x${LIBFFI_LIB_PATH}" != x; then
-        if test -e ${LIBFFI_LIB_PATH}/libffi.so.?; then
+        if test "x$OPENJDK_TARGET_OS" = xandroid && test -f "${LIBFFI_LIB_PATH}/libffi.so"; then
+          # Android libffi uses an unversioned SONAME.
+          LIBFFI_LIB_FILE="${LIBFFI_LIB_PATH}/libffi.so"
+        elif test -e ${LIBFFI_LIB_PATH}/libffi.so.?; then
           LIBFFI_LIB_FILE="${LIBFFI_LIB_PATH}/libffi.so.?"
         else
           AC_MSG_ERROR([Could not locate libffi.so.? for bundling in ${LIBFFI_LIB_PATH}])

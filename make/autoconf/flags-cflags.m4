@@ -46,8 +46,8 @@ AC_DEFUN([FLAGS_SETUP_SHARED_LIBS],
     SET_SHARED_LIBRARY_MAPFILE='-Wl,-version-script=[$]1'
 
   elif test "x$TOOLCHAIN_TYPE" = xclang; then
-    if test "x$OPENJDK_TARGET_OS" = xmacosx; then
-      # Linking is different on MacOSX
+    if test "x$OPENJDK_TARGET_OS" = xmacosx || test "x$OPENJDK_TARGET_OS" = xios; then
+      # Apple platforms use Mach-O install names and export lists.
       SHARED_LIBRARY_FLAGS="-dynamiclib -compatibility_version 1.0.0 -current_version 1.0.0"
       SET_EXECUTABLE_ORIGIN='-Wl,-rpath,@loader_path$(or [$]1,/.)'
       SET_SHARED_LIBRARY_ORIGIN="$SET_EXECUTABLE_ORIGIN"
@@ -73,8 +73,8 @@ AC_DEFUN([FLAGS_SETUP_SHARED_LIBS],
       SET_SHARED_LIBRARY_MAPFILE='-Wl,-version-script=[$]1'
 
       # arm specific settings
-      if test "x$OPENJDK_TARGET_CPU" = "xarm"; then
-        # '-Wl,-z,origin' isn't used on arm.
+      if test "x$OPENJDK_TARGET_CPU" = "xarm" && test "x$OPENJDK_TARGET_OS" != "xandroid"; then
+        # '-Wl,-z,origin' isn't used on non-Android arm.
         SET_SHARED_LIBRARY_ORIGIN='-Wl,-rpath,\$$$$ORIGIN[$]1'
       else
         SET_SHARED_LIBRARY_ORIGIN="-Wl,-z,origin $SET_EXECUTABLE_ORIGIN"
@@ -492,6 +492,18 @@ AC_DEFUN([FLAGS_SETUP_CFLAGS_HELPER],
   if test "x$OPENJDK_TARGET_OS" = xlinux; then
     CFLAGS_OS_DEF_JVM="-DLINUX -D_FILE_OFFSET_BITS=64"
     CFLAGS_OS_DEF_JDK="-D_GNU_SOURCE -D_REENTRANT -D_LARGEFILE64_SOURCE"
+  elif test "x$OPENJDK_TARGET_OS" = xandroid; then
+    # The NDK compiler selects the architecture and API level. Do not replace
+    # its target or define __ANDROID_API__ here.
+    CFLAGS_OS_DEF_JVM="-DLINUX -DANDROID"
+    if test "x$OPENJDK_TARGET_CPU_BITS" = x32; then
+      # HotSpot requires 64-bit file offsets even when Bionic uses LP32.
+      CFLAGS_OS_DEF_JVM="$CFLAGS_OS_DEF_JVM -D_FILE_OFFSET_BITS=64"
+    fi
+    CFLAGS_OS_DEF_JDK="-DLINUX -D_GNU_SOURCE -D_REENTRANT -D_LARGEFILE64_SOURCE"
+  elif test "x$OPENJDK_TARGET_OS" = xios; then
+    CFLAGS_OS_DEF_JVM="-D_ALLBSD_SOURCE -D__IOS__ -D_XOPEN_SOURCE"
+    CFLAGS_OS_DEF_JDK="-D_ALLBSD_SOURCE -D__IOS__"
   elif test "x$OPENJDK_TARGET_OS" = xmacosx; then
     CFLAGS_OS_DEF_JVM="-D_ALLBSD_SOURCE -D_DARWIN_C_SOURCE -D_XOPEN_SOURCE"
     CFLAGS_OS_DEF_JDK="-D_ALLBSD_SOURCE -D_DARWIN_UNLIMITED_SELECT"
@@ -604,7 +616,7 @@ AC_DEFUN([FLAGS_SETUP_CFLAGS_HELPER],
     # works for all platforms.
     TOOLCHAIN_CFLAGS_JVM="$TOOLCHAIN_CFLAGS_JVM -mno-omit-leaf-frame-pointer -mstack-alignment=16"
 
-    if test "x$OPENJDK_TARGET_OS" = xlinux; then
+    if test "x$OPENJDK_TARGET_OS" = xlinux || test "x$OPENJDK_TARGET_OS" = xandroid; then
       if test "x$DEBUG_LEVEL" = xrelease; then
         # Clang does not inline as much as GCC does for functions with "inline" keyword by default.
         # This causes noticeable slowdown in pause time for G1, and possibly in other areas.
@@ -783,7 +795,7 @@ AC_DEFUN([FLAGS_SETUP_CFLAGS_CPU_DEP],
     if test "x$FLAGS_CPU" = xx86; then
       AC_MSG_RESULT([yes])
       AC_MSG_CHECKING([if control flow protection is enabled by additional compiler flags])
-      if echo "${EXTRA_CFLAGS}${EXTRA_CXXFLAGS}${EXTRA_ASFLAGS}" | ${GREP} -q 'fcf-protection' ; then
+      if test "x$FLAGS_OS" = xandroid || echo "${EXTRA_CFLAGS}${EXTRA_CXXFLAGS}${EXTRA_ASFLAGS}" | ${GREP} -q 'fcf-protection' ; then
         # cf-protection requires CMOV and thus i686
         $1_CFLAGS_CPU="-march=i686"
         AC_MSG_RESULT([yes, forcing ${$1_CFLAGS_CPU}])
@@ -826,7 +838,7 @@ AC_DEFUN([FLAGS_SETUP_CFLAGS_CPU_DEP],
     fi
 
   elif test "x$TOOLCHAIN_TYPE" = xclang; then
-    if test "x$FLAGS_OS" = xlinux; then
+    if test "x$FLAGS_OS" = xlinux || test "x$FLAGS_OS" = xandroid; then
       # ppc test not really needed for clang
       if test "x$FLAGS_CPU_ARCH" != xarm &&  test "x$FLAGS_CPU_ARCH" != xppc; then
         # for all archs except arm and ppc, prevent gcc to omit frame pointer
@@ -840,6 +852,9 @@ AC_DEFUN([FLAGS_SETUP_CFLAGS_CPU_DEP],
     fi
     if test "x$OPENJDK_TARGET_OS" = xaix; then
       $1_CFLAGS_CPU="-mcpu=pwr8"
+    fi
+    if test "x$FLAGS_CPU" = xarm && test "x$FLAGS_OS" = xandroid; then
+      $1_CFLAGS_CPU_JVM="${$1_CFLAGS_CPU_JVM} -DARM"
     fi
 
   elif test "x$TOOLCHAIN_TYPE" = xxlc; then

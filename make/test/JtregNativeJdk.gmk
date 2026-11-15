@@ -125,6 +125,12 @@ ifeq ($(call isTargetOs, linux), true)
   # nio tests' libCreationTimeHelper native needs -ldl linker flag
   BUILD_JDK_JTREG_LIBRARIES_LIBS_libCreationTimeHelper := -ldl
   BUILD_JDK_JTREG_LIBRARIES_LIBS_libAndroidRuntimeChecks := -ldl
+  BUILD_JDK_JTREG_LIBRARIES_LIBS_libAndroidUnixRuntimeChecks := -ldl
+endif
+
+ifeq ($(call isTargetOs, android), true)
+  BUILD_JDK_JTREG_LIBRARIES_LIBS_libAndroidRuntimeChecks := -ldl
+  BUILD_JDK_JTREG_LIBRARIES_LIBS_libAndroidUnixRuntimeChecks := -ldl
 endif
 
 ifeq ($(ASAN_ENABLED), true)

@@ -44,8 +44,10 @@ AC_DEFUN_ONCE([LIB_SETUP_STD_LIBS],
       [with_stdc__lib=default]
   )
 
-  if test "x$OPENJDK_TARGET_OS" = xlinux; then
-    # Test if stdc++ can be linked statically.
+  if test "x$OPENJDK_TARGET_OS" = xlinux || test "x$OPENJDK_TARGET_OS" = xandroid; then
+    # The Android Clang driver applies -static-libstdc++ to its NDK libc++.
+    # Keep the existing static/dynamic option meaningful for both platforms.
+    # Test if the standard C++ runtime can be linked statically.
     AC_MSG_CHECKING([if static link of stdc++ is possible])
     STATIC_STDCXX_FLAGS="-static-libstdc++ -static-libgcc"
     AC_LANG_PUSH(C++)
