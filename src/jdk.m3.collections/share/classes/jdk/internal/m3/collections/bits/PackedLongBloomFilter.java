@@ -40,7 +40,7 @@ public final class PackedLongBloomFilter implements LongBloomMembership {
         long hash = mix(value), step = mix(value ^ 0x9e3779b97f4a7c15L) | 1L;
         boolean changed = false;
         for (int i = 0; i < hashFunctions; i++, hash += step) {
-            int bit = (int) Long.remainderUnsigned(hash, bitSize); long mask = 1L << (bit & 63);
+            int bit = position(hash); long mask = 1L << (bit & 63);
             changed |= (words[bit >>> 6] & mask) == 0; words[bit >>> 6] |= mask;
         }
         return changed;
@@ -48,12 +48,18 @@ public final class PackedLongBloomFilter implements LongBloomMembership {
     public boolean mightContain(long value) {
         long hash = mix(value), step = mix(value ^ 0x9e3779b97f4a7c15L) | 1L;
         for (int i = 0; i < hashFunctions; i++, hash += step) {
-            int bit = (int) Long.remainderUnsigned(hash, bitSize);
+            int bit = position(hash);
             if ((words[bit >>> 6] & (1L << (bit & 63))) == 0) return false;
         }
         return true;
     }
     public void clear() { Arrays.fill(words, 0); }
+    /** Power-of-two dimensions preserve the exact unsigned remainder bit layout. */
+    private int position(long hash) {
+        int mask = bitSize - 1;
+        return (bitSize & mask) == 0 ? (int) hash & mask
+                : (int) Long.remainderUnsigned(hash, bitSize);
+    }
     private static long mix(long value) {
         value ^= value >>> 33; value *= 0xff51afd7ed558ccdL;
         value ^= value >>> 33; value *= 0xc4ceb9fe1a85ec53L;

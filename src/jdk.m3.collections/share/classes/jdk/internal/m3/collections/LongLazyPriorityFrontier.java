@@ -211,33 +211,49 @@ public final class LongLazyPriorityFrontier {
     }
 
     private boolean before(int a, int b) {
-        int order = Long.compare(priorities[a], priorities[b]);
+        return before(ids[a], priorities[a], serials[a], ids[b], priorities[b], serials[b]);
+    }
+
+    private static boolean before(long leftId, long leftPriority, long leftSerial,
+                                  long rightId, long rightPriority, long rightSerial) {
+        int order = Long.compare(leftPriority, rightPriority);
         if (order != 0) return order > 0;
-        order = Long.compare(ids[a], ids[b]);
+        order = Long.compare(leftId, rightId);
         if (order != 0) return order < 0;
-        return serials[a] < serials[b];
+        return leftSerial < rightSerial;
     }
 
     private void siftUp(int start) {
+        long id = ids[start];
+        long priority = priorities[start];
+        long serial = serials[start];
+        byte flag = resolved[start];
         int index = start;
         while (index > 0) {
             int parent = (index - 1) >>> 1;
-            if (!before(index, parent)) break;
-            swap(index, parent);
+            if (!before(id, priority, serial, ids[parent], priorities[parent], serials[parent])) break;
+            // Move one parent down into the hole; keep this entry in registers.
+            copy(parent, index);
             index = parent;
         }
+        if (index != start) place(index, id, priority, serial, flag);
     }
 
     private void siftDown(int start) {
+        long id = ids[start];
+        long priority = priorities[start];
+        long serial = serials[start];
+        byte flag = resolved[start];
         int index = start;
         while (index < (size >>> 1)) {
             int child = (index << 1) + 1;
             int right = child + 1;
             if (right < size && before(right, child)) child = right;
-            if (!before(child, index)) return;
-            swap(index, child);
+            if (!before(ids[child], priorities[child], serials[child], id, priority, serial)) break;
+            copy(child, index);
             index = child;
         }
+        if (index != start) place(index, id, priority, serial, flag);
     }
 
     private void copy(int from, int to) {
@@ -247,15 +263,10 @@ public final class LongLazyPriorityFrontier {
         resolved[to] = resolved[from];
     }
 
-    private void swap(int a, int b) {
-        long id = ids[a];
-        long priority = priorities[a];
-        long serial = serials[a];
-        byte flag = resolved[a];
-        copy(b, a);
-        ids[b] = id;
-        priorities[b] = priority;
-        serials[b] = serial;
-        resolved[b] = flag;
+    private void place(int index, long id, long priority, long serial, byte flag) {
+        ids[index] = id;
+        priorities[index] = priority;
+        serials[index] = serial;
+        resolved[index] = flag;
     }
 }
