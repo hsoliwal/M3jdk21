@@ -37,7 +37,9 @@ public record M3LibraryBinding(Family family, String factoryName, List<String> p
         if (m3Owners.isEmpty()) throw new IllegalArgumentException("M3 owner evidence required");
         for (String owner : m3Owners) {
             typeName(owner);
-            if (!owner.startsWith("jdk.m3.collections.M3")) throw new IllegalArgumentException("not an M3 collection owner");
+            if (!owner.startsWith("jdk.m3.collections.M3")
+                    && !owner.equals("jdk.m3.collections.CountedBag"))
+                throw new IllegalArgumentException("not an M3 collection owner");
         }
         if (version == null || version.isBlank() || version.chars().anyMatch(Character::isWhitespace))
             throw new IllegalArgumentException("pinned compatibility version required");
