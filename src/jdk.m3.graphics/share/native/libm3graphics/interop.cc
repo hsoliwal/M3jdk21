@@ -1,0 +1,1237 @@
+#include <array>
+#include <cstring>
+#include "interop.hh"
+#include <iostream>
+#include <jni.h>
+#include <memory>
+#include "SkBlendMode.h"
+#include "SkCodecAnimation.h"
+#include "shaper/interop.hh"
+#include "src/base/SkUTF.h"
+#include "paragraph/interop.hh"
+
+namespace java {
+    namespace io {
+        namespace OutputStream {
+            jclass cls;
+            jmethodID write;
+            jmethodID flush;
+
+            void onLoad(JNIEnv* env) {
+                jclass cls = env->FindClass("java/io/OutputStream");
+                write = env->GetMethodID(cls, "write", "([BII)V");
+                flush = env->GetMethodID(cls, "flush", "()V");
+            }
+        }
+    }
+
+    namespace lang {
+        namespace Float {
+            jclass cls;
+            jmethodID ctor;
+
+            void onLoad(JNIEnv* env) {
+                jclass local = env->FindClass("java/lang/Float");
+                cls  = static_cast<jclass>(env->NewGlobalRef(local));
+                ctor = env->GetMethodID(cls, "<init>", "(F)V");
+            }
+
+            void onUnload(JNIEnv* env) {
+                env->DeleteGlobalRef(cls);
+            }
+        }
+
+        namespace RuntimeException {
+            jclass cls;
+
+            void onLoad(JNIEnv* env) {
+                jclass local = env->FindClass("java/lang/RuntimeException");
+                cls  = static_cast<jclass>(env->NewGlobalRef(local));
+            }
+
+            void onUnload(JNIEnv* env) {
+                env->DeleteGlobalRef(cls);
+            }
+        }
+
+        namespace String {
+            jclass cls;
+
+            void onLoad(JNIEnv* env) {
+                jclass local = env->FindClass("java/lang/String");
+                cls = static_cast<jclass>(env->NewGlobalRef(local));
+            }
+
+            void onUnload(JNIEnv* env) {
+                env->DeleteGlobalRef(cls);
+            }
+        }
+
+        namespace Throwable {
+            jmethodID printStackTrace;
+
+            void onLoad(JNIEnv* env) {
+                jclass cls = env->FindClass("java/lang/Throwable");
+                printStackTrace = env->GetMethodID(cls, "printStackTrace", "()V");
+            }
+
+            bool exceptionThrown(JNIEnv* env) {
+                if (env->ExceptionCheck()) {
+                    auto th = skija::AutoLocal<jthrowable>(env, env->ExceptionOccurred());
+                    env->CallVoidMethod(th.get(), printStackTrace);
+                    env->ExceptionCheck(); // ignore
+                    return true;
+                } else
+                    return false;
+            }
+        }
+    }
+
+    namespace util {
+        namespace Iterator {
+            jclass cls;
+            jmethodID next;
+            jmethodID hasNext;
+
+            void onLoad(JNIEnv* env) {
+                jclass local = env->FindClass("java/util/Iterator");
+                cls  = static_cast<jclass>(env->NewGlobalRef(local));
+                next = env->GetMethodID(cls, "next", "()Ljava/lang/Object;");
+                hasNext = env->GetMethodID(cls, "hasNext", "()Z");
+            }
+
+            void onUnload(JNIEnv* env) {
+                env->DeleteGlobalRef(cls);
+            }
+        }
+
+        namespace function {
+            namespace BooleanSupplier {
+                jclass cls;
+                jmethodID apply;
+
+                void onLoad(JNIEnv* env) {
+                    jclass local = env->FindClass("java/util/function/BooleanSupplier");
+                    cls   = static_cast<jclass>(env->NewGlobalRef(local));
+                    apply = env->GetMethodID(cls, "getAsBoolean", "()Z");
+                }
+
+                void onUnload(JNIEnv* env) {
+                    env->DeleteGlobalRef(cls);
+                }
+            }
+        }
+    }
+
+    void onLoad(JNIEnv* env) {
+        io::OutputStream::onLoad(env);
+        lang::Float::onLoad(env);
+        lang::RuntimeException::onLoad(env);
+        lang::String::onLoad(env);
+        lang::Throwable::onLoad(env);
+        util::Iterator::onLoad(env);
+        util::function::BooleanSupplier::onLoad(env);
+    }
+
+    void onUnload(JNIEnv* env) {
+        util::function::BooleanSupplier::onUnload(env);
+        util::Iterator::onUnload(env);
+        lang::String::onUnload(env);
+        lang::RuntimeException::onUnload(env);
+        lang::Float::onUnload(env);
+    }
+}
+
+namespace skija {
+    namespace AnimationFrameInfo {
+        jclass cls;
+        jmethodID ctor;
+
+        void onLoad(JNIEnv* env) {
+            jclass local = env->FindClass("jdk/m3/graphics/M3AnimationFrameInfo");
+            cls  = static_cast<jclass>(env->NewGlobalRef(local));
+            ctor = env->GetMethodID(cls, "<init>", "(IIZIZIILjdk/m3/graphics/M3IRect;)V");
+        }
+
+        void onUnload(JNIEnv* env) {
+            env->DeleteGlobalRef(cls);
+        }
+
+        jobject toJava(JNIEnv* env, const SkCodec::FrameInfo& i) {
+            SkBlendMode blend;
+            switch (i.fBlend) {
+                case SkCodecAnimation::Blend::kSrcOver:
+                    blend = SkBlendMode::kSrcOver;
+                    break;
+                case SkCodecAnimation::Blend::kSrc:
+                    blend = SkBlendMode::kSrc;
+                    break;
+            }
+            jobject res = env->NewObject(cls, ctor,
+                                         i.fRequiredFrame,
+                                         i.fDuration,
+                                         i.fFullyReceived,
+                                         static_cast<jint>(i.fAlphaType),
+                                         i.fHasAlphaWithinBounds,
+                                         static_cast<jint>(i.fDisposalMethod),
+                                         static_cast<jint>(blend),
+                                         types::IRect::fromSkIRect(env, i.fFrameRect));
+            return java::lang::Throwable::exceptionThrown(env) ? nullptr : res;
+        }
+    }
+
+    namespace Color4f {
+        jclass cls;
+        jmethodID ctor;
+
+        void onLoad(JNIEnv* env) {
+            jclass local = env->FindClass("jdk/m3/graphics/M3Color4f");
+            cls  = static_cast<jclass>(env->NewGlobalRef(local));
+            ctor = env->GetMethodID(cls, "<init>", "(FFFF)V");
+        }
+
+        void onUnload(JNIEnv* env) {
+            env->DeleteGlobalRef(cls);
+        }
+    }
+
+    namespace Drawable {
+        jclass cls;
+        jmethodID onDraw;
+        jmethodID onGetBounds;
+
+        void onLoad(JNIEnv* env) {
+            jclass local = env->FindClass("jdk/m3/graphics/M3Drawable");
+            cls = static_cast<jclass>(env->NewGlobalRef(local));
+            onDraw = env->GetMethodID(cls, "_onDraw", "(J)V");
+            onGetBounds = env->GetMethodID(cls, "onGetBounds", "()Ljdk/m3/graphics/M3Rect;");
+        }
+
+        void onUnload(JNIEnv* env) {
+            env->DeleteGlobalRef(cls);
+        }
+    }
+
+    namespace FontFamilyName {
+        jclass cls;
+        jmethodID ctor;
+
+        void onLoad(JNIEnv* env) {
+            jclass local = env->FindClass("jdk/m3/graphics/M3FontFamilyName");
+            cls  = static_cast<jclass>(env->NewGlobalRef(local));
+            ctor = env->GetMethodID(cls, "<init>", "(Ljava/lang/String;Ljava/lang/String;)V");
+        }
+
+        void onUnload(JNIEnv* env) {
+            env->DeleteGlobalRef(cls);
+        }
+    }
+
+    namespace FontArguments {
+        jclass cls;
+        jfieldID collectionIndex;
+        jfieldID variations;
+        jfieldID paletteIndex;
+        jfieldID paletteOverrides;
+
+        void onLoad(JNIEnv* env) {
+            jclass local = env->FindClass("jdk/m3/graphics/M3FontArguments");
+            cls = static_cast<jclass>(env->NewGlobalRef(local));
+            collectionIndex = env->GetFieldID(cls, "_collectionIndex", "I");
+            variations = env->GetFieldID(cls, "_variations", "[Ljdk/m3/graphics/M3FontVariation;");
+            paletteIndex = env->GetFieldID(cls, "_paletteIndex", "I");
+            paletteOverrides = env->GetFieldID(cls, "_paletteOverrides", "[Ljdk/m3/graphics/M3FontPaletteOverride;");
+        }
+
+        void onUnload(JNIEnv* env) {
+            env->DeleteGlobalRef(cls);
+        }
+
+        SkFontArguments toSkFontArguments(JNIEnv* env, jobject fontArgumentsObj) {
+            SkFontArguments args;
+
+            jint collectionIdx = env->GetIntField(fontArgumentsObj, collectionIndex);
+            args.setCollectionIndex(collectionIdx);
+
+            jobjectArray variationsArr = static_cast<jobjectArray>(env->GetObjectField(fontArgumentsObj, variations));
+            jsize variationCount = variationsArr == nullptr ? 0 : env->GetArrayLength(variationsArr);
+            if (variationCount > 0) {
+                // NOTE: heap allocation, call freeSkFontArguments
+                SkFontArguments::VariationPosition::Coordinate* coordinates = new SkFontArguments::VariationPosition::Coordinate[variationCount];
+                for (int i = 0; i < variationCount; ++i) {
+                    jobject jvar = env->GetObjectArrayElement(variationsArr, i);
+                    coordinates[i] = {
+                        static_cast<SkFourByteTag>(env->GetIntField(jvar, skija::FontVariation::tag)),
+                        env->GetFloatField(jvar, skija::FontVariation::value)
+                    };
+                    env->DeleteLocalRef(jvar);
+                }
+                args.setVariationDesignPosition({coordinates, variationCount});
+            }
+
+            jint paletteIdx = env->GetIntField(fontArgumentsObj, paletteIndex);
+            jobjectArray paletteOverridesArr = static_cast<jobjectArray>(env->GetObjectField(fontArgumentsObj, paletteOverrides));
+            jsize overrideCount = paletteOverridesArr == nullptr ? 0 : env->GetArrayLength(paletteOverridesArr);
+
+            if (overrideCount > 0) {
+                // NOTE: heap allocation, call freeSkFontArguments
+                SkFontArguments::Palette::Override* overrides = new SkFontArguments::Palette::Override[overrideCount];
+                for (int i = 0; i < overrideCount; ++i) {
+                    jobject joverride = env->GetObjectArrayElement(paletteOverridesArr, i);
+                    overrides[i] = {
+                        static_cast<uint16_t>(env->GetIntField(joverride, skija::FontPaletteOverride::index)),
+                        static_cast<SkColor>(env->GetIntField(joverride, skija::FontPaletteOverride::color))
+                    };
+                    env->DeleteLocalRef(joverride);
+                }
+                args.setPalette({paletteIdx, overrides, overrideCount});
+            } else if (paletteIdx != 0) {
+                args.setPalette({paletteIdx, nullptr, 0});
+            }
+
+            return args;
+        }
+
+        void freeSkFontArguments(SkFontArguments& args) {
+            auto variationPosition = args.getVariationDesignPosition();
+            if (variationPosition.coordinates != nullptr) {
+                delete[] variationPosition.coordinates;
+            }
+
+            auto palette = args.getPalette();
+            if (palette.overrides != nullptr) {
+                delete[] palette.overrides;
+            }
+        }
+    }
+
+    namespace FontFeature {
+        jclass cls;
+        jmethodID ctor;
+        jfieldID tag;
+        jfieldID value;
+        jfieldID start;
+        jfieldID end;
+
+        void onLoad(JNIEnv* env) {
+            jclass local = env->FindClass("jdk/m3/graphics/M3FontFeature");
+            cls  = static_cast<jclass>(env->NewGlobalRef(local));
+            ctor = env->GetMethodID(cls, "<init>", "(Ljava/lang/String;I)V");
+            tag   = env->GetFieldID(cls, "_tag",   "I");
+            value = env->GetFieldID(cls, "_value", "I");
+            start = env->GetFieldID(cls, "_start", "J");
+            end   = env->GetFieldID(cls, "_end",   "J");
+        }
+
+        void onUnload(JNIEnv* env) {
+            env->DeleteGlobalRef(cls);
+        }
+
+        std::vector<SkShaper::Feature> fromJavaArray(JNIEnv* env, jobjectArray featuresArr) {
+            jsize featuresLen = featuresArr == nullptr ? 0 : env->GetArrayLength(featuresArr);
+            std::vector<SkShaper::Feature> features(featuresLen);
+            for (int i = 0; i < featuresLen; ++i) {
+                skija::AutoLocal<jobject> featureObj(env, env->GetObjectArrayElement(featuresArr, i));
+                features[i] = {static_cast<SkFourByteTag>(env->GetIntField(featureObj.get(), skija::FontFeature::tag)),
+                               static_cast<uint32_t>(env->GetIntField(featureObj.get(), skija::FontFeature::value)),
+                               static_cast<size_t>(env->GetLongField(featureObj.get(), skija::FontFeature::start)),
+                               static_cast<size_t>(env->GetLongField(featureObj.get(), skija::FontFeature::end))};
+            }
+            return features;
+        }
+    }
+
+    namespace FontPaletteOverride {
+        jclass cls;
+        jfieldID index;
+        jfieldID color;
+
+        void onLoad(JNIEnv* env) {
+            jclass local = env->FindClass("jdk/m3/graphics/M3FontPaletteOverride");
+            cls = static_cast<jclass>(env->NewGlobalRef(local));
+            index = env->GetFieldID(cls, "_index", "I");
+            color = env->GetFieldID(cls, "_color", "I");
+        }
+
+        void onUnload(JNIEnv* env) {
+            env->DeleteGlobalRef(cls);
+        }
+    }
+
+    namespace FontMetrics {
+        jclass cls;
+        jmethodID ctor;
+
+        void onLoad(JNIEnv* env) {
+            jclass local = env->FindClass("jdk/m3/graphics/M3FontMetrics");
+            cls  = static_cast<jclass>(env->NewGlobalRef(local));
+            ctor = env->GetMethodID(cls, "<init>", "(FFFFFFFFFFFLjava/lang/Float;Ljava/lang/Float;Ljava/lang/Float;Ljava/lang/Float;)V");
+        }
+
+        void onUnload(JNIEnv* env) {
+            env->DeleteGlobalRef(cls);
+        }
+
+        jobject toJava(JNIEnv* env, const SkFontMetrics& m) {
+            float f1, f2, f3, f4;
+            return env->NewObject(cls, ctor,
+                m.fTop,
+                m.fAscent,
+                m.fDescent,
+                m.fBottom,
+                m.fLeading,
+                m.fAvgCharWidth,
+                m.fMaxCharWidth,
+                m.fXMin,
+                m.fXMax,
+                m.fXHeight,
+                m.fCapHeight,
+                m.hasUnderlineThickness(&f1) ? javaFloat(env, f1) : nullptr,
+                m.hasUnderlinePosition(&f2)  ? javaFloat(env, f2) : nullptr,
+                m.hasStrikeoutThickness(&f3) ? javaFloat(env, f3) : nullptr,
+                m.hasStrikeoutPosition(&f4)  ? javaFloat(env, f4) : nullptr);
+        }
+    }
+
+    namespace FontMgr {
+        jclass cls;
+        
+        void onLoad(JNIEnv* env) {
+            jclass local = env->FindClass("jdk/m3/graphics/M3FontMgr");
+            cls = static_cast<jclass>(env->NewGlobalRef(local));
+        }
+
+        void onUnload(JNIEnv* env) {
+            env->DeleteGlobalRef(cls);
+        }
+    }
+
+    namespace FontStyle {
+        SkFontStyle fromJava(jint style) {
+            return SkFontStyle(style & 0xFFFF, (style >> 16) & 0xFF, static_cast<SkFontStyle::Slant>((style >> 24) & 0xFF));
+        }
+
+        jint toJava(const SkFontStyle& fs) {
+            return (static_cast<int>(fs.slant()) << 24)| (fs.width() << 16) | fs.weight();
+        }
+    }
+
+    namespace FontVariation {
+        jclass    cls;
+        jmethodID ctor;
+        jfieldID  tag;
+        jfieldID  value;
+
+        void onLoad(JNIEnv* env) {
+            jclass local = env->FindClass("jdk/m3/graphics/M3FontVariation");    
+            cls   = static_cast<jclass>(env->NewGlobalRef(local));
+            ctor = env->GetMethodID(cls, "<init>", "(IF)V");
+            tag   = env->GetFieldID(cls, "_tag", "I");
+            value = env->GetFieldID(cls, "_value", "F");
+        }
+
+        void onUnload(JNIEnv* env) {
+            env->DeleteGlobalRef(cls);
+        }
+    }
+
+    namespace FontVariationAxis {
+        jclass    cls;
+        jmethodID ctor;
+
+        void onLoad(JNIEnv* env) {
+            jclass local = env->FindClass("jdk/m3/graphics/M3FontVariationAxis");
+            cls  = static_cast<jclass>(env->NewGlobalRef(local));
+            ctor = env->GetMethodID(cls, "<init>", "(IFFFZ)V");
+        }
+
+        void onUnload(JNIEnv* env) {
+            env->DeleteGlobalRef(cls);
+        }
+    }
+
+    namespace Image {
+        jclass cls;
+        jmethodID ctor;
+
+        void onLoad(JNIEnv* env) {
+            jclass local = env->FindClass("jdk/m3/graphics/M3Image");
+            cls  = static_cast<jclass>(env->NewGlobalRef(local));
+            ctor = env->GetMethodID(cls, "<init>", "(J)V");
+        }
+
+        void onUnload(JNIEnv* env) {
+            env->DeleteGlobalRef(cls);
+        }
+    }
+
+    namespace ImageInfo {
+        jclass cls;
+        jmethodID ctor;
+
+        void onLoad(JNIEnv* env) {
+            jclass local = env->FindClass("jdk/m3/graphics/M3ImageInfo");
+            cls   = static_cast<jclass>(env->NewGlobalRef(local));
+            ctor = env->GetMethodID(cls, "<init>", "(IIIIJ)V");
+        }
+
+        void onUnload(JNIEnv* env) {
+            env->DeleteGlobalRef(cls);
+        }
+
+        jobject toJava(JNIEnv* env, const SkImageInfo& info) {
+            return env->NewObject(cls, ctor,
+                info.width(),
+                info.height(),
+                static_cast<jint>(info.colorType()),
+                static_cast<jint>(info.alphaType()),
+                reinterpret_cast<jlong>(info.refColorSpace().release()));
+        }
+    }
+
+    namespace ImageWithFilterResult {
+        jclass cls;
+        jmethodID ctor;
+
+        void onLoad(JNIEnv* env) {
+            jclass local = env->FindClass("jdk/m3/graphics/M3ImageWithFilterResult");
+            cls  = static_cast<jclass>(env->NewGlobalRef(local));
+            ctor = env->GetMethodID(cls, "<init>", "(Ljdk/m3/graphics/M3Image;Ljdk/m3/graphics/M3IRect;Ljdk/m3/graphics/M3IPoint;)V");
+        }
+
+        void onUnload(JNIEnv* env) {
+            env->DeleteGlobalRef(cls);
+        }
+
+        jobject make(JNIEnv* env, SkImage* image, const SkIRect& subset, const SkIPoint& offset) {
+            jobject imageObj = env->NewObject(skija::Image::cls, skija::Image::ctor, reinterpret_cast<jlong>(image));
+            jobject subsetObj = types::IRect::fromSkIRect(env, subset);
+            jobject offsetObj = types::IPoint::fromSkIPoint(env, offset);
+            return env->NewObject(cls, ctor, imageObj, subsetObj, offsetObj);
+        }
+    }
+
+    namespace Path {
+        jclass cls;
+        jmethodID ctor;
+
+        void onLoad(JNIEnv* env) {
+            jclass local = env->FindClass("jdk/m3/graphics/M3Path");
+            cls          = static_cast<jclass>(env->NewGlobalRef(local));
+            ctor         = env->GetMethodID(cls, "<init>", "(J)V");
+        }
+
+        void onUnload(JNIEnv* env) {
+            env->DeleteGlobalRef(cls);
+        }
+    }
+
+    namespace PathSegment {
+        jclass cls;
+        jmethodID ctorDone;
+        jmethodID ctorMoveClose;
+        jmethodID ctorLine;
+        jmethodID ctorQuad;
+        jmethodID ctorConic;
+        jmethodID ctorCubic;
+
+        void onLoad(JNIEnv* env) {
+            jclass local  = env->FindClass("jdk/m3/graphics/M3PathSegment");
+            cls           = static_cast<jclass>(env->NewGlobalRef(local));
+            ctorDone      = env->GetMethodID(cls, "<init>", "()V");
+            ctorMoveClose = env->GetMethodID(cls, "<init>", "(IFFZ)V");
+            ctorLine      = env->GetMethodID(cls, "<init>", "(FFFFZZ)V");
+            ctorQuad      = env->GetMethodID(cls, "<init>", "(FFFFFFZ)V");
+            ctorConic     = env->GetMethodID(cls, "<init>", "(FFFFFFFZ)V");
+            ctorCubic     = env->GetMethodID(cls, "<init>", "(FFFFFFFFZ)V");
+        }
+
+        void onUnload(JNIEnv* env) {
+            env->DeleteGlobalRef(cls);
+        }
+    }
+
+    namespace PaintFilterCanvas {
+        jmethodID onFilterId;
+
+        void onLoad(JNIEnv* env) {
+            jclass local = env->FindClass("jdk/m3/graphics/M3PaintFilterCanvas");
+            onFilterId = env->GetMethodID(local, "onFilter", "(J)Z");
+        }
+
+        void onUnload(JNIEnv* env) {
+        }
+
+        bool onFilter(jobject obj, SkPaint& paint) {
+            JNIScope scope;
+            if (!scope.env) return true;
+            return scope.env->CallBooleanMethod(obj, onFilterId, reinterpret_cast<jlong>(&paint));
+        }
+
+        jobject attach(JNIEnv* env, jobject obj) {
+            return env->NewGlobalRef(obj);
+        }
+
+        void detach(jobject obj) {
+            JNIScope scope;
+            if (!scope.env) return;
+            scope.env->DeleteGlobalRef(obj);
+        }
+    }
+
+   namespace RSXform {
+        jclass cls;
+        jmethodID ctor;
+
+        void onLoad(JNIEnv* env) {
+            jclass local = env->FindClass("jdk/m3/graphics/M3RSXform");
+            cls  = static_cast<jclass>(env->NewGlobalRef(local));
+            ctor = env->GetMethodID(cls, "<init>", "(FFFF)V");
+        }
+
+        void onUnload(JNIEnv* env) {
+            env->DeleteGlobalRef(cls);
+        }
+    }
+
+    namespace RuntimeEffectUniformInfo {
+        jclass cls;
+        jmethodID ctor;
+
+        void onLoad(JNIEnv* env) {
+            jclass local = env->FindClass("jdk/m3/graphics/M3RuntimeEffectUniformInfo");
+            cls  = static_cast<jclass>(env->NewGlobalRef(local));
+            ctor = env->GetMethodID(cls, "<init>", "(Ljava/lang/String;IIII)V");
+        }
+
+        void onUnload(JNIEnv* env) {
+            env->DeleteGlobalRef(cls);
+        }
+    }
+
+    namespace RuntimeEffectChildInfo {
+        jclass cls;
+        jmethodID ctor;
+
+        void onLoad(JNIEnv* env) {
+            jclass local = env->FindClass("jdk/m3/graphics/M3RuntimeEffectChildInfo");
+            cls  = static_cast<jclass>(env->NewGlobalRef(local));
+            ctor = env->GetMethodID(cls, "<init>", "(Ljava/lang/String;II)V");
+        }
+
+        void onUnload(JNIEnv* env) {
+            env->DeleteGlobalRef(cls);
+        }
+    }
+
+    namespace SamplingMode {
+        SkSamplingOptions unpack(jlong val) {
+            if (0x8000000000000000 & val) {
+                val = val & 0x7FFFFFFFFFFFFFFF;
+                float* ptr = reinterpret_cast<float*>(&val);
+                return SkSamplingOptions(SkCubicResampler {ptr[1], ptr[0]});
+            } else if (0x4000000000000000 & val) {
+                int32_t maxAniso = (int32_t) (val & 0xFFFFFFFF);
+                return SkSamplingOptions::Aniso(maxAniso);
+            } else {
+                int32_t filter = (int32_t) ((val >> 32) & 0xFFFFFFFF);
+                int32_t mipmap = (int32_t) (val & 0xFFFFFFFF);
+                return SkSamplingOptions(static_cast<SkFilterMode>(filter), static_cast<SkMipmapMode>(mipmap));
+            }
+        }
+    }
+
+    namespace SurfaceProps {
+        jclass cls;
+        jmethodID ctor;
+        jmethodID _getFlags;
+        jmethodID _getPixelGeometryOrdinal;
+
+        void onLoad(JNIEnv* env) {
+            jclass local = env->FindClass("jdk/m3/graphics/M3SurfaceProps");
+            cls = static_cast<jclass>(env->NewGlobalRef(local));
+            ctor = env->GetMethodID(cls, "<init>", "(ZI)V");
+            _getFlags = env->GetMethodID(cls, "_getFlags", "()I");
+            _getPixelGeometryOrdinal = env->GetMethodID(cls, "_getPixelGeometryOrdinal", "()I");
+        }
+
+        void onUnload(JNIEnv* env) {
+            env->DeleteGlobalRef(cls);
+        }
+
+        jobject toJava(JNIEnv* env, const SkSurfaceProps& props) {
+            jobject res = env->NewObject(cls, ctor, props.isUseDeviceIndependentFonts(), static_cast<jint>(props.pixelGeometry()));
+            return java::lang::Throwable::exceptionThrown(env) ? nullptr : res;
+        }
+
+        std::unique_ptr<SkSurfaceProps> toSkSurfaceProps(JNIEnv* env, jobject surfacePropsObj) {
+            if (surfacePropsObj == nullptr)
+                return std::unique_ptr<SkSurfaceProps>(nullptr);
+            uint32_t flags = static_cast<uint32_t>(env->CallIntMethod(surfacePropsObj, _getFlags));
+            if (java::lang::Throwable::exceptionThrown(env))
+                std::unique_ptr<SkSurfaceProps>(nullptr);
+            SkPixelGeometry geom = static_cast<SkPixelGeometry>(env->CallIntMethod(surfacePropsObj, _getPixelGeometryOrdinal));
+            if (java::lang::Throwable::exceptionThrown(env))
+                std::unique_ptr<SkSurfaceProps>(nullptr);
+            return std::make_unique<SkSurfaceProps>(flags, geom);
+        }
+    }
+
+    namespace TransferFunction {
+        jclass cls;
+        jmethodID ctor;
+        jfieldID _g;
+        jfieldID _a;
+        jfieldID _b;
+        jfieldID _c;
+        jfieldID _d;
+        jfieldID _e;
+        jfieldID _f;
+
+        void onLoad(JNIEnv* env) {
+            jclass local = env->FindClass("jdk/m3/graphics/M3TransferFunction");
+            cls  = static_cast<jclass>(env->NewGlobalRef(local));
+            ctor = env->GetMethodID(cls, "<init>", "(FFFFFFF)V");
+            _g = env->GetFieldID(cls, "_g", "F");
+            _a = env->GetFieldID(cls, "_a", "F");
+            _b = env->GetFieldID(cls, "_b", "F");
+            _c = env->GetFieldID(cls, "_c", "F");
+            _d = env->GetFieldID(cls, "_d", "F");
+            _e = env->GetFieldID(cls, "_e", "F");
+            _f = env->GetFieldID(cls, "_f", "F");
+        }
+
+        void onUnload(JNIEnv* env) {
+            env->DeleteGlobalRef(cls);
+        }
+
+        jobject toJava(JNIEnv* env, const skcms_TransferFunction& fn) {
+            return env->NewObject(cls, ctor, fn.g, fn.a, fn.b, fn.c, fn.d, fn.e, fn.f);
+        }
+
+        skcms_TransferFunction fromJava(JNIEnv* env, jobject obj) {
+            return {
+                env->GetFloatField(obj, _g),
+                env->GetFloatField(obj, _a),
+                env->GetFloatField(obj, _b),
+                env->GetFloatField(obj, _c),
+                env->GetFloatField(obj, _d),
+                env->GetFloatField(obj, _e),
+                env->GetFloatField(obj, _f),
+            };
+        }
+    }
+
+    namespace impl {
+        namespace Native {
+            jfieldID _ptr;
+
+            void onLoad(JNIEnv* env) {
+                jclass cls = env->FindClass("jdk/m3/graphics/impl/M3Native");
+                _ptr = env->GetFieldID(cls, "_ptr", "J");
+            }
+
+            void* fromJava(JNIEnv* env, jobject obj, jclass cls) {
+                if (env->IsInstanceOf(obj, cls)) {
+                    jlong ptr = env->GetLongField(obj, skija::impl::Native::_ptr);
+                    return reinterpret_cast<void*>(static_cast<uintptr_t>(ptr));
+                }
+                return nullptr;
+            }
+        }
+    }
+
+    void onLoad(JNIEnv* env) {
+        AnimationFrameInfo::onLoad(env);
+        Color4f::onLoad(env);
+        Drawable::onLoad(env);
+        FontArguments::onLoad(env);
+        FontFamilyName::onLoad(env);
+        FontFeature::onLoad(env);
+        FontMetrics::onLoad(env);
+        FontMgr::onLoad(env);
+        FontPaletteOverride::onLoad(env);
+        FontVariation::onLoad(env);
+        FontVariationAxis::onLoad(env);
+        Image::onLoad(env);
+        ImageInfo::onLoad(env);
+        ImageWithFilterResult::onLoad(env);
+        Path::onLoad(env);
+        PathSegment::onLoad(env);
+        PaintFilterCanvas::onLoad(env);
+        RSXform::onLoad(env);
+        RuntimeEffectUniformInfo::onLoad(env);
+        RuntimeEffectChildInfo::onLoad(env);
+        SurfaceProps::onLoad(env);
+        TransferFunction::onLoad(env);
+
+        impl::Native::onLoad(env);
+    }
+
+    void onUnload(JNIEnv* env) {
+        TransferFunction::onUnload(env);
+        SurfaceProps::onUnload(env);
+        RuntimeEffectChildInfo::onUnload(env);
+        RuntimeEffectUniformInfo::onUnload(env);
+        RSXform::onUnload(env);
+        PaintFilterCanvas::onUnload(env);
+        PathSegment::onUnload(env);
+        Path::onUnload(env);
+        ImageWithFilterResult::onUnload(env);
+        ImageInfo::onUnload(env);
+        Image::onUnload(env);
+        FontVariationAxis::onUnload(env);
+        FontVariation::onUnload(env);
+        FontPaletteOverride::onUnload(env);
+        FontMgr::onUnload(env);
+        FontMetrics::onUnload(env);
+        FontFeature::onUnload(env);
+        FontArguments::onUnload(env);
+        FontFamilyName::onUnload(env);
+        Drawable::onUnload(env);
+        Color4f::onUnload(env);
+        AnimationFrameInfo::onUnload(env);
+    }
+}
+
+namespace types {
+    namespace IPoint {
+        jclass    cls;
+        jmethodID ctor;
+
+        void onLoad(JNIEnv* env) {
+            jclass local = env->FindClass("jdk/m3/graphics/M3IPoint");
+            cls  = static_cast<jclass>(env->NewGlobalRef(local));
+            ctor = env->GetMethodID(cls, "<init>", "(II)V");
+        }
+
+        void onUnload(JNIEnv* env) {
+            env->DeleteGlobalRef(cls);
+        }
+
+        jobject make(JNIEnv* env, jint x, jint y) {
+            return env->NewObject(cls, ctor, x, y);
+        }
+
+        jobject fromSkIPoint(JNIEnv* env, const SkIPoint& p) {
+            return env->NewObject(cls, ctor, p.fX, p.fY);
+        }
+    }
+
+    namespace IRect {
+        jclass cls;
+        jmethodID makeLTRB;
+        jfieldID left;
+        jfieldID top;
+        jfieldID right;
+        jfieldID bottom;    
+
+        void onLoad(JNIEnv* env) {
+            jclass local = env->FindClass("jdk/m3/graphics/M3IRect");
+            cls      = static_cast<jclass>(env->NewGlobalRef(local));
+            makeLTRB = env->GetStaticMethodID(cls, "makeLTRB", "(IIII)Ljdk/m3/graphics/M3IRect;");
+            left     = env->GetFieldID(cls, "_left",   "I");
+            top      = env->GetFieldID(cls, "_top",    "I");
+            right    = env->GetFieldID(cls, "_right",  "I");
+            bottom   = env->GetFieldID(cls, "_bottom", "I");
+        }
+
+        void onUnload(JNIEnv* env) {
+            env->DeleteGlobalRef(cls);
+        }
+
+        jobject fromSkIRect(JNIEnv* env, const SkIRect& rect) {
+            jobject res = env->CallStaticObjectMethod(cls, makeLTRB, rect.fLeft, rect.fTop, rect.fRight, rect.fBottom);
+            return java::lang::Throwable::exceptionThrown(env) ? nullptr : res;
+        }
+
+        std::unique_ptr<SkIRect> toSkIRect(JNIEnv* env, jobject obj) {
+            if (obj == nullptr)
+                return std::unique_ptr<SkIRect>(nullptr);
+            else {
+                return std::unique_ptr<SkIRect>(new SkIRect{
+                    env->GetIntField(obj, left), 
+                    env->GetIntField(obj, top), 
+                    env->GetIntField(obj, right), 
+                    env->GetIntField(obj, bottom)
+                });
+            }
+        }
+    }
+
+    namespace Point {
+        jclass    cls;
+        jmethodID ctor;
+        jfieldID x;
+        jfieldID y;
+
+        void onLoad(JNIEnv* env) {
+            jclass local = env->FindClass("jdk/m3/graphics/M3Point");
+            cls  = static_cast<jclass>(env->NewGlobalRef(local));
+            ctor = env->GetMethodID(cls, "<init>", "(FF)V");
+            x = env->GetFieldID(cls, "_x", "F");
+            y = env->GetFieldID(cls, "_y", "F");
+        }
+
+        void onUnload(JNIEnv* env) {
+            env->DeleteGlobalRef(cls);
+        }
+
+        jobject make(JNIEnv* env, float x, float y) {
+            return env->NewObject(cls, ctor, x, y);
+        }
+
+        jobject fromSkPoint(JNIEnv* env, const SkPoint& p) {
+            return env->NewObject(cls, ctor, p.fX, p.fY);
+        }
+
+        jobjectArray fromSkPoints(JNIEnv* env, SkSpan<const SkPoint> ps) {
+            jobjectArray res = env->NewObjectArray((jsize) ps.size(), cls, nullptr);
+            for (int i = 0; i < ps.size(); ++i) {
+                skija::AutoLocal<jobject> pointObj(env, fromSkPoint(env, ps[i]));
+                env->SetObjectArrayElement(res, i, pointObj.get());
+            }
+            return res;
+        }
+    }
+
+    namespace Rect {
+        jclass cls;
+        jmethodID makeLTRB;
+        jfieldID left;
+        jfieldID top;
+        jfieldID right;
+        jfieldID bottom;
+
+        void onLoad(JNIEnv* env) {
+            jclass local = env->FindClass("jdk/m3/graphics/M3Rect");
+            cls      = static_cast<jclass>(env->NewGlobalRef(local));
+            makeLTRB = env->GetStaticMethodID(cls, "makeLTRB", "(FFFF)Ljdk/m3/graphics/M3Rect;");
+            left     = env->GetFieldID(cls, "_left",   "F");
+            top      = env->GetFieldID(cls, "_top",    "F");
+            right    = env->GetFieldID(cls, "_right",  "F");
+            bottom   = env->GetFieldID(cls, "_bottom", "F");
+        }
+
+        void onUnload(JNIEnv* env) {
+            env->DeleteGlobalRef(cls);
+        }
+
+        std::unique_ptr<SkRect> toSkRect(JNIEnv* env, jobject rectObj) {
+            if (rectObj == nullptr)
+                return std::unique_ptr<SkRect>(nullptr);
+            else {
+                SkRect* rect = new SkRect();
+                rect->setLTRB(env->GetFloatField(rectObj, left), 
+                              env->GetFloatField(rectObj, top), 
+                              env->GetFloatField(rectObj, right), 
+                              env->GetFloatField(rectObj, bottom));
+                if (java::lang::Throwable::exceptionThrown(env))
+                    return std::unique_ptr<SkRect>(nullptr);
+                return std::unique_ptr<SkRect>(rect);
+            }
+        }
+
+        jobject fromLTRB(JNIEnv* env, float left, float top, float right, float bottom) {
+            jobject res = env->CallStaticObjectMethod(cls, makeLTRB, left, top, right, bottom);
+            return java::lang::Throwable::exceptionThrown(env) ? nullptr : res;
+        }
+
+        jobject fromSkRect(JNIEnv* env, const SkRect& rect) {
+            return fromLTRB(env, rect.fLeft, rect.fTop, rect.fRight, rect.fBottom);
+        }
+    }
+
+    namespace RRect {
+        jclass cls;
+        jmethodID makeLTRB1;
+        jmethodID makeLTRB2;
+        jmethodID makeLTRB4;
+        jmethodID makeNinePatchLTRB;
+        jmethodID makeComplexLTRB;
+        jfieldID left;
+        jfieldID top;
+        jfieldID right;
+        jfieldID bottom;
+        jfieldID radii;
+
+        void onLoad(JNIEnv* env) {
+            jclass local = env->FindClass("jdk/m3/graphics/M3RRect");
+            cls      = static_cast<jclass>(env->NewGlobalRef(local));
+            makeLTRB1 = env->GetStaticMethodID(cls, "makeLTRB", "(FFFFF)Ljdk/m3/graphics/M3RRect;");
+            makeLTRB2 = env->GetStaticMethodID(cls, "makeLTRB", "(FFFFFF)Ljdk/m3/graphics/M3RRect;");
+            makeLTRB4 = env->GetStaticMethodID(cls, "makeLTRB", "(FFFFFFFF)Ljdk/m3/graphics/M3RRect;");
+            makeNinePatchLTRB = env->GetStaticMethodID(cls, "makeNinePatchLTRB", "(FFFFFFFF)Ljdk/m3/graphics/M3RRect;");
+            makeComplexLTRB = env->GetStaticMethodID(cls, "makeComplexLTRB", "(FFFF[F)Ljdk/m3/graphics/M3RRect;");
+            left     = env->GetFieldID(cls, "_left",   "F");
+            top      = env->GetFieldID(cls, "_top",    "F");
+            right    = env->GetFieldID(cls, "_right",  "F");
+            bottom   = env->GetFieldID(cls, "_bottom", "F");
+            radii    = env->GetFieldID(cls, "_radii",  "[F");
+        }
+
+        void onUnload(JNIEnv* env) {
+            env->DeleteGlobalRef(cls);
+        }
+
+        SkRRect toSkRRect(JNIEnv* env, jfloat left, jfloat top, jfloat right, jfloat bottom, jfloatArray jradii) {
+            SkRect rect {left, top, right, bottom};
+            SkRRect rrect = SkRRect::MakeEmpty();
+            jfloat* radii = env->GetFloatArrayElements(jradii, 0);
+            switch (env->GetArrayLength(jradii)) {
+                case 1:
+                    rrect.setRectXY(rect, radii[0], radii[0]);
+                    break;
+                case 2:
+                    rrect.setRectXY(rect, radii[0], radii[1]);
+                    break;
+                case 4: {
+                    SkVector vradii[4] = {{radii[0], radii[0]}, {radii[1], radii[1]}, {radii[2], radii[2]}, {radii[3], radii[3]}};
+                    rrect.setRectRadii(rect, vradii);
+                    break;
+                }
+                case 8: {
+                    SkVector vradii[4] = {{radii[0], radii[1]}, {radii[2], radii[3]}, {radii[4], radii[5]}, {radii[6], radii[7]}};
+                    rrect.setRectRadii(rect, vradii);
+                    break;
+                }
+            }
+            env->ReleaseFloatArrayElements(jradii, radii, 0);
+            return rrect;
+        }
+
+        jobject fromSkRRect(JNIEnv* env, const SkRRect& rr) {
+            const SkRect& r = rr.rect();
+            switch (rr.getType()) {
+                case SkRRect::Type::kEmpty_Type:
+                case SkRRect::Type::kRect_Type:
+                    return env->CallStaticObjectMethod(cls, makeLTRB1, r.fLeft, r.fTop, r.fRight, r.fBottom, 0);
+
+                case SkRRect::Type::kOval_Type:
+                case SkRRect::Type::kSimple_Type: {
+                    float rx = rr.getSimpleRadii().fX;
+                    float ry = rr.getSimpleRadii().fY;
+                    if (SkScalarNearlyEqual(rx, ry))
+                        return env->CallStaticObjectMethod(cls, makeLTRB1, r.fLeft, r.fTop, r.fRight, r.fBottom, rx);
+                    else
+                        return env->CallStaticObjectMethod(cls, makeLTRB2, r.fLeft, r.fTop, r.fRight, r.fBottom, rx, ry);
+                }
+
+                case SkRRect::Type::kNinePatch_Type:
+                    return env->CallStaticObjectMethod(cls, makeNinePatchLTRB,
+                        r.fLeft, r.fTop, r.fRight, r.fBottom,
+                        rr.radii(SkRRect::Corner::kUpperLeft_Corner).fX,
+                        rr.radii(SkRRect::Corner::kUpperLeft_Corner).fY,
+                        rr.radii(SkRRect::Corner::kLowerRight_Corner).fX,
+                        rr.radii(SkRRect::Corner::kLowerRight_Corner).fY);
+
+                case SkRRect::Type::kComplex_Type:
+                    std::vector<float> radii = {
+                        rr.radii(SkRRect::Corner::kUpperLeft_Corner).fX,
+                        rr.radii(SkRRect::Corner::kUpperLeft_Corner).fY,
+                        rr.radii(SkRRect::Corner::kUpperRight_Corner).fX,
+                        rr.radii(SkRRect::Corner::kUpperRight_Corner).fY,
+                        rr.radii(SkRRect::Corner::kLowerRight_Corner).fX,
+                        rr.radii(SkRRect::Corner::kLowerRight_Corner).fY,
+                        rr.radii(SkRRect::Corner::kLowerLeft_Corner).fX,
+                        rr.radii(SkRRect::Corner::kLowerLeft_Corner).fY
+                    };
+
+                    return env->CallStaticObjectMethod(cls, makeComplexLTRB, r.fLeft, r.fTop, r.fRight, r.fBottom, javaFloatArray(env, radii));
+            }
+
+            return nullptr;
+        }
+    }
+
+    void onLoad(JNIEnv* env) {
+        IPoint::onLoad(env);
+        IRect::onLoad(env);
+        Point::onLoad(env);
+        Rect::onLoad(env);
+        RRect::onLoad(env);
+    }
+
+    void onUnload(JNIEnv* env) {
+        IPoint::onUnload(env);
+        IRect::onUnload(env);
+        Point::onUnload(env);
+        Rect::onUnload(env);
+        RRect::onUnload(env);
+    }
+}
+
+std::unique_ptr<SkMatrix> skMatrix(JNIEnv* env, jfloatArray matrixArray) {
+    if (matrixArray == nullptr)
+        return std::unique_ptr<SkMatrix>(nullptr);
+    else {
+        jfloat* m = env->GetFloatArrayElements(matrixArray, 0);
+        SkMatrix* ptr = new SkMatrix();
+        ptr->setAll(m[0], m[1], m[2], m[3], m[4], m[5], m[6], m[7], m[8]);
+        env->ReleaseFloatArrayElements(matrixArray, m, 0);
+        return std::unique_ptr<SkMatrix>(ptr);
+    }
+}
+
+std::unique_ptr<SkM44> skM44(JNIEnv* env, jfloatArray matrixArray) {
+    if (matrixArray == nullptr)
+        return std::unique_ptr<SkM44>(nullptr);
+    else {
+        jfloat* m = env->GetFloatArrayElements(matrixArray, 0);
+        SkM44* ptr = new SkM44(m[0], m[1], m[2], m[3], m[4], m[5], m[6], m[7], m[8], m[9], m[10], m[11], m[12], m[13], m[14], m[15]);
+        env->ReleaseFloatArrayElements(matrixArray, m, 0);
+        return std::unique_ptr<SkM44>(ptr);
+    }
+}
+
+skija::ConvertToUTF32::ConvertToUTF32(JNIEnv* env, jstring str) {
+    jsize len = env->GetStringLength(str);
+    const jchar* chars = env->GetStringCritical(str, nullptr);
+    const uint16_t* src = reinterpret_cast<const uint16_t*>(chars);
+    const uint16_t* end = src + len;
+    SkUnichar* dst = fStorage.reset(len);
+    int n = 0;
+    while (src < end) {
+        SkUnichar u = SkUTF::NextUTF16(&src, end);
+        if (u < 0) {
+            env->ReleaseStringCritical(str, chars);
+            fValid = false;
+            return;
+        }
+        dst[n++] = u;
+    }
+    env->ReleaseStringCritical(str, chars);
+    fCount = n;
+}
+
+std::optional<SkString> skString(JNIEnv* env, jstring s) {
+    if (s == nullptr) {
+        return std::nullopt;
+    } else {
+        jsize len16 = env->GetStringLength(s);
+        const jchar* chars = env->GetStringCritical(s, nullptr);
+        const uint16_t* src = reinterpret_cast<const uint16_t*>(chars);
+        int len8 = SkUTF::UTF16ToUTF8(nullptr, 0, src, len16);
+        if (len8 < 0) {
+            env->ReleaseStringCritical(s, chars);
+            env->ThrowNew(env->FindClass("java/lang/IllegalArgumentException"), "Invalid UTF-16 string (unpaired surrogate)");
+            return std::nullopt;
+        }
+        SkString res(len8);
+        SkUTF::UTF16ToUTF8(res.data(), len8, src, len16);
+        env->ReleaseStringCritical(s, chars);
+        return std::optional(res);
+    }
+}
+
+jstring javaString(JNIEnv* env, const SkString& str) {
+    return javaString(env, str.c_str(), str.size());
+}
+
+jstring javaString(JNIEnv* env, const char* chars, size_t len) {
+    if (!chars || !len)
+        return nullptr;
+    int utf16Units = SkUTF::UTF8ToUTF16(nullptr, 0, chars, len);
+    auto utf16 = std::unique_ptr<uint16_t[]>(new uint16_t[utf16Units]);
+    SkUTF::UTF8ToUTF16(utf16.get(), utf16Units, chars, len);
+    return env->NewString(utf16.get(), utf16Units);
+}
+
+jstring javaString(JNIEnv* env, const char* chars) {
+    return chars ? javaString(env, chars, strlen(chars)) : nullptr;
+}
+
+jstring javaString(JNIEnv* env, const std::string& str) {
+    return javaString(env, str.c_str(), str.size());
+}
+
+jstring javaString(JNIEnv* env, std::string_view str) {
+    return javaString(env, str.data(), str.size());
+}
+
+jobject javaFloat(JNIEnv* env, SkScalar val) {
+    return env->NewObject(java::lang::Float::cls, java::lang::Float::ctor, val);
+}
+
+jlong packTwoInts(int32_t a, int32_t b) {
+    return (uint64_t (a) << 32) | b;
+}
+
+jlong packIPoint(SkIPoint p) {
+    return packTwoInts(p.fX, p.fY);
+}
+
+jlong packISize(SkISize p) {
+    return packTwoInts(p.fWidth, p.fHeight);
+}
+
+std::vector<SkString> skStringVector(JNIEnv* env, jobjectArray arr) {
+    if (arr == nullptr) {
+        return std::vector<SkString>(0);
+    } else {
+        jsize len = env->GetArrayLength(arr);
+        std::vector<SkString> res(len);
+        for (jint i = 0; i < len; ++i) {
+            jstring str = static_cast<jstring>(env->GetObjectArrayElement(arr, i));
+            res[i] = *skString(env, str);
+            env->DeleteLocalRef(str);
+        }
+        return res;
+    }
+}
+
+jobjectArray javaStringArray(JNIEnv* env, const std::vector<SkString>& strings) {
+    jobjectArray res = env->NewObjectArray((jsize) strings.size(), java::lang::String::cls, nullptr);
+    for (jint i = 0; i < (jsize) strings.size(); ++i) {
+        skija::AutoLocal<jstring> str(env, javaString(env, strings[i]));
+        env->SetObjectArrayElement(res, i, str.get());
+    }
+    return res;
+}
+
+void deleteJBytes(void* addr, void*) {
+    delete[] (jbyte*) addr;
+}
+
+skija::UtfIndicesConverter::UtfIndicesConverter(const char* chars8, size_t len8):
+  fStart8(chars8),
+  fPtr8(chars8),
+  fEnd8(chars8 + len8),
+  fPos16(0)
+{}
+
+skija::UtfIndicesConverter::UtfIndicesConverter(const SkString& str):
+  skija::UtfIndicesConverter::UtfIndicesConverter(str.c_str(), str.size())
+{}
+
+size_t skija::UtfIndicesConverter::from16To8(uint32_t i16) {
+    if (i16 >= fPos16) {
+        // if new i16 >= last fPos16, continue from where we started
+    } else {
+        fPtr8 = fStart8;
+        fPos16 = 0;
+    }
+
+    while (fPtr8 < fEnd8 && fPos16 < i16) {
+        SkUnichar u = SkUTF::NextUTF8(&fPtr8, fEnd8);
+        fPos16 += (uint32_t) SkUTF::ToUTF16(u);
+    }
+
+    return fPtr8 - fStart8;
+}
+
+uint32_t skija::UtfIndicesConverter::from8To16(size_t i8) {
+    if (i8 >= (size_t) (fPtr8 - fStart8)) {
+        // if new i8 >= last fPtr8, continue from where we started
+    } else {
+        fPtr8 = fStart8;
+        fPos16 = 0;
+    }
+
+    while (fPtr8 < fEnd8 && (size_t) (fPtr8 - fStart8) < i8) {
+        SkUnichar u = SkUTF::NextUTF8(&fPtr8, fEnd8);
+        fPos16 += (uint32_t) SkUTF::ToUTF16(u);
+    }
+
+    return fPos16;
+}

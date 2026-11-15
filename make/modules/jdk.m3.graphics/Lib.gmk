@@ -1,0 +1,95 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright 2026 Hitesh Soliwal and contributors
+
+include LibCommon.gmk
+
+ifeq ($(SKIA_ENABLED), true)
+  M3GRAPHICS_NATIVE_DIR := $(TOPDIR)/src/jdk.m3.graphics/share/native/libm3graphics
+  SKIA_SOURCE_DIR := $(M3GRAPHICS_NATIVE_DIR)/skia
+  SKIA_OUTPUT_DIR := $(SUPPORT_OUTPUTDIR)/native/jdk.m3.graphics/skia
+  SKIA_BUILD_CONFIG := $(SKIA_OUTPUT_DIR)/skia-build-config.h
+  SKIA_SYSTEM_LIBS := $(SKIA_OUTPUT_DIR)/skia-system-libs.rsp
+  SKIA_NATIVE_LIBS := $(SKIA_OUTPUT_DIR)/skia-native-libs.rsp
+  SKIA_ARCHIVE_STATE := $(SKIA_OUTPUT_DIR)/skia-archives.stamp
+  SKIA_BUILD_SCRIPT := $(TOPDIR)/make/modules/jdk.m3.graphics/lib/BuildSkia.py
+
+  # The engine is built by its original GN graph, with owned dependencies. The
+  # JNI sources remain in this original module and are compiled by the JDK build.
+  SKIA_BUILD_COMMAND := $(SKIA_PYTHON) $(SKIA_BUILD_SCRIPT) \
+      --source $(SKIA_SOURCE_DIR) --output $(SKIA_OUTPUT_DIR) \
+      --gn "$(SKIA_GN)" --ninja "$(SKIA_NINJA)" \
+      --fixpath-base="$(FIXPATH_BASE)" \
+      --cc "$(CC)" --cxx "$(CXX)" --ar "$(AR)" --toolchain $(TOOLCHAIN_TYPE) \
+      --os $(SKIA_TARGET_OS) --cpu $(SKIA_TARGET_CPU) --jobs $(JOBS) \
+      --sysroot="$(SYSROOT)" --sysroot-cflags="$(SYSROOT_CFLAGS)" \
+      --cflags="$(EXTRA_CFLAGS)" --cxxflags="$(EXTRA_CXXFLAGS)" \
+      --ldflags="$(SYSROOT_LDFLAGS) $(EXTRA_LDFLAGS)" \
+      --fontconfig-cflags="$(FONTCONFIG_CFLAGS)" \
+      $(if $(SKIA_NDK), --ndk $(SKIA_NDK)) \
+      $(if $(OPENJDK_TARGET_ANDROID_API), --ndk-api $(OPENJDK_TARGET_ANDROID_API)) \
+      $(if $(OPENJDK_TARGET_IOS_SIMULATOR), --ios-simulator $(OPENJDK_TARGET_IOS_SIMULATOR)) \
+      $(if $(OPENJDK_TARGET_IOS_DEPLOYMENT_TARGET), --ios-min-target $(OPENJDK_TARGET_IOS_DEPLOYMENT_TARGET))
+
+  .PHONY: build-skia
+  build-skia:
+	$(call MakeDir, $(SKIA_OUTPUT_DIR))
+	$(call ExecuteWithLog, $(SKIA_OUTPUT_DIR)/build, $(SKIA_BUILD_COMMAND))
+
+  # Ninja owns source/dependency freshness; unchanged outputs retain timestamps.
+  $(SKIA_BUILD_CONFIG) $(SKIA_SYSTEM_LIBS) $(SKIA_NATIVE_LIBS) \
+      $(SKIA_ARCHIVE_STATE): build-skia
+
+  SKIA_INCLUDE_DIRS := $(SKIA_SOURCE_DIR) $(SKIA_SOURCE_DIR)/include/core \
+      $(SKIA_SOURCE_DIR)/include/config $(SKIA_SOURCE_DIR)/include/encode \
+      $(SKIA_SOURCE_DIR)/include/pathops $(SKIA_SOURCE_DIR)/include/svg \
+      $(SKIA_SOURCE_DIR)/include/utils $(SKIA_SOURCE_DIR)/include/codec \
+      $(SKIA_SOURCE_DIR)/include/effects $(SKIA_SOURCE_DIR)/include/third_party/skcms \
+      $(SKIA_SOURCE_DIR)/include/third_party/vulkan $(SKIA_SOURCE_DIR)/third_party/skcms \
+      $(SKIA_SOURCE_DIR)/modules/skunicode/include $(SKIA_SOURCE_DIR)/modules/skshaper/include \
+      $(SKIA_SOURCE_DIR)/modules/skparagraph/include $(SKIA_SOURCE_DIR)/modules/svg/include \
+      $(SKIA_SOURCE_DIR)/modules/skottie/include $(SKIA_SOURCE_DIR)/modules/sksg/include \
+      $(SKIA_SOURCE_DIR)/modules/skresources/include \
+      $(SKIA_SOURCE_DIR)/third_party/externals/harfbuzz/src \
+      $(SKIA_SOURCE_DIR)/third_party/externals/freetype/include \
+      $(SKIA_SOURCE_DIR)/third_party/externals/icu/source/common \
+      $(SKIA_SOURCE_DIR)/third_party/icu \
+      $(SKIA_SOURCE_DIR)/third_party/externals/vulkan-headers/include
+
+  M3GRAPHICS_CXXFLAGS := $(filter-out -std=% -fno-rtti -fno-exceptions, $(CXXFLAGS_JDKLIB)) \
+      -std=c++20 -frtti -fexceptions -include $(SKIA_BUILD_CONFIG)
+  ifeq ($(TOOLCHAIN_TYPE), microsoft)
+    M3GRAPHICS_CXXFLAGS := $(filter-out -MD -MDd, $(CXXFLAGS_JDKLIB)) \
+        -MT -std:c++20 -GR -EHsc -FI$(SKIA_BUILD_CONFIG)
+  endif
+
+  $(eval $(call SetupJdkLibrary, BUILD_LIBM3GRAPHICS, \
+      NAME := m3graphics, \
+      SRC := $(M3GRAPHICS_NATIVE_DIR), \
+      EXCLUDES := skia, \
+      TOOLCHAIN := TOOLCHAIN_LINK_CXX, \
+      OPTIMIZATION := HIGH, \
+      CXXFLAGS := $(M3GRAPHICS_CXXFLAGS) $(addprefix -I, $(SKIA_INCLUDE_DIRS)) \
+          $(FONTCONFIG_CFLAGS), \
+      EXTRA_DEPS := $(SKIA_BUILD_CONFIG), \
+      DISABLED_WARNINGS_gcc := attributes unused-parameter sign-compare, \
+      DISABLED_WARNINGS_clang := unused-parameter sign-compare, \
+      WARNINGS_AS_ERRORS := false, \
+      LDFLAGS := $(LDFLAGS_JDKLIB) $(LDFLAGS_CXX_JDK), \
+      LIBS := @$(SKIA_NATIVE_LIBS) @$(SKIA_SYSTEM_LIBS) $(LIBCXX), \
+  ))
+
+  $(BUILD_LIBM3GRAPHICS): $(SKIA_NATIVE_LIBS) $(SKIA_SYSTEM_LIBS) $(SKIA_ARCHIVE_STATE)
+  TARGETS += $(BUILD_LIBM3GRAPHICS)
+
+  ifeq ($(call isTargetOs, windows), true)
+    # jlink installs this native resource under lib on Windows. The owned ICU
+    # loader also searches that installed location relative to the DLL in bin.
+    SKIA_ICU_DATA := $(SKIA_OUTPUT_DIR)/icudtl.dat
+    $(SKIA_ICU_DATA): build-skia
+    $(eval $(call SetupCopyFiles, COPY_M3GRAPHICS_ICU_DATA, \
+        FILES := $(SKIA_ICU_DATA), \
+        DEST := $(call FindLibDirForModule, $(MODULE)), \
+    ))
+    TARGETS += $(COPY_M3GRAPHICS_ICU_DATA)
+  endif
+endif

@@ -1,0 +1,14 @@
+#include "jdk_m3_graphics_svg_M3SVGCanvas.h"
+#include <jni.h>
+#include "SkRect.h"
+#include "SkCanvas.h"
+#include "SkSVGCanvas.h"
+#include "SkStream.h"
+
+extern "C" JNIEXPORT jlong JNICALL Java_jdk_m3_graphics_svg_M3SVGCanvas__1nMake
+  (JNIEnv* env, jclass jclass, jfloat left, jfloat top, jfloat right, jfloat bottom, jlong wstreamPtr, jint flags) {
+    SkWStream* wstream = reinterpret_cast<SkWStream*>(static_cast<uintptr_t>(wstreamPtr));
+    SkRect bounds {left, top, right, bottom};
+    SkCanvas* instance = SkSVGCanvas::Make(bounds, wstream, flags).release();
+    return reinterpret_cast<jlong>(instance);
+}

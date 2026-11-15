@@ -73,7 +73,7 @@ public class M3TextBlob extends M3Managed {
     public float[] getIntercepts(float lowerBound, float upperBound) {
         /* M3-LEAF kind=RETURN id=8c1216d8ba04a645220d9ff032471a274c060e640a36f6f33abb174b5439451e contract=INTERNAL_OR_PACKAGE patterns=RETURN */
         return /* M3-LEAF kind=INVOCATION id=66eb315141e75bacb45a661f01139404d24808d81cc0bbfbc30619a4f732224e contract=INTERNAL_OR_PACKAGE patterns=INVOCATION */
- getIntercepts(lowerBound, upperBound);
+ getIntercepts(lowerBound, upperBound, null);
     }
 
     /**
