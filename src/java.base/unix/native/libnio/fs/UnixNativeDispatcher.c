@@ -1,5 +1,6 @@
 /*
  * Copyright (c) 2008, 2023, Oracle and/or its affiliates. All rights reserved.
+ * Modified 2026-11-15: preserve Bionic integer typedefs in the private statx layout.
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
  *
  * This code is free software; you can redistribute it and/or modify it
@@ -79,7 +80,7 @@
 // by defining binary compatible statx structs in this file and
 // not relying on included headers.
 
-#ifndef __GLIBC__
+#if !defined(__BIONIC__) && !defined(__GLIBC__)
 // Alpine doesn't know these types, define them
 typedef unsigned int       __uint32_t;
 typedef unsigned short     __uint16_t;
