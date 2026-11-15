@@ -498,18 +498,11 @@ Java_sun_nio_fs_UnixNativeDispatcher_init(JNIEnv* env, jclass this)
     futimesAvailable = futimesAvailable || my_futimens_func != NULL;
 #endif
 
-    int supports_futimes = (my_futimesat_func != NULL);
-#ifdef __ANDROID__
-    // Android has futimens before futimesat (API 26).
-    supports_futimes |= (my_futimens_func != NULL);
-#endif
-
 #ifdef _ALLBSD_SOURCE
     capabilities |= sun_nio_fs_UnixNativeDispatcher_SUPPORTS_FUTIMES;
     capabilities |= sun_nio_fs_UnixNativeDispatcher_SUPPORTS_LUTIMES;
 #else
     if (futimesAvailable)
-    if (supports_futimes)
         capabilities |= sun_nio_fs_UnixNativeDispatcher_SUPPORTS_FUTIMES;
     if (my_lutimes_func != NULL)
         capabilities |= sun_nio_fs_UnixNativeDispatcher_SUPPORTS_LUTIMES;
@@ -522,7 +515,6 @@ Java_sun_nio_fs_UnixNativeDispatcher_init(JNIEnv* env, jclass this)
     if (my_openat64_func != NULL &&  my_fstatat64_func != NULL &&
         my_unlinkat_func != NULL && my_renameat_func != NULL &&
         futimesAvailable && my_fdopendir_func != NULL)
-        supports_futimes && my_fdopendir_func != NULL)
     {
         capabilities |= sun_nio_fs_UnixNativeDispatcher_SUPPORTS_OPENAT;
     }
