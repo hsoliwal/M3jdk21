@@ -118,18 +118,7 @@ final class M3StringPrecomputeBridge {
         // The exact-trigram gate of the source's repeat use (A42): absence answers without a scan.
         if (!M3StringSearchPrecompute.mayContain(source, target)) return -1;
 
-        int limit = end - targetLength;
-        char first = target.charAt(0);
-        for (int start = from; start <= limit; start++) {
-            if (source.charAt(start) != first) continue;
-            int index = 1;
-            while (index < targetLength
-                    && source.charAt(start + index) == target.charAt(index)) {
-                index++;
-            }
-            if (index == targetLength) return start;
-        }
-        return -1;
+        return M3StringSearchPrecompute.indexOf(source, target, from, end);
     }
 
     static int lastIndexOf(M3String source, String target, int fromIndex) {
@@ -148,15 +137,7 @@ final class M3StringPrecomputeBridge {
         // The exact-trigram gate of the source's repeat use (A42): absence answers without a scan.
         if (!M3StringSearchPrecompute.mayContain(source, target)) return -1;
 
-        for (int candidate = start; candidate >= 0; candidate--) {
-            int index = 0;
-            while (index < targetLength
-                    && source.charAt(candidate + index) == target.charAt(index)) {
-                index++;
-            }
-            if (index == targetLength) return candidate;
-        }
-        return -1;
+        return M3StringSearchPrecompute.lastIndexOf(source, target, start);
     }
 
     static String substring(M3String source, int beginIndex, int endIndex) {
