@@ -1,0 +1,3985 @@
+{
+  "schema": "m3jdk21-tornado-parallel-source-lock/1",
+  "repository": "hsoliwal/synexia-tornadovm",
+  "commit": "89e16dda92328038309d6c3667605b3ebc13dc91",
+  "modules": [
+    {
+      "name": "tornado.api",
+      "java_root": "tornado-api/src/main/java",
+      "resources_root": null
+    },
+    {
+      "name": "tornado.drivers.common",
+      "java_root": "tornado-drivers/drivers-common/src/main/java",
+      "resources_root": "tornado-drivers/drivers-common/src/main/resources"
+    },
+    {
+      "name": "tornado.drivers.opencl",
+      "java_root": "tornado-drivers/opencl/src/main/java",
+      "resources_root": "tornado-drivers/opencl/src/main/resources"
+    },
+    {
+      "name": "tornado.runtime",
+      "java_root": "tornado-runtime/src/main/java",
+      "resources_root": null
+    },
+    {
+      "name": "tornado.tc.check",
+      "java_root": "tornado-compiler/tc-check/src/main/java",
+      "resources_root": null
+    },
+    {
+      "name": "tornado.tc.codegen",
+      "java_root": "tornado-compiler/tc-codegen/src/main/java",
+      "resources_root": null
+    },
+    {
+      "name": "tornado.tc.debug",
+      "java_root": "tornado-compiler/tc-debug/src/main/java",
+      "resources_root": null
+    },
+    {
+      "name": "tornado.tc.frontend",
+      "java_root": "tornado-compiler/tc-frontend/src/main/java",
+      "resources_root": null
+    },
+    {
+      "name": "tornado.tc.ir",
+      "java_root": "tornado-compiler/tc-ir/src/main/java",
+      "resources_root": null
+    },
+    {
+      "name": "tornado.tc.lower",
+      "java_root": "tornado-compiler/tc-lower/src/main/java",
+      "resources_root": null
+    },
+    {
+      "name": "tornado.tc.opt",
+      "java_root": "tornado-compiler/tc-opt/src/main/java",
+      "resources_root": null
+    },
+    {
+      "name": "tornado.tc.runtime",
+      "java_root": "tornado-compiler/tc-runtime/src/main/java",
+      "resources_root": null
+    },
+    {
+      "name": "tornado.tc.selftest",
+      "java_root": "tornado-compiler/tc-selftest/src/main/java",
+      "resources_root": "tornado-compiler/tc-selftest/src/main/resources"
+    },
+    {
+      "name": "tornado.tc.tornado",
+      "java_root": "tornado-compiler/tc-tornado/src/main/java",
+      "resources_root": null
+    }
+  ],
+  "files": [
+    {
+      "path": "LICENSE_APACHE2",
+      "kind": "legal",
+      "module": null,
+      "relative": "LICENSE_APACHE2",
+      "sha256": "c95bae1d1ce0235ecccd3560b772ec1efb97f348a79f0fbe0a634f0c2ccefe2c"
+    },
+    {
+      "path": "THIRD_PARTY_NOTICES",
+      "kind": "legal",
+      "module": null,
+      "relative": "THIRD_PARTY_NOTICES",
+      "sha256": "58f948bdbbeb9f5265a3c949e7292b195b226e6d69e5ce9db40ddc637f18b0ef"
+    },
+    {
+      "path": "tornado-api/src/main/java/module-info.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "module-info.java",
+      "sha256": "cda3fd1a623b5fd79462d9403f4f0b27758e82b91f2cf474f4628f2b61b5b246"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/AbstractWorkerGrid.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/AbstractWorkerGrid.java",
+      "sha256": "fb2d9e102715e0b63662e8a4b949c27c2d94780bdc9a48461836e2cd787ad22d"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/AccessorParameters.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/AccessorParameters.java",
+      "sha256": "48eba314c02cdbfdd63f42cef659a34add87857f1cae5777fb74168361ddb82a"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/DRMode.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/DRMode.java",
+      "sha256": "0c7df5937f5931263ef44df33f9dd22ce01c9805cff7d7a2a0527225eed7fe79"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/DataRange.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/DataRange.java",
+      "sha256": "5541ad50fb3c9614b02ae7408c7add86427047bb9cc5b768a74de1f4919394df"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/DeviceKernel.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/DeviceKernel.java",
+      "sha256": "8ee795fcc715d92c169a9ca552851bb5ff15ef0913ec7f66d91863f3faa8d919"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/ExecutionContext.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/ExecutionContext.java",
+      "sha256": "192dc3544e7abb955b6b2f1acb2d9f983b6dc54be506fc1c1fb36717f357a3b5"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/ExecutionPlanType.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/ExecutionPlanType.java",
+      "sha256": "85a40f6b62d4c91b1a5352fae3d7462dcbfa21a025a291bff9e5402b25e244d1"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/GridScheduler.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/GridScheduler.java",
+      "sha256": "7b5b4954a1bf1e7d4b85a5f48d8f61abec37431c7358c73acd2094768ea445c5"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/ImmutableTaskGraph.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/ImmutableTaskGraph.java",
+      "sha256": "0c5db36d9ad453989fa0ff307b17dc2505035613ad8cc028bfd3ac0a0a67ad65"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/KernelContext.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/KernelContext.java",
+      "sha256": "495c3418fbd51ab156bb91bcc8c71112ce01b4df6e5aaffdb6fb4a379bd4e2e0"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/TaskGraph.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/TaskGraph.java",
+      "sha256": "704b7dd4af9be48bd51957a1501ffa91a4a6785aa3bb7657ed9d3f9e97f12bd6"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/TaskGraphInterface.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/TaskGraphInterface.java",
+      "sha256": "e4c1e15f0ee0e61b43c0b8a96808a6b01a7cb515be5292a2b5d4b16e6e769b9f"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/TornadoBackend.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/TornadoBackend.java",
+      "sha256": "56b997371eaadeda485358b58182d217bd03d1c765e7749d038421d3fcfe46f8"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/TornadoDeviceContext.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/TornadoDeviceContext.java",
+      "sha256": "55400e22d143c1bb30490c993e1a83f521422b9a616c11ca81977657408100ef"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/TornadoDeviceMap.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/TornadoDeviceMap.java",
+      "sha256": "c77646721dfaa9ea812d81b94297cd1b1ea545dc7e9873a3f453e6bb3c81c2a0"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/TornadoExecutionPlan.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/TornadoExecutionPlan.java",
+      "sha256": "7bfc44a8ddef11ea9c24847c115dc2e78e4872d7156ac9ebd6571a665cf571a3"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/TornadoExecutionResult.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/TornadoExecutionResult.java",
+      "sha256": "c16f459188b79f65a6370b38a4c9076656a58186a2ef9739fcedc2ba36b90e86"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/TornadoExecutor.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/TornadoExecutor.java",
+      "sha256": "ed6f16db93f6d38baa84c24fd2a15641d652d4d2fe08198bd2928be9693621d3"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/TornadoProfilerResult.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/TornadoProfilerResult.java",
+      "sha256": "950f61b932a10ec248cc5e94d4372f5f9cfa576df1abc768670ee9f8aca19d89"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/TornadoRuntime.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/TornadoRuntime.java",
+      "sha256": "6492430ae092840fdd8d4456e4d0839a6d7bb8233c0fec68dbcd63e5dcb93802"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/TornadoSetting.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/TornadoSetting.java",
+      "sha256": "1b54e981d87546dbdd7a6004e8554b9a24ad6c48a6f20b6e046f85c4b34c0fec"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/TornadoTargetDevice.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/TornadoTargetDevice.java",
+      "sha256": "0229c22f8c659d4d0fd74700d9f62ea7962d197caf1407873061b272d420227a"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/TornadoTaskGraphInterface.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/TornadoTaskGraphInterface.java",
+      "sha256": "e50595dd8b82593f6384b938201acc3a2a6dbfa9a3e2c824e9d63906986786b0"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/WorkerGrid.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/WorkerGrid.java",
+      "sha256": "bd1cd600f742831857eca664a757f43df4ef17d93df8f5668f5bd46de1ae1e5c"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/WorkerGrid1D.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/WorkerGrid1D.java",
+      "sha256": "4c638a5de6bc8e6066996867226ae8f289ff0b6cdfdf4b6266d319bf18f3fc92"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/WorkerGrid2D.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/WorkerGrid2D.java",
+      "sha256": "fb222181c61858cec9659a56d0a5d0c36f21744afa6e47e0861e0fa7d49f7a7f"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/WorkerGrid3D.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/WorkerGrid3D.java",
+      "sha256": "081d66c7ef27cc77befac65313081020c3bb4630332546bb46b47548612b7aa2"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/annotations/Parallel.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/annotations/Parallel.java",
+      "sha256": "9a9639cb24fc047be20244ae4e1744e4262ba296cc88bc56dae781edaf5b6973"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/annotations/Reduce.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/annotations/Reduce.java",
+      "sha256": "f9038366c7b7371511ae1492aa4b18517fb036bc30fbbdc5c6282a828f5ccbcb"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/common/Access.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/common/Access.java",
+      "sha256": "d4d05ae8304d7e1df6ad2a0bf167b999fc854bf7edaf1d6a32c04ac77becca31"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/common/Event.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/common/Event.java",
+      "sha256": "79bdb3034a62fd25af84e6ac97073ffae65a816dba8b6d64505343790b1033d0"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/common/LibraryTaskDescriptor.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/common/LibraryTaskDescriptor.java",
+      "sha256": "33fa683be2d9d37108b4e77cfcfcd1b1b264e6bdc165fac63d669d9c12aff118"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/common/PrebuiltTaskPackage.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/common/PrebuiltTaskPackage.java",
+      "sha256": "50810ea24c7d0ee6ed4313aba14f9557f0011456dea227451e463c2de78420ad"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/common/ProfiledAction.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/common/ProfiledAction.java",
+      "sha256": "2ef48c5693fb65a1dc61252c9ebf4d39cf1fc70635ac84dc903e2a89b9581189"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/common/SchedulableTask.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/common/SchedulableTask.java",
+      "sha256": "3764e7667a4517715b8c37b92b44076d14c80f89843014dd3537ae0134d09ae1"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/common/TaskPackage.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/common/TaskPackage.java",
+      "sha256": "4bc7687697e11455602d5a7ef44b3317a23fc672c677d0549744872f9ebe0cf2"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/common/TimedEvent.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/common/TimedEvent.java",
+      "sha256": "c314883a383ff16d1cb36ad0f6affbef68540b12c7280b79b6e8507c30cd0639"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/common/TornadoDevice.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/common/TornadoDevice.java",
+      "sha256": "cec2f005ec431fd3f3696d63331a3e4536c616412ac8014e5503a954bbd9ab4c"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/common/TornadoEvents.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/common/TornadoEvents.java",
+      "sha256": "c539ac7e5f4751f5a062dac87a563d8ce3e15ab720af360bcd602735ed9f4b34"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/common/TornadoFunctions.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/common/TornadoFunctions.java",
+      "sha256": "8bb3f85dd84d7d3224b5a05a9537dd46fe10a04dbf1ac886df796ac1ccecf938"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/enums/DataTransferMode.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/enums/DataTransferMode.java",
+      "sha256": "666c3b935a1cc37c618a879668220f58015c9c8f18e43cc278f04e570b3af3aa"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/enums/DeviceLaunchMode.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/enums/DeviceLaunchMode.java",
+      "sha256": "72adec79a3cf3296ca5ccf719455e03dbbb244f2c947ff7ce615f7a75d609bbf"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/enums/MMAShape.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/enums/MMAShape.java",
+      "sha256": "9bccdbb40693bfa1929a36c7dab4492d726b4aea110725182c60c716bc08ed61"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/enums/ProfilerMode.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/enums/ProfilerMode.java",
+      "sha256": "592655a62f22d8bdefcfdce25a4b3b7c03f826d155df17998098c27b4cc97f2a"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/enums/TornadoDeviceType.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/enums/TornadoDeviceType.java",
+      "sha256": "82a0a7bb4013d73b91838401b33a08af198e0f02db81bb46b89fbf45ef464b40"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/enums/TornadoExecutionStatus.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/enums/TornadoExecutionStatus.java",
+      "sha256": "327640197bdba5f79c9c8452f635967395643606974795bfc4c5bc23cd64fd2b"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/enums/TornadoVMBackendType.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/enums/TornadoVMBackendType.java",
+      "sha256": "7ebbe34a6c3e19c833adab965c7eccd18cc5592bccfe5043212deb37f415f9fb"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/exceptions/Debug.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/exceptions/Debug.java",
+      "sha256": "b3e3cbaf8f6f1aad98489a077ef534f924ce0a3f7bb28ffbfbe86b145a3fb153"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/exceptions/TornadoAPIException.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/exceptions/TornadoAPIException.java",
+      "sha256": "1ba96406d77d6dc53edda25f8e544ccbc4abb7131fdbb21213fda3391f58cfe2"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/exceptions/TornadoBackendNotFound.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/exceptions/TornadoBackendNotFound.java",
+      "sha256": "4fd24c7a676ab957a9afb74e67780e9d5e79218f3daae5ad961c24c000e70788"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/exceptions/TornadoBailoutRuntimeException.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/exceptions/TornadoBailoutRuntimeException.java",
+      "sha256": "5f967f08fcc020c472933f3fd1e2f6288aff7b8b15abd728c1fdeb27694290b0"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/exceptions/TornadoCompilationException.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/exceptions/TornadoCompilationException.java",
+      "sha256": "aaee8762d37fb1f69ac8a130c6195c8cdd620f111b7461e20fd705f9b843bee3"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/exceptions/TornadoDeviceDynamicParallelismNotSupported.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/exceptions/TornadoDeviceDynamicParallelismNotSupported.java",
+      "sha256": "35ea53c4264bc28885a1e80d4de1d2c8b232f572edeacb95fc0d468b20c04cf9"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/exceptions/TornadoDeviceFP16NotSupported.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/exceptions/TornadoDeviceFP16NotSupported.java",
+      "sha256": "77e26918987104d89854a78696cea03514e6edb56e01474a26767ac3cf1b4ab6"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/exceptions/TornadoDeviceFP64NotSupported.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/exceptions/TornadoDeviceFP64NotSupported.java",
+      "sha256": "d057aaa2ea03cc354c958c8c37f2f24cc42e807aabf4aef28c62d9ee851646ac"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/exceptions/TornadoDeviceFP8NotSupported.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/exceptions/TornadoDeviceFP8NotSupported.java",
+      "sha256": "6fe08136e01585c6e624e74351634637c33bca244d26053ae10113623aafdc5f"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/exceptions/TornadoDeviceMMANotSupported.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/exceptions/TornadoDeviceMMANotSupported.java",
+      "sha256": "d973770a226ff85f3ac393e11d442356dd950e14a8cea56e3440c6f9c322cc4b"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/exceptions/TornadoDeviceNotFound.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/exceptions/TornadoDeviceNotFound.java",
+      "sha256": "5bd6b2837da2d4faa663e148a00576a241804badf107ebbe30387277f1c87ff7"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/exceptions/TornadoDeviceTileNotSupported.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/exceptions/TornadoDeviceTileNotSupported.java",
+      "sha256": "336ee20d253e910d034a18fa5a455d8ab9cc8552c7e1c35bcabb53f014434186"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/exceptions/TornadoDeviceViewNotSupported.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/exceptions/TornadoDeviceViewNotSupported.java",
+      "sha256": "2432ae8ea5b69cc568a6aacab3fdf73733cb1f523562c8fe0637e808125463c3"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/exceptions/TornadoExecutionPlanException.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/exceptions/TornadoExecutionPlanException.java",
+      "sha256": "de532b322753e0a1e12a7122449f9f5944e76f32aafe08f26aece5a6d64c4f59"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/exceptions/TornadoFailureException.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/exceptions/TornadoFailureException.java",
+      "sha256": "8d9afd7912731b96642442addaba073ef807e3eb22679aaa404c4f30b5b1dd41"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/exceptions/TornadoInliningException.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/exceptions/TornadoInliningException.java",
+      "sha256": "301e2a56b069a865e97c78e2b53e89fa06310b588dcfb49b31819eb3aee2b221"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/exceptions/TornadoInternalError.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/exceptions/TornadoInternalError.java",
+      "sha256": "28b5509426da29e963dcf8dc69f847a8e7f0f3e23afb6f5113655481590c7a91"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/exceptions/TornadoLibraryTaskNotSupported.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/exceptions/TornadoLibraryTaskNotSupported.java",
+      "sha256": "230e4f9cfed05a78210e7b6a42b1bfdab959568ac50ef31980a1d7423e53be68"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/exceptions/TornadoMemoryException.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/exceptions/TornadoMemoryException.java",
+      "sha256": "590d10900e0573951bf0ab1877928eacb4b0321a59142fcdd6c02cd8d5d9720f"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/exceptions/TornadoNoMetalPlatformException.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/exceptions/TornadoNoMetalPlatformException.java",
+      "sha256": "cceec34367069624f979eea4bc14537e97161801ee0116e1c449b1df016b89a4"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/exceptions/TornadoNoOpenCLPlatformException.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/exceptions/TornadoNoOpenCLPlatformException.java",
+      "sha256": "138729e046a07d1b4204fae34376a9677127683ddbc104fc589374a921db4804"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/exceptions/TornadoOutOfMemoryException.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/exceptions/TornadoOutOfMemoryException.java",
+      "sha256": "f874831b2bea469d194653016082b4aa08f94010e498244d2b39477d5550aa80"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/exceptions/TornadoRuntimeException.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/exceptions/TornadoRuntimeException.java",
+      "sha256": "b649abf983dab455e5abcabb575b8e3820d15c1fcfd171f1df4372726d9865e3"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/exceptions/TornadoTaskRuntimeException.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/exceptions/TornadoTaskRuntimeException.java",
+      "sha256": "ba09f32d4b391d81d4443e29a96c0ebc2b72aa472530403ff00f63af30d4fdb5"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/exceptions/TornadoUnifiedMemoryNotSupported.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/exceptions/TornadoUnifiedMemoryNotSupported.java",
+      "sha256": "88698d16525700a4d392dee2c1259f20c7211cbb4df27fb7719e56e36a850f75"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/internal/annotations/CompilerIntrinsic.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/internal/annotations/CompilerIntrinsic.java",
+      "sha256": "1d30b7f61b60fb6b5741a3f1fdd57a5578285509f821e60f39dc99ec06969f41"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/internal/annotations/HalfType.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/internal/annotations/HalfType.java",
+      "sha256": "6cd21f88812f16082e79c6cce6c42a5f7b18d01a779d5060db6f70eed8fdc988"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/internal/annotations/Payload.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/internal/annotations/Payload.java",
+      "sha256": "7924f32d2924e19a0b79a4bea1f0c9c1f04601532707aa7ce5ec27ed59b7942f"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/internal/annotations/SegmentElementSize.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/internal/annotations/SegmentElementSize.java",
+      "sha256": "55143f8b4ab4644b474ab4cc8b08f7c97b5005518c650264e0d12ba41cad179e"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/internal/annotations/TornadoVMIntrinsic.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/internal/annotations/TornadoVMIntrinsic.java",
+      "sha256": "0378bd14d37ccd0e709af05a5fa597838692586cd9b39563b915f845c06e2ac8"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/internal/annotations/Vector.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/internal/annotations/Vector.java",
+      "sha256": "de2c374c3d22aa04d1cc57db891d1f0a08dfe0f89c9e49d226430ff036738aa9"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/math/TornadoMath.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/math/TornadoMath.java",
+      "sha256": "0cbec3d5ca446598924f68c82432f31d31bb26f0bfe524e4eeef1a853fc4bf3b"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/memory/CUDADeviceViewBinding.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/memory/CUDADeviceViewBinding.java",
+      "sha256": "824d00a4adb99f3400bea110af7f78a73c39a313e33189ff076dea4c357b3678"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/memory/DeviceBufferState.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/memory/DeviceBufferState.java",
+      "sha256": "11aed9124ea63396752403fad722f960f6dd8bd6d6ec562d1af5f15a09643a37"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/memory/NativeArrayLayouts.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/memory/NativeArrayLayouts.java",
+      "sha256": "fa679c185acffa64db90f60714a42a2587181be4d4e9b2597859bdfff75e5589"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/memory/ObjectState.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/memory/ObjectState.java",
+      "sha256": "5c755d70d567db69ca39e634910524f28924d7b8c78ebd6fd25bbc537a681285"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/memory/TornadoMemoryProvider.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/memory/TornadoMemoryProvider.java",
+      "sha256": "9bd196d797859760a3bc1e4ff840bb2b8d6e32089743b4a9deae390b71bbf248"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/memory/XPUBuffer.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/memory/XPUBuffer.java",
+      "sha256": "36f85459f9bf0692032193a87f00994a780d9a1feffbbe0ac8b5d9198da7538f"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/plan/types/OffConcurrentDevices.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/plan/types/OffConcurrentDevices.java",
+      "sha256": "32d848af69d5442f2baac1be3741070690a889d60f1e89e9de0afc2b840c44cb"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/plan/types/OffMemoryLimit.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/plan/types/OffMemoryLimit.java",
+      "sha256": "5c6df99c0f97ee32dbc0f4a13bccf1a6850160794cb2e54860caefe4206c1c3f"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/plan/types/OffPlanResultsHistory.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/plan/types/OffPlanResultsHistory.java",
+      "sha256": "ecf5bd7441f2bbfeb1764683b613378ed444f73541f5866e300330da8cbf2ed2"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/plan/types/OffPrintKernel.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/plan/types/OffPrintKernel.java",
+      "sha256": "7dd49c1e0077e2fa85eafb23d7e20b8bdc7ca62829afb4dab8cb891d0a002ece"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/plan/types/OffProfiler.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/plan/types/OffProfiler.java",
+      "sha256": "b9260426f2620029531803fc724dbfe123095bf61e6e73d0a8ea775b04fdb551"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/plan/types/OffThreadInfo.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/plan/types/OffThreadInfo.java",
+      "sha256": "fb78317ecff8b6f07850adc852a90b8b1f601e72cf67b62987552d2fa1b3f8a0"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/plan/types/WithAllGraphs.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/plan/types/WithAllGraphs.java",
+      "sha256": "cbb0e682aa145857cb02b94fff98ca3d14432d1a3706ef9a31e04f0de8568f0a"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/plan/types/WithBatch.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/plan/types/WithBatch.java",
+      "sha256": "ada5c611f0085ddc52ac4c8a0e68230249eb4db7b59bf3b34a7068477c4fe17a"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/plan/types/WithCUDAGraph.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/plan/types/WithCUDAGraph.java",
+      "sha256": "ac3d2ee4bd026ee7a0c1821e9c72497ef4b6aba529c12e963055f5bcf6a065be"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/plan/types/WithCUDAPendingLaunchCount.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/plan/types/WithCUDAPendingLaunchCount.java",
+      "sha256": "5c805ac362d645c1869ae45559096ab3910f7536aa4ed17488df37737069b109"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/plan/types/WithClearProfiles.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/plan/types/WithClearProfiles.java",
+      "sha256": "390054a73e0c998c88d697a9985fbfb94ac5edd1f8b7316d06b448187d55ead8"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/plan/types/WithCompilerFlags.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/plan/types/WithCompilerFlags.java",
+      "sha256": "c0e66a1b9de75ac90244742324b25cc282f779423e41adae7be843278e2d578e"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/plan/types/WithConcurrentDevices.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/plan/types/WithConcurrentDevices.java",
+      "sha256": "e477fe6ab7e30985e0e42352225ff4ee568fa8e129c5a32e4c346810ec456fd3"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/plan/types/WithDefaultScheduler.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/plan/types/WithDefaultScheduler.java",
+      "sha256": "72ac261b884efafaaefd3316d30bb213ec7c0059e3df8607d31492a210efca33"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/plan/types/WithDevice.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/plan/types/WithDevice.java",
+      "sha256": "4caf8b285cbf5d6d42e47f4369640322ea54054a2c94992b4164a47e81fd5d52"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/plan/types/WithDynamicShapes.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/plan/types/WithDynamicShapes.java",
+      "sha256": "d444c7b9412bb3f9cf09e983b9773fcb30893a668cd32c834aed66ad9e9ee53b"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/plan/types/WithFreeDeviceMemory.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/plan/types/WithFreeDeviceMemory.java",
+      "sha256": "09d96ed37206b481a306ed77dbc235ac829ae1ff98a5acf17d4efd510f56968f"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/plan/types/WithGraph.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/plan/types/WithGraph.java",
+      "sha256": "ff6a7297fc0dc94d6d02b206dc5400d4d2d69481f0f8f1052154e9a16e7810ce"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/plan/types/WithGridScheduler.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/plan/types/WithGridScheduler.java",
+      "sha256": "e9d1d11125ddc7278245638de7f80ec81ca1eb6206bbaaa98b69f51def39be55"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/plan/types/WithIntraPlanConcurrency.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/plan/types/WithIntraPlanConcurrency.java",
+      "sha256": "a2a0312e3a6c607393ba517714427596f57b91efe616e52a193d0d88614648fb"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/plan/types/WithMemoryLimit.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/plan/types/WithMemoryLimit.java",
+      "sha256": "df4c16b61d32893f8bd9a1b1953f2decd369ee2ff8c7efc9d6172d6059a3a4ef"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/plan/types/WithPlanResultsHistory.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/plan/types/WithPlanResultsHistory.java",
+      "sha256": "58f7f69f6626ebfda60bb322012ae0d5abde62230f9dd818dbf70361d733bf31"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/plan/types/WithPreCompilation.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/plan/types/WithPreCompilation.java",
+      "sha256": "510548ab0440b3f19b6f6da0270d85490f5803017115ae7019019733284ab5c1"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/plan/types/WithPrintKernel.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/plan/types/WithPrintKernel.java",
+      "sha256": "c576b99a54dc9ed4202296594b437a9535e47a4959c0ddc34ad5cbbfa78b78d8"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/plan/types/WithProfiler.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/plan/types/WithProfiler.java",
+      "sha256": "f3ee6feb2d0f3f9999311db303938cefc3af8163af37844e516f2af76f9d57ae"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/plan/types/WithResetDevice.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/plan/types/WithResetDevice.java",
+      "sha256": "bd7a9c146598aae48d339be2e553f23d68f58ec7ddd4bee4f67108b196848889"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/plan/types/WithStagedTransfers.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/plan/types/WithStagedTransfers.java",
+      "sha256": "fbf6d9c8e41b6c92e1111b5be674bf9c0a607f86e78b1dda079b884bd962909d"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/plan/types/WithStrictFloatingPoint.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/plan/types/WithStrictFloatingPoint.java",
+      "sha256": "e42b9730df6d05832a9916d581ee99e8a95d5d876f07649e9fa0134a4873c49b"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/plan/types/WithThreadInfo.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/plan/types/WithThreadInfo.java",
+      "sha256": "56dd37a0c10bfbdfc18d57b1aa82f44fa6d63c81a09620cabf50b1853bede126"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/plan/types/WithWarmUpIterations.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/plan/types/WithWarmUpIterations.java",
+      "sha256": "0fb3ac9c6129474b07e0149cba9134de7f16ddce01bdc31cf29e9193cd258ffb"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/plan/types/WithWarmUpTime.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/plan/types/WithWarmUpTime.java",
+      "sha256": "ea36b265416a63b33cd5555735a29a69302f8b3162204234da743b3955f379e5"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/profiler/ChromeEventJSonWriter.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/profiler/ChromeEventJSonWriter.java",
+      "sha256": "e54a67c03404bf6cf094fbab30620fcf969736b218096eafd31ac3481b5eb28b"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/profiler/ChromeEventTracer.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/profiler/ChromeEventTracer.java",
+      "sha256": "c1e7ca689dacccf238708427cdad2d820449ee52e6f5ce2f8235110292b2a387"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/profiler/JSonWriter.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/profiler/JSonWriter.java",
+      "sha256": "8052d5f96990ec511e2fbfa7511a72c2277d05ecfa09945f69b98369fea342dc"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/profiler/ProfilerInterface.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/profiler/ProfilerInterface.java",
+      "sha256": "0495b166a79680ea4dffe7d5d48a3e7aa5287e3ceb5e573a6c12281a580bf0ae"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/profiler/ProfilerType.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/profiler/ProfilerType.java",
+      "sha256": "befe152342d37f78f58d72cffe5bd5ba6b317dff216471bdb8a61b32d796b3ac"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/profiler/TornadoProfiler.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/profiler/TornadoProfiler.java",
+      "sha256": "6d70988896c1a04ad269918617eefbe2954b7c955e5fcf368cfc77fd72b6a9c7"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/runtime/ExecutorFrame.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/runtime/ExecutorFrame.java",
+      "sha256": "dfa6e6c5256b9740db41ab8bfe0443a619c3f71c7ddb32065f2a2d8d83614c07"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/runtime/TaskContextInterface.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/runtime/TaskContextInterface.java",
+      "sha256": "1acc332beb949473d68ff298cdc83ba73f72288a4967757309227312b09e7ee9"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/runtime/TornadoAPIProvider.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/runtime/TornadoAPIProvider.java",
+      "sha256": "076ccde151c41d32c3bd8a0d3a398fcebe7966f8ce4f2be68cb003e7caba572e"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/runtime/TornadoRuntimeProvider.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/runtime/TornadoRuntimeProvider.java",
+      "sha256": "1e72d3b50885dc7c4b30c990f855aa11d196896a4257f6abe6f67e7dcde7fc1b"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/tile/DType.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/tile/DType.java",
+      "sha256": "6a5661e29dccb297e6de0dfeaf016c28de63aa84acf06b2b233d3626f2abdfb0"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/tile/PartitionView.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/tile/PartitionView.java",
+      "sha256": "57debb6392a88eb3eb5517bdde971986e8f58da976a5a8e1a8f747d5ec5b10f4"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/tile/TensorView.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/tile/TensorView.java",
+      "sha256": "8c1a89446701307ff6334b7472c96a623dd5835a162f7c709ff08e859313d580"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/tile/Tile.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/tile/Tile.java",
+      "sha256": "3aa11fec7e72964fbd364e8d6a1205374dafa119073eee527e0d997726a39b9e"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/tile/TileContext.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/tile/TileContext.java",
+      "sha256": "10123ac74bd0448335dff832deb030ed594365bf19a9a444687998d0a1af909a"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/types/BFloat16.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/types/BFloat16.java",
+      "sha256": "b84e2c9628a822b26f56bfc4925fb25f349fe67b0f31d5e97ad4a675be9b1ada"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/types/FP8.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/types/FP8.java",
+      "sha256": "bca37b3ee6122232811825dc6fad3f30311fab6f663beef0940e5e2dba813898"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/types/HalfFloat.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/types/HalfFloat.java",
+      "sha256": "0cca38720ac835ed2428e48a68dc663230570d499ea905172f4ecec60b74c98d"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/types/arrays/BFloat16Array.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/types/arrays/BFloat16Array.java",
+      "sha256": "38731a024277645638942d598039bcd4db5c2c25ceea2fa58fdee2d170f5f1eb"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/types/arrays/ByteArray.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/types/arrays/ByteArray.java",
+      "sha256": "6be4339f4d474148e5ff0893f05e414748f57157291a8ba56efd81d1679f47c7"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/types/arrays/CharArray.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/types/arrays/CharArray.java",
+      "sha256": "be0c40d6d6466476d021c21fa2f064895a52c667705626c01542b6b043cc51dc"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/types/arrays/DoubleArray.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/types/arrays/DoubleArray.java",
+      "sha256": "e28655b4fb69765fbe6fddfbc8f89c9187d7630cc824260e3f80795e2d8915cc"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/types/arrays/FP8Array.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/types/arrays/FP8Array.java",
+      "sha256": "f3c5e768f36633fb5c62a75a7e7d9ae13bcd894e8ae97eabd5d22ce225dad7a0"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/types/arrays/FloatArray.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/types/arrays/FloatArray.java",
+      "sha256": "a60c62a5cc73d305fb2329e5321c945e42cee320efd58edea67d89c177c7e62b"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/types/arrays/HalfFloatArray.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/types/arrays/HalfFloatArray.java",
+      "sha256": "820a9468d7f748d97b2cede1e143e6c3eaddf87c1d17e2baf605975ac18475da"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/types/arrays/Int8Array.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/types/arrays/Int8Array.java",
+      "sha256": "759b8dcf0ecd27f1b4596876011ba251f958503c99ba943171dad0d9feb94525"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/types/arrays/IntArray.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/types/arrays/IntArray.java",
+      "sha256": "46e91ea378cbf83b822e07998c02ee859cc38f12141d73ed4c6c6edd94f63f88"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/types/arrays/LongArray.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/types/arrays/LongArray.java",
+      "sha256": "80ce68281a8e3506a3fc41bf292a24982d7f6ca847bafb9ff0bdbefd9208ae1c"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/types/arrays/ShortArray.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/types/arrays/ShortArray.java",
+      "sha256": "cf96c69a57a44a19c0ce616446fadf2556ecda4eabb963f9cd1b5b8885579eab"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/types/arrays/TornadoMemorySegment.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/types/arrays/TornadoMemorySegment.java",
+      "sha256": "711e46fb62ddc67c33f370ff4d39e26a59456183f144580f0899f5c5aa9d308f"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/types/arrays/TornadoNativeArray.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/types/arrays/TornadoNativeArray.java",
+      "sha256": "b358afed674a518415444cfd7751f5a81048342a1bf8ef414993d5f84110d3e3"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/types/collections/TornadoCollectionInterface.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/types/collections/TornadoCollectionInterface.java",
+      "sha256": "d57ecaba9ba29fe7e4c3affb9b51bc5f64d7b5e4ac410e8685c3838bd2b3ed9a"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/types/collections/VectorDouble.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/types/collections/VectorDouble.java",
+      "sha256": "b47b533c631249e89a493b98a0405a8707499a1db110e91952998afc6f5714b7"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/types/collections/VectorDouble16.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/types/collections/VectorDouble16.java",
+      "sha256": "ac94feae1caeff2bcc020b9eb9c2125abad0bda00362e96bfd00a72086324056"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/types/collections/VectorDouble2.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/types/collections/VectorDouble2.java",
+      "sha256": "1d8e109230cf4967a344eb5e06790a7212ec62e9d635fe50ac4166d667599169"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/types/collections/VectorDouble3.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/types/collections/VectorDouble3.java",
+      "sha256": "698249a1253bec23cc05ffb174c2adb973139a23e962e15fcf7abe2e0d3be378"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/types/collections/VectorDouble4.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/types/collections/VectorDouble4.java",
+      "sha256": "557574164c8657630e9b4ca7af0f0fce135b312d92edf76caef8cf47f1298e6d"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/types/collections/VectorDouble8.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/types/collections/VectorDouble8.java",
+      "sha256": "7c34f72df17b354faf3d072eea22b4eea27b84394ff1314b99c2874fd4fa4dd6"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/types/collections/VectorFloat.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/types/collections/VectorFloat.java",
+      "sha256": "9a9eba404b7085054e8e813229d1f9ddc2ccd739a1c6d26fcfc502be75049550"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/types/collections/VectorFloat16.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/types/collections/VectorFloat16.java",
+      "sha256": "09456163f6e4eb1cb9f7cb314061071dfab5250281e71a337679caf01eb85ffd"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/types/collections/VectorFloat2.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/types/collections/VectorFloat2.java",
+      "sha256": "f109767c22fd35b3cea21891e96928608a209b09a868a9981442f85e50a60ed5"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/types/collections/VectorFloat3.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/types/collections/VectorFloat3.java",
+      "sha256": "4cc83b21ab0f1e25035c4d782e2c33a4e906af8d14325f7c42509f4418951156"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/types/collections/VectorFloat4.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/types/collections/VectorFloat4.java",
+      "sha256": "de0aac6cfa953c2436d92be13e3351636c5b645b1c772d9ee035548c1ea7dc6f"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/types/collections/VectorFloat8.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/types/collections/VectorFloat8.java",
+      "sha256": "e2554ff1c01bc32307a01fe1508e02ee037c710e49002dcb69b38db28f4f570a"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/types/collections/VectorHalf.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/types/collections/VectorHalf.java",
+      "sha256": "7f2fee072b1c575d27744afd28dcd4ef728c10542a272c1d2d238e6ab704680a"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/types/collections/VectorHalf16.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/types/collections/VectorHalf16.java",
+      "sha256": "155704b3a151fb65ca73bc1d0b06844ed5edb0703ee9a4154bce73069aa5a6bc"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/types/collections/VectorHalf2.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/types/collections/VectorHalf2.java",
+      "sha256": "47fcfc70808a73d76616431fe15fda7d556955a1ef23036000289816d317e738"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/types/collections/VectorHalf3.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/types/collections/VectorHalf3.java",
+      "sha256": "2c4f5d660f29478d2f8e1309dc743fa136fdc5eb8c4db50900faa059ef0e94c3"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/types/collections/VectorHalf4.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/types/collections/VectorHalf4.java",
+      "sha256": "56c04ad1d43704ef33b6f594fc84d57b3aeb3b98b3665070d334f23d45c0abae"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/types/collections/VectorHalf8.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/types/collections/VectorHalf8.java",
+      "sha256": "c7e395f87aaa290586173cec019f5a46d4966799ce387ced54dce6e15c84ac18"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/types/collections/VectorInt.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/types/collections/VectorInt.java",
+      "sha256": "abfcdeb07dee10a2700aa449e3abac9706ef23fb4bfc7572db410abdf98ee654"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/types/collections/VectorInt16.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/types/collections/VectorInt16.java",
+      "sha256": "3902e0b94e6f88369faf9b25c11b84f7fcfeb07271f41a54bf0e05ef8d270363"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/types/collections/VectorInt2.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/types/collections/VectorInt2.java",
+      "sha256": "be0d3bd6e1eed5cc94243aff22053a9a514d273354ad37a463c881b54c8cf5c8"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/types/collections/VectorInt3.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/types/collections/VectorInt3.java",
+      "sha256": "948f10c083664e50ec1d486dac84c953c38d847055fc6c54a88ef5af7bf04a55"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/types/collections/VectorInt4.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/types/collections/VectorInt4.java",
+      "sha256": "269fa7769ed9e9e9a42834cff6ca2aeef4e56d34625f1bc130ad4cc219dbc394"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/types/collections/VectorInt8.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/types/collections/VectorInt8.java",
+      "sha256": "25d517c857f117e986a6455ab53ec0c456123001964b97c023c98fb1d744d53f"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/types/common/PrimitiveStorage.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/types/common/PrimitiveStorage.java",
+      "sha256": "b2a3ba0e2cb70446eba4208d75ec41cc3bfbef215339b8caf7a5e009655397cf"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/types/images/ImageByte3.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/types/images/ImageByte3.java",
+      "sha256": "5668e0fa953247e31a612fad36e88c1c2ca5e98d94bc0c32bed267b6ad509eac"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/types/images/ImageByte4.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/types/images/ImageByte4.java",
+      "sha256": "88d4d7fbdea5a51ce15947a4980be82a9ba1e091e44373b7bc8937e6a129d781"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/types/images/ImageFloat.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/types/images/ImageFloat.java",
+      "sha256": "c9973c9e301099b7b747d04b93a4a49fc4cae985db07f162bab095b4c8217ff3"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/types/images/ImageFloat3.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/types/images/ImageFloat3.java",
+      "sha256": "d15a309b446300b3d749063c1a9411c0294e0d2a7ddb71b92148c8adc8ff93e1"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/types/images/ImageFloat4.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/types/images/ImageFloat4.java",
+      "sha256": "b54ac05d84336435d5f911d78d7380743db4227f0f1dffe1db6a4997a90a5606"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/types/images/ImageFloat8.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/types/images/ImageFloat8.java",
+      "sha256": "cb2c20276b11a8c13c1601ee9d0114058059f341b9adeb2b5deba4eac6f2d0ab"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/types/images/TornadoImagesInterface.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/types/images/TornadoImagesInterface.java",
+      "sha256": "5c0c3ba7fadb7af178a9a9926cadf8026329b9adab77a208d3a6029be2de9ad3"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/types/matrix/Matrix2DDouble.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/types/matrix/Matrix2DDouble.java",
+      "sha256": "bfc59f3ccebd7331407165bd355f64095b99ca2469d459e1eb8fcaf1b1960e73"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/types/matrix/Matrix2DFloat.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/types/matrix/Matrix2DFloat.java",
+      "sha256": "e0bfdb996ef641796c08b2907d7d16d5b21f848e31721deb48067085703f1be4"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/types/matrix/Matrix2DFloat4.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/types/matrix/Matrix2DFloat4.java",
+      "sha256": "d1a5a758058d5985b276781a2d591153c2fc1a540edac054b2854b89d5883094"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/types/matrix/Matrix2DInt.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/types/matrix/Matrix2DInt.java",
+      "sha256": "a92189143cb9c8cabdbf0001fda6d1e62991d1b37a84c2e0df331f580d7cf2c6"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/types/matrix/Matrix2DType.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/types/matrix/Matrix2DType.java",
+      "sha256": "e5e7adbcd0ba67bf0c0ac1afc26dfc8ee801491896c69d1b38eb2ecaa89a627f"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/types/matrix/Matrix3DDouble.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/types/matrix/Matrix3DDouble.java",
+      "sha256": "be5e8f1d2847f2d70a93691f6897a1063ad60f5179b33d6777d0a4280c50d9eb"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/types/matrix/Matrix3DFloat.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/types/matrix/Matrix3DFloat.java",
+      "sha256": "2b981bc0914cb6294e8a7269779203ccf13eb6e59bdc88655f45d21f63197a3a"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/types/matrix/Matrix3DFloat4.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/types/matrix/Matrix3DFloat4.java",
+      "sha256": "f16f2aae61ecd65ff7cca7fe0b09f8a20819c1990db3a9b80b3769e1d4cf9279"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/types/matrix/Matrix3DInt.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/types/matrix/Matrix3DInt.java",
+      "sha256": "6f9c89449071d5c92e4312c07eeec54433b496fba564a9cb612f13162fa102b1"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/types/matrix/Matrix3DLong.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/types/matrix/Matrix3DLong.java",
+      "sha256": "536aeb64b2f2812850b3f5404ce9b06f0af3a06c380f98541c13acdebb678db0"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/types/matrix/Matrix3DShort.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/types/matrix/Matrix3DShort.java",
+      "sha256": "cc998b20cdb06edecb6b91d28848d01126e99fc9dceac007fe664a64dde75796"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/types/matrix/Matrix3DType.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/types/matrix/Matrix3DType.java",
+      "sha256": "eb1820e29efe1e0d436484870cbdd2d1ebc3a9a0bfd23d657ca10f483b4cdabd"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/types/matrix/Matrix4x4Float.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/types/matrix/Matrix4x4Float.java",
+      "sha256": "24c1c6ccdbe33dde685161e99d5a307ed84d2d77b7476d4d4bdfffe034f82df1"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/types/matrix/Matrix8x8Float.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/types/matrix/Matrix8x8Float.java",
+      "sha256": "c24bd8fabc27d1de43dcc9e2fff19798e55f5ea7bd2eb3f242cf31c94baab4ea"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/types/matrix/Matrix8x8Half.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/types/matrix/Matrix8x8Half.java",
+      "sha256": "be668d4022738f6bb0c533fbe9928b40fa6addf49fb160712d532e0f5e66972c"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/types/matrix/TornadoMatrixInterface.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/types/matrix/TornadoMatrixInterface.java",
+      "sha256": "d4b7175466b42ca862a94995cf1bafbceb8692f4094ce44bac5b816969a9f9c1"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/types/utils/ByteOps.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/types/utils/ByteOps.java",
+      "sha256": "d20146987e637f1140137c1d9e355a34cfbe8f969905780f6c8e24ee5821d99f"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/types/utils/DoubleOps.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/types/utils/DoubleOps.java",
+      "sha256": "e92b06bcd92a55a14ba1c99f95c23f31b9bbda492216ff640d378e905fefa027"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/types/utils/FloatOps.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/types/utils/FloatOps.java",
+      "sha256": "120f31a24adceb72f393158cd857751baef2ea5d4641d4f0d6cbc04f77963595"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/types/utils/FloatingPointError.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/types/utils/FloatingPointError.java",
+      "sha256": "1a5e816ebcc36c65d473cd4c561a129c8f0fc698626fcb1df52bb0d91201196c"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/types/utils/IntOps.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/types/utils/IntOps.java",
+      "sha256": "d3439b4b6166baf29b9f8ef39457ae741a8f8cd0b66052c17e1150b2ab5f53e4"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/types/utils/LongOps.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/types/utils/LongOps.java",
+      "sha256": "ca9d25c7492231f160c672c57ec0cf3fba82767ff12127595c173c1306287296"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/types/utils/ShortOps.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/types/utils/ShortOps.java",
+      "sha256": "925dfa0c54b13c6b208ea18a289b1fead92b8e0ddd460600190e1e6049f216af"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/types/utils/StorageFormats.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/types/utils/StorageFormats.java",
+      "sha256": "846807b2a2fd901f9b598eb85a966bedd0e33457fe066737453e9f8e812c6b1d"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/types/utils/VolumeOps.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/types/utils/VolumeOps.java",
+      "sha256": "9566c453a3237c190043fe3b1000c022b36c59aebb619d69be538a50ec39ba8e"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/types/vectors/Byte3.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/types/vectors/Byte3.java",
+      "sha256": "022018aa2c3c74e4112e04f099776d4828eb52ec546a938abb67a54545354a8c"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/types/vectors/Byte4.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/types/vectors/Byte4.java",
+      "sha256": "b6f6becbd75e49bcf9dff8ed1c47872a465f3bc993c06413a48ecc50b793cfe1"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/types/vectors/Double16.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/types/vectors/Double16.java",
+      "sha256": "d2b806327d34a3c652e174deef0494e2ee2a7f3e5036e34e4419bf0d7c4ea3d7"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/types/vectors/Double2.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/types/vectors/Double2.java",
+      "sha256": "a8f21c423c6ac6d576ae45a4e89d749bd1fc1cad5a2d31c5d3c1c9f1f2292de0"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/types/vectors/Double3.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/types/vectors/Double3.java",
+      "sha256": "a2a8eb0940950416d5a4054367dae6193985bef191b134deef63dd6b1f5b066d"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/types/vectors/Double4.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/types/vectors/Double4.java",
+      "sha256": "f745325a57f7d0da88a6a02410aaaf6f5c1cd6b0650880e0919f0b085d887b81"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/types/vectors/Double8.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/types/vectors/Double8.java",
+      "sha256": "236bc28b7fcdd0c1facee775eec040414239a7d9c65959f09e46362a33720e3d"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/types/vectors/Float16.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/types/vectors/Float16.java",
+      "sha256": "a3c2103de32e03eecd5d3ae54d4192a30a7faeeb0b5e97581df3410c7db122e8"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/types/vectors/Float2.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/types/vectors/Float2.java",
+      "sha256": "2b49970998ba802645d73aeb7e4e0884920a3389331e437a06cf8efc139e0cd5"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/types/vectors/Float3.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/types/vectors/Float3.java",
+      "sha256": "ecc9aea57b868bc828190a8bc421fabe97352600e4da0b10515d0f2131492d8d"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/types/vectors/Float4.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/types/vectors/Float4.java",
+      "sha256": "64002c02d66b54e4f62171b3c31d71832df9e49cbebefe9b64685b6e7e3d94fe"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/types/vectors/Float8.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/types/vectors/Float8.java",
+      "sha256": "82159049f430896f94b218bd4d29568731d429042f241c7881852133a0a72ef3"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/types/vectors/Half16.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/types/vectors/Half16.java",
+      "sha256": "f1a5a83bb8b37b2ac40a486a6eb1a50002fd2a35edf000492849b3bfe971d38d"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/types/vectors/Half2.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/types/vectors/Half2.java",
+      "sha256": "20e9460fafd61b45a8b4b41628a7a1d2577276d93413bbbd9a418f3c8d24dab3"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/types/vectors/Half3.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/types/vectors/Half3.java",
+      "sha256": "563b1e2180739161d931b5e78a55da2125bf12fb4c23207d2a23f5f73e744043"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/types/vectors/Half4.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/types/vectors/Half4.java",
+      "sha256": "34f62f99fb367b6190c4ae9e71c449fe8d6a36855533793f6e5251609ef8bd55"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/types/vectors/Half8.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/types/vectors/Half8.java",
+      "sha256": "95ff626f63ea191684e858e4212d3ac079cb95fb4bafcc8a8d58c37ee3129db4"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/types/vectors/Int16.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/types/vectors/Int16.java",
+      "sha256": "aedc20fac282db2976fc108b47aeb62be7b772fcec2a38a93dd2af8d2e4d18d5"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/types/vectors/Int2.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/types/vectors/Int2.java",
+      "sha256": "009022bf48ef6f04c88ab77568c9dc25ed2da7f2cf04c987dc3a5c4a9f42f8ff"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/types/vectors/Int3.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/types/vectors/Int3.java",
+      "sha256": "8528a215539157359289ae0e52bb7c8b85f11cc29372aef913c221ef1d1dddaf"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/types/vectors/Int4.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/types/vectors/Int4.java",
+      "sha256": "72d42a3b8e63aac9eb1c33aca365e6f93cead7cd6f190082671e2d473a2cc68c"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/types/vectors/Int8.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/types/vectors/Int8.java",
+      "sha256": "0c6bbcd08f44186794293662fe42545f7c576a9f189d1710956abeaef0c089e0"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/types/vectors/Short2.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/types/vectors/Short2.java",
+      "sha256": "eaae5addc70a3e3d09f7615aaf2c2e832016931ace6c54bae0354f8460436f7a"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/types/vectors/Short3.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/types/vectors/Short3.java",
+      "sha256": "9d1e57e2155e629ba86a9ba7fa46f345480470e8d1c0d07aff5abdf65271cce6"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/types/vectors/TornadoVectorsInterface.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/types/vectors/TornadoVectorsInterface.java",
+      "sha256": "88f5f91be4ec05afdf19639081b5e7f72af8aed8d6a643223545fb588ff59f84"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/types/volumes/TornadoVolumesInterface.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/types/volumes/TornadoVolumesInterface.java",
+      "sha256": "dc2775366cf6f1d517a74bcd46d572d03b4118438a589e5ccdce44e440cd6d01"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/types/volumes/VolumeShort2.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/types/volumes/VolumeShort2.java",
+      "sha256": "6de3b9510f96da6bdefbe35d3919fe4e37a3952263fba2c52ee0b397241a0964"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/utils/QuantizationUtils.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/utils/QuantizationUtils.java",
+      "sha256": "047369d8f88f811df76a474e0edec2079597077527cc49e1afb63982ae9c651c"
+    },
+    {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/utils/TornadoAPIUtils.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/utils/TornadoAPIUtils.java",
+      "sha256": "7590905a5173b7caa7198aead751506fdc234a0f97252e8146e0d68ae0c4f80c"
+    },
+    {
+      "path": "tornado-compiler/tc-check/src/main/java/module-info.java",
+      "kind": "java",
+      "module": "tornado.tc.check",
+      "relative": "module-info.java",
+      "sha256": "d1fcee5446e2b832c2c89239e14dae5896570730b3e8d9766cea635af2f275c9"
+    },
+    {
+      "path": "tornado-compiler/tc-check/src/main/java/uk/ac/manchester/tornado/tc/check/ExternalTool.java",
+      "kind": "java",
+      "module": "tornado.tc.check",
+      "relative": "uk/ac/manchester/tornado/tc/check/ExternalTool.java",
+      "sha256": "ac956b60ab720583b190bad8613b277241e00c57533e57dcbe2a960d394da4ea"
+    },
+    {
+      "path": "tornado-compiler/tc-check/src/main/java/uk/ac/manchester/tornado/tc/check/FileCheck.java",
+      "kind": "java",
+      "module": "tornado.tc.check",
+      "relative": "uk/ac/manchester/tornado/tc/check/FileCheck.java",
+      "sha256": "1394651cec1278f5bb39d1495caa8c2ebb43c43167852f49918fcf80b3aa8016"
+    },
+    {
+      "path": "tornado-compiler/tc-check/src/main/java/uk/ac/manchester/tornado/tc/check/Lit.java",
+      "kind": "java",
+      "module": "tornado.tc.check",
+      "relative": "uk/ac/manchester/tornado/tc/check/Lit.java",
+      "sha256": "63a1ac09ef14fc65eea0440165c508875bf53e09835f41d2b88bf580d0a4633b"
+    },
+    {
+      "path": "tornado-compiler/tc-check/src/main/java/uk/ac/manchester/tornado/tc/check/SourceRules.java",
+      "kind": "java",
+      "module": "tornado.tc.check",
+      "relative": "uk/ac/manchester/tornado/tc/check/SourceRules.java",
+      "sha256": "567f90be9909d31bc78f227a7177d52310c19b36c2e6fed576f55c5bfe2428b3"
+    },
+    {
+      "path": "tornado-compiler/tc-codegen/src/main/java/module-info.java",
+      "kind": "java",
+      "module": "tornado.tc.codegen",
+      "relative": "module-info.java",
+      "sha256": "a77146346e88ece9cd2746c3c588ed9b3e25a38d2326acc28c44d6af27301a30"
+    },
+    {
+      "path": "tornado-compiler/tc-codegen/src/main/java/uk/ac/manchester/tornado/tc/codegen/CDialect.java",
+      "kind": "java",
+      "module": "tornado.tc.codegen",
+      "relative": "uk/ac/manchester/tornado/tc/codegen/CDialect.java",
+      "sha256": "676df692bccc215b7f02fc1f69ad73ceb6be08f8499f7537ba8b826876b421bd"
+    },
+    {
+      "path": "tornado-compiler/tc-codegen/src/main/java/uk/ac/manchester/tornado/tc/codegen/CEmitter.java",
+      "kind": "java",
+      "module": "tornado.tc.codegen",
+      "relative": "uk/ac/manchester/tornado/tc/codegen/CEmitter.java",
+      "sha256": "6ff2f9dd9f34b70f9e3db89221b25917087a4b0e08605054bae012f1bef1787d"
+    },
+    {
+      "path": "tornado-compiler/tc-codegen/src/main/java/uk/ac/manchester/tornado/tc/codegen/CudaDialect.java",
+      "kind": "java",
+      "module": "tornado.tc.codegen",
+      "relative": "uk/ac/manchester/tornado/tc/codegen/CudaDialect.java",
+      "sha256": "46a216bd59d70410551e783461dbf2a2ce2740a28142a6393dcf81aa2e173d5b"
+    },
+    {
+      "path": "tornado-compiler/tc-codegen/src/main/java/uk/ac/manchester/tornado/tc/codegen/Helpers.java",
+      "kind": "java",
+      "module": "tornado.tc.codegen",
+      "relative": "uk/ac/manchester/tornado/tc/codegen/Helpers.java",
+      "sha256": "5adee9fa968955f08e3272c0086eb36b287696cead0fa42076dd67478e560b49"
+    },
+    {
+      "path": "tornado-compiler/tc-codegen/src/main/java/uk/ac/manchester/tornado/tc/codegen/Intrinsics.java",
+      "kind": "java",
+      "module": "tornado.tc.codegen",
+      "relative": "uk/ac/manchester/tornado/tc/codegen/Intrinsics.java",
+      "sha256": "2a53dc4579ceaecb97f1bef21f2ce2635de25398e31222a91d3a617376287b6f"
+    },
+    {
+      "path": "tornado-compiler/tc-codegen/src/main/java/uk/ac/manchester/tornado/tc/codegen/MetalDialect.java",
+      "kind": "java",
+      "module": "tornado.tc.codegen",
+      "relative": "uk/ac/manchester/tornado/tc/codegen/MetalDialect.java",
+      "sha256": "cfbaac404dcf5fa088b7183fa741e223f8fb6d110e8c84c263d79eda7fc5d5b1"
+    },
+    {
+      "path": "tornado-compiler/tc-codegen/src/main/java/uk/ac/manchester/tornado/tc/codegen/Naming.java",
+      "kind": "java",
+      "module": "tornado.tc.codegen",
+      "relative": "uk/ac/manchester/tornado/tc/codegen/Naming.java",
+      "sha256": "aa04698dea9e9832a7deeceb325223829b9fb7bd79c0caa658fc33d462e894d9"
+    },
+    {
+      "path": "tornado-compiler/tc-codegen/src/main/java/uk/ac/manchester/tornado/tc/codegen/OpenClDialect.java",
+      "kind": "java",
+      "module": "tornado.tc.codegen",
+      "relative": "uk/ac/manchester/tornado/tc/codegen/OpenClDialect.java",
+      "sha256": "e45531529c584b16962fc8ff44f2e98752b17e05e57cfae6ea90857dc02e81a4"
+    },
+    {
+      "path": "tornado-compiler/tc-codegen/src/main/java/uk/ac/manchester/tornado/tc/codegen/TileSpellings.java",
+      "kind": "java",
+      "module": "tornado.tc.codegen",
+      "relative": "uk/ac/manchester/tornado/tc/codegen/TileSpellings.java",
+      "sha256": "baa42dc72c88f972374294bb47d6371c01911ba11eb4a31232bb00728f4def9f"
+    },
+    {
+      "path": "tornado-compiler/tc-codegen/src/main/java/uk/ac/manchester/tornado/tc/codegen/tools/EmitTool.java",
+      "kind": "java",
+      "module": "tornado.tc.codegen",
+      "relative": "uk/ac/manchester/tornado/tc/codegen/tools/EmitTool.java",
+      "sha256": "975067e4bc311b2e7324c7cde8fa4015846879efe7991e7fde8c2a38ebbaee45"
+    },
+    {
+      "path": "tornado-compiler/tc-debug/src/main/java/module-info.java",
+      "kind": "java",
+      "module": "tornado.tc.debug",
+      "relative": "module-info.java",
+      "sha256": "128cf70e725b86b1c8f975f3d87e0c02235201c1a46ea081ae65e2501e7f8350"
+    },
+    {
+      "path": "tornado-compiler/tc-debug/src/main/java/uk/ac/manchester/tornado/tc/debug/HtmlReport.java",
+      "kind": "java",
+      "module": "tornado.tc.debug",
+      "relative": "uk/ac/manchester/tornado/tc/debug/HtmlReport.java",
+      "sha256": "a89ac06a79e7f3e67802c6feb4bf8526f9fbcd620fe3b9bc79db258eae3ced3c"
+    },
+    {
+      "path": "tornado-compiler/tc-frontend/src/main/java/module-info.java",
+      "kind": "java",
+      "module": "tornado.tc.frontend",
+      "relative": "module-info.java",
+      "sha256": "08a8730923353faea918765536c30b1ad03504537aaa2e77bad43e9abe3ee3bf"
+    },
+    {
+      "path": "tornado-compiler/tc-frontend/src/main/java/uk/ac/manchester/tornado/tc/frontend/Bindings.java",
+      "kind": "java",
+      "module": "tornado.tc.frontend",
+      "relative": "uk/ac/manchester/tornado/tc/frontend/Bindings.java",
+      "sha256": "0d8752e2624efc3f1894edb53f1076aed82ca5346ef429169e7699c2bd58e162"
+    },
+    {
+      "path": "tornado-compiler/tc-frontend/src/main/java/uk/ac/manchester/tornado/tc/frontend/DeviceKernels.java",
+      "kind": "java",
+      "module": "tornado.tc.frontend",
+      "relative": "uk/ac/manchester/tornado/tc/frontend/DeviceKernels.java",
+      "sha256": "326ea0f77a2388491b6aa058dd5e9c0a2ba7bb6c0d58bcebaf30cc615d77a6cf"
+    },
+    {
+      "path": "tornado-compiler/tc-frontend/src/main/java/uk/ac/manchester/tornado/tc/frontend/Disassembler.java",
+      "kind": "java",
+      "module": "tornado.tc.frontend",
+      "relative": "uk/ac/manchester/tornado/tc/frontend/Disassembler.java",
+      "sha256": "27c0a43273b85422e6912cf760d42226344507af077221775341d82fbe4cc343"
+    },
+    {
+      "path": "tornado-compiler/tc-frontend/src/main/java/uk/ac/manchester/tornado/tc/frontend/Frontend.java",
+      "kind": "java",
+      "module": "tornado.tc.frontend",
+      "relative": "uk/ac/manchester/tornado/tc/frontend/Frontend.java",
+      "sha256": "3f9724e1294b07d3f9a0a966cfda7f7207a0bf236bce5366ca362915b3416a31"
+    },
+    {
+      "path": "tornado-compiler/tc-frontend/src/main/java/uk/ac/manchester/tornado/tc/frontend/LocalArrays.java",
+      "kind": "java",
+      "module": "tornado.tc.frontend",
+      "relative": "uk/ac/manchester/tornado/tc/frontend/LocalArrays.java",
+      "sha256": "20b2ad79a42929626b4906da542cb366854c10716800b66cfe36beff5703d096"
+    },
+    {
+      "path": "tornado-compiler/tc-frontend/src/main/java/uk/ac/manchester/tornado/tc/frontend/LocalCollections.java",
+      "kind": "java",
+      "module": "tornado.tc.frontend",
+      "relative": "uk/ac/manchester/tornado/tc/frontend/LocalCollections.java",
+      "sha256": "2bd8b14d35421721cae2da8243d9f924b3223d2ce0dcf1b3cd610299cf98fd20"
+    },
+    {
+      "path": "tornado-compiler/tc-frontend/src/main/java/uk/ac/manchester/tornado/tc/frontend/ModelFrontend.java",
+      "kind": "java",
+      "module": "tornado.tc.frontend",
+      "relative": "uk/ac/manchester/tornado/tc/frontend/ModelFrontend.java",
+      "sha256": "722745fe40569f4dd883bd9959f9aa000d8bcdc65dc9bfeee58b02d6648315f7"
+    },
+    {
+      "path": "tornado-compiler/tc-frontend/src/main/java/uk/ac/manchester/tornado/tc/frontend/SsaVariables.java",
+      "kind": "java",
+      "module": "tornado.tc.frontend",
+      "relative": "uk/ac/manchester/tornado/tc/frontend/SsaVariables.java",
+      "sha256": "98e1489d33c6ff1da1feb2dae9c458b722d7739286fd1abd0df837586f32ef60"
+    },
+    {
+      "path": "tornado-compiler/tc-frontend/src/main/java/uk/ac/manchester/tornado/tc/frontend/TaskSites.java",
+      "kind": "java",
+      "module": "tornado.tc.frontend",
+      "relative": "uk/ac/manchester/tornado/tc/frontend/TaskSites.java",
+      "sha256": "fda45f8fc859e5591891b19fcbd5eff11dd6092a2aafa09bb2012f22715d8a59"
+    },
+    {
+      "path": "tornado-compiler/tc-frontend/src/main/java/uk/ac/manchester/tornado/tc/frontend/Translator.java",
+      "kind": "java",
+      "module": "tornado.tc.frontend",
+      "relative": "uk/ac/manchester/tornado/tc/frontend/Translator.java",
+      "sha256": "0cc96604bce9f95a22575ff66cefaf3d22b87d7c1d5f74b45ae50d7cc1ec3895"
+    },
+    {
+      "path": "tornado-compiler/tc-frontend/src/main/java/uk/ac/manchester/tornado/tc/frontend/classfile/Bytecode.java",
+      "kind": "java",
+      "module": "tornado.tc.frontend",
+      "relative": "uk/ac/manchester/tornado/tc/frontend/classfile/Bytecode.java",
+      "sha256": "e699fcf9c10139e268defded6108a2f12ffb7aaa0cf60029e04b1f7d2e45ff3c"
+    },
+    {
+      "path": "tornado-compiler/tc-frontend/src/main/java/uk/ac/manchester/tornado/tc/frontend/classfile/ClassFile.java",
+      "kind": "java",
+      "module": "tornado.tc.frontend",
+      "relative": "uk/ac/manchester/tornado/tc/frontend/classfile/ClassFile.java",
+      "sha256": "5748f32142c1951828d14636603ac87da84b8197f624b010af4d068d85eceea8"
+    },
+    {
+      "path": "tornado-compiler/tc-frontend/src/main/java/uk/ac/manchester/tornado/tc/frontend/classfile/ClassFormatException.java",
+      "kind": "java",
+      "module": "tornado.tc.frontend",
+      "relative": "uk/ac/manchester/tornado/tc/frontend/classfile/ClassFormatException.java",
+      "sha256": "4a2bdd7ecfafe4840611e2c091bec47f92cab659eb1ec1e64fb63fbfe27d0fbe"
+    },
+    {
+      "path": "tornado-compiler/tc-frontend/src/main/java/uk/ac/manchester/tornado/tc/frontend/classfile/ConstantPool.java",
+      "kind": "java",
+      "module": "tornado.tc.frontend",
+      "relative": "uk/ac/manchester/tornado/tc/frontend/classfile/ConstantPool.java",
+      "sha256": "fda41111fde3a83ed3e802c495fbabb7828d99dc10c9f5734a89ed8d3c1b4fe1"
+    },
+    {
+      "path": "tornado-compiler/tc-frontend/src/main/java/uk/ac/manchester/tornado/tc/frontend/classfile/TypeAnnotations.java",
+      "kind": "java",
+      "module": "tornado.tc.frontend",
+      "relative": "uk/ac/manchester/tornado/tc/frontend/classfile/TypeAnnotations.java",
+      "sha256": "8fc7b16ca4f841ae9d574c7992e6b87fd5c4eaac6a45494973a30946d70bc327"
+    },
+    {
+      "path": "tornado-compiler/tc-frontend/src/main/java/uk/ac/manchester/tornado/tc/frontend/tools/CoverageTool.java",
+      "kind": "java",
+      "module": "tornado.tc.frontend",
+      "relative": "uk/ac/manchester/tornado/tc/frontend/tools/CoverageTool.java",
+      "sha256": "e8cd993662dc997989cd116ab428f75bf88bbb2f7ce798cf9e09197ad50fcbcd"
+    },
+    {
+      "path": "tornado-compiler/tc-frontend/src/main/java/uk/ac/manchester/tornado/tc/frontend/tools/JavaTool.java",
+      "kind": "java",
+      "module": "tornado.tc.frontend",
+      "relative": "uk/ac/manchester/tornado/tc/frontend/tools/JavaTool.java",
+      "sha256": "691c8563fce9995c27de4274b0497fd6c8d26f7eb518b1ed21520b454b38fd63"
+    },
+    {
+      "path": "tornado-compiler/tc-ir/src/main/java/module-info.java",
+      "kind": "java",
+      "module": "tornado.tc.ir",
+      "relative": "module-info.java",
+      "sha256": "b472d45903fccf65694a9f07f14360ab59f21b9a7f1e3e9025159ec47d60481a"
+    },
+    {
+      "path": "tornado-compiler/tc-ir/src/main/java/uk/ac/manchester/tornado/tc/ir/AddressSpace.java",
+      "kind": "java",
+      "module": "tornado.tc.ir",
+      "relative": "uk/ac/manchester/tornado/tc/ir/AddressSpace.java",
+      "sha256": "9d12a067e5c4b946fa253e6320b7e9d974e9c0bbe1302b035142a0ea728b8272"
+    },
+    {
+      "path": "tornado-compiler/tc-ir/src/main/java/uk/ac/manchester/tornado/tc/ir/ApiTypes.java",
+      "kind": "java",
+      "module": "tornado.tc.ir",
+      "relative": "uk/ac/manchester/tornado/tc/ir/ApiTypes.java",
+      "sha256": "47af306525b512af335f3444b9208b3c5335792d7501a85de40fea1ba3b427f9"
+    },
+    {
+      "path": "tornado-compiler/tc-ir/src/main/java/uk/ac/manchester/tornado/tc/ir/Attribute.java",
+      "kind": "java",
+      "module": "tornado.tc.ir",
+      "relative": "uk/ac/manchester/tornado/tc/ir/Attribute.java",
+      "sha256": "0db7b034aa7cfd8357907d064e55b43e243778eb234b45da291e016ac563bcc6"
+    },
+    {
+      "path": "tornado-compiler/tc-ir/src/main/java/uk/ac/manchester/tornado/tc/ir/Block.java",
+      "kind": "java",
+      "module": "tornado.tc.ir",
+      "relative": "uk/ac/manchester/tornado/tc/ir/Block.java",
+      "sha256": "8046ba0fa7d5b6f1352c1ca83679cffddf24394db886de5b886a2af60d95b4c1"
+    },
+    {
+      "path": "tornado-compiler/tc-ir/src/main/java/uk/ac/manchester/tornado/tc/ir/BlockArg.java",
+      "kind": "java",
+      "module": "tornado.tc.ir",
+      "relative": "uk/ac/manchester/tornado/tc/ir/BlockArg.java",
+      "sha256": "cd08952c259b297bbfde200f1ddcb0840ba69673ecae8c95695e5f9519403dcd"
+    },
+    {
+      "path": "tornado-compiler/tc-ir/src/main/java/uk/ac/manchester/tornado/tc/ir/Diagnostic.java",
+      "kind": "java",
+      "module": "tornado.tc.ir",
+      "relative": "uk/ac/manchester/tornado/tc/ir/Diagnostic.java",
+      "sha256": "9940c1111ba4212859e3b485ab0288468ed0ab9ca5cfd58b79be5b1638db36c7"
+    },
+    {
+      "path": "tornado-compiler/tc-ir/src/main/java/uk/ac/manchester/tornado/tc/ir/ErrorCodes.java",
+      "kind": "java",
+      "module": "tornado.tc.ir",
+      "relative": "uk/ac/manchester/tornado/tc/ir/ErrorCodes.java",
+      "sha256": "959a876d417e4da515db5968c584e1dd8fd0dc19b600ddd0923b422877fe5501"
+    },
+    {
+      "path": "tornado-compiler/tc-ir/src/main/java/uk/ac/manchester/tornado/tc/ir/Function.java",
+      "kind": "java",
+      "module": "tornado.tc.ir",
+      "relative": "uk/ac/manchester/tornado/tc/ir/Function.java",
+      "sha256": "b358459d59079e03a23b5089e170f373c0018750863e914bc47888bf40e2bf71"
+    },
+    {
+      "path": "tornado-compiler/tc-ir/src/main/java/uk/ac/manchester/tornado/tc/ir/Immediates.java",
+      "kind": "java",
+      "module": "tornado.tc.ir",
+      "relative": "uk/ac/manchester/tornado/tc/ir/Immediates.java",
+      "sha256": "ab2eaf9fbdb06f84f65d9cf483c86966adaedc31630695df9782930386c05c56"
+    },
+    {
+      "path": "tornado-compiler/tc-ir/src/main/java/uk/ac/manchester/tornado/tc/ir/Inst.java",
+      "kind": "java",
+      "module": "tornado.tc.ir",
+      "relative": "uk/ac/manchester/tornado/tc/ir/Inst.java",
+      "sha256": "da588b49a70ef634f90c34d334772ca22906bc3fbed5ff23cd92cf65ea53c318"
+    },
+    {
+      "path": "tornado-compiler/tc-ir/src/main/java/uk/ac/manchester/tornado/tc/ir/IntrinsicRegistry.java",
+      "kind": "java",
+      "module": "tornado.tc.ir",
+      "relative": "uk/ac/manchester/tornado/tc/ir/IntrinsicRegistry.java",
+      "sha256": "72f0abae86c6c01821556446b1ce2011e2ac94c2fc4d4a1633c8c324374437af"
+    },
+    {
+      "path": "tornado-compiler/tc-ir/src/main/java/uk/ac/manchester/tornado/tc/ir/IrBuilder.java",
+      "kind": "java",
+      "module": "tornado.tc.ir",
+      "relative": "uk/ac/manchester/tornado/tc/ir/IrBuilder.java",
+      "sha256": "4291dfc046df0cdc916dedf2e00a556412e27e4ba825c9adb837e39b0d0ce91f"
+    },
+    {
+      "path": "tornado-compiler/tc-ir/src/main/java/uk/ac/manchester/tornado/tc/ir/IrModule.java",
+      "kind": "java",
+      "module": "tornado.tc.ir",
+      "relative": "uk/ac/manchester/tornado/tc/ir/IrModule.java",
+      "sha256": "892def5d16d9ece9fd1924028454163c39307f47abd1f6b94ac1d39d86f863c1"
+    },
+    {
+      "path": "tornado-compiler/tc-ir/src/main/java/uk/ac/manchester/tornado/tc/ir/IrParseException.java",
+      "kind": "java",
+      "module": "tornado.tc.ir",
+      "relative": "uk/ac/manchester/tornado/tc/ir/IrParseException.java",
+      "sha256": "f375725bce30d07e17b9c75714fcfde3d4ce01de88b1b835357de647ef0688d0"
+    },
+    {
+      "path": "tornado-compiler/tc-ir/src/main/java/uk/ac/manchester/tornado/tc/ir/IrParser.java",
+      "kind": "java",
+      "module": "tornado.tc.ir",
+      "relative": "uk/ac/manchester/tornado/tc/ir/IrParser.java",
+      "sha256": "64034f0699680ce7247cb8559ea72d376694c747109203775de4fa32bd1d5cf7"
+    },
+    {
+      "path": "tornado-compiler/tc-ir/src/main/java/uk/ac/manchester/tornado/tc/ir/IrPrinter.java",
+      "kind": "java",
+      "module": "tornado.tc.ir",
+      "relative": "uk/ac/manchester/tornado/tc/ir/IrPrinter.java",
+      "sha256": "cd59e4cf442b9f1165b0a30589610a9b456ea0216235b52c179c14f144fd10b8"
+    },
+    {
+      "path": "tornado-compiler/tc-ir/src/main/java/uk/ac/manchester/tornado/tc/ir/Loc.java",
+      "kind": "java",
+      "module": "tornado.tc.ir",
+      "relative": "uk/ac/manchester/tornado/tc/ir/Loc.java",
+      "sha256": "d8b157f48d94715dfde6d9ee1e2ee9e2d7ea6cd23c62c4145d63afd94a0cf24d"
+    },
+    {
+      "path": "tornado-compiler/tc-ir/src/main/java/uk/ac/manchester/tornado/tc/ir/Opcode.java",
+      "kind": "java",
+      "module": "tornado.tc.ir",
+      "relative": "uk/ac/manchester/tornado/tc/ir/Opcode.java",
+      "sha256": "dd7bf87ed02b3c7ac690ee94df1f4ebd3756f9e1847322a43e5b790b270ac399"
+    },
+    {
+      "path": "tornado-compiler/tc-ir/src/main/java/uk/ac/manchester/tornado/tc/ir/Successor.java",
+      "kind": "java",
+      "module": "tornado.tc.ir",
+      "relative": "uk/ac/manchester/tornado/tc/ir/Successor.java",
+      "sha256": "c1aa1ef8034de65b767b0e66de07b3467036e68dd732809d76d4e0b7c8529693"
+    },
+    {
+      "path": "tornado-compiler/tc-ir/src/main/java/uk/ac/manchester/tornado/tc/ir/Type.java",
+      "kind": "java",
+      "module": "tornado.tc.ir",
+      "relative": "uk/ac/manchester/tornado/tc/ir/Type.java",
+      "sha256": "bad07e60ee7bc49c9a2a8286c0a50c7afcc82da57cb5ea8856baa6f71fcdf3dd"
+    },
+    {
+      "path": "tornado-compiler/tc-ir/src/main/java/uk/ac/manchester/tornado/tc/ir/Value.java",
+      "kind": "java",
+      "module": "tornado.tc.ir",
+      "relative": "uk/ac/manchester/tornado/tc/ir/Value.java",
+      "sha256": "ac46c6a4b8a20224e4e14fc624e86564af4144d5d2c82c47e65011fd3170226d"
+    },
+    {
+      "path": "tornado-compiler/tc-ir/src/main/java/uk/ac/manchester/tornado/tc/ir/Verifier.java",
+      "kind": "java",
+      "module": "tornado.tc.ir",
+      "relative": "uk/ac/manchester/tornado/tc/ir/Verifier.java",
+      "sha256": "77b3d2c3eaf3cf7ef81e43fc89038cf195e226cb66f58c236da8d8146616d362"
+    },
+    {
+      "path": "tornado-compiler/tc-ir/src/main/java/uk/ac/manchester/tornado/tc/ir/analysis/Analyses.java",
+      "kind": "java",
+      "module": "tornado.tc.ir",
+      "relative": "uk/ac/manchester/tornado/tc/ir/analysis/Analyses.java",
+      "sha256": "0af69c722135bca58c51a2038efe4867523488894a886f957861dbd3742f095f"
+    },
+    {
+      "path": "tornado-compiler/tc-ir/src/main/java/uk/ac/manchester/tornado/tc/ir/analysis/Constants.java",
+      "kind": "java",
+      "module": "tornado.tc.ir",
+      "relative": "uk/ac/manchester/tornado/tc/ir/analysis/Constants.java",
+      "sha256": "f67edc2030b8316dc49825b042ae458c656c9fc477ae41497686493ed02c8206"
+    },
+    {
+      "path": "tornado-compiler/tc-ir/src/main/java/uk/ac/manchester/tornado/tc/ir/analysis/CountedLoop.java",
+      "kind": "java",
+      "module": "tornado.tc.ir",
+      "relative": "uk/ac/manchester/tornado/tc/ir/analysis/CountedLoop.java",
+      "sha256": "1d7e4b08a41837b02af50fe1768fe3e922c1bf9e866739c847f709591f9b9444"
+    },
+    {
+      "path": "tornado-compiler/tc-ir/src/main/java/uk/ac/manchester/tornado/tc/ir/analysis/DominatorTree.java",
+      "kind": "java",
+      "module": "tornado.tc.ir",
+      "relative": "uk/ac/manchester/tornado/tc/ir/analysis/DominatorTree.java",
+      "sha256": "bb4bd9ad572f38863921aa0b97bf118cd9cda0bc8b13ac682e7502f3c4052314"
+    },
+    {
+      "path": "tornado-compiler/tc-ir/src/main/java/uk/ac/manchester/tornado/tc/ir/analysis/KernelFeatures.java",
+      "kind": "java",
+      "module": "tornado.tc.ir",
+      "relative": "uk/ac/manchester/tornado/tc/ir/analysis/KernelFeatures.java",
+      "sha256": "310e747dadb3eba433bc9acd9ce4e83d45289ea185bc30cd21bdab142648458f"
+    },
+    {
+      "path": "tornado-compiler/tc-ir/src/main/java/uk/ac/manchester/tornado/tc/ir/analysis/LoopForest.java",
+      "kind": "java",
+      "module": "tornado.tc.ir",
+      "relative": "uk/ac/manchester/tornado/tc/ir/analysis/LoopForest.java",
+      "sha256": "c128a184740f64641f84b8c26f558d740ad0b4b6f058aeb5c1945816dfb3945a"
+    },
+    {
+      "path": "tornado-compiler/tc-ir/src/main/java/uk/ac/manchester/tornado/tc/ir/analysis/LoopShape.java",
+      "kind": "java",
+      "module": "tornado.tc.ir",
+      "relative": "uk/ac/manchester/tornado/tc/ir/analysis/LoopShape.java",
+      "sha256": "6bd3344c2040c97e07fba81efa9ebe045a67252fd0f925396ff73d753ecc4c31"
+    },
+    {
+      "path": "tornado-compiler/tc-ir/src/main/java/uk/ac/manchester/tornado/tc/ir/target/TargetCaps.java",
+      "kind": "java",
+      "module": "tornado.tc.ir",
+      "relative": "uk/ac/manchester/tornado/tc/ir/target/TargetCaps.java",
+      "sha256": "68031d09bb30d2fe8a9e4026bf9b347df96c42cce94533111ad48a2087c9158f"
+    },
+    {
+      "path": "tornado-compiler/tc-ir/src/main/java/uk/ac/manchester/tornado/tc/ir/tools/IrTool.java",
+      "kind": "java",
+      "module": "tornado.tc.ir",
+      "relative": "uk/ac/manchester/tornado/tc/ir/tools/IrTool.java",
+      "sha256": "9282ddf5507ec9a1c529570c4102cc6c908596fd2e0c26121f3c018c10674e53"
+    },
+    {
+      "path": "tornado-compiler/tc-lower/src/main/java/module-info.java",
+      "kind": "java",
+      "module": "tornado.tc.lower",
+      "relative": "module-info.java",
+      "sha256": "591f605e6bf4b8ad674808c5934af2b9d9f512d874c01efd52a978dc801aacdd"
+    },
+    {
+      "path": "tornado-compiler/tc-lower/src/main/java/uk/ac/manchester/tornado/tc/lower/S.java",
+      "kind": "java",
+      "module": "tornado.tc.lower",
+      "relative": "uk/ac/manchester/tornado/tc/lower/S.java",
+      "sha256": "7b166a137500d907ffe199f753daa9463d6f96c42bb04ceb303f6e6b7c092c17"
+    },
+    {
+      "path": "tornado-compiler/tc-lower/src/main/java/uk/ac/manchester/tornado/tc/lower/SPrinter.java",
+      "kind": "java",
+      "module": "tornado.tc.lower",
+      "relative": "uk/ac/manchester/tornado/tc/lower/SPrinter.java",
+      "sha256": "a1df14c707667947ffb85969f18b9cee6cc9492063b99afe7b8fe51d87124b3d"
+    },
+    {
+      "path": "tornado-compiler/tc-lower/src/main/java/uk/ac/manchester/tornado/tc/lower/Simplifier.java",
+      "kind": "java",
+      "module": "tornado.tc.lower",
+      "relative": "uk/ac/manchester/tornado/tc/lower/Simplifier.java",
+      "sha256": "b50e2b36e66b895211a1b13583e2c7adeef337fcb2d6b3c9ceabb88e0b7e3e63"
+    },
+    {
+      "path": "tornado-compiler/tc-lower/src/main/java/uk/ac/manchester/tornado/tc/lower/Structurizer.java",
+      "kind": "java",
+      "module": "tornado.tc.lower",
+      "relative": "uk/ac/manchester/tornado/tc/lower/Structurizer.java",
+      "sha256": "4a5957b2fb4aca193f40b393d4583c1456f123cedc0943bda9fa53128f4fafba"
+    },
+    {
+      "path": "tornado-compiler/tc-lower/src/main/java/uk/ac/manchester/tornado/tc/lower/tools/LowerTool.java",
+      "kind": "java",
+      "module": "tornado.tc.lower",
+      "relative": "uk/ac/manchester/tornado/tc/lower/tools/LowerTool.java",
+      "sha256": "cac4d8081bea2e5543707d34fc85a08f8c74ab120a612bfe1bd2c3934df242e1"
+    },
+    {
+      "path": "tornado-compiler/tc-opt/src/main/java/module-info.java",
+      "kind": "java",
+      "module": "tornado.tc.opt",
+      "relative": "module-info.java",
+      "sha256": "d4af679ea229553112565865ffc11e92ce2006f1012167641dd10f44ab58d404"
+    },
+    {
+      "path": "tornado-compiler/tc-opt/src/main/java/uk/ac/manchester/tornado/tc/opt/Canonicalizer.java",
+      "kind": "java",
+      "module": "tornado.tc.opt",
+      "relative": "uk/ac/manchester/tornado/tc/opt/Canonicalizer.java",
+      "sha256": "2cc64f32b5d559f432c182c15f3dac466d90b9c0ac4611494d6bde25bf3bb62d"
+    },
+    {
+      "path": "tornado-compiler/tc-opt/src/main/java/uk/ac/manchester/tornado/tc/opt/CfgSimplify.java",
+      "kind": "java",
+      "module": "tornado.tc.opt",
+      "relative": "uk/ac/manchester/tornado/tc/opt/CfgSimplify.java",
+      "sha256": "75a8cb1d4c324d0fd2e62e8942d5f308ebfe115246c2d9fe195eb1342eec2ae6"
+    },
+    {
+      "path": "tornado-compiler/tc-opt/src/main/java/uk/ac/manchester/tornado/tc/opt/DeadCodeElimination.java",
+      "kind": "java",
+      "module": "tornado.tc.opt",
+      "relative": "uk/ac/manchester/tornado/tc/opt/DeadCodeElimination.java",
+      "sha256": "8c62e2bcc4c9f0be1c38328e48bd45ff83905ae03c320975ed94d7d9d82df8c5"
+    },
+    {
+      "path": "tornado-compiler/tc-opt/src/main/java/uk/ac/manchester/tornado/tc/opt/FloatNarrowing.java",
+      "kind": "java",
+      "module": "tornado.tc.opt",
+      "relative": "uk/ac/manchester/tornado/tc/opt/FloatNarrowing.java",
+      "sha256": "a9c7fca61f2bab8be9ffd0ccfe1b153810c2f6b3ae6d7c9a9e85985b20911870"
+    },
+    {
+      "path": "tornado-compiler/tc-opt/src/main/java/uk/ac/manchester/tornado/tc/opt/FmaRematerialization.java",
+      "kind": "java",
+      "module": "tornado.tc.opt",
+      "relative": "uk/ac/manchester/tornado/tc/opt/FmaRematerialization.java",
+      "sha256": "2d5c91a0cdbf91d18639950266d4df1ec34cb960f4fae4887870279746d45458"
+    },
+    {
+      "path": "tornado-compiler/tc-opt/src/main/java/uk/ac/manchester/tornado/tc/opt/FullLoopUnroll.java",
+      "kind": "java",
+      "module": "tornado.tc.opt",
+      "relative": "uk/ac/manchester/tornado/tc/opt/FullLoopUnroll.java",
+      "sha256": "58cfd74f15240d393aaa2e845bb0ca9a0d8db28729891b73be7a999b79e06db6"
+    },
+    {
+      "path": "tornado-compiler/tc-opt/src/main/java/uk/ac/manchester/tornado/tc/opt/GlobalValueNumbering.java",
+      "kind": "java",
+      "module": "tornado.tc.opt",
+      "relative": "uk/ac/manchester/tornado/tc/opt/GlobalValueNumbering.java",
+      "sha256": "e75c66b8c8f6f187a5518b2d5fac6a3d7d717c6d0c00fd31ca59cbaa22263531"
+    },
+    {
+      "path": "tornado-compiler/tc-opt/src/main/java/uk/ac/manchester/tornado/tc/opt/Inliner.java",
+      "kind": "java",
+      "module": "tornado.tc.opt",
+      "relative": "uk/ac/manchester/tornado/tc/opt/Inliner.java",
+      "sha256": "81cb96423bf3f3874742f90be60d7fa908b4fce83f1a41a68d117e659815c259"
+    },
+    {
+      "path": "tornado-compiler/tc-opt/src/main/java/uk/ac/manchester/tornado/tc/opt/LoopInvariantCodeMotion.java",
+      "kind": "java",
+      "module": "tornado.tc.opt",
+      "relative": "uk/ac/manchester/tornado/tc/opt/LoopInvariantCodeMotion.java",
+      "sha256": "993aadace02a632a74523ced7d74e094dca7c86f04b5b5e38f5e44f504b6ab30"
+    },
+    {
+      "path": "tornado-compiler/tc-opt/src/main/java/uk/ac/manchester/tornado/tc/opt/MathPeepholes.java",
+      "kind": "java",
+      "module": "tornado.tc.opt",
+      "relative": "uk/ac/manchester/tornado/tc/opt/MathPeepholes.java",
+      "sha256": "170f89b422abfafc6d46e415016ec14631b9b50a3e423e86d89e191a1949e205"
+    },
+    {
+      "path": "tornado-compiler/tc-opt/src/main/java/uk/ac/manchester/tornado/tc/opt/NativeHalfArithmetic.java",
+      "kind": "java",
+      "module": "tornado.tc.opt",
+      "relative": "uk/ac/manchester/tornado/tc/opt/NativeHalfArithmetic.java",
+      "sha256": "5755c54b685de0240df980b78973d6cace218173efca55cffb6b9c68d46ff623"
+    },
+    {
+      "path": "tornado-compiler/tc-opt/src/main/java/uk/ac/manchester/tornado/tc/opt/NoWrapInference.java",
+      "kind": "java",
+      "module": "tornado.tc.opt",
+      "relative": "uk/ac/manchester/tornado/tc/opt/NoWrapInference.java",
+      "sha256": "60b48227a9923ceccec36df1be5b145f808891ae5853ce1d8e4d7c34164e2a33"
+    },
+    {
+      "path": "tornado-compiler/tc-opt/src/main/java/uk/ac/manchester/tornado/tc/opt/Pass.java",
+      "kind": "java",
+      "module": "tornado.tc.opt",
+      "relative": "uk/ac/manchester/tornado/tc/opt/Pass.java",
+      "sha256": "51e20f740a81a28d97900d933587b5133919f9aafb2bd356c1ded2f8e0e2321a"
+    },
+    {
+      "path": "tornado-compiler/tc-opt/src/main/java/uk/ac/manchester/tornado/tc/opt/PassManager.java",
+      "kind": "java",
+      "module": "tornado.tc.opt",
+      "relative": "uk/ac/manchester/tornado/tc/opt/PassManager.java",
+      "sha256": "a5e66e4ed833cd3bd17d9933d09028bf61d77306cd6a80aa723280749f7aaa56"
+    },
+    {
+      "path": "tornado-compiler/tc-opt/src/main/java/uk/ac/manchester/tornado/tc/opt/tools/OptTool.java",
+      "kind": "java",
+      "module": "tornado.tc.opt",
+      "relative": "uk/ac/manchester/tornado/tc/opt/tools/OptTool.java",
+      "sha256": "061ebd3b945c7a5194e219450f440a6d9e187e7a91299e1b992f187eb8c20e8c"
+    },
+    {
+      "path": "tornado-compiler/tc-runtime/src/main/java/module-info.java",
+      "kind": "java",
+      "module": "tornado.tc.runtime",
+      "relative": "module-info.java",
+      "sha256": "68d07f152dc8a593f3833706db50b18406b2e0a52e21493e9d456866ae0d37d9"
+    },
+    {
+      "path": "tornado-compiler/tc-runtime/src/main/java/uk/ac/manchester/tornado/tc/runtime/TcCompiler.java",
+      "kind": "java",
+      "module": "tornado.tc.runtime",
+      "relative": "uk/ac/manchester/tornado/tc/runtime/TcCompiler.java",
+      "sha256": "71e95187b79dac537ebc383bc196d95e9ba436e19cacef1ede792c021d49a4a6"
+    },
+    {
+      "path": "tornado-compiler/tc-runtime/src/main/java/uk/ac/manchester/tornado/tc/runtime/TcEvents.java",
+      "kind": "java",
+      "module": "tornado.tc.runtime",
+      "relative": "uk/ac/manchester/tornado/tc/runtime/TcEvents.java",
+      "sha256": "a5b37b5aee2cdee59419b1c5048d523f3c6d6e46f9e1d0b8fc03224ffe255afc"
+    },
+    {
+      "path": "tornado-compiler/tc-runtime/src/main/java/uk/ac/manchester/tornado/tc/runtime/TcOptions.java",
+      "kind": "java",
+      "module": "tornado.tc.runtime",
+      "relative": "uk/ac/manchester/tornado/tc/runtime/TcOptions.java",
+      "sha256": "a1d70cdeb60d0434ca55bf4daba638837270a94c10b91d000811ff9492eaf9a6"
+    },
+    {
+      "path": "tornado-compiler/tc-runtime/src/main/java/uk/ac/manchester/tornado/tc/runtime/TcTrace.java",
+      "kind": "java",
+      "module": "tornado.tc.runtime",
+      "relative": "uk/ac/manchester/tornado/tc/runtime/TcTrace.java",
+      "sha256": "97afc99234fa2c6f165a5300855e8e784ceca52868c9f0d5b1965505c7a523da"
+    },
+    {
+      "path": "tornado-compiler/tc-runtime/src/main/java/uk/ac/manchester/tornado/tc/runtime/tools/EmitSweep.java",
+      "kind": "java",
+      "module": "tornado.tc.runtime",
+      "relative": "uk/ac/manchester/tornado/tc/runtime/tools/EmitSweep.java",
+      "sha256": "5bcb346855425c772f131264301acfa3866565a191478ab9ae9b02efb45f9014"
+    },
+    {
+      "path": "tornado-compiler/tc-runtime/src/main/java/uk/ac/manchester/tornado/tc/runtime/tools/Tc.java",
+      "kind": "java",
+      "module": "tornado.tc.runtime",
+      "relative": "uk/ac/manchester/tornado/tc/runtime/tools/Tc.java",
+      "sha256": "ea47fc1a5e7199873bb30d8e4f496f663a688e098c77240b414cff6b4c6efa34"
+    },
+    {
+      "path": "tornado-compiler/tc-runtime/src/main/java/uk/ac/manchester/tornado/tc/runtime/tools/TypeLayouts.java",
+      "kind": "java",
+      "module": "tornado.tc.runtime",
+      "relative": "uk/ac/manchester/tornado/tc/runtime/tools/TypeLayouts.java",
+      "sha256": "74a809f52bfb48e6fbb56a36c85682f49f8e73448d2705c9e50a1a998fa9a56d"
+    },
+    {
+      "path": "tornado-compiler/tc-selftest/src/main/java/module-info.java",
+      "kind": "java",
+      "module": "tornado.tc.selftest",
+      "relative": "module-info.java",
+      "sha256": "bbb33a967854df974bfa527c138b301b9e20210c2cebe7888fea988874dbcfa8"
+    },
+    {
+      "path": "tornado-compiler/tc-selftest/src/main/java/uk/ac/manchester/tornado/tc/selftest/BackendChecks.java",
+      "kind": "java",
+      "module": "tornado.tc.selftest",
+      "relative": "uk/ac/manchester/tornado/tc/selftest/BackendChecks.java",
+      "sha256": "dce3fcf12b6d1373994e17fb4b2dd59ad9403a4dfcad424c0b4db99a96d0d8bc"
+    },
+    {
+      "path": "tornado-compiler/tc-selftest/src/main/java/uk/ac/manchester/tornado/tc/selftest/Check.java",
+      "kind": "java",
+      "module": "tornado.tc.selftest",
+      "relative": "uk/ac/manchester/tornado/tc/selftest/Check.java",
+      "sha256": "d9159c6944623b18127d47831aa1eeadf0cb43a9770669ab214afa41ef9a4278"
+    },
+    {
+      "path": "tornado-compiler/tc-selftest/src/main/java/uk/ac/manchester/tornado/tc/selftest/Checks.java",
+      "kind": "java",
+      "module": "tornado.tc.selftest",
+      "relative": "uk/ac/manchester/tornado/tc/selftest/Checks.java",
+      "sha256": "90adc4e9d3d3d828cd338f5d5d8ca7fe205b770151d83cfe753bcf0bf5c8903a"
+    },
+    {
+      "path": "tornado-compiler/tc-selftest/src/main/java/uk/ac/manchester/tornado/tc/selftest/Json.java",
+      "kind": "java",
+      "module": "tornado.tc.selftest",
+      "relative": "uk/ac/manchester/tornado/tc/selftest/Json.java",
+      "sha256": "7136f32f821210b2f668b932aa4f52aa3ff5d40df65c814c7d3a4d38c5e69bde"
+    },
+    {
+      "path": "tornado-compiler/tc-selftest/src/main/java/uk/ac/manchester/tornado/tc/selftest/Kernels.java",
+      "kind": "java",
+      "module": "tornado.tc.selftest",
+      "relative": "uk/ac/manchester/tornado/tc/selftest/Kernels.java",
+      "sha256": "3b4a8718bf98dcb1c8c9a9bd01d9255de00d8b339cec09b67dcd2ba1cacf0cef"
+    },
+    {
+      "path": "tornado-compiler/tc-selftest/src/main/java/uk/ac/manchester/tornado/tc/selftest/SelfTest.java",
+      "kind": "java",
+      "module": "tornado.tc.selftest",
+      "relative": "uk/ac/manchester/tornado/tc/selftest/SelfTest.java",
+      "sha256": "0e84c7f1f69d6ad412ea4cdc68869c9543f25b911ae796d5c53266e29a9ecd7b"
+    },
+    {
+      "path": "tornado-compiler/tc-selftest/src/main/java/uk/ac/manchester/tornado/tc/selftest/TensorCoreKernels.java",
+      "kind": "java",
+      "module": "tornado.tc.selftest",
+      "relative": "uk/ac/manchester/tornado/tc/selftest/TensorCoreKernels.java",
+      "sha256": "9f075baf21488df02c014e6a95aca18eee197198d3eea439fe357e8606cacf99"
+    },
+    {
+      "path": "tornado-compiler/tc-selftest/src/main/resources/selftest/branches.tcir",
+      "kind": "resource",
+      "module": "tornado.tc.selftest",
+      "relative": "selftest/branches.tcir",
+      "sha256": "09bbc88b6cd751e7f1018990bdb0572ff2534b7211642855ef127ba34fedb69d"
+    },
+    {
+      "path": "tornado-compiler/tc-selftest/src/main/resources/selftest/local-memory.tcir",
+      "kind": "resource",
+      "module": "tornado.tc.selftest",
+      "relative": "selftest/local-memory.tcir",
+      "sha256": "b0b61025464deccc8568b899711ea89f2b3fbde082ae1ecba2a801aca2c916f3"
+    },
+    {
+      "path": "tornado-compiler/tc-selftest/src/main/resources/selftest/vector-add.tcir",
+      "kind": "resource",
+      "module": "tornado.tc.selftest",
+      "relative": "selftest/vector-add.tcir",
+      "sha256": "f60525563202f448c250e8539c149297c77dfaf63201d61e90f353abc5f657b3"
+    },
+    {
+      "path": "tornado-compiler/tc-tornado/src/main/java/module-info.java",
+      "kind": "java",
+      "module": "tornado.tc.tornado",
+      "relative": "module-info.java",
+      "sha256": "6afb0dd8c613ada23e1d7db2a00e8a53784ae5f960b24b7260846438879c4ae3"
+    },
+    {
+      "path": "tornado-compiler/tc-tornado/src/main/java/uk/ac/manchester/tornado/tc/tornado/AbiLowering.java",
+      "kind": "java",
+      "module": "tornado.tc.tornado",
+      "relative": "uk/ac/manchester/tornado/tc/tornado/AbiLowering.java",
+      "sha256": "617503371330fd1f5be7e1859bb729ecd3e4ea9ccbcb0ce74bfaa42827fdd3aa"
+    },
+    {
+      "path": "tornado-compiler/tc-tornado/src/main/java/uk/ac/manchester/tornado/tc/tornado/AccessAnalysis.java",
+      "kind": "java",
+      "module": "tornado.tc.tornado",
+      "relative": "uk/ac/manchester/tornado/tc/tornado/AccessAnalysis.java",
+      "sha256": "6fbd5f07aac1711e1ca43282fe76fe8665dc8868ce785ed274ef8f20439a7077"
+    },
+    {
+      "path": "tornado-compiler/tc-tornado/src/main/java/uk/ac/manchester/tornado/tc/tornado/AtomicSlots.java",
+      "kind": "java",
+      "module": "tornado.tc.tornado",
+      "relative": "uk/ac/manchester/tornado/tc/tornado/AtomicSlots.java",
+      "sha256": "2cc77265c4aa2602052a7370e21f0337e2f0c25a92bd91cc1ea6af6eaa7349bf"
+    },
+    {
+      "path": "tornado-compiler/tc-tornado/src/main/java/uk/ac/manchester/tornado/tc/tornado/BatchOffset.java",
+      "kind": "java",
+      "module": "tornado.tc.tornado",
+      "relative": "uk/ac/manchester/tornado/tc/tornado/BatchOffset.java",
+      "sha256": "eacaad8613475b8cca513c8f95e36807b4ae8843c072c30632b23fbca184ba8b"
+    },
+    {
+      "path": "tornado-compiler/tc-tornado/src/main/java/uk/ac/manchester/tornado/tc/tornado/Legality.java",
+      "kind": "java",
+      "module": "tornado.tc.tornado",
+      "relative": "uk/ac/manchester/tornado/tc/tornado/Legality.java",
+      "sha256": "6f532d2b5afb09d7fdb9bd92e94151867c3089ce6e59df3194fe20897bc4c67d"
+    },
+    {
+      "path": "tornado-compiler/tc-tornado/src/main/java/uk/ac/manchester/tornado/tc/tornado/ObjectLayout.java",
+      "kind": "java",
+      "module": "tornado.tc.tornado",
+      "relative": "uk/ac/manchester/tornado/tc/tornado/ObjectLayout.java",
+      "sha256": "00f231304083a0fd88afb04bcc0c562f4363db526ec2bf71df03f65c7c0c391d"
+    },
+    {
+      "path": "tornado-compiler/tc-tornado/src/main/java/uk/ac/manchester/tornado/tc/tornado/ParallelLoopLowering.java",
+      "kind": "java",
+      "module": "tornado.tc.tornado",
+      "relative": "uk/ac/manchester/tornado/tc/tornado/ParallelLoopLowering.java",
+      "sha256": "3edddcbffb341c6acfbf513cc90d806e1f7a3d2d2a72ac2c9a7f1f49f167bab7"
+    },
+    {
+      "path": "tornado-compiler/tc-tornado/src/main/java/uk/ac/manchester/tornado/tc/tornado/ReductionLowering.java",
+      "kind": "java",
+      "module": "tornado.tc.tornado",
+      "relative": "uk/ac/manchester/tornado/tc/tornado/ReductionLowering.java",
+      "sha256": "3934814ede611c4da69e51e66c440571788cb16b88013a98757d1b02f23e2c11"
+    },
+    {
+      "path": "tornado-compiler/tc-tornado/src/main/java/uk/ac/manchester/tornado/tc/tornado/TileTyping.java",
+      "kind": "java",
+      "module": "tornado.tc.tornado",
+      "relative": "uk/ac/manchester/tornado/tc/tornado/TileTyping.java",
+      "sha256": "5e47554dba6a7d04d5695b06509e777e8a688c89fb6e4e5352f7b5a7adf04166"
+    },
+    {
+      "path": "tornado-compiler/tc-tornado/src/main/java/uk/ac/manchester/tornado/tc/tornado/ValueSpecialisation.java",
+      "kind": "java",
+      "module": "tornado.tc.tornado",
+      "relative": "uk/ac/manchester/tornado/tc/tornado/ValueSpecialisation.java",
+      "sha256": "9bffbb8803c88dd04af77dbf6dded0cba1dc7d6bf9c3b2f39f4c5f3d9a4699f8"
+    },
+    {
+      "path": "tornado-compiler/tc-tornado/src/main/java/uk/ac/manchester/tornado/tc/tornado/tools/TornadoTool.java",
+      "kind": "java",
+      "module": "tornado.tc.tornado",
+      "relative": "uk/ac/manchester/tornado/tc/tornado/tools/TornadoTool.java",
+      "sha256": "fb449a1a2d77389173fbdb8b37c1ef8d71078799fc1229750a3026de60649198"
+    },
+    {
+      "path": "tornado-drivers/drivers-common/src/main/java/module-info.java",
+      "kind": "java",
+      "module": "tornado.drivers.common",
+      "relative": "module-info.java",
+      "sha256": "477c658f4e2e97c6472e7d9d912c186b8420cedc985cdd4e41951ef90dedc657"
+    },
+    {
+      "path": "tornado-drivers/drivers-common/src/main/java/uk/ac/manchester/tornado/drivers/TornadoDeviceQuery.java",
+      "kind": "java",
+      "module": "tornado.drivers.common",
+      "relative": "uk/ac/manchester/tornado/drivers/TornadoDeviceQuery.java",
+      "sha256": "383983edd87e0ccd7169fd894deaedcb916c227a5275df3c5d459796977341f2"
+    },
+    {
+      "path": "tornado-drivers/drivers-common/src/main/java/uk/ac/manchester/tornado/drivers/common/CommandQueue.java",
+      "kind": "java",
+      "module": "tornado.drivers.common",
+      "relative": "uk/ac/manchester/tornado/drivers/common/CommandQueue.java",
+      "sha256": "e6c6a6772a48947268482259967df00a0a5ea02da35258d1b0f452f9582a45e2"
+    },
+    {
+      "path": "tornado-drivers/drivers-common/src/main/java/uk/ac/manchester/tornado/drivers/common/GridInfo.java",
+      "kind": "java",
+      "module": "tornado.drivers.common",
+      "relative": "uk/ac/manchester/tornado/drivers/common/GridInfo.java",
+      "sha256": "608c97db1594d41fcd6bce207715d014578d260ea6b4baa449877ecd6e9209bf"
+    },
+    {
+      "path": "tornado-drivers/drivers-common/src/main/java/uk/ac/manchester/tornado/drivers/common/TornadoBufferProvider.java",
+      "kind": "java",
+      "module": "tornado.drivers.common",
+      "relative": "uk/ac/manchester/tornado/drivers/common/TornadoBufferProvider.java",
+      "sha256": "d549704c58d4d2af9091b294eaf9caaa363cd9ac9ed41fece2a882b5099ffbfc"
+    },
+    {
+      "path": "tornado-drivers/drivers-common/src/main/java/uk/ac/manchester/tornado/drivers/common/ffm/NVMLAPI.java",
+      "kind": "java",
+      "module": "tornado.drivers.common",
+      "relative": "uk/ac/manchester/tornado/drivers/common/ffm/NVMLAPI.java",
+      "sha256": "dafd01d8230b57ca39224d889de0efdfc81845700abab75ecd822ea21191ea9f"
+    },
+    {
+      "path": "tornado-drivers/drivers-common/src/main/java/uk/ac/manchester/tornado/drivers/common/logging/Logger.java",
+      "kind": "java",
+      "module": "tornado.drivers.common",
+      "relative": "uk/ac/manchester/tornado/drivers/common/logging/Logger.java",
+      "sha256": "340552410a874eff4fb8efbf44232d09d95f801a09f38de3ebf0b497474f20ab"
+    },
+    {
+      "path": "tornado-drivers/drivers-common/src/main/java/uk/ac/manchester/tornado/drivers/common/mm/PrimitiveSerialiser.java",
+      "kind": "java",
+      "module": "tornado.drivers.common",
+      "relative": "uk/ac/manchester/tornado/drivers/common/mm/PrimitiveSerialiser.java",
+      "sha256": "3a50cba83ab8d871ad1fcc7d63c380fedad36fb049dde770ed469a0dc39facf4"
+    },
+    {
+      "path": "tornado-drivers/drivers-common/src/main/java/uk/ac/manchester/tornado/drivers/common/power/PowerMetric.java",
+      "kind": "java",
+      "module": "tornado.drivers.common",
+      "relative": "uk/ac/manchester/tornado/drivers/common/power/PowerMetric.java",
+      "sha256": "82e1bf01a26c1879d6545d0501aa4ea8a2c5db3e81b29fce27efec3b642576f7"
+    },
+    {
+      "path": "tornado-drivers/drivers-common/src/main/java/uk/ac/manchester/tornado/drivers/common/tc/TcAccessProvider.java",
+      "kind": "java",
+      "module": "tornado.drivers.common",
+      "relative": "uk/ac/manchester/tornado/drivers/common/tc/TcAccessProvider.java",
+      "sha256": "4233bf920c62266aac9b090fe87c927ff2a9809b78be5f95f7c696c56918c7b5"
+    },
+    {
+      "path": "tornado-drivers/drivers-common/src/main/java/uk/ac/manchester/tornado/drivers/common/tc/TcArguments.java",
+      "kind": "java",
+      "module": "tornado.drivers.common",
+      "relative": "uk/ac/manchester/tornado/drivers/common/tc/TcArguments.java",
+      "sha256": "e728ed9df45a75bba33031f6d88625a6831a601335546aabafaa7cc98419496c"
+    },
+    {
+      "path": "tornado-drivers/drivers-common/src/main/java/uk/ac/manchester/tornado/drivers/common/tc/TcHook.java",
+      "kind": "java",
+      "module": "tornado.drivers.common",
+      "relative": "uk/ac/manchester/tornado/drivers/common/tc/TcHook.java",
+      "sha256": "fe920256b043b610570d48ba433c5ee9e54c9c81b346b131abb20b6e69baf713"
+    },
+    {
+      "path": "tornado-drivers/drivers-common/src/main/java/uk/ac/manchester/tornado/drivers/common/tc/TcKernels.java",
+      "kind": "java",
+      "module": "tornado.drivers.common",
+      "relative": "uk/ac/manchester/tornado/drivers/common/tc/TcKernels.java",
+      "sha256": "c2e3314fd97be65efffeb54af23f58553e4114829989f6fd30368ab7b52b044f"
+    },
+    {
+      "path": "tornado-drivers/drivers-common/src/main/java/uk/ac/manchester/tornado/drivers/common/tc/TcTargetDevice.java",
+      "kind": "java",
+      "module": "tornado.drivers.common",
+      "relative": "uk/ac/manchester/tornado/drivers/common/tc/TcTargetDevice.java",
+      "sha256": "cf9356eda817ab869ad541610ee7af9d6cf610cbf86c6247312a2387396958c9"
+    },
+    {
+      "path": "tornado-drivers/drivers-common/src/main/java/uk/ac/manchester/tornado/drivers/common/utils/Colour.java",
+      "kind": "java",
+      "module": "tornado.drivers.common",
+      "relative": "uk/ac/manchester/tornado/drivers/common/utils/Colour.java",
+      "sha256": "0edeaa029f4651f84e5d0e177d00bbeefb65f0e25409d663e1e0f5ab6a63b8c7"
+    },
+    {
+      "path": "tornado-drivers/drivers-common/src/main/java/uk/ac/manchester/tornado/drivers/common/utils/ColoursTerminal.java",
+      "kind": "java",
+      "module": "tornado.drivers.common",
+      "relative": "uk/ac/manchester/tornado/drivers/common/utils/ColoursTerminal.java",
+      "sha256": "ecaae649aa8f6d1ec182a6dc8451e3cb5345f8a3e7cd4ff10eab87a1523c4c9a"
+    },
+    {
+      "path": "tornado-drivers/drivers-common/src/main/java/uk/ac/manchester/tornado/drivers/common/utils/EventDescriptor.java",
+      "kind": "java",
+      "module": "tornado.drivers.common",
+      "relative": "uk/ac/manchester/tornado/drivers/common/utils/EventDescriptor.java",
+      "sha256": "98ed95ba51f9d2bd73821d35b3cd525182d08066bc3f665264452361c5cd5787"
+    },
+    {
+      "path": "tornado-drivers/drivers-common/src/main/resources/META-INF/services/uk.ac.manchester.tornado.runtime.common.KernelAccess$Provider",
+      "kind": "resource",
+      "module": "tornado.drivers.common",
+      "relative": "META-INF/services/uk.ac.manchester.tornado.runtime.common.KernelAccess$Provider",
+      "sha256": "6d7c2e66bc858c7cf12efe1b4bec08f9330b53c8b0d5cf4e9a4d940c8c39e448"
+    },
+    {
+      "path": "tornado-drivers/opencl/src/main/java/module-info.java",
+      "kind": "java",
+      "module": "tornado.drivers.opencl",
+      "relative": "module-info.java",
+      "sha256": "c7dc4dcedaf0733880a3b473945996605fbf116e3d1a74ef026f60d7ff104d0c"
+    },
+    {
+      "path": "tornado-drivers/opencl/src/main/java/uk/ac/manchester/tornado/drivers/opencl/OCLBackendImpl.java",
+      "kind": "java",
+      "module": "tornado.drivers.opencl",
+      "relative": "uk/ac/manchester/tornado/drivers/opencl/OCLBackendImpl.java",
+      "sha256": "b5dcc5f537f3a1db7607e2026da5c7bd937ef945912b5214f87052ff547ad972"
+    },
+    {
+      "path": "tornado-drivers/opencl/src/main/java/uk/ac/manchester/tornado/drivers/opencl/OCLCodeCache.java",
+      "kind": "java",
+      "module": "tornado.drivers.opencl",
+      "relative": "uk/ac/manchester/tornado/drivers/opencl/OCLCodeCache.java",
+      "sha256": "993c9727bd1bdef1828bb83f4b13760f32207b21e0c873a85f1df1a15eec2d6d"
+    },
+    {
+      "path": "tornado-drivers/opencl/src/main/java/uk/ac/manchester/tornado/drivers/opencl/OCLCommandQueue.java",
+      "kind": "java",
+      "module": "tornado.drivers.opencl",
+      "relative": "uk/ac/manchester/tornado/drivers/opencl/OCLCommandQueue.java",
+      "sha256": "069b279db077f7860c947fb835d0ac51f5eae92aa8d1e0c3f4e91492c0213e01"
+    },
+    {
+      "path": "tornado-drivers/opencl/src/main/java/uk/ac/manchester/tornado/drivers/opencl/OCLCommandQueueTable.java",
+      "kind": "java",
+      "module": "tornado.drivers.opencl",
+      "relative": "uk/ac/manchester/tornado/drivers/opencl/OCLCommandQueueTable.java",
+      "sha256": "784080ba27892981b58733f7140ac9601f94b1dfc1fddb2d808690e3221dee89"
+    },
+    {
+      "path": "tornado-drivers/opencl/src/main/java/uk/ac/manchester/tornado/drivers/opencl/OCLContext.java",
+      "kind": "java",
+      "module": "tornado.drivers.opencl",
+      "relative": "uk/ac/manchester/tornado/drivers/opencl/OCLContext.java",
+      "sha256": "ececfc6cdafc5ce1eeca5866c803f971e2bad0cf5d3135a45af6b110c5057671"
+    },
+    {
+      "path": "tornado-drivers/opencl/src/main/java/uk/ac/manchester/tornado/drivers/opencl/OCLContextInterface.java",
+      "kind": "java",
+      "module": "tornado.drivers.opencl",
+      "relative": "uk/ac/manchester/tornado/drivers/opencl/OCLContextInterface.java",
+      "sha256": "5e057712e2540d360168553d5f0ec544816e7dbcafdea87e2354d48129478103"
+    },
+    {
+      "path": "tornado-drivers/opencl/src/main/java/uk/ac/manchester/tornado/drivers/opencl/OCLDevice.java",
+      "kind": "java",
+      "module": "tornado.drivers.opencl",
+      "relative": "uk/ac/manchester/tornado/drivers/opencl/OCLDevice.java",
+      "sha256": "c16c33579c719218d43e07e6a39657b862bb0545c7450866f4d9a360b993a0dc"
+    },
+    {
+      "path": "tornado-drivers/opencl/src/main/java/uk/ac/manchester/tornado/drivers/opencl/OCLDeviceBackend.java",
+      "kind": "java",
+      "module": "tornado.drivers.opencl",
+      "relative": "uk/ac/manchester/tornado/drivers/opencl/OCLDeviceBackend.java",
+      "sha256": "bb3cf4200fb5b5c64b329d7a3b9e765c84502e98e6b8b26efe1099cc7972483c"
+    },
+    {
+      "path": "tornado-drivers/opencl/src/main/java/uk/ac/manchester/tornado/drivers/opencl/OCLDeviceContext.java",
+      "kind": "java",
+      "module": "tornado.drivers.opencl",
+      "relative": "uk/ac/manchester/tornado/drivers/opencl/OCLDeviceContext.java",
+      "sha256": "3ed19713ab121d0c697734f041af3458e83c525aa173346a208d43bb08df6bb0"
+    },
+    {
+      "path": "tornado-drivers/opencl/src/main/java/uk/ac/manchester/tornado/drivers/opencl/OCLDeviceContextInterface.java",
+      "kind": "java",
+      "module": "tornado.drivers.opencl",
+      "relative": "uk/ac/manchester/tornado/drivers/opencl/OCLDeviceContextInterface.java",
+      "sha256": "c41d2c57f81438f5556dab2cba640681d2c83e5c44290f79191a97f8f6d4cee6"
+    },
+    {
+      "path": "tornado-drivers/opencl/src/main/java/uk/ac/manchester/tornado/drivers/opencl/OCLErrorCode.java",
+      "kind": "java",
+      "module": "tornado.drivers.opencl",
+      "relative": "uk/ac/manchester/tornado/drivers/opencl/OCLErrorCode.java",
+      "sha256": "bc7ea0f96d396d1e6eba7e11dfce6143ecd31b4ea769a99cbe9296ca9fdcb7c4"
+    },
+    {
+      "path": "tornado-drivers/opencl/src/main/java/uk/ac/manchester/tornado/drivers/opencl/OCLEvent.java",
+      "kind": "java",
+      "module": "tornado.drivers.opencl",
+      "relative": "uk/ac/manchester/tornado/drivers/opencl/OCLEvent.java",
+      "sha256": "a4295ad48cb0c3f6612ffe5996f308eff012a43acd8e8b24175714003db223b5"
+    },
+    {
+      "path": "tornado-drivers/opencl/src/main/java/uk/ac/manchester/tornado/drivers/opencl/OCLEventPool.java",
+      "kind": "java",
+      "module": "tornado.drivers.opencl",
+      "relative": "uk/ac/manchester/tornado/drivers/opencl/OCLEventPool.java",
+      "sha256": "30b81b324ae40aa0f5d379805b40d54fe7eb1ef5051129a710349c99b5622f89"
+    },
+    {
+      "path": "tornado-drivers/opencl/src/main/java/uk/ac/manchester/tornado/drivers/opencl/OCLGridInfo.java",
+      "kind": "java",
+      "module": "tornado.drivers.opencl",
+      "relative": "uk/ac/manchester/tornado/drivers/opencl/OCLGridInfo.java",
+      "sha256": "ad2f896166cca7cff802907d147f64015453d3983666fc673276a0a6542089b2"
+    },
+    {
+      "path": "tornado-drivers/opencl/src/main/java/uk/ac/manchester/tornado/drivers/opencl/OCLInstalledCode.java",
+      "kind": "java",
+      "module": "tornado.drivers.opencl",
+      "relative": "uk/ac/manchester/tornado/drivers/opencl/OCLInstalledCode.java",
+      "sha256": "eb28e218d4516982fa7a18e68e2cc1aec6441993e45dd285b3ad259c3e35c618"
+    },
+    {
+      "path": "tornado-drivers/opencl/src/main/java/uk/ac/manchester/tornado/drivers/opencl/OCLKernel.java",
+      "kind": "java",
+      "module": "tornado.drivers.opencl",
+      "relative": "uk/ac/manchester/tornado/drivers/opencl/OCLKernel.java",
+      "sha256": "41222a4e0c8b19aaa09a34701ce1a522574cd443af4c4e001c3f4a13dcff78e1"
+    },
+    {
+      "path": "tornado-drivers/opencl/src/main/java/uk/ac/manchester/tornado/drivers/opencl/OCLPlatform.java",
+      "kind": "java",
+      "module": "tornado.drivers.opencl",
+      "relative": "uk/ac/manchester/tornado/drivers/opencl/OCLPlatform.java",
+      "sha256": "05bed79ef674070fbae6e4888241548dbcba7945d541ef583946a825aefb415b"
+    },
+    {
+      "path": "tornado-drivers/opencl/src/main/java/uk/ac/manchester/tornado/drivers/opencl/OCLProgram.java",
+      "kind": "java",
+      "module": "tornado.drivers.opencl",
+      "relative": "uk/ac/manchester/tornado/drivers/opencl/OCLProgram.java",
+      "sha256": "1f4d5be14d0cf1d68ff47c95f87a0e2cfc4324b2fc6a03d4d04a4e754d3256b2"
+    },
+    {
+      "path": "tornado-drivers/opencl/src/main/java/uk/ac/manchester/tornado/drivers/opencl/OCLTargetDevice.java",
+      "kind": "java",
+      "module": "tornado.drivers.opencl",
+      "relative": "uk/ac/manchester/tornado/drivers/opencl/OCLTargetDevice.java",
+      "sha256": "2261734f59be1df5e0e586ab661830a9239c0f59e286d518d0db3a691276c561"
+    },
+    {
+      "path": "tornado-drivers/opencl/src/main/java/uk/ac/manchester/tornado/drivers/opencl/OCLTornadoDriverProvider.java",
+      "kind": "java",
+      "module": "tornado.drivers.opencl",
+      "relative": "uk/ac/manchester/tornado/drivers/opencl/OCLTornadoDriverProvider.java",
+      "sha256": "8e8c1d5240fc5fd88895fcbb37c83180cbc81f0127fef3f63ec4e2a11d2f16d3"
+    },
+    {
+      "path": "tornado-drivers/opencl/src/main/java/uk/ac/manchester/tornado/drivers/opencl/OpenCL.java",
+      "kind": "java",
+      "module": "tornado.drivers.opencl",
+      "relative": "uk/ac/manchester/tornado/drivers/opencl/OpenCL.java",
+      "sha256": "a751b50f01bc5bb24bd870cfc599fe9f3d68f30b03ec9069f3b5c2306b1bcb1f"
+    },
+    {
+      "path": "tornado-drivers/opencl/src/main/java/uk/ac/manchester/tornado/drivers/opencl/OpenCLBlocking.java",
+      "kind": "java",
+      "module": "tornado.drivers.opencl",
+      "relative": "uk/ac/manchester/tornado/drivers/opencl/OpenCLBlocking.java",
+      "sha256": "9048decbfa995e39af8978dc49f822647a0aebf2e23d08da7413103520a14ce5"
+    },
+    {
+      "path": "tornado-drivers/opencl/src/main/java/uk/ac/manchester/tornado/drivers/opencl/TornadoPlatformInterface.java",
+      "kind": "java",
+      "module": "tornado.drivers.opencl",
+      "relative": "uk/ac/manchester/tornado/drivers/opencl/TornadoPlatformInterface.java",
+      "sha256": "1e5485154ca9ee9ececc7386128085b9b295c0e48737b7e45a6b6109231e86f9"
+    },
+    {
+      "path": "tornado-drivers/opencl/src/main/java/uk/ac/manchester/tornado/drivers/opencl/enums/OCLBufferCreateType.java",
+      "kind": "java",
+      "module": "tornado.drivers.opencl",
+      "relative": "uk/ac/manchester/tornado/drivers/opencl/enums/OCLBufferCreateType.java",
+      "sha256": "a61e31af33f06ed03335eee38159c862fdbd32825399d1a15011b5a1fa9f6aa2"
+    },
+    {
+      "path": "tornado-drivers/opencl/src/main/java/uk/ac/manchester/tornado/drivers/opencl/enums/OCLBuildStatus.java",
+      "kind": "java",
+      "module": "tornado.drivers.opencl",
+      "relative": "uk/ac/manchester/tornado/drivers/opencl/enums/OCLBuildStatus.java",
+      "sha256": "381427f4adfaa09b0376c14c75cc1244f9938ba1af33f4f0276f5ac6f9e2565d"
+    },
+    {
+      "path": "tornado-drivers/opencl/src/main/java/uk/ac/manchester/tornado/drivers/opencl/enums/OCLCommandExecutionStatus.java",
+      "kind": "java",
+      "module": "tornado.drivers.opencl",
+      "relative": "uk/ac/manchester/tornado/drivers/opencl/enums/OCLCommandExecutionStatus.java",
+      "sha256": "9a4be3de499594fed025f8033ebf0bf18ce370d08dde4813fe8e60115c0a03f6"
+    },
+    {
+      "path": "tornado-drivers/opencl/src/main/java/uk/ac/manchester/tornado/drivers/opencl/enums/OCLCommandQueueInfo.java",
+      "kind": "java",
+      "module": "tornado.drivers.opencl",
+      "relative": "uk/ac/manchester/tornado/drivers/opencl/enums/OCLCommandQueueInfo.java",
+      "sha256": "cee5f4220fe85e84442575f73fee57a2d8726a29956b1e634adc44ad0f1bac5b"
+    },
+    {
+      "path": "tornado-drivers/opencl/src/main/java/uk/ac/manchester/tornado/drivers/opencl/enums/OCLCommandQueueProperties.java",
+      "kind": "java",
+      "module": "tornado.drivers.opencl",
+      "relative": "uk/ac/manchester/tornado/drivers/opencl/enums/OCLCommandQueueProperties.java",
+      "sha256": "74dce0944ca863355442a3ade2835333654dae2fda4c68c5383ce707badcc6b9"
+    },
+    {
+      "path": "tornado-drivers/opencl/src/main/java/uk/ac/manchester/tornado/drivers/opencl/enums/OCLContextInfo.java",
+      "kind": "java",
+      "module": "tornado.drivers.opencl",
+      "relative": "uk/ac/manchester/tornado/drivers/opencl/enums/OCLContextInfo.java",
+      "sha256": "2f6c3bfad812359293b13f191f02744d716cfb38a7ddd2716d99258a904bf565"
+    },
+    {
+      "path": "tornado-drivers/opencl/src/main/java/uk/ac/manchester/tornado/drivers/opencl/enums/OCLDeviceInfo.java",
+      "kind": "java",
+      "module": "tornado.drivers.opencl",
+      "relative": "uk/ac/manchester/tornado/drivers/opencl/enums/OCLDeviceInfo.java",
+      "sha256": "696f87f99b520c173b51135937f2b810d420e96c4ab07bf61a105fc7e357f186"
+    },
+    {
+      "path": "tornado-drivers/opencl/src/main/java/uk/ac/manchester/tornado/drivers/opencl/enums/OCLDeviceType.java",
+      "kind": "java",
+      "module": "tornado.drivers.opencl",
+      "relative": "uk/ac/manchester/tornado/drivers/opencl/enums/OCLDeviceType.java",
+      "sha256": "b6b3c69724ecd3f31f218352d4041ef8896fd985f5d2632964e3ac0cc2d28576"
+    },
+    {
+      "path": "tornado-drivers/opencl/src/main/java/uk/ac/manchester/tornado/drivers/opencl/enums/OCLEventInfo.java",
+      "kind": "java",
+      "module": "tornado.drivers.opencl",
+      "relative": "uk/ac/manchester/tornado/drivers/opencl/enums/OCLEventInfo.java",
+      "sha256": "8114e433a375dc3cfc52e13a7c01ccd3b86f557a581d5c270e0309d6a853372f"
+    },
+    {
+      "path": "tornado-drivers/opencl/src/main/java/uk/ac/manchester/tornado/drivers/opencl/enums/OCLKernelInfo.java",
+      "kind": "java",
+      "module": "tornado.drivers.opencl",
+      "relative": "uk/ac/manchester/tornado/drivers/opencl/enums/OCLKernelInfo.java",
+      "sha256": "d3e9f13d27d970df9a9efa917e2c6c77087d309694e4457450cb9fbf72385d51"
+    },
+    {
+      "path": "tornado-drivers/opencl/src/main/java/uk/ac/manchester/tornado/drivers/opencl/enums/OCLLocalMemType.java",
+      "kind": "java",
+      "module": "tornado.drivers.opencl",
+      "relative": "uk/ac/manchester/tornado/drivers/opencl/enums/OCLLocalMemType.java",
+      "sha256": "dc4f0e59a202def7d82fc00c4febdf70084e2b780cde00afe5575af905ca4e12"
+    },
+    {
+      "path": "tornado-drivers/opencl/src/main/java/uk/ac/manchester/tornado/drivers/opencl/enums/OCLMemFlags.java",
+      "kind": "java",
+      "module": "tornado.drivers.opencl",
+      "relative": "uk/ac/manchester/tornado/drivers/opencl/enums/OCLMemFlags.java",
+      "sha256": "f5de0b0364f19cb178ad3598b096cbc504adc43fd1cb82cfc8c2ebbd9b38b5be"
+    },
+    {
+      "path": "tornado-drivers/opencl/src/main/java/uk/ac/manchester/tornado/drivers/opencl/enums/OCLPlatformInfo.java",
+      "kind": "java",
+      "module": "tornado.drivers.opencl",
+      "relative": "uk/ac/manchester/tornado/drivers/opencl/enums/OCLPlatformInfo.java",
+      "sha256": "4d4f414e4c021e01e988a4696e6d8745d891d5183a15584b504fd240dcc03748"
+    },
+    {
+      "path": "tornado-drivers/opencl/src/main/java/uk/ac/manchester/tornado/drivers/opencl/enums/OCLProfilingInfo.java",
+      "kind": "java",
+      "module": "tornado.drivers.opencl",
+      "relative": "uk/ac/manchester/tornado/drivers/opencl/enums/OCLProfilingInfo.java",
+      "sha256": "b77fc61c2c2c2e66bbe7960f010d35515435e67abae41164e3273a9df8002fd6"
+    },
+    {
+      "path": "tornado-drivers/opencl/src/main/java/uk/ac/manchester/tornado/drivers/opencl/enums/OCLProgramBuildInfo.java",
+      "kind": "java",
+      "module": "tornado.drivers.opencl",
+      "relative": "uk/ac/manchester/tornado/drivers/opencl/enums/OCLProgramBuildInfo.java",
+      "sha256": "57f09098bdef15d6fcb72ca38aee9c95792a0cc280871677c84e7b6b600554de"
+    },
+    {
+      "path": "tornado-drivers/opencl/src/main/java/uk/ac/manchester/tornado/drivers/opencl/enums/OCLProgramInfo.java",
+      "kind": "java",
+      "module": "tornado.drivers.opencl",
+      "relative": "uk/ac/manchester/tornado/drivers/opencl/enums/OCLProgramInfo.java",
+      "sha256": "08122f67a18e6ef7523a2f4f7b3dde9b080cffe0f58e92b20381410a779ff785"
+    },
+    {
+      "path": "tornado-drivers/opencl/src/main/java/uk/ac/manchester/tornado/drivers/opencl/exceptions/OCLException.java",
+      "kind": "java",
+      "module": "tornado.drivers.opencl",
+      "relative": "uk/ac/manchester/tornado/drivers/opencl/exceptions/OCLException.java",
+      "sha256": "cc121f618c7a370022f42eb4047691ea04110dd0235eaf3fcb5c33c172047640"
+    },
+    {
+      "path": "tornado-drivers/opencl/src/main/java/uk/ac/manchester/tornado/drivers/opencl/ffm/OpenCLAPI.java",
+      "kind": "java",
+      "module": "tornado.drivers.opencl",
+      "relative": "uk/ac/manchester/tornado/drivers/opencl/ffm/OpenCLAPI.java",
+      "sha256": "24550574d99a925b42037faaa24dfd3d800d0e32b614670d5dcc3f6a6b3beaf6"
+    },
+    {
+      "path": "tornado-drivers/opencl/src/main/java/uk/ac/manchester/tornado/drivers/opencl/mm/FieldBuffer.java",
+      "kind": "java",
+      "module": "tornado.drivers.opencl",
+      "relative": "uk/ac/manchester/tornado/drivers/opencl/mm/FieldBuffer.java",
+      "sha256": "17153ca43fe73d600d9e58406d20034f0aad7236b83ddbb39b11f7c6ed63df6f"
+    },
+    {
+      "path": "tornado-drivers/opencl/src/main/java/uk/ac/manchester/tornado/drivers/opencl/mm/OCLArrayWrapper.java",
+      "kind": "java",
+      "module": "tornado.drivers.opencl",
+      "relative": "uk/ac/manchester/tornado/drivers/opencl/mm/OCLArrayWrapper.java",
+      "sha256": "b4200ad19b32ab55c679b69b9540a91db307beee69fddecb973cbd543b376076"
+    },
+    {
+      "path": "tornado-drivers/opencl/src/main/java/uk/ac/manchester/tornado/drivers/opencl/mm/OCLAtomicsBuffer.java",
+      "kind": "java",
+      "module": "tornado.drivers.opencl",
+      "relative": "uk/ac/manchester/tornado/drivers/opencl/mm/OCLAtomicsBuffer.java",
+      "sha256": "b3757d55089955fc8a2f001405997988e72ce10131fa471b0b6ed6d4bed55118"
+    },
+    {
+      "path": "tornado-drivers/opencl/src/main/java/uk/ac/manchester/tornado/drivers/opencl/mm/OCLByteArrayWrapper.java",
+      "kind": "java",
+      "module": "tornado.drivers.opencl",
+      "relative": "uk/ac/manchester/tornado/drivers/opencl/mm/OCLByteArrayWrapper.java",
+      "sha256": "c8dcad690b5911f8c1d0f7eefa12de31093cdfa9ea697d96060976704acc6d74"
+    },
+    {
+      "path": "tornado-drivers/opencl/src/main/java/uk/ac/manchester/tornado/drivers/opencl/mm/OCLByteBuffer.java",
+      "kind": "java",
+      "module": "tornado.drivers.opencl",
+      "relative": "uk/ac/manchester/tornado/drivers/opencl/mm/OCLByteBuffer.java",
+      "sha256": "f2c7ca20870538cc2befad0cf13b08074c7b8eed3c6dca61197bac17746caf8f"
+    },
+    {
+      "path": "tornado-drivers/opencl/src/main/java/uk/ac/manchester/tornado/drivers/opencl/mm/OCLCharArrayWrapper.java",
+      "kind": "java",
+      "module": "tornado.drivers.opencl",
+      "relative": "uk/ac/manchester/tornado/drivers/opencl/mm/OCLCharArrayWrapper.java",
+      "sha256": "e65fb03d34fd6b39238696a235b70e034b73b03c48eb9229167d157395de15a2"
+    },
+    {
+      "path": "tornado-drivers/opencl/src/main/java/uk/ac/manchester/tornado/drivers/opencl/mm/OCLDoubleArrayWrapper.java",
+      "kind": "java",
+      "module": "tornado.drivers.opencl",
+      "relative": "uk/ac/manchester/tornado/drivers/opencl/mm/OCLDoubleArrayWrapper.java",
+      "sha256": "e3d20de5f5548bce3a82011778a45efa3b1dafbafd07e440cf6801224ec7bd91"
+    },
+    {
+      "path": "tornado-drivers/opencl/src/main/java/uk/ac/manchester/tornado/drivers/opencl/mm/OCLFieldBuffer.java",
+      "kind": "java",
+      "module": "tornado.drivers.opencl",
+      "relative": "uk/ac/manchester/tornado/drivers/opencl/mm/OCLFieldBuffer.java",
+      "sha256": "b9913ea460aacffbbfe74ad68c01cc3d60b94f5b7e02f740162f21463ecb7b5b"
+    },
+    {
+      "path": "tornado-drivers/opencl/src/main/java/uk/ac/manchester/tornado/drivers/opencl/mm/OCLFloatArrayWrapper.java",
+      "kind": "java",
+      "module": "tornado.drivers.opencl",
+      "relative": "uk/ac/manchester/tornado/drivers/opencl/mm/OCLFloatArrayWrapper.java",
+      "sha256": "5cc28fa8ee01e852446d82c61c38a188143aa507f6b30aab9d11cd2e72a7150e"
+    },
+    {
+      "path": "tornado-drivers/opencl/src/main/java/uk/ac/manchester/tornado/drivers/opencl/mm/OCLIntArrayWrapper.java",
+      "kind": "java",
+      "module": "tornado.drivers.opencl",
+      "relative": "uk/ac/manchester/tornado/drivers/opencl/mm/OCLIntArrayWrapper.java",
+      "sha256": "660e8019d1e08db8eeff0149f6c569d0ebb35eed2f2da7eafe835d8fd8dbb62d"
+    },
+    {
+      "path": "tornado-drivers/opencl/src/main/java/uk/ac/manchester/tornado/drivers/opencl/mm/OCLKernelStackFrame.java",
+      "kind": "java",
+      "module": "tornado.drivers.opencl",
+      "relative": "uk/ac/manchester/tornado/drivers/opencl/mm/OCLKernelStackFrame.java",
+      "sha256": "b539a8873c349481daa5cf7d875a1ac31e0f135d89fa79fc075badf7e1cb6daa"
+    },
+    {
+      "path": "tornado-drivers/opencl/src/main/java/uk/ac/manchester/tornado/drivers/opencl/mm/OCLLongArrayWrapper.java",
+      "kind": "java",
+      "module": "tornado.drivers.opencl",
+      "relative": "uk/ac/manchester/tornado/drivers/opencl/mm/OCLLongArrayWrapper.java",
+      "sha256": "3e220ba0b6d7ba7998b5db9b5ba7291b3b7554226e1f80b9b56ff5df4e7ca4ba"
+    },
+    {
+      "path": "tornado-drivers/opencl/src/main/java/uk/ac/manchester/tornado/drivers/opencl/mm/OCLMemoryManager.java",
+      "kind": "java",
+      "module": "tornado.drivers.opencl",
+      "relative": "uk/ac/manchester/tornado/drivers/opencl/mm/OCLMemoryManager.java",
+      "sha256": "bc1b04cd6545c25c6914d5b71073b21b014e8b99e26b8f3b2fb6392648bc98ee"
+    },
+    {
+      "path": "tornado-drivers/opencl/src/main/java/uk/ac/manchester/tornado/drivers/opencl/mm/OCLMemorySegmentWrapper.java",
+      "kind": "java",
+      "module": "tornado.drivers.opencl",
+      "relative": "uk/ac/manchester/tornado/drivers/opencl/mm/OCLMemorySegmentWrapper.java",
+      "sha256": "8b498acbc0d01e8b108f76b2686aa8f04d441407eb85b57d2956af3ad460622f"
+    },
+    {
+      "path": "tornado-drivers/opencl/src/main/java/uk/ac/manchester/tornado/drivers/opencl/mm/OCLMultiDimArrayWrapper.java",
+      "kind": "java",
+      "module": "tornado.drivers.opencl",
+      "relative": "uk/ac/manchester/tornado/drivers/opencl/mm/OCLMultiDimArrayWrapper.java",
+      "sha256": "d54ae243f5eaae5cc702847d9fc0754250a998cbf43aa3a39c132ef20ec63698"
+    },
+    {
+      "path": "tornado-drivers/opencl/src/main/java/uk/ac/manchester/tornado/drivers/opencl/mm/OCLShortArrayWrapper.java",
+      "kind": "java",
+      "module": "tornado.drivers.opencl",
+      "relative": "uk/ac/manchester/tornado/drivers/opencl/mm/OCLShortArrayWrapper.java",
+      "sha256": "05a158d5abc929b68487ee5df24092195d6373bbecd4cd6f1a4025ce41423719"
+    },
+    {
+      "path": "tornado-drivers/opencl/src/main/java/uk/ac/manchester/tornado/drivers/opencl/mm/OCLVectorWrapper.java",
+      "kind": "java",
+      "module": "tornado.drivers.opencl",
+      "relative": "uk/ac/manchester/tornado/drivers/opencl/mm/OCLVectorWrapper.java",
+      "sha256": "1aa07eb92534e6ed08ab6ebb5ef7be8ef85c7f1e64992b620cc2efc291e073ac"
+    },
+    {
+      "path": "tornado-drivers/opencl/src/main/java/uk/ac/manchester/tornado/drivers/opencl/natives/NativeCommandQueue.java",
+      "kind": "java",
+      "module": "tornado.drivers.opencl",
+      "relative": "uk/ac/manchester/tornado/drivers/opencl/natives/NativeCommandQueue.java",
+      "sha256": "ae9d307116180b3e559ec37429e69257a7c135ffc6fe2d092daa84144dc8116c"
+    },
+    {
+      "path": "tornado-drivers/opencl/src/main/java/uk/ac/manchester/tornado/drivers/opencl/power/OCLEmptyPowerMetricHandler.java",
+      "kind": "java",
+      "module": "tornado.drivers.opencl",
+      "relative": "uk/ac/manchester/tornado/drivers/opencl/power/OCLEmptyPowerMetricHandler.java",
+      "sha256": "296f9b96e6bbaa3772eaecc0325c96ad4ff5800ca35686c4212392f3631f011a"
+    },
+    {
+      "path": "tornado-drivers/opencl/src/main/java/uk/ac/manchester/tornado/drivers/opencl/power/OCLNvidiaPowerMetricHandler.java",
+      "kind": "java",
+      "module": "tornado.drivers.opencl",
+      "relative": "uk/ac/manchester/tornado/drivers/opencl/power/OCLNvidiaPowerMetricHandler.java",
+      "sha256": "406453e836156be1641df7875ab741865341e31d58caa8b5e498143ef36455ab"
+    },
+    {
+      "path": "tornado-drivers/opencl/src/main/java/uk/ac/manchester/tornado/drivers/opencl/runtime/OCLBufferProvider.java",
+      "kind": "java",
+      "module": "tornado.drivers.opencl",
+      "relative": "uk/ac/manchester/tornado/drivers/opencl/runtime/OCLBufferProvider.java",
+      "sha256": "f08de2d080851eba9f0c7818c03795a51062ef1d6ece1bf505772b364bab9d8b"
+    },
+    {
+      "path": "tornado-drivers/opencl/src/main/java/uk/ac/manchester/tornado/drivers/opencl/runtime/OCLMemoryRegions.java",
+      "kind": "java",
+      "module": "tornado.drivers.opencl",
+      "relative": "uk/ac/manchester/tornado/drivers/opencl/runtime/OCLMemoryRegions.java",
+      "sha256": "a0c0c348fe1ad38394f44ede45c34d8b110ba3d3f4885697fa9bf556b2640797"
+    },
+    {
+      "path": "tornado-drivers/opencl/src/main/java/uk/ac/manchester/tornado/drivers/opencl/runtime/OCLTornadoDevice.java",
+      "kind": "java",
+      "module": "tornado.drivers.opencl",
+      "relative": "uk/ac/manchester/tornado/drivers/opencl/runtime/OCLTornadoDevice.java",
+      "sha256": "bc1bfd50c3a86222dd49fde67fa7f0a5512a0af9228f53fba4af5b1150b88664"
+    },
+    {
+      "path": "tornado-drivers/opencl/src/main/java/uk/ac/manchester/tornado/drivers/opencl/scheduler/OCLAMDScheduler.java",
+      "kind": "java",
+      "module": "tornado.drivers.opencl",
+      "relative": "uk/ac/manchester/tornado/drivers/opencl/scheduler/OCLAMDScheduler.java",
+      "sha256": "5f6d71d22a1ab681f1f7fde6852b8742589e9b5507fcaf2a2419c42f39815ba5"
+    },
+    {
+      "path": "tornado-drivers/opencl/src/main/java/uk/ac/manchester/tornado/drivers/opencl/scheduler/OCLCPUScheduler.java",
+      "kind": "java",
+      "module": "tornado.drivers.opencl",
+      "relative": "uk/ac/manchester/tornado/drivers/opencl/scheduler/OCLCPUScheduler.java",
+      "sha256": "6a156ed67adb27954b99792ebd5c0bd55df808168c9d81db3eb56e9d70d6c61e"
+    },
+    {
+      "path": "tornado-drivers/opencl/src/main/java/uk/ac/manchester/tornado/drivers/opencl/scheduler/OCLGenericGPUScheduler.java",
+      "kind": "java",
+      "module": "tornado.drivers.opencl",
+      "relative": "uk/ac/manchester/tornado/drivers/opencl/scheduler/OCLGenericGPUScheduler.java",
+      "sha256": "79b4a80206068bf2afb3404169a0b81a322b8f6b223f099bd866e660f1340c88"
+    },
+    {
+      "path": "tornado-drivers/opencl/src/main/java/uk/ac/manchester/tornado/drivers/opencl/scheduler/OCLKernelScheduler.java",
+      "kind": "java",
+      "module": "tornado.drivers.opencl",
+      "relative": "uk/ac/manchester/tornado/drivers/opencl/scheduler/OCLKernelScheduler.java",
+      "sha256": "0bee8ceb6dacb6391e6ad8b99b3049d6fe28b543859c4fd500fff663b35c6b21"
+    },
+    {
+      "path": "tornado-drivers/opencl/src/main/java/uk/ac/manchester/tornado/drivers/opencl/scheduler/OCLNVIDIAGPUScheduler.java",
+      "kind": "java",
+      "module": "tornado.drivers.opencl",
+      "relative": "uk/ac/manchester/tornado/drivers/opencl/scheduler/OCLNVIDIAGPUScheduler.java",
+      "sha256": "7cbac7d13dfe9b838339b014d8e914207d558d6c1fe187a6b275c25b517086f1"
+    },
+    {
+      "path": "tornado-drivers/opencl/src/main/java/uk/ac/manchester/tornado/drivers/opencl/scheduler/OCLScheduler.java",
+      "kind": "java",
+      "module": "tornado.drivers.opencl",
+      "relative": "uk/ac/manchester/tornado/drivers/opencl/scheduler/OCLScheduler.java",
+      "sha256": "2af42c412e4f172c402aae9a9dd4cdd6b5e7fa54be2ae4f1af013e4d3679221f"
+    },
+    {
+      "path": "tornado-drivers/opencl/src/main/java/uk/ac/manchester/tornado/drivers/opencl/virtual/VirtualDeviceDescriptor.java",
+      "kind": "java",
+      "module": "tornado.drivers.opencl",
+      "relative": "uk/ac/manchester/tornado/drivers/opencl/virtual/VirtualDeviceDescriptor.java",
+      "sha256": "34af2f2decfea27aa404a6ca0d2cbbb3f93d17d31df9972117ea3cc4d97c2266"
+    },
+    {
+      "path": "tornado-drivers/opencl/src/main/java/uk/ac/manchester/tornado/drivers/opencl/virtual/VirtualJSONParser.java",
+      "kind": "java",
+      "module": "tornado.drivers.opencl",
+      "relative": "uk/ac/manchester/tornado/drivers/opencl/virtual/VirtualJSONParser.java",
+      "sha256": "05f8bb81135cad3fa57503df9c562c2e70727b23b9d878739d9e1cdade12e41c"
+    },
+    {
+      "path": "tornado-drivers/opencl/src/main/java/uk/ac/manchester/tornado/drivers/opencl/virtual/VirtualOCLContext.java",
+      "kind": "java",
+      "module": "tornado.drivers.opencl",
+      "relative": "uk/ac/manchester/tornado/drivers/opencl/virtual/VirtualOCLContext.java",
+      "sha256": "68e80aad05e292cd89dfb2433ab316f6af1c8eb2df606c32543f41f6cfeedcb2"
+    },
+    {
+      "path": "tornado-drivers/opencl/src/main/java/uk/ac/manchester/tornado/drivers/opencl/virtual/VirtualOCLDevice.java",
+      "kind": "java",
+      "module": "tornado.drivers.opencl",
+      "relative": "uk/ac/manchester/tornado/drivers/opencl/virtual/VirtualOCLDevice.java",
+      "sha256": "09dc471ca027846d2201e61e8275a27e776da529dfbb43a7a4835bd8ca8c4dd6"
+    },
+    {
+      "path": "tornado-drivers/opencl/src/main/java/uk/ac/manchester/tornado/drivers/opencl/virtual/VirtualOCLDeviceContext.java",
+      "kind": "java",
+      "module": "tornado.drivers.opencl",
+      "relative": "uk/ac/manchester/tornado/drivers/opencl/virtual/VirtualOCLDeviceContext.java",
+      "sha256": "b49f4d0257c1dc2b35e031a11d0e2372dc896b05b2e3adbf7eecfdac482f7daa"
+    },
+    {
+      "path": "tornado-drivers/opencl/src/main/java/uk/ac/manchester/tornado/drivers/opencl/virtual/VirtualOCLPlatform.java",
+      "kind": "java",
+      "module": "tornado.drivers.opencl",
+      "relative": "uk/ac/manchester/tornado/drivers/opencl/virtual/VirtualOCLPlatform.java",
+      "sha256": "be1e3d558989a58ecea493f90fda3398e73ec9b7a18eeb047f4a8b4f9391ee96"
+    },
+    {
+      "path": "tornado-drivers/opencl/src/main/java/uk/ac/manchester/tornado/drivers/opencl/virtual/VirtualOCLTornadoDevice.java",
+      "kind": "java",
+      "module": "tornado.drivers.opencl",
+      "relative": "uk/ac/manchester/tornado/drivers/opencl/virtual/VirtualOCLTornadoDevice.java",
+      "sha256": "14af61c78a794307b1db9423079d3acbed0fbe47b18331d2a71d7bccfe5da8ed"
+    },
+    {
+      "path": "tornado-drivers/opencl/src/main/resources/META-INF/services/uk.ac.manchester.tornado.runtime.TornadoBackendProvider",
+      "kind": "resource",
+      "module": "tornado.drivers.opencl",
+      "relative": "META-INF/services/uk.ac.manchester.tornado.runtime.TornadoBackendProvider",
+      "sha256": "2ef85b362f6a65f403a86f3757a03db8c88a25d2030a30d0e76b9aa343ca1725"
+    },
+    {
+      "path": "tornado-runtime/src/main/java/module-info.java",
+      "kind": "java",
+      "module": "tornado.runtime",
+      "relative": "module-info.java",
+      "sha256": "758bbb62d64de67df90f5d490c89200cce2e255fe3b0151c3afdec0c6a1e1218"
+    },
+    {
+      "path": "tornado-runtime/src/main/java/uk/ac/manchester/tornado/runtime/Backends.java",
+      "kind": "java",
+      "module": "tornado.runtime",
+      "relative": "uk/ac/manchester/tornado/runtime/Backends.java",
+      "sha256": "d09819e78d2a2fd759681b64d93ef4d56ef087174ff2cefbe6931c940f361949"
+    },
+    {
+      "path": "tornado-runtime/src/main/java/uk/ac/manchester/tornado/runtime/EmptyEvent.java",
+      "kind": "java",
+      "module": "tornado.runtime",
+      "relative": "uk/ac/manchester/tornado/runtime/EmptyEvent.java",
+      "sha256": "99020cd5cea546b84c60777e43866fad0249eaefe9b3eff017c8961a2feca7db"
+    },
+    {
+      "path": "tornado-runtime/src/main/java/uk/ac/manchester/tornado/runtime/EventSet.java",
+      "kind": "java",
+      "module": "tornado.runtime",
+      "relative": "uk/ac/manchester/tornado/runtime/EventSet.java",
+      "sha256": "e917a66744da11209c0f4950a7a02fdf153ae49680589de0ba98971eb34f3e3d"
+    },
+    {
+      "path": "tornado-runtime/src/main/java/uk/ac/manchester/tornado/runtime/JVMMapping.java",
+      "kind": "java",
+      "module": "tornado.runtime",
+      "relative": "uk/ac/manchester/tornado/runtime/JVMMapping.java",
+      "sha256": "7a5b01a49cef6efdf55643c41c6a83967377ffe3893ac5c1f480f4b9c679b318"
+    },
+    {
+      "path": "tornado-runtime/src/main/java/uk/ac/manchester/tornado/runtime/TornadoAcceleratorBackend.java",
+      "kind": "java",
+      "module": "tornado.runtime",
+      "relative": "uk/ac/manchester/tornado/runtime/TornadoAcceleratorBackend.java",
+      "sha256": "e1f5c88ffd8be1d0d6d8b56548771d2c4864919c3bf0504baa9a493b4414ac35"
+    },
+    {
+      "path": "tornado-runtime/src/main/java/uk/ac/manchester/tornado/runtime/TornadoBackendProvider.java",
+      "kind": "java",
+      "module": "tornado.runtime",
+      "relative": "uk/ac/manchester/tornado/runtime/TornadoBackendProvider.java",
+      "sha256": "e40285937f686935f55c5274b571998744aea95610fb48f3c37fe0f498616372"
+    },
+    {
+      "path": "tornado-runtime/src/main/java/uk/ac/manchester/tornado/runtime/TornadoCoreRuntime.java",
+      "kind": "java",
+      "module": "tornado.runtime",
+      "relative": "uk/ac/manchester/tornado/runtime/TornadoCoreRuntime.java",
+      "sha256": "3e7a99b3493456377eeaf9026f1c45bbd16c2e2597c720a3f22deb67cd50f370"
+    },
+    {
+      "path": "tornado-runtime/src/main/java/uk/ac/manchester/tornado/runtime/TornadoVM.java",
+      "kind": "java",
+      "module": "tornado.runtime",
+      "relative": "uk/ac/manchester/tornado/runtime/TornadoVM.java",
+      "sha256": "b0e22a70c23b8e3047b92aa15ec90afcdf630b81207bdff567f7743dc3e24687"
+    },
+    {
+      "path": "tornado-runtime/src/main/java/uk/ac/manchester/tornado/runtime/TornadoVMConfigAccess.java",
+      "kind": "java",
+      "module": "tornado.runtime",
+      "relative": "uk/ac/manchester/tornado/runtime/TornadoVMConfigAccess.java",
+      "sha256": "3fcd7e31fc0d97fc71a94a2e28464f83df14d006b3541387a0da1025d8cbf7c5"
+    },
+    {
+      "path": "tornado-runtime/src/main/java/uk/ac/manchester/tornado/runtime/analyzer/MetaReduceCodeAnalysis.java",
+      "kind": "java",
+      "module": "tornado.runtime",
+      "relative": "uk/ac/manchester/tornado/runtime/analyzer/MetaReduceCodeAnalysis.java",
+      "sha256": "c4dffe48c1e4d12d90c0bf85f7a51576171d231a8c21dd6d2aa9a89b36a04487"
+    },
+    {
+      "path": "tornado-runtime/src/main/java/uk/ac/manchester/tornado/runtime/analyzer/MetaReduceTasks.java",
+      "kind": "java",
+      "module": "tornado.runtime",
+      "relative": "uk/ac/manchester/tornado/runtime/analyzer/MetaReduceTasks.java",
+      "sha256": "73a193f879e46b387455540476c574ea80b5f31a56e2ad25c359e59e949891b3"
+    },
+    {
+      "path": "tornado-runtime/src/main/java/uk/ac/manchester/tornado/runtime/analyzer/ReduceCodeAnalysis.java",
+      "kind": "java",
+      "module": "tornado.runtime",
+      "relative": "uk/ac/manchester/tornado/runtime/analyzer/ReduceCodeAnalysis.java",
+      "sha256": "9ac37b097c6a05e728185c1e2328970f997b8069b57a5badcaec9802061a63eb"
+    },
+    {
+      "path": "tornado-runtime/src/main/java/uk/ac/manchester/tornado/runtime/analyzer/TaskUtils.java",
+      "kind": "java",
+      "module": "tornado.runtime",
+      "relative": "uk/ac/manchester/tornado/runtime/analyzer/TaskUtils.java",
+      "sha256": "8b55a81a0cc67dbfe42424b887796508287fee66c7d84726eeee6f8b0f43d003"
+    },
+    {
+      "path": "tornado-runtime/src/main/java/uk/ac/manchester/tornado/runtime/common/BatchCompilationConfig.java",
+      "kind": "java",
+      "module": "tornado.runtime",
+      "relative": "uk/ac/manchester/tornado/runtime/common/BatchCompilationConfig.java",
+      "sha256": "a69cb0256b22dab5636b5c19e8124193bdf8de93dd8b1ae8437970d7637be668"
+    },
+    {
+      "path": "tornado-runtime/src/main/java/uk/ac/manchester/tornado/runtime/common/BatchConfiguration.java",
+      "kind": "java",
+      "module": "tornado.runtime",
+      "relative": "uk/ac/manchester/tornado/runtime/common/BatchConfiguration.java",
+      "sha256": "0929e707dc5be6ed16e74201e78172e7321890a5b9e2a2a6408c633cfd299298"
+    },
+    {
+      "path": "tornado-runtime/src/main/java/uk/ac/manchester/tornado/runtime/common/CUDATokens.java",
+      "kind": "java",
+      "module": "tornado.runtime",
+      "relative": "uk/ac/manchester/tornado/runtime/common/CUDATokens.java",
+      "sha256": "b360f58f4d512978cc18ca0cd9c314949e60986b9673a2f9ba6c91c2ed866031"
+    },
+    {
+      "path": "tornado-runtime/src/main/java/uk/ac/manchester/tornado/runtime/common/ColoursTerminal.java",
+      "kind": "java",
+      "module": "tornado.runtime",
+      "relative": "uk/ac/manchester/tornado/runtime/common/ColoursTerminal.java",
+      "sha256": "a0011bc6a612ca6c4e868a88cfb46bee772375fc6f2a45d4689ef4a2fa0f9b65"
+    },
+    {
+      "path": "tornado-runtime/src/main/java/uk/ac/manchester/tornado/runtime/common/CompilerFlags.java",
+      "kind": "java",
+      "module": "tornado.runtime",
+      "relative": "uk/ac/manchester/tornado/runtime/common/CompilerFlags.java",
+      "sha256": "78d75427465669507614261131720e2ae7b79e236fc562bf64d9d26eb5eab730"
+    },
+    {
+      "path": "tornado-runtime/src/main/java/uk/ac/manchester/tornado/runtime/common/CudaCompileProfile.java",
+      "kind": "java",
+      "module": "tornado.runtime",
+      "relative": "uk/ac/manchester/tornado/runtime/common/CudaCompileProfile.java",
+      "sha256": "fdc12f20956e93e39baf6413a8084114223041f635d9af2a44462f260bc8f165"
+    },
+    {
+      "path": "tornado-runtime/src/main/java/uk/ac/manchester/tornado/runtime/common/DeviceBuffer.java",
+      "kind": "java",
+      "module": "tornado.runtime",
+      "relative": "uk/ac/manchester/tornado/runtime/common/DeviceBuffer.java",
+      "sha256": "62eb9ab62f87135f7b499dd99c2a34ca16b40a7e8fd3ad02514e57cb6a4907c9"
+    },
+    {
+      "path": "tornado-runtime/src/main/java/uk/ac/manchester/tornado/runtime/common/FieldLayout.java",
+      "kind": "java",
+      "module": "tornado.runtime",
+      "relative": "uk/ac/manchester/tornado/runtime/common/FieldLayout.java",
+      "sha256": "61e1bc63e9ce506128f75f40dca9434397598e5ce3a9997238ccd3828f4e82e1"
+    },
+    {
+      "path": "tornado-runtime/src/main/java/uk/ac/manchester/tornado/runtime/common/JavaKind.java",
+      "kind": "java",
+      "module": "tornado.runtime",
+      "relative": "uk/ac/manchester/tornado/runtime/common/JavaKind.java",
+      "sha256": "bed83e8362e0b56f38ceed3e18380d8a44ebaa7584eada7515642035ad50d714"
+    },
+    {
+      "path": "tornado-runtime/src/main/java/uk/ac/manchester/tornado/runtime/common/KernelAccess.java",
+      "kind": "java",
+      "module": "tornado.runtime",
+      "relative": "uk/ac/manchester/tornado/runtime/common/KernelAccess.java",
+      "sha256": "f7b983e63cd60d378abc0ffd6cba26a0ba6a04e858a0adcc8ce4e25caa24c726"
+    },
+    {
+      "path": "tornado-runtime/src/main/java/uk/ac/manchester/tornado/runtime/common/KernelStackFrame.java",
+      "kind": "java",
+      "module": "tornado.runtime",
+      "relative": "uk/ac/manchester/tornado/runtime/common/KernelStackFrame.java",
+      "sha256": "7a64faa59c2085af01b963611f20e6db9db6d1a2c4479cbc678639ac7ceff680"
+    },
+    {
+      "path": "tornado-runtime/src/main/java/uk/ac/manchester/tornado/runtime/common/MetalTokens.java",
+      "kind": "java",
+      "module": "tornado.runtime",
+      "relative": "uk/ac/manchester/tornado/runtime/common/MetalTokens.java",
+      "sha256": "14f2e8c96cf4151c25e4a7d2265fee3a8a0dc0de7c0baab2d76f12e5782fb446"
+    },
+    {
+      "path": "tornado-runtime/src/main/java/uk/ac/manchester/tornado/runtime/common/NamedEvent.java",
+      "kind": "java",
+      "module": "tornado.runtime",
+      "relative": "uk/ac/manchester/tornado/runtime/common/NamedEvent.java",
+      "sha256": "0407124a6a40e2e84825c687b10e6e6bcf803f94dae9215e42cbeb1de6efd804"
+    },
+    {
+      "path": "tornado-runtime/src/main/java/uk/ac/manchester/tornado/runtime/common/OCLTokens.java",
+      "kind": "java",
+      "module": "tornado.runtime",
+      "relative": "uk/ac/manchester/tornado/runtime/common/OCLTokens.java",
+      "sha256": "347db6045ad79be36592add9a9ac0b340528846ca11da75e00fb9e848d9cb1cb"
+    },
+    {
+      "path": "tornado-runtime/src/main/java/uk/ac/manchester/tornado/runtime/common/RuntimeUtilities.java",
+      "kind": "java",
+      "module": "tornado.runtime",
+      "relative": "uk/ac/manchester/tornado/runtime/common/RuntimeUtilities.java",
+      "sha256": "3405b1cc0a356802c2abd654358c2a6d42ac6448863c8688aa8f8be2a100d7ae"
+    },
+    {
+      "path": "tornado-runtime/src/main/java/uk/ac/manchester/tornado/runtime/common/Statistics.java",
+      "kind": "java",
+      "module": "tornado.runtime",
+      "relative": "uk/ac/manchester/tornado/runtime/common/Statistics.java",
+      "sha256": "84f3be9d1de206e55722fbb0746646da51b97e42413c0a5f4723fc95ef3a2c03"
+    },
+    {
+      "path": "tornado-runtime/src/main/java/uk/ac/manchester/tornado/runtime/common/Tornado.java",
+      "kind": "java",
+      "module": "tornado.runtime",
+      "relative": "uk/ac/manchester/tornado/runtime/common/Tornado.java",
+      "sha256": "f38fc7b01c10ca3a51ddd47dcb401c0c31945f2f0ead1bc35eaff3f8ddbcf35b"
+    },
+    {
+      "path": "tornado-runtime/src/main/java/uk/ac/manchester/tornado/runtime/common/TornadoInstalledCode.java",
+      "kind": "java",
+      "module": "tornado.runtime",
+      "relative": "uk/ac/manchester/tornado/runtime/common/TornadoInstalledCode.java",
+      "sha256": "4175cc303693cc20174e714b8c2e1457ec5d60cc09df11455ca0f399d547c759"
+    },
+    {
+      "path": "tornado-runtime/src/main/java/uk/ac/manchester/tornado/runtime/common/TornadoLogger.java",
+      "kind": "java",
+      "module": "tornado.runtime",
+      "relative": "uk/ac/manchester/tornado/runtime/common/TornadoLogger.java",
+      "sha256": "51bac0fe20ffd6c88e0f10e805acbab01a2724a01699c2d8c893c3205b696b13"
+    },
+    {
+      "path": "tornado-runtime/src/main/java/uk/ac/manchester/tornado/runtime/common/TornadoOptions.java",
+      "kind": "java",
+      "module": "tornado.runtime",
+      "relative": "uk/ac/manchester/tornado/runtime/common/TornadoOptions.java",
+      "sha256": "ab8f81d9e7f91d2e7e8428f417fa2ad7135a75750a229170c67b8ee63304ac91"
+    },
+    {
+      "path": "tornado-runtime/src/main/java/uk/ac/manchester/tornado/runtime/common/TornadoSchedulingStrategy.java",
+      "kind": "java",
+      "module": "tornado.runtime",
+      "relative": "uk/ac/manchester/tornado/runtime/common/TornadoSchedulingStrategy.java",
+      "sha256": "ea177cb355dd83d98585247bd92e89e319547a5d4f2f58f920d8f51e9f95ebdc"
+    },
+    {
+      "path": "tornado-runtime/src/main/java/uk/ac/manchester/tornado/runtime/common/TornadoVMClient.java",
+      "kind": "java",
+      "module": "tornado.runtime",
+      "relative": "uk/ac/manchester/tornado/runtime/common/TornadoVMClient.java",
+      "sha256": "4e2211f1c608403027925e471ddd631f3760a60b17c757b063b8c2f3cf29da71"
+    },
+    {
+      "path": "tornado-runtime/src/main/java/uk/ac/manchester/tornado/runtime/common/TornadoXPUDevice.java",
+      "kind": "java",
+      "module": "tornado.runtime",
+      "relative": "uk/ac/manchester/tornado/runtime/common/TornadoXPUDevice.java",
+      "sha256": "bd39d36a159a3fa2c874fa143f30a362eec2fdccfaedd5dce2591c272f1be674"
+    },
+    {
+      "path": "tornado-runtime/src/main/java/uk/ac/manchester/tornado/runtime/common/XPUDeviceBufferState.java",
+      "kind": "java",
+      "module": "tornado.runtime",
+      "relative": "uk/ac/manchester/tornado/runtime/common/XPUDeviceBufferState.java",
+      "sha256": "b32433b0f19f50b9fc8c99321b20d779d722eb8160779dcff9c152f323604634"
+    },
+    {
+      "path": "tornado-runtime/src/main/java/uk/ac/manchester/tornado/runtime/common/enums/DataTypeSize.java",
+      "kind": "java",
+      "module": "tornado.runtime",
+      "relative": "uk/ac/manchester/tornado/runtime/common/enums/DataTypeSize.java",
+      "sha256": "f3618caa389d53adf4dfa0eae12c742fe00139a95d69b39733d7dc7e2f037f53"
+    },
+    {
+      "path": "tornado-runtime/src/main/java/uk/ac/manchester/tornado/runtime/common/enums/ThreadSchedule.java",
+      "kind": "java",
+      "module": "tornado.runtime",
+      "relative": "uk/ac/manchester/tornado/runtime/common/enums/ThreadSchedule.java",
+      "sha256": "3b9c383ef3f60837cfe3edfa81c242c06f922ad54b5f60387cdc44061fa489dc"
+    },
+    {
+      "path": "tornado-runtime/src/main/java/uk/ac/manchester/tornado/runtime/common/enums/TornadoBackends.java",
+      "kind": "java",
+      "module": "tornado.runtime",
+      "relative": "uk/ac/manchester/tornado/runtime/common/enums/TornadoBackends.java",
+      "sha256": "4006df4c55f4da98a65b91c530f71a6770b98e3bb44c78ccd2993bb7da78ee89"
+    },
+    {
+      "path": "tornado-runtime/src/main/java/uk/ac/manchester/tornado/runtime/common/exceptions/TornadoUnimplementedException.java",
+      "kind": "java",
+      "module": "tornado.runtime",
+      "relative": "uk/ac/manchester/tornado/runtime/common/exceptions/TornadoUnimplementedException.java",
+      "sha256": "61fa0b442bceb131120c15dd829bb08d06634b0fe6cac645f1ca739343ec866a"
+    },
+    {
+      "path": "tornado-runtime/src/main/java/uk/ac/manchester/tornado/runtime/common/exceptions/TornadoUnsupportedError.java",
+      "kind": "java",
+      "module": "tornado.runtime",
+      "relative": "uk/ac/manchester/tornado/runtime/common/exceptions/TornadoUnsupportedError.java",
+      "sha256": "216b2bb6149be57a19d364f99e52e6886fd40a704a7642dfb46f202fbfc1257e"
+    },
+    {
+      "path": "tornado-runtime/src/main/java/uk/ac/manchester/tornado/runtime/directives/CompilerInternals.java",
+      "kind": "java",
+      "module": "tornado.runtime",
+      "relative": "uk/ac/manchester/tornado/runtime/directives/CompilerInternals.java",
+      "sha256": "f3ca9395600b06226b207c7a60f6d58d2512bf9486790d7b9bb626d33fd8ead0"
+    },
+    {
+      "path": "tornado-runtime/src/main/java/uk/ac/manchester/tornado/runtime/domain/Domain.java",
+      "kind": "java",
+      "module": "tornado.runtime",
+      "relative": "uk/ac/manchester/tornado/runtime/domain/Domain.java",
+      "sha256": "ecaab3b2659dc57e01141dc2c3fc88e99872d09e79a01c732a13139548723f16"
+    },
+    {
+      "path": "tornado-runtime/src/main/java/uk/ac/manchester/tornado/runtime/domain/DomainTree.java",
+      "kind": "java",
+      "module": "tornado.runtime",
+      "relative": "uk/ac/manchester/tornado/runtime/domain/DomainTree.java",
+      "sha256": "f55c771377b01694cfc5779b91ecf625a7b22431a291ee099cb79b795db46f43"
+    },
+    {
+      "path": "tornado-runtime/src/main/java/uk/ac/manchester/tornado/runtime/domain/IntDomain.java",
+      "kind": "java",
+      "module": "tornado.runtime",
+      "relative": "uk/ac/manchester/tornado/runtime/domain/IntDomain.java",
+      "sha256": "d95c10927fbbeebddbb6d68cf3aff7afeabe7a9c6d474de31c64a897616eb844"
+    },
+    {
+      "path": "tornado-runtime/src/main/java/uk/ac/manchester/tornado/runtime/ffm/FFMSupport.java",
+      "kind": "java",
+      "module": "tornado.runtime",
+      "relative": "uk/ac/manchester/tornado/runtime/ffm/FFMSupport.java",
+      "sha256": "468e91c2eb70e79a914f772f6c95a48f74c220ca5f77afcd28c040cb91cc50a4"
+    },
+    {
+      "path": "tornado-runtime/src/main/java/uk/ac/manchester/tornado/runtime/graph/IntermediateTornadoGraph.java",
+      "kind": "java",
+      "module": "tornado.runtime",
+      "relative": "uk/ac/manchester/tornado/runtime/graph/IntermediateTornadoGraph.java",
+      "sha256": "bb1910a88331cc77abab59ef9a465bc83daed5d66c193a80c2ddec4cec179d00"
+    },
+    {
+      "path": "tornado-runtime/src/main/java/uk/ac/manchester/tornado/runtime/graph/TornadoExecutionContext.java",
+      "kind": "java",
+      "module": "tornado.runtime",
+      "relative": "uk/ac/manchester/tornado/runtime/graph/TornadoExecutionContext.java",
+      "sha256": "b3c3ab77c73546bbae28467f20145f9d94e878bc0e22b431b2ebc80456c3ce95"
+    },
+    {
+      "path": "tornado-runtime/src/main/java/uk/ac/manchester/tornado/runtime/graph/TornadoGraph.java",
+      "kind": "java",
+      "module": "tornado.runtime",
+      "relative": "uk/ac/manchester/tornado/runtime/graph/TornadoGraph.java",
+      "sha256": "dd184ad36f1259d0b2992be250b28dc8bf229a87d58c31027bf6e454c96ec418"
+    },
+    {
+      "path": "tornado-runtime/src/main/java/uk/ac/manchester/tornado/runtime/graph/TornadoGraphBuilder.java",
+      "kind": "java",
+      "module": "tornado.runtime",
+      "relative": "uk/ac/manchester/tornado/runtime/graph/TornadoGraphBuilder.java",
+      "sha256": "8d6590fc89d6566676619462a7db0ae7dea3d3b871ec94fb7413e65d5155a466"
+    },
+    {
+      "path": "tornado-runtime/src/main/java/uk/ac/manchester/tornado/runtime/graph/TornadoVMBytecodeBuilder.java",
+      "kind": "java",
+      "module": "tornado.runtime",
+      "relative": "uk/ac/manchester/tornado/runtime/graph/TornadoVMBytecodeBuilder.java",
+      "sha256": "cb4c0ad6fc5f95806fb830820fc80e6bf618d8bdbfd41bd4f92b91cf60ae89e2"
+    },
+    {
+      "path": "tornado-runtime/src/main/java/uk/ac/manchester/tornado/runtime/graph/TornadoVMBytecodeResult.java",
+      "kind": "java",
+      "module": "tornado.runtime",
+      "relative": "uk/ac/manchester/tornado/runtime/graph/TornadoVMBytecodeResult.java",
+      "sha256": "8a1061b76ed72840af870573627bb93bc32333ac3ef574d527c94ceef6575a32"
+    },
+    {
+      "path": "tornado-runtime/src/main/java/uk/ac/manchester/tornado/runtime/graph/TornadoVMBytecodes.java",
+      "kind": "java",
+      "module": "tornado.runtime",
+      "relative": "uk/ac/manchester/tornado/runtime/graph/TornadoVMBytecodes.java",
+      "sha256": "23bbeef31fd436f9c987a390c8913047a7c1967ae090f0eb14ad96b4862e0c18"
+    },
+    {
+      "path": "tornado-runtime/src/main/java/uk/ac/manchester/tornado/runtime/graph/TornadoVMGraphCompiler.java",
+      "kind": "java",
+      "module": "tornado.runtime",
+      "relative": "uk/ac/manchester/tornado/runtime/graph/TornadoVMGraphCompiler.java",
+      "sha256": "270630f22be483fc41f40a6b404415272258aa3956a03ee32723ac25b509a76b"
+    },
+    {
+      "path": "tornado-runtime/src/main/java/uk/ac/manchester/tornado/runtime/graph/nodes/AbstractNode.java",
+      "kind": "java",
+      "module": "tornado.runtime",
+      "relative": "uk/ac/manchester/tornado/runtime/graph/nodes/AbstractNode.java",
+      "sha256": "a56a33ded7e04ded6c111a79da93111ad4bf823847472f4dcd9fca83f6a6c599"
+    },
+    {
+      "path": "tornado-runtime/src/main/java/uk/ac/manchester/tornado/runtime/graph/nodes/AllocateMultipleBuffersNode.java",
+      "kind": "java",
+      "module": "tornado.runtime",
+      "relative": "uk/ac/manchester/tornado/runtime/graph/nodes/AllocateMultipleBuffersNode.java",
+      "sha256": "06a67e305b6c77fdc22a436d1ea19952d7c342812df94c195037c1c2a6802f57"
+    },
+    {
+      "path": "tornado-runtime/src/main/java/uk/ac/manchester/tornado/runtime/graph/nodes/AllocateNode.java",
+      "kind": "java",
+      "module": "tornado.runtime",
+      "relative": "uk/ac/manchester/tornado/runtime/graph/nodes/AllocateNode.java",
+      "sha256": "e6bab9222708d986a7248b3c326d9f7034685701d0ebba39a058678aa3767aa5"
+    },
+    {
+      "path": "tornado-runtime/src/main/java/uk/ac/manchester/tornado/runtime/graph/nodes/BinaryNode.java",
+      "kind": "java",
+      "module": "tornado.runtime",
+      "relative": "uk/ac/manchester/tornado/runtime/graph/nodes/BinaryNode.java",
+      "sha256": "2d92ceb80789389697bcb5a24f26414240cf38d966d5c9618ef95956db88e70e"
+    },
+    {
+      "path": "tornado-runtime/src/main/java/uk/ac/manchester/tornado/runtime/graph/nodes/BlockingCopyOutNode.java",
+      "kind": "java",
+      "module": "tornado.runtime",
+      "relative": "uk/ac/manchester/tornado/runtime/graph/nodes/BlockingCopyOutNode.java",
+      "sha256": "8ecf2913e4b6ae5e4f55a0a5ea93f217c50efde04b784163a7a17879b31abc9a"
+    },
+    {
+      "path": "tornado-runtime/src/main/java/uk/ac/manchester/tornado/runtime/graph/nodes/ConstantNode.java",
+      "kind": "java",
+      "module": "tornado.runtime",
+      "relative": "uk/ac/manchester/tornado/runtime/graph/nodes/ConstantNode.java",
+      "sha256": "210faf190cc2d2e2f903675403301ea4b733c772e9fc7120da8a8d0cfc334f7c"
+    },
+    {
+      "path": "tornado-runtime/src/main/java/uk/ac/manchester/tornado/runtime/graph/nodes/ContextNode.java",
+      "kind": "java",
+      "module": "tornado.runtime",
+      "relative": "uk/ac/manchester/tornado/runtime/graph/nodes/ContextNode.java",
+      "sha256": "04d79c9dba981f7c91c654921a3009300a4a48945a13156b3b891ce566194b4c"
+    },
+    {
+      "path": "tornado-runtime/src/main/java/uk/ac/manchester/tornado/runtime/graph/nodes/ContextOpNode.java",
+      "kind": "java",
+      "module": "tornado.runtime",
+      "relative": "uk/ac/manchester/tornado/runtime/graph/nodes/ContextOpNode.java",
+      "sha256": "19c41e23d3aa29256e04f96322d18019cfa0ef47b9f3c7609e0f68b8f4c6d5d1"
+    },
+    {
+      "path": "tornado-runtime/src/main/java/uk/ac/manchester/tornado/runtime/graph/nodes/CopyInNode.java",
+      "kind": "java",
+      "module": "tornado.runtime",
+      "relative": "uk/ac/manchester/tornado/runtime/graph/nodes/CopyInNode.java",
+      "sha256": "b28cda14064259e3b314c0af900a647c031204bb3c1d45fb38835d0033bb1899"
+    },
+    {
+      "path": "tornado-runtime/src/main/java/uk/ac/manchester/tornado/runtime/graph/nodes/CopyOutNode.java",
+      "kind": "java",
+      "module": "tornado.runtime",
+      "relative": "uk/ac/manchester/tornado/runtime/graph/nodes/CopyOutNode.java",
+      "sha256": "c175920c19c2b4aecc4ea0ff983f1f18cb605f079b0a5b6e3c08adb11ade4a83"
+    },
+    {
+      "path": "tornado-runtime/src/main/java/uk/ac/manchester/tornado/runtime/graph/nodes/DeallocateNode.java",
+      "kind": "java",
+      "module": "tornado.runtime",
+      "relative": "uk/ac/manchester/tornado/runtime/graph/nodes/DeallocateNode.java",
+      "sha256": "3fefb5d0d946b32654c3cd23cad7cd28b5c533192770dc71cc6bc1ce753725a8"
+    },
+    {
+      "path": "tornado-runtime/src/main/java/uk/ac/manchester/tornado/runtime/graph/nodes/DependentReadNode.java",
+      "kind": "java",
+      "module": "tornado.runtime",
+      "relative": "uk/ac/manchester/tornado/runtime/graph/nodes/DependentReadNode.java",
+      "sha256": "4919091ec249ec5caf1bbf2e34e0ebf8a8474085cc35f5efd8926dc9173a12d1"
+    },
+    {
+      "path": "tornado-runtime/src/main/java/uk/ac/manchester/tornado/runtime/graph/nodes/ObjectNode.java",
+      "kind": "java",
+      "module": "tornado.runtime",
+      "relative": "uk/ac/manchester/tornado/runtime/graph/nodes/ObjectNode.java",
+      "sha256": "d10c1aa549fe6d664b8e34a4b8c0cecbfc7f2d9e1bf1700cc4db9e95ca1ae940"
+    },
+    {
+      "path": "tornado-runtime/src/main/java/uk/ac/manchester/tornado/runtime/graph/nodes/OnDeviceObjectNode.java",
+      "kind": "java",
+      "module": "tornado.runtime",
+      "relative": "uk/ac/manchester/tornado/runtime/graph/nodes/OnDeviceObjectNode.java",
+      "sha256": "bebe47a82b9f42d266388a2bc23b48048bd130ca8194a5ac621dd94cef76f5a0"
+    },
+    {
+      "path": "tornado-runtime/src/main/java/uk/ac/manchester/tornado/runtime/graph/nodes/PersistedObjectNode.java",
+      "kind": "java",
+      "module": "tornado.runtime",
+      "relative": "uk/ac/manchester/tornado/runtime/graph/nodes/PersistedObjectNode.java",
+      "sha256": "2fc54b8f02bde1e6b362cb9810918162222ef5ca1686df13baa971b3984fec18"
+    },
+    {
+      "path": "tornado-runtime/src/main/java/uk/ac/manchester/tornado/runtime/graph/nodes/StreamInNode.java",
+      "kind": "java",
+      "module": "tornado.runtime",
+      "relative": "uk/ac/manchester/tornado/runtime/graph/nodes/StreamInNode.java",
+      "sha256": "a485c990268b25696a5b06cc385dc662972dd48eb14cca0e4f944b005b060bed"
+    },
+    {
+      "path": "tornado-runtime/src/main/java/uk/ac/manchester/tornado/runtime/graph/nodes/TaskNode.java",
+      "kind": "java",
+      "module": "tornado.runtime",
+      "relative": "uk/ac/manchester/tornado/runtime/graph/nodes/TaskNode.java",
+      "sha256": "e21f789054250635baebb1e7dd6737540085cdfaba3a16f1a50ca1b1d5f3f7b0"
+    },
+    {
+      "path": "tornado-runtime/src/main/java/uk/ac/manchester/tornado/runtime/graph/nodes/UnaryNode.java",
+      "kind": "java",
+      "module": "tornado.runtime",
+      "relative": "uk/ac/manchester/tornado/runtime/graph/nodes/UnaryNode.java",
+      "sha256": "b6cc0b4bde325b4ce625fd873176b573ca2224074ca69c8748b691a78a98565b"
+    },
+    {
+      "path": "tornado-runtime/src/main/java/uk/ac/manchester/tornado/runtime/interpreter/DebugInterpreter.java",
+      "kind": "java",
+      "module": "tornado.runtime",
+      "relative": "uk/ac/manchester/tornado/runtime/interpreter/DebugInterpreter.java",
+      "sha256": "257efac720183881dade77d984af4183fe4c33191bbf681e03fa17acd338955a"
+    },
+    {
+      "path": "tornado-runtime/src/main/java/uk/ac/manchester/tornado/runtime/interpreter/InterpreterUtilities.java",
+      "kind": "java",
+      "module": "tornado.runtime",
+      "relative": "uk/ac/manchester/tornado/runtime/interpreter/InterpreterUtilities.java",
+      "sha256": "7fac6326e94e897d8e931d6e72b5e422c344583886177b20b64886e4d31503ac"
+    },
+    {
+      "path": "tornado-runtime/src/main/java/uk/ac/manchester/tornado/runtime/interpreter/TornadoVMInterpreter.java",
+      "kind": "java",
+      "module": "tornado.runtime",
+      "relative": "uk/ac/manchester/tornado/runtime/interpreter/TornadoVMInterpreter.java",
+      "sha256": "d9f54018dfee077016f2749d2ddab713b6a0a10f58874e2d82e4edbd5bc19fae"
+    },
+    {
+      "path": "tornado-runtime/src/main/java/uk/ac/manchester/tornado/runtime/library/LibraryRegistry.java",
+      "kind": "java",
+      "module": "tornado.runtime",
+      "relative": "uk/ac/manchester/tornado/runtime/library/LibraryRegistry.java",
+      "sha256": "f1fc9b05c50cf273db7ab3051a58d6199c89f4c2e8b0399297cc70ea8bf9495b"
+    },
+    {
+      "path": "tornado-runtime/src/main/java/uk/ac/manchester/tornado/runtime/library/spi/LibraryContext.java",
+      "kind": "java",
+      "module": "tornado.runtime",
+      "relative": "uk/ac/manchester/tornado/runtime/library/spi/LibraryContext.java",
+      "sha256": "29414ecd0ee92ba79956268fc235b7750725e37b2fd3a1f6fb80f2a46eacb16a"
+    },
+    {
+      "path": "tornado-runtime/src/main/java/uk/ac/manchester/tornado/runtime/library/spi/LibraryInvocation.java",
+      "kind": "java",
+      "module": "tornado.runtime",
+      "relative": "uk/ac/manchester/tornado/runtime/library/spi/LibraryInvocation.java",
+      "sha256": "cb0bfbbe164ab40f48b378f6aba601bb19cdb72bfef411427aa652b4c107b6fc"
+    },
+    {
+      "path": "tornado-runtime/src/main/java/uk/ac/manchester/tornado/runtime/library/spi/TornadoLibraryProvider.java",
+      "kind": "java",
+      "module": "tornado.runtime",
+      "relative": "uk/ac/manchester/tornado/runtime/library/spi/TornadoLibraryProvider.java",
+      "sha256": "a8ce81e40581303960d3136ea61ca5fe3d636f794773e2b4924b67c23bb0818e"
+    },
+    {
+      "path": "tornado-runtime/src/main/java/uk/ac/manchester/tornado/runtime/library/spi/TornadoNativeStreamSupport.java",
+      "kind": "java",
+      "module": "tornado.runtime",
+      "relative": "uk/ac/manchester/tornado/runtime/library/spi/TornadoNativeStreamSupport.java",
+      "sha256": "1d36780fe9e7204fc2fa1c6eeed8a9f59ecf26928e5945525dc35d8ea3b2909c"
+    },
+    {
+      "path": "tornado-runtime/src/main/java/uk/ac/manchester/tornado/runtime/profiler/EmptyProfiler.java",
+      "kind": "java",
+      "module": "tornado.runtime",
+      "relative": "uk/ac/manchester/tornado/runtime/profiler/EmptyProfiler.java",
+      "sha256": "9520d11e82c9baad63fa4d5587cd45e5759dcdbac3978a46d8eccb6f6d5a242f"
+    },
+    {
+      "path": "tornado-runtime/src/main/java/uk/ac/manchester/tornado/runtime/profiler/FeatureExtractionUtilities.java",
+      "kind": "java",
+      "module": "tornado.runtime",
+      "relative": "uk/ac/manchester/tornado/runtime/profiler/FeatureExtractionUtilities.java",
+      "sha256": "6b16130c273dec43c68b11597f8ce8386de22586c7d410b3d99524a0d13f90c0"
+    },
+    {
+      "path": "tornado-runtime/src/main/java/uk/ac/manchester/tornado/runtime/profiler/ProfilerCodeFeatures.java",
+      "kind": "java",
+      "module": "tornado.runtime",
+      "relative": "uk/ac/manchester/tornado/runtime/profiler/ProfilerCodeFeatures.java",
+      "sha256": "726ab1b800d52025e44038dba62f353a17d0547200909dcc2570172c119f1f32"
+    },
+    {
+      "path": "tornado-runtime/src/main/java/uk/ac/manchester/tornado/runtime/profiler/TimeProfiler.java",
+      "kind": "java",
+      "module": "tornado.runtime",
+      "relative": "uk/ac/manchester/tornado/runtime/profiler/TimeProfiler.java",
+      "sha256": "d599ae6a5c7137b753950d6a87a2a29e6573fadd1d490b95cffb94fc5aa05691"
+    },
+    {
+      "path": "tornado-runtime/src/main/java/uk/ac/manchester/tornado/runtime/tasks/CompilableTask.java",
+      "kind": "java",
+      "module": "tornado.runtime",
+      "relative": "uk/ac/manchester/tornado/runtime/tasks/CompilableTask.java",
+      "sha256": "b2c6026dcfd6635e4ba82a90a5ab039e22f2d332382cf0e52be2cc8a9f7a0fbc"
+    },
+    {
+      "path": "tornado-runtime/src/main/java/uk/ac/manchester/tornado/runtime/tasks/DataObjectState.java",
+      "kind": "java",
+      "module": "tornado.runtime",
+      "relative": "uk/ac/manchester/tornado/runtime/tasks/DataObjectState.java",
+      "sha256": "6396b932d9d6ae30f2f1719659d73ba434e6ffed63f001705e4045d96a70d247"
+    },
+    {
+      "path": "tornado-runtime/src/main/java/uk/ac/manchester/tornado/runtime/tasks/LibraryTask.java",
+      "kind": "java",
+      "module": "tornado.runtime",
+      "relative": "uk/ac/manchester/tornado/runtime/tasks/LibraryTask.java",
+      "sha256": "04e8a6d76225824beee9da0832b46b79e4ddc360b578654577942f5a6e4c5041"
+    },
+    {
+      "path": "tornado-runtime/src/main/java/uk/ac/manchester/tornado/runtime/tasks/LocalObjectState.java",
+      "kind": "java",
+      "module": "tornado.runtime",
+      "relative": "uk/ac/manchester/tornado/runtime/tasks/LocalObjectState.java",
+      "sha256": "e6595ac9e5a5a7a91082ddc11dbe5309cd2112b7986540b8a51f4597c4fe84aa"
+    },
+    {
+      "path": "tornado-runtime/src/main/java/uk/ac/manchester/tornado/runtime/tasks/PrebuiltTask.java",
+      "kind": "java",
+      "module": "tornado.runtime",
+      "relative": "uk/ac/manchester/tornado/runtime/tasks/PrebuiltTask.java",
+      "sha256": "8d5b5165d54bc512c667ce485bd8ac3bbee98f0476264bb5237bdc7f8b7d8c09"
+    },
+    {
+      "path": "tornado-runtime/src/main/java/uk/ac/manchester/tornado/runtime/tasks/ReduceFactory.java",
+      "kind": "java",
+      "module": "tornado.runtime",
+      "relative": "uk/ac/manchester/tornado/runtime/tasks/ReduceFactory.java",
+      "sha256": "f0d092cb1024aa5badf939653b41838af93aeac8fa2dfeffd7713ec23619a377"
+    },
+    {
+      "path": "tornado-runtime/src/main/java/uk/ac/manchester/tornado/runtime/tasks/ReduceTaskGraph.java",
+      "kind": "java",
+      "module": "tornado.runtime",
+      "relative": "uk/ac/manchester/tornado/runtime/tasks/ReduceTaskGraph.java",
+      "sha256": "16047beb00f749ad31d55539a04384da8ad718ca3426a4a622799c316a018d9c"
+    },
+    {
+      "path": "tornado-runtime/src/main/java/uk/ac/manchester/tornado/runtime/tasks/StreamingObject.java",
+      "kind": "java",
+      "module": "tornado.runtime",
+      "relative": "uk/ac/manchester/tornado/runtime/tasks/StreamingObject.java",
+      "sha256": "029e0313fa287da728d36f57ce8530596ea2c477dd6cb0d40a46242805e92f63"
+    },
+    {
+      "path": "tornado-runtime/src/main/java/uk/ac/manchester/tornado/runtime/tasks/TornadoGraphBitcodes.java",
+      "kind": "java",
+      "module": "tornado.runtime",
+      "relative": "uk/ac/manchester/tornado/runtime/tasks/TornadoGraphBitcodes.java",
+      "sha256": "ec7ea253b9eec097d3febcb66cb6f6c38c2f3167fbc9d64eca6f880dfe807c47"
+    },
+    {
+      "path": "tornado-runtime/src/main/java/uk/ac/manchester/tornado/runtime/tasks/TornadoTaskGraph.java",
+      "kind": "java",
+      "module": "tornado.runtime",
+      "relative": "uk/ac/manchester/tornado/runtime/tasks/TornadoTaskGraph.java",
+      "sha256": "c5859eabc9bc4e1cca01cf3eccee1d4ebe8762456d5c8473af863e8dfe17f413"
+    },
+    {
+      "path": "tornado-runtime/src/main/java/uk/ac/manchester/tornado/runtime/tasks/meta/AbstractRTContext.java",
+      "kind": "java",
+      "module": "tornado.runtime",
+      "relative": "uk/ac/manchester/tornado/runtime/tasks/meta/AbstractRTContext.java",
+      "sha256": "75c8ac2f2d31822fb4732f21460e016209b651b9b5fdd713fbe204ecdb7c5185"
+    },
+    {
+      "path": "tornado-runtime/src/main/java/uk/ac/manchester/tornado/runtime/tasks/meta/Coarseness.java",
+      "kind": "java",
+      "module": "tornado.runtime",
+      "relative": "uk/ac/manchester/tornado/runtime/tasks/meta/Coarseness.java",
+      "sha256": "3680a86712efff1ec4b30b12731fba23733fa8a8840753cf4aceb9373a279adb"
+    },
+    {
+      "path": "tornado-runtime/src/main/java/uk/ac/manchester/tornado/runtime/tasks/meta/MetaDataUtils.java",
+      "kind": "java",
+      "module": "tornado.runtime",
+      "relative": "uk/ac/manchester/tornado/runtime/tasks/meta/MetaDataUtils.java",
+      "sha256": "b5aa1c17b6602966a748a020f6694eeeb446a60e065c2aaa25325b47276a7caa"
+    },
+    {
+      "path": "tornado-runtime/src/main/java/uk/ac/manchester/tornado/runtime/tasks/meta/ScheduleContext.java",
+      "kind": "java",
+      "module": "tornado.runtime",
+      "relative": "uk/ac/manchester/tornado/runtime/tasks/meta/ScheduleContext.java",
+      "sha256": "f4ec800e8837b551bc7787183821f05fc0f50c96da0d367eb400aa6f19a56dae"
+    },
+    {
+      "path": "tornado-runtime/src/main/java/uk/ac/manchester/tornado/runtime/tasks/meta/TaskDataContext.java",
+      "kind": "java",
+      "module": "tornado.runtime",
+      "relative": "uk/ac/manchester/tornado/runtime/tasks/meta/TaskDataContext.java",
+      "sha256": "8f9ca6e59d97a6e4e076fdb2eb57e9b458ae48a6cf641f6c05af27d69defb462"
+    },
+    {
+      "path": "tornado-runtime/src/main/java/uk/ac/manchester/tornado/runtime/utils/JsonHandler.java",
+      "kind": "java",
+      "module": "tornado.runtime",
+      "relative": "uk/ac/manchester/tornado/runtime/utils/JsonHandler.java",
+      "sha256": "9659a8f4502b20edd3e2f263f9cf1fba2503e7cf92bd429ae71f7675f92c3a1f"
+    },
+    {
+      "path": "tornado-runtime/src/main/java/uk/ac/manchester/tornado/runtime/utils/TornadoUtils.java",
+      "kind": "java",
+      "module": "tornado.runtime",
+      "relative": "uk/ac/manchester/tornado/runtime/utils/TornadoUtils.java",
+      "sha256": "d87e4a285c7d26b2e3a143b664897f199ed344e964b1d836a30827925725c9b5"
+    }
+  ]
+}
