@@ -237,7 +237,7 @@ public final class M3WebGen {
 	List<String> families() {
 		List<String> out = new ArrayList<>();
 		for (Map<String, String> m : members) {
-			if (!out.contains(m.get("family")) && Files.exists(gen.resolve("templates/family/" + m.get("family") + ".java.tmpl"))) {
+			if (!out.contains(m.get("family"))) {
 				out.add(m.get("family"));
 			}
 		}
@@ -350,7 +350,15 @@ public final class M3WebGen {
 		});
 		Path m = s.root().resolve(s.nebula() ? "GENERATED.tsv" : "webwidgets/GENERATED.tsv");
 		Files.createDirectories(m.getParent());
-		Files.writeString(m, b.toString(), StandardCharsets.UTF_8);
+		String text = b.toString();
+		try {
+			if (Files.readString(m, StandardCharsets.UTF_8).equals(text)) {
+				return;
+			}
+		} catch (IOException | SecurityException comparisonUnavailable) {
+			// Preserve the original write and its failure when comparison is unavailable.
+		}
+		Files.writeString(m, text, StandardCharsets.UTF_8);
 	}
 
 	static String pascal(String concept) {

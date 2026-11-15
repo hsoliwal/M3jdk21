@@ -179,8 +179,11 @@ public abstract class M3WebModel extends M3WebView {
 	@Override
 	public final void paint(M3WebPaint p) {
 		p.reset();
+		if ((widgetFlags & HIDDEN) != 0 || width <= 0 || height <= 0) {
+			return;
+		}
 		emit(p);
-		if (focus >= 0 && (widgetFlags & FOCUS) != 0) {
+		if (focus >= 0 && focus < count && (widgetFlags & FOCUS) != 0) {
 			int b = focus * 4;
 			p.roundLine(rects[b] - 2, rects[b + 1] - 2, rects[b + 2] + 4, rects[b + 3] + 4, radius() + 2, theme.slot(M3WebTheme.ACCENT));
 		}
