@@ -80,23 +80,15 @@ public final class LongLongPriorityQueue {
         if (!admission.test(value, priority, topValue, topPriority, size)) return false;
 
         ensureCapacity(size + 1);
-        int index = size++;
-        while (index > 0) {
-            int parent = (index - 1) >>> 1;
-            if (!before(value, priority, values[parent], priorities[parent])) break;
-            values[index] = values[parent];
-            priorities[index] = priorities[parent];
-            index = parent;
-        }
-        values[index] = value;
-        priorities[index] = priority;
+        siftUpFrom(size++, value, priority);
         return true;
     }
 
     /**
-     * Appends primitive value/priority lanes and heapifies once. With an
-     * admission filter configured, candidates are offered individually so the
-     * filter observes the evolving root exactly as single insertion would.
+     * Appends primitive value/priority lanes. Small batches repair only their
+     * ancestor paths; larger batches heapify once. With an admission filter,
+     * candidates are offered individually so the filter observes the evolving
+     * root exactly as single insertion would.
      */
     public int offerAll(long[] sourceValues, long[] sourcePriorities) {
         Objects.requireNonNull(sourceValues, "sourceValues");
@@ -114,11 +106,21 @@ public final class LongLongPriorityQueue {
             return added;
         }
 
+        int start = size;
         ensureCapacity(Math.addExact(size, sourceValues.length));
         System.arraycopy(sourceValues, 0, values, size, sourceValues.length);
         System.arraycopy(sourcePriorities, 0, priorities, size, sourcePriorities.length);
         size += sourceValues.length;
-        heapify();
+        int heightBound = Integer.SIZE - Integer.numberOfLeadingZeros(size);
+        if ((long) sourceValues.length * heightBound < (size >>> 1)) {
+            // Existing entries are already a heap. Avoid visiting every old
+            // parent when the append has fewer possible ancestor steps.
+            for (int index = start; index < size; index++) {
+                siftUpFrom(index, values[index], priorities[index]);
+            }
+        } else {
+            heapify();
+        }
         return sourceValues.length;
     }
 
@@ -157,6 +159,18 @@ public final class LongLongPriorityQueue {
         Arrays.fill(values, 0, size, 0L);
         Arrays.fill(priorities, 0, size, 0L);
         size = 0;
+    }
+
+    private void siftUpFrom(int index, long value, long priority) {
+        while (index > 0) {
+            int parent = (index - 1) >>> 1;
+            if (!before(value, priority, values[parent], priorities[parent])) break;
+            values[index] = values[parent];
+            priorities[index] = priorities[parent];
+            index = parent;
+        }
+        values[index] = value;
+        priorities[index] = priority;
     }
 
     private void heapify() {
