@@ -83,7 +83,11 @@ public final class IntSparseSet {
     }
 
     public void clear() {
-        for (int i = 0; i < size; i++) sparse[dense[i]] = 0;
+        // A sparse slot is live only when its index lies below size AND
+        // the dense value at that index matches its key. On clear, size=0
+        // invalidates all old sparse coordinates. Subsequent insertions
+        // rebind their own slots, while stale ones fail the dense equality
+        // guard in contains(). Avoid O(size) scattered sparse writes.
         Arrays.fill(dense, 0, size, 0);
         size = 0;
     }
