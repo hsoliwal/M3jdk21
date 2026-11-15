@@ -1148,13 +1148,14 @@ final class M3String implements CharSequence {
 
     byte[] encode(Charset charset) {
         Charset checked = Objects.requireNonNull(charset, "charset");
-        if (checked.equals(StandardCharsets.UTF_8)) {
+        // Charset.equals compares names; custom encoders must retain their behavior.
+        if (checked == StandardCharsets.UTF_8) {
             return encodeUtf8();
         }
-        if (checked.equals(StandardCharsets.ISO_8859_1)) {
+        if (checked == StandardCharsets.ISO_8859_1) {
             return encodeSingleByte(false);
         }
-        if (checked.equals(StandardCharsets.US_ASCII)) {
+        if (checked == StandardCharsets.US_ASCII) {
             return encodeSingleByte(true);
         }
         return encodeWithEncoder(checked);
@@ -1234,10 +1235,11 @@ final class M3String implements CharSequence {
 
     byte[] encodeNoRepl(Charset charset) {
         Charset checked = Objects.requireNonNull(charset, "charset");
-        if (checked.equals(StandardCharsets.UTF_8)) {
+        // Charset.equals compares names; custom encoders must retain their behavior.
+        if (checked == StandardCharsets.UTF_8) {
             return encodeUtf8NoRepl();
         }
-        if (checked.equals(StandardCharsets.ISO_8859_1)) {
+        if (checked == StandardCharsets.ISO_8859_1) {
             M3StringFacts prepared = facts();
             if (prepared.latin1) {
                 byte[] output = new byte[length()];
@@ -1249,7 +1251,7 @@ final class M3String implements CharSequence {
             }
             throw new InternalError("M3String Latin-1 fact mismatch");
         }
-        if (checked.equals(StandardCharsets.US_ASCII) && facts().ascii) {
+        if (checked == StandardCharsets.US_ASCII && facts().ascii) {
             byte[] output = new byte[length()];
             getBytes(output, 0, 0, String.LATIN1, length());
             return output;
@@ -1328,9 +1330,7 @@ final class M3String implements CharSequence {
     }
 
     private byte[] encodeWithEncoder(Charset charset) {
-        CharsetEncoder encoder = charset.newEncoder()
-                .onMalformedInput(CodingErrorAction.REPLACE)
-                .onUnmappableCharacter(CodingErrorAction.REPLACE);
+        CharsetEncoder encoder = charset.newEncoder();
         int length = length();
         if (encoder instanceof ArrayEncoder arrayEncoder
                 && arrayEncoder.isASCIICompatible()) {
@@ -1344,6 +1344,9 @@ final class M3String implements CharSequence {
         int capacity = (int) (length * (double) encoder.maxBytesPerChar());
         byte[] output = new byte[capacity];
         if (length == 0) return output;
+        // Match String's callback order, including no configuration for empty input.
+        encoder.onMalformedInput(CodingErrorAction.REPLACE)
+                .onUnmappableCharacter(CodingErrorAction.REPLACE);
 
         ByteBuffer bytes = ByteBuffer.wrap(output);
         CharBuffer input = CharBuffer.wrap(this);

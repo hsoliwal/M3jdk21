@@ -42,7 +42,6 @@
 #include "jni_util.h"
 #include "dlfcn.h"
 
-#if defined(LINUX) && !defined(__ANDROID__) && (defined(_GNU_SOURCE) || \
 #if defined(__BIONIC__)
 /*
  * Bionic keeps the POSIX function at the strerror_r symbol. With GNU features
