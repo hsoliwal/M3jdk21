@@ -1,0 +1,154 @@
+#
+# Copyright (c) 2026, Hitesh Soliwal and Contributors to the Synexia Project.
+# SPDX-License-Identifier: Apache-2.0
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+default: all
+
+include $(SPEC)
+include MakeBase.gmk
+include UtilsForTests.gmk
+
+THIS_FILE := $(TOPDIR)/test/make/TestNativeStaticLibs.gmk
+TEST_SOURCE_DIR := $(TOPDIR)/test/make/native/static-libs
+OUTPUT_DIR := $(TESTMAKE_OUTPUTDIR)/native-static-libs-$(TOOLCHAIN_TYPE)
+SOURCE_DIR := $(OUTPUT_DIR)/src
+
+# The fixture binaries must be executable on the build host. The whole-archive
+# options below cover the native ELF and Mach-O toolchains.
+ifeq ($(call isTargetOs, linux macosx), true)
+  ifneq ($(COMPILE_TYPE), cross)
+    SUPPORTED := true
+  endif
+endif
+
+ifeq ($(SUPPORTED), true)
+  $(OUTPUT_DIR)/_sources: $(THIS_FILE) $(TEST_SOURCE_DIR)/prepare.sh
+	$(BASH) $(TEST_SOURCE_DIR)/prepare.sh "$(SOURCE_DIR)"
+	$(TOUCH) $@
+
+  ifeq ($(BUILD_FIXTURES), true)
+    # Test the optional archives independently of a fully static JDK build.
+    override STATIC_BUILD := false
+    include NativeCompilation.gmk
+
+    COMMON_OBJECTS := shared$(OBJ_SUFFIX) \
+        $(addsuffix $(OBJ_SUFFIX), $(addprefix part, \
+            1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20))
+
+    override STATIC_LIBS := true
+    $(eval $(call SetupNativeCompilation, LEFT, \
+        NAME := left, \
+        SRC := $(SOURCE_DIR)/common $(SOURCE_DIR)/left, \
+        OBJECT_DIR := $(OUTPUT_DIR)/left, \
+        OUTPUT_DIR := $(OUTPUT_DIR)/lib, \
+        OPTIMIZATION := NONE, \
+        COMPILE_WITH_DEBUG_SYMBOLS := false, \
+        COPY_DEBUG_SYMBOLS := false, \
+        STRIP_SYMBOLS := false, \
+    ))
+
+    $(eval $(call SetupNativeCompilation, RIGHT, \
+        NAME := right, \
+        SRC := $(SOURCE_DIR)/common $(SOURCE_DIR)/right, \
+        OBJECT_DIR := $(OUTPUT_DIR)/right, \
+        OUTPUT_DIR := $(OUTPUT_DIR)/lib, \
+        STATIC_LIB_EXCLUDE_OBJS := $(COMMON_OBJECTS), \
+        OPTIMIZATION := NONE, \
+        COMPILE_WITH_DEBUG_SYMBOLS := false, \
+        COPY_DEBUG_SYMBOLS := false, \
+        STRIP_SYMBOLS := false, \
+    ))
+
+    # The same exclusion must not alter an ordinary static-library build.
+    override STATIC_LIBS := false
+    $(eval $(call SetupNativeCompilation, CONTROL, \
+        NAME := control, \
+        TYPE := STATIC_LIBRARY, \
+        SRC := $(SOURCE_DIR)/common $(SOURCE_DIR)/right, \
+        OBJECT_DIR := $(OUTPUT_DIR)/control, \
+        OUTPUT_DIR := $(OUTPUT_DIR)/lib, \
+        STATIC_LIB_EXCLUDE_OBJS := $(COMMON_OBJECTS), \
+        OPTIMIZATION := NONE, \
+        COMPILE_WITH_DEBUG_SYMBOLS := false, \
+        COPY_DEBUG_SYMBOLS := false, \
+        STRIP_SYMBOLS := false, \
+    ))
+
+    $(call AssertEquals, $(words $(LEFT_ALL_OBJS)), 22, left object count)
+    $(call AssertEquals, $(notdir $(RIGHT_ALL_OBJS)), right$(OBJ_SUFFIX), static exclusion)
+    $(call AssertEquals, $(words $(CONTROL_ALL_OBJS)), 22, ordinary object count)
+    $(call AssertEquals, $(filter $(COMMON_OBJECTS), $(notdir $(CONTROL_ALL_OBJS))), \
+        $(sort $(COMMON_OBJECTS)), ordinary build preserves common symbols)
+
+    ifeq ($(call isTargetOs, linux), true)
+      WHOLE_ARCHIVES := -Wl$(COMMA)--whole-archive $(LEFT_TARGET) $(RIGHT_TARGET) \
+          -Wl$(COMMA)--no-whole-archive
+    else
+      WHOLE_ARCHIVES := -Wl$(COMMA)-force_load$(COMMA)$(LEFT_TARGET) \
+          -Wl$(COMMA)-force_load$(COMMA)$(RIGHT_TARGET)
+    endif
+
+    $(eval $(call SetupNativeCompilation, COMBINED, \
+        NAME := combined, \
+        TYPE := EXECUTABLE, \
+        SRC := $(SOURCE_DIR)/combined, \
+        OBJECT_DIR := $(OUTPUT_DIR)/combined, \
+        OUTPUT_DIR := $(OUTPUT_DIR)/bin, \
+        LIBS := $(WHOLE_ARCHIVES), \
+        OPTIMIZATION := NONE, \
+        COMPILE_WITH_DEBUG_SYMBOLS := false, \
+        COPY_DEBUG_SYMBOLS := false, \
+        STRIP_SYMBOLS := false, \
+    ))
+    $(COMBINED_TARGET): $(LEFT_TARGET) $(RIGHT_TARGET)
+
+    $(eval $(call SetupNativeCompilation, CONTROL_MAIN, \
+        NAME := controlmain, \
+        TYPE := EXECUTABLE, \
+        SRC := $(SOURCE_DIR)/controlmain, \
+        OBJECT_DIR := $(OUTPUT_DIR)/controlmain, \
+        OUTPUT_DIR := $(OUTPUT_DIR)/bin, \
+        LIBS := $(CONTROL_TARGET), \
+        OPTIMIZATION := NONE, \
+        COMPILE_WITH_DEBUG_SYMBOLS := false, \
+        COPY_DEBUG_SYMBOLS := false, \
+        STRIP_SYMBOLS := false, \
+    ))
+    $(CONTROL_MAIN_TARGET): $(CONTROL_TARGET)
+
+    build-and-check: $(COMBINED_TARGET) $(CONTROL_MAIN_TARGET)
+	$(COMBINED_TARGET)
+	$(CONTROL_MAIN_TARGET)
+        # 22 objects must exercise the command-file path, not just a short list.
+	test -s $(LEFT_OBJ_FILE_LIST)
+	$(BASH) $(TEST_SOURCE_DIR)/check-images.sh "$(TOPDIR)" "$(SPEC)" \
+	    "$(OUTPUT_DIR)" "$(MAKE)" "$(LEFT_TARGET)" "$(RIGHT_TARGET)" \
+	    "$(STATIC_LIBRARY_SUFFIX)" "$(LIBRARY_PREFIX)"
+	$(ECHO) "Native static archives, executable links and image goals passed"
+
+    .PHONY: build-and-check
+  endif
+
+  run-tests: $(OUTPUT_DIR)/_sources
+	+$(MAKE) $(MAKE_ARGS) -I $(TOPDIR)/test/make -f $(THIS_FILE) \
+	    BUILD_FIXTURES=true build-and-check
+else
+  run-tests:
+	$(ECHO) "SKIPPED: native-static-libs requires native Linux or macOS"
+endif
+
+all: run-tests
+
+.PHONY: default all run-tests

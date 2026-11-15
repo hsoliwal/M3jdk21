@@ -1,5 +1,6 @@
 /*
  * Copyright (c) 2008, 2023, Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2026, Hitesh Soliwal and contributors. All rights reserved.
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
  *
  * This code is free software; you can redistribute it and/or modify it
@@ -23,6 +24,14 @@
  * questions.
  */
 
+/* Bionic's GNU strerror_r returns char* at API 23 and later. Select its
+ * POSIX declaration before system headers so getErrorString retains its
+ * int status, caller-owned buffer and existing native ABI on Android.
+ */
+#if defined(__ANDROID__) && defined(_GNU_SOURCE)
+#undef _GNU_SOURCE
+#endif
+
 #include <errno.h>
 #include <string.h>
 
@@ -31,7 +40,7 @@
 #include "jni_util.h"
 #include "dlfcn.h"
 
-#if defined(LINUX) && (defined(_GNU_SOURCE) || \
+#if defined(LINUX) && !defined(__ANDROID__) && (defined(_GNU_SOURCE) || \
          (defined(_POSIX_C_SOURCE) && _POSIX_C_SOURCE < 200112L \
              && defined(_XOPEN_SOURCE) && _XOPEN_SOURCE < 600))
 extern int __xpg_strerror_r(int, char *, size_t);
