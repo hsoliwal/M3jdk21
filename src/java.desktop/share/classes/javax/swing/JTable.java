@@ -2943,6 +2943,9 @@ public class JTable extends JComponent implements TableModelListener, Scrollable
      */
     public int rowAtPoint(Point point) {
         int y = point.y;
+        if (y < 0) {
+            return -1;
+        }
         int result = (rowModel == null) ?  y/getRowHeight() : rowModel.getIndex(y);
         if (m3RowSizes != null) {
             result = m3RowSizes.getIndex(y);

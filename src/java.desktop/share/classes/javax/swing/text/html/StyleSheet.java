@@ -71,6 +71,7 @@ import javax.swing.text.StyledDocument;
 import javax.swing.text.View;
 
 import sun.swing.SwingUtilities2;
+import sun.swing.SwingAccessor;
 
 /**
  * Support for defining the visual characteristics of
@@ -165,6 +166,33 @@ import sun.swing.SwingUtilities2;
  */
 @SuppressWarnings("serial") // Superclass is not serializable across versions
 public class StyleSheet extends StyleContext {
+    static {
+        SwingAccessor.setCssParserAccessor((reader, callback) ->
+            new CSSParser().parse(reader, new CSSParser.CSSParserCallback() {
+                public void handleImport(String value) {
+                    // Synth never resolves an import or opens a URL.
+                }
+                public void handleSelector(String value) {
+                    callback.handleSelector(value);
+                }
+                public void handleUnsupportedSelector() {
+                    callback.handleUnsupportedSelector();
+                }
+                public void startRule() {
+                    callback.startRule();
+                }
+                public void handleProperty(String value) {
+                    callback.handleProperty(value);
+                }
+                public void handleValue(String value) {
+                    callback.handleValue(value);
+                }
+                public void endRule() {
+                    callback.endRule();
+                }
+            }, false));
+    }
+
     // As the javadoc states, this class maintains a mapping between
     // a CSS selector (such as p.bar) and a Style.
     // This consists of a number of parts:

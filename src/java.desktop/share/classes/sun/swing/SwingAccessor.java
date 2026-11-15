@@ -27,6 +27,8 @@ package sun.swing;
 
 import java.awt.Component;
 import java.awt.Point;
+import java.io.IOException;
+import java.io.Reader;
 import java.lang.invoke.MethodHandles;
 import javax.accessibility.Accessible;
 import javax.accessibility.AccessibleContext;
@@ -320,6 +322,36 @@ public final class SwingAccessor {
         try {
             MethodHandles.lookup().ensureInitialized(c);
         } catch (IllegalAccessException e) {}
+    }
+
+    /** The existing HTML CSS parser, shared with Synth without URL loading. */
+    public interface CssParserAccessor {
+        void parse(Reader reader, CssParserCallback callback) throws IOException;
+    }
+
+    /** Callbacks for a CSS rule stream. The reader remains caller-owned. */
+    public interface CssParserCallback {
+        void handleSelector(String selector);
+        void handleUnsupportedSelector();
+        void startRule();
+        void handleProperty(String property);
+        void handleValue(String value);
+        void endRule();
+    }
+
+    private static CssParserAccessor cssParserAccessor;
+
+    public static void setCssParserAccessor(CssParserAccessor accessor) {
+        cssParserAccessor = accessor;
+    }
+
+    public static CssParserAccessor getCssParserAccessor() {
+        var access = cssParserAccessor;
+        if (access == null) {
+            ensureClassInitialized(javax.swing.text.html.StyleSheet.class);
+            access = cssParserAccessor;
+        }
+        return access;
     }
 
     private static ThreadLocal<Boolean> tlObj = new ThreadLocal<Boolean>();

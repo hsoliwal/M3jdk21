@@ -40,6 +40,7 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.Reader;
 import java.io.NotSerializableException;
 import java.io.Serial;
 import java.io.Serializable;
@@ -608,6 +609,77 @@ public class SynthLookAndFeel extends BasicLookAndFeel {
     }
 
     /**
+     * Adds CSS rules to this look and feel's existing Synth styles. CSS is
+     * opt-in; XML styles, painters and properties remain the fallback for
+     * properties that CSS does not specify. Later calls append rules. CSS
+     * declarations cascade by {@code !important}, selector specificity, and
+     * then source order, independently for each property and component state.
+     * Application-owned colors, fonts, borders and opaque settings retain
+     * the normal Synth and {@link javax.swing.plaf.UIResource} rules.
+     *
+     * <p>The supported selectors are a Synth region name (case-insensitive,
+     * for example {@code Button}), {@code *}, {@code #name}, and
+     * {@code .class}, combined without whitespace, or grouped with commas.
+     * Names and classes are case-sensitive identifiers consisting of ASCII letters,
+     * digits, {@code -} and {@code _}. A component's classes come from the
+     * whitespace-separated string in its {@code "styleClass"} client
+     * property. State selectors are {@code :enabled}, {@code :disabled},
+     * {@code :hover}, {@code :pressed} (or {@code :active}), {@code :focus},
+     * {@code :selected} (or {@code :checked}) and {@code :default}.
+     * Combinators, attribute selectors and functional selectors are ignored;
+     * an unsupported selector invalidates its entire comma-separated rule.
+     *
+     * <p>Supported declarations are {@code color}, {@code background-color},
+     * {@code font-family}, {@code font-size}, {@code font-weight},
+     * {@code font-style}, {@code padding}, the four {@code padding-*}
+     * longhands, and {@code -synth-opaque}. Colors accept the sixteen basic
+     * CSS color names, {@code orange}, {@code transparent}, hexadecimal
+     * {@code #rgb}, {@code #rgba}, {@code #rrggbb}, {@code #rrggbbaa}, and
+     * {@code rgb(r,g,b)} or {@code rgba(r,g,b,a)} with integer channels and
+     * alpha from zero to one. Font family uses the first named or generic
+     * family; weight accepts {@code normal}, {@code bold}, or multiples of
+     * 100 from 100 to 900; style accepts {@code normal}, {@code italic}, or
+     * {@code oblique}. Sizes accept positive {@code px} or {@code pt}; a CSS
+     * pixel is one Swing logical unit and a point is 4/3 of that unit.
+     * Padding maps to Synth style insets and accepts one to four nonnegative
+     * pixel lengths (or unitless zero). Font sizes are limited to 4096
+     * logical units and padding to 32767. The opaque property accepts
+     * {@code true} or {@code false}; otherwise a specified background color
+     * is opaque exactly when its alpha is 255. Unsupported properties and
+     * invalid values are ignored. There is no inheritance, resource loading,
+     * or {@code @import} processing.
+     *
+     * <p>This method does not close {@code reader}. An I/O or parsing failure
+     * leaves the previously loaded rules intact. If this look and feel is
+     * installed, this method must run on the event dispatch thread and
+     * refreshes the styles of its windows. Call {@link #updateStyles} for
+     * detached component trees. Existing custom style factories are not
+     * replaced. State-dependent layout continues to follow Synth UI policy.
+     *
+     * @param reader the CSS rule source
+     * @throws IllegalArgumentException if {@code reader} is null
+     * @throws IllegalStateException if this look and feel is installed and
+     *         the calling thread is not the event dispatch thread
+     * @throws IOException if the source cannot be read
+     * @throws ParseException if the CSS parser rejects the source
+     */
+    public void loadCss(Reader reader) throws IOException, ParseException {
+        if (reader == null) {
+            throw new IllegalArgumentException("You must supply a CSS reader");
+        }
+        boolean installed = UIManager.getLookAndFeel() == this;
+        if (installed && !SwingUtilities.isEventDispatchThread()) {
+            throw new IllegalStateException("Installed CSS must load on the EDT");
+        }
+        ((DefaultSynthStyleFactory) factory).loadCss(reader);
+        if (UIManager.getLookAndFeel() == this) {
+            for (Window window : Window.getWindows()) {
+                updateStyles(window);
+            }
+        }
+    }
+
+    /**
      * Loads the set of <code>SynthStyle</code>s that will be used by
      * this <code>SynthLookAndFeel</code>. Path based resources are resolved
      * relatively to the specified <code>URL</code> of the style. For example
@@ -835,6 +907,10 @@ public class SynthLookAndFeel extends BasicLookAndFeel {
     protected boolean shouldUpdateStyleOnEvent(PropertyChangeEvent ev) {
         String eName = ev.getPropertyName();
         if ("name" == eName || "componentOrientation" == eName) {
+            return true;
+        }
+        if ("styleClass".equals(eName) &&
+                ((DefaultSynthStyleFactory) factory).hasCssStyles()) {
             return true;
         }
         if ("ancestor" == eName && ev.getNewValue() != null) {

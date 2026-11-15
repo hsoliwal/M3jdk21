@@ -115,6 +115,8 @@ class CSSParser {
     private int            tokenBufferLength;
     /** Set to true if any whitespace is read. */
     private boolean        readWS;
+    /** Whether the current token came from a quoted string. */
+    private boolean        quotedToken;
 
 
     // The delegate interface.
@@ -126,6 +128,9 @@ class CSSParser {
         // a problem, handleSelector will have to be told if the string is
         // quoted.
         void handleSelector(String selector);
+        // The legacy callback loses blocks and quotes. A consumer of simple
+        // selectors must not accept their prefixes or unquoted contents.
+        default void handleUnsupportedSelector() { }
         void startRule();
         // Property names are mapped to lower case before being passed to
         // the delegate.
@@ -284,6 +289,9 @@ class CSSParser {
         int       nextToken;
 
         if (tokenBufferLength > 0) {
+            if (quotedToken) {
+                callback.handleUnsupportedSelector();
+            }
             callback.handleSelector(new String(tokenBuffer, 0,
                                                tokenBufferLength));
         }
@@ -292,6 +300,9 @@ class CSSParser {
         for (;;) {
             while ((nextToken = nextToken((char)0)) == IDENTIFIER) {
                 if (tokenBufferLength > 0) {
+                    if (quotedToken) {
+                        callback.handleUnsupportedSelector();
+                    }
                     callback.handleSelector(new String(tokenBuffer, 0,
                                                        tokenBufferLength));
                 }
@@ -301,6 +312,7 @@ class CSSParser {
                 return true;
 
             case BRACKET_OPEN: case PAREN_OPEN:
+                callback.handleUnsupportedSelector();
                 parseTillClosed(nextToken);
                 // Not too sure about this, how we handle this isn't very
                 // well spec'd.
@@ -471,17 +483,20 @@ class CSSParser {
      */
     private int nextToken(char idChar) throws IOException {
         readWS = false;
+        quotedToken = false;
 
         int     nextChar = readWS();
 
         switch (nextChar) {
         case '\'':
+            quotedToken = true;
             readTill('\'');
             if (tokenBufferLength > 0) {
                 tokenBufferLength--;
             }
             return IDENTIFIER;
         case '"':
+            quotedToken = true;
             readTill('"');
             if (tokenBufferLength > 0) {
                 tokenBufferLength--;
