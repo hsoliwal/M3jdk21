@@ -15,10 +15,14 @@ import java.util.regex.Pattern;
 /**
  * Handle of an execution backend.
  *
- * <p>The pure-Java CPU reference ({@value #REFERENCE_ID}) is always present. Other backends are discovered once per
- * process through {@link java.util.ServiceLoader} and {@link BackendProvider}; a provider whose probe fails, throws, or
- * whose id is invalid, reserved or ambiguous is recorded as unavailable and never selected. Discovered backends have
- * one instance per id. {@link #fromProvider(BackendProvider)} creates an independent, explicitly supplied backend
+ * <p>The pure-Java CPU reference ({@value #REFERENCE_ID}) is always present. Other backends are
+ * discovered once per
+ * process through {@link java.util.ServiceLoader} and {@link BackendProvider}; a provider whose
+ * probe fails, throws, or
+ * whose id is invalid, reserved or ambiguous is recorded as unavailable and never selected.
+ * Discovered backends have
+ * one instance per id. {@link #fromProvider(BackendProvider)} creates an independent, explicitly
+ * supplied backend
  * without changing process-wide discovery. Backends are compared by identity.</p>
  */
 public final class Backend {
@@ -33,7 +37,10 @@ public final class Backend {
         REFERENCE,
         /** The available backend with the highest score; the CPU reference wins ties. */
         BEST,
-        /** The available non-reference backend with the highest score; fails when none is available. */
+        /**
+         * The available non-reference backend with the highest score; fails when none is
+         * available.
+         */
         ACCELERATOR
     }
 
@@ -76,7 +83,8 @@ public final class Backend {
     /**
      * Returns the available backend with the given id.
      *
-     * @param id backend id, for example {@value #REFERENCE_ID}, {@code "cpu"}, {@code "opencl"} or {@code "cuda"}
+     * @param id backend id, for example {@value #REFERENCE_ID}, {@code "cpu"}, {@code "opencl"}
+     * or {@code "cuda"}
      * @return the backend
      * @throws IllegalArgumentException if no provider declares {@code id}
      * @throws IllegalStateException    if the provider exists but is unavailable
@@ -88,15 +96,19 @@ public final class Backend {
     /**
      * Creates an independent backend from an explicitly supplied engine provider.
      *
-     * <p>The provider's id, capabilities and score are snapshotted, and its runtime must be available. This method
-     * neither installs nor replaces a process-wide provider. Choose the returned backend when building a new
-     * {@link Plan}; already prepared plans retain their original backend and device storage. The caller owns any
+     * <p>The provider's id, capabilities and score are snapshotted, and its runtime must be
+     * available. This method
+     * neither installs nor replaces a process-wide provider. Choose the returned backend when
+     * building a new
+     * {@link Plan}; already prepared plans retain their original backend and device storage. The
+     * caller owns any
      * provider-wide resources; each plan owns and closes only its prepared device program.</p>
      *
      * @param provider stateless provider factory
      * @return a backend for this provider
      * @throws NullPointerException if the provider or its capabilities are null
-     * @throws IllegalArgumentException if the id is invalid or reserved, or the provider claims the reference role
+     * @throws IllegalArgumentException if the id is invalid or reserved, or the provider claims
+     * the reference role
      * @throws IllegalStateException if the runtime is unavailable or its probe fails
      */
     public static Backend fromProvider(BackendProvider provider) {
@@ -106,11 +118,13 @@ public final class Backend {
             throw new IllegalArgumentException("invalid backend id: " + id);
         }
         if (REFERENCE_ID.equals(id)) {
-            throw new IllegalArgumentException("backend id " + id + " is reserved for the CPU reference");
+            throw new IllegalArgumentException(
+                    "backend id " + id + " is reserved for the CPU reference");
         }
         Set<Capability> capabilities = Set.copyOf(provider.capabilities());
         if (capabilities.contains(Capability.REFERENCE)) {
-            throw new IllegalArgumentException("the reference capability is reserved for the CPU reference");
+            throw new IllegalArgumentException(
+                    "the reference capability is reserved for the CPU reference");
         }
         int score = provider.score();
         Probe probe;
@@ -143,8 +157,10 @@ public final class Backend {
     /**
      * Selects an available backend that supports the requested kernel.
      *
-     * <p>Preference and tie-breaking are identical to {@link #select(Policy)}, after excluding unsupported kernels.
-     * Selection happens before plan preparation. A later preparation or execution failure is reported to the caller;
+     * <p>Preference and tie-breaking are identical to {@link #select(Policy)}, after excluding
+     * unsupported kernels.
+     * Selection happens before plan preparation. A later preparation or execution failure is
+     * reported to the caller;
      * it never retries the operation on another backend.</p>
      *
      * @param policy selection policy
@@ -158,7 +174,8 @@ public final class Backend {
     }
 
     /**
-     * Returns the probe result of every discovered provider, keyed by id (or by a diagnostic key for providers that
+     * Returns the probe result of every discovered provider, keyed by id (or by a diagnostic key
+     * for providers that
      * could not be loaded or named), in key order.
      *
      * @return an unmodifiable sorted map
@@ -214,7 +231,8 @@ public final class Backend {
     }
 
     DeviceProgram prepare(KernelId kernel, Grid1D grid, int[] bufferLengths) {
-        return Objects.requireNonNull(provider.prepare(kernel, grid, bufferLengths.clone()), "device program");
+        return Objects.requireNonNull(
+                provider.prepare(kernel, grid, bufferLengths.clone()), "device program");
     }
 
     @Override

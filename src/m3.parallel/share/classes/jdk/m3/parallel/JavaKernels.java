@@ -11,7 +11,8 @@ import java.util.concurrent.ConcurrentMap;
 /**
  * Process-wide registry of {@link JavaKernel} bodies used by the CPU reference backend.
  *
- * <p>Registration is idempotent for the same kernel instance and refuses to replace a different instance, so a kernel
+ * <p>Registration is idempotent for the same kernel instance and refuses to replace a different
+ * instance, so a kernel
  * id has exactly one Java meaning per process.</p>
  */
 public final class JavaKernels {
@@ -27,8 +28,10 @@ public final class JavaKernels {
     /**
      * Registers and returns the canonical integer-add kernel.
      *
-     * <p>The three equally sized bindings are left input, right input and output. Each work-item writes one output
-     * using Java's 32-bit wrapping addition. Padded work-items do nothing; input buffers are not modified.</p>
+     * <p>The three equally sized bindings are left input, right input and output. Each work-item
+     * writes one output
+     * using Java's 32-bit wrapping addition. Padded work-items do nothing; input buffers are not
+     * modified.</p>
      *
      * @return kernel id {@code m3.parallel.int-add.v1}
      * @throws IllegalStateException if a different body already owns the id
@@ -40,7 +43,8 @@ public final class JavaKernels {
     /**
      * Registers and returns the canonical 32-bit population-count kernel.
      *
-     * <p>The two equally sized bindings are input and output. Each work-item writes {@link Integer#bitCount(int)}
+     * <p>The two equally sized bindings are input and output. Each work-item writes {@link
+     * Integer#bitCount(int)}
      * of its input, including negative two's-complement values. Padded work-items do nothing.</p>
      *
      * @return kernel id {@code m3.parallel.int-bitcount.v1}
@@ -82,14 +86,16 @@ public final class JavaKernels {
      * @param id     kernel id
      * @param kernel kernel body
      * @return {@code id}
-     * @throws IllegalStateException if a different kernel instance is already registered under {@code id}
+     * @throws IllegalStateException if a different kernel instance is already registered under
+     * {@code id}
      */
     public static KernelId register(KernelId id, JavaKernel kernel) {
         Objects.requireNonNull(id, "id");
         Objects.requireNonNull(kernel, "kernel");
         JavaKernel previous = KERNELS.putIfAbsent(id, kernel);
         if (previous != null && previous != kernel) {
-            throw new IllegalStateException("a different Java kernel is already registered for " + id);
+            throw new IllegalStateException(
+                    "a different Java kernel is already registered for " + id);
         }
         return id;
     }

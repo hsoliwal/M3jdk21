@@ -29,11 +29,14 @@ import jdk.internal.vm.parallel.BulkTask;
  * The adapter never falls back to the reference backend after an explicitly chosen accelerator
  * fails.</p>
  *
- * <p>This compatibility adapter exposes the JDK-internal bulk contract. Callers using that contract must explicitly
- * obtain access to {@code java.base/jdk.internal.vm.parallel}; the public {@code m3.parallel} launch API needs no
+ * <p>This compatibility adapter exposes the JDK-internal bulk contract. Callers using that
+ * contract must explicitly
+ * obtain access to {@code java.base/jdk.internal.vm.parallel}; the public {@code m3.parallel}
+ * launch API needs no
  * internal-package access.</p>
  */
-@SuppressWarnings("exports") // Existing adapter ABI intentionally includes the qualified JDK-internal SPI.
+// Existing adapter ABI intentionally includes the qualified JDK-internal SPI.
+@SuppressWarnings("exports")
 public final class M3ParallelIntAddProvider implements BulkExecutorProvider {
     public static final String OPERATION_ID = "m3.parallel.int-add.v1";
     public static final String LEFT = "left";
@@ -50,7 +53,8 @@ public final class M3ParallelIntAddProvider implements BulkExecutorProvider {
     public M3ParallelIntAddProvider(Backend backend) {
         this.backend = Objects.requireNonNull(backend, "backend");
         if (!backend.supports(KERNEL)) {
-            throw new IllegalArgumentException("backend does not support reviewed kernel: " + backend.id());
+            throw new IllegalArgumentException(
+                    "backend does not support reviewed kernel: " + backend.id());
         }
         providerId = "m3-parallel-" + backend.id();
         priority = backend.isReference() ? 10 : Math.addExact(20, backend.score());
@@ -84,8 +88,8 @@ public final class M3ParallelIntAddProvider implements BulkExecutorProvider {
                 && task.inputs().equals(List.of(LEFT, RIGHT))
                 && task.outputs().equals(List.of(SUM))
                 && (backend.isReference()
-                    ? task.localWork() == 0
-                    : task.localWork() >= 1 && task.localWork() <= task.workItems());
+                ? task.localWork() == 0
+                : task.localWork() >= 1 && task.localWork() <= task.workItems());
     }
 
     @Override
@@ -112,12 +116,12 @@ public final class M3ParallelIntAddProvider implements BulkExecutorProvider {
         IntBuffer c = IntBuffer.allocate(n);
         int local = backend.isReference() ? 1 : Math.toIntExact(task.localWork());
         try (Plan plan = Plan.builder(backend)
-                .kernel(KERNEL)
-                .grid(Grid1D.of(n, local))
-                .bind(a, Transfer.ONCE)
-                .bind(b, Transfer.ONCE)
-                .bind(c, Transfer.ON_DEMAND)
-                .build()) {
+                     .kernel(KERNEL)
+                     .grid(Grid1D.of(n, local))
+                     .bind(a, Transfer.ONCE)
+                     .bind(b, Transfer.ONCE)
+                     .bind(c, Transfer.ON_DEMAND)
+                     .build()) {
             Verified receipt = Verified.run(plan);
             return new BulkExecution(Map.of(SUM, c.toArray()), id(), receipt.root());
         }
