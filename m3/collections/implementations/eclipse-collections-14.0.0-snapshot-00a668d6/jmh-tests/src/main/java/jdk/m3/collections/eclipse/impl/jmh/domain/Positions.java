@@ -15,10 +15,10 @@ import java.util.Collections;
 import java.util.PrimitiveIterator;
 import java.util.Random;
 
+import org.apache.commons.lang3.RandomStringUtils;
 import jdk.m3.collections.eclipse.api.set.Pool;
 import jdk.m3.collections.eclipse.impl.list.mutable.FastList;
 import jdk.m3.collections.eclipse.impl.set.mutable.UnifiedSet;
-import org.apache.commons.lang3.RandomStringUtils;
 
 public class Positions
 {

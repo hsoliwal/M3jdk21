@@ -1,8 +1,8 @@
 package-version=${versionmask;===;${Bundle-Version}}
 
--jpms-module-info: com.m3.collections.eclipse.api;version="${package-version}"
-Bundle-SymbolicName: com.m3.collections.eclipse.api
+-jpms-module-info: jdk.m3.collections.eclipse.api;version="${package-version}"
+Bundle-SymbolicName: jdk.m3.collections.eclipse.api
 Export-Package: \
-  com.m3.collections.eclipse.api.*;version="${package-version}"
+  jdk.m3.collections.eclipse.api.*;version="${package-version}"
 Import-Package: \
   *

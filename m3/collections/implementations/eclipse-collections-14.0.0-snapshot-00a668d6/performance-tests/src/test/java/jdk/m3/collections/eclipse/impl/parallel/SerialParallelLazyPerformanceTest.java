@@ -24,6 +24,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
+import org.apache.commons.lang3.RandomStringUtils;
 import jdk.m3.collections.eclipse.api.block.function.Function;
 import jdk.m3.collections.eclipse.api.block.function.Function0;
 import jdk.m3.collections.eclipse.api.block.predicate.Predicate;
@@ -42,7 +43,6 @@ import jdk.m3.collections.eclipse.impl.map.mutable.ConcurrentHashMap;
 import jdk.m3.collections.eclipse.impl.set.mutable.UnifiedSet;
 import jdk.m3.collections.eclipse.impl.test.Verify;
 import jdk.m3.collections.eclipse.impl.utility.Iterate;
-import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;

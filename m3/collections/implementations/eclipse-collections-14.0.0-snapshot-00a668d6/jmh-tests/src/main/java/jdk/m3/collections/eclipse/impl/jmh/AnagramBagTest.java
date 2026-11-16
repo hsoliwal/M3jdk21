@@ -21,6 +21,7 @@ import java.util.stream.Collectors;
 
 import com.google.common.collect.HashMultiset;
 import com.google.common.collect.Multiset;
+import org.apache.commons.lang3.RandomStringUtils;
 import jdk.m3.collections.eclipse.api.RichIterable;
 import jdk.m3.collections.eclipse.api.bag.ParallelUnsortedBag;
 import jdk.m3.collections.eclipse.api.multimap.MutableMultimap;
@@ -33,7 +34,6 @@ import jdk.m3.collections.eclipse.impl.forkjoin.FJIterate;
 import jdk.m3.collections.eclipse.impl.list.mutable.FastList;
 import jdk.m3.collections.eclipse.impl.multimap.list.FastListMultimap;
 import jdk.m3.collections.eclipse.impl.parallel.ParallelIterate;
-import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Assert;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;

@@ -21,8 +21,8 @@ import jdk.m3.collections.eclipse.test.CollectionTestCase;
 import jdk.m3.collections.eclipse.test.IterableTestCase;
 import org.junit.jupiter.api.Test;
 
-import static jdk.m3.collections.eclipse.test.IterableTestCase.assertIterablesEqual;
 import static org.assertj.core.api.Assertions.assertThat;
+import static jdk.m3.collections.eclipse.test.IterableTestCase.assertIterablesEqual;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;

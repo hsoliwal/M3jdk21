@@ -36,9 +36,9 @@ import jdk.m3.collections.eclipse.codegenerator.model.Primitive;
  * API folder with the templates is a sibling folder. You can specify any number
  * of pairs of arguments, for example:
  * <blockquote>{@code
- * org.eclipse.collections.api.map.primitive.IntValuesMap
+ * jdk.m3.collections.eclipse.api.map.primitive.IntValuesMap
  * api/map/primitiveValuesMap
- * org.eclipse.collections.api.map.primitive.CharIntMap
+ * jdk.m3.collections.eclipse.api.map.primitive.CharIntMap
  * api/map/primitivePrimitiveMap
  * }</blockquote>
  * </p>
