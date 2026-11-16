@@ -27,3 +27,7 @@ jobs:
         run: |
           set -euo pipefail
           python3 m3/collections/qualification/range-preflight-20261116/verify_product_candidate.py
+      - name: Classify static-import source collision with unchanged old binary
+        run: |
+          set -euo pipefail
+          python3 m3/collections/qualification/range-preflight-20261116/verify_static_import_collision.py
