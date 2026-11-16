@@ -110,6 +110,10 @@ public abstract class AbstractMapBag<E> implements Bag<E> {
             } else {
                 entryIterator.remove();
             }
+            removeRest2();
+        }
+
+        private void removeRest2() {
             parent.size--;
             canRemove = false;
         }
@@ -231,12 +235,67 @@ public abstract class AbstractMapBag<E> implements Bag<E> {
      */
     @Override
     public boolean addAll(final Collection<? extends E> coll) {
+        if (canAggregateBagCounts(coll)) {
+            @SuppressWarnings("unchecked")
+            final HashBag<? extends E> source = (HashBag<? extends E>) coll;
+            boolean changed = false;
+            for (final Entry<? extends E, MutableInteger> entry : source.getMap().entrySet()) {
+                final int count = entry.getValue().value;
+                final boolean added = add(entry.getKey(), count);
+                // The inherited BagIterator/add(E) calls advance modCount once
+                // per occurrence, including copies rejected by saturation.
+                modCount += count - 1;
+                changed |= added;
+            }
+            return changed;
+        }
         boolean changed = false;
         for (final E current : coll) {
             final boolean added = add(current);
             changed = changed || added;
         }
         return changed;
+    }
+
+    /**
+     * Only exact HashBag-to-HashBag transfers of stable JDK value keys can
+     * replace repeated iterator callbacks with the already-owned counts.
+     * Subclasses, custom equals/hashCode keys and self-add retain the
+     * original per-occurrence dispatch, including partial failures.
+     */
+    private boolean canAggregateBagCounts(final Collection<?> collection) {
+        if (collection == null || collection == this || getClass() != HashBag.class
+                || collection.getClass() != HashBag.class || collection.size() < 128) {
+            return false;
+        }
+        final HashBag<?> source = (HashBag<?>) collection;
+        final Map<?, MutableInteger> sourceMap = source.getMap();
+        if ((long) sourceMap.size() * 8L > collection.size()) {
+            return false;
+        }
+        return canAggregateBagCountsRest(sourceMap);
+    }
+
+    private static boolean canAggregateBagCountsRest(final Map<?, MutableInteger> sourceMap) {
+        for (final Entry<?, MutableInteger> entry : sourceMap.entrySet()) {
+            final MutableInteger count = entry.getValue();
+            final Object key = entry.getKey();
+            if (count == null || count.value < 1 || !isKnownImmutableKey(key)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /** No user-provided equality/hash callbacks occur on these exact final types. */
+    private static boolean isKnownImmutableKey(final Object key) {
+        if (key == null) {
+            return true;
+        }
+        final Class<?> type = key.getClass();
+        return type == String.class || type == Integer.class || type == Long.class
+                || type == Boolean.class || type == Byte.class || type == Short.class
+                || type == Character.class || type == Float.class || type == Double.class;
     }
 
     /**
@@ -349,6 +408,10 @@ public abstract class AbstractMapBag<E> implements Bag<E> {
         if (other.size() != size()) {
             return false;
         }
+        return equalsRest(other);
+    }
+
+    private boolean equalsRest(final Bag<?> other) {
         for (final E element : map.keySet()) {
             if (other.getCount(element) != getCount(element)) {
                 return false;
@@ -459,6 +522,10 @@ public abstract class AbstractMapBag<E> implements Bag<E> {
             return false;
         }
         modCount++;
+        return removeRest(nCopies, mut, object);
+    }
+
+    private boolean removeRest(final int nCopies, final MutableInteger mut, final Object object) {
         if (nCopies < mut.value) {
             mut.value -= nCopies;
             size -= nCopies;
@@ -478,6 +545,21 @@ public abstract class AbstractMapBag<E> implements Bag<E> {
      */
     @Override
     public boolean removeAll(final Collection<?> coll) {
+        if (canAggregateBagCounts(coll)) {
+            final HashBag<?> source = (HashBag<?>) coll;
+            boolean changed = false;
+            for (final Entry<?, MutableInteger> entry : source.getMap().entrySet()) {
+                final Object key = entry.getKey();
+                final int removed = Math.min(getCount(key), entry.getValue().value);
+                if (removed > 0 && remove(key, removed)) {
+                    // Each successful remove(key, 1) normally increments
+                    // modCount; an absent key does not. Retain the counter.
+                    modCount += removed - 1;
+                    changed = true;
+                }
+            }
+            return changed;
+        }
         boolean result = false;
         if (coll != null) {
             for (final Object current : coll) {
@@ -497,7 +579,7 @@ public abstract class AbstractMapBag<E> implements Bag<E> {
      * @return {@code true} if this call changed the collection
      */
     boolean retainAll(final Bag<?> other) {
-        boolean result = false;
+        final boolean result = false;
         final Bag<E> excess = new HashBag<>();
         for (final E current : uniqueSet()) {
             final int myCount = getCount(current);
@@ -508,6 +590,10 @@ public abstract class AbstractMapBag<E> implements Bag<E> {
                 excess.add(current, myCount);
             }
         }
+        return retainAllRest(excess, result);
+    }
+
+    private boolean retainAllRest(final Bag<E> excess, boolean result) {
         if (!excess.isEmpty()) {
             result = removeAll(excess);
         }
@@ -548,7 +634,11 @@ public abstract class AbstractMapBag<E> implements Bag<E> {
     @Override
     public Object[] toArray() {
         final Object[] result = new Object[size()];
-        int i = 0;
+        final int i = 0;
+        return toArrayRest(result, i);
+    }
+
+    private Object[] toArrayRest(final Object[] result, int i) {
         for (final E current : map.keySet()) {
             final int count = getCount(current);
             if (count >= 8 && count <= result.length - i) {
@@ -617,6 +707,10 @@ public abstract class AbstractMapBag<E> implements Bag<E> {
         final StringBuilder buf = new StringBuilder();
         buf.append(CollectionUtils.DEFAULT_TOSTRING_PREFIX);
         final Iterator<E> it = uniqueSet().iterator();
+        return toStringRest(it, buf);
+    }
+
+    private String toStringRest(final Iterator<E> it, final StringBuilder buf) {
         while (it.hasNext()) {
             final Object current = it.next();
             final int count = getCount(current);
