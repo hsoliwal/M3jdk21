@@ -7,12 +7,16 @@
  * every consumer has moved.
  */
 module jdk.m3.collections {
-    // The provider superset (providers/classes: Guava, see legal/guava.md) logs through
-    // java.util.logging and has Unsafe fast paths (jdk.unsupported). Its exports are in
-    // providers/classes/module-info.java.extra. Not "requires static": the build tool that
-    // merges the extra file (GenModuleInfoSource) reads "requires" and "requires transitive" only.
+    // The provider superset (providers/classes) needs these; its exports are in
+    // providers/classes/module-info.java.extra.
+    // Guava (legal/guava.md) logs through java.util.logging; its Unsafe fast paths fall back to
+    // plain Java when jdk.unsupported is absent.
     requires java.logging;
-    requires jdk.unsupported;
+    requires static jdk.unsupported;
+    // commons-collections (legal/commons-collections.md): IteratorUtils.getIterator(Object) tests
+    // every argument against org.w3c.dom.NodeList, and NodeListIterator has Node and NodeList in
+    // its public signatures. Not static: without java.xml that method fails for any argument.
+    requires transitive java.xml;
 
     exports jdk.m3.arrays;
     exports jdk.m3.arrays.packed;

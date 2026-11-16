@@ -25,3 +25,26 @@ exports jdk.m3.collections.guava.reflect;
 exports jdk.m3.collections.guava.util.concurrent;
 exports jdk.m3.collections.guava.util.concurrent.internal;
 exports jdk.m3.collections.guava.xml;
+
+// Apache Commons Collections, the fork's state after release 4.5.0 (legal/commons-collections.md).
+// The root package jdk.m3.collections.apache is exported by share/classes/module-info.java already:
+// the module owns three classes in it.
+exports jdk.m3.collections.apache.bag;
+exports jdk.m3.collections.apache.bidimap;
+exports jdk.m3.collections.apache.bloomfilter;
+exports jdk.m3.collections.apache.collection;
+exports jdk.m3.collections.apache.comparators;
+exports jdk.m3.collections.apache.functors;
+exports jdk.m3.collections.apache.iterators;
+exports jdk.m3.collections.apache.keyvalue;
+exports jdk.m3.collections.apache.list;
+exports jdk.m3.collections.apache.map;
+exports jdk.m3.collections.apache.multimap;
+exports jdk.m3.collections.apache.multiset;
+exports jdk.m3.collections.apache.properties;
+exports jdk.m3.collections.apache.queue;
+exports jdk.m3.collections.apache.sequence;
+exports jdk.m3.collections.apache.set;
+exports jdk.m3.collections.apache.splitmap;
+exports jdk.m3.collections.apache.trie;
+exports jdk.m3.collections.apache.trie.analyzer;

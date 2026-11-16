@@ -408,7 +408,8 @@ public class GenModuleInfoSource {
                     hasCurlyBracket = true;
                 } else if (token.equals("requires")) {
                     token = nextIdentifier(parser);
-                    if (token.equals("transitive")) {
+                    // the modifiers of a requires directive, in either order
+                    while (token.equals("transitive") || token.equals("static")) {
                         token = nextIdentifier(parser);
                     }
                     if (extraFile) {
