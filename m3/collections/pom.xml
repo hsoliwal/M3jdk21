@@ -144,6 +144,11 @@
         <configuration>
           <!-- Keep leaf-root package metadata identical to fresh javac. -->
           <createMissingPackageInfoClass>false</createMissingPackageInfoClass>
+          <!-- Guava (src/jdk.m3.collections/share/legal/guava.md) belongs to the JDK module build only: it needs
+               jdk.m3.annotations and the JDK build's javac flags, which this bridge does not have. -->
+          <excludes>
+            <exclude>guava/**</exclude>
+          </excludes>
           <compilerArgs>
             <arg>-Xlint:all,-module</arg>
             <arg>-Werror</arg>
