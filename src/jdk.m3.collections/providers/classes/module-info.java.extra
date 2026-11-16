@@ -707,3 +707,8 @@ provides jdk.m3.collections.eclipse.api.factory.stack.primitive.MutableFloatStac
 provides jdk.m3.collections.eclipse.api.factory.stack.primitive.MutableIntStackFactory with jdk.m3.collections.eclipse.impl.stack.mutable.primitive.MutableIntStackFactoryImpl;
 provides jdk.m3.collections.eclipse.api.factory.stack.primitive.MutableLongStackFactory with jdk.m3.collections.eclipse.impl.stack.mutable.primitive.MutableLongStackFactoryImpl;
 provides jdk.m3.collections.eclipse.api.factory.stack.primitive.MutableShortStackFactory with jdk.m3.collections.eclipse.impl.stack.mutable.primitive.MutableShortStackFactoryImpl;
+
+// LMAX Disruptor, development state 4.0.0-SNAPSHOT (legal/disruptor.md): the packages its own descriptor exports
+exports jdk.m3.collections.disruptor;
+exports jdk.m3.collections.disruptor.dsl;
+exports jdk.m3.collections.disruptor.util;
