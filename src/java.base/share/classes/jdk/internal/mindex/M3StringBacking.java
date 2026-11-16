@@ -102,4 +102,29 @@ public interface M3StringBacking extends AutoCloseable {
         }
         return true;
     }
+
+    /**
+     * Tests a UTF-16 code-unit prefix without materializing the backing.
+     * Null is unequal; the empty prefix matches every valid backing.
+     */
+    default boolean startsWith(long id, CharSequence prefix) {
+        if (prefix == null) {
+            return false;
+        }
+        int size = prefix.length();
+        return size <= length(id) && contentEquals(id, 0, size, prefix);
+    }
+
+    /**
+     * Tests a UTF-16 code-unit suffix without materializing the backing.
+     * Null is unequal; the empty suffix matches every valid backing.
+     */
+    default boolean endsWith(long id, CharSequence suffix) {
+        if (suffix == null) {
+            return false;
+        }
+        int total = length(id);
+        int size = suffix.length();
+        return size <= total && contentEquals(id, total - size, total, suffix);
+    }
 }
