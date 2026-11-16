@@ -12,8 +12,12 @@
  * @test id=flagOn
  * @summary Composite search and reverse on a matched M3 storage image
  * @modules java.base/java.lang:+open
- * @run main/othervm -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage M3CompositeBuilderSearchReverseTest flagOn
- * @run main/othervm -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage -Dm3.string.pool.maxBytes=0 M3CompositeBuilderSearchReverseTest flagOn
+ * @run main/othervm -XX:+UnlockExperimentalVMOptions
+ *   -XX:+UseM3StringStorage
+ *   M3CompositeBuilderSearchReverseTest flagOn
+ * @run main/othervm -XX:+UnlockExperimentalVMOptions
+ *   -XX:+UseM3StringStorage -Dm3.string.pool.maxBytes=0
+ *   M3CompositeBuilderSearchReverseTest flagOn
  */
 
 import java.lang.reflect.Field;
@@ -63,7 +67,8 @@ public class M3CompositeBuilderSearchReverseTest {
             oracle.append(units, from, to - from);
         }
         int capacity() {
-            return raw instanceof StringBuilder builder ? builder.capacity() : ((StringBuffer) raw).capacity();
+            return raw instanceof StringBuilder builder
+                    ? builder.capacity() : ((StringBuffer) raw).capacity();
         }
         int search(String needle, int from, boolean backwards) {
             if (raw instanceof StringBuilder builder) return backwards
@@ -78,7 +83,8 @@ public class M3CompositeBuilderSearchReverseTest {
             return backwards ? buffer.lastIndexOf(needle) : buffer.indexOf(needle);
         }
         Object reverse() {
-            return raw instanceof StringBuilder builder ? builder.reverse() : ((StringBuffer) raw).reverse();
+            return raw instanceof StringBuilder builder
+                    ? builder.reverse() : ((StringBuffer) raw).reverse();
         }
     }
     static void content(Subject subject, String where) {
@@ -107,7 +113,8 @@ public class M3CompositeBuilderSearchReverseTest {
                     check(LANE.get(subject.raw) == lane, "search detached composite lane");
                     check(VALUE.get(subject.raw) == flat, "search replaced flat backing");
                 }
-                int wanted = backwards ? subject.oracle.lastIndexOf(needle) : subject.oracle.indexOf(needle);
+                int wanted = backwards ? subject.oracle.lastIndexOf(needle)
+                        : subject.oracle.indexOf(needle);
                 check(subject.search(needle, backwards) == wanted, "search overload");
                 check(LANE.get(subject.raw) == lane, "search overload detached lane");
                 try {
@@ -146,7 +153,8 @@ public class M3CompositeBuilderSearchReverseTest {
                 if ((shape & 2) == 0) subject.flat(new char[] {second});
                 else subject.piece(new char[] {'!', second, '?'}, 1, 2);
                 subject.flat(new char[] {'q'});
-                searches(subject, new String[] {"", "p", "q", new String(new char[] {first, second}), "missing"});
+                searches(subject, new String[] {"", "p", "q",
+                        new String(new char[] {first, second}), "missing"});
                 reverse(subject);
                 searches(subject, new String[] {"", "q", new String(new char[] {second, first})});
                 reverse(subject);
@@ -173,7 +181,8 @@ public class M3CompositeBuilderSearchReverseTest {
             needles[0] = ""; needles[1] = "absent";
             for (int i = 2; i < needles.length; i++) {
                 int from = random.nextInt(expected.length() + 1);
-                needles[i] = expected.substring(from, Math.min(expected.length(), from + random.nextInt(60)));
+                needles[i] = expected.substring(from,
+                        Math.min(expected.length(), from + random.nextInt(60)));
             }
             searches(subject, needles);
             reverse(subject);
@@ -189,7 +198,8 @@ public class M3CompositeBuilderSearchReverseTest {
         block[0] = '\udc00'; block[block.length - 1] = '\ud800';
         for (int i = 0; i < 128; i++) subject.piece(block, 0, block.length);
         subject.flat(new char[] {'b'});
-        searches(subject, new String[] {"a".repeat(9000), "a".repeat(9000) + "b", "\ud800\udc00", ""});
+        searches(subject, new String[] {"a".repeat(9000), "a".repeat(9000) + "b",
+                "\ud800\udc00", ""});
         reverse(subject);
         content(subject, "large reverse");
     }

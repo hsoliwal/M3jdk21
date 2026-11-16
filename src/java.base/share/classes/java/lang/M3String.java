@@ -1661,7 +1661,8 @@ final class M3String implements CharSequence {
                 if (mapped == Character.ERROR) {
                     char[] expansion = upper
                             ? (conditional
-                                    ? ConditionalSpecialCasing.toUpperCaseCharArray(source, index, locale)
+                                    ? ConditionalSpecialCasing.toUpperCaseCharArray(
+                                            source, index, locale)
                                     : Character.toUpperCaseCharArray(codePoint))
                             : ConditionalSpecialCasing.toLowerCaseCharArray(source, index, locale);
                     for (char unit : expansion) {
