@@ -739,6 +739,44 @@ public interface List<E> extends SequencedCollection<E> {
     List<E> subList(int fromIndex, int toIndex);
 
     /**
+     * Copies one contiguous window of this list into a caller-owned array.
+     * Only the requested {@code length} elements are transferred; this method
+     * does not copy the whole list, allocate an intermediate array, or write a
+     * trailing null marker. The destination outside the requested window is
+     * left unchanged. Null list elements are copied as null values.
+     *
+     * <p>Both source and destination ranges are validated before the first
+     * element is stored. If an element cannot be stored in the runtime type
+     * of the destination array, a prefix may already have been copied.
+     * Concurrent structural changes to a list are not supported.
+     *
+     * @implSpec
+     * The default implementation validates both ranges and uses
+     * {@link #listIterator(int)} to copy the requested elements in order.
+     * It works with sequential lists without accessing every element by its
+     * index. Implementations with contiguous storage may override it with
+     * a bulk copy.
+     *
+     * @param fromIndex the first source index (inclusive)
+     * @param length the number of elements to copy
+     * @param destination the caller-owned destination array
+     * @param destinationOffset the first destination index (inclusive)
+     * @throws NullPointerException if destination is null
+     * @throws IndexOutOfBoundsException if either requested range is invalid
+     * @throws ArrayStoreException if an element cannot be stored in the array
+     */
+    default void copyRangeToArray(int fromIndex, int length,
+            Object[] destination, int destinationOffset) {
+        Objects.requireNonNull(destination);
+        Objects.checkFromIndexSize(fromIndex, length, size());
+        Objects.checkFromIndexSize(destinationOffset, length, destination.length);
+        ListIterator<E> elements = listIterator(fromIndex);
+        for (int i = 0; i < length; i++) {
+            destination[destinationOffset + i] = elements.next();
+        }
+    }
+
+    /**
      * Creates a {@link Spliterator} over the elements in this list.
      *
      * <p>The {@code Spliterator} reports {@link Spliterator#SIZED} and
