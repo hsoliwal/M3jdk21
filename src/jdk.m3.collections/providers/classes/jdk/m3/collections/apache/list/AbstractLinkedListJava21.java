@@ -46,7 +46,6 @@ import jdk.m3.collections.apache.OrderedIterator;
  * </p>
  *
  * @param <E> The type of elements in this list
- * See AbstractLinkedList.
  * @since 4.5.0-M3
  */
 @SuppressWarnings("this-escape")

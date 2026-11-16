@@ -21,8 +21,6 @@
  * The following implementations are provided in the package:
  * <ul>
  *   <li>TreeList - a list that is optimized for insertions and removals at any index in the list</li>
- *   <li>CursorableLinkedList - a list that can be modified while the listIterator (cursor) is being used</li>
- *   <li>NodeCachingLinkedList - a linked list that caches the storage nodes for a performance gain</li>
  * </ul>
  * <p>
  * The following decorators are provided in the package:

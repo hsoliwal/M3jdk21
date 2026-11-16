@@ -13,9 +13,10 @@ module jdk.m3.collections {
     // plain Java when jdk.unsupported is absent.
     requires java.logging;
     requires static jdk.unsupported;
-    // commons-collections (legal/commons-collections.md): only NodeListIterator needs java.xml;
-    // it has org.w3c.dom.Node and NodeList in its public signatures.
-    requires static transitive java.xml;
+    // commons-collections (legal/commons-collections.md): IteratorUtils.getIterator(Object) tests
+    // every argument against org.w3c.dom.NodeList, and NodeListIterator has Node and NodeList in
+    // its public signatures. Not static: without java.xml that method fails for any argument.
+    requires transitive java.xml;
 
     exports jdk.m3.arrays;
     exports jdk.m3.arrays.packed;
