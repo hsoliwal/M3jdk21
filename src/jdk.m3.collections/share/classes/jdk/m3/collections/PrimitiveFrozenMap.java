@@ -155,7 +155,8 @@ public final class PrimitiveFrozenMap {
         if (index < 0 || index >= size()) throw new IndexOutOfBoundsException(index);
     }
 
-    private static void heapSortPairs(
+    // Shared within this package by the typed frozen map owners.
+    static void heapSortPairs(
             PrimitiveKind keyKind, PrimitiveKind valueKind,
             Object keys, Object values, int size) {
         for (int parent = (size >>> 1) - 1; parent >= 0; parent--) {
@@ -171,9 +172,9 @@ public final class PrimitiveFrozenMap {
             PrimitiveKind keyKind, PrimitiveKind valueKind,
             Object keys, Object values, int root, int size) {
         int index = root;
-        while (true) {
+        // Only a parent computes a child index; leaf arithmetic can overflow for huge lanes.
+        while (index < (size >>> 1)) {
             int child = (index << 1) + 1;
-            if (child >= size) return;
             int right = child + 1;
             if (right < size
                     && keyKind.compareBits(
