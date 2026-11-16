@@ -1,0 +1,7 @@
+gate_implies_units_every_range	97656	0
+latin1_arm_alone_every_range	97656	0
+count_arm_alone_every_range	97656	0
+gate_true_cases	76590	0
+discriminator:gate_without_pair_condition	1	KILLED
+discriminator:lone_surrogates_stay_one_per_unit	1	KILLED
+RESULT	PASS	failures=0

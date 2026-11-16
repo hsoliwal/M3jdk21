@@ -1,0 +1,121 @@
+# Absorbing string-utility algorithms into java.base
+
+Written 2026-11-16. Companion to [HANDOVER.md](HANDOVER.md). Data: `record/absorb/` beside this file.
+
+## The decision
+
+The owner, 2026-11-16, in two question dialogs:
+
+1. Fork commons-lang, commons-text, commons-io, univocity-parsers, antlr4 and javaparser ("all"). Done; the forks
+   are untouched.
+2. "inline all as per M3String" means: **absorb the algorithms into java.base.** The string algorithms of the
+   utility libraries get one implementation in the JDK, on the M3 String owners, and the libraries call the JDK.
+
+This follows the owner's earlier rule: the JDK owns each fast implementation once, in java.base; no duplicate
+fast paths.
+
+## What binds the work
+
+- **Licence.** java.base is GPLv2 with the Classpath exception; the donors are Apache-2.0 (commons, Guava),
+  BSD-3-Clause (antlr4) or to be checked (univocity-parsers, javaparser). A rule recorded on 2026-10-07 (carried
+  from notes, not re-read today) says no Apache-derived code goes into `src/**`. So "absorb" here means a
+  clean-room implementation of the algorithm, written from its specification and the donor's documented
+  behaviour. The donor code is the oracle: it may enter the tree only as a test fixture that a differential test
+  runs against the JDK owner. If the owner wants donor code copied instead, that needs an explicit ruling.
+- **Public surface.** No new public or protected class or member without the owner's admission (rule of
+  2026-11-08). A kernel can land package-private at once; its public entry point is a separate decision (below).
+- **Behaviour.** A library method that is redirected to the JDK must return what it returned before, for every
+  input, null and empty arguments included. The donor's own test suite is the gate, on a stock JDK and on M3JDK.
+- **Measures.** Class tests answered from the M3 class masks are exact only for ASCII text; the Unicode
+  definitions (`Character.isLetter`, `isDigit`, `isWhitespace`) decide everything else.
+- **Proof.** As in the handover: kernel text copied into a harness on a stock JVM, or the class patched into the
+  stock JDK when it compiles there; discriminators; a jtreg test; in-VM runs stated as NOT_RUN until they happen.
+
+## Catalogue
+
+`absorb/ABSORB_CATALOGUE.tsv`, built by `tools/absorb_catalogue.py` from the copies M3jdk21 carries at
+`83d1ceca0e07`: every public static operation name of commons-lang3 3.17.0 `StringUtils` and
+`CharSequenceUtils`, Guava `Strings` and `Ascii`, and commons-text `WordUtils`, with overload count, source lines,
+`toCharArray` and `charAt` counts, and whether `java.lang.String` already has a public method of that name.
+
+172 operation names. 28 have a same-name `String` method (route DELEGATE: the library can call it, nothing to
+absorb). 144 do not (route ABSORB). The route and the family come from the name alone, so each row is a proposal.
+
+| Family | To absorb | Examples | Classic algorithm, and the M3 structure it can use |
+|---|---|---|---|
+| SLICE | 25 | `substringBefore`, `substringBetween`, `left`, `mid`, `abbreviate`, `truncate`, `remove`, `overlay` | One search, then slices of the composite: no copy |
+| SEARCH | 20 | `containsAny`, `containsNone`, `containsOnly`, `indexOfAny`, `indexOfAnyBut`, `countMatches`, `ordinalIndexOf` | Character-set bitmask (two words for ASCII), counted scans over bulk windows; the unit presence signal rejects early |
+| EMPTY_BLANK | 16 | `isNotBlank`, `isAnyBlank`, `defaultIfBlank`, `firstNonBlank` | The edge scan of leaf 6 |
+| BUILD | 13 | `leftPad`, `rightPad`, `center`, `rotate`, `reverse`, `wrap`, `appendIfMissing` | Tuples of the argument and a repeated pad: no copy |
+| EDGE | 12 | `stripStart`, `stripEnd`, `chomp`, `chop`, `deleteWhitespace`, `normalizeSpace` | Edge scans; run compaction in one pass |
+| CLASS_TEST | 11 | `isNumeric`, `isAlpha`, `isAlphanumeric`, `isWhitespace`, `isAllLowerCase`, `isAsciiPrintable` | Class masks when the text is ASCII, else the Unicode test per code point |
+| CASE | 11 | `capitalize`, `uncapitalize`, `swapCase`, `lowerCase` | First-change scan; the class masks prove "nothing to change" |
+| REPLACE | 7 | `replaceEach`, `replaceChars`, `replaceOnce`, `replaceIgnoreCase` | Aho-Corasick for many patterns; a translation table for chars |
+| SPLIT_JOIN | 6 | `splitByWholeSeparator`, `splitPreserveAllTokens`, `splitByCharacterTypeCamelCase` | Delimiter walk over bulk windows (leaf 7); boundary masks for camelCase |
+| COMPARE | 6 | `indexOfDifference`, `getCommonPrefix`, `compareIgnoreCase`, `equalsAny` | Longest common prefix by word-at-a-time mismatch over leaf runs |
+| DISTANCE | 3 | `getLevenshteinDistance`, `getJaroWinklerDistance`, `getFuzzyDistance` | Bit-parallel edit distance (Myers), banded when a threshold is given |
+| OTHER | 14 | `getDigits`, Guava `commonPrefix`, `commonSuffix`, `padStart`, `lenientFormat`, `Ascii.truncate` | Per operation |
+
+Not catalogued yet: commons-io, Guava `CharMatcher` / `Splitter` / `Joiner`, Spring `StringUtils`, the parsers
+(univocity scanning, Jackson number and string decoding), commons-text similarity and `StringSubstitutor`.
+
+## Order of work
+
+1. The 28 DELEGATE rows cost nothing in the JDK: they are fork changes (the library calls the `String` method
+   for a `String` argument).
+2. Kernels by family, most used first: SEARCH (character sets and counting), EDGE and EMPTY_BLANK (already half
+   there through leaf 6), CLASS_TEST, COMPARE, then SLICE and BUILD (composition, no algorithm), then REPLACE,
+   SPLIT_JOIN and DISTANCE.
+3. Each kernel: package-private in `java.lang` next to the M3 String owners, working on a flat String and on a
+   composite; a differential test against the donor method in the test tree; then its entry point.
+
+## Open decision: where a library calls the kernel
+
+A kernel in `java.lang` cannot be called by a library until it has an entry point. The choices:
+
+- **A facade in an M3 module** (`jdk.m3.text` exists with 26 source files): public static methods there, the
+  kernels reached through a qualified export of java.base. Matches the owner's earlier rule "libraries keep
+  upstream packages; jdk.m3 facades on M3 structures". A fork then needs M3JDK at run time, or a fallback.
+- **New public methods on `java.lang.String`.** Shortest call path; changes the Java SE surface of the fork.
+- **A new public class in `java.lang`.** Same remark.
+- **JDK-internal only** (through `JavaLangAccess`): JDK modules and library copies built as M3JDK modules can
+  call it; a fork on the class path cannot.
+
+**Taken by the owner on 2026-11-16 (question dialog): new methods on `java.lang.String`.** This admits new
+public `String` methods for absorbed operations; each pull request still lists the methods it adds.
+
+## How the forks call the JDK
+
+Taken by the owner on 2026-11-16 (question dialog): **M3JDK-only forks.** A fork is compiled against M3JDK and
+calls every `String` method directly, the new ones included; it then builds and runs only on M3JDK. No method
+handles and no fallbacks. A fork that upstream compiles for Java 8 (commons-lang does) is raised to the M3JDK
+level in the same change. Proof for a fork change without an M3JDK image: compile the fork's main sources
+against the stock JDK with the edited `String` patched in, and compare the changed methods with the released
+library jar on the same inputs.
+
+## Landed
+
+| Operation | New public method | Pull request |
+|---|---|---|
+| `countMatches` | `public int countMatches(int ch)` | M3jdk21 #3175, merged `74ba211ea9c2` |
+| `indexOfDifference` | `public int indexOfDifference(String other)` | M3jdk21 #3186, merged `b7200d690615` |
+
+**Lesson from `indexOfDifference`: the library's behaviour is found by testing, not assumed.** A plain
+first-differing-char rule disagreed with commons-lang3 3.22.0 on 84,574 of 21.9 million pairs, and a pure
+code-point rule on 418. The library moves the result back onto a high surrogate only when the difference is
+found inside the shorter string. The JDK method documents and implements exactly that, so the library can
+delegate. Run the donor jar as an oracle before writing the Javadoc of any absorbed operation.
+
+First fork change: hsoliwal/commons-lang #1, merged `db94e11f9ced`. `StringUtils.countMatches(CharSequence, char)`
+calls `String.countMatches(int)` and `isBlank(CharSequence)` calls `String.isBlank()` for a `String` argument; the
+compiler level in `pom.xml` goes from 1.8 to 21. Proof (`fork-commons-lang/` in the run record): the 264 main
+sources compiled against the stock JDK with the edited `String` patched in; the fork's `StringUtils` and the
+released 3.22.0 jar compared on 222,223 inputs for `isBlank` and 1,555,561 for `countMatches`, each text as a
+`String` and as a `StringBuilder`, plus `null`: 0 mismatches. Not run: the fork's Maven build and tests (its
+build plugins may reject non-Java-8 API until they are switched off), and anything inside an M3JDK VM.
+
+How it was proven, as the pattern for the next ones (`leaf11/` in the run record): the method text is checked to
+be verbatim in the head source, inserted into the stock `java/lang/String.java` from the JDK's `src.zip` together
+with a null-returning `m3()` shim, compiled into `java.base` with `--patch-module`, and run inside the real
+`java.lang.String` of the stock VM against a naive oracle and against the donor jar (commons-lang3 3.22.0). The
+jtreg test has M3 storage runs for CI.

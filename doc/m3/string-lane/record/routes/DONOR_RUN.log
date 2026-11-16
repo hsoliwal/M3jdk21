@@ -1,0 +1,6 @@
+START 2026-11-16T16:32:02+05:30
+atomize	1	2026-11-16T16:55:55+05:30	recipe com.synexia.rewrite.M3AtomizeInventory: parsed 1872 of 1872, tables 40, changed 0, errors 6 -> I:\m3-scratch\string-converge-20261116\apl\az
+planes	0	2026-11-16T16:56:00+05:30	atoms 64928 | EXACT:3743 clusters/16053 atoms LOGIC:2278 clusters/24360 atoms STRUCTURE:1029 clusters/2294 atoms SIMHASH:158 clusters/54036 atoms
+join	0	2026-11-16T16:57:03+05:30	joined 37377 atoms: {'NEAR': 32970, 'LOGIC': 2351, 'EXACT': 601, 'ABSENT': 1455}
+converge	0	2026-11-16T16:57:32+05:30	types 1813: CONVERGE_TO_OWNER 0 types / 0 specific atoms, SHARED_LOGIC 198 types / 6328 specific atoms, ABSORB 1615 types / 26366 specific atoms, KEEP 0 types / 0 specific atoms
+END failed=1 2026-11-16T16:57:32+05:30

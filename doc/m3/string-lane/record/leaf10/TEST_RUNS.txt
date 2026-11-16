@@ -1,0 +1,3 @@
+stock: PASS checks=3000
+base patched: PASS checks=3000
+head patched: PASS checks=3000

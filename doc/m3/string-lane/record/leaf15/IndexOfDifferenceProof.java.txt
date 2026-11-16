@@ -1,0 +1,138 @@
+// SPDX-License-Identifier: Apache-2.0 OR EPL-2.0
+// Copyright (c) 2026 Synexia, Hitesh Soliwal (hsoliwal@gmail.com) and others
+
+import java.lang.reflect.Method;
+import java.util.List;
+import java.util.stream.IntStream;
+import org.apache.commons.lang3.StringUtils;
+
+/**
+ * Proof of String.indexOfDifference(String) on a stock JVM whose java.lang.String carries the
+ * method text of the head source. Oracles: the documented rule written apart, and the donor
+ * operation, commons-lang3 StringUtils.indexOfDifference. Prints one row per check: name, cases,
+ * mismatches. Exit 1 on a mismatch or a surviving discriminator.
+ */
+public final class IndexOfDifferenceProof {
+    private static final char[] UNITS = {
+        'a', 'b', (char) 0xE9, (char) 0x100, (char) 0x101, (char) 0x200, (char) 0xD83D, (char) 0xDE42
+    };
+    private static final int MAX_LENGTH = 4;
+    private static final List<Integer> LONG_LENGTHS = List.of(7, 8, 9, 15, 16, 17, 63, 64, 65, 4_097);
+    private static final Method ANY = any();
+    private static int failures;
+
+    private IndexOfDifferenceProof() {}
+
+    public static void main(String[] args) {
+        List<String> texts = IntStream.rangeClosed(0, MAX_LENGTH).boxed()
+                .flatMap(length -> IntStream.range(0, (int) Math.pow(UNITS.length, length))
+                        .mapToObj(code -> digits(code, length)))
+                .toList();
+        long pairs = (long) texts.size() * texts.size();
+        report("public_vs_naive_all_pairs", pairs, count(texts, (a, b) -> a.indexOfDifference(b) != naive(a, b)));
+        report("donor_StringUtils_indexOfDifference", pairs,
+                count(texts, (a, b) -> a.indexOfDifference(b) != StringUtils.indexOfDifference(a, b)));
+        report("any_storage_kernel_counts_common_units", pairs, count(texts, (a, b) -> viaAny(a, b) != a.indexOfDifference(b)));
+        report("long_texts_every_difference_position", longCases(), longMismatches());
+        discriminator("proper_prefix_gives_shorter_length", "abc".indexOfDifference("abcde") == 3
+                && "abcde".indexOfDifference("abc") == 3);
+        discriminator("equal_content_gives_minus_one", new String("abc").indexOfDifference("abc") == -1
+                && "".indexOfDifference("") == -1);
+        discriminator("second_byte_of_a_wide_unit", text(0x100, 0x100).indexOfDifference(text(0x100, 0x101)) == 1
+                && text(0x100).indexOfDifference(text(0x200)) == 0);
+        discriminator("difference_inside_a_pair_reports_the_high_surrogate",
+                text(0xD83D, 'a').indexOfDifference(text(0xD83D, 0xDE42)) == 0
+                        && text('x', 0xD83D).indexOfDifference(text('x', 0xD83D, 0xDE42)) == 2
+                        && text(0xD83D, 'a').indexOfDifference(text(0xD83D, 'b')) == 1);
+        discriminator("mixed_coders", "ab".indexOfDifference(text('a', 'b', 0x100)) == 2
+                && text('a', 0x100).indexOfDifference("ab") == 1);
+        System.out.println("RESULT\t" + (failures == 0 ? "PASS" : "FAIL") + "\tfailures=" + failures);
+        System.exit(failures == 0 ? 0 : 1);
+    }
+
+    private interface Pair {
+        boolean differs(String a, String b);
+    }
+
+    private static long count(List<String> texts, Pair check) {
+        return texts.stream().mapToLong(a -> texts.stream().filter(b -> check.differs(a, b)).count()).sum();
+    }
+
+    private static String digits(int code, int length) {
+        char[] units = new char[length];
+        int[] rest = {code};
+        IntStream.range(0, length).forEach(index -> {
+            units[index] = UNITS[rest[0] % UNITS.length];
+            rest[0] /= UNITS.length;
+        });
+        return new String(units);
+    }
+
+    private static String text(int... units) {
+        char[] chars = new char[units.length];
+        IntStream.range(0, units.length).forEach(index -> chars[index] = (char) units[index]);
+        return new String(chars);
+    }
+
+    /** The documented rule, written apart from the method: unit scan, then the pair exception. */
+    private static int naive(String a, String b) {
+        int limit = Math.min(a.length(), b.length());
+        int same = IntStream.range(0, limit).filter(i -> a.charAt(i) != b.charAt(i)).findFirst().orElse(limit);
+        if (same == limit) return a.length() == b.length() ? -1 : limit;
+        boolean inside = same > 0 && Character.isHighSurrogate(a.charAt(same - 1))
+                && (Character.isLowSurrogate(a.charAt(same)) || Character.isLowSurrogate(b.charAt(same)));
+        return inside ? same - 1 : same;
+    }
+
+    private static long longCases() {
+        return LONG_LENGTHS.stream().mapToLong(length -> 2L * (length + 1)).sum();
+    }
+
+    /** One changed unit at every position of a long text, Latin-1 and UTF-16, plus no change. */
+    private static long longMismatches() {
+        return LONG_LENGTHS.stream().mapToLong(length -> IntStream.of(0, 1).mapToLong(wide ->
+                IntStream.rangeClosed(0, length).filter(at -> !longCase(length, at, wide == 1)).count()).sum()).sum();
+    }
+
+    private static boolean longCase(int length, int at, boolean wide) {
+        char[] left = new char[length];
+        IntStream.range(0, length).forEach(i -> left[i] = wide && i % 3 == 0 ? (char) 0x3B1 : (char) ('a' + i % 26));
+        char[] right = left.clone();
+        if (at < length) right[at] = (char) (right[at] + 1);
+        int expected = at < length ? at : -1;
+        return new String(left).indexOfDifference(new String(right)) == expected
+                && new String(right).indexOfDifference(new String(left)) == expected;
+    }
+
+    private static Method any() {
+        try {
+            Method method = String.class.getDeclaredMethod("commonUnits", String.class, int.class);
+            method.setAccessible(true);
+            return method;
+        } catch (ReflectiveOperationException failure) {
+            throw new IllegalStateException(failure);
+        }
+    }
+
+    /** The result built from the any-storage kernel, the path an M3-backed String takes. */
+    private static int viaAny(String a, String b) {
+        try {
+            int limit = Math.min(a.length(), b.length());
+            int same = (int) ANY.invoke(a, b, limit);
+            int units = IntStream.range(0, limit).filter(i -> a.charAt(i) != b.charAt(i)).findFirst().orElse(limit);
+            return same == units ? a.indexOfDifference(b) : Integer.MIN_VALUE;
+        } catch (ReflectiveOperationException failure) {
+            throw new IllegalStateException(failure);
+        }
+    }
+
+    private static void report(String name, long cases, long mismatches) {
+        failures += mismatches == 0 ? 0 : 1;
+        System.out.println(name + "\t" + cases + "\t" + mismatches);
+    }
+
+    private static void discriminator(String name, boolean detected) {
+        failures += detected ? 0 : 1;
+        System.out.println("discriminator:" + name + "\t1\t" + (detected ? "KILLED" : "SURVIVED"));
+    }
+}

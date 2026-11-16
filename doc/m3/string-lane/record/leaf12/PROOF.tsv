@@ -1,0 +1,18 @@
+applied	matches_sites=1	compile_sites=3	inserted_lines=36
+stock	cases	30048
+memo	cases	30048
+case_digests_differ	0
+memo:same_instance_on_second_call	PASS
+memo:stored_pattern_has_the_regex	PASS
+memo:long_regex_is_not_stored	PASS
+memo:invalid_regex_throws_every_time	PASS
+memo:null_regex_reaches_Pattern_compile	PASS
+memo:every_slot_reuse_returns_the_asked_regex	PASS
+memo:parallel_readers_get_the_asked_regex	PASS
+stock	ns_per_call	matches	291	
+stock	ns_per_call	replaceAll	226	
+stock	ns_per_call	split	247	
+memo	ns_per_call	matches	81	
+memo	ns_per_call	replaceAll	264	
+memo	ns_per_call	split	207	
+RESULT	PASS

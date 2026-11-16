@@ -1,0 +1,16 @@
+call_sites	operation
+90	append
+22	substring
+8	startsWith
+7	trim
+6	indexOf
+6	charAt
+5	new StringBuilder
+5	endsWith
+3	Pattern.compile
+2	toUpperCase
+2	toLowerCase
+1	matches
+1	concat
+1	String.format
+1	MessageFormat.format

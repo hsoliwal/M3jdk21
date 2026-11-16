@@ -1,0 +1,10 @@
+block_verbatim_in_head	1
+base_charAt_lines	6
+charAt_every_index_vs_expanded_text	3003	0
+list_stored_once_and_well_formed	3003	0
+too_wide_tuple_keeps_the_descent	1	0
+short_leaf_walk_falls_back	1	0
+tuple_reported_as_leaf_falls_back	1	0
+discriminator:search_with_greater_or_equal_is_wrong	1	KILLED
+owner_reads_per_unit_on_a_600_leaf_chain	base=301	head=1
+RESULT	PASS	failures=0

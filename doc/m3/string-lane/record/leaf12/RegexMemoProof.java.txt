@@ -1,0 +1,177 @@
+// SPDX-License-Identifier: Apache-2.0 OR EPL-2.0
+// Copyright (c) 2026 Synexia, Hitesh Soliwal (hsoliwal@gmail.com) and others
+
+import java.io.IOException;
+import java.io.PrintStream;
+import java.lang.reflect.Method;
+import java.security.MessageDigest;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HexFormat;
+import java.util.List;
+import java.util.function.Supplier;
+import java.util.regex.Pattern;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
+
+/**
+ * Differential harness for the regex memo of java.lang.String. Public API only in modes "cases"
+ * and "time", so run_proof.sh runs it on the unpatched stock JVM and on the same JVM with the
+ * stock String edited by the recipe. Mode "cases" writes one row per (regex, input): a SHA-256
+ * over the results and exceptions of matches, replaceFirst, replaceAll and split, taken three
+ * times so later rounds read the memo. Mode "memo" (patched JVM only) checks the stored
+ * instances by reflection. Mode "time" prints nanoseconds per call.
+ */
+public final class RegexMemoProof {
+    private static final List<String> FIXED = List.of(
+            "", "a", ",", "\\s+", "[,;]", "a|b", "(\\w+)@(\\w+)", "^x", "x$", "(?i)abc", "\\d{2,4}",
+            "a*", "(a)(b)?", "\\p{L}+", "(?<=a)b", "(x)\\1", "[^a-c]", ".", "\\.", "\\Q.\\E",
+            "(", "[a", "*a", "\\", "(?<n>a", "a{2,1}");
+    private static final List<String> INPUTS = List.of(
+            "", "a", "abc", "ABC", "a,b;c,,d", "x  y\tz", "user@host and me@there", "xx", "aab",
+            "2024-11-16", "café naïve", "a.b.c", "xaxbx", "aaaa", "b", "ab ab ab");
+    private static final List<String> REPLACEMENTS = List.of("-", "$1", "", "\\$");
+    private static final int GENERATED = 600;
+    private static final int ROUNDS = 3;
+    private static final int TIMED_CALLS = 2_000_000;
+
+    private RegexMemoProof() {}
+
+    public static void main(String[] args) throws Exception {
+        switch (args[0]) {
+            case "cases" -> cases(args[1]);
+            case "memo" -> memo();
+            default -> time();
+        }
+    }
+
+    /** More regexes than the memo has slots, so slots are reused and evicted. */
+    private static List<String> regexes() {
+        Stream<String> generated = IntStream.range(0, GENERATED).mapToObj(n -> "x{" + n + "}y?");
+        return Stream.concat(FIXED.stream(), generated).toList();
+    }
+
+    private static void cases(String file) throws IOException {
+        List<String> rows = new ArrayList<>();
+        List<String> regexes = regexes();
+        IntStream.range(0, ROUNDS).forEach(round -> regexes.forEach(regex ->
+                INPUTS.forEach(input -> rows.add(row(round, regex, input)))));
+        try (PrintStream out = new PrintStream(file, "UTF-8")) {
+            rows.forEach(out::println);
+        }
+        System.out.println("cases\t" + rows.size());
+    }
+
+    private static String row(int round, String regex, String input) {
+        StringBuilder results = new StringBuilder();
+        results.append(outcome(() -> input.matches(regex)));
+        REPLACEMENTS.forEach(replacement -> results
+                .append(outcome(() -> input.replaceFirst(regex, replacement)))
+                .append(outcome(() -> input.replaceAll(regex, replacement))));
+        results.append(outcome(() -> Arrays.toString(input.split(regex))))
+                .append(outcome(() -> Arrays.toString(input.split(regex, -1))))
+                .append(outcome(() -> Arrays.toString(input.split(regex, 2))));
+        return round + "|" + regex + "|" + input + "\t" + sha(results.toString());
+    }
+
+    private static String outcome(Supplier<Object> call) {
+        try {
+            return call.get() + "\u0001";
+        } catch (RuntimeException failure) {
+            return failure.getClass().getName() + ":" + failure.getMessage() + "\u0001";
+        }
+    }
+
+    private static String sha(String text) {
+        try {
+            byte[] hash = MessageDigest.getInstance("SHA-256").digest(text.getBytes("UTF-8"));
+            return HexFormat.of().formatHex(hash);
+        } catch (Exception impossible) {
+            throw new IllegalStateException(impossible);
+        }
+    }
+
+    private static void memo() throws Exception {
+        Method compiled = String.class.getDeclaredMethod("compiledRegex", String.class);
+        compiled.setAccessible(true);
+        check("same_instance_on_second_call", compiled.invoke(null, "a+b") == compiled.invoke(null, "a+b"));
+        check("stored_pattern_has_the_regex",
+                ((Pattern) compiled.invoke(null, "[0-9]+")).pattern().equals("[0-9]+"));
+        String longRegex = "a".repeat(300);
+        check("long_regex_is_not_stored",
+                compiled.invoke(null, longRegex) != compiled.invoke(null, longRegex));
+        check("invalid_regex_throws_every_time", throwsSyntax(compiled) && throwsSyntax(compiled));
+        check("null_regex_reaches_Pattern_compile", nullFails(compiled));
+        boolean exact = regexes().stream().filter(RegexMemoProof::valid).allMatch(regex ->
+                patternOf(compiled, regex).equals(regex) && patternOf(compiled, regex).equals(regex));
+        check("every_slot_reuse_returns_the_asked_regex", exact);
+        boolean parallel = IntStream.range(0, 200_000).parallel().allMatch(index -> {
+            String regex = "x{" + index % GENERATED + "}y?";
+            return patternOf(compiled, regex).equals(regex);
+        });
+        check("parallel_readers_get_the_asked_regex", parallel);
+    }
+
+    private static boolean valid(String regex) {
+        try {
+            Pattern.compile(regex);
+            return true;
+        } catch (RuntimeException invalid) {
+            return false;
+        }
+    }
+
+    private static String patternOf(Method compiled, String regex) {
+        try {
+            return ((Pattern) compiled.invoke(null, regex)).pattern();
+        } catch (ReflectiveOperationException failure) {
+            throw new IllegalStateException(failure);
+        }
+    }
+
+    private static boolean throwsSyntax(Method compiled) {
+        try {
+            compiled.invoke(null, "(");
+            return false;
+        } catch (ReflectiveOperationException failure) {
+            return failure.getCause() instanceof java.util.regex.PatternSyntaxException;
+        }
+    }
+
+    private static boolean nullFails(Method compiled) {
+        try {
+            compiled.invoke(null, (Object) null);
+            return false;
+        } catch (ReflectiveOperationException failure) {
+            StackTraceElement top = failure.getCause().getStackTrace()[0];
+            return failure.getCause() instanceof NullPointerException
+                    && top.getClassName().equals("java.util.regex.Pattern");
+        }
+    }
+
+    private static void check(String name, boolean ok) {
+        System.out.println("memo:" + name + "\t" + (ok ? "PASS" : "FAIL"));
+        if (!ok) System.exit(1);
+    }
+
+    private static void time() {
+        String input = "release-2024-11-16-build-0042";
+        timed("matches", () -> input.matches("[a-z]+-\\d{4}-\\d{2}-\\d{2}-build-\\d+"));
+        timed("replaceAll", () -> input.replaceAll("-\\d+", "#"));
+        timed("split", () -> input.split("-\\d\\d-"));
+    }
+
+    private static void timed(String name, Supplier<Object> call) {
+        int[] sink = {0};
+        Runnable pass = () -> {
+            for (int index = 0; index < TIMED_CALLS; index++) {
+                sink[0] += call.get().hashCode();
+            }
+        };
+        pass.run();
+        long start = System.nanoTime();
+        pass.run();
+        System.out.println("ns_per_call\t" + name + "\t" + (System.nanoTime() - start) / TIMED_CALLS
+                + "\t" + (sink[0] != 1 ? "" : " "));
+    }
+}

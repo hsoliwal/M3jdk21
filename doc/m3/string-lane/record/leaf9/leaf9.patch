@@ -1,0 +1,158 @@
+diff --git a/base/src/java.base/share/classes/java/lang/AbstractStringBuilder.java b/head/src/java.base/share/classes/java/lang/AbstractStringBuilder.java
+index 3fad3db..d2857d2 100644
+--- a/base/src/java.base/share/classes/java/lang/AbstractStringBuilder.java
++++ b/head/src/java.base/share/classes/java/lang/AbstractStringBuilder.java
+@@ -1964,6 +1964,13 @@ abstract sealed class AbstractStringBuilder implements Appendable, CharSequence
+     private final void appendChars(String s, int off, int end) {
+         M3String storage = s.m3();
+         if (storage != null && isLatin1() && !s.isLatin1()) {
++            // Prepared facts of the whole value prove every range Latin-1, without a slice.
++            M3StringFacts whole = storage.factsIfPrepared();
++            if (whole != null && whole.latin1) {
++                storage.getBytes(this.value, off, this.count, LATIN1, end - off);
++                count += end - off;
++                return;
++            }
+             M3String range = storage.slice(off, end);
+             M3StringFacts prepared = range.factsIfPrepared();
+             if (prepared != null && prepared.latin1) {
+@@ -2006,7 +2013,12 @@ abstract sealed class AbstractStringBuilder implements Appendable, CharSequence
+                 }
+             }
+         } else if (s.isLatin1()) {
+-            StringUTF16.putCharsSB(this.value, this.count, s, off, end);
++            if (storage != null) {
++                // One bulk inflate from the owner in place of a charAt dispatch per unit.
++                s.getBytes(this.value, off, this.count, UTF16, end - off);
++            } else {
++                StringUTF16.putCharsSB(this.value, this.count, s, off, end);
++            }
+         } else if (storage != null) {
+             s.getBytes(this.value, off, this.count, UTF16, end - off);
+         } else { // both UTF16
+diff --git a/head/test/jdk/java/lang/String/M3StringBuilderRangeAppendTest.java b/head/test/jdk/java/lang/String/M3StringBuilderRangeAppendTest.java
+new file mode 100644
+index 0000000..4708e2e
+--- /dev/null
++++ b/head/test/jdk/java/lang/String/M3StringBuilderRangeAppendTest.java
+@@ -0,0 +1,120 @@
++/*
++ * Copyright (c) 2026, Hitesh Soliwal. All rights reserved.
++ * GPLv2 with the Classpath exception.
++ *
++ * @test
++ * @summary Range appends of M3-backed Strings to StringBuilder and StringBuffer copy exact units
++ * @modules java.base/java.lang:+open
++ * @run main/othervm -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage
++ *      M3StringBuilderRangeAppendTest
++ * @run main/othervm -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage
++ *      -XX:-CompactStrings M3StringBuilderRangeAppendTest
++ */
++
++import java.lang.reflect.Field;
++import java.lang.reflect.Method;
++import java.util.Arrays;
++import java.util.List;
++import java.util.stream.IntStream;
++
++/**
++ * append(CharSequence, int, int) with an M3-backed String: a Latin-1 or a UTF-16 builder, and a
++ * source that is Latin-1 coded, a Latin-1 range of a UTF-16 owner, or wide. Short ranges and a
++ * small part of a long source take the copy path; a large part takes the piece path. Every
++ * result is compared with the units built by array copies, without and with prepared facts.
++ */
++public class M3StringBuilderRangeAppendTest {
++    private static final char EURO = (char) 0x20AC;
++    private static final int LONG = 2_000;
++    private static final List<String> PREFIXES = List.of("", "p", "wide" + EURO);
++    private static final Field STRING_M3 = optionalField("java.lang.String", "m3");
++    private static int checks;
++    private static int prepared;
++
++    /** A source String, the units it must hold, and the part of it that is appended. */
++    private record Source(String value, char[] units) {
++        static Source admitted(char[] units) {
++            return new Source(new String(units), units);
++        }
++
++        Source slice(int begin, int end) {
++            return new Source(value.substring(begin, end), Arrays.copyOfRange(units, begin, end));
++        }
++    }
++
++    public static void main(String[] args) throws Exception {
++        for (Source source : sources()) {
++            checkRanges(source);
++            if (prepareFacts(source.value())) {
++                prepared++;
++                checkRanges(source);
++            }
++        }
++        System.out.println("PASS checks=" + checks + "|preparedFacts=" + prepared);
++    }
++
++    private static List<Source> sources() {
++        Source latin = Source.admitted(fill(LONG, 'a', 'z'));
++        Source wide = Source.admitted(fill(LONG, (char) 0x3B1, (char) 0x3C9));
++        Source mixed = Source.admitted((EURO + new String(fill(LONG, 'a', 'z'))).toCharArray());
++        return List.of(latin, wide, mixed, mixed.slice(1, LONG + 1), mixed.slice(1, 40),
++                latin.slice(3, 20), wide.slice(5, 70), Source.admitted(new char[0]),
++                Source.admitted(new char[] {'x'}), Source.admitted(new char[] {EURO}));
++    }
++
++    private static char[] fill(int length, char first, char last) {
++        char[] units = new char[length];
++        IntStream.range(0, length)
++                .forEach(index -> units[index] = (char) (first + index % (last - first + 1)));
++        return units;
++    }
++
++    /** Whole, empty, short, a small part of a long source, and a part large enough to lift. */
++    private static void checkRanges(Source source) {
++        int length = source.units().length;
++        int[][] ranges = {
++            {0, length}, {0, 0}, {length, length}, {Math.min(1, length), length},
++            {0, Math.min(5, length)}, {Math.min(10, length), Math.min(110, length)},
++            {Math.min(7, length), Math.min(1_207, length)}
++        };
++        Arrays.stream(ranges).forEach(range -> PREFIXES.forEach(prefix -> {
++            same(new StringBuilder(prefix).append(source.value(), range[0], range[1])
++                    .append('|').toString(), prefix, source, range);
++            same(new StringBuffer(prefix).append(source.value(), range[0], range[1])
++                    .append('|').toString(), prefix, source, range);
++        }));
++    }
++
++    private static void same(String actual, String prefix, Source source, int[] range) {
++        checks++;
++        char[] expected = (prefix + new String(source.units(), range[0], range[1] - range[0])
++                + '|').toCharArray();
++        char[] units = new char[actual.length()];
++        IntStream.range(0, units.length).forEach(index -> units[index] = actual.charAt(index));
++        if (!Arrays.equals(units, expected)) {
++            throw new AssertionError("range " + range[0] + ".." + range[1] + " of a source of "
++                    + source.units().length + " units after prefix length " + prefix.length());
++        }
++    }
++
++    /** Prepares the facts of an M3-backed String; false when the String has no M3 owner. */
++    private static boolean prepareFacts(String value) throws Exception {
++        Object storage = STRING_M3 == null ? null : STRING_M3.get(value);
++        if (storage == null) return false;
++        Method facts = storage.getClass().getDeclaredMethod("facts");
++        facts.setAccessible(true);
++        facts.invoke(storage);
++        return true;
++    }
++
++    /** Null on a JDK without the M3 String owners, so the oracle itself can run anywhere. */
++    private static Field optionalField(String owner, String name) {
++        try {
++            Field field = Class.forName(owner).getDeclaredField(name);
++            field.setAccessible(true);
++            return field;
++        } catch (ClassNotFoundException | NoSuchFieldException absent) {
++            return null;
++        }
++    }
++}

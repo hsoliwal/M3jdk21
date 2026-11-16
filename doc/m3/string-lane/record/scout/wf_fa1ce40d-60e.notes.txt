@@ -1,0 +1,51 @@
+SCOUT NOTES
+Sources and their limits. All make, module-info, pack and test citations are from K:/m3-work/wt-fix3, a checkout of 2026-11-14 (HEAD 0272c943666f, two days older than master). In that working tree the directories m3/vendor/third_party/lucene-* and opennlp-tools are not checked out on disk; I read them from the commit's blobs with 'git show HEAD:<path>' under GIT_NO_LAZY_FETCH=1 (no network, nothing written). Line numbers for those files are blob line numbers. Nothing was compiled or run.
+
+Findings on the four questions.
+(1) What exists today: m3/tooling/module-packs/nlp-search (289 files in this checkout, not 14) builds named modules as JMODs with Python drivers and the supplied JDK's javac, jar, jmod and jlink, then links a separate image; it is not part of make. Versions: Lucene 9.10.0 (five modules, each with an upstream module-info.java; core has multi-release sources for 19, 20, 21) and OpenNLP Tools 2.4.0 (no upstream descriptor; the pack supplies one), plus lucene-analysis-opennlp taken from fork commit d1b7235f1ba1, slf4j-api 2.0.12 and slf4j-simple. m3/vendor/third_party-m3/nlp-search holds 13 overlay Java files (3 Lucene core, 1 queryparser, 9 OpenNLP) that replace or add owner files during the pack build. A second lane (current_forks.py, current-forks/) targets the fork heads, where Lucene needs Java 25. The parser pack is built the same way (Python driver, its own workflow). Packs named jackson and text-tools are not in this checkout, so how they build is not established.
+(2) How a module enters the image: the only hard requirement is src/<module>/share/classes/module-info.java (Modules.gmk:83-129); make/modules/<module>/Java.gmk is optional and carries lint and COPY settings; make/conf/module-loader-map.conf lists a module only if it goes to the boot or platform loader (jdk.m3.annotations, collections, graphics, io, logging, paradigm are platform; jdk.m3.llm is not listed, so application loader); legal notices come from src/<module>/share/legal; tests sit under test/jdk/jdk/m3/<area>. No jdk.m3 module is in make/conf/docs-modules.conf. jdk.m3.graphics has no Lib.gmk in this checkout, and src/jdk.m3.tornado does not exist in it (seven jdk.m3 modules).
+(3) Exports: java.base exports no M3 internal package to any module as of 2026-11-14; jdk.internal.access is the only route and no M3 or library module is on its list.
+(4) Closure: the Lucene modules need only JDK modules (java.logging, java.xml, optional jdk.unsupported and jdk.management, and jdk.incubator.vector if the vector provider is kept); OpenNLP needs org.slf4j; analysis.opennlp needs all of them.
+
+Two matters outside this angle that the owner should see. First, jdk.internal.mindex.M3Automaton and three sibling files at master (I:/m3-scratch/string-converge-20261116/owner/..., 2,980 lines) carry an Apache-2.0 header and state their Lucene 9.10.0 lineage (M3Automaton.java:1-15) inside java.base; the string-lane handover section 7 lists this as an open licence ruling. Once Lucene is a module of the same image, there are two automaton cores, which touches the no-duplicate-fast-path rule. Second, the approved layout of 2026-11-08 quoted in make/m3/integrate/AREAS.tsv:27 places 'nlp' under a jdk.m3.search module that does not exist; that needs reconciling with upstream module names before leaf 1 is closed.
+
+Not established: java.base module-info.java and JavaLangAccess at master (the provided master trees lack both); the lint kinds Lucene and OpenNLP raise under the JDK's -Xlint:all -Werror; whether String.getChars over a range flattens an M3-backed value; the state of RULES.tsv and AREAS.tsv at master.
+
+SKEPTIC MISSED
+All make, module, pack and HotSpot citations are from K:/m3-work/wt-fix3 at HEAD 0272c943666f (2026-11-14, two days older than master). Vendored Lucene, OpenNLP and SLF4J files are excluded from that sparse working tree; I read them from commit blobs with read-only git ls-tree, show and grep, lazy fetch disabled. Nothing was compiled or run. Disclosure: I wrote two temporary listing files outside every source tree, K:\codex-work\agent-temp\claude\ad86ad206b99821e\869c2ac5-c1de-4638-b863-5a63569eeba8\scratchpad\vend.lst and K:\codex-work\agent-temp\claude\ad86ad206b99821e\869c2ac5-c1de-4638-b863-5a63569eeba8\scratchpad\vend.err.
+
+What the scout overlooked:
+
+1. M3 storage is off by default. UseM3StringStorage is an EXPERIMENTAL product flag, default false (src/hotspot/share/runtime/globals.hpp:1161-1162), injected into String.M3_JOINED_STRINGS (threads.cpp:352; master String.java:247-251), and rejected together with JVMCI, UseStringDeduplication, CDS archive operations and Flight Recorder (arguments.cpp:3021-3048). In a default VM no module "uses the M3 string structure". The scout left this as unverified; it decides whether leaves 4 and 5 prove anything. Neither CI lane exercises it: both run on Temurin 21 (m3-current-nlp-search-jmods-20261018.yml:51-55; m3sdk-jmod-receiver.yml:127-135 with --compiler-source-proof), and the pack records "whole_jdk_or_m3_string_promotion": False (build.py:229).
+
+2. The public path already keeps the composite. String.getChars over a range copies leaf by leaf at master (String.java:1836-1847, M3String.java:1120-1128, M3StringTuple.java:42-47, M3StringPool.java:969-980), and java.io.StringReader already uses the code-unit cursor (StringReader.java:57). A better leaf after the pilot is a differential test under the flag, with no export.
+
+3. A third version lane exists. CURRENT_FORKS.md:55-66 and current_forks.py:281, 388 build the fork sources for Java 21 with a staging recipe and --enable-preview. Version mismatch to record: the vendored trees are Apache release sources (Lucene 9.10.0, manifest commit 695c0ac8; OpenNLP 2.4.0) plus 13 overlay files; analysis.opennlp is pinned to fork commit d1b7235f, while CI checks out lucene 873b6167 and opennlp 8b647d1d (CURRENT_FORK_REFS.json). Apart from those 33 files, no fork source is carried.
+
+4. Service binding defeats part of opt-in resolution (Resolver.java:229-240, Configuration.java:313): resolving Lucene core binds every provider module in the image, and through analysis.opennlp also OpenNLP and SLF4J. This bears on which modules ship at all.
+
+5. make/Images.gmk:78 uses --dedup-legal-notices=error-if-not-same-content: same-name legal files with different content fail the image link.
+
+6. ct.sym is generated for DOCS_MODULES only (make/modules/jdk.compiler/Gendata.gmk:39) and no jdk.m3 module is in docs-modules.conf, so 'javac --release 21' on the image would not see the library modules (inferred, not run).
+
+7. Lucene's public Version.getPackageImplementationVersion() (Version.java:589-606) depends on a manifest that jmods do not have; the pack's flatten step deletes it too (jmod_image.py:40-42).
+
+8. The pinned pack ships ten JMODs and org.apache.lucene.analysis.opennlp is not one of them (README.md:25-36, build.py:95-98).
+
+9. The overlay adds public types with M3 in the name to upstream packages (org.apache.lucene.analysis.M3TextReaders, opennlp.tools.tokenize.M3Tokenizers), and a fourth Lucene overlay file, queryparser QueryParserBase.java, is missing from the scout's leaf list.
+
+10. The ledger's existing pattern for libraries (RULES.tsv:23-26, R3-LIB) relocates them to com.m3.lib.* packages and jdk.m3.lib.<lib> modules; jdk.m3.graphics, the scout's worked example, was absorbed with package and type renames (share/legal/skija.md, 'Changes made'). Both differ from the rule that libraries keep upstream packages, so the Lucene route needs its own ledger rows.
+
+11. A stale CI reference: m3sdk-jmod-receiver.yml:17 and 139 name m3/tooling/module-packs/text-tools, which is not in the commit tree (packs at HEAD: collections, kernel, nlp-search, parser, parser-openrewrite, recipes). That job is the only one that runs the pinned nlp-search build.
+
+Wrong rows in the scout's text:
+- MR-6: 194 org.slf4j import lines, not 193.
+- MR-6: slf4j-api is 46 sources plus one descriptor, not 47 plus one.
+- MR-6: COPY_FILES is not forwarded to the module compile (CompileJavaModules.gmk:94-116).
+- MR-5: the id seed comes from /dev/urandom first (StringHelper.java:239-242), nanoTime is the fallback; and pinning tests.seed cannot give byte-equal indexes because of the timestamp and runtime diagnostics (IndexWriter.java:5013-5020).
+- MR-2: item 1 (descriptor unchanged) and item 4 (annotate the descriptor) contradict each other; the annotation is not required (Preview.java:139-143).
+- MR-2: treating the vector provider as optional ignores the LinkageError at VectorizationProvider.java:169-171.
+- Notes: "builds named modules as JMODs ... plus lucene-analysis-opennlp" is inexact; that module is compiled to a jar and not packaged.
+- MR-4: the stated gain ("chunk-wise reads") matches none of the existing accessors.
+
+Confirmed on spot-check: nlp-search pack 289 files, overlay 13 Java files, seven jdk.m3 modules, no Lib.gmk for jdk.m3.graphics, jdk/internal/mindex 48 files, automaton core 2,980 lines with Apache-2.0 headers and Lucene 9.10.0 lineage, no jackson or text-tools pack in this commit.

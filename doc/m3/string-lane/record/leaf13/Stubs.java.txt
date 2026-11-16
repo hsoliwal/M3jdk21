@@ -1,0 +1,114 @@
+// SPDX-License-Identifier: Apache-2.0 OR EPL-2.0
+// Copyright (c) 2026 Synexia, Hitesh Soliwal (hsoliwal@gmail.com) and others
+
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * Proof stubs, never shipped: the members of the java.lang owners that the copied M3StringTuple
+ * text calls. M3StringLeafCursor here is an independent in-order walk with the documented
+ * contract (scalar owner, start inside it, length; adjacent ranges of one owner coalesced), plus
+ * two switches that make it misbehave so the guards of the copied text can be exercised.
+ */
+abstract class M3StringOwner {
+    static long reads;
+    final int length;
+
+    M3StringOwner(int length) {
+        this.length = length;
+    }
+
+    abstract char charAt(int index);
+}
+
+final class Leaf extends M3StringOwner {
+    private final char[] units;
+
+    Leaf(char[] units) {
+        super(units.length);
+        this.units = units;
+    }
+
+    @Override
+    char charAt(int index) {
+        reads++;
+        return units[index];
+    }
+}
+
+final class M3String {
+    private final M3StringOwner owner;
+    private final int start;
+    private final int length;
+
+    M3String(M3StringOwner owner, int start, int length) {
+        this.owner = owner;
+        this.start = start;
+        this.length = length;
+    }
+
+    M3StringOwner owner() {
+        return owner;
+    }
+
+    int start() {
+        return start;
+    }
+
+    int length() {
+        return length;
+    }
+
+    char charAt(int index) {
+        M3StringOwner.reads++;
+        return owner.charAt(start + index);
+    }
+}
+
+final class M3StringLeafCursor {
+    static boolean dropLast;
+    static boolean reportTuple;
+    private final List<Object[]> ranges = new ArrayList<>();
+    private int next = -1;
+
+    M3StringLeafCursor(M3StringOwner owner, int start, int count, boolean coalesceAdjacent) {
+        collect(owner, start, count, coalesceAdjacent);
+        if (dropLast && !ranges.isEmpty()) ranges.remove(ranges.size() - 1);
+    }
+
+    private void collect(M3StringOwner owner, int start, int count, boolean coalesce) {
+        if (count == 0) {
+            return;
+        }
+        if (owner instanceof M3StringTuple tuple && !reportTuple) {
+            int leftLength = tuple.left.length();
+            int inLeft = Math.max(0, Math.min(count, leftLength - start));
+            collect(tuple.left.owner(), tuple.left.start() + start, inLeft, coalesce);
+            int rightStart = Math.max(0, start - leftLength);
+            collect(tuple.right.owner(), tuple.right.start() + rightStart, count - inLeft, coalesce);
+            return;
+        }
+        Object[] last = ranges.isEmpty() ? null : ranges.get(ranges.size() - 1);
+        if (coalesce && last != null && last[0] == owner && (int) last[1] + (int) last[2] == start) {
+            last[2] = (int) last[2] + count;
+        } else {
+            ranges.add(new Object[] {owner, start, count});
+        }
+    }
+
+    boolean next() {
+        return ++next < ranges.size();
+    }
+
+    M3StringOwner owner() {
+        return (M3StringOwner) ranges.get(next)[0];
+    }
+
+    int start() {
+        return (int) ranges.get(next)[1];
+    }
+
+    int length() {
+        return (int) ranges.get(next)[2];
+    }
+}

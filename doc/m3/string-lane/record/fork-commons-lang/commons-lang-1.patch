@@ -1,0 +1,41 @@
+diff --git a/pom.xml b/pom.xml
+index 875ab1c..4b824a5 100644
+--- a/pom.xml
++++ b/pom.xml
+@@ -123,8 +123,8 @@
+     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+     <!-- project.build.outputTimestamp is managed by Maven plugins, see https://maven.apache.org/guides/mini/guide-reproducible-builds.html -->
+     <project.build.outputTimestamp>2026-11-11T19:48:59Z</project.build.outputTimestamp>
+-    <maven.compiler.source>1.8</maven.compiler.source>
+-    <maven.compiler.target>1.8</maven.compiler.target>
++    <maven.compiler.source>21</maven.compiler.source>
++    <maven.compiler.target>21</maven.compiler.target>
+     <!--
+        This is also  used to generate download_xxx file name.
+        To override this when generating the download page:
+diff --git a/src/main/java/org/apache/commons/lang3/StringUtils.java b/src/main/java/org/apache/commons/lang3/StringUtils.java
+index cf94148..2a78fc6 100644
+--- a/src/main/java/org/apache/commons/lang3/StringUtils.java
++++ b/src/main/java/org/apache/commons/lang3/StringUtils.java
+@@ -1532,6 +1532,10 @@ public static int countMatches(final CharSequence str, final char ch) {
+         if (isEmpty(str)) {
+             return 0;
+         }
++        if (str instanceof String) {
++            // M3JDK: counting has one implementation, in java.lang.String.
++            return ((String) str).countMatches(ch);
++        }
+         int count = 0;
+         // We could also call str.toCharArray() for faster lookups but that would generate more garbage.
+         for (int i = 0; i < str.length(); i++) {
+@@ -3612,6 +3616,10 @@ public static boolean isAsciiPrintable(final CharSequence cs) {
+      * @since 3.0 Changed signature from isBlank(String) to isBlank(CharSequence)
+      */
+     public static boolean isBlank(final CharSequence cs) {
++        if (cs instanceof String) {
++            // M3JDK: the white space test of a String has one implementation, in java.lang.String.
++            return ((String) cs).isBlank();
++        }
+         final int strLen = length(cs);
+         for (int i = 0; i < strLen; i++) {
+             if (!Character.isWhitespace(cs.charAt(i))) {

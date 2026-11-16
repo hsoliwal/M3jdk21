@@ -1,0 +1,7 @@
+fork	parent	default_branch_at	license_as_reported_by_github	private
+hsoliwal/commons-lang	apache/commons-lang	master@e2a0789bc9	Apache-2.0	false
+hsoliwal/commons-text	apache/commons-text	master@2728206b64	Apache-2.0	false
+hsoliwal/commons-io	apache/commons-io	master@31cc5e824d	Apache-2.0	false
+hsoliwal/univocity-parsers	uniVocity/univocity-parsers	master@7e7d1b3c0a	-	false
+hsoliwal/antlr4	antlr/antlr4	dev@45be27daf0	BSD-3-Clause	false
+hsoliwal/javaparser	javaparser/javaparser	master@e50f05fbbf	NOASSERTION	false

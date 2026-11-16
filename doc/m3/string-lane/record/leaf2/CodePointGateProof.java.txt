@@ -1,0 +1,88 @@
+// SPDX-License-Identifier: Apache-2.0 OR EPL-2.0
+// Copyright (c) 2026 Synexia, Hitesh Soliwal (hsoliwal@gmail.com) and others
+
+import java.util.List;
+import java.util.stream.IntStream;
+
+/**
+ * Stock-JVM proof of the claim behind the codePointCount gate of an M3-backed String: when a value
+ * holds no surrogate pair (it is Latin-1 coded, or its code point count equals its unit count),
+ * every range holds one code point per unit, so codePointCount(begin, end) == end - begin.
+ * The oracle is the stock String.codePointCount. Prints one row per check: name, cases,
+ * mismatches. Exit 1 on a mismatch or a surviving discriminator.
+ */
+public final class CodePointGateProof {
+    private static final char[] UNITS = {'a', (char) 0xE9, (char) 0x100, (char) 0xD83D, (char) 0xDE42};
+    private static final int MAX_LENGTH = 7;
+    private static final int LATIN1_LIMIT = 0xFF;
+    private static int failures;
+
+    private CodePointGateProof() {}
+
+    public static void main(String[] args) {
+        List<String> corpus = corpus();
+        long gated = corpus.stream().filter(CodePointGateProof::gate).count();
+        report("gate_implies_units_every_range", corpus,
+                text -> !gate(text) || everyRange(text, true));
+        report("latin1_arm_alone_every_range", corpus,
+                text -> !latin1(text) || everyRange(text, true));
+        report("count_arm_alone_every_range", corpus,
+                text -> !pairFree(text) || everyRange(text, true));
+        System.out.println("gate_true_cases\t" + gated + "\t0");
+        discriminator("gate_without_pair_condition",
+                corpus.stream().anyMatch(text -> !gate(text) && !everyRange(text, true)));
+        discriminator("lone_surrogates_stay_one_per_unit",
+                everyRange(new String(new char[] {(char) 0xDE42, 'a', (char) 0xD83D}), true));
+        System.out.println("RESULT\t" + (failures == 0 ? "PASS" : "FAIL") + "\tfailures=" + failures);
+        System.exit(failures == 0 ? 0 : 1);
+    }
+
+    private static List<String> corpus() {
+        return IntStream.rangeClosed(0, MAX_LENGTH).boxed()
+                .flatMap(length -> IntStream.range(0, (int) Math.pow(UNITS.length, length))
+                        .mapToObj(code -> digits(code, length)))
+                .toList();
+    }
+
+    private static String digits(int code, int length) {
+        char[] text = new char[length];
+        int[] rest = {code};
+        IntStream.range(0, length).forEach(index -> {
+            text[index] = UNITS[rest[0] % UNITS.length];
+            rest[0] /= UNITS.length;
+        });
+        return new String(text);
+    }
+
+    private static boolean latin1(String text) {
+        return text.chars().allMatch(unit -> unit <= LATIN1_LIMIT);
+    }
+
+    private static boolean pairFree(String text) {
+        return text.codePointCount(0, text.length()) == text.length();
+    }
+
+    /** The gate of String.codePointCount for an M3-backed value, restated on a flat String. */
+    private static boolean gate(String text) {
+        return latin1(text) || pairFree(text);
+    }
+
+    private static boolean everyRange(String text, boolean expected) {
+        boolean all = IntStream.rangeClosed(0, text.length()).allMatch(begin ->
+                IntStream.rangeClosed(begin, text.length()).allMatch(end ->
+                        text.codePointCount(begin, end) == end - begin));
+        return all == expected;
+    }
+
+    private static void report(String name, List<String> corpus,
+            java.util.function.Predicate<String> check) {
+        long mismatches = corpus.stream().filter(check.negate()).count();
+        failures += mismatches == 0 ? 0 : 1;
+        System.out.println(name + "\t" + corpus.size() + "\t" + mismatches);
+    }
+
+    private static void discriminator(String name, boolean detected) {
+        failures += detected ? 0 : 1;
+        System.out.println("discriminator:" + name + "\t1\t" + (detected ? "KILLED" : "SURVIVED"));
+    }
+}

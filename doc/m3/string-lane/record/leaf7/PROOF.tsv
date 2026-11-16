@@ -1,0 +1,12 @@
+PositionKernelBase	copied_lines=37	windowFor=0
+PositionKernel	copied_lines=45	windowFor=1
+single_hit_sweep_latin1	1932	0
+single_hit_sweep_utf16	1932	0
+random_vs_oracle_and_base	20000	0
+latin1_gate_reads_nothing	2	0
+forward_copy_bound_2d_plus_32	67	0
+split_scenario_units_copied	length=200	base=2775	head=780
+split_scenario_units_copied	length=4000	base=1005500	head=15980
+split_scenario_units_copied	length=40000	base=19437056	head=159980
+discriminator:mutant_advance_by_window_size	1	KILLED
+RESULT	PASS	failures=0

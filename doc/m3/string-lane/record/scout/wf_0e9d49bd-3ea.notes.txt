@@ -1,0 +1,124 @@
+SCOUT NOTES
+SOURCES AND LIMITS. String.java and M3StringFacts.java: CURRENT copies under leaf1/head. All other java.lang owners: master-java-lang. java.util.regex: owner/src. Test names and java.util.Objects: K:/m3-work/wt-fix3, the 2026-11-14 checkout (two days older than master). Nothing was compiled, run or measured; every gain is an estimate. Line numbers are from files I read. HANDOVER sections 2 and 3 read first.
+
+KEY FACTS BEHIND THE MATRIX. value() on an M3 String = M3String.materialize() = JNI nativeByteShadow of the whole value, never cached (String.java 5592-5595, M3String.java 1369-1371). compatibilityValue() is NOT a flatten: it returns one shared empty sentinel (M3String.java 1373-1386). charShadow() = JNI char[] (1389-1391). M3String.charAt = Objects.checkIndex + owner.charAt (672-675); tuple charAt recurses left/right with two checks per level and no finger (M3StringTuple.java 34-39); atom charAt = checkIndex + fence + Unsafe read (M3StringAtom.java 376-383). Atoms are off-heap; bulk getChars/getBytes of an atom are per-byte Unsafe loops (434-503), no copyMemory anywhere in the owners.
+
+MATRIX (CURRENT String.java lines; C=COMPOSITE, F=FACTS, U=UNIT_LOOP, X=FLATTEN, N=NO_M3_PATH)
+String() | N flat empty | - | 270
+String(String) | C shares owner; value = sentinel | M3String.compatibilityValue | 287-294
+String(char[]), (char[],int,int) | C admit (snapshot copy, pool intern) | maybeAdmit -> M3String.admit -> M3StringPool.internChars | 305, 330, 5393-5407, 5499
+String(int[],int,int) | C admit | maybeAdmitCodePoints | 367-382
+String(byte[],int hibyte,int,int), (byte[],int hibyte) | C admit of a flat candidate | maybeAdmit(byte[],byte) | 437-462, 494
+String(byte[],int,int,String|Charset), (byte[],String|Charset), (byte[],int,int), (byte[]) | C admit; ASCII/Latin-1 straight from the source bytes | decodeForM3Construction -> maybeAdmitDecodedSingleByte | 531-592, 612-700, 1473-1550
+String(StringBuffer) | C via buffer.toString() | - | 1561
+String(StringBuilder) | X of the builder lane (asb.getValue() -> m3EnsureFlat, AbstractStringBuilder 1828-1831, 690-696), then admit | String(AbstractStringBuilder,Void) | 1580, 5429-5444
+length(), isEmpty() | F O(1) coordinate | M3String.length | 1592-1609
+charAt(int) | U by definition (owner dispatch, tuple O(height)) | M3String.charAt 672 | 1629-1633
+codePointAt, codePointBefore | U, 1-2 charAt | String.charAt | 1663-1674, 1706-1718
+codePointCount | C geometry up to 32768 units (first use scans with a cursor, 64-slot cache) else slice.facts() | M3StringCodePointPrecompute.prepare | 1746-1756
+offsetByCodePoints | F (Latin-1, or codePointCount == length if prepared) -> geometry -> else Character.offsetByCodePoints(this) U | - | 1783-1803
+getChars(int,int,char[],int) | C bulk leaf-path copy | M3String.getChars 1120 -> M3StringPool.copyCharsFromPath 969 | 1836-1841
+getBytes(int,int,byte[],int) | C bulk | M3String.getBytes 1130 | 1894-1900
+getBytes(String), getBytes(Charset), getBytes() | C encode; facts() first (full scan if unprepared); ASCII/Latin-1 bulk; non-ASCII UTF-8 cursor U (1175-1200); ISO/ASCII with unmappable units charAt U (1216-1229); other charsets CharBuffer.wrap(M3String) U | M3String.encode 1149 | 1928-1977
+equals(Object) | both M3: identity and hash F, then run-wise bulk; M3 vs flat: cached-hash F then U | Bridge.contentEquals 31 -> M3String.contentEquals 1037 -> compareFlatPrefix 1107 | 1997-2009
+contentEquals(StringBuffer), contentEquals(CharSequence) | U charAt both sides (String argument -> equals); flat receiver + lane builder: X of the builder via getValue (2063) | - | 2045-2060, 2094-2120
+equalsIgnoreCase | -> regionMatches(true,..) | - | 2181-2185
+compareTo | both M3 run-wise bulk; mixed U | Bridge.compareTo 44 -> comparePrefix 1069 / compareFlatPrefix 1107 | 2232-2237
+CASE_INSENSITIVE_ORDER.compare, compareToIgnoreCase | U codePointAt both sides | - | 2274-2296, 2333
+regionMatches(int,String,int,int) | F (same coordinate, prepared hashes) then U charAt, no cursor | - | 2383-2401
+regionMatches(boolean,int,String,int,int) | F (ASCII case hashes if prepared) then U charAt | mixedAsciiCaseHashDiffers 2143 | 2483-2533
+startsWith(String,int), startsWith(String), endsWith | M3 receiver: F gates then U bounded by the prefix (cursor only for a prefix of 64+ units on a tuple); flat receiver + M3 prefix: X prefix.value() | Bridge.startsWith 67-97, M3String.startsWith 1402 | 2565-2575, 2612, 2627
+hashCode() | whole owner F (owner.javaHash); slice: facts() full scan + range slot | Bridge.hashCodeValue 99 -> M3String.hashCodeValue 690 | 2653-2659
+indexOf(int), (int,int), (int,int,int) | F gate if prepared; under 256 or over 32768 units: new byte[] window + getBytes + stock scan per call; between: block signals and masks | M3String.indexOf 1437 -> M3StringPositionPrecompute.indexOf 43 / linearIndexOf 235 | 2693, 2749-2757, 2803-2810
+lastIndexOf(int), (int,int) | same, reverse | M3StringPositionPrecompute.lastIndexOf 88 / linearLastIndexOf 252 | 2839, 2877-2885
+indexOf(String), (String,int), (String,int,int) | F gates; M3 needle: cached KMP/BMH plan, cursor U; flat needle: U candidate loop | Bridge.indexOf 103 -> M3StringSearchPrecompute.indexOf 279 / M3String.indexOf 1500 | 2905, 2939-2944, 2973-2982
+lastIndexOf(String), (String,int) | same, reverse | Bridge.lastIndexOf 124 -> M3StringSearchPrecompute.lastIndexOf 315 / M3String.lastIndexOf 1526 | 3044, 3065-3069
+substring(int), substring(int,int), subSequence | C O(1) slice | Bridge.substring 143 | 3141, 3167-3179, 3214
+concat(String) | C tuple; a slice operand pays facts() in internTuple | m3Concat 5561 -> M3String.join 240 -> M3StringPool.concat 570, internTuple 643 | 3238-3246
+replace(char,char) | F gate; C pieces; one indexOf(char) restart per hit | M3String.replace 1753-1772 | 3280-3286
+matches(String) | literal -> contentEquals (see equals); else M3StringRegexDp.tryMatch; else Pattern.matches -> plan or Matcher over String.charAt U | - | 3336-3348
+contains(CharSequence) | -> indexOf(String) | - | 3359-3360
+replaceFirst, replaceAll | literal: indexOf + C slices; else Pattern/Matcher U | M3String.replaceLiteralRegex 1819 | 3403-3409, 3452-3458
+replace(CharSequence,CharSequence) | indexOf + C slices; pool-refusal fallback X value() at 3497-3502; empty target makes one slice per unit (M3String 1781-1787) | m3Replace 3545 -> replaceMatches 1850 | 3473-3534
+split(String,int), split(String), splitWithDelimiters | char fast path: indexOf(ch,off) restart loop + C slices (3850-3852); literal: indexOf(literal,off) loop (3810); else Pattern.split U | - | 3657, 3756, 3760-3883, 3927
+join(CharSequence,CharSequence...), join(CharSequence,Iterable) | C | M3String.joinDesignated 360 | 3956, 3976-4004, 4063
+toLowerCase(Locale), toLowerCase(), toUpperCase(Locale), toUpperCase() | C pieces; first-change scan is cursor U, no F gate | M3String.caseMap 1616-1687 | 4133-4139, 4164, 4220-4226, 4251
+trim, strip, stripLeading, stripTrailing | F through facts() (full scan when unprepared) | Bridge 147-173 | 4287-4290, 4324-4327, 4359-4362, 4394-4397
+isBlank | F through facts().stripStart, no early exit | indexOfNonWhitespace 4563-4565 | 4418-4420
+lines() | F gate (lineTerminatorCount == 0 if prepared) else U charAt; C slices | M3LinesSpliterator | 4452-4504
+indent(int) | U charAt, two passes; line.facts() per line for n < 0 | M3String.indent 455-526 | 4543-4549
+stripIndent() | U charAt, three passes; line.facts() per line | M3String.stripIndent 528-609 | 4667-4674
+translateEscapes() | U charAt; C slices | M3String.translateEscapes 1551-1609 | 4794-4800
+transform, toString, describeConstable, resolveConstantDesc | identity | - | 4888, 4897, 5677, 5690
+chars(), codePoints() | C cursor spliterator (per unit, leaf amortized) | M3String.charsStream 682, codePointsStream 686 | 4911-4914, 4935-4938
+toCharArray() | X charShadow (JNI); the result must be a fresh array anyway | M3String.charShadow 1389 | 4953-4956
+format(String,Object...), format(Locale,..), formatted | N (Formatter reads the format through charAt) | - | 5000, 5041, 5062
+valueOf(Object|boolean|int|long|float|double) | N, delegates | - | 5075, 5153, 5185-5228
+valueOf(char[]), valueOf(char[],int,int), copyValueOf (2) | constructor admit | - | 5089-5142
+valueOf(char) | C internUnit | M3StringPool.internUnit 518 | 5165-5168
+intern() | native, not read | - | 5254
+repeat(int) | C doubling tuples | M3String.repeat 611-626 | 5274-5290
+
+M3String.indexOf 1516 / lastIndexOf 1541 (asked): both are nested charAt loops on source and needle. They run only when the needle is M3 and M3StringSearchPrecompute.prepare returns null: needle longer than 8192 units, or OutOfMemoryError while building the plan (M3StringSearchPrecompute 57-68). Needles of length 0 and 1 are answered before (1504-1505, 1530-1531). Rare; not a candidate.
+
+RUNNERS-UP (not in the six)
+- toLowerCase / toUpperCase facts gate: M3String.caseMap 1616-1630 scans with a cursor until the first change. For a value with prepared facts, ascii == true and (regexAnyClasses & REGEX_UPPER) == 0 (REGEX_LOWER for toUpperCase) proves no unit changes, so 'return this' in O(1); exact because the scan at 1623-1629 is locale independent and for ASCII only A-Z (a-z) change. Small, certain; confidence 0.8.
+- charAt finger: a String backed by a tuple re-descends the DAG on every charAt (M3StringTuple 34-39). A single cached leaf window on the root tuple (immutable holder, racy publish like String.hash) would make sequential charAt O(1) amortized for every caller including Matcher, Integer.parseInt and user loops. Costs one reference per tuple and a holder per leaf switch; needs a benchmark; confidence 0.45.
+- Atom bulk primitives: M3StringAtom.getBytes / getChars copy byte by byte through Unsafe (434-503). Same-width copies could use Unsafe.copyMemory, opposite byte order copySwapMemory. Every window path (facts scan, searches, encode, builder append) sits on this. Whether C2 already vectorizes these loops is not verified.
+
+SIDE FINDINGS
+- Exception type: String.charAt on an M3 String throws IndexOutOfBoundsException, not StringIndexOutOfBoundsException: M3String.charAt uses Objects.checkIndex (672-675), which passes a null formatter (Objects.java 364-366 in the 2026-11-14 checkout), while the flat path uses String.checkIndex with SIOOBE_FORMATTER (StringLatin1.java 45-47, String.java 5608-5610). A catch of StringIndexOutOfBoundsException no longer catches. Whether a test covers it: not checked.
+- M3String.encodeSingleByte (1216-1229), encodeNoRepl Latin-1 check (1249-1251) and encodeUtf8NoRepl (1276-1298) loop charAt without the cursor that encodeUtf8 uses (1175).
+- AbstractStringBuilder.appendChars(String,..) 2006-2007: an M3 Latin-1 String appended (below the 64-unit lift threshold, M3StringBuilderLane 40, 74-82) to a UTF-16 builder goes through StringUTF16.putCharsSB(.., CharSequence, ..) (StringUTF16.java 1522-1527), one s.charAt per unit; the M3 getBytes branch at 2008-2009 is tested after it.
+- M3String.coder() is the owner coder (649-651): a slice of a UTF16 owner reports UTF16 even when its units are all Latin-1. Any coder-based shortcut in mixed comparisons would be wrong.
+- Not verified: whether class-file literals are M3-backed. This decides how often the mixed-side rows (SM-01, SM-04, SM-06) run.
+
+SCOUT NOTES
+Read-only pass; nothing was compiled or run, so every gain is an estimate and every in-VM check is NOT_RUN.
+
+Sources: AbstractStringBuilder, M3StringBuilderLane, StringBuilder, StringBuffer, StringConcatHelper, M3String, M3StringAtom, M3StringOwner, M3StringPool, M3StringTuple, M3StringPrecomputeBridge, StringUTF16 and StringLatin1 from I:/m3-scratch/string-converge-20261116/master-java-lang (master). String.java and M3StringFacts.java from leaf1/head. StringConcatFactory.java, hotspot stringopts.cpp and jni.cpp, jdk/internal/misc/Unsafe.java and the tests come from K:/m3-work/wt-fix3, the 2026-11-14 checkout (two days older than master).
+
+How the builders use M3 today (from the code):
+- M3StringBuilderLane holds four parallel arrays (text String[], span long[] = start<<32 | length, flatAt int[], logicalEnd int[]), units, virtualCapacity, one state bit and a composed cache keyed on (flatCount, pieces). There are no per-piece objects and no rope builder; the flat chunks stay in the builder's own value/count, in order.
+- A String is lifted as a piece only when M3 storage is on, the range is at least 64 units and at least 1/8 of its source, s.m3() != null, the VM is booted and admission is enabled (lane lines 74-82). Everything else is copied into the flat buffer through String.getBytes, which uses the leaf path and does not materialize the argument.
+- Lane-aware without flatten: length, capacity, ensureCapacity, charAt, codePointAt, codePointBefore, append(String), append(String range), all flat-tail appends, indexOf/lastIndexOf, toString, getBytes (copyOut). Lane-aware by rebuilding the lane: setCharAt, delete, deleteCharAt, replace, insert(String) and the valueOf-based inserts, reverse. Full copy without detaching: chars, codePoints, the peer side of compareTo, append(AbstractStringBuilder).
+- Flatten (m3EnsureFlat): compareTo (this side), trimToSize, setLength, codePointCount, offsetByCodePoints, getChars, both substring forms, subSequence, insert(char[]) (two forms), insert(CharSequence) (two forms), insert(int,char), append of a non-String CharSequence range, repeat of a foreign CharSequence, mix, prepend, getValue (new String(sb), contentEquals), writeObject.
+- toString: without a lane it is new String(this) -> getValue -> maybeAdmitCompact, a one-atom admission of the flat content (String.java 5429-5444); the String keeps only the shared empty sentinel as value. With a lane, compose admits each flat chunk as an atom, takes an O(1) slice per piece and folds pairs into a balanced tuple; it returns null (flat fallback, which flattens) when admission is off, a piece is not M3-backed or the pool refuses. StringBuffer keeps the composed String in toStringCache.
+
+Not ranked, seen while reading:
+- append(AbstractStringBuilder) (AbstractStringBuilder 721-732) copies a composite source's pieces flat; the lane lists this as not yet received (lane line 520). A transfer must snapshot the peer's lane fields because StringBuffer does not lock the argument.
+- repeat(CharSequence,int) (2190-2198) copies count * length units; M3String.repeat (M3String.java 611-626) composes in O(log count) but uses Math.multiplyExact, so the stock OutOfMemoryError check must run first.
+- compose (lane 470-512) re-admits every flat chunk whenever (flatCount, pieces) changed; for range pieces, internTuple's hashCodeValue forces range facts. An append-only prefix cache would make repeated toString incremental.
+- M3StringPool.internCompactBytes hashes with mix64 once per unit (313-322) before the per-unit copy, so each flat-path toString makes several scalar passes. Whether that hash is persisted in the lexicon was not checked.
+- C2's StringConcat fusion returns early under UseM3StringStorage (stringopts.cpp 640-647, 2026-11-14 checkout: "until a dedicated M3 C2 lowering constructs M3String owners and coordinates"), and arguments.cpp 3054 sets OptimizeStringConcat off. Explicit new StringBuilder().append(...).toString() chains therefore run the Java path above; an M3-aware lowering of those chains is the open compiler leaf.
+- The LeetCodifySites rows for the lane (charAt binary search, twoWay, pushFlat, compose) are covered by LANE-EDIT-SPLICE and LANE-SEARCH-WINDOW; the charAt binary search itself is fine.
+
+SKEPTIC MISSED
+Matrix spot-check: 36 rows compared with the CURRENT String.java (constructors 287-294 and 1580, length through offsetByCodePoints, getChars/getBytes, equals, contentEquals, compareTo, CASE_INSENSITIVE_ORDER, both regionMatches, startsWith, hashCode, indexOf/lastIndexOf, substring, concat, replace, matches, contains, split, toLowerCase, trim, isBlank, lines, indent, chars, toCharArray, valueOf(char), repeat, join). All line numbers and callees match. Rows that are wrong or incomplete:
+- charAt row (1629-1633): a behaviour defect, not only a cost. M3String.charAt 672-675 uses Objects.checkIndex, which throws IndexOutOfBoundsException (Objects.java 364-366, 2026-11-14 checkout). Stock throws StringIndexOutOfBoundsException via StringLatin1.charAt 45-47 and String.checkIndex 5608-5610. codePointAt 1665, codePointBefore 1708, getChars 1837-1838 and substring 3169 keep the stock checks, so charAt is the only odd one. The scout left this as a side finding; it should be the first leaf.
+- hashCode row: 'full scan' is true for atom and immediate slices only; a tuple slice composes child facts (M3StringTuple 77-93).
+- concat row: omits that a flat operand is re-admitted on every call. M3String.canonicalize 416-422 hashes every unit (M3StringPool.internCompactBytes 313-323), allocates a Fingerprint, takes a bucket lock and compares content, and never attaches the result.
+- 'Class-file literals M3-backed: not verified' is settled: flat (jni.cpp 2142-2175, the only caller of m3AdmitNative under hotspot/share in the 2026-11-14 checkout).
+
+Better candidates of this angle the scout overlooked or ranked too low:
+1. String.m3 is volatile (String.java 176) and every row starts by reading it (1593, 1607, 1630, 2004 ...), for flat Strings too. value is @Stable final (169-170) and finals in java.lang are trusted by C2 (ciField.cpp 219-231, 2026-11-14 checkout), so stock folds constant-receiver operations and hoists loads out of loops; a volatile non-final field prevents both. The only late writer is ensureM3 5526-5537 via m3AdmitNative 5544-5551, which the VM calls before the JNI handle is published and where it already rewrites value (jni.cpp 2157-2163). Making m3 final with the VM storing it needs a VM change in the same leaf. The JIT effect is not measured.
+2. Atom bulk primitives: M3StringAtom.getBytes 473-503, getChars 434-456 and local 66-77 move one byte per Unsafe call. Unsafe.copyMemory for equal layouts and copySwapMemory for the big-endian UTF-16 payload are exact replacements. Every window reader (facts scan 196-199, linearIndexOf 242, blockSignal 171, exactBlock 192) and every admission sits on these, and the window forms of SM-02 and SM-04 depend on it. The scout had it as a runner-up.
+3. Pool-admission compares M3StringAtom 531-582 loop charAt with a bounds check and try/finally fence per unit on every admission hit, which is every String constructor row for a spelling already in the pool. One mismatch kernel serves these and SM-01.
+4. Indy concat: StringConcatHelper.m3Concat 456-473 and m3Append 487-492 canonicalize each flat recipe constant on every execution. The constants are fixed at link time, so the bootstrap can bind them once (the compiler-side item of the standing order).
+5. replace(char,char), M3String 1753-1772: besides the indexOf restart it emits one 1-unit piece plus one slice per hit and interns about 2k tuples for k hits, each hashing slices through facts() (SM-02 again). caseMap's bounded chunk assembly 1690-1726 is the existing shape that produces atoms for dense edits.
+6. toCharArray 4953-4956 crosses JNI on every call (M3String.charShadow 1389-1391, native at 1912) although new char[n] plus M3String.getChars 1120-1128 is a composite bulk path. Which is faster for long values is not verified.
+7. new String(StringBuilder) 1580-1582 and 5429-5444 flattens a lane builder through AbstractStringBuilder.getValue 1828-1831, while StringBuilder.toString 473-483 composes. The row is correct in the matrix but was not made a candidate (I8 gap). The builder's own substring (1172-1173, 1221-1222), setLength 357 and codePointCount 515 also call m3EnsureFlat.
+8. toLowerCase/toUpperCase facts gate (scout runner-up): plausible from M3String.caseMap 1616-1630 and the REGEX_UPPER/REGEX_LOWER masks (M3StringFacts 43-44); small and exact when facts are prepared.
+
+SKEPTIC MISSED
+1. Execution mode decides every gain estimate, and the scout did not check it. In the 2026-11-14 checkout (two days older than master; master's HotSpot sources were not in the provided set), K:/m3-work/wt-fix3/src/hotspot/share/runtime/arguments.cpp 3018-3057 runs set_mode_flags(_int) whenever UseM3StringStorage is on: interpreter only. If that still holds on master, each UNSAFE.getByte in the atom kernels is a native call per byte, intrinsic-based proposals (StringLatin1.inflate, vectorizedHashCode, intrinsic indexOf) give nothing, and the wins are bulk natives (System.arraycopy, Unsafe.copyMemory and copySwapMemory) and fewer calls per unit. That would put ATOM-BULK-TRANSFER first. The scout's remark about C2 concat fusion (stringopts.cpp 640) is accurate but understates this.
+
+2. Forward search over flat bytes with an M3-backed needle: M3StringSearchPrecompute.java 490-527, kmp 529-548, adaptiveBmh 550-582. This is the path of every lane-less StringBuilder.indexOf(String) (AbstractStringBuilder.java 1659, through leaf1/head String.java 3009-3012), the common case. It builds a full plan eagerly for any needle of 2 units or more (prepare, 57-116: two prefix tables, a 256-int skip table and trigram facts on a cache miss) and then calls pattern.charAt per source unit (539, 542, 563), an owner dispatch that is an O(index) digit walk for an 8 to 10 unit identifier immediate (M3StringImmediate.java 224-233). The reverse lane already has the fix (592-641): units(pattern) copies the needle once (647-655), a Latin-1 source with a wider needle returns -1 (606), and the plan is built only after dense failures. Port that shape to the forward lane; results are unchanged.
+
+3. Admission kernel behind every flat-path toString: M3StringPool.internCompactBytes (276-362) makes up to five scalar passes over the builder content (Latin-1 scan 287-292, lexicon probe, mix64 per unit 316-322, per-unit contentEqualsCompactBytes through charAt at M3StringAtom.java 531-548, per-unit copy and hash at 189-205). The scout listed only the hash pass under 'not ranked'; this path is hotter than m3Concat and should outrank CONCAT-PAIRWISE-FOLD. Fuse the scan and hash passes and compare with vectorizedMismatch (precedent at M3StringAtom.java 401).
+
+4. A correctness gap on that same path: String(AbstractStringBuilder) passes the live builder array (leaf1/head String.java 5429-5438), while the char[] path admits a private snapshot for exactly this reason (5497-5506). A racing writer between the Latin-1 scan and the copy makes toString throw IllegalArgumentException("Latin1 unit out of range") (M3StringAtom.java 194-196), which stock toString never throws, or files an atom under a fingerprint that does not match its content. Any leaf that touches this kernel has to close it.
+
+5. m3Concat has no short-result cutover: StringConcatHelper.java 456-473 (and simpleConcat 435-441) build interned tuples even for a 10-unit result such as "x=" + i, although the total length is already known at line 463. The lane copies anything under LIFT_UNITS = 64 (M3StringBuilderLane.java 40, 74-82) and concat has no such rule. Taking flatConcat (495-509) below a threshold yields one atom or immediate. This trades a composite for an atom, which the text of I2 does not obviously allow for concat, so it needs the owner's decision.
+
+6. Operation matrix in the scout notes: I checked every row against the m3EnsureFlat and m3Lane sites in AbstractStringBuilder.java (181, 321, 357, 515, 543, 581, 607, 807, 1055, 1112, 1148, 1173, 1222, 1259, 1329, 1365, 1453, 1511, 1829, 2056, 2070, 2180) and StringBuilder.java 502, StringBuffer.java 507 and 779. No wrong rows.

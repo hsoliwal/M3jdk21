@@ -1,0 +1,13 @@
+kernel_methods	4
+strip_leading_vs_stock	597871	0
+strip_trailing_vs_stock	597871	0
+strip_result_vs_stock	597871	0
+trim_edges_vs_naive	597871	0
+trim_result_vs_stock	597871	0
+bounded_leading_decides_exactly	597871	0
+bounded_trailing_decides_exactly	597871	0
+discriminator:trim_rule_differs_from_strip_rule	1	KILLED
+discriminator:lone_surrogate_is_not_white_space	1	KILLED
+discriminator:no_break_space_stays	1	KILLED
+discriminator:bound_zero_never_reads	1	KILLED
+RESULT	PASS	failures=0

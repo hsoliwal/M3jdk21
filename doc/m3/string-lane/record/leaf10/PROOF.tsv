@@ -1,0 +1,18 @@
+stock	cases	7040
+base	cases	7040
+head	cases	7040
+bytes_differ_head_vs_stock	0
+bytes_differ_head_vs_base	0
+write_lengths_differ_head_vs_stock	0
+write_lengths_differ_head_vs_base	0
+write_lengths_differ_base_vs_stock	0
+stock	ns_per_write	ascii	52
+stock	ns_per_write	latin1	113
+stock	ns_per_write	cjk	164
+base	ns_per_write	ascii	277
+base	ns_per_write	latin1	318
+base	ns_per_write	cjk	458
+head	ns_per_write	ascii	48
+head	ns_per_write	latin1	128
+head	ns_per_write	cjk	170
+RESULT	PASS

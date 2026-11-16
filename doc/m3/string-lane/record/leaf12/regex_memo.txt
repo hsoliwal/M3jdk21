@@ -1,0 +1,36 @@
+    /**
+     * The compiled form of the regex argument of {@link #matches}, {@link #replaceFirst},
+     * {@link #replaceAll} and {@link #split(String, int)}. A regex is compiled once, stored,
+     * and read back by later calls with an equal regex, together with everything the
+     * compilation derived. A {@code null} regex and a very long one go to
+     * {@link Pattern#compile(String)} as before; so does an invalid one, on every call,
+     * with its exception.
+     */
+    private static Pattern compiledRegex(String regex) {
+        if (regex == null || regex.length() > RegexMemo.MAX_REGEX_UNITS) {
+            return Pattern.compile(regex);
+        }
+        return RegexMemo.compiled(regex);
+    }
+
+    /** Recently compiled regex arguments: softly held, one per slot of a direct-mapped table. */
+    private static final class RegexMemo {
+        static final int MAX_REGEX_UNITS = 256;
+        private static final int SLOTS = 256;
+        private static final java.util.concurrent.atomic.AtomicReferenceArray<
+                java.lang.ref.SoftReference<Pattern>> TABLE =
+                new java.util.concurrent.atomic.AtomicReferenceArray<>(SLOTS);
+
+        private RegexMemo() {}
+
+        static Pattern compiled(String regex) {
+            int slot = regex.hashCode() & (SLOTS - 1);
+            java.lang.ref.SoftReference<Pattern> stored = TABLE.get(slot);
+            Pattern known = stored == null ? null : stored.get();
+            if (known != null && known.pattern().equals(regex)) return known;
+            Pattern compiled = Pattern.compile(regex);
+            TABLE.set(slot, new java.lang.ref.SoftReference<>(compiled));
+            return compiled;
+        }
+    }
+

@@ -1,0 +1,12 @@
+ns per call; each line = 3 JVM runs, each run prints matches, replaceAll, split (9 numbers)
+stock matches: 327 333 316 355 271 312 351 261 303
+memo matches: 95 231 189 91 205 190 84 218 201
+stock replaceAll: 321 390 270 269 231 248 279 229 347
+memo replaceAll: 67 169 154 66 147 156 73 181 185
+stock split: 298 230 260 268 243 283 313 244 486
+memo split: 82 258 272 90 248 227 92 247 246
+
+median (min to max) per call, 9 runs each:
+| `matches` | 313 ns (268 to 355) | 84 ns (66 to 95) |
+| `replaceAll` | 244 ns (229 to 390) | 218 ns (147 to 258) |
+| `split` | 303 ns (248 to 486) | 190 ns (154 to 272) |

@@ -1,0 +1,225 @@
+diff --git a/base/src/java.base/share/classes/java/lang/M3StringTuple.java b/head/src/java.base/share/classes/java/lang/M3StringTuple.java
+index ede9e34..49a0c95 100644
+--- a/base/src/java.base/share/classes/java/lang/M3StringTuple.java
++++ b/head/src/java.base/share/classes/java/lang/M3StringTuple.java
+@@ -31,13 +31,109 @@ final class M3StringTuple extends M3StringOwner {
+         this.canonicalId = canonicalId;
+     }
+ 
++    /** Smallest height at which the stored segment list replaces the descent from the root. */
++    private static final int SEGMENT_MIN_HEIGHT = 3;
++    /** Most segments one stored list may hold; a wider tuple keeps the descent. */
++    private static final int SEGMENT_MAX_COUNT = 1024;
++    /** Marks a tuple that has no stored list, so the walk over its leaves is not repeated. */
++    private static final Segments NO_SEGMENTS =
++            new Segments(new int[0], new M3StringOwner[0], new int[0]);
++
++    /** The segment list of this tuple once computed; {@link #NO_SEGMENTS} when it has none. */
++    private Segments segments;
++
+     @Override
+     char charAt(int index) {
+         Objects.checkIndex(index, length);
++        Segments list = height >= SEGMENT_MIN_HEIGHT ? segments() : NO_SEGMENTS;
++        if (list != NO_SEGMENTS) return list.charAt(index);
+         int leftLength = left.length();
+         return index < leftLength ? left.charAt(index) : right.charAt(index - leftLength);
+     }
+ 
++    /** Computed once and stored. The fields of a list are final, so a racing reader is safe. */
++    private Segments segments() {
++        Segments known = segments;
++        if (known == null) {
++            known = Segments.of(this);
++            segments = known;
++        }
++        return known;
++    }
++
++    /**
++     * A rope as a segment list: the scalar leaf ranges of a tuple in text order. Segment
++     * {@code i} holds the units from {@code ends[i - 1]} (0 for the first) up to
++     * {@code ends[i]}; they are in {@code owners[i]} from {@code starts[i]}. A unit is found by
++     * a binary search over the cumulative ends, not by a descent from the root.
++     */
++    static final class Segments {
++        private static final int FIRST_CAPACITY = 16;
++        final int[] ends;
++        final M3StringOwner[] owners;
++        final int[] starts;
++
++        Segments(int[] ends, M3StringOwner[] owners, int[] starts) {
++            this.ends = ends;
++            this.owners = owners;
++            this.starts = starts;
++        }
++
++        /**
++         * The list of {@code tuple}, or {@link #NO_SEGMENTS} when it has more than
++         * {@link #SEGMENT_MAX_COUNT} segments, when a leaf is not a scalar owner, or when the
++         * leaves do not add up to the length of the tuple.
++         */
++        static Segments of(M3StringTuple tuple) {
++            int[] ends = new int[FIRST_CAPACITY];
++            M3StringOwner[] owners = new M3StringOwner[FIRST_CAPACITY];
++            int[] starts = new int[FIRST_CAPACITY];
++            int count = 0;
++            int end = 0;
++            M3StringLeafCursor leaves = new M3StringLeafCursor(tuple, 0, tuple.length, true);
++            while (leaves.next()) {
++                if (leaves.length() == 0) continue;
++                if (count == SEGMENT_MAX_COUNT || leaves.owner() instanceof M3StringTuple) {
++                    return NO_SEGMENTS;
++                }
++                if (count == ends.length) {
++                    ends = java.util.Arrays.copyOf(ends, count << 1);
++                    owners = java.util.Arrays.copyOf(owners, count << 1);
++                    starts = java.util.Arrays.copyOf(starts, count << 1);
++                }
++                end += leaves.length();
++                ends[count] = end;
++                owners[count] = leaves.owner();
++                starts[count] = leaves.start();
++                count++;
++            }
++            if (end != tuple.length || count == 0) return NO_SEGMENTS;
++            return new Segments(java.util.Arrays.copyOf(ends, count),
++                    java.util.Arrays.copyOf(owners, count), java.util.Arrays.copyOf(starts, count));
++        }
++
++        char charAt(int index) {
++            int at = segmentOf(ends, index);
++            int begin = at == 0 ? 0 : ends[at - 1];
++            return owners[at].charAt(starts[at] + index - begin);
++        }
++
++        /** The segment that holds unit {@code index}: the first whose end is greater. */
++        static int segmentOf(int[] ends, int index) {
++            int low = 0;
++            int high = ends.length - 1;
++            while (low < high) {
++                int middle = (low + high) >>> 1;
++                if (ends[middle] > index) {
++                    high = middle;
++                } else {
++                    low = middle + 1;
++                }
++            }
++            return low;
++        }
++    }
++
+     @Override
+     void getChars(int start, int end, char[] destination, int destinationStart) {
+         Objects.checkFromToIndex(start, end, length);
+diff --git a/head/test/jdk/java/lang/String/M3StringSegmentListTest.java b/head/test/jdk/java/lang/String/M3StringSegmentListTest.java
+new file mode 100644
+index 0000000..36a8e56
+--- /dev/null
++++ b/head/test/jdk/java/lang/String/M3StringSegmentListTest.java
+@@ -0,0 +1,105 @@
++/*
++ * Copyright (c) 2026, Hitesh Soliwal. All rights reserved.
++ * GPLv2 with the Classpath exception.
++ *
++ * @test
++ * @summary charAt of deep concatenated Strings reads the right unit through the segment list
++ * @run main M3StringSegmentListTest
++ * @run main/othervm -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage
++ *      M3StringSegmentListTest
++ * @run main/othervm -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage
++ *      -XX:-CompactStrings M3StringSegmentListTest
++ */
++
++import java.util.Random;
++import java.util.stream.IntStream;
++
++/**
++ * A concatenated M3-backed String keeps a list of its leaf segments and finds a unit by a
++ * binary search over their ends. Every index of ropes built in several shapes is compared with
++ * the char array built beside them: appended piece by piece, prepended, joined pairwise,
++ * doubled until the leaves outnumber what a list may hold, and ranges cut out of each.
++ */
++public class M3StringSegmentListTest {
++    private static final long SEED = 20261116L;
++    private static final int PIECES = 700;
++    private static final int DOUBLINGS = 13;
++    private static int checks;
++
++    public static void main(String[] args) {
++        Random random = new Random(SEED);
++        String[] pieces = IntStream.range(0, PIECES).mapToObj(index -> piece(random, index))
++                .toArray(String[]::new);
++        check(append(pieces), join(pieces));
++        check(prepend(pieces), reverseJoin(pieces));
++        check(pairwise(pieces, 0, pieces.length), join(pieces));
++        String doubled = "abc";
++        StringBuilder flat = new StringBuilder("abc");
++        for (int round = 0; round < DOUBLINGS; round++) {
++            doubled = doubled.concat(doubled);
++            flat.append(flat);
++        }
++        check(doubled, flat.toString().toCharArray());
++        System.out.println("PASS checks=" + checks);
++    }
++
++    /** Pieces of one to eight chars; some hold a char outside Latin-1. */
++    private static String piece(Random random, int index) {
++        char[] units = new char[1 + random.nextInt(8)];
++        IntStream.range(0, units.length).forEach(at -> units[at] =
++                index % 9 == 0 && at == 0 ? (char) 0x3B1 : (char) ('a' + random.nextInt(26)));
++        return new String(units);
++    }
++
++    private static String append(String[] pieces) {
++        String text = "";
++        for (String piece : pieces) text = text.concat(piece);
++        return text;
++    }
++
++    private static String prepend(String[] pieces) {
++        String text = "";
++        for (String piece : pieces) text = piece.concat(text);
++        return text;
++    }
++
++    private static String pairwise(String[] pieces, int from, int to) {
++        if (to - from == 1) return pieces[from];
++        int middle = (from + to) >>> 1;
++        return pairwise(pieces, from, middle).concat(pairwise(pieces, middle, to));
++    }
++
++    private static char[] join(String[] pieces) {
++        StringBuilder all = new StringBuilder();
++        for (String piece : pieces) all.append(piece.toCharArray());
++        return all.toString().toCharArray();
++    }
++
++    private static char[] reverseJoin(String[] pieces) {
++        StringBuilder all = new StringBuilder();
++        for (int index = pieces.length - 1; index >= 0; index--) {
++            all.append(pieces[index].toCharArray());
++        }
++        return all.toString().toCharArray();
++    }
++
++    /** Every index of the rope, of a middle range and of a short tail range. */
++    private static void check(String rope, char[] expected) {
++        same(rope, expected, 0, expected.length);
++        same(rope.substring(expected.length / 3, 2 * expected.length / 3), expected,
++                expected.length / 3, 2 * expected.length / 3);
++        same(rope.substring(expected.length - 5), expected, expected.length - 5, expected.length);
++    }
++
++    private static void same(String text, char[] expected, int from, int to) {
++        if (text.length() != to - from) {
++            throw new AssertionError("length " + text.length() + ", expected " + (to - from));
++        }
++        for (int index = to - from - 1; index >= 0; index--) {
++            checks++;
++            if (text.charAt(index) != expected[from + index]) {
++                throw new AssertionError("index " + index + " of the range from " + from);
++            }
++        }
++    }
++}
