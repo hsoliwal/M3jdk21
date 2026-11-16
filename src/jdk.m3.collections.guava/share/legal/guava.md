@@ -2,7 +2,7 @@
 
 ### Origin
 
-The Java sources under `jdk/m3/collections/guava` in the module `jdk.m3.collections` are derived from Guava
+The Java sources of the module `jdk.m3.collections.guava` are derived from Guava
 (https://github.com/google/guava), release 33.4.8, as carried and changed in the fork
 https://github.com/hsoliwal/guava at commit `a26ada9e9503a5fdf1eff4d95c641fba68ce6560`: all main sources of the
 `guava` artifact (JRE flavour) and of `failureaccess`. Guava is licensed under the Apache License, Version 2.0.
