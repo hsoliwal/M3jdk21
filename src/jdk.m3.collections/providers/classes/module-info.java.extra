@@ -49,10 +49,11 @@ exports jdk.m3.collections.apache.splitmap;
 exports jdk.m3.collections.apache.trie;
 exports jdk.m3.collections.apache.trie.analyzer;
 
-// Eclipse Collections, development state 14.0.0-SNAPSHOT (legal/eclipse-collections.md). The library has no module
-// descriptor (as an automatic module it exports every package), so every package is exported here. Its factories
-// are found through java.util.ServiceLoader: the uses and provides directives stand for the META-INF/services
-// entries its build generates from annotations.
+// Eclipse Collections, development state 14.0.0-SNAPSHOT (legal/eclipse-collections.md). The library has no
+// module descriptor (as an automatic module it exports every package), so every package is exported here.
+// Its factory holders call java.util.ServiceLoader: without the uses directives they fail to initialise in a
+// named module. The provides directives are the service entries the library's release build writes from its
+// annotations; the library also finds its factories by class name when no entry exists.
 exports jdk.m3.collections.eclipse.api;
 exports jdk.m3.collections.eclipse.api.annotation;
 exports jdk.m3.collections.eclipse.api.annotation.category;

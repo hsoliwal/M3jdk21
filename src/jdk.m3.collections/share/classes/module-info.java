@@ -9,10 +9,12 @@
 module jdk.m3.collections {
     // The provider superset (providers/classes) needs these; its exports are in
     // providers/classes/module-info.java.extra.
-    // Guava (legal/guava.md) logs through java.util.logging; its Unsafe fast paths fall back to
-    // plain Java when jdk.unsupported is absent.
+    // Guava (legal/guava.md) logs through java.util.logging. Its Unsafe fast paths would fall back
+    // to plain Java without jdk.unsupported, but Eclipse Collections (legal/eclipse-collections.md)
+    // has no fallback: ConcurrentHashMapUnsafe and the parallel iterables' toSet, aggregateBy and
+    // aggregateInPlaceBy fail without it. So it is not static.
     requires java.logging;
-    requires static jdk.unsupported;
+    requires jdk.unsupported;
     // commons-collections (legal/commons-collections.md): IteratorUtils.getIterator(Object) tests
     // every argument against org.w3c.dom.NodeList, and NodeListIterator has Node and NodeList in
     // its public signatures. Not static: without java.xml that method fails for any argument.
