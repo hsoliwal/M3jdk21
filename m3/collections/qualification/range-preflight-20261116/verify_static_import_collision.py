@@ -6,6 +6,7 @@
 Binary compatibility does not imply universal Java source compatibility. The
 product owner signature is verified before building proof-only matching types.
 """
+import hashlib
 import os
 from pathlib import Path
 import subprocess
@@ -25,7 +26,11 @@ def write(root, path, data):
     return filename
 
 def main():
-    source = OWNER.read_text(encoding="utf-8")
+    source_bytes = OWNER.read_bytes()
+    expected_digest = "e44eb0497a6f0cda7b369cf19c1b0546022012976028b6a1edce93cbd1759407"
+    if hashlib.sha256(source_bytes).hexdigest() != expected_digest:
+        raise AssertionError("M3 product owner drift: new proof required")
+    source = source_bytes.decode("utf-8")
     expected = "public static <E> void forEachRange(List<? extends E> source,"
     assert expected in source, "source API declaration drift"
 
@@ -102,6 +107,39 @@ public final class FrozenSourceClient {
         if rebuilt.returncode == 0 or "ambiguous" not in rebuilt.stdout:
             raise AssertionError("expected ambiguous static import:\n" + rebuilt.stdout)
 
+        # Explicitly qualified calls remain source-selectable even when
+        # wildcard static imports expose two applicable methods.
+        for class_name, qualified in (
+            ("QualifiedLegacyRangeClient", "legacy.other.RangeOps"),
+            ("QualifiedM3RangeClient", "jdk.m3.collections.CollectionViews"),
+        ):
+            qualified_text = unchanged_client.replace(
+                "public final class FrozenSourceClient",
+                "public final class " + class_name,
+            ).replace(
+                "        forEachRange(List.of",
+                "        " + qualified + ".forEachRange(List.of",
+            )
+            if qualified_text == unchanged_client:
+                raise AssertionError("qualified-client source rewrite did not happen")
+            qualified_source = write(
+                root, "client/" + class_name + ".java", qualified_text
+            )
+            rebuilt_qualified = run(
+                "javac", *flags, "-classpath", str(new_classes),
+                "-d", str(new_classes), str(qualified_source),
+            )
+            if rebuilt_qualified.returncode:
+                raise AssertionError(
+                    "qualified call failed against new API:\n" + rebuilt_qualified.stdout
+                )
+            qualified_output = run(
+                "java", "-cp", str(new_classes), class_name
+            )
+            if qualified_output.returncode or qualified_output.stdout.strip() != "[2, 3]":
+                raise AssertionError("qualified call changed behavior:\n" + qualified_output.stdout)
+
+        print("M3_STATIC_IMPORT_QUALIFIED_CALLS_PASS cases=2")
         print("M3_STATIC_IMPORT_FROZEN_BINARY_PASS")
         print("M3_STATIC_IMPORT_UNCHANGED_SOURCE_COLLISION_CONFIRMED")
         print("SOURCE_COMPATIBILITY_HOLD: wildcard static imports can be ambiguous")
