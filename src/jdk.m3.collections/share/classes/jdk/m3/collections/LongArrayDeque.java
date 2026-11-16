@@ -274,6 +274,15 @@ public final class LongArrayDeque implements LongDeque {
         return elements.length;
     }
 
+    //FLLDCIM: CONVERGE - com.synexia.primitives.LongArrayDeque.payloadBytes(), the one public member this owner lacked
+    /**
+     * Bytes of primitive payload this deque retains now: its element lane. The value depends on the capacity only,
+     * so it changes when the lane is replaced and not when an element is added or removed.
+     */
+    public long payloadBytes() {
+        return (long) elements.length * Long.BYTES;
+    }
+
     @Override
     public void clear() {
         if (size == 0) {
