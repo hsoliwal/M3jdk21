@@ -4728,3 +4728,19 @@ PREFIXED	m3/collections/src/test/java/jdk/m3/collections/M3LazyTopKWindowContrac
 PREFIXED	m3/collections/src/test/java/jdk/m3/collections/M3LazyTopKWindowTest.java
 
 PREFIXED	src/jdk.m3.collections/share/classes/jdk/m3/arrays/M3Arrays.java
+PREFIXED	src/jdk.m3.text/share/classes/jdk/m3/text/M3BigString.java
+PREFIXED	src/jdk.m3.text/share/classes/jdk/m3/text/M3CorpusProjectionDigest.java
+PREFIXED	src/jdk.m3.text/share/classes/jdk/m3/text/M3CorpusSourceReceipt.java
+PREFIXED	src/jdk.m3.text/share/classes/jdk/m3/text/M3FixedAddressMapping.java
+PREFIXED	src/jdk.m3.text/share/classes/jdk/m3/text/M3GvasLiteralImage.java
+PREFIXED	src/jdk.m3.text/share/classes/jdk/m3/text/M3InstanceIndexPrecompute.java
+PREFIXED	src/jdk.m3.text/share/classes/jdk/m3/text/M3LangDexSourceEnvelope.java
+PREFIXED	src/jdk.m3.text/share/classes/jdk/m3/text/M3LanguageCorpusManifest.java
+PREFIXED	src/jdk.m3.text/share/classes/jdk/m3/text/M3LanguageGrammarSupport.java
+PREFIXED	src/jdk.m3.text/share/classes/jdk/m3/text/M3LexiconPrecompute.java
+PREFIXED	src/jdk.m3.text/share/classes/jdk/m3/text/M3NumberSpace.java
+PREFIXED	src/jdk.m3.text/share/classes/jdk/m3/text/M3PrecomputePayload.java
+PREFIXED	src/jdk.m3.text/share/classes/jdk/m3/text/M3RopeTextIndex.java
+PREFIXED	src/jdk.m3.text/share/classes/jdk/m3/text/M3StringPiece.java
+PREFIXED	src/jdk.m3.text/share/classes/jdk/m3/text/M3WordRows.java
+PREFIXED	src/jdk.m3.text/share/classes/jdk/m3/text/M3WordRowsNative.java
