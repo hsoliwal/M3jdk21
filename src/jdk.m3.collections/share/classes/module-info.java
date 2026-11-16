@@ -7,6 +7,13 @@
  * every consumer has moved.
  */
 module jdk.m3.collections {
+    // The provider superset (providers/classes: Guava, see legal/guava.md) logs through
+    // java.util.logging and has Unsafe fast paths (jdk.unsupported). Its exports are in
+    // providers/classes/module-info.java.extra. Not "requires static": the build tool that
+    // merges the extra file (GenModuleInfoSource) reads "requires" and "requires transitive" only.
+    requires java.logging;
+    requires jdk.unsupported;
+
     exports jdk.m3.arrays;
     exports jdk.m3.arrays.packed;
     exports jdk.m3.collections;

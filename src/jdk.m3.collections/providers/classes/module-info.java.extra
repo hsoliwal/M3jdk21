@@ -1,0 +1,27 @@
+/*
+ * SPDX-License-Identifier: Apache-2.0 OR EPL-2.0
+ * Copyright (c) 2026 Synexia, Hitesh Soliwal (hsoliwal@gmail.com) and others
+ */
+
+// The provider superset of jdk.m3.collections: the packages of the libraries carried in providers/classes.
+// The JDK build merges these exports into the module descriptor (make/common/modules/GensrcModuleInfo.gmk);
+// share/classes/module-info.java alone stays a complete descriptor of the module's own packages.
+
+// Guava 33.4.8 (legal/guava.md): the packages Guava's own descriptor exports
+exports jdk.m3.collections.guava.annotations;
+exports jdk.m3.collections.guava.base;
+exports jdk.m3.collections.guava.cache;
+exports jdk.m3.collections.guava.collect;
+exports jdk.m3.collections.guava.escape;
+exports jdk.m3.collections.guava.eventbus;
+exports jdk.m3.collections.guava.graph;
+exports jdk.m3.collections.guava.hash;
+exports jdk.m3.collections.guava.html;
+exports jdk.m3.collections.guava.io;
+exports jdk.m3.collections.guava.math;
+exports jdk.m3.collections.guava.net;
+exports jdk.m3.collections.guava.primitives;
+exports jdk.m3.collections.guava.reflect;
+exports jdk.m3.collections.guava.util.concurrent;
+exports jdk.m3.collections.guava.util.concurrent.internal;
+exports jdk.m3.collections.guava.xml;

@@ -104,6 +104,10 @@ ifneq ($(OPENJDK_TARGET_OS), $(OPENJDK_TARGET_OS_TYPE))
   SRC_SUBDIRS += $(OPENJDK_TARGET_OS_TYPE)/classes
 endif
 SRC_SUBDIRS += share/classes
+# Provider sources a module carries beside its own (jdk.m3.collections: the superset of the collection libraries).
+# A second root of the same module: its package folders are apart from share/classes, and its exports are in
+# providers/classes/module-info.java.extra.
+SRC_SUBDIRS += providers/classes
 
 SPEC_SUBDIRS += share/specs
 
