@@ -76,6 +76,11 @@ final class M3StringFacts implements java.util.function.LongPredicate {
     final int stripStart;
     /** End-exclusive code-unit index whose code point is not Character.isWhitespace. */
     final int stripEnd;
+    /**
+     * Number of line terminators as {@link String#lines()} defines them: LF, CR, or CR LF as
+     * one. Zero means the whole value is a single line.
+     */
+    final int lineTerminatorCount;
 
     private M3StringFacts(
             int utf16Length,
@@ -102,7 +107,8 @@ final class M3StringFacts implements java.util.function.LongPredicate {
             int stripStart,
             int stripEnd,
             int regexAllClasses,
-            int regexAnyClasses) {
+            int regexAnyClasses,
+            int lineTerminatorCount) {
         this.utf16Length = utf16Length;
         this.utf8Length = utf8Length;
         this.modifiedUtf8Length = modifiedUtf8Length;
@@ -128,6 +134,7 @@ final class M3StringFacts implements java.util.function.LongPredicate {
         this.stripEnd = stripEnd;
         this.regexAllClasses = regexAllClasses;
         this.regexAnyClasses = regexAnyClasses;
+        this.lineTerminatorCount = lineTerminatorCount;
     }
 
     /**
@@ -184,6 +191,7 @@ final class M3StringFacts implements java.util.function.LongPredicate {
         int trimStart = 0;
         int trimEnd = 0;
         boolean leadingTrim = true;
+        int lineTerminators = 0;
 
         char[] window = new char[Math.min(length, SCAN_WINDOW)];
         for (int base = 0; base < length; base += window.length) {
@@ -205,6 +213,9 @@ final class M3StringFacts implements java.util.function.LongPredicate {
                 int regexClasses = regexClasses(unit);
                 regexAll &= regexClasses;
                 regexAny |= regexClasses;
+                if ((regexClasses & REGEX_VERTICAL) != 0) {
+                    lineTerminators += lineTerminatorStep(previous1, unit);
+                }
                 upperHash = 31 * upperHash + asciiUpper(unit);
                 lowerHash = 31 * lowerHash + asciiLower(unit);
                 titleHash = 31 * titleHash + (index == 0 ? asciiUpper(unit) : asciiLower(unit));
@@ -303,7 +314,25 @@ final class M3StringFacts implements java.util.function.LongPredicate {
                 stripStart,
                 stripEnd,
                 regexAll,
-                regexAny);
+                regexAny,
+                lineTerminators);
+    }
+
+    /**
+     * One step of the line-terminator fold. LF directly after CR completes the CR LF terminator
+     * that the CR already counted.
+     */
+    static int lineTerminatorStep(char previous, char unit) {
+        if (unit == '\n') return previous == '\r' ? 0 : 1;
+        return unit == '\r' ? 1 : 0;
+    }
+
+    /**
+     * Seam rule of the line-terminator measure for two non-empty sides. CR ending the left side
+     * and LF starting the right side were counted once on each side and are one terminator.
+     */
+    static int lineTerminatorSeam(int leftCount, char leftLast, int rightCount, char rightFirst) {
+        return leftCount + rightCount - (leftLast == '\r' && rightFirst == '\n' ? 1 : 0);
     }
 
 
@@ -440,7 +469,12 @@ final class M3StringFacts implements java.util.function.LongPredicate {
                 stripStart,
                 stripEnd,
                 left.regexAllClasses & right.regexAllClasses,
-                left.regexAnyClasses | right.regexAnyClasses);
+                left.regexAnyClasses | right.regexAnyClasses,
+                lineTerminatorSeam(
+                        left.lineTerminatorCount,
+                        left.lastUtf16Unit,
+                        right.lineTerminatorCount,
+                        right.firstUtf16Unit));
     }
 
     /**
