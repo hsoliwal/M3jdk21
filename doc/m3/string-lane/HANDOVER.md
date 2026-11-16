@@ -36,7 +36,7 @@ Every statement below is marked by how it is known:
 
 ## 1b. What converges into M3jdk21 (owner, 2026-11-16, question dialog: all four)
 
-The owner said "this is supposed to converge to m3jdk" eleven times in one evening and then chose every option
+The owner said "this is supposed to converge to m3jdk" repeatedly that evening and then chose every option
 offered:
 
 1. **Library source trees.** The whole source of the forked libraries (commons-lang, commons-text, commons-io,
