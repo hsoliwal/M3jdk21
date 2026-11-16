@@ -128,6 +128,34 @@ public final class PackedBooleanList {
         return -1;
     }
 
+    /** Exact primitive membership, using the existing word-index lookup. */
+    public boolean contains(boolean value) {
+        return indexOf(value) >= 0;
+    }
+
+    /**
+     * Finds the final matching logical bit without inspecting spare capacity.
+     * The high partial word is masked before either the set-bit or clear-bit
+     * search; all other words are fully occupied.
+     *
+     * @return last matching index, or -1 if the value is absent
+     */
+    public int lastIndexOf(boolean value) {
+        if (size == 0) return -1;
+        int lastWord = (size - 1) >>> 6;
+        int tail = size & 63;
+        for (int word = lastWord; word >= 0; word--) {
+            long matches = value ? words[word] : ~words[word];
+            if (word == lastWord && tail != 0) {
+                matches &= (1L << tail) - 1L;
+            }
+            if (matches != 0L) {
+                return (word << 6) + (Long.SIZE - 1 - Long.numberOfLeadingZeros(matches));
+            }
+        }
+        return -1;
+    }
+
     /** Sorts false values before true values without allocating a second lane. */
     public void sort() {
         int trueCount = 0;
