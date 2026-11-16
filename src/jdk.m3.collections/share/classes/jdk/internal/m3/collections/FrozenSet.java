@@ -6,6 +6,7 @@ package jdk.internal.m3.collections;
 
 import java.util.AbstractSet;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
@@ -32,12 +33,11 @@ import jdk.m3.collections.ObjectIntHashMap;
  */
 public final class FrozenSet<E> {
     static final long STATE_FROZEN = 1L << 0;
-    private static final long[] FROZEN_STATE = {STATE_FROZEN};
     private static final Object[] EMPTY = new Object[0];
 
     private final Object[] valueLane;
     private final ObjectIntHashMap<Object> ordinals;
-    private final long[] stateMaskWords = FROZEN_STATE;
+    private final long[] stateMaskWords;
     private final int size;
 
     public FrozenSet() { this(EMPTY, new ObjectIntHashMap<>(0)); }
@@ -46,6 +46,10 @@ public final class FrozenSet<E> {
         valueLane = values;
         ordinals = index;
         size = values.length;
+        int tail = size & 63;
+        stateMaskWords = new long[(size >>> 6) + (tail == 0 ? 0 : 1)];
+        Arrays.fill(stateMaskWords, -1L);
+        if (tail != 0) stateMaskWords[stateMaskWords.length - 1] = (1L << tail) - 1;
     }
 
     /** Retained compatibility descriptor; lookup lanes are owned by ObjectIntHashMap. */

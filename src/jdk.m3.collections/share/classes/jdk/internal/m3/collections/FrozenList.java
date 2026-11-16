@@ -6,6 +6,7 @@ package jdk.internal.m3.collections;
 
 import java.util.AbstractList;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.Iterator;
@@ -35,11 +36,10 @@ import java.util.function.UnaryOperator;
  */
 public final class FrozenList<E> {
     static final long STATE_FROZEN = 1L << 0;
-    private static final long[] FROZEN_STATE = {STATE_FROZEN};
     private static final Object[] EMPTY = new Object[0];
 
     private final Object[] valueLane;
-    private final long[] stateMaskWords = FROZEN_STATE;
+    private final long[] stateMaskWords;
     private final int size;
 
     /** Creates a valid immutable empty owner. */
@@ -48,6 +48,10 @@ public final class FrozenList<E> {
     private FrozenList(Object[] values) {
         valueLane = values;
         size = values.length;
+        int tail = size & 63;
+        stateMaskWords = new long[(size >>> 6) + (tail == 0 ? 0 : 1)];
+        Arrays.fill(stateMaskWords, -1L);
+        if (tail != 0) stateMaskWords[stateMaskWords.length - 1] = (1L << tail) - 1;
     }
 
     /** Retained compatibility descriptor; it does not describe admission status. */
