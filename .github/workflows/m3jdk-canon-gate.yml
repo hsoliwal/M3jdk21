@@ -1,0 +1,64 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3JDK canon gate
+on:
+  pull_request:
+    branches: [master]
+    paths:
+      - 'make/jdk/src/classes/build/tools/canongate/**'
+      - 'make/scripts/canon-gate.sh'
+      - 'make/conf/canon-patterns.tsv'
+      - 'test/make/canongate/**'
+      - 'doc/canon-gate.md'
+      - '.github/workflows/m3jdk-canon-gate.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  selftest:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /make/jdk/src/classes/build/tools/canongate/**
+            /make/scripts/canon-gate.sh
+            /make/conf/canon-patterns.tsv
+            /test/make/canongate/**
+            /doc/canon-gate.md
+      - uses: actions/setup-java@cf277c60eb25467037889841efdb72551f06f6c3
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Compile with all lint warnings as errors and run the discriminating suite
+        run: bash make/scripts/canon-gate.sh selftest
+      - name: The seed pattern catalog is a valid packet input
+        run: |
+          set -eu
+          work="$RUNNER_TEMP/canon"
+          mkdir -p "$work"
+          printf '# canon-gate smoke packet\n' > "$work/spec.md"
+          printf 'path\tsha256\tatom\tpattern\trole\texact_hash\tlogic_hash\tstructure_hash\tsim_hash\n' > "$work/atoms.tsv"
+          {
+            printf 'task_packet\tactive\nsource_doc\tspec.md\ninvariant_id\tCANON-SMOKE\n'
+            printf 'run.mode\tdry-run\nrun.profile\tfast\nrun.workers\t1\nrun.shard_count\t1\nrun.shard_index\t0\n'
+            printf 'targets.modules\tmake/jdk/src/classes/build/tools/canongate\n'
+            printf 'invariant_locks\tPUBLIC_API:LOCKED,EXTERNAL_BEHAVIOR:LOCKED,DISABLED_PATHS:FORBIDDEN,EXCLUDED_PATHS:FORBIDDEN,BUILD_SCRIPTS:LOCKED\n'
+            printf 'allowed_delta\tnone\nforbidden\tany change\nstop_conditions\tfirst failing stage\n'
+            printf 'pattern_catalog\t%s\n' "$GITHUB_WORKSPACE/make/conf/canon-patterns.tsv"
+            printf 'verify_order\tdiff,atom_pattern,lint,compile\n'
+            printf 'output_contract\tSTATUS.tsv,FINAL_REPORT.md,RUN_CONTEXT.tsv,PROVENANCE.tsv,VERIFY_CONTRACT.tsv,OUTPUT_CONTRACT.tsv,ATOM_PATTERN.tsv\n'
+            printf 'verify.diff\tgit diff --check\n'
+            printf 'verify.atom_pattern\tcp %s "$CANON_RUN_DIR/ATOM_PATTERN.tsv"\n' "$work/atoms.tsv"
+            printf 'verify.lint\tbash -n make/scripts/canon-gate.sh\n'
+            printf 'verify.compile\ttrue\n'
+          } > "$work/packet.tsv"
+          bash make/scripts/canon-gate.sh check "$work/packet.tsv"
+          bash make/scripts/canon-gate.sh run "$work/packet.tsv" "$work/run"
+          cat "$work/run/FINAL_REPORT.md" >> "$GITHUB_STEP_SUMMARY"
