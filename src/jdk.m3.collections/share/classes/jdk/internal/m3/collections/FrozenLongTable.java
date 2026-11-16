@@ -68,21 +68,7 @@ public final class FrozenLongTable {
         long[] encountered = new long[rows.length];
         long[] cellRows = new long[rows.length];
         PackedLongRowIndex ordinals = new PackedLongRowIndex(0);
-        int distinct = 0;
-        for (int cell = 0; cell < sourceRows.length; cell++) {
-            long key = sourceRows[cell];
-            int ordinal = ordinals.find(key, encountered);
-            if (ordinal < 0) {
-                ordinals.ensure(distinct + 1, encountered);
-                ordinal = distinct++;
-                encountered[ordinal] = key;
-                ordinals.insert(ordinal, encountered);
-            }
-            cellRows[cell] = ordinal;
-        }
-        if (distinct == Integer.MAX_VALUE) {
-            throw new OutOfMemoryError("FrozenLongTable offset capacity exhausted");
-        }
+        int distinct = distinctOf(sourceRows, encountered, cellRows, ordinals);
         int[] order = LongKeyOrder.lexicographic(cellRows, sourceColumns);
         int[] offsets = new int[distinct + 1];
         long[] packedColumns = new long[order.length];
@@ -104,6 +90,25 @@ public final class FrozenLongTable {
         offsets[distinct] = order.length;
         return new FrozenLongTable(Arrays.copyOf(encountered, distinct), offsets,
                 packedColumns, packedValues, ordinals);
+    }
+
+    private static int distinctOf(long[] sourceRows, long[] encountered, long[] cellRows, PackedLongRowIndex ordinals) {
+        int distinct = 0;
+        for (int cell = 0; cell < sourceRows.length; cell++) {
+            long key = sourceRows[cell];
+            int ordinal = ordinals.find(key, encountered);
+            if (ordinal < 0) {
+                ordinals.ensure(distinct + 1, encountered);
+                ordinal = distinct++;
+                encountered[ordinal] = key;
+                ordinals.insert(ordinal, encountered);
+            }
+            cellRows[cell] = ordinal;
+        }
+        if (distinct == Integer.MAX_VALUE) {
+            throw new OutOfMemoryError("FrozenLongTable offset capacity exhausted");
+        }
+        return distinct;
     }
 
     public int size() { return size; }

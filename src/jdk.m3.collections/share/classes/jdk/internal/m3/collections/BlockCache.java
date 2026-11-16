@@ -129,6 +129,21 @@ public final class BlockCache implements BlockStore {
 	 */
 	@Override
 	public int reserve (int parentKey, int block) {
+		int victim = victimOf();
+		if (victim < 0) return -1;
+		if (slotState [victim] != EMPTY) {
+			evictions++;
+			if (evictor != null && slotState [victim] == LOADED) evictor.evicting (victim);
+		}
+		clearSlot (victim);
+		slotParent [victim] = parentKey;
+		slotBlock [victim] = block;
+		slotState [victim] = PENDING;
+		slotStamp [victim] = clock;
+		return victim;
+	}
+
+	private int victimOf() {
 		int victim = -1;
 		int victimStamp = 0;
 		for (int i = 0; i < capacity; i++) {
@@ -143,16 +158,6 @@ public final class BlockCache implements BlockStore {
 				victimStamp = slotStamp [i];
 			}
 		}
-		if (victim < 0) return -1;
-		if (slotState [victim] != EMPTY) {
-			evictions++;
-			if (evictor != null && slotState [victim] == LOADED) evictor.evicting (victim);
-		}
-		clearSlot (victim);
-		slotParent [victim] = parentKey;
-		slotBlock [victim] = block;
-		slotState [victim] = PENDING;
-		slotStamp [victim] = clock;
 		return victim;
 	}
 

@@ -93,6 +93,17 @@ public final class LazyBitAddressSpace {
 
     /** Returns true when the bit changed from clear to set. */
     public boolean set(long index) {
+        long[] leaf = leafOf(index);
+        int offset = leafOffset(index);
+        int word = offset >>> 6;
+        long bit = 1L << (offset & 63);
+        if ((leaf[word] & bit) != 0L) return false;
+        leaf[word] |= bit;
+        cardinality++;
+        return true;
+    }
+
+    private long[] leafOf(long index) {
         checkIndex(index);
         int rootIndex = rootIndex(index);
         Object[] middle = (Object[]) root[rootIndex];
@@ -108,13 +119,7 @@ public final class LazyBitAddressSpace {
             middle[middleIndex] = leaf;
             allocatedLeaves++;
         }
-        int offset = leafOffset(index);
-        int word = offset >>> 6;
-        long bit = 1L << (offset & 63);
-        if ((leaf[word] & bit) != 0L) return false;
-        leaf[word] |= bit;
-        cardinality++;
-        return true;
+        return leaf;
     }
 
     /** Returns true when the bit changed from set to clear. */

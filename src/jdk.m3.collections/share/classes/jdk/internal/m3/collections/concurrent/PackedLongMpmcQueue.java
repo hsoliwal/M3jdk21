@@ -232,9 +232,7 @@ public final class PackedLongMpmcQueue implements LongQueue {
 
     @Override
     public int offerBatch(long[] source, int offset, int length) {
-        Objects.requireNonNull(source, "source");
-        Objects.checkFromIndexSize(offset, length, source.length);
-        int requested = Math.min(length, capacity);
+        int requested = requestedOf(source, offset, length);
         if (requested == 0) return 0;
         for (;;) {
             long position = (long) TAIL.getAcquire(this);
@@ -262,6 +260,13 @@ public final class PackedLongMpmcQueue implements LongQueue {
             }
             return available;
         }
+    }
+
+    private int requestedOf(long[] source, int offset, int length) {
+        Objects.requireNonNull(source, "source");
+        Objects.checkFromIndexSize(offset, length, source.length);
+        int requested = Math.min(length, capacity);
+        return requested;
     }
 
     @Override

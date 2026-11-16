@@ -63,6 +63,12 @@ public final class FrozenLongBag {
                 distinct++;
             }
         }
+        int[] counts = countsOf(elements, distinct);
+        return new FrozenLongBag(distinct == elements.length
+                ? elements : Arrays.copyOf(elements, distinct), counts, source.length);
+    }
+
+    private static int[] countsOf(long[] elements, int distinct) {
         int[] counts = new int[distinct];
         int ordinal = 0;
         long previous = elements[0];
@@ -77,8 +83,7 @@ public final class FrozenLongBag {
                 counts[ordinal] = 1;
             }
         }
-        return new FrozenLongBag(distinct == elements.length
-                ? elements : Arrays.copyOf(elements, distinct), counts, source.length);
+        return counts;
     }
 
     public int size() {
