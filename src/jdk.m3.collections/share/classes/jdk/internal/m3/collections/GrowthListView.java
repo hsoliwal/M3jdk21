@@ -4,61 +4,108 @@
  */
 package jdk.internal.m3.collections;
 
+import java.util.Arrays;
+
 /**
- * M3 five-library superset scaffold {@code GrowthListView}: API group {@code GROWTH_LIST} over arrays and state masks.
+ * Dynamic indexed list over one parent-owned {@code Object[]} lane. Indexed
+ * writes and inserts beyond the logical end extend the list with null slots,
+ * matching Commons Collections GrowthList without its list decorator graph.
+ * Stored elements have no Node, Cell or Entry objects.
  *
- * <p>Provider lineage (LIBRARY_API_MATRIX.tsv, run 20261017-m3-to-public/LIB-SUPERSET):
- * <ul>
- *   <li>COMMONS GrowthList/FixedSizeList/SetUniqueList: size-behavior decorators [license Apache-2.0; SUPERSET_VIEW VIEW_OF:M3LongArrayList; priority P2; matrix owner facades over list owner]</li>
- * </ul>
- *
- * <p>DOOP mapping: lane kind OBJECT; lanes {@code Object[] valueLane}; offset scheme ordinal slot; set(index) beyond size grows; state-mask bits GROWTH; stored nodes NONE; API entry objects NONE (transient facades over slots, never the stored representation); matrix note: base value lane + behavior flags / FIXED_SIZE/UNIQUE flags.
- *
- * <p>Status: SCAFFOLD. Every public atom throws {@link NotYetReceived} until this owner is received through a hash-pinned Synexia recipe with its own
- * provider oracle (never inferred from another provider). Not a {@code java.util} replacement.
+ * <p>Not thread-safe. Element references and their encounter order are retained.
  */
 public final class GrowthListView<E> {
-    /** State-mask bit {@code GROWTH} (per-slot state word, bit 0). */
     static final long STATE_GROWTH = 1L << 0;
-
-    /** Storage lane {@code valueLane}: dynamic primitive/reference array lane. */
     private Object[] valueLane = new Object[0];
-    /** Per-slot state words (GROWTH); one bit set per slot and state. */
-    private long[] stateMaskWords = new long[0];
-    /** Live slot count. */
+    private final long[] stateMaskWords = {STATE_GROWTH};
     private int size;
 
-    /** Creates an empty scaffold owner; lanes grow by copy once received. */
-    public GrowthListView() {
-    }
+    public GrowthListView() { }
 
-    /** Reports the declared state-mask bits and lanes for ledgers; never allocates per element. */
+    /** Keep the existing public catalogue descriptor and compatibility identity. */
     public static String scaffoldDescriptor() {
         return "M3GrowthListView|GROWTH_LIST|OBJECT|GROWTH|Object[] valueLane";
     }
 
-    /** GrowthList.get (scaffold: not yet received). */
+    @SuppressWarnings("unchecked")
     public E get(int index) {
-        throw new NotYetReceived("M3GrowthListView.get");
+        checkExisting(index);
+        return (E) valueLane[index];
     }
 
-    /** GrowthList.set (pads with null up to index) (scaffold: not yet received). */
+    /** Replace one value, or grow and null-pad up to the requested index. */
+    @SuppressWarnings("unchecked")
     public E set(int index, E element) {
-        throw new NotYetReceived("M3GrowthListView.set");
+        int required = requiredLength(index);
+        if (index < size) {
+            E previous = (E) valueLane[index];
+            valueLane[index] = element;
+            return previous;
+        }
+        reserve(required);
+        Arrays.fill(valueLane, size, index, null);
+        valueLane[index] = element;
+        size = required;
+        return null;
     }
 
-    /** GrowthList.add(index) (pads) (scaffold: not yet received). */
+    /** Insert in encounter order, or append after null-padding a gap. */
     public void add(int index, E element) {
-        throw new NotYetReceived("M3GrowthListView.add");
+        int required = requiredLength(index);
+        if (index < size) {
+            reserve(increment(size));
+            System.arraycopy(valueLane, index, valueLane, index + 1, size - index);
+            valueLane[index] = element;
+            size++;
+        } else if (index == size) {
+            reserve(increment(size));
+            valueLane[size++] = element;
+        } else {
+            reserve(required);
+            Arrays.fill(valueLane, size, index, null);
+            valueLane[index] = element;
+            size = required;
+        }
     }
 
-    /** List.add (scaffold: not yet received). */
     public boolean add(E element) {
-        throw new NotYetReceived("M3GrowthListView.add");
+        reserve(increment(size));
+        valueLane[size++] = element;
+        return true;
     }
 
-    /** List.size (scaffold: not yet received). */
-    public int size() {
-        throw new NotYetReceived("M3GrowthListView.size");
+    public int size() { return size; }
+
+    /** Explicit snapshot boundary; not the retained backing array. */
+    public Object[] toArray() { return Arrays.copyOf(valueLane, size); }
+
+    /** Release owned references while retaining the reusable capacity. */
+    public void clear() {
+        Arrays.fill(valueLane, 0, size, null);
+        size = 0;
+    }
+
+    private void checkExisting(int index) {
+        if (index < 0 || index >= size) {
+            throw new IndexOutOfBoundsException("index=" + index + " size=" + size);
+        }
+    }
+
+    private static int requiredLength(int index) {
+        if (index < 0) throw new IndexOutOfBoundsException("index=" + index);
+        return increment(index);
+    }
+
+    private static int increment(int index) {
+        if (index == Integer.MAX_VALUE) throw new OutOfMemoryError("list too large");
+        return index + 1;
+    }
+
+    private void reserve(int minimum) {
+        if (minimum <= valueLane.length) return;
+        long grown = valueLane.length == 0 ? 8L
+                : (long) valueLane.length + (valueLane.length >>> 1) + 1;
+        int capacity = (int) Math.min(Integer.MAX_VALUE, Math.max(grown, minimum));
+        valueLane = Arrays.copyOf(valueLane, capacity);
     }
 }
