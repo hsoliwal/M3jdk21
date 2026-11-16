@@ -97,3 +97,16 @@ The same sources ship in the M3 Maven fork as `tools/m3-smart-builder/src/main/j
 the two copies differ only in their package line.
 
 The gate reads `ATOM_PATTERN.tsv` one UTF-8 row at a time instead of retaining every input line at once. Source coverage, source digests and hash-plane clusters are still retained for deterministic results, so this is not a claim of constant memory for the whole run.
+
+### Complete selected-file inventory dispositions
+
+The optional inventory emits additive `INVENTORY_DISPOSITIONS.tsv` with
+`path`, `status`, `sha256` columns and one row per selected path, alongside
+the unmodified seven-column `INVENTORY.tsv`. Ordinary files report
+`INVENTORIED` and SHA-256. Missing, directory, symlink/linked-parent,
+nonregular or noncanonical entries report `MISSING`,
+`UNSUPPORTED_DIRECTORY`, `UNSUPPORTED_SYMLINK`,
+`UNSUPPORTED_NONREGULAR` or `UNSAFE_PATH` with `-` rather than being
+silently skipped. These dispositions do not count as verified atoms.
+The current inventory still materializes bytes for normalized clustering;
+bounded-memory source indexing and race-free file opening need separate work.
