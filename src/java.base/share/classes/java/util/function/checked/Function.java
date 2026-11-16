@@ -1,0 +1,77 @@
+/*
+ * SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+package java.util.function.checked;
+
+/**
+ * A checked function with the shape {@code (reference) to reference}.
+ *
+ * <p>Primitive positions are primitive in the functional method. Reference arguments and results
+ * may be null unless the implementation imposes a restriction. Invocations are caller-driven; this
+ * interface implies no scheduling, caching, serialization, purity, resource ownership, or
+ * thread-safety guarantee.
+ *
+ * <p>The exception parameter preserves the declared throwable type. Default operations relay the
+ * original throwable without wrapping or catching it and do not change thread interruption status.
+ *
+ * This is a functional interface whose functional method is {@code apply}.
+ *
+ * @param <T> an input type
+ * @param <R> the result type
+ * @param <E> the throwable type
+ * @since M3JDK 21
+ */
+@FunctionalInterface
+public interface Function<T, R, E extends Throwable> {
+    /**
+     * Applies this function to the supplied arguments.
+     *
+     * @param value1 the argument at position 1
+     * @return the result
+     * @throws E if the operation fails
+     */
+    R apply(T value1) throws E;
+
+    /**
+     * Returns a function that passes this result to {@code after}.
+     * <p>This function runs first. If it throws, {@code after} is not invoked. The result,
+     * including null, is passed unchanged. Composition invokes neither function.
+     *
+     * @param <W> the composed result type
+     * @param after the function to apply second
+     * @return the composed function
+     * @throws NullPointerException if {@code after} is null
+     */
+    default <W> Function<T, W, E> andThen(
+            java.util.function.checked.Function<? super R, ? extends W, ? extends E> after) {
+        java.util.Objects.requireNonNull(after);
+        return (value1) -> after.apply(apply(value1));
+    }
+
+    /**
+     * Returns a function that invokes {@code before}, then this function.
+     *
+     * @param <W> the composed input type
+     * @param before the function to apply first
+     * @return the composed function
+     * @throws NullPointerException if {@code before} is null
+     */
+    default <W> Function<W, R, E> compose(
+            Function<? super W, ? extends T, ? extends E> before) {
+        java.util.Objects.requireNonNull(before);
+        return value -> apply(before.apply(value));
+    }
+
+    /**
+     * Returns a function that returns its argument unchanged.
+     *
+     * @param <T> the input and result type
+     * @param <E> the throwable type
+     * @return an identity function
+     */
+    static <T, E extends Throwable> Function<T, T, E> identity() {
+        return value -> value;
+    }
+}

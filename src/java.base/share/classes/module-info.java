@@ -113,6 +113,8 @@ module java.base {
     exports java.util.concurrent.atomic;
     exports java.util.concurrent.locks;
     exports java.util.function;
+    exports java.util.function.checked;
+    exports java.util.function.ext;
     exports java.util.jar;
     exports java.util.random;
     exports java.util.regex;
