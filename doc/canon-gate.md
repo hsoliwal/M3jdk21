@@ -53,6 +53,12 @@ The `atom_pattern` stage must write `$CANON_RUN_DIR/ATOM_PATTERN.tsv`, tab-separ
 - Every pattern must be admitted by `pattern_catalog` or be a typed residue written `RESIDUE:<reason>`; `UNKNOWN` is
   never admitted. A residue that keeps recurring is the candidate for a new catalog row.
 - Every file that differs from `base_ref` needs at least one row.
+- Only canonical repository-relative paths may appear in atom rows: reject absolute paths, `.`/`..`,
+  empty path components, backslashes, colons and control characters. A symlink cannot be
+  treated as an ordinary source file merely because its target has a matching digest.
+- The current table has no deletion or nonregular-path evidence schema. **Changed deleted
+  files, symlinks, gitlinks and directories fail closed** with `ATOM_NONREGULAR_CHANGE`
+  until a versioned and tested deletion-proof representation is explicitly added.
 - Hash planes: `exact_hash`, `logic_hash` and `structure_hash` are 64 hex digits and `sim_hash` (SimHash-64) is 16.
   Every atom of a `.java` file must carry all four; other files may write `-`.
 - Atoms that share a plane value are listed in `ATOM_CLUSTERS.tsv` as proposals ("These atoms may be similar. Please
@@ -62,7 +68,8 @@ The `atom_pattern` stage must write `$CANON_RUN_DIR/ATOM_PATTERN.tsv`, tab-separ
 
 `STAGE_FAILED`, `HEAD_MOVED`, `DRY_RUN_MUTATION`, `OUT_OF_SCOPE`, `EXCLUDED_PATH`, `DISABLED_PATH`, `BUILD_SCRIPT_LOCKED`
 (a build script changes without being named in `targets.files`), `ATOM_PATTERN_SCHEMA`, `ATOM_STALE`, `PATTERN_UNKNOWN`,
-`PATTERN_NOT_ADMITTED`, `ATOM_PLANES_MISSING`, `ATOM_UNCOVERED`, `NON_IDEMPOTENT`, `BASELINE_UNREADABLE`, `OUTPUT_CONTRACT_MISSING`.
+`PATTERN_NOT_ADMITTED`, `ATOM_PLANES_MISSING`, `ATOM_UNCOVERED`, `ATOM_PATTERN_MISSING`, `ATOM_NONREGULAR_CHANGE`,
+`NON_IDEMPOTENT`, `BASELINE_UNREADABLE`, `OUTPUT_CONTRACT_MISSING`.
 
 ## Artifacts
 
