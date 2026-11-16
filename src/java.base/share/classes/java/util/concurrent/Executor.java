@@ -159,6 +159,7 @@ public interface Executor {
      * @throws RejectedExecutionException if this task cannot be accepted
      */
     default void executeWithProgress(Runnable command) {
+        java.util.Objects.requireNonNull(command, "command");
         execute(command, ProgressMonitors.current());
     }
 
