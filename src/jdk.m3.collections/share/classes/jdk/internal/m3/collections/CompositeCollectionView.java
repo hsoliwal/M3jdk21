@@ -4,76 +4,123 @@
  */
 package jdk.internal.m3.collections;
 
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
 /**
- * M3 five-library superset scaffold {@code CompositeCollectionView}: API group {@code COMPOSITE_COLLECTION} over arrays and state masks.
- *
- * <p>Provider lineage (LIBRARY_API_MATRIX.tsv, run 20261017-m3-to-public/LIB-SUPERSET):
- * <ul>
- *   <li>COMMONS CompositeMap/CompositeCollection: union view over several backings [license Apache-2.0; SUPERSET_VIEW VIEW_OF:multiple owners; priority P2; matrix owner mask-selected union of lane sets]</li>
- * </ul>
- *
- * <p>DOOP mapping: lane kind OBJECT; lanes {@code Object[] backingLane}; offset scheme per-backing precedence offsets; state-mask bits SELECTED; stored nodes NONE; API entry objects TRANSIENT_FACADE (transient facades over slots, never the stored representation); matrix note: per-backing lane refs + precedence offsets / per-backing selection masks.
- *
- * <p>Status: SCAFFOLD. Every public atom throws {@link NotYetReceived} until this owner is received through a hash-pinned Synexia recipe with its own
- * provider oracle (never inferred from another provider). Not a {@code java.util} replacement.
+ * Live concatenation of collection owners, with only one parent-owned
+ * {@code Object[]} of backing references. No per-entry Node, Cell or Entry
+ * objects, copied element arrays, or permanent iterator chains are retained.
+ * The view is not synchronized; nested collections own their own mutations.
  */
-public final class CompositeCollectionView<E> {
-    /** State-mask bit {@code SELECTED} (per-slot state word, bit 0). */
+public final class CompositeCollectionView<E> implements Iterable<E> {
     static final long STATE_SELECTED = 1L << 0;
-
-    /** Storage lane {@code backingLane}: dynamic primitive/reference array lane. */
     private Object[] backingLane = new Object[0];
-    /** Per-slot state words (SELECTED); one bit set per slot and state. */
-    private long[] stateMaskWords = new long[0];
-    /** Live slot count. */
-    private int size;
+    private int backingCount;
 
-    /** Creates an empty scaffold owner; lanes grow by copy once received. */
-    public CompositeCollectionView() {
-    }
+    public CompositeCollectionView() { }
 
-    /** Reports the declared state-mask bits and lanes for ledgers; never allocates per element. */
     public static String scaffoldDescriptor() {
         return "M3CompositeCollectionView|COMPOSITE_COLLECTION|OBJECT|SELECTED|Object[] backingLane";
     }
 
-    /** CompositeCollection.addComposited (scaffold: not yet received). */
-    public void addComposited(java.util.Collection<E> collection) {
-        throw new NotYetReceived("M3CompositeCollectionView.addComposited");
+    /** Null backings are ignored; repeated backing references remain distinct. */
+    public void addComposited(Collection<E> collection) {
+        if (collection == null) return;
+        if (backingCount == backingLane.length) {
+            long next = backingCount == 0 ? 4L : (long) backingCount + (backingCount >>> 1) + 1;
+            backingLane = Arrays.copyOf(backingLane, (int) Math.min(next, Integer.MAX_VALUE));
+        }
+        backingLane[backingCount++] = collection;
     }
 
-    /** CompositeCollection.removeComposited (scaffold: not yet received). */
-    public void removeComposited(java.util.Collection<E> collection) {
-        throw new NotYetReceived("M3CompositeCollectionView.removeComposited");
+    /** Removes the first collection that compares equal, as List.remove does. */
+    public void removeComposited(Collection<E> collection) {
+        for (int i = 0; i < backingCount; i++) {
+            Object current = backingLane[i];
+            if (collection == null ? current == null : collection.equals(current)) {
+                int shift = backingCount - i - 1;
+                if (shift > 0) {
+                    System.arraycopy(backingLane, i + 1, backingLane, i, shift);
+                }
+                backingLane[--backingCount] = null;
+                return;
+            }
+        }
     }
 
-    /** CompositeCollection.add (mutator required) (scaffold: not yet received). */
+    /** Matches Commons CompositeCollection's default lack of a mutator. */
     public boolean add(E element) {
-        throw new NotYetReceived("M3CompositeCollectionView.add");
+        throw new UnsupportedOperationException(
+                "add() is not supported on CompositeCollection without a CollectionMutator strategy");
     }
 
-    /** CompositeCollection.remove (scaffold: not yet received). */
+    /** Removal needs a configured composite mutator and is rejected by default. */
     public boolean remove(Object element) {
-        throw new NotYetReceived("M3CompositeCollectionView.remove");
+        throw new UnsupportedOperationException(
+                "remove() is not supported on CompositeCollection without a CollectionMutator strategy");
     }
 
-    /** CompositeCollection.contains (scaffold: not yet received). */
+    /** Each child retains its own membership semantics and callback order. */
+    @SuppressWarnings("unchecked")
     public boolean contains(Object element) {
-        throw new NotYetReceived("M3CompositeCollectionView.contains");
+        for (int i = 0; i < backingCount; i++) {
+            if (((Collection<E>) backingLane[i]).contains(element)) return true;
+        }
+        return false;
     }
 
-    /** CompositeCollection.iterator (chained) (scaffold: not yet received). */
-    public java.util.Iterator<E> iterator() {
-        throw new NotYetReceived("M3CompositeCollectionView.iterator");
+    /** Capture iterator references only while traversal is in progress. */
+    @SuppressWarnings("unchecked")
+    @Override public Iterator<E> iterator() {
+        return new Iterator<>() {
+            private int backingIndex;
+            private Iterator<E> current = Collections.emptyIterator();
+            private Iterator<E> lastUsed;
+            private boolean canRemove;
+
+            @Override public boolean hasNext() {
+                while (!current.hasNext() && backingIndex < backingCount) {
+                    current = ((Collection<E>) backingLane[backingIndex++]).iterator();
+                }
+                return current.hasNext();
+            }
+
+            @Override public E next() {
+                if (!hasNext()) throw new NoSuchElementException();
+                E next = current.next();
+                lastUsed = current;
+                canRemove = true;
+                return next;
+            }
+
+            @Override public void remove() {
+                if (!canRemove) throw new IllegalStateException();
+                lastUsed.remove();
+                canRemove = false;
+            }
+        };
     }
 
-    /** CompositeCollection.size (scaffold: not yet received). */
+    /** Recompute live cardinality; adding/removing from a child is observable. */
+    @SuppressWarnings("unchecked")
     public int size() {
-        throw new NotYetReceived("M3CompositeCollectionView.size");
+        long count = 0;
+        for (int i = 0; i < backingCount; i++) {
+            count += ((Collection<E>) backingLane[i]).size();
+            if (count >= Integer.MAX_VALUE) return Integer.MAX_VALUE;
+        }
+        return (int) count;
     }
 
-    /** CompositeCollection.isEmpty (scaffold: not yet received). */
+    @SuppressWarnings("unchecked")
     public boolean isEmpty() {
-        throw new NotYetReceived("M3CompositeCollectionView.isEmpty");
+        for (int i = 0; i < backingCount; i++) {
+            if (!((Collection<E>) backingLane[i]).isEmpty()) return false;
+        }
+        return true;
     }
 }
