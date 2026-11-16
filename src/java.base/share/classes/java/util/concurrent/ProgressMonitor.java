@@ -40,6 +40,35 @@ public interface ProgressMonitor {
      */
     default void worked(long units) { }
     /**
+     * Announces a task whose total amount of work is unknown.
+     *
+     * @implSpec
+     * This implementation invokes {@link #begin(String, long)} exactly once,
+     * passing the same task reference and {@link #UNKNOWN_WORK}. The selected
+     * implementation owns task validation, including handling of a null task.
+     * This overload adds no cancellation or lifecycle callbacks and propagates
+     * failures from the selected implementation unchanged.
+     *
+     * @param task the task description passed to the full-argument implementation
+     */
+    default void begin(String task) {
+        begin(task, UNKNOWN_WORK);
+    }
+
+    /**
+     * Reports one additional unit of completed work.
+     *
+     * @implSpec
+     * This implementation invokes {@link #worked(long)} exactly once with
+     * {@code 1L}, using virtual dispatch. It adds no cancellation or lifecycle
+     * callbacks and propagates failures from the selected implementation
+     * unchanged.
+     */
+    default void worked() {
+        worked(1L);
+    }
+
+    /**
      * Reports a progress message. The default implementation does nothing.
      *
      * @param text the progress message
