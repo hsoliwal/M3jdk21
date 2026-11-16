@@ -4,9 +4,9 @@ on:
   pull_request:
     paths:
       - '.github/workflows/m3-arrayified-apache-list-owners-20261113.yml'
-      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/apache/M3NodeCachingLinkedList.java'
-      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/apache/M3TreeList.java'
-      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/apache/M3ArrayStack.java'
+      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/apache/NodeCachingLinkedList.java'
+      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/apache/TreeList.java'
+      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/apache/ArrayStack.java'
       - 'test/jdk/jdk/m3/collections/ArrayLinkedListContract.java'
       - 'test/jdk/jdk/m3/collections/ArrayTreeListContract.java'
       - 'test/jdk/jdk/m3/collections/ArrayStackContract.java'
@@ -29,14 +29,14 @@ jobs:
           build="$RUNNER_TEMP/m3jdk-collection-array-owners"
           mkdir -p "$build/src/jdk.m3.collections/jdk/m3/collections/apache" "$build/classes" "$build/test-classes"
           printf 'module jdk.m3.collections { exports jdk.m3.collections.apache; }\n' > "$build/src/jdk.m3.collections/module-info.java"
-          cp src/jdk.m3.collections/share/classes/jdk/m3/collections/apache/M3NodeCachingLinkedList.java "$build/src/jdk.m3.collections/jdk/m3/collections/apache/"
-          cp src/jdk.m3.collections/share/classes/jdk/m3/collections/apache/M3TreeList.java "$build/src/jdk.m3.collections/jdk/m3/collections/apache/"
-          cp src/jdk.m3.collections/share/classes/jdk/m3/collections/apache/M3ArrayStack.java "$build/src/jdk.m3.collections/jdk/m3/collections/apache/"
+          cp src/jdk.m3.collections/share/classes/jdk/m3/collections/apache/NodeCachingLinkedList.java "$build/src/jdk.m3.collections/jdk/m3/collections/apache/"
+          cp src/jdk.m3.collections/share/classes/jdk/m3/collections/apache/TreeList.java "$build/src/jdk.m3.collections/jdk/m3/collections/apache/"
+          cp src/jdk.m3.collections/share/classes/jdk/m3/collections/apache/ArrayStack.java "$build/src/jdk.m3.collections/jdk/m3/collections/apache/"
           javac --release 21 -Xlint:all,-module -Werror -d "$build/classes" \
             "$build/src/jdk.m3.collections/module-info.java" \
-            "$build/src/jdk.m3.collections/jdk/m3/collections/apache/M3NodeCachingLinkedList.java" \
-            "$build/src/jdk.m3.collections/jdk/m3/collections/apache/M3TreeList.java" \
-            "$build/src/jdk.m3.collections/jdk/m3/collections/apache/M3ArrayStack.java"
+            "$build/src/jdk.m3.collections/jdk/m3/collections/apache/NodeCachingLinkedList.java" \
+            "$build/src/jdk.m3.collections/jdk/m3/collections/apache/TreeList.java" \
+            "$build/src/jdk.m3.collections/jdk/m3/collections/apache/ArrayStack.java"
           javac --release 21 -Xlint:all,-module -Werror \
             --module-path "$build/classes" --add-modules jdk.m3.collections \
             -d "$build/test-classes" \
@@ -60,9 +60,9 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          test "$(git hash-object src/jdk.m3.collections/share/classes/jdk/m3/collections/apache/M3NodeCachingLinkedList.java)" = "0639e6a9a0f4ef6c8d697ae1fa90f7a9542d15b9"
-          test "$(git hash-object src/jdk.m3.collections/share/classes/jdk/m3/collections/apache/M3TreeList.java)" = "9da0a6ad147c423a0cfa718a8159890cc2c25977"
-          test "$(git hash-object src/jdk.m3.collections/share/classes/jdk/m3/collections/apache/M3ArrayStack.java)" = "fc253468efae015e37bfd68ad0195e106e8222f5"
+          test "$(git hash-object src/jdk.m3.collections/share/classes/jdk/m3/collections/apache/NodeCachingLinkedList.java)" = "0639e6a9a0f4ef6c8d697ae1fa90f7a9542d15b9"
+          test "$(git hash-object src/jdk.m3.collections/share/classes/jdk/m3/collections/apache/TreeList.java)" = "9da0a6ad147c423a0cfa718a8159890cc2c25977"
+          test "$(git hash-object src/jdk.m3.collections/share/classes/jdk/m3/collections/apache/ArrayStack.java)" = "fc253468efae015e37bfd68ad0195e106e8222f5"
           build="$RUNNER_TEMP/m3jdk-collection-array-owners"
           mkdir -p "$build/javadoc"
           javadoc -quiet -Xdoclint:all -Werror -d "$build/javadoc" \
@@ -151,14 +151,14 @@ jobs:
           test -x "$image/bin/javac"
           "$image/bin/java" --list-modules | grep -Eq '^jdk[.]m3[.]collections(@|$)'
           "$image/bin/javap" --module jdk.m3.collections \
-            jdk.m3.collections.apache.M3NodeCachingLinkedList > "$RUNNER_TEMP/linked.txt"
+            jdk.m3.collections.apache.NodeCachingLinkedList > "$RUNNER_TEMP/linked.txt"
           "$image/bin/javap" --module jdk.m3.collections \
-            jdk.m3.collections.apache.M3TreeList > "$RUNNER_TEMP/tree.txt"
+            jdk.m3.collections.apache.TreeList > "$RUNNER_TEMP/tree.txt"
           "$image/bin/javap" --module jdk.m3.collections \
-            jdk.m3.collections.apache.M3ArrayStack > "$RUNNER_TEMP/stack.txt"
-          grep -Fq 'class jdk.m3.collections.apache.M3NodeCachingLinkedList' "$RUNNER_TEMP/linked.txt"
-          grep -Fq 'class jdk.m3.collections.apache.M3TreeList' "$RUNNER_TEMP/tree.txt"
-          grep -Fq 'class jdk.m3.collections.apache.M3ArrayStack' "$RUNNER_TEMP/stack.txt"
+            jdk.m3.collections.apache.ArrayStack > "$RUNNER_TEMP/stack.txt"
+          grep -Fq 'class jdk.m3.collections.apache.NodeCachingLinkedList' "$RUNNER_TEMP/linked.txt"
+          grep -Fq 'class jdk.m3.collections.apache.TreeList' "$RUNNER_TEMP/tree.txt"
+          grep -Fq 'class jdk.m3.collections.apache.ArrayStack' "$RUNNER_TEMP/stack.txt"
 
       - name: Run the actual product JTReg tests against the built M3JDK21
         shell: bash

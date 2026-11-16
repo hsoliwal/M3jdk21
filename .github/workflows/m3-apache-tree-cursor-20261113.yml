@@ -4,8 +4,8 @@ name: M3 Apache TreeList primitive-index iterator proof
 on:
   pull_request:
     paths:
-      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/apache/M3TreeList.java'
-      - 'test/jdk/jdk/m3/collections/M3TreeListCursorContract.java'
+      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/apache/TreeList.java'
+      - 'test/jdk/jdk/m3/collections/TreeListCursorContract.java'
       - 'test/jdk/jdk/m3/collections/M3TreeListCursorJTReg.java'
       - 'test/jdk/jdk/m3/collections/TreeListCursorAllocationFailure.java'
       - 'test/jdk/jdk/m3/collections/verify_tree_cursor_fault.py'
@@ -33,11 +33,13 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          OWNER=src/jdk.m3.collections/share/classes/jdk/m3/collections/apache/M3TreeList.java
-          test "$(git hash-object "$OWNER")" = 'ab861ce0c29d53080b54117414a4ba8486b1c58e'
+          OWNER=src/jdk.m3.collections/share/classes/jdk/m3/collections/apache/TreeList.java
+          test "$(git hash-object "$OWNER")" = '305e3fee2c7566ffea6e87a971a33aeb2aa6a2b5'
           mkdir -p target/tree-cursor/before
-          git show 778cd3eac266974e7b5155e79838f74ee516b535:"$OWNER" > target/tree-cursor/before/M3TreeList.java
+          # The preimage is read at its old path and name; the same rename is then applied to it.
+          git show 778cd3eac266974e7b5155e79838f74ee516b535:src/jdk.m3.collections/share/classes/jdk/m3/collections/apache/M3TreeList.java > target/tree-cursor/before/M3TreeList.java
           test "$(git hash-object target/tree-cursor/before/M3TreeList.java)" = '9da0a6ad147c423a0cfa718a8159890cc2c25977'
+          sed 's/\bM3TreeList\b/TreeList/g' target/tree-cursor/before/M3TreeList.java > target/tree-cursor/before/TreeList.java
       - name: Lint independent disposable fault verifier
         run: python3 -m py_compile test/jdk/jdk/m3/collections/verify_tree_cursor_fault.py
       - name: Strict Java 21 source and original-target contracts
@@ -47,25 +49,25 @@ jobs:
           mkdir -p target/tree-cursor/baseline target/tree-cursor/candidate
           javac --release 21 -proc:none -Xlint:all -Werror \
             -d target/tree-cursor/baseline \
-            target/tree-cursor/before/M3TreeList.java \
+            target/tree-cursor/before/TreeList.java \
             test/jdk/jdk/m3/collections/ArrayTreeListContract.java
           javac --release 21 -proc:none -Xlint:all -Werror \
             -d target/tree-cursor/candidate \
-            src/jdk.m3.collections/share/classes/jdk/m3/collections/apache/M3TreeList.java \
+            src/jdk.m3.collections/share/classes/jdk/m3/collections/apache/TreeList.java \
             test/jdk/jdk/m3/collections/ArrayTreeListContract.java \
-            test/jdk/jdk/m3/collections/M3TreeListCursorContract.java
-          javap -public -s -classpath target/tree-cursor/baseline jdk.m3.collections.apache.M3TreeList \
+            test/jdk/jdk/m3/collections/TreeListCursorContract.java
+          javap -public -s -classpath target/tree-cursor/baseline jdk.m3.collections.apache.TreeList \
             > target/tree-cursor/baseline-api.txt
-          javap -public -s -classpath target/tree-cursor/candidate jdk.m3.collections.apache.M3TreeList \
+          javap -public -s -classpath target/tree-cursor/candidate jdk.m3.collections.apache.TreeList \
             > target/tree-cursor/candidate-api.txt
           diff -u target/tree-cursor/baseline-api.txt target/tree-cursor/candidate-api.txt
           java -cp target/tree-cursor/baseline ArrayTreeListContract \
             | tee target/tree-cursor/baseline.out
           java -cp target/tree-cursor/candidate ArrayTreeListContract \
             | tee target/tree-cursor/candidate-original-contract.out
-          java -cp target/tree-cursor/candidate M3TreeListCursorContract \
+          java -cp target/tree-cursor/candidate TreeListCursorContract \
             | tee target/tree-cursor/candidate-cursor.out
-          java -Xint -cp target/tree-cursor/candidate M3TreeListCursorContract \
+          java -Xint -cp target/tree-cursor/candidate TreeListCursorContract \
             | tee target/tree-cursor/candidate-cursor-interpreted.out
       - name: Prove actual canonical source allocation-failure retry
         shell: bash

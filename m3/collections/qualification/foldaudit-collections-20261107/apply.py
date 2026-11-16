@@ -7,7 +7,7 @@ as landed although their landing merge was ancestry-only (tree == first parent) 
 Inputs (S:/m3-scratch/eb-conv/foldaudit: LEAVES.tsv, HUNK_VERDICTS.tsv, CLOSED_PRS.tsv, CITED_MERGES.tsv):
   PR #1084 head 6b16a20dcedf, cited landing b42ab7605b86 = ANCESTRY_ONLY (3 parents, tree 692d0cc47d21 == first parent):
     L0014 M3GuavaLongMultiset, L0050 M3LibraryBags (interop), L0025 M3CountTotals, L0028 M3CountLanes, L0054
-    M3CountedCatalogue, L0029 m3_count_lanes.c, L0032 m3_count_totals.c, and the seven hash-pinned receiver texts passed
+    CountedCatalogue, L0029 m3_count_lanes.c, L0032 m3_count_totals.c, and the seven hash-pinned receiver texts passed
     from lane 22 (L0308 L0311 L0341 L0346 L0373 L0377 L0493); qualified by the origin tests L0107 L0151 L0166 L0173
     (MAPPED into the real module test trees: the origin counts/ module has no pom on master).
   PR #1791 head f452419fdcee, landed through #2070 (2028b1fb5f4) whose retain merge kept master's pre-identity owner:
@@ -117,10 +117,10 @@ RULES = (
       ("equivalent to left.union(right).size().", "equivalent to left.union(right).totalCount().", 1),
       ("equivalent to left.difference(right).size().", "equivalent to left.difference(right).totalCount().", 1),
       cls("public final class M3CountTotals {\n", "    " + anchor("L0025", "ADD from " + P1084 + " blob 31ce540046a3, " + D1084), API)]),
-    ("L0054", "ADD", CORE + "tooling/M3CountedCatalogue.java", "ffc026d13caa254e8eabed974eca365669c3e7a2", P1084, D1084,
+    ("L0054", "ADD", CORE + "tooling/CountedCatalogue.java", "ffc026d13caa254e8eabed974eca365669c3e7a2", P1084, D1084,
      "ADD MAPPED: origin counts/src/main tooling class into the core module (no counts pom on master); JDK naming; its ledger is the test resource counts/catalogue.tsv",
      [("package " + LEG + ".tooling;\n", "package jdk.m3.collections.tooling;\n", 1),
-      cls("public final class M3CountedCatalogue {\n", "    " + anchor("L0054", "ADD from " + P1084 + " blob ffc026d13caa, " + D1084), MAPPED)]),
+      cls("public final class CountedCatalogue {\n", "    " + anchor("L0054", "ADD from " + P1084 + " blob ffc026d13caa, " + D1084), MAPPED)]),
     ("L0029", "ADD", NATIVE + "m3_count_lanes.c", "fcb85a55c9ff3d19faa1de991a109e3b3f3c3582", P1084, D1084,
      "ADD: origin blob, JNI symbol renamed with the package (javac -h header match in GATES.tsv), one anchor comment",
      [(JNI_LEG + "M3CountLanes_combineNative(", "Java_jdk_m3_collections_M3CountLanes_combineNative(", 1),

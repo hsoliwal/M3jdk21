@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
 # SPDX-License-Identifier: Apache-2.0
-"""Fail-closed disposable source instrumentation for the canonical M3TreeList."""
+"""Fail-closed disposable source instrumentation for the canonical TreeList."""
 from __future__ import annotations
 
 import hashlib
@@ -10,10 +10,10 @@ import subprocess
 import sys
 from pathlib import Path
 
-OWNER = Path('src/jdk.m3.collections/share/classes/jdk/m3/collections/apache/M3TreeList.java')
+OWNER = Path('src/jdk.m3.collections/share/classes/jdk/m3/collections/apache/TreeList.java')
 PROOF = Path('test/jdk/jdk/m3/collections/TreeListCursorAllocationFailure.java')
-EXPECTED_OWNER = 'ab861ce0c29d53080b54117414a4ba8486b1c58e'
-EXPECTED_PROOF = 'ab8a43dfb0191c81b039e8e49e419de964a126de'
+EXPECTED_OWNER = '305e3fee2c7566ffea6e87a971a33aeb2aa6a2b5'
+EXPECTED_PROOF = '2ef6e72e244d7ba6978a0e57b95033dab8de3b6b'
 CLASS = 'TreeListCursorAllocationFailure'
 FIELD_MARKER = '    private class TreeIterator implements Iterator<E> {'
 ALLOCATION_MARKER = '                path = Arrays.copyOf(path, capacity);'
@@ -75,7 +75,7 @@ def run(repo: Path, output: Path) -> dict[str, object]:
     text = source.decode('utf-8', 'strict')
     disposable = transform(text).encode('utf-8')
     hardcheck(git_hash(src_path.read_bytes()) == EXPECTED_OWNER, 'input source changed during transform')
-    java = output / 'M3TreeList.java'
+    java = output / 'TreeList.java'
     hardcheck(not java.exists() or java.read_bytes() == disposable, 'existing output drift')
     java.write_bytes(disposable)
     classes = output / 'classes'
