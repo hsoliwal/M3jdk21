@@ -14,7 +14,7 @@ import java.util.function.Function;
 
 /**
  * Indexed collection with array-owned element, key and primitive offset lanes.
- * It does not retain a Map<K, Collection<E>> or per-element entry/node graph.
+ * It does not retain a {@code Map<K, Collection<E>>} or per-element entry/node graph.
  * Lookup uses a compact open-addressed int[] of the first ordinal per key.
  * Keys are cached until explicitly reindexed after external key mutation.
  */
