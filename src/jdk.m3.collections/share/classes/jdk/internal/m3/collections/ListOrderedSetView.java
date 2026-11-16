@@ -4,82 +4,141 @@
  */
 package jdk.internal.m3.collections;
 
-/**
- * M3 five-library superset scaffold {@code ListOrderedSetView}: API group {@code LIST_ORDERED_SET} over arrays and state masks.
- *
- * <p>Provider lineage (LIBRARY_API_MATRIX.tsv, run 20261017-m3-to-public/LIB-SUPERSET):
- * <ul>
- *   <li>COMMONS ListOrderedMap/ListOrderedSet: insertion-order decorator with index access [license Apache-2.0; SUPERSET_VIEW VIEW_OF:M3OrderedSlotMap; priority P2; matrix owner ordered slot owners]</li>
- * </ul>
- *
- * <p>DOOP mapping: lane kind OBJECT; lanes {@code Object[] valueLane;int[] orderLane;int[] hashIndexLane}; offset scheme slot + insertion order lane with ordinal access; state-mask bits OCCUPIED,DELETED; stored nodes NONE; API entry objects TRANSIENT_FACADE (transient facades over slots, never the stored representation); matrix note: lanes + order link lanes + ordinal offsets / occupancy mask.
- *
- * <p>Status: SCAFFOLD. Every public atom throws {@link NotYetReceived} until this owner is received through a hash-pinned Synexia recipe with its own
- * provider oracle (never inferred from another provider). Not a {@code java.util} replacement.
- */
+import java.util.AbstractList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Objects;
+
+/** Ordered, unique elements in one Object[] lane, with optional primitive index. */
 public final class ListOrderedSetView<E> {
-    /** State-mask bit {@code OCCUPIED} (per-slot state word, bit 0). */
     static final long STATE_OCCUPIED = 1L << 0;
-    /** State-mask bit {@code DELETED} (per-slot state word, bit 1). */
     static final long STATE_DELETED = 1L << 1;
-
-    /** Storage lane {@code valueLane}: dynamic primitive/reference array lane. */
     private Object[] valueLane = new Object[0];
-    /** Storage lane {@code orderLane}: dynamic primitive/reference array lane. */
     private int[] orderLane = new int[0];
-    /** Storage lane {@code hashIndexLane}: dynamic primitive/reference array lane. */
     private int[] hashIndexLane = new int[0];
-    /** Per-slot state words (OCCUPIED,DELETED); one bit set per slot and state. */
     private long[] stateMaskWords = new long[0];
-    /** Live slot count. */
     private int size;
+    private int epoch;
 
-    /** Creates an empty scaffold owner; lanes grow by copy once received. */
-    public ListOrderedSetView() {
-    }
+    public ListOrderedSetView() { }
 
-    /** Reports the declared state-mask bits and lanes for ledgers; never allocates per element. */
     public static String scaffoldDescriptor() {
         return "M3ListOrderedSetView|LIST_ORDERED_SET|OBJECT|OCCUPIED,DELETED|Object[] valueLane;int[] orderLane;int[] hashIndexLane";
     }
 
-    /** ListOrderedSet.add (scaffold: not yet received). */
-    public boolean add(E element) {
-        throw new NotYetReceived("M3ListOrderedSetView.add");
+    private static boolean stable(Object x) {
+        return x == null || x.getClass() == String.class || x.getClass() == Integer.class
+                || x.getClass() == Long.class;
     }
 
-    /** ListOrderedSet.add(index) (scaffold: not yet received). */
-    public void add(int index, E element) {
-        throw new NotYetReceived("M3ListOrderedSetView.add");
+    private static int hash(Object x) {
+        int h = x == null ? 0 : x.hashCode();
+        return h ^ (h >>> 16);
     }
 
-    /** ListOrderedSet.get(index) (scaffold: not yet received). */
-    public E get(int index) {
-        throw new NotYetReceived("M3ListOrderedSetView.get");
+    private void indexIfEligible() {
+        if (hashIndexLane.length != 0 || size < 64 || size > (1 << 28)) return;
+        for (int i = 0; i < size; i++) if (!stable(valueLane[i])) return;
+        int capacity = 128;
+        while (capacity < (long) size * 2) capacity <<= 1;
+        int[] index = new int[capacity];
+        for (int i = 0; i < size; i++) {
+            int slot = hash(valueLane[i]) & (capacity - 1);
+            while (index[slot] != 0) slot = (slot + 1) & (capacity - 1);
+            index[slot] = i + 1;
+        }
+        hashIndexLane = index;
     }
 
-    /** ListOrderedSet.indexOf (scaffold: not yet received). */
     public int indexOf(Object element) {
-        throw new NotYetReceived("M3ListOrderedSetView.indexOf");
+        if (stable(element)) {
+            indexIfEligible();
+            if (hashIndexLane.length != 0) {
+                int mask = hashIndexLane.length - 1;
+                int slot = hash(element) & mask;
+                for (int entry; (entry = hashIndexLane[slot]) != 0;
+                        slot = (slot + 1) & mask) {
+                    if (Objects.equals(element, valueLane[entry - 1])) return entry - 1;
+                }
+                return -1;
+            }
+        }
+        for (int i = 0; i < size; i++) if (Objects.equals(element, valueLane[i])) return i;
+        return -1;
     }
 
-    /** ListOrderedSet.remove(index) (scaffold: not yet received). */
+    private void grow(int required) {
+        if (required <= valueLane.length) return;
+        long next = valueLane.length == 0 ? 8L : (long) valueLane.length + (valueLane.length >>> 1) + 1;
+        valueLane = Arrays.copyOf(valueLane, (int) Math.min(Integer.MAX_VALUE, Math.max(next, required)));
+    }
+
+    private void changed() { hashIndexLane = new int[0]; epoch++; }
+
+    public boolean add(E element) {
+        if (indexOf(element) >= 0) return false;
+        grow(Math.addExact(size, 1));
+        boolean keepIndex = hashIndexLane.length != 0 && stable(element)
+                && (long) (size + 1) * 2 <= hashIndexLane.length;
+        valueLane[size++] = element;
+        if (keepIndex) {
+            int mask = hashIndexLane.length - 1;
+            int bucket = hash(element) & mask;
+            while (hashIndexLane[bucket] != 0) bucket = (bucket + 1) & mask;
+            hashIndexLane[bucket] = size;
+            epoch++;
+        } else {
+            changed();
+        }
+        return true;
+    }
+
+    public void add(int index, E element) {
+        if (index < 0 || index > size) throw new IndexOutOfBoundsException(index);
+        if (indexOf(element) >= 0) return;
+        grow(Math.addExact(size, 1));
+        System.arraycopy(valueLane, index, valueLane, index + 1, size - index);
+        valueLane[index] = element;
+        size++;
+        changed();
+    }
+
+    @SuppressWarnings("unchecked")
+    public E get(int index) { return (E) valueLane[Objects.checkIndex(index, size)]; }
+
+    @SuppressWarnings("unchecked")
     public E remove(int index) {
-        throw new NotYetReceived("M3ListOrderedSetView.remove");
+        Objects.checkIndex(index, size);
+        E old = (E) valueLane[index];
+        System.arraycopy(valueLane, index + 1, valueLane, index, size - index - 1);
+        valueLane[--size] = null;
+        changed();
+        return old;
     }
 
-    /** Set.remove (scaffold: not yet received). */
     public boolean remove(Object element) {
-        throw new NotYetReceived("M3ListOrderedSetView.remove");
+        int index = indexOf(element);
+        if (index < 0) return false;
+        remove(index);
+        return true;
     }
 
-    /** ListOrderedSet.asList (scaffold: not yet received). */
-    public java.util.List<E> asList() {
-        throw new NotYetReceived("M3ListOrderedSetView.asList");
+    /** Unmodifiable, live projection: neither order nor values are copied. */
+    public List<E> asList() {
+        return Collections.unmodifiableList(new AbstractList<>() {
+            @Override public E get(int index) { return ListOrderedSetView.this.get(index); }
+            @Override public int size() { return ListOrderedSetView.this.size; }
+        });
     }
 
-    /** Set.size (scaffold: not yet received). */
-    public int size() {
-        throw new NotYetReceived("M3ListOrderedSetView.size");
+    public int size() { return size; }
+
+    public void clear() {
+        Arrays.fill(valueLane, 0, size, null);
+        size = 0;
+        changed();
     }
+
+    public Object[] toArray() { return Arrays.copyOf(valueLane, size); }
 }
