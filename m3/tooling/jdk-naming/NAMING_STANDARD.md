@@ -56,6 +56,7 @@ statement false. Identifiers never keep it.
 | `SECRET` | `secrets.SYNEXIA_*` | a repository secret is a dependency; the standalone check must still see it |
 | `LEGAL_FILE` | `Synexia-NOTICE`, `Synexia-LICENSE`, `Synexia-RIGHTS`, `Synexia-AUTHORS`, `M3-SYNEXIA-*.md` | release-boundary attribution files |
 | `REPOSITORY` | links to and the name `hsoliwal/com.synexia` | a true link to the donor; the standalone check removes dependencies, the rename never hides them |
+| `REPOSITORY_TORNADO` | the exact source repository `hsoliwal/synexia-tornadovm` and its GitHub/raw/API links | the parallel API source lock and its validator must name the actual fork; other owners, similarly named repositories and adjacent product names are not exempt |
 | `LEGAL_MD` | `legal/synexia.md` | the JDK legal file of the Synexia components is named after the donor, like every `legal/<component>.md` |
 | `LEGAL` (path) | files named `*synexia-notice*`, `-license`, `-rights`, `-authors`, `legal/synexia.md` | the files behind `LEGAL_FILE` and `LEGAL_MD`; they keep their names and follow their renamed directory (`.../m3-openrewrite-recipes/licenses/Synexia-LICENSE`) |
 
@@ -71,6 +72,13 @@ Three forms are not names and no rule touches them:
 A kept span keeps only itself; the rest of its line is renamed, so a one-line
 `<dependency><groupId>com.synexia</groupId><artifactId>synexia-x</artifactId></dependency>` names the renamed
 module `m3-x`.
+
+`NAMING_KEEP.tsv` lists individual files that must use historical names, with one of the existing
+`DETECTOR`, `PIN`, `DONOR_DIFFERENTIAL`, `MAVEN_COORDINATE` or `LINEAGE_ID` reasons. Both executors
+exclude exactly those files from content rewriting and path moves. Malformed or duplicate rows are rejected,
+and every listed path must exist in the scanned tree. The Java scanner reads its table independently for each
+scan: from the working tree for `scan()`, or from the requested revision for `scan(rev)`. A sparse checkout
+does not substitute current files or a different root's exceptions for the requested revision's blobs.
 
 ## 4. Lineage
 

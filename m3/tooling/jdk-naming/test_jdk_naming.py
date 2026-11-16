@@ -118,6 +118,51 @@ class JdkNamingTest(unittest.TestCase):
         again = jn.plan(self.root)
         self.assertEqual((again["moves"], again["rewrites"]), ([], []))
 
+    def test_tornado_source_repository_is_preserved_as_an_exact_span(self):
+        """A source-fork identity is provenance; the rest of a line still follows the naming rules."""
+        repository = "hsoliwal/synexia-tornadovm"
+        references = (
+            repository,
+            "https://github.com/" + repository + "/blob/pin/src/SynexiaKernel.java",
+            "https://raw.githubusercontent.com/" + repository + "/pin/synexia-kernel.java",
+            "https://api.github.com/repos/" + repository + "/git/refs/heads/synexia-main",
+            "https://github.com/" + repository + ".git",
+        )
+        for reference in references:
+            before = 'repository = "' + reference + '"; artifact = "synexia-tool"'
+            after = 'repository = "' + reference + '"; artifact = "m3-tool"'
+            counts = {}
+            self.assertEqual(after, jn.rewrite_line(before, counts), reference)
+            self.assertEqual({"KEBAB": 1}, counts, reference)
+        for before in (
+                "other/synexia-tornadovm", "xhsoliwal/synexia-tornadovm",
+                repository + "-other", repository + "_other", repository + ".other",
+                "https://github.com/" + repository + "-other/blob/pin/SynexiaKernel.java",
+                "https://github.com/other/" + repository,
+                "https://example.test/" + repository,
+                "https://github.com/" + repository + "%2Dother",
+                "git@elsewhere.example:" + repository + ".git",
+                "synexia-tornadovm"):
+            self.assertNotEqual(before, jn.rewrite_line(before, {}), before)
+        self.assertEqual(repository + ".", jn.rewrite_line(repository + ".", {}))
+
+    def test_tornado_source_lock_and_validator_reach_a_fixed_point_unchanged(self):
+        repository = "hsoliwal/synexia-tornadovm"
+        commit = "97adc5e43fb69099f2b850575e739f4d1f621f8a"
+        files = {
+            "make/tornado/source-lock.json": json.dumps({"repository": repository, "commit": commit}) + "\n",
+            "make/tornado/build_parallel.py": 'if lock.get("repository") != "' + repository + '":\n    raise ValueError("source")\n',
+        }
+        for path, source in files.items():
+            self.put(path, source)
+        plan = jn.plan(self.root)
+        self.assertEqual(([], [], []), (plan["moves"], plan["rewrites"], plan["refusals"]))
+        jn.apply(self.root, plan)
+        for path, source in files.items():
+            self.assertEqual(source.encode("utf-8"), (self.root / path).read_bytes(), path)
+        snapshot = jn.plan_tree(self.root, self.commit())
+        self.assertEqual(([], [], []), (snapshot["moves"], snapshot["rewrites"], snapshot["refusals"]))
+
     def test_doubled_m3_prefixes_from_pass_one_collapse(self):
         self.put(".github/workflows/m3-m3-family.yml", "run: python check_m3_m3_family.py M3_M3_MODE m3-m3-m3-x\n")
         self.put("m3/x/Note.java", "// the Synexia M3 family, SynexiaM3Owner\n")

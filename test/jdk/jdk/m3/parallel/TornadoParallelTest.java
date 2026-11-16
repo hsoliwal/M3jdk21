@@ -5,6 +5,8 @@
 
 
 
+import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.Proxy;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
@@ -25,6 +27,12 @@ import jdk.m3.parallel.Verified;
 import jdk.m3.parallel.bulk.M3ParallelBitCountProvider;
 import jdk.m3.parallel.bulk.M3ParallelIntAddProvider;
 import jdk.m3.parallel.spi.Probe;
+import uk.ac.manchester.tornado.api.TornadoRuntime;
+import uk.ac.manchester.tornado.api.TornadoTargetDevice;
+import uk.ac.manchester.tornado.api.common.TornadoDevice;
+import uk.ac.manchester.tornado.api.enums.TornadoDeviceType;
+import uk.ac.manchester.tornado.api.enums.TornadoVMBackendType;
+import uk.ac.manchester.tornado.api.exceptions.TornadoAPIException;
 
 /**
  * Explicit integration test for an image containing the optional parallel and
@@ -42,6 +50,11 @@ import jdk.m3.parallel.spi.Probe;
  * VM with {@code -Dtest.tornado.cached-option=bailout} or {@code virtual}. The
  * fixture enables and initializes the real runtime option, clears its system
  * property, and checks that the provider still refuses the cached option.</p>
+ *
+ * <p>Run {@code TornadoParallelTest grid-limits} in a fresh VM to check device
+ * admission with deterministic metadata. This mode uses the runtime's existing
+ * implementation-loading hooks and stops at task-graph construction. It requires
+ * no device driver and does not execute a kernel or qualify hardware.</p>
  */
 public final class TornadoParallelTest {
     private static final String BACKEND = "tornado";
@@ -58,12 +71,16 @@ public final class TornadoParallelTest {
 
     public static void main(String[] args) throws Exception {
         if (args.length < 1 || args.length > 2
-                || !Set.of("unavailable", "device", "image").contains(args[0])
-                || args.length == 2 && !Set.of("cpu", "gpu").contains(args[1])) {
+                || !Set.of("unavailable", "device", "image", "grid-limits").contains(args[0])
+                || args.length == 2 && (!Set.of("cpu", "gpu").contains(args[1])
+                || "grid-limits".equals(args[0]))) {
             throw new IllegalArgumentException(
-                    "usage: TornadoParallelTest unavailable|device|image [cpu|gpu]");
+                    "usage: TornadoParallelTest unavailable|device|image [cpu|gpu]"
+                            + ", or grid-limits");
         }
-        if ("unavailable".equals(args[0])) {
+        if ("grid-limits".equals(args[0])) {
+            gridLimits();
+        } else if ("unavailable".equals(args[0])) {
             unavailable(cacheRejectedOption());
         } else {
             Backend backend = device(args.length == 2 ? args[1] : null);
@@ -77,6 +94,122 @@ public final class TornadoParallelTest {
             rejectedPlans(backend);
         }
         System.out.println("PASS TornadoParallelTest mode=" + args[0] + " checks=" + checks);
+    }
+
+    private static void gridLimits() {
+        System.setProperty("tornado.load.runtime.implementation", GridLimitRuntime.class.getName());
+        System.setProperty("tornado.load.api.implementation", GridLimitGraph.class.getName());
+        Backend backend = Backend.of(BACKEND);
+        require(backend.capabilities().equals(Set.of(Backend.Capability.CPU)),
+                "grid fixture must discover the real provider with deterministic CPU metadata");
+        for (KernelId kernel : List.of(ADD, BITCOUNT)) {
+            gridLimit(backend, kernel, new long[]{16}, new long[]{8}, true, 16, true,
+                    "total limit below axis limit");
+            gridLimit(backend, kernel, new long[]{8}, new long[]{16}, true, 16, true,
+                    "axis limit below total limit");
+            gridLimit(backend, kernel, new long[]{8}, new long[]{8}, true, 8, false,
+                    "exact device limit");
+            gridLimit(backend, kernel, new long[]{16}, new long[]{8}, true, 4, false,
+                    "local work below both limits");
+            gridLimit(backend, kernel, null, new long[]{8}, true, 16, true,
+                    "total limit remains binding without axis metadata");
+            gridLimit(backend, kernel, new long[]{8}, null, true, 16, true,
+                    "axis limit remains binding without total metadata");
+            gridLimit(backend, kernel, null, null, true, 16, false,
+                    "missing metadata is not a zero-sized limit");
+            gridLimit(backend, kernel, new long[0], new long[0], true, 16, false,
+                    "empty metadata is not a zero-sized limit");
+            gridLimit(backend, kernel, new long[]{0}, new long[]{0}, true, 16, false,
+                    "zero metadata remains unspecified");
+            gridLimit(backend, kernel, new long[]{-1}, new long[]{-1}, true, 16, false,
+                    "negative metadata remains unspecified");
+            gridLimit(backend, kernel, new long[]{16}, null, false, 16, false,
+                    "missing physical metadata preserves axis admission");
+            gridLimit(backend, kernel, new long[]{8}, null, false, 16, true,
+                    "axis refusal does not require physical metadata");
+        }
+    }
+
+    private static void gridLimit(Backend backend, KernelId kernel, long[] axis, long[] total,
+                                  boolean physical, int local, boolean refused, String message) {
+        GridLimitRuntime.axis = axis;
+        GridLimitRuntime.total = total;
+        GridLimitRuntime.physical = physical;
+        int before = GridLimitGraph.constructions;
+        Runnable prepare = () -> {
+            Plan.Builder builder = Plan.builder(backend).kernel(kernel).grid(Grid1D.of(3, local))
+                    .bind(IntBuffer.allocate(3), Transfer.ONCE);
+            if (kernel.equals(ADD)) {
+                builder.bind(IntBuffer.allocate(3), Transfer.ONCE);
+            }
+            try (Plan prepared = builder.bind(IntBuffer.allocate(3), Transfer.ON_DEMAND).build()) {
+                throw new AssertionError(
+                        "grid fixture unexpectedly created a device program: " + prepared);
+            }
+        };
+        if (refused) {
+            expect(IllegalArgumentException.class, prepare, message);
+        } else {
+            try {
+                prepare.run();
+                throw new AssertionError("grid fixture must reach graph construction: " + message);
+            } catch (TornadoAPIException expected) {
+                require(expected.getCause() != null
+                        && expected.getCause().getCause() == GridLimitGraph.STOP,
+                        "admitted grid reaches only the graph-construction sentinel: " + message);
+            }
+        }
+        require(GridLimitGraph.constructions == before + (refused ? 0 : 1),
+                "invalid grids stop before graph construction: " + message);
+    }
+
+    /** Loaded through Tornado's public runtime implementation hook in grid-limits mode. */
+    public static final class GridLimitRuntime {
+        private static long[] axis;
+        private static long[] total;
+        private static boolean physical = true;
+        private static final TornadoTargetDevice TARGET = fixture(TornadoTargetDevice.class,
+                (proxy, method, args) -> switch (method.getName()) {
+                    case "getDeviceMaxWorkGroupSize" -> total;
+                    default -> throw new AssertionError("unexpected target call: " + method);
+                });
+        private static final TornadoDevice DEVICE = fixture(TornadoDevice.class,
+                (proxy, method, args) -> switch (method.getName()) {
+                    case "getTornadoVMBackend" -> TornadoVMBackendType.OPENCL;
+                    case "getDeviceType" -> TornadoDeviceType.CPU;
+                    case "getDeviceMaxWorkgroupDimensions" -> axis;
+                    case "getPhysicalDevice" -> physical ? TARGET : null;
+                    default -> throw new AssertionError("unexpected device call: " + method);
+                });
+        private static final TornadoRuntime RUNTIME = fixture(TornadoRuntime.class,
+                (proxy, method, args) -> switch (method.getName()) {
+                    case "getNumBackends" -> 1;
+                    case "getDefaultDevice" -> DEVICE;
+                    default -> throw new AssertionError("unexpected runtime call: " + method);
+                });
+
+        private GridLimitRuntime() {
+        }
+
+        public static TornadoRuntime getTornadoRuntime() {
+            return RUNTIME;
+        }
+
+        private static <T> T fixture(Class<T> type, InvocationHandler handler) {
+            return type.cast(Proxy.newProxyInstance(type.getClassLoader(),
+                    new Class<?>[]{type}, handler));
+        }
+    }
+
+    /** Graph factory sentinel: admitted grids stop here without creating a runtime graph. */
+    public static final class GridLimitGraph {
+        private static final RuntimeException STOP = new RuntimeException("grid admitted");
+        private static int constructions;
+
+        public GridLimitGraph(String name) {
+            constructions++;
+            throw STOP;
+        }
     }
 
     private static String cacheRejectedOption() throws ReflectiveOperationException {
