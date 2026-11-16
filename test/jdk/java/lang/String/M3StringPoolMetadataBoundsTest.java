@@ -18,7 +18,9 @@
  * @test
  * @summary Refused local atoms and uncached tuples do not retain empty map buckets
  * @modules java.base/java.lang:+open
- * @run main/othervm -XX:+UnlockExperimentalVMOptions -XX:-UseM3StringStorage -Dm3.string.immediate=false -Dm3.string.pool.maxBytes=0 -Dm3.string.pool.maxTuples=0 M3StringPoolMetadataBoundsTest
+ * @run main/othervm -XX:+UnlockExperimentalVMOptions -XX:-UseM3StringStorage
+ *      -Dm3.string.immediate=false -Dm3.string.pool.maxBytes=0
+ *      -Dm3.string.pool.maxTuples=0 M3StringPoolMetadataBoundsTest
  */
 
 import java.lang.reflect.Field;

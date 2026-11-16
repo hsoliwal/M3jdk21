@@ -214,7 +214,8 @@ public class M3StringPoolBoundsTest {
      * original strict total-byte equality; neither lane uses a noise tolerance here.
      */
     private static void checkRefusedAccounting(
-            long previousBytes, int heldBytes, char[] refusedSource, String message) throws Exception {
+            long previousBytes, int heldBytes, char[] refusedSource, String message)
+            throws Exception {
         if (!flagOn) {
             check(bytes() == previousBytes, message);
             return;
