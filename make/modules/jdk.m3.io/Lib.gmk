@@ -49,3 +49,23 @@ ifeq ($(call isTargetOs, linux), true)
     TARGETS += $(BUILD_LIBM3OPTANE) $(BUILD_LIBM3PMEMSDK) $(BUILD_LIBM3PMEMACCEL)
   endif
 endif
+
+# M3 OS capabilities probe: optional read-only kernel admission. The Linux
+# library is built for all target CPUs with suitable syscall/header support;
+# on Windows, Apple, Android and BSD the Java report stays UNPROBED until
+# their independently tested native backends exist. No NIO backend is switched.
+ifeq ($(call isTargetOs, linux), true)
+  M3_OS_NATIVE_SRC := $(TOPDIR)/src/jdk.m3.io/share/native/libm3osprobe
+  M3_OS_NATIVE_CFLAGS := $(filter-out -D_GNU_SOURCE,$(CFLAGS_JDKLIB)) -std=c17 \
+      -Wall -Wextra -Wpedantic -Werror
+
+  $(eval $(call SetupJdkLibrary, BUILD_LIBM3OSPROBE, \
+      NAME := m3osprobe, \
+      SRC := $(M3_OS_NATIVE_SRC), \
+      INCLUDE_FILES := m3osprobe.c, \
+      OPTIMIZATION := HIGH, \
+      CFLAGS := $(M3_OS_NATIVE_CFLAGS), \
+      LDFLAGS := $(LDFLAGS_JDKLIB) $(call SET_SHARED_LIBRARY_ORIGIN), \
+  ))
+  TARGETS += $(BUILD_LIBM3OSPROBE)
+endif

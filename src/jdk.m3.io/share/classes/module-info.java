@@ -8,4 +8,5 @@
  */
 module jdk.m3.io {
     exports jdk.m3.optane;
+    exports jdk.m3.os;
 }
