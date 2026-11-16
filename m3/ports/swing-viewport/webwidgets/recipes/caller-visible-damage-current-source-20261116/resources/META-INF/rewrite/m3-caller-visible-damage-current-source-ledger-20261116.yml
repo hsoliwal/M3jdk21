@@ -1,0 +1,12 @@
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.CallerVisibleDamageCurrentSourceLedger20261116
+displayName: Record the selected current-source lanes output
+description: Update exactly one generated-source ledger row while retaining every other byte.
+recipeList:
+  - org.openrewrite.text.FindAndReplace:
+      find: "src/main/java/jdk/m3/swing/web/model/M3WebLanes.java\tcore/M3WebLanes.java.tmpl\t70264dc0e1183b6c0dcc82dc998ba027e02f8301072e6b6ae05324ed053805fd\n"
+      replace: "src/main/java/jdk/m3/swing/web/model/M3WebLanes.java\tcore/M3WebLanes.java.tmpl\t65d98416b094a5b082e9f66c03aa42037e6dc3fd40417926edb73dae91657e03\n"
+      regex: false
+      caseSensitive: true
+      filePattern: m3/ports/swing-viewport/webwidgets/GENERATED.tsv

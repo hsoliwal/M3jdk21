@@ -15,7 +15,7 @@ concurrency:
   cancel-in-progress: false
 env:
   MODULE: m3/ports/swing-viewport
-  RECIPE: m3/ports/swing-viewport/webwidgets/recipes/caller-visible-damage-20261112
+  RECIPE: m3/ports/swing-viewport/webwidgets/recipes/caller-visible-damage-current-source-20261116
 jobs:
   qualification:
     name: ${{ matrix.lane }}

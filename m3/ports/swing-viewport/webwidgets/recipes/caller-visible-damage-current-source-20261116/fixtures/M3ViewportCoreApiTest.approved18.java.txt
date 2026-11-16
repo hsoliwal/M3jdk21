@@ -1,0 +1,518 @@
+/*******************************************************************************
+ * Copyright (c) 2026 Synexia, Hitesh Soliwal (hsoliwal@gmail.com) and others.
+ *
+ * This program and the accompanying materials are made available under the
+ * terms of the Apache License, Version 2.0, or (at your option) the Eclipse
+ * Public License 2.0, which are available at
+ * https://www.apache.org/licenses/LICENSE-2.0 and
+ * https://www.eclipse.org/legal/epl-2.0/
+ *
+ * SPDX-License-Identifier: Apache-2.0 OR EPL-2.0
+ *
+ * Contributors:
+ *     Hitesh Soliwal (Synexia) - initial API and implementation
+ *******************************************************************************/
+package jdk.m3.swing.viewport;
+
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import org.junit.jupiter.api.Test;
+
+/**
+ * Contract of the port's extent, plane and damage core (same answers as the SWT fork's public M3 viewport
+ * facades; the Nebula/Swing model differential compares both on every web widget).
+ */
+class M3ViewportCoreApiTest {
+    @Test
+    void extentBeyondIntAndThumb() {
+        assertEquals(4_096_000_000L, M3ViewportExtent.contentExtent(1_000_000, 4096));
+        assertEquals(1, M3ViewportExtent.visibleRows(1_000_000, 4096, 260));
+        assertEquals(0, M3ViewportExtent.visibleRows(0, 20, 260));
+        assertEquals(999_999, M3ViewportExtent.maxTopRow(1_000_000, 4096, 260));
+        int[] t = new int[2];
+        M3ViewportExtent.projectThumb(1_000_000, 4096, 260, 500_000, 200, t, 0);
+        assertTrue(t[0] > 0 && t[1] == 8 && t[0] + t[1] <= 200);
+        M3ViewportExtent.projectThumb(3, 20, 260, 0, 200, t, 0);
+        assertArrayEquals(new int[] { 0, 200 }, t);
+        assertEquals(0, M3ViewportExtent.thumb(0, 20, 100));
+        assertThrows(IllegalArgumentException.class, () -> M3ViewportExtent.contentExtent(-1, 1));
+        assertThrows(IllegalArgumentException.class, () -> M3ViewportExtent.visibleRows(1, 0, 1));
+        assertThrows(IllegalArgumentException.class, () -> M3ViewportExtent.visibleRows(1, 1, -1));
+    }
+
+    @Test
+    void giantRowCountsScaleTheThumb() {
+        long rows = 5_000_000_000L;
+        assertEquals(Integer.MAX_VALUE, M3ViewportExtent.maximum(rows));
+        assertEquals(5, M3ViewportExtent.thumb(rows, 1, 10));
+        int max = Integer.MAX_VALUE - 5;
+        assertEquals(max, M3ViewportExtent.selectionForTopRow(rows, 1, 10, Long.MAX_VALUE));
+        int s = M3ViewportExtent.selectionForTopRow(rows, 1, 10, rows / 2);
+        assertTrue(s > max / 2 - 8 && s < max / 2 + 8, "scaled selection " + s);
+        assertEquals(0, M3ViewportExtent.selectionForTopRow(rows, 1, 10, 0));
+    }
+
+    @Test
+    void planeMasks() {
+        M3ViewportPlanes p = new M3ViewportPlanes();
+        assertEquals(0, p.scrollTo(0, 0));
+        int v = p.scrollTo(0, 40);
+        assertTrue((v & M3ViewportPlanes.BODY) != 0 && (v & M3ViewportPlanes.HEADER) == 0);
+        int h = p.scrollTo(30, 40);
+        assertTrue((h & M3ViewportPlanes.HEADER) != 0 && (h & M3ViewportPlanes.FROZEN) == 0);
+        assertEquals(0, p.scrollTo(30, 40));
+        p.initialize(1, 2);
+        assertEquals(1.0, p.originX());
+        assertEquals(2.0, p.originY());
+        assertEquals(63, M3ViewportPlanes.ALL);
+        assertThrows(IllegalArgumentException.class, () -> p.scrollTo(Double.NaN, 0));
+    }
+
+    @Test
+    void damageBoundingBox() {
+        M3ViewportDamage d = new M3ViewportDamage();
+        int[] out = new int[4];
+        assertFalse(d.take(out));
+        d.add(10, 10, 5, 5);
+        d.add(40, 2, 4, 4);
+        d.add(0, 0, 0, 9);
+        assertTrue(!d.isEmpty() && d.addedArea() == 41);
+        assertTrue(d.take(out));
+        assertArrayEquals(new int[] { 10, 2, 34, 13 }, out);
+        assertTrue(d.isEmpty() && d.addedArea() == 0);
+    }
+
+    @Test
+    void damageNeverSilentlyDropsAcceptedEndpointRectangles() {
+        int[][] rectangles = {
+                { Integer.MAX_VALUE - 1, 0, 10, 1 },
+                { 0, Integer.MAX_VALUE - 1, 1, 10 },
+                { Integer.MAX_VALUE - 1, Integer.MAX_VALUE - 1, 10, 10 }
+        };
+        for (int[] rectangle : rectangles) {
+            M3ViewportDamage damage = new M3ViewportDamage();
+            int[] out = new int[4];
+            try {
+                damage.add(rectangle[0], rectangle[1], rectangle[2], rectangle[3]);
+            } catch (IllegalArgumentException rejected) {
+                assertTrue(damage.isEmpty());
+                assertEquals(0L, damage.addedArea());
+                continue;
+            }
+            assertFalse(damage.isEmpty());
+            assertEquals((long) rectangle[2] * rectangle[3], damage.addedArea());
+            assertTrue(damage.take(out));
+            assertArrayEquals(rectangle, out);
+            assertTrue(damage.isEmpty());
+            assertEquals(0L, damage.addedArea());
+        }
+    }
+
+    @Test
+    void damageNeverLosesAcceptedRepresentableUnion() {
+        int[][][] cases = {
+                { { Integer.MAX_VALUE - 1, 0, 10, 1 },
+                  { Integer.MAX_VALUE - 2, 1, 1, 1 },
+                  { Integer.MAX_VALUE - 2, 0, 11, 2 } },
+                { { 0, Integer.MAX_VALUE - 1, 1, 10 },
+                  { 1, Integer.MAX_VALUE - 2, 1, 1 },
+                  { 0, Integer.MAX_VALUE - 2, 2, 11 } }
+        };
+        for (int[][] rectangleCase : cases) {
+            M3ViewportDamage damage = new M3ViewportDamage();
+            int[] out = new int[4];
+            int[] first = rectangleCase[0];
+            int[] second = rectangleCase[1];
+            int[] expected = rectangleCase[2];
+            try {
+                damage.add(first[0], first[1], first[2], first[3]);
+            } catch (IllegalArgumentException rejected) {
+                assertTrue(damage.isEmpty());
+                assertEquals(0L, damage.addedArea());
+                continue;
+            }
+            try {
+                damage.add(second[0], second[1], second[2], second[3]);
+            } catch (IllegalArgumentException rejected) {
+                assertEquals(10L, damage.addedArea());
+                assertTrue(damage.take(out));
+                assertArrayEquals(first, out);
+                continue;
+            }
+            assertEquals(11L, damage.addedArea());
+            assertTrue(damage.take(out));
+            assertArrayEquals(expected, out);
+            assertFalse(damage.take(out));
+            assertArrayEquals(expected, out);
+        }
+    }
+
+    @Test
+    void damageKeepsLargeBoundsWithinSharedSwtDomain() {
+        int limit = 1 << 29;
+        M3ViewportDamage damage = new M3ViewportDamage();
+        int[] out = new int[4];
+        damage.add(-limit, -limit, 1, 1);
+        damage.add(limit, limit, limit, limit);
+        assertEquals(1L + (long) limit * limit, damage.addedArea());
+        assertTrue(damage.take(out));
+        assertArrayEquals(new int[] { -limit, -limit, 3 * limit, 3 * limit }, out);
+    }
+
+    @Test
+    void damageIgnoredDimensionsCannotMutateEmptyOrResidentState() {
+        int[][] ignored = {
+                { Integer.MIN_VALUE, Integer.MAX_VALUE, 0, 1 },
+                { Integer.MAX_VALUE, Integer.MIN_VALUE, 1, 0 },
+                { Integer.MAX_VALUE, Integer.MAX_VALUE, -1, Integer.MAX_VALUE },
+                { Integer.MIN_VALUE, Integer.MIN_VALUE, Integer.MAX_VALUE, -1 },
+                { Integer.MAX_VALUE, Integer.MIN_VALUE, Integer.MIN_VALUE, Integer.MIN_VALUE }
+        };
+        for (boolean resident : new boolean[] { false, true }) {
+            M3ViewportDamage damage = new M3ViewportDamage();
+            if (resident) damage.add(10, 20, 3, 4);
+            for (int[] rectangle : ignored) {
+                damage.add(rectangle[0], rectangle[1], rectangle[2], rectangle[3]);
+                assertEquals(!resident, damage.isEmpty());
+                assertEquals(resident ? 12L : 0L, damage.addedArea());
+            }
+            int[] out = { 9, 8, 7, 6 };
+            assertEquals(resident, damage.take(out));
+            assertArrayEquals(resident ? new int[] { 10, 20, 3, 4 } : new int[] { 9, 8, 7, 6 }, out);
+            assertTrue(damage.isEmpty());
+            assertEquals(0L, damage.addedArea());
+            damage.add(-4, -6, 2, 3);
+            assertEquals(6L, damage.addedArea());
+            assertTrue(damage.take(out));
+            assertArrayEquals(new int[] { -4, -6, 2, 3 }, out);
+            assertTrue(damage.isEmpty());
+            assertEquals(0L, damage.addedArea());
+        }
+    }
+
+    @Test
+    void damageAreaCountsOverlapsAndRetainsJavaLongWrapping() {
+        int side = Integer.MAX_VALUE;
+        java.math.BigInteger singleArea = java.math.BigInteger.valueOf(side).pow(2);
+        M3ViewportDamage damage = new M3ViewportDamage();
+        for (int repeat = 1; repeat <= 3; repeat++) {
+            damage.add(0, 0, side, side);
+            assertEquals(singleArea.multiply(java.math.BigInteger.valueOf(repeat)).longValue(),
+                    damage.addedArea());
+            assertFalse(damage.isEmpty());
+        }
+        assertTrue(damage.addedArea() < 0L);
+        assertFalse(damage.isEmpty());
+        int[] out = new int[4];
+        assertTrue(damage.take(out));
+        assertArrayEquals(new int[] { 0, 0, side, side }, out);
+        assertTrue(damage.isEmpty());
+        assertEquals(0L, damage.addedArea());
+    }
+
+    @Test
+    void damageDrainPreservesPartialOutputFailureAndResetsOnlyAfterSuccess() {
+        M3ViewportDamage empty = new M3ViewportDamage();
+        int[] untouched = { 13, 17, 19 };
+        assertFalse(empty.take(null));
+        assertFalse(empty.take(untouched));
+        assertArrayEquals(new int[] { 13, 17, 19 }, untouched);
+
+        M3ViewportDamage nullOutput = new M3ViewportDamage();
+        nullOutput.add(2, 3, 5, 7);
+        assertThrows(NullPointerException.class, () -> nullOutput.take(null));
+        assertFalse(nullOutput.isEmpty());
+        assertEquals(35L, nullOutput.addedArea());
+        int[] afterNull = new int[4];
+        assertTrue(nullOutput.take(afterNull));
+        assertArrayEquals(new int[] { 2, 3, 5, 7 }, afterNull);
+        assertTrue(nullOutput.isEmpty());
+        assertEquals(0L, nullOutput.addedArea());
+
+        int[] expected = { 2, 3, 5, 7 };
+        for (int length = 0; length < 4; length++) {
+            M3ViewportDamage damage = new M3ViewportDamage();
+            damage.add(2, 3, 5, 7);
+            int[] shortOutput = new int[length];
+            java.util.Arrays.fill(shortOutput, -99);
+            assertThrows(ArrayIndexOutOfBoundsException.class, () -> damage.take(shortOutput));
+            for (int slot = 0; slot < length; slot++) assertEquals(expected[slot], shortOutput[slot]);
+            assertFalse(damage.isEmpty());
+            assertEquals(35L, damage.addedArea());
+            int[] out = { 0, 0, 0, 0, 91 };
+            assertTrue(damage.take(out));
+            assertArrayEquals(new int[] { 2, 3, 5, 7, 91 }, out);
+            assertTrue(damage.isEmpty());
+            assertEquals(0L, damage.addedArea());
+        }
+    }
+
+    @Test
+    void unresidentModelStateDoesNotRequestVisiblePaint() throws Throwable {
+        runCallerDamageContract("callerUnresidentDamage");
+    }
+
+    @Test
+    void outsideModelRectanglesCannotBridgeVisibleDamage() throws Throwable {
+        runCallerDamageContract("callerOutsideDamage");
+    }
+
+    @Test
+    void paddedModelDamageClipsWideArithmeticBeforeNarrowing() throws Throwable {
+        runCallerDamageContract("callerPaddedDamage");
+    }
+
+    @Test
+    void modelDamageDrainPreservesBackendFailuresAndResize() throws Throwable {
+        runCallerDamageContract("callerDrainDamage");
+    }
+
+    private static void runCallerDamageContract(String name) throws Throwable {
+        Class<?> checks = Class.forName("jdk.m3.swing.web.model.M3WebChecks");
+        java.lang.reflect.Method contract = checks.getDeclaredMethod(name);
+        contract.setAccessible(true);
+        try {
+            contract.invoke(null);
+        } catch (java.lang.reflect.InvocationTargetException failure) {
+            throw failure.getCause();
+        }
+    }
+
+    @Test
+    void wideDamageAcceptsEveryPositiveIntSingleton() throws ReflectiveOperationException {
+        int limit = 1 << 29;
+        int[] origins = { Integer.MIN_VALUE, -Integer.MAX_VALUE, -limit, -1, 0, 1,
+                limit, Integer.MAX_VALUE - 1, Integer.MAX_VALUE };
+        int[] extents = { 1, 2, 10, limit, Integer.MAX_VALUE };
+        for (int x : origins) for (int y : origins) for (int width : extents) for (int height : extents) {
+            M3ViewportDamage damage = new M3ViewportDamage();
+            damage.add(x, y, width, height);
+            assertFalse(damage.isEmpty());
+            assertEquals((long) width * height, damage.addedArea());
+            int[] out = { 13, 17, 19, 23, 29 };
+            assertTrue(damage.take(out));
+            assertArrayEquals(new int[] { x, y, width, height, 29 }, out);
+            assertTrue(damage.isEmpty());
+            assertEquals(0L, damage.addedArea());
+        }
+        var wide = M3ViewportDamage.class.getMethod("takeWide", long[].class);
+        assertEquals(boolean.class, wide.getReturnType());
+        assertFalse(java.lang.reflect.Modifier.isStatic(wide.getModifiers()));
+        for (int x : origins) for (int y : origins) for (int width : extents) for (int height : extents) {
+            M3ViewportDamage damage = new M3ViewportDamage();
+            damage.add(x, y, width, height);
+            long[] out = { 13, 17, 19, 23, 29 };
+            assertTrue((Boolean) wide.invoke(damage, (Object) out));
+            assertArrayEquals(new long[] { x, y, width, height, 29 }, out);
+            assertTrue(damage.isEmpty());
+            assertEquals(0L, damage.addedArea());
+        }
+    }
+
+    @Test
+    void wideDamageRetainsOversizedUnionAfterLegacyProjectionFailure() throws ReflectiveOperationException {
+        var wide = M3ViewportDamage.class.getMethod("takeWide", long[].class);
+        int max = Integer.MAX_VALUE;
+        int min = Integer.MIN_VALUE;
+        int[][][] cases = {
+                { { 0, 0, max, 1 }, { max, 0, 1, 1 } },
+                { { 0, 0, 1, max }, { 0, max, 1, 1 } },
+                { { min, 0, max, 1 }, { max, 0, max, 1 } },
+                { { 0, min, 1, max }, { 0, max, 1, max } },
+                { { min, min, max, max }, { max, max, max, max } }
+        };
+        M3ViewportDamage boundary = new M3ViewportDamage();
+        boundary.add(0, 0, max - 1, 1);
+        boundary.add(max - 1, 0, 1, 1);
+        int[] boundaryOut = new int[4];
+        assertTrue(boundary.take(boundaryOut));
+        assertArrayEquals(new int[] { 0, 0, max, 1 }, boundaryOut);
+        for (int[][] rectangles : cases) {
+            M3ViewportDamage damage = new M3ViewportDamage();
+            long area = 0;
+            long x0 = Long.MAX_VALUE, y0 = Long.MAX_VALUE;
+            long x1 = Long.MIN_VALUE, y1 = Long.MIN_VALUE;
+            for (int[] r : rectangles) {
+                damage.add(r[0], r[1], r[2], r[3]);
+                area += (long) r[2] * r[3];
+                x0 = Math.min(x0, r[0]); y0 = Math.min(y0, r[1]);
+                x1 = Math.max(x1, (long) r[0] + r[2]);
+                y1 = Math.max(y1, (long) r[1] + r[3]);
+            }
+            int[] out = { 13, 17, 19, 23, 29 };
+            assertThrows(ArithmeticException.class, () -> damage.take(out));
+            assertArrayEquals(new int[] { 13, 17, 19, 23, 29 }, out);
+            assertThrows(ArithmeticException.class, () -> damage.take(null));
+            for (int length = 0; length < 4; length++) {
+                int[] shortOutput = new int[length];
+                java.util.Arrays.fill(shortOutput, -777);
+                assertThrows(ArithmeticException.class, () -> damage.take(shortOutput));
+                for (int value : shortOutput) assertEquals(-777, value);
+                assertFalse(damage.isEmpty());
+                assertEquals(area, damage.addedArea());
+            }
+            assertFalse(damage.isEmpty());
+            assertEquals(area, damage.addedArea());
+            damage.add(0, 0, 2, 3);
+            area += 6;
+            x0 = Math.min(x0, 0); y0 = Math.min(y0, 0);
+            x1 = Math.max(x1, 2); y1 = Math.max(y1, 3);
+            assertEquals(area, damage.addedArea());
+            long[] exact = { 31, 37, 41, 43, 47 };
+            assertTrue((Boolean) wide.invoke(damage, (Object) exact));
+            assertArrayEquals(new long[] { x0, y0, x1 - x0, y1 - y0, 47 }, exact);
+            assertTrue(damage.isEmpty());
+            assertEquals(0L, damage.addedArea());
+            assertFalse(damage.take(null));
+            assertFalse((Boolean) wide.invoke(damage, (Object) exact));
+            assertArrayEquals(new long[] { x0, y0, x1 - x0, y1 - y0, 47 }, exact);
+        }
+    }
+
+    @Test
+    void wideDamageDrainPreservesNullPartialFailureAndResetOrder() throws ReflectiveOperationException {
+        var wide = M3ViewportDamage.class.getMethod("takeWide", long[].class);
+        M3ViewportDamage empty = new M3ViewportDamage();
+        assertFalse((Boolean) wide.invoke(empty, (Object) null));
+        long[] untouched = { 13, 17, 19 };
+        assertFalse((Boolean) wide.invoke(empty, (Object) untouched));
+        assertArrayEquals(new long[] { 13, 17, 19 }, untouched);
+        int min = Integer.MIN_VALUE, max = Integer.MAX_VALUE;
+        int[][][] cases = {
+                { { 2, 3, 5, 7 } },
+                { { min, min, max, max }, { max, max, max, max } }
+        };
+        for (int[][] rectangles : cases) {
+            long x0 = Long.MAX_VALUE, y0 = Long.MAX_VALUE;
+            long x1 = Long.MIN_VALUE, y1 = Long.MIN_VALUE, area = 0;
+            for (int[] r : rectangles) {
+                x0 = Math.min(x0, r[0]); y0 = Math.min(y0, r[1]);
+                x1 = Math.max(x1, (long) r[0] + r[2]);
+                y1 = Math.max(y1, (long) r[1] + r[3]);
+                area += (long) r[2] * r[3];
+            }
+            M3ViewportDamage nullOutput = new M3ViewportDamage();
+            for (int[] r : rectangles) nullOutput.add(r[0], r[1], r[2], r[3]);
+            var nullFailure = assertThrows(java.lang.reflect.InvocationTargetException.class,
+                    () -> wide.invoke(nullOutput, (Object) null));
+            assertTrue(nullFailure.getCause() instanceof NullPointerException);
+            assertFalse(nullOutput.isEmpty());
+            assertEquals(area, nullOutput.addedArea());
+            long[] nullRecovery = { 13, 17, 19, 23, 29 };
+            assertTrue((Boolean) wide.invoke(nullOutput, (Object) nullRecovery));
+            assertArrayEquals(new long[] { x0, y0, x1 - x0, y1 - y0, 29 }, nullRecovery);
+            long[] expected = { x0, y0, x1 - x0, y1 - y0 };
+            for (int length = 0; length < expected.length; length++) {
+                M3ViewportDamage damage = new M3ViewportDamage();
+                for (int[] r : rectangles) damage.add(r[0], r[1], r[2], r[3]);
+                long[] shortOutput = new long[length];
+                java.util.Arrays.fill(shortOutput, -777);
+                var failure = assertThrows(java.lang.reflect.InvocationTargetException.class,
+                        () -> wide.invoke(damage, (Object) shortOutput));
+                assertTrue(failure.getCause() instanceof ArrayIndexOutOfBoundsException);
+                for (int index = 0; index < length; index++) assertEquals(expected[index], shortOutput[index]);
+                assertFalse(damage.isEmpty());
+                assertEquals(area, damage.addedArea());
+                long[] recovery = { 13, 17, 19, 23, 29 };
+                assertTrue((Boolean) wide.invoke(damage, (Object) recovery));
+                assertArrayEquals(new long[] { x0, y0, x1 - x0, y1 - y0, 29 }, recovery);
+                assertTrue(damage.isEmpty());
+                assertEquals(0L, damage.addedArea());
+            }
+        }
+    }
+
+    @Test
+    void wideDamagePermutationAndWrappedZeroAreaRemainNonempty() throws ReflectiveOperationException {
+        var wide = M3ViewportDamage.class.getMethod("takeWide", long[].class);
+        java.util.Random random = new java.util.Random(20261103L);
+        for (int round = 0; round < 64; round++) {
+            int[][] rectangles = new int[5][4];
+            long x0 = Long.MAX_VALUE, y0 = Long.MAX_VALUE;
+            long x1 = Long.MIN_VALUE, y1 = Long.MIN_VALUE, area = 0;
+            for (int[] r : rectangles) {
+                r[0] = round % 2 == 0 ? random.nextInt(100) - 50 : random.nextInt();
+                r[1] = round % 2 == 0 ? random.nextInt(100) - 50 : random.nextInt();
+                r[2] = round % 2 == 0 ? random.nextInt(128) + 1 : random.nextInt(Integer.MAX_VALUE) + 1;
+                r[3] = round % 2 == 0 ? random.nextInt(128) + 1 : random.nextInt(Integer.MAX_VALUE) + 1;
+                x0 = Math.min(x0, r[0]); y0 = Math.min(y0, r[1]);
+                x1 = Math.max(x1, (long) r[0] + r[2]); y1 = Math.max(y1, (long) r[1] + r[3]);
+                area += (long) r[2] * r[3];
+            }
+            for (boolean reverse : new boolean[] { false, true }) {
+                M3ViewportDamage damage = new M3ViewportDamage();
+                for (int index = 0; index < rectangles.length; index++) {
+                    int[] r = rectangles[reverse ? rectangles.length - 1 - index : index];
+                    damage.add(r[0], r[1], r[2], r[3]);
+                }
+                assertFalse(damage.isEmpty());
+                assertEquals(area, damage.addedArea());
+                int[] small = { 13, 17, 19, 23, 29 };
+                if (x1 - x0 > Integer.MAX_VALUE || y1 - y0 > Integer.MAX_VALUE) {
+                    assertThrows(ArithmeticException.class, () -> damage.take(small));
+                    assertArrayEquals(new int[] { 13, 17, 19, 23, 29 }, small);
+                    assertFalse(damage.isEmpty());
+                    assertEquals(area, damage.addedArea());
+                } else {
+                    assertTrue(damage.take(small));
+                    assertArrayEquals(new int[] { (int) x0, (int) y0, (int) (x1 - x0), (int) (y1 - y0), 29 }, small);
+                    for (int index = 0; index < rectangles.length; index++) {
+                        int[] r = rectangles[reverse ? rectangles.length - 1 - index : index];
+                        damage.add(r[0], r[1], r[2], r[3]);
+                    }
+                }
+                long[] exact = { 31, 37, 41, 43, 47 };
+                assertTrue((Boolean) wide.invoke(damage, (Object) exact));
+                assertArrayEquals(new long[] { x0, y0, x1 - x0, y1 - y0, 47 }, exact);
+                assertTrue(damage.isEmpty());
+                assertEquals(0L, damage.addedArea());
+            }
+        }
+        int min = Integer.MIN_VALUE, max = Integer.MAX_VALUE;
+        int[][] zeroArea = {
+                { min, min, max, max }, { min, max, max, max },
+                { max, min, max, max }, { max, max, max, max },
+                { 0, 0, max, 8 }, { 0, 0, 2, 2 }
+        };
+        for (int a = 0; a < 4; a++) for (int b = 0; b < 4; b++)
+            for (int c = 0; c < 4; c++) for (int d = 0; d < 4; d++) {
+                if (a == b || a == c || a == d || b == c || b == d || c == d) continue;
+                M3ViewportDamage permutation = new M3ViewportDamage();
+                java.math.BigInteger permutationArea = java.math.BigInteger.ZERO;
+                for (int index : new int[] { a, b, c, d }) {
+                    int[] r = zeroArea[index];
+                    permutation.add(r[0], r[1], r[2], r[3]);
+                    permutationArea = permutationArea.add(java.math.BigInteger.valueOf(r[2]).multiply(java.math.BigInteger.valueOf(r[3])));
+                    assertEquals(permutationArea.longValue(), permutation.addedArea());
+                    assertFalse(permutation.isEmpty());
+                }
+                long[] exact = { 31, 37, 41, 43, 47 };
+                assertTrue((Boolean) wide.invoke(permutation, (Object) exact));
+                assertArrayEquals(new long[] { min, min, 6_442_450_942L, 6_442_450_942L, 47 }, exact);
+                assertTrue(permutation.isEmpty());
+            }
+        M3ViewportDamage damage = new M3ViewportDamage();
+        java.math.BigInteger exactArea = java.math.BigInteger.ZERO;
+        for (int[] r : zeroArea) {
+            damage.add(r[0], r[1], r[2], r[3]);
+            exactArea = exactArea.add(java.math.BigInteger.valueOf(r[2]).multiply(java.math.BigInteger.valueOf(r[3])));
+            assertEquals(exactArea.longValue(), damage.addedArea());
+            assertFalse(damage.isEmpty());
+        }
+        assertEquals(java.math.BigInteger.ONE.shiftLeft(64), exactArea);
+        assertEquals(0L, damage.addedArea());
+        int[] small = { 13, 17, 19, 23, 29 };
+        assertThrows(ArithmeticException.class, () -> damage.take(small));
+        assertArrayEquals(new int[] { 13, 17, 19, 23, 29 }, small);
+        assertFalse(damage.isEmpty());
+        long[] exact = { 31, 37, 41, 43, 47 };
+        assertTrue((Boolean) wide.invoke(damage, (Object) exact));
+        assertArrayEquals(new long[] { min, min, 6_442_450_942L, 6_442_450_942L, 47 }, exact);
+        assertTrue(damage.isEmpty());
+        assertEquals(0L, damage.addedArea());
+    }
+}
