@@ -170,30 +170,50 @@ public final class StreamEncoder extends Writer {
                     "begin " + off + ", end " + end + ", length " + length);
         }
 
-        // Retain the immutable String (and its M3 owner), not a full char[] shadow.
-        // Slice confines the encoder's input view to this exact requested range.
-        CharBuffer cb = CharBuffer.wrap(str, off, end).slice();
         Object lock = this.lock;
         if (lock instanceof InternalLock locker) {
             locker.lock();
             try {
-                lockedWriteString(cb);
+                lockedWriteString(str, off, end);
             } finally {
                 locker.unlock();
             }
         } else {
             synchronized (lock) {
-                lockedWriteString(cb);
+                lockedWriteString(str, off, end);
             }
         }
     }
 
-    private void lockedWriteString(CharBuffer cb) throws IOException {
+    /** Longest run of a String that is copied out at once for the array encode loops. */
+    private static final int STRING_WINDOW_CHARS = 8192;
+
+    /**
+     * Writes {@code str[off, end)} through bounded char windows. The String is never copied
+     * out whole (an M3-backed String keeps its owner), and the encoders run their array
+     * loops, not one buffer read per char. The byte buffer is sized once for the whole range,
+     * and a surrogate pair cut by a window edge goes through the leftover char, so the bytes
+     * are those of a single contiguous encode.
+     */
+    private void lockedWriteString(String str, int off, int end) throws IOException {
         ensureOpen();
         // A zero-length String write must not advance a stateful encoder or
         // consume a leftover surrogate. The public CharBuffer overload is unchanged.
-        if (cb.hasRemaining()) {
-            implWrite(cb);
+        if (off == end) return;
+        char[] window = new char[Math.min(end - off, STRING_WINDOW_CHARS)];
+        boolean sized = false;
+        for (int base = off; base < end; base += window.length) {
+            int count = Math.min(window.length, end - base);
+            str.getChars(base, base + count, window, 0);
+            CharBuffer cb = CharBuffer.wrap(window, 0, count);
+            if (haveLeftoverChar) {
+                flushLeftoverChar(cb, false);
+            }
+            if (!sized) {
+                growByteBufferIfNeeded(cb.remaining() + (end - base - count));
+                sized = true;
+            }
+            encodeRemaining(cb);
         }
     }
 
@@ -395,7 +415,11 @@ public final class StreamEncoder extends Writer {
         }
 
         growByteBufferIfNeeded(cb.remaining());
+        encodeRemaining(cb);
+    }
 
+    /** Encodes what is left of {@code cb}; one char that needs more input is kept as leftover. */
+    private void encodeRemaining(CharBuffer cb) throws IOException {
         while (cb.hasRemaining()) {
             CoderResult cr = encoder.encode(cb, bb, false);
             if (cr.isUnderflow()) {
