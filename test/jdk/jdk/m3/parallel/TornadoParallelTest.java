@@ -3,6 +3,8 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
+
+
 import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
@@ -46,8 +48,8 @@ public final class TornadoParallelTest {
     private static final KernelId ADD = KernelId.of(M3ParallelIntAddProvider.OPERATION_ID);
     private static final KernelId BITCOUNT = KernelId.of(M3ParallelBitCountProvider.OPERATION_ID);
     private static final int[] EDGE_BITS = {
-        0, -1, Integer.MIN_VALUE, Integer.MAX_VALUE, 1, -2,
-        0x5555_5555, 0xaaaa_aaaa, 0x0f0f_0f0f, 0xf0f0_f0f0
+            0, -1, Integer.MIN_VALUE, Integer.MAX_VALUE, 1, -2,
+            0x5555_5555, 0xaaaa_aaaa, 0x0f0f_0f0f, 0xf0f0_f0f0
     };
     private static long checks;
 
@@ -58,7 +60,8 @@ public final class TornadoParallelTest {
         if (args.length < 1 || args.length > 2
                 || !Set.of("unavailable", "device", "image").contains(args[0])
                 || args.length == 2 && !Set.of("cpu", "gpu").contains(args[1])) {
-            throw new IllegalArgumentException("usage: TornadoParallelTest unavailable|device|image [cpu|gpu]");
+            throw new IllegalArgumentException(
+                    "usage: TornadoParallelTest unavailable|device|image [cpu|gpu]");
         }
         if ("unavailable".equals(args[0])) {
             unavailable(cacheRejectedOption());
@@ -92,12 +95,15 @@ public final class TornadoParallelTest {
                 property = "tornado.virtual.device";
                 field = "VIRTUAL_DEVICE_ENABLED";
             }
-            default -> throw new IllegalArgumentException("unknown test.tornado.cached-option: " + option);
+            default -> throw new IllegalArgumentException(
+                    "unknown test.tornado.cached-option: " + option);
         }
         System.setProperty(property, "true");
         try {
-            Class<?> options = Class.forName("uk.ac.manchester.tornado.runtime.common.TornadoOptions");
-            require(options.getField(field).getBoolean(null), "real Tornado runtime option must be cached true");
+            Class<?> options = Class.forName(
+                    "uk.ac.manchester.tornado.runtime.common.TornadoOptions");
+            require(options.getField(field).getBoolean(null),
+                    "real Tornado runtime option must be cached true");
         } finally {
             System.setProperty(property, "false");
         }
@@ -110,11 +116,14 @@ public final class TornadoParallelTest {
         require(!probe.available(), "unavailable mode found an available Tornado provider");
         require(!probe.reason().isBlank(), "unavailability reason must be recorded");
         if (expectedRefusal != null) {
-            require(probe.reason().contains(expectedRefusal), "cached option refusal must precede device probing: " + probe.reason());
+            require(probe.reason().contains(expectedRefusal),
+                    "cached option refusal must precede device probing: " + probe.reason());
         }
         require(Backend.reference().isReference(), "reference backend must remain usable");
-        require(Backend.select(Backend.Policy.REFERENCE) == Backend.reference(), "reference selection");
-        expect(IllegalStateException.class, () -> Backend.of(BACKEND), "unavailable backend selection");
+        require(Backend.select(Backend.Policy.REFERENCE) == Backend.reference(),
+                "reference selection");
+        expect(IllegalStateException.class, () -> Backend.of(BACKEND),
+                "unavailable backend selection");
         expect(IllegalStateException.class, () -> Backend.select(Backend.Policy.ACCELERATOR),
                 "required accelerator must reject missing device");
         expect(IllegalStateException.class, M3ParallelIntAddProvider::requiredAccelerator,
@@ -130,14 +139,20 @@ public final class TornadoParallelTest {
         require(probe != null && probe.available(), "real Tornado device required: " + probe);
         Backend backend = Backend.of(BACKEND);
         require(!backend.isReference(), "Tornado device must not be the Java reference");
-        require(Backend.select(Backend.Policy.ACCELERATOR) == backend, "required accelerator selection");
-        require(backend.supports(ADD) && backend.supports(BITCOUNT), "both existing kernels must be supported");
+        require(Backend.select(Backend.Policy.ACCELERATOR) == backend,
+                "required accelerator selection");
+        require(backend.supports(ADD) && backend.supports(BITCOUNT),
+                "both existing kernels must be supported");
         if ("cpu".equals(expectedType)) {
-            require(backend.capabilities().contains(Backend.Capability.CPU), "CPU capability must be reported");
-            require(!backend.capabilities().contains(Backend.Capability.GPU), "CPU device must not claim GPU");
+            require(backend.capabilities().contains(Backend.Capability.CPU),
+                    "CPU capability must be reported");
+            require(!backend.capabilities().contains(Backend.Capability.GPU),
+                    "CPU device must not claim GPU");
         } else if ("gpu".equals(expectedType)) {
-            require(backend.capabilities().contains(Backend.Capability.GPU), "GPU capability must be reported");
-            require(!backend.capabilities().contains(Backend.Capability.CPU), "GPU device must not claim CPU");
+            require(backend.capabilities().contains(Backend.Capability.GPU),
+                    "GPU capability must be reported");
+            require(!backend.capabilities().contains(Backend.Capability.CPU),
+                    "GPU device must not claim CPU");
         }
         System.out.println("Tornado device capabilities: " + backend.capabilities());
         return backend;
@@ -145,13 +160,16 @@ public final class TornadoParallelTest {
 
     private static void bulkOperations(Backend backend, boolean actualDevice) {
         M3ParallelIntAddProvider add = actualDevice
-                ? M3ParallelIntAddProvider.requiredAccelerator() : M3ParallelIntAddProvider.reference();
+                ? M3ParallelIntAddProvider.requiredAccelerator()
+                : M3ParallelIntAddProvider.reference();
         M3ParallelBitCountProvider bitcount = actualDevice
-                ? M3ParallelBitCountProvider.requiredAccelerator() : M3ParallelBitCountProvider.reference();
+                ? M3ParallelBitCountProvider.requiredAccelerator()
+                : M3ParallelBitCountProvider.reference();
         BulkScheduler scheduler = new BulkScheduler(List.of(add, bitcount));
-        require(scheduler.providerIds().containsAll(List.of(add.id(), bitcount.id())), "bulk providers registered");
+        require(scheduler.providerIds().containsAll(List.of(add.id(), bitcount.id())),
+                "bulk providers registered");
         Random random = new Random(0x544f524e41444f4cL);
-        int[] lengths = actualDevice ? new int[] {1, 7, 33, 129, 257} : new int[] {17};
+        int[] lengths = actualDevice ? new int[]{1, 7, 33, 129, 257} : new int[]{17};
         for (int length : lengths) {
             int local = actualDevice ? Math.min(32, Integer.highestOneBit(length)) : 0;
             int[] left = sample(random, length);
@@ -179,21 +197,25 @@ public final class TornadoParallelTest {
             int[] bits = sample(random, length);
             int[] bitsBefore = bits.clone();
             BulkTask countTask = countTask(length, local);
-            require(scheduler.select(countTask) == bitcount, "scheduler must select the bitcount provider");
+            require(scheduler.select(countTask) == bitcount,
+                    "scheduler must select the bitcount provider");
             BulkExecution counted = scheduler.execute(countTask, Map.of("bits", bits));
             checkEnvelope(counted, "m3-bitcount-" + backend.id(), "counts");
-            equal((int[]) counted.output("counts"), bitcount(bitsBefore), "bulk bitcount signed patterns");
+            equal((int[]) counted.output("counts"), bitcount(bitsBefore),
+                    "bulk bitcount signed patterns");
             equal(bits, bitsBefore, "bulk bitcount input remains unchanged");
         }
         int local = actualDevice ? 1 : 0;
         expect(IllegalArgumentException.class,
-                () -> scheduler.execute(addTask(2, local), Map.of("left", new int[1], "right", new int[2])),
+                () -> scheduler.execute(addTask(2, local),
+                        Map.of("left", new int[1], "right", new int[2])),
                 "bulk input length mismatch");
         expect(IllegalArgumentException.class,
                 () -> scheduler.execute(countTask(1, local), Map.of("bits", new long[1])),
                 "bulk input primitive type");
         expect(IllegalArgumentException.class,
-                () -> scheduler.execute(countTask(1, local), Map.of("bits", new int[1], "extra", new int[1])),
+                () -> scheduler.execute(countTask(1, local),
+                        Map.of("bits", new int[1], "extra", new int[1])),
                 "bulk unexpected input");
         expect(IllegalStateException.class,
                 () -> scheduler.execute(new BulkTask("unsupported.kernel", 1, local,
@@ -226,29 +248,35 @@ public final class TornadoParallelTest {
             right.copyFrom(nextRight);
             Result second = plan.execute();
             current = second;
-            require(second.launch() == 2 && plan.session().launches() == 2, "second launch counter");
+            require(second.launch() == 2 && plan.session().launches() == 2,
+                    "second launch counter");
             expect(IllegalStateException.class, () -> first.download(sum), "stale result download");
             expect(IllegalStateException.class, () -> first.upload(left), "stale result upload");
             second.download(sum);
-            equal(sum.toArray(), add(originalLeft, nextRight), "ONCE isolated; EACH_LAUNCH refreshed");
+            equal(sum.toArray(), add(originalLeft, nextRight),
+                    "ONCE isolated; EACH_LAUNCH refreshed");
 
             IntBuffer unbound = IntBuffer.allocate(length);
             sum.copyFrom(constant(length, 123));
-            expect(IllegalArgumentException.class, () -> second.download(sum, unbound), "unbound download");
-            equal(sum.toArray(), constant(length, 123), "invalid download must not partially transfer");
+            expect(IllegalArgumentException.class, () -> second.download(sum, unbound),
+                    "unbound download");
+            equal(sum.toArray(), constant(length, 123),
+                    "invalid download must not partially transfer");
             expect(IllegalArgumentException.class, () -> second.upload(unbound), "unbound upload");
             int[] patchedLeft = sample(random, length);
             left.copyFrom(patchedLeft);
             require(second.upload(left) == second, "explicit upload returns the current result");
             left.copyFrom(constant(length, 999));
             second.download(left);
-            equal(left.toArray(), patchedLeft, "explicit upload snapshots before later host mutation");
+            equal(left.toArray(), patchedLeft,
+                    "explicit upload snapshots before later host mutation");
             require(plan.session().launches() == 2, "explicit transfers must not launch a kernel");
 
             int[] finalRight = sample(random, length);
             right.copyFrom(finalRight);
             current = plan.execute().downloadAll();
-            equal(sum.toArray(), add(patchedLeft, finalRight), "explicit input refresh and repeated automatic upload");
+            equal(sum.toArray(), add(patchedLeft, finalRight),
+                    "explicit input refresh and repeated automatic upload");
             equal(left.toArray(), patchedLeft, "downloadAll preserves device left");
             equal(right.toArray(), finalRight, "downloadAll preserves device right");
             require(current.launch() == 3, "third launch counter");
@@ -256,12 +284,15 @@ public final class TornadoParallelTest {
             plan.close();
         }
         plan.close();
-        require(!plan.isOpen() && !plan.session().isOpen(), "closed plan state and idempotent close");
+        require(!plan.isOpen() && !plan.session().isOpen(),
+                "closed plan state and idempotent close");
         expect(IllegalStateException.class, plan::execute, "closed plan execute");
         Result closedResult = current;
         require(closedResult != null, "completed result retained for closed-state check");
-        expect(IllegalStateException.class, () -> closedResult.download(sum), "closed result download");
-        expect(IllegalStateException.class, () -> closedResult.upload(left), "closed result upload");
+        expect(IllegalStateException.class, () -> closedResult.download(sum),
+                "closed result download");
+        expect(IllegalStateException.class, () -> closedResult.upload(left),
+                "closed result upload");
     }
 
     private static void zeroAndExplicitTransfers(Backend backend) {
@@ -283,8 +314,10 @@ public final class TornadoParallelTest {
             equal(counts.toArray(), constant(length, 32), "explicitly uploaded negative patterns");
             bits.copyFrom(constant(length, Integer.MIN_VALUE));
             plan.execute().downloadAll();
-            equal(bits.toArray(), constant(length, -1), "ON_DEMAND ignores unuploaded host mutation");
-            equal(counts.toArray(), constant(length, 32), "resident input stays available on repeated launch");
+            equal(bits.toArray(), constant(length, -1),
+                    "ON_DEMAND ignores unuploaded host mutation");
+            equal(counts.toArray(), constant(length, 32),
+                    "resident input stays available on repeated launch");
             expect(IllegalStateException.class, second::downloadAll, "superseded ON_DEMAND result");
         }
     }
@@ -299,16 +332,20 @@ public final class TornadoParallelTest {
             IntBuffer second = IntBuffer.of(other);
             IntBuffer output = filled(length, -333);
             Grid1D grid = Grid1D.of(length, 8);
-            Plan.Builder builder = Plan.builder(backend).kernel(kernel).grid(grid).bind(first, Transfer.ONCE);
+            Plan.Builder builder = Plan.builder(backend).kernel(kernel).grid(grid)
+                    .bind(first, Transfer.ONCE);
             if (kernel.equals(ADD)) {
                 builder.bind(second, Transfer.ONCE);
             }
             builder.bind(output, Transfer.ON_DEMAND);
             try (Plan plan = builder.build()) {
                 Verified receipt = Verified.run(plan, 2);
-                require(receipt.backend().equals(BACKEND), "receipt identifies actual Tornado backend");
-                require(receipt.kernel().equals(kernel) && receipt.grid().equals(grid), "receipt kernel and grid");
-                require(receipt.launches() == 2 && plan.session().launches() == 2, "receipt launch count");
+                require(receipt.backend().equals(BACKEND),
+                        "receipt identifies actual Tornado backend");
+                require(receipt.kernel().equals(kernel) && receipt.grid().equals(grid),
+                        "receipt kernel and grid");
+                require(receipt.launches() == 2 && plan.session().launches() == 2,
+                        "receipt launch count");
                 hash(receipt.inputRoot(), "receipt input root");
                 hash(receipt.outputRoot(), "receipt output root");
                 hash(receipt.root(), "receipt root");
@@ -318,10 +355,13 @@ public final class TornadoParallelTest {
                 }
                 equal(output.toArray(), kernel.equals(ADD) ? add(source, other) : bitcount(source),
                         "verified complete output image");
-                expect(IllegalStateException.class, () -> Verified.run(plan), "verification requires a fresh plan");
-                String changedRoot = (receipt.root().charAt(0) == '0' ? "1" : "0") + receipt.root().substring(1);
+                expect(IllegalStateException.class, () -> Verified.run(plan),
+                        "verification requires a fresh plan");
+                String changedRoot = (receipt.root().charAt(0) == '0' ? "1" : "0")
+                        + receipt.root().substring(1);
                 expect(IllegalArgumentException.class,
-                        () -> new Verified(receipt.backend(), receipt.kernel(), receipt.grid(), receipt.launches(),
+                        () -> new Verified(receipt.backend(), receipt.kernel(), receipt.grid(),
+                                receipt.launches(),
                                 receipt.inputRoot(), receipt.outputRoot(), changedRoot),
                         "receipt must reject a changed content root");
             }
@@ -333,20 +373,24 @@ public final class TornadoParallelTest {
         require(!backend.supports(unsupported), "unknown kernel must not be advertised");
         expect(IllegalArgumentException.class,
                 () -> Plan.builder(backend).kernel(unsupported).grid(Grid1D.of(3, 2))
-                        .bind(IntBuffer.allocate(3), Transfer.ONCE).build(), "unsupported kernel prepare");
+                        .bind(IntBuffer.allocate(3), Transfer.ONCE).build(),
+                "unsupported kernel prepare");
         expect(IllegalArgumentException.class,
                 () -> Plan.builder(backend).kernel(ADD).grid(Grid1D.of(3, 2))
                         .bind(IntBuffer.allocate(3), Transfer.ONCE)
-                        .bind(IntBuffer.allocate(3), Transfer.ON_DEMAND).build(), "add binding count");
+                        .bind(IntBuffer.allocate(3), Transfer.ON_DEMAND).build(),
+                "add binding count");
         expect(IllegalArgumentException.class,
                 () -> Plan.builder(backend).kernel(BITCOUNT).grid(Grid1D.of(3, 2))
                         .bind(IntBuffer.allocate(4), Transfer.ONCE)
-                        .bind(IntBuffer.allocate(3), Transfer.ON_DEMAND).build(), "binding length versus grid");
+                        .bind(IntBuffer.allocate(3), Transfer.ON_DEMAND).build(),
+                "binding length versus grid");
         expect(IllegalArgumentException.class,
                 () -> Plan.builder(backend).kernel(BITCOUNT)
                         .grid(Grid1D.of(M3ParallelBitCountProvider.MAX_ITEMS + 1, 1))
                         .bind(IntBuffer.allocate(1), Transfer.ONCE)
-                        .bind(IntBuffer.allocate(1), Transfer.ON_DEMAND).build(), "reviewed work bound");
+                        .bind(IntBuffer.allocate(1), Transfer.ON_DEMAND).build(),
+                "reviewed work bound");
     }
 
     private static void imageIdentity() throws ClassNotFoundException {
@@ -355,16 +399,21 @@ public final class TornadoParallelTest {
         inImage(M3ParallelIntAddProvider.class, "m3.parallel.bulk.provider");
         inImage(M3ParallelBitCountProvider.class, "m3.parallel.bulk.provider");
         inImage(BulkScheduler.class, "java.base");
-        inImage(Class.forName("jdk.internal.m3.tornado.parallel.TornadoBackendProvider"), "jdk.m3.tornado");
+        inImage(Class.forName("jdk.internal.m3.tornado.parallel.TornadoBackendProvider"),
+                "jdk.m3.tornado");
         inImage(Class.forName("uk.ac.manchester.tornado.api.TornadoExecutionPlan"), "tornado.api");
-        inImage(Class.forName("uk.ac.manchester.tornado.runtime.TornadoCoreRuntime"), "tornado.runtime");
+        inImage(Class.forName("uk.ac.manchester.tornado.runtime.TornadoCoreRuntime"),
+                "tornado.runtime");
     }
 
     private static void inImage(Class<?> type, String module) {
-        require(module.equals(type.getModule().getName()), type.getName() + " must belong to " + module);
+        require(module.equals(type.getModule().getName()),
+                type.getName() + " must belong to " + module);
         URL resource = type.getResource('/' + type.getName().replace('.', '/') + ".class");
-        require(resource != null && "jrt".equals(resource.getProtocol()), type.getName() + " must load from jrt");
-        require(resource.getPath().startsWith('/' + module + '/'), type.getName() + " jrt module identity");
+        require(resource != null && "jrt".equals(resource.getProtocol()),
+                type.getName() + " must load from jrt");
+        require(resource.getPath().startsWith('/' + module + '/'),
+                type.getName() + " jrt module identity");
     }
 
     private static BulkTask addTask(int length, int local) {
@@ -434,11 +483,13 @@ public final class TornadoParallelTest {
         }
     }
 
-    private static void expect(Class<? extends RuntimeException> type, Runnable action, String message) {
+    private static void expect(Class<? extends RuntimeException> type, Runnable action,
+                               String message) {
         try {
             action.run();
         } catch (RuntimeException actual) {
-            require(type.isInstance(actual), message + ": expected " + type.getName() + ", got " + actual);
+            require(type.isInstance(actual),
+                    message + ": expected " + type.getName() + ", got " + actual);
             return;
         }
         throw new AssertionError(message + ": expected " + type.getName());
