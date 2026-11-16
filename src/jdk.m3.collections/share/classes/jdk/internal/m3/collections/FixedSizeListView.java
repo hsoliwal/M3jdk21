@@ -4,31 +4,41 @@
  */
 package jdk.internal.m3.collections;
 
+import java.util.Arrays;
+import java.util.Objects;
+
 /**
- * M3 five-library superset scaffold {@code FixedSizeListView}: API group {@code FIXED_SIZE_LIST} over arrays and state masks.
+ * M3 five-library superset {@code FixedSizeListView}: API group
+ * {@code FIXED_SIZE_LIST} over caller-owned arrays.
  *
  * <p>Provider lineage (LIBRARY_API_MATRIX.tsv, run 20261017-m3-to-public/LIB-SUPERSET):
  * <ul>
- *   <li>JDK Arrays.asList: fixed-size writable array view [license GPLv2+CPE; SUPERSET_VIEW VIEW_OF:LongCompositeViews; priority P2; matrix owner LongCompositeViews]</li>
+ *   <li>JDK Arrays.asList: fixed-size writable array view [license GPLv2+CPE;
+ *   SUPERSET_VIEW VIEW_OF:LongCompositeViews; priority P2; matrix owner
+ *   LongCompositeViews]</li>
  * </ul>
  *
- * <p>DOOP mapping: lane kind OBJECT; lanes {@code Object[] valueLane}; offset scheme identity offsets over caller array; state-mask bits FIXED_SIZE; stored nodes NONE; API entry objects NONE (transient facades over slots, never the stored representation); matrix note: direct lane view; identity offsets / FIXED_SIZE flag.
+ * <p>DOOP mapping: lane kind OBJECT; {@code Object[] valueLane} retains the caller's
+ * original array with direct identity offsets. Fixed-size state is implicit at
+ * the owner boundary. Stored structural nodes: none; API entry objects: none.
  *
- * <p>Status: SCAFFOLD. Every public atom throws {@link NotYetReceived} until this owner is received through a hash-pinned Synexia recipe with its own
- * provider oracle (never inferred from another provider). Not a {@code java.util} replacement.
+ * <p>Status: source-sealed receiving candidate. The caller's original array remains
+ * the authoritative payload store; JDK array-list semantics are the independent
+ * behavioral oracle. This owner does not replace {@code java.util.List} or
+ * the JDK's own {@code Arrays.asList}.
  */
 public final class FixedSizeListView<E> {
     /** State-mask bit {@code FIXED_SIZE} (per-slot state word, bit 0). */
     static final long STATE_FIXED_SIZE = 1L << 0;
 
-    /** Storage lane {@code valueLane}: dynamic primitive/reference array lane. */
+    /** Authoritative array: the exact caller-provided reference lane for {@code of}. */
     private Object[] valueLane = new Object[0];
-    /** Per-slot state words (FIXED_SIZE); one bit set per slot and state. */
+    /** Legacy empty metadata lane; fixed length is an implicit owner-wide state. */
     private long[] stateMaskWords = new long[0];
     /** Live slot count. */
     private int size;
 
-    /** Creates an empty scaffold owner; lanes grow by copy once received. */
+    /** Creates an empty fixed-size view. */
     public FixedSizeListView() {
     }
 
@@ -37,48 +47,62 @@ public final class FixedSizeListView<E> {
         return "M3FixedSizeListView|FIXED_SIZE_LIST|OBJECT|FIXED_SIZE|Object[] valueLane";
     }
 
-    /** Arrays.asList (fixed-size writable view) (scaffold: not yet received). */
+    /** Retain the original caller array; null is not a valid backing owner. */
     public static <E> FixedSizeListView<E> of(E[] backing) {
-        throw new NotYetReceived("M3FixedSizeListView.of");
+        Objects.requireNonNull(backing);
+        FixedSizeListView<E> view = new FixedSizeListView<>();
+        view.valueLane = backing;
+        view.size = backing.length;
+        return view;
     }
 
-    /** List.get (scaffold: not yet received). */
+    /** Indexed read using the JDK array view's bounds and exception behavior. */
+    @SuppressWarnings("unchecked")
     public E get(int index) {
-        throw new NotYetReceived("M3FixedSizeListView.get");
+        return (E) valueLane[index];
     }
 
-    /** List.set (writes through to backing array) (scaffold: not yet received). */
+    /** Write through to the original array, retaining array covariance checks. */
+    @SuppressWarnings("unchecked")
     public E set(int index, E element) {
-        throw new NotYetReceived("M3FixedSizeListView.set");
+        E previous = (E) valueLane[index];
+        valueLane[index] = element;
+        return previous;
     }
 
-    /** List.indexOf (scaffold: not yet received). */
+    /** First matching slot; invoke search-element equals just as a JDK List does. */
     public int indexOf(Object element) {
-        throw new NotYetReceived("M3FixedSizeListView.indexOf");
+        for (int i = 0; i < size; i++) {
+            if (element == null ? valueLane[i] == null : element.equals(valueLane[i])) {
+                return i;
+            }
+        }
+        return -1;
     }
 
-    /** List.contains (scaffold: not yet received). */
+    /** Membership uses the same first-match equality contract as indexOf. */
     public boolean contains(Object element) {
-        throw new NotYetReceived("M3FixedSizeListView.contains");
+        return indexOf(element) >= 0;
     }
 
-    /** List.toArray (copy) (scaffold: not yet received). */
+    /** Detached Object[] copy, independent even for covariant backing arrays. */
     public Object[] toArray() {
-        throw new NotYetReceived("M3FixedSizeListView.toArray");
+        return Arrays.copyOf(valueLane, size, Object[].class);
     }
 
-    /** java.util.List facade (scaffold: not yet received). */
+    /** JDK-owned fixed-size, writable-element facade over the same array. */
+    @SuppressWarnings("unchecked")
     public java.util.List<E> asList() {
-        throw new NotYetReceived("M3FixedSizeListView.asList");
+        return Arrays.asList((E[]) valueLane);
     }
 
-    /** List.size (scaffold: not yet received). */
+    /** Length is fixed by the caller-owned backing array. */
     public int size() {
-        throw new NotYetReceived("M3FixedSizeListView.size");
+        return size;
     }
 
-    /** UOE contract once received (fixed size) (scaffold: not yet received). */
+    /** Fixed-size append always refuses, including for an empty backing. */
     public boolean add(E element) {
-        throw new NotYetReceived("M3FixedSizeListView.add");
+        throw new UnsupportedOperationException();
     }
 }
