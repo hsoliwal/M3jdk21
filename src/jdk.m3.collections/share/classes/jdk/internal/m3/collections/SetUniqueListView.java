@@ -4,73 +4,175 @@
  */
 package jdk.internal.m3.collections;
 
+import java.util.AbstractSet;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.ConcurrentModificationException;
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+import java.util.Objects;
+import java.util.Set;
+
 /**
- * M3 five-library superset scaffold {@code SetUniqueListView}: API group {@code SET_UNIQUE_LIST} over arrays and state masks.
- *
- * <p>Provider lineage (LIBRARY_API_MATRIX.tsv, run 20261017-m3-to-public/LIB-SUPERSET):
- * <ul>
- *   <li>COMMONS GrowthList/FixedSizeList/SetUniqueList: size-behavior decorators [license Apache-2.0; SUPERSET_VIEW VIEW_OF:M3LongArrayList; priority P2; matrix owner facades over list owner]</li>
- * </ul>
- *
- * <p>DOOP mapping: lane kind OBJECT; lanes {@code Object[] valueLane;int[] hashIndexLane}; offset scheme ordinal slot + uniqueness hash index; state-mask bits UNIQUE; stored nodes NONE; API entry objects NONE (transient facades over slots, never the stored representation); matrix note: base value lane + behavior flags / FIXED_SIZE/UNIQUE flags.
- *
- * <p>Status: SCAFFOLD. Every public atom throws {@link NotYetReceived} until this owner is received through a hash-pinned Synexia recipe with its own
- * provider oracle (never inferred from another provider). Not a {@code java.util} replacement.
+ * Distinct, insertion-ordered values stored in one Object[] lane.
+ * Projections are constructed only at API boundaries; no persistent hash
+ * nodes, entries or wrappers are stored. Custom equality is evaluated in
+ * candidate-to-stored order and never reordered by an internal hash table.
  */
 public final class SetUniqueListView<E> {
-    /** State-mask bit {@code UNIQUE} (per-slot state word, bit 0). */
     static final long STATE_UNIQUE = 1L << 0;
-
-    /** Storage lane {@code valueLane}: dynamic primitive/reference array lane. */
     private Object[] valueLane = new Object[0];
-    /** Storage lane {@code hashIndexLane}: dynamic primitive/reference array lane. */
-    private int[] hashIndexLane = new int[0];
-    /** Per-slot state words (UNIQUE); one bit set per slot and state. */
-    private long[] stateMaskWords = new long[0];
-    /** Live slot count. */
+    private static final int[] EMPTY_INDEX = new int[0];
+    private int[] hashIndexLane = EMPTY_INDEX;
+    private long[] stateMaskWords = {STATE_UNIQUE};
     private int size;
+    private int epoch;
 
-    /** Creates an empty scaffold owner; lanes grow by copy once received. */
-    public SetUniqueListView() {
-    }
+    public SetUniqueListView() { }
 
-    /** Reports the declared state-mask bits and lanes for ledgers; never allocates per element. */
     public static String scaffoldDescriptor() {
         return "M3SetUniqueListView|SET_UNIQUE_LIST|OBJECT|UNIQUE|Object[] valueLane;int[] hashIndexLane";
     }
 
-    /** SetUniqueList.add (ignores duplicates) (scaffold: not yet received). */
+    /** Hash acceleration only for exact immutable JDK scalars. */
+    private static boolean stable(Object value) {
+        return value == null || value.getClass() == String.class
+                || value.getClass() == Integer.class || value.getClass() == Long.class;
+    }
+
+    private static int hash(Object key) {
+        int code = key == null ? 0 : key.hashCode();
+        return code ^ (code >>> 16);
+    }
+
+    private void insertIndex(int slot) {
+        int mask = hashIndexLane.length - 1;
+        int bucket = hash(valueLane[slot]) & mask;
+        while (hashIndexLane[bucket] != 0) bucket = (bucket + 1) & mask;
+        hashIndexLane[bucket] = slot + 1;
+    }
+
+    private void indexIfEligible() {
+        if (hashIndexLane.length != 0 || size < 64 || size >= (1 << 28)) return;
+        for (int i = 0; i < size; i++) if (!stable(valueLane[i])) return;
+        int capacity = 128;
+        while (capacity < size * 2) capacity <<= 1;
+        hashIndexLane = new int[capacity];
+        for (int i = 0; i < size; i++) insertIndex(i);
+    }
+
+    private int indexOf(Object candidate) {
+        if (stable(candidate)) {
+            indexIfEligible();
+            if (hashIndexLane.length != 0) {
+                int mask = hashIndexLane.length - 1;
+                int bucket = hash(candidate) & mask;
+                for (int slot; (slot = hashIndexLane[bucket]) != 0;
+                        bucket = (bucket + 1) & mask) {
+                    if (Objects.equals(candidate, valueLane[slot - 1])) return slot - 1;
+                }
+                return -1;
+            }
+        }
+        for (int i = 0; i < size; i++) {
+            if (Objects.equals(candidate, valueLane[i])) return i;
+        }
+        return -1;
+    }
+
+    private void reserve(int count) {
+        if (count <= valueLane.length) return;
+        long proposed = valueLane.length == 0 ? 8L
+                : (long) valueLane.length + (valueLane.length >>> 1) + 1;
+        valueLane = Arrays.copyOf(valueLane, (int) Math.min(Integer.MAX_VALUE, Math.max(count, proposed)));
+    }
+
+    private void changed() {
+        epoch++;
+        hashIndexLane = EMPTY_INDEX;
+    }
+
     public boolean add(E element) {
-        throw new NotYetReceived("M3SetUniqueListView.add");
+        if (indexOf(element) >= 0) return false;
+        reserve(Math.addExact(size, 1));
+        // Keep the already-materialized index hot for simple append-only use.
+        boolean indexed = hashIndexLane.length != 0 && stable(element)
+                && (long) (size + 1) * 2 <= hashIndexLane.length;
+        valueLane[size++] = element;
+        if (indexed) {
+            insertIndex(size - 1);
+            epoch++;
+        } else {
+            changed();
+        }
+        return true;
     }
 
-    /** SetUniqueList.add(index) (scaffold: not yet received). */
+    /** Reject invalid indices even if a duplicate makes insertion a no-op. */
     public void add(int index, E element) {
-        throw new NotYetReceived("M3SetUniqueListView.add");
+        Objects.checkIndex(index, Math.addExact(size, 1));
+        if (indexOf(element) >= 0) return;
+        reserve(Math.addExact(size, 1));
+        System.arraycopy(valueLane, index, valueLane, index + 1, size - index);
+        valueLane[index] = element;
+        size++;
+        changed();
     }
 
-    /** SetUniqueList.set (removes earlier duplicate) (scaffold: not yet received). */
+    /** Commons SetUniqueList semantics: set and remove any earlier duplicate. */
+    @SuppressWarnings("unchecked")
     public E set(int index, E element) {
-        throw new NotYetReceived("M3SetUniqueListView.set");
+        Objects.checkIndex(index, size);
+        int duplicate = indexOf(element);
+        E previous = (E) valueLane[index];
+        valueLane[index] = element;
+        if (duplicate != -1 && duplicate != index) {
+            System.arraycopy(valueLane, duplicate + 1, valueLane, duplicate, size - duplicate - 1);
+            valueLane[--size] = null;
+        }
+        changed();
+        return previous;
     }
 
-    /** List.get (scaffold: not yet received). */
+    @SuppressWarnings("unchecked")
     public E get(int index) {
-        throw new NotYetReceived("M3SetUniqueListView.get");
+        return (E) valueLane[Objects.checkIndex(index, size)];
     }
 
-    /** List.remove (scaffold: not yet received). */
     public boolean remove(Object element) {
-        throw new NotYetReceived("M3SetUniqueListView.remove");
+        int index = indexOf(element);
+        if (index < 0) return false;
+        System.arraycopy(valueLane, index + 1, valueLane, index, size - index - 1);
+        valueLane[--size] = null;
+        changed();
+        return true;
     }
 
-    /** SetUniqueList.asSet (scaffold: not yet received). */
-    public java.util.Set<E> asSet() {
-        throw new NotYetReceived("M3SetUniqueListView.asSet");
+    /** Live, read-only set facade; changes still live in the owning Object[]. */
+    public Set<E> asSet() {
+        return Collections.unmodifiableSet(new AbstractSet<>() {
+            @Override public int size() { return SetUniqueListView.this.size; }
+            @Override public boolean contains(Object value) { return indexOf(value) >= 0; }
+            @Override public Iterator<E> iterator() {
+                return new Iterator<>() {
+                    private final int expected = epoch;
+                    private int next;
+                    private void check() {
+                        if (expected != epoch) throw new ConcurrentModificationException();
+                    }
+                    @Override public boolean hasNext() { check(); return next < size; }
+                    @Override public E next() {
+                        check();
+                        if (next >= size) throw new NoSuchElementException();
+                        return get(next++);
+                    }
+                };
+            }
+        });
     }
 
-    /** List.size (scaffold: not yet received). */
-    public int size() {
-        throw new NotYetReceived("M3SetUniqueListView.size");
-    }
+    public int size() { return size; }
+
+    /** Additive detached snapshot; not a second persistent storage owner. */
+    public Object[] toArray() { return Arrays.copyOf(valueLane, size); }
 }
