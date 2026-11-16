@@ -16,11 +16,15 @@
 
 package jdk.m3.collections.guava.util.concurrent;
 
+import jdk.m3.collections.guava.annotations.GwtIncompatible;
+import jdk.m3.collections.guava.annotations.J2ktIncompatible;
 import junit.framework.TestCase;
 import org.jspecify.annotations.NullUnmarked;
 
 /** Unit tests for {@link ForwardingListeningExecutorService} */
 @NullUnmarked
+@GwtIncompatible
+@J2ktIncompatible
 public class ForwardingListeningExecutorServiceTest extends TestCase {
   public void testForwarding() {
     ForwardingObjectTester.testForwardingObject(ForwardingListeningExecutorService.class);

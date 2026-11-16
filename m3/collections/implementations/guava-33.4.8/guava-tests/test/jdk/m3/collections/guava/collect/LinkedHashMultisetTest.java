@@ -16,7 +16,7 @@
 
 package jdk.m3.collections.guava.collect;
 
-import static com.google.common.truth.Truth.assertThat;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
 import static java.util.Arrays.asList;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
@@ -27,6 +27,7 @@ import jdk.m3.collections.guava.collect.testing.features.CollectionSize;
 import jdk.m3.collections.guava.collect.testing.google.MultisetFeature;
 import jdk.m3.collections.guava.collect.testing.google.MultisetTestSuiteBuilder;
 import jdk.m3.collections.guava.collect.testing.google.TestStringMultisetGenerator;
+import java.util.ArrayList;
 import java.util.List;
 import junit.framework.Test;
 import junit.framework.TestCase;
@@ -38,7 +39,7 @@ import org.jspecify.annotations.NullMarked;
  *
  * @author Kevin Bourrillion
  */
-@GwtCompatible(emulated = true)
+@GwtCompatible
 @NullMarked
 public class LinkedHashMultisetTest extends TestCase {
 
@@ -74,7 +75,7 @@ public class LinkedHashMultisetTest extends TestCase {
 
       @Override
       public List<String> order(List<String> insertionOrder) {
-        List<String> order = Lists.newArrayList();
+        List<String> order = new ArrayList<>();
         for (String s : insertionOrder) {
           int index = order.indexOf(s);
           if (index == -1) {
@@ -94,7 +95,7 @@ public class LinkedHashMultisetTest extends TestCase {
     multiset.add("bar");
     assertEquals(3, multiset.size());
     assertEquals(2, multiset.count("foo"));
-    assertEquals("[foo x 2, bar]", multiset.toString());
+    assertThat(multiset.toString()).isEqualTo("[foo x 2, bar]");
   }
 
   public void testCreateWithSize() {
@@ -103,14 +104,14 @@ public class LinkedHashMultisetTest extends TestCase {
     multiset.add("bar");
     assertEquals(3, multiset.size());
     assertEquals(2, multiset.count("foo"));
-    assertEquals("[foo x 2, bar]", multiset.toString());
+    assertThat(multiset.toString()).isEqualTo("[foo x 2, bar]");
   }
 
   public void testCreateFromIterable() {
     Multiset<String> multiset = LinkedHashMultiset.create(asList("foo", "bar", "foo"));
     assertEquals(3, multiset.size());
     assertEquals(2, multiset.count("foo"));
-    assertEquals("[foo x 2, bar]", multiset.toString());
+    assertThat(multiset.toString()).isEqualTo("[foo x 2, bar]");
   }
 
   public void testToString() {
@@ -119,10 +120,10 @@ public class LinkedHashMultisetTest extends TestCase {
     ms.add("c", 1);
     ms.add("b", 2);
 
-    assertEquals("[a x 3, c, b x 2]", ms.toString());
+    assertThat(ms.toString()).isEqualTo("[a x 3, c, b x 2]");
   }
 
-  public void testLosesPlaceInLine() throws Exception {
+  public void testLosesPlaceInLine() {
     Multiset<String> ms = LinkedHashMultiset.create();
     ms.add("a");
     ms.add("b", 2);

@@ -29,7 +29,7 @@ import org.jspecify.annotations.Nullable;
  *
  * @author Louis Wasserman
  */
-@GwtCompatible(emulated = true)
+@GwtCompatible
 abstract class DescendingMultiset<E extends @Nullable Object> extends ForwardingMultiset<E>
     implements SortedMultiset<E> {
   abstract SortedMultiset<E> forwardMultiset();
@@ -40,7 +40,7 @@ abstract class DescendingMultiset<E extends @Nullable Object> extends Forwarding
   public Comparator<? super E> comparator() {
     Comparator<? super E> result = comparator;
     if (result == null) {
-      return comparator = Ordering.from(forwardMultiset().comparator()).<E>reverse();
+      return comparator = Ordering.from(forwardMultiset().comparator()).reverse();
     }
     return result;
   }
@@ -111,7 +111,10 @@ abstract class DescendingMultiset<E extends @Nullable Object> extends Forwarding
   @Override
   public Set<Entry<E>> entrySet() {
     Set<Entry<E>> result = entrySet;
-    return (result == null) ? entrySet = createEntrySet() : result;
+    if (result == null) {
+      result = entrySet = createEntrySet();
+    }
+    return result;
   }
 
   Set<Entry<E>> createEntrySet() {

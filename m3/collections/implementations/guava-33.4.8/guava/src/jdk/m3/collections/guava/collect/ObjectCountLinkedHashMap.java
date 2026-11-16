@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 // M3 array-storage adaptation; provenance: m3/array-storage-20261019/CONTRACT.md
-// Modified 2026 by Hitesh Soliwal and Synexia contributors: array storage.
 package jdk.m3.collections.guava.collect;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
@@ -30,9 +29,9 @@ import org.jspecify.annotations.Nullable;
  * entries, {@code ObjectCountLinkedHashMap} minimizes object allocation and reduces memory
  * footprint.
  */
-@GwtCompatible(serializable = true, emulated = true)
+@GwtCompatible
 @NullMarked
-class ObjectCountLinkedHashMap<K extends @Nullable Object> extends ObjectCountHashMap<K> {
+final class ObjectCountLinkedHashMap<K extends @Nullable Object> extends ObjectCountHashMap<K> {
   /** Creates an empty {@code ObjectCountLinkedHashMap} instance. */
   static <K extends @Nullable Object> ObjectCountLinkedHashMap<K> create() {
     return new ObjectCountLinkedHashMap<K>();

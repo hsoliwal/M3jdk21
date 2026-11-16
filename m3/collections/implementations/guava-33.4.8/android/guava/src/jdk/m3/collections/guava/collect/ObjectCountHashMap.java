@@ -22,12 +22,12 @@ import static jdk.m3.collections.guava.collect.Hashing.smearedHash;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.annotations.VisibleForTesting;
-import jdk.m3.collections.guava.base.Objects;
 import jdk.m3.collections.guava.base.Preconditions;
 import jdk.m3.collections.guava.collect.Multiset.Entry;
 import jdk.m3.collections.guava.collect.Multisets.AbstractEntry;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import java.util.Arrays;
+import java.util.Objects;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
@@ -38,7 +38,7 @@ import org.jspecify.annotations.Nullable;
  *
  * <p>In the absence of element deletions, this will iterate over elements in insertion order.
  */
-@GwtCompatible(serializable = true, emulated = true)
+@GwtCompatible
 @NullMarked
 class ObjectCountHashMap<K extends @Nullable Object> {
 
@@ -208,7 +208,7 @@ class ObjectCountHashMap<K extends @Nullable Object> {
     return new MapEntry(index);
   }
 
-  class MapEntry extends AbstractEntry<K> {
+  private final class MapEntry extends AbstractEntry<K> {
     @ParametricNullness final K key;
 
     int lastKnownIndex;
@@ -228,30 +228,15 @@ class ObjectCountHashMap<K extends @Nullable Object> {
     void updateLastKnownIndex() {
       if (lastKnownIndex == -1
           || lastKnownIndex >= size()
-          || !Objects.equal(key, keys[lastKnownIndex])) {
+          || !Objects.equals(key, keys[lastKnownIndex])) {
         lastKnownIndex = indexOf(key);
       }
     }
 
-    @SuppressWarnings("unchecked") // values only contains Vs
     @Override
     public int getCount() {
       updateLastKnownIndex();
       return (lastKnownIndex == -1) ? 0 : values[lastKnownIndex];
-    }
-
-    @SuppressWarnings("unchecked") // values only contains Vs
-    @CanIgnoreReturnValue
-    public int setCount(int count) {
-      updateLastKnownIndex();
-      if (lastKnownIndex == -1) {
-        put(key, count);
-        return 0;
-      } else {
-        int old = values[lastKnownIndex];
-        values[lastKnownIndex] = count;
-        return old;
-      }
     }
   }
 
@@ -298,7 +283,7 @@ class ObjectCountHashMap<K extends @Nullable Object> {
       do {
         last = next;
         entry = entries[next];
-        if (getHash(entry) == hash && Objects.equal(key, keys[next])) {
+        if (getHash(entry) == hash && Objects.equals(key, keys[next])) {
           int oldValue = values[next];
 
           values[next] = value;
@@ -391,7 +376,7 @@ class ObjectCountHashMap<K extends @Nullable Object> {
     int next = table[hash & hashTableMask()];
     while (next != UNSET) {
       long entry = entries[next];
-      if (getHash(entry) == hash && Objects.equal(key, keys[next])) {
+      if (getHash(entry) == hash && Objects.equals(key, keys[next])) {
         return next;
       }
       next = getNext(entry);
@@ -422,7 +407,7 @@ class ObjectCountHashMap<K extends @Nullable Object> {
     int last = UNSET;
     do {
       if (getHash(entries[next]) == hash) {
-        if (Objects.equal(key, keys[next])) {
+        if (Objects.equals(key, keys[next])) {
           int oldValue = values[next];
 
           if (last == UNSET) {
@@ -480,7 +465,8 @@ class ObjectCountHashMap<K extends @Nullable Object> {
         long entry;
         do {
           previous = lastNext;
-          lastNext = getNext(entry = entries[lastNext]);
+          entry = entries[lastNext];
+          lastNext = getNext(entry);
         } while (lastNext != srcIndex);
         // here, entries[previous] points to the old entry location; update it
         entries[previous] = swapNext(entry, dstIndex);

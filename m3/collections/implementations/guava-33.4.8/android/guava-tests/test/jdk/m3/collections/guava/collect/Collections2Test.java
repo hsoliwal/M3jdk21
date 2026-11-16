@@ -19,9 +19,9 @@ package jdk.m3.collections.guava.collect;
 import static jdk.m3.collections.guava.base.Strings.isNullOrEmpty;
 import static jdk.m3.collections.guava.collect.Iterables.concat;
 import static jdk.m3.collections.guava.collect.Lists.newArrayList;
-import static jdk.m3.collections.guava.collect.Lists.newLinkedList;
-import static com.google.common.truth.Truth.assertThat;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
 import static java.util.Collections.nCopies;
+import static org.junit.Assert.assertThrows;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
@@ -32,9 +32,11 @@ import jdk.m3.collections.guava.collect.testing.TestStringCollectionGenerator;
 import jdk.m3.collections.guava.collect.testing.features.CollectionFeature;
 import jdk.m3.collections.guava.collect.testing.features.CollectionSize;
 import jdk.m3.collections.guava.testing.NullPointerTester;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Objects;
@@ -50,7 +52,7 @@ import org.jspecify.annotations.Nullable;
  * @author Chris Povirk
  * @author Jared Levy
  */
-@GwtCompatible(emulated = true)
+@GwtCompatible
 @NullMarked
 public class Collections2Test extends TestCase {
   @J2ktIncompatible
@@ -80,8 +82,8 @@ public class Collections2Test extends TestCase {
     return CollectionTestSuiteBuilder.using(
             new TestStringCollectionGenerator() {
               @Override
-              public Collection<String> create(String[] elements) {
-                List<String> unfiltered = newArrayList();
+              protected Collection<String> create(String[] elements) {
+                List<String> unfiltered = new ArrayList<>();
                 unfiltered.add("yyy");
                 Collections.addAll(unfiltered, elements);
                 unfiltered.add("zzz");
@@ -105,8 +107,8 @@ public class Collections2Test extends TestCase {
     return CollectionTestSuiteBuilder.using(
             new TestStringCollectionGenerator() {
               @Override
-              public Collection<String> create(String[] elements) {
-                List<String> unfiltered = newArrayList();
+              protected Collection<String> create(String[] elements) {
+                List<String> unfiltered = new ArrayList<>();
                 Collections.addAll(unfiltered, elements);
                 return Collections2.filter(unfiltered, NOT_YYY_ZZZ);
               }
@@ -128,8 +130,8 @@ public class Collections2Test extends TestCase {
     return CollectionTestSuiteBuilder.using(
             new TestStringCollectionGenerator() {
               @Override
-              public Collection<String> create(String[] elements) {
-                List<String> unfiltered = newLinkedList();
+              protected Collection<String> create(String[] elements) {
+                List<String> unfiltered = new LinkedList<>();
                 unfiltered.add("yyy");
                 Collections.addAll(unfiltered, elements);
                 unfiltered.add("zzz");
@@ -153,8 +155,8 @@ public class Collections2Test extends TestCase {
     return CollectionTestSuiteBuilder.using(
             new TestStringCollectionGenerator() {
               @Override
-              public Collection<String> create(String[] elements) {
-                List<String> unfiltered = newArrayList();
+              protected Collection<String> create(String[] elements) {
+                List<String> unfiltered = new ArrayList<>();
                 unfiltered.add("yyy");
                 unfiltered.addAll(ImmutableList.copyOf(elements));
                 unfiltered.add("zzz");
@@ -178,8 +180,8 @@ public class Collections2Test extends TestCase {
     return CollectionTestSuiteBuilder.using(
             new TestStringCollectionGenerator() {
               @Override
-              public Collection<String> create(String[] elements) {
-                List<String> unfiltered = newArrayList();
+              protected Collection<String> create(String[] elements) {
+                List<String> unfiltered = new ArrayList<>();
                 unfiltered.add("yyy");
                 unfiltered.addAll(ImmutableList.copyOf(elements));
                 unfiltered.add("zzz");
@@ -204,8 +206,8 @@ public class Collections2Test extends TestCase {
     return CollectionTestSuiteBuilder.using(
             new TestStringCollectionGenerator() {
               @Override
-              public Collection<@Nullable String> create(@Nullable String[] elements) {
-                List<@Nullable String> list = newArrayList();
+              protected Collection<@Nullable String> create(@Nullable String[] elements) {
+                List<@Nullable String> list = new ArrayList<>();
                 for (String element : elements) {
                   list.add((element == null) ? null : "q" + element);
                 }
@@ -230,7 +232,7 @@ public class Collections2Test extends TestCase {
   }
 
   public void testOrderedPermutationSetEmpty() {
-    List<Integer> list = newArrayList();
+    List<Integer> list = new ArrayList<>();
     Collection<List<Integer>> permutationSet = Collections2.orderedPermutations(list);
 
     assertEquals(1, permutationSet.size());
@@ -238,7 +240,7 @@ public class Collections2Test extends TestCase {
 
     Iterator<List<Integer>> permutations = permutationSet.iterator();
 
-    assertNextPermutation(Lists.<Integer>newArrayList(), permutations);
+    assertNextPermutation(new ArrayList<>(), permutations);
     assertNoMorePermutations(permutations);
   }
 
@@ -327,20 +329,19 @@ public class Collections2Test extends TestCase {
   }
 
   public void testPermutationSetEmpty() {
-    Collection<List<Integer>> permutationSet =
-        Collections2.permutations(Collections.<Integer>emptyList());
+    Collection<List<Integer>> permutationSet = Collections2.permutations(Collections.emptyList());
 
     assertEquals(1, permutationSet.size());
     assertTrue(permutationSet.contains(Collections.<Integer>emptyList()));
 
     Iterator<List<Integer>> permutations = permutationSet.iterator();
-    assertNextPermutation(Collections.<Integer>emptyList(), permutations);
+    assertNextPermutation(Collections.emptyList(), permutations);
     assertNoMorePermutations(permutations);
   }
 
   public void testPermutationSetOneElement() {
     Iterator<List<Integer>> permutations =
-        Collections2.permutations(Collections.<Integer>singletonList(1)).iterator();
+        Collections2.permutations(Collections.singletonList(1)).iterator();
     assertNextPermutation(newArrayList(1), permutations);
     assertNoMorePermutations(permutations);
   }
@@ -465,22 +466,19 @@ public class Collections2Test extends TestCase {
     assertFalse(permutationSet.contains(null));
   }
 
-  private <T> void assertNextPermutation(
+  private static <T> void assertNextPermutation(
       List<T> expectedPermutation, Iterator<List<T>> permutations) {
     assertTrue("Expected another permutation, but there was none.", permutations.hasNext());
     assertEquals(expectedPermutation, permutations.next());
   }
 
-  private <T> void assertNoMorePermutations(Iterator<List<T>> permutations) {
+  private static <T> void assertNoMorePermutations(Iterator<List<T>> permutations) {
     assertFalse("Expected no more permutations, but there was one.", permutations.hasNext());
-    try {
-      permutations.next();
-      fail("Expected NoSuchElementException.");
-    } catch (NoSuchElementException expected) {
-    }
+    assertThrows(NoSuchElementException.class, () -> permutations.next());
   }
 
-  private <T> void assertPermutationsCount(int expected, Collection<List<T>> permutationSet) {
+  private static <T> void assertPermutationsCount(
+      int expected, Collection<List<T>> permutationSet) {
     assertEquals(expected, permutationSet.size());
     Iterator<List<T>> permutations = permutationSet.iterator();
     for (int i = 0; i < expected; i++) {
@@ -490,11 +488,11 @@ public class Collections2Test extends TestCase {
     assertNoMorePermutations(permutations);
   }
 
-  public void testToStringImplWithNullEntries() throws Exception {
-    List<@Nullable String> list = Lists.newArrayList();
+  public void testToStringImplWithNullEntries() {
+    List<@Nullable String> list = new ArrayList<>();
     list.add("foo");
     list.add(null);
 
-    assertEquals(list.toString(), Collections2.toStringImpl(list));
+    assertThat(Collections2.toStringImpl(list)).isEqualTo(list.toString());
   }
 }

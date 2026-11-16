@@ -42,7 +42,7 @@ import org.jspecify.annotations.Nullable;
  * @author Mike Bostock
  * @since 2.0
  */
-@GwtCompatible(emulated = true)
+@GwtCompatible
 @J2ktIncompatible
 public final class EnumHashBiMap<K extends Enum<K>, V extends @Nullable Object>
     extends AbstractBiMap<K, V> {
@@ -77,7 +77,7 @@ public final class EnumHashBiMap<K extends Enum<K>, V extends @Nullable Object>
 
   private EnumHashBiMap(Class<K> keyType) {
     super(new EnumMap<K, V>(keyType), new HashMap<V, K>());
-    // TODO: cpovirk - Pre-size the HashMap based on the number of enum values?
+    // TODO(cpovirk): Pre-size the HashMap based on the number of enum values?
     this.keyTypeOrObjectUnderJ2cl = keyType;
   }
 
@@ -127,13 +127,13 @@ public final class EnumHashBiMap<K extends Enum<K>, V extends @Nullable Object>
     stream.defaultReadObject();
     keyTypeOrObjectUnderJ2cl = (Class<K>) requireNonNull(stream.readObject());
     /*
-     * TODO: cpovirk - Pre-size the HashMap based on the number of enum values? (But *not* based on
+     * TODO(cpovirk): Pre-size the HashMap based on the number of enum values? (But *not* based on
      * the number of entries in the map, as that makes it easy for hostile inputs to trigger lots of
      * allocation—not that any program should be deserializing hostile inputs to begin with!)
      */
-    setDelegates(new EnumMap<K, V>(keyTypeOrObjectUnderJ2cl), new HashMap<V, K>());
+    setDelegates(new EnumMap<>(keyTypeOrObjectUnderJ2cl), new HashMap<>());
     Serialization.populateMap(this, stream);
   }
 
-  @GwtIncompatible @J2ktIncompatible private static final long serialVersionUID = 0;
+  @GwtIncompatible private static final long serialVersionUID = 0;
 }

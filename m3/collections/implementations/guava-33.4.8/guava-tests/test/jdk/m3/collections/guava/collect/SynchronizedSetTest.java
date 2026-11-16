@@ -16,7 +16,6 @@
 
 package jdk.m3.collections.guava.collect;
 
-
 import jdk.m3.collections.guava.collect.testing.SetTestSuiteBuilder;
 import jdk.m3.collections.guava.collect.testing.TestStringSetGenerator;
 import jdk.m3.collections.guava.collect.testing.features.CollectionFeature;

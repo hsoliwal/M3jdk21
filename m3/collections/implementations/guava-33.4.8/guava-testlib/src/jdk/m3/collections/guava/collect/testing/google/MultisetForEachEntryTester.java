@@ -31,17 +31,13 @@ import jdk.m3.collections.guava.collect.testing.features.CollectionFeature;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
-import org.junit.Ignore;
 
 /**
  * Tests for {@code Multiset#forEachEntry}.
  *
  * @author Louis Wasserman
  */
-@GwtCompatible(emulated = true)
-@Ignore("test runners must not instantiate and run this directly, only via suites we build")
-// @Ignore affects the Android test runner, which respects JUnit 4 annotations on JUnit 3 tests.
-@SuppressWarnings("JUnit4ClassUsedInJUnit3")
+@GwtCompatible
 public class MultisetForEachEntryTester<E> extends AbstractMultisetTester<E> {
   public void testForEachEntry() {
     List<Entry<E>> expected = new ArrayList<>(getMultiset().entrySet());

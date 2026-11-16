@@ -16,14 +16,14 @@
 
 package jdk.m3.collections.guava.collect;
 
-import static jdk.m3.collections.guava.collect.ReflectionFreeAssertThrows.assertThrows;
 import static jdk.m3.collections.guava.collect.Tables.immutableCell;
-import static com.google.common.truth.Truth.assertThat;
+import static jdk.m3.collections.guava.testing.SerializableTester.reserializeAndAssert;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
+import static org.junit.Assert.assertThrows;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
 import jdk.m3.collections.guava.annotations.J2ktIncompatible;
-import jdk.m3.collections.guava.testing.SerializableTester;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
@@ -32,11 +32,11 @@ import org.jspecify.annotations.Nullable;
  *
  * @author Gregory Kick
  */
-@GwtCompatible(emulated = true)
+@GwtCompatible
 @NullMarked
 public class ImmutableTableTest extends AbstractTableReadTest<Character> {
   @Override
-  protected Table<String, Integer, Character> create(@Nullable Object... data) {
+  Table<String, Integer, Character> create(@Nullable Object... data) {
     ImmutableTable.Builder<String, Integer, Character> builder = ImmutableTable.builder();
     for (int i = 0; i < data.length; i = i + 3) {
       builder.put((String) data[i], (Integer) data[i + 1], (Character) data[i + 2]);
@@ -85,12 +85,9 @@ public class ImmutableTableTest extends AbstractTableReadTest<Character> {
 
   public void testBuilder_withImmutableCellAndNullContents() {
     ImmutableTable.Builder<Character, Integer, String> builder = new ImmutableTable.Builder<>();
-    assertThrows(
-        NullPointerException.class, () -> builder.put(immutableCell((Character) null, 1, "foo")));
-    assertThrows(
-        NullPointerException.class, () -> builder.put(immutableCell('a', (Integer) null, "foo")));
-    assertThrows(
-        NullPointerException.class, () -> builder.put(immutableCell('a', 1, (String) null)));
+    assertThrows(NullPointerException.class, () -> builder.put(immutableCell(null, 1, "foo")));
+    assertThrows(NullPointerException.class, () -> builder.put(immutableCell('a', null, "foo")));
+    assertThrows(NullPointerException.class, () -> builder.put(immutableCell('a', 1, null)));
   }
 
   private static class StringHolder {
@@ -100,7 +97,7 @@ public class ImmutableTableTest extends AbstractTableReadTest<Character> {
   public void testBuilder_withMutableCell() {
     ImmutableTable.Builder<Character, Integer, String> builder = new ImmutableTable.Builder<>();
 
-    final StringHolder holder = new StringHolder();
+    StringHolder holder = new StringHolder();
     holder.string = "foo";
     Table.Cell<Character, Integer, String> mutableCell =
         new Tables.AbstractCell<Character, Integer, String>() {
@@ -351,7 +348,7 @@ public class ImmutableTableTest extends AbstractTableReadTest<Character> {
 
   public void testDenseSerialization_rowOrder() {
     ImmutableTable.Builder<Character, Integer, String> builder = ImmutableTable.builder();
-    builder.orderRowsBy(Ordering.<Character>natural());
+    builder.orderRowsBy(Ordering.natural());
     builder.put('b', 2, "foo");
     builder.put('b', 1, "bar");
     builder.put('a', 2, "baz");
@@ -362,7 +359,7 @@ public class ImmutableTableTest extends AbstractTableReadTest<Character> {
 
   public void testDenseSerialization_columnOrder() {
     ImmutableTable.Builder<Character, Integer, String> builder = ImmutableTable.builder();
-    builder.orderColumnsBy(Ordering.<Integer>natural());
+    builder.orderColumnsBy(Ordering.natural());
     builder.put('b', 2, "foo");
     builder.put('b', 1, "bar");
     builder.put('a', 2, "baz");
@@ -373,8 +370,8 @@ public class ImmutableTableTest extends AbstractTableReadTest<Character> {
 
   public void testDenseSerialization_bothOrders() {
     ImmutableTable.Builder<Character, Integer, String> builder = ImmutableTable.builder();
-    builder.orderRowsBy(Ordering.<Character>natural());
-    builder.orderColumnsBy(Ordering.<Integer>natural());
+    builder.orderRowsBy(Ordering.natural());
+    builder.orderColumnsBy(Ordering.natural());
     builder.put('b', 2, "foo");
     builder.put('b', 1, "bar");
     builder.put('a', 2, "baz");
@@ -397,7 +394,7 @@ public class ImmutableTableTest extends AbstractTableReadTest<Character> {
 
   public void testSparseSerialization_rowOrder() {
     ImmutableTable.Builder<Character, Integer, String> builder = ImmutableTable.builder();
-    builder.orderRowsBy(Ordering.<Character>natural());
+    builder.orderRowsBy(Ordering.natural());
     builder.put('b', 2, "foo");
     builder.put('b', 1, "bar");
     builder.put('a', 2, "baz");
@@ -410,7 +407,7 @@ public class ImmutableTableTest extends AbstractTableReadTest<Character> {
 
   public void testSparseSerialization_columnOrder() {
     ImmutableTable.Builder<Character, Integer, String> builder = ImmutableTable.builder();
-    builder.orderColumnsBy(Ordering.<Integer>natural());
+    builder.orderColumnsBy(Ordering.natural());
     builder.put('b', 2, "foo");
     builder.put('b', 1, "bar");
     builder.put('a', 2, "baz");
@@ -423,8 +420,8 @@ public class ImmutableTableTest extends AbstractTableReadTest<Character> {
 
   public void testSparseSerialization_bothOrders() {
     ImmutableTable.Builder<Character, Integer, String> builder = ImmutableTable.builder();
-    builder.orderRowsBy(Ordering.<Character>natural());
-    builder.orderColumnsBy(Ordering.<Integer>natural());
+    builder.orderRowsBy(Ordering.natural());
+    builder.orderColumnsBy(Ordering.natural());
     builder.put('b', 2, "foo");
     builder.put('b', 1, "bar");
     builder.put('a', 2, "baz");
@@ -436,7 +433,7 @@ public class ImmutableTableTest extends AbstractTableReadTest<Character> {
   }
 
   private static <R, C, V> void validateReserialization(Table<R, C, V> original) {
-    Table<R, C, V> copy = SerializableTester.reserializeAndAssert(original);
+    Table<R, C, V> copy = reserializeAndAssert(original);
     assertThat(copy.cellSet()).containsExactlyElementsIn(original.cellSet()).inOrder();
     assertThat(copy.rowKeySet()).containsExactlyElementsIn(original.rowKeySet()).inOrder();
     assertThat(copy.columnKeySet()).containsExactlyElementsIn(original.columnKeySet()).inOrder();
@@ -444,7 +441,6 @@ public class ImmutableTableTest extends AbstractTableReadTest<Character> {
 
   @J2ktIncompatible
   @GwtIncompatible // Mind-bogglingly slow in GWT
-  @AndroidIncompatible // slow
   public void testOverflowCondition() {
     // See https://github.com/google/guava/issues/1322 for details.
     ImmutableTable.Builder<Integer, Integer, String> builder = ImmutableTable.builder();

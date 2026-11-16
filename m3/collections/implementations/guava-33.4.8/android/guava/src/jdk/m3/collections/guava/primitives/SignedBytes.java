@@ -17,9 +17,10 @@ package jdk.m3.collections.guava.primitives;
 import static jdk.m3.collections.guava.base.Preconditions.checkArgument;
 import static jdk.m3.collections.guava.base.Preconditions.checkNotNull;
 import static jdk.m3.collections.guava.base.Preconditions.checkPositionIndexes;
+import static jdk.m3.collections.guava.primitives.Bytes.reverse;
+import static java.util.Arrays.sort;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
-import java.util.Arrays;
 import java.util.Comparator;
 
 /**
@@ -211,7 +212,7 @@ public final class SignedBytes {
   public static void sortDescending(byte[] array, int fromIndex, int toIndex) {
     checkNotNull(array);
     checkPositionIndexes(fromIndex, toIndex, array.length);
-    Arrays.sort(array, fromIndex, toIndex);
-    Bytes.reverse(array, fromIndex, toIndex);
+    sort(array, fromIndex, toIndex);
+    reverse(array, fromIndex, toIndex);
   }
 }

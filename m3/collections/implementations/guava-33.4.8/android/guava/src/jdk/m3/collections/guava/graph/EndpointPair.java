@@ -19,11 +19,10 @@ package jdk.m3.collections.guava.graph;
 import static jdk.m3.collections.guava.base.Preconditions.checkNotNull;
 import static jdk.m3.collections.guava.graph.GraphConstants.NOT_AVAILABLE_ON_UNDIRECTED;
 
-import jdk.m3.collections.guava.annotations.Beta;
-import jdk.m3.collections.guava.base.Objects;
 import jdk.m3.collections.guava.collect.Iterators;
 import jdk.m3.collections.guava.collect.UnmodifiableIterator;
 import com.google.errorprone.annotations.Immutable;
+import java.util.Objects;
 import org.jspecify.annotations.Nullable;
 
 /**
@@ -37,7 +36,6 @@ import org.jspecify.annotations.Nullable;
  * @author James Sexton
  * @since 20.0
  */
-@Beta
 @Immutable(containerOf = {"N"})
 public abstract class EndpointPair<N> implements Iterable<N> {
   private final N nodeU;
@@ -136,7 +134,7 @@ public abstract class EndpointPair<N> implements Iterable<N> {
   public abstract boolean equals(@Nullable Object obj);
 
   /**
-   * The hashcode of an ordered {@link EndpointPair} is equal to {@code Objects.hashCode(source(),
+   * The hashcode of an ordered {@link EndpointPair} is equal to {@code Objects.hash(source(),
    * target())}. The hashcode of an unordered {@link EndpointPair} is equal to {@code
    * nodeU().hashCode() + nodeV().hashCode()}.
    */
@@ -182,7 +180,7 @@ public abstract class EndpointPair<N> implements Iterable<N> {
 
     @Override
     public int hashCode() {
-      return Objects.hashCode(source(), target());
+      return Objects.hash(source(), target());
     }
 
     @Override

@@ -18,15 +18,15 @@ package jdk.m3.collections.guava.collect.testing.testers;
 
 import static jdk.m3.collections.guava.collect.testing.Helpers.assertEqualInOrder;
 import static jdk.m3.collections.guava.collect.testing.Helpers.copyToList;
+import static jdk.m3.collections.guava.collect.testing.Helpers.entryComparator;
 import static jdk.m3.collections.guava.collect.testing.features.CollectionSize.ONE;
 import static jdk.m3.collections.guava.collect.testing.features.CollectionSize.SEVERAL;
 import static jdk.m3.collections.guava.collect.testing.features.CollectionSize.ZERO;
-import static jdk.m3.collections.guava.collect.testing.testers.ReflectionFreeAssertThrows.assertThrows;
 import static java.util.Collections.sort;
+import static org.junit.Assert.assertThrows;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.collect.testing.AbstractMapTester;
-import jdk.m3.collections.guava.collect.testing.Helpers;
 import jdk.m3.collections.guava.collect.testing.features.CollectionSize;
 import java.util.Comparator;
 import java.util.Iterator;
@@ -34,7 +34,6 @@ import java.util.List;
 import java.util.Map.Entry;
 import java.util.NoSuchElementException;
 import java.util.SortedMap;
-import org.junit.Ignore;
 
 /**
  * A generic JUnit test which tests operations on a SortedMap. Can't be invoked directly; please see
@@ -44,10 +43,10 @@ import org.junit.Ignore;
  * @author Louis Wasserman
  */
 @GwtCompatible
-@Ignore("test runners must not instantiate and run this directly, only via suites we build")
-// @Ignore affects the Android test runner, which respects JUnit 4 annotations on JUnit 3 tests.
-@SuppressWarnings("JUnit4ClassUsedInJUnit3")
 public class SortedMapNavigationTester<K, V> extends AbstractMapTester<K, V> {
+  @SuppressWarnings("unchecked")
+  private static final Comparator<Object> NATURAL_ORDER =
+      (o1, o2) -> ((Comparable<Object>) o1).compareTo(o2);
 
   private SortedMap<K, V> navigableMap;
   private Entry<K, V> a;
@@ -61,7 +60,7 @@ public class SortedMapNavigationTester<K, V> extends AbstractMapTester<K, V> {
         copyToList(
             getSubjectGenerator()
                 .getSampleElements(getSubjectGenerator().getCollectionSize().getNumElements()));
-    sort(entries, Helpers.<K, V>entryComparator(navigableMap.comparator()));
+    sort(entries, entryComparator(navigableMap.comparator()));
 
     // some tests assume SEVERAL == 3
     if (entries.size() >= 1) {
@@ -117,7 +116,7 @@ public class SortedMapNavigationTester<K, V> extends AbstractMapTester<K, V> {
         copyToList(
             getSubjectGenerator()
                 .getSampleElements(getSubjectGenerator().getCollectionSize().getNumElements()));
-    sort(entries, Helpers.<K, V>entryComparator(navigableMap.comparator()));
+    sort(entries, entryComparator(navigableMap.comparator()));
     for (int i = 0; i < entries.size(); i++) {
       assertEqualInOrder(
           entries.subList(0, i), navigableMap.headMap(entries.get(i).getKey()).entrySet());
@@ -129,7 +128,7 @@ public class SortedMapNavigationTester<K, V> extends AbstractMapTester<K, V> {
         copyToList(
             getSubjectGenerator()
                 .getSampleElements(getSubjectGenerator().getCollectionSize().getNumElements()));
-    sort(entries, Helpers.<K, V>entryComparator(navigableMap.comparator()));
+    sort(entries, entryComparator(navigableMap.comparator()));
     for (int i = 0; i < entries.size(); i++) {
       assertEqualInOrder(
           entries.subList(i, entries.size()),
@@ -142,7 +141,7 @@ public class SortedMapNavigationTester<K, V> extends AbstractMapTester<K, V> {
         copyToList(
             getSubjectGenerator()
                 .getSampleElements(getSubjectGenerator().getCollectionSize().getNumElements()));
-    sort(entries, Helpers.<K, V>entryComparator(navigableMap.comparator()));
+    sort(entries, entryComparator(navigableMap.comparator()));
     for (int i = 0; i < entries.size(); i++) {
       for (int j = i + 1; j < entries.size(); j++) {
         assertEqualInOrder(
@@ -161,14 +160,7 @@ public class SortedMapNavigationTester<K, V> extends AbstractMapTester<K, V> {
   public void testOrderedByComparator() {
     Comparator<? super K> comparator = navigableMap.comparator();
     if (comparator == null) {
-      comparator =
-          new Comparator<K>() {
-            @SuppressWarnings("unchecked")
-            @Override
-            public int compare(K o1, K o2) {
-              return ((Comparable) o1).compareTo(o2);
-            }
-          };
+      comparator = NATURAL_ORDER;
     }
     Iterator<Entry<K, V>> entryItr = navigableMap.entrySet().iterator();
     Entry<K, V> prevEntry = entryItr.next();

@@ -30,7 +30,7 @@ import org.jspecify.annotations.Nullable;
  *
  * @author Gregory Kick
  */
-@GwtCompatible(emulated = true)
+@GwtCompatible
 @SuppressWarnings("rawtypes") // allow ungenerified Comparable types
 final class EmptyContiguousSet<C extends Comparable> extends ContiguousSet<C> {
   EmptyContiguousSet(DiscreteDomain<C> domain) {
@@ -145,7 +145,7 @@ final class EmptyContiguousSet<C extends Comparable> extends ContiguousSet<C> {
     return 0;
   }
 
-  @GwtIncompatible // serialization
+  @GwtIncompatible
   @J2ktIncompatible
   private static final class SerializedForm<C extends Comparable> implements Serializable {
     private final DiscreteDomain<C> domain;
@@ -158,19 +158,19 @@ final class EmptyContiguousSet<C extends Comparable> extends ContiguousSet<C> {
       return new EmptyContiguousSet<>(domain);
     }
 
-    @GwtIncompatible @J2ktIncompatible private static final long serialVersionUID = 0;
+    private static final long serialVersionUID = 0;
   }
 
-  @GwtIncompatible // serialization
+  @GwtIncompatible
   @J2ktIncompatible
-  @Override
+    @Override
   Object writeReplace() {
     return new SerializedForm<>(domain);
   }
 
-  @GwtIncompatible // serialization
+  @GwtIncompatible
   @J2ktIncompatible
-  private void readObject(ObjectInputStream stream) throws InvalidObjectException {
+    private void readObject(ObjectInputStream stream) throws InvalidObjectException {
     throw new InvalidObjectException("Use SerializedForm");
   }
 

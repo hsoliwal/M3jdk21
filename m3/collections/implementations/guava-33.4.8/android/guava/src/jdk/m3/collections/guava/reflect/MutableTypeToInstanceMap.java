@@ -15,14 +15,14 @@
 package jdk.m3.collections.guava.reflect;
 
 import static jdk.m3.collections.guava.base.Preconditions.checkNotNull;
+import static jdk.m3.collections.guava.collect.Iterators.transform;
 
 import jdk.m3.collections.guava.collect.ForwardingMap;
 import jdk.m3.collections.guava.collect.ForwardingMapEntry;
 import jdk.m3.collections.guava.collect.ForwardingSet;
-import jdk.m3.collections.guava.collect.Iterators;
-import jdk.m3.collections.guava.collect.Maps;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import com.google.errorprone.annotations.DoNotCall;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
@@ -40,7 +40,7 @@ public final class MutableTypeToInstanceMap<B extends @Nullable Object>
   /** Creates a new map. */
   public MutableTypeToInstanceMap() {}
 
-  private final Map<TypeToken<? extends @NonNull B>, B> backingMap = Maps.newHashMap();
+  private final Map<TypeToken<? extends @NonNull B>, B> backingMap = new HashMap<>();
 
   @Override
   public <T extends @NonNull B> @Nullable T getInstance(Class<T> type) {
@@ -129,7 +129,7 @@ public final class MutableTypeToInstanceMap<B extends @Nullable Object>
 
         @Override
         public Iterator<Entry<K, V>> iterator() {
-          return UnmodifiableEntry.transformEntries(super.iterator());
+          return transformEntries(super.iterator());
         }
 
         @Override
@@ -155,7 +155,7 @@ public final class MutableTypeToInstanceMap<B extends @Nullable Object>
 
     private static <K, V extends @Nullable Object> Iterator<Entry<K, V>> transformEntries(
         Iterator<Entry<K, V>> entries) {
-      return Iterators.transform(entries, UnmodifiableEntry::new);
+      return transform(entries, UnmodifiableEntry::new);
     }
 
     private UnmodifiableEntry(Entry<K, V> delegate) {

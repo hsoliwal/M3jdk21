@@ -49,9 +49,9 @@ import org.jspecify.annotations.Nullable;
  * @author Jared Levy
  * @since 2.0
  */
-@GwtCompatible(serializable = true, emulated = true)
+@GwtCompatible
 public final class HashMultimap<K extends @Nullable Object, V extends @Nullable Object>
-    extends HashMultimapGwtSerializationDependencies<K, V> {
+    extends AbstractSetMultimap<K, V> {
   private static final int DEFAULT_VALUES_PER_KEY = 2;
 
   @VisibleForTesting transient int expectedValuesPerKey = DEFAULT_VALUES_PER_KEY;
@@ -107,13 +107,13 @@ public final class HashMultimap<K extends @Nullable Object, V extends @Nullable 
   }
 
   private HashMultimap(int expectedKeys, int expectedValuesPerKey) {
-    super(Platform.<K, Collection<V>>newHashMapWithExpectedSize(expectedKeys));
+    super(Platform.newHashMapWithExpectedSize(expectedKeys));
     Preconditions.checkArgument(expectedValuesPerKey >= 0);
     this.expectedValuesPerKey = expectedValuesPerKey;
   }
 
   private HashMultimap(Multimap<? extends K, ? extends V> multimap) {
-    super(Platform.<K, Collection<V>>newHashMapWithExpectedSize(multimap.keySet().size()));
+    super(Platform.newHashMapWithExpectedSize(multimap.keySet().size()));
     putAll(multimap);
   }
 
@@ -126,26 +126,26 @@ public final class HashMultimap<K extends @Nullable Object, V extends @Nullable 
    */
   @Override
   Set<V> createCollection() {
-    return Platform.<V>newHashSetWithExpectedSize(expectedValuesPerKey);
+    return Platform.newHashSetWithExpectedSize(expectedValuesPerKey);
   }
 
   /**
    * @serialData expectedValuesPerKey, number of distinct keys, and then for each distinct key: the
    *     key, number of values for that key, and the key's values
    */
-  @GwtIncompatible // java.io.ObjectOutputStream
+  @GwtIncompatible
   @J2ktIncompatible
-  private void writeObject(ObjectOutputStream stream) throws IOException {
+    private void writeObject(ObjectOutputStream stream) throws IOException {
     stream.defaultWriteObject();
     Serialization.writeMultimap(this, stream);
   }
 
-  @GwtIncompatible // java.io.ObjectInputStream
+  @GwtIncompatible
   @J2ktIncompatible
-  private void readObject(ObjectInputStream stream) throws IOException, ClassNotFoundException {
+    private void readObject(ObjectInputStream stream) throws IOException, ClassNotFoundException {
     stream.defaultReadObject();
     expectedValuesPerKey = DEFAULT_VALUES_PER_KEY;
-    int distinctKeys = Serialization.readCount(stream);
+    int distinctKeys = stream.readInt();
     Map<K, Collection<V>> map = Platform.newHashMapWithExpectedSize(12);
     setMap(map);
     Serialization.populateMultimap(this, stream, distinctKeys);

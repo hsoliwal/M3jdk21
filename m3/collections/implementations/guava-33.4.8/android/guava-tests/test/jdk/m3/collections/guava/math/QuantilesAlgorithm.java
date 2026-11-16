@@ -16,9 +16,12 @@
 
 package jdk.m3.collections.guava.math;
 
+import static java.util.Arrays.sort;
+
+import jdk.m3.collections.guava.annotations.GwtIncompatible;
+import jdk.m3.collections.guava.annotations.J2ktIncompatible;
 import jdk.m3.collections.guava.collect.ImmutableMap;
 import java.math.RoundingMode;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Map;
 import org.jspecify.annotations.NullUnmarked;
@@ -32,6 +35,8 @@ import org.jspecify.annotations.NullUnmarked;
  * @author Pete Gillin
  * @since 20.0
  */
+@GwtIncompatible
+@J2ktIncompatible
 @NullUnmarked
 enum QuantilesAlgorithm {
 
@@ -43,14 +48,14 @@ enum QuantilesAlgorithm {
 
     @Override
     double singleQuantile(int index, int scale, double[] dataset) {
-      Arrays.sort(dataset);
+      sort(dataset);
       return singleQuantileFromSorted(index, scale, dataset);
     }
 
     @Override
     Map<Integer, Double> multipleQuantiles(
         Collection<Integer> indexes, int scale, double[] dataset) {
-      Arrays.sort(dataset);
+      sort(dataset);
       ImmutableMap.Builder<Integer, Double> builder = ImmutableMap.builder();
       for (int index : indexes) {
         builder.put(index, singleQuantileFromSorted(index, scale, dataset));
@@ -58,7 +63,7 @@ enum QuantilesAlgorithm {
       return builder.buildOrThrow();
     }
 
-    private double singleQuantileFromSorted(int index, int scale, double[] dataset) {
+    double singleQuantileFromSorted(int index, int scale, double[] dataset) {
       long numerator = (long) index * (dataset.length - 1);
       int positionFloor = (int) LongMath.divide(numerator, scale, RoundingMode.DOWN);
       int remainder = (int) (numerator - positionFloor * scale);

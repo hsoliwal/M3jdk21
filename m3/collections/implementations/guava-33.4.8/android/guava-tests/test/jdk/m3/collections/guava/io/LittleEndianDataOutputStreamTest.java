@@ -16,9 +16,10 @@
 
 package jdk.m3.collections.guava.io;
 
+import static jdk.m3.collections.guava.primitives.Bytes.asList;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
 import static java.nio.charset.StandardCharsets.ISO_8859_1;
 
-import jdk.m3.collections.guava.primitives.Bytes;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.DataInput;
@@ -35,8 +36,8 @@ import org.jspecify.annotations.NullUnmarked;
 @NullUnmarked
 public class LittleEndianDataOutputStreamTest extends TestCase {
 
-  private ByteArrayOutputStream baos = new ByteArrayOutputStream();
-  private LittleEndianDataOutputStream out = new LittleEndianDataOutputStream(baos);
+  private final ByteArrayOutputStream baos = new ByteArrayOutputStream();
+  private final LittleEndianDataOutputStream out = new LittleEndianDataOutputStream(baos);
 
   public void testWriteLittleEndian() throws IOException {
 
@@ -76,7 +77,7 @@ public class LittleEndianDataOutputStreamTest extends TestCase {
     assertEquals(20675, in.readUnsignedShort());
     assertEquals(0xBEBAFECA, in.readInt());
     assertEquals(0xBEBAFECAEFBEADDEL, in.readLong());
-    assertEquals("Herby Derby", in.readUTF());
+    assertThat(in.readUTF()).isEqualTo("Herby Derby");
     assertEquals(0xBEBAFECA, Float.floatToIntBits(in.readFloat()));
     assertEquals(0xBEBAFECAEFBEADDEL, Double.doubleToLongBits(in.readDouble()));
   }
@@ -144,6 +145,6 @@ public class LittleEndianDataOutputStreamTest extends TestCase {
   }
 
   private static void assertEquals(byte[] expected, byte[] actual) {
-    assertEquals(Bytes.asList(expected), Bytes.asList(actual));
+    assertEquals(asList(expected), asList(actual));
   }
 }

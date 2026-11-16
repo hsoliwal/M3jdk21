@@ -23,18 +23,14 @@ import static jdk.m3.collections.guava.collect.testing.features.CollectionSize.Z
 import static jdk.m3.collections.guava.collect.testing.features.MapFeature.ALLOWS_NULL_KEYS;
 import static jdk.m3.collections.guava.collect.testing.features.MapFeature.ALLOWS_NULL_VALUES;
 import static jdk.m3.collections.guava.collect.testing.features.MapFeature.SUPPORTS_PUT;
-import static jdk.m3.collections.guava.collect.testing.google.ReflectionFreeAssertThrows.assertThrows;
+import static org.junit.Assert.assertThrows;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.collect.testing.features.CollectionSize;
 import jdk.m3.collections.guava.collect.testing.features.MapFeature;
-import org.junit.Ignore;
 
 /** Tester for {@code BiMap.put} and {@code BiMap.forcePut}. */
 @GwtCompatible
-@Ignore("test runners must not instantiate and run this directly, only via suites we build")
-// @Ignore affects the Android test runner, which respects JUnit 4 annotations on JUnit 3 tests.
-@SuppressWarnings("JUnit4ClassUsedInJUnit3")
 public class BiMapPutTester<K, V> extends AbstractBiMapTester<K, V> {
 
   @MapFeature.Require(SUPPORTS_PUT)
@@ -102,7 +98,7 @@ public class BiMapPutTester<K, V> extends AbstractBiMapTester<K, V> {
 
     getMap().forcePut(null, v1());
 
-    expectContents(mapEntry((K) null, v1()));
+    expectContents(mapEntry(null, v1()));
 
     assertFalse(getMap().containsValue(v0()));
 
@@ -120,7 +116,7 @@ public class BiMapPutTester<K, V> extends AbstractBiMapTester<K, V> {
 
     getMap().forcePut(k1(), null);
 
-    expectContents(mapEntry(k1(), (V) null));
+    expectContents(mapEntry(k1(), null));
 
     assertFalse(getMap().containsKey(k0()));
 

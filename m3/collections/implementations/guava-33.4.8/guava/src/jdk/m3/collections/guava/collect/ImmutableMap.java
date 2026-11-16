@@ -20,6 +20,9 @@ import static jdk.m3.collections.guava.base.Preconditions.checkNotNull;
 import static jdk.m3.collections.guava.base.Preconditions.checkState;
 import static jdk.m3.collections.guava.collect.CollectPreconditions.checkEntryNotNull;
 import static jdk.m3.collections.guava.collect.CollectPreconditions.checkNonnegative;
+import static jdk.m3.collections.guava.collect.Maps.equalsImpl;
+import static jdk.m3.collections.guava.collect.Maps.toStringImpl;
+import static jdk.m3.collections.guava.collect.Sets.hashCodeImpl;
 import static java.lang.System.arraycopy;
 import static java.util.Arrays.sort;
 import static java.util.Objects.requireNonNull;
@@ -33,7 +36,6 @@ import com.google.errorprone.annotations.DoNotCall;
 import com.google.errorprone.annotations.DoNotMock;
 import com.google.errorprone.annotations.concurrent.LazyInit;
 import com.google.j2objc.annotations.RetainedWith;
-import com.google.j2objc.annotations.WeakOuter;
 import java.io.InvalidObjectException;
 import java.io.ObjectInputStream;
 import java.io.Serializable;
@@ -69,8 +71,11 @@ import org.jspecify.annotations.Nullable;
  * @since 2.0
  */
 @DoNotMock("Use ImmutableMap.of or another implementation")
-@GwtCompatible(serializable = true, emulated = true)
-@SuppressWarnings("serial") // we're overriding default serialization
+@GwtCompatible
+@SuppressWarnings({
+  "serial", // we're overriding default serialization
+  "TooManyParameters",
+})
 public abstract class ImmutableMap<K, V> implements Map<K, V>, Serializable {
 
   /**
@@ -558,7 +563,7 @@ public abstract class ImmutableMap<K, V> implements Map<K, V>, Serializable {
           entries = Arrays.copyOf(entries, size);
         }
         @SuppressWarnings("nullness") // entries 0..localSize-1 are non-null
-        Entry<K, V>[] nonNullEntries = (Entry<K, V>[]) entries;
+        Entry<K, V>[] nonNullEntries = entries;
         if (!throwIfDuplicateKeys) {
           // We want to retain only the last-put value for any given key, before sorting.
           // This could be improved, but orderEntriesByValue is rather rarely used anyway.
@@ -572,8 +577,8 @@ public abstract class ImmutableMap<K, V> implements Map<K, V>, Serializable {
             nonNullEntries,
             0,
             localSize,
-            Ordering.from(valueComparator).onResultOf(Maps.<V>valueFunction()));
-        localEntries = (@Nullable Entry<K, V>[]) nonNullEntries;
+            Ordering.from(valueComparator).onResultOf(Entry::getValue));
+        localEntries = nonNullEntries;
       }
       entriesUsed = true;
       return RegularImmutableMap.fromEntryArray(localSize, localEntries, throwIfDuplicateKeys);
@@ -692,12 +697,22 @@ public abstract class ImmutableMap<K, V> implements Map<K, V>, Serializable {
         return kvMap;
       }
     } else if (map instanceof EnumMap) {
-      @SuppressWarnings("unchecked") // safe since map is not writable
-      ImmutableMap<K, V> kvMap =
-          (ImmutableMap<K, V>)
-              copyOfEnumMap(
-                  (EnumMap<?, ? extends V>) map); // hide K (violates bounds) from J2KT, preserve V.
-      return kvMap;
+      EnumMap<?, ? extends V> clone = ((EnumMap<?, ? extends V>) map).clone();
+      for (Entry<?, ?> entry : clone.entrySet()) {
+        checkEntryNotNull(entry.getKey(), entry.getValue());
+      }
+      ImmutableMap<?, ? extends V> untypedResult = ImmutableEnumMap.asImmutable(clone);
+      /*
+       * The result has the same type argument we started with. We just couldn't express EnumMap<K,
+       * ...> or ImmutableEnumMap<K, ...> along the way because our own <K> isn't <K extends
+       * Enum<K>>.
+       *
+       * We are also performing a covariant cast, potentially from ImmutableMap<K, Sub> to
+       * ImmutableMap<K, Super>. That is safe because no one can add elements to the map.
+       */
+      @SuppressWarnings("unchecked")
+      ImmutableMap<K, V> result = (ImmutableMap<K, V>) untypedResult;
+      return result;
     }
     return copyOf(map.entrySet());
   }
@@ -730,21 +745,12 @@ public abstract class ImmutableMap<K, V> implements Map<K, V>, Serializable {
     }
   }
 
-  private static <K extends Enum<K>, V> ImmutableMap<K, ? extends V> copyOfEnumMap(
-      EnumMap<?, ? extends V> original) {
-    @SuppressWarnings("unchecked") // the best we could do to make copyOf(Map) compile
-    EnumMap<K, V> copy = new EnumMap<>((EnumMap<K, ? extends V>) original);
-    for (Entry<K, V> entry : copy.entrySet()) {
-      checkEntryNotNull(entry.getKey(), entry.getValue());
-    }
-    return ImmutableEnumMap.asImmutable(copy);
-  }
-
   static final Entry<?, ?>[] EMPTY_ENTRY_ARRAY = new Entry<?, ?>[0];
 
   abstract static class IteratorBasedImmutableMap<K, V> extends ImmutableMap<K, V> {
     abstract UnmodifiableIterator<Entry<K, V>> entryIterator();
 
+    @GwtIncompatible // Spliterator
     Spliterator<Entry<K, V>> entrySpliterator() {
       return Spliterators.spliterator(
           entryIterator(),
@@ -752,14 +758,19 @@ public abstract class ImmutableMap<K, V> implements Map<K, V>, Serializable {
           Spliterator.DISTINCT | Spliterator.NONNULL | Spliterator.IMMUTABLE | Spliterator.ORDERED);
     }
 
-    @Override
-    ImmutableSet<K> createKeySet() {
-      return new ImmutableMapKeySet<>(this);
-    }
+    @LazyInit @RetainedWith private transient @Nullable ImmutableSet<Entry<K, V>> entrySet;
 
     @Override
-    ImmutableSet<Entry<K, V>> createEntrySet() {
-      class EntrySetImpl extends ImmutableMapEntrySet<K, V> {
+    public final ImmutableSet<Entry<K, V>> entrySet() {
+      ImmutableSet<Entry<K, V>> result = entrySet;
+      if (result == null) {
+        result = entrySet = createEntrySet();
+      }
+      return result;
+    }
+
+    final ImmutableSet<Entry<K, V>> createEntrySet() {
+      final class EntrySetImpl extends ImmutableMapEntrySet<K, V> {
         @Override
         ImmutableMap<K, V> map() {
           return IteratorBasedImmutableMap.this;
@@ -768,6 +779,11 @@ public abstract class ImmutableMap<K, V> implements Map<K, V>, Serializable {
         @Override
         public UnmodifiableIterator<Entry<K, V>> iterator() {
           return entryIterator();
+        }
+
+        @Override
+        public Spliterator<Entry<K, V>> spliterator() {
+          return IteratorBasedImmutableMap.this.entrySpliterator();
         }
 
         // redeclare to help optimizers with b/310253115
@@ -782,8 +798,33 @@ public abstract class ImmutableMap<K, V> implements Map<K, V>, Serializable {
       return new EntrySetImpl();
     }
 
+    @LazyInit @RetainedWith private transient @Nullable ImmutableSet<K> keySet;
+
     @Override
-    ImmutableCollection<V> createValues() {
+    public final ImmutableSet<K> keySet() {
+      ImmutableSet<K> result = keySet;
+      if (result == null) {
+        result = keySet = createKeySet();
+      }
+      return result;
+    }
+
+    ImmutableSet<K> createKeySet() {
+      return new ImmutableMapKeySet<>(this);
+    }
+
+    @LazyInit @RetainedWith private transient @Nullable ImmutableCollection<V> values;
+
+    @Override
+    public final ImmutableCollection<V> values() {
+      ImmutableCollection<V> result = values;
+      if (result == null) {
+        result = values = createValues();
+      }
+      return result;
+    }
+
+    final ImmutableCollection<V> createValues() {
       return new ImmutableMapValues<>(this);
     }
 
@@ -974,7 +1015,7 @@ public abstract class ImmutableMap<K, V> implements Map<K, V>, Serializable {
   }
 
   @Override
-  public boolean isEmpty() {
+  public final boolean isEmpty() {
     return size() == 0;
   }
 
@@ -1034,38 +1075,23 @@ public abstract class ImmutableMap<K, V> implements Map<K, V>, Serializable {
     }
   }
 
-  @LazyInit @RetainedWith private transient @Nullable ImmutableSet<Entry<K, V>> entrySet;
-
   /**
    * Returns an immutable set of the mappings in this map. The iteration order is specified by the
    * method used to create this map. Typically, this is insertion order.
    */
   @Override
-  public ImmutableSet<Entry<K, V>> entrySet() {
-    ImmutableSet<Entry<K, V>> result = entrySet;
-    return (result == null) ? entrySet = createEntrySet() : result;
-  }
-
-  abstract ImmutableSet<Entry<K, V>> createEntrySet();
-
-  @LazyInit @RetainedWith private transient @Nullable ImmutableSet<K> keySet;
+  public abstract ImmutableSet<Entry<K, V>> entrySet();
 
   /**
    * Returns an immutable set of the keys in this map, in the same order that they appear in {@link
    * #entrySet}.
    */
-  @Override
-  public ImmutableSet<K> keySet() {
-    ImmutableSet<K> result = keySet;
-    return (result == null) ? keySet = createKeySet() : result;
-  }
-
   /*
-   * This could have a good default implementation of return new ImmutableKeySet<K, V>(this),
-   * but ProGuard can't figure out how to eliminate that default when RegularImmutableMap
-   * overrides it.
+   * This could have a good default implementation of `return new ImmutableKeySet<K, V>(this)`, but
+   * ProGuard can't figure out how to eliminate that default when RegularImmutableMap overrides it.
    */
-  abstract ImmutableSet<K> createKeySet();
+  @Override
+  public abstract ImmutableSet<K> keySet();
 
   UnmodifiableIterator<K> keyIterator() {
     UnmodifiableIterator<Entry<K, V>> entryIterator = entrySet().iterator();
@@ -1082,49 +1108,45 @@ public abstract class ImmutableMap<K, V> implements Map<K, V>, Serializable {
     };
   }
 
+  @GwtIncompatible // Spliterator
   Spliterator<K> keySpliterator() {
-    return CollectSpliterators.map(entrySet().spliterator(), Entry::getKey);
+    return CollectSpliterators.map(
+        entrySet().spliterator(),
+        Spliterator.ORDERED | Spliterator.DISTINCT | Spliterator.NONNULL | Spliterator.IMMUTABLE,
+        Entry::getKey);
   }
-
-  @LazyInit @RetainedWith private transient @Nullable ImmutableCollection<V> values;
 
   /**
    * Returns an immutable collection of the values in this map, in the same order that they appear
    * in {@link #entrySet}.
    */
-  @Override
-  public ImmutableCollection<V> values() {
-    ImmutableCollection<V> result = values;
-    return (result == null) ? values = createValues() : result;
-  }
-
   /*
-   * This could have a good default implementation of {@code return new
-   * ImmutableMapValues<K, V>(this)}, but ProGuard can't figure out how to eliminate that default
-   * when RegularImmutableMap overrides it.
+   * This could have a good default implementation of `return new ImmutableMapValues<K, V>(this)`,
+   * but ProGuard can't figure out how to eliminate that default when RegularImmutableMap overrides
+   * it.
    */
-  abstract ImmutableCollection<V> createValues();
-
-  // cached so that this.multimapView().inverse() only computes inverse once
-  @LazyInit private transient @Nullable ImmutableSetMultimap<K, V> multimapView;
+  @Override
+  public abstract ImmutableCollection<V> values();
 
   /**
    * Returns a multimap view of the map.
    *
+   * <p>This method may return a new multimap instance on each call. While the multimap is cheap to
+   * create, it is an instance of {@link ImmutableMultimap}, whose {@link ImmutableMultimap#inverse
+   * inverse()} method may perform a more expensive operation and cache the result. Callers who want
+   * to repeatedly operate on {@code map.asMultimap().inverse()} may wish to store the result of
+   * that expression (or store the result of {@code asMultimap()}, since it caches its {@code
+   * inverse()} view).
+   *
    * @since 14.0
    */
-  public ImmutableSetMultimap<K, V> asMultimap() {
+  public final ImmutableSetMultimap<K, V> asMultimap() {
     if (isEmpty()) {
       return ImmutableSetMultimap.of();
     }
-    ImmutableSetMultimap<K, V> result = multimapView;
-    return (result == null)
-        ? (multimapView =
-            new ImmutableSetMultimap<>(new MapViewOfValuesAsSingletonSets(), size(), null))
-        : result;
+    return new ImmutableSetMultimap<>(new MapViewOfValuesAsSingletonSets(), size(), null);
   }
 
-  @WeakOuter
   private final class MapViewOfValuesAsSingletonSets
       extends IteratorBasedImmutableMap<K, ImmutableSet<V>> {
 
@@ -1204,14 +1226,14 @@ public abstract class ImmutableMap<K, V> implements Map<K, V>, Serializable {
 
   @Override
   public boolean equals(@Nullable Object object) {
-    return Maps.equalsImpl(this, object);
+    return equalsImpl(this, object);
   }
 
   abstract boolean isPartialView();
 
   @Override
   public int hashCode() {
-    return Sets.hashCodeImpl(entrySet());
+    return hashCodeImpl(entrySet());
   }
 
   boolean isHashCodeFast() {
@@ -1219,8 +1241,8 @@ public abstract class ImmutableMap<K, V> implements Map<K, V>, Serializable {
   }
 
   @Override
-  public String toString() {
-    return Maps.toStringImpl(this);
+  public final String toString() {
+    return toStringImpl(this);
   }
 
   /**
@@ -1300,7 +1322,7 @@ public abstract class ImmutableMap<K, V> implements Map<K, V>, Serializable {
       return new Builder<>(size);
     }
 
-    @GwtIncompatible @J2ktIncompatible private static final long serialVersionUID = 0;
+    @GwtIncompatible private static final long serialVersionUID = 0;
   }
 
   /**

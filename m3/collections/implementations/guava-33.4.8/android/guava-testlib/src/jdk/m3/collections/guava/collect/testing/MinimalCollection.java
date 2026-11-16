@@ -16,8 +16,10 @@
 
 package jdk.m3.collections.guava.collect.testing;
 
+import static jdk.m3.collections.guava.base.Preconditions.checkNotNull;
 import static java.lang.System.arraycopy;
 import static java.util.Arrays.asList;
+import static java.util.Objects.requireNonNull;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import java.util.AbstractCollection;
@@ -61,9 +63,7 @@ public class MinimalCollection<E extends @Nullable Object> extends AbstractColle
 
     if (!allowNulls) {
       for (Object element : contents) {
-        if (element == null) {
-          throw new NullPointerException();
-        }
+        requireNonNull(element);
       }
     }
   }
@@ -77,9 +77,7 @@ public class MinimalCollection<E extends @Nullable Object> extends AbstractColle
   public boolean contains(@Nullable Object object) {
     if (!allowNulls) {
       // behave badly
-      if (object == null) {
-        throw new NullPointerException();
-      }
+      checkNotNull(object);
     }
     Platform.checkCast(type, object); // behave badly
     return asList(contents).contains(object);
@@ -90,9 +88,7 @@ public class MinimalCollection<E extends @Nullable Object> extends AbstractColle
     if (!allowNulls) {
       for (Object object : collection) {
         // behave badly
-        if (object == null) {
-          throw new NullPointerException();
-        }
+        requireNonNull(object);
       }
     }
     return super.containsAll(collection);

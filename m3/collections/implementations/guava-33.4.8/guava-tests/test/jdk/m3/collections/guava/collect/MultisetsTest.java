@@ -16,17 +16,19 @@
 
 package jdk.m3.collections.guava.collect;
 
+import static jdk.m3.collections.guava.collect.Iterables.getOnlyElement;
 import static jdk.m3.collections.guava.collect.Multisets.difference;
 import static jdk.m3.collections.guava.collect.Multisets.intersection;
 import static jdk.m3.collections.guava.collect.Multisets.sum;
 import static jdk.m3.collections.guava.collect.Multisets.union;
 import static jdk.m3.collections.guava.collect.Multisets.unmodifiableMultiset;
-import static com.google.common.truth.Truth.assertThat;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
 import static java.util.Arrays.asList;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
 import jdk.m3.collections.guava.annotations.J2ktIncompatible;
+import jdk.m3.collections.guava.collect.Multiset.Entry;
 import jdk.m3.collections.guava.collect.testing.DerivedComparable;
 import jdk.m3.collections.guava.testing.CollectorTester;
 import jdk.m3.collections.guava.testing.NullPointerTester;
@@ -43,7 +45,7 @@ import org.jspecify.annotations.NullMarked;
  * @author Jared Levy
  * @author Louis Wasserman
  */
-@GwtCompatible(emulated = true)
+@GwtCompatible
 @NullMarked
 public class MultisetsTest extends TestCase {
 
@@ -161,6 +163,25 @@ public class MultisetsTest extends TestCase {
     assertThat(sum(ms1, ms2)).containsExactly("a", "b", "a");
   }
 
+  public void testSumEntryIteratorOverflow() {
+    int count = Integer.MAX_VALUE / 2 + 1;
+    Multiset<String> ms1 = HashMultiset.create();
+    ms1.add("a", count);
+    Multiset<String> ms2 = HashMultiset.create();
+    ms2.add("a", count);
+    Entry<String> sumEntry = getOnlyElement(sum(ms1, ms2).entrySet());
+    assertThat(sumEntry.getCount()).isEqualTo(Integer.MAX_VALUE);
+  }
+
+  public void testSumCountOverflow() {
+    int count = Integer.MAX_VALUE / 2 + 1;
+    Multiset<String> ms1 = HashMultiset.create();
+    ms1.add("a", count);
+    Multiset<String> ms2 = HashMultiset.create();
+    ms2.add("a", count);
+    assertThat(sum(ms1, ms2).count("a")).isEqualTo(Integer.MAX_VALUE);
+  }
+
   public void testDifferenceWithNoRemovedElements() {
     Multiset<String> ms1 = HashMultiset.create(asList("a", "b", "a"));
     Multiset<String> ms2 = HashMultiset.create(asList("a"));
@@ -259,11 +280,11 @@ public class MultisetsTest extends TestCase {
   public void testUnmodifiableMultisetShortCircuit() {
     Multiset<String> mod = HashMultiset.create();
     Multiset<String> unmod = unmodifiableMultiset(mod);
-    assertNotSame(mod, unmod);
-    assertSame(unmod, unmodifiableMultiset(unmod));
+    assertThat(unmod).isNotSameInstanceAs(mod);
+    assertThat(unmodifiableMultiset(unmod)).isSameInstanceAs(unmod);
     ImmutableMultiset<String> immutable = ImmutableMultiset.of("a", "a", "b", "a");
-    assertSame(immutable, unmodifiableMultiset(immutable));
-    assertSame(immutable, unmodifiableMultiset((Multiset<String>) immutable));
+    assertThat(unmodifiableMultiset(immutable)).isSameInstanceAs(immutable);
+    assertThat(unmodifiableMultiset((Multiset<String>) immutable)).isSameInstanceAs(immutable);
   }
 
   public void testHighestCountFirst() {
@@ -292,7 +313,7 @@ public class MultisetsTest extends TestCase {
             Multisets.<Multiset.Entry<String>, String, Multiset<String>>toMultiset(
                 Multiset.Entry::getElement, Multiset.Entry::getCount, LinkedHashMultiset::create),
             equivalence)
-        .expectCollects(ImmutableMultiset.<String>of())
+        .expectCollects(ImmutableMultiset.of())
         .expectCollects(
             ImmutableMultiset.of("a", "a", "b", "c", "c", "c"),
             Multisets.immutableEntry("a", 1),

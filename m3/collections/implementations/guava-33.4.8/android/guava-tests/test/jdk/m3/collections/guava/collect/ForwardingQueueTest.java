@@ -19,12 +19,14 @@ package jdk.m3.collections.guava.collect;
 import static java.util.Arrays.asList;
 
 import jdk.m3.collections.guava.base.Function;
+import jdk.m3.collections.guava.collect.ForwardingQueue.SimpleForwardingQueue;
 import jdk.m3.collections.guava.collect.testing.QueueTestSuiteBuilder;
 import jdk.m3.collections.guava.collect.testing.TestStringQueueGenerator;
 import jdk.m3.collections.guava.collect.testing.features.CollectionFeature;
 import jdk.m3.collections.guava.collect.testing.features.CollectionSize;
 import jdk.m3.collections.guava.testing.ForwardingWrapperTester;
 import java.util.Collection;
+import java.util.LinkedList;
 import java.util.Queue;
 import junit.framework.Test;
 import junit.framework.TestCase;
@@ -41,16 +43,9 @@ import org.jspecify.annotations.Nullable;
 @NullUnmarked
 public class ForwardingQueueTest extends TestCase {
 
-  static final class StandardImplForwardingQueue<T> extends ForwardingQueue<T> {
-    private final Queue<T> backingQueue;
-
+  static final class StandardImplForwardingQueue<T> extends SimpleForwardingQueue<T> {
     StandardImplForwardingQueue(Queue<T> backingQueue) {
-      this.backingQueue = backingQueue;
-    }
-
-    @Override
-    protected Queue<T> delegate() {
-      return backingQueue;
+      super(backingQueue);
     }
 
     @Override
@@ -130,7 +125,7 @@ public class ForwardingQueueTest extends TestCase {
 
                   @Override
                   protected Queue<String> create(String[] elements) {
-                    return new StandardImplForwardingQueue<>(Lists.newLinkedList(asList(elements)));
+                    return new StandardImplForwardingQueue<>(new LinkedList<>(asList(elements)));
                   }
                 })
             .named("ForwardingQueue[LinkedList] with standard implementations")
@@ -156,7 +151,7 @@ public class ForwardingQueueTest extends TestCase {
             });
   }
 
-  private static <T> Queue<T> wrap(final Queue<T> delegate) {
+  private static <T> Queue<T> wrap(Queue<T> delegate) {
     return new ForwardingQueue<T>() {
       @Override
       protected Queue<T> delegate() {

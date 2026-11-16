@@ -20,5 +20,5 @@ import jdk.m3.collections.guava.annotations.GwtCompatible;
  * Holder for extra methods of {@code Objects} only in web. Intended to be empty for regular
  * version.
  */
-@GwtCompatible(emulated = true)
+@GwtCompatible
 abstract class ExtraObjectsMethodsForWeb {}

@@ -34,7 +34,7 @@ import org.jspecify.annotations.Nullable;
  *
  * @author Louis Wasserman
  */
-@GwtCompatible(emulated = true)
+@GwtCompatible
 final class UnmodifiableSortedMultiset<E extends @Nullable Object> extends UnmodifiableMultiset<E>
     implements SortedMultiset<E> {
   UnmodifiableSortedMultiset(SortedMultiset<E> delegate) {
@@ -52,24 +52,23 @@ final class UnmodifiableSortedMultiset<E extends @Nullable Object> extends Unmod
   }
 
   @Override
-  NavigableSet<E> createElementSet() {
-    return unmodifiableNavigableSet(delegate().elementSet());
-  }
-
-  @Override
   public NavigableSet<E> elementSet() {
-    return (NavigableSet<E>) super.elementSet();
+    return unmodifiableNavigableSet(delegate().elementSet());
   }
 
   @LazyInit private transient @Nullable UnmodifiableSortedMultiset<E> descendingMultiset;
 
+  // TODO(b/418181860): This method creates retain cycles in J2ObjC. In order to break the cycle,
+  // there needs to be separate classes for primary and descending multiset, where the primary one
+  // would hold {@code @LazyInit @RetainedWith @Nullable} reference to its descending multiset, and
+  // the other {@code final} reference.
   @Override
   public SortedMultiset<E> descendingMultiset() {
     UnmodifiableSortedMultiset<E> result = descendingMultiset;
     if (result == null) {
       result = new UnmodifiableSortedMultiset<>(delegate().descendingMultiset());
       result.descendingMultiset = this;
-      return descendingMultiset = result;
+      this.descendingMultiset = result;
     }
     return result;
   }

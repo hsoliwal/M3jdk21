@@ -33,11 +33,11 @@ import java.util.function.IntFunction;
 import java.util.function.LongConsumer;
 import java.util.function.Predicate;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 import org.jspecify.annotations.Nullable;
 
 /** Spliterator utilities for {@code common.collect} internals. */
 @GwtCompatible
-@SuppressWarnings("Java7ApiChecker")
 @IgnoreJRERequirement // used only from APIs that work with Stream
 final class CollectSpliterators {
   private CollectSpliterators() {}
@@ -61,7 +61,7 @@ final class CollectSpliterators {
      * processes Streams and thus hasn't had a chance to see Streams's annotation?
      */
     @IgnoreJRERequirement
-    class WithCharacteristics implements Spliterator<T> {
+    final class WithCharacteristics implements Spliterator<T> {
       private final Spliterator.OfInt delegate;
 
       WithCharacteristics(Spliterator.OfInt delegate) {
@@ -157,7 +157,7 @@ final class CollectSpliterators {
     checkNotNull(fromSpliterator);
     checkNotNull(predicate);
     @IgnoreJRERequirement // see earlier comment about redundancy
-    class Splitr implements Spliterator<T>, Consumer<T> {
+    final class Splitr implements Spliterator<T>, Consumer<T> {
       @Nullable T holder = null;
 
       @Override
@@ -374,13 +374,12 @@ final class CollectSpliterators {
         prefix.forEachRemaining(action);
         prefix = null;
       }
-      from.forEachRemaining(
-          fromElement -> {
-            Spliterator<OutElementT> elements = function.apply(fromElement);
-            if (elements != null) {
-              elements.forEachRemaining(action);
-            }
-          });
+      from.forEachRemaining(fromElement -> {
+        Spliterator<OutElementT> elements = function.apply(fromElement);
+        if (elements != null) {
+          elements.forEachRemaining(action);
+        }
+      });
       estimatedSize = 0;
     }
 
@@ -500,13 +499,12 @@ final class CollectSpliterators {
         prefix.forEachRemaining(action);
         prefix = null;
       }
-      from.forEachRemaining(
-          fromElement -> {
-            OutSpliteratorT elements = function.apply(fromElement);
-            if (elements != null) {
-              elements.forEachRemaining(action);
-            }
-          });
+      from.forEachRemaining(fromElement -> {
+        OutSpliteratorT elements = function.apply(fromElement);
+        if (elements != null) {
+          elements.forEachRemaining(action);
+        }
+      });
       estimatedSize = 0;
     }
   }

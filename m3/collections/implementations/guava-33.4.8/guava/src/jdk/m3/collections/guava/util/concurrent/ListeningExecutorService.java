@@ -15,6 +15,7 @@
 package jdk.m3.collections.guava.util.concurrent;
 
 import static jdk.m3.collections.guava.util.concurrent.Internal.toNanosSaturated;
+import static java.util.concurrent.TimeUnit.NANOSECONDS;
 
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
 import jdk.m3.collections.guava.annotations.J2ktIncompatible;
@@ -46,21 +47,21 @@ import org.jspecify.annotations.Nullable;
 public interface ListeningExecutorService extends ExecutorService {
   /**
    * @return a {@code ListenableFuture} representing pending completion of the task
-   * @throws RejectedExecutionException {@inheritDoc}
+   * @throws RejectedExecutionException if the task cannot be scheduled for execution
    */
   @Override
   <T extends @Nullable Object> ListenableFuture<T> submit(Callable<T> task);
 
   /**
    * @return a {@code ListenableFuture} representing pending completion of the task
-   * @throws RejectedExecutionException {@inheritDoc}
+   * @throws RejectedExecutionException if the task cannot be scheduled for execution
    */
   @Override
   ListenableFuture<?> submit(Runnable task);
 
   /**
    * @return a {@code ListenableFuture} representing pending completion of the task
-   * @throws RejectedExecutionException {@inheritDoc}
+   * @throws RejectedExecutionException if the task cannot be scheduled for execution
    */
   @Override
   <T extends @Nullable Object> ListenableFuture<T> submit(
@@ -81,7 +82,7 @@ public interface ListeningExecutorService extends ExecutorService {
    * @return A list of {@code ListenableFuture} instances representing the tasks, in the same
    *     sequential order as produced by the iterator for the given task list, each of which has
    *     completed.
-   * @throws RejectedExecutionException {@inheritDoc}
+   * @throws RejectedExecutionException if the task cannot be scheduled for execution
    * @throws NullPointerException if any task is null
    */
   @Override
@@ -104,7 +105,7 @@ public interface ListeningExecutorService extends ExecutorService {
    *     sequential order as produced by the iterator for the given task list. If the operation did
    *     not time out, each task will have completed. If it did time out, some of these tasks will
    *     not have completed.
-   * @throws RejectedExecutionException {@inheritDoc}
+   * @throws RejectedExecutionException if the task cannot be scheduled for execution
    * @throws NullPointerException if any task is null
    */
   @Override
@@ -120,7 +121,7 @@ public interface ListeningExecutorService extends ExecutorService {
   @J2ktIncompatible
   default <T extends @Nullable Object> List<Future<T>> invokeAll(
       Collection<? extends Callable<T>> tasks, Duration timeout) throws InterruptedException {
-    return invokeAll(tasks, toNanosSaturated(timeout), TimeUnit.NANOSECONDS);
+    return invokeAll(tasks, toNanosSaturated(timeout), NANOSECONDS);
   }
 
   /**
@@ -132,7 +133,7 @@ public interface ListeningExecutorService extends ExecutorService {
   default <T extends @Nullable Object> T invokeAny(
       Collection<? extends Callable<T>> tasks, Duration timeout)
       throws InterruptedException, ExecutionException, TimeoutException {
-    return invokeAny(tasks, toNanosSaturated(timeout), TimeUnit.NANOSECONDS);
+    return invokeAny(tasks, toNanosSaturated(timeout), NANOSECONDS);
   }
 
   /**
@@ -142,6 +143,6 @@ public interface ListeningExecutorService extends ExecutorService {
    */
   @J2ktIncompatible
   default boolean awaitTermination(Duration timeout) throws InterruptedException {
-    return awaitTermination(toNanosSaturated(timeout), TimeUnit.NANOSECONDS);
+    return awaitTermination(toNanosSaturated(timeout), NANOSECONDS);
   }
 }

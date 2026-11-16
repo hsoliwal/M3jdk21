@@ -16,8 +16,9 @@
 
 package jdk.m3.collections.guava.collect;
 
-import static jdk.m3.collections.guava.collect.ReflectionFreeAssertThrows.assertThrows;
 import static jdk.m3.collections.guava.collect.SneakyThrows.sneakyThrow;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
+import static org.junit.Assert.assertThrows;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
@@ -38,7 +39,7 @@ import org.jspecify.annotations.Nullable;
  * @author Kevin Bourrillion
  */
 @SuppressWarnings("serial") // No serialization is used in this test
-@GwtCompatible(emulated = true)
+@GwtCompatible
 @NullMarked
 public class AbstractIteratorTest extends TestCase {
 
@@ -48,10 +49,10 @@ public class AbstractIteratorTest extends TestCase {
     // second, then signals that it's reached the end of the data
     Iterator<Integer> iter =
         new AbstractIterator<Integer>() {
-          private int rep;
+          int rep;
 
           @Override
-          public @Nullable Integer computeNext() {
+          protected @Nullable Integer computeNext() {
             switch (rep++) {
               case 0:
                 return 0;
@@ -89,10 +90,10 @@ public class AbstractIteratorTest extends TestCase {
      */
     AbstractIterator<Integer> iter =
         new AbstractIterator<Integer>() {
-          private int rep;
+          int rep;
 
           @Override
-          public @Nullable Integer computeNext() {
+          protected @Nullable Integer computeNext() {
             switch (rep++) {
               case 0:
                 return 0;
@@ -128,27 +129,31 @@ public class AbstractIteratorTest extends TestCase {
 
   @J2ktIncompatible // weak references, details of GC
   @GwtIncompatible // weak references
-  @AndroidIncompatible // depends on details of GC
   public void testFreesNextReference() {
     Iterator<Object> itr =
         new AbstractIterator<Object>() {
           @Override
-          public Object computeNext() {
+          protected Object computeNext() {
             return new Object();
           }
         };
-    WeakReference<Object> ref = new WeakReference<>(itr.next());
+    WeakReference<Object> ref = doNextAndGetWeakReference(itr);
     GcFinalization.awaitClear(ref);
+  }
+
+  @GwtIncompatible // weak references
+  private static WeakReference<Object> doNextAndGetWeakReference(Iterator<Object> itr) {
+    return new WeakReference<>(itr.next());
   }
 
   public void testDefaultBehaviorOfPeekForEmptyIteration() {
 
     AbstractIterator<Integer> empty =
         new AbstractIterator<Integer>() {
-          private boolean alreadyCalledEndOfData;
+          boolean alreadyCalledEndOfData;
 
           @Override
-          public @Nullable Integer computeNext() {
+          protected @Nullable Integer computeNext() {
             if (alreadyCalledEndOfData) {
               fail("Should not have been invoked again");
             }
@@ -165,13 +170,13 @@ public class AbstractIteratorTest extends TestCase {
     assertThrows(NoSuchElementException.class, empty::peek);
   }
 
-  public void testSneakyThrow() throws Exception {
+  public void testSneakyThrow() {
     Iterator<Integer> iter =
         new AbstractIterator<Integer>() {
           boolean haveBeenCalled;
 
           @Override
-          public Integer computeNext() {
+          protected Integer computeNext() {
             if (haveBeenCalled) {
               throw new AssertionError("Should not have been called again");
             } else {
@@ -188,25 +193,25 @@ public class AbstractIteratorTest extends TestCase {
   }
 
   public void testException() {
-    final SomeUncheckedException exception = new SomeUncheckedException();
+    SomeUncheckedException exception = new SomeUncheckedException();
     Iterator<Integer> iter =
         new AbstractIterator<Integer>() {
           @Override
-          public Integer computeNext() {
+          protected Integer computeNext() {
             throw exception;
           }
         };
 
     // It should pass through untouched
     SomeUncheckedException e = assertThrows(SomeUncheckedException.class, iter::hasNext);
-    assertSame(exception, e);
+    assertThat(e).isEqualTo(exception);
   }
 
   public void testExceptionAfterEndOfData() {
     Iterator<Integer> iter =
         new AbstractIterator<Integer>() {
           @Override
-          public Integer computeNext() {
+          protected Integer computeNext() {
             endOfData();
             throw new SomeUncheckedException();
           }
@@ -221,7 +226,7 @@ public class AbstractIteratorTest extends TestCase {
           boolean haveBeenCalled;
 
           @Override
-          public Integer computeNext() {
+          protected Integer computeNext() {
             if (haveBeenCalled) {
               endOfData();
             }

@@ -16,6 +16,8 @@
 
 package jdk.m3.collections.guava.collect.testing;
 
+import static java.util.Objects.requireNonNull;
+
 import jdk.m3.collections.guava.collect.testing.features.CollectionFeature;
 import jdk.m3.collections.guava.collect.testing.features.CollectionSize;
 import java.util.Collection;
@@ -33,12 +35,10 @@ public class MinimalCollectionTest extends TestCase {
     return CollectionTestSuiteBuilder.using(
             new TestStringCollectionGenerator() {
               @Override
-              public Collection<String> create(String[] elements) {
+              protected Collection<String> create(String[] elements) {
                 // TODO: MinimalCollection should perhaps throw
                 for (Object element : elements) {
-                  if (element == null) {
-                    throw new NullPointerException();
-                  }
+                  requireNonNull(element);
                 }
                 return MinimalCollection.of(elements);
               }

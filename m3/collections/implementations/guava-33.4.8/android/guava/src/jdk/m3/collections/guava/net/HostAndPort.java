@@ -22,11 +22,11 @@ import static jdk.m3.collections.guava.base.Strings.isNullOrEmpty;
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
 import jdk.m3.collections.guava.annotations.J2ktIncompatible;
-import jdk.m3.collections.guava.base.Objects;
 import jdk.m3.collections.guava.primitives.Ints;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import com.google.errorprone.annotations.Immutable;
 import java.io.Serializable;
+import java.util.Objects;
 import org.jspecify.annotations.Nullable;
 
 /**
@@ -34,14 +34,15 @@ import org.jspecify.annotations.Nullable;
  *
  * <p>Example usage:
  *
- * <pre>
- * HostAndPort hp = HostAndPort.fromString("[2001:db8::1]")
- *     .withDefaultPort(80)
- *     .requireBracketsForIPv6();
- * hp.getHost();   // returns "2001:db8::1"
- * hp.getPort();   // returns 80
- * hp.toString();  // returns "[2001:db8::1]:80"
- * </pre>
+ * {@snippet :
+ * HostAndPort hp =
+ *     HostAndPort.fromString("[2001:db8::1]")
+ *         .withDefaultPort(80)
+ *         .requireBracketsForIPv6();
+ * hp.getHost();  // returns "2001:db8::1"
+ * hp.getPort();  // returns 80
+ * hp.toString(); // returns "[2001:db8::1]:80"
+ * }
  *
  * <p>Here are some examples of recognized formats:
  *
@@ -184,7 +185,7 @@ public final class HostAndPort implements Serializable {
       } else {
         // 0 or 2+ colons. Bare hostname or IPv6 literal.
         host = hostPortString;
-        hasBracketlessColons = (colonPos >= 0);
+        hasBracketlessColons = colonPos >= 0;
       }
     }
 
@@ -213,7 +214,7 @@ public final class HostAndPort implements Serializable {
         "Bracketed host-port string must start with a bracket: %s",
         hostPortString);
     int colonIndex = hostPortString.indexOf(':');
-    int closeBracketIndex = hostPortString.lastIndexOf(']');
+    int closeBracketIndex = hostPortString.indexOf(']');
     checkArgument(
         colonIndex > -1 && closeBracketIndex > colonIndex,
         "Invalid bracketed host/port: %s",
@@ -281,14 +282,14 @@ public final class HostAndPort implements Serializable {
     }
     if (other instanceof HostAndPort) {
       HostAndPort that = (HostAndPort) other;
-      return Objects.equal(this.host, that.host) && this.port == that.port;
+      return Objects.equals(this.host, that.host) && this.port == that.port;
     }
     return false;
   }
 
   @Override
   public int hashCode() {
-    return Objects.hashCode(host, port);
+    return Objects.hash(host, port);
   }
 
   /** Rebuild the host:port string, including brackets if necessary. */

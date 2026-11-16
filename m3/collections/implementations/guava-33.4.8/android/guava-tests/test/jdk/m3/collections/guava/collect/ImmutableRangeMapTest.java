@@ -16,11 +16,11 @@ package jdk.m3.collections.guava.collect;
 
 import static jdk.m3.collections.guava.collect.BoundType.OPEN;
 import static jdk.m3.collections.guava.collect.Maps.immutableEntry;
-import static com.google.common.truth.Truth.assertThat;
+import static jdk.m3.collections.guava.testing.SerializableTester.reserializeAndAssert;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
 import static org.junit.Assert.assertThrows;
 
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
-import jdk.m3.collections.guava.testing.SerializableTester;
 import java.util.Map.Entry;
 import java.util.NoSuchElementException;
 import junit.framework.TestCase;
@@ -41,7 +41,7 @@ public class ImmutableRangeMapTest extends TestCase {
   static {
     ImmutableList.Builder<Range<Integer>> builder = ImmutableList.builder();
 
-    builder.add(Range.<Integer>all());
+    builder.add(Range.all());
 
     // Add one-ended ranges
     for (int i = MIN_BOUND; i <= MAX_BOUND; i++) {
@@ -69,7 +69,7 @@ public class ImmutableRangeMapTest extends TestCase {
 
   public void testBuilderRejectsEmptyRanges() {
     for (int i = MIN_BOUND; i <= MAX_BOUND; i++) {
-      final int ii = i;
+      int ii = i;
       ImmutableRangeMap.Builder<Integer, Integer> builder = ImmutableRangeMap.builder();
       assertThrows(IllegalArgumentException.class, () -> builder.put(Range.closedOpen(ii, ii), 1));
       assertThrows(IllegalArgumentException.class, () -> builder.put(Range.openClosed(ii, ii), 1));
@@ -172,7 +172,7 @@ public class ImmutableRangeMapTest extends TestCase {
     }
   }
 
-  @AndroidIncompatible // slow
+  // Android: takes ~25s
   public void testAsMapOfRanges() {
     for (Range<Integer> range1 : RANGES) {
       for (Range<Integer> range2 : RANGES) {
@@ -186,8 +186,8 @@ public class ImmutableRangeMapTest extends TestCase {
           ImmutableMap<Range<Integer>, Integer> descendingMap = rangeMap.asDescendingMapOfRanges();
           assertEquals(expectedAsMap, asMap);
           assertEquals(expectedAsMap, descendingMap);
-          SerializableTester.reserializeAndAssert(asMap);
-          SerializableTester.reserializeAndAssert(descendingMap);
+          reserializeAndAssert(asMap);
+          reserializeAndAssert(descendingMap);
           assertEquals(
               ImmutableList.copyOf(asMap.entrySet()).reverse(),
               ImmutableList.copyOf(descendingMap.entrySet()));
@@ -200,6 +200,7 @@ public class ImmutableRangeMapTest extends TestCase {
     }
   }
 
+  @AndroidIncompatible // ~30s; doable but probably not worth it. We could test on fewer ranges
 
   public void testSubRangeMap() {
     for (Range<Integer> range1 : RANGES) {
@@ -228,7 +229,7 @@ public class ImmutableRangeMapTest extends TestCase {
 
   public void testSerialization() {
     ImmutableRangeMap<Integer, Integer> emptyRangeMap = ImmutableRangeMap.of();
-    SerializableTester.reserializeAndAssert(emptyRangeMap);
+    reserializeAndAssert(emptyRangeMap);
 
     ImmutableRangeMap<Integer, Integer> nonEmptyRangeMap =
         new ImmutableRangeMap.Builder<Integer, Integer>()
@@ -241,12 +242,12 @@ public class ImmutableRangeMapTest extends TestCase {
     ImmutableMap<Range<Integer>, Integer> test = nonEmptyRangeMap.asMapOfRanges();
 
     for (Range<Integer> range : test.keySet()) {
-      SerializableTester.reserializeAndAssert(range);
+      reserializeAndAssert(range);
     }
 
-    SerializableTester.reserializeAndAssert(test.keySet());
+    reserializeAndAssert(test.keySet());
 
-    SerializableTester.reserializeAndAssert(nonEmptyRangeMap);
+    reserializeAndAssert(nonEmptyRangeMap);
   }
 
   // TODO(b/172823566): Use mainline testToImmutableRangeMap once CollectorTester is usable to java7

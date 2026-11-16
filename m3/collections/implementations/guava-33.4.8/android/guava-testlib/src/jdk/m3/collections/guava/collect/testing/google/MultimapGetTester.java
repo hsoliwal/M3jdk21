@@ -26,15 +26,14 @@ import static jdk.m3.collections.guava.collect.testing.features.MapFeature.ALLOW
 import static jdk.m3.collections.guava.collect.testing.features.MapFeature.ALLOWS_NULL_VALUES;
 import static jdk.m3.collections.guava.collect.testing.features.MapFeature.SUPPORTS_PUT;
 import static jdk.m3.collections.guava.collect.testing.features.MapFeature.SUPPORTS_REMOVE;
-import static jdk.m3.collections.guava.collect.testing.google.ReflectionFreeAssertThrows.assertThrows;
 import static java.util.Collections.singletonList;
+import static org.junit.Assert.assertThrows;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.collect.Multimap;
 import jdk.m3.collections.guava.collect.testing.features.CollectionSize;
 import jdk.m3.collections.guava.collect.testing.features.MapFeature;
 import java.util.Collection;
-import org.junit.Ignore;
 
 /**
  * Tests for {@link Multimap#get(Object)}.
@@ -42,9 +41,6 @@ import org.junit.Ignore;
  * @author Louis Wasserman
  */
 @GwtCompatible
-@Ignore("test runners must not instantiate and run this directly, only via suites we build")
-// @Ignore affects the Android test runner, which respects JUnit 4 annotations on JUnit 3 tests.
-@SuppressWarnings("JUnit4ClassUsedInJUnit3")
 public class MultimapGetTester<K, V> extends AbstractMultimapTester<K, V, Multimap<K, V>> {
   public void testGetEmpty() {
     Collection<V> result = multimap().get(k3());

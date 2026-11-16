@@ -12,12 +12,16 @@
  * the License.
  */
 
+// Copyright 2026 Hitesh Soliwal and Contributors to the Synexia Project.
 package jdk.m3.collections.guava.primitives;
 
 import static jdk.m3.collections.guava.base.Preconditions.checkArgument;
 import static jdk.m3.collections.guava.base.Preconditions.checkNotNull;
+import static java.lang.System.arraycopy;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
+import jdk.m3.collections.guava.annotations.GwtIncompatible;
+import jdk.m3.collections.guava.annotations.J2ktIncompatible;
 import jdk.m3.collections.guava.base.Preconditions;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import com.google.errorprone.annotations.Immutable;
@@ -137,7 +141,7 @@ public final class ImmutableIntArray implements Serializable {
         rest.length <= Integer.MAX_VALUE - 1, "the total number of elements must fit in an int");
     int[] array = new int[rest.length + 1];
     array[0] = first;
-    System.arraycopy(rest, 0, array, 1, rest.length);
+    arraycopy(rest, 0, array, 1, rest.length);
     return new ImmutableIntArray(array);
   }
 
@@ -148,6 +152,10 @@ public final class ImmutableIntArray implements Serializable {
 
   /** Returns an immutable array containing the given values, in order. */
   public static ImmutableIntArray copyOf(Collection<Integer> values) {
+    if (values instanceof AsList) {
+      ImmutableIntArray parent = ((AsList) values).parent;
+      return parent.isEmpty() ? EMPTY : new ImmutableIntArray(parent.toArray());
+    }
     return values.isEmpty() ? EMPTY : new ImmutableIntArray(Ints.toArray(values));
   }
 
@@ -170,7 +178,6 @@ public final class ImmutableIntArray implements Serializable {
    *
    * @since 33.4.0 (but since 22.0 in the JRE flavor)
    */
-  @SuppressWarnings("Java7ApiChecker")
   @IgnoreJRERequirement // Users will use this only if they're already using streams.
   public static ImmutableIntArray copyOf(IntStream stream) {
     // Note this uses very different growth behavior from copyOf(Iterable) and the builder.
@@ -236,7 +243,7 @@ public final class ImmutableIntArray implements Serializable {
     @CanIgnoreReturnValue
     public Builder addAll(int[] values) {
       ensureRoomFor(values.length);
-      System.arraycopy(values, 0, array, count, values.length);
+      arraycopy(values, 0, array, count, values.length);
       count += values.length;
       return this;
     }
@@ -262,6 +269,13 @@ public final class ImmutableIntArray implements Serializable {
      */
     @CanIgnoreReturnValue
     public Builder addAll(Collection<Integer> values) {
+      if (values instanceof AsList) {
+        ImmutableIntArray parent = ((AsList) values).parent;
+        // Preserve the scalar failure path if the combined size overflows.
+        if (parent.length() <= Integer.MAX_VALUE - count) {
+          return addAll(parent);
+        }
+      }
       ensureRoomFor(values.size());
       for (Integer value : values) {
         array[count++] = value;
@@ -275,7 +289,6 @@ public final class ImmutableIntArray implements Serializable {
      *
      * @since 33.4.0 (but since 22.0 in the JRE flavor)
      */
-    @SuppressWarnings("Java7ApiChecker")
     @IgnoreJRERequirement // Users will use this only if they're already using streams.
     @CanIgnoreReturnValue
     public Builder addAll(IntStream stream) {
@@ -295,7 +308,7 @@ public final class ImmutableIntArray implements Serializable {
     @CanIgnoreReturnValue
     public Builder addAll(ImmutableIntArray values) {
       ensureRoomFor(values.length());
-      System.arraycopy(values.array, values.start, array, count, values.length());
+      arraycopy(values.array, values.start, array, count, values.length());
       count += values.length();
       return this;
     }
@@ -422,7 +435,6 @@ public final class ImmutableIntArray implements Serializable {
    *
    * @since 33.4.0 (but since 22.0 in the JRE flavor)
    */
-  @SuppressWarnings("Java7ApiChecker")
   @IgnoreJRERequirement // We rely on users not to call this without library desugaring.
   public void forEach(IntConsumer consumer) {
     checkNotNull(consumer);
@@ -436,7 +448,6 @@ public final class ImmutableIntArray implements Serializable {
    *
    * @since 33.4.0 (but since 22.0 in the JRE flavor)
    */
-  @SuppressWarnings("Java7ApiChecker")
   // If users use this when they shouldn't, we hope that NewApi will catch subsequent stream calls
   @IgnoreJRERequirement
   public IntStream stream() {
@@ -462,7 +473,6 @@ public final class ImmutableIntArray implements Serializable {
         : new ImmutableIntArray(array, start + startIndex, start + endIndex);
   }
 
-  @SuppressWarnings("Java7ApiChecker")
   @IgnoreJRERequirement // used only from APIs that use streams
   /*
    * We declare this as package-private, rather than private, to avoid generating a synthetic
@@ -488,7 +498,8 @@ public final class ImmutableIntArray implements Serializable {
     return new AsList(this);
   }
 
-  static class AsList extends AbstractList<Integer> implements RandomAccess, Serializable {
+  private static final class AsList extends AbstractList<Integer>
+      implements RandomAccess, Serializable {
     private final ImmutableIntArray parent;
 
     private AsList(ImmutableIntArray parent) {
@@ -527,15 +538,13 @@ public final class ImmutableIntArray implements Serializable {
       return parent.subArray(fromIndex, toIndex).asList();
     }
 
-    // The default List spliterator is not efficiently splittable
-    @Override
-    @SuppressWarnings("Java7ApiChecker")
     /*
      * This is an override that is not directly visible to callers, so NewApi will catch calls to
      * Collection.spliterator() where necessary.
      */
     @IgnoreJRERequirement
-    public Spliterator<Integer> spliterator() {
+    @Override
+    public Spliterator.OfInt spliterator() {
       return parent.spliterator();
     }
 
@@ -573,6 +582,8 @@ public final class ImmutableIntArray implements Serializable {
     public String toString() {
       return parent.toString();
     }
+
+    @GwtIncompatible @J2ktIncompatible     private static final long serialVersionUID = 4432621008496800951L;
   }
 
   /**
@@ -605,7 +616,7 @@ public final class ImmutableIntArray implements Serializable {
     int hash = 1;
     for (int i = start; i < end; i++) {
       hash *= 31;
-      hash += Ints.hashCode(array[i]);
+      hash += Integer.hashCode(array[i]);
     }
     return hash;
   }
@@ -650,4 +661,6 @@ public final class ImmutableIntArray implements Serializable {
   Object readResolve() {
     return isEmpty() ? EMPTY : this;
   }
+
+  @GwtIncompatible @J2ktIncompatible   private static final long serialVersionUID = -7031592199741285664L;
 }

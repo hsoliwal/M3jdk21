@@ -16,6 +16,7 @@ package jdk.m3.collections.guava.util.concurrent;
 
 import static jdk.m3.collections.guava.base.Preconditions.checkNotNull;
 import static jdk.m3.collections.guava.util.concurrent.Internal.toNanosSaturated;
+import static java.util.concurrent.TimeUnit.NANOSECONDS;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
@@ -43,9 +44,9 @@ import org.jspecify.annotations.Nullable;
  *         .catching(RpcException.class, e -> false, directExecutor());
  * }
  *
- * <h3>Alternatives</h3>
+ * <h2>Alternatives</h2>
  *
- * <h4>Frameworks</h4>
+ * <h3>Frameworks</h3>
  *
  * <p>When chaining together a graph of asynchronous operations, you will often find it easier to
  * use a framework. Frameworks automate the process, often adding features like monitoring,
@@ -55,26 +56,32 @@ import org.jspecify.annotations.Nullable;
  *   <li><a href="https://dagger.dev/producers.html">Dagger Producers</a>
  * </ul>
  *
- * <h4>{@link java.util.concurrent.CompletableFuture} / {@link java.util.concurrent.CompletionStage}
- * </h4>
+ * <h3>{@link java.util.CompletableFuture} / {@link java.util.concurrent.CompletionStage} </h3>
  *
  * <p>Users of {@code CompletableFuture} will likely want to continue using {@code
- * CompletableFuture}. {@code FluentFuture} is targeted at people who use {@code ListenableFuture},
- * who can't use Java 8, or who want an API more focused than {@code CompletableFuture}. (If you
- * need to adapt between {@code CompletableFuture} and {@code ListenableFuture}, consider <a
- * href="https://github.com/lukas-krecan/future-converter">Future Converter</a>.)
+ * CompletableFuture}. {@link FluentFuture} is targeted at people who use {@link ListenableFuture},
+ * who can't use Java 8, or who want an API more focused than {@code CompletableFuture}. If you need
+ * to adapt between {@code CompletableFuture} and {@link ListenableFuture}, consider <a
+ * href="https://github.com/lukas-krecan/future-converter">Future Converter</a>.
  *
- * <h3>Extension</h3>
+ * <h3>{@link ClosingFuture}</h3>
  *
- * If you want a class like {@code FluentFuture} but with extra methods, we recommend declaring your
+ * <p>If the steps of your pipeline create objects that must be closed when the computation is done,
+ * such as database connections or file handles, use {@link ClosingFuture}. It supports the same
+ * kinds of derived steps as {@link FluentFuture} but closes those objects once the pipeline
+ * completes, fails, or is cancelled.
+ *
+ * <h2>Extension</h2>
+ *
+ * If you want a class like {@link FluentFuture} but with extra methods, we recommend declaring your
  * own subclass of {@link ListenableFuture}, complete with a method like {@link #from} to adapt an
- * existing {@code ListenableFuture}, implemented atop a {@link ForwardingListenableFuture} that
+ * existing {@link ListenableFuture}, implemented atop a {@link ForwardingListenableFuture} that
  * forwards to that future and adds the desired methods.
  *
  * @since 23.0
  */
 @DoNotMock("Use FluentFuture.from(Futures.immediate*Future) or SettableFuture")
-@GwtCompatible(emulated = true)
+@GwtCompatible
 public abstract class FluentFuture<V extends @Nullable Object>
     extends GwtFluentFutureCatchingSpecialization<V> {
 
@@ -83,7 +90,7 @@ public abstract class FluentFuture<V extends @Nullable Object>
    * that {@link #get} calls exactly the implementation of {@link AbstractFuture#get}.
    */
   abstract static class TrustedFuture<V extends @Nullable Object> extends FluentFuture<V>
-      implements AbstractFuture.Trusted<V> {
+      implements Trusted<V> {
     @CanIgnoreReturnValue
     @Override
     @ParametricNullness
@@ -271,11 +278,10 @@ public abstract class FluentFuture<V extends @Nullable Object>
    */
   @J2ktIncompatible
   @GwtIncompatible // ScheduledExecutorService
-  @SuppressWarnings("Java7ApiChecker")
   @IgnoreJRERequirement // Users will use this only if they're already using Duration.
   public final FluentFuture<V> withTimeout(
       Duration timeout, ScheduledExecutorService scheduledExecutor) {
-    return withTimeout(toNanosSaturated(timeout), TimeUnit.NANOSECONDS, scheduledExecutor);
+    return withTimeout(toNanosSaturated(timeout), NANOSECONDS, scheduledExecutor);
   }
 
   /**
@@ -299,7 +305,8 @@ public abstract class FluentFuture<V extends @Nullable Object>
   /**
    * Returns a new {@code Future} whose result is asynchronously derived from the result of this
    * {@code Future}. If the input {@code Future} fails, the returned {@code Future} fails with the
-   * same exception (and the function is not invoked).
+   * same exception (and the function is not invoked). If the function throws an exception, the
+   * returned {@code Future} fails with that exception.
    *
    * <p>More precisely, the returned {@code Future} takes its result from a {@code Future} produced
    * by applying the given {@code AsyncFunction} to the result of the original {@code Future}.
@@ -343,11 +350,11 @@ public abstract class FluentFuture<V extends @Nullable Object>
   /**
    * Returns a new {@code Future} whose result is derived from the result of this {@code Future}. If
    * this input {@code Future} fails, the returned {@code Future} fails with the same exception (and
-   * the function is not invoked). Example usage:
+   * the function is not invoked). If the function throws an exception, the returned {@code Future}
+   * fails with that exception. Example usage:
    *
    * {@snippet :
-   * ListenableFuture<List<Row>> rowsFuture =
-   *     queryFuture.transform(QueryResult::getRows, executor);
+   * ListenableFuture<List<Row>> rowsFuture = queryFuture.transform(QueryResult::getRows, executor);
    * }
    *
    * <p>When selecting an executor, note that {@code directExecutor} is dangerous in some cases. See

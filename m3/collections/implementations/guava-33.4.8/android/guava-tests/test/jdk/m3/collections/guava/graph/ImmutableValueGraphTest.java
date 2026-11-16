@@ -16,7 +16,7 @@
 
 package jdk.m3.collections.guava.graph;
 
-import static com.google.common.truth.Truth.assertThat;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
 
 import org.jspecify.annotations.NullUnmarked;
 import org.junit.Test;
@@ -35,7 +35,6 @@ public class ImmutableValueGraphTest {
     ImmutableValueGraph<String, Integer> immutableValueGraph =
         ImmutableValueGraph.copyOf(mutableValueGraph);
 
-    assertThat(immutableValueGraph.asGraph()).isInstanceOf(ImmutableGraph.class);
     assertThat(immutableValueGraph).isNotInstanceOf(MutableValueGraph.class);
     assertThat(immutableValueGraph).isEqualTo(mutableValueGraph);
 

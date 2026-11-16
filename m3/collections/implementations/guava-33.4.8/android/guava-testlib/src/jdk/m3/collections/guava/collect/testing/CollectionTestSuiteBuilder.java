@@ -18,10 +18,10 @@ package jdk.m3.collections.guava.collect.testing;
 
 import static jdk.m3.collections.guava.collect.testing.features.CollectionFeature.SERIALIZABLE;
 import static jdk.m3.collections.guava.collect.testing.features.CollectionFeature.SERIALIZABLE_INCLUDING_VIEWS;
+import static jdk.m3.collections.guava.testing.SerializableTester.reserialize;
 
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
 import jdk.m3.collections.guava.collect.testing.features.Feature;
-import jdk.m3.collections.guava.testing.SerializableTester;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
@@ -52,8 +52,7 @@ public class CollectionTestSuiteBuilder<E>
 
     if (parentBuilder.getFeatures().contains(SERIALIZABLE)) {
       derivedSuites.add(
-          CollectionTestSuiteBuilder.using(
-                  new ReserializedCollectionGenerator<E>(parentBuilder.getSubjectGenerator()))
+          using(new ReserializedCollectionGenerator<E>(parentBuilder.getSubjectGenerator()))
               .named(getName() + " reserialized")
               .withFeatures(computeReserializedCollectionFeatures(parentBuilder.getFeatures()))
               .suppressing(parentBuilder.getSuppressedTests())
@@ -64,7 +63,8 @@ public class CollectionTestSuiteBuilder<E>
     return derivedSuites;
   }
 
-  static class ReserializedCollectionGenerator<E> implements TestCollectionGenerator<E> {
+  private static final class ReserializedCollectionGenerator<E>
+      implements TestCollectionGenerator<E> {
     final OneSizeTestContainerGenerator<Collection<E>, E> gen;
 
     private ReserializedCollectionGenerator(OneSizeTestContainerGenerator<Collection<E>, E> gen) {
@@ -78,7 +78,7 @@ public class CollectionTestSuiteBuilder<E>
 
     @Override
     public Collection<E> create(Object... elements) {
-      return SerializableTester.reserialize(gen.create(elements));
+      return reserialize(gen.create(elements));
     }
 
     @Override

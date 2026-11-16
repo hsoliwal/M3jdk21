@@ -8,25 +8,13 @@
 
   <groupId>com.google.guava</groupId>
   <artifactId>guava-bom</artifactId>
-  <version>33.4.8-jre</version>
+  <version>999.0.0-HEAD-jre-SNAPSHOT</version>
   <packaging>pom</packaging>
-
-  <parent>
-    <groupId>org.sonatype.oss</groupId>
-    <artifactId>oss-parent</artifactId>
-    <version>9</version>
-    <relativePath></relativePath>
-  </parent>
 
   <name>Guava BOM</name>
   <description>BOM for Guava artifacts</description>
   <url>https://github.com/google/guava</url>
   <inceptionYear>2010</inceptionYear>
-
-  <issueManagement>
-    <system>GitHub Issues</system>
-    <url>https://github.com/google/guava/issues</url>
-  </issueManagement>
 
   <licenses>
     <license>
@@ -35,6 +23,33 @@
       <distribution>repo</distribution>
     </license>
   </licenses>
+
+  <developers>
+    <!-- Sonatype requires that we list someone here. Guava has many contributors: https://github.com/google/guava/graphs/contributors -->
+    <developer>
+      <id>cpovirk</id>
+      <name>Chris Povirk</name>
+      <email>cpovirk@google.com</email>
+    </developer>
+  </developers>
+
+  <scm>
+    <connection>scm:git:https://github.com/google/guava.git</connection>
+    <developerConnection>scm:git:git@github.com:google/guava.git</developerConnection>
+    <url>https://github.com/google/guava</url>
+  </scm>
+
+  <issueManagement>
+    <system>GitHub Issues</system>
+    <url>https://github.com/google/guava/issues</url>
+  </issueManagement>
+
+  <properties>
+    <artifactregistry-maven-wagon.version>2.2.5</artifactregistry-maven-wagon.version>
+    <central-publishing-maven-plugin.version>0.12.0</central-publishing-maven-plugin.version>
+    <maven-deploy-plugin.version>3.2.0</maven-deploy-plugin.version>
+    <maven-gpg-plugin.version>3.0.1</maven-gpg-plugin.version>
+  </properties>
 
   <dependencyManagement>
     <dependencies>
@@ -55,10 +70,81 @@
       </dependency>
     </dependencies>
   </dependencyManagement>
-  <properties>
-    <!-- M3 namespace source only: retain donor coordinates as provenance.
-         Disable normal lifecycle publication until a target-owned build is qualified. -->
-    <maven.install.skip>true</maven.install.skip>
-    <maven.deploy.skip>true</maven.deploy.skip>
-  </properties>
+
+  <build>
+    <plugins>
+      <plugin>
+        <artifactId>maven-clean-plugin</artifactId>
+        <version>3.5.0</version>
+      </plugin>
+      <plugin>
+        <artifactId>maven-install-plugin</artifactId>
+        <version>3.1.4</version>
+      </plugin>
+    </plugins>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <artifactId>maven-deploy-plugin</artifactId>
+          <version>${maven-deploy-plugin.version}</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
+
+  <profiles>
+    <profile>
+      <id>sonatype-oss-release</id>
+      <build>
+        <plugins>
+          <plugin>
+            <artifactId>maven-gpg-plugin</artifactId>
+            <version>${maven-gpg-plugin.version}</version>
+            <executions>
+              <execution>
+                <id>sign-artifacts</id>
+                <phase>verify</phase>
+                <goals>
+                  <goal>sign</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <groupId>com.google.cloud.artifactregistry</groupId>
+            <artifactId>artifactregistry-maven-wagon</artifactId>
+            <version>${artifactregistry-maven-wagon.version}</version>
+            <extensions>true</extensions>
+          </plugin>
+        </plugins>
+      </build>
+      <distributionManagement>
+        <repository>
+          <id>oss-exit-gate</id>
+          <url>artifactregistry://us-maven.pkg.dev/oss-exit-gate-prod/guava--mavencentral</url>
+        </repository>
+      </distributionManagement>
+    </profile>
+    <profile>
+      <id>bypass-oss-exit-gate</id>
+      <!-- TODO(cpovirk): Remove <activation> once OSS Exit Gate setup is complete; see main pom.xml. -->
+      <activation>
+        <!-- We would use activeByDefault, but then it would be deactivated automatically when any *other* profile is activated, including sonatype-oss-release. -->
+        <property>
+          <name>bypass-oss-exit-gate</name>
+          <value>!false</value>
+        </property>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.sonatype.central</groupId>
+            <artifactId>central-publishing-maven-plugin</artifactId>
+            <version>${central-publishing-maven-plugin.version}</version>
+            <extensions>true</extensions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
 </project>

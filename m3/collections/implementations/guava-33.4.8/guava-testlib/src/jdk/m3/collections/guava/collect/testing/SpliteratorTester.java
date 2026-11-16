@@ -83,7 +83,7 @@ public final class SpliteratorTester<E extends @Nullable Object> {
       return spliterator.estimateSize();
     }
 
-    final Comparator<? super E> getComparator() {
+    final @Nullable Comparator<? super E> getComparator() {
       return spliterator.getComparator();
     }
 
@@ -154,7 +154,7 @@ public final class SpliteratorTester<E extends @Nullable Object> {
    * Different ways of decomposing a Spliterator, all of which must produce the same elements (up to
    * ordering, if Spliterator.ORDERED is not present).
    */
-  enum SpliteratorDecompositionStrategy {
+  private enum SpliteratorDecompositionStrategy {
     NO_SPLIT_FOR_EACH_REMAINING {
       @Override
       <E extends @Nullable Object> void forEach(
@@ -182,11 +182,10 @@ public final class SpliteratorTester<E extends @Nullable Object> {
         }
         long size = spliterator.getExactSizeIfKnown();
         long[] counter = {0};
-        spliterator.forEachRemaining(
-            e -> {
-              consumer.accept(e);
-              counter[0]++;
-            });
+        spliterator.forEachRemaining(e -> {
+          consumer.accept(e);
+          counter[0]++;
+        });
         if (size >= 0) {
           assertEquals(size, counter[0]);
         }
@@ -290,14 +289,13 @@ public final class SpliteratorTester<E extends @Nullable Object> {
     this.spliteratorSuppliers = checkNotNull(spliteratorSuppliers);
   }
 
-  @SafeVarargs
   @CanIgnoreReturnValue
-  public final Ordered expect(Object... elements) {
+  public Ordered expect(Object... elements) {
     return expect(asList(elements));
   }
 
   @CanIgnoreReturnValue
-  public final Ordered expect(Iterable<?> elements) {
+  public Ordered expect(Iterable<?> elements) {
     List<List<E>> resultsForAllStrategies = new ArrayList<>();
     for (Supplier<GeneralSpliterator<E>> spliteratorSupplier : spliteratorSuppliers) {
       GeneralSpliterator<E> spliterator = spliteratorSupplier.get();

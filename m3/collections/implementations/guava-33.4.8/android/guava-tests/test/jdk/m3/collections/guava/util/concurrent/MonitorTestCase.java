@@ -16,6 +16,8 @@
 
 package jdk.m3.collections.guava.util.concurrent;
 
+import jdk.m3.collections.guava.annotations.GwtIncompatible;
+import jdk.m3.collections.guava.annotations.J2ktIncompatible;
 import jdk.m3.collections.guava.testing.NullPointerTester;
 import jdk.m3.collections.guava.testing.TearDownStack;
 import java.util.Random;
@@ -28,6 +30,8 @@ import org.jspecify.annotations.NullUnmarked;
  * @author Justin T. Sampson
  */
 @NullUnmarked
+@GwtIncompatible
+@J2ktIncompatible
 public abstract class MonitorTestCase extends TestCase {
 
   public class TestGuard extends Monitor.Guard {
@@ -50,20 +54,22 @@ public abstract class MonitorTestCase extends TestCase {
 
   private final boolean interruptible;
   private Monitor monitor;
-  private final TearDownStack tearDownStack = new TearDownStack(true);
+  private final TearDownStack tearDownStack = new TearDownStack();
   private TestThread<Monitor> thread1;
   private TestThread<Monitor> thread2;
 
-  protected MonitorTestCase(boolean interruptible) {
+  MonitorTestCase(boolean interruptible) {
     this.interruptible = interruptible;
   }
 
   @Override
-  protected final void setUp() throws Exception {
+  protected final void setUp() {
     boolean fair = new Random().nextBoolean();
     monitor = new Monitor(fair);
-    tearDownStack.addTearDown(thread1 = new TestThread<>(monitor, "TestThread #1"));
-    tearDownStack.addTearDown(thread2 = new TestThread<>(monitor, "TestThread #2"));
+    thread1 = new TestThread<>(monitor, "TestThread #1");
+    tearDownStack.addTearDown(thread1);
+    thread2 = new TestThread<>(monitor, "TestThread #2");
+    tearDownStack.addTearDown(thread2);
   }
 
   @Override
@@ -75,7 +81,7 @@ public abstract class MonitorTestCase extends TestCase {
     return interruptible ? "enterInterruptibly" : "enter";
   }
 
-  private String tryEnter() {
+  private static String tryEnter() {
     return "tryEnter";
   }
 
@@ -83,7 +89,7 @@ public abstract class MonitorTestCase extends TestCase {
     return interruptible ? "enterIfInterruptibly" : "enterIf";
   }
 
-  private String tryEnterIf() {
+  private static String tryEnterIf() {
     return "tryEnterIf";
   }
 
@@ -95,7 +101,7 @@ public abstract class MonitorTestCase extends TestCase {
     return interruptible ? "waitFor" : "waitForUninterruptibly";
   }
 
-  private String leave() {
+  private static String leave() {
     return "leave";
   }
 

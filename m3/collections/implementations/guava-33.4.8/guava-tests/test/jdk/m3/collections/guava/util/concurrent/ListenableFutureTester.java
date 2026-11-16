@@ -17,7 +17,8 @@
 package jdk.m3.collections.guava.util.concurrent;
 
 import static jdk.m3.collections.guava.base.Preconditions.checkNotNull;
-import static com.google.common.truth.Truth.assertThat;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
+import static java.util.concurrent.Executors.newCachedThreadPool;
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertFalse;
@@ -25,11 +26,12 @@ import static junit.framework.Assert.assertTrue;
 import static junit.framework.Assert.fail;
 import static org.junit.Assert.assertThrows;
 
+import jdk.m3.collections.guava.annotations.GwtIncompatible;
+import jdk.m3.collections.guava.annotations.J2ktIncompatible;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import org.jspecify.annotations.NullUnmarked;
 import org.jspecify.annotations.Nullable;
 
@@ -39,38 +41,38 @@ import org.jspecify.annotations.Nullable;
  * @author Sven Mawson
  */
 @NullUnmarked
-public class ListenableFutureTester {
-
+@GwtIncompatible
+@J2ktIncompatible
+final class ListenableFutureTester {
   private final ExecutorService exec;
   private final ListenableFuture<?> future;
   private final CountDownLatch latch;
 
-  public ListenableFutureTester(ListenableFuture<?> future) {
-    this.exec = Executors.newCachedThreadPool();
+  static ListenableFutureTester register(ListenableFuture<?> future) {
+    ListenableFutureTester tester = new ListenableFutureTester(future);
+    tester.setUp();
+    return tester;
+  }
+
+  private ListenableFutureTester(ListenableFuture<?> future) {
+    this.exec = newCachedThreadPool();
     this.future = checkNotNull(future);
     this.latch = new CountDownLatch(1);
   }
 
-  public void setUp() {
-    future.addListener(
-        new Runnable() {
-          @Override
-          public void run() {
-            latch.countDown();
-          }
-        },
-        exec);
+  private void setUp() {
+    future.addListener(latch::countDown, exec);
 
     assertEquals(1, latch.getCount());
     assertFalse(future.isDone());
     assertFalse(future.isCancelled());
   }
 
-  public void tearDown() {
+  void tearDown() {
     exec.shutdown();
   }
 
-  public void testCompletedFuture(@Nullable Object expectedValue)
+  void testCompletedFuture(@Nullable Object expectedValue)
       throws InterruptedException, ExecutionException {
     assertTrue(future.isDone());
     assertFalse(future.isCancelled());
@@ -82,7 +84,7 @@ public class ListenableFutureTester {
     assertEquals(expectedValue, future.get());
   }
 
-  public void testCancelledFuture() throws InterruptedException, ExecutionException {
+  void testCancelledFuture() throws InterruptedException {
     assertTrue(future.isDone());
     assertTrue(future.isCancelled());
 
@@ -90,10 +92,10 @@ public class ListenableFutureTester {
     assertTrue(future.isDone());
     assertTrue(future.isCancelled());
 
-    assertThrows(CancellationException.class, () -> future.get());
+    assertThrows(CancellationException.class, future::get);
   }
 
-  public void testFailedFuture(@Nullable String message) throws InterruptedException {
+  void testFailedFuture(@Nullable String message) throws InterruptedException {
     assertTrue(future.isDone());
     assertFalse(future.isCancelled());
 

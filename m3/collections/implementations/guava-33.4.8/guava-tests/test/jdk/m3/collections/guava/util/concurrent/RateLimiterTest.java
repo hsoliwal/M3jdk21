@@ -16,7 +16,7 @@
 
 package jdk.m3.collections.guava.util.concurrent;
 
-import static com.google.common.truth.Truth.assertThat;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
 import static java.lang.Math.max;
 import static java.lang.reflect.Modifier.isStatic;
 import static java.util.concurrent.TimeUnit.MICROSECONDS;
@@ -24,14 +24,18 @@ import static java.util.concurrent.TimeUnit.MILLISECONDS;
 import static java.util.concurrent.TimeUnit.NANOSECONDS;
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.junit.Assert.assertThrows;
+import static org.mockito.Mockito.mock;
 
+import jdk.m3.collections.guava.annotations.GwtIncompatible;
+import jdk.m3.collections.guava.annotations.J2ktIncompatible;
 import jdk.m3.collections.guava.collect.ImmutableClassToInstanceMap;
 import jdk.m3.collections.guava.collect.ImmutableSet;
-import jdk.m3.collections.guava.collect.Lists;
+import jdk.m3.collections.guava.primitives.Doubles;
 import jdk.m3.collections.guava.testing.NullPointerTester;
 import jdk.m3.collections.guava.testing.NullPointerTester.Visibility;
 import jdk.m3.collections.guava.util.concurrent.RateLimiter.SleepingStopwatch;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
@@ -39,7 +43,6 @@ import java.util.Random;
 import java.util.concurrent.TimeUnit;
 import junit.framework.TestCase;
 import org.jspecify.annotations.NullUnmarked;
-import org.mockito.Mockito;
 
 /**
  * Tests for RateLimiter.
@@ -47,6 +50,8 @@ import org.mockito.Mockito;
  * @author Dimitris Andreou
  */
 @NullUnmarked
+@GwtIncompatible
+@J2ktIncompatible
 public class RateLimiterTest extends TestCase {
   private static final double EPSILON = 1e-8;
 
@@ -67,7 +72,7 @@ public class RateLimiterTest extends TestCase {
   }
 
   public void testDoubleMinValueCanAcquireExactlyOnce() {
-    RateLimiter r = RateLimiter.create(Double.MIN_VALUE, stopwatch);
+    RateLimiter r = RateLimiter.create(Doubles.MIN_POSITIVE_VALUE, stopwatch);
     assertTrue("Unable to acquire initial permit", r.tryAcquire());
     assertFalse("Capable of acquiring an additional permit", r.tryAcquire());
     stopwatch.sleepMillis(Integer.MAX_VALUE);
@@ -150,7 +155,6 @@ public class RateLimiterTest extends TestCase {
     assertThrows(IllegalArgumentException.class, () -> RateLimiter.create(1.0, -1, NANOSECONDS));
   }
 
-  @AndroidIncompatible // difference in String.format rounding?
   public void testWarmUp() {
     RateLimiter limiter = RateLimiter.create(2.0, 4000, MILLISECONDS, 3.0, stopwatch);
     for (int i = 0; i < 8; i++) {
@@ -216,7 +220,6 @@ public class RateLimiterTest extends TestCase {
         "R0.00, R0.20, R0.20, R0.20, R0.20, R0.20, R0.20, R0.20"); // #3
   }
 
-  @AndroidIncompatible // difference in String.format rounding?
   public void testWarmUpAndUpdate() {
     RateLimiter limiter = RateLimiter.create(2.0, 4000, MILLISECONDS, 3.0, stopwatch);
     for (int i = 0; i < 8; i++) {
@@ -424,10 +427,10 @@ public class RateLimiterTest extends TestCase {
       limiter.setRate(rate);
       long burst = measureTotalTimeMillis(limiter, oneSecWorthOfWork, new Random());
       // we allow one second worth of work to go in a burst (i.e. take less than a second)
-      assertTrue(burst <= 1000);
+      assertThat(burst).isAtMost(1000);
       long afterBurst = measureTotalTimeMillis(limiter, oneSecWorthOfWork, new Random());
       // but work beyond that must take at least one second
-      assertTrue(afterBurst >= 1000);
+      assertThat(afterBurst).isAtLeast(1000);
     }
   }
 
@@ -466,8 +469,8 @@ public class RateLimiterTest extends TestCase {
     tester.testInstanceMethods(RateLimiter.create(5.0, stopwatch), Visibility.PACKAGE);
   }
 
-  public void testVerySmallDoubleValues() throws Exception {
-    RateLimiter rateLimiter = RateLimiter.create(Double.MIN_VALUE, stopwatch);
+  public void testVerySmallDoubleValues() {
+    RateLimiter rateLimiter = RateLimiter.create(Doubles.MIN_POSITIVE_VALUE, stopwatch);
     assertTrue("Should acquire initial permit", rateLimiter.tryAcquire());
     assertFalse("Should not acquire additional permit", rateLimiter.tryAcquire());
     stopwatch.sleepMillis(5000);
@@ -487,7 +490,7 @@ public class RateLimiterTest extends TestCase {
   }
 
   private void assertEvents(String... events) {
-    assertEquals(Arrays.toString(events), stopwatch.readEventsAndClear());
+    assertThat(stopwatch.readEventsAndClear()).isEqualTo(Arrays.toString(events));
   }
 
   /**
@@ -496,10 +499,10 @@ public class RateLimiterTest extends TestCase {
    */
   static class FakeStopwatch extends SleepingStopwatch {
     long instant = 0L;
-    final List<String> events = Lists.newArrayList();
+    final List<String> events = new ArrayList<>();
 
     @Override
-    public long readMicros() {
+    protected long readMicros() {
       return NANOSECONDS.toMicros(instant);
     }
 
@@ -509,7 +512,7 @@ public class RateLimiterTest extends TestCase {
 
     void sleepMicros(String caption, long micros) {
       instant += MICROSECONDS.toNanos(micros);
-      events.add(caption + String.format(Locale.ROOT, "%3.2f", (micros / 1000000.0)));
+      events.add(caption + String.format(Locale.ROOT, "%3.2f", micros / 1000000.0));
     }
 
     @Override
@@ -533,7 +536,7 @@ public class RateLimiterTest extends TestCase {
 
   @AndroidIncompatible // Mockito loses its ability to mock doGetRate as of Android 21
   public void testMockingMockito() throws Exception {
-    RateLimiter mock = Mockito.mock(RateLimiter.class);
+    RateLimiter mock = mock(RateLimiter.class);
     for (Method method : RateLimiter.class.getMethods()) {
       if (!isStatic(method.getModifiers())
           && !NOT_WORKING_ON_MOCKS.contains(method.getName())

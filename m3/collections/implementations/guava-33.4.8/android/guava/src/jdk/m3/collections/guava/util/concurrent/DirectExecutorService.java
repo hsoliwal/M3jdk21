@@ -17,15 +17,13 @@ package jdk.m3.collections.guava.util.concurrent;
 import static java.util.concurrent.TimeUnit.NANOSECONDS;
 
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
-import jdk.m3.collections.guava.annotations.J2ktIncompatible;
+import jdk.m3.collections.guava.collect.ImmutableList;
 import com.google.errorprone.annotations.concurrent.GuardedBy;
-import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.RejectedExecutionException;
 import java.util.concurrent.TimeUnit;
 
 /** See newDirectExecutorService javadoc for behavioral notes. */
-@J2ktIncompatible // Emulated
 @GwtIncompatible
 final class DirectExecutorService extends AbstractListeningExecutorService {
 
@@ -76,7 +74,7 @@ final class DirectExecutorService extends AbstractListeningExecutorService {
   @Override
   public List<Runnable> shutdownNow() {
     shutdown();
-    return Collections.emptyList();
+    return ImmutableList.of();
   }
 
   @Override

@@ -16,7 +16,9 @@
 
 package jdk.m3.collections.guava.eventbus;
 
-import jdk.m3.collections.guava.collect.Lists;
+import static jdk.m3.collections.guava.truth.Truth.assertWithMessage;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executor;
 import junit.framework.TestCase;
@@ -60,7 +62,7 @@ public class AsyncEventBusTest extends TestCase {
     tasks.get(0).run();
 
     assertEquals("One event should be delivered.", 1, events.size());
-    assertEquals("Correct string should be delivered.", EVENT, events.get(0));
+    assertWithMessage("Correct string should be delivered.").that(events.get(0)).isEqualTo(EVENT);
   }
 
   /**
@@ -70,7 +72,7 @@ public class AsyncEventBusTest extends TestCase {
    * @author cbiffle
    */
   public static class FakeExecutor implements Executor {
-    List<Runnable> tasks = Lists.newArrayList();
+    List<Runnable> tasks = new ArrayList<>();
 
     @Override
     public void execute(Runnable task) {

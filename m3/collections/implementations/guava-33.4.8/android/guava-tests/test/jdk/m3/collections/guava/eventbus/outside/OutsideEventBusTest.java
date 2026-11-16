@@ -16,6 +16,8 @@
 
 package jdk.m3.collections.guava.eventbus.outside;
 
+import static jdk.m3.collections.guava.truth.Truth.assertWithMessage;
+
 import jdk.m3.collections.guava.eventbus.EventBus;
 import jdk.m3.collections.guava.eventbus.Subscribe;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -35,8 +37,8 @@ public class OutsideEventBusTest extends TestCase {
    * it can fail here.
    */
   public void testAnonymous() {
-    final AtomicReference<String> holder = new AtomicReference<>();
-    final AtomicInteger deliveries = new AtomicInteger();
+    AtomicReference<String> holder = new AtomicReference<>();
+    AtomicInteger deliveries = new AtomicInteger();
     EventBus bus = new EventBus();
     bus.register(
         new Object() {
@@ -51,6 +53,6 @@ public class OutsideEventBusTest extends TestCase {
     bus.post(EVENT);
 
     assertEquals("Only one event should be delivered.", 1, deliveries.get());
-    assertEquals("Correct string should be delivered.", EVENT, holder.get());
+    assertWithMessage("Correct string should be delivered.").that(holder.get()).isEqualTo(EVENT);
   }
 }

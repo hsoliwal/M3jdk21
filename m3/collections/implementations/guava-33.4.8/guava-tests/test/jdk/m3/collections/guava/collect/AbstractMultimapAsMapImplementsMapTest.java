@@ -16,7 +16,8 @@
 
 package jdk.m3.collections.guava.collect;
 
-import static jdk.m3.collections.guava.collect.ReflectionFreeAssertThrows.assertThrows;
+import static jdk.m3.collections.guava.collect.Lists.newArrayList;
+import static org.junit.Assert.assertThrows;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.collect.testing.MapInterfaceTest;
@@ -35,12 +36,12 @@ import org.jspecify.annotations.NullMarked;
 public abstract class AbstractMultimapAsMapImplementsMapTest
     extends MapInterfaceTest<String, Collection<Integer>> {
 
-  public AbstractMultimapAsMapImplementsMapTest(
+  AbstractMultimapAsMapImplementsMapTest(
       boolean modifiable, boolean allowsNulls, boolean supportsIteratorRemove) {
     super(allowsNulls, allowsNulls, false, modifiable, modifiable, supportsIteratorRemove);
   }
 
-  protected void populate(Multimap<String, Integer> multimap) {
+  void populate(Multimap<String, Integer> multimap) {
     multimap.put("one", 1);
     multimap.put("two", 2);
     multimap.put("two", 22);
@@ -50,13 +51,13 @@ public abstract class AbstractMultimapAsMapImplementsMapTest
   }
 
   @Override
-  protected String getKeyNotInPopulatedMap() throws UnsupportedOperationException {
+  protected String getKeyNotInPopulatedMap() {
     return "zero";
   }
 
   @Override
-  protected Collection<Integer> getValueNotInPopulatedMap() throws UnsupportedOperationException {
-    return Lists.newArrayList(0);
+  protected Collection<Integer> getValueNotInPopulatedMap() {
+    return newArrayList(0);
   }
 
   /**
@@ -67,16 +68,16 @@ public abstract class AbstractMultimapAsMapImplementsMapTest
    */
   @Override
   public void testRemove() {
-    final Map<String, Collection<Integer>> map;
+    Map<String, Collection<Integer>> map;
     try {
       map = makePopulatedMap();
     } catch (UnsupportedOperationException e) {
       return;
     }
-    final String keyToRemove = map.keySet().iterator().next();
+    String keyToRemove = map.keySet().iterator().next();
     if (supportsRemove) {
       int initialSize = map.size();
-      map.get(keyToRemove);
+      // var oldValue = map.get(keyToRemove);
       map.remove(keyToRemove);
       // This line doesn't hold - see the Javadoc comments above.
       // assertEquals(expectedValue, oldValue);

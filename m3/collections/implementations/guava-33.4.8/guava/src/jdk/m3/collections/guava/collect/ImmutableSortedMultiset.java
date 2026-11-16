@@ -16,6 +16,8 @@ package jdk.m3.collections.guava.collect;
 
 import static jdk.m3.collections.guava.base.Preconditions.checkArgument;
 import static jdk.m3.collections.guava.base.Preconditions.checkNotNull;
+import static jdk.m3.collections.guava.collect.Lists.newArrayList;
+import static jdk.m3.collections.guava.collect.Lists.newArrayListWithCapacity;
 
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
 import jdk.m3.collections.guava.annotations.J2ktIncompatible;
@@ -25,6 +27,7 @@ import com.google.errorprone.annotations.concurrent.LazyInit;
 import java.io.InvalidObjectException;
 import java.io.ObjectInputStream;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
@@ -170,7 +173,7 @@ public abstract class ImmutableSortedMultiset<E> extends ImmutableMultiset<E>
   public static <E extends Comparable<? super E>> ImmutableSortedMultiset<E> of(
       E e1, E e2, E e3, E e4, E e5, E e6, E... remaining) {
     int size = remaining.length + 6;
-    List<E> all = Lists.newArrayListWithCapacity(size);
+    List<E> all = newArrayListWithCapacity(size);
     Collections.addAll(all, e1, e2, e3, e4, e5, e6);
     Collections.addAll(all, remaining);
     return copyOf(Ordering.natural(), all);
@@ -268,7 +271,7 @@ public abstract class ImmutableSortedMultiset<E> extends ImmutableMultiset<E>
         }
       }
     }
-    elements = Lists.newArrayList(elements); // defensive copy
+    elements = newArrayList(elements); // defensive copy
     TreeMultiset<E> sortedCopy = TreeMultiset.create(checkNotNull(comparator));
     Iterables.addAll(sortedCopy, elements);
     return copyOfSortedEntries(comparator, sortedCopy.entrySet());
@@ -290,7 +293,7 @@ public abstract class ImmutableSortedMultiset<E> extends ImmutableMultiset<E>
    */
   public static <E> ImmutableSortedMultiset<E> copyOfSorted(SortedMultiset<E> sortedMultiset) {
     return copyOfSortedEntries(
-        sortedMultiset.comparator(), Lists.newArrayList(sortedMultiset.entrySet()));
+        sortedMultiset.comparator(), new ArrayList<>(sortedMultiset.entrySet()));
   }
 
   private static <E> ImmutableSortedMultiset<E> copyOfSortedEntries(
@@ -338,10 +341,11 @@ public abstract class ImmutableSortedMultiset<E> extends ImmutableMultiset<E>
   public ImmutableSortedMultiset<E> descendingMultiset() {
     ImmutableSortedMultiset<E> result = descendingMultiset;
     if (result == null) {
-      return descendingMultiset =
-          this.isEmpty()
-              ? emptyMultiset(Ordering.from(comparator()).reverse())
-              : new DescendingImmutableSortedMultiset<E>(this);
+      result =
+          descendingMultiset =
+              this.isEmpty()
+                  ? emptyMultiset(Ordering.from(comparator()).reverse())
+                  : new DescendingImmutableSortedMultiset<E>(this);
     }
     return result;
   }
@@ -382,7 +386,7 @@ public abstract class ImmutableSortedMultiset<E> extends ImmutableMultiset<E>
   public abstract ImmutableSortedMultiset<E> headMultiset(E upperBound, BoundType boundType);
 
   @Override
-  public ImmutableSortedMultiset<E> subMultiset(
+  public final ImmutableSortedMultiset<E> subMultiset(
       E lowerBound, BoundType lowerBoundType, E upperBound, BoundType upperBoundType) {
     checkArgument(
         comparator().compare(lowerBound, upperBound) <= 0,
@@ -458,7 +462,7 @@ public abstract class ImmutableSortedMultiset<E> extends ImmutableMultiset<E>
      * ImmutableSortedMultiset#orderedBy(Comparator)}.
      */
     public Builder(Comparator<? super E> comparator) {
-      super(TreeMultiset.<E>create(checkNotNull(comparator)));
+      super(TreeMultiset.create(checkNotNull(comparator)));
     }
 
     /**
@@ -590,6 +594,8 @@ public abstract class ImmutableSortedMultiset<E> extends ImmutableMultiset<E>
       }
       return builder.build();
     }
+
+    private static final long serialVersionUID = -1602158873381216563L;
   }
 
   @Override

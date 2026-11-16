@@ -23,7 +23,7 @@ import jdk.m3.collections.guava.annotations.GwtCompatible;
  *
  * @author Chris Povirk
  */
-@GwtCompatible(emulated = true)
+@GwtCompatible
 abstract class ForwardingImmutableSet<E> {
   private ForwardingImmutableSet() {}
 }

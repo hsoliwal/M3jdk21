@@ -16,8 +16,11 @@
 
 package jdk.m3.collections.guava.net;
 
-import static com.google.common.truth.Truth.assertThat;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
+import static org.junit.Assert.assertThrows;
 
+import jdk.m3.collections.guava.annotations.GwtIncompatible;
+import jdk.m3.collections.guava.annotations.J2ktIncompatible;
 import jdk.m3.collections.guava.collect.ImmutableList;
 import jdk.m3.collections.guava.testing.EqualsTester;
 import jdk.m3.collections.guava.testing.NullPointerTester;
@@ -34,6 +37,8 @@ import org.jspecify.annotations.NullUnmarked;
  * @author Craig Berry
  */
 @NullUnmarked
+@GwtIncompatible
+@J2ktIncompatible
 public final class HostSpecifierTest extends TestCase {
 
   private static final ImmutableList<String> GOOD_IPS =
@@ -87,32 +92,24 @@ public final class HostSpecifierTest extends TestCase {
   }
 
   public void testNulls() {
-    final NullPointerTester tester = new NullPointerTester();
+    NullPointerTester tester = new NullPointerTester();
 
     tester.testAllPublicStaticMethods(HostSpecifier.class);
     tester.testAllPublicInstanceMethods(HostSpecifier.fromValid("google.com"));
   }
 
-  private void assertGood(String spec) throws ParseException {
+  private static void assertGood(String spec) throws ParseException {
     // Throws exception if not working correctly
     HostSpecifier unused = HostSpecifier.fromValid(spec);
     unused = HostSpecifier.from(spec);
     assertTrue(HostSpecifier.isValid(spec));
   }
 
-  private void assertBad(String spec) {
-    try {
-      HostSpecifier.fromValid(spec);
-      fail("Should have thrown IllegalArgumentException: " + spec);
-    } catch (IllegalArgumentException expected) {
-    }
+  private static void assertBad(String spec) {
+    assertThrows(IllegalArgumentException.class, () -> HostSpecifier.fromValid(spec));
 
-    try {
-      HostSpecifier.from(spec);
-      fail("Should have thrown ParseException: " + spec);
-    } catch (ParseException expected) {
-      assertThat(expected).hasCauseThat().isInstanceOf(IllegalArgumentException.class);
-    }
+    ParseException expected = assertThrows(ParseException.class, () -> HostSpecifier.from(spec));
+    assertThat(expected).hasCauseThat().isInstanceOf(IllegalArgumentException.class);
 
     assertFalse(HostSpecifier.isValid(spec));
   }

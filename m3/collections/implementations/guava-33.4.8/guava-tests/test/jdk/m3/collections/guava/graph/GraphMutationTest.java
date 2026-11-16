@@ -16,14 +16,15 @@
 
 package jdk.m3.collections.guava.graph;
 
-import static com.google.common.truth.Truth.assertThat;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
+import static java.util.Collections.shuffle;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 import java.util.RandomAccess;
 import org.jspecify.annotations.NullUnmarked;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
@@ -33,10 +34,20 @@ import org.junit.runners.JUnit4;
 
 @NullUnmarked
 public final class GraphMutationTest {
-  private static final int NUM_TRIALS = 50;
-  private static final int NUM_NODES = 100;
-  private static final int NUM_EDGES = 1000;
-  private static final int NODE_POOL_SIZE = 1000; // must be >> NUM_NODES
+  private static final int NUM_TRIALS = isAndroid() ? 10 : 50;
+  private static final int NUM_NODES = isAndroid() ? 20 : 100;
+  private static final int NUM_EDGES = isAndroid() ? 100 : 1000;
+  private static final int NODE_POOL_SIZE = isAndroid() ? 200 : 1000; // must be >> NUM_NODES
+
+  @BeforeClass
+  public static void checkGraphSize() {
+    /*
+     * We ensure that NUM_EDGES is possible for NUM_NODES for both directed and undirected graphs.
+     * Undirected graphs allow for fewer edges, so we check against the number possible there.
+     */
+    long maxEdges = (long) NUM_NODES * (NUM_NODES + 1) / 2;
+    assertThat((long) NUM_EDGES).isAtMost(maxEdges);
+  }
 
   @Test
   public void directedGraph() {
@@ -71,7 +82,7 @@ public final class GraphMutationTest {
       assertThat(graph.edges()).hasSize(NUM_EDGES);
       AbstractGraphTest.validateGraph(graph);
 
-      Collections.shuffle(edgeList, gen);
+      shuffle(edgeList, gen);
       int numEdgesToRemove = gen.nextInt(NUM_EDGES);
       for (int i = 0; i < numEdgesToRemove; ++i) {
         EndpointPair<Integer> edge = edgeList.get(i);
@@ -82,7 +93,7 @@ public final class GraphMutationTest {
       assertThat(graph.edges()).hasSize(NUM_EDGES - numEdgesToRemove);
       AbstractGraphTest.validateGraph(graph);
 
-      Collections.shuffle(nodeList, gen);
+      shuffle(nodeList, gen);
       int numNodesToRemove = gen.nextInt(NUM_NODES);
       for (int i = 0; i < numNodesToRemove; ++i) {
         assertThat(graph.removeNode(nodeList.get(i))).isTrue();
@@ -100,11 +111,11 @@ public final class GraphMutationTest {
       assertThat(graph.edges()).isEmpty(); // no edges can remain if there's no nodes
       AbstractGraphTest.validateGraph(graph);
 
-      Collections.shuffle(nodeList, gen);
+      shuffle(nodeList, gen);
       for (Integer node : nodeList) {
         assertThat(graph.addNode(node)).isTrue();
       }
-      Collections.shuffle(edgeList, gen);
+      shuffle(edgeList, gen);
       for (EndpointPair<Integer> edge : edgeList) {
         assertThat(graph.putEdge(edge.nodeU(), edge.nodeV())).isTrue();
       }
@@ -117,5 +128,9 @@ public final class GraphMutationTest {
 
   private static <L extends List<T> & RandomAccess, T> T getRandomElement(L list, Random gen) {
     return list.get(gen.nextInt(list.size()));
+  }
+
+  private static boolean isAndroid() {
+    return System.getProperty("java.runtime.name", "").contains("Android");
   }
 }

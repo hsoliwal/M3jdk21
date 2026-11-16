@@ -16,6 +16,8 @@
 
 package jdk.m3.collections.guava.collect;
 
+import static java.lang.Long.parseLong;
+
 import java.util.Random;
 import org.jspecify.annotations.NullUnmarked;
 
@@ -30,7 +32,7 @@ import org.jspecify.annotations.NullUnmarked;
 @NullUnmarked
 public final class SpecialRandom extends Random {
   public static SpecialRandom valueOf(String s) {
-    return (s.length() == 0) ? new SpecialRandom() : new SpecialRandom(Long.parseLong(s));
+    return s.isEmpty() ? new SpecialRandom() : new SpecialRandom(parseLong(s));
   }
 
   private final boolean hasSeed;

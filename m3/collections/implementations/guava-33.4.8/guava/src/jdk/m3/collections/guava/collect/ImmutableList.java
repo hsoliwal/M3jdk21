@@ -21,8 +21,12 @@ import static jdk.m3.collections.guava.base.Preconditions.checkElementIndex;
 import static jdk.m3.collections.guava.base.Preconditions.checkNotNull;
 import static jdk.m3.collections.guava.base.Preconditions.checkPositionIndexes;
 import static jdk.m3.collections.guava.collect.CollectPreconditions.checkNonnegative;
+import static jdk.m3.collections.guava.collect.Lists.equalsImpl;
+import static jdk.m3.collections.guava.collect.Lists.indexOfImpl;
+import static jdk.m3.collections.guava.collect.Lists.lastIndexOfImpl;
 import static jdk.m3.collections.guava.collect.ObjectArrays.checkElementsNotNull;
 import static jdk.m3.collections.guava.collect.RegularImmutableList.EMPTY;
+import static java.lang.System.arraycopy;
 import static java.util.Objects.requireNonNull;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
@@ -60,8 +64,11 @@ import org.jspecify.annotations.Nullable;
  * @author Kevin Bourrillion
  * @since 2.0
  */
-@GwtCompatible(serializable = true, emulated = true)
-@SuppressWarnings("serial") // we're overriding default serialization
+@GwtCompatible
+@SuppressWarnings({
+  "serial", // we're overriding default serialization
+  "TooManyParameters",
+})
 public abstract class ImmutableList<E> extends ImmutableCollection<E>
     implements List<E>, RandomAccess {
 
@@ -220,7 +227,7 @@ public abstract class ImmutableList<E> extends ImmutableCollection<E>
     array[9] = e10;
     array[10] = e11;
     array[11] = e12;
-    System.arraycopy(others, 0, array, 12, others.length);
+    arraycopy(others, 0, array, 12, others.length);
     return construct(array);
   }
 
@@ -259,7 +266,7 @@ public abstract class ImmutableList<E> extends ImmutableCollection<E>
     if (elements instanceof ImmutableCollection) {
       @SuppressWarnings("unchecked") // all supported methods are covariant
       ImmutableList<E> list = ((ImmutableCollection<E>) elements).asList();
-      return list.isPartialView() ? ImmutableList.<E>asImmutableList(list.toArray()) : list;
+      return list.isPartialView() ? asImmutableList(list.toArray()) : list;
     }
     return construct(elements.toArray());
   }
@@ -301,8 +308,8 @@ public abstract class ImmutableList<E> extends ImmutableCollection<E>
 
   /**
    * Returns an immutable list containing the given elements, sorted according to their natural
-   * order. The sorting algorithm used is stable, so elements that compare as equal will stay in the
-   * order in which they appear in the input.
+   * order. The sorting algorithm used is <i>stable</i>, so elements that compare as equal will stay
+   * in the order in which they appear in the input.
    *
    * <p>If your data has no duplicates, or you wish to deduplicate elements, use {@code
    * ImmutableSortedSet.copyOf(elements)}; if you want a {@code List} you can use its {@code
@@ -324,8 +331,8 @@ public abstract class ImmutableList<E> extends ImmutableCollection<E>
 
   /**
    * Returns an immutable list containing the given elements, in sorted order relative to the
-   * specified comparator. The sorting algorithm used is stable, so elements that compare as equal
-   * will stay in the order in which they appear in the input.
+   * specified comparator. The sorting algorithm used is <i>stable</i>, so elements that compare as
+   * equal will stay in the order in which they appear in the input.
    *
    * <p>If your data has no duplicates, or you wish to deduplicate elements, use {@code
    * ImmutableSortedSet.copyOf(comparator, elements)}; if you want a {@code List} you can use its
@@ -399,7 +406,7 @@ public abstract class ImmutableList<E> extends ImmutableCollection<E>
   }
 
   @Override
-  public UnmodifiableListIterator<E> listIterator() {
+  public final UnmodifiableListIterator<E> listIterator() {
     return listIterator(0);
   }
 
@@ -407,7 +414,7 @@ public abstract class ImmutableList<E> extends ImmutableCollection<E>
   public UnmodifiableListIterator<E> listIterator(int index) {
     return new AbstractIndexedListIterator<E>(size(), index) {
       @Override
-      protected E get(int index) {
+      E get(int index) {
         return ImmutableList.this.get(index);
       }
     };
@@ -424,20 +431,18 @@ public abstract class ImmutableList<E> extends ImmutableCollection<E>
 
   @Override
   public int indexOf(@Nullable Object object) {
-    return (object == null) ? -1 : Lists.indexOfImpl(this, object);
+    return (object == null) ? -1 : indexOfImpl(this, object);
   }
 
   @Override
   public int lastIndexOf(@Nullable Object object) {
-    return (object == null) ? -1 : Lists.lastIndexOfImpl(this, object);
+    return (object == null) ? -1 : lastIndexOfImpl(this, object);
   }
 
   @Override
   public boolean contains(@Nullable Object object) {
     return indexOf(object) >= 0;
   }
-
-  // constrain the return type to ImmutableList<E>
 
   /**
    * Returns an immutable list of the elements between the specified {@code fromIndex}, inclusive,
@@ -473,7 +478,7 @@ public abstract class ImmutableList<E> extends ImmutableCollection<E>
     return new SubList(fromIndex, toIndex - fromIndex);
   }
 
-  class SubList extends ImmutableList<E> {
+  private final class SubList extends ImmutableList<E> {
     final transient int offset;
     final transient int length;
 
@@ -609,8 +614,14 @@ public abstract class ImmutableList<E> extends ImmutableCollection<E>
   }
 
   @Override
+  @GwtIncompatible // Spliterator
   public Spliterator<E> spliterator() {
-    return CollectSpliterators.indexed(size(), SPLITERATOR_CHARACTERISTICS, this::get);
+    return spliteratorWithCharacteristics(SPLITERATOR_CHARACTERISTICS);
+  }
+
+  @GwtIncompatible // Spliterator
+  final Spliterator<E> spliteratorWithCharacteristics(int characteristics) {
+    return CollectSpliterators.indexed(size(), characteristics, this::get);
   }
 
   @Override
@@ -634,7 +645,7 @@ public abstract class ImmutableList<E> extends ImmutableCollection<E>
     return (size() <= 1) ? this : new ReverseImmutableList<E>(this);
   }
 
-  private static class ReverseImmutableList<E> extends ImmutableList<E> {
+  private static final class ReverseImmutableList<E> extends ImmutableList<E> {
     private final transient ImmutableList<E> forwardList;
 
     ReverseImmutableList(ImmutableList<E> backingList) {
@@ -704,12 +715,12 @@ public abstract class ImmutableList<E> extends ImmutableCollection<E>
   }
 
   @Override
-  public boolean equals(@Nullable Object obj) {
-    return Lists.equalsImpl(this, obj);
+  public final boolean equals(@Nullable Object obj) {
+    return equalsImpl(this, obj);
   }
 
   @Override
-  public int hashCode() {
+  public final int hashCode() {
     int hashCode = 1;
     int n = size();
     for (int i = 0; i < n; i++) {
@@ -726,7 +737,7 @@ public abstract class ImmutableList<E> extends ImmutableCollection<E>
    * implementation types do not leak into the serialized representation.
    */
   @J2ktIncompatible // serialization
-  static class SerializedForm implements Serializable {
+  static final class SerializedForm implements Serializable {
     final Object[] elements;
 
     SerializedForm(Object[] elements) {
@@ -737,7 +748,7 @@ public abstract class ImmutableList<E> extends ImmutableCollection<E>
       return copyOf(elements);
     }
 
-    @GwtIncompatible @J2ktIncompatible private static final long serialVersionUID = 0;
+    @GwtIncompatible private static final long serialVersionUID = 0;
   }
 
   @J2ktIncompatible // serialization
@@ -818,6 +829,10 @@ public abstract class ImmutableList<E> extends ImmutableCollection<E>
 
     private void ensureRoomFor(int newElements) {
       @Nullable Object[] contents = this.contents;
+      // Avoid re-evaluating growth policy on a proven in-bounds, unshared array append.
+      if (!copyOnWrite && newElements >= 0 && newElements <= contents.length - size) {
+        return;
+      }
       int newCapacity = expandedCapacity(contents.length, size + newElements);
       // expandedCapacity handles the overflow case
       if (contents.length < newCapacity || copyOnWrite) {
@@ -867,7 +882,7 @@ public abstract class ImmutableList<E> extends ImmutableCollection<E>
        * We uphold that promise here because our callers promise that `elements` will not contain
        * nulls in its first `n` elements.
        */
-      System.arraycopy(elements, 0, contents, size, n);
+      arraycopy(elements, 0, contents, size, n);
       size += n;
     }
 

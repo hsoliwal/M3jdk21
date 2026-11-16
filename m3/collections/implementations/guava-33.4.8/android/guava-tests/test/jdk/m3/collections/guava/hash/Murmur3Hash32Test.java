@@ -16,12 +16,14 @@
 
 package jdk.m3.collections.guava.hash;
 
+import static jdk.m3.collections.guava.hash.Funnels.byteArrayFunnel;
 import static jdk.m3.collections.guava.hash.Hashing.murmur3_32;
 import static jdk.m3.collections.guava.hash.Hashing.murmur3_32_fixed;
 import static java.nio.charset.StandardCharsets.UTF_16;
 import static java.nio.charset.StandardCharsets.UTF_16LE;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
+import jdk.m3.collections.guava.annotations.J2ktIncompatible;
 import jdk.m3.collections.guava.hash.HashTestUtils.HashFn;
 import java.nio.charset.Charset;
 import java.util.Random;
@@ -30,6 +32,7 @@ import org.jspecify.annotations.NullUnmarked;
 
 /** Tests for {@link Murmur3_32HashFunction}. */
 @NullUnmarked
+@J2ktIncompatible
 public class Murmur3Hash32Test extends TestCase {
   public void testKnownIntegerInputs() {
     assertHash(593689054, murmur3_32().hashInt(0));
@@ -81,7 +84,7 @@ public class Murmur3Hash32Test extends TestCase {
   }
 
   @SuppressWarnings("deprecation")
-  private void assertStringHash(int expected, String string, Charset charset) {
+  private static void assertStringHash(int expected, String string, Charset charset) {
     if (allBmp(string)) {
       assertHash(expected, murmur3_32().hashString(string, charset));
     }
@@ -94,7 +97,7 @@ public class Murmur3Hash32Test extends TestCase {
     assertHash(expected, murmur3_32_fixed().newHasher().putBytes(string.getBytes(charset)).hash());
   }
 
-  private boolean allBmp(String string) {
+  private static boolean allBmp(String string) {
     // Ordinarily we'd use something like i += Character.charCount(string.codePointAt(i)) here. But
     // we can get away with i++ because the whole point of this method is to return false if we find
     // a code point that doesn't fit in a char.
@@ -164,7 +167,7 @@ public class Murmur3Hash32Test extends TestCase {
           @Override
           public byte[] hash(byte[] input, int seed) {
             Hasher hasher = murmur3_32(seed).newHasher();
-            Funnels.byteArrayFunnel().funnel(input, hasher);
+            byteArrayFunnel().funnel(input, hasher);
             return hasher.hash().asBytes();
           }
         };

@@ -53,7 +53,7 @@ class MapIteratorCache<K, V> {
    * while writing to it in another. All it does is help with _reading_ from multiple threads
    * concurrently. For more information, see AbstractNetworkTest.concurrentIteration.
    */
-  private transient volatile @Nullable Entry<K, V> cacheEntry;
+  private volatile @Nullable Entry<K, V> cacheEntry;
 
   MapIteratorCache(Map<K, V> backingMap) {
     this.backingMap = checkNotNull(backingMap);
@@ -134,6 +134,7 @@ class MapIteratorCache<K, V> {
 
   // Internal methods (package-visible, but treat as only subclass-visible)
 
+  @SuppressWarnings("ReferenceEquality") // see comment below
   @Nullable V getIfCached(@Nullable Object key) {
     Entry<K, V> entry = cacheEntry; // store local reference for thread-safety
 

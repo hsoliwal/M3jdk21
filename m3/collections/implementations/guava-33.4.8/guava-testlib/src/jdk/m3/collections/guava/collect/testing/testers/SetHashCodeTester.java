@@ -26,22 +26,18 @@ import jdk.m3.collections.guava.collect.testing.features.CollectionFeature;
 import jdk.m3.collections.guava.collect.testing.features.CollectionSize;
 import java.lang.reflect.Method;
 import java.util.Collection;
-import org.junit.Ignore;
 
 /**
  * Tests {@link java.util.Set#hashCode}.
  *
  * @author George van den Driessche
  */
-@GwtCompatible(emulated = true)
-@Ignore("test runners must not instantiate and run this directly, only via suites we build")
-// @Ignore affects the Android test runner, which respects JUnit 4 annotations on JUnit 3 tests.
-@SuppressWarnings("JUnit4ClassUsedInJUnit3")
+@GwtCompatible
 public class SetHashCodeTester<E> extends AbstractSetTester<E> {
   public void testHashCode() {
     int expectedHashCode = 0;
     for (E element : getSampleElements()) {
-      expectedHashCode += ((element == null) ? 0 : element.hashCode());
+      expectedHashCode += (element == null) ? 0 : element.hashCode();
     }
     assertEquals(
         "A Set's hashCode() should be the sum of those of its elements.",
@@ -55,7 +51,7 @@ public class SetHashCodeTester<E> extends AbstractSetTester<E> {
     Collection<E> elements = getSampleElements(getNumElements() - 1);
     int expectedHashCode = 0;
     for (E element : elements) {
-      expectedHashCode += ((element == null) ? 0 : element.hashCode());
+      expectedHashCode += (element == null) ? 0 : element.hashCode();
     }
 
     elements.add(null);

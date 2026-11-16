@@ -21,14 +21,14 @@ import static jdk.m3.collections.guava.base.CaseFormat.LOWER_HYPHEN;
 import static jdk.m3.collections.guava.base.CaseFormat.LOWER_UNDERSCORE;
 import static jdk.m3.collections.guava.base.CaseFormat.UPPER_CAMEL;
 import static jdk.m3.collections.guava.base.CaseFormat.UPPER_UNDERSCORE;
-import static com.google.common.truth.Truth.assertThat;
-import static com.google.common.truth.Truth.assertWithMessage;
+import static jdk.m3.collections.guava.testing.SerializableTester.reserializeAndAssert;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
+import static jdk.m3.collections.guava.truth.Truth.assertWithMessage;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
 import jdk.m3.collections.guava.annotations.J2ktIncompatible;
 import jdk.m3.collections.guava.testing.NullPointerTester;
-import jdk.m3.collections.guava.testing.SerializableTester;
 import junit.framework.TestCase;
 import org.jspecify.annotations.NullUnmarked;
 
@@ -37,7 +37,7 @@ import org.jspecify.annotations.NullUnmarked;
  *
  * @author Mike Bostock
  */
-@GwtCompatible(emulated = true)
+@GwtCompatible
 @NullUnmarked
 public class CaseFormatTest extends TestCase {
 
@@ -228,7 +228,7 @@ public class CaseFormatTest extends TestCase {
   public void testConverter_serialization() {
     for (CaseFormat outer : CaseFormat.values()) {
       for (CaseFormat inner : CaseFormat.values()) {
-        SerializableTester.reserializeAndAssert(outer.converterTo(inner));
+        reserializeAndAssert(outer.converterTo(inner));
       }
     }
   }

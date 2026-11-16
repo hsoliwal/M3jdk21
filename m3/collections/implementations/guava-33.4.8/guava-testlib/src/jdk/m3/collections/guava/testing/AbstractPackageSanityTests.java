@@ -18,25 +18,26 @@ package jdk.m3.collections.guava.testing;
 
 import static jdk.m3.collections.guava.base.Predicates.and;
 import static jdk.m3.collections.guava.base.Predicates.not;
+import static jdk.m3.collections.guava.collect.Iterables.filter;
+import static jdk.m3.collections.guava.collect.Maps.newTreeMap;
 import static jdk.m3.collections.guava.testing.AbstractPackageSanityTests.Chopper.suffix;
+import static jdk.m3.collections.guava.testing.SerializableTester.reserialize;
+import static jdk.m3.collections.guava.testing.SerializableTester.reserializeAndAssert;
+import static java.util.Collections.sort;
 
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
 import jdk.m3.collections.guava.annotations.J2ktIncompatible;
 import jdk.m3.collections.guava.annotations.VisibleForTesting;
-import jdk.m3.collections.guava.base.Optional;
 import jdk.m3.collections.guava.base.Predicate;
 import jdk.m3.collections.guava.collect.HashMultimap;
 import jdk.m3.collections.guava.collect.ImmutableList;
-import jdk.m3.collections.guava.collect.Iterables;
-import jdk.m3.collections.guava.collect.Lists;
-import jdk.m3.collections.guava.collect.Maps;
 import jdk.m3.collections.guava.collect.Multimap;
-import jdk.m3.collections.guava.collect.Sets;
 import jdk.m3.collections.guava.reflect.ClassPath;
 import jdk.m3.collections.guava.testing.NullPointerTester.Visibility;
 import com.google.j2objc.annotations.J2ObjCIncompatible;
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Locale;
@@ -45,6 +46,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import junit.framework.TestCase;
 import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 import org.junit.Test;
 
 /**
@@ -196,9 +198,9 @@ public abstract class AbstractPackageSanityTests extends TestCase {
           Object instance = tester.instantiate(classToTest);
           if (instance != null) {
             if (isEqualsDefined(classToTest)) {
-              SerializableTester.reserializeAndAssert(instance);
+              reserializeAndAssert(instance);
             } else {
-              SerializableTester.reserialize(instance);
+              reserialize(instance);
             }
           }
         } catch (Throwable e) {
@@ -234,15 +236,6 @@ public abstract class AbstractPackageSanityTests extends TestCase {
   @Test
   public void testNulls() throws Exception {
     for (Class<?> classToTest : findClassesToTest(loadClassesInPackage(), NULL_TEST_METHOD_NAMES)) {
-      if (classToTest.getSimpleName().equals("ReflectionFreeAssertThrows")) {
-        /*
-         * These classes handle null properly but throw IllegalArgumentException for the default
-         * Class argument that this test uses. Normally we'd fix that by declaring a
-         * ReflectionFreeAssertThrowsTest with a testNulls method, but that's annoying to have to do
-         * for a package-private utility class. So we skip the class entirely instead.
-         */
-        continue;
-      }
       try {
         tester.doTestNulls(classToTest, visibility);
       } catch (Throwable e) {
@@ -336,20 +329,20 @@ public abstract class AbstractPackageSanityTests extends TestCase {
    * is {@code explicitTestNames}.
    */
   @VisibleForTesting
-  List<Class<?>> findClassesToTest(
+  final List<Class<?>> findClassesToTest(
       Iterable<? extends Class<?>> classes, Iterable<String> explicitTestNames) {
     // "a.b.Foo" -> a.b.Foo.class
-    TreeMap<String, Class<?>> classMap = Maps.newTreeMap();
+    TreeMap<String, Class<?>> classMap = newTreeMap();
     for (Class<?> cls : classes) {
       classMap.put(cls.getName(), cls);
     }
     // Foo.class -> [FooTest.class, FooTests.class, FooTestSuite.class, ...]
     Multimap<Class<?>, Class<?>> testClasses = HashMultimap.create();
-    LinkedHashSet<Class<?>> candidateClasses = Sets.newLinkedHashSet();
+    LinkedHashSet<Class<?>> candidateClasses = new LinkedHashSet<>();
     for (Class<?> cls : classes) {
-      Optional<String> testedClassName = TEST_SUFFIX.chop(cls.getName());
-      if (testedClassName.isPresent()) {
-        Class<?> testedClass = classMap.get(testedClassName.get());
+      String testedClassName = TEST_SUFFIX.chop(cls.getName());
+      if (testedClassName != null) {
+        Class<?> testedClass = classMap.get(testedClassName);
         if (testedClass != null) {
           testClasses.put(testedClass, cls);
         }
@@ -357,9 +350,9 @@ public abstract class AbstractPackageSanityTests extends TestCase {
         candidateClasses.add(cls);
       }
     }
-    List<Class<?>> result = Lists.newArrayList();
+    List<Class<?>> result = new ArrayList<>();
     NEXT_CANDIDATE:
-    for (Class<?> candidate : Iterables.filter(candidateClasses, classFilter)) {
+    for (Class<?> candidate : filter(candidateClasses, classFilter)) {
       for (Class<?> testClass : testClasses.get(candidate)) {
         if (hasTest(testClass, explicitTestNames)) {
           // covered by explicit test
@@ -372,7 +365,7 @@ public abstract class AbstractPackageSanityTests extends TestCase {
   }
 
   private List<Class<?>> loadClassesInPackage() throws IOException {
-    List<Class<?>> classes = Lists.newArrayList();
+    List<Class<?>> classes = new ArrayList<>();
     String packageName = getClass().getPackage().getName();
     for (ClassPath.ClassInfo classInfo :
         ClassPath.from(getClass().getClassLoader()).getTopLevelClasses(packageName)) {
@@ -388,6 +381,7 @@ public abstract class AbstractPackageSanityTests extends TestCase {
         classes.add(cls);
       }
     }
+    sort(classes, (a, b) -> a.getName().compareTo(b.getName()));
     return classes;
   }
 
@@ -417,22 +411,23 @@ public abstract class AbstractPackageSanityTests extends TestCase {
       Chopper i = this;
       return new Chopper() {
         @Override
-        Optional<String> chop(String str) {
-          return i.chop(str).or(you.chop(str));
+        @Nullable String chop(String str) {
+          String result = i.chop(str);
+          return result != null ? result : you.chop(str);
         }
       };
     }
 
-    abstract Optional<String> chop(String str);
+    abstract @Nullable String chop(String str);
 
     static Chopper suffix(String suffix) {
       return new Chopper() {
         @Override
-        Optional<String> chop(String str) {
+        @Nullable String chop(String str) {
           if (str.endsWith(suffix)) {
-            return Optional.of(str.substring(0, str.length() - suffix.length()));
+            return str.substring(0, str.length() - suffix.length());
           } else {
-            return Optional.absent();
+            return null;
           }
         }
       };

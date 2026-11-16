@@ -19,7 +19,7 @@ package jdk.m3.collections.guava.collect.testing.testers;
 import static jdk.m3.collections.guava.collect.testing.Helpers.getMethod;
 import static jdk.m3.collections.guava.collect.testing.features.CollectionFeature.ALLOWS_NULL_VALUES;
 import static jdk.m3.collections.guava.collect.testing.features.CollectionSize.ZERO;
-import static jdk.m3.collections.guava.collect.testing.testers.ReflectionFreeAssertThrows.assertThrows;
+import static org.junit.Assert.assertThrows;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
@@ -28,7 +28,6 @@ import jdk.m3.collections.guava.collect.testing.AbstractCollectionTester;
 import jdk.m3.collections.guava.collect.testing.features.CollectionFeature;
 import jdk.m3.collections.guava.collect.testing.features.CollectionSize;
 import java.lang.reflect.Method;
-import org.junit.Ignore;
 
 /**
  * A generic JUnit test which tests creation (typically through a constructor or static factory
@@ -37,10 +36,7 @@ import org.junit.Ignore;
  *
  * @author Chris Povirk
  */
-@GwtCompatible(emulated = true)
-@Ignore("test runners must not instantiate and run this directly, only via suites we build")
-// @Ignore affects the Android test runner, which respects JUnit 4 annotations on JUnit 3 tests.
-@SuppressWarnings("JUnit4ClassUsedInJUnit3")
+@GwtCompatible
 public class CollectionCreationTester<E> extends AbstractCollectionTester<E> {
   @CollectionFeature.Require(ALLOWS_NULL_VALUES)
   @CollectionSize.Require(absent = ZERO)
@@ -55,11 +51,7 @@ public class CollectionCreationTester<E> extends AbstractCollectionTester<E> {
   public void testCreateWithNull_unsupported() {
     E[] array = createArrayWithNullElement();
 
-    assertThrows(
-        NullPointerException.class,
-        () -> {
-          Object unused = getSubjectGenerator().create(array);
-        });
+    assertThrows(NullPointerException.class, () -> getSubjectGenerator().create(array));
   }
 
   /**

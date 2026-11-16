@@ -20,8 +20,8 @@ import static jdk.m3.collections.guava.collect.testing.Helpers.assertEqualIgnori
 import static jdk.m3.collections.guava.collect.testing.Helpers.getMethod;
 import static jdk.m3.collections.guava.collect.testing.features.CollectionFeature.KNOWN_ORDER;
 import static jdk.m3.collections.guava.collect.testing.features.CollectionSize.ZERO;
-import static jdk.m3.collections.guava.collect.testing.testers.ReflectionFreeAssertThrows.assertThrows;
 import static java.util.Arrays.asList;
+import static org.junit.Assert.assertThrows;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
@@ -34,7 +34,6 @@ import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
-import org.junit.Ignore;
 
 /**
  * A generic JUnit test which tests {@code toArray()} operations on a collection. Can't be invoked
@@ -43,10 +42,7 @@ import org.junit.Ignore;
  * @author Kevin Bourrillion
  * @author Chris Povirk
  */
-@GwtCompatible(emulated = true)
-@Ignore("test runners must not instantiate and run this directly, only via suites we build")
-// @Ignore affects the Android test runner, which respects JUnit 4 annotations on JUnit 3 tests.
-@SuppressWarnings("JUnit4ClassUsedInJUnit3")
+@GwtCompatible
 public class CollectionToArrayTester<E> extends AbstractCollectionTester<E> {
   public void testToArray_noArgs() {
     Object[] array = collection.toArray();
@@ -169,12 +165,8 @@ public class CollectionToArrayTester<E> extends AbstractCollectionTester<E> {
 
   @CollectionSize.Require(absent = ZERO)
   public void testToArray_emptyArrayOfWrongTypeForNonEmptyCollection() {
-    assertThrows(
-        ArrayStoreException.class,
-        () -> {
-          WrongType[] array = new WrongType[0];
-          collection.toArray(array);
-        });
+    WrongType[] array = new WrongType[0];
+    assertThrows(ArrayStoreException.class, () -> collection.toArray(array));
   }
 
   @CollectionSize.Require(ZERO)
@@ -186,7 +178,7 @@ public class CollectionToArrayTester<E> extends AbstractCollectionTester<E> {
         collection.toArray(array));
   }
 
-  private void expectArrayContentsAnyOrder(Object[] expected, Object[] actual) {
+  private static void expectArrayContentsAnyOrder(Object[] expected, Object[] actual) {
     assertEqualIgnoringOrder(asList(expected), asList(actual));
   }
 

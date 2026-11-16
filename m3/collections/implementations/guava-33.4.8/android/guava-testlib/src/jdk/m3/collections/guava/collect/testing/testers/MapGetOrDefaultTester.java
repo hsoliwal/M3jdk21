@@ -27,7 +27,6 @@ import jdk.m3.collections.guava.collect.testing.WrongType;
 import jdk.m3.collections.guava.collect.testing.features.CollectionSize;
 import jdk.m3.collections.guava.collect.testing.features.MapFeature;
 import java.util.Map;
-import org.junit.Ignore;
 
 /**
  * A generic JUnit test which tests {@link Map#getOrDefault}. Can't be invoked directly; please see
@@ -36,9 +35,6 @@ import org.junit.Ignore;
  * @author Louis Wasserman
  */
 @GwtCompatible
-@Ignore("test runners must not instantiate and run this directly, only via suites we build")
-// @Ignore affects the Android test runner, which respects JUnit 4 annotations on JUnit 3 tests.
-@SuppressWarnings("JUnit4ClassUsedInJUnit3")
 @IgnoreJRERequirement // We opt into library desugaring for our tests.
 public class MapGetOrDefaultTester<K, V> extends AbstractMapTester<K, V> {
   @CollectionSize.Require(absent = ZERO)

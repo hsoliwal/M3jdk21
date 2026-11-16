@@ -23,7 +23,7 @@ import static jdk.m3.collections.guava.util.concurrent.Uninterruptibles.getUnint
 import static java.util.concurrent.TimeUnit.MILLISECONDS;
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static junit.framework.Assert.assertFalse;
-import static junit.framework.Assert.fail;
+import static org.junit.Assert.assertThrows;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import java.util.concurrent.ExecutionException;
@@ -32,27 +32,17 @@ import java.util.concurrent.TimeoutException;
 import org.jspecify.annotations.Nullable;
 
 /** Methods factored out so that they can be emulated differently in GWT. */
-@GwtCompatible(emulated = true)
+@GwtCompatible
 final class TestPlatform {
   static void verifyGetOnPendingFuture(Future<?> future) {
     checkNotNull(future);
-    try {
-      pseudoTimedGetUninterruptibly(future, 10, MILLISECONDS);
-      fail();
-    } catch (TimeoutException expected) {
-    } catch (ExecutionException e) {
-      throw new AssertionError(e);
-    }
+    assertThrows(
+        TimeoutException.class, () -> pseudoTimedGetUninterruptibly(future, 10, MILLISECONDS));
   }
 
   static void verifyTimedGetOnPendingFuture(Future<?> future) {
-    try {
-      getUninterruptibly(future, 0, SECONDS);
-      fail();
-    } catch (TimeoutException expected) {
-    } catch (ExecutionException e) {
-      throw new AssertionError(e);
-    }
+    checkNotNull(future);
+    assertThrows(TimeoutException.class, () -> getUninterruptibly(future, 0, SECONDS));
   }
 
   static void verifyThreadWasNotInterrupted() {

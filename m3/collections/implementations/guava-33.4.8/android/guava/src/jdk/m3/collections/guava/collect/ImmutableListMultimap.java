@@ -49,7 +49,8 @@ import org.jspecify.annotations.Nullable;
  * @author Jared Levy
  * @since 2.0
  */
-@GwtCompatible(serializable = true, emulated = true)
+@SuppressWarnings("TooManyParameters")
+@GwtCompatible
 public class ImmutableListMultimap<K, V> extends ImmutableMultimap<K, V>
     implements ListMultimap<K, V> {
   /**
@@ -80,7 +81,6 @@ public class ImmutableListMultimap<K, V> extends ImmutableMultimap<K, V>
    *
    * @since 33.2.0 (available since 21.0 in guava-jre)
    */
-  @SuppressWarnings("Java7ApiChecker")
   @IgnoreJRERequirement // Users will use this only if they're already using streams.
   public static <T extends @Nullable Object, K, V>
       Collector<T, ?, ImmutableListMultimap<K, V>> toImmutableListMultimap(
@@ -121,7 +121,6 @@ public class ImmutableListMultimap<K, V> extends ImmutableMultimap<K, V>
    *
    * @since 33.2.0 (available since 21.0 in guava-jre)
    */
-  @SuppressWarnings("Java7ApiChecker")
   @IgnoreJRERequirement // Users will use this only if they're already using streams.
   public static <T extends @Nullable Object, K, V>
       Collector<T, ?, ImmutableListMultimap<K, V>> flatteningToImmutableListMultimap(
@@ -143,14 +142,14 @@ public class ImmutableListMultimap<K, V> extends ImmutableMultimap<K, V>
 
   /** Returns an immutable multimap containing a single entry. */
   public static <K, V> ImmutableListMultimap<K, V> of(K k1, V v1) {
-    ImmutableListMultimap.Builder<K, V> builder = ImmutableListMultimap.builder();
+    ImmutableListMultimap.Builder<K, V> builder = builder();
     builder.put(k1, v1);
     return builder.build();
   }
 
   /** Returns an immutable multimap containing the given entries, in order. */
   public static <K, V> ImmutableListMultimap<K, V> of(K k1, V v1, K k2, V v2) {
-    ImmutableListMultimap.Builder<K, V> builder = ImmutableListMultimap.builder();
+    ImmutableListMultimap.Builder<K, V> builder = builder();
     builder.put(k1, v1);
     builder.put(k2, v2);
     return builder.build();
@@ -158,7 +157,7 @@ public class ImmutableListMultimap<K, V> extends ImmutableMultimap<K, V>
 
   /** Returns an immutable multimap containing the given entries, in order. */
   public static <K, V> ImmutableListMultimap<K, V> of(K k1, V v1, K k2, V v2, K k3, V v3) {
-    ImmutableListMultimap.Builder<K, V> builder = ImmutableListMultimap.builder();
+    ImmutableListMultimap.Builder<K, V> builder = builder();
     builder.put(k1, v1);
     builder.put(k2, v2);
     builder.put(k3, v3);
@@ -168,7 +167,7 @@ public class ImmutableListMultimap<K, V> extends ImmutableMultimap<K, V>
   /** Returns an immutable multimap containing the given entries, in order. */
   public static <K, V> ImmutableListMultimap<K, V> of(
       K k1, V v1, K k2, V v2, K k3, V v3, K k4, V v4) {
-    ImmutableListMultimap.Builder<K, V> builder = ImmutableListMultimap.builder();
+    ImmutableListMultimap.Builder<K, V> builder = builder();
     builder.put(k1, v1);
     builder.put(k2, v2);
     builder.put(k3, v3);
@@ -179,7 +178,7 @@ public class ImmutableListMultimap<K, V> extends ImmutableMultimap<K, V>
   /** Returns an immutable multimap containing the given entries, in order. */
   public static <K, V> ImmutableListMultimap<K, V> of(
       K k1, V v1, K k2, V v2, K k3, V v3, K k4, V v4, K k5, V v5) {
-    ImmutableListMultimap.Builder<K, V> builder = ImmutableListMultimap.builder();
+    ImmutableListMultimap.Builder<K, V> builder = builder();
     builder.put(k1, v1);
     builder.put(k2, v2);
     builder.put(k3, v3);
@@ -436,6 +435,14 @@ public class ImmutableListMultimap<K, V> extends ImmutableMultimap<K, V>
     return new ImmutableListMultimap<>(builder.buildOrThrow(), size);
   }
 
+  /**
+   * An instance created in {@link #readObject} to be returned from {@link #readResolve}. This field
+   * is used only by those methods, and it is never set in a "normal" instance.
+   *
+   * <p>For more background, see {@code ConcurrentHashMultiset.deserializationReplacement}.
+   */
+  private transient @Nullable ImmutableListMultimap<?, ?> deserializationReplacement;
+
   ImmutableListMultimap(ImmutableMap<K, ImmutableList<V>> map, int size) {
     super(map, size);
   }
@@ -448,10 +455,10 @@ public class ImmutableListMultimap<K, V> extends ImmutableMultimap<K, V>
    * parameters used to build this multimap.
    */
   @Override
-  public ImmutableList<V> get(K key) {
+  public final ImmutableList<V> get(K key) {
     // This cast is safe as its type is known in constructor.
     ImmutableList<V> list = (ImmutableList<V>) map.get(key);
-    return (list == null) ? ImmutableList.<V>of() : list;
+    return (list == null) ? ImmutableList.of() : list;
   }
 
   @LazyInit @RetainedWith private transient @Nullable ImmutableListMultimap<V, K> inverse;
@@ -466,9 +473,12 @@ public class ImmutableListMultimap<K, V> extends ImmutableMultimap<K, V>
    * @since 11.0
    */
   @Override
-  public ImmutableListMultimap<V, K> inverse() {
+  public final ImmutableListMultimap<V, K> inverse() {
     ImmutableListMultimap<V, K> result = inverse;
-    return (result == null) ? (inverse = invert()) : result;
+    if (result == null) {
+      result = inverse = invert();
+    }
+    return result;
   }
 
   private ImmutableListMultimap<V, K> invert() {
@@ -513,16 +523,16 @@ public class ImmutableListMultimap<K, V> extends ImmutableMultimap<K, V>
    * @serialData number of distinct keys, and then for each distinct key: the key, the number of
    *     values for that key, and the key's values
    */
-  @GwtIncompatible // java.io.ObjectOutputStream
+  @GwtIncompatible
   @J2ktIncompatible
-  private void writeObject(ObjectOutputStream stream) throws IOException {
+    private void writeObject(ObjectOutputStream stream) throws IOException {
     stream.defaultWriteObject();
     Serialization.writeMultimap(this, stream);
   }
 
-  @GwtIncompatible // java.io.ObjectInputStream
+  @GwtIncompatible
   @J2ktIncompatible
-  private void readObject(ObjectInputStream stream) throws IOException, ClassNotFoundException {
+    private void readObject(ObjectInputStream stream) throws IOException, ClassNotFoundException {
     stream.defaultReadObject();
     int keyCount = stream.readInt();
     if (keyCount < 0) {
@@ -553,8 +563,13 @@ public class ImmutableListMultimap<K, V> extends ImmutableMultimap<K, V>
       throw (InvalidObjectException) new InvalidObjectException(e.getMessage()).initCause(e);
     }
 
-    FieldSettersHolder.MAP_FIELD_SETTER.set(this, tmpMap);
-    FieldSettersHolder.SIZE_FIELD_SETTER.set(this, tmpSize);
+    deserializationReplacement = new ImmutableListMultimap<>(tmpMap, tmpSize);
+  }
+
+  @GwtIncompatible
+  @J2ktIncompatible
+    private Object readResolve() {
+    return requireNonNull(deserializationReplacement); // set by readObject
   }
 
   @GwtIncompatible @J2ktIncompatible private static final long serialVersionUID = 0;

@@ -16,16 +16,23 @@
 
 package jdk.m3.collections.guava.collect;
 
-import static com.google.common.truth.Truth.assertThat;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
 import static java.lang.Math.max;
 import static java.util.Arrays.asList;
+import static org.junit.Assert.assertThrows;
 
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
+import jdk.m3.collections.guava.annotations.J2ktIncompatible;
 import jdk.m3.collections.guava.collect.testing.SetTestSuiteBuilder;
 import jdk.m3.collections.guava.collect.testing.TestStringSetGenerator;
 import jdk.m3.collections.guava.collect.testing.features.CollectionFeature;
 import jdk.m3.collections.guava.collect.testing.features.CollectionSize;
 import jdk.m3.collections.guava.collect.testing.features.Feature;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -46,7 +53,7 @@ public class CompactHashSetTest extends TestCase {
   @AndroidIncompatible // test-suite builders
   public static Test suite() {
     List<Feature<?>> allFeatures =
-        Arrays.<Feature<?>>asList(
+        Arrays.asList(
             CollectionSize.ANY,
             CollectionFeature.ALLOWS_NULL_VALUES,
             CollectionFeature.FAILS_FAST_ON_CONCURRENT_MODIFICATION,
@@ -125,6 +132,27 @@ public class CompactHashSetTest extends TestCase {
       assertThat(set.needsAllocArrays()).isFalse();
       int expectedSize = max(1, i);
       assertThat(set.elements).hasLength(expectedSize);
+    }
+  }
+
+  @J2ktIncompatible
+  @GwtIncompatible // java.io.ObjectInputStream
+  public void testDeserializeWithHugeSize() throws Exception {
+    CompactHashSet<Integer> set = CompactHashSet.create();
+    set.add(1);
+    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+    try (ObjectOutputStream oos = new ObjectOutputStream(baos)) {
+      oos.writeObject(set);
+    }
+    try (ObjectInputStream ois =
+        new ObjectInputStream(new ByteArrayInputStream(baos.toByteArray())) {
+          @Override
+          public int readInt() throws IOException {
+            int unused = super.readInt();
+            return Integer.MAX_VALUE;
+          }
+        }) {
+      assertThrows(IOException.class, ois::readObject);
     }
   }
 }

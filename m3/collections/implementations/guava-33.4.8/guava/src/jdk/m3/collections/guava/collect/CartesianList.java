@@ -19,7 +19,6 @@ import static jdk.m3.collections.guava.base.Preconditions.checkElementIndex;
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
 import jdk.m3.collections.guava.annotations.J2ktIncompatible;
-import jdk.m3.collections.guava.math.IntMath;
 import java.util.AbstractList;
 import java.util.List;
 import java.util.ListIterator;
@@ -34,8 +33,8 @@ import org.jspecify.annotations.Nullable;
 @GwtCompatible
 final class CartesianList<E> extends AbstractList<List<E>> implements RandomAccess {
 
-  private final transient ImmutableList<List<E>> axes;
-  private final transient int[] axesSizeProduct;
+  private final ImmutableList<List<E>> axes;
+  private final int[] axesSizeProduct;
 
   static <E> List<List<E>> create(List<? extends List<? extends E>> lists) {
     ImmutableList.Builder<List<E>> axesBuilder = new ImmutableList.Builder<>(lists.size());
@@ -55,7 +54,7 @@ final class CartesianList<E> extends AbstractList<List<E>> implements RandomAcce
     axesSizeProduct[axes.size()] = 1;
     try {
       for (int i = axes.size() - 1; i >= 0; i--) {
-        axesSizeProduct[i] = IntMath.checkedMultiply(axesSizeProduct[i + 1], axes.get(i).size());
+        axesSizeProduct[i] = Math.multiplyExact(axesSizeProduct[i + 1], axes.get(i).size());
       }
     } catch (ArithmeticException e) {
       throw new IllegalArgumentException(

@@ -16,18 +16,21 @@
 
 package jdk.m3.collections.guava.testing;
 
-import static com.google.common.truth.Truth.assertThat;
+import static jdk.m3.collections.guava.testing.GcFinalization.reachabilityFence;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.assertTrue;
 
-import jdk.m3.collections.guava.testing.GcFinalization.FinalizationPredicate;
 import jdk.m3.collections.guava.util.concurrent.SettableFuture;
 import java.lang.ref.WeakReference;
 import java.util.WeakHashMap;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicBoolean;
-import junit.framework.TestCase;
 import org.jspecify.annotations.NullUnmarked;
 import org.jspecify.annotations.Nullable;
+import org.junit.Test;
 
 /**
  * Tests for {@link GcFinalization}.
@@ -35,20 +38,19 @@ import org.jspecify.annotations.Nullable;
  * @author Martin Buchholz
  * @author mike nonemacher
  */
-@AndroidIncompatible // depends on details of gc
-
 @NullUnmarked
-public class GcFinalizationTest extends TestCase {
+public class GcFinalizationTest {
 
   // ----------------------------------------------------------------
   // Ordinary tests of successful method execution
   // ----------------------------------------------------------------
 
-  public void testAwait_countDownLatch() {
-    final CountDownLatch latch = new CountDownLatch(1);
+  @Test
+  public void await_countDownLatch() {
+    CountDownLatch latch = new CountDownLatch(1);
     Object unused =
         new Object() {
-          @SuppressWarnings({"removal", "Finalize"}) // b/260137033
+          @SuppressWarnings({"removal", "Finalize"}) // b/487687332
           @Override
           protected void finalize() {
             latch.countDown();
@@ -59,11 +61,12 @@ public class GcFinalizationTest extends TestCase {
     assertEquals(0, latch.getCount());
   }
 
-  public void testAwaitDone_future() {
-    final SettableFuture<@Nullable Void> future = SettableFuture.create();
+  @Test
+  public void awaitDone_future() {
+    SettableFuture<@Nullable Void> future = SettableFuture.create();
     Object unused =
         new Object() {
-          @SuppressWarnings({"removal", "Finalize"}) // b/260137033
+          @SuppressWarnings({"removal", "Finalize"}) // b/487687332
           @Override
           protected void finalize() {
             future.set(null);
@@ -75,11 +78,12 @@ public class GcFinalizationTest extends TestCase {
     assertFalse(future.isCancelled());
   }
 
-  public void testAwaitDone_future_cancel() {
-    final SettableFuture<@Nullable Void> future = SettableFuture.create();
+  @Test
+  public void awaitDone_future_cancel() {
+    SettableFuture<@Nullable Void> future = SettableFuture.create();
     Object unused =
         new Object() {
-          @SuppressWarnings({"removal", "Finalize"}) // b/260137033
+          @SuppressWarnings({"removal", "Finalize"}) // b/487687332
           @Override
           protected void finalize() {
             future.cancel(false);
@@ -91,22 +95,22 @@ public class GcFinalizationTest extends TestCase {
     assertTrue(future.isCancelled());
   }
 
-  public void testAwaitClear() {
-    final WeakReference<Object> ref = new WeakReference<>(new Object());
+  @Test
+  public void awaitClear() {
+    WeakReference<Object> ref = createWeakReference();
     GcFinalization.awaitClear(ref);
-    assertNull(ref.get());
+    assertThat(ref.get()).isNull();
   }
 
-  public void testAwaitDone_finalizationPredicate() {
-    final WeakHashMap<Object, Object> map = new WeakHashMap<>();
+  private static WeakReference<Object> createWeakReference() {
+    return new WeakReference<>(new Object());
+  }
+
+  @Test
+  public void awaitDone_finalizationPredicate() {
+    WeakHashMap<Object, Object> map = new WeakHashMap<>();
     map.put(new Object(), Boolean.TRUE);
-    GcFinalization.awaitDone(
-        new FinalizationPredicate() {
-          @Override
-          public boolean isDone() {
-            return map.isEmpty();
-          }
-        });
+    GcFinalization.awaitDone(map::isEmpty);
     assertTrue(map.isEmpty());
   }
 
@@ -115,30 +119,26 @@ public class GcFinalizationTest extends TestCase {
   // Trickier than it looks, because runFinalization swallows interrupts.
   // ----------------------------------------------------------------
 
-  class Interruptenator extends Thread {
+  static final class Interruptenator extends Thread {
     final AtomicBoolean shutdown;
 
-    Interruptenator(final Thread interruptee) {
+    Interruptenator(Thread interruptee) {
       this(interruptee, new AtomicBoolean(false));
     }
 
-    @SuppressWarnings("ThreadPriorityCheck") // TODO: b/175898629 - Consider onSpinWait.
-    Interruptenator(final Thread interruptee, final AtomicBoolean shutdown) {
-      super(
-          new Runnable() {
-            @Override
-            public void run() {
-              while (!shutdown.get()) {
-                interruptee.interrupt();
-                Thread.yield();
-              }
-            }
-          });
+    @SuppressWarnings("ThreadPriorityCheck") // TODO(b/175898629): Consider onSpinWait.
+    Interruptenator(Thread interruptee, AtomicBoolean shutdown) {
+      super(() -> {
+        while (!shutdown.get()) {
+          interruptee.interrupt();
+          Thread.yield();
+        }
+      });
       this.shutdown = shutdown;
       start();
     }
 
-    @SuppressWarnings("ThreadPriorityCheck") // TODO: b/175898629 - Consider onSpinWait.
+    @SuppressWarnings("ThreadPriorityCheck") // TODO(b/175898629): Consider onSpinWait.
     void shutdown() {
       shutdown.set(true);
       while (this.isAlive()) {
@@ -152,10 +152,11 @@ public class GcFinalizationTest extends TestCase {
     assertThat(e).hasCauseThat().isInstanceOf(InterruptedException.class);
   }
 
-  public void testAwait_countDownLatch_interrupted() {
+  @Test
+  public void await_countDownLatch_interrupted() {
     Interruptenator interruptenator = new Interruptenator(Thread.currentThread());
     try {
-      final CountDownLatch latch = new CountDownLatch(1);
+      CountDownLatch latch = new CountDownLatch(1);
       RuntimeException expected =
           assertThrows(RuntimeException.class, () -> GcFinalization.await(latch));
       assertWrapsInterruptedException(expected);
@@ -165,10 +166,11 @@ public class GcFinalizationTest extends TestCase {
     }
   }
 
-  public void testAwaitDone_future_interrupted_interrupted() {
+  @Test
+  public void awaitDone_future_interrupted_interrupted() {
     Interruptenator interruptenator = new Interruptenator(Thread.currentThread());
     try {
-      final SettableFuture<@Nullable Void> future = SettableFuture.create();
+      SettableFuture<@Nullable Void> future = SettableFuture.create();
       RuntimeException expected =
           assertThrows(RuntimeException.class, () -> GcFinalization.awaitDone(future));
       assertWrapsInterruptedException(expected);
@@ -178,33 +180,30 @@ public class GcFinalizationTest extends TestCase {
     }
   }
 
-  public void testAwaitClear_interrupted() {
+  @Test
+  public void awaitClear_interrupted() {
     Interruptenator interruptenator = new Interruptenator(Thread.currentThread());
+    Foo foo = new Foo();
     try {
-      final WeakReference<Object> ref = new WeakReference<Object>(Boolean.TRUE);
+      WeakReference<Object> ref = new WeakReference<>(foo);
       RuntimeException expected =
           assertThrows(RuntimeException.class, () -> GcFinalization.awaitClear(ref));
       assertWrapsInterruptedException(expected);
     } finally {
+      reachabilityFence(foo);
       interruptenator.shutdown();
       Thread.interrupted();
     }
   }
 
-  public void testAwaitDone_finalizationPredicate_interrupted() {
+  private static final class Foo {}
+
+  @Test
+  public void awaitDone_finalizationPredicate_interrupted() {
     Interruptenator interruptenator = new Interruptenator(Thread.currentThread());
     try {
       RuntimeException expected =
-          assertThrows(
-              RuntimeException.class,
-              () ->
-                  GcFinalization.awaitDone(
-                      new FinalizationPredicate() {
-                        @Override
-                        public boolean isDone() {
-                          return false;
-                        }
-                      }));
+          assertThrows(RuntimeException.class, () -> GcFinalization.awaitDone(() -> false));
       assertWrapsInterruptedException(expected);
     } finally {
       interruptenator.shutdown();
@@ -217,17 +216,10 @@ public class GcFinalizationTest extends TestCase {
    * the more direct await* methods, but should be reliable enough in practice to avoid flakiness of
    * this test. (And if it isn't, we'd like to know about it first!)
    */
-  public void testAwaitFullGc() {
-    final CountDownLatch finalizerRan = new CountDownLatch(1);
-    final WeakReference<Object> ref =
-        new WeakReference<Object>(
-            new Object() {
-              @SuppressWarnings({"removal", "Finalize"}) // b/260137033
-              @Override
-              protected void finalize() {
-                finalizerRan.countDown();
-              }
-            });
+  @Test
+  public void awaitFullGc() {
+    CountDownLatch finalizerRan = new CountDownLatch(1);
+    WeakReference<Object> ref = createWeakReferenceWithFinalizer(finalizerRan);
 
     // Don't copy this into your own test!
     // Use e.g. awaitClear or await(CountDownLatch) instead.
@@ -237,6 +229,18 @@ public class GcFinalizationTest extends TestCase {
     GcFinalization.awaitFullGc();
 
     assertEquals(0, finalizerRan.getCount());
-    assertNull(ref.get());
+    assertThat(ref.get()).isNull();
+  }
+
+  private static WeakReference<Object> createWeakReferenceWithFinalizer(
+      CountDownLatch finalizerRan) {
+    return new WeakReference<>(
+        new Object() {
+          @SuppressWarnings({"removal", "Finalize"}) // b/487687332
+          @Override
+          protected void finalize() {
+            finalizerRan.countDown();
+          }
+        });
   }
 }

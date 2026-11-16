@@ -80,7 +80,7 @@ abstract class AbstractCatchingFuture<
     @RetainedLocalRef ListenableFuture<? extends V> localInputFuture = inputFuture;
     @RetainedLocalRef Class<X> localExceptionType = exceptionType;
     @RetainedLocalRef F localFallback = fallback;
-    if (localInputFuture == null | localExceptionType == null | localFallback == null
+    if ((localInputFuture == null | localExceptionType == null | localFallback == null)
         // This check, unlike all the others, is a volatile read
         || isCancelled()) {
       return;
@@ -129,7 +129,9 @@ abstract class AbstractCatchingFuture<
       return;
     }
 
-    @SuppressWarnings("unchecked") // verified safe by isInstanceOfThrowableClass
+    // The cast was verified as safe by isInstanceOfThrowableClass.
+    // We can't use localExceptionType.cast(throwable) because it wouldn't work under GWT, etc.
+    @SuppressWarnings("unchecked")
     X castThrowable = (X) throwable;
     T fallbackResult;
     try {
@@ -234,7 +236,7 @@ abstract class AbstractCatchingFuture<
 
     @Override
     @ParametricNullness
-    V doFallback(Function<? super X, ? extends V> fallback, X cause) throws Exception {
+    V doFallback(Function<? super X, ? extends V> fallback, X cause) {
       return fallback.apply(cause);
     }
 

@@ -16,18 +16,22 @@ package jdk.m3.collections.guava.util.concurrent;
 
 import static jdk.m3.collections.guava.base.Preconditions.checkArgument;
 import static jdk.m3.collections.guava.base.Preconditions.checkNotNull;
+import static jdk.m3.collections.guava.collect.Lists.newArrayListWithCapacity;
 import static jdk.m3.collections.guava.util.concurrent.Callables.threadRenaming;
 import static jdk.m3.collections.guava.util.concurrent.Internal.toNanosSaturated;
 import static jdk.m3.collections.guava.util.concurrent.SneakyThrows.sneakyThrow;
 import static java.util.Objects.requireNonNull;
+import static java.util.concurrent.Executors.defaultThreadFactory;
+import static java.util.concurrent.Executors.unconfigurableExecutorService;
+import static java.util.concurrent.Executors.unconfigurableScheduledExecutorService;
+import static java.util.concurrent.TimeUnit.NANOSECONDS;
+import static java.util.concurrent.TimeUnit.SECONDS;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
 import jdk.m3.collections.guava.annotations.J2ktIncompatible;
 import jdk.m3.collections.guava.annotations.VisibleForTesting;
 import jdk.m3.collections.guava.base.Supplier;
-import jdk.m3.collections.guava.collect.Lists;
-import jdk.m3.collections.guava.collect.Queues;
 import jdk.m3.collections.guava.util.concurrent.ForwardingListenableFuture.SimpleForwardingListenableFuture;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import java.lang.reflect.InvocationTargetException;
@@ -43,26 +47,28 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
+import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.RejectedExecutionException;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.ThreadPoolExecutor.CallerRunsPolicy;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 import org.jspecify.annotations.Nullable;
 
 /**
- * Factory and utility methods for {@link java.util.concurrent.Executor}, {@link ExecutorService},
- * and {@link java.util.concurrent.ThreadFactory}.
+ * Factory and utility methods for {@link Executor}, {@link ExecutorService}, and {@link
+ * ThreadFactory}.
  *
  * @author Eric Fellheimer
  * @author Kyle Littlefield
  * @author Justin Mahoney
  * @since 3.0
  */
-@GwtCompatible(emulated = true)
+@GwtCompatible
 public final class MoreExecutors {
   private MoreExecutors() {}
 
@@ -83,8 +89,7 @@ public final class MoreExecutors {
   @GwtIncompatible // TODO
   public static ExecutorService getExitingExecutorService(
       ThreadPoolExecutor executor, Duration terminationTimeout) {
-    return getExitingExecutorService(
-        executor, toNanosSaturated(terminationTimeout), TimeUnit.NANOSECONDS);
+    return getExitingExecutorService(executor, toNanosSaturated(terminationTimeout), NANOSECONDS);
   }
 
   /**
@@ -145,7 +150,7 @@ public final class MoreExecutors {
   public static ScheduledExecutorService getExitingScheduledExecutorService(
       ScheduledThreadPoolExecutor executor, Duration terminationTimeout) {
     return getExitingScheduledExecutorService(
-        executor, toNanosSaturated(terminationTimeout), TimeUnit.NANOSECONDS);
+        executor, toNanosSaturated(terminationTimeout), NANOSECONDS);
   }
 
   /**
@@ -204,7 +209,7 @@ public final class MoreExecutors {
   @J2ktIncompatible
   @GwtIncompatible // java.time.Duration
   public static void addDelayedShutdownHook(ExecutorService service, Duration terminationTimeout) {
-    addDelayedShutdownHook(service, toNanosSaturated(terminationTimeout), TimeUnit.NANOSECONDS);
+    addDelayedShutdownHook(service, toNanosSaturated(terminationTimeout), NANOSECONDS);
   }
 
   /**
@@ -235,26 +240,26 @@ public final class MoreExecutors {
     final ExecutorService getExitingExecutorService(
         ThreadPoolExecutor executor, long terminationTimeout, TimeUnit timeUnit) {
       useDaemonThreadFactory(executor);
-      ExecutorService service = Executors.unconfigurableExecutorService(executor);
+      ExecutorService service = unconfigurableExecutorService(executor);
       addDelayedShutdownHook(executor, terminationTimeout, timeUnit);
       return service;
     }
 
     final ExecutorService getExitingExecutorService(ThreadPoolExecutor executor) {
-      return getExitingExecutorService(executor, 120, TimeUnit.SECONDS);
+      return getExitingExecutorService(executor, 120, SECONDS);
     }
 
     final ScheduledExecutorService getExitingScheduledExecutorService(
         ScheduledThreadPoolExecutor executor, long terminationTimeout, TimeUnit timeUnit) {
       useDaemonThreadFactory(executor);
-      ScheduledExecutorService service = Executors.unconfigurableScheduledExecutorService(executor);
+      ScheduledExecutorService service = unconfigurableScheduledExecutorService(executor);
       addDelayedShutdownHook(executor, terminationTimeout, timeUnit);
       return service;
     }
 
     final ScheduledExecutorService getExitingScheduledExecutorService(
         ScheduledThreadPoolExecutor executor) {
-      return getExitingScheduledExecutorService(executor, 120, TimeUnit.SECONDS);
+      return getExitingScheduledExecutorService(executor, 120, SECONDS);
     }
 
     final void addDelayedShutdownHook(
@@ -283,6 +288,8 @@ public final class MoreExecutors {
     void addShutdownHook(Thread hook) {
       Runtime.getRuntime().addShutdownHook(hook);
     }
+
+    Application() {}
   }
 
   @J2ktIncompatible
@@ -297,11 +304,10 @@ public final class MoreExecutors {
 
   /**
    * Creates an executor service that runs each task in the thread that invokes {@code
-   * execute/submit}, as in {@code ThreadPoolExecutor.CallerRunsPolicy}. This applies both to
-   * individually submitted tasks and to collections of tasks submitted via {@code invokeAll} or
-   * {@code invokeAny}. In the latter case, tasks will run serially on the calling thread. Tasks are
-   * run to completion before a {@code Future} is returned to the caller (unless the executor has
-   * been shutdown).
+   * execute/submit}, as in {@link CallerRunsPolicy} This applies both to individually submitted
+   * tasks and to collections of tasks submitted via {@code invokeAll} or {@code invokeAny}. In the
+   * latter case, tasks will run serially on the calling thread. Tasks are run to completion before
+   * a {@code Future} is returned to the caller (unless the executor has been shutdown).
    *
    * <p>Although all tasks are immediately executed in the thread that submitted the task, this
    * {@code ExecutorService} imposes a small locking overhead on each task submission in order to
@@ -328,7 +334,7 @@ public final class MoreExecutors {
 
   /**
    * Returns an {@link Executor} that runs each task in the thread that invokes {@link
-   * Executor#execute execute}, as in {@code ThreadPoolExecutor.CallerRunsPolicy}.
+   * Executor#execute execute}, as in {@link CallerRunsPolicy}.
    *
    * <p>This executor is appropriate for tasks that are lightweight and not deeply chained.
    * Inappropriate {@code directExecutor} usage can cause problems, and these problems can be
@@ -521,6 +527,12 @@ public final class MoreExecutors {
       return delegate.shutdownNow();
     }
 
+    /*
+     * TODO(user): In addition to overriding `execute`, also
+     * override the `Future`-returning methods of `ExecutorService` to propagate cancellation from
+     * our `TrustedListenableFutureTask` to a `Future` returned by the delegate executor?
+     */
+
     @Override
     public final void execute(Runnable command) {
       delegate.execute(command);
@@ -581,7 +593,7 @@ public final class MoreExecutors {
 
       private final ScheduledFuture<?> scheduledDelegate;
 
-      public ListenableScheduledTask(
+      ListenableScheduledTask(
           ListenableFuture<V> listenableDelegate, ScheduledFuture<?> scheduledDelegate) {
         super(listenableDelegate);
         this.scheduledDelegate = scheduledDelegate;
@@ -594,7 +606,12 @@ public final class MoreExecutors {
           // Unless it is cancelled, the delegate may continue being scheduled
           scheduledDelegate.cancel(mayInterruptIfRunning);
 
-          // TODO(user): Cancel "this" if "scheduledDelegate" is cancelled.
+          /*
+           * We'd love to also arrange for the inverse -- that is, to also automatically cancel this
+           * future if scheduledDelegate is cancelled (as happens after the delegate executor is
+           * shut down: https://github.com/google/guava/issues/3553). But it seems unlikely that
+           * that's possible to detect in general.
+           */
         }
         return cancelled;
       }
@@ -610,12 +627,11 @@ public final class MoreExecutors {
       }
     }
 
-    @GwtIncompatible // TODO
     private static final class NeverSuccessfulListenableFutureTask
         extends AbstractFuture.TrustedFuture<@Nullable Void> implements Runnable {
       private final Runnable delegate;
 
-      public NeverSuccessfulListenableFutureTask(Runnable delegate) {
+      NeverSuccessfulListenableFutureTask(Runnable delegate) {
         this.delegate = checkNotNull(delegate);
       }
 
@@ -625,7 +641,24 @@ public final class MoreExecutors {
           delegate.run();
         } catch (Throwable t) {
           // Any Exception is either a RuntimeException or sneaky checked exception.
+
+          /*
+           * We fail this `ListenableFuture`, whose result is exposed to the user through the
+           * `ListenableScheduledTask` we return from the `schedule*` methods.
+           */
           setException(t);
+
+          /*
+           * We fail the current run of the recurring task so that it is not rescheduled. This also
+           * fails the `ScheduledFuture`, which might be visible only to users who operate directly
+           * on the delegate executor's queue.
+           *
+           * (Users who try to operate directly on the `ScheduledFuture` may have additional
+           * problems. For example, if they cancel that `Future`, it won't cancel the user-visible
+           * `ListenableScheduledTask`. This is essentially the same problem as the
+           * `ListenableScheduledTask` has with executor shutdown:
+           * https://github.com/google/guava/issues/3553)
+           */
           throw t;
         }
       }
@@ -661,8 +694,7 @@ public final class MoreExecutors {
       boolean timed,
       Duration timeout)
       throws InterruptedException, ExecutionException, TimeoutException {
-    return invokeAnyImpl(
-        executorService, tasks, timed, toNanosSaturated(timeout), TimeUnit.NANOSECONDS);
+    return invokeAnyImpl(executorService, tasks, timed, toNanosSaturated(timeout), NANOSECONDS);
   }
 
   /**
@@ -688,8 +720,8 @@ public final class MoreExecutors {
     checkNotNull(unit);
     int ntasks = tasks.size();
     checkArgument(ntasks > 0);
-    List<Future<T>> futures = Lists.newArrayListWithCapacity(ntasks);
-    BlockingQueue<Future<T>> futureQueue = Queues.newLinkedBlockingQueue();
+    List<Future<T>> futures = newArrayListWithCapacity(ntasks);
+    BlockingQueue<Future<T>> futureQueue = new LinkedBlockingQueue<>();
     long timeoutNanos = unit.toNanos(timeout);
 
     // For efficiency, especially in executors with limited
@@ -719,7 +751,7 @@ public final class MoreExecutors {
           } else if (active == 0) {
             break;
           } else if (timed) {
-            f = futureQueue.poll(timeoutNanos, TimeUnit.NANOSECONDS);
+            f = futureQueue.poll(timeoutNanos, NANOSECONDS);
             if (f == null) {
               throw new TimeoutException();
             }
@@ -781,7 +813,7 @@ public final class MoreExecutors {
   @GwtIncompatible // concurrency
   public static ThreadFactory platformThreadFactory() {
     if (!isAppEngineWithApiClasses()) {
-      return Executors.defaultThreadFactory();
+      return defaultThreadFactory();
     }
     try {
       return (ThreadFactory)
@@ -958,7 +990,7 @@ public final class MoreExecutors {
   @J2ktIncompatible
   @GwtIncompatible // java.time.Duration
   public static boolean shutdownAndAwaitTermination(ExecutorService service, Duration timeout) {
-    return shutdownAndAwaitTermination(service, toNanosSaturated(timeout), TimeUnit.NANOSECONDS);
+    return shutdownAndAwaitTermination(service, toNanosSaturated(timeout), NANOSECONDS);
   }
 
   /**
@@ -999,14 +1031,14 @@ public final class MoreExecutors {
     service.shutdown();
     try {
       // Wait for half the duration of the timeout for existing tasks to terminate
-      if (!service.awaitTermination(halfTimeoutNanos, TimeUnit.NANOSECONDS)) {
+      if (!service.awaitTermination(halfTimeoutNanos, NANOSECONDS)) {
         // Cancel currently executing tasks
         service.shutdownNow();
         // Wait the other half of the timeout for tasks to respond to being cancelled
-        service.awaitTermination(halfTimeoutNanos, TimeUnit.NANOSECONDS);
+        service.awaitTermination(halfTimeoutNanos, NANOSECONDS);
       }
     } catch (InterruptedException ie) {
-      // Preserve interrupt status
+      // Preserve interrupted status
       Thread.currentThread().interrupt();
       // (Re-)Cancel if current thread also interrupted
       service.shutdownNow();
@@ -1031,7 +1063,7 @@ public final class MoreExecutors {
       try {
         delegate.execute(command);
       } catch (RejectedExecutionException e) {
-        future.setException(e);
+        future.setExceptionInternal(e);
       }
     };
   }

@@ -1,25 +1,40 @@
+import javax.xml.parsers.DocumentBuilderFactory
+import javax.xml.xpath.XPathFactory
+import org.w3c.dom.Document
+
 val runningGradle5 = gradle.gradleVersion.startsWith("5.")
 
-val guavaVersionJre =
-  "<version>(.*)</version>".toRegex().find(file("../../pom.xml").readText())?.groups?.get(1)?.value
-    ?: error("version not found in pom")
+val pomDocument: Document =
+  DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(file("../../pom.xml"))
+val xpath = XPathFactory.newInstance().newXPath()
+
+fun evaluatePom(expression: String): String =
+  xpath.evaluate(expression, pomDocument).trim().takeIf { it.isNotEmpty() }
+    ?: error("Expression '$expression' not found in pom.xml")
+
+val guavaVersionJre = evaluatePom("/project/version")
+val failureaccessVersion = evaluatePom("/project/properties/failureaccess.version")
+val j2objcVersion = evaluatePom("/project/properties/j2objc.version")
+val jspecifyVersion = evaluatePom("/project/properties/jspecify.version")
+val errorProneAnnotationsVersion =
+  evaluatePom("/project/properties/error_prone_annotations.version")
 
 val expectedReducedRuntimeClasspathAndroidVersion =
   setOf(
     "guava-${guavaVersionJre.replace("jre", "android")}.jar",
-    "failureaccess-1.0.3.jar",
-    "j2objc-annotations-3.0.0.jar",
-    "jspecify-1.0.0.jar",
-    "error_prone_annotations-2.36.0.jar",
+    "failureaccess-$failureaccessVersion.jar",
+    "j2objc-annotations-$j2objcVersion.jar",
+    "jspecify-$jspecifyVersion.jar",
+    "error_prone_annotations-$errorProneAnnotationsVersion.jar",
     "listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar"
   )
 val expectedReducedRuntimeClasspathJreVersion =
   setOf(
     "guava-$guavaVersionJre.jar",
-    "failureaccess-1.0.3.jar",
-    "j2objc-annotations-3.0.0.jar",
-    "jspecify-1.0.0.jar",
-    "error_prone_annotations-2.36.0.jar",
+    "failureaccess-$failureaccessVersion.jar",
+    "j2objc-annotations-$j2objcVersion.jar",
+    "jspecify-$jspecifyVersion.jar",
+    "error_prone_annotations-$errorProneAnnotationsVersion.jar",
     "listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar"
   )
 val expectedCompileClasspathAndroidVersion = expectedReducedRuntimeClasspathAndroidVersion
@@ -43,6 +58,13 @@ buildscript {
 }
 
 subprojects {
+  if (gradle.startParameter.taskNames.any { it.contains("wrapper") }) {
+    // When all we're doing is running the Gradle wrapper to initialize the project, we don't need
+    // to set up AGP. And it's nice not to: If we did, then we'd need to ensure that the AGP and
+    // Gradle-Wrapper versions are compatible, even though our "real" Gradle runs use different
+    // Gradle versions than the Gradle-Wrapper run does.
+    return@subprojects
+  }
   if (name.endsWith("Java")) {
     apply(plugin = "java-library")
   } else {

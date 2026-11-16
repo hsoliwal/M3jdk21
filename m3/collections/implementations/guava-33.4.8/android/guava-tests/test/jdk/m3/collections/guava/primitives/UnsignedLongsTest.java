@@ -14,16 +14,17 @@
 
 package jdk.m3.collections.guava.primitives;
 
-import static jdk.m3.collections.guava.primitives.ReflectionFreeAssertThrows.assertThrows;
+import static jdk.m3.collections.guava.collect.testing.Helpers.testComparator;
 import static jdk.m3.collections.guava.primitives.UnsignedLongs.max;
 import static jdk.m3.collections.guava.primitives.UnsignedLongs.min;
-import static com.google.common.truth.Truth.assertThat;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
 import static java.math.BigInteger.ONE;
+import static java.util.Arrays.asList;
+import static org.junit.Assert.assertThrows;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
 import jdk.m3.collections.guava.annotations.J2ktIncompatible;
-import jdk.m3.collections.guava.collect.testing.Helpers;
 import jdk.m3.collections.guava.testing.NullPointerTester;
 import java.math.BigInteger;
 import java.util.Arrays;
@@ -39,7 +40,7 @@ import org.jspecify.annotations.NullUnmarked;
  * @author Brian Milch
  * @author Louis Wasserman
  */
-@GwtCompatible(emulated = true)
+@GwtCompatible
 @NullUnmarked
 public class UnsignedLongsTest extends TestCase {
   private static final long LEAST = 0L;
@@ -90,7 +91,7 @@ public class UnsignedLongsTest extends TestCase {
 
   public void testLexicographicalComparator() {
     List<long[]> ordered =
-        Arrays.asList(
+        asList(
             new long[] {},
             new long[] {LEAST},
             new long[] {LEAST, LEAST},
@@ -102,7 +103,7 @@ public class UnsignedLongsTest extends TestCase {
             new long[] {GREATEST, GREATEST, GREATEST});
 
     Comparator<long[]> comparator = UnsignedLongs.lexicographicalComparator();
-    Helpers.testComparator(comparator, ordered);
+    testComparator(comparator, ordered);
   }
 
   public void testSort() {
@@ -257,18 +258,16 @@ public class UnsignedLongsTest extends TestCase {
     BigInteger max = BigInteger.ZERO.setBit(64).subtract(ONE);
     // loops through all legal radix values.
     for (int r = Character.MIN_RADIX; r <= Character.MAX_RADIX; r++) {
-      final int radix = r;
+      int radix = r;
       // tests can successfully parse a number string with this radix.
       String maxAsString = max.toString(radix);
       assertThat(UnsignedLongs.parseUnsignedLong(maxAsString, radix)).isEqualTo(max.longValue());
 
+      BigInteger overflow = max.add(ONE);
+      String overflowAsString = overflow.toString(radix);
       assertThrows(
           NumberFormatException.class,
-          () -> {
-            BigInteger overflow = max.add(ONE);
-            String overflowAsString = overflow.toString(radix);
-            UnsignedLongs.parseUnsignedLong(overflowAsString, radix);
-          });
+          () -> UnsignedLongs.parseUnsignedLong(overflowAsString, radix));
     }
 
     assertThrows(

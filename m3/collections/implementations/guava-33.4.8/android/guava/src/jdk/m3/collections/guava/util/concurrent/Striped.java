@@ -15,6 +15,8 @@
 package jdk.m3.collections.guava.util.concurrent;
 
 import static jdk.m3.collections.guava.collect.Lists.newArrayList;
+import static java.util.Arrays.sort;
+import static java.util.Collections.unmodifiableList;
 
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
 import jdk.m3.collections.guava.annotations.J2ktIncompatible;
@@ -30,8 +32,6 @@ import java.lang.ref.Reference;
 import java.lang.ref.ReferenceQueue;
 import java.lang.ref.WeakReference;
 import java.math.RoundingMode;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.Semaphore;
@@ -148,7 +148,7 @@ public abstract class Striped<L> {
     for (int i = 0; i < result.size(); i++) {
       stripes[i] = indexFor(result.get(i));
     }
-    Arrays.sort(stripes);
+    sort(stripes);
     // optimize for runs of identical stripes
     int previousStripe = stripes[0];
     result.set(0, getAt(previousStripe));
@@ -180,7 +180,7 @@ public abstract class Striped<L> {
      */
     @SuppressWarnings("unchecked") // we carefully replaced all keys with their respective L's
     List<L> asStripes = (List<L>) result;
-    return Collections.unmodifiableList(asStripes);
+    return unmodifiableList(asStripes);
   }
 
   // Static factories
@@ -192,8 +192,9 @@ public abstract class Striped<L> {
    * @param stripes the minimum number of stripes (locks) required
    * @param supplier a {@code Supplier<L>} object to obtain locks from
    * @return a new {@code Striped<L>}
+   * @since 33.5.0
    */
-  static <L> Striped<L> custom(int stripes, Supplier<L> supplier) {
+  public static <L> Striped<L> custom(int stripes, Supplier<L> supplier) {
     return new CompactStriped<>(stripes, supplier);
   }
 
@@ -368,7 +369,7 @@ public abstract class Striped<L> {
    * Implementation of Striped where 2^k stripes are represented as an array of the same length,
    * eagerly initialized.
    */
-  private static class CompactStriped<L> extends PowerOfTwoStriped<L> {
+  private static final class CompactStriped<L> extends PowerOfTwoStriped<L> {
     /** Size is a power of two. */
     private final Object[] array;
 
@@ -400,7 +401,7 @@ public abstract class Striped<L> {
    * user key's (smeared) hashCode(). The stripes are lazily initialized and are weakly referenced.
    */
   @VisibleForTesting
-  static class SmallLazyStriped<L> extends PowerOfTwoStriped<L> {
+  static final class SmallLazyStriped<L> extends PowerOfTwoStriped<L> {
     final AtomicReferenceArray<@Nullable ArrayReference<? extends L>> locks;
     final Supplier<L> supplier;
     final int size;
@@ -472,7 +473,7 @@ public abstract class Striped<L> {
    * user key's (smeared) hashCode(). The stripes are lazily initialized and are weakly referenced.
    */
   @VisibleForTesting
-  static class LargeLazyStriped<L> extends PowerOfTwoStriped<L> {
+  static final class LargeLazyStriped<L> extends PowerOfTwoStriped<L> {
     final ConcurrentMap<Integer, L> locks;
     final Supplier<L> supplier;
     final int size;
@@ -525,7 +526,7 @@ public abstract class Striped<L> {
     return hashCode ^ (hashCode >>> 7) ^ (hashCode >>> 4);
   }
 
-  private static class PaddedLock extends ReentrantLock {
+  private static final class PaddedLock extends ReentrantLock {
     /*
      * Padding from 40 into 64 bytes, same size as cache line. Might be beneficial to add a fourth
      * long here, to minimize chance of interference between consecutive locks, but I couldn't
@@ -540,7 +541,7 @@ public abstract class Striped<L> {
     }
   }
 
-  private static class PaddedSemaphore extends Semaphore {
+  private static final class PaddedSemaphore extends Semaphore {
     // See PaddedReentrantLock comment
     long unused1;
     long unused2;

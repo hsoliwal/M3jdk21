@@ -16,6 +16,8 @@
 
 package jdk.m3.collections.guava.collect;
 
+import static jdk.m3.collections.guava.collect.Maps.indexMap;
+
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
 import jdk.m3.collections.guava.annotations.J2ktIncompatible;
@@ -24,12 +26,12 @@ import java.util.List;
 import org.jspecify.annotations.Nullable;
 
 /** An ordering that compares objects according to a given order. */
-@GwtCompatible(serializable = true)
+@GwtCompatible
 final class ExplicitOrdering<T> extends Ordering<T> implements Serializable {
   final ImmutableMap<T, Integer> rankMap;
 
   ExplicitOrdering(List<T> valuesInOrder) {
-    this(Maps.indexMap(valuesInOrder));
+    this(indexMap(valuesInOrder));
   }
 
   ExplicitOrdering(ImmutableMap<T, Integer> rankMap) {

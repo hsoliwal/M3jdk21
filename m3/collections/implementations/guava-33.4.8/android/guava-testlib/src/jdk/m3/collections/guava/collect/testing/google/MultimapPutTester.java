@@ -16,6 +16,7 @@
 
 package jdk.m3.collections.guava.collect.testing.google;
 
+import static jdk.m3.collections.guava.collect.Lists.newArrayList;
 import static jdk.m3.collections.guava.collect.testing.Helpers.assertContains;
 import static jdk.m3.collections.guava.collect.testing.Helpers.assertEmpty;
 import static jdk.m3.collections.guava.collect.testing.Helpers.assertEqualIgnoringOrder;
@@ -25,11 +26,10 @@ import static jdk.m3.collections.guava.collect.testing.features.CollectionSize.Z
 import static jdk.m3.collections.guava.collect.testing.features.MapFeature.ALLOWS_NULL_KEYS;
 import static jdk.m3.collections.guava.collect.testing.features.MapFeature.ALLOWS_NULL_VALUES;
 import static jdk.m3.collections.guava.collect.testing.features.MapFeature.SUPPORTS_PUT;
-import static jdk.m3.collections.guava.collect.testing.google.ReflectionFreeAssertThrows.assertThrows;
+import static org.junit.Assert.assertThrows;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.collect.ImmutableList;
-import jdk.m3.collections.guava.collect.Lists;
 import jdk.m3.collections.guava.collect.Multimap;
 import jdk.m3.collections.guava.collect.testing.features.CollectionSize;
 import jdk.m3.collections.guava.collect.testing.features.MapFeature;
@@ -39,7 +39,6 @@ import java.util.List;
 import java.util.Map.Entry;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
-import org.junit.Ignore;
 
 /**
  * Tester for {@link Multimap#put}.
@@ -47,9 +46,6 @@ import org.junit.Ignore;
  * @author Louis Wasserman
  */
 @GwtCompatible
-@Ignore("test runners must not instantiate and run this directly, only via suites we build")
-// @Ignore affects the Android test runner, which respects JUnit 4 annotations on JUnit 3 tests.
-@SuppressWarnings("JUnit4ClassUsedInJUnit3")
 @NullMarked
 public class MultimapPutTester<K extends @Nullable Object, V extends @Nullable Object>
     extends AbstractMultimapTester<K, V, Multimap<K, V>> {
@@ -62,7 +58,7 @@ public class MultimapPutTester<K extends @Nullable Object, V extends @Nullable O
   public void testPutEmpty() {
     int size = getNumElements();
 
-    assertGet(k3(), ImmutableList.<V>of());
+    assertGet(k3(), ImmutableList.of());
 
     assertTrue(multimap().put(k3(), v3()));
 
@@ -105,7 +101,7 @@ public class MultimapPutTester<K extends @Nullable Object, V extends @Nullable O
 
     multimap().put(k3(), null);
 
-    assertGet(k3(), Lists.newArrayList((V) null)); // ImmutableList.of can't take null.
+    assertGet(k3(), newArrayList((V) null)); // ImmutableList.of can't take null.
     assertEquals(size + 1, multimap().size());
   }
 

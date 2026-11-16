@@ -16,8 +16,9 @@
 
 package jdk.m3.collections.guava.escape;
 
-import static jdk.m3.collections.guava.escape.ReflectionFreeAssertThrows.assertThrows;
-import static com.google.common.truth.Truth.assertThat;
+import static jdk.m3.collections.guava.escape.UnicodeEscaper.codePointAtInternal;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
+import static org.junit.Assert.assertThrows;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import junit.framework.TestCase;
@@ -93,13 +94,13 @@ public class UnicodeEscaperTest extends TestCase {
     UnicodeEscaper e = SIMPLE_ESCAPER;
 
     // Build up a range of surrogate pair characters to test
-    final int min = Character.MIN_SUPPLEMENTARY_CODE_POINT;
-    final int max = Character.MAX_CODE_POINT;
-    final int range = max - min;
-    final int s1 = min + (1 * range) / 4;
-    final int s2 = min + (2 * range) / 4;
-    final int s3 = min + (3 * range) / 4;
-    final char[] dst = new char[12];
+    int min = Character.MIN_SUPPLEMENTARY_CODE_POINT;
+    int max = Character.MAX_CODE_POINT;
+    int range = max - min;
+    int s1 = min + (1 * range) / 4;
+    int s2 = min + (2 * range) / 4;
+    int s3 = min + (3 * range) / 4;
+    char[] dst = new char[12];
 
     // Put surrogate pairs at odd indices so they can be split easily
     dst[0] = 'x';
@@ -122,6 +123,7 @@ public class UnicodeEscaperTest extends TestCase {
     assertThrows(IllegalArgumentException.class, () -> escapeAsString(SIMPLE_ESCAPER, test));
   }
 
+  @SuppressWarnings("nullness") // test of bogus call
   public void testNullInput() {
     UnicodeEscaper e = SIMPLE_ESCAPER;
     assertThrows(NullPointerException.class, () -> e.escape((String) null));
@@ -167,8 +169,7 @@ public class UnicodeEscaperTest extends TestCase {
   }
 
   public void testCodePointAt_indexOutOfBoundsException() {
-    assertThrows(
-        IndexOutOfBoundsException.class, () -> UnicodeEscaper.codePointAt("Testing...", 4, 2));
+    assertThrows(IndexOutOfBoundsException.class, () -> codePointAtInternal("Testing...", 4, 2));
   }
 
   private static String escapeAsString(Escaper e, String s) {

@@ -16,11 +16,11 @@
 
 package jdk.m3.collections.guava.util.concurrent;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
 
+import jdk.m3.collections.guava.annotations.GwtIncompatible;
+import jdk.m3.collections.guava.annotations.J2ktIncompatible;
 import jdk.m3.collections.guava.util.concurrent.UncaughtExceptionHandlers.Exiter;
-import jdk.m3.collections.guava.util.concurrent.UncaughtExceptionHandlers.RuntimeWrapper;
 import junit.framework.TestCase;
 import org.jspecify.annotations.NullUnmarked;
 
@@ -28,17 +28,12 @@ import org.jspecify.annotations.NullUnmarked;
  * @author Gregory Kick
  */
 @NullUnmarked
+@GwtIncompatible
+@J2ktIncompatible
 public class UncaughtExceptionHandlersTest extends TestCase {
-
-  private RuntimeWrapper runtimeMock;
-
-  @Override
-  protected void setUp() {
-    runtimeMock = mock(RuntimeWrapper.class);
-  }
-
   public void testExiter() {
-    new Exiter(runtimeMock).uncaughtException(new Thread(), new Exception());
-    verify(runtimeMock).exit(1);
+    int[] exitCode = {-1};
+    new Exiter(code -> exitCode[0] = code).uncaughtException(new Thread(), new Exception());
+    assertThat(exitCode[0]).isEqualTo(1);
   }
 }

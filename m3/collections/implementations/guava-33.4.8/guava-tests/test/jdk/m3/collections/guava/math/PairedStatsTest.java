@@ -46,14 +46,17 @@ import static jdk.m3.collections.guava.math.StatsTesting.assertLinearTransformat
 import static jdk.m3.collections.guava.math.StatsTesting.assertStatsApproxEqual;
 import static jdk.m3.collections.guava.math.StatsTesting.assertVerticalLinearTransformation;
 import static jdk.m3.collections.guava.math.StatsTesting.createPairedStatsOf;
-import static com.google.common.truth.Truth.assertThat;
-import static com.google.common.truth.Truth.assertWithMessage;
+import static jdk.m3.collections.guava.testing.SerializableTester.reserialize;
+import static jdk.m3.collections.guava.testing.SerializableTester.reserializeAndAssert;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
+import static jdk.m3.collections.guava.truth.Truth.assertWithMessage;
 import static org.junit.Assert.assertThrows;
 
+import jdk.m3.collections.guava.annotations.GwtIncompatible;
+import jdk.m3.collections.guava.annotations.J2ktIncompatible;
 import jdk.m3.collections.guava.collect.ImmutableList;
 import jdk.m3.collections.guava.math.StatsTesting.ManyValues;
 import jdk.m3.collections.guava.testing.EqualsTester;
-import jdk.m3.collections.guava.testing.SerializableTester;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import junit.framework.TestCase;
@@ -66,6 +69,8 @@ import org.jspecify.annotations.NullUnmarked;
  * @author Pete Gillin
  */
 @NullUnmarked
+@J2ktIncompatible
+@GwtIncompatible
 public class PairedStatsTest extends TestCase {
 
   public void testCount() {
@@ -90,7 +95,7 @@ public class PairedStatsTest extends TestCase {
   }
 
   public void testPopulationCovariance() {
-    assertThrows(IllegalStateException.class, () -> EMPTY_PAIRED_STATS.populationCovariance());
+    assertThrows(IllegalStateException.class, EMPTY_PAIRED_STATS::populationCovariance);
     assertThat(ONE_VALUE_PAIRED_STATS.populationCovariance()).isEqualTo(0.0);
     assertThat(createSingleStats(Double.POSITIVE_INFINITY, 1.23).populationCovariance()).isNaN();
     assertThat(createSingleStats(Double.NEGATIVE_INFINITY, 1.23).populationCovariance()).isNaN();
@@ -104,9 +109,9 @@ public class PairedStatsTest extends TestCase {
       PairedStats stats = createPairedStatsOf(values.asIterable(), OTHER_MANY_VALUES);
       double populationCovariance = stats.populationCovariance();
       if (values.hasAnyNonFinite()) {
-        assertWithMessage("population covariance of " + values).that(populationCovariance).isNaN();
+        assertWithMessage("population covariance of %s", values).that(populationCovariance).isNaN();
       } else {
-        assertWithMessage("population covariance of " + values)
+        assertWithMessage("population covariance of %s", values)
             .that(populationCovariance)
             .isWithin(ALLOWED_ERROR)
             .of(MANY_VALUES_SUM_OF_PRODUCTS_OF_DELTAS / MANY_VALUES_COUNT);
@@ -120,8 +125,8 @@ public class PairedStatsTest extends TestCase {
   }
 
   public void testSampleCovariance() {
-    assertThrows(IllegalStateException.class, () -> EMPTY_PAIRED_STATS.sampleCovariance());
-    assertThrows(IllegalStateException.class, () -> ONE_VALUE_PAIRED_STATS.sampleCovariance());
+    assertThrows(IllegalStateException.class, EMPTY_PAIRED_STATS::sampleCovariance);
+    assertThrows(IllegalStateException.class, ONE_VALUE_PAIRED_STATS::sampleCovariance);
     assertThat(TWO_VALUES_PAIRED_STATS.sampleCovariance())
         .isWithin(ALLOWED_ERROR)
         .of(TWO_VALUES_SUM_OF_PRODUCTS_OF_DELTAS);
@@ -134,13 +139,11 @@ public class PairedStatsTest extends TestCase {
   }
 
   public void testPearsonsCorrelationCoefficient() {
+    assertThrows(IllegalStateException.class, EMPTY_PAIRED_STATS::pearsonsCorrelationCoefficient);
     assertThrows(
-        IllegalStateException.class, () -> EMPTY_PAIRED_STATS.pearsonsCorrelationCoefficient());
-    assertThrows(
-        IllegalStateException.class, () -> ONE_VALUE_PAIRED_STATS.pearsonsCorrelationCoefficient());
-    assertThrows(
-        IllegalStateException.class,
-        () -> createSingleStats(Double.POSITIVE_INFINITY, 1.23).pearsonsCorrelationCoefficient());
+        IllegalStateException.class, ONE_VALUE_PAIRED_STATS::pearsonsCorrelationCoefficient);
+    PairedStats infiniteXStats = createSingleStats(Double.POSITIVE_INFINITY, 1.23);
+    assertThrows(IllegalStateException.class, infiniteXStats::pearsonsCorrelationCoefficient);
     assertThat(TWO_VALUES_PAIRED_STATS.pearsonsCorrelationCoefficient())
         .isWithin(ALLOWED_ERROR)
         .of(
@@ -153,11 +156,11 @@ public class PairedStatsTest extends TestCase {
       PairedStats stats = createPairedStatsOf(MANY_VALUES, values.asIterable());
       double pearsonsCorrelationCoefficient = stats.pearsonsCorrelationCoefficient();
       if (values.hasAnyNonFinite()) {
-        assertWithMessage("Pearson's correlation coefficient of " + values)
+        assertWithMessage("Pearson's correlation coefficient of %s", values)
             .that(pearsonsCorrelationCoefficient)
             .isNaN();
       } else {
-        assertWithMessage("Pearson's correlation coefficient of " + values)
+        assertWithMessage("Pearson's correlation coefficient of %s", values)
             .that(pearsonsCorrelationCoefficient)
             .isWithin(ALLOWED_ERROR)
             .of(
@@ -168,18 +171,16 @@ public class PairedStatsTest extends TestCase {
     }
     assertThrows(
         IllegalStateException.class,
-        () -> HORIZONTAL_VALUES_PAIRED_STATS.pearsonsCorrelationCoefficient());
+        HORIZONTAL_VALUES_PAIRED_STATS::pearsonsCorrelationCoefficient);
     assertThrows(
-        IllegalStateException.class,
-        () -> VERTICAL_VALUES_PAIRED_STATS.pearsonsCorrelationCoefficient());
+        IllegalStateException.class, VERTICAL_VALUES_PAIRED_STATS::pearsonsCorrelationCoefficient);
     assertThrows(
-        IllegalStateException.class,
-        () -> CONSTANT_VALUES_PAIRED_STATS.pearsonsCorrelationCoefficient());
+        IllegalStateException.class, CONSTANT_VALUES_PAIRED_STATS::pearsonsCorrelationCoefficient);
   }
 
   public void testLeastSquaresFit() {
-    assertThrows(IllegalStateException.class, () -> EMPTY_PAIRED_STATS.leastSquaresFit());
-    assertThrows(IllegalStateException.class, () -> ONE_VALUE_PAIRED_STATS.leastSquaresFit());
+    assertThrows(IllegalStateException.class, EMPTY_PAIRED_STATS::leastSquaresFit);
+    assertThrows(IllegalStateException.class, ONE_VALUE_PAIRED_STATS::leastSquaresFit);
     assertThrows(
         IllegalStateException.class,
         () -> createSingleStats(Double.POSITIVE_INFINITY, 1.23).leastSquaresFit());
@@ -211,7 +212,7 @@ public class PairedStatsTest extends TestCase {
     assertVerticalLinearTransformation(
         VERTICAL_VALUES_PAIRED_STATS.leastSquaresFit(),
         VERTICAL_VALUES_PAIRED_STATS.xStats().mean());
-    assertThrows(IllegalStateException.class, () -> CONSTANT_VALUES_PAIRED_STATS.leastSquaresFit());
+    assertThrows(IllegalStateException.class, CONSTANT_VALUES_PAIRED_STATS::leastSquaresFit);
   }
 
   public void testEqualsAndHashCode() {
@@ -219,7 +220,7 @@ public class PairedStatsTest extends TestCase {
         .addEqualityGroup(
             MANY_VALUES_PAIRED_STATS,
             DUPLICATE_MANY_VALUES_PAIRED_STATS,
-            SerializableTester.reserialize(MANY_VALUES_PAIRED_STATS))
+            reserialize(MANY_VALUES_PAIRED_STATS))
         .addEqualityGroup(
             new PairedStats(MANY_VALUES_STATS_ITERABLE, OTHER_MANY_VALUES_STATS, 1.23),
             new PairedStats(MANY_VALUES_STATS_VARARGS, OTHER_MANY_VALUES_STATS, 1.23))
@@ -235,7 +236,7 @@ public class PairedStatsTest extends TestCase {
   }
 
   public void testSerializable() {
-    SerializableTester.reserializeAndAssert(MANY_VALUES_PAIRED_STATS);
+    reserializeAndAssert(MANY_VALUES_PAIRED_STATS);
   }
 
   public void testToString() {
@@ -252,7 +253,7 @@ public class PairedStatsTest extends TestCase {
                 + "}");
   }
 
-  private PairedStats createSingleStats(double x, double y) {
+  private static PairedStats createSingleStats(double x, double y) {
     return createPairedStatsOf(ImmutableList.of(x), ImmutableList.of(y));
   }
 

@@ -16,8 +16,8 @@
 
 package jdk.m3.collections.guava.collect.testing;
 
-import static jdk.m3.collections.guava.collect.testing.ReflectionFreeAssertThrows.assertThrows;
 import static java.util.Collections.singleton;
+import static org.junit.Assert.assertThrows;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import java.util.Collections;
@@ -34,11 +34,11 @@ import junit.framework.TestCase;
 public class MinimalIterableTest extends TestCase {
 
   public void testOf_empty() {
-    Iterable<String> iterable = MinimalIterable.<String>of();
+    Iterable<String> iterable = MinimalIterable.of();
     Iterator<String> iterator = iterable.iterator();
     assertFalse(iterator.hasNext());
-    assertThrows(NoSuchElementException.class, () -> iterator.next());
-    assertThrows(IllegalStateException.class, () -> iterable.iterator());
+    assertThrows(NoSuchElementException.class, iterator::next);
+    assertThrows(IllegalStateException.class, iterable::iterator);
   }
 
   public void testOf_one() {
@@ -47,16 +47,16 @@ public class MinimalIterableTest extends TestCase {
     assertTrue(iterator.hasNext());
     assertEquals("a", iterator.next());
     assertFalse(iterator.hasNext());
-    assertThrows(NoSuchElementException.class, () -> iterator.next());
-    assertThrows(IllegalStateException.class, () -> iterable.iterator());
+    assertThrows(NoSuchElementException.class, iterator::next);
+    assertThrows(IllegalStateException.class, iterable::iterator);
   }
 
   public void testFrom_empty() {
-    Iterable<String> iterable = MinimalIterable.from(Collections.<String>emptySet());
+    Iterable<String> iterable = MinimalIterable.from(Collections.emptySet());
     Iterator<String> iterator = iterable.iterator();
     assertFalse(iterator.hasNext());
-    assertThrows(NoSuchElementException.class, () -> iterator.next());
-    assertThrows(IllegalStateException.class, () -> iterable.iterator());
+    assertThrows(NoSuchElementException.class, iterator::next);
+    assertThrows(IllegalStateException.class, iterable::iterator);
   }
 
   public void testFrom_one() {
@@ -64,9 +64,9 @@ public class MinimalIterableTest extends TestCase {
     Iterator<String> iterator = iterable.iterator();
     assertTrue(iterator.hasNext());
     assertEquals("a", iterator.next());
-    assertThrows(UnsupportedOperationException.class, () -> iterator.remove());
+    assertThrows(UnsupportedOperationException.class, iterator::remove);
     assertFalse(iterator.hasNext());
-    assertThrows(NoSuchElementException.class, () -> iterator.next());
-    assertThrows(IllegalStateException.class, () -> iterable.iterator());
+    assertThrows(NoSuchElementException.class, iterator::next);
+    assertThrows(IllegalStateException.class, iterable::iterator);
   }
 }

@@ -17,10 +17,12 @@
 package jdk.m3.collections.guava.collect;
 
 import static jdk.m3.collections.guava.base.Preconditions.checkState;
+import static jdk.m3.collections.guava.collect.Maps.asMap;
+import static jdk.m3.collections.guava.collect.Maps.immutableEnumMap;
 import static jdk.m3.collections.guava.collect.testing.Helpers.mapEntry;
 import static jdk.m3.collections.guava.collect.testing.features.CollectionFeature.ALLOWS_NULL_QUERIES;
 import static jdk.m3.collections.guava.collect.testing.features.CollectionFeature.SERIALIZABLE;
-import static com.google.common.truth.Truth.assertThat;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
@@ -30,6 +32,7 @@ import jdk.m3.collections.guava.collect.testing.AnEnum;
 import jdk.m3.collections.guava.collect.testing.MapTestSuiteBuilder;
 import jdk.m3.collections.guava.collect.testing.TestEnumMapGenerator;
 import jdk.m3.collections.guava.collect.testing.features.CollectionSize;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 import junit.framework.Test;
@@ -42,7 +45,7 @@ import org.jspecify.annotations.NullMarked;
  *
  * @author Louis Wasserman
  */
-@GwtCompatible(emulated = true)
+@GwtCompatible
 @NullMarked
 public class ImmutableEnumMapTest extends TestCase {
   @J2ktIncompatible
@@ -50,11 +53,11 @@ public class ImmutableEnumMapTest extends TestCase {
   public static class ImmutableEnumMapGenerator extends TestEnumMapGenerator {
     @Override
     protected Map<AnEnum, String> create(Entry<AnEnum, String>[] entries) {
-      Map<AnEnum, String> map = Maps.newHashMap();
+      Map<AnEnum, String> map = new HashMap<>();
       for (Entry<AnEnum, String> entry : entries) {
         map.put(entry.getKey(), entry.getValue());
       }
-      return Maps.immutableEnumMap(map);
+      return immutableEnumMap(map);
     }
   }
 
@@ -74,7 +77,7 @@ public class ImmutableEnumMapTest extends TestCase {
 
   public void testIteratesOnce() {
     Map<AnEnum, AnEnum> map =
-        Maps.asMap(
+        asMap(
             ImmutableSet.of(AnEnum.A),
             new Function<AnEnum, AnEnum>() {
               boolean used = false;
@@ -86,18 +89,18 @@ public class ImmutableEnumMapTest extends TestCase {
                 return ae;
               }
             });
-    ImmutableMap<AnEnum, AnEnum> copy = Maps.immutableEnumMap(map);
+    ImmutableMap<AnEnum, AnEnum> copy = immutableEnumMap(map);
     assertThat(copy.entrySet()).containsExactly(mapEntry(AnEnum.A, AnEnum.A));
   }
 
   public void testEmptyImmutableEnumMap() {
-    ImmutableMap<AnEnum, String> map = Maps.immutableEnumMap(ImmutableMap.<AnEnum, String>of());
+    ImmutableMap<AnEnum, String> map = immutableEnumMap(ImmutableMap.<AnEnum, String>of());
     assertEquals(ImmutableMap.of(), map);
   }
 
   public void testImmutableEnumMapOrdering() {
     ImmutableMap<AnEnum, String> map =
-        Maps.immutableEnumMap(ImmutableMap.of(AnEnum.C, "c", AnEnum.A, "a", AnEnum.E, "e"));
+        immutableEnumMap(ImmutableMap.of(AnEnum.C, "c", AnEnum.A, "a", AnEnum.E, "e"));
 
     assertThat(map.entrySet())
         .containsExactly(mapEntry(AnEnum.A, "a"), mapEntry(AnEnum.C, "c"), mapEntry(AnEnum.E, "e"))

@@ -16,6 +16,9 @@
 
 package jdk.m3.collections.guava.collect;
 
+import static jdk.m3.collections.guava.collect.Sets.equalsImpl;
+import static jdk.m3.collections.guava.collect.Sets.hashCodeImpl;
+
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.base.Predicate;
 import java.util.Map.Entry;
@@ -57,23 +60,18 @@ final class FilteredKeySetMultimap<K extends @Nullable Object, V extends @Nullab
 
   @Override
   public Set<Entry<K, V>> entries() {
-    return (Set<Entry<K, V>>) super.entries();
-  }
-
-  @Override
-  Set<Entry<K, V>> createEntries() {
     return new EntrySet();
   }
 
-  class EntrySet extends Entries implements Set<Entry<K, V>> {
+  private final class EntrySet extends Entries implements Set<Entry<K, V>> {
     @Override
     public int hashCode() {
-      return Sets.hashCodeImpl(this);
+      return hashCodeImpl(this);
     }
 
     @Override
     public boolean equals(@Nullable Object o) {
-      return Sets.equalsImpl(this, o);
+      return equalsImpl(this, o);
     }
   }
 }

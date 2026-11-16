@@ -23,7 +23,7 @@ import jdk.m3.collections.guava.annotations.GwtCompatible;
  *
  * @author Jesse Wilson
  */
-@GwtCompatible(emulated = true)
+@GwtCompatible
 final class Platform {
   private Platform() {}
 

@@ -32,7 +32,7 @@ import org.jspecify.annotations.Nullable;
  * comparator utilities, see either {@code Comparator} itself (for Java 8+), or {@code
  * jdk.m3.collections.guava.collect.Ordering} (otherwise).
  *
- * <h3>Relationship to {@code Ordering}</h3>
+ * <h2>Relationship to {@code Ordering}</h2>
  *
  * <p>In light of the significant enhancements to {@code Comparator} in Java 8, the overwhelming
  * majority of usages of {@code Ordering} can be written using only built-in JDK APIs. This class is
@@ -117,8 +117,7 @@ public final class Comparators {
    * <p>For example:
    *
    * {@snippet :
-   * Stream.of("foo", "quux", "banana", "elephant")
-   *     .collect(least(2, comparingInt(String::length)))
+   * Stream.of("foo", "quux", "banana", "elephant").collect(least(2, comparingInt(String::length)))
    * // returns {"foo", "quux"}
    * }
    *
@@ -129,7 +128,6 @@ public final class Comparators {
    * @throws IllegalArgumentException if {@code k < 0}
    * @since 33.2.0 (available since 22.0 in guava-jre)
    */
-  @SuppressWarnings("Java7ApiChecker")
   @IgnoreJRERequirement // Users will use this only if they're already using streams.
   public static <T extends @Nullable Object> Collector<T, ?, List<T>> least(
       int k, Comparator<? super T> comparator) {
@@ -163,7 +161,6 @@ public final class Comparators {
    * @throws IllegalArgumentException if {@code k < 0}
    * @since 33.2.0 (available since 22.0 in guava-jre)
    */
-  @SuppressWarnings("Java7ApiChecker")
   @IgnoreJRERequirement // Users will use this only if they're already using streams.
   public static <T extends @Nullable Object> Collector<T, ?, List<T>> greatest(
       int k, Comparator<? super T> comparator) {
@@ -177,7 +174,6 @@ public final class Comparators {
    *
    * @since 33.4.0 (but since 22.0 in the JRE flavor)
    */
-  @SuppressWarnings("Java7ApiChecker")
   @IgnoreJRERequirement // Users will use this only if they're already using Optional.
   public static <T> Comparator<Optional<T>> emptiesFirst(Comparator<? super T> valueComparator) {
     checkNotNull(valueComparator);
@@ -192,7 +188,6 @@ public final class Comparators {
    *
    * @since 33.4.0 (but since 22.0 in the JRE flavor)
    */
-  @SuppressWarnings("Java7ApiChecker")
   @IgnoreJRERequirement // Users will use this only if they're already using Optional.
   public static <T> Comparator<Optional<T>> emptiesLast(Comparator<? super T> valueComparator) {
     checkNotNull(valueComparator);
@@ -200,7 +195,6 @@ public final class Comparators {
         o -> orElseNull(o), Comparator.nullsLast(valueComparator));
   }
 
-  @SuppressWarnings("Java7ApiChecker")
   @IgnoreJRERequirement // helper for emptiesFirst+emptiesLast
   /*
    * If we make these calls inline inside the lambda inside emptiesFirst()/emptiesLast(), we get an

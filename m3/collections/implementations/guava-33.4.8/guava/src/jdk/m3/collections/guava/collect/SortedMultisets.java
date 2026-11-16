@@ -22,7 +22,6 @@ import static jdk.m3.collections.guava.collect.BoundType.OPEN;
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
 import jdk.m3.collections.guava.collect.Multiset.Entry;
-import com.google.j2objc.annotations.Weak;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.NavigableSet;
@@ -35,7 +34,7 @@ import org.jspecify.annotations.Nullable;
  *
  * @author Louis Wasserman
  */
-@GwtCompatible(emulated = true)
+@GwtCompatible
 final class SortedMultisets {
   private SortedMultisets() {}
 
@@ -43,7 +42,7 @@ final class SortedMultisets {
   @SuppressWarnings("JdkObsolete") // TODO(b/6160855): Switch GWT emulations to NavigableSet.
   static class ElementSet<E extends @Nullable Object> extends Multisets.ElementSet<E>
       implements SortedSet<E> {
-    @Weak private final SortedMultiset<E> multiset;
+    private final SortedMultiset<E> multiset;
 
     ElementSet(SortedMultiset<E> multiset) {
       this.multiset = multiset;

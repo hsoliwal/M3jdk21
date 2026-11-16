@@ -17,6 +17,7 @@
 package jdk.m3.collections.guava.collect;
 
 import static jdk.m3.collections.guava.collect.Tables.transpose;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import org.jspecify.annotations.NullMarked;
@@ -32,7 +33,7 @@ import org.jspecify.annotations.Nullable;
 public class TransposedTableTest extends AbstractTableTest<Character> {
 
   @Override
-  protected Table<String, Integer, Character> create(@Nullable Object... data) {
+  Table<String, Integer, Character> create(@Nullable Object... data) {
     Table<Integer, String, Character> original = HashBasedTable.create();
     Table<String, Integer, Character> table = transpose(original);
     table.clear();
@@ -42,7 +43,7 @@ public class TransposedTableTest extends AbstractTableTest<Character> {
 
   public void testTransposeTransposed() {
     Table<Integer, String, Character> original = HashBasedTable.create();
-    assertSame(original, transpose(transpose(original)));
+    assertThat(transpose(transpose(original))).isSameInstanceAs(original);
   }
 
   public void testPutOriginalModifiesTranspose() {
@@ -63,11 +64,11 @@ public class TransposedTableTest extends AbstractTableTest<Character> {
     Table<Integer, String, Character> original = HashBasedTable.create();
     Table<String, Integer, Character> transpose = transpose(original);
     original.put(1, "foo", 'a');
-    assertSame(original.columnKeySet(), transpose.rowKeySet());
-    assertSame(original.rowKeySet(), transpose.columnKeySet());
-    assertSame(original.columnMap(), transpose.rowMap());
-    assertSame(original.rowMap(), transpose.columnMap());
-    assertSame(original.values(), transpose.values());
+    assertThat(transpose.rowKeySet()).isEqualTo(original.columnKeySet());
+    assertThat(transpose.columnKeySet()).isEqualTo(original.rowKeySet());
+    assertThat(transpose.rowMap()).isEqualTo(original.columnMap());
+    assertThat(transpose.columnMap()).isEqualTo(original.rowMap());
+    assertThat(transpose.values()).containsExactlyElementsIn(original.values());
     assertEquals(original.row(1), transpose.column(1));
     assertEquals(original.row(2), transpose.column(2));
     assertEquals(original.column("foo"), transpose.row("foo"));

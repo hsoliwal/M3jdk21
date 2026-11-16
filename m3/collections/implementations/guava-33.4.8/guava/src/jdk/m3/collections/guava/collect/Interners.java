@@ -42,7 +42,7 @@ public final class Interners {
    *
    * @since 21.0
    */
-  public static class InternerBuilder {
+  public static final class InternerBuilder {
     private final MapMaker mapMaker = new MapMaker();
     private boolean strong = true;
 
@@ -65,7 +65,6 @@ public final class Interners {
      * @see Interners#newWeakInterner()
      */
     @CanIgnoreReturnValue
-    @GwtIncompatible("java.lang.ref.WeakReference")
     public InternerBuilder weak() {
       this.strong = false;
       return this;
@@ -82,6 +81,7 @@ public final class Interners {
       return this;
     }
 
+    /** Builds and returns a new interner. */
     public <E> Interner<E> build() {
       if (!strong) {
         mapMaker.weakKeys();
@@ -110,7 +110,6 @@ public final class Interners {
    * likely does not perform as well as {@link #newStrongInterner}, but is the best alternative when
    * the memory usage of that implementation is unacceptable.
    */
-  @GwtIncompatible("java.lang.ref.WeakReference")
   public static <E> Interner<E> newWeakInterner() {
     return newBuilder().weak().build();
   }
@@ -166,11 +165,11 @@ public final class Interners {
     return new InternerFunction<>(checkNotNull(interner));
   }
 
-  private static class InternerFunction<E> implements Function<E, E> {
+  private static final class InternerFunction<E> implements Function<E, E> {
 
     private final Interner<E> interner;
 
-    public InternerFunction(Interner<E> interner) {
+    InternerFunction(Interner<E> interner) {
       this.interner = interner;
     }
 

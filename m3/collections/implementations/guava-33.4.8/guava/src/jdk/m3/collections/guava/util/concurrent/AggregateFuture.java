@@ -31,7 +31,6 @@ import com.google.errorprone.annotations.concurrent.LazyInit;
 import com.google.j2objc.annotations.RetainedLocalRef;
 import java.util.Set;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Future;
 import org.jspecify.annotations.Nullable;
 
 /**
@@ -79,12 +78,12 @@ abstract class AggregateFuture<InputT extends @Nullable Object, OutputT extends 
   protected final void afterDone() {
     super.afterDone();
 
-    @RetainedLocalRef ImmutableCollection<? extends Future<?>> localFutures = futures;
+    @RetainedLocalRef ImmutableCollection<? extends ListenableFuture<?>> localFutures = futures;
     releaseResources(OUTPUT_FUTURE_DONE); // nulls out `futures`
 
     if (isCancelled() & localFutures != null) {
       boolean wasInterrupted = wasInterrupted();
-      for (Future<?> future : localFutures) {
+      for (ListenableFuture<?> future : localFutures) {
         future.cancel(wasInterrupted);
       }
     }
@@ -96,7 +95,7 @@ abstract class AggregateFuture<InputT extends @Nullable Object, OutputT extends 
 
   @Override
   protected final @Nullable String pendingToString() {
-    @RetainedLocalRef ImmutableCollection<? extends Future<?>> localFutures = futures;
+    @RetainedLocalRef ImmutableCollection<? extends ListenableFuture<?>> localFutures = futures;
     if (localFutures != null) {
       return "futures=" + localFutures;
     }
@@ -166,7 +165,7 @@ abstract class AggregateFuture<InputT extends @Nullable Object, OutputT extends 
        */
       @RetainedLocalRef
       ImmutableCollection<? extends ListenableFuture<? extends InputT>> localFutures = futures;
-      ImmutableCollection<? extends Future<? extends InputT>> localFuturesOrNull =
+      ImmutableCollection<? extends ListenableFuture<? extends InputT>> localFuturesOrNull =
           collectsValues ? localFutures : null;
       Runnable listener = () -> decrementCountAndMaybeComplete(localFuturesOrNull);
       for (ListenableFuture<? extends InputT> future : localFutures) {
@@ -277,7 +276,8 @@ abstract class AggregateFuture<InputT extends @Nullable Object, OutputT extends 
    * Collects the result (success or failure) of one input future. The input must not have been
    * cancelled. For details on when this is called, see {@link #collectOneValue}.
    */
-  private void collectValueFromNonCancelledFuture(int index, Future<? extends InputT> future) {
+  private void collectValueFromNonCancelledFuture(
+      int index, ListenableFuture<? extends InputT> future) {
     try {
       // We get the result, even if collectOneValue is a no-op, so that we can fail fast.
       // We use getUninterruptibly over getDone as a micro-optimization, we know the future is done.
@@ -290,7 +290,7 @@ abstract class AggregateFuture<InputT extends @Nullable Object, OutputT extends 
   }
 
   private void decrementCountAndMaybeComplete(
-      @Nullable ImmutableCollection<? extends Future<? extends InputT>>
+      @Nullable ImmutableCollection<? extends ListenableFuture<? extends InputT>>
           futuresIfNeedToCollectAtCompletion) {
     int newRemaining = decrementRemainingAndGet();
     checkState(newRemaining >= 0, "Less than 0 remaining futures");
@@ -300,11 +300,11 @@ abstract class AggregateFuture<InputT extends @Nullable Object, OutputT extends 
   }
 
   private void processCompleted(
-      @Nullable ImmutableCollection<? extends Future<? extends InputT>>
+      @Nullable ImmutableCollection<? extends ListenableFuture<? extends InputT>>
           futuresIfNeedToCollectAtCompletion) {
     if (futuresIfNeedToCollectAtCompletion != null) {
       int i = 0;
-      for (Future<? extends InputT> future : futuresIfNeedToCollectAtCompletion) {
+      for (ListenableFuture<? extends InputT> future : futuresIfNeedToCollectAtCompletion) {
         if (!future.isCancelled()) {
           collectValueFromNonCancelledFuture(i, future);
         }

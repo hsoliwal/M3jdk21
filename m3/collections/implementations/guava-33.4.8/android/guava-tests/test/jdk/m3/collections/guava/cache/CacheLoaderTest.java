@@ -16,12 +16,14 @@
 
 package jdk.m3.collections.guava.cache;
 
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
 import static jdk.m3.collections.guava.util.concurrent.Futures.immediateFuture;
 
+import jdk.m3.collections.guava.annotations.GwtIncompatible;
 import jdk.m3.collections.guava.collect.ImmutableList;
 import jdk.m3.collections.guava.collect.ImmutableMap;
-import jdk.m3.collections.guava.collect.Queues;
 import jdk.m3.collections.guava.util.concurrent.ListenableFuture;
+import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.Map;
 import java.util.concurrent.Executor;
@@ -35,11 +37,12 @@ import org.jspecify.annotations.NullUnmarked;
  *
  * @author Charles Fry
  */
+@GwtIncompatible
 @NullUnmarked
 public class CacheLoaderTest extends TestCase {
 
   private static class QueuingExecutor implements Executor {
-    private final Deque<Runnable> tasks = Queues.newArrayDeque();
+    private final Deque<Runnable> tasks = new ArrayDeque<>();
 
     @Override
     public void execute(Runnable task) {
@@ -52,9 +55,9 @@ public class CacheLoaderTest extends TestCase {
   }
 
   public void testAsyncReload() throws Exception {
-    final AtomicInteger loadCount = new AtomicInteger();
-    final AtomicInteger reloadCount = new AtomicInteger();
-    final AtomicInteger loadAllCount = new AtomicInteger();
+    AtomicInteger loadCount = new AtomicInteger();
+    AtomicInteger reloadCount = new AtomicInteger();
+    AtomicInteger loadAllCount = new AtomicInteger();
 
     CacheLoader<Object, Object> baseLoader =
         new CacheLoader<Object, Object>() {
@@ -71,23 +74,23 @@ public class CacheLoaderTest extends TestCase {
           }
 
           @Override
-          public Map<Object, Object> loadAll(Iterable<?> keys) {
+          public Map<Object, Object> loadAll(Iterable<? extends Object> keys) {
             loadAllCount.incrementAndGet();
             return ImmutableMap.of();
           }
         };
 
-    assertEquals(0, loadCount.get());
-    assertEquals(0, reloadCount.get());
-    assertEquals(0, loadAllCount.get());
+    assertThat(loadCount.get()).isEqualTo(0);
+    assertThat(reloadCount.get()).isEqualTo(0);
+    assertThat(loadAllCount.get()).isEqualTo(0);
 
     Object unused1 = baseLoader.load(new Object());
     @SuppressWarnings("unused") // https://errorprone.info/bugpattern/FutureReturnValueIgnored
     Future<?> possiblyIgnoredError = baseLoader.reload(new Object(), new Object());
     Map<Object, Object> unused2 = baseLoader.loadAll(ImmutableList.of(new Object()));
-    assertEquals(1, loadCount.get());
-    assertEquals(1, reloadCount.get());
-    assertEquals(1, loadAllCount.get());
+    assertThat(loadCount.get()).isEqualTo(1);
+    assertThat(reloadCount.get()).isEqualTo(1);
+    assertThat(loadAllCount.get()).isEqualTo(1);
 
     QueuingExecutor executor = new QueuingExecutor();
     CacheLoader<Object, Object> asyncReloader = CacheLoader.asyncReloading(baseLoader, executor);
@@ -96,13 +99,13 @@ public class CacheLoaderTest extends TestCase {
     @SuppressWarnings("unused") // https://errorprone.info/bugpattern/FutureReturnValueIgnored
     Future<?> possiblyIgnoredError1 = asyncReloader.reload(new Object(), new Object());
     Map<Object, Object> unused4 = asyncReloader.loadAll(ImmutableList.of(new Object()));
-    assertEquals(2, loadCount.get());
-    assertEquals(1, reloadCount.get());
-    assertEquals(2, loadAllCount.get());
+    assertThat(loadCount.get()).isEqualTo(2);
+    assertThat(reloadCount.get()).isEqualTo(1);
+    assertThat(loadAllCount.get()).isEqualTo(2);
 
     executor.runNext();
-    assertEquals(2, loadCount.get());
-    assertEquals(2, reloadCount.get());
-    assertEquals(2, loadAllCount.get());
+    assertThat(loadCount.get()).isEqualTo(2);
+    assertThat(reloadCount.get()).isEqualTo(2);
+    assertThat(loadAllCount.get()).isEqualTo(2);
   }
 }

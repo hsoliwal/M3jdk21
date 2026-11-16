@@ -23,6 +23,7 @@ import static jdk.m3.collections.guava.net.UrlEscaperTesting.assertPathEscaper;
 import static jdk.m3.collections.guava.net.UrlEscapers.urlFormParameterEscaper;
 import static jdk.m3.collections.guava.net.UrlEscapers.urlFragmentEscaper;
 import static jdk.m3.collections.guava.net.UrlEscapers.urlPathSegmentEscaper;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.escape.UnicodeEscaper;
@@ -40,7 +41,7 @@ public class UrlEscapersTest extends TestCase {
   public void testUrlFormParameterEscaper() {
     UnicodeEscaper e = (UnicodeEscaper) urlFormParameterEscaper();
     // Verify that these are the same escaper (as documented)
-    assertSame(e, urlFormParameterEscaper());
+    assertThat(urlFormParameterEscaper()).isSameInstanceAs(e);
     assertBasicUrlEscaper(e);
 
     /*
@@ -58,8 +59,8 @@ public class UrlEscapersTest extends TestCase {
     assertEscaping(e, "+", ' ');
     assertEscaping(e, "%2B", '+');
 
-    assertEquals("safe+with+spaces", e.escape("safe with spaces"));
-    assertEquals("foo%40bar.com", e.escape("foo@bar.com"));
+    assertThat(e.escape("safe with spaces")).isEqualTo("safe+with+spaces");
+    assertThat(e.escape("foo@bar.com")).isEqualTo("foo%40bar.com");
   }
 
   public void testUrlPathSegmentEscaper() {

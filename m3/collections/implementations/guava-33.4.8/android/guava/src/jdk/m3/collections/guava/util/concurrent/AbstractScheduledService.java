@@ -19,8 +19,11 @@ import static jdk.m3.collections.guava.base.Preconditions.checkNotNull;
 import static jdk.m3.collections.guava.util.concurrent.Futures.immediateCancelledFuture;
 import static jdk.m3.collections.guava.util.concurrent.Internal.toNanosSaturated;
 import static jdk.m3.collections.guava.util.concurrent.MoreExecutors.directExecutor;
+import static jdk.m3.collections.guava.util.concurrent.MoreExecutors.newThread;
+import static jdk.m3.collections.guava.util.concurrent.MoreExecutors.renamingDecorator;
 import static jdk.m3.collections.guava.util.concurrent.Platform.restoreInterruptIfIsInterruptedException;
 import static java.util.Objects.requireNonNull;
+import static java.util.concurrent.Executors.newSingleThreadScheduledExecutor;
 import static java.util.concurrent.TimeUnit.NANOSECONDS;
 
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
@@ -31,7 +34,6 @@ import com.google.j2objc.annotations.WeakOuter;
 import java.time.Duration;
 import java.util.concurrent.Callable;
 import java.util.concurrent.Executor;
-import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
@@ -60,7 +62,7 @@ import org.jspecify.annotations.Nullable;
  * shared state without additional synchronization necessary for visibility to later executions of
  * the life cycle methods.
  *
- * <h3>Usage Example</h3>
+ * <h2>Usage Example</h2>
  *
  * <p>Here is a sketch of a service which crawls a website and uses the scheduling capabilities to
  * rate limit itself.
@@ -126,7 +128,6 @@ public abstract class AbstractScheduledService implements Service {
      *     next
      * @since 33.4.0 (but since 28.0 in the JRE flavor)
      */
-    @SuppressWarnings("Java7ApiChecker")
     @IgnoreJRERequirement // Users will use this only if they're already using Duration
     public static Scheduler newFixedDelaySchedule(Duration initialDelay, Duration delay) {
       return newFixedDelaySchedule(
@@ -148,7 +149,7 @@ public abstract class AbstractScheduledService implements Service {
       checkArgument(delay > 0, "delay must be > 0, found %s", delay);
       return new Scheduler() {
         @Override
-        public Cancellable schedule(
+        Cancellable schedule(
             AbstractService service, ScheduledExecutorService executor, Runnable task) {
           return new FutureAsCancellable(
               executor.scheduleWithFixedDelay(task, initialDelay, delay, unit));
@@ -164,7 +165,6 @@ public abstract class AbstractScheduledService implements Service {
      * @param period the period between successive executions of the task
      * @since 33.4.0 (but since 28.0 in the JRE flavor)
      */
-    @SuppressWarnings("Java7ApiChecker")
     @IgnoreJRERequirement // Users will use this only if they're already using Duration
     public static Scheduler newFixedRateSchedule(Duration initialDelay, Duration period) {
       return newFixedRateSchedule(
@@ -185,7 +185,7 @@ public abstract class AbstractScheduledService implements Service {
       checkArgument(period > 0, "period must be > 0, found %s", period);
       return new Scheduler() {
         @Override
-        public Cancellable schedule(
+        Cancellable schedule(
             AbstractService service, ScheduledExecutorService executor, Runnable task) {
           return new FutureAsCancellable(
               executor.scheduleAtFixedRate(task, initialDelay, period, unit));
@@ -218,7 +218,7 @@ public abstract class AbstractScheduledService implements Service {
     private final ReentrantLock lock = new ReentrantLock();
 
     @WeakOuter
-    class Task implements Runnable {
+    final class Task implements Runnable {
       @Override
       public void run() {
         lock.lock();
@@ -257,62 +257,59 @@ public abstract class AbstractScheduledService implements Service {
     private final Runnable task = new Task();
 
     @Override
-    protected final void doStart() {
-      executorService =
-          MoreExecutors.renamingDecorator(executor(), () -> serviceName() + " " + state());
-      executorService.execute(
-          () -> {
-            lock.lock();
-            try {
-              startUp();
-              /*
-               * requireNonNull is safe because executorService is never cleared after the
-               * assignment above.
-               */
-              requireNonNull(executorService);
-              runningTask = scheduler().schedule(delegate, executorService, task);
-              notifyStarted();
-            } catch (Throwable t) {
-              restoreInterruptIfIsInterruptedException(t);
-              notifyFailed(t);
-              if (runningTask != null) {
-                // prevent the task from running if possible
-                runningTask.cancel(false);
-              }
-            } finally {
-              lock.unlock();
-            }
-          });
+    protected void doStart() {
+      executorService = renamingDecorator(executor(), () -> serviceName() + " " + state());
+      executorService.execute(() -> {
+        lock.lock();
+        try {
+          startUp();
+          /*
+           * requireNonNull is safe because executorService is never cleared after the
+           * assignment above.
+           */
+          requireNonNull(executorService);
+          runningTask = scheduler().schedule(delegate, executorService, task);
+          notifyStarted();
+        } catch (Throwable t) {
+          restoreInterruptIfIsInterruptedException(t);
+          notifyFailed(t);
+          if (runningTask != null) {
+            // prevent the task from running if possible
+            runningTask.cancel(false);
+          }
+        } finally {
+          lock.unlock();
+        }
+      });
     }
 
     @Override
-    protected final void doStop() {
+    protected void doStop() {
       // Both requireNonNull calls are safe because doStop can run only after a successful doStart.
       requireNonNull(runningTask);
       requireNonNull(executorService);
       runningTask.cancel(false);
-      executorService.execute(
-          () -> {
-            try {
-              lock.lock();
-              try {
-                if (state() != State.STOPPING) {
-                  // This means that the state has changed since we were scheduled. This implies
-                  // that an execution of runOneIteration has thrown an exception and we have
-                  // transitioned to a failed state, also this means that shutDown has already
-                  // been called, so we do not want to call it again.
-                  return;
-                }
-                shutDown();
-              } finally {
-                lock.unlock();
-              }
-              notifyStopped();
-            } catch (Throwable t) {
-              restoreInterruptIfIsInterruptedException(t);
-              notifyFailed(t);
+      executorService.execute(() -> {
+        try {
+          lock.lock();
+          try {
+            if (state() != State.STOPPING) {
+              // This means that the state has changed since we were scheduled. This implies
+              // that an execution of runOneIteration has thrown an exception and we have
+              // transitioned to a failed state, also this means that shutDown has already
+              // been called, so we do not want to call it again.
+              return;
             }
-          });
+            shutDown();
+          } finally {
+            lock.unlock();
+          }
+          notifyStopped();
+        } catch (Throwable t) {
+          restoreInterruptIfIsInterruptedException(t);
+          notifyFailed(t);
+        }
+      });
     }
 
     @Override
@@ -367,15 +364,8 @@ public abstract class AbstractScheduledService implements Service {
    * fails}.
    */
   protected ScheduledExecutorService executor() {
-    @WeakOuter
-    class ThreadFactoryImpl implements ThreadFactory {
-      @Override
-      public Thread newThread(Runnable runnable) {
-        return MoreExecutors.newThread(serviceName(), runnable);
-      }
-    }
-    ScheduledExecutorService executor =
-        Executors.newSingleThreadScheduledExecutor(new ThreadFactoryImpl());
+    @WeakOuter ThreadFactory threadFactory = runnable -> newThread(serviceName(), runnable);
+    ScheduledExecutorService executor = newSingleThreadScheduledExecutor(threadFactory);
     // Add a listener to shut down the executor after the service is stopped. This ensures that the
     // JVM shutdown will not be prevented from exiting after this service has stopped or failed.
     // Technically this listener is added after start() was called so it is a little gross, but it
@@ -525,7 +515,7 @@ public abstract class AbstractScheduledService implements Service {
    */
   public abstract static class CustomScheduler extends Scheduler {
     /** Constructor for use by subclasses. */
-    public CustomScheduler() {}
+    protected CustomScheduler() {}
 
     /** A callable class that can reschedule itself using a {@link CustomScheduler}. */
     private final class ReschedulableCallable implements Callable<@Nullable Void> {
@@ -582,7 +572,7 @@ public abstract class AbstractScheduledService implements Service {
       }
 
       @Override
-      public @Nullable Void call() throws Exception {
+      public @Nullable Void call() {
         wrappedRunnable.run();
         reschedule();
         return null;
@@ -593,7 +583,7 @@ public abstract class AbstractScheduledService implements Service {
        * #cancellationDelegate}.
        */
       @CanIgnoreReturnValue
-      public Cancellable reschedule() {
+      Cancellable reschedule() {
         // invoke the callback outside the lock, prevents some shenanigans.
         Schedule schedule;
         try {
@@ -645,9 +635,8 @@ public abstract class AbstractScheduledService implements Service {
       @SuppressWarnings("GuardedBy")
       private Cancellable initializeOrUpdateCancellationDelegate(Schedule schedule) {
         if (cancellationDelegate == null) {
-          return cancellationDelegate = new SupplantableFuture(lock, submitToExecutor(schedule));
-        }
-        if (!cancellationDelegate.currentFuture.isCancelled()) {
+          cancellationDelegate = new SupplantableFuture(lock, submitToExecutor(schedule));
+        } else if (!cancellationDelegate.currentFuture.isCancelled()) {
           cancellationDelegate.currentFuture = submitToExecutor(schedule);
         }
         return cancellationDelegate;
@@ -736,7 +725,6 @@ public abstract class AbstractScheduledService implements Service {
        * @param delay the time from now to delay execution
        * @since 33.4.0 (but since 31.1 in the JRE flavor)
        */
-      @SuppressWarnings("Java7ApiChecker")
       @IgnoreJRERequirement // Users will use this only if they're already using Duration
       public Schedule(Duration delay) {
         this(toNanosSaturated(delay), NANOSECONDS);

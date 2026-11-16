@@ -19,19 +19,19 @@ import static jdk.m3.collections.guava.base.Preconditions.checkNotNull;
 import static jdk.m3.collections.guava.base.Preconditions.checkState;
 import static jdk.m3.collections.guava.math.DoubleUtils.ensureNonNegative;
 import static jdk.m3.collections.guava.math.StatsAccumulator.calculateNewMeanNonFinite;
-import static jdk.m3.collections.guava.primitives.Doubles.isFinite;
 import static java.lang.Double.NaN;
 import static java.lang.Double.doubleToLongBits;
+import static java.lang.Double.isFinite;
 import static java.lang.Double.isNaN;
 
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
 import jdk.m3.collections.guava.annotations.J2ktIncompatible;
 import jdk.m3.collections.guava.base.MoreObjects;
-import jdk.m3.collections.guava.base.Objects;
 import java.io.Serializable;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.util.Iterator;
+import java.util.Objects;
 import java.util.stream.Collector;
 import java.util.stream.DoubleStream;
 import java.util.stream.IntStream;
@@ -237,7 +237,7 @@ public final class Stats implements Serializable {
    * <p>If these values are a sample drawn from a population, this is also an unbiased estimator of
    * the arithmetic mean of the population.
    *
-   * <h3>Non-finite values</h3>
+   * <h4>Non-finite values</h4>
    *
    * <p>If the dataset contains {@link Double#NaN} then the result is {@link Double#NaN}. If it
    * contains both {@link Double#POSITIVE_INFINITY} and {@link Double#NEGATIVE_INFINITY} then the
@@ -259,7 +259,7 @@ public final class Stats implements Serializable {
   /**
    * Returns the sum of the values.
    *
-   * <h3>Non-finite values</h3>
+   * <h4>Non-finite values</h4>
    *
    * <p>If the dataset contains {@link Double#NaN} then the result is {@link Double#NaN}. If it
    * contains both {@link Double#POSITIVE_INFINITY} and {@link Double#NEGATIVE_INFINITY} then the
@@ -280,7 +280,7 @@ public final class Stats implements Serializable {
    * is not guaranteed to return zero when the dataset consists of the same value multiple times,
    * due to numerical errors. However, it is guaranteed never to return a negative result.
    *
-   * <h3>Non-finite values</h3>
+   * <h4>Non-finite values</h4>
    *
    * <p>If the dataset contains any non-finite values ({@link Double#POSITIVE_INFINITY}, {@link
    * Double#NEGATIVE_INFINITY}, or {@link Double#NaN}) then the result is {@link Double#NaN}.
@@ -307,7 +307,7 @@ public final class Stats implements Serializable {
    * is not guaranteed to return zero when the dataset consists of the same value multiple times,
    * due to numerical errors. However, it is guaranteed never to return a negative result.
    *
-   * <h3>Non-finite values</h3>
+   * <h4>Non-finite values</h4>
    *
    * <p>If the dataset contains any non-finite values ({@link Double#POSITIVE_INFINITY}, {@link
    * Double#NEGATIVE_INFINITY}, or {@link Double#NaN}) then the result is {@link Double#NaN}.
@@ -327,7 +327,7 @@ public final class Stats implements Serializable {
    * <p>This is not guaranteed to return zero when the dataset consists of the same value multiple
    * times, due to numerical errors. However, it is guaranteed never to return a negative result.
    *
-   * <h3>Non-finite values</h3>
+   * <h4>Non-finite values</h4>
    *
    * <p>If the dataset contains any non-finite values ({@link Double#POSITIVE_INFINITY}, {@link
    * Double#NEGATIVE_INFINITY}, or {@link Double#NaN}) then the result is {@link Double#NaN}.
@@ -353,7 +353,7 @@ public final class Stats implements Serializable {
    * <p>This is not guaranteed to return zero when the dataset consists of the same value multiple
    * times, due to numerical errors. However, it is guaranteed never to return a negative result.
    *
-   * <h3>Non-finite values</h3>
+   * <h4>Non-finite values</h4>
    *
    * <p>If the dataset contains any non-finite values ({@link Double#POSITIVE_INFINITY}, {@link
    * Double#NEGATIVE_INFINITY}, or {@link Double#NaN}) then the result is {@link Double#NaN}.
@@ -367,7 +367,7 @@ public final class Stats implements Serializable {
   /**
    * Returns the lowest value in the dataset. The count must be non-zero.
    *
-   * <h3>Non-finite values</h3>
+   * <h4>Non-finite values</h4>
    *
    * <p>If the dataset contains {@link Double#NaN} then the result is {@link Double#NaN}. If it
    * contains {@link Double#NEGATIVE_INFINITY} and not {@link Double#NaN} then the result is {@link
@@ -385,7 +385,7 @@ public final class Stats implements Serializable {
   /**
    * Returns the highest value in the dataset. The count must be non-zero.
    *
-   * <h3>Non-finite values</h3>
+   * <h4>Non-finite values</h4>
    *
    * <p>If the dataset contains {@link Double#NaN} then the result is {@link Double#NaN}. If it
    * contains {@link Double#POSITIVE_INFINITY} and not {@link Double#NaN} then the result is {@link
@@ -439,7 +439,7 @@ public final class Stats implements Serializable {
    */
   @Override
   public int hashCode() {
-    return Objects.hashCode(count, mean, sumOfSquaresOfDeltas, min, max);
+    return Objects.hash(count, mean, sumOfSquaresOfDeltas, min, max);
   }
 
   @Override

@@ -17,11 +17,11 @@
 package jdk.m3.collections.guava.graph;
 
 import static jdk.m3.collections.guava.graph.GraphConstants.EXPECTED_DEGREE;
+import static java.util.Collections.unmodifiableSet;
 
 import jdk.m3.collections.guava.collect.BiMap;
 import jdk.m3.collections.guava.collect.HashBiMap;
 import jdk.m3.collections.guava.collect.ImmutableBiMap;
-import java.util.Collections;
 import java.util.Map;
 import java.util.Set;
 
@@ -39,7 +39,7 @@ final class UndirectedNetworkConnections<N, E> extends AbstractUndirectedNetwork
   }
 
   static <N, E> UndirectedNetworkConnections<N, E> of() {
-    return new UndirectedNetworkConnections<>(HashBiMap.<E, N>create(EXPECTED_DEGREE));
+    return new UndirectedNetworkConnections<>(HashBiMap.create(EXPECTED_DEGREE));
   }
 
   static <N, E> UndirectedNetworkConnections<N, E> ofImmutable(Map<E, N> incidentEdges) {
@@ -48,7 +48,7 @@ final class UndirectedNetworkConnections<N, E> extends AbstractUndirectedNetwork
 
   @Override
   public Set<N> adjacentNodes() {
-    return Collections.unmodifiableSet(((BiMap<E, N>) incidentEdgeMap).values());
+    return unmodifiableSet(((BiMap<E, N>) incidentEdgeMap).values());
   }
 
   @Override

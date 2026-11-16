@@ -29,8 +29,7 @@ import java.lang.annotation.Target;
 
 /**
  * Signifies that a test should not be run under Android. This annotation is respected only by our
- * Google-internal Android suite generators. Note that those generators also suppress any test
- * annotated with LargeTest.
+ * Google-internal Android suite generators.
  *
  * <p>For more discussion, see {@linkplain jdk.m3.collections.guava.base.AndroidIncompatible the
  * documentation on another copy of this annotation}.

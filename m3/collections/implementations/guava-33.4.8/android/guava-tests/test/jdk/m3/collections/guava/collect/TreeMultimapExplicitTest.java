@@ -18,12 +18,12 @@ package jdk.m3.collections.guava.collect;
 
 import static jdk.m3.collections.guava.collect.Maps.immutableEntry;
 import static jdk.m3.collections.guava.collect.Sets.newHashSet;
-import static com.google.common.truth.Truth.assertThat;
+import static jdk.m3.collections.guava.testing.SerializableTester.reserializeAndAssert;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
 import static java.util.Arrays.asList;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
-import jdk.m3.collections.guava.testing.SerializableTester;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.Iterator;
@@ -38,7 +38,7 @@ import org.jspecify.annotations.Nullable;
  *
  * @author Jared Levy
  */
-@GwtCompatible(emulated = true)
+@GwtCompatible
 @NullMarked
 public class TreeMultimapExplicitTest extends TestCase {
 
@@ -67,14 +67,14 @@ public class TreeMultimapExplicitTest extends TestCase {
 
   /** Decreasing integer values. A {@code null} comes before any non-null value. */
   private static final Comparator<@Nullable Integer> DECREASING_INT_COMPARATOR =
-      Ordering.<Integer>natural().reverse().<Integer>nullsFirst();
+      Ordering.<Integer>natural().reverse().nullsFirst();
 
-  private SetMultimap<String, Integer> create() {
+  private static SetMultimap<String, Integer> create() {
     return TreeMultimap.create(StringLength.COMPARATOR, DECREASING_INT_COMPARATOR);
   }
 
   /** Create and populate a {@code TreeMultimap} with explicit comparators. */
-  private TreeMultimap<@Nullable String, @Nullable Integer> createPopulate() {
+  private static TreeMultimap<@Nullable String, @Nullable Integer> createPopulate() {
     TreeMultimap<@Nullable String, @Nullable Integer> multimap =
         TreeMultimap.create(StringLength.COMPARATOR, DECREASING_INT_COMPARATOR);
     multimap.put("google", 2);
@@ -114,7 +114,7 @@ public class TreeMultimapExplicitTest extends TestCase {
     multimap.putAll("foo", asList(-1, 2, 4));
     multimap.putAll("bar", asList(2, 3));
     multimap.put("foo", 1);
-    assertEquals("{bar=[3, 2, 1], foo=[4, 3, 2, 1, -1]}", multimap.toString());
+    assertThat(multimap.toString()).isEqualTo("{bar=[3, 2, 1], foo=[4, 3, 2, 1, -1]}");
   }
 
   public void testGetComparator() {
@@ -139,13 +139,13 @@ public class TreeMultimapExplicitTest extends TestCase {
     TreeMultimap<@Nullable String, @Nullable Integer> multimap = createPopulate();
     Iterator<Entry<String, Collection<Integer>>> iterator = multimap.asMap().entrySet().iterator();
     Entry<String, Collection<Integer>> entry = iterator.next();
-    assertEquals(null, entry.getKey());
+    assertThat(entry.getKey()).isNull();
     assertThat(entry.getValue()).containsExactly(7, 3, 1);
     entry = iterator.next();
-    assertEquals("tree", entry.getKey());
+    assertThat(entry.getKey()).isEqualTo("tree");
     assertThat(entry.getValue()).containsExactly(null, 0);
     entry = iterator.next();
-    assertEquals("google", entry.getKey());
+    assertThat(entry.getKey()).isEqualTo("google");
     assertThat(entry.getValue()).containsExactly(6, 2);
   }
 
@@ -193,8 +193,8 @@ public class TreeMultimapExplicitTest extends TestCase {
     TreeMultimap<@Nullable String, @Nullable Integer> multimap = createPopulate();
     SortedSet<@Nullable String> keySet = multimap.keySet();
 
-    assertEquals(null, keySet.first());
-    assertEquals("google", keySet.last());
+    assertThat(keySet.first()).isNull();
+    assertThat(keySet.last()).isEqualTo("google");
     assertEquals(StringLength.COMPARATOR, keySet.comparator());
     assertEquals(Sets.<@Nullable String>newHashSet(null, "tree"), keySet.headSet("yahoo"));
     assertEquals(newHashSet("google"), keySet.tailSet("yahoo"));
@@ -204,8 +204,7 @@ public class TreeMultimapExplicitTest extends TestCase {
   @GwtIncompatible // SerializableTester
   public void testExplicitComparatorSerialization() {
     TreeMultimap<@Nullable String, @Nullable Integer> multimap = createPopulate();
-    TreeMultimap<@Nullable String, @Nullable Integer> copy =
-        SerializableTester.reserializeAndAssert(multimap);
+    TreeMultimap<@Nullable String, @Nullable Integer> copy = reserializeAndAssert(multimap);
     assertThat(copy.values()).containsExactly(7, 3, 1, null, 0, 6, 2).inOrder();
     assertThat(copy.keySet()).containsExactly(null, "tree", "google").inOrder();
     assertEquals(multimap.keyComparator(), copy.keyComparator());

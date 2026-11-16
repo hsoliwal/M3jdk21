@@ -16,34 +16,40 @@
 
 package jdk.m3.collections.guava.cache;
 
-import static jdk.m3.collections.guava.cache.ReflectionFreeAssertThrows.assertThrows;
 import static jdk.m3.collections.guava.cache.TestingCacheLoaders.constantLoader;
 import static jdk.m3.collections.guava.cache.TestingCacheLoaders.identityLoader;
 import static jdk.m3.collections.guava.cache.TestingRemovalListeners.countingRemovalListener;
 import static jdk.m3.collections.guava.cache.TestingRemovalListeners.nullRemovalListener;
 import static jdk.m3.collections.guava.cache.TestingRemovalListeners.queuingRemovalListener;
 import static jdk.m3.collections.guava.cache.TestingWeighers.constantWeigher;
-import static com.google.common.truth.Truth.assertThat;
+import static jdk.m3.collections.guava.collect.Maps.immutableEntry;
+import static jdk.m3.collections.guava.collect.Sets.newHashSetWithExpectedSize;
+import static jdk.m3.collections.guava.collect.Sets.union;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
+import static jdk.m3.collections.guava.truth.Truth.assertWithMessage;
+import static java.util.Objects.requireNonNull;
+import static java.util.concurrent.Executors.newFixedThreadPool;
 import static java.util.concurrent.TimeUnit.MILLISECONDS;
 import static java.util.concurrent.TimeUnit.NANOSECONDS;
 import static java.util.concurrent.TimeUnit.SECONDS;
+import static org.junit.Assert.assertThrows;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
+import jdk.m3.collections.guava.annotations.J2ktIncompatible;
 import jdk.m3.collections.guava.base.Ticker;
 import jdk.m3.collections.guava.cache.TestingRemovalListeners.CountingRemovalListener;
 import jdk.m3.collections.guava.cache.TestingRemovalListeners.QueuingRemovalListener;
-import jdk.m3.collections.guava.collect.Maps;
-import jdk.m3.collections.guava.collect.Sets;
 import jdk.m3.collections.guava.testing.NullPointerTester;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import java.time.Duration;
+import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Random;
 import java.util.Set;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -51,7 +57,7 @@ import junit.framework.TestCase;
 import org.jspecify.annotations.NullUnmarked;
 
 /** Unit tests for CacheBuilder. */
-@GwtCompatible(emulated = true)
+@GwtCompatible
 // We are intentionally testing the TimeUnit overloads, too.
 @SuppressWarnings("LongTimeUnit_ExpireAfterWrite_Seconds")
 @NullUnmarked
@@ -63,8 +69,8 @@ public class CacheBuilderTest extends TestCase {
     LoadingCache<String, Integer> cache =
         CacheBuilder.newBuilder().removalListener(countingRemovalListener()).build(loader);
 
-    assertEquals(Integer.valueOf(1), cache.getUnchecked("one"));
-    assertEquals(1, cache.size());
+    assertThat(cache.getUnchecked("one")).isEqualTo(1);
+    assertThat(cache.size()).isEqualTo(1);
   }
 
   public void testInitialCapacity_negative() {
@@ -77,18 +83,20 @@ public class CacheBuilderTest extends TestCase {
     assertThrows(IllegalStateException.class, () -> builder.initialCapacity(16));
   }
 
+  @J2ktIncompatible
   @GwtIncompatible // CacheTesting
   public void testInitialCapacity_small() {
     LoadingCache<?, ?> cache = CacheBuilder.newBuilder().initialCapacity(5).build(identityLoader());
     LocalCache<?, ?> map = CacheTesting.toLocalCache(cache);
 
     assertThat(map.segments).hasLength(4);
-    assertEquals(2, map.segments[0].table.length());
-    assertEquals(2, map.segments[1].table.length());
-    assertEquals(2, map.segments[2].table.length());
-    assertEquals(2, map.segments[3].table.length());
+    assertThat(map.segments[0].table.length()).isEqualTo(2);
+    assertThat(map.segments[1].table.length()).isEqualTo(2);
+    assertThat(map.segments[2].table.length()).isEqualTo(2);
+    assertThat(map.segments[3].table.length()).isEqualTo(2);
   }
 
+  @J2ktIncompatible
   @GwtIncompatible // CacheTesting
   public void testInitialCapacity_smallest() {
     LoadingCache<?, ?> cache = CacheBuilder.newBuilder().initialCapacity(0).build(identityLoader());
@@ -96,10 +104,10 @@ public class CacheBuilderTest extends TestCase {
 
     assertThat(map.segments).hasLength(4);
     // 1 is as low as it goes, not 0. it feels dirty to know this/test this.
-    assertEquals(1, map.segments[0].table.length());
-    assertEquals(1, map.segments[1].table.length());
-    assertEquals(1, map.segments[2].table.length());
-    assertEquals(1, map.segments[3].table.length());
+    assertThat(map.segments[0].table.length()).isEqualTo(1);
+    assertThat(map.segments[1].table.length()).isEqualTo(1);
+    assertThat(map.segments[2].table.length()).isEqualTo(1);
+    assertThat(map.segments[3].table.length()).isEqualTo(1);
   }
 
   public void testInitialCapacity_large() {
@@ -118,6 +126,7 @@ public class CacheBuilderTest extends TestCase {
     assertThrows(IllegalStateException.class, () -> builder.concurrencyLevel(16));
   }
 
+  @J2ktIncompatible
   @GwtIncompatible // CacheTesting
   public void testConcurrencyLevel_small() {
     LoadingCache<?, ?> cache =
@@ -141,12 +150,14 @@ public class CacheBuilderTest extends TestCase {
     assertThrows(IllegalStateException.class, () -> builder.maximumSize(16));
   }
 
+  @J2ktIncompatible
   @GwtIncompatible // maximumWeight
   public void testMaximumSize_andWeight() {
     CacheBuilder<Object, Object> builder = CacheBuilder.newBuilder().maximumSize(16);
     assertThrows(IllegalStateException.class, () -> builder.maximumWeight(16));
   }
 
+  @J2ktIncompatible
   @GwtIncompatible // digs into internals of the non-GWT implementation
   public void testMaximumSize_largerThanInt() {
     CacheBuilder<Object, Object> builder =
@@ -155,12 +166,14 @@ public class CacheBuilderTest extends TestCase {
     assertThat(cache.segments.length * cache.segments[0].table.length()).isEqualTo(512);
   }
 
+  @J2ktIncompatible
   @GwtIncompatible // maximumWeight
   public void testMaximumWeight_negative() {
     CacheBuilder<Object, Object> builder = CacheBuilder.newBuilder();
     assertThrows(IllegalArgumentException.class, () -> builder.maximumWeight(-1));
   }
 
+  @J2ktIncompatible
   @GwtIncompatible // maximumWeight
   public void testMaximumWeight_setTwice() {
     CacheBuilder<Object, Object> builder = CacheBuilder.newBuilder().maximumWeight(16);
@@ -168,18 +181,21 @@ public class CacheBuilderTest extends TestCase {
     assertThrows(IllegalStateException.class, () -> builder.maximumSize(16));
   }
 
+  @J2ktIncompatible
   @GwtIncompatible // maximumWeight
   public void testMaximumWeight_withoutWeigher() {
     CacheBuilder<Object, Object> builder = CacheBuilder.newBuilder().maximumWeight(1);
     assertThrows(IllegalStateException.class, () -> builder.build(identityLoader()));
   }
 
+  @J2ktIncompatible
   @GwtIncompatible // weigher
   public void testWeigher_withoutMaximumWeight() {
     CacheBuilder<Object, Object> builder = CacheBuilder.newBuilder().weigher(constantWeigher(42));
     assertThrows(IllegalStateException.class, () -> builder.build(identityLoader()));
   }
 
+  @J2ktIncompatible
   @GwtIncompatible // weigher
   public void testWeigher_withMaximumSize() {
     assertThrows(
@@ -190,23 +206,26 @@ public class CacheBuilderTest extends TestCase {
         () -> CacheBuilder.newBuilder().maximumSize(1).weigher(constantWeigher(42)));
   }
 
+  @J2ktIncompatible
   @GwtIncompatible // weakKeys
   public void testKeyStrengthSetTwice() {
     CacheBuilder<Object, Object> builder1 = CacheBuilder.newBuilder().weakKeys();
-    assertThrows(IllegalStateException.class, () -> builder1.weakKeys());
+    assertThrows(IllegalStateException.class, builder1::weakKeys);
   }
 
+  @J2ktIncompatible
   @GwtIncompatible // weakValues
   public void testValueStrengthSetTwice() {
     CacheBuilder<Object, Object> builder1 = CacheBuilder.newBuilder().weakValues();
-    assertThrows(IllegalStateException.class, () -> builder1.weakValues());
-    assertThrows(IllegalStateException.class, () -> builder1.softValues());
+    assertThrows(IllegalStateException.class, builder1::weakValues);
+    assertThrows(IllegalStateException.class, builder1::softValues);
 
     CacheBuilder<Object, Object> builder2 = CacheBuilder.newBuilder().softValues();
-    assertThrows(IllegalStateException.class, () -> builder2.softValues());
-    assertThrows(IllegalStateException.class, () -> builder2.weakValues());
+    assertThrows(IllegalStateException.class, builder2::softValues);
+    assertThrows(IllegalStateException.class, builder2::weakValues);
   }
 
+  @J2ktIncompatible
   @GwtIncompatible // Duration
   @IgnoreJRERequirement // No more dangerous than wherever the caller got the Duration from
   public void testLargeDurationsAreOk() {
@@ -223,6 +242,7 @@ public class CacheBuilderTest extends TestCase {
     assertThrows(IllegalArgumentException.class, () -> builder.expireAfterWrite(-1, SECONDS));
   }
 
+  @J2ktIncompatible
   @GwtIncompatible // Duration
   public void testTimeToLive_negative_duration() {
     CacheBuilder<Object, Object> builder = CacheBuilder.newBuilder();
@@ -242,6 +262,7 @@ public class CacheBuilderTest extends TestCase {
     assertThrows(IllegalStateException.class, () -> builder.expireAfterWrite(3600, SECONDS));
   }
 
+  @J2ktIncompatible
   @GwtIncompatible // Duration
   public void testTimeToLive_setTwice_duration() {
     CacheBuilder<Object, Object> builder =
@@ -254,6 +275,7 @@ public class CacheBuilderTest extends TestCase {
     assertThrows(IllegalArgumentException.class, () -> builder.expireAfterAccess(-1, SECONDS));
   }
 
+  @J2ktIncompatible
   @GwtIncompatible // Duration
   public void testTimeToIdle_negative_duration() {
     CacheBuilder<Object, Object> builder = CacheBuilder.newBuilder();
@@ -273,6 +295,7 @@ public class CacheBuilderTest extends TestCase {
     assertThrows(IllegalStateException.class, () -> builder.expireAfterAccess(3600, SECONDS));
   }
 
+  @J2ktIncompatible
   @GwtIncompatible // Duration
   public void testTimeToIdle_setTwice_duration() {
     CacheBuilder<Object, Object> builder =
@@ -289,18 +312,21 @@ public class CacheBuilderTest extends TestCase {
     // well, it didn't blow up.
   }
 
+  @J2ktIncompatible
   @GwtIncompatible // refreshAfterWrite
   public void testRefresh_zero() {
     CacheBuilder<Object, Object> builder = CacheBuilder.newBuilder();
     assertThrows(IllegalArgumentException.class, () -> builder.refreshAfterWrite(0, SECONDS));
   }
 
+  @J2ktIncompatible
   @GwtIncompatible // Duration
   public void testRefresh_zero_duration() {
     CacheBuilder<Object, Object> builder = CacheBuilder.newBuilder();
     assertThrows(IllegalArgumentException.class, () -> builder.refreshAfterWrite(Duration.ZERO));
   }
 
+  @J2ktIncompatible
   @GwtIncompatible // refreshAfterWrite
   public void testRefresh_setTwice() {
     CacheBuilder<Object, Object> builder =
@@ -308,6 +334,7 @@ public class CacheBuilderTest extends TestCase {
     assertThrows(IllegalStateException.class, () -> builder.refreshAfterWrite(3600, SECONDS));
   }
 
+  @J2ktIncompatible
   @GwtIncompatible // Duration
   public void testRefresh_setTwice_duration() {
     CacheBuilder<Object, Object> builder =
@@ -328,29 +355,59 @@ public class CacheBuilderTest extends TestCase {
   }
 
   public void testValuesIsNotASet() {
-    assertFalse(CacheBuilder.newBuilder().build().asMap().values() instanceof Set);
+    assertThat(CacheBuilder.newBuilder().build().asMap().values() instanceof Set).isFalse();
   }
 
+  @J2ktIncompatible // asMap
+  public void testAsMapEntrySet_containsAndRemoveNulls() {
+    CountingRemovalListener<Integer, Integer> listener = countingRemovalListener();
+    Cache<Integer, Integer> cache = CacheBuilder.newBuilder().removalListener(listener).build();
+    cache.put(10, 20);
+
+    Set<Entry<Integer, Integer>> entries = cache.asMap().entrySet();
+    assertThat(entries.contains(null)).isFalse();
+    assertThat(entries.contains(immutableEntry(10, null))).isFalse();
+    assertThat(entries.contains(immutableEntry(99, null))).isFalse();
+    assertThat(entries.contains(immutableEntry(null, 20))).isFalse();
+    assertThat(entries.contains(immutableEntry(null, null))).isFalse();
+
+    assertThat(entries.remove(null)).isFalse();
+    assertThat(entries.remove(immutableEntry(10, null))).isFalse();
+    assertThat(entries.remove(immutableEntry(99, null))).isFalse();
+    assertThat(entries.remove(immutableEntry(null, 20))).isFalse();
+    assertThat(entries.remove(immutableEntry(null, null))).isFalse();
+
+    assertThat(cache.asMap().remove(10, null)).isFalse();
+    assertThat(cache.asMap().remove(99, null)).isFalse();
+    assertThat(cache.asMap().remove(null, 20)).isFalse();
+    assertThat(cache.asMap().remove(null, null)).isFalse();
+
+    assertThat(listener.getCount()).isEqualTo(0);
+    assertThat(cache.asMap()).containsExactly(10, 20);
+  }
+
+  @J2ktIncompatible
   @GwtIncompatible // CacheTesting
   public void testNullCache() {
     CountingRemovalListener<Object, Object> listener = countingRemovalListener();
     LoadingCache<Object, Object> nullCache =
         CacheBuilder.newBuilder().maximumSize(0).removalListener(listener).build(identityLoader());
-    assertEquals(0, nullCache.size());
+    assertThat(nullCache.size()).isEqualTo(0);
     Object key = new Object();
-    assertSame(key, nullCache.getUnchecked(key));
-    assertEquals(1, listener.getCount());
-    assertEquals(0, nullCache.size());
+    assertThat(nullCache.getUnchecked(key)).isSameInstanceAs(key);
+    assertThat(listener.getCount()).isEqualTo(1);
+    assertThat(nullCache.size()).isEqualTo(0);
     CacheTesting.checkEmpty(nullCache.asMap());
   }
 
+  @J2ktIncompatible
   @GwtIncompatible // QueuingRemovalListener
   public void testRemovalNotification_clear() throws InterruptedException {
     // If a clear() happens while a computation is pending, we should not get a removal
     // notification.
 
-    final AtomicBoolean shouldWait = new AtomicBoolean(false);
-    final CountDownLatch computingLatch = new CountDownLatch(1);
+    AtomicBoolean shouldWait = new AtomicBoolean(false);
+    CountDownLatch computingLatch = new CountDownLatch(1);
     CacheLoader<String, String> computingFunction =
         new CacheLoader<String, String>() {
           @Override
@@ -363,7 +420,7 @@ public class CacheBuilderTest extends TestCase {
         };
     QueuingRemovalListener<String, String> listener = queuingRemovalListener();
 
-    final LoadingCache<String, String> cache =
+    LoadingCache<String, String> cache =
         CacheBuilder.newBuilder()
             .concurrencyLevel(1)
             .removalListener(listener)
@@ -373,16 +430,13 @@ public class CacheBuilderTest extends TestCase {
     cache.getUnchecked("a");
     shouldWait.set(true);
 
-    final CountDownLatch computationStarted = new CountDownLatch(1);
-    final CountDownLatch computationComplete = new CountDownLatch(1);
+    CountDownLatch computationStarted = new CountDownLatch(1);
+    CountDownLatch computationComplete = new CountDownLatch(1);
     new Thread(
-            new Runnable() {
-              @Override
-              public void run() {
-                computationStarted.countDown();
-                cache.getUnchecked("b");
-                computationComplete.countDown();
-              }
+            () -> {
+              computationStarted.countDown();
+              cache.getUnchecked("b");
+              computationComplete.countDown();
             })
         .start();
 
@@ -397,12 +451,12 @@ public class CacheBuilderTest extends TestCase {
     // At this point, the listener should be holding the seed value (a -> a), and the map should
     // contain the computed value (b -> b), since the clear() happened before the computation
     // completed.
-    assertEquals(1, listener.size());
+    assertThat(listener).hasSize(1);
     RemovalNotification<String, String> notification = listener.remove();
-    assertEquals("a", notification.getKey());
-    assertEquals("a", notification.getValue());
-    assertEquals(1, cache.size());
-    assertEquals("b", cache.getUnchecked("b"));
+    assertThat(notification.getKey()).isEqualTo("a");
+    assertThat(notification.getValue()).isEqualTo("a");
+    assertThat(cache.size()).isEqualTo(1);
+    assertThat(cache.getUnchecked("b")).isEqualTo("b");
   }
 
   // "Basher tests", where we throw a bunch of stuff at a LoadingCache and check basic invariants.
@@ -414,9 +468,10 @@ public class CacheBuilderTest extends TestCase {
    * removal listener), or else is not affected by the {@code clear()} (and therefore exists in the
    * cache afterward).
    */
+  @J2ktIncompatible
   @GwtIncompatible // QueuingRemovalListener
 
-  @SuppressWarnings("ThreadPriorityCheck") // TODO: b/175898629 - Consider onSpinWait.
+  @SuppressWarnings("ThreadPriorityCheck") // TODO(b/175898629): Consider onSpinWait.
   public void testRemovalNotification_clear_basher() throws InterruptedException {
     // If a clear() happens close to the end of computation, one of two things should happen:
     // - computation ends first: the removal listener is called, and the cache does not contain the
@@ -425,7 +480,7 @@ public class CacheBuilderTest extends TestCase {
     AtomicBoolean computationShouldWait = new AtomicBoolean();
     CountDownLatch computationLatch = new CountDownLatch(1);
     QueuingRemovalListener<String, String> listener = queuingRemovalListener();
-    final LoadingCache<String, String> cache =
+    LoadingCache<String, String> cache =
         CacheBuilder.newBuilder()
             .removalListener(listener)
             .concurrencyLevel(20)
@@ -434,7 +489,7 @@ public class CacheBuilderTest extends TestCase {
     int nThreads = 100;
     int nTasks = 1000;
     int nSeededEntries = 100;
-    Set<String> expectedKeys = Sets.newHashSetWithExpectedSize(nTasks + nSeededEntries);
+    Set<String> expectedKeys = newHashSetWithExpectedSize(nTasks + nSeededEntries);
     // seed the map, so its segments have a count>0; otherwise, clear() won't visit the in-progress
     // entries
     for (int i = 0; i < nSeededEntries; i++) {
@@ -444,22 +499,18 @@ public class CacheBuilderTest extends TestCase {
     }
     computationShouldWait.set(true);
 
-    final AtomicInteger computedCount = new AtomicInteger();
-    ExecutorService threadPool = Executors.newFixedThreadPool(nThreads);
-    final CountDownLatch tasksFinished = new CountDownLatch(nTasks);
+    AtomicInteger computedCount = new AtomicInteger();
+    ExecutorService threadPool = newFixedThreadPool(nThreads);
+    CountDownLatch tasksFinished = new CountDownLatch(nTasks);
     for (int i = 0; i < nTasks; i++) {
-      final String s = "a" + i;
+      String s = "a" + i;
       @SuppressWarnings("unused") // https://errorprone.info/bugpattern/FutureReturnValueIgnored
       Future<?> possiblyIgnoredError =
-          threadPool.submit(
-              new Runnable() {
-                @Override
-                public void run() {
-                  cache.getUnchecked(s);
-                  computedCount.incrementAndGet();
-                  tasksFinished.countDown();
-                }
-              });
+          threadPool.submit(() -> {
+            cache.getUnchecked(s);
+            computedCount.incrementAndGet();
+            tasksFinished.countDown();
+          });
       expectedKeys.add(s);
     }
 
@@ -474,25 +525,25 @@ public class CacheBuilderTest extends TestCase {
     // Check all of the removal notifications we received: they should have had correctly-associated
     // keys and values. (An earlier bug saw removal notifications for in-progress computations,
     // which had real keys with null values.)
-    Map<String, String> removalNotifications = Maps.newHashMap();
+    Map<String, String> removalNotifications = new HashMap<>();
     for (RemovalNotification<String, String> notification : listener) {
       removalNotifications.put(notification.getKey(), notification.getValue());
-      assertEquals(
-          "Unexpected key/value pair passed to removalListener",
-          notification.getKey(),
-          notification.getValue());
+      assertWithMessage("Unexpected key/value pair passed to removalListener")
+          .that(notification.getValue())
+          .isEqualTo(notification.getKey());
     }
 
     // All of the seed values should have been visible, so we should have gotten removal
     // notifications for all of them.
     for (int i = 0; i < nSeededEntries; i++) {
-      assertEquals("b" + i, removalNotifications.get("b" + i));
+      assertThat(removalNotifications.get("b" + i)).isEqualTo("b" + i);
     }
 
     // Each of the values added to the map should either still be there, or have seen a removal
     // notification.
-    assertEquals(expectedKeys, Sets.union(cache.asMap().keySet(), removalNotifications.keySet()));
-    assertTrue(Sets.intersection(cache.asMap().keySet(), removalNotifications.keySet()).isEmpty());
+    assertThat(union(cache.asMap().keySet(), removalNotifications.keySet()))
+        .isEqualTo(expectedKeys);
+    assertThat(cache.asMap().keySet()).containsNoneIn(removalNotifications.keySet());
     threadPool.shutdown();
     threadPool.awaitTermination(300, SECONDS);
   }
@@ -501,19 +552,21 @@ public class CacheBuilderTest extends TestCase {
    * Calls get() repeatedly from many different threads, and tests that all of the removed entries
    * (removed because of size limits or expiration) trigger appropriate removal notifications.
    */
+  @AndroidIncompatible // ~40s; doable but probably not worth it. We could try reducing nTasks, etc.
+  @J2ktIncompatible
   @GwtIncompatible // QueuingRemovalListener
 
   public void testRemovalNotification_get_basher() throws InterruptedException {
     int nTasks = 1000;
     int nThreads = 100;
-    final int getsPerTask = 1000;
-    final int nUniqueKeys = 10000;
-    final Random random = new Random(); // Randoms.insecureRandom();
+    int getsPerTask = 1000;
+    int nUniqueKeys = 10000;
+    Random random = new Random(); // Randoms.insecureRandom();
 
     QueuingRemovalListener<String, String> removalListener = queuingRemovalListener();
-    final AtomicInteger computeCount = new AtomicInteger();
-    final AtomicInteger exceptionCount = new AtomicInteger();
-    final AtomicInteger computeNullCount = new AtomicInteger();
+    AtomicInteger computeCount = new AtomicInteger();
+    AtomicInteger exceptionCount = new AtomicInteger();
+    AtomicInteger computeNullCount = new AtomicInteger();
     @SuppressWarnings("CacheLoaderNull") // test of handling of erroneous implementation
     CacheLoader<String, String> countingIdentityLoader =
         new CacheLoader<String, String>() {
@@ -536,7 +589,7 @@ public class CacheBuilderTest extends TestCase {
             }
           }
         };
-    final LoadingCache<String, String> cache =
+    LoadingCache<String, String> cache =
         CacheBuilder.newBuilder()
             .recordStats()
             .concurrencyLevel(2)
@@ -545,22 +598,18 @@ public class CacheBuilderTest extends TestCase {
             .maximumSize(5000)
             .build(countingIdentityLoader);
 
-    ExecutorService threadPool = Executors.newFixedThreadPool(nThreads);
+    ExecutorService threadPool = newFixedThreadPool(nThreads);
     for (int i = 0; i < nTasks; i++) {
       @SuppressWarnings("unused") // https://errorprone.info/bugpattern/FutureReturnValueIgnored
       Future<?> possiblyIgnoredError =
-          threadPool.submit(
-              new Runnable() {
-                @Override
-                public void run() {
-                  for (int j = 0; j < getsPerTask; j++) {
-                    try {
-                      cache.getUnchecked("key" + random.nextInt(nUniqueKeys));
-                    } catch (RuntimeException e) {
-                    }
-                  }
-                }
-              });
+          threadPool.submit(() -> {
+            for (int j = 0; j < getsPerTask; j++) {
+              try {
+                cache.getUnchecked("key" + random.nextInt(nUniqueKeys));
+              } catch (RuntimeException e) {
+              }
+            }
+          });
     }
 
     threadPool.shutdown();
@@ -571,32 +620,37 @@ public class CacheBuilderTest extends TestCase {
 
     // Verify that each received removal notification was valid
     for (RemovalNotification<String, String> notification : removalListener) {
-      assertEquals("Invalid removal notification", notification.getKey(), notification.getValue());
+      assertWithMessage("Invalid removal notification")
+          .that(notification.getValue())
+          .isEqualTo(notification.getKey());
     }
 
     CacheStats stats = cache.stats();
-    assertEquals(removalListener.size(), stats.evictionCount());
-    assertEquals(computeCount.get(), stats.loadSuccessCount());
-    assertEquals(exceptionCount.get() + computeNullCount.get(), stats.loadExceptionCount());
+    assertThat(stats.evictionCount()).isEqualTo(removalListener.size());
+    assertThat(stats.loadSuccessCount()).isEqualTo(computeCount.get());
+    assertThat(stats.loadExceptionCount()).isEqualTo(exceptionCount.get() + computeNullCount.get());
     // each computed value is still in the cache, or was passed to the removal listener
-    assertEquals(computeCount.get(), cache.size() + removalListener.size());
+    assertThat(cache.size() + removalListener.size()).isEqualTo(computeCount.get());
   }
 
+  @J2ktIncompatible
   @GwtIncompatible // NullPointerTester
-  public void testNullParameters() throws Exception {
+  public void testNullParameters() {
     NullPointerTester tester = new NullPointerTester();
     CacheBuilder<Object, Object> builder = CacheBuilder.newBuilder();
     tester.testAllPublicInstanceMethods(builder);
   }
 
+  @J2ktIncompatible
   @GwtIncompatible // CacheTesting
   public void testSizingDefaults() {
     LoadingCache<?, ?> cache = CacheBuilder.newBuilder().build(identityLoader());
     LocalCache<?, ?> map = CacheTesting.toLocalCache(cache);
     assertThat(map.segments).hasLength(4); // concurrency level
-    assertEquals(4, map.segments[0].table.length()); // capacity / conc level
+    assertThat(map.segments[0].table.length()).isEqualTo(4); // capacity / conc level
   }
 
+  @J2ktIncompatible
   @GwtIncompatible // CountDownLatch
   static final class DelayingIdentityLoader<T> extends CacheLoader<T, T> {
     private final AtomicBoolean shouldWait;
@@ -615,5 +669,9 @@ public class CacheBuilderTest extends TestCase {
       }
       return key;
     }
+  }
+
+  private static boolean isAndroid() {
+    return requireNonNull(System.getProperty("java.runtime.name", "")).contains("Android");
   }
 }

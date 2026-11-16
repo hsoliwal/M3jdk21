@@ -17,12 +17,12 @@
 package jdk.m3.collections.guava.collect;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
-import jdk.m3.collections.guava.base.Objects;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import com.google.errorprone.annotations.CompatibleWith;
 import com.google.errorprone.annotations.DoNotMock;
 import java.util.Collection;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import org.jspecify.annotations.Nullable;
 
@@ -44,7 +44,7 @@ import org.jspecify.annotations.Nullable;
  * not be modifiable. When modification isn't supported, those methods will throw an {@link
  * UnsupportedOperationException}.
  *
- * <h3>Implementations</h3>
+ * <h2>Implementations</h2>
  *
  * <ul>
  *   <li>{@link ImmutableTable}

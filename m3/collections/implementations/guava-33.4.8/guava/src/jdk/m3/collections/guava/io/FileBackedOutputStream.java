@@ -15,22 +15,36 @@
 package jdk.m3.collections.guava.io;
 
 import static jdk.m3.collections.guava.base.Preconditions.checkArgument;
+import static jdk.m3.collections.guava.base.Preconditions.checkPositionIndexes;
+import static jdk.m3.collections.guava.base.Throwables.throwIfUnchecked;
+import static jdk.m3.collections.guava.collect.Sets.newConcurrentHashSet;
+import static java.lang.Math.max;
+import static java.lang.Math.min;
+import static java.nio.channels.Channels.newOutputStream;
 import static java.util.Objects.requireNonNull;
 
 import jdk.m3.collections.guava.annotations.Beta;
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
 import jdk.m3.collections.guava.annotations.J2ktIncompatible;
 import jdk.m3.collections.guava.annotations.VisibleForTesting;
+import jdk.m3.collections.guava.base.FinalizablePhantomReference;
+import jdk.m3.collections.guava.base.FinalizableReferenceQueue;
+import jdk.m3.collections.guava.io.TempFileCreator.TempFileAndChannel;
+import jdk.m3.collections.guava.primitives.Ints;
 import com.google.errorprone.annotations.concurrent.GuardedBy;
 import com.google.j2objc.annotations.J2ObjCIncompatible;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.lang.ref.Reference;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.nio.ByteBuffer;
+import java.nio.channels.FileChannel;
+import java.util.Set;
 import org.jspecify.annotations.Nullable;
 
 /**
@@ -42,18 +56,16 @@ import org.jspecify.annotations.Nullable;
  * the very old Android Ice Cream Sandwich release), then this stream throws an exception instead of
  * creating a file that would be more accessible. (This behavior is new in Guava 32.0.0. Previous
  * versions would create a file that is more accessible, as discussed in <a
- * href="https://github.com/google/guava/issues/2575">Guava issue 2575</a>. TODO: b/283778848 - Fill
- * in CVE number once it's available.)
+ * href="https://nvd.nist.gov/vuln/detail/cve-2023-2976">CVE-2023-2976</a>.
  *
  * <p>Temporary files created by this stream may live in the local filesystem until either:
  *
  * <ul>
  *   <li>{@link #reset} is called (removing the data in this stream and deleting the file), or...
- *   <li>this stream (or, more precisely, its {@link #asByteSource} view) is finalized during
- *       garbage collection, <strong>AND</strong> this stream was not constructed with {@linkplain
- *       #FileBackedOutputStream(int) the 1-arg constructor} or the {@linkplain
- *       #FileBackedOutputStream(int, boolean) 2-arg constructor} passing {@code false} in the
- *       second parameter.
+ *   <li>this stream (or, more precisely, its {@link #asByteSource} view) is garbage collected,
+ *       <strong>AND</strong> this stream was constructed with {@linkplain
+ *       #FileBackedOutputStream(int, boolean) the two-arg constructor} with {@code true} for the
+ *       second parameter. Relying on this second approach is discouraged.
  * </ul>
  *
  * <p>This class is thread-safe.
@@ -66,21 +78,11 @@ import org.jspecify.annotations.Nullable;
 @GwtIncompatible
 @J2ObjCIncompatible
 public final class FileBackedOutputStream extends OutputStream {
-  private final int fileThreshold;
-  private final boolean resetOnFinalize;
-  private final ByteSource source;
-
-  @GuardedBy("this")
-  private OutputStream out;
-
-  @GuardedBy("this")
-  private @Nullable MemoryOutput memory;
-
-  @GuardedBy("this")
-  private @Nullable File file;
+  private final FbosByteSource byteSource;
+  private final State state;
 
   /** ByteArrayOutputStream that exposes its internals. */
-  private static class MemoryOutput extends ByteArrayOutputStream {
+  private static final class MemoryOutput extends ByteArrayOutputStream {
     byte[] getBuffer() {
       return buf;
     }
@@ -92,13 +94,13 @@ public final class FileBackedOutputStream extends OutputStream {
 
   /** Returns the file holding the data (possibly null). */
   @VisibleForTesting
-  synchronized @Nullable File getFile() {
-    return file;
+  @Nullable File getFile() {
+    return state.getFile();
   }
 
   /**
    * Creates a new instance that uses the given file threshold, and does not reset the data when the
-   * {@link ByteSource} returned by {@link #asByteSource} is finalized.
+   * {@link ByteSource} returned by {@link #asByteSource} is garbage collected.
    *
    * @param fileThreshold the number of bytes before the stream should switch to buffering to a file
    * @throws IllegalArgumentException if {@code fileThreshold} is negative
@@ -109,47 +111,67 @@ public final class FileBackedOutputStream extends OutputStream {
 
   /**
    * Creates a new instance that uses the given file threshold, and optionally resets the data when
-   * the {@link ByteSource} returned by {@link #asByteSource} is finalized.
+   * the {@link ByteSource} returned by {@link #asByteSource} is garbage collected. Prefer to {@link
+   * #reset} the stream explicitly, rather than rely on garbage collection: If you call {@link
+   * #reset} explicitly, you can call it more promptly, and you can appropriately handle any
+   * exception that results.
    *
    * @param fileThreshold the number of bytes before the stream should switch to buffering to a file
-   * @param resetOnFinalize if true, the {@link #reset} method will be called when the {@link
-   *     ByteSource} returned by {@link #asByteSource} is finalized.
+   * @param resetWhenGarbageCollected if true, the {@link #reset} method will be called when the
+   *     {@link ByteSource} returned by {@link #asByteSource} is garbage collected.
    * @throws IllegalArgumentException if {@code fileThreshold} is negative
    */
-  public FileBackedOutputStream(int fileThreshold, boolean resetOnFinalize) {
+  public FileBackedOutputStream(int fileThreshold, boolean resetWhenGarbageCollected) {
     checkArgument(
         fileThreshold >= 0, "fileThreshold must be non-negative, but was %s", fileThreshold);
-    this.fileThreshold = fileThreshold;
-    this.resetOnFinalize = resetOnFinalize;
-    memory = new MemoryOutput();
-    out = memory;
+    this.state = new State(fileThreshold, resetWhenGarbageCollected);
+    this.byteSource = new FbosByteSource(state);
 
-    if (resetOnFinalize) {
-      source =
-          new ByteSource() {
-            @Override
-            public InputStream openStream() throws IOException {
-              return openInputStream();
-            }
+    if (resetWhenGarbageCollected) {
+      FinalizableReference.register(byteSource);
+    }
+  }
 
-            @SuppressWarnings({"removal", "Finalize"}) // b/260137033
-            @Override
-            protected void finalize() {
-              try {
-                reset();
-              } catch (Throwable t) {
-                t.printStackTrace(System.err);
-              }
-            }
-          };
-    } else {
-      source =
-          new ByteSource() {
-            @Override
-            public InputStream openStream() throws IOException {
-              return openInputStream();
-            }
-          };
+  private static final class FinalizableReference extends FinalizablePhantomReference<ByteSource> {
+    static final FinalizableReferenceQueue referenceQueue = new FinalizableReferenceQueue();
+    static final Set<FinalizableReference> references = newConcurrentHashSet();
+
+    static void register(FbosByteSource referent) {
+      try {
+        references.add(new FinalizableReference(referent));
+      } finally {
+        FileBackedOutputStream.reachabilityFence(referent);
+      }
+    }
+
+    final State state;
+
+    FinalizableReference(FbosByteSource referent) {
+      super(referent, referenceQueue);
+      this.state = referent.state;
+    }
+
+    @Override
+    public void finalizeReferent() {
+      references.remove(this);
+      try {
+        state.reset();
+      } catch (Throwable t) {
+        t.printStackTrace(System.err);
+      }
+    }
+  }
+
+  private static final class FbosByteSource extends ByteSource {
+    final State state;
+
+    FbosByteSource(State state) {
+      this.state = state;
+    }
+
+    @Override
+    public InputStream openStream() throws IOException {
+      return state.openInputStream();
     }
   }
 
@@ -159,17 +181,7 @@ public final class FileBackedOutputStream extends OutputStream {
    * @since 15.0
    */
   public ByteSource asByteSource() {
-    return source;
-  }
-
-  private synchronized InputStream openInputStream() throws IOException {
-    if (file != null) {
-      return new FileInputStream(file);
-    } else {
-      // requireNonNull is safe because we always have either `file` or `memory`.
-      requireNonNull(memory);
-      return new ByteArrayInputStream(memory.getBuffer(), 0, memory.getCount());
-    }
+    return byteSource;
   }
 
   /**
@@ -178,79 +190,304 @@ public final class FileBackedOutputStream extends OutputStream {
    *
    * @throws IOException if an I/O error occurred while deleting the file buffer
    */
-  public synchronized void reset() throws IOException {
+  public void reset() throws IOException {
     try {
-      close();
+      state.reset();
     } finally {
+      reachabilityFence(byteSource);
+    }
+  }
+
+  @Override
+  public void write(int b) throws IOException {
+    try {
+      state.write(b);
+    } finally {
+      reachabilityFence(byteSource);
+    }
+  }
+
+  @Override
+  public void write(byte[] b) throws IOException {
+    write(b, 0, b.length);
+  }
+
+  @Override
+  public void write(byte[] b, int off, int len) throws IOException {
+    try {
+      state.write(b, off, len);
+    } finally {
+      reachabilityFence(byteSource);
+    }
+  }
+
+  @Override
+  public void close() throws IOException {
+    try {
+      state.close();
+    } finally {
+      reachabilityFence(byteSource);
+    }
+  }
+
+  @Override
+  public void flush() throws IOException {
+    try {
+      state.flush();
+    } finally {
+      reachabilityFence(byteSource);
+    }
+  }
+
+  /**
+   * Per-instance state, extracted to a separate object so that {@link FinalizableReference} can
+   * still access it after the {@link FileBackedOutputStream} and {@link ByteSource} have been
+   * garbage collected.
+   */
+  private static final class State {
+    final int fileThreshold;
+    final boolean resetWhenGarbageCollected;
+
+    @GuardedBy("this")
+    @Nullable MemoryOutput memory;
+
+    @GuardedBy("this")
+    @Nullable TempFileAndChannel fileAndChannel;
+
+    @GuardedBy("this")
+    OutputStream out;
+
+    State(int fileThreshold, boolean resetWhenGarbageCollected) {
+      this.fileThreshold = fileThreshold;
+      this.resetWhenGarbageCollected = resetWhenGarbageCollected;
+      this.memory = new MemoryOutput();
+      this.out = memory;
+    }
+
+    synchronized @Nullable File getFile() {
+      return fileAndChannel != null ? fileAndChannel.file : null;
+    }
+
+    synchronized InputStream openInputStream() throws IOException {
+      if (fileAndChannel != null) {
+        return new ChannelInputStream(fileAndChannel.channel);
+      } else {
+        // requireNonNull is safe because we always have either `fileAndChannel` or `memory`.
+        requireNonNull(memory);
+        return new ByteArrayInputStream(memory.getBuffer(), 0, memory.getCount());
+      }
+    }
+
+    synchronized void reset() throws IOException {
+      /*
+       * We don't need to call this.close(): It does nothing but update `out`, and we handle
+       * updating `out` here.
+       */
+
       if (memory == null) {
         memory = new MemoryOutput();
       } else {
         memory.reset();
       }
       out = memory;
-      if (file != null) {
-        File deleteMe = file;
-        file = null;
-        if (!deleteMe.delete()) {
-          throw new IOException("Could not delete: " + deleteMe);
+
+      try (TempFileAndChannel closeMe = fileAndChannel) {
+        fileAndChannel = null;
+      }
+    }
+
+    synchronized void write(int b) throws IOException {
+      update(1);
+      out.write(b);
+    }
+
+    synchronized void write(byte[] b, int off, int len) throws IOException {
+      update(len);
+      out.write(b, off, len);
+    }
+
+    synchronized void close() {
+      /*
+       * It would make sense to switch to CLOSED_OUTPUT_STREAM whether we've spilled to a file or
+       * not. But that would be a difference from our initial behavior of allowing writes after
+       * close() in the non-spilled case, thanks to behavior inherited from ByteArrayOutputStream.
+       *
+       * TODO(cpovirk): Maybe change that behavior, which is fragile.
+       */
+      if (fileAndChannel != null) {
+        // Do not close the FileChannel; it must stay open for subsequent reads via asByteSource().
+        out = CLOSED_OUTPUT_STREAM;
+        /*
+         * We don't even need to set a bit that marks the old OutputStream as closed, since we
+         * control all access to that stream (and we have now cut off that access).
+         */
+      }
+    }
+
+    synchronized void flush() throws IOException {
+      out.flush();
+    }
+
+    /**
+     * Checks if writing {@code len} bytes would go over threshold, and switches to file buffering
+     * if so.
+     */
+    @GuardedBy("this")
+    void update(int len) throws IOException {
+      if (memory != null && (memory.getCount() + len > fileThreshold)) {
+        TempFileAndChannel temp = TempFileCreator.INSTANCE.openTempFile("FileBackedOutputStream");
+        if (resetWhenGarbageCollected) {
+          // References are not guaranteed to be collected on system shutdown; this is insurance.
+          temp.file.deleteOnExit();
         }
+        try {
+          OutputStream transfer = newOutputStream(temp.channel);
+          transfer.write(memory.getBuffer(), 0, memory.getCount());
+          transfer.flush();
+          // We've successfully transferred the data; switch to writing to file.
+          out = transfer;
+        } catch (IOException e) {
+          try {
+            temp.close();
+          } catch (IOException closeException) {
+            e.addSuppressed(closeException);
+          }
+          throw e;
+        }
+
+        fileAndChannel = temp;
+        memory = null;
       }
     }
   }
 
-  @Override
-  public synchronized void write(int b) throws IOException {
-    update(1);
-    out.write(b);
-  }
+  private static final OutputStream CLOSED_OUTPUT_STREAM =
+      new OutputStream() {
+        @Override
+        public void write(int b) throws IOException {
+          throw new IOException("Stream closed");
+        }
 
-  @Override
-  public synchronized void write(byte[] b) throws IOException {
-    write(b, 0, b.length);
-  }
+        @Override
+        public void write(byte[] b, int off, int len) throws IOException {
+          checkPositionIndexes(off, off + len, b.length);
+          throw new IOException("Stream closed");
+        }
 
-  @Override
-  public synchronized void write(byte[] b, int off, int len) throws IOException {
-    update(len);
-    out.write(b, off, len);
-  }
+        @Override
+        public void flush() throws IOException {
+          throw new IOException("Stream closed");
+        }
+      };
 
-  @Override
-  public synchronized void close() throws IOException {
-    out.close();
-  }
+  private static final class ChannelInputStream extends InputStream {
+    final FileChannel channel;
 
-  @Override
-  public synchronized void flush() throws IOException {
-    out.flush();
-  }
+    @GuardedBy("this")
+    long position;
 
-  /**
-   * Checks if writing {@code len} bytes would go over threshold, and switches to file buffering if
-   * so.
-   */
-  @GuardedBy("this")
-  private void update(int len) throws IOException {
-    if (memory != null && (memory.getCount() + len > fileThreshold)) {
-      File temp = TempFileCreator.INSTANCE.createTempFile("FileBackedOutputStream");
-      if (resetOnFinalize) {
-        // Finalizers are not guaranteed to be called on system shutdown;
-        // this is insurance.
-        temp.deleteOnExit();
+    @GuardedBy("this")
+    boolean closed;
+
+    ChannelInputStream(FileChannel channel) {
+      this.channel = channel;
+    }
+
+    @Override
+    public synchronized int read() throws IOException {
+      byte[] b = new byte[1];
+      return read(b, 0, 1) == 1 ? b[0] & 0xFF : -1;
+    }
+
+    @Override
+    public synchronized int read(byte[] b, int off, int len) throws IOException {
+      ByteBuffer buf = ByteBuffer.wrap(b, off, len);
+      checkOpen();
+      if (len == 0) {
+        return 0;
       }
-      try {
-        FileOutputStream transfer = new FileOutputStream(temp);
-        transfer.write(memory.getBuffer(), 0, memory.getCount());
-        transfer.flush();
-        // We've successfully transferred the data; switch to writing to file
-        out = transfer;
-      } catch (IOException e) {
-        temp.delete();
-        throw e;
+      int read = channel.read(buf, position);
+      if (read > 0) {
+        position += read;
       }
+      return read;
+    }
 
-      file = temp;
-      memory = null;
+    @Override
+    public synchronized long skip(long n) throws IOException {
+      checkOpen();
+      if (n <= 0) {
+        return 0;
+      }
+      long available = channel.size() - position;
+      if (available <= 0) {
+        return 0;
+      }
+      long skipped = min(n, available);
+      position += skipped;
+      return skipped;
+    }
+
+    @Override
+    public synchronized int available() throws IOException {
+      checkOpen();
+      return Ints.saturatedCast(max(0, channel.size() - position));
+    }
+
+    @Override
+    public synchronized void close() {
+      // Do not close the FileChannel; it must stay open for subsequent reads via asByteSource().
+      closed = true;
+    }
+
+    @GuardedBy("this")
+    void checkOpen() throws IOException {
+      if (closed) {
+        throw new IOException("Stream closed");
+      }
+    }
+  }
+
+  /** Ensures that {@code o} is not garbage collected until this point in the code. */
+  @VisibleForTesting
+  // We call the method only after checking that it's present.
+  @IgnoreJRERequirement
+  @SuppressWarnings({
+    "Java8ApiChecker",
+    "NewApi",
+    // This method is a helper, which we call from a `finally` block, as recommended.
+    "ReachabilityFenceUsage",
+  })
+  static void reachabilityFence(@Nullable Object o) {
+    if (IS_REACHABILITY_FENCE_METHOD_USABLE) {
+      Reference.reachabilityFence(o);
+    }
+  }
+
+  private static final boolean IS_REACHABILITY_FENCE_METHOD_USABLE =
+      computeIsReachabilityFenceMethodUsable();
+
+  private static boolean computeIsReachabilityFenceMethodUsable() {
+    try {
+      Method method = Reference.class.getMethod("reachabilityFence", Object.class);
+      method.invoke(null, FileBackedOutputStream.class); // to make sure the method is accessible
+      return true;
+    } catch (NoSuchMethodException | IllegalAccessException probablyBeforeJava9OrAndroid28) {
+      /*
+       * It's theoretically possible for Reference.reachabilityFence to exist under older VMs in an
+       * inaccessible form.
+       */
+      return false;
+    } catch (InvocationTargetException e) {
+      /*
+       * It's theoretically possible for Reference.reachabilityFence to exist under older VMs but
+       * not work. (Under Android in particular, we really should check the API Level instead of
+       * probing for methods....) But it's hard to imagine how reachabilityFence in particular could
+       * exist but throw, so we propagate anything that's thrown, presumably an unchecked Exception
+       * or Error.
+       */
+      throwIfUnchecked(e.getCause());
+      throw new AssertionError(e.getCause());
     }
   }
 }

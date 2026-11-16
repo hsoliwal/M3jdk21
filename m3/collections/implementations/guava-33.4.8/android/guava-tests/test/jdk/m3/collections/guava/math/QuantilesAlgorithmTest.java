@@ -16,11 +16,13 @@
 
 package jdk.m3.collections.guava.math;
 
-import static com.google.common.truth.Truth.assertThat;
-import static com.google.common.truth.Truth.assertWithMessage;
+import static jdk.m3.collections.guava.collect.Sets.difference;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
+import static jdk.m3.collections.guava.truth.Truth.assertWithMessage;
 
+import jdk.m3.collections.guava.annotations.GwtIncompatible;
+import jdk.m3.collections.guava.annotations.J2ktIncompatible;
 import jdk.m3.collections.guava.collect.ImmutableSet;
-import jdk.m3.collections.guava.collect.Sets;
 import java.util.Map;
 import java.util.Random;
 import junit.framework.TestCase;
@@ -31,6 +33,8 @@ import org.jspecify.annotations.NullUnmarked;
  * returning more-or-less the same answers.
  */
 @NullUnmarked
+@GwtIncompatible
+@J2ktIncompatible
 public class QuantilesAlgorithmTest extends TestCase {
 
   private static final Random rng = new Random(82674067L);
@@ -38,7 +42,7 @@ public class QuantilesAlgorithmTest extends TestCase {
   private static final double ALLOWED_ERROR = 1.0e-10;
   private static final QuantilesAlgorithm REFERENCE_ALGORITHM = QuantilesAlgorithm.SORTING;
   private static final ImmutableSet<QuantilesAlgorithm> NON_REFERENCE_ALGORITHMS =
-      Sets.difference(
+      difference(
               ImmutableSet.copyOf(QuantilesAlgorithm.values()),
               ImmutableSet.of(REFERENCE_ALGORITHM))
           .immutableCopy();
@@ -80,7 +84,9 @@ public class QuantilesAlgorithmTest extends TestCase {
     assertThat(referenceQuantiles.keySet()).isEqualTo(indexes);
     for (QuantilesAlgorithm algorithm : NON_REFERENCE_ALGORITHMS) {
       Map<Integer, Double> quantiles = algorithm.multipleQuantiles(indexes, 100, dataset.clone());
-      assertWithMessage("Wrong keys from " + algorithm).that(quantiles.keySet()).isEqualTo(indexes);
+      assertWithMessage("Wrong keys from %s", algorithm)
+          .that(quantiles.keySet())
+          .isEqualTo(indexes);
       for (int i : indexes) {
         assertWithMessage("Mismatch between %s and %s at %s", algorithm, REFERENCE_ALGORITHM, i)
             .that(quantiles.get(i))

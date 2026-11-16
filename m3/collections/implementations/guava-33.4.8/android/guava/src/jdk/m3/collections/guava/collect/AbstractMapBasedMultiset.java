@@ -19,6 +19,7 @@ package jdk.m3.collections.guava.collect;
 import static jdk.m3.collections.guava.base.Preconditions.checkArgument;
 import static jdk.m3.collections.guava.base.Preconditions.checkNotNull;
 import static jdk.m3.collections.guava.collect.CollectPreconditions.checkNonnegative;
+import static jdk.m3.collections.guava.collect.CollectPreconditions.checkRemove;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
@@ -43,7 +44,7 @@ import org.jspecify.annotations.Nullable;
  *
  * @author Kevin Bourrillion
  */
-@GwtCompatible(emulated = true)
+@GwtCompatible
 abstract class AbstractMapBasedMultiset<E extends @Nullable Object> extends AbstractMultiset<E>
     implements Serializable {
 
@@ -197,7 +198,7 @@ abstract class AbstractMapBasedMultiset<E extends @Nullable Object> extends Abst
     @Override
     public void remove() {
       checkForConcurrentModification();
-      CollectPreconditions.checkRemove(toRemove != -1);
+      checkRemove(toRemove != -1);
       size -= backingMap.removeEntry(toRemove);
       entryIndex = backingMap.nextIndexAfterRemove(entryIndex, toRemove);
       toRemove = -1;
@@ -217,7 +218,7 @@ abstract class AbstractMapBasedMultiset<E extends @Nullable Object> extends Abst
   }
 
   @Override
-  final Iterator<Entry<E>> entryIterator() {
+  final Iterator<Entry<E>> internalEntryIterator() {
     return new Itr<Entry<E>>() {
       @Override
       Entry<E> result(int entryIndex) {
@@ -227,7 +228,7 @@ abstract class AbstractMapBasedMultiset<E extends @Nullable Object> extends Abst
   }
 
   /** Allocation-free implementation of {@code target.addAll(this)}. */
-  void addTo(Multiset<? super E> target) {
+  final void addTo(Multiset<? super E> target) {
     checkNotNull(target);
     for (int i = backingMap.firstIndex(); i >= 0; i = backingMap.nextIndex(i)) {
       target.add(backingMap.getKey(i), backingMap.getValue(i));
@@ -235,7 +236,7 @@ abstract class AbstractMapBasedMultiset<E extends @Nullable Object> extends Abst
   }
 
   @Override
-  final int distinctElements() {
+  final int internalDistinctElements() {
     return backingMap.size();
   }
 
@@ -253,18 +254,18 @@ abstract class AbstractMapBasedMultiset<E extends @Nullable Object> extends Abst
    * @serialData the number of distinct elements, the first element, its count, the second element,
    *     its count, and so on
    */
-  @GwtIncompatible // java.io.ObjectOutputStream
+  @GwtIncompatible
   @J2ktIncompatible
-  private void writeObject(ObjectOutputStream stream) throws IOException {
+    private void writeObject(ObjectOutputStream stream) throws IOException {
     stream.defaultWriteObject();
     Serialization.writeMultiset(this, stream);
   }
 
-  @GwtIncompatible // java.io.ObjectInputStream
+  @GwtIncompatible
   @J2ktIncompatible
-  private void readObject(ObjectInputStream stream) throws IOException, ClassNotFoundException {
+    private void readObject(ObjectInputStream stream) throws IOException, ClassNotFoundException {
     stream.defaultReadObject();
-    int distinctElements = Serialization.readCount(stream);
+    int distinctElements = stream.readInt();
     backingMap = newBackingMap(ObjectCountHashMap.DEFAULT_SIZE);
     Serialization.populateMultiset(this, stream, distinctElements);
   }

@@ -15,8 +15,9 @@
 package jdk.m3.collections.guava.cache;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
+import jdk.m3.collections.guava.annotations.J2ktIncompatible;
 import jdk.m3.collections.guava.collect.ImmutableMap;
-import jdk.m3.collections.guava.collect.Maps;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.concurrent.Callable;
@@ -66,7 +67,7 @@ public abstract class AbstractCache<K, V> implements Cache<K, V> {
    */
   @Override
   public ImmutableMap<K, V> getAllPresent(Iterable<? extends Object> keys) {
-    Map<K, V> result = Maps.newLinkedHashMap();
+    Map<K, V> result = new LinkedHashMap<>();
     for (Object key : keys) {
       if (!result.containsKey(key)) {
         @SuppressWarnings("unchecked")
@@ -133,6 +134,7 @@ public abstract class AbstractCache<K, V> implements Cache<K, V> {
   }
 
   @Override
+  @J2ktIncompatible // Thread safety complexity
   public ConcurrentMap<K, V> asMap() {
     throw new UnsupportedOperationException();
   }
@@ -203,6 +205,13 @@ public abstract class AbstractCache<K, V> implements Cache<K, V> {
 
   /**
    * A thread-safe {@link StatsCounter} implementation for use by {@link Cache} implementors.
+   *
+   * <p>Each counter is updated atomically, but the counters are not updated together: For
+   * performance, this class does not lock, so a {@link #snapshot} taken concurrently with updates
+   * may reflect only part of an update. For example, it may include the increment of the
+   * load-success count from a call to {@link #recordLoadSuccess} but not the corresponding load
+   * time. As a result, values derived from a snapshot, like {@link CacheStats#averageLoadPenalty},
+   * may be briefly inconsistent.
    *
    * @since 10.0
    */

@@ -21,7 +21,11 @@ import static jdk.m3.collections.guava.math.MathPreconditions.checkNonNegative;
 import static jdk.m3.collections.guava.math.MathPreconditions.checkPositive;
 import static jdk.m3.collections.guava.math.MathPreconditions.checkRoundingUnnecessary;
 import static java.lang.Math.abs;
+import static java.lang.Math.ceil;
+import static java.lang.Math.floor;
 import static java.lang.Math.min;
+import static java.lang.Math.nextDown;
+import static java.lang.Math.nextUp;
 import static java.math.RoundingMode.HALF_EVEN;
 import static java.math.RoundingMode.HALF_UP;
 
@@ -29,6 +33,7 @@ import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
 import jdk.m3.collections.guava.annotations.VisibleForTesting;
 import jdk.m3.collections.guava.primitives.UnsignedLongs;
+import com.google.errorprone.annotations.InlineMe;
 import java.math.BigInteger;
 import java.math.RoundingMode;
 
@@ -46,7 +51,7 @@ import java.math.RoundingMode;
  * @author Louis Wasserman
  * @since 11.0
  */
-@GwtCompatible(emulated = true)
+@GwtCompatible
 public final class LongMath {
   @VisibleForTesting static final long MAX_SIGNED_POWER_OF_TWO = 1L << (Long.SIZE - 2);
 
@@ -101,7 +106,8 @@ public final class LongMath {
    */
   @VisibleForTesting
   static int lessThanBranchFree(long x, long y) {
-    // Returns the sign bit of x - y.
+    // The double negation is optimized away by normal Java, but is necessary for GWT
+    // to make sure bit twiddling works as expected.
     return (int) (~~(x - y) >>> (Long.SIZE - 1));
   }
 
@@ -366,7 +372,9 @@ public final class LongMath {
 
   /**
    * Returns the result of dividing {@code p} by {@code q}, rounding using the specified {@code
-   * RoundingMode}.
+   * RoundingMode}. If the {@code RoundingMode} is {@link RoundingMode#DOWN}, then this method is
+   * equivalent to regular Java division, {@code p / q}; and if it is {@link RoundingMode#FLOOR},
+   * then this method is equivalent to {@link Math#floorDiv(long,long) Math.floorDiv}{@code (p, q)}.
    *
    * @throws ArithmeticException if {@code q == 0}, or if {@code mode == UNNECESSARY} and {@code a}
    *     is not an integer multiple of {@code b}
@@ -441,7 +449,7 @@ public final class LongMath {
    * }
    *
    * @throws ArithmeticException if {@code m <= 0}
-   * @see <a href="http://docs.oracle.com/javase/specs/jls/se7/html/jls-15.html#jls-15.17.3">
+   * @see <a href="https://docs.oracle.com/javase/specs/jls/se27/html/jls-15.html#jls-15.17.3">
    *     Remainder Operator</a>
    */
   @GwtIncompatible // TODO
@@ -465,7 +473,7 @@ public final class LongMath {
    * }
    *
    * @throws ArithmeticException if {@code m <= 0}
-   * @see <a href="http://docs.oracle.com/javase/specs/jls/se7/html/jls-15.html#jls-15.17.3">
+   * @see <a href="https://docs.oracle.com/javase/specs/jls/se27/html/jls-15.html#jls-15.17.3">
    *     Remainder Operator</a>
    */
   @GwtIncompatible // TODO
@@ -473,8 +481,7 @@ public final class LongMath {
     if (m <= 0) {
       throw new ArithmeticException("Modulus must be positive");
     }
-    long result = x % m;
-    return (result >= 0) ? result : result + m;
+    return Math.floorMod(x, m);
   }
 
   /**
@@ -531,65 +538,59 @@ public final class LongMath {
   /**
    * Returns the sum of {@code a} and {@code b}, provided it does not overflow.
    *
+   * <p><b>Note:</b> this method is now unnecessary and should be treated as deprecated; use {@link
+   * Math#addExact(long, long)} instead. Note that if both arguments are {@code int} values, writing
+   * {@code Math.addExact(a, b)} will call the {@link Math#addExact(int, int)} overload, not {@link
+   * Math#addExact(long, long)}. Also note that adding two {@code int} values can <b>never</b>
+   * overflow a {@code long}, so you can just write {@code (long) a + b}.
+   *
    * @throws ArithmeticException if {@code a + b} overflows in signed {@code long} arithmetic
    */
-  // Whenever both tests are cheap and functional, it's faster to use &, | instead of &&, ||
-  @SuppressWarnings("ShortCircuitBoolean")
+  @InlineMe(replacement = "Math.addExact(a, b)")
   public static long checkedAdd(long a, long b) {
-    long result = a + b;
-    checkNoOverflow((a ^ b) < 0 | (a ^ result) >= 0, "checkedAdd", a, b);
-    return result;
+    return Math.addExact(a, b);
   }
 
   /**
    * Returns the difference of {@code a} and {@code b}, provided it does not overflow.
    *
+   * <p><b>Note:</b> this method is now unnecessary and should be treated as deprecated; use {@link
+   * Math#subtractExact(long, long)} instead. Note that if both arguments are {@code int} values,
+   * writing {@code Math.subtractExact(a, b)} will call the {@link Math#subtractExact(int, int)}
+   * overload, not {@link Math#subtractExact(long, long)}. Also note that subtracting two {@code
+   * int} values can <b>never</b> overflow a {@code long}, so you can just write {@code (long) a -
+   * b}.
+   *
    * @throws ArithmeticException if {@code a - b} overflows in signed {@code long} arithmetic
    */
-  // Whenever both tests are cheap and functional, it's faster to use &, | instead of &&, ||
-  @SuppressWarnings("ShortCircuitBoolean")
+  @InlineMe(replacement = "Math.subtractExact(a, b)")
   public static long checkedSubtract(long a, long b) {
-    long result = a - b;
-    checkNoOverflow((a ^ b) >= 0 | (a ^ result) >= 0, "checkedSubtract", a, b);
-    return result;
+    return Math.subtractExact(a, b);
   }
 
   /**
    * Returns the product of {@code a} and {@code b}, provided it does not overflow.
    *
+   * <p><b>Note:</b> this method is now unnecessary and should be treated as deprecated; use {@link
+   * Math#multiplyExact(long, long)} instead. Note that if both arguments are {@code int} values,
+   * writing {@code Math.multiplyExact(a, b)} will call the {@link Math#multiplyExact(int, int)}
+   * overload, not {@link Math#multiplyExact(long, long)}. Also note that multiplying two {@code
+   * int} values can <b>never</b> overflow a {@code long}, so you can just write {@code (long) a *
+   * b}.
+   *
    * @throws ArithmeticException if {@code a * b} overflows in signed {@code long} arithmetic
    */
-  // Whenever both tests are cheap and functional, it's faster to use &, | instead of &&, ||
-  @SuppressWarnings("ShortCircuitBoolean")
+  @InlineMe(replacement = "Math.multiplyExact(a, b)")
   public static long checkedMultiply(long a, long b) {
-    // Hacker's Delight, Section 2-12
-    int leadingZeros =
-        Long.numberOfLeadingZeros(a)
-            + Long.numberOfLeadingZeros(~a)
-            + Long.numberOfLeadingZeros(b)
-            + Long.numberOfLeadingZeros(~b);
-    /*
-     * If leadingZeros > Long.SIZE + 1 it's definitely fine, if it's < Long.SIZE it's definitely
-     * bad. We do the leadingZeros check to avoid the division below if at all possible.
-     *
-     * Otherwise, if b == Long.MIN_VALUE, then the only allowed values of a are 0 and 1. We take
-     * care of all a < 0 with their own check, because in particular, the case a == -1 will
-     * incorrectly pass the division check below.
-     *
-     * In all other cases, we check that either a is 0 or the result is consistent with division.
-     */
-    if (leadingZeros > Long.SIZE + 1) {
-      return a * b;
-    }
-    checkNoOverflow(leadingZeros >= Long.SIZE, "checkedMultiply", a, b);
-    checkNoOverflow(a >= 0 | b != Long.MIN_VALUE, "checkedMultiply", a, b);
-    long result = a * b;
-    checkNoOverflow(a == 0 || result / a == b, "checkedMultiply", a, b);
-    return result;
+    return Math.multiplyExact(a, b);
   }
 
   /**
    * Returns the {@code b} to the {@code k}th power, provided it does not overflow.
+   *
+   * <p><b>Java 25+ users:</b> Prefer {@link Math#powExact(long, int)}. Note that if {@code b} is an
+   * {@code int} value, writing {@code Math.powExact(b, k)} will call the {@link Math#powExact(int,
+   * int)} overload, not {@link Math#powExact(long, int)}.
    *
    * @throws ArithmeticException if {@code b} to the {@code k}th power overflows in signed {@code
    *     long} arithmetic
@@ -623,10 +624,10 @@ public final class LongMath {
         case 0:
           return accum;
         case 1:
-          return checkedMultiply(accum, b);
+          return Math.multiplyExact(accum, b);
         default:
           if ((k & 1) != 0) {
-            accum = checkedMultiply(accum, b);
+            accum = Math.multiplyExact(accum, b);
           }
           k >>= 1;
           if (k > 0) {
@@ -833,7 +834,7 @@ public final class LongMath {
           }
           return result;
         } else {
-          int nBits = LongMath.log2(n, RoundingMode.CEILING);
+          int nBits = log2(n, RoundingMode.CEILING);
 
           long result = 1;
           long numerator = n--;
@@ -1108,12 +1109,12 @@ public final class LongMath {
     /** Works for all nonnegative signed longs. */
     LARGE {
       /** Returns (a + b) mod m. Precondition: {@code 0 <= a}, {@code b < m < 2^63}. */
-      private long plusMod(long a, long b, long m) {
+      long plusMod(long a, long b, long m) {
         return (a >= m - b) ? (a + b - m) : (a + b);
       }
 
       /** Returns (a * 2^32) mod m. a may be any unsigned long. */
-      private long times2ToThe32Mod(long a, long m) {
+      long times2ToThe32Mod(long a, long m) {
         int remainingPowersOf2 = 32;
         do {
           int shift = min(remainingPowersOf2, Long.numberOfLeadingZeros(a));
@@ -1270,26 +1271,20 @@ public final class LongMath {
         checkRoundingUnnecessary(cmpXToRoundArbitrarily == 0);
         return roundArbitrarily;
       case FLOOR:
-        return (cmpXToRoundArbitrarily >= 0)
-            ? roundArbitrarily
-            : DoubleUtils.nextDown(roundArbitrarily);
+        return (cmpXToRoundArbitrarily >= 0) ? roundArbitrarily : nextDown(roundArbitrarily);
       case CEILING:
-        return (cmpXToRoundArbitrarily <= 0) ? roundArbitrarily : Math.nextUp(roundArbitrarily);
+        return (cmpXToRoundArbitrarily <= 0) ? roundArbitrarily : nextUp(roundArbitrarily);
       case DOWN:
         if (x >= 0) {
-          return (cmpXToRoundArbitrarily >= 0)
-              ? roundArbitrarily
-              : DoubleUtils.nextDown(roundArbitrarily);
+          return (cmpXToRoundArbitrarily >= 0) ? roundArbitrarily : nextDown(roundArbitrarily);
         } else {
-          return (cmpXToRoundArbitrarily <= 0) ? roundArbitrarily : Math.nextUp(roundArbitrarily);
+          return (cmpXToRoundArbitrarily <= 0) ? roundArbitrarily : nextUp(roundArbitrarily);
         }
       case UP:
         if (x >= 0) {
-          return (cmpXToRoundArbitrarily <= 0) ? roundArbitrarily : Math.nextUp(roundArbitrarily);
+          return (cmpXToRoundArbitrarily <= 0) ? roundArbitrarily : nextUp(roundArbitrarily);
         } else {
-          return (cmpXToRoundArbitrarily >= 0)
-              ? roundArbitrarily
-              : DoubleUtils.nextDown(roundArbitrarily);
+          return (cmpXToRoundArbitrarily >= 0) ? roundArbitrarily : nextDown(roundArbitrarily);
         }
       case HALF_DOWN:
       case HALF_UP:
@@ -1303,13 +1298,13 @@ public final class LongMath {
           if (cmpXToRoundArbitrarily >= 0) {
             roundFloorAsDouble = roundArbitrarily;
             roundFloor = roundArbitrarilyAsLong;
-            roundCeilingAsDouble = Math.nextUp(roundArbitrarily);
-            roundCeiling = (long) Math.ceil(roundCeilingAsDouble);
+            roundCeilingAsDouble = nextUp(roundArbitrarily);
+            roundCeiling = (long) ceil(roundCeilingAsDouble);
           } else {
             roundCeilingAsDouble = roundArbitrarily;
             roundCeiling = roundArbitrarilyAsLong;
-            roundFloorAsDouble = DoubleUtils.nextDown(roundArbitrarily);
-            roundFloor = (long) Math.floor(roundFloorAsDouble);
+            roundFloorAsDouble = nextDown(roundArbitrarily);
+            roundFloor = (long) floor(roundFloorAsDouble);
           }
 
           long deltaToFloor = x - roundFloor;
@@ -1343,6 +1338,35 @@ public final class LongMath {
         }
     }
     throw new AssertionError("impossible");
+  }
+
+  /**
+   * Returns the closest representable {@code long} to the absolute value of {@code x}.
+   *
+   * <p>This is the same thing as the true absolute value of {@code x} except in the case when
+   * {@code x} is {@link Long#MIN_VALUE}, in which case this returns {@link Long#MAX_VALUE}. (Note
+   * that {@code Long.MAX_VALUE} is mathematically equal to {@code -Long.MIN_VALUE - 1}.)
+   *
+   * <p>There are three common APIs for determining the absolute value of a long, all of which
+   * behave identically except when passed {@code Long.MIN_VALUE}. Those methods are:
+   *
+   * <ul>
+   *   <li>{@link Math#abs(long)}, which returns {@code Long.MIN_VALUE} when passed {@code
+   *       Long.MIN_VALUE}
+   *   <li>{@link Math#absExact(long)}, which throws {@link ArithmeticException} when passed {@code
+   *       Long.MIN_VALUE}
+   *   <li>this method, {@code LongMath.saturatedAbs(long)}, which returns {@code Long.MAX_VALUE}
+   *       when passed {@code Long.MIN_VALUE}
+   * </ul>
+   *
+   * <p>Note that if your only goal is to turn a well-distributed {@code long} (such as a random
+   * number) into a well-distributed nonnegative number, the most even distribution is achieved not
+   * by this method or other absolute value methods, but by {@code x & Long.MAX_VALUE}.
+   *
+   * @since 33.5.0
+   */
+  public static long saturatedAbs(long x) {
+    return (x == Long.MIN_VALUE) ? Long.MAX_VALUE : Math.abs(x);
   }
 
   private LongMath() {}

@@ -29,7 +29,7 @@ import java.util.Map;
  * @author Gregory Kick
  */
 @GwtCompatible
-class SingletonImmutableTable<R, C, V> extends ImmutableTable<R, C, V> {
+final class SingletonImmutableTable<R, C, V> extends ImmutableTable<R, C, V> {
   final R singleRowKey;
   final C singleColumnKey;
   final V singleValue;
@@ -49,17 +49,17 @@ class SingletonImmutableTable<R, C, V> extends ImmutableTable<R, C, V> {
     checkNotNull(columnKey);
     return containsColumn(columnKey)
         ? ImmutableMap.of(singleRowKey, singleValue)
-        : ImmutableMap.<R, V>of();
+        : ImmutableMap.of();
   }
 
   @Override
   public ImmutableMap<C, Map<R, V>> columnMap() {
-    return ImmutableMap.of(singleColumnKey, (Map<R, V>) ImmutableMap.of(singleRowKey, singleValue));
+    return ImmutableMap.of(singleColumnKey, ImmutableMap.of(singleRowKey, singleValue));
   }
 
   @Override
   public ImmutableMap<R, Map<C, V>> rowMap() {
-    return ImmutableMap.of(singleRowKey, (Map<C, V>) ImmutableMap.of(singleColumnKey, singleValue));
+    return ImmutableMap.of(singleRowKey, ImmutableMap.of(singleColumnKey, singleValue));
   }
 
   @Override
@@ -68,12 +68,12 @@ class SingletonImmutableTable<R, C, V> extends ImmutableTable<R, C, V> {
   }
 
   @Override
-  ImmutableSet<Cell<R, C, V>> createCellSet() {
+  public ImmutableSet<Cell<R, C, V>> cellSet() {
     return ImmutableSet.of(cellOf(singleRowKey, singleColumnKey, singleValue));
   }
 
   @Override
-  ImmutableCollection<V> createValues() {
+  public ImmutableCollection<V> values() {
     return ImmutableSet.of(singleValue);
   }
 

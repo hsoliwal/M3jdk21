@@ -19,8 +19,8 @@ import static jdk.m3.collections.guava.base.Preconditions.checkNotNull;
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
 import jdk.m3.collections.guava.annotations.J2ktIncompatible;
 import jdk.m3.collections.guava.base.Preconditions;
-import jdk.m3.collections.guava.collect.Queues;
 import com.google.errorprone.annotations.concurrent.GuardedBy;
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -69,8 +69,8 @@ final class ListenerCallQueue<L> {
   }
 
   /**
-   * Adds a listener that will be called using the given executor when events are later {@link
-   * #enqueue enqueued} and {@link #dispatch dispatched}.
+   * Adds a listener that will be called using the given executor when events are later {@linkplain
+   * #enqueue enqueued} and {@linkplain #dispatch dispatched}.
    */
   public void addListener(L listener, Executor executor) {
     checkNotNull(listener, "listener");
@@ -134,10 +134,10 @@ final class ListenerCallQueue<L> {
     final Executor executor;
 
     @GuardedBy("this")
-    final Queue<ListenerCallQueue.Event<L>> waitQueue = Queues.newArrayDeque();
+    final Queue<ListenerCallQueue.Event<L>> waitQueue = new ArrayDeque<>();
 
     @GuardedBy("this")
-    final Queue<Object> labelQueue = Queues.newArrayDeque();
+    final Queue<Object> labelQueue = new ArrayDeque<>();
 
     @GuardedBy("this")
     boolean isThreadScheduled;
@@ -154,7 +154,7 @@ final class ListenerCallQueue<L> {
     }
 
     /**
-     * Dispatches all listeners {@linkplain #enqueue enqueued} prior to this call, serially and in
+     * Dispatches all events {@linkplain #enqueue enqueued} prior to this call, serially and in
      * order.
      */
     @SuppressWarnings("CatchingUnchecked") // sneaky checked exception
@@ -174,7 +174,7 @@ final class ListenerCallQueue<L> {
           synchronized (this) {
             isThreadScheduled = false;
           }
-          // Log it and keep going.
+          // TODO(b/542982933): Don't hurt other listeners by rethrowing, especially after logging?
           logger
               .get()
               .log(
@@ -229,4 +229,7 @@ final class ListenerCallQueue<L> {
       }
     }
   }
+
+  /** Constructs a new {@code ListenerCallQueue}. */
+  ListenerCallQueue() {}
 }

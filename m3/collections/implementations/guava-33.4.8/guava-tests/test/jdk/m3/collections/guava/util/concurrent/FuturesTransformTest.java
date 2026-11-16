@@ -16,9 +16,13 @@
 
 package jdk.m3.collections.guava.util.concurrent;
 
+import static jdk.m3.collections.guava.util.concurrent.AbstractChainedListenableFutureTest.Input.EXCEPTION_DATA;
+import static jdk.m3.collections.guava.util.concurrent.AbstractChainedListenableFutureTest.Input.VALID_INPUT_DATA;
 import static jdk.m3.collections.guava.util.concurrent.Futures.transform;
 import static jdk.m3.collections.guava.util.concurrent.MoreExecutors.directExecutor;
 
+import jdk.m3.collections.guava.annotations.GwtIncompatible;
+import jdk.m3.collections.guava.annotations.J2ktIncompatible;
 import jdk.m3.collections.guava.base.Function;
 import java.lang.reflect.UndeclaredThrowableException;
 import org.jspecify.annotations.NullUnmarked;
@@ -29,25 +33,27 @@ import org.jspecify.annotations.NullUnmarked;
  * @author Nishant Thakkar
  */
 @NullUnmarked
+@GwtIncompatible
+@J2ktIncompatible
 public class FuturesTransformTest extends AbstractChainedListenableFutureTest<String> {
   private static final String RESULT_DATA = "SUCCESS";
   private static final UndeclaredThrowableException WRAPPED_EXCEPTION =
       new UndeclaredThrowableException(EXCEPTION);
 
   @Override
-  protected ListenableFuture<String> buildChainingFuture(ListenableFuture<Integer> inputFuture) {
+  ListenableFuture<String> buildChainingFuture(ListenableFuture<Input> inputFuture) {
     return transform(inputFuture, new ComposeFunction(), directExecutor());
   }
 
   @Override
-  protected String getSuccessfulResult() {
+  String getSuccessfulResult() {
     return RESULT_DATA;
   }
 
-  private class ComposeFunction implements Function<Integer, String> {
+  private static final class ComposeFunction implements Function<Input, String> {
     @Override
-    public String apply(Integer input) {
-      if (input.intValue() == VALID_INPUT_DATA) {
+    public String apply(Input input) {
+      if (input == VALID_INPUT_DATA) {
         return RESULT_DATA;
       } else {
         throw WRAPPED_EXCEPTION;

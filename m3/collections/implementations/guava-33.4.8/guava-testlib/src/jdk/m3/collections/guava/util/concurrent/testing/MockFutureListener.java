@@ -18,6 +18,7 @@ package jdk.m3.collections.guava.util.concurrent.testing;
 
 import static jdk.m3.collections.guava.util.concurrent.MoreExecutors.directExecutor;
 import static java.util.concurrent.TimeUnit.SECONDS;
+import static org.junit.Assert.assertThrows;
 
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
 import jdk.m3.collections.guava.util.concurrent.ListenableFuture;
@@ -75,12 +76,8 @@ public class MockFutureListener implements Runnable {
     // Verify that the listener executed in a reasonable amount of time.
     Assert.assertTrue(countDownLatch.await(1L, SECONDS));
 
-    try {
-      future.get();
-      Assert.fail("This call was supposed to throw an ExecutionException");
-    } catch (ExecutionException expected) {
-      Assert.assertSame(expectedCause, expected.getCause());
-    }
+    ExecutionException expected = assertThrows(ExecutionException.class, () -> future.get());
+    Assert.assertSame(expectedCause, expected.getCause());
   }
 
   public void assertTimeout() throws Exception {

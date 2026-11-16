@@ -17,12 +17,12 @@
 package jdk.m3.collections.guava.graph;
 
 import static jdk.m3.collections.guava.base.Preconditions.checkNotNull;
+import static jdk.m3.collections.guava.collect.Iterators.transform;
 import static jdk.m3.collections.guava.graph.GraphConstants.INNER_CAPACITY;
 import static jdk.m3.collections.guava.graph.GraphConstants.INNER_LOAD_FACTOR;
+import static java.util.Collections.unmodifiableSet;
 
 import jdk.m3.collections.guava.collect.ImmutableMap;
-import jdk.m3.collections.guava.collect.Iterators;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -63,7 +63,7 @@ final class UndirectedGraphConnections<N, V> implements GraphConnections<N, V> {
 
   @Override
   public Set<N> adjacentNodes() {
-    return Collections.unmodifiableSet(adjacentNodeValues.keySet());
+    return unmodifiableSet(adjacentNodeValues.keySet());
   }
 
   @Override
@@ -78,35 +78,43 @@ final class UndirectedGraphConnections<N, V> implements GraphConnections<N, V> {
 
   @Override
   public Iterator<EndpointPair<N>> incidentEdgeIterator(N thisNode) {
-    return Iterators.transform(
+    checkNotNull(thisNode);
+    return transform(
         adjacentNodeValues.keySet().iterator(),
-        (N incidentNode) -> EndpointPair.unordered(thisNode, incidentNode));
+        incidentNode -> EndpointPair.unordered(thisNode, incidentNode));
   }
 
   @Override
   public @Nullable V value(N node) {
+    checkNotNull(node);
     return adjacentNodeValues.get(node);
   }
 
   @Override
   public void removePredecessor(N node) {
+    checkNotNull(node);
     @SuppressWarnings("unused")
     V unused = removeSuccessor(node);
   }
 
   @Override
   public @Nullable V removeSuccessor(N node) {
+    checkNotNull(node);
     return adjacentNodeValues.remove(node);
   }
 
   @Override
   public void addPredecessor(N node, V value) {
+    checkNotNull(node);
+    checkNotNull(value);
     @SuppressWarnings("unused")
     V unused = addSuccessor(node, value);
   }
 
   @Override
   public @Nullable V addSuccessor(N node, V value) {
+    checkNotNull(node);
+    checkNotNull(value);
     return adjacentNodeValues.put(node, value);
   }
 }

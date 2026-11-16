@@ -27,7 +27,7 @@ import java.util.List;
 import org.jspecify.annotations.Nullable;
 
 /** Aggregate future that collects (stores) results of each future. */
-@GwtCompatible(emulated = true)
+@GwtCompatible
 abstract class CollectionFuture<V extends @Nullable Object, C extends @Nullable Object>
     extends AggregateFuture<V, C> {
   /*
@@ -38,6 +38,7 @@ abstract class CollectionFuture<V extends @Nullable Object, C extends @Nullable 
    */
   @LazyInit private @Nullable List<@Nullable Present<V>> values;
 
+  @SuppressWarnings("EmptyList") // ImmutableList doesn't support nullable element types
   CollectionFuture(
       ImmutableCollection<? extends ListenableFuture<? extends V>> futures,
       boolean allMustSucceed) {
@@ -91,7 +92,7 @@ abstract class CollectionFuture<V extends @Nullable Object, C extends @Nullable 
     }
 
     @Override
-    public List<@Nullable V> combine(List<@Nullable Present<V>> values) {
+    List<@Nullable V> combine(List<@Nullable Present<V>> values) {
       List<@Nullable V> result = newArrayListWithCapacity(values.size());
       for (Present<V> element : values) {
         result.add(element != null ? element.value : null);
@@ -101,7 +102,7 @@ abstract class CollectionFuture<V extends @Nullable Object, C extends @Nullable 
   }
 
   /** The result of a successful {@code Future}. */
-  private static final class Present<V extends @Nullable Object> {
+  static final class Present<V extends @Nullable Object> {
     @ParametricNullness final V value;
 
     Present(@ParametricNullness V value) {

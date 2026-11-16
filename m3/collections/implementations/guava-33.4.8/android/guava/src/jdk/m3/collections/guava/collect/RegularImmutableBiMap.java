@@ -16,6 +16,8 @@
 
 package jdk.m3.collections.guava.collect;
 
+import static jdk.m3.collections.guava.collect.RegularImmutableMap.createHashTableOrThrow;
+
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
 import jdk.m3.collections.guava.annotations.J2ktIncompatible;
@@ -27,7 +29,7 @@ import org.jspecify.annotations.Nullable;
  *
  * @author Louis Wasserman
  */
-@GwtCompatible(serializable = true, emulated = true)
+@GwtCompatible
 @SuppressWarnings("serial") // uses writeReplace(), not default serialization
 final class RegularImmutableBiMap<K, V> extends ImmutableBiMap<K, V> {
   static final RegularImmutableBiMap<Object, Object> EMPTY = new RegularImmutableBiMap<>();
@@ -54,12 +56,10 @@ final class RegularImmutableBiMap<K, V> extends ImmutableBiMap<K, V> {
     this.size = size;
     this.keyOffset = 0;
     int tableSize = (size >= 2) ? ImmutableSet.chooseTableSize(size) : 0;
-    this.keyHashTable =
-        RegularImmutableMap.createHashTableOrThrow(alternatingKeysAndValues, size, tableSize, 0);
-    Object valueHashTable =
-        RegularImmutableMap.createHashTableOrThrow(alternatingKeysAndValues, size, tableSize, 1);
+    this.keyHashTable = createHashTableOrThrow(alternatingKeysAndValues, size, tableSize, 0);
+    Object valueHashTable = createHashTableOrThrow(alternatingKeysAndValues, size, tableSize, 1);
     this.inverse =
-        new RegularImmutableBiMap<V, K>(valueHashTable, alternatingKeysAndValues, size, this);
+        new RegularImmutableBiMap<>(valueHashTable, alternatingKeysAndValues, size, this);
   }
 
   /** V-to-K constructor. */
@@ -102,12 +102,12 @@ final class RegularImmutableBiMap<K, V> extends ImmutableBiMap<K, V> {
   }
 
   @Override
-  ImmutableSet<Entry<K, V>> createEntrySet() {
+  public ImmutableSet<Entry<K, V>> entrySet() {
     return new RegularImmutableMap.EntrySet<K, V>(this, alternatingKeysAndValues, keyOffset, size);
   }
 
   @Override
-  ImmutableSet<K> createKeySet() {
+  public ImmutableSet<K> keySet() {
     @SuppressWarnings("unchecked")
     ImmutableList<K> keyList =
         (ImmutableList<K>)

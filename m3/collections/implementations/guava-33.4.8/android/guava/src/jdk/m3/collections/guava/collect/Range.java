@@ -39,7 +39,7 @@ import org.jspecify.annotations.Nullable;
  * possible to <i>iterate</i> over these contained values. To do so, pass this range instance and an
  * appropriate {@link DiscreteDomain} to {@link ContiguousSet#create}.
  *
- * <h3>Types of ranges</h3>
+ * <h2>Types of ranges</h2>
  *
  * <p>Each end of the range may be bounded or unbounded. If bounded, there is an associated
  * <i>endpoint</i> value, and the range is considered to be either <i>open</i> (does not include the
@@ -76,7 +76,7 @@ import org.jspecify.annotations.Nullable;
  *   <li>{@code (a..a)} : <b>invalid</b>; an exception will be thrown
  * </ul>
  *
- * <h3>Warnings</h3>
+ * <h2>Warnings</h2>
  *
  * <ul>
  *   <li>Use immutable value types only, if at all possible. If you must use a mutable type, <b>do
@@ -92,7 +92,7 @@ import org.jspecify.annotations.Nullable;
  *       <b>This may change in the future.</b>
  * </ul>
  *
- * <h3>Other notes</h3>
+ * <h2>Other notes</h2>
  *
  * <ul>
  *   <li>All ranges are shallow-immutable.
@@ -111,7 +111,7 @@ import org.jspecify.annotations.Nullable;
  *   <li>A {@code Range} is serializable if it has no bounds, or if each bound is serializable.
  * </ul>
  *
- * <h3>Further reading</h3>
+ * <h2>Further reading</h2>
  *
  * <p>See the Guava User Guide article on <a
  * href="https://github.com/google/guava/wiki/RangesExplained">{@code Range}</a>.
@@ -123,8 +123,7 @@ import org.jspecify.annotations.Nullable;
 @GwtCompatible
 @SuppressWarnings("rawtypes") // https://github.com/google/guava/issues/989
 @Immutable(containerOf = "C")
-public final class Range<C extends Comparable> extends RangeGwtSerializationDependencies
-    implements Predicate<C>, Serializable {
+public final class Range<C extends Comparable> implements Predicate<C>, Serializable {
   @SuppressWarnings("unchecked")
   static <C extends Comparable<?>> Ordering<Range<C>> rangeLexOrdering() {
     return (Ordering<Range<C>>) RangeLexOrdering.INSTANCE;
@@ -209,7 +208,7 @@ public final class Range<C extends Comparable> extends RangeGwtSerializationDepe
    * @since 14.0
    */
   public static <C extends Comparable<?>> Range<C> lessThan(C endpoint) {
-    return create(Cut.<C>belowAll(), Cut.belowValue(endpoint));
+    return create(Cut.belowAll(), Cut.belowValue(endpoint));
   }
 
   /**
@@ -218,7 +217,7 @@ public final class Range<C extends Comparable> extends RangeGwtSerializationDepe
    * @since 14.0
    */
   public static <C extends Comparable<?>> Range<C> atMost(C endpoint) {
-    return create(Cut.<C>belowAll(), Cut.aboveValue(endpoint));
+    return create(Cut.belowAll(), Cut.aboveValue(endpoint));
   }
 
   /**
@@ -243,7 +242,7 @@ public final class Range<C extends Comparable> extends RangeGwtSerializationDepe
    * @since 14.0
    */
   public static <C extends Comparable<?>> Range<C> greaterThan(C endpoint) {
-    return create(Cut.aboveValue(endpoint), Cut.<C>aboveAll());
+    return create(Cut.aboveValue(endpoint), Cut.aboveAll());
   }
 
   /**
@@ -252,7 +251,7 @@ public final class Range<C extends Comparable> extends RangeGwtSerializationDepe
    * @since 14.0
    */
   public static <C extends Comparable<?>> Range<C> atLeast(C endpoint) {
-    return create(Cut.belowValue(endpoint), Cut.<C>aboveAll());
+    return create(Cut.belowValue(endpoint), Cut.aboveAll());
   }
 
   /**
@@ -704,7 +703,7 @@ public final class Range<C extends Comparable> extends RangeGwtSerializationDepe
   }
 
   /** Needed to serialize sorted collections of Ranges. */
-  private static class RangeLexOrdering extends Ordering<Range<?>> implements Serializable {
+  private static final class RangeLexOrdering extends Ordering<Range<?>> implements Serializable {
     static final Ordering<?> INSTANCE = new RangeLexOrdering();
 
     @Override

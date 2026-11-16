@@ -16,6 +16,8 @@
 
 package jdk.m3.collections.guava.util.concurrent;
 
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
+
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import junit.framework.TestCase;
 import org.jspecify.annotations.NullUnmarked;
@@ -29,6 +31,6 @@ import org.jspecify.annotations.NullUnmarked;
 @NullUnmarked
 public class RunnablesTest extends TestCase {
   public void testDoNothingRunnableIsSingleton() {
-    assertSame(Runnables.doNothing(), Runnables.doNothing());
+    assertThat(Runnables.doNothing()).isSameInstanceAs(Runnables.doNothing());
   }
 }

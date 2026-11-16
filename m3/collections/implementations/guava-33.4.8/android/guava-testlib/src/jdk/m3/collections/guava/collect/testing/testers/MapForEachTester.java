@@ -16,6 +16,7 @@
 
 package jdk.m3.collections.guava.collect.testing.testers;
 
+import static jdk.m3.collections.guava.collect.testing.Helpers.assertEqualIgnoringOrder;
 import static jdk.m3.collections.guava.collect.testing.features.CollectionFeature.KNOWN_ORDER;
 import static jdk.m3.collections.guava.collect.testing.features.CollectionSize.ZERO;
 import static jdk.m3.collections.guava.collect.testing.features.MapFeature.ALLOWS_NULL_KEYS;
@@ -24,7 +25,6 @@ import static java.util.Arrays.asList;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.collect.testing.AbstractMapTester;
-import jdk.m3.collections.guava.collect.testing.Helpers;
 import jdk.m3.collections.guava.collect.testing.features.CollectionFeature;
 import jdk.m3.collections.guava.collect.testing.features.CollectionSize;
 import jdk.m3.collections.guava.collect.testing.features.MapFeature;
@@ -32,7 +32,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import org.junit.Ignore;
 
 /**
  * A generic JUnit test which tests {@link Map#forEach}. Can't be invoked directly; please see
@@ -41,9 +40,6 @@ import org.junit.Ignore;
  * @author Louis Wasserman
  */
 @GwtCompatible
-@Ignore("test runners must not instantiate and run this directly, only via suites we build")
-// @Ignore affects the Android test runner, which respects JUnit 4 annotations on JUnit 3 tests.
-@SuppressWarnings("JUnit4ClassUsedInJUnit3")
 @IgnoreJRERequirement // We opt into library desugaring for our tests.
 public class MapForEachTester<K, V> extends AbstractMapTester<K, V> {
   @CollectionFeature.Require(KNOWN_ORDER)
@@ -57,7 +53,7 @@ public class MapForEachTester<K, V> extends AbstractMapTester<K, V> {
   public void testForEachUnknownOrder() {
     List<Entry<K, V>> entries = new ArrayList<>();
     getMap().forEach((k, v) -> entries.add(entry(k, v)));
-    Helpers.assertEqualIgnoringOrder(getSampleEntries(), entries);
+    assertEqualIgnoringOrder(getSampleEntries(), entries);
   }
 
   @MapFeature.Require(ALLOWS_NULL_KEYS)
@@ -67,7 +63,7 @@ public class MapForEachTester<K, V> extends AbstractMapTester<K, V> {
     List<Entry<K, V>> expectedEntries = asList(createArrayWithNullKey());
     List<Entry<K, V>> entries = new ArrayList<>();
     getMap().forEach((k, v) -> entries.add(entry(k, v)));
-    Helpers.assertEqualIgnoringOrder(expectedEntries, entries);
+    assertEqualIgnoringOrder(expectedEntries, entries);
   }
 
   @MapFeature.Require(ALLOWS_NULL_VALUES)
@@ -77,6 +73,6 @@ public class MapForEachTester<K, V> extends AbstractMapTester<K, V> {
     List<Entry<K, V>> expectedEntries = asList(createArrayWithNullValue());
     List<Entry<K, V>> entries = new ArrayList<>();
     getMap().forEach((k, v) -> entries.add(entry(k, v)));
-    Helpers.assertEqualIgnoringOrder(expectedEntries, entries);
+    assertEqualIgnoringOrder(expectedEntries, entries);
   }
 }

@@ -18,13 +18,12 @@ package jdk.m3.collections.guava.collect.testing.testers;
 
 import static jdk.m3.collections.guava.collect.testing.features.CollectionFeature.SUPPORTS_ADD;
 import static jdk.m3.collections.guava.collect.testing.features.CollectionSize.ZERO;
-import static jdk.m3.collections.guava.collect.testing.testers.ReflectionFreeAssertThrows.assertThrows;
+import static org.junit.Assert.assertThrows;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.collect.testing.MinimalCollection;
 import jdk.m3.collections.guava.collect.testing.features.CollectionFeature;
 import jdk.m3.collections.guava.collect.testing.features.CollectionSize;
-import org.junit.Ignore;
 
 /**
  * A generic JUnit test which tests {@code addAll(Collection)} operations on a list. Can't be
@@ -33,9 +32,6 @@ import org.junit.Ignore;
  * @author Chris Povirk
  */
 @GwtCompatible
-@Ignore("test runners must not instantiate and run this directly, only via suites we build")
-// @Ignore affects the Android test runner, which respects JUnit 4 annotations on JUnit 3 tests.
-@SuppressWarnings("JUnit4ClassUsedInJUnit3")
 public class ListAddAllTester<E> extends AbstractListTester<E> {
   @CollectionFeature.Require(SUPPORTS_ADD)
   @CollectionSize.Require(absent = ZERO)

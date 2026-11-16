@@ -16,13 +16,15 @@
 
 package jdk.m3.collections.guava.util.concurrent;
 
+import static jdk.m3.collections.guava.testing.SerializableTester.reserialize;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
+
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
 import jdk.m3.collections.guava.annotations.J2ktIncompatible;
 import jdk.m3.collections.guava.collect.ImmutableMap;
-import jdk.m3.collections.guava.collect.Sets;
 import jdk.m3.collections.guava.testing.NullPointerTester;
-import jdk.m3.collections.guava.testing.SerializableTester;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Random;
 import java.util.Set;
@@ -34,7 +36,7 @@ import org.jspecify.annotations.NullUnmarked;
  *
  * @author mike nonemacher
  */
-@GwtCompatible(emulated = true)
+@GwtCompatible
 @NullUnmarked
 public class AtomicLongMapTest extends TestCase {
   private static final int ITERATIONS = 100;
@@ -486,7 +488,7 @@ public class AtomicLongMapTest extends TestCase {
       map.put(key, newValue);
       assertTrue(map.containsKey(key));
 
-      long before = map.get(key);
+      assertThat(map.get(key)).isEqualTo(newValue);
       assertFalse(map.remove(key, newValue + 1));
       assertFalse(map.remove(key, newValue - 1));
       assertTrue(map.remove(key, newValue));
@@ -520,7 +522,7 @@ public class AtomicLongMapTest extends TestCase {
 
   public void testRemoveZeros() {
     AtomicLongMap<Object> map = AtomicLongMap.create();
-    Set<Object> nonZeroKeys = Sets.newHashSet();
+    Set<Object> nonZeroKeys = new HashSet<>();
     for (int i = 0; i < ITERATIONS; i++) {
       Object key = new Object();
       long value = i % 2;
@@ -574,7 +576,7 @@ public class AtomicLongMapTest extends TestCase {
   public void testSerialization() {
     AtomicLongMap<String> map = AtomicLongMap.create();
     map.put("key", 1L);
-    AtomicLongMap<String> reserialized = SerializableTester.reserialize(map);
+    AtomicLongMap<String> reserialized = reserialize(map);
     assertEquals(map.asMap(), reserialized.asMap());
   }
 }

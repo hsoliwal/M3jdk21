@@ -16,11 +16,13 @@
 
 package jdk.m3.collections.guava.collect;
 
-import static jdk.m3.collections.guava.collect.ReflectionFreeAssertThrows.assertThrows;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
 import static java.util.Collections.nCopies;
+import static org.junit.Assert.assertThrows;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.collect.Multiset.Entry;
+import jdk.m3.collections.guava.testing.EqualsTester;
 import junit.framework.TestCase;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
@@ -35,7 +37,7 @@ import org.jspecify.annotations.Nullable;
 public class MultisetsImmutableEntryTest extends TestCase {
   private static final @Nullable String NE = null;
 
-  private static <E extends @Nullable Object> Entry<E> entry(final E element, final int count) {
+  private static <E extends @Nullable Object> Entry<E> entry(E element, int count) {
     return Multisets.immutableEntry(element, count);
   }
 
@@ -44,39 +46,24 @@ public class MultisetsImmutableEntryTest extends TestCase {
   }
 
   public void testToString() {
-    assertEquals("foo", entry("foo", 1).toString());
-    assertEquals("bar x 2", entry("bar", 2).toString());
+    assertThat(entry("foo", 1).toString()).isEqualTo("foo");
+    assertThat(entry("bar", 2).toString()).isEqualTo("bar x 2");
   }
 
   public void testToStringNull() {
-    assertEquals("null", entry(NE, 1).toString());
-    assertEquals("null x 2", entry(NE, 2).toString());
+    assertThat(entry(NE, 1).toString()).isEqualTo("null");
+    assertThat(entry(NE, 2).toString()).isEqualTo("null x 2");
   }
 
   public void testEquals() {
-    assertEquals(control("foo", 1), entry("foo", 1));
-    assertEquals(control("bar", 2), entry("bar", 2));
-    assertFalse(control("foo", 1).equals(entry("foo", 2)));
-    assertFalse(entry("foo", 1).equals(control("bar", 1)));
-    assertFalse(entry("foo", 1).equals(new Object()));
-    assertFalse(entry("foo", 1).equals(null));
-  }
-
-  public void testEqualsNull() {
-    assertEquals(control(NE, 1), entry(NE, 1));
-    assertFalse(control(NE, 1).equals(entry(NE, 2)));
-    assertFalse(entry(NE, 1).equals(control("bar", 1)));
-    assertFalse(entry(NE, 1).equals(new Object()));
-    assertFalse(entry(NE, 1).equals(null));
-  }
-
-  public void testHashCode() {
-    assertEquals(control("foo", 1).hashCode(), entry("foo", 1).hashCode());
-    assertEquals(control("bar", 2).hashCode(), entry("bar", 2).hashCode());
-  }
-
-  public void testHashCodeNull() {
-    assertEquals(control(NE, 1).hashCode(), entry(NE, 1).hashCode());
+    new EqualsTester()
+        .addEqualityGroup(control("foo", 1), entry("foo", 1))
+        .addEqualityGroup(control("bar", 2), entry("bar", 2))
+        .addEqualityGroup(control("foo", 2), entry("foo", 2))
+        .addEqualityGroup(control("bar", 1), entry("bar", 1))
+        .addEqualityGroup(control(NE, 1), entry(NE, 1))
+        .addEqualityGroup(control(NE, 2), entry(NE, 2))
+        .testEquals();
   }
 
   public void testNegativeCount() {

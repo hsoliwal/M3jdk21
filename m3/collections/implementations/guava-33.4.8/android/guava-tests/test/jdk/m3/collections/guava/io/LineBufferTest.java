@@ -16,19 +16,19 @@
 
 package jdk.m3.collections.guava.io;
 
+import static jdk.m3.collections.guava.collect.Lists.transform;
 import static java.lang.Math.max;
 import static java.lang.Math.min;
+import static java.util.Arrays.asList;
 
-import jdk.m3.collections.guava.base.Function;
 import jdk.m3.collections.guava.collect.ImmutableSet;
-import jdk.m3.collections.guava.collect.Lists;
 import java.io.BufferedReader;
 import java.io.FilterReader;
 import java.io.IOException;
 import java.io.Reader;
 import java.io.StringReader;
 import java.nio.CharBuffer;
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 import org.jspecify.annotations.NullUnmarked;
 
@@ -37,7 +37,6 @@ import org.jspecify.annotations.NullUnmarked;
  *
  * @author Chris Nokleberg
  */
-@AndroidIncompatible // occasionally very slow
 @NullUnmarked
 public class LineBufferTest extends IoTestCase {
 
@@ -64,16 +63,8 @@ public class LineBufferTest extends IoTestCase {
 
   private static void bufferHelper(String input, String... expect) throws IOException {
 
-    List<String> expectProcess = Arrays.asList(expect);
-    List<String> expectRead =
-        Lists.transform(
-            expectProcess,
-            new Function<String, String>() {
-              @Override
-              public String apply(String value) {
-                return value.replaceAll("[\\r\\n]", "");
-              }
-            });
+    List<String> expectProcess = asList(expect);
+    List<String> expectRead = transform(expectProcess, value -> value.replaceAll("[\\r\\n]", ""));
 
     for (int chunk : CHUNK_SIZES) {
       chunk = max(1, min(chunk, input.length()));
@@ -85,11 +76,11 @@ public class LineBufferTest extends IoTestCase {
   }
 
   private static List<String> bufferHelper(String input, int chunk) throws IOException {
-    final List<String> lines = Lists.newArrayList();
+    List<String> lines = new ArrayList<>();
     LineBuffer lineBuf =
         new LineBuffer() {
           @Override
-          protected void handleLine(String line, String end) {
+          void handleLine(String line, String end) {
             lines.add(line + end);
           }
         };
@@ -106,7 +97,7 @@ public class LineBufferTest extends IoTestCase {
 
   private static List<String> readUsingJava(String input, int chunk) throws IOException {
     BufferedReader r = new BufferedReader(getChunkedReader(input, chunk));
-    List<String> lines = Lists.newArrayList();
+    List<String> lines = new ArrayList<>();
     String line;
     while ((line = r.readLine()) != null) {
       lines.add(line);
@@ -120,7 +111,7 @@ public class LineBufferTest extends IoTestCase {
     Readable readable =
         asReader ? getChunkedReader(input, chunk) : getChunkedReadable(input, chunk);
     LineReader r = new LineReader(readable);
-    List<String> lines = Lists.newArrayList();
+    List<String> lines = new ArrayList<>();
     String line;
     while ((line = r.readLine()) != null) {
       lines.add(line);
@@ -130,7 +121,7 @@ public class LineBufferTest extends IoTestCase {
 
   // Returns a Readable that is *not* a Reader.
   private static Readable getChunkedReadable(String input, int chunk) {
-    final Reader reader = getChunkedReader(input, chunk);
+    Reader reader = getChunkedReader(input, chunk);
     return new Readable() {
       @Override
       public int read(CharBuffer cbuf) throws IOException {
@@ -139,7 +130,7 @@ public class LineBufferTest extends IoTestCase {
     };
   }
 
-  private static Reader getChunkedReader(String input, final int chunk) {
+  private static Reader getChunkedReader(String input, int chunk) {
     return new FilterReader(new StringReader(input)) {
       @Override
       public int read(char[] cbuf, int off, int len) throws IOException {

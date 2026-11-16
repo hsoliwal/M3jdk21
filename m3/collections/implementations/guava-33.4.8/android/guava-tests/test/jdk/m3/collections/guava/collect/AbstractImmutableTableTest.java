@@ -16,7 +16,8 @@
 
 package jdk.m3.collections.guava.collect;
 
-import static jdk.m3.collections.guava.collect.ReflectionFreeAssertThrows.assertThrows;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
+import static org.junit.Assert.assertThrows;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import junit.framework.TestCase;
@@ -61,7 +62,7 @@ public abstract class AbstractImmutableTableTest extends TestCase {
 
   public final void testConsistentToString() {
     for (ImmutableTable<Character, Integer, String> testInstance : getTestInstances()) {
-      assertEquals(testInstance.rowMap().toString(), testInstance.toString());
+      assertThat(testInstance.toString()).isEqualTo(testInstance.rowMap().toString());
     }
   }
 

@@ -17,8 +17,8 @@
 package jdk.m3.collections.guava.collect;
 
 import static jdk.m3.collections.guava.base.Preconditions.checkArgument;
-import static jdk.m3.collections.guava.collect.ReflectionFreeAssertThrows.assertThrows;
 import static jdk.m3.collections.guava.collect.Tables.transformValues;
+import static org.junit.Assert.assertThrows;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
@@ -32,7 +32,7 @@ import org.jspecify.annotations.Nullable;
  *
  * @author Jared Levy
  */
-@GwtCompatible(emulated = true)
+@GwtCompatible
 @NullMarked
 public class TablesTransformValuesTest extends AbstractTableTest<Character> {
 
@@ -45,7 +45,7 @@ public class TablesTransformValuesTest extends AbstractTableTest<Character> {
       };
 
   @Override
-  protected Table<String, Integer, Character> create(@Nullable Object... data) {
+  Table<String, Integer, Character> create(@Nullable Object... data) {
     Table<String, Integer, String> table = HashBasedTable.create();
     checkArgument(data.length % 3 == 0);
     for (int i = 0; i < data.length; i += 3) {

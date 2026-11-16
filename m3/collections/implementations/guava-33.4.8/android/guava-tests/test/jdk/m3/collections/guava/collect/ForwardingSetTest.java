@@ -19,6 +19,7 @@ package jdk.m3.collections.guava.collect;
 import static java.util.Arrays.asList;
 
 import jdk.m3.collections.guava.base.Function;
+import jdk.m3.collections.guava.collect.ForwardingSet.SimpleForwardingSet;
 import jdk.m3.collections.guava.collect.testing.MinimalSet;
 import jdk.m3.collections.guava.collect.testing.SetTestSuiteBuilder;
 import jdk.m3.collections.guava.collect.testing.TestStringSetGenerator;
@@ -27,6 +28,7 @@ import jdk.m3.collections.guava.collect.testing.features.CollectionSize;
 import jdk.m3.collections.guava.testing.EqualsTester;
 import jdk.m3.collections.guava.testing.ForwardingWrapperTester;
 import java.util.Collection;
+import java.util.LinkedHashSet;
 import java.util.Set;
 import junit.framework.Test;
 import junit.framework.TestCase;
@@ -42,16 +44,9 @@ import org.jspecify.annotations.Nullable;
  */
 @NullUnmarked
 public class ForwardingSetTest extends TestCase {
-  static class StandardImplForwardingSet<T> extends ForwardingSet<T> {
-    private final Set<T> backingSet;
-
+  static class StandardImplForwardingSet<T> extends SimpleForwardingSet<T> {
     StandardImplForwardingSet(Set<T> backingSet) {
-      this.backingSet = backingSet;
-    }
-
-    @Override
-    protected Set<T> delegate() {
-      return backingSet;
+      super(backingSet);
     }
 
     @Override
@@ -125,7 +120,7 @@ public class ForwardingSetTest extends TestCase {
                 new TestStringSetGenerator() {
                   @Override
                   protected Set<String> create(String[] elements) {
-                    return new StandardImplForwardingSet<>(Sets.newLinkedHashSet(asList(elements)));
+                    return new StandardImplForwardingSet<>(new LinkedHashSet<>(asList(elements)));
                   }
                 })
             .named("ForwardingSet[LinkedHashSet] with standard implementations")
@@ -171,7 +166,7 @@ public class ForwardingSetTest extends TestCase {
         .testEquals();
   }
 
-  private static <T> Set<T> wrap(final Set<T> delegate) {
+  private static <T> Set<T> wrap(Set<T> delegate) {
     return new ForwardingSet<T>() {
       @Override
       protected Set<T> delegate() {

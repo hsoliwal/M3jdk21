@@ -31,7 +31,6 @@ import jdk.m3.collections.guava.collect.Multimap;
 import jdk.m3.collections.guava.collect.testing.features.CollectionSize;
 import jdk.m3.collections.guava.collect.testing.features.MapFeature;
 import java.util.Collection;
-import org.junit.Ignore;
 
 /**
  * Tests for {@link Multimap#removeAll(Object)}.
@@ -39,9 +38,6 @@ import org.junit.Ignore;
  * @author Louis Wasserman
  */
 @GwtCompatible
-@Ignore("test runners must not instantiate and run this directly, only via suites we build")
-// @Ignore affects the Android test runner, which respects JUnit 4 annotations on JUnit 3 tests.
-@SuppressWarnings("JUnit4ClassUsedInJUnit3")
 public class MultimapRemoveAllTester<K, V> extends AbstractMultimapTester<K, V, Multimap<K, V>> {
   @MapFeature.Require(SUPPORTS_REMOVE)
   public void testRemoveAllAbsentKey() {
@@ -83,7 +79,7 @@ public class MultimapRemoveAllTester<K, V> extends AbstractMultimapTester<K, V, 
 
     assertContentsAnyOrder(multimap().removeAll(null), getValueForNullKey());
 
-    expectMissing(mapEntry((K) null, getValueForNullKey()));
+    expectMissing(mapEntry(null, getValueForNullKey()));
   }
 
   @MapFeature.Require({SUPPORTS_REMOVE, ALLOWS_ANY_NULL_QUERIES})

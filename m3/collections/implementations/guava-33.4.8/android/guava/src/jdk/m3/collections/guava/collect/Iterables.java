@@ -18,14 +18,21 @@ package jdk.m3.collections.guava.collect;
 
 import static jdk.m3.collections.guava.base.Preconditions.checkArgument;
 import static jdk.m3.collections.guava.base.Preconditions.checkNotNull;
+import static jdk.m3.collections.guava.base.Predicates.instanceOf;
+import static jdk.m3.collections.guava.collect.CollectPreconditions.checkNonnegativeIndex;
 import static jdk.m3.collections.guava.collect.CollectPreconditions.checkRemove;
+import static jdk.m3.collections.guava.collect.Collections2.safeContains;
+import static jdk.m3.collections.guava.collect.Iterators.advance;
+import static jdk.m3.collections.guava.collect.Iterators.consumingIterator;
+import static jdk.m3.collections.guava.collect.Iterators.getNext;
+import static jdk.m3.collections.guava.collect.Iterators.unmodifiableIterator;
+import static jdk.m3.collections.guava.collect.Lists.newArrayList;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
 import jdk.m3.collections.guava.base.Function;
 import jdk.m3.collections.guava.base.Optional;
 import jdk.m3.collections.guava.base.Predicate;
-import jdk.m3.collections.guava.base.Predicates;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import com.google.errorprone.annotations.InlineMe;
 import java.util.Collection;
@@ -36,6 +43,7 @@ import java.util.NoSuchElementException;
 import java.util.Queue;
 import java.util.RandomAccess;
 import java.util.Set;
+import java.util.SortedSet;
 import java.util.stream.Stream;
 import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.Nullable;
@@ -62,7 +70,7 @@ import org.jspecify.annotations.Nullable;
  * @author Jared Levy
  * @since 2.0
  */
-@GwtCompatible(emulated = true)
+@GwtCompatible
 public final class Iterables {
   private Iterables() {}
 
@@ -102,7 +110,7 @@ public final class Iterables {
 
     @Override
     public Iterator<T> iterator() {
-      return Iterators.unmodifiableIterator(iterable.iterator());
+      return unmodifiableIterator(iterable.iterator());
     }
 
     @Override
@@ -128,7 +136,7 @@ public final class Iterables {
   public static boolean contains(Iterable<?> iterable, @Nullable Object element) {
     if (iterable instanceof Collection) {
       Collection<?> collection = (Collection<?>) iterable;
-      return Collections2.safeContains(collection, element);
+      return safeContains(collection, element);
     }
     return Iterators.contains(iterable.iterator(), element);
   }
@@ -247,21 +255,6 @@ public final class Iterables {
     }
   }
 
-  /** Removes and returns the first matching element, or returns {@code null} if there is none. */
-  static <T extends @Nullable Object> @Nullable T removeFirstMatching(
-      Iterable<T> removeFrom, Predicate<? super T> predicate) {
-    checkNotNull(predicate);
-    Iterator<T> iterator = removeFrom.iterator();
-    while (iterator.hasNext()) {
-      T next = iterator.next();
-      if (predicate.apply(next)) {
-        iterator.remove();
-        return next;
-      }
-    }
-    return null;
-  }
-
   /**
    * Determines whether two iterables contain equal elements in the same order. More specifically,
    * this method returns {@code true} if {@code iterable1} and {@code iterable2} contain the same
@@ -356,7 +349,7 @@ public final class Iterables {
       Iterable<E> iterable) {
     return (iterable instanceof Collection)
         ? (Collection<E>) iterable
-        : Lists.newArrayList(iterable.iterator());
+        : newArrayList(iterable.iterator());
   }
 
   /**
@@ -422,7 +415,7 @@ public final class Iterables {
 
       @Override
       public String toString() {
-        return iterable.toString() + " (cycled)";
+        return iterable + " (cycled)";
       }
     };
   }
@@ -449,7 +442,7 @@ public final class Iterables {
    */
   @SafeVarargs
   public static <T extends @Nullable Object> Iterable<T> cycle(T... elements) {
-    return cycle(Lists.newArrayList(elements));
+    return cycle(newArrayList(elements));
   }
 
   /**
@@ -555,6 +548,9 @@ public final class Iterables {
    * <p><b>Note:</b> if {@code iterable} is a {@link List}, use {@link Lists#partition(List, int)}
    * instead.
    *
+   * <p><b>Java 24+ users:</b> The {@code Stream} equivalent of this method is {@code
+   * stream.gather(Gatherers.windowFixed(size))}.
+   *
    * @param iterable the iterable to return a partitioned view of
    * @param size the desired size of each partition (the last may be smaller)
    * @return an iterable of unmodifiable lists containing the elements of {@code iterable} divided
@@ -637,7 +633,7 @@ public final class Iterables {
   public static <T> Iterable<T> filter(Iterable<?> unfiltered, Class<T> desiredType) {
     checkNotNull(unfiltered);
     checkNotNull(desiredType);
-    return (Iterable<T>) filter(unfiltered, Predicates.instanceOf(desiredType));
+    return (Iterable<T>) filter(unfiltered, instanceOf(desiredType));
   }
 
   /**
@@ -799,14 +795,14 @@ public final class Iterables {
   public static <T extends @Nullable Object> T get(
       Iterable<? extends T> iterable, int position, @ParametricNullness T defaultValue) {
     checkNotNull(iterable);
-    Iterators.checkNonnegative(position);
+    checkNonnegativeIndex(position, "position");
     if (iterable instanceof List) {
       List<? extends T> list = (List<? extends T>) iterable;
       return (position < list.size()) ? list.get(position) : defaultValue;
     } else {
       Iterator<? extends T> iterator = iterable.iterator();
-      Iterators.advance(iterator, position);
-      return Iterators.getNext(iterator, defaultValue);
+      advance(iterator, position);
+      return getNext(iterator, defaultValue);
     }
   }
 
@@ -835,7 +831,7 @@ public final class Iterables {
   @ParametricNullness
   public static <T extends @Nullable Object> T getFirst(
       Iterable<? extends T> iterable, @ParametricNullness T defaultValue) {
-    return Iterators.getNext(iterable.iterator(), defaultValue);
+    return getNext(iterable.iterator(), defaultValue);
   }
 
   /**
@@ -859,6 +855,8 @@ public final class Iterables {
         throw new NoSuchElementException();
       }
       return getLastInNonemptyList(list);
+    } else if (iterable instanceof SortedSet) {
+      return ((SortedSet<T>) iterable).last();
     }
 
     return Iterators.getLast(iterable.iterator());
@@ -889,6 +887,8 @@ public final class Iterables {
         return defaultValue;
       } else if (iterable instanceof List) {
         return getLastInNonemptyList((List<? extends T>) iterable);
+      } else if (iterable instanceof SortedSet) {
+        return ((SortedSet<? extends T>) iterable).last();
       }
     }
 
@@ -934,7 +934,7 @@ public final class Iterables {
         }
         Iterator<T> iterator = iterable.iterator();
 
-        Iterators.advance(iterator, numberToSkip);
+        advance(iterator, numberToSkip);
 
         /*
          * We can't just return the iterator because an immediate call to its
@@ -1019,7 +1019,7 @@ public final class Iterables {
       public Iterator<T> iterator() {
         return (iterable instanceof Queue)
             ? new ConsumingQueueIterator<>((Queue<T>) iterable)
-            : Iterators.consumingIterator(iterable.iterator());
+            : consumingIterator(iterable.iterator());
       }
 
       @Override
@@ -1056,8 +1056,9 @@ public final class Iterables {
    * <p>Callers must ensure that the source {@code iterables} are in non-descending order as this
    * method does not sort its input.
    *
-   * <p>For any equivalent elements across all {@code iterables}, it is undefined which element is
-   * returned first.
+   * <p>For any equivalent elements across all {@code iterables}, elements are returned in the order
+   * of their source iterables. That is, if element A from iterable 1 and element B from iterable 2
+   * compare as equal, A will be returned before B if iterable 1 was passed before iterable 2.
    *
    * @since 11.0
    */

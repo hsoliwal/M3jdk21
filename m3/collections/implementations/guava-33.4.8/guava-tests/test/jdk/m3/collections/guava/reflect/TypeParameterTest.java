@@ -20,7 +20,6 @@ import static org.junit.Assert.assertThrows;
 
 import jdk.m3.collections.guava.testing.EqualsTester;
 import jdk.m3.collections.guava.testing.NullPointerTester;
-import java.lang.reflect.Method;
 import java.lang.reflect.TypeVariable;
 import junit.framework.TestCase;
 import org.jspecify.annotations.NullUnmarked;
@@ -45,8 +44,7 @@ public class TypeParameterTest extends TestCase {
     assertThrows(IllegalArgumentException.class, () -> new TypeParameter<String>() {});
   }
 
-  public <A, B> void testEquals() throws Exception {
-    Method method = TypeParameterTest.class.getDeclaredMethod("testEquals");
+  public <A, B> void testEquals() {
     new EqualsTester()
         .addEqualityGroup(new TypeParameter<A>() {}, new TypeParameter<A>() {})
         .addEqualityGroup(new TypeParameter<B>() {})

@@ -16,13 +16,18 @@
 
 package jdk.m3.collections.guava.net;
 
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
+
+import jdk.m3.collections.guava.annotations.GwtIncompatible;
+import jdk.m3.collections.guava.annotations.J2ktIncompatible;
 import jdk.m3.collections.guava.base.Ascii;
 import jdk.m3.collections.guava.base.Joiner;
 import jdk.m3.collections.guava.base.Splitter;
 import jdk.m3.collections.guava.collect.ImmutableBiMap;
+import jdk.m3.collections.guava.collect.ImmutableList;
 import jdk.m3.collections.guava.collect.ImmutableSet;
-import jdk.m3.collections.guava.collect.Lists;
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.List;
 import junit.framework.TestCase;
 import org.jspecify.annotations.NullUnmarked;
@@ -33,6 +38,8 @@ import org.jspecify.annotations.NullUnmarked;
  * @author Kurt Alfred Kluever
  */
 @NullUnmarked
+@GwtIncompatible
+@J2ktIncompatible
 public class HttpHeadersTest extends TestCase {
 
   public void testConstantNameMatchesString() throws Exception {
@@ -50,30 +57,31 @@ public class HttpHeadersTest extends TestCase {
             .put("SEC_WEBSOCKET_VERSION", "Sec-WebSocket-Version")
             .put("X_WEBKIT_CSP", "X-WebKit-CSP")
             .put("X_WEBKIT_CSP_REPORT_ONLY", "X-WebKit-CSP-Report-Only")
+            .put("ON_PREFETCH_ACTIVATION", "on-prefetch-activation")
             .buildOrThrow();
     ImmutableSet<String> uppercaseAcronyms =
         ImmutableSet.of(
-            "CH", "ID", "DNT", "DNS", "DPR", "ECT", "GPC", "HTTP2", "IP", "MD5", "P3P", "RTT", "TE",
-            "UA", "UID", "URL", "WWW", "XSS");
-    assertConstantNameMatchesString(HttpHeaders.class, specialCases, uppercaseAcronyms);
-  }
+            "CDN", "CH", "ID", "DNT", "DNS", "DPR", "ECT", "GPC", "HTTP2", "IP", "MD5", "P3P",
+            "RTT", "TE", "UA", "UID", "URL", "WWW", "XSS");
 
-  // Visible for other tests to use
-  static void assertConstantNameMatchesString(
-      Class<?> clazz,
-      ImmutableBiMap<String, String> specialCases,
-      ImmutableSet<String> uppercaseAcronyms)
-      throws IllegalAccessException {
-    for (Field field : relevantFields(clazz)) {
-      assertEquals(
-          upperToHttpHeaderName(field.getName(), specialCases, uppercaseAcronyms), field.get(null));
+    for (Field field : httpHeadersFields()) {
+      assertThat(field.get(null))
+          .isEqualTo(upperToHttpHeaderName(field.getName(), specialCases, uppercaseAcronyms));
     }
   }
 
-  // Visible for other tests to use
-  static ImmutableSet<Field> relevantFields(Class<?> cls) {
+  // Tests that there are no duplicate HTTP header names
+  public void testNoDuplicateFields() throws Exception {
+    ImmutableList.Builder<String> httpHeaders = ImmutableList.builder();
+    for (Field field : httpHeadersFields()) {
+      httpHeaders.add((String) field.get(null));
+    }
+    assertThat(httpHeaders.build()).containsNoDuplicates();
+  }
+
+  private static ImmutableSet<Field> httpHeadersFields() {
     ImmutableSet.Builder<Field> builder = ImmutableSet.builder();
-    for (Field field : cls.getDeclaredFields()) {
+    for (Field field : HttpHeaders.class.getDeclaredFields()) {
       /*
        * Coverage mode generates synthetic fields.  If we ever add private
        * fields, they will cause similar problems, and we may want to switch
@@ -86,9 +94,6 @@ public class HttpHeadersTest extends TestCase {
     return builder.build();
   }
 
-  private static final Splitter SPLITTER = Splitter.on('_');
-  private static final Joiner JOINER = Joiner.on('-');
-
   private static String upperToHttpHeaderName(
       String constantName,
       ImmutableBiMap<String, String> specialCases,
@@ -96,13 +101,13 @@ public class HttpHeadersTest extends TestCase {
     if (specialCases.containsKey(constantName)) {
       return specialCases.get(constantName);
     }
-    List<String> parts = Lists.newArrayList();
-    for (String part : SPLITTER.split(constantName)) {
+    List<String> parts = new ArrayList<>();
+    for (String part : Splitter.on('_').split(constantName)) {
       if (!uppercaseAcronyms.contains(part)) {
         part = part.charAt(0) + Ascii.toLowerCase(part.substring(1));
       }
       parts.add(part);
     }
-    return JOINER.join(parts);
+    return Joiner.on('-').join(parts);
   }
 }

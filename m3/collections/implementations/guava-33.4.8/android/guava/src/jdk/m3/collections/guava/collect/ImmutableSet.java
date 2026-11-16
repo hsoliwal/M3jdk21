@@ -19,7 +19,10 @@ package jdk.m3.collections.guava.collect;
 import static jdk.m3.collections.guava.base.Preconditions.checkArgument;
 import static jdk.m3.collections.guava.base.Preconditions.checkNotNull;
 import static jdk.m3.collections.guava.collect.CollectPreconditions.checkNonnegative;
+import static jdk.m3.collections.guava.collect.ImmutableList.asImmutableList;
 import static jdk.m3.collections.guava.collect.ObjectArrays.checkElementNotNull;
+import static jdk.m3.collections.guava.collect.Sets.equalsImpl;
+import static jdk.m3.collections.guava.collect.Sets.hashCodeImpl;
 import static java.lang.Math.max;
 import static java.util.Objects.requireNonNull;
 
@@ -49,9 +52,11 @@ import org.jspecify.annotations.Nullable;
  *
  * @since 2.0
  */
-@GwtCompatible(serializable = true, emulated = true)
+@GwtCompatible
 @SuppressWarnings("serial") // we're overriding default serialization
 public abstract class ImmutableSet<E> extends ImmutableCollection<E> implements Set<E> {
+  // @IgnoreJRERequirement is not necessary because this compiles down to a constant.
+  // (which is fortunate because Animal Sniffer doesn't look for @IgnoreJRERequirement on fields)
 
   /**
    * Returns a {@code Collector} that accumulates the input elements into a new {@code
@@ -61,7 +66,6 @@ public abstract class ImmutableSet<E> extends ImmutableCollection<E> implements 
    *
    * @since 33.2.0 (available since 21.0 in guava-jre)
    */
-  @SuppressWarnings("Java7ApiChecker")
   @IgnoreJRERequirement // Users will use this only if they're already using streams.
   public static <E> Collector<E, ?, ImmutableSet<E>> toImmutableSet() {
     return CollectCollectors.toImmutableSet();
@@ -260,11 +264,6 @@ public abstract class ImmutableSet<E> extends ImmutableCollection<E> implements 
    * @throws NullPointerException if any of {@code elements} is null
    * @since 7.0 (source-compatible since 2.0)
    */
-  // This the best we could do to get copyOfEnumSet to compile in the mainline.
-  // The suppression also covers the cast to E[], discussed below.
-  // In the backport, we don't have those cases and thus don't need this suppression.
-  // We keep it to minimize diffs.
-  @SuppressWarnings("unchecked")
   public static <E> ImmutableSet<E> copyOf(Collection<? extends E> elements) {
     /*
      * TODO(lowasser): consider checking for ImmutableAsList here
@@ -355,12 +354,12 @@ public abstract class ImmutableSet<E> extends ImmutableCollection<E> implements 
         && hashCode() != object.hashCode()) {
       return false;
     }
-    return Sets.equalsImpl(this, object);
+    return equalsImpl(this, object);
   }
 
   @Override
   public int hashCode() {
-    return Sets.hashCodeImpl(this);
+    return hashCodeImpl(this);
   }
 
   // This declaration is needed to make Set.iterator() and
@@ -373,11 +372,14 @@ public abstract class ImmutableSet<E> extends ImmutableCollection<E> implements 
   @Override
   public ImmutableList<E> asList() {
     ImmutableList<E> result = asList;
-    return (result == null) ? asList = createAsList() : result;
+    if (result == null) {
+      result = asList = createAsList();
+    }
+    return result;
   }
 
   ImmutableList<E> createAsList() {
-    return ImmutableList.asImmutableList(toArray());
+    return asImmutableList(toArray());
   }
 
   /*
@@ -388,7 +390,7 @@ public abstract class ImmutableSet<E> extends ImmutableCollection<E> implements 
    * particular implementation type is an implementation detail.
    */
   @J2ktIncompatible // serialization
-  private static class SerializedForm implements Serializable {
+  private static final class SerializedForm implements Serializable {
     final Object[] elements;
 
     SerializedForm(Object[] elements) {
@@ -399,7 +401,7 @@ public abstract class ImmutableSet<E> extends ImmutableCollection<E> implements 
       return copyOf(elements);
     }
 
-    @GwtIncompatible @J2ktIncompatible private static final long serialVersionUID = 0;
+    @GwtIncompatible private static final long serialVersionUID = 0;
   }
 
   @Override

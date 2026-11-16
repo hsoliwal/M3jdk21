@@ -15,6 +15,11 @@
 package jdk.m3.collections.guava.collect;
 
 import static jdk.m3.collections.guava.base.Preconditions.checkNotNull;
+import static jdk.m3.collections.guava.collect.Iterables.all;
+import static jdk.m3.collections.guava.collect.Iterables.any;
+import static jdk.m3.collections.guava.collect.Lists.asList;
+import static java.util.Arrays.asList;
+import static java.util.Collections.emptyList;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
@@ -26,7 +31,6 @@ import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import com.google.errorprone.annotations.InlineMe;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
@@ -56,7 +60,7 @@ import org.jspecify.annotations.Nullable;
  *
  * <p><a id="streams"></a>
  *
- * <h3>Comparison to streams</h3>
+ * <h2>Comparison to streams</h2>
  *
  * <p>{@link Stream} is similar to this class, but generally more powerful, and certainly more
  * standard. Key differences include:
@@ -77,7 +81,7 @@ import org.jspecify.annotations.Nullable;
  *   <li>Streams are standard Java, not requiring a third-party dependency.
  * </ul>
  *
- * <h3>Example</h3>
+ * <h2>Example</h2>
  *
  * <p>Here is an example that accepts a list from a database call, filters it based on a predicate,
  * transforms it by invoking {@code toString()} on each element, and returns the first 10 elements
@@ -107,26 +111,26 @@ import org.jspecify.annotations.Nullable;
  * @author Marcin Mikosik
  * @since 12.0
  */
-@GwtCompatible(emulated = true)
+@GwtCompatible
 public abstract class FluentIterable<E extends @Nullable Object> implements Iterable<E> {
   // We store 'iterable' and use it instead of 'this' to allow Iterables to perform instanceof
   // checks on the _original_ iterable when FluentIterable.from is used.
-  // To avoid a self retain cycle under j2objc, we store Optional.absent() instead of
-  // Optional.of(this). To access the delegate iterable, call #getDelegate(), which converts to
-  // absent() back to 'this'.
-  private final Optional<Iterable<E>> iterableDelegate;
+  // To avoid a self retain cycle under j2objc, we store null instead of
+  // a reference to 'this'. To access the delegate iterable, call #getDelegate(), which converts
+  // null back to 'this'.
+  private final @Nullable Iterable<E> iterableDelegate;
 
   /** Constructor for use by subclasses. */
   protected FluentIterable() {
-    this.iterableDelegate = Optional.absent();
+    this.iterableDelegate = null;
   }
 
   FluentIterable(Iterable<E> iterable) {
-    this.iterableDelegate = Optional.of(iterable);
+    this.iterableDelegate = checkNotNull(iterable);
   }
 
   private Iterable<E> getDelegate() {
-    return iterableDelegate.or(this);
+    return iterableDelegate != null ? iterableDelegate : this;
   }
 
   /**
@@ -158,7 +162,7 @@ public abstract class FluentIterable<E extends @Nullable Object> implements Iter
    * @since 20.0 (since 18.0 as an overload of {@code of})
    */
   public static <E extends @Nullable Object> FluentIterable<E> from(E[] elements) {
-    return from(Arrays.asList(elements));
+    return from(asList(elements));
   }
 
   /**
@@ -293,7 +297,7 @@ public abstract class FluentIterable<E extends @Nullable Object> implements Iter
             /* lazily generate the iterators on each input only as needed */
             new AbstractIndexedListIterator<Iterator<? extends T>>(inputs.length) {
               @Override
-              public Iterator<? extends T> get(int i) {
+              Iterator<? extends T> get(int i) {
                 return inputs[i].iterator();
               }
             });
@@ -308,8 +312,9 @@ public abstract class FluentIterable<E extends @Nullable Object> implements Iter
    *
    * @since 20.0
    */
+  @SuppressWarnings("EmptyList") // ImmutableList doesn't support nullable element types
   public static <E extends @Nullable Object> FluentIterable<E> of() {
-    return FluentIterable.from(Collections.<E>emptyList());
+    return from(emptyList());
   }
 
   /**
@@ -322,7 +327,7 @@ public abstract class FluentIterable<E extends @Nullable Object> implements Iter
    */
   public static <E extends @Nullable Object> FluentIterable<E> of(
       @ParametricNullness E element, E... elements) {
-    return from(Lists.asList(element, elements));
+    return from(asList(element, elements));
   }
 
   /**
@@ -389,7 +394,7 @@ public abstract class FluentIterable<E extends @Nullable Object> implements Iter
    * @since 18.0
    */
   public final FluentIterable<E> append(Iterable<? extends E> other) {
-    return FluentIterable.concat(getDelegate(), other);
+    return concat(getDelegate(), other);
   }
 
   /**
@@ -401,7 +406,7 @@ public abstract class FluentIterable<E extends @Nullable Object> implements Iter
    * @since 18.0
    */
   public final FluentIterable<E> append(E... elements) {
-    return FluentIterable.concat(getDelegate(), Arrays.asList(elements));
+    return concat(getDelegate(), asList(elements));
   }
 
   /**
@@ -438,7 +443,7 @@ public abstract class FluentIterable<E extends @Nullable Object> implements Iter
    * <p><b>{@code Stream} equivalent:</b> {@link Stream#anyMatch} (same).
    */
   public final boolean anyMatch(Predicate<? super E> predicate) {
-    return Iterables.any(getDelegate(), predicate);
+    return any(getDelegate(), predicate);
   }
 
   /**
@@ -448,7 +453,7 @@ public abstract class FluentIterable<E extends @Nullable Object> implements Iter
    * <p><b>{@code Stream} equivalent:</b> {@link Stream#allMatch} (same).
    */
   public final boolean allMatch(Predicate<? super E> predicate) {
-    return Iterables.all(getDelegate(), predicate);
+    return all(getDelegate(), predicate);
   }
 
   /**
@@ -495,7 +500,7 @@ public abstract class FluentIterable<E extends @Nullable Object> implements Iter
    */
   public <T extends @Nullable Object> FluentIterable<T> transformAndConcat(
       Function<? super E, ? extends Iterable<? extends T>> function) {
-    return FluentIterable.concat(transform(function));
+    return concat(transform(function));
   }
 
   /**
@@ -625,6 +630,9 @@ public abstract class FluentIterable<E extends @Nullable Object> implements Iter
    * FluentIterable} in the order specified by {@code comparator}. To produce an {@code
    * ImmutableList} sorted by its natural ordering, use {@code toSortedList(Ordering.natural())}.
    *
+   * <p>The sorting algorithm used is <i>stable</i>, so elements that compare as equal will stay in
+   * the order in which they appear in this fluent iterable.
+   *
    * <p><b>{@code Stream} equivalent:</b> pass {@link ImmutableList#toImmutableList} to {@code
    * stream.sorted(comparator).collect()}.
    *
@@ -714,9 +722,8 @@ public abstract class FluentIterable<E extends @Nullable Object> implements Iter
    * In the returned multimap, keys appear in the order they are first encountered, and the values
    * corresponding to each key appear in the same order as they are encountered.
    *
-   * <p><b>{@code Stream} equivalent:</b> {@code stream.collect(Collectors.groupingBy(keyFunction))}
-   * behaves similarly, but returns a mutable {@code Map<K, List<E>>} instead, and may not preserve
-   * the order of entries.
+   * <p><b>{@code Stream} equivalent:</b> {@code
+   * stream.collect(ImmutableListMultimap.toImmutableListMultimap(keyFunction, v -> v))}.
    *
    * @param keyFunction the function used to produce the key for each value
    * @throws NullPointerException if any element of this iterable is {@code null}, or if {@code

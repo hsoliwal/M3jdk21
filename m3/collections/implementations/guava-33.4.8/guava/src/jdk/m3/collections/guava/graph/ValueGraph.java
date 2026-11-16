@@ -16,7 +16,6 @@
 
 package jdk.m3.collections.guava.graph;
 
-import jdk.m3.collections.guava.annotations.Beta;
 import java.util.Collection;
 import java.util.Optional;
 import java.util.Set;
@@ -35,7 +34,7 @@ import org.jspecify.annotations.Nullable;
  * href="https://github.com/google/guava/wiki/GraphsExplained#choosing-the-right-graph-type">
  * "Choosing the right graph type"</a> section of the Guava User Guide for more details.
  *
- * <h3>Capabilities</h3>
+ * <h2>Capabilities</h2>
  *
  * <p>{@code ValueGraph} supports the following use cases (<a
  * href="https://github.com/google/guava/wiki/GraphsExplained#definitions">definitions of
@@ -55,7 +54,7 @@ import org.jspecify.annotations.Nullable;
  * edge multiplicity, but the {@code *degree()} and mutation methods will not reflect your
  * interpretation of the edge value as its multiplicity.)
  *
- * <h3>Building a {@code ValueGraph}</h3>
+ * <h2>Building a {@code ValueGraph}</h2>
  *
  * <p>The implementation classes that {@code common.graph} provides are not public, by design. To
  * create an instance of one of the built-in implementations of {@code ValueGraph}, use the {@link
@@ -85,7 +84,7 @@ import org.jspecify.annotations.Nullable;
  * href="https://github.com/google/guava/wiki/GraphsExplained#building-graph-instances">more
  * information on (and examples of) building graphs</a>.
  *
- * <h3>Additional documentation</h3>
+ * <h2>Additional documentation</h2>
  *
  * <p>See the Guava User Guide for the {@code common.graph} package (<a
  * href="https://github.com/google/guava/wiki/GraphsExplained">"Graphs Explained"</a>) for
@@ -107,7 +106,6 @@ import org.jspecify.annotations.Nullable;
  * @param <V> Value parameter type
  * @since 20.0
  */
-@Beta
 public interface ValueGraph<N, V> extends BaseGraph<N> {
   //
   // ValueGraph-level accessors
@@ -369,7 +367,7 @@ public interface ValueGraph<N, V> extends BaseGraph<N> {
   //
 
   /**
-   * Returns {@code true} iff {@code object} is a {@link ValueGraph} that has the same elements and
+   * Returns {@code true} if {@code object} is a {@link ValueGraph} that has the same elements and
    * the same structural relationships as those in this graph.
    *
    * <p>Thus, two value graphs A and B are equal if <b>all</b> of the following are true:
@@ -378,7 +376,8 @@ public interface ValueGraph<N, V> extends BaseGraph<N> {
    *   <li>A and B have equal {@link #isDirected() directedness}.
    *   <li>A and B have equal {@link #nodes() node sets}.
    *   <li>A and B have equal {@link #edges() edge sets}.
-   *   <li>The {@link #edgeValue(N, N) value} of a given edge is the same in both A and B.
+   *   <li>The {@linkplain #edgeValue(Object, Object) value} of a given edge is the same in both A
+   *       and B.
    * </ul>
    *
    * <p>Graph properties besides {@link #isDirected() directedness} do <b>not</b> affect equality.
@@ -393,8 +392,8 @@ public interface ValueGraph<N, V> extends BaseGraph<N> {
 
   /**
    * Returns the hash code for this graph. The hash code of a graph is defined as the hash code of a
-   * map from each of its {@link #edges() edges} to the associated {@link #edgeValue(N, N) edge
-   * value}.
+   * map from each of its {@link #edges() edges} to the associated {@linkplain #edgeValue(Object,
+   * Object) edge value}.
    *
    * <p>A reference implementation of this is provided by {@link AbstractValueGraph#hashCode()}.
    */

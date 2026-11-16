@@ -42,7 +42,7 @@ class Subscriber {
   }
 
   /** The event bus this subscriber belongs to. */
-  @Weak private EventBus bus;
+  @Weak private final EventBus bus;
 
   /** The object with the subscriber method. */
   @VisibleForTesting final Object target;
@@ -64,14 +64,13 @@ class Subscriber {
 
   /** Dispatches {@code event} to this subscriber using the proper executor. */
   final void dispatchEvent(Object event) {
-    executor.execute(
-        () -> {
-          try {
-            invokeSubscriberMethod(event);
-          } catch (InvocationTargetException e) {
-            bus.handleSubscriberException(e.getCause(), context(event));
-          }
-        });
+    executor.execute(() -> {
+      try {
+        invokeSubscriberMethod(event);
+      } catch (InvocationTargetException e) {
+        bus.handleSubscriberException(e.getCause(), context(event));
+      }
+    });
   }
 
   /**
@@ -104,6 +103,7 @@ class Subscriber {
     return (31 + method.hashCode()) * 31 + System.identityHashCode(target);
   }
 
+  @SuppressWarnings("ReferenceEquality") // see comment below
   @Override
   public final boolean equals(@Nullable Object obj) {
     if (obj instanceof Subscriber) {

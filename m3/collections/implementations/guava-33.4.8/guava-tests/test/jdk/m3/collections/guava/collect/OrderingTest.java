@@ -19,17 +19,18 @@ package jdk.m3.collections.guava.collect;
 import static jdk.m3.collections.guava.base.Preconditions.checkArgument;
 import static jdk.m3.collections.guava.collect.Iterators.singletonIterator;
 import static jdk.m3.collections.guava.collect.Lists.newArrayList;
-import static jdk.m3.collections.guava.collect.ReflectionFreeAssertThrows.assertThrows;
+import static jdk.m3.collections.guava.collect.ObjectArrays.newArray;
 import static jdk.m3.collections.guava.collect.testing.Helpers.testComparator;
 import static jdk.m3.collections.guava.testing.SerializableTester.reserialize;
 import static jdk.m3.collections.guava.testing.SerializableTester.reserializeAndAssert;
-import static com.google.common.truth.Truth.assertThat;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
 import static java.util.Arrays.asList;
 import static java.util.Arrays.sort;
 import static java.util.Collections.emptyList;
 import static java.util.Collections.singleton;
 import static java.util.Collections.sort;
 import static java.util.Collections.unmodifiableList;
+import static org.junit.Assert.assertThrows;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
@@ -41,6 +42,7 @@ import jdk.m3.collections.guava.collect.Ordering.IncomparableValueException;
 import jdk.m3.collections.guava.collect.testing.Helpers;
 import jdk.m3.collections.guava.testing.EqualsTester;
 import jdk.m3.collections.guava.testing.NullPointerTester;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
@@ -58,7 +60,7 @@ import org.jspecify.annotations.Nullable;
  *
  * @author Jesse Wilson
  */
-@GwtCompatible(emulated = true)
+@GwtCompatible
 @NullMarked
 public class OrderingTest extends TestCase {
   // TODO(cpovirk): some of these are inexplicably slow (20-30s) under GWT
@@ -67,13 +69,13 @@ public class OrderingTest extends TestCase {
 
   public void testAllEqual() {
     Ordering<@Nullable Object> comparator = Ordering.allEqual();
-    assertSame(comparator, comparator.reverse());
+    assertThat(comparator.reverse()).isSameInstanceAs(comparator);
 
     assertEquals(0, comparator.compare(null, null));
     assertEquals(0, comparator.compare(new Object(), new Object()));
     assertEquals(0, comparator.compare("apples", "oranges"));
-    assertSame(comparator, reserialize(comparator));
-    assertEquals("Ordering.allEqual()", comparator.toString());
+    assertThat(reserialize(comparator)).isSameInstanceAs(comparator);
+    assertThat(comparator.toString()).isEqualTo("Ordering.allEqual()");
 
     List<String> strings = ImmutableList.of("b", "a", "d", "c");
     assertEquals(strings, comparator.sortedCopy(strings));
@@ -82,24 +84,24 @@ public class OrderingTest extends TestCase {
 
   // From https://github.com/google/guava/issues/1342
   public void testComplicatedOrderingExample() {
-    Integer nullInt = (Integer) null;
+    Integer nullInt = null;
     Ordering<@Nullable Iterable<@Nullable Integer>> example =
         Ordering.<Integer>natural()
             .<Integer>nullsFirst()
-            .reverse()
-            .lexicographical()
+            .<@Nullable Integer>reverse()
+            .<@Nullable Integer>lexicographical()
             .reverse()
             .<Iterable<@Nullable Integer>>nullsLast();
-    List<@Nullable Integer> list1 = Lists.newArrayList();
-    List<@Nullable Integer> list2 = Lists.newArrayList(1);
-    List<@Nullable Integer> list3 = Lists.newArrayList(1, 1);
-    List<@Nullable Integer> list4 = Lists.newArrayList(1, 2);
-    List<@Nullable Integer> list5 = Lists.newArrayList(1, null, 2);
-    List<@Nullable Integer> list6 = Lists.newArrayList(2);
-    List<@Nullable Integer> list7 = Lists.newArrayList(nullInt);
-    List<@Nullable Integer> list8 = Lists.newArrayList(nullInt, nullInt);
+    List<@Nullable Integer> list1 = new ArrayList<>();
+    List<@Nullable Integer> list2 = newArrayList(1);
+    List<@Nullable Integer> list3 = newArrayList(1, 1);
+    List<@Nullable Integer> list4 = newArrayList(1, 2);
+    List<@Nullable Integer> list5 = newArrayList(1, null, 2);
+    List<@Nullable Integer> list6 = newArrayList(2);
+    List<@Nullable Integer> list7 = newArrayList(nullInt);
+    List<@Nullable Integer> list8 = newArrayList(nullInt, nullInt);
     List<@Nullable List<@Nullable Integer>> list =
-        Lists.newArrayList(list1, list2, list3, list4, list5, list6, list7, list8, null);
+        newArrayList(list1, list2, list3, list4, list5, list6, list7, list8, null);
     List<@Nullable List<@Nullable Integer>> sorted = example.sortedCopy(list);
 
     // [[null, null], [null], [1, null, 2], [1, 1], [1, 2], [1], [2], [], null]
@@ -108,11 +110,11 @@ public class OrderingTest extends TestCase {
             Lists.<@Nullable Integer>newArrayList(nullInt, nullInt),
             Lists.<@Nullable Integer>newArrayList(nullInt),
             Lists.<@Nullable Integer>newArrayList(1, null, 2),
-            Lists.newArrayList(1, 1),
-            Lists.newArrayList(1, 2),
-            Lists.newArrayList(1),
-            Lists.newArrayList(2),
-            Lists.newArrayList(),
+            newArrayList(1, 1),
+            newArrayList(1, 2),
+            newArrayList(1),
+            newArrayList(2),
+            new ArrayList<>(),
             null)
         .inOrder();
   }
@@ -123,8 +125,8 @@ public class OrderingTest extends TestCase {
     assertThrows(NullPointerException.class, () -> comparator.compare(1, null));
     assertThrows(NullPointerException.class, () -> comparator.compare(null, 2));
     assertThrows(NullPointerException.class, () -> comparator.compare(null, null));
-    assertSame(comparator, reserialize(comparator));
-    assertEquals("Ordering.natural()", comparator.toString());
+    assertThat(reserialize(comparator)).isSameInstanceAs(comparator);
+    assertThat(comparator.toString()).isEqualTo("Ordering.natural()");
   }
 
   public void testFrom() {
@@ -134,7 +136,7 @@ public class OrderingTest extends TestCase {
     assertTrue(caseInsensitiveOrdering.compare("B", "a") > 0);
 
     @SuppressWarnings({"deprecation", "InlineMeInliner"}) // test of a deprecated method
-    Ordering<String> orderingFromOrdering = Ordering.from(Ordering.<String>natural());
+    Ordering<String> orderingFromOrdering = Ordering.from(Ordering.natural());
     new EqualsTester()
         .addEqualityGroup(caseInsensitiveOrdering, Ordering.from(String.CASE_INSENSITIVE_ORDER))
         .addEqualityGroup(orderingFromOrdering, Ordering.natural())
@@ -142,7 +144,7 @@ public class OrderingTest extends TestCase {
   }
 
   public void testExplicit_none() {
-    Comparator<Integer> c = Ordering.explicit(Collections.<Integer>emptyList());
+    Comparator<Integer> c = Ordering.explicit(Collections.emptyList());
     IncomparableValueException expected =
         assertThrows(IncomparableValueException.class, () -> c.compare(0, 0));
     assertEquals(0, expected.value);
@@ -156,7 +158,7 @@ public class OrderingTest extends TestCase {
         assertThrows(IncomparableValueException.class, () -> c.compare(0, 1));
     assertEquals(1, expected.value);
     reserializeAndAssert(c);
-    assertEquals("Ordering.explicit([0])", c.toString());
+    assertThat(c.toString()).isEqualTo("Ordering.explicit([0])");
   }
 
   public void testExplicitMax_b297601553() {
@@ -202,7 +204,7 @@ public class OrderingTest extends TestCase {
   // actual public API.
   @J2ktIncompatible // Ordering.arbitrary
   public void testArbitrary_withoutCollisions() {
-    List<Object> list = Lists.newArrayList();
+    List<Object> list = new ArrayList<>();
     for (int i = 0; i < 50; i++) {
       list.add(new Object());
     }
@@ -214,21 +216,21 @@ public class OrderingTest extends TestCase {
     // comparing any pair of elements gives the answer we expect.
     testComparator(arbitrary, list);
 
-    assertEquals("Ordering.arbitrary()", arbitrary.toString());
+    assertThat(arbitrary.toString()).isEqualTo("Ordering.arbitrary()");
   }
 
   @J2ktIncompatible // ArbitraryOrdering
   public void testArbitrary_withCollisions() {
-    List<Integer> list = Lists.newArrayList();
+    List<MyInteger> list = new ArrayList<>();
     for (int i = 0; i < 50; i++) {
-      list.add(i);
+      list.add(new MyInteger(i));
     }
 
     Ordering<Object> arbitrary =
         new ArbitraryOrdering() {
           @Override
           int identityHashCode(Object object) {
-            return ((Integer) object) % 5; // fake tons of collisions!
+            return ((MyInteger) object).intValue() % 5; // fake tons of collisions!
           }
         };
 
@@ -245,8 +247,8 @@ public class OrderingTest extends TestCase {
   public void testUsingToString() {
     Ordering<Object> ordering = Ordering.usingToString();
     testComparator(ordering, 1, 12, 124, 2);
-    assertEquals("Ordering.usingToString()", ordering.toString());
-    assertSame(ordering, reserialize(ordering));
+    assertThat(ordering.toString()).isEqualTo("Ordering.usingToString()");
+    assertThat(reserialize(ordering)).isSameInstanceAs(ordering);
   }
 
   // use an enum to get easy serializability
@@ -302,8 +304,8 @@ public class OrderingTest extends TestCase {
   }
 
   public void testCompound_instance_generics() {
-    Ordering<Object> objects = Ordering.explicit((Object) 1);
-    Ordering<Number> numbers = Ordering.explicit((Number) 1);
+    Ordering<Object> objects = Ordering.explicit(1);
+    Ordering<Number> numbers = Ordering.explicit(1);
     Ordering<Integer> integers = Ordering.explicit(1);
 
     // Like by like equals like
@@ -354,7 +356,7 @@ public class OrderingTest extends TestCase {
   public void testReverseOfReverseSameAsForward() {
     // Not guaranteed by spec, but it works, and saves us from testing
     // exhaustively
-    assertSame(numberOrdering, numberOrdering.reverse().reverse());
+    assertThat(numberOrdering.reverse().reverse()).isSameInstanceAs(numberOrdering);
   }
 
   private enum StringLengthFunction implements Function<String, Integer> {
@@ -381,7 +383,7 @@ public class OrderingTest extends TestCase {
         .addEqualityGroup(DECREASING_INTEGER)
         .testEquals();
     reserializeAndAssert(comparator);
-    assertEquals("Ordering.natural().onResultOf(STRING_LENGTH)", comparator.toString());
+    assertThat(comparator.toString()).isEqualTo("Ordering.natural().onResultOf(STRING_LENGTH)");
   }
 
   public void testOnResultOf_chained() {
@@ -398,7 +400,8 @@ public class OrderingTest extends TestCase {
         .addEqualityGroup(Ordering.natural())
         .testEquals();
     reserializeAndAssert(comparator);
-    assertEquals("Ordering.natural().reverse().onResultOf(STRING_LENGTH)", comparator.toString());
+    assertThat(comparator.toString())
+        .isEqualTo("Ordering.natural().reverse().onResultOf(STRING_LENGTH)");
   }
 
   public void testLexicographical() {
@@ -421,7 +424,7 @@ public class OrderingTest extends TestCase {
   }
 
   public void testNullsFirst() {
-    Ordering<@Nullable Integer> ordering = Ordering.<Integer>natural().<Integer>nullsFirst();
+    Ordering<@Nullable Integer> ordering = Ordering.<Integer>natural().nullsFirst();
     Helpers.<@Nullable Integer>testComparator(ordering, null, Integer.MIN_VALUE, 0, 1);
 
     new EqualsTester()
@@ -432,7 +435,7 @@ public class OrderingTest extends TestCase {
   }
 
   public void testNullsLast() {
-    Ordering<@Nullable Integer> ordering = Ordering.<Integer>natural().<Integer>nullsLast();
+    Ordering<@Nullable Integer> ordering = Ordering.<Integer>natural().nullsLast();
     Helpers.<@Nullable Integer>testComparator(ordering, 0, 1, Integer.MAX_VALUE, null);
 
     new EqualsTester()
@@ -444,7 +447,7 @@ public class OrderingTest extends TestCase {
 
   @SuppressWarnings({"deprecation", "InlineMeInliner"}) // test of a deprecated method
   public void testBinarySearch() {
-    List<Integer> ints = Lists.newArrayList(0, 2, 3, 5, 7, 9);
+    List<Integer> ints = newArrayList(0, 2, 3, 5, 7, 9);
     assertEquals(4, numberOrdering.binarySearch(ints, 7));
   }
 
@@ -469,10 +472,7 @@ public class OrderingTest extends TestCase {
     List<@Nullable Integer> listWithNull = asList(5, 3, null, 9);
     assertThrows(
         NullPointerException.class,
-        () ->
-            Ordering.<Integer>natural()
-                .nullsFirst()
-                .immutableSortedCopy((List<Integer>) listWithNull));
+        () -> Ordering.<Integer>natural().nullsFirst().immutableSortedCopy(listWithNull));
   }
 
   public void testIsOrdered() {
@@ -496,28 +496,28 @@ public class OrderingTest extends TestCase {
   }
 
   public void testLeastOfIterable_empty_0() {
-    List<Integer> result = numberOrdering.leastOf(Arrays.<Integer>asList(), 0);
+    List<Integer> result = numberOrdering.leastOf(Arrays.asList(), 0);
     assertTrue(result instanceof RandomAccess);
     assertListImmutable(result);
     assertEquals(ImmutableList.<Integer>of(), result);
   }
 
   public void testLeastOfIterator_empty_0() {
-    List<Integer> result = numberOrdering.leastOf(Iterators.<Integer>emptyIterator(), 0);
+    List<Integer> result = numberOrdering.leastOf(Iterators.emptyIterator(), 0);
     assertTrue(result instanceof RandomAccess);
     assertListImmutable(result);
     assertEquals(ImmutableList.<Integer>of(), result);
   }
 
   public void testLeastOfIterable_empty_1() {
-    List<Integer> result = numberOrdering.leastOf(Arrays.<Integer>asList(), 1);
+    List<Integer> result = numberOrdering.leastOf(Arrays.asList(), 1);
     assertTrue(result instanceof RandomAccess);
     assertListImmutable(result);
     assertEquals(ImmutableList.<Integer>of(), result);
   }
 
   public void testLeastOfIterator_empty_1() {
-    List<Integer> result = numberOrdering.leastOf(Iterators.<Integer>emptyIterator(), 1);
+    List<Integer> result = numberOrdering.leastOf(Iterators.emptyIterator(), 1);
     assertTrue(result instanceof RandomAccess);
     assertListImmutable(result);
     assertEquals(ImmutableList.<Integer>of(), result);
@@ -660,27 +660,27 @@ public class OrderingTest extends TestCase {
   }
 
   public void testLeastOfIterable_ties() {
-    Integer foo = new Integer(Integer.MAX_VALUE - 10);
-    Integer bar = new Integer(Integer.MAX_VALUE - 10);
+    MyInteger foo = new MyInteger(Integer.MAX_VALUE - 10);
+    MyInteger bar = new MyInteger(Integer.MAX_VALUE - 10);
 
-    assertNotSame(foo, bar);
-    assertEquals(foo, bar);
+    assertThat(foo).isNotSameInstanceAs(bar);
+    assertThat(foo).isEqualTo(bar);
 
-    List<Integer> list = asList(3, foo, bar, -1);
-    List<Integer> result = numberOrdering.leastOf(list, list.size());
-    assertEquals(ImmutableList.of(-1, 3, foo, bar), result);
+    List<MyInteger> list = asList(new MyInteger(3), foo, bar, new MyInteger(-1));
+    List<MyInteger> result = numberOrdering.leastOf(list, list.size());
+    assertEquals(ImmutableList.of(new MyInteger(-1), new MyInteger(3), foo, bar), result);
   }
 
   public void testLeastOfIterator_ties() {
-    Integer foo = new Integer(Integer.MAX_VALUE - 10);
-    Integer bar = new Integer(Integer.MAX_VALUE - 10);
+    MyInteger foo = new MyInteger(Integer.MAX_VALUE - 10);
+    MyInteger bar = new MyInteger(Integer.MAX_VALUE - 10);
 
-    assertNotSame(foo, bar);
-    assertEquals(foo, bar);
+    assertThat(foo).isNotSameInstanceAs(bar);
+    assertThat(foo).isEqualTo(bar);
 
-    List<Integer> list = asList(3, foo, bar, -1);
-    List<Integer> result = numberOrdering.leastOf(list.iterator(), list.size());
-    assertEquals(ImmutableList.of(-1, 3, foo, bar), result);
+    List<MyInteger> list = asList(new MyInteger(3), foo, bar, new MyInteger(-1));
+    List<MyInteger> result = numberOrdering.leastOf(list.iterator(), list.size());
+    assertEquals(ImmutableList.of(new MyInteger(-1), new MyInteger(3), foo, bar), result);
   }
 
   @GwtIncompatible // slow
@@ -697,7 +697,7 @@ public class OrderingTest extends TestCase {
     Ordering<Integer> ordering = Ordering.natural();
 
     for (int i = 0; i < iterations; i++) {
-      List<Integer> list = Lists.newArrayList();
+      List<Integer> list = new ArrayList<>();
       for (int j = 0; j < elements; j++) {
         list.add(random.nextInt(10 * i + j + 1));
       }
@@ -743,52 +743,47 @@ public class OrderingTest extends TestCase {
   }
 
   private static void assertListImmutable(List<Integer> result) {
-    try {
-      result.set(0, 1);
-      fail();
-    } catch (UnsupportedOperationException expected) {
-      // pass
-    }
+    assertThrows(UnsupportedOperationException.class, () -> result.set(0, 1));
   }
 
   public void testIteratorMinAndMax() {
-    List<Integer> ints = Lists.newArrayList(5, 3, 0, 9);
+    List<Integer> ints = newArrayList(5, 3, 0, 9);
     assertEquals(9, (int) numberOrdering.max(ints.iterator()));
     assertEquals(0, (int) numberOrdering.min(ints.iterator()));
 
     // when the values are the same, the first argument should be returned
-    Integer a = new Integer(4);
-    Integer b = new Integer(4);
-    ints = Lists.newArrayList(a, b, b);
-    assertSame(a, numberOrdering.max(ints.iterator()));
-    assertSame(a, numberOrdering.min(ints.iterator()));
+    MyInteger a = new MyInteger(4);
+    MyInteger b = new MyInteger(4);
+    List<MyInteger> myInts = newArrayList(a, b, b);
+    assertThat(numberOrdering.max(myInts.iterator())).isSameInstanceAs(a);
+    assertThat(numberOrdering.min(myInts.iterator())).isSameInstanceAs(a);
   }
 
   public void testIteratorMinExhaustsIterator() {
-    List<Integer> ints = Lists.newArrayList(9, 0, 3, 5);
+    List<Integer> ints = newArrayList(9, 0, 3, 5);
     Iterator<Integer> iterator = ints.iterator();
     assertEquals(0, (int) numberOrdering.min(iterator));
     assertFalse(iterator.hasNext());
   }
 
   public void testIteratorMaxExhaustsIterator() {
-    List<Integer> ints = Lists.newArrayList(9, 0, 3, 5);
+    List<Integer> ints = newArrayList(9, 0, 3, 5);
     Iterator<Integer> iterator = ints.iterator();
     assertEquals(9, (int) numberOrdering.max(iterator));
     assertFalse(iterator.hasNext());
   }
 
   public void testIterableMinAndMax() {
-    List<Integer> ints = Lists.newArrayList(5, 3, 0, 9);
+    List<Integer> ints = newArrayList(5, 3, 0, 9);
     assertEquals(9, (int) numberOrdering.max(ints));
     assertEquals(0, (int) numberOrdering.min(ints));
 
     // when the values are the same, the first argument should be returned
-    Integer a = new Integer(4);
-    Integer b = new Integer(4);
-    ints = Lists.newArrayList(a, b, b);
-    assertSame(a, numberOrdering.max(ints));
-    assertSame(a, numberOrdering.min(ints));
+    MyInteger a = new MyInteger(4);
+    MyInteger b = new MyInteger(4);
+    List<MyInteger> myInts = newArrayList(a, b, b);
+    assertThat(numberOrdering.max(myInts)).isSameInstanceAs(a);
+    assertThat(numberOrdering.min(myInts)).isSameInstanceAs(a);
   }
 
   public void testVarargsMinAndMax() {
@@ -806,10 +801,10 @@ public class OrderingTest extends TestCase {
     assertEquals(0, (int) numberOrdering.min(5, 3, 0, 9, 0));
 
     // when the values are the same, the first argument should be returned
-    Integer a = new Integer(4);
-    Integer b = new Integer(4);
-    assertSame(a, numberOrdering.max(a, b, b));
-    assertSame(a, numberOrdering.min(a, b, b));
+    MyInteger a = new MyInteger(4);
+    MyInteger b = new MyInteger(4);
+    assertThat(numberOrdering.max(a, b, b)).isSameInstanceAs(a);
+    assertThat(numberOrdering.min(a, b, b)).isSameInstanceAs(a);
   }
 
   public void testParameterMinAndMax() {
@@ -819,10 +814,10 @@ public class OrderingTest extends TestCase {
     assertEquals(3, (int) numberOrdering.min(5, 3));
 
     // when the values are the same, the first argument should be returned
-    Integer a = new Integer(4);
-    Integer b = new Integer(4);
-    assertSame(a, numberOrdering.max(a, b));
-    assertSame(a, numberOrdering.min(a, b));
+    MyInteger a = new MyInteger(4);
+    MyInteger b = new MyInteger(4);
+    assertThat(numberOrdering.max(a, b)).isSameInstanceAs(a);
+    assertThat(numberOrdering.min(a, b)).isSameInstanceAs(a);
   }
 
   private static class NumberOrdering extends Ordering<Number> {
@@ -854,7 +849,7 @@ public class OrderingTest extends TestCase {
   private static final int RECURSE_DEPTH = 2;
 
   public void testCombinationsExhaustively_startingFromNatural() {
-    testExhaustively(Ordering.<String>natural(), "a", "b", "d");
+    testExhaustively(Ordering.natural(), "a", "b", "d");
   }
 
   @GwtIncompatible // too slow
@@ -891,11 +886,11 @@ public class OrderingTest extends TestCase {
       Ordering<? super T> ordering, T... strictlyOrderedElements) {
     checkArgument(
         strictlyOrderedElements.length >= 3,
-        "strictlyOrderedElements " + "requires at least 3 elements");
+        "strictlyOrderedElements requires at least 3 elements");
     List<T> list = asList(strictlyOrderedElements);
 
     // for use calling Collection.toArray later
-    T[] emptyArray = Platform.newArray(strictlyOrderedElements, 0);
+    T[] emptyArray = newArray(strictlyOrderedElements, 0);
 
     // shoot me, but I didn't want to deal with wildcards through the whole test
     @SuppressWarnings("unchecked")
@@ -943,7 +938,7 @@ public class OrderingTest extends TestCase {
 
     // generic arrays and unchecked cast
     void testMinAndMax() {
-      List<T> shuffledList = Lists.newArrayList(strictlyOrderedList);
+      List<T> shuffledList = new ArrayList<>(strictlyOrderedList);
       shuffledList = shuffledCopy(shuffledList, new Random(5));
 
       T min = strictlyOrderedList.get(0);
@@ -972,19 +967,19 @@ public class OrderingTest extends TestCase {
       for (int i = 0; i < strictlyOrderedList.size(); i++) {
         assertEquals(i, ordering.binarySearch(strictlyOrderedList, strictlyOrderedList.get(i)));
       }
-      List<T> newList = Lists.newArrayList(strictlyOrderedList);
+      List<T> newList = new ArrayList<>(strictlyOrderedList);
       T valueNotInList = newList.remove(1);
       assertEquals(-2, ordering.binarySearch(newList, valueNotInList));
     }
 
     void testSortedCopy() {
-      List<T> shuffledList = Lists.newArrayList(strictlyOrderedList);
+      List<T> shuffledList = new ArrayList<>(strictlyOrderedList);
       shuffledList = shuffledCopy(shuffledList, new Random(5));
 
       assertEquals(strictlyOrderedList, ordering.sortedCopy(shuffledList));
 
       if (!strictlyOrderedList.contains(null)) {
-        List<@NonNull T> nonNullShuffledList = (List<@NonNull T>) shuffledList;
+        List<@NonNull T> nonNullShuffledList = shuffledList;
         assertEquals(strictlyOrderedList, ordering.immutableSortedCopy(nonNullShuffledList));
       }
     }
@@ -999,7 +994,7 @@ public class OrderingTest extends TestCase {
     REVERSE {
       @Override
       <T extends @Nullable Object> Scenario<?> mutate(Scenario<T> scenario) {
-        List<T> newList = Lists.newArrayList(scenario.strictlyOrderedList);
+        List<T> newList = new ArrayList<>(scenario.strictlyOrderedList);
         Collections.reverse(newList);
         return new Scenario<T>(scenario.ordering.reverse(), newList, scenario.emptyArray);
       }
@@ -1007,7 +1002,7 @@ public class OrderingTest extends TestCase {
     NULLS_FIRST {
       @Override
       <T extends @Nullable Object> Scenario<?> mutate(Scenario<T> scenario) {
-        List<T> newList = Lists.newArrayList((T) null);
+        List<T> newList = newArrayList((T) null);
         for (T t : scenario.strictlyOrderedList) {
           if (t != null) {
             newList.add(t);
@@ -1019,7 +1014,7 @@ public class OrderingTest extends TestCase {
     NULLS_LAST {
       @Override
       <T extends @Nullable Object> Scenario<?> mutate(Scenario<T> scenario) {
-        List<T> newList = Lists.newArrayList();
+        List<T> newList = new ArrayList<>();
         for (T t : scenario.strictlyOrderedList) {
           if (t != null) {
             newList.add(t);
@@ -1031,7 +1026,7 @@ public class OrderingTest extends TestCase {
     },
     ON_RESULT_OF {
       @Override
-      <T extends @Nullable Object> Scenario<?> mutate(final Scenario<T> scenario) {
+      <T extends @Nullable Object> Scenario<?> mutate(Scenario<T> scenario) {
         Ordering<Integer> ordering =
             scenario.ordering.onResultOf(
                 new Function<Integer, T>() {
@@ -1040,7 +1035,7 @@ public class OrderingTest extends TestCase {
                     return scenario.strictlyOrderedList.get(from);
                   }
                 });
-        List<Integer> list = Lists.newArrayList();
+        List<Integer> list = new ArrayList<>();
         for (int i = 0; i < scenario.strictlyOrderedList.size(); i++) {
           list.add(i);
         }
@@ -1051,16 +1046,13 @@ public class OrderingTest extends TestCase {
       @SuppressWarnings("unchecked") // generic arrays
       @Override
       <T extends @Nullable Object> Scenario<?> mutate(Scenario<T> scenario) {
-        List<Composite<T>> composites = Lists.newArrayList();
+        List<Composite<T>> composites = new ArrayList<>();
         for (T t : scenario.strictlyOrderedList) {
           composites.add(new Composite<T>(t, 1));
           composites.add(new Composite<T>(t, 2));
         }
         Ordering<Composite<T>> ordering =
-            scenario
-                .ordering
-                .onResultOf(Composite.<T>getValueFunction())
-                .compound(Ordering.natural());
+            scenario.ordering.onResultOf(Composite.getValueFunction()).compound(Ordering.natural());
         return new Scenario<Composite<T>>(
             ordering, composites, (Composite<T>[]) new Composite<?>[0]);
       }
@@ -1069,7 +1061,7 @@ public class OrderingTest extends TestCase {
       @SuppressWarnings("unchecked") // generic arrays
       @Override
       <T extends @Nullable Object> Scenario<?> mutate(Scenario<T> scenario) {
-        List<Composite<T>> composites = Lists.newArrayList();
+        List<Composite<T>> composites = new ArrayList<>();
         for (T t : scenario.strictlyOrderedList) {
           composites.add(new Composite<T>(t, 1));
         }
@@ -1078,7 +1070,7 @@ public class OrderingTest extends TestCase {
         }
         Ordering<Composite<T>> ordering =
             Ordering.<Composite<T>>natural()
-                .compound(scenario.ordering.onResultOf(Composite.<T>getValueFunction()));
+                .compound(scenario.ordering.onResultOf(Composite.getValueFunction()));
         return new Scenario<Composite<T>>(
             ordering, composites, (Composite<T>[]) new Composite<?>[0]);
       }
@@ -1087,8 +1079,8 @@ public class OrderingTest extends TestCase {
       @SuppressWarnings("unchecked") // generic arrays
       @Override
       <T extends @Nullable Object> Scenario<?> mutate(Scenario<T> scenario) {
-        List<Iterable<T>> words = Lists.newArrayList();
-        words.add(Collections.<T>emptyList());
+        List<Iterable<T>> words = new ArrayList<>();
+        words.add(Collections.emptyList());
         for (T t : scenario.strictlyOrderedList) {
           words.add(asList(t));
           for (T s : scenario.strictlyOrderedList) {
@@ -1145,8 +1137,8 @@ public class OrderingTest extends TestCase {
   }
 
   private static <T extends @Nullable Object> List<T> shuffledCopy(List<T> in, Random random) {
-    List<T> mutable = newArrayList(in);
-    List<T> out = newArrayList();
+    List<T> mutable = new ArrayList<>(in);
+    List<T> out = new ArrayList<>();
     while (!mutable.isEmpty()) {
       out.add(mutable.remove(random.nextInt(mutable.size())));
     }

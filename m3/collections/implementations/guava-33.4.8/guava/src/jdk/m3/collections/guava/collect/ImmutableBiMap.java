@@ -45,7 +45,8 @@ import org.jspecify.annotations.Nullable;
  * @author Jared Levy
  * @since 2.0
  */
-@GwtCompatible(serializable = true, emulated = true)
+@SuppressWarnings("TooManyParameters")
+@GwtCompatible
 public abstract class ImmutableBiMap<K, V> extends ImmutableMap<K, V> implements BiMap<K, V> {
 
   /**
@@ -295,7 +296,7 @@ public abstract class ImmutableBiMap<K, V> extends ImmutableMap<K, V> implements
    * Returns a new builder, expecting the specified number of entries to be added.
    *
    * <p>If {@code expectedSize} is exactly the number of entries added to the builder before {@link
-   * Builder#build} is called, the builder is likely to perform better than an unsized {@link
+   * Builder#build()} is called, the builder is likely to perform better than an unsized {@link
    * #builder()} would have.
    *
    * <p>It is not specified if any performance benefits apply if {@code expectedSize} is close to,
@@ -350,7 +351,7 @@ public abstract class ImmutableBiMap<K, V> extends ImmutableMap<K, V> implements
 
     /**
      * Associates {@code key} with {@code value} in the built bimap. Duplicate keys or values are
-     * not allowed, and will cause {@link #build} to fail.
+     * not allowed, and will cause {@link #build()} to fail.
      */
     @CanIgnoreReturnValue
     @Override
@@ -361,7 +362,7 @@ public abstract class ImmutableBiMap<K, V> extends ImmutableMap<K, V> implements
 
     /**
      * Adds the given {@code entry} to the bimap. Duplicate keys or values are not allowed, and will
-     * cause {@link #build} to fail.
+     * cause {@link #build()} to fail.
      *
      * @since 19.0
      */
@@ -374,7 +375,7 @@ public abstract class ImmutableBiMap<K, V> extends ImmutableMap<K, V> implements
 
     /**
      * Associates all of the given map's keys and values in the built bimap. Duplicate keys or
-     * values are not allowed, and will cause {@link #build} to fail.
+     * values are not allowed, and will cause {@link #build()} to fail.
      *
      * @throws NullPointerException if any key or value in {@code map} is null
      */
@@ -387,7 +388,7 @@ public abstract class ImmutableBiMap<K, V> extends ImmutableMap<K, V> implements
 
     /**
      * Adds all of the given entries to the built bimap. Duplicate keys or values are not allowed,
-     * and will cause {@link #build} to fail.
+     * and will cause {@link #build()} to fail.
      *
      * @throws NullPointerException if any key, value, or entry is null
      * @since 19.0
@@ -470,10 +471,10 @@ public abstract class ImmutableBiMap<K, V> extends ImmutableMap<K, V> implements
               entries = Arrays.copyOf(entries, size);
             }
             sort(
-                (Entry<K, V>[]) entries, // Entries up to size are not null
+                entries, // Entries up to size are not null
                 0,
                 size,
-                Ordering.from(valueComparator).onResultOf(Maps.valueFunction()));
+                Ordering.from(valueComparator).onResultOf(Entry::getValue));
           }
           entriesUsed = true;
           return RegularImmutableBiMap.fromEntryArray(size, entries);
@@ -584,16 +585,11 @@ public abstract class ImmutableBiMap<K, V> extends ImmutableMap<K, V> implements
 
   /**
    * Returns an immutable set of the values in this map, in the same order they appear in {@link
-   * #entrySet}.
+   * #entrySet()}.
    */
   @Override
-  public ImmutableSet<V> values() {
+  public final ImmutableSet<V> values() {
     return inverse().keySet();
-  }
-
-  @Override
-  final ImmutableSet<V> createValues() {
-    throw new AssertionError("should never be called");
   }
 
   /**
@@ -619,7 +615,7 @@ public abstract class ImmutableBiMap<K, V> extends ImmutableMap<K, V> implements
    * bimap and its inverse in sync during serialization, the way AbstractBiMap does.
    */
   @J2ktIncompatible // serialization
-  private static class SerializedForm<K, V> extends ImmutableMap.SerializedForm<K, V> {
+  private static final class SerializedForm<K, V> extends ImmutableMap.SerializedForm<K, V> {
     SerializedForm(ImmutableBiMap<K, V> bimap) {
       super(bimap);
     }
@@ -629,7 +625,7 @@ public abstract class ImmutableBiMap<K, V> extends ImmutableMap<K, V> implements
       return new Builder<>(size);
     }
 
-    @GwtIncompatible @J2ktIncompatible private static final long serialVersionUID = 0;
+    @GwtIncompatible private static final long serialVersionUID = 0;
   }
 
   @Override

@@ -18,10 +18,10 @@ package jdk.m3.collections.guava.collect.testing;
 
 import static jdk.m3.collections.guava.collect.testing.Helpers.castOrCopyToList;
 import static jdk.m3.collections.guava.collect.testing.Helpers.entryComparator;
-import static jdk.m3.collections.guava.collect.testing.Helpers.equal;
 import static jdk.m3.collections.guava.collect.testing.Helpers.mapEntry;
 import static java.util.Arrays.asList;
 import static java.util.Collections.sort;
+import static java.util.Objects.requireNonNull;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import java.util.ArrayList;
@@ -30,6 +30,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Objects;
 import java.util.Set;
 import java.util.SortedMap;
 import java.util.SortedSet;
@@ -145,7 +146,7 @@ public final class DerivedCollectionGenerators {
 
     @Override
     public Iterable<K> order(List<K> insertionOrder) {
-      V v = ((TestMapGenerator<K, V>) mapGenerator.getInnerGenerator()).samples().e0().getValue();
+      V v = mapGenerator.getInnerGenerator().samples().e0().getValue();
       List<Entry<K, V>> entries = new ArrayList<>();
       for (K element : insertionOrder) {
         entries.add(mapEntry(element, v));
@@ -265,7 +266,7 @@ public final class DerivedCollectionGenerators {
 
             int indexOfEntryWithValue(V value) {
               for (int i = 0; i < orderedEntries.size(); i++) {
-                if (equal(orderedEntries.get(i).getValue(), value)) {
+                if (Objects.equals(orderedEntries.get(i).getValue(), value)) {
                   return i;
                 }
               }
@@ -285,7 +286,7 @@ public final class DerivedCollectionGenerators {
   // TODO(cpovirk): could something like this be used elsewhere, e.g., ReserializedListGenerator?
   static class ForwardingTestMapGenerator<K extends @Nullable Object, V extends @Nullable Object>
       implements TestMapGenerator<K, V> {
-    TestMapGenerator<K, V> delegate;
+    final TestMapGenerator<K, V> delegate;
 
     ForwardingTestMapGenerator(TestMapGenerator<K, V> delegate) {
       this.delegate = delegate;
@@ -335,7 +336,7 @@ public final class DerivedCollectionGenerators {
     final Bound from;
     final E firstInclusive;
     final E lastInclusive;
-    private final Comparator<? super E> comparator;
+    private final @Nullable Comparator<? super E> comparator;
     private final TestSortedSetGenerator<E> delegate;
 
     public SortedSetSubsetTestSetGenerator(
@@ -383,14 +384,12 @@ public final class DerivedCollectionGenerators {
 
     @Override
     public SortedSet<E> create(Object... elements) {
-      List<?> normalValues = (List<?>) asList(elements);
+      List<?> normalValues = asList(elements);
       List<E> extremeValues = new ArrayList<>();
 
       // nulls are usually out of bounds for a subset, so ban them altogether
       for (Object o : elements) {
-        if (o == null) {
-          throw new NullPointerException();
-        }
+        requireNonNull(o);
       }
 
       // prepare extreme values to be filtered out of view
@@ -459,7 +458,7 @@ public final class DerivedCollectionGenerators {
     final Bound from;
     final K firstInclusive;
     final K lastInclusive;
-    private final Comparator<Entry<K, V>> entryComparator;
+    private final @Nullable Comparator<Entry<K, V>> entryComparator;
 
     public SortedMapSubmapTestMapGenerator(
         TestSortedMapGenerator<K, V> delegate, Bound to, Bound from) {

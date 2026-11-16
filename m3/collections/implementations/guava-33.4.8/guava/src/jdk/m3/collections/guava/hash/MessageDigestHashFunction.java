@@ -18,6 +18,7 @@ import static jdk.m3.collections.guava.base.Preconditions.checkArgument;
 import static jdk.m3.collections.guava.base.Preconditions.checkNotNull;
 import static jdk.m3.collections.guava.base.Preconditions.checkState;
 
+import jdk.m3.collections.guava.annotations.J2ktIncompatible;
 import com.google.errorprone.annotations.Immutable;
 import java.io.InvalidObjectException;
 import java.io.ObjectInputStream;
@@ -62,7 +63,7 @@ final class MessageDigestHashFunction extends AbstractHashFunction implements Se
 
   private static boolean supportsClone(MessageDigest digest) {
     try {
-      Object unused = digest.clone();
+      Object unused = Platform.clone(digest);
       return true;
     } catch (CloneNotSupportedException e) {
       return false;
@@ -91,7 +92,7 @@ final class MessageDigestHashFunction extends AbstractHashFunction implements Se
   public Hasher newHasher() {
     if (supportsClone) {
       try {
-        return new MessageDigestHasher((MessageDigest) prototype.clone(), bytes);
+        return new MessageDigestHasher((MessageDigest) Platform.clone(prototype), bytes);
       } catch (CloneNotSupportedException e) {
         // falls through
       }
@@ -121,6 +122,7 @@ final class MessageDigestHashFunction extends AbstractHashFunction implements Se
     return new SerializedForm(prototype.getAlgorithm(), bytes, toString);
   }
 
+  @J2ktIncompatible
   private void readObject(ObjectInputStream stream) throws InvalidObjectException {
     throw new InvalidObjectException("Use SerializedForm");
   }
@@ -149,6 +151,7 @@ final class MessageDigestHashFunction extends AbstractHashFunction implements Se
     }
 
     @Override
+    @J2ktIncompatible
     protected void update(ByteBuffer bytes) {
       checkNotDone();
       digest.update(bytes);

@@ -14,7 +14,7 @@
 
 package jdk.m3.collections.guava.util.concurrent;
 
-import static com.google.common.truth.Truth.assertThat;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
 import static jdk.m3.collections.guava.util.concurrent.Futures.getUnchecked;
 import static jdk.m3.collections.guava.util.concurrent.Futures.immediateFuture;
 import static jdk.m3.collections.guava.util.concurrent.FuturesGetCheckedInputs.CHECKED_EXCEPTION;
@@ -28,7 +28,7 @@ import static jdk.m3.collections.guava.util.concurrent.FuturesGetCheckedInputs.O
 import static jdk.m3.collections.guava.util.concurrent.FuturesGetCheckedInputs.RUNTIME_EXCEPTION;
 import static jdk.m3.collections.guava.util.concurrent.FuturesGetCheckedInputs.RUNTIME_EXCEPTION_FUTURE;
 import static jdk.m3.collections.guava.util.concurrent.FuturesGetCheckedInputs.UNCHECKED_EXCEPTION;
-import static jdk.m3.collections.guava.util.concurrent.ReflectionFreeAssertThrows.assertThrows;
+import static org.junit.Assert.assertThrows;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
@@ -39,11 +39,11 @@ import junit.framework.TestCase;
 import org.jspecify.annotations.NullUnmarked;
 
 /** Unit tests for {@link Futures#getUnchecked(Future)}. */
-@GwtCompatible(emulated = true)
+@GwtCompatible
 @NullUnmarked
 public class FuturesGetUncheckedTest extends TestCase {
   public void testGetUnchecked_success() {
-    assertEquals("foo", getUnchecked(immediateFuture("foo")));
+    assertThat(getUnchecked(immediateFuture("foo"))).isEqualTo("foo");
   }
 
   @J2ktIncompatible
@@ -51,7 +51,7 @@ public class FuturesGetUncheckedTest extends TestCase {
   public void testGetUnchecked_interrupted() {
     Thread.currentThread().interrupt();
     try {
-      assertEquals("foo", getUnchecked(immediateFuture("foo")));
+      assertThat(getUnchecked(immediateFuture("foo"))).isEqualTo("foo");
       assertTrue(Thread.currentThread().isInterrupted());
     } finally {
       Thread.interrupted();
@@ -99,12 +99,7 @@ public class FuturesGetUncheckedTest extends TestCase {
   }
 
   public void testGetUnchecked_error() {
-    try {
-      getUnchecked(ERROR_FUTURE);
-    } catch (Error expected) {
-      assertEquals(ERROR, expected);
-      return;
-    }
-    fail();
+    Error expected = assertThrows(Error.class, () -> getUnchecked(ERROR_FUTURE));
+    assertEquals(ERROR, expected);
   }
 }

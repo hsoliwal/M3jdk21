@@ -12,12 +12,16 @@
  * the License.
  */
 
+// Copyright 2026 Hitesh Soliwal and Contributors to the Synexia Project.
 package jdk.m3.collections.guava.primitives;
 
 import static jdk.m3.collections.guava.base.Preconditions.checkArgument;
 import static jdk.m3.collections.guava.base.Preconditions.checkNotNull;
+import static java.lang.System.arraycopy;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
+import jdk.m3.collections.guava.annotations.GwtIncompatible;
+import jdk.m3.collections.guava.annotations.J2ktIncompatible;
 import jdk.m3.collections.guava.base.Preconditions;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import com.google.errorprone.annotations.Immutable;
@@ -137,7 +141,7 @@ public final class ImmutableLongArray implements Serializable {
         rest.length <= Integer.MAX_VALUE - 1, "the total number of elements must fit in an int");
     long[] array = new long[rest.length + 1];
     array[0] = first;
-    System.arraycopy(rest, 0, array, 1, rest.length);
+    arraycopy(rest, 0, array, 1, rest.length);
     return new ImmutableLongArray(array);
   }
 
@@ -150,6 +154,10 @@ public final class ImmutableLongArray implements Serializable {
 
   /** Returns an immutable array containing the given values, in order. */
   public static ImmutableLongArray copyOf(Collection<Long> values) {
+    if (values instanceof AsList) {
+      ImmutableLongArray parent = ((AsList) values).parent;
+      return parent.isEmpty() ? EMPTY : new ImmutableLongArray(parent.toArray());
+    }
     return values.isEmpty() ? EMPTY : new ImmutableLongArray(Longs.toArray(values));
   }
 
@@ -172,7 +180,6 @@ public final class ImmutableLongArray implements Serializable {
    *
    * @since 33.4.0 (but since 22.0 in the JRE flavor)
    */
-  @SuppressWarnings("Java7ApiChecker")
   @IgnoreJRERequirement // Users will use this only if they're already using streams.
   public static ImmutableLongArray copyOf(LongStream stream) {
     // Note this uses very different growth behavior from copyOf(Iterable) and the builder.
@@ -238,7 +245,7 @@ public final class ImmutableLongArray implements Serializable {
     @CanIgnoreReturnValue
     public Builder addAll(long[] values) {
       ensureRoomFor(values.length);
-      System.arraycopy(values, 0, array, count, values.length);
+      arraycopy(values, 0, array, count, values.length);
       count += values.length;
       return this;
     }
@@ -264,6 +271,13 @@ public final class ImmutableLongArray implements Serializable {
      */
     @CanIgnoreReturnValue
     public Builder addAll(Collection<Long> values) {
+      if (values instanceof AsList) {
+        ImmutableLongArray parent = ((AsList) values).parent;
+        // Preserve the scalar failure path if the combined size overflows.
+        if (parent.length() <= Integer.MAX_VALUE - count) {
+          return addAll(parent);
+        }
+      }
       ensureRoomFor(values.size());
       for (Long value : values) {
         array[count++] = value;
@@ -277,7 +291,6 @@ public final class ImmutableLongArray implements Serializable {
      *
      * @since 33.4.0 (but since 22.0 in the JRE flavor)
      */
-    @SuppressWarnings("Java7ApiChecker")
     @IgnoreJRERequirement // Users will use this only if they're already using streams.
     @CanIgnoreReturnValue
     public Builder addAll(LongStream stream) {
@@ -297,7 +310,7 @@ public final class ImmutableLongArray implements Serializable {
     @CanIgnoreReturnValue
     public Builder addAll(ImmutableLongArray values) {
       ensureRoomFor(values.length());
-      System.arraycopy(values.array, values.start, array, count, values.length());
+      arraycopy(values.array, values.start, array, count, values.length());
       count += values.length();
       return this;
     }
@@ -424,7 +437,6 @@ public final class ImmutableLongArray implements Serializable {
    *
    * @since 33.4.0 (but since 22.0 in the JRE flavor)
    */
-  @SuppressWarnings("Java7ApiChecker")
   @IgnoreJRERequirement // We rely on users not to call this without library desugaring.
   public void forEach(LongConsumer consumer) {
     checkNotNull(consumer);
@@ -438,7 +450,6 @@ public final class ImmutableLongArray implements Serializable {
    *
    * @since 33.4.0 (but since 22.0 in the JRE flavor)
    */
-  @SuppressWarnings("Java7ApiChecker")
   // If users use this when they shouldn't, we hope that NewApi will catch subsequent stream calls
   @IgnoreJRERequirement
   public LongStream stream() {
@@ -464,7 +475,6 @@ public final class ImmutableLongArray implements Serializable {
         : new ImmutableLongArray(array, start + startIndex, start + endIndex);
   }
 
-  @SuppressWarnings("Java7ApiChecker")
   @IgnoreJRERequirement // used only from APIs that use streams
   /*
    * We declare this as package-private, rather than private, to avoid generating a synthetic
@@ -490,7 +500,8 @@ public final class ImmutableLongArray implements Serializable {
     return new AsList(this);
   }
 
-  static class AsList extends AbstractList<Long> implements RandomAccess, Serializable {
+  private static final class AsList extends AbstractList<Long>
+      implements RandomAccess, Serializable {
     private final ImmutableLongArray parent;
 
     private AsList(ImmutableLongArray parent) {
@@ -529,15 +540,13 @@ public final class ImmutableLongArray implements Serializable {
       return parent.subArray(fromIndex, toIndex).asList();
     }
 
-    // The default List spliterator is not efficiently splittable
-    @Override
-    @SuppressWarnings("Java7ApiChecker")
     /*
      * This is an override that is not directly visible to callers, so NewApi will catch calls to
      * Collection.spliterator() where necessary.
      */
     @IgnoreJRERequirement
-    public Spliterator<Long> spliterator() {
+    @Override
+    public Spliterator.OfLong spliterator() {
       return parent.spliterator();
     }
 
@@ -575,6 +584,8 @@ public final class ImmutableLongArray implements Serializable {
     public String toString() {
       return parent.toString();
     }
+
+    @GwtIncompatible @J2ktIncompatible     private static final long serialVersionUID = 3355900623165613301L;
   }
 
   /**
@@ -607,7 +618,7 @@ public final class ImmutableLongArray implements Serializable {
     int hash = 1;
     for (int i = start; i < end; i++) {
       hash *= 31;
-      hash += Longs.hashCode(array[i]);
+      hash += Long.hashCode(array[i]);
     }
     return hash;
   }
@@ -652,4 +663,6 @@ public final class ImmutableLongArray implements Serializable {
   Object readResolve() {
     return isEmpty() ? EMPTY : this;
   }
+
+  @GwtIncompatible @J2ktIncompatible   private static final long serialVersionUID = 6402900342693743567L;
 }

@@ -16,7 +16,7 @@
 
 package jdk.m3.collections.guava.io;
 
-import static com.google.common.truth.Truth.assertThat;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
 
 import jdk.m3.collections.guava.collect.Iterables;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
@@ -36,15 +36,15 @@ public class FilesFileTraverserTest extends IoTestCase {
   private File rootDir;
 
   @Override
-  public void setUp() throws IOException {
+  protected void setUp() throws IOException {
     rootDir = createTempDir();
   }
 
-  public void testFileTraverser_emptyDirectory() throws Exception {
+  public void testFileTraverser_emptyDirectory() {
     assertThat(Files.fileTraverser().breadthFirst(rootDir)).containsExactly(rootDir);
   }
 
-  public void testFileTraverser_nonExistingFile() throws Exception {
+  public void testFileTraverser_nonExistingFile() {
     File file = new File(rootDir, "file-that-doesnt-exist");
 
     assertThat(Files.fileTraverser().breadthFirst(file)).containsExactly(file);
@@ -62,7 +62,7 @@ public class FilesFileTraverserTest extends IoTestCase {
     assertThat(Files.fileTraverser().breadthFirst(rootDir)).containsExactly(rootDir, file);
   }
 
-  public void testFileTraverser_singleDirectory() throws Exception {
+  public void testFileTraverser_singleDirectory() {
     File file = newDir("some-dir");
 
     assertThat(Files.fileTraverser().breadthFirst(rootDir)).containsExactly(rootDir, file);

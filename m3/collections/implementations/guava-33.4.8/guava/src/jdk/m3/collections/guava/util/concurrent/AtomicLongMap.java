@@ -17,14 +17,15 @@
 package jdk.m3.collections.guava.util.concurrent;
 
 import static jdk.m3.collections.guava.base.Preconditions.checkNotNull;
+import static java.util.Collections.unmodifiableMap;
 import static java.util.Objects.requireNonNull;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
+import jdk.m3.collections.guava.annotations.GwtIncompatible;
 import jdk.m3.collections.guava.annotations.J2ktIncompatible;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import com.google.errorprone.annotations.concurrent.LazyInit;
 import java.io.Serializable;
-import java.util.Collections;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -59,7 +60,6 @@ import org.jspecify.annotations.Nullable;
  * @since 11.0
  */
 @GwtCompatible
-@J2ktIncompatible
 public final class AtomicLongMap<K> implements Serializable {
   private final ConcurrentHashMap<K, Long> map;
 
@@ -150,7 +150,7 @@ public final class AtomicLongMap<K> implements Serializable {
     Long result =
         map.compute(
             key,
-            (k, value) -> updaterFunction.applyAsLong((value == null) ? 0L : value.longValue()));
+            (K k, @Nullable Long value) -> updaterFunction.applyAsLong(value == null ? 0L : value));
     return requireNonNull(result);
   }
 
@@ -167,8 +167,8 @@ public final class AtomicLongMap<K> implements Serializable {
     AtomicLong holder = new AtomicLong();
     map.compute(
         key,
-        (k, value) -> {
-          long oldValue = (value == null) ? 0L : value.longValue();
+        (K k, @Nullable Long value) -> {
+          long oldValue = (value == null) ? 0L : value;
           holder.set(oldValue);
           return updaterFunction.applyAsLong(oldValue);
         });
@@ -229,7 +229,7 @@ public final class AtomicLongMap<K> implements Serializable {
   @CanIgnoreReturnValue
   public long remove(K key) {
     Long result = map.remove(key);
-    return (result == null) ? 0L : result.longValue();
+    return (result == null) ? 0L : result;
   }
 
   /**
@@ -241,7 +241,7 @@ public final class AtomicLongMap<K> implements Serializable {
   }
 
   /**
-   * Atomically remove {@code key} from the map iff its associated value is 0.
+   * Removes {@code key} from the map if its associated value is 0.
    *
    * @since 20.0
    */
@@ -274,11 +274,14 @@ public final class AtomicLongMap<K> implements Serializable {
   /** Returns a live, read-only view of the map backing this {@code AtomicLongMap}. */
   public Map<K, Long> asMap() {
     Map<K, Long> result = asMap;
-    return (result == null) ? asMap = createAsMap() : result;
+    if (result == null) {
+      result = asMap = createAsMap();
+    }
+    return result;
   }
 
   private Map<K, Long> createAsMap() {
-    return Collections.unmodifiableMap(map);
+    return unmodifiableMap(map);
   }
 
   /** Returns true if this map contains a mapping for the specified key. */
@@ -324,7 +327,7 @@ public final class AtomicLongMap<K> implements Serializable {
     Long result =
         map.compute(
             key,
-            (k, oldValue) -> {
+            (K k, @Nullable Long oldValue) -> {
               if (oldValue == null || oldValue == 0) {
                 noValue.set(true);
                 return newValue;
@@ -332,7 +335,7 @@ public final class AtomicLongMap<K> implements Serializable {
                 return oldValue;
               }
             });
-    return noValue.get() ? 0L : requireNonNull(result).longValue();
+    return noValue.get() ? 0L : requireNonNull(result);
   }
 
   /**
@@ -349,4 +352,6 @@ public final class AtomicLongMap<K> implements Serializable {
       return map.replace(key, expectedOldValue, newValue);
     }
   }
+
+  @GwtIncompatible @J2ktIncompatible   private static final long serialVersionUID = -193610662228457848L;
 }

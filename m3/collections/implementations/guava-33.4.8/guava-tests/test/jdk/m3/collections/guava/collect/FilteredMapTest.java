@@ -17,6 +17,7 @@
 package jdk.m3.collections.guava.collect;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
+import java.util.HashMap;
 import java.util.Map;
 import org.jspecify.annotations.NullMarked;
 
@@ -25,6 +26,6 @@ import org.jspecify.annotations.NullMarked;
 public class FilteredMapTest extends AbstractFilteredMapTest {
   @Override
   Map<String, Integer> createUnfiltered() {
-    return Maps.newHashMap();
+    return new HashMap<>();
   }
 }

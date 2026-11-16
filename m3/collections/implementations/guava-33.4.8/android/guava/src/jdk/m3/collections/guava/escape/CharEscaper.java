@@ -15,6 +15,7 @@
 package jdk.m3.collections.guava.escape;
 
 import static jdk.m3.collections.guava.base.Preconditions.checkNotNull;
+import static java.lang.System.arraycopy;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import org.jspecify.annotations.Nullable;
@@ -82,6 +83,10 @@ public abstract class CharEscaper extends Escaper {
    */
   protected abstract char @Nullable [] escape(char c);
 
+  final char @Nullable [] escapeInternal(char c) {
+    return escape(c);
+  }
+
   /**
    * Returns the escaped form of a given literal string, starting at the given index. This method is
    * called by the {@link #escape(String)} method when it discovers that escaping is required. It is
@@ -134,7 +139,7 @@ public abstract class CharEscaper extends Escaper {
 
       // Copy the replacement string into the dest buffer as needed.
       if (rlen > 0) {
-        System.arraycopy(r, 0, dest, destIndex, rlen);
+        arraycopy(r, 0, dest, destIndex, rlen);
         destIndex += rlen;
       }
       lastEscape = index + 1;
@@ -165,7 +170,7 @@ public abstract class CharEscaper extends Escaper {
     }
     char[] copy = new char[size];
     if (index > 0) {
-      System.arraycopy(dest, 0, copy, 0, index);
+      arraycopy(dest, 0, copy, 0, index);
     }
     return copy;
   }

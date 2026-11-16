@@ -16,25 +16,28 @@ package jdk.m3.collections.guava.cache;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
+import jdk.m3.collections.guava.annotations.J2ktIncompatible;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.atomic.AtomicInteger;
 import org.jspecify.annotations.NullUnmarked;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Utility {@link RemovalListener} implementations intended for use in testing.
  *
  * @author mike nonemacher
  */
-@GwtCompatible(emulated = true)
+@GwtCompatible
 @NullUnmarked
-class TestingRemovalListeners {
+final class TestingRemovalListeners {
 
   /** Returns a new no-op {@code RemovalListener}. */
-  static <K, V> NullRemovalListener<K, V> nullRemovalListener() {
+  static <K, V> RemovalListener<K, V> nullRemovalListener() {
     return new NullRemovalListener<>();
   }
 
   /** Type-inferring factory method for creating a {@link QueuingRemovalListener}. */
+  @J2ktIncompatible
   @GwtIncompatible // ConcurrentLinkedQueue
   static <K, V> QueuingRemovalListener<K, V> queuingRemovalListener() {
     return new QueuingRemovalListener<>();
@@ -46,9 +49,10 @@ class TestingRemovalListeners {
   }
 
   /** {@link RemovalListener} that adds all {@link RemovalNotification} objects to a queue. */
+  @J2ktIncompatible
   @GwtIncompatible // ConcurrentLinkedQueue
-  static class QueuingRemovalListener<K, V> extends ConcurrentLinkedQueue<RemovalNotification<K, V>>
-      implements RemovalListener<K, V> {
+  static final class QueuingRemovalListener<K, V>
+      extends ConcurrentLinkedQueue<RemovalNotification<K, V>> implements RemovalListener<K, V> {
 
     @Override
     public void onRemoval(RemovalNotification<K, V> notification) {
@@ -60,9 +64,9 @@ class TestingRemovalListeners {
    * {@link RemovalListener} that counts each {@link RemovalNotification} it receives, and provides
    * access to the most-recently received one.
    */
-  static class CountingRemovalListener<K, V> implements RemovalListener<K, V> {
+  static final class CountingRemovalListener<K, V> implements RemovalListener<K, V> {
     private final AtomicInteger count = new AtomicInteger();
-    private volatile RemovalNotification<K, V> lastNotification;
+    private volatile @Nullable RemovalNotification<K, V> lastNotification;
 
     @Override
     public void onRemoval(RemovalNotification<K, V> notification) {
@@ -70,26 +74,28 @@ class TestingRemovalListeners {
       lastNotification = notification;
     }
 
-    public int getCount() {
+    int getCount() {
       return count.get();
     }
 
-    public K getLastEvictedKey() {
+    @Nullable K getLastEvictedKey() {
       return lastNotification.getKey();
     }
 
-    public V getLastEvictedValue() {
+    @Nullable V getLastEvictedValue() {
       return lastNotification.getValue();
     }
 
-    public RemovalNotification<K, V> getLastNotification() {
+    @Nullable RemovalNotification<K, V> getLastNotification() {
       return lastNotification;
     }
   }
 
   /** No-op {@link RemovalListener}. */
-  static class NullRemovalListener<K, V> implements RemovalListener<K, V> {
+  private static final class NullRemovalListener<K, V> implements RemovalListener<K, V> {
     @Override
     public void onRemoval(RemovalNotification<K, V> notification) {}
   }
+
+  private TestingRemovalListeners() {}
 }

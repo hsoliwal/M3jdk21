@@ -14,6 +14,7 @@
 
 package jdk.m3.collections.guava.util.concurrent;
 
+import static jdk.m3.collections.guava.math.LongMath.saturatedAbs;
 import static jdk.m3.collections.guava.util.concurrent.MoreExecutors.directExecutor;
 import static java.util.concurrent.TimeUnit.MILLISECONDS;
 
@@ -92,7 +93,7 @@ final class TimeoutFuture<V extends @Nullable Object> extends FluentFuture.Trust
     }
 
     @Override
-    // TODO: b/227335009 - Maybe change interruption behavior, but it requires thought.
+    // TODO(b/227335009): Maybe change interruption behavior, but it requires thought.
     @SuppressWarnings("Interruption")
     public void run() {
       // If either of these reads return null then we must be after a successful cancel or another
@@ -120,7 +121,7 @@ final class TimeoutFuture<V extends @Nullable Object> extends FluentFuture.Trust
        */
       timeoutFutureRef = null;
       if (delegate.isDone()) {
-        timeoutFuture.setFuture(delegate);
+        timeoutFuture.setFutureInternal(delegate);
       } else {
         try {
           @RetainedLocalRef ScheduledFuture<?> timer = timeoutFuture.timer;
@@ -130,7 +131,7 @@ final class TimeoutFuture<V extends @Nullable Object> extends FluentFuture.Trust
           // to produce the message throws (probably StackOverflowError from delegate.toString())
           try {
             if (timer != null) {
-              long overDelayMs = Math.abs(timer.getDelay(MILLISECONDS));
+              long overDelayMs = saturatedAbs(timer.getDelay(MILLISECONDS));
               if (overDelayMs > 10) { // Not all timing drift is worth reporting
                 message += " (timeout delayed by " + overDelayMs + " ms after scheduled time)";
               }

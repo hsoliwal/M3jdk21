@@ -19,13 +19,12 @@ package jdk.m3.collections.guava.collect.testing.google;
 import static jdk.m3.collections.guava.collect.testing.features.CollectionSize.ZERO;
 import static jdk.m3.collections.guava.collect.testing.features.MapFeature.ALLOWS_NULL_KEYS;
 import static jdk.m3.collections.guava.collect.testing.features.MapFeature.ALLOWS_NULL_KEY_QUERIES;
-import static jdk.m3.collections.guava.collect.testing.google.ReflectionFreeAssertThrows.assertThrows;
+import static org.junit.Assert.assertThrows;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.collect.Multimap;
 import jdk.m3.collections.guava.collect.testing.features.CollectionSize;
 import jdk.m3.collections.guava.collect.testing.features.MapFeature;
-import org.junit.Ignore;
 
 /**
  * Tester for the {@code containsKey} methods of {@code Multimap} and its {@code asMap()} view.
@@ -33,9 +32,6 @@ import org.junit.Ignore;
  * @author Louis Wasserman
  */
 @GwtCompatible
-@Ignore("test runners must not instantiate and run this directly, only via suites we build")
-// @Ignore affects the Android test runner, which respects JUnit 4 annotations on JUnit 3 tests.
-@SuppressWarnings("JUnit4ClassUsedInJUnit3")
 public class MultimapContainsKeyTester<K, V> extends AbstractMultimapTester<K, V, Multimap<K, V>> {
   @CollectionSize.Require(absent = ZERO)
   public void testContainsKeyYes() {

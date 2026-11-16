@@ -18,10 +18,9 @@ package jdk.m3.collections.guava.graph;
 
 import static jdk.m3.collections.guava.graph.GraphConstants.ENDPOINTS_MISMATCH;
 import static jdk.m3.collections.guava.graph.TestUtil.assertEdgeNotInGraphErrorMessage;
-import static com.google.common.truth.Truth.assertThat;
-import static com.google.common.truth.TruthJUnit.assume;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
+import static jdk.m3.collections.guava.truth.TruthJUnit.assume;
 import static org.junit.Assert.assertThrows;
-import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import jdk.m3.collections.guava.collect.ImmutableSet;
@@ -198,9 +197,7 @@ public abstract class AbstractStandardDirectedNetworkTest extends AbstractNetwor
     IllegalArgumentException e =
         assertThrows(
             IllegalArgumentException.class,
-            () -> {
-              Set<String> unused = network.edgesConnecting(EndpointPair.unordered(N1, N2));
-            });
+            () -> network.edgesConnecting(EndpointPair.unordered(N1, N2)));
     assertThat(e).hasMessageThat().contains(ENDPOINTS_MISMATCH);
   }
 
@@ -210,9 +207,7 @@ public abstract class AbstractStandardDirectedNetworkTest extends AbstractNetwor
     IllegalArgumentException e =
         assertThrows(
             IllegalArgumentException.class,
-            () -> {
-              String unused = network.edgeConnectingOrNull(EndpointPair.unordered(N1, N2));
-            });
+            () -> network.edgeConnectingOrNull(EndpointPair.unordered(N1, N2)));
     assertThat(e).hasMessageThat().contains(ENDPOINTS_MISMATCH);
   }
 
@@ -509,8 +504,8 @@ public abstract class AbstractStandardDirectedNetworkTest extends AbstractNetwor
     assume().that(graphIsMutable()).isTrue();
     assume().that(network.allowsParallelEdges()).isTrue();
 
-    assertTrue(networkAsMutableNetwork.addEdge(N1, N2, E12));
-    assertTrue(networkAsMutableNetwork.addEdge(N1, N2, E12_A));
+    assertThat(networkAsMutableNetwork.addEdge(N1, N2, E12)).isTrue();
+    assertThat(networkAsMutableNetwork.addEdge(N1, N2, E12_A)).isTrue();
     assertThat(network.edgesConnecting(N1, N2)).containsExactly(E12, E12_A);
   }
 
@@ -547,9 +542,9 @@ public abstract class AbstractStandardDirectedNetworkTest extends AbstractNetwor
     assume().that(graphIsMutable()).isTrue();
 
     networkAsMutableNetwork.addNode(N1);
-    assertTrue(networkAsMutableNetwork.addEdge(N1, N5, E15));
-    assertTrue(networkAsMutableNetwork.addEdge(N4, N1, E41));
-    assertTrue(networkAsMutableNetwork.addEdge(N2, N3, E23));
+    assertThat(networkAsMutableNetwork.addEdge(N1, N5, E15)).isTrue();
+    assertThat(networkAsMutableNetwork.addEdge(N4, N1, E41)).isTrue();
+    assertThat(networkAsMutableNetwork.addEdge(N2, N3, E23)).isTrue();
     assertThat(network.nodes()).containsExactly(N1, N5, N4, N2, N3);
     assertThat(network.edges()).containsExactly(E15, E41, E23);
     assertThat(network.edgesConnecting(N1, N5)).containsExactly(E15);
@@ -621,8 +616,8 @@ public abstract class AbstractStandardDirectedNetworkTest extends AbstractNetwor
     assume().that(network.allowsSelfLoops()).isTrue();
     assume().that(network.allowsParallelEdges()).isTrue();
 
-    assertTrue(networkAsMutableNetwork.addEdge(N1, N1, E11));
-    assertTrue(networkAsMutableNetwork.addEdge(N1, N1, E11_A));
+    assertThat(networkAsMutableNetwork.addEdge(N1, N1, E11)).isTrue();
+    assertThat(networkAsMutableNetwork.addEdge(N1, N1, E11_A)).isTrue();
     assertThat(network.edgesConnecting(N1, N1)).containsExactly(E11, E11_A);
   }
 

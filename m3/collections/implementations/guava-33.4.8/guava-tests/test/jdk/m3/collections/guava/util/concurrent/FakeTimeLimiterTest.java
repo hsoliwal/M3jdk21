@@ -16,10 +16,12 @@
 
 package jdk.m3.collections.guava.util.concurrent;
 
-import static com.google.common.truth.Truth.assertThat;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
 import static java.util.concurrent.TimeUnit.MILLISECONDS;
 import static org.junit.Assert.assertThrows;
 
+import jdk.m3.collections.guava.annotations.GwtIncompatible;
+import jdk.m3.collections.guava.annotations.J2ktIncompatible;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import junit.framework.TestCase;
@@ -31,6 +33,8 @@ import org.jspecify.annotations.NullUnmarked;
  * @author Jens Nyman
  */
 @NullUnmarked
+@GwtIncompatible
+@J2ktIncompatible
 public class FakeTimeLimiterTest extends TestCase {
 
   private static final int DELAY_MS = 50;
@@ -51,7 +55,7 @@ public class FakeTimeLimiterTest extends TestCase {
     assertThat(result).isEqualTo(RETURN_VALUE);
   }
 
-  public void testCallWithTimeout_wrapsCheckedException() throws Exception {
+  public void testCallWithTimeout_wrapsCheckedException() {
     Exception exception = new SampleCheckedException();
     ExecutionException e =
         assertThrows(
@@ -60,7 +64,7 @@ public class FakeTimeLimiterTest extends TestCase {
     assertThat(e).hasCauseThat().isEqualTo(exception);
   }
 
-  public void testCallWithTimeout_wrapsUncheckedException() throws Exception {
+  public void testCallWithTimeout_wrapsUncheckedException() {
     Exception exception = new RuntimeException("test");
     UncheckedExecutionException e =
         assertThrows(
@@ -78,10 +82,10 @@ public class FakeTimeLimiterTest extends TestCase {
   }
 
   public void testRunWithTimeout_returnsWithoutException() throws Exception {
-    timeLimiter.runWithTimeout(Runnables.doNothing(), DELAY_MS, MILLISECONDS);
+    timeLimiter.runWithTimeout(() -> {}, DELAY_MS, MILLISECONDS);
   }
 
-  public void testRunWithTimeout_wrapsUncheckedException() throws Exception {
+  public void testRunWithTimeout_wrapsUncheckedException() {
     RuntimeException exception = new RuntimeException("test");
     UncheckedExecutionException e =
         assertThrows(
@@ -90,7 +94,7 @@ public class FakeTimeLimiterTest extends TestCase {
     assertThat(e).hasCauseThat().isEqualTo(exception);
   }
 
-  public void testRunUninterruptiblyWithTimeout_wrapsUncheckedException() throws Exception {
+  public void testRunUninterruptiblyWithTimeout_wrapsUncheckedException() {
     RuntimeException exception = new RuntimeException("test");
     UncheckedExecutionException e =
         assertThrows(
@@ -101,21 +105,15 @@ public class FakeTimeLimiterTest extends TestCase {
     assertThat(e).hasCauseThat().isEqualTo(exception);
   }
 
-  public static <T> Callable<T> callableThrowing(final Exception exception) {
-    return new Callable<T>() {
-      @Override
-      public T call() throws Exception {
-        throw exception;
-      }
+  private static <T> Callable<T> callableThrowing(Exception exception) {
+    return () -> {
+      throw exception;
     };
   }
 
-  private static Runnable runnableThrowing(final RuntimeException e) {
-    return new Runnable() {
-      @Override
-      public void run() {
-        throw e;
-      }
+  private static Runnable runnableThrowing(RuntimeException e) {
+    return () -> {
+      throw e;
     };
   }
 

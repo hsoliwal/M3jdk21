@@ -16,11 +16,14 @@
 
 package jdk.m3.collections.guava.collect.testing.testers;
 
+import static jdk.m3.collections.guava.collect.testing.Helpers.assertEqualIgnoringOrder;
+import static jdk.m3.collections.guava.collect.testing.Helpers.copyToSet;
 import static jdk.m3.collections.guava.collect.testing.Helpers.mapEntry;
 import static jdk.m3.collections.guava.collect.testing.features.CollectionFeature.KNOWN_ORDER;
+import static jdk.m3.collections.guava.collect.testing.features.CollectionSize.SEVERAL;
 import static jdk.m3.collections.guava.collect.testing.features.CollectionSize.ZERO;
 import static jdk.m3.collections.guava.collect.testing.features.MapFeature.SUPPORTS_PUT;
-import static jdk.m3.collections.guava.collect.testing.testers.ReflectionFreeAssertThrows.assertThrows;
+import static org.junit.Assert.assertThrows;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.collect.testing.AbstractMapTester;
@@ -28,10 +31,16 @@ import jdk.m3.collections.guava.collect.testing.SampleElements;
 import jdk.m3.collections.guava.collect.testing.features.CollectionFeature;
 import jdk.m3.collections.guava.collect.testing.features.CollectionSize;
 import jdk.m3.collections.guava.collect.testing.features.MapFeature;
+import jdk.m3.collections.guava.collect.testing.testers.TestExceptions.SomeUncheckedException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
-import org.junit.Ignore;
+import java.util.Objects;
+import java.util.Set;
+import java.util.concurrent.atomic.AtomicReference;
+import java.util.function.BiFunction;
+import org.jspecify.annotations.Nullable;
 
 /**
  * A generic JUnit test which tests {@code replaceAll()} operations on a map. Can't be invoked
@@ -40,9 +49,6 @@ import org.junit.Ignore;
  * @author Louis Wasserman
  */
 @GwtCompatible
-@Ignore("test runners must not instantiate and run this directly, only via suites we build")
-// @Ignore affects the Android test runner, which respects JUnit 4 annotations on JUnit 3 tests.
-@SuppressWarnings("JUnit4ClassUsedInJUnit3")
 public class MapReplaceAllTester<K, V> extends AbstractMapTester<K, V> {
   private SampleElements<K> keys() {
     return new SampleElements<>(k0(), k1(), k2(), k3(), k4());
@@ -55,11 +61,10 @@ public class MapReplaceAllTester<K, V> extends AbstractMapTester<K, V> {
   @MapFeature.Require(SUPPORTS_PUT)
   public void testReplaceAllRotate() {
     getMap()
-        .replaceAll(
-            (K k, V v) -> {
-              int index = keys().asList().indexOf(k);
-              return values().asList().get(index + 1);
-            });
+        .replaceAll((K k, V v) -> {
+          int index = keys().asList().indexOf(k);
+          return values().asList().get(index + 1);
+        });
     List<Entry<K, V>> expectedEntries = new ArrayList<>();
     for (Entry<K, V> entry : getSampleEntries()) {
       int index = keys().asList().indexOf(entry.getKey());
@@ -72,16 +77,90 @@ public class MapReplaceAllTester<K, V> extends AbstractMapTester<K, V> {
   @CollectionFeature.Require(KNOWN_ORDER)
   public void testReplaceAllPreservesOrder() {
     getMap()
-        .replaceAll(
-            (K k, V v) -> {
-              int index = keys().asList().indexOf(k);
-              return values().asList().get(index + 1);
-            });
+        .replaceAll((K k, V v) -> {
+          int index = keys().asList().indexOf(k);
+          return values().asList().get(index + 1);
+        });
     List<Entry<K, V>> orderedEntries = getOrderedElements();
     int index = 0;
     for (K key : getMap().keySet()) {
       assertEquals(orderedEntries.get(index).getKey(), key);
       index++;
+    }
+  }
+
+  @MapFeature.Require(SUPPORTS_PUT)
+  @CollectionSize.Require(SEVERAL)
+  public void testReplaceAllThrowsMidwayThroughNewValue() {
+    doTestReplaceAllThrowsMidwayThrough((k, v) -> v3());
+  }
+
+  @MapFeature.Require(SUPPORTS_PUT)
+  @CollectionSize.Require(SEVERAL)
+  public void testReplaceAllThrowsMidwayThroughExistingValue() {
+    doTestReplaceAllThrowsMidwayThrough((k, v) -> {
+      int index = keys().asList().indexOf(k);
+      return values().asList().get((index + 1) % getNumEntries());
+    });
+  }
+
+  private void doTestReplaceAllThrowsMidwayThrough(BiFunction<K, V, V> functionForFirstEntry) {
+    Map<K, V> map = getMap();
+
+    /*
+     * We set up a stateful function that replaces the first value it encounters (and stores the new
+     * entry) and then throws afterward.
+     *
+     * We expect either:
+     *
+     * - The first value is replaced in the map, and everything else is untouched.
+     *
+     * - The entire map is untouched because the map either computes all replacements before making
+     *   changes or else rolls back changes in case of an exception.
+     */
+
+    AtomicReference<@Nullable Entry<K, V>> firstReplacement = new AtomicReference<>();
+    assertThrows(
+        SomeUncheckedException.class,
+        () ->
+            map.replaceAll((k, v) -> {
+              if (firstReplacement.get() == null) {
+                V newValue = functionForFirstEntry.apply(k, v);
+                firstReplacement.set(mapEntry(k, newValue));
+                return newValue;
+              }
+              throw new SomeUncheckedException();
+            }));
+    Entry<K, V> replacement = firstReplacement.get();
+    if (Objects.equals(map.get(replacement.getKey()), replacement.getValue())) {
+      expectReplacement(replacement);
+    } else {
+      expectUnchanged();
+    }
+
+    List<V> expectedValues = new ArrayList<>();
+    for (Entry<K, V> entry : map.entrySet()) {
+      expectedValues.add(entry.getValue());
+    }
+    assertEqualIgnoringOrder(expectedValues, map.values());
+    assertEquals(expectedValues.size(), map.values().size());
+    for (V value : values().asList()) {
+      if (expectedValues.contains(value)) {
+        assertTrue("Should contain value " + value, map.containsValue(value));
+        assertTrue("values() should contain " + value, map.values().contains(value));
+      } else {
+        expectMissingValues(value);
+        assertFalse("values() should not contain " + value, map.values().contains(value));
+      }
+    }
+
+    if (map.values() instanceof Set) {
+      Set<V> values = (Set<V>) getMap().values();
+      assertEquals(
+          "values() Set should not contain duplicate values",
+          expectedValues.size(),
+          copyToSet(expectedValues).size());
+      assertEquals(copyToSet(expectedValues), values);
     }
   }
 
@@ -92,11 +171,10 @@ public class MapReplaceAllTester<K, V> extends AbstractMapTester<K, V> {
         UnsupportedOperationException.class,
         () ->
             getMap()
-                .replaceAll(
-                    (K k, V v) -> {
-                      int index = keys().asList().indexOf(k);
-                      return values().asList().get(index + 1);
-                    }));
+                .replaceAll((K k, V v) -> {
+                  int index = keys().asList().indexOf(k);
+                  return values().asList().get(index + 1);
+                }));
     expectUnchanged();
   }
 
@@ -105,11 +183,10 @@ public class MapReplaceAllTester<K, V> extends AbstractMapTester<K, V> {
   public void testReplaceAll_unsupportedByEmptyCollection() {
     try {
       getMap()
-          .replaceAll(
-              (K k, V v) -> {
-                int index = keys().asList().indexOf(k);
-                return values().asList().get(index + 1);
-              });
+          .replaceAll((K k, V v) -> {
+            int index = keys().asList().indexOf(k);
+            return values().asList().get(index + 1);
+          });
     } catch (UnsupportedOperationException tolerated) {
     }
     expectUnchanged();

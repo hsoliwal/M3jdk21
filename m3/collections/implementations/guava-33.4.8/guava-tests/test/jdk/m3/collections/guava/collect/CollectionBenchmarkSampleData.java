@@ -17,8 +17,11 @@
 package jdk.m3.collections.guava.collect;
 
 import static jdk.m3.collections.guava.base.Preconditions.checkNotNull;
+import static jdk.m3.collections.guava.collect.Lists.newArrayListWithCapacity;
+import static jdk.m3.collections.guava.collect.Sets.newHashSetWithExpectedSize;
 import static java.util.Collections.shuffle;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import org.jspecify.annotations.NullUnmarked;
@@ -63,7 +66,7 @@ class CollectionBenchmarkSampleData {
   }
 
   private Element[] createQueries(Set<Element> elementsInSet, int numQueries) {
-    List<Element> queryList = Lists.newArrayListWithCapacity(numQueries);
+    List<Element> queryList = newArrayListWithCapacity(numQueries);
 
     int numGoodQueries = (int) (numQueries * hitRate + 0.5);
 
@@ -76,7 +79,7 @@ class CollectionBenchmarkSampleData {
       for (int i = 0; i < minCopiesOfEachGoodQuery; i++) {
         queryList.addAll(elementsInSet);
       }
-      List<Element> tmp = Lists.newArrayList(elementsInSet);
+      List<Element> tmp = new ArrayList<>(elementsInSet);
       shuffle(tmp, random);
       queryList.addAll(tmp.subList(0, extras));
     }
@@ -93,7 +96,7 @@ class CollectionBenchmarkSampleData {
   }
 
   private Set<Element> createData() {
-    Set<Element> set = Sets.newHashSetWithExpectedSize(size);
+    Set<Element> set = newHashSetWithExpectedSize(size);
     while (set.size() < size) {
       set.add(newElement());
     }
@@ -149,6 +152,7 @@ class CollectionBenchmarkSampleData {
     }
 
     @Override
+    @SuppressWarnings("CompareToZero")
     public int compareTo(Element e) {
       int x = slowItDown();
       return x + super.compareTo(e) - x; // silly attempt to prevent opt

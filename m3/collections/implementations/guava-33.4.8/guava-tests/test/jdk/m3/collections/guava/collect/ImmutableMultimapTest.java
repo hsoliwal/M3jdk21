@@ -17,9 +17,10 @@
 package jdk.m3.collections.guava.collect;
 
 import static jdk.m3.collections.guava.collect.Maps.immutableEntry;
-import static jdk.m3.collections.guava.collect.ReflectionFreeAssertThrows.assertThrows;
-import static com.google.common.truth.Truth.assertThat;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
+import static jdk.m3.collections.guava.truth.Truth.assertWithMessage;
 import static java.util.Arrays.asList;
+import static org.junit.Assert.assertThrows;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
@@ -40,7 +41,7 @@ import org.jspecify.annotations.Nullable;
  *
  * @author Jared Levy
  */
-@GwtCompatible(emulated = true)
+@GwtCompatible
 @NullMarked
 public class ImmutableMultimapTest extends TestCase {
 
@@ -53,9 +54,8 @@ public class ImmutableMultimapTest extends TestCase {
 
   public void testBuilder_withImmutableEntryAndNullContents() {
     Builder<String, Integer> builder = new Builder<>();
-    assertThrows(
-        NullPointerException.class, () -> builder.put(immutableEntry("one", (Integer) null)));
-    assertThrows(NullPointerException.class, () -> builder.put(immutableEntry((String) null, 1)));
+    assertThrows(NullPointerException.class, () -> builder.put(immutableEntry("one", null)));
+    assertThrows(NullPointerException.class, () -> builder.put(immutableEntry(null, 1)));
   }
 
   public void testBuilderWithExpectedKeysNegative() {
@@ -103,7 +103,7 @@ public class ImmutableMultimapTest extends TestCase {
   @SuppressWarnings("JUnitIncompatibleType")
   public void testBuilder_withMutableEntry() {
     ImmutableMultimap.Builder<String, Integer> builder = new Builder<>();
-    final StringHolder holder = new StringHolder();
+    StringHolder holder = new StringHolder();
     holder.string = "one";
     Entry<String, Integer> entry =
         new AbstractMapEntry<String, Integer>() {
@@ -128,17 +128,15 @@ public class ImmutableMultimapTest extends TestCase {
   public void testCopyOf() {
     ImmutableSetMultimap<String, String> setMultimap = ImmutableSetMultimap.of("k1", "v1");
     ImmutableMultimap<String, String> setMultimapCopy = ImmutableMultimap.copyOf(setMultimap);
-    assertSame(
-        "copyOf(ImmutableSetMultimap) should not create a new instance",
-        setMultimap,
-        setMultimapCopy);
+    assertWithMessage("copyOf(ImmutableSetMultimap) should not create a new instance")
+        .that(setMultimapCopy)
+        .isSameInstanceAs(setMultimap);
 
     ImmutableListMultimap<String, String> listMultimap = ImmutableListMultimap.of("k1", "v1");
     ImmutableMultimap<String, String> listMultimapCopy = ImmutableMultimap.copyOf(listMultimap);
-    assertSame(
-        "copyOf(ImmutableListMultimap) should not create a new instance",
-        listMultimap,
-        listMultimapCopy);
+    assertWithMessage("copyOf(ImmutableListMultimap) should not create a new instance")
+        .that(listMultimapCopy)
+        .isSameInstanceAs(listMultimap);
   }
 
   public void testUnhashableSingletonValue() {
@@ -151,8 +149,7 @@ public class ImmutableMultimapTest extends TestCase {
   public void testUnhashableMixedValues() {
     SampleElements<UnhashableObject> unhashables = new Unhashables();
     Multimap<Integer, Object> multimap =
-        ImmutableMultimap.<Integer, Object>of(
-            0, unhashables.e0(), 2, "hey you", 0, unhashables.e1());
+        ImmutableMultimap.of(0, unhashables.e0(), 2, "hey you", 0, unhashables.e1());
     assertEquals(2, multimap.get(0).size());
     assertTrue(multimap.get(0).contains(unhashables.e0()));
     assertTrue(multimap.get(0).contains(unhashables.e1()));

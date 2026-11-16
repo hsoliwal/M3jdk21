@@ -16,6 +16,7 @@
 
 package jdk.m3.collections.guava.collect.testing;
 
+import static jdk.m3.collections.guava.base.Preconditions.checkArgument;
 import static jdk.m3.collections.guava.collect.testing.Helpers.copyToList;
 import static jdk.m3.collections.guava.collect.testing.Helpers.copyToSet;
 import static java.lang.System.arraycopy;
@@ -50,7 +51,7 @@ import org.jspecify.annotations.Nullable;
 @GwtCompatible
 @NullMarked
 abstract class AbstractIteratorTester<E extends @Nullable Object, I extends Iterator<E>> {
-  private Stimulus<E, ? super I>[] stimuli;
+  private final Stimulus<E, ? super I>[] stimuli;
   private final Iterator<E> elementsToInsert;
   private final Set<IteratorFeature> features;
   private final List<E> expectedElements;
@@ -98,7 +99,7 @@ abstract class AbstractIteratorTester<E extends @Nullable Object, I extends Iter
 
     abstract boolean isPermitted(Exception exception);
 
-    void assertPermitted(Exception exception) {
+    final void assertPermitted(Exception exception) {
       if (!isPermitted(exception)) {
         String message =
             "Exception "
@@ -287,9 +288,7 @@ abstract class AbstractIteratorTester<E extends @Nullable Object, I extends Iter
     // periodically we should manually try (steps * 3 / 2) here; all tests but
     // one should still pass (testVerifyGetsCalled()).
     stimuli = (Stimulus<E, ? super I>[]) new Stimulus<?, ?>[steps];
-    if (!elementsToInsertIterable.iterator().hasNext()) {
-      throw new IllegalArgumentException();
-    }
+    checkArgument(elementsToInsertIterable.iterator().hasNext());
     elementsToInsert = Helpers.cycle(elementsToInsertIterable);
     this.features = copyToSet(features);
     this.expectedElements = copyToList(expectedElements);
@@ -507,7 +506,7 @@ abstract class AbstractIteratorTester<E extends @Nullable Object, I extends Iter
   abstract static class Stimulus<E extends @Nullable Object, T extends Iterator<E>> {
     private final String toString;
 
-    protected Stimulus(String toString) {
+    Stimulus(String toString) {
       this.toString = toString;
     }
 
@@ -518,26 +517,26 @@ abstract class AbstractIteratorTester<E extends @Nullable Object, I extends Iter
     abstract void executeAndCompare(ListIterator<E> reference, T target);
 
     @Override
-    public String toString() {
+    public final String toString() {
       return toString;
     }
   }
 
-  Stimulus<E, Iterator<E>> hasNext =
+  final Stimulus<E, Iterator<E>> hasNext =
       new Stimulus<E, Iterator<E>>("hasNext") {
         @Override
         void executeAndCompare(ListIterator<E> reference, Iterator<E> target) {
           assertEquals(reference.hasNext(), target.hasNext());
         }
       };
-  Stimulus<E, Iterator<E>> next =
+  final Stimulus<E, Iterator<E>> next =
       new Stimulus<E, Iterator<E>>("next") {
         @Override
         void executeAndCompare(ListIterator<E> reference, Iterator<E> target) {
           internalExecuteAndCompare(reference, target, NEXT_METHOD);
         }
       };
-  Stimulus<E, Iterator<E>> remove =
+  final Stimulus<E, Iterator<E>> remove =
       new Stimulus<E, Iterator<E>>("remove") {
         @Override
         void executeAndCompare(ListIterator<E> reference, Iterator<E> target) {
@@ -545,46 +544,46 @@ abstract class AbstractIteratorTester<E extends @Nullable Object, I extends Iter
         }
       };
 
-  List<Stimulus<E, Iterator<E>>> iteratorStimuli() {
+  final List<Stimulus<E, Iterator<E>>> iteratorStimuli() {
     return asList(hasNext, next, remove);
   }
 
-  Stimulus<E, ListIterator<E>> hasPrevious =
+  final Stimulus<E, ListIterator<E>> hasPrevious =
       new Stimulus<E, ListIterator<E>>("hasPrevious") {
         @Override
         void executeAndCompare(ListIterator<E> reference, ListIterator<E> target) {
           assertEquals(reference.hasPrevious(), target.hasPrevious());
         }
       };
-  Stimulus<E, ListIterator<E>> nextIndex =
+  final Stimulus<E, ListIterator<E>> nextIndex =
       new Stimulus<E, ListIterator<E>>("nextIndex") {
         @Override
         void executeAndCompare(ListIterator<E> reference, ListIterator<E> target) {
           assertEquals(reference.nextIndex(), target.nextIndex());
         }
       };
-  Stimulus<E, ListIterator<E>> previousIndex =
+  final Stimulus<E, ListIterator<E>> previousIndex =
       new Stimulus<E, ListIterator<E>>("previousIndex") {
         @Override
         void executeAndCompare(ListIterator<E> reference, ListIterator<E> target) {
           assertEquals(reference.previousIndex(), target.previousIndex());
         }
       };
-  Stimulus<E, ListIterator<E>> previous =
+  final Stimulus<E, ListIterator<E>> previous =
       new Stimulus<E, ListIterator<E>>("previous") {
         @Override
         void executeAndCompare(ListIterator<E> reference, ListIterator<E> target) {
           internalExecuteAndCompare(reference, target, PREVIOUS_METHOD);
         }
       };
-  Stimulus<E, ListIterator<E>> add =
+  final Stimulus<E, ListIterator<E>> add =
       new Stimulus<E, ListIterator<E>>("add") {
         @Override
         void executeAndCompare(ListIterator<E> reference, ListIterator<E> target) {
           internalExecuteAndCompare(reference, target, newAddMethod());
         }
       };
-  Stimulus<E, ListIterator<E>> set =
+  final Stimulus<E, ListIterator<E>> set =
       new Stimulus<E, ListIterator<E>>("set") {
         @Override
         void executeAndCompare(ListIterator<E> reference, ListIterator<E> target) {
@@ -592,7 +591,7 @@ abstract class AbstractIteratorTester<E extends @Nullable Object, I extends Iter
         }
       };
 
-  List<Stimulus<E, ListIterator<E>>> listIteratorStimuli() {
+  final List<Stimulus<E, ListIterator<E>>> listIteratorStimuli() {
     return asList(hasPrevious, nextIndex, previousIndex, previous, add, set);
   }
 }

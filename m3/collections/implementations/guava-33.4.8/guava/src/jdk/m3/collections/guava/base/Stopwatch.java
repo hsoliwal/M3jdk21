@@ -38,7 +38,7 @@ import java.util.concurrent.TimeUnit;
  *
  * <p>In contrast, <i>wall time</i> is a reading of "now" as given by a method like
  * {@link System#currentTimeMillis()}, best represented as an {@link java.time.Instant}. Such values
- * <i>can</i> be subtracted to obtain a {@code Duration} (such as by {@code Duration.between}), but
+ * <i>can</i> be subtracted to obtain a {@link Duration} (such as by {@link Duration#between}), but
  * doing so does <i>not</i> give a reliable measurement of elapsed time, because wall time readings
  * are inherently approximate, routinely affected by periodic clock corrections. Because this class
  * (by default) uses {@link System#nanoTime}, it is unaffected by these changes.
@@ -55,7 +55,7 @@ import java.util.concurrent.TimeUnit;
  * <p>The one downside of {@code Stopwatch} relative to {@link System#nanoTime()} is that {@code
  * Stopwatch} requires object allocation and additional method calls, which can reduce the accuracy
  * of the elapsed times reported. {@code Stopwatch} is still suitable for logging and metrics where
- * reasonably accurate values are sufficient. If the uncommon case that you need to maximize
+ * reasonably accurate values are sufficient. In the uncommon case that you need to maximize
  * accuracy, use {@code System.nanoTime()} directly instead.
  *
  * <p>Basic usage:
@@ -86,7 +86,7 @@ import java.util.concurrent.TimeUnit;
  * Stopwatch.createStarted(
  *      new Ticker() {
  *        public long read() {
- *          return android.os.SystemClock.elapsedRealtimeNanos(); // requires API Level 17
+ *          return android.os.SystemClock.elapsedRealtimeNanos();
  *        }
  *      });
  * }
@@ -94,7 +94,7 @@ import java.util.concurrent.TimeUnit;
  * @author Kevin Bourrillion
  * @since 10.0
  */
-@GwtCompatible(emulated = true)
+@GwtCompatible
 @SuppressWarnings("GoodTime") // lots of violations
 public final class Stopwatch {
   private final Ticker ticker;
@@ -209,7 +209,7 @@ public final class Stopwatch {
    *
    * <p>It is generally not a good idea to use an ambiguous, unitless {@code long} to represent
    * elapsed time. Therefore, we recommend using {@link #elapsed()} instead, which returns a
-   * strongly-typed {@code Duration} instance.
+   * strongly-typed {@link Duration} instance.
    *
    * @since 14.0 (since 10.0 as {@code elapsedTime()})
    */
@@ -269,7 +269,7 @@ public final class Stopwatch {
       case NANOSECONDS:
         return "ns";
       case MICROSECONDS:
-        return "\u03bcs"; // μs
+        return "μs";
       case MILLISECONDS:
         return "ms";
       case SECONDS:

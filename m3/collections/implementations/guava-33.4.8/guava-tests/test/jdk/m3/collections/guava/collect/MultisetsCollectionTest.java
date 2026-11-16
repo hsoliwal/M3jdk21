@@ -16,6 +16,7 @@
 
 package jdk.m3.collections.guava.collect;
 
+import static jdk.m3.collections.guava.base.Predicates.in;
 import static jdk.m3.collections.guava.base.Predicates.not;
 import static jdk.m3.collections.guava.collect.Multisets.difference;
 import static jdk.m3.collections.guava.collect.Multisets.intersection;
@@ -26,9 +27,7 @@ import static java.util.Arrays.asList;
 import static java.util.Collections.sort;
 
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
-import jdk.m3.collections.guava.base.Objects;
 import jdk.m3.collections.guava.base.Predicate;
-import jdk.m3.collections.guava.base.Predicates;
 import jdk.m3.collections.guava.collect.testing.features.CollectionFeature;
 import jdk.m3.collections.guava.collect.testing.features.CollectionSize;
 import jdk.m3.collections.guava.collect.testing.google.MultisetTestSuiteBuilder;
@@ -37,6 +36,7 @@ import jdk.m3.collections.guava.collect.testing.google.TestStringMultisetGenerat
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
@@ -199,7 +199,7 @@ public class MultisetsCollectionTest extends TestCase {
            * "add an extra item 0 to A and an extra item 1 to B" really means
            * "add an extra item 0 to A and B," which isn't what we want.
            */
-          if (!Objects.equal(elements[0], elements[1])) {
+          if (!Objects.equals(elements[0], elements[1])) {
             multiset2.add(elements[1], 2);
           }
         }
@@ -251,7 +251,7 @@ public class MultisetsCollectionTest extends TestCase {
   private static final ImmutableMultiset<String> ELEMENTS_TO_FILTER_OUT =
       ImmutableMultiset.of("foobar", "bazfoo", "foobar", "foobar");
 
-  private static final Predicate<String> PREDICATE = not(Predicates.in(ELEMENTS_TO_FILTER_OUT));
+  private static final Predicate<String> PREDICATE = not(in(ELEMENTS_TO_FILTER_OUT));
 
   private static TestStringMultisetGenerator filteredGenerator() {
     return new TestStringMultisetGenerator() {
@@ -265,7 +265,7 @@ public class MultisetsCollectionTest extends TestCase {
 
       @Override
       public List<String> order(List<String> insertionOrder) {
-        return Lists.newArrayList(LinkedHashMultiset.create(insertionOrder));
+        return new ArrayList<>(LinkedHashMultiset.create(insertionOrder));
       }
     };
   }

@@ -14,10 +14,10 @@
 
 package jdk.m3.collections.guava.base;
 
-import static jdk.m3.collections.guava.base.ReflectionFreeAssertThrows.assertThrows;
 import static jdk.m3.collections.guava.base.Verify.verify;
 import static jdk.m3.collections.guava.base.Verify.verifyNotNull;
-import static com.google.common.truth.Truth.assertThat;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
+import static org.junit.Assert.assertThrows;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
@@ -27,7 +27,7 @@ import junit.framework.TestCase;
 import org.jspecify.annotations.NullUnmarked;
 
 /** Unit test for {@link jdk.m3.collections.guava.base.Verify}. */
-@GwtCompatible(emulated = true)
+@GwtCompatible
 @NullUnmarked
 public class VerifyTest extends TestCase {
   public void testVerify_simple_success() {
@@ -60,7 +60,7 @@ public class VerifyTest extends TestCase {
 
   public void testVerifyNotNull_simple_success() {
     String result = verifyNotNull(NON_NULL_STRING);
-    assertSame(NON_NULL_STRING, result);
+    assertThat(result).isSameInstanceAs(NON_NULL_STRING);
   }
 
   public void testVerifyNotNull_simple_failure() {
@@ -69,7 +69,7 @@ public class VerifyTest extends TestCase {
 
   public void testVerifyNotNull_complexMessage_success() {
     String result = verifyNotNull(NON_NULL_STRING, "%s", IGNORE_ME);
-    assertSame(NON_NULL_STRING, result);
+    assertThat(result).isSameInstanceAs(NON_NULL_STRING);
   }
 
   public void testVerifyNotNull_simpleMessage_failure() {

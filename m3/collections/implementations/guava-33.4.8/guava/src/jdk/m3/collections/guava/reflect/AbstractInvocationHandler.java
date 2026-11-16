@@ -39,7 +39,7 @@ import org.jspecify.annotations.Nullable;
  */
 public abstract class AbstractInvocationHandler implements InvocationHandler {
   /** Constructor for use by subclasses. */
-  public AbstractInvocationHandler() {}
+  protected AbstractInvocationHandler() {}
 
   private static final Object[] NO_ARGS = {};
 
@@ -58,6 +58,7 @@ public abstract class AbstractInvocationHandler implements InvocationHandler {
    *   <li>other method calls are dispatched to {@link #handleInvocation}.
    * </ul>
    */
+  @SuppressWarnings("ReferenceEquality") // == fast path
   @Override
   public final @Nullable Object invoke(
       Object proxy, Method method, @Nullable Object @Nullable [] args) throws Throwable {

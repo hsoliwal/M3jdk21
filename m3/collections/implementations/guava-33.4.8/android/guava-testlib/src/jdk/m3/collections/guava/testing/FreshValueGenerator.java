@@ -18,7 +18,11 @@ package jdk.m3.collections.guava.testing;
 
 import static jdk.m3.collections.guava.base.Preconditions.checkNotNull;
 import static jdk.m3.collections.guava.base.Throwables.throwIfUnchecked;
+import static jdk.m3.collections.guava.collect.Lists.newArrayListWithCapacity;
+import static jdk.m3.collections.guava.collect.Maps.newTreeMap;
+import static jdk.m3.collections.guava.collect.Sets.newTreeSet;
 import static java.nio.charset.StandardCharsets.UTF_8;
+import static java.util.Arrays.asList;
 import static java.util.Objects.requireNonNull;
 
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
@@ -51,15 +55,12 @@ import jdk.m3.collections.guava.collect.Iterables;
 import jdk.m3.collections.guava.collect.LinkedHashMultimap;
 import jdk.m3.collections.guava.collect.LinkedHashMultiset;
 import jdk.m3.collections.guava.collect.ListMultimap;
-import jdk.m3.collections.guava.collect.Lists;
-import jdk.m3.collections.guava.collect.Maps;
 import jdk.m3.collections.guava.collect.Multimap;
 import jdk.m3.collections.guava.collect.Multiset;
 import jdk.m3.collections.guava.collect.Ordering;
 import jdk.m3.collections.guava.collect.Range;
 import jdk.m3.collections.guava.collect.RowSortedTable;
 import jdk.m3.collections.guava.collect.SetMultimap;
-import jdk.m3.collections.guava.collect.Sets;
 import jdk.m3.collections.guava.collect.SortedMultiset;
 import jdk.m3.collections.guava.collect.Table;
 import jdk.m3.collections.guava.collect.TreeBasedTable;
@@ -98,7 +99,6 @@ import java.nio.LongBuffer;
 import java.nio.ShortBuffer;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.Currency;
@@ -117,6 +117,7 @@ import java.util.SortedMap;
 import java.util.SortedSet;
 import java.util.TreeMap;
 import java.util.TreeSet;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.regex.Pattern;
@@ -223,7 +224,7 @@ class FreshValueGenerator {
     if (emptyGenerate != null) {
       if (emptyInstanceGenerated.containsKey(type.getType())) {
         // empty instance already generated
-        if (emptyInstanceGenerated.get(type.getType()).intValue() == freshness.get()) {
+        if (emptyInstanceGenerated.get(type.getType()) == freshness.get()) {
           // same freshness, generate again.
           return invokeGeneratorMethod(emptyGenerate);
         } else {
@@ -239,7 +240,7 @@ class FreshValueGenerator {
     Method generate = GENERATORS.get(rawType);
     if (generate != null) {
       ImmutableList<Parameter> params = Invokable.from(generate).getParameters();
-      List<Object> args = Lists.newArrayListWithCapacity(params.size());
+      List<Object> args = newArrayListWithCapacity(params.size());
       TypeVariable<?>[] typeVars = rawType.getTypeParameters();
       for (int i = 0; i < params.size(); i++) {
         TypeToken<?> paramType = type.resolveType(typeVars[i]);
@@ -324,7 +325,7 @@ class FreshValueGenerator {
   }
 
   private <T> T pickInstance(T[] instances, T defaultValue) {
-    return pickInstance(Arrays.asList(instances), defaultValue);
+    return pickInstance(asList(instances), defaultValue);
   }
 
   private <T> T pickInstance(Collection<T> instances, T defaultValue) {
@@ -359,7 +360,7 @@ class FreshValueGenerator {
   private @interface Empty {}
 
   @Generates
-  Class<?> generateClass() {
+  final Class<?> generateClass() {
     return pickInstance(
         ImmutableList.of(
             int.class, long.class, void.class, Object.class, Object[].class, Iterable.class),
@@ -377,7 +378,7 @@ class FreshValueGenerator {
   }
 
   @Generates
-  int generateInt() {
+  final int generateInt() {
     return freshness.get();
   }
 
@@ -388,7 +389,7 @@ class FreshValueGenerator {
   }
 
   @Generates
-  long generateLong() {
+  final long generateLong() {
     return generateInt();
   }
 
@@ -399,7 +400,7 @@ class FreshValueGenerator {
   }
 
   @Generates
-  float generateFloat() {
+  final float generateFloat() {
     return generateInt();
   }
 
@@ -410,7 +411,7 @@ class FreshValueGenerator {
   }
 
   @Generates
-  double generateDouble() {
+  final double generateDouble() {
     return generateInt();
   }
 
@@ -421,7 +422,7 @@ class FreshValueGenerator {
   }
 
   @Generates
-  short generateShort() {
+  final short generateShort() {
     return (short) generateInt();
   }
 
@@ -432,7 +433,7 @@ class FreshValueGenerator {
   }
 
   @Generates
-  byte generateByte() {
+  final byte generateByte() {
     return (byte) generateInt();
   }
 
@@ -443,7 +444,7 @@ class FreshValueGenerator {
   }
 
   @Generates
-  char generateChar() {
+  final char generateChar() {
     return generateString().charAt(0);
   }
 
@@ -454,7 +455,7 @@ class FreshValueGenerator {
   }
 
   @Generates
-  boolean generateBoolean() {
+  final boolean generateBoolean() {
     return generateInt() % 2 == 0;
   }
 
@@ -490,7 +491,7 @@ class FreshValueGenerator {
   }
 
   @Generates
-  String generateString() {
+  final String generateString() {
     return Integer.toString(generateInt());
   }
 
@@ -603,7 +604,7 @@ class FreshValueGenerator {
   }
 
   @Generates
-  <T extends @Nullable Object> Ordering<T> generateOrdering() {
+  final <T extends @Nullable Object> Ordering<T> generateOrdering() {
     return new Ordering<T>() {
       @Override
       @SuppressWarnings("UnusedVariable") // intentionally weird Comparator
@@ -647,14 +648,14 @@ class FreshValueGenerator {
 
   @Generates
   static <E> ArrayList<E> generateArrayList(@Nullable E freshElement) {
-    ArrayList<E> list = Lists.newArrayList();
+    ArrayList<E> list = new ArrayList<>();
     list.add(freshElement);
     return list;
   }
 
   @Generates
   static <E> LinkedList<E> generateLinkedList(@Nullable E freshElement) {
-    LinkedList<E> list = Lists.newLinkedList();
+    LinkedList<E> list = new LinkedList<>();
     list.add(freshElement);
     return list;
   }
@@ -681,7 +682,7 @@ class FreshValueGenerator {
 
   @Generates
   static <E> LinkedHashSet<E> generateLinkedHashSet(@Nullable E freshElement) {
-    LinkedHashSet<E> set = Sets.newLinkedHashSet();
+    LinkedHashSet<E> set = new LinkedHashSet<>();
     set.add(freshElement);
     return set;
   }
@@ -703,7 +704,7 @@ class FreshValueGenerator {
 
   @Generates
   static <E extends Comparable<? super E>> TreeSet<E> generateTreeSet(E freshElement) {
-    TreeSet<E> set = Sets.newTreeSet();
+    TreeSet<E> set = newTreeSet();
     set.add(freshElement);
     return set;
   }
@@ -768,7 +769,7 @@ class FreshValueGenerator {
 
   @Generates
   static <K, V> LinkedHashMap<K, V> generateLinkedHashMap(@Nullable K key, @Nullable V value) {
-    LinkedHashMap<K, V> map = Maps.newLinkedHashMap();
+    LinkedHashMap<K, V> map = new LinkedHashMap<>();
     map.put(key, value);
     return map;
   }
@@ -780,12 +781,12 @@ class FreshValueGenerator {
 
   @Empty
   static <K, V> ConcurrentMap<K, V> generateConcurrentMap() {
-    return Maps.newConcurrentMap();
+    return new ConcurrentHashMap<>();
   }
 
   @Generates
   static <K, V> ConcurrentMap<K, V> generateConcurrentMap(K key, V value) {
-    ConcurrentMap<K, V> map = Maps.newConcurrentMap();
+    ConcurrentMap<K, V> map = new ConcurrentHashMap<>();
     map.put(key, value);
     return map;
   }
@@ -805,7 +806,7 @@ class FreshValueGenerator {
   @Generates
   static <K extends Comparable<? super K>, V> TreeMap<K, V> generateTreeMap(
       K key, @Nullable V value) {
-    TreeMap<K, V> map = Maps.newTreeMap();
+    TreeMap<K, V> map = newTreeMap();
     map.put(key, value);
     return map;
   }
@@ -942,12 +943,12 @@ class FreshValueGenerator {
   }
 
   @Generates
-  StringReader generateStringReader() {
+  final StringReader generateStringReader() {
     return new StringReader(generateString());
   }
 
   @Generates
-  Reader generateReader() {
+  final Reader generateReader() {
     return generateStringReader();
   }
 
@@ -962,7 +963,7 @@ class FreshValueGenerator {
   }
 
   @Generates
-  CharBuffer generateCharBuffer() {
+  final CharBuffer generateCharBuffer() {
     return CharBuffer.allocate(generateInt());
   }
 
@@ -995,4 +996,6 @@ class FreshValueGenerator {
   DoubleBuffer generateDoubleBuffer() {
     return DoubleBuffer.allocate(generateInt());
   }
+
+  public FreshValueGenerator() {}
 }

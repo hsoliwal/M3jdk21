@@ -16,7 +16,7 @@
 
 package jdk.m3.collections.guava.graph;
 
-import static com.google.common.truth.Truth.assertThat;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
 
 import org.jspecify.annotations.NullUnmarked;
 import org.junit.Test;

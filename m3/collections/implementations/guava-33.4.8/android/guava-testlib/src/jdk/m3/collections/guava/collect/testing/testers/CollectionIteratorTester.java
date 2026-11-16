@@ -25,8 +25,8 @@ import static jdk.m3.collections.guava.collect.testing.features.CollectionFeatur
 import static jdk.m3.collections.guava.collect.testing.features.CollectionFeature.KNOWN_ORDER;
 import static jdk.m3.collections.guava.collect.testing.features.CollectionFeature.SUPPORTS_ITERATOR_REMOVE;
 import static jdk.m3.collections.guava.collect.testing.features.CollectionSize.ZERO;
-import static jdk.m3.collections.guava.collect.testing.testers.ReflectionFreeAssertThrows.assertThrows;
 import static java.util.Arrays.asList;
+import static org.junit.Assert.assertThrows;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.collect.testing.AbstractCollectionTester;
@@ -42,7 +42,6 @@ import java.util.NoSuchElementException;
 import java.util.Set;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
-import org.junit.Ignore;
 
 /**
  * A generic JUnit test which tests {@code iterator} operations on a collection. Can't be invoked
@@ -50,10 +49,7 @@ import org.junit.Ignore;
  *
  * @author Chris Povirk
  */
-@GwtCompatible(emulated = true)
-@Ignore("test runners must not instantiate and run this directly, only via suites we build")
-// @Ignore affects the Android test runner, which respects JUnit 4 annotations on JUnit 3 tests.
-@SuppressWarnings("JUnit4ClassUsedInJUnit3")
+@GwtCompatible
 @NullMarked
 public class CollectionIteratorTester<E extends @Nullable Object>
     extends AbstractCollectionTester<E> {

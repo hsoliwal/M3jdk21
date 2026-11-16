@@ -19,19 +19,20 @@ package jdk.m3.collections.guava.graph;
 import static jdk.m3.collections.guava.base.Preconditions.checkArgument;
 import static jdk.m3.collections.guava.base.Preconditions.checkNotNull;
 import static jdk.m3.collections.guava.base.Preconditions.checkState;
+import static jdk.m3.collections.guava.collect.Iterators.concat;
+import static jdk.m3.collections.guava.collect.Iterators.transform;
 import static jdk.m3.collections.guava.graph.GraphConstants.INNER_CAPACITY;
 import static jdk.m3.collections.guava.graph.GraphConstants.INNER_LOAD_FACTOR;
 import static jdk.m3.collections.guava.graph.Graphs.checkNonNegative;
 import static jdk.m3.collections.guava.graph.Graphs.checkPositive;
+import static java.util.Collections.unmodifiableSet;
 
 import jdk.m3.collections.guava.base.Function;
 import jdk.m3.collections.guava.collect.AbstractIterator;
 import jdk.m3.collections.guava.collect.ImmutableList;
-import jdk.m3.collections.guava.collect.Iterators;
 import jdk.m3.collections.guava.collect.UnmodifiableIterator;
 import java.util.AbstractSet;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -233,7 +234,7 @@ final class DirectedGraphConnections<N, V> implements GraphConnections<N, V> {
   @Override
   public Set<N> adjacentNodes() {
     if (orderedNodeConnections == null) {
-      return Collections.unmodifiableSet(adjacentNodeValues.keySet());
+      return unmodifiableSet(adjacentNodeValues.keySet());
     } else {
       return new AbstractSet<N>() {
         @Override
@@ -371,16 +372,16 @@ final class DirectedGraphConnections<N, V> implements GraphConnections<N, V> {
     Iterator<EndpointPair<N>> resultWithDoubleSelfLoop;
     if (orderedNodeConnections == null) {
       resultWithDoubleSelfLoop =
-          Iterators.concat(
-              Iterators.transform(
+          concat(
+              transform(
                   predecessors().iterator(),
                   (N predecessor) -> EndpointPair.ordered(predecessor, thisNode)),
-              Iterators.transform(
+              transform(
                   successors().iterator(),
                   (N successor) -> EndpointPair.ordered(thisNode, successor)));
     } else {
       resultWithDoubleSelfLoop =
-          Iterators.transform(
+          transform(
               orderedNodeConnections.iterator(),
               (NodeConnection<N> connection) -> {
                 if (connection instanceof NodeConnection.Succ) {
@@ -487,6 +488,8 @@ final class DirectedGraphConnections<N, V> implements GraphConnections<N, V> {
 
   @Override
   public void addPredecessor(N node, V unused) {
+    checkNotNull(node);
+    checkNotNull(unused);
     Object previousValue = adjacentNodeValues.put(node, PRED);
     boolean addedPredecessor;
 
@@ -516,6 +519,8 @@ final class DirectedGraphConnections<N, V> implements GraphConnections<N, V> {
   @SuppressWarnings("unchecked")
   @Override
   public @Nullable V addSuccessor(N node, V value) {
+    checkNotNull(node);
+    checkNotNull(value);
     Object previousValue = adjacentNodeValues.put(node, value);
     Object previousSuccessor;
 

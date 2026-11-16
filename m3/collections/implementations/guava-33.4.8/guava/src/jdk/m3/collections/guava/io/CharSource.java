@@ -24,7 +24,6 @@ import jdk.m3.collections.guava.base.Optional;
 import jdk.m3.collections.guava.base.Splitter;
 import jdk.m3.collections.guava.collect.AbstractIterator;
 import jdk.m3.collections.guava.collect.ImmutableList;
-import jdk.m3.collections.guava.collect.Lists;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import com.google.errorprone.annotations.MustBeClosed;
 import java.io.BufferedReader;
@@ -36,6 +35,7 @@ import java.io.StringReader;
 import java.io.UncheckedIOException;
 import java.io.Writer;
 import java.nio.charset.Charset;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.function.Consumer;
@@ -146,8 +146,8 @@ public abstract class CharSource {
    * {@snippet :
    * try (Stream<String> lines = source.lines()) {
    *   lines.map(...)
-   *      .filter(...)
-   *      .forEach(...);
+   *       .filter(...)
+   *       .forEach(...);
    * }
    * }
    *
@@ -160,7 +160,6 @@ public abstract class CharSource {
     return reader.lines().onClose(() -> closeUnchecked(reader));
   }
 
-  @SuppressWarnings("Java7ApiChecker")
   @IgnoreJRERequirement // helper for lines()
   /*
    * If we make these calls inline inside the lambda inside lines(), we get an Animal Sniffer error,
@@ -228,7 +227,7 @@ public abstract class CharSource {
     }
   }
 
-  private long countBySkipping(Reader reader) throws IOException {
+  private static long countBySkipping(Reader reader) throws IOException {
     long count = 0;
     long read;
     while ((read = reader.skip(Long.MAX_VALUE)) != 0) {
@@ -337,7 +336,7 @@ public abstract class CharSource {
     Closer closer = Closer.create();
     try {
       BufferedReader reader = closer.register(openBufferedStream());
-      List<String> result = Lists.newArrayList();
+      List<String> result = new ArrayList<>();
       String line;
       while ((line = reader.readLine()) != null) {
         result.add(line);
@@ -488,6 +487,9 @@ public abstract class CharSource {
    * returned {@code CharSource} and any {@code Reader} instances created by it is unspecified if
    * the {@code charSequence} is mutated while it is being read, so don't do that.
    *
+   * <p><b>Java 24+ users:</b> If you only need a {@link Reader}, prefer {@link
+   * Reader#of(CharSequence)}.
+   *
    * @since 15.0 (since 14.0 as {@code CharStreams.asCharSource(String)})
    */
   public static CharSource wrap(CharSequence charSequence) {
@@ -529,7 +531,7 @@ public abstract class CharSource {
 
     @Override
     public String toString() {
-      return CharSource.this.toString() + ".asByteSource(" + charset + ")";
+      return CharSource.this + ".asByteSource(" + charset + ")";
     }
   }
 
@@ -537,9 +539,9 @@ public abstract class CharSource {
 
     private static final Splitter LINE_SPLITTER = Splitter.onPattern("\r\n|\n|\r");
 
-    protected final CharSequence seq;
+    final CharSequence seq;
 
-    protected CharSequenceCharSource(CharSequence seq) {
+    CharSequenceCharSource(CharSequence seq) {
       this.seq = checkNotNull(seq);
     }
 
@@ -574,7 +576,7 @@ public abstract class CharSource {
      */
     private Iterator<String> linesIterator() {
       return new AbstractIterator<String>() {
-        Iterator<String> lines = LINE_SPLITTER.split(seq).iterator();
+        final Iterator<String> lines = LINE_SPLITTER.split(seq).iterator();
 
         @Override
         protected @Nullable String computeNext() {
@@ -640,7 +642,7 @@ public abstract class CharSource {
    * </ul>
    */
   private static class StringCharSource extends CharSequenceCharSource {
-    protected StringCharSource(String seq) {
+    StringCharSource(String seq) {
       super(seq);
     }
 

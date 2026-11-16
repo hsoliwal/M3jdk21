@@ -23,10 +23,10 @@ import static jdk.m3.collections.guava.collect.testing.features.MapFeature.ALLOW
 import static jdk.m3.collections.guava.collect.testing.features.MapFeature.ALLOWS_NULL_VALUES;
 import static jdk.m3.collections.guava.collect.testing.features.MapFeature.SUPPORTS_PUT;
 import static jdk.m3.collections.guava.collect.testing.features.MapFeature.SUPPORTS_REMOVE;
-import static jdk.m3.collections.guava.collect.testing.google.ReflectionFreeAssertThrows.assertThrows;
 import static java.util.Arrays.asList;
 import static java.util.Collections.emptyList;
 import static java.util.Collections.singletonList;
+import static org.junit.Assert.assertThrows;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.collect.Multimap;
@@ -35,7 +35,6 @@ import jdk.m3.collections.guava.collect.testing.features.MapFeature;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import org.junit.Ignore;
 
 /**
  * Tests for {@link Multimap#replaceValues(Object, Iterable)}.
@@ -43,9 +42,6 @@ import org.junit.Ignore;
  * @author Louis Wasserman
  */
 @GwtCompatible
-@Ignore("test runners must not instantiate and run this directly, only via suites we build")
-// @Ignore affects the Android test runner, which respects JUnit 4 annotations on JUnit 3 tests.
-@SuppressWarnings("JUnit4ClassUsedInJUnit3")
 public class MultimapReplaceValuesTester<K, V>
     extends AbstractMultimapTester<K, V, Multimap<K, V>> {
 
@@ -72,6 +68,7 @@ public class MultimapReplaceValuesTester<K, V>
     assertEquals(size + values.size(), multimap().size());
   }
 
+  @SuppressWarnings("EmptyList") // ImmutableList doesn't support nullable element types
   @MapFeature.Require({SUPPORTS_PUT, SUPPORTS_REMOVE})
   public void testReplaceValuesWithEmpty() {
     int size = multimap().size();

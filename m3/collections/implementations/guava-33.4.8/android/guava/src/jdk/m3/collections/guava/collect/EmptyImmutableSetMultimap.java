@@ -26,12 +26,12 @@ import java.util.Collection;
  *
  * @author Mike Ward
  */
-@GwtCompatible(serializable = true)
-class EmptyImmutableSetMultimap extends ImmutableSetMultimap<Object, Object> {
+@GwtCompatible
+final class EmptyImmutableSetMultimap extends ImmutableSetMultimap<Object, Object> {
   static final EmptyImmutableSetMultimap INSTANCE = new EmptyImmutableSetMultimap();
 
   private EmptyImmutableSetMultimap() {
-    super(ImmutableMap.<Object, ImmutableSet<Object>>of(), 0, null);
+    super(ImmutableMap.of(), 0, null);
   }
 
   /*

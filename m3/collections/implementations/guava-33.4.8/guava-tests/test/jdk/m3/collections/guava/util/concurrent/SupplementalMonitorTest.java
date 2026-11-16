@@ -16,10 +16,13 @@
 
 package jdk.m3.collections.guava.util.concurrent;
 
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
 import static jdk.m3.collections.guava.util.concurrent.GeneratedMonitorTest.startThread;
 import static jdk.m3.collections.guava.util.concurrent.Uninterruptibles.joinUninterruptibly;
 import static org.junit.Assert.assertThrows;
 
+import jdk.m3.collections.guava.annotations.GwtIncompatible;
+import jdk.m3.collections.guava.annotations.J2ktIncompatible;
 import jdk.m3.collections.guava.util.concurrent.GeneratedMonitorTest.FlagGuard;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -36,11 +39,13 @@ import org.jspecify.annotations.NullUnmarked;
  * @author Justin T. Sampson
  */
 @NullUnmarked
+@GwtIncompatible
+@J2ktIncompatible
 public class SupplementalMonitorTest extends TestCase {
 
   public void testLeaveWithoutEnterThrowsIMSE() {
     Monitor monitor = new Monitor();
-    assertThrows(IllegalMonitorStateException.class, () -> monitor.leave());
+    assertThrows(IllegalMonitorStateException.class, monitor::leave);
   }
 
   public void testGetWaitQueueLengthWithWrongMonitorThrowsIMSE() {
@@ -101,29 +106,25 @@ public class SupplementalMonitorTest extends TestCase {
   }
 
   private static void verifyOccupiedMethodsInAnotherThread(
-      final Monitor monitor,
+      Monitor monitor,
       boolean expectedIsOccupied,
       boolean expectedIsOccupiedByCurrentThread,
       int expectedOccupiedDepth) {
-    final AtomicBoolean actualIsOccupied = new AtomicBoolean();
-    final AtomicBoolean actualIsOccupiedByCurrentThread = new AtomicBoolean();
-    final AtomicInteger actualOccupiedDepth = new AtomicInteger();
-    final AtomicReference<Throwable> thrown = new AtomicReference<>();
+    AtomicBoolean actualIsOccupied = new AtomicBoolean();
+    AtomicBoolean actualIsOccupiedByCurrentThread = new AtomicBoolean();
+    AtomicInteger actualOccupiedDepth = new AtomicInteger();
+    AtomicReference<Throwable> thrown = new AtomicReference<>();
     joinUninterruptibly(
-        startThread(
-            new Runnable() {
-              @Override
-              public void run() {
-                try {
-                  actualIsOccupied.set(monitor.isOccupied());
-                  actualIsOccupiedByCurrentThread.set(monitor.isOccupiedByCurrentThread());
-                  actualOccupiedDepth.set(monitor.getOccupiedDepth());
-                } catch (Throwable t) {
-                  thrown.set(t);
-                }
-              }
-            }));
-    assertNull(thrown.get());
+        startThread(() -> {
+          try {
+            actualIsOccupied.set(monitor.isOccupied());
+            actualIsOccupiedByCurrentThread.set(monitor.isOccupiedByCurrentThread());
+            actualOccupiedDepth.set(monitor.getOccupiedDepth());
+          } catch (Throwable t) {
+            thrown.set(t);
+          }
+        }));
+    assertThat(thrown.get()).isNull();
     assertEquals(expectedIsOccupied, actualIsOccupied.get());
     assertEquals(expectedIsOccupiedByCurrentThread, actualIsOccupiedByCurrentThread.get());
     assertEquals(expectedOccupiedDepth, actualOccupiedDepth.get());

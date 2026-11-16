@@ -20,12 +20,12 @@ import static jdk.m3.collections.guava.collect.testing.features.CollectionFeatur
 import static jdk.m3.collections.guava.collect.testing.features.CollectionSize.SEVERAL;
 import static jdk.m3.collections.guava.collect.testing.features.CollectionSize.ZERO;
 import static java.util.Collections.nCopies;
+import static org.junit.Assert.assertThrows;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.collect.testing.features.CollectionFeature;
 import jdk.m3.collections.guava.collect.testing.features.CollectionSize;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
-import org.junit.Ignore;
 
 /**
  * A generic JUnit test which tests conditional {@code setCount()} operations on a multiset. Can't
@@ -34,9 +34,6 @@ import org.junit.Ignore;
  * @author Chris Povirk
  */
 @GwtCompatible
-@Ignore("test runners must not instantiate and run this directly, only via suites we build")
-// @Ignore affects the Android test runner, which respects JUnit 4 annotations on JUnit 3 tests.
-@SuppressWarnings("JUnit4ClassUsedInJUnit3")
 public class MultisetSetCountConditionallyTester<E> extends AbstractMultisetSetCountTester<E> {
   @Override
   void setCountCheckReturnValue(E element, int count) {
@@ -55,26 +52,20 @@ public class MultisetSetCountConditionallyTester<E> extends AbstractMultisetSetC
     return getMultiset().setCount(element, getMultiset().count(element), count);
   }
 
-  private void assertSetCountNegativeOldCount() {
-    try {
-      getMultiset().setCount(e3(), -1, 1);
-      fail("calling setCount() with a negative oldCount should throw IllegalArgumentException");
-    } catch (IllegalArgumentException expected) {
-    }
-  }
-
   // Negative oldCount.
 
   @CollectionFeature.Require(SUPPORTS_ADD)
   public void testSetCountConditional_negativeOldCount_addSupported() {
-    assertSetCountNegativeOldCount();
+    assertThrows(IllegalArgumentException.class, () -> getMultiset().setCount(e3(), -1, 1));
   }
 
   @CollectionFeature.Require(absent = SUPPORTS_ADD)
   public void testSetCountConditional_negativeOldCount_addUnsupported() {
-    try {
-      assertSetCountNegativeOldCount();
-    } catch (UnsupportedOperationException tolerated) {
+    RuntimeException expected =
+        assertThrows(RuntimeException.class, () -> getMultiset().setCount(e3(), -1, 1));
+    if (!(expected instanceof IllegalArgumentException
+        || expected instanceof UnsupportedOperationException)) {
+      throw expected;
     }
   }
 
@@ -108,8 +99,7 @@ public class MultisetSetCountConditionallyTester<E> extends AbstractMultisetSetC
   }
 
   /*
-   * TODO: test that unmodifiable multisets either throw UOE or return false
-   * when both are valid options. Currently we test the UOE cases and the
-   * return-false cases but not their intersection
+   * TODO: test that unmodifiable multisets either throw UOE or return false when both are valid
+   * options. Currently we test the UOE cases and the return-false cases but not their intersection
    */
 }

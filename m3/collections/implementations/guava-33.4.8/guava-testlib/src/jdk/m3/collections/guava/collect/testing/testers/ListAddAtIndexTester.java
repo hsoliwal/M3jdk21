@@ -22,7 +22,7 @@ import static jdk.m3.collections.guava.collect.testing.features.CollectionFeatur
 import static jdk.m3.collections.guava.collect.testing.features.CollectionSize.ONE;
 import static jdk.m3.collections.guava.collect.testing.features.CollectionSize.ZERO;
 import static jdk.m3.collections.guava.collect.testing.features.ListFeature.SUPPORTS_ADD_WITH_INDEX;
-import static jdk.m3.collections.guava.collect.testing.testers.ReflectionFreeAssertThrows.assertThrows;
+import static org.junit.Assert.assertThrows;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
@@ -33,7 +33,6 @@ import jdk.m3.collections.guava.collect.testing.features.ListFeature;
 import java.lang.reflect.Method;
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
-import org.junit.Ignore;
 
 /**
  * A generic JUnit test which tests {@code add(int, Object)} operations on a list. Can't be invoked
@@ -41,10 +40,7 @@ import org.junit.Ignore;
  *
  * @author Chris Povirk
  */
-@GwtCompatible(emulated = true)
-@Ignore("test runners must not instantiate and run this directly, only via suites we build")
-// @Ignore affects the Android test runner, which respects JUnit 4 annotations on JUnit 3 tests.
-@SuppressWarnings("JUnit4ClassUsedInJUnit3")
+@GwtCompatible
 public class ListAddAtIndexTester<E> extends AbstractListTester<E> {
   @ListFeature.Require(SUPPORTS_ADD_WITH_INDEX)
   @CollectionSize.Require(absent = ZERO)
@@ -73,13 +69,9 @@ public class ListAddAtIndexTester<E> extends AbstractListTester<E> {
   @CollectionFeature.Require(FAILS_FAST_ON_CONCURRENT_MODIFICATION)
   @ListFeature.Require(SUPPORTS_ADD_WITH_INDEX)
   public void testAddAtIndexConcurrentWithIteration() {
-    assertThrows(
-        ConcurrentModificationException.class,
-        () -> {
-          Iterator<E> iterator = collection.iterator();
-          getList().add(0, e3());
-          iterator.next();
-        });
+    Iterator<E> iterator = collection.iterator();
+    getList().add(0, e3());
+    assertThrows(ConcurrentModificationException.class, iterator::next);
   }
 
   @ListFeature.Require(absent = SUPPORTS_ADD_WITH_INDEX)

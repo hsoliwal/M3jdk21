@@ -15,11 +15,11 @@
 package jdk.m3.collections.guava.base;
 
 import static jdk.m3.collections.guava.base.Preconditions.checkNotNull;
+import static java.util.Collections.singleton;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
 import jdk.m3.collections.guava.annotations.J2ktIncompatible;
-import java.util.Collections;
 import java.util.Set;
 import org.jspecify.annotations.Nullable;
 
@@ -67,7 +67,7 @@ final class Present<T> extends Optional<T> {
 
   @Override
   public Set<T> asSet() {
-    return Collections.singleton(reference);
+    return singleton(reference);
   }
 
   @Override
@@ -79,9 +79,9 @@ final class Present<T> extends Optional<T> {
   }
 
   @Override
-  public boolean equals(@Nullable Object object) {
-    if (object instanceof Present) {
-      Present<?> other = (Present<?>) object;
+  public boolean equals(@Nullable Object obj) {
+    if (obj instanceof Present) {
+      Present<?> other = (Present<?>) obj;
       return reference.equals(other.reference);
     }
     return false;

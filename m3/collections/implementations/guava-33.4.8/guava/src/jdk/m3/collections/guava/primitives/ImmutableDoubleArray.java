@@ -12,12 +12,16 @@
  * the License.
  */
 
+// Copyright 2026 Hitesh Soliwal and Contributors to the Synexia Project.
 package jdk.m3.collections.guava.primitives;
 
 import static jdk.m3.collections.guava.base.Preconditions.checkArgument;
 import static jdk.m3.collections.guava.base.Preconditions.checkNotNull;
+import static java.lang.System.arraycopy;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
+import jdk.m3.collections.guava.annotations.GwtIncompatible;
+import jdk.m3.collections.guava.annotations.J2ktIncompatible;
 import jdk.m3.collections.guava.base.Preconditions;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import com.google.errorprone.annotations.Immutable;
@@ -26,6 +30,7 @@ import java.util.AbstractList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
+import java.util.PrimitiveIterator;
 import java.util.RandomAccess;
 import java.util.Spliterator;
 import java.util.Spliterators;
@@ -138,7 +143,7 @@ public final class ImmutableDoubleArray implements Serializable {
         rest.length <= Integer.MAX_VALUE - 1, "the total number of elements must fit in an int");
     double[] array = new double[rest.length + 1];
     array[0] = first;
-    System.arraycopy(rest, 0, array, 1, rest.length);
+    arraycopy(rest, 0, array, 1, rest.length);
     return new ImmutableDoubleArray(array);
   }
 
@@ -151,6 +156,10 @@ public final class ImmutableDoubleArray implements Serializable {
 
   /** Returns an immutable array containing the given values, in order. */
   public static ImmutableDoubleArray copyOf(Collection<Double> values) {
+    if (values instanceof AsList) {
+      ImmutableDoubleArray parent = ((AsList) values).parent;
+      return parent.isEmpty() ? EMPTY : new ImmutableDoubleArray(parent.toArray());
+    }
     return values.isEmpty() ? EMPTY : new ImmutableDoubleArray(Doubles.toArray(values));
   }
 
@@ -237,7 +246,7 @@ public final class ImmutableDoubleArray implements Serializable {
     @CanIgnoreReturnValue
     public Builder addAll(double[] values) {
       ensureRoomFor(values.length);
-      System.arraycopy(values, 0, array, count, values.length);
+      arraycopy(values, 0, array, count, values.length);
       count += values.length;
       return this;
     }
@@ -263,6 +272,13 @@ public final class ImmutableDoubleArray implements Serializable {
      */
     @CanIgnoreReturnValue
     public Builder addAll(Collection<Double> values) {
+      if (values instanceof AsList) {
+        ImmutableDoubleArray parent = ((AsList) values).parent;
+        // Preserve the scalar failure path if the combined size overflows.
+        if (parent.length() <= Integer.MAX_VALUE - count) {
+          return addAll(parent);
+        }
+      }
       ensureRoomFor(values.size());
       for (Double value : values) {
         array[count++] = value;
@@ -294,7 +310,7 @@ public final class ImmutableDoubleArray implements Serializable {
     @CanIgnoreReturnValue
     public Builder addAll(ImmutableDoubleArray values) {
       ensureRoomFor(values.length());
-      System.arraycopy(values.array, values.start, array, count, values.length());
+      arraycopy(values.array, values.start, array, count, values.length());
       count += values.length();
       return this;
     }
@@ -482,7 +498,8 @@ public final class ImmutableDoubleArray implements Serializable {
     return new AsList(this);
   }
 
-  static class AsList extends AbstractList<Double> implements RandomAccess, Serializable {
+  private static final class AsList extends AbstractList<Double>
+      implements RandomAccess, Serializable {
     private final ImmutableDoubleArray parent;
 
     private AsList(ImmutableDoubleArray parent) {
@@ -521,10 +538,14 @@ public final class ImmutableDoubleArray implements Serializable {
       return parent.subArray(fromIndex, toIndex).asList();
     }
 
-    // The default List spliterator is not efficiently splittable
     @Override
-    public Spliterator<Double> spliterator() {
+    public Spliterator.OfDouble spliterator() {
       return parent.spliterator();
+    }
+
+    @Override
+    public PrimitiveIterator.OfDouble iterator() {
+      return Spliterators.iterator(spliterator());
     }
 
     @Override
@@ -561,6 +582,8 @@ public final class ImmutableDoubleArray implements Serializable {
     public String toString() {
       return parent.toString();
     }
+
+    @GwtIncompatible @J2ktIncompatible     private static final long serialVersionUID = -4939467387665637038L;
   }
 
   /**
@@ -598,7 +621,7 @@ public final class ImmutableDoubleArray implements Serializable {
     int hash = 1;
     for (int i = start; i < end; i++) {
       hash *= 31;
-      hash += Doubles.hashCode(array[i]);
+      hash += Double.hashCode(array[i]);
     }
     return hash;
   }
@@ -643,4 +666,6 @@ public final class ImmutableDoubleArray implements Serializable {
   Object readResolve() {
     return isEmpty() ? EMPTY : this;
   }
+
+  @GwtIncompatible @J2ktIncompatible   private static final long serialVersionUID = 679347448744984100L;
 }

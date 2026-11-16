@@ -15,7 +15,6 @@
  */
 
 // M3 intrinsic AVL array adaptation; provenance: m3/tree-multiset-arrays-20261019/CONTRACT.md
-// Modified 2026 by Hitesh Soliwal and Synexia contributors: array storage.
 package jdk.m3.collections.guava.collect;
 
 import static jdk.m3.collections.guava.base.Preconditions.checkArgument;
@@ -60,7 +59,7 @@ import org.jspecify.annotations.Nullable;
  * @author Jared Levy
  * @since 2.0
  */
-@GwtCompatible(emulated = true)
+@GwtCompatible
 public final class TreeMultiset<E extends @Nullable Object> extends AbstractSortedMultiset<E>
     implements Serializable {
 
@@ -135,7 +134,7 @@ public final class TreeMultiset<E extends @Nullable Object> extends AbstractSort
     this.range = range;
   }
 
-  TreeMultiset(Comparator<? super E> comparator) {
+  private TreeMultiset(Comparator<? super E> comparator) {
     super(comparator);
     this.range = GeneralRange.all(comparator);
     this.rootReference = new SlotStore<>();
@@ -277,7 +276,7 @@ public final class TreeMultiset<E extends @Nullable Object> extends AbstractSort
   }
 
   @Override
-  int distinctElements() {
+  int internalDistinctElements() {
     return Ints.saturatedCast(aggregateForEntries(Aggregate.DISTINCT));
   }
 
@@ -401,6 +400,8 @@ public final class TreeMultiset<E extends @Nullable Object> extends AbstractSort
           }
           return true;
         } else {
+          // Validate the element even when its count cannot match.
+          int unused = rootReference.compare(comparator(), element, element);
           return false;
         }
       }
@@ -420,7 +421,7 @@ public final class TreeMultiset<E extends @Nullable Object> extends AbstractSort
       if (!range.hasLowerBound() && !range.hasUpperBound()) {
         rootReference.clear();
       } else {
-        Iterators.clear(entryIterator());
+        Iterators.clear(internalEntryIterator());
       }
     } finally {
       rootReference.exit();
@@ -513,11 +514,11 @@ public final class TreeMultiset<E extends @Nullable Object> extends AbstractSort
 
   @Override
   Iterator<E> elementIterator() {
-    return Multisets.elementIterator(entryIterator());
+    return Multisets.elementIterator(internalEntryIterator());
   }
 
   @Override
-  Iterator<Entry<E>> entryIterator() {
+  Iterator<Entry<E>> internalEntryIterator() {
     return entryIterator(false);
   }
 
@@ -531,11 +532,11 @@ public final class TreeMultiset<E extends @Nullable Object> extends AbstractSort
     rootReference.enter();
     try {
       return new Iterator<Entry<E>>() {
-        private int current = descending ? lastNode() : firstNode();
-        private long generation = current == NONE ? 0 : rootReference.generation(current);
-        private @Nullable E currentElement;
-        private @Nullable CursorSnapshot<E> captured;
-        private @Nullable Entry<E> prevEntry;
+        int current = descending ? lastNode() : firstNode();
+        long generation = current == NONE ? 0 : rootReference.generation(current);
+        @Nullable E currentElement;
+        @Nullable CursorSnapshot<E> captured;
+        @Nullable Entry<E> prevEntry;
 
         {
           captureCurrent();
@@ -1587,6 +1588,7 @@ public final class TreeMultiset<E extends @Nullable Object> extends AbstractSort
    * @serialData the comparator, the number of distinct elements, the first element, its count, the
    *     second element, its count, and so on
    */
+  @GwtIncompatible
   @J2ktIncompatible
   private void writeObject(ObjectOutputStream stream) throws IOException {
     stream.defaultWriteObject();

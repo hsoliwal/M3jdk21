@@ -16,15 +16,16 @@
 
 package jdk.m3.collections.guava.net;
 
-import static jdk.m3.collections.guava.net.ReflectionFreeAssertThrows.assertThrows;
+import static jdk.m3.collections.guava.base.Strings.repeat;
+import static jdk.m3.collections.guava.collect.Iterables.concat;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
+import static org.junit.Assert.assertThrows;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
 import jdk.m3.collections.guava.annotations.J2ktIncompatible;
 import jdk.m3.collections.guava.base.Ascii;
-import jdk.m3.collections.guava.base.Strings;
 import jdk.m3.collections.guava.collect.ImmutableSet;
-import jdk.m3.collections.guava.collect.Iterables;
 import jdk.m3.collections.guava.testing.EqualsTester;
 import jdk.m3.collections.guava.testing.NullPointerTester;
 import junit.framework.TestCase;
@@ -35,7 +36,7 @@ import org.jspecify.annotations.NullUnmarked;
  *
  * @author Craig Berry
  */
-@GwtCompatible(emulated = true)
+@GwtCompatible
 @NullUnmarked
 public final class InternetDomainNameTest extends TestCase {
   private static final InternetDomainName UNICODE_EXAMPLE =
@@ -48,13 +49,13 @@ public final class InternetDomainNameTest extends TestCase {
 
   /** A domain part which is valid under lenient validation, but invalid under strict validation. */
   @SuppressWarnings("InlineMeInliner") // String.repeat unavailable under Java 8
-  static final String LOTS_OF_DELTAS = Strings.repeat(DELTA, 62);
+  static final String LOTS_OF_DELTAS = repeat(DELTA, 62);
 
   @SuppressWarnings("InlineMeInliner") // String.repeat unavailable under Java 8
-  private static final String ALMOST_TOO_MANY_LEVELS = Strings.repeat("a.", 127);
+  private static final String ALMOST_TOO_MANY_LEVELS = repeat("a.", 127);
 
   @SuppressWarnings("InlineMeInliner") // String.repeat unavailable under Java 8
-  private static final String ALMOST_TOO_LONG = Strings.repeat("aaaaa.", 40) + "1234567890.c";
+  private static final String ALMOST_TOO_LONG = repeat("aaaaa.", 40) + "1234567890.c";
 
   private static final ImmutableSet<String> VALID_NAME =
       ImmutableSet.of(
@@ -116,10 +117,10 @@ public final class InternetDomainNameTest extends TestCase {
           "co.uk.", // Trailing dot
           "co\uFF61uk", // Alternate dot character
           "com",
-          "foo.bd",
+          "gov.ck",
+          "org.ck",
           "org.mK",
           "us",
-          "xxxxxx.bd",
           // keep-sorted end
           "j\u00f8rpeland.no", // "jorpeland.no" (first o slashed)
           "xn--jrpeland-54a.no" // IDNA (punycode) encoding of above
@@ -263,25 +264,25 @@ public final class InternetDomainNameTest extends TestCase {
 
   public void testPublicSuffix() {
     for (String name : PS) {
-      final InternetDomainName domain = InternetDomainName.from(name);
+      InternetDomainName domain = InternetDomainName.from(name);
       assertTrue(name, domain.isPublicSuffix());
       assertTrue(name, domain.hasPublicSuffix());
       assertFalse(name, domain.isUnderPublicSuffix());
       assertFalse(name, domain.isTopPrivateDomain());
-      assertEquals(domain, domain.publicSuffix());
+      assertThat(domain.publicSuffix()).isEqualTo(domain);
     }
 
     for (String name : NO_PS) {
-      final InternetDomainName domain = InternetDomainName.from(name);
+      InternetDomainName domain = InternetDomainName.from(name);
       assertFalse(name, domain.isPublicSuffix());
       assertFalse(name, domain.hasPublicSuffix());
       assertFalse(name, domain.isUnderPublicSuffix());
       assertFalse(name, domain.isTopPrivateDomain());
-      assertNull(domain.publicSuffix());
+      assertThat(domain.publicSuffix()).isNull();
     }
 
     for (String name : NON_PS) {
-      final InternetDomainName domain = InternetDomainName.from(name);
+      InternetDomainName domain = InternetDomainName.from(name);
       assertFalse(name, domain.isPublicSuffix());
       assertTrue(name, domain.hasPublicSuffix());
       assertTrue(name, domain.isUnderPublicSuffix());
@@ -290,7 +291,7 @@ public final class InternetDomainNameTest extends TestCase {
 
   public void testUnderPublicSuffix() {
     for (String name : SOMEWHERE_UNDER_PS) {
-      final InternetDomainName domain = InternetDomainName.from(name);
+      InternetDomainName domain = InternetDomainName.from(name);
       assertFalse(name, domain.isPublicSuffix());
       assertTrue(name, domain.hasPublicSuffix());
       assertTrue(name, domain.isUnderPublicSuffix());
@@ -299,18 +300,18 @@ public final class InternetDomainNameTest extends TestCase {
 
   public void testTopPrivateDomain() {
     for (String name : TOP_PRIVATE_DOMAIN) {
-      final InternetDomainName domain = InternetDomainName.from(name);
+      InternetDomainName domain = InternetDomainName.from(name);
       assertFalse(name, domain.isPublicSuffix());
       assertTrue(name, domain.hasPublicSuffix());
       assertTrue(name, domain.isUnderPublicSuffix());
       assertTrue(name, domain.isTopPrivateDomain());
-      assertEquals(domain.parent(), domain.publicSuffix());
+      assertThat(domain.publicSuffix()).isEqualTo(domain.parent());
     }
   }
 
   public void testUnderPrivateDomain() {
     for (String name : UNDER_PRIVATE_DOMAIN) {
-      final InternetDomainName domain = InternetDomainName.from(name);
+      InternetDomainName domain = InternetDomainName.from(name);
       assertFalse(name, domain.isPublicSuffix());
       assertTrue(name, domain.hasPublicSuffix());
       assertTrue(name, domain.isUnderPublicSuffix());
@@ -320,25 +321,25 @@ public final class InternetDomainNameTest extends TestCase {
 
   public void testRegistrySuffix() {
     for (String name : RS) {
-      final InternetDomainName domain = InternetDomainName.from(name);
+      InternetDomainName domain = InternetDomainName.from(name);
       assertTrue(name, domain.isRegistrySuffix());
       assertTrue(name, domain.hasRegistrySuffix());
       assertFalse(name, domain.isUnderRegistrySuffix());
       assertFalse(name, domain.isTopDomainUnderRegistrySuffix());
-      assertEquals(domain, domain.registrySuffix());
+      assertThat(domain.registrySuffix()).isEqualTo(domain);
     }
 
     for (String name : NO_RS) {
-      final InternetDomainName domain = InternetDomainName.from(name);
+      InternetDomainName domain = InternetDomainName.from(name);
       assertFalse(name, domain.isRegistrySuffix());
       assertFalse(name, domain.hasRegistrySuffix());
       assertFalse(name, domain.isUnderRegistrySuffix());
       assertFalse(name, domain.isTopDomainUnderRegistrySuffix());
-      assertNull(domain.registrySuffix());
+      assertThat(domain.registrySuffix()).isNull();
     }
 
     for (String name : NON_RS) {
-      final InternetDomainName domain = InternetDomainName.from(name);
+      InternetDomainName domain = InternetDomainName.from(name);
       assertFalse(name, domain.isRegistrySuffix());
       assertTrue(name, domain.hasRegistrySuffix());
       assertTrue(name, domain.isUnderRegistrySuffix());
@@ -347,7 +348,7 @@ public final class InternetDomainNameTest extends TestCase {
 
   public void testUnderRegistrySuffix() {
     for (String name : SOMEWHERE_UNDER_RS) {
-      final InternetDomainName domain = InternetDomainName.from(name);
+      InternetDomainName domain = InternetDomainName.from(name);
       assertFalse(name, domain.isRegistrySuffix());
       assertTrue(name, domain.hasRegistrySuffix());
       assertTrue(name, domain.isUnderRegistrySuffix());
@@ -356,18 +357,18 @@ public final class InternetDomainNameTest extends TestCase {
 
   public void testTopDomainUnderRegistrySuffix() {
     for (String name : TOP_UNDER_REGISTRY_SUFFIX) {
-      final InternetDomainName domain = InternetDomainName.from(name);
+      InternetDomainName domain = InternetDomainName.from(name);
       assertFalse(name, domain.isRegistrySuffix());
       assertTrue(name, domain.hasRegistrySuffix());
       assertTrue(name, domain.isUnderRegistrySuffix());
       assertTrue(name, domain.isTopDomainUnderRegistrySuffix());
-      assertEquals(domain.parent(), domain.registrySuffix());
+      assertThat(domain.registrySuffix()).isEqualTo(domain.parent());
     }
   }
 
   public void testUnderTopDomainUnderRegistrySuffix() {
     for (String name : UNDER_TOP_UNDER_REGISTRY_SUFFIX) {
-      final InternetDomainName domain = InternetDomainName.from(name);
+      InternetDomainName domain = InternetDomainName.from(name);
       assertFalse(name, domain.isRegistrySuffix());
       assertTrue(name, domain.hasRegistrySuffix());
       assertTrue(name, domain.isUnderRegistrySuffix());
@@ -376,9 +377,10 @@ public final class InternetDomainNameTest extends TestCase {
   }
 
   public void testParent() {
-    assertEquals("com", InternetDomainName.from("google.com").parent().toString());
-    assertEquals("uk", InternetDomainName.from("co.uk").parent().toString());
-    assertEquals("google.com", InternetDomainName.from("www.google.com").parent().toString());
+    assertThat(InternetDomainName.from("google.com").parent().toString()).isEqualTo("com");
+    assertThat(InternetDomainName.from("co.uk").parent().toString()).isEqualTo("uk");
+    assertThat(InternetDomainName.from("www.google.com").parent().toString())
+        .isEqualTo("google.com");
 
     assertThrows(IllegalStateException.class, () -> InternetDomainName.from("com").parent());
   }
@@ -386,7 +388,7 @@ public final class InternetDomainNameTest extends TestCase {
   public void testChild() {
     InternetDomainName domain = InternetDomainName.from("foo.com");
 
-    assertEquals("www.foo.com", domain.child("www").toString());
+    assertThat(domain.child("www").toString()).isEqualTo("www.foo.com");
 
     assertThrows(IllegalArgumentException.class, () -> domain.child("www."));
   }
@@ -394,7 +396,7 @@ public final class InternetDomainNameTest extends TestCase {
   public void testParentChild() {
     InternetDomainName origin = InternetDomainName.from("foo.com");
     InternetDomainName parent = origin.parent();
-    assertEquals("com", parent.toString());
+    assertThat(parent.toString()).isEqualTo("com");
 
     // These would throw an exception if leniency were not preserved during parent() and child()
     // calls.
@@ -405,9 +407,9 @@ public final class InternetDomainNameTest extends TestCase {
   public void testValidTopPrivateDomain() {
     InternetDomainName googleDomain = InternetDomainName.from("google.com");
 
-    assertEquals(googleDomain, googleDomain.topPrivateDomain());
-    assertEquals(googleDomain, googleDomain.child("mail").topPrivateDomain());
-    assertEquals(googleDomain, googleDomain.child("foo.bar").topPrivateDomain());
+    assertThat(googleDomain.topPrivateDomain()).isEqualTo(googleDomain);
+    assertThat(googleDomain.child("mail").topPrivateDomain()).isEqualTo(googleDomain);
+    assertThat(googleDomain.child("foo.bar").topPrivateDomain()).isEqualTo(googleDomain);
   }
 
   public void testInvalidTopPrivateDomain() {
@@ -420,9 +422,8 @@ public final class InternetDomainNameTest extends TestCase {
   }
 
   public void testIsValid() {
-    final Iterable<String> validCases = Iterables.concat(VALID_NAME, PS, NO_PS, NON_PS);
-    final Iterable<String> invalidCases =
-        Iterables.concat(INVALID_NAME, VALID_IP_ADDRS, INVALID_IP_ADDRS);
+    Iterable<String> validCases = concat(VALID_NAME, PS, NO_PS, NON_PS);
+    Iterable<String> invalidCases = concat(INVALID_NAME, VALID_IP_ADDRS, INVALID_IP_ADDRS);
 
     for (String valid : validCases) {
       assertTrue(valid, InternetDomainName.isValid(valid));
@@ -431,6 +432,18 @@ public final class InternetDomainNameTest extends TestCase {
     for (String invalid : invalidCases) {
       assertFalse(invalid, InternetDomainName.isValid(invalid));
     }
+  }
+
+  @GwtIncompatible // Character.isDigit is ASCII-only under GWT
+  public void testIsValid_nonAsciiDigitsInFinalPart() {
+    // InetAddress/InetAddresses parse single-char non-ASCII decimal digits; supplementary code
+    // points are not supported.
+    assertFalse(InternetDomainName.isValid("127.0.0.１")); // Final 1 is full-width
+    assertFalse(InternetDomainName.isValid("127.0.0.١")); // Final 1 is Arabic-Indic
+
+    // Final 1 is Mathematical Bold (supplementary code point U+1D7CF)
+    // Character.isDigit(char) returns false; Character.isDigit(int) returns true
+    assertTrue(InternetDomainName.isValid("127.0.0.𝟏"));
   }
 
   public void testToString() {
@@ -450,14 +463,14 @@ public final class InternetDomainNameTest extends TestCase {
         expectedName = expectedName.substring(0, expectedName.length() - 1);
       }
 
-      assertEquals(expectedName, domain.toString());
+      assertThat(domain.toString()).isEqualTo(expectedName);
     }
   }
 
   public void testPublicSuffixExclusion() {
     InternetDomainName domain = InternetDomainName.from("foo.city.yokohama.jp");
     assertTrue(domain.hasPublicSuffix());
-    assertEquals("yokohama.jp", domain.publicSuffix().toString());
+    assertThat(domain.publicSuffix().toString()).isEqualTo("yokohama.jp");
 
     // Behold the weirdness!
     assertFalse(domain.publicSuffix().isPublicSuffix());
@@ -469,14 +482,14 @@ public final class InternetDomainNameTest extends TestCase {
 
     InternetDomainName domain = InternetDomainName.from("www.essex.sch.uk");
     assertTrue(domain.hasPublicSuffix());
-    assertEquals("essex.sch.uk", domain.publicSuffix().toString());
-    assertEquals("www.essex.sch.uk", domain.topPrivateDomain().toString());
+    assertThat(domain.publicSuffix().toString()).isEqualTo("essex.sch.uk");
+    assertThat(domain.topPrivateDomain().toString()).isEqualTo("www.essex.sch.uk");
   }
 
   public void testRegistrySuffixExclusion() {
     InternetDomainName domain = InternetDomainName.from("foo.city.yokohama.jp");
     assertTrue(domain.hasRegistrySuffix());
-    assertEquals("yokohama.jp", domain.registrySuffix().toString());
+    assertThat(domain.registrySuffix().toString()).isEqualTo("yokohama.jp");
 
     // Behold the weirdness!
     assertFalse(domain.registrySuffix().isRegistrySuffix());
@@ -488,8 +501,8 @@ public final class InternetDomainNameTest extends TestCase {
 
     InternetDomainName domain = InternetDomainName.from("www.essex.sch.uk");
     assertTrue(domain.hasRegistrySuffix());
-    assertEquals("essex.sch.uk", domain.registrySuffix().toString());
-    assertEquals("www.essex.sch.uk", domain.topDomainUnderRegistrySuffix().toString());
+    assertThat(domain.registrySuffix().toString()).isEqualTo("essex.sch.uk");
+    assertThat(domain.topDomainUnderRegistrySuffix().toString()).isEqualTo("www.essex.sch.uk");
   }
 
   public void testEquality() {
@@ -508,7 +521,7 @@ public final class InternetDomainNameTest extends TestCase {
   @J2ktIncompatible
   @GwtIncompatible // NullPointerTester
   public void testNulls() {
-    final NullPointerTester tester = new NullPointerTester();
+    NullPointerTester tester = new NullPointerTester();
 
     tester.testAllPublicStaticMethods(InternetDomainName.class);
     tester.testAllPublicInstanceMethods(InternetDomainName.from("google.com"));

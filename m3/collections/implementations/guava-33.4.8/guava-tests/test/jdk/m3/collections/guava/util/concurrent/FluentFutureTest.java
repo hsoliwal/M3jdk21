@@ -17,7 +17,7 @@
 package jdk.m3.collections.guava.util.concurrent;
 
 import static jdk.m3.collections.guava.base.Verify.verify;
-import static com.google.common.truth.Truth.assertThat;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
 import static jdk.m3.collections.guava.util.concurrent.Futures.immediateFailedFuture;
 import static jdk.m3.collections.guava.util.concurrent.Futures.immediateFuture;
 import static jdk.m3.collections.guava.util.concurrent.MoreExecutors.directExecutor;
@@ -28,7 +28,6 @@ import static org.junit.Assert.assertThrows;
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
 import jdk.m3.collections.guava.annotations.J2ktIncompatible;
-import jdk.m3.collections.guava.base.Function;
 import jdk.m3.collections.guava.util.concurrent.ForwardingListenableFuture.SimpleForwardingListenableFuture;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ScheduledExecutorService;
@@ -41,16 +40,16 @@ import org.jspecify.annotations.NullMarked;
  * tested in {@link FuturesTest}.
  */
 @NullMarked
-@GwtCompatible(emulated = true)
+@GwtCompatible
 public class FluentFutureTest extends TestCase {
   @SuppressWarnings({"deprecation", "InlineMeInliner"}) // test of a deprecated method
   public void testFromFluentFuture() {
-    FluentFuture<String> f = FluentFuture.from(SettableFuture.<String>create());
+    FluentFuture<String> f = FluentFuture.from(SettableFuture.create());
     assertThat(FluentFuture.from(f)).isSameInstanceAs(f);
   }
 
   public void testFromFluentFuturePassingAsNonFluent() {
-    ListenableFuture<String> f = FluentFuture.from(SettableFuture.<String>create());
+    ListenableFuture<String> f = FluentFuture.from(SettableFuture.create());
     assertThat(FluentFuture.from(f)).isSameInstanceAs(f);
   }
 
@@ -64,7 +63,7 @@ public class FluentFutureTest extends TestCase {
 
   public void testAddCallback() {
     FluentFuture<String> f = FluentFuture.from(immediateFuture("a"));
-    final boolean[] called = new boolean[1];
+    boolean[] called = new boolean[1];
     f.addCallback(
         new FutureCallback<String>() {
           @Override
@@ -85,69 +84,38 @@ public class FluentFutureTest extends TestCase {
   public void testCatching() throws Exception {
     FluentFuture<?> f =
         FluentFuture.from(immediateFailedFuture(new CustomRuntimeException()))
-            .catching(
-                Throwable.class,
-                new Function<Throwable, Class<?>>() {
-                  @Override
-                  public Class<?> apply(Throwable input) {
-                    return input.getClass();
-                  }
-                },
-                directExecutor());
+            .catching(Throwable.class, Object::getClass, directExecutor());
     assertThat(f.get()).isEqualTo(CustomRuntimeException.class);
   }
 
   public void testCatchingAsync() throws Exception {
     FluentFuture<?> f =
         FluentFuture.from(immediateFailedFuture(new CustomRuntimeException()))
-            .catchingAsync(
-                Throwable.class,
-                new AsyncFunction<Throwable, Class<?>>() {
-                  @Override
-                  public ListenableFuture<Class<?>> apply(Throwable input) {
-                    return Futures.<Class<?>>immediateFuture(input.getClass());
-                  }
-                },
-                directExecutor());
+            .catchingAsync(Throwable.class, t -> immediateFuture(t.getClass()), directExecutor());
     assertThat(f.get()).isEqualTo(CustomRuntimeException.class);
   }
 
   public void testTransform() throws Exception {
     FluentFuture<Integer> f =
-        FluentFuture.from(immediateFuture(1))
-            .transform(
-                new Function<Integer, Integer>() {
-                  @Override
-                  public Integer apply(Integer input) {
-                    return input + 1;
-                  }
-                },
-                directExecutor());
+        FluentFuture.from(immediateFuture(1)).transform(i -> i + 1, directExecutor());
     assertThat(f.get()).isEqualTo(2);
   }
 
   public void testTransformAsync() throws Exception {
     FluentFuture<Integer> f =
         FluentFuture.from(immediateFuture(1))
-            .transformAsync(
-                new AsyncFunction<Integer, Integer>() {
-                  @Override
-                  public ListenableFuture<Integer> apply(Integer input) {
-                    return immediateFuture(input + 1);
-                  }
-                },
-                directExecutor());
+            .transformAsync(i -> immediateFuture(i + 1), directExecutor());
     assertThat(f.get()).isEqualTo(2);
   }
 
   @J2ktIncompatible
   @GwtIncompatible // withTimeout
-  public void testWithTimeout() throws Exception {
+  public void testWithTimeout() {
     ScheduledExecutorService executor = newScheduledThreadPool(1);
     try {
       FluentFuture<?> f =
           FluentFuture.from(SettableFuture.create()).withTimeout(0, SECONDS, executor);
-      ExecutionException e = assertThrows(ExecutionException.class, () -> f.get());
+      ExecutionException e = assertThrows(ExecutionException.class, f::get);
       assertThat(e).hasCauseThat().isInstanceOf(TimeoutException.class);
     } finally {
       executor.shutdown();

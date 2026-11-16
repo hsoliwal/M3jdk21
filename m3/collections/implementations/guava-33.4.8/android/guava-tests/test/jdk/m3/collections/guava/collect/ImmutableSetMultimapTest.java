@@ -16,12 +16,13 @@
 
 package jdk.m3.collections.guava.collect;
 
-import static jdk.m3.collections.guava.collect.ReflectionFreeAssertThrows.assertThrows;
+import static jdk.m3.collections.guava.collect.Maps.immutableEntry;
 import static jdk.m3.collections.guava.collect.testing.features.CollectionFeature.KNOWN_ORDER;
 import static jdk.m3.collections.guava.collect.testing.features.CollectionFeature.SERIALIZABLE;
 import static jdk.m3.collections.guava.collect.testing.features.MapFeature.ALLOWS_ANY_NULL_QUERIES;
-import static com.google.common.truth.Truth.assertThat;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
 import static java.util.Collections.emptySet;
+import static org.junit.Assert.assertThrows;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
@@ -49,7 +50,7 @@ import org.jspecify.annotations.Nullable;
  *
  * @author Mike Ward
  */
-@GwtCompatible(emulated = true)
+@GwtCompatible
 @NullMarked
 public class ImmutableSetMultimapTest extends TestCase {
   @J2ktIncompatible
@@ -103,14 +104,14 @@ public class ImmutableSetMultimapTest extends TestCase {
     ImmutableSetMultimap.Builder<String, String> builder =
         ImmutableSetMultimap.builderWithExpectedKeys(0);
     builder.put("key", "value");
-    assertThat(builder.build().entries()).containsExactly(Maps.immutableEntry("key", "value"));
+    assertThat(builder.build().entries()).containsExactly(immutableEntry("key", "value"));
   }
 
   public void testBuilderWithExpectedKeysPositive() {
     ImmutableSetMultimap.Builder<String, String> builder =
         ImmutableSetMultimap.builderWithExpectedKeys(1);
     builder.put("key", "value");
-    assertThat(builder.build().entries()).containsExactly(Maps.immutableEntry("key", "value"));
+    assertThat(builder.build().entries()).containsExactly(immutableEntry("key", "value"));
   }
 
   public void testBuilderWithExpectedValuesPerKeyNegative() {
@@ -122,14 +123,14 @@ public class ImmutableSetMultimapTest extends TestCase {
     ImmutableSetMultimap.Builder<String, String> builder =
         ImmutableSetMultimap.<String, String>builder().expectedValuesPerKey(0);
     builder.put("key", "value");
-    assertThat(builder.build().entries()).containsExactly(Maps.immutableEntry("key", "value"));
+    assertThat(builder.build().entries()).containsExactly(immutableEntry("key", "value"));
   }
 
   public void testBuilderWithExpectedValuesPerKeyPositive() {
     ImmutableSetMultimap.Builder<String, String> builder =
         ImmutableSetMultimap.<String, String>builder().expectedValuesPerKey(1);
     builder.put("key", "value");
-    assertThat(builder.build().entries()).containsExactly(Maps.immutableEntry("key", "value"));
+    assertThat(builder.build().entries()).containsExactly(immutableEntry("key", "value"));
   }
 
   public void testBuilderWithExpectedValuesPerKeyNegativeOrderValuesBy() {
@@ -144,7 +145,7 @@ public class ImmutableSetMultimapTest extends TestCase {
             .orderValuesBy(Ordering.natural())
             .expectedValuesPerKey(0);
     builder.put("key", "value");
-    assertThat(builder.build().entries()).containsExactly(Maps.immutableEntry("key", "value"));
+    assertThat(builder.build().entries()).containsExactly(immutableEntry("key", "value"));
   }
 
   public void testBuilderWithExpectedValuesPerKeyPositiveOrderValuesBy() {
@@ -153,7 +154,7 @@ public class ImmutableSetMultimapTest extends TestCase {
             .orderValuesBy(Ordering.natural())
             .expectedValuesPerKey(1);
     builder.put("key", "value");
-    assertThat(builder.build().entries()).containsExactly(Maps.immutableEntry("key", "value"));
+    assertThat(builder.build().entries()).containsExactly(immutableEntry("key", "value"));
   }
 
   static class HashHostileComparable implements Comparable<HashHostileComparable> {
@@ -188,16 +189,14 @@ public class ImmutableSetMultimapTest extends TestCase {
 
   public void testBuilder_withImmutableEntry() {
     ImmutableSetMultimap<String, Integer> multimap =
-        new Builder<String, Integer>().put(Maps.immutableEntry("one", 1)).build();
+        new Builder<String, Integer>().put(immutableEntry("one", 1)).build();
     assertEquals(ImmutableSet.of(1), multimap.get("one"));
   }
 
   public void testBuilder_withImmutableEntryAndNullContents() {
     Builder<String, Integer> builder = new Builder<>();
-    assertThrows(
-        NullPointerException.class, () -> builder.put(Maps.immutableEntry("one", (Integer) null)));
-    assertThrows(
-        NullPointerException.class, () -> builder.put(Maps.immutableEntry((String) null, 1)));
+    assertThrows(NullPointerException.class, () -> builder.put(immutableEntry("one", null)));
+    assertThrows(NullPointerException.class, () -> builder.put(immutableEntry(null, 1)));
   }
 
   private static class StringHolder {
@@ -206,7 +205,7 @@ public class ImmutableSetMultimapTest extends TestCase {
 
   public void testBuilder_withMutableEntry() {
     ImmutableSetMultimap.Builder<String, Integer> builder = new Builder<>();
-    final StringHolder holder = new StringHolder();
+    StringHolder holder = new StringHolder();
     holder.string = "one";
     Entry<String, Integer> entry =
         new AbstractMapEntry<String, Integer>() {
@@ -305,8 +304,7 @@ public class ImmutableSetMultimapTest extends TestCase {
     assertThrows(NullPointerException.class, () -> builder.put(null, 1));
     assertThrows(NullPointerException.class, () -> builder.putAll(null, Arrays.asList(1, 2, 3)));
     assertThrows(NullPointerException.class, () -> builder.putAll(null, 1, 2, 3));
-    assertThrows(
-        NullPointerException.class, () -> builder.putAll((Multimap<String, Integer>) toPut));
+    assertThrows(NullPointerException.class, () -> builder.putAll(toPut));
   }
 
   public void testBuilderPutNullValue() {
@@ -317,8 +315,7 @@ public class ImmutableSetMultimapTest extends TestCase {
     assertThrows(
         NullPointerException.class, () -> builder.putAll("foo", Arrays.asList(1, null, 3)));
     assertThrows(NullPointerException.class, () -> builder.putAll("foo", 4, null, 6));
-    assertThrows(
-        NullPointerException.class, () -> builder.putAll((Multimap<String, Integer>) toPut));
+    assertThrows(NullPointerException.class, () -> builder.putAll(toPut));
   }
 
   public void testBuilderOrderKeysBy() {
@@ -447,23 +444,19 @@ public class ImmutableSetMultimapTest extends TestCase {
 
   public void testCopyOfImmutableSetMultimap() {
     Multimap<String, Integer> multimap = createMultimap();
-    assertSame(multimap, ImmutableSetMultimap.copyOf(multimap));
+    assertThat(ImmutableSetMultimap.copyOf(multimap)).isSameInstanceAs(multimap);
   }
 
   public void testCopyOfNullKey() {
     HashMultimap<@Nullable String, Integer> input = HashMultimap.create();
     input.put(null, 1);
-    assertThrows(
-        NullPointerException.class,
-        () -> ImmutableSetMultimap.copyOf((Multimap<String, Integer>) input));
+    assertThrows(NullPointerException.class, () -> ImmutableSetMultimap.copyOf(input));
   }
 
   public void testCopyOfNullValue() {
     HashMultimap<String, @Nullable Integer> input = HashMultimap.create();
     input.putAll("foo", Arrays.<@Nullable Integer>asList(1, null, 3));
-    assertThrows(
-        NullPointerException.class,
-        () -> ImmutableSetMultimap.copyOf((Multimap<String, Integer>) input));
+    assertThrows(NullPointerException.class, () -> ImmutableSetMultimap.copyOf(input));
   }
 
   // TODO(b/172823566): Use mainline testToImmutableSetMultimap once CollectorTester is usable.
@@ -494,7 +487,7 @@ public class ImmutableSetMultimapTest extends TestCase {
     assertEquals(emptySet(), multimap.keySet());
     assertEquals(0, multimap.size());
     assertTrue(multimap.values().isEmpty());
-    assertEquals("{}", multimap.toString());
+    assertThat(multimap.toString()).isEqualTo("{}");
   }
 
   public void testEmptyMultimapWrites() {
@@ -514,7 +507,7 @@ public class ImmutableSetMultimapTest extends TestCase {
     assertFalse(multimap.entries().isEmpty());
     assertEquals(3, multimap.size());
     assertFalse(multimap.isEmpty());
-    assertEquals("{foo=[1, 3], bar=[2]}", multimap.toString());
+    assertThat(multimap.toString()).isEqualTo("{foo=[1, 3], bar=[2]}");
   }
 
   public void testMultimapWrites() {
@@ -596,11 +589,13 @@ public class ImmutableSetMultimapTest extends TestCase {
         ImmutableSetMultimap.of("of", 'o', "of", 'f', "to", 't', "to", 'o').inverse());
   }
 
+  // Yes, we want to test that inverse() returns the same instance each time that it's called.
+  @SuppressWarnings("SelfAssertion")
   public void testInverseMinimizesWork() {
     ImmutableSetMultimap<String, Character> multimap =
         ImmutableSetMultimap.of("of", 'o', "of", 'f', "to", 't', "to", 'o');
-    assertSame(multimap.inverse(), multimap.inverse());
-    assertSame(multimap, multimap.inverse().inverse());
+    assertThat(multimap.inverse()).isSameInstanceAs(multimap.inverse());
+    assertThat(multimap.inverse().inverse()).isSameInstanceAs(multimap);
   }
 
   private static <K, V> void assertMultimapEquals(
@@ -631,7 +626,7 @@ public class ImmutableSetMultimapTest extends TestCase {
   @GwtIncompatible // SerializableTester
   public void testEmptySerialization() {
     Multimap<String, Integer> multimap = ImmutableSetMultimap.of();
-    assertSame(multimap, SerializableTester.reserialize(multimap));
+    assertThat(SerializableTester.reserialize(multimap)).isSameInstanceAs(multimap);
   }
 
   @J2ktIncompatible
@@ -654,7 +649,7 @@ public class ImmutableSetMultimapTest extends TestCase {
         Ordering.usingToString(), ((ImmutableSortedSet<Integer>) multimap.get("z")).comparator());
   }
 
-  private ImmutableSetMultimap<String, Integer> createMultimap() {
+  private static ImmutableSetMultimap<String, Integer> createMultimap() {
     return ImmutableSetMultimap.<String, Integer>builder()
         .put("foo", 1)
         .put("bar", 2)

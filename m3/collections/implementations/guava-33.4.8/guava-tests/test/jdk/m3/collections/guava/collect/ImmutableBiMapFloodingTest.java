@@ -37,19 +37,26 @@ public class ImmutableBiMapFloodingTest extends AbstractHashFloodingTest<BiMap<O
   public ImmutableBiMapFloodingTest() {
     super(
         EnumSet.allOf(ConstructionPathway.class).stream()
-            .flatMap(
-                path ->
-                    Stream.<Construction<BiMap<Object, Object>>>of(
-                        keys ->
-                            path.create(transform(keys, key -> immutableEntry(key, new Object()))),
-                        keys ->
-                            path.create(transform(keys, key -> immutableEntry(new Object(), key))),
-                        keys -> path.create(transform(keys, key -> immutableEntry(key, key)))))
+            .flatMap(path ->
+                Stream.<Construction<BiMap<Object, Object>>>of(
+                    keys -> path.create(transform(keys, key -> immutableEntry(key, new Object()))),
+                    keys -> path.create(transform(keys, key -> immutableEntry(new Object(), key))),
+                    keys -> path.create(transform(keys, key -> immutableEntry(key, key)))))
             .collect(toImmutableList()),
         n -> n * log(n),
         ImmutableList.of(
-            QueryOp.create("BiMap.get", BiMap::get, Math::log),
-            QueryOp.create("BiMap.inverse.get", (bm, o) -> bm.inverse().get(o), Math::log)));
+            QueryOp.create(
+                "BiMap.get",
+                (biMap, key) -> {
+                  Object unused = biMap.get(key);
+                },
+                Math::log),
+            QueryOp.create(
+                "BiMap.inverse.get",
+                (biMap, o) -> {
+                  Object unused = biMap.inverse().get(o);
+                },
+                Math::log)));
   }
 
   /** All the ways to create an ImmutableBiMap. */

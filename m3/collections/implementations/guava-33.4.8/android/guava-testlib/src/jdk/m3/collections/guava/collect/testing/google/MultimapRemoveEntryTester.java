@@ -25,7 +25,7 @@ import static jdk.m3.collections.guava.collect.testing.features.MapFeature.ALLOW
 import static jdk.m3.collections.guava.collect.testing.features.MapFeature.ALLOWS_NULL_VALUES;
 import static jdk.m3.collections.guava.collect.testing.features.MapFeature.ALLOWS_NULL_VALUE_QUERIES;
 import static jdk.m3.collections.guava.collect.testing.features.MapFeature.SUPPORTS_REMOVE;
-import static jdk.m3.collections.guava.collect.testing.google.ReflectionFreeAssertThrows.assertThrows;
+import static org.junit.Assert.assertThrows;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.collect.ImmutableList;
@@ -36,7 +36,6 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map.Entry;
-import org.junit.Ignore;
 
 /**
  * Tests for {@link Multimap#remove(Object, Object)}.
@@ -44,9 +43,6 @@ import org.junit.Ignore;
  * @author Louis Wasserman
  */
 @GwtCompatible
-@Ignore("test runners must not instantiate and run this directly, only via suites we build")
-// @Ignore affects the Android test runner, which respects JUnit 4 annotations on JUnit 3 tests.
-@SuppressWarnings("JUnit4ClassUsedInJUnit3")
 public class MultimapRemoveEntryTester<K, V> extends AbstractMultimapTester<K, V, Multimap<K, V>> {
   @MapFeature.Require(SUPPORTS_REMOVE)
   public void testRemoveAbsent() {
@@ -62,7 +58,7 @@ public class MultimapRemoveEntryTester<K, V> extends AbstractMultimapTester<K, V
     assertFalse(multimap().containsEntry(k0(), v0()));
     expectMissing(e0());
     assertEquals(getNumElements() - 1, multimap().size());
-    assertGet(k0(), ImmutableList.<V>of());
+    assertGet(k0(), ImmutableList.of());
   }
 
   @CollectionSize.Require(absent = ZERO)
@@ -72,8 +68,8 @@ public class MultimapRemoveEntryTester<K, V> extends AbstractMultimapTester<K, V
 
     assertTrue(multimap().remove(null, getValueForNullKey()));
 
-    expectMissing(mapEntry((K) null, getValueForNullKey()));
-    assertGet(getKeyForNullValue(), ImmutableList.<V>of());
+    expectMissing(mapEntry(null, getValueForNullKey()));
+    assertGet(getKeyForNullValue(), ImmutableList.of());
   }
 
   @CollectionSize.Require(absent = ZERO)
@@ -83,8 +79,8 @@ public class MultimapRemoveEntryTester<K, V> extends AbstractMultimapTester<K, V
 
     assertTrue(multimap().remove(getKeyForNullValue(), null));
 
-    expectMissing(mapEntry(getKeyForNullValue(), (V) null));
-    assertGet(getKeyForNullValue(), ImmutableList.<V>of());
+    expectMissing(mapEntry(getKeyForNullValue(), null));
+    assertGet(getKeyForNullValue(), ImmutableList.of());
   }
 
   @MapFeature.Require({SUPPORTS_REMOVE, ALLOWS_NULL_KEY_QUERIES})

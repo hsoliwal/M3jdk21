@@ -14,19 +14,19 @@
 
 package jdk.m3.collections.guava.util.concurrent;
 
-import static com.google.common.truth.Truth.assertThat;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
 import static jdk.m3.collections.guava.util.concurrent.Futures.getDone;
 import static jdk.m3.collections.guava.util.concurrent.Futures.immediateCancelledFuture;
 import static jdk.m3.collections.guava.util.concurrent.Futures.immediateFailedFuture;
 import static jdk.m3.collections.guava.util.concurrent.Futures.immediateFuture;
-import static jdk.m3.collections.guava.util.concurrent.ReflectionFreeAssertThrows.assertThrows;
+import static jdk.m3.collections.guava.util.concurrent.Futures.immediateVoidFuture;
+import static org.junit.Assert.assertThrows;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.ExecutionException;
 import junit.framework.TestCase;
 import org.jspecify.annotations.NullUnmarked;
-import org.jspecify.annotations.Nullable;
 
 /** Unit tests for {@link Futures#getDone}. */
 @GwtCompatible
@@ -37,7 +37,7 @@ public class FuturesGetDoneTest extends TestCase {
   }
 
   public void testSuccessfulNull() throws ExecutionException {
-    assertThat(getDone(Futures.<@Nullable String>immediateFuture(null))).isEqualTo(null);
+    assertThat(getDone(immediateVoidFuture())).isEqualTo(null);
   }
 
   public void testFailed() {
@@ -47,11 +47,11 @@ public class FuturesGetDoneTest extends TestCase {
     assertThat(expected).hasCauseThat().isEqualTo(failureCause);
   }
 
-  public void testCancelled() throws ExecutionException {
+  public void testCancelled() {
     assertThrows(CancellationException.class, () -> getDone(immediateCancelledFuture()));
   }
 
-  public void testPending() throws ExecutionException {
+  public void testPending() {
     assertThrows(IllegalStateException.class, () -> getDone(SettableFuture.create()));
   }
 }

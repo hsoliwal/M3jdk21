@@ -16,6 +16,7 @@ package jdk.m3.collections.guava.collect;
 
 import static jdk.m3.collections.guava.collect.BoundType.OPEN;
 import static jdk.m3.collections.guava.collect.testing.Helpers.mapEntry;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
 import static org.junit.Assert.assertThrows;
 
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
@@ -26,6 +27,7 @@ import jdk.m3.collections.guava.collect.testing.features.CollectionFeature;
 import jdk.m3.collections.guava.collect.testing.features.CollectionSize;
 import jdk.m3.collections.guava.collect.testing.features.MapFeature;
 import jdk.m3.collections.guava.testing.EqualsTester;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -285,7 +287,7 @@ public class TreeRangeMapTest extends TestCase {
   static {
     ImmutableList.Builder<Range<Integer>> builder = ImmutableList.builder();
 
-    builder.add(Range.<Integer>all());
+    builder.add(Range.all());
 
     // Add one-ended ranges
     for (int i = MIN_BOUND; i <= MAX_BOUND; i++) {
@@ -349,9 +351,9 @@ public class TreeRangeMapTest extends TestCase {
 
         try {
           assertEquals(expected, rangeMap.span());
-          assertNotNull(expected);
+          assertThat(expected).isNotNull();
         } catch (NoSuchElementException e) {
-          assertNull(expected);
+          assertThat(expected).isNull();
         }
       }
     }
@@ -359,7 +361,7 @@ public class TreeRangeMapTest extends TestCase {
 
   public void testAllRangesAlone() {
     for (Range<Integer> range : RANGES) {
-      Map<Integer, Integer> model = Maps.newHashMap();
+      Map<Integer, Integer> model = new HashMap<>();
       putModel(model, range, 1);
       RangeMap<Integer, Integer> test = TreeRangeMap.create();
       test.put(range, 1);
@@ -370,7 +372,7 @@ public class TreeRangeMapTest extends TestCase {
   public void testAllRangePairs() {
     for (Range<Integer> range1 : RANGES) {
       for (Range<Integer> range2 : RANGES) {
-        Map<Integer, Integer> model = Maps.newHashMap();
+        Map<Integer, Integer> model = new HashMap<>();
         putModel(model, range1, 1);
         putModel(model, range2, 2);
         RangeMap<Integer, Integer> test = TreeRangeMap.create();
@@ -385,7 +387,7 @@ public class TreeRangeMapTest extends TestCase {
     for (Range<Integer> range1 : RANGES) {
       for (Range<Integer> range2 : RANGES) {
         for (Range<Integer> range3 : RANGES) {
-          Map<Integer, Integer> model = Maps.newHashMap();
+          Map<Integer, Integer> model = new HashMap<>();
           putModel(model, range1, 1);
           putModel(model, range2, 2);
           putModel(model, range3, 3);
@@ -403,7 +405,7 @@ public class TreeRangeMapTest extends TestCase {
     for (Range<Integer> range1 : RANGES) {
       for (Range<Integer> range2 : RANGES) {
         for (Range<Integer> range3 : RANGES) {
-          Map<Integer, Integer> model = Maps.newHashMap();
+          Map<Integer, Integer> model = new HashMap<>();
           putModel(model, range1, 1);
           putModel(model, range2, 2);
           putModel(model, range3, 3);
@@ -423,7 +425,7 @@ public class TreeRangeMapTest extends TestCase {
   public void testPutAndRemove() {
     for (Range<Integer> rangeToPut : RANGES) {
       for (Range<Integer> rangeToRemove : RANGES) {
-        Map<Integer, Integer> model = Maps.newHashMap();
+        Map<Integer, Integer> model = new HashMap<>();
         putModel(model, rangeToPut, 1);
         removeModel(model, rangeToRemove);
         RangeMap<Integer, Integer> test = TreeRangeMap.create();
@@ -438,7 +440,7 @@ public class TreeRangeMapTest extends TestCase {
     for (Range<Integer> rangeToPut1 : RANGES) {
       for (Range<Integer> rangeToPut2 : RANGES) {
         for (Range<Integer> rangeToRemove : RANGES) {
-          Map<Integer, Integer> model = Maps.newHashMap();
+          Map<Integer, Integer> model = new HashMap<>();
           putModel(model, rangeToPut1, 1);
           putModel(model, rangeToPut2, 2);
           removeModel(model, rangeToRemove);
@@ -458,7 +460,7 @@ public class TreeRangeMapTest extends TestCase {
     for (Range<Integer> rangeToPut1 : RANGES) {
       for (Range<Integer> rangeToPut2 : RANGES) {
         for (Range<Integer> rangeToRemove : RANGES) {
-          Map<Integer, Integer> model = Maps.newHashMap();
+          Map<Integer, Integer> model = new HashMap<>();
           putModel(model, rangeToPut1, 1);
           putModel(model, rangeToPut2, 2);
           removeModel(model, rangeToRemove);
@@ -681,7 +683,7 @@ public class TreeRangeMapTest extends TestCase {
     for (Range<Integer> range1 : RANGES) {
       for (Range<Integer> range2 : RANGES) {
         for (Range<Integer> range3 : RANGES) {
-          Map<Integer, Integer> model = Maps.newHashMap();
+          Map<Integer, Integer> model = new HashMap<>();
           mergeModel(model, range1, 1, Integer::sum);
           mergeModel(model, range2, 2, Integer::sum);
           mergeModel(model, range3, 3, Integer::sum);
@@ -904,7 +906,7 @@ public class TreeRangeMapTest extends TestCase {
         .testEquals();
   }
 
-  private void verify(Map<Integer, Integer> model, RangeMap<Integer, Integer> test) {
+  private static void verify(Map<Integer, Integer> model, RangeMap<Integer, Integer> test) {
     for (int i = MIN_BOUND - 1; i <= MAX_BOUND + 1; i++) {
       assertEquals(model.get(i), test.get(i));
 

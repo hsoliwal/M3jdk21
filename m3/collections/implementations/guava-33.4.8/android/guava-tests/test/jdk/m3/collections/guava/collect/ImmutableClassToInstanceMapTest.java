@@ -16,28 +16,25 @@
 
 package jdk.m3.collections.guava.collect;
 
-import static jdk.m3.collections.guava.collect.Maps.immutableEntry;
-import static com.google.common.truth.Truth.assertThat;
+import static jdk.m3.collections.guava.testing.SerializableTester.reserialize;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
 import static java.util.Collections.emptyMap;
 import static java.util.Collections.singletonMap;
 import static org.junit.Assert.assertThrows;
 
+import jdk.m3.collections.guava.collect.ClassToInstanceMapTesting.Impl;
+import jdk.m3.collections.guava.collect.ClassToInstanceMapTesting.TestClassToInstanceMapGenerator;
 import jdk.m3.collections.guava.collect.testing.MapTestSuiteBuilder;
-import jdk.m3.collections.guava.collect.testing.SampleElements;
-import jdk.m3.collections.guava.collect.testing.TestMapGenerator;
 import jdk.m3.collections.guava.collect.testing.features.CollectionFeature;
 import jdk.m3.collections.guava.collect.testing.features.CollectionSize;
 import jdk.m3.collections.guava.collect.testing.features.MapFeature;
-import jdk.m3.collections.guava.testing.SerializableTester;
-import java.io.Serializable;
-import java.util.List;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 import org.jspecify.annotations.NullUnmarked;
-import org.jspecify.annotations.Nullable;
 
 /**
  * Unit test for {@link ImmutableClassToInstanceMap}.
@@ -58,7 +55,7 @@ public class ImmutableClassToInstanceMapTest extends TestCase {
                   // but here we have to do some serious fudging
                   @Override
                   @SuppressWarnings({"unchecked", "rawtypes"})
-                  public Map<Class, Impl> create(Object... elements) {
+                  public Map<Class<?>, Impl> create(Object... elements) {
                     ImmutableClassToInstanceMap.Builder<Impl> builder =
                         ImmutableClassToInstanceMap.builder();
                     for (Object object : elements) {
@@ -82,17 +79,16 @@ public class ImmutableClassToInstanceMapTest extends TestCase {
   }
 
   public void testSerialization_empty() {
-    assertSame(
-        ImmutableClassToInstanceMap.of(),
-        SerializableTester.reserialize(ImmutableClassToInstanceMap.of()));
+    assertThat(reserialize(ImmutableClassToInstanceMap.of()))
+        .isSameInstanceAs(ImmutableClassToInstanceMap.of());
   }
 
   public void testCopyOf_map_empty() {
     Map<Class<?>, Object> in = emptyMap();
     ClassToInstanceMap<Object> map = ImmutableClassToInstanceMap.copyOf(in);
     assertTrue(map.isEmpty());
-    assertSame(map, ImmutableClassToInstanceMap.of());
-    assertSame(map, ImmutableClassToInstanceMap.copyOf(map));
+    assertThat(map).isSameInstanceAs(ImmutableClassToInstanceMap.of());
+    assertThat(ImmutableClassToInstanceMap.copyOf(map)).isSameInstanceAs(map);
   }
 
   public void testOf_zero() {
@@ -105,7 +101,7 @@ public class ImmutableClassToInstanceMapTest extends TestCase {
   }
 
   public void testCopyOf_map_valid() {
-    Map<Class<? extends Number>, Number> in = Maps.newHashMap();
+    Map<Class<? extends Number>, Number> in = new HashMap<>();
     in.put(Number.class, 0);
     in.put(Double.class, Math.PI);
     ClassToInstanceMap<Number> map = ImmutableClassToInstanceMap.copyOf(in);
@@ -117,11 +113,11 @@ public class ImmutableClassToInstanceMapTest extends TestCase {
     Double pi = map.getInstance(Double.class);
     assertThat(pi).isEqualTo(Math.PI);
 
-    assertSame(map, ImmutableClassToInstanceMap.copyOf(map));
+    assertThat(ImmutableClassToInstanceMap.copyOf(map)).isSameInstanceAs(map);
   }
 
   public void testCopyOf_map_nulls() {
-    Map<Class<? extends Number>, Number> nullKey = singletonMap(null, (Number) 1.0);
+    Map<Class<? extends Number>, Number> nullKey = singletonMap(null, 1.0);
     assertThrows(NullPointerException.class, () -> ImmutableClassToInstanceMap.copyOf(nullKey));
 
     Map<? extends Class<? extends Number>, Number> nullValue = singletonMap(Number.class, null);
@@ -157,73 +153,5 @@ public class ImmutableClassToInstanceMapTest extends TestCase {
 
     assertEquals(0, (int) ictim.getInstance(Integer.class));
     assertEquals(1, (int) ictim.getInstance(int.class));
-  }
-
-  @SuppressWarnings("rawtypes") // TODO(cpovirk): Can we at least use Class<?> in some places?
-  abstract static class TestClassToInstanceMapGenerator implements TestMapGenerator<Class, Impl> {
-
-    @Override
-    public Class<?>[] createKeyArray(int length) {
-      return new Class<?>[length];
-    }
-
-    @Override
-    public Impl[] createValueArray(int length) {
-      return new Impl[length];
-    }
-
-    @Override
-    public SampleElements<Entry<Class, Impl>> samples() {
-      return new SampleElements<>(
-          immutableEntry((Class) One.class, new Impl(1)),
-          immutableEntry((Class) Two.class, new Impl(2)),
-          immutableEntry((Class) Three.class, new Impl(3)),
-          immutableEntry((Class) Four.class, new Impl(4)),
-          immutableEntry((Class) Five.class, new Impl(5)));
-    }
-
-    @Override
-    @SuppressWarnings("unchecked")
-    public Entry<Class, Impl>[] createArray(int length) {
-      return (Entry<Class, Impl>[]) new Entry<?, ?>[length];
-    }
-
-    @Override
-    public Iterable<Entry<Class, Impl>> order(List<Entry<Class, Impl>> insertionOrder) {
-      return insertionOrder;
-    }
-  }
-
-  private interface One {}
-
-  private interface Two {}
-
-  private interface Three {}
-
-  private interface Four {}
-
-  private interface Five {}
-
-  static final class Impl implements One, Two, Three, Four, Five, Serializable {
-    final int value;
-
-    Impl(int value) {
-      this.value = value;
-    }
-
-    @Override
-    public boolean equals(@Nullable Object obj) {
-      return obj instanceof Impl && value == ((Impl) obj).value;
-    }
-
-    @Override
-    public int hashCode() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return Integer.toString(value);
-    }
   }
 }

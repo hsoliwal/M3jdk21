@@ -17,11 +17,11 @@
 package jdk.m3.collections.guava.collect.testing.features;
 
 import static jdk.m3.collections.guava.collect.testing.Helpers.copyToSet;
+import static java.util.Collections.emptySet;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
 import jdk.m3.collections.guava.annotations.J2ktIncompatible;
-import java.util.Collections;
 import java.util.Set;
 import org.jspecify.annotations.Nullable;
 
@@ -46,14 +46,14 @@ public final class TesterRequirements {
   }
 
   public TesterRequirements() {
-    this(Collections.<Feature<?>>emptySet(), Collections.<Feature<?>>emptySet());
+    this(emptySet(), emptySet());
   }
 
-  public final Set<Feature<?>> getPresentFeatures() {
+  public Set<Feature<?>> getPresentFeatures() {
     return presentFeatures;
   }
 
-  public final Set<Feature<?>> getAbsentFeatures() {
+  public Set<Feature<?>> getAbsentFeatures() {
     return absentFeatures;
   }
 

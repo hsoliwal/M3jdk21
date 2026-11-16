@@ -18,17 +18,17 @@ package jdk.m3.collections.guava.graph;
 
 import static jdk.m3.collections.guava.base.Preconditions.checkNotNull;
 import static jdk.m3.collections.guava.base.Preconditions.checkState;
+import static jdk.m3.collections.guava.collect.Iterables.concat;
+import static jdk.m3.collections.guava.collect.Iterators.unmodifiableIterator;
+import static jdk.m3.collections.guava.collect.Sets.union;
 import static jdk.m3.collections.guava.graph.Graphs.checkNonNegative;
 import static jdk.m3.collections.guava.graph.Graphs.checkPositive;
+import static java.util.Collections.unmodifiableSet;
 import static java.util.Objects.requireNonNull;
 
-import jdk.m3.collections.guava.collect.Iterables;
-import jdk.m3.collections.guava.collect.Iterators;
-import jdk.m3.collections.guava.collect.Sets;
 import jdk.m3.collections.guava.collect.UnmodifiableIterator;
 import jdk.m3.collections.guava.math.IntMath;
 import java.util.AbstractSet;
-import java.util.Collections;
 import java.util.Map;
 import java.util.Set;
 import org.jspecify.annotations.Nullable;
@@ -58,7 +58,7 @@ abstract class AbstractDirectedNetworkConnections<N, E> implements NetworkConnec
 
   @Override
   public Set<N> adjacentNodes() {
-    return Sets.union(predecessors(), successors());
+    return union(predecessors(), successors());
   }
 
   @Override
@@ -68,9 +68,9 @@ abstract class AbstractDirectedNetworkConnections<N, E> implements NetworkConnec
       public UnmodifiableIterator<E> iterator() {
         Iterable<E> incidentEdges =
             (selfLoopCount == 0)
-                ? Iterables.concat(inEdgeMap.keySet(), outEdgeMap.keySet())
-                : Sets.union(inEdgeMap.keySet(), outEdgeMap.keySet());
-        return Iterators.unmodifiableIterator(incidentEdges.iterator());
+                ? concat(inEdgeMap.keySet(), outEdgeMap.keySet())
+                : union(inEdgeMap.keySet(), outEdgeMap.keySet());
+        return unmodifiableIterator(incidentEdges.iterator());
       }
 
       @Override
@@ -87,12 +87,12 @@ abstract class AbstractDirectedNetworkConnections<N, E> implements NetworkConnec
 
   @Override
   public Set<E> inEdges() {
-    return Collections.unmodifiableSet(inEdgeMap.keySet());
+    return unmodifiableSet(inEdgeMap.keySet());
   }
 
   @Override
   public Set<E> outEdges() {
-    return Collections.unmodifiableSet(outEdgeMap.keySet());
+    return unmodifiableSet(outEdgeMap.keySet());
   }
 
   @Override

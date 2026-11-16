@@ -22,7 +22,7 @@ import static jdk.m3.collections.guava.collect.testing.features.MapFeature.ALLOW
 import static jdk.m3.collections.guava.collect.testing.features.MapFeature.ALLOWS_NULL_VALUES;
 import static jdk.m3.collections.guava.collect.testing.features.MapFeature.FAILS_FAST_ON_CONCURRENT_MODIFICATION;
 import static jdk.m3.collections.guava.collect.testing.features.MapFeature.SUPPORTS_PUT;
-import static jdk.m3.collections.guava.collect.testing.testers.ReflectionFreeAssertThrows.assertThrows;
+import static org.junit.Assert.assertThrows;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
@@ -35,7 +35,7 @@ import java.lang.reflect.Method;
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.Map.Entry;
-import org.junit.Ignore;
+import org.jspecify.annotations.Nullable;
 
 /**
  * A generic JUnit test which tests {@code put} operations on a map. Can't be invoked directly;
@@ -44,10 +44,7 @@ import org.junit.Ignore;
  * @author Chris Povirk
  * @author Kevin Bourrillion
  */
-@GwtCompatible(emulated = true)
-@Ignore("test runners must not instantiate and run this directly, only via suites we build")
-// @Ignore affects the Android test runner, which respects JUnit 4 annotations on JUnit 3 tests.
-@SuppressWarnings("JUnit4ClassUsedInJUnit3")
+@GwtCompatible
 public class MapPutTester<K, V> extends AbstractMapTester<K, V> {
   private Entry<K, V> nullKeyEntry;
   private Entry<K, V> nullValueEntry;
@@ -79,37 +76,25 @@ public class MapPutTester<K, V> extends AbstractMapTester<K, V> {
   @MapFeature.Require({FAILS_FAST_ON_CONCURRENT_MODIFICATION, SUPPORTS_PUT})
   @CollectionSize.Require(absent = ZERO)
   public void testPutAbsentConcurrentWithEntrySetIteration() {
-    assertThrows(
-        ConcurrentModificationException.class,
-        () -> {
-          Iterator<Entry<K, V>> iterator = getMap().entrySet().iterator();
-          put(e3());
-          iterator.next();
-        });
+    Iterator<Entry<K, V>> iterator = getMap().entrySet().iterator();
+    put(e3());
+    assertThrows(ConcurrentModificationException.class, iterator::next);
   }
 
   @MapFeature.Require({FAILS_FAST_ON_CONCURRENT_MODIFICATION, SUPPORTS_PUT})
   @CollectionSize.Require(absent = ZERO)
   public void testPutAbsentConcurrentWithKeySetIteration() {
-    assertThrows(
-        ConcurrentModificationException.class,
-        () -> {
-          Iterator<K> iterator = getMap().keySet().iterator();
-          put(e3());
-          iterator.next();
-        });
+    Iterator<K> iterator = getMap().keySet().iterator();
+    put(e3());
+    assertThrows(ConcurrentModificationException.class, iterator::next);
   }
 
   @MapFeature.Require({FAILS_FAST_ON_CONCURRENT_MODIFICATION, SUPPORTS_PUT})
   @CollectionSize.Require(absent = ZERO)
   public void testPutAbsentConcurrentWithValueIteration() {
-    assertThrows(
-        ConcurrentModificationException.class,
-        () -> {
-          Iterator<V> iterator = getMap().values().iterator();
-          put(e3());
-          iterator.next();
-        });
+    Iterator<V> iterator = getMap().values().iterator();
+    put(e3());
+    assertThrows(ConcurrentModificationException.class, iterator::next);
   }
 
   @MapFeature.Require(absent = SUPPORTS_PUT)
@@ -227,7 +212,7 @@ public class MapPutTester<K, V> extends AbstractMapTester<K, V> {
   }
 
   @CanIgnoreReturnValue
-  private V put(Entry<K, V> entry) {
+  private @Nullable V put(Entry<K, V> entry) {
     return getMap().put(entry.getKey(), entry.getValue());
   }
 

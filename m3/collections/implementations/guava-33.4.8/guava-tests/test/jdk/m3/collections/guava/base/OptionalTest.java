@@ -16,9 +16,10 @@
 
 package jdk.m3.collections.guava.base;
 
-import static jdk.m3.collections.guava.base.ReflectionFreeAssertThrows.assertThrows;
 import static jdk.m3.collections.guava.testing.SerializableTester.reserialize;
-import static com.google.common.truth.Truth.assertThat;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
+import static java.util.Collections.singleton;
+import static org.junit.Assert.assertThrows;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
@@ -27,7 +28,6 @@ import jdk.m3.collections.guava.collect.FluentIterable;
 import jdk.m3.collections.guava.collect.ImmutableList;
 import jdk.m3.collections.guava.testing.EqualsTester;
 import jdk.m3.collections.guava.testing.NullPointerTester;
-import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import junit.framework.TestCase;
@@ -40,11 +40,11 @@ import org.jspecify.annotations.Nullable;
  * @author Kurt Alfred Kluever
  */
 @NullMarked
-@GwtCompatible(emulated = true)
+@GwtCompatible
 public final class OptionalTest extends TestCase {
   @SuppressWarnings("NullOptional")
   public void testToJavaUtil_static() {
-    assertNull(Optional.toJavaUtil(null));
+    assertThat(Optional.toJavaUtil(null)).isNull();
     assertEquals(java.util.Optional.empty(), Optional.toJavaUtil(Optional.absent()));
     assertEquals(java.util.Optional.of("abc"), Optional.toJavaUtil(Optional.of("abc")));
   }
@@ -56,7 +56,7 @@ public final class OptionalTest extends TestCase {
 
   @SuppressWarnings("NullOptional")
   public void testFromJavaUtil() {
-    assertNull(Optional.fromJavaUtil(null));
+    assertThat(Optional.fromJavaUtil(null)).isNull();
     assertEquals(Optional.absent(), Optional.fromJavaUtil(java.util.Optional.empty()));
     assertEquals(Optional.of("abc"), Optional.fromJavaUtil(java.util.Optional.of("abc")));
   }
@@ -67,21 +67,22 @@ public final class OptionalTest extends TestCase {
   }
 
   public void testOf() {
-    assertEquals("training", Optional.of("training").get());
+    assertThat(Optional.of("training").get()).isEqualTo("training");
   }
 
+  @SuppressWarnings("nullness") // test of a bogus call
   public void testOf_null() {
     assertThrows(NullPointerException.class, () -> Optional.of(null));
   }
 
   public void testFromNullable() {
     Optional<String> optionalName = Optional.fromNullable("bob");
-    assertEquals("bob", optionalName.get());
+    assertThat(optionalName.get()).isEqualTo("bob");
   }
 
   public void testFromNullable_null() {
     // not promised by spec, but easier to test
-    assertSame(Optional.absent(), Optional.fromNullable(null));
+    assertThat(Optional.fromNullable(null)).isSameInstanceAs(Optional.absent());
   }
 
   public void testIsPresent_no() {
@@ -99,12 +100,12 @@ public final class OptionalTest extends TestCase {
   }
 
   public void testGet_present() {
-    assertEquals("training", Optional.of("training").get());
+    assertThat(Optional.of("training").get()).isEqualTo("training");
   }
 
   @SuppressWarnings("OptionalOfRedundantMethod") // Unit tests for Optional
   public void testOr_t_present() {
-    assertEquals("a", Optional.of("a").or("default"));
+    assertThat(Optional.of("a").or("default")).isEqualTo("a");
   }
 
   public void testOr_t_absent() {
@@ -113,7 +114,7 @@ public final class OptionalTest extends TestCase {
 
   @SuppressWarnings("OptionalOfRedundantMethod") // Unit tests for Optional
   public void testOr_supplier_present() {
-    assertEquals("a", Optional.of("a").or(Suppliers.ofInstance("fallback")));
+    assertThat(Optional.of("a").or(Suppliers.ofInstance("fallback"))).isEqualTo("a");
   }
 
   public void testOr_supplier_absent() {
@@ -129,7 +130,7 @@ public final class OptionalTest extends TestCase {
   @SuppressWarnings("OptionalOfRedundantMethod") // Unit tests for Optional
   public void testOr_nullSupplier_present() {
     Supplier<String> nullSupplier = (Supplier<String>) Suppliers.<@Nullable String>ofInstance(null);
-    assertEquals("a", Optional.of("a").or(nullSupplier));
+    assertThat(Optional.of("a").or(nullSupplier)).isEqualTo("a");
   }
 
   @SuppressWarnings("OptionalOfRedundantMethod") // Unit tests for Optional
@@ -143,15 +144,15 @@ public final class OptionalTest extends TestCase {
 
   @SuppressWarnings("OptionalOfRedundantMethod") // Unit tests for Optional
   public void testOrNull_present() {
-    assertEquals("a", Optional.of("a").orNull());
+    assertThat(Optional.of("a").orNull()).isEqualTo("a");
   }
 
   public void testOrNull_absent() {
-    assertNull(Optional.absent().orNull());
+    assertThat(Optional.absent().orNull()).isNull();
   }
 
   public void testAsSet_present() {
-    Set<String> expected = Collections.singleton("a");
+    Set<String> expected = singleton("a");
     assertEquals(expected, Optional.of("a").asSet());
   }
 
@@ -182,12 +183,18 @@ public final class OptionalTest extends TestCase {
     assertEquals(Optional.of("42"), Optional.of(42).transform(Functions.toStringFunction()));
   }
 
+  @SuppressWarnings("nullness") // test of a bogus call
   public void testTransform_present_functionReturnsNull() {
     assertThrows(NullPointerException.class, () -> Optional.of("a").transform(input -> null));
   }
 
-  public void testTransform_absent_functionReturnsNull() {
-    assertEquals(Optional.absent(), Optional.absent().transform(input -> null));
+  public void testTransform_absent_functionNotCalled() {
+    assertThat(
+            Optional.absent()
+                .transform(input -> {
+                  throw new AssertionError();
+                }))
+        .isAbsent();
   }
 
   public void testEqualsAndHashCode() {
@@ -199,11 +206,11 @@ public final class OptionalTest extends TestCase {
   }
 
   public void testToString_absent() {
-    assertEquals("Optional.absent()", Optional.absent().toString());
+    assertThat(Optional.absent().toString()).isEqualTo("Optional.absent()");
   }
 
   public void testToString_present() {
-    assertEquals("Optional.of(training)", Optional.of("training").toString());
+    assertThat(Optional.of("training").toString()).isEqualTo("Optional.of(training)");
   }
 
   public void testPresentInstances_allPresent() {
@@ -219,13 +226,14 @@ public final class OptionalTest extends TestCase {
 
   public void testPresentInstances_somePresent() {
     List<Optional<String>> optionals =
-        ImmutableList.of(Optional.of("a"), Optional.<String>absent(), Optional.of("c"));
+        ImmutableList.of(Optional.of("a"), Optional.absent(), Optional.of("c"));
     assertThat(Optional.presentInstances(optionals)).containsExactly("a", "c").inOrder();
   }
 
+  @SuppressWarnings("DuplicateAssertion") // We intentionally iterate multiple times.
   public void testPresentInstances_callingIteratorTwice() {
     List<Optional<String>> optionals =
-        ImmutableList.of(Optional.of("a"), Optional.<String>absent(), Optional.of("c"));
+        ImmutableList.of(Optional.of("a"), Optional.absent(), Optional.of("c"));
     Iterable<String> onlyPresent = Optional.presentInstances(optionals);
     assertThat(onlyPresent).containsExactly("a", "c").inOrder();
     assertThat(onlyPresent).containsExactly("a", "c").inOrder();
@@ -233,7 +241,7 @@ public final class OptionalTest extends TestCase {
 
   public void testPresentInstances_wildcards() {
     List<Optional<? extends Number>> optionals =
-        ImmutableList.<Optional<? extends Number>>of(Optional.<Double>absent(), Optional.of(2));
+        ImmutableList.of(Optional.<Double>absent(), Optional.of(2));
     Iterable<Number> onlyPresent = Optional.presentInstances(optionals);
     assertThat(onlyPresent).containsExactly(2);
   }
@@ -243,7 +251,7 @@ public final class OptionalTest extends TestCase {
   }
 
   private static FluentIterable<? extends Number> getSomeNumbers() {
-    return FluentIterable.from(ImmutableList.<Number>of());
+    return FluentIterable.from(ImmutableList.of());
   }
 
   /*

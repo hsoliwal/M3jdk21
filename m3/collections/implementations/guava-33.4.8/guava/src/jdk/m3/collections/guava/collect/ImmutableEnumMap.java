@@ -18,6 +18,8 @@ package jdk.m3.collections.guava.collect;
 
 import static jdk.m3.collections.guava.base.Preconditions.checkArgument;
 import static jdk.m3.collections.guava.collect.Iterables.getOnlyElement;
+import static jdk.m3.collections.guava.collect.Iterators.unmodifiableIterator;
+import static jdk.m3.collections.guava.collect.Maps.unmodifiableEntryIterator;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
@@ -36,7 +38,7 @@ import org.jspecify.annotations.Nullable;
  *
  * @author Louis Wasserman
  */
-@GwtCompatible(serializable = true, emulated = true)
+@GwtCompatible
 @SuppressWarnings("serial") // we're overriding default serialization
 final class ImmutableEnumMap<K extends Enum<K>, V> extends IteratorBasedImmutableMap<K, V> {
   static <K extends Enum<K>, V> ImmutableMap<K, V> asImmutable(EnumMap<K, V> map) {
@@ -60,7 +62,7 @@ final class ImmutableEnumMap<K extends Enum<K>, V> extends IteratorBasedImmutabl
 
   @Override
   UnmodifiableIterator<K> keyIterator() {
-    return Iterators.unmodifiableIterator(delegate.keySet().iterator());
+    return unmodifiableIterator(delegate.keySet().iterator());
   }
 
   @Override
@@ -96,12 +98,16 @@ final class ImmutableEnumMap<K extends Enum<K>, V> extends IteratorBasedImmutabl
 
   @Override
   UnmodifiableIterator<Entry<K, V>> entryIterator() {
-    return Maps.unmodifiableEntryIterator(delegate.entrySet().iterator());
+    return unmodifiableEntryIterator(delegate.entrySet().iterator());
   }
 
   @Override
+  @GwtIncompatible // Spliterator
   Spliterator<Entry<K, V>> entrySpliterator() {
-    return CollectSpliterators.map(delegate.entrySet().spliterator(), Maps::unmodifiableEntry);
+    return CollectSpliterators.map(
+        delegate.entrySet().spliterator(),
+        Spliterator.DISTINCT | Spliterator.ORDERED | Spliterator.IMMUTABLE | Spliterator.NONNULL,
+        Maps::unmodifiableEntry);
   }
 
   @Override
@@ -130,7 +136,7 @@ final class ImmutableEnumMap<K extends Enum<K>, V> extends IteratorBasedImmutabl
    * This class is used to serialize ImmutableEnumMap instances.
    */
   @J2ktIncompatible // serialization
-  private static class EnumSerializedForm<K extends Enum<K>, V> implements Serializable {
+  private static final class EnumSerializedForm<K extends Enum<K>, V> implements Serializable {
     final EnumMap<K, V> delegate;
 
     EnumSerializedForm(EnumMap<K, V> delegate) {
@@ -141,6 +147,6 @@ final class ImmutableEnumMap<K extends Enum<K>, V> extends IteratorBasedImmutabl
       return new ImmutableEnumMap<>(delegate);
     }
 
-    @GwtIncompatible @J2ktIncompatible private static final long serialVersionUID = 0;
+    @GwtIncompatible private static final long serialVersionUID = 0;
   }
 }

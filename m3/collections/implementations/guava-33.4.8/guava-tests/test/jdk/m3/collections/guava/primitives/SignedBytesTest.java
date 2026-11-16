@@ -16,18 +16,19 @@
 
 package jdk.m3.collections.guava.primitives;
 
-import static jdk.m3.collections.guava.primitives.ReflectionFreeAssertThrows.assertThrows;
+import static jdk.m3.collections.guava.collect.testing.Helpers.testComparator;
 import static jdk.m3.collections.guava.primitives.SignedBytes.max;
 import static jdk.m3.collections.guava.primitives.SignedBytes.min;
-import static com.google.common.truth.Truth.assertThat;
-import static com.google.common.truth.Truth.assertWithMessage;
+import static jdk.m3.collections.guava.testing.SerializableTester.reserialize;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
+import static jdk.m3.collections.guava.truth.Truth.assertWithMessage;
+import static java.util.Arrays.asList;
+import static org.junit.Assert.assertThrows;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
 import jdk.m3.collections.guava.annotations.J2ktIncompatible;
-import jdk.m3.collections.guava.collect.testing.Helpers;
 import jdk.m3.collections.guava.testing.NullPointerTester;
-import jdk.m3.collections.guava.testing.SerializableTester;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
@@ -40,7 +41,7 @@ import org.jspecify.annotations.NullMarked;
  * @author Kevin Bourrillion
  */
 @NullMarked
-@GwtCompatible(emulated = true)
+@GwtCompatible
 public class SignedBytesTest extends TestCase {
   private static final byte[] EMPTY = {};
   private static final byte[] ARRAY1 = {(byte) 1};
@@ -71,14 +72,9 @@ public class SignedBytesTest extends TestCase {
   }
 
   private static void assertCastFails(long value) {
-    try {
-      SignedBytes.checkedCast(value);
-      fail("Cast to byte should have failed: " + value);
-    } catch (IllegalArgumentException ex) {
-      assertWithMessage(value + " not found in exception text: " + ex.getMessage())
-          .that(ex.getMessage().contains(String.valueOf(value)))
-          .isTrue();
-    }
+    IllegalArgumentException ex =
+        assertThrows(IllegalArgumentException.class, () -> SignedBytes.checkedCast(value));
+    assertThat(ex).hasMessageThat().contains(String.valueOf(value));
   }
 
   public void testCompare() {
@@ -88,13 +84,13 @@ public class SignedBytesTest extends TestCase {
         int expected = Byte.compare(x, y);
         int actual = SignedBytes.compare(x, y);
         if (expected == 0) {
-          assertWithMessage(x + ", " + y).that(actual).isEqualTo(expected);
+          assertWithMessage("%s, %s", x, y).that(actual).isEqualTo(expected);
         } else if (expected < 0) {
-          assertWithMessage(x + ", " + y + " (expected: " + expected + ", actual" + actual + ")")
+          assertWithMessage("%s, %s (expected: %s, actual%s)", x, y, expected, actual)
               .that(actual < 0)
               .isTrue();
         } else {
-          assertWithMessage(x + ", " + y + " (expected: " + expected + ", actual" + actual + ")")
+          assertWithMessage("%s, %s (expected: %s, actual%s)", x, y, expected, actual)
               .that(actual > 0)
               .isTrue();
         }
@@ -133,7 +129,7 @@ public class SignedBytesTest extends TestCase {
   @J2ktIncompatible // b/285319375
   public void testLexicographicalComparator() {
     List<byte[]> ordered =
-        Arrays.asList(
+        asList(
             new byte[] {},
             new byte[] {LEAST},
             new byte[] {LEAST, LEAST},
@@ -145,14 +141,14 @@ public class SignedBytesTest extends TestCase {
             new byte[] {GREATEST, GREATEST, GREATEST});
 
     Comparator<byte[]> comparator = SignedBytes.lexicographicalComparator();
-    Helpers.testComparator(comparator, ordered);
+    testComparator(comparator, ordered);
   }
 
   @J2ktIncompatible
   @GwtIncompatible // SerializableTester
   public void testLexicographicalComparatorSerializable() {
     Comparator<byte[]> comparator = SignedBytes.lexicographicalComparator();
-    assertThat(SerializableTester.reserialize(comparator)).isSameInstanceAs(comparator);
+    assertThat(reserialize(comparator)).isSameInstanceAs(comparator);
   }
 
   public void testSortDescending() {

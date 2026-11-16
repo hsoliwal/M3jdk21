@@ -24,8 +24,6 @@ import com.google.j2objc.annotations.J2ObjCIncompatible;
 import java.lang.invoke.VarHandle;
 import java.lang.reflect.Field;
 import java.nio.ByteOrder;
-import java.security.AccessController;
-import java.security.PrivilegedActionException;
 import java.security.PrivilegedExceptionAction;
 import java.util.Objects;
 import org.jspecify.annotations.Nullable;
@@ -128,7 +126,8 @@ final class LittleEndianByteArray {
    * <p>This abstraction allows us to use single-instruction load and put when available, or fall
    * back on the slower approach of using Longs.fromBytes(byte...).
    */
-  private interface LittleEndianBytes {
+  @VisibleForTesting
+  interface LittleEndianBytes {
     long getLongLittleEndian(byte[] array, int offset);
 
     void putLongLittleEndian(byte[] array, int offset, long value);
@@ -171,7 +170,7 @@ final class LittleEndianByteArray {
    * Unsafe.theUnsafe is inaccessible, the attempt to load the nested class fails, and the outer
    * class's static initializer can fall back on a non-Unsafe version.
    */
-  @SuppressWarnings("SunApi") // b/345822163
+  @SuppressWarnings({"SunApi", "removal"}) // b/345822163
   @VisibleForTesting
   enum UnsafeByteArray implements LittleEndianBytes {
     // Do *not* change the order of these constants!
@@ -226,21 +225,28 @@ final class LittleEndianByteArray {
         // We'll try reflection instead.
       }
       try {
-        return AccessController.doPrivileged(
-            (PrivilegedExceptionAction<Unsafe>)
-                () -> {
-                  Class<Unsafe> k = Unsafe.class;
-                  for (Field f : k.getDeclaredFields()) {
-                    f.setAccessible(true);
-                    Object x = f.get(null);
-                    if (k.isInstance(x)) {
-                      return k.cast(x);
-                    }
-                  }
-                  throw new NoSuchFieldError("the Unsafe");
-                });
-      } catch (PrivilegedActionException e) {
-        throw new RuntimeException("Could not initialize intrinsics", e.getCause());
+        PrivilegedExceptionAction<Unsafe> action =
+            () -> {
+              Class<Unsafe> k = Unsafe.class;
+              for (Field f : k.getDeclaredFields()) {
+                f.setAccessible(true);
+                Object x = f.get(null);
+                if (k.isInstance(x)) {
+                  return k.cast(x);
+                }
+              }
+              throw new NoSuchFieldError("the Unsafe");
+            };
+        try {
+          return (Unsafe)
+              Class.forName("java.security.AccessController")
+                  .getMethod("doPrivileged", PrivilegedExceptionAction.class)
+                  .invoke(null, action);
+        } catch (Exception e) {
+          return action.run();
+        }
+      } catch (Exception e) {
+        throw new RuntimeException("Could not initialize intrinsics", e);
       }
     }
 
@@ -289,7 +295,7 @@ final class LittleEndianByteArray {
     }
   }
 
-  static LittleEndianBytes makeGetter() {
+  private static LittleEndianBytes makeGetter() {
     LittleEndianBytes usingVarHandle =
         VarHandleLittleEndianBytesMaker.INSTANCE.tryMakeVarHandleLittleEndianBytes();
     if (usingVarHandle != null) {

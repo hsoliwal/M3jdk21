@@ -15,12 +15,14 @@
 package jdk.m3.collections.guava.collect;
 
 import static jdk.m3.collections.guava.collect.BoundType.OPEN;
+import static jdk.m3.collections.guava.collect.Maps.newTreeMap;
 import static jdk.m3.collections.guava.collect.Range.range;
-import static com.google.common.truth.Truth.assertThat;
+import static jdk.m3.collections.guava.testing.SerializableTester.reserializeAndAssert;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
 import static java.util.Arrays.asList;
 
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
-import jdk.m3.collections.guava.testing.SerializableTester;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.NavigableMap;
 import org.jspecify.annotations.NullUnmarked;
@@ -44,7 +46,7 @@ public class TreeRangeSetTest extends AbstractRangeSetTest {
   static {
     ImmutableList.Builder<Range<Integer>> queryBuilder = ImmutableList.builder();
 
-    queryBuilder.add(Range.<Integer>all());
+    queryBuilder.add(Range.all());
 
     for (int i = MIN_BOUND; i <= MAX_BOUND; i++) {
       for (BoundType boundType : BoundType.values()) {
@@ -88,19 +90,19 @@ public class TreeRangeSetTest extends AbstractRangeSetTest {
   private static final ImmutableList<Cut<Integer>> CUTS_TO_TEST;
 
   static {
-    List<Cut<Integer>> cutsToTest = Lists.newArrayList();
+    List<Cut<Integer>> cutsToTest = new ArrayList<>();
     for (int i = MIN_BOUND - 1; i <= MAX_BOUND + 1; i++) {
       cutsToTest.add(Cut.belowValue(i));
       cutsToTest.add(Cut.aboveValue(i));
     }
-    cutsToTest.add(Cut.<Integer>aboveAll());
-    cutsToTest.add(Cut.<Integer>belowAll());
+    cutsToTest.add(Cut.aboveAll());
+    cutsToTest.add(Cut.belowAll());
     CUTS_TO_TEST = ImmutableList.copyOf(cutsToTest);
   }
 
   private void testRangesByLowerBounds(
       TreeRangeSet<Integer> rangeSet, Iterable<Range<Integer>> expectedRanges) {
-    NavigableMap<Cut<Integer>, Range<Integer>> expectedRangesByLowerBound = Maps.newTreeMap();
+    NavigableMap<Cut<Integer>, Range<Integer>> expectedRangesByLowerBound = newTreeMap();
     for (Range<Integer> range : expectedRanges) {
       expectedRangesByLowerBound.put(range.lowerBound, range);
     }
@@ -150,7 +152,7 @@ public class TreeRangeSetTest extends AbstractRangeSetTest {
   }
 
   public void testEnclosing(RangeSet<Integer> rangeSet) {
-    assertTrue(rangeSet.enclosesAll(ImmutableList.<Range<Integer>>of()));
+    assertTrue(rangeSet.enclosesAll(ImmutableList.of()));
     for (Range<Integer> query : QUERY_RANGES) {
       boolean expectEnclose = false;
       for (Range<Integer> expectedRange : rangeSet.asRanges()) {
@@ -177,7 +179,7 @@ public class TreeRangeSetTest extends AbstractRangeSetTest {
       rangeSet.add(range);
 
       TreeRangeSet<Integer> complement = TreeRangeSet.create();
-      complement.add(Range.<Integer>all());
+      complement.add(Range.all());
       complement.remove(range);
 
       assertEquals(complement, rangeSet.complement());
@@ -192,7 +194,7 @@ public class TreeRangeSetTest extends AbstractRangeSetTest {
   }
 
   public void testEmptyIntersecting() {
-    testIntersects(TreeRangeSet.<Integer>create());
+    testIntersects(TreeRangeSet.create());
     testIntersects(TreeRangeSet.<Integer>create().complement());
   }
 
@@ -218,7 +220,7 @@ public class TreeRangeSetTest extends AbstractRangeSetTest {
   }
 
   public void testEmptyEnclosing() {
-    testEnclosing(TreeRangeSet.<Integer>create());
+    testEnclosing(TreeRangeSet.create());
     testEnclosing(TreeRangeSet.<Integer>create().complement());
   }
 
@@ -255,7 +257,7 @@ public class TreeRangeSetTest extends AbstractRangeSetTest {
     }
   }
 
-  private RangeSet<Integer> expectedSubRangeSet(
+  private static RangeSet<Integer> expectedSubRangeSet(
       RangeSet<Integer> rangeSet, Range<Integer> subRange) {
     RangeSet<Integer> expected = TreeRangeSet.create();
     for (Range<Integer> range : rangeSet.asRanges()) {
@@ -266,13 +268,14 @@ public class TreeRangeSetTest extends AbstractRangeSetTest {
     return expected;
   }
 
-  private RangeSet<Integer> expectedComplement(RangeSet<Integer> rangeSet) {
+  private static RangeSet<Integer> expectedComplement(RangeSet<Integer> rangeSet) {
     RangeSet<Integer> expected = TreeRangeSet.create();
-    expected.add(Range.<Integer>all());
+    expected.add(Range.all());
     expected.removeAll(rangeSet);
     return expected;
   }
 
+  @AndroidIncompatible // ~40s; doable but probably not worth it. We could test on fewer ranges
 
   public void testSubRangeSet() {
     for (Range<Integer> range1 : QUERY_RANGES) {
@@ -312,6 +315,7 @@ public class TreeRangeSetTest extends AbstractRangeSetTest {
     }
   }
 
+  @AndroidIncompatible // ~70s; doable but probably not worth it. We could test on fewer ranges
 
   public void testSubRangeSetOfComplement() {
     for (Range<Integer> range1 : QUERY_RANGES) {
@@ -328,6 +332,7 @@ public class TreeRangeSetTest extends AbstractRangeSetTest {
     }
   }
 
+  @AndroidIncompatible // ~90s; doable but probably not worth it. We could test on fewer ranges
 
   public void testComplementOfSubRangeSet() {
     for (Range<Integer> range1 : QUERY_RANGES) {
@@ -351,7 +356,7 @@ public class TreeRangeSetTest extends AbstractRangeSetTest {
         rangeSet.add(range1);
         rangeSet.add(range2);
 
-        NavigableMap<Cut<Integer>, Range<Integer>> expectedRangesByUpperBound = Maps.newTreeMap();
+        NavigableMap<Cut<Integer>, Range<Integer>> expectedRangesByUpperBound = newTreeMap();
         for (Range<Integer> range : rangeSet.asRanges()) {
           expectedRangesByUpperBound.put(range.upperBound, range);
         }
@@ -650,7 +655,7 @@ public class TreeRangeSetTest extends AbstractRangeSetTest {
     rangeSet.add(Range.closed(3, 10));
     assertEquals(Range.closed(3, 10), rangeSet.rangeContaining(5));
     assertTrue(rangeSet.contains(5));
-    assertNull(rangeSet.rangeContaining(1));
+    assertThat(rangeSet.rangeContaining(1)).isNull();
     assertFalse(rangeSet.contains(1));
   }
 
@@ -662,7 +667,7 @@ public class TreeRangeSetTest extends AbstractRangeSetTest {
     assertTrue(rangeSet.contains(5));
     assertEquals(Range.closed(7, 10), rangeSet.rangeContaining(8));
     assertTrue(rangeSet.contains(8));
-    assertNull(rangeSet.rangeContaining(6));
+    assertThat(rangeSet.rangeContaining(6)).isNull();
     assertFalse(rangeSet.contains(6));
   }
 
@@ -682,11 +687,10 @@ public class TreeRangeSetTest extends AbstractRangeSetTest {
         .inOrder();
   }
 
-  @GwtIncompatible // SerializableTester
   public void testSerialization() {
     RangeSet<Integer> rangeSet = TreeRangeSet.create();
     rangeSet.add(Range.closed(3, 10));
     rangeSet.remove(Range.open(5, 7));
-    SerializableTester.reserializeAndAssert(rangeSet);
+    reserializeAndAssert(rangeSet);
   }
 }

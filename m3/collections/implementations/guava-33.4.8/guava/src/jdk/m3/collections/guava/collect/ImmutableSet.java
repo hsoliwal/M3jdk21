@@ -19,6 +19,10 @@ package jdk.m3.collections.guava.collect;
 import static jdk.m3.collections.guava.base.Preconditions.checkArgument;
 import static jdk.m3.collections.guava.base.Preconditions.checkNotNull;
 import static jdk.m3.collections.guava.collect.CollectPreconditions.checkNonnegative;
+import static jdk.m3.collections.guava.collect.ImmutableList.asImmutableList;
+import static jdk.m3.collections.guava.collect.Sets.equalsImpl;
+import static jdk.m3.collections.guava.collect.Sets.hashCodeImpl;
+import static jdk.m3.collections.guava.collect.Sets.newHashSetWithExpectedSize;
 import static jdk.m3.collections.guava.math.IntMath.sqrt;
 import static java.lang.Math.max;
 import static java.util.Objects.requireNonNull;
@@ -44,7 +48,6 @@ import java.util.Iterator;
 import java.util.Set;
 import java.util.SortedSet;
 import java.util.Spliterator;
-import java.util.function.Consumer;
 import java.util.stream.Collector;
 import org.jspecify.annotations.Nullable;
 
@@ -54,7 +57,7 @@ import org.jspecify.annotations.Nullable;
  *
  * @since 2.0
  */
-@GwtCompatible(serializable = true, emulated = true)
+@GwtCompatible
 @SuppressWarnings("serial") // we're overriding default serialization
 public abstract class ImmutableSet<E> extends ImmutableCollection<E> implements Set<E> {
   static final int SPLITERATOR_CHARACTERISTICS =
@@ -93,7 +96,7 @@ public abstract class ImmutableSet<E> extends ImmutableCollection<E> implements 
   }
 
   /*
-   * TODO: b/315526394 - Skip the Builder entirely for the of(...) methods, since we don't need to
+   * TODO(b/315526394): Skip the Builder entirely for the of(...) methods, since we don't need to
    * worry that we might trigger the fallback to the JDK-backed implementation? (The varargs one
    * _could_, so we could keep it as it is. Or we could convince ourselves that hash flooding is
    * unlikely in practice there, too.)
@@ -168,11 +171,6 @@ public abstract class ImmutableSet<E> extends ImmutableCollection<E> implements 
    * @throws NullPointerException if any of {@code elements} is null
    * @since 7.0 (source-compatible since 2.0)
    */
-  // This the best we could do to get copyOfEnumSet to compile in the mainline.
-  // The suppression also covers the cast to E[], discussed below.
-  // In the backport, we don't have those cases and thus don't need this suppression.
-  // We keep it to minimize diffs.
-  @SuppressWarnings("unchecked")
   public static <E> ImmutableSet<E> copyOf(Collection<? extends E> elements) {
     /*
      * TODO(lowasser): consider checking for ImmutableAsList here
@@ -186,7 +184,17 @@ public abstract class ImmutableSet<E> extends ImmutableCollection<E> implements 
         return set;
       }
     } else if (elements instanceof EnumSet) {
-      return copyOfEnumSet((EnumSet<?>) elements);
+      EnumSet<?> clone = ((EnumSet<?>) elements).clone();
+      ImmutableSet<?> untypedResult = ImmutableEnumSet.asImmutable(clone);
+      /*
+       * The result has the same type argument we started with. We just couldn't express EnumSet<E>
+       * or ImmutableEnumSet<E> along the way because our own <E> isn't <E extends Enum<E>>.
+       *
+       * We are also performing a safe covariant cast to change <? extends E> to <E>.
+       */
+      @SuppressWarnings("unchecked")
+      ImmutableSet<E> result = (ImmutableSet<E>) untypedResult;
+      return result;
     }
 
     if (elements.isEmpty()) {
@@ -195,6 +203,7 @@ public abstract class ImmutableSet<E> extends ImmutableCollection<E> implements 
     }
     // Collection<E>.toArray() is required to contain only E instances, and all we do is read them.
     // TODO(cpovirk): Consider using Object[] anyway.
+    @SuppressWarnings("unchecked")
     E[] array = (E[]) elements.toArray();
     /*
      * For a Set, we guess that it contains no duplicates. That's just a guess for purpose of
@@ -269,11 +278,6 @@ public abstract class ImmutableSet<E> extends ImmutableCollection<E> implements 
     }
   }
 
-  @SuppressWarnings({"rawtypes", "unchecked"}) // necessary to compile against Java 8
-  private static ImmutableSet copyOfEnumSet(EnumSet<?> enumSet) {
-    return ImmutableEnumSet.asImmutable(EnumSet.copyOf((EnumSet) enumSet));
-  }
-
   ImmutableSet() {}
 
   /** Returns {@code true} if the {@code hashCode()} method runs quickly. */
@@ -292,12 +296,12 @@ public abstract class ImmutableSet<E> extends ImmutableCollection<E> implements 
         && hashCode() != object.hashCode()) {
       return false;
     }
-    return Sets.equalsImpl(this, object);
+    return equalsImpl(this, object);
   }
 
   @Override
   public int hashCode() {
-    return Sets.hashCodeImpl(this);
+    return hashCodeImpl(this);
   }
 
   // This declaration is needed to make Set.iterator() and
@@ -305,7 +309,6 @@ public abstract class ImmutableSet<E> extends ImmutableCollection<E> implements 
   @Override
   public abstract UnmodifiableIterator<E> iterator();
 
-  @GwtCompatible
   abstract static class CachingAsList<E> extends ImmutableSet<E> {
     @LazyInit @RetainedWith private transient @Nullable ImmutableList<E> asList;
 
@@ -313,75 +316,13 @@ public abstract class ImmutableSet<E> extends ImmutableCollection<E> implements 
     public ImmutableList<E> asList() {
       ImmutableList<E> result = asList;
       if (result == null) {
-        return asList = createAsList();
-      } else {
-        return result;
+        result = asList = createAsList();
       }
+      return result;
     }
 
     ImmutableList<E> createAsList() {
       return new RegularImmutableAsList<>(this, toArray());
-    }
-
-    // redeclare to help optimizers with b/310253115
-    @SuppressWarnings("RedundantOverride")
-    @Override
-    @J2ktIncompatible
-    @GwtIncompatible
-        Object writeReplace() {
-      return super.writeReplace();
-    }
-  }
-
-  abstract static class Indexed<E> extends CachingAsList<E> {
-    abstract E get(int index);
-
-    @Override
-    public UnmodifiableIterator<E> iterator() {
-      return asList().iterator();
-    }
-
-    @Override
-    public Spliterator<E> spliterator() {
-      return CollectSpliterators.indexed(size(), SPLITERATOR_CHARACTERISTICS, this::get);
-    }
-
-    @Override
-    public void forEach(Consumer<? super E> consumer) {
-      checkNotNull(consumer);
-      int n = size();
-      for (int i = 0; i < n; i++) {
-        consumer.accept(get(i));
-      }
-    }
-
-    @Override
-    int copyIntoArray(@Nullable Object[] dst, int offset) {
-      return asList().copyIntoArray(dst, offset);
-    }
-
-    @Override
-    ImmutableList<E> createAsList() {
-      return new ImmutableAsList<E>() {
-        @Override
-        public E get(int index) {
-          return Indexed.this.get(index);
-        }
-
-        @Override
-        Indexed<E> delegateCollection() {
-          return Indexed.this;
-        }
-
-        // redeclare to help optimizers with b/310253115
-        @SuppressWarnings("RedundantOverride")
-        @Override
-        @J2ktIncompatible
-        @GwtIncompatible
-                Object writeReplace() {
-          return super.writeReplace();
-        }
-      };
     }
 
     // redeclare to help optimizers with b/310253115
@@ -402,7 +343,7 @@ public abstract class ImmutableSet<E> extends ImmutableCollection<E> implements 
    * particular implementation type is an implementation detail.
    */
   @J2ktIncompatible // serialization
-  private static class SerializedForm implements Serializable {
+  private static final class SerializedForm implements Serializable {
     final Object[] elements;
 
     SerializedForm(Object[] elements) {
@@ -413,7 +354,7 @@ public abstract class ImmutableSet<E> extends ImmutableCollection<E> implements 
       return copyOf(elements);
     }
 
-    @GwtIncompatible @J2ktIncompatible private static final long serialVersionUID = 0;
+    @GwtIncompatible private static final long serialVersionUID = 0;
   }
 
   @Override
@@ -479,6 +420,10 @@ public abstract class ImmutableSet<E> extends ImmutableCollection<E> implements 
     private @Nullable SetBuilderImpl<E> impl;
     boolean forceCopy;
 
+    /**
+     * Creates a new builder. The returned builder is equivalent to the builder generated by {@link
+     * ImmutableSet#builder}.
+     */
     public Builder() {
       this(0);
     }
@@ -675,7 +620,7 @@ public abstract class ImmutableSet<E> extends ImmutableCollection<E> implements 
 
     @Override
     ImmutableSet<E> build() {
-      return ImmutableSet.of();
+      return of();
     }
   }
 
@@ -943,7 +888,7 @@ public abstract class ImmutableSet<E> extends ImmutableCollection<E> implements 
 
     JdkBackedSetBuilderImpl(SetBuilderImpl<E> toCopy) {
       super(toCopy); // initializes dedupedElements and distinct
-      delegate = Sets.newHashSetWithExpectedSize(distinct);
+      delegate = newHashSetWithExpectedSize(distinct);
       for (int i = 0; i < distinct; i++) {
         /*
          * requireNonNull is safe because we ensure that the first `distinct` elements have been
@@ -979,8 +924,7 @@ public abstract class ImmutableSet<E> extends ImmutableCollection<E> implements 
            */
           return of(requireNonNull(dedupedElements[0]));
         default:
-          return new JdkBackedImmutableSet<>(
-              delegate, ImmutableList.asImmutableList(dedupedElements, distinct));
+          return new JdkBackedImmutableSet<>(delegate, asImmutableList(dedupedElements, distinct));
       }
     }
   }

@@ -19,9 +19,9 @@ import static jdk.m3.collections.guava.io.BaseEncoding.base32;
 import static jdk.m3.collections.guava.io.BaseEncoding.base32Hex;
 import static jdk.m3.collections.guava.io.BaseEncoding.base64;
 import static jdk.m3.collections.guava.io.BaseEncoding.base64Url;
-import static jdk.m3.collections.guava.io.ReflectionFreeAssertThrows.assertThrows;
-import static com.google.common.truth.Truth.assertThat;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
 import static java.nio.charset.StandardCharsets.UTF_8;
+import static org.junit.Assert.assertThrows;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
@@ -45,7 +45,7 @@ import org.jspecify.annotations.Nullable;
  *
  * @author Louis Wasserman
  */
-@GwtCompatible(emulated = true)
+@GwtCompatible
 @NullUnmarked
 public class BaseEncodingTest extends TestCase {
 
@@ -88,6 +88,44 @@ public class BaseEncodingTest extends TestCase {
     testStreamingEncodingWithSeparators(base64(), "foob", "Zm9vYg==");
     testStreamingEncodingWithSeparators(base64(), "fooba", "Zm9vYmE=");
     testStreamingEncodingWithSeparators(base64(), "foobar", "Zm9vYmFy");
+  }
+
+  @GwtIncompatible // Reader
+  @AndroidIncompatible // ~40s
+
+  public void testBase64StreamingLargeInput() throws IOException {
+    // (1L << 31) is a multiple of 4 (charsPerChunk for Base64); adding 2 'A's and "==" gives a
+    // valid stream whose character count exceeds Integer.MAX_VALUE (b/533864962).
+    long numAs = (1L << 31) + 2;
+    Reader reader =
+        new Reader() {
+          long remainingAs = numAs;
+          int remainingEquals = 2;
+
+          @Override
+          public int read() {
+            if (remainingAs > 0) {
+              remainingAs--;
+              return 'A';
+            }
+            if (remainingEquals > 0) {
+              remainingEquals--;
+              return '=';
+            }
+            return -1;
+          }
+
+          @Override
+          public int read(char[] cbuf, int off, int len) {
+            throw new UnsupportedOperationException();
+          }
+
+          @Override
+          public void close() {}
+        };
+    try (InputStream decoded = base64().decodingStream(reader)) {
+      assertThat(ByteStreams.exhaust(decoded)).isEqualTo((1L << 31) / 4 * 3 + 1);
+    }
   }
 
   public void testBase64LenientPadding() {
@@ -463,13 +501,10 @@ public class BaseEncodingTest extends TestCase {
       @Override
       void assertFailsToDecode(
           BaseEncoding encoding, String cannotDecode, @Nullable String expectedMessage) {
-        try {
-          encoding.decode(cannotDecode);
-          fail("Expected IllegalArgumentException");
-        } catch (IllegalArgumentException expected) {
-          if (expectedMessage != null) {
-            assertThat(expected).hasCauseThat().hasMessageThat().isEqualTo(expectedMessage);
-          }
+        IllegalArgumentException expected =
+            assertThrows(IllegalArgumentException.class, () -> encoding.decode(cannotDecode));
+        if (expectedMessage != null) {
+          assertThat(expected).hasCauseThat().hasMessageThat().isEqualTo(expectedMessage);
         }
       }
     },
@@ -477,13 +512,10 @@ public class BaseEncodingTest extends TestCase {
       @Override
       void assertFailsToDecode(
           BaseEncoding encoding, String cannotDecode, @Nullable String expectedMessage) {
-        try {
-          encoding.decodeChecked(cannotDecode);
-          fail("Expected DecodingException");
-        } catch (DecodingException expected) {
-          if (expectedMessage != null) {
-            assertThat(expected).hasMessageThat().isEqualTo(expectedMessage);
-          }
+        DecodingException expected =
+            assertThrows(DecodingException.class, () -> encoding.decodeChecked(cannotDecode));
+        if (expectedMessage != null) {
+          assertThat(expected).hasMessageThat().isEqualTo(expectedMessage);
         }
       }
     },
@@ -503,15 +535,7 @@ public class BaseEncodingTest extends TestCase {
         // See https://github.com/google/guava/issues/3542
         Reader reader = new StringReader(cannotDecode);
         InputStream decodingStream = encoding.decodingStream(reader);
-        try {
-          ByteStreams.exhaust(decodingStream);
-          fail("Expected DecodingException");
-        } catch (DecodingException expected) {
-          // Don't assert on the expectedMessage; the messages for exceptions thrown from the
-          // decoding stream may differ from the messages for the decode methods.
-        } catch (IOException e) {
-          fail("Expected DecodingException but got: " + e);
-        }
+        assertThrows(DecodingException.class, () -> ByteStreams.exhaust(decodingStream));
       }
     };
 
@@ -570,6 +594,17 @@ public class BaseEncodingTest extends TestCase {
       }
       assertThat(decodingStream.read()).isEqualTo(-1);
     }
+  }
+
+  @GwtIncompatible // Writer
+  public void testEncodingStream_closeIsIdempotent() throws IOException {
+    StringWriter writer = new StringWriter();
+    OutputStream encodingStream = base64().encodingStream(writer);
+    encodingStream.write(0);
+    encodingStream.close();
+    assertThat(writer.toString()).isEqualTo("AA==");
+    encodingStream.close();
+    assertThat(writer.toString()).isEqualTo("AA==");
   }
 
   public void testToString() {

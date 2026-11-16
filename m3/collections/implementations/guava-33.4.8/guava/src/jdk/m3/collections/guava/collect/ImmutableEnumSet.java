@@ -17,6 +17,7 @@
 package jdk.m3.collections.guava.collect;
 
 import static jdk.m3.collections.guava.collect.Iterables.getOnlyElement;
+import static jdk.m3.collections.guava.collect.Iterators.unmodifiableIterator;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
@@ -36,7 +37,7 @@ import org.jspecify.annotations.Nullable;
  *
  * @author Jared Levy
  */
-@GwtCompatible(serializable = true, emulated = true)
+@GwtCompatible
 @SuppressWarnings("serial") // we're overriding default serialization
 final class ImmutableEnumSet<E extends Enum<E>> extends ImmutableSet<E> {
   static <E extends Enum<E>> ImmutableSet<E> asImmutable(EnumSet<E> set) {
@@ -71,7 +72,7 @@ final class ImmutableEnumSet<E extends Enum<E>> extends ImmutableSet<E> {
 
   @Override
   public UnmodifiableIterator<E> iterator() {
-    return Iterators.unmodifiableIterator(delegate.iterator());
+    return unmodifiableIterator(delegate.iterator());
   }
 
   @Override
@@ -96,7 +97,7 @@ final class ImmutableEnumSet<E extends Enum<E>> extends ImmutableSet<E> {
 
   @Override
   public boolean containsAll(Collection<?> collection) {
-    if (collection instanceof ImmutableEnumSet<?>) {
+    if (collection instanceof ImmutableEnumSet) {
       collection = ((ImmutableEnumSet<?>) collection).delegate;
     }
     return delegate.containsAll(collection);
@@ -128,7 +129,10 @@ final class ImmutableEnumSet<E extends Enum<E>> extends ImmutableSet<E> {
   @Override
   public int hashCode() {
     int result = hashCode;
-    return (result == 0) ? hashCode = delegate.hashCode() : result;
+    if (result == 0) {
+      result = hashCode = delegate.hashCode();
+    }
+    return result;
   }
 
   @Override
@@ -136,7 +140,6 @@ final class ImmutableEnumSet<E extends Enum<E>> extends ImmutableSet<E> {
     return delegate.toString();
   }
 
-  // All callers of the constructor are restricted to <E extends Enum<E>>.
   @Override
   @J2ktIncompatible // serialization
   Object writeReplace() {
@@ -152,7 +155,7 @@ final class ImmutableEnumSet<E extends Enum<E>> extends ImmutableSet<E> {
    * This class is used to serialize ImmutableEnumSet instances.
    */
   @J2ktIncompatible // serialization
-  private static class EnumSerializedForm<E extends Enum<E>> implements Serializable {
+  private static final class EnumSerializedForm<E extends Enum<E>> implements Serializable {
     final EnumSet<E> delegate;
 
     EnumSerializedForm(EnumSet<E> delegate) {
@@ -164,6 +167,6 @@ final class ImmutableEnumSet<E extends Enum<E>> extends ImmutableSet<E> {
       return new ImmutableEnumSet<E>(delegate.clone());
     }
 
-    @GwtIncompatible @J2ktIncompatible private static final long serialVersionUID = 0;
+    @GwtIncompatible private static final long serialVersionUID = 0;
   }
 }

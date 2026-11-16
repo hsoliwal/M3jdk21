@@ -19,6 +19,7 @@ package jdk.m3.collections.guava.collect;
 import static java.util.Arrays.asList;
 
 import jdk.m3.collections.guava.base.Function;
+import jdk.m3.collections.guava.collect.ForwardingCollection.SimpleForwardingCollection;
 import jdk.m3.collections.guava.collect.testing.CollectionTestSuiteBuilder;
 import jdk.m3.collections.guava.collect.testing.MinimalCollection;
 import jdk.m3.collections.guava.collect.testing.TestStringCollectionGenerator;
@@ -26,6 +27,7 @@ import jdk.m3.collections.guava.collect.testing.features.CollectionFeature;
 import jdk.m3.collections.guava.collect.testing.features.CollectionSize;
 import jdk.m3.collections.guava.testing.ForwardingWrapperTester;
 import java.util.Collection;
+import java.util.LinkedList;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
@@ -40,16 +42,9 @@ import org.jspecify.annotations.NullUnmarked;
  */
 @NullUnmarked
 public class ForwardingCollectionTest extends TestCase {
-  static final class StandardImplForwardingCollection<T> extends ForwardingCollection<T> {
-    private final Collection<T> backingCollection;
-
+  static final class StandardImplForwardingCollection<T> extends SimpleForwardingCollection<T> {
     StandardImplForwardingCollection(Collection<T> backingCollection) {
-      this.backingCollection = backingCollection;
-    }
-
-    @Override
-    protected Collection<T> delegate() {
-      return backingCollection;
+      super(backingCollection);
     }
 
     @Override
@@ -114,7 +109,7 @@ public class ForwardingCollectionTest extends TestCase {
                   @Override
                   protected Collection<String> create(String[] elements) {
                     return new StandardImplForwardingCollection<>(
-                        Lists.newLinkedList(asList(elements)));
+                        new LinkedList<>(asList(elements)));
                   }
                 })
             .named("ForwardingCollection[LinkedList] with standard implementations")
@@ -131,7 +126,7 @@ public class ForwardingCollectionTest extends TestCase {
                     return new StandardImplForwardingCollection<>(MinimalCollection.of(elements));
                   }
                 })
-            .named("ForwardingCollection[MinimalCollection] with standard" + " implementations")
+            .named("ForwardingCollection[MinimalCollection] with standard implementations")
             .withFeatures(CollectionSize.ANY, CollectionFeature.ALLOWS_NULL_VALUES)
             .createTestSuite());
 
@@ -151,7 +146,7 @@ public class ForwardingCollectionTest extends TestCase {
             });
   }
 
-  private static <T> Collection<T> wrap(final Collection<T> delegate) {
+  private static <T> Collection<T> wrap(Collection<T> delegate) {
     return new ForwardingCollection<T>() {
       @Override
       protected Collection<T> delegate() {

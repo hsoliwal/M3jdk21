@@ -17,8 +17,8 @@
 package jdk.m3.collections.guava.collect;
 
 import static jdk.m3.collections.guava.base.MoreObjects.toStringHelper;
-import static com.google.common.truth.Truth.assertThat;
-import static com.google.common.truth.Truth.assertWithMessage;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
+import static jdk.m3.collections.guava.truth.Truth.assertWithMessage;
 import static java.lang.Integer.signum;
 import static java.util.Comparator.comparing;
 import static java.util.Comparator.naturalOrder;

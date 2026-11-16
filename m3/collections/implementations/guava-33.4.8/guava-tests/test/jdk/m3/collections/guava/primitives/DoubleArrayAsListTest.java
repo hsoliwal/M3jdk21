@@ -17,6 +17,7 @@
 package jdk.m3.collections.guava.primitives;
 
 import static jdk.m3.collections.guava.base.Preconditions.checkNotNull;
+import static java.lang.System.arraycopy;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
@@ -39,7 +40,7 @@ import org.jspecify.annotations.NullUnmarked;
  *
  * @author Kevin Bourrillion
  */
-@GwtCompatible(emulated = true)
+@GwtCompatible
 @NullUnmarked
 @AndroidIncompatible // test-suite builders
 public class DoubleArrayAsListTest extends TestCase {
@@ -84,15 +85,15 @@ public class DoubleArrayAsListTest extends TestCase {
 
   public static final class DoublesAsListGenerator extends TestDoubleListGenerator {
     @Override
-    protected List<Double> create(Double[] elements) {
+    List<Double> create(Double[] elements) {
       return asList(elements);
     }
   }
 
   public static final class DoublesAsListHeadSubListGenerator extends TestDoubleListGenerator {
     @Override
-    protected List<Double> create(Double[] elements) {
-      Double[] suffix = {Double.MIN_VALUE, Double.MAX_VALUE};
+    List<Double> create(Double[] elements) {
+      Double[] suffix = {Doubles.MIN_POSITIVE_VALUE, Double.MAX_VALUE};
       Double[] all = concat(elements, suffix);
       return asList(all).subList(0, elements.length);
     }
@@ -100,7 +101,7 @@ public class DoubleArrayAsListTest extends TestCase {
 
   public static final class DoublesAsListTailSubListGenerator extends TestDoubleListGenerator {
     @Override
-    protected List<Double> create(Double[] elements) {
+    List<Double> create(Double[] elements) {
       Double[] prefix = {86.0, 99.0};
       Double[] all = concat(prefix, elements);
       return asList(all).subList(2, elements.length + 2);
@@ -109,8 +110,8 @@ public class DoubleArrayAsListTest extends TestCase {
 
   public static final class DoublesAsListMiddleSubListGenerator extends TestDoubleListGenerator {
     @Override
-    protected List<Double> create(Double[] elements) {
-      Double[] prefix = {Double.MIN_VALUE, Double.MAX_VALUE};
+    List<Double> create(Double[] elements) {
+      Double[] prefix = {Doubles.MIN_POSITIVE_VALUE, Double.MAX_VALUE};
       Double[] suffix = {86.0, 99.0};
       Double[] all = concat(concat(prefix, elements), suffix);
       return asList(all).subList(2, elements.length + 2);
@@ -119,8 +120,8 @@ public class DoubleArrayAsListTest extends TestCase {
 
   private static Double[] concat(Double[] left, Double[] right) {
     Double[] result = new Double[left.length + right.length];
-    System.arraycopy(left, 0, result, 0, left.length);
-    System.arraycopy(right, 0, result, left.length, right.length);
+    arraycopy(left, 0, result, 0, left.length);
+    arraycopy(right, 0, result, left.length, right.length);
     return result;
   }
 
@@ -144,7 +145,7 @@ public class DoubleArrayAsListTest extends TestCase {
      * Creates a new collection containing the given elements; implement this method instead of
      * {@link #create(Object...)}.
      */
-    protected abstract List<Double> create(Double[] elements);
+    abstract List<Double> create(Double[] elements);
 
     @Override
     public Double[] createArray(int length) {

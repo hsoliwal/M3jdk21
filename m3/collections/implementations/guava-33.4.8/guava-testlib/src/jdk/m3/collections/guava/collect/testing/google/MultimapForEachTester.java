@@ -16,6 +16,7 @@
 package jdk.m3.collections.guava.collect.testing.google;
 
 import static jdk.m3.collections.guava.collect.testing.Helpers.assertEqualIgnoringOrder;
+import static jdk.m3.collections.guava.collect.testing.Helpers.assertEqualInOrder;
 import static jdk.m3.collections.guava.collect.testing.Helpers.mapEntry;
 import static jdk.m3.collections.guava.collect.testing.features.CollectionFeature.KNOWN_ORDER;
 
@@ -25,7 +26,6 @@ import jdk.m3.collections.guava.collect.testing.features.CollectionFeature;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map.Entry;
-import org.junit.Ignore;
 
 /**
  * Tests for {@link Multimap#forEach}.
@@ -33,20 +33,17 @@ import org.junit.Ignore;
  * @author Louis Wasserman
  */
 @GwtCompatible
-@Ignore("test runners must not instantiate and run this directly, only via suites we build")
-// @Ignore affects the Android test runner, which respects JUnit 4 annotations on JUnit 3 tests.
-@SuppressWarnings("JUnit4ClassUsedInJUnit3")
 public class MultimapForEachTester<K, V> extends AbstractMultimapTester<K, V, Multimap<K, V>> {
   public void testForEach() {
     List<Entry<K, V>> entries = new ArrayList<>();
     multimap().forEach((k, v) -> entries.add(mapEntry(k, v)));
-    assertEqualIgnoringOrder(getSampleElements(), multimap().entries());
+    assertEqualIgnoringOrder(getSampleElements(), entries);
   }
 
   @CollectionFeature.Require(KNOWN_ORDER)
   public void testForEachOrder() {
     List<Entry<K, V>> entries = new ArrayList<>();
     multimap().forEach((k, v) -> entries.add(mapEntry(k, v)));
-    assertEqualIgnoringOrder(getSampleElements(), multimap().entries());
+    assertEqualInOrder(getOrderedElements(), entries);
   }
 }

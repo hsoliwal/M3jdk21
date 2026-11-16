@@ -15,12 +15,12 @@
  */
 
 // M3 immutable map index adaptation; provenance: m3/immutable-index-arrays-20261019/CONTRACT.md
-// Modified 2026 by Hitesh Soliwal and Synexia contributors: array storage.
 package jdk.m3.collections.guava.collect;
 
 import static jdk.m3.collections.guava.base.Preconditions.checkNotNull;
 import static jdk.m3.collections.guava.base.Preconditions.checkPositionIndex;
 import static jdk.m3.collections.guava.collect.CollectPreconditions.checkEntryNotNull;
+import static jdk.m3.collections.guava.collect.Hashing.closedTableSize;
 import static jdk.m3.collections.guava.collect.ImmutableMapEntry.createEntryArray;
 import static java.util.Objects.requireNonNull;
 
@@ -45,7 +45,7 @@ import org.jspecify.annotations.Nullable;
  * @author Kevin Bourrillion
  * @author Gregory Kick
  */
-@GwtCompatible(serializable = true, emulated = true)
+@GwtCompatible
 final class RegularImmutableMap<K, V> extends ImmutableMap<K, V> {
   @SuppressWarnings("unchecked")
   static final ImmutableMap<Object, Object> EMPTY =
@@ -123,9 +123,8 @@ final class RegularImmutableMap<K, V> extends ImmutableMap<K, V> {
      * of non-null entries.
      */
     @SuppressWarnings("nullness")
-    Entry<K, V>[] entries =
-        (n == entryArray.length) ? (Entry<K, V>[]) entryArray : createEntryArray(n);
-    int tableSize = Hashing.closedTableSize(n, MAX_LOAD_FACTOR);
+    Entry<K, V>[] entries = (n == entryArray.length) ? entryArray : createEntryArray(n);
+    int tableSize = closedTableSize(n, MAX_LOAD_FACTOR);
     int[] table = createIndexArray(tableSize);
     int[] nextInKeyBucket = createIndexArray(n);
     int mask = tableSize - 1;
@@ -174,8 +173,7 @@ final class RegularImmutableMap<K, V> extends ImmutableMap<K, V> {
       entries[entryIndex] = effectiveEntry;
     }
     if (duplicates != null) {
-      // Explicit type parameters needed here to avoid a problem with nullness inference.
-      entries = RegularImmutableMap.<K, V>removeDuplicates(entries, n, n - dupCount, duplicates);
+      entries = removeDuplicates(entries, n, n - dupCount, duplicates);
       // Slot compaction invalidates primitive indexes even when the bucket capacity is unchanged.
       return fromEntryArrayCheckingBucketOverflow(
           entries.length, entries, /* throwIfDuplicateKeys= */ true);
@@ -270,7 +268,7 @@ final class RegularImmutableMap<K, V> extends ImmutableMap<K, V> {
     return ABSENT;
   }
 
-  static class BucketOverflowException extends Exception {}
+  static final class BucketOverflowException extends Exception {}
 
   @Override
   public @Nullable V get(@Nullable Object key) {
@@ -323,16 +321,15 @@ final class RegularImmutableMap<K, V> extends ImmutableMap<K, V> {
   }
 
   @Override
-  ImmutableSet<Entry<K, V>> createEntrySet() {
+  public ImmutableSet<Entry<K, V>> entrySet() {
     return new ImmutableMapEntrySet.RegularEntrySet<>(this, entries);
   }
 
   @Override
-  ImmutableSet<K> createKeySet() {
+  public ImmutableSet<K> keySet() {
     return new KeySet<>(this);
   }
 
-  @GwtCompatible(emulated = true)
   private static final class KeySet<K> extends IndexedImmutableSet<K> {
     private final RegularImmutableMap<K, ?> map;
 
@@ -370,10 +367,10 @@ final class RegularImmutableMap<K, V> extends ImmutableMap<K, V> {
     }
 
     // No longer used for new writes, but kept so that old data can still be read.
-    @GwtIncompatible // serialization
+    @GwtIncompatible
     @J2ktIncompatible
     @SuppressWarnings("unused")
-    private static class SerializedForm<K> implements Serializable {
+    private static final class SerializedForm<K> implements Serializable {
       final ImmutableMap<K, ?> map;
 
       SerializedForm(ImmutableMap<K, ?> map) {
@@ -384,16 +381,26 @@ final class RegularImmutableMap<K, V> extends ImmutableMap<K, V> {
         return map.keySet();
       }
 
-      @GwtIncompatible @J2ktIncompatible private static final long serialVersionUID = 0;
+      private static final long serialVersionUID = 0;
     }
   }
 
+  /*
+   * While we *could* declare a return type of ImmutableList on this package-private implementation
+   * type, no user would see it, so all we'd end up with is an extra method in the class file.
+   *
+   * (Arguably it would have been even better not to have returned an ImmutableList in the first
+   * place. It's especially a bit strange given that ImmutableMap.of(k, v).values() (a
+   * SingletonImmutableBiMap) returns an ImmutubleSet. Surely users have already come to depend on
+   * these implementation details, such as through `equals` calls. Maybe we should have returned a
+   * more vanilla ImmutableCollection with a fast asList() method?))
+   */
+  @SuppressWarnings("PreferredInterfaceType")
   @Override
-  ImmutableCollection<V> createValues() {
+  public ImmutableCollection<V> values() {
     return new Values<>(this);
   }
 
-  @GwtCompatible(emulated = true)
   private static final class Values<K, V> extends ImmutableList<V> {
     final RegularImmutableMap<K, V> map;
 
@@ -426,10 +433,10 @@ final class RegularImmutableMap<K, V> extends ImmutableMap<K, V> {
     }
 
     // No longer used for new writes, but kept so that old data can still be read.
-    @GwtIncompatible // serialization
+    @GwtIncompatible
     @J2ktIncompatible
     @SuppressWarnings("unused")
-    private static class SerializedForm<V> implements Serializable {
+    private static final class SerializedForm<V> implements Serializable {
       final ImmutableMap<?, V> map;
 
       SerializedForm(ImmutableMap<?, V> map) {
@@ -440,7 +447,7 @@ final class RegularImmutableMap<K, V> extends ImmutableMap<K, V> {
         return map.values();
       }
 
-      @GwtIncompatible @J2ktIncompatible private static final long serialVersionUID = 0;
+      private static final long serialVersionUID = 0;
     }
   }
 

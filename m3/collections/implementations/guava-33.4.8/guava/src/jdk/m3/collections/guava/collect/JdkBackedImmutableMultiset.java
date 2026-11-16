@@ -15,12 +15,13 @@
 package jdk.m3.collections.guava.collect;
 
 import static jdk.m3.collections.guava.base.Preconditions.checkNotNull;
+import static jdk.m3.collections.guava.collect.ImmutableList.asImmutableList;
+import static jdk.m3.collections.guava.collect.Maps.newHashMapWithExpectedSize;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
 import jdk.m3.collections.guava.annotations.J2ktIncompatible;
 import jdk.m3.collections.guava.primitives.Ints;
-import com.google.errorprone.annotations.concurrent.LazyInit;
 import java.util.Collection;
 import java.util.Map;
 import org.jspecify.annotations.Nullable;
@@ -40,7 +41,7 @@ final class JdkBackedImmutableMultiset<E> extends ImmutableMultiset<E> {
   static <E> ImmutableMultiset<E> create(Collection<? extends Entry<? extends E>> entries) {
     @SuppressWarnings("unchecked")
     Entry<E>[] entriesArray = entries.toArray((Entry<E>[]) new Entry<?>[0]);
-    Map<E, Integer> delegateMap = Maps.newHashMapWithExpectedSize(entriesArray.length);
+    Map<E, Integer> delegateMap = newHashMapWithExpectedSize(entriesArray.length);
     long size = 0;
     for (int i = 0; i < entriesArray.length; i++) {
       Entry<E> entry = entriesArray[i];
@@ -52,8 +53,7 @@ final class JdkBackedImmutableMultiset<E> extends ImmutableMultiset<E> {
         entriesArray[i] = Multisets.immutableEntry(element, count);
       }
     }
-    return new JdkBackedImmutableMultiset<>(
-        delegateMap, ImmutableList.asImmutableList(entriesArray), size);
+    return new JdkBackedImmutableMultiset<>(delegateMap, asImmutableList(entriesArray), size);
   }
 
   private JdkBackedImmutableMultiset(
@@ -68,12 +68,9 @@ final class JdkBackedImmutableMultiset<E> extends ImmutableMultiset<E> {
     return delegateMap.getOrDefault(element, 0);
   }
 
-  @LazyInit private transient @Nullable ImmutableSet<E> elementSet;
-
   @Override
   public ImmutableSet<E> elementSet() {
-    ImmutableSet<E> result = elementSet;
-    return (result == null) ? elementSet = new ElementSet<>(entries, this) : result;
+    return new ElementSet<>(entries, this);
   }
 
   @Override

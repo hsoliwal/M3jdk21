@@ -14,9 +14,10 @@
 
 package jdk.m3.collections.guava.primitives;
 
-import static jdk.m3.collections.guava.primitives.ReflectionFreeAssertThrows.assertThrows;
-import static com.google.common.truth.Truth.assertThat;
-import static com.google.common.truth.Truth.assertWithMessage;
+import static jdk.m3.collections.guava.testing.SerializableTester.reserializeAndAssert;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
+import static jdk.m3.collections.guava.truth.Truth.assertWithMessage;
+import static org.junit.Assert.assertThrows;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
@@ -24,7 +25,6 @@ import jdk.m3.collections.guava.annotations.J2ktIncompatible;
 import jdk.m3.collections.guava.collect.ImmutableSet;
 import jdk.m3.collections.guava.testing.EqualsTester;
 import jdk.m3.collections.guava.testing.NullPointerTester;
-import jdk.m3.collections.guava.testing.SerializableTester;
 import java.math.BigInteger;
 import junit.framework.TestCase;
 import org.jspecify.annotations.NullUnmarked;
@@ -34,7 +34,7 @@ import org.jspecify.annotations.NullUnmarked;
  *
  * @author Louis Wasserman
  */
-@GwtCompatible(emulated = true)
+@GwtCompatible
 @NullUnmarked
 public class UnsignedLongTest extends TestCase {
   private static final ImmutableSet<Long> TEST_LONGS;
@@ -151,7 +151,7 @@ public class UnsignedLongTest extends TestCase {
   public void testFloatValue() {
     for (long value : TEST_LONGS) {
       UnsignedLong unsignedValue = UnsignedLong.fromLongBits(value);
-      assertWithMessage("Float value of " + unsignedValue)
+      assertWithMessage("Float value of %s", unsignedValue)
           .that(unsignedValue.floatValue())
           .isEqualTo(unsignedValue.bigIntegerValue().floatValue());
     }
@@ -160,7 +160,7 @@ public class UnsignedLongTest extends TestCase {
   public void testDoubleValue() {
     for (long value : TEST_LONGS) {
       UnsignedLong unsignedValue = UnsignedLong.fromLongBits(value);
-      assertWithMessage("Double value of " + unsignedValue)
+      assertWithMessage("Double value of %s", unsignedValue)
           .that(unsignedValue.doubleValue())
           .isEqualTo(unsignedValue.bigIntegerValue().doubleValue());
     }
@@ -283,11 +283,11 @@ public class UnsignedLongTest extends TestCase {
     }
   }
 
+  @GwtIncompatible
   @J2ktIncompatible
-  @GwtIncompatible // serialization
   public void testSerialization() {
     for (long a : TEST_LONGS) {
-      SerializableTester.reserializeAndAssert(UnsignedLong.fromLongBits(a));
+      reserializeAndAssert(UnsignedLong.fromLongBits(a));
     }
   }
 

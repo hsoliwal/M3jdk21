@@ -16,7 +16,7 @@
 
 package jdk.m3.collections.guava.io;
 
-import static com.google.common.truth.Truth.assertThat;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
 import static org.junit.Assert.assertThrows;
 
 import java.io.ByteArrayInputStream;
@@ -106,7 +106,7 @@ public class CountingInputStreamTest extends IoTestCase {
 
   private static class UnmarkableInputStream extends InputStream {
     @Override
-    public int read() throws IOException {
+    public int read() {
       return 0;
     }
 

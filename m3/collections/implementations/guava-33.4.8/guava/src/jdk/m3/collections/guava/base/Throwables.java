@@ -31,7 +31,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.AbstractList;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import org.jspecify.annotations.Nullable;
 
@@ -45,7 +44,7 @@ import org.jspecify.annotations.Nullable;
  * @author Ben Yu
  * @since 1.0
  */
-@GwtCompatible(emulated = true)
+@GwtCompatible
 public final class Throwables {
   private Throwables() {}
 
@@ -126,6 +125,8 @@ public final class Throwables {
    *
    * @since 20.0
    */
+  // We can't use throwIfInstanceOf here: It's @GwtIncompatible, and this method is not.
+  @SuppressWarnings("ThrowIfInstanceOf")
   public static void throwIfUnchecked(Throwable throwable) {
     checkNotNull(throwable);
     if (throwable instanceof RuntimeException) {
@@ -304,7 +305,7 @@ public final class Throwables {
       }
       advanceSlowPointer = !advanceSlowPointer; // only advance every other iteration
     }
-    return Collections.unmodifiableList(causes);
+    return unmodifiableList(causes);
   }
 
   /**
@@ -337,6 +338,7 @@ public final class Throwables {
    * parsing the resulting string; if you need programmatic access to the stack frames, you can call
    * {@link Throwable#getStackTrace()}.
    */
+  @SuppressWarnings("ReturnGetStackTraceAsString") // suggests implementing this as a call to itself
   @GwtIncompatible // java.io.PrintWriter, java.io.StringWriter
   public static String getStackTraceAsString(Throwable throwable) {
     StringWriter stringWriter = new StringWriter();
@@ -476,7 +478,6 @@ public final class Throwables {
    * Returns the JavaLangAccess class that is present in all Sun JDKs. It is not allowed in
    * AppEngine, and not present in non-Sun JDKs.
    */
-  @SuppressWarnings("removal") // b/318391980
   @J2ktIncompatible
   @GwtIncompatible // java.lang.reflect
   private static @Nullable Object getJla() {
@@ -488,9 +489,8 @@ public final class Throwables {
       Class<?> sharedSecrets = Class.forName(SHARED_SECRETS_CLASSNAME, false, null);
       Method langAccess = sharedSecrets.getMethod("getJavaLangAccess");
       return langAccess.invoke(null);
-    } catch (ThreadDeath death) {
-      throw death;
     } catch (Throwable t) {
+      throwIfThreadDeath(t);
       /*
        * This is not one of AppEngine's allowed classes, so even in Sun JDKs, this can fail with
        * a NoClassDefFoundError. Other apps might deny access to sun.misc packages.
@@ -511,9 +511,8 @@ public final class Throwables {
 
   /**
    * Returns the Method that can be used to return the size of a stack, or null if that method
-   * cannot be found (it is only to be found in fairly recent JDKs). Tries to test method {@link
-   * sun.misc.JavaLangAccess#getStackTraceDepth(Throwable) getStackTraceDepth} prior to return it
-   * (might fail some JDKs).
+   * cannot be found (it is only to be found in fairly recent JDKs). Tries to test method {@code
+   * sun.misc.JavaLangAccess.getStackTraceDepth} prior to return it (might fail some JDKs).
    *
    * <p>See <a href="https://github.com/google/guava/issues/2887">Throwables#lazyStackTrace throws
    * UnsupportedOperationException</a>.
@@ -533,21 +532,26 @@ public final class Throwables {
     }
   }
 
-  @SuppressWarnings("removal") // b/318391980
   @J2ktIncompatible
   @GwtIncompatible // java.lang.reflect
-  private static @Nullable Method getJlaMethod(String name, Class<?>... parameterTypes)
-      throws ThreadDeath {
+  private static @Nullable Method getJlaMethod(String name, Class<?>... parameterTypes) {
     try {
       return Class.forName(JAVA_LANG_ACCESS_CLASSNAME, false, null).getMethod(name, parameterTypes);
-    } catch (ThreadDeath death) {
-      throw death;
     } catch (Throwable t) {
+      throwIfThreadDeath(t);
       /*
        * Either the JavaLangAccess class itself is not found, or the method is not supported on the
        * JVM.
        */
       return null;
+    }
+  }
+
+  @J2ktIncompatible
+  @GwtIncompatible
+  private static void throwIfThreadDeath(Throwable t) {
+    if (t.getClass().getName().equals("java.lang.ThreadDeath")) {
+      throw (Error) t;
     }
   }
 }

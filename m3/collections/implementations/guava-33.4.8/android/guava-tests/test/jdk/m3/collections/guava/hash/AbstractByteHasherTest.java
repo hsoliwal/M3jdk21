@@ -18,6 +18,7 @@ import static java.nio.charset.StandardCharsets.UTF_16LE;
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertThrows;
 
+import jdk.m3.collections.guava.annotations.J2ktIncompatible;
 import java.io.ByteArrayOutputStream;
 import java.util.Random;
 import junit.framework.TestCase;
@@ -66,6 +67,7 @@ public class AbstractByteHasherTest extends TestCase {
     hasher.assertBytes(new byte[] {1, 2});
   }
 
+  @J2ktIncompatible // no UTF_16LE support
   public void testString() {
     Random random = new Random();
     for (int i = 0; i < 100; i++) {
@@ -100,7 +102,7 @@ public class AbstractByteHasherTest extends TestCase {
     assertThrows(IndexOutOfBoundsException.class, () -> hasher.putBytes(new byte[8], 0, -1));
   }
 
-  private class TestHasher extends AbstractByteHasher {
+  private static final class TestHasher extends AbstractByteHasher {
 
     private final ByteArrayOutputStream out = new ByteArrayOutputStream();
 

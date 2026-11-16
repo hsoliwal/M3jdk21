@@ -12,12 +12,16 @@
  * the License.
  */
 
+// Copyright 2026 Hitesh Soliwal and Contributors to the Synexia Project.
 package jdk.m3.collections.guava.primitives;
 
 import static jdk.m3.collections.guava.base.Preconditions.checkArgument;
 import static jdk.m3.collections.guava.base.Preconditions.checkNotNull;
+import static java.lang.System.arraycopy;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
+import jdk.m3.collections.guava.annotations.GwtIncompatible;
+import jdk.m3.collections.guava.annotations.J2ktIncompatible;
 import jdk.m3.collections.guava.base.Preconditions;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import com.google.errorprone.annotations.Immutable;
@@ -138,7 +142,7 @@ public final class ImmutableDoubleArray implements Serializable {
         rest.length <= Integer.MAX_VALUE - 1, "the total number of elements must fit in an int");
     double[] array = new double[rest.length + 1];
     array[0] = first;
-    System.arraycopy(rest, 0, array, 1, rest.length);
+    arraycopy(rest, 0, array, 1, rest.length);
     return new ImmutableDoubleArray(array);
   }
 
@@ -151,6 +155,10 @@ public final class ImmutableDoubleArray implements Serializable {
 
   /** Returns an immutable array containing the given values, in order. */
   public static ImmutableDoubleArray copyOf(Collection<Double> values) {
+    if (values instanceof AsList) {
+      ImmutableDoubleArray parent = ((AsList) values).parent;
+      return parent.isEmpty() ? EMPTY : new ImmutableDoubleArray(parent.toArray());
+    }
     return values.isEmpty() ? EMPTY : new ImmutableDoubleArray(Doubles.toArray(values));
   }
 
@@ -173,7 +181,6 @@ public final class ImmutableDoubleArray implements Serializable {
    *
    * @since 33.4.0 (but since 22.0 in the JRE flavor)
    */
-  @SuppressWarnings("Java7ApiChecker")
   @IgnoreJRERequirement // Users will use this only if they're already using streams.
   public static ImmutableDoubleArray copyOf(DoubleStream stream) {
     // Note this uses very different growth behavior from copyOf(Iterable) and the builder.
@@ -239,7 +246,7 @@ public final class ImmutableDoubleArray implements Serializable {
     @CanIgnoreReturnValue
     public Builder addAll(double[] values) {
       ensureRoomFor(values.length);
-      System.arraycopy(values, 0, array, count, values.length);
+      arraycopy(values, 0, array, count, values.length);
       count += values.length;
       return this;
     }
@@ -265,6 +272,13 @@ public final class ImmutableDoubleArray implements Serializable {
      */
     @CanIgnoreReturnValue
     public Builder addAll(Collection<Double> values) {
+      if (values instanceof AsList) {
+        ImmutableDoubleArray parent = ((AsList) values).parent;
+        // Preserve the scalar failure path if the combined size overflows.
+        if (parent.length() <= Integer.MAX_VALUE - count) {
+          return addAll(parent);
+        }
+      }
       ensureRoomFor(values.size());
       for (Double value : values) {
         array[count++] = value;
@@ -278,7 +292,6 @@ public final class ImmutableDoubleArray implements Serializable {
      *
      * @since 33.4.0 (but since 22.0 in the JRE flavor)
      */
-    @SuppressWarnings("Java7ApiChecker")
     @IgnoreJRERequirement // Users will use this only if they're already using streams.
     @CanIgnoreReturnValue
     public Builder addAll(DoubleStream stream) {
@@ -298,7 +311,7 @@ public final class ImmutableDoubleArray implements Serializable {
     @CanIgnoreReturnValue
     public Builder addAll(ImmutableDoubleArray values) {
       ensureRoomFor(values.length());
-      System.arraycopy(values.array, values.start, array, count, values.length());
+      arraycopy(values.array, values.start, array, count, values.length());
       count += values.length();
       return this;
     }
@@ -427,7 +440,6 @@ public final class ImmutableDoubleArray implements Serializable {
    *
    * @since 33.4.0 (but since 22.0 in the JRE flavor)
    */
-  @SuppressWarnings("Java7ApiChecker")
   @IgnoreJRERequirement // We rely on users not to call this without library desugaring.
   public void forEach(DoubleConsumer consumer) {
     checkNotNull(consumer);
@@ -441,7 +453,6 @@ public final class ImmutableDoubleArray implements Serializable {
    *
    * @since 33.4.0 (but since 22.0 in the JRE flavor)
    */
-  @SuppressWarnings("Java7ApiChecker")
   // If users use this when they shouldn't, we hope that NewApi will catch subsequent stream calls
   @IgnoreJRERequirement
   public DoubleStream stream() {
@@ -467,7 +478,6 @@ public final class ImmutableDoubleArray implements Serializable {
         : new ImmutableDoubleArray(array, start + startIndex, start + endIndex);
   }
 
-  @SuppressWarnings("Java7ApiChecker")
   @IgnoreJRERequirement // used only from APIs that use streams
   /*
    * We declare this as package-private, rather than private, to avoid generating a synthetic
@@ -493,7 +503,8 @@ public final class ImmutableDoubleArray implements Serializable {
     return new AsList(this);
   }
 
-  static class AsList extends AbstractList<Double> implements RandomAccess, Serializable {
+  private static final class AsList extends AbstractList<Double>
+      implements RandomAccess, Serializable {
     private final ImmutableDoubleArray parent;
 
     private AsList(ImmutableDoubleArray parent) {
@@ -532,15 +543,13 @@ public final class ImmutableDoubleArray implements Serializable {
       return parent.subArray(fromIndex, toIndex).asList();
     }
 
-    // The default List spliterator is not efficiently splittable
-    @Override
-    @SuppressWarnings("Java7ApiChecker")
     /*
      * This is an override that is not directly visible to callers, so NewApi will catch calls to
      * Collection.spliterator() where necessary.
      */
     @IgnoreJRERequirement
-    public Spliterator<Double> spliterator() {
+    @Override
+    public Spliterator.OfDouble spliterator() {
       return parent.spliterator();
     }
 
@@ -578,6 +587,8 @@ public final class ImmutableDoubleArray implements Serializable {
     public String toString() {
       return parent.toString();
     }
+
+    @GwtIncompatible @J2ktIncompatible     private static final long serialVersionUID = -4939467387665637038L;
   }
 
   /**
@@ -615,7 +626,7 @@ public final class ImmutableDoubleArray implements Serializable {
     int hash = 1;
     for (int i = start; i < end; i++) {
       hash *= 31;
-      hash += Doubles.hashCode(array[i]);
+      hash += Double.hashCode(array[i]);
     }
     return hash;
   }
@@ -660,4 +671,6 @@ public final class ImmutableDoubleArray implements Serializable {
   Object readResolve() {
     return isEmpty() ? EMPTY : this;
   }
+
+  @GwtIncompatible @J2ktIncompatible   private static final long serialVersionUID = 679347448744984100L;
 }

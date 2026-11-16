@@ -17,6 +17,7 @@
 package jdk.m3.collections.guava.collect;
 
 import jdk.m3.collections.guava.base.Function;
+import jdk.m3.collections.guava.collect.ForwardingSortedMap.SimpleForwardingSortedMap;
 import jdk.m3.collections.guava.collect.testing.Helpers.NullsBeforeTwo;
 import jdk.m3.collections.guava.collect.testing.SafeTreeMap;
 import jdk.m3.collections.guava.collect.testing.SortedMapTestSuiteBuilder;
@@ -46,25 +47,18 @@ import org.jspecify.annotations.Nullable;
  */
 @NullUnmarked
 public class ForwardingSortedMapTest extends TestCase {
-  static class StandardImplForwardingSortedMap<K, V> extends ForwardingSortedMap<K, V> {
-    private final SortedMap<K, V> backingSortedMap;
-
+  static class StandardImplForwardingSortedMap<K, V> extends SimpleForwardingSortedMap<K, V> {
     StandardImplForwardingSortedMap(SortedMap<K, V> backingSortedMap) {
-      this.backingSortedMap = backingSortedMap;
+      super(backingSortedMap);
     }
 
     @Override
-    protected SortedMap<K, V> delegate() {
-      return backingSortedMap;
-    }
-
-    @Override
-    public boolean containsKey(Object key) {
+    public boolean containsKey(@Nullable Object key) {
       return standardContainsKey(key);
     }
 
     @Override
-    public boolean containsValue(Object value) {
+    public boolean containsValue(@Nullable Object value) {
       return standardContainsValue(value);
     }
 
@@ -74,7 +68,7 @@ public class ForwardingSortedMapTest extends TestCase {
     }
 
     @Override
-    public @Nullable V remove(Object object) {
+    public @Nullable V remove(@Nullable Object object) {
       return standardRemove(object);
     }
 
@@ -108,7 +102,7 @@ public class ForwardingSortedMapTest extends TestCase {
       return new StandardEntrySet() {
         @Override
         public Iterator<Entry<K, V>> iterator() {
-          return backingSortedMap.entrySet().iterator();
+          return delegate().entrySet().iterator();
         }
       };
     }
@@ -159,7 +153,7 @@ public class ForwardingSortedMapTest extends TestCase {
     suite.addTest(
         SortedMapTestSuiteBuilder.using(
                 new TestStringSortedMapGenerator() {
-                  private final Comparator<String> comparator = NullsBeforeTwo.INSTANCE;
+                  final Comparator<String> comparator = NullsBeforeTwo.INSTANCE;
 
                   @Override
                   protected SortedMap<String, String> create(Entry<String, String>[] entries) {
@@ -195,7 +189,7 @@ public class ForwardingSortedMapTest extends TestCase {
                     return new StandardImplForwardingSortedMap<>(builder.build());
                   }
                 })
-            .named("ForwardingSortedMap[ImmutableSortedMap] with standard " + "implementations")
+            .named("ForwardingSortedMap[ImmutableSortedMap] with standard implementations")
             .withFeatures(
                 CollectionSize.ANY,
                 MapFeature.REJECTS_DUPLICATES_AT_CREATION,
@@ -227,7 +221,7 @@ public class ForwardingSortedMapTest extends TestCase {
         .testEquals();
   }
 
-  private static <K, V> SortedMap<K, V> wrap(final SortedMap<K, V> delegate) {
+  private static <K, V> SortedMap<K, V> wrap(SortedMap<K, V> delegate) {
     return new ForwardingSortedMap<K, V>() {
       @Override
       protected SortedMap<K, V> delegate() {

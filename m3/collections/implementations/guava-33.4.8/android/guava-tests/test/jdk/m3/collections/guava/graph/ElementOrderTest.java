@@ -19,7 +19,7 @@ package jdk.m3.collections.guava.graph;
 import static jdk.m3.collections.guava.base.Preconditions.checkNotNull;
 import static jdk.m3.collections.guava.graph.ElementOrder.insertion;
 import static jdk.m3.collections.guava.graph.ElementOrder.unordered;
-import static com.google.common.truth.Truth.assertThat;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
 
 import jdk.m3.collections.guava.collect.Ordering;
 import java.util.Comparator;
@@ -173,12 +173,7 @@ public final class ElementOrderTest {
   @Test
   public void customComparator() {
     Comparator<NonComparableSuperClass> comparator =
-        new Comparator<NonComparableSuperClass>() {
-          @Override
-          public int compare(NonComparableSuperClass left, NonComparableSuperClass right) {
-            return left.value.compareTo(right.value);
-          }
-        };
+        (left, right) -> left.value.compareTo(right.value);
 
     MutableGraph<NonComparableSuperClass> graph =
         GraphBuilder.undirected().nodeOrder(ElementOrder.sorted(comparator)).build();

@@ -16,32 +16,33 @@ package jdk.m3.collections.guava.eventbus;
 
 import static jdk.m3.collections.guava.base.Preconditions.checkArgument;
 import static jdk.m3.collections.guava.base.Preconditions.checkNotNull;
+import static jdk.m3.collections.guava.collect.Iterators.concat;
+import static jdk.m3.collections.guava.collect.Lists.newArrayListWithCapacity;
+import static java.util.Arrays.asList;
 
 import jdk.m3.collections.guava.annotations.VisibleForTesting;
 import jdk.m3.collections.guava.base.MoreObjects;
-import jdk.m3.collections.guava.base.Objects;
 import jdk.m3.collections.guava.cache.CacheBuilder;
 import jdk.m3.collections.guava.cache.CacheLoader;
 import jdk.m3.collections.guava.cache.LoadingCache;
 import jdk.m3.collections.guava.collect.HashMultimap;
 import jdk.m3.collections.guava.collect.ImmutableList;
 import jdk.m3.collections.guava.collect.ImmutableSet;
-import jdk.m3.collections.guava.collect.Iterators;
-import jdk.m3.collections.guava.collect.Lists;
-import jdk.m3.collections.guava.collect.Maps;
 import jdk.m3.collections.guava.collect.Multimap;
 import jdk.m3.collections.guava.primitives.Primitives;
 import jdk.m3.collections.guava.reflect.TypeToken;
 import jdk.m3.collections.guava.util.concurrent.UncheckedExecutionException;
 import com.google.j2objc.annotations.Weak;
 import java.lang.reflect.Method;
-import java.util.Arrays;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Objects;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.CopyOnWriteArraySet;
 import org.jspecify.annotations.Nullable;
@@ -60,7 +61,7 @@ final class SubscriberRegistry {
    * immutable snapshot of all current subscribers to an event without any locking.
    */
   private final ConcurrentMap<Class<?>, CopyOnWriteArraySet<Subscriber>> subscribers =
-      Maps.newConcurrentMap();
+      new ConcurrentHashMap<>();
 
   /** The event bus this registry belongs to. */
   @Weak private final EventBus bus;
@@ -124,8 +125,7 @@ final class SubscriberRegistry {
   Iterator<Subscriber> getSubscribers(Object event) {
     ImmutableSet<Class<?>> eventTypes = flattenHierarchy(event.getClass());
 
-    List<Iterator<Subscriber>> subscriberIterators =
-        Lists.newArrayListWithCapacity(eventTypes.size());
+    List<Iterator<Subscriber>> subscriberIterators = newArrayListWithCapacity(eventTypes.size());
 
     for (Class<?> eventType : eventTypes) {
       CopyOnWriteArraySet<Subscriber> eventSubscribers = subscribers.get(eventType);
@@ -135,7 +135,7 @@ final class SubscriberRegistry {
       }
     }
 
-    return Iterators.concat(subscriberIterators.iterator());
+    return concat(subscriberIterators.iterator());
   }
 
   /**
@@ -191,7 +191,7 @@ final class SubscriberRegistry {
 
   private static ImmutableList<Method> getAnnotatedMethodsNotCached(Class<?> clazz) {
     Set<? extends Class<?>> supertypes = TypeToken.of(clazz).getTypes().rawTypes();
-    Map<MethodIdentifier, Method> identifiers = Maps.newHashMap();
+    Map<MethodIdentifier, Method> identifiers = new HashMap<>();
     for (Class<?> supertype : supertypes) {
       for (Method method : supertype.getDeclaredMethods()) {
         if (method.isAnnotationPresent(Subscribe.class) && !method.isSynthetic()) {
@@ -228,9 +228,8 @@ final class SubscriberRegistry {
       CacheBuilder.newBuilder()
           .weakKeys()
           .build(
-              CacheLoader.from(
-                  concreteClass ->
-                      ImmutableSet.copyOf(TypeToken.of(concreteClass).getTypes().rawTypes())));
+              CacheLoader.from(concreteClass ->
+                  ImmutableSet.copyOf(TypeToken.of(concreteClass).getTypes().rawTypes())));
 
   /**
    * Flattens a class's type hierarchy into a set of {@code Class} objects including all
@@ -248,12 +247,12 @@ final class SubscriberRegistry {
 
     MethodIdentifier(Method method) {
       this.name = method.getName();
-      this.parameterTypes = Arrays.asList(method.getParameterTypes());
+      this.parameterTypes = asList(method.getParameterTypes());
     }
 
     @Override
     public int hashCode() {
-      return Objects.hashCode(name, parameterTypes);
+      return Objects.hash(name, parameterTypes);
     }
 
     @Override

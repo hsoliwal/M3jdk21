@@ -16,16 +16,21 @@
 
 package jdk.m3.collections.guava.primitives;
 
+import static jdk.m3.collections.guava.collect.testing.Helpers.testComparator;
 import static jdk.m3.collections.guava.primitives.UnsignedBytes.max;
 import static jdk.m3.collections.guava.primitives.UnsignedBytes.min;
-import static com.google.common.truth.Truth.assertThat;
-import static com.google.common.truth.Truth.assertWithMessage;
+import static jdk.m3.collections.guava.testing.SerializableTester.reserialize;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
+import static jdk.m3.collections.guava.truth.Truth.assertWithMessage;
+import static java.lang.Byte.toUnsignedInt;
 import static java.lang.Math.signum;
+import static java.util.Arrays.asList;
 import static org.junit.Assert.assertThrows;
 
-import jdk.m3.collections.guava.collect.testing.Helpers;
+import jdk.m3.collections.guava.annotations.GwtIncompatible;
+import jdk.m3.collections.guava.annotations.J2ktIncompatible;
+import jdk.m3.collections.guava.primitives.UnsignedBytes.LexicographicalComparatorHolder.UnsafeComparator;
 import jdk.m3.collections.guava.testing.NullPointerTester;
-import jdk.m3.collections.guava.testing.SerializableTester;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
@@ -40,6 +45,8 @@ import org.jspecify.annotations.NullUnmarked;
  * @author Louis Wasserman
  */
 @NullUnmarked
+@GwtIncompatible
+@J2ktIncompatible
 public class UnsignedBytesTest extends TestCase {
   private static final byte LEAST = 0;
   private static final byte GREATEST = (byte) 255;
@@ -47,6 +54,7 @@ public class UnsignedBytesTest extends TestCase {
   // Only in this class, VALUES must be strictly ascending
   private static final byte[] VALUES = {LEAST, 127, (byte) 128, (byte) 129, GREATEST};
 
+  @SuppressWarnings("InlineMeInliner") // We need to test our method.
   public void testToInt() {
     assertThat(UnsignedBytes.toInt((byte) 0)).isEqualTo(0);
     assertThat(UnsignedBytes.toInt((byte) 1)).isEqualTo(1);
@@ -58,7 +66,7 @@ public class UnsignedBytesTest extends TestCase {
 
   public void testCheckedCast() {
     for (byte value : VALUES) {
-      assertThat(UnsignedBytes.checkedCast(UnsignedBytes.toInt(value))).isEqualTo(value);
+      assertThat(UnsignedBytes.checkedCast(toUnsignedInt(value))).isEqualTo(value);
     }
     assertCastFails(256L);
     assertCastFails(-1L);
@@ -68,7 +76,7 @@ public class UnsignedBytesTest extends TestCase {
 
   public void testSaturatedCast() {
     for (byte value : VALUES) {
-      assertThat(UnsignedBytes.saturatedCast(UnsignedBytes.toInt(value))).isEqualTo(value);
+      assertThat(UnsignedBytes.saturatedCast(toUnsignedInt(value))).isEqualTo(value);
     }
     assertThat(UnsignedBytes.saturatedCast(256L)).isEqualTo(GREATEST);
     assertThat(UnsignedBytes.saturatedCast(-1L)).isEqualTo(LEAST);
@@ -77,14 +85,9 @@ public class UnsignedBytesTest extends TestCase {
   }
 
   private static void assertCastFails(long value) {
-    try {
-      UnsignedBytes.checkedCast(value);
-      fail("Cast to byte should have failed: " + value);
-    } catch (IllegalArgumentException ex) {
-      assertWithMessage(value + " not found in exception text: " + ex.getMessage())
-          .that(ex.getMessage().contains(String.valueOf(value)))
-          .isTrue();
-    }
+    IllegalArgumentException ex =
+        assertThrows(IllegalArgumentException.class, () -> UnsignedBytes.checkedCast(value));
+    assertThat(ex).hasMessageThat().contains(String.valueOf(value));
   }
 
   public void testCompare() {
@@ -95,7 +98,7 @@ public class UnsignedBytesTest extends TestCase {
         byte x = VALUES[i];
         byte y = VALUES[j];
         // note: spec requires only that the sign is the same
-        assertWithMessage(x + ", " + y)
+        assertWithMessage("%s, %s", x, y)
             .that(signum(UnsignedBytes.compare(x, y)))
             .isEqualTo(signum(Integer.compare(i, j)));
       }
@@ -124,19 +127,11 @@ public class UnsignedBytesTest extends TestCase {
   }
 
   private static void assertParseFails(String value) {
-    try {
-      UnsignedBytes.parseUnsignedByte(value);
-      fail();
-    } catch (NumberFormatException expected) {
-    }
+    assertThrows(NumberFormatException.class, () -> UnsignedBytes.parseUnsignedByte(value));
   }
 
   private static void assertParseFails(String value, int radix) {
-    try {
-      UnsignedBytes.parseUnsignedByte(value, radix);
-      fail();
-    } catch (NumberFormatException expected) {
-    }
+    assertThrows(NumberFormatException.class, () -> UnsignedBytes.parseUnsignedByte(value, radix));
   }
 
   public void testParseUnsignedByte() {
@@ -155,7 +150,7 @@ public class UnsignedBytesTest extends TestCase {
         .isGreaterThan(0);
   }
 
-  public void testParseUnsignedByteWithRadix() throws NumberFormatException {
+  public void testParseUnsignedByteWithRadix() {
     // We can easily afford to test this exhaustively.
     for (int radix = Character.MIN_RADIX; radix <= Character.MAX_RADIX; radix++) {
       for (int i = 0; i <= 0xff; i++) {
@@ -208,53 +203,24 @@ public class UnsignedBytesTest extends TestCase {
     assertThat(UnsignedBytes.join(",", (byte) 128, (byte) -1)).isEqualTo("128,255");
   }
 
-  private static String unsafeComparatorClassName() {
-    return UnsignedBytes.LexicographicalComparatorHolder.class.getName() + "$UnsafeComparator";
-  }
-
   private static boolean unsafeComparatorAvailable() {
-    // See Java Puzzler #44
-    // Use reflection instead of catching NoClassDefFoundError
-    try {
-      Class.forName(unsafeComparatorClassName());
-      return true;
-    } catch (Error | ClassNotFoundException tolerable) {
-      /*
-       * We're probably running on Android.
-       *
-       * A note on exception types:
-       *
-       * Android API level 10 throws ExceptionInInitializerError the first time and
-       * ClassNotFoundException thereafter.
-       *
-       * Android API level 26 and JVM8 both let our Error propagate directly the first time and
-       * throw NoClassDefFoundError thereafter. This is the proper behavior according to the spec.
-       * See https://docs.oracle.com/javase/specs/jls/se8/html/jls-12.html#jls-12.4.2 (steps #11 and
-       * #5).
-       *
-       * Note that that "first time" might happen in a test other than
-       * testLexicographicalComparatorChoice!
-       */
-      return false;
-    }
+    return UnsafeComparator.INSTANCE.isFunctional();
   }
 
-  public void testLexicographicalComparatorChoice() throws Exception {
+  public void testLexicographicalComparatorChoice() {
     Comparator<byte[]> defaultComparator = UnsignedBytes.lexicographicalComparator();
     assertThat(defaultComparator).isNotNull();
     assertThat(UnsignedBytes.lexicographicalComparator()).isSameInstanceAs(defaultComparator);
     if (unsafeComparatorAvailable()) {
-      assertThat(Class.forName(unsafeComparatorClassName()))
-          .isSameInstanceAs(defaultComparator.getClass());
+      assertThat(defaultComparator).isInstanceOf(UnsafeComparator.class);
     } else {
-      assertThat(UnsignedBytes.lexicographicalComparatorJavaImpl())
-          .isSameInstanceAs(defaultComparator);
+      assertThat(defaultComparator).isEqualTo(UnsignedBytes.lexicographicalComparatorJavaImpl());
     }
   }
 
   public void testLexicographicalComparator() {
     List<byte[]> ordered =
-        Arrays.asList(
+        asList(
             new byte[] {},
             new byte[] {LEAST},
             new byte[] {LEAST, LEAST},
@@ -267,13 +233,13 @@ public class UnsignedBytesTest extends TestCase {
 
     // The VarHandle, Unsafe, or Java implementation.
     Comparator<byte[]> comparator = UnsignedBytes.lexicographicalComparator();
-    Helpers.testComparator(comparator, ordered);
-    assertThat(SerializableTester.reserialize(comparator)).isSameInstanceAs(comparator);
+    testComparator(comparator, ordered);
+    assertThat(reserialize(comparator)).isSameInstanceAs(comparator);
 
     // The Java implementation.
     Comparator<byte[]> javaImpl = UnsignedBytes.lexicographicalComparatorJavaImpl();
-    Helpers.testComparator(javaImpl, ordered);
-    assertThat(SerializableTester.reserialize(javaImpl)).isSameInstanceAs(javaImpl);
+    testComparator(javaImpl, ordered);
+    assertThat(reserialize(javaImpl)).isSameInstanceAs(javaImpl);
   }
 
   public void testLexicographicalComparatorLongPseudorandomInputs() {

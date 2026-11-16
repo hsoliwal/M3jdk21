@@ -16,17 +16,17 @@
 
 package jdk.m3.collections.guava.eventbus.outside;
 
-import static com.google.common.truth.Truth.assertThat;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
 
-import jdk.m3.collections.guava.collect.Lists;
 import jdk.m3.collections.guava.eventbus.Subscribe;
 import jdk.m3.collections.guava.eventbus.outside.BaseSubscriberFinderTest.Subscriber;
+import java.util.ArrayList;
 import java.util.List;
 
 public class BaseSubscriberFinderTest extends AbstractEventBusTest<Subscriber> {
   static class Subscriber {
-    final List<Object> nonSubscriberEvents = Lists.newArrayList();
-    final List<Object> subscriberEvents = Lists.newArrayList();
+    final List<Object> nonSubscriberEvents = new ArrayList<>();
+    final List<Object> subscriberEvents = new ArrayList<>();
 
     public void notASubscriber(Object o) {
       nonSubscriberEvents.add(o);

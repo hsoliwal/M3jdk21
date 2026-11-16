@@ -16,9 +16,11 @@
 
 package jdk.m3.collections.guava.collect;
 
+import static jdk.m3.collections.guava.collect.Sets.newTreeSet;
 import static java.util.Arrays.asList;
 
 import jdk.m3.collections.guava.base.Function;
+import jdk.m3.collections.guava.collect.ForwardingSortedSet.SimpleForwardingSortedSet;
 import jdk.m3.collections.guava.collect.testing.SafeTreeSet;
 import jdk.m3.collections.guava.collect.testing.SortedSetTestSuiteBuilder;
 import jdk.m3.collections.guava.collect.testing.TestStringSortedSetGenerator;
@@ -26,6 +28,7 @@ import jdk.m3.collections.guava.collect.testing.features.CollectionFeature;
 import jdk.m3.collections.guava.collect.testing.features.CollectionSize;
 import jdk.m3.collections.guava.testing.EqualsTester;
 import jdk.m3.collections.guava.testing.ForwardingWrapperTester;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.SortedSet;
@@ -42,16 +45,9 @@ import org.jspecify.annotations.Nullable;
  */
 @NullUnmarked
 public class ForwardingSortedSetTest extends TestCase {
-  static class StandardImplForwardingSortedSet<T> extends ForwardingSortedSet<T> {
-    private final SortedSet<T> backingSortedSet;
-
+  static class StandardImplForwardingSortedSet<T> extends SimpleForwardingSortedSet<T> {
     StandardImplForwardingSortedSet(SortedSet<T> backingSortedSet) {
-      this.backingSortedSet = backingSortedSet;
-    }
-
-    @Override
-    protected SortedSet<T> delegate() {
-      return backingSortedSet;
+      super(backingSortedSet);
     }
 
     @Override
@@ -136,7 +132,7 @@ public class ForwardingSortedSetTest extends TestCase {
 
                   @Override
                   public List<String> order(List<String> insertionOrder) {
-                    return Lists.newArrayList(Sets.newTreeSet(insertionOrder));
+                    return new ArrayList<>(newTreeSet(insertionOrder));
                   }
                 })
             .named("ForwardingSortedSet[SafeTreeSet] with standard implementations")
@@ -171,7 +167,7 @@ public class ForwardingSortedSetTest extends TestCase {
         .testEquals();
   }
 
-  private static <T> SortedSet<T> wrap(final SortedSet<T> delegate) {
+  private static <T> SortedSet<T> wrap(SortedSet<T> delegate) {
     return new ForwardingSortedSet<T>() {
       @Override
       protected SortedSet<T> delegate() {

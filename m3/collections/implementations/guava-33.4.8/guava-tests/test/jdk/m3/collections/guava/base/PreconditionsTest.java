@@ -22,15 +22,16 @@ import static jdk.m3.collections.guava.base.Preconditions.checkNotNull;
 import static jdk.m3.collections.guava.base.Preconditions.checkPositionIndex;
 import static jdk.m3.collections.guava.base.Preconditions.checkPositionIndexes;
 import static jdk.m3.collections.guava.base.Preconditions.checkState;
-import static jdk.m3.collections.guava.base.ReflectionFreeAssertThrows.assertThrows;
-import static com.google.common.truth.Truth.assertThat;
+import static jdk.m3.collections.guava.base.Strings.lenientFormat;
+import static jdk.m3.collections.guava.collect.Lists.cartesianProduct;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
+import static org.junit.Assert.assertThrows;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
 import jdk.m3.collections.guava.annotations.J2ktIncompatible;
 import jdk.m3.collections.guava.collect.ImmutableList;
 import jdk.m3.collections.guava.collect.ImmutableSet;
-import jdk.m3.collections.guava.collect.Lists;
 import jdk.m3.collections.guava.testing.ArbitraryInstances;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -50,7 +51,7 @@ import org.jspecify.annotations.Nullable;
  */
 @NullMarked
 @SuppressWarnings("LenientFormatStringValidation") // Intentional for testing
-@GwtCompatible(emulated = true)
+@GwtCompatible
 public class PreconditionsTest extends TestCase {
   public void testCheckArgument_simple_success() {
     checkArgument(true);
@@ -167,7 +168,7 @@ public class PreconditionsTest extends TestCase {
 
   public void testCheckNotNull_simple_success() {
     String result = checkNotNull(NON_NULL_STRING);
-    assertSame(NON_NULL_STRING, result);
+    assertThat(result).isSameInstanceAs(NON_NULL_STRING);
   }
 
   public void testCheckNotNull_simple_failure() {
@@ -176,7 +177,7 @@ public class PreconditionsTest extends TestCase {
 
   public void testCheckNotNull_simpleMessage_success() {
     String result = checkNotNull(NON_NULL_STRING, IGNORE_ME);
-    assertSame(NON_NULL_STRING, result);
+    assertThat(result).isSameInstanceAs(NON_NULL_STRING);
   }
 
   public void testCheckNotNull_simpleMessage_failure() {
@@ -187,7 +188,7 @@ public class PreconditionsTest extends TestCase {
 
   public void testCheckNotNull_complexMessage_success() {
     String result = checkNotNull(NON_NULL_STRING, "%s", IGNORE_ME);
-    assertSame(NON_NULL_STRING, result);
+    assertThat(result).isSameInstanceAs(NON_NULL_STRING);
   }
 
   public void testCheckNotNull_complexMessage_failure() {
@@ -297,7 +298,7 @@ public class PreconditionsTest extends TestCase {
         .isEqualTo("end index (0) must not be less than start index (1)");
   }
 
-  @GwtIncompatible("Reflection")
+  @GwtIncompatible // Reflection
   @J2ktIncompatible
   public void testAllOverloads_checkArgument() throws Exception {
     for (ImmutableList<Class<?>> sig : allSignatures(boolean.class)) {
@@ -314,7 +315,7 @@ public class PreconditionsTest extends TestCase {
     }
   }
 
-  @GwtIncompatible("Reflection")
+  @GwtIncompatible // Reflection
   @J2ktIncompatible
   public void testAllOverloads_checkState() throws Exception {
     for (ImmutableList<Class<?>> sig : allSignatures(boolean.class)) {
@@ -331,7 +332,7 @@ public class PreconditionsTest extends TestCase {
     }
   }
 
-  @GwtIncompatible("Reflection")
+  @GwtIncompatible // Reflection
   @J2ktIncompatible
   public void testAllOverloads_checkNotNull() throws Exception {
     for (ImmutableList<Class<?>> sig : allSignatures(Object.class)) {
@@ -353,7 +354,7 @@ public class PreconditionsTest extends TestCase {
    * Asserts that the given throwable has the given class and then asserts on the message as using
    * the full set of method parameters.
    */
-  private void assertFailureCause(
+  private static void assertFailureCause(
       Throwable throwable, Class<? extends Throwable> clazz, Object[] params) {
     assertThat(throwable).isInstanceOf(clazz);
     if (params.length == 1) {
@@ -363,7 +364,7 @@ public class PreconditionsTest extends TestCase {
     } else {
       assertThat(throwable)
           .hasMessageThat()
-          .isEqualTo(Strings.lenientFormat("", Arrays.copyOfRange(params, 2, params.length)));
+          .isEqualTo(lenientFormat("", Arrays.copyOfRange(params, 2, params.length)));
     }
   }
 
@@ -374,9 +375,9 @@ public class PreconditionsTest extends TestCase {
    * @param firstParam The first parameter
    * @param sig The method signature
    */
-  @GwtIncompatible("ArbitraryInstances")
+  @GwtIncompatible // ArbitraryInstances
   @J2ktIncompatible
-  private Object[] getParametersForSignature(
+  private static Object[] getParametersForSignature(
       @Nullable Object firstParam, ImmutableList<Class<?>> sig) {
     Object[] params = new Object[sig.size()];
     params[0] = firstParam;
@@ -405,13 +406,13 @@ public class PreconditionsTest extends TestCase {
     ImmutableSet.Builder<ImmutableList<Class<?>>> allOverloads = ImmutableSet.builder();
     // The first two are for the overloads that don't take formatting args, e.g.
     // checkArgument(boolean) and checkArgument(boolean, Object)
-    allOverloads.add(ImmutableList.<Class<?>>of(predicateType));
-    allOverloads.add(ImmutableList.<Class<?>>of(predicateType, Object.class));
+    allOverloads.add(ImmutableList.of(predicateType));
+    allOverloads.add(ImmutableList.of(predicateType, Object.class));
 
     List<List<Class<?>>> typesLists = new ArrayList<>();
     for (int i = 0; i < 2; i++) {
       typesLists.add(POSSIBLE_PARAM_TYPES);
-      for (List<Class<?>> curr : Lists.cartesianProduct(typesLists)) {
+      for (List<Class<?>> curr : cartesianProduct(typesLists)) {
         allOverloads.add(
             ImmutableList.<Class<?>>builder()
                 .add(predicateType)
@@ -426,7 +427,7 @@ public class PreconditionsTest extends TestCase {
   // 'test' to demonstrate some potentially ambiguous overloads.  This 'test' is kind of strange,
   // but essentially each line will be a call to a Preconditions method that, but for a documented
   // change would be a compiler error.
-  // See http://docs.oracle.com/javase/specs/jls/se7/html/jls-15.html#jls-15.12.2 for the spec on
+  // See https://docs.oracle.com/javase/specs/jls/se27/html/jls-15.html#jls-15.12.2 for the spec on
   // how javac selects overloads
   @SuppressWarnings("null")
   public void overloadSelection() {

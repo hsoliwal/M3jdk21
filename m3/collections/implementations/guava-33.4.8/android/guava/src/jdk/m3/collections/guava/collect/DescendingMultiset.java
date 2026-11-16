@@ -18,7 +18,6 @@ package jdk.m3.collections.guava.collect;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import com.google.errorprone.annotations.concurrent.LazyInit;
-import com.google.j2objc.annotations.WeakOuter;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.NavigableSet;
@@ -31,31 +30,26 @@ import org.jspecify.annotations.Nullable;
  *
  * @author Louis Wasserman
  */
-@GwtCompatible(emulated = true)
+@GwtCompatible
 abstract class DescendingMultiset<E extends @Nullable Object> extends ForwardingMultiset<E>
     implements SortedMultiset<E> {
   abstract SortedMultiset<E> forwardMultiset();
 
-  @LazyInit private transient @Nullable Comparator<? super E> comparator;
+  @LazyInit private @Nullable Comparator<? super E> comparator;
 
   @Override
   public Comparator<? super E> comparator() {
     Comparator<? super E> result = comparator;
     if (result == null) {
-      return comparator = Ordering.from(forwardMultiset().comparator()).<E>reverse();
+      result = Ordering.from(forwardMultiset().comparator()).reverse();
+      comparator = result;
     }
     return result;
   }
 
-  @LazyInit private transient @Nullable NavigableSet<E> elementSet;
-
   @Override
   public NavigableSet<E> elementSet() {
-    NavigableSet<E> result = elementSet;
-    if (result == null) {
-      return elementSet = new SortedMultisets.NavigableElementSet<>(this);
-    }
-    return result;
+    return new SortedMultisets.NavigableElementSet<>(this);
   }
 
   @Override
@@ -111,17 +105,9 @@ abstract class DescendingMultiset<E extends @Nullable Object> extends Forwarding
 
   abstract Iterator<Entry<E>> entryIterator();
 
-  @LazyInit private transient @Nullable Set<Entry<E>> entrySet;
-
   @Override
   public Set<Entry<E>> entrySet() {
-    Set<Entry<E>> result = entrySet;
-    return (result == null) ? entrySet = createEntrySet() : result;
-  }
-
-  Set<Entry<E>> createEntrySet() {
-    @WeakOuter
-    class EntrySetImpl extends Multisets.EntrySet<E> {
+    final class EntrySetImpl extends Multisets.EntrySet<E> {
       @Override
       Multiset<E> multiset() {
         return DescendingMultiset.this;

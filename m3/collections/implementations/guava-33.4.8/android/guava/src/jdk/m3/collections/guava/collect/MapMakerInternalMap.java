@@ -14,9 +14,11 @@
 
 package jdk.m3.collections.guava.collect;
 
+import static jdk.m3.collections.guava.base.Preconditions.checkArgument;
 import static jdk.m3.collections.guava.base.Preconditions.checkNotNull;
 import static jdk.m3.collections.guava.collect.CollectPreconditions.checkRemove;
 import static java.lang.Math.min;
+import static java.util.Objects.requireNonNull;
 
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
 import jdk.m3.collections.guava.annotations.J2ktIncompatible;
@@ -26,9 +28,7 @@ import jdk.m3.collections.guava.collect.MapMaker.Dummy;
 import jdk.m3.collections.guava.primitives.Ints;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import com.google.errorprone.annotations.concurrent.GuardedBy;
-import com.google.errorprone.annotations.concurrent.LazyInit;
 import com.google.j2objc.annotations.Weak;
-import com.google.j2objc.annotations.WeakOuter;
 import java.io.IOException;
 import java.io.InvalidObjectException;
 import java.io.ObjectInputStream;
@@ -38,7 +38,7 @@ import java.lang.ref.Reference;
 import java.lang.ref.ReferenceQueue;
 import java.lang.ref.WeakReference;
 import java.util.AbstractCollection;
-import java.util.AbstractMap;
+import java.util.AbstractMap.SimpleEntry;
 import java.util.AbstractSet;
 import java.util.Collection;
 import java.util.Iterator;
@@ -75,12 +75,12 @@ import org.jspecify.annotations.Nullable;
   "nullness", // too much trouble for the payoff
 })
 @NullUnmarked // TODO(cpovirk): Annotate for nullness.
-class MapMakerInternalMap<
+final class MapMakerInternalMap<
         K,
         V,
         E extends MapMakerInternalMap.InternalEntry<K, V, E>,
         S extends MapMakerInternalMap.Segment<K, V, E, S>>
-    extends AbstractMap<K, V> implements ConcurrentMap<K, V>, Serializable {
+    implements ConcurrentMap<K, V>, Serializable {
 
   /*
    * The basic strategy is to subdivide the table among Segments, each of which itself is a
@@ -205,18 +205,18 @@ class MapMakerInternalMap<
       MapMaker builder) {
     if (builder.getKeyStrength() == Strength.STRONG
         && builder.getValueStrength() == Strength.STRONG) {
-      return new MapMakerInternalMap<>(builder, StrongKeyStrongValueEntry.Helper.<K, V>instance());
+      return new MapMakerInternalMap<>(builder, StrongKeyStrongValueEntry.Helper.instance());
     }
     if (builder.getKeyStrength() == Strength.STRONG
         && builder.getValueStrength() == Strength.WEAK) {
-      return new MapMakerInternalMap<>(builder, StrongKeyWeakValueEntry.Helper.<K, V>instance());
+      return new MapMakerInternalMap<>(builder, StrongKeyWeakValueEntry.Helper.instance());
     }
     if (builder.getKeyStrength() == Strength.WEAK
         && builder.getValueStrength() == Strength.STRONG) {
-      return new MapMakerInternalMap<>(builder, WeakKeyStrongValueEntry.Helper.<K, V>instance());
+      return new MapMakerInternalMap<>(builder, WeakKeyStrongValueEntry.Helper.instance());
     }
     if (builder.getKeyStrength() == Strength.WEAK && builder.getValueStrength() == Strength.WEAK) {
-      return new MapMakerInternalMap<>(builder, WeakKeyWeakValueEntry.Helper.<K, V>instance());
+      return new MapMakerInternalMap<>(builder, WeakKeyWeakValueEntry.Helper.instance());
     }
     throw new AssertionError();
   }
@@ -236,15 +236,14 @@ class MapMakerInternalMap<
           MapMaker builder) {
     if (builder.getKeyStrength() == Strength.STRONG
         && builder.getValueStrength() == Strength.STRONG) {
-      return new MapMakerInternalMap<>(builder, StrongKeyDummyValueEntry.Helper.<K>instance());
+      return new MapMakerInternalMap<>(builder, StrongKeyDummyValueEntry.Helper.instance());
     }
     if (builder.getKeyStrength() == Strength.WEAK
         && builder.getValueStrength() == Strength.STRONG) {
-      return new MapMakerInternalMap<>(builder, WeakKeyDummyValueEntry.Helper.<K>instance());
+      return new MapMakerInternalMap<>(builder, WeakKeyDummyValueEntry.Helper.instance());
     }
-    if (builder.getValueStrength() == Strength.WEAK) {
-      throw new IllegalArgumentException("Map cannot have both weak and dummy values");
-    }
+    checkArgument(
+        builder.getValueStrength() != Strength.WEAK, "Map cannot have both weak and dummy values");
     throw new AssertionError();
   }
 
@@ -576,7 +575,7 @@ class MapMakerInternalMap<
   }
 
   /** Concrete implementation of {@link InternalEntry} for strong keys and {@link Dummy} values. */
-  static class StrongKeyDummyValueEntry<K>
+  private static class StrongKeyDummyValueEntry<K>
       extends AbstractStrongKeyEntry<K, Dummy, StrongKeyDummyValueEntry<K>>
       implements StrongValueEntry<K, Dummy, StrongKeyDummyValueEntry<K>> {
 
@@ -667,7 +666,7 @@ class MapMakerInternalMap<
     final int hash;
 
     AbstractWeakKeyEntry(ReferenceQueue<K> queue, K key, int hash) {
-      super(key, queue);
+      super(checkNotValueType(key), queue);
       this.hash = hash;
     }
 
@@ -688,7 +687,7 @@ class MapMakerInternalMap<
   }
 
   /** Concrete implementation of {@link InternalEntry} for weak keys and {@link Dummy} values. */
-  static class WeakKeyDummyValueEntry<K>
+  private static class WeakKeyDummyValueEntry<K>
       extends AbstractWeakKeyEntry<K, Dummy, WeakKeyDummyValueEntry<K>>
       implements StrongValueEntry<K, Dummy, WeakKeyDummyValueEntry<K>> {
 
@@ -872,7 +871,7 @@ class MapMakerInternalMap<
   }
 
   /** Concrete implementation of {@link InternalEntry} for weak keys and weak values. */
-  static class WeakKeyWeakValueEntry<K, V>
+  private static class WeakKeyWeakValueEntry<K, V>
       extends AbstractWeakKeyEntry<K, V, WeakKeyWeakValueEntry<K, V>>
       implements WeakValueEntry<K, V, WeakKeyWeakValueEntry<K, V>> {
     private volatile WeakValueReference<K, V, WeakKeyWeakValueEntry<K, V>> valueReference =
@@ -1059,7 +1058,7 @@ class MapMakerInternalMap<
     @Weak final E entry;
 
     WeakValueReferenceImpl(ReferenceQueue<V> queue, V referent, E entry) {
-      super(referent, queue);
+      super(checkNotValueType(referent), queue);
       this.entry = entry;
     }
 
@@ -1087,9 +1086,9 @@ class MapMakerInternalMap<
     // using variant of single-word Wang/Jenkins hash.
     // TODO(kevinb): use Hashing/move this to Hashing?
     h += (h << 15) ^ 0xffffcd7d;
-    h ^= (h >>> 10);
-    h += (h << 3);
-    h ^= (h >>> 6);
+    h ^= h >>> 10;
+    h += h << 3;
+    h ^= h >>> 6;
     h += (h << 2) + (h << 14);
     return h ^ (h >>> 16);
   }
@@ -1156,7 +1155,7 @@ class MapMakerInternalMap<
   }
 
   @SuppressWarnings("unchecked")
-  final Segment<K, V, E, S>[] newSegmentArray(int ssize) {
+  Segment<K, V, E, S>[] newSegmentArray(int ssize) {
     return (Segment<K, V, E, S>[]) new Segment<?, ?, ?, ?>[ssize];
   }
 
@@ -1251,20 +1250,20 @@ class MapMakerInternalMap<
     void maybeClearReferenceQueues() {}
 
     /** Sets the value of the given {@code entry}. */
-    void setValue(E entry, V value) {
+    final void setValue(E entry, V value) {
       this.map.entryHelper.setValue(self(), entry, value);
     }
 
     /** Returns a copy of the given {@code entry}. */
-    @Nullable E copyEntry(E original, E newNext) {
+    final @Nullable E copyEntry(E original, E newNext) {
       return this.map.entryHelper.copy(self(), original, newNext);
     }
 
-    AtomicReferenceArray<E> newEntryArray(int size) {
+    final AtomicReferenceArray<E> newEntryArray(int size) {
       return new AtomicReferenceArray<>(size);
     }
 
-    void initTable(AtomicReferenceArray<E> newTable) {
+    final void initTable(AtomicReferenceArray<E> newTable) {
       this.threshold = newTable.length() * 3 / 4; // 0.75
       this.table = newTable;
     }
@@ -1351,14 +1350,14 @@ class MapMakerInternalMap<
     /**
      * Unsafely returns the value of the given entry if it's still live, or {@code null} otherwise.
      */
-    @Nullable V getLiveValueForTesting(InternalEntry<K, V, ?> entry) {
+    final @Nullable V getLiveValueForTesting(InternalEntry<K, V, ?> entry) {
       return getLiveValue(castForTesting(entry));
     }
 
     // reference queues, for garbage collection cleanup
 
     /** Cleanup collected entries when the lock is available. */
-    void tryDrainReferenceQueues() {
+    final void tryDrainReferenceQueues() {
       if (tryLock()) {
         try {
           maybeDrainReferenceQueues();
@@ -1369,7 +1368,7 @@ class MapMakerInternalMap<
     }
 
     @GuardedBy("this")
-    void drainKeyReferenceQueue(ReferenceQueue<K> keyReferenceQueue) {
+    final void drainKeyReferenceQueue(ReferenceQueue<K> keyReferenceQueue) {
       Reference<? extends K> ref;
       int i = 0;
       while ((ref = keyReferenceQueue.poll()) != null) {
@@ -1383,7 +1382,7 @@ class MapMakerInternalMap<
     }
 
     @GuardedBy("this")
-    void drainValueReferenceQueue(ReferenceQueue<V> valueReferenceQueue) {
+    final void drainValueReferenceQueue(ReferenceQueue<V> valueReferenceQueue) {
       Reference<? extends V> ref;
       int i = 0;
       while ((ref = valueReferenceQueue.poll()) != null) {
@@ -1396,12 +1395,12 @@ class MapMakerInternalMap<
       }
     }
 
-    <T> void clearReferenceQueue(ReferenceQueue<T> referenceQueue) {
+    final <T> void clearReferenceQueue(ReferenceQueue<T> referenceQueue) {
       while (referenceQueue.poll() != null) {}
     }
 
     /** Returns first entry of bin for given hash. */
-    @Nullable E getFirst(int hash) {
+    final @Nullable E getFirst(int hash) {
       // read this volatile field only once
       AtomicReferenceArray<E> table = this.table;
       return table.get(hash & (table.length() - 1));
@@ -1409,7 +1408,7 @@ class MapMakerInternalMap<
 
     // Specialized implementations of map methods
 
-    @Nullable E getEntry(Object key, int hash) {
+    final @Nullable E getEntry(Object key, int hash) {
       if (count != 0) { // read-volatile
         for (E e = getFirst(hash); e != null; e = e.getNext()) {
           if (e.getHash() != hash) {
@@ -1431,11 +1430,11 @@ class MapMakerInternalMap<
       return null;
     }
 
-    @Nullable E getLiveEntry(Object key, int hash) {
+    final @Nullable E getLiveEntry(Object key, int hash) {
       return getEntry(key, hash);
     }
 
-    @Nullable V get(Object key, int hash) {
+    final @Nullable V get(Object key, int hash) {
       try {
         E e = getLiveEntry(key, hash);
         if (e == null) {
@@ -1452,7 +1451,7 @@ class MapMakerInternalMap<
       }
     }
 
-    boolean containsKey(Object key, int hash) {
+    final boolean containsKey(Object key, int hash) {
       try {
         if (count != 0) { // read-volatile
           E e = getLiveEntry(key, hash);
@@ -1494,7 +1493,7 @@ class MapMakerInternalMap<
       }
     }
 
-    @Nullable V put(K key, int hash, V value, boolean onlyIfAbsent) {
+    final @Nullable V put(K key, int hash, V value, boolean onlyIfAbsent) {
       lock();
       try {
         preWriteCleanup();
@@ -1553,7 +1552,7 @@ class MapMakerInternalMap<
 
     /** Expands the table if possible. */
     @GuardedBy("this")
-    void expand() {
+    final void expand() {
       AtomicReferenceArray<E> oldTable = table;
       int oldCapacity = oldTable.length();
       if (oldCapacity >= MAXIMUM_CAPACITY) {
@@ -1620,7 +1619,7 @@ class MapMakerInternalMap<
       this.count = newCount;
     }
 
-    boolean replace(K key, int hash, V oldValue, V newValue) {
+    final boolean replace(K key, int hash, V oldValue, V newValue) {
       lock();
       try {
         preWriteCleanup();
@@ -1667,7 +1666,7 @@ class MapMakerInternalMap<
       }
     }
 
-    @Nullable V replace(K key, int hash, V newValue) {
+    final @Nullable V replace(K key, int hash, V newValue) {
       lock();
       try {
         preWriteCleanup();
@@ -1709,7 +1708,7 @@ class MapMakerInternalMap<
     }
 
     @CanIgnoreReturnValue
-    @Nullable V remove(Object key, int hash) {
+    final @Nullable V remove(Object key, int hash) {
       lock();
       try {
         preWriteCleanup();
@@ -1749,7 +1748,7 @@ class MapMakerInternalMap<
       }
     }
 
-    boolean remove(Object key, int hash, Object value) {
+    final boolean remove(Object key, int hash, Object value) {
       lock();
       try {
         preWriteCleanup();
@@ -1790,7 +1789,7 @@ class MapMakerInternalMap<
       }
     }
 
-    void clear() {
+    final void clear() {
       if (count != 0) {
         lock();
         try {
@@ -1822,7 +1821,7 @@ class MapMakerInternalMap<
      * @return the new first entry for the table
      */
     @GuardedBy("this")
-    @Nullable E removeFromChain(E first, E entry) {
+    final @Nullable E removeFromChain(E first, E entry) {
       int newCount = count;
       E newFirst = entry.getNext();
       for (E e = first; e != entry; e = e.getNext()) {
@@ -1839,7 +1838,7 @@ class MapMakerInternalMap<
 
     /** Removes an entry whose key has been garbage collected. */
     @CanIgnoreReturnValue
-    boolean reclaimKey(E entry, int hash) {
+    final boolean reclaimKey(E entry, int hash) {
       lock();
       try {
         int newCount = count - 1;
@@ -1866,7 +1865,7 @@ class MapMakerInternalMap<
 
     /** Removes an entry whose value has been garbage collected. */
     @CanIgnoreReturnValue
-    boolean reclaimValue(K key, int hash, WeakValueReference<K, V, E> valueReference) {
+    final boolean reclaimValue(K key, int hash, WeakValueReference<K, V, E> valueReference) {
       lock();
       try {
         int newCount = this.count - 1;
@@ -1932,7 +1931,7 @@ class MapMakerInternalMap<
     }
 
     @GuardedBy("this")
-    boolean removeEntryForTesting(E entry) {
+    final boolean removeEntryForTesting(E entry) {
       int hash = entry.getHash();
       int newCount = this.count - 1;
       AtomicReferenceArray<E> table = this.table;
@@ -1965,7 +1964,7 @@ class MapMakerInternalMap<
      * Gets the value from an entry. Returns {@code null} if the entry is invalid or
      * partially-collected.
      */
-    @Nullable V getLiveValue(E entry) {
+    final @Nullable V getLiveValue(E entry) {
       if (entry.getKey() == null) {
         tryDrainReferenceQueues();
         return null;
@@ -1984,7 +1983,7 @@ class MapMakerInternalMap<
      * the cleanupExecutor. If cleanup is not observed after a sufficient number of reads, try
      * cleaning up from the read thread.
      */
-    void postReadCleanup() {
+    final void postReadCleanup() {
       if ((readCount.incrementAndGet() & DRAIN_THRESHOLD) == 0) {
         runCleanup();
       }
@@ -1995,15 +1994,15 @@ class MapMakerInternalMap<
      * thread acquires the segment lock, immediately after acquiring the lock.
      */
     @GuardedBy("this")
-    void preWriteCleanup() {
+    final void preWriteCleanup() {
       runLockedCleanup();
     }
 
-    void runCleanup() {
+    final void runCleanup() {
       runLockedCleanup();
     }
 
-    void runLockedCleanup() {
+    final void runLockedCleanup() {
       if (tryLock()) {
         try {
           maybeDrainReferenceQueues();
@@ -2033,7 +2032,7 @@ class MapMakerInternalMap<
 
     @SuppressWarnings("unchecked")
     @Override
-    public @Nullable StrongKeyStrongValueEntry<K, V> castForTesting(
+    @Nullable StrongKeyStrongValueEntry<K, V> castForTesting(
         @Nullable InternalEntry<K, V, ?> entry) {
       return (StrongKeyStrongValueEntry<K, V>) entry;
     }
@@ -2063,25 +2062,24 @@ class MapMakerInternalMap<
 
     @SuppressWarnings("unchecked")
     @Override
-    public @Nullable StrongKeyWeakValueEntry<K, V> castForTesting(
-        @Nullable InternalEntry<K, V, ?> entry) {
+    @Nullable StrongKeyWeakValueEntry<K, V> castForTesting(@Nullable InternalEntry<K, V, ?> entry) {
       return (StrongKeyWeakValueEntry<K, V>) entry;
     }
 
     @Override
-    public WeakValueReference<K, V, StrongKeyWeakValueEntry<K, V>> getWeakValueReferenceForTesting(
+    WeakValueReference<K, V, StrongKeyWeakValueEntry<K, V>> getWeakValueReferenceForTesting(
         InternalEntry<K, V, ?> e) {
       return castForTesting(e).getValueReference();
     }
 
     @Override
-    public WeakValueReference<K, V, StrongKeyWeakValueEntry<K, V>> newWeakValueReferenceForTesting(
+    WeakValueReference<K, V, StrongKeyWeakValueEntry<K, V>> newWeakValueReferenceForTesting(
         InternalEntry<K, V, ?> e, V value) {
       return new WeakValueReferenceImpl<>(queueForValues, value, castForTesting(e));
     }
 
     @Override
-    public void setWeakValueReferenceForTesting(
+    void setWeakValueReferenceForTesting(
         InternalEntry<K, V, ?> e,
         WeakValueReference<K, V, ? extends InternalEntry<K, V, ?>> valueReference) {
       StrongKeyWeakValueEntry<K, V> entry = castForTesting(e);
@@ -2105,7 +2103,7 @@ class MapMakerInternalMap<
   }
 
   /** Concrete implementation of {@link Segment} for strong keys and {@link Dummy} values. */
-  static final class StrongKeyDummyValueSegment<K>
+  private static final class StrongKeyDummyValueSegment<K>
       extends Segment<K, Dummy, StrongKeyDummyValueEntry<K>, StrongKeyDummyValueSegment<K>> {
     StrongKeyDummyValueSegment(
         MapMakerInternalMap<K, Dummy, StrongKeyDummyValueEntry<K>, StrongKeyDummyValueSegment<K>>
@@ -2121,7 +2119,7 @@ class MapMakerInternalMap<
 
     @SuppressWarnings("unchecked")
     @Override
-    public StrongKeyDummyValueEntry<K> castForTesting(InternalEntry<K, Dummy, ?> entry) {
+    StrongKeyDummyValueEntry<K> castForTesting(InternalEntry<K, Dummy, ?> entry) {
       return (StrongKeyDummyValueEntry<K>) entry;
     }
   }
@@ -2150,7 +2148,7 @@ class MapMakerInternalMap<
 
     @SuppressWarnings("unchecked")
     @Override
-    public WeakKeyStrongValueEntry<K, V> castForTesting(InternalEntry<K, V, ?> entry) {
+    WeakKeyStrongValueEntry<K, V> castForTesting(InternalEntry<K, V, ?> entry) {
       return (WeakKeyStrongValueEntry<K, V>) entry;
     }
 
@@ -2166,7 +2164,7 @@ class MapMakerInternalMap<
   }
 
   /** Concrete implementation of {@link Segment} for weak keys and weak values. */
-  static final class WeakKeyWeakValueSegment<K, V>
+  private static final class WeakKeyWeakValueSegment<K, V>
       extends Segment<K, V, WeakKeyWeakValueEntry<K, V>, WeakKeyWeakValueSegment<K, V>> {
     private final ReferenceQueue<K> queueForKeys = new ReferenceQueue<>();
     private final ReferenceQueue<V> queueForValues = new ReferenceQueue<>();
@@ -2194,25 +2192,24 @@ class MapMakerInternalMap<
 
     @SuppressWarnings("unchecked")
     @Override
-    public @Nullable WeakKeyWeakValueEntry<K, V> castForTesting(
-        @Nullable InternalEntry<K, V, ?> entry) {
+    @Nullable WeakKeyWeakValueEntry<K, V> castForTesting(@Nullable InternalEntry<K, V, ?> entry) {
       return (WeakKeyWeakValueEntry<K, V>) entry;
     }
 
     @Override
-    public WeakValueReference<K, V, WeakKeyWeakValueEntry<K, V>> getWeakValueReferenceForTesting(
+    WeakValueReference<K, V, WeakKeyWeakValueEntry<K, V>> getWeakValueReferenceForTesting(
         InternalEntry<K, V, ?> e) {
       return castForTesting(e).getValueReference();
     }
 
     @Override
-    public WeakValueReference<K, V, WeakKeyWeakValueEntry<K, V>> newWeakValueReferenceForTesting(
+    WeakValueReference<K, V, WeakKeyWeakValueEntry<K, V>> newWeakValueReferenceForTesting(
         InternalEntry<K, V, ?> e, V value) {
       return new WeakValueReferenceImpl<>(queueForValues, value, castForTesting(e));
     }
 
     @Override
-    public void setWeakValueReferenceForTesting(
+    void setWeakValueReferenceForTesting(
         InternalEntry<K, V, ?> e,
         WeakValueReference<K, V, ? extends InternalEntry<K, V, ?>> valueReference) {
       WeakKeyWeakValueEntry<K, V> entry = castForTesting(e);
@@ -2237,7 +2234,7 @@ class MapMakerInternalMap<
   }
 
   /** Concrete implementation of {@link Segment} for weak keys and {@link Dummy} values. */
-  static final class WeakKeyDummyValueSegment<K>
+  private static final class WeakKeyDummyValueSegment<K>
       extends Segment<K, Dummy, WeakKeyDummyValueEntry<K>, WeakKeyDummyValueSegment<K>> {
     private final ReferenceQueue<K> queueForKeys = new ReferenceQueue<>();
 
@@ -2259,7 +2256,7 @@ class MapMakerInternalMap<
 
     @SuppressWarnings("unchecked")
     @Override
-    public WeakKeyDummyValueEntry<K> castForTesting(InternalEntry<K, Dummy, ?> entry) {
+    WeakKeyDummyValueEntry<K> castForTesting(InternalEntry<K, Dummy, ?> entry) {
       return (WeakKeyDummyValueEntry<K>) entry;
     }
 
@@ -2492,28 +2489,34 @@ class MapMakerInternalMap<
     }
   }
 
-  @LazyInit transient @Nullable Set<K> keySet;
+  @Override
+  public boolean equals(@Nullable Object obj) {
+    return Maps.equalsImpl(this, obj);
+  }
+
+  @Override
+  public int hashCode() {
+    return entrySet().hashCode();
+  }
+
+  @Override
+  public String toString() {
+    return Maps.toStringImpl(this);
+  }
 
   @Override
   public Set<K> keySet() {
-    Set<K> ks = keySet;
-    return (ks != null) ? ks : (keySet = new KeySet());
+    return new KeySet();
   }
-
-  @LazyInit transient @Nullable Collection<V> values;
 
   @Override
   public Collection<V> values() {
-    Collection<V> vs = values;
-    return (vs != null) ? vs : (values = new Values());
+    return new Values();
   }
-
-  @LazyInit transient @Nullable Set<Entry<K, V>> entrySet;
 
   @Override
   public Set<Entry<K, V>> entrySet() {
-    Set<Entry<K, V>> es = entrySet;
-    return (es != null) ? es : (entrySet = new EntrySet());
+    return new EntrySet();
   }
 
   // Iterator Support
@@ -2561,7 +2564,7 @@ class MapMakerInternalMap<
     }
 
     /** Finds the next entry in the current chain. Returns {@code true} if an entry was found. */
-    boolean nextInChain() {
+    final boolean nextInChain() {
       if (nextEntry != null) {
         for (nextEntry = nextEntry.getNext(); nextEntry != null; nextEntry = nextEntry.getNext()) {
           if (advanceTo(nextEntry)) {
@@ -2573,7 +2576,7 @@ class MapMakerInternalMap<
     }
 
     /** Finds the next entry in the current table. Returns {@code true} if an entry was found. */
-    boolean nextInTable() {
+    final boolean nextInTable() {
       while (nextTableIndex >= 0) {
         if ((nextEntry = currentTable.get(nextTableIndex--)) != null) {
           if (advanceTo(nextEntry) || nextInChain()) {
@@ -2588,7 +2591,7 @@ class MapMakerInternalMap<
      * Advances to the given entry. Returns {@code true} if the entry was valid, {@code false} if it
      * should be skipped.
      */
-    boolean advanceTo(E entry) {
+    final boolean advanceTo(E entry) {
       try {
         K key = entry.getKey();
         V value = getLiveValue(entry);
@@ -2605,11 +2608,11 @@ class MapMakerInternalMap<
     }
 
     @Override
-    public boolean hasNext() {
+    public final boolean hasNext() {
       return nextExternal != null;
     }
 
-    WriteThroughEntry nextEntry() {
+    final WriteThroughEntry nextEntry() {
       if (nextExternal == null) {
         throw new NoSuchElementException();
       }
@@ -2619,7 +2622,7 @@ class MapMakerInternalMap<
     }
 
     @Override
-    public void remove() {
+    public final void remove() {
       checkRemove(lastReturned != null);
       MapMakerInternalMap.this.remove(lastReturned.getKey());
       lastReturned = null;
@@ -2646,46 +2649,20 @@ class MapMakerInternalMap<
    * Custom Entry class used by EntryIterator.next(), that relays setValue changes to the underlying
    * map.
    */
-  final class WriteThroughEntry extends AbstractMapEntry<K, V> {
-    final K key; // non-null
-    V value; // non-null
-
+  final class WriteThroughEntry extends SimpleEntry<K, V> {
     WriteThroughEntry(K key, V value) {
-      this.key = key;
-      this.value = value;
+      super(key, value);
     }
 
-    @Override
-    public K getKey() {
-      return key;
-    }
-
-    @Override
-    public V getValue() {
-      return value;
-    }
-
-    @Override
-    public boolean equals(@Nullable Object object) {
-      // Cannot use key and value equivalence
-      if (object instanceof Entry) {
-        Entry<?, ?> that = (Entry<?, ?>) object;
-        return key.equals(that.getKey()) && value.equals(that.getValue());
-      }
-      return false;
-    }
-
-    @Override
-    public int hashCode() {
-      // Cannot use key and value equivalence
-      return key.hashCode() ^ value.hashCode();
-    }
+    /*
+     * We inherit equals() and hashCode() instead of overriding them to use keyEquivalence and
+     * valueEquivalence.
+     */
 
     @Override
     public V setValue(V newValue) {
-      V oldValue = put(key, newValue);
-      value = newValue; // only if put succeeds
-      return oldValue;
+      put(getKey(), newValue);
+      return super.setValue(newValue); // done after put() so that it happens only if put() succeeds
     }
   }
 
@@ -2697,7 +2674,6 @@ class MapMakerInternalMap<
     }
   }
 
-  @WeakOuter
   final class KeySet extends AbstractSet<K> {
 
     @Override
@@ -2731,7 +2707,6 @@ class MapMakerInternalMap<
     }
   }
 
-  @WeakOuter
   final class Values extends AbstractCollection<V> {
 
     @Override
@@ -2760,7 +2735,6 @@ class MapMakerInternalMap<
     }
   }
 
-  @WeakOuter
   final class EntrySet extends AbstractSet<Entry<K, V>> {
 
     @Override
@@ -2789,8 +2763,7 @@ class MapMakerInternalMap<
         return false;
       }
       Entry<?, ?> e = (Entry<?, ?>) o;
-      Object key = e.getKey();
-      return key != null && MapMakerInternalMap.this.remove(key, e.getValue());
+      return MapMakerInternalMap.this.remove(e.getKey(), e.getValue());
     }
 
     @Override
@@ -2823,7 +2796,6 @@ class MapMakerInternalMap<
         this);
   }
 
-  @J2ktIncompatible // java.io.ObjectInputStream
   private void readObject(ObjectInputStream in) throws InvalidObjectException {
     throw new InvalidObjectException("Use SerializationProxy");
   }
@@ -2864,7 +2836,7 @@ class MapMakerInternalMap<
       return delegate;
     }
 
-    void writeMapTo(ObjectOutputStream out) throws IOException {
+    final void writeMapTo(ObjectOutputStream out) throws IOException {
       out.writeInt(delegate.size());
       for (Entry<K, V> entry : delegate.entrySet()) {
         out.writeObject(entry.getKey());
@@ -2873,20 +2845,18 @@ class MapMakerInternalMap<
       out.writeObject(null); // terminate entries
     }
 
-    @J2ktIncompatible // java.io.ObjectInputStream
-    MapMaker readMapMaker(ObjectInputStream in) throws IOException {
+    final MapMaker readMapMaker(ObjectInputStream in) throws IOException {
       int size = in.readInt();
       return new MapMaker()
-          .initialCapacity(size)
+          .initialCapacity(min(size, 256))
           .setKeyStrength(keyStrength)
           .setValueStrength(valueStrength)
           .keyEquivalence(keyEquivalence)
-          .concurrencyLevel(concurrencyLevel);
+          .concurrencyLevel(min(concurrencyLevel, 1024));
     }
 
     @SuppressWarnings("unchecked")
-    @J2ktIncompatible // java.io.ObjectInputStream
-    void readEntries(ObjectInputStream in) throws IOException, ClassNotFoundException {
+    final void readEntries(ObjectInputStream in) throws IOException, ClassNotFoundException {
       while (true) {
         K key = (K) in.readObject();
         if (key == null) {
@@ -2921,7 +2891,6 @@ class MapMakerInternalMap<
       writeMapTo(out);
     }
 
-    @J2ktIncompatible // java.io.ObjectInputStream
     private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
       in.defaultReadObject();
       MapMaker mapMaker = readMapMaker(in);
@@ -2933,4 +2902,17 @@ class MapMakerInternalMap<
       return delegate;
     }
   }
+
+  private static <T> @Nullable T checkNotValueType(@Nullable T referent) {
+    return referent;
+  }
+
+  private static IllegalArgumentException createException(Object referent) {
+    return new IllegalArgumentException(
+        "Cannot create a weak or soft reference to a value class: "
+            + referent.getClass().getName());
+  }
+
+  private static final boolean IS_ANDROID =
+      requireNonNull(System.getProperty("java.runtime.name", "")).contains("Android");
 }

@@ -17,13 +17,14 @@ package jdk.m3.collections.guava.collect;
 
 import static jdk.m3.collections.guava.collect.Lists.cartesianProduct;
 import static jdk.m3.collections.guava.collect.Lists.transform;
-import static com.google.common.truth.Truth.assertWithMessage;
+import static jdk.m3.collections.guava.truth.Truth.assertWithMessage;
 import static java.lang.Math.max;
 import static java.util.Arrays.asList;
 import static java.util.Collections.nCopies;
 
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -156,11 +157,20 @@ public abstract class AbstractHashFloodingTest<T> extends TestCase {
     }
 
     static final QueryOp<Map<Object, Object>> MAP_GET =
-        QueryOp.create("Map.get", Map::get, Math::log);
+        create(
+            "Map.get",
+            (map, key) -> {
+              Object unused = map.get(key);
+            },
+            Math::log);
 
-    @SuppressWarnings("ReturnValueIgnored")
     static final QueryOp<Set<Object>> SET_CONTAINS =
-        QueryOp.create("Set.contains", Set::contains, Math::log);
+        create(
+            "Set.contains",
+            (set, key) -> {
+              boolean unused = set.contains(key);
+            },
+            Math::log);
 
     abstract void apply(T collection, Object query);
 
@@ -171,13 +181,14 @@ public abstract class AbstractHashFloodingTest<T> extends TestCase {
    * Returns a list of objects with the same hash code, of size 2^power, counting calls to equals,
    * hashCode, and compareTo in counter.
    */
-  static List<CountsHashCodeAndEquals> createAdversarialInput(int power, CallsCounter counter) {
+  private static List<CountsHashCodeAndEquals> createAdversarialInput(
+      int power, CallsCounter counter) {
     String str1 = "Aa";
     String str2 = "BB";
     assertEquals(str1.hashCode(), str2.hashCode());
     List<String> haveSameHashes2 = asList(str1, str2);
     List<CountsHashCodeAndEquals> result =
-        Lists.newArrayList(
+        new ArrayList<>(
             transform(
                 cartesianProduct(nCopies(power, haveSameHashes2)),
                 strs ->

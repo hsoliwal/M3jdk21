@@ -20,7 +20,6 @@ import static jdk.m3.collections.guava.base.Preconditions.checkArgument;
 import static jdk.m3.collections.guava.base.Preconditions.checkNotNull;
 import static java.util.Objects.requireNonNull;
 
-import jdk.m3.collections.guava.annotations.Beta;
 import jdk.m3.collections.guava.collect.AbstractIterator;
 import jdk.m3.collections.guava.collect.ImmutableSet;
 import com.google.errorprone.annotations.DoNotMock;
@@ -60,7 +59,6 @@ import org.jspecify.annotations.Nullable;
  * @param <N> Node parameter type
  * @since 23.1
  */
-@Beta
 @DoNotMock(
     "Call forGraph or forTree, passing a lambda or a Graph with the desired edges (built with"
         + " GraphBuilder)")
@@ -265,8 +263,7 @@ public abstract class Traverser<N> {
    * number of nodes as follows:
    *
    * {@snippet :
-   * Iterables.limit(
-   *     Traverser.forGraph(graph).depthFirstPreOrder(node), maxNumberOfNodes);
+   * Iterables.limit(Traverser.forGraph(graph).depthFirstPreOrder(node), maxNumberOfNodes);
    * }
    *
    * <p>See <a href="https://en.wikipedia.org/wiki/Depth-first_search">Wikipedia</a> for more info.
@@ -315,8 +312,7 @@ public abstract class Traverser<N> {
    * number of nodes as follows:
    *
    * {@snippet :
-   * Iterables.limit(
-   *     Traverser.forGraph(graph).depthFirstPostOrder(node), maxNumberOfNodes);
+   * Iterables.limit(Traverser.forGraph(graph).depthFirstPostOrder(node), maxNumberOfNodes);
    * }
    *
    * <p>See <a href="https://en.wikipedia.org/wiki/Depth-first_search">Wikipedia</a> for more info.

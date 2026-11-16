@@ -17,7 +17,8 @@
 package jdk.m3.collections.guava.collect;
 
 import static jdk.m3.collections.guava.base.Preconditions.checkArgument;
-import static jdk.m3.collections.guava.collect.ReflectionFreeAssertThrows.assertThrows;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
+import static org.junit.Assert.assertThrows;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import java.util.Map;
@@ -36,7 +37,7 @@ import org.jspecify.annotations.Nullable;
 public abstract class AbstractTableTest<C extends @Nullable Character>
     extends AbstractTableReadTest<C> {
 
-  protected void populate(Table<String, Integer, C> table, @Nullable Object... data) {
+  void populate(Table<String, Integer, C> table, @Nullable Object... data) {
     checkArgument(data.length % 3 == 0);
     for (int i = 0; i < data.length; i += 3) {
       table.put(
@@ -44,11 +45,11 @@ public abstract class AbstractTableTest<C extends @Nullable Character>
     }
   }
 
-  protected boolean supportsRemove() {
+  boolean supportsRemove() {
     return true;
   }
 
-  protected boolean supportsNullValues() {
+  boolean supportsNullValues() {
     return false;
   }
 
@@ -64,9 +65,9 @@ public abstract class AbstractTableTest<C extends @Nullable Character>
   }
 
   public void testPut() {
-    assertNull(table.put("foo", 1, cellValue('a')));
-    assertNull(table.put("bar", 1, cellValue('b')));
-    assertNull(table.put("foo", 3, cellValue('c')));
+    assertThat(table.put("foo", 1, cellValue('a'))).isNull();
+    assertThat(table.put("bar", 1, cellValue('b'))).isNull();
+    assertThat(table.put("foo", 3, cellValue('c'))).isNull();
     assertEquals((Character) 'a', table.put("foo", 1, cellValue('d')));
     assertEquals((Character) 'd', table.get("foo", 1));
     assertEquals((Character) 'b', table.get("bar", 1));
@@ -82,7 +83,7 @@ public abstract class AbstractTableTest<C extends @Nullable Character>
     assertThrows(NullPointerException.class, () -> table.put(null, 2, cellValue('d')));
     assertThrows(NullPointerException.class, () -> table.put("cat", null, cellValue('d')));
     if (supportsNullValues()) {
-      assertNull(table.put("cat", 2, null));
+      assertThat(table.put("cat", 2, null)).isNull();
       assertTrue(table.contains("cat", 2));
     } else {
       assertThrows(NullPointerException.class, () -> table.put("cat", 2, null));
@@ -95,7 +96,7 @@ public abstract class AbstractTableTest<C extends @Nullable Character>
 
     if (supportsNullValues()) {
       assertEquals((Character) 'b', table.put("bar", 1, nullableCellValue(null)));
-      assertNull(table.get("bar", 1));
+      assertThat(table.get("bar", 1)).isNull();
     } else {
       assertThrows(NullPointerException.class, () -> table.put("bar", 1, nullableCellValue(null)));
     }
@@ -119,17 +120,17 @@ public abstract class AbstractTableTest<C extends @Nullable Character>
   public void testRemove() {
     table = create("foo", 1, 'a', "bar", 1, 'b', "foo", 3, 'c');
     if (supportsRemove()) {
-      assertNull(table.remove("cat", 1));
-      assertNull(table.remove("bar", 3));
+      assertThat(table.remove("cat", 1)).isNull();
+      assertThat(table.remove("bar", 3)).isNull();
       assertEquals(3, table.size());
       assertEquals((Character) 'c', table.remove("foo", 3));
       assertEquals(2, table.size());
       assertEquals((Character) 'a', table.get("foo", 1));
       assertEquals((Character) 'b', table.get("bar", 1));
-      assertNull(table.get("foo", 3));
-      assertNull(table.remove(null, 1));
-      assertNull(table.remove("foo", null));
-      assertNull(table.remove(null, null));
+      assertThat(table.get("foo", 3)).isNull();
+      assertThat(table.remove(null, 1)).isNull();
+      assertThat(table.remove("foo", null)).isNull();
+      assertThat(table.remove(null, null)).isNull();
       assertSize(2);
     } else {
       assertThrows(UnsupportedOperationException.class, () -> table.remove("foo", 3));
@@ -156,13 +157,13 @@ public abstract class AbstractTableTest<C extends @Nullable Character>
   }
 
   @SuppressWarnings("unchecked") // C can only be @Nullable Character or Character
-  protected @NonNull C cellValue(Character character) {
+  private @NonNull C cellValue(Character character) {
     return (C) character;
   }
 
   // Only safe wrt. ClassCastException. Not null-safe (can be used to test expected Table NPEs)
   @SuppressWarnings("unchecked")
-  protected C nullableCellValue(@Nullable Character character) {
+  private C nullableCellValue(@Nullable Character character) {
     return (C) character;
   }
 }

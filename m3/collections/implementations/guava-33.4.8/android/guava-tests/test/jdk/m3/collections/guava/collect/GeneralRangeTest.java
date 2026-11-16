@@ -16,16 +16,16 @@ package jdk.m3.collections.guava.collect;
 
 import static jdk.m3.collections.guava.collect.BoundType.CLOSED;
 import static jdk.m3.collections.guava.collect.BoundType.OPEN;
-import static jdk.m3.collections.guava.collect.ReflectionFreeAssertThrows.assertThrows;
 import static java.util.Collections.unmodifiableList;
+import static org.junit.Assert.assertThrows;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
 import jdk.m3.collections.guava.annotations.J2ktIncompatible;
-import jdk.m3.collections.guava.base.Objects;
 import jdk.m3.collections.guava.testing.NullPointerTester;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import junit.framework.TestCase;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
@@ -35,11 +35,11 @@ import org.jspecify.annotations.Nullable;
  *
  * @author Louis Wasserman
  */
-@GwtCompatible(emulated = true)
+@GwtCompatible
 @NullMarked
 public class GeneralRangeTest extends TestCase {
   private static final Ordering<@Nullable Integer> ORDERING =
-      Ordering.<Integer>natural().<Integer>nullsFirst();
+      Ordering.<Integer>natural().nullsFirst();
 
   private static final List<@Nullable Integer> IN_ORDER_VALUES =
       unmodifiableList(Arrays.<@Nullable Integer>asList(null, 1, 2, 3, 4, 5));
@@ -84,7 +84,7 @@ public class GeneralRangeTest extends TestCase {
     for (Integer i : IN_ORDER_VALUES) {
       GeneralRange<@Nullable Integer> range = GeneralRange.range(ORDERING, i, CLOSED, i, CLOSED);
       for (Integer j : IN_ORDER_VALUES) {
-        assertEquals(Objects.equal(i, j), range.contains(j));
+        assertEquals(Objects.equals(i, j), range.contains(j));
       }
     }
   }

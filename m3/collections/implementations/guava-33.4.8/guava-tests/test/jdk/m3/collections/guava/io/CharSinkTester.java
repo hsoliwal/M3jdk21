@@ -16,6 +16,8 @@
 
 package jdk.m3.collections.guava.io;
 
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
+
 import jdk.m3.collections.guava.base.Joiner;
 import jdk.m3.collections.guava.collect.ImmutableList;
 import jdk.m3.collections.guava.io.SourceSinkFactory.CharSinkFactory;
@@ -51,7 +53,7 @@ public class CharSinkTester extends SourceSinkTester<CharSink, String, CharSinkF
   static TestSuite suiteForString(
       String name, CharSinkFactory factory, String string, String desc) {
     TestSuite stringSuite = new TestSuite(name + " [" + desc + "]");
-    for (final Method method : testMethods) {
+    for (Method method : testMethods) {
       stringSuite.addTest(new CharSinkTester(factory, string, name, desc, method));
     }
     return stringSuite;
@@ -131,7 +133,7 @@ public class CharSinkTester extends SourceSinkTester<CharSink, String, CharSinkF
   }
 
   private void assertContainsExpectedString() throws IOException {
-    assertEquals(expected, factory.getSinkContents());
+    assertThat(factory.getSinkContents()).isEqualTo(expected);
   }
 
   private void assertContainsExpectedLines(String separator) throws IOException {
@@ -140,6 +142,6 @@ public class CharSinkTester extends SourceSinkTester<CharSink, String, CharSinkF
       // if we wrote any lines in writeLines(), there will be a trailing newline
       expected += separator;
     }
-    assertEquals(expected, factory.getSinkContents());
+    assertThat(factory.getSinkContents()).isEqualTo(expected);
   }
 }

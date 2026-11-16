@@ -22,7 +22,7 @@ import static jdk.m3.collections.guava.collect.testing.features.CollectionFeatur
 import static jdk.m3.collections.guava.collect.testing.features.CollectionFeature.RESTRICTS_ELEMENTS;
 import static jdk.m3.collections.guava.collect.testing.features.CollectionFeature.SUPPORTS_ADD;
 import static jdk.m3.collections.guava.collect.testing.features.CollectionSize.ZERO;
-import static jdk.m3.collections.guava.collect.testing.testers.ReflectionFreeAssertThrows.assertThrows;
+import static org.junit.Assert.assertThrows;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
@@ -33,7 +33,6 @@ import jdk.m3.collections.guava.collect.testing.features.CollectionSize;
 import java.lang.reflect.Method;
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
-import org.junit.Ignore;
 
 /**
  * A generic JUnit test which tests {@code add} operations on a collection. Can't be invoked
@@ -42,10 +41,7 @@ import org.junit.Ignore;
  * @author Chris Povirk
  * @author Kevin Bourrillion
  */
-@GwtCompatible(emulated = true)
-@Ignore("test runners must not instantiate and run this directly, only via suites we build")
-// @Ignore affects the Android test runner, which respects JUnit 4 annotations on JUnit 3 tests.
-@SuppressWarnings("JUnit4ClassUsedInJUnit3")
+@GwtCompatible
 public class CollectionAddTester<E> extends AbstractCollectionTester<E> {
   @CollectionFeature.Require(SUPPORTS_ADD)
   public void testAdd_supportedNotPresent() {
@@ -88,13 +84,9 @@ public class CollectionAddTester<E> extends AbstractCollectionTester<E> {
   @CollectionFeature.Require({SUPPORTS_ADD, FAILS_FAST_ON_CONCURRENT_MODIFICATION})
   @CollectionSize.Require(absent = ZERO)
   public void testAddConcurrentWithIteration() {
-    assertThrows(
-        ConcurrentModificationException.class,
-        () -> {
-          Iterator<E> iterator = collection.iterator();
-          assertTrue(collection.add(e3()));
-          iterator.next();
-        });
+    Iterator<E> iterator = collection.iterator();
+    assertTrue(collection.add(e3()));
+    assertThrows(ConcurrentModificationException.class, iterator::next);
   }
 
   /**

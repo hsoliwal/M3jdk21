@@ -23,12 +23,16 @@ import static jdk.m3.collections.guava.util.concurrent.Service.State.STARTING;
 import static jdk.m3.collections.guava.util.concurrent.Service.State.STOPPING;
 import static jdk.m3.collections.guava.util.concurrent.Service.State.TERMINATED;
 
+import jdk.m3.collections.guava.annotations.GwtIncompatible;
+import jdk.m3.collections.guava.annotations.J2ktIncompatible;
 import java.util.Locale;
 import junit.framework.TestCase;
 import org.jspecify.annotations.NullUnmarked;
 
 /** Unit tests for {@link Service} */
 @NullUnmarked
+@GwtIncompatible
+@J2ktIncompatible
 public class ServiceTest extends TestCase {
 
   /** Assert on the comparison ordering of the State enum since we guarantee it. */

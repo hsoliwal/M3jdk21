@@ -21,6 +21,7 @@ package jdk.m3.collections.guava.hash;
 
 import static jdk.m3.collections.guava.base.Preconditions.checkArgument;
 
+import jdk.m3.collections.guava.annotations.J2ktIncompatible;
 import com.google.errorprone.annotations.Immutable;
 import java.io.Serializable;
 import java.nio.ByteBuffer;
@@ -33,6 +34,7 @@ import org.jspecify.annotations.Nullable;
  * @author Jean-Philippe Aumasson
  * @author Daniel J. Bernstein
  */
+@J2ktIncompatible
 @Immutable
 final class SipHashFunction extends AbstractHashFunction implements Serializable {
   static final HashFunction SIP_HASH_24 =

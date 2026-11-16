@@ -16,7 +16,8 @@
 
 package jdk.m3.collections.guava.base;
 
-import static jdk.m3.collections.guava.base.ReflectionFreeAssertThrows.assertThrows;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
+import static org.junit.Assert.assertThrows;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
@@ -26,23 +27,24 @@ import junit.framework.TestCase;
 import org.jspecify.annotations.NullUnmarked;
 
 /** Tests for {@link MoreObjects}. */
-@GwtCompatible(emulated = true)
+@GwtCompatible
 @NullUnmarked
 public class MoreObjectsTest extends TestCase {
   public void testFirstNonNull_withNonNull() {
     String s1 = "foo";
     String s2 = MoreObjects.firstNonNull(s1, "bar");
-    assertSame(s1, s2);
+    assertThat(s2).isSameInstanceAs(s1);
 
     Long n1 = 42L;
     Long n2 = MoreObjects.firstNonNull(null, n1);
-    assertSame(n1, n2);
+    assertThat(n2).isSameInstanceAs(n1);
 
     Boolean b1 = true;
     Boolean b2 = MoreObjects.firstNonNull(b1, null);
-    assertSame(b1, b2);
+    assertThat(b2).isSameInstanceAs(b1);
   }
 
+  @SuppressWarnings("DistinctVarargsChecker")
   public void testFirstNonNull_throwsNullPointerException() {
     assertThrows(NullPointerException.class, () -> MoreObjects.firstNonNull(null, null));
   }
@@ -50,7 +52,7 @@ public class MoreObjectsTest extends TestCase {
   // ToStringHelper's tests are in ToStringHelperTest
 
   @J2ktIncompatible
-  @GwtIncompatible("NullPointerTester")
+  @GwtIncompatible // NullPointerTester
   public void testNulls() throws Exception {
     NullPointerTester tester = new NullPointerTester();
     tester.ignore(MoreObjects.class.getMethod("firstNonNull", Object.class, Object.class));

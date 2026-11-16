@@ -15,6 +15,7 @@
 package jdk.m3.collections.guava.hash;
 
 import jdk.m3.collections.guava.annotations.Beta;
+import jdk.m3.collections.guava.annotations.J2ktIncompatible;
 import jdk.m3.collections.guava.base.Preconditions;
 import java.io.InvalidObjectException;
 import java.io.ObjectInputStream;
@@ -29,6 +30,7 @@ import org.jspecify.annotations.Nullable;
  * @author Dimitris Andreou
  * @since 11.0
  */
+@J2ktIncompatible
 @Beta
 public final class Funnels {
   private Funnels() {}
@@ -87,7 +89,7 @@ public final class Funnels {
     return new StringCharsetFunnel(charset);
   }
 
-  private static class StringCharsetFunnel implements Funnel<CharSequence> {
+  private static final class StringCharsetFunnel implements Funnel<CharSequence> {
     private final Charset charset;
 
     StringCharsetFunnel(Charset charset) {
@@ -126,7 +128,7 @@ public final class Funnels {
       throw new InvalidObjectException("Use SerializedForm");
     }
 
-    private static class SerializedForm implements Serializable {
+    private static final class SerializedForm implements Serializable {
       private final String charsetCanonicalName;
 
       SerializedForm(Charset charset) {
@@ -175,7 +177,7 @@ public final class Funnels {
     return new SequentialFunnel<>(elementFunnel);
   }
 
-  private static class SequentialFunnel<E extends @Nullable Object>
+  private static final class SequentialFunnel<E extends @Nullable Object>
       implements Funnel<Iterable<? extends E>> {
     private final Funnel<E> elementFunnel;
 
@@ -208,6 +210,8 @@ public final class Funnels {
     public int hashCode() {
       return SequentialFunnel.class.hashCode() ^ elementFunnel.hashCode();
     }
+
+    private static final long serialVersionUID = 9033121045301066662L;
   }
 
   /**
@@ -247,7 +251,7 @@ public final class Funnels {
     return new SinkAsStream(sink);
   }
 
-  private static class SinkAsStream extends OutputStream {
+  private static final class SinkAsStream extends OutputStream {
     final PrimitiveSink sink;
 
     SinkAsStream(PrimitiveSink sink) {

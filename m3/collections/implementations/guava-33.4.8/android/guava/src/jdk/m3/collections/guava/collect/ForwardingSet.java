@@ -17,6 +17,9 @@
 package jdk.m3.collections.guava.collect;
 
 import static jdk.m3.collections.guava.base.Preconditions.checkNotNull;
+import static jdk.m3.collections.guava.collect.Sets.equalsImpl;
+import static jdk.m3.collections.guava.collect.Sets.hashCodeImpl;
+import static jdk.m3.collections.guava.collect.Sets.removeAllImpl;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import java.util.Collection;
@@ -75,7 +78,7 @@ public abstract class ForwardingSet<E extends @Nullable Object> extends Forwardi
    */
   @Override
   protected boolean standardRemoveAll(Collection<?> collection) {
-    return Sets.removeAllImpl(this, checkNotNull(collection)); // for GWT
+    return removeAllImpl(this, checkNotNull(collection)); // for GWT
   }
 
   /**
@@ -86,7 +89,7 @@ public abstract class ForwardingSet<E extends @Nullable Object> extends Forwardi
    * @since 7.0
    */
   protected boolean standardEquals(@Nullable Object object) {
-    return Sets.equalsImpl(this, object);
+    return equalsImpl(this, object);
   }
 
   /**
@@ -96,6 +99,27 @@ public abstract class ForwardingSet<E extends @Nullable Object> extends Forwardi
    * @since 7.0
    */
   protected int standardHashCode() {
-    return Sets.hashCodeImpl(this);
+    return hashCodeImpl(this);
+  }
+
+  /**
+   * A simplified version of {@link ForwardingSet} where subclasses can pass in an already
+   * constructed {@link Set} as the delegate.
+   *
+   * <p>TODO(b/3417232): Consider making this public, but take into consideration whether it would
+   * then appear as a user-visible supertype for any classes.
+   */
+  abstract static class SimpleForwardingSet<E extends @Nullable Object> extends ForwardingSet<E> {
+    private final Set<E> delegate;
+
+    /** Constructor for use by subclasses. */
+    SimpleForwardingSet(Set<E> delegate) {
+      this.delegate = checkNotNull(delegate);
+    }
+
+    @Override
+    protected final Set<E> delegate() {
+      return delegate;
+    }
   }
 }

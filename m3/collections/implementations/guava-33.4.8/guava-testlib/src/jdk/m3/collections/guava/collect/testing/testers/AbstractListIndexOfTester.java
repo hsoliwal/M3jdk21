@@ -24,7 +24,6 @@ import jdk.m3.collections.guava.collect.testing.WrongType;
 import jdk.m3.collections.guava.collect.testing.features.CollectionFeature;
 import jdk.m3.collections.guava.collect.testing.features.CollectionSize;
 import org.jspecify.annotations.Nullable;
-import org.junit.Ignore;
 
 /**
  * Common parent class for {@link ListIndexOfTester} and {@link ListLastIndexOfTester}.
@@ -32,9 +31,6 @@ import org.junit.Ignore;
  * @author Chris Povirk
  */
 @GwtCompatible
-@Ignore("test runners must not instantiate and run this directly, only via suites we build")
-// @Ignore affects the Android test runner, which respects JUnit 4 annotations on JUnit 3 tests.
-@SuppressWarnings("JUnit4ClassUsedInJUnit3")
 public abstract class AbstractListIndexOfTester<E> extends AbstractListTester<E> {
   /** Override to call {@code indexOf()} or {@code lastIndexOf()}. */
   protected abstract int find(@Nullable Object o);

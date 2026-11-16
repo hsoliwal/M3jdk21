@@ -16,8 +16,11 @@
 
 package jdk.m3.collections.guava.collect;
 
-import static jdk.m3.collections.guava.collect.ReflectionFreeAssertThrows.assertThrows;
+import static jdk.m3.collections.guava.collect.Sets.newIdentityHashSet;
+import static jdk.m3.collections.guava.testing.SerializableTester.reserialize;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
 import static java.util.Arrays.asList;
+import static org.junit.Assert.assertThrows;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
@@ -30,7 +33,6 @@ import jdk.m3.collections.guava.collect.testing.google.MultisetTestSuiteBuilder;
 import jdk.m3.collections.guava.collect.testing.google.TestEnumMultisetGenerator;
 import jdk.m3.collections.guava.testing.ClassSanityTester;
 import jdk.m3.collections.guava.testing.NullPointerTester;
-import jdk.m3.collections.guava.testing.SerializableTester;
 import com.google.errorprone.annotations.Keep;
 import java.util.Collection;
 import java.util.EnumSet;
@@ -45,12 +47,11 @@ import org.jspecify.annotations.NullUnmarked;
  *
  * @author Jared Levy
  */
-@GwtCompatible(emulated = true)
+@GwtCompatible
 @J2ktIncompatible // EnumMultiset
 @NullUnmarked
 public class EnumMultisetTest extends TestCase {
 
-  @J2ktIncompatible
   @GwtIncompatible // suite
   @AndroidIncompatible // test-suite builders
   public static Test suite() {
@@ -118,7 +119,7 @@ public class EnumMultisetTest extends TestCase {
   }
 
   public void testCreateEmptyWithClass() {
-    Multiset<Color> ms = EnumMultiset.create(ImmutableList.<Color>of(), Color.class);
+    Multiset<Color> ms = EnumMultiset.create(ImmutableList.of(), Color.class);
     ms.add(Color.RED);
   }
 
@@ -132,13 +133,13 @@ public class EnumMultisetTest extends TestCase {
     ms.add(Color.BLUE, 3);
     ms.add(Color.YELLOW, 1);
     ms.add(Color.RED, 2);
-    assertEquals("[BLUE x 3, RED x 2, YELLOW]", ms.toString());
+    assertThat(ms.toString()).isEqualTo("[BLUE x 3, RED x 2, YELLOW]");
   }
 
   @GwtIncompatible // SerializableTester
   public void testSerializable() {
     Multiset<Color> ms = EnumMultiset.create(asList(Color.RED, Color.YELLOW, Color.RED));
-    assertEquals(ms, SerializableTester.reserialize(ms));
+    assertEquals(ms, reserialize(ms));
   }
 
   public void testEntrySet() {
@@ -147,7 +148,7 @@ public class EnumMultisetTest extends TestCase {
     ms.add(Color.YELLOW, 1);
     ms.add(Color.RED, 2);
 
-    Set<Object> uniqueEntries = Sets.newIdentityHashSet();
+    Set<Object> uniqueEntries = newIdentityHashSet();
     uniqueEntries.addAll(ms.entrySet());
     assertEquals(3, uniqueEntries.size());
   }
@@ -162,7 +163,6 @@ public class EnumMultisetTest extends TestCase {
     }
   }
 
-  @J2ktIncompatible
   @GwtIncompatible // reflection
   public void testEquals() throws Exception {
     new ClassSanityTester()
@@ -172,9 +172,8 @@ public class EnumMultisetTest extends TestCase {
         .testEquals();
   }
 
-  @J2ktIncompatible
   @GwtIncompatible // reflection
-  public void testNulls() throws Exception {
+  public void testNulls() {
     new NullPointerTester()
         .setDefault(Class.class, Color.class)
         .setDefault(Iterable.class, EnumSet.allOf(Color.class))

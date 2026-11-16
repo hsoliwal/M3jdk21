@@ -16,14 +16,14 @@
 
 package jdk.m3.collections.guava.collect;
 
-import static jdk.m3.collections.guava.collect.ReflectionFreeAssertThrows.assertThrows;
-import static com.google.common.truth.Truth.assertThat;
+import static jdk.m3.collections.guava.testing.SerializableTester.reserializeAndAssert;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
+import static org.junit.Assert.assertThrows;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
 import jdk.m3.collections.guava.annotations.J2ktIncompatible;
 import jdk.m3.collections.guava.testing.NullPointerTester;
-import jdk.m3.collections.guava.testing.SerializableTester;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
@@ -32,12 +32,12 @@ import org.jspecify.annotations.Nullable;
  *
  * @author Jared Levy
  */
-@GwtCompatible(emulated = true)
+@GwtCompatible
 @NullMarked
 public class HashBasedTableTest extends AbstractTableTest<Character> {
 
   @Override
-  protected Table<String, Integer, Character> create(@Nullable Object... data) {
+  Table<String, Integer, Character> create(@Nullable Object... data) {
     Table<String, Integer, Character> table = HashBasedTable.create();
     table.put("foo", 4, 'a');
     table.put("cat", 1, 'b');
@@ -92,7 +92,7 @@ public class HashBasedTableTest extends AbstractTableTest<Character> {
   @GwtIncompatible // SerializableTester
   public void testSerialization() {
     table = create("foo", 1, 'a', "bar", 1, 'b', "foo", 3, 'c');
-    SerializableTester.reserializeAndAssert(table);
+    reserializeAndAssert(table);
   }
 
   @J2ktIncompatible

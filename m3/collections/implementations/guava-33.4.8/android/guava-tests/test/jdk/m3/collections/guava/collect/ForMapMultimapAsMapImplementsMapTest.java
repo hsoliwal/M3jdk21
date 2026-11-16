@@ -19,6 +19,7 @@ package jdk.m3.collections.guava.collect;
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.collect.testing.MapInterfaceTest;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Map;
 import org.jspecify.annotations.NullMarked;
 
@@ -38,13 +39,13 @@ public class ForMapMultimapAsMapImplementsMapTest extends AbstractMultimapAsMapI
 
   @Override
   protected Map<String, Collection<Integer>> makeEmptyMap() {
-    Map<String, Integer> map = Maps.newHashMap();
+    Map<String, Integer> map = new HashMap<>();
     return Multimaps.forMap(map).asMap();
   }
 
   @Override
   protected Map<String, Collection<Integer>> makePopulatedMap() {
-    Map<String, Integer> map = Maps.newHashMap();
+    Map<String, Integer> map = new HashMap<>();
     map.put("foo", 1);
     map.put("bar", 2);
     map.put("cow", 3);
@@ -56,7 +57,7 @@ public class ForMapMultimapAsMapImplementsMapTest extends AbstractMultimapAsMapI
     try {
       super.testEntrySetRemoveAllNullFromEmpty();
     } catch (RuntimeException tolerated) {
-      // GWT's HashMap.entrySet().removeAll(null) doesn't throws NPE.
+      // GWT's HashMap.entrySet().removeAll(null) doesn't throw NPE.
     }
   }
 
@@ -65,7 +66,7 @@ public class ForMapMultimapAsMapImplementsMapTest extends AbstractMultimapAsMapI
     try {
       super.testEntrySetRetainAllNullFromEmpty();
     } catch (RuntimeException tolerated) {
-      // GWT's HashMap.entrySet().retainAll(null) doesn't throws NPE.
+      // GWT's HashMap.entrySet().retainAll(null) doesn't throw NPE.
     }
   }
 
@@ -74,7 +75,7 @@ public class ForMapMultimapAsMapImplementsMapTest extends AbstractMultimapAsMapI
     try {
       super.testKeySetRemoveAllNullFromEmpty();
     } catch (RuntimeException tolerated) {
-      // GWT's HashMap.keySet().removeAll(null) doesn't throws NPE.
+      // GWT's HashMap.keySet().removeAll(null) doesn't throw NPE.
     }
   }
 
@@ -83,7 +84,7 @@ public class ForMapMultimapAsMapImplementsMapTest extends AbstractMultimapAsMapI
     try {
       super.testKeySetRetainAllNullFromEmpty();
     } catch (RuntimeException tolerated) {
-      // GWT's HashMap.keySet().retainAll(null) doesn't throws NPE.
+      // GWT's HashMap.keySet().retainAll(null) doesn't throw NPE.
     }
   }
 
@@ -92,7 +93,7 @@ public class ForMapMultimapAsMapImplementsMapTest extends AbstractMultimapAsMapI
     try {
       super.testValuesRemoveAllNullFromEmpty();
     } catch (RuntimeException tolerated) {
-      // GWT's HashMap.values().removeAll(null) doesn't throws NPE.
+      // GWT's HashMap.values().removeAll(null) doesn't throw NPE.
     }
   }
 
@@ -101,7 +102,7 @@ public class ForMapMultimapAsMapImplementsMapTest extends AbstractMultimapAsMapI
     try {
       super.testValuesRemoveAllNullFromEmpty();
     } catch (RuntimeException tolerated) {
-      // GWT's HashMap.values().retainAll(null) doesn't throws NPE.
+      // GWT's HashMap.values().retainAll(null) doesn't throw NPE.
     }
   }
 }

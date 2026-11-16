@@ -23,8 +23,8 @@ import static jdk.m3.collections.guava.collect.testing.features.CollectionFeatur
 import static jdk.m3.collections.guava.collect.testing.features.CollectionFeature.SUPPORTS_REMOVE;
 import static jdk.m3.collections.guava.collect.testing.features.CollectionSize.SEVERAL;
 import static jdk.m3.collections.guava.collect.testing.features.CollectionSize.ZERO;
-import static jdk.m3.collections.guava.collect.testing.google.ReflectionFreeAssertThrows.assertThrows;
 import static java.util.Arrays.asList;
+import static org.junit.Assert.assertThrows;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
@@ -38,7 +38,6 @@ import java.lang.reflect.Method;
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.List;
-import org.junit.Ignore;
 
 /**
  * Common superclass for {@link MultisetSetCountUnconditionallyTester} and {@link
@@ -48,17 +47,13 @@ import org.junit.Ignore;
  *
  * @author Chris Povirk
  */
-@GwtCompatible(emulated = true)
-@Ignore("test runners must not instantiate and run this directly, only via suites we build")
-// @Ignore affects the Android test runner, which respects JUnit 4 annotations on JUnit 3 tests.
-@SuppressWarnings("JUnit4ClassUsedInJUnit3")
+@GwtCompatible
 public abstract class AbstractMultisetSetCountTester<E> extends AbstractMultisetTester<E> {
   /*
-   * TODO: consider adding MultisetFeatures.SUPPORTS_SET_COUNT. Currently we
-   * assume that using setCount() to increase the count is permitted iff add()
-   * is permitted and similarly for decrease/remove(). We assume that a
-   * setCount() no-op is permitted if either add() or remove() is permitted,
-   * though we also allow it to "succeed" if neither is permitted.
+   * TODO: consider adding MultisetFeatures.SUPPORTS_SET_COUNT. Currently we assume that using
+   * setCount() to increase the count is permitted if and only if add() is permitted and similarly
+   * for decrease/remove(). We assume that a setCount() no-op is permitted if either add() or
+   * remove() is permitted, though we also allow it to "succeed" if neither is permitted.
    */
 
   private void assertSetCount(E element, int count) {
@@ -93,19 +88,13 @@ public abstract class AbstractMultisetSetCountTester<E> extends AbstractMultiset
   abstract void setCountNoCheckReturnValue(E element, int count);
 
   private void assertSetCountIncreasingFailure(E element, int count) {
-    try {
-      setCountNoCheckReturnValue(element, count);
-      fail("a call to multiset.setCount() to increase an element's count should throw");
-    } catch (UnsupportedOperationException expected) {
-    }
+    assertThrows(
+        UnsupportedOperationException.class, () -> setCountNoCheckReturnValue(element, count));
   }
 
   private void assertSetCountDecreasingFailure(E element, int count) {
-    try {
-      setCountNoCheckReturnValue(element, count);
-      fail("a call to multiset.setCount() to decrease an element's count should throw");
-    } catch (UnsupportedOperationException expected) {
-    }
+    assertThrows(
+        UnsupportedOperationException.class, () -> setCountNoCheckReturnValue(element, count));
   }
 
   // Unconditional setCount no-ops.

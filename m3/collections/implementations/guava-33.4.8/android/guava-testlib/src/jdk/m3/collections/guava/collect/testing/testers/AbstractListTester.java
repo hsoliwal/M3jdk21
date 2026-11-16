@@ -22,9 +22,9 @@ import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.collect.testing.AbstractCollectionTester;
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
-import org.junit.Ignore;
 
 /**
  * Base class for list testers.
@@ -33,9 +33,6 @@ import org.junit.Ignore;
  */
 @GwtCompatible
 @NullMarked
-@Ignore("test runners must not instantiate and run this directly, only via suites we build")
-// @Ignore affects the Android test runner, which respects JUnit 4 annotations on JUnit 3 tests.
-@SuppressWarnings("JUnit4ClassUsedInJUnit3")
 public class AbstractListTester<E extends @Nullable Object> extends AbstractCollectionTester<E> {
   /*
    * Previously we had a field named list that was initialized to the value of
@@ -63,7 +60,7 @@ public class AbstractListTester<E extends @Nullable Object> extends AbstractColl
     for (int i = 0; i < expectedList.size(); i++) {
       E expected = expectedList.get(i);
       E actual = getList().get(i);
-      if (expected != actual && (expected == null || !expected.equals(actual))) {
+      if (!Objects.equals(actual, expected)) {
         fail("mismatch at index " + i + ": " + reportContext(expectedList));
       }
     }

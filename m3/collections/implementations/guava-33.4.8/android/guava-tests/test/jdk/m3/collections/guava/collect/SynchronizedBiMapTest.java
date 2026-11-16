@@ -17,6 +17,8 @@
 package jdk.m3.collections.guava.collect;
 
 import static jdk.m3.collections.guava.base.Preconditions.checkArgument;
+import static jdk.m3.collections.guava.collect.Maps.synchronizedBiMap;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
 
 import jdk.m3.collections.guava.collect.Synchronized.SynchronizedBiMap;
 import jdk.m3.collections.guava.collect.Synchronized.SynchronizedSet;
@@ -73,8 +75,8 @@ public class SynchronizedBiMapTest extends SynchronizedMapTest {
   }
 
   @Override
-  protected <K, V> BiMap<K, V> create() {
-    TestBiMap<K, V> inner = new TestBiMap<>(HashBiMap.<K, V>create(), mutex);
+  <K, V> BiMap<K, V> create() {
+    TestBiMap<K, V> inner = new TestBiMap<>(HashBiMap.create(), mutex);
     BiMap<K, V> outer = Synchronized.biMap(inner, mutex);
     return outer;
   }
@@ -88,7 +90,7 @@ public class SynchronizedBiMapTest extends SynchronizedMapTest {
         checkArgument(!result.containsKey(entry.getKey()));
         result.put(entry.getKey(), entry.getValue());
       }
-      return Maps.synchronizedBiMap(result);
+      return synchronizedBiMap(result);
     }
   }
 
@@ -97,7 +99,7 @@ public class SynchronizedBiMapTest extends SynchronizedMapTest {
     @Override
     protected BiMap<String, String> create(Entry<String, String>[] entries) {
       Object mutex = new Object();
-      BiMap<String, String> backing = new TestBiMap<>(HashBiMap.<String, String>create(), mutex);
+      BiMap<String, String> backing = new TestBiMap<>(HashBiMap.create(), mutex);
       BiMap<String, String> result = Synchronized.biMap(backing, mutex);
       for (Entry<String, String> entry : entries) {
         checkArgument(!result.containsKey(entry.getKey()));
@@ -143,9 +145,9 @@ public class SynchronizedBiMapTest extends SynchronizedMapTest {
   public void testInverse() {
     BiMap<String, Integer> bimap = create();
     BiMap<Integer, String> inverse = bimap.inverse();
-    assertSame(bimap, inverse.inverse());
+    assertThat(inverse.inverse()).isSameInstanceAs(bimap);
     assertTrue(inverse instanceof SynchronizedBiMap);
-    assertSame(mutex, ((SynchronizedBiMap<?, ?>) inverse).mutex);
+    assertThat(((SynchronizedBiMap<?, ?>) inverse).mutex).isSameInstanceAs(mutex);
   }
 
   @Override
@@ -153,6 +155,6 @@ public class SynchronizedBiMapTest extends SynchronizedMapTest {
     BiMap<String, Integer> map = create();
     Set<Integer> values = map.values();
     assertTrue(values instanceof SynchronizedSet);
-    assertSame(mutex, ((SynchronizedSet<?>) values).mutex);
+    assertThat(((SynchronizedSet<?>) values).mutex).isSameInstanceAs(mutex);
   }
 }

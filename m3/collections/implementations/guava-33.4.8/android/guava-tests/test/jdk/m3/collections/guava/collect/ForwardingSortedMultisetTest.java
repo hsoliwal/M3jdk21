@@ -17,6 +17,7 @@ package jdk.m3.collections.guava.collect;
 import static java.util.Arrays.asList;
 
 import jdk.m3.collections.guava.base.Function;
+import jdk.m3.collections.guava.collect.ForwardingSortedMultiset.SimpleForwardingSortedMultiset;
 import jdk.m3.collections.guava.collect.Multiset.Entry;
 import jdk.m3.collections.guava.collect.testing.features.CollectionFeature;
 import jdk.m3.collections.guava.collect.testing.features.CollectionSize;
@@ -41,16 +42,9 @@ import org.jspecify.annotations.Nullable;
  */
 @NullUnmarked
 public class ForwardingSortedMultisetTest extends TestCase {
-  static class StandardImplForwardingSortedMultiset<E> extends ForwardingSortedMultiset<E> {
-    private final SortedMultiset<E> backingMultiset;
-
+  static class StandardImplForwardingSortedMultiset<E> extends SimpleForwardingSortedMultiset<E> {
     StandardImplForwardingSortedMultiset(SortedMultiset<E> backingMultiset) {
-      this.backingMultiset = backingMultiset;
-    }
-
-    @Override
-    protected SortedMultiset<E> delegate() {
-      return backingMultiset;
+      super(backingMultiset);
     }
 
     @Override
@@ -59,7 +53,11 @@ public class ForwardingSortedMultisetTest extends TestCase {
 
         @Override
         Iterator<Entry<E>> entryIterator() {
-          return backingMultiset.descendingMultiset().entrySet().iterator();
+          return StandardImplForwardingSortedMultiset.this
+              .delegate()
+              .descendingMultiset()
+              .entrySet()
+              .iterator();
         }
       };
     }
@@ -228,7 +226,7 @@ public class ForwardingSortedMultisetTest extends TestCase {
         .testEquals();
   }
 
-  private static <T> SortedMultiset<T> wrap(final SortedMultiset<T> delegate) {
+  private static <T> SortedMultiset<T> wrap(SortedMultiset<T> delegate) {
     return new ForwardingSortedMultiset<T>() {
       @Override
       protected SortedMultiset<T> delegate() {

@@ -27,11 +27,9 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.SortedMap;
-import java.util.TreeMap;
 import java.util.function.BinaryOperator;
 import java.util.function.Function;
 import java.util.stream.Collector;
-import java.util.stream.Collectors;
 import org.jspecify.annotations.Nullable;
 
 /**
@@ -45,12 +43,6 @@ public final class ImmutableSortedMap<K, V> extends ForwardingImmutableMap<K, V>
 
   @SuppressWarnings("unchecked")
   static final Comparator<?> NATURAL_ORDER = Ordering.natural();
-
-  // This reference is only used by GWT compiler to infer the keys and values
-  // of the map that needs to be serialized.
-  private @Nullable Comparator<? super K> unusedComparatorForSerialization;
-  private @Nullable K unusedKeyForSerialization;
-  private @Nullable V unusedValueForSerialization;
 
   private final transient SortedMap<K, V> sortedDelegate;
 
@@ -68,6 +60,13 @@ public final class ImmutableSortedMap<K, V> extends ForwardingImmutableMap<K, V>
     this.sortedDelegate = delegate;
   }
 
+  public static <T extends @Nullable Object, K extends Comparable<? super K>, V>
+      Collector<T, ?, ImmutableSortedMap<K, V>> toImmutableSortedMap(
+          Function<? super T, ? extends K> keyFunction,
+          Function<? super T, ? extends V> valueFunction) {
+    return CollectCollectors.toImmutableSortedMap(Ordering.natural(), keyFunction, valueFunction);
+  }
+
   public static <T extends @Nullable Object, K, V>
       Collector<T, ?, ImmutableSortedMap<K, V>> toImmutableSortedMap(
           Comparator<? super K> comparator,
@@ -76,20 +75,23 @@ public final class ImmutableSortedMap<K, V> extends ForwardingImmutableMap<K, V>
     return CollectCollectors.toImmutableSortedMap(comparator, keyFunction, valueFunction);
   }
 
+  public static <T extends @Nullable Object, K extends Comparable<? super K>, V>
+      Collector<T, ?, ImmutableSortedMap<K, V>> toImmutableSortedMap(
+          Function<? super T, ? extends K> keyFunction,
+          Function<? super T, ? extends V> valueFunction,
+          BinaryOperator<V> mergeFunction) {
+    return CollectCollectors.toImmutableSortedMap(
+        Ordering.natural(), keyFunction, valueFunction, mergeFunction);
+  }
+
   public static <T extends @Nullable Object, K, V>
       Collector<T, ?, ImmutableSortedMap<K, V>> toImmutableSortedMap(
           Comparator<? super K> comparator,
           Function<? super T, ? extends K> keyFunction,
           Function<? super T, ? extends V> valueFunction,
           BinaryOperator<V> mergeFunction) {
-    checkNotNull(comparator);
-    checkNotNull(keyFunction);
-    checkNotNull(valueFunction);
-    checkNotNull(mergeFunction);
-    return Collectors.collectingAndThen(
-        Collectors.toMap(
-            keyFunction, valueFunction, mergeFunction, () -> new TreeMap<K, V>(comparator)),
-        ImmutableSortedMap::copyOfSorted);
+    return CollectCollectors.toImmutableSortedMap(
+        comparator, keyFunction, valueFunction, mergeFunction);
   }
 
   // unsafe, comparator() returns a comparator on the specified type
@@ -415,24 +417,27 @@ public final class ImmutableSortedMap<K, V> extends ForwardingImmutableMap<K, V>
 
   @Override
   ImmutableSortedSet<K> createKeySet() {
-    // the keySet() of the delegate is only a Set and TreeMap.navigatableKeySet
+    // the keySet() of the delegate is only a Set and TreeMap.navigableKeySet
     // is not available in GWT yet.  To keep the code simple and code size more,
     // we make a copy here, instead of creating a view of it.
     //
     // TODO: revisit if it's unbearably slow or when GWT supports
-    // TreeMap.navigatbleKeySet().
+    // TreeMap.navigableKeySet().
     return ImmutableSortedSet.copyOf(comparator, sortedDelegate.keySet());
   }
 
+  @Override
   public Comparator<? super K> comparator() {
     return comparator;
   }
 
-  public @Nullable K firstKey() {
+  @Override
+  public K firstKey() {
     return sortedDelegate.firstKey();
   }
 
-  public @Nullable K lastKey() {
+  @Override
+  public K lastKey() {
     return sortedDelegate.lastKey();
   }
 
@@ -447,6 +452,7 @@ public final class ImmutableSortedMap<K, V> extends ForwardingImmutableMap<K, V>
     return null;
   }
 
+  @Override
   public ImmutableSortedMap<K, V> headMap(K toKey) {
     checkNotNull(toKey);
     return newView(sortedDelegate.headMap(toKey));
@@ -464,6 +470,7 @@ public final class ImmutableSortedMap<K, V> extends ForwardingImmutableMap<K, V>
     return headMap(toKey);
   }
 
+  @Override
   public ImmutableSortedMap<K, V> subMap(K fromKey, K toKey) {
     checkNotNull(fromKey);
     checkNotNull(toKey);
@@ -478,6 +485,7 @@ public final class ImmutableSortedMap<K, V> extends ForwardingImmutableMap<K, V>
     return tailMap(fromKey, fromInclusive).headMap(toKey, toInclusive);
   }
 
+  @Override
   public ImmutableSortedMap<K, V> tailMap(K fromKey) {
     checkNotNull(fromKey);
     return newView(sortedDelegate.tailMap(fromKey));
@@ -523,6 +531,6 @@ public final class ImmutableSortedMap<K, V> extends ForwardingImmutableMap<K, V>
   }
 
   private static <E> Comparator<@Nullable E> nullAccepting(Comparator<E> comparator) {
-    return Ordering.from(comparator).<E>nullsFirst();
+    return Ordering.from(comparator).nullsFirst();
   }
 }

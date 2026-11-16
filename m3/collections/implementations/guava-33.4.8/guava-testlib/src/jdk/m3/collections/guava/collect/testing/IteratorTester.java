@@ -16,8 +16,9 @@
 
 package jdk.m3.collections.guava.collect.testing;
 
+import static java.util.Collections.singleton;
+
 import jdk.m3.collections.guava.annotations.GwtCompatible;
-import java.util.Collections;
 import java.util.Iterator;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
@@ -59,11 +60,9 @@ import org.jspecify.annotations.Nullable;
  * Collections.unmodifiableList}'s iterator:
  *
  * {@snippet :
- * List<String> expectedElements =
- *     Arrays.asList("a", "b", "c", "d", "e");
+ * List<String> expectedElements = Arrays.asList("a", "b", "c", "d", "e");
  * List<String> actualElements =
- *     Collections.unmodifiableList(
- *         Arrays.asList("a", "b", "c", "d", "e"));
+ *     Collections.unmodifiableList(Arrays.asList("a", "b", "c", "d", "e"));
  * IteratorTester<String> iteratorTester =
  *     new IteratorTester<String>(
  *         6,
@@ -100,7 +99,7 @@ public abstract class IteratorTester<E extends @Nullable Object>
       Iterable<? extends IteratorFeature> features,
       Iterable<E> expectedElements,
       KnownOrder knownOrder) {
-    super(steps, Collections.<E>singleton(null), features, expectedElements, knownOrder, 0);
+    super(steps, singleton(null), features, expectedElements, knownOrder, 0);
   }
 
   @Override

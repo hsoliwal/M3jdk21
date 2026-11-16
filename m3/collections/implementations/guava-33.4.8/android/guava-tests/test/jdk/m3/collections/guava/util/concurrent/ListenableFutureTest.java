@@ -16,8 +16,10 @@
 
 package jdk.m3.collections.guava.util.concurrent;
 
-import static com.google.common.truth.Truth.assertWithMessage;
+import static jdk.m3.collections.guava.truth.Truth.assertWithMessage;
 
+import jdk.m3.collections.guava.annotations.GwtIncompatible;
+import jdk.m3.collections.guava.annotations.J2ktIncompatible;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Future;
 import junit.framework.TestCase;
@@ -25,6 +27,8 @@ import org.jspecify.annotations.NullUnmarked;
 
 /** Test for {@link ListenableFuture}. */
 @NullUnmarked
+@GwtIncompatible
+@J2ktIncompatible
 public class ListenableFutureTest extends TestCase {
   public void testNoNewApis() throws Exception {
     assertWithMessage(

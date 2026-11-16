@@ -16,15 +16,17 @@
 
 package jdk.m3.collections.guava.util.concurrent;
 
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
 import static jdk.m3.collections.guava.util.concurrent.MoreExecutors.directExecutor;
+import static java.util.concurrent.Executors.newCachedThreadPool;
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.junit.Assert.assertThrows;
 
-import java.util.concurrent.Callable;
+import jdk.m3.collections.guava.annotations.GwtIncompatible;
+import jdk.m3.collections.guava.annotations.J2ktIncompatible;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import junit.framework.TestCase;
 import org.jspecify.annotations.NullUnmarked;
 
@@ -34,44 +36,35 @@ import org.jspecify.annotations.NullUnmarked;
  * @author Sven Mawson
  */
 @NullUnmarked
+@GwtIncompatible
+@J2ktIncompatible
 public class ListenableFutureTaskTest extends TestCase {
 
   private ExecutorService exec;
 
-  protected final CountDownLatch runLatch = new CountDownLatch(1);
-  protected final CountDownLatch taskLatch = new CountDownLatch(1);
-  protected final CountDownLatch listenerLatch = new CountDownLatch(1);
+  private final CountDownLatch runLatch = new CountDownLatch(1);
+  private final CountDownLatch taskLatch = new CountDownLatch(1);
+  private final CountDownLatch listenerLatch = new CountDownLatch(1);
 
-  protected volatile boolean throwException = false;
+  private volatile boolean throwException = false;
 
-  protected final ListenableFutureTask<Integer> task =
-      ListenableFutureTask.create(
-          new Callable<Integer>() {
-            @Override
-            public Integer call() throws Exception {
-              runLatch.countDown();
-              taskLatch.await();
-              if (throwException) {
-                throw new IllegalStateException("Fail");
-              }
-              return 25;
-            }
-          });
+  private final ListenableFutureTask<Integer> task =
+      ListenableFutureTask.create(() -> {
+        runLatch.countDown();
+        taskLatch.await();
+        if (throwException) {
+          throw new IllegalStateException("Fail");
+        }
+        return 25;
+      });
 
   @Override
   protected void setUp() throws Exception {
     super.setUp();
 
-    exec = Executors.newCachedThreadPool();
+    exec = newCachedThreadPool();
 
-    task.addListener(
-        new Runnable() {
-          @Override
-          public void run() {
-            listenerLatch.countDown();
-          }
-        },
-        directExecutor());
+    task.addListener(listenerLatch::countDown, directExecutor());
   }
 
   @Override
@@ -117,7 +110,7 @@ public class ListenableFutureTaskTest extends TestCase {
     taskLatch.countDown();
 
     ExecutionException e = assertThrows(ExecutionException.class, () -> task.get(5, SECONDS));
-    assertEquals(IllegalStateException.class, e.getCause().getClass());
+    assertThat(e).hasCauseThat().isInstanceOf(IllegalStateException.class);
 
     assertTrue(listenerLatch.await(5, SECONDS));
     assertTrue(task.isDone());

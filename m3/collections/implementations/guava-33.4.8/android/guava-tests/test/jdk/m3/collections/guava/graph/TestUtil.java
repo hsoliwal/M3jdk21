@@ -16,13 +16,16 @@
 
 package jdk.m3.collections.guava.graph;
 
-import static com.google.common.truth.Truth.assertThat;
+import static jdk.m3.collections.guava.collect.Iterators.size;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
 
 import jdk.m3.collections.guava.collect.ImmutableSet;
-import jdk.m3.collections.guava.collect.Iterators;
+import jdk.m3.collections.guava.collect.Ordering;
+import jdk.m3.collections.guava.testing.EqualsTester;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import java.util.Set;
 import org.jspecify.annotations.NullUnmarked;
+import org.jspecify.annotations.Nullable;
 
 /** Utility methods used in various common.graph tests. */
 @NullUnmarked
@@ -39,24 +42,60 @@ final class TestUtil {
     DIRECTED;
   }
 
+  enum NetworkType {
+    BASIC(false, false, ElementOrder.insertion(), ElementOrder.insertion()),
+    WITH_SELF_LOOPS(true, false, ElementOrder.insertion(), ElementOrder.insertion()),
+    NATURAL_ORDERING(
+        false,
+        false,
+        ElementOrder.sorted(Ordering.natural()),
+        ElementOrder.sorted(Ordering.natural())),
+    WITH_SELF_LOOPS_AND_PARALLEL_EDGES(
+        true, true, ElementOrder.insertion(), ElementOrder.insertion());
+
+    final boolean allowsSelfLoops;
+    final boolean allowsParallelEdges;
+    final ElementOrder<Integer> nodeOrder;
+    final ElementOrder<String> edgeOrder;
+
+    NetworkType(
+        boolean allowsSelfLoops,
+        boolean allowsParallelEdges,
+        ElementOrder<Integer> nodeOrder,
+        ElementOrder<String> edgeOrder) {
+      this.allowsSelfLoops = allowsSelfLoops;
+      this.allowsParallelEdges = allowsParallelEdges;
+      this.nodeOrder = nodeOrder;
+      this.edgeOrder = edgeOrder;
+    }
+
+    NetworkBuilder<Integer, String> configure(NetworkBuilder<Object, Object> builder) {
+      return builder
+          .allowsSelfLoops(allowsSelfLoops)
+          .allowsParallelEdges(allowsParallelEdges)
+          .nodeOrder(nodeOrder)
+          .edgeOrder(edgeOrder);
+    }
+  }
+
   private TestUtil() {}
 
-  static void assertNodeNotInGraphErrorMessage(Throwable throwable) {
+  static void assertNodeNotInGraphErrorMessage(@Nullable Throwable throwable) {
     assertThat(throwable).hasMessageThat().startsWith(NODE_STRING);
     assertThat(throwable).hasMessageThat().contains(ERROR_ELEMENT_NOT_IN_GRAPH);
   }
 
-  static void assertEdgeNotInGraphErrorMessage(Throwable throwable) {
+  static void assertEdgeNotInGraphErrorMessage(@Nullable Throwable throwable) {
     assertThat(throwable).hasMessageThat().startsWith(EDGE_STRING);
     assertThat(throwable).hasMessageThat().contains(ERROR_ELEMENT_NOT_IN_GRAPH);
   }
 
-  static void assertNodeRemovedFromGraphErrorMessage(Throwable throwable) {
+  static void assertNodeRemovedFromGraphErrorMessage(@Nullable Throwable throwable) {
     assertThat(throwable).hasMessageThat().startsWith(NODE_STRING);
     assertThat(throwable).hasMessageThat().contains(ERROR_ELEMENT_REMOVED);
   }
 
-  static void assertEdgeRemovedFromGraphErrorMessage(Throwable throwable) {
+  static void assertEdgeRemovedFromGraphErrorMessage(@Nullable Throwable throwable) {
     assertThat(throwable).hasMessageThat().startsWith(EDGE_STRING);
     assertThat(throwable).hasMessageThat().contains(ERROR_ELEMENT_REMOVED);
   }
@@ -91,14 +130,24 @@ final class TestUtil {
    * In some cases our graph implementations return custom sets that define their own size() and
    * contains(). Verify that these sets are consistent with the elements of their iterator.
    */
+  // We want to test our implementations of Collection methods, so we call them directly.
+  @SuppressWarnings({
+    "CollectionSizeTruth",
+    "CollectionContainsTruth",
+    "CollectionDoesNotContainTruth"
+  })
   @CanIgnoreReturnValue
   static <T> Set<T> sanityCheckSet(Set<T> set) {
-    assertThat(set).hasSize(Iterators.size(set.iterator()));
+    assertThat(set.size()).isEqualTo(size(set.iterator()));
     for (Object element : set) {
-      assertThat(set).contains(element);
+      assertThat(set.contains(element)).isTrue();
     }
-    assertThat(set).doesNotContain(new Object());
-    assertThat(set).isEqualTo(ImmutableSet.copyOf(set));
+    try {
+      assertThat(set.contains(new Object())).isFalse();
+    } catch (ClassCastException tolerated) {
+      // It's OK for our backing TreeMap to throw. TODO(cpovirk): Would we prefer that it not?
+    }
+    new EqualsTester().addEqualityGroup(set, ImmutableSet.copyOf(set)).testEquals();
     return set;
   }
 }

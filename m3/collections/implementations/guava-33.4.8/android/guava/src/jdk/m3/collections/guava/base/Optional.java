@@ -85,7 +85,7 @@ import org.jspecify.annotations.Nullable;
  * @since 10.0
  */
 @DoNotMock("Use Optional.of(value) or Optional.absent()")
-@GwtCompatible(serializable = true)
+@GwtCompatible
 public abstract class Optional<T> implements Serializable {
   /**
    * Returns an {@code Optional} instance with no contained reference.
@@ -117,7 +117,7 @@ public abstract class Optional<T> implements Serializable {
    * {@code Optional.ofNullable}.
    */
   public static <T> Optional<T> fromNullable(@Nullable T nullableReference) {
-    return (nullableReference == null) ? Optional.<T>absent() : new Present<T>(nullableReference);
+    return nullableReference == null ? absent() : new Present<>(nullableReference);
   }
 
   /**
@@ -126,10 +126,7 @@ public abstract class Optional<T> implements Serializable {
    *
    * @since 33.4.0 (but since 21.0 in the JRE flavor)
    */
-  @SuppressWarnings({
-    "NullableOptional", // Null passthrough is reasonable for type conversions
-    "Java7ApiChecker",
-  })
+  @SuppressWarnings("NullableOptional") // Null passthrough is reasonable for type conversions
   @IgnoreJRERequirement // Users will use this only if they're already using Optional.
   public static <T> @Nullable Optional<T> fromJavaUtil(
       java.util.@Nullable Optional<T> javaUtilOptional) {
@@ -152,7 +149,6 @@ public abstract class Optional<T> implements Serializable {
   @SuppressWarnings({
     "AmbiguousMethodReference", // We chose the name despite knowing this risk.
     "NullableOptional", // Null passthrough is reasonable for type conversions
-    "Java7ApiChecker",
   })
   // If users use this when they shouldn't, we hope that NewApi will catch subsequent Optional calls
   @IgnoreJRERequirement
@@ -170,13 +166,10 @@ public abstract class Optional<T> implements Serializable {
    *
    * @since 33.4.0 (but since 21.0 in the JRE flavor)
    */
-  @SuppressWarnings({
-    "AmbiguousMethodReference", // We chose the name despite knowing this risk.
-    "Java7ApiChecker",
-  })
+  @SuppressWarnings("AmbiguousMethodReference") // We chose the name despite knowing this risk.
   // If users use this when they shouldn't, we hope that NewApi will catch subsequent Optional calls
   @IgnoreJRERequirement
-  public java.util.Optional<T> toJavaUtil() {
+  public final java.util.Optional<T> toJavaUtil() {
     return java.util.Optional.ofNullable(orNull());
   }
 
@@ -355,7 +348,7 @@ public abstract class Optional<T> implements Serializable {
     checkNotNull(optionals);
     return () ->
         new AbstractIterator<T>() {
-          private final Iterator<? extends Optional<? extends T>> iterator =
+          final Iterator<? extends Optional<? extends T>> iterator =
               checkNotNull(optionals.iterator());
 
           @Override

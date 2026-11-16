@@ -14,6 +14,7 @@
 
 package jdk.m3.collections.guava.collect;
 
+import static jdk.m3.collections.guava.collect.Maps.indexMap;
 import static java.util.Objects.requireNonNull;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
@@ -29,8 +30,7 @@ import java.util.Map.Entry;
 @Immutable(containerOf = {"R", "C", "V"})
 final class SparseImmutableTable<R, C, V> extends RegularImmutableTable<R, C, V> {
   static final ImmutableTable<Object, Object, Object> EMPTY =
-      new SparseImmutableTable<>(
-          ImmutableList.<Cell<Object, Object, Object>>of(), ImmutableSet.of(), ImmutableSet.of());
+      new SparseImmutableTable<>(ImmutableList.of(), ImmutableSet.of(), ImmutableSet.of());
 
   private final ImmutableMap<R, ImmutableMap<C, V>> rowMap;
   private final ImmutableMap<C, ImmutableMap<R, V>> columnMap;
@@ -48,12 +48,12 @@ final class SparseImmutableTable<R, C, V> extends RegularImmutableTable<R, C, V>
       ImmutableList<Cell<R, C, V>> cellList,
       ImmutableSet<R> rowSpace,
       ImmutableSet<C> columnSpace) {
-    Map<R, Integer> rowIndex = Maps.indexMap(rowSpace);
-    Map<R, Map<C, V>> rows = Maps.newLinkedHashMap();
+    Map<R, Integer> rowIndex = indexMap(rowSpace);
+    Map<R, Map<C, V>> rows = new LinkedHashMap<>();
     for (R row : rowSpace) {
       rows.put(row, new LinkedHashMap<C, V>());
     }
-    Map<C, Map<R, V>> columns = Maps.newLinkedHashMap();
+    Map<C, Map<R, V>> columns = new LinkedHashMap<>();
     for (C col : columnSpace) {
       columns.put(col, new LinkedHashMap<R, V>());
     }
@@ -96,15 +96,13 @@ final class SparseImmutableTable<R, C, V> extends RegularImmutableTable<R, C, V>
   @Override
   public ImmutableMap<C, Map<R, V>> columnMap() {
     // Casts without copying.
-    ImmutableMap<C, ImmutableMap<R, V>> columnMap = this.columnMap;
-    return ImmutableMap.<C, Map<R, V>>copyOf(columnMap);
+    return ImmutableMap.copyOf(columnMap);
   }
 
   @Override
   public ImmutableMap<R, Map<C, V>> rowMap() {
     // Casts without copying.
-    ImmutableMap<R, ImmutableMap<C, V>> rowMap = this.rowMap;
-    return ImmutableMap.<R, Map<C, V>>copyOf(rowMap);
+    return ImmutableMap.copyOf(rowMap);
   }
 
   @Override
@@ -134,7 +132,7 @@ final class SparseImmutableTable<R, C, V> extends RegularImmutableTable<R, C, V>
   @J2ktIncompatible
   @GwtIncompatible
     Object writeReplace() {
-    Map<C, Integer> columnKeyToIndex = Maps.indexMap(columnKeySet());
+    Map<C, Integer> columnKeyToIndex = indexMap(columnKeySet());
     int[] cellColumnIndices = new int[cellSet().size()];
     int i = 0;
     for (Cell<R, C, V> cell : cellSet()) {

@@ -21,6 +21,7 @@ import static jdk.m3.collections.guava.collect.testing.features.CollectionFeatur
 import static jdk.m3.collections.guava.collect.testing.features.CollectionFeature.RESTRICTS_ELEMENTS;
 import static jdk.m3.collections.guava.collect.testing.features.CollectionFeature.SERIALIZABLE;
 import static jdk.m3.collections.guava.collect.testing.features.CollectionFeature.SERIALIZABLE_INCLUDING_VIEWS;
+import static jdk.m3.collections.guava.testing.SerializableTester.reserialize;
 import static java.util.Arrays.asList;
 import static java.util.Collections.emptySet;
 import static java.util.Collections.sort;
@@ -28,7 +29,6 @@ import static java.util.Collections.sort;
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
 import jdk.m3.collections.guava.collect.BoundType;
 import jdk.m3.collections.guava.collect.ImmutableList;
-import jdk.m3.collections.guava.collect.Lists;
 import jdk.m3.collections.guava.collect.Multiset;
 import jdk.m3.collections.guava.collect.SortedMultiset;
 import jdk.m3.collections.guava.collect.testing.AbstractTester;
@@ -37,7 +37,6 @@ import jdk.m3.collections.guava.collect.testing.OneSizeTestContainerGenerator;
 import jdk.m3.collections.guava.collect.testing.SampleElements;
 import jdk.m3.collections.guava.collect.testing.SetTestSuiteBuilder;
 import jdk.m3.collections.guava.collect.testing.features.Feature;
-import jdk.m3.collections.guava.testing.SerializableTester;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
@@ -114,8 +113,8 @@ public class SortedMultisetTestSuiteBuilder<E> extends MultisetTestSuiteBuilder<
     NO_BOUND;
   }
 
-  List<TestSuite> createDerivedSuites(SortedMultisetTestSuiteBuilder<E> parentBuilder) {
-    List<TestSuite> derivedSuites = Lists.newArrayList();
+  final List<TestSuite> createDerivedSuites(SortedMultisetTestSuiteBuilder<E> parentBuilder) {
+    List<TestSuite> derivedSuites = new ArrayList<>();
 
     if (!parentBuilder.getFeatures().contains(NoRecurse.DESCENDING)) {
       derivedSuites.add(createDescendingSuite(parentBuilder));
@@ -163,7 +162,7 @@ public class SortedMultisetTestSuiteBuilder<E> extends MultisetTestSuiteBuilder<
     E firstInclusive = samplesList.get(0);
     E lastInclusive = samplesList.get(samplesList.size() - 1);
 
-    return SortedMultisetTestSuiteBuilder.using(
+    return using(
             new ForwardingTestMultisetGenerator<E>(delegate) {
               @Override
               public SortedMultiset<E> create(Object... entries) {
@@ -225,7 +224,7 @@ public class SortedMultisetTestSuiteBuilder<E> extends MultisetTestSuiteBuilder<
    * work for this purpose, which may cause problems for navigable maps with non-string or unicode
    * generators.
    */
-  private List<String> getExtremeValues() {
+  private static List<String> getExtremeValues() {
     List<String> result = new ArrayList<>();
     result.add("!! a");
     result.add("!! b");
@@ -245,7 +244,7 @@ public class SortedMultisetTestSuiteBuilder<E> extends MultisetTestSuiteBuilder<
       features.remove(SERIALIZABLE);
     }
 
-    return SortedMultisetTestSuiteBuilder.using(
+    return using(
             new ForwardingTestMultisetGenerator<E>(delegate) {
               @Override
               public SortedMultiset<E> create(Object... entries) {
@@ -271,11 +270,11 @@ public class SortedMultisetTestSuiteBuilder<E> extends MultisetTestSuiteBuilder<
     features.remove(SERIALIZABLE);
     features.remove(SERIALIZABLE_INCLUDING_VIEWS);
 
-    return SortedMultisetTestSuiteBuilder.using(
+    return using(
             new ForwardingTestMultisetGenerator<E>(delegate) {
               @Override
               public SortedMultiset<E> create(Object... entries) {
-                return SerializableTester.reserialize(((SortedMultiset<E>) super.create(entries)));
+                return reserialize((SortedMultiset<E>) super.create(entries));
               }
             })
         .named(parentBuilder.getName() + " reserialized")

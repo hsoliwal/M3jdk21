@@ -22,18 +22,19 @@ import static jdk.m3.collections.guava.collect.testing.features.CollectionSize.Z
 import static jdk.m3.collections.guava.collect.testing.features.MapFeature.ALLOWS_NULL_KEYS;
 import static jdk.m3.collections.guava.collect.testing.features.MapFeature.ALLOWS_NULL_VALUES;
 import static jdk.m3.collections.guava.collect.testing.features.MapFeature.SUPPORTS_PUT;
-import static jdk.m3.collections.guava.collect.testing.google.ReflectionFreeAssertThrows.assertThrows;
+import static java.util.Collections.emptyList;
 import static java.util.Collections.singletonList;
+import static org.junit.Assert.assertThrows;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.collect.Iterators;
 import jdk.m3.collections.guava.collect.Multimap;
 import jdk.m3.collections.guava.collect.testing.features.CollectionSize;
 import jdk.m3.collections.guava.collect.testing.features.MapFeature;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
-import org.junit.Ignore;
 
 /**
  * Tests for {@link Multimap#putAll(Object, Iterable)}.
@@ -41,13 +42,8 @@ import org.junit.Ignore;
  * @author Louis Wasserman
  */
 @GwtCompatible
-@Ignore("test runners must not instantiate and run this directly, only via suites we build")
-@SuppressWarnings({
-  // @Ignore affects the Android test runner, which respects JUnit 4 annotations on JUnit 3 tests.
-  "JUnit4ClassUsedInJUnit3",
-  // We use ::iterator so that we test passing a plain Iterable, not a Collection.
-  "UnnecessaryMethodReference",
-})
+// We use ::iterator so that we test passing a plain Iterable, not a Collection.
+@SuppressWarnings("UnnecessaryMethodReference")
 public class MultimapPutIterableTester<K, V> extends AbstractMultimapTester<K, V, Multimap<K, V>> {
   @CollectionSize.Require(absent = ZERO)
   @MapFeature.Require(SUPPORTS_PUT)
@@ -107,10 +103,10 @@ public class MultimapPutIterableTester<K, V> extends AbstractMultimapTester<K, V
     if (values.size() == 0) {
       expectUnchanged();
       // Be extra thorough in case internal state was corrupted by the expected null.
-      assertEquals(newArrayList(), newArrayList(values));
+      assertEquals(new ArrayList<>(), new ArrayList<>(values));
       assertEquals(size, multimap().size());
     } else {
-      assertEquals(newArrayList(v3()), newArrayList(values));
+      assertEquals(newArrayList(v3()), new ArrayList<>(values));
       assertEquals(size + 1, multimap().size());
     }
   }
@@ -129,7 +125,7 @@ public class MultimapPutIterableTester<K, V> extends AbstractMultimapTester<K, V
      */
     expectUnchanged();
     // Be extra thorough in case internal state was corrupted by the expected null.
-    assertEquals(newArrayList(), newArrayList(multimap().get(k3())));
+    assertEquals(new ArrayList<>(), new ArrayList<>(multimap().get(k3())));
     assertEquals(size, multimap().size());
   }
 
@@ -144,9 +140,10 @@ public class MultimapPutIterableTester<K, V> extends AbstractMultimapTester<K, V
     assertThrows(NullPointerException.class, () -> multimap().putAll(null, singletonList(v3())));
   }
 
+  @SuppressWarnings("EmptyList") // ImmutableList doesn't support nullable element types
   @MapFeature.Require(SUPPORTS_PUT)
   public void testPutAllEmptyCollectionOnAbsentKey() {
-    assertFalse(multimap().putAll(k3(), Collections.<V>emptyList()));
+    assertFalse(multimap().putAll(k3(), emptyList()));
     expectUnchanged();
   }
 
@@ -156,10 +153,11 @@ public class MultimapPutIterableTester<K, V> extends AbstractMultimapTester<K, V
     expectUnchanged();
   }
 
+  @SuppressWarnings("EmptyList") // ImmutableList doesn't support nullable element types
   @CollectionSize.Require(absent = ZERO)
   @MapFeature.Require(SUPPORTS_PUT)
   public void testPutAllEmptyIterableOnPresentKey() {
-    multimap().putAll(k0(), Collections.<V>emptyList());
+    multimap().putAll(k0(), emptyList());
     expectUnchanged();
   }
 
@@ -167,7 +165,7 @@ public class MultimapPutIterableTester<K, V> extends AbstractMultimapTester<K, V
   public void testPutAllOnlyCallsIteratorOnce() {
     Iterable<V> iterable =
         new Iterable<V>() {
-          private boolean calledIteratorAlready = false;
+          boolean calledIteratorAlready = false;
 
           @Override
           public Iterator<V> iterator() {

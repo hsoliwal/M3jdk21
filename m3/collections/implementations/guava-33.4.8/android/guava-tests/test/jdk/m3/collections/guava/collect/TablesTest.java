@@ -17,12 +17,13 @@
 package jdk.m3.collections.guava.collect;
 
 import static jdk.m3.collections.guava.collect.Tables.immutableCell;
+import static jdk.m3.collections.guava.testing.SerializableTester.reserializeAndAssert;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
 import jdk.m3.collections.guava.collect.Table.Cell;
 import jdk.m3.collections.guava.testing.EqualsTester;
-import jdk.m3.collections.guava.testing.SerializableTester;
 import junit.framework.TestCase;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
@@ -32,23 +33,23 @@ import org.jspecify.annotations.Nullable;
  *
  * @author Jared Levy
  */
-@GwtCompatible(emulated = true)
+@GwtCompatible
 @NullMarked
 public class TablesTest extends TestCase {
 
   @GwtIncompatible // SerializableTester
   public void testImmutableEntrySerialization() {
     Cell<String, Integer, Character> entry = immutableCell("foo", 1, 'a');
-    SerializableTester.reserializeAndAssert(entry);
+    reserializeAndAssert(entry);
   }
 
   public void testImmutableEntryToString() {
     Cell<String, Integer, Character> entry = immutableCell("foo", 1, 'a');
-    assertEquals("(foo,1)=a", entry.toString());
+    assertThat(entry.toString()).isEqualTo("(foo,1)=a");
 
     Cell<@Nullable String, @Nullable Integer, @Nullable Character> nullEntry =
         immutableCell(null, null, null);
-    assertEquals("(null,null)=null", nullEntry.toString());
+    assertThat(nullEntry.toString()).isEqualTo("(null,null)=null");
   }
 
   public void testEntryEquals() {

@@ -14,13 +14,15 @@
 
 package jdk.m3.collections.guava.collect;
 
+import static jdk.m3.collections.guava.collect.Collections2.safeContains;
+import static jdk.m3.collections.guava.collect.Collections2.safeRemove;
 import static jdk.m3.collections.guava.collect.Maps.immutableEntry;
+import static jdk.m3.collections.guava.collect.Maps.safeContainsKey;
 import static jdk.m3.collections.guava.collect.Maps.safeGet;
+import static jdk.m3.collections.guava.collect.Maps.safeRemove;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
-import com.google.errorprone.annotations.concurrent.LazyInit;
-import com.google.j2objc.annotations.WeakOuter;
 import java.util.AbstractCollection;
 import java.util.AbstractSet;
 import java.util.Collection;
@@ -41,12 +43,12 @@ abstract class AbstractTable<
 
   @Override
   public boolean containsRow(@Nullable Object rowKey) {
-    return Maps.safeContainsKey(rowMap(), rowKey);
+    return safeContainsKey(rowMap(), rowKey);
   }
 
   @Override
   public boolean containsColumn(@Nullable Object columnKey) {
-    return Maps.safeContainsKey(columnMap(), columnKey);
+    return safeContainsKey(columnMap(), columnKey);
   }
 
   @Override
@@ -72,7 +74,7 @@ abstract class AbstractTable<
   @Override
   public boolean contains(@Nullable Object rowKey, @Nullable Object columnKey) {
     Map<C, V> row = safeGet(rowMap(), rowKey);
-    return row != null && Maps.safeContainsKey(row, columnKey);
+    return row != null && safeContainsKey(row, columnKey);
   }
 
   @Override
@@ -95,7 +97,7 @@ abstract class AbstractTable<
   @Override
   public @Nullable V remove(@Nullable Object rowKey, @Nullable Object columnKey) {
     Map<C, V> row = safeGet(rowMap(), rowKey);
-    return (row == null) ? null : Maps.safeRemove(row, columnKey);
+    return (row == null) ? null : safeRemove(row, columnKey);
   }
 
   @CanIgnoreReturnValue
@@ -107,35 +109,26 @@ abstract class AbstractTable<
 
   @Override
   public void putAll(Table<? extends R, ? extends C, ? extends V> table) {
-    for (Table.Cell<? extends R, ? extends C, ? extends V> cell : table.cellSet()) {
+    for (Cell<? extends R, ? extends C, ? extends V> cell : table.cellSet()) {
       put(cell.getRowKey(), cell.getColumnKey(), cell.getValue());
     }
   }
 
-  @LazyInit private transient @Nullable Set<Cell<R, C, V>> cellSet;
-
   @Override
   public Set<Cell<R, C, V>> cellSet() {
-    Set<Cell<R, C, V>> result = cellSet;
-    return (result == null) ? cellSet = createCellSet() : result;
-  }
-
-  Set<Cell<R, C, V>> createCellSet() {
     return new CellSet();
   }
 
-  abstract Iterator<Table.Cell<R, C, V>> cellIterator();
+  abstract Iterator<Cell<R, C, V>> cellIterator();
 
-  @WeakOuter
-  class CellSet extends AbstractSet<Cell<R, C, V>> {
+  private final class CellSet extends AbstractSet<Cell<R, C, V>> {
     @Override
     public boolean contains(@Nullable Object o) {
       if (o instanceof Cell) {
         Cell<?, ?, ?> cell = (Cell<?, ?, ?>) o;
         Map<C, V> row = safeGet(rowMap(), cell.getRowKey());
         return row != null
-            && Collections2.safeContains(
-                row.entrySet(), immutableEntry(cell.getColumnKey(), cell.getValue()));
+            && safeContains(row.entrySet(), immutableEntry(cell.getColumnKey(), cell.getValue()));
       }
       return false;
     }
@@ -146,8 +139,7 @@ abstract class AbstractTable<
         Cell<?, ?, ?> cell = (Cell<?, ?, ?>) o;
         Map<C, V> row = safeGet(rowMap(), cell.getRowKey());
         return row != null
-            && Collections2.safeRemove(
-                row.entrySet(), immutableEntry(cell.getColumnKey(), cell.getValue()));
+            && safeRemove(row.entrySet(), immutableEntry(cell.getColumnKey(), cell.getValue()));
       }
       return false;
     }
@@ -168,15 +160,8 @@ abstract class AbstractTable<
     }
   }
 
-  @LazyInit private transient @Nullable Collection<V> values;
-
   @Override
   public Collection<V> values() {
-    Collection<V> result = values;
-    return (result == null) ? values = createValues() : result;
-  }
-
-  Collection<V> createValues() {
     return new Values();
   }
 
@@ -190,8 +175,7 @@ abstract class AbstractTable<
     };
   }
 
-  @WeakOuter
-  class Values extends AbstractCollection<V> {
+  private final class Values extends AbstractCollection<V> {
     @Override
     public Iterator<V> iterator() {
       return valuesIterator();
@@ -214,18 +198,18 @@ abstract class AbstractTable<
   }
 
   @Override
-  public boolean equals(@Nullable Object obj) {
+  public final boolean equals(@Nullable Object obj) {
     return Tables.equalsImpl(this, obj);
   }
 
   @Override
-  public int hashCode() {
+  public final int hashCode() {
     return cellSet().hashCode();
   }
 
   /** Returns the string representation {@code rowMap().toString()}. */
   @Override
-  public String toString() {
+  public final String toString() {
     return rowMap().toString();
   }
 }

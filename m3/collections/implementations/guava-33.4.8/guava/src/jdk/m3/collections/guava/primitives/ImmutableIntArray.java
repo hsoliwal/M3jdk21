@@ -12,12 +12,16 @@
  * the License.
  */
 
+// Copyright 2026 Hitesh Soliwal and Contributors to the Synexia Project.
 package jdk.m3.collections.guava.primitives;
 
 import static jdk.m3.collections.guava.base.Preconditions.checkArgument;
 import static jdk.m3.collections.guava.base.Preconditions.checkNotNull;
+import static java.lang.System.arraycopy;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
+import jdk.m3.collections.guava.annotations.GwtIncompatible;
+import jdk.m3.collections.guava.annotations.J2ktIncompatible;
 import jdk.m3.collections.guava.base.Preconditions;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import com.google.errorprone.annotations.Immutable;
@@ -26,6 +30,7 @@ import java.util.AbstractList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
+import java.util.PrimitiveIterator;
 import java.util.RandomAccess;
 import java.util.Spliterator;
 import java.util.Spliterators;
@@ -137,7 +142,7 @@ public final class ImmutableIntArray implements Serializable {
         rest.length <= Integer.MAX_VALUE - 1, "the total number of elements must fit in an int");
     int[] array = new int[rest.length + 1];
     array[0] = first;
-    System.arraycopy(rest, 0, array, 1, rest.length);
+    arraycopy(rest, 0, array, 1, rest.length);
     return new ImmutableIntArray(array);
   }
 
@@ -148,6 +153,10 @@ public final class ImmutableIntArray implements Serializable {
 
   /** Returns an immutable array containing the given values, in order. */
   public static ImmutableIntArray copyOf(Collection<Integer> values) {
+    if (values instanceof AsList) {
+      ImmutableIntArray parent = ((AsList) values).parent;
+      return parent.isEmpty() ? EMPTY : new ImmutableIntArray(parent.toArray());
+    }
     return values.isEmpty() ? EMPTY : new ImmutableIntArray(Ints.toArray(values));
   }
 
@@ -234,7 +243,7 @@ public final class ImmutableIntArray implements Serializable {
     @CanIgnoreReturnValue
     public Builder addAll(int[] values) {
       ensureRoomFor(values.length);
-      System.arraycopy(values, 0, array, count, values.length);
+      arraycopy(values, 0, array, count, values.length);
       count += values.length;
       return this;
     }
@@ -260,6 +269,13 @@ public final class ImmutableIntArray implements Serializable {
      */
     @CanIgnoreReturnValue
     public Builder addAll(Collection<Integer> values) {
+      if (values instanceof AsList) {
+        ImmutableIntArray parent = ((AsList) values).parent;
+        // Preserve the scalar failure path if the combined size overflows.
+        if (parent.length() <= Integer.MAX_VALUE - count) {
+          return addAll(parent);
+        }
+      }
       ensureRoomFor(values.size());
       for (Integer value : values) {
         array[count++] = value;
@@ -291,7 +307,7 @@ public final class ImmutableIntArray implements Serializable {
     @CanIgnoreReturnValue
     public Builder addAll(ImmutableIntArray values) {
       ensureRoomFor(values.length());
-      System.arraycopy(values.array, values.start, array, count, values.length());
+      arraycopy(values.array, values.start, array, count, values.length());
       count += values.length();
       return this;
     }
@@ -477,7 +493,8 @@ public final class ImmutableIntArray implements Serializable {
     return new AsList(this);
   }
 
-  static class AsList extends AbstractList<Integer> implements RandomAccess, Serializable {
+  private static final class AsList extends AbstractList<Integer>
+      implements RandomAccess, Serializable {
     private final ImmutableIntArray parent;
 
     private AsList(ImmutableIntArray parent) {
@@ -516,10 +533,14 @@ public final class ImmutableIntArray implements Serializable {
       return parent.subArray(fromIndex, toIndex).asList();
     }
 
-    // The default List spliterator is not efficiently splittable
     @Override
-    public Spliterator<Integer> spliterator() {
+    public Spliterator.OfInt spliterator() {
       return parent.spliterator();
+    }
+
+    @Override
+    public PrimitiveIterator.OfInt iterator() {
+      return Spliterators.iterator(spliterator());
     }
 
     @Override
@@ -556,6 +577,8 @@ public final class ImmutableIntArray implements Serializable {
     public String toString() {
       return parent.toString();
     }
+
+    @GwtIncompatible @J2ktIncompatible     private static final long serialVersionUID = 4432621008496800951L;
   }
 
   /**
@@ -588,7 +611,7 @@ public final class ImmutableIntArray implements Serializable {
     int hash = 1;
     for (int i = start; i < end; i++) {
       hash *= 31;
-      hash += Ints.hashCode(array[i]);
+      hash += Integer.hashCode(array[i]);
     }
     return hash;
   }
@@ -633,4 +656,6 @@ public final class ImmutableIntArray implements Serializable {
   Object readResolve() {
     return isEmpty() ? EMPTY : this;
   }
+
+  @GwtIncompatible @J2ktIncompatible   private static final long serialVersionUID = -7031592199741285664L;
 }

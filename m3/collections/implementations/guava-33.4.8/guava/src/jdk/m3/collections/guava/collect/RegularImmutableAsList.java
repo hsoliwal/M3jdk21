@@ -28,7 +28,7 @@ import org.jspecify.annotations.Nullable;
  *
  * @author Louis Wasserman
  */
-@GwtCompatible(emulated = true)
+@GwtCompatible
 @SuppressWarnings("serial") // uses writeReplace, not default serialization
 class RegularImmutableAsList<E> extends ImmutableAsList<E> {
   private final ImmutableCollection<E> delegate;
@@ -40,7 +40,7 @@ class RegularImmutableAsList<E> extends ImmutableAsList<E> {
   }
 
   RegularImmutableAsList(ImmutableCollection<E> delegate, Object[] array) {
-    this(delegate, ImmutableList.<E>asImmutableList(array));
+    this(delegate, asImmutableList(array));
   }
 
   @Override
@@ -48,13 +48,13 @@ class RegularImmutableAsList<E> extends ImmutableAsList<E> {
     return delegate;
   }
 
-  ImmutableList<? extends E> delegateList() {
+  final ImmutableList<? extends E> delegateList() {
     return delegateList;
   }
 
   @SuppressWarnings("unchecked") // safe covariant cast!
   @Override
-  public UnmodifiableListIterator<E> listIterator(int index) {
+  public final UnmodifiableListIterator<E> listIterator(int index) {
     return (UnmodifiableListIterator<E>) delegateList.listIterator(index);
   }
 
@@ -86,7 +86,7 @@ class RegularImmutableAsList<E> extends ImmutableAsList<E> {
   }
 
   @Override
-  public E get(int index) {
+  public final E get(int index) {
     return delegateList.get(index);
   }
 

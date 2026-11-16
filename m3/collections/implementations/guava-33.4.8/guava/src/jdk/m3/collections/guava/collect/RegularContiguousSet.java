@@ -18,6 +18,8 @@ import static jdk.m3.collections.guava.base.Preconditions.checkArgument;
 import static jdk.m3.collections.guava.base.Preconditions.checkElementIndex;
 import static jdk.m3.collections.guava.base.Preconditions.checkNotNull;
 import static jdk.m3.collections.guava.collect.BoundType.CLOSED;
+import static jdk.m3.collections.guava.collect.Collections2.containsAllImpl;
+import static jdk.m3.collections.guava.collect.Sets.hashCodeImpl;
 import static java.util.Objects.requireNonNull;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
@@ -34,7 +36,7 @@ import org.jspecify.annotations.Nullable;
  *
  * @author Gregory Kick
  */
-@GwtCompatible(emulated = true)
+@GwtCompatible
 @SuppressWarnings("rawtypes") // https://github.com/google/guava/issues/989
 final class RegularContiguousSet<C extends Comparable> extends ContiguousSet<C> {
   private final Range<C> range;
@@ -184,7 +186,7 @@ final class RegularContiguousSet<C extends Comparable> extends ContiguousSet<C> 
 
   @Override
   public boolean containsAll(Collection<?> targets) {
-    return Collections2.containsAllImpl(this, targets);
+    return containsAllImpl(this, targets);
   }
 
   @Override
@@ -236,10 +238,10 @@ final class RegularContiguousSet<C extends Comparable> extends ContiguousSet<C> 
   // copied to make sure not to use the GWT-emulated version
   @Override
   public int hashCode() {
-    return Sets.hashCodeImpl(this);
+    return hashCodeImpl(this);
   }
 
-  @GwtIncompatible // serialization
+  @GwtIncompatible
   @J2ktIncompatible
   private static final class SerializedForm<C extends Comparable> implements Serializable {
     final Range<C> range;
@@ -253,18 +255,20 @@ final class RegularContiguousSet<C extends Comparable> extends ContiguousSet<C> 
     private Object readResolve() {
       return new RegularContiguousSet<>(range, domain);
     }
+
+    private static final long serialVersionUID = 8555423162527582369L;
   }
 
-  @GwtIncompatible // serialization
+  @GwtIncompatible
   @J2ktIncompatible
-  @Override
+    @Override
   Object writeReplace() {
     return new SerializedForm<>(range, domain);
   }
 
-  @GwtIncompatible // serialization
+  @GwtIncompatible
   @J2ktIncompatible
-  private void readObject(ObjectInputStream stream) throws InvalidObjectException {
+    private void readObject(ObjectInputStream stream) throws InvalidObjectException {
     throw new InvalidObjectException("Use SerializedForm");
   }
 

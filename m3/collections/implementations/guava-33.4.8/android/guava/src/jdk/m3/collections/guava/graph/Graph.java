@@ -16,7 +16,6 @@
 
 package jdk.m3.collections.guava.graph;
 
-import jdk.m3.collections.guava.annotations.Beta;
 import com.google.errorprone.annotations.DoNotMock;
 import java.util.Collection;
 import java.util.Set;
@@ -35,7 +34,7 @@ import org.jspecify.annotations.Nullable;
  * href="https://github.com/google/guava/wiki/GraphsExplained#choosing-the-right-graph-type">
  * "Choosing the right graph type"</a> section of the Guava User Guide for more details.
  *
- * <h3>Capabilities</h3>
+ * <h2>Capabilities</h2>
  *
  * <p>{@code Graph} supports the following use cases (<a
  * href="https://github.com/google/guava/wiki/GraphsExplained#definitions">definitions of
@@ -51,7 +50,7 @@ import org.jspecify.annotations.Nullable;
  * <p>{@code Graph} explicitly does not support parallel edges, and forbids implementations or
  * extensions with parallel edges. If you need parallel edges, use {@link Network}.
  *
- * <h3>Building a {@code Graph}</h3>
+ * <h2>Building a {@code Graph}</h2>
  *
  * <p>The implementation classes that {@code common.graph} provides are not public, by design. To
  * create an instance of one of the built-in implementations of {@code Graph}, use the {@link
@@ -80,7 +79,7 @@ import org.jspecify.annotations.Nullable;
  * href="https://github.com/google/guava/wiki/GraphsExplained#building-graph-instances">more
  * information on (and examples of) building graphs</a>.
  *
- * <h3>Additional documentation</h3>
+ * <h2>Additional documentation</h2>
  *
  * <p>See the Guava User Guide for the {@code common.graph} package (<a
  * href="https://github.com/google/guava/wiki/GraphsExplained">"Graphs Explained"</a>) for
@@ -101,7 +100,6 @@ import org.jspecify.annotations.Nullable;
  * @param <N> Node parameter type
  * @since 20.0
  */
-@Beta
 @DoNotMock("Use GraphBuilder to create a real instance")
 public interface Graph<N> extends BaseGraph<N> {
   //
@@ -319,7 +317,7 @@ public interface Graph<N> extends BaseGraph<N> {
   //
 
   /**
-   * Returns {@code true} iff {@code object} is a {@link Graph} that has the same elements and the
+   * Returns {@code true} if {@code object} is a {@link Graph} that has the same elements and the
    * same structural relationships as those in this graph.
    *
    * <p>Thus, two graphs A and B are equal if <b>all</b> of the following are true:

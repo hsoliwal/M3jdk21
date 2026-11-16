@@ -16,11 +16,13 @@
 
 package jdk.m3.collections.guava.util.concurrent;
 
-import static com.google.common.truth.Truth.assertThat;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
 import static jdk.m3.collections.guava.util.concurrent.Futures.immediateFailedFuture;
 import static jdk.m3.collections.guava.util.concurrent.Futures.immediateFuture;
 import static java.util.concurrent.TimeUnit.NANOSECONDS;
 
+import jdk.m3.collections.guava.annotations.GwtIncompatible;
+import jdk.m3.collections.guava.annotations.J2ktIncompatible;
 import jdk.m3.collections.guava.util.concurrent.ForwardingListenableFuture.SimpleForwardingListenableFuture;
 import java.time.Duration;
 import java.util.List;
@@ -29,9 +31,12 @@ import java.util.concurrent.Delayed;
 import java.util.concurrent.TimeUnit;
 import junit.framework.TestCase;
 import org.jspecify.annotations.NullUnmarked;
+import org.jspecify.annotations.Nullable;
 
 /** Tests for default methods of the interface. */
 @NullUnmarked
+@GwtIncompatible
+@J2ktIncompatible
 public class ListeningScheduledExecutorServiceTest extends TestCase {
 
   private Runnable recordedCommand;
@@ -100,7 +105,7 @@ public class ListeningScheduledExecutorServiceTest extends TestCase {
     }
 
     @Override
-    public <V> ListenableScheduledFuture<V> schedule(
+    public <V extends @Nullable Object> ListenableScheduledFuture<V> schedule(
         Callable<V> callable, long delay, TimeUnit unit) {
       recordedDelay = delay;
       recordedTimeUnit = unit;
@@ -162,13 +167,13 @@ public class ListeningScheduledExecutorServiceTest extends TestCase {
     }
   }
 
-  private static class ImmediateScheduledFuture<V> extends SimpleForwardingListenableFuture<V>
-      implements ListenableScheduledFuture<V> {
-    static <V> ListenableScheduledFuture<V> of(V value) {
+  private static class ImmediateScheduledFuture<V extends @Nullable Object>
+      extends SimpleForwardingListenableFuture<V> implements ListenableScheduledFuture<V> {
+    static <V extends @Nullable Object> ListenableScheduledFuture<V> of(V value) {
       return new ImmediateScheduledFuture<>(immediateFuture(value));
     }
 
-    static <V> ListenableScheduledFuture<V> failed(Throwable t) {
+    static <V extends @Nullable Object> ListenableScheduledFuture<V> failed(Throwable t) {
       return new ImmediateScheduledFuture<>(immediateFailedFuture(t));
     }
 

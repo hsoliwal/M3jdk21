@@ -24,10 +24,11 @@ import static jdk.m3.collections.guava.collect.testing.features.CollectionSize.Z
 import static jdk.m3.collections.guava.collect.testing.features.ListFeature.SUPPORTS_ADD_WITH_INDEX;
 import static jdk.m3.collections.guava.collect.testing.features.ListFeature.SUPPORTS_REMOVE_WITH_INDEX;
 import static jdk.m3.collections.guava.collect.testing.features.ListFeature.SUPPORTS_SET;
-import static jdk.m3.collections.guava.collect.testing.testers.ReflectionFreeAssertThrows.assertThrows;
+import static jdk.m3.collections.guava.testing.SerializableTester.reserializeAndAssert;
 import static java.util.Arrays.asList;
 import static java.util.Collections.emptyList;
 import static java.util.Collections.singletonList;
+import static org.junit.Assert.assertThrows;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
@@ -35,11 +36,9 @@ import jdk.m3.collections.guava.annotations.J2ktIncompatible;
 import jdk.m3.collections.guava.collect.testing.features.CollectionFeature;
 import jdk.m3.collections.guava.collect.testing.features.CollectionSize;
 import jdk.m3.collections.guava.collect.testing.features.ListFeature;
-import jdk.m3.collections.guava.testing.SerializableTester;
 import java.lang.reflect.Method;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
-import org.junit.Ignore;
 
 /**
  * A generic JUnit test which tests {@code subList()} operations on a list. Can't be invoked
@@ -47,10 +46,7 @@ import org.junit.Ignore;
  *
  * @author Chris Povirk
  */
-@GwtCompatible(emulated = true)
-@Ignore("test runners must not instantiate and run this directly, only via suites we build")
-// @Ignore affects the Android test runner, which respects JUnit 4 annotations on JUnit 3 tests.
-@SuppressWarnings("JUnit4ClassUsedInJUnit3")
+@GwtCompatible
 public class ListSubListTester<E> extends AbstractListTester<E> {
   public void testSubList_startNegative() {
     assertThrows(IndexOutOfBoundsException.class, () -> getList().subList(-1, 0));
@@ -61,20 +57,18 @@ public class ListSubListTester<E> extends AbstractListTester<E> {
   }
 
   public void testSubList_startGreaterThanEnd() {
-    try {
-      getList().subList(1, 0);
-      fail("subList(1, 0) should throw");
-    } catch (IndexOutOfBoundsException expected) {
-    } catch (IllegalArgumentException expected) {
-      /*
-       * The subList() docs claim that this should be an
-       * IndexOutOfBoundsException, but many JDK implementations throw
-       * IllegalArgumentException:
-       * https://bugs.openjdk.org/browse/JDK-4506427
-       */
+    RuntimeException expected = assertThrows(RuntimeException.class, () -> getList().subList(1, 0));
+    /*
+     * The subList() docs claim that this should be an IndexOutOfBoundsException, but many JDK
+     * implementations throw IllegalArgumentException: https://bugs.openjdk.org/browse/JDK-4506427
+     */
+    if (!(expected instanceof IndexOutOfBoundsException
+        || expected instanceof IllegalArgumentException)) {
+      throw expected;
     }
   }
 
+  @SuppressWarnings("EmptyList") // ImmutableList doesn't support nullable element types
   public void testSubList_empty() {
     assertEquals("subList(0, 0) should be empty", emptyList(), getList().subList(0, 0));
   }
@@ -173,6 +167,7 @@ public class ListSubListTester<E> extends AbstractListTester<E> {
         subList);
   }
 
+  @SuppressWarnings("EmptyList") // ImmutableList doesn't support nullable element types
   public void testSubList_ofSubListEmpty() {
     List<E> subList = getList().subList(0, 0).subList(0, 0);
     assertEquals("subList(0, 0).subList(0, 0) should be an empty list", emptyList(), subList);
@@ -290,18 +285,18 @@ public class ListSubListTester<E> extends AbstractListTester<E> {
 
   @CollectionFeature.Require(SERIALIZABLE_INCLUDING_VIEWS)
   public void testReserializeWholeSubList() {
-    SerializableTester.reserializeAndAssert(getList().subList(0, getNumElements()));
+    reserializeAndAssert(getList().subList(0, getNumElements()));
   }
 
   @CollectionFeature.Require(SERIALIZABLE_INCLUDING_VIEWS)
   public void testReserializeEmptySubList() {
-    SerializableTester.reserializeAndAssert(getList().subList(0, 0));
+    reserializeAndAssert(getList().subList(0, 0));
   }
 
   @CollectionFeature.Require(SERIALIZABLE_INCLUDING_VIEWS)
   @CollectionSize.Require(absent = {ZERO, ONE})
   public void testReserializeSubList() {
-    SerializableTester.reserializeAndAssert(getList().subList(0, 2));
+    reserializeAndAssert(getList().subList(0, 2));
   }
 
   /**

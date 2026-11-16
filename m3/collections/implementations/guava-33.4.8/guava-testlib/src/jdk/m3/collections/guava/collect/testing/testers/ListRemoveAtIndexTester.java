@@ -21,7 +21,7 @@ import static jdk.m3.collections.guava.collect.testing.features.CollectionFeatur
 import static jdk.m3.collections.guava.collect.testing.features.CollectionSize.ONE;
 import static jdk.m3.collections.guava.collect.testing.features.CollectionSize.ZERO;
 import static jdk.m3.collections.guava.collect.testing.features.ListFeature.SUPPORTS_REMOVE_WITH_INDEX;
-import static jdk.m3.collections.guava.collect.testing.testers.ReflectionFreeAssertThrows.assertThrows;
+import static org.junit.Assert.assertThrows;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.collect.testing.features.CollectionFeature;
@@ -30,7 +30,6 @@ import jdk.m3.collections.guava.collect.testing.features.ListFeature;
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.List;
-import org.junit.Ignore;
 
 /**
  * A generic JUnit test which tests {@code remove(int)} operations on a list. Can't be invoked
@@ -39,9 +38,6 @@ import org.junit.Ignore;
  * @author Chris Povirk
  */
 @GwtCompatible
-@Ignore("test runners must not instantiate and run this directly, only via suites we build")
-// @Ignore affects the Android test runner, which respects JUnit 4 annotations on JUnit 3 tests.
-@SuppressWarnings("JUnit4ClassUsedInJUnit3")
 public class ListRemoveAtIndexTester<E> extends AbstractListTester<E> {
   @ListFeature.Require(absent = SUPPORTS_REMOVE_WITH_INDEX)
   @CollectionSize.Require(absent = ZERO)
@@ -78,13 +74,9 @@ public class ListRemoveAtIndexTester<E> extends AbstractListTester<E> {
   @ListFeature.Require(SUPPORTS_REMOVE_WITH_INDEX)
   @CollectionSize.Require(absent = ZERO)
   public void testRemoveAtIndexConcurrentWithIteration() {
-    assertThrows(
-        ConcurrentModificationException.class,
-        () -> {
-          Iterator<E> iterator = collection.iterator();
-          getList().remove(getNumElements() / 2);
-          iterator.next();
-        });
+    Iterator<E> iterator = collection.iterator();
+    getList().remove(getNumElements() / 2);
+    assertThrows(ConcurrentModificationException.class, iterator::next);
   }
 
   @ListFeature.Require(SUPPORTS_REMOVE_WITH_INDEX)

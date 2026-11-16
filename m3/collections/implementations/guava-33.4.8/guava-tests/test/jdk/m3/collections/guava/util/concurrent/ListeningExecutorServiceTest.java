@@ -16,25 +16,30 @@
 
 package jdk.m3.collections.guava.util.concurrent;
 
-import static com.google.common.truth.Truth.assertThat;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
 import static jdk.m3.collections.guava.util.concurrent.Futures.immediateFailedFuture;
 import static jdk.m3.collections.guava.util.concurrent.Futures.immediateFuture;
+import static java.util.Collections.singleton;
+import static java.util.Collections.singletonList;
 import static java.util.concurrent.TimeUnit.NANOSECONDS;
 
+import jdk.m3.collections.guava.annotations.GwtIncompatible;
+import jdk.m3.collections.guava.annotations.J2ktIncompatible;
 import java.time.Duration;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
 import junit.framework.TestCase;
 import org.jspecify.annotations.NullUnmarked;
+import org.jspecify.annotations.Nullable;
 
 @NullUnmarked
+@GwtIncompatible
+@J2ktIncompatible
 public final class ListeningExecutorServiceTest extends TestCase {
 
   private Collection<? extends Callable<?>> recordedTasks;
@@ -44,7 +49,7 @@ public final class ListeningExecutorServiceTest extends TestCase {
   private final ListeningExecutorService executorService = new FakeExecutorService();
 
   public void testInvokeAny() throws Exception {
-    Set<Callable<String>> tasks = Collections.singleton(() -> "invokeAny");
+    Set<Callable<String>> tasks = singleton(() -> "invokeAny");
 
     String result = executorService.invokeAny(tasks, Duration.ofSeconds(7));
 
@@ -55,7 +60,7 @@ public final class ListeningExecutorServiceTest extends TestCase {
   }
 
   public void testInvokeAll() throws Exception {
-    Set<Callable<String>> tasks = Collections.singleton(() -> "invokeAll");
+    Set<Callable<String>> tasks = singleton(() -> "invokeAll");
 
     List<Future<String>> result = executorService.invokeAll(tasks, Duration.ofDays(365));
 
@@ -74,10 +79,11 @@ public final class ListeningExecutorServiceTest extends TestCase {
     assertThat(Duration.ofNanos(recordedTimeout)).isEqualTo(Duration.ofMinutes(144));
   }
 
-  private class FakeExecutorService extends AbstractListeningExecutorService {
+  private final class FakeExecutorService extends AbstractListeningExecutorService {
     @Override
-    public <T> T invokeAny(Collection<? extends Callable<T>> tasks, long timeout, TimeUnit unit)
-        throws InterruptedException, ExecutionException, TimeoutException {
+    public <T extends @Nullable Object> T invokeAny(
+        Collection<? extends Callable<T>> tasks, long timeout, TimeUnit unit)
+        throws ExecutionException {
       recordedTasks = tasks;
       recordedTimeout = timeout;
       recordedTimeUnit = unit;
@@ -89,16 +95,15 @@ public final class ListeningExecutorServiceTest extends TestCase {
     }
 
     @Override
-    public <T> List<Future<T>> invokeAll(
-        Collection<? extends Callable<T>> tasks, long timeout, TimeUnit unit)
-        throws InterruptedException {
+    public <T extends @Nullable Object> List<Future<T>> invokeAll(
+        Collection<? extends Callable<T>> tasks, long timeout, TimeUnit unit) {
       recordedTasks = tasks;
       recordedTimeout = timeout;
       recordedTimeUnit = unit;
       try {
-        return Collections.singletonList(immediateFuture(tasks.iterator().next().call()));
+        return singletonList(immediateFuture(tasks.iterator().next().call()));
       } catch (Exception e) {
-        return Collections.singletonList(immediateFailedFuture(e));
+        return singletonList(immediateFailedFuture(e));
       }
     }
 

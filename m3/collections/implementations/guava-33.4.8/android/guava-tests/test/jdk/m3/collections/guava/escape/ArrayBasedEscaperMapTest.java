@@ -16,8 +16,8 @@
 
 package jdk.m3.collections.guava.escape;
 
-import static jdk.m3.collections.guava.escape.ReflectionFreeAssertThrows.assertThrows;
-import static com.google.common.truth.Truth.assertThat;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
+import static org.junit.Assert.assertThrows;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.collect.ImmutableMap;
@@ -31,6 +31,7 @@ import org.jspecify.annotations.NullUnmarked;
 @GwtCompatible
 @NullUnmarked
 public class ArrayBasedEscaperMapTest extends TestCase {
+  @SuppressWarnings("nullness") // test of a bogus call
   public void testNullMap() {
     assertThrows(NullPointerException.class, () -> ArrayBasedEscaperMap.create(null));
   }

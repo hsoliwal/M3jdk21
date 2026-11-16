@@ -20,7 +20,7 @@ import static jdk.m3.collections.guava.collect.testing.features.CollectionSize.S
 import static jdk.m3.collections.guava.collect.testing.features.CollectionSize.ZERO;
 import static jdk.m3.collections.guava.collect.testing.features.MapFeature.FAILS_FAST_ON_CONCURRENT_MODIFICATION;
 import static jdk.m3.collections.guava.collect.testing.features.MapFeature.SUPPORTS_REMOVE;
-import static jdk.m3.collections.guava.collect.testing.testers.ReflectionFreeAssertThrows.assertThrows;
+import static org.junit.Assert.assertThrows;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.collect.testing.AbstractMapTester;
@@ -29,7 +29,6 @@ import jdk.m3.collections.guava.collect.testing.features.MapFeature;
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.Map.Entry;
-import org.junit.Ignore;
 
 /**
  * A generic JUnit test which tests {@code clear()} operations on a map. Can't be invoked directly;
@@ -39,9 +38,6 @@ import org.junit.Ignore;
  * @author Chris Povirk
  */
 @GwtCompatible
-@Ignore("test runners must not instantiate and run this directly, only via suites we build")
-// @Ignore affects the Android test runner, which respects JUnit 4 annotations on JUnit 3 tests.
-@SuppressWarnings("JUnit4ClassUsedInJUnit3")
 public class MapClearTester<K, V> extends AbstractMapTester<K, V> {
   @MapFeature.Require(SUPPORTS_REMOVE)
   public void testClear() {
@@ -54,37 +50,25 @@ public class MapClearTester<K, V> extends AbstractMapTester<K, V> {
   @MapFeature.Require({FAILS_FAST_ON_CONCURRENT_MODIFICATION, SUPPORTS_REMOVE})
   @CollectionSize.Require(SEVERAL)
   public void testClearConcurrentWithEntrySetIteration() {
-    assertThrows(
-        ConcurrentModificationException.class,
-        () -> {
-          Iterator<Entry<K, V>> iterator = getMap().entrySet().iterator();
-          getMap().clear();
-          iterator.next();
-        });
+    Iterator<Entry<K, V>> iterator = getMap().entrySet().iterator();
+    getMap().clear();
+    assertThrows(ConcurrentModificationException.class, iterator::next);
   }
 
   @MapFeature.Require({FAILS_FAST_ON_CONCURRENT_MODIFICATION, SUPPORTS_REMOVE})
   @CollectionSize.Require(SEVERAL)
   public void testClearConcurrentWithKeySetIteration() {
-    assertThrows(
-        ConcurrentModificationException.class,
-        () -> {
-          Iterator<K> iterator = getMap().keySet().iterator();
-          getMap().clear();
-          iterator.next();
-        });
+    Iterator<K> iterator = getMap().keySet().iterator();
+    getMap().clear();
+    assertThrows(ConcurrentModificationException.class, iterator::next);
   }
 
   @MapFeature.Require({FAILS_FAST_ON_CONCURRENT_MODIFICATION, SUPPORTS_REMOVE})
   @CollectionSize.Require(SEVERAL)
   public void testClearConcurrentWithValuesIteration() {
-    assertThrows(
-        ConcurrentModificationException.class,
-        () -> {
-          Iterator<V> iterator = getMap().values().iterator();
-          getMap().clear();
-          iterator.next();
-        });
+    Iterator<V> iterator = getMap().values().iterator();
+    getMap().clear();
+    assertThrows(ConcurrentModificationException.class, iterator::next);
   }
 
   @MapFeature.Require(absent = SUPPORTS_REMOVE)

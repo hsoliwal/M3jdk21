@@ -17,6 +17,7 @@
 package jdk.m3.collections.guava.collect;
 
 import static jdk.m3.collections.guava.base.Preconditions.checkNotNull;
+import static jdk.m3.collections.guava.collect.Sets.hashCodeImpl;
 import static java.util.Objects.requireNonNull;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
@@ -25,7 +26,6 @@ import jdk.m3.collections.guava.annotations.J2ktIncompatible;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import com.google.errorprone.annotations.DoNotCall;
 import com.google.errorprone.annotations.concurrent.LazyInit;
-import com.google.j2objc.annotations.WeakOuter;
 import java.io.InvalidObjectException;
 import java.io.ObjectInputStream;
 import java.io.Serializable;
@@ -53,10 +53,9 @@ import org.jspecify.annotations.Nullable;
  * @author Louis Wasserman
  * @since 2.0
  */
-@GwtCompatible(serializable = true, emulated = true)
+@GwtCompatible
 @SuppressWarnings("serial") // we're overriding default serialization
-public abstract class ImmutableMultiset<E> extends ImmutableMultisetGwtSerializationDependencies<E>
-    implements Multiset<E> {
+public abstract class ImmutableMultiset<E> extends ImmutableCollection<E> implements Multiset<E> {
 
   /**
    * Returns a {@code Collector} that accumulates the input elements into a new {@code
@@ -65,7 +64,6 @@ public abstract class ImmutableMultiset<E> extends ImmutableMultisetGwtSerializa
    *
    * @since 33.2.0 (available since 21.0 in guava-jre)
    */
-  @SuppressWarnings("Java7ApiChecker")
   @IgnoreJRERequirement // Users will use this only if they're already using streams.
   public static <E> Collector<E, ?, ImmutableMultiset<E>> toImmutableMultiset() {
     return CollectCollectors.toImmutableMultiset(Function.identity(), e -> 1);
@@ -82,7 +80,6 @@ public abstract class ImmutableMultiset<E> extends ImmutableMultisetGwtSerializa
    *
    * @since 33.2.0 (available since 22.0 in guava-jre)
    */
-  @SuppressWarnings("Java7ApiChecker")
   @IgnoreJRERequirement // Users will use this only if they're already using streams.
   public static <T extends @Nullable Object, E>
       Collector<T, ?, ImmutableMultiset<E>> toImmutableMultiset(
@@ -191,7 +188,7 @@ public abstract class ImmutableMultiset<E> extends ImmutableMultisetGwtSerializa
       }
     }
     ImmutableMultiset.Builder<E> builder =
-        new ImmutableMultiset.Builder<E>(Multisets.inferDistinctElements(elements));
+        new ImmutableMultiset.Builder<>(Multisets.inferDistinctElements(elements));
     builder.addAll(elements);
     return builder.build();
   }
@@ -212,7 +209,7 @@ public abstract class ImmutableMultiset<E> extends ImmutableMultisetGwtSerializa
 
   static <E> ImmutableMultiset<E> copyFromEntries(
       Collection<? extends Entry<? extends E>> entries) {
-    ImmutableMultiset.Builder<E> builder = new ImmutableMultiset.Builder<E>(entries.size());
+    ImmutableMultiset.Builder<E> builder = new ImmutableMultiset.Builder<>(entries.size());
     for (Entry<? extends E> entry : entries) {
       builder.addCopies(entry.getElement(), entry.getCount());
     }
@@ -222,7 +219,7 @@ public abstract class ImmutableMultiset<E> extends ImmutableMultisetGwtSerializa
   ImmutableMultiset() {}
 
   @Override
-  public UnmodifiableIterator<E> iterator() {
+  public final UnmodifiableIterator<E> iterator() {
     Iterator<Entry<E>> entryIterator = entrySet().iterator();
     return new UnmodifiableIterator<E>() {
       int remaining;
@@ -253,9 +250,12 @@ public abstract class ImmutableMultiset<E> extends ImmutableMultisetGwtSerializa
   @LazyInit private transient @Nullable ImmutableList<E> asList;
 
   @Override
-  public ImmutableList<E> asList() {
+  public final ImmutableList<E> asList() {
     ImmutableList<E> result = asList;
-    return (result == null) ? asList = super.asList() : result;
+    if (result == null) {
+      result = asList = super.asList();
+    }
+    return result;
   }
 
   @Override
@@ -321,8 +321,8 @@ public abstract class ImmutableMultiset<E> extends ImmutableMultisetGwtSerializa
 
   @GwtIncompatible // not present in emulated superclass
   @Override
-  int copyIntoArray(@Nullable Object[] dst, int offset) {
-    for (Multiset.Entry<E> entry : entrySet()) {
+  final int copyIntoArray(@Nullable Object[] dst, int offset) {
+    for (Entry<E> entry : entrySet()) {
       Arrays.fill(dst, offset, offset + entry.getCount(), entry.getElement());
       offset += entry.getCount();
     }
@@ -330,17 +330,17 @@ public abstract class ImmutableMultiset<E> extends ImmutableMultisetGwtSerializa
   }
 
   @Override
-  public boolean equals(@Nullable Object object) {
+  public final boolean equals(@Nullable Object object) {
     return Multisets.equalsImpl(this, object);
   }
 
   @Override
   public int hashCode() {
-    return Sets.hashCodeImpl(entrySet());
+    return hashCodeImpl(entrySet());
   }
 
   @Override
-  public String toString() {
+  public final String toString() {
     return entrySet().toString();
   }
 
@@ -350,21 +350,13 @@ public abstract class ImmutableMultiset<E> extends ImmutableMultisetGwtSerializa
   @Override
   public abstract ImmutableSet<E> elementSet();
 
-  @LazyInit private transient @Nullable ImmutableSet<Entry<E>> entrySet;
-
   @Override
-  public ImmutableSet<Entry<E>> entrySet() {
-    ImmutableSet<Entry<E>> es = entrySet;
-    return (es == null) ? (entrySet = createEntrySet()) : es;
-  }
-
-  private ImmutableSet<Entry<E>> createEntrySet() {
-    return isEmpty() ? ImmutableSet.<Entry<E>>of() : new EntrySet();
+  public final ImmutableSet<Entry<E>> entrySet() {
+    return isEmpty() ? ImmutableSet.of() : new EntrySet();
   }
 
   abstract Entry<E> getEntry(int index);
 
-  @WeakOuter
   private final class EntrySet extends IndexedImmutableSet<Entry<E>> {
     @Override
     boolean isPartialView() {
@@ -403,7 +395,7 @@ public abstract class ImmutableMultiset<E> extends ImmutableMultisetGwtSerializa
     @J2ktIncompatible
     @Override
         Object writeReplace() {
-      return new EntrySetSerializedForm<E>(ImmutableMultiset.this);
+      return new EntrySetSerializedForm<>(ImmutableMultiset.this);
     }
 
     @GwtIncompatible
@@ -417,7 +409,7 @@ public abstract class ImmutableMultiset<E> extends ImmutableMultisetGwtSerializa
 
   @GwtIncompatible
   @J2ktIncompatible
-  static class EntrySetSerializedForm<E> implements Serializable {
+  private static final class EntrySetSerializedForm<E> implements Serializable {
     final ImmutableMultiset<E> multiset;
 
     EntrySetSerializedForm(ImmutableMultiset<E> multiset) {
@@ -427,6 +419,8 @@ public abstract class ImmutableMultiset<E> extends ImmutableMultisetGwtSerializa
         Object readResolve() {
       return multiset.entrySet();
     }
+
+    private static final long serialVersionUID = -6456416336206982697L;
   }
 
   @GwtIncompatible
@@ -550,7 +544,7 @@ public abstract class ImmutableMultiset<E> extends ImmutableMultisetGwtSerializa
         return this;
       }
       if (buildInvoked) {
-        contents = new ObjectCountHashMap<E>(contents);
+        contents = new ObjectCountHashMap<>(contents);
         isLinkedHash = false;
       }
       buildInvoked = false;
@@ -573,12 +567,12 @@ public abstract class ImmutableMultiset<E> extends ImmutableMultisetGwtSerializa
     public Builder<E> setCount(E element, int count) {
       requireNonNull(contents); // see the comment on the field
       if (count == 0 && !isLinkedHash) {
-        contents = new ObjectCountLinkedHashMap<E>(contents);
+        contents = new ObjectCountLinkedHashMap<>(contents);
         isLinkedHash = true;
         // to preserve insertion order through deletions, we have to switch to an actual linked
         // implementation at least for now, but this should be a super rare case
       } else if (buildInvoked) {
-        contents = new ObjectCountHashMap<E>(contents);
+        contents = new ObjectCountHashMap<>(contents);
         isLinkedHash = false;
       }
       buildInvoked = false;
@@ -665,12 +659,12 @@ public abstract class ImmutableMultiset<E> extends ImmutableMultisetGwtSerializa
       if (isLinkedHash) {
         // we need ObjectCountHashMap-backed contents, with its keys and values array in direct
         // insertion order
-        contents = new ObjectCountHashMap<E>(contents);
+        contents = new ObjectCountHashMap<>(contents);
         isLinkedHash = false;
       }
       buildInvoked = true;
       // contents is now ObjectCountHashMap, but still guaranteed to be in insertion order!
-      return new RegularImmutableMultiset<E>(contents);
+      return new RegularImmutableMultiset<>(contents);
     }
   }
 

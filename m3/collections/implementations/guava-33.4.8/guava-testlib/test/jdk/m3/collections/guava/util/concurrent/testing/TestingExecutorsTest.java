@@ -39,13 +39,7 @@ public class TestingExecutorsTest extends TestCase {
 
   public void testNoOpScheduledExecutor() throws InterruptedException {
     taskDone = false;
-    Runnable task =
-        new Runnable() {
-          @Override
-          public void run() {
-            taskDone = true;
-          }
-        };
+    Runnable task = () -> taskDone = true;
     ScheduledFuture<?> future =
         TestingExecutors.noOpScheduledExecutor().schedule(task, 10, MILLISECONDS);
     Thread.sleep(20);
@@ -62,33 +56,27 @@ public class TestingExecutorsTest extends TestCase {
     assertTrue(executor.isTerminated());
   }
 
-  public void testNoOpScheduledExecutorInvokeAll() throws ExecutionException, InterruptedException {
+  public void testNoOpScheduledExecutorInvokeAll() throws InterruptedException {
     ListeningScheduledExecutorService executor = TestingExecutors.noOpScheduledExecutor();
     taskDone = false;
     Callable<Boolean> task =
-        new Callable<Boolean>() {
-          @Override
-          public Boolean call() {
-            taskDone = true;
-            return taskDone;
-          }
+        () -> {
+          taskDone = true;
+          return taskDone;
         };
     List<Future<Boolean>> futureList = executor.invokeAll(ImmutableList.of(task), 10, MILLISECONDS);
     Future<Boolean> future = futureList.get(0);
     assertFalse(taskDone);
     assertTrue(future.isDone());
-    assertThrows(CancellationException.class, () -> future.get());
+    assertThrows(CancellationException.class, future::get);
   }
 
   public void testSameThreadScheduledExecutor() throws ExecutionException, InterruptedException {
     taskDone = false;
     Callable<Integer> task =
-        new Callable<Integer>() {
-          @Override
-          public Integer call() {
-            taskDone = true;
-            return 6;
-          }
+        () -> {
+          taskDone = true;
+          return 6;
         };
     Future<Integer> future =
         TestingExecutors.sameThreadScheduledExecutor().schedule(task, 10000, MILLISECONDS);
@@ -96,16 +84,13 @@ public class TestingExecutorsTest extends TestCase {
     assertEquals(6, (int) future.get());
   }
 
-  public void testSameThreadScheduledExecutorWithException() throws InterruptedException {
+  public void testSameThreadScheduledExecutorWithException() {
     Runnable runnable =
-        new Runnable() {
-          @Override
-          public void run() {
-            throw new RuntimeException("Oh no!");
-          }
+        () -> {
+          throw new RuntimeException("Oh no!");
         };
 
     Future<?> future = TestingExecutors.sameThreadScheduledExecutor().submit(runnable);
-    assertThrows(ExecutionException.class, () -> future.get());
+    assertThrows(ExecutionException.class, future::get);
   }
 }

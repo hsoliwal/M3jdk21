@@ -20,8 +20,9 @@ import static jdk.m3.collections.guava.collect.testing.features.CollectionFeatur
 import static jdk.m3.collections.guava.collect.testing.features.CollectionFeature.SUPPORTS_REMOVE;
 import static jdk.m3.collections.guava.collect.testing.features.CollectionSize.ONE;
 import static jdk.m3.collections.guava.collect.testing.features.CollectionSize.ZERO;
-import static jdk.m3.collections.guava.collect.testing.testers.ReflectionFreeAssertThrows.assertThrows;
 import static java.util.Arrays.asList;
+import static java.util.Collections.singleton;
+import static org.junit.Assert.assertThrows;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.collect.testing.AbstractCollectionTester;
@@ -29,9 +30,7 @@ import jdk.m3.collections.guava.collect.testing.MinimalCollection;
 import jdk.m3.collections.guava.collect.testing.features.CollectionFeature;
 import jdk.m3.collections.guava.collect.testing.features.CollectionSize;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
-import org.junit.Ignore;
 
 /**
  * A generic JUnit test which tests {@code retainAll} operations on a collection. Can't be invoked
@@ -40,13 +39,10 @@ import org.junit.Ignore;
  * @author Chris Povirk
  */
 @GwtCompatible
-@Ignore("test runners must not instantiate and run this directly, only via suites we build")
-// @Ignore affects the Android test runner, which respects JUnit 4 annotations on JUnit 3 tests.
-@SuppressWarnings("JUnit4ClassUsedInJUnit3")
 public class CollectionRetainAllTester<E> extends AbstractCollectionTester<E> {
 
   /** A collection of elements to retain, along with a description for use in failure messages. */
-  private class Target {
+  private final class Target {
     private final Collection<E> toRetain;
     private final String description;
 
@@ -89,7 +85,7 @@ public class CollectionRetainAllTester<E> extends AbstractCollectionTester<E> {
     containsDuplicates =
         new Target(MinimalCollection.of(e0(), e0(), e3(), e3()), "containsDuplicates");
     partialOverlap = new Target(MinimalCollection.of(e2(), e3()), "partialOverlap");
-    nullSingleton = new Target(Collections.<E>singleton(null), "nullSingleton");
+    nullSingleton = new Target(singleton(null), "nullSingleton");
   }
 
   // retainAll(empty)
@@ -308,12 +304,7 @@ public class CollectionRetainAllTester<E> extends AbstractCollectionTester<E> {
   }
 
   private void expectThrows(Target target) {
-    try {
-      collection.retainAll(target.toRetain);
-      String message = Platform.format("retainAll(%s) should throw", target);
-      fail(message);
-    } catch (UnsupportedOperationException expected) {
-    }
+    assertThrows(UnsupportedOperationException.class, () -> collection.retainAll(target.toRetain));
   }
 
   private void expectReturnsFalseOrThrows(Target target) {

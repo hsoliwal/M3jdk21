@@ -18,13 +18,13 @@ package jdk.m3.collections.guava.collect.testing.google;
 
 import static jdk.m3.collections.guava.base.Preconditions.checkNotNull;
 import static jdk.m3.collections.guava.collect.Iterables.getOnlyElement;
+import static jdk.m3.collections.guava.collect.Maps.immutableEnumMap;
 import static jdk.m3.collections.guava.collect.testing.Helpers.mapEntry;
 import static java.util.Arrays.asList;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.collect.ImmutableMap;
 import jdk.m3.collections.guava.collect.ImmutableSet;
-import jdk.m3.collections.guava.collect.Maps;
 import jdk.m3.collections.guava.collect.Ordering;
 import jdk.m3.collections.guava.collect.testing.AnEnum;
 import jdk.m3.collections.guava.collect.testing.SampleElements;
@@ -37,6 +37,8 @@ import jdk.m3.collections.guava.collect.testing.TestUnhashableCollectionGenerato
 import jdk.m3.collections.guava.collect.testing.UnhashableObject;
 import java.util.Collection;
 import java.util.EnumMap;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -65,7 +67,7 @@ public class MapGenerators {
   public static class ImmutableMapCopyOfGenerator extends TestStringMapGenerator {
     @Override
     protected Map<String, String> create(Entry<String, String>[] entries) {
-      Map<String, String> builder = Maps.newLinkedHashMap();
+      Map<String, String> builder = new LinkedHashMap<>();
       for (Entry<String, String> entry : entries) {
         builder.put(entry.getKey(), entry.getValue());
       }
@@ -155,12 +157,12 @@ public class MapGenerators {
   public static class ImmutableEnumMapGenerator extends TestEnumMapGenerator {
     @Override
     protected Map<AnEnum, String> create(Entry<AnEnum, String>[] entries) {
-      Map<AnEnum, String> map = Maps.newHashMap();
+      Map<AnEnum, String> map = new HashMap<>();
       for (Entry<AnEnum, String> entry : entries) {
         checkNotNull(entry);
         map.put(entry.getKey(), entry.getValue());
       }
-      return Maps.immutableEnumMap(map);
+      return immutableEnumMap(map);
     }
   }
 
@@ -235,4 +237,12 @@ public class MapGenerators {
       return new ImmutableSet[length];
     }
   }
+
+  /**
+   * Useless constructor for a class of static utility methods.
+   *
+   * @deprecated Do not instantiate this utility class.
+   */
+  @Deprecated
+  public MapGenerators() {}
 }

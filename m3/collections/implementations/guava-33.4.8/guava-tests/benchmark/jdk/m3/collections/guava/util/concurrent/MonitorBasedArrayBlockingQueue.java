@@ -16,6 +16,11 @@
 
 package jdk.m3.collections.guava.util.concurrent;
 
+import static jdk.m3.collections.guava.base.Preconditions.checkArgument;
+import static jdk.m3.collections.guava.base.Preconditions.checkNotNull;
+
+import jdk.m3.collections.guava.annotations.GwtIncompatible;
+import jdk.m3.collections.guava.annotations.J2ktIncompatible;
 import jdk.m3.collections.guava.collect.ObjectArrays;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import java.util.AbstractQueue;
@@ -54,6 +59,8 @@ import org.jspecify.annotations.Nullable;
  */
 // TODO(kak): consider removing some of the @CanIgnoreReturnValue annotations as appropriate
 @NullUnmarked
+@GwtIncompatible
+@J2ktIncompatible
 public class MonitorBasedArrayBlockingQueue<E> extends AbstractQueue<E>
     implements BlockingQueue<E> {
 
@@ -108,7 +115,7 @@ public class MonitorBasedArrayBlockingQueue<E> extends AbstractQueue<E>
    * monitor.
    */
   private E extract() {
-    final E[] items = this.items;
+    E[] items = this.items;
     E x = items[takeIndex];
     items[takeIndex] = null;
     takeIndex = inc(takeIndex);
@@ -121,7 +128,7 @@ public class MonitorBasedArrayBlockingQueue<E> extends AbstractQueue<E>
    * monitor.
    */
   void removeAt(int i) {
-    final E[] items = this.items;
+    E[] items = this.items;
     // if removing front item, just advance
     if (i == takeIndex) {
       items[takeIndex] = null;
@@ -164,7 +171,7 @@ public class MonitorBasedArrayBlockingQueue<E> extends AbstractQueue<E>
    * @throws IllegalArgumentException if {@code capacity} is less than 1
    */
   public MonitorBasedArrayBlockingQueue(int capacity, boolean fair) {
-    if (capacity <= 0) throw new IllegalArgumentException();
+    checkArgument(capacity > 0);
     this.items = newEArray(capacity);
     monitor = new Monitor(fair);
     notEmpty =
@@ -198,7 +205,7 @@ public class MonitorBasedArrayBlockingQueue<E> extends AbstractQueue<E>
    */
   public MonitorBasedArrayBlockingQueue(int capacity, boolean fair, Collection<? extends E> c) {
     this(capacity, fair);
-    if (capacity < c.size()) throw new IllegalArgumentException();
+    checkArgument(capacity >= c.size());
 
     for (E e : c) add(e);
   }
@@ -235,8 +242,8 @@ public class MonitorBasedArrayBlockingQueue<E> extends AbstractQueue<E>
   @CanIgnoreReturnValue
   @Override
   public boolean offer(E e) {
-    if (e == null) throw new NullPointerException();
-    final Monitor monitor = this.monitor;
+    checkNotNull(e);
+    Monitor monitor = this.monitor;
     if (monitor.enterIf(notFull)) {
       try {
         insert(e);
@@ -259,9 +266,8 @@ public class MonitorBasedArrayBlockingQueue<E> extends AbstractQueue<E>
   @CanIgnoreReturnValue
   @Override
   public boolean offer(E e, long timeout, TimeUnit unit) throws InterruptedException {
-
-    if (e == null) throw new NullPointerException();
-    final Monitor monitor = this.monitor;
+    checkNotNull(e);
+    Monitor monitor = this.monitor;
     if (monitor.enterWhen(notFull, timeout, unit)) {
       try {
         insert(e);
@@ -283,8 +289,8 @@ public class MonitorBasedArrayBlockingQueue<E> extends AbstractQueue<E>
    */
   @Override
   public void put(E e) throws InterruptedException {
-    if (e == null) throw new NullPointerException();
-    final Monitor monitor = this.monitor;
+    checkNotNull(e);
+    Monitor monitor = this.monitor;
     monitor.enterWhen(notFull);
     try {
       insert(e);
@@ -296,7 +302,7 @@ public class MonitorBasedArrayBlockingQueue<E> extends AbstractQueue<E>
   @CanIgnoreReturnValue
   @Override
   public @Nullable E poll() {
-    final Monitor monitor = this.monitor;
+    Monitor monitor = this.monitor;
     if (monitor.enterIf(notEmpty)) {
       try {
         return extract();
@@ -311,7 +317,7 @@ public class MonitorBasedArrayBlockingQueue<E> extends AbstractQueue<E>
   @CanIgnoreReturnValue
   @Override
   public @Nullable E poll(long timeout, TimeUnit unit) throws InterruptedException {
-    final Monitor monitor = this.monitor;
+    Monitor monitor = this.monitor;
     if (monitor.enterWhen(notEmpty, timeout, unit)) {
       try {
         return extract();
@@ -326,7 +332,7 @@ public class MonitorBasedArrayBlockingQueue<E> extends AbstractQueue<E>
   @CanIgnoreReturnValue
   @Override
   public E take() throws InterruptedException {
-    final Monitor monitor = this.monitor;
+    Monitor monitor = this.monitor;
     monitor.enterWhen(notEmpty);
     try {
       return extract();
@@ -338,7 +344,7 @@ public class MonitorBasedArrayBlockingQueue<E> extends AbstractQueue<E>
   @CanIgnoreReturnValue
   @Override
   public @Nullable E peek() {
-    final Monitor monitor = this.monitor;
+    Monitor monitor = this.monitor;
     if (monitor.enterIf(notEmpty)) {
       try {
         return items[takeIndex];
@@ -360,7 +366,7 @@ public class MonitorBasedArrayBlockingQueue<E> extends AbstractQueue<E>
   @CanIgnoreReturnValue
   @Override
   public int size() {
-    final Monitor monitor = this.monitor;
+    Monitor monitor = this.monitor;
     monitor.enter();
     try {
       return count;
@@ -383,7 +389,7 @@ public class MonitorBasedArrayBlockingQueue<E> extends AbstractQueue<E>
   @CanIgnoreReturnValue
   @Override
   public int remainingCapacity() {
-    final Monitor monitor = this.monitor;
+    Monitor monitor = this.monitor;
     monitor.enter();
     try {
       return items.length - count;
@@ -405,8 +411,8 @@ public class MonitorBasedArrayBlockingQueue<E> extends AbstractQueue<E>
   @Override
   public boolean remove(@Nullable Object o) {
     if (o == null) return false;
-    final E[] items = this.items;
-    final Monitor monitor = this.monitor;
+    E[] items = this.items;
+    Monitor monitor = this.monitor;
     monitor.enter();
     try {
       int i = takeIndex;
@@ -436,8 +442,8 @@ public class MonitorBasedArrayBlockingQueue<E> extends AbstractQueue<E>
   @Override
   public boolean contains(@Nullable Object o) {
     if (o == null) return false;
-    final E[] items = this.items;
-    final Monitor monitor = this.monitor;
+    E[] items = this.items;
+    Monitor monitor = this.monitor;
     monitor.enter();
     try {
       int i = takeIndex;
@@ -466,8 +472,8 @@ public class MonitorBasedArrayBlockingQueue<E> extends AbstractQueue<E>
   @CanIgnoreReturnValue
   @Override
   public Object[] toArray() {
-    final E[] items = this.items;
-    final Monitor monitor = this.monitor;
+    E[] items = this.items;
+    Monitor monitor = this.monitor;
     monitor.enter();
     try {
       Object[] a = new Object[count];
@@ -515,8 +521,8 @@ public class MonitorBasedArrayBlockingQueue<E> extends AbstractQueue<E>
   @CanIgnoreReturnValue
   @Override
   public <T> T[] toArray(T[] a) {
-    final E[] items = this.items;
-    final Monitor monitor = this.monitor;
+    E[] items = this.items;
+    Monitor monitor = this.monitor;
     monitor.enter();
     try {
       if (a.length < count) a = ObjectArrays.newArray(a, count);
@@ -543,7 +549,7 @@ public class MonitorBasedArrayBlockingQueue<E> extends AbstractQueue<E>
   @CanIgnoreReturnValue
   @Override
   public String toString() {
-    final Monitor monitor = this.monitor;
+    Monitor monitor = this.monitor;
     monitor.enter();
     try {
       return super.toString();
@@ -558,8 +564,8 @@ public class MonitorBasedArrayBlockingQueue<E> extends AbstractQueue<E>
    */
   @Override
   public void clear() {
-    final E[] items = this.items;
-    final Monitor monitor = this.monitor;
+    E[] items = this.items;
+    Monitor monitor = this.monitor;
     monitor.enter();
     try {
       int i = takeIndex;
@@ -585,10 +591,10 @@ public class MonitorBasedArrayBlockingQueue<E> extends AbstractQueue<E>
   @CanIgnoreReturnValue
   @Override
   public int drainTo(Collection<? super E> c) {
-    if (c == null) throw new NullPointerException();
-    if (c == this) throw new IllegalArgumentException();
-    final E[] items = this.items;
-    final Monitor monitor = this.monitor;
+    checkNotNull(c);
+    checkArgument(c != this);
+    E[] items = this.items;
+    Monitor monitor = this.monitor;
     monitor.enter();
     try {
       int i = takeIndex;
@@ -620,11 +626,11 @@ public class MonitorBasedArrayBlockingQueue<E> extends AbstractQueue<E>
   @CanIgnoreReturnValue
   @Override
   public int drainTo(Collection<? super E> c, int maxElements) {
-    if (c == null) throw new NullPointerException();
-    if (c == this) throw new IllegalArgumentException();
+    checkNotNull(c);
+    checkArgument(c != this);
     if (maxElements <= 0) return 0;
-    final E[] items = this.items;
-    final Monitor monitor = this.monitor;
+    E[] items = this.items;
+    Monitor monitor = this.monitor;
     monitor.enter();
     try {
       int i = takeIndex;
@@ -658,7 +664,7 @@ public class MonitorBasedArrayBlockingQueue<E> extends AbstractQueue<E>
   @CanIgnoreReturnValue
   @Override
   public Iterator<E> iterator() {
-    final Monitor monitor = this.monitor;
+    Monitor monitor = this.monitor;
     monitor.enter();
     try {
       return new Itr();
@@ -720,7 +726,7 @@ public class MonitorBasedArrayBlockingQueue<E> extends AbstractQueue<E>
 
     @Override
     public E next() {
-      final Monitor monitor = MonitorBasedArrayBlockingQueue.this.monitor;
+      Monitor monitor = MonitorBasedArrayBlockingQueue.this.monitor;
       monitor.enter();
       try {
         if (nextIndex < 0) throw new NoSuchElementException();
@@ -736,7 +742,7 @@ public class MonitorBasedArrayBlockingQueue<E> extends AbstractQueue<E>
 
     @Override
     public void remove() {
-      final Monitor monitor = MonitorBasedArrayBlockingQueue.this.monitor;
+      Monitor monitor = MonitorBasedArrayBlockingQueue.this.monitor;
       monitor.enter();
       try {
         int i = lastRet;

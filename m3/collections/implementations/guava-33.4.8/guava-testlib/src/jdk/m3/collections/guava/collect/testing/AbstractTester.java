@@ -34,11 +34,11 @@ import org.jspecify.annotations.Nullable;
  *     parameterize the test.
  * @author George van den Driessche
  */
-@GwtCompatible(emulated = true)
+@GwtCompatible
 @NullMarked
 public class AbstractTester<G> extends TestCase {
   private G subjectGenerator;
-  private String suiteName;
+  private @Nullable String suiteName;
   private @Nullable Runnable setUp;
   private @Nullable Runnable tearDown;
 
@@ -99,7 +99,7 @@ public class AbstractTester<G> extends TestCase {
    *
    * @since 33.4.0
    */
-  public static void assertNull(String message, Object object) {
+  public static void assertNull(String message, @Nullable Object object) {
     assertEquals(message, null, object);
   }
 }

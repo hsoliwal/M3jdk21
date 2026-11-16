@@ -22,7 +22,6 @@ import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
 import jdk.m3.collections.guava.annotations.J2ktIncompatible;
 import jdk.m3.collections.guava.base.Supplier;
-import com.google.j2objc.annotations.WeakOuter;
 import java.util.Comparator;
 import java.util.Map;
 import java.util.Set;
@@ -36,7 +35,7 @@ import org.jspecify.annotations.Nullable;
  * single row key may or may not be ordered, depending on the implementation. When rows and columns
  * are both sorted, it's easier to use the {@link TreeBasedTable} subclass.
  *
- * <p>The {@link #rowKeySet} method returns a {@link SortedSet} and the {@link #rowMap} method
+ * <p>The {@link #rowKeySet} method returns a {@link SortedSet} and the {@link #rowMap()} method
  * returns a {@link SortedMap}, instead of the {@link Set} and {@link Map} specified by the {@link
  * Table} interface.
  *
@@ -72,7 +71,7 @@ class StandardRowSortedTable<R, C, V> extends StandardTable<R, C, V>
    * Table} interface.
    */
   @Override
-  public SortedSet<R> rowKeySet() {
+  public final SortedSet<R> rowKeySet() {
     return (SortedSet<R>) rowMap().keySet();
   }
 
@@ -83,24 +82,18 @@ class StandardRowSortedTable<R, C, V> extends StandardTable<R, C, V>
    * Table} interface.
    */
   @Override
-  public SortedMap<R, Map<C, V>> rowMap() {
+  public final SortedMap<R, Map<C, V>> rowMap() {
     return (SortedMap<R, Map<C, V>>) super.rowMap();
   }
 
   @Override
-  SortedMap<R, Map<C, V>> createRowMap() {
+  final SortedMap<R, Map<C, V>> createRowMap() {
     return new RowSortedMap();
   }
 
-  @WeakOuter
-  private class RowSortedMap extends RowMap implements SortedMap<R, Map<C, V>> {
+  private final class RowSortedMap extends RowMap implements SortedMap<R, Map<C, V>> {
     @Override
     public SortedSet<R> keySet() {
-      return (SortedSet<R>) super.keySet();
-    }
-
-    @Override
-    SortedSet<R> createKeySet() {
       return new Maps.SortedKeySet<>(this);
     }
 

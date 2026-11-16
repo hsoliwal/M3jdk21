@@ -15,8 +15,10 @@
 package jdk.m3.collections.guava.util.concurrent;
 
 import static jdk.m3.collections.guava.base.StandardSystemProperty.JAVA_SPECIFICATION_VERSION;
-import static com.google.common.truth.Truth.assertThat;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
 
+import jdk.m3.collections.guava.annotations.GwtIncompatible;
+import jdk.m3.collections.guava.annotations.J2ktIncompatible;
 import junit.framework.TestCase;
 import org.jspecify.annotations.NullUnmarked;
 
@@ -28,8 +30,10 @@ import org.jspecify.annotations.NullUnmarked;
  * Android.
  */
 @NullUnmarked
+@GwtIncompatible
+@J2ktIncompatible
 public class AbstractFutureDefaultAtomicHelperTest extends TestCase {
-  public void testUsingExpectedAtomicHelper() throws Exception {
+  public void testUsingExpectedAtomicHelper() {
     if (isJava8() || isAndroid()) {
       assertThat(AbstractFutureState.atomicHelperTypeForTest()).isEqualTo("UnsafeAtomicHelper");
     } else {

@@ -19,16 +19,19 @@ package jdk.m3.collections.guava.math;
 import static jdk.m3.collections.guava.math.Quantiles.median;
 import static jdk.m3.collections.guava.math.Quantiles.percentiles;
 import static jdk.m3.collections.guava.math.Quantiles.quartiles;
-import static com.google.common.truth.Truth.assertThat;
-import static com.google.common.truth.Truth.assertWithMessage;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
+import static jdk.m3.collections.guava.truth.Truth.assertWithMessage;
 import static java.lang.Double.NEGATIVE_INFINITY;
 import static java.lang.Double.NaN;
 import static java.lang.Double.POSITIVE_INFINITY;
 import static java.math.RoundingMode.CEILING;
 import static java.math.RoundingMode.FLOOR;
 import static java.math.RoundingMode.UNNECESSARY;
+import static java.util.Collections.shuffle;
 import static org.junit.Assert.assertThrows;
 
+import jdk.m3.collections.guava.annotations.GwtIncompatible;
+import jdk.m3.collections.guava.annotations.J2ktIncompatible;
 import jdk.m3.collections.guava.collect.ImmutableList;
 import jdk.m3.collections.guava.collect.ImmutableMap;
 import jdk.m3.collections.guava.collect.Ordering;
@@ -36,10 +39,9 @@ import jdk.m3.collections.guava.math.Quantiles.ScaleAndIndexes;
 import jdk.m3.collections.guava.primitives.Doubles;
 import jdk.m3.collections.guava.primitives.Ints;
 import jdk.m3.collections.guava.primitives.Longs;
-import com.google.common.truth.Correspondence;
-import com.google.common.truth.Correspondence.BinaryPredicate;
+import jdk.m3.collections.guava.truth.Correspondence;
+import jdk.m3.collections.guava.truth.Correspondence.BinaryPredicate;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 import junit.framework.TestCase;
@@ -52,6 +54,8 @@ import org.jspecify.annotations.Nullable;
  * @author Pete Gillin
  */
 @NullUnmarked
+@GwtIncompatible
+@J2ktIncompatible
 public class QuantilesTest extends TestCase {
 
   /*
@@ -523,19 +527,18 @@ public class QuantilesTest extends TestCase {
 
   public void testPercentiles_index_compute_doubleCollection() {
     for (int index = 0; index <= 100; index++) {
-      assertWithMessage("quantile at index " + index)
+      assertWithMessage("quantile at index %s", index)
           .that(percentiles().index(index).compute(PSEUDORANDOM_DATASET))
           .isWithin(ALLOWED_ERROR)
           .of(expectedLargeDatasetPercentile(index));
     }
   }
 
-  @AndroidIncompatible // slow
   public void testPercentiles_index_computeInPlace() {
     // Assert that the computation gives the correct result for all possible percentiles.
     for (int index = 0; index <= 100; index++) {
       double[] dataset = Doubles.toArray(PSEUDORANDOM_DATASET);
-      assertWithMessage("quantile at index " + index)
+      assertWithMessage("quantile at index %s", index)
           .that(percentiles().index(index).computeInPlace(dataset))
           .isWithin(ALLOWED_ERROR)
           .of(expectedLargeDatasetPercentile(index));
@@ -573,13 +576,12 @@ public class QuantilesTest extends TestCase {
       expectedBuilder.put(index, expectedLargeDatasetPercentile(index));
     }
     Random random = new Random(770683168895677741L);
-    Collections.shuffle(indexes, random);
+    shuffle(indexes, random);
     assertThat(percentiles().indexes(Ints.toArray(indexes)).compute(PSEUDORANDOM_DATASET))
         .comparingValuesUsing(QUANTILE_CORRESPONDENCE)
         .containsExactlyEntriesIn(expectedBuilder.buildOrThrow());
   }
 
-  @AndroidIncompatible // slow
   public void testPercentiles_indexes_varargsAll_computeInPlace() {
     double[] dataset = Doubles.toArray(PSEUDORANDOM_DATASET);
     List<Integer> indexes = new ArrayList<>();
@@ -589,7 +591,7 @@ public class QuantilesTest extends TestCase {
       expectedBuilder.put(index, expectedLargeDatasetPercentile(index));
     }
     Random random = new Random(770683168895677741L);
-    Collections.shuffle(indexes, random);
+    shuffle(indexes, random);
     assertThat(percentiles().indexes(Ints.toArray(indexes)).computeInPlace(dataset))
         .comparingValuesUsing(QUANTILE_CORRESPONDENCE)
         .containsExactlyEntriesIn(expectedBuilder.buildOrThrow());
@@ -694,10 +696,6 @@ public class QuantilesTest extends TestCase {
 
   public void testScale_indexes_indexes_computeInPlace_empty() {
     int[] emptyIndexes = {};
-    assertThrows(
-        IllegalArgumentException.class,
-        () -> {
-          Quantiles.ScaleAndIndexes unused = Quantiles.scale(10).indexes(emptyIndexes);
-        });
+    assertThrows(IllegalArgumentException.class, () -> Quantiles.scale(10).indexes(emptyIndexes));
   }
 }

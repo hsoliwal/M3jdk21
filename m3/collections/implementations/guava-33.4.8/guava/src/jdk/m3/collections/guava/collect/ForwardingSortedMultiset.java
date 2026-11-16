@@ -14,6 +14,8 @@
 
 package jdk.m3.collections.guava.collect;
 
+import static jdk.m3.collections.guava.base.Preconditions.checkNotNull;
+
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import java.util.Comparator;
 import java.util.Iterator;
@@ -42,7 +44,7 @@ import org.jspecify.annotations.Nullable;
  * @author Louis Wasserman
  * @since 15.0
  */
-@GwtCompatible(emulated = true)
+@GwtCompatible
 public abstract class ForwardingSortedMultiset<E extends @Nullable Object>
     extends ForwardingMultiset<E> implements SortedMultiset<E> {
   /** Constructor for use by subclasses. */
@@ -100,10 +102,10 @@ public abstract class ForwardingSortedMultiset<E extends @Nullable Object>
    */
   protected abstract class StandardDescendingMultiset extends DescendingMultiset<E> {
     /** Constructor for use by subclasses. */
-    public StandardDescendingMultiset() {}
+    protected StandardDescendingMultiset() {}
 
     @Override
-    SortedMultiset<E> forwardMultiset() {
+    final SortedMultiset<E> forwardMultiset() {
       return ForwardingSortedMultiset.this;
     }
   }
@@ -227,5 +229,27 @@ public abstract class ForwardingSortedMultiset<E extends @Nullable Object>
   @Override
   public SortedMultiset<E> tailMultiset(@ParametricNullness E lowerBound, BoundType boundType) {
     return delegate().tailMultiset(lowerBound, boundType);
+  }
+
+  /**
+   * A simplified version of {@link ForwardingSortedMultiset} where subclasses can pass in an
+   * already constructed {@link SortedMultiset} as the delegate.
+   *
+   * <p>TODO(b/3417232): Consider making this public, but take into consideration whether it would
+   * then appear as a user-visible supertype for any classes.
+   */
+  abstract static class SimpleForwardingSortedMultiset<E extends @Nullable Object>
+      extends ForwardingSortedMultiset<E> {
+    private final SortedMultiset<E> delegate;
+
+    /** Constructor for use by subclasses. */
+    SimpleForwardingSortedMultiset(SortedMultiset<E> delegate) {
+      this.delegate = checkNotNull(delegate);
+    }
+
+    @Override
+    protected final SortedMultiset<E> delegate() {
+      return delegate;
+    }
   }
 }

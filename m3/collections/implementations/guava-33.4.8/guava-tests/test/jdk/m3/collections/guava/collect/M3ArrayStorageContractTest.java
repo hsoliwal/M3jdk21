@@ -1,17 +1,18 @@
-/*******************************************************************************
- * Copyright (c) 2026 Synexia, Hitesh Soliwal (hsoliwal@gmail.com) and others.
+/*
+ * Copyright 2026 Hitesh Soliwal and Contributors to the Synexia Project
  *
- * This program and the accompanying materials are made available under the
- * terms of the Apache License, Version 2.0, or (at your option) the Eclipse
- * Public License 2.0, which are available at
- * https://www.apache.org/licenses/LICENSE-2.0 and
- * https://www.eclipse.org/legal/epl-2.0/
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- * SPDX-License-Identifier: Apache-2.0 OR EPL-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
- * Contributors:
- *     Hitesh Soliwal (Synexia) - initial API and implementation
- *******************************************************************************/
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 package jdk.m3.collections.guava.collect;
 
@@ -47,7 +48,6 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Random;
 import java.util.Set;
-import java.util.concurrent.atomic.AtomicReference;
 import org.junit.Test;
 
 /** Physical discriminators and comparisons against separately compiled, unchanged JRE owners. */
@@ -140,45 +140,22 @@ public final class M3ArrayStorageContractTest {
   @Test
   public void bimapMatchesOriginalAcrossSeededCollisionNullAndViewEdits() throws Exception {
     try (URLClassLoader oracle = originalLoader()) {
-      AtomicReference<Map<Object, Object>> original =
-          new AtomicReference<>(map(oracle, "HashBiMap"));
+      Map<Object, Object> original = map(oracle, "HashBiMap");
       Map<Object, Object> candidate = HashBiMap.create(0);
       Random random = new Random(0x4D334152524159L);
-      int originalDefects = 0;
       for (int step = 0; step < 12000; step++) {
         int operation = random.nextInt(12);
         Object key = random.nextInt(9) == 0 ? null : new CollisionKey(random.nextInt(50));
         Object value = random.nextInt(9) == 0 ? null : new CollisionKey(random.nextInt(50) + 100);
         boolean removeAfterSet = random.nextBoolean();
-        Object expected;
-        try {
-          expected = outcome(() -> editMap(original.get(), operation, key, value, removeAfterSet));
-        } catch (NullPointerException defect) {
-          // 33.4.8 HashBiMap: entry-iterator remove() after setValue() follows a stale bucket entry
-          // (an upstream defect fixed after 33.4.8); the array owner completes the edit. Rebuild the
-          // original from the candidate's pairs, in order, and keep comparing from there.
-          assertTrue(
-              "only entry edits with removal reach the 33.4.8 defect",
-              (operation == 8 || operation == 9) && removeAfterSet);
-          outcome(() -> editMap(candidate, operation, key, value, removeAfterSet));
-          Map<Object, Object> rebuilt = map(oracle, "HashBiMap");
-          for (Map.Entry<Object, Object> entry : candidate.entrySet()) {
-            rebuilt.put(entry.getKey(), entry.getValue());
-          }
-          original.set(rebuilt);
-          originalDefects++;
-          continue;
-        }
+        Object expected = outcome(() -> editMap(original, operation, key, value, removeAfterSet));
         Object actual = outcome(() -> editMap(candidate, operation, key, value, removeAfterSet));
         assertEquals("result at step " + step + " operation " + operation, expected, actual);
-        assertEquals("ordered mappings at step " + step, entries(original.get()), entries(candidate));
+        assertEquals("ordered mappings at step " + step, entries(original), entries(candidate));
         assertEquals(
-            "inverse at step " + step,
-            entries(inverse(original.get())),
-            entries(inverse(candidate)));
+            "inverse at step " + step, entries(inverse(original)), entries(inverse(candidate)));
         assertSame(candidate, inverse(inverse(candidate)));
       }
-      assertTrue("33.4.8 defect hits stay rare: " + originalDefects, originalDefects < 600);
     }
   }
 

@@ -28,7 +28,7 @@ import org.jspecify.annotations.Nullable;
  * @author Jesse Wilson
  * @author Kevin Bourrillion
  */
-@GwtCompatible(emulated = true)
+@GwtCompatible
 final class ImmutableMapKeySet<K, V> extends IndexedImmutableSet<K> {
   private final ImmutableMap<K, V> map;
 
@@ -68,9 +68,9 @@ final class ImmutableMapKeySet<K, V> extends IndexedImmutableSet<K> {
     return new KeySetSerializedForm<K>(map);
   }
 
-  @GwtIncompatible // serialization
+  @GwtIncompatible
   @J2ktIncompatible
-  private static class KeySetSerializedForm<K> implements Serializable {
+  private static final class KeySetSerializedForm<K> implements Serializable {
     final ImmutableMap<K, ?> map;
 
     KeySetSerializedForm(ImmutableMap<K, ?> map) {
@@ -81,6 +81,6 @@ final class ImmutableMapKeySet<K, V> extends IndexedImmutableSet<K> {
       return map.keySet();
     }
 
-    @GwtIncompatible @J2ktIncompatible private static final long serialVersionUID = 0;
+    private static final long serialVersionUID = 0;
   }
 }

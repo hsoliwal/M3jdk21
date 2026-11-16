@@ -16,11 +16,15 @@
 
 package jdk.m3.collections.guava.collect;
 
+import static jdk.m3.collections.guava.base.Preconditions.checkNotNull;
+import static jdk.m3.collections.guava.collect.Collections2.containsAllImpl;
+import static jdk.m3.collections.guava.collect.Collections2.toStringImpl;
+
 import jdk.m3.collections.guava.annotations.GwtCompatible;
-import jdk.m3.collections.guava.base.Objects;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.Objects;
 import org.jspecify.annotations.Nullable;
 
 /**
@@ -147,7 +151,7 @@ public abstract class ForwardingCollection<E extends @Nullable Object> extends F
    * @since 7.0
    */
   protected boolean standardContainsAll(Collection<?> collection) {
-    return Collections2.containsAllImpl(this, collection);
+    return containsAllImpl(this, collection);
   }
 
   /**
@@ -170,7 +174,7 @@ public abstract class ForwardingCollection<E extends @Nullable Object> extends F
   protected boolean standardRemove(@Nullable Object object) {
     Iterator<E> iterator = iterator();
     while (iterator.hasNext()) {
-      if (Objects.equal(iterator.next(), object)) {
+      if (Objects.equals(iterator.next(), object)) {
         iterator.remove();
         return true;
       }
@@ -230,7 +234,7 @@ public abstract class ForwardingCollection<E extends @Nullable Object> extends F
    * @since 7.0
    */
   protected String standardToString() {
-    return Collections2.toStringImpl(this);
+    return toStringImpl(this);
   }
 
   /**
@@ -254,5 +258,27 @@ public abstract class ForwardingCollection<E extends @Nullable Object> extends F
    */
   protected <T extends @Nullable Object> T[] standardToArray(T[] array) {
     return ObjectArrays.toArrayImpl(this, array);
+  }
+
+  /**
+   * A simplified version of {@link ForwardingCollection} where subclasses can pass in an already
+   * constructed {@link Collection} as the delegate.
+   *
+   * <p>TODO(b/3417232): Consider making this public, but take into consideration whether it would
+   * then appear as a user-visible supertype for any classes.
+   */
+  abstract static class SimpleForwardingCollection<E extends @Nullable Object>
+      extends ForwardingCollection<E> {
+    private final Collection<E> delegate;
+
+    /** Constructor for use by subclasses. */
+    SimpleForwardingCollection(Collection<E> delegate) {
+      this.delegate = checkNotNull(delegate);
+    }
+
+    @Override
+    protected final Collection<E> delegate() {
+      return delegate;
+    }
   }
 }

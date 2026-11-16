@@ -16,10 +16,12 @@
 
 package jdk.m3.collections.guava.util.concurrent;
 
-import static com.google.common.truth.Truth.assertThat;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
 import static java.util.concurrent.TimeUnit.MINUTES;
 import static org.junit.Assert.assertThrows;
 
+import jdk.m3.collections.guava.annotations.GwtIncompatible;
+import jdk.m3.collections.guava.annotations.J2ktIncompatible;
 import jdk.m3.collections.guava.base.Joiner;
 import jdk.m3.collections.guava.util.concurrent.CycleDetectingLockFactory.Policies;
 import jdk.m3.collections.guava.util.concurrent.CycleDetectingLockFactory.Policy;
@@ -37,6 +39,8 @@ import org.jspecify.annotations.NullUnmarked;
  * @author Darick Tong
  */
 @NullUnmarked
+@GwtIncompatible
+@J2ktIncompatible
 public class CycleDetectingLockFactoryTest extends TestCase {
 
   private ReentrantLock lockA;
@@ -52,7 +56,10 @@ public class CycleDetectingLockFactoryTest extends TestCase {
   private ReentrantLock lock2;
   private ReentrantLock lock3;
   private ReentrantLock lock01;
+
+  @SuppressWarnings("UnusedVariable")
   private ReentrantLock lock02;
+
   private ReentrantLock lock03;
 
   @Override
@@ -88,7 +95,7 @@ public class CycleDetectingLockFactoryTest extends TestCase {
   // In the unittest, create each ordered factory with its own set of lock
   // graph nodes (as opposed to using the static per-Enum map) to avoid
   // conflicts across different test runs.
-  private <E extends Enum<E>>
+  private static <E extends Enum<E>>
       CycleDetectingLockFactory.WithExplicitOrdering<E> newInstanceWithExplicitOrdering(
           Class<E> enumClass, Policy policy) {
     return new CycleDetectingLockFactory.WithExplicitOrdering<E>(
@@ -103,17 +110,16 @@ public class CycleDetectingLockFactoryTest extends TestCase {
     lockB.unlock();
 
     // The opposite order should fail (Policies.THROW).
-    PotentialDeadlockException firstException = null;
     lockB.lock();
     PotentialDeadlockException expected =
         assertThrows(PotentialDeadlockException.class, () -> lockA.lock());
     checkMessage(expected, "LockB -> LockA", "LockA -> LockB");
-    firstException = expected;
+    PotentialDeadlockException firstException = expected;
     // Second time should also fail, with a cached causal chain.
     expected = assertThrows(PotentialDeadlockException.class, () -> lockA.lock());
     checkMessage(expected, "LockB -> LockA", "LockA -> LockB");
     // The causal chain should be cached.
-    assertSame(firstException.getCause(), expected.getCause());
+    assertThat(expected).hasCauseThat().isEqualTo(firstException.getCause());
     // lockA should work after lockB is released.
     lockB.unlock();
     lockA.lock();
@@ -230,7 +236,7 @@ public class CycleDetectingLockFactoryTest extends TestCase {
     Lock lockB = factory.newReentrantReadWriteLock(OtherOrder.FIRST).readLock();
 
     lockA.lock();
-    assertThrows(IllegalStateException.class, () -> lockB.lock());
+    assertThrows(IllegalStateException.class, lockB::lock);
 
     lockA.unlock();
     lockB.lock();
@@ -481,7 +487,7 @@ public class CycleDetectingLockFactoryTest extends TestCase {
   // (e.g. "LockA -> LockB", "LockB -> LockC", ...)
   // Checks that the exception.getMessage() matches a regex of the form:
   // "LockA -> LockB \b.*\b LockB -> LockC \b.*\b LockC -> LockA"
-  private void checkMessage(IllegalStateException exception, String... expectedLockCycle) {
+  private static void checkMessage(IllegalStateException exception, String... expectedLockCycle) {
     String regex = Joiner.on("\\b.*\\b").join(expectedLockCycle);
     assertThat(exception).hasMessageThat().containsMatch(regex);
   }

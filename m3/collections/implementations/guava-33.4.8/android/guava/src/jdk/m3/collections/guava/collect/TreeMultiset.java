@@ -56,7 +56,7 @@ import org.jspecify.annotations.Nullable;
  * @author Jared Levy
  * @since 2.0
  */
-@GwtCompatible(emulated = true)
+@GwtCompatible
 public final class TreeMultiset<E extends @Nullable Object> extends AbstractSortedMultiset<E>
     implements Serializable {
 
@@ -116,14 +116,23 @@ public final class TreeMultiset<E extends @Nullable Object> extends AbstractSort
   private final transient GeneralRange<E> range;
   private final transient AvlNode<E> header;
 
-  TreeMultiset(Reference<AvlNode<E>> rootReference, GeneralRange<E> range, AvlNode<E> endLink) {
+  /**
+   * An instance created in {@link #readObject} to be returned from {@link #readResolve}. This field
+   * is used only by those methods, and it is never set in a "normal" instance.
+   *
+   * <p>For more background, see {@code ConcurrentHashMultiset.deserializationReplacement}.
+   */
+  private transient @Nullable TreeMultiset<E> deserializationReplacement;
+
+  private TreeMultiset(
+      Reference<AvlNode<E>> rootReference, GeneralRange<E> range, AvlNode<E> endLink) {
     super(range.comparator());
     this.rootReference = rootReference;
     this.range = range;
     this.header = endLink;
   }
 
-  TreeMultiset(Comparator<? super E> comparator) {
+  private TreeMultiset(Comparator<? super E> comparator) {
     super(comparator);
     this.range = GeneralRange.all(comparator);
     this.header = new AvlNode<>();
@@ -229,11 +238,11 @@ public final class TreeMultiset<E extends @Nullable Object> extends AbstractSort
   }
 
   @Override
-  int distinctElements() {
+  int internalDistinctElements() {
     return Ints.saturatedCast(aggregateForEntries(Aggregate.DISTINCT));
   }
 
-  static int distinctElements(@Nullable AvlNode<?> node) {
+  private static int distinctElements(@Nullable AvlNode<?> node) {
     return (node == null) ? 0 : node.distinctElements;
   }
 
@@ -335,6 +344,8 @@ public final class TreeMultiset<E extends @Nullable Object> extends AbstractSort
         }
         return true;
       } else {
+        // Validate the element even when its count cannot match.
+        int unused = comparator().compare(element, element);
         return false;
       }
     }
@@ -364,7 +375,7 @@ public final class TreeMultiset<E extends @Nullable Object> extends AbstractSort
       rootReference.clear();
     } else {
       // TODO(cpovirk): Perhaps we can optimize in this case, too?
-      Iterators.clear(entryIterator());
+      Iterators.clear(internalEntryIterator());
     }
   }
 
@@ -437,11 +448,11 @@ public final class TreeMultiset<E extends @Nullable Object> extends AbstractSort
 
   @Override
   Iterator<E> elementIterator() {
-    return Multisets.elementIterator(entryIterator());
+    return Multisets.elementIterator(internalEntryIterator());
   }
 
   @Override
-  Iterator<Entry<E>> entryIterator() {
+  Iterator<Entry<E>> internalEntryIterator() {
     return new Iterator<Entry<E>>() {
       @Nullable AvlNode<E> current = firstNode();
       @Nullable Entry<E> prevEntry;
@@ -551,11 +562,11 @@ public final class TreeMultiset<E extends @Nullable Object> extends AbstractSort
   private static final class Reference<T> {
     private @Nullable T value;
 
-    public @Nullable T get() {
+    @Nullable T get() {
       return value;
     }
 
-    public void checkAndSet(@Nullable T expected, @Nullable T newValue) {
+    void checkAndSet(@Nullable T expected, @Nullable T newValue) {
       if (value != expected) {
         throw new ConcurrentModificationException();
       }
@@ -580,7 +591,7 @@ public final class TreeMultiset<E extends @Nullable Object> extends AbstractSort
      */
     private final @Nullable E elem;
 
-    // elemCount is 0 iff this node has been deleted.
+    // elemCount is 0 if and only if this node has been deleted.
     private int elemCount;
 
     private int distinctElements;
@@ -921,8 +932,7 @@ public final class TreeMultiset<E extends @Nullable Object> extends AbstractSort
     }
 
     private void recomputeMultiset() {
-      this.distinctElements =
-          1 + TreeMultiset.distinctElements(left) + TreeMultiset.distinctElements(right);
+      this.distinctElements = 1 + distinctElements(left) + distinctElements(right);
       this.totalCount = elemCount + totalCount(left) + totalCount(right);
     }
 
@@ -1053,9 +1063,9 @@ public final class TreeMultiset<E extends @Nullable Object> extends AbstractSort
    * @serialData the comparator, the number of distinct elements, the first element, its count, the
    *     second element, its count, and so on
    */
+  @GwtIncompatible
   @J2ktIncompatible
-  @GwtIncompatible // java.io.ObjectOutputStream
-  private void writeObject(ObjectOutputStream stream) throws IOException {
+    private void writeObject(ObjectOutputStream stream) throws IOException {
     stream.defaultWriteObject();
     stream.writeObject(elementSet().comparator());
     Serialization.writeMultiset(this, stream);
@@ -1068,15 +1078,14 @@ public final class TreeMultiset<E extends @Nullable Object> extends AbstractSort
     @SuppressWarnings("unchecked")
     // reading data stored by writeObject
     Comparator<? super E> comparator = (Comparator<? super E>) requireNonNull(stream.readObject());
-    Serialization.getFieldSetter(AbstractSortedMultiset.class, "comparator").set(this, comparator);
-    Serialization.getFieldSetter(TreeMultiset.class, "range")
-        .set(this, GeneralRange.all(comparator));
-    Serialization.getFieldSetter(TreeMultiset.class, "rootReference")
-        .set(this, new Reference<AvlNode<E>>());
-    AvlNode<E> header = new AvlNode<>();
-    Serialization.getFieldSetter(TreeMultiset.class, "header").set(this, header);
-    successor(header, header);
-    Serialization.populateMultiset(this, stream);
+    deserializationReplacement = new TreeMultiset<>(comparator);
+    Serialization.populateMultiset(deserializationReplacement, stream);
+  }
+
+  @J2ktIncompatible
+  @GwtIncompatible
+    private Object readResolve() {
+    return requireNonNull(deserializationReplacement); // set by readObject
   }
 
   @GwtIncompatible @J2ktIncompatible private static final long serialVersionUID = 1;

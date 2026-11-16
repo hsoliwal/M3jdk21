@@ -16,9 +16,9 @@
 
 package jdk.m3.collections.guava.collect;
 
-import static jdk.m3.collections.guava.collect.ReflectionFreeAssertThrows.assertThrows;
 import static jdk.m3.collections.guava.collect.TableCollectors.toImmutableTable;
 import static jdk.m3.collections.guava.collect.Tables.immutableCell;
+import static org.junit.Assert.assertThrows;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.annotations.J2ktIncompatible;
@@ -36,7 +36,7 @@ import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
 /** Unit tests for {@link TableCollectors}. */
-@GwtCompatible(emulated = true)
+@GwtCompatible
 @NullMarked
 public class TableCollectorsTest extends TestCase {
   public void testToImmutableTable() {
@@ -218,7 +218,7 @@ public class TableCollectorsTest extends TestCase {
             Cell::getRowKey,
             Cell::getColumnKey,
             Cell::getValue,
-            (BinaryOperator<Integer>) mergeFunction,
+            mergeFunction,
             HashBasedTable::create);
     BiPredicate<Table<String, String, Integer>, Table<String, String, Integer>> equivalence =
         pairwiseOnResultOf(Table::cellSet);
@@ -238,12 +238,10 @@ public class TableCollectorsTest extends TestCase {
             () -> {
               Table<String, String, @Nullable Integer> table =
                   ArrayTable.create(ImmutableList.of("one"), ImmutableList.of("uno"));
-              return (Table<String, String, Integer>) table;
+              return table;
             });
     Cell<String, String, @Nullable Integer> cell = immutableCell("one", "uno", null);
-    assertThrows(
-        NullPointerException.class,
-        () -> Stream.of((Cell<String, String, Integer>) cell).collect(collector));
+    assertThrows(NullPointerException.class, () -> Stream.of(cell).collect(collector));
   }
 
   public void testToTableConflict() {

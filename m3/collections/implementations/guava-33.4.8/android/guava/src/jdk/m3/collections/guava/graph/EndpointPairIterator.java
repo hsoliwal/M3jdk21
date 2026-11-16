@@ -17,11 +17,11 @@
 package jdk.m3.collections.guava.graph;
 
 import static jdk.m3.collections.guava.base.Preconditions.checkState;
+import static jdk.m3.collections.guava.collect.Sets.newHashSetWithExpectedSize;
 import static java.util.Objects.requireNonNull;
 
 import jdk.m3.collections.guava.collect.AbstractIterator;
 import jdk.m3.collections.guava.collect.ImmutableSet;
-import jdk.m3.collections.guava.collect.Sets;
 import java.util.Iterator;
 import java.util.Set;
 import org.jspecify.annotations.Nullable;
@@ -117,7 +117,7 @@ abstract class EndpointPairIterator<N> extends AbstractIterator<EndpointPair<N>>
 
     private Undirected(BaseGraph<N> graph) {
       super(graph);
-      this.visitedNodes = Sets.newHashSetWithExpectedSize(graph.nodes().size() + 1);
+      this.visitedNodes = newHashSetWithExpectedSize(graph.nodes().size() + 1);
     }
 
     @Override

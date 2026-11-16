@@ -16,9 +16,10 @@
 
 package jdk.m3.collections.guava.collect;
 
-import static jdk.m3.collections.guava.collect.ReflectionFreeAssertThrows.assertThrows;
-import static com.google.common.truth.Truth.assertThat;
+import static jdk.m3.collections.guava.collect.Collections2.permutations;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
 import static java.util.Collections.nCopies;
+import static org.junit.Assert.assertThrows;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.math.IntMath;
@@ -68,7 +69,7 @@ public class TopKSelectorTest extends TestCase {
   }
 
   public void testOfferedKPlusOne() {
-    for (List<Integer> list : Collections2.permutations(Ints.asList(1, 2, 3, 4, 5))) {
+    for (List<Integer> list : permutations(Ints.asList(1, 2, 3, 4, 5))) {
       TopKSelector<Integer> top = TopKSelector.least(4);
       top.offerAll(list);
       assertThat(top.topK()).containsExactly(1, 2, 3, 4).inOrder();
@@ -76,7 +77,7 @@ public class TopKSelectorTest extends TestCase {
   }
 
   public void testOfferedThreeK() {
-    for (List<Integer> list : Collections2.permutations(Ints.asList(1, 2, 3, 4, 5, 6))) {
+    for (List<Integer> list : permutations(Ints.asList(1, 2, 3, 4, 5, 6))) {
       TopKSelector<Integer> top = TopKSelector.least(2);
       top.offerAll(list);
       assertThat(top.topK()).containsExactly(1, 2).inOrder();
@@ -92,7 +93,7 @@ public class TopKSelectorTest extends TestCase {
   public void testWorstCase() {
     int n = 2000000;
     int k = 200000;
-    final long[] compareCalls = {0};
+    long[] compareCalls = {0};
     Comparator<Integer> cmp =
         new Comparator<Integer>() {
           @Override

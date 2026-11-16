@@ -17,6 +17,7 @@ package jdk.m3.collections.guava.base;
 import static jdk.m3.collections.guava.base.Preconditions.checkArgument;
 import static jdk.m3.collections.guava.base.Preconditions.checkNotNull;
 import static jdk.m3.collections.guava.base.Preconditions.checkPositionIndex;
+import static java.util.Arrays.sort;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
@@ -40,10 +41,9 @@ import java.util.BitSet;
  * points</a> in the range {@code 0x10000} to {@code 0x10FFFF} which includes the majority of
  * assigned characters, including important CJK characters and emoji.
  *
- * <p>Supplementary characters are <a
- * href="https://docs.oracle.com/javase/8/docs/api/java/lang/Character.html#supplementary">encoded
- * into a {@code String} using surrogate pairs</a>, and a {@code CharMatcher} treats these just as
- * two separate characters. {@link #countIn} counts each supplementary character as 2 {@code char}s.
+ * <p>Supplementary characters are {@linkplain Character##supplementary encoded into a string using
+ * surrogate pairs}, and a {@code CharMatcher} treats these just as two separate characters. {@link
+ * #countIn} counts each supplementary character as 2 {@code char}s.
  *
  * <p>For up-to-date Unicode character properties (digit, letter, etc.) and support for
  * supplementary code points, use ICU4J UCharacter and UnicodeSet (freeze() after building). For
@@ -62,7 +62,7 @@ import java.util.BitSet;
  * @author Kevin Bourrillion
  * @since 1.0
  */
-@GwtCompatible(emulated = true)
+@GwtCompatible
 public abstract class CharMatcher implements Predicate<Character> {
   /*
    *           N777777777NO
@@ -415,7 +415,7 @@ public abstract class CharMatcher implements Predicate<Character> {
    * matcher which is faster to query than the original.
    */
   @GwtIncompatible // SmallCharMatcher
-  CharMatcher precomputedInternal() {
+  final CharMatcher precomputedInternal() {
     BitSet table = new BitSet();
     setBits(table);
     int totalCharacters = table.cardinality();
@@ -1330,7 +1330,7 @@ public abstract class CharMatcher implements Predicate<Character> {
     }
 
     @Override
-    public String toString() {
+    public final String toString() {
       return description;
     }
   }
@@ -1536,7 +1536,7 @@ public abstract class CharMatcher implements Predicate<Character> {
     }
 
     @Override
-    public CharMatcher negate() {
+    public final CharMatcher negate() {
       return original;
     }
 
@@ -1575,7 +1575,7 @@ public abstract class CharMatcher implements Predicate<Character> {
 
     @Override
     public String toString() {
-      return "CharMatcher.and(" + first + ", " + second + ")";
+      return first + ".and(" + second + ")";
     }
   }
 
@@ -1604,7 +1604,7 @@ public abstract class CharMatcher implements Predicate<Character> {
 
     @Override
     public String toString() {
-      return "CharMatcher.or(" + first + ", " + second + ")";
+      return first + ".or(" + second + ")";
     }
   }
 
@@ -1736,9 +1736,9 @@ public abstract class CharMatcher implements Predicate<Character> {
 
     private final char[] chars;
 
-    public AnyOf(CharSequence chars) {
+    AnyOf(CharSequence chars) {
       this.chars = chars.toString().toCharArray();
-      Arrays.sort(this.chars);
+      sort(this.chars);
     }
 
     @Override

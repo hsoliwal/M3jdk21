@@ -30,7 +30,6 @@ import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import com.google.errorprone.annotations.DoNotCall;
 import com.google.errorprone.annotations.concurrent.LazyInit;
 import com.google.j2objc.annotations.RetainedWith;
-import com.google.j2objc.annotations.Weak;
 import java.io.IOException;
 import java.io.InvalidObjectException;
 import java.io.ObjectInputStream;
@@ -59,7 +58,8 @@ import org.jspecify.annotations.Nullable;
  * @author Mike Ward
  * @since 2.0
  */
-@GwtCompatible(serializable = true, emulated = true)
+@SuppressWarnings("TooManyParameters")
+@GwtCompatible
 public class ImmutableSetMultimap<K, V> extends ImmutableMultimap<K, V>
     implements SetMultimap<K, V> {
   /**
@@ -158,7 +158,7 @@ public class ImmutableSetMultimap<K, V> extends ImmutableMultimap<K, V>
 
   /** Returns an immutable multimap containing a single entry. */
   public static <K, V> ImmutableSetMultimap<K, V> of(K k1, V v1) {
-    ImmutableSetMultimap.Builder<K, V> builder = ImmutableSetMultimap.builder();
+    ImmutableSetMultimap.Builder<K, V> builder = builder();
     builder.put(k1, v1);
     return builder.build();
   }
@@ -168,7 +168,7 @@ public class ImmutableSetMultimap<K, V> extends ImmutableMultimap<K, V>
    * an entry (according to {@link Object#equals}) after the first are ignored.
    */
   public static <K, V> ImmutableSetMultimap<K, V> of(K k1, V v1, K k2, V v2) {
-    ImmutableSetMultimap.Builder<K, V> builder = ImmutableSetMultimap.builder();
+    ImmutableSetMultimap.Builder<K, V> builder = builder();
     builder.put(k1, v1);
     builder.put(k2, v2);
     return builder.build();
@@ -179,7 +179,7 @@ public class ImmutableSetMultimap<K, V> extends ImmutableMultimap<K, V>
    * an entry (according to {@link Object#equals}) after the first are ignored.
    */
   public static <K, V> ImmutableSetMultimap<K, V> of(K k1, V v1, K k2, V v2, K k3, V v3) {
-    ImmutableSetMultimap.Builder<K, V> builder = ImmutableSetMultimap.builder();
+    ImmutableSetMultimap.Builder<K, V> builder = builder();
     builder.put(k1, v1);
     builder.put(k2, v2);
     builder.put(k3, v3);
@@ -192,7 +192,7 @@ public class ImmutableSetMultimap<K, V> extends ImmutableMultimap<K, V>
    */
   public static <K, V> ImmutableSetMultimap<K, V> of(
       K k1, V v1, K k2, V v2, K k3, V v3, K k4, V v4) {
-    ImmutableSetMultimap.Builder<K, V> builder = ImmutableSetMultimap.builder();
+    ImmutableSetMultimap.Builder<K, V> builder = builder();
     builder.put(k1, v1);
     builder.put(k2, v2);
     builder.put(k3, v3);
@@ -206,7 +206,7 @@ public class ImmutableSetMultimap<K, V> extends ImmutableMultimap<K, V>
    */
   public static <K, V> ImmutableSetMultimap<K, V> of(
       K k1, V v1, K k2, V v2, K k3, V v3, K k4, V v4, K k5, V v5) {
-    ImmutableSetMultimap.Builder<K, V> builder = ImmutableSetMultimap.builder();
+    ImmutableSetMultimap.Builder<K, V> builder = builder();
     builder.put(k1, v1);
     builder.put(k2, v2);
     builder.put(k3, v3);
@@ -275,7 +275,7 @@ public class ImmutableSetMultimap<K, V> extends ImmutableMultimap<K, V>
     @Override
     int expectedValueCollectionSize(int defaultExpectedValues, Iterable<?> values) {
       // Only trust the size of `values` if it is a Set and therefore probably already deduplicated.
-      if (values instanceof Set<?>) {
+      if (values instanceof Set) {
         Set<?> collection = (Set<?>) values;
         return max(defaultExpectedValues, collection.size());
       } else {
@@ -394,7 +394,7 @@ public class ImmutableSetMultimap<K, V> extends ImmutableMultimap<K, V>
     @Override
     public ImmutableSetMultimap<K, V> build() {
       if (builderMap == null) {
-        return ImmutableSetMultimap.of();
+        return of();
       }
       Collection<Map.Entry<K, ImmutableCollection.Builder<V>>> mapEntries = builderMap.entrySet();
       if (keyComparator != null) {
@@ -418,14 +418,21 @@ public class ImmutableSetMultimap<K, V> extends ImmutableMultimap<K, V>
    */
   public static <K, V> ImmutableSetMultimap<K, V> copyOf(
       Multimap<? extends K, ? extends V> multimap) {
-    return copyOf(multimap, null);
-  }
-
-  private static <K, V> ImmutableSetMultimap<K, V> copyOf(
-      Multimap<? extends K, ? extends V> multimap,
-      @Nullable Comparator<? super V> valueComparator) {
     checkNotNull(multimap); // eager for GWT
-    if (multimap.isEmpty() && valueComparator == null) {
+
+    /*
+     * TODO(cpovirk): When given an ImmutableSetMultimap that has a non-null valueComparator, should
+     * we always return a new instance with a null valueComparator, as we already do if the input is
+     * empty or a partial view?
+     *
+     * Related: Should methods that do accept a comparator (like fromMapEntries, or like this one if
+     * we were to choose to *preserve* an input comparator) return not the generic empty of()
+     * instance but instead an empty ImmutableSetMultimap instance with the requested
+     * valueComparator, since the comparator is visible when users call `get` on a key that's not
+     * present?
+     */
+
+    if (multimap.isEmpty()) {
       return of();
     }
 
@@ -437,7 +444,7 @@ public class ImmutableSetMultimap<K, V> extends ImmutableMultimap<K, V>
       }
     }
 
-    return fromMapEntries(multimap.asMap().entrySet(), valueComparator);
+    return fromMapEntries(multimap.asMap().entrySet(), /* valueComparator= */ null);
   }
 
   /**
@@ -510,6 +517,14 @@ public class ImmutableSetMultimap<K, V> extends ImmutableMultimap<K, V>
    */
   private final transient ImmutableSet<V> emptySet;
 
+  /**
+   * An instance created in {@link #readObject} to be returned from {@link #readResolve}. This field
+   * is used only by those methods, and it is never set in a "normal" instance.
+   *
+   * <p>For more background, see {@code ConcurrentHashMultiset.deserializationReplacement}.
+   */
+  private transient @Nullable ImmutableSetMultimap<?, ?> deserializationReplacement;
+
   ImmutableSetMultimap(
       ImmutableMap<K, ImmutableSet<V>> map,
       int size,
@@ -526,7 +541,7 @@ public class ImmutableSetMultimap<K, V> extends ImmutableMultimap<K, V>
    * parameters used to build this multimap.
    */
   @Override
-  public ImmutableSet<V> get(K key) {
+  public final ImmutableSet<V> get(K key) {
     // This cast is safe as its type is known in constructor.
     ImmutableSet<V> set = (ImmutableSet<V>) map.get(key);
     return MoreObjects.firstNonNull(set, emptySet);
@@ -540,11 +555,16 @@ public class ImmutableSetMultimap<K, V> extends ImmutableMultimap<K, V>
    * <p>Because an inverse of a set multimap cannot contain multiple pairs with the same key and
    * value, this method returns an {@code ImmutableSetMultimap} rather than the {@code
    * ImmutableMultimap} specified in the {@code ImmutableMultimap} class.
+   *
+   * @since 11.0
    */
   @Override
-  public ImmutableSetMultimap<V, K> inverse() {
+  public final ImmutableSetMultimap<V, K> inverse() {
     ImmutableSetMultimap<V, K> result = inverse;
-    return (result == null) ? (inverse = invert()) : result;
+    if (result == null) {
+      result = inverse = invert();
+    }
+    return result;
   }
 
   private ImmutableSetMultimap<V, K> invert() {
@@ -585,20 +605,17 @@ public class ImmutableSetMultimap<K, V> extends ImmutableMultimap<K, V>
     throw new UnsupportedOperationException();
   }
 
-  @LazyInit @RetainedWith private transient @Nullable ImmutableSet<Entry<K, V>> entries;
-
   /**
    * Returns an immutable collection of all key-value pairs in the multimap. Its iterator traverses
    * the values for the first key, the values for the second key, and so on.
    */
   @Override
-  public ImmutableSet<Entry<K, V>> entries() {
-    ImmutableSet<Entry<K, V>> result = entries;
-    return result == null ? (entries = new EntrySet<>(this)) : result;
+  public final ImmutableSet<Entry<K, V>> entries() {
+    return new EntrySet<>(this);
   }
 
   private static final class EntrySet<K, V> extends ImmutableSet<Entry<K, V>> {
-    @Weak private final transient ImmutableSetMultimap<K, V> multimap;
+    private final transient ImmutableSetMultimap<K, V> multimap;
 
     EntrySet(ImmutableSetMultimap<K, V> multimap) {
       this.multimap = multimap;
@@ -647,49 +664,40 @@ public class ImmutableSetMultimap<K, V> extends ImmutableMultimap<K, V>
 
   private static <V> ImmutableSet<V> emptySet(@Nullable Comparator<? super V> valueComparator) {
     return (valueComparator == null)
-        ? ImmutableSet.<V>of()
-        : ImmutableSortedSet.<V>emptySet(valueComparator);
+        ? ImmutableSet.of()
+        : ImmutableSortedSet.emptySet(valueComparator);
   }
 
   private static <V> ImmutableSet.Builder<V> valuesBuilder(
       @Nullable Comparator<? super V> valueComparator) {
     return (valueComparator == null)
-        ? new ImmutableSet.Builder<V>()
-        : new ImmutableSortedSet.Builder<V>(valueComparator);
+        ? new ImmutableSet.Builder<>()
+        : new ImmutableSortedSet.Builder<>(valueComparator);
   }
 
   /**
    * @serialData number of distinct keys, and then for each distinct key: the key, the number of
    *     values for that key, and the key's values
    */
-  @GwtIncompatible // java.io.ObjectOutputStream
+  @GwtIncompatible
   @J2ktIncompatible
-  private void writeObject(ObjectOutputStream stream) throws IOException {
+    private void writeObject(ObjectOutputStream stream) throws IOException {
     stream.defaultWriteObject();
     stream.writeObject(valueComparator());
     Serialization.writeMultimap(this, stream);
   }
 
-  @Nullable Comparator<? super V> valueComparator() {
+  private @Nullable Comparator<? super V> valueComparator() {
     return emptySet instanceof ImmutableSortedSet
         ? ((ImmutableSortedSet<V>) emptySet).comparator()
         : null;
   }
 
-  @GwtIncompatible // java serialization
+  @GwtIncompatible
   @J2ktIncompatible
-  private static final class SetFieldSettersHolder {
-    static final Serialization.FieldSetter<? super ImmutableSetMultimap<?, ?>>
-        EMPTY_SET_FIELD_SETTER =
-            Serialization.getFieldSetter(ImmutableSetMultimap.class, "emptySet");
-  }
-
-  @GwtIncompatible // java.io.ObjectInputStream
-  @J2ktIncompatible
-  // Serialization type safety is at the caller's mercy.
-  @SuppressWarnings("unchecked")
-  private void readObject(ObjectInputStream stream) throws IOException, ClassNotFoundException {
+    private void readObject(ObjectInputStream stream) throws IOException, ClassNotFoundException {
     stream.defaultReadObject();
+    @SuppressWarnings("unchecked") // reading data stored by writeObject
     Comparator<Object> valueComparator = (Comparator<Object>) stream.readObject();
     int keyCount = stream.readInt();
     if (keyCount < 0) {
@@ -724,9 +732,13 @@ public class ImmutableSetMultimap<K, V> extends ImmutableMultimap<K, V>
       throw (InvalidObjectException) new InvalidObjectException(e.getMessage()).initCause(e);
     }
 
-    FieldSettersHolder.MAP_FIELD_SETTER.set(this, tmpMap);
-    FieldSettersHolder.SIZE_FIELD_SETTER.set(this, tmpSize);
-    SetFieldSettersHolder.EMPTY_SET_FIELD_SETTER.set(this, emptySet(valueComparator));
+    deserializationReplacement = new ImmutableSetMultimap<>(tmpMap, tmpSize, valueComparator);
+  }
+
+  @GwtIncompatible
+  @J2ktIncompatible
+    private Object readResolve() {
+    return requireNonNull(deserializationReplacement); // set by readObject
   }
 
   @GwtIncompatible @J2ktIncompatible private static final long serialVersionUID = 0;

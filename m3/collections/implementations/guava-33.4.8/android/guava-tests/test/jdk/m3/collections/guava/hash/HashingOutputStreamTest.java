@@ -14,11 +14,13 @@
 
 package jdk.m3.collections.guava.hash;
 
+import static jdk.m3.collections.guava.hash.Hashing.sha512;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 
+import jdk.m3.collections.guava.annotations.J2ktIncompatible;
 import jdk.m3.collections.guava.testing.NullPointerTester;
 import java.io.ByteArrayOutputStream;
 import junit.framework.TestCase;
@@ -30,6 +32,7 @@ import org.jspecify.annotations.NullUnmarked;
  * @author Zoe Piepmeier
  */
 @NullUnmarked
+@J2ktIncompatible
 public class HashingOutputStreamTest extends TestCase {
   private Hasher hasher;
   private HashFunction hashFunction;
@@ -77,18 +80,18 @@ public class HashingOutputStreamTest extends TestCase {
 
   public void testHash_hashesCorrectly() throws Exception {
     byte[] buf = new byte[] {'y', 'a', 'm', 's'};
-    HashCode expectedHash = Hashing.md5().hashBytes(buf);
-    HashingOutputStream out = new HashingOutputStream(Hashing.md5(), buffer);
+    HashCode expectedHash = sha512().hashBytes(buf);
+    HashingOutputStream out = new HashingOutputStream(sha512(), buffer);
 
     out.write(buf);
 
     assertEquals(expectedHash, out.hash());
   }
 
-  public void testChecksForNull() throws Exception {
+  public void testChecksForNull() {
     NullPointerTester tester = new NullPointerTester();
     tester.testAllPublicInstanceMethods(
-        new HashingOutputStream(Hashing.md5(), new ByteArrayOutputStream()));
+        new HashingOutputStream(sha512(), new ByteArrayOutputStream()));
     tester.testAllPublicStaticMethods(HashingOutputStream.class);
     tester.testAllPublicConstructors(HashingOutputStream.class);
   }

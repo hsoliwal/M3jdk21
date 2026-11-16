@@ -20,7 +20,7 @@ import static jdk.m3.collections.guava.collect.testing.features.CollectionSize.Z
 import static jdk.m3.collections.guava.collect.testing.features.MapFeature.ALLOWS_NULL_KEYS;
 import static jdk.m3.collections.guava.collect.testing.features.MapFeature.ALLOWS_NULL_VALUES;
 import static jdk.m3.collections.guava.collect.testing.features.MapFeature.SUPPORTS_PUT;
-import static jdk.m3.collections.guava.collect.testing.testers.ReflectionFreeAssertThrows.assertThrows;
+import static org.junit.Assert.assertThrows;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.collect.testing.AbstractMapTester;
@@ -28,7 +28,6 @@ import jdk.m3.collections.guava.collect.testing.features.CollectionSize;
 import jdk.m3.collections.guava.collect.testing.features.MapFeature;
 import java.util.Map;
 import java.util.Map.Entry;
-import org.junit.Ignore;
 
 /**
  * A generic JUnit test which tests {@link Map#putIfAbsent}. Can't be invoked directly; please see
@@ -37,9 +36,6 @@ import org.junit.Ignore;
  * @author Louis Wasserman
  */
 @GwtCompatible
-@Ignore("test runners must not instantiate and run this directly, only via suites we build")
-// @Ignore affects the Android test runner, which respects JUnit 4 annotations on JUnit 3 tests.
-@SuppressWarnings("JUnit4ClassUsedInJUnit3")
 public class MapPutIfAbsentTester<K, V> extends AbstractMapTester<K, V> {
 
   @MapFeature.Require(SUPPORTS_PUT)
@@ -124,5 +120,17 @@ public class MapPutIfAbsentTester<K, V> extends AbstractMapTester<K, V> {
         "putIfAbsent(key, null) should return null",
         getMap().putIfAbsent(nullValueEntry.getKey(), nullValueEntry.getValue()));
     expectAdded(nullValueEntry);
+  }
+
+  @MapFeature.Require({SUPPORTS_PUT, ALLOWS_NULL_VALUES})
+  @CollectionSize.Require(absent = ZERO)
+  public void testPutIfAbsent_replacesNullValue() {
+    initMapWithNullValue();
+
+    // putIfAbsent should replace the null value with the new value
+    assertNull(
+        "putIfAbsent(existingKeyWithNullValue, value) should return null",
+        getMap().putIfAbsent(getKeyForNullValue(), v3()));
+    assertEquals("Map should now contain the new value", v3(), getMap().get(getKeyForNullValue()));
   }
 }

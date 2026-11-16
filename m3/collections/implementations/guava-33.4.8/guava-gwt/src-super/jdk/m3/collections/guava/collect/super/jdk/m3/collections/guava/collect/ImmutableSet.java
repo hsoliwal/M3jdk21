@@ -126,8 +126,7 @@ public abstract class ImmutableSet<E> extends ImmutableCollection<E> implements 
     }
     E first = elements.next();
     if (!elements.hasNext()) {
-      // TODO: Remove "ImmutableSet.<E>" when eclipse bug is fixed.
-      return ImmutableSet.<E>of(first);
+      return of(first);
     }
 
     Set<E> delegate = Sets.newLinkedHashSet();
@@ -198,32 +197,9 @@ public abstract class ImmutableSet<E> extends ImmutableCollection<E> implements 
       }
     }
 
+    @Override
     ImmutableList<E> createAsList() {
       return new RegularImmutableAsList<E>(this, toArray());
-    }
-  }
-
-  abstract static class Indexed<E> extends ImmutableSet<E> {
-    abstract E get(int index);
-
-    @Override
-    public UnmodifiableIterator<E> iterator() {
-      return asList().iterator();
-    }
-
-    @Override
-    ImmutableList<E> createAsList() {
-      return new ImmutableAsList<E>() {
-        @Override
-        public E get(int index) {
-          return Indexed.this.get(index);
-        }
-
-        @Override
-        Indexed<E> delegateCollection() {
-          return Indexed.this;
-        }
-      };
     }
   }
 

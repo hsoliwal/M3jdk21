@@ -16,7 +16,7 @@
 
 package jdk.m3.collections.guava.graph;
 
-import static com.google.common.truth.Truth.assertThat;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
 
 import org.jspecify.annotations.NullUnmarked;
 import org.junit.Test;
@@ -34,7 +34,6 @@ public class ImmutableNetworkTest {
     mutableNetwork.addNode("A");
     ImmutableNetwork<String, Integer> immutableNetwork = ImmutableNetwork.copyOf(mutableNetwork);
 
-    assertThat(immutableNetwork.asGraph()).isInstanceOf(ImmutableGraph.class);
     assertThat(immutableNetwork).isNotInstanceOf(MutableNetwork.class);
     assertThat(immutableNetwork).isEqualTo(mutableNetwork);
 

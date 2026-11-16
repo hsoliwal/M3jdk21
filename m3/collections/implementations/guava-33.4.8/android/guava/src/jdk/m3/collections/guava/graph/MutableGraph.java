@@ -16,7 +16,6 @@
 
 package jdk.m3.collections.guava.graph;
 
-import jdk.m3.collections.guava.annotations.Beta;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 
 /**
@@ -28,7 +27,6 @@ import com.google.errorprone.annotations.CanIgnoreReturnValue;
  * @param <N> Node parameter type
  * @since 20.0
  */
-@Beta
 public interface MutableGraph<N> extends Graph<N> {
 
   /**

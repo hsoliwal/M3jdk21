@@ -14,6 +14,7 @@
 
 package jdk.m3.collections.guava.hash;
 
+import jdk.m3.collections.guava.annotations.J2ktIncompatible;
 import jdk.m3.collections.guava.base.Supplier;
 import com.google.errorprone.annotations.Immutable;
 
@@ -22,5 +23,6 @@ import com.google.errorprone.annotations.Immutable;
  * Immutable}.
  */
 // TODO(cpovirk): Should we just use ChecksumType directly instead of defining this type?
+@J2ktIncompatible
 @Immutable
 interface ImmutableSupplier<T> extends Supplier<T> {}

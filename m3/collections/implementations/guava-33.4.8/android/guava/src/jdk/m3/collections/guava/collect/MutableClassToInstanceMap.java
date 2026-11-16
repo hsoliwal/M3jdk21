@@ -20,6 +20,8 @@ import static jdk.m3.collections.guava.base.Preconditions.checkNotNull;
 
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
 import jdk.m3.collections.guava.annotations.J2ktIncompatible;
+import jdk.m3.collections.guava.collect.ForwardingMapEntry.SimpleForwardingMapEntry;
+import jdk.m3.collections.guava.collect.ForwardingSet.SimpleForwardingSet;
 import jdk.m3.collections.guava.primitives.Primitives;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import java.io.InvalidObjectException;
@@ -85,12 +87,7 @@ public final class MutableClassToInstanceMap<B extends @Nullable Object>
    */
   private static <B extends @Nullable Object> Entry<Class<? extends @NonNull B>, B> checkedEntry(
       Entry<Class<? extends @NonNull B>, B> entry) {
-    return new ForwardingMapEntry<Class<? extends @NonNull B>, B>() {
-      @Override
-      protected Entry<Class<? extends @NonNull B>, B> delegate() {
-        return entry;
-      }
-
+    return new SimpleForwardingMapEntry<Class<? extends @NonNull B>, B>(entry) {
       @Override
       @ParametricNullness
       public B setValue(@ParametricNullness B value) {
@@ -102,13 +99,7 @@ public final class MutableClassToInstanceMap<B extends @Nullable Object>
 
   @Override
   public Set<Entry<Class<? extends @NonNull B>, B>> entrySet() {
-    return new ForwardingSet<Entry<Class<? extends @NonNull B>, B>>() {
-
-      @Override
-      protected Set<Entry<Class<? extends @NonNull B>, B>> delegate() {
-        return MutableClassToInstanceMap.this.delegate().entrySet();
-      }
-
+    return new SimpleForwardingSet<Entry<Class<? extends @NonNull B>, B>>(delegate().entrySet()) {
       @Override
       public Iterator<Entry<Class<? extends @NonNull B>, B>> iterator() {
         return new TransformedIterator<
@@ -146,7 +137,7 @@ public final class MutableClassToInstanceMap<B extends @Nullable Object>
   @Override
   @CanIgnoreReturnValue
   public @Nullable B put(Class<? extends @NonNull B> key, @ParametricNullness B value) {
-    cast(key, value);
+    cast(key, value); // If we pass this result to `put` below, it upsets our nullness checker.
     return super.put(key, value);
   }
 
@@ -176,11 +167,11 @@ public final class MutableClassToInstanceMap<B extends @Nullable Object>
     return Primitives.wrap(type).cast(value);
   }
 
-  private Object writeReplace() {
+    private Object writeReplace() {
     return new SerializedForm<>(delegate());
   }
 
-  private void readObject(ObjectInputStream stream) throws InvalidObjectException {
+    private void readObject(ObjectInputStream stream) throws InvalidObjectException {
     throw new InvalidObjectException("Use SerializedForm");
   }
 

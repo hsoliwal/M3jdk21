@@ -20,7 +20,6 @@ import static jdk.m3.collections.guava.base.Preconditions.checkNotNull;
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
 import jdk.m3.collections.guava.annotations.J2ktIncompatible;
 import jdk.m3.collections.guava.base.MoreObjects;
-import jdk.m3.collections.guava.collect.Lists;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import java.io.IOException;
 import java.io.InputStream;
@@ -28,6 +27,7 @@ import java.io.OutputStream;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.List;
 import org.jspecify.annotations.Nullable;
 
@@ -146,7 +146,7 @@ public final class Resources {
         url,
         charset,
         new LineProcessor<List<String>>() {
-          final List<String> result = Lists.newArrayList();
+          final List<String> result = new ArrayList<>();
 
           @Override
           public boolean processLine(String line) {

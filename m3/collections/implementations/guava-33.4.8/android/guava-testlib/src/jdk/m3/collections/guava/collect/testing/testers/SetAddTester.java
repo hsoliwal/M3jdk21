@@ -27,7 +27,6 @@ import jdk.m3.collections.guava.annotations.J2ktIncompatible;
 import jdk.m3.collections.guava.collect.testing.features.CollectionFeature;
 import jdk.m3.collections.guava.collect.testing.features.CollectionSize;
 import java.lang.reflect.Method;
-import org.junit.Ignore;
 
 /**
  * A generic JUnit test which tests add operations on a set. Can't be invoked directly; please see
@@ -35,10 +34,7 @@ import org.junit.Ignore;
  *
  * @author Kevin Bourrillion
  */
-@GwtCompatible(emulated = true)
-@Ignore("test runners must not instantiate and run this directly, only via suites we build")
-// @Ignore affects the Android test runner, which respects JUnit 4 annotations on JUnit 3 tests.
-@SuppressWarnings("JUnit4ClassUsedInJUnit3")
+@GwtCompatible
 public class SetAddTester<E> extends AbstractSetTester<E> {
   @CollectionFeature.Require(SUPPORTS_ADD)
   @CollectionSize.Require(absent = ZERO)

@@ -16,17 +16,19 @@
 
 package jdk.m3.collections.guava.collect;
 
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
+
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
 import jdk.m3.collections.guava.testing.EqualsTester;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * Tests {@link EmptyImmutableTable}
+ * Tests an empty {@link ImmutableTable}.
  *
  * @author Gregory Kick
  */
-@GwtCompatible(emulated = true)
+@GwtCompatible
 @NullMarked
 public class EmptyImmutableTableTest extends AbstractImmutableTableTest {
   private static final ImmutableTable<Character, Integer, String> INSTANCE = ImmutableTable.of();
@@ -59,7 +61,7 @@ public class EmptyImmutableTableTest extends AbstractImmutableTableTest {
   }
 
   public void testToString() {
-    assertEquals("{}", INSTANCE.toString());
+    assertThat(INSTANCE.toString()).isEqualTo("{}");
   }
 
   public void testSize() {
@@ -67,7 +69,7 @@ public class EmptyImmutableTableTest extends AbstractImmutableTableTest {
   }
 
   public void testGet() {
-    assertNull(INSTANCE.get('a', 1));
+    assertThat(INSTANCE.get('a', 1)).isNull();
   }
 
   public void testIsEmpty() {

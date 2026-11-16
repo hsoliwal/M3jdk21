@@ -14,6 +14,9 @@
 
 package jdk.m3.collections.guava.collect;
 
+import static jdk.m3.collections.guava.collect.Maps.newTreeMap;
+import static jdk.m3.collections.guava.collect.Sets.newTreeSet;
+
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import junit.framework.TestCase;
 import org.jspecify.annotations.NullMarked;
@@ -27,14 +30,14 @@ import org.jspecify.annotations.NullMarked;
 @NullMarked
 public class SortedIterablesTest extends TestCase {
   public void testSameComparator() {
-    assertTrue(SortedIterables.hasSameComparator(Ordering.natural(), Sets.newTreeSet()));
-    assertTrue(SortedIterables.hasSameComparator(Ordering.natural(), Maps.newTreeMap().keySet()));
+    assertTrue(SortedIterables.hasSameComparator(Ordering.natural(), newTreeSet()));
+    assertTrue(SortedIterables.hasSameComparator(Ordering.natural(), newTreeMap().keySet()));
     assertTrue(
         SortedIterables.hasSameComparator(
-            Ordering.natural().reverse(), Sets.newTreeSet(Ordering.natural().reverse())));
+            Ordering.natural().reverse(), newTreeSet(Ordering.natural().reverse())));
   }
 
   public void testComparator() {
-    assertEquals(Ordering.natural(), SortedIterables.comparator(Sets.newTreeSet()));
+    assertEquals(Ordering.natural(), SortedIterables.comparator(newTreeSet()));
   }
 }

@@ -15,6 +15,7 @@
 package jdk.m3.collections.guava.cache;
 
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
+import jdk.m3.collections.guava.annotations.J2ktIncompatible;
 import jdk.m3.collections.guava.cache.LocalCache.ValueReference;
 import org.jspecify.annotations.Nullable;
 
@@ -39,6 +40,7 @@ import org.jspecify.annotations.Nullable;
  * </ul>
  */
 @GwtIncompatible
+@J2ktIncompatible
 interface ReferenceEntry<K, V> {
   /** Returns the value reference from this entry. */
   @Nullable ValueReference<K, V> getValueReference();

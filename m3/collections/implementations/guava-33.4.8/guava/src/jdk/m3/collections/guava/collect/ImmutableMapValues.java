@@ -33,7 +33,7 @@ import org.jspecify.annotations.Nullable;
  * @author Jesse Wilson
  * @author Kevin Bourrillion
  */
-@GwtCompatible(emulated = true)
+@GwtCompatible
 final class ImmutableMapValues<K, V> extends ImmutableCollection<V> {
   private final ImmutableMap<K, V> map;
 
@@ -64,8 +64,12 @@ final class ImmutableMapValues<K, V> extends ImmutableCollection<V> {
   }
 
   @Override
+  @GwtIncompatible // Spliterator
   public Spliterator<V> spliterator() {
-    return CollectSpliterators.map(map.entrySet().spliterator(), Entry::getValue);
+    return CollectSpliterators.map(
+        map.entrySet().spliterator(),
+        Spliterator.ORDERED | Spliterator.IMMUTABLE | Spliterator.NONNULL,
+        Entry::getValue);
   }
 
   @Override
@@ -129,7 +133,7 @@ final class ImmutableMapValues<K, V> extends ImmutableCollection<V> {
    * expect to do so again, as discussed in https://github.com/google/guava#important-warnings.
    */
   @SuppressWarnings("unused")
-  private static class SerializedForm<V> implements Serializable {
+  private static final class SerializedForm<V> implements Serializable {
     final ImmutableMap<?, V> map;
 
     SerializedForm(ImmutableMap<?, V> map) {
@@ -140,6 +144,6 @@ final class ImmutableMapValues<K, V> extends ImmutableCollection<V> {
       return map.values();
     }
 
-    @GwtIncompatible @J2ktIncompatible private static final long serialVersionUID = 0;
+    private static final long serialVersionUID = 0;
   }
 }

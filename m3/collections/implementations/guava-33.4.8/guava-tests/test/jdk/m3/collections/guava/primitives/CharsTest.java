@@ -18,9 +18,9 @@ package jdk.m3.collections.guava.primitives;
 
 import static jdk.m3.collections.guava.primitives.Chars.max;
 import static jdk.m3.collections.guava.primitives.Chars.min;
-import static jdk.m3.collections.guava.primitives.ReflectionFreeAssertThrows.assertThrows;
-import static com.google.common.truth.Truth.assertThat;
-import static com.google.common.truth.Truth.assertWithMessage;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
+import static jdk.m3.collections.guava.truth.Truth.assertWithMessage;
+import static org.junit.Assert.assertThrows;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
@@ -43,7 +43,7 @@ import org.jspecify.annotations.Nullable;
  *
  * @author Kevin Bourrillion
  */
-@GwtCompatible(emulated = true)
+@GwtCompatible
 @NullMarked
 public class CharsTest extends TestCase {
   private static final char[] EMPTY = {};
@@ -55,9 +55,11 @@ public class CharsTest extends TestCase {
 
   private static final char[] VALUES = {LEAST, 'a', '\u00e0', '\udcaa', GREATEST};
 
+  // We need to test that our method behaves like the JDK method.
+  @SuppressWarnings("InlineMeInliner")
   public void testHashCode() {
     for (char value : VALUES) {
-      assertThat(Chars.hashCode(value)).isEqualTo(((Character) value).hashCode());
+      assertThat(Chars.hashCode(value)).isEqualTo(Character.hashCode(value));
     }
   }
 
@@ -81,15 +83,10 @@ public class CharsTest extends TestCase {
     assertThat(Chars.saturatedCast(Long.MIN_VALUE)).isEqualTo(LEAST);
   }
 
-  private void assertCastFails(long value) {
-    try {
-      Chars.checkedCast(value);
-      fail("Cast to char should have failed: " + value);
-    } catch (IllegalArgumentException ex) {
-      assertWithMessage(value + " not found in exception text: " + ex.getMessage())
-          .that(ex.getMessage().contains(String.valueOf(value)))
-          .isTrue();
-    }
+  private static void assertCastFails(long value) {
+    IllegalArgumentException ex =
+        assertThrows(IllegalArgumentException.class, () -> Chars.checkedCast(value));
+    assertThat(ex).hasMessageThat().contains(String.valueOf(value));
   }
 
   // We need to test that our method behaves like the JDK method.
@@ -97,7 +94,7 @@ public class CharsTest extends TestCase {
   public void testCompare() {
     for (char x : VALUES) {
       for (char y : VALUES) {
-        assertWithMessage(x + ", " + y)
+        assertWithMessage("%s, %s", x, y)
             .that(Math.signum(Chars.compare(x, y)))
             .isEqualTo(Math.signum(Character.compare(x, y)));
       }
@@ -124,6 +121,28 @@ public class CharsTest extends TestCase {
     assertThat(Chars.indexOf(ARRAY234, (char) 4)).isEqualTo(2);
     assertThat(Chars.indexOf(new char[] {(char) 2, (char) 3, (char) 2, (char) 3}, (char) 3))
         .isEqualTo(1);
+  }
+
+  public void testIndexOfIndexed() {
+    assertThat(Chars.indexOf(EMPTY, (char) 1, 0, 0)).isEqualTo(-1);
+    assertThat(Chars.indexOf(ARRAY1, (char) 2, 0, 1)).isEqualTo(-1);
+    assertThat(Chars.indexOf(ARRAY234, (char) 1, 0, 3)).isEqualTo(-1);
+    assertThat(Chars.indexOf(new char[] {(char) -1}, (char) -1, 0, 1)).isEqualTo(0);
+    assertThat(Chars.indexOf(ARRAY234, (char) 2, 0, 3)).isEqualTo(0);
+    assertThat(Chars.indexOf(ARRAY234, (char) 2, 0, 0)).isEqualTo(-1);
+    assertThat(Chars.indexOf(ARRAY234, (char) 2, 1, 3)).isEqualTo(-1);
+    assertThat(Chars.indexOf(ARRAY234, (char) 3, 1, 2)).isEqualTo(1);
+    assertThat(Chars.indexOf(ARRAY234, (char) 3, 0, 1)).isEqualTo(-1);
+    assertThat(Chars.indexOf(ARRAY234, (char) 4, 2, 3)).isEqualTo(2);
+    assertThat(Chars.indexOf(ARRAY234, (char) 4, 0, 2)).isEqualTo(-1);
+    assertThat(Chars.indexOf(new char[] {(char) 2, (char) 3, (char) 2, (char) 3}, (char) 3, 2, 4))
+        .isEqualTo(3);
+    assertThat(Chars.indexOf(new char[] {(char) 3, (char) 3, (char) 3, (char) 3}, (char) 3, 1, 3))
+        .isEqualTo(1);
+
+    assertThrows(IndexOutOfBoundsException.class, () -> Chars.indexOf(ARRAY234, (char) 2, -1, 1));
+    assertThrows(IndexOutOfBoundsException.class, () -> Chars.indexOf(ARRAY234, (char) 2, 0, 4));
+    assertThrows(IndexOutOfBoundsException.class, () -> Chars.indexOf(ARRAY234, (char) 2, 2, 1));
   }
 
   public void testIndexOf_arrayTarget() {
@@ -160,6 +179,81 @@ public class CharsTest extends TestCase {
         .isEqualTo(-1);
   }
 
+  public void testIndexOf_arrayTargetIndexed() {
+    assertThat(Chars.indexOf(EMPTY, EMPTY, 0, 0)).isEqualTo(0);
+    assertThat(Chars.indexOf(ARRAY234, EMPTY, 0, 3)).isEqualTo(0);
+    assertThat(Chars.indexOf(ARRAY234, EMPTY, 1, 3)).isEqualTo(1);
+    assertThat(Chars.indexOf(ARRAY234, EMPTY, 2, 2)).isEqualTo(2);
+    assertThat(Chars.indexOf(ARRAY234, EMPTY, 3, 3)).isEqualTo(3);
+    assertThat(Chars.indexOf(EMPTY, ARRAY234, 0, 0)).isEqualTo(-1);
+    assertThat(Chars.indexOf(ARRAY234, ARRAY1, 0, 3)).isEqualTo(-1);
+    assertThat(Chars.indexOf(ARRAY1, ARRAY234, 0, 1)).isEqualTo(-1);
+    assertThat(Chars.indexOf(ARRAY1, ARRAY1, 0, 1)).isEqualTo(0);
+    assertThat(Chars.indexOf(ARRAY1, ARRAY1, 0, 0)).isEqualTo(-1);
+    assertThat(Chars.indexOf(ARRAY1, ARRAY1, 1, 1)).isEqualTo(-1);
+    assertThat(Chars.indexOf(ARRAY234, ARRAY234, 0, 3)).isEqualTo(0);
+    assertThat(Chars.indexOf(ARRAY234, ARRAY234, 0, 2)).isEqualTo(-1);
+    assertThat(Chars.indexOf(ARRAY234, ARRAY234, 1, 3)).isEqualTo(-1);
+    assertThat(Chars.indexOf(ARRAY234, new char[] {(char) 2, (char) 3}, 0, 3)).isEqualTo(0);
+    assertThat(Chars.indexOf(ARRAY234, new char[] {(char) 2, (char) 3}, 0, 2)).isEqualTo(0);
+    assertThat(Chars.indexOf(ARRAY234, new char[] {(char) 2, (char) 3}, 0, 1)).isEqualTo(-1);
+    assertThat(Chars.indexOf(ARRAY234, new char[] {(char) 2, (char) 3}, 1, 3)).isEqualTo(-1);
+    assertThat(Chars.indexOf(ARRAY234, new char[] {(char) 3, (char) 4}, 0, 3)).isEqualTo(1);
+    assertThat(Chars.indexOf(ARRAY234, new char[] {(char) 3, (char) 4}, 1, 3)).isEqualTo(1);
+    assertThat(Chars.indexOf(ARRAY234, new char[] {(char) 3, (char) 4}, 1, 2)).isEqualTo(-1);
+    assertThat(Chars.indexOf(ARRAY234, new char[] {(char) 3}, 1, 2)).isEqualTo(1);
+    assertThat(Chars.indexOf(ARRAY234, new char[] {(char) 4}, 2, 3)).isEqualTo(2);
+    assertThat(
+            Chars.indexOf(
+                new char[] {(char) 2, (char) 3, (char) 3, (char) 3, (char) 3},
+                new char[] {(char) 3},
+                2,
+                5))
+        .isEqualTo(2);
+    assertThat(
+            Chars.indexOf(
+                new char[] {(char) 2, (char) 3, (char) 2, (char) 3, (char) 4, (char) 2, (char) 3},
+                new char[] {(char) 2, (char) 3, (char) 4},
+                0,
+                7))
+        .isEqualTo(2);
+    assertThat(
+            Chars.indexOf(
+                new char[] {(char) 2, (char) 3, (char) 2, (char) 3, (char) 4, (char) 2, (char) 3},
+                new char[] {(char) 2, (char) 3, (char) 4},
+                2,
+                5))
+        .isEqualTo(2);
+    assertThat(
+            Chars.indexOf(
+                new char[] {(char) 2, (char) 3, (char) 2, (char) 3, (char) 4, (char) 2, (char) 3},
+                new char[] {(char) 2, (char) 3, (char) 4},
+                2,
+                4))
+        .isEqualTo(-1);
+    assertThat(
+            Chars.indexOf(
+                new char[] {(char) 2, (char) 2, (char) 3, (char) 4, (char) 2, (char) 3, (char) 4},
+                new char[] {(char) 2, (char) 3, (char) 4},
+                2,
+                7))
+        .isEqualTo(4);
+    assertThat(
+            Chars.indexOf(
+                new char[] {(char) 4, (char) 3, (char) 2},
+                new char[] {(char) 2, (char) 3, (char) 4},
+                0,
+                3))
+        .isEqualTo(-1);
+
+    assertThrows(IndexOutOfBoundsException.class, () -> Chars.indexOf(ARRAY234, ARRAY1, -1, 1));
+    assertThrows(IndexOutOfBoundsException.class, () -> Chars.indexOf(ARRAY234, ARRAY1, 0, 4));
+    assertThrows(IndexOutOfBoundsException.class, () -> Chars.indexOf(ARRAY234, ARRAY1, 2, 1));
+    assertThrows(IndexOutOfBoundsException.class, () -> Chars.indexOf(ARRAY234, EMPTY, -1, 1));
+    assertThrows(IndexOutOfBoundsException.class, () -> Chars.indexOf(ARRAY234, EMPTY, 0, 4));
+    assertThrows(IndexOutOfBoundsException.class, () -> Chars.indexOf(ARRAY234, EMPTY, 2, 1));
+  }
+
   public void testLastIndexOf() {
     assertThat(Chars.lastIndexOf(EMPTY, (char) 1)).isEqualTo(-1);
     assertThat(Chars.lastIndexOf(ARRAY1, (char) 2)).isEqualTo(-1);
@@ -170,6 +264,33 @@ public class CharsTest extends TestCase {
     assertThat(Chars.lastIndexOf(ARRAY234, (char) 4)).isEqualTo(2);
     assertThat(Chars.lastIndexOf(new char[] {(char) 2, (char) 3, (char) 2, (char) 3}, (char) 3))
         .isEqualTo(3);
+  }
+
+  public void testLastIndexOfIndexed() {
+    assertThat(Chars.lastIndexOf(EMPTY, (char) 1, 0, 0)).isEqualTo(-1);
+    assertThat(Chars.lastIndexOf(ARRAY1, (char) 2, 0, 1)).isEqualTo(-1);
+    assertThat(Chars.lastIndexOf(ARRAY234, (char) 1, 0, 3)).isEqualTo(-1);
+    assertThat(Chars.lastIndexOf(new char[] {(char) -1}, (char) -1, 0, 1)).isEqualTo(0);
+    assertThat(Chars.lastIndexOf(ARRAY234, (char) 2, 0, 3)).isEqualTo(0);
+    assertThat(Chars.lastIndexOf(ARRAY234, (char) 2, 0, 0)).isEqualTo(-1);
+    assertThat(Chars.lastIndexOf(ARRAY234, (char) 2, 1, 3)).isEqualTo(-1);
+    assertThat(Chars.lastIndexOf(ARRAY234, (char) 3, 1, 2)).isEqualTo(1);
+    assertThat(Chars.lastIndexOf(ARRAY234, (char) 3, 0, 1)).isEqualTo(-1);
+    assertThat(Chars.lastIndexOf(ARRAY234, (char) 4, 2, 3)).isEqualTo(2);
+    assertThat(Chars.lastIndexOf(ARRAY234, (char) 4, 0, 2)).isEqualTo(-1);
+    assertThat(
+            Chars.lastIndexOf(new char[] {(char) 2, (char) 3, (char) 2, (char) 3}, (char) 3, 0, 3))
+        .isEqualTo(1);
+    assertThat(
+            Chars.lastIndexOf(new char[] {(char) 3, (char) 3, (char) 3, (char) 3}, (char) 3, 1, 3))
+        .isEqualTo(2);
+
+    assertThrows(
+        IndexOutOfBoundsException.class, () -> Chars.lastIndexOf(ARRAY234, (char) 2, -1, 1));
+    assertThrows(
+        IndexOutOfBoundsException.class, () -> Chars.lastIndexOf(ARRAY234, (char) 2, 0, 4));
+    assertThrows(
+        IndexOutOfBoundsException.class, () -> Chars.lastIndexOf(ARRAY234, (char) 2, 2, 1));
   }
 
   public void testMax_noArgs() {
@@ -241,11 +362,7 @@ public class CharsTest extends TestCase {
     char[] sharedArray = new char[arraysDim2];
     Arrays.fill(arrays, sharedArray);
 
-    try {
-      Chars.concat(arrays);
-      fail();
-    } catch (IllegalArgumentException expected) {
-    }
+    assertThrows(IllegalArgumentException.class, () -> Chars.concat(arrays));
   }
 
   @GwtIncompatible // Chars.fromByteArray
@@ -384,17 +501,25 @@ public class CharsTest extends TestCase {
     assertThat(input).isEqualTo(expectedOutput);
   }
 
-  public void testRotate() {
-    testRotate(new char[] {}, -1, new char[] {});
-    testRotate(new char[] {}, 0, new char[] {});
-    testRotate(new char[] {}, 1, new char[] {});
+  public void testRotate_emptyArray() {
+    char[] empty = {};
+    char[] expected = {};
+    testRotate(empty, -1, expected);
+    testRotate(empty, 0, expected);
+    testRotate(empty, 1, expected);
+  }
 
-    testRotate(new char[] {'1'}, -2, new char[] {'1'});
-    testRotate(new char[] {'1'}, -1, new char[] {'1'});
-    testRotate(new char[] {'1'}, 0, new char[] {'1'});
-    testRotate(new char[] {'1'}, 1, new char[] {'1'});
-    testRotate(new char[] {'1'}, 2, new char[] {'1'});
+  public void testRotate_singleElementArray() {
+    char[] single = {'1'};
+    char[] expected = {'1'};
+    testRotate(single, -2, expected);
+    testRotate(single, -1, expected);
+    testRotate(single, 0, expected);
+    testRotate(single, 1, expected);
+    testRotate(single, 2, expected);
+  }
 
+  public void testRotate_multiElementArray() {
     testRotate(new char[] {'1', '2'}, -3, new char[] {'2', '1'});
     testRotate(new char[] {'1', '2'}, -1, new char[] {'2', '1'});
     testRotate(new char[] {'1', '2'}, -2, new char[] {'1', '2'});
@@ -434,13 +559,44 @@ public class CharsTest extends TestCase {
     testRotate(new char[] {'1', '2', '3', '4', '5'}, 6, new char[] {'5', '1', '2', '3', '4'});
   }
 
-  public void testRotateIndexed() {
-    testRotate(new char[] {}, 0, 0, 0, new char[] {});
+  public void testRotate_minValueDistance() {
+    testRotate(new char[] {'1', '2', '3'}, Integer.MIN_VALUE, new char[] {'3', '1', '2'});
+    testRotate(
+        new char[] {'0', '1', '2', '3', '4'},
+        Integer.MIN_VALUE,
+        1,
+        4,
+        new char[] {'0', '3', '1', '2', '4'});
+  }
 
-    testRotate(new char[] {'1'}, 0, 0, 1, new char[] {'1'});
-    testRotate(new char[] {'1'}, 1, 0, 1, new char[] {'1'});
-    testRotate(new char[] {'1'}, 1, 1, 1, new char[] {'1'});
+  public void testRotateIndexed_emptyRange() {
+    char[] empty = {};
+    char[] expectedEmpty = {};
+    testRotate(empty, 0, 0, 0, expectedEmpty);
 
+    char[] single = {'1'};
+    char[] expectedSingle = {'1'};
+    testRotate(single, 1, 1, 1, expectedSingle);
+
+    char[] array = {'0', '1', '2'};
+    char[] expectedArray = {'0', '1', '2'};
+    testRotate(array, 1, 1, 1, expectedArray);
+    testRotate(array, -1, 2, 2, expectedArray);
+  }
+
+  public void testRotateIndexed_singleElementRange() {
+    char[] single = {'1'};
+    char[] expectedSingle = {'1'};
+    testRotate(single, 0, 0, 1, expectedSingle);
+    testRotate(single, 1, 0, 1, expectedSingle);
+
+    char[] array = {'0', '1', '2'};
+    char[] expectedArray = {'0', '1', '2'};
+    testRotate(array, 1, 1, 2, expectedArray);
+    testRotate(array, -1, 2, 3, expectedArray);
+  }
+
+  public void testRotateIndexed_multiElementRange() {
     // Rotate the central 5 elements, leaving the ends as-is
     testRotate(
         new char[] {'0', '1', '2', '3', '4', '5', '6'},
@@ -600,7 +756,7 @@ public class CharsTest extends TestCase {
 
   public void testToArray() {
     // need explicit type parameter to avoid javac warning!?
-    List<Character> none = Arrays.<Character>asList();
+    List<Character> none = Arrays.asList();
     assertThat(Chars.toArray(none)).isEqualTo(EMPTY);
 
     List<Character> one = Arrays.asList((char) 1);
@@ -629,6 +785,7 @@ public class CharsTest extends TestCase {
     }
   }
 
+  @SuppressWarnings("nullness") // test of a bogus call
   public void testToArray_withNull() {
     List<@Nullable Character> list = Arrays.asList((char) 0, (char) 1, null);
     assertThrows(NullPointerException.class, () -> Chars.toArray(list));
@@ -664,6 +821,8 @@ public class CharsTest extends TestCase {
     assertThat(Chars.toArray(list.subList(2, 2))).isEqualTo(new char[] {});
   }
 
+  // `primitives` can't depend on `collect`, so this is what the prod code has to return.
+  @SuppressWarnings("EmptyList")
   public void testAsListEmpty() {
     assertThat(Chars.asList(EMPTY)).isSameInstanceAs(Collections.emptyList());
   }

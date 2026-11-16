@@ -17,17 +17,22 @@
 package jdk.m3.collections.guava.util.concurrent;
 
 import static jdk.m3.collections.guava.collect.Iterables.concat;
+import static jdk.m3.collections.guava.collect.Lists.newArrayList;
+import static jdk.m3.collections.guava.collect.Sets.newHashSetWithExpectedSize;
+import static jdk.m3.collections.guava.collect.Sets.newIdentityHashSet;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
+import static org.junit.Assert.assertThrows;
 
+import jdk.m3.collections.guava.annotations.GwtIncompatible;
+import jdk.m3.collections.guava.annotations.J2ktIncompatible;
 import jdk.m3.collections.guava.base.Functions;
 import jdk.m3.collections.guava.base.Supplier;
 import jdk.m3.collections.guava.collect.ImmutableList;
-import jdk.m3.collections.guava.collect.Lists;
-import jdk.m3.collections.guava.collect.Maps;
 import jdk.m3.collections.guava.collect.Ordering;
-import jdk.m3.collections.guava.collect.Sets;
 import jdk.m3.collections.guava.testing.GcFinalization;
 import jdk.m3.collections.guava.testing.NullPointerTester;
 import java.lang.ref.WeakReference;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -45,6 +50,8 @@ import org.jspecify.annotations.NullUnmarked;
  * @author Dimitris Andreou
  */
 @NullUnmarked
+@GwtIncompatible
+@J2ktIncompatible
 public class StripedTest extends TestCase {
   private static List<Striped<?>> strongImplementations() {
     return ImmutableList.of(
@@ -58,48 +65,20 @@ public class StripedTest extends TestCase {
         Striped.semaphore(256, 1));
   }
 
-  private static final Supplier<ReadWriteLock> READ_WRITE_LOCK_SUPPLIER =
-      new Supplier<ReadWriteLock>() {
-        @Override
-        public ReadWriteLock get() {
-          return new ReentrantReadWriteLock();
-        }
-      };
+  private static final Supplier<Lock> FAIR_LOCK_SUPPLER = () -> new ReentrantLock(true);
 
-  private static final Supplier<Lock> LOCK_SUPPLER =
-      new Supplier<Lock>() {
-        @Override
-        public Lock get() {
-          return new ReentrantLock();
-        }
-      };
-
-  private static final Supplier<Lock> FAIR_LOCK_SUPPLER =
-      new Supplier<Lock>() {
-        @Override
-        public Lock get() {
-          return new ReentrantLock(true);
-        }
-      };
-
-  private static final Supplier<Semaphore> SEMAPHORE_SUPPLER =
-      new Supplier<Semaphore>() {
-        @Override
-        public Semaphore get() {
-          return new Semaphore(1, false);
-        }
-      };
+  private static final Supplier<Semaphore> SEMAPHORE_SUPPLER = () -> new Semaphore(1, false);
 
   private static List<Striped<?>> weakImplementations() {
     return ImmutableList.<Striped<?>>builder()
-        .add(new Striped.SmallLazyStriped<ReadWriteLock>(50, READ_WRITE_LOCK_SUPPLIER))
-        .add(new Striped.SmallLazyStriped<ReadWriteLock>(64, READ_WRITE_LOCK_SUPPLIER))
-        .add(new Striped.LargeLazyStriped<ReadWriteLock>(50, READ_WRITE_LOCK_SUPPLIER))
-        .add(new Striped.LargeLazyStriped<ReadWriteLock>(64, READ_WRITE_LOCK_SUPPLIER))
-        .add(new Striped.SmallLazyStriped<Lock>(50, LOCK_SUPPLER))
-        .add(new Striped.SmallLazyStriped<Lock>(64, LOCK_SUPPLER))
-        .add(new Striped.LargeLazyStriped<Lock>(50, LOCK_SUPPLER))
-        .add(new Striped.LargeLazyStriped<Lock>(64, LOCK_SUPPLER))
+        .add(new Striped.SmallLazyStriped<ReadWriteLock>(50, ReentrantReadWriteLock::new))
+        .add(new Striped.SmallLazyStriped<ReadWriteLock>(64, ReentrantReadWriteLock::new))
+        .add(new Striped.LargeLazyStriped<ReadWriteLock>(50, ReentrantReadWriteLock::new))
+        .add(new Striped.LargeLazyStriped<ReadWriteLock>(64, ReentrantReadWriteLock::new))
+        .add(new Striped.SmallLazyStriped<Lock>(50, ReentrantLock::new))
+        .add(new Striped.SmallLazyStriped<Lock>(64, ReentrantLock::new))
+        .add(new Striped.LargeLazyStriped<Lock>(50, ReentrantLock::new))
+        .add(new Striped.LargeLazyStriped<Lock>(64, ReentrantLock::new))
         .add(new Striped.SmallLazyStriped<Semaphore>(50, SEMAPHORE_SUPPLER))
         .add(new Striped.SmallLazyStriped<Semaphore>(64, SEMAPHORE_SUPPLER))
         .add(new Striped.LargeLazyStriped<Semaphore>(50, SEMAPHORE_SUPPLER))
@@ -113,7 +92,7 @@ public class StripedTest extends TestCase {
     return concat(strongImplementations(), weakImplementations());
   }
 
-  public void testNull() throws Exception {
+  public void testNull() {
     for (Striped<?> striped : allImplementations()) {
       new NullPointerTester().testAllPublicInstanceMethods(striped);
     }
@@ -121,40 +100,48 @@ public class StripedTest extends TestCase {
 
   public void testSizes() {
     // not bothering testing all variations, since we know they share implementations
-    assertTrue(Striped.lock(100).size() >= 100);
+    assertThat(Striped.lock(100).size()).isAtLeast(100);
     assertTrue(Striped.lock(256).size() == 256);
-    assertTrue(Striped.lazyWeakLock(100).size() >= 100);
+    assertThat(Striped.lazyWeakLock(100).size()).isAtLeast(100);
     assertTrue(Striped.lazyWeakLock(256).size() == 256);
   }
 
-  @AndroidIncompatible // Presumably GC doesn't trigger, despite our efforts.
   public void testWeakImplementations() {
     for (Striped<?> striped : weakImplementations()) {
-      WeakReference<Object> weakRef = new WeakReference<>(striped.get(new Object()));
+      WeakReference<Object> weakRef = getWeakReferenceToStripe(striped);
       GcFinalization.awaitClear(weakRef);
     }
   }
 
-  @AndroidIncompatible // Presumably GC doesn't trigger, despite our efforts.
+  private static WeakReference<Object> getWeakReferenceToStripe(Striped<?> striped) {
+    return new WeakReference<>(striped.get(new Object()));
+  }
+
   public void testWeakReadWrite() {
     Striped<ReadWriteLock> striped = Striped.lazyWeakReadWriteLock(1000);
     Object key = new Object();
     Lock readLock = striped.get(key).readLock();
-    WeakReference<Object> garbage = new WeakReference<>(new Object());
+    WeakReference<Object> garbage = createGarbage();
     GcFinalization.awaitClear(garbage);
     Lock writeLock = striped.get(key).writeLock();
     readLock.lock();
-    assertFalse(writeLock.tryLock());
-    readLock.unlock();
+    try {
+      assertFalse(writeLock.tryLock());
+    } finally {
+      readLock.unlock();
+    }
   }
 
-  @AndroidIncompatible // Presumably GC doesn't trigger, despite our efforts.
+  private static WeakReference<Object> createGarbage() {
+    return new WeakReference<>(new Object());
+  }
+
   public void testStrongImplementations() {
     for (Striped<?> striped : strongImplementations()) {
-      WeakReference<Object> weakRef = new WeakReference<>(striped.get(new Object()));
-      WeakReference<Object> garbage = new WeakReference<>(new Object());
+      WeakReference<Object> weakRef = getWeakReferenceToStripe(striped);
+      WeakReference<Object> garbage = createGarbage();
       GcFinalization.awaitClear(garbage);
-      assertNotNull(weakRef.get());
+      assertThat(weakRef.get()).isNotNull();
     }
   }
 
@@ -168,14 +155,14 @@ public class StripedTest extends TestCase {
 
   public void testBulkGetReturnsSorted() {
     for (Striped<?> striped : allImplementations()) {
-      Map<Object, Integer> indexByLock = Maps.newHashMap();
+      Map<Object, Integer> indexByLock = new HashMap<>();
       for (int i = 0; i < striped.size(); i++) {
         indexByLock.put(striped.getAt(i), i);
       }
 
       // ensure that bulkGet returns locks in monotonically increasing order
       for (int objectsNum = 1; objectsNum <= striped.size() * 2; objectsNum++) {
-        Set<Object> objects = Sets.newHashSetWithExpectedSize(objectsNum);
+        Set<Object> objects = newHashSetWithExpectedSize(objectsNum);
         for (int i = 0; i < objectsNum; i++) {
           objects.add(new Object());
         }
@@ -185,7 +172,7 @@ public class StripedTest extends TestCase {
 
         // check idempotency
         Iterable<?> locks2 = striped.bulkGet(objects);
-        assertEquals(Lists.newArrayList(locks), Lists.newArrayList(locks2));
+        assertEquals(newArrayList(locks), newArrayList(locks2));
       }
     }
   }
@@ -198,12 +185,12 @@ public class StripedTest extends TestCase {
   }
 
   private static void assertBasicInvariants(Striped<?> striped) {
-    Set<Object> observed = Sets.newIdentityHashSet(); // for the sake of weakly referenced locks.
+    Set<Object> observed = newIdentityHashSet(); // for the sake of weakly referenced locks.
     // this gets the stripes with #getAt(index)
     for (int i = 0; i < striped.size(); i++) {
       Object object = striped.getAt(i);
-      assertNotNull(object);
-      assertSame(object, striped.getAt(i)); // idempotent
+      assertThat(object).isNotNull();
+      assertThat(striped.getAt(i)).isSameInstanceAs(object); // idempotent
       observed.add(object);
     }
     assertTrue("All stripes observed", observed.size() == striped.size());
@@ -213,17 +200,10 @@ public class StripedTest extends TestCase {
       assertTrue(observed.contains(striped.get(new Object())));
     }
 
-    try {
-      striped.getAt(-1);
-      fail();
-    } catch (RuntimeException expected) {
-    }
+    assertThrows(IndexOutOfBoundsException.class, () -> striped.getAt(-1));
 
-    try {
-      striped.getAt(striped.size());
-      fail();
-    } catch (RuntimeException expected) {
-    }
+    int size = striped.size();
+    assertThrows(IndexOutOfBoundsException.class, () -> striped.getAt(size));
   }
 
   public void testMaxSize() {

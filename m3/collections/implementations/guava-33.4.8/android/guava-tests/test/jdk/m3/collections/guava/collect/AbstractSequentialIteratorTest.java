@@ -16,9 +16,9 @@
 
 package jdk.m3.collections.guava.collect;
 
-import static jdk.m3.collections.guava.collect.ReflectionFreeAssertThrows.assertThrows;
 import static jdk.m3.collections.guava.collect.testing.IteratorFeature.UNMODIFIABLE;
-import static com.google.common.truth.Truth.assertThat;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
+import static org.junit.Assert.assertThrows;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
@@ -32,7 +32,7 @@ import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
 /** Tests for {@link AbstractSequentialIterator}. */
-@GwtCompatible(emulated = true)
+@GwtCompatible
 @NullMarked
 public class AbstractSequentialIteratorTest extends TestCase {
   @GwtIncompatible // Too slow
@@ -124,7 +124,7 @@ public class AbstractSequentialIteratorTest extends TestCase {
     assertThrows(SomeUncheckedException.class, broken::next);
   }
 
-  private static Iterator<Integer> newDoubler(int first, final int last) {
+  private static Iterator<Integer> newDoubler(int first, int last) {
     return new AbstractSequentialIterator<Integer>(first) {
       @Override
       protected @Nullable Integer computeNext(Integer previous) {
@@ -135,7 +135,7 @@ public class AbstractSequentialIteratorTest extends TestCase {
 
   private static class EmptyAbstractSequentialIterator<T> extends AbstractSequentialIterator<T> {
 
-    public EmptyAbstractSequentialIterator() {
+    EmptyAbstractSequentialIterator() {
       super(null);
     }
 
@@ -147,7 +147,7 @@ public class AbstractSequentialIteratorTest extends TestCase {
 
   private static class BrokenAbstractSequentialIterator extends AbstractSequentialIterator<Object> {
 
-    public BrokenAbstractSequentialIterator() {
+    BrokenAbstractSequentialIterator() {
       super("UNUSED");
     }
 

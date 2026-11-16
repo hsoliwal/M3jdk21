@@ -14,7 +14,6 @@
 
 package jdk.m3.collections.guava.collect;
 
-import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
 import jdk.m3.collections.guava.annotations.J2ktIncompatible;
 import java.util.Set;
@@ -22,12 +21,11 @@ import org.jspecify.annotations.Nullable;
 
 /**
  * ImmutableSet implementation backed by a JDK HashSet, used to defend against apparent hash
- * flooding. This implementation is never used on the GWT client side, but it must be present there
- * for serialization to work.
+ * flooding. This implementation is never used on the GWT client side.
  *
  * @author Louis Wasserman
  */
-@GwtCompatible(serializable = true)
+@GwtIncompatible
 final class JdkBackedImmutableSet<E> extends IndexedImmutableSet<E> {
   private final Set<?> delegate;
   private final ImmutableList<E> delegateList;
@@ -61,7 +59,6 @@ final class JdkBackedImmutableSet<E> extends IndexedImmutableSet<E> {
   @SuppressWarnings("RedundantOverride")
   @Override
   @J2ktIncompatible
-  @GwtIncompatible
     Object writeReplace() {
     return super.writeReplace();
   }

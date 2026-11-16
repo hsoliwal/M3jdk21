@@ -18,6 +18,7 @@ import static jdk.m3.collections.guava.base.Preconditions.checkArgument;
 import static jdk.m3.collections.guava.base.Preconditions.checkNotNull;
 import static jdk.m3.collections.guava.base.Preconditions.checkState;
 import static java.lang.Math.min;
+import static java.lang.System.arraycopy;
 
 import jdk.m3.collections.guava.base.Preconditions;
 import jdk.m3.collections.guava.primitives.UnsignedInts;
@@ -287,7 +288,7 @@ public abstract class HashCode {
 
     @Override
     public long padToLong() {
-      long retVal = (bytes[0] & 0xFF);
+      long retVal = bytes[0] & 0xFF;
       for (int i = 1; i < min(bytes.length, 8); i++) {
         retVal |= (bytes[i] & 0xFFL) << (i * 8);
       }
@@ -296,7 +297,7 @@ public abstract class HashCode {
 
     @Override
     void writeBytesToImpl(byte[] dest, int offset, int maxLength) {
-      System.arraycopy(bytes, 0, dest, offset, maxLength);
+      arraycopy(bytes, 0, dest, offset, maxLength);
     }
 
     @Override
@@ -314,7 +315,7 @@ public abstract class HashCode {
 
       boolean areEqual = true;
       for (int i = 0; i < this.bytes.length; i++) {
-        areEqual &= (this.bytes[i] == that.getBytesInternal()[i]);
+        areEqual &= this.bytes[i] == that.getBytesInternal()[i];
       }
       return areEqual;
     }
@@ -389,9 +390,9 @@ public abstract class HashCode {
     }
     // If we have less than 4 bytes, use them all.
     byte[] bytes = getBytesInternal();
-    int val = (bytes[0] & 0xFF);
+    int val = bytes[0] & 0xFF;
     for (int i = 1; i < bytes.length; i++) {
-      val |= ((bytes[i] & 0xFF) << (i * 8));
+      val |= (bytes[i] & 0xFF) << (i * 8);
     }
     return val;
   }

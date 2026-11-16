@@ -1,13 +1,11 @@
 package jdk.m3.collections.guava.graph;
 
-import jdk.m3.collections.guava.annotations.Beta;
 import java.util.Set;
 
 /**
  * Supertype for {@link Graphs}, containing the old signatures of methods whose signatures we've
  * changed. This provides binary compatibility for users who compiled against the old signatures.
  */
-@Beta
 abstract class GraphsBridgeMethods {
 
   @SuppressWarnings("PreferredInterfaceType")

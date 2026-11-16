@@ -16,6 +16,8 @@
 
 package jdk.m3.collections.guava.collect;
 
+import static jdk.m3.collections.guava.collect.Lists.newArrayList;
+
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
 import jdk.m3.collections.guava.annotations.J2ktIncompatible;
@@ -28,7 +30,7 @@ import org.jspecify.annotations.Nullable;
  *
  * @author Emily Soldal
  */
-@GwtCompatible(serializable = true)
+@GwtCompatible
 final class AllEqualOrdering extends Ordering<@Nullable Object> implements Serializable {
   static final AllEqualOrdering INSTANCE = new AllEqualOrdering();
 
@@ -40,7 +42,7 @@ final class AllEqualOrdering extends Ordering<@Nullable Object> implements Seria
 
   @Override
   public <E extends @Nullable Object> List<E> sortedCopy(Iterable<E> iterable) {
-    return Lists.newArrayList(iterable);
+    return newArrayList(iterable);
   }
 
   @Override

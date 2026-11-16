@@ -21,8 +21,8 @@ import static jdk.m3.collections.guava.base.Preconditions.checkNotNull;
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.base.Equivalence;
 import jdk.m3.collections.guava.collect.ImmutableList;
-import jdk.m3.collections.guava.collect.Lists;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
+import java.util.ArrayList;
 import java.util.List;
 import junit.framework.AssertionFailedError;
 import org.jspecify.annotations.NullMarked;
@@ -36,11 +36,8 @@ import org.jspecify.annotations.NullMarked;
 @GwtCompatible
 @NullMarked
 final class RelationshipTester<T> {
-
-  static class ItemReporter {
-    String reportItem(Item<?> item) {
-      return item.toString();
-    }
+  interface ItemReporter {
+    String reportItem(Item<?> item);
   }
 
   /**
@@ -55,7 +52,7 @@ final class RelationshipTester<T> {
   private final String relationshipName;
   private final String hashName;
   private final ItemReporter itemReporter;
-  private final List<ImmutableList<T>> groups = Lists.newArrayList();
+  private final List<ImmutableList<T>> groups = new ArrayList<>();
 
   RelationshipTester(
       Equivalence<? super T> equivalence,

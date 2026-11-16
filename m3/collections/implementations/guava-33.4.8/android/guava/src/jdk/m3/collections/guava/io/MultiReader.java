@@ -32,7 +32,7 @@ import org.jspecify.annotations.Nullable;
  */
 @J2ktIncompatible
 @GwtIncompatible
-class MultiReader extends Reader {
+final class MultiReader extends Reader {
   private final Iterator<? extends CharSource> it;
   private @Nullable Reader current;
 
@@ -52,15 +52,14 @@ class MultiReader extends Reader {
   @Override
   public int read(char[] cbuf, int off, int len) throws IOException {
     checkNotNull(cbuf);
-    if (current == null) {
-      return -1;
-    }
-    int result = current.read(cbuf, off, len);
-    if (result == -1) {
+    while (current != null) {
+      int result = current.read(cbuf, off, len);
+      if (result != -1) {
+        return result;
+      }
       advance();
-      return read(cbuf, off, len);
     }
-    return result;
+    return -1;
   }
 
   @Override

@@ -16,11 +16,11 @@
 
 package jdk.m3.collections.guava.io;
 
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 import jdk.m3.collections.guava.base.Optional;
 import jdk.m3.collections.guava.collect.ImmutableList;
-import jdk.m3.collections.guava.collect.Lists;
 import jdk.m3.collections.guava.io.SourceSinkFactory.ByteSourceFactory;
 import jdk.m3.collections.guava.io.SourceSinkFactory.CharSourceFactory;
 import java.io.BufferedReader;
@@ -28,6 +28,7 @@ import java.io.IOException;
 import java.io.Reader;
 import java.io.StringWriter;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map.Entry;
 import junit.framework.TestSuite;
@@ -146,9 +147,9 @@ public class CharSourceTester extends SourceSinkTester<CharSource, String, CharS
 
   public void testReadFirstLine() throws IOException {
     if (expectedLines.isEmpty()) {
-      assertNull(source.readFirstLine());
+      assertThat(source.readFirstLine()).isNull();
     } else {
-      assertEquals(expectedLines.get(0), source.readFirstLine());
+      assertThat(source.readFirstLine()).isEqualTo(expectedLines.get(0));
     }
   }
 
@@ -164,7 +165,7 @@ public class CharSourceTester extends SourceSinkTester<CharSource, String, CharS
     assertEquals(expected.length(), source.length());
   }
 
-  public void testLengthIfKnown() throws IOException {
+  public void testLengthIfKnown() {
     Optional<Long> lengthIfKnown = source.lengthIfKnown();
     if (lengthIfKnown.isPresent()) {
       assertEquals(expected.length(), (long) lengthIfKnown.get());
@@ -175,10 +176,10 @@ public class CharSourceTester extends SourceSinkTester<CharSource, String, CharS
     List<String> list =
         source.readLines(
             new LineProcessor<List<String>>() {
-              List<String> list = Lists.newArrayList();
+              final List<String> list = new ArrayList<>();
 
               @Override
-              public boolean processLine(String line) throws IOException {
+              public boolean processLine(String line) {
                 list.add(line);
                 return true;
               }
@@ -196,10 +197,10 @@ public class CharSourceTester extends SourceSinkTester<CharSource, String, CharS
     List<String> list =
         source.readLines(
             new LineProcessor<List<String>>() {
-              List<String> list = Lists.newArrayList();
+              final List<String> list = new ArrayList<>();
 
               @Override
-              public boolean processLine(String line) throws IOException {
+              public boolean processLine(String line) {
                 list.add(line);
                 return false;
               }
@@ -218,7 +219,7 @@ public class CharSourceTester extends SourceSinkTester<CharSource, String, CharS
   }
 
   private void assertExpectedString(String string) {
-    assertEquals(expected, string);
+    assertThat(string).isEqualTo(expected);
   }
 
   private void assertExpectedLines(List<String> list) {

@@ -18,7 +18,6 @@ package jdk.m3.collections.guava.collect;
 
 import static jdk.m3.collections.guava.collect.Lists.transform;
 import static jdk.m3.collections.guava.collect.Sets.difference;
-import static jdk.m3.collections.guava.collect.Sets.newHashSet;
 import static java.lang.reflect.Modifier.isPublic;
 import static java.lang.reflect.Modifier.isStatic;
 import static java.util.Arrays.asList;
@@ -26,13 +25,15 @@ import static org.junit.Assert.assertThrows;
 
 import jdk.m3.collections.guava.base.Function;
 import jdk.m3.collections.guava.base.Joiner;
-import jdk.m3.collections.guava.base.Objects;
+import com.google.errorprone.annotations.FormatMethod;
 import java.lang.reflect.Method;
 import java.lang.reflect.Type;
 import java.lang.reflect.TypeVariable;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import junit.framework.TestCase;
 import org.jspecify.annotations.NullUnmarked;
@@ -100,7 +101,7 @@ public class FauxveridesTest extends TestCase {
     assertThrows(ClassCastException.class, () -> ImmutableSortedSet.copyOf(original.iterator()));
   }
 
-  private void doHasAllFauxveridesTest(Class<?> descendant, Class<?> ancestor) {
+  private static void doHasAllFauxveridesTest(Class<?> descendant, Class<?> ancestor) {
     Set<MethodSignature> required = getAllRequiredToFauxveride(ancestor);
     Set<MethodSignature> found = getAllFauxveridden(descendant, ancestor);
     Set<MethodSignature> missing = ImmutableSortedSet.copyOf(difference(required, found));
@@ -122,7 +123,7 @@ public class FauxveridesTest extends TestCase {
 
   private static Set<MethodSignature> getPublicStaticMethodsBetween(
       Class<?> descendant, Class<?> ancestor) {
-    Set<MethodSignature> methods = newHashSet();
+    Set<MethodSignature> methods = new HashSet<>();
     for (Class<?> clazz : getClassesBetween(descendant, ancestor)) {
       methods.addAll(getPublicStaticMethods(clazz));
     }
@@ -130,7 +131,7 @@ public class FauxveridesTest extends TestCase {
   }
 
   private static Set<MethodSignature> getPublicStaticMethods(Class<?> clazz) {
-    Set<MethodSignature> publicStaticMethods = newHashSet();
+    Set<MethodSignature> publicStaticMethods = new HashSet<>();
 
     for (Method method : clazz.getDeclaredMethods()) {
       int modifiers = method.getModifiers();
@@ -144,7 +145,7 @@ public class FauxveridesTest extends TestCase {
 
   /** [descendant, ancestor) */
   private static Set<Class<?>> getClassesBetween(Class<?> descendant, Class<?> ancestor) {
-    Set<Class<?>> classes = newHashSet();
+    Set<Class<?>> classes = new HashSet<>();
 
     while (!descendant.equals(ancestor)) {
       classes.add(descendant);
@@ -185,7 +186,7 @@ public class FauxveridesTest extends TestCase {
 
     @Override
     public int hashCode() {
-      return Objects.hashCode(name, parameterTypes, typeSignature);
+      return Objects.hash(name, parameterTypes, typeSignature);
     }
 
     @Override
@@ -289,6 +290,7 @@ public class FauxveridesTest extends TestCase {
         }
       };
 
+  @FormatMethod
   private static String rootLocaleFormat(String format, Object... args) {
     return String.format(Locale.ROOT, format, args);
   }

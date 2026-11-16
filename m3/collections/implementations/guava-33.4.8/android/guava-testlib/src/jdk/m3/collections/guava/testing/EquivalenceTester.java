@@ -17,15 +17,16 @@
 package jdk.m3.collections.guava.testing;
 
 import static jdk.m3.collections.guava.base.Preconditions.checkNotNull;
+import static jdk.m3.collections.guava.collect.Lists.asList;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertTrue;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.base.Equivalence;
 import jdk.m3.collections.guava.collect.ImmutableList;
-import jdk.m3.collections.guava.collect.Lists;
-import jdk.m3.collections.guava.testing.RelationshipTester.ItemReporter;
+import jdk.m3.collections.guava.testing.RelationshipTester.Item;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
+import java.util.ArrayList;
 import java.util.List;
 import org.jspecify.annotations.NullMarked;
 
@@ -57,11 +58,13 @@ public final class EquivalenceTester<T> {
 
   private final Equivalence<? super T> equivalence;
   private final RelationshipTester<T> delegate;
-  private final List<T> items = Lists.newArrayList();
+  private final List<T> items = new ArrayList<>();
 
   private EquivalenceTester(Equivalence<? super T> equivalence) {
     this.equivalence = checkNotNull(equivalence);
-    this.delegate = new RelationshipTester<>(equivalence, "equivalent", "hash", new ItemReporter());
+    this.delegate =
+        new RelationshipTester<>(
+            equivalence, "equivalent", "hash", /* itemReporter= */ Item::toString);
   }
 
   public static <T> EquivalenceTester<T> of(Equivalence<? super T> equivalence) {
@@ -74,10 +77,14 @@ public final class EquivalenceTester<T> {
    */
   @CanIgnoreReturnValue
   public EquivalenceTester<T> addEquivalenceGroup(T first, T... rest) {
-    addEquivalenceGroup(Lists.asList(first, rest));
+    addEquivalenceGroup(asList(first, rest));
     return this;
   }
 
+  /**
+   * Adds a group of objects that are supposed to be equivalent to each other and not equivalent to
+   * objects in any other equivalence group added to this tester.
+   */
   @CanIgnoreReturnValue
   public EquivalenceTester<T> addEquivalenceGroup(Iterable<T> group) {
     delegate.addRelatedGroup(group);

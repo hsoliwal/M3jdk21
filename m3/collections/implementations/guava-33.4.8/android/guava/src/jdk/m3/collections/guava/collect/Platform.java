@@ -28,7 +28,7 @@ import org.jspecify.annotations.Nullable;
  *
  * @author Hayward Chan
  */
-@GwtCompatible(emulated = true)
+@GwtCompatible
 final class Platform {
   /** Returns the platform preferred implementation of a map based on a hash table. */
   static <K extends @Nullable Object, V extends @Nullable Object>
@@ -82,23 +82,6 @@ final class Platform {
    */
   static <E extends @Nullable Object> Set<E> preservesInsertionOrderOnAddsSet() {
     return CompactHashSet.create();
-  }
-
-  /**
-   * Returns a new array of the given length with the same type as a reference array.
-   *
-   * @param reference any array of the desired type
-   * @param length the length of the new array
-   */
-  /*
-   * The new array contains nulls, even if the old array did not. If we wanted to be accurate, we
-   * would declare a return type of `@Nullable T[]`. However, we've decided not to think too hard
-   * about arrays for now, as they're a mess. (We previously discussed this in the review of
-   * ObjectArrays, which is the main caller of this method.)
-   */
-  static <T extends @Nullable Object> T[] newArray(T[] reference, int length) {
-    T[] empty = reference.length == 0 ? reference : Arrays.copyOf(reference, 0);
-    return Arrays.copyOf(empty, length);
   }
 
   /** Equivalent to Arrays.copyOfRange(source, from, to, arrayOfType.getClass()). */

@@ -17,7 +17,7 @@
 package jdk.m3.collections.guava.io;
 
 import static jdk.m3.collections.guava.base.CharMatcher.whitespace;
-import static com.google.common.truth.Truth.assertThat;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
 import static java.nio.charset.StandardCharsets.US_ASCII;
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.junit.Assert.assertThrows;
@@ -61,7 +61,7 @@ public class ResourcesTest extends IoTestCase {
 
   public void testToString() throws IOException {
     URL resource = getClass().getResource("testdata/i18n.txt");
-    assertEquals(I18N, Resources.toString(resource, UTF_8));
+    assertThat(Resources.toString(resource, UTF_8)).isEqualTo(I18N);
     assertThat(Resources.toString(resource, US_ASCII)).isNotEqualTo(I18N);
   }
 
@@ -80,7 +80,7 @@ public class ResourcesTest extends IoTestCase {
     URL resource = getClass().getResource("testdata/alice_in_wonderland.txt");
     LineProcessor<List<String>> collectAndLowercaseAndTrim =
         new LineProcessor<List<String>>() {
-          List<String> collector = new ArrayList<>();
+          final List<String> collector = new ArrayList<>();
 
           @Override
           public boolean processLine(String line) {
@@ -95,15 +95,16 @@ public class ResourcesTest extends IoTestCase {
         };
     List<String> result = Resources.readLines(resource, US_ASCII, collectAndLowercaseAndTrim);
     assertEquals(3600, result.size());
-    assertEquals("ALICE'S ADVENTURES IN WONDERLAND", result.get(0));
-    assertEquals("THE END", result.get(result.size() - 1));
+    assertThat(result.get(0)).isEqualTo("ALICE'S ADVENTURES IN WONDERLAND");
+    assertThat(result.get(result.size() - 1)).isEqualTo("THE END");
   }
 
+  @SuppressWarnings({"PreferCharsetOverload", "JdkObsolete"}) // requires Java 10 / API Level 33
   public void testCopyToOutputStream() throws IOException {
     ByteArrayOutputStream out = new ByteArrayOutputStream();
     URL resource = getClass().getResource("testdata/i18n.txt");
     Resources.copy(resource, out);
-    assertEquals(I18N, out.toString("UTF-8"));
+    assertThat(out.toString("UTF-8")).isEqualTo(I18N);
   }
 
   public void testGetResource_notFound() {
@@ -114,7 +115,7 @@ public class ResourcesTest extends IoTestCase {
   }
 
   public void testGetResource() {
-    assertNotNull(Resources.getResource("jdk/m3/collections/guava/io/testdata/i18n.txt"));
+    assertThat(Resources.getResource("jdk/m3/collections/guava/io/testdata/i18n.txt")).isNotNull();
   }
 
   public void testGetResource_relativePath_notFound() {
@@ -130,9 +131,10 @@ public class ResourcesTest extends IoTestCase {
   }
 
   public void testGetResource_relativePath() {
-    assertNotNull(Resources.getResource(getClass(), "testdata/i18n.txt"));
+    assertThat(Resources.getResource(getClass(), "testdata/i18n.txt")).isNotNull();
   }
 
+  @SuppressWarnings({"PreferCharsetOverload", "JdkObsolete"}) // requires Java 10 / API Level 33
   public void testGetResource_contextClassLoader() throws IOException {
     // Check that we can find a resource if it is visible to the context class
     // loader, even if it is not visible to the loader of the Resources class.
@@ -155,7 +157,7 @@ public class ResourcesTest extends IoTestCase {
       Thread.currentThread().setContextClassLoader(loader);
       URL url = Resources.getResource(tempFile.getName());
       String text = Resources.toString(url, UTF_8);
-      assertEquals("rud a chur ar an méar fhada" + System.lineSeparator(), text);
+      assertThat(text).isEqualTo("rud a chur ar an méar fhada" + System.lineSeparator());
     } finally {
       Thread.currentThread().setContextClassLoader(oldContextLoader);
     }
@@ -165,7 +167,7 @@ public class ResourcesTest extends IoTestCase {
     ClassLoader oldContextLoader = Thread.currentThread().getContextClassLoader();
     try {
       Thread.currentThread().setContextClassLoader(null);
-      assertNotNull(Resources.getResource("jdk/m3/collections/guava/io/testdata/i18n.txt"));
+      assertThat(Resources.getResource("jdk/m3/collections/guava/io/testdata/i18n.txt")).isNotNull();
       assertThrows(IllegalArgumentException.class, () -> Resources.getResource("no such resource"));
     } finally {
       Thread.currentThread().setContextClassLoader(oldContextLoader);

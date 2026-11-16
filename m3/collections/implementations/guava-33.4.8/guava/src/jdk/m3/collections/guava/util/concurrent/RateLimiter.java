@@ -17,8 +17,10 @@ package jdk.m3.collections.guava.util.concurrent;
 import static jdk.m3.collections.guava.base.Preconditions.checkArgument;
 import static jdk.m3.collections.guava.base.Preconditions.checkNotNull;
 import static jdk.m3.collections.guava.util.concurrent.Internal.toNanosSaturated;
+import static jdk.m3.collections.guava.util.concurrent.Uninterruptibles.sleepUninterruptibly;
 import static java.lang.Math.max;
 import static java.util.concurrent.TimeUnit.MICROSECONDS;
+import static java.util.concurrent.TimeUnit.NANOSECONDS;
 import static java.util.concurrent.TimeUnit.SECONDS;
 
 import jdk.m3.collections.guava.annotations.Beta;
@@ -133,7 +135,7 @@ public abstract class RateLimiter {
 
   @VisibleForTesting
   static RateLimiter create(double permitsPerSecond, SleepingStopwatch stopwatch) {
-    RateLimiter rateLimiter = new SmoothBursty(stopwatch, 1.0 /* maxBurstSeconds */);
+    RateLimiter rateLimiter = new SmoothBursty(stopwatch, /* maxBurstSeconds= */ 1.0);
     rateLimiter.setRate(permitsPerSecond);
     return rateLimiter;
   }
@@ -163,7 +165,7 @@ public abstract class RateLimiter {
    * @since 28.0 (but only since 33.4.0 in the Android flavor)
    */
   public static RateLimiter create(double permitsPerSecond, Duration warmupPeriod) {
-    return create(permitsPerSecond, toNanosSaturated(warmupPeriod), TimeUnit.NANOSECONDS);
+    return create(permitsPerSecond, toNanosSaturated(warmupPeriod), NANOSECONDS);
   }
 
   /**
@@ -332,7 +334,7 @@ public abstract class RateLimiter {
    * @since 28.0 (but only since 33.4.0 in the Android flavor)
    */
   public boolean tryAcquire(Duration timeout) {
-    return tryAcquire(1, toNanosSaturated(timeout), TimeUnit.NANOSECONDS);
+    return tryAcquire(1, toNanosSaturated(timeout), NANOSECONDS);
   }
 
   /**
@@ -391,7 +393,7 @@ public abstract class RateLimiter {
    * @since 28.0 (but only since 33.4.0 in the Android flavor)
    */
   public boolean tryAcquire(int permits, Duration timeout) {
-    return tryAcquire(permits, toNanosSaturated(timeout), TimeUnit.NANOSECONDS);
+    return tryAcquire(permits, toNanosSaturated(timeout), NANOSECONDS);
   }
 
   /**
@@ -414,9 +416,8 @@ public abstract class RateLimiter {
       long nowMicros = stopwatch.readMicros();
       if (!canAcquire(nowMicros, timeoutMicros)) {
         return false;
-      } else {
-        microsToWait = reserveAndGetWaitLength(permits, nowMicros);
       }
+      microsToWait = reserveAndGetWaitLength(permits, nowMicros);
     }
     stopwatch.sleepMicrosUninterruptibly(microsToWait);
     return true;
@@ -454,7 +455,7 @@ public abstract class RateLimiter {
   abstract long reserveEarliestAvailable(int permits, long nowMicros);
 
   @Override
-  public String toString() {
+  public final String toString() {
     return String.format(Locale.ROOT, "RateLimiter[stableRate=%3.1fqps]", getRate());
   }
 
@@ -483,7 +484,7 @@ public abstract class RateLimiter {
         @Override
         protected void sleepMicrosUninterruptibly(long micros) {
           if (micros > 0) {
-            Uninterruptibles.sleepUninterruptibly(micros, MICROSECONDS);
+            sleepUninterruptibly(micros, MICROSECONDS);
           }
         }
       };

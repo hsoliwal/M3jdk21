@@ -101,11 +101,11 @@ public class TestsForMapsInJavaUtil {
     return emptySet();
   }
 
-  private Collection<Method> suppressForEmptyNavigableMap() {
+  private static Collection<Method> suppressForEmptyNavigableMap() {
     return emptySet();
   }
 
-  private Collection<Method> suppressForEmptySortedMap() {
+  private static Collection<Method> suppressForEmptySortedMap() {
     return emptySet();
   }
 
@@ -161,7 +161,8 @@ public class TestsForMapsInJavaUtil {
     return asList(
         MapEntrySetTester.getSetValueMethod(),
         MapEntrySetTester.getSetValueWithNullValuesAbsentMethod(),
-        MapEntrySetTester.getSetValueWithNullValuesPresentMethod());
+        MapEntrySetTester.getSetValueWithNullValuesPresentMethod(),
+        MapEntrySetTester.getIteratorSetValueAndRemove());
   }
 
   public Test testsForCheckedMap() {

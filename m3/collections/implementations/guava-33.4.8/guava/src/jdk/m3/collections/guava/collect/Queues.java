@@ -14,6 +14,7 @@
 
 package jdk.m3.collections.guava.collect;
 
+import static jdk.m3.collections.guava.collect.Internal.toNanosSaturated;
 import static java.util.concurrent.TimeUnit.NANOSECONDS;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
@@ -44,7 +45,7 @@ import org.jspecify.annotations.Nullable;
  * @author Kurt Alfred Kluever
  * @since 11.0
  */
-@GwtCompatible(emulated = true)
+@GwtCompatible
 public final class Queues {
   private Queues() {}
 
@@ -294,8 +295,7 @@ public final class Queues {
   public static <E> int drain(
       BlockingQueue<E> q, Collection<? super E> buffer, int numElements, Duration timeout)
       throws InterruptedException {
-    // TODO(b/126049426): Consider using saturateToNanos(timeout) instead.
-    return drain(q, buffer, numElements, timeout.toNanos(), NANOSECONDS);
+    return drain(q, buffer, numElements, toNanosSaturated(timeout), NANOSECONDS);
   }
 
   /**
@@ -346,7 +346,7 @@ public final class Queues {
   }
 
   /**
-   * Drains the queue as {@linkplain #drain(BlockingQueue, Collection, int, Duration)}, but with a
+   * Drains the queue as {@link #drain(BlockingQueue, Collection, int, Duration)}, but with a
    * different behavior in case it is interrupted while waiting. In that case, the operation will
    * continue as usual, and in the end the thread's interruption status will be set (no {@code
    * InterruptedException} is thrown).
@@ -363,14 +363,13 @@ public final class Queues {
   @GwtIncompatible // BlockingQueue
   public static <E> int drainUninterruptibly(
       BlockingQueue<E> q, Collection<? super E> buffer, int numElements, Duration timeout) {
-    // TODO(b/126049426): Consider using saturateToNanos(timeout) instead.
-    return drainUninterruptibly(q, buffer, numElements, timeout.toNanos(), NANOSECONDS);
+    return drainUninterruptibly(q, buffer, numElements, toNanosSaturated(timeout), NANOSECONDS);
   }
 
   /**
-   * Drains the queue as {@linkplain #drain(BlockingQueue, Collection, int, long, TimeUnit)}, but
-   * with a different behavior in case it is interrupted while waiting. In that case, the operation
-   * will continue as usual, and in the end the thread's interruption status will be set (no {@code
+   * Drains the queue as {@link #drain(BlockingQueue, Collection, int, long, TimeUnit)}, but with a
+   * different behavior in case it is interrupted while waiting. In that case, the operation will
+   * continue as usual, and in the end the thread's interruption status will be set (no {@code
    * InterruptedException} is thrown).
    *
    * @param q the blocking queue to be drained
@@ -435,9 +434,9 @@ public final class Queues {
    * {@snippet :
    * Queue<E> queue = Queues.synchronizedQueue(MinMaxPriorityQueue.<E>create());
    * ...
-   * queue.add(element);  // Needn't be in synchronized block
+   * queue.add(element); // Needn't be in synchronized block
    * ...
-   * synchronized (queue) {  // Must synchronize on queue!
+   * synchronized (queue) { // Must synchronize on queue!
    *   Iterator<E> i = queue.iterator(); // Must be in synchronized block
    *   while (i.hasNext()) {
    *     foo(i.next());
@@ -467,11 +466,11 @@ public final class Queues {
    * of the deque's iterators:
    *
    * {@snippet :
-   * Deque<E> deque = Queues.synchronizedDeque(Queues.<E>newArrayDeque());
+   * Deque<E> deque = Queues.synchronizedDeque(Queues.newArrayDeque());
    * ...
-   * deque.add(element);  // Needn't be in synchronized block
+   * deque.add(element); // Needn't be in synchronized block
    * ...
-   * synchronized (deque) {  // Must synchronize on deque!
+   * synchronized (deque) { // Must synchronize on deque!
    *   Iterator<E> i = deque.iterator(); // Must be in synchronized block
    *   while (i.hasNext()) {
    *     foo(i.next());

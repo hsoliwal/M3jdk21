@@ -16,12 +16,11 @@
 
 package jdk.m3.collections.guava.escape;
 
-import static com.google.common.truth.Truth.assertThat;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.collect.ImmutableMap;
 import jdk.m3.collections.guava.escape.testing.EscaperAsserts;
-import java.io.IOException;
 import junit.framework.TestCase;
 import org.jspecify.annotations.NullMarked;
 
@@ -38,7 +37,7 @@ public class ArrayBasedCharEscaperTest extends TestCase {
           '\t', "<tab>",
           '&', "<and>");
 
-  public void testSafeRange() throws IOException {
+  public void testSafeRange() {
     // Basic escaping of unsafe chars (wrap them in {,}'s)
     CharEscaper wrappingEscaper =
         new ArrayBasedCharEscaper(NO_REPLACEMENTS, 'A', 'Z') {
@@ -52,7 +51,7 @@ public class ArrayBasedCharEscaperTest extends TestCase {
     assertThat(wrappingEscaper.escape("[FOO@BAR]")).isEqualTo("{[}FOO{@}BAR{]}");
   }
 
-  public void testSafeRange_maxLessThanMin() throws IOException {
+  public void testSafeRange_maxLessThanMin() {
     // Basic escaping of unsafe chars (wrap them in {,}'s)
     CharEscaper wrappingEscaper =
         new ArrayBasedCharEscaper(NO_REPLACEMENTS, 'Z', 'A') {
@@ -66,10 +65,10 @@ public class ArrayBasedCharEscaperTest extends TestCase {
     assertThat(wrappingEscaper.escape("[FOO]")).isEqualTo("{[}{F}{O}{O}{]}");
   }
 
-  public void testDeleteUnsafeChars() throws IOException {
+  public void testDeleteUnsafeChars() {
     CharEscaper deletingEscaper =
         new ArrayBasedCharEscaper(NO_REPLACEMENTS, ' ', '~') {
-          private final char[] noChars = new char[0];
+          final char[] noChars = new char[0];
 
           @Override
           protected char[] escapeUnsafe(char c) {
@@ -84,10 +83,10 @@ public class ArrayBasedCharEscaperTest extends TestCase {
         .isEqualTo("Everything outside the printable ASCII range is deleted.");
   }
 
-  public void testReplacementPriority() throws IOException {
+  public void testReplacementPriority() {
     CharEscaper replacingEscaper =
         new ArrayBasedCharEscaper(SIMPLE_REPLACEMENTS, ' ', '~') {
-          private final char[] unknown = new char[] {'?'};
+          final char[] unknown = new char[] {'?'};
 
           @Override
           protected char[] escapeUnsafe(char c) {

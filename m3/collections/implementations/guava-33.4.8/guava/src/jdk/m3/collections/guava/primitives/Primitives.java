@@ -15,9 +15,9 @@
 package jdk.m3.collections.guava.primitives;
 
 import static jdk.m3.collections.guava.base.Preconditions.checkNotNull;
+import static java.util.Collections.unmodifiableMap;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
-import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
@@ -59,8 +59,8 @@ public final class Primitives {
     add(primToWrap, wrapToPrim, short.class, Short.class);
     add(primToWrap, wrapToPrim, void.class, Void.class);
 
-    PRIMITIVE_TO_WRAPPER_TYPE = Collections.unmodifiableMap(primToWrap);
-    WRAPPER_TO_PRIMITIVE_TYPE = Collections.unmodifiableMap(wrapToPrim);
+    PRIMITIVE_TO_WRAPPER_TYPE = unmodifiableMap(primToWrap);
+    WRAPPER_TO_PRIMITIVE_TYPE = unmodifiableMap(wrapToPrim);
   }
 
   private static void add(

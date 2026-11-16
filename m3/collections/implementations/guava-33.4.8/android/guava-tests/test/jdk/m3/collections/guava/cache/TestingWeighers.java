@@ -14,6 +14,8 @@
 
 package jdk.m3.collections.guava.cache;
 
+import jdk.m3.collections.guava.annotations.GwtIncompatible;
+import jdk.m3.collections.guava.annotations.J2ktIncompatible;
 import org.jspecify.annotations.NullUnmarked;
 
 /**
@@ -21,8 +23,10 @@ import org.jspecify.annotations.NullUnmarked;
  *
  * @author Charles Fry
  */
+@GwtIncompatible
+@J2ktIncompatible
 @NullUnmarked
-public class TestingWeighers {
+public final class TestingWeighers {
 
   /** Returns a {@link Weigher} that returns the given {@code constant} for every request. */
   static Weigher<Object, Object> constantWeigher(int constant) {
@@ -65,4 +69,6 @@ public class TestingWeighers {
       return value;
     }
   }
+
+  private TestingWeighers() {}
 }

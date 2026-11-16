@@ -20,6 +20,7 @@ import static jdk.m3.collections.guava.collect.testing.Helpers.copyToList;
 import static jdk.m3.collections.guava.collect.testing.features.CollectionFeature.KNOWN_ORDER;
 import static jdk.m3.collections.guava.collect.testing.features.CollectionFeature.SERIALIZABLE;
 import static jdk.m3.collections.guava.collect.testing.features.CollectionFeature.SERIALIZABLE_INCLUDING_VIEWS;
+import static jdk.m3.collections.guava.testing.SerializableTester.reserialize;
 
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
 import jdk.m3.collections.guava.collect.testing.features.CollectionFeature;
@@ -44,7 +45,6 @@ import jdk.m3.collections.guava.collect.testing.testers.ListRetainAllTester;
 import jdk.m3.collections.guava.collect.testing.testers.ListSetTester;
 import jdk.m3.collections.guava.collect.testing.testers.ListSubListTester;
 import jdk.m3.collections.guava.collect.testing.testers.ListToArrayTester;
-import jdk.m3.collections.guava.testing.SerializableTester;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
@@ -111,8 +111,7 @@ public final class ListTestSuiteBuilder<E>
 
     if (parentBuilder.getFeatures().contains(SERIALIZABLE)) {
       derivedSuites.add(
-          ListTestSuiteBuilder.using(
-                  new ReserializedListGenerator<E>(parentBuilder.getSubjectGenerator()))
+          using(new ReserializedListGenerator<E>(parentBuilder.getSubjectGenerator()))
               .named(getName() + " reserialized")
               .withFeatures(computeReserializedCollectionFeatures(parentBuilder.getFeatures()))
               .suppressing(parentBuilder.getSuppressedTests())
@@ -123,7 +122,7 @@ public final class ListTestSuiteBuilder<E>
     return derivedSuites;
   }
 
-  static class ReserializedListGenerator<E> implements TestListGenerator<E> {
+  private static final class ReserializedListGenerator<E> implements TestListGenerator<E> {
     final OneSizeTestContainerGenerator<Collection<E>, E> gen;
 
     private ReserializedListGenerator(OneSizeTestContainerGenerator<Collection<E>, E> gen) {
@@ -137,7 +136,7 @@ public final class ListTestSuiteBuilder<E>
 
     @Override
     public List<E> create(Object... elements) {
-      return (List<E>) SerializableTester.reserialize(gen.create(elements));
+      return (List<E>) reserialize(gen.create(elements));
     }
 
     @Override

@@ -17,15 +17,18 @@
 package jdk.m3.collections.guava.io;
 
 import static jdk.m3.collections.guava.base.Preconditions.checkArgument;
+import static jdk.m3.collections.guava.hash.Hashing.sha512;
 import static jdk.m3.collections.guava.io.TestOption.AVAILABLE_ALWAYS_ZERO;
 import static jdk.m3.collections.guava.io.TestOption.CLOSE_THROWS;
 import static jdk.m3.collections.guava.io.TestOption.OPEN_THROWS;
 import static jdk.m3.collections.guava.io.TestOption.READ_THROWS;
 import static jdk.m3.collections.guava.io.TestOption.SKIP_THROWS;
 import static jdk.m3.collections.guava.io.TestOption.WRITE_THROWS;
-import static com.google.common.truth.Truth.assertThat;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
+import static java.lang.Byte.toUnsignedInt;
 import static java.lang.Math.max;
 import static java.lang.Math.min;
+import static java.lang.System.arraycopy;
 import static java.nio.charset.StandardCharsets.US_ASCII;
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertThrows;
@@ -33,8 +36,6 @@ import static org.junit.Assert.assertThrows;
 import jdk.m3.collections.guava.collect.ImmutableList;
 import jdk.m3.collections.guava.collect.ImmutableSet;
 import jdk.m3.collections.guava.collect.Iterables;
-import jdk.m3.collections.guava.hash.Hashing;
-import jdk.m3.collections.guava.primitives.UnsignedBytes;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -75,7 +76,7 @@ public class ByteSourceTest extends IoTestCase {
   private TestByteSource source;
 
   @Override
-  protected void setUp() throws Exception {
+  protected void setUp() {
     source = new TestByteSource(bytes);
   }
 
@@ -131,14 +132,14 @@ public class ByteSourceTest extends IoTestCase {
   }
 
   public void testRead_withProcessor() throws IOException {
-    final byte[] processedBytes = new byte[bytes.length];
+    byte[] processedBytes = new byte[bytes.length];
     ByteProcessor<byte[]> processor =
         new ByteProcessor<byte[]>() {
           int pos;
 
           @Override
-          public boolean processBytes(byte[] buf, int off, int len) throws IOException {
-            System.arraycopy(buf, off, processedBytes, pos, len);
+          public boolean processBytes(byte[] buf, int off, int len) {
+            arraycopy(buf, off, processedBytes, pos, len);
             pos += len;
             return true;
           }
@@ -161,7 +162,7 @@ public class ByteSourceTest extends IoTestCase {
           boolean firstCall = true;
 
           @Override
-          public boolean processBytes(byte[] buf, int off, int len) throws IOException {
+          public boolean processBytes(byte[] buf, int off, int len) {
             assertTrue("consume() called twice", firstCall);
             firstCall = false;
             return false;
@@ -180,8 +181,10 @@ public class ByteSourceTest extends IoTestCase {
   public void testHash() throws IOException {
     ByteSource byteSource = new TestByteSource("hamburger\n".getBytes(US_ASCII));
 
-    // Pasted this expected string from `echo hamburger | md5sum`
-    assertEquals("cfa0c5002275c90508338a5cdb2a9781", byteSource.hash(Hashing.md5()).toString());
+    // Pasted this expected string from `echo hamburger | sha512sum`
+    assertThat(byteSource.hash(sha512()).toString())
+        .isEqualTo(
+            "db0f986332e64487e8cfd30773944574abf9472382e661597e070699a3a78f6781bc0bd3b1cd51156ba25a4028c73bc505bdea2343de3b724568bcf3c50526c6");
   }
 
   public void testContentEquals() throws IOException {
@@ -250,7 +253,7 @@ public class ByteSourceTest extends IoTestCase {
   private static class AppendableByteSource extends ByteSource {
     private byte[] bytes;
 
-    public AppendableByteSource(byte[] initialBytes) {
+    AppendableByteSource(byte[] initialBytes) {
       this.bytes = initialBytes.clone();
     }
 
@@ -259,9 +262,9 @@ public class ByteSourceTest extends IoTestCase {
       return new In();
     }
 
-    public void append(byte[] b) {
+    void append(byte[] b) {
       byte[] newBytes = Arrays.copyOf(bytes, bytes.length + b.length);
-      System.arraycopy(b, 0, newBytes, bytes.length, b.length);
+      arraycopy(b, 0, newBytes, bytes.length, b.length);
       bytes = newBytes;
     }
 
@@ -271,7 +274,7 @@ public class ByteSourceTest extends IoTestCase {
       @Override
       public int read() throws IOException {
         byte[] b = new byte[1];
-        return read(b) == -1 ? -1 : UnsignedBytes.toInt(b[0]);
+        return read(b) == -1 ? -1 : toUnsignedInt(b[0]);
       }
 
       @Override
@@ -281,7 +284,7 @@ public class ByteSourceTest extends IoTestCase {
         }
 
         int lenToRead = min(len, bytes.length - pos);
-        System.arraycopy(bytes, pos, b, off, lenToRead);
+        arraycopy(bytes, pos, b, off, lenToRead);
         pos += lenToRead;
         return lenToRead;
       }
@@ -415,13 +418,8 @@ public class ByteSourceTest extends IoTestCase {
    * @return the number of exceptions that were suppressed on the expected thrown exception
    */
   private static int runSuppressionFailureTest(ByteSource in, ByteSink out) {
-    try {
-      in.copyTo(out);
-      fail();
-    } catch (IOException expected) {
-      return expected.getSuppressed().length;
-    }
-    throw new AssertionError(); // can't happen
+    IOException expected = assertThrows(IOException.class, () -> in.copyTo(out));
+    return expected.getSuppressed().length;
   }
 
   private static ByteSource newNormalByteSource() {

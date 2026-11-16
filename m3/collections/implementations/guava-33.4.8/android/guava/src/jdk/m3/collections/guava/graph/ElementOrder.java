@@ -18,16 +18,17 @@ package jdk.m3.collections.guava.graph;
 
 import static jdk.m3.collections.guava.base.Preconditions.checkNotNull;
 import static jdk.m3.collections.guava.base.Preconditions.checkState;
+import static jdk.m3.collections.guava.collect.Maps.newHashMapWithExpectedSize;
+import static jdk.m3.collections.guava.collect.Maps.newLinkedHashMapWithExpectedSize;
+import static jdk.m3.collections.guava.collect.Maps.newTreeMap;
 
-import jdk.m3.collections.guava.annotations.Beta;
 import jdk.m3.collections.guava.base.MoreObjects;
 import jdk.m3.collections.guava.base.MoreObjects.ToStringHelper;
-import jdk.m3.collections.guava.base.Objects;
-import jdk.m3.collections.guava.collect.Maps;
 import jdk.m3.collections.guava.collect.Ordering;
 import com.google.errorprone.annotations.Immutable;
 import java.util.Comparator;
 import java.util.Map;
+import java.util.Objects;
 import org.jspecify.annotations.Nullable;
 
 /**
@@ -44,7 +45,6 @@ import org.jspecify.annotations.Nullable;
  * @author Joshua O'Madadhain
  * @since 20.0
  */
-@Beta
 @Immutable
 public final class ElementOrder<T> {
   private final Type type;
@@ -88,7 +88,7 @@ public final class ElementOrder<T> {
    * <p>This instance is only useful in combination with {@code incidentEdgeOrder}, e.g. {@code
    * graphBuilder.incidentEdgeOrder(ElementOrder.stable())}.
    *
-   * <h3>In combination with {@code incidentEdgeOrder}</h3>
+   * <h4>In combination with {@code incidentEdgeOrder}</h4>
    *
    * <p>{@code incidentEdgeOrder(ElementOrder.stable())} guarantees the ordering of the returned
    * collections of the following methods:
@@ -130,7 +130,7 @@ public final class ElementOrder<T> {
    * Returns an instance which specifies that the natural ordering of the elements is guaranteed.
    */
   public static <S extends Comparable<? super S>> ElementOrder<S> natural() {
-    return new ElementOrder<>(Type.SORTED, Ordering.<S>natural());
+    return new ElementOrder<>(Type.SORTED, Ordering.natural());
   }
 
   /**
@@ -168,12 +168,12 @@ public final class ElementOrder<T> {
     }
 
     ElementOrder<?> other = (ElementOrder<?>) obj;
-    return (type == other.type) && Objects.equal(comparator, other.comparator);
+    return (type == other.type) && Objects.equals(comparator, other.comparator);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hashCode(type, comparator);
+    return Objects.hash(type, comparator);
   }
 
   @Override
@@ -189,12 +189,12 @@ public final class ElementOrder<T> {
   <K extends T, V> Map<K, V> createMap(int expectedSize) {
     switch (type) {
       case UNORDERED:
-        return Maps.newHashMapWithExpectedSize(expectedSize);
+        return newHashMapWithExpectedSize(expectedSize);
       case INSERTION:
       case STABLE:
-        return Maps.newLinkedHashMapWithExpectedSize(expectedSize);
+        return newLinkedHashMapWithExpectedSize(expectedSize);
       case SORTED:
-        return Maps.newTreeMap(comparator());
+        return newTreeMap(comparator());
     }
     throw new AssertionError();
   }

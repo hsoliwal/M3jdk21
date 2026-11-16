@@ -16,6 +16,8 @@
 
 package jdk.m3.collections.guava.testing;
 
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
+
 import java.util.logging.Level;
 import java.util.logging.LogRecord;
 import java.util.logging.Logger;
@@ -31,7 +33,7 @@ import org.jspecify.annotations.NullUnmarked;
 public class TestLogHandlerTest extends TestCase {
 
   private TestLogHandler handler;
-  private TearDownStack stack = new TearDownStack();
+  private final TearDownStack stack = new TearDownStack();
 
   @Override
   protected void setUp() throws Exception {
@@ -44,26 +46,22 @@ public class TestLogHandlerTest extends TestCase {
 
     ExampleClassUnderTest.logger.setUseParentHandlers(false); // optional
 
-    stack.addTearDown(
-        new TearDown() {
-          @Override
-          public void tearDown() throws Exception {
-            ExampleClassUnderTest.logger.setUseParentHandlers(true);
-            ExampleClassUnderTest.logger.removeHandler(handler);
-          }
-        });
+    stack.addTearDown(() -> {
+      ExampleClassUnderTest.logger.setUseParentHandlers(true);
+      ExampleClassUnderTest.logger.removeHandler(handler);
+    });
   }
 
-  public void test() throws Exception {
+  public void test() {
     assertTrue(handler.getStoredLogRecords().isEmpty());
     ExampleClassUnderTest.foo();
     LogRecord record = handler.getStoredLogRecords().get(0);
     assertEquals(Level.INFO, record.getLevel());
-    assertEquals("message", record.getMessage());
-    assertSame(EXCEPTION, record.getThrown());
+    assertThat(record.getMessage()).isEqualTo("message");
+    assertThat(record.getThrown()).isEqualTo(EXCEPTION);
   }
 
-  public void testConcurrentModification() throws Exception {
+  public void testConcurrentModification() {
     // Tests for the absence of a bug where logging while iterating over the
     // stored log records causes a ConcurrentModificationException
     assertTrue(handler.getStoredLogRecords().isEmpty());
@@ -91,11 +89,13 @@ public class TestLogHandlerTest extends TestCase {
 
   static final Exception EXCEPTION = new Exception();
 
-  static class ExampleClassUnderTest {
+  static final class ExampleClassUnderTest {
     static final Logger logger = Logger.getLogger(ExampleClassUnderTest.class.getName());
 
     static void foo() {
       logger.log(Level.INFO, "message", EXCEPTION);
     }
+
+    private ExampleClassUnderTest() {}
   }
 }

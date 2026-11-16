@@ -18,16 +18,18 @@ package jdk.m3.collections.guava.math;
 
 import static jdk.m3.collections.guava.base.Preconditions.checkArgument;
 import static jdk.m3.collections.guava.base.Preconditions.checkNotNull;
-import static com.google.common.truth.Truth.assertThat;
+import static jdk.m3.collections.guava.base.Predicates.equalTo;
+import static jdk.m3.collections.guava.collect.Iterables.any;
+import static jdk.m3.collections.guava.collect.Lists.partition;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
 import static java.lang.Double.NEGATIVE_INFINITY;
 import static java.lang.Double.NaN;
 import static java.lang.Double.POSITIVE_INFINITY;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.assertThrows;
 
-import jdk.m3.collections.guava.base.Predicates;
+import jdk.m3.collections.guava.annotations.GwtIncompatible;
+import jdk.m3.collections.guava.annotations.J2ktIncompatible;
 import jdk.m3.collections.guava.collect.ImmutableList;
-import jdk.m3.collections.guava.collect.Iterables;
-import jdk.m3.collections.guava.collect.Lists;
 import jdk.m3.collections.guava.primitives.Doubles;
 import jdk.m3.collections.guava.primitives.Ints;
 import java.math.BigInteger;
@@ -42,6 +44,8 @@ import org.jspecify.annotations.NullUnmarked;
  * @author Pete Gillin
  */
 @NullUnmarked
+@J2ktIncompatible
+@GwtIncompatible
 class StatsTesting {
   // TODO(cpovirk): Convince myself that this larger error makes sense.
   static final double ALLOWED_ERROR = isAndroid() ? .25 : 1e-10;
@@ -92,15 +96,15 @@ class StatsTesting {
     }
 
     boolean hasAnyPositiveInfinity() {
-      return Iterables.any(values, Predicates.equalTo(POSITIVE_INFINITY));
+      return any(values, equalTo(POSITIVE_INFINITY));
     }
 
     boolean hasAnyNegativeInfinity() {
-      return Iterables.any(values, Predicates.equalTo(NEGATIVE_INFINITY));
+      return any(values, equalTo(NEGATIVE_INFINITY));
     }
 
     boolean hasAnyNaN() {
-      return Iterables.any(values, Predicates.equalTo(NaN));
+      return any(values, equalTo(NaN));
     }
 
     boolean hasAnyNonFinite() {
@@ -306,7 +310,7 @@ class StatsTesting {
   // PairedStats instances:
 
   static final PairedStats EMPTY_PAIRED_STATS =
-      createPairedStatsOf(ImmutableList.<Double>of(), ImmutableList.<Double>of());
+      createPairedStatsOf(ImmutableList.of(), ImmutableList.of());
   static final PairedStats ONE_VALUE_PAIRED_STATS =
       createPairedStatsOf(ImmutableList.of(ONE_VALUE), ImmutableList.of(OTHER_ONE_VALUE));
   static final PairedStats TWO_VALUES_PAIRED_STATS =
@@ -366,26 +370,10 @@ class StatsTesting {
   static void assertStatsApproxEqual(Stats expectedStats, Stats actualStats) {
     assertThat(actualStats.count()).isEqualTo(expectedStats.count());
     if (expectedStats.count() == 0) {
-      try {
-        actualStats.mean();
-        fail("Expected IllegalStateException");
-      } catch (IllegalStateException expected) {
-      }
-      try {
-        actualStats.populationVariance();
-        fail("Expected IllegalStateException");
-      } catch (IllegalStateException expected) {
-      }
-      try {
-        actualStats.min();
-        fail("Expected IllegalStateException");
-      } catch (IllegalStateException expected) {
-      }
-      try {
-        actualStats.max();
-        fail("Expected IllegalStateException");
-      } catch (IllegalStateException expected) {
-      }
+      assertThrows(IllegalStateException.class, () -> actualStats.mean());
+      assertThrows(IllegalStateException.class, () -> actualStats.populationVariance());
+      assertThrows(IllegalStateException.class, () -> actualStats.min());
+      assertThrows(IllegalStateException.class, () -> actualStats.max());
     } else if (expectedStats.count() == 1) {
       assertThat(actualStats.mean()).isWithin(ALLOWED_ERROR).of(expectedStats.mean());
       assertThat(actualStats.populationVariance()).isEqualTo(0.0);
@@ -435,23 +423,16 @@ class StatsTesting {
    * its inverse throws as expected.
    */
   static void assertHorizontalLinearTransformation(LinearTransformation transformation, double y) {
+    LinearTransformation inverse = transformation.inverse();
     assertThat(transformation.isHorizontal()).isTrue();
     assertThat(transformation.isVertical()).isFalse();
     assertThat(transformation.inverse().isHorizontal()).isFalse();
     assertThat(transformation.inverse().isVertical()).isTrue();
     assertThat(transformation.transform(-1.0)).isWithin(ALLOWED_ERROR).of(y);
     assertThat(transformation.transform(1.0)).isWithin(ALLOWED_ERROR).of(y);
-    try {
-      transformation.inverse().transform(0.0);
-      fail("Expected IllegalStateException");
-    } catch (IllegalStateException expected) {
-    }
+    assertThrows(IllegalStateException.class, () -> inverse.transform(0.0));
     assertThat(transformation.slope()).isWithin(ALLOWED_ERROR).of(0.0);
-    try {
-      transformation.inverse().slope();
-      fail("Expected IllegalStateException");
-    } catch (IllegalStateException expected) {
-    }
+    assertThrows(IllegalStateException.class, () -> inverse.slope());
     assertThat(transformation.inverse()).isSameInstanceAs(transformation.inverse());
     assertThat(transformation.inverse().inverse()).isSameInstanceAs(transformation);
   }
@@ -467,18 +448,10 @@ class StatsTesting {
     assertThat(transformation.isVertical()).isTrue();
     assertThat(transformation.inverse().isHorizontal()).isTrue();
     assertThat(transformation.inverse().isVertical()).isFalse();
-    try {
-      transformation.transform(0.0);
-      fail("Expected IllegalStateException");
-    } catch (IllegalStateException expected) {
-    }
+    assertThrows(IllegalStateException.class, () -> transformation.transform(0.0));
     assertThat(transformation.inverse().transform(-1.0)).isWithin(ALLOWED_ERROR).of(x);
     assertThat(transformation.inverse().transform(1.0)).isWithin(ALLOWED_ERROR).of(x);
-    try {
-      transformation.slope();
-      fail("Expected IllegalStateException");
-    } catch (IllegalStateException expected) {
-    }
+    assertThrows(IllegalStateException.class, () -> transformation.slope());
     assertThat(transformation.inverse().slope()).isWithin(ALLOWED_ERROR).of(0.0);
     assertThat(transformation.inverse()).isSameInstanceAs(transformation.inverse());
     assertThat(transformation.inverse().inverse()).isSameInstanceAs(transformation);
@@ -528,8 +501,8 @@ class StatsTesting {
     checkArgument(xValues.size() == yValues.size());
     checkArgument(partitionSize > 0);
     PairedStatsAccumulator accumulator = new PairedStatsAccumulator();
-    List<List<Double>> xPartitions = Lists.partition(xValues, partitionSize);
-    List<List<Double>> yPartitions = Lists.partition(yValues, partitionSize);
+    List<List<Double>> xPartitions = partition(xValues, partitionSize);
+    List<List<Double>> yPartitions = partition(yValues, partitionSize);
     for (int index = 0; index < xPartitions.size(); index++) {
       accumulator.addAll(createPairedStatsOf(xPartitions.get(index), yPartitions.get(index)));
     }

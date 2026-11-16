@@ -16,6 +16,7 @@
 
 package jdk.m3.collections.guava.collect.testing.testers;
 
+import static jdk.m3.collections.guava.collect.testing.Helpers.getMethod;
 import static jdk.m3.collections.guava.collect.testing.features.CollectionFeature.ALLOWS_NULL_VALUES;
 import static jdk.m3.collections.guava.collect.testing.features.CollectionFeature.KNOWN_ORDER;
 import static jdk.m3.collections.guava.collect.testing.features.CollectionFeature.SUPPORTS_ADD;
@@ -26,13 +27,11 @@ import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
 import jdk.m3.collections.guava.annotations.J2ktIncompatible;
 import jdk.m3.collections.guava.collect.testing.AbstractCollectionTester;
-import jdk.m3.collections.guava.collect.testing.Helpers;
 import jdk.m3.collections.guava.collect.testing.SpliteratorTester;
 import jdk.m3.collections.guava.collect.testing.features.CollectionFeature;
 import jdk.m3.collections.guava.collect.testing.features.CollectionSize;
 import java.lang.reflect.Method;
 import java.util.Spliterator;
-import org.junit.Ignore;
 
 /**
  * A generic JUnit test which tests {@code spliterator} operations on a collection. Can't be invoked
@@ -40,10 +39,7 @@ import org.junit.Ignore;
  *
  * @author Louis Wasserman
  */
-@GwtCompatible(emulated = true)
-@Ignore("test runners must not instantiate and run this directly, only via suites we build")
-// @Ignore affects the Android test runner, which respects JUnit 4 annotations on JUnit 3 tests.
-@SuppressWarnings("JUnit4ClassUsedInJUnit3")
+@GwtCompatible
 @IgnoreJRERequirement // We opt into library desugaring for our tests.
 public class CollectionSpliteratorTester<E> extends AbstractCollectionTester<E> {
 
@@ -79,14 +75,14 @@ public class CollectionSpliteratorTester<E> extends AbstractCollectionTester<E> 
   @J2ktIncompatible
   @GwtIncompatible // reflection
   public static Method getSpliteratorNotImmutableCollectionAllowsAddMethod() {
-    return Helpers.getMethod(
+    return getMethod(
         CollectionSpliteratorTester.class, "testSpliteratorNotImmutable_collectionAllowsAdd");
   }
 
   @J2ktIncompatible
   @GwtIncompatible // reflection
   public static Method getSpliteratorNotImmutableCollectionAllowsRemoveMethod() {
-    return Helpers.getMethod(
+    return getMethod(
         CollectionSpliteratorTester.class, "testSpliteratorNotImmutable_collectionAllowsRemove");
   }
 }

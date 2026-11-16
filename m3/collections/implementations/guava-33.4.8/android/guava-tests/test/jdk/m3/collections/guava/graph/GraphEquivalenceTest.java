@@ -16,22 +16,16 @@
 
 package jdk.m3.collections.guava.graph;
 
-import static jdk.m3.collections.guava.graph.TestUtil.EdgeType.DIRECTED;
-import static jdk.m3.collections.guava.graph.TestUtil.EdgeType.UNDIRECTED;
-import static com.google.common.truth.Truth.assertThat;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
 
 import jdk.m3.collections.guava.graph.TestUtil.EdgeType;
-import java.util.Arrays;
-import java.util.Collection;
+import com.google.testing.junit.testparameterinjector.TestParameter;
+import com.google.testing.junit.testparameterinjector.TestParameterInjector;
 import org.jspecify.annotations.NullUnmarked;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-import org.junit.runners.Parameterized.Parameters;
 
-@AndroidIncompatible
-// TODO(cpovirk): Figure out Android JUnit 4 support. Does it work with Gingerbread? @RunWith?
-@RunWith(Parameterized.class)
+@RunWith(TestParameterInjector.class)
 @NullUnmarked
 public final class GraphEquivalenceTest {
   private static final Integer N1 = 1;
@@ -41,13 +35,7 @@ public final class GraphEquivalenceTest {
   private final EdgeType edgeType;
   private final MutableGraph<Integer> graph;
 
-  // add parameters: directed/undirected
-  @Parameters
-  public static Collection<Object[]> parameters() {
-    return Arrays.asList(new Object[][] {{EdgeType.UNDIRECTED}, {EdgeType.DIRECTED}});
-  }
-
-  public GraphEquivalenceTest(EdgeType edgeType) {
+  public GraphEquivalenceTest(@TestParameter EdgeType edgeType) {
     this.edgeType = edgeType;
     this.graph = createGraph(edgeType);
   }

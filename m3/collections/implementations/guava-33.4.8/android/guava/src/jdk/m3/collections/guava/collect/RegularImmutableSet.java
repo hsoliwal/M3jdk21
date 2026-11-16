@@ -16,6 +16,7 @@
 
 package jdk.m3.collections.guava.collect;
 
+import static jdk.m3.collections.guava.collect.Hashing.smearedHash;
 import static java.lang.System.arraycopy;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
@@ -29,7 +30,7 @@ import org.jspecify.annotations.Nullable;
  *
  * @author Kevin Bourrillion
  */
-@GwtCompatible(serializable = true, emulated = true)
+@GwtCompatible
 @SuppressWarnings("serial") // uses writeReplace(), not default serialization
 final class RegularImmutableSet<E> extends ImmutableSet<E> {
   private static final Object[] EMPTY_ARRAY = new Object[0];
@@ -60,7 +61,7 @@ final class RegularImmutableSet<E> extends ImmutableSet<E> {
     if (target == null || table.length == 0) {
       return false;
     }
-    for (int i = Hashing.smearedHash(target); ; i++) {
+    for (int i = smearedHash(target); ; i++) {
       i &= mask;
       Object candidate = table[i];
       if (candidate == null) {

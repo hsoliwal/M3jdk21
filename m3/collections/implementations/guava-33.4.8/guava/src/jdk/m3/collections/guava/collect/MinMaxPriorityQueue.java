@@ -24,12 +24,12 @@ import static jdk.m3.collections.guava.collect.CollectPreconditions.checkRemove;
 import static java.lang.Math.max;
 import static java.lang.Math.min;
 import static java.lang.System.arraycopy;
+import static java.util.Collections.emptySet;
 import static java.util.Objects.requireNonNull;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.annotations.J2ktIncompatible;
 import jdk.m3.collections.guava.annotations.VisibleForTesting;
-import jdk.m3.collections.guava.math.IntMath;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import com.google.j2objc.annotations.Weak;
 import com.google.j2objc.annotations.WeakOuter;
@@ -37,7 +37,6 @@ import java.util.AbstractQueue;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
@@ -117,7 +116,7 @@ public final class MinMaxPriorityQueue<E> extends AbstractQueue<E> {
    */
   public static <E extends Comparable<E>> MinMaxPriorityQueue<E> create(
       Iterable<? extends E> initialContents) {
-    return new Builder<E>(Ordering.<E>natural()).create(initialContents);
+    return new Builder<E>(Ordering.natural()).create(initialContents);
   }
 
   /**
@@ -208,7 +207,7 @@ public final class MinMaxPriorityQueue<E> extends AbstractQueue<E> {
      * initial contents.
      */
     public <T extends B> MinMaxPriorityQueue<T> create() {
-      return create(Collections.<T>emptySet());
+      return create(emptySet());
     }
 
     /**
@@ -404,9 +403,8 @@ public final class MinMaxPriorityQueue<E> extends AbstractQueue<E> {
    * down to replace the element at {@code index}. This fact is used by iterator.remove so as to
    * visit elements during a traversal once and only once.
    */
-  @VisibleForTesting
   @CanIgnoreReturnValue
-  @Nullable MoveDesc<E> removeAt(int index) {
+  private @Nullable MoveDesc<E> removeAt(int index) {
     checkPositionIndex(index, size);
     modCount++;
     size--;
@@ -441,6 +439,11 @@ public final class MinMaxPriorityQueue<E> extends AbstractQueue<E> {
     return changes;
   }
 
+  @VisibleForTesting
+  void removeAtForTesting(int index) {
+    removeAt(index);
+  }
+
   private @Nullable MoveDesc<E> fillHole(int index, E toTrickle) {
     Heap heap = heapForIndex(index);
     // We consider elementData(index) a "hole", and we want to fill it
@@ -464,7 +467,7 @@ public final class MinMaxPriorityQueue<E> extends AbstractQueue<E> {
   }
 
   // Returned from removeAt() to iterator.remove()
-  static class MoveDesc<E> {
+  private static final class MoveDesc<E> {
     final E toTrickle;
     final E replaced;
 
@@ -516,7 +519,7 @@ public final class MinMaxPriorityQueue<E> extends AbstractQueue<E> {
    * sake they are stored interleaved on alternate heap levels in the same array (MMPQ.queue).
    */
   @WeakOuter
-  class Heap {
+  private final class Heap {
     final Ordering<E> ordering;
 
     @SuppressWarnings("nullness:initialization.field.uninitialized")
@@ -767,7 +770,7 @@ public final class MinMaxPriorityQueue<E> extends AbstractQueue<E> {
    *
    * <p>If the underlying queue is modified during iteration an exception will be thrown.
    */
-  private class QueueIterator implements Iterator<E> {
+  private final class QueueIterator implements Iterator<E> {
     private int cursor = -1;
     private int nextCursor = -1;
     private int expectedModCount = modCount;
@@ -920,8 +923,8 @@ public final class MinMaxPriorityQueue<E> extends AbstractQueue<E> {
 
   /**
    * Returns the comparator used to order the elements in this queue. Obeys the general contract of
-   * {@link PriorityQueue#comparator}, but returns {@link Ordering#natural} instead of {@code null}
-   * to indicate natural ordering.
+   * {@link PriorityQueue#comparator()}, but returns {@link Ordering#natural()} instead of {@code
+   * null} to indicate natural ordering.
    */
   public Comparator<? super E> comparator() {
     return minHeap.ordering;
@@ -968,7 +971,7 @@ public final class MinMaxPriorityQueue<E> extends AbstractQueue<E> {
   private int calculateNewCapacity() {
     int oldCapacity = queue.length;
     int newCapacity =
-        (oldCapacity < 64) ? (oldCapacity + 1) * 2 : IntMath.checkedMultiply(oldCapacity / 2, 3);
+        (oldCapacity < 64) ? (oldCapacity + 1) * 2 : Math.multiplyExact(oldCapacity / 2, 3);
     return capAtMaximumSize(newCapacity, maximumSize);
   }
 

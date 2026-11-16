@@ -19,7 +19,8 @@ package jdk.m3.collections.guava.collect;
 import static jdk.m3.collections.guava.collect.BoundType.CLOSED;
 import static jdk.m3.collections.guava.collect.BoundType.OPEN;
 import static jdk.m3.collections.guava.collect.DiscreteDomain.integers;
-import static jdk.m3.collections.guava.collect.ReflectionFreeAssertThrows.assertThrows;
+import static jdk.m3.collections.guava.collect.Sets.powerSet;
+import static jdk.m3.collections.guava.collect.Sets.union;
 import static jdk.m3.collections.guava.collect.testing.features.CollectionFeature.ALLOWS_NULL_QUERIES;
 import static jdk.m3.collections.guava.collect.testing.features.CollectionFeature.KNOWN_ORDER;
 import static jdk.m3.collections.guava.collect.testing.features.CollectionFeature.NON_STANDARD_TOSTRING;
@@ -27,7 +28,8 @@ import static jdk.m3.collections.guava.collect.testing.features.CollectionFeatur
 import static jdk.m3.collections.guava.collect.testing.testers.NavigableSetNavigationTester.getHoleMethods;
 import static jdk.m3.collections.guava.testing.SerializableTester.reserialize;
 import static jdk.m3.collections.guava.testing.SerializableTester.reserializeAndAssert;
-import static com.google.common.truth.Truth.assertThat;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
+import static org.junit.Assert.assertThrows;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
@@ -50,7 +52,7 @@ import org.jspecify.annotations.NullUnmarked;
 /**
  * @author Gregory Kick
  */
-@GwtCompatible(emulated = true)
+@GwtCompatible
 @NullUnmarked
 public class ContiguousSetTest extends TestCase {
   private static final DiscreteDomain<Integer> NOT_EQUAL_TO_INTEGERS =
@@ -115,7 +117,7 @@ public class ContiguousSetTest extends TestCase {
     // not testing hashCode for these because it takes forever to compute
     assertEquals(
         ContiguousSet.closed(Integer.MIN_VALUE, Integer.MAX_VALUE),
-        ContiguousSet.create(Range.<Integer>all(), integers()));
+        ContiguousSet.create(Range.all(), integers()));
     assertEquals(
         ContiguousSet.closed(Integer.MIN_VALUE, Integer.MAX_VALUE),
         ContiguousSet.create(Range.atLeast(Integer.MIN_VALUE), integers()));
@@ -138,7 +140,7 @@ public class ContiguousSetTest extends TestCase {
      * Make sure that we're using RegularContiguousSet.SerializedForm and not
      * ImmutableSet.SerializedForm, which would be enormous.
      */
-    ContiguousSet<Integer> enormous = ContiguousSet.create(Range.<Integer>all(), integers());
+    ContiguousSet<Integer> enormous = ContiguousSet.create(Range.all(), integers());
     assertTrue(enormous instanceof RegularContiguousSet);
     // We can't use reserializeAndAssert because it calls hashCode, which is enormously slow.
     ContiguousSet<Integer> enormousReserialized = reserialize(enormous);
@@ -255,16 +257,14 @@ public class ContiguousSetTest extends TestCase {
     assertEquals(1, ContiguousSet.create(Range.closed(1, 3), integers()).first().intValue());
     assertEquals(1, ContiguousSet.create(Range.open(0, 4), integers()).first().intValue());
     assertEquals(
-        Integer.MIN_VALUE,
-        ContiguousSet.create(Range.<Integer>all(), integers()).first().intValue());
+        Integer.MIN_VALUE, ContiguousSet.create(Range.all(), integers()).first().intValue());
   }
 
   public void testLast() {
     assertEquals(3, ContiguousSet.create(Range.closed(1, 3), integers()).last().intValue());
     assertEquals(3, ContiguousSet.create(Range.open(0, 4), integers()).last().intValue());
     assertEquals(
-        Integer.MAX_VALUE,
-        ContiguousSet.create(Range.<Integer>all(), integers()).last().intValue());
+        Integer.MAX_VALUE, ContiguousSet.create(Range.all(), integers()).last().intValue());
   }
 
   public void testContains() {
@@ -282,7 +282,7 @@ public class ContiguousSetTest extends TestCase {
     assertFalse(set.contains(4));
   }
 
-  // TODO: https://youtrack.jetbrains.com/issue/KT-71001/ - Enable when Kotlin throws expected CCE.
+  // TODO(user): Enable when Kotlin throws expected CCE.
   @J2ktIncompatible
   public void testContains_typeMismatch() {
     ImmutableSortedSet<Integer> set = ContiguousSet.create(Range.open(0, 4), integers());
@@ -291,15 +291,15 @@ public class ContiguousSetTest extends TestCase {
 
   public void testContainsAll() {
     ImmutableSortedSet<Integer> set = ContiguousSet.create(Range.closed(1, 3), integers());
-    for (Set<Integer> subset : Sets.powerSet(ImmutableSet.of(1, 2, 3))) {
+    for (Set<Integer> subset : powerSet(ImmutableSet.of(1, 2, 3))) {
       assertTrue(set.containsAll(subset));
     }
-    for (Set<Integer> subset : Sets.powerSet(ImmutableSet.of(1, 2, 3))) {
-      assertFalse(set.containsAll(Sets.union(subset, ImmutableSet.of(9))));
+    for (Set<Integer> subset : powerSet(ImmutableSet.of(1, 2, 3))) {
+      assertFalse(set.containsAll(union(subset, ImmutableSet.of(9))));
     }
   }
 
-  // TODO: https://youtrack.jetbrains.com/issue/KT-71001/ - Enable when Kotlin throws expected CCE.
+  // TODO(user): Enable when Kotlin throws expected CCE.
   @J2ktIncompatible
   public void testContainsAll_typeMismatch() {
     ImmutableSortedSet<Integer> set = ContiguousSet.create(Range.closed(1, 3), integers());
@@ -357,15 +357,14 @@ public class ContiguousSetTest extends TestCase {
   public void testRange_unboundedRange() {
     assertEquals(
         Range.closed(Integer.MIN_VALUE, Integer.MAX_VALUE),
-        ContiguousSet.create(Range.<Integer>all(), integers()).range());
+        ContiguousSet.create(Range.all(), integers()).range());
     assertEquals(
         Range.atLeast(Integer.MIN_VALUE),
-        ContiguousSet.create(Range.<Integer>all(), integers()).range(CLOSED, OPEN));
-    assertEquals(
-        Range.all(), ContiguousSet.create(Range.<Integer>all(), integers()).range(OPEN, OPEN));
+        ContiguousSet.create(Range.all(), integers()).range(CLOSED, OPEN));
+    assertEquals(Range.all(), ContiguousSet.create(Range.all(), integers()).range(OPEN, OPEN));
     assertEquals(
         Range.atMost(Integer.MAX_VALUE),
-        ContiguousSet.create(Range.<Integer>all(), integers()).range(OPEN, CLOSED));
+        ContiguousSet.create(Range.all(), integers()).range(OPEN, CLOSED));
   }
 
   public void testIntersection_empty() {

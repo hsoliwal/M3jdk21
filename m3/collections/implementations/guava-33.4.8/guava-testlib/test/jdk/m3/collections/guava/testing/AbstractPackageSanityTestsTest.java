@@ -16,11 +16,11 @@
 
 package jdk.m3.collections.guava.testing;
 
-import static com.google.common.truth.Truth.assertThat;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
+import static java.util.Arrays.asList;
 
 import jdk.m3.collections.guava.base.Predicates;
 import jdk.m3.collections.guava.collect.ImmutableList;
-import java.util.Arrays;
 import java.util.List;
 import junit.framework.TestCase;
 import org.jspecify.annotations.NullUnmarked;
@@ -131,6 +131,6 @@ public class AbstractPackageSanityTestsTest extends TestCase {
 
   private List<Class<?>> findClassesToTest(
       Iterable<? extends Class<?>> classes, String... explicitTestNames) {
-    return sanityTests.findClassesToTest(classes, Arrays.asList(explicitTestNames));
+    return sanityTests.findClassesToTest(classes, asList(explicitTestNames));
   }
 }

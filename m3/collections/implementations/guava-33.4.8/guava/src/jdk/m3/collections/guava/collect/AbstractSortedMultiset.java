@@ -33,10 +33,10 @@ import org.jspecify.annotations.Nullable;
  *
  * @author Louis Wasserman
  */
-@GwtCompatible(emulated = true)
+@GwtCompatible
 abstract class AbstractSortedMultiset<E extends @Nullable Object> extends AbstractMultiset<E>
     implements SortedMultiset<E> {
-  @GwtTransient final Comparator<? super E> comparator;
+  private final Comparator<? super E> comparator;
 
   // needed for serialization
   @SuppressWarnings("unchecked")
@@ -49,35 +49,30 @@ abstract class AbstractSortedMultiset<E extends @Nullable Object> extends Abstra
   }
 
   @Override
-  public NavigableSet<E> elementSet() {
-    return (NavigableSet<E>) super.elementSet();
-  }
-
-  @Override
-  NavigableSet<E> createElementSet() {
+  public final NavigableSet<E> elementSet() {
     return new SortedMultisets.NavigableElementSet<>(this);
   }
 
   @Override
-  public Comparator<? super E> comparator() {
+  public final Comparator<? super E> comparator() {
     return comparator;
   }
 
   @Override
-  public @Nullable Entry<E> firstEntry() {
-    Iterator<Entry<E>> entryIterator = entryIterator();
+  public final @Nullable Entry<E> firstEntry() {
+    Iterator<Entry<E>> entryIterator = internalEntryIterator();
     return entryIterator.hasNext() ? entryIterator.next() : null;
   }
 
   @Override
-  public @Nullable Entry<E> lastEntry() {
+  public final @Nullable Entry<E> lastEntry() {
     Iterator<Entry<E>> entryIterator = descendingEntryIterator();
     return entryIterator.hasNext() ? entryIterator.next() : null;
   }
 
   @Override
-  public @Nullable Entry<E> pollFirstEntry() {
-    Iterator<Entry<E>> entryIterator = entryIterator();
+  public final @Nullable Entry<E> pollFirstEntry() {
+    Iterator<Entry<E>> entryIterator = internalEntryIterator();
     if (entryIterator.hasNext()) {
       Entry<E> result = entryIterator.next();
       result = Multisets.immutableEntry(result.getElement(), result.getCount());
@@ -88,7 +83,7 @@ abstract class AbstractSortedMultiset<E extends @Nullable Object> extends Abstra
   }
 
   @Override
-  public @Nullable Entry<E> pollLastEntry() {
+  public final @Nullable Entry<E> pollLastEntry() {
     Iterator<Entry<E>> entryIterator = descendingEntryIterator();
     if (entryIterator.hasNext()) {
       Entry<E> result = entryIterator.next();
@@ -100,7 +95,7 @@ abstract class AbstractSortedMultiset<E extends @Nullable Object> extends Abstra
   }
 
   @Override
-  public SortedMultiset<E> subMultiset(
+  public final SortedMultiset<E> subMultiset(
       @ParametricNullness E fromElement,
       BoundType fromBoundType,
       @ParametricNullness E toElement,
@@ -113,21 +108,24 @@ abstract class AbstractSortedMultiset<E extends @Nullable Object> extends Abstra
 
   abstract Iterator<Entry<E>> descendingEntryIterator();
 
-  Iterator<E> descendingIterator() {
+  final Iterator<E> descendingIterator() {
     return Multisets.iteratorImpl(descendingMultiset());
   }
 
-  @LazyInit private transient @Nullable SortedMultiset<E> descendingMultiset;
+  @LazyInit private @Nullable SortedMultiset<E> descendingMultiset;
 
   @Override
-  public SortedMultiset<E> descendingMultiset() {
+  public final SortedMultiset<E> descendingMultiset() {
     SortedMultiset<E> result = descendingMultiset;
-    return (result == null) ? descendingMultiset = createDescendingMultiset() : result;
+    if (result == null) {
+      result = descendingMultiset = createDescendingMultiset();
+    }
+    return result;
   }
 
-  SortedMultiset<E> createDescendingMultiset() {
+  final SortedMultiset<E> createDescendingMultiset() {
     @WeakOuter
-    class DescendingMultisetImpl extends DescendingMultiset<E> {
+    final class DescendingMultisetImpl extends DescendingMultiset<E> {
       @Override
       SortedMultiset<E> forwardMultiset() {
         return AbstractSortedMultiset.this;

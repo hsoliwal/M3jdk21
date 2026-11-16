@@ -19,7 +19,7 @@ package jdk.m3.collections.guava.net;
 import static jdk.m3.collections.guava.escape.testing.EscaperAsserts.assertEscaping;
 import static jdk.m3.collections.guava.escape.testing.EscaperAsserts.assertUnescaped;
 import static jdk.m3.collections.guava.escape.testing.EscaperAsserts.assertUnicodeEscaping;
-import static junit.framework.Assert.assertEquals;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
 import static junit.framework.Assert.fail;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
@@ -38,6 +38,7 @@ final class UrlEscaperTesting {
    * Helper to assert common expected behaviour of uri escapers. You should call
    * assertBasicUrlEscaper() unless the escaper explicitly does not escape '%'.
    */
+  @SuppressWarnings("nullness") // test of a bogus call
   static void assertBasicUrlEscaperExceptPercent(UnicodeEscaper e) {
     // URL escapers should throw null pointer exceptions for null input
     try {
@@ -70,10 +71,10 @@ final class UrlEscaperTesting {
     assertUnicodeEscaping(e, "%F0%90%80%80", '\uD800', '\uDC00');
     assertUnicodeEscaping(e, "%F4%8F%BF%BF", '\uDBFF', '\uDFFF');
 
-    assertEquals("", e.escape(""));
-    assertEquals("safestring", e.escape("safestring"));
-    assertEquals("embedded%00null", e.escape("embedded\0null"));
-    assertEquals("max%EF%BF%BFchar", e.escape("max\uffffchar"));
+    assertThat(e.escape("")).isEqualTo("");
+    assertThat(e.escape("safestring")).isEqualTo("safestring");
+    assertThat(e.escape("embedded\0null")).isEqualTo("embedded%00null");
+    assertThat(e.escape("max\uffffchar")).isEqualTo("max%EF%BF%BFchar");
   }
 
   // Helper to assert common expected behaviour of uri escapers.
@@ -97,8 +98,8 @@ final class UrlEscaperTesting {
     // Don't use plus for spaces
     assertEscaping(e, "%20", ' ');
 
-    assertEquals("safe%20with%20spaces", e.escape("safe with spaces"));
-    assertEquals("foo@bar.com", e.escape("foo@bar.com"));
+    assertThat(e.escape("safe with spaces")).isEqualTo("safe%20with%20spaces");
+    assertThat(e.escape("foo@bar.com")).isEqualTo("foo@bar.com");
   }
 
   private UrlEscaperTesting() {}
