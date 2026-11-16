@@ -834,4 +834,70 @@ public final class CollectionViews {
             }
         };
     }
+
+    /*
+     * Copyright (c) 2026, Hitesh Soliwal and Contributors to the Synexia Project.
+     * Additive static M3JDK operations; inherited java.util APIs remain unchanged.
+     */
+
+    /**
+     * Traverses a half-open list window using its existing virtual list iterator.
+     * No element array or view is materialized. The owning list controls iterator
+     * fail-fast, ordering, and concurrent-mutation behavior.
+     *
+     * @param source the authoritative list
+     * @param fromIndex inclusive first index
+     * @param toIndex exclusive end index
+     * @param action callback for selected values
+     * @param <E> selected element type
+     */
+    public static <E> void forEachRange(List<? extends E> source,
+            int fromIndex, int toIndex, Consumer<? super E> action) {
+        Objects.requireNonNull(source, "source");
+        Objects.requireNonNull(action, "action");
+        Objects.checkFromToIndex(fromIndex, toIndex, source.size());
+        if (fromIndex == toIndex) return;
+        java.util.ListIterator<? extends E> each = source.listIterator(fromIndex);
+        for (int remaining = toIndex - fromIndex; remaining > 0; remaining--) {
+            action.accept(each.next());
+        }
+    }
+
+    /**
+     * Traverses a half-open list window with borrowed M3 progress reporting.
+     * Each successfully completed callback credits one work unit. Cancellation
+     * is checked before each element and once after the range, without clearing
+     * thread interruption. This method never begins or completes the monitor.
+     *
+     * @param source the authoritative list
+     * @param fromIndex inclusive first index
+     * @param toIndex exclusive end index
+     * @param action callback for selected values
+     * @param monitor caller-owned monitor, which must remain valid during the call
+     * @param <E> selected element type
+     */
+    public static <E> void forEachRangeMonitored(List<? extends E> source,
+            int fromIndex, int toIndex, Consumer<? super E> action,
+            ProgressMonitor monitor) {
+        Objects.requireNonNull(source, "source");
+        Objects.requireNonNull(action, "action");
+        Objects.requireNonNull(monitor, "monitor");
+        Objects.checkFromToIndex(fromIndex, toIndex, source.size());
+        checkRangeCancellation(monitor);
+        if (fromIndex == toIndex) return;
+        java.util.ListIterator<? extends E> each = source.listIterator(fromIndex);
+        for (int remaining = toIndex - fromIndex; remaining > 0; remaining--) {
+            checkRangeCancellation(monitor);
+            action.accept(each.next());
+            monitor.worked(1L);
+        }
+        checkRangeCancellation(monitor);
+    }
+
+    private static void checkRangeCancellation(ProgressMonitor monitor) {
+        monitor.checkCanceled();
+        if (Thread.currentThread().isInterrupted()) {
+            throw new java.util.concurrent.CancellationException("Range traversal interrupted");
+        }
+    }
 }
