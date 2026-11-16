@@ -82,4 +82,24 @@ public interface M3StringBacking extends AutoCloseable {
         }
         return Integer.compare(leftLength, rightLength);
     }
+
+    /**
+     * Compares a UTF-16 code-unit range without materializing its backing.
+     * A null comparison sequence is unequal; invalid ranges are rejected.
+     * The range may split a surrogate pair, as with String substring indexes.
+     */
+    default boolean contentEquals(long id, int start, int end, CharSequence other) {
+        int total = length(id);
+        java.util.Objects.checkFromToIndex(start, end, total);
+        int rangeLength = end - start;
+        if (other == null || other.length() != rangeLength) {
+            return false;
+        }
+        for (int index = 0; index < rangeLength; index++) {
+            if (charAt(id, start + index) != other.charAt(index)) {
+                return false;
+            }
+        }
+        return true;
+    }
 }
