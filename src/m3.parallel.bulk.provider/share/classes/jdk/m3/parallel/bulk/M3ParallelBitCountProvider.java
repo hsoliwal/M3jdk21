@@ -27,11 +27,14 @@ import jdk.internal.vm.parallel.BulkTask;
  * mutates the input nor infers source semantics from a bitmap count. The CPU reference
  * remains the exact oracle, and explicit accelerator requests cannot silently fall back.</p>
  *
- * <p>This compatibility adapter exposes the JDK-internal bulk contract. Callers using that contract must explicitly
- * obtain access to {@code java.base/jdk.internal.vm.parallel}; the public {@code m3.parallel} launch API needs no
+ * <p>This compatibility adapter exposes the JDK-internal bulk contract. Callers using that
+ * contract must explicitly
+ * obtain access to {@code java.base/jdk.internal.vm.parallel}; the public {@code m3.parallel}
+ * launch API needs no
  * internal-package access.</p>
  */
-@SuppressWarnings("exports") // Existing adapter ABI intentionally includes the qualified JDK-internal SPI.
+// Existing adapter ABI intentionally includes the qualified JDK-internal SPI.
+@SuppressWarnings("exports")
 public final class M3ParallelBitCountProvider implements BulkExecutorProvider {
     public static final String OPERATION_ID = "m3.parallel.int-bitcount.v1";
     public static final String INPUT = "bits";
@@ -47,7 +50,8 @@ public final class M3ParallelBitCountProvider implements BulkExecutorProvider {
     public M3ParallelBitCountProvider(Backend backend) {
         this.backend = Objects.requireNonNull(backend, "backend");
         if (!backend.supports(KERNEL)) {
-            throw new IllegalArgumentException("backend cannot run bitcount kernel: " + backend.id());
+            throw new IllegalArgumentException(
+                    "backend cannot run bitcount kernel: " + backend.id());
         }
         providerId = "m3-bitcount-" + backend.id();
         priority = backend.isReference() ? 10 : Math.addExact(20, backend.score());
@@ -80,8 +84,8 @@ public final class M3ParallelBitCountProvider implements BulkExecutorProvider {
                 && task.inputs().equals(List.of(INPUT))
                 && task.outputs().equals(List.of(OUTPUT))
                 && (backend.isReference()
-                    ? task.localWork() == 0
-                    : task.localWork() >= 1 && task.localWork() <= task.workItems());
+                ? task.localWork() == 0
+                : task.localWork() >= 1 && task.localWork() <= task.workItems());
     }
 
     @Override
@@ -105,11 +109,11 @@ public final class M3ParallelBitCountProvider implements BulkExecutorProvider {
         IntBuffer target = IntBuffer.allocate(length);
         int local = backend.isReference() ? 1 : Math.toIntExact(task.localWork());
         try (Plan plan = Plan.builder(backend)
-                .kernel(KERNEL)
-                .grid(Grid1D.of(length, local))
-                .bind(source, Transfer.ONCE)
-                .bind(target, Transfer.ON_DEMAND)
-                .build()) {
+                     .kernel(KERNEL)
+                     .grid(Grid1D.of(length, local))
+                     .bind(source, Transfer.ONCE)
+                     .bind(target, Transfer.ON_DEMAND)
+                     .build()) {
             Verified receipt = Verified.run(plan);
             return new BulkExecution(Map.of(OUTPUT, target.toArray()), id(), receipt.root());
         }

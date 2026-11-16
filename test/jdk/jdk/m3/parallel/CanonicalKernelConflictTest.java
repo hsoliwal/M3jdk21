@@ -9,13 +9,17 @@
  * @run main/othervm CanonicalKernelConflictTest
  */
 
+
+
 import jdk.m3.parallel.JavaKernel;
 import jdk.m3.parallel.JavaKernels;
 import jdk.m3.parallel.KernelId;
 
 public class CanonicalKernelConflictTest {
     public static void main(String[] args) {
-        JavaKernel incompatible = (index, buffers) -> { throw new AssertionError("must not execute"); };
+        JavaKernel incompatible = (index, buffers) -> {
+            throw new AssertionError("must not execute");
+        };
         check("m3.parallel.int-add.v1", incompatible, JavaKernels::intAdd);
         check("m3.parallel.int-bitcount.v1", incompatible, JavaKernels::intBitCount);
         System.out.println("CanonicalKernelConflictTest passed");
@@ -28,7 +32,8 @@ public class CanonicalKernelConflictTest {
             admission.run();
             throw new AssertionError("conflicting body accepted: " + id);
         } catch (IllegalStateException expected) {
-            if (JavaKernels.lookup(id).orElseThrow() != body) throw new AssertionError("previous body replaced");
+            if (JavaKernels.lookup(id).orElseThrow() != body)
+                throw new AssertionError("previous body replaced");
         }
     }
 }

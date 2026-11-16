@@ -23,10 +23,12 @@ import java.util.stream.Stream;
 /** Process-wide backend discovery, run once on first use. Never throws for a faulty provider. */
 final class BackendRegistry {
     static final Backend REFERENCE = new Backend(Backend.REFERENCE_ID, new ReferenceProvider(),
-            EnumSet.of(Backend.Capability.REFERENCE, Backend.Capability.CPU, Backend.Capability.MULTI_THREADED), 0);
+            EnumSet.of(Backend.Capability.REFERENCE, Backend.Capability.CPU,
+                    Backend.Capability.MULTI_THREADED), 0);
 
     private static final int MAX_LOAD_FAILURES = 64;
-    private static final Comparator<Backend> PREFERENCE = Comparator.comparingInt(Backend::score).reversed()
+    private static final Comparator<Backend> PREFERENCE = Comparator
+            .comparingInt(Backend::score).reversed()
             .thenComparing(backend -> !backend.isReference())
             .thenComparing(Backend::id);
 
@@ -44,7 +46,8 @@ final class BackendRegistry {
         byId.forEach((id, providers) -> admit(id, providers, probes, available));
         PROBES = Collections.unmodifiableMap(probes);
         AVAILABLE = Collections.unmodifiableMap(available);
-        PREFERRED = Stream.concat(Stream.of(REFERENCE), available.values().stream()).sorted(PREFERENCE).toList();
+        PREFERRED = Stream.concat(Stream.of(REFERENCE), available.values().stream())
+                .sorted(PREFERENCE).toList();
     }
 
     private BackendRegistry() {
@@ -75,7 +78,8 @@ final class BackendRegistry {
             case BEST -> Stream.concat(Stream.of(REFERENCE), AVAILABLE.values().stream())
                     .min(PREFERENCE).orElse(REFERENCE);
             case ACCELERATOR -> AVAILABLE.values().stream().min(PREFERENCE)
-                    .orElseThrow(() -> new IllegalStateException("no accelerator backend available: " + PROBES));
+                    .orElseThrow(() -> new IllegalStateException(
+                            "no accelerator backend available: " + PROBES));
         };
     }
 
@@ -110,7 +114,8 @@ final class BackendRegistry {
         return providers;
     }
 
-    private static Optional<BackendProvider> instantiate(ServiceLoader.Provider<BackendProvider> provider,
+    private static Optional<BackendProvider> instantiate(
+            ServiceLoader.Provider<BackendProvider> provider,
             Map<String, Probe> probes) {
         try {
             return Optional.of(provider.get());
@@ -129,7 +134,8 @@ final class BackendRegistry {
                 return Optional.empty();
             }
             if (Backend.REFERENCE_ID.equals(id)) {
-                probes.put(key, Probe.unavailable("backend id " + id + " is reserved for the CPU reference"));
+                probes.put(key, Probe.unavailable(
+                        "backend id " + id + " is reserved for the CPU reference"));
                 return Optional.empty();
             }
             return Optional.of(id);
@@ -140,11 +146,12 @@ final class BackendRegistry {
     }
 
     private static void admit(String id, List<BackendProvider> providers, Map<String, Probe> probes,
-            Map<String, Backend> available) {
+                              Map<String, Backend> available) {
         if (providers.size() > 1) {
-            probes.put(id, Probe.unavailable("ambiguous: " + providers.size() + " providers declare id " + id + " ("
+            probes.put(id, Probe.unavailable("ambiguous: " + providers.size()
+                    + " providers declare id " + id + " ("
                     + providers.stream().map(p -> p.getClass().getName()).sorted()
-                            .collect(Collectors.joining(", ")) + ")"));
+                    .collect(Collectors.joining(", ")) + ")"));
             return;
         }
         BackendProvider provider = providers.get(0);
@@ -162,6 +169,7 @@ final class BackendRegistry {
     }
 
     private static Probe failure(Throwable error) {
-        return Probe.unavailable("probe failed: " + error.getClass().getName() + ": " + error.getMessage());
+        return Probe.unavailable(
+                "probe failed: " + error.getClass().getName() + ": " + error.getMessage());
     }
 }
