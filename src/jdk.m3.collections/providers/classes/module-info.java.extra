@@ -731,3 +731,33 @@ exports jdk.m3.collections.brownies.exceptions;
 exports jdk.m3.collections.brownies.helper;
 exports jdk.m3.collections.brownies.helper.primitive;
 exports jdk.m3.collections.brownies.primitive;
+
+// JCTools, development state 5.0.0-SNAPSHOT (legal/jctools.md): the projects jctools-core and jctools-core-jdk11.
+// The library has no module descriptor; these are the nine packages its OSGi annotations export
+exports jdk.m3.collections.jctools.counters;
+exports jdk.m3.collections.jctools.maps;
+exports jdk.m3.collections.jctools.queues;
+exports jdk.m3.collections.jctools.queues.atomic;
+exports jdk.m3.collections.jctools.queues.atomic.unpadded;
+exports jdk.m3.collections.jctools.queues.unpadded;
+exports jdk.m3.collections.jctools.queues.varhandle;
+exports jdk.m3.collections.jctools.queues.varhandle.unpadded;
+exports jdk.m3.collections.jctools.util;
+
+// Capsule 0.7.2 (legal/capsule.md). The library has no module descriptor: every package
+exports jdk.m3.collections.capsule;
+exports jdk.m3.collections.capsule.annotation;
+exports jdk.m3.collections.capsule.core;
+exports jdk.m3.collections.capsule.core.trie;
+exports jdk.m3.collections.capsule.factory;
+exports jdk.m3.collections.capsule.util;
+exports jdk.m3.collections.capsule.util.collection;
+exports jdk.m3.collections.capsule.util.function;
+exports jdk.m3.collections.capsule.util.iterator;
+exports jdk.m3.collections.capsule.util.stream;
+
+// Bifurcan 0.2.0 (legal/bifurcan.md). The library has no module descriptor: every package
+exports jdk.m3.collections.bifurcan;
+exports jdk.m3.collections.bifurcan.hash;
+exports jdk.m3.collections.bifurcan.nodes;
+exports jdk.m3.collections.bifurcan.utils;

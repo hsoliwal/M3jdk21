@@ -1,0 +1,34 @@
+package jdk.m3.collections.jctools.queues;
+
+import jdk.m3.collections.jctools.util.InternalAPI;
+
+import static jdk.m3.collections.jctools.util.UnsafeRefArrayAccess.REF_ARRAY_BASE;
+import static jdk.m3.collections.jctools.util.UnsafeRefArrayAccess.REF_ELEMENT_SHIFT;
+
+/**
+ * This is used for method substitution in the LinkedArray classes code generation.
+ */
+@SuppressWarnings("missing-explicit-ctor")
+@InternalAPI
+public final class LinkedArrayQueueUtil
+{
+    public static int length(Object[] buf)
+    {
+        return buf.length;
+    }
+
+    /**
+     * This method assumes index is actually (index &lt;&lt; 1) because lower bit is
+     * used for resize. This is compensated for by reducing the element shift.
+     * The computation is constant folded, so there's no cost.
+     */
+    public static long modifiedCalcCircularRefElementOffset(long index, long mask)
+    {
+        return REF_ARRAY_BASE + ((index & mask) << (REF_ELEMENT_SHIFT - 1));
+    }
+
+    public static long nextArrayOffset(Object[] curr)
+    {
+        return REF_ARRAY_BASE + ((long) (length(curr) - 1) << REF_ELEMENT_SHIFT);
+    }
+}
