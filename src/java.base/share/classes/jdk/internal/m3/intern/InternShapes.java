@@ -304,7 +304,7 @@ public final class InternShapes {
         if (v instanceof Double d) return prim(8, Double.doubleToLongBits(d));
         if (v instanceof Enum<?> e) return enumValue(scope, e);
         if (v instanceof Record r) return recordValue(scope, r, depth);
-        if (v instanceof Internable i) return i.internInto(this);
+        if (v instanceof Internable i) return i.internInto(this, scope);
         if (v instanceof java.util.List<?> l && isImmutable(l)) return list(scope, l, depth);
         if (v instanceof java.util.Set<?> s && isImmutable(s)) return set(scope, s, depth);
         if (v instanceof java.util.Map<?, ?> m && isImmutable(m)) return map(scope, m, depth);

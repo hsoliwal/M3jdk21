@@ -10,7 +10,8 @@ public interface Internable {
     /**
      * Interns this object into a shared InternShapes space.
      * @param shapes The InternShapes space to intern into.
+     * @param loaderScope Resolution scope of record and enum types met inside this value.
      * @return The interned handle.
      */
-    long internInto(InternShapes shapes);
+    long internInto(InternShapes shapes, long loaderScope);
 }

@@ -63,7 +63,7 @@ public class InternShapesCompositeTest {
         differ(shapes.internRecordValue(scope, new Point(1, "p")), shapes.internRecordValue(scope, new Point(2, "p")), "record components");
         // Internable values intern themselves
         long marker = shapes.internValue(scope, List.of("marker"));
-        Internable custom = s -> marker;
+        Internable custom = (s, sc) -> marker;
         same(shapes.internValue(scope, custom), marker, "Internable");
         // mutable composites are refused; read-only views go through a snapshot
         ArrayList<Integer> mutable = new ArrayList<>(List.of(4, 5));
