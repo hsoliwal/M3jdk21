@@ -60,3 +60,32 @@ jobs:
         run: >-
           mvn -B -ntp -f m3/collections/pom.xml
           -Dtest=MatPrimitiveExportContractTest -DfailIfNoTests=true test
+
+      - name: Execute range jtreg-style main on the actual compiled M3 module
+        shell: bash
+        run: |
+          set -euo pipefail
+          module_dir="$RUNNER_TEMP/m3-arrays/module"
+          test -s "$module_dir/module-info.class"
+          test -s "$module_dir/jdk/m3/collections/CollectionViews.class"
+          test -s "$module_dir/jdk/m3/collections/DefaultProgressMonitor.class"
+          test -s test/jdk/jdk/m3/collections/CollectionViewsRangeCompatibilityTest.java
+          test_dir="$RUNNER_TEMP/m3-real-range-contract"
+          mkdir -p "$test_dir"
+          javac --release 21 -proc:none -Xlint:all,-module -Werror \
+            --module-path "$module_dir" --add-modules jdk.m3.collections \
+            -d "$test_dir" \
+            test/jdk/jdk/m3/collections/CollectionViewsRangeCompatibilityTest.java
+          for mode in default interpreter tier1; do
+            options=()
+            case "$mode" in
+              interpreter) options=(-Xint) ;;
+              tier1) options=(-XX:TieredStopAtLevel=1) ;;
+            esac
+            output="$(java "${options[@]}" \
+              --module-path "$module_dir" --add-modules jdk.m3.collections \
+              -cp "$test_dir" CollectionViewsRangeCompatibilityTest)"
+            printf '%s\n' "$output"
+            test "$output" = "M3_STATIC_RANGE_COMPAT_PASS checks=46"
+          done
+          echo "M3_REAL_MODULE_RANGE_TEST_PASS configurations=3 checks=138"
