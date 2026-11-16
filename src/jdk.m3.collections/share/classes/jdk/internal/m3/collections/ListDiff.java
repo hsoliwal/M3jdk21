@@ -22,9 +22,10 @@ import jdk.m3.collections.LongLongHashMap;
  * longest increasing run of their new positions, stay put; every other old key is removed, every other new key is
  * inserted, and a key that is removed and inserted is reported as a move. The result is an {@link Patch} of int
  * runs.
- * <p>Keys must be unique within each snapshot. Cost: O((n + m) log(n + m)) time, O(n + m) int lanes plus two
+ * <p>Keys must be unique within each snapshot. Cost: O((n + m) log(n + m)) time, O(n + m) int lanes plus up to two
  * open-addressed key maps ({@link LongLongHashMap}); no entry objects. Strictly ascending snapshots use a
- * linear merge and temporary storage proportional to their remove and insert runs.</p>
+ * linear merge and temporary storage proportional to their remove and insert runs. The fallback can reuse an
+ * old-snapshot ordering proof when the new snapshot is at least as large.</p>
  */
 public final class ListDiff {
 	private ListDiff () {
@@ -32,16 +33,20 @@ public final class ListDiff {
 
 	/** Diffs {@code before} into {@code after}; throws {@link IllegalArgumentException} on a duplicate key. */
 	public static Patch diff (long [] before, long [] after) {
-		if (before != null && after != null && strictlyAscending (after) && strictlyAscending (before)) {
-			return sortedDiff (before, after);
+		boolean beforeAscending = false;
+		if (before != null && after != null) {
+			boolean afterAscending = strictlyAscending (after);
+			if (afterAscending || before.length <= after.length) beforeAscending = strictlyAscending (before);
+			if (beforeAscending && afterAscending) return sortedDiff (before, after);
 		}
-		return genericDiff (before, after);
+		return genericDiff (before, after, beforeAscending);
 	}
 
-	/** Original arbitrary-order implementation, retained as the fallback owner. */
-	private static Patch genericDiff (long [] before, long [] after) {
+	/** Arbitrary-order fallback; a proven ascending old snapshot is already duplicate-free. */
+	private static Patch genericDiff (long [] before, long [] after, boolean beforeAscending) {
 		LongLongHashMap newIndex = index (after, "after");
-		index (before, "before");
+		// A successful new index admits any no-larger old size; otherwise retain its original capacity check.
+		if (!beforeAscending || before.length > after.length) index (before, "before");
 		int n = before.length;
 		/* positions in the new snapshot of the old keys that survive, in old order */
 		int [] survivorOld = new int [n], survivorNew = new int [n];
