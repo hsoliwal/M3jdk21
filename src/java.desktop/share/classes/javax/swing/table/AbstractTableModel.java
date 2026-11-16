@@ -29,6 +29,10 @@ import javax.swing.*;
 import javax.swing.event.*;
 import java.io.Serializable;
 import java.util.EventListener;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
+import java.util.Objects;
 
 /**
  *  This abstract class provides default implementations for most of
@@ -266,6 +270,114 @@ public abstract class AbstractTableModel implements TableModel, Serializable
     public void fireTableRowsDeleted(int firstRow, int lastRow) {
         fireTableChanged(new TableModelEvent(this, firstRow, lastRow,
                              TableModelEvent.ALL_COLUMNS, TableModelEvent.DELETE));
+    }
+
+    /**
+     * Notifies all listeners that the run of {@code oldCount} rows that
+     * started at {@code firstRow} has been replaced by a run of
+     * {@code newCount} rows, and that the model already holds the new rows.
+     * Exactly one event is fired, the most precise one that is valid for a
+     * model that has already changed:
+     * <ul>
+     * <li>both counts equal: the rows of the run were updated;
+     * <li>{@code oldCount} zero: the rows of the run were inserted;
+     * <li>{@code newCount} zero: the rows of the run were deleted;
+     * <li>otherwise: all data changed, as {@link #fireTableDataChanged}.
+     * </ul>
+     * No event is fired when both counts are zero.
+     * <p>
+     * A change of both content and size is not reported as two row events:
+     * a listener such as a row sorter may read the whole model again while it
+     * handles the first event, and would then apply the second event to rows
+     * it has already seen.
+     * <p>
+     * For an insertion, a deletion or an update this is the row-level
+     * alternative to {@link #fireTableDataChanged}: a {@code JTable} keeps
+     * its selection and a sorted table places inserted rows in order.
+     * Updated rows of a sorted table move only if its row sorter sorts on
+     * updates, as after {@link #fireTableRowsUpdated}.
+     * This method is an addition of this JDK and is not part of Java SE 21.
+     *
+     * @param  firstRow  the index of the first replaced row
+     * @param  oldCount  the number of rows the run had
+     * @param  newCount  the number of rows the run has now
+     * @throws IllegalArgumentException if an argument is negative
+     *
+     * @see #fireTableRowsChanged
+     * @see TableModelEvent
+     * @see EventListenerList
+     */
+    public void fireTableRowsReplaced(int firstRow, int oldCount, int newCount) {
+        if (firstRow < 0 || oldCount < 0 || newCount < 0) {
+            throw new IllegalArgumentException(
+                    "firstRow, oldCount and newCount must not be negative");
+        }
+        if (oldCount == newCount) {
+            if (oldCount > 0) {
+                fireTableRowsUpdated(firstRow, firstRow + oldCount - 1);
+            }
+        } else if (oldCount == 0) {
+            fireTableRowsInserted(firstRow, firstRow + newCount - 1);
+        } else if (newCount == 0) {
+            fireTableRowsDeleted(firstRow, firstRow + oldCount - 1);
+        } else {
+            fireTableDataChanged();
+        }
+    }
+
+    /**
+     * Notifies all listeners of the difference between the rows the model
+     * had, {@code oldRows}, and the rows it has now, {@code newRows}. The
+     * rows both lists start with and the rows both lists end with are
+     * unchanged; the run between them is reported with
+     * {@link #fireTableRowsReplaced}. A model that builds a new list of rows
+     * can therefore replace
+     * <pre>
+     *     rows = newRows;
+     *     fireTableDataChanged();
+     * </pre>
+     * by
+     * <pre>
+     *     List&lt;Row&gt; oldRows = rows;
+     *     rows = newRows;
+     *     fireTableRowsChanged(oldRows, newRows);
+     * </pre>
+     * and an append, an insertion, a removal or a change of rows in place
+     * reaches the listeners as that, not as a change of the whole table. A
+     * change of both content and size between the unchanged ends is
+     * reported as a change of all data.
+     * <p>
+     * Rows are compared with {@link Objects#equals(Object, Object)}; a row
+     * that is equal before and after is reported as unchanged. The lists are
+     * only read. {@code oldRows} must be the rows as they were: a model that
+     * changes its list in place passes a copy taken before the change.
+     * This method is an addition of this JDK and is not part of Java SE 21.
+     *
+     * @param  oldRows  the rows before the change, one element per row
+     * @param  newRows  the rows the model holds now, one element per row
+     * @throws NullPointerException if a list is {@code null}
+     *
+     * @see #fireTableRowsReplaced
+     */
+    public void fireTableRowsChanged(List<?> oldRows, List<?> newRows) {
+        int oldSize = oldRows.size();
+        int newSize = newRows.size();
+        int limit = Math.min(oldSize, newSize);
+        int prefix = 0;
+        Iterator<?> oldHead = oldRows.iterator();
+        Iterator<?> newHead = newRows.iterator();
+        while (prefix < limit && Objects.equals(oldHead.next(), newHead.next())) {
+            prefix++;
+        }
+        int suffix = 0;
+        ListIterator<?> oldTail = oldRows.listIterator(oldSize);
+        ListIterator<?> newTail = newRows.listIterator(newSize);
+        while (suffix < limit - prefix
+                && Objects.equals(oldTail.previous(), newTail.previous())) {
+            suffix++;
+        }
+        fireTableRowsReplaced(prefix, oldSize - prefix - suffix,
+                newSize - prefix - suffix);
     }
 
     /**
