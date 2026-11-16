@@ -46,12 +46,12 @@ public interface ProgressMonitor {
      * This implementation invokes {@link #begin(String, long)} exactly once,
      * passing the same task reference and {@link #UNKNOWN_WORK}. The selected
      * implementation owns task validation, including handling of a null task.
-     * This overload adds no cancellation or lifecycle callbacks and propagates
+     * This method adds no cancellation or lifecycle callbacks and propagates
      * failures from the selected implementation unchanged.
      *
      * @param task the task description passed to the full-argument implementation
      */
-    default void begin(String task) {
+    default void beginUnknownWork(String task) {
         begin(task, UNKNOWN_WORK);
     }
 
@@ -64,7 +64,7 @@ public interface ProgressMonitor {
      * callbacks and propagates failures from the selected implementation
      * unchanged.
      */
-    default void worked() {
+    default void workedOneUnit() {
         worked(1L);
     }
 

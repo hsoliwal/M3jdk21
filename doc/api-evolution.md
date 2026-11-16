@@ -34,17 +34,17 @@ a borrowed resource merely because a shorter entry point was introduced.
 The progress SPI applies this rule directly:
 
 ```java
-default void begin(String task) {
+default void beginUnknownWork(String task) {
     begin(task, UNKNOWN_WORK);
 }
 
-default void worked() {
+default void workedOneUnit() {
     worked(1L);
 }
 ```
 
 The full-argument hooks retain task validation and progress semantics, including
-the handling of a null task. The default overloads add no monitor state or
+the handling of a null task. The distinct defaults add no monitor state or
 callbacks. Existing concrete class methods retain Java's normal precedence.
 
 The existing whole-array monitored I/O overloads in `InputStream`, `OutputStream`,
@@ -72,6 +72,20 @@ For example, adding `read(char[])` beside `read(CharBuffer)` would make an exist
 not add either array overload to that interface. Test null arguments, lambdas,
 method references, boxing, widening, varargs, erasure and inherited methods when
 they are relevant to the candidate overload set.
+
+Adding an overload with a different argument count can also break previously
+valid method references. For example, an existing `monitor::worked` expression
+selects `Consumer<Long>` over `Function<Long,Object>` when the only declaration is
+`worked(long)`. Adding `worked()` makes that method reference inexact for this
+overload-resolution context and the selector call becomes ambiguous. The same
+problem occurs for `monitor::begin` with the corresponding two-argument selector.
+The proposed short overloads were rejected after this concrete counterexample.
+The progress defaults therefore use distinct names, `beginUnknownWork(String)`
+and `workedOneUnit()`, leaving both established method groups unchanged.
+
+Test method references passed to overloaded functional-interface parameters as
+well as method references assigned to a single known target type. Different
+arity alone is not sufficient evidence that an overload preserves old source.
 
 Unrelated inherited defaults can conflict at compilation and can cause an
 `IncompatibleClassChangeError` when an old binary invokes the method. A superclass
@@ -110,6 +124,7 @@ Focused target tests:
 
 - `test/jdk/java/util/concurrent/ProgressMonitor/DefaultOverloads.java`
 - `test/langtools/tools/javac/compatibility/DefaultApiEvolution.java`
+- `test/langtools/tools/javac/compatibility/MethodReferenceEvolution.java`
 - Existing `test/jdk/java/io/MonitoredIoArrayOverloads.java`
 - Existing progress-provider and `ProgressJob` regressions
 
@@ -119,4 +134,5 @@ Focused target tests:
 - [JLS 13.4.23: overload evolution](https://docs.oracle.com/javase/specs/jls/se21/html/jls-13.html#jls-13.4.23)
 - [JLS 8.4.8.4: inherited methods and abstract superclasses](https://docs.oracle.com/javase/specs/jls/se21/html/jls-8.html#jls-8.4.8.4)
 - [JLS 9.8: functional interfaces](https://docs.oracle.com/javase/specs/jls/se21/html/jls-9.html#jls-9.8)
+- [JLS 15.13.1: exact and inexact method references](https://docs.oracle.com/javase/specs/jls/se21/html/jls-15.html#jls-15.13.1)
 - [JLS 15.12.2.5: most-specific overload selection](https://docs.oracle.com/javase/specs/jls/se21/html/jls-15.html#jls-15.12.2.5)

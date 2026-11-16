@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: GPL-2.0-only
  *
  * @test
- * @summary Progress convenience defaults preserve provider dispatch and borrowed lifecycle
+ * @summary Progress defaults retain exact method references, provider dispatch and borrowed lifecycle
  * @run main/othervm DefaultOverloads
  * @run main/othervm -Xint DefaultOverloads
  */
@@ -16,7 +16,9 @@ import java.util.List;
 import java.util.concurrent.ProgressMonitor;
 import java.util.concurrent.ProgressMonitors;
 import java.util.function.BiConsumer;
+import java.util.function.BiFunction;
 import java.util.function.Consumer;
+import java.util.function.Function;
 import java.util.function.LongConsumer;
 
 public class DefaultOverloads {
@@ -86,34 +88,34 @@ public class DefaultOverloads {
     private static final class Provider extends ExistingHooks { }
 
     /*
-     * These concrete short forms predate implementation of ProgressMonitor in
+     * These concrete named methods predate implementation of ProgressMonitor in
      * the child. Class inheritance must take precedence over interface defaults.
      */
-    private abstract static class ExistingShortForms {
+    private abstract static class ExistingNamedMethods {
         String task;
         int begins;
         int updates;
 
-        public void begin(String task) {
+        public void beginUnknownWork(String task) {
             this.task = task;
             begins++;
         }
 
-        public void worked() {
+        public void workedOneUnit() {
             updates++;
         }
     }
 
-    private static final class ShortFormProvider extends ExistingShortForms
+    private static final class NamedMethodProvider extends ExistingNamedMethods
             implements ProgressMonitor {
         @Override
         public void begin(String task, long totalWork) {
-            throw new AssertionError("interface default bypassed existing short begin");
+            throw new AssertionError("interface default bypassed existing beginUnknownWork");
         }
 
         @Override
         public void worked(long units) {
-            throw new AssertionError("interface default bypassed existing short worked");
+            throw new AssertionError("interface default bypassed existing workedOneUnit");
         }
     }
 
@@ -124,6 +126,7 @@ public class DefaultOverloads {
         existingClassMethodsWin();
         failureIdentity();
         methodReferences();
+        exactMethodReferences();
         noOpAndInterruption();
         weightedChildren();
         unknownAndZeroBudgets();
@@ -132,8 +135,8 @@ public class DefaultOverloads {
     }
 
     private static void methodShape() throws Exception {
-        Method begin = ProgressMonitor.class.getDeclaredMethod("begin", String.class);
-        Method worked = ProgressMonitor.class.getDeclaredMethod("worked");
+        Method begin = ProgressMonitor.class.getDeclaredMethod("beginUnknownWork", String.class);
+        Method worked = ProgressMonitor.class.getDeclaredMethod("workedOneUnit");
         for (Method method : new Method[] { begin, worked }) {
             check(method.isDefault(), method + " is a default method");
             check(Modifier.isPublic(method.getModifiers()), method + " is public");
@@ -151,18 +154,18 @@ public class DefaultOverloads {
         for (String task : new String[] { new String("task"), "", "\uD83D\uDE80", null }) {
             Provider provider = new Provider();
             ProgressMonitor monitor = provider;
-            monitor.begin(task);
+            monitor.beginUnknownWork(task);
             check(provider.begins == 1, "one full-argument begin invocation");
             check(provider.task == task, "task reference, including null, is unchanged");
             check(provider.total == ProgressMonitor.UNKNOWN_WORK, "unknown work sentinel");
             events(provider, "begin");
 
-            monitor.worked();
+            monitor.workedOneUnit();
             check(provider.updates == 1, "one full-argument worked invocation");
             check(provider.units == 1L && provider.completed == 1L, "one work unit");
             events(provider, "begin", "worked");
 
-            monitor.worked();
+            monitor.workedOneUnit();
             check(provider.updates == 2 && provider.completed == 2L,
                     "one additional invocation and unit on repetition");
             events(provider, "begin", "worked", "worked");
@@ -170,14 +173,14 @@ public class DefaultOverloads {
     }
 
     private static void existingClassMethodsWin() {
-        ShortFormProvider provider = new ShortFormProvider();
+        NamedMethodProvider provider = new NamedMethodProvider();
         ProgressMonitor monitor = provider;
         String task = new String("existing class method");
-        monitor.begin(task);
-        monitor.worked();
-        check(provider.begins == 1 && provider.task == task, "inherited short begin wins");
-        check(provider.updates == 1, "inherited short worked wins");
-        monitor.begin(null);
+        monitor.beginUnknownWork(task);
+        monitor.workedOneUnit();
+        check(provider.begins == 1 && provider.task == task, "inherited beginUnknownWork wins");
+        check(provider.updates == 1, "inherited workedOneUnit wins");
+        monitor.beginUnknownWork(null);
         check(provider.begins == 2 && provider.task == null,
                 "existing class method retains null handling");
     }
@@ -188,7 +191,7 @@ public class DefaultOverloads {
                 new AssertionError("provider error") }) {
             Provider begin = new Provider();
             begin.beginFailure = failure;
-            expectSame(failure, () -> begin.begin(null));
+            expectSame(failure, () -> begin.beginUnknownWork(null));
             check(begin.begins == 1 && begin.task == null
                     && begin.total == ProgressMonitor.UNKNOWN_WORK,
                     "begin failure occurs in the selected full-argument hook");
@@ -196,7 +199,7 @@ public class DefaultOverloads {
 
             Provider worked = new Provider();
             worked.workFailure = failure;
-            expectSame(failure, worked::worked);
+            expectSame(failure, worked::workedOneUnit);
             check(worked.updates == 1 && worked.units == 1L,
                     "worked failure occurs in the selected full-argument hook");
             events(worked, "worked");
@@ -216,16 +219,48 @@ public class DefaultOverloads {
                 "existing worked method reference keeps its argument");
         events(provider, "begin", "worked");
 
-        Consumer<String> newBegin = provider::begin;
-        Runnable newWorked = provider::worked;
+        Consumer<String> newBegin = provider::beginUnknownWork;
+        Runnable newWorked = provider::workedOneUnit;
         newBegin.accept(null);
         newWorked.run();
         check(provider.begins == 2 && provider.task == null
                 && provider.total == ProgressMonitor.UNKNOWN_WORK,
-                "short begin method reference dispatches the existing hook");
+                "named begin convenience method reference dispatches the existing hook");
         check(provider.updates == 2 && provider.units == 1L && provider.completed == 4L,
-                "short worked method reference dispatches the existing hook");
+                "named work convenience method reference dispatches the existing hook");
         events(provider, "begin", "worked", "begin", "worked");
+    }
+
+    private static void exactMethodReferences() {
+        Provider provider = new Provider();
+        ProgressMonitor monitor = provider;
+        selectWorked(monitor::worked);
+        selectBegin(monitor::begin);
+        check(provider.updates == 1 && provider.units == 2L,
+                "exact worked reference selects the Consumer overload");
+        check(provider.begins == 1 && provider.task == null && provider.total == 7L,
+                "exact begin reference selects the BiConsumer overload");
+        events(provider, "worked", "begin");
+    }
+
+    @SuppressWarnings("overloads")
+    private static void selectWorked(Consumer<Long> action) {
+        action.accept(2L);
+    }
+
+    @SuppressWarnings("overloads")
+    private static void selectWorked(Function<Long, Object> function) {
+        throw new AssertionError("void worked hook selected a value-returning function");
+    }
+
+    @SuppressWarnings("overloads")
+    private static void selectBegin(BiConsumer<String, Long> action) {
+        action.accept(null, 7L);
+    }
+
+    @SuppressWarnings("overloads")
+    private static void selectBegin(BiFunction<String, Long, Object> function) {
+        throw new AssertionError("void begin hook selected a value-returning function");
     }
 
     private static void noOpAndInterruption() {
@@ -233,8 +268,8 @@ public class DefaultOverloads {
                 ProgressMonitor.NONE, new ProgressMonitor() { }, new Provider() }) {
             Thread.currentThread().interrupt();
             try {
-                monitor.begin(null);
-                monitor.worked();
+                monitor.beginUnknownWork(null);
+                monitor.workedOneUnit();
                 check(Thread.currentThread().isInterrupted(),
                         "convenience operations retain interruption");
                 if (monitor instanceof Provider provider) {
@@ -254,12 +289,12 @@ public class DefaultOverloads {
         Provider fullParent = new Provider();
         ProgressMonitor shortChild = shortParent.child(null, 10L, 3L);
         ProgressMonitor fullChild = fullParent.child(null, 10L, 3L);
-        shortChild.begin(null);
+        shortChild.beginUnknownWork(null);
         fullChild.begin(null, ProgressMonitor.UNKNOWN_WORK);
         events(shortParent);
         events(fullParent);
         for (long expected : new long[] { 3L, 6L, 10L, 10L }) {
-            shortChild.worked();
+            shortChild.workedOneUnit();
             fullChild.worked(1L);
             check(shortParent.completed == expected, "weighted single-unit credit");
             check(shortParent.completed == fullParent.completed
@@ -270,7 +305,7 @@ public class DefaultOverloads {
         }
         shortChild.done();
         fullChild.done();
-        shortChild.worked();
+        shortChild.workedOneUnit();
         fullChild.worked(1L);
         check(shortParent.completed == 10L && fullParent.completed == 10L,
                 "completion and later updates retain the parent budget");
@@ -281,21 +316,21 @@ public class DefaultOverloads {
     private static void unknownAndZeroBudgets() {
         Provider unknownParent = new Provider();
         ProgressMonitor unknown = unknownParent.child(null, 7L, ProgressMonitor.UNKNOWN_WORK);
-        unknown.begin("unknown");
-        unknown.worked();
-        unknown.worked();
+        unknown.beginUnknownWork("unknown");
+        unknown.workedOneUnit();
+        unknown.workedOneUnit();
         check(unknownParent.completed == 0L, "unknown total defers credit");
         events(unknownParent);
         unknown.done();
         unknown.done();
-        unknown.worked();
+        unknown.workedOneUnit();
         check(unknownParent.completed == 7L && unknownParent.updates == 1,
                 "unknown total is credited once at completion");
         events(unknownParent, "worked");
 
         Provider zeroParent = new Provider();
         ProgressMonitor zero = zeroParent.child(null, 0L, 2L);
-        zero.worked();
+        zero.workedOneUnit();
         zero.done();
         check(zeroParent.completed == 0L, "zero parent budget remains zero");
         events(zeroParent);
@@ -310,8 +345,8 @@ public class DefaultOverloads {
         String task = new String("borrowed scope");
         try (ProgressMonitors.Scope scope = ProgressMonitors.bind(borrowed)) {
             check(ProgressMonitors.current() == borrowed, "scope exposes the borrowed monitor");
-            ProgressMonitors.current().begin(task);
-            ProgressMonitors.current().worked();
+            ProgressMonitors.current().beginUnknownWork(task);
+            ProgressMonitors.current().workedOneUnit();
             check(borrowed.task == task && borrowed.total == ProgressMonitor.UNKNOWN_WORK
                     && borrowed.updates == 1 && borrowed.completed == 1L,
                     "scoped convenience calls reach the borrowed provider");

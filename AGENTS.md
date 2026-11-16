@@ -217,6 +217,8 @@ virtual hooks, validation owners, callback order and specified behavior.
 Check old binary execution, unchanged-source recompilation and behavioral
 equivalence separately. Check null/lambda/method-reference overload selection,
 erasure, inherited default conflicts and class-method precedence where relevant.
+Include overloaded functional-interface selector calls; a different argument
+count can still change method-reference exactness and break existing source.
 A Java binary-compatible classification alone is not complete compatibility
 evidence. Retain negative fixtures for unsafe additions. Existing ProgressMonitor
 and monitored-I/O owners are the implementation examples; no parallel API family

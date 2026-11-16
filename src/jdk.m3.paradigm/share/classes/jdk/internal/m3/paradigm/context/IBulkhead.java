@@ -15,6 +15,7 @@
 package jdk.internal.m3.paradigm.context;
 
 import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
@@ -302,7 +303,7 @@ public interface IBulkhead {
             totalCalls.incrementAndGet();
             try {
                 concurrent.incrementAndGet();
-                Future<T> future = executor.submit(operation::get);
+                Future<T> future = executor.submit((Callable<T>) operation::get);
                 return future.get(timeout.toMillis(), TimeUnit.MILLISECONDS);
             } catch (RejectedExecutionException e) {
                 rejectedCalls.incrementAndGet();
@@ -373,7 +374,7 @@ public interface IBulkhead {
                     throw new BulkheadFullException("Virtual thread bulkhead full");
                 }
                 try {
-                    Future<T> future = executor.submit(operation::get);
+                    Future<T> future = executor.submit((Callable<T>) operation::get);
                     return future.get(timeout.toMillis(), TimeUnit.MILLISECONDS);
                 } finally {
                     semaphore.release();
