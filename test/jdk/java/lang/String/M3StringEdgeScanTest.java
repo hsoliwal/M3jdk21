@@ -6,7 +6,8 @@
  * @summary strip, trim and isBlank of M3-backed Strings match a flat peer with and without facts
  * @modules java.base/java.lang:+open
  * @run main/othervm -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage M3StringEdgeScanTest
- * @run main/othervm -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage -XX:-CompactStrings M3StringEdgeScanTest
+ * @run main/othervm -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage
+ *      -XX:-CompactStrings M3StringEdgeScanTest
  */
 
 import java.lang.reflect.Field;

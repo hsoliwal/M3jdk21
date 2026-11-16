@@ -5,8 +5,10 @@
  * @test
  * @summary startsWith and endsWith compare a flat receiver with an M3-backed prefix by content
  * @modules java.base/java.lang:+open
- * @run main/othervm -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage M3StringMixedStartsWithTest
- * @run main/othervm -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage -XX:-CompactStrings M3StringMixedStartsWithTest
+ * @run main/othervm -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage
+ *      M3StringMixedStartsWithTest
+ * @run main/othervm -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage
+ *      -XX:-CompactStrings M3StringMixedStartsWithTest
  */
 
 import java.lang.reflect.Field;

@@ -5,8 +5,10 @@
  * @test
  * @summary Single-unit search of short and very long M3-backed Strings matches a flat peer
  * @modules java.base/java.lang:+open
- * @run main/othervm -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage M3StringLinearUnitSearchTest
- * @run main/othervm -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage -XX:-CompactStrings M3StringLinearUnitSearchTest
+ * @run main/othervm -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage
+ *      M3StringLinearUnitSearchTest
+ * @run main/othervm -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage
+ *      -XX:-CompactStrings M3StringLinearUnitSearchTest
  */
 
 import java.lang.reflect.Field;
