@@ -4,81 +4,90 @@
  */
 package jdk.internal.m3.collections;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
+
 /**
- * M3 five-library superset scaffold {@code FixedSizeListView}: API group {@code FIXED_SIZE_LIST} over arrays and state masks.
- *
- * <p>Provider lineage (LIBRARY_API_MATRIX.tsv, run 20261017-m3-to-public/LIB-SUPERSET):
- * <ul>
- *   <li>JDK Arrays.asList: fixed-size writable array view [license GPLv2+CPE; SUPERSET_VIEW VIEW_OF:LongCompositeViews; priority P2; matrix owner LongCompositeViews]</li>
- * </ul>
- *
- * <p>DOOP mapping: lane kind OBJECT; lanes {@code Object[] valueLane}; offset scheme identity offsets over caller array; state-mask bits FIXED_SIZE; stored nodes NONE; API entry objects NONE (transient facades over slots, never the stored representation); matrix note: direct lane view; identity offsets / FIXED_SIZE flag.
- *
- * <p>Status: SCAFFOLD. Every public atom throws {@link NotYetReceived} until this owner is received through a hash-pinned Synexia recipe with its own
- * provider oracle (never inferred from another provider). Not a {@code java.util} replacement.
+ * Fixed-size, live array-backed sequence. There is exactly one value lane:
+ * the caller's original array. List facades are projected only at the API
+ * boundary; neither entries nor copied per-element state are retained.
+ * The owner does not promise thread safety beyond the caller's array.
  */
 public final class FixedSizeListView<E> {
-    /** State-mask bit {@code FIXED_SIZE} (per-slot state word, bit 0). */
+    /** Fixed-size state is per-view metadata, not one object per element. */
     static final long STATE_FIXED_SIZE = 1L << 0;
 
-    /** Storage lane {@code valueLane}: dynamic primitive/reference array lane. */
+    private static final long[] FIXED_MASK = {STATE_FIXED_SIZE};
     private Object[] valueLane = new Object[0];
-    /** Per-slot state words (FIXED_SIZE); one bit set per slot and state. */
-    private long[] stateMaskWords = new long[0];
-    /** Live slot count. */
+    private final long[] stateMaskWords = FIXED_MASK;
     private int size;
 
-    /** Creates an empty scaffold owner; lanes grow by copy once received. */
-    public FixedSizeListView() {
-    }
+    /** An independent, empty fixed-size view (also preserves the old constructor). */
+    public FixedSizeListView() { }
 
-    /** Reports the declared state-mask bits and lanes for ledgers; never allocates per element. */
+    /** Stable introspection signature retained for clients of the original owner. */
     public static String scaffoldDescriptor() {
         return "M3FixedSizeListView|FIXED_SIZE_LIST|OBJECT|FIXED_SIZE|Object[] valueLane";
     }
 
-    /** Arrays.asList (fixed-size writable view) (scaffold: not yet received). */
+    /** Does not copy the input: updates are visible through both references. */
     public static <E> FixedSizeListView<E> of(E[] backing) {
-        throw new NotYetReceived("M3FixedSizeListView.of");
+        Objects.requireNonNull(backing, "backing");
+        FixedSizeListView<E> view = new FixedSizeListView<>();
+        view.valueLane = backing;
+        view.size = backing.length;
+        return view;
     }
 
-    /** List.get (scaffold: not yet received). */
+    @SuppressWarnings("unchecked")
     public E get(int index) {
-        throw new NotYetReceived("M3FixedSizeListView.get");
+        return (E) valueLane[index];
     }
 
-    /** List.set (writes through to backing array) (scaffold: not yet received). */
+    /** Preserves the runtime component type's ArrayStoreException behavior. */
+    @SuppressWarnings("unchecked")
     public E set(int index, E element) {
-        throw new NotYetReceived("M3FixedSizeListView.set");
+        E prior = (E) valueLane[index];
+        valueLane[index] = element;
+        return prior;
     }
 
-    /** List.indexOf (scaffold: not yet received). */
-    public int indexOf(Object element) {
-        throw new NotYetReceived("M3FixedSizeListView.indexOf");
+    /** Exact List equality direction: candidate.equals(stored), not reverse. */
+    public int indexOf(Object candidate) {
+        if (candidate == null) {
+            for (int i = 0; i < size; i++) {
+                if (valueLane[i] == null) return i;
+            }
+        } else {
+            for (int i = 0; i < size; i++) {
+                if (candidate.equals(valueLane[i])) return i;
+            }
+        }
+        return -1;
     }
 
-    /** List.contains (scaffold: not yet received). */
-    public boolean contains(Object element) {
-        throw new NotYetReceived("M3FixedSizeListView.contains");
+    public boolean contains(Object candidate) {
+        return indexOf(candidate) >= 0;
     }
 
-    /** List.toArray (copy) (scaffold: not yet received). */
+    /** Detached Object[] snapshot, never the retained backing array. */
     public Object[] toArray() {
-        throw new NotYetReceived("M3FixedSizeListView.toArray");
+        return Arrays.copyOf(valueLane, size, Object[].class);
     }
 
-    /** java.util.List facade (scaffold: not yet received). */
-    public java.util.List<E> asList() {
-        throw new NotYetReceived("M3FixedSizeListView.asList");
+    /** The standard JDK fixed-size facade, backed by the same single array. */
+    @SuppressWarnings("unchecked")
+    public List<E> asList() {
+        return Arrays.asList((E[]) valueLane);
     }
 
-    /** List.size (scaffold: not yet received). */
     public int size() {
-        throw new NotYetReceived("M3FixedSizeListView.size");
+        return size;
     }
 
-    /** UOE contract once received (fixed size) (scaffold: not yet received). */
+    /** A fixed-size list cannot append, even when it is empty. */
     public boolean add(E element) {
-        throw new NotYetReceived("M3FixedSizeListView.add");
+        throw new UnsupportedOperationException();
     }
 }
