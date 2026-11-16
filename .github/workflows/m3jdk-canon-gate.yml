@@ -44,7 +44,7 @@ jobs:
           work="$RUNNER_TEMP/canon"
           mkdir -p "$work"
           printf '# canon-gate smoke packet\n' > "$work/spec.md"
-          printf 'path\tsha256\tatom\tpattern\trole\n' > "$work/atoms.tsv"
+          printf 'path\tsha256\tatom\tpattern\trole\texact_hash\tlogic_hash\tstructure_hash\tsim_hash\n' > "$work/atoms.tsv"
           {
             printf 'task_packet\tactive\nsource_doc\tspec.md\ninvariant_id\tCANON-SMOKE\n'
             printf 'run.mode\tdry-run\nrun.profile\tfast\nrun.workers\t1\nrun.shard_count\t1\nrun.shard_index\t0\n'
