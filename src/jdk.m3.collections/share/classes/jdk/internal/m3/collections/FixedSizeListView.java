@@ -85,6 +85,15 @@ public final class FixedSizeListView<E> {
     public int size() {
         return size;
     }
+    //FLLDCIM: CONVERGE - Commons FixedSizeList.isFull and maxSize (BoundedCollection), absent on every hash plane
+    /** A fixed-size list is always full: nothing can be added to it. */
+    public boolean isFull() {
+        return true;
+    }
+    /** The bound of a fixed-size list is its size. */
+    public int maxSize() {
+        return size;
+    }
 
     /** A fixed-size list cannot append, even when it is empty. */
     public boolean add(E element) {

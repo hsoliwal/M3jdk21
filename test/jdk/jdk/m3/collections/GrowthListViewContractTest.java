@@ -139,7 +139,45 @@ public class GrowthListViewContractTest {
         }
     }
 
+    /** Reference semantics of GrowthList.addAll(index, collection) over an ArrayList. */
+    private static boolean donorAddAll(ArrayList<Object> owner, int index, List<Object> elements) {
+        int size = owner.size();
+        boolean padded = index > size;
+        if (padded) owner.addAll(Collections.nCopies(index - size, null));
+        return owner.addAll(index, elements) || padded;
+    }
+
+    private static void bulkInsert() {
+        GrowthListView<Object> actual = new GrowthListView<>();
+        ArrayList<Object> expected = new ArrayList<>();
+        equal(actual.addAll(0, List.of()), donorAddAll(expected, 0, List.of()), "empty into empty");
+        equal(actual.addAll(3, List.of()), donorAddAll(expected, 3, List.of()), "a gap alone is a change");
+        same(actual, expected);
+        equal(actual.addAll(1, Arrays.asList("a", null, "b")), donorAddAll(expected, 1, Arrays.asList("a", null, "b")), "insert");
+        equal(actual.addAll(expected.size(), List.of("end")), donorAddAll(expected, expected.size(), List.of("end")), "append");
+        equal(actual.addAll(expected.size() + 5, List.of("far")), donorAddAll(expected, expected.size() + 5, List.of("far")), "gap");
+        same(actual, expected);
+        equal(failure(() -> actual.addAll(-1, List.of("x"))), IndexOutOfBoundsException.class, "negative index");
+        equal(failure(() -> actual.addAll(2, null)), NullPointerException.class, "null elements");
+        equal(failure(() -> actual.addAll(expected.size() + 9, null)), NullPointerException.class, "null elements beyond the end");
+        same(actual, expected);
+        Random random = new Random(0x67A11L);
+        for (int step = 0; step < 4000; step++) {
+            List<Object> batch = new ArrayList<>();
+            for (int i = random.nextInt(6); i > 0; i--) batch.add(random.nextInt(5) == 0 ? null : "v" + random.nextInt(50));
+            int index = random.nextInt(expected.size() + 8);
+            equal(actual.addAll(index, batch), donorAddAll(expected, index, batch), "random bulk insert");
+            if (step % 40 == 0) same(actual, expected);
+            if (expected.size() > 600) {
+                actual.clear();
+                expected.clear();
+            }
+        }
+        same(actual, expected);
+    }
+
     public static void main(String[] args) throws Exception {
+        bulkInsert();
         boundaries();
         randomized();
         ownership();

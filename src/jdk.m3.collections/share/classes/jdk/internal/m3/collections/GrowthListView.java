@@ -5,6 +5,7 @@
 package jdk.internal.m3.collections;
 
 import java.util.Arrays;
+import java.util.Collection;
 
 /**
  * Dynamic indexed list over one parent-owned {@code Object[]} lane. Indexed
@@ -52,19 +53,19 @@ public final class GrowthListView<E> {
     /** Insert in encounter order, or append after null-padding a gap. */
     public void add(int index, E element) {
         int required = requiredLength(index);
+        int next = index <= size ? increment(size) : required;
+        reserve(next);
+        gap(index, 1);
+        valueLane[index] = element;
+        size = next;
+    }
+
+    /** Opens {@code count} slots at the index: later elements move up, and a gap beyond the end is null-padded. */
+    private void gap(int index, int count) {
         if (index < size) {
-            reserve(increment(size));
-            System.arraycopy(valueLane, index, valueLane, index + 1, size - index);
-            valueLane[index] = element;
-            size++;
-        } else if (index == size) {
-            reserve(increment(size));
-            valueLane[size++] = element;
+            System.arraycopy(valueLane, index, valueLane, index + count, size - index);
         } else {
-            reserve(required);
             Arrays.fill(valueLane, size, index, null);
-            valueLane[index] = element;
-            size = required;
         }
     }
 
@@ -72,6 +73,25 @@ public final class GrowthListView<E> {
         reserve(increment(size));
         valueLane[size++] = element;
         return true;
+    }
+
+    //FLLDCIM: CONVERGE - Commons GrowthList.addAll(int, Collection), absent on every hash plane
+    /**
+     * Insert all elements at the index in their iteration order, after null-padding a gap beyond the
+     * logical end. Reports a change when a gap was padded or an element was inserted. The index and
+     * the elements are read before anything changes.
+     */
+    public boolean addAll(int index, Collection<? extends E> elements) {
+        if (index < 0) throw new IndexOutOfBoundsException("index=" + index);
+        Object[] added = elements.toArray();
+        long required = (long) Math.max(size, index) + added.length;
+        if (required > Integer.MAX_VALUE) throw new OutOfMemoryError("list too large");
+        reserve((int) required);
+        gap(index, added.length);
+        System.arraycopy(added, 0, valueLane, index, added.length);
+        boolean changed = required != size;
+        size = (int) required;
+        return changed;
     }
 
     public int size() { return size; }

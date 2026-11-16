@@ -111,7 +111,26 @@ public final class FixedSizeListViewContractTest {
             }
         }
     }
+    /** Commons FixedSizeList (BoundedCollection): always full, bounded at its size; writes in place keep both. */
+    private static void testBound() {
+        for (int n : new int[]{0, 1, 5, 64}) {
+            Object[] values = new Object[n];
+            FixedSizeListView<Object> view = FixedSizeListView.of(values);
+            yes(view.isFull(), "always full");
+            eq(view.maxSize(), n, "bound is the size");
+            if (n > 0) {
+                view.set(n - 1, "x");
+                yes(view.isFull() && view.maxSize() == n && view.size() == n, "set keeps the bound");
+            }
+            eq(error(() -> view.add("y")), UnsupportedOperationException.class, "a full list refuses add");
+            eq(view.maxSize(), n, "a refused add keeps the bound");
+        }
+        FixedSizeListView<Object> empty = new FixedSizeListView<>();
+        yes(empty.isFull(), "empty view is full");
+        eq(empty.maxSize(), 0, "empty view bound");
+    }
     public static void main(String[] args) throws Exception {
+        testBound();
         testOne(new Object[0]);
         testOne(new Object[]{null});
         testOne(new Object[]{"a", 1, "b", null, Long.valueOf(7L)});
