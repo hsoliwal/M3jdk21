@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -19,7 +19,6 @@ package jdk.m3.collections.apache.properties;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.io.Reader;
 import java.util.Collection;
 import java.util.Collections;
@@ -54,21 +53,21 @@ public class PropertiesFactory extends AbstractPropertiesFactory<Properties> {
         @Override
         public synchronized Object compute(final Object key,
             final BiFunction<? super Object, ? super Object, ? extends Object> remappingFunction) {
-            Objects.requireNonNull(key);
+            Objects.requireNonNull(key, "key");
             throw new UnsupportedOperationException();
         }
 
         @Override
         public synchronized Object computeIfAbsent(final Object key,
             final Function<? super Object, ? extends Object> mappingFunction) {
-            Objects.requireNonNull(key);
+            Objects.requireNonNull(key, "key");
             throw new UnsupportedOperationException();
         }
 
         @Override
         public synchronized Object computeIfPresent(final Object key,
             final BiFunction<? super Object, ? super Object, ? extends Object> remappingFunction) {
-            Objects.requireNonNull(key);
+            Objects.requireNonNull(key, "key");
             throw new UnsupportedOperationException();
         }
 
@@ -104,7 +103,7 @@ public class PropertiesFactory extends AbstractPropertiesFactory<Properties> {
 
         @Override
         public synchronized void forEach(final BiConsumer<? super Object, ? super Object> action) {
-            Objects.requireNonNull(action);
+            Objects.requireNonNull(action, "action");
         }
 
         @Override
@@ -153,8 +152,8 @@ public class PropertiesFactory extends AbstractPropertiesFactory<Properties> {
          */
         @SuppressWarnings("resource")
         @Override
-        public synchronized void load(final InputStream inStream) throws IOException {
-            Objects.requireNonNull(inStream);
+        public synchronized void load(final InputStream inputStream) throws IOException {
+            Objects.requireNonNull(inputStream, "inputStream");
             throw new UnsupportedOperationException();
         }
 
@@ -165,7 +164,7 @@ public class PropertiesFactory extends AbstractPropertiesFactory<Properties> {
         @SuppressWarnings("resource")
         @Override
         public synchronized void load(final Reader reader) throws IOException {
-            Objects.requireNonNull(reader);
+            Objects.requireNonNull(reader, "reader");
             throw new UnsupportedOperationException();
         }
 
@@ -175,17 +174,17 @@ public class PropertiesFactory extends AbstractPropertiesFactory<Properties> {
          */
         @SuppressWarnings("resource")
         @Override
-        public synchronized void loadFromXML(final InputStream in)
+        public synchronized void loadFromXML(final InputStream inputStream)
             throws IOException, InvalidPropertiesFormatException {
-            Objects.requireNonNull(in);
+            Objects.requireNonNull(inputStream, "inputStream");
             throw new UnsupportedOperationException();
         }
 
         @Override
         public synchronized Object merge(final Object key, final Object value,
             final BiFunction<? super Object, ? super Object, ? extends Object> remappingFunction) {
-            Objects.requireNonNull(key);
-            Objects.requireNonNull(value);
+            Objects.requireNonNull(key, "key");
+            Objects.requireNonNull(value, "value");
             throw new UnsupportedOperationException();
         }
 
@@ -196,21 +195,21 @@ public class PropertiesFactory extends AbstractPropertiesFactory<Properties> {
 
         @Override
         public synchronized Object put(final Object key, final Object value) {
-            Objects.requireNonNull(key);
-            Objects.requireNonNull(value);
+            Objects.requireNonNull(key, "key");
+            Objects.requireNonNull(value, "value");
             throw new UnsupportedOperationException();
         }
 
         @Override
-        public synchronized void putAll(final Map<? extends Object, ? extends Object> t) {
-            Objects.requireNonNull(t);
+        public synchronized void putAll(final Map<? extends Object, ? extends Object> map) {
+            Objects.requireNonNull(map, "map");
             throw new UnsupportedOperationException();
         }
 
         @Override
         public synchronized Object putIfAbsent(final Object key, final Object value) {
-            Objects.requireNonNull(key);
-            Objects.requireNonNull(value);
+            Objects.requireNonNull(key, "key");
+            Objects.requireNonNull(value, "value");
             throw new UnsupportedOperationException();
         }
 
@@ -221,50 +220,43 @@ public class PropertiesFactory extends AbstractPropertiesFactory<Properties> {
 
         @Override
         public synchronized Object remove(final Object key) {
-            Objects.requireNonNull(key);
+            Objects.requireNonNull(key, "key");
             throw new UnsupportedOperationException();
         }
 
         @Override
         public synchronized boolean remove(final Object key, final Object value) {
-            Objects.requireNonNull(key);
-            Objects.requireNonNull(value);
+            Objects.requireNonNull(key, "key");
+            Objects.requireNonNull(value, "value");
             throw new UnsupportedOperationException();
         }
 
         @Override
         public synchronized Object replace(final Object key, final Object value) {
-            Objects.requireNonNull(key);
-            Objects.requireNonNull(value);
+            Objects.requireNonNull(key, "key");
+            Objects.requireNonNull(value, "value");
             throw new UnsupportedOperationException();
         }
 
         @Override
         public synchronized boolean replace(final Object key, final Object oldValue, final Object newValue) {
-            Objects.requireNonNull(key);
-            Objects.requireNonNull(oldValue);
-            Objects.requireNonNull(newValue);
+            Objects.requireNonNull(key, "key");
+            Objects.requireNonNull(oldValue, "oldValue");
+            Objects.requireNonNull(newValue, "newValue");
             throw new UnsupportedOperationException();
         }
 
         @Override
         public synchronized void replaceAll(
             final BiFunction<? super Object, ? super Object, ? extends Object> function) {
-            Objects.requireNonNull(function);
+            Objects.requireNonNull(function, "function");
             throw new UnsupportedOperationException();
-        }
-
-        @SuppressWarnings("deprecation")
-        @Override
-        public void save(final OutputStream out, final String comments) {
-            // Implement as super
-            super.save(out, comments);
         }
 
         @Override
         public synchronized Object setProperty(final String key, final String value) {
-            Objects.requireNonNull(key);
-            Objects.requireNonNull(value);
+            Objects.requireNonNull(key, "key");
+            Objects.requireNonNull(value, "value");
             throw new UnsupportedOperationException();
         }
 
@@ -276,12 +268,6 @@ public class PropertiesFactory extends AbstractPropertiesFactory<Properties> {
         @Override
         public Set<String> stringPropertyNames() {
             return Collections.emptySet();
-        }
-
-        @Override
-        public synchronized String toString() {
-            // Implement as super
-            return super.toString();
         }
 
         @Override
@@ -313,7 +299,7 @@ public class PropertiesFactory extends AbstractPropertiesFactory<Properties> {
     /**
      * Subclasses override to provide customized properties instances.
      *
-     * @return a new Properties instance.
+     * @return A new Properties instance.
      */
     @Override
     protected Properties createProperties() {

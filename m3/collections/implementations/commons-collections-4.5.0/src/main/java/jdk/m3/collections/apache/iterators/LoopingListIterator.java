@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -37,13 +37,14 @@ import jdk.m3.collections.apache.ResettableListIterator;
  * ConcurrentModificationException.
  * </p>
  *
- * @param <E> the type of elements returned by this iterator.
+ * @param <E> The type of elements returned by this iterator.
  * @since 3.2
  */
 public class LoopingListIterator<E> implements ResettableListIterator<E> {
 
     /** The list to base the iterator on */
     private final List<E> list;
+
     /** The current list iterator */
     private ListIterator<E> iterator;
 
@@ -55,7 +56,7 @@ public class LoopingListIterator<E> implements ResettableListIterator<E> {
      * passed in and a reference to it held.
      * </p>
      *
-     * @param list the list to wrap
+     * @param list The list to wrap
      * @throws NullPointerException if the list is null
      */
     public LoopingListIterator(final List<E> list) {
@@ -76,7 +77,7 @@ public class LoopingListIterator<E> implements ResettableListIterator<E> {
      * that supports it.
      * </p>
      *
-     * @param obj  the element to insert
+     * @param obj  The element to insert
      * @throws UnsupportedOperationException if the add method is not
      *  supported by the iterator implementation of the underlying list
      */
@@ -123,7 +124,7 @@ public class LoopingListIterator<E> implements ResettableListIterator<E> {
      * If at the end of the list, returns the first element.
      * </p>
      *
-     * @return the object after the last element returned
+     * @return The object after the last element returned
      * @throws NoSuchElementException if there are no elements in the list
      */
     @Override
@@ -147,7 +148,7 @@ public class LoopingListIterator<E> implements ResettableListIterator<E> {
      * the list.
      * </p>
      *
-     * @return the index of the element that would be returned if next() were called
+     * @return The index of the element that would be returned if next() were called
      * @throws NoSuchElementException if there are no elements in the list
      */
     @Override
@@ -169,7 +170,7 @@ public class LoopingListIterator<E> implements ResettableListIterator<E> {
      * that in this case, traversal to find that element takes linear time.
      * </p>
      *
-     * @return the object before the last element returned
+     * @return The object before the last element returned
      * @throws NoSuchElementException if there are no elements in the list
      */
     @Override
@@ -198,7 +199,7 @@ public class LoopingListIterator<E> implements ResettableListIterator<E> {
      * returned, signifying the end of the list.
      * </p>
      *
-     * @return the index of the element that would be returned if previous() were called
+     * @return The index of the element that would be returned if previous() were called
      * @throws NoSuchElementException if there are no elements in the list
      */
     @Override
@@ -255,7 +256,7 @@ public class LoopingListIterator<E> implements ResettableListIterator<E> {
      * that supports it.
      * </p>
      *
-     * @param obj  the element with which to replace the last element returned
+     * @param obj  The element with which to replace the last element returned
      * @throws UnsupportedOperationException if the set method is not
      *  supported by the iterator implementation of the underlying list
      */
@@ -267,7 +268,7 @@ public class LoopingListIterator<E> implements ResettableListIterator<E> {
     /**
      * Gets the size of the list underlying the iterator.
      *
-     * @return the current list size
+     * @return The current list size
      */
     public int size() {
         return list.size();

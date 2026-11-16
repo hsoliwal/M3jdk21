@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -18,6 +18,8 @@ package jdk.m3.collections.apache.collection;
 
 import static java.util.Arrays.asList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -25,6 +27,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Iterator;
 
 import jdk.m3.collections.apache.Transformer;
 import org.junit.jupiter.api.Test;
@@ -34,7 +37,7 @@ import org.junit.jupiter.api.Test;
  * {@link IndexedCollection} implementation.
  */
 @SuppressWarnings("boxing")
-public class IndexedCollectionTest extends AbstractCollectionTest<String> {
+class IndexedCollectionTest extends AbstractCollectionTest<String> {
 
     private static final class IntegerTransformer implements Transformer<String, Integer>, Serializable {
         private static final long serialVersionUID = 809439581555072949L;
@@ -98,7 +101,7 @@ public class IndexedCollectionTest extends AbstractCollectionTest<String> {
     }
 
     @Test
-    public void testAddedObjectsCanBeRetrievedByKey() throws Exception {
+    void testAddedObjectsCanBeRetrievedByKey() throws Exception {
         final Collection<String> coll = makeTestCollection();
         coll.add("12");
         coll.add("16");
@@ -116,7 +119,7 @@ public class IndexedCollectionTest extends AbstractCollectionTest<String> {
     }
 
     @Test
-    public void testDecoratedCollectionIsIndexedOnCreation() throws Exception {
+    void testDecoratedCollectionIsIndexedOnCreation() throws Exception {
         final Collection<String> original = makeFullCollection();
         final IndexedCollection<Integer, String> indexed = decorateUniqueCollection(original);
 
@@ -126,7 +129,7 @@ public class IndexedCollectionTest extends AbstractCollectionTest<String> {
     }
 
     @Test
-    public void testEnsureDuplicateObjectsCauseException() throws Exception {
+    void testEnsureDuplicateObjectsCauseException() throws Exception {
         final Collection<String> coll = makeUniqueTestCollection();
 
         coll.add("1");
@@ -135,7 +138,39 @@ public class IndexedCollectionTest extends AbstractCollectionTest<String> {
     }
 
     @Test
-    public void testReindexUpdatesIndexWhenDecoratedCollectionIsModifiedSeparately() throws Exception {
+    void testFailedUniqueAddDoesNotPolluteDecoratedCollection() {
+        final IndexedCollection<Integer, String> indexed = decorateUniqueCollection(new ArrayList<>());
+        indexed.add("01");
+
+        assertThrows(IllegalArgumentException.class, () -> indexed.add("1"));
+        assertEquals(1, indexed.size());
+        assertEquals(asList("01"), new ArrayList<>(indexed));
+        assertEquals("01", indexed.get(1));
+    }
+
+    @Test
+    void testIteratorRemoveUpdatesIndex() {
+        final IndexedCollection<Integer, String> indexed = decorateUniqueCollection(new ArrayList<>());
+        indexed.add("1");
+        indexed.add("2");
+
+        final Iterator<String> it = indexed.iterator();
+        while (it.hasNext()) {
+            if ("1".equals(it.next())) {
+                it.remove();
+            }
+        }
+
+        assertFalse(indexed.contains("1"));
+        assertNull(indexed.get(1));
+        assertEquals(1, indexed.size());
+        // the unique index must no longer report the removed key
+        indexed.add("1");
+        assertEquals("1", indexed.get(1));
+    }
+
+    @Test
+    void testReindexUpdatesIndexWhenDecoratedCollectionIsModifiedSeparately() throws Exception {
         final Collection<String> original = new ArrayList<>();
         final IndexedCollection<Integer, String> indexed = decorateUniqueCollection(original);
 
@@ -152,6 +187,17 @@ public class IndexedCollectionTest extends AbstractCollectionTest<String> {
         assertEquals("1", indexed.get(1));
         assertEquals("2", indexed.get(2));
         assertEquals("3", indexed.get(3));
+    }
+
+    @Test
+    void testRemovePreservesRemainingValuesWithSameTransformedKey() {
+        @SuppressWarnings("unchecked")
+        final IndexedCollection<Integer, String> indexed = (IndexedCollection<Integer, String>) decorateCollection(new ArrayList<>());
+        indexed.add("01");
+        indexed.add("1");
+        indexed.remove("01");
+        assertEquals("1", indexed.get(1));
+        assertNotNull(indexed.values(1));
     }
 
 }

@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -24,7 +24,7 @@ import jdk.m3.collections.apache.Predicate;
  * This interface enables tools to access the decorated predicates.
  * </p>
  *
- * @param <T> the type of the input to the predicate.
+ * @param <T> The type of the input to the predicate.
  * @since 3.1
  */
 public interface PredicateDecorator<T> extends Predicate<T> {
@@ -35,7 +35,7 @@ public interface PredicateDecorator<T> extends Predicate<T> {
      * The array may be the internal data structure of the predicate and thus
      * should not be altered.
      *
-     * @return the predicates being decorated
+     * @return The predicates being decorated
      */
     Predicate<? super T>[] getPredicates();
 

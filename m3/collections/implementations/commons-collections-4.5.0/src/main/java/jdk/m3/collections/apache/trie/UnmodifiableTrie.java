@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -29,12 +29,13 @@ import jdk.m3.collections.apache.OrderedMapIterator;
 import jdk.m3.collections.apache.Trie;
 import jdk.m3.collections.apache.Unmodifiable;
 import jdk.m3.collections.apache.iterators.UnmodifiableOrderedMapIterator;
+import jdk.m3.collections.apache.map.UnmodifiableEntrySet;
 
 /**
  * An unmodifiable {@link Trie}.
  *
- * @param <K> the type of the keys in this map
- * @param <V> the type of the values in this map
+ * @param <K> The type of the keys in this map
+ * @param <V> The type of the values in this map
  * @since 4.0
  */
 public class UnmodifiableTrie<K, V> implements Trie<K, V>, Serializable, Unmodifiable {
@@ -47,8 +48,8 @@ public class UnmodifiableTrie<K, V> implements Trie<K, V>, Serializable, Unmodif
      *
      * @param <K>  the key type
      * @param <V>  the value type
-     * @param trie  the trie to decorate, must not be null
-     * @return a new unmodifiable trie
+     * @param trie  The trie to decorate, must not be null
+     * @return A new unmodifiable trie
      * @throws NullPointerException if trie is null
      */
     public static <K, V> Trie<K, V> unmodifiableTrie(final Trie<K, ? extends V> trie) {
@@ -68,7 +69,7 @@ public class UnmodifiableTrie<K, V> implements Trie<K, V>, Serializable, Unmodif
     /**
      * Constructor that wraps (not copies).
      *
-     * @param trie  the trie to decorate, must not be null
+     * @param trie  The trie to decorate, must not be null
      * @throws NullPointerException if trie is null
      */
     public UnmodifiableTrie(final Trie<K, ? extends V> trie) {
@@ -77,6 +78,11 @@ public class UnmodifiableTrie<K, V> implements Trie<K, V>, Serializable, Unmodif
         this.delegate = tmpTrie;
     }
 
+    /**
+     * Always throws {@link UnsupportedOperationException}.
+     *
+     * @throws UnsupportedOperationException Always thrown.
+     */
     @Override
     public void clear() {
         throw new UnsupportedOperationException();
@@ -99,7 +105,7 @@ public class UnmodifiableTrie<K, V> implements Trie<K, V>, Serializable, Unmodif
 
     @Override
     public Set<Entry<K, V>> entrySet() {
-        return Collections.unmodifiableSet(delegate.entrySet());
+        return UnmodifiableEntrySet.unmodifiableEntrySet(delegate.entrySet());
     }
 
     @Override
@@ -163,16 +169,35 @@ public class UnmodifiableTrie<K, V> implements Trie<K, V>, Serializable, Unmodif
         return delegate.previousKey(key);
     }
 
+    /**
+     * Always throws {@link UnsupportedOperationException}.
+     *
+     * @param key Ignored.
+     * @param value Ignored.
+     * @throws UnsupportedOperationException Always thrown.
+     */
     @Override
     public V put(final K key, final V value) {
         throw new UnsupportedOperationException();
     }
 
+    /**
+     * Always throws {@link UnsupportedOperationException}.
+     *
+     * @param m Ignored.
+     * @throws UnsupportedOperationException Always thrown.
+     */
     @Override
     public void putAll(final Map<? extends K, ? extends V> m) {
         throw new UnsupportedOperationException();
     }
 
+    /**
+     * Always throws {@link UnsupportedOperationException}.
+     *
+     * @param key Ignored.
+     * @throws UnsupportedOperationException Always thrown.
+     */
     @Override
     public V remove(final Object key) {
         throw new UnsupportedOperationException();

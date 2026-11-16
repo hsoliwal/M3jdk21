@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -20,6 +20,7 @@ import java.util.Comparator;
 
 import jdk.m3.collections.apache.Predicate;
 import jdk.m3.collections.apache.SortedBag;
+import jdk.m3.collections.apache.multiset.PredicatedSortedMultiSet;
 
 /**
  * Decorates another {@link SortedBag} to validate that additions
@@ -38,9 +39,11 @@ import jdk.m3.collections.apache.SortedBag;
  * This class is Serializable from Commons Collections 3.1.
  * </p>
  *
- * @param <E> the type of elements in this bag
+ * @param <E> The type of elements in this bag
  * @since 3.0
+ * @deprecated Since 4.6.0, use {@link PredicatedSortedMultiSet} instead.
  */
+@Deprecated
 public class PredicatedSortedBag<E> extends PredicatedBag<E> implements SortedBag<E> {
 
     /** Serialization version */
@@ -52,10 +55,10 @@ public class PredicatedSortedBag<E> extends PredicatedBag<E> implements SortedBa
      * If there are any elements already in the bag being decorated, they
      * are validated.
      *
-     * @param <E> the type of the elements in the bag
-     * @param bag  the bag to decorate, must not be null
-     * @param predicate  the predicate to use for validation, must not be null
-     * @return a new predicated SortedBag
+     * @param <E> The type of the elements in the bag
+     * @param bag  The bag to decorate, must not be null
+     * @param predicate  The predicate to use for validation, must not be null
+     * @return A new predicated SortedBag
      * @throws NullPointerException if bag or predicate is null
      * @throws IllegalArgumentException if the bag contains invalid elements
      * @since 4.0
@@ -70,8 +73,8 @@ public class PredicatedSortedBag<E> extends PredicatedBag<E> implements SortedBa
      * <p>If there are any elements already in the bag being decorated, they
      * are validated.
      *
-     * @param bag  the bag to decorate, must not be null
-     * @param predicate  the predicate to use for validation, must not be null
+     * @param bag  The bag to decorate, must not be null
+     * @param predicate  The predicate to use for validation, must not be null
      * @throws NullPointerException if bag or predicate is null
      * @throws IllegalArgumentException if the bag contains invalid elements
      */
@@ -87,7 +90,7 @@ public class PredicatedSortedBag<E> extends PredicatedBag<E> implements SortedBa
     /**
      * Gets the decorated sorted bag.
      *
-     * @return the decorated bag
+     * @return The decorated bag
      */
     @Override
     protected SortedBag<E> decorated() {

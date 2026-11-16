@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -23,7 +23,7 @@ import jdk.m3.collections.apache.Predicate;
 /**
  * Predicate implementation that always returns false.
  *
- * @param <T> the type of the input to the predicate.
+ * @param <T> The type of the input to the predicate.
  * @since 3.0
  */
 public final class FalsePredicate<T> extends AbstractPredicate<T> implements Serializable {
@@ -38,8 +38,8 @@ public final class FalsePredicate<T> extends AbstractPredicate<T> implements Ser
     /**
      * Gets a typed instance.
      *
-     * @param <T> the type that the predicate queries
-     * @return the singleton instance
+     * @param <T> The type that the predicate queries
+     * @return The singleton instance
      * @since 4.0
      */
     public static <T> Predicate<T> falsePredicate() {
@@ -55,7 +55,7 @@ public final class FalsePredicate<T> extends AbstractPredicate<T> implements Ser
     /**
      * Returns the singleton instance.
      *
-     * @return the singleton instance.
+     * @return The singleton instance.
      */
     private Object readResolve() {
         return INSTANCE;
@@ -64,7 +64,7 @@ public final class FalsePredicate<T> extends AbstractPredicate<T> implements Ser
     /**
      * Evaluates the predicate returning false always.
      *
-     * @param object  the input object
+     * @param object  The input object
      * @return false always
      */
     @Override

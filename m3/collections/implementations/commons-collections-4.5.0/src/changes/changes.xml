@@ -7,7 +7,7 @@
      (the "License"); you may not use this file except in compliance with
      the License.  You may obtain a copy of the License at
 
-          http://www.apache.org/licenses/LICENSE-2.0
+          https://www.apache.org/licenses/LICENSE-2.0
 
      Unless required by applicable law or agreed to in writing, software
      distributed under the License is distributed on an "AS IS" BASIS,
@@ -22,6 +22,115 @@
     <title>Apache Commons Collections Release Notes</title>
   </properties>
   <body>
+  <release version="4.6.1" date="YYYY-MM-DD" description="This is a feature and maintenance release. Java 8 or later is required.">
+    <!-- FIX -->
+    <action type="fix" dev="ggregory" due-to="Naveed Khan, Gary Gregory">Fix inverted fixed-size guard in FixedSizeSortedMap.putAll (#722).</action>
+    <action type="fix" dev="ggregory" due-to="Naveed Khan, Gary Gregory">Keep existing sort order in ComparatorChain.setComparator (#723).</action>
+    <action type="fix" dev="ggregory" due-to="Naveed Khan, Gary Gregory">Update the index on remove via IndexedCollection.iterator() (#724).</action>
+    <action type="fix" dev="ggregory" due-to="thomaslantern, Gary Gregory">[Javadoc] Fix grammar in ArrayStack class Javadoc (#725).</action>
+    <action type="fix" dev="ggregory" due-to="Gary Gregory">General Javadoc improvements.</action>
+    <action type="fix" dev="ggregory" due-to="Naveed Khan, Gary Gregory">Fix AbstractLinkedList addAll returning true for an empty collection (#726).</action>
+    <action type="fix" dev="ggregory" due-to="Thomas Mortagne, Gary Gregory" issue="COLLECTIONS-898">AbstractSetTest cannot be used with an explicitly typed Set (unless it's based on String) (#727).</action>
+    <action type="fix" dev="ggregory" due-to="Naveed Khan, Gary Gregory">Fix map and bidimap nextKey() skipping a key and throwing for keys not in the map (#728).</action>
+    <action type="fix" dev="ggregory" due-to="Naveed Khan, Gary Gregory">Reset last element in EnumerationIterator.remove() (#729).</action>
+    <action type="fix" dev="ggregory" due-to="Naveed Khan, Gary Gregory">Fix TransformedMultiValuedMap.putAll(K, Iterable) NPE for null value transformer (#731).</action>
+    <action type="fix" dev="ggregory" due-to="Gary Gregory">Fix AbstractReferenceMap.ReferenceEntry.setValue(V) to throw NullPointerException on null input (contract).</action>
+    <action type="fix" dev="ggregory" due-to="Manfred Baedke, Gary Gregory" issue="COLLECTIONS-900">Preserve iteration state, subclass behavior, and later child additions when chaining IteratorChain instances. Reject detected cycles during traversal and removal (#730, #755).</action>
+    <!-- ADD -->
+    <!-- UPDATE -->
+    <action type="update" dev="ggregory" due-to="Gary Gregory">Bump org.apache.commons:commons-parent from 104 to 107.</action>
+    <action type="update" dev="ggregory" due-to="Gary Gregory">[test] Bump com.google.guava:guava-testlib from 33.6.0-jre to 33.7.1-jre (#733).</action>
+    <action type="update" dev="ggregory" due-to="Gary Gregory">[test] Bump org.easymock:easymock from 5.6.0 to 5.7.0 (#732).</action>
+    <action type="update" dev="ggregory" due-to="Gary Gregory">[test] Bump org.apache.commons:commons-lang3 from 3.20.0 to 3.22.0.</action>
+    <action type="update" dev="ggregory" due-to="Gary Gregory">Bump commons-codeccommons-codec from 1.22.1 to 1.23.0.</action>
+    <!-- REMOVE -->
+    <action type="fix" dev="ggregory" due-to="Gary Gregory">Remove reference to sonatype-snapshots in POM (2026-08-15 f009).</action>
+  </release>
+  <release version="4.6.0" date="2026-08-06" description="This is a feature and maintenance release. Java 8 or later is required.">
+    <!-- FIX -->
+    <action type="fix" dev="ggregory" due-to="Gary Gregory" issue="COLLECTIONS-776">Wrapping PassiveExpiringMap in Collections.synchronizedMap breaks expiration.</action>
+    <action type="fix" dev="ggregory" due-to="Gary Gregory">jdk.m3.collections.apache.map.AbstractReferenceMap.ReferenceEntry.toReference(ReferenceStrength, T, int) now throws IllegalArgumentException instead of Error.</action>
+    <action type="fix" dev="ggregory" due-to="Eric Hubert, Gary Gregory">Remove deprecation annotation of jdk.m3.collections.apache.Factory; this will be deprecated in 5.0 in favor of java.util.function.Supplier.</action>
+    <action type="fix" dev="ggregory" due-to="Eric Hubert, Gary Gregory">Remove deprecation annotation of jdk.m3.collections.apache.Predicate; this will be deprecated in 5.0 in favor of java.util.function.Predicate.</action>
+    <action type="fix" dev="ggregory" due-to="Eric Hubert, Gary Gregory">Remove deprecation annotation of jdk.m3.collections.apache.Transformer; this will be deprecated in 5.0 in favor of java.util.function.Function.</action>
+    <action type="fix" dev="ggregory" due-to="Eric Hubert, Gary Gregory">Remove deprecation annotation of jdk.m3.collections.apache.Closure; this will be deprecated in 5.0 in favor of java.util.function.Consumer.</action>
+    <action type="fix" dev="ggregory" due-to="Sebastian Götz, Gary Gregory" issue="COLLECTIONS-874">MapUtils.getLongValue(Map, K, Function) returns a byte instead of a long.</action>
+    <action type="fix" dev="ggregory" due-to="Naveed Khan, Gary Gregory">MapUtils.getIntValue(Map, K, Function) returns a byte instead of an int.</action>
+    <action type="fix" dev="ggregory" due-to="Gary Gregory">Fix exception message in jdk.m3.collections.apache.functors.FunctorUtils.validate(Consumer...)</action>
+    <action type="fix" dev="ggregory" due-to="Gary Gregory">Fix exception message in jdk.m3.collections.apache.iterators.UnmodifiableIterator.remove() to match java.util.Iterator.remove().</action>
+    <action type="fix" dev="pkarwasz" due-to="Piotr P. Karwasz, Joerg Budischewski" issue="COLLECTIONS-838">Calling SetUtils.union on multiple instances of SetView causes JVM to hang</action>
+    <action type="fix" dev="pkarwasz" due-to="Piotr P. Karwasz, Joerg Budischewski" issue="COLLECTIONS-722">Improve IteratorUtils.chainedIterator() performance.</action>
+    <action type="fix" dev="ggregory" due-to="Gary Gregory, PMD">Fix UselessOverridingMethod in jdk.m3.collections.apache.properties.PropertiesFactory.</action>
+    <action type="fix" dev="ggregory" due-to="Adam Rauch, Gary Gregory" issue="COLLECTIONS-693">OrderedProperties.stringPropertyNames() returns an unordered Set.</action>
+    <action type="fix" dev="ggregory" due-to="Gary Gregory" >Fix SortedProperties.keySet() returned an unsorted Set.</action>
+    <action type="fix" dev="ggregory" due-to="Gary Gregory" >Fix SortedProperties.propertyNames() returned an unsorted Enumeration.</action>
+    <action type="fix" dev="ggregory" due-to="Gary Gregory" >Fix SortedProperties.stringPropertyNames() returned an unsorted Set.</action>
+    <action type="fix" dev="ggregory" due-to="Gary Gregory" >Fix SortedProperties.forEach() called its consumer out of order.</action>
+    <action type="fix" dev="ggregory" due-to="Gary Gregory">Fix Apache RAT plugin console warnings.</action>
+    <action type="fix" dev="ggregory" due-to="Paul King, Gary Gregory, Sebb">Add MultiValuedMap.inverted() #665.</action>
+    <action type="fix" dev="ggregory" due-to="John Griffin, Gary Gregory" issue="COLLECTIONS-885">PatriciaTrie submap and range view operations silently mutate trie structure resulting in ConcurrentModificationException for any iterating threads #672.</action>
+    <action type="fix" dev="ggregory" due-to="Partha Protim Paul" issue="COLLECTIONS-886">[javadoc] CompositeSet.addComposited(Set) does not throw NullPointerException when null is passed #675.</action>
+    <action type="fix" dev="ggregory" due-to="Partha Paul, Gary Gregory" issue="COLLECTIONS-887">ConcurrentReferenceHashMap.remove(key), remove(key, value), replace(key, value), and replace(key, oldValue, newValue) throw NullPointerException inconsistently.</action>
+    <action type="fix" dev="ggregory" due-to="Marc Carter, Gary Gregory" issue="COLLECTIONS-888">PatriciaTrie incompatible with Java 21 (JEP 431 Sequenced Collections).</action>
+    <action type="fix" dev="ggregory" due-to="Dexter.k, Gary Gregory">Reject non-positive entry count in bag/multiset doReadObject (#679).</action>
+    <action type="fix" dev="ggregory" due-to="Dexter.k, Gary Gregory">Fix most Junit 5 nested tests (#681).</action>
+    <action type="fix" dev="ggregory" due-to="Suhyeon Park, Gary Gregory" issue="COLLECTIONS-881">MultiMapUtils.getXXX ensure safe copy (#669).</action>
+    <action type="fix" dev="ggregory" due-to="Dexter.k, Gary Gregory">Re-validate entries in PredicatedMap/PredicatedCollection readObject (#682).</action>
+    <action type="fix" dev="ggregory" due-to="Ruiqi Dong, Gary Gregory" issue="COLLECTIONS-889">IndexedCollection.remove(Object) removes all values for a non-unique index key.</action>
+    <action type="fix" dev="ggregory" due-to="Ruiqi Dong, Gary Gregory" issue="COLLECTIONS-890">TransformIterator throws NullPointerException when its transformer is null.</action>
+    <action type="fix" dev="ggregory" due-to="Ruiqi Dong, Gary Gregory" issue="COLLECTIONS-892">IndexedCollection.add(Object) mutates unique indexed collections before rejecting duplicate keys.</action>
+    <action type="fix" dev="ggregory" due-to="Maxim Safronov, Gary Gregory" issue="COLLECTIONS-878">MapUtils.invertMap() improves HashMap construction (#652).</action>
+    <action type="fix" dev="ggregory" due-to="Dexter.k, Gary Gregory">Validate order and uniqueness invariants in decorator readObject() (#684).</action>
+    <action type="fix" dev="ggregory" due-to="Gary Gregory">TransformIterator now fail-fast on a null Iterator (#686).</action>
+    <action type="fix" dev="ggregory" due-to="sankalp suman, Ben Manes" issue="COLLECTIONS-884">[COLLECTIONS-884] Fix JUnit 5 test discovery for Map EntrySet and Values views (#689).</action>
+    <action type="fix" dev="ggregory" due-to="Dexter.k, Gary Gregory">Reject non-positive maxSize in LRUMap.doReadObject() (#690).</action>
+    <action type="fix" dev="ggregory" due-to="Naveed Khan, Alex Herbert, Gary Gregory">[javadoc] Document that BloomFilter merge operations are non-atomic and a filter that throws during a merge should be considered invalid (#695).</action>    
+    <action type="fix" dev="ggregory" due-to="Vasiliy Mikhailov, Gary Gregory">Fix AbstractMapBag.retainAll removing all copies when the other bag has more (#692).</action>
+    <action type="fix" dev="ggregory" due-to="Vasiliy Mikhailov, Gary Gregory">Fix integer overflow in SetOperations.cosineSimilarity (#693).</action>
+    <action type="fix" dev="ggregory" due-to="Vasiliy Mikhailov, Gary Gregory">Validate deserialized size in CircularFifoQueue.readObject (#678).</action>
+    <action type="fix" dev="ggregory" due-to="Vasiliy Mikhailov, Gary Gregory">Do not mutate the input map in SwitchTransformer.switchTransformer (#696).</action>
+    <action type="fix" dev="ggregory" due-to="Naveed Khan, Gary Gregory">Do not mutate the input map in SwitchClosure.switchClosure, ClosureUtils.switchMapClosure and TransformerUtils.switchMapTransformer (#700).</action>
+    <action type="fix" dev="ggregory" due-to="Dexter.k, Gary Gregory">Fix stale size in AbstractMapMultiSet view iterator remove (#701).</action>
+    <action type="fix" dev="ggregory" due-to="Javid Khan, Gary Gregory">Stop ExtendedMessageFormat seekNonWs reading past the pattern end (#1740).</action>
+    <action type="fix" dev="ggregory" due-to="Dexter.k, Gary Gregory">Remove stale keys in OrderedProperties compute and merge (#702).</action>
+    <action type="fix" dev="ggregory" due-to="sankalp suman, Gary Gregory" issue="COLLECTIONS-776">Fix expiration bypass in PassiveExpiringMap when wrapped in SynchronizedMap (#694).</action>
+    <action type="fix" dev="ggregory" due-to="Dexter.k, Gary Gregory">Fix MapUtils.getIntValue(Map, K, Function) returning a byte (#704).</action>
+    <action type="fix" dev="ggregory" due-to="Paul King, Gary Gregory" issue="COLLECTIONS-893">Bring (Collection compliant) MultiSet family to (non-compliant) Bag parity (#703).</action>
+    <action type="fix" dev="ggregory" due-to="Naveed Khan, Gary Gregory">AbstractMapBag and AbstractMapMultiSet.add(Object, int) overflow the size and element count past Integer.MAX_VALUE (#705).</action>
+    <action type="fix" dev="ggregory" due-to="Paul King, Sol Thiessen, Gary Gregory" issue="COLLECTIONS-894">TreeBag documentation should explicitly warn about infinite loop as a result of concurrent writes (#707).</action>
+    <action type="fix" dev="ggregory" due-to="Paul King, Gary Gregory" issue="COLLECTIONS-896">Add TransformedMultiSet plus fill minor gaps for MultiSet vs. Bags (#708).</action>
+    <action type="fix" dev="ggregory" due-to="Paul King, Gary Gregory" issue="COLLECTIONS-895">Deprecate the Bag family in favor of the MultiSet family (#709).</action>
+    <action type="fix" dev="ggregory" due-to="Naveed Khan, Gary Gregory">CompositeCollection, CompositeSet, CompositeMap, AbstractMultiValuedMap and AbstractMultiSet size() overflow int when the total exceeds Integer.MAX_VALUE (#710).</action>
+    <action type="fix" dev="ggregory" due-to="Naveed Khan, Gary Gregory">DualHashBidiMap, DualLinkedHashBidiMap, and DualTreeBidiMap entrySet() Map.Entry.setValue(Object) returns the new value instead of the previous value (#711).</action>
+    <action type="fix" dev="ggregory" due-to="sankalp suman, Gary Gregory" issue="COLLECTIONS-714">PatriciaTrie ignores trailing null characters in keys (#712).</action>
+    <action type="fix" dev="ggregory" due-to="Naveed Khan, Gary Gregory">Flat3Map entrySet().remove(Object) removes a mapping when only the key matches, ignoring the entry value (#714).</action>
+    <action type="fix" dev="ggregory" due-to="Naveed Khan, Gary Gregory">SetUniqueList and ListOrderedSet leave the backing collection inconsistent when add(int, Object) or addAll(int, Collection) is called with an out-of-range index.</action>
+    <action type="fix" dev="ggregory" due-to="Naveed Khan, Gary Gregory">CollectionUtils.collate(Iterable, Iterable, Comparator, boolean) does not remove duplicate null elements when includeDuplicates is false (#715).</action>
+    <action type="fix" dev="ggregory" due-to="Naveed Khan, Gary Gregory">Do not register a value collection until an add succeeds (#717).</action>
+    <action type="fix" dev="ggregory" due-to="Naveed Khan, Gary Gregory">Increment modCount after the bounds check in TreeList add and remove (#716).</action>
+    <action type="fix" dev="ggregory" due-to="Gary Gregory">Add messages when throwing NullPointerException.</action>
+    <action type="fix" dev="ggregory" due-to="Naveed Khan, Gary Gregory">Reject remove on the Unmodifiable map from SplitMapUtils.readableMap (#718).</action>
+    <action type="fix" dev="ggregory" due-to="Naveed Khan, Gary Gregory">Keep OrderedProperties keySet and values in sync with the map (#719).</action>
+    <action type="fix" dev="ggregory" due-to="Daniele, THE_ZAID, Gary Gregory" issue="COLLECTIONS-859">Clarify ambiguous @return Javadoc in PredicateUtils.</action>
+    <action type="fix" dev="ggregory" due-to="Naveed Khan, Gary Gregory">Synchronize forEach() in SynchronizedCollection (#720).</action>
+    <!-- ADD -->
+    <action type="add" dev="ggregory" due-to="Gary Gregory">Add generics to UnmodifiableIterator for the wrapped type.</action>
+    <action type="add" dev="ggregory" due-to="Gary Gregory">Add a Maven benchmark profile for JMH.</action>
+    <action type="add" dev="ggregory" due-to="Gary Gregory">Add a Maven benchmark profile for JMH.</action>
+    <action type="add" issue="COLLECTIONS-893" dev="paulk" due-to="Paul King">Add SortedMultiSet interface, TreeMultiSet implementation, sorted multiset decorators, and MultiSetUtils factory methods, giving MultiSet feature parity with SortedBag/TreeBag.</action>
+    <action type="add" issue="COLLECTIONS-893" dev="paulk" due-to="Paul King">Add MultiSetUtils.containsOccurrences/removeOccurrences/retainOccurrences providing Bag's cardinality-respecting semantics under explicit names, and Bag-to-MultiSet migration notes in the Bag javadoc.</action>
+    <action type="add" dev="ggregory" due-to="Gary Gregory">Add IterableUtils.sumSizes(Iterable&lt;? extends Collection&lt;E&gt;&gt;).</action>
+    <!-- UPDATE -->
+    <action type="update" dev="ggregory" due-to="Gary Gregory, Dependabot">Bump org.apache.commons:commons-parent from 81 to 104 #612, #645, #662, #663.</action>
+    <action type="update" dev="ggregory" due-to="Gary Gregory">Bump com.google.guava:guava-testlib from 33.3.1-jre to 33.5.0-jre #644.</action>
+    <action type="update" dev="ggregory" due-to="Gary Gregory">Bump PMD from 7.8.0 to 7.13.0 (now inherited from parent POM).</action>
+    <action type="update" dev="ggregory" due-to="Gary Gregory">Bump org.easymock:easymock from 5.5.0 to 5.6.0 #617.</action>
+    <action type="update" dev="ggregory" due-to="Gary Gregory">[test] Bump org.apache.commons:commons-lang3 from 3.17.0 to 3.20.0 #625.</action>
+    <action type="update" dev="ggregory" due-to="Gary Gregory">[test] Bump commons-io:commons-io from 2.19.0 to 2.22.0.</action>
+    <action type="update" dev="ggregory" due-to="Gary Gregory">Bump commons-codec:commons-codec from 1.18.0 to 1.22.1.</action>
+    <action type="update" dev="ggregory" due-to="Gary Gregory">Bump doxia.module.markdown.version from 2.0.0 to 2.1.0.</action>
+    <action type="update" dev="ggregory" due-to="Gary Gregory, Dependabot">Bump com.google.guava:guava-testlib from 33.5.0-jre to 33.6.0-jre (#680).</action>
+  </release>
   <release version="4.5.0" date="2025-04-19" description="This is a feature and maintenance release. Java 8 or later is required.">
     <!-- FIX -->
     <action type="fix" dev="ggregory" due-to="Gary Gregory">Refactor AbstractPropertiesFactory.load(File) to use NIO.</action>
@@ -239,7 +348,7 @@
       Return 0 immediately if the given iterable is null in IterableUtils#size. Update tests.
     </action>
     <action issue="COLLECTIONS-697" dev="eax" type="fix" due-to="Ranjan George">
-      JavaDoc for FixedSizeList should warn that modifying underlying list is still allowed and is not prevented
+      Javadoc for FixedSizeList should warn that modifying underlying list is still allowed and is not prevented
     </action>
     <action dev="ggregory" type="fix" due-to="dota17">
       Fill in some map test cases #104.

@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,6 +16,8 @@
  */
 package jdk.m3.collections.apache.map;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -23,6 +25,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
+import jdk.m3.collections.apache.OrderedMap;
 import jdk.m3.collections.apache.Unmodifiable;
 import org.junit.jupiter.api.Test;
 
@@ -30,8 +33,8 @@ import org.junit.jupiter.api.Test;
  * Extension of {@link AbstractSortedMapTest} for exercising the
  * {@link UnmodifiableSortedMap} implementation.
  *
- * @param <K> the key type.
- * @param <V> the value type.
+ * @param <K> The key type.
+ * @param <V> The value type.
  */
 public class UnmodifiableSortedMapTest<K, V> extends AbstractSortedMapTest<K, V> {
 
@@ -68,7 +71,7 @@ public class UnmodifiableSortedMapTest<K, V> extends AbstractSortedMapTest<K, V>
     }
 
     @Test
-    public void testDecorateFactory() {
+    void testDecorateFactory() {
         final SortedMap<K, V> map = makeFullMap();
         assertSame(map, UnmodifiableSortedMap.unmodifiableSortedMap(map));
 
@@ -76,7 +79,7 @@ public class UnmodifiableSortedMapTest<K, V> extends AbstractSortedMapTest<K, V>
     }
 
     @Test
-    public void testHeadMap() {
+    void testHeadMap() {
         final SortedMap<K, V> map = makeFullMap();
         final SortedMap<K, V> m = new TreeMap<>();
         // "again" is the first key of the map
@@ -89,7 +92,20 @@ public class UnmodifiableSortedMapTest<K, V> extends AbstractSortedMapTest<K, V>
     }
 
     @Test
-    public void testSubMap() {
+    void testNextKey() {
+        final SortedMap<String, String> base = new TreeMap<>();
+        base.put("a", "1");
+        base.put("c", "3");
+        final OrderedMap<String, String> map = (OrderedMap<String, String>) UnmodifiableSortedMap.unmodifiableSortedMap(base);
+        assertEquals("c", map.nextKey("a"));
+        // an absent key has no next key, whether inside the key range or past the end
+        assertNull(map.nextKey("b"));
+        assertNull(map.nextKey("c"));
+        assertNull(map.nextKey("z"));
+    }
+
+    @Test
+    void testSubMap() {
         final SortedMap<K, V> map = makeFullMap();
 
         assertSame(18, map.size());
@@ -104,7 +120,7 @@ public class UnmodifiableSortedMapTest<K, V> extends AbstractSortedMapTest<K, V>
     }
 
     @Test
-    public void testTailMap() {
+    void testTailMap() {
         final SortedMap<K, V> map = makeFullMap();
 
         assertSame(18, map.size());
@@ -117,12 +133,12 @@ public class UnmodifiableSortedMapTest<K, V> extends AbstractSortedMapTest<K, V>
     }
 
     @Test
-    public void testUnmodifiable() {
+    void testUnmodifiable() {
         assertTrue(makeObject() instanceof Unmodifiable);
         assertTrue(makeFullMap() instanceof Unmodifiable);
     }
 
-//    public void testCreate() throws Exception {
+//    void testCreate() throws Exception {
 //        resetEmpty();
 //        writeExternalFormToDisk(
 //            (java.io.Serializable) map,

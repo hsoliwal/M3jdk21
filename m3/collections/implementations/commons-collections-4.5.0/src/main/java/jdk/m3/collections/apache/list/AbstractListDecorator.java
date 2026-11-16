@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -28,7 +28,7 @@ import jdk.m3.collections.apache.collection.AbstractCollectionDecorator;
  * Methods are forwarded directly to the decorated list.
  * </p>
  *
- * @param <E> the type of the elements in the list.
+ * @param <E> The type of the elements in the list.
  * @since 3.0
  */
 public abstract class AbstractListDecorator<E> extends AbstractCollectionDecorator<E> implements List<E> {
@@ -38,6 +38,7 @@ public abstract class AbstractListDecorator<E> extends AbstractCollectionDecorat
 
     /**
      * Constructor only used in deserialization, do not use otherwise.
+     *
      * @since 3.1
      */
     protected AbstractListDecorator() {
@@ -46,7 +47,7 @@ public abstract class AbstractListDecorator<E> extends AbstractCollectionDecorat
     /**
      * Constructor that wraps (not copies).
      *
-     * @param list  the list to decorate, must not be null
+     * @param list  The list to decorate, must not be null
      * @throws NullPointerException if list is null
      */
     protected AbstractListDecorator(final List<E> list) {
@@ -66,7 +67,7 @@ public abstract class AbstractListDecorator<E> extends AbstractCollectionDecorat
     /**
      * Gets the list being decorated.
      *
-     * @return the decorated list
+     * @return The decorated list
      */
     @Override
     protected List<E> decorated() {

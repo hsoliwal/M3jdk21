@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -53,7 +53,7 @@ public final class BooleanComparator implements Comparator<Boolean>, Serializabl
      *
      * @param trueFirst when {@code true}, sort
      * {@code true} {@code Boolean}s before {@code false}
-     * @return a singleton BooleanComparator instance
+     * @return A singleton BooleanComparator instance
      * @since 4.0
      */
     public static BooleanComparator booleanComparator(final boolean trueFirst) {
@@ -71,7 +71,7 @@ public final class BooleanComparator implements Comparator<Boolean>, Serializabl
      * virtual machine.
      * </p>
      *
-     * @return the false first singleton BooleanComparator
+     * @return The false first singleton BooleanComparator
      */
     public static BooleanComparator getFalseFirstComparator() {
         return FALSE_FIRST;
@@ -88,7 +88,7 @@ public final class BooleanComparator implements Comparator<Boolean>, Serializabl
      * virtual machine.
      * </p>
      *
-     * @return the true first singleton BooleanComparator
+     * @return The true first singleton BooleanComparator
      */
     public static BooleanComparator getTrueFirstComparator() {
         return TRUE_FIRST;
@@ -127,8 +127,8 @@ public final class BooleanComparator implements Comparator<Boolean>, Serializabl
      * Compares two non-{@code null} {@code Boolean} objects
      * according to the value of {@link #sortsTrueFirst()}.
      *
-     * @param b1  the first boolean to compare
-     * @param b2  the second boolean to compare
+     * @param b1  The first boolean to compare
+     * @param b2  The second boolean to compare
      * @return negative if obj1 is less, positive if greater, zero if equal
      * @throws NullPointerException when either argument {@code null}
      */
@@ -149,7 +149,7 @@ public final class BooleanComparator implements Comparator<Boolean>, Serializabl
      * iff {@code <em>that</em>} is a {@link BooleanComparator}
      * whose value of {@link #sortsTrueFirst()} is equal to mine.
      *
-     * @param object  the object to compare to
+     * @param object  The object to compare to
      * @return true if equal
      */
     @Override
@@ -163,7 +163,7 @@ public final class BooleanComparator implements Comparator<Boolean>, Serializabl
      * Implement a hash code for this comparator that is consistent with
      * {@link #equals(Object) equals}.
      *
-     * @return a hash code for this comparator.
+     * @return A hash code for this comparator.
      */
     @Override
     public int hashCode() {
@@ -176,10 +176,10 @@ public final class BooleanComparator implements Comparator<Boolean>, Serializabl
      * I sort {@code true} values before
      * {@code false} values.  In other words,
      * returns {@code true} iff
-     * {@link #compare(Boolean,Boolean) compare(Boolean.FALSE,Boolean.TRUE)}
+     * {@link #compare(Boolean,Boolean) compare(Boolean.FALSE, Boolean.TRUE)}
      * returns a positive value.
      *
-     * @return the trueFirst flag
+     * @return The trueFirst flag
      */
     public boolean sortsTrueFirst() {
         return trueFirst;

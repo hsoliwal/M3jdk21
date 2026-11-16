@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -23,7 +23,7 @@ import java.util.Iterator;
  * Adapter to make an {@link Iterator Iterator} instance appear to be an
  * {@link Enumeration Enumeration} instance.
  *
- * @param <E> the type of elements returned by this iterator.
+ * @param <E> The type of elements returned by this iterator.
  * @since 1.0
  */
 public class IteratorEnumeration<E> implements Enumeration<E> {
@@ -42,7 +42,7 @@ public class IteratorEnumeration<E> implements Enumeration<E> {
      * Constructs a new {@code IteratorEnumeration} that will use the given
      * iterator.
      *
-     * @param iterator the iterator to use
+     * @param iterator The iterator to use
      */
     public IteratorEnumeration(final Iterator<? extends E> iterator) {
         this.iterator = iterator;
@@ -51,7 +51,7 @@ public class IteratorEnumeration<E> implements Enumeration<E> {
     /**
      * Gets the underlying iterator.
      *
-     * @return the underlying iterator
+     * @return The underlying iterator
      */
     public Iterator<? extends E> getIterator() {
         return iterator;
@@ -70,7 +70,7 @@ public class IteratorEnumeration<E> implements Enumeration<E> {
     /**
      * Returns the next element from the underlying iterator.
      *
-     * @return the next element from the underlying iterator.
+     * @return The next element from the underlying iterator.
      * @throws java.util.NoSuchElementException if the underlying iterator has
      * no more elements
      */
@@ -82,7 +82,7 @@ public class IteratorEnumeration<E> implements Enumeration<E> {
     /**
      * Sets the underlying iterator.
      *
-     * @param iterator the new underlying iterator
+     * @param iterator The new underlying iterator
      */
     public void setIterator(final Iterator<? extends E> iterator) {
         this.iterator = iterator;

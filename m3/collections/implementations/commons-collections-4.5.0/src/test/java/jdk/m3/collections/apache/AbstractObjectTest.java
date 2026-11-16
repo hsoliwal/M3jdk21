@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package jdk.m3.collections.apache;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -38,12 +39,12 @@ import org.junit.jupiter.api.Test;
 /**
  * Tests {@link Object}.
  * <p>
- * To use, simply extend this class, and implement
- * the {@link #makeObject()} method.
+ * To use, simply extend this class, and implement the {@link #makeObject()} method.
+ * </p>
  * <p>
- * If your {@link Object} fails one of these tests by design,
- * you may still use this base set of cases.  Simply override the
- * test case (method) your {@link Object} fails.
+ * If your {@link Object} fails one of these tests by design, you may still use this base set of cases. Simply override the test case (method) your
+ * {@link Object} fails.
+ * </p>
  */
 public abstract class AbstractObjectTest extends BulkTest {
 
@@ -74,37 +75,27 @@ public abstract class AbstractObjectTest extends BulkTest {
         return retval.toString();
     }
 
-    // protected implementation
     /**
-     * Gets the version of Collections that this object tries to
-     * maintain serialization compatibility with. Defaults to 4, due to
-     * the package change to collections4 introduced in version 4.
+     * Gets the version of Collections that this object tries to maintain serialization compatibility with. Defaults to 4, due to the package change to
+     * collections4 introduced in version 4. This constant makes it possible for TestMap (and other subclasses, if necessary) to automatically check SCM for a
+     * versionX copy of a Serialized object, so we can make sure that compatibility is maintained. See, for example, TestMap.getCanonicalFullMapName(Map map).
+     * Subclasses can override this variable, indicating compatibility with earlier Collections versions.
      *
-     * This constant makes it possible for TestMap (and other subclasses,
-     * if necessary) to automatically check SCM for a versionX copy of a
-     * Serialized object, so we can make sure that compatibility is maintained.
-     * See, for example, TestMap.getCanonicalFullMapName(Map map).
-     * Subclasses can override this variable, indicating compatibility
-     * with earlier Collections versions.
-     *
-     * @return The version, or {@code null} if this object shouldn't be
-     * tested for compatibility with previous versions.
+     * @return The version, or {@code null} if this object shouldn't be tested for compatibility with previous versions.
      */
     public String getCompatibilityVersion() {
         return "4";
     }
 
     /**
-     * Returns true to indicate that the collection supports equals() comparisons.
-     * This implementation returns true;
+     * Returns true to indicate that the collection supports equals() comparisons. This implementation returns true;
      */
     public boolean isEqualsCheckable() {
         return true;
     }
 
     /**
-     * Is serialization testing supported.
-     * Default is true.
+     * Is serialization testing supported. Default is true.
      */
     public boolean isTestSerialization() {
         return true;
@@ -113,16 +104,15 @@ public abstract class AbstractObjectTest extends BulkTest {
     /**
      * Implement this method to return the object to test.
      *
-     * @return the object to test
+     * @return The object to test.
      */
     public abstract Object makeObject();
 
     /**
-     * Read a Serialized or Externalized Object from bytes.
-     * Useful for verifying serialization in memory.
+     * Reads a Serialized or Externalized Object from bytes. Useful for verifying serialization in memory.
      *
-     * @param b byte array containing a serialized Object
-     * @return Object contained in the bytes
+     * @param b byte array containing a serialized Object.
+     * @return Object contained in the bytes.
      * @throws IOException
      * @throws ClassNotFoundException
      */
@@ -132,12 +122,10 @@ public abstract class AbstractObjectTest extends BulkTest {
     }
 
     /**
-     * Reads a Serialized or Externalized Object from disk.
-     * Useful for creating compatibility tests between
-     * different SCM versions of the same class
+     * Reads a Serialized or Externalized Object from disk. Useful for creating compatibility tests between different SCM versions of the same class
      *
-     * @param path path to the serialized Object
-     * @return the Object at the given path
+     * @param path path to the serialized Object.
+     * @return The Object at the given path.
      * @throws IOException
      * @throws ClassNotFoundException
      */
@@ -149,21 +137,7 @@ public abstract class AbstractObjectTest extends BulkTest {
 
     // private implementation
     private Object readExternalFormFromStream(final InputStream stream) throws IOException, ClassNotFoundException {
-        final ObjectInputStream oStream = new ObjectInputStream(stream);
-        return oStream.readObject();
-    }
-
-    protected Object serializeDeserialize(final Object obj) throws Exception {
-        final ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        final ObjectOutputStream out = new ObjectOutputStream(buffer);
-        out.writeObject(obj);
-        out.close();
-
-        final ObjectInputStream in = new ObjectInputStream(new ByteArrayInputStream(buffer.toByteArray()));
-        final Object dest = in.readObject();
-        in.close();
-
-        return dest;
+        return new ObjectInputStream(stream).readObject();
     }
 
     protected boolean skipSerializedCanonicalTests() {
@@ -171,9 +145,7 @@ public abstract class AbstractObjectTest extends BulkTest {
     }
 
     /**
-     * Override this method if a subclass is testing an object
-     * that cannot serialize an "empty" Collection.
-     * (for example Comparators have no contents)
+     * Override this method if a subclass is testing an object that cannot serialize an "empty" Collection. (for example Comparators have no contents)
      *
      * @return true
      */
@@ -182,9 +154,7 @@ public abstract class AbstractObjectTest extends BulkTest {
     }
 
     /**
-     * Override this method if a subclass is testing an object
-     * that cannot serialize a "full" Collection.
-     * (for example Comparators have no contents)
+     * Override this method if a subclass is testing an object that cannot serialize a "full" Collection. (for example Comparators have no contents)
      *
      * @return true
      */
@@ -193,8 +163,7 @@ public abstract class AbstractObjectTest extends BulkTest {
     }
 
     /**
-     * Tests serialization by comparing against a previously stored version in SCM.
-     * If the test object is serializable, confirm that a canonical form exists.
+     * Tests serialization by comparing against a previously stored version in SCM. If the test object is serializable, confirm that a canonical form exists.
      */
     @Test
     public void testCanonicalEmptyCollectionExists() {
@@ -202,16 +171,13 @@ public abstract class AbstractObjectTest extends BulkTest {
             final Object object = makeObject();
             if (object instanceof Serializable) {
                 final String name = getCanonicalEmptyCollectionName(object);
-                assertTrue(
-                        new File(name).exists(),
-                        "Canonical empty collection (" + name + ") is not in SCM");
+                assertTrue(new File(name).exists(), "Canonical empty collection (" + name + ") is not in SCM");
             }
         }
     }
 
     /**
-     * Tests serialization by comparing against a previously stored version in SCM.
-     * If the test object is serializable, confirm that a canonical form exists.
+     * Tests serialization by comparing against a previously stored version in SCM. If the test object is serializable, confirm that a canonical form exists.
      */
     @Test
     public void testCanonicalFullCollectionExists() {
@@ -219,44 +185,38 @@ public abstract class AbstractObjectTest extends BulkTest {
             final Object object = makeObject();
             if (object instanceof Serializable) {
                 final String name = getCanonicalFullCollectionName(object);
-                assertTrue(
-                        new File(name).exists(),
-                        "Canonical full collection (" + name + ") is not in SCM");
+                assertTrue(new File(name).exists(), "Canonical full collection (" + name + ") is not in SCM");
             }
         }
     }
 
     @Test
-    public void testEqualsNull() {
+    void testEqualsNull() {
         final Object obj = makeObject();
         assertFalse(obj.equals(null)); // make sure this doesn't throw NPE either
     }
 
     @Test
-    public void testObjectEqualsSelf() {
+    void testObjectEqualsSelf() {
         final Object obj = makeObject();
         assertEquals(obj, obj, "A Object should equal itself");
     }
 
     @Test
-    public void testObjectHashCodeEqualsContract() {
+    void testObjectHashCodeEqualsContract() {
         final Object obj1 = makeObject();
         if (obj1.equals(obj1)) {
-            assertEquals(
-                    obj1.hashCode(), obj1.hashCode(),
-                    "[1] When two objects are equal, their hashCodes should be also.");
+            assertEquals(obj1.hashCode(), obj1.hashCode(), "[1] When two objects are equal, their hashCodes should be also.");
         }
         final Object obj2 = makeObject();
         if (obj1.equals(obj2)) {
-            assertEquals(
-                    obj1.hashCode(), obj2.hashCode(),
-                    "[2] When two objects are equal, their hashCodes should be also.");
+            assertEquals(obj1.hashCode(), obj2.hashCode(), "[2] When two objects are equal, their hashCodes should be also.");
             assertEquals(obj2, obj1, "When obj1.equals(obj2) is true, then obj2.equals(obj1) should also be true");
         }
     }
 
     @Test
-    public void testObjectHashCodeEqualsSelfHashCode() {
+    void testObjectHashCodeEqualsSelfHashCode() {
         final Object obj = makeObject();
         assertEquals(obj.hashCode(), obj.hashCode(), "hashCode should be repeatable");
     }
@@ -273,9 +233,7 @@ public abstract class AbstractObjectTest extends BulkTest {
     }
 
     /**
-     * Sanity check method, makes sure that any Serializable
-     * class can be serialized and de-serialized in memory,
-     * using the handy makeObject() method
+     * Sanity check method, makes sure that any Serializable class can be serialized and de-serialized in memory, using the handy makeObject() method
      *
      * @throws IOException
      * @throws ClassNotFoundException
@@ -284,17 +242,15 @@ public abstract class AbstractObjectTest extends BulkTest {
     public void testSimpleSerialization() throws Exception {
         final Object o = makeObject();
         if (o instanceof Serializable && isTestSerialization()) {
-            final byte[] object = writeExternalFormToBytes((Serializable) o);
-            readExternalFormFromBytes(object);
+            readExternalFormFromBytes(writeExternalFormToBytes((Serializable) o));
         }
     }
 
     /**
-     * Converts a Serializable or Externalizable object to
-     * bytes.  Useful for in-memory tests of serialization
+     * Converts a Serializable or Externalizable object to bytes. Useful for in-memory tests of serialization
      *
-     * @param o Object to convert to bytes
-     * @return serialized form of the Object
+     * @param o Object to convert to bytes.
+     * @return serialized form of the Object.
      * @throws IOException
      */
     protected byte[] writeExternalFormToBytes(final Serializable o) throws IOException {
@@ -304,15 +260,11 @@ public abstract class AbstractObjectTest extends BulkTest {
     }
 
     /**
-     * Writes a Serializable or Externalizable object as
-     * a file at the given path.  NOT USEFUL as part
-     * of a unit test; this is just a utility method
-     * for creating disk-based objects in SCM that can become
-     * the basis for compatibility tests using
-     * readExternalFormFromDisk(String path)
+     * Writes a Serializable or Externalizable object as a file at the given path. NOT USEFUL as part of a unit test; this is just a utility method for creating
+     * disk-based objects in SCM that can become the basis for compatibility tests using readExternalFormFromDisk(String path)
      *
-     * @param o Object to serialize
-     * @param path path to write the serialized Object
+     * @param o    Object to serialize.
+     * @param path path to write the serialized Object.
      * @throws IOException
      */
     protected void writeExternalFormToDisk(final Serializable o, final String path) throws IOException {
@@ -322,8 +274,6 @@ public abstract class AbstractObjectTest extends BulkTest {
     }
 
     private void writeExternalFormToStream(final Serializable o, final OutputStream stream) throws IOException {
-        final ObjectOutputStream oStream = new ObjectOutputStream(stream);
-        oStream.writeObject(o);
+        new ObjectOutputStream(stream).writeObject(o);
     }
-
 }

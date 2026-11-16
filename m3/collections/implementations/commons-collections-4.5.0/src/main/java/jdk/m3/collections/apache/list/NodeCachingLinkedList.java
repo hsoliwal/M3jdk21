@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -39,7 +39,7 @@ import java.util.Collection;
  * <strong>Note that this implementation is not synchronized.</strong>
  * </p>
  *
- * @param <E> the type of the elements in the list.
+ * @param <E> The type of the elements in the list.
  * @since 3.0
  * @deprecated parent {@link AbstractLinkedList} is source incompatible with List methods added in Java 21
  */
@@ -81,7 +81,7 @@ public class NodeCachingLinkedList<E> extends AbstractLinkedList<E> implements S
     /**
      * Constructor that copies the specified collection
      *
-     * @param coll  the collection to copy
+     * @param coll  The collection to copy
      */
     public NodeCachingLinkedList(final Collection<? extends E> coll) {
         super(coll);
@@ -91,7 +91,7 @@ public class NodeCachingLinkedList<E> extends AbstractLinkedList<E> implements S
     /**
      * Constructor that species the maximum cache size.
      *
-     * @param maximumCacheSize  the maximum cache size
+     * @param maximumCacheSize  The maximum cache size
      */
     public NodeCachingLinkedList(final int maximumCacheSize) {
         this.maximumCacheSize = maximumCacheSize;
@@ -102,7 +102,7 @@ public class NodeCachingLinkedList<E> extends AbstractLinkedList<E> implements S
      * Adds a node to the cache, if the cache isn't full.
      * The node's contents are cleared, so they can be garbage collected.
      *
-     * @param node  the node to add to the cache
+     * @param node  The node to add to the cache
      */
     protected void addNodeToCache(final Node<E> node) {
         if (isCacheFull()) {
@@ -123,7 +123,7 @@ public class NodeCachingLinkedList<E> extends AbstractLinkedList<E> implements S
      * a new one.
      *
      * @param value  value of the new node
-     * @return the newly created node
+     * @return The newly created node
      */
     @Override
     protected Node<E> createNode(final E value) {
@@ -138,7 +138,7 @@ public class NodeCachingLinkedList<E> extends AbstractLinkedList<E> implements S
     /**
      * Gets the maximum size of the cache.
      *
-     * @return the maximum cache size
+     * @return The maximum cache size
      */
     protected int getMaximumCacheSize() {
         return maximumCacheSize;
@@ -149,7 +149,7 @@ public class NodeCachingLinkedList<E> extends AbstractLinkedList<E> implements S
      * {@link #cacheSize} is decreased accordingly. The node that is returned
      * will have {@code null} values for next, previous and element.
      *
-     * @return a node, or {@code null} if there are no nodes in the cache.
+     * @return A node, or {@code null} if there are no nodes in the cache.
      */
     protected Node<E> getNodeFromCache() {
         if (cacheSize == 0) {
@@ -175,8 +175,8 @@ public class NodeCachingLinkedList<E> extends AbstractLinkedList<E> implements S
     /**
      * Deserializes the data held in this object to the stream specified.
      *
-     * @param in  the input stream
-     * @throws IOException if an error occurs while reading from the stream
+     * @param in  The input stream
+     * @throws IOException Thrown if an error occurs while reading from the stream
      * @throws ClassNotFoundException if an object read from the stream cannot be loaded
      */
     private void readObject(final ObjectInputStream in) throws IOException, ClassNotFoundException {
@@ -208,7 +208,7 @@ public class NodeCachingLinkedList<E> extends AbstractLinkedList<E> implements S
      * Removes the node from the list, storing it in the cache for reuse
      * if the cache is not yet full.
      *
-     * @param node  the node to remove
+     * @param node  The node to remove
      */
     @Override
     protected void removeNode(final Node<E> node) {
@@ -219,7 +219,7 @@ public class NodeCachingLinkedList<E> extends AbstractLinkedList<E> implements S
     /**
      * Sets the maximum size of the cache.
      *
-     * @param maximumCacheSize  the new maximum cache size
+     * @param maximumCacheSize  The new maximum cache size
      */
     protected void setMaximumCacheSize(final int maximumCacheSize) {
         this.maximumCacheSize = maximumCacheSize;
@@ -239,7 +239,7 @@ public class NodeCachingLinkedList<E> extends AbstractLinkedList<E> implements S
     /**
      * Serializes this object to an ObjectOutputStream.
      *
-     * @param out the target ObjectOutputStream.
+     * @param out The target ObjectOutputStream.
      * @throws IOException thrown when an I/O errors occur writing to the target stream.
      */
     private void writeObject(final ObjectOutputStream out) throws IOException {

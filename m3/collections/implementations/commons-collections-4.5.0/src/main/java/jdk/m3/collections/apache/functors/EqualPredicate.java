@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -26,7 +26,7 @@ import jdk.m3.collections.apache.Predicate;
  * Predicate implementation that returns true if the input is the same object
  * as the one stored in this predicate by equals.
  *
- * @param <T> the type of the input to the predicate.
+ * @param <T> The type of the input to the predicate.
  * @since 3.0
  */
 public final class EqualPredicate<T> extends AbstractPredicate<T> implements Serializable {
@@ -37,9 +37,9 @@ public final class EqualPredicate<T> extends AbstractPredicate<T> implements Ser
     /**
      * Creates the predicate.
      *
-     * @param <T> the type that the predicate queries
-     * @param object  the object to compare to
-     * @return the predicate
+     * @param <T> The type that the predicate queries
+     * @param object  The object to compare to
+     * @return The predicate
      */
     public static <T> Predicate<T> equalPredicate(final T object) {
         if (object == null) {
@@ -51,10 +51,10 @@ public final class EqualPredicate<T> extends AbstractPredicate<T> implements Ser
     /**
      * Creates the identity predicate.
      *
-     * @param <T> the type that the predicate queries
-     * @param object  the object to compare to
-     * @param equator  the equator to use for comparison
-     * @return the predicate
+     * @param <T> The type that the predicate queries
+     * @param object  The object to compare to
+     * @param equator  The equator to use for comparison
+     * @return The predicate
      * @since 4.0
      */
     public static <T> Predicate<T> equalPredicate(final T object, final Equator<T> equator) {
@@ -74,7 +74,7 @@ public final class EqualPredicate<T> extends AbstractPredicate<T> implements Ser
      * Constructor that performs no validation.
      * Use {@code equalPredicate} if you want that.
      *
-     * @param object  the object to compare to
+     * @param object  The object to compare to
      */
     public EqualPredicate(final T object) {
         // do not use the DefaultEquator to keep backwards compatibility
@@ -86,8 +86,8 @@ public final class EqualPredicate<T> extends AbstractPredicate<T> implements Ser
      * Constructor that performs no validation.
      * Use {@code equalPredicate} if you want that.
      *
-     * @param test  the object to compare to
-     * @param equator  the equator to use for comparison
+     * @param test  The object to compare to
+     * @param equator  The equator to use for comparison
      * @since 4.0
      */
     public EqualPredicate(final T test, final Equator<T> equator) {
@@ -98,7 +98,7 @@ public final class EqualPredicate<T> extends AbstractPredicate<T> implements Ser
     /**
      * Gets the value.
      *
-     * @return the value
+     * @return The value
      * @since 3.1
      */
     public Object getValue() {
@@ -108,7 +108,7 @@ public final class EqualPredicate<T> extends AbstractPredicate<T> implements Ser
     /**
      * Evaluates the predicate returning true if the input equals the stored value.
      *
-     * @param object  the input object
+     * @param object  The input object
      * @return true if input object equals stored value
      */
     @Override

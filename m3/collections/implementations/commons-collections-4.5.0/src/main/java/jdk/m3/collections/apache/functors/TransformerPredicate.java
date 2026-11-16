@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -26,7 +26,7 @@ import jdk.m3.collections.apache.Transformer;
 /**
  * Predicate implementation that returns the result of a transformer.
  *
- * @param <T> the type of the input to the predicate.
+ * @param <T> The type of the input to the predicate.
  * @since 3.0
  */
 public final class TransformerPredicate<T> extends AbstractPredicate<T> implements Serializable {
@@ -37,9 +37,9 @@ public final class TransformerPredicate<T> extends AbstractPredicate<T> implemen
     /**
      * Creates the predicate.
      *
-     * @param <T> the type that the predicate queries
-     * @param transformer  the transformer to decorate
-     * @return the predicate
+     * @param <T> The type that the predicate queries
+     * @param transformer  The transformer to decorate
+     * @return The predicate
      * @throws NullPointerException if the transformer is null
      */
     public static <T> Predicate<T> transformerPredicate(final Transformer<? super T, Boolean> transformer) {
@@ -53,7 +53,7 @@ public final class TransformerPredicate<T> extends AbstractPredicate<T> implemen
      * Constructor that performs no validation.
      * Use {@code transformerPredicate} if you want that.
      *
-     * @param transformer  the transformer to decorate
+     * @param transformer  The transformer to decorate
      */
     public TransformerPredicate(final Transformer<? super T, Boolean> transformer) {
         iTransformer = transformer;
@@ -62,7 +62,7 @@ public final class TransformerPredicate<T> extends AbstractPredicate<T> implemen
     /**
      * Gets the transformer.
      *
-     * @return the transformer
+     * @return The transformer
      * @since 3.1
      */
     public Transformer<? super T, Boolean> getTransformer() {
@@ -72,7 +72,7 @@ public final class TransformerPredicate<T> extends AbstractPredicate<T> implemen
     /**
      * Evaluates the predicate returning the result of the decorated transformer.
      *
-     * @param object  the input object
+     * @param object  The input object
      * @return true if decorated transformer returns Boolean.TRUE
      * @throws FunctorException if the transformer returns an invalid type
      */

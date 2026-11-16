@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -35,7 +35,7 @@ import jdk.m3.collections.apache.Transformer;
  * This class is Serializable from Commons Collections 3.1.
  * </p>
  *
- * @param <E> the type of the elements in the collection
+ * @param <E> The type of the elements in the collection.
  * @since 3.0
  */
 public class TransformedCollection<E> extends AbstractCollectionDecorator<E> {
@@ -44,18 +44,19 @@ public class TransformedCollection<E> extends AbstractCollectionDecorator<E> {
     private static final long serialVersionUID = 8692300188161871514L;
 
     /**
-     * Factory method to create a transforming collection that will transform
+     * Creates a transforming collection that will transform
      * existing contents of the specified collection.
      * <p>
      * If there are any elements already in the collection being decorated, they
      * will be transformed by this method.
      * Contrast this with {@link #transformingCollection(Collection, Transformer)}.
+     * </p>
      *
-     * @param <E> the type of the elements in the collection
-     * @param collection  the collection to decorate, must not be null
-     * @param transformer  the transformer to use for conversion, must not be null
-     * @return a new transformed Collection
-     * @throws NullPointerException if collection or transformer is null
+     * @param <E> The type of the elements in the collection.
+     * @param collection  The collection to decorate, must not be null.
+     * @param transformer  The transformer to use for conversion, must not be null.
+     * @return A new transformed Collection.
+     * @throws NullPointerException if collection or transformer is null.
      * @since 4.0
      */
     public static <E> TransformedCollection<E> transformedCollection(final Collection<E> collection,
@@ -75,17 +76,18 @@ public class TransformedCollection<E> extends AbstractCollectionDecorator<E> {
     }
 
     /**
-     * Factory method to create a transforming collection.
+     * Creates a transforming collection.
      * <p>
      * If there are any elements already in the collection being decorated, they
      * are NOT transformed.
      * Contrast this with {@link #transformedCollection(Collection, Transformer)}.
+     * </p>
      *
-     * @param <E> the type of the elements in the collection
-     * @param coll  the collection to decorate, must not be null
-     * @param transformer  the transformer to use for conversion, must not be null
-     * @return a new transformed collection
-     * @throws NullPointerException if collection or transformer is null
+     * @param <E> The type of the elements in the collection.
+     * @param coll  The collection to decorate, must not be null.
+     * @param transformer  The transformer to use for conversion, must not be null.
+     * @return A new transformed collection.
+     * @throws NullPointerException if collection or transformer is null.
      * @since 4.0
      */
     public static <E> TransformedCollection<E> transformingCollection(final Collection<E> coll,
@@ -97,14 +99,15 @@ public class TransformedCollection<E> extends AbstractCollectionDecorator<E> {
     protected final Transformer<? super E, ? extends E> transformer;
 
     /**
-     * Constructor that wraps (not copies).
+     * Constructs and wraps (not copies).
      * <p>
      * If there are any elements already in the collection being decorated, they
      * are NOT transformed.
+     * </p>
      *
-     * @param collection  the collection to decorate, must not be null
-     * @param transformer  the transformer to use for conversion, must not be null
-     * @throws NullPointerException if collection or transformer is null
+     * @param collection  The collection to decorate, must not be null.
+     * @param transformer  The transformer to use for conversion, must not be null.
+     * @throws NullPointerException if collection or transformer is null.
      */
     protected TransformedCollection(final Collection<E> collection, final Transformer<? super E, ? extends E> transformer) {
         super(collection);
@@ -125,9 +128,10 @@ public class TransformedCollection<E> extends AbstractCollectionDecorator<E> {
      * Transforms a collection.
      * <p>
      * The transformer itself may throw an exception if necessary.
+     * </p>
      *
-     * @param coll  the collection to transform
-     * @return a transformed object
+     * @param coll  The collection to transform.
+     * @return A transformed object.
      */
     protected Collection<E> transform(final Collection<? extends E> coll) {
         final List<E> list = new ArrayList<>(coll.size());
@@ -141,9 +145,10 @@ public class TransformedCollection<E> extends AbstractCollectionDecorator<E> {
      * Transforms an object.
      * <p>
      * The transformer itself may throw an exception if necessary.
+     * </p>
      *
-     * @param object  the object to transform
-     * @return a transformed object
+     * @param object  The object to transform.
+     * @return A transformed object.
      */
     protected E transform(final E object) {
         return transformer.apply(object);

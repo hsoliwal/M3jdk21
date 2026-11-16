@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -18,10 +18,6 @@ package jdk.m3.collections.apache.comparators;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedList;
@@ -32,7 +28,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Tests for ReverseComparator.
  */
-public class ReverseComparatorTest extends AbstractComparatorTest<Integer> {
+class ReverseComparatorTest extends AbstractComparatorTest<Integer> {
 
     @Override
     public List<Integer> getComparableObjectsOrdered() {
@@ -50,7 +46,7 @@ public class ReverseComparatorTest extends AbstractComparatorTest<Integer> {
         return "4";
     }
 
-//    public void testCreate() throws Exception {
+//    void testCreate() throws Exception {
 //        writeExternalFormToDisk((java.io.Serializable) makeObject(), "src/test/resources/data/test/ReverseComparator.version4.obj");
 //    }
 
@@ -78,15 +74,7 @@ public class ReverseComparatorTest extends AbstractComparatorTest<Integer> {
     @Override
     public void testSerializeDeserializeThenCompare() throws Exception {
         final Comparator<?> comp = new ReverseComparator<>(new ComparableComparator<>());
-
-        final ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        final ObjectOutputStream out = new ObjectOutputStream(buffer);
-        out.writeObject(comp);
-        out.close();
-
-        final ObjectInputStream in = new ObjectInputStream(new ByteArrayInputStream(buffer.toByteArray()));
-        final Object dest = in.readObject();
-        in.close();
+        final Object dest = serializeDeserialize(comp);
         assertEquals(comp, dest, "obj != deserialize(serialize(obj))");
     }
 

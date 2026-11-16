@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -25,7 +25,7 @@ import jdk.m3.collections.apache.Transformer;
  * Closure implementation that calls a Transformer using the input object
  * and ignore the result.
  *
- * @param <T> the type of the input to the operation.
+ * @param <T> The type of the input to the operation.
  * @since 3.0
  */
 public class TransformerClosure<T> implements Closure<T>, Serializable {
@@ -37,10 +37,11 @@ public class TransformerClosure<T> implements Closure<T>, Serializable {
      * Factory method that performs validation.
      * <p>
      * A null transformer will return the {@code NOPClosure}.
+     * </p>
      *
-     * @param <E> the type that the closure acts on
-     * @param transformer  the transformer to call, null means nop
-     * @return the {@code transformer} closure
+     * @param <E> The type that the closure acts on
+     * @param transformer  The transformer to call, null means nop
+     * @return The {@code transformer} closure
      */
     public static <E> Closure<E> transformerClosure(final Transformer<? super E, ?> transformer) {
         if (transformer == null) {
@@ -56,7 +57,7 @@ public class TransformerClosure<T> implements Closure<T>, Serializable {
      * Constructor that performs no validation.
      * Use {@code transformerClosure} if you want that.
      *
-     * @param transformer  the transformer to call, not null
+     * @param transformer  The transformer to call, not null
      */
     public TransformerClosure(final Transformer<? super T, ?> transformer) {
         iTransformer = transformer;
@@ -65,7 +66,7 @@ public class TransformerClosure<T> implements Closure<T>, Serializable {
     /**
      * Executes the closure by calling the decorated transformer.
      *
-     * @param input  the input object
+     * @param input  The input object
      */
     @Override
     public void execute(final T input) {
@@ -75,7 +76,7 @@ public class TransformerClosure<T> implements Closure<T>, Serializable {
     /**
      * Gets the transformer.
      *
-     * @return the transformer
+     * @return The transformer
      * @since 3.1
      */
     public Transformer<? super T, ?> getTransformer() {

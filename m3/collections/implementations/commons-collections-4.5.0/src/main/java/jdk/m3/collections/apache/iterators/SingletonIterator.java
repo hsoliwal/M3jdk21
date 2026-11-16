@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,15 +16,16 @@
  */
 package jdk.m3.collections.apache.iterators;
 
+import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 import jdk.m3.collections.apache.ResettableIterator;
 
 /**
- * {@code SingletonIterator} is an {@link java.util.Iterator} over a single
+ * {@code SingletonIterator} is an {@link Iterator} over a single
  * object instance.
  *
- * @param <E> the type of elements returned by this iterator.
+ * @param <E> The type of elements returned by this iterator.
  * @since 2.0
  */
 public class SingletonIterator<E>
@@ -32,10 +33,13 @@ public class SingletonIterator<E>
 
     /** Whether remove is allowed */
     private final boolean removeAllowed;
+
     /** Is the cursor before the first element */
     private boolean beforeFirst = true;
+
     /** Has the element been removed */
     private boolean removed;
+
     /** The object */
     private E object;
 
@@ -43,7 +47,7 @@ public class SingletonIterator<E>
      * Constructs a new {@code SingletonIterator} where {@code remove}
      * is a permitted operation.
      *
-     * @param object  the single object to return from the iterator
+     * @param object  The single object to return from the iterator
      */
     public SingletonIterator(final E object) {
         this(object, true);
@@ -53,7 +57,7 @@ public class SingletonIterator<E>
      * Constructs a new {@code SingletonIterator} optionally choosing if
      * {@code remove} is a permitted operation.
      *
-     * @param object  the single object to return from the iterator
+     * @param object  The single object to return from the iterator
      * @param removeAllowed  true if remove is allowed
      * @since 3.1
      */
@@ -79,7 +83,7 @@ public class SingletonIterator<E>
      * <p>
      * This returns the single object if it hasn't been returned yet.
      *
-     * @return the single object
+     * @return The single object
      * @throws NoSuchElementException if the single object has already
      *    been returned
      */

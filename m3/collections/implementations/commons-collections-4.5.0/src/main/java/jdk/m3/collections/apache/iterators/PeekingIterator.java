@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -19,6 +19,7 @@ package jdk.m3.collections.apache.iterators;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.Objects;
+import java.util.Queue;
 
 /**
  * Decorates an iterator to support one-element lookahead while iterating.
@@ -27,7 +28,7 @@ import java.util.Objects;
  * {@link #peek()} or {@link #element()}.
  * </p>
  *
- * @param <E> the type of elements returned by this iterator.
+ * @param <E> The type of elements returned by this iterator.
  * @since 4.0
  */
 public class PeekingIterator<E> implements Iterator<E> {
@@ -39,8 +40,8 @@ public class PeekingIterator<E> implements Iterator<E> {
      * </p>
      *
      * @param <E>      the element type
-     * @param iterator the iterator to decorate
-     * @return a new peeking iterator
+     * @param iterator The iterator to decorate
+     * @return A new peeking iterator
      * @throws NullPointerException if the iterator is null
      */
     public static <E> PeekingIterator<E> peekingIterator(final Iterator<? extends E> iterator) {
@@ -68,7 +69,7 @@ public class PeekingIterator<E> implements Iterator<E> {
     /**
      * Constructs a new instance.
      *
-     * @param iterator the iterator to decorate
+     * @param iterator The iterator to decorate
      */
     public PeekingIterator(final Iterator<? extends E> iterator) {
         this.iterator = iterator;
@@ -81,7 +82,7 @@ public class PeekingIterator<E> implements Iterator<E> {
      * element() or {@link #peek()} has been called after the most recent invocation of {@link #next()}
      * </p>
      *
-     * @return the next element from the iterator
+     * @return The next element from the iterator
      * @throws NoSuchElementException if the iterator is already exhausted according to {@link #hasNext()}
      */
     public E element() {
@@ -121,7 +122,7 @@ public class PeekingIterator<E> implements Iterator<E> {
      * {@link #element()} or {@link #peek()} has been called after the most recent invocation of {@link #next()}.
      * </p>
      *
-     * @return the next element from the iterator
+     * @return The next element from the iterator
      * @throws NoSuchElementException if the iterator is already exhausted according to {@link #hasNext()}.
      */
     @Override
@@ -143,14 +144,14 @@ public class PeekingIterator<E> implements Iterator<E> {
      * {@link #element()} instead.
      * </p>
      * <p>
-     * The rationale behind this is to follow the {@link java.util.Queue} interface which uses the same terminology.
+     * The rationale behind this is to follow the {@link Queue} interface which uses the same terminology.
      * </p>
      * <p>
      * Note that if the underlying iterator is a {@link FilterIterator} or a {@link FilterListIterator}, the underlying predicate will <em>not</em> be tested if
      * {@link #element()} or peek() has been called after the most recent invocation of {@link #next()}.
      * </p>
      *
-     * @return the next element from the iterator
+     * @return The next element from the iterator
      */
     public E peek() {
         fill();

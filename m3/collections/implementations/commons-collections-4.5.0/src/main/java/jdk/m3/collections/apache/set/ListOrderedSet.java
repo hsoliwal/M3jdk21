@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,6 +16,9 @@
  */
 package jdk.m3.collections.apache.set;
 
+import java.io.IOException;
+import java.io.InvalidObjectException;
+import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
@@ -54,7 +57,7 @@ import jdk.m3.collections.apache.list.UnmodifiableList;
  * This class is Serializable from Commons Collections 3.1.
  * </p>
  *
- * @param <E> the type of the elements in this set
+ * @param <E> The type of the elements in this set
  * @since 3.0
  */
 public class ListOrderedSet<E>
@@ -116,9 +119,9 @@ public class ListOrderedSet<E>
      * altering the specified list.
      * </p>
      *
-     * @param <E> the element type
-     * @param list the list to decorate, must not be null
-     * @return a new ordered set
+     * @param <E> The element type
+     * @param list The list to decorate, must not be null
+     * @return A new ordered set
      * @throws NullPointerException if list is null
      * @since 4.0
      */
@@ -136,9 +139,9 @@ public class ListOrderedSet<E>
      * An {@code ArrayList} is used to retain order.
      * </p>
      *
-     * @param <E> the element type
-     * @param set the set to decorate, must not be null
-     * @return a new ordered set
+     * @param <E> The element type
+     * @param set The set to decorate, must not be null
+     * @return A new ordered set
      * @throws NullPointerException if set is null
      * @since 4.0
      */
@@ -152,10 +155,10 @@ public class ListOrderedSet<E>
      * The list and set must both be empty.
      * </p>
      *
-     * @param <E> the element type
-     * @param set the set to decorate, must be empty and not null
-     * @param list the list to decorate, must be empty and not null
-     * @return a new ordered set
+     * @param <E> The element type
+     * @param set The set to decorate, must be empty and not null
+     * @param list The list to decorate, must be empty and not null
+     * @return A new ordered set
      * @throws NullPointerException if set or list is null
      * @throws IllegalArgumentException if either the set or list is not empty
      * @since 4.0
@@ -186,7 +189,7 @@ public class ListOrderedSet<E>
     /**
      * Constructor that wraps (not copies).
      *
-     * @param set the set to decorate, must not be null
+     * @param set The set to decorate, must not be null
      * @throws NullPointerException if set is null
      */
     protected ListOrderedSet(final Set<E> set) {
@@ -201,8 +204,8 @@ public class ListOrderedSet<E>
      * The set and list must both be correctly initialized to the same elements.
      * </p>
      *
-     * @param set the set to decorate, must not be null
-     * @param list the list to decorate, must not be null
+     * @param set The set to decorate, must not be null
+     * @param list The list to decorate, must not be null
      * @throws NullPointerException if set or list is null
      */
     protected ListOrderedSet(final Set<E> set, final List<E> list) {
@@ -224,11 +227,14 @@ public class ListOrderedSet<E>
      * contained in this ordered set (optional operation). Shifts the element
      * currently at this position and any subsequent elements to the right.
      *
-     * @param index the index at which the element is to be inserted
-     * @param object the element to be inserted
+     * @param index The index at which the element is to be inserted
+     * @param object The element to be inserted
      * @see List#add(int, Object)
      */
     public void add(final int index, final E object) {
+        if (index < 0 || index > setOrder.size()) {
+            throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + setOrder.size());
+        }
         if (!contains(object)) {
             decorated().add(object);
             setOrder.add(index, object);
@@ -250,12 +256,15 @@ public class ListOrderedSet<E>
      * element currently at the position and all subsequent elements to the
      * right.
      *
-     * @param index the position to insert the elements
-     * @param coll the collection containing the elements to be inserted
+     * @param index The position to insert the elements
+     * @param coll The collection containing the elements to be inserted
      * @return {@code true} if this ordered set changed as a result of the call
      * @see List#addAll(int, Collection)
      */
     public boolean addAll(final int index, final Collection<? extends E> coll) {
+        if (index < 0 || index > setOrder.size()) {
+            throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + setOrder.size());
+        }
         boolean changed = false;
         // collect all elements to be added for performance reasons
         final List<E> toAdd = new ArrayList<>();
@@ -278,7 +287,7 @@ public class ListOrderedSet<E>
     /**
      * Gets an unmodifiable view of the order of the Set.
      *
-     * @return an unmodifiable list view
+     * @return An unmodifiable list view
      */
     public List<E> asList() {
         return UnmodifiableList.unmodifiableList(setOrder);
@@ -293,8 +302,8 @@ public class ListOrderedSet<E>
     /**
      * Gets the element at the specified position in this ordered set.
      *
-     * @param index the position of the element in the ordered {@link Set}.
-     * @return the element at position {@code index}
+     * @param index The position of the element in the ordered {@link Set}.
+     * @return The element at position {@code index}
      * @see List#get(int)
      */
     public E get(final int index) {
@@ -305,8 +314,8 @@ public class ListOrderedSet<E>
      * Returns the index of the first occurrence of the specified element in
      * ordered set.
      *
-     * @param object the element to search for
-     * @return the index of the first occurrence of the object, or {@code -1} if
+     * @param object The element to search for
+     * @return The index of the first occurrence of the object, or {@code -1} if
      *         this ordered set does not contain this object
      * @see List#indexOf(Object)
      */
@@ -320,11 +329,26 @@ public class ListOrderedSet<E>
     }
 
     /**
+     * Deserializes the set and re-checks that the iteration order matches the
+     * decorated set, as the constructors guarantee.
+     *
+     * @param in  The input stream
+     * @throws IOException Thrown if an error occurs while reading from the stream
+     * @throws ClassNotFoundException if a class read from the stream cannot be loaded
+     */
+    private void readObject(final ObjectInputStream in) throws IOException, ClassNotFoundException {
+        in.defaultReadObject();
+        if (setOrder.size() != size() || !new HashSet<>(setOrder).equals(decorated())) {
+            throw new InvalidObjectException("Inconsistent ListOrderedSet deserialized: iteration order does not match the set");
+        }
+    }
+
+    /**
      * Removes the element at the specified position from the ordered set.
      * Shifts any subsequent elements to the left.
      *
-     * @param index the index of the element to be removed
-     * @return the element that has been remove from the ordered set
+     * @param index The index of the element to be removed
+     * @return The element that has been remove from the ordered set
      * @see List#remove(int)
      */
     public E remove(final int index) {
@@ -342,8 +366,88 @@ public class ListOrderedSet<E>
         return result;
     }
 
+    /** Equality must be callback-free before combining serial removals. */
+    private static boolean isStableBulkValue(final Object value) {
+        return value == null || value.getClass() == String.class
+                || value.getClass() == Integer.class || value.getClass() == Long.class;
+    }
+
+    /**
+     * Check both externally supplied owners before compacting their shared membership.
+     * Unknown values, owners and subclasses retain the original remove dispatch.
+     */
+    private boolean canCompactRemoval(final Collection<?> coll) {
+        if (getClass() != ListOrderedSet.class || setOrder.getClass() != ArrayList.class
+                || decorated().getClass() != HashSet.class || coll == null
+                || (coll != this && (coll.getClass() != HashSet.class
+                        || size() < 8192 || coll.size() < 1024))) {
+            return false;
+        }
+        final int count = setOrder.size();
+        if (count != decorated().size() || count > 1 << 29) {
+            return false;
+        }
+        int capacity = 1;
+        while (capacity < count * 2) {
+            capacity <<= 1;
+        }
+        // One scratch lane proves uniqueness without allocating a node per value.
+        final Object[] observed = new Object[capacity];
+        final int mask = capacity - 1;
+        boolean nullSeen = false;
+        for (final E value : setOrder) {
+            if (!isStableBulkValue(value) || !decorated().contains(value)) {
+                return false;
+            }
+            if (value == null) {
+                if (nullSeen) {
+                    return false;
+                }
+                nullSeen = true;
+            } else {
+                final int hash = value.hashCode();
+                int slot = (hash ^ hash >>> 16) & mask;
+                int probes = 0;
+                while (observed[slot] != null) {
+                    if (value.equals(observed[slot]) || ++probes == 16) {
+                        // Collisions must not turn the admission scan quadratic.
+                        return false;
+                    }
+                    slot = slot + 1 & mask;
+                }
+                observed[slot] = value;
+            }
+        }
+        if (coll != this) {
+            for (final Object value : coll) {
+                if (!isStableBulkValue(value)) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
     @Override
     public boolean removeAll(final Collection<?> coll) {
+        if (canCompactRemoval(coll)) {
+            if (coll == this) {
+                if (isEmpty()) {
+                    return false;
+                }
+                clear();
+                return true;
+            }
+            // Compact the array once, preserving the identity and order of survivors.
+            final boolean changed = setOrder.removeAll(coll);
+            if (changed) {
+                // Keep the original removal order in the backing hash table as well.
+                for (final Object value : coll) {
+                    decorated().remove(value);
+                }
+            }
+            return changed;
+        }
         boolean result = false;
         for (final Object name : coll) {
             result |= remove(name);
@@ -405,7 +509,7 @@ public class ListOrderedSet<E>
      * that the decorated Set's toString is not used, so any custom toStrings
      * will be ignored.
      *
-     * @return a string representation of the ordered set
+     * @return A string representation of the ordered set
      */
     // Fortunately List.toString and Set.toString look the same
     @Override

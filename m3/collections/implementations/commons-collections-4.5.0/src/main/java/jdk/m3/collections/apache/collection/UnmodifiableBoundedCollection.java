@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -42,7 +42,7 @@ import jdk.m3.collections.apache.iterators.UnmodifiableIterator;
  * Attempts to modify it will result in an UnsupportedOperationException.
  * </p>
  *
- * @param <E> the type of elements in this collection
+ * @param <E> The type of elements in this collection.
  * @since 3.0
  */
 public final class UnmodifiableBoundedCollection<E> extends AbstractCollectionDecorator<E>
@@ -52,12 +52,12 @@ public final class UnmodifiableBoundedCollection<E> extends AbstractCollectionDe
     private static final long serialVersionUID = -7112672385450340330L;
 
     /**
-     * Factory method to create an unmodifiable bounded collection.
+     * Creates an unmodifiable bounded collection.
      *
-     * @param <E> the type of the elements in the collection
-     * @param coll  the {@code BoundedCollection} to decorate, must not be null
-     * @return a new unmodifiable bounded collection
-     * @throws NullPointerException if {@code coll} is {@code null}
+     * @param <E> The type of the elements in the collection.
+     * @param coll  The {@code BoundedCollection} to decorate, must not be null.
+     * @return A new unmodifiable bounded collection.
+     * @throws NullPointerException if {@code coll} is {@code null}.
      * @since 4.0
      */
     public static <E> BoundedCollection<E> unmodifiableBoundedCollection(final BoundedCollection<? extends E> coll) {
@@ -70,16 +70,17 @@ public final class UnmodifiableBoundedCollection<E> extends AbstractCollectionDe
     }
 
     /**
-     * Factory method to create an unmodifiable bounded collection.
+     * Creates an unmodifiable bounded collection.
      * <p>
      * This method is capable of drilling down through up to 1000 other decorators
      * to find a suitable BoundedCollection.
+     * </p>
      *
-     * @param <E> the type of the elements in the collection
-     * @param collection  the {@code BoundedCollection} to decorate, must not be null
-     * @return a new unmodifiable bounded collection
-     * @throws NullPointerException if coll is null
-     * @throws IllegalArgumentException if coll is not a {@code BoundedCollection}
+     * @param <E> The type of the elements in the collection.
+     * @param collection  The {@code BoundedCollection} to decorate, must not be null.
+     * @return A new unmodifiable bounded collection.
+     * @throws NullPointerException if coll is null.
+     * @throws IllegalArgumentException if coll is not a {@code BoundedCollection}.
      * @since 4.0
      */
     @SuppressWarnings("unchecked")
@@ -105,26 +106,43 @@ public final class UnmodifiableBoundedCollection<E> extends AbstractCollectionDe
     }
 
     /**
-     * Constructor that wraps (not copies).
+     * Constructs and wraps (not copies).
      *
-     * @param coll  the collection to decorate, must not be null
-     * @throws NullPointerException if coll is null
+     * @param coll  The collection to decorate, must not be null.
+     * @throws NullPointerException if coll is null.
      */
     @SuppressWarnings("unchecked") // safe to upcast
     private UnmodifiableBoundedCollection(final BoundedCollection<? extends E> coll) {
         super((BoundedCollection<E>) coll);
     }
 
+    /**
+     * Always throws {@link UnsupportedOperationException}.
+     *
+     * @param object Ignored.
+     * @throws UnsupportedOperationException Always thrown.
+     */
     @Override
     public boolean add(final E object) {
         throw new UnsupportedOperationException();
     }
 
+    /**
+     * Always throws {@link UnsupportedOperationException}.
+     *
+     * @param coll Ignored.
+     * @throws UnsupportedOperationException Always thrown.
+     */
     @Override
     public boolean addAll(final Collection<? extends E> coll) {
         throw new UnsupportedOperationException();
     }
 
+    /**
+     * Always throws {@link UnsupportedOperationException}.
+     *
+     * @throws UnsupportedOperationException Always thrown.
+     */
     @Override
     public void clear() {
         throw new UnsupportedOperationException();
@@ -150,17 +168,33 @@ public final class UnmodifiableBoundedCollection<E> extends AbstractCollectionDe
         return decorated().maxSize();
     }
 
+    /**
+     * Always throws {@link UnsupportedOperationException}.
+     *
+     * @param object Ignored.
+     * @throws UnsupportedOperationException Always thrown.
+     */
     @Override
     public boolean remove(final Object object) {
         throw new UnsupportedOperationException();
     }
 
+    /**
+     * Always throws {@link UnsupportedOperationException}.
+     *
+     * @param coll Ignored.
+     * @throws UnsupportedOperationException Always thrown.
+     */
     @Override
     public boolean removeAll(final Collection<?> coll) {
         throw new UnsupportedOperationException();
     }
 
     /**
+     * Always throws {@link UnsupportedOperationException}.
+     *
+     * @param filter Ignored.
+     * @throws UnsupportedOperationException Always thrown.
      * @since 4.4
      */
     @Override
@@ -168,6 +202,12 @@ public final class UnmodifiableBoundedCollection<E> extends AbstractCollectionDe
         throw new UnsupportedOperationException();
     }
 
+    /**
+     * Always throws {@link UnsupportedOperationException}.
+     *
+     * @param Ignored.
+     * @throws UnsupportedOperationException Always thrown.
+     */
     @Override
     public boolean retainAll(final Collection<?> coll) {
         throw new UnsupportedOperationException();

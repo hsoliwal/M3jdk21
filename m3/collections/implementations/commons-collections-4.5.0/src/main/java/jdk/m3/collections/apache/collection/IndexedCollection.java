@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -24,6 +24,7 @@ import java.util.function.Predicate;
 
 import jdk.m3.collections.apache.MultiMap;
 import jdk.m3.collections.apache.Transformer;
+import jdk.m3.collections.apache.iterators.AbstractIteratorDecorator;
 import jdk.m3.collections.apache.map.MultiValueMap;
 
 /**
@@ -40,50 +41,69 @@ import jdk.m3.collections.apache.map.MultiValueMap;
  * the {@link Collection}.
  * </p>
  *
- * @param <K> the type of object in the index.
- * @param <C> the type of object in the collection.
+ * @param <K> The type of object in the index.
+ * @param <C> The type of object in the collection.
  * @since 4.0
  */
 public class IndexedCollection<K, C> extends AbstractCollectionDecorator<C> {
 
     // TODO: replace with MultiValuedMap
 
+    /**
+     * Iterator that keeps the index in sync when {@code remove()} is used.
+     */
+    private final class IteratorDecorator extends AbstractIteratorDecorator<C> {
+
+        private C lastReturned;
+
+        private IteratorDecorator(final Iterator<C> iterator) {
+            super(iterator);
+        }
+
+        @Override
+        public C next() {
+            lastReturned = super.next();
+            return lastReturned;
+        }
+
+        @Override
+        public void remove() {
+            super.remove();
+            removeFromIndex(lastReturned);
+            lastReturned = null;
+        }
+    }
+
     /** Serialization version */
     private static final long serialVersionUID = -5512610452568370038L;
 
     /**
-     * Create an {@link IndexedCollection} for a non-unique index.
+     * Creates an {@link IndexedCollection} for a non-unique index.
      *
-     * @param <K> the index object type.
-     * @param <C> the collection type.
-     * @param coll the decorated {@link Collection}.
-     * @param keyTransformer the {@link Transformer} for generating index keys.
-     * @return the created {@link IndexedCollection}.
+     * @param <K>            the index object type.
+     * @param <C>            the collection type.
+     * @param coll           The decorated {@link Collection}.
+     * @param keyTransformer The {@link Transformer} for generating index keys.
+     * @return The created {@link IndexedCollection}.
      */
-    public static <K, C> IndexedCollection<K, C> nonUniqueIndexedCollection(final Collection<C> coll,
-                                                                            final Transformer<C, K> keyTransformer) {
-        return new IndexedCollection<>(coll, keyTransformer,
-                                           MultiValueMap.<K, C>multiValueMap(new HashMap<>()),
-                                           false);
+    public static <K, C> IndexedCollection<K, C> nonUniqueIndexedCollection(final Collection<C> coll, final Transformer<C, K> keyTransformer) {
+        return new IndexedCollection<>(coll, keyTransformer, MultiValueMap.<K, C>multiValueMap(new HashMap<>()), false);
     }
 
     /**
-     * Create an {@link IndexedCollection} for a unique index.
+     * Creates an {@link IndexedCollection} for a unique index.
      * <p>
-     * If an element is added, which maps to an existing key, an {@link IllegalArgumentException}
-     * will be thrown.
+     * If an element is added, which maps to an existing key, an {@link IllegalArgumentException} will be thrown.
+     * </p>
      *
-     * @param <K> the index object type.
-     * @param <C> the collection type.
-     * @param coll the decorated {@link Collection}.
-     * @param keyTransformer the {@link Transformer} for generating index keys.
-     * @return the created {@link IndexedCollection}.
+     * @param <K>            the index object type.
+     * @param <C>            the collection type.
+     * @param coll           The decorated {@link Collection}.
+     * @param keyTransformer The {@link Transformer} for generating index keys.
+     * @return The created {@link IndexedCollection}.
      */
-    public static <K, C> IndexedCollection<K, C> uniqueIndexedCollection(final Collection<C> coll,
-                                                                         final Transformer<C, K> keyTransformer) {
-        return new IndexedCollection<>(coll, keyTransformer,
-                                           MultiValueMap.<K, C>multiValueMap(new HashMap<>()),
-                                           true);
+    public static <K, C> IndexedCollection<K, C> uniqueIndexedCollection(final Collection<C> coll, final Transformer<C, K> keyTransformer) {
+        return new IndexedCollection<>(coll, keyTransformer, MultiValueMap.<K, C>multiValueMap(new HashMap<>()), true);
     }
 
     /** The {@link Transformer} for generating index keys. */
@@ -96,15 +116,14 @@ public class IndexedCollection<K, C> extends AbstractCollectionDecorator<C> {
     private final boolean uniqueIndex;
 
     /**
-     * Create a {@link IndexedCollection}.
+     * Creates a {@link IndexedCollection}.
      *
-     * @param coll  decorated {@link Collection}
-     * @param keyTransformer  {@link Transformer} for generating index keys
-     * @param map  map to use as index
-     * @param uniqueIndex  if the index shall enforce uniqueness of index keys
+     * @param coll  decorated {@link Collection}.
+     * @param keyTransformer  {@link Transformer} for generating index keys.
+     * @param map  map to use as index.
+     * @param uniqueIndex  if the index shall enforce uniqueness of index keys.
      */
-    public IndexedCollection(final Collection<C> coll, final Transformer<C, K> keyTransformer,
-                             final MultiMap<K, C> map, final boolean uniqueIndex) {
+    public IndexedCollection(final Collection<C> coll, final Transformer<C, K> keyTransformer, final MultiMap<K, C> map, final boolean uniqueIndex) {
         super(coll);
         this.keyTransformer = keyTransformer;
         this.index = map;
@@ -116,13 +135,14 @@ public class IndexedCollection<K, C> extends AbstractCollectionDecorator<C> {
      * {@inheritDoc}
      *
      * @throws IllegalArgumentException if the object maps to an existing key and the index
-     *   enforces a uniqueness constraint
+     *   enforces a uniqueness constraint.
      */
     @Override
     public boolean add(final C object) {
+        final K key = toValidKey(object);
         final boolean added = super.add(object);
         if (added) {
-            addToIndex(object);
+            index.put(key, object);
         }
         return added;
     }
@@ -139,16 +159,12 @@ public class IndexedCollection<K, C> extends AbstractCollectionDecorator<C> {
     /**
      * Provides checking for adding the index.
      *
-     * @param object the object to index
+     * @param object The object to index.
      * @throws IllegalArgumentException if the object maps to an existing key and the index
-     *   enforces a uniqueness constraint
+     *   enforces a uniqueness constraint.
      */
     private void addToIndex(final C object) {
-        final K key = keyTransformer.apply(object);
-        if (uniqueIndex && index.containsKey(key)) {
-            throw new IllegalArgumentException("Duplicate key in uniquely indexed collection.");
-        }
-        index.put(key, object);
+        index.put(toValidKey(object), object);
     }
 
     @Override
@@ -160,7 +176,8 @@ public class IndexedCollection<K, C> extends AbstractCollectionDecorator<C> {
     /**
      * {@inheritDoc}
      * <p>
-     * Note: uses the index for fast lookup
+     * Note: uses the index for fast lookup.
+     * </p>
      */
     @SuppressWarnings("unchecked")
     @Override
@@ -171,16 +188,12 @@ public class IndexedCollection<K, C> extends AbstractCollectionDecorator<C> {
     /**
      * {@inheritDoc}
      * <p>
-     * Note: uses the index for fast lookup
+     * Note: uses the index for fast lookup.
+     * </p>
      */
     @Override
     public boolean containsAll(final Collection<?> coll) {
-        for (final Object o : coll) {
-            if (!contains(o)) {
-                return false;
-            }
-        }
-        return true;
+        return coll.stream().allMatch(this::contains);
     }
 
     /**
@@ -189,9 +202,10 @@ public class IndexedCollection<K, C> extends AbstractCollectionDecorator<C> {
      * In case of a non-unique index, this method will return the first
      * value associated with the given key. To retrieve all elements associated
      * with a key, use {@link #values(Object)}.
+     * </p>
      *
-     * @param key  key to look up
-     * @return element found
+     * @param key  key to look up.
+     * @return element found.
      * @see #values(Object)
      */
     public C get(final K key) {
@@ -200,14 +214,17 @@ public class IndexedCollection<K, C> extends AbstractCollectionDecorator<C> {
         return coll == null ? null : coll.iterator().next();
     }
 
+    @Override
+    public Iterator<C> iterator() {
+        return new IteratorDecorator(decorated().iterator());
+    }
+
     /**
      * Clears the index and re-indexes the entire decorated {@link Collection}.
      */
     public void reindex() {
         index.clear();
-        for (final C c : decorated()) {
-            addToIndex(c);
-        }
+        decorated().forEach(this::addToIndex);
     }
 
     @SuppressWarnings("unchecked")
@@ -232,10 +249,10 @@ public class IndexedCollection<K, C> extends AbstractCollectionDecorator<C> {
     /**
      * Removes an object from the index.
      *
-     * @param object the object to remove
+     * @param object The object to remove.
      */
     private void removeFromIndex(final C object) {
-        index.remove(keyTransformer.apply(object));
+        index.removeMapping(keyTransformer.apply(object), object);
     }
 
     /**
@@ -269,13 +286,21 @@ public class IndexedCollection<K, C> extends AbstractCollectionDecorator<C> {
         return changed;
     }
 
+    private K toValidKey(final C object) {
+        final K key = keyTransformer.apply(object);
+        if (uniqueIndex && index.containsKey(key)) {
+            throw new IllegalArgumentException("Duplicate key in uniquely indexed collection.");
+        }
+        return key;
+    }
+
     /**
      * Gets all elements associated with the given key.
      *
-     * @param key  key to look up
-     * @return a collection of elements found, or null if {@code contains(key) == false}
+     * @param key  key to look up.
+     * @return A collection of elements found, or null if {@code contains(key) == false}.
      */
-    @SuppressWarnings("unchecked") // index is a MultiMap which returns a Collection
+    @SuppressWarnings("unchecked") // index is a MultiMap which returns a Collection.
     public Collection<C> values(final K key) {
         return (Collection<C>) index.get(key);
     }

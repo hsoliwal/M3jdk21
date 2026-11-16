@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -40,8 +40,8 @@ public class QueueUtils {
     /**
      * Gets an empty {@code Queue}.
      *
-     * @param <E> the type of the elements in the queue
-     * @return an empty {@link Queue}
+     * @param <E> The type of the elements in the queue
+     * @return An empty {@link Queue}
      */
     @SuppressWarnings("unchecked") // OK, empty queue is compatible with any type
     public static <E> Queue<E> emptyQueue() {
@@ -57,10 +57,10 @@ public class QueueUtils {
      * as it is a backdoor for adding invalid objects.
      * </p>
      *
-     * @param <E> the type of the elements in the queue
-     * @param queue  the queue to predicate, must not be null
-     * @param predicate  the predicate used to evaluate new elements, must not be null
-     * @return a predicated queue
+     * @param <E> The type of the elements in the queue
+     * @param queue  The queue to predicate, must not be null
+     * @param predicate  The predicate used to evaluate new elements, must not be null
+     * @return A predicated queue
      * @throws NullPointerException if the queue or predicate is null
      */
     public static <E> Queue<E> predicatedQueue(final Queue<E> queue, final Predicate<? super E> predicate) {
@@ -89,9 +89,9 @@ public class QueueUtils {
      * Failure to follow this advice may result in non-deterministic behavior.
      * </p>
      *
-     * @param <E> the element type
-     * @param queue the queue to synchronize, must not be null
-     * @return a synchronized queue backed by that queue
+     * @param <E> The element type
+     * @param queue The queue to synchronize, must not be null
+     * @return A synchronized queue backed by that queue
      * @throws NullPointerException if the queue is null
      * @since 4.2
      */
@@ -111,10 +111,10 @@ public class QueueUtils {
      * If you want that behavior, see {@link TransformedQueue#transformedQueue}.
      * </p>
      *
-     * @param <E> the type of the elements in the queue
-     * @param queue  the queue to predicate, must not be null
-     * @param transformer  the transformer for the queue, must not be null
-     * @return a transformed queue backed by the given queue
+     * @param <E> The type of the elements in the queue
+     * @param queue  The queue to predicate, must not be null
+     * @param transformer  The transformer for the queue, must not be null
+     * @return A transformed queue backed by the given queue
      * @throws NullPointerException if the queue or transformer is null
      */
     public static <E> Queue<E> transformingQueue(final Queue<E> queue, final Transformer<? super E, ? extends E> transformer) {
@@ -124,9 +124,9 @@ public class QueueUtils {
     /**
      * Returns an unmodifiable queue backed by the given queue.
      *
-     * @param <E> the type of the elements in the queue
-     * @param queue  the queue to make unmodifiable, must not be null
-     * @return an unmodifiable queue backed by that queue
+     * @param <E> The type of the elements in the queue
+     * @param queue  The queue to make unmodifiable, must not be null
+     * @return An unmodifiable queue backed by that queue
      * @throws NullPointerException if the queue is null
      */
     public static <E> Queue<E> unmodifiableQueue(final Queue<? extends E> queue) {

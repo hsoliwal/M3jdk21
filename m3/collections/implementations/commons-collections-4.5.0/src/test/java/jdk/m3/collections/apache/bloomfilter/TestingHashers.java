@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -22,6 +22,7 @@ import java.util.concurrent.ThreadLocalRandom;
  * A collection of methods and statics that represent standard hashers in testing.
  */
 public class TestingHashers {
+
     /**
      * Hasher that increments from 1.
      */
@@ -48,8 +49,8 @@ public class TestingHashers {
 
     /**
      * Enables all bits in the filter.
-     * @param <T> the Bloom filter type.
-     * @param filter the Bloom filter to populate
+     * @param <T> The Bloom filter type.
+     * @param filter The Bloom filter to populate
      * @return {@code filter} for chaining
      */
     public static <T extends BloomFilter> T populateEntireFilter(final T filter) {
@@ -68,10 +69,10 @@ public class TestingHashers {
 
     /**
      * Enables all bits in a range (inclusive).
-     * @param <T> the Bloom filter type.
-     * @param filter the Bloom filter to populate
-     * @param start the starting bit to enable.
-     * @param end the last bit to enable.
+     * @param <T> The Bloom filter type.
+     * @param filter The Bloom filter to populate
+     * @param start The starting bit to enable.
+     * @param end The last bit to enable.
      * @return {@code filter} for chaining
      */
     public static <T extends BloomFilter> T populateRange(final T filter, final int start, final int end) {

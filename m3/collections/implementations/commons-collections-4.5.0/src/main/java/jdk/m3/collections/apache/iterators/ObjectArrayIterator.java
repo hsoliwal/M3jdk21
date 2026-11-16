@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,12 +16,13 @@
  */
 package jdk.m3.collections.apache.iterators;
 
+import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 import jdk.m3.collections.apache.ResettableIterator;
 
 /**
- * An {@link java.util.Iterator Iterator} over an array of objects.
+ * An {@link Iterator Iterator} over an array of objects.
  * <p>
  * This iterator does not support {@link #remove}, as the object array cannot be
  * structurally modified.
@@ -31,17 +32,20 @@ import jdk.m3.collections.apache.ResettableIterator;
  * back to the start if required.
  * </p>
  *
- * @param <E> the type of elements returned by this iterator.
+ * @param <E> The type of elements returned by this iterator.
  * @since 3.0
  */
 public class ObjectArrayIterator<E> implements ResettableIterator<E> {
 
     /** The array */
     final E[] array;
+
     /** The start index to loop from */
     final int startIndex;
+
     /** The end index to loop to */
     final int endIndex;
+
     /** The current iterator index */
     int index;
 
@@ -49,7 +53,7 @@ public class ObjectArrayIterator<E> implements ResettableIterator<E> {
      * Constructs an ObjectArrayIterator that will iterate over the values in the
      * specified array.
      *
-     * @param array the array to iterate over
+     * @param array The array to iterate over
      * @throws NullPointerException if {@code array} is {@code null}
      */
     public ObjectArrayIterator(final E... array) {
@@ -60,8 +64,8 @@ public class ObjectArrayIterator<E> implements ResettableIterator<E> {
      * Constructs an ObjectArrayIterator that will iterate over the values in the
      * specified array from a specific start index.
      *
-     * @param array  the array to iterate over
-     * @param start  the index to start iterating at
+     * @param array  The array to iterate over
+     * @param start  The index to start iterating at
      * @throws NullPointerException if {@code array} is {@code null}
      * @throws IndexOutOfBoundsException if the start index is out of bounds
      */
@@ -73,9 +77,9 @@ public class ObjectArrayIterator<E> implements ResettableIterator<E> {
      * Constructs an ObjectArrayIterator that will iterate over a range of values
      * in the specified array.
      *
-     * @param array  the array to iterate over
-     * @param start  the index to start iterating at
-     * @param end  the index (exclusive) to finish iterating at
+     * @param array  The array to iterate over
+     * @param start  The index to start iterating at
+     * @param end  The index (exclusive) to finish iterating at
      * @throws IndexOutOfBoundsException if the start or end index is out of bounds
      * @throws IllegalArgumentException if end index is before the start
      * @throws NullPointerException if {@code array} is {@code null}
@@ -102,7 +106,7 @@ public class ObjectArrayIterator<E> implements ResettableIterator<E> {
     /**
      * Gets the array that this iterator is iterating over.
      *
-     * @return the array this iterator iterates over
+     * @return The array this iterator iterates over
      */
     public E[] getArray() {
         return array;
@@ -111,7 +115,7 @@ public class ObjectArrayIterator<E> implements ResettableIterator<E> {
     /**
      * Gets the end index to loop to.
      *
-     * @return the end index
+     * @return The end index
      */
     public int getEndIndex() {
         return endIndex;
@@ -120,7 +124,7 @@ public class ObjectArrayIterator<E> implements ResettableIterator<E> {
     /**
      * Gets the start index to loop from.
      *
-     * @return the start index
+     * @return The start index
      */
     public int getStartIndex() {
         return startIndex;
@@ -139,7 +143,7 @@ public class ObjectArrayIterator<E> implements ResettableIterator<E> {
     /**
      * Returns the next element in the array.
      *
-     * @return the next element in the array
+     * @return The next element in the array
      * @throws NoSuchElementException if all the elements in the array
      *    have already been returned
      */
@@ -152,9 +156,9 @@ public class ObjectArrayIterator<E> implements ResettableIterator<E> {
     }
 
     /**
-     * Throws {@link UnsupportedOperationException}.
+     * Always throws {@link UnsupportedOperationException}.
      *
-     * @throws UnsupportedOperationException always
+     * @throws UnsupportedOperationException Always thrown.
      */
     @Override
     public void remove() {

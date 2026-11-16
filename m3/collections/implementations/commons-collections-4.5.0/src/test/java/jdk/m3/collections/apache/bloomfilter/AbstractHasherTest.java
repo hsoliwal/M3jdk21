@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -41,8 +41,8 @@ public abstract class AbstractHasherTest extends AbstractIndexExtractorTest {
     /**
      * A method to get the number of items in a hasher. Mostly applies to
      * Collections of hashers.
-     * @param hasher the hasher to check.
-     * @return the number of hashers in the hasher
+     * @param hasher The hasher to check.
+     * @return The number of hashers in the hasher
      */
     protected abstract int getHasherSize(Hasher hasher);
 
@@ -52,7 +52,7 @@ public abstract class AbstractHasherTest extends AbstractIndexExtractorTest {
      *  <li>Hash functions (k) = 17
      *  <li>Number of bits (m) = 72
      * </ul>
-     * @return the testing shape.
+     * @return The testing shape.
      */
     protected final Shape getTestShape() {
         return Shape.fromKM(17, 72);
@@ -65,7 +65,7 @@ public abstract class AbstractHasherTest extends AbstractIndexExtractorTest {
         "5, 67868",
         "75, 10"
     })
-    public void testHashing(final int k, final int m) {
+    void testHashing(final int k, final int m) {
         final int[] count = {0};
         final Hasher hasher = createHasher();
         hasher.indices(Shape.fromKM(k, m)).processIndices(i -> {

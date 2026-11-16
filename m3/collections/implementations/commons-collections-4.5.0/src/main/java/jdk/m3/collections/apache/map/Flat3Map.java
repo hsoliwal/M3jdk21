@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -44,11 +44,11 @@ import jdk.m3.collections.apache.iterators.EmptyMapIterator;
  * It also has good garbage collection characteristics.
  * </p>
  * <ul>
- * <li>Optimized for operation at size 3 or less.
- * <li>Still works well once size 3 exceeded.
- * <li>Gets at size 3 or less are about 0-10% faster than HashMap,
- * <li>Puts at size 3 or less are over 4 times faster than HashMap.
- * <li>Performance 5% slower than HashMap once size 3 exceeded once.
+ * <li>Optimized for operation at size 3 or less.</li>
+ * <li>Still works well once size 3 exceeded.</li>
+ * <li>Gets at size 3 or less are about 0-10% faster than HashMap,</li>
+ * <li>Puts at size 3 or less are over 4 times faster than HashMap.</li>
+ * <li>Performance 5% slower than HashMap once size 3 exceeded once.</li>
  * </ul>
  * <p>
  * The design uses two distinct modes of operation - flat and delegate.
@@ -76,8 +76,8 @@ import jdk.m3.collections.apache.iterators.EmptyMapIterator;
  * exceptions when accessed by concurrent threads without synchronization.
  * </p>
  *
- * @param <K> the type of the keys in this map
- * @param <V> the type of the values in this map
+ * @param <K> The type of the keys in this map
+ * @param <V> The type of the values in this map
  * @since 3.0
  */
 public class Flat3Map<K, V> implements IterableMap<K, V>, Serializable, Cloneable {
@@ -85,6 +85,7 @@ public class Flat3Map<K, V> implements IterableMap<K, V>, Serializable, Cloneabl
     abstract static class EntryIterator<K, V> {
         private final Flat3Map<K, V> parent;
         private int nextIndex;
+        private boolean canRemove;
         private FlatMapEntry<K, V> currentEntry;
 
         /**
@@ -98,21 +99,62 @@ public class Flat3Map<K, V> implements IterableMap<K, V>, Serializable, Cloneabl
             return nextIndex < parent.size;
         }
 
-        public Map.Entry<K, V> nextEntry() {
+        private void advance() {
             if (!hasNext()) {
                 throw new NoSuchElementException(AbstractHashedMap.NO_NEXT_ENTRY);
             }
-            currentEntry = new FlatMapEntry<>(parent, ++nextIndex);
+            nextIndex++;
+            canRemove = true;
+        }
+
+        private K currentKey() {
+            switch (nextIndex) {
+            case 3:
+                return parent.key3;
+            case 2:
+                return parent.key2;
+            case 1:
+                return parent.key1;
+            default:
+                throw new IllegalStateException("Invalid map index: " + nextIndex);
+            }
+        }
+
+        public Map.Entry<K, V> nextEntry() {
+            advance();
+            currentEntry = new FlatMapEntry<>(parent, nextIndex);
             return currentEntry;
         }
 
+        K nextKey() {
+            advance();
+            return currentKey();
+        }
+
+        V nextValue() {
+            advance();
+            switch (nextIndex) {
+            case 3:
+                return parent.value3;
+            case 2:
+                return parent.value2;
+            case 1:
+                return parent.value1;
+            default:
+                throw new IllegalStateException("Invalid map index: " + nextIndex);
+            }
+        }
+
         public void remove() {
-            if (currentEntry == null) {
+            if (!canRemove) {
                 throw new IllegalStateException(AbstractHashedMap.REMOVE_INVALID);
             }
-            parent.remove(currentEntry.getKey());
-            currentEntry.setRemoved(true);
+            parent.remove(currentKey());
+            if (currentEntry != null) {
+                currentEntry.setRemoved(true);
+            }
             nextIndex--;
+            canRemove = false;
             currentEntry = null;
         }
 
@@ -149,11 +191,12 @@ public class Flat3Map<K, V> implements IterableMap<K, V>, Serializable, Cloneabl
             if (!(obj instanceof Map.Entry)) {
                 return false;
             }
+            if (!contains(obj)) {
+                return false;
+            }
             final Map.Entry<?, ?> entry = (Map.Entry<?, ?>) obj;
-            final Object key = entry.getKey();
-            final boolean result = parent.containsKey(key);
-            parent.remove(key);
-            return result;
+            parent.remove(entry.getKey());
+            return true;
         }
 
         @Override
@@ -161,6 +204,7 @@ public class Flat3Map<K, V> implements IterableMap<K, V>, Serializable, Cloneabl
             return parent.size();
         }
     }
+
     /**
      * EntrySetIterator and MapEntry
      */
@@ -248,7 +292,7 @@ public class Flat3Map<K, V> implements IterableMap<K, V>, Serializable, Cloneabl
          * As a consequence, all subsequent call to {@link #getKey()},
          * {@link #setValue(Object)} and {@link #getValue()} will fail.
          *
-         * @param removed the new value of the removed flag
+         * @param removed The new value of the removed flag
          */
         void setRemoved(final boolean removed) {
             this.removed = removed;
@@ -449,7 +493,7 @@ public class Flat3Map<K, V> implements IterableMap<K, V>, Serializable, Cloneabl
 
         @Override
         public K next() {
-            return nextEntry().getKey();
+            return nextKey();
         }
     }
 
@@ -503,7 +547,7 @@ public class Flat3Map<K, V> implements IterableMap<K, V>, Serializable, Cloneabl
 
         @Override
         public V next() {
-            return nextEntry().getValue();
+            return nextValue();
         }
     }
 
@@ -552,7 +596,7 @@ public class Flat3Map<K, V> implements IterableMap<K, V>, Serializable, Cloneabl
     /**
      * Constructor copying elements from another map.
      *
-     * @param map  the map to copy
+     * @param map  The map to copy
      * @throws NullPointerException if the map is null
      */
     public Flat3Map(final Map<? extends K, ? extends V> map) {
@@ -579,7 +623,7 @@ public class Flat3Map<K, V> implements IterableMap<K, V>, Serializable, Cloneabl
     /**
      * Clones the map without cloning the keys or values.
      *
-     * @return a shallow clone
+     * @return A shallow clone
      * @since 3.1
      */
     @Override
@@ -599,7 +643,7 @@ public class Flat3Map<K, V> implements IterableMap<K, V>, Serializable, Cloneabl
     /**
      * Checks whether the map contains the specified key.
      *
-     * @param key  the key to search for
+     * @param key  The key to search for
      * @return true if the map contains the key
      */
     @Override
@@ -645,7 +689,7 @@ public class Flat3Map<K, V> implements IterableMap<K, V>, Serializable, Cloneabl
     /**
      * Checks whether the map contains the specified value.
      *
-     * @param value  the value to search for
+     * @param value  The value to search for
      * @return true if the map contains the key
      */
     @Override
@@ -719,7 +763,7 @@ public class Flat3Map<K, V> implements IterableMap<K, V>, Serializable, Cloneabl
      * would be poor choices.
      * </p>
      *
-     * @return a new AbstractHashedMap or subclass
+     * @return A new AbstractHashedMap or subclass
      * @since 3.1
      */
     protected AbstractHashedMap<K, V> createDelegateMap() {
@@ -735,7 +779,7 @@ public class Flat3Map<K, V> implements IterableMap<K, V>, Serializable, Cloneabl
      * creation and simply iterate through the entries, use {@link #mapIterator()}.
      * </p>
      *
-     * @return the entrySet view
+     * @return The entrySet view
      */
     @Override
     public Set<Map.Entry<K, V>> entrySet() {
@@ -748,7 +792,7 @@ public class Flat3Map<K, V> implements IterableMap<K, V>, Serializable, Cloneabl
     /**
      * Compares this map with another.
      *
-     * @param obj  the object to compare to
+     * @param obj  The object to compare to
      * @return true if equal
      */
     @Override
@@ -801,8 +845,8 @@ public class Flat3Map<K, V> implements IterableMap<K, V>, Serializable, Cloneabl
     /**
      * Gets the value mapped to the key specified.
      *
-     * @param key  the key
-     * @return the mapped value, null if no match
+     * @param key  The key
+     * @return The mapped value, null if no match
      */
     @Override
     public V get(final Object key) {
@@ -849,7 +893,7 @@ public class Flat3Map<K, V> implements IterableMap<K, V>, Serializable, Cloneabl
     /**
      * Gets the standard Map hashCode.
      *
-     * @return the hash code defined in the Map interface
+     * @return The hash code defined in the Map interface
      */
     @Override
     public int hashCode() {
@@ -887,7 +931,7 @@ public class Flat3Map<K, V> implements IterableMap<K, V>, Serializable, Cloneabl
      * Changes made to the view affect this map.
      * To simply iterate through the keys, use {@link #mapIterator()}.
      *
-     * @return the keySet view
+     * @return The keySet view
      */
     @Override
     public Set<K> keySet() {
@@ -907,7 +951,7 @@ public class Flat3Map<K, V> implements IterableMap<K, V>, Serializable, Cloneabl
      * It also avoids creating the Map Entry object.
      * </p>
      *
-     * @return the map iterator
+     * @return The map iterator
      */
     @Override
     public MapIterator<K, V> mapIterator() {
@@ -923,9 +967,9 @@ public class Flat3Map<K, V> implements IterableMap<K, V>, Serializable, Cloneabl
     /**
      * Puts a key-value mapping into this map.
      *
-     * @param key  the key to add
-     * @param value  the value to add
-     * @return the value previously mapped to this key, null if none
+     * @param key  The key to add
+     * @param value  The value to add
+     * @return The value previously mapped to this key, null if none
      */
     @Override
     public V put(final K key, final V value) {
@@ -1007,7 +1051,7 @@ public class Flat3Map<K, V> implements IterableMap<K, V>, Serializable, Cloneabl
     /**
      * Puts all the values from the specified map into this map.
      *
-     * @param map  the map to add
+     * @param map  The map to add
      * @throws NullPointerException if the map is null
      */
     @Override
@@ -1033,8 +1077,8 @@ public class Flat3Map<K, V> implements IterableMap<K, V>, Serializable, Cloneabl
     /**
      * Deserializes the map in using a custom routine.
      *
-     * @param in the input stream
-     * @throws IOException if an error occurs while reading from the stream
+     * @param in The input stream
+     * @throws IOException Thrown if an error occurs while reading from the stream
      * @throws ClassNotFoundException if an object read from the stream cannot be loaded
      */
     @SuppressWarnings("unchecked")
@@ -1052,8 +1096,8 @@ public class Flat3Map<K, V> implements IterableMap<K, V>, Serializable, Cloneabl
     /**
      * Removes the specified mapping from this map.
      *
-     * @param key  the mapping to remove
-     * @return the value mapped to the removed key, null if key not in map
+     * @param key  The mapping to remove
+     * @return The value mapped to the removed key, null if key not in map
      */
     @Override
     public V remove(final Object key) {
@@ -1201,7 +1245,7 @@ public class Flat3Map<K, V> implements IterableMap<K, V>, Serializable, Cloneabl
     /**
      * Gets the size of the map.
      *
-     * @return the size
+     * @return The size
      */
     @Override
     public int size() {
@@ -1214,7 +1258,7 @@ public class Flat3Map<K, V> implements IterableMap<K, V>, Serializable, Cloneabl
     /**
      * Gets the map as a String.
      *
-     * @return a string version of the map
+     * @return A string version of the map
      */
     @Override
     public String toString() {
@@ -1255,7 +1299,7 @@ public class Flat3Map<K, V> implements IterableMap<K, V>, Serializable, Cloneabl
      * Changes made to the view affect this map.
      * To simply iterate through the values, use {@link #mapIterator()}.
      *
-     * @return the values view
+     * @return The values view
      */
     @Override
     public Collection<V> values() {
@@ -1268,7 +1312,7 @@ public class Flat3Map<K, V> implements IterableMap<K, V>, Serializable, Cloneabl
     /**
      * Serializes this object to an ObjectOutputStream.
      *
-     * @param out the target ObjectOutputStream.
+     * @param out The target ObjectOutputStream.
      * @throws IOException thrown when an I/O errors occur writing to the target stream.
      */
     private void writeObject(final ObjectOutputStream out) throws IOException {

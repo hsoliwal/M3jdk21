@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -21,16 +21,17 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
+import jdk.m3.collections.apache.Get;
 import jdk.m3.collections.apache.IterableGet;
 import jdk.m3.collections.apache.MapIterator;
 import jdk.m3.collections.apache.map.EntrySetToMapIteratorAdapter;
 
 /**
  * {@link IterableGet} that uses a {@link Map}&lt;K, V&gt; for the
- * {@link jdk.m3.collections.apache.Get Get}&lt;K, V&gt; implementation.
+ * {@link Get Get}&lt;K, V&gt; implementation.
  *
- * @param <K> the type of the keys in this map
- * @param <V> the type of the values in this map
+ * @param <K> The type of the keys in this map
+ * @param <V> The type of the values in this map
  * @since 4.0
  */
 public class AbstractIterableGetMapDecorator<K, V> implements IterableGet<K, V> {
@@ -46,7 +47,8 @@ public class AbstractIterableGetMapDecorator<K, V> implements IterableGet<K, V> 
 
     /**
      * Create a new AbstractSplitMapDecorator.
-     * @param map the map to decorate, must not be null
+     *
+     * @param map The map to decorate, must not be null
      * @throws NullPointerException if map is null
      */
     public AbstractIterableGetMapDecorator(final Map<K, V> map) {
@@ -66,7 +68,7 @@ public class AbstractIterableGetMapDecorator<K, V> implements IterableGet<K, V> 
     /**
      * Gets the map being decorated.
      *
-     * @return the decorated map
+     * @return The decorated map
      */
     protected Map<K, V> decorated() {
         return map;
@@ -107,6 +109,7 @@ public class AbstractIterableGetMapDecorator<K, V> implements IterableGet<K, V> 
 
     /**
      * Gets a MapIterator over this Get.
+     *
      * @return MapIterator&lt;K, V&gt;
      */
     @Override

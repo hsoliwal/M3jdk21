@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -27,8 +27,8 @@ import org.junit.jupiter.api.Test;
 /**
  * Tests TreeMap.
  *
- * @param <K> the key type.
- * @param <V> the value type.
+ * @param <K> The key type.
+ * @param <V> The value type.
  */
 public abstract class AbstractTreeMapTest<K, V> extends AbstractMapTest<TreeMap<K, V>, K, V> {
 
@@ -44,7 +44,7 @@ public abstract class AbstractTreeMapTest<K, V> extends AbstractMapTest<TreeMap<
     public abstract TreeMap<K, V> makeObject();
 
     @Test
-    public void testNewMap() {
+    void testNewMap() {
         final TreeMap<K, V> map = makeObject();
         assertTrue(map.isEmpty(), "New map is empty");
         assertEquals(0, map.size(), "New map has size zero");
@@ -52,7 +52,7 @@ public abstract class AbstractTreeMapTest<K, V> extends AbstractMapTest<TreeMap<
 
     @Test
     @SuppressWarnings("unchecked")
-    public void testSearch() {
+    void testSearch() {
         final TreeMap<K, V> map = makeObject();
         map.put((K) "first", (V) "First Item");
         map.put((K) "second", (V) "Second Item");

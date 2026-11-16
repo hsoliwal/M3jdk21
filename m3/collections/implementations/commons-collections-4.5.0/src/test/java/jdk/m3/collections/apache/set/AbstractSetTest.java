@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -71,7 +71,7 @@ public abstract class AbstractSetTest<E> extends AbstractCollectionTest<E> {
     /**
      * Returns an empty Set for use in modification testing.
      *
-     * @return a confirmed empty collection
+     * @return A confirmed empty collection
      */
     @Override
     public Collection<E> makeConfirmedCollection() {
@@ -81,7 +81,7 @@ public abstract class AbstractSetTest<E> extends AbstractCollectionTest<E> {
     /**
      * Returns a full Set for use in modification testing.
      *
-     * @return a confirmed full collection
+     * @return A confirmed full collection
      */
     @Override
     public Collection<E> makeConfirmedFullCollection() {
@@ -96,7 +96,7 @@ public abstract class AbstractSetTest<E> extends AbstractCollectionTest<E> {
      *
      * Override if your set does not support the add operation.
      *
-     * @return a full set
+     * @return A full set
      */
     @Override
     public Set<E> makeFullCollection() {
@@ -108,7 +108,7 @@ public abstract class AbstractSetTest<E> extends AbstractCollectionTest<E> {
     /**
      * Makes an empty set.  The returned set should have no elements.
      *
-     * @return an empty set
+     * @return An empty set
      */
     @Override
     public abstract Set<E> makeObject();
@@ -118,13 +118,13 @@ public abstract class AbstractSetTest<E> extends AbstractCollectionTest<E> {
      */
     @Test
     @SuppressWarnings("unchecked")
-    public void testSetEquals() {
+    void testSetEquals() {
         resetEmpty();
         assertEquals(getCollection(), getConfirmed(), "Empty sets should be equal");
         verify();
 
         final Collection<E> set2 = makeConfirmedCollection();
-        set2.add((E) "foo");
+        set2.add(getFullElements()[0]);
         assertFalse(getCollection().equals(set2), "Empty set shouldn't equal nonempty set");
 
         resetFull();
@@ -140,7 +140,7 @@ public abstract class AbstractSetTest<E> extends AbstractCollectionTest<E> {
      * Tests {@link Set#hashCode()}.
      */
     @Test
-    public void testSetHashCode() {
+    void testSetHashCode() {
         resetEmpty();
         assertEquals(getCollection().hashCode(), getConfirmed().hashCode(),
                 "Empty sets have equal hashCodes");

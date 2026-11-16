@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -25,7 +25,7 @@ import jdk.m3.collections.apache.ComparatorUtils;
  * Reverses the order of another comparator by reversing the arguments
  * to its {@link #compare(Object, Object) compare} method.
  *
- * @param <E> the type of objects compared by this comparator
+ * @param <E> The type of objects compared by this comparator
  * @since 2.0
  * @see java.util.Collections#reverseOrder()
  */
@@ -64,8 +64,8 @@ public class ReverseComparator<E> implements Comparator<E>, Serializable {
     /**
      * Compares two objects in reverse order.
      *
-     * @param obj1  the first object to compare
-     * @param obj2  the second object to compare
+     * @param obj1  The first object to compare
+     * @param obj2  The second object to compare
      * @return negative if obj1 is less, positive if greater, zero if equal
      */
     @Override
@@ -85,7 +85,7 @@ public class ReverseComparator<E> implements Comparator<E>, Serializable {
      * Subclasses may want to override this behavior to remain consistent
      * with the {@link Comparator#equals(Object) equals} contract.
      *
-     * @param object  the object to compare to
+     * @param object  The object to compare to
      * @return true if equal
      * @since 3.0
      */
@@ -94,7 +94,7 @@ public class ReverseComparator<E> implements Comparator<E>, Serializable {
         if (this == object) {
             return true;
         }
-        if (null == object) {
+        if (object == null) {
             return false;
         }
         if (object.getClass().equals(this.getClass())) {
@@ -108,7 +108,7 @@ public class ReverseComparator<E> implements Comparator<E>, Serializable {
      * Implement a hash code for this comparator that is consistent with
      * {@link #equals(Object) equals}.
      *
-     * @return a suitable hash code
+     * @return A suitable hash code
      * @since 3.0
      */
     @Override

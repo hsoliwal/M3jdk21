@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -19,12 +19,14 @@ package jdk.m3.collections.apache.collection;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import java.io.InvalidObjectException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
 import jdk.m3.collections.apache.Predicate;
+import jdk.m3.collections.apache.functors.NotNullPredicate;
 import jdk.m3.collections.apache.functors.TruePredicate;
 import org.junit.jupiter.api.Test;
 
@@ -39,8 +41,7 @@ public class PredicatedCollectionTest<E> extends AbstractCollectionTest<E> {
     protected Predicate<E> testPredicate =
         String.class::isInstance;
 
-    protected Collection<E> decorateCollection(
-                final Collection<E> collection, final Predicate<E> predicate) {
+    protected Collection<E> decorateCollection(final Collection<E> collection, final Predicate<E> predicate) {
         return PredicatedCollection.predicatedCollection(collection, predicate);
     }
 
@@ -81,35 +82,40 @@ public class PredicatedCollectionTest<E> extends AbstractCollectionTest<E> {
     }
 
     @Test
+    void testDeserializeRejectsElementFailingPredicate() throws Exception {
+        final PredicatedCollection<E> coll = (PredicatedCollection<E>) decorateCollection(new ArrayList<>(), NotNullPredicate.<E>notNullPredicate());
+        // a crafted stream can carry an element that never passed add(); mimic it by
+        // writing one straight into the decorated collection
+        coll.decorated().add(null);
+        assertThrows(InvalidObjectException.class, () -> serializeDeserialize(coll));
+    }
+
+    @Test
     @SuppressWarnings("unchecked")
-    public void testIllegalAdd() {
+    void testIllegalAdd() {
         final Collection<E> c = makeTestCollection();
         final Integer i = 3;
-
         assertThrows(IllegalArgumentException.class, () -> c.add((E) i), "Integer should fail string predicate.");
-
         assertFalse(c.contains(i), "Collection shouldn't contain illegal element");
     }
 
     @Test
     @SuppressWarnings("unchecked")
-    public void testIllegalAddAll() {
+    void testIllegalAddAll() {
         final Collection<E> c = makeTestCollection();
         final List<E> elements = new ArrayList<>();
         elements.add((E) "one");
         elements.add((E) "two");
         elements.add((E) Integer.valueOf(3));
         elements.add((E) "four");
-
         assertThrows(IllegalArgumentException.class, () -> c.addAll(elements), "Integer should fail string predicate.");
-
         assertFalse(c.contains("one"), "Collection shouldn't contain illegal element");
         assertFalse(c.contains("two"), "Collection shouldn't contain illegal element");
         assertFalse(c.contains(3), "Collection shouldn't contain illegal element");
         assertFalse(c.contains("four"), "Collection shouldn't contain illegal element");
     }
 
-//    public void testCreate() throws Exception {
+//    void testCreate() throws Exception {
 //        resetEmpty();
 //        writeExternalFormToDisk((java.io.Serializable) getCollection(), "src/test/resources/data/test/PredicatedCollection.emptyCollection.version4.obj");
 //        resetFull();

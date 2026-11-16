@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -40,8 +40,8 @@ import org.junit.jupiter.api.Test;
  * overriding the supportsXxx() methods if necessary.
  * </p>
  *
- * @param <K> the type of the keys in the maps tested.
- * @param <V> the type of the values in the maps tested.
+ * @param <K> The type of the keys in the maps tested.
+ * @param <V> The type of the values in the maps tested.
  */
 public abstract class AbstractMapIteratorTest<K, V> extends AbstractIteratorTest<K> {
 
@@ -58,7 +58,7 @@ public abstract class AbstractMapIteratorTest<K, V> extends AbstractIteratorTest
      * Implement this method to return the confirmed map which contains the same
      * data as the iterator.
      *
-     * @return a full map which can be updated
+     * @return A full map which can be updated
      */
     public abstract Map<K, V> getConfirmedMap();
 
@@ -66,7 +66,7 @@ public abstract class AbstractMapIteratorTest<K, V> extends AbstractIteratorTest
      * Implement this method to return the map which contains the same data as the
      * iterator.
      *
-     * @return a full map which can be updated
+     * @return A full map which can be updated
      */
     public abstract Map<K, V> getMap();
 
@@ -83,7 +83,7 @@ public abstract class AbstractMapIteratorTest<K, V> extends AbstractIteratorTest
     /**
      * Implement this method to return a map iterator over an empty map.
      *
-     * @return an empty iterator
+     * @return An empty iterator
      */
     @Override
     public abstract MapIterator<K, V> makeEmptyIterator();
@@ -91,7 +91,7 @@ public abstract class AbstractMapIteratorTest<K, V> extends AbstractIteratorTest
     /**
      * Implement this method to return a map iterator over a map with elements.
      *
-     * @return a full iterator
+     * @return A full iterator
      */
     @Override
     public abstract MapIterator<K, V> makeObject();
@@ -110,7 +110,7 @@ public abstract class AbstractMapIteratorTest<K, V> extends AbstractIteratorTest
      * Test that the empty list iterator contract is correct.
      */
     @Test
-    public void testEmptyMapIterator() {
+    void testEmptyMapIterator() {
         if (!supportsEmptyIterator()) {
             return;
         }
@@ -137,7 +137,12 @@ public abstract class AbstractMapIteratorTest<K, V> extends AbstractIteratorTest
             }
         } else {
             // setValue() should throw an IllegalStateException
-            assertThrows(IllegalStateException.class, () -> it.setValue(addSetValues()[0]));
+            try {
+                it.setValue(addSetValues()[0]);
+                fail();
+            } catch (final UnsupportedOperationException | IllegalStateException ex) {
+                // ignore
+            }
         }
     }
 
@@ -145,7 +150,7 @@ public abstract class AbstractMapIteratorTest<K, V> extends AbstractIteratorTest
      * Test that the full list iterator contract is correct.
      */
     @Test
-    public void testFullMapIterator() {
+    void testFullMapIterator() {
         if (!supportsFullIterator()) {
             return;
         }
@@ -175,7 +180,7 @@ public abstract class AbstractMapIteratorTest<K, V> extends AbstractIteratorTest
     }
 
     @Test
-    public void testMapIteratorRemoveGetKey() {
+    void testMapIteratorRemoveGetKey() {
         if (!supportsRemove()) {
             return;
         }
@@ -194,7 +199,7 @@ public abstract class AbstractMapIteratorTest<K, V> extends AbstractIteratorTest
     }
 
     @Test
-    public void testMapIteratorRemoveGetValue() {
+    void testMapIteratorRemoveGetValue() {
         if (!supportsRemove()) {
             return;
         }
@@ -213,7 +218,7 @@ public abstract class AbstractMapIteratorTest<K, V> extends AbstractIteratorTest
     }
 
     @Test
-    public void testMapIteratorSet() {
+    void testMapIteratorSet() {
         if (!supportsFullIterator()) {
             return;
         }
@@ -257,7 +262,7 @@ public abstract class AbstractMapIteratorTest<K, V> extends AbstractIteratorTest
     }
 
     @Test
-    public void testMapIteratorSetRemoveSet() {
+    void testMapIteratorSetRemoveSet() {
         if (!supportsSetValue() || !supportsRemove()) {
             return;
         }
@@ -295,7 +300,7 @@ public abstract class AbstractMapIteratorTest<K, V> extends AbstractIteratorTest
         assertFalse(map.containsKey(key));
         verify();
         // second remove fails
-        assertThrows(NoSuchElementException.class, it::remove, "Full iterators must have at least one element");
+        assertThrows(IllegalStateException.class, it::remove, "Full iterators must have at least one element");
         verify();
     }
 

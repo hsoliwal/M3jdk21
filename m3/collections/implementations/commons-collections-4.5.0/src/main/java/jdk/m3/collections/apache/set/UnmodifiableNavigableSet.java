@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -34,7 +34,7 @@ import jdk.m3.collections.apache.iterators.UnmodifiableIterator;
  * Attempts to modify it will result in an UnsupportedOperationException.
  * </p>
  *
- * @param <E> the type of the elements in this set
+ * @param <E> The type of the elements in this set
  * @since 4.1
  */
 public final class UnmodifiableNavigableSet<E>
@@ -47,9 +47,9 @@ public final class UnmodifiableNavigableSet<E>
     /**
      * Factory method to create an unmodifiable set.
      *
-     * @param <E> the element type
-     * @param set  the set to decorate, must not be null
-     * @return a new unmodifiable {@link NavigableSet}
+     * @param <E> The element type
+     * @param set  The set to decorate, must not be null
+     * @return A new unmodifiable {@link NavigableSet}
      * @throws NullPointerException if set is null
      */
     public static <E> NavigableSet<E> unmodifiableNavigableSet(final NavigableSet<E> set) {
@@ -62,23 +62,40 @@ public final class UnmodifiableNavigableSet<E>
     /**
      * Constructor that wraps (not copies).
      *
-     * @param set  the set to decorate, must not be null
+     * @param set  The set to decorate, must not be null
      * @throws NullPointerException if set is null
      */
     private UnmodifiableNavigableSet(final NavigableSet<E> set) {
         super(set);
     }
 
+    /**
+     * Always throws {@link UnsupportedOperationException}.
+     *
+     * @param object Ignored.
+     * @throws UnsupportedOperationException Always thrown.
+     */
     @Override
     public boolean add(final E object) {
         throw new UnsupportedOperationException();
     }
 
+    /**
+     * Always throws {@link UnsupportedOperationException}.
+     *
+     * @param coll Ignored.
+     * @throws UnsupportedOperationException Always thrown.
+     */
     @Override
     public boolean addAll(final Collection<? extends E> coll) {
         throw new UnsupportedOperationException();
     }
 
+    /**
+     * Always throws {@link UnsupportedOperationException}.
+     *
+     * @throws UnsupportedOperationException Always thrown.
+     */
     @Override
     public void clear() {
         throw new UnsupportedOperationException();
@@ -97,14 +114,12 @@ public final class UnmodifiableNavigableSet<E>
 
     @Override
     public SortedSet<E> headSet(final E toElement) {
-        final SortedSet<E> head = decorated().headSet(toElement);
-        return UnmodifiableSortedSet.unmodifiableSortedSet(head);
+        return UnmodifiableSortedSet.unmodifiableSortedSet(decorated().headSet(toElement));
     }
 
     @Override
     public NavigableSet<E> headSet(final E toElement, final boolean inclusive) {
-        final NavigableSet<E> head = decorated().headSet(toElement, inclusive);
-        return unmodifiableNavigableSet(head);
+        return unmodifiableNavigableSet(decorated().headSet(toElement, inclusive));
     }
 
     @Override
@@ -113,6 +128,9 @@ public final class UnmodifiableNavigableSet<E>
     }
 
     /**
+     * Always throws {@link UnsupportedOperationException}.
+     *
+     * @throws UnsupportedOperationException Always thrown.
      * @since 4.5.0-M1
      */
     @Override
@@ -121,6 +139,9 @@ public final class UnmodifiableNavigableSet<E>
     }
 
     /**
+     * Always throws {@link UnsupportedOperationException}.
+     *
+     * @throws UnsupportedOperationException Always thrown.
      * @since 4.5.0-M1
      */
     @Override
@@ -131,8 +152,8 @@ public final class UnmodifiableNavigableSet<E>
     /**
      * Deserializes the collection in using a custom routine.
      *
-     * @param in  the input stream
-     * @throws IOException if an error occurs while reading from the stream
+     * @param in  The input stream
+     * @throws IOException Thrown if an error occurs while reading from the stream
      * @throws ClassNotFoundException if an object read from the stream cannot be loaded
      */
     @SuppressWarnings("unchecked") // (1) should only fail if input stream is incorrect
@@ -141,17 +162,33 @@ public final class UnmodifiableNavigableSet<E>
         setCollection((Collection<E>) in.readObject()); // (1)
     }
 
+    /**
+     * Always throws {@link UnsupportedOperationException}.
+     *
+     * @param object Ignored.
+     * @throws UnsupportedOperationException Always thrown.
+     */
     @Override
     public boolean remove(final Object object) {
         throw new UnsupportedOperationException();
     }
 
+    /**
+     * Always throws {@link UnsupportedOperationException}.
+     *
+     * @param coll Ignored.
+     * @throws UnsupportedOperationException Always thrown.
+     */
     @Override
     public boolean removeAll(final Collection<?> coll) {
         throw new UnsupportedOperationException();
     }
 
     /**
+     * Always throws {@link UnsupportedOperationException}.
+     *
+     * @param filter Ignored.
+     * @throws UnsupportedOperationException Always thrown.
      * @since 4.4
      */
     @Override
@@ -159,6 +196,12 @@ public final class UnmodifiableNavigableSet<E>
         throw new UnsupportedOperationException();
     }
 
+    /**
+     * Always throws {@link UnsupportedOperationException}.
+     *
+     * @param coll Ignored.
+     * @throws UnsupportedOperationException Always thrown.
+     */
     @Override
     public boolean retainAll(final Collection<?> coll) {
         throw new UnsupportedOperationException();
@@ -167,33 +210,29 @@ public final class UnmodifiableNavigableSet<E>
     @Override
     public NavigableSet<E> subSet(final E fromElement, final boolean fromInclusive, final E toElement,
             final boolean toInclusive) {
-        final NavigableSet<E> sub = decorated().subSet(fromElement, fromInclusive, toElement, toInclusive);
-        return unmodifiableNavigableSet(sub);
+        return unmodifiableNavigableSet(decorated().subSet(fromElement, fromInclusive, toElement, toInclusive));
     }
 
     // SortedSet
     @Override
     public SortedSet<E> subSet(final E fromElement, final E toElement) {
-        final SortedSet<E> sub = decorated().subSet(fromElement, toElement);
-        return UnmodifiableSortedSet.unmodifiableSortedSet(sub);
+        return UnmodifiableSortedSet.unmodifiableSortedSet(decorated().subSet(fromElement, toElement));
     }
 
     @Override
     public SortedSet<E> tailSet(final E fromElement) {
-        final SortedSet<E> tail = decorated().tailSet(fromElement);
-        return UnmodifiableSortedSet.unmodifiableSortedSet(tail);
+        return UnmodifiableSortedSet.unmodifiableSortedSet(decorated().tailSet(fromElement));
     }
 
     @Override
     public NavigableSet<E> tailSet(final E fromElement, final boolean inclusive) {
-        final NavigableSet<E> tail = decorated().tailSet(fromElement, inclusive);
-        return unmodifiableNavigableSet(tail);
+        return unmodifiableNavigableSet(decorated().tailSet(fromElement, inclusive));
     }
 
     /**
      * Serializes this object to an ObjectOutputStream.
      *
-     * @param out the target ObjectOutputStream.
+     * @param out The target ObjectOutputStream.
      * @throws IOException thrown when an I/O errors occur writing to the target stream.
      */
     private void writeObject(final ObjectOutputStream out) throws IOException {

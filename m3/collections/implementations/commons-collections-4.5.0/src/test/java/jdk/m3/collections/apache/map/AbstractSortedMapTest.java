@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -31,10 +31,10 @@ import jdk.m3.collections.apache.BulkTest;
 import org.junit.jupiter.api.Test;
 
 /**
- * Tests {@link java.util.SortedMap}.
+ * Tests {@link SortedMap}.
  *
- * @param <K> the key type.
- * @param <V> the value type.
+ * @param <K> The key type.
+ * @param <V> The value type.
  */
 public abstract class AbstractSortedMapTest<K, V> extends AbstractMapTest<SortedMap<K, V>, K, V> {
 
@@ -72,7 +72,7 @@ public abstract class AbstractSortedMapTest<K, V> extends AbstractMapTest<Sorted
         }
 
         @Test
-        public void testHeadMapOutOfRange() {
+        void testHeadMapOutOfRange() {
             if (!isPutAddSupported()) {
                 return;
             }
@@ -81,7 +81,7 @@ public abstract class AbstractSortedMapTest<K, V> extends AbstractMapTest<Sorted
             verify();
         }
 
-//        public void testCreate() throws Exception {
+//        void testCreate() throws Exception {
 //            Map map = makeEmptyMap();
 //            writeExternalFormToDisk(
 //                (java.io.Serializable) map,
@@ -135,7 +135,7 @@ public abstract class AbstractSortedMapTest<K, V> extends AbstractMapTest<Sorted
         }
 
         @Test
-        public void testSubMapOutOfRange() {
+        void testSubMapOutOfRange() {
             if (!isPutAddSupported()) {
                 return;
             }
@@ -144,7 +144,7 @@ public abstract class AbstractSortedMapTest<K, V> extends AbstractMapTest<Sorted
             verify();
         }
 
-//        public void testCreate() throws Exception {
+//        void testCreate() throws Exception {
 //            Map map = makeEmptyMap();
 //            writeExternalFormToDisk(
 //                (java.io.Serializable) map,
@@ -192,7 +192,7 @@ public abstract class AbstractSortedMapTest<K, V> extends AbstractMapTest<Sorted
         }
 
         @Test
-        public void testTailMapOutOfRange() {
+        void testTailMapOutOfRange() {
             if (!isPutAddSupported()) {
                 return;
             }
@@ -201,7 +201,7 @@ public abstract class AbstractSortedMapTest<K, V> extends AbstractMapTest<Sorted
             verify();
         }
 
-//        public void testCreate() throws Exception {
+//        void testCreate() throws Exception {
 //            Map map = makeEmptyMap();
 //            writeExternalFormToDisk(
 //                (java.io.Serializable) map,
@@ -295,19 +295,19 @@ public abstract class AbstractSortedMapTest<K, V> extends AbstractMapTest<Sorted
         public boolean isTestSerialization() {
             return false;
         }
-//        public void testSimpleSerialization() throws Exception {
+//        void testSimpleSerialization() throws Exception {
 //            if (main.isSubMapViewsSerializable() == false) return;
 //            super.testSimpleSerialization();
 //        }
-//        public void testSerializeDeserializeThenCompare() throws Exception {
+//        void testSerializeDeserializeThenCompare() throws Exception {
 //            if (main.isSubMapViewsSerializable() == false) return;
 //            super.testSerializeDeserializeThenCompare();
 //        }
-//        public void testEmptyMapCompatibility() throws Exception {
+//        void testEmptyMapCompatibility() throws Exception {
 //            if (main.isSubMapViewsSerializable() == false) return;
 //            super.testEmptyMapCompatibility();
 //        }
-//        public void testFullMapCompatibility() throws Exception {
+//        void testFullMapCompatibility() throws Exception {
 //            if (main.isSubMapViewsSerializable() == false) return;
 //            super.testFullMapCompatibility();
 //        }
@@ -375,7 +375,7 @@ public abstract class AbstractSortedMapTest<K, V> extends AbstractMapTest<Sorted
     /**
      * SortedMap uses TreeMap as its known comparison.
      *
-     * @return a map that is known to be valid
+     * @return A map that is known to be valid
      */
     @Override
     public SortedMap<K, V> makeConfirmedMap() {
@@ -397,19 +397,19 @@ public abstract class AbstractSortedMapTest<K, V> extends AbstractMapTest<Sorted
     public abstract SortedMap<K, V> makeObject();
 
     @Test
-    public void testComparator() {
+    void testComparator() {
 //        SortedMap<K, V> sm = makeFullMap();
         // no tests I can think of
     }
 
     @Test
-    public void testFirstKey() {
+    void testFirstKey() {
         final SortedMap<K, V> sm = makeFullMap();
         assertSame(sm.keySet().iterator().next(), sm.firstKey());
     }
 
     @Test
-    public void testLastKey() {
+    void testLastKey() {
         final SortedMap<K, V> sm = makeFullMap();
         K obj = null;
         for (final K k : sm.keySet()) {

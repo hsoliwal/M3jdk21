@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -23,7 +23,7 @@ import jdk.m3.collections.apache.Transformer;
 /**
  * Transformer implementation that does nothing.
  *
- * @param <T> the type of the input and result to the function.
+ * @param <T> The type of the input and result to the function.
  * @since 3.0
  */
 public class NOPTransformer<T> implements Transformer<T, T>, Serializable {
@@ -39,7 +39,7 @@ public class NOPTransformer<T> implements Transformer<T, T>, Serializable {
      * Factory returning the singleton instance.
      *
      * @param <T>  the input/output type
-     * @return the singleton instance
+     * @return The singleton instance
      * @since 3.1
      */
     public static <T> Transformer<T, T> nopTransformer() {
@@ -55,7 +55,7 @@ public class NOPTransformer<T> implements Transformer<T, T>, Serializable {
     /**
      * Returns the singleton instance.
      *
-     * @return the singleton instance.
+     * @return The singleton instance.
      */
     private Object readResolve() {
         return INSTANCE;
@@ -64,8 +64,8 @@ public class NOPTransformer<T> implements Transformer<T, T>, Serializable {
     /**
      * Transforms the input to result by doing nothing.
      *
-     * @param input  the input object to transform
-     * @return the transformed result which is the input
+     * @param input  The input object to transform
+     * @return The transformed result which is the input
      */
     @Override
     public T transform(final T input) {

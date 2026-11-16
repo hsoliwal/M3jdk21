@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -25,7 +25,7 @@ import jdk.m3.collections.apache.Transformer;
  * Transformer implementation that calls a Predicate using the input object
  * and then returns the result.
  *
- * @param <T> the type of the input and result to the function.
+ * @param <T> The type of the input and result to the function.
  * @since 3.0
  */
 public class PredicateTransformer<T> implements Transformer<T, Boolean>, Serializable {
@@ -37,8 +37,8 @@ public class PredicateTransformer<T> implements Transformer<T, Boolean>, Seriali
      * Factory method that performs validation.
      *
      * @param <T>  the input type
-     * @param predicate  the predicate to call, not null
-     * @return the {@code predicate} transformer
+     * @param predicate  The predicate to call, not null
+     * @return The {@code predicate} transformer
      * @throws IllegalArgumentException if the predicate is null
      */
     public static <T> Transformer<T, Boolean> predicateTransformer(final Predicate<? super T> predicate) {
@@ -55,7 +55,7 @@ public class PredicateTransformer<T> implements Transformer<T, Boolean>, Seriali
      * Constructor that performs no validation.
      * Use {@code predicateTransformer} if you want that.
      *
-     * @param predicate  the predicate to call, not null
+     * @param predicate  The predicate to call, not null
      */
     public PredicateTransformer(final Predicate<? super T> predicate) {
         iPredicate = predicate;
@@ -64,7 +64,7 @@ public class PredicateTransformer<T> implements Transformer<T, Boolean>, Seriali
     /**
      * Gets the predicate.
      *
-     * @return the predicate
+     * @return The predicate
      * @since 3.1
      */
     public Predicate<? super T> getPredicate() {
@@ -74,8 +74,8 @@ public class PredicateTransformer<T> implements Transformer<T, Boolean>, Seriali
     /**
      * Transforms the input to result by calling a predicate.
      *
-     * @param input  the input object to transform
-     * @return the transformed result
+     * @param input  The input object to transform
+     * @return The transformed result
      */
     @Override
     public Boolean transform(final T input) {

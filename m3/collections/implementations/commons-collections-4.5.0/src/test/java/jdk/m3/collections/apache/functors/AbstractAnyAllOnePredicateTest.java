@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -33,7 +33,7 @@ public abstract class AbstractAnyAllOnePredicateTest<T> extends AbstractComposit
     /**
      * Creates a new {@code TestCompositePredicate}.
      *
-     * @param testValue the value which the mock predicates should expect to see (may be null).
+     * @param testValue The value which the mock predicates should expect to see (may be null).
      */
     protected AbstractAnyAllOnePredicateTest(final T testValue) {
         super(testValue);
@@ -69,9 +69,10 @@ public abstract class AbstractAnyAllOnePredicateTest<T> extends AbstractComposit
      * the same value as the single predicate does.
      */
     @SuppressWarnings("boxing")
+    @Test
     public final void singleValues() {
-        assertTrue(getPredicateInstance(true).evaluate(null));
-        assertFalse(getPredicateInstance(false).evaluate(null));
+        assertTrue(getPredicateInstance(true).test(getTestValue()));
+        assertFalse(getPredicateInstance(false).test(getTestValue()));
     }
 
 }

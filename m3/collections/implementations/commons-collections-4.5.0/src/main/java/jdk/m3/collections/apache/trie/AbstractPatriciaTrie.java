@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package jdk.m3.collections.apache.trie;
 
 import java.io.IOException;
@@ -37,20 +38,18 @@ import jdk.m3.collections.apache.OrderedMapIterator;
 import jdk.m3.collections.apache.Trie;
 
 /**
- * This class implements the base PATRICIA algorithm and everything that
- * is related to the {@link Map} interface.
+ * This class implements the base PATRICIA algorithm and everything that is related to the {@link Map} interface.
  *
- * @param <K> the type of the keys in this map
- * @param <V> the type of the values in this map
+ * @param <K> The type of the keys in this map
+ * @param <V> The type of the values in this map
  * @since 4.0
  */
 public abstract class AbstractPatriciaTrie<K, V> extends AbstractBitwiseTrie<K, V> {
 
     /**
-     * A range view of the {@link jdk.m3.collections.apache.Trie}.
+     * A range view of the {@link Trie}.
      */
-    private abstract class AbstractRangeMap extends AbstractMap<K, V>
-            implements SortedMap<K, V> {
+    private abstract class AbstractRangeMap extends AbstractMap<K, V> implements SortedMap<K, V> {
 
         /** The {@link #entrySet()} view. */
         private transient volatile Set<Map.Entry<K, V>> entrySet;
@@ -65,20 +64,26 @@ public abstract class AbstractPatriciaTrie<K, V> extends AbstractBitwiseTrie<K, 
             if (!inRange(castKey(key))) {
                 return false;
             }
-
             return AbstractPatriciaTrie.this.containsKey(key);
         }
 
         /**
          * Creates and returns an {@link #entrySet()} view of the {@link AbstractRangeMap}.
+         *
+         * @return the entry set.
          */
         protected abstract Set<Map.Entry<K, V>> createEntrySet();
 
         /**
          * Creates and returns a sub-range view of the current {@link AbstractRangeMap}.
+         *
+         * @param fromKey       the from key.
+         * @param fromInclusive whether from is inclusive.
+         * @param toKey         the to key.
+         * @param toInclusive   whether to is inclusive.
+         * @return the sub-range map.
          */
-        protected abstract SortedMap<K, V> createRangeMap(K fromKey, boolean fromInclusive,
-                                                          K toKey, boolean toInclusive);
+        protected abstract SortedMap<K, V> createRangeMap(K fromKey, boolean fromInclusive, K toKey, boolean toInclusive);
 
         @Override
         public Set<Map.Entry<K, V>> entrySet() {
@@ -93,17 +98,20 @@ public abstract class AbstractPatriciaTrie<K, V> extends AbstractBitwiseTrie<K, 
             if (!inRange(castKey(key))) {
                 return null;
             }
-
             return AbstractPatriciaTrie.this.get(key);
         }
 
         /**
          * Gets the FROM Key.
+         *
+         * @return the from key.
          */
         protected abstract K getFromKey();
 
         /**
          * Gets the TO Key.
+         *
+         * @return the to key.
          */
         protected abstract K getToKey();
 
@@ -117,11 +125,14 @@ public abstract class AbstractPatriciaTrie<K, V> extends AbstractBitwiseTrie<K, 
 
         /**
          * Returns true if the provided key is in the FROM range of the {@link AbstractRangeMap}.
+         *
+         * @param key            the key.
+         * @param forceInclusive whether to force inclusive.
+         * @return true if in range.
          */
         protected boolean inFromRange(final K key, final boolean forceInclusive) {
             final K fromKey = getFromKey();
             final boolean fromInclusive = isFromInclusive();
-
             final int ret = getKeyAnalyzer().compare(key, fromKey);
             if (fromInclusive || forceInclusive) {
                 return ret >= 0;
@@ -131,31 +142,38 @@ public abstract class AbstractPatriciaTrie<K, V> extends AbstractBitwiseTrie<K, 
 
         /**
          * Returns true if the provided key is greater than TO and less than FROM.
+         *
+         * @param key the key.
+         * @return true if in range.
          */
         protected boolean inRange(final K key) {
             final K fromKey = getFromKey();
             final K toKey = getToKey();
-
             return (fromKey == null || inFromRange(key, false)) && (toKey == null || inToRange(key, false));
         }
 
         /**
          * This form allows the high endpoint (as well as all legit keys).
+         *
+         * @param key the key.
+         * @return true if in range.
          */
         protected boolean inRange2(final K key) {
             final K fromKey = getFromKey();
             final K toKey = getToKey();
-
             return (fromKey == null || inFromRange(key, false)) && (toKey == null || inToRange(key, true));
         }
 
         /**
          * Returns true if the provided key is in the TO range of the {@link AbstractRangeMap}.
+         *
+         * @param key            the key.
+         * @param forceInclusive whether to force inclusive.
+         * @return true if in range.
          */
         protected boolean inToRange(final K key, final boolean forceInclusive) {
             final K toKey = getToKey();
             final boolean toInclusive = isToInclusive();
-
             final int ret = getKeyAnalyzer().compare(key, toKey);
             if (toInclusive || forceInclusive) {
                 return ret <= 0;
@@ -190,7 +208,6 @@ public abstract class AbstractPatriciaTrie<K, V> extends AbstractBitwiseTrie<K, 
             if (!inRange(castKey(key))) {
                 return null;
             }
-
             return AbstractPatriciaTrie.this.remove(key);
         }
 
@@ -199,11 +216,9 @@ public abstract class AbstractPatriciaTrie<K, V> extends AbstractBitwiseTrie<K, 
             if (!inRange2(fromKey)) {
                 throw new IllegalArgumentException("FromKey is out of range: " + fromKey);
             }
-
             if (!inRange2(toKey)) {
                 throw new IllegalArgumentException("ToKey is out of range: " + toKey);
             }
-
             return createRangeMap(fromKey, isFromInclusive(), toKey, isToInclusive());
         }
 
@@ -224,8 +239,15 @@ public abstract class AbstractPatriciaTrie<K, V> extends AbstractBitwiseTrie<K, 
         /** For fast-fail. */
         protected int expectedModCount = AbstractPatriciaTrie.this.modCount;
 
-        protected TrieEntry<K, V> next; // the next node to return
-        protected TrieEntry<K, V> current; // the current entry we're on
+        /**
+         * The next node to return.
+         */
+        protected TrieEntry<K, V> next;
+
+        /**
+         * The current entry.
+         */
+        protected TrieEntry<K, V> current;
 
         /**
          * Starts iteration from the root.
@@ -236,12 +258,18 @@ public abstract class AbstractPatriciaTrie<K, V> extends AbstractBitwiseTrie<K, 
 
         /**
          * Starts iteration at the given entry.
+         *
+         * @param firstEntry the first entry to return.
          */
         protected AbstractTrieIterator(final TrieEntry<K, V> firstEntry) {
             next = firstEntry;
         }
 
         /**
+         * Finds the next {@link TrieEntry} after the provided entry.
+         *
+         * @param prior the prior entry.
+         * @return the next entry.
          * @see PatriciaTrie#nextEntry(TrieEntry)
          */
         protected TrieEntry<K, V> findNext(final TrieEntry<K, V> prior) {
@@ -255,17 +283,17 @@ public abstract class AbstractPatriciaTrie<K, V> extends AbstractBitwiseTrie<K, 
 
         /**
          * Returns the next {@link TrieEntry}.
+         *
+         * @return the next entry.
          */
         protected TrieEntry<K, V> nextEntry() {
             if (expectedModCount != AbstractPatriciaTrie.this.modCount) {
                 throw new ConcurrentModificationException();
             }
-
             final TrieEntry<K, V> e = next;
             if (e == null) {
                 throw new NoSuchElementException();
             }
-
             next = findNext(e);
             current = e;
             return e;
@@ -276,21 +304,18 @@ public abstract class AbstractPatriciaTrie<K, V> extends AbstractBitwiseTrie<K, 
             if (current == null) {
                 throw new IllegalStateException();
             }
-
             if (expectedModCount != AbstractPatriciaTrie.this.modCount) {
                 throw new ConcurrentModificationException();
             }
-
             final TrieEntry<K, V> node = current;
             current = null;
             AbstractPatriciaTrie.this.removeEntry(node);
-
             expectedModCount = AbstractPatriciaTrie.this.modCount;
         }
     }
 
     /**
-     * This is an entry set view of the {@link jdk.m3.collections.apache.Trie} as returned by {@link Map#entrySet()}.
+     * This is an entry set view of the {@link Trie} as returned by {@link Map#entrySet()}.
      */
     private final class EntrySet extends AbstractSet<Map.Entry<K, V>> {
 
@@ -298,6 +323,7 @@ public abstract class AbstractPatriciaTrie<K, V> extends AbstractBitwiseTrie<K, 
          * An {@link Iterator} that returns {@link Entry} Objects.
          */
         private final class EntryIterator extends AbstractTrieIterator<Map.Entry<K, V>> {
+
             @Override
             public Map.Entry<K, V> next() {
                 return nextEntry();
@@ -314,7 +340,6 @@ public abstract class AbstractPatriciaTrie<K, V> extends AbstractBitwiseTrie<K, 
             if (!(o instanceof Map.Entry)) {
                 return false;
             }
-
             final TrieEntry<K, V> candidate = getEntry(((Map.Entry<?, ?>) o).getKey());
             return candidate != null && candidate.equals(o);
         }
@@ -326,10 +351,7 @@ public abstract class AbstractPatriciaTrie<K, V> extends AbstractBitwiseTrie<K, 
 
         @Override
         public boolean remove(final Object obj) {
-            if (!(obj instanceof Map.Entry)) {
-                return false;
-            }
-            if (!contains(obj)) {
+            if (!(obj instanceof Map.Entry) || !contains(obj)) {
                 return false;
             }
             final Map.Entry<?, ?> entry = (Map.Entry<?, ?>) obj;
@@ -342,8 +364,9 @@ public abstract class AbstractPatriciaTrie<K, V> extends AbstractBitwiseTrie<K, 
             return AbstractPatriciaTrie.this.size();
         }
     }
+
     /**
-     * This is a key set view of the {@link jdk.m3.collections.apache.Trie} as returned by {@link Map#keySet()}.
+     * This is a key set view of the {@link Trie} as returned by {@link Map#keySet()}.
      */
     private final class KeySet extends AbstractSet<K> {
 
@@ -351,6 +374,7 @@ public abstract class AbstractPatriciaTrie<K, V> extends AbstractBitwiseTrie<K, 
          * An {@link Iterator} that returns Key Objects.
          */
         private final class KeyIterator extends AbstractTrieIterator<K> {
+
             @Override
             public K next() {
                 return nextEntry().getKey();
@@ -384,8 +408,9 @@ public abstract class AbstractPatriciaTrie<K, V> extends AbstractBitwiseTrie<K, 
             return AbstractPatriciaTrie.this.size();
         }
     }
+
     /**
-     * A prefix {@link RangeEntrySet} view of the {@link jdk.m3.collections.apache.Trie}.
+     * A prefix {@link RangeEntrySet} view of the {@link Trie}.
      */
     private final class PrefixRangeEntrySet extends RangeEntrySet {
 
@@ -396,18 +421,19 @@ public abstract class AbstractPatriciaTrie<K, V> extends AbstractBitwiseTrie<K, 
 
             // values to reset the subtree if we remove it.
             private final K prefix;
+
             private final int offset;
+
             private final int lengthInBits;
+
             private boolean lastOne;
 
             private TrieEntry<K, V> subtree; // the subtree to search within
 
             /**
-             * Starts iteration at the given entry &amp; search only
-             * within the given subtree.
+             * Starts iteration at the given entry &amp; search only within the given subtree.
              */
-            EntryIterator(final TrieEntry<K, V> startScan, final K prefix,
-                    final int offset, final int lengthInBits) {
+            EntryIterator(final TrieEntry<K, V> startScan, final K prefix, final int offset, final int lengthInBits) {
                 subtree = startScan;
                 next = AbstractPatriciaTrie.this.followLeft(startScan);
                 this.prefix = prefix;
@@ -438,15 +464,12 @@ public abstract class AbstractPatriciaTrie<K, V> extends AbstractBitwiseTrie<K, 
                 if (current == subtree) {
                     needsFixing = true;
                 }
-
                 super.remove();
-
                 // If the subtree changed its bitIndex or we
                 // removed the old subtree, get a new one.
                 if (bitIdx != subtree.bitIndex || needsFixing) {
                     subtree = subtree(prefix, offset, lengthInBits);
                 }
-
                 // If the subtree's bitIndex is less than the
                 // length of our prefix, it's the last item
                 // in the prefix tree.
@@ -479,7 +502,6 @@ public abstract class AbstractPatriciaTrie<K, V> extends AbstractBitwiseTrie<K, 
                 if (hit != 0) {
                     throw new NoSuchElementException();
                 }
-
                 ++hit;
                 return entry;
             }
@@ -489,7 +511,6 @@ public abstract class AbstractPatriciaTrie<K, V> extends AbstractBitwiseTrie<K, 
                 if (hit != 1) {
                     throw new IllegalStateException();
                 }
-
                 ++hit;
                 AbstractPatriciaTrie.this.removeEntry(entry);
             }
@@ -515,7 +536,6 @@ public abstract class AbstractPatriciaTrie<K, V> extends AbstractBitwiseTrie<K, 
                 prefixStart = subtree(delegate.prefix, delegate.offsetInBits, delegate.lengthInBits);
                 expectedModCount = AbstractPatriciaTrie.this.modCount;
             }
-
             if (prefixStart == null) {
                 final Set<Map.Entry<K, V>> empty = Collections.emptySet();
                 return empty.iterator();
@@ -533,7 +553,7 @@ public abstract class AbstractPatriciaTrie<K, V> extends AbstractBitwiseTrie<K, 
     }
 
     /**
-     * A submap used for prefix views over the {@link jdk.m3.collections.apache.Trie}.
+     * A submap used for prefix views over the {@link Trie}.
      */
     private final class PrefixRangeMap extends AbstractRangeMap {
 
@@ -577,71 +597,57 @@ public abstract class AbstractPatriciaTrie<K, V> extends AbstractBitwiseTrie<K, 
         }
 
         @Override
-        protected SortedMap<K, V> createRangeMap(final K fromKey, final boolean fromInclusive,
-                                                 final K toKey, final boolean toInclusive) {
+        protected SortedMap<K, V> createRangeMap(final K fromKey, final boolean fromInclusive, final K toKey, final boolean toInclusive) {
             return new RangeEntryMap(fromKey, fromInclusive, toKey, toInclusive);
         }
 
         @Override
         public K firstKey() {
             fixup();
-
             Map.Entry<K, V> e = null;
             if (fromKey == null) {
                 e = firstEntry();
             } else {
                 e = higherEntry(fromKey);
             }
-
             final K first = e != null ? e.getKey() : null;
             if (e == null || !getKeyAnalyzer().isPrefix(prefix, offsetInBits, lengthInBits, first)) {
                 throw new NoSuchElementException();
             }
-
             return first;
         }
 
         /**
-         * This method does two things. It determines the FROM
-         * and TO range of the {@link PrefixRangeMap} and the number
-         * of elements in the range. This method must be called every
-         * time the {@link jdk.m3.collections.apache.Trie} has changed.
+         * This method does two things. It determines the FROM and TO range of the {@link PrefixRangeMap} and the number of elements in the range. This method
+         * must be called every time the {@link Trie} has changed.
          */
         private int fixup() {
             // The trie has changed since we last found our toKey / fromKey
-            if (size == - 1 || AbstractPatriciaTrie.this.modCount != expectedModCount) {
+            if (size == -1 || AbstractPatriciaTrie.this.modCount != expectedModCount) {
                 final Iterator<Map.Entry<K, V>> it = super.entrySet().iterator();
                 size = 0;
-
                 Map.Entry<K, V> entry = null;
                 if (it.hasNext()) {
                     entry = it.next();
                     size = 1;
                 }
-
                 fromKey = entry == null ? null : entry.getKey();
                 if (fromKey != null) {
                     final TrieEntry<K, V> prior = previousEntry((TrieEntry<K, V>) entry);
                     fromKey = prior == null ? null : prior.getKey();
                 }
-
                 toKey = fromKey;
-
                 while (it.hasNext()) {
                     ++size;
                     entry = it.next();
                 }
-
                 toKey = entry == null ? null : entry.getKey();
-
                 if (toKey != null) {
                     entry = nextEntry((TrieEntry<K, V>) entry);
                     toKey = entry == null ? null : entry.getKey();
                 }
-
                 expectedModCount = AbstractPatriciaTrie.this.modCount;
             }
-
             return size;
         }
 
@@ -700,19 +706,16 @@ public abstract class AbstractPatriciaTrie<K, V> extends AbstractBitwiseTrie<K, 
         @Override
         public K lastKey() {
             fixup();
-
             Map.Entry<K, V> e = null;
             if (toKey == null) {
                 e = lastEntry();
             } else {
                 e = lowerEntry(toKey);
             }
-
             final K last = e != null ? e.getKey() : null;
             if (e == null || !getKeyAnalyzer().isPrefix(prefix, offsetInBits, lengthInBits, last)) {
                 throw new NoSuchElementException();
             }
-
             return last;
         }
     }
@@ -736,18 +739,19 @@ public abstract class AbstractPatriciaTrie<K, V> extends AbstractBitwiseTrie<K, 
 
         /**
          * Creates a {@link RangeEntryMap}.
+         *
+         * @param fromKey       the from key.
+         * @param fromInclusive whether from is inclusive.
+         * @param toKey         the to key.
+         * @param toInclusive   whether to is inclusive.
          */
-        protected RangeEntryMap(final K fromKey, final boolean fromInclusive,
-                                final K toKey, final boolean toInclusive) {
-
+        protected RangeEntryMap(final K fromKey, final boolean fromInclusive, final K toKey, final boolean toInclusive) {
             if (fromKey == null && toKey == null) {
-                throw new IllegalArgumentException("must have a from or to!");
+                throw new IllegalArgumentException("must have a from or to.");
             }
-
             if (fromKey != null && toKey != null && getKeyAnalyzer().compare(fromKey, toKey) > 0) {
                 throw new IllegalArgumentException("fromKey > toKey");
             }
-
             this.fromKey = fromKey;
             this.fromInclusive = fromInclusive;
             this.toKey = toKey;
@@ -755,8 +759,10 @@ public abstract class AbstractPatriciaTrie<K, V> extends AbstractBitwiseTrie<K, 
         }
 
         /**
-         * Creates a {@link RangeEntryMap} with the fromKey included and
-         * the toKey excluded from the range.
+         * Creates a {@link RangeEntryMap} with the fromKey included and the toKey excluded from the range.
+         *
+         * @param fromKey the from key.
+         * @param toKey   the to key.
          */
         protected RangeEntryMap(final K fromKey, final K toKey) {
             this(fromKey, true, toKey, false);
@@ -768,8 +774,7 @@ public abstract class AbstractPatriciaTrie<K, V> extends AbstractBitwiseTrie<K, 
         }
 
         @Override
-        protected SortedMap<K, V> createRangeMap(final K fromKey, final boolean fromInclusive,
-                                                 final K toKey, final boolean toInclusive) {
+        protected SortedMap<K, V> createRangeMap(final K fromKey, final boolean fromInclusive, final K toKey, final boolean toInclusive) {
             return new RangeEntryMap(fromKey, fromInclusive, toKey, toInclusive);
         }
 
@@ -783,7 +788,6 @@ public abstract class AbstractPatriciaTrie<K, V> extends AbstractBitwiseTrie<K, 
             } else {
                 e = higherEntry(fromKey);
             }
-
             final K first = e != null ? e.getKey() : null;
             if (e == null || toKey != null && !inToRange(first, false)) {
                 throw new NoSuchElementException();
@@ -821,7 +825,6 @@ public abstract class AbstractPatriciaTrie<K, V> extends AbstractBitwiseTrie<K, 
             } else {
                 e = lowerEntry(toKey);
             }
-
             final K last = e != null ? e.getKey() : null;
             if (e == null || fromKey != null && !inFromRange(last, false)) {
                 throw new NoSuchElementException();
@@ -883,13 +886,11 @@ public abstract class AbstractPatriciaTrie<K, V> extends AbstractBitwiseTrie<K, 
             if (!(o instanceof Map.Entry)) {
                 return false;
             }
-
             final Map.Entry<K, V> entry = (Map.Entry<K, V>) o;
             final K key = entry.getKey();
             if (!delegate.inRange(key)) {
                 return false;
             }
-
             final TrieEntry<K, V> node = getEntry(key);
             return node != null && compare(node.getValue(), entry.getValue());
         }
@@ -903,19 +904,16 @@ public abstract class AbstractPatriciaTrie<K, V> extends AbstractBitwiseTrie<K, 
         public Iterator<Map.Entry<K, V>> iterator() {
             final K fromKey = delegate.getFromKey();
             final K toKey = delegate.getToKey();
-
             TrieEntry<K, V> first = null;
             if (fromKey == null) {
                 first = firstEntry();
             } else {
                 first = ceilingEntry(fromKey);
             }
-
             TrieEntry<K, V> last = null;
             if (toKey != null) {
                 last = ceilingEntry(toKey);
             }
-
             return new EntryIterator(first, last);
         }
 
@@ -925,13 +923,11 @@ public abstract class AbstractPatriciaTrie<K, V> extends AbstractBitwiseTrie<K, 
             if (!(o instanceof Map.Entry)) {
                 return false;
             }
-
             final Map.Entry<K, V> entry = (Map.Entry<K, V>) o;
             final K key = entry.getKey();
             if (!delegate.inRange(key)) {
                 return false;
             }
-
             final TrieEntry<K, V> node = getEntry(key);
             if (node != null && compare(node.getValue(), entry.getValue())) {
                 removeEntry(node);
@@ -944,11 +940,9 @@ public abstract class AbstractPatriciaTrie<K, V> extends AbstractBitwiseTrie<K, 
         public int size() {
             if (size == -1 || expectedModCount != AbstractPatriciaTrie.this.modCount) {
                 size = 0;
-
                 for (final Iterator<?> it = iterator(); it.hasNext(); it.next()) {
                     ++size;
                 }
-
                 expectedModCount = AbstractPatriciaTrie.this.modCount;
             }
             return size;
@@ -956,11 +950,9 @@ public abstract class AbstractPatriciaTrie<K, V> extends AbstractBitwiseTrie<K, 
     }
 
     /**
-     * A {@link Reference} allows us to return something through a Method's
-     * argument list. An alternative would be to an Array with a length of
-     * one (1) but that leads to compiler warnings. Computationally and memory
-     * wise there's no difference (except for the need to load the
-     * {@link Reference} Class but that happens only once).
+     * A {@link Reference} allows us to return something through a Method's argument list. An alternative would be to an Array with a length of one (1) but that
+     * leads to compiler warnings. Computationally and memory wise there's no difference (except for the need to load the {@link Reference} Class but that
+     * happens only once).
      */
     private static final class Reference<E> {
 
@@ -976,10 +968,10 @@ public abstract class AbstractPatriciaTrie<K, V> extends AbstractBitwiseTrie<K, 
     }
 
     /**
-     * A {@link jdk.m3.collections.apache.Trie} is a set of {@link TrieEntry} nodes.
+     * A {@link Trie} is a set of {@link TrieEntry} nodes.
      *
-     * @param <K> the key type.
-     * @param <V> the value type.
+     * @param <K> The key type.
+     * @param <V> The value type.
      */
     protected static class TrieEntry<K, V> extends BasicEntry<K, V> {
 
@@ -1003,8 +995,8 @@ public abstract class AbstractPatriciaTrie<K, V> extends AbstractBitwiseTrie<K, 
         /**
          * Constructs a new instance.
          *
-         * @param key The entry's key.
-         * @param value The entry's value.
+         * @param key      The entry's key.
+         * @param value    The entry's value.
          * @param bitIndex The entry's bitIndex.
          */
         public TrieEntry(final K key, final V value, final int bitIndex) {
@@ -1046,17 +1038,14 @@ public abstract class AbstractPatriciaTrie<K, V> extends AbstractBitwiseTrie<K, 
         @Override
         public String toString() {
             final StringBuilder buffer = new StringBuilder();
-
             if (bitIndex == -1) {
                 buffer.append("RootEntry(");
             } else {
                 buffer.append("Entry(");
             }
-
             buffer.append("key=").append(getKey()).append(" [").append(bitIndex).append("], ");
             buffer.append("value=").append(getValue()).append(", ");
-            //buffer.append("bitIndex=").append(bitIndex).append(", ");
-
+            // buffer.append("bitIndex=").append(bitIndex).append(", ");
             if (parent != null) {
                 if (parent.bitIndex == -1) {
                     buffer.append("parent=").append("ROOT");
@@ -1067,7 +1056,6 @@ public abstract class AbstractPatriciaTrie<K, V> extends AbstractBitwiseTrie<K, 
                 buffer.append("parent=").append("null");
             }
             buffer.append(", ");
-
             if (left != null) {
                 if (left.bitIndex == -1) {
                     buffer.append("left=").append("ROOT");
@@ -1078,7 +1066,6 @@ public abstract class AbstractPatriciaTrie<K, V> extends AbstractBitwiseTrie<K, 
                 buffer.append("left=").append("null");
             }
             buffer.append(", ");
-
             if (right != null) {
                 if (right.bitIndex == -1) {
                     buffer.append("right=").append("ROOT");
@@ -1089,23 +1076,20 @@ public abstract class AbstractPatriciaTrie<K, V> extends AbstractBitwiseTrie<K, 
                 buffer.append("right=").append("null");
             }
             buffer.append(", ");
-
             if (predecessor != null) {
                 if (predecessor.bitIndex == -1) {
                     buffer.append("predecessor=").append("ROOT");
                 } else {
-                    buffer.append("predecessor=").append(predecessor.getKey()).append(" [").
-                           append(predecessor.bitIndex).append("]");
+                    buffer.append("predecessor=").append(predecessor.getKey()).append(" [").append(predecessor.bitIndex).append("]");
                 }
             }
-
             buffer.append(")");
             return buffer.toString();
         }
     }
 
     /**
-     * An {@link OrderedMapIterator} for a {@link jdk.m3.collections.apache.Trie}.
+     * An {@link OrderedMapIterator} for a {@link Trie}.
      */
     private final class TrieMapIterator extends AbstractTrieIterator<K> implements OrderedMapIterator<K, V> {
 
@@ -1153,12 +1137,10 @@ public abstract class AbstractPatriciaTrie<K, V> extends AbstractBitwiseTrie<K, 
             if (expectedModCount != AbstractPatriciaTrie.this.modCount) {
                 throw new ConcurrentModificationException();
             }
-
             final TrieEntry<K, V> e = previous;
             if (e == null) {
                 throw new NoSuchElementException();
             }
-
             previous = AbstractPatriciaTrie.this.previousEntry(e);
             next = current;
             current = e;
@@ -1172,11 +1154,10 @@ public abstract class AbstractPatriciaTrie<K, V> extends AbstractBitwiseTrie<K, 
             }
             return current.setValue(value);
         }
-
     }
 
     /**
-     * This is a value view of the {@link jdk.m3.collections.apache.Trie} as returned by {@link Map#values()}.
+     * This is a value view of the {@link Trie} as returned by {@link Map#values()}.
      */
     private final class Values extends AbstractCollection<V> {
 
@@ -1184,6 +1165,7 @@ public abstract class AbstractPatriciaTrie<K, V> extends AbstractBitwiseTrie<K, 
          * An {@link Iterator} that returns Value Objects.
          */
         private final class ValueIterator extends AbstractTrieIterator<V> {
+
             @Override
             public V next() {
                 return nextEntry().getValue();
@@ -1207,7 +1189,7 @@ public abstract class AbstractPatriciaTrie<K, V> extends AbstractBitwiseTrie<K, 
 
         @Override
         public boolean remove(final Object o) {
-            for (final Iterator<V> it = iterator(); it.hasNext(); ) {
+            for (final Iterator<V> it = iterator(); it.hasNext();) {
                 final V value = it.next();
                 if (compare(value, o)) {
                     it.remove();
@@ -1227,18 +1209,21 @@ public abstract class AbstractPatriciaTrie<K, V> extends AbstractBitwiseTrie<K, 
 
     /**
      * Returns true if 'next' is a valid uplink coming from 'from'.
+     *
+     * @param next the next entry.
+     * @param from the from entry.
+     * @return true if valid.
      */
     static boolean isValidUplink(final TrieEntry<?, ?> next, final TrieEntry<?, ?> from) {
         return next != null && next.bitIndex <= from.bitIndex && !next.isEmpty();
     }
 
-    /** The root node of the {@link jdk.m3.collections.apache.Trie}. */
+    /** The root node of the {@link Trie}. */
     private transient TrieEntry<K, V> root = new TrieEntry<>(null, null, -1);
 
     /**
-     * Each of these fields are initialized to contain an instance of the
-     * appropriate view the first time this view is requested. The views are
-     * stateless, so there's no reason to create more than one of each.
+     * Each of these fields are initialized to contain an instance of the appropriate view the first time this view is requested. The views are stateless, so
+     * there's no reason to create more than one of each.
      */
     private transient volatile Set<K> keySet;
 
@@ -1246,30 +1231,28 @@ public abstract class AbstractPatriciaTrie<K, V> extends AbstractBitwiseTrie<K, 
 
     private transient volatile Set<Map.Entry<K, V>> entrySet;
 
-    /** The current size of the {@link jdk.m3.collections.apache.Trie}. */
+    /** The current size of the {@link Trie}. */
     private transient int size;
 
     /**
-     * The number of times this {@link jdk.m3.collections.apache.Trie} has been modified.
-     * It's used to detect concurrent modifications and fail-fast the {@link Iterator}s.
+     * The number of times this {@link Trie} has been modified. It's used to detect concurrent modifications and fail-fast the {@link Iterator}s.
      */
     protected transient int modCount;
 
     /**
      * Constructs a new {@link Trie} using the given {@link KeyAnalyzer}.
      *
-     * @param keyAnalyzer  the {@link KeyAnalyzer}.
+     * @param keyAnalyzer The {@link KeyAnalyzer}.
      */
     protected AbstractPatriciaTrie(final KeyAnalyzer<? super K> keyAnalyzer) {
         super(keyAnalyzer);
     }
 
     /**
-     * Constructs a new {@link jdk.m3.collections.apache.Trie} using the given {@link KeyAnalyzer} and initializes the
-     * {@link jdk.m3.collections.apache.Trie} with the values from the provided {@link Map}.
+     * Constructs a new {@link Trie} using the given {@link KeyAnalyzer} and initializes the {@link Trie} with the values from the provided {@link Map}.
      *
-     * @param keyAnalyzer  the {@link KeyAnalyzer}.
-     * @param map The source map.
+     * @param keyAnalyzer The {@link KeyAnalyzer}.
+     * @param map         The source map.
      */
     protected AbstractPatriciaTrie(final KeyAnalyzer<? super K> keyAnalyzer, final Map<? extends K, ? extends V> map) {
         super(keyAnalyzer);
@@ -1277,16 +1260,18 @@ public abstract class AbstractPatriciaTrie<K, V> extends AbstractBitwiseTrie<K, 
     }
 
     /**
-     * Adds the given {@link TrieEntry} to the {@link jdk.m3.collections.apache.Trie}.
+     * Adds the given {@link TrieEntry} to the {@link Trie}.
+     *
+     * @param entry        the entry to add.
+     * @param lengthInBits the length in bits.
+     * @return the added entry.
      */
     TrieEntry<K, V> addEntry(final TrieEntry<K, V> entry, final int lengthInBits) {
         TrieEntry<K, V> current = root.left;
         TrieEntry<K, V> path = root;
         while (true) {
-            if (current.bitIndex >= entry.bitIndex
-                    || current.bitIndex <= path.bitIndex) {
+            if (current.bitIndex >= entry.bitIndex || current.bitIndex <= path.bitIndex) {
                 entry.predecessor = entry;
-
                 if (!isBitSet(entry.key, entry.bitIndex, lengthInBits)) {
                     entry.left = entry;
                     entry.right = current;
@@ -1294,28 +1279,22 @@ public abstract class AbstractPatriciaTrie<K, V> extends AbstractBitwiseTrie<K, 
                     entry.left = current;
                     entry.right = entry;
                 }
-
                 entry.parent = path;
                 if (current.bitIndex >= entry.bitIndex) {
                     current.parent = entry;
                 }
-
                 // if we inserted an uplink, set the predecessor on it
                 if (current.bitIndex <= path.bitIndex) {
                     current.predecessor = entry;
                 }
-
                 if (path == root || !isBitSet(entry.key, path.bitIndex, lengthInBits)) {
                     path.left = entry;
                 } else {
                     path.right = entry;
                 }
-
                 return entry;
             }
-
             path = current;
-
             if (!isBitSet(entry.key, current.bitIndex, lengthInBits)) {
                 current = current.left;
             } else {
@@ -1325,51 +1304,43 @@ public abstract class AbstractPatriciaTrie<K, V> extends AbstractBitwiseTrie<K, 
     }
 
     /**
-     * Returns a key-value mapping associated with the least key greater
-     * than or equal to the given key, or null if there is no such key.
+     * Returns a key-value mapping associated with the least key greater than or equal to the given key, or null if there is no such key.
+     *
+     * @param key the key.
+     * @return the entry.
      */
     TrieEntry<K, V> ceilingEntry(final K key) {
-        // Basically:
-        // Follow the steps of adding an entry, but instead...
-        //
-        // - If we ever encounter a situation where we found an equal
-        //   key, we return it immediately.
-        //
-        // - If we hit an empty root, return the first iterable item.
-        //
-        // - If we have to add a new item, we temporarily add it,
-        //   find the successor to it, then remove the added item.
-        //
-        // These steps ensure that the returned value is either the
-        // entry for the key itself, or the first entry directly after
-        // the key.
-
-        // TODO: Cleanup so that we don't actually have to add/remove from the
-        //       tree.  (We do it here because there are other well-defined
-        //       functions to perform the search.)
         final int lengthInBits = lengthInBits(key);
-
         if (lengthInBits == 0) {
             if (!root.isEmpty()) {
                 return root;
             }
             return firstEntry();
         }
-
         final TrieEntry<K, V> found = getNearestEntryForKey(key, lengthInBits);
-        if (compareKeys(key, found.key)) {
+        if (keysAreEqual(key, found.key)) {
             return found;
         }
-
         final int bitIndex = bitIndex(key, found.key);
         if (KeyAnalyzer.isValidBitIndex(bitIndex)) {
-            final TrieEntry<K, V> added = new TrieEntry<>(key, null, bitIndex);
-            addEntry(added, lengthInBits);
-            incrementSize(); // must increment because remove will decrement
-            final TrieEntry<K, V> ceil = nextEntry(added);
-            removeEntry(added);
-            modCount -= 2; // we didn't really modify it.
-            return ceil;
+            if (!isBitSet(key, bitIndex, lengthInBits)) {
+                // search key < found.key
+                // found is a ceiling candidate, walk backward to find the smallest entry still >= key
+                TrieEntry<K, V> ceiling = found;
+                TrieEntry<K, V> prev = previousEntry(found);
+                while (prev != null && !prev.isEmpty() && getKeyAnalyzer().compare(key, prev.key) <= 0) {
+                    ceiling = prev;
+                    prev = previousEntry(prev);
+                }
+                return ceiling;
+            }
+            // search key > found.key
+            // walk forward to find the first entry.key > key
+            TrieEntry<K, V> next = nextEntry(found);
+            while (next != null && getKeyAnalyzer().compare(key, next.key) > 0) {
+                next = nextEntry(next);
+            }
+            return next;
         }
         if (KeyAnalyzer.isNullBitKey(bitIndex)) {
             if (!root.isEmpty()) {
@@ -1380,7 +1351,6 @@ public abstract class AbstractPatriciaTrie<K, V> extends AbstractBitwiseTrie<K, 
         if (KeyAnalyzer.isEqualBitKey(bitIndex)) {
             return found;
         }
-
         // we should have exited above.
         throw new IllegalStateException("invalid lookup: " + key);
     }
@@ -1390,12 +1360,10 @@ public abstract class AbstractPatriciaTrie<K, V> extends AbstractBitwiseTrie<K, 
         root.key = null;
         root.bitIndex = -1;
         root.value = null;
-
         root.parent = null;
         root.left = root;
         root.right = null;
         root.predecessor = root;
-
         size = 0;
         incrementModCount();
     }
@@ -1410,15 +1378,14 @@ public abstract class AbstractPatriciaTrie<K, V> extends AbstractBitwiseTrie<K, 
         if (k == null) {
             return false;
         }
-
         final K key = castKey(k);
         final int lengthInBits = lengthInBits(key);
         final TrieEntry<K, V> entry = getNearestEntryForKey(key, lengthInBits);
-        return !entry.isEmpty() && compareKeys(key, entry.key);
+        return !entry.isEmpty() && keysAreEqual(key, entry.key);
     }
 
     /**
-     * A helper method to decrement the {@link jdk.m3.collections.apache.Trie} size and increment the modification counter.
+     * A helper method to decrement the {@link Trie} size and increment the modification counter.
      */
     void decrementSize() {
         size--;
@@ -1434,17 +1401,19 @@ public abstract class AbstractPatriciaTrie<K, V> extends AbstractBitwiseTrie<K, 
     }
 
     /**
-     * Returns the first entry the {@link jdk.m3.collections.apache.Trie} is storing.
+     * Returns the first entry the {@link Trie} is storing.
      * <p>
-     * This is implemented by going always to the left until
-     * we encounter a valid uplink. That uplink is the first key.
+     * This is implemented by going always to the left until we encounter a valid uplink. That uplink is the first key.
+     * </p>
+     *
+     * @return The first entry the {@link Trie} is storing.
+     * @since 4.6.0
      */
-    TrieEntry<K, V> firstEntry() {
+    public TrieEntry<K, V> firstEntry() {
         // if Trie is empty, no first node.
         if (isEmpty()) {
             return null;
         }
-
         return followLeft(root);
     }
 
@@ -1457,36 +1426,42 @@ public abstract class AbstractPatriciaTrie<K, V> extends AbstractBitwiseTrie<K, 
     }
 
     /**
-     * Returns a key-value mapping associated with the greatest key
-     * less than or equal to the given key, or null if there is no such key.
+     * Returns a key-value mapping associated with the greatest key less than or equal to the given key, or null if there is no such key.
+     *
+     * @param key the key.
+     * @return the entry.
      */
     TrieEntry<K, V> floorEntry(final K key) {
-        // TODO: Cleanup so that we don't actually have to add/remove from the
-        //       tree.  (We do it here because there are other well-defined
-        //       functions to perform the search.)
         final int lengthInBits = lengthInBits(key);
-
         if (lengthInBits == 0) {
             if (!root.isEmpty()) {
                 return root;
             }
             return null;
         }
-
         final TrieEntry<K, V> found = getNearestEntryForKey(key, lengthInBits);
-        if (compareKeys(key, found.key)) {
+        if (keysAreEqual(key, found.key)) {
             return found;
         }
-
         final int bitIndex = bitIndex(key, found.key);
         if (KeyAnalyzer.isValidBitIndex(bitIndex)) {
-            final TrieEntry<K, V> added = new TrieEntry<>(key, null, bitIndex);
-            addEntry(added, lengthInBits);
-            incrementSize(); // must increment because remove will decrement
-            final TrieEntry<K, V> floor = previousEntry(added);
-            removeEntry(added);
-            modCount -= 2; // we didn't really modify it.
-            return floor;
+            if (isBitSet(key, bitIndex, lengthInBits)) {
+                TrieEntry<K, V> floor = found;
+                TrieEntry<K, V> next = nextEntry(found);
+                while (next != null && getKeyAnalyzer().compare(key, next.key) >= 0) {
+                    floor = next;
+                    next = nextEntry(next);
+                }
+                return floor;
+            }
+            TrieEntry<K, V> prev = previousEntry(found);
+            while (prev != null && !prev.isEmpty() && getKeyAnalyzer().compare(key, prev.key) < 0) {
+                prev = previousEntry(prev);
+            }
+            if (prev == null || prev.isEmpty()) {
+                return null;
+            }
+            return prev;
         }
         if (KeyAnalyzer.isNullBitKey(bitIndex)) {
             if (!root.isEmpty()) {
@@ -1497,13 +1472,15 @@ public abstract class AbstractPatriciaTrie<K, V> extends AbstractBitwiseTrie<K, 
         if (KeyAnalyzer.isEqualBitKey(bitIndex)) {
             return found;
         }
-
         // we should have exited above.
         throw new IllegalStateException("invalid lookup: " + key);
     }
 
     /**
      * Goes left through the tree until it finds a valid node.
+     *
+     * @param node the node.
+     * @return the valid node.
      */
     TrieEntry<K, V> followLeft(TrieEntry<K, V> node) {
         while (true) {
@@ -1512,29 +1489,28 @@ public abstract class AbstractPatriciaTrie<K, V> extends AbstractBitwiseTrie<K, 
             if (child.isEmpty()) {
                 child = node.right;
             }
-
             if (child.bitIndex <= node.bitIndex) {
                 return child;
             }
-
             node = child;
         }
     }
 
     /**
      * Traverses down the right path until it finds an uplink.
+     *
+     * @param node the node.
+     * @return the uplink.
      */
     TrieEntry<K, V> followRight(TrieEntry<K, V> node) {
         // if Trie is empty, no last entry.
         if (node.right == null) {
             return null;
         }
-
         // Go as far right as possible, until we encounter an uplink.
         while (node.right.bitIndex > node.bitIndex) {
             node = node.right;
         }
-
         return node.right;
     }
 
@@ -1545,31 +1521,30 @@ public abstract class AbstractPatriciaTrie<K, V> extends AbstractBitwiseTrie<K, 
     }
 
     /**
-     * Gets the entry associated with the specified key in the
-     * PatriciaTrieBase.  Returns null if the map contains no mapping
-     * for this key.
+     * Gets the entry associated with the specified key in the PatriciaTrieBase. Returns null if the map contains no mapping for this key.
      * <p>
      * This may throw ClassCastException if the object is not of type K.
+     *
+     * @param k the key.
+     * @return the entry.
      */
     TrieEntry<K, V> getEntry(final Object k) {
         final K key = castKey(k);
         if (key == null) {
             return null;
         }
-
         final int lengthInBits = lengthInBits(key);
         final TrieEntry<K, V> entry = getNearestEntryForKey(key, lengthInBits);
-        return !entry.isEmpty() && compareKeys(key, entry.key) ? entry : null;
+        return !entry.isEmpty() && keysAreEqual(key, entry.key) ? entry : null;
     }
 
     /**
-     * Gets the nearest entry for a given key.  This is useful
-     * for finding knowing if a given key exists (and finding the value
-     * for it), or for inserting the key.
+     * Gets the nearest entry for a given key. This is useful for finding knowing if a given key exists (and finding the value for it), or for inserting the
+     * key. The actual get implementation. This is very similar to selectR but with the exception that it might return the root Entry even if it's empty.
      *
-     * The actual get implementation. This is very similar to
-     * selectR but with the exception that it might return the
-     * root Entry even if it's empty.
+     * @param key          the key.
+     * @param lengthInBits the length in bits.
+     * @return the nearest entry.
      */
     TrieEntry<K, V> getNearestEntryForKey(final K key, final int lengthInBits) {
         TrieEntry<K, V> current = root.left;
@@ -1578,7 +1553,6 @@ public abstract class AbstractPatriciaTrie<K, V> extends AbstractBitwiseTrie<K, 
             if (current.bitIndex <= path.bitIndex) {
                 return current;
             }
-
             path = current;
             if (!isBitSet(key, current.bitIndex, lengthInBits)) {
                 current = current.left;
@@ -1589,38 +1563,27 @@ public abstract class AbstractPatriciaTrie<K, V> extends AbstractBitwiseTrie<K, 
     }
 
     /**
-     * Gets a view of this {@link jdk.m3.collections.apache.Trie} of all elements that are prefixed
-     * by the number of bits in the given Key.
+     * Gets a view of this {@link Trie} of all elements that are prefixed by the number of bits in the given Key.
      * <p>
-     * The view that this returns is optimized to have a very efficient
-     * {@link Iterator}. The {@link SortedMap#firstKey()},
-     * {@link SortedMap#lastKey()} &amp; {@link Map#size()} methods must
-     * iterate over all possible values in order to determine the results.
-     * This information is cached until the PATRICIA {@link jdk.m3.collections.apache.Trie} changes.
-     * All other methods (except {@link Iterator}) must compare the given
-     * key to the prefix to ensure that it is within the range of the view.
-     * The {@link Iterator}'s remove method must also relocate the subtree
-     * that contains the prefixes if the entry holding the subtree is
-     * removed or changes. Changing the subtree takes O(K) time.
-     *
-     * @param key  the key to use in the search
-     * @param offsetInBits  the prefix offset
-     * @param lengthInBits  the number of significant prefix bits
-     * @return a {@link SortedMap} view of this {@link jdk.m3.collections.apache.Trie} with all elements whose
-     *   key is prefixed by the search key
+     * The view that this returns is optimized to have a very efficient {@link Iterator}. The {@link SortedMap#firstKey()}, {@link SortedMap#lastKey()} &amp;
+     * {@link Map#size()} methods must iterate over all possible values in order to determine the results. This information is cached until the PATRICIA
+     * {@link Trie} changes. All other methods (except {@link Iterator}) must compare the given key to the prefix to ensure that it is within the range of the
+     * view. The {@link Iterator}'s remove method must also relocate the subtree that contains the prefixes if the entry holding the subtree is removed or
+     * changes. Changing the subtree takes O(K) time.
+     * </p>
+     * @param key          The key to use in the search
+     * @param offsetInBits The prefix offset
+     * @param lengthInBits The number of significant prefix bits
+     * @return A {@link SortedMap} view of this {@link Trie} with all elements whose key is prefixed by the search key
      */
     private SortedMap<K, V> getPrefixMapByBits(final K key, final int offsetInBits, final int lengthInBits) {
-
         final int offsetLength = offsetInBits + lengthInBits;
         if (offsetLength > lengthInBits(key)) {
-            throw new IllegalArgumentException(offsetInBits + " + "
-                    + lengthInBits + " > " + lengthInBits(key));
+            throw new IllegalArgumentException(offsetInBits + " + " + lengthInBits + " > " + lengthInBits(key));
         }
-
         if (offsetLength == 0) {
             return this;
         }
-
         return new PrefixRangeMap(key, offsetInBits, lengthInBits);
     }
 
@@ -1630,15 +1593,10 @@ public abstract class AbstractPatriciaTrie<K, V> extends AbstractBitwiseTrie<K, 
     }
 
     /**
-     * Returns an entry strictly higher than the given key,
-     * or null if no such entry exists.
+     * Returns an entry strictly higher than the given key, or null if no such entry exists.
      */
     TrieEntry<K, V> higherEntry(final K key) {
-        // TODO: Cleanup so that we don't actually have to add/remove from the
-        //       tree.  (We do it here because there are other well-defined
-        //       functions to perform the search.)
         final int lengthInBits = lengthInBits(key);
-
         if (lengthInBits == 0) {
             if (!root.isEmpty()) {
                 // If data in root, and more after -- return it.
@@ -1651,21 +1609,26 @@ public abstract class AbstractPatriciaTrie<K, V> extends AbstractBitwiseTrie<K, 
             // Root is empty & we want something after empty, return first.
             return firstEntry();
         }
-
         final TrieEntry<K, V> found = getNearestEntryForKey(key, lengthInBits);
-        if (compareKeys(key, found.key)) {
+        if (keysAreEqual(key, found.key)) {
             return nextEntry(found);
         }
-
         final int bitIndex = bitIndex(key, found.key);
         if (KeyAnalyzer.isValidBitIndex(bitIndex)) {
-            final TrieEntry<K, V> added = new TrieEntry<>(key, null, bitIndex);
-            addEntry(added, lengthInBits);
-            incrementSize(); // must increment because remove will decrement
-            final TrieEntry<K, V> ceil = nextEntry(added);
-            removeEntry(added);
-            modCount -= 2; // we didn't really modify it.
-            return ceil;
+            if (!isBitSet(key, bitIndex, lengthInBits)) {
+                TrieEntry<K, V> ceiling = found;
+                TrieEntry<K, V> prev = previousEntry(found);
+                while (prev != null && !prev.isEmpty() && getKeyAnalyzer().compare(key, prev.key) <= 0) {
+                    ceiling = prev;
+                    prev = previousEntry(prev);
+                }
+                return ceiling;
+            }
+            TrieEntry<K, V> next = nextEntry(found);
+            while (next != null && getKeyAnalyzer().compare(key, next.key) > 0) {
+                next = nextEntry(next);
+            }
+            return next;
         }
         if (KeyAnalyzer.isNullBitKey(bitIndex)) {
             if (!root.isEmpty()) {
@@ -1679,7 +1642,6 @@ public abstract class AbstractPatriciaTrie<K, V> extends AbstractBitwiseTrie<K, 
         if (KeyAnalyzer.isEqualBitKey(bitIndex)) {
             return nextEntry(found);
         }
-
         // we should have exited above.
         throw new IllegalStateException("invalid lookup: " + key);
     }
@@ -1692,7 +1654,7 @@ public abstract class AbstractPatriciaTrie<K, V> extends AbstractBitwiseTrie<K, 
     }
 
     /**
-     * A helper method to increment the {@link jdk.m3.collections.apache.Trie} size and the modification counter.
+     * A helper method to increment the {@link Trie} size and the modification counter.
      */
     void incrementSize() {
         size++;
@@ -1708,12 +1670,15 @@ public abstract class AbstractPatriciaTrie<K, V> extends AbstractBitwiseTrie<K, 
     }
 
     /**
-     * Returns the last entry the {@link jdk.m3.collections.apache.Trie} is storing.
+     * Returns the last entry the {@link Trie} is storing.
+     * <p>
+     * This is implemented by going always to the right until we encounter a valid uplink. That uplink is the last key.
+     * </p>
      *
-     * <p>This is implemented by going always to the right until
-     * we encounter a valid uplink. That uplink is the last key.
+     * @return The last entry the {@link Trie} is storing.
+     * @since 4.6.0
      */
-    TrieEntry<K, V> lastEntry() {
+    public TrieEntry<K, V> lastEntry() {
         return followRight(root.left);
     }
 
@@ -1727,47 +1692,36 @@ public abstract class AbstractPatriciaTrie<K, V> extends AbstractBitwiseTrie<K, 
     }
 
     /**
-     * Returns a key-value mapping associated with the greatest key
-     * strictly less than the given key, or null if there is no such key.
+     * Returns a key-value mapping associated with the greatest key strictly less than the given key, or null if there is no such key.
      */
     TrieEntry<K, V> lowerEntry(final K key) {
-        // Basically:
-        // Follow the steps of adding an entry, but instead...
-        //
-        // - If we ever encounter a situation where we found an equal
-        //   key, we return it's previousEntry immediately.
-        //
-        // - If we hit root (empty or not), return null.
-        //
-        // - If we have to add a new item, we temporarily add it,
-        //   find the previousEntry to it, then remove the added item.
-        //
-        // These steps ensure that the returned value is always just before
-        // the key or null (if there was nothing before it).
-
-        // TODO: Cleanup so that we don't actually have to add/remove from the
-        //       tree.  (We do it here because there are other well-defined
-        //       functions to perform the search.)
         final int lengthInBits = lengthInBits(key);
-
         if (lengthInBits == 0) {
             return null; // there can never be anything before root.
         }
-
         final TrieEntry<K, V> found = getNearestEntryForKey(key, lengthInBits);
-        if (compareKeys(key, found.key)) {
+        if (keysAreEqual(key, found.key)) {
             return previousEntry(found);
         }
-
         final int bitIndex = bitIndex(key, found.key);
         if (KeyAnalyzer.isValidBitIndex(bitIndex)) {
-            final TrieEntry<K, V> added = new TrieEntry<>(key, null, bitIndex);
-            addEntry(added, lengthInBits);
-            incrementSize(); // must increment because remove will decrement
-            final TrieEntry<K, V> prior = previousEntry(added);
-            removeEntry(added);
-            modCount -= 2; // we didn't really modify it.
-            return prior;
+            if (isBitSet(key, bitIndex, lengthInBits)) {
+                TrieEntry<K, V> floor = found;
+                TrieEntry<K, V> next = nextEntry(found);
+                while (next != null && getKeyAnalyzer().compare(key, next.key) >= 0) {
+                    floor = next;
+                    next = nextEntry(next);
+                }
+                return floor;
+            }
+            TrieEntry<K, V> prev = previousEntry(found);
+            while (prev != null && !prev.isEmpty() && getKeyAnalyzer().compare(key, prev.key) < 0) {
+                prev = previousEntry(prev);
+            }
+            if (prev == null || prev.isEmpty()) {
+                return null;
+            }
+            return prev;
         }
         if (KeyAnalyzer.isNullBitKey(bitIndex)) {
             return null;
@@ -1775,7 +1729,6 @@ public abstract class AbstractPatriciaTrie<K, V> extends AbstractBitwiseTrie<K, 
         if (KeyAnalyzer.isEqualBitKey(bitIndex)) {
             return previousEntry(found);
         }
-
         // we should have exited above.
         throw new IllegalStateException("invalid lookup: " + key);
     }
@@ -1786,8 +1739,7 @@ public abstract class AbstractPatriciaTrie<K, V> extends AbstractBitwiseTrie<K, 
     }
 
     /**
-     * Returns the entry lexicographically after the given entry.
-     * If the given entry is null, returns the first node.
+     * Returns the entry lexicographically after the given entry. If the given entry is null, returns the first node.
      */
     TrieEntry<K, V> nextEntry(final TrieEntry<K, V> node) {
         if (node == null) {
@@ -1797,12 +1749,13 @@ public abstract class AbstractPatriciaTrie<K, V> extends AbstractBitwiseTrie<K, 
     }
 
     /**
-     * Scans for the next node, starting at the specified point, and using 'previous'
-     * as a hint that the last node we returned was 'previous' (so we know not to return
-     * it again).  If 'tree' is non-null, this will limit the search to the given tree.
-     *
+     * Scans for the next node, starting at the specified point, and using 'previous' as a hint that the last node we returned was 'previous' (so we know not to
+     * return it again). If 'tree' is non-null, this will limit the search to the given tree.
+     * <p>
      * The basic premise is that each iteration can follow the following steps:
+     * </p>
      *
+     * <pre>
      * 1) Scan all the way to the left.
      *   a) If we already started from this node last time, proceed to Step 2.
      *   b) If a valid uplink is found, use it.
@@ -1828,12 +1781,10 @@ public abstract class AbstractPatriciaTrie<K, V> extends AbstractBitwiseTrie<K, 
      *    already found &amp; returned the end of the Trie, so exit.
      *
      * 7) Do Step 1 on the parent's right child.
+     * </pre>
      */
-    TrieEntry<K, V> nextEntryImpl(final TrieEntry<K, V> start,
-            final TrieEntry<K, V> previous, final TrieEntry<K, V> tree) {
-
+    TrieEntry<K, V> nextEntryImpl(final TrieEntry<K, V> start, final TrieEntry<K, V> previous, final TrieEntry<K, V> tree) {
         TrieEntry<K, V> current = start;
-
         // Only look at the left if this was a recursive or
         // the first check, otherwise we know we've already looked
         // at the left.
@@ -1844,44 +1795,34 @@ public abstract class AbstractPatriciaTrie<K, V> extends AbstractBitwiseTrie<K, 
                 if (previous == current.left) {
                     break;
                 }
-
                 if (isValidUplink(current.left, current)) {
                     return current.left;
                 }
-
                 current = current.left;
             }
         }
-
         // If there's no data at all, exit.
-        if (current.isEmpty()) {
-            return null;
-        }
-
         // If we've already returned the left,
         // and the immediate right is null,
         // there's only one entry in the Trie
         // which is stored at the root.
         //
-        //  / ("")   <-- root
-        //  \_/  \
-        //       null <-- 'current'
+        // / ("") <-- root
+        // \_/ \
+        // null <-- 'current'
         //
-        if (current.right == null) {
+        if (current.isEmpty() || current.right == null) {
             return null;
         }
-
         // If nothing valid on the left, try the right.
         if (previous != current.right) {
             // See if it immediately is valid.
             if (isValidUplink(current.right, current)) {
                 return current.right;
             }
-
             // Must search on the right's side if it wasn't initially valid.
             return nextEntryImpl(current.right, previous, tree);
         }
-
         // Neither left nor right are valid, find the first parent
         // whose child did not come from the right & traverse it.
         while (current == current.parent.right) {
@@ -1889,44 +1830,32 @@ public abstract class AbstractPatriciaTrie<K, V> extends AbstractBitwiseTrie<K, 
             if (current == tree) {
                 return null;
             }
-
             current = current.parent;
         }
-
         // If we're on the top of the subtree, we can't go any higher.
-        if (current == tree) {
-            return null;
-        }
-
         // If there's no right, the parent must be root, so we're done.
-        if (current.parent.right == null) {
+        if (current == tree || current.parent.right == null) {
             return null;
         }
-
         // If the parent's right points to itself, we've found one.
-        if (previous != current.parent.right
-                && isValidUplink(current.parent.right, current.parent)) {
+        if (previous != current.parent.right && isValidUplink(current.parent.right, current.parent)) {
             return current.parent.right;
         }
-
         // If the parent's right is itself, there can't be any more nodes.
         if (current.parent.right == current.parent) {
             return null;
         }
-
         // We need to traverse down the parent's right's path.
         return nextEntryImpl(current.parent.right, previous, tree);
     }
 
     /**
-     * Returns the entry lexicographically after the given entry.
-     * If the given entry is null, returns the first node.
-     *
-     * This will traverse only within the subtree.  If the given node
-     * is not within the subtree, this will have undefined results.
+     * Returns the entry lexicographically after the given entry. If the given entry is null, returns the first node.
+     * <p>
+     * This will traverse only within the subtree. If the given node is not within the subtree, this will have undefined results.
+     * </p>
      */
-    TrieEntry<K, V> nextEntryInSubtree(final TrieEntry<K, V> node,
-            final TrieEntry<K, V> parentOfSubtree) {
+    TrieEntry<K, V> nextEntryInSubtree(final TrieEntry<K, V> node, final TrieEntry<K, V> parentOfSubtree) {
         if (node == null) {
             return firstEntry();
         }
@@ -1951,8 +1880,11 @@ public abstract class AbstractPatriciaTrie<K, V> extends AbstractBitwiseTrie<K, 
 
     /**
      * Returns the node lexicographically before the given node (or null if none).
-     *
+     * <p>
      * This follows four simple branches:
+     * </p>
+     *
+     * <pre>
      *  - If the uplink that returned us was a right uplink:
      *      - If predecessor's left is a valid uplink from predecessor, return it.
      *      - Else, follow the right path from the predecessor's left.
@@ -1965,14 +1897,14 @@ public abstract class AbstractPatriciaTrie<K, V> extends AbstractBitwiseTrie<K, 
      *              - If it is root &amp; root !isEmpty, return root.
      *          - If node.parent.left is not uplink from node.parent:
      *              - Follow right path for first right child from node.parent.left
+     * </pre>
      *
-     * @param start  the start entry
+     * @param start The start entry
      */
     TrieEntry<K, V> previousEntry(final TrieEntry<K, V> start) {
         if (start.predecessor == null) {
-            throw new IllegalArgumentException("must have come from somewhere!");
+            throw new IllegalArgumentException("must have come from somewhere.");
         }
-
         if (start.predecessor.right == start) {
             if (isValidUplink(start.predecessor.left, start.predecessor)) {
                 return start.predecessor.left;
@@ -1983,18 +1915,15 @@ public abstract class AbstractPatriciaTrie<K, V> extends AbstractBitwiseTrie<K, 
         while (node.parent != null && node == node.parent.left) {
             node = node.parent;
         }
-
         if (node.parent == null) { // can be null if we're looking up root.
             return null;
         }
-
         if (isValidUplink(node.parent.left, node.parent)) {
             if (node.parent.left == root) {
                 if (root.isEmpty()) {
                     return null;
                 }
                 return root;
-
             }
             return node.parent.left;
         }
@@ -2015,9 +1944,7 @@ public abstract class AbstractPatriciaTrie<K, V> extends AbstractBitwiseTrie<K, 
     @Override
     public V put(final K key, final V value) {
         Objects.requireNonNull(key, "key");
-
         final int lengthInBits = lengthInBits(key);
-
         // The only place to store a key with a length
         // of zero bits is the root node
         if (lengthInBits == 0) {
@@ -2028,9 +1955,8 @@ public abstract class AbstractPatriciaTrie<K, V> extends AbstractBitwiseTrie<K, 
             }
             return root.setKeyValue(key, value);
         }
-
         final TrieEntry<K, V> found = getNearestEntryForKey(key, lengthInBits);
-        if (compareKeys(key, found.key)) {
+        if (keysAreEqual(key, found.key)) {
             if (found.isEmpty()) { // <- must be the root
                 incrementSize();
             } else {
@@ -2038,7 +1964,6 @@ public abstract class AbstractPatriciaTrie<K, V> extends AbstractBitwiseTrie<K, 
             }
             return found.setKeyValue(key, value);
         }
-
         final int bitIndex = bitIndex(key, found.key);
         if (!KeyAnalyzer.isOutOfBoundsIndex(bitIndex)) {
             if (KeyAnalyzer.isValidBitIndex(bitIndex)) { // in 99.999...9% the case
@@ -2051,7 +1976,6 @@ public abstract class AbstractPatriciaTrie<K, V> extends AbstractBitwiseTrie<K, 
             if (KeyAnalyzer.isNullBitKey(bitIndex)) {
                 // A bits of the Key are zero. The only place to
                 // store such a Key is the root Node!
-
                 /* NULL BIT KEY */
                 if (root.isEmpty()) {
                     incrementSize();
@@ -2059,14 +1983,12 @@ public abstract class AbstractPatriciaTrie<K, V> extends AbstractBitwiseTrie<K, 
                     incrementModCount();
                 }
                 return root.setKeyValue(key, value);
-
             }
             if (KeyAnalyzer.isEqualBitKey(bitIndex) && found != root) { // NOPMD
                 incrementModCount();
                 return found.setKeyValue(key, value);
             }
         }
-
         throw new IllegalArgumentException("Failed to put: " + key + " -> " + value + ", " + bitIndex);
     }
 
@@ -2099,21 +2021,18 @@ public abstract class AbstractPatriciaTrie<K, V> extends AbstractBitwiseTrie<K, 
         if (k == null) {
             return null;
         }
-
         final K key = castKey(k);
         final int lengthInBits = lengthInBits(key);
         TrieEntry<K, V> current = root.left;
         TrieEntry<K, V> path = root;
         while (true) {
             if (current.bitIndex <= path.bitIndex) {
-                if (!current.isEmpty() && compareKeys(key, current.key)) {
+                if (!current.isEmpty() && keysAreEqual(key, current.key)) {
                     return removeEntry(current);
                 }
                 return null;
             }
-
             path = current;
-
             if (!isBitSet(key, current.bitIndex, lengthInBits)) {
                 current = current.left;
             } else {
@@ -2123,11 +2042,10 @@ public abstract class AbstractPatriciaTrie<K, V> extends AbstractBitwiseTrie<K, 
     }
 
     /**
-     * Removes a single entry from the {@link jdk.m3.collections.apache.Trie}.
-     *
-     * If we found a Key (Entry h) then figure out if it's
-     * an internal (hard to remove) or external Entry (easy
-     * to remove)
+     * Removes a single entry from the {@link Trie}.
+     * <p>
+     * If we found a Key (Entry h) then figure out if it's an internal (hard to remove) or external Entry (easy to remove)
+     * </p>
      */
     V removeEntry(final TrieEntry<K, V> h) {
         if (h != root) {
@@ -2137,89 +2055,74 @@ public abstract class AbstractPatriciaTrie<K, V> extends AbstractBitwiseTrie<K, 
                 removeExternalEntry(h);
             }
         }
-
         decrementSize();
         return h.setKeyValue(null, null);
     }
 
     /**
-     * Removes an external entry from the {@link jdk.m3.collections.apache.Trie}.
-     *
-     * If it's an external Entry then just remove it.
-     * This is very easy and straight forward.
+     * Removes an external entry from the {@link Trie}. If it's an external Entry then just remove it. This is very easy and straight forward.
      */
     private void removeExternalEntry(final TrieEntry<K, V> h) {
         if (h == root) {
-            throw new IllegalArgumentException("Cannot delete root Entry!");
+            throw new IllegalArgumentException("Cannot delete root Entry.");
         }
         if (!h.isExternalNode()) {
-            throw new IllegalArgumentException(h + " is not an external Entry!");
+            throw new IllegalArgumentException(h + " is not an external Entry.");
         }
-
         final TrieEntry<K, V> parent = h.parent;
         final TrieEntry<K, V> child = h.left == h ? h.right : h.left;
-
         if (parent.left == h) {
             parent.left = child;
         } else {
             parent.right = child;
         }
-
         // either the parent is changing, or the predecessor is changing.
         if (child.bitIndex > parent.bitIndex) {
             child.parent = parent;
         } else {
             child.predecessor = parent;
         }
-
     }
 
     /**
-     * Removes an internal entry from the {@link jdk.m3.collections.apache.Trie}.
-     *
-     * If it's an internal Entry then "good luck" with understanding
-     * this code. The Idea is essentially that Entry p takes Entry h's
-     * place in the trie which requires some re-wiring.
+     * Removes an internal entry from the {@link Trie}.
+     * <p>
+     * If it's an internal Entry then "good luck" with understanding this code. The Idea is essentially that Entry p takes Entry h's place in the trie which
+     * requires some re-wiring.
+     * </p>
      */
     private void removeInternalEntry(final TrieEntry<K, V> h) {
         if (h == root) {
-            throw new IllegalArgumentException("Cannot delete root Entry!");
+            throw new IllegalArgumentException("Cannot delete root Entry.");
         }
         if (!h.isInternalNode()) {
-            throw new IllegalArgumentException(h + " is not an internal Entry!");
+            throw new IllegalArgumentException(h + " is not an internal Entry.");
         }
-
         final TrieEntry<K, V> p = h.predecessor;
-
         // Set P's bitIndex
         p.bitIndex = h.bitIndex;
-
         // Fix P's parent, predecessor and child Nodes
         {
             final TrieEntry<K, V> parent = p.parent;
             final TrieEntry<K, V> child = p.left == h ? p.right : p.left;
-
             // if it was looping to itself previously,
             // it will now be pointed from its parent
             // (if we aren't removing its parent --
-            //  in that case, it remains looping to itself).
+            // in that case, it remains looping to itself).
             // otherwise, it will continue to have the same
             // predecessor.
             if (p.predecessor == p && p.parent != h) {
                 p.predecessor = p.parent;
             }
-
             if (parent.left == p) {
                 parent.left = child;
             } else {
                 parent.right = child;
             }
-
             if (child.bitIndex > parent.bitIndex) {
                 child.parent = parent;
             }
         }
-
         // Fix H's parent and child Nodes
         {
             // If H is a parent of its left and right child
@@ -2227,11 +2130,9 @@ public abstract class AbstractPatriciaTrie<K, V> extends AbstractBitwiseTrie<K, 
             if (h.left.parent == h) {
                 h.left.parent = p;
             }
-
             if (h.right.parent == h) {
                 h.right.parent = p;
             }
-
             // Change H's parent
             if (h.parent.left == h) {
                 h.parent.left = p;
@@ -2239,42 +2140,38 @@ public abstract class AbstractPatriciaTrie<K, V> extends AbstractBitwiseTrie<K, 
                 h.parent.right = p;
             }
         }
-
         // Copy the remaining fields from H to P
-        //p.bitIndex = h.bitIndex;
+        // p.bitIndex = h.bitIndex;
         p.parent = h.parent;
         p.left = h.left;
         p.right = h.right;
-
         // Make sure that if h was pointing to any uplinks,
         // p now points to them.
         if (isValidUplink(p.left, p)) {
             p.left.predecessor = p;
         }
-
         if (isValidUplink(p.right, p)) {
             p.right.predecessor = p;
         }
     }
 
     /**
-     * Returns the {@link java.util.Map.Entry} whose key is closest in a bitwise XOR
-     * metric to the given key. This is NOT lexicographic closeness.
+     * Returns the {@link Entry} whose key is closest in a bitwise XOR metric to the given key. This is NOT lexicographic closeness.
+     * <p>
      * For example, given the keys:
-     *
+     * </p>
      * <ol>
-     * <li>D = 1000100
-     * <li>H = 1001000
-     * <li>L = 1001100
+     * <li>D = 1000100</li>
+     * <li>H = 1001000</li>
+     * <li>L = 1001100</li>
      * </ol>
+     * <p>
+     * If the {@link Trie} contained 'H' and 'L', a lookup of 'D' would return 'L', because the XOR distance between D &amp; L is smaller than the XOR distance
+     * between D &amp; H.
+     * </p>
      *
-     * If the {@link jdk.m3.collections.apache.Trie} contained 'H' and 'L', a lookup of 'D' would
-     * return 'L', because the XOR distance between D &amp; L is smaller
-     * than the XOR distance between D &amp; H.
-     *
-     * @param key  the key to use in the search
-     * @return the {@link java.util.Map.Entry} whose key is closest in a bitwise XOR metric
-     *   to the provided key
+     * @param key The key to use in the search.
+     * @return The {@link Entry} whose key is closest in a bitwise XOR metric to the provided key.
      */
     public Map.Entry<K, V> select(final K key) {
         final int lengthInBits = lengthInBits(key);
@@ -2286,23 +2183,22 @@ public abstract class AbstractPatriciaTrie<K, V> extends AbstractBitwiseTrie<K, 
     }
 
     /**
-     * Returns the key that is closest in a bitwise XOR metric to the
-     * provided key. This is NOT lexicographic closeness!
-     *
+     * Returns the key that is closest in a bitwise XOR metric to the provided key. This is NOT lexicographic closeness!
+     * <p>
      * For example, given the keys:
-     *
+     * </p>
      * <ol>
-     * <li>D = 1000100
-     * <li>H = 1001000
-     * <li>L = 1001100
+     * <li>D = 1000100</li>
+     * <li>H = 1001000</li>
+     * <li>L = 1001100</li>
      * </ol>
+     * <p>
+     * If the {@link Trie} contained 'H' and 'L', a lookup of 'D' would return 'L', because the XOR distance between D &amp; L is smaller than the XOR distance
+     * between D &amp; H.
+     * </p>
      *
-     * If the {@link jdk.m3.collections.apache.Trie} contained 'H' and 'L', a lookup of 'D' would
-     * return 'L', because the XOR distance between D &amp; L is smaller
-     * than the XOR distance between D &amp; H.
-     *
-     * @param key  the key to use in the search
-     * @return the key that is closest in a bitwise XOR metric to the provided key
+     * @param key The key to use in the search.
+     * @return The key that is closest in a bitwise XOR metric to the provided key.
      */
     public K selectKey(final K key) {
         final Map.Entry<K, V> entry = select(key);
@@ -2312,10 +2208,7 @@ public abstract class AbstractPatriciaTrie<K, V> extends AbstractBitwiseTrie<K, 
         return entry.getKey();
     }
 
-    private boolean selectR(final TrieEntry<K, V> h, final int bitIndex,
-                            final K key, final int lengthInBits,
-                            final Reference<Map.Entry<K, V>> reference) {
-
+    private boolean selectR(final TrieEntry<K, V> h, final int bitIndex, final K key, final int lengthInBits, final Reference<Map.Entry<K, V>> reference) {
         if (h.bitIndex <= bitIndex) {
             // If we hit the root Node and it is empty
             // we have to look for an alternative best
@@ -2326,7 +2219,6 @@ public abstract class AbstractPatriciaTrie<K, V> extends AbstractBitwiseTrie<K, 
             }
             return true;
         }
-
         if (!isBitSet(key, h.bitIndex, lengthInBits)) {
             if (selectR(h.left, h.bitIndex, key, lengthInBits, reference)) {
                 return selectR(h.right, h.bitIndex, key, lengthInBits, reference);
@@ -2338,24 +2230,22 @@ public abstract class AbstractPatriciaTrie<K, V> extends AbstractBitwiseTrie<K, 
     }
 
     /**
-     * Returns the value whose key is closest in a bitwise XOR metric to
-     * the provided key. This is NOT lexicographic closeness!
-     *
+     * Returns the value whose key is closest in a bitwise XOR metric to the provided key. This is NOT lexicographic closeness!
+     * <p>
      * For example, given the keys:
-     *
+     * </p>
      * <ol>
-     * <li>D = 1000100
-     * <li>H = 1001000
-     * <li>L = 1001100
+     * <li>D = 1000100</li>
+     * <li>H = 1001000</li>
+     * <li>L = 1001100</li>
      * </ol>
+     * <p>
+     * If the {@link Trie} contained 'H' and 'L', a lookup of 'D' would return 'L', because the XOR distance between D &amp; L is smaller than the XOR distance
+     * between D &amp; H.
+     * </p>
      *
-     * If the {@link jdk.m3.collections.apache.Trie} contained 'H' and 'L', a lookup of 'D' would
-     * return 'L', because the XOR distance between D &amp; L is smaller
-     * than the XOR distance between D &amp; H.
-     *
-     * @param key  the key to use in the search
-     * @return the value whose key is closest in a bitwise XOR metric
-     * to the provided key
+     * @param key The key to use in the search.
+     * @return The value whose key is closest in a bitwise XOR metric to the provided key.
      */
     public V selectValue(final K key) {
         final Map.Entry<K, V> entry = select(key);
@@ -2377,9 +2267,14 @@ public abstract class AbstractPatriciaTrie<K, V> extends AbstractBitwiseTrie<K, 
 
     /**
      * Finds the subtree that contains the prefix.
+     * <p>
+     * This is very similar to getR but with the difference that we stop the lookup if h.bitIndex > lengthInBits.
+     * </p>
      *
-     * This is very similar to getR but with the difference that
-     * we stop the lookup if h.bitIndex > lengthInBits.
+     * @param prefix       the prefix.
+     * @param offsetInBits the offset in bits.
+     * @param lengthInBits the length in bits.
+     * @return the subtree entry.
      */
     TrieEntry<K, V> subtree(final K prefix, final int offsetInBits, final int lengthInBits) {
         TrieEntry<K, V> current = root.left;
@@ -2388,7 +2283,6 @@ public abstract class AbstractPatriciaTrie<K, V> extends AbstractBitwiseTrie<K, 
             if (current.bitIndex <= path.bitIndex || lengthInBits <= current.bitIndex) {
                 break;
             }
-
             path = current;
             if (!isBitSet(prefix, offsetInBits + current.bitIndex, offsetInBits + lengthInBits)) {
                 current = current.left;
@@ -2396,40 +2290,27 @@ public abstract class AbstractPatriciaTrie<K, V> extends AbstractBitwiseTrie<K, 
                 current = current.right;
             }
         }
-
         // Make sure the entry is valid for a subtree.
         final TrieEntry<K, V> entry = current.isEmpty() ? path : current;
-
         // If entry is root, it can't be empty.
         if (entry.isEmpty()) {
             return null;
         }
-
         final int endIndexInBits = offsetInBits + lengthInBits;
-
         // if root && length of root is less than length of lookup,
         // there's nothing.
         // (this prevents returning the whole subtree if root has an empty
-        //  string and we want to lookup things with "\0")
-        if (entry == root && lengthInBits(entry.getKey()) < endIndexInBits) {
-            return null;
-        }
-
+        // string and we want to lookup things with "\0")
         // Found key's length-th bit differs from our key
         // which means it cannot be the prefix...
-        if (isBitSet(prefix, endIndexInBits - 1, endIndexInBits)
-                != isBitSet(entry.key, lengthInBits - 1, lengthInBits(entry.key))) {
+        if (entry == root && lengthInBits(entry.getKey()) < endIndexInBits || isBitSet(prefix, endIndexInBits - 1, endIndexInBits) != isBitSet(entry.key, lengthInBits - 1, lengthInBits(entry.key))) {
             return null;
         }
-
         // ... or there are less than 'length' equal bits
-        final int bitIndex = getKeyAnalyzer().bitIndex(prefix, offsetInBits, lengthInBits,
-                                                       entry.key, 0, lengthInBits(entry.getKey()));
-
+        final int bitIndex = getKeyAnalyzer().bitIndex(prefix, offsetInBits, lengthInBits, entry.key, 0, lengthInBits(entry.getKey()));
         if (bitIndex >= 0 && bitIndex < lengthInBits) {
             return null;
         }
-
         return entry;
     }
 
@@ -2449,7 +2330,7 @@ public abstract class AbstractPatriciaTrie<K, V> extends AbstractBitwiseTrie<K, 
     /**
      * Serializes this object to an ObjectOutputStream.
      *
-     * @param out the target ObjectOutputStream.
+     * @param out The target ObjectOutputStream.
      * @throws IOException thrown when an I/O errors occur writing to the target stream.
      */
     private void writeObject(final ObjectOutputStream out) throws IOException {
@@ -2460,5 +2341,4 @@ public abstract class AbstractPatriciaTrie<K, V> extends AbstractBitwiseTrie<K, 
             out.writeObject(entry.getValue());
         }
     }
-
 }

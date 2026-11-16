@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -44,9 +44,9 @@ final class ArrayUtils {
      * The method returns {@code false} if a {@code null} array is passed in.
      * </p>
      *
-     * @param array        the array to search, may be {@code null}.
-     * @param objectToFind the object to find, may be {@code null}.
-     * @return {@code true} if the array contains the object
+     * @param array        The array to search, may be {@code null}.
+     * @param objectToFind The object to find, may be {@code null}.
+     * @return {@code true} if the array contains the object.
      */
     static boolean contains(final Object[] array, final Object objectToFind) {
         return indexOf(array, objectToFind) != CollectionUtils.INDEX_NOT_FOUND;
@@ -63,11 +63,11 @@ final class ArrayUtils {
      * A negative startIndex is treated as zero. A startIndex larger than the array length will return {@link CollectionUtils#INDEX_NOT_FOUND} ({@code -1}).
      * </p>
      *
-     * @param array        the array to search for the object, may be {@code null}.
-     * @param objectToFind the object to find, may be {@code null}.
-     * @param startIndex   the index to start searching at
-     * @return the index of the object within the array starting at the index, {@link CollectionUtils#INDEX_NOT_FOUND} ({@code -1}) if not found or {@code null}
-     *         array input
+     * @param array        The array to search for the object, may be {@code null}.
+     * @param objectToFind The object to find, may be {@code null}.
+     * @param startIndex   The index to start searching.
+     * @return The index of the object within the array starting at the index, {@link CollectionUtils#INDEX_NOT_FOUND} ({@code -1}) if not found or {@code null}
+     *         array input.
      */
     static int indexOf(final Object[] array, final Object objectToFind, int startIndex) {
         if (array == null) {
@@ -100,9 +100,9 @@ final class ArrayUtils {
      * This method returns {@link CollectionUtils#INDEX_NOT_FOUND} ({@code -1}) for a {@code null} input array.
      * </p>
      *
-     * @param array        the array to search for the object, may be {@code null}.
-     * @param objectToFind the object to find, may be {@code null}.
-     * @return the index of the object within the array, {@link CollectionUtils#INDEX_NOT_FOUND} ({@code -1}) if not found or {@code null} array input
+     * @param array        The array to search for the object, may be {@code null}.
+     * @param objectToFind The object to find, may be {@code null}.
+     * @return The index of the object within the array, {@link CollectionUtils#INDEX_NOT_FOUND} ({@code -1}) if not found or {@code null} array input.
      */
     static <T> int indexOf(final T[] array, final Object objectToFind) {
         return indexOf(array, objectToFind, 0);

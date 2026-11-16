@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -35,8 +35,8 @@ import jdk.m3.collections.apache.MultiValuedMap;
  * to extensions such as synchronized and unmodifiable behavior.
  * </p>
  *
- * @param <K> the type of key elements
- * @param <V> the type of value elements
+ * @param <K> The type of key elements
+ * @param <V> The type of value elements
  * @since 4.1
  */
 public abstract class AbstractMultiValuedMapDecorator<K, V>
@@ -51,7 +51,7 @@ public abstract class AbstractMultiValuedMapDecorator<K, V>
     /**
      * Constructor that wraps (not copies).
      *
-     * @param map  the map to decorate, must not be null
+     * @param map  The map to decorate, must not be null
      * @throws NullPointerException if the map is null
      */
     protected AbstractMultiValuedMapDecorator(final MultiValuedMap<K, V> map) {
@@ -86,7 +86,7 @@ public abstract class AbstractMultiValuedMapDecorator<K, V>
     /**
      * The decorated multivalued map.
      *
-     * @return the map to decorate
+     * @return The map to decorate
      */
     protected MultiValuedMap<K, V> decorated() {
         return map;

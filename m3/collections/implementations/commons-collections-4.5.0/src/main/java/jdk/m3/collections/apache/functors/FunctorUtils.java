@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -31,6 +31,17 @@ import jdk.m3.collections.apache.Predicate;
 final class FunctorUtils {
 
     /**
+     * Clones the given array or returns null on null input.
+     *
+     * @param <T> The array type.
+     * @param array The array to clone.
+     * @return The cloned array or null.
+     */
+    private static <T> T[] clone(final T... array) {
+        return array != null ? array.clone() : null;
+    }
+
+    /**
      * A very simple method that coerces Predicate<? super T> to Predicate<T>.
      * Due to the {@link Predicate#test(T)} method, Predicate<? super T> is
      * able to be coerced to Predicate<T> without casting issues.
@@ -40,9 +51,9 @@ final class FunctorUtils {
      * suppression.
      * </p>
      *
-     * @param <T> the type of object the returned predicate should "accept"
-     * @param predicate the predicate to coerce.
-     * @return the coerced predicate.
+     * @param <T> The type of object the returned predicate should "accept"
+     * @param predicate The predicate to coerce.
+     * @return The coerced predicate.
      */
     @SuppressWarnings("unchecked")
     static <R extends java.util.function.Predicate<T>, P extends java.util.function.Predicate<? super T>, T> R coerce(final P predicate) {
@@ -50,17 +61,17 @@ final class FunctorUtils {
     }
 
     /**
-     * A very simple method that coerces Transformer<? super I, ? extends O> to Transformer<I, O>.
+     * A very simple method that coerces {@code Transformer<? super I, ? extends O>} to {@code Transformer<I, O>}.
      * <p>
      * This method exists
      * simply as centralized documentation and atomic unchecked warning
      * suppression.
      * </p>
      *
-     * @param <I> the type of object the returned transformer should "accept"
-     * @param <O> the type of object the returned transformer should "produce"
-     * @param transformer the transformer to coerce.
-     * @return the coerced transformer.
+     * @param <I> The type of object the returned transformer should "accept"
+     * @param <O> The type of object the returned transformer should "produce"
+     * @param transformer The transformer to coerce.
+     * @return The coerced transformer.
      */
     @SuppressWarnings("unchecked")
     static <R extends Function<I, O>, P extends Function<? super I, ? extends O>, I, O> R coerce(final P transformer) {
@@ -70,15 +81,12 @@ final class FunctorUtils {
     /**
      * Clones the consumers to ensure that the internal references can't be updated.
      *
-     * @param consumers  the consumers to copy.
-     * @return the cloned consumers.
+     * @param consumers  The consumers to copy.
+     * @return The cloned consumers.
      */
     @SuppressWarnings("unchecked")
     static <T extends Consumer<?>> T[] copy(final T... consumers) {
-        if (consumers == null) {
-            return null;
-        }
-        return consumers.clone();
+        return clone(consumers);
     }
 
     /**
@@ -86,35 +94,29 @@ final class FunctorUtils {
      * Due to the {@link Predicate#test(T)} method, Predicate<? super T> is
      * able to be coerced to Predicate<T> without casting issues.
      *
-     * @param predicates  the predicates to copy
-     * @return the cloned predicates
+     * @param predicates  The predicates to copy
+     * @return The cloned predicates
      */
     @SuppressWarnings("unchecked")
     static <T extends java.util.function.Predicate<?>> T[] copy(final T... predicates) {
-        if (predicates == null) {
-            return null;
-        }
-        return predicates.clone();
+        return clone(predicates);
     }
 
     /**
      * Copy method.
      *
-     * @param transformers  the transformers to copy
-     * @return a clone of the transformers
+     * @param transformers  The transformers to copy
+     * @return A clone of the transformers
      */
     @SuppressWarnings("unchecked")
     static <T extends Function<?, ?>> T[] copy(final T... transformers) {
-        if (transformers == null) {
-            return null;
-        }
-        return transformers.clone();
+        return clone(transformers);
     }
 
     /**
      * Validate the predicates to ensure that all is well.
      *
-     * @param predicates  the predicates to validate
+     * @param predicates  The predicates to validate
      * @return predicate array
      */
     static <T> Predicate<? super T>[] validate(final Collection<? extends java.util.function.Predicate<? super T>> predicates) {
@@ -136,10 +138,10 @@ final class FunctorUtils {
     /**
      * Validates the consumers to ensure that all is well.
      *
-     * @param consumers  the consumers to validate.
+     * @param consumers  The consumers to validate.
      */
     static void validate(final Consumer<?>... consumers) {
-        Objects.requireNonNull(consumers, "closures");
+        Objects.requireNonNull(consumers, "consumers");
         for (int i = 0; i < consumers.length; i++) {
             if (consumers[i] == null) {
                 throw new NullPointerException("closures[" + i + "]");
@@ -150,7 +152,7 @@ final class FunctorUtils {
     /**
      * Validate method
      *
-     * @param functions  the transformers to validate
+     * @param functions  The transformers to validate
      */
     static void validate(final Function<?, ?>... functions) {
         Objects.requireNonNull(functions, "functions");
@@ -164,7 +166,7 @@ final class FunctorUtils {
     /**
      * Validate the predicates to ensure that all is well.
      *
-     * @param predicates  the predicates to validate
+     * @param predicates  The predicates to validate
      */
     static void validate(final java.util.function.Predicate<?>... predicates) {
         Objects.requireNonNull(predicates, "predicates");

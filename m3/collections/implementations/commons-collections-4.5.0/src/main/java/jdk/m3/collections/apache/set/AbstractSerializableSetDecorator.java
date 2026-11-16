@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -25,7 +25,7 @@ import java.util.Set;
 /**
  * Serializable subclass of AbstractSetDecorator.
  *
- * @param <E> the type of the elements in this set
+ * @param <E> The type of the elements in this set
  * @since 3.1
  */
 public abstract class AbstractSerializableSetDecorator<E>
@@ -37,7 +37,7 @@ public abstract class AbstractSerializableSetDecorator<E>
     /**
      * Constructs a new instance.
      *
-     * @param set  the list to decorate, must not be null
+     * @param set  The list to decorate, must not be null
      * @throws NullPointerException if set is null
      */
     protected AbstractSerializableSetDecorator(final Set<E> set) {
@@ -47,8 +47,8 @@ public abstract class AbstractSerializableSetDecorator<E>
     /**
      * Deserializes the set in using a custom routine.
      *
-     * @param in  the input stream
-     * @throws IOException if an error occurs while reading from the stream
+     * @param in  The input stream
+     * @throws IOException Thrown if an error occurs while reading from the stream
      * @throws ClassNotFoundException if an object read from the stream cannot be loaded
      */
     @SuppressWarnings("unchecked")
@@ -60,7 +60,7 @@ public abstract class AbstractSerializableSetDecorator<E>
     /**
      * Serializes this object to an ObjectOutputStream.
      *
-     * @param out the target ObjectOutputStream.
+     * @param out The target ObjectOutputStream.
      * @throws IOException thrown when an I/O errors occur writing to the target stream.
      */
     private void writeObject(final ObjectOutputStream out) throws IOException {

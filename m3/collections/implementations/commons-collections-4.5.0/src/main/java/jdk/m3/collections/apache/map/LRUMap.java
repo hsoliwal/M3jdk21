@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -17,12 +17,14 @@
 package jdk.m3.collections.apache.map;
 
 import java.io.IOException;
+import java.io.InvalidObjectException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.Map;
 
 import jdk.m3.collections.apache.BoundedMap;
+import jdk.m3.collections.apache.MapIterator;
 
 /**
  * A {@code Map} implementation with a fixed maximum size which removes
@@ -39,7 +41,7 @@ import jdk.m3.collections.apache.BoundedMap;
  * of modifying the map's iteration order and thus invalidating any
  * iterators currently in use.  It is therefore suggested that iterations
  * over an {@link LRUMap} instance access entry values only through a
- * {@link jdk.m3.collections.apache.MapIterator MapIterator} or {@link #entrySet()} iterator.
+ * {@link MapIterator MapIterator} or {@link #entrySet()} iterator.
  * </p>
  * <p>
  * The map implements {@code OrderedMap} and entries may be queried using
@@ -59,8 +61,8 @@ import jdk.m3.collections.apache.BoundedMap;
  * {@code NullPointerException}'s when accessed by concurrent threads.
  * </p>
  *
- * @param <K> the type of the keys in this map
- * @param <V> the type of the values in this map
+ * @param <K> The type of the keys in this map
+ * @param <V> The type of the values in this map
  * @since 3.0 (previously in main package v1.0)
  */
 public class LRUMap<K, V>
@@ -68,11 +70,13 @@ public class LRUMap<K, V>
 
     /** Serialization version */
     private static final long serialVersionUID = -612114643488955218L;
+
     /** Default maximum size */
     protected static final int DEFAULT_MAX_SIZE = 100;
 
     /** Maximum size */
     private transient int maxSize;
+
     /** Scan behavior */
     private final boolean scanUntilRemovable;
 
@@ -86,7 +90,7 @@ public class LRUMap<K, V>
     /**
      * Constructs a new, empty map with the specified maximum size.
      *
-     * @param maxSize  the maximum size of the map
+     * @param maxSize  The maximum size of the map
      * @throws IllegalArgumentException if the maximum size is less than one
      */
     public LRUMap(final int maxSize) {
@@ -96,7 +100,7 @@ public class LRUMap<K, V>
     /**
      * Constructs a new, empty map with the specified maximum size.
      *
-     * @param maxSize  the maximum size of the map
+     * @param maxSize  The maximum size of the map
      * @param scanUntilRemovable  scan until a removable entry is found, default false
      * @throws IllegalArgumentException if the maximum size is less than one
      * @since 3.1
@@ -109,8 +113,8 @@ public class LRUMap<K, V>
      * Constructs a new, empty map with the specified max capacity and
      * load factor.
      *
-     * @param maxSize  the maximum size of the map
-     * @param loadFactor  the load factor
+     * @param maxSize  The maximum size of the map
+     * @param loadFactor  The load factor
      * @throws IllegalArgumentException if the maximum size is less than one
      * @throws IllegalArgumentException if the load factor is less than zero
      */
@@ -121,8 +125,8 @@ public class LRUMap<K, V>
     /**
      * Constructs a new, empty map with the specified max capacity and load factor.
      *
-     * @param maxSize  the maximum size of the map
-     * @param loadFactor  the load factor
+     * @param maxSize  The maximum size of the map
+     * @param loadFactor  The load factor
      * @param scanUntilRemovable  scan until a removable entry is found, default false
      * @throws IllegalArgumentException if the maximum size is less than one
      * @throws IllegalArgumentException if the load factor is less than zero
@@ -135,8 +139,8 @@ public class LRUMap<K, V>
     /**
      * Constructs a new, empty map with the specified maximum size.
      *
-     * @param maxSize  the maximum size of the map
-     * @param initialSize  the initial size of the map
+     * @param maxSize  The maximum size of the map
+     * @param initialSize  The initial size of the map
      * @throws IllegalArgumentException if the maximum size is less than one
      * @throws IllegalArgumentException if the initial size is negative or larger than the maximum size
      * @since 4.1
@@ -149,9 +153,9 @@ public class LRUMap<K, V>
      * Constructs a new, empty map with the specified max / initial capacity and
      * load factor.
      *
-     * @param maxSize  the maximum size of the map
-     * @param initialSize  the initial size of the map
-     * @param loadFactor  the load factor
+     * @param maxSize  The maximum size of the map
+     * @param initialSize  The initial size of the map
+     * @param loadFactor  The load factor
      * @throws IllegalArgumentException if the maximum size is less than one
      * @throws IllegalArgumentException if the initial size is negative or larger than the maximum size
      * @throws IllegalArgumentException if the load factor is less than zero
@@ -164,9 +168,9 @@ public class LRUMap<K, V>
     /**
      * Constructs a new, empty map with the specified max / initial capacity and load factor.
      *
-     * @param maxSize  the maximum size of the map
-     * @param initialSize  the initial size of the map
-     * @param loadFactor  the load factor
+     * @param maxSize  The maximum size of the map
+     * @param initialSize  The initial size of the map
+     * @param loadFactor  The load factor
      * @param scanUntilRemovable  scan until a removable entry is found, default false
      * @throws IllegalArgumentException if the maximum size is less than one
      * @throws IllegalArgumentException if the initial size is negative or larger than the maximum size
@@ -195,7 +199,7 @@ public class LRUMap<K, V>
      * The maximum size is set from the map's size.
      * </p>
      *
-     * @param map  the map to copy
+     * @param map  The map to copy
      * @throws NullPointerException if the map is null
      * @throws IllegalArgumentException if the map is empty
      */
@@ -208,7 +212,7 @@ public class LRUMap<K, V>
      *
      * <p>The maximum size is set from the map's size.</p>
      *
-     * @param map  the map to copy
+     * @param map  The map to copy
      * @param scanUntilRemovable  scan until a removable entry is found, default false
      * @throws NullPointerException if the map is null
      * @throws IllegalArgumentException if the map is empty
@@ -231,10 +235,10 @@ public class LRUMap<K, V>
      * It also handles the scanUntilRemovable functionality.
      * </p>
      *
-     * @param hashIndex  the index into the data array to store at
-     * @param hashCode  the hash code of the key to add
-     * @param key  the key to add
-     * @param value  the value to add
+     * @param hashIndex  The index into the data array to store at
+     * @param hashCode  The hash code of the key to add
+     * @param key  The key to add
+     * @param value  The value to add
      */
     @Override
     protected void addMapping(final int hashIndex, final int hashCode, final K key, final V value) {
@@ -278,7 +282,7 @@ public class LRUMap<K, V>
     /**
      * Clones the map without cloning the keys or values.
      *
-     * @return a shallow clone
+     * @return A shallow clone
      */
     @Override
     public LRUMap<K, V> clone() {
@@ -288,21 +292,24 @@ public class LRUMap<K, V>
     /**
      * Reads the data necessary for {@code put()} to work in the superclass.
      *
-     * @param in  the input stream
-     * @throws IOException if an error occurs while reading from the stream
+     * @param in  The input stream
+     * @throws IOException Thrown if an error occurs while reading from the stream
      * @throws ClassNotFoundException if an object read from the stream cannot be loaded
      */
     @Override
     protected void doReadObject(final ObjectInputStream in) throws IOException, ClassNotFoundException {
         maxSize = in.readInt();
+        if (maxSize < 1) {
+            throw new InvalidObjectException("LRUMap max size must be greater than 0");
+        }
         super.doReadObject(in);
     }
 
     /**
      * Writes the data necessary for {@code put()} to work in deserialization.
      *
-     * @param out  the output stream
-     * @throws IOException if an error occurs while writing to the stream
+     * @param out  The output stream
+     * @throws IOException Thrown if an error occurs while writing to the stream
      */
     @Override
     protected void doWriteObject(final ObjectOutputStream out) throws IOException {
@@ -316,8 +323,8 @@ public class LRUMap<K, V>
      * This operation changes the position of the key in the map to the
      * most recently used position (last).
      *
-     * @param key  the key
-     * @return the mapped value, null if no match
+     * @param key  The key
+     * @return The mapped value, null if no match
      */
     @Override
     public V get(final Object key) {
@@ -332,10 +339,10 @@ public class LRUMap<K, V>
      * order is not changed by this operation.
      * </p>
      *
-     * @param key  the key
+     * @param key  The key
      * @param updateToMRU  whether the key shall be updated to the
      *   most recently used position
-     * @return the mapped value, null if no match
+     * @return The mapped value, null if no match
      * @since 4.1
      */
     public V get(final Object key, final boolean updateToMRU) {
@@ -373,7 +380,7 @@ public class LRUMap<K, V>
     /**
      * Gets the maximum size of the map (the bound).
      *
-     * @return the maximum number of elements the map can hold
+     * @return The maximum number of elements the map can hold
      */
     @Override
     public int maxSize() {
@@ -386,7 +393,7 @@ public class LRUMap<K, V>
      * This implementation moves the updated entry to the end of the list.
      * </p>
      *
-     * @param entry  the entry to update
+     * @param entry  The entry to update
      */
     protected void moveToMRU(final LinkEntry<K, V> entry) {
         if (entry.after != header) {
@@ -412,8 +419,8 @@ public class LRUMap<K, V>
     /**
      * Deserializes the map in using a custom routine.
      *
-     * @param in the input stream
-     * @throws IOException if an error occurs while reading from the stream
+     * @param in The input stream
+     * @throws IOException Thrown if an error occurs while reading from the stream
      * @throws ClassNotFoundException if an object read from the stream cannot be loaded
      */
     private void readObject(final ObjectInputStream in) throws IOException, ClassNotFoundException {
@@ -457,7 +464,7 @@ public class LRUMap<K, V>
      * This is fixed in version 3.1 onwards.
      * </p>
      *
-     * @param entry  the entry to be removed
+     * @param entry  The entry to be removed
      * @return {@code true}
      */
     protected boolean removeLRU(final LinkEntry<K, V> entry) {
@@ -469,11 +476,11 @@ public class LRUMap<K, V>
      * <p>
      * This method uses {@link #removeEntry}, {@link #reuseEntry} and {@link #addEntry}.
      *
-     * @param entry  the entry to reuse
-     * @param hashIndex  the index into the data array to store at
-     * @param hashCode  the hash code of the key to add
-     * @param key  the key to add
-     * @param value  the value to add
+     * @param entry  The entry to reuse
+     * @param hashIndex  The index into the data array to store at
+     * @param hashCode  The hash code of the key to add
+     * @param key  The key to add
+     * @param value  The value to add
      */
     protected void reuseMapping(final LinkEntry<K, V> entry, final int hashIndex, final int hashCode,
                                 final K key, final V value) {
@@ -514,8 +521,8 @@ public class LRUMap<K, V>
      * using {@link #moveToMRU(AbstractLinkedMap.LinkEntry)}.
      * </p>
      *
-     * @param entry  the entry to update
-     * @param newValue  the new value to store
+     * @param entry  The entry to update
+     * @param newValue  The new value to store
      */
     @Override
     protected void updateEntry(final HashEntry<K, V> entry, final V newValue) {
@@ -526,7 +533,7 @@ public class LRUMap<K, V>
     /**
      * Serializes this object to an ObjectOutputStream.
      *
-     * @param out the target ObjectOutputStream.
+     * @param out The target ObjectOutputStream.
      * @throws IOException thrown when an I/O errors occur writing to the target stream.
      */
     private void writeObject(final ObjectOutputStream out) throws IOException {

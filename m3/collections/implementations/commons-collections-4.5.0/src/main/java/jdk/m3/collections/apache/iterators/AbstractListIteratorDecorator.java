@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -25,7 +25,7 @@ import java.util.Objects;
  * All methods are forwarded to the decorated list iterator.
  * </p>
  *
- * @param <E> the type of elements in this iterator.
+ * @param <E> The type of elements in this iterator.
  * @since 3.0
  */
 public class AbstractListIteratorDecorator<E> implements ListIterator<E> {
@@ -36,7 +36,7 @@ public class AbstractListIteratorDecorator<E> implements ListIterator<E> {
     /**
      * Constructor that decorates the specified iterator.
      *
-     * @param iterator  the iterator to decorate, must not be null
+     * @param iterator  The iterator to decorate, must not be null
      * @throws NullPointerException if the iterator is null
      */
     public AbstractListIteratorDecorator(final ListIterator<E> iterator) {
@@ -52,7 +52,7 @@ public class AbstractListIteratorDecorator<E> implements ListIterator<E> {
     /**
      * Gets the iterator being decorated.
      *
-     * @return the decorated iterator
+     * @return The decorated iterator
      */
     protected ListIterator<E> getListIterator() {
         return iterator;

@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -30,7 +30,7 @@ import jdk.m3.collections.apache.Transformer;
  * use the Integer form to remove objects.
  * </p>
  *
- * @param <E> the type of the elements in this set
+ * @param <E> The type of the elements in this set
  * @since 4.1
  */
 public class TransformedNavigableSet<E> extends TransformedSortedSet<E> implements NavigableSet<E> {
@@ -46,10 +46,10 @@ public class TransformedNavigableSet<E> extends TransformedSortedSet<E> implemen
      * will be transformed by this method.
      * Contrast this with {@link #transformingNavigableSet(NavigableSet, Transformer)}.
      *
-     * @param <E> the element type
-     * @param set  the set to decorate, must not be null
-     * @param transformer  the transformer to use for conversion, must not be null
-     * @return a new transformed {@link NavigableSet}
+     * @param <E> The element type
+     * @param set  The set to decorate, must not be null
+     * @param transformer  The transformer to use for conversion, must not be null
+     * @return A new transformed {@link NavigableSet}
      * @throws NullPointerException if set or transformer is null
      */
     public static <E> TransformedNavigableSet<E> transformedNavigableSet(final NavigableSet<E> set,
@@ -74,10 +74,10 @@ public class TransformedNavigableSet<E> extends TransformedSortedSet<E> implemen
      * are NOT transformed.
      * Contrast this with {@link #transformedNavigableSet(NavigableSet, Transformer)}.
      *
-     * @param <E> the element type
-     * @param set  the set to decorate, must not be null
-     * @param transformer  the transformer to use for conversion, must not be null
-     * @return a new transformed {@link NavigableSet}
+     * @param <E> The element type
+     * @param set  The set to decorate, must not be null
+     * @param transformer  The transformer to use for conversion, must not be null
+     * @return A new transformed {@link NavigableSet}
      * @throws NullPointerException if set or transformer is null
      */
     public static <E> TransformedNavigableSet<E> transformingNavigableSet(final NavigableSet<E> set,
@@ -91,8 +91,8 @@ public class TransformedNavigableSet<E> extends TransformedSortedSet<E> implemen
      * If there are any elements already in the set being decorated, they
      * are NOT transformed.
      *
-     * @param set  the set to decorate, must not be null
-     * @param transformer  the transformer to use for conversion, must not be null
+     * @param set  The set to decorate, must not be null
+     * @param transformer  The transformer to use for conversion, must not be null
      * @throws NullPointerException if set or transformer is null
      */
     protected TransformedNavigableSet(final NavigableSet<E> set,
@@ -108,7 +108,7 @@ public class TransformedNavigableSet<E> extends TransformedSortedSet<E> implemen
     /**
      * Gets the decorated navigable set.
      *
-     * @return the decorated navigable set
+     * @return The decorated navigable set
      */
     @Override
     protected NavigableSet<E> decorated() {

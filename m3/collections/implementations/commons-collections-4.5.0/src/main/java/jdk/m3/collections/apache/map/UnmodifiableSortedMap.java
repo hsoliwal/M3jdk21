@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -39,8 +39,8 @@ import jdk.m3.collections.apache.set.UnmodifiableSet;
  * Attempts to modify it will result in an UnsupportedOperationException.
  * </p>
  *
- * @param <K> the type of the keys in this map
- * @param <V> the type of the values in this map
+ * @param <K> The type of the keys in this map
+ * @param <V> The type of the values in this map
  * @since 3.0
  */
 public final class UnmodifiableSortedMap<K, V>
@@ -55,8 +55,8 @@ public final class UnmodifiableSortedMap<K, V>
      *
      * @param <K>  the key type
      * @param <V>  the value type
-     * @param map  the map to decorate, must not be null
-     * @return a new unmodifiable sorted map
+     * @param map  The map to decorate, must not be null
+     * @return A new unmodifiable sorted map
      * @throws NullPointerException if map is null
      * @since 4.0
      */
@@ -72,7 +72,7 @@ public final class UnmodifiableSortedMap<K, V>
     /**
      * Constructor that wraps (not copies).
      *
-     * @param map  the map to decorate, must not be null
+     * @param map  The map to decorate, must not be null
      * @throws NullPointerException if map is null
      */
     @SuppressWarnings("unchecked") // safe to upcast
@@ -80,6 +80,11 @@ public final class UnmodifiableSortedMap<K, V>
         super((SortedMap<K, V>) map);
     }
 
+    /**
+     * Always throws {@link UnsupportedOperationException}.
+     *
+     * @throws UnsupportedOperationException Always thrown.
+     */
     @Override
     public void clear() {
         throw new UnsupportedOperationException();
@@ -115,11 +120,24 @@ public final class UnmodifiableSortedMap<K, V>
         return decorated().lastKey();
     }
 
+    /**
+     * Always throws {@link UnsupportedOperationException}.
+     *
+     * @param key Ignored.
+     * @param value Ignored.
+     * @throws UnsupportedOperationException Always thrown.
+     */
     @Override
     public V put(final K key, final V value) {
         throw new UnsupportedOperationException();
     }
 
+    /**
+     * Always throws {@link UnsupportedOperationException}.
+     *
+     * @param mapToCopy Ignored.
+     * @throws UnsupportedOperationException Always thrown.
+     */
     @Override
     public void putAll(final Map<? extends K, ? extends V> mapToCopy) {
         throw new UnsupportedOperationException();
@@ -128,8 +146,8 @@ public final class UnmodifiableSortedMap<K, V>
     /**
      * Deserializes the map in using a custom routine.
      *
-     * @param in  the input stream
-     * @throws IOException if an error occurs while reading from the stream
+     * @param in  The input stream
+     * @throws IOException Thrown if an error occurs while reading from the stream
      * @throws ClassNotFoundException if an object read from the stream cannot be loaded
      * @since 3.1
      */
@@ -139,6 +157,12 @@ public final class UnmodifiableSortedMap<K, V>
         map = (Map<K, V>) in.readObject();
     }
 
+    /**
+     * Always throws {@link UnsupportedOperationException}.
+     *
+     * @param key Ignored.
+     * @throws UnsupportedOperationException Always thrown.
+     */
     @Override
     public V remove(final Object key) {
         throw new UnsupportedOperationException();
@@ -162,7 +186,7 @@ public final class UnmodifiableSortedMap<K, V>
     /**
      * Serializes this object to an ObjectOutputStream.
      *
-     * @param out the target ObjectOutputStream.
+     * @param out The target ObjectOutputStream.
      * @throws IOException thrown when an I/O errors occur writing to the target stream.
      * @since 3.1
      */

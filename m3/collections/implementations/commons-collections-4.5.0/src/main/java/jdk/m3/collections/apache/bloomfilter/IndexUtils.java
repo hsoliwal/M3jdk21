@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -33,9 +33,9 @@ final class IndexUtils {
     /**
      * Ensure the array can add an element at the specified index.
      *
-     * @param array the array to check.
-     * @param index the index to add at.
-     * @return the array or a newly allocated copy of the array.
+     * @param array The array to check.
+     * @param index The index to add at.
+     * @return The array or a newly allocated copy of the array.
      */
     static int[] ensureCapacityForAdd(final int[] array, final int index) {
         if (index >= array.length) {

@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -14,8 +14,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-// Modified 2026 by Hitesh Soliwal and Contributors to the Synexia Project:
-// enabled-bit index in int[] array lanes (IndexStore) instead of a TreeSet of boxed integers.
+// Modified 2026 by Hitesh Soliwal and contributors: sparse lifecycle array hot paths.
+// Modified 2026 by Synexia contributors: sorted-lane bulk union without per-key tree updates.
+// Modified 2026 by Synexia contributors: array-backed dense-peer sorted merge and matching.
 package jdk.m3.collections.apache.bloomfilter;
 
 import java.util.Arrays;
@@ -73,11 +74,23 @@ public final class SparseBloomFilter implements BloomFilter<SparseBloomFilter> {
 
         /** Publishes every lane only after all allocations have succeeded. */
         private void grow() {
-            final long proposed = Math.max(8L, keys.length + (long) (keys.length >>> 1));
-            final int capacity = (int) Math.min(Integer.MAX_VALUE - 8L, proposed);
-            if (capacity <= keys.length) {
+            reserve((long) size + 1L);
+        }
+
+        /** Retain the geometric endpoint, without allocating intermediate generations. */
+        private void reserve(final long required) {
+            if (required <= keys.length) {
+                return;
+            }
+            final long maximum = Integer.MAX_VALUE - 8L;
+            if (required > maximum) {
                 throw new OutOfMemoryError("SparseBloomFilter slot capacity exhausted");
             }
+            long proposed = keys.length;
+            do {
+                proposed = Math.min(maximum, Math.max(8L, proposed + (proposed >>> 1)));
+            } while (proposed < required);
+            final int capacity = (int) proposed;
             final int[] newKeys = Arrays.copyOf(keys, capacity);
             final int[] newLeft = Arrays.copyOf(left, capacity);
             final int[] newRight = Arrays.copyOf(right, capacity);
@@ -169,19 +182,186 @@ public final class SparseBloomFilter implements BloomFilter<SparseBloomFilter> {
             }
             if (key < keys[slot]) {
                 final int child = insert(left[slot], key, previous, slot);
+                if (child < 0) {
+                    // A complemented coordinate reports unchanged subtree height.
+                    if (left[slot] != ~child) {
+                        left[slot] = ~child;
+                    }
+                    return ~slot;
+                }
                 left[slot] = child;
             } else if (key > keys[slot]) {
                 final int child = insert(right[slot], key, slot, successor);
+                if (child < 0) {
+                    if (right[slot] != ~child) {
+                        right[slot] = ~child;
+                    }
+                    return ~slot;
+                }
                 right[slot] = child;
             } else {
-                return slot;
+                return ~slot;
             }
+            final int oldHeight = heights[slot];
             recalcHeight(slot);
-            return balance(slot);
+            final int balanced = balance(slot);
+            return heights[balanced] == oldHeight ? ~balanced : balanced;
         }
 
         private void add(final int key) {
-            root = insert(root, key, NONE, NONE);
+            final int result = insert(root, key, NONE, NONE);
+            root = result < 0 ? ~result : result;
+        }
+
+        /** Merge large exact-peer batches through the existing sorted successor lane. */
+        private void addAll(final IndexStore other) {
+            if (other == this || other.size == 0) {
+                return;
+            }
+            final int expectedModCount = other.modCount;
+            // Keep tree insertion for small batches where a full receiver scan costs more.
+            if (other.size < 32 || (size != 0
+                    && (long) other.size * (height(root) + 1) < (long) size + other.size)) {
+                for (int source = other.first; source != NONE; source = other.next[source]) {
+                    add(other.keys[source]);
+                    if (other.modCount != expectedModCount) {
+                        throw new ConcurrentModificationException();
+                    }
+                }
+                return;
+            }
+            int current = first;
+            int missing = 0;
+            for (int source = other.first; source != NONE; source = other.next[source]) {
+                final int key = other.keys[source];
+                while (current != NONE && keys[current] < key) {
+                    current = next[current];
+                }
+                if (current == NONE || keys[current] != key) {
+                    missing++;
+                }
+                if (other.modCount != expectedModCount) {
+                    throw new ConcurrentModificationException();
+                }
+            }
+            if (missing == 0) {
+                return;
+            }
+            // All lanes are allocated before publication; no scratch nodes or key copies.
+            reserve((long) size + missing);
+            current = first;
+            int previous = NONE;
+            for (int source = other.first; source != NONE; source = other.next[source]) {
+                final int key = other.keys[source];
+                while (current != NONE && keys[current] < key) {
+                    previous = current;
+                    current = next[current];
+                }
+                if (current != NONE && keys[current] == key) {
+                    previous = current;
+                    current = next[current];
+                } else {
+                    previous = newLeaf(key, previous, current);
+                }
+                if (other.modCount != expectedModCount) {
+                    // No caller callbacks run here; concurrent use remains unsupported.
+                    root = (int) (rebuild(first, size) >>> 32);
+                    throw new ConcurrentModificationException();
+                }
+            }
+            root = (int) (rebuild(first, size) >>> 32);
+        }
+
+        /**
+         * Scan exact dense peers by primitive word directly, then splice missing
+         * keys into the owner-held sorted successor lane. No mutable bitmaps,
+         * retained scratch arrays, node objects or callback dispatch escape.
+         */
+        private void addAll(final SimpleBloomFilter other) {
+            final int count = other.cardinality();
+            final int words = BitMaps.numberOfBitMaps(other.getShape());
+            if (count < 32 || (long) words > (long) count * 2L
+                    || (size != 0 && (long) count * (height(root) + 1) < (long) size + count)) {
+                other.processIndices(value -> {
+                    add(value);
+                    return true;
+                });
+                return;
+            }
+            int current = first;
+            int missing = 0;
+            for (int wordIndex = 0; wordIndex < words; wordIndex++) {
+                long word = other.wordAt(wordIndex);
+                while (word != 0L) {
+                    final int key = (wordIndex << 6) + Long.numberOfTrailingZeros(word);
+                    while (current != NONE && keys[current] < key) {
+                        current = next[current];
+                    }
+                    if (current == NONE || keys[current] != key) {
+                        missing++;
+                    }
+                    word &= word - 1;
+                }
+            }
+            if (missing == 0) {
+                return;
+            }
+            reserve((long) size + missing);
+            current = first;
+            int previous = NONE;
+            for (int wordIndex = 0; wordIndex < words; wordIndex++) {
+                long word = other.wordAt(wordIndex);
+                while (word != 0L) {
+                    final int key = (wordIndex << 6) + Long.numberOfTrailingZeros(word);
+                    while (current != NONE && keys[current] < key) {
+                        previous = current;
+                        current = next[current];
+                    }
+                    if (current != NONE && keys[current] == key) {
+                        previous = current;
+                        current = next[current];
+                    } else {
+                        previous = newLeaf(key, previous, current);
+                    }
+                    word &= word - 1;
+                }
+            }
+            root = (int) (rebuild(first, size) >>> 32);
+        }
+
+        /** Ordered bitmap words use one monotone successor scan. */
+        private boolean containsAll(final SimpleBloomFilter other) {
+            int current = first;
+            final int words = BitMaps.numberOfBitMaps(other.getShape());
+            for (int wordIndex = 0; wordIndex < words; wordIndex++) {
+                long word = other.wordAt(wordIndex);
+                while (word != 0L) {
+                    final int key = (wordIndex << 6) + Long.numberOfTrailingZeros(word);
+                    while (current != NONE && keys[current] < key) {
+                        current = next[current];
+                    }
+                    if (current == NONE || keys[current] != key) {
+                        return false;
+                    }
+                    word &= word - 1;
+                }
+            }
+            return true;
+        }
+
+        /** Pack the balanced root and first unconsumed successor into one primitive. */
+        private long rebuild(final int cursor, final int count) {
+            if (count == 0) {
+                return ((long) NONE << 32) | (cursor & 0xffffffffL);
+            }
+            final int leftSize = count >>> 1;
+            final long prefix = rebuild(cursor, leftSize);
+            final int slot = (int) prefix;
+            final long suffix = rebuild(next[slot], count - leftSize - 1);
+            left[slot] = (int) (prefix >>> 32);
+            right[slot] = (int) (suffix >>> 32);
+            recalcHeight(slot);
+            return ((long) slot << 32) | (suffix & 0xffffffffL);
         }
 
         private boolean contains(final int key) {
@@ -196,6 +376,49 @@ public final class SparseBloomFilter implements BloomFilter<SparseBloomFilter> {
                 }
             }
             return false;
+        }
+
+        /** Use sorted lanes for large peer queries, tree lookup for small ones. */
+        private boolean containsAll(final IndexStore other) {
+            if (other == this || other.size == 0) {
+                return true;
+            }
+            if (other.size == 1) {
+                return contains(other.keys[other.first]);
+            }
+            if (size < other.size || keys[first] > other.keys[other.first]
+                    || keys[last] < other.keys[other.last]) {
+                return false;
+            }
+            final int expectedModCount = other.modCount;
+            // Estimate coordinate visits without a workload-specific size constant.
+            if ((long) other.size * (height(root) + 1) < (long) size + other.size) {
+                for (int slot = other.first; slot != NONE; slot = other.next[slot]) {
+                    final boolean found = contains(other.keys[slot]);
+                    if (other.modCount != expectedModCount) {
+                        throw new ConcurrentModificationException();
+                    }
+                    if (!found) {
+                        return false;
+                    }
+                }
+                return true;
+            }
+            int current = first;
+            for (int slot = other.first; slot != NONE; slot = other.next[slot]) {
+                final int wanted = other.keys[slot];
+                while (current != NONE && keys[current] < wanted) {
+                    current = next[current];
+                }
+                if (other.modCount != expectedModCount) {
+                    throw new ConcurrentModificationException();
+                }
+                if (current == NONE || keys[current] != wanted) {
+                    return false;
+                }
+                current = next[current];
+            }
+            return true;
         }
 
         private void clear() {
@@ -258,7 +481,7 @@ public final class SparseBloomFilter implements BloomFilter<SparseBloomFilter> {
     /**
      * Adds the index to the indices.
      *
-     * @param idx the index to add.
+     * @param idx The index to add.
      * @return {@code true} always
      */
     private boolean add(final int idx) {
@@ -281,6 +504,23 @@ public final class SparseBloomFilter implements BloomFilter<SparseBloomFilter> {
         return result;
     }
 
+    /** Copies the existing ascending successor lane into one detached result. */
+    @Override
+    public int[] asIndexArray() {
+        final int expectedModCount = indices.modCount;
+        final int[] result = new int[indices.size];
+        int offset = 0;
+        for (int current = indices.first; current != IndexStore.NONE;) {
+            final int value = indices.keys[current];
+            current = indices.next[current];
+            if (indices.modCount != expectedModCount) {
+                throw new ConcurrentModificationException();
+            }
+            result[offset++] = value;
+        }
+        return result;
+    }
+
     @Override
     public int cardinality() {
         return indices.size;
@@ -298,18 +538,34 @@ public final class SparseBloomFilter implements BloomFilter<SparseBloomFilter> {
 
     @Override
     public boolean contains(final BitMapExtractor bitMapExtractor) {
+        if (bitMapExtractor instanceof SimpleBloomFilter) {
+            return contains((IndexExtractor) bitMapExtractor);
+        }
         return contains(IndexExtractor.fromBitMapExtractor(bitMapExtractor));
     }
 
     @Override
     public boolean contains(final IndexExtractor indexExtractor) {
+        if (indexExtractor instanceof SparseBloomFilter) {
+            return indices.containsAll(((SparseBloomFilter) indexExtractor).indices);
+        }
+        if (indexExtractor instanceof SimpleBloomFilter) {
+            final SimpleBloomFilter other = (SimpleBloomFilter) indexExtractor;
+            final int count = other.cardinality();
+            if (count >= 32 && indices.size > 0
+                    && (long) BitMaps.numberOfBitMaps(other.getShape()) <= (long) count * 2L
+                    && (long) count * (indices.height(indices.root) + 1) >= (long) indices.size + count) {
+                return indices.containsAll(other);
+            }
+        }
+        // Preserve arbitrary-producer callbacks, return values and exception behavior.
         return indexExtractor.processIndices(indices::contains);
     }
 
     /**
      * Creates a new instance of this {@link SparseBloomFilter} with the same properties as the current one.
      *
-     * @return a copy of this {@link SparseBloomFilter}.
+     * @return A copy of this {@link SparseBloomFilter}.
      */
     @Override
     public SparseBloomFilter copy() {
@@ -329,13 +585,17 @@ public final class SparseBloomFilter implements BloomFilter<SparseBloomFilter> {
     @Override
     public boolean merge(final BitMapExtractor bitMapExtractor) {
         Objects.requireNonNull(bitMapExtractor, "bitMapExtractor");
-        return this.merge(IndexExtractor.fromBitMapExtractor(bitMapExtractor));
+        return bitMapExtractor instanceof SimpleBloomFilter
+                ? merge((IndexExtractor) bitMapExtractor)
+                : merge(IndexExtractor.fromBitMapExtractor(bitMapExtractor));
     }
 
     @Override
     public boolean merge(final BloomFilter<?> other) {
         Objects.requireNonNull(other, "other");
-        final IndexExtractor indexExtractor = (other.characteristics() & SPARSE) != 0 ? (IndexExtractor) other : IndexExtractor.fromBitMapExtractor(other);
+        final IndexExtractor indexExtractor = (other.characteristics() & SPARSE) != 0
+                || other instanceof SimpleBloomFilter
+                ? (IndexExtractor) other : IndexExtractor.fromBitMapExtractor(other);
         merge(indexExtractor);
         return true;
     }
@@ -350,7 +610,14 @@ public final class SparseBloomFilter implements BloomFilter<SparseBloomFilter> {
     @Override
     public boolean merge(final IndexExtractor indexExtractor) {
         Objects.requireNonNull(indexExtractor, "indexExtractor");
-        indexExtractor.processIndices(this::add);
+        if (indexExtractor instanceof SparseBloomFilter) {
+            indices.addAll(((SparseBloomFilter) indexExtractor).indices);
+        } else if (indexExtractor instanceof SimpleBloomFilter) {
+            indices.addAll((SimpleBloomFilter) indexExtractor);
+        } else {
+            indexExtractor.processIndices(this::add);
+        }
+
         if (!indices.isEmpty()) {
             if (indices.keys[indices.last] >= shape.getNumberOfBits()) {
                 throw new IllegalArgumentException(String.format("Value in list %s is greater than maximum value (%s)",

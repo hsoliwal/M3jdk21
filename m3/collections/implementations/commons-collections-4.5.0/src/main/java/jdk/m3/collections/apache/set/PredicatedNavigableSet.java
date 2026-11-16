@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -38,7 +38,7 @@ import jdk.m3.collections.apache.Predicate;
  *                                              NotNullPredicate.notNullPredicate());
  * </pre>
  *
- * @param <E> the type of the elements in this set
+ * @param <E> The type of the elements in this set
  * @since 4.1
  */
 public class PredicatedNavigableSet<E> extends PredicatedSortedSet<E> implements NavigableSet<E> {
@@ -52,10 +52,10 @@ public class PredicatedNavigableSet<E> extends PredicatedSortedSet<E> implements
      * If there are any elements already in the set being decorated, they
      * are validated.
      *
-     * @param <E> the element type
-     * @param set  the set to decorate, must not be null
-     * @param predicate  the predicate to use for validation, must not be null
-     * @return a new predicated navigable set.
+     * @param <E> The element type
+     * @param set  The set to decorate, must not be null
+     * @param predicate  The predicate to use for validation, must not be null
+     * @return A new predicated navigable set.
      * @throws NullPointerException if set or predicate is null
      * @throws IllegalArgumentException if the set contains invalid elements
      * @since 4.0
@@ -71,8 +71,8 @@ public class PredicatedNavigableSet<E> extends PredicatedSortedSet<E> implements
      * If there are any elements already in the set being decorated, they
      * are validated.
      *
-     * @param set  the set to decorate, must not be null
-     * @param predicate  the predicate to use for validation, must not be null
+     * @param set  The set to decorate, must not be null
+     * @param predicate  The predicate to use for validation, must not be null
      * @throws NullPointerException if set or predicate is null
      * @throws IllegalArgumentException if the set contains invalid elements
      */
@@ -88,7 +88,7 @@ public class PredicatedNavigableSet<E> extends PredicatedSortedSet<E> implements
     /**
      * Gets the navigable set being decorated.
      *
-     * @return the decorated navigable set
+     * @return The decorated navigable set
      */
     @Override
     protected NavigableSet<E> decorated() {

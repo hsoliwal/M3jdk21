@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -27,8 +27,8 @@ import jdk.m3.collections.apache.Trie;
  * This class provides some basic {@link Trie} functionality and
  * utility methods for actual bitwise {@link Trie} implementations.
  *
- * @param <K> the type of the keys in this map
- * @param <V> the type of the values in this map
+ * @param <K> The type of the keys in this map
+ * @param <V> The type of the values in this map
  * @since 4.0
  */
 public abstract class AbstractBitwiseTrie<K, V> extends AbstractMap<K, V>
@@ -37,8 +37,8 @@ public abstract class AbstractBitwiseTrie<K, V> extends AbstractMap<K, V>
     /**
      * A basic implementation of {@link Entry}.
      *
-     * @param <K> the type of the keys in this entry.
-     * @param <V> the type of the values in this entry.
+     * @param <K> The type of the keys in this entry.
+     * @param <V> The type of the values in this entry.
      */
     abstract static class BasicEntry<K, V> implements Map.Entry<K, V>, Serializable {
 
@@ -138,7 +138,7 @@ public abstract class AbstractBitwiseTrie<K, V> extends AbstractMap<K, V>
     /**
      * Constructs a new {@link Trie} using the given {@link KeyAnalyzer}.
      *
-     * @param keyAnalyzer  the {@link KeyAnalyzer} to use
+     * @param keyAnalyzer  The {@link KeyAnalyzer} to use
      */
     protected AbstractBitwiseTrie(final KeyAnalyzer<? super K> keyAnalyzer) {
         this.keyAnalyzer = Objects.requireNonNull(keyAnalyzer, "keyAnalyzer");
@@ -169,22 +169,9 @@ public abstract class AbstractBitwiseTrie<K, V> extends AbstractMap<K, V>
     }
 
     /**
-     * A utility method for calling {@link KeyAnalyzer#compare(Object, Object)}
-     */
-    final boolean compareKeys(final K key, final K other) {
-        if (key == null) {
-            return other == null;
-        }
-        if (other == null) {
-            return false;
-        }
-
-        return keyAnalyzer.compare(key, other) == 0;
-    }
-
-    /**
      * Gets the {@link KeyAnalyzer} that constructed the {@link Trie}.
-     * @return the {@link KeyAnalyzer} used by this {@link Trie}
+     *
+     * @return The {@link KeyAnalyzer} used by this {@link Trie}
      */
     protected KeyAnalyzer<? super K> getKeyAnalyzer() {
         return keyAnalyzer;
@@ -200,6 +187,20 @@ public abstract class AbstractBitwiseTrie<K, V> extends AbstractMap<K, V>
             return false;
         }
         return keyAnalyzer.isBitSet(key, bitIndex, lengthInBits);
+    }
+
+    /**
+     * A null-safe utility method for calling {@link KeyAnalyzer#compare(Object, Object)}
+     */
+    final boolean keysAreEqual(final K key, final K other) {
+        if (key == null) {
+            return other == null;
+        }
+        if (other == null) {
+            return false;
+        }
+
+        return keyAnalyzer.compare(key, other) == 0;
     }
 
     /**

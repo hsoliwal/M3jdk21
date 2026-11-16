@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -14,15 +14,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+// Modified 2026 by Hitesh Soliwal and contributors: direct reference-array reads with reflective fallbacks.
+// Modified 2026 by Synexia contributors: reuse typed primitive reads from ArrayIterator.
 package jdk.m3.collections.apache.iterators;
 
 import java.lang.reflect.Array;
+import java.util.ListIterator;
 import java.util.NoSuchElementException;
 
 import jdk.m3.collections.apache.ResettableListIterator;
 
 /**
- * Implements a {@link java.util.ListIterator} over an array.
+ * Implements a {@link ListIterator} over an array.
  * <p>
  * The array can be either an array of object or of primitives. If you know
  * that you have an object array, the {@link ObjectArrayListIterator}
@@ -33,7 +36,7 @@ import jdk.m3.collections.apache.ResettableListIterator;
  * cannot be changed in size. The {@link #set(Object)} method is supported however.
  * </p>
  *
- * @param <E> the type of elements returned by this iterator.
+ * @param <E> The type of elements returned by this iterator.
  * @see jdk.m3.collections.apache.iterators.ArrayIterator
  * @see java.util.Iterator
  * @see java.util.ListIterator
@@ -54,7 +57,7 @@ public class ArrayListIterator<E> extends ArrayIterator<E>
      * Constructs an ArrayListIterator that will iterate over the values in the
      * specified array.
      *
-     * @param array the array to iterate over
+     * @param array The array to iterate over
      * @throws IllegalArgumentException if {@code array} is not an array.
      * @throws NullPointerException if {@code array} is {@code null}
      */
@@ -66,8 +69,8 @@ public class ArrayListIterator<E> extends ArrayIterator<E>
      * Constructs an ArrayListIterator that will iterate over the values in the
      * specified array from a specific start index.
      *
-     * @param array  the array to iterate over
-     * @param startIndex  the index to start iterating at
+     * @param array  The array to iterate over
+     * @param startIndex  The index to start iterating at
      * @throws IllegalArgumentException if {@code array} is not an array.
      * @throws NullPointerException if {@code array} is {@code null}
      * @throws IndexOutOfBoundsException if the start index is out of bounds
@@ -80,9 +83,9 @@ public class ArrayListIterator<E> extends ArrayIterator<E>
      * Constructs an ArrayListIterator that will iterate over a range of values
      * in the specified array.
      *
-     * @param array  the array to iterate over
-     * @param startIndex  the index to start iterating at
-     * @param endIndex  the index (exclusive) to finish iterating at
+     * @param array  The array to iterate over
+     * @param startIndex  The index to start iterating at
+     * @param endIndex  The index (exclusive) to finish iterating at
      * @throws IllegalArgumentException if {@code array} is not an array.
      * @throws IndexOutOfBoundsException if the start or end index is out of bounds
      * @throws IllegalArgumentException if end index is before the start
@@ -96,7 +99,7 @@ public class ArrayListIterator<E> extends ArrayIterator<E>
      * This iterator does not support modification of its backing collection, and so will
      * always throw an {@link UnsupportedOperationException} when this method is invoked.
      *
-     * @param o  the element to add
+     * @param o  The element to add
      * @throws UnsupportedOperationException always thrown.
      * @see java.util.ListIterator#set
      */
@@ -118,7 +121,7 @@ public class ArrayListIterator<E> extends ArrayIterator<E>
     /**
      * Gets the next element from the array.
      *
-     * @return the next element
+     * @return The next element
      * @throws NoSuchElementException if there is no next element
      */
     @Override
@@ -128,13 +131,23 @@ public class ArrayListIterator<E> extends ArrayIterator<E>
             throw new NoSuchElementException();
         }
         lastItemIndex = index;
+        if (array instanceof Object[]) {
+            final Object[] values = (Object[]) array;
+            if (index >= 0 && index < values.length) {
+                return (E) values[index++];
+            }
+        }
+        if (index >= 0 && index < endIndex) {
+            return (E) primitiveAt(array, index++);
+        }
+        // Subclasses can override hasNext() and admit invalid positions.
         return (E) Array.get(array, index++);
     }
 
     /**
      * Gets the next index to be retrieved.
      *
-     * @return the index of the item to be retrieved next
+     * @return The index of the item to be retrieved next
      */
     @Override
     public int nextIndex() {
@@ -144,7 +157,7 @@ public class ArrayListIterator<E> extends ArrayIterator<E>
     /**
      * Gets the previous element from the array.
      *
-     * @return the previous element
+     * @return The previous element
      * @throws NoSuchElementException if there is no previous element
      */
     @Override
@@ -154,13 +167,23 @@ public class ArrayListIterator<E> extends ArrayIterator<E>
             throw new NoSuchElementException();
         }
         lastItemIndex = --index;
+        if (array instanceof Object[]) {
+            final Object[] values = (Object[]) array;
+            if (index >= 0 && index < values.length) {
+                return (E) values[index];
+            }
+        }
+        if (index >= 0 && index < endIndex) {
+            return (E) primitiveAt(array, index);
+        }
+        // A subclass may have admitted a position outside the backing array.
         return (E) Array.get(array, index);
     }
 
     /**
      * Gets the index of the item to be retrieved if {@link #previous()} is called.
      *
-     * @return the index of the item to be retrieved next
+     * @return The index of the item to be retrieved next
      */
     @Override
     public int previousIndex() {
@@ -183,15 +206,15 @@ public class ArrayListIterator<E> extends ArrayIterator<E>
      * to {@link #next()} of {@link #previous()}.
      * </p>
      * <p>
-     * <strong>Note:</strong> {@link java.util.ListIterator} implementations that support
+     * <strong>Note:</strong> {@link ListIterator} implementations that support
      * {@code add()} and {@code remove()} only allow {@code set()} to be called
-     * once per call to {@code next()} or {@code previous} (see the {@link java.util.ListIterator}
+     * once per call to {@code next()} or {@code previous} (see the {@link ListIterator}
      * Javadoc for more details). Since this implementation does
      * not support {@code add()} or {@code remove()}, {@code set()} may be
      * called as often as desired.
      * </p>
      *
-     * @param o  the element to set
+     * @param o  The element to set
      * @throws IllegalStateException if {@link #next()} or {@link #previous()} has not been called
      * before {@link #set(Object)}
      * @see java.util.ListIterator#set
@@ -202,6 +225,12 @@ public class ArrayListIterator<E> extends ArrayIterator<E>
             throw new IllegalStateException("must call next() or previous() before a call to set()");
         }
 
+        // Exact wrapper types can use Java's primitive array lanes. Preserve
+        // Array.set's widening, null/incompatible and invalid-index behavior.
+        if (!(array instanceof Object[]) && lastItemIndex >= 0 && lastItemIndex < endIndex
+                && writePrimitive(array, lastItemIndex, o)) {
+            return;
+        }
         Array.set(array, lastItemIndex, o);
     }
 

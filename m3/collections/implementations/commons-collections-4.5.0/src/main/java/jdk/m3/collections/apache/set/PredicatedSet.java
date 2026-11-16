@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -37,7 +37,7 @@ import jdk.m3.collections.apache.collection.PredicatedCollection;
  * This class is Serializable from Commons Collections 3.1.
  * </p>
  *
- * @param <E> the type of the elements in this set
+ * @param <E> The type of the elements in this set
  * @since 3.0
  */
 public class PredicatedSet<E> extends PredicatedCollection<E> implements Set<E> {
@@ -51,10 +51,10 @@ public class PredicatedSet<E> extends PredicatedCollection<E> implements Set<E> 
      * If there are any elements already in the set being decorated, they
      * are validated.
      *
-     * @param <E> the element type
-     * @param set  the set to decorate, must not be null
-     * @param predicate  the predicate to use for validation, must not be null
-     * @return a decorated set
+     * @param <E> The element type
+     * @param set  The set to decorate, must not be null
+     * @param predicate  The predicate to use for validation, must not be null
+     * @return A decorated set
      * @throws NullPointerException if set or predicate is null
      * @throws IllegalArgumentException if the set contains invalid elements
      * @since 4.0
@@ -69,8 +69,8 @@ public class PredicatedSet<E> extends PredicatedCollection<E> implements Set<E> 
      * If there are any elements already in the set being decorated, they
      * are validated.
      *
-     * @param set  the set to decorate, must not be null
-     * @param predicate  the predicate to use for validation, must not be null
+     * @param set  The set to decorate, must not be null
+     * @param predicate  The predicate to use for validation, must not be null
      * @throws NullPointerException if set or predicate is null
      * @throws IllegalArgumentException if the set contains invalid elements
      */
@@ -81,7 +81,7 @@ public class PredicatedSet<E> extends PredicatedCollection<E> implements Set<E> 
     /**
      * Gets the set being decorated.
      *
-     * @return the decorated set
+     * @return The decorated set
      */
     @Override
     protected Set<E> decorated() {

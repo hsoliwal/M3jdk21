@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -42,7 +42,7 @@ import jdk.m3.collections.apache.iterators.UnmodifiableIterator;
  * This class is Serializable from Commons Collections 3.1.
  * </p>
  *
- * @param <E> the type of elements in this collection
+ * @param <E> The type of elements in this collection
  * @since 3.0
  */
 public class FixedSizeList<E>
@@ -72,9 +72,9 @@ public class FixedSizeList<E>
     /**
      * Factory method to create a fixed size list.
      *
-     * @param <E> the type of the elements in the list
-     * @param list  the list to decorate, must not be null
-     * @return a new fixed size list
+     * @param <E> The type of the elements in the list
+     * @param list  The list to decorate, must not be null
+     * @return A new fixed size list
      * @throws NullPointerException if list is null
      * @since 4.0
      */
@@ -82,6 +82,11 @@ public class FixedSizeList<E>
         return new FixedSizeList<>(list);
     }
 
+    /**
+     * Always throws {@link UnsupportedOperationException}.
+     *
+     * @throws UnsupportedOperationException Always thrown.
+     */
     private static UnsupportedOperationException unsupportedOperationException() {
         return new UnsupportedOperationException("List is fixed size");
     }
@@ -89,7 +94,7 @@ public class FixedSizeList<E>
     /**
      * Constructor that wraps (not copies).
      *
-     * @param list  the list to decorate, must not be null
+     * @param list  The list to decorate, must not be null
      * @throws NullPointerException if list is null
      */
     protected FixedSizeList(final List<E> list) {

@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -21,7 +21,7 @@ import jdk.m3.collections.apache.OrderedIterator;
 /**
  * Provides an implementation of an empty ordered iterator.
  *
- * @param <E> the type of elements returned by this iterator.
+ * @param <E> The type of elements returned by this iterator.
  * @since 3.1
  */
 public class EmptyOrderedIterator<E> extends AbstractEmptyIterator<E>
@@ -38,7 +38,7 @@ public class EmptyOrderedIterator<E> extends AbstractEmptyIterator<E>
     /**
      * Typed instance of the iterator.
      *
-     * @param <E> the element type
+     * @param <E> The element type
      * @return OrderedIterator&lt;E&gt;
      */
     public static <E> OrderedIterator<E> emptyOrderedIterator() {

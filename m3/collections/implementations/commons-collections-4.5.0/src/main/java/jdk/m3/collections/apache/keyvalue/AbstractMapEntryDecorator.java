@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -17,16 +17,17 @@
 package jdk.m3.collections.apache.keyvalue;
 
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Objects;
 
 import jdk.m3.collections.apache.KeyValue;
 
 /**
  * Provides a base decorator that allows additional functionality to be
- * added to a {@link java.util.Map.Entry Map.Entry}.
+ * added to a {@link Entry Map.Entry}.
  *
- * @param <K> the type of keys
- * @param <V> the type of mapped values
+ * @param <K> The type of keys
+ * @param <V> The type of mapped values
  * @since 3.0
  */
 public abstract class AbstractMapEntryDecorator<K, V> implements Map.Entry<K, V>, KeyValue<K, V> {
@@ -37,7 +38,7 @@ public abstract class AbstractMapEntryDecorator<K, V> implements Map.Entry<K, V>
     /**
      * Constructor that wraps (not copies).
      *
-     * @param entry  the {@code Map.Entry} to decorate, must not be null
+     * @param entry  The {@code Map.Entry} to decorate, must not be null
      * @throws NullPointerException if the collection is null
      */
     public AbstractMapEntryDecorator(final Map.Entry<K, V> entry) {
@@ -60,7 +61,7 @@ public abstract class AbstractMapEntryDecorator<K, V> implements Map.Entry<K, V>
     /**
      * Gets the map being decorated.
      *
-     * @return the decorated map
+     * @return The decorated map
      */
     protected Map.Entry<K, V> getMapEntry() {
         return entry;

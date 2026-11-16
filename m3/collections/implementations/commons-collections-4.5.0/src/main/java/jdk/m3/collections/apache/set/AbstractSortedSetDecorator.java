@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -26,7 +26,7 @@ import java.util.SortedSet;
  * Methods are forwarded directly to the decorated set.
  * </p>
  *
- * @param <E> the type of the elements in the sorted set
+ * @param <E> The type of the elements in the sorted set
  * @since 3.0
  */
 public abstract class AbstractSortedSetDecorator<E>
@@ -38,6 +38,7 @@ public abstract class AbstractSortedSetDecorator<E>
 
     /**
      * Constructor only used in deserialization, do not use otherwise.
+     *
      * @since 3.1
      */
     protected AbstractSortedSetDecorator() {
@@ -46,7 +47,7 @@ public abstract class AbstractSortedSetDecorator<E>
     /**
      * Constructor that wraps (not copies).
      *
-     * @param set  the set to decorate, must not be null
+     * @param set  The set to decorate, must not be null
      * @throws NullPointerException if set is null
      */
     protected AbstractSortedSetDecorator(final Set<E> set) {
@@ -61,7 +62,7 @@ public abstract class AbstractSortedSetDecorator<E>
     /**
      * Gets the set being decorated.
      *
-     * @return the decorated set
+     * @return The decorated set
      */
     @Override
     protected SortedSet<E> decorated() {

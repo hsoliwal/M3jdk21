@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -33,7 +33,7 @@ import jdk.m3.collections.apache.Predicate;
  * threw an exception.
  * </p>
  *
- * @param <T> the type of the input to the predicate.
+ * @param <T> The type of the input to the predicate.
  * @since 3.0
  */
 public final class AllPredicate<T> extends AbstractQuantifierPredicate<T> {
@@ -48,9 +48,9 @@ public final class AllPredicate<T> extends AbstractQuantifierPredicate<T> {
      * If the collection is size one, then that predicate is returned.
      * </p>
      *
-     * @param <T> the type that the predicate queries
-     * @param predicates  the predicates to check, cloned, not null
-     * @return the {@code all} predicate
+     * @param <T> The type that the predicate queries
+     * @param predicates  The predicates to check, cloned, not null
+     * @return The {@code all} predicate
      * @throws NullPointerException if the predicates array is null
      * @throws NullPointerException if any predicate in the array is null
      */
@@ -72,9 +72,9 @@ public final class AllPredicate<T> extends AbstractQuantifierPredicate<T> {
      * If the array is size one, then that predicate is returned.
      * </p>
      *
-     * @param <T> the type that the predicate queries
-     * @param predicates  the predicates to check, cloned, not null
-     * @return the {@code all} predicate
+     * @param <T> The type that the predicate queries
+     * @param predicates  The predicates to check, cloned, not null
+     * @return The {@code all} predicate
      * @throws NullPointerException if the predicates array is null
      * @throws NullPointerException if any predicate in the array is null
      */
@@ -94,7 +94,7 @@ public final class AllPredicate<T> extends AbstractQuantifierPredicate<T> {
      * Constructor that performs no validation.
      * Use {@code allPredicate} if you want that.
      *
-     * @param predicates  the predicates to check, not cloned, not null
+     * @param predicates  The predicates to check, not cloned, not null
      */
     public AllPredicate(final Predicate<? super T>... predicates) {
         super(predicates);
@@ -103,7 +103,7 @@ public final class AllPredicate<T> extends AbstractQuantifierPredicate<T> {
     /**
      * Evaluates the predicate returning true if all predicates return true.
      *
-     * @param object  the input object
+     * @param object  The input object
      * @return true if all decorated predicates return true
      */
     @Override

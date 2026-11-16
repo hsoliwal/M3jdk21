@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -25,7 +25,7 @@ import jdk.m3.collections.apache.Closure;
 /**
  * Closure implementation that chains the specified closures together.
  *
- * @param <T> the type of the input to the operation.
+ * @param <T> The type of the input to the operation.
  * @since 3.0
  */
 public class ChainedClosure<T> implements Closure<T>, Serializable {
@@ -36,9 +36,9 @@ public class ChainedClosure<T> implements Closure<T>, Serializable {
     /**
      * Factory method that performs validation and copies the parameter array.
      *
-     * @param <E> the type that the closure acts on
-     * @param closures  the closures to chain, copied, no nulls
-     * @return the {@code chained} closure
+     * @param <E> The type that the closure acts on
+     * @param closures  The closures to chain, copied, no nulls
+     * @return The {@code chained} closure
      * @throws NullPointerException if the closures array is null
      * @throws NullPointerException if any closure in the array is null
      */
@@ -55,9 +55,9 @@ public class ChainedClosure<T> implements Closure<T>, Serializable {
      * result into the next closure. The ordering is that of the iterator()
      * method on the collection.
      *
-     * @param <E> the type that the closure acts on
-     * @param closures  a collection of closures to chain
-     * @return the {@code chained} closure
+     * @param <E> The type that the closure acts on
+     * @param closures  A collection of closures to chain
+     * @return The {@code chained} closure
      * @throws NullPointerException if the closures collection is null
      * @throws NullPointerException if any closure in the collection is null
      */
@@ -84,7 +84,7 @@ public class ChainedClosure<T> implements Closure<T>, Serializable {
      * Hidden constructor for the use by the static factory methods.
      *
      * @param clone  if {@code true} the input argument will be cloned
-     * @param closures  the closures to chain, no nulls
+     * @param closures  The closures to chain, no nulls
      */
     private ChainedClosure(final boolean clone, final Closure<? super T>... closures) {
         iClosures = clone ? FunctorUtils.copy(closures) : closures;
@@ -94,7 +94,7 @@ public class ChainedClosure<T> implements Closure<T>, Serializable {
      * Constructor that performs no validation.
      * Use {@code chainedClosure} if you want that.
      *
-     * @param closures  the closures to chain, copied, no nulls
+     * @param closures  The closures to chain, copied, no nulls
      */
     public ChainedClosure(final Closure<? super T>... closures) {
         this(true, closures);
@@ -103,7 +103,7 @@ public class ChainedClosure<T> implements Closure<T>, Serializable {
     /**
      * Execute a list of closures.
      *
-     * @param input  the input object passed to each closure
+     * @param input  The input object passed to each closure
      */
     @Override
     public void execute(final T input) {
@@ -115,7 +115,7 @@ public class ChainedClosure<T> implements Closure<T>, Serializable {
     /**
      * Gets the closures.
      *
-     * @return a copy of the closures
+     * @return A copy of the closures
      * @since 3.1
      */
     public Closure<? super T>[] getClosures() {

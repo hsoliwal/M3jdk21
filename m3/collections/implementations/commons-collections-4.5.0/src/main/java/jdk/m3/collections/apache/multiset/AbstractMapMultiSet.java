@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -17,6 +17,7 @@
 package jdk.m3.collections.apache.multiset;
 
 import java.io.IOException;
+import java.io.InvalidObjectException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.lang.reflect.Array;
@@ -36,7 +37,7 @@ import jdk.m3.collections.apache.iterators.AbstractIteratorDecorator;
  * number of occurrences of that element in the multiset.
  * </p>
  *
- * @param <E> the type held in the multiset.
+ * @param <E> The type held in the multiset.
  * @since 4.1
  */
 public abstract class AbstractMapMultiSet<E> extends AbstractMultiSet<E> {
@@ -44,7 +45,7 @@ public abstract class AbstractMapMultiSet<E> extends AbstractMultiSet<E> {
     /**
      * Inner class EntrySetIterator.
      *
-     * @param <E> the element type.
+     * @param <E> The element type.
      */
     protected static class EntrySetIterator<E> implements Iterator<Entry<E>> {
 
@@ -56,16 +57,17 @@ public abstract class AbstractMapMultiSet<E> extends AbstractMultiSet<E> {
          */
         protected final Iterator<Map.Entry<E, MutableInteger>> decorated;
 
-        /** The last returned entry */
+        /** The last returned entry. */
         protected Entry<E> last;
 
-        /** Whether remove is allowed at present */
+        /** Whether remove is allowed at present. */
         protected boolean canRemove;
 
         /**
          * Constructs a new instance.
-         * @param decorated  the iterator to decorate
-         * @param parent  the parent multiset
+         *
+         * @param decorated  The iterator to decorate.
+         * @param parent  The parent multiset.
          */
         protected EntrySetIterator(final Iterator<Map.Entry<E, MutableInteger>> decorated,
                                    final AbstractMapMultiSet<E> parent) {
@@ -90,11 +92,15 @@ public abstract class AbstractMapMultiSet<E> extends AbstractMultiSet<E> {
             if (!canRemove) {
                 throw new IllegalStateException("Iterator remove() can only be called once after next()");
             }
+            final int count = last.getCount();
             decorated.remove();
+            parent.size -= count;
+            parent.modCount++;
             last = null;
             canRemove = false;
         }
     }
+
     /**
      * Inner class iterator for the MultiSet.
      */
@@ -109,7 +115,7 @@ public abstract class AbstractMapMultiSet<E> extends AbstractMultiSet<E> {
         /**
          * Constructs a new instance.
          *
-         * @param parent the parent multiset
+         * @param parent The parent multiset.
          */
         MapBasedMultiSetIterator(final AbstractMapMultiSet<E> parent) {
             this.parent = parent;
@@ -163,7 +169,7 @@ public abstract class AbstractMapMultiSet<E> extends AbstractMultiSet<E> {
     /**
      * Inner class MultiSetEntry.
      *
-     * @param <E> the key type.
+     * @param <E> The key type.
      */
     protected static class MultiSetEntry<E> extends AbstractEntry<E> {
 
@@ -174,7 +180,8 @@ public abstract class AbstractMapMultiSet<E> extends AbstractMultiSet<E> {
 
         /**
          * Constructs a new instance.
-         * @param parentEntry  the entry to decorate
+         *
+         * @param parentEntry  The entry to decorate.
          */
         protected MultiSetEntry(final Map.Entry<E, MutableInteger> parentEntry) {
             this.parentEntry = parentEntry;
@@ -195,12 +202,14 @@ public abstract class AbstractMapMultiSet<E> extends AbstractMultiSet<E> {
      * Mutable integer class for storing the data.
      */
     protected static class MutableInteger {
+
         /** The value of this mutable. */
         protected int value;
 
         /**
          * Constructs a new instance.
-         * @param value the initial value
+         *
+         * @param value The initial value.
          */
         MutableInteger(final int value) {
             this.value = value;
@@ -223,23 +232,24 @@ public abstract class AbstractMapMultiSet<E> extends AbstractMultiSet<E> {
     /**
      * Inner class UniqueSetIterator.
      *
-     * @param <E> the element type.
+     * @param <E> The element type.
      */
     protected static class UniqueSetIterator<E> extends AbstractIteratorDecorator<E> {
 
-        /** The parent multiset */
+        /** The parent multiset. */
         protected final AbstractMapMultiSet<E> parent;
 
-        /** The last returned element */
+        /** The last returned element. */
         protected E lastElement;
 
-        /** Whether remove is allowed at present */
+        /** Whether remove is allowed at present. */
         protected boolean canRemove;
 
         /**
          * Constructs a new instance.
-         * @param iterator  the iterator to decorate
-         * @param parent  the parent multiset
+         *
+         * @param iterator  The iterator to decorate.
+         * @param parent  The parent multiset.
          */
         protected UniqueSetIterator(final Iterator<E> iterator, final AbstractMapMultiSet<E> parent) {
             super(iterator);
@@ -260,19 +270,20 @@ public abstract class AbstractMapMultiSet<E> extends AbstractMultiSet<E> {
             }
             final int count = parent.getCount(lastElement);
             super.remove();
-            parent.remove(lastElement, count);
+            parent.size -= count;
+            parent.modCount++;
             lastElement = null;
             canRemove = false;
         }
     }
 
-    /** The map to use to store the data */
+    /** The map to use to store the data. */
     private transient Map<E, MutableInteger> map;
 
-    /** The current total size of the multiset */
-    private transient int size;
+    /** The current total size of the multiset; kept exact past {@link Integer#MAX_VALUE}, {@link #size()} saturates */
+    private transient long size;
 
-    /** The modification count for fail fast iterators */
+    /** The modification count for fail fast iterators. */
     private transient int modCount;
 
     /**
@@ -285,10 +296,23 @@ public abstract class AbstractMapMultiSet<E> extends AbstractMultiSet<E> {
      * Constructor that assigns the specified Map as the backing store. The map
      * must be empty and non-null.
      *
-     * @param map the map to assign
+     * @param map The map to assign.
      */
     protected AbstractMapMultiSet(final Map<E, MutableInteger> map) {
         this.map = map;
+    }
+
+    /**
+     * Constructs a new instance that assigns the specified Map as the backing store. The map
+     * must be empty and non-null. The multiset is filled from the iterable elements.
+     *
+     * @param map The map to assign.
+     * @param iterable The iterable of elements to add.
+     * @since 4.6.0
+     */
+    protected AbstractMapMultiSet(final Map<E, MutableInteger> map, final Iterable<? extends E> iterable) {
+        this(map);
+        iterable.forEach(this::add);
     }
 
     @Override
@@ -302,11 +326,13 @@ public abstract class AbstractMapMultiSet<E> extends AbstractMultiSet<E> {
 
         if (occurrences > 0) {
             modCount++;
-            size += occurrences;
             if (mut == null) {
                 map.put(object, new MutableInteger(occurrences));
+                size += occurrences;
             } else {
-                mut.value += occurrences;
+                final int applied = Math.min(occurrences, Integer.MAX_VALUE - mut.value);
+                mut.value += applied;
+                size += applied;
             }
         }
         return oldCount;
@@ -326,8 +352,8 @@ public abstract class AbstractMapMultiSet<E> extends AbstractMultiSet<E> {
      * Determines if the multiset contains the given element by checking if the
      * underlying map contains the element as a key.
      *
-     * @param object the object to search for
-     * @return true if the multiset contains the given element
+     * @param object The object to search for.
+     * @return true if the multiset contains the given element.
      */
     @Override
     public boolean contains(final Object object) {
@@ -347,10 +373,10 @@ public abstract class AbstractMapMultiSet<E> extends AbstractMultiSet<E> {
     /**
      * Reads the multiset in using a custom routine.
      *
-     * @param in the input stream
-     * @throws IOException any of the usual I/O related exceptions
-     * @throws ClassNotFoundException if the stream contains an object which class cannot be loaded
-     * @throws ClassCastException if the stream does not contain the correct objects
+     * @param in The input stream.
+     * @throws IOException any of the usual I/O related exceptions.
+     * @throws ClassNotFoundException if the stream contains an object which class cannot be loaded.
+     * @throws ClassCastException if the stream does not contain the correct objects.
      */
     @Override
     protected void doReadObject(final ObjectInputStream in)
@@ -360,6 +386,9 @@ public abstract class AbstractMapMultiSet<E> extends AbstractMultiSet<E> {
             @SuppressWarnings("unchecked") // This will fail at runtime if the stream is incorrect
             final E obj = (E) in.readObject();
             final int count = in.readInt();
+            if (count < 1) {
+                throw new InvalidObjectException("Invalid count for entry: " + count);
+            }
             map.put(obj, new MutableInteger(count));
             size += count;
         }
@@ -368,8 +397,8 @@ public abstract class AbstractMapMultiSet<E> extends AbstractMultiSet<E> {
     /**
      * Writes the multiset out using a custom routine.
      *
-     * @param out the output stream
-     * @throws IOException any of the usual I/O related exceptions
+     * @param out The output stream.
+     * @throws IOException any of the usual I/O related exceptions.
      */
     @Override
     protected void doWriteObject(final ObjectOutputStream out) throws IOException {
@@ -404,8 +433,8 @@ public abstract class AbstractMapMultiSet<E> extends AbstractMultiSet<E> {
      * Gets the number of occurrence of the given element in this multiset by
      * looking up its count in the underlying map.
      *
-     * @param object the object to search for
-     * @return the number of occurrences of the object, zero if not found
+     * @param object The object to search for.
+     * @return The number of occurrences of the object, zero if not found.
      */
     @Override
     public int getCount(final Object object) {
@@ -420,7 +449,7 @@ public abstract class AbstractMapMultiSet<E> extends AbstractMultiSet<E> {
      * Gets the map that backs this multiset.
      * Not intended for interactive use outside of subclasses.
      *
-     * @return the map being used by the MultiSet
+     * @return The map being used by the MultiSet.
      */
     protected Map<E, MutableInteger> getMap() {
         return map;
@@ -440,7 +469,7 @@ public abstract class AbstractMapMultiSet<E> extends AbstractMultiSet<E> {
     /**
      * Returns true if the underlying map is empty.
      *
-     * @return true if multiset is empty
+     * @return true if multiset is empty.
      */
     @Override
     public boolean isEmpty() {
@@ -451,7 +480,7 @@ public abstract class AbstractMapMultiSet<E> extends AbstractMultiSet<E> {
      * Gets an iterator over the multiset elements. Elements present in the
      * MultiSet more than once will be returned repeatedly.
      *
-     * @return the iterator
+     * @return The iterator.
      */
     @Override
     public Iterator<E> iterator() {
@@ -489,26 +518,27 @@ public abstract class AbstractMapMultiSet<E> extends AbstractMultiSet<E> {
      * <strong>Note:</strong> this method should only be used during deserialization
      * </p>
      *
-     * @param map the map to wrap
+     * @param map The map to wrap.
      */
     protected void setMap(final Map<E, MutableInteger> map) {
         this.map = map;
     }
 
     /**
-     * Returns the number of elements in this multiset.
+     * Returns the number of elements in this multiset, or {@code Integer.MAX_VALUE}
+     * if the multiset contains more than {@code Integer.MAX_VALUE} elements.
      *
-     * @return current size of the multiset
+     * @return current size of the multiset.
      */
     @Override
     public int size() {
-        return size;
+        return (int) Math.min(size, Integer.MAX_VALUE);
     }
 
     /**
      * Returns an array of all of this multiset's elements.
      *
-     * @return an array of all of this multiset's elements
+     * @return An array of all of this multiset's elements.
      */
     @Override
     public Object[] toArray() {
@@ -516,25 +546,28 @@ public abstract class AbstractMapMultiSet<E> extends AbstractMultiSet<E> {
         int i = 0;
         for (final Map.Entry<E, MutableInteger> entry : map.entrySet()) {
             final E current = entry.getKey();
-            final MutableInteger count = entry.getValue();
-            for (int index = count.value; index > 0; index--) {
-                result[i++] = current;
+            final int count = entry.getValue().value;
+            if (count >= 8 && count <= result.length - i) {
+                java.util.Arrays.fill(result, i, i + count, current);
+                i += count;
+            } else {
+                for (int index = count; index > 0; index--) {
+                    result[i++] = current;
+                }
             }
         }
         return result;
     }
 
     /**
-     * Returns an array of all of this multiset's elements.
-     * If the input array has more elements than are in the multiset,
-     * trailing elements will be set to null.
+     * Returns an array of all of this multiset's elements. If the input array has more elements than are in the multiset, trailing elements will be set to
+     * null.
      *
-     * @param <T> the type of the array elements
-     * @param array the array to populate
-     * @return an array of all of this multiset's elements
-     * @throws ArrayStoreException if the runtime type of the specified array is not
-     *   a supertype of the runtime type of the elements in this list
-     * @throws NullPointerException if the specified array is null
+     * @param <T>   The type of the array elements.
+     * @param array The array to populate.
+     * @return An array of all of this multiset's elements.
+     * @throws ArrayStoreException  if the runtime type of the specified array is not a supertype of the runtime type of the elements in this list.
+     * @throws NullPointerException if the specified array is null.
      */
     @Override
     public <T> T[] toArray(T[] array) {
@@ -548,17 +581,20 @@ public abstract class AbstractMapMultiSet<E> extends AbstractMultiSet<E> {
         int i = 0;
         for (final Map.Entry<E, MutableInteger> entry : map.entrySet()) {
             final E current = entry.getKey();
-            final MutableInteger count = entry.getValue();
-            for (int index = count.value; index > 0; index--) {
-                // unsafe, will throw ArrayStoreException if types are not compatible, see Javadoc
-                @SuppressWarnings("unchecked")
-                final T unchecked = (T) current;
-                array[i++] = unchecked;
+            final int count = entry.getValue().value;
+            if (count >= 8 && count <= array.length - i) {
+                java.util.Arrays.fill(array, i, i + count, current);
+                i += count;
+            } else {
+                for (int index = count; index > 0; index--) {
+                    // Retain the original partial destination writes on an invalid count.
+                    @SuppressWarnings("unchecked")
+                    final T unchecked = (T) current;
+                    array[i++] = unchecked;
+                }
             }
         }
-        while (i < array.length) {
-            array[i++] = null;
-        }
+        java.util.Arrays.fill(array, i, array.length, null);
         return array;
     }
 

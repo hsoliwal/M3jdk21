@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -17,6 +17,7 @@
 package jdk.m3.collections.apache.functors;
 
 import java.io.Serializable;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Objects;
 
@@ -27,8 +28,8 @@ import jdk.m3.collections.apache.Transformer;
  * Transformer implementation calls the transformer whose predicate returns true,
  * like a switch statement.
  *
- * @param <T> the type of the input to the function.
- * @param <R> the type of the result of the function.
+ * @param <T> The type of the input to the function.
+ * @param <R> The type of the result of the function.
  * @since 3.0
  */
 public class SwitchTransformer<T, R> implements Transformer<T, R>, Serializable {
@@ -46,11 +47,12 @@ public class SwitchTransformer<T, R> implements Transformer<T, R>, Serializable 
      * transformer is called. The default transformer is set in the map with a
      * null key. The ordering is that of the iterator() method on the entryset
      * collection of the map.
+     * </p>
      *
      * @param <I>  the input type
      * @param <O>  the output type
-     * @param map  a map of predicates to transformers
-     * @return the {@code switch} transformer
+     * @param map  A map of predicates to transformers
+     * @return The {@code switch} transformer
      * @throws NullPointerException if the map is null
      * @throws NullPointerException if any transformer in the map is null
      * @throws ClassCastException  if the map elements are of the wrong type
@@ -63,9 +65,10 @@ public class SwitchTransformer<T, R> implements Transformer<T, R>, Serializable 
         if (map.isEmpty()) {
             return ConstantTransformer.<I, O>nullTransformer();
         }
-        // convert to array like this to guarantee iterator() ordering
-        final Transformer<? super I, ? extends O> defaultTransformer = map.remove(null);
-        final int size = map.size();
+        // copy so the caller's map is not mutated; LinkedHashMap preserves iterator() ordering
+        final Map<Predicate<? super I>, Transformer<? super I, ? extends O>> entries = new LinkedHashMap<>(map);
+        final Transformer<? super I, ? extends O> defaultTransformer = entries.remove(null);
+        final int size = entries.size();
         if (size == 0) {
             return (Transformer<I, O>) (defaultTransformer == null ? ConstantTransformer.<I, O>nullTransformer() :
                                                                      defaultTransformer);
@@ -73,14 +76,15 @@ public class SwitchTransformer<T, R> implements Transformer<T, R>, Serializable 
         final Transformer<? super I, ? extends O>[] transformers = new Transformer[size];
         final Predicate<? super I>[] preds = new Predicate[size];
         int i = 0;
-        for (final Map.Entry<? extends Predicate<? super I>,
-                             ? extends Transformer<? super I, ? extends O>> entry : map.entrySet()) {
+        for (final Map.Entry<Predicate<? super I>,
+                             Transformer<? super I, ? extends O>> entry : entries.entrySet()) {
             preds[i] = entry.getKey();
             transformers[i] = entry.getValue();
             i++;
         }
         return new SwitchTransformer<>(false, preds, transformers, defaultTransformer);
     }
+
     /**
      * Factory method that performs validation and copies the parameter arrays.
      *
@@ -88,8 +92,8 @@ public class SwitchTransformer<T, R> implements Transformer<T, R>, Serializable 
      * @param <O>  the output type
      * @param predicates  array of predicates, cloned, no nulls
      * @param transformers  matching array of transformers, cloned, no nulls
-     * @param defaultTransformer  the transformer to use if no match, null means return null
-     * @return the {@code chained} transformer
+     * @param defaultTransformer  The transformer to use if no match, null means return null
+     * @return The {@code chained} transformer
      * @throws NullPointerException if either array is null
      * @throws NullPointerException if any element in the arrays is null
      * @throws IllegalArgumentException if the arrays have different sizes
@@ -109,6 +113,7 @@ public class SwitchTransformer<T, R> implements Transformer<T, R>, Serializable 
         }
         return new SwitchTransformer<>(predicates, transformers, defaultTransformer);
     }
+
     /** The tests to consider */
     private final Predicate<? super T>[] iPredicates;
 
@@ -124,7 +129,7 @@ public class SwitchTransformer<T, R> implements Transformer<T, R>, Serializable 
      * @param clone  if {@code true} the input arguments will be cloned
      * @param predicates  array of predicates, no nulls
      * @param transformers  matching array of transformers, no nulls
-     * @param defaultTransformer  the transformer to use if no match, null means return null
+     * @param defaultTransformer  The transformer to use if no match, null means return null
      */
     private SwitchTransformer(final boolean clone, final Predicate<? super T>[] predicates,
                              final Transformer<? super T, ? extends R>[] transformers,
@@ -141,7 +146,7 @@ public class SwitchTransformer<T, R> implements Transformer<T, R>, Serializable 
      *
      * @param predicates  array of predicates, cloned, no nulls
      * @param transformers  matching array of transformers, cloned, no nulls
-     * @param defaultTransformer  the transformer to use if no match, null means return null
+     * @param defaultTransformer  The transformer to use if no match, null means return null
      */
     public SwitchTransformer(final Predicate<? super T>[] predicates,
             final Transformer<? super T, ? extends R>[] transformers,
@@ -152,7 +157,7 @@ public class SwitchTransformer<T, R> implements Transformer<T, R>, Serializable 
     /**
      * Gets the default transformer.
      *
-     * @return the default transformer
+     * @return The default transformer
      * @since 3.1
      */
     public Transformer<? super T, ? extends R> getDefaultTransformer() {
@@ -162,7 +167,7 @@ public class SwitchTransformer<T, R> implements Transformer<T, R>, Serializable 
     /**
      * Gets the predicates.
      *
-     * @return a copy of the predicates
+     * @return A copy of the predicates
      * @since 3.1
      */
     public Predicate<? super T>[] getPredicates() {
@@ -172,7 +177,7 @@ public class SwitchTransformer<T, R> implements Transformer<T, R>, Serializable 
     /**
      * Gets the transformers.
      *
-     * @return a copy of the transformers
+     * @return A copy of the transformers
      * @since 3.1
      */
     public Transformer<? super T, ? extends R>[] getTransformers() {
@@ -183,8 +188,8 @@ public class SwitchTransformer<T, R> implements Transformer<T, R>, Serializable 
      * Transforms the input to result by calling the transformer whose matching
      * predicate returns true.
      *
-     * @param input  the input object to transform
-     * @return the transformed result
+     * @param input  The input object to transform
+     * @return The transformed result
      */
     @Override
     public R transform(final T input) {

@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -14,39 +14,45 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package jdk.m3.collections.apache;
 
+import java.util.Collection;
 import java.util.Comparator;
 
 /**
- * Defines a type of {@code Bag} that maintains a sorted order among
- * its unique representative members.
+ * Defines a type of {@code Bag} that maintains a sorted order among its unique representative members.
+ * <p>
+ * The {@link SortedMultiSet} interface provides the same functionality while complying with the {@link Collection Collection} contract, and should be preferred
+ * for new code; see the {@link Bag} documentation for migration notes.
+ * </p>
  *
- * @param <E> the type of elements in this bag
+ * @param <E> The type of elements in this bag.
+ * @see SortedMultiSet
  * @since 2.0
+ * @deprecated Since 4.6.0, use {@link SortedMultiSet} instead; see the {@link Bag} Javadoc for migration notes.
  */
+@Deprecated
 public interface SortedBag<E> extends Bag<E> {
 
     /**
-     * Returns the comparator associated with this sorted set, or null
-     * if it uses its elements' natural ordering.
+     * Returns the comparator associated with this sorted set, or null if it uses its elements' natural ordering.
      *
-     * @return the comparator in use, or null if natural ordering
+     * @return The comparator in use, or null if natural ordering.
      */
     Comparator<? super E> comparator();
 
     /**
      * Returns the first (lowest) member.
      *
-     * @return the first element in the sorted bag
+     * @return The first element in the sorted bag.
      */
     E first();
 
     /**
      * Returns the last (highest) member.
      *
-     * @return the last element in the sorted bag
+     * @return The last element in the sorted bag.
      */
     E last();
-
 }

@@ -1,17 +1,15 @@
-/*******************************************************************************
- * Copyright (c) 2026 Synexia, Hitesh Soliwal (hsoliwal@gmail.com) and others.
- *
- * This program and the accompanying materials are made available under the
- * terms of the Apache License, Version 2.0, or (at your option) the Eclipse
- * Public License 2.0, which are available at
- * https://www.apache.org/licenses/LICENSE-2.0 and
- * https://www.eclipse.org/legal/epl-2.0/
- *
- * SPDX-License-Identifier: Apache-2.0 OR EPL-2.0
- *
- * Contributors:
- *     Hitesh Soliwal (Synexia) - initial API and implementation
- *******************************************************************************/
+/*
+ * Copyright 2026 Hitesh Soliwal and Contributors to the Synexia Project.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * https://www.apache.org/licenses/LICENSE-2.0
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package jdk.m3.collections.apache.iterators;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
@@ -34,22 +32,21 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.TreeSet;
 
+import jdk.m3.collections.apache.ArrayStorageOracle;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
-import jdk.m3.collections.apache.M3ArrayStorageOracle;
-
 /** Original-source checks for direct ordinal payload storage without retained map entries. */
 class PermutationIteratorArrayStorageTest {
     @TempDir
     static Path work;
-    private static M3ArrayStorageOracle oracle;
+    private static ArrayStorageOracle oracle;
 
     @BeforeAll
     static void originalSource() throws Exception {
-        oracle = new M3ArrayStorageOracle(work);
+        oracle = new ArrayStorageOracle(work);
         assertNotSame(PermutationIterator.class, oracle.originalClass("iterators.PermutationIterator"));
     }
 

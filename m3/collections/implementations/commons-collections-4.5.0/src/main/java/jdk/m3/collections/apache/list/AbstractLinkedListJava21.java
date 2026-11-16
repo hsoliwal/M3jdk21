@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -45,7 +45,7 @@ import jdk.m3.collections.apache.OrderedIterator;
  * (see COLLECTIONS-842 for details).
  * </p>
  *
- * @param <E> the type of elements in this list
+ * @param <E> The type of elements in this list
  * @see AbstractLinkedList
  * @since 4.5.0-M3
  */
@@ -65,7 +65,7 @@ public abstract class AbstractLinkedListJava21<E> implements List<E> {
     /**
      * A list iterator over the linked list.
      *
-     * @param <E> the type of elements in this iterator.
+     * @param <E> The type of elements in this iterator.
      */
     protected static class LinkedListIterator<E> implements ListIterator<E>, OrderedIterator<E> {
 
@@ -96,7 +96,7 @@ public abstract class AbstractLinkedListJava21<E> implements List<E> {
         /**
          * The modification count that the list is expected to have. If the list
          * doesn't have this count, then a
-         * {@link java.util.ConcurrentModificationException} may be thrown by
+         * {@link ConcurrentModificationException} may be thrown by
          * the operations.
          */
         protected int expectedModCount;
@@ -104,8 +104,8 @@ public abstract class AbstractLinkedListJava21<E> implements List<E> {
         /**
          * Create a ListIterator for a list.
          *
-         * @param parent  the parent list
-         * @param fromIndex  the index to start at
+         * @param parent  The parent list
+         * @param fromIndex  The index to start at
          * @throws IndexOutOfBoundsException if fromIndex is less than 0 or greater than the size of the list
          */
         protected LinkedListIterator(final AbstractLinkedListJava21<E> parent, final int fromIndex)
@@ -141,7 +141,7 @@ public abstract class AbstractLinkedListJava21<E> implements List<E> {
         /**
          * Gets the last node returned.
          *
-         * @return the last node returned
+         * @return The last node returned
          * @throws IllegalStateException If {@link #next()} or {@link #previous()} haven't been called,
          * or if the node has been removed with {@link #remove()} or a new node added with {@link #add(Object)}.
          */
@@ -226,15 +226,19 @@ public abstract class AbstractLinkedListJava21<E> implements List<E> {
     /**
      * The sublist implementation for AbstractLinkedListJava21.
      *
-     * @param <E> the type of elements in this list.
+     * @param <E> The type of elements in this list.
      */
     protected static class LinkedSubList<E> extends AbstractList<E> {
+
         /** The main list */
         AbstractLinkedListJava21<E> parent;
+
         /** Offset from the main list */
         int offset;
+
         /** Sublist size */
         int size;
+
         /** Sublist modCount */
         int expectedModCount;
 
@@ -376,7 +380,7 @@ public abstract class AbstractLinkedListJava21<E> implements List<E> {
     /**
      * A list iterator over the linked sub list.
      *
-     * @param <E> the type of elements in this iterator.
+     * @param <E> The type of elements in this iterator.
      */
     protected static class LinkedSubListIterator<E> extends LinkedListIterator<E> {
 
@@ -431,14 +435,16 @@ public abstract class AbstractLinkedListJava21<E> implements List<E> {
      * is via the methods on this class.
      * </p>
      *
-     * @param <E> the type of the node value.
+     * @param <E> The type of the node value.
      */
     protected static class Node<E> {
 
         /** A pointer to the node before this node */
         protected Node<E> previous;
+
         /** A pointer to the node after this node */
         protected Node<E> next;
+
         /** The object contained within this node */
         protected E value;
 
@@ -453,7 +459,7 @@ public abstract class AbstractLinkedListJava21<E> implements List<E> {
         /**
          * Constructs a new node.
          *
-         * @param value  the value to store
+         * @param value  The value to store
          */
         protected Node(final E value) {
             this.value = value;
@@ -462,9 +468,9 @@ public abstract class AbstractLinkedListJava21<E> implements List<E> {
         /**
          * Constructs a new node.
          *
-         * @param previous  the previous node in the list
-         * @param next  the next node in the list
-         * @param value  the value to store
+         * @param previous  The previous node in the list
+         * @param next  The next node in the list
+         * @param value  The value to store
          */
         protected Node(final Node<E> previous, final Node<E> next, final E value) {
             this.previous = previous;
@@ -475,7 +481,7 @@ public abstract class AbstractLinkedListJava21<E> implements List<E> {
         /**
          * Gets the next node.
          *
-         * @return the next node
+         * @return The next node
          * @since 3.1
          */
         protected Node<E> getNextNode() {
@@ -485,7 +491,7 @@ public abstract class AbstractLinkedListJava21<E> implements List<E> {
         /**
          * Gets the previous node.
          *
-         * @return the previous node
+         * @return The previous node
          * @since 3.1
          */
         protected Node<E> getPreviousNode() {
@@ -495,7 +501,7 @@ public abstract class AbstractLinkedListJava21<E> implements List<E> {
         /**
          * Gets the value of the node.
          *
-         * @return the value
+         * @return The value
          * @since 3.1
          */
         protected E getValue() {
@@ -505,7 +511,7 @@ public abstract class AbstractLinkedListJava21<E> implements List<E> {
         /**
          * Sets the next node.
          *
-         * @param next  the next node
+         * @param next  The next node
          * @since 3.1
          */
         protected void setNextNode(final Node<E> next) {
@@ -515,7 +521,7 @@ public abstract class AbstractLinkedListJava21<E> implements List<E> {
         /**
          * Sets the previous node.
          *
-         * @param previous  the previous node
+         * @param previous  The previous node
          * @since 3.1
          */
         protected void setPreviousNode(final Node<E> previous) {
@@ -525,7 +531,7 @@ public abstract class AbstractLinkedListJava21<E> implements List<E> {
         /**
          * Sets the value of the node.
          *
-         * @param value  the value
+         * @param value  The value
          * @since 3.1
          */
         protected void setValue(final E value) {
@@ -559,7 +565,7 @@ public abstract class AbstractLinkedListJava21<E> implements List<E> {
     /**
      * Constructs a list copying data from the specified collection.
      *
-     * @param coll  the collection to copy
+     * @param coll  The collection to copy
      */
     protected AbstractLinkedListJava21(final Collection<? extends E> coll) {
         init();
@@ -586,6 +592,9 @@ public abstract class AbstractLinkedListJava21<E> implements List<E> {
     @Override
     public boolean addAll(final int index, final Collection<? extends E> coll) {
         final Node<E> node = getNode(index, true);
+        if (coll.isEmpty()) {
+            return false;
+        }
         for (final E e : coll) {
             addNodeBefore(node, e);
         }
@@ -695,7 +704,7 @@ public abstract class AbstractLinkedListJava21<E> implements List<E> {
      * Subclasses can override this to create a different class.
      *
      * @param value  value of the new node
-     * @return a new node containing the value
+     * @return A new node containing the value
      */
     protected Node<E> createNode(final E value) {
         return new Node<>(value);
@@ -704,8 +713,8 @@ public abstract class AbstractLinkedListJava21<E> implements List<E> {
     /**
      * Creates an iterator for the sublist.
      *
-     * @param subList  the sublist to get an iterator for
-     * @return a new iterator on the given sublist
+     * @param subList  The sublist to get an iterator for
+     * @return A new iterator on the given sublist
      */
     protected Iterator<E> createSubListIterator(final LinkedSubList<E> subList) {
         return createSubListListIterator(subList, 0);
@@ -714,9 +723,9 @@ public abstract class AbstractLinkedListJava21<E> implements List<E> {
     /**
      * Creates a list iterator for the sublist.
      *
-     * @param subList  the sublist to get an iterator for
-     * @param fromIndex  the index to start from, relative to the sublist
-     * @return a new list iterator on the given sublist
+     * @param subList  The sublist to get an iterator for
+     * @param fromIndex  The index to start from, relative to the sublist
+     * @return A new list iterator on the given sublist
      */
     protected ListIterator<E> createSubListListIterator(final LinkedSubList<E> subList, final int fromIndex) {
         return new LinkedSubListIterator<>(subList, fromIndex);
@@ -729,7 +738,7 @@ public abstract class AbstractLinkedListJava21<E> implements List<E> {
      * {@code readObject}.
      * </p>
      *
-     * @param inputStream  the stream to read the object from
+     * @param inputStream  The stream to read the object from
      * @throws IOException  if any error occurs while reading from the stream
      * @throws ClassNotFoundException  if a class read from the stream cannot be loaded
      */
@@ -749,7 +758,7 @@ public abstract class AbstractLinkedListJava21<E> implements List<E> {
      * {@code writeObject}.
      * </p>
      *
-     * @param outputStream  the stream to write the object to
+     * @param outputStream  The stream to write the object to
      * @throws IOException  if anything goes wrong
      */
     protected void doWriteObject(final ObjectOutputStream outputStream) throws IOException {
@@ -813,10 +822,10 @@ public abstract class AbstractLinkedListJava21<E> implements List<E> {
     /**
      * Gets the node at a particular index.
      *
-     * @param index  the index, starting from 0
+     * @param index  The index, starting from 0
      * @param endMarkerAllowed  whether or not the end marker can be returned if
      * startIndex is set to the list's size
-     * @return the node at the given index
+     * @return The node at the given index
      * @throws IndexOutOfBoundsException if the index is less than 0; equal to
      * the size of the list and endMakerAllowed is false; or greater than the
      * size of the list
@@ -895,8 +904,8 @@ public abstract class AbstractLinkedListJava21<E> implements List<E> {
      * This implementation uses the equals method.
      * Subclasses can override this to match differently.
      *
-     * @param value1  the first value to compare, may be null
-     * @param value2  the second value to compare, may be null
+     * @param value1  The first value to compare, may be null
+     * @param value2  The second value to compare, may be null
      * @return true if equal
      */
     protected boolean isEqualValue(final Object value1, final Object value2) {
@@ -1011,7 +1020,7 @@ public abstract class AbstractLinkedListJava21<E> implements List<E> {
     /**
      * Removes the specified node from the list.
      *
-     * @param node  the node to remove
+     * @param node  The node to remove
      * @throws NullPointerException if {@code node} is null
      */
     protected void removeNode(final Node<E> node) {
@@ -1061,9 +1070,9 @@ public abstract class AbstractLinkedListJava21<E> implements List<E> {
     /**
      * Gets a sublist of the main list.
      *
-     * @param fromIndexInclusive  the index to start from
-     * @param toIndexExclusive  the index to end at
-     * @return the new sublist
+     * @param fromIndexInclusive  The index to start from
+     * @param toIndexExclusive  The index to end at
+     * @return The new sublist
      */
     @Override
     public List<E> subList(final int fromIndexInclusive, final int toIndexExclusive) {

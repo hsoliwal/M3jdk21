@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -18,6 +18,7 @@ package jdk.m3.collections.apache.comparators;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -34,7 +35,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Test class for FixedOrderComparator.
  */
-public class FixedOrderComparatorTest extends AbstractComparatorTest<String> {
+class FixedOrderComparatorTest extends AbstractComparatorTest<String> {
 
     @Nested
     class Equals {
@@ -43,7 +44,7 @@ public class FixedOrderComparatorTest extends AbstractComparatorTest<String> {
         void expectFalseWhenBothComparatorsWithDifferentItems() {
             final FixedOrderComparator<Integer> comparator1 = new FixedOrderComparator<>(1, 2, 3);
             final FixedOrderComparator<Integer> comparator2 = new FixedOrderComparator<>(2, 3, 4);
-            assertFalse(comparator1.equals(comparator2));
+            assertNotEquals(comparator1, comparator2);
         }
 
         @Test
@@ -52,13 +53,13 @@ public class FixedOrderComparatorTest extends AbstractComparatorTest<String> {
             comparator1.setUnknownObjectBehavior(FixedOrderComparator.UnknownObjectBehavior.BEFORE);
             final FixedOrderComparator<Integer> comparator2 = new FixedOrderComparator<>();
             comparator2.setUnknownObjectBehavior(FixedOrderComparator.UnknownObjectBehavior.AFTER);
-            assertFalse(comparator1.equals(comparator2));
+            assertNotEquals(comparator1, comparator2);
         }
 
         @Test
         void expectFalseWhenFixedOrderComparatorIsComparedWithNull() {
             final FixedOrderComparator<Integer> comparator = new FixedOrderComparator<>();
-            assertFalse(comparator.equals(null));
+            assertNotEquals(comparator, null);
         }
 
         @Test
@@ -72,14 +73,14 @@ public class FixedOrderComparatorTest extends AbstractComparatorTest<String> {
             final FixedOrderComparator<Integer> comparator1 = new FixedOrderComparator<>(1, 2, 3);
             final FixedOrderComparator<Integer> comparator2 = new FixedOrderComparator<>(1, 2, 3);
             comparator2.compare(1, 2);
-            assertFalse(comparator1.equals(comparator2));
+            assertNotEquals(comparator1, comparator2);
         }
 
         @Test
         void expectFalseWhenOneComparatorsWithDuplicateItems() {
             final FixedOrderComparator<Integer> comparator1 = new FixedOrderComparator<>(1, 2, 3);
             final FixedOrderComparator<Integer> comparator2 = new FixedOrderComparator<>(1, 2, 3, 3);
-            assertFalse(comparator1.equals(comparator2));
+            assertNotEquals(comparator1, comparator2);
         }
 
         @Test
@@ -88,20 +89,20 @@ public class FixedOrderComparatorTest extends AbstractComparatorTest<String> {
             final FixedOrderComparator<Integer> comparator2 = new FixedOrderComparator<>(1, 2, 3);
             comparator1.compare(1, 2);
             comparator2.compare(1, 2);
-            assertTrue(comparator1.equals(comparator2));
+            assertEquals(comparator1, comparator2);
         }
 
         @Test
         void expectTrueWhenBothComparatorsWithoutAnyItems() {
             final FixedOrderComparator<Integer> comparator1 = new FixedOrderComparator<>();
             final FixedOrderComparator<Integer> comparator2 = new FixedOrderComparator<>();
-            assertTrue(comparator1.equals(comparator2));
+            assertEquals(comparator1, comparator2);
         }
 
         @Test
         void expectTrueWhenBothObjectsAreSame() {
             final FixedOrderComparator<Integer> comparator = new FixedOrderComparator<>();
-            assertTrue(comparator.equals(comparator));
+            assertEquals(comparator, comparator);
         }
     }
 
@@ -168,7 +169,7 @@ public class FixedOrderComparatorTest extends AbstractComparatorTest<String> {
         return Arrays.asList(topCities);
     }
 
-//    public void testCreate() throws Exception {
+//    void testCreate() throws Exception {
 //        writeExternalFormToDisk((java.io.Serializable) makeObject(), "src/test/resources/data/test/FixedOrderComparator.version4.obj");
 //    }
 
@@ -190,7 +191,7 @@ public class FixedOrderComparatorTest extends AbstractComparatorTest<String> {
      * Tests addAsEqual method.
      */
     @Test
-    public void testAddAsEqual() {
+    void testAddAsEqual() {
         final FixedOrderComparator<String> comparator = new FixedOrderComparator<>(topCities);
         comparator.addAsEqual("New York", "Minneapolis");
         assertEquals(0, comparator.compare("New York", "Minneapolis"));
@@ -202,7 +203,7 @@ public class FixedOrderComparatorTest extends AbstractComparatorTest<String> {
      * Tests that the array constructor compares items properly.
      */
     @Test
-    public void testArrayConstructor() {
+    void testArrayConstructor() {
         final String[] keys = topCities.clone();
         final String[] topCitiesForTest = topCities.clone();
         final FixedOrderComparator<String> comparator = new FixedOrderComparator<>(topCitiesForTest);
@@ -216,7 +217,7 @@ public class FixedOrderComparatorTest extends AbstractComparatorTest<String> {
      * Tests that the constructor plus add method compares items properly.
      */
     @Test
-    public void testConstructorPlusAdd() {
+    void testConstructorPlusAdd() {
         final FixedOrderComparator<String> comparator = new FixedOrderComparator<>();
         for (final String topCity : topCities) {
             comparator.add(topCity);
@@ -229,7 +230,7 @@ public class FixedOrderComparatorTest extends AbstractComparatorTest<String> {
      * Tests the list constructor.
      */
     @Test
-    public void testListConstructor() {
+    void testListConstructor() {
         final String[] keys = topCities.clone();
         final List<String> topCitiesForTest = new LinkedList<>(Arrays.asList(topCities));
         final FixedOrderComparator<String> comparator = new FixedOrderComparator<>(topCitiesForTest);
@@ -247,7 +248,7 @@ public class FixedOrderComparatorTest extends AbstractComparatorTest<String> {
      * Tests whether or not updates are disabled after a comparison is made.
      */
     @Test
-    public void testLock() {
+    void testLock() {
         final FixedOrderComparator<String> comparator = new FixedOrderComparator<>(topCities);
         assertFalse(comparator.isLocked());
         comparator.compare("New York", "Tokyo");
@@ -261,7 +262,7 @@ public class FixedOrderComparatorTest extends AbstractComparatorTest<String> {
     }
 
     @Test
-    public void testUnknownObjectBehavior() {
+    void testUnknownObjectBehavior() {
         FixedOrderComparator<String> comparator = new FixedOrderComparator<>(topCities);
 
         final FixedOrderComparator<String> finalComparator = comparator;

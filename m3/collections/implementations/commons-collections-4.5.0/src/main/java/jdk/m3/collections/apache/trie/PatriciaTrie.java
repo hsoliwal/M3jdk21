@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -18,15 +18,16 @@ package jdk.m3.collections.apache.trie;
 
 import java.util.Map;
 
+import jdk.m3.collections.apache.Trie;
 import jdk.m3.collections.apache.trie.analyzer.StringKeyAnalyzer;
 
 /**
  * Implements a PATRICIA Trie (Practical Algorithm to Retrieve Information
  * Coded in Alphanumeric).
  * <p>
- * A PATRICIA {@link jdk.m3.collections.apache.Trie} is a compressed
- * {@link jdk.m3.collections.apache.Trie}. Instead of storing
- * all data at the edges of the {@link jdk.m3.collections.apache.Trie}
+ * A PATRICIA {@link Trie} is a compressed
+ * {@link Trie}. Instead of storing
+ * all data at the edges of the {@link Trie}
  * (and having empty internal nodes), PATRICIA stores data in every node.
  * This allows for very efficient traversal, insert, delete, predecessor,
  * successor, prefix, range, and {@link #select(Object)}
@@ -42,20 +43,20 @@ import jdk.m3.collections.apache.trie.analyzer.StringKeyAnalyzer;
  * the given key, instead of comparing the entire key to another key.
  * </p>
  * <p>
- * The {@link jdk.m3.collections.apache.Trie} can return operations in
+ * The {@link Trie} can return operations in
  * lexicographical order using the 'prefixMap', 'submap', or 'iterator' methods.
- * The {@link jdk.m3.collections.apache.Trie} can also
+ * The {@link Trie} can also
  * scan for items that are 'bitwise' (using an XOR metric) by the 'select' method.
  * Bitwise closeness is determined by the {@link KeyAnalyzer} returning true or
  * false for a bit being set or not in a given key.
  * </p>
  * <p>
- * This PATRICIA {@link jdk.m3.collections.apache.Trie} supports both variable
+ * This PATRICIA {@link Trie} supports both variable
  * length &amp; fixed length keys. Some methods, such as {@link jdk.m3.collections.apache.Trie#prefixMap(Object)}
  * are suited only to variable length keys.
  * </p>
  *
- * @param <V> the type of the values in this map
+ * @param <V> The type of the values in this map
  * @see <a href="https://en.wikipedia.org/wiki/Radix_tree">Radix Tree</a>
  * @see <a href="https://users.monash.edu/~lloyd/tildeAlgDS/Tree/PATRICIA/">PATRICIA</a>
  * @see <a href="https://www.imperialviolet.org/binary/critbit.pdf">Crit-Bit Tree</a>

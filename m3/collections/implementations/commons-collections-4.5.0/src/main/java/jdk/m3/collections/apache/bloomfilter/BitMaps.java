@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+// Modified 2026 by Synexia contributors: unsigned power-of-two modulus mask.
 package jdk.m3.collections.apache.bloomfilter;
 
 /**
@@ -36,7 +37,7 @@ public class BitMaps {
      * </p>
      *
      * @param bitMaps  The array of bit maps.
-     * @param bitIndex the index of the bit to locate.
+     * @param bitIndex The index of the bit to locate.
      * @return {@code true} if the bit is enabled, {@code false} otherwise.
      * @throws IndexOutOfBoundsException if bitIndex specifies a bit not in the range being tracked.
      */
@@ -54,8 +55,8 @@ public class BitMaps {
      *
      * <p><em>If the input is negative the behavior is not defined.</em></p>
      *
-     * @param bitIndex the bit index (assumed to be positive)
-     * @return the filter bit
+     * @param bitIndex The bit index (assumed to be positive)
+     * @return The filter bit
      */
     public static long getLongBit(final int bitIndex) {
         // Bit shifts only use the first 6 bits. Thus it is not necessary to mask this
@@ -75,8 +76,8 @@ public class BitMaps {
      * <p><em>The divide is performed using bit shifts. If the input is negative the behavior
      * is not defined.</em></p>
      *
-     * @param bitIndex the bit index (assumed to be positive)
-     * @return the index of the bit map in an array of bit maps.
+     * @param bitIndex The bit index (assumed to be positive)
+     * @return The index of the bit map in an array of bit maps.
      */
     public static int getLongIndex(final int bitIndex) {
         // An integer divide by 64 is equivalent to a shift of 6 bits if the integer is
@@ -97,13 +98,20 @@ public class BitMaps {
      *
      * <p><em>If the divisor is negative the behavior is not defined.</em></p>
      *
-     * @param dividend an unsigned long value to calculate the modulus of.
-     * @param divisor the divisor for the modulus calculation, must be strictly positive.
-     * @return the remainder or modulus value.
+     * @param dividend An unsigned long value to calculate the modulus of.
+     * @param divisor The divisor for the modulus calculation, must be strictly positive.
+     * @return The remainder or modulus value.
      * @throws ArithmeticException if the divisor is zero
      * @see Long#remainderUnsigned(long, long)
      */
     public static int mod(final long dividend, final int divisor) {
+        // A power-of-two modulus is a mask, even when the dividend is a
+        // negative signed long representing a large unsigned value. Keep
+        // the original division path for zero (including its exception)
+        // and for every other divisor.
+        if (divisor > 0 && (divisor & (divisor - 1)) == 0) {
+            return (int) (dividend & (divisor - 1L));
+        }
         // See Hacker's Delight (2nd ed), section 9.3.
         // Assume divisor is positive.
         // Divide half the unsigned number and then double the quotient result.
@@ -118,8 +126,8 @@ public class BitMaps {
      *
      * <p><em>If the input is negative the behavior is not defined.</em></p>
      *
-     * @param numberOfBits the number of bits to store in the array of bit maps.
-     * @return a new bitmap.
+     * @param numberOfBits The number of bits to store in the array of bit maps.
+     * @return A new bitmap.
      */
     static long[] newBitMap(final int numberOfBits) {
         return new long[numberOfBitMaps(numberOfBits)];
@@ -128,8 +136,8 @@ public class BitMaps {
     /**
      * Creates a new bitmap for given shape parameter.
      *
-     * @param shape the shape.
-     * @return a new bitmap.
+     * @param shape The shape.
+     * @return A new bitmap.
      */
     static long[] newBitMap(final Shape shape) {
         return newBitMap(shape.getNumberOfBits());
@@ -140,8 +148,8 @@ public class BitMaps {
      *
      * <p><em>If the input is negative the behavior is not defined.</em></p>
      *
-     * @param numberOfBits the number of bits to store in the array of bit maps.
-     * @return the number of bit maps necessary.
+     * @param numberOfBits The number of bits to store in the array of bit maps.
+     * @return The number of bit maps necessary.
      */
     public static int numberOfBitMaps(final int numberOfBits) {
         return (numberOfBits - 1 >> DIVIDE_BY_64) + 1;
@@ -150,8 +158,8 @@ public class BitMaps {
     /**
      * Calculates the number of bit maps (longs) required for the shape parameter.
      *
-     * @param shape the shape.
-     * @return the number of bit maps necessary.
+     * @param shape The shape.
+     * @return The number of bit maps necessary.
      */
     static int numberOfBitMaps(final Shape shape) {
         return numberOfBitMaps(shape.getNumberOfBits());
@@ -162,7 +170,7 @@ public class BitMaps {
      * <p><em>Does not perform range checking</em></p>
      *
      * @param bitMaps  The array of bit maps.
-     * @param bitIndex the index of the bit to set.
+     * @param bitIndex The index of the bit to set.
      * @throws IndexOutOfBoundsException if bitIndex specifies a bit not in the range being tracked.
      */
     public static void set(final long[] bitMaps, final int bitIndex) {

@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -22,9 +22,8 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.IOException;
-import java.io.ObjectInputStream;
 import java.math.BigInteger;
-import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
 
@@ -39,7 +38,7 @@ import org.junit.jupiter.api.Test;
  * Tests for {@link TransformedSplitMap}
  */
 @SuppressWarnings("boxing")
-public class TransformedSplitMapTest extends BulkTest {
+class TransformedSplitMapTest extends BulkTest {
 
     private final Transformer<Integer, String> intToString = String::valueOf;
 
@@ -48,41 +47,35 @@ public class TransformedSplitMapTest extends BulkTest {
     private final Transformer<String, Integer> stringToInt = Integer::valueOf;
 
     @Test
-    public void testEmptyMap() throws IOException, ClassNotFoundException {
+    void testEmptyMap() throws IOException, ClassNotFoundException {
         final TransformedSplitMap<String, String, String, String> map =
                 TransformedSplitMap.transformingMap(new HashMap<>(),
                                                     NOPTransformer.<String>nopTransformer(),
                                                     NOPTransformer.<String>nopTransformer());
-
-        final ObjectInputStream in = new ObjectInputStream(Files.newInputStream(Paths.get(TEST_DATA_PATH + "/TransformedSplitMap.emptyCollection.version4.obj")));
-        final Object readObject = in.readObject();
-        in.close();
-
+        final Path path = Paths.get(TEST_DATA_PATH + "/TransformedSplitMap.emptyCollection.version4.obj");
+        final Object readObject = deserialize(path);
         final TransformedSplitMap<?, ?, ?, ?> readMap = (TransformedSplitMap<?, ?, ?, ?>) readObject;
         assertTrue(readMap.isEmpty(), "Map should be empty");
         assertEquals(map.entrySet(), readMap.entrySet());
     }
 
     @Test
-    public void testFullMap() throws IOException, ClassNotFoundException {
+    void testFullMap() throws IOException, ClassNotFoundException {
         final TransformedSplitMap<String, String, String, String> map = TransformedSplitMap.transformingMap(new HashMap<>(),
                 NOPTransformer.<String>nopTransformer(), NOPTransformer.<String>nopTransformer());
         map.put("a", "b");
         map.put("c", "d");
         map.put("e", "f");
         map.put("g", "h");
-
-        final ObjectInputStream in = new ObjectInputStream(Files.newInputStream(Paths.get(TEST_DATA_PATH + "TransformedSplitMap.fullCollection.version4.obj")));
-        final Object readObject = in.readObject();
-        in.close();
-
+        final Path path = Paths.get(TEST_DATA_PATH + "TransformedSplitMap.fullCollection.version4.obj");
+        final Object readObject = deserialize(path);
         final TransformedSplitMap<?, ?, ?, ?> readMap = (TransformedSplitMap<?, ?, ?, ?>) readObject;
         assertFalse(readMap.isEmpty(), "Map should not be empty");
         assertEquals(map.entrySet(), readMap.entrySet());
     }
 
     @Test
-    public void testMapIterator() {
+    void testMapIterator() {
         final TransformedSplitMap<String, String, String, Integer> map =
                 TransformedSplitMap.transformingMap(new HashMap<>(),
                                                     NOPTransformer.<String>nopTransformer(), stringToInt);
@@ -99,7 +92,7 @@ public class TransformedSplitMapTest extends BulkTest {
     }
 
     @Test
-    public void testTransformedMap() {
+    void testTransformedMap() {
         final TransformedSplitMap<Integer, String, Object, Class<?>> map = TransformedSplitMap.transformingMap(
                 new HashMap<>(), intToString, objectToClass);
 
@@ -141,7 +134,7 @@ public class TransformedSplitMapTest extends BulkTest {
         assertEquals(--sz2, map2.size());
     }
 
-//    public void testCreate() throws IOException {
+//    void testCreate() throws IOException {
 //        TransformedSplitMap<String, String, String, String> map = TransformedSplitMap.transformingMap(
 //                new HashMap<String, String>(),
 //                NOPTransformer.<String>nopTransformer(),

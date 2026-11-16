@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,15 +16,16 @@
  */
 package jdk.m3.collections.apache.iterators;
 
+import java.util.ListIterator;
 import java.util.NoSuchElementException;
 
 import jdk.m3.collections.apache.ResettableListIterator;
 
 /**
- * {@code SingletonIterator} is an {@link java.util.ListIterator} over a single
+ * {@code SingletonIterator} is an {@link ListIterator} over a single
  * object instance.
  *
- * @param <E> the type of elements returned by this iterator.
+ * @param <E> The type of elements returned by this iterator.
  * @since 2.1
  */
 public class SingletonListIterator<E> implements ResettableListIterator<E> {
@@ -37,17 +38,17 @@ public class SingletonListIterator<E> implements ResettableListIterator<E> {
     /**
      * Constructs a new {@code SingletonListIterator}.
      *
-     * @param object  the single object to return from the iterator
+     * @param object  The single object to return from the iterator
      */
     public SingletonListIterator(final E object) {
         this.object = object;
     }
 
     /**
-     * Add always throws {@link UnsupportedOperationException}.
+     * Always throws {@link UnsupportedOperationException}.
      *
-     * @param obj  the object to add
-     * @throws UnsupportedOperationException always
+     * @param obj Ignored.
+     * @throws UnsupportedOperationException Always thrown.
      */
     @Override
     public void add(final E obj) {
@@ -83,7 +84,7 @@ public class SingletonListIterator<E> implements ResettableListIterator<E> {
      * <p>
      * This returns the single object if it hasn't been returned yet.
      *
-     * @return the single object
+     * @return The single object
      * @throws NoSuchElementException if the single object has already
      *    been returned
      */
@@ -113,7 +114,7 @@ public class SingletonListIterator<E> implements ResettableListIterator<E> {
      * <p>
      * This returns the single object if it has been returned.
      *
-     * @return the single object
+     * @return The single object
      * @throws NoSuchElementException if the single object has not already
      *    been returned
      */
@@ -140,6 +141,7 @@ public class SingletonListIterator<E> implements ResettableListIterator<E> {
 
     /**
      * Remove the object from this iterator.
+     *
      * @throws IllegalStateException if the {@code next} or {@code previous}
      *        method has not yet been called, or the {@code remove} method
      *        has already been called after the last call to {@code next}
@@ -166,7 +168,7 @@ public class SingletonListIterator<E> implements ResettableListIterator<E> {
     /**
      * Sets sets the value of the singleton.
      *
-     * @param object  the object to set
+     * @param object  The object to set
      * @throws IllegalStateException if {@code next} has not been called
      *          or the object has been removed
      */

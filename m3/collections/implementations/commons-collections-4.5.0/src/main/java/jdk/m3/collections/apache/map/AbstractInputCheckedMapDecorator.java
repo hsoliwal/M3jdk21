@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -156,7 +156,7 @@ abstract class AbstractInputCheckedMapDecorator<K, V>
     /**
      * Constructor that wraps (not copies).
      *
-     * @param map  the map to decorate, must not be null
+     * @param map  The map to decorate, must not be null
      * @throws NullPointerException if map is null
      */
     protected AbstractInputCheckedMapDecorator(final Map<K, V> map) {
@@ -173,8 +173,8 @@ abstract class AbstractInputCheckedMapDecorator<K, V>
      * This implementation returns the input value.
      * </p>
      *
-     * @param value  the value to check
-     * @return the input value
+     * @param value  The value to check
+     * @return The input value
      * @throws UnsupportedOperationException if the map may not be changed by setValue
      * @throws IllegalArgumentException if the specified value is invalid
      * @throws ClassCastException if the class of the specified value is invalid

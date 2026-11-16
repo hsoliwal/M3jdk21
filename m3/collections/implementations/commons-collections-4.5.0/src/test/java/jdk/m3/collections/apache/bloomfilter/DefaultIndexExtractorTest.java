@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -28,13 +28,13 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-public class DefaultIndexExtractorTest extends AbstractIndexExtractorTest {
+class DefaultIndexExtractorTest extends AbstractIndexExtractorTest {
 
     /**
      * Generates an array of integers.
-     * @param size the size of the array
-     * @param bound the upper bound (exclusive) of the values in the array.
-     * @return an array of int.
+     * @param size The size of the array
+     * @param bound The upper bound (exclusive) of the values in the array.
+     * @return An array of int.
      */
     public static int[] generateIntArray(final int size, final int bound) {
         return ThreadLocalRandom.current().ints(size, 0, bound).toArray();
@@ -42,8 +42,8 @@ public class DefaultIndexExtractorTest extends AbstractIndexExtractorTest {
 
     /**
      * Creates a sorted unique array of ints.
-     * @param ary the array to sort and make unique
-     * @return the sorted unique array.
+     * @param ary The array to sort and make unique
+     * @return The sorted unique array.
      */
     public static int[] unique(final int[] ary) {
         return Arrays.stream(ary).distinct().sorted().toArray();
@@ -51,8 +51,8 @@ public class DefaultIndexExtractorTest extends AbstractIndexExtractorTest {
 
     /**
      * Creates a BitSet of indices.
-     * @param ary the array
-     * @return the set.
+     * @param ary The array
+     * @return The set.
      */
     public static BitSet uniqueSet(final int[] ary) {
         final BitSet bs = new BitSet();
@@ -66,7 +66,7 @@ public class DefaultIndexExtractorTest extends AbstractIndexExtractorTest {
     @Override
     protected IndexExtractor createEmptyExtractor() {
         return predicate -> {
-            Objects.requireNonNull(predicate);
+            Objects.requireNonNull(predicate, "predicate");
             return true;
         };
     }
@@ -74,7 +74,7 @@ public class DefaultIndexExtractorTest extends AbstractIndexExtractorTest {
     @Override
     protected IndexExtractor createExtractor() {
         return predicate -> {
-            Objects.requireNonNull(predicate);
+            Objects.requireNonNull(predicate, "predicate");
             for (final int i : values) {
                 if (!predicate.test(i)) {
                     return false;
@@ -102,10 +102,10 @@ public class DefaultIndexExtractorTest extends AbstractIndexExtractorTest {
 
     @ParameterizedTest
     @ValueSource(ints = {32, 33})
-    public void testEntries(final int size) {
+    void testEntries(final int size) {
         final int[] values = IntStream.range(0, size).toArray();
         final IndexExtractor indexExtractor = predicate -> {
-            Objects.requireNonNull(predicate);
+            Objects.requireNonNull(predicate, "predicate");
             for (final int i : values) {
                 if (!predicate.test(i)) {
                     return false;
@@ -118,7 +118,7 @@ public class DefaultIndexExtractorTest extends AbstractIndexExtractorTest {
     }
 
     @Test
-    public void testFromBitMapExtractor() {
+    void testFromBitMapExtractor() {
         for (int i = 0; i < 5; i++) {
             final int[] expected = generateIntArray(7, 256);
             final long[] bits = BitMaps.newBitMap(256);
@@ -131,7 +131,7 @@ public class DefaultIndexExtractorTest extends AbstractIndexExtractorTest {
     }
 
     @Test
-    public void testFromIndexArray() {
+    void testFromIndexArray() {
         for (int i = 0; i < 5; i++) {
             final int[] expected = generateIntArray(10, 256);
             final IndexExtractor ip = IndexExtractor.fromIndexArray(expected);

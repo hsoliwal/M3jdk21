@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -17,9 +17,12 @@
 
 package jdk.m3.collections.apache.map;
 
+import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+
 import java.util.Objects;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -37,7 +40,7 @@ import org.junit.jupiter.api.Test;
  * </ol>
  * COUNTER CLAIM: The class is documented to use MultiKey which documents key elements as "The keys should be immutable".
  */
-public class MultiKeyMapCompress672Test {
+class MultiKeyMapCompress672Test {
 
     private static final class KeyFixture {
 
@@ -80,21 +83,21 @@ public class MultiKeyMapCompress672Test {
     private final MultiKeyMap<Object, String> multiKeyMap = new MultiKeyMap<>();
 
     @Test
-    public void testMutateKey() {
+    void testMutateKey() {
         // Both objects have the 'field' value set to "originalValue"
         final KeyFixture keyFixture2Ro = new KeyFixture();
         final KeyFixture keyFixture2Rw = new KeyFixture();
         // Put original mapping
-        Assertions.assertNull(multiKeyMap.put(KEY_1, keyFixture2Rw, "value"));
+        assertNull(multiKeyMap.put(KEY_1, keyFixture2Rw, "value"));
         // Both mappings are correct
-        Assertions.assertEquals("value", multiKeyMap.get(KEY_1, keyFixture2Rw));
-        Assertions.assertEquals("value", multiKeyMap.get(KEY_1, keyFixture2Ro));
+        assertEquals("value", multiKeyMap.get(KEY_1, keyFixture2Rw));
+        assertEquals("value", multiKeyMap.get(KEY_1, keyFixture2Ro));
         // Modify 'fixture2'
         keyFixture2Rw.setValue("newValue");
         // Modified mapping SHOULD NOT work
-        Assertions.assertNull(multiKeyMap.get(KEY_1, keyFixture2Rw));
+        assertNull(multiKeyMap.get(KEY_1, keyFixture2Rw));
         // Claim: Original mapping SHOULD work
         // COUNTER CLAIM: The class is documented to use MultiKey which documents key elements as "The keys should be immutable".
-        Assertions.assertNotEquals("value", multiKeyMap.get(KEY_1, keyFixture2Ro));
+        assertNotEquals("value", multiKeyMap.get(KEY_1, keyFixture2Ro));
     }
 }

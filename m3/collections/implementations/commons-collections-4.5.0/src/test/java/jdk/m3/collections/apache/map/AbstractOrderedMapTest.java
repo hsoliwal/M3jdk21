@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -34,16 +34,18 @@ import jdk.m3.collections.apache.OrderedMap;
 import jdk.m3.collections.apache.OrderedMapIterator;
 import jdk.m3.collections.apache.comparators.NullComparator;
 import jdk.m3.collections.apache.iterators.AbstractOrderedMapIteratorTest;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 /**
  * Tests {@link OrderedMap}.
  *
- * @param <K> the type of the keys in the maps tested.
- * @param <V> the type of the values in the maps tested.
+ * @param <K> The type of the keys in the maps tested.
+ * @param <V> The type of the values in the maps tested.
  */
 public abstract class AbstractOrderedMapTest<K, V> extends AbstractIterableMapTest<K, V> {
 
+    @Nested
     public class InnerTestOrderedMapIterator extends AbstractOrderedMapIteratorTest<K, V> {
 
         @Override
@@ -118,7 +120,7 @@ public abstract class AbstractOrderedMapTest<K, V> extends AbstractIterableMapTe
     /**
      * OrderedMap uses TreeMap as its known comparison.
      *
-     * @return a map that is known to be valid
+     * @return A map that is known to be valid
      */
     @Override
     public Map<K, V> makeConfirmedMap() {
@@ -140,7 +142,7 @@ public abstract class AbstractOrderedMapTest<K, V> extends AbstractIterableMapTe
     public abstract OrderedMap<K, V> makeObject();
 
     @Test
-    public void testFirstKey() {
+    void testFirstKey() {
         resetEmpty();
         OrderedMap<K, V> ordered = getMap();
         final OrderedMap<K, V> finalOrdered = ordered;
@@ -153,7 +155,7 @@ public abstract class AbstractOrderedMapTest<K, V> extends AbstractIterableMapTe
     }
 
     @Test
-    public void testLastKey() {
+    void testLastKey() {
         resetEmpty();
         OrderedMap<K, V> ordered = getMap();
         final OrderedMap<K, V> finalOrdered = ordered;
@@ -169,7 +171,7 @@ public abstract class AbstractOrderedMapTest<K, V> extends AbstractIterableMapTe
     }
 
     @Test
-    public void testNextKey() {
+    void testNextKey() {
         resetEmpty();
         OrderedMap<K, V> ordered = getMap();
         assertNull(ordered.nextKey(getOtherKeys()[0]));
@@ -202,7 +204,7 @@ public abstract class AbstractOrderedMapTest<K, V> extends AbstractIterableMapTe
     }
 
     @Test
-    public void testPreviousKey() {
+    void testPreviousKey() {
         resetEmpty();
         OrderedMap<K, V> ordered = getMap();
         assertNull(ordered.previousKey(getOtherKeys()[0]));

@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -37,8 +37,8 @@ import jdk.m3.collections.apache.Transformer;
  * <strong>Note that TransformedMultiValuedMap is not synchronized and is not thread-safe.</strong>
  * </p>
  *
- * @param <K> the type of the keys in this map
- * @param <V> the type of the values in this map
+ * @param <K> The type of the keys in this map
+ * @param <V> The type of the values in this map
  * @since 4.1
  */
 public class TransformedMultiValuedMap<K, V> extends AbstractMultiValuedMapDecorator<K, V> {
@@ -55,12 +55,12 @@ public class TransformedMultiValuedMap<K, V> extends AbstractMultiValuedMapDecor
      * {@link #transformingMap(MultiValuedMap, Transformer, Transformer)}.
      * </p>
      *
-     * @param <K> the key type
-     * @param <V> the value type
-     * @param map  the MultiValuedMap to decorate, may not be null
-     * @param keyTransformer  the transformer to use for key conversion, null means no conversion
-     * @param valueTransformer  the transformer to use for value conversion, null means no conversion
-     * @return a new transformed MultiValuedMap
+     * @param <K> The key type
+     * @param <V> The value type
+     * @param map  The MultiValuedMap to decorate, may not be null
+     * @param keyTransformer  The transformer to use for key conversion, null means no conversion
+     * @param valueTransformer  The transformer to use for value conversion, null means no conversion
+     * @return A new transformed MultiValuedMap
      * @throws NullPointerException if map is null
      */
     public static <K, V> TransformedMultiValuedMap<K, V> transformedMap(final MultiValuedMap<K, V> map,
@@ -84,12 +84,12 @@ public class TransformedMultiValuedMap<K, V> extends AbstractMultiValuedMapDecor
      * {@link #transformedMap(MultiValuedMap, Transformer, Transformer)}.
      * </p>
      *
-     * @param <K> the key type
-     * @param <V> the value type
-     * @param map  the MultiValuedMap to decorate, may not be null
-     * @param keyTransformer  the transformer to use for key conversion, null means no conversion
-     * @param valueTransformer  the transformer to use for value conversion, null means no conversion
-     * @return a new transformed MultiValuedMap
+     * @param <K> The key type
+     * @param <V> The value type
+     * @param map  The MultiValuedMap to decorate, may not be null
+     * @param keyTransformer  The transformer to use for key conversion, null means no conversion
+     * @param valueTransformer  The transformer to use for value conversion, null means no conversion
+     * @return A new transformed MultiValuedMap
      * @throws NullPointerException if map is null
      */
     public static <K, V> TransformedMultiValuedMap<K, V> transformingMap(final MultiValuedMap<K, V> map,
@@ -111,9 +111,9 @@ public class TransformedMultiValuedMap<K, V> extends AbstractMultiValuedMapDecor
      * are NOT transformed.
      * </p>
      *
-     * @param map  the MultiValuedMap to decorate, may not be null
-     * @param keyTransformer  the transformer to use for key conversion, null means no conversion
-     * @param valueTransformer  the transformer to use for value conversion, null means no conversion
+     * @param map  The MultiValuedMap to decorate, may not be null
+     * @param keyTransformer  The transformer to use for key conversion, null means no conversion
+     * @param valueTransformer  The transformer to use for value conversion, null means no conversion
      * @throws NullPointerException if map is null
      */
     protected TransformedMultiValuedMap(final MultiValuedMap<K, V> map,
@@ -133,7 +133,7 @@ public class TransformedMultiValuedMap<K, V> extends AbstractMultiValuedMapDecor
     public boolean putAll(final K key, final Iterable<? extends V> values) {
         Objects.requireNonNull(values, "values");
 
-        final Iterable<V> transformedValues = FluentIterable.of(values).transform(valueTransformer);
+        final Iterable<V> transformedValues = FluentIterable.of(values).transform(this::transformValue);
         final Iterator<? extends V> it = transformedValues.iterator();
         return it.hasNext() && CollectionUtils.addAll(decorated().get(transformKey(key)), it);
     }
@@ -164,8 +164,8 @@ public class TransformedMultiValuedMap<K, V> extends AbstractMultiValuedMapDecor
      * The transformer itself may throw an exception if necessary.
      * </p>
      *
-     * @param object  the object to transform
-     * @return the transformed object
+     * @param object  The object to transform
+     * @return The transformed object
      */
     protected K transformKey(final K object) {
         if (keyTransformer == null) {
@@ -180,8 +180,8 @@ public class TransformedMultiValuedMap<K, V> extends AbstractMultiValuedMapDecor
      * The transformer itself may throw an exception if necessary.
      * </p>
      *
-     * @param object  the object to transform
-     * @return the transformed object
+     * @param object  The object to transform
+     * @return The transformed object
      */
     protected V transformValue(final V object) {
         if (valueTransformer == null) {

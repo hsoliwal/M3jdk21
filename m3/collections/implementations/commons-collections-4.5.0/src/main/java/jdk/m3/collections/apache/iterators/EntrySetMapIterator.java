@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -34,8 +34,8 @@ import jdk.m3.collections.apache.ResettableIterator;
  * }
  * </pre>
  *
- * @param <K> the type of keys
- * @param <V> the type of mapped values
+ * @param <K> The type of keys
+ * @param <V> The type of mapped values
  * @since 3.0
  */
 public class EntrySetMapIterator<K, V> implements MapIterator<K, V>, ResettableIterator<K> {
@@ -48,7 +48,7 @@ public class EntrySetMapIterator<K, V> implements MapIterator<K, V>, ResettableI
     /**
      * Constructs a new instance.
      *
-     * @param map  the map to iterate over
+     * @param map  The map to iterate over
      */
     public EntrySetMapIterator(final Map<K, V> map) {
         this.map = map;
@@ -59,7 +59,7 @@ public class EntrySetMapIterator<K, V> implements MapIterator<K, V>, ResettableI
      * Gets the current key, which is the key returned by the last call
      * to {@code next()}.
      *
-     * @return the current key
+     * @return The current key
      * @throws IllegalStateException if {@code next()} has not yet been called
      */
     @Override
@@ -74,7 +74,7 @@ public class EntrySetMapIterator<K, V> implements MapIterator<K, V>, ResettableI
      * Gets the current value, which is the value associated with the last key
      * returned by {@code next()}.
      *
-     * @return the current value
+     * @return The current value
      * @throws IllegalStateException if {@code next()} has not yet been called
      */
     @Override
@@ -98,7 +98,7 @@ public class EntrySetMapIterator<K, V> implements MapIterator<K, V>, ResettableI
     /**
      * Gets the next <em>key</em> from the {@code Map}.
      *
-     * @return the next key in the iteration
+     * @return The next key in the iteration
      * @throws java.util.NoSuchElementException if the iteration is finished
      */
     @Override
@@ -141,8 +141,8 @@ public class EntrySetMapIterator<K, V> implements MapIterator<K, V>, ResettableI
     /**
      * Sets the value associated with the current key.
      *
-     * @param value  the new value
-     * @return the previous value
+     * @param value  The new value
+     * @return The previous value
      * @throws UnsupportedOperationException if setValue is not supported by the map
      * @throws IllegalStateException if {@code next()} has not yet been called
      * @throws IllegalStateException if {@code remove()} has been called since the
@@ -159,7 +159,7 @@ public class EntrySetMapIterator<K, V> implements MapIterator<K, V>, ResettableI
     /**
      * Gets the iterator as a String.
      *
-     * @return a string version of the iterator
+     * @return A string version of the iterator
      */
     @Override
     public String toString() {

@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -26,8 +26,8 @@ import jdk.m3.collections.apache.OrderedMapIterator;
  * All methods are forwarded to the decorated map iterator.
  * </p>
  *
- * @param <K> the type of keys
- * @param <V> the type of mapped values
+ * @param <K> The type of keys
+ * @param <V> The type of mapped values
  * @since 3.0
  */
 public class AbstractOrderedMapIteratorDecorator<K, V> implements OrderedMapIterator<K, V> {
@@ -38,7 +38,7 @@ public class AbstractOrderedMapIteratorDecorator<K, V> implements OrderedMapIter
     /**
      * Constructor that decorates the specified iterator.
      *
-     * @param iterator  the iterator to decorate, must not be null
+     * @param iterator  The iterator to decorate, must not be null
      * @throws NullPointerException if the iterator is null
      */
     public AbstractOrderedMapIteratorDecorator(final OrderedMapIterator<K, V> iterator) {
@@ -54,7 +54,7 @@ public class AbstractOrderedMapIteratorDecorator<K, V> implements OrderedMapIter
     /**
      * Gets the iterator being decorated.
      *
-     * @return the decorated iterator
+     * @return The decorated iterator
      */
     protected OrderedMapIterator<K, V> getOrderedMapIterator() {
         return iterator;

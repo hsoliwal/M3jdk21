@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -34,7 +34,7 @@ import jdk.m3.collections.apache.Transformer;
  * Abstract implementation of the {@link MultiSet} interface to simplify the
  * creation of subclass implementations.
  *
- * @param <E> the type held in the multiset
+ * @param <E> The type held in the multiset
  * @since 4.1
  */
 public abstract class AbstractMultiSet<E> extends AbstractCollection<E> implements MultiSet<E> {
@@ -42,7 +42,7 @@ public abstract class AbstractMultiSet<E> extends AbstractCollection<E> implemen
     /**
      * Inner class AbstractEntry.
      *
-     * @param <E> the element type.
+     * @param <E> The element type.
      */
     protected abstract static class AbstractEntry<E> implements Entry<E> {
 
@@ -81,7 +81,7 @@ public abstract class AbstractMultiSet<E> extends AbstractCollection<E> implemen
     /**
      * Inner class EntrySet.
      *
-     * @param <E> the element type.
+     * @param <E> The element type.
      */
     protected static class EntrySet<E> extends AbstractSet<Entry<E>> {
 
@@ -90,7 +90,7 @@ public abstract class AbstractMultiSet<E> extends AbstractCollection<E> implemen
         /**
          * Constructs a new view of the MultiSet.
          *
-         * @param parent  the parent MultiSet
+         * @param parent  The parent MultiSet
          */
         protected EntrySet(final AbstractMultiSet<E> parent) {
             this.parent = parent;
@@ -147,7 +147,7 @@ public abstract class AbstractMultiSet<E> extends AbstractCollection<E> implemen
         /**
          * Constructs a new instance.
          *
-         * @param parent the parent multiset
+         * @param parent The parent multiset
          */
         MultiSetIterator(final AbstractMultiSet<E> parent) {
             this.parent = parent;
@@ -193,7 +193,7 @@ public abstract class AbstractMultiSet<E> extends AbstractCollection<E> implemen
     /**
      * Inner class UniqueSet.
      *
-     * @param <E> the element type.
+     * @param <E> The element type.
      */
     protected static class UniqueSet<E> extends AbstractSet<E> {
 
@@ -203,7 +203,7 @@ public abstract class AbstractMultiSet<E> extends AbstractCollection<E> implemen
         /**
          * Constructs a new unique element view of the MultiSet.
          *
-         * @param parent  the parent MultiSet
+         * @param parent  The parent MultiSet
          */
         protected UniqueSet(final AbstractMultiSet<E> parent) {
             this.parent = parent;
@@ -258,6 +258,13 @@ public abstract class AbstractMultiSet<E> extends AbstractCollection<E> implemen
         return true;
     }
 
+    /**
+     * Always throws {@link UnsupportedOperationException}.
+     *
+     * @param object Ignored.
+     * @param occurrences Ignored.
+     * @throws UnsupportedOperationException Always thrown.
+     */
     @Override
     public int add(final E object, final int occurrences) {
         throw new UnsupportedOperationException();
@@ -278,7 +285,7 @@ public abstract class AbstractMultiSet<E> extends AbstractCollection<E> implemen
     /**
      * Determines if the multiset contains the given element.
      *
-     * @param object the object to search for
+     * @param object The object to search for
      * @return true if the multiset contains the given element
      */
     @Override
@@ -289,7 +296,7 @@ public abstract class AbstractMultiSet<E> extends AbstractCollection<E> implemen
     /**
      * Create a new view for the set of entries in this multiset.
      *
-     * @return a view of the set of entries
+     * @return A view of the set of entries
      */
     protected Set<Entry<E>> createEntrySet() {
         return new EntrySet<>(this);
@@ -299,14 +306,14 @@ public abstract class AbstractMultiSet<E> extends AbstractCollection<E> implemen
      * Creates an entry set iterator.
      * Subclasses can override this to return iterators with different properties.
      *
-     * @return the entrySet iterator
+     * @return The entrySet iterator
      */
     protected abstract Iterator<Entry<E>> createEntrySetIterator();
 
     /**
      * Create a new view for the set of unique elements in this multiset.
      *
-     * @return a view of the set of unique elements
+     * @return A view of the set of unique elements
      */
     protected Set<E> createUniqueSet() {
         return new UniqueSet<>(this);
@@ -316,7 +323,7 @@ public abstract class AbstractMultiSet<E> extends AbstractCollection<E> implemen
      * Creates a unique set iterator.
      * Subclasses can override this to return iterators with different properties.
      *
-     * @return the uniqueSet iterator
+     * @return The uniqueSet iterator
      */
     protected Iterator<E> createUniqueSetIterator() {
         final Transformer<Entry<E>, E> transformer = Entry::getElement;
@@ -326,7 +333,7 @@ public abstract class AbstractMultiSet<E> extends AbstractCollection<E> implemen
     /**
      * Reads the multiset in using a custom routine.
      *
-     * @param in the input stream
+     * @param in The input stream
      * @throws IOException any of the usual I/O related exceptions
      * @throws ClassNotFoundException if the stream contains an object which class cannot be loaded
      * @throws ClassCastException if the stream does not contain the correct objects
@@ -345,7 +352,7 @@ public abstract class AbstractMultiSet<E> extends AbstractCollection<E> implemen
     /**
      * Writes the multiset out using a custom routine.
      *
-     * @param out the output stream
+     * @param out The output stream
      * @throws IOException any of the usual I/O related exceptions
      */
     protected void doWriteObject(final ObjectOutputStream out) throws IOException {
@@ -359,7 +366,7 @@ public abstract class AbstractMultiSet<E> extends AbstractCollection<E> implemen
     /**
      * Returns an unmodifiable view of the entries of this multiset.
      *
-     * @return the set of entries in this multiset
+     * @return The set of entries in this multiset
      */
     @Override
     public Set<Entry<E>> entrySet() {
@@ -393,8 +400,8 @@ public abstract class AbstractMultiSet<E> extends AbstractCollection<E> implemen
      * Gets the number of occurrence of the given element in this multiset by
      * iterating over its entrySet.
      *
-     * @param object the object to search for
-     * @return the number of occurrences of the object, zero if not found
+     * @param object The object to search for
+     * @return The number of occurrences of the object, zero if not found
      */
     @Override
     public int getCount(final Object object) {
@@ -416,7 +423,7 @@ public abstract class AbstractMultiSet<E> extends AbstractCollection<E> implemen
      * Gets an iterator over the multiset elements. Elements present in the
      * MultiSet more than once will be returned repeatedly.
      *
-     * @return the iterator
+     * @return The iterator
      */
     @Override
     public Iterator<E> iterator() {
@@ -428,6 +435,13 @@ public abstract class AbstractMultiSet<E> extends AbstractCollection<E> implemen
         return remove(object, 1) != 0;
     }
 
+    /**
+     * Always throws {@link UnsupportedOperationException}.
+     *
+     * @param object Ignored.
+     * @param occurrences Ignored.
+     * @throws UnsupportedOperationException Always thrown.
+     */
     @Override
     public int remove(final Object object, final int occurrences) {
         throw new UnsupportedOperationException();
@@ -461,21 +475,26 @@ public abstract class AbstractMultiSet<E> extends AbstractCollection<E> implemen
     /**
      * Returns the number of elements in this multiset.
      *
-     * @return current size of the multiset
+     * @return current size of the multiset, or {@code Integer.MAX_VALUE} if the total exceeds it.
      */
     @Override
     public int size() {
-        int totalSize = 0;
-        for (final Entry<E> entry : entrySet()) {
-            totalSize += entry.getCount();
+        // TODO reuse IterableUtils.sumToInt(Iterable, ToIntFunction)
+        int size = 0;
+        try {
+            for (final Entry<E> entry : entrySet()) {
+                size = Math.addExact(size, entry.getCount());
+            }
+        } catch (final ArithmeticException e) {
+            size = Integer.MAX_VALUE;
         }
-        return totalSize;
+        return size;
     }
 
     /**
      * Implement a toString() method suitable for debugging.
      *
-     * @return a debugging toString
+     * @return A debugging toString
      */
     @Override
     public String toString() {
@@ -485,14 +504,14 @@ public abstract class AbstractMultiSet<E> extends AbstractCollection<E> implemen
     /**
      * Returns the number of unique elements in this multiset.
      *
-     * @return the number of unique elements
+     * @return The number of unique elements
      */
     protected abstract int uniqueElements();
 
     /**
      * Returns a view of the unique elements of this multiset.
      *
-     * @return the set of unique elements in this multiset
+     * @return The set of unique elements in this multiset
      */
     @Override
     public Set<E> uniqueSet() {

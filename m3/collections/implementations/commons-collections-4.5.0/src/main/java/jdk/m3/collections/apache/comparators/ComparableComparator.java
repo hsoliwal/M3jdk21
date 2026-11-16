@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -18,14 +18,16 @@ package jdk.m3.collections.apache.comparators;
 
 import java.io.Serializable;
 import java.util.Comparator;
+import java.util.SortedMap;
+import java.util.SortedSet;
 
 /**
  * A {@link Comparator Comparator} that compares {@link Comparable Comparable}
  * objects.
  * <p>
  * This Comparator is useful, for example, for enforcing the natural order in
- * custom implementations of {@link java.util.SortedSet SortedSet} and
- * {@link java.util.SortedMap SortedMap}.
+ * custom implementations of {@link SortedSet SortedSet} and
+ * {@link SortedMap SortedMap}.
  * </p>
  * <p>
  * Note: In the 2.0 and 2.1 releases of Commons Collections, this class would
@@ -37,7 +39,7 @@ import java.util.Comparator;
  * details.
  * </p>
  *
- * @param <E> the type of objects compared by this comparator
+ * @param <E> The type of objects compared by this comparator
  * @since 2.0
  * @see java.util.Collections#reverseOrder()
  */
@@ -58,7 +60,7 @@ public class ComparableComparator<E extends Comparable<? super E>> implements Co
      * when multiple comparable comparators may be used in the same VM.
      *
      * @param <E>  the element type
-     * @return the singleton ComparableComparator
+     * @return The singleton ComparableComparator
      * @since 4.0
      */
     public static <E extends Comparable<? super E>> ComparableComparator<E> comparableComparator() {
@@ -78,8 +80,8 @@ public class ComparableComparator<E extends Comparable<? super E>> implements Co
      * This method is equivalent to:
      * <pre>((Comparable)obj1).compareTo(obj2)</pre>
      *
-     * @param obj1  the first object to compare
-     * @param obj2  the second object to compare
+     * @param obj1  The first object to compare
+     * @param obj2  The second object to compare
      * @return negative if obj1 is less, positive if greater, zero if equal
      * @throws NullPointerException if <em>obj1</em> is {@code null},
      *         or when {@code ((Comparable)obj1).compareTo(obj2)} does
@@ -100,21 +102,21 @@ public class ComparableComparator<E extends Comparable<? super E>> implements Co
      * {@code this.getClass()}. Subclasses may want to override this behavior to remain
      * consistent with the {@link Comparator#equals(Object)} contract.
      *
-     * @param object  the object to compare with
+     * @param object  The object to compare with
      * @return {@code true} if equal
      * @since 3.0
      */
     @Override
     public boolean equals(final Object object) {
         return this == object ||
-               null != object && object.getClass().equals(this.getClass());
+               object != null && object.getClass().equals(this.getClass());
     }
 
     /**
      * Implement a hash code for this comparator that is consistent with
      * {@link #equals(Object) equals}.
      *
-     * @return a hash code for this comparator.
+     * @return A hash code for this comparator.
      * @since 3.0
      */
     @Override

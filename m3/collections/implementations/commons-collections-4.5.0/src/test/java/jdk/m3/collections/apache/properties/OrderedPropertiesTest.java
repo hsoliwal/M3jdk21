@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -18,23 +18,51 @@ package jdk.m3.collections.apache.properties;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.function.Consumer;
+import java.util.stream.Stream;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 /**
  * Tests {@link OrderedProperties}.
  */
-public class OrderedPropertiesTest {
+class OrderedPropertiesTest {
+
+    /**
+     * Every way of dropping the middle mapping through the key and value views.
+     */
+    static Stream<Arguments> getViewRemovals() {
+        return Stream.of(
+                arguments("keySet().remove", (Consumer<OrderedProperties>) props -> props.keySet().remove("key2")),
+                arguments("keySet().removeAll", (Consumer<OrderedProperties>) props -> props.keySet().removeAll(Collections.singleton("key2"))),
+                arguments("keySet().iterator().remove", (Consumer<OrderedProperties>) props -> removeSecond(props.keySet().iterator())),
+                arguments("values().remove", (Consumer<OrderedProperties>) props -> props.values().remove("value2")),
+                arguments("values().iterator().remove", (Consumer<OrderedProperties>) props -> removeSecond(props.values().iterator())));
+    }
+
+    private static void removeSecond(final Iterator<Object> iterator) {
+        iterator.next();
+        iterator.next();
+        iterator.remove();
+    }
 
     private void assertAscendingOrder(final OrderedProperties orderedProperties) {
         final int first = 1;
@@ -57,6 +85,9 @@ public class OrderedPropertiesTest {
         for (int i = first; i <= last; i++) {
             assertEquals("key" + i, propertyNames.nextElement());
         }
+        final Set<String> propertyNameSet = orderedProperties.stringPropertyNames();
+        final AtomicInteger i = new AtomicInteger(first);
+        propertyNameSet.forEach(e -> assertEquals("key" + i.getAndIncrement(), e));
     }
 
     private OrderedProperties assertDescendingOrder(final OrderedProperties orderedProperties) {
@@ -80,6 +111,9 @@ public class OrderedPropertiesTest {
         for (int i = first; i <= last; i--) {
             assertEquals("key" + i, propertyNames.nextElement());
         }
+        final Set<String> propertyNameSet = orderedProperties.stringPropertyNames();
+        final AtomicInteger i = new AtomicInteger(first);
+        propertyNameSet.forEach(e -> assertEquals("key" + i.getAndDecrement(), e));
         return orderedProperties;
     }
 
@@ -91,8 +125,16 @@ public class OrderedPropertiesTest {
         return assertDescendingOrder(orderedProperties);
     }
 
+    private OrderedProperties newThreeKeyProperties() {
+        final OrderedProperties orderedProperties = new OrderedProperties();
+        orderedProperties.put("key1", "value1");
+        orderedProperties.put("key2", "value2");
+        orderedProperties.put("key3", "value3");
+        return orderedProperties;
+    }
+
     @Test
-    public void testCompute() {
+    void testCompute() {
         final OrderedProperties orderedProperties = new OrderedProperties();
         int first = 1;
         int last = 11;
@@ -112,7 +154,7 @@ public class OrderedPropertiesTest {
     }
 
     @Test
-    public void testComputeIfAbsent() {
+    void testComputeIfAbsent() {
         final OrderedProperties orderedProperties = new OrderedProperties();
         int first = 1;
         int last = 11;
@@ -132,7 +174,21 @@ public class OrderedPropertiesTest {
     }
 
     @Test
-    public void testEntrySet() {
+    void testComputeToNullRemovesKey() {
+        final OrderedProperties orderedProperties = new OrderedProperties();
+        orderedProperties.put("a", "1");
+        orderedProperties.put("b", "2");
+        // A remapping to null removes the mapping; the ordered key view must follow.
+        orderedProperties.compute("a", (k, v) -> null);
+        assertFalse(orderedProperties.containsKey("a"));
+        assertFalse(orderedProperties.keySet().contains("a"));
+        assertEquals(1, orderedProperties.size());
+        assertEquals("[b]", orderedProperties.keySet().toString());
+        assertEquals("{b=2}", orderedProperties.toString());
+    }
+
+    @Test
+    void testEntrySet() {
         final OrderedProperties orderedProperties = new OrderedProperties();
         final char first = 'Z';
         final char last = 'A';
@@ -148,7 +204,7 @@ public class OrderedPropertiesTest {
     }
 
     @Test
-    public void testForEach() {
+    void testForEach() {
         final OrderedProperties orderedProperties = new OrderedProperties();
         final char first = 'Z';
         final char last = 'A';
@@ -164,7 +220,7 @@ public class OrderedPropertiesTest {
     }
 
     @Test
-    public void testKeys() {
+    void testKeys() {
         final OrderedProperties orderedProperties = new OrderedProperties();
         final char first = 'Z';
         final char last = 'A';
@@ -178,7 +234,25 @@ public class OrderedPropertiesTest {
     }
 
     @Test
-    public void testLoadOrderedKeys() throws IOException {
+    void testKeySetRejectsAdd() {
+        final OrderedProperties orderedProperties = newThreeKeyProperties();
+        final Set<Object> keySet = orderedProperties.keySet();
+        assertThrows(UnsupportedOperationException.class, () -> keySet.add("key4"));
+        assertEquals("[key1, key2, key3]", orderedProperties.keySet().toString());
+        assertEquals("{key1=value1, key2=value2, key3=value3}", orderedProperties.toString());
+    }
+
+    @Test
+    void testKeySetRejectsAddAll() {
+        final OrderedProperties orderedProperties = newThreeKeyProperties();
+        final Set<Object> keySet = orderedProperties.keySet();
+        assertThrows(UnsupportedOperationException.class, () -> keySet.addAll(Arrays.asList("key4")));
+        assertEquals("[key1, key2, key3]", orderedProperties.keySet().toString());
+        assertEquals("{key1=value1, key2=value2, key3=value3}", orderedProperties.toString());
+    }
+
+    @Test
+    void testLoadOrderedKeys() throws IOException {
         final OrderedProperties orderedProperties = new OrderedProperties();
         try (FileReader reader = new FileReader("src/test/resources/jdk/m3/collections/apache/properties/test.properties")) {
             orderedProperties.load(reader);
@@ -187,12 +261,12 @@ public class OrderedPropertiesTest {
     }
 
     @Test
-    public void testLoadOrderedKeysReverse() throws IOException {
+    void testLoadOrderedKeysReverse() throws IOException {
         loadOrderedKeysReverse();
     }
 
     @Test
-    public void testMerge() {
+    void testMerge() {
         final OrderedProperties orderedProperties = new OrderedProperties();
         int first = 1;
         int last = 11;
@@ -210,7 +284,20 @@ public class OrderedPropertiesTest {
     }
 
     @Test
-    public void testPut() {
+    void testMergeToNullRemovesKey() {
+        final OrderedProperties orderedProperties = new OrderedProperties();
+        orderedProperties.put("a", "1");
+        orderedProperties.put("b", "2");
+        // A remapping to null removes the mapping; the ordered key view must follow.
+        orderedProperties.merge("a", "x", (oldVal, newVal) -> null);
+        assertFalse(orderedProperties.containsKey("a"));
+        assertFalse(orderedProperties.keySet().contains("a"));
+        assertEquals(1, orderedProperties.size());
+        assertEquals("{b=2}", orderedProperties.toString());
+    }
+
+    @Test
+    void testPut() {
         final OrderedProperties orderedProperties = new OrderedProperties();
         int first = 1;
         int last = 11;
@@ -228,7 +315,7 @@ public class OrderedPropertiesTest {
     }
 
     @Test
-    public void testPutAll() {
+    void testPutAll() {
         final OrderedProperties sourceProperties = new OrderedProperties();
         int first = 1;
         int last = 11;
@@ -248,7 +335,7 @@ public class OrderedPropertiesTest {
     }
 
     @Test
-    public void testPutIfAbsent() {
+    void testPutIfAbsent() {
         final OrderedProperties orderedProperties = new OrderedProperties();
         int first = 1;
         int last = 11;
@@ -266,7 +353,7 @@ public class OrderedPropertiesTest {
     }
 
     @Test
-    public void testRemoveKey() throws FileNotFoundException, IOException {
+    void testRemoveKey() throws FileNotFoundException, IOException {
         final OrderedProperties props = loadOrderedKeysReverse();
         final String k = "key1";
         props.remove(k);
@@ -277,7 +364,7 @@ public class OrderedPropertiesTest {
     }
 
     @Test
-    public void testRemoveKeyValue() throws FileNotFoundException, IOException {
+    void testRemoveKeyValue() throws FileNotFoundException, IOException {
         final OrderedProperties props = loadOrderedKeysReverse();
         final String k = "key1";
         props.remove(k, "value1");
@@ -288,7 +375,13 @@ public class OrderedPropertiesTest {
     }
 
     @Test
-    public void testToString() {
+    void testStringPropertyName() {
+        final OrderedProperties orderedProperties = new OrderedProperties();
+        assertTrue(orderedProperties.stringPropertyNames().isEmpty());
+    }
+
+    @Test
+    void testToString() {
         final OrderedProperties orderedProperties = new OrderedProperties();
         final char first = 'Z';
         final char last = 'A';
@@ -298,5 +391,17 @@ public class OrderedPropertiesTest {
         assertEquals(
                 "{Z=ValueZ, Y=ValueY, X=ValueX, W=ValueW, V=ValueV, U=ValueU, T=ValueT, S=ValueS, R=ValueR, Q=ValueQ, P=ValueP, O=ValueO, N=ValueN, M=ValueM, L=ValueL, K=ValueK, J=ValueJ, I=ValueI, H=ValueH, G=ValueG, F=ValueF, E=ValueE, D=ValueD, C=ValueC, B=ValueB, A=ValueA}",
                 orderedProperties.toString());
+    }
+
+    @ParameterizedTest(name = "{0}")
+    @MethodSource("getViewRemovals")
+    void testViewRemovalRemovesMapping(final String description, final Consumer<OrderedProperties> removal) {
+        final OrderedProperties orderedProperties = newThreeKeyProperties();
+        removal.accept(orderedProperties);
+        assertFalse(orderedProperties.containsKey("key2"));
+        assertEquals(2, orderedProperties.size());
+        assertEquals("[key1, key3]", orderedProperties.keySet().toString());
+        assertEquals("[value1, value3]", orderedProperties.values().toString());
+        assertEquals("{key1=value1, key3=value3}", orderedProperties.toString());
     }
 }

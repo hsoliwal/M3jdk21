@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -35,7 +35,7 @@ import jdk.m3.collections.apache.set.UnmodifiableSet;
  * Attempts to modify it will result in an UnsupportedOperationException.
  * </p>
  *
- * @param <E> the type held in the multiset
+ * @param <E> The type held in the multiset
  * @since 4.1
  */
 public final class UnmodifiableMultiSet<E>
@@ -51,8 +51,8 @@ public final class UnmodifiableMultiSet<E>
      * </p>
      *
      * @param <E>  the type of the elements in the multiset
-     * @param multiset  the multiset to decorate, may not be null
-     * @return an unmodifiable MultiSet
+     * @param multiset  The multiset to decorate, may not be null
+     * @return An unmodifiable MultiSet
      * @throws NullPointerException if multiset is null
      */
     public static <E> MultiSet<E> unmodifiableMultiSet(final MultiSet<? extends E> multiset) {
@@ -67,7 +67,7 @@ public final class UnmodifiableMultiSet<E>
     /**
      * Constructor that wraps (not copies).
      *
-     * @param multiset  the multiset to decorate, may not be null
+     * @param multiset  The multiset to decorate, may not be null
      * @throws NullPointerException if multiset is null
      */
     @SuppressWarnings("unchecked") // safe to upcast
@@ -75,21 +75,45 @@ public final class UnmodifiableMultiSet<E>
         super((MultiSet<E>) multiset);
     }
 
+    /**
+     * Always throws {@link UnsupportedOperationException}.
+     *
+     * @param object Ignored.
+     * @throws UnsupportedOperationException Always thrown.
+     */
     @Override
     public boolean add(final E object) {
         throw new UnsupportedOperationException();
     }
 
+    /**
+     * Always throws {@link UnsupportedOperationException}.
+     *
+     * @param object Ignored.
+     * @param count Ignored.
+     * @throws UnsupportedOperationException Always thrown.
+     */
     @Override
     public int add(final E object, final int count) {
         throw new UnsupportedOperationException();
     }
 
+    /**
+     * Always throws {@link UnsupportedOperationException}.
+     *
+     * @param coll Ignored.
+     * @throws UnsupportedOperationException Always thrown.
+     */
     @Override
     public boolean addAll(final Collection<? extends E> coll) {
         throw new UnsupportedOperationException();
     }
 
+    /**
+     * Always throws {@link UnsupportedOperationException}.
+     *
+     * @throws UnsupportedOperationException Always thrown.
+     */
     @Override
     public void clear() {
         throw new UnsupportedOperationException();
@@ -97,8 +121,7 @@ public final class UnmodifiableMultiSet<E>
 
     @Override
     public Set<MultiSet.Entry<E>> entrySet() {
-        final Set<MultiSet.Entry<E>> set = decorated().entrySet();
-        return UnmodifiableSet.unmodifiableSet(set);
+        return UnmodifiableSet.unmodifiableSet(decorated().entrySet());
     }
 
     @Override
@@ -109,8 +132,8 @@ public final class UnmodifiableMultiSet<E>
     /**
      * Deserializes the collection in using a custom routine.
      *
-     * @param in  the input stream
-     * @throws IOException if an error occurs while reading from the stream
+     * @param in  The input stream
+     * @throws IOException Thrown if an error occurs while reading from the stream
      * @throws ClassNotFoundException if an object read from the stream cannot be loaded
      * @throws ClassCastException if deserialized object has wrong type
      */
@@ -120,22 +143,45 @@ public final class UnmodifiableMultiSet<E>
         setCollection((Collection<E>) in.readObject());
     }
 
+    /**
+     * Always throws {@link UnsupportedOperationException}.
+     *
+     * @param object Ignored.
+     * @throws UnsupportedOperationException Always thrown.
+     */
     @Override
     public boolean remove(final Object object) {
         throw new UnsupportedOperationException();
     }
 
+    /**
+     * Always throws {@link UnsupportedOperationException}.
+     *
+     * @param object Ignored.
+     * @param count Ignored.
+     * @throws UnsupportedOperationException Always thrown.
+     */
     @Override
     public int remove(final Object object, final int count) {
         throw new UnsupportedOperationException();
     }
 
+    /**
+     * Always throws {@link UnsupportedOperationException}.
+     *
+     * @param coll Ignored.
+     * @throws UnsupportedOperationException Always thrown.
+     */
     @Override
     public boolean removeAll(final Collection<?> coll) {
         throw new UnsupportedOperationException();
     }
 
     /**
+     * Always throws {@link UnsupportedOperationException}.
+     *
+     * @param filter Ignored.
+     * @throws UnsupportedOperationException Always thrown.
      * @since 4.4
      */
     @Override
@@ -143,11 +189,24 @@ public final class UnmodifiableMultiSet<E>
         throw new UnsupportedOperationException();
     }
 
+    /**
+     * Always throws {@link UnsupportedOperationException}.
+     *
+     * @param coll Ignored.
+     * @throws UnsupportedOperationException Always thrown.
+     */
     @Override
     public boolean retainAll(final Collection<?> coll) {
         throw new UnsupportedOperationException();
     }
 
+    /**
+     * Always throws {@link UnsupportedOperationException}.
+     *
+     * @param object Ignored.
+     * @param count Ignored.
+     * @throws UnsupportedOperationException Always thrown.
+     */
     @Override
     public int setCount(final E object, final int count) {
         throw new UnsupportedOperationException();
@@ -155,14 +214,13 @@ public final class UnmodifiableMultiSet<E>
 
     @Override
     public Set<E> uniqueSet() {
-        final Set<E> set = decorated().uniqueSet();
-        return UnmodifiableSet.unmodifiableSet(set);
+        return UnmodifiableSet.unmodifiableSet(decorated().uniqueSet());
     }
 
     /**
      * Serializes this object to an ObjectOutputStream.
      *
-     * @param out the target ObjectOutputStream.
+     * @param out The target ObjectOutputStream.
      * @throws IOException thrown when an I/O errors occur writing to the target stream.
      */
     private void writeObject(final ObjectOutputStream out) throws IOException {

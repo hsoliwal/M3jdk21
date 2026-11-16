@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -21,8 +21,8 @@ import java.util.SortedMap;
 /**
  * {@link SortedMap} + {@link OrderedMap}.
  *
- * @param <K> the type of the keys in the map
- * @param <V> the type of the values in the map
+ * @param <K> The type of the keys in the map.
+ * @param <V> The type of the values in the map.
  * @since 4.0
  */
 public interface IterableSortedMap<K, V> extends SortedMap<K, V>, OrderedMap<K, V> {

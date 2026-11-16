@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -30,7 +30,7 @@ import jdk.m3.collections.apache.collection.TransformedCollection;
  * use the Integer form to remove objects.
  * </p>
  *
- * @param <E> the type of elements held in this queue
+ * @param <E> The type of elements held in this queue
  * @since 4.0
  */
 public class TransformedQueue<E> extends TransformedCollection<E> implements Queue<E> {
@@ -46,10 +46,10 @@ public class TransformedQueue<E> extends TransformedCollection<E> implements Que
      * will be transformed by this method.
      * Contrast this with {@link #transformingQueue(Queue, Transformer)}.
      *
-     * @param <E> the type of the elements in the queue
-     * @param queue  the queue to decorate, must not be null
-     * @param transformer  the transformer to use for conversion, must not be null
-     * @return a new transformed Queue
+     * @param <E> The type of the elements in the queue
+     * @param queue  The queue to decorate, must not be null
+     * @param transformer  The transformer to use for conversion, must not be null
+     * @return A new transformed Queue
      * @throws NullPointerException if queue or transformer is null
      * @since 4.0
      */
@@ -75,10 +75,10 @@ public class TransformedQueue<E> extends TransformedCollection<E> implements Que
      * are NOT transformed.
      * Contrast this with {@link #transformedQueue(Queue, Transformer)}.
      *
-     * @param <E> the type of the elements in the queue
-     * @param queue  the queue to decorate, must not be null
-     * @param transformer  the transformer to use for conversion, must not be null
-     * @return a new transformed Queue
+     * @param <E> The type of the elements in the queue
+     * @param queue  The queue to decorate, must not be null
+     * @param transformer  The transformer to use for conversion, must not be null
+     * @return A new transformed Queue
      * @throws NullPointerException if queue or transformer is null
      */
     public static <E> TransformedQueue<E> transformingQueue(final Queue<E> queue,
@@ -92,8 +92,8 @@ public class TransformedQueue<E> extends TransformedCollection<E> implements Que
      * If there are any elements already in the queue being decorated, they
      * are NOT transformed.
      *
-     * @param queue  the queue to decorate, must not be null
-     * @param transformer  the transformer to use for conversion, must not be null
+     * @param queue  The queue to decorate, must not be null
+     * @param transformer  The transformer to use for conversion, must not be null
      * @throws NullPointerException if queue or transformer is null
      */
     protected TransformedQueue(final Queue<E> queue, final Transformer<? super E, ? extends E> transformer) {
@@ -108,7 +108,7 @@ public class TransformedQueue<E> extends TransformedCollection<E> implements Que
     /**
      * Gets the decorated queue.
      *
-     * @return the decorated queue
+     * @return The decorated queue
      */
     protected Queue<E> getQueue() {
         return (Queue<E>) decorated();

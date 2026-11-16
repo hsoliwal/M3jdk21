@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -20,6 +20,7 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.ListIterator;
 import java.util.Map;
+import java.util.NavigableMap;
 import java.util.Set;
 import java.util.SortedMap;
 
@@ -41,8 +42,8 @@ import jdk.m3.collections.apache.iterators.ListIteratorWrapper;
  * But, you might want that loophole, so this class is kept simple.
  * </p>
  *
- * @param <K> the type of the keys in the map
- * @param <V> the type of the values in the map
+ * @param <K> The type of the keys in the map
+ * @param <V> The type of the values in the map
  * @since 3.0
  */
 public abstract class AbstractSortedMapDecorator<K, V> extends AbstractMapDecorator<K, V> implements
@@ -59,7 +60,8 @@ public abstract class AbstractSortedMapDecorator<K, V> extends AbstractMapDecora
 
         /**
          * Create a new AbstractSortedMapDecorator.SortedMapIterator.
-         * @param entrySet  the entrySet to iterate
+         *
+         * @param entrySet  The entrySet to iterate
          */
         protected SortedMapIterator(final Set<Map.Entry<K, V>> entrySet) {
             super(entrySet);
@@ -94,6 +96,7 @@ public abstract class AbstractSortedMapDecorator<K, V> extends AbstractMapDecora
 
     /**
      * Constructor only used in deserialization, do not use otherwise.
+     *
      * @since 3.1
      */
     protected AbstractSortedMapDecorator() {
@@ -102,7 +105,7 @@ public abstract class AbstractSortedMapDecorator<K, V> extends AbstractMapDecora
     /**
      * Constructor that wraps (not copies).
      *
-     * @param map  the map to decorate, must not be null
+     * @param map  The map to decorate, must not be null
      * @throws NullPointerException if the map is null
      */
     public AbstractSortedMapDecorator(final SortedMap<K, V> map) {
@@ -117,7 +120,7 @@ public abstract class AbstractSortedMapDecorator<K, V> extends AbstractMapDecora
     /**
      * Gets the map being decorated.
      *
-     * @return the decorated map
+     * @return The decorated map
      */
     @Override
     protected SortedMap<K, V> decorated() {
@@ -149,6 +152,13 @@ public abstract class AbstractSortedMapDecorator<K, V> extends AbstractMapDecora
 
     @Override
     public K nextKey(final K key) {
+        if (!containsKey(key)) {
+            return null;
+        }
+        final SortedMap<K, V> map = decorated();
+        if (map instanceof NavigableMap) {
+            return ((NavigableMap<K, V>) map).higherKey(key);
+        }
         final Iterator<K> it = tailMap(key).keySet().iterator();
         it.next();
         return it.hasNext() ? it.next() : null;

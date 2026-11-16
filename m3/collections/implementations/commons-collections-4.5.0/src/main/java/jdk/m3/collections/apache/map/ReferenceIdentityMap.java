@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -21,6 +21,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.lang.ref.Reference;
+import java.util.Map;
 
 /**
  * A {@code Map} implementation that allows mappings to be
@@ -41,7 +42,7 @@ import java.lang.ref.Reference;
  * </p>
  * <p>
  * This map is similar to
- * {@link jdk.m3.collections.apache.map.ReferenceMap ReferenceMap}.
+ * {@link ReferenceMap ReferenceMap}.
  * It differs in that keys and values in this class are compared using {@code ==}.
  * </p>
  * <p>
@@ -49,7 +50,7 @@ import java.lang.ref.Reference;
  * As a general rule, don't compare this map to other maps.
  * </p>
  * <p>
- * This {@link java.util.Map Map} implementation does <em>not</em> allow null elements.
+ * This {@link Map Map} implementation does <em>not</em> allow null elements.
  * Attempting to add a null key or value to the map will raise a {@code NullPointerException}.
  * </p>
  * <p>
@@ -70,8 +71,8 @@ import java.lang.ref.Reference;
  * exceptions when accessed by concurrent threads without synchronization.
  * </p>
  *
- * @param <K> the type of the keys in this map
- * @param <V> the type of the values in this map
+ * @param <K> The type of the keys in this map
+ * @param <V> The type of the values in this map
  * @see java.lang.ref.Reference
  * @since 3.0 (previously in main package v2.1)
  */
@@ -93,11 +94,11 @@ public class ReferenceIdentityMap<K, V> extends AbstractReferenceMap<K, V> imple
      * Constructs a new {@code ReferenceIdentityMap} that will
      * use the specified types of references.
      *
-     * @param keyType  the type of reference to use for keys;
+     * @param keyType  The type of reference to use for keys;
      *   must be {@link AbstractReferenceMap.ReferenceStrength#HARD HARD},
      *   {@link AbstractReferenceMap.ReferenceStrength#SOFT SOFT},
      *   {@link AbstractReferenceMap.ReferenceStrength#WEAK WEAK}
-     * @param valueType  the type of reference to use for values;
+     * @param valueType  The type of reference to use for values;
      *   must be {@link AbstractReferenceMap.ReferenceStrength#HARD HARD},
      *   {@link AbstractReferenceMap.ReferenceStrength#SOFT SOFT},
      *   {@link AbstractReferenceMap.ReferenceStrength#WEAK WEAK}
@@ -110,11 +111,11 @@ public class ReferenceIdentityMap<K, V> extends AbstractReferenceMap<K, V> imple
      * Constructs a new {@code ReferenceIdentityMap} that will
      * use the specified types of references.
      *
-     * @param keyType  the type of reference to use for keys;
+     * @param keyType  The type of reference to use for keys;
      *   must be {@link AbstractReferenceMap.ReferenceStrength#HARD HARD},
      *   {@link AbstractReferenceMap.ReferenceStrength#SOFT SOFT},
      *   {@link AbstractReferenceMap.ReferenceStrength#WEAK WEAK}
-     * @param valueType  the type of reference to use for values;
+     * @param valueType  The type of reference to use for values;
      *   must be {@link AbstractReferenceMap.ReferenceStrength#HARD HARD},
      *   {@link AbstractReferenceMap.ReferenceStrength#SOFT SOFT},
      *   {@link AbstractReferenceMap.ReferenceStrength#WEAK WEAK}
@@ -130,16 +131,16 @@ public class ReferenceIdentityMap<K, V> extends AbstractReferenceMap<K, V> imple
      * Constructs a new {@code ReferenceIdentityMap} with the
      * specified reference types, load factor and initial capacity.
      *
-     * @param keyType  the type of reference to use for keys;
+     * @param keyType  The type of reference to use for keys;
      *   must be {@link AbstractReferenceMap.ReferenceStrength#HARD HARD},
      *   {@link AbstractReferenceMap.ReferenceStrength#SOFT SOFT},
      *   {@link AbstractReferenceMap.ReferenceStrength#WEAK WEAK}
-     * @param valueType  the type of reference to use for values;
+     * @param valueType  The type of reference to use for values;
      *   must be {@link AbstractReferenceMap.ReferenceStrength#HARD HARD},
      *   {@link AbstractReferenceMap.ReferenceStrength#SOFT SOFT},
      *   {@link AbstractReferenceMap.ReferenceStrength#WEAK WEAK}
-     * @param capacity  the initial capacity for the map
-     * @param loadFactor  the load factor for the map
+     * @param capacity  The initial capacity for the map
+     * @param loadFactor  The load factor for the map
      */
     public ReferenceIdentityMap(final ReferenceStrength keyType, final ReferenceStrength valueType,
             final int capacity, final float loadFactor) {
@@ -150,16 +151,16 @@ public class ReferenceIdentityMap<K, V> extends AbstractReferenceMap<K, V> imple
      * Constructs a new {@code ReferenceIdentityMap} with the
      * specified reference types, load factor and initial capacity.
      *
-     * @param keyType  the type of reference to use for keys;
+     * @param keyType  The type of reference to use for keys;
      *   must be {@link AbstractReferenceMap.ReferenceStrength#HARD HARD},
      *   {@link AbstractReferenceMap.ReferenceStrength#SOFT SOFT},
      *   {@link AbstractReferenceMap.ReferenceStrength#WEAK WEAK}
-     * @param valueType  the type of reference to use for values;
+     * @param valueType  The type of reference to use for values;
      *   must be {@link AbstractReferenceMap.ReferenceStrength#HARD HARD},
      *   {@link AbstractReferenceMap.ReferenceStrength#SOFT SOFT},
      *   {@link AbstractReferenceMap.ReferenceStrength#WEAK WEAK}
-     * @param capacity  the initial capacity for the map
-     * @param loadFactor  the load factor for the map
+     * @param capacity  The initial capacity for the map
+     * @param loadFactor  The load factor for the map
      * @param purgeValues  should the value be automatically purged when the
      *   key is garbage collected
      */
@@ -174,8 +175,8 @@ public class ReferenceIdentityMap<K, V> extends AbstractReferenceMap<K, V> imple
      * This implementation uses the identity hash code.
      * </p>
      *
-     * @param key  the key to get a hash code for
-     * @return the hash code
+     * @param key  The key to get a hash code for
+     * @return The hash code
      */
     @Override
     protected int hash(final Object key) {
@@ -188,9 +189,9 @@ public class ReferenceIdentityMap<K, V> extends AbstractReferenceMap<K, V> imple
      * This implementation uses the identity hash code.
      * </p>
      *
-     * @param key  the key to get a hash code for, may be null
-     * @param value  the value to get a hash code for, may be null
-     * @return the hash code, as per the MapEntry specification
+     * @param key  The key to get a hash code for, may be null
+     * @param value  The value to get a hash code for, may be null
+     * @return The hash code, as per the MapEntry specification
      */
     @Override
     protected int hashEntry(final Object key, final Object value) {
@@ -205,8 +206,8 @@ public class ReferenceIdentityMap<K, V> extends AbstractReferenceMap<K, V> imple
      * before comparison and uses {@code ==}.
      * </p>
      *
-     * @param key1  the first key to compare passed in from outside
-     * @param key2  the second key extracted from the entry via {@code entry.key}
+     * @param key1  The first key to compare passed in from outside
+     * @param key2  The second key extracted from the entry via {@code entry.key}
      * @return true if equal by identity
      */
     @Override
@@ -221,8 +222,8 @@ public class ReferenceIdentityMap<K, V> extends AbstractReferenceMap<K, V> imple
      * This implementation uses {@code ==}.
      * </p>
      *
-     * @param value1  the first value to compare passed in from outside
-     * @param value2  the second value extracted from the entry via {@code getValue()}
+     * @param value1  The first value to compare passed in from outside
+     * @param value2  The second value extracted from the entry via {@code getValue()}
      * @return true if equal by identity
      */
     @Override
@@ -233,8 +234,8 @@ public class ReferenceIdentityMap<K, V> extends AbstractReferenceMap<K, V> imple
     /**
      * Deserializes the map in using a custom routine.
      *
-     * @param in the input stream
-     * @throws IOException if an error occurs while reading from the stream
+     * @param in The input stream
+     * @throws IOException Thrown if an error occurs while reading from the stream
      * @throws ClassNotFoundException if an object read from the stream cannot be loaded
      */
     private void readObject(final ObjectInputStream in) throws IOException, ClassNotFoundException {
@@ -245,7 +246,7 @@ public class ReferenceIdentityMap<K, V> extends AbstractReferenceMap<K, V> imple
     /**
      * Serializes this object to an ObjectOutputStream.
      *
-     * @param out the target ObjectOutputStream.
+     * @param out The target ObjectOutputStream.
      * @throws IOException thrown when an I/O errors occur writing to the target stream.
      */
     private void writeObject(final ObjectOutputStream out) throws IOException {

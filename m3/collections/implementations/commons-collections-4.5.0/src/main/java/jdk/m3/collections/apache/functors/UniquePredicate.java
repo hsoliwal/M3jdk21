@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -26,7 +26,7 @@ import jdk.m3.collections.apache.Predicate;
  * Predicate implementation that returns true the first time an object is
  * passed into the predicate.
  *
- * @param <T> the type of the input to the predicate.
+ * @param <T> The type of the input to the predicate.
  * @since 3.0
  */
 public final class UniquePredicate<T>  extends AbstractPredicate<T> implements Serializable {
@@ -37,8 +37,8 @@ public final class UniquePredicate<T>  extends AbstractPredicate<T> implements S
     /**
      * Creates the predicate.
      *
-     * @param <T> the type that the predicate queries
-     * @return the predicate
+     * @param <T> The type that the predicate queries
+     * @return The predicate
      * @throws IllegalArgumentException if the predicate is null
      */
     public static <T> Predicate<T> uniquePredicate() {
@@ -59,7 +59,7 @@ public final class UniquePredicate<T>  extends AbstractPredicate<T> implements S
      * Evaluates the predicate returning true if the input object hasn't been
      * received yet.
      *
-     * @param object  the input object
+     * @param object  The input object
      * @return true if this is the first time the object is seen
      */
     @Override

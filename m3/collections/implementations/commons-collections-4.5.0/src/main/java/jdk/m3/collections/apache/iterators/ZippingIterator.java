@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,13 +16,9 @@
  */
 package jdk.m3.collections.apache.iterators;
 
-import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Objects;
-
-import jdk.m3.collections.apache.FluentIterable;
 
 /**
  * Provides an interleaved iteration over the elements contained in a
@@ -33,13 +29,31 @@ import jdk.m3.collections.apache.FluentIterable;
  * and {@code B.next()} until both iterators are exhausted.
  * </p>
  *
- * @param <E> the type of elements returned by this iterator.
+ * @param <E> The type of elements returned by this iterator.
  * @since 4.1
  */
 public class ZippingIterator<E> implements Iterator<E> {
 
-    /** The {@link Iterator}s to evaluate. */
-    private final Iterator<Iterator<? extends E>> iterators;
+    /** The child iterators, indexed by stable slots. Exhausted slots are cleared. */
+    private final Iterator<? extends E>[] iterators;
+
+    /** The next live slot in the circular chain. */
+    private final int[] nextIndices;
+
+    /** The next slot to probe. */
+    private int currentIndex;
+
+    /** The live predecessor of the next slot to probe. */
+    private int previousIndex;
+
+    /** The number of child slots still in the circular chain. */
+    private int remaining;
+
+    /** The last examined slot, also shared by reentrant child callbacks. */
+    private int lastExaminedIndex = -1;
+
+    /** The predecessor of the last examined slot. */
+    private int lastExaminedPredecessor;
 
     /** The next iterator to use for next(). */
     private Iterator<? extends E> nextIterator;
@@ -51,46 +65,57 @@ public class ZippingIterator<E> implements Iterator<E> {
      * Constructs a new {@code ZippingIterator} that will provide
      * interleaved iteration of the specified iterators.
      *
-     * @param iterators  the array of iterators
+     * @param iterators  The array of iterators
      * @throws NullPointerException if any iterator is null
      */
     public ZippingIterator(final Iterator<? extends E>... iterators) {
-        // create a mutable list to be able to remove exhausted iterators
-        final List<Iterator<? extends E>> list = new ArrayList<>();
-        for (final Iterator<? extends E> iterator : iterators) {
-            Objects.requireNonNull(iterator, "iterator");
-            list.add(iterator);
+        this(iterators, true);
+    }
+
+    /**
+     * Caller-owned varargs are copied; privately created two/three-argument
+     * arrays are already exclusively owned and need not be copied again.
+     */
+    private ZippingIterator(final Iterator<? extends E>[] iterators,
+                            final boolean snapshotCallerArray) {
+        final int length = iterators.length;
+        this.iterators = snapshotCallerArray ? iterators.clone() : iterators;
+        nextIndices = new int[length];
+        for (int i = 0; i < length; i++) {
+            Objects.requireNonNull(this.iterators[i], "iterator");
+            nextIndices[i] = i + 1 == length ? 0 : i + 1;
         }
-        this.iterators = FluentIterable.of(list).loop().iterator();
+        remaining = length;
+        previousIndex = length - 1;
     }
 
     /**
      * Constructs a new {@code ZippingIterator} that will provide
      * interleaved iteration over the two given iterators.
      *
-     * @param a  the first child iterator
-     * @param b  the second child iterator
+     * @param a  The first child iterator
+     * @param b  The second child iterator
      * @throws NullPointerException if either iterator is null
      */
     @SuppressWarnings("unchecked")
     public ZippingIterator(final Iterator<? extends E> a, final Iterator<? extends E> b) {
-        this(new Iterator[] {a, b});
+        this(new Iterator[] {a, b}, false);
     }
 
     /**
      * Constructs a new {@code ZippingIterator} that will provide
      * interleaved iteration over the three given iterators.
      *
-     * @param a  the first child iterator
-     * @param b  the second child iterator
-     * @param c  the third child iterator
+     * @param a  The first child iterator
+     * @param b  The second child iterator
+     * @param c  The third child iterator
      * @throws NullPointerException if either iterator is null
      */
     @SuppressWarnings("unchecked")
     public ZippingIterator(final Iterator<? extends E> a,
                            final Iterator<? extends E> b,
                            final Iterator<? extends E> c) {
-        this(new Iterator[] {a, b, c});
+        this(new Iterator[] {a, b, c}, false);
     }
 
     /**
@@ -106,14 +131,26 @@ public class ZippingIterator<E> implements Iterator<E> {
             return true;
         }
 
-        while (iterators.hasNext()) {
-            final Iterator<? extends E> childIterator = iterators.next();
+        while (remaining != 0) {
+            final Iterator<? extends E> childIterator = iterators[currentIndex];
+            lastExaminedIndex = currentIndex;
+            lastExaminedPredecessor = previousIndex;
+            // Advance before invoking user code, including when hasNext() throws.
+            currentIndex = nextIndices[currentIndex];
+            previousIndex = lastExaminedIndex;
             if (childIterator.hasNext()) {
                 nextIterator = childIterator;
                 return true;
             }
-            // iterator is exhausted, remove it
-            iterators.remove();
+            // Match the shared cursor's remove state after a reentrant callback.
+            if (lastExaminedIndex == -1) {
+                throw new IllegalStateException();
+            }
+            nextIndices[lastExaminedPredecessor] = currentIndex;
+            previousIndex = lastExaminedPredecessor;
+            iterators[lastExaminedIndex] = null;
+            lastExaminedIndex = -1;
+            remaining--;
         }
         return false;
     }
@@ -121,7 +158,7 @@ public class ZippingIterator<E> implements Iterator<E> {
     /**
      * Returns the next element from a child iterator.
      *
-     * @return the next interleaved element
+     * @return The next interleaved element
      * @throws NoSuchElementException if no child iterator has any more elements
      */
     @Override

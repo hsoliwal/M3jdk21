@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -41,21 +41,21 @@ import org.junit.jupiter.api.Test;
  * overriding the supportsXxx() methods if necessary.
  * </p>
  *
- * @param <E> the type of elements tested by this iterator.
+ * @param <E> The type of elements tested by this iterator.
  */
 public abstract class AbstractIteratorTest<E> extends AbstractObjectTest {
 
     /**
      * Implement this method to return an iterator over an empty collection.
      *
-     * @return an empty iterator
+     * @return An empty iterator
      */
     public abstract Iterator<E> makeEmptyIterator();
 
     /**
      * Implements the abstract superclass method to return the full iterator.
      *
-     * @return a full iterator
+     * @return A full iterator
      */
     @Override
     public abstract Iterator<E> makeObject();
@@ -94,7 +94,7 @@ public abstract class AbstractIteratorTest<E> extends AbstractObjectTest {
      * Test the empty iterator.
      */
     @Test
-    public void testEmptyIterator() {
+    void testEmptyIterator() {
         if (!supportsEmptyIterator()) {
             return;
         }
@@ -116,7 +116,7 @@ public abstract class AbstractIteratorTest<E> extends AbstractObjectTest {
      * Tests {@link Iterator#forEachRemaining(java.util.function.Consumer)}.
      */
     @Test
-    public void testForEachRemaining() {
+    void testForEachRemaining() {
         final List<E> expected = IteratorUtils.toList(makeObject());
         final Iterator<E> it = makeObject();
         final List<E> actual = new ArrayList<>();
@@ -128,7 +128,7 @@ public abstract class AbstractIteratorTest<E> extends AbstractObjectTest {
      * Test normal iteration behavior.
      */
     @Test
-    public void testFullIterator() {
+    void testFullIterator() {
         if (!supportsFullIterator()) {
             return;
         }
@@ -158,7 +158,7 @@ public abstract class AbstractIteratorTest<E> extends AbstractObjectTest {
      * Test remove behavior.
      */
     @Test
-    public void testRemove() {
+    void testRemove() {
         final Iterator<E> it = makeObject();
 
         if (!supportsRemove()) {

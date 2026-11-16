@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -14,19 +14,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+// Modified 2026 by Hitesh Soliwal and contributors: direct reference-array reads with reflective fallbacks.
+// Modified 2026 by Synexia contributors: direct Java-8 primitive array lanes.
 package jdk.m3.collections.apache.iterators;
 
 import java.lang.reflect.Array;
+import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 import jdk.m3.collections.apache.ResettableIterator;
 
 /**
- * Implements an {@link java.util.Iterator Iterator} over any array.
+ * Implements an {@link Iterator Iterator} over any array.
  * <p>
  * The array can be either an array of object or of primitives. If you know
  * that you have an object array, the
- * {@link jdk.m3.collections.apache.iterators.ObjectArrayIterator ObjectArrayIterator}
+ * {@link ObjectArrayIterator ObjectArrayIterator}
  * class is a better choice, as it will perform better.
  * </p>
  * <p>
@@ -34,17 +37,20 @@ import jdk.m3.collections.apache.ResettableIterator;
  * the iterator back to the start if required.
  * </p>
  *
- * @param <E> the type of elements returned by this iterator.
+ * @param <E> The type of elements returned by this iterator.
  * @since 1.0
  */
 public class ArrayIterator<E> implements ResettableIterator<E> {
 
     /** The array to iterate over */
     final Object array;
+
     /** The start index to loop from */
     final int startIndex;
+
     /** The end index to loop to */
     final int endIndex;
+
     /** The current iterator index */
     int index;
 
@@ -52,7 +58,7 @@ public class ArrayIterator<E> implements ResettableIterator<E> {
      * Constructs an ArrayIterator that will iterate over the values in the
      * specified array.
      *
-     * @param array the array to iterate over.
+     * @param array The array to iterate over.
      * @throws IllegalArgumentException if {@code array} is not an array.
      * @throws NullPointerException if {@code array} is {@code null}
      */
@@ -64,8 +70,8 @@ public class ArrayIterator<E> implements ResettableIterator<E> {
      * Constructs an ArrayIterator that will iterate over the values in the
      * specified array from a specific start index.
      *
-     * @param array  the array to iterate over.
-     * @param startIndex  the index to start iterating at.
+     * @param array  The array to iterate over.
+     * @param startIndex  The index to start iterating at.
      * @throws IllegalArgumentException if {@code array} is not an array.
      * @throws NullPointerException if {@code array} is {@code null}
      * @throws IndexOutOfBoundsException if the index is invalid
@@ -78,9 +84,9 @@ public class ArrayIterator<E> implements ResettableIterator<E> {
      * Constructs an ArrayIterator that will iterate over a range of values
      * in the specified array.
      *
-     * @param array  the array to iterate over.
-     * @param startIndex  the index to start iterating at.
-     * @param endIndex  the index to finish iterating at.
+     * @param array  The array to iterate over.
+     * @param startIndex  The index to start iterating at.
+     * @param endIndex  The index to finish iterating at.
      * @throws IllegalArgumentException if {@code array} is not an array.
      * @throws NullPointerException if {@code array} is {@code null}
      * @throws IndexOutOfBoundsException if either index is invalid
@@ -102,9 +108,9 @@ public class ArrayIterator<E> implements ResettableIterator<E> {
     /**
      * Checks whether the index is valid or not.
      *
-     * @param bound  the index to check
-     * @param len  the length of the array
-     * @param type  the index type (for error messages)
+     * @param bound  The index to check
+     * @param len  The length of the array
+     * @param type  The index type (for error messages)
      * @throws IndexOutOfBoundsException if the index is invalid
      */
     protected void checkBound(final int bound, final int len, final String type) {
@@ -119,7 +125,7 @@ public class ArrayIterator<E> implements ResettableIterator<E> {
     /**
      * Gets the array that this iterator is iterating over.
      *
-     * @return the array this iterator iterates over.
+     * @return The array this iterator iterates over.
      */
     public Object getArray() {
         return array;
@@ -128,7 +134,7 @@ public class ArrayIterator<E> implements ResettableIterator<E> {
     /**
      * Gets the end index to loop to.
      *
-     * @return the end index
+     * @return The end index
      * @since 4.0
      */
     public int getEndIndex() {
@@ -138,7 +144,7 @@ public class ArrayIterator<E> implements ResettableIterator<E> {
     /**
      * Gets the start index to loop from.
      *
-     * @return the start index
+     * @return The start index
      * @since 4.0
      */
     public int getStartIndex() {
@@ -158,7 +164,7 @@ public class ArrayIterator<E> implements ResettableIterator<E> {
     /**
      * Returns the next element in the array.
      *
-     * @return the next element in the array
+     * @return The next element in the array
      * @throws NoSuchElementException if all the elements in the array
      *  have already been returned
      */
@@ -168,13 +174,87 @@ public class ArrayIterator<E> implements ResettableIterator<E> {
         if (!hasNext()) {
             throw new NoSuchElementException();
         }
+        if (array instanceof Object[]) {
+            final Object[] values = (Object[]) array;
+            if (index >= 0 && index < values.length) {
+                return (E) values[index++];
+            }
+        }
+        // Constructor-validated primitive ranges use direct typed loads.
+        // Overridden hasNext() and package-local cursor corruption can admit
+        // an invalid index: retain the original Array.get exception message.
+        if (index >= 0 && index < endIndex) {
+            return (E) primitiveAt(array, index++);
+        }
         return (E) Array.get(array, index++);
     }
 
     /**
-     * Throws {@link UnsupportedOperationException}.
+     * Read all eight primitive array kinds through direct typed lanes, avoiding
+     * java.lang.reflect.Array.get and retaining its boxing types. Callers only
+     * use this while a constructor-validated index remains within the slice;
+     * overridden bounds callbacks still delegate to Array.get for failures.
+     */
+    static Object primitiveAt(final Object source, final int position) {
+        if (source instanceof int[]) {
+            return ((int[]) source)[position];
+        }
+        if (source instanceof long[]) {
+            return ((long[]) source)[position];
+        }
+        if (source instanceof double[]) {
+            return ((double[]) source)[position];
+        }
+        if (source instanceof float[]) {
+            return ((float[]) source)[position];
+        }
+        if (source instanceof short[]) {
+            return ((short[]) source)[position];
+        }
+        if (source instanceof char[]) {
+            return ((char[]) source)[position];
+        }
+        if (source instanceof byte[]) {
+            return ((byte[]) source)[position];
+        }
+        if (source instanceof boolean[]) {
+            return ((boolean[]) source)[position];
+        }
+        return Array.get(source, position);
+    }
+
+    /**
+     * Exact boxed writes skip reflection; widening conversions, nulls and
+     * incompatible payloads intentionally fall back to Array.set in the caller.
+     * A caller must establish that the index is valid before invoking this.
+     */
+    static boolean writePrimitive(final Object source, final int position, final Object value) {
+        if (source instanceof int[] && value instanceof Integer) {
+            ((int[]) source)[position] = (Integer) value;
+        } else if (source instanceof long[] && value instanceof Long) {
+            ((long[]) source)[position] = (Long) value;
+        } else if (source instanceof double[] && value instanceof Double) {
+            ((double[]) source)[position] = (Double) value;
+        } else if (source instanceof float[] && value instanceof Float) {
+            ((float[]) source)[position] = (Float) value;
+        } else if (source instanceof short[] && value instanceof Short) {
+            ((short[]) source)[position] = (Short) value;
+        } else if (source instanceof char[] && value instanceof Character) {
+            ((char[]) source)[position] = (Character) value;
+        } else if (source instanceof byte[] && value instanceof Byte) {
+            ((byte[]) source)[position] = (Byte) value;
+        } else if (source instanceof boolean[] && value instanceof Boolean) {
+            ((boolean[]) source)[position] = (Boolean) value;
+        } else {
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * Always throws {@link UnsupportedOperationException}.
      *
-     * @throws UnsupportedOperationException always
+     * @throws UnsupportedOperationException Always thrown.
      */
     @Override
     public void remove() {

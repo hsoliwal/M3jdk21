@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -59,8 +59,8 @@ import jdk.m3.collections.apache.Transformer;
  * This class is Serializable from Commons Collections 3.1.
  * </p>
  *
- * @param <K> the type of the keys in this map
- * @param <V> the type of the values in this map
+ * @param <K> The type of the keys in this map
+ * @param <V> The type of the values in this map
  * @since 3.0
  */
 public class LazySortedMap<K, V> extends LazyMap<K, V> implements SortedMap<K, V> {
@@ -73,9 +73,9 @@ public class LazySortedMap<K, V> extends LazyMap<K, V> implements SortedMap<K, V
      *
      * @param <K>  the key type
      * @param <V>  the value type
-     * @param map  the map to decorate, must not be null
-     * @param factory  the factory to use, must not be null
-     * @return a new lazy sorted map
+     * @param map  The map to decorate, must not be null
+     * @param factory  The factory to use, must not be null
+     * @return A new lazy sorted map
      * @throws NullPointerException if map or factory is null
      * @since 4.0
      */
@@ -89,9 +89,9 @@ public class LazySortedMap<K, V> extends LazyMap<K, V> implements SortedMap<K, V
      *
      * @param <K>  the key type
      * @param <V>  the value type
-     * @param map  the map to decorate, must not be null
-     * @param factory  the factory to use, must not be null
-     * @return a new lazy sorted map
+     * @param map  The map to decorate, must not be null
+     * @param factory  The factory to use, must not be null
+     * @return A new lazy sorted map
      * @throws NullPointerException if map or factory is null
      * @since 4.0
      */
@@ -103,8 +103,8 @@ public class LazySortedMap<K, V> extends LazyMap<K, V> implements SortedMap<K, V
     /**
      * Constructor that wraps (not copies).
      *
-     * @param map  the map to decorate, must not be null
-     * @param factory  the factory to use, must not be null
+     * @param map  The map to decorate, must not be null
+     * @param factory  The factory to use, must not be null
      * @throws NullPointerException if map or factory is null
      */
     protected LazySortedMap(final SortedMap<K, V> map, final Factory<? extends V> factory) {
@@ -114,8 +114,8 @@ public class LazySortedMap<K, V> extends LazyMap<K, V> implements SortedMap<K, V
     /**
      * Constructor that wraps (not copies).
      *
-     * @param map  the map to decorate, must not be null
-     * @param factory  the factory to use, must not be null
+     * @param map  The map to decorate, must not be null
+     * @param factory  The factory to use, must not be null
      * @throws NullPointerException if map or factory is null
      */
     protected LazySortedMap(final SortedMap<K, V> map, final Transformer<? super K, ? extends V> factory) {
@@ -135,7 +135,7 @@ public class LazySortedMap<K, V> extends LazyMap<K, V> implements SortedMap<K, V
     /**
      * Gets the map being decorated.
      *
-     * @return the decorated map
+     * @return The decorated map
      */
     protected SortedMap<K, V> getSortedMap() {
         return (SortedMap<K, V>) map;

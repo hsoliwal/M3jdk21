@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -24,6 +24,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 
+import jdk.m3.collections.apache.MultiMapUtils;
 import jdk.m3.collections.apache.MultiValuedMap;
 
 /**
@@ -37,8 +38,8 @@ import jdk.m3.collections.apache.MultiValuedMap;
  * exceptions when accessed by concurrent threads without synchronization.
  * </p>
  *
- * @param <K> the type of the keys in this map
- * @param <V> the type of the values in this map
+ * @param <K> The type of the keys in this map
+ * @param <V> The type of the values in this map
  * @since 4.1
  */
 public class HashSetValuedHashMap<K, V> extends AbstractSetValuedMap<K, V>
@@ -74,7 +75,7 @@ public class HashSetValuedHashMap<K, V> extends AbstractSetValuedMap<K, V>
      * Creates an empty HashSetValuedHashMap with the default initial
      * map capacity (16) and the specified initial set capacity.
      *
-     * @param initialSetCapacity  the initial capacity used for value collections
+     * @param initialSetCapacity  The initial capacity used for value collections
      */
     public HashSetValuedHashMap(final int initialSetCapacity) {
         this(DEFAULT_INITIAL_MAP_CAPACITY, initialSetCapacity);
@@ -84,8 +85,8 @@ public class HashSetValuedHashMap<K, V> extends AbstractSetValuedMap<K, V>
      * Creates an empty HashSetValuedHashMap with the specified initial
      * map and list capacities.
      *
-     * @param initialMapCapacity  the initial hashmap capacity
-     * @param initialSetCapacity  the initial capacity used for value collections
+     * @param initialMapCapacity  The initial hashmap capacity
+     * @param initialSetCapacity  The initial capacity used for value collections
      */
     public HashSetValuedHashMap(final int initialMapCapacity, final int initialSetCapacity) {
         super(new HashMap<>(initialMapCapacity));
@@ -95,7 +96,7 @@ public class HashSetValuedHashMap<K, V> extends AbstractSetValuedMap<K, V>
     /**
      * Creates an HashSetValuedHashMap copying all the mappings of the given map.
      *
-     * @param map a {@code Map} to copy into this map
+     * @param map A {@code Map} to copy into this map
      */
     public HashSetValuedHashMap(final Map<? extends K, ? extends V> map) {
         this(map.size(), DEFAULT_INITIAL_SET_CAPACITY);
@@ -105,7 +106,7 @@ public class HashSetValuedHashMap<K, V> extends AbstractSetValuedMap<K, V>
     /**
      * Creates an HashSetValuedHashMap copying all the mappings of the given map.
      *
-     * @param map a {@code MultiValuedMap} to copy into this map
+     * @param map A {@code MultiValuedMap} to copy into this map
      */
     public HashSetValuedHashMap(final MultiValuedMap<? extends K, ? extends V> map) {
         this(map.size(), DEFAULT_INITIAL_SET_CAPACITY);
@@ -115,6 +116,11 @@ public class HashSetValuedHashMap<K, V> extends AbstractSetValuedMap<K, V>
     @Override
     protected HashSet<V> createCollection() {
         return new HashSet<>(initialSetCapacity);
+    }
+
+    @Override
+    public HashSetValuedHashMap<V, K> inverted() {
+        return MultiMapUtils.invert(this, new HashSetValuedHashMap<V, K>());
     }
 
     /**
@@ -133,7 +139,7 @@ public class HashSetValuedHashMap<K, V> extends AbstractSetValuedMap<K, V>
     /**
      * Serializes this object to an ObjectOutputStream.
      *
-     * @param out the target ObjectOutputStream.
+     * @param out The target ObjectOutputStream.
      * @throws IOException thrown when an I/O errors occur writing to the target stream.
      */
     private void writeObject(final ObjectOutputStream out) throws IOException {

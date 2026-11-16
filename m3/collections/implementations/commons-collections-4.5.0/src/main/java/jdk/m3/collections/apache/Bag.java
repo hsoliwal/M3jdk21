@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -40,10 +40,38 @@ import java.util.Set;
  * In an ideal world, the interface would be changed to fix the problems, however
  * it has been decided to maintain backwards compatibility instead.
  * </p>
+ * <p>
+ * The {@link MultiSet} interface, added in version 4.1, provides the same
+ * functionality while complying with the {@link Collection} contract, and
+ * should be preferred for new code. Existing code can migrate as follows,
+ * with the cardinality-respecting behavior preserved through explicitly
+ * named methods:
+ * </p>
+ * <ul>
+ *   <li>{@code bag.add(e)} becomes {@code multiSet.add(e)}
+ *       (which always returns {@code true}, per the {@code MultiSet} contract)</li>
+ *   <li>{@code bag.getCount(e)} becomes {@code multiSet.getCount(e)}</li>
+ *   <li>{@code bag.remove(e)}, which removes all copies, becomes
+ *       {@code multiSet.setCount(e, 0)}</li>
+ *   <li>{@code bag.containsAll(coll)} becomes
+ *       {@code MultiSetUtils.containsOccurrences(multiSet, new HashMultiSet<>(coll))}</li>
+ *   <li>{@code bag.removeAll(coll)} becomes
+ *       {@code MultiSetUtils.removeOccurrences(multiSet, new HashMultiSet<>(coll))}</li>
+ *   <li>{@code bag.retainAll(coll)} becomes
+ *       {@code MultiSetUtils.retainOccurrences(multiSet, new HashMultiSet<>(coll))}</li>
+ *   <li>{@link SortedBag} and {@code TreeBag} become {@link SortedMultiSet}
+ *       and {@code TreeMultiSet}</li>
+ *   <li>the {@code CollectionBag} and {@code CollectionSortedBag} wrappers are
+ *       not needed, as a {@code MultiSet} already complies with the
+ *       {@code Collection} contract</li>
+ * </ul>
  *
- * @param <E> the type of elements in this bag
+ * @param <E> The type of elements in this bag
+ * @see MultiSet
  * @since 2.0
+ * @deprecated Since 4.6.0, use {@link MultiSet} instead; see the migration notes above.
  */
+@Deprecated
 public interface Bag<E> extends Collection<E> {
 
     /**
@@ -57,12 +85,12 @@ public interface Bag<E> extends Collection<E> {
      * <p>
      * Since this method always increases the size of the bag,
      * according to the {@link Collection#add(Object)} contract, it
-     * should always return {@code true}.  Since it sometimes returns
+     * should always return {@code true}. Since it sometimes returns
      * {@code false}, this method violates the contract.
      * </p>
      *
-     * @param object  the object to add
-     * @return {@code true} if the object was not already in the {@code uniqueSet}
+     * @param object  The object to add.
+     * @return {@code true} if the object was not already in the {@code uniqueSet}.
      */
     @Override
     boolean add(E object);
@@ -75,17 +103,17 @@ public interface Bag<E> extends Collection<E> {
      * {@link #uniqueSet()} and report its count as {@code nCopies}.
      * </p>
      *
-     * @param object  the object to add
-     * @param nCopies  the number of copies to add
-     * @return {@code true} if the object was not already in the {@code uniqueSet}
-     * @throws ClassCastException if the class of the specified element prevents it from being added to this collection
+     * @param object  The object to add.
+     * @param nCopies  The number of copies to add.
+     * @return {@code true} if the object was not already in the {@code uniqueSet}.
+     * @throws ClassCastException if the class of the specified element prevents it from being added to this collection.
      */
     boolean add(E object, int nCopies);
 
     /**
      * <em>(Violation)</em>
      * Returns {@code true} if the bag contains all elements in
-     * the given collection, respecting cardinality.  That is, if the
+     * the given collection, respecting cardinality. That is, if the
      * given collection {@code coll} contains {@code n} copies
      * of a given object, calling {@link #getCount(Object)} on that object must
      * be {@code &gt;= n} for all {@code n} in {@code coll}.
@@ -97,8 +125,8 @@ public interface Bag<E> extends Collection<E> {
      * in the given collection.
      * </p>
      *
-     * @param coll  the collection to check against
-     * @return {@code true} if the Bag contains all the collection
+     * @param coll  The collection to check against.
+     * @return {@code true} if the Bag contains all the collection.
      */
     @Override
     boolean containsAll(Collection<?> coll);
@@ -108,8 +136,8 @@ public interface Bag<E> extends Collection<E> {
      * object currently in the bag. If the object does not exist in the
      * bag, return 0.
      *
-     * @param object  the object to search for
-     * @return the number of occurrences of the object, zero if not found
+     * @param object  The object to search for.
+     * @return The number of occurrences of the object, zero if not found.
      */
     int getCount(Object object);
 
@@ -118,7 +146,7 @@ public interface Bag<E> extends Collection<E> {
      * including copies due to cardinality. This iterator is fail-fast
      * and will not tolerate concurrent modifications.
      *
-     * @return iterator over all elements in the Bag
+     * @return iterator over all elements in the Bag.
      */
     @Override
     Iterator<E> iterator();
@@ -135,8 +163,8 @@ public interface Bag<E> extends Collection<E> {
      * given object, not <em>all</em> occurrences.
      * </p>
      *
-     * @param object  the object to remove
-     * @return {@code true} if this call changed the collection
+     * @param object  The object to remove.
+     * @return {@code true} if this call changed the collection.
      */
     @Override
     boolean remove(Object object);
@@ -148,16 +176,16 @@ public interface Bag<E> extends Collection<E> {
      * copies in the Bag, no error is thrown.
      * </p>
      *
-     * @param object  the object to remove
-     * @param nCopies  the number of copies to remove
-     * @return {@code true} if this call changed the collection
+     * @param object  The object to remove.
+     * @param nCopies  The number of copies to remove.
+     * @return {@code true} if this call changed the collection.
      */
     boolean remove(Object object, int nCopies);
 
     /**
      * <em>(Violation)</em>
      * Remove all elements represented in the given collection,
-     * respecting cardinality.  That is, if the given collection
+     * respecting cardinality. That is, if the given collection
      * {@code coll} contains {@code n} copies of a given object,
      * the bag will have {@code n} fewer copies, assuming the bag
      * had at least {@code n} copies to begin with.
@@ -169,8 +197,8 @@ public interface Bag<E> extends Collection<E> {
      * given collection.
      * </p>
      *
-     * @param coll  the collection to remove
-     * @return {@code true} if this call changed the collection
+     * @param coll  The collection to remove.
+     * @return {@code true} if this call changed the collection.
      */
     @Override
     boolean removeAll(Collection<?> coll);
@@ -178,10 +206,10 @@ public interface Bag<E> extends Collection<E> {
     /**
      * <em>(Violation)</em>
      * Remove any members of the bag that are not in the given
-     * collection, respecting cardinality.  That is, if the given
+     * collection, respecting cardinality. That is, if the given
      * collection {@code coll} contains {@code n} copies of a
-     * given object and the bag has {@code m &gt; n} copies, then
-     * delete {@code m - n} copies from the bag.  In addition, if
+     * given object and the bag has {@code m > n} copies, then
+     * delete {@code m - n} copies from the bag. In addition, if
      * {@code e} is an object in the bag but
      * {@code !coll.contains(e)}, then remove {@code e} and any
      * of its copies.
@@ -193,8 +221,8 @@ public interface Bag<E> extends Collection<E> {
      * given collection.
      * </p>
      *
-     * @param coll  the collection to retain
-     * @return {@code true} if this call changed the collection
+     * @param coll  The collection to retain.
+     * @return {@code true} if this call changed the collection.
      */
     @Override
     boolean retainAll(Collection<?> coll);
@@ -202,7 +230,7 @@ public interface Bag<E> extends Collection<E> {
     /**
      * Returns the total number of items in the bag across all types.
      *
-     * @return the total size of the Bag
+     * @return The total size of the Bag.
      */
     @Override
     int size();
@@ -210,10 +238,10 @@ public interface Bag<E> extends Collection<E> {
     /**
      * Returns a {@link Set} of unique elements in the Bag.
      * <p>
-     * Uniqueness constraints are the same as those in {@link java.util.Set}.
+     * Uniqueness constraints are the same as those in {@link Set}.
      * </p>
      *
-     * @return the Set of unique Bag elements
+     * @return The Set of unique Bag elements.
      */
     Set<E> uniqueSet();
 
@@ -225,7 +253,7 @@ public interface Bag<E> extends Collection<E> {
 //     * the same elements.
 //     * This equals definition is compatible with the Set interface.
 //     *
-//     * @param obj  the Bag to compare to
+//     * @param obj  The Bag to compare to
 //     * @return true if equal
 //     */
 //    boolean equals(Object obj);
@@ -237,7 +265,7 @@ public interface Bag<E> extends Collection<E> {
 //     * {@code (e==null ? 0 : e.hashCode()) ^ noOccurrences)}.
 //     * This hash code definition is compatible with the Set interface.
 //     *
-//     * @return the hash code of the Bag
+//     * @return The hash code of the Bag
 //     */
 //    int hashCode();
 

@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -33,8 +33,8 @@ import jdk.m3.collections.apache.ListValuedMap;
  * the List implementation to use as values.
  * </p>
  *
- * @param <K> the type of the keys in this map
- * @param <V> the type of the values in this map
+ * @param <K> The type of the keys in this map
+ * @param <V> The type of the values in this map
  * @since 4.1
  */
 public abstract class AbstractListValuedMap<K, V> extends AbstractMultiValuedMap<K, V>
@@ -126,10 +126,12 @@ public abstract class AbstractListValuedMap<K, V> extends AbstractMultiValuedMap
 
         @Override
         public void add(final int index, final V value) {
-            List<V> list = getMapping();
+            final List<V> list = getMapping();
             if (list == null) {
-                list = createCollection();
-                getMap().put(key, list);
+                final List<V> newList = createCollection();
+                newList.add(index, value);
+                getMap().put(key, newList);
+                return;
             }
             list.add(index, value);
         }
@@ -233,7 +235,7 @@ public abstract class AbstractListValuedMap<K, V> extends AbstractMultiValuedMap
     /**
      * A constructor that wraps, not copies
      *
-     * @param map  the map to wrap, must not be null
+     * @param map  The map to wrap, must not be null
      * @throws NullPointerException if the map is null
      */
     protected AbstractListValuedMap(final Map<K, ? extends List<V>> map) {
@@ -242,7 +244,8 @@ public abstract class AbstractListValuedMap<K, V> extends AbstractMultiValuedMap
 
     /**
      * Creates a new value collection using the provided factory.
-     * @return a new list
+     *
+     * @return A new list
      */
     @Override
     protected abstract List<V> createCollection();
@@ -251,8 +254,8 @@ public abstract class AbstractListValuedMap<K, V> extends AbstractMultiValuedMap
      * Gets the list of values associated with the specified key. This would
      * return an empty list in case the mapping is not present
      *
-     * @param key  the key to retrieve
-     * @return the {@code List} of values, will return an empty {@link List} for no mapping
+     * @param key  The key to retrieve
+     * @return The {@code List} of values, will return an empty {@link List} for no mapping
      */
     @Override
     public List<V> get(final K key) {
@@ -271,8 +274,8 @@ public abstract class AbstractListValuedMap<K, V> extends AbstractMultiValuedMap
      * A subsequent {@code get(Object)} would return an empty list.
      * </p>
      *
-     * @param key  the key to remove values from
-     * @return the {@code List} of values removed, will return an empty,
+     * @param key  The key to remove values from
+     * @return The {@code List} of values removed, will return an empty,
      *   unmodifiable list for no mapping found.
      */
     @Override

@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -35,13 +35,14 @@ import jdk.m3.collections.apache.ResettableIterator;
  * implementations will throw a ConcurrentModificationException.
  * </p>
  *
- * @param <E> the type of elements returned by this iterator.
+ * @param <E> The type of elements returned by this iterator.
  * @since 3.0
  */
 public class LoopingIterator<E> implements ResettableIterator<E> {
 
     /** The collection to base the iterator on */
     private final Collection<? extends E> collection;
+
     /** The current iterator */
     private Iterator<? extends E> iterator;
 
@@ -52,7 +53,7 @@ public class LoopingIterator<E> implements ResettableIterator<E> {
      * the original source, so the Collection must be passed in.
      * </p>
      *
-     * @param collection  the collection to wrap
+     * @param collection  The collection to wrap
      * @throws NullPointerException if the collection is null
      */
     public LoopingIterator(final Collection<? extends E> collection) {
@@ -80,7 +81,7 @@ public class LoopingIterator<E> implements ResettableIterator<E> {
      * If at the end of the collection, return the first element.
      * </p>
      *
-     * @return the next object
+     * @return The next object
      * @throws NoSuchElementException if there are no elements
      *         at all.  Use {@link #hasNext} to avoid this error.
      */
@@ -125,7 +126,7 @@ public class LoopingIterator<E> implements ResettableIterator<E> {
     /**
      * Gets the size of the collection underlying the iterator.
      *
-     * @return the current collection size
+     * @return The current collection size
      */
     public int size() {
         return collection.size();
