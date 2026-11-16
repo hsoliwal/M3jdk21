@@ -604,7 +604,11 @@ abstract sealed class AbstractStringBuilder implements Appendable, CharSequence
      *             negative or greater than or equal to {@code length()}.
      */
     public void setCharAt(int index, char ch) {
-        m3EnsureFlat();
+        if (m3Lane != null) {
+            checkIndex(index, length());
+            m3Lane.replace(this, index, index + 1, String.valueOf(ch));
+            return;
+        }
         checkIndex(index, count);
         if (isLatin1() && StringLatin1.canEncode(ch)) {
             value[index] = (byte)ch;
@@ -1042,13 +1046,16 @@ abstract sealed class AbstractStringBuilder implements Appendable, CharSequence
      *             greater than {@code end}.
      */
     public AbstractStringBuilder delete(int start, int end) {
-        m3EnsureFlat();
-        int count = this.count;
+        int count = length();
         if (end > count) {
             end = count;
         }
         Preconditions.checkFromToIndex(start, end, count, Preconditions.SIOOBE_FORMATTER);
         int len = end - start;
+        if (m3Lane != null) {
+            if (len > 0) m3Lane.replace(this, start, end, "");
+            return this;
+        }
         if (len > 0) {
             shift(end, -len);
             this.count = count - len;
@@ -1101,8 +1108,11 @@ abstract sealed class AbstractStringBuilder implements Appendable, CharSequence
      *              {@code length()}.
      */
     public AbstractStringBuilder deleteCharAt(int index) {
-        m3EnsureFlat();
-        checkIndex(index, count);
+        checkIndex(index, length());
+        if (m3Lane != null) {
+            m3Lane.replace(this, index, index + 1, "");
+            return this;
+        }
         shift(index + 1, -1);
         count--;
         maybeLatin1 = true;
@@ -1129,13 +1139,16 @@ abstract sealed class AbstractStringBuilder implements Appendable, CharSequence
      *             greater than {@code end}.
      */
     public AbstractStringBuilder replace(int start, int end, String str) {
-        m3EnsureFlat();
-        int count = this.count;
+        int count = length();
         if (end > count) {
             end = count;
         }
         Preconditions.checkFromToIndex(start, end, count, Preconditions.SIOOBE_FORMATTER);
         int len = str.length();
+        if (m3Lane != null) {
+            m3Lane.replace(this, start, end, str);
+            return this;
+        }
         int newCount = count + len - (end - start);
         ensureCapacityInternal(newCount);
         shift(end, newCount - count);
@@ -1308,12 +1321,15 @@ abstract sealed class AbstractStringBuilder implements Appendable, CharSequence
      * @throws     StringIndexOutOfBoundsException  if the offset is invalid.
      */
     public AbstractStringBuilder insert(int offset, String str) {
-        m3EnsureFlat();
-        checkOffset(offset, count);
+        checkOffset(offset, length());
         if (str == null) {
             str = "null";
         }
         int len = str.length();
+        if (m3Lane != null) {
+            m3Lane.replace(this, offset, offset, str);
+            return this;
+        }
         ensureCapacityInternal(count + len);
         shift(offset, len);
         count += len;

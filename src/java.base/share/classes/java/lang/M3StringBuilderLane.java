@@ -9,7 +9,7 @@ import jdk.internal.util.ArraysSupport;
 import static java.lang.String.LATIN1;
 import static java.lang.String.UTF16;
 
-//FLLDCIM: R5-BUILDER \u2014 composite lane (pieces + flat chunks; bounded search/reverse)
+//FLLDCIM: R5-BUILDER \u2014 composite lane (pieces + flat chunks; bounded search/reverse/middle edits)
 /**
  * Composite lane of an {@link AbstractStringBuilder}: appended M3 Strings are kept as pieces
  * (references to the caller's immutable String plus a packed range) instead of being copied into
@@ -22,6 +22,7 @@ import static java.lang.String.UTF16;
  * code-point readers translate positions through {@code logicalEnd} without copying piece text.
  * Search reads these coordinates without materializing them, and reverse publishes immutable
  * bounded chunks only after the complete replacement lane has been staged successfully.
+ * String middle edits retain unaffected immutable ranges and snapshot surviving flat chunks.
  * Other readers and editors call {@link #flatten}, which materializes the logical content into a
  * buffer of the capacity the stock builder would have had ({@link #virtualCapacity}) and detaches
  * the lane, or read a detached copy ({@link #detached}, {@link #copyOut}) when they must not mutate
@@ -39,8 +40,8 @@ final class M3StringBuilderLane {
     static final int LIFT_UNITS = 64;
     /** A range must cover at least 1/PIN_RATIO of its source String (pool-bounds rule). */
     static final int PIN_RATIO = 8;
-    /** Upper bound on transient UTF-16 scratch and each immutable chunk emitted by reverse. */
-    private static final int REVERSE_CHUNK_UNITS = 1024;
+    /** Upper bound on transient UTF-16 scratch and each copied immutable edit/reverse chunk. */
+    private static final int COPY_CHUNK_UNITS = 1024;
 
     /** Some piece is UTF16-coded (its content may still be Latin-1 when it is a range). */
     private static final int UTF16_PIECE = 1;
@@ -275,7 +276,7 @@ final class M3StringBuilderLane {
         if (length < 2) return;
         M3StringBuilderLane replacement = new M3StringBuilderLane(virtualCapacity);
         replacement.state = state | (builder.coder == UTF16 ? UTF16_PIECE : 0);
-        char[] chunk = new char[Math.min(REVERSE_CHUNK_UNITS, length)];
+        char[] chunk = new char[Math.min(COPY_CHUNK_UNITS, length)];
         int used = 0;
         int index = length;
         while (index > 0) {
@@ -297,6 +298,91 @@ final class M3StringBuilderLane {
         }
         builder.count = 0;
         builder.m3Lane = replacement;
+    }
+
+    /**
+     * Splice an already checked UTF-16 range. Immutable source spans survive by reference;
+     * flat chunks and slices that would retain a disproportionately large owner are copied
+     * in bounded chunks. All metadata and payload are staged before publication. This is
+     * linear in the number of pieces plus copied units, not a tree-based logarithmic edit.
+     */
+    void replace(AbstractStringBuilder builder, int start, int end, String inserted) {
+        int length = builder.count + units;
+        long newLength = (long) length - (end - start) + inserted.length();
+        if (newLength > Integer.MAX_VALUE) {
+            throw new OutOfMemoryError("Required length exceeds implementation limit");
+        }
+        M3StringBuilderLane replacement = new M3StringBuilderLane(virtualCapacity);
+        replacement.state = state | (builder.coder == UTF16 ? UTF16_PIECE : 0);
+        // Stock replace/insert grows using the old coder, before the inserted String inflates it.
+        replacement.reserveLogical((int) newLength, builder.coder);
+        copyRange(builder, 0, start, replacement);
+        replacement.pushRange(inserted, 0, inserted.length(), builder.coder);
+        copyRange(builder, end, length, replacement);
+        if (inserted.coder() == UTF16) replacement.state |= UTF16_PIECE;
+        builder.count = 0;
+        builder.m3Lane = replacement;
+        builder.maybeLatin1 = true;
+    }
+
+    /** Transfer surviving intervals in their original interleaved flat/piece order. */
+    private void copyRange(AbstractStringBuilder builder, int start, int end,
+            M3StringBuilderLane replacement) {
+        int logical = 0;
+        int flat = 0;
+        for (int i = 0; i < pieces && logical < end; i++) {
+            int flatEnd = flatAt[i];
+            int next = logical + flatEnd - flat;
+            int from = Math.max(start, logical);
+            int to = Math.min(end, next);
+            if (from < to) {
+                replacement.pushFlat(builder.value, builder.coder,
+                        flat + from - logical, flat + to - logical);
+            }
+            logical = next;
+            flat = flatEnd;
+            long packed = span[i];
+            next = logical + (int) packed;
+            from = Math.max(start, logical);
+            to = Math.min(end, next);
+            if (from < to) {
+                replacement.pushRange(text[i], (int) (packed >>> 32) + from - logical,
+                        to - from, builder.coder);
+            }
+            logical = next;
+        }
+        int from = Math.max(start, logical);
+        if (from < end) {
+            replacement.pushFlat(builder.value, builder.coder,
+                    flat + from - logical, flat + end - logical);
+        }
+    }
+
+    /** A small surviving slice never pins an arbitrarily large original String. */
+    private void pushRange(String source, int start, int length, byte flatCoder) {
+        if (length == 0) return;
+        if ((long) length * PIN_RATIO >= source.length()) {
+            push(source, start, length, 0, flatCoder);
+            return;
+        }
+        char[] chunk = new char[Math.min(COPY_CHUNK_UNITS, length)];
+        for (int copied = 0; copied < length; ) {
+            int size = Math.min(chunk.length, length - copied);
+            source.getChars(start + copied, start + copied + size, chunk, 0);
+            push(new String(chunk, 0, size), 0, size, 0, flatCoder);
+            copied += size;
+        }
+    }
+
+    /** Snapshot only the surviving mutable flat payload, using bounded UTF-16 scratch. */
+    private void pushFlat(byte[] flat, byte flatCoder, int from, int to) {
+        char[] chunk = new char[Math.min(COPY_CHUNK_UNITS, to - from)];
+        while (from < to) {
+            int size = Math.min(chunk.length, to - from);
+            for (int i = 0; i < size; i++) chunk[i] = flatCharAt(flat, flatCoder, from + i);
+            push(new String(chunk, 0, size), 0, size, 0, flatCoder);
+            from += size;
+        }
     }
 
     /** Stock capacity growth for a flat-buffer minimum, applied to the logical length. */
@@ -429,8 +515,7 @@ final class M3StringBuilderLane {
         return pieces;
     }
 
-    // M3NotYetReceived: piece-table middle edits (insert/delete/replace/setCharAt) over the
-    //   lanes; donor naotsugu/piecetable PieceTableImpl (Apache-2.0, PORT). First cut: flatten.
+    // M3NotYetReceived: foreign CharSequence/array middle edits retain their flat callback path.
     // M3NotYetReceived: eager admission of the pending flat chunk at a chunk threshold.
     // M3NotYetReceived: append(AbstractStringBuilder) transfers the source pieces instead of copying.
 }
