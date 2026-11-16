@@ -405,6 +405,31 @@ public class ArrayList<E> extends AbstractList<E>
         return a;
     }
 
+    /**
+     * Copies an indexed window directly from this list's backing storage.
+     *
+     * @implSpec
+     * After checking both bounds, this implementation performs exactly one
+     * {@link System#arraycopy(Object, int, Object, int, int)} operation.
+     * It does not allocate a sublist or an intermediate array.
+     *
+     * @param fromIndex the first source index (inclusive)
+     * @param length the number of elements to copy
+     * @param destination the caller-owned destination array
+     * @param destinationOffset the first destination index (inclusive)
+     * @throws NullPointerException if destination is null
+     * @throws IndexOutOfBoundsException if either requested range is invalid
+     * @throws ArrayStoreException if an element cannot be stored in the array
+     */
+    @Override
+    public void copyRangeToArray(int fromIndex, int length,
+            Object[] destination, int destinationOffset) {
+        Objects.requireNonNull(destination);
+        Objects.checkFromIndexSize(fromIndex, length, size);
+        Objects.checkFromIndexSize(destinationOffset, length, destination.length);
+        System.arraycopy(elementData, fromIndex, destination, destinationOffset, length);
+    }
+
     // Positional Access Operations
 
     @SuppressWarnings("unchecked")
