@@ -127,9 +127,11 @@ inline T Atomic::PlatformCmpxchg<8>::operator()(T volatile* dest,
 
 // Atomically copy 64 bits of data
 inline void atomic_copy64(const volatile void *src, volatile void *dst) {
-  int64_t tmp;
-  __atomic_load(reinterpret_cast<const volatile int64_t*>(src), &tmp, __ATOMIC_RELAXED);
-  __atomic_store(reinterpret_cast<volatile int64_t*>(dst), &tmp, __ATOMIC_RELAXED);
+  // Copy's jlong entry points require both addresses to be 8-byte aligned.
+  typedef int64_t aligned_int64_t ATTRIBUTE_ALIGNED(8);
+  aligned_int64_t tmp;
+  __atomic_load(reinterpret_cast<const volatile aligned_int64_t*>(src), &tmp, __ATOMIC_RELAXED);
+  __atomic_store(reinterpret_cast<volatile aligned_int64_t*>(dst), &tmp, __ATOMIC_RELAXED);
 }
 
 template<>

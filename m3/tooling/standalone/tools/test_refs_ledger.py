@@ -165,6 +165,13 @@ class LineageLedgerTest(unittest.TestCase):
     def port_tree(self, td: Path) -> Path:
         root = td / "repo"
         shutil.copytree(PORT, root / PORT.relative_to(REPO))
+        port_spec = importlib.util.spec_from_file_location("collection_port_verifier", PORT_VERIFIER)
+        port_verifier = importlib.util.module_from_spec(port_spec)
+        port_spec.loader.exec_module(port_verifier)
+        for relative, _ in port_verifier.CURRENT_OWNERS.values():
+            destination = root / relative
+            destination.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copyfile(REPO / relative, destination)
         rewrite_ledger(root, donor_repository())
         return root
 

@@ -36,6 +36,25 @@ EXPECTED = {
         "b6c820c05dca67fc53a92a4be84f0b0a2c28b411",
 }
 
+# The provenance rows retain their historical target keys. Inspect the current
+# consolidated owners without rewriting those donor identities.
+CURRENT_OWNERS = {
+    'm3/collections/src/main/java/jdk/m3/collections/M3DenseHash.java':
+        ('src/jdk.m3.collections/share/classes/jdk/m3/collections/DenseHash.java', 'jdk.m3.collections'),
+    'm3/collections/src/main/java/jdk/m3/collections/M3PrimitiveKind.java':
+        ('src/jdk.m3.collections/share/classes/jdk/m3/collections/PrimitiveKind.java', 'jdk.m3.collections'),
+    'm3/collections/src/main/java/jdk/m3/collections/M3PrimitiveArrayList.java':
+        ('src/jdk.m3.collections/share/classes/jdk/m3/collections/PrimitiveArrayList.java', 'jdk.m3.collections'),
+    'm3/collections/src/main/java/jdk/m3/collections/M3PrimitiveArrayDeque.java':
+        ('src/jdk.m3.collections/share/classes/jdk/m3/collections/PrimitiveArrayDeque.java', 'jdk.m3.collections'),
+    'm3/collections/src/main/java/jdk/m3/collections/M3IntArrayDeque.java':
+        ('src/jdk.m3.collections/share/classes/jdk/m3/collections/IntArrayDeque.java', 'jdk.m3.collections'),
+    'm3/collections/src/main/java/jdk/m3/collections/M3PrimitiveMinMaxQueue.java':
+        ('src/jdk.m3.collections/share/classes/jdk/m3/collections/PrimitiveMinMaxQueue.java', 'jdk.m3.collections'),
+    'm3/collections/src/main/java/jdk/m3/collections/M3LongFenwickTree.java':
+        ('src/jdk.m3.collections/share/classes/jdk/m3/collections/range/LongFenwickTree.java', 'jdk.m3.collections.range'),
+}
+
 SOURCE_COMMIT = "8513abf8eb0d911873c9127a138007a42dd4ab60"; REFRESH_COMMITS = frozenset({"fd9a233680b43197eb8c5745a729c342ca56c4e2"})  # CONVERGE_HUB_REFRESH v1, 2026-11-06
 HEX40 = re.compile(r"^[0-9a-f]{40}$")
 
@@ -81,17 +100,22 @@ def provenance_rows() -> dict[str, dict[str, str]]:
 
 
 def verify_main_sources(rows: dict[str, dict[str, str]]) -> None:
+    if set(CURRENT_OWNERS) != set(EXPECTED):
+        fail("current owner mapping differs from historical provenance keys")
+    if len({path for path, _ in CURRENT_OWNERS.values()}) != len(EXPECTED):
+        fail("current owner mapping contains duplicate destinations")
     for relative, blob in EXPECTED.items():
         row = rows.get(relative)
         if row is None or row["sourceBlob"] != blob:
             fail(f"provenance mismatch: {relative}")
-        path = REPO / relative
+        current, package_name = CURRENT_OWNERS[relative]
+        path = REPO / current
         text = path.read_text(encoding="utf-8")
         if f"Source-Git-blob: {blob}" not in text:
             fail(f"source blob header mismatch: {relative}")
         if "import com.synexia" in text or "package com.synexia" in text:
             fail(f"Synexia runtime package leaked into port: {relative}")
-        expected_package = "package jdk.m3.collections;"  # one home since 2026-11-06 (CONSOLIDATE_PORT_OWNERS v1)
+        expected_package = f"package {package_name};"
         if expected_package not in text:
             fail(f"target package mismatch: {relative}")
 
