@@ -408,8 +408,16 @@ public class GenModuleInfoSource {
                     hasCurlyBracket = true;
                 } else if (token.equals("requires")) {
                     token = nextIdentifier(parser);
-                    // the modifiers of a requires directive, in either order
+                    // the modifiers of a requires directive, each at most once, in either order
+                    boolean seenStatic = false;
+                    boolean seenTransitive = false;
                     while (token.equals("transitive") || token.equals("static")) {
+                        boolean isStatic = token.equals("static");
+                        if (isStatic ? seenStatic : seenTransitive) {
+                            throw parser.newError("repeated modifier " + token);
+                        }
+                        seenStatic |= isStatic;
+                        seenTransitive |= !isStatic;
                         token = nextIdentifier(parser);
                     }
                     if (extraFile) {

@@ -185,6 +185,21 @@ public class ModuleInfoExtraTest {
         },                      ".*, line .*, missing semicolon.*",
         new String[] {
             "module x {",
+            "   requires static static m1;",
+            "}"
+        },                      ".*, line .*, repeated modifier static.*",
+        new String[] {
+            "module x {",
+            "   requires static transitive static m1;",
+            "}"
+        },                      ".*, line .*, repeated modifier static.*",
+        new String[] {
+            "module x {",
+            "   requires static m1",
+            "}"
+        },                      ".*, line .*, missing semicolon.*",
+        new String[] {
+            "module x {",
             "   exports p1 to m1;",
             "   exports p1 to m2;",
             "}"
