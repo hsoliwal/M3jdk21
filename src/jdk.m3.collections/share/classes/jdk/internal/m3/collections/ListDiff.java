@@ -23,7 +23,8 @@ import jdk.m3.collections.LongLongHashMap;
  * inserted, and a key that is removed and inserted is reported as a move. The result is an {@link Patch} of int
  * runs.
  * <p>Keys must be unique within each snapshot. Cost: O((n + m) log(n + m)) time, O(n + m) int lanes plus two
- * open-addressed key maps ({@link LongLongHashMap}); no entry objects.</p>
+ * open-addressed key maps ({@link LongLongHashMap}); no entry objects. Strictly ascending snapshots use a
+ * linear merge and temporary storage proportional to their remove and insert runs.</p>
  */
 public final class ListDiff {
 	private ListDiff () {
@@ -31,6 +32,14 @@ public final class ListDiff {
 
 	/** Diffs {@code before} into {@code after}; throws {@link IllegalArgumentException} on a duplicate key. */
 	public static Patch diff (long [] before, long [] after) {
+		if (before != null && after != null && strictlyAscending (after) && strictlyAscending (before)) {
+			return sortedDiff (before, after);
+		}
+		return genericDiff (before, after);
+	}
+
+	/** Original arbitrary-order implementation, retained as the fallback owner. */
+	private static Patch genericDiff (long [] before, long [] after) {
 		LongLongHashMap newIndex = index (after, "after");
 		index (before, "before");
 		int n = before.length;
@@ -62,6 +71,77 @@ public final class ListDiff {
 		int [][] removes = runs (keptOld, true);
 		int [][] inserts = runs (keptNew, false);
 		return new Patch (removes [0], removes [1], inserts [0], inserts [1], moveFrom, moveTo, kept);
+	}
+
+	/** Tests strict signed-long order without changing the existing duplicate-key validation errors. */
+	private static boolean strictlyAscending (long [] keys) {
+		for (int i = 1; i < keys.length; i++) {
+			if (keys [i - 1] >= keys [i]) return false;
+		}
+		return true;
+	}
+
+	/** Every shared key in ascending snapshots is kept; only the gaps need edit runs. */
+	private static Patch sortedDiff (long [] before, long [] after) {
+		long counts = sortedRuns (before, after, null);
+		int removes = (int) (counts >>> 32), inserts = (int) counts;
+		int [][] runs = {new int [removes], new int [removes], new int [inserts], new int [inserts]};
+		sortedRuns (before, after, runs);
+		int kept = before.length;
+		for (int count : runs [1]) kept -= count;
+		return new Patch (runs [0], runs [1], runs [2], runs [3], new int [0], new int [0], kept);
+	}
+
+	/**
+	 * Counts the gaps between shared keys, or writes them into exact-sized lanes when {@code runs} is supplied.
+	 * The high 32 bits of the result hold the remove-run count; the low 32 bits hold the insert-run count.
+	 * Only a shared key ends a gap: an insertion does not split adjacent old removals, and vice versa.
+	 */
+	private static long sortedRuns (long [] before, long [] after, int [][] runs) {
+		int oldAt = 0, newAt = 0, oldStart = 0, newStart = 0;
+		int removes = 0, inserts = 0;
+		while (oldAt < before.length && newAt < after.length) {
+			long oldKey = before [oldAt], newKey = after [newAt];
+			if (oldKey < newKey) {
+				oldAt++;
+			} else if (oldKey > newKey) {
+				newAt++;
+			} else {
+				if (oldAt > oldStart) {
+					if (runs != null) {
+						int run = runs [0].length - 1 - removes;
+						runs [0] [run] = oldStart;
+						runs [1] [run] = oldAt - oldStart;
+					}
+					removes++;
+				}
+				if (newAt > newStart) {
+					if (runs != null) {
+						runs [2] [inserts] = newStart;
+						runs [3] [inserts] = newAt - newStart;
+					}
+					inserts++;
+				}
+				oldStart = ++oldAt;
+				newStart = ++newAt;
+			}
+		}
+		if (before.length > oldStart) {
+			if (runs != null) {
+				int run = runs [0].length - 1 - removes;
+				runs [0] [run] = oldStart;
+				runs [1] [run] = before.length - oldStart;
+			}
+			removes++;
+		}
+		if (after.length > newStart) {
+			if (runs != null) {
+				runs [2] [inserts] = newStart;
+				runs [3] [inserts] = after.length - newStart;
+			}
+			inserts++;
+		}
+		return ((long) removes << 32) | (inserts & 0xffffffffL);
 	}
 
 	private static LongLongHashMap index (long [] keys, String side) {
