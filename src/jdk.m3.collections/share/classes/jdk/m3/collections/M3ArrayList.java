@@ -25,6 +25,7 @@ import java.io.ObjectOutputStream;
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.AbstractList;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.BitSet;
 import java.util.Collection;
@@ -212,6 +213,84 @@ public final class M3ArrayList<E> extends AbstractList<E>
         Arrays.fill(elements, 0, size, null);
         size = 0;
         modCount++;
+    }
+
+    /** Restrict indexed membership to pure, symmetric, final value classes. */
+    private static boolean stableBulkValue(Object value) {
+        return value == null || value.getClass() == String.class
+                || value.getClass() == Integer.class || value.getClass() == Long.class;
+    }
+
+    private boolean useBulkIndex(Collection<?> members) {
+        if (members == null || members.getClass() != ArrayList.class
+                || size < 16384 || members.size() < 512 || members.size() > 65536
+                || (long) size * members.size() < 8_000_000L) return false;
+        for (int i = 0; i < size; i++) {
+            if (!stableBulkValue(elements[i])) return false;
+        }
+        for (Object member : members) {
+            if (!stableBulkValue(member)) return false;
+        }
+        return true;
+    }
+
+    private static final Object BULK_NULL_KEY = new Object();
+
+    /**
+     * Transient array index. An adversarial long probe chain abandons the
+     * optimization before any mutation, retaining inherited callback order.
+     */
+    private static Object[] indexMembers(ArrayList<?> members) {
+        int capacity = 1;
+        int required = members.size() << 1; // caller guarantees <= 65536
+        while (capacity < required) capacity <<= 1;
+        Object[] slots = new Object[capacity];
+        int mask = capacity - 1;
+        for (Object member : members) {
+            Object key = member == null ? BULK_NULL_KEY : member;
+            int hash = key.hashCode();
+            int slot = (hash ^ (hash >>> 16)) & mask;
+            int collisions = 0;
+            for (;;) {
+                Object prior = slots[slot];
+                if (prior == null || prior.equals(key)) {
+                    slots[slot] = key;
+                    break;
+                }
+                if (++collisions > 16) return null;
+                slot = (slot + 1) & mask;
+            }
+        }
+        return slots;
+    }
+
+    private static boolean indexedContains(Object[] slots, Object candidate) {
+        Object key = candidate == null ? BULK_NULL_KEY : candidate;
+        int hash = key.hashCode();
+        int mask = slots.length - 1;
+        int slot = (hash ^ (hash >>> 16)) & mask;
+        for (Object prior; (prior = slots[slot]) != null; slot = (slot + 1) & mask) {
+            if (prior.equals(key)) return true;
+        }
+        return false;
+    }
+
+    /** Array-owned, stable and exact-type bulk removal; all other calls delegate. */
+    @Override public boolean removeAll(Collection<?> members) {
+        if (useBulkIndex(members)) {
+            Object[] slots = indexMembers((ArrayList<?>) members);
+            if (slots != null) return removeIf(value -> indexedContains(slots, value));
+        }
+        return super.removeAll(members);
+    }
+
+    /** Symmetric bulk retention over the same private array-index atom. */
+    @Override public boolean retainAll(Collection<?> members) {
+        if (useBulkIndex(members)) {
+            Object[] slots = indexMembers((ArrayList<?>) members);
+            if (slots != null) return removeIf(value -> !indexedContains(slots, value));
+        }
+        return super.retainAll(members);
     }
 
     /**
