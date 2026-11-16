@@ -712,3 +712,22 @@ provides jdk.m3.collections.eclipse.api.factory.stack.primitive.MutableShortStac
 exports jdk.m3.collections.disruptor;
 exports jdk.m3.collections.disruptor.dsl;
 exports jdk.m3.collections.disruptor.util;
+
+// RoaringBitmap, development state after release 1.6.29 (legal/roaring.md): the four packages its own descriptor
+// exports and the three of its bit-sliced index (bsi), which has no descriptor. jdk.m3.collections.roaring.art is
+// not exported, as in the library
+exports jdk.m3.collections.roaring;
+exports jdk.m3.collections.roaring.bsi;
+exports jdk.m3.collections.roaring.bsi.buffer;
+exports jdk.m3.collections.roaring.bsi.longlong;
+exports jdk.m3.collections.roaring.buffer;
+exports jdk.m3.collections.roaring.insights;
+exports jdk.m3.collections.roaring.longlong;
+
+// Brownies Collections 0.9.24 (legal/brownies.md). The library has no module descriptor; its manifest exports
+// every package
+exports jdk.m3.collections.brownies;
+exports jdk.m3.collections.brownies.exceptions;
+exports jdk.m3.collections.brownies.helper;
+exports jdk.m3.collections.brownies.helper.primitive;
+exports jdk.m3.collections.brownies.primitive;

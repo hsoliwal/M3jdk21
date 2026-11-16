@@ -1,0 +1,131 @@
+/*
+ * (c) the authors Licensed under the Apache License, Version 2.0.
+ */
+
+package jdk.m3.collections.roaring;
+
+/**
+ * Fast iterator minimizing the stress on the garbage collector. You can create one reusable
+ * instance of this class and then {@link #wrap(RoaringBitmap)}
+ *
+ * This iterator enumerates the stored values in reverse (starting from the end).
+ *
+ * @author Borislav Ivanov
+ **/
+@SuppressWarnings("this-escape")
+public class ReverseIntIteratorFlyweight implements PeekableIntIterator {
+
+  private int hs;
+
+  private PeekableCharIterator iter;
+
+  private ReverseArrayContainerCharIterator arrIter = new ReverseArrayContainerCharIterator();
+
+  private ReverseBitmapContainerCharIterator bitmapIter = new ReverseBitmapContainerCharIterator();
+
+  private ReverseRunContainerCharIterator runIter = new ReverseRunContainerCharIterator();
+
+  private int pos;
+
+  private RoaringBitmap roaringBitmap = null;
+
+  /**
+   * Creates an instance that is not ready for iteration. You must first call
+   * {@link #wrap(RoaringBitmap)}.
+   */
+  public ReverseIntIteratorFlyweight() {}
+
+  /**
+   * Creates an instance that is ready for iteration.
+   *
+   * @param r bitmap to be iterated over
+   */
+  public ReverseIntIteratorFlyweight(RoaringBitmap r) {
+    wrap(r);
+  }
+
+  @Override
+  public PeekableIntIterator clone() {
+    try {
+      ReverseIntIteratorFlyweight x = (ReverseIntIteratorFlyweight) super.clone();
+      // nextContainer() re-wraps the cached cursors in place, so the clone needs its own:
+      // sharing them lets whichever iterator crosses a container first clobber the other.
+      x.arrIter = new ReverseArrayContainerCharIterator();
+      x.bitmapIter = new ReverseBitmapContainerCharIterator();
+      x.runIter = new ReverseRunContainerCharIterator();
+      if (this.iter != null) {
+        x.iter = this.iter.clone();
+      }
+      return x;
+    } catch (CloneNotSupportedException e) {
+      return null; // will not happen
+    }
+  }
+
+  @Override
+  public boolean hasNext() {
+    return pos >= 0;
+  }
+
+  @Override
+  public int next() {
+    final int x = iter.nextAsInt() | hs;
+    if (!iter.hasNext()) {
+      --pos;
+      nextContainer();
+    }
+    return x;
+  }
+
+  private void nextContainer() {
+
+    if (pos >= 0) {
+
+      Container container = this.roaringBitmap.highLowContainer.getContainerAtIndex(pos);
+      if (container instanceof BitmapContainer) {
+        bitmapIter.wrap(((BitmapContainer) container).bitmap);
+        iter = bitmapIter;
+      } else if (container instanceof ArrayContainer) {
+        arrIter.wrap((ArrayContainer) container);
+        iter = arrIter;
+      } else {
+        runIter.wrap((RunContainer) container);
+        iter = runIter;
+      }
+      hs = (this.roaringBitmap.highLowContainer.getKeyAtIndex(pos)) << 16;
+    }
+  }
+
+  /**
+   * Prepares a bitmap for iteration
+   *
+   * @param r bitmap to be iterated over
+   */
+  public void wrap(RoaringBitmap r) {
+    this.roaringBitmap = r;
+    this.hs = 0;
+    this.pos = this.roaringBitmap.highLowContainer.size() - 1;
+    this.nextContainer();
+  }
+
+  @Override
+  public void advanceIfNeeded(int maxval) {
+    // In reverse order: skip while next value is strictly greater than maxval (unsigned).
+    while (hasNext() && ((hs >>> 16) > (maxval >>> 16))) {
+      --pos;
+      nextContainer();
+    }
+    if (hasNext() && ((hs >>> 16) == (maxval >>> 16))) {
+      iter.advanceIfNeeded(Util.lowbits(maxval));
+      if (!iter.hasNext()) {
+        --pos;
+        nextContainer();
+      }
+    }
+  }
+
+  @Override
+  public int peekNext() {
+    return (iter.peekNext()) | hs;
+  }
+}
