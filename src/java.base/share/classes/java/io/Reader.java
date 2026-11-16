@@ -518,4 +518,44 @@ public abstract class Reader implements Readable, Closeable {
         return transferred;
     }
 
+    /*
+     * Whole-array monitored I/O additions:
+     * Copyright (c) 2026, Hitesh Soliwal and Contributors to the Synexia Project.
+     * The original OpenJDK copyright and license notices above are retained.
+     */
+
+    /**
+     * Reads UTF-16 code units into the supplied array with caller-owned progress.
+     *
+     * <p>When the inherited four-argument implementation is selected,
+     * this operation performs at most one bounded read and can return
+     * fewer code units than the array's length. It does not promise to
+     * fill the array. Progress and cooperative cancellation follow
+     * that implementation's contract.
+     *
+     * @implSpec
+     * This implementation invokes {@code readMonitored(chars, 0, chars.length, monitor)}
+     * exactly once when the array is nonnull, using virtual dispatch.
+     * It returns the selected implementation's result unchanged.
+     * The monitor is forwarded unchanged, including when null; the selected
+     * implementation owns its validation. A null array fails before that
+     * invocation. This method adds no progress, cancellation or lifecycle
+     * callbacks, and propagates failures from the selected implementation.
+     *
+     * @param chars destination array
+     * @param monitor monitor passed to the selected four-argument implementation
+     * @return the selected implementation's result, which is the number of
+     *         UTF-16 code units read or {@code -1} at end of input for the inherited implementation
+     * @throws IOException if the selected implementation throws it
+     * @throws NullPointerException if {@code chars} is null; the inherited
+     *         four-argument implementation also rejects a null monitor
+     * @throws java.util.concurrent.CancellationException if the selected
+     *         implementation reports cancellation
+     * @see #readMonitored(char[], int, int, java.util.concurrent.ProgressMonitor)
+     */
+    public int readMonitored(char[] chars,
+            java.util.concurrent.ProgressMonitor monitor) throws IOException {
+        return readMonitored(chars, 0, chars.length, monitor);
+    }
+
 }
