@@ -4,85 +4,190 @@
  */
 package jdk.internal.m3.collections;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Objects;
+
 /**
- * M3 five-library superset scaffold {@code ArrayTable}: API group {@code ARRAY_TABLE} over arrays and state masks.
+ * Table over a fixed list of row keys and a fixed list of column keys, stored as one dense value lane.
  *
- * <p>Provider lineage (LIBRARY_API_MATRIX.tsv, run 20261017-m3-to-public/LIB-SUPERSET):
- * <ul>
- *   <li>GUAVA ArrayTable: dense fixed universe row x col grid [license Apache-2.0; SUPERSET_VIEW VIEW_OF:native indexed table; priority P2; matrix owner dense value lane grid]</li>
- * </ul>
+ * <p>The cell of row {@code r} and column {@code c} is slot {@code r * columns + c} of the value lane, so a cell is
+ * read and written by index in O(1) with no entry object. Two open-addressed int lanes map a key to its index; they
+ * are at most half full and never change after construction. One state bit per cell tells whether the cell holds a
+ * value. Every pair of a row key and a column key is a cell from the start: a cell without a value reads as null.
+ * Keys are not null; values may be null.</p>
  *
- * <p>DOOP mapping: lane kind OBJECT; lanes {@code Object[] rowKeyLane;Object[] columnKeyLane;Object[] valueLane}; offset scheme dense grid: row*columnCount+column; state-mask bits PRESENT; stored nodes NONE; API entry objects TRANSIENT_FACADE(Cell) (transient facades over slots, never the stored representation); matrix note: value lane row*cols+col offsets / presence bitmask per cell.
- *
- * <p>Status: SCAFFOLD. Every public atom throws {@link NotYetReceived} until this owner is received through a hash-pinned Synexia recipe with its own
- * provider oracle (never inferred from another provider). Not a {@code java.util} replacement.
+ * <p>Provider comparison: Guava {@code ArrayTable} (Apache-2.0): the same results and the same refusals for the
+ * operations declared here. Not thread safe. Not a {@code java.util} replacement.</p>
  */
 public final class ArrayTable<R, C, V> {
-    /** State-mask bit {@code PRESENT} (per-slot state word, bit 0). */
+    /** State-mask bit {@code PRESENT}: bit {@code i} of the state words is set while cell {@code i} holds a value. */
     static final long STATE_PRESENT = 1L << 0;
+    private static final int NONE = -1;
+    private static final int GOLDEN_RATIO_32 = 0x9E3779B9;
+    private static final int FOLD_SHIFT = 16;
 
-    /** Storage lane {@code rowKeyLane}: dynamic primitive/reference array lane. */
+    /** Storage lane {@code rowKeyLane}: the row keys in their given order. */
     private Object[] rowKeyLane = new Object[0];
-    /** Storage lane {@code columnKeyLane}: dynamic primitive/reference array lane. */
+    /** Storage lane {@code columnKeyLane}: the column keys in their given order. */
     private Object[] columnKeyLane = new Object[0];
-    /** Storage lane {@code valueLane}: dynamic primitive/reference array lane. */
+    /** Storage lane {@code valueLane}: the cell values, row after row. */
     private Object[] valueLane = new Object[0];
-    /** Per-slot state words (PRESENT); one bit set per slot and state. */
+    /** State words (PRESENT): one bit per cell, 64 cells per word. */
     private long[] stateMaskWords = new long[0];
-    /** Live slot count. */
+    /** Live slot count: the cells that hold a value. */
     private int size;
+    /** Open-addressed table of row index + 1; 0 is empty; at most half full. */
+    private int[] rowIndexLane = new int[1];
+    /** Open-addressed table of column index + 1; 0 is empty; at most half full. */
+    private int[] columnIndexLane = new int[1];
+    private List<R> rowKeys = List.of();
+    private List<C> columnKeys = List.of();
 
-    /** Creates an empty scaffold owner; lanes grow by copy once received. */
+    /** Creates a table without keys: it has no cell. */
     public ArrayTable() {
+    }
+
+    /**
+     * Creates a table whose cells all read as null.
+     *
+     * @param rowKeys the row keys, in order, without null and without duplicates
+     * @param columnKeys the column keys, in order, without null and without duplicates
+     * @throws IllegalArgumentException if a key is repeated or exactly one of the two key lists is empty
+     */
+    public ArrayTable(Iterable<? extends R> rowKeys, Iterable<? extends C> columnKeys) {
+        rowKeyLane = keys(rowKeys);
+        columnKeyLane = keys(columnKeys);
+        if ((rowKeyLane.length == 0) != (columnKeyLane.length == 0)) {
+            throw new IllegalArgumentException("exactly one of the key lists is empty");
+        }
+        rowIndexLane = index(rowKeyLane);
+        columnIndexLane = index(columnKeyLane);
+        valueLane = new Object[Math.multiplyExact(rowKeyLane.length, columnKeyLane.length)];
+        stateMaskWords = new long[(valueLane.length + Long.SIZE - 1) / Long.SIZE];
+        this.rowKeys = view(rowKeyLane);
+        this.columnKeys = view(columnKeyLane);
     }
 
     /** Reports the declared state-mask bits and lanes for ledgers; never allocates per element. */
     public static String scaffoldDescriptor() {
-        return "M3ArrayTable|ARRAY_TABLE|OBJECT|PRESENT|Object[] rowKeyLane;Object[] columnKeyLane;Object[] valueLane";
+        return "ArrayTable|ARRAY_TABLE|OBJECT|PRESENT|Object[] rowKeyLane;Object[] columnKeyLane;Object[] valueLane";
     }
 
-    /** ArrayTable.at (scaffold: not yet received). */
+    /** The value of the cell at a row index and a column index; {@code IndexOutOfBoundsException} outside the table. */
+    @SuppressWarnings("unchecked")
     public V at(int rowIndex, int columnIndex) {
-        throw new NotYetReceived("M3ArrayTable.at");
+        return (V) valueLane[cell(rowIndex, columnIndex)];
     }
 
-    /** ArrayTable.set (scaffold: not yet received). */
+    /** Writes the cell at a row index and a column index and returns the value it held, or null. */
+    @SuppressWarnings("unchecked")
     public V set(int rowIndex, int columnIndex, V value) {
-        throw new NotYetReceived("M3ArrayTable.set");
+        int cell = cell(rowIndex, columnIndex);
+        V old = (V) valueLane[cell];
+        valueLane[cell] = value;
+        if ((old == null) != (value == null)) {
+            stateMaskWords[cell / Long.SIZE] ^= STATE_PRESENT << cell;
+            size += value == null ? -1 : 1;
+        }
+        return old;
     }
 
-    /** ArrayTable.get (scaffold: not yet received). */
+    /** The value of the cell of a row key and a column key, or null when a key is not in the table. */
     public V get(Object rowKey, Object columnKey) {
-        throw new NotYetReceived("M3ArrayTable.get");
+        int row = find(rowKeyLane, rowIndexLane, rowKey);
+        int column = find(columnKeyLane, columnIndexLane, columnKey);
+        return row == NONE || column == NONE ? null : at(row, column);
     }
 
-    /** ArrayTable.put (scaffold: not yet received). */
+    /**
+     * Writes the cell of a row key and a column key and returns the value it held, or null. A key that is not in the
+     * table is refused with {@code IllegalArgumentException}; a null key with {@code NullPointerException}.
+     */
     public V put(R rowKey, C columnKey, V value) {
-        throw new NotYetReceived("M3ArrayTable.put");
+        Objects.requireNonNull(rowKey);
+        Objects.requireNonNull(columnKey);
+        int row = find(rowKeyLane, rowIndexLane, rowKey);
+        if (row == NONE) {
+            throw new IllegalArgumentException("Row " + rowKey + " not in " + rowKeys);
+        }
+        int column = find(columnKeyLane, columnIndexLane, columnKey);
+        if (column == NONE) {
+            throw new IllegalArgumentException("Column " + columnKey + " not in " + columnKeys);
+        }
+        return set(row, column, value);
     }
 
-    /** ArrayTable.erase (scaffold: not yet received). */
+    /** Writes null into the cell of two keys and returns the value it held; null when a key is not in the table. */
     public V erase(Object rowKey, Object columnKey) {
-        throw new NotYetReceived("M3ArrayTable.erase");
+        int row = find(rowKeyLane, rowIndexLane, rowKey);
+        int column = find(columnKeyLane, columnIndexLane, columnKey);
+        return row == NONE || column == NONE ? null : set(row, column, null);
     }
 
-    /** ArrayTable.contains (scaffold: not yet received). */
+    /** Tells whether both keys are in the table; the value of the cell does not matter. */
     public boolean contains(Object rowKey, Object columnKey) {
-        throw new NotYetReceived("M3ArrayTable.contains");
+        return find(rowKeyLane, rowIndexLane, rowKey) != NONE && find(columnKeyLane, columnIndexLane, columnKey) != NONE;
     }
 
-    /** ArrayTable.rowKeyList (scaffold: not yet received). */
-    public java.util.List<R> rowKeyList() {
-        throw new NotYetReceived("M3ArrayTable.rowKeyList");
+    /** The row keys in order, as a list that cannot be changed. */
+    public List<R> rowKeyList() {
+        return rowKeys;
     }
 
-    /** ArrayTable.columnKeyList (scaffold: not yet received). */
-    public java.util.List<C> columnKeyList() {
-        throw new NotYetReceived("M3ArrayTable.columnKeyList");
+    /** The column keys in order, as a list that cannot be changed. */
+    public List<C> columnKeyList() {
+        return columnKeys;
     }
 
-    /** ArrayTable.size (rows*columns) (scaffold: not yet received). */
+    /** The number of cells: rows times columns. */
     public int size() {
-        throw new NotYetReceived("M3ArrayTable.size");
+        return rowKeyLane.length * columnKeyLane.length;
+    }
+
+    private int cell(int rowIndex, int columnIndex) {
+        Objects.checkIndex(rowIndex, rowKeyLane.length);
+        Objects.checkIndex(columnIndex, columnKeyLane.length);
+        return rowIndex * columnKeyLane.length + columnIndex;
+    }
+
+    private static Object[] keys(Iterable<?> given) {
+        List<Object> keys = new ArrayList<>();
+        given.forEach(key -> keys.add(Objects.requireNonNull(key)));
+        return keys.toArray();
+    }
+
+    @SuppressWarnings("unchecked")
+    private static <K> List<K> view(Object[] lane) {
+        return Collections.unmodifiableList(Arrays.asList((K[]) lane));
+    }
+
+    private static int[] index(Object[] keys) {
+        int[] table = new int[Integer.highestOneBit(Math.max(1, keys.length) << 1) << 1];
+        for (int slot = 0; slot < keys.length; slot++) {
+            int position = probe(keys, table, keys[slot]);
+            if (table[position] != 0) {
+                throw new IllegalArgumentException("Multiple entries with same key: " + keys[slot]);
+            }
+            table[position] = slot + 1;
+        }
+        return table;
+    }
+
+    private static int find(Object[] keys, int[] table, Object key) {
+        return key == null ? NONE : table[probe(keys, table, key)] - 1;
+    }
+
+    /** The table position that holds the key, or the empty position where its probe run ends. */
+    private static int probe(Object[] keys, int[] table, Object key) {
+        int mask = table.length - 1;
+        int hash = key.hashCode() * GOLDEN_RATIO_32;
+        int position = (hash ^ (hash >>> FOLD_SHIFT)) & mask;
+        while (table[position] != 0 && !key.equals(keys[table[position] - 1])) {
+            position = (position + 1) & mask;
+        }
+        return position;
     }
 }
