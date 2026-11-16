@@ -7,9 +7,12 @@
  * @test
  * @summary Canonical String casing preserves JDK Unicode/locale rules and bounded output owners
  * @modules java.base/java.lang:open
- * @run main/othervm -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage M3StringUnicodeCaseTest
- * @run main/othervm -Xint -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage -XX:-CompactStrings M3StringUnicodeCaseTest
- * @run main/othervm -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage -Dm3.string.pool.maxBytes=0 M3StringUnicodeCaseTest refusal
+ * @run main/othervm -XX:+UnlockExperimentalVMOptions
+ *   -XX:+UseM3StringStorage M3StringUnicodeCaseTest
+ * @run main/othervm -Xint -XX:+UnlockExperimentalVMOptions
+ *   -XX:+UseM3StringStorage -XX:-CompactStrings M3StringUnicodeCaseTest
+ * @run main/othervm -XX:+UnlockExperimentalVMOptions
+ *   -XX:+UseM3StringStorage -Dm3.string.pool.maxBytes=0 M3StringUnicodeCaseTest refusal
  */
 
 import java.lang.reflect.Constructor;
@@ -178,7 +181,8 @@ public class M3StringUnicodeCaseTest {
             boolean right = visit(RIGHT.get(owner), seen, wanted, max);
             return left || right;
         }
-        check((int) OWNER_LENGTH.get(owner) <= max, "case result retained an oversized scalar owner");
+        check((int) OWNER_LENGTH.get(owner) <= max,
+                "case result retained an oversized scalar owner");
         return false;
     }
 
@@ -188,7 +192,9 @@ public class M3StringUnicodeCaseTest {
 
     private static Method method(Class<?> owner, String name, Class<?>... parameters)
             throws ReflectiveOperationException {
-        Method method = owner.getDeclaredMethod(name, parameters); method.setAccessible(true); return method;
+        Method method = owner.getDeclaredMethod(name, parameters);
+        method.setAccessible(true);
+        return method;
     }
 
     private static void check(boolean ok, String message) {
