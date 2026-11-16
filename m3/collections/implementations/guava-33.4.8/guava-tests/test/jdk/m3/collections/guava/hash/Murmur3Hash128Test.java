@@ -16,9 +16,12 @@
 
 package jdk.m3.collections.guava.hash;
 
+import static jdk.m3.collections.guava.hash.Funnels.byteArrayFunnel;
 import static jdk.m3.collections.guava.hash.Hashing.murmur3_128;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
+import jdk.m3.collections.guava.annotations.J2ktIncompatible;
 import jdk.m3.collections.guava.hash.HashTestUtils.HashFn;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
@@ -27,6 +30,7 @@ import org.jspecify.annotations.NullUnmarked;
 
 /** Tests for {@link Murmur3_128HashFunction}. */
 @NullUnmarked
+@J2ktIncompatible
 public class Murmur3Hash128Test extends TestCase {
   public void testKnownValues() {
     assertHash(0, 0x629942693e10f867L, 0x92db0b82baeb5347L, "hell");
@@ -43,7 +47,7 @@ public class Murmur3Hash128Test extends TestCase {
     // Known output from Python smhasher
     HashCode foxHash =
         murmur3_128(0).hashString("The quick brown fox jumps over the lazy dog", UTF_8);
-    assertEquals("6c1b07bc7bbc4be347939ac4a93c437a", foxHash.toString());
+    assertThat(foxHash.toString()).isEqualTo("6c1b07bc7bbc4be347939ac4a93c437a");
   }
 
   private static void assertHash(int seed, long expected1, long expected2, String stringInput) {
@@ -68,7 +72,7 @@ public class Murmur3Hash128Test extends TestCase {
           @Override
           public byte[] hash(byte[] input, int seed) {
             Hasher hasher = murmur3_128(seed).newHasher();
-            Funnels.byteArrayFunnel().funnel(input, hasher);
+            byteArrayFunnel().funnel(input, hasher);
             return hasher.hash().asBytes();
           }
         };

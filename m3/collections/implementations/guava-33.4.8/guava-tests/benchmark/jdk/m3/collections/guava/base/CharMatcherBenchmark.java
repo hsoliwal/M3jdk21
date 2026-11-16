@@ -20,7 +20,7 @@ import com.google.caliper.BeforeExperiment;
 import com.google.caliper.Benchmark;
 import com.google.caliper.Param;
 import jdk.m3.collections.guava.base.BenchmarkHelpers.SampleMatcherConfig;
-import jdk.m3.collections.guava.collect.Lists;
+import java.util.ArrayList;
 import java.util.BitSet;
 import java.util.Collections;
 import java.util.List;
@@ -121,7 +121,7 @@ public class CharMatcherBenchmark {
     }
     // Use a shuffled index array to ensure constant percentage of matching
     // characters
-    List<Integer> list = Lists.newArrayList();
+    List<Integer> list = new ArrayList<>();
     for (int i = 0; i < length; i++) {
       list.add(i);
     }
@@ -201,7 +201,7 @@ public class CharMatcherBenchmark {
       }
     }
 
-    private int sum = 69552218;
+    private final int sum = 69552218;
     private static int[] prob;
 
     private static void populateProb1() {

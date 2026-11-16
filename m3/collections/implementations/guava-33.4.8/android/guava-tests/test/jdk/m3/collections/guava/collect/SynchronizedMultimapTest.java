@@ -18,7 +18,7 @@ package jdk.m3.collections.guava.collect;
 
 import static jdk.m3.collections.guava.collect.Multimaps.synchronizedListMultimap;
 import static jdk.m3.collections.guava.collect.Multimaps.synchronizedSortedSetMultimap;
-import static com.google.common.truth.Truth.assertThat;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
 import static java.util.Arrays.asList;
 
 import jdk.m3.collections.guava.collect.testing.features.CollectionFeature;
@@ -79,8 +79,8 @@ public class SynchronizedMultimapTest extends TestCase {
 
   private static final class TestMultimap<K, V> extends ForwardingSetMultimap<K, V>
       implements Serializable {
-    final SetMultimap<K, V> delegate = HashMultimap.create();
-    public final Object mutex = new Object[0]; // something Serializable
+    private final SetMultimap<K, V> delegate = HashMultimap.create();
+    private final Object mutex = new Object[0]; // something Serializable
 
     @Override
     protected SetMultimap<K, V> delegate() {
@@ -223,8 +223,7 @@ public class SynchronizedMultimapTest extends TestCase {
   }
 
   public void testSynchronizedListMultimap() {
-    ListMultimap<String, Integer> multimap =
-        synchronizedListMultimap(ArrayListMultimap.<String, Integer>create());
+    ListMultimap<String, Integer> multimap = synchronizedListMultimap(ArrayListMultimap.create());
     multimap.putAll("foo", asList(3, -1, 2, 4, 1));
     multimap.putAll("bar", asList(1, 2, 3, 1));
     assertThat(multimap.removeAll("foo")).containsExactly(3, -1, 2, 4, 1).inOrder();
@@ -235,7 +234,7 @@ public class SynchronizedMultimapTest extends TestCase {
 
   public void testSynchronizedSortedSetMultimap() {
     SortedSetMultimap<String, Integer> multimap =
-        synchronizedSortedSetMultimap(TreeMultimap.<String, Integer>create());
+        synchronizedSortedSetMultimap(TreeMultimap.create());
     multimap.putAll("foo", asList(3, -1, 2, 4, 1));
     multimap.putAll("bar", asList(1, 2, 3, 1));
     assertThat(multimap.removeAll("foo")).containsExactly(-1, 1, 2, 3, 4).inOrder();

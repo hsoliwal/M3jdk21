@@ -16,10 +16,13 @@
 
 package jdk.m3.collections.guava.util.concurrent;
 
-import static com.google.common.truth.Truth.assertThat;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
+import static jdk.m3.collections.guava.util.concurrent.AbstractChainedListenableFutureTest.Input.VALID_INPUT_DATA;
 import static java.util.concurrent.TimeUnit.MILLISECONDS;
 import static org.junit.Assert.assertThrows;
 
+import jdk.m3.collections.guava.annotations.GwtIncompatible;
+import jdk.m3.collections.guava.annotations.J2ktIncompatible;
 import jdk.m3.collections.guava.util.concurrent.testing.MockFutureListener;
 import java.util.concurrent.TimeoutException;
 import junit.framework.TestCase;
@@ -32,14 +35,21 @@ import org.jspecify.annotations.NullUnmarked;
  * @author Nishant Thakkar
  */
 @NullUnmarked
+@GwtIncompatible
+@J2ktIncompatible
 public abstract class AbstractChainedListenableFutureTest<T> extends TestCase {
-  protected static final int EXCEPTION_DATA = -1;
-  protected static final int VALID_INPUT_DATA = 1;
-  protected static final Exception EXCEPTION = new Exception("Test exception");
+  enum Input {
+    EXCEPTION_DATA,
+    VALID_INPUT_DATA,
+    SLOW_OUTPUT_VALID_INPUT_DATA,
+    SLOW_FUNC_VALID_INPUT_DATA,
+  }
 
-  protected SettableFuture<Integer> inputFuture;
-  protected ListenableFuture<T> resultFuture;
-  protected MockFutureListener listener;
+  static final Exception EXCEPTION = new Exception("Test exception");
+
+  SettableFuture<Input> inputFuture;
+  ListenableFuture<T> resultFuture;
+  MockFutureListener listener;
 
   @Override
   protected void setUp() throws Exception {
@@ -50,7 +60,7 @@ public abstract class AbstractChainedListenableFutureTest<T> extends TestCase {
     listener = new MockFutureListener(resultFuture);
   }
 
-  public void testFutureGetBeforeCallback() throws Exception {
+  public void testFutureGetBeforeCallback() {
     // Verify that get throws a timeout exception before the callback is called.
     assertThrows(TimeoutException.class, () -> resultFuture.get(1L, MILLISECONDS));
   }
@@ -80,7 +90,7 @@ public abstract class AbstractChainedListenableFutureTest<T> extends TestCase {
     listener.assertSuccess(getSuccessfulResult());
   }
 
-  public void testInputFutureToString() throws Throwable {
+  public void testInputFutureToString() {
     assertThat(resultFuture.toString()).contains(inputFuture.toString());
   }
 
@@ -89,11 +99,11 @@ public abstract class AbstractChainedListenableFutureTest<T> extends TestCase {
    * when inputFuture returns VALID_INPUT_DATA, and sets the exception to EXCEPTION in all other
    * cases.
    */
-  protected abstract ListenableFuture<T> buildChainingFuture(ListenableFuture<Integer> inputFuture);
+  abstract ListenableFuture<T> buildChainingFuture(ListenableFuture<Input> inputFuture);
 
   /**
    * Override to return the result when VALID_INPUT_DATA is passed in to the chaining
    * listenableFuture
    */
-  protected abstract T getSuccessfulResult();
+  abstract T getSuccessfulResult();
 }

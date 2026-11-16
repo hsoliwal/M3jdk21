@@ -26,8 +26,8 @@ import org.jspecify.annotations.Nullable;
 @NullUnmarked
 public class SynchronizedTableTest extends AbstractTableTest<Character> {
   private static final class TestTable<R, C, V> implements Table<R, C, V>, Serializable {
-    final Table<R, C, V> delegate = HashBasedTable.create();
-    public final Object mutex = new Object[0]; // something Serializable
+    private final Table<R, C, V> delegate = HashBasedTable.create();
+    private final Object mutex = new Object[0]; // something Serializable
 
     @Override
     public String toString() {
@@ -103,25 +103,25 @@ public class SynchronizedTableTest extends AbstractTableTest<Character> {
     }
 
     @Override
-    public boolean contains(Object rowKey, Object columnKey) {
+    public boolean contains(@Nullable Object rowKey, @Nullable Object columnKey) {
       assertTrue(Thread.holdsLock(mutex));
       return delegate.contains(rowKey, columnKey);
     }
 
     @Override
-    public boolean containsColumn(Object columnKey) {
+    public boolean containsColumn(@Nullable Object columnKey) {
       assertTrue(Thread.holdsLock(mutex));
       return delegate.containsColumn(columnKey);
     }
 
     @Override
-    public boolean containsRow(Object rowKey) {
+    public boolean containsRow(@Nullable Object rowKey) {
       assertTrue(Thread.holdsLock(mutex));
       return delegate.containsRow(rowKey);
     }
 
     @Override
-    public @Nullable V get(Object rowKey, Object columnKey) {
+    public @Nullable V get(@Nullable Object rowKey, @Nullable Object columnKey) {
       assertTrue(Thread.holdsLock(mutex));
       return delegate.get(rowKey, columnKey);
     }
@@ -139,7 +139,7 @@ public class SynchronizedTableTest extends AbstractTableTest<Character> {
     }
 
     @Override
-    public @Nullable V remove(Object rowKey, Object columnKey) {
+    public @Nullable V remove(@Nullable Object rowKey, @Nullable Object columnKey) {
       assertTrue(Thread.holdsLock(mutex));
       return delegate.remove(rowKey, columnKey);
     }
@@ -166,7 +166,7 @@ public class SynchronizedTableTest extends AbstractTableTest<Character> {
   }
 
   @Override
-  protected Table<String, Integer, Character> create(@Nullable Object... data) {
+  Table<String, Integer, Character> create(@Nullable Object... data) {
     TestTable<String, Integer, Character> table = new TestTable<>();
     Table<String, Integer, Character> synced = Synchronized.table(table, table.mutex);
     populate(synced, data);

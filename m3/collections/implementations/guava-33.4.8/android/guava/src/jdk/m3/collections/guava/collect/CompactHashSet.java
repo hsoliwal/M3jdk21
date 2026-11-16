@@ -26,7 +26,6 @@ import static java.util.Objects.requireNonNull;
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
 import jdk.m3.collections.guava.annotations.J2ktIncompatible;
 import jdk.m3.collections.guava.annotations.VisibleForTesting;
-import jdk.m3.collections.guava.base.Objects;
 import jdk.m3.collections.guava.base.Preconditions;
 import jdk.m3.collections.guava.primitives.Ints;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
@@ -43,6 +42,7 @@ import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.NoSuchElementException;
+import java.util.Objects;
 import java.util.Set;
 import org.jspecify.annotations.Nullable;
 
@@ -220,7 +220,7 @@ class CompactHashSet<E extends @Nullable Object> extends AbstractSet<E> implemen
   }
 
   /** Returns whether arrays need to be allocated. */
-  boolean needsAllocArrays() {
+  final boolean needsAllocArrays() {
     return table == null;
   }
 
@@ -242,7 +242,7 @@ class CompactHashSet<E extends @Nullable Object> extends AbstractSet<E> implemen
 
   @SuppressWarnings("unchecked")
   @VisibleForTesting
-  @Nullable Set<E> delegateOrNull() {
+  final @Nullable Set<E> delegateOrNull() {
     if (table instanceof Set) {
       return (Set<E>) table;
     }
@@ -283,13 +283,13 @@ class CompactHashSet<E extends @Nullable Object> extends AbstractSet<E> implemen
     return (1 << (metadata & CompactHashing.HASH_TABLE_BITS_MASK)) - 1;
   }
 
-  void incrementModCount() {
+  final void incrementModCount() {
     metadata += CompactHashing.MODIFICATION_COUNT_INCREMENT;
   }
 
   @CanIgnoreReturnValue
   @Override
-  public boolean add(@ParametricNullness E object) {
+  public final boolean add(@ParametricNullness E object) {
     if (needsAllocArrays()) {
       allocArrays();
     }
@@ -322,7 +322,7 @@ class CompactHashSet<E extends @Nullable Object> extends AbstractSet<E> implemen
         entryIndex = next - 1;
         entry = entries[entryIndex];
         if (CompactHashing.getHashPrefix(entry, mask) == hashPrefix
-            && Objects.equal(object, elements[entryIndex])) {
+            && Objects.equals(object, elements[entryIndex])) {
           return false;
         }
         next = CompactHashing.getNext(entry, mask);
@@ -414,7 +414,7 @@ class CompactHashSet<E extends @Nullable Object> extends AbstractSet<E> implemen
   }
 
   @Override
-  public boolean contains(@Nullable Object object) {
+  public final boolean contains(@Nullable Object object) {
     if (needsAllocArrays()) {
       return false;
     }
@@ -433,7 +433,7 @@ class CompactHashSet<E extends @Nullable Object> extends AbstractSet<E> implemen
       int entryIndex = next - 1;
       int entry = entry(entryIndex);
       if (CompactHashing.getHashPrefix(entry, mask) == hashPrefix
-          && Objects.equal(object, element(entryIndex))) {
+          && Objects.equals(object, element(entryIndex))) {
         return true;
       }
       next = CompactHashing.getNext(entry, mask);
@@ -443,7 +443,7 @@ class CompactHashSet<E extends @Nullable Object> extends AbstractSet<E> implemen
 
   @CanIgnoreReturnValue
   @Override
-  public boolean remove(@Nullable Object object) {
+  public final boolean remove(@Nullable Object object) {
     if (needsAllocArrays()) {
       return false;
     }
@@ -533,7 +533,7 @@ class CompactHashSet<E extends @Nullable Object> extends AbstractSet<E> implemen
   }
 
   @Override
-  public Iterator<E> iterator() {
+  public final Iterator<E> iterator() {
     Set<E> delegate = delegateOrNull();
     if (delegate != null) {
       return delegate.iterator();
@@ -575,7 +575,7 @@ class CompactHashSet<E extends @Nullable Object> extends AbstractSet<E> implemen
         expectedMetadata += CompactHashing.MODIFICATION_COUNT_INCREMENT;
       }
 
-      private void checkForConcurrentModification() {
+      void checkForConcurrentModification() {
         if (metadata != expectedMetadata) {
           throw new ConcurrentModificationException();
         }
@@ -584,13 +584,13 @@ class CompactHashSet<E extends @Nullable Object> extends AbstractSet<E> implemen
   }
 
   @Override
-  public int size() {
+  public final int size() {
     Set<E> delegate = delegateOrNull();
     return (delegate != null) ? delegate.size() : size;
   }
 
   @Override
-  public boolean isEmpty() {
+  public final boolean isEmpty() {
     return size() == 0;
   }
 
@@ -683,12 +683,14 @@ class CompactHashSet<E extends @Nullable Object> extends AbstractSet<E> implemen
     if (elementCount < 0) {
       throw new InvalidObjectException("Invalid size: " + elementCount);
     }
-    init(elementCount);
+    init(min(elementCount, 256));
     for (int i = 0; i < elementCount; i++) {
       E element = (E) stream.readObject();
       add(element);
     }
   }
+
+  @J2ktIncompatible private static final long serialVersionUID = -6187423658046915740L;
 
   /*
    * For discussion of the safety of the following methods, see the comments near the end of

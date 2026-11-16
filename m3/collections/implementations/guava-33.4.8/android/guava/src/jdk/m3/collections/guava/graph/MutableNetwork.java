@@ -16,7 +16,6 @@
 
 package jdk.m3.collections.guava.graph;
 
-import jdk.m3.collections.guava.annotations.Beta;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 
 /**
@@ -29,7 +28,6 @@ import com.google.errorprone.annotations.CanIgnoreReturnValue;
  * @param <E> Edge parameter type
  * @since 20.0
  */
-@Beta
 public interface MutableNetwork<N, E> extends Network<N, E> {
 
   /**

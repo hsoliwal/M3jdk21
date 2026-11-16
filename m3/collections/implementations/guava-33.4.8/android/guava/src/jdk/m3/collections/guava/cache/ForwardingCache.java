@@ -15,6 +15,7 @@
 package jdk.m3.collections.guava.cache;
 
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
+import jdk.m3.collections.guava.annotations.J2ktIncompatible;
 import jdk.m3.collections.guava.base.Preconditions;
 import jdk.m3.collections.guava.collect.ForwardingObject;
 import jdk.m3.collections.guava.collect.ImmutableMap;
@@ -33,6 +34,7 @@ import org.jspecify.annotations.Nullable;
  * @since 10.0
  */
 @GwtIncompatible
+@J2ktIncompatible // Compiles fine, but hidden for safety because the tests have not been ported
 public abstract class ForwardingCache<K, V> extends ForwardingObject implements Cache<K, V> {
 
   /** Constructor for use by subclasses. */
@@ -133,6 +135,7 @@ public abstract class ForwardingCache<K, V> extends ForwardingObject implements 
   public abstract static class SimpleForwardingCache<K, V> extends ForwardingCache<K, V> {
     private final Cache<K, V> delegate;
 
+    /** Constructor for use by subclasses. */
     protected SimpleForwardingCache(Cache<K, V> delegate) {
       this.delegate = Preconditions.checkNotNull(delegate);
     }

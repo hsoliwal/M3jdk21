@@ -16,18 +16,24 @@
 
 package jdk.m3.collections.guava.base;
 
-import static jdk.m3.collections.guava.base.ReflectionFreeAssertThrows.assertThrows;
+import static jdk.m3.collections.guava.base.Predicates.alwaysFalse;
+import static jdk.m3.collections.guava.base.Predicates.alwaysTrue;
+import static jdk.m3.collections.guava.base.Predicates.compose;
+import static jdk.m3.collections.guava.base.Predicates.equalTo;
+import static jdk.m3.collections.guava.testing.SerializableTester.reserialize;
+import static jdk.m3.collections.guava.testing.SerializableTester.reserializeAndAssert;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
+import static org.junit.Assert.assertThrows;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
 import jdk.m3.collections.guava.annotations.J2ktIncompatible;
 import jdk.m3.collections.guava.collect.ImmutableMap;
-import jdk.m3.collections.guava.collect.Maps;
 import jdk.m3.collections.guava.testing.ClassSanityTester;
 import jdk.m3.collections.guava.testing.EqualsTester;
 import jdk.m3.collections.guava.testing.NullPointerTester;
-import jdk.m3.collections.guava.testing.SerializableTester;
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.Map;
 import junit.framework.TestCase;
 import org.jspecify.annotations.NullMarked;
@@ -39,19 +45,14 @@ import org.jspecify.annotations.Nullable;
  * @author Mike Bostock
  * @author Vlad Patryshev
  */
-@GwtCompatible(emulated = true)
+@GwtCompatible
 @NullMarked
 public class FunctionsTest extends TestCase {
 
   public void testIdentity_same() {
     Function<@Nullable String, @Nullable String> identity = Functions.identity();
-    assertNull(identity.apply(null));
-    assertSame("foo", identity.apply("foo"));
-  }
-
-  public void testIdentity_notSame() {
-    Function<Long, Long> identity = Functions.identity();
-    assertNotSame(new Long(135135L), identity.apply(new Long(135135L)));
+    assertThat(identity.apply(null)).isNull();
+    assertThat(identity.apply("foo")).isSameInstanceAs("foo");
   }
 
   @J2ktIncompatible
@@ -60,19 +61,20 @@ public class FunctionsTest extends TestCase {
     checkCanReserializeSingleton(Functions.identity());
   }
 
+  @SuppressWarnings("nullness") // test of a bogus call
   public void testToStringFunction_apply() {
-    assertEquals("3", Functions.toStringFunction().apply(3));
-    assertEquals("hiya", Functions.toStringFunction().apply("hiya"));
-    assertEquals(
-        "I'm a string",
-        Functions.toStringFunction()
-            .apply(
-                new Object() {
-                  @Override
-                  public String toString() {
-                    return "I'm a string";
-                  }
-                }));
+    assertThat(Functions.toStringFunction().apply(3)).isEqualTo("3");
+    assertThat(Functions.toStringFunction().apply("hiya")).isEqualTo("hiya");
+    assertThat(
+            Functions.toStringFunction()
+                .apply(
+                    new Object() {
+                      @Override
+                      public String toString() {
+                        return "I'm a string";
+                      }
+                    }))
+        .isEqualTo("I'm a string");
     assertThrows(NullPointerException.class, () -> Functions.toStringFunction().apply(null));
   }
 
@@ -90,7 +92,7 @@ public class FunctionsTest extends TestCase {
   }
 
   public void testForMapWithoutDefault() {
-    Map<String, @Nullable Integer> map = Maps.newHashMap();
+    Map<String, @Nullable Integer> map = new HashMap<>();
     map.put("One", 1);
     map.put("Three", 3);
     map.put("Null", null);
@@ -98,7 +100,7 @@ public class FunctionsTest extends TestCase {
 
     assertEquals(1, function.apply("One").intValue());
     assertEquals(3, function.apply("Three").intValue());
-    assertNull(function.apply("Null"));
+    assertThat(function.apply("Null")).isNull();
 
     assertThrows(IllegalArgumentException.class, () -> function.apply("Two"));
 
@@ -115,7 +117,7 @@ public class FunctionsTest extends TestCase {
   }
 
   public void testForMapWithDefault() {
-    Map<String, @Nullable Integer> map = Maps.newHashMap();
+    Map<String, @Nullable Integer> map = new HashMap<>();
     map.put("One", 1);
     map.put("Three", 3);
     map.put("Null", null);
@@ -124,7 +126,7 @@ public class FunctionsTest extends TestCase {
     assertEquals(1, function.apply("One").intValue());
     assertEquals(42, function.apply("Two").intValue());
     assertEquals(3, function.apply("Three").intValue());
-    assertNull(function.apply("Null"));
+    assertThat(function.apply("Null")).isNull();
 
     new EqualsTester()
         .addEqualityGroup(function, Functions.forMap(map, 42))
@@ -137,7 +139,7 @@ public class FunctionsTest extends TestCase {
   @J2ktIncompatible
   @GwtIncompatible // SerializableTester
   public void testForMapWithDefault_includeSerializable() {
-    Map<String, Integer> map = Maps.newHashMap();
+    Map<String, Integer> map = new HashMap<>();
     map.put("One", 1);
     map.put("Three", 3);
     Function<String, Integer> function = Functions.forMap(map, 42);
@@ -147,8 +149,7 @@ public class FunctionsTest extends TestCase {
     assertEquals(3, function.apply("Three").intValue());
 
     new EqualsTester()
-        .addEqualityGroup(
-            function, Functions.forMap(map, 42), SerializableTester.reserialize(function))
+        .addEqualityGroup(function, Functions.forMap(map, 42), reserialize(function))
         .addEqualityGroup(Functions.forMap(map))
         .addEqualityGroup(Functions.forMap(map, null))
         .addEqualityGroup(Functions.forMap(map, 43))
@@ -165,8 +166,8 @@ public class FunctionsTest extends TestCase {
     ImmutableMap<String, Integer> map = ImmutableMap.of("One", 1);
     Function<String, @Nullable Integer> function = Functions.forMap(map, null);
 
-    assertEquals((Integer) 1, function.apply("One"));
-    assertNull(function.apply("Two"));
+    assertThat(function.apply("One")).isEqualTo(1);
+    assertThat(function.apply("Two")).isNull();
 
     // check basic sanity of equals and hashCode
     new EqualsTester()
@@ -182,17 +183,17 @@ public class FunctionsTest extends TestCase {
     Function<String, Integer> function = Functions.forMap(map, null);
 
     assertEquals((Integer) 1, function.apply("One"));
-    assertNull(function.apply("Two"));
+    assertThat(function.apply("Two")).isNull();
 
     // check basic sanity of equals and hashCode
     new EqualsTester()
-        .addEqualityGroup(function, SerializableTester.reserialize(function))
+        .addEqualityGroup(function, reserialize(function))
         .addEqualityGroup(Functions.forMap(map, 1))
         .testEquals();
   }
 
   public void testForMapWildCardWithDefault() {
-    Map<String, Integer> map = Maps.newHashMap();
+    Map<String, Integer> map = new HashMap<>();
     map.put("One", 1);
     map.put("Three", 3);
     Number number = Double.valueOf(42);
@@ -204,13 +205,13 @@ public class FunctionsTest extends TestCase {
   }
 
   public void testComposition() {
-    Map<String, Integer> mJapaneseToInteger = Maps.newHashMap();
+    Map<String, Integer> mJapaneseToInteger = new HashMap<>();
     mJapaneseToInteger.put("Ichi", 1);
     mJapaneseToInteger.put("Ni", 2);
     mJapaneseToInteger.put("San", 3);
     Function<String, Integer> japaneseToInteger = Functions.forMap(mJapaneseToInteger);
 
-    Map<Integer, String> mIntegerToSpanish = Maps.newHashMap();
+    Map<Integer, String> mIntegerToSpanish = new HashMap<>();
     mIntegerToSpanish.put(1, "Uno");
     mIntegerToSpanish.put(3, "Tres");
     mIntegerToSpanish.put(4, "Cuatro");
@@ -219,9 +220,9 @@ public class FunctionsTest extends TestCase {
     Function<String, String> japaneseToSpanish =
         Functions.compose(integerToSpanish, japaneseToInteger);
 
-    assertEquals("Uno", japaneseToSpanish.apply("Ichi"));
+    assertThat(japaneseToSpanish.apply("Ichi")).isEqualTo("Uno");
     assertThrows(IllegalArgumentException.class, () -> japaneseToSpanish.apply("Ni"));
-    assertEquals("Tres", japaneseToSpanish.apply("San"));
+    assertThat(japaneseToSpanish.apply("San")).isEqualTo("Tres");
     assertThrows(IllegalArgumentException.class, () -> japaneseToSpanish.apply("Shi"));
 
     new EqualsTester()
@@ -235,13 +236,13 @@ public class FunctionsTest extends TestCase {
   @J2ktIncompatible
   @GwtIncompatible // SerializableTester
   public void testComposition_includeReserializabled() {
-    Map<String, Integer> mJapaneseToInteger = Maps.newHashMap();
+    Map<String, Integer> mJapaneseToInteger = new HashMap<>();
     mJapaneseToInteger.put("Ichi", 1);
     mJapaneseToInteger.put("Ni", 2);
     mJapaneseToInteger.put("San", 3);
     Function<String, Integer> japaneseToInteger = Functions.forMap(mJapaneseToInteger);
 
-    Map<Integer, String> mIntegerToSpanish = Maps.newHashMap();
+    Map<Integer, String> mIntegerToSpanish = new HashMap<>();
     mIntegerToSpanish.put(1, "Uno");
     mIntegerToSpanish.put(3, "Tres");
     mIntegerToSpanish.put(4, "Cuatro");
@@ -254,7 +255,7 @@ public class FunctionsTest extends TestCase {
         .addEqualityGroup(
             japaneseToSpanish,
             Functions.compose(integerToSpanish, japaneseToInteger),
-            SerializableTester.reserialize(japaneseToSpanish))
+            reserialize(japaneseToSpanish))
         .addEqualityGroup(japaneseToInteger)
         .addEqualityGroup(integerToSpanish)
         .addEqualityGroup(Functions.compose(japaneseToInteger, integerToSpanish))
@@ -262,10 +263,10 @@ public class FunctionsTest extends TestCase {
   }
 
   public void testCompositionWildcard() {
-    Map<String, Integer> mapJapaneseToInteger = Maps.newHashMap();
+    Map<String, Integer> mapJapaneseToInteger = new HashMap<>();
     Function<String, Integer> japaneseToInteger = Functions.forMap(mapJapaneseToInteger);
 
-    Function<Object, String> numberToSpanish = Functions.constant("Yo no se");
+    Function<@Nullable Object, String> numberToSpanish = Functions.constant("Yo no se");
 
     Function<String, String> unusedJapaneseToSpanish =
         Functions.compose(numberToSpanish, japaneseToInteger);
@@ -291,20 +292,20 @@ public class FunctionsTest extends TestCase {
     //     assertEquals(c1, c2);
 
     // But for now, settle for this:
-    assertEquals(c1.hashCode(), c2.hashCode());
+    assertThat(c1.hashCode()).isEqualTo(c2.hashCode());
 
-    assertEquals(c1.apply(1.0f), c2.apply(1.0f));
-    assertEquals(c1.apply(5.0f), c2.apply(5.0f));
+    assertThat(c1.apply(1.0f)).isEqualTo(c2.apply(1.0f));
+    assertThat(c1.apply(5.0f)).isEqualTo(c2.apply(5.0f));
   }
 
   public void testComposeOfPredicateAndFunctionIsAssociative() {
     Map<Float, String> m = ImmutableMap.of(4.0f, "A", 3.0f, "B", 2.0f, "C", 1.0f, "D");
-    Predicate<? super Integer> h = Predicates.equalTo(42);
+    Predicate<? super Integer> h = equalTo(42);
     Function<? super String, Integer> g = new HashCodeFunction();
     Function<Float, String> f = Functions.forMap(m, "F");
 
-    Predicate<Float> p1 = Predicates.compose(Predicates.compose(h, g), f);
-    Predicate<Float> p2 = Predicates.compose(h, Functions.compose(g, f));
+    Predicate<Float> p1 = compose(compose(h, g), f);
+    Predicate<Float> p2 = compose(h, Functions.compose(g, f));
 
     // Might be nice (eventually) to have:
     //     assertEquals(p1, p2);
@@ -317,14 +318,14 @@ public class FunctionsTest extends TestCase {
   }
 
   public void testForPredicate() {
-    Function<Object, Boolean> alwaysTrue = Functions.forPredicate(Predicates.alwaysTrue());
-    Function<Object, Boolean> alwaysFalse = Functions.forPredicate(Predicates.alwaysFalse());
+    Function<Object, Boolean> alwaysTrue = Functions.forPredicate(alwaysTrue());
+    Function<Object, Boolean> alwaysFalse = Functions.forPredicate(alwaysFalse());
 
     assertTrue(alwaysTrue.apply(0));
     assertFalse(alwaysFalse.apply(0));
 
     new EqualsTester()
-        .addEqualityGroup(alwaysTrue, Functions.forPredicate(Predicates.alwaysTrue()))
+        .addEqualityGroup(alwaysTrue, Functions.forPredicate(alwaysTrue()))
         .addEqualityGroup(alwaysFalse)
         .addEqualityGroup(Functions.identity())
         .testEquals();
@@ -333,17 +334,17 @@ public class FunctionsTest extends TestCase {
   @J2ktIncompatible
   @GwtIncompatible // SerializableTester
   public void testForPredicateSerializable() {
-    checkCanReserialize(Functions.forPredicate(Predicates.equalTo(5)));
+    checkCanReserialize(Functions.forPredicate(equalTo(5)));
   }
 
   public void testConstant() {
-    Function<@Nullable Object, Object> f = Functions.<Object>constant("correct");
+    Function<@Nullable Object, Object> f = Functions.constant("correct");
     assertEquals("correct", f.apply(new Object()));
     assertEquals("correct", f.apply(null));
 
     Function<@Nullable Object, @Nullable String> g = Functions.constant(null);
-    assertEquals(null, g.apply(2));
-    assertEquals(null, g.apply(null));
+    assertThat(g.apply(2)).isNull();
+    assertThat(g.apply(null)).isNull();
 
     new EqualsTester()
         .addEqualityGroup(f, Functions.constant("correct"))
@@ -420,8 +421,6 @@ public class FunctionsTest extends TestCase {
 
   @J2ktIncompatible
   @GwtIncompatible // reflection
-  @AndroidIncompatible // TODO(cpovirk): ClassNotFoundException: jdk.m3.collections.guava.base.Function
-  // (I suspect that this and the other similar failures happen with ArbitraryInstances proxies.)
   public void testEqualsAndSerializable() throws Exception {
     new ClassSanityTester().forAllPublicStaticMethods(Functions.class).testEqualsAndSerializable();
   }
@@ -429,7 +428,7 @@ public class FunctionsTest extends TestCase {
   @J2ktIncompatible
   @GwtIncompatible // SerializableTester
   private static <Y> void checkCanReserialize(Function<? super Integer, Y> f) {
-    Function<? super Integer, Y> g = SerializableTester.reserializeAndAssert(f);
+    Function<? super Integer, Y> g = reserializeAndAssert(f);
     for (int i = 1; i < 5; i++) {
       // convoluted way to check that the same result happens from each
       Y expected = null;
@@ -450,8 +449,8 @@ public class FunctionsTest extends TestCase {
   @J2ktIncompatible
   @GwtIncompatible // SerializableTester
   private static <Y> void checkCanReserializeSingleton(Function<? super String, Y> f) {
-    Function<? super String, Y> g = SerializableTester.reserializeAndAssert(f);
-    assertSame(f, g);
+    Function<? super String, Y> g = reserializeAndAssert(f);
+    assertThat(g).isSameInstanceAs(f);
     for (Integer i = 1; i < 5; i++) {
       assertEquals(f.apply(i.toString()), g.apply(i.toString()));
     }

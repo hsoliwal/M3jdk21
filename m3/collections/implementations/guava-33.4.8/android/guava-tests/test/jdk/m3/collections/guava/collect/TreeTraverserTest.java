@@ -14,7 +14,7 @@
 
 package jdk.m3.collections.guava.collect;
 
-import static com.google.common.truth.Truth.assertThat;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
 import static java.util.Arrays.asList;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
@@ -29,10 +29,12 @@ import org.jspecify.annotations.NullMarked;
 /**
  * Tests for {@code TreeTraverser}.
  *
+ * @deprecated Use {@link jdk.m3.collections.guava.graph.Traverser} instead.
  * @author Louis Wasserman
  */
-@GwtCompatible(emulated = true)
+@GwtCompatible
 @NullMarked
+@Deprecated // Use jdk.m3.collections.guava.graph.Traverser instead.
 public class TreeTraverserTest extends TestCase {
   private static class Node {
     final char value;
@@ -45,7 +47,7 @@ public class TreeTraverserTest extends TestCase {
   private static final class Tree extends Node {
     final List<Tree> children;
 
-    public Tree(char value, Tree... children) {
+    Tree(char value, Tree... children) {
       super(value);
       this.children = asList(children);
     }
@@ -75,16 +77,16 @@ public class TreeTraverserTest extends TestCase {
   //   /|\      |
   //  / | \     f
   // a  b  c
-  static final Tree a = new Tree('a');
-  static final Tree b = new Tree('b');
-  static final Tree c = new Tree('c');
-  static final Tree d = new Tree('d', a, b, c);
-  static final Tree e = new Tree('e');
-  static final Tree f = new Tree('f');
-  static final Tree g = new Tree('g', f);
-  static final Tree h = new Tree('h', d, e, g);
+  private static final Tree a = new Tree('a');
+  private static final Tree b = new Tree('b');
+  private static final Tree c = new Tree('c');
+  private static final Tree d = new Tree('d', a, b, c);
+  private static final Tree e = new Tree('e');
+  private static final Tree f = new Tree('f');
+  private static final Tree g = new Tree('g', f);
+  private static final Tree h = new Tree('h', d, e, g);
 
-  static String iterationOrder(Iterable<? extends Node> iterable) {
+  private static String iterationOrder(Iterable<? extends Node> iterable) {
     StringBuilder builder = new StringBuilder();
     for (Node t : iterable) {
       builder.append(t.value);

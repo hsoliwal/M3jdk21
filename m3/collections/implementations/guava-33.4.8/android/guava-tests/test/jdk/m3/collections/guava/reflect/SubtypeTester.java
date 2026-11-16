@@ -17,9 +17,12 @@
 package jdk.m3.collections.guava.reflect;
 
 import static jdk.m3.collections.guava.base.Preconditions.checkState;
-import static com.google.common.truth.Truth.assertThat;
-import static com.google.common.truth.Truth.assertWithMessage;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
+import static jdk.m3.collections.guava.truth.Truth.assertWithMessage;
+import static java.util.Arrays.sort;
 
+import com.google.errorprone.annotations.Keep;
+import com.google.errorprone.annotations.Modifier;
 import com.google.errorprone.annotations.RequiredModifiers;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -27,9 +30,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 import java.lang.reflect.Method;
 import java.lang.reflect.Type;
-import java.util.Arrays;
-import java.util.Comparator;
-import javax.lang.model.element.Modifier;
 import org.jspecify.annotations.NullUnmarked;
 import org.jspecify.annotations.Nullable;
 
@@ -65,14 +65,14 @@ import org.jspecify.annotations.Nullable;
  *
  * <p>The declaration methods must be public.
  */
-@AndroidIncompatible // only used by android incompatible tests.
 @NullUnmarked
 abstract class SubtypeTester implements Cloneable {
 
   /** Annotates a public method that declares subtype assertion. */
-  @RequiredModifiers(Modifier.PUBLIC)
+  @RequiredModifiers(modifier = Modifier.PUBLIC)
   @Retention(RetentionPolicy.RUNTIME)
   @Target(ElementType.METHOD)
+  @Keep
   @interface TestSubtype {
     /** Suppresses the assertion on {@link TypeToken#getSubtype}. */
     boolean suppressGetSubtype() default false;
@@ -140,14 +140,7 @@ abstract class SubtypeTester implements Cloneable {
   final void testAllDeclarations() throws Exception {
     checkState(method == null);
     Method[] methods = getClass().getMethods();
-    Arrays.sort(
-        methods,
-        new Comparator<Method>() {
-          @Override
-          public int compare(Method a, Method b) {
-            return a.getName().compareTo(b.getName());
-          }
-        });
+    sort(methods, (a, b) -> a.getName().compareTo(b.getName()));
     for (Method method : methods) {
       if (method.isAnnotationPresent(TestSubtype.class)) {
         method.setAccessible(true);

@@ -17,18 +17,20 @@ package jdk.m3.collections.guava.hash;
 import static jdk.m3.collections.guava.base.Preconditions.checkArgument;
 import static jdk.m3.collections.guava.base.Preconditions.checkNotNull;
 
+import jdk.m3.collections.guava.annotations.J2ktIncompatible;
 import com.google.errorprone.annotations.Immutable;
 import java.nio.ByteBuffer;
 import java.nio.charset.Charset;
 import org.jspecify.annotations.Nullable;
 
 /**
- * An abstract composition of multiple hash functions. {@linkplain #newHasher()} delegates to the
- * {@code Hasher} objects of the delegate hash functions, and in the end, they are used by
- * {@linkplain #makeHash(Hasher[])} that constructs the final {@code HashCode}.
+ * An abstract composition of multiple hash functions. {@link #newHasher()} delegates to the {@code
+ * Hasher} objects of the delegate hash functions, and in the end, they are used by {@link
+ * #makeHash(Hasher[])} that constructs the final {@code HashCode}.
  *
  * @author Dimitris Andreou
  */
+@J2ktIncompatible
 @Immutable
 abstract class AbstractCompositeHashFunction extends AbstractHashFunction {
 

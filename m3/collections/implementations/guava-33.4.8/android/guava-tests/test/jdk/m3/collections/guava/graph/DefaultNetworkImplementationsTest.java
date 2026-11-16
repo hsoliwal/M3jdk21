@@ -16,31 +16,25 @@
 
 package jdk.m3.collections.guava.graph;
 
-import static jdk.m3.collections.guava.graph.TestUtil.EdgeType.DIRECTED;
-import static jdk.m3.collections.guava.graph.TestUtil.EdgeType.UNDIRECTED;
 import static jdk.m3.collections.guava.graph.TestUtil.assertNodeNotInGraphErrorMessage;
-import static com.google.common.truth.Truth.assertThat;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
 import static org.junit.Assert.assertThrows;
 
 import jdk.m3.collections.guava.graph.TestUtil.EdgeType;
-import java.util.Arrays;
-import java.util.Collection;
+import com.google.testing.junit.testparameterinjector.TestParameter;
+import com.google.testing.junit.testparameterinjector.TestParameterInjector;
 import java.util.Set;
 import org.jspecify.annotations.NullUnmarked;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-import org.junit.runners.Parameterized.Parameters;
 
 /**
  * Test for {@link Network} methods which have default implementations. Currently those
  * implementations are in {@link AbstractNetwork}; in future they might be in {@link Network}
  * itself, once we are willing to use Java 8 default methods.
  */
-@AndroidIncompatible
-// TODO(cpovirk): Figure out Android JUnit 4 support. Does it work with Gingerbread? @RunWith?
-@RunWith(Parameterized.class)
+@RunWith(TestParameterInjector.class)
 @NullUnmarked
 public final class DefaultNetworkImplementationsTest {
   private MutableNetwork<Integer, String> network;
@@ -55,22 +49,14 @@ public final class DefaultNetworkImplementationsTest {
   private static final String E21 = "2-1";
   private static final String E23 = "2-3";
 
-  @Parameters
-  public static Collection<Object[]> parameters() {
-    return Arrays.asList(
-        new Object[][] {
-          {UNDIRECTED}, {DIRECTED},
-        });
-  }
-
   private final EdgeType edgeType;
 
-  public DefaultNetworkImplementationsTest(EdgeType edgeType) {
+  public DefaultNetworkImplementationsTest(@TestParameter EdgeType edgeType) {
     this.edgeType = edgeType;
   }
 
   @Before
-  public void setUp() throws Exception {
+  public void setUp() {
     NetworkBuilder<Object, Object> builder =
         (edgeType == EdgeType.DIRECTED) ? NetworkBuilder.directed() : NetworkBuilder.undirected();
 

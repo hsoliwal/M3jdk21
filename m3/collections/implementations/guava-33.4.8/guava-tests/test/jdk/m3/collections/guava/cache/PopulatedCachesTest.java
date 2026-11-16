@@ -17,22 +17,27 @@ package jdk.m3.collections.guava.cache;
 import static jdk.m3.collections.guava.cache.CacheTesting.checkEmpty;
 import static jdk.m3.collections.guava.cache.CacheTesting.checkValidState;
 import static jdk.m3.collections.guava.cache.TestingCacheLoaders.identityLoader;
-import static com.google.common.truth.Truth.assertThat;
+import static jdk.m3.collections.guava.collect.Iterables.getOnlyElement;
+import static jdk.m3.collections.guava.collect.Iterables.transform;
+import static jdk.m3.collections.guava.collect.Iterators.size;
+import static jdk.m3.collections.guava.collect.Maps.immutableEntry;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
 import static java.util.concurrent.TimeUnit.DAYS;
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.junit.Assert.assertThrows;
 
-import jdk.m3.collections.guava.base.Function;
+import jdk.m3.collections.guava.annotations.GwtIncompatible;
+import jdk.m3.collections.guava.annotations.J2ktIncompatible;
 import jdk.m3.collections.guava.cache.CacheBuilderFactory.DurationSpec;
 import jdk.m3.collections.guava.cache.LocalCache.Strength;
+import jdk.m3.collections.guava.collect.ImmutableList;
 import jdk.m3.collections.guava.collect.ImmutableMap;
 import jdk.m3.collections.guava.collect.ImmutableSet;
 import jdk.m3.collections.guava.collect.Iterables;
-import jdk.m3.collections.guava.collect.Iterators;
-import jdk.m3.collections.guava.collect.Lists;
-import jdk.m3.collections.guava.collect.Maps;
 import jdk.m3.collections.guava.testing.EqualsTester;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -45,20 +50,30 @@ import org.jspecify.annotations.NullUnmarked;
  *
  * @author mike nonemacher
  */
+@GwtIncompatible
+@J2ktIncompatible
 
 @NullUnmarked
 public class PopulatedCachesTest extends TestCase {
-  // we use integers as keys; make sure the range covers some values that ARE cached by
-  // Integer.valueOf(int), and some that are not cached. (127 is the highest cached value.)
   static final int WARMUP_MIN = 120;
   static final int WARMUP_MAX = 135;
   static final int WARMUP_SIZE = WARMUP_MAX - WARMUP_MIN;
+
+  private static final ImmutableList<?> KEYS;
+
+  static {
+    ImmutableList.Builder<Object> keys = ImmutableList.builder();
+    for (int i = 0; i < WARMUP_MAX; i++) {
+      keys.add(new Object());
+    }
+    KEYS = keys.build();
+  }
 
   public void testSize_populated() {
     for (LoadingCache<Object, Object> cache : caches()) {
       // don't let the entries get GCed
       List<Entry<Object, Object>> unused = warmUp(cache);
-      assertEquals(WARMUP_SIZE, cache.size());
+      assertThat(cache.size()).isEqualTo(WARMUP_SIZE);
       assertMapSize(cache.asMap(), WARMUP_SIZE);
       checkValidState(cache);
     }
@@ -70,12 +85,12 @@ public class PopulatedCachesTest extends TestCase {
       List<Entry<Object, Object>> warmed = warmUp(cache);
       for (int i = WARMUP_MIN; i < WARMUP_MAX; i++) {
         Entry<Object, Object> entry = warmed.get(i - WARMUP_MIN);
-        assertTrue(cache.asMap().containsKey(entry.getKey()));
-        assertTrue(cache.asMap().containsValue(entry.getValue()));
+        assertThat(cache.asMap().containsKey(entry.getKey())).isTrue();
+        assertThat(cache.asMap().containsValue(entry.getValue())).isTrue();
         // this getUnchecked() call shouldn't be a cache miss; verified below
-        assertEquals(entry.getValue(), cache.getUnchecked(entry.getKey()));
+        assertThat(cache.getUnchecked(entry.getKey())).isEqualTo(entry.getValue());
       }
-      assertEquals(WARMUP_SIZE, cache.stats().missCount());
+      assertThat(cache.stats().missCount()).isEqualTo(WARMUP_SIZE);
       checkValidState(cache);
     }
   }
@@ -87,18 +102,18 @@ public class PopulatedCachesTest extends TestCase {
       for (int i = WARMUP_MIN; i < WARMUP_MAX; i++) {
         Entry<Object, Object> entry = warmed.get(i - WARMUP_MIN);
         Object newValue = new Object();
-        assertSame(entry.getValue(), cache.asMap().put(entry.getKey(), newValue));
+        assertThat(cache.asMap().put(entry.getKey(), newValue)).isSameInstanceAs(entry.getValue());
         // don't let the new entry get GCed
         warmed.add(entryOf(entry.getKey(), newValue));
         Object newKey = new Object();
-        assertNull(cache.asMap().put(newKey, entry.getValue()));
+        assertThat(cache.asMap().put(newKey, entry.getValue())).isNull();
         // this getUnchecked() call shouldn't be a cache miss; verified below
-        assertEquals(newValue, cache.getUnchecked(entry.getKey()));
-        assertEquals(entry.getValue(), cache.getUnchecked(newKey));
+        assertThat(cache.getUnchecked(entry.getKey())).isEqualTo(newValue);
+        assertThat(cache.getUnchecked(newKey)).isEqualTo(entry.getValue());
         // don't let the new entry get GCed
         warmed.add(entryOf(newKey, entry.getValue()));
       }
-      assertEquals(WARMUP_SIZE, cache.stats().missCount());
+      assertThat(cache.stats().missCount()).isEqualTo(WARMUP_SIZE);
       checkValidState(cache);
     }
   }
@@ -110,16 +125,17 @@ public class PopulatedCachesTest extends TestCase {
       for (int i = WARMUP_MIN; i < WARMUP_MAX; i++) {
         Entry<Object, Object> entry = warmed.get(i - WARMUP_MIN);
         Object newValue = new Object();
-        assertSame(entry.getValue(), cache.asMap().putIfAbsent(entry.getKey(), newValue));
+        assertThat(cache.asMap().putIfAbsent(entry.getKey(), newValue))
+            .isSameInstanceAs(entry.getValue());
         Object newKey = new Object();
-        assertNull(cache.asMap().putIfAbsent(newKey, entry.getValue()));
+        assertThat(cache.asMap().putIfAbsent(newKey, entry.getValue())).isNull();
         // this getUnchecked() call shouldn't be a cache miss; verified below
-        assertEquals(entry.getValue(), cache.getUnchecked(entry.getKey()));
-        assertEquals(entry.getValue(), cache.getUnchecked(newKey));
+        assertThat(cache.getUnchecked(entry.getKey())).isEqualTo(entry.getValue());
+        assertThat(cache.getUnchecked(newKey)).isEqualTo(entry.getValue());
         // don't let the new entry get GCed
         warmed.add(entryOf(newKey, entry.getValue()));
       }
-      assertEquals(WARMUP_SIZE, cache.stats().missCount());
+      assertThat(cache.stats().missCount()).isEqualTo(WARMUP_SIZE);
       checkValidState(cache);
     }
   }
@@ -132,8 +148,8 @@ public class PopulatedCachesTest extends TestCase {
       Object newValue = new Object();
       cache.asMap().putAll(ImmutableMap.of(newKey, newValue));
       // this getUnchecked() call shouldn't be a cache miss; verified below
-      assertEquals(newValue, cache.getUnchecked(newKey));
-      assertEquals(WARMUP_SIZE, cache.stats().missCount());
+      assertThat(cache.getUnchecked(newKey)).isEqualTo(newValue);
+      assertThat(cache.stats().missCount()).isEqualTo(WARMUP_SIZE);
       checkValidState(cache);
     }
   }
@@ -145,16 +161,17 @@ public class PopulatedCachesTest extends TestCase {
       for (int i = WARMUP_MIN; i < WARMUP_MAX; i++) {
         Entry<Object, Object> entry = warmed.get(i - WARMUP_MIN);
         Object newValue = new Object();
-        assertSame(entry.getValue(), cache.asMap().replace(entry.getKey(), newValue));
-        assertTrue(cache.asMap().replace(entry.getKey(), newValue, entry.getValue()));
+        assertThat(cache.asMap().replace(entry.getKey(), newValue))
+            .isSameInstanceAs(entry.getValue());
+        assertThat(cache.asMap().replace(entry.getKey(), newValue, entry.getValue())).isTrue();
         Object newKey = new Object();
-        assertNull(cache.asMap().replace(newKey, entry.getValue()));
-        assertFalse(cache.asMap().replace(newKey, entry.getValue(), newValue));
+        assertThat(cache.asMap().replace(newKey, entry.getValue())).isNull();
+        assertThat(cache.asMap().replace(newKey, entry.getValue(), newValue)).isFalse();
         // this getUnchecked() call shouldn't be a cache miss; verified below
-        assertEquals(entry.getValue(), cache.getUnchecked(entry.getKey()));
-        assertFalse(cache.asMap().containsKey(newKey));
+        assertThat(cache.getUnchecked(entry.getKey())).isEqualTo(entry.getValue());
+        assertThat(cache.asMap().containsKey(newKey)).isFalse();
       }
-      assertEquals(WARMUP_SIZE, cache.stats().missCount());
+      assertThat(cache.stats().missCount()).isEqualTo(WARMUP_SIZE);
       checkValidState(cache);
     }
   }
@@ -166,9 +183,9 @@ public class PopulatedCachesTest extends TestCase {
       for (int i = WARMUP_MIN; i < WARMUP_MAX; i++) {
         Entry<Object, Object> entry = warmed.get(i - WARMUP_MIN);
         Object key = entry.getKey();
-        assertEquals(entry.getValue(), cache.asMap().remove(key));
-        assertNull(cache.asMap().remove(key));
-        assertFalse(cache.asMap().containsKey(key));
+        assertThat(cache.asMap().remove(key)).isEqualTo(entry.getValue());
+        assertThat(cache.asMap().remove(key)).isNull();
+        assertThat(cache.asMap().containsKey(key)).isFalse();
       }
       checkEmpty(cache);
     }
@@ -178,25 +195,27 @@ public class PopulatedCachesTest extends TestCase {
     for (LoadingCache<Object, Object> cache : caches()) {
       // don't let the entries get GCed
       List<Entry<Object, Object>> warmed = warmUp(cache);
+      Object wrongValue = new Object();
       for (int i = WARMUP_MIN; i < WARMUP_MAX; i++) {
         Object key = warmed.get(i - WARMUP_MIN).getKey();
         Object value = warmed.get(i - WARMUP_MIN).getValue();
-        assertFalse(cache.asMap().remove(key, -1));
-        assertTrue(cache.asMap().remove(key, value));
-        assertFalse(cache.asMap().remove(key, -1));
-        assertFalse(cache.asMap().containsKey(key));
+        assertThat(cache.asMap().remove(key, wrongValue)).isFalse();
+        assertThat(cache.asMap().remove(key, value)).isTrue();
+        assertThat(cache.asMap().remove(key, wrongValue)).isFalse();
+        assertThat(cache.asMap().containsKey(key)).isFalse();
       }
       checkEmpty(cache);
     }
   }
 
+  // Android: tests ~20s
 
   public void testKeySet_populated() {
     for (LoadingCache<Object, Object> cache : caches()) {
       Set<Object> keys = cache.asMap().keySet();
       List<Entry<Object, Object>> warmed = warmUp(cache);
 
-      Set<Object> expected = Maps.newHashMap(cache.asMap()).keySet();
+      Set<Object> expected = new HashMap<>(cache.asMap()).keySet();
       assertThat(keys).containsExactlyElementsIn(expected);
       assertThat(keys.toArray()).asList().containsExactlyElementsIn(expected);
       assertThat(keys.toArray(new Object[0])).asList().containsExactlyElementsIn(expected);
@@ -205,13 +224,13 @@ public class PopulatedCachesTest extends TestCase {
           .addEqualityGroup(cache.asMap().keySet(), keys)
           .addEqualityGroup(ImmutableSet.of())
           .testEquals();
-      assertEquals(WARMUP_SIZE, keys.size());
+      assertThat(keys).hasSize(WARMUP_SIZE);
       for (int i = WARMUP_MIN; i < WARMUP_MAX; i++) {
         Object key = warmed.get(i - WARMUP_MIN).getKey();
-        assertTrue(keys.contains(key));
-        assertTrue(keys.remove(key));
-        assertFalse(keys.remove(key));
-        assertFalse(keys.contains(key));
+        assertThat(keys.contains(key)).isTrue();
+        assertThat(keys.remove(key)).isTrue();
+        assertThat(keys.remove(key)).isFalse();
+        assertThat(keys.contains(key)).isFalse();
       }
       checkEmpty(keys);
       checkEmpty(cache);
@@ -223,31 +242,32 @@ public class PopulatedCachesTest extends TestCase {
       Collection<Object> values = cache.asMap().values();
       List<Entry<Object, Object>> warmed = warmUp(cache);
 
-      Collection<Object> expected = Maps.newHashMap(cache.asMap()).values();
+      Collection<Object> expected = new HashMap<>(cache.asMap()).values();
       assertThat(values).containsExactlyElementsIn(expected);
       assertThat(values.toArray()).asList().containsExactlyElementsIn(expected);
       assertThat(values.toArray(new Object[0])).asList().containsExactlyElementsIn(expected);
 
-      assertEquals(WARMUP_SIZE, values.size());
+      assertThat(values).hasSize(WARMUP_SIZE);
       for (int i = WARMUP_MIN; i < WARMUP_MAX; i++) {
         Object value = warmed.get(i - WARMUP_MIN).getValue();
-        assertTrue(values.contains(value));
-        assertTrue(values.remove(value));
-        assertFalse(values.remove(value));
-        assertFalse(values.contains(value));
+        assertThat(values.contains(value)).isTrue();
+        assertThat(values.remove(value)).isTrue();
+        assertThat(values.remove(value)).isFalse();
+        assertThat(values.contains(value)).isFalse();
       }
       checkEmpty(values);
       checkEmpty(cache);
     }
   }
 
+  // Android: tests ~20s
 
   public void testEntrySet_populated() {
     for (LoadingCache<Object, Object> cache : caches()) {
       Set<Entry<Object, Object>> entries = cache.asMap().entrySet();
       List<Entry<Object, Object>> warmed = warmUp(cache, WARMUP_MIN, WARMUP_MAX);
 
-      Set<?> expected = Maps.newHashMap(cache.asMap()).entrySet();
+      Set<?> expected = new HashMap<>(cache.asMap()).entrySet();
       assertThat(entries).containsExactlyElementsIn(expected);
       assertThat(entries.toArray()).asList().containsExactlyElementsIn(expected);
       assertThat(entries.toArray(new Object[0])).asList().containsExactlyElementsIn(expected);
@@ -256,13 +276,13 @@ public class PopulatedCachesTest extends TestCase {
           .addEqualityGroup(cache.asMap().entrySet(), entries)
           .addEqualityGroup(ImmutableSet.of())
           .testEquals();
-      assertEquals(WARMUP_SIZE, entries.size());
+      assertThat(entries).hasSize(WARMUP_SIZE);
       for (int i = WARMUP_MIN; i < WARMUP_MAX; i++) {
         Entry<Object, Object> newEntry = warmed.get(i - WARMUP_MIN);
-        assertTrue(entries.contains(newEntry));
-        assertTrue(entries.remove(newEntry));
-        assertFalse(entries.remove(newEntry));
-        assertFalse(entries.contains(newEntry));
+        assertThat(entries.contains(newEntry)).isTrue();
+        assertThat(entries.remove(newEntry)).isTrue();
+        assertThat(entries.remove(newEntry)).isFalse();
+        assertThat(entries.contains(newEntry)).isFalse();
       }
       checkEmpty(entries);
       checkEmpty(cache);
@@ -271,15 +291,17 @@ public class PopulatedCachesTest extends TestCase {
 
   public void testWriteThroughEntry() {
     for (LoadingCache<Object, Object> cache : caches()) {
-      cache.getUnchecked(1);
-      Entry<Object, Object> entry = Iterables.getOnlyElement(cache.asMap().entrySet());
+      Object key = new Object();
+      cache.getUnchecked(key);
+      Entry<Object, Object> entry = getOnlyElement(cache.asMap().entrySet());
 
-      cache.invalidate(1);
-      assertEquals(0, cache.size());
+      cache.invalidate(key);
+      assertThat(cache.size()).isEqualTo(0);
 
-      entry.setValue(3);
-      assertEquals(1, cache.size());
-      assertEquals(3, cache.getIfPresent(1));
+      Object newValue = new Object();
+      entry.setValue(newValue);
+      assertThat(cache.size()).isEqualTo(1);
+      assertThat(cache.getIfPresent(key)).isEqualTo(newValue);
       checkValidState(cache);
 
       assertThrows(NullPointerException.class, () -> entry.setValue(null));
@@ -290,20 +312,14 @@ public class PopulatedCachesTest extends TestCase {
   /* ---------------- Local utilities -------------- */
 
   /** Most of the tests in this class run against every one of these caches. */
-  private Iterable<LoadingCache<Object, Object>> caches() {
+  private static Iterable<LoadingCache<Object, Object>> caches() {
     // lots of different ways to configure a LoadingCache
     CacheBuilderFactory factory = cacheFactory();
-    return Iterables.transform(
-        factory.buildAllPermutations(),
-        new Function<CacheBuilder<Object, Object>, LoadingCache<Object, Object>>() {
-          @Override
-          public LoadingCache<Object, Object> apply(CacheBuilder<Object, Object> builder) {
-            return builder.recordStats().build(identityLoader());
-          }
-        });
+    return transform(
+        factory.buildAllPermutations(), builder -> builder.recordStats().build(identityLoader()));
   }
 
-  private CacheBuilderFactory cacheFactory() {
+  private static CacheBuilderFactory cacheFactory() {
     // This is trickier than expected. We plan to put 15 values in each of these (WARMUP_MIN to
     // WARMUP_MAX), but the tests assume no values get evicted. Even with a maximumSize of 100, one
     // of the values gets evicted. With weak keys, we use identity equality, which means using
@@ -330,7 +346,7 @@ public class PopulatedCachesTest extends TestCase {
                 DurationSpec.of(1, SECONDS), DurationSpec.of(1, DAYS)));
   }
 
-  private List<Entry<Object, Object>> warmUp(LoadingCache<Object, Object> cache) {
+  private static List<Entry<Object, Object>> warmUp(LoadingCache<Object, Object> cache) {
     return warmUp(cache, WARMUP_MIN, WARMUP_MAX);
   }
 
@@ -338,42 +354,43 @@ public class PopulatedCachesTest extends TestCase {
    * Returns the entries that were added to the map, so they won't fall out of a map with weak or
    * soft references until the caller drops the reference to the returned entries.
    */
-  private List<Entry<Object, Object>> warmUp(
+  private static List<Entry<Object, Object>> warmUp(
       LoadingCache<Object, Object> cache, int minimum, int maximum) {
 
-    List<Entry<Object, Object>> entries = Lists.newArrayList();
+    List<Entry<Object, Object>> entries = new ArrayList<>();
     for (int i = minimum; i < maximum; i++) {
-      Object key = i;
+      Object key = KEYS.get(i);
       Object value = cache.getUnchecked(key);
       entries.add(entryOf(key, value));
     }
     return entries;
   }
 
-  private Entry<Object, Object> entryOf(Object key, Object value) {
-    return Maps.immutableEntry(key, value);
+  private static Entry<Object, Object> entryOf(Object key, Object value) {
+    return immutableEntry(key, value);
   }
 
-  private void assertMapSize(Map<?, ?> map, int size) {
-    assertEquals(size, map.size());
+  private static void assertMapSize(Map<?, ?> map, int size) {
+    assertThat(map).hasSize(size);
     if (size > 0) {
-      assertFalse(map.isEmpty());
+      assertThat(map.isEmpty()).isFalse();
     } else {
-      assertTrue(map.isEmpty());
+      assertThat(map.isEmpty()).isTrue();
     }
     assertCollectionSize(map.keySet(), size);
     assertCollectionSize(map.entrySet(), size);
     assertCollectionSize(map.values(), size);
   }
 
-  private void assertCollectionSize(Collection<?> collection, int size) {
-    assertEquals(size, collection.size());
+  @SuppressWarnings("IterablesSizeOfCollection") // we are testing our iterator implementation
+  private static void assertCollectionSize(Collection<?> collection, int size) {
+    assertThat(collection.size()).isEqualTo(size);
     if (size > 0) {
-      assertFalse(collection.isEmpty());
+      assertThat(collection.isEmpty()).isFalse();
     } else {
-      assertTrue(collection.isEmpty());
+      assertThat(collection.isEmpty()).isTrue();
     }
-    assertEquals(size, Iterables.size(collection));
-    assertEquals(size, Iterators.size(collection.iterator()));
+    assertThat(Iterables.size(collection)).isEqualTo(size);
+    assertThat(size(collection.iterator())).isEqualTo(size);
   }
 }

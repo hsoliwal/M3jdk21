@@ -17,12 +17,11 @@
 package jdk.m3.collections.guava.graph;
 
 import static jdk.m3.collections.guava.base.Preconditions.checkNotNull;
+import static jdk.m3.collections.guava.collect.Maps.asMap;
 
-import jdk.m3.collections.guava.annotations.Beta;
 import jdk.m3.collections.guava.base.Function;
 import jdk.m3.collections.guava.base.Functions;
 import jdk.m3.collections.guava.collect.ImmutableMap;
-import jdk.m3.collections.guava.collect.Maps;
 import jdk.m3.collections.guava.graph.GraphConstants.Presence;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import com.google.errorprone.annotations.Immutable;
@@ -44,14 +43,13 @@ import com.google.errorprone.annotations.InlineMe;
  * @param <N> Node parameter type
  * @since 20.0
  */
-@Beta
 @Immutable(containerOf = {"N"})
-public class ImmutableGraph<N> extends ForwardingGraph<N> {
+public final class ImmutableGraph<N> extends ForwardingGraph<N> {
   @SuppressWarnings("Immutable") // The backing graph must be immutable.
   private final BaseGraph<N> backingGraph;
 
   ImmutableGraph(BaseGraph<N> backingGraph) {
-    this.backingGraph = backingGraph;
+    this.backingGraph = checkNotNull(backingGraph);
   }
 
   /** Returns an immutable copy of {@code graph}. */
@@ -99,8 +97,7 @@ public class ImmutableGraph<N> extends ForwardingGraph<N> {
         (Function<N, Presence>) Functions.constant(Presence.EDGE_EXISTS);
     return graph.isDirected()
         ? DirectedGraphConnections.ofImmutable(node, graph.incidentEdges(node), edgeValueFn)
-        : UndirectedGraphConnections.ofImmutable(
-            Maps.asMap(graph.adjacentNodes(node), edgeValueFn));
+        : UndirectedGraphConnections.ofImmutable(asMap(graph.adjacentNodes(node), edgeValueFn));
   }
 
   @Override
@@ -129,14 +126,14 @@ public class ImmutableGraph<N> extends ForwardingGraph<N> {
    *
    * @since 28.0
    */
-  public static class Builder<N> {
+  public static final class Builder<N> {
 
     private final MutableGraph<N> mutableGraph;
 
     Builder(GraphBuilder<N> graphBuilder) {
       // The incidentEdgeOrder for immutable graphs is always stable. However, we don't want to
       // modify this builder, so we make a copy instead.
-      this.mutableGraph = graphBuilder.copy().incidentEdgeOrder(ElementOrder.<N>stable()).build();
+      this.mutableGraph = graphBuilder.copy().incidentEdgeOrder(ElementOrder.stable()).build();
     }
 
     /**
@@ -198,7 +195,7 @@ public class ImmutableGraph<N> extends ForwardingGraph<N> {
      * Returns a newly-created {@code ImmutableGraph} based on the contents of this {@code Builder}.
      */
     public ImmutableGraph<N> build() {
-      return ImmutableGraph.copyOf(mutableGraph);
+      return copyOf(mutableGraph);
     }
   }
 }

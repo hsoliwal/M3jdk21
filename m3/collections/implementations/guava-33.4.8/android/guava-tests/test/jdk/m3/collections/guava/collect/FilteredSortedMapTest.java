@@ -16,6 +16,10 @@
 
 package jdk.m3.collections.guava.collect;
 
+import static jdk.m3.collections.guava.collect.Maps.filterEntries;
+import static jdk.m3.collections.guava.collect.Maps.newTreeMap;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
+
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import java.util.SortedMap;
 import org.jspecify.annotations.NullMarked;
@@ -25,7 +29,7 @@ import org.jspecify.annotations.NullMarked;
 public class FilteredSortedMapTest extends AbstractFilteredMapTest {
   @Override
   SortedMap<String, Integer> createUnfiltered() {
-    return Maps.newTreeMap();
+    return newTreeMap();
   }
 
   public void testFirstAndLastKeyFilteredMap() {
@@ -35,9 +39,9 @@ public class FilteredSortedMapTest extends AbstractFilteredMapTest {
     unfiltered.put("cat", 3);
     unfiltered.put("dog", 5);
 
-    SortedMap<String, Integer> filtered = Maps.filterEntries(unfiltered, CORRECT_LENGTH);
-    assertEquals("banana", filtered.firstKey());
-    assertEquals("cat", filtered.lastKey());
+    SortedMap<String, Integer> filtered = filterEntries(unfiltered, CORRECT_LENGTH);
+    assertThat(filtered.firstKey()).isEqualTo("banana");
+    assertThat(filtered.lastKey()).isEqualTo("cat");
   }
 
   public void testHeadSubTailMap_filteredMap() {
@@ -46,7 +50,7 @@ public class FilteredSortedMapTest extends AbstractFilteredMapTest {
     unfiltered.put("banana", 6);
     unfiltered.put("cat", 4);
     unfiltered.put("dog", 3);
-    SortedMap<String, Integer> filtered = Maps.filterEntries(unfiltered, CORRECT_LENGTH);
+    SortedMap<String, Integer> filtered = filterEntries(unfiltered, CORRECT_LENGTH);
 
     assertEquals(ImmutableMap.of("banana", 6), filtered.headMap("dog"));
     assertEquals(ImmutableMap.of(), filtered.headMap("banana"));

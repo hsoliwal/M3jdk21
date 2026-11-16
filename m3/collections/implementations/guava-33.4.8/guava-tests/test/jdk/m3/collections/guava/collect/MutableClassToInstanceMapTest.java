@@ -16,10 +16,11 @@
 
 package jdk.m3.collections.guava.collect;
 
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
 import static org.junit.Assert.assertThrows;
 
-import jdk.m3.collections.guava.collect.ImmutableClassToInstanceMapTest.Impl;
-import jdk.m3.collections.guava.collect.ImmutableClassToInstanceMapTest.TestClassToInstanceMapGenerator;
+import jdk.m3.collections.guava.collect.ClassToInstanceMapTesting.Impl;
+import jdk.m3.collections.guava.collect.ClassToInstanceMapTesting.TestClassToInstanceMapGenerator;
 import jdk.m3.collections.guava.collect.testing.MapTestSuiteBuilder;
 import jdk.m3.collections.guava.collect.testing.features.CollectionFeature;
 import jdk.m3.collections.guava.collect.testing.features.CollectionSize;
@@ -50,11 +51,11 @@ public class MutableClassToInstanceMapTest extends TestCase {
                   // but here we have to do some serious fudging
                   @Override
                   @SuppressWarnings({"unchecked", "rawtypes"})
-                  public Map<Class, Impl> create(Object... elements) {
+                  public Map<Class<?>, Impl> create(Object... elements) {
                     MutableClassToInstanceMap<Impl> map = MutableClassToInstanceMap.create();
                     for (Object object : elements) {
-                      Entry<Class, Impl> entry = (Entry<Class, Impl>) object;
-                      map.putInstance(entry.getKey(), entry.getValue());
+                      Entry<?, ?> entry = (Entry<?, ?>) object;
+                      map.putInstance((Class) entry.getKey(), (Impl) entry.getValue());
                     }
                     return (Map) map;
                   }
@@ -76,7 +77,7 @@ public class MutableClassToInstanceMapTest extends TestCase {
   private ClassToInstanceMap<Number> map;
 
   @Override
-  protected void setUp() throws Exception {
+  protected void setUp() {
     map = MutableClassToInstanceMap.create();
   }
 
@@ -86,40 +87,40 @@ public class MutableClassToInstanceMapTest extends TestCase {
      * because we know that newClassMap() is implemented using ConstrainedMap which is itself
      * well-tested. A purist would object to this, but what can I say, we're dirty cheaters.
      */
-    map.put(Integer.class, new Integer(5));
-    assertThrows(ClassCastException.class, () -> map.put(Double.class, new Long(42)));
+    map.put(Integer.class, 5);
+    assertThrows(ClassCastException.class, () -> map.put(Double.class, 42L));
     // Won't compile: map.put(String.class, "x");
   }
 
   public void testPutAndGetInstance() {
-    assertNull(map.putInstance(Integer.class, new Integer(5)));
+    assertThat(map.putInstance(Integer.class, 5)).isNull();
 
-    Integer oldValue = map.putInstance(Integer.class, new Integer(7));
+    Integer oldValue = map.putInstance(Integer.class, 7);
     assertEquals(5, (int) oldValue);
 
     Integer newValue = map.getInstance(Integer.class);
     assertEquals(7, (int) newValue);
 
-    // Won't compile: map.putInstance(Double.class, new Long(42));
+    // Won't compile: map.putInstance(Double.class, 42L);
   }
 
   public void testNull() {
-    assertThrows(NullPointerException.class, () -> map.put(null, new Integer(1)));
+    assertThrows(NullPointerException.class, () -> map.put(null, 1));
     map.putInstance(Integer.class, null);
-    assertNull(map.get(Integer.class));
-    assertNull(map.getInstance(Integer.class));
+    assertThat(map.get(Integer.class)).isNull();
+    assertThat(map.getInstance(Integer.class)).isNull();
 
     map.put(Long.class, null);
-    assertNull(map.get(Long.class));
-    assertNull(map.getInstance(Long.class));
+    assertThat(map.get(Long.class)).isNull();
+    assertThat(map.getInstance(Long.class)).isNull();
   }
 
   public void testPrimitiveAndWrapper() {
-    assertNull(map.getInstance(int.class));
-    assertNull(map.getInstance(Integer.class));
+    assertThat(map.getInstance(int.class)).isNull();
+    assertThat(map.getInstance(Integer.class)).isNull();
 
-    assertNull(map.putInstance(int.class, 0));
-    assertNull(map.putInstance(Integer.class, 1));
+    assertThat(map.putInstance(int.class, 0)).isNull();
+    assertThat(map.putInstance(Integer.class, 1)).isNull();
     assertEquals(2, map.size());
 
     assertEquals(0, (int) map.getInstance(int.class));
@@ -128,8 +129,8 @@ public class MutableClassToInstanceMapTest extends TestCase {
     assertEquals(0, (int) map.putInstance(int.class, null));
     assertEquals(1, (int) map.putInstance(Integer.class, null));
 
-    assertNull(map.getInstance(int.class));
-    assertNull(map.getInstance(Integer.class));
+    assertThat(map.getInstance(int.class)).isNull();
+    assertThat(map.getInstance(Integer.class)).isNull();
     assertEquals(2, map.size());
   }
 }

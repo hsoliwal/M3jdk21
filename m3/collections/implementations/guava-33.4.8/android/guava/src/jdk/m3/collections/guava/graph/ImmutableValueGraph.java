@@ -17,12 +17,11 @@
 package jdk.m3.collections.guava.graph;
 
 import static jdk.m3.collections.guava.base.Preconditions.checkNotNull;
+import static jdk.m3.collections.guava.collect.Maps.asMap;
 import static java.util.Objects.requireNonNull;
 
-import jdk.m3.collections.guava.annotations.Beta;
 import jdk.m3.collections.guava.base.Function;
 import jdk.m3.collections.guava.collect.ImmutableMap;
-import jdk.m3.collections.guava.collect.Maps;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import com.google.errorprone.annotations.Immutable;
 import com.google.errorprone.annotations.InlineMe;
@@ -42,7 +41,6 @@ import com.google.errorprone.annotations.InlineMe;
  * @param <V> Value parameter type
  * @since 20.0
  */
-@Beta
 @Immutable(containerOf = {"N", "V"})
 @SuppressWarnings("Immutable") // Extends StandardValueGraph but uses ImmutableMaps.
 public final class ImmutableValueGraph<N, V> extends StandardValueGraph<N, V> {
@@ -102,7 +100,7 @@ public final class ImmutableValueGraph<N, V> extends StandardValueGraph<N, V> {
         ? DirectedGraphConnections.ofImmutable(
             node, graph.incidentEdges(node), successorNodeToValueFn)
         : UndirectedGraphConnections.ofImmutable(
-            Maps.asMap(graph.adjacentNodes(node), successorNodeToValueFn));
+            asMap(graph.adjacentNodes(node), successorNodeToValueFn));
   }
 
   /**
@@ -126,15 +124,14 @@ public final class ImmutableValueGraph<N, V> extends StandardValueGraph<N, V> {
    *
    * @since 28.0
    */
-  public static class Builder<N, V> {
+  public static final class Builder<N, V> {
 
     private final MutableValueGraph<N, V> mutableValueGraph;
 
     Builder(ValueGraphBuilder<N, V> graphBuilder) {
       // The incidentEdgeOrder for immutable graphs is always stable. However, we don't want to
       // modify this builder, so we make a copy instead.
-      this.mutableValueGraph =
-          graphBuilder.copy().incidentEdgeOrder(ElementOrder.<N>stable()).build();
+      this.mutableValueGraph = graphBuilder.copy().incidentEdgeOrder(ElementOrder.stable()).build();
     }
 
     /**
@@ -202,7 +199,7 @@ public final class ImmutableValueGraph<N, V> extends StandardValueGraph<N, V> {
      * Builder}.
      */
     public ImmutableValueGraph<N, V> build() {
-      return ImmutableValueGraph.copyOf(mutableValueGraph);
+      return copyOf(mutableValueGraph);
     }
   }
 }

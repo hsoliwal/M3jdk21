@@ -17,6 +17,7 @@
 package jdk.m3.collections.guava.primitives;
 
 import static jdk.m3.collections.guava.base.Preconditions.checkNotNull;
+import static java.lang.System.arraycopy;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
@@ -39,7 +40,7 @@ import org.jspecify.annotations.NullUnmarked;
  *
  * @author Kevin Bourrillion
  */
-@GwtCompatible(emulated = true)
+@GwtCompatible
 @NullUnmarked
 @AndroidIncompatible // test-suite builders
 public class LongArrayAsListTest extends TestCase {
@@ -84,14 +85,14 @@ public class LongArrayAsListTest extends TestCase {
 
   public static final class LongsAsListGenerator extends TestLongListGenerator {
     @Override
-    protected List<Long> create(Long[] elements) {
+    List<Long> create(Long[] elements) {
       return asList(elements);
     }
   }
 
   public static final class LongsAsListHeadSubListGenerator extends TestLongListGenerator {
     @Override
-    protected List<Long> create(Long[] elements) {
+    List<Long> create(Long[] elements) {
       Long[] suffix = {Long.MIN_VALUE, Long.MAX_VALUE};
       Long[] all = concat(elements, suffix);
       return asList(all).subList(0, elements.length);
@@ -100,7 +101,7 @@ public class LongArrayAsListTest extends TestCase {
 
   public static final class LongsAsListTailSubListGenerator extends TestLongListGenerator {
     @Override
-    protected List<Long> create(Long[] elements) {
+    List<Long> create(Long[] elements) {
       Long[] prefix = {86L, 99L};
       Long[] all = concat(prefix, elements);
       return asList(all).subList(2, elements.length + 2);
@@ -109,7 +110,7 @@ public class LongArrayAsListTest extends TestCase {
 
   public static final class LongsAsListMiddleSubListGenerator extends TestLongListGenerator {
     @Override
-    protected List<Long> create(Long[] elements) {
+    List<Long> create(Long[] elements) {
       Long[] prefix = {Long.MIN_VALUE, Long.MAX_VALUE};
       Long[] suffix = {86L, 99L};
       Long[] all = concat(concat(prefix, elements), suffix);
@@ -119,8 +120,8 @@ public class LongArrayAsListTest extends TestCase {
 
   private static Long[] concat(Long[] left, Long[] right) {
     Long[] result = new Long[left.length + right.length];
-    System.arraycopy(left, 0, result, 0, left.length);
-    System.arraycopy(right, 0, result, left.length, right.length);
+    arraycopy(left, 0, result, 0, left.length);
+    arraycopy(right, 0, result, left.length, right.length);
     return result;
   }
 
@@ -144,7 +145,7 @@ public class LongArrayAsListTest extends TestCase {
      * Creates a new collection containing the given elements; implement this method instead of
      * {@link #create(Object...)}.
      */
-    protected abstract List<Long> create(Long[] elements);
+    abstract List<Long> create(Long[] elements);
 
     @Override
     public Long[] createArray(int length) {

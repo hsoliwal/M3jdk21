@@ -34,7 +34,7 @@ import org.jspecify.annotations.Nullable;
  * @author Kevin Bourrillion
  * @since 2.0
  */
-@GwtCompatible(emulated = true)
+@GwtCompatible
 @SuppressWarnings("AvoidObjectArrays")
 public final class ObjectArrays {
 
@@ -58,8 +58,14 @@ public final class ObjectArrays {
    * @param reference any array of the desired type
    * @param length the length of the new array
    */
+  /*
+   * The new array contains nulls, even if the old array did not. If we wanted to be accurate, we
+   * would declare a return type of `@Nullable T[]`. However, we've decided not to think too hard
+   * about arrays for now, as they're a mess.
+   */
   public static <T extends @Nullable Object> T[] newArray(T[] reference, int length) {
-    return Platform.newArray(reference, length);
+    T[] empty = reference.length == 0 ? reference : Arrays.copyOf(reference, 0);
+    return Arrays.copyOf(empty, length);
   }
 
   /**
@@ -225,8 +231,7 @@ public final class ObjectArrays {
     return array;
   }
 
-  // We do this instead of Preconditions.checkNotNull to save boxing and array
-  // creation cost.
+  // We do this instead of Preconditions.checkNotNull to save boxing and array-creation cost.
   @CanIgnoreReturnValue
   static Object checkElementNotNull(@Nullable Object element, int index) {
     if (element == null) {

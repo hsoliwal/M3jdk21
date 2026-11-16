@@ -16,20 +16,19 @@
 
 package jdk.m3.collections.guava.graph;
 
+import static jdk.m3.collections.guava.graph.AbstractNetworkTest.validateNetwork;
 import static jdk.m3.collections.guava.graph.GraphConstants.ENDPOINTS_MISMATCH;
 import static jdk.m3.collections.guava.graph.TestUtil.assertStronglyEquivalent;
-import static com.google.common.truth.Truth.assertThat;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
 import static java.util.concurrent.Executors.newFixedThreadPool;
 import static org.junit.Assert.assertThrows;
 
 import jdk.m3.collections.guava.collect.ImmutableList;
 import java.util.Set;
-import java.util.concurrent.Callable;
 import java.util.concurrent.CyclicBarrier;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Future;
 import org.jspecify.annotations.NullUnmarked;
-import org.jspecify.annotations.Nullable;
 import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -57,6 +56,17 @@ public final class ValueGraphTest {
     assertThat(graph.incidentEdgeOrder()).isEqualTo(asGraph.incidentEdgeOrder());
     assertThat(graph.isDirected()).isEqualTo(asGraph.isDirected());
     assertThat(graph.allowsSelfLoops()).isEqualTo(asGraph.allowsSelfLoops());
+
+    Network<Integer, EndpointPair<Integer>> asNetwork = graph.asNetwork();
+    validateNetwork(asNetwork);
+    assertThat(graph.nodes()).isEqualTo(asNetwork.nodes());
+    assertThat(graph.edges()).hasSize(asNetwork.edges().size());
+    assertThat(graph.nodeOrder()).isEqualTo(asNetwork.nodeOrder());
+    assertThat(graph.isDirected()).isEqualTo(asNetwork.isDirected());
+    assertThat(graph.allowsSelfLoops()).isEqualTo(asNetwork.allowsSelfLoops());
+    assertThat(asNetwork.edgeOrder()).isEqualTo(ElementOrder.unordered());
+    assertThat(asNetwork.allowsParallelEdges()).isFalse();
+    assertThat(asNetwork.asGraph()).isEqualTo(graph.asGraph());
 
     for (Integer node : graph.nodes()) {
       assertThat(graph.adjacentNodes(node)).isEqualTo(asGraph.adjacentNodes(node));
@@ -416,27 +426,23 @@ public final class ValueGraphTest {
 
     int threadCount = 20;
     ExecutorService executor = newFixedThreadPool(threadCount);
-    final CyclicBarrier barrier = new CyclicBarrier(threadCount);
+    CyclicBarrier barrier = new CyclicBarrier(threadCount);
     ImmutableList.Builder<Future<?>> futures = ImmutableList.builder();
     for (int i = 0; i < threadCount; i++) {
       futures.add(
-          executor.submit(
-              new Callable<@Nullable Void>() {
-                @Override
-                public @Nullable Void call() throws Exception {
-                  barrier.await();
-                  Integer first = graph.nodes().iterator().next();
-                  for (Integer node : graph.nodes()) {
-                    Set<Integer> unused = graph.successors(node);
-                  }
-                  /*
-                   * Also look up an earlier node so that, if the graph is using MapRetrievalCache,
-                   * we read one of the fields declared in that class.
-                   */
-                  Set<Integer> unused = graph.successors(first);
-                  return null;
-                }
-              }));
+          executor.submit(() -> {
+            barrier.await();
+            Integer first = graph.nodes().iterator().next();
+            for (Integer node : graph.nodes()) {
+              Set<Integer> unused = graph.successors(node);
+            }
+            /*
+             * Also look up an earlier node so that, if the graph is using MapRetrievalCache,
+             * we read one of the fields declared in that class.
+             */
+            Set<Integer> unused = graph.successors(first);
+            return null; // so the lambda is a Callable to propagate checked await() exceptions
+          }));
     }
 
     // For more about this test, see the equivalent in AbstractNetworkTest.

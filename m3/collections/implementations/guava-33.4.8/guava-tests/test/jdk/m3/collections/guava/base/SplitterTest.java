@@ -16,9 +16,9 @@
 
 package jdk.m3.collections.guava.base;
 
-import static jdk.m3.collections.guava.base.ReflectionFreeAssertThrows.assertThrows;
 import static jdk.m3.collections.guava.collect.ImmutableList.toImmutableList;
-import static com.google.common.truth.Truth.assertThat;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
+import static org.junit.Assert.assertThrows;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
@@ -37,11 +37,12 @@ import org.jspecify.annotations.NullMarked;
  * @author Julien Silland
  */
 @NullMarked
-@GwtCompatible(emulated = true)
+@GwtCompatible
 public class SplitterTest extends TestCase {
 
   private static final Splitter COMMA_SPLITTER = Splitter.on(',');
 
+  @SuppressWarnings("nullness") // test of a bogus call
   public void testSplitNullString() {
     assertThrows(NullPointerException.class, () -> COMMA_SPLITTER.split(null));
   }
@@ -72,9 +73,10 @@ public class SplitterTest extends TestCase {
   }
 
   public void testToString() {
-    assertEquals("[]", COMMA_SPLITTER.split("").toString());
-    assertEquals("[a, b, c]", COMMA_SPLITTER.split("a,b,c").toString());
-    assertEquals("[yam, bam, jam, ham]", Splitter.on(", ").split("yam, bam, jam, ham").toString());
+    assertThat(COMMA_SPLITTER.split("").toString()).isEqualTo("[]");
+    assertThat(COMMA_SPLITTER.split("a,b,c").toString()).isEqualTo("[a, b, c]");
+    assertThat(Splitter.on(", ").split("yam, bam, jam, ham").toString())
+        .isEqualTo("[yam, bam, jam, ham]");
   }
 
   public void testCharacterSimpleSplitWithNoDelimiter() {
@@ -161,8 +163,7 @@ public class SplitterTest extends TestCase {
   }
 
   public void testCharacterSplitWithTrim() {
-    String jacksons =
-        "arfo(Marlon)aorf, (Michael)orfa, afro(Jackie)orfa, " + "ofar(Jemaine), aff(Tito)";
+    String jacksons = "arfo(Marlon)aorf, (Michael)orfa, afro(Jackie)orfa, ofar(Jemaine), aff(Tito)";
     Iterable<String> family =
         COMMA_SPLITTER
             .trimResults(CharMatcher.anyOf("afro").or(CharMatcher.whitespace()))
@@ -281,8 +282,7 @@ public class SplitterTest extends TestCase {
   }
 
   public void testStringSplitWithTrim() {
-    String jacksons =
-        "arfo(Marlon)aorf, (Michael)orfa, afro(Jackie)orfa, " + "ofar(Jemaine), aff(Tito)";
+    String jacksons = "arfo(Marlon)aorf, (Michael)orfa, afro(Jackie)orfa, ofar(Jemaine), aff(Tito)";
     Iterable<String> family =
         Splitter.on(",")
             .trimResults(CharMatcher.anyOf("afro").or(CharMatcher.whitespace()))
@@ -359,7 +359,6 @@ public class SplitterTest extends TestCase {
 
   @J2ktIncompatible // Kotlin Native's regex is based on Apache Harmony, like old Android
   @GwtIncompatible // java.util.regex.Pattern
-  @AndroidIncompatible // Bug in older versions of Android we test against, since fixed.
   public void testPatternSplitLookBehind() {
     if (!CommonPattern.isPcreLike()) {
       return;
@@ -373,7 +372,6 @@ public class SplitterTest extends TestCase {
 
   @J2ktIncompatible // Kotlin Native's regex is based on Apache Harmony, like old Android
   @GwtIncompatible // java.util.regex.Pattern
-  @AndroidIncompatible // Bug in older versions of Android we test against, since fixed.
   public void testPatternSplitWordBoundary() {
     String string = "foo<bar>bletch";
     Iterable<String> words = Splitter.on(Pattern.compile("\\b")).split(string);
@@ -387,7 +385,6 @@ public class SplitterTest extends TestCase {
     assertThat(words).containsExactly("f").inOrder();
   }
 
-  @AndroidIncompatible // Apparently Gingerbread's regex API is buggy.
   @J2ktIncompatible // Kotlin Native's regex is based on Apache Harmony, like old Android
   @GwtIncompatible // java.util.regex.Pattern
   public void testPatternSplitWordBoundary_singleWordInput() {
@@ -452,8 +449,7 @@ public class SplitterTest extends TestCase {
 
   @GwtIncompatible // java.util.regex.Pattern
   public void testPatternSplitWithTrim() {
-    String jacksons =
-        "arfo(Marlon)aorf, (Michael)orfa, afro(Jackie)orfa, " + "ofar(Jemaine), aff(Tito)";
+    String jacksons = "arfo(Marlon)aorf, (Michael)orfa, afro(Jackie)orfa, ofar(Jemaine), aff(Tito)";
     Iterable<String> family =
         Splitter.on(Pattern.compile(","))
             .trimResults(CharMatcher.anyOf("afro").or(CharMatcher.whitespace()))
@@ -476,13 +472,9 @@ public class SplitterTest extends TestCase {
     assertIteratorIsUnmodifiable(Splitter.on(Pattern.compile(",")).split("a,b").iterator());
   }
 
-  private void assertIteratorIsUnmodifiable(Iterator<?> iterator) {
+  private static void assertIteratorIsUnmodifiable(Iterator<?> iterator) {
     iterator.next();
-    try {
-      iterator.remove();
-      fail();
-    } catch (UnsupportedOperationException expected) {
-    }
+    assertThrows(UnsupportedOperationException.class, () -> iterator.remove());
   }
 
   public void testSplitterIterableIsLazy_char() {
@@ -507,16 +499,16 @@ public class SplitterTest extends TestCase {
    * This test really pushes the boundaries of what we support. In general the splitter's behaviour
    * is not well defined if the char sequence it's splitting is mutated during iteration.
    */
-  private void assertSplitterIterableIsLazy(Splitter splitter) {
+  private static void assertSplitterIterableIsLazy(Splitter splitter) {
     StringBuilder builder = new StringBuilder();
     Iterator<String> iterator = splitter.split(builder).iterator();
 
     builder.append("A,");
-    assertEquals("A", iterator.next());
+    assertThat(iterator.next()).isEqualTo("A");
     builder.append("B,");
-    assertEquals("B", iterator.next());
+    assertThat(iterator.next()).isEqualTo("B");
     builder.append("C");
-    assertEquals("C", iterator.next());
+    assertThat(iterator.next()).isEqualTo("C");
     assertFalse(iterator.hasNext());
   }
 

@@ -70,8 +70,10 @@ import static jdk.m3.collections.guava.math.StatsTesting.TWO_VALUES_MIN;
 import static jdk.m3.collections.guava.math.StatsTesting.TWO_VALUES_STATS;
 import static jdk.m3.collections.guava.math.StatsTesting.TWO_VALUES_SUM_OF_SQUARES_OF_DELTAS;
 import static jdk.m3.collections.guava.math.StatsTesting.megaPrimitiveDoubleStream;
-import static com.google.common.truth.Truth.assertThat;
-import static com.google.common.truth.Truth.assertWithMessage;
+import static jdk.m3.collections.guava.testing.SerializableTester.reserialize;
+import static jdk.m3.collections.guava.testing.SerializableTester.reserializeAndAssert;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
+import static jdk.m3.collections.guava.truth.Truth.assertWithMessage;
 import static java.lang.Double.NEGATIVE_INFINITY;
 import static java.lang.Double.NaN;
 import static java.lang.Double.POSITIVE_INFINITY;
@@ -79,12 +81,13 @@ import static java.lang.Math.sqrt;
 import static java.util.Arrays.stream;
 import static org.junit.Assert.assertThrows;
 
+import jdk.m3.collections.guava.annotations.GwtIncompatible;
+import jdk.m3.collections.guava.annotations.J2ktIncompatible;
 import jdk.m3.collections.guava.collect.ImmutableList;
 import jdk.m3.collections.guava.math.StatsTesting.ManyValues;
 import jdk.m3.collections.guava.primitives.Ints;
 import jdk.m3.collections.guava.primitives.Longs;
 import jdk.m3.collections.guava.testing.EqualsTester;
-import jdk.m3.collections.guava.testing.SerializableTester;
 import java.math.BigDecimal;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
@@ -99,6 +102,8 @@ import org.jspecify.annotations.NullUnmarked;
  * @author Pete Gillin
  */
 @NullUnmarked
+@GwtIncompatible
+@J2ktIncompatible
 public class StatsTest extends TestCase {
 
   public void testCount() {
@@ -117,8 +122,8 @@ public class StatsTest extends TestCase {
   }
 
   public void testMean() {
-    assertThrows(IllegalStateException.class, () -> EMPTY_STATS_VARARGS.mean());
-    assertThrows(IllegalStateException.class, () -> EMPTY_STATS_ITERABLE.mean());
+    assertThrows(IllegalStateException.class, EMPTY_STATS_VARARGS::mean);
+    assertThrows(IllegalStateException.class, EMPTY_STATS_ITERABLE::mean);
     assertThat(ONE_VALUE_STATS.mean()).isWithin(ALLOWED_ERROR).of(ONE_VALUE);
     assertThat(Stats.of(POSITIVE_INFINITY).mean()).isPositiveInfinity();
     assertThat(Stats.of(NEGATIVE_INFINITY).mean()).isNegativeInfinity();
@@ -129,15 +134,15 @@ public class StatsTest extends TestCase {
     for (ManyValues values : ALL_MANY_VALUES) {
       double mean = Stats.of(values.asArray()).mean();
       if (values.hasAnyNaN()) {
-        assertWithMessage("mean of " + values).that(mean).isNaN();
+        assertWithMessage("mean of %s", values).that(mean).isNaN();
       } else if (values.hasAnyPositiveInfinity() && values.hasAnyNegativeInfinity()) {
-        assertWithMessage("mean of " + values).that(mean).isNaN();
+        assertWithMessage("mean of %s", values).that(mean).isNaN();
       } else if (values.hasAnyPositiveInfinity()) {
-        assertWithMessage("mean of " + values).that(mean).isPositiveInfinity();
+        assertWithMessage("mean of %s", values).that(mean).isPositiveInfinity();
       } else if (values.hasAnyNegativeInfinity()) {
-        assertWithMessage("mean of " + values).that(mean).isNegativeInfinity();
+        assertWithMessage("mean of %s", values).that(mean).isNegativeInfinity();
       } else {
-        assertWithMessage("mean of " + values)
+        assertWithMessage("mean of %s", values)
             .that(mean)
             .isWithin(ALLOWED_ERROR)
             .of(MANY_VALUES_MEAN);
@@ -201,8 +206,8 @@ public class StatsTest extends TestCase {
   }
 
   public void testPopulationVariance() {
-    assertThrows(IllegalStateException.class, () -> EMPTY_STATS_VARARGS.populationVariance());
-    assertThrows(IllegalStateException.class, () -> EMPTY_STATS_ITERABLE.populationVariance());
+    assertThrows(IllegalStateException.class, EMPTY_STATS_VARARGS::populationVariance);
+    assertThrows(IllegalStateException.class, EMPTY_STATS_ITERABLE::populationVariance);
     assertThat(ONE_VALUE_STATS.populationVariance()).isEqualTo(0.0);
     assertThat(Stats.of(POSITIVE_INFINITY).populationVariance()).isNaN();
     assertThat(Stats.of(NEGATIVE_INFINITY).populationVariance()).isNaN();
@@ -218,9 +223,9 @@ public class StatsTest extends TestCase {
     for (ManyValues values : ALL_MANY_VALUES) {
       double populationVariance = Stats.of(values.asIterable()).populationVariance();
       if (values.hasAnyNonFinite()) {
-        assertWithMessage("population variance of " + values).that(populationVariance).isNaN();
+        assertWithMessage("population variance of %s", values).that(populationVariance).isNaN();
       } else {
-        assertWithMessage("population variance of " + values)
+        assertWithMessage("population variance of %s", values)
             .that(populationVariance)
             .isWithin(ALLOWED_ERROR)
             .of(MANY_VALUES_SUM_OF_SQUARES_OF_DELTAS / MANY_VALUES_COUNT);
@@ -253,10 +258,8 @@ public class StatsTest extends TestCase {
   }
 
   public void testPopulationStandardDeviation() {
-    assertThrows(
-        IllegalStateException.class, () -> EMPTY_STATS_VARARGS.populationStandardDeviation());
-    assertThrows(
-        IllegalStateException.class, () -> EMPTY_STATS_ITERABLE.populationStandardDeviation());
+    assertThrows(IllegalStateException.class, EMPTY_STATS_VARARGS::populationStandardDeviation);
+    assertThrows(IllegalStateException.class, EMPTY_STATS_ITERABLE::populationStandardDeviation);
     assertThat(ONE_VALUE_STATS.populationStandardDeviation()).isEqualTo(0.0);
     assertThat(TWO_VALUES_STATS.populationStandardDeviation())
         .isWithin(ALLOWED_ERROR)
@@ -288,9 +291,9 @@ public class StatsTest extends TestCase {
   }
 
   public void testSampleVariance() {
-    assertThrows(IllegalStateException.class, () -> EMPTY_STATS_VARARGS.sampleVariance());
-    assertThrows(IllegalStateException.class, () -> EMPTY_STATS_ITERABLE.sampleVariance());
-    assertThrows(IllegalStateException.class, () -> ONE_VALUE_STATS.sampleVariance());
+    assertThrows(IllegalStateException.class, EMPTY_STATS_VARARGS::sampleVariance);
+    assertThrows(IllegalStateException.class, EMPTY_STATS_ITERABLE::sampleVariance);
+    assertThrows(IllegalStateException.class, ONE_VALUE_STATS::sampleVariance);
     assertThat(TWO_VALUES_STATS.sampleVariance())
         .isWithin(ALLOWED_ERROR)
         .of(TWO_VALUES_SUM_OF_SQUARES_OF_DELTAS);
@@ -321,9 +324,9 @@ public class StatsTest extends TestCase {
   }
 
   public void testSampleStandardDeviation() {
-    assertThrows(IllegalStateException.class, () -> EMPTY_STATS_VARARGS.sampleStandardDeviation());
-    assertThrows(IllegalStateException.class, () -> EMPTY_STATS_ITERABLE.sampleStandardDeviation());
-    assertThrows(IllegalStateException.class, () -> ONE_VALUE_STATS.sampleStandardDeviation());
+    assertThrows(IllegalStateException.class, EMPTY_STATS_VARARGS::sampleStandardDeviation);
+    assertThrows(IllegalStateException.class, EMPTY_STATS_ITERABLE::sampleStandardDeviation);
+    assertThrows(IllegalStateException.class, ONE_VALUE_STATS::sampleStandardDeviation);
     assertThat(TWO_VALUES_STATS.sampleStandardDeviation())
         .isWithin(ALLOWED_ERROR)
         .of(sqrt(TWO_VALUES_SUM_OF_SQUARES_OF_DELTAS));
@@ -354,8 +357,8 @@ public class StatsTest extends TestCase {
   }
 
   public void testMax() {
-    assertThrows(IllegalStateException.class, () -> EMPTY_STATS_VARARGS.max());
-    assertThrows(IllegalStateException.class, () -> EMPTY_STATS_ITERABLE.max());
+    assertThrows(IllegalStateException.class, EMPTY_STATS_VARARGS::max);
+    assertThrows(IllegalStateException.class, EMPTY_STATS_ITERABLE::max);
     assertThat(ONE_VALUE_STATS.max()).isEqualTo(ONE_VALUE);
     assertThat(Stats.of(POSITIVE_INFINITY).max()).isPositiveInfinity();
     assertThat(Stats.of(NEGATIVE_INFINITY).max()).isNegativeInfinity();
@@ -368,11 +371,11 @@ public class StatsTest extends TestCase {
     for (ManyValues values : ALL_MANY_VALUES) {
       double max = Stats.of(values.asIterable().iterator()).max();
       if (values.hasAnyNaN()) {
-        assertWithMessage("max of " + values).that(max).isNaN();
+        assertWithMessage("max of %s", values).that(max).isNaN();
       } else if (values.hasAnyPositiveInfinity()) {
-        assertWithMessage("max of " + values).that(max).isPositiveInfinity();
+        assertWithMessage("max of %s", values).that(max).isPositiveInfinity();
       } else {
-        assertWithMessage("max of " + values).that(max).isEqualTo(MANY_VALUES_MAX);
+        assertWithMessage("max of %s", values).that(max).isEqualTo(MANY_VALUES_MAX);
       }
     }
     assertThat(MANY_VALUES_STATS_SNAPSHOT.max()).isEqualTo(MANY_VALUES_MAX);
@@ -383,8 +386,8 @@ public class StatsTest extends TestCase {
   }
 
   public void testMin() {
-    assertThrows(IllegalStateException.class, () -> EMPTY_STATS_VARARGS.min());
-    assertThrows(IllegalStateException.class, () -> EMPTY_STATS_ITERABLE.min());
+    assertThrows(IllegalStateException.class, EMPTY_STATS_VARARGS::min);
+    assertThrows(IllegalStateException.class, EMPTY_STATS_ITERABLE::min);
     assertThat(ONE_VALUE_STATS.min()).isEqualTo(ONE_VALUE);
     assertThat(Stats.of(POSITIVE_INFINITY).min()).isPositiveInfinity();
     assertThat(Stats.of(NEGATIVE_INFINITY).min()).isNegativeInfinity();
@@ -400,11 +403,11 @@ public class StatsTest extends TestCase {
       accumulator.addAll(values.asIterable());
       double min = accumulator.snapshot().min();
       if (values.hasAnyNaN()) {
-        assertWithMessage("min of " + values).that(min).isNaN();
+        assertWithMessage("min of %s", values).that(min).isNaN();
       } else if (values.hasAnyNegativeInfinity()) {
-        assertWithMessage("min of " + values).that(min).isNegativeInfinity();
+        assertWithMessage("min of %s", values).that(min).isNegativeInfinity();
       } else {
-        assertWithMessage("min of " + values).that(min).isEqualTo(MANY_VALUES_MIN);
+        assertWithMessage("min of %s", values).that(min).isEqualTo(MANY_VALUES_MIN);
       }
     }
     assertThat(INTEGER_MANY_VALUES_STATS_VARARGS.min()).isEqualTo(INTEGER_MANY_VALUES_MIN);
@@ -453,7 +456,7 @@ public class StatsTest extends TestCase {
             Stats.of(1.0, 1.0, 5.0, 5.0),
             Stats.of(ImmutableList.of(1.0, 1.0, 5.0, 5.0)),
             Stats.of(ImmutableList.of(1.0, 1.0, 5.0, 5.0).iterator()),
-            SerializableTester.reserialize(Stats.of(1.0, 1.0, 5.0, 5.0)))
+            reserialize(Stats.of(1.0, 1.0, 5.0, 5.0)))
         .addEqualityGroup(Stats.of(1.0, 5.0))
         .addEqualityGroup(Stats.of(1.0, 5.0, 1.0, 6.0))
         .addEqualityGroup(Stats.of(2.0, 6.0, 2.0, 6.0))
@@ -468,7 +471,7 @@ public class StatsTest extends TestCase {
   }
 
   public void testSerializable() {
-    SerializableTester.reserializeAndAssert(MANY_VALUES_STATS_ITERABLE);
+    reserializeAndAssert(MANY_VALUES_STATS_ITERABLE);
   }
 
   public void testToString() {
@@ -489,8 +492,8 @@ public class StatsTest extends TestCase {
   }
 
   public void testMeanOf() {
-    assertThrows(IllegalArgumentException.class, () -> Stats.meanOf());
-    assertThrows(IllegalArgumentException.class, () -> Stats.meanOf(ImmutableList.<Number>of()));
+    assertThrows(IllegalArgumentException.class, Stats::meanOf);
+    assertThrows(IllegalArgumentException.class, () -> Stats.meanOf(ImmutableList.of()));
     assertThat(Stats.meanOf(ONE_VALUE)).isWithin(ALLOWED_ERROR).of(ONE_VALUE);
     assertThat(Stats.meanOf(POSITIVE_INFINITY)).isPositiveInfinity();
     assertThat(Stats.meanOf(NEGATIVE_INFINITY)).isNegativeInfinity();
@@ -501,15 +504,15 @@ public class StatsTest extends TestCase {
     for (ManyValues values : ALL_MANY_VALUES) {
       double mean = Stats.meanOf(values.asArray());
       if (values.hasAnyNaN()) {
-        assertWithMessage("mean of " + values).that(mean).isNaN();
+        assertWithMessage("mean of %s", values).that(mean).isNaN();
       } else if (values.hasAnyPositiveInfinity() && values.hasAnyNegativeInfinity()) {
-        assertWithMessage("mean of " + values).that(mean).isNaN();
+        assertWithMessage("mean of %s", values).that(mean).isNaN();
       } else if (values.hasAnyPositiveInfinity()) {
-        assertWithMessage("mean of " + values).that(mean).isPositiveInfinity();
+        assertWithMessage("mean of %s", values).that(mean).isPositiveInfinity();
       } else if (values.hasAnyNegativeInfinity()) {
-        assertWithMessage("mean of " + values).that(mean).isNegativeInfinity();
+        assertWithMessage("mean of %s", values).that(mean).isNegativeInfinity();
       } else {
-        assertWithMessage("mean of " + values)
+        assertWithMessage("mean of %s", values)
             .that(mean)
             .isWithin(ALLOWED_ERROR)
             .of(MANY_VALUES_MEAN);

@@ -17,15 +17,19 @@
 package jdk.m3.collections.guava.collect;
 
 import static jdk.m3.collections.guava.collect.Maps.immutableEntry;
+import static jdk.m3.collections.guava.collect.Maps.newTreeMap;
 import static jdk.m3.collections.guava.collect.Maps.transformValues;
-import static jdk.m3.collections.guava.collect.ReflectionFreeAssertThrows.assertThrows;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
+import static org.junit.Assert.assertThrows;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.base.Function;
 import jdk.m3.collections.guava.base.Functions;
 import jdk.m3.collections.guava.collect.testing.MapInterfaceTest;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
@@ -40,22 +44,22 @@ import org.jspecify.annotations.Nullable;
 @GwtCompatible
 @NullMarked
 abstract class AbstractMapsTransformValuesTest extends MapInterfaceTest<String, String> {
-  public AbstractMapsTransformValuesTest() {
+  AbstractMapsTransformValuesTest() {
     super(false, true, false, true, true);
   }
 
   @Override
-  protected String getKeyNotInPopulatedMap() throws UnsupportedOperationException {
+  protected String getKeyNotInPopulatedMap() {
     return "z";
   }
 
   @Override
-  protected String getValueNotInPopulatedMap() throws UnsupportedOperationException {
+  protected String getValueNotInPopulatedMap() {
     return "26";
   }
 
   /** Helper assertion comparing two maps */
-  private void assertMapsEqual(Map<?, ?> expected, Map<?, ?> map) {
+  private static void assertMapsEqual(Map<?, ?> expected, Map<?, ?> map) {
     assertEquals(expected, map);
     assertEquals(expected.hashCode(), map.hashCode());
     assertEquals(expected.entrySet(), map.entrySet());
@@ -72,7 +76,7 @@ abstract class AbstractMapsTransformValuesTest extends MapInterfaceTest<String, 
   public void testTransformEmptyMapEquality() {
     Map<String, String> map =
         transformValues(ImmutableMap.<String, Integer>of(), Functions.toStringFunction());
-    assertMapsEqual(Maps.newHashMap(), map);
+    assertMapsEqual(new HashMap<>(), map);
   }
 
   public void testTransformSingletonMapEquality() {
@@ -80,12 +84,12 @@ abstract class AbstractMapsTransformValuesTest extends MapInterfaceTest<String, 
         transformValues(ImmutableMap.of("a", 1), Functions.toStringFunction());
     Map<String, String> expected = ImmutableMap.of("a", "1");
     assertMapsEqual(expected, map);
-    assertEquals(expected.get("a"), map.get("a"));
+    assertThat(map.get("a")).isEqualTo(expected.get("a"));
   }
 
   public void testTransformIdentityFunctionEquality() {
     Map<String, Integer> underlying = ImmutableMap.of("a", 1);
-    Map<String, Integer> map = transformValues(underlying, Functions.<Integer>identity());
+    Map<String, Integer> map = transformValues(underlying, Functions.identity());
     assertMapsEqual(underlying, map);
   }
 
@@ -102,39 +106,30 @@ abstract class AbstractMapsTransformValuesTest extends MapInterfaceTest<String, 
   }
 
   public void testTransformRemoveEntry() {
-    Map<String, Integer> underlying = Maps.newHashMap();
+    Map<String, Integer> underlying = new HashMap<>();
     underlying.put("a", 1);
     Map<String, String> map = transformValues(underlying, Functions.toStringFunction());
-    assertEquals("1", map.remove("a"));
-    assertNull(map.remove("b"));
+    assertThat(map.remove("a")).isEqualTo("1");
+    assertThat(map.remove("b")).isNull();
   }
 
   public void testTransformEqualityOfMapsWithNullValues() {
-    Map<String, @Nullable String> underlying = Maps.newHashMap();
+    Map<String, @Nullable String> underlying = new HashMap<>();
     underlying.put("a", null);
     underlying.put("b", "");
 
-    Map<String, Boolean> map =
-        transformValues(
-            underlying,
-            new Function<@Nullable String, Boolean>() {
-              @Override
-              public Boolean apply(@Nullable String from) {
-                return from == null;
-              }
-            });
-    Map<String, Boolean> expected = ImmutableMap.of("a", true, "b", false);
-    assertMapsEqual(expected, map);
-    assertEquals(expected.get("a"), map.get("a"));
-    assertEquals(expected.containsKey("a"), map.containsKey("a"));
-    assertEquals(expected.get("b"), map.get("b"));
-    assertEquals(expected.containsKey("b"), map.containsKey("b"));
-    assertEquals(expected.get("c"), map.get("c"));
-    assertEquals(expected.containsKey("c"), map.containsKey("c"));
+    Map<String, Boolean> map = transformValues(underlying, from -> from == null);
+    assertMapsEqual(ImmutableMap.of("a", true, "b", false), map);
+    assertThat(map.get("a")).isEqualTo(true);
+    assertThat(map.containsKey("a")).isEqualTo(true);
+    assertThat(map.get("b")).isEqualTo(false);
+    assertThat(map.containsKey("b")).isEqualTo(true);
+    assertThat(map.get("c")).isNull();
+    assertThat(map.containsKey("c")).isEqualTo(false);
   }
 
   public void testTransformReflectsUnderlyingMap() {
-    Map<String, Integer> underlying = Maps.newHashMap();
+    Map<String, Integer> underlying = new HashMap<>();
     underlying.put("a", 1);
     underlying.put("b", 2);
     underlying.put("c", 3);
@@ -143,7 +138,7 @@ abstract class AbstractMapsTransformValuesTest extends MapInterfaceTest<String, 
 
     underlying.put("d", 4);
     assertEquals(underlying.size(), map.size());
-    assertEquals("4", map.get("d"));
+    assertThat(map.get("d")).isEqualTo("4");
 
     underlying.remove("c");
     assertEquals(underlying.size(), map.size());
@@ -154,7 +149,7 @@ abstract class AbstractMapsTransformValuesTest extends MapInterfaceTest<String, 
   }
 
   public void testTransformChangesAreReflectedInUnderlyingMap() {
-    Map<String, Integer> underlying = Maps.newLinkedHashMap();
+    Map<String, Integer> underlying = new LinkedHashMap<>();
     underlying.put("a", 1);
     underlying.put("b", 2);
     underlying.put("c", 3);
@@ -204,13 +199,13 @@ abstract class AbstractMapsTransformValuesTest extends MapInterfaceTest<String, 
 
   public void testTransformEquals() {
     Map<String, Integer> underlying = ImmutableMap.of("a", 0, "b", 1, "c", 2);
-    Map<String, Integer> expected = transformValues(underlying, Functions.<Integer>identity());
+    Map<String, Integer> expected = transformValues(underlying, Functions.identity());
 
     assertMapsEqual(expected, expected);
 
-    Map<String, Integer> equalToUnderlying = Maps.newTreeMap();
+    Map<String, Integer> equalToUnderlying = newTreeMap();
     equalToUnderlying.putAll(underlying);
-    Map<String, Integer> map = transformValues(equalToUnderlying, Functions.<Integer>identity());
+    Map<String, Integer> map = transformValues(equalToUnderlying, Functions.identity());
     assertMapsEqual(expected, map);
 
     map =
@@ -226,7 +221,7 @@ abstract class AbstractMapsTransformValuesTest extends MapInterfaceTest<String, 
   }
 
   public void testTransformEntrySetContains() {
-    Map<@Nullable String, @Nullable Boolean> underlying = Maps.newHashMap();
+    Map<@Nullable String, @Nullable Boolean> underlying = new HashMap<>();
     underlying.put("a", null);
     underlying.put("b", true);
     underlying.put(null, true);
@@ -256,7 +251,7 @@ abstract class AbstractMapsTransformValuesTest extends MapInterfaceTest<String, 
     try {
       super.testKeySetRemoveAllNullFromEmpty();
     } catch (RuntimeException tolerated) {
-      // GWT's HashMap.keySet().removeAll(null) doesn't throws NPE.
+      // GWT's HashMap.keySet().removeAll(null) doesn't throw NPE.
     }
   }
 
@@ -265,7 +260,7 @@ abstract class AbstractMapsTransformValuesTest extends MapInterfaceTest<String, 
     try {
       super.testEntrySetRemoveAllNullFromEmpty();
     } catch (RuntimeException tolerated) {
-      // GWT's HashMap.entrySet().removeAll(null) doesn't throws NPE.
+      // GWT's HashMap.entrySet().removeAll(null) doesn't throw NPE.
     }
   }
 }

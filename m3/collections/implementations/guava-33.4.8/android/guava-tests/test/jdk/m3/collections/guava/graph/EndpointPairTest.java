@@ -16,7 +16,7 @@
 
 package jdk.m3.collections.guava.graph;
 
-import static com.google.common.truth.Truth.assertThat;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
 import static org.junit.Assert.assertThrows;
 
 import jdk.m3.collections.guava.collect.ImmutableList;
@@ -87,9 +87,7 @@ public final class EndpointPairTest {
   @Test
   public void testAdjacentNode_nodeNotIncident() {
     ImmutableList<MutableNetwork<Integer, String>> testNetworks =
-        ImmutableList.of(
-            NetworkBuilder.directed().<Integer, String>build(),
-            NetworkBuilder.undirected().<Integer, String>build());
+        ImmutableList.of(NetworkBuilder.directed().build(), NetworkBuilder.undirected().build());
     for (MutableNetwork<Integer, String> network : testNetworks) {
       network.addEdge(1, 2, "1-2");
       EndpointPair<Integer> endpointPair = network.incidentNodes("1-2");
@@ -235,11 +233,13 @@ public final class EndpointPairTest {
     assertThat(edges).doesNotContain(EndpointPair.ordered(N3, N4)); // nodes not in graph
   }
 
+  // We are testing our implementations of methods on Collection.
+  @SuppressWarnings({"CollectionSizeTruth", "CollectionContainsTruth"})
   private static void containsExactlySanityCheck(Collection<?> collection, Object... varargs) {
-    assertThat(collection).hasSize(varargs.length);
+    assertThat(collection.size()).isEqualTo(varargs.length);
     for (Object obj : varargs) {
-      assertThat(collection).contains(obj);
+      assertThat(collection.contains(obj)).isTrue();
     }
-    assertThat(collection).containsExactly(varargs);
+    assertThat(ImmutableList.copyOf(collection.iterator())).containsExactlyElementsIn(varargs);
   }
 }

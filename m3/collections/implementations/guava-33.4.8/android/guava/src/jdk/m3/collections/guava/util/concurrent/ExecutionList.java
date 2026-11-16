@@ -17,7 +17,6 @@ package jdk.m3.collections.guava.util.concurrent;
 import static jdk.m3.collections.guava.base.Preconditions.checkNotNull;
 
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
-import jdk.m3.collections.guava.annotations.J2ktIncompatible;
 import com.google.errorprone.annotations.concurrent.GuardedBy;
 import java.util.concurrent.Executor;
 import java.util.logging.Level;
@@ -39,20 +38,21 @@ import org.jspecify.annotations.Nullable;
  * @author Sven Mawson
  * @since 1.0
  */
-@J2ktIncompatible
 @GwtIncompatible
 public final class ExecutionList {
   /** Logger to log exceptions caught when running runnables. */
   private static final LazyLogger log = new LazyLogger(ExecutionList.class);
 
+  private final Object lock = new Object();
+
   /**
    * The runnable, executor pairs to execute. This acts as a stack threaded through the {@link
    * RunnableExecutorPair#next} field.
    */
-  @GuardedBy("this")
+  @GuardedBy("lock")
   private @Nullable RunnableExecutorPair runnables;
 
-  @GuardedBy("this")
+  @GuardedBy("lock")
   private boolean executed;
 
   /** Creates a new, empty {@link ExecutionList}. */
@@ -75,7 +75,7 @@ public final class ExecutionList {
     // Lock while we check state. We must maintain the lock while adding the new pair so that
     // another thread can't run the list out from under us. We only add to the list if we have not
     // yet started execution.
-    synchronized (this) {
+    synchronized (lock) {
       if (!executed) {
         runnables = new RunnableExecutorPair(runnable, executor, runnables);
         return;
@@ -103,7 +103,7 @@ public final class ExecutionList {
     // Lock while we update our state so the add method above will finish adding any listeners
     // before we start to run them.
     RunnableExecutorPair list;
-    synchronized (this) {
+    synchronized (lock) {
       if (executed) {
         return;
       }

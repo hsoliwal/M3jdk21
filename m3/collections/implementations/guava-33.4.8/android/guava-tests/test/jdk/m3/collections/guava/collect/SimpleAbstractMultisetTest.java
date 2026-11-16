@@ -15,20 +15,21 @@
 package jdk.m3.collections.guava.collect;
 
 import static jdk.m3.collections.guava.base.Preconditions.checkArgument;
-import static jdk.m3.collections.guava.collect.ReflectionFreeAssertThrows.assertThrows;
+import static org.junit.Assert.assertThrows;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
 import jdk.m3.collections.guava.annotations.J2ktIncompatible;
-import jdk.m3.collections.guava.base.Objects;
 import jdk.m3.collections.guava.collect.testing.features.CollectionFeature;
 import jdk.m3.collections.guava.collect.testing.features.CollectionSize;
 import jdk.m3.collections.guava.collect.testing.google.MultisetTestSuiteBuilder;
 import jdk.m3.collections.guava.collect.testing.google.TestStringMultisetGenerator;
 import java.io.Serializable;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
 import junit.framework.Test;
 import junit.framework.TestCase;
@@ -43,7 +44,7 @@ import org.jspecify.annotations.Nullable;
  * @author Louis Wasserman
  */
 @SuppressWarnings("serial") // No serialization is used in this test
-@GwtCompatible(emulated = true)
+@GwtCompatible
 @NullMarked
 public class SimpleAbstractMultisetTest extends TestCase {
   @J2ktIncompatible
@@ -73,7 +74,7 @@ public class SimpleAbstractMultisetTest extends TestCase {
 
   @SuppressWarnings("ModifiedButNotUsed")
   public void testFastAddAllMultiset() {
-    final AtomicInteger addCalls = new AtomicInteger();
+    AtomicInteger addCalls = new AtomicInteger();
     Multiset<String> multiset =
         new NoRemoveMultiset<String>() {
           @Override
@@ -95,9 +96,12 @@ public class SimpleAbstractMultisetTest extends TestCase {
     assertTrue(multiset.contains("a"));
   }
 
+  // Subclasses production AbstractMultiset and overrides package-private (internal)
+  // abstract methods across library boundaries, which causes a Kotlin/Native
+  // fake override dispatch crash.
   private static class NoRemoveMultiset<E extends @Nullable Object> extends AbstractMultiset<E>
       implements Serializable {
-    final Map<E, Integer> backingMap = Maps.newHashMap();
+    final Map<E, Integer> backingMap = new HashMap<>();
 
     @Override
     public int size() {
@@ -112,7 +116,7 @@ public class SimpleAbstractMultisetTest extends TestCase {
     @Override
     public int count(@Nullable Object element) {
       for (Entry<E> entry : entrySet()) {
-        if (Objects.equal(entry.getElement(), element)) {
+        if (Objects.equals(entry.getElement(), element)) {
           return entry.getCount();
         }
       }
@@ -133,12 +137,12 @@ public class SimpleAbstractMultisetTest extends TestCase {
 
     @Override
     Iterator<E> elementIterator() {
-      return Multisets.elementIterator(entryIterator());
+      return Multisets.elementIterator(internalEntryIterator());
     }
 
     @Override
-    Iterator<Entry<E>> entryIterator() {
-      final Iterator<Map.Entry<E, Integer>> backingEntries = backingMap.entrySet().iterator();
+    Iterator<Entry<E>> internalEntryIterator() {
+      Iterator<Map.Entry<E, Integer>> backingEntries = backingMap.entrySet().iterator();
       return new UnmodifiableIterator<Multiset.Entry<E>>() {
         @Override
         public boolean hasNext() {
@@ -147,7 +151,7 @@ public class SimpleAbstractMultisetTest extends TestCase {
 
         @Override
         public Multiset.Entry<E> next() {
-          final Map.Entry<E, Integer> mapEntry = backingEntries.next();
+          Map.Entry<E, Integer> mapEntry = backingEntries.next();
           return new Multisets.AbstractEntry<E>() {
             @Override
             public E getElement() {
@@ -170,7 +174,7 @@ public class SimpleAbstractMultisetTest extends TestCase {
     }
 
     @Override
-    int distinctElements() {
+    int internalDistinctElements() {
       return backingMap.size();
     }
   }

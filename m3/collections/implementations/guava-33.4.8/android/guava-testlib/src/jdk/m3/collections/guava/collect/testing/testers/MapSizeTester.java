@@ -18,7 +18,6 @@ package jdk.m3.collections.guava.collect.testing.testers;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.collect.testing.AbstractMapTester;
-import org.junit.Ignore;
 
 /**
  * A generic JUnit test which tests {@code size()} operations on a map. Can't be invoked directly;
@@ -27,9 +26,6 @@ import org.junit.Ignore;
  * @author George van den Driessche
  */
 @GwtCompatible
-@Ignore("test runners must not instantiate and run this directly, only via suites we build")
-// @Ignore affects the Android test runner, which respects JUnit 4 annotations on JUnit 3 tests.
-@SuppressWarnings("JUnit4ClassUsedInJUnit3")
 public class MapSizeTester<K, V> extends AbstractMapTester<K, V> {
   public void testSize() {
     assertEquals("size():", getNumElements(), getMap().size());

@@ -20,6 +20,7 @@ import java.util.ArrayDeque;
 import java.util.Collection;
 import java.util.Deque;
 import java.util.Iterator;
+import java.util.LinkedList;
 import junit.framework.TestCase;
 import org.jspecify.annotations.NullUnmarked;
 import org.jspecify.annotations.Nullable;
@@ -32,7 +33,7 @@ import org.jspecify.annotations.Nullable;
 @NullUnmarked
 public class SynchronizedDequeTest extends TestCase {
 
-  protected Deque<String> create() {
+  private Deque<String> create() {
     TestDeque<String> inner = new TestDeque<>();
     Deque<String> outer = Synchronized.deque(inner, inner.mutex);
     outer.add("foo"); // necessary because we try to remove elements later on
@@ -40,8 +41,8 @@ public class SynchronizedDequeTest extends TestCase {
   }
 
   private static final class TestDeque<E> implements Deque<E> {
-    private final Deque<E> delegate = Lists.newLinkedList();
-    public final Object mutex = new Object[0]; // something Serializable
+    private final Deque<E> delegate = new LinkedList<>();
+    private final Object mutex = new Object[0]; // something Serializable
 
     @Override
     public boolean offer(E o) {

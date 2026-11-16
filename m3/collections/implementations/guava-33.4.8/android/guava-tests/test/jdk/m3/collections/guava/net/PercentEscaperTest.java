@@ -19,8 +19,8 @@ package jdk.m3.collections.guava.net;
 import static jdk.m3.collections.guava.escape.testing.EscaperAsserts.assertEscaping;
 import static jdk.m3.collections.guava.escape.testing.EscaperAsserts.assertUnescaped;
 import static jdk.m3.collections.guava.escape.testing.EscaperAsserts.assertUnicodeEscaping;
-import static jdk.m3.collections.guava.net.ReflectionFreeAssertThrows.assertThrows;
-import static com.google.common.truth.Truth.assertThat;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
+import static org.junit.Assert.assertThrows;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.base.Preconditions;
@@ -59,10 +59,10 @@ public class PercentEscaperTest extends TestCase {
     assertUnicodeEscaping(e, "%F4%8F%BF%BF", '\uDBFF', '\uDFFF');
 
     // simple string tests
-    assertEquals("", e.escape(""));
-    assertEquals("safestring", e.escape("safestring"));
-    assertEquals("embedded%00null", e.escape("embedded\0null"));
-    assertEquals("max%EF%BF%BFchar", e.escape("max\uffffchar"));
+    assertThat(e.escape("")).isEqualTo("");
+    assertThat(e.escape("safestring")).isEqualTo("safestring");
+    assertThat(e.escape("embedded\0null")).isEqualTo("embedded%00null");
+    assertThat(e.escape("max\uffffchar")).isEqualTo("max%EF%BF%BFchar");
   }
 
   /** Tests the various ways that the space character can be handled */
@@ -71,9 +71,9 @@ public class PercentEscaperTest extends TestCase {
     UnicodeEscaper plusForSpaceEscaper = new PercentEscaper("", true);
     UnicodeEscaper spaceEscaper = new PercentEscaper(" ", false);
 
-    assertEquals("string%20with%20spaces", basicEscaper.escape("string with spaces"));
-    assertEquals("string+with+spaces", plusForSpaceEscaper.escape("string with spaces"));
-    assertEquals("string with spaces", spaceEscaper.escape("string with spaces"));
+    assertThat(basicEscaper.escape("string with spaces")).isEqualTo("string%20with%20spaces");
+    assertThat(plusForSpaceEscaper.escape("string with spaces")).isEqualTo("string+with+spaces");
+    assertThat(spaceEscaper.escape("string with spaces")).isEqualTo("string with spaces");
   }
 
   /** Tests that if we add extra 'safe' characters they remain unescaped */
@@ -94,11 +94,12 @@ public class PercentEscaperTest extends TestCase {
   /** Tests that if specify '%' as safe the result is an idempotent escaper. */
   public void testCustomEscaper_withpercent() {
     UnicodeEscaper e = new PercentEscaper("%", false);
-    assertEquals("foo%7Cbar", e.escape("foo|bar"));
-    assertEquals("foo%7Cbar", e.escape("foo%7Cbar")); // idempotent
+    assertThat(e.escape("foo|bar")).isEqualTo("foo%7Cbar");
+    assertThat(e.escape("foo%7Cbar")).isEqualTo("foo%7Cbar"); // idempotent
   }
 
   /** Test that giving a null 'safeChars' string causes a {@link NullPointerException}. */
+  @SuppressWarnings("nullness") // test of a bogus call
   public void testBadArguments_null() {
     assertThrows(NullPointerException.class, () -> new PercentEscaper(null, false));
   }
@@ -108,8 +109,7 @@ public class PercentEscaperTest extends TestCase {
    * IllegalArgumentException}.
    */
   public void testBadArguments_badchars() {
-    String msg =
-        "Alphanumeric characters are always 'safe' " + "and should not be explicitly specified";
+    String msg = "Alphanumeric characters are always 'safe' and should not be explicitly specified";
     IllegalArgumentException expected =
         assertThrows(IllegalArgumentException.class, () -> new PercentEscaper("-+#abc.!", false));
     assertThat(expected).hasMessageThat().isEqualTo(msg);
@@ -127,7 +127,7 @@ public class PercentEscaperTest extends TestCase {
   }
 
   /** Helper to manually escape a 7-bit ascii character */
-  private String escapeAscii(char c) {
+  private static String escapeAscii(char c) {
     Preconditions.checkArgument(c < 128);
     String hex = "0123456789ABCDEF";
     return "%" + hex.charAt((c >> 4) & 0xf) + hex.charAt(c & 0xf);

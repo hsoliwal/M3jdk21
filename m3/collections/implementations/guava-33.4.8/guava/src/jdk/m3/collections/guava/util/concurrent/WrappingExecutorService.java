@@ -17,6 +17,7 @@ package jdk.m3.collections.guava.util.concurrent;
 import static jdk.m3.collections.guava.base.Preconditions.checkNotNull;
 import static jdk.m3.collections.guava.base.Throwables.throwIfUnchecked;
 import static jdk.m3.collections.guava.util.concurrent.Platform.restoreInterruptIfIsInterruptedException;
+import static java.util.concurrent.Executors.callable;
 
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
 import jdk.m3.collections.guava.annotations.J2ktIncompatible;
@@ -27,7 +28,6 @@ import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
@@ -48,6 +48,7 @@ import org.jspecify.annotations.Nullable;
 abstract class WrappingExecutorService implements ExecutorService {
   private final ExecutorService delegate;
 
+  /** Constructor for use by subclasses. */
   protected WrappingExecutorService(ExecutorService delegate) {
     this.delegate = checkNotNull(delegate);
   }
@@ -63,7 +64,7 @@ abstract class WrappingExecutorService implements ExecutorService {
    * delegates to {@link #wrapTask(Callable)}.
    */
   protected Runnable wrapTask(Runnable command) {
-    Callable<Object> wrapped = wrapTask(Executors.callable(command, null));
+    Callable<Object> wrapped = wrapTask(callable(command, null));
     return () -> {
       try {
         wrapped.call();

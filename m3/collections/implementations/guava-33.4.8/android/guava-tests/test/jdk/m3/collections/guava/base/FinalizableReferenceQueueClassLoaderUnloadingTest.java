@@ -18,8 +18,10 @@ package jdk.m3.collections.guava.base;
 
 import static jdk.m3.collections.guava.base.StandardSystemProperty.JAVA_CLASS_PATH;
 import static jdk.m3.collections.guava.base.StandardSystemProperty.PATH_SEPARATOR;
-import static com.google.common.truth.Truth.assertThat;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
 
+import jdk.m3.collections.guava.annotations.GwtIncompatible;
+import jdk.m3.collections.guava.annotations.J2ktIncompatible;
 import jdk.m3.collections.guava.collect.ImmutableList;
 import jdk.m3.collections.guava.testing.GcFinalization;
 import java.io.File;
@@ -43,6 +45,8 @@ import org.junit.runners.JUnit4;
  * @author Eamonn McManus
  */
 @AndroidIncompatible
+@GwtIncompatible
+@J2ktIncompatible
 @RunWith(JUnit4.class)
 @NullUnmarked
 public class FinalizableReferenceQueueClassLoaderUnloadingTest {
@@ -74,7 +78,7 @@ public class FinalizableReferenceQueueClassLoaderUnloadingTest {
   }
 
   private WeakReference<ClassLoader> useFrqInSeparateLoader() throws Exception {
-    final ClassLoader myLoader = getClass().getClassLoader();
+    ClassLoader myLoader = getClass().getClassLoader();
     URLClassLoader sepLoader = new URLClassLoader(getClassPathUrls(), myLoader.getParent());
     // sepLoader is the loader that we will use to load the parallel FinalizableReferenceQueue (FRQ)
     // and friends, and that we will eventually expect to see garbage-collected. The assumption
@@ -84,7 +88,7 @@ public class FinalizableReferenceQueueClassLoaderUnloadingTest {
 
     Class<?> frqC = FinalizableReferenceQueue.class;
     Class<?> sepFrqC = sepLoader.loadClass(frqC.getName());
-    assertThat(frqC).isNotSameInstanceAs(sepFrqC);
+    assertThat(frqC).isNotEqualTo(sepFrqC);
     // Check the assumptions above.
 
     // FRQ tries to load the Finalizer class (for the reference-collecting thread) in a few ways.

@@ -16,13 +16,12 @@
 
 package jdk.m3.collections.guava.escape;
 
-import static jdk.m3.collections.guava.escape.ReflectionFreeAssertThrows.assertThrows;
-import static com.google.common.truth.Truth.assertThat;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
+import static org.junit.Assert.assertThrows;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.collect.ImmutableMap;
 import jdk.m3.collections.guava.escape.testing.EscaperAsserts;
-import java.io.IOException;
 import junit.framework.TestCase;
 import org.jspecify.annotations.NullMarked;
 
@@ -40,7 +39,7 @@ public class ArrayBasedUnicodeEscaperTest extends TestCase {
           '&', "<and>");
   private static final char[] NO_CHARS = new char[0];
 
-  public void testReplacements() throws IOException {
+  public void testReplacements() {
     // In reality this is not a very sensible escaper to have (if you are only
     // escaping elements from a map you would use a ArrayBasedCharEscaper).
     UnicodeEscaper escaper =
@@ -63,7 +62,7 @@ public class ArrayBasedUnicodeEscaperTest extends TestCase {
     assertThrows(IllegalArgumentException.class, () -> escaper.escape(badUnicode));
   }
 
-  public void testSafeRange() throws IOException {
+  public void testSafeRange() {
     // Basic escaping of unsafe chars (wrap them in {,}'s)
     UnicodeEscaper wrappingEscaper =
         new ArrayBasedUnicodeEscaper(NO_REPLACEMENTS, 'A', 'Z', null) {
@@ -77,7 +76,7 @@ public class ArrayBasedUnicodeEscaperTest extends TestCase {
     assertThat(wrappingEscaper.escape("[FOO@BAR]")).isEqualTo("{[}FOO{@}BAR{]}");
   }
 
-  public void testDeleteUnsafeChars() throws IOException {
+  public void testDeleteUnsafeChars() {
     UnicodeEscaper deletingEscaper =
         new ArrayBasedUnicodeEscaper(NO_REPLACEMENTS, ' ', '~', null) {
           @Override
@@ -93,10 +92,10 @@ public class ArrayBasedUnicodeEscaperTest extends TestCase {
         .isEqualTo("Everything outside the printable ASCII range is deleted.");
   }
 
-  public void testReplacementPriority() throws IOException {
+  public void testReplacementPriority() {
     UnicodeEscaper replacingEscaper =
         new ArrayBasedUnicodeEscaper(SIMPLE_REPLACEMENTS, ' ', '~', null) {
-          private final char[] unknown = new char[] {'?'};
+          final char[] unknown = new char[] {'?'};
 
           @Override
           protected char[] escapeUnsafe(int c) {
@@ -111,10 +110,10 @@ public class ArrayBasedUnicodeEscaperTest extends TestCase {
         .isEqualTo("<tab>Fish <and>? Chips?<newline>");
   }
 
-  public void testCodePointsFromSurrogatePairs() throws IOException {
+  public void testCodePointsFromSurrogatePairs() {
     UnicodeEscaper surrogateEscaper =
         new ArrayBasedUnicodeEscaper(NO_REPLACEMENTS, 0, 0x20000, null) {
-          private final char[] escaped = new char[] {'X'};
+          final char[] escaped = new char[] {'X'};
 
           @Override
           protected char[] escapeUnsafe(int c) {

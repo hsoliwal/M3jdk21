@@ -18,7 +18,6 @@ package jdk.m3.collections.guava.base;
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import java.lang.ref.WeakReference;
 import java.util.Locale;
-import java.util.logging.Logger;
 import java.util.regex.Pattern;
 import org.jspecify.annotations.Nullable;
 
@@ -27,9 +26,8 @@ import org.jspecify.annotations.Nullable;
  *
  * @author Jesse Wilson
  */
-@GwtCompatible(emulated = true)
+@GwtCompatible
 final class Platform {
-  private static final Logger logger = Logger.getLogger(Platform.class.getName());
   private static final PatternCompiler patternCompiler = loadPatternCompiler();
 
   private Platform() {}
@@ -81,7 +79,8 @@ final class Platform {
     return stringIsNullOrEmpty(string) ? null : string;
   }
 
-  static String lenientFormat(@Nullable String template, @Nullable Object @Nullable ... args) {
+  static String lenientFormat(
+      @Nullable String template, @Nullable Object @Nullable ... args) {
     return Strings.lenientFormat(template, args);
   }
 

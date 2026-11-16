@@ -18,7 +18,9 @@ package jdk.m3.collections.guava.collect;
 
 import static jdk.m3.collections.guava.collect.MapMakerInternalMap.Strength.STRONG;
 import static jdk.m3.collections.guava.collect.MapMakerInternalMap.Strength.WEAK;
+import static jdk.m3.collections.guava.testing.SerializableTester.reserialize;
 import static jdk.m3.collections.guava.testing.SerializableTester.reserializeAndAssert;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
 import static java.util.Arrays.asList;
 import static org.junit.Assert.assertThrows;
 import static org.mockito.ArgumentMatchers.isA;
@@ -31,6 +33,7 @@ import jdk.m3.collections.guava.collect.testing.features.CollectionFeature;
 import jdk.m3.collections.guava.collect.testing.features.CollectionSize;
 import jdk.m3.collections.guava.collect.testing.google.MultisetTestSuiteBuilder;
 import jdk.m3.collections.guava.collect.testing.google.TestStringMultisetGenerator;
+import java.io.Serializable;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
@@ -92,8 +95,7 @@ public class ConcurrentHashMultisetTest extends TestCase {
     return new TestStringMultisetGenerator() {
       @Override
       protected Multiset<String> create(String[] elements) {
-        Multiset<String> multiset =
-            new ConcurrentHashMultiset<>(new ConcurrentSkipListMap<String, AtomicInteger>());
+        Multiset<String> multiset = ConcurrentHashMultiset.create(new ConcurrentSkipListMap<>());
         Collections.addAll(multiset, elements);
         return multiset;
       }
@@ -116,11 +118,11 @@ public class ConcurrentHashMultisetTest extends TestCase {
     backingMap = mock(ConcurrentMap.class);
     when(backingMap.isEmpty()).thenReturn(true);
 
-    multiset = new ConcurrentHashMultiset<>(backingMap);
+    multiset = ConcurrentHashMultiset.create(backingMap);
   }
 
   public void testCount_elementPresent() {
-    final int COUNT = 12;
+    int COUNT = 12;
     when(backingMap.get(KEY)).thenReturn(new AtomicInteger(COUNT));
 
     assertEquals(COUNT, multiset.count(KEY));
@@ -133,14 +135,14 @@ public class ConcurrentHashMultisetTest extends TestCase {
   }
 
   public void testAdd_zero() {
-    final int INITIAL_COUNT = 32;
+    int INITIAL_COUNT = 32;
 
     when(backingMap.get(KEY)).thenReturn(new AtomicInteger(INITIAL_COUNT));
     assertEquals(INITIAL_COUNT, multiset.add(KEY, 0));
   }
 
   public void testAdd_firstFewWithSuccess() {
-    final int COUNT = 400;
+    int COUNT = 400;
 
     when(backingMap.get(KEY)).thenReturn(null);
     when(backingMap.putIfAbsent(eq(KEY), isA(AtomicInteger.class))).thenReturn(null);
@@ -160,8 +162,8 @@ public class ConcurrentHashMultisetTest extends TestCase {
   }
 
   public void testAdd_laterFewWithOverflow() {
-    final int INITIAL_COUNT = 92384930;
-    final int COUNT_TO_ADD = Integer.MAX_VALUE - INITIAL_COUNT + 1;
+    int INITIAL_COUNT = 92384930;
+    int COUNT_TO_ADD = Integer.MAX_VALUE - INITIAL_COUNT + 1;
 
     when(backingMap.get(KEY)).thenReturn(new AtomicInteger(INITIAL_COUNT));
 
@@ -202,7 +204,7 @@ public class ConcurrentHashMultisetTest extends TestCase {
   }
 
   public void testRemove_zeroFromSome() {
-    final int INITIAL_COUNT = 14;
+    int INITIAL_COUNT = 14;
     when(backingMap.get(KEY)).thenReturn(new AtomicInteger(INITIAL_COUNT));
 
     assertEquals(INITIAL_COUNT, multiset.remove(KEY, 0));
@@ -309,6 +311,54 @@ public class ConcurrentHashMultisetTest extends TestCase {
     assertEquals(0, multiset.setCount(KEY, 0));
   }
 
+  public void testSerialCycle() {
+    ConcurrentHashMultiset<ContainsMultiset> multiset = ConcurrentHashMultiset.create();
+    ContainsMultiset containsMultiset = new ContainsMultiset(multiset);
+    multiset.add(containsMultiset);
+    ContainsBothWithMultisetFirst multisetFirst =
+        new ContainsBothWithMultisetFirst(multiset, containsMultiset);
+    ContainsBothWithContainsMultisetFirst containsMultisetFirst =
+        new ContainsBothWithContainsMultisetFirst(containsMultiset, multiset);
+
+    ContainsBothWithMultisetFirst reMultisetFirst = reserialize(multisetFirst);
+    assertThat(reMultisetFirst.a.isEmpty()).isFalse();
+    // The following NPE is a side effect of our changes to avoid mutating `final` fields.
+    assertThrows(NullPointerException.class, () -> reMultisetFirst.z.multiset.isEmpty());
+
+    ContainsBothWithContainsMultisetFirst reContainsMultisetFirst =
+        reserialize(containsMultisetFirst);
+    assertThat(reContainsMultisetFirst.a.multiset.isEmpty()).isFalse();
+    assertThat(reContainsMultisetFirst.z.isEmpty()).isFalse();
+  }
+
+  private static final class ContainsMultiset implements Serializable {
+    private final ConcurrentHashMultiset<?> multiset;
+
+    ContainsMultiset(ConcurrentHashMultiset<?> multiset) {
+      this.multiset = multiset;
+    }
+  }
+
+  private static final class ContainsBothWithMultisetFirst implements Serializable {
+    private final ConcurrentHashMultiset<?> a;
+    private final ContainsMultiset z;
+
+    ContainsBothWithMultisetFirst(ConcurrentHashMultiset<?> a, ContainsMultiset z) {
+      this.a = a;
+      this.z = z;
+    }
+  }
+
+  private static final class ContainsBothWithContainsMultisetFirst implements Serializable {
+    private final ContainsMultiset a;
+    private final ConcurrentHashMultiset<?> z;
+
+    ContainsBothWithContainsMultisetFirst(ContainsMultiset a, ConcurrentHashMultiset<?> z) {
+      this.a = a;
+      this.z = z;
+    }
+  }
+
   public void testCreate() {
     ConcurrentHashMultiset<Integer> multiset = ConcurrentHashMultiset.create();
     assertTrue(multiset.isEmpty());
@@ -330,7 +380,7 @@ public class ConcurrentHashMultisetTest extends TestCase {
     testIdentityKeyEquality(WEAK);
   }
 
-  private void testIdentityKeyEquality(MapMakerInternalMap.Strength keyStrength) {
+  private static void testIdentityKeyEquality(MapMakerInternalMap.Strength keyStrength) {
 
     ConcurrentMap<String, AtomicInteger> map =
         new MapMaker().setKeyStrength(keyStrength).keyEquivalence(Equivalence.identity()).makeMap();
@@ -339,8 +389,8 @@ public class ConcurrentHashMultisetTest extends TestCase {
 
     String s1 = new String("a");
     String s2 = new String("a");
-    assertEquals(s1, s2); // Stating the obvious.
-    assertTrue(s1 != s2); // Stating the obvious.
+    assertThat(s1).isEqualTo(s2); // Stating the obvious.
+    assertThat(s1).isNotSameInstanceAs(s2); // Stating the obvious.
 
     multiset.add(s1);
     assertTrue(multiset.contains(s1));
@@ -366,7 +416,7 @@ public class ConcurrentHashMultisetTest extends TestCase {
     testLogicalKeyEquality(WEAK);
   }
 
-  private void testLogicalKeyEquality(MapMakerInternalMap.Strength keyStrength) {
+  private static void testLogicalKeyEquality(MapMakerInternalMap.Strength keyStrength) {
 
     ConcurrentMap<String, AtomicInteger> map =
         new MapMaker().setKeyStrength(keyStrength).keyEquivalence(Equivalence.equals()).makeMap();
@@ -375,7 +425,7 @@ public class ConcurrentHashMultisetTest extends TestCase {
 
     String s1 = new String("a");
     String s2 = new String("a");
-    assertEquals(s1, s2); // Stating the obvious.
+    assertThat(s2).isEqualTo(s1); // Stating the obvious.
 
     multiset.add(s1);
     assertTrue(multiset.contains(s1));
@@ -421,8 +471,8 @@ public class ConcurrentHashMultisetTest extends TestCase {
 
     String s1 = new String("a");
     String s2 = new String("a");
-    assertEquals(s1, s2); // Stating the obvious.
-    assertTrue(s1 != s2); // Stating the obvious.
+    assertThat(s1).isEqualTo(s2); // Stating the obvious.
+    assertThat(s1).isNotSameInstanceAs(s2); // Stating the obvious.
 
     multiset.add(s1);
     assertTrue(multiset.contains(s1));

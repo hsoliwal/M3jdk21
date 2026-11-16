@@ -21,14 +21,13 @@ import static jdk.m3.collections.guava.collect.testing.features.CollectionFeatur
 import static jdk.m3.collections.guava.collect.testing.features.CollectionSize.ONE;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
-import jdk.m3.collections.guava.collect.Lists;
 import jdk.m3.collections.guava.collect.Multimap;
 import jdk.m3.collections.guava.collect.testing.features.CollectionFeature;
 import jdk.m3.collections.guava.collect.testing.features.CollectionSize;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map.Entry;
-import org.junit.Ignore;
 
 /**
  * Tester for {@code Multimap.values}.
@@ -36,12 +35,9 @@ import org.junit.Ignore;
  * @author Louis Wasserman
  */
 @GwtCompatible
-@Ignore("test runners must not instantiate and run this directly, only via suites we build")
-// @Ignore affects the Android test runner, which respects JUnit 4 annotations on JUnit 3 tests.
-@SuppressWarnings("JUnit4ClassUsedInJUnit3")
 public class MultimapValuesTester<K, V> extends AbstractMultimapTester<K, V, Multimap<K, V>> {
   public void testValues() {
-    List<V> expected = Lists.newArrayList();
+    List<V> expected = new ArrayList<>();
     for (Entry<K, V> entry : getSampleElements()) {
       expected.add(entry.getValue());
     }
@@ -50,7 +46,7 @@ public class MultimapValuesTester<K, V> extends AbstractMultimapTester<K, V, Mul
 
   @CollectionFeature.Require(KNOWN_ORDER)
   public void testValuesInOrder() {
-    List<V> expected = Lists.newArrayList();
+    List<V> expected = new ArrayList<>();
     for (Entry<K, V> entry : getOrderedElements()) {
       expected.add(entry.getValue());
     }

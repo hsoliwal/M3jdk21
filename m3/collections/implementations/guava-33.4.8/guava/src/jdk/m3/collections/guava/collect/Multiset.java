@@ -69,7 +69,7 @@ import org.jspecify.annotations.Nullable;
  * element (in a way that affects its {@link Object#equals} behavior) while it is contained in a
  * multiset. Undefined behavior and bugs will result.
  *
- * <h3>Implementations</h3>
+ * <h2>Implementations</h2>
  *
  * <ul>
  *   <li>{@link ImmutableMultiset}
@@ -305,8 +305,7 @@ public interface Multiset<E extends @Nullable Object> extends Collection<E> {
      * if:
      *
      * {@snippet :
-     * Objects.equal(a.getElement(), b.getElement())
-     *     && a.getCount() == b.getCount()
+     * Objects.equals(a.getElement(), b.getElement()) && a.getCount() == b.getCount()
      * }
      */
     @Override
@@ -468,14 +467,13 @@ public interface Multiset<E extends @Nullable Object> extends Collection<E> {
   default void forEach(Consumer<? super E> action) {
     checkNotNull(action);
     entrySet()
-        .forEach(
-            entry -> {
-              E elem = entry.getElement();
-              int count = entry.getCount();
-              for (int i = 0; i < count; i++) {
-                action.accept(elem);
-              }
-            });
+        .forEach(entry -> {
+          E elem = entry.getElement();
+          int count = entry.getCount();
+          for (int i = 0; i < count; i++) {
+            action.accept(elem);
+          }
+        });
   }
 
   @Override

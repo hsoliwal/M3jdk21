@@ -21,6 +21,7 @@ import static java.util.concurrent.TimeUnit.NANOSECONDS;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
+import jdk.m3.collections.guava.annotations.J2ktIncompatible;
 import jdk.m3.collections.guava.base.Ascii;
 import jdk.m3.collections.guava.base.Equivalence;
 import jdk.m3.collections.guava.base.MoreObjects;
@@ -93,8 +94,9 @@ import org.jspecify.annotations.Nullable;
  *   <li>least-recently-used eviction when a maximum size is exceeded (note that the cache is
  *       divided into segments, each of which does LRU internally)
  *   <li>time-based expiration of entries, measured since last access or last write
- *   <li>keys automatically wrapped in {@code WeakReference}
- *   <li>values automatically wrapped in {@code WeakReference} or {@code SoftReference}
+ *   <li>keys automatically wrapped in {@linkplain WeakReference weak} references
+ *   <li>values automatically wrapped in {@linkplain WeakReference weak} or {@linkplain
+ *       SoftReference soft} references
  *   <li>notification of evicted (or otherwise removed) entries
  *   <li>accumulation of cache access statistics
  * </ul>
@@ -191,7 +193,7 @@ import org.jspecify.annotations.Nullable;
  * @author Kevin Bourrillion
  * @since 10.0
  */
-@GwtCompatible(emulated = true)
+@GwtCompatible
 public final class CacheBuilder<K, V> {
   private static final int DEFAULT_INITIAL_CAPACITY = 16;
   private static final int DEFAULT_CONCURRENCY_LEVEL = 4;
@@ -326,7 +328,8 @@ public final class CacheBuilder<K, V> {
    *
    * @since 12.0
    */
-  @GwtIncompatible // To be supported
+  @GwtIncompatible
+  @J2ktIncompatible
   public static CacheBuilder<Object, Object> from(CacheBuilderSpec spec) {
     return spec.toCacheBuilder().lenientParsing();
   }
@@ -338,7 +341,8 @@ public final class CacheBuilder<K, V> {
    * @param spec a String in the format specified by {@link CacheBuilderSpec}
    * @since 12.0
    */
-  @GwtIncompatible // To be supported
+  @GwtIncompatible
+  @J2ktIncompatible
   public static CacheBuilder<Object, Object> from(String spec) {
     return from(CacheBuilderSpec.parse(spec));
   }
@@ -348,7 +352,8 @@ public final class CacheBuilder<K, V> {
    *
    * @return this {@code CacheBuilder} instance (for chaining)
    */
-  @GwtIncompatible // To be supported
+  @GwtIncompatible
+  @J2ktIncompatible
   @CanIgnoreReturnValue
   CacheBuilder<K, V> lenientParsing() {
     strictParsing = false;
@@ -363,7 +368,7 @@ public final class CacheBuilder<K, V> {
    *
    * @return this {@code CacheBuilder} instance (for chaining)
    */
-  @GwtIncompatible // To be supported
+  @GwtIncompatible
   @CanIgnoreReturnValue
   CacheBuilder<K, V> keyEquivalence(Equivalence<Object> equivalence) {
     checkState(keyEquivalence == null, "key equivalence was already set to %s", keyEquivalence);
@@ -384,7 +389,7 @@ public final class CacheBuilder<K, V> {
    *
    * @return this {@code CacheBuilder} instance (for chaining)
    */
-  @GwtIncompatible // To be supported
+  @GwtIncompatible
   @CanIgnoreReturnValue
   CacheBuilder<K, V> valueEquivalence(Equivalence<Object> equivalence) {
     checkState(
@@ -531,7 +536,8 @@ public final class CacheBuilder<K, V> {
    * @throws IllegalStateException if a maximum weight or size was already set
    * @since 11.0
    */
-  @GwtIncompatible // To be supported
+  @J2ktIncompatible
+  @GwtIncompatible
   @CanIgnoreReturnValue
   public CacheBuilder<K, V> maximumWeight(long maximumWeight) {
     checkState(
@@ -574,7 +580,8 @@ public final class CacheBuilder<K, V> {
    *     previously called
    * @since 11.0
    */
-  @GwtIncompatible // To be supported
+  @J2ktIncompatible
+  @GwtIncompatible
   @CanIgnoreReturnValue // TODO(b/27479612): consider removing this
   public <K1 extends K, V1 extends V> CacheBuilder<K1, V1> weigher(
       Weigher<? super K1, ? super V1> weigher) {
@@ -722,10 +729,8 @@ public final class CacheBuilder<K, V> {
    */
   @J2ObjCIncompatible
   @GwtIncompatible // Duration
-  @SuppressWarnings({
-    "GoodTime", // Duration decomposition
-    "Java7ApiChecker",
-  })
+  @J2ktIncompatible
+  @SuppressWarnings("GoodTime") // Duration decomposition
   @IgnoreJRERequirement // No more dangerous than wherever the caller got the Duration from
   @CanIgnoreReturnValue
   public CacheBuilder<K, V> expireAfterWrite(Duration duration) {
@@ -753,8 +758,9 @@ public final class CacheBuilder<K, V> {
    * @return this {@code CacheBuilder} instance (for chaining)
    * @throws IllegalArgumentException if {@code duration} is negative
    * @throws IllegalStateException if {@link #expireAfterWrite} was already set
+   * @deprecated Use {@link #expireAfterWrite(Duration)} instead.
    */
-  @SuppressWarnings("GoodTime") // should accept a Duration
+  @Deprecated // GoodTime
   @CanIgnoreReturnValue
   public CacheBuilder<K, V> expireAfterWrite(long duration, TimeUnit unit) {
     checkState(
@@ -798,11 +804,9 @@ public final class CacheBuilder<K, V> {
    *     href="https://github.com/google/guava#guava-google-core-libraries-for-java">flavor</a>)
    */
   @J2ObjCIncompatible
+  @J2ktIncompatible
   @GwtIncompatible // Duration
-  @SuppressWarnings({
-    "GoodTime", // Duration decomposition
-    "Java7ApiChecker",
-  })
+  @SuppressWarnings("GoodTime") // Duration decomposition
   @IgnoreJRERequirement // No more dangerous than wherever the caller got the Duration from
   @CanIgnoreReturnValue
   public CacheBuilder<K, V> expireAfterAccess(Duration duration) {
@@ -835,8 +839,9 @@ public final class CacheBuilder<K, V> {
    * @return this {@code CacheBuilder} instance (for chaining)
    * @throws IllegalArgumentException if {@code duration} is negative
    * @throws IllegalStateException if {@link #expireAfterAccess} was already set
+   * @deprecated Use {@link #expireAfterAccess(Duration)} instead.
    */
-  @SuppressWarnings("GoodTime") // should accept a Duration
+  @Deprecated // GoodTime
   @CanIgnoreReturnValue
   public CacheBuilder<K, V> expireAfterAccess(long duration, TimeUnit unit) {
     checkState(
@@ -884,11 +889,9 @@ public final class CacheBuilder<K, V> {
    *     href="https://github.com/google/guava#guava-google-core-libraries-for-java">flavor</a>)
    */
   @J2ObjCIncompatible
+  @J2ktIncompatible
   @GwtIncompatible // Duration
-  @SuppressWarnings({
-    "GoodTime", // Duration decomposition
-    "Java7ApiChecker",
-  })
+  @SuppressWarnings("GoodTime") // Duration decomposition
   @IgnoreJRERequirement // No more dangerous than wherever the caller got the Duration from
   @CanIgnoreReturnValue
   public CacheBuilder<K, V> refreshAfterWrite(Duration duration) {
@@ -924,9 +927,10 @@ public final class CacheBuilder<K, V> {
    * @throws IllegalArgumentException if {@code duration} is negative
    * @throws IllegalStateException if {@link #refreshAfterWrite} was already set
    * @since 11.0
+   * @deprecated Use {@link #refreshAfterWrite(Duration)} instead.
    */
-  @GwtIncompatible // To be supported (synchronously).
-  @SuppressWarnings("GoodTime") // should accept a Duration
+  @GwtIncompatible
+  @Deprecated // GoodTime
   @CanIgnoreReturnValue
   public CacheBuilder<K, V> refreshAfterWrite(long duration, TimeUnit unit) {
     checkNotNull(unit);
@@ -1131,11 +1135,9 @@ public final class CacheBuilder<K, V> {
    * {@link Long#MAX_VALUE} or {@link Long#MIN_VALUE}. This behavior can be useful when decomposing
    * a duration in order to call a legacy API which requires a {@code long, TimeUnit} pair.
    */
+  @J2ktIncompatible
   @GwtIncompatible // Duration
-  @SuppressWarnings({
-    "GoodTime", // Duration decomposition
-    "Java7ApiChecker",
-  })
+  @SuppressWarnings("GoodTime") // Duration decomposition
   @IgnoreJRERequirement // No more dangerous than wherever the caller got the Duration from
   private static long toNanosSaturated(Duration duration) {
     // Using a try/catch seems lazy, but the catch block will rarely get invoked (except for

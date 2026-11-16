@@ -16,12 +16,14 @@
 
 package jdk.m3.collections.guava.collect;
 
+import static jdk.m3.collections.guava.collect.Hashing.closedTableSize;
+import static jdk.m3.collections.guava.collect.Hashing.smearedHash;
 import static java.lang.Math.max;
 
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
-import jdk.m3.collections.guava.base.Objects;
 import jdk.m3.collections.guava.primitives.Ints;
 import java.util.Arrays;
+import java.util.Objects;
 import org.jspecify.annotations.Nullable;
 
 /**
@@ -40,7 +42,7 @@ final class CompactHashing {
   private static final int HASH_TABLE_BITS_MAX_BITS = 5;
 
   /** Use high bits of metadata for modification count. */
-  static final int MODIFICATION_COUNT_INCREMENT = (1 << HASH_TABLE_BITS_MAX_BITS);
+  static final int MODIFICATION_COUNT_INCREMENT = 1 << HASH_TABLE_BITS_MAX_BITS;
 
   /** Bitmask that selects the low bits of metadata to get hashTableBits. */
   static final int HASH_TABLE_BITS_MASK = (1 << HASH_TABLE_BITS_MAX_BITS) - 1;
@@ -69,7 +71,7 @@ final class CompactHashing {
    */
   static int tableSize(int expectedSize) {
     // We use entries next == 0 to indicate UNSET, so actual capacity is 1 less than requested.
-    return max(MIN_HASH_TABLE_SIZE, Hashing.closedTableSize(expectedSize + 1, 1.0));
+    return max(MIN_HASH_TABLE_SIZE, closedTableSize(expectedSize + 1, 1.0));
   }
 
   /** Creates and returns a properly-sized array with the given number of buckets. */
@@ -164,7 +166,7 @@ final class CompactHashing {
       int[] entries,
       @Nullable Object[] keys,
       @Nullable Object @Nullable [] values) {
-    int hash = Hashing.smearedHash(key);
+    int hash = smearedHash(key);
     int tableIndex = hash & mask;
     int next = tableGet(table, tableIndex);
     if (next == UNSET) {
@@ -176,8 +178,8 @@ final class CompactHashing {
       int entryIndex = next - 1;
       int entry = entries[entryIndex];
       if (getHashPrefix(entry, mask) == hashPrefix
-          && Objects.equal(key, keys[entryIndex])
-          && (values == null || Objects.equal(value, values[entryIndex]))) {
+          && Objects.equals(key, keys[entryIndex])
+          && (values == null || Objects.equals(value, values[entryIndex]))) {
         int newNext = getNext(entry, mask);
         if (lastEntryIndex == -1) {
           // we need to update the root link from table[]

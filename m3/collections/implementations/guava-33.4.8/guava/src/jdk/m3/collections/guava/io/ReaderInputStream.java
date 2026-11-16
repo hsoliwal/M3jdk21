@@ -17,11 +17,11 @@ package jdk.m3.collections.guava.io;
 import static jdk.m3.collections.guava.base.Preconditions.checkArgument;
 import static jdk.m3.collections.guava.base.Preconditions.checkNotNull;
 import static jdk.m3.collections.guava.base.Preconditions.checkPositionIndexes;
+import static java.lang.Byte.toUnsignedInt;
 import static java.lang.Math.min;
 
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
 import jdk.m3.collections.guava.annotations.J2ktIncompatible;
-import jdk.m3.collections.guava.primitives.UnsignedBytes;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Reader;
@@ -121,7 +121,7 @@ final class ReaderInputStream extends InputStream {
 
   @Override
   public int read() throws IOException {
-    return (read(singleByte) == 1) ? UnsignedBytes.toInt(singleByte[0]) : -1;
+    return (read(singleByte) == 1) ? toUnsignedInt(singleByte[0]) : -1;
   }
 
   // TODO(chrisn): Consider trying to encode/flush directly to the argument byte

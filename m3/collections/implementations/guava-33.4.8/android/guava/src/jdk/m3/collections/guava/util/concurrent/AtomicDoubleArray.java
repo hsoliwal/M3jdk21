@@ -92,7 +92,8 @@ public class AtomicDoubleArray implements Serializable {
   }
 
   /**
-   * Gets the current value at position {@code i}.
+   * Returns the current value of the element at index {@code i}, with memory effects as specified
+   * by {@link java.lang.invoke.VarHandle#getVolatile VarHandle.getVolatile}.
    *
    * @param i the index
    * @return the current value
@@ -102,7 +103,8 @@ public class AtomicDoubleArray implements Serializable {
   }
 
   /**
-   * Atomically sets the element at position {@code i} to the given value.
+   * Sets the element at index {@code i} to {@code newValue}, with memory effects as specified by
+   * {@link java.lang.invoke.VarHandle#setVolatile VarHandle.setVolatile}.
    *
    * @param i the index
    * @param newValue the new value
@@ -113,7 +115,8 @@ public class AtomicDoubleArray implements Serializable {
   }
 
   /**
-   * Eventually sets the element at position {@code i} to the given value.
+   * Sets the element at index {@code i} to {@code newValue}, with memory effects as specified by
+   * {@link java.lang.invoke.VarHandle#setRelease VarHandle.setRelease}.
    *
    * @param i the index
    * @param newValue the new value
@@ -154,7 +157,7 @@ public class AtomicDoubleArray implements Serializable {
    * value is <a href="#bitEquals">bitwise equal</a> to the expected value.
    *
    * <p>May <a
-   * href="http://download.oracle.com/javase/7/docs/api/java/util/concurrent/atomic/package-summary.html#Spurious">
+   * href="https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/atomic/package-summary.html#Spurious">
    * fail spuriously</a> and does not provide ordering guarantees, so is only rarely an appropriate
    * alternative to {@code compareAndSet}.
    *

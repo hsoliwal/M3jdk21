@@ -16,41 +16,38 @@
 
 package jdk.m3.collections.guava.graph;
 
-import java.util.Arrays;
-import java.util.Collection;
+import com.google.testing.junit.testparameterinjector.TestParameter;
+import com.google.testing.junit.testparameterinjector.TestParameterInjector;
 import org.jspecify.annotations.NullUnmarked;
 import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-import org.junit.runners.Parameterized.Parameters;
 
 /** Tests for a directed {@link StandardMutableGraph}. */
-@AndroidIncompatible
-@RunWith(Parameterized.class)
+@RunWith(TestParameterInjector.class)
 @NullUnmarked
 public final class StandardMutableDirectedGraphTest extends AbstractStandardDirectedGraphTest {
 
-  @Parameters(name = "allowsSelfLoops={0}, incidentEdgeOrder={1}")
-  public static Collection<Object[]> parameters() {
-    return Arrays.asList(
-        new Object[][] {
-          {false, ElementOrder.unordered()},
-          {true, ElementOrder.unordered()},
-          {false, ElementOrder.stable()},
-          {true, ElementOrder.stable()},
-        });
+  private enum IncidentEdgeOrder {
+    UNORDERED(ElementOrder.unordered()),
+    STABLE(ElementOrder.stable());
+
+    final ElementOrder<Integer> elementOrder;
+
+    IncidentEdgeOrder(ElementOrder<Integer> elementOrder) {
+      this.elementOrder = elementOrder;
+    }
   }
 
   private final boolean allowsSelfLoops;
   private final ElementOrder<Integer> incidentEdgeOrder;
 
   public StandardMutableDirectedGraphTest(
-      boolean allowsSelfLoops, ElementOrder<Integer> incidentEdgeOrder) {
+      @TestParameter boolean allowsSelfLoops, @TestParameter IncidentEdgeOrder incidentEdgeOrder) {
     this.allowsSelfLoops = allowsSelfLoops;
-    this.incidentEdgeOrder = incidentEdgeOrder;
+    this.incidentEdgeOrder = incidentEdgeOrder.elementOrder;
   }
 
   @Override
-  public MutableGraph<Integer> createGraph() {
+  MutableGraph<Integer> createGraph() {
     return GraphBuilder.directed()
         .allowsSelfLoops(allowsSelfLoops)
         .incidentEdgeOrder(incidentEdgeOrder)
@@ -58,12 +55,12 @@ public final class StandardMutableDirectedGraphTest extends AbstractStandardDire
   }
 
   @Override
-  final void addNode(Integer n) {
+  void addNode(Integer n) {
     graphAsMutableGraph.addNode(n);
   }
 
   @Override
-  final void putEdge(Integer n1, Integer n2) {
+  void putEdge(Integer n1, Integer n2) {
     graphAsMutableGraph.putEdge(n1, n2);
   }
 }

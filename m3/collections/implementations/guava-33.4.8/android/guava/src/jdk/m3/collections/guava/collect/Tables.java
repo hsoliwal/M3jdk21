@@ -18,15 +18,19 @@ package jdk.m3.collections.guava.collect;
 
 import static jdk.m3.collections.guava.base.Preconditions.checkArgument;
 import static jdk.m3.collections.guava.base.Preconditions.checkNotNull;
+import static jdk.m3.collections.guava.collect.Collections2.transform;
+import static jdk.m3.collections.guava.collect.Iterators.transform;
 import static jdk.m3.collections.guava.collect.NullnessCasts.uncheckedCastNullableTToT;
+import static java.util.Collections.unmodifiableCollection;
 import static java.util.Collections.unmodifiableMap;
+import static java.util.Collections.unmodifiableSet;
 import static java.util.Collections.unmodifiableSortedMap;
+import static java.util.Collections.unmodifiableSortedSet;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
 import jdk.m3.collections.guava.annotations.J2ktIncompatible;
 import jdk.m3.collections.guava.base.Function;
-import jdk.m3.collections.guava.base.Objects;
 import jdk.m3.collections.guava.base.Supplier;
 import jdk.m3.collections.guava.collect.Table.Cell;
 import java.io.Serializable;
@@ -34,6 +38,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.SortedMap;
 import java.util.SortedSet;
@@ -67,7 +72,6 @@ public final class Tables {
    *
    * @since 33.2.0 (available since 21.0 in guava-jre)
    */
-  @SuppressWarnings("Java7ApiChecker")
   @IgnoreJRERequirement // Users will use this only if they're already using streams.
   public static <
           T extends @Nullable Object,
@@ -98,7 +102,6 @@ public final class Tables {
    *
    * @since 33.2.0 (available since 21.0 in guava-jre)
    */
-  @SuppressWarnings("Java7ApiChecker")
   @IgnoreJRERequirement // Users will use this only if they're already using streams.
   public static <
           T extends @Nullable Object,
@@ -177,26 +180,26 @@ public final class Tables {
     AbstractCell() {}
 
     @Override
-    public boolean equals(@Nullable Object obj) {
+    public final boolean equals(@Nullable Object obj) {
       if (obj == this) {
         return true;
       }
       if (obj instanceof Cell) {
         Cell<?, ?, ?> other = (Cell<?, ?, ?>) obj;
-        return Objects.equal(getRowKey(), other.getRowKey())
-            && Objects.equal(getColumnKey(), other.getColumnKey())
-            && Objects.equal(getValue(), other.getValue());
+        return Objects.equals(getRowKey(), other.getRowKey())
+            && Objects.equals(getColumnKey(), other.getColumnKey())
+            && Objects.equals(getValue(), other.getValue());
       }
       return false;
     }
 
     @Override
-    public int hashCode() {
-      return Objects.hashCode(getRowKey(), getColumnKey(), getValue());
+    public final int hashCode() {
+      return Objects.hash(getRowKey(), getColumnKey(), getValue());
     }
 
     @Override
-    public String toString() {
+    public final String toString() {
       return "(" + getRowKey() + "," + getColumnKey() + ")=" + getValue();
     }
   }
@@ -220,7 +223,7 @@ public final class Tables {
         : new TransposeTable<C, R, V>(table);
   }
 
-  private static class TransposeTable<
+  private static final class TransposeTable<
           C extends @Nullable Object, R extends @Nullable Object, V extends @Nullable Object>
       extends AbstractTable<C, R, V> {
     final Table<R, C, V> original;
@@ -319,7 +322,7 @@ public final class Tables {
 
     @Override
     Iterator<Cell<C, R, V>> cellIterator() {
-      return Iterators.transform(original.cellSet().iterator(), Tables::transposeCell);
+      return transform(original.cellSet().iterator(), Tables::transposeCell);
     }
   }
 
@@ -406,7 +409,7 @@ public final class Tables {
     return new TransformedTable<>(fromTable, function);
   }
 
-  private static class TransformedTable<
+  private static final class TransformedTable<
           R extends @Nullable Object,
           C extends @Nullable Object,
           V1 extends @Nullable Object,
@@ -482,7 +485,7 @@ public final class Tables {
 
     @Override
     Iterator<Cell<R, C, V2>> cellIterator() {
-      return Iterators.transform(fromTable.cellSet().iterator(), this::applyToValue);
+      return transform(fromTable.cellSet().iterator(), this::applyToValue);
     }
 
     @Override
@@ -496,8 +499,8 @@ public final class Tables {
     }
 
     @Override
-    Collection<V2> createValues() {
-      return Collections2.transform(fromTable.values(), function);
+    public Collection<V2> values() {
+      return transform(fromTable.values(), function);
     }
 
     @Override
@@ -546,7 +549,7 @@ public final class Tables {
 
     @Override
     public Set<Cell<R, C, V>> cellSet() {
-      return Collections.unmodifiableSet(super.cellSet());
+      return unmodifiableSet(super.cellSet());
     }
 
     @Override
@@ -556,12 +559,12 @@ public final class Tables {
 
     @Override
     public Map<R, V> column(@ParametricNullness C columnKey) {
-      return Collections.unmodifiableMap(super.column(columnKey));
+      return unmodifiableMap(super.column(columnKey));
     }
 
     @Override
     public Set<C> columnKeySet() {
-      return Collections.unmodifiableSet(super.columnKeySet());
+      return unmodifiableSet(super.columnKeySet());
     }
 
     @Override
@@ -589,12 +592,12 @@ public final class Tables {
 
     @Override
     public Map<C, V> row(@ParametricNullness R rowKey) {
-      return Collections.unmodifiableMap(super.row(rowKey));
+      return unmodifiableMap(super.row(rowKey));
     }
 
     @Override
     public Set<R> rowKeySet() {
-      return Collections.unmodifiableSet(super.rowKeySet());
+      return unmodifiableSet(super.rowKeySet());
     }
 
     @Override
@@ -604,7 +607,7 @@ public final class Tables {
 
     @Override
     public Collection<V> values() {
-      return Collections.unmodifiableCollection(super.values());
+      return unmodifiableCollection(super.values());
     }
 
     @GwtIncompatible @J2ktIncompatible private static final long serialVersionUID = 0;
@@ -637,7 +640,7 @@ public final class Tables {
           R extends @Nullable Object, C extends @Nullable Object, V extends @Nullable Object>
       extends UnmodifiableTable<R, C, V> implements RowSortedTable<R, C, V> {
 
-    public UnmodifiableRowSortedMap(RowSortedTable<R, ? extends C, ? extends V> delegate) {
+    UnmodifiableRowSortedMap(RowSortedTable<R, ? extends C, ? extends V> delegate) {
       super(delegate);
     }
 
@@ -654,7 +657,7 @@ public final class Tables {
 
     @Override
     public SortedSet<R> rowKeySet() {
-      return Collections.unmodifiableSortedSet(delegate().rowKeySet());
+      return unmodifiableSortedSet(delegate().rowKeySet());
     }
 
     @GwtIncompatible @J2ktIncompatible private static final long serialVersionUID = 0;
@@ -669,11 +672,11 @@ public final class Tables {
    * of its collection views:
    *
    * {@snippet :
-   * Table<R, C, V> table = Tables.synchronizedTable(HashBasedTable.<R, C, V>create());
+   * Table<R, C, V> table = Tables.synchronizedTable(HashBasedTable.create());
    * ...
-   * Map<C, V> row = table.row(rowKey);  // Needn't be in synchronized block
+   * Map<C, V> row = table.row(rowKey); // Needn't be in synchronized block
    * ...
-   * synchronized (table) {  // Synchronizing on table, not row!
+   * synchronized (table) { // Synchronizing on table, not row!
    *   Iterator<Entry<C, V>> i = row.entrySet().iterator(); // Must be in synchronized block
    *   while (i.hasNext()) {
    *     foo(i.next());
@@ -695,6 +698,7 @@ public final class Tables {
     return Synchronized.table(table, null);
   }
 
+  @SuppressWarnings("ReferenceEquality") // == fast path
   static boolean equalsImpl(Table<?, ?, ?> table, @Nullable Object obj) {
     if (obj == table) {
       return true;

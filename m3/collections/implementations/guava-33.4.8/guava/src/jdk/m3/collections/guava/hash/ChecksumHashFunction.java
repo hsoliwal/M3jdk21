@@ -18,6 +18,7 @@ import static jdk.m3.collections.guava.base.Preconditions.checkArgument;
 import static jdk.m3.collections.guava.base.Preconditions.checkNotNull;
 import static jdk.m3.collections.guava.hash.SneakyThrows.sneakyThrow;
 
+import jdk.m3.collections.guava.annotations.J2ktIncompatible;
 import com.google.errorprone.annotations.Immutable;
 import com.google.j2objc.annotations.J2ObjCIncompatible;
 import java.io.Serializable;
@@ -33,6 +34,7 @@ import org.jspecify.annotations.Nullable;
  *
  * @author Colin Decker
  */
+@J2ktIncompatible
 @Immutable
 final class ChecksumHashFunction extends AbstractHashFunction implements Serializable {
   private final ImmutableSupplier<? extends Checksum> checksumSupplier;

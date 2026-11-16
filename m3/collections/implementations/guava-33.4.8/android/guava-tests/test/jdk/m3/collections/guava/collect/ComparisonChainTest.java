@@ -16,7 +16,7 @@
 
 package jdk.m3.collections.guava.collect;
 
-import static com.google.common.truth.Truth.assertThat;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import junit.framework.AssertionFailedError;

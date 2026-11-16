@@ -26,7 +26,6 @@ import jdk.m3.collections.guava.annotations.GwtIncompatible;
 import jdk.m3.collections.guava.annotations.J2ktIncompatible;
 import jdk.m3.collections.guava.base.Function;
 import jdk.m3.collections.guava.base.Throwables;
-import jdk.m3.collections.guava.collect.Lists;
 import jdk.m3.collections.guava.reflect.AbstractInvocationHandler;
 import jdk.m3.collections.guava.reflect.Reflection;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
@@ -34,6 +33,7 @@ import java.lang.reflect.AccessibleObject;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 import org.jspecify.annotations.NullMarked;
@@ -140,8 +140,7 @@ public final class ForwardingWrapperTester {
             interfaceType,
             new AbstractInvocationHandler() {
               @Override
-              protected Object handleInvocation(Object p, Method m, @Nullable Object[] args)
-                  throws Throwable {
+              protected Object handleInvocation(Object p, Method m, @Nullable Object[] args) {
                 throw exception;
               }
             });
@@ -180,7 +179,7 @@ public final class ForwardingWrapperTester {
 
   private static @Nullable Object[] getParameterValues(Method method) {
     FreshValueGenerator paramValues = new FreshValueGenerator();
-    List<@Nullable Object> passedArgs = Lists.newArrayList();
+    List<@Nullable Object> passedArgs = new ArrayList<>();
     for (Class<?> paramType : method.getParameterTypes()) {
       passedArgs.add(paramValues.generateFresh(paramType));
     }
@@ -205,7 +204,7 @@ public final class ForwardingWrapperTester {
 
     @Override
     protected @Nullable Object handleInvocation(
-        Object p, Method calledMethod, @Nullable Object[] args) throws Throwable {
+        Object p, Method calledMethod, @Nullable Object[] args) {
       assertEquals(method, calledMethod);
       assertEquals(method + " invoked more than once.", 0, called.get());
       for (int i = 0; i < passedArgs.length; i++) {
@@ -241,4 +240,7 @@ public final class ForwardingWrapperTester {
       return "dummy " + interfaceType.getSimpleName();
     }
   }
+
+  /** Constructs a new {@code ForwardingWrapperTester}. */
+  public ForwardingWrapperTester() {}
 }

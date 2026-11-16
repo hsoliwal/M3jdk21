@@ -27,7 +27,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.Collection;
 import java.util.Comparator;
-import java.util.Map;
 import java.util.NavigableMap;
 import java.util.NavigableSet;
 import java.util.SortedSet;
@@ -72,8 +71,8 @@ import org.jspecify.annotations.Nullable;
  * @author Louis Wasserman
  * @since 2.0
  */
-@GwtCompatible(serializable = true, emulated = true)
-public class TreeMultimap<K extends @Nullable Object, V extends @Nullable Object>
+@GwtCompatible
+public final class TreeMultimap<K extends @Nullable Object, V extends @Nullable Object>
     extends AbstractSortedKeySortedSetMultimap<K, V> {
   private transient Comparator<? super K> keyComparator;
   private transient Comparator<? super V> valueComparator;
@@ -122,11 +121,6 @@ public class TreeMultimap<K extends @Nullable Object, V extends @Nullable Object
       Multimap<? extends K, ? extends V> multimap) {
     this(keyComparator, valueComparator);
     putAll(multimap);
-  }
-
-  @Override
-  Map<K, Collection<V>> createAsMap() {
-    return createMaybeNavigableAsMap();
   }
 
   /**
@@ -205,18 +199,18 @@ public class TreeMultimap<K extends @Nullable Object, V extends @Nullable Object
    * @serialData key comparator, value comparator, number of distinct keys, and then for each
    *     distinct key: the key, number of values for that key, and key values
    */
-  @GwtIncompatible // java.io.ObjectOutputStream
+  @GwtIncompatible
   @J2ktIncompatible
-  private void writeObject(ObjectOutputStream stream) throws IOException {
+    private void writeObject(ObjectOutputStream stream) throws IOException {
     stream.defaultWriteObject();
     stream.writeObject(keyComparator());
     stream.writeObject(valueComparator());
     Serialization.writeMultimap(this, stream);
   }
 
-  @GwtIncompatible // java.io.ObjectInputStream
+  @GwtIncompatible
   @J2ktIncompatible
-  @SuppressWarnings("unchecked") // reading data stored by writeObject
+    @SuppressWarnings("unchecked") // reading data stored by writeObject
   private void readObject(ObjectInputStream stream) throws IOException, ClassNotFoundException {
     stream.defaultReadObject();
     keyComparator = requireNonNull((Comparator<? super K>) stream.readObject());

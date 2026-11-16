@@ -16,11 +16,12 @@
 
 package jdk.m3.collections.guava.base;
 
-import static com.google.common.truth.Truth.assertThat;
+import static jdk.m3.collections.guava.collect.Sets.newConcurrentHashSet;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
 
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
+import jdk.m3.collections.guava.annotations.J2ktIncompatible;
 import jdk.m3.collections.guava.base.internal.Finalizer;
-import jdk.m3.collections.guava.collect.Sets;
 import jdk.m3.collections.guava.testing.GcFinalization;
 import java.io.Closeable;
 import java.io.IOException;
@@ -47,10 +48,7 @@ import org.junit.runners.JUnit4;
  *
  * @author Bob Lee
  */
-// - depends on details of GC and classloading
-// - .class files aren't available
-// - possibly no real concept of separate ClassLoaders?
-@AndroidIncompatible
+@J2ktIncompatible
 @GwtIncompatible
 @RunWith(JUnit4.class)
 @NullUnmarked
@@ -59,13 +57,14 @@ public class FinalizableReferenceQueueTest {
   private @Nullable FinalizableReferenceQueue frq;
 
   @After
-  public void tearDown() throws Exception {
+  public void tearDown() {
     frq = null;
   }
 
   @Test
   public void testFinalizeReferentCalled() {
-    final MockReference reference = new MockReference(frq = new FinalizableReferenceQueue());
+    frq = new FinalizableReferenceQueue();
+    MockReference reference = new MockReference(frq);
 
     GcFinalization.awaitDone(() -> reference.finalizeReferentCalled);
   }
@@ -119,6 +118,7 @@ public class FinalizableReferenceQueueTest {
         };
   }
 
+  @AndroidIncompatible
   @Test
   public void testDecoupledLoader() {
     FinalizableReferenceQueue.DecoupledLoader decoupledLoader =
@@ -132,7 +132,7 @@ public class FinalizableReferenceQueueTest {
     Class<?> finalizerCopy = decoupledLoader.loadFinalizer();
 
     assertThat(finalizerCopy).isNotNull();
-    assertThat(finalizerCopy).isNotSameInstanceAs(Finalizer.class);
+    assertThat(finalizerCopy).isNotEqualTo(Finalizer.class);
 
     assertThat(FinalizableReferenceQueue.getStartFinalizer(finalizerCopy)).isNotNull();
   }
@@ -159,13 +159,14 @@ public class FinalizableReferenceQueueTest {
     }
   }
 
+  @AndroidIncompatible
   @Test
   public void testGetFinalizerUrl() {
     assertThat(getClass().getResource("internal/Finalizer.class")).isNotNull();
   }
 
   @Test
-  public void testFinalizeClassHasNoNestedClasses() throws Exception {
+  public void testFinalizeClassHasNoNestedClasses() {
     // Ensure that the Finalizer class has no nested classes.
     // See https://github.com/google/guava/issues/1505
     assertThat(Finalizer.class.getDeclaredClasses()).isEmpty();
@@ -174,7 +175,7 @@ public class FinalizableReferenceQueueTest {
   static class MyServerExampleWithFrq implements Closeable {
     private static final FinalizableReferenceQueue frq = new FinalizableReferenceQueue();
 
-    private static final Set<Reference<?>> references = Sets.newConcurrentHashSet();
+    private static final Set<Reference<?>> references = newConcurrentHashSet();
 
     private final ServerSocket serverSocket;
 
@@ -210,7 +211,7 @@ public class FinalizableReferenceQueueTest {
     }
   }
 
-  private ServerSocket makeMyServerExampleWithFrq(AtomicBoolean finalizeReferentRan)
+  private static ServerSocket makeMyServerExampleWithFrq(AtomicBoolean finalizeReferentRan)
       throws IOException {
     MyServerExampleWithFrq myServer = MyServerExampleWithFrq.create(finalizeReferentRan);
     assertThat(myServer.serverSocket.isClosed()).isFalse();
@@ -256,7 +257,8 @@ public class FinalizableReferenceQueueTest {
   }
 
   @SuppressWarnings("Java8ApiChecker")
-  private ServerSocket makeMyServerExampleWithCleaner(AtomicBoolean cleanerRan) throws IOException {
+  private static ServerSocket makeMyServerExampleWithCleaner(AtomicBoolean cleanerRan)
+      throws IOException {
     MyServerExampleWithCleaner myServer = new MyServerExampleWithCleaner(cleanerRan);
     assertThat(myServer.serverSocket.isClosed()).isFalse();
     return myServer.serverSocket;

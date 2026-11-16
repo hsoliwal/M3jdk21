@@ -17,12 +17,11 @@
 package jdk.m3.collections.guava.collect.testing.testers;
 
 import static jdk.m3.collections.guava.collect.testing.features.CollectionFeature.SERIALIZABLE;
+import static jdk.m3.collections.guava.testing.SerializableTester.reserialize;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.collect.testing.AbstractCollectionTester;
 import jdk.m3.collections.guava.collect.testing.features.CollectionFeature;
-import jdk.m3.collections.guava.testing.SerializableTester;
-import org.junit.Ignore;
 
 /**
  * Basic reserialization test for collection types that must preserve {@code equals()} behavior when
@@ -31,9 +30,6 @@ import org.junit.Ignore;
  * @author Louis Wasserman
  */
 @GwtCompatible
-@Ignore("test runners must not instantiate and run this directly, only via suites we build")
-// @Ignore affects the Android test runner, which respects JUnit 4 annotations on JUnit 3 tests.
-@SuppressWarnings("JUnit4ClassUsedInJUnit3")
 public class CollectionSerializationEqualTester<E> extends AbstractCollectionTester<E> {
   @CollectionFeature.Require(SERIALIZABLE)
   /*
@@ -43,6 +39,6 @@ public class CollectionSerializationEqualTester<E> extends AbstractCollectionTes
    */
   @SuppressWarnings("UndefinedEquals")
   public void testReserialize() {
-    assertEquals(SerializableTester.reserialize(actualContents()), actualContents());
+    assertEquals(reserialize(actualContents()), actualContents());
   }
 }

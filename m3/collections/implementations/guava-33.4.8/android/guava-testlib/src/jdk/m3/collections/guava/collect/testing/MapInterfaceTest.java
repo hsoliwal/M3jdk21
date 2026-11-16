@@ -17,12 +17,12 @@
 package jdk.m3.collections.guava.collect.testing;
 
 import static jdk.m3.collections.guava.collect.testing.Helpers.mapEntry;
-import static jdk.m3.collections.guava.collect.testing.ReflectionFreeAssertThrows.assertThrows;
 import static java.util.Arrays.asList;
 import static java.util.Collections.emptyMap;
 import static java.util.Collections.emptySet;
 import static java.util.Collections.singleton;
 import static java.util.Collections.singletonMap;
+import static org.junit.Assert.assertThrows;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.annotations.J2ktIncompatible;
@@ -75,7 +75,7 @@ public abstract class MapInterfaceTest<K extends @Nullable Object, V extends @Nu
    * @throws UnsupportedOperationException if it's not possible to make an empty instance of the
    *     class under test.
    */
-  protected abstract Map<K, V> makeEmptyMap() throws UnsupportedOperationException;
+  protected abstract Map<K, V> makeEmptyMap();
 
   /**
    * Creates a new, non-empty instance of the class under test.
@@ -84,7 +84,7 @@ public abstract class MapInterfaceTest<K extends @Nullable Object, V extends @Nu
    * @throws UnsupportedOperationException if it's not possible to make a non-empty instance of the
    *     class under test.
    */
-  protected abstract Map<K, V> makePopulatedMap() throws UnsupportedOperationException;
+  protected abstract Map<K, V> makePopulatedMap();
 
   /**
    * Creates a new key that is not expected to be found in {@link #makePopulatedMap()}.
@@ -93,7 +93,7 @@ public abstract class MapInterfaceTest<K extends @Nullable Object, V extends @Nu
    * @throws UnsupportedOperationException if it's not possible to make a key that will not be found
    *     in the map.
    */
-  protected abstract K getKeyNotInPopulatedMap() throws UnsupportedOperationException;
+  protected abstract K getKeyNotInPopulatedMap();
 
   /**
    * Creates a new value that is not expected to be found in {@link #makePopulatedMap()}.
@@ -102,7 +102,7 @@ public abstract class MapInterfaceTest<K extends @Nullable Object, V extends @Nu
    * @throws UnsupportedOperationException if it's not possible to make a value that will not be
    *     found in the map.
    */
-  protected abstract V getValueNotInPopulatedMap() throws UnsupportedOperationException;
+  protected abstract V getValueNotInPopulatedMap();
 
   /**
    * Constructor that assigns {@code supportsIteratorRemove} the same value as {@code
@@ -687,7 +687,7 @@ public abstract class MapInterfaceTest<K extends @Nullable Object, V extends @Nu
     Set<Entry<K, V>> entriesToRetain =
         singleton(mapEntry(originalEntry.getKey(), originalEntry.getValue()));
     if (supportsRemove) {
-      boolean shouldRemove = (entrySet.size() > entriesToRetain.size());
+      boolean shouldRemove = entrySet.size() > entriesToRetain.size();
       boolean didRemove = entrySet.retainAll(entriesToRetain);
       assertEquals(shouldRemove, didRemove);
       assertEquals(entriesToRetain.size(), map.size());
@@ -750,7 +750,7 @@ public abstract class MapInterfaceTest<K extends @Nullable Object, V extends @Nu
     Set<Entry<K, V>> entrySet = map.entrySet();
     Entry<@Nullable K, @Nullable V> entryToAdd = mapEntry(null, null);
     try {
-      entrySet.add((Entry<K, V>) entryToAdd);
+      entrySet.add(entryToAdd);
       fail("Expected UnsupportedOperationException or NullPointerException.");
     } catch (UnsupportedOperationException | NullPointerException e) {
       // Expected.
@@ -758,7 +758,7 @@ public abstract class MapInterfaceTest<K extends @Nullable Object, V extends @Nu
     assertInvariants(map);
 
     try {
-      entrySet.addAll(singleton((Entry<K, V>) entryToAdd));
+      entrySet.addAll(singleton(entryToAdd));
       fail("Expected UnsupportedOperationException or NullPointerException.");
     } catch (UnsupportedOperationException | NullPointerException e) {
       // Expected.
@@ -928,7 +928,7 @@ public abstract class MapInterfaceTest<K extends @Nullable Object, V extends @Nu
       }
     } else {
       try {
-        map.get(null);
+        V unused = map.get(null);
       } catch (NullPointerException optional) {
       }
     }

@@ -15,11 +15,11 @@
 package jdk.m3.collections.guava.util.concurrent;
 
 import static jdk.m3.collections.guava.base.Preconditions.checkNotNull;
+import static java.util.concurrent.Executors.callable;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import com.google.j2objc.annotations.WeakOuter;
 import java.util.concurrent.Callable;
-import java.util.concurrent.Executors;
 import java.util.concurrent.RunnableFuture;
 import org.jspecify.annotations.Nullable;
 
@@ -53,7 +53,7 @@ class TrustedListenableFutureTask<V extends @Nullable Object> extends FluentFutu
    */
   static <V extends @Nullable Object> TrustedListenableFutureTask<V> create(
       Runnable runnable, @ParametricNullness V result) {
-    return new TrustedListenableFutureTask<>(Executors.callable(runnable, result));
+    return new TrustedListenableFutureTask<>(callable(runnable, result));
   }
 
   /*
@@ -118,7 +118,7 @@ class TrustedListenableFutureTask<V extends @Nullable Object> extends FluentFutu
     }
 
     @Override
-    final boolean isDone() {
+    boolean isDone() {
       return TrustedListenableFutureTask.this.isDone();
     }
 
@@ -154,7 +154,7 @@ class TrustedListenableFutureTask<V extends @Nullable Object> extends FluentFutu
     }
 
     @Override
-    final boolean isDone() {
+    boolean isDone() {
       return TrustedListenableFutureTask.this.isDone();
     }
 

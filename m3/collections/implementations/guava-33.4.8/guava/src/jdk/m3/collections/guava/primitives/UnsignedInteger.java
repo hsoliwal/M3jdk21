@@ -39,10 +39,15 @@ import org.jspecify.annotations.Nullable;
  * @author Louis Wasserman
  * @since 11.0
  */
-@GwtCompatible(emulated = true)
+@GwtCompatible
 public final class UnsignedInteger extends Number implements Comparable<UnsignedInteger> {
+  /** An {@code UnsignedInteger} constant holding the value 0. */
   public static final UnsignedInteger ZERO = fromIntBits(0);
+
+  /** An {@code UnsignedInteger} constant holding the value 1. */
   public static final UnsignedInteger ONE = fromIntBits(1);
+
+  /** An {@code UnsignedInteger} constant holding the maximum value, 2^32 - 1. */
   public static final UnsignedInteger MAX_VALUE = fromIntBits(-1);
 
   private final int value;
@@ -250,4 +255,6 @@ public final class UnsignedInteger extends Number implements Comparable<Unsigned
   public String toString(int radix) {
     return UnsignedInts.toString(value, radix);
   }
+
+  @GwtIncompatible @J2ktIncompatible   private static final long serialVersionUID = 4720406302515855051L;
 }

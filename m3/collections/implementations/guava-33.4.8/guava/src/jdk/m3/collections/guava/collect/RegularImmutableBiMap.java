@@ -15,12 +15,12 @@
  */
 
 // M3 immutable bimap index adaptation; provenance: m3/immutable-index-arrays-20261019/CONTRACT.md
-// Modified 2026 by Hitesh Soliwal and Synexia contributors: array storage.
 package jdk.m3.collections.guava.collect;
 
 import static jdk.m3.collections.guava.base.Preconditions.checkNotNull;
 import static jdk.m3.collections.guava.base.Preconditions.checkPositionIndex;
 import static jdk.m3.collections.guava.collect.CollectPreconditions.checkEntryNotNull;
+import static jdk.m3.collections.guava.collect.Hashing.closedTableSize;
 import static jdk.m3.collections.guava.collect.ImmutableMapEntry.createEntryArray;
 import static jdk.m3.collections.guava.collect.Maps.immutableEntry;
 import static jdk.m3.collections.guava.collect.RegularImmutableMap.ABSENT;
@@ -48,9 +48,9 @@ import org.jspecify.annotations.Nullable;
  *
  * @author Louis Wasserman
  */
-@GwtCompatible(serializable = true, emulated = true)
+@GwtCompatible
 @SuppressWarnings("serial") // uses writeReplace(), not default serialization
-class RegularImmutableBiMap<K, V> extends ImmutableBiMap<K, V> {
+final class RegularImmutableBiMap<K, V> extends ImmutableBiMap<K, V> {
   @SuppressWarnings("unchecked") // TODO(cpovirk): Consider storing Entry<?, ?>[] instead.
   static final RegularImmutableBiMap<Object, Object> EMPTY =
       new RegularImmutableBiMap<>(
@@ -78,7 +78,7 @@ class RegularImmutableBiMap<K, V> extends ImmutableBiMap<K, V> {
 
   static <K, V> ImmutableBiMap<K, V> fromEntryArray(int n, @Nullable Entry<K, V>[] entryArray) {
     checkPositionIndex(n, entryArray.length);
-    int tableSize = Hashing.closedTableSize(n, MAX_LOAD_FACTOR);
+    int tableSize = closedTableSize(n, MAX_LOAD_FACTOR);
     int mask = tableSize - 1;
     int[] keyTable = createIndexArray(tableSize);
     int[] valueTable = createIndexArray(tableSize);
@@ -90,8 +90,7 @@ class RegularImmutableBiMap<K, V> extends ImmutableBiMap<K, V> {
      * of non-null entries.
      */
     @SuppressWarnings("nullness")
-    Entry<K, V>[] entries =
-        (n == entryArray.length) ? (Entry<K, V>[]) entryArray : createEntryArray(n);
+    Entry<K, V>[] entries = (n == entryArray.length) ? entryArray : createEntryArray(n);
     int hashCode = 0;
 
     for (int i = 0; i < n; i++) {
@@ -172,14 +171,14 @@ class RegularImmutableBiMap<K, V> extends ImmutableBiMap<K, V> {
   }
 
   @Override
-  ImmutableSet<Entry<K, V>> createEntrySet() {
+  public ImmutableSet<Entry<K, V>> entrySet() {
     return isEmpty()
-        ? ImmutableSet.<Entry<K, V>>of()
+        ? ImmutableSet.of()
         : new ImmutableMapEntrySet.RegularEntrySet<K, V>(this, entries);
   }
 
   @Override
-  ImmutableSet<K> createKeySet() {
+  public ImmutableSet<K> keySet() {
     return new ImmutableMapKeySet<>(this);
   }
 
@@ -219,7 +218,10 @@ class RegularImmutableBiMap<K, V> extends ImmutableBiMap<K, V> {
       return ImmutableBiMap.of();
     }
     ImmutableBiMap<V, K> result = inverse;
-    return (result == null) ? inverse = new Inverse() : result;
+    if (result == null) {
+      result = inverse = new Inverse();
+    }
+    return result;
   }
 
   private final class Inverse extends ImmutableBiMap<V, K> {
@@ -256,12 +258,12 @@ class RegularImmutableBiMap<K, V> extends ImmutableBiMap<K, V> {
     }
 
     @Override
-    ImmutableSet<V> createKeySet() {
+    public ImmutableSet<V> keySet() {
       return new ImmutableMapKeySet<>(this);
     }
 
     @Override
-    ImmutableSet<Entry<V, K>> createEntrySet() {
+    public ImmutableSet<Entry<V, K>> entrySet() {
       return new InverseEntrySet();
     }
 
@@ -345,7 +347,7 @@ class RegularImmutableBiMap<K, V> extends ImmutableBiMap<K, V> {
   }
 
   @J2ktIncompatible // serialization
-  private static class InverseSerializedForm<K, V> implements Serializable {
+  private static final class InverseSerializedForm<K, V> implements Serializable {
     private final ImmutableBiMap<K, V> forward;
 
     InverseSerializedForm(ImmutableBiMap<K, V> forward) {
@@ -356,7 +358,7 @@ class RegularImmutableBiMap<K, V> extends ImmutableBiMap<K, V> {
       return forward.inverse();
     }
 
-    @GwtIncompatible @J2ktIncompatible private static final long serialVersionUID = 1;
+    @GwtIncompatible private static final long serialVersionUID = 1;
   }
 
   // redeclare to help optimizers with b/310253115

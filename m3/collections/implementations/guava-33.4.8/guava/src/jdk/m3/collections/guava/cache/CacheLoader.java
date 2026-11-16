@@ -27,6 +27,7 @@ import jdk.m3.collections.guava.util.concurrent.ListenableFutureTask;
 import java.io.Serializable;
 import java.util.Map;
 import java.util.concurrent.Executor;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Computes or retrieves values, based on a key, for use in populating a {@link LoadingCache}.
@@ -55,7 +56,7 @@ import java.util.concurrent.Executor;
  * @author Charles Fry
  * @since 10.0
  */
-@GwtCompatible(emulated = true)
+@GwtCompatible
 public abstract class CacheLoader<K, V> {
   /** Constructor for use by subclasses. */
   protected CacheLoader() {}
@@ -68,7 +69,7 @@ public abstract class CacheLoader<K, V> {
    * @throws Exception if unable to load the result
    * @throws InterruptedException if this method is interrupted. {@code InterruptedException} is
    *     treated like any other {@code Exception} in all respects except that, when it is caught,
-   *     the thread's interrupt status is set
+   *     the thread's interrupted status is set
    */
   public abstract V load(K key) throws Exception;
 
@@ -90,7 +91,7 @@ public abstract class CacheLoader<K, V> {
    * @throws Exception if unable to reload the result
    * @throws InterruptedException if this method is interrupted. {@code InterruptedException} is
    *     treated like any other {@code Exception} in all respects except that, when it is caught,
-   *     the thread's interrupt status is set
+   *     the thread's interrupted status is set
    * @since 11.0
    */
   @GwtIncompatible // Futures
@@ -119,7 +120,7 @@ public abstract class CacheLoader<K, V> {
    * @throws Exception if unable to load the result
    * @throws InterruptedException if this method is interrupted. {@code InterruptedException} is
    *     treated like any other {@code Exception} in all respects except that, when it is caught,
-   *     the thread's interrupt status is set
+   *     the thread's interrupted status is set
    * @since 11.0
    */
   public Map<K, V> loadAll(Iterable<? extends K> keys) throws Exception {
@@ -160,7 +161,7 @@ public abstract class CacheLoader<K, V> {
       implements Serializable {
     private final Function<K, V> computingFunction;
 
-    public FunctionToCacheLoader(Function<K, V> computingFunction) {
+    FunctionToCacheLoader(Function<K, V> computingFunction) {
       this.computingFunction = checkNotNull(computingFunction);
     }
 
@@ -211,7 +212,7 @@ public abstract class CacheLoader<K, V> {
       implements Serializable {
     private final Supplier<V> computingSupplier;
 
-    public SupplierToCacheLoader(Supplier<V> computingSupplier) {
+    SupplierToCacheLoader(Supplier<V> computingSupplier) {
       this.computingSupplier = checkNotNull(computingSupplier);
     }
 
@@ -242,7 +243,8 @@ public abstract class CacheLoader<K, V> {
    * @since 11.0
    */
   public static final class InvalidCacheLoadException extends RuntimeException {
-    public InvalidCacheLoadException(String message) {
+    /** Constructs a new {@code InvalidCacheLoadException} with the specified detail message. */
+    public InvalidCacheLoadException(@Nullable String message) {
       super(message);
     }
   }

@@ -17,10 +17,12 @@
 package jdk.m3.collections.guava.util.concurrent;
 
 import static jdk.m3.collections.guava.base.StandardSystemProperty.JAVA_SPECIFICATION_VERSION;
-import static com.google.common.truth.Truth.assertThat;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
 import static java.lang.Integer.parseInt;
 import static java.util.concurrent.TimeUnit.SECONDS;
 
+import jdk.m3.collections.guava.annotations.GwtIncompatible;
+import jdk.m3.collections.guava.annotations.J2ktIncompatible;
 import java.lang.reflect.Method;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.SynchronousQueue;
@@ -30,6 +32,8 @@ import org.jspecify.annotations.NullUnmarked;
 
 /** Unit tests for {@link ForwardingExecutorService} */
 @NullUnmarked
+@GwtIncompatible
+@J2ktIncompatible
 public class ForwardingExecutorServiceTest extends TestCase {
   public void testForwarding() {
     ForwardingObjectTester.testForwardingObject(ForwardingExecutorService.class);

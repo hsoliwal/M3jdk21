@@ -18,14 +18,17 @@ package jdk.m3.collections.guava.collect;
 
 import static jdk.m3.collections.guava.base.Preconditions.checkArgument;
 import static jdk.m3.collections.guava.base.Preconditions.checkNotNull;
+import static jdk.m3.collections.guava.base.Predicates.and;
 import static jdk.m3.collections.guava.collect.CollectPreconditions.checkNonnegative;
+import static jdk.m3.collections.guava.collect.Iterables.any;
+import static jdk.m3.collections.guava.collect.Lists.newArrayList;
 import static java.lang.Math.min;
 import static java.util.Objects.requireNonNull;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
+import jdk.m3.collections.guava.annotations.GwtIncompatible;
 import jdk.m3.collections.guava.base.Function;
 import jdk.m3.collections.guava.base.Predicate;
-import jdk.m3.collections.guava.base.Predicates;
 import jdk.m3.collections.guava.math.IntMath;
 import jdk.m3.collections.guava.primitives.Ints;
 import java.util.AbstractCollection;
@@ -82,8 +85,6 @@ public final class Collections2 {
    *
    * <p><b>{@code Stream} equivalent:</b> {@link java.util.stream.Stream#filter Stream.filter}.
    */
-  // TODO(kevinb): how can we omit that Iterables link when building gwt
-  // javadoc?
   public static <E extends @Nullable Object> Collection<E> filter(
       Collection<E> unfiltered, Predicate<? super E> predicate) {
     if (unfiltered instanceof FilteredCollection) {
@@ -130,18 +131,18 @@ public final class Collections2 {
       this.predicate = predicate;
     }
 
-    FilteredCollection<E> createCombined(Predicate<? super E> newPredicate) {
-      return new FilteredCollection<>(unfiltered, Predicates.and(predicate, newPredicate));
+    final FilteredCollection<E> createCombined(Predicate<? super E> newPredicate) {
+      return new FilteredCollection<>(unfiltered, and(predicate, newPredicate));
     }
 
     @Override
-    public boolean add(@ParametricNullness E element) {
+    public final boolean add(@ParametricNullness E element) {
       checkArgument(predicate.apply(element));
       return unfiltered.add(element);
     }
 
     @Override
-    public boolean addAll(Collection<? extends E> collection) {
+    public final boolean addAll(Collection<? extends E> collection) {
       for (E element : collection) {
         checkArgument(predicate.apply(element));
       }
@@ -149,12 +150,12 @@ public final class Collections2 {
     }
 
     @Override
-    public void clear() {
+    public final void clear() {
       Iterables.removeIf(unfiltered, predicate);
     }
 
     @Override
-    public boolean contains(@Nullable Object element) {
+    public final boolean contains(@Nullable Object element) {
       if (safeContains(unfiltered, element)) {
         @SuppressWarnings("unchecked") // element is in unfiltered, so it must be an E
         E e = (E) element;
@@ -164,59 +165,59 @@ public final class Collections2 {
     }
 
     @Override
-    public boolean containsAll(Collection<?> collection) {
+    public final boolean containsAll(Collection<?> collection) {
       return containsAllImpl(this, collection);
     }
 
     @Override
-    public boolean isEmpty() {
-      return !Iterables.any(unfiltered, predicate);
+    public final boolean isEmpty() {
+      return !any(unfiltered, predicate);
     }
 
     @Override
-    public Iterator<E> iterator() {
+    public final Iterator<E> iterator() {
       return Iterators.filter(unfiltered.iterator(), predicate);
     }
 
     @Override
+    @GwtIncompatible // Spliterator
     public Spliterator<E> spliterator() {
       return CollectSpliterators.filter(unfiltered.spliterator(), predicate);
     }
 
     @Override
-    public void forEach(Consumer<? super E> action) {
+    public final void forEach(Consumer<? super E> action) {
       checkNotNull(action);
-      unfiltered.forEach(
-          (E e) -> {
-            if (predicate.test(e)) {
-              action.accept(e);
-            }
-          });
+      unfiltered.forEach((E e) -> {
+        if (predicate.test(e)) {
+          action.accept(e);
+        }
+      });
     }
 
     @Override
-    public boolean remove(@Nullable Object element) {
+    public final boolean remove(@Nullable Object element) {
       return contains(element) && unfiltered.remove(element);
     }
 
     @Override
-    public boolean removeAll(Collection<?> collection) {
+    public final boolean removeAll(Collection<?> collection) {
       return removeIf(collection::contains);
     }
 
     @Override
-    public boolean retainAll(Collection<?> collection) {
+    public final boolean retainAll(Collection<?> collection) {
       return removeIf(element -> !collection.contains(element));
     }
 
     @Override
-    public boolean removeIf(java.util.function.Predicate<? super E> filter) {
+    public final boolean removeIf(java.util.function.Predicate<? super E> filter) {
       checkNotNull(filter);
       return unfiltered.removeIf(element -> predicate.apply(element) && filter.test(element));
     }
 
     @Override
-    public int size() {
+    public final int size() {
       int size = 0;
       for (E e : unfiltered) {
         if (predicate.apply(e)) {
@@ -227,15 +228,15 @@ public final class Collections2 {
     }
 
     @Override
-    public @Nullable Object[] toArray() {
+    public final @Nullable Object[] toArray() {
       // creating an ArrayList so filtering happens once
-      return Lists.newArrayList(iterator()).toArray();
+      return newArrayList(iterator()).toArray();
     }
 
     @Override
     @SuppressWarnings("nullness") // b/192354773 in our checker affects toArray declarations
-    public <T extends @Nullable Object> T[] toArray(T[] array) {
-      return Lists.newArrayList(iterator()).toArray(array);
+    public final <T extends @Nullable Object> T[] toArray(T[] array) {
+      return newArrayList(iterator()).toArray(array);
     }
   }
 
@@ -263,7 +264,8 @@ public final class Collections2 {
     return new TransformedCollection<>(fromCollection, function);
   }
 
-  static class TransformedCollection<F extends @Nullable Object, T extends @Nullable Object>
+  private static final class TransformedCollection<
+          F extends @Nullable Object, T extends @Nullable Object>
       extends AbstractCollection<T> {
     final Collection<F> fromCollection;
     final Function<? super F, ? extends T> function;
@@ -289,8 +291,9 @@ public final class Collections2 {
     }
 
     @Override
+    @GwtIncompatible // Spliterator
     public Spliterator<T> spliterator() {
-      return CollectSpliterators.map(fromCollection.spliterator(), function);
+      return CollectSpliterators.map(fromCollection.spliterator(), 0, function);
     }
 
     @Override
@@ -331,7 +334,8 @@ public final class Collections2 {
     return true;
   }
 
-  /** An implementation of {@link Collection#toString()}. */
+  /** An implementation of {@code Collection.toString()}. */
+  @SuppressWarnings("ReferenceEquality") // using == to detect direct infinite recursion
   static String toStringImpl(Collection<?> collection) {
     StringBuilder sb = newStringBuilderForCollection(collection.size()).append('[');
     boolean first = true;
@@ -509,7 +513,7 @@ public final class Collections2 {
     final Comparator<? super E> comparator;
 
     OrderedPermutationIterator(List<E> list, Comparator<? super E> comparator) {
-      this.nextPermutation = Lists.newArrayList(list);
+      this.nextPermutation = new ArrayList<>(list);
       this.comparator = comparator;
     }
 
@@ -629,7 +633,7 @@ public final class Collections2 {
     }
   }
 
-  private static class PermutationIterator<E> extends AbstractIterator<List<E>> {
+  private static final class PermutationIterator<E> extends AbstractIterator<List<E>> {
     final List<E> list;
     final int[] c;
     final int[] o;

@@ -16,6 +16,7 @@
 
 package jdk.m3.collections.guava.collect;
 
+import static jdk.m3.collections.guava.collect.Maps.newTreeMap;
 import static jdk.m3.collections.guava.collect.Maps.transformValues;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
@@ -34,12 +35,12 @@ import org.jspecify.annotations.NullMarked;
 public class MapsSortedTransformValuesTest extends AbstractMapsTransformValuesTest {
   @Override
   protected SortedMap<String, String> makeEmptyMap() {
-    return transformValues(Maps.<String, String>newTreeMap(), Functions.<String>identity());
+    return transformValues(Maps.newTreeMap(), Functions.identity());
   }
 
   @Override
   protected SortedMap<String, String> makePopulatedMap() {
-    SortedMap<String, Integer> underlying = Maps.newTreeMap();
+    SortedMap<String, Integer> underlying = newTreeMap();
     underlying.put("a", 1);
     underlying.put("b", 2);
     underlying.put("c", 3);

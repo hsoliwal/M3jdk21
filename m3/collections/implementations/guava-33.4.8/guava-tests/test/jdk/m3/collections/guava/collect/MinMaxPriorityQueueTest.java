@@ -16,14 +16,17 @@
 
 package jdk.m3.collections.guava.collect;
 
-import static jdk.m3.collections.guava.base.Objects.equal;
+import static jdk.m3.collections.guava.collect.Collections2.permutations;
+import static jdk.m3.collections.guava.collect.Lists.newArrayList;
+import static jdk.m3.collections.guava.collect.Lists.newArrayListWithCapacity;
+import static jdk.m3.collections.guava.collect.Maps.newTreeMap;
 import static jdk.m3.collections.guava.collect.Platform.reduceExponentIfGwt;
 import static jdk.m3.collections.guava.collect.Platform.reduceIterationsIfGwt;
-import static jdk.m3.collections.guava.collect.ReflectionFreeAssertThrows.assertThrows;
 import static jdk.m3.collections.guava.collect.Sets.newHashSet;
-import static com.google.common.truth.Truth.assertThat;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
 import static java.util.Arrays.asList;
 import static java.util.Collections.shuffle;
+import static org.junit.Assert.assertThrows;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
@@ -40,10 +43,13 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.ConcurrentModificationException;
+import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
+import java.util.Objects;
 import java.util.PriorityQueue;
 import java.util.Queue;
 import java.util.Random;
@@ -61,7 +67,7 @@ import org.jspecify.annotations.Nullable;
  * @author Alexei Stolboushkin
  * @author Sverre Sundsdal
  */
-@GwtCompatible(emulated = true)
+@GwtCompatible
 @NullMarked
 public class MinMaxPriorityQueueTest extends TestCase {
   private static final Ordering<Integer> SOME_COMPARATOR = Ordering.<Integer>natural().reverse();
@@ -99,7 +105,7 @@ public class MinMaxPriorityQueueTest extends TestCase {
     MinMaxPriorityQueue<Integer> queue = MinMaxPriorityQueue.orderedBy(SOME_COMPARATOR).create();
     assertEquals(11, queue.capacity());
     checkUnbounded(queue);
-    assertSame(SOME_COMPARATOR, queue.comparator());
+    assertThat(queue.comparator()).isEqualTo(SOME_COMPARATOR);
   }
 
   // We use the rawtypeToWildcard "cast" to make the test work with J2KT in other tests. Leaving one
@@ -117,7 +123,7 @@ public class MinMaxPriorityQueueTest extends TestCase {
         MinMaxPriorityQueue.orderedBy(SOME_COMPARATOR).expectedSize(8).create();
     assertEquals(8, queue.capacity());
     checkUnbounded(queue);
-    assertSame(SOME_COMPARATOR, queue.comparator());
+    assertThat(queue.comparator()).isEqualTo(SOME_COMPARATOR);
   }
 
   public void testCreation_maximumSize() {
@@ -133,7 +139,7 @@ public class MinMaxPriorityQueueTest extends TestCase {
         MinMaxPriorityQueue.orderedBy(SOME_COMPARATOR).maximumSize(42).create();
     assertEquals(11, queue.capacity());
     assertEquals(42, queue.maximumSize);
-    assertSame(SOME_COMPARATOR, queue.comparator());
+    assertThat(queue.comparator()).isEqualTo(SOME_COMPARATOR);
   }
 
   public void testCreation_expectedSize_maximumSize() {
@@ -160,7 +166,7 @@ public class MinMaxPriorityQueueTest extends TestCase {
     assertEquals(6, queue.size());
     assertEquals(11, queue.capacity());
     checkUnbounded(queue);
-    assertSame(SOME_COMPARATOR, queue.comparator());
+    assertThat(queue.comparator()).isEqualTo(SOME_COMPARATOR);
   }
 
   public void testCreation_expectedSize_withContents() {
@@ -192,14 +198,14 @@ public class MinMaxPriorityQueueTest extends TestCase {
     assertEquals(6, queue.size());
     assertEquals(8, queue.capacity());
     assertEquals(42, queue.maximumSize);
-    assertSame(SOME_COMPARATOR, queue.comparator());
+    assertThat(queue.comparator()).isEqualTo(SOME_COMPARATOR);
   }
 
   // TODO: tests that check the weird interplay between expected size,
   // maximum size, size of initial contents, default capacity...
 
   private static void checkNatural(MinMaxPriorityQueue<Integer> queue) {
-    assertSame(Ordering.natural(), queue.comparator());
+    assertThat(queue.comparator()).isEqualTo(Ordering.natural());
   }
 
   private static void checkUnbounded(MinMaxPriorityQueue<Integer> queue) {
@@ -216,7 +222,7 @@ public class MinMaxPriorityQueueTest extends TestCase {
      * this map would contain the same exact elements as the MinMaxHeap; the
      * value in the map is the number of occurrences of the key.
      */
-    SortedMap<Integer, AtomicInteger> replica = Maps.newTreeMap();
+    SortedMap<Integer, AtomicInteger> replica = newTreeMap();
     assertTrue("Empty heap should be OK", mmHeap.isIntact());
     for (int i = 0; i < heapSize; i++) {
       int randomInt = random.nextInt();
@@ -267,9 +273,9 @@ public class MinMaxPriorityQueueTest extends TestCase {
     assertEquals(1, (int) mmHeap.peek());
     assertEquals(1, (int) mmHeap.peekLast());
     assertEquals(1, (int) mmHeap.pollLast());
-    assertNull(mmHeap.peek());
-    assertNull(mmHeap.peekLast());
-    assertNull(mmHeap.pollLast());
+    assertThat(mmHeap.peek()).isNull();
+    assertThat(mmHeap.peekLast()).isNull();
+    assertThat(mmHeap.pollLast()).isNull();
   }
 
   public void testSmallMinHeap() {
@@ -285,14 +291,14 @@ public class MinMaxPriorityQueueTest extends TestCase {
     assertEquals(3, (int) mmHeap.peekLast());
     assertEquals(3, (int) mmHeap.peek());
     assertEquals(3, (int) mmHeap.poll());
-    assertNull(mmHeap.peekLast());
-    assertNull(mmHeap.peek());
-    assertNull(mmHeap.poll());
+    assertThat(mmHeap.peekLast()).isNull();
+    assertThat(mmHeap.peek()).isNull();
+    assertThat(mmHeap.poll()).isNull();
   }
 
   public void testRemove() {
     MinMaxPriorityQueue<Integer> mmHeap = MinMaxPriorityQueue.create();
-    mmHeap.addAll(Lists.newArrayList(1, 2, 3, 4, 47, 1, 5, 3, 0));
+    mmHeap.addAll(newArrayList(1, 2, 3, 4, 47, 1, 5, 3, 0));
     assertTrue("Heap is not intact initially", mmHeap.isIntact());
     assertEquals(9, mmHeap.size());
     mmHeap.remove(5);
@@ -300,14 +306,14 @@ public class MinMaxPriorityQueueTest extends TestCase {
     assertTrue("Heap is not intact after remove()", mmHeap.isIntact());
     assertEquals(47, (int) mmHeap.pollLast());
     assertEquals(4, (int) mmHeap.pollLast());
-    mmHeap.removeAll(Lists.newArrayList(2, 3));
+    mmHeap.removeAll(newArrayList(2, 3));
     assertEquals(3, mmHeap.size());
     assertTrue("Heap is not intact after removeAll()", mmHeap.isIntact());
   }
 
   public void testContains() {
     MinMaxPriorityQueue<Integer> mmHeap = MinMaxPriorityQueue.create();
-    mmHeap.addAll(Lists.newArrayList(1, 1, 2));
+    mmHeap.addAll(newArrayList(1, 1, 2));
     assertEquals(3, mmHeap.size());
     assertFalse("Heap does not contain null", mmHeap.contains(null));
     assertFalse("Heap does not contain 3", mmHeap.contains(3));
@@ -327,7 +333,7 @@ public class MinMaxPriorityQueueTest extends TestCase {
 
   public void testIteratorPastEndException() {
     MinMaxPriorityQueue<Integer> mmHeap = MinMaxPriorityQueue.create();
-    mmHeap.addAll(Lists.newArrayList(1, 2));
+    mmHeap.addAll(newArrayList(1, 2));
     Iterator<Integer> it = mmHeap.iterator();
     assertTrue("Iterator has reached end prematurely", it.hasNext());
     it.next();
@@ -337,7 +343,7 @@ public class MinMaxPriorityQueueTest extends TestCase {
 
   public void testIteratorConcurrentModification() {
     MinMaxPriorityQueue<Integer> mmHeap = MinMaxPriorityQueue.create();
-    mmHeap.addAll(Lists.newArrayList(1, 2, 3, 4));
+    mmHeap.addAll(newArrayList(1, 2, 3, 4));
     Iterator<Integer> it = mmHeap.iterator();
     assertTrue("Iterator has reached end prematurely", it.hasNext());
     it.next();
@@ -348,7 +354,7 @@ public class MinMaxPriorityQueueTest extends TestCase {
 
   /** Tests a failure caused by fix to childless uncle issue. */
   public void testIteratorRegressionChildlessUncle() {
-    final ArrayList<Integer> initial = Lists.newArrayList(1, 15, 13, 8, 9, 10, 11, 14);
+    ArrayList<Integer> initial = newArrayList(1, 15, 13, 8, 9, 10, 11, 14);
     MinMaxPriorityQueue<Integer> q = MinMaxPriorityQueue.create(initial);
     assertIntact(q);
     q.remove(9);
@@ -356,7 +362,7 @@ public class MinMaxPriorityQueueTest extends TestCase {
     q.remove(10);
     // Now we're in the critical state: [1, 15, 13, 8, 14]
     // Removing 8 while iterating caused duplicates in iteration result.
-    List<Integer> result = Lists.newArrayListWithCapacity(initial.size());
+    List<Integer> result = newArrayListWithCapacity(initial.size());
     for (Iterator<Integer> iter = q.iterator(); iter.hasNext(); ) {
       Integer value = iter.next();
       result.add(value);
@@ -375,8 +381,7 @@ public class MinMaxPriorityQueueTest extends TestCase {
    */
   public void testInvalidatingRemove() {
     MinMaxPriorityQueue<Integer> mmHeap = MinMaxPriorityQueue.create();
-    mmHeap.addAll(
-        Lists.newArrayList(1, 20, 1000, 2, 3, 30, 40, 10, 11, 12, 13, 300, 400, 500, 600));
+    mmHeap.addAll(newArrayList(1, 20, 1000, 2, 3, 30, 40, 10, 11, 12, 13, 300, 400, 500, 600));
     assertEquals(15, mmHeap.size());
     assertTrue("Heap is not intact initially", mmHeap.isIntact());
     mmHeap.remove(12);
@@ -388,7 +393,7 @@ public class MinMaxPriorityQueueTest extends TestCase {
   public void testInvalidatingRemove2() {
     MinMaxPriorityQueue<Integer> mmHeap = MinMaxPriorityQueue.create();
     List<Integer> values =
-        Lists.newArrayList(
+        newArrayList(
             1, 20, 1000, 2, 3, 30, 40, 10, 11, 12, 13, 300, 400, 500, 600, 4, 5, 6, 7, 8, 9, 4, 5,
             200, 250);
     mmHeap.addAll(values);
@@ -397,7 +402,7 @@ public class MinMaxPriorityQueueTest extends TestCase {
     mmHeap.remove(2);
     assertEquals(24, mmHeap.size());
     assertTrue("Heap is not intact after remove()", mmHeap.isIntact());
-    values.removeAll(Lists.newArrayList(2));
+    values.removeAll(newArrayList(2));
     assertEquals(values.size(), mmHeap.size());
     assertTrue(values.containsAll(mmHeap));
     assertTrue(mmHeap.containsAll(values));
@@ -405,7 +410,7 @@ public class MinMaxPriorityQueueTest extends TestCase {
 
   public void testIteratorInvalidatingIteratorRemove() {
     MinMaxPriorityQueue<Integer> mmHeap = MinMaxPriorityQueue.create();
-    mmHeap.addAll(Lists.newArrayList(1, 20, 100, 2, 3, 30, 40));
+    mmHeap.addAll(newArrayList(1, 20, 100, 2, 3, 30, 40));
     assertEquals(7, mmHeap.size());
     assertTrue("Heap is not intact initially", mmHeap.isIntact());
     Iterator<Integer> it = mmHeap.iterator();
@@ -444,8 +449,7 @@ public class MinMaxPriorityQueueTest extends TestCase {
    */
   public void testIteratorInvalidatingIteratorRemove2() {
     MinMaxPriorityQueue<Integer> mmHeap = MinMaxPriorityQueue.create();
-    mmHeap.addAll(
-        Lists.newArrayList(1, 20, 1000, 2, 3, 30, 40, 10, 11, 12, 13, 200, 300, 500, 400));
+    mmHeap.addAll(newArrayList(1, 20, 1000, 2, 3, 30, 40, 10, 11, 12, 13, 200, 300, 500, 400));
     assertTrue("Heap is not intact initially", mmHeap.isIntact());
     Iterator<Integer> it = mmHeap.iterator();
     assertEquals((Integer) 1, it.next());
@@ -479,14 +483,14 @@ public class MinMaxPriorityQueueTest extends TestCase {
         rawtypeToWildcard(MinMaxPriorityQueue.expectedSize(5)).create();
     Collections.addAll(mmHeap, "foo", "bar", "foobar", "barfoo", "larry", "sergey", "eric");
     assertTrue("Heap is not intact initially", mmHeap.isIntact());
-    assertEquals("bar", mmHeap.peek());
-    assertEquals("sergey", mmHeap.peekLast());
+    assertThat(mmHeap.peek()).isEqualTo("bar");
+    assertThat(mmHeap.peekLast()).isEqualTo("sergey");
     assertEquals(7, mmHeap.size());
     assertTrue("Could not remove larry", mmHeap.remove("larry"));
     assertEquals(6, mmHeap.size());
     assertFalse("heap contains larry which has been removed", mmHeap.contains("larry"));
     assertTrue("heap does not contain sergey", mmHeap.contains("sergey"));
-    assertTrue("Could not remove larry", mmHeap.removeAll(Lists.newArrayList("sergey", "eric")));
+    assertTrue("Could not remove larry", mmHeap.removeAll(newArrayList("sergey", "eric")));
     assertFalse("Could remove nikesh which is not in the heap", mmHeap.remove("nikesh"));
     assertEquals(4, mmHeap.size());
   }
@@ -496,8 +500,8 @@ public class MinMaxPriorityQueueTest extends TestCase {
         MinMaxPriorityQueue.orderedBy(Ordering.<String>natural().reverse()).create();
     Collections.addAll(mmHeap, "foo", "bar", "foobar", "barfoo", "larry", "sergey", "eric");
     assertTrue("Heap is not intact initially", mmHeap.isIntact());
-    assertEquals("sergey", mmHeap.peek());
-    assertEquals("bar", mmHeap.peekLast());
+    assertThat(mmHeap.peek()).isEqualTo("sergey");
+    assertThat(mmHeap.peekLast()).isEqualTo("bar");
   }
 
   public void testCreateWithCapacityAndOrdering() {
@@ -511,15 +515,14 @@ public class MinMaxPriorityQueueTest extends TestCase {
     assertEquals(0, (int) mmHeap.peekLast());
   }
 
-  private <T extends Comparable<T>> void runIterator(final List<T> values, int steps)
-      throws Exception {
+  private static <T extends Comparable<T>> void runIterator(List<T> values, int steps) {
     IteratorTester<T> tester =
         new IteratorTester<T>(
             steps,
             IteratorFeature.MODIFIABLE,
-            Lists.newLinkedList(values),
+            new LinkedList<>(values),
             IteratorTester.KnownOrder.UNKNOWN_ORDER) {
-          private @Nullable MinMaxPriorityQueue<T> mmHeap;
+          @Nullable MinMaxPriorityQueue<T> mmHeap;
 
           @Override
           protected Iterator<T> newTargetIterator() {
@@ -529,24 +532,24 @@ public class MinMaxPriorityQueueTest extends TestCase {
 
           @Override
           protected void verify(List<T> elements) {
-            assertEquals(newHashSet(elements), newHashSet(mmHeap.iterator()));
+            assertEquals(new HashSet<>(elements), newHashSet(mmHeap.iterator()));
             assertIntact(mmHeap);
           }
         };
     tester.test();
   }
 
-  public void testIteratorTester() throws Exception {
+  public void testIteratorTester() {
     Random random = new Random(0);
-    List<Integer> list = Lists.newArrayList();
+    List<Integer> list = new ArrayList<>();
     for (int i = 0; i < 3; i++) {
       list.add(random.nextInt());
     }
     runIterator(list, 6);
   }
 
-  public void testIteratorTesterLarger() throws Exception {
-    runIterator(Lists.newArrayList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10), 5);
+  public void testIteratorTesterLarger() {
+    runIterator(newArrayList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10), 5);
   }
 
   public void testRemoveAt() {
@@ -560,7 +563,7 @@ public class MinMaxPriorityQueueTest extends TestCase {
       mmHeap.add(random.nextInt());
     }
     for (int i = 0; i < numberOfModifications; i++) {
-      mmHeap.removeAt(random.nextInt(mmHeap.size()));
+      mmHeap.removeAtForTesting(random.nextInt(mmHeap.size()));
       assertIntactUsingSeed(seed, mmHeap);
       mmHeap.add(random.nextInt());
       assertIntactUsingSeed(seed, mmHeap);
@@ -570,10 +573,10 @@ public class MinMaxPriorityQueueTest extends TestCase {
   public void testRemoveAt_exhaustive() {
     int size = reduceExponentIfGwt(8);
     List<Integer> expected = createOrderedList(size);
-    for (Collection<Integer> perm : Collections2.permutations(expected)) {
+    for (Collection<Integer> perm : permutations(expected)) {
       for (int i = 0; i < perm.size(); i++) {
         MinMaxPriorityQueue<Integer> q = MinMaxPriorityQueue.create(perm);
-        q.removeAt(i);
+        q.removeAtForTesting(i);
         assertIntactUsingStartedWith(perm, q);
       }
     }
@@ -693,9 +696,9 @@ public class MinMaxPriorityQueueTest extends TestCase {
   public void testExhaustive_pollAndPush() {
     int size = 5;
     List<Integer> expected = createOrderedList(size);
-    for (Collection<Integer> perm : Collections2.permutations(expected)) {
+    for (Collection<Integer> perm : permutations(expected)) {
       MinMaxPriorityQueue<Integer> q = MinMaxPriorityQueue.create(perm);
-      List<Integer> elements = Lists.newArrayListWithCapacity(size);
+      List<Integer> elements = newArrayListWithCapacity(size);
       while (!q.isEmpty()) {
         Integer next = q.pollFirst();
         for (int i = 0; i <= size; i++) {
@@ -715,12 +718,12 @@ public class MinMaxPriorityQueueTest extends TestCase {
     int size = 8;
     List<Integer> expected = createOrderedList(size);
     MinMaxPriorityQueue<Integer> q = MinMaxPriorityQueue.create(expected);
-    List<Integer> contents = Lists.newArrayList(expected);
-    List<Integer> elements = Lists.newArrayListWithCapacity(size);
+    List<Integer> contents = new ArrayList<>(expected);
+    List<Integer> elements = newArrayListWithCapacity(size);
     while (!q.isEmpty()) {
       assertThat(q).containsExactlyElementsIn(contents);
       Integer next = q.pollFirst();
-      contents.remove(next);
+      contents.remove(/* element */ next);
       assertThat(q).containsExactlyElementsIn(contents);
       for (int i = 0; i <= size; i++) {
         q.add(i);
@@ -733,7 +736,7 @@ public class MinMaxPriorityQueueTest extends TestCase {
         assertTrue(contents.remove(Integer.valueOf(i)));
         assertThat(q).containsExactlyElementsIn(contents);
         assertEquals(next, q.poll());
-        contents.remove(next);
+        contents.remove(/* element */ next);
         assertThat(q).containsExactlyElementsIn(contents);
       }
       elements.add(next);
@@ -831,7 +834,7 @@ public class MinMaxPriorityQueueTest extends TestCase {
   }
 
   /** Returns the seed used for the randomization. */
-  private long insertRandomly(ArrayList<Integer> elements, MinMaxPriorityQueue<Integer> q) {
+  private static long insertRandomly(ArrayList<Integer> elements, MinMaxPriorityQueue<Integer> q) {
     long seed = new Random().nextLong();
     Random random = new Random(seed);
     insertRandomly(elements, q, random);
@@ -842,11 +845,11 @@ public class MinMaxPriorityQueueTest extends TestCase {
       ArrayList<Integer> elements, MinMaxPriorityQueue<Integer> q, Random random) {
     while (!elements.isEmpty()) {
       int selectedIndex = random.nextInt(elements.size());
-      q.offer(elements.remove(selectedIndex));
+      q.offer(elements.remove(/* index */ selectedIndex));
     }
   }
 
-  private ArrayList<Integer> createOrderedList(int size) {
+  private static ArrayList<Integer> createOrderedList(int size) {
     ArrayList<Integer> elements = new ArrayList<>(size);
     for (int i = 0; i < size; i++) {
       elements.add(i);
@@ -944,7 +947,7 @@ public class MinMaxPriorityQueueTest extends TestCase {
 
   private static void assertEqualsUsingSeed(
       long seed, @Nullable Object expected, @Nullable Object actual) {
-    if (!equal(actual, expected)) {
+    if (!Objects.equals(actual, expected)) {
       // fail(), but with the JUnit-supplied message.
       assertEquals("Using seed " + seed, expected, actual);
     }
@@ -952,7 +955,7 @@ public class MinMaxPriorityQueueTest extends TestCase {
 
   private static void assertEqualsUsingStartedWith(
       Collection<?> startedWith, @Nullable Object expected, @Nullable Object actual) {
-    if (!equal(actual, expected)) {
+    if (!Objects.equals(actual, expected)) {
       // fail(), but with the JUnit-supplied message.
       assertEquals("Started with " + startedWith, expected, actual);
     }

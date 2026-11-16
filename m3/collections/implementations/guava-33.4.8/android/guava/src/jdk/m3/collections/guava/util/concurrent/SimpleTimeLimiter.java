@@ -21,12 +21,12 @@ import static jdk.m3.collections.guava.util.concurrent.Uninterruptibles.getUnint
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
 import jdk.m3.collections.guava.annotations.J2ktIncompatible;
 import jdk.m3.collections.guava.collect.ObjectArrays;
-import jdk.m3.collections.guava.collect.Sets;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
@@ -47,7 +47,7 @@ import org.jspecify.annotations.Nullable;
  */
 @J2ktIncompatible
 @GwtIncompatible
-// TODO: b/227335009 - Maybe change interruption behavior, but it requires thought.
+// TODO(b/227335009): Maybe change interruption behavior, but it requires thought.
 @SuppressWarnings("Interruption")
 public final class SimpleTimeLimiter implements TimeLimiter {
 
@@ -125,7 +125,7 @@ public final class SimpleTimeLimiter implements TimeLimiter {
       future.cancel(true);
       throw e;
     } catch (ExecutionException e) {
-      throw throwCause(e, true /* combineStackTraces */);
+      throw throwCause(e, /* combineStackTraces= */ true);
     } catch (TimeoutException e) {
       future.cancel(true);
       throw new UncheckedTimeoutException(e);
@@ -147,7 +147,7 @@ public final class SimpleTimeLimiter implements TimeLimiter {
     try {
       return future.get(timeoutDuration, timeoutUnit);
     } catch (InterruptedException | TimeoutException e) {
-      future.cancel(true /* mayInterruptIfRunning */);
+      future.cancel(/* mayInterruptIfRunning= */ true);
       throw e;
     } catch (ExecutionException e) {
       wrapAndThrowExecutionExceptionOrError(e.getCause());
@@ -170,7 +170,7 @@ public final class SimpleTimeLimiter implements TimeLimiter {
     try {
       return getUninterruptibly(future, timeoutDuration, timeoutUnit);
     } catch (TimeoutException e) {
-      future.cancel(true /* mayInterruptIfRunning */);
+      future.cancel(/* mayInterruptIfRunning= */ true);
       throw e;
     } catch (ExecutionException e) {
       wrapAndThrowExecutionExceptionOrError(e.getCause());
@@ -190,7 +190,7 @@ public final class SimpleTimeLimiter implements TimeLimiter {
     try {
       future.get(timeoutDuration, timeoutUnit);
     } catch (InterruptedException | TimeoutException e) {
-      future.cancel(true /* mayInterruptIfRunning */);
+      future.cancel(/* mayInterruptIfRunning= */ true);
       throw e;
     } catch (ExecutionException e) {
       wrapAndThrowRuntimeExecutionExceptionOrError(e.getCause());
@@ -210,7 +210,7 @@ public final class SimpleTimeLimiter implements TimeLimiter {
     try {
       getUninterruptibly(future, timeoutDuration, timeoutUnit);
     } catch (TimeoutException e) {
-      future.cancel(true /* mayInterruptIfRunning */);
+      future.cancel(/* mayInterruptIfRunning= */ true);
       throw e;
     } catch (ExecutionException e) {
       wrapAndThrowRuntimeExecutionExceptionOrError(e.getCause());
@@ -239,7 +239,7 @@ public final class SimpleTimeLimiter implements TimeLimiter {
   }
 
   private static Set<Method> findInterruptibleMethods(Class<?> interfaceType) {
-    Set<Method> set = Sets.newHashSet();
+    Set<Method> set = new HashSet<>();
     for (Method m : interfaceType.getMethods()) {
       if (declaresInterruptedEx(m)) {
         set.add(m);
@@ -258,7 +258,8 @@ public final class SimpleTimeLimiter implements TimeLimiter {
     return false;
   }
 
-  private void wrapAndThrowExecutionExceptionOrError(Throwable cause) throws ExecutionException {
+  private static void wrapAndThrowExecutionExceptionOrError(Throwable cause)
+      throws ExecutionException {
     if (cause instanceof Error) {
       throw new ExecutionError((Error) cause);
     } else if (cause instanceof RuntimeException) {
@@ -268,7 +269,7 @@ public final class SimpleTimeLimiter implements TimeLimiter {
     }
   }
 
-  private void wrapAndThrowRuntimeExecutionExceptionOrError(Throwable cause) {
+  private static void wrapAndThrowRuntimeExecutionExceptionOrError(Throwable cause) {
     if (cause instanceof Error) {
       throw new ExecutionError((Error) cause);
     } else {

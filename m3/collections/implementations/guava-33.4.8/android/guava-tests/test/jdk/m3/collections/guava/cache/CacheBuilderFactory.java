@@ -14,17 +14,23 @@
 
 package jdk.m3.collections.guava.cache;
 
-import jdk.m3.collections.guava.base.Function;
+import static jdk.m3.collections.guava.collect.Iterables.transform;
+import static jdk.m3.collections.guava.collect.Lists.newArrayListWithExpectedSize;
+import static jdk.m3.collections.guava.collect.Lists.transform;
+import static jdk.m3.collections.guava.collect.Sets.cartesianProduct;
+import static jdk.m3.collections.guava.collect.Sets.newHashSet;
+import static jdk.m3.collections.guava.collect.Sets.newLinkedHashSet;
+
+import jdk.m3.collections.guava.annotations.GwtIncompatible;
+import jdk.m3.collections.guava.annotations.J2ktIncompatible;
 import jdk.m3.collections.guava.base.MoreObjects;
-import jdk.m3.collections.guava.base.Objects;
 import jdk.m3.collections.guava.base.Optional;
 import jdk.m3.collections.guava.base.Preconditions;
 import jdk.m3.collections.guava.cache.LocalCache.Strength;
-import jdk.m3.collections.guava.collect.Iterables;
-import jdk.m3.collections.guava.collect.Lists;
-import jdk.m3.collections.guava.collect.Sets;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import org.jspecify.annotations.NullUnmarked;
@@ -36,65 +42,67 @@ import org.jspecify.annotations.Nullable;
  *
  * @author mike nonemacher
  */
+@GwtIncompatible
+@J2ktIncompatible
 @NullUnmarked
 class CacheBuilderFactory {
   // Default values contain only 'null', which means don't call the CacheBuilder method (just give
   // the CacheBuilder default).
-  private Set<Integer> concurrencyLevels = Sets.newHashSet((Integer) null);
-  private Set<Integer> initialCapacities = Sets.newHashSet((Integer) null);
-  private Set<Integer> maximumSizes = Sets.newHashSet((Integer) null);
-  private Set<DurationSpec> expireAfterWrites = Sets.newHashSet((DurationSpec) null);
-  private Set<DurationSpec> expireAfterAccesses = Sets.newHashSet((DurationSpec) null);
-  private Set<DurationSpec> refreshes = Sets.newHashSet((DurationSpec) null);
-  private Set<Strength> keyStrengths = Sets.newHashSet((Strength) null);
-  private Set<Strength> valueStrengths = Sets.newHashSet((Strength) null);
+  private Set<Integer> concurrencyLevels = newHashSet((Integer) null);
+  private Set<Integer> initialCapacities = newHashSet((Integer) null);
+  private Set<Integer> maximumSizes = newHashSet((Integer) null);
+  private Set<DurationSpec> expireAfterWrites = newHashSet((DurationSpec) null);
+  private Set<DurationSpec> expireAfterAccesses = newHashSet((DurationSpec) null);
+  private Set<DurationSpec> refreshes = newHashSet((DurationSpec) null);
+  private Set<Strength> keyStrengths = newHashSet((Strength) null);
+  private Set<Strength> valueStrengths = newHashSet((Strength) null);
 
   @CanIgnoreReturnValue
   CacheBuilderFactory withConcurrencyLevels(Set<Integer> concurrencyLevels) {
-    this.concurrencyLevels = Sets.newLinkedHashSet(concurrencyLevels);
+    this.concurrencyLevels = new LinkedHashSet<>(concurrencyLevels);
     return this;
   }
 
   @CanIgnoreReturnValue
   CacheBuilderFactory withInitialCapacities(Set<Integer> initialCapacities) {
-    this.initialCapacities = Sets.newLinkedHashSet(initialCapacities);
+    this.initialCapacities = new LinkedHashSet<>(initialCapacities);
     return this;
   }
 
   @CanIgnoreReturnValue
   CacheBuilderFactory withMaximumSizes(Set<Integer> maximumSizes) {
-    this.maximumSizes = Sets.newLinkedHashSet(maximumSizes);
+    this.maximumSizes = new LinkedHashSet<>(maximumSizes);
     return this;
   }
 
   @CanIgnoreReturnValue
   CacheBuilderFactory withExpireAfterWrites(Set<DurationSpec> durations) {
-    this.expireAfterWrites = Sets.newLinkedHashSet(durations);
+    this.expireAfterWrites = new LinkedHashSet<>(durations);
     return this;
   }
 
   @CanIgnoreReturnValue
   CacheBuilderFactory withExpireAfterAccesses(Set<DurationSpec> durations) {
-    this.expireAfterAccesses = Sets.newLinkedHashSet(durations);
+    this.expireAfterAccesses = new LinkedHashSet<>(durations);
     return this;
   }
 
   @CanIgnoreReturnValue
   CacheBuilderFactory withRefreshes(Set<DurationSpec> durations) {
-    this.refreshes = Sets.newLinkedHashSet(durations);
+    this.refreshes = new LinkedHashSet<>(durations);
     return this;
   }
 
   @CanIgnoreReturnValue
   CacheBuilderFactory withKeyStrengths(Set<Strength> keyStrengths) {
-    this.keyStrengths = Sets.newLinkedHashSet(keyStrengths);
+    this.keyStrengths = new LinkedHashSet<>(keyStrengths);
     Preconditions.checkArgument(!this.keyStrengths.contains(Strength.SOFT));
     return this;
   }
 
   @CanIgnoreReturnValue
   CacheBuilderFactory withValueStrengths(Set<Strength> valueStrengths) {
-    this.valueStrengths = Sets.newLinkedHashSet(valueStrengths);
+    this.valueStrengths = new LinkedHashSet<>(valueStrengths);
     return this;
   }
 
@@ -109,12 +117,10 @@ class CacheBuilderFactory {
             refreshes,
             keyStrengths,
             valueStrengths);
-    return Iterables.transform(
+    return transform(
         combinations,
-        new Function<List<Object>, CacheBuilder<Object, Object>>() {
-          @Override
-          public CacheBuilder<Object, Object> apply(List<Object> combination) {
-            return createCacheBuilder(
+        combination ->
+            createCacheBuilder(
                 (Integer) combination.get(0),
                 (Integer) combination.get(1),
                 (Integer) combination.get(2),
@@ -122,26 +128,8 @@ class CacheBuilderFactory {
                 (DurationSpec) combination.get(4),
                 (DurationSpec) combination.get(5),
                 (Strength) combination.get(6),
-                (Strength) combination.get(7));
-          }
-        });
+                (Strength) combination.get(7)));
   }
-
-  private static final Function<Object, Optional<?>> NULLABLE_TO_OPTIONAL =
-      new Function<Object, Optional<?>>() {
-        @Override
-        public Optional<?> apply(@Nullable Object obj) {
-          return Optional.fromNullable(obj);
-        }
-      };
-
-  private static final Function<Optional<?>, @Nullable Object> OPTIONAL_TO_NULLABLE =
-      new Function<Optional<?>, @Nullable Object>() {
-        @Override
-        public @Nullable Object apply(Optional<?> optional) {
-          return optional.orNull();
-        }
-      };
 
   /**
    * Sets.cartesianProduct doesn't allow sets that contain null, but we want null to mean "don't
@@ -149,25 +137,17 @@ class CacheBuilderFactory {
    * method wraps the elements in the input sets (which may contain null) as Optionals, calls
    * Sets.cartesianProduct with those, then transforms the result to unwrap the Optionals.
    */
-  private Iterable<List<Object>> buildCartesianProduct(Set<?>... sets) {
-    List<Set<Optional<?>>> optionalSets = Lists.newArrayListWithExpectedSize(sets.length);
+  private static Iterable<List<Object>> buildCartesianProduct(Set<?>... sets) {
+    List<Set<Optional<?>>> optionalSets = newArrayListWithExpectedSize(sets.length);
     for (Set<?> set : sets) {
-      Set<Optional<?>> optionalSet =
-          Sets.newLinkedHashSet(Iterables.transform(set, NULLABLE_TO_OPTIONAL));
+      Set<Optional<?>> optionalSet = newLinkedHashSet(transform(set, Optional::fromNullable));
       optionalSets.add(optionalSet);
     }
-    Set<List<Optional<?>>> cartesianProduct = Sets.cartesianProduct(optionalSets);
-    return Iterables.transform(
-        cartesianProduct,
-        new Function<List<Optional<?>>, List<Object>>() {
-          @Override
-          public List<Object> apply(List<Optional<?>> objs) {
-            return Lists.transform(objs, OPTIONAL_TO_NULLABLE);
-          }
-        });
+    Set<List<Optional<?>>> cartesianProduct = cartesianProduct(optionalSets);
+    return transform(cartesianProduct, objs -> transform(objs, Optional::orNull));
   }
 
-  private CacheBuilder<Object, Object> createCacheBuilder(
+  private static CacheBuilder<Object, Object> createCacheBuilder(
       @Nullable Integer concurrencyLevel,
       @Nullable Integer initialCapacity,
       @Nullable Integer maximumSize,
@@ -220,7 +200,7 @@ class CacheBuilderFactory {
 
     @Override
     public int hashCode() {
-      return Objects.hashCode(duration, unit);
+      return Objects.hash(duration, unit);
     }
 
     @Override

@@ -19,6 +19,7 @@ package jdk.m3.collections.guava.collect;
 import java.util.ArrayDeque;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.Queue;
 import junit.framework.TestCase;
 import org.jspecify.annotations.NullUnmarked;
@@ -32,7 +33,7 @@ import org.jspecify.annotations.Nullable;
 @NullUnmarked
 public class SynchronizedQueueTest extends TestCase {
 
-  protected Queue<String> create() {
+  private Queue<String> create() {
     TestQueue<String> inner = new TestQueue<>();
     Queue<String> outer = Synchronized.queue(inner, inner.mutex);
     outer.add("foo"); // necessary because we try to remove elements later on
@@ -40,8 +41,8 @@ public class SynchronizedQueueTest extends TestCase {
   }
 
   private static final class TestQueue<E> implements Queue<E> {
-    private final Queue<E> delegate = Lists.newLinkedList();
-    public final Object mutex = new Object[0]; // something Serializable
+    private final Queue<E> delegate = new LinkedList<>();
+    private final Object mutex = new Object[0]; // something Serializable
 
     @Override
     public boolean offer(E o) {

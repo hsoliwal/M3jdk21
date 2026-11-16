@@ -16,6 +16,8 @@ package jdk.m3.collections.guava.collect;
 
 import static jdk.m3.collections.guava.base.Preconditions.checkArgument;
 import static jdk.m3.collections.guava.base.Preconditions.checkNotNull;
+import static jdk.m3.collections.guava.collect.CollectPreconditions.checkNonnegative;
+import static jdk.m3.collections.guava.collect.Lists.newArrayListWithCapacity;
 
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
 import jdk.m3.collections.guava.annotations.J2ktIncompatible;
@@ -27,6 +29,7 @@ import com.google.errorprone.annotations.concurrent.LazyInit;
 import java.io.InvalidObjectException;
 import java.io.ObjectInputStream;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
@@ -68,7 +71,6 @@ public abstract class ImmutableSortedMultiset<E> extends ImmutableMultiset<E>
    *
    * @since 33.2.0 (available since 21.0 in guava-jre)
    */
-  @SuppressWarnings("Java7ApiChecker")
   @IgnoreJRERequirement // Users will use this only if they're already using streams.
   public static <E> Collector<E, ?, ImmutableSortedMultiset<E>> toImmutableSortedMultiset(
       Comparator<? super E> comparator) {
@@ -86,7 +88,6 @@ public abstract class ImmutableSortedMultiset<E> extends ImmutableMultiset<E>
    *
    * @since 33.2.0 (available since 22.0 in guava-jre)
    */
-  @SuppressWarnings("Java7ApiChecker")
   @IgnoreJRERequirement // Users will use this only if they're already using streams.
   public static <T extends @Nullable Object, E>
       Collector<T, ?, ImmutableSortedMultiset<E>> toImmutableSortedMultiset(
@@ -106,7 +107,6 @@ public abstract class ImmutableSortedMultiset<E> extends ImmutableMultiset<E>
         (Multiset<E> multiset) -> copyOfSortedEntries(comparator, multiset.entrySet()));
   }
 
-  @SuppressWarnings("Java7ApiChecker")
   @IgnoreJRERequirement // helper for toImmutableSortedMultiset
   /*
    * If we make these calls inline inside toImmutableSortedMultiset, we get an Animal Sniffer error,
@@ -193,7 +193,7 @@ public abstract class ImmutableSortedMultiset<E> extends ImmutableMultiset<E>
   public static <E extends Comparable<? super E>> ImmutableSortedMultiset<E> of(
       E e1, E e2, E e3, E e4, E e5, E e6, E... remaining) {
     int size = remaining.length + 6;
-    List<E> all = Lists.newArrayListWithCapacity(size);
+    List<E> all = newArrayListWithCapacity(size);
     Collections.addAll(all, e1, e2, e3, e4, e5, e6);
     Collections.addAll(all, remaining);
     return copyOf(Ordering.natural(), all);
@@ -310,7 +310,7 @@ public abstract class ImmutableSortedMultiset<E> extends ImmutableMultiset<E>
    */
   public static <E> ImmutableSortedMultiset<E> copyOfSorted(SortedMultiset<E> sortedMultiset) {
     return copyOfSortedEntries(
-        sortedMultiset.comparator(), Lists.newArrayList(sortedMultiset.entrySet()));
+        sortedMultiset.comparator(), new ArrayList<>(sortedMultiset.entrySet()));
   }
 
   private static <E> ImmutableSortedMultiset<E> copyOfSortedEntries(
@@ -358,10 +358,11 @@ public abstract class ImmutableSortedMultiset<E> extends ImmutableMultiset<E>
   public ImmutableSortedMultiset<E> descendingMultiset() {
     ImmutableSortedMultiset<E> result = descendingMultiset;
     if (result == null) {
-      return descendingMultiset =
-          this.isEmpty()
-              ? emptyMultiset(Ordering.from(comparator()).reverse())
-              : new DescendingImmutableSortedMultiset<E>(this);
+      result =
+          descendingMultiset =
+              this.isEmpty()
+                  ? emptyMultiset(Ordering.from(comparator()).reverse())
+                  : new DescendingImmutableSortedMultiset<E>(this);
     }
     return result;
   }
@@ -402,7 +403,7 @@ public abstract class ImmutableSortedMultiset<E> extends ImmutableMultiset<E>
   public abstract ImmutableSortedMultiset<E> headMultiset(E upperBound, BoundType boundType);
 
   @Override
-  public ImmutableSortedMultiset<E> subMultiset(
+  public final ImmutableSortedMultiset<E> subMultiset(
       E lowerBound, BoundType lowerBoundType, E upperBound, BoundType upperBoundType) {
     checkArgument(
         comparator().compare(lowerBound, upperBound) <= 0,
@@ -596,7 +597,7 @@ public abstract class ImmutableSortedMultiset<E> extends ImmutableMultiset<E>
     @Override
     public Builder<E> addCopies(E element, int occurrences) {
       checkNotNull(element);
-      CollectPreconditions.checkNonnegative(occurrences, "occurrences");
+      checkNonnegative(occurrences, "occurrences");
       if (occurrences == 0) {
         return this;
       }
@@ -621,7 +622,7 @@ public abstract class ImmutableSortedMultiset<E> extends ImmutableMultiset<E>
     @Override
     public Builder<E> setCount(E element, int count) {
       checkNotNull(element);
-      CollectPreconditions.checkNonnegative(count, "count");
+      checkNonnegative(count, "count");
       maintenance();
       elements[length] = element;
       counts[length] = ~count;
@@ -733,6 +734,8 @@ public abstract class ImmutableSortedMultiset<E> extends ImmutableMultiset<E>
       }
       return builder.build();
     }
+
+    private static final long serialVersionUID = -1602158873381216563L;
   }
 
   @Override
@@ -757,7 +760,6 @@ public abstract class ImmutableSortedMultiset<E> extends ImmutableMultiset<E>
    */
   @DoNotCall("Use toImmutableSortedMultiset.")
   @Deprecated
-  @SuppressWarnings("Java7ApiChecker")
   @IgnoreJRERequirement // Users will use this only if they're already using streams.
   public static <E> Collector<E, ?, ImmutableMultiset<E>> toImmutableMultiset() {
     throw new UnsupportedOperationException();
@@ -774,7 +776,6 @@ public abstract class ImmutableSortedMultiset<E> extends ImmutableMultiset<E>
    */
   @DoNotCall("Use toImmutableSortedMultiset.")
   @Deprecated
-  @SuppressWarnings("Java7ApiChecker")
   @IgnoreJRERequirement // Users will use this only if they're already using streams.
   public static <T extends @Nullable Object, E>
       Collector<T, ?, ImmutableMultiset<E>> toImmutableMultiset(

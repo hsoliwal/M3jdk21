@@ -17,9 +17,9 @@
 package jdk.m3.collections.guava.graph;
 
 import static jdk.m3.collections.guava.base.Preconditions.checkNotNull;
+import static jdk.m3.collections.guava.collect.Iterators.singletonIterator;
 
 import jdk.m3.collections.guava.collect.ImmutableSet;
-import jdk.m3.collections.guava.collect.Iterators;
 import jdk.m3.collections.guava.collect.UnmodifiableIterator;
 import java.util.AbstractSet;
 import java.util.Map;
@@ -49,7 +49,7 @@ final class EdgesConnecting<E> extends AbstractSet<E> {
     E connectingEdge = getConnectingEdge();
     return (connectingEdge == null)
         ? ImmutableSet.<E>of().iterator()
-        : Iterators.singletonIterator(connectingEdge);
+        : singletonIterator(connectingEdge);
   }
 
   @Override
@@ -60,7 +60,7 @@ final class EdgesConnecting<E> extends AbstractSet<E> {
   @Override
   public boolean contains(@Nullable Object edge) {
     E connectingEdge = getConnectingEdge();
-    return (connectingEdge != null && connectingEdge.equals(edge));
+    return connectingEdge != null && connectingEdge.equals(edge);
   }
 
   private @Nullable E getConnectingEdge() {

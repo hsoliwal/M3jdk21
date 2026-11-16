@@ -16,15 +16,15 @@
 
 package jdk.m3.collections.guava.collect;
 
-import static jdk.m3.collections.guava.collect.ReflectionFreeAssertThrows.assertThrows;
-import static com.google.common.truth.Truth.assertThat;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
+import static org.junit.Assert.assertThrows;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
 import jdk.m3.collections.guava.annotations.J2ktIncompatible;
-import jdk.m3.collections.guava.base.Objects;
 import jdk.m3.collections.guava.testing.EqualsTester;
 import jdk.m3.collections.guava.testing.NullPointerTester;
+import java.util.Objects;
 import junit.framework.TestCase;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
@@ -34,10 +34,10 @@ import org.jspecify.annotations.Nullable;
  *
  * @author Jared Levy
  */
-@GwtCompatible(emulated = true)
+@GwtCompatible
 @NullMarked
 public abstract class AbstractTableReadTest<C extends @Nullable Character> extends TestCase {
-  protected Table<String, Integer, C> table;
+  Table<String, Integer, C> table;
 
   /**
    * Creates a table with the specified data.
@@ -46,14 +46,14 @@ public abstract class AbstractTableReadTest<C extends @Nullable Character> exten
    * @throws IllegalArgumentException if the size of {@code data} isn't a multiple of 3
    * @throws ClassCastException if a data element has the wrong type
    */
-  protected abstract Table<String, Integer, C> create(@Nullable Object... data);
+  abstract Table<String, Integer, C> create(@Nullable Object... data);
 
-  protected void assertSize(int expectedSize) {
+  void assertSize(int expectedSize) {
     assertEquals(expectedSize, table.size());
   }
 
   @Override
-  public void setUp() throws Exception {
+  protected void setUp() throws Exception {
     super.setUp();
     table = create();
   }
@@ -101,12 +101,12 @@ public abstract class AbstractTableReadTest<C extends @Nullable Character> exten
     assertEquals((Character) 'a', table.get("foo", 1));
     assertEquals((Character) 'b', table.get("bar", 1));
     assertEquals((Character) 'c', table.get("foo", 3));
-    assertNull(table.get("foo", 2));
-    assertNull(table.get("bar", 3));
-    assertNull(table.get("cat", 1));
-    assertNull(table.get("foo", null));
-    assertNull(table.get(null, 1));
-    assertNull(table.get(null, null));
+    assertThat(table.get("foo", 2)).isNull();
+    assertThat(table.get("bar", 3)).isNull();
+    assertThat(table.get("cat", 1)).isNull();
+    assertThat(table.get("foo", null)).isNull();
+    assertThat(table.get(null, 1)).isNull();
+    assertThat(table.get(null, null)).isNull();
   }
 
   public void testIsEmpty() {
@@ -124,8 +124,7 @@ public abstract class AbstractTableReadTest<C extends @Nullable Character> exten
   public void testEquals() {
     table = create("foo", 1, 'a', "bar", 1, 'b', "foo", 3, 'c');
     // We know that we have only added non-null Characters.
-    Table<String, Integer, Character> hashCopy =
-        HashBasedTable.create((Table<String, Integer, ? extends Character>) table);
+    Table<String, Integer, Character> hashCopy = HashBasedTable.create(table);
     Table<String, Integer, C> reordered = create("foo", 3, 'c', "foo", 1, 'a', "bar", 1, 'b');
     Table<String, Integer, C> smaller = create("foo", 1, 'a', "bar", 1, 'b');
     Table<String, Integer, C> swapOuter = create("bar", 1, 'a', "foo", 1, 'b', "bar", 3, 'c');
@@ -142,15 +141,13 @@ public abstract class AbstractTableReadTest<C extends @Nullable Character> exten
   public void testHashCode() {
     table = create("foo", 1, 'a', "bar", 1, 'b', "foo", 3, 'c');
     int expected =
-        Objects.hashCode("foo", 1, 'a')
-            + Objects.hashCode("bar", 1, 'b')
-            + Objects.hashCode("foo", 3, 'c');
+        Objects.hash("foo", 1, 'a') + Objects.hash("bar", 1, 'b') + Objects.hash("foo", 3, 'c');
     assertEquals(expected, table.hashCode());
   }
 
   public void testToStringSize1() {
     table = create("foo", 1, 'a');
-    assertEquals("{foo={1=a}}", table.toString());
+    assertThat(table.toString()).isEqualTo("{foo={1=a}}");
   }
 
   public void testRow() {

@@ -18,12 +18,11 @@ package jdk.m3.collections.guava.collect.testing.testers;
 
 import static jdk.m3.collections.guava.collect.testing.Helpers.assertEqualIgnoringOrder;
 import static jdk.m3.collections.guava.collect.testing.features.CollectionFeature.SERIALIZABLE;
+import static jdk.m3.collections.guava.testing.SerializableTester.reserialize;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.collect.testing.AbstractCollectionTester;
 import jdk.m3.collections.guava.collect.testing.features.CollectionFeature;
-import jdk.m3.collections.guava.testing.SerializableTester;
-import org.junit.Ignore;
 
 /**
  * Basic reserialization test for collections.
@@ -31,13 +30,10 @@ import org.junit.Ignore;
  * @author Louis Wasserman
  */
 @GwtCompatible
-@Ignore("test runners must not instantiate and run this directly, only via suites we build")
-// @Ignore affects the Android test runner, which respects JUnit 4 annotations on JUnit 3 tests.
-@SuppressWarnings("JUnit4ClassUsedInJUnit3")
 public class CollectionSerializationTester<E> extends AbstractCollectionTester<E> {
   @CollectionFeature.Require(SERIALIZABLE)
   public void testReserialize() {
     // For a bare Collection, the most we can guarantee is that the elements are preserved.
-    assertEqualIgnoringOrder(actualContents(), SerializableTester.reserialize(actualContents()));
+    assertEqualIgnoringOrder(actualContents(), reserialize(actualContents()));
   }
 }

@@ -21,18 +21,18 @@ import static jdk.m3.collections.guava.io.TestOption.CLOSE_THROWS;
 import static jdk.m3.collections.guava.io.TestOption.OPEN_THROWS;
 import static jdk.m3.collections.guava.io.TestOption.READ_THROWS;
 import static jdk.m3.collections.guava.io.TestOption.WRITE_THROWS;
-import static com.google.common.truth.Truth.assertThat;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
 import static org.junit.Assert.assertThrows;
 
 import jdk.m3.collections.guava.collect.ImmutableList;
 import jdk.m3.collections.guava.collect.ImmutableSet;
 import jdk.m3.collections.guava.collect.Iterables;
-import jdk.m3.collections.guava.collect.Lists;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.Reader;
 import java.io.StringWriter;
 import java.io.Writer;
+import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.List;
 import java.util.stream.Stream;
@@ -72,7 +72,7 @@ public class CharSourceTest extends IoTestCase {
   private TestCharSource source;
 
   @Override
-  public void setUp() {
+  protected void setUp() {
     source = new TestCharSource(STRING);
   }
 
@@ -91,7 +91,7 @@ public class CharSourceTest extends IoTestCase {
     writer.close();
 
     assertTrue(source.wasStreamClosed());
-    assertEquals(STRING, writer.toString());
+    assertThat(writer.toString()).isEqualTo(STRING);
   }
 
   public void testLines() throws IOException {
@@ -115,7 +115,7 @@ public class CharSourceTest extends IoTestCase {
     assertEquals(STRING.length(), source.copyTo(builder));
     assertTrue(source.wasStreamOpened() && source.wasStreamClosed());
 
-    assertEquals(STRING, builder.toString());
+    assertThat(builder.toString()).isEqualTo(STRING);
   }
 
   public void testCopyTo_charSink() throws IOException {
@@ -127,17 +127,17 @@ public class CharSourceTest extends IoTestCase {
     assertTrue(source.wasStreamOpened() && source.wasStreamClosed());
     assertTrue(sink.wasStreamOpened() && sink.wasStreamClosed());
 
-    assertEquals(STRING, sink.getString());
+    assertThat(sink.getString()).isEqualTo(STRING);
   }
 
   public void testRead_toString() throws IOException {
-    assertEquals(STRING, source.read());
+    assertThat(source.read()).isEqualTo(STRING);
     assertTrue(source.wasStreamOpened() && source.wasStreamClosed());
   }
 
   public void testReadFirstLine() throws IOException {
     TestCharSource lines = new TestCharSource(LINES);
-    assertEquals("foo", lines.readFirstLine());
+    assertThat(lines.readFirstLine()).isEqualTo("foo");
     assertTrue(lines.wasStreamOpened() && lines.wasStreamClosed());
   }
 
@@ -152,10 +152,10 @@ public class CharSourceTest extends IoTestCase {
     List<String> list =
         lines.readLines(
             new LineProcessor<List<String>>() {
-              List<String> list = Lists.newArrayList();
+              final List<String> list = new ArrayList<>();
 
               @Override
-              public boolean processLine(String line) throws IOException {
+              public boolean processLine(String line) {
                 list.add(line);
                 return true;
               }
@@ -174,10 +174,10 @@ public class CharSourceTest extends IoTestCase {
     List<String> list =
         lines.readLines(
             new LineProcessor<List<String>>() {
-              List<String> list = Lists.newArrayList();
+              final List<String> list = new ArrayList<>();
 
               @Override
-              public boolean processLine(String line) throws IOException {
+              public boolean processLine(String line) {
                 list.add(line);
                 return false;
               }
@@ -240,9 +240,10 @@ public class CharSourceTest extends IoTestCase {
 
     String expected = "abcde";
 
-    assertEquals(expected, CharSource.concat(ImmutableList.of(c1, c2, c3)).read());
-    assertEquals(expected, CharSource.concat(c1, c2, c3).read());
-    assertEquals(expected, CharSource.concat(ImmutableList.of(c1, c2, c3).iterator()).read());
+    assertThat(CharSource.concat(ImmutableList.of(c1, c2, c3)).read()).isEqualTo(expected);
+    assertThat(CharSource.concat(c1, c2, c3).read()).isEqualTo(expected);
+    assertThat(CharSource.concat(ImmutableList.of(c1, c2, c3).iterator()).read())
+        .isEqualTo(expected);
     assertFalse(CharSource.concat(c1, c2, c3).isEmpty());
 
     CharSource emptyConcat = CharSource.concat(CharSource.empty(), CharSource.empty());
@@ -263,7 +264,7 @@ public class CharSourceTest extends IoTestCase {
     for (int i = 0; i < 8; i++) {
       builder.append((char) reader.read());
     }
-    assertEquals(expected, builder.toString());
+    assertThat(builder.toString()).isEqualTo(expected);
   }
 
   static final CharSource BROKEN_READ_SOURCE = new TestCharSource("ABC", READ_THROWS);
@@ -309,13 +310,8 @@ public class CharSourceTest extends IoTestCase {
    * @return the number of exceptions that were suppressed on the expected thrown exception
    */
   private static int runSuppressionFailureTest(CharSource in, CharSink out) {
-    try {
-      in.copyTo(out);
-      fail();
-    } catch (IOException expected) {
-      return expected.getSuppressed().length;
-    }
-    throw new AssertionError(); // can't happen
+    IOException expected = assertThrows(IOException.class, () -> in.copyTo(out));
+    return expected.getSuppressed().length;
   }
 
   private static CharSource newNormalCharSource() {

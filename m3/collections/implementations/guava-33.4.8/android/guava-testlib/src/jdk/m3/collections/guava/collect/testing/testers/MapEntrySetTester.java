@@ -20,13 +20,14 @@ import static jdk.m3.collections.guava.collect.testing.Helpers.getMethod;
 import static jdk.m3.collections.guava.collect.testing.Helpers.mapEntry;
 import static jdk.m3.collections.guava.collect.testing.features.CollectionFeature.SUPPORTS_ITERATOR_REMOVE;
 import static jdk.m3.collections.guava.collect.testing.features.CollectionSize.ONE;
+import static jdk.m3.collections.guava.collect.testing.features.CollectionSize.SEVERAL;
 import static jdk.m3.collections.guava.collect.testing.features.CollectionSize.ZERO;
 import static jdk.m3.collections.guava.collect.testing.features.MapFeature.ALLOWS_NULL_KEYS;
 import static jdk.m3.collections.guava.collect.testing.features.MapFeature.ALLOWS_NULL_KEY_QUERIES;
 import static jdk.m3.collections.guava.collect.testing.features.MapFeature.ALLOWS_NULL_VALUES;
 import static jdk.m3.collections.guava.collect.testing.features.MapFeature.ALLOWS_NULL_VALUE_QUERIES;
 import static jdk.m3.collections.guava.collect.testing.features.MapFeature.SUPPORTS_PUT;
-import static jdk.m3.collections.guava.collect.testing.testers.ReflectionFreeAssertThrows.assertThrows;
+import static org.junit.Assert.assertThrows;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
@@ -39,7 +40,6 @@ import java.lang.reflect.Method;
 import java.util.Iterator;
 import java.util.Map.Entry;
 import java.util.Set;
-import org.junit.Ignore;
 
 /**
  * Tests {@link java.util.Map#entrySet}.
@@ -49,9 +49,6 @@ import org.junit.Ignore;
  * @param <V> The value type of the map implementation under test.
  */
 @GwtCompatible
-@Ignore("test runners must not instantiate and run this directly, only via suites we build")
-// @Ignore affects the Android test runner, which respects JUnit 4 annotations on JUnit 3 tests.
-@SuppressWarnings("JUnit4ClassUsedInJUnit3")
 public class MapEntrySetTester<K, V> extends AbstractMapTester<K, V> {
   private enum IncomparableType {
     INSTANCE;
@@ -59,13 +56,37 @@ public class MapEntrySetTester<K, V> extends AbstractMapTester<K, V> {
 
   @CollectionSize.Require(ONE)
   @CollectionFeature.Require(SUPPORTS_ITERATOR_REMOVE)
-  public void testEntrySetIteratorRemove() {
+  public void testIteratorRemoveOnly() {
     Set<Entry<K, V>> entrySet = getMap().entrySet();
     Iterator<Entry<K, V>> entryItr = entrySet.iterator();
     assertEquals(e0(), entryItr.next());
     entryItr.remove();
     assertTrue(getMap().isEmpty());
     assertFalse(entrySet.contains(e0()));
+  }
+
+  @CollectionSize.Require(SEVERAL)
+  @CollectionFeature.Require(SUPPORTS_ITERATOR_REMOVE)
+  public void testIteratorRemoveMultiple() {
+    Iterator<Entry<K, V>> entryItr = getMap().entrySet().iterator();
+    while (entryItr.hasNext()) {
+      entryItr.next();
+      entryItr.remove();
+    }
+    assertTrue(getMap().isEmpty());
+  }
+
+  @CollectionSize.Require(absent = ZERO)
+  @CollectionFeature.Require(SUPPORTS_ITERATOR_REMOVE)
+  @MapFeature.Require(SUPPORTS_PUT)
+  public void testIteratorSetValueAndRemove() {
+    Iterator<Entry<K, V>> entryItr = getMap().entrySet().iterator();
+    while (entryItr.hasNext()) {
+      Entry<K, V> entry = entryItr.next();
+      entry.setValue(e3().getValue());
+      entryItr.remove();
+    }
+    assertTrue(getMap().isEmpty());
   }
 
   public void testContainsEntryWithIncomparableKey() {
@@ -129,7 +150,7 @@ public class MapEntrySetTester<K, V> extends AbstractMapTester<K, V> {
         break;
       }
     }
-    expectReplacement(entry(k0(), (V) null));
+    expectReplacement(entry(k0(), null));
   }
 
   @MapFeature.Require(value = SUPPORTS_PUT, absent = ALLOWS_NULL_VALUES)
@@ -170,5 +191,11 @@ public class MapEntrySetTester<K, V> extends AbstractMapTester<K, V> {
   @GwtIncompatible // reflection
   public static Method getSetValueWithNullValuesAbsentMethod() {
     return getMethod(MapEntrySetTester.class, "testSetValueWithNullValuesAbsent");
+  }
+
+  @J2ktIncompatible
+  @GwtIncompatible // reflection
+  public static Method getIteratorSetValueAndRemove() {
+    return getMethod(MapEntrySetTester.class, "testIteratorSetValueAndRemove");
   }
 }

@@ -16,7 +16,7 @@
 
 package jdk.m3.collections.guava.collect;
 
-import static com.google.common.truth.Truth.assertWithMessage;
+import static jdk.m3.collections.guava.truth.Truth.assertWithMessage;
 import static java.lang.reflect.Modifier.PRIVATE;
 import static java.lang.reflect.Modifier.PROTECTED;
 import static java.lang.reflect.Modifier.PUBLIC;
@@ -64,14 +64,11 @@ public class WriteReplaceOverridesTest extends TestCase {
       if (!GUAVA_PACKAGES.contains(info.getPackageName())) {
         continue;
       }
-      if (info.getName().endsWith("GwtSerializationDependencies")) {
-        continue; // These classes exist only for the GWT compiler, not to be used.
-      }
       if (
       /*
        * At least one of the classes nested inside TypeResolverTest triggers a bug under older JDKs:
        * https://bugs.openjdk.org/browse/JDK-8215328 -> https://bugs.openjdk.org/browse/JDK-8215470
-       * https://github.com/google/guava/blob/4f12c5891a7adedbaa1d99fc9f77d8cc4e9da206/guava-tests/test/com/google/common/reflect/TypeResolverTest.java#L201
+       * https://github.com/google/guava/blob/4f12c5891a7adedbaa1d99fc9f77d8cc4e9da206/guava-tests/test/jdk/m3/collections/guava/reflect/TypeResolverTest.java#L201
        */
       info.getName().contains("TypeResolverTest")
           /*
@@ -106,12 +103,11 @@ public class WriteReplaceOverridesTest extends TestCase {
           FluentIterable.from(TypeToken.of(clazz).getTypes())
               .transform(TypeToken::getRawType)
               .transformAndConcat(c -> asList(c.getDeclaredMethods()))
-              .firstMatch(
-                  m ->
-                      m.getName().equals("writeReplace")
-                          && m.getParameterTypes().length == 0
-                          // Only package-private methods are a problem.
-                          && (m.getModifiers() & (PUBLIC | PROTECTED | PRIVATE)) == 0)
+              .firstMatch(m ->
+                  m.getName().equals("writeReplace")
+                      && m.getParameterTypes().length == 0
+                      // Only package-private methods are a problem.
+                      && (m.getModifiers() & (PUBLIC | PROTECTED | PRIVATE)) == 0)
               .transform(Method::getDeclaringClass);
       if (!supersWithPackagePrivateWriteReplace.isPresent()) {
         continue;

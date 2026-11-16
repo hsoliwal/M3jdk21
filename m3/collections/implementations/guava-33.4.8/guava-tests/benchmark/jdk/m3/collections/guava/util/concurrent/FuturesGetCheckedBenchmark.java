@@ -17,7 +17,6 @@
 package jdk.m3.collections.guava.util.concurrent;
 
 import static jdk.m3.collections.guava.base.Preconditions.checkArgument;
-import static jdk.m3.collections.guava.collect.Lists.newArrayList;
 import static jdk.m3.collections.guava.util.concurrent.Futures.immediateFailedFuture;
 import static jdk.m3.collections.guava.util.concurrent.Futures.immediateFuture;
 import static jdk.m3.collections.guava.util.concurrent.FuturesGetChecked.checkExceptionClassValidity;
@@ -35,6 +34,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.security.GeneralSecurityException;
 import java.security.KeyException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.TooManyListenersException;
 import java.util.concurrent.BrokenBarrierException;
@@ -115,7 +115,7 @@ public class FuturesGetCheckedBenchmark {
   @Param({"0", "1", "12"})
   int otherEntriesInDataStructure;
 
-  final List<ClassValue<?>> retainedReferencesToOtherClassValues = newArrayList();
+  final List<ClassValue<?>> retainedReferencesToOtherClassValues = new ArrayList<>();
 
   @BeforeExperiment
   void addOtherEntries() throws Exception {

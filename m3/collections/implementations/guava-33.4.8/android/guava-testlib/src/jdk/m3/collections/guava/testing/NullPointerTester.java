@@ -25,12 +25,9 @@ import static java.util.stream.Stream.concat;
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
 import jdk.m3.collections.guava.annotations.J2ktIncompatible;
 import jdk.m3.collections.guava.base.Converter;
-import jdk.m3.collections.guava.base.Objects;
 import jdk.m3.collections.guava.collect.ClassToInstanceMap;
 import jdk.m3.collections.guava.collect.ImmutableList;
 import jdk.m3.collections.guava.collect.ImmutableSet;
-import jdk.m3.collections.guava.collect.Lists;
-import jdk.m3.collections.guava.collect.Maps;
 import jdk.m3.collections.guava.collect.MutableClassToInstanceMap;
 import jdk.m3.collections.guava.reflect.Invokable;
 import jdk.m3.collections.guava.reflect.Parameter;
@@ -46,9 +43,12 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
-import java.util.concurrent.ConcurrentMap;
+import java.util.Map;
+import java.util.Objects;
 import junit.framework.Assert;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
@@ -76,7 +76,7 @@ import org.jspecify.annotations.Nullable;
 public final class NullPointerTester {
 
   private final ClassToInstanceMap<Object> defaults = MutableClassToInstanceMap.create();
-  private final List<Member> ignoredMembers = Lists.newArrayList();
+  private final List<Member> ignoredMembers = new ArrayList<>();
 
   private ExceptionTypePolicy policy = ExceptionTypePolicy.NPE_OR_UOE;
 
@@ -85,6 +85,7 @@ public final class NullPointerTester {
    * NullPointerTester. But if you are a user who is reading this because this change caused you
    * trouble, please let us know: https://github.com/google/guava/issues/new
    */
+  /** Constructs a new {@code NullPointerTester}. */
   @IgnoreJRERequirement
   public NullPointerTester() {
     try {
@@ -113,12 +114,12 @@ public final class NullPointerTester {
     concat(
             stream(AbstractFuture.class.getDeclaredMethods()),
             stream(requireNonNull(AbstractFuture.class.getSuperclass()).getDeclaredMethods()))
-        .filter(
-            m ->
-                m.getName().equals("getDoneValue")
-                    || m.getName().equals("casValue")
-                    || m.getName().equals("casListeners")
-                    || m.getName().equals("gasListeners"))
+        .filter(m ->
+            m.getName().equals("getDoneValue")
+                || m.getName().equals("getKnownSuccessfulDoneValue")
+                || m.getName().equals("casValue")
+                || m.getName().equals("casListeners")
+                || m.getName().equals("gasListeners"))
         .forEach(ignoredMembers::add);
   }
 
@@ -302,7 +303,7 @@ public final class NullPointerTester {
       return isVisible(member.getModifiers());
     }
 
-    final Iterable<Method> getStaticMethods(Class<?> cls) {
+    final ImmutableList<Method> getStaticMethods(Class<?> cls) {
       ImmutableList.Builder<Method> builder = ImmutableList.builder();
       for (Method method : getVisibleMethods(cls)) {
         if (Invokable.from(method).isStatic()) {
@@ -312,8 +313,10 @@ public final class NullPointerTester {
       return builder.build();
     }
 
+    // TODO(cpovirk): Disable Animal Sniffer entirely for guava-testlib?
+    @IgnoreJRERequirement // see comment on other @IgnoreJRERequirement annotation above
     final Iterable<Method> getInstanceMethods(Class<?> cls) {
-      ConcurrentMap<Signature, Method> map = Maps.newConcurrentMap();
+      Map<Signature, Method> map = new HashMap<>();
       for (Method method : getVisibleMethods(cls)) {
         if (!Invokable.from(method).isStatic()) {
           map.putIfAbsent(new Signature(method), method);
@@ -365,7 +368,7 @@ public final class NullPointerTester {
 
     @Override
     public int hashCode() {
-      return Objects.hashCode(name, parameterTypes);
+      return Objects.hash(name, parameterTypes);
     }
   }
 
@@ -381,7 +384,11 @@ public final class NullPointerTester {
       @Nullable Object instance, Invokable<?, ?> invokable, int paramIndex, Class<?> testedClass) {
     /*
      * jdk.m3.collections.guava is starting to rely on type-use annotations, which aren't visible under
-     * Android VMs and in open-source guava-android. So we skip testing there.
+     * Android VMs. So we skip testing there.
+     *
+     * The approach that we're using here also has the effect of skipping testing in the open-source
+     * repo for guava-android, even though those tests run under the JVM. That's not the behavior
+     * that we'd pick in a vacuum, but it's fine when the tests still run internally.
      */
     if (Reflection.getPackageName(testedClass).startsWith("jdk.m3.collections.guava")) {
       return;
@@ -493,7 +500,7 @@ public final class NullPointerTester {
         return doConvert(convertFromType);
       }
 
-      private /*static*/ <S> S doConvert(TypeToken<S> type) {
+      /*static*/ <S> S doConvert(TypeToken<S> type) {
         return checkNotNull(getDefaultValue(type));
       }
     };
@@ -549,7 +556,29 @@ public final class NullPointerTester {
   }
 
   private boolean isIgnored(Member member) {
-    return member.isSynthetic() || ignoredMembers.contains(member) || isEquals(member);
+    return member.isSynthetic()
+        || ignoredMembers.contains(member)
+        || isEquals(member)
+        /*
+         * We can assume that Kotlin code is performing the null checks that we want, since kotlinc
+         * inserts checks automatically for non-private functions (which are the only kind that we
+         * check).
+         *
+         * We *would* just check such functions redundantly, but kotlinc emits its nullness
+         * annotations in the form of JetBrains annotations, which have only class retention and
+         * thus are invisible at runtime. Thus, we conclude that the parameter types are
+         * *non*-nullable, even when they are declared as `Foo?`.
+         */
+        || hasAutomaticNullChecksFromKotlin(member);
+  }
+
+  private static boolean hasAutomaticNullChecksFromKotlin(Member member) {
+    for (Annotation annotation : member.getDeclaringClass().getAnnotations()) {
+      if (annotation.annotationType().getName().equals("kotlin.Metadata")) {
+        return true;
+      }
+    }
+    return false;
   }
 
   /**
@@ -569,7 +598,7 @@ public final class NullPointerTester {
       return false;
     }
     Method method = (Method) member;
-    if (!method.getName().contentEquals("equals")) {
+    if (!method.getName().equals("equals")) {
       return false;
     }
     Class<?>[] parameters = method.getParameterTypes();
@@ -590,7 +619,7 @@ public final class NullPointerTester {
      */
     NPE_OR_UOE() {
       @Override
-      public boolean isExpectedType(Throwable cause) {
+      boolean isExpectedType(Throwable cause) {
         return cause instanceof NullPointerException
             || cause instanceof UnsupportedOperationException;
       }
@@ -602,14 +631,14 @@ public final class NullPointerTester {
      */
     NPE_IAE_OR_UOE() {
       @Override
-      public boolean isExpectedType(Throwable cause) {
+      boolean isExpectedType(Throwable cause) {
         return cause instanceof NullPointerException
             || cause instanceof IllegalArgumentException
             || cause instanceof UnsupportedOperationException;
       }
     };
 
-    public abstract boolean isExpectedType(Throwable cause);
+    abstract boolean isExpectedType(Throwable cause);
   }
 
   private static boolean annotatedTypeExists() {
@@ -638,7 +667,6 @@ public final class NullPointerTester {
    * don't know that anyone uses it there, anyway.
    */
   private enum NullnessAnnotationReader {
-    @SuppressWarnings("Java7ApiChecker")
     FROM_DECLARATION_AND_TYPE_USE_ANNOTATIONS {
       @Override
       boolean isNullable(Invokable<?, ?> invokable) {

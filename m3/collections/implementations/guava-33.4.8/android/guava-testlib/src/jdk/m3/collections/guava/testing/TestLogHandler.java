@@ -16,10 +16,11 @@
 
 package jdk.m3.collections.guava.testing;
 
+import static java.util.Collections.unmodifiableList;
+
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import com.google.errorprone.annotations.concurrent.GuardedBy;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.logging.Handler;
 import java.util.logging.LogRecord;
@@ -78,6 +79,7 @@ public class TestLogHandler extends Handler {
   @Override
   public void close() {}
 
+  /** Clears all stored log records. */
   public void clear() {
     synchronized (lock) {
       list.clear();
@@ -95,7 +97,7 @@ public class TestLogHandler extends Handler {
   public List<LogRecord> getStoredLogRecords() {
     synchronized (lock) {
       List<LogRecord> result = new ArrayList<>(list);
-      return Collections.unmodifiableList(result);
+      return unmodifiableList(result);
     }
   }
 }

@@ -124,7 +124,7 @@ public enum CaseFormat {
   /**
    * Converts the specified {@code String str} from this format to the specified {@code format}. A
    * "best effort" approach is taken; if {@code str} does not conform to the assumed format, then
-   * the behavior of this method is undefined but we make a reasonable effort at converting anyway.
+   * the behavior of this method is undefined, but we make a reasonable effort at converting anyway.
    */
   public final String to(CaseFormat format, String str) {
     checkNotNull(format);
@@ -186,9 +186,9 @@ public enum CaseFormat {
     }
 
     @Override
-    public boolean equals(@Nullable Object object) {
-      if (object instanceof StringConverter) {
-        StringConverter that = (StringConverter) object;
+    public boolean equals(@Nullable Object obj) {
+      if (obj instanceof StringConverter) {
+        StringConverter that = (StringConverter) obj;
         return sourceFormat.equals(that.sourceFormat) && targetFormat.equals(that.targetFormat);
       }
       return false;
@@ -196,7 +196,7 @@ public enum CaseFormat {
 
     @Override
     public int hashCode() {
-      return sourceFormat.hashCode() ^ targetFormat.hashCode();
+      return 3 * sourceFormat.hashCode() + targetFormat.hashCode();
     }
 
     @Override

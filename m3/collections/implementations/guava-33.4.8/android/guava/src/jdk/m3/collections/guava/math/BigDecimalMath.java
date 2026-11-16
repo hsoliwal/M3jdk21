@@ -14,9 +14,14 @@
 
 package jdk.m3.collections.guava.math;
 
+import static jdk.m3.collections.guava.base.Preconditions.checkNotNull;
+import static jdk.m3.collections.guava.math.MathPreconditions.checkNonNegative;
+
+import jdk.m3.collections.guava.annotations.Beta;
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
 import jdk.m3.collections.guava.annotations.J2ktIncompatible;
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.math.RoundingMode;
 
 /**
@@ -27,8 +32,97 @@ import java.math.RoundingMode;
  */
 @J2ktIncompatible
 @GwtIncompatible
-public class BigDecimalMath {
+public final class BigDecimalMath {
   private BigDecimalMath() {}
+
+  /**
+   * Returns {@code x} converted to a {@link BigInteger}, ensuring that the magnitude of {@code x}
+   * does not exceed {@code maxIntegerDigits} before performing conversion.
+   *
+   * <p>Converting a {@link BigDecimal} with a very large negative scale to a {@code BigInteger}
+   * requires materializing the unscaled value multiplied by {@code 10^-scale}. When {@code x} is
+   * parsed from uncontrolled string or JSON inputs (such as {@code "1e123456789"}), directly
+   * calling {@link BigDecimal#toBigInteger()} or {@link BigDecimal#toBigIntegerExact()} can exhaust
+   * CPU and memory. This method safely verifies that the number of decimal digits required for the
+   * integer representation fits within {@code maxIntegerDigits} before conversion.
+   *
+   * <p>Choosing a reasonable value for {@code maxIntegerDigits} depends on the range of expected
+   * valid values for your input. A value of 100 is generally sufficient for most common use cases
+   * and provides a large safety margin against resource exhaustion from malicious inputs.
+   *
+   * @param x the {@code BigDecimal} to convert to a {@code BigInteger}
+   * @param maxIntegerDigits the maximum allowable number of digits in the integer part (for values
+   *     where {@code |x| < 1}, the integer part is considered to have 0 digits)
+   * @return {@code x} converted to a {@code BigInteger}
+   * @throws IllegalArgumentException if {@code maxIntegerDigits < 0}
+   * @throws ArithmeticException if the integer part of {@code x} requires more than {@code
+   *     maxIntegerDigits} digits
+   * @since 33.7.0
+   */
+  @Beta
+  public static BigInteger toBigInteger(BigDecimal x, int maxIntegerDigits) {
+    checkNotNull(x);
+    checkNonNegative("maxIntegerDigits", maxIntegerDigits);
+    // If x is 0 or |x| < 1 (i.e. precision <= scale), the integer part is BigInteger.ZERO.
+    if (x.signum() == 0 || x.precision() <= x.scale()) {
+      return BigInteger.ZERO;
+    }
+    checkMaxIntegerDigits(x, maxIntegerDigits);
+    return x.toBigInteger();
+  }
+
+  /**
+   * Returns {@code x} converted to a {@link BigInteger}, checking that {@code x} has no fractional
+   * part and ensuring that the magnitude of {@code x} does not exceed {@code maxIntegerDigits}
+   * before performing conversion.
+   *
+   * <p>Converting a {@link BigDecimal} with a very large negative scale to a {@code BigInteger}
+   * requires materializing the unscaled value multiplied by {@code 10^-scale}. When {@code x} is
+   * parsed from uncontrolled string or JSON inputs (such as {@code "1e123456789"}), directly
+   * calling {@link BigDecimal#toBigInteger()} or {@link BigDecimal#toBigIntegerExact()} can exhaust
+   * CPU and memory. This method safely verifies that the number of decimal digits required for the
+   * integer representation fits within {@code maxIntegerDigits} before conversion.
+   *
+   * <p>Choosing a reasonable value for {@code maxIntegerDigits} depends on the range of expected
+   * valid values for your input. A value of 100 is generally sufficient for most common use cases
+   * and provides a large safety margin against resource exhaustion from malicious inputs.
+   *
+   * @param x the {@code BigDecimal} to convert to a {@code BigInteger}
+   * @param maxIntegerDigits the maximum allowable number of digits in the integer part (for values
+   *     where {@code |x| < 1}, the integer part is considered to have 0 digits)
+   * @return {@code x} converted to a {@code BigInteger}
+   * @throws IllegalArgumentException if {@code maxIntegerDigits < 0}
+   * @throws ArithmeticException if {@code x} has a nonzero fractional part or if the integer part
+   *     of {@code x} requires more than {@code maxIntegerDigits} digits
+   * @since 33.7.0
+   */
+  @Beta
+  public static BigInteger toBigIntegerExact(BigDecimal x, int maxIntegerDigits) {
+    checkNotNull(x);
+    checkNonNegative("maxIntegerDigits", maxIntegerDigits);
+    // If x is 0, regardless of scale, the integer value is BigInteger.ZERO.
+    if (x.signum() == 0) {
+      return BigInteger.ZERO;
+    }
+    // If |x| < 1 (i.e. precision <= scale) and x != 0, x has a nonzero fractional part and cannot
+    // be represented exactly as a BigInteger.
+    if (x.precision() <= x.scale()) {
+      throw new ArithmeticException(
+          x + " has a nonzero fractional part and cannot be represented exactly as a BigInteger.");
+    }
+    checkMaxIntegerDigits(x, maxIntegerDigits);
+    return x.toBigIntegerExact();
+  }
+
+  private static void checkMaxIntegerDigits(BigDecimal x, int maxIntegerDigits) {
+    long integerDigits = (long) x.precision() - x.scale();
+    if (integerDigits > maxIntegerDigits) {
+      throw new ArithmeticException(
+          String.format(
+              "BigDecimal (%s) requires %s integer digits, which is > maxIntegerDigits (%s)",
+              x, integerDigits, maxIntegerDigits));
+    }
+  }
 
   /**
    * Returns {@code x}, rounded to a {@code double} with the specified rounding mode. If {@code x}
@@ -55,7 +149,7 @@ public class BigDecimalMath {
     return BigDecimalToDoubleRounder.INSTANCE.roundToDouble(x, mode);
   }
 
-  private static class BigDecimalToDoubleRounder extends ToDoubleRounder<BigDecimal> {
+  private static final class BigDecimalToDoubleRounder extends ToDoubleRounder<BigDecimal> {
     static final BigDecimalToDoubleRounder INSTANCE = new BigDecimalToDoubleRounder();
 
     private BigDecimalToDoubleRounder() {}

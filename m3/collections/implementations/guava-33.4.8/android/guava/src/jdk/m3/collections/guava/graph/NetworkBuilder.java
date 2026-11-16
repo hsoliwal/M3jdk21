@@ -19,9 +19,8 @@ package jdk.m3.collections.guava.graph;
 import static jdk.m3.collections.guava.base.Preconditions.checkNotNull;
 import static jdk.m3.collections.guava.graph.Graphs.checkNonNegative;
 
-import jdk.m3.collections.guava.annotations.Beta;
-import jdk.m3.collections.guava.base.Optional;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
+import org.jspecify.annotations.Nullable;
 
 /**
  * A builder for constructing instances of {@link MutableNetwork} or {@link ImmutableNetwork} with
@@ -51,7 +50,7 @@ import com.google.errorprone.annotations.CanIgnoreReturnValue;
  * flightNetwork.addEdge("LAX", "ATL", 1598);
  * flightNetwork.addEdge("ATL", "LAX", 2450);
  *
- * // Building a immutable network
+ * // Building an immutable network
  * ImmutableNetwork<String, Integer> immutableNetwork =
  *     NetworkBuilder.directed()
  *         .allowsParallelEdges(true)
@@ -72,11 +71,10 @@ import com.google.errorprone.annotations.CanIgnoreReturnValue;
  *     constructed based on an existing {@code Network} using {@link #from(Network)}.
  * @since 20.0
  */
-@Beta
 public final class NetworkBuilder<N, E> extends AbstractGraphBuilder<N> {
   boolean allowsParallelEdges = false;
   ElementOrder<? super E> edgeOrder = ElementOrder.insertion();
-  Optional<Integer> expectedEdgeCount = Optional.absent();
+  @Nullable Integer expectedEdgeCount = null;
 
   /** Creates a new instance with the specified edge directionality. */
   private NetworkBuilder(boolean directed) {
@@ -153,7 +151,7 @@ public final class NetworkBuilder<N, E> extends AbstractGraphBuilder<N> {
    */
   @CanIgnoreReturnValue
   public NetworkBuilder<N, E> expectedNodeCount(int expectedNodeCount) {
-    this.expectedNodeCount = Optional.of(checkNonNegative(expectedNodeCount));
+    this.expectedNodeCount = checkNonNegative(expectedNodeCount);
     return this;
   }
 
@@ -164,7 +162,7 @@ public final class NetworkBuilder<N, E> extends AbstractGraphBuilder<N> {
    */
   @CanIgnoreReturnValue
   public NetworkBuilder<N, E> expectedEdgeCount(int expectedEdgeCount) {
-    this.expectedEdgeCount = Optional.of(checkNonNegative(expectedEdgeCount));
+    this.expectedEdgeCount = checkNonNegative(expectedEdgeCount);
     return this;
   }
 

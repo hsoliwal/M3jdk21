@@ -17,14 +17,13 @@
 package jdk.m3.collections.guava.collect.testing.testers;
 
 import static jdk.m3.collections.guava.collect.testing.features.CollectionFeature.SERIALIZABLE;
+import static jdk.m3.collections.guava.testing.SerializableTester.reserialize;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.collect.testing.AbstractMapTester;
 import jdk.m3.collections.guava.collect.testing.features.CollectionFeature;
 import jdk.m3.collections.guava.testing.EqualsTester;
-import jdk.m3.collections.guava.testing.SerializableTester;
 import java.util.Map;
-import org.junit.Ignore;
 
 /**
  * Basic serialization test for maps.
@@ -32,13 +31,10 @@ import org.junit.Ignore;
  * @author Louis Wasserman
  */
 @GwtCompatible
-@Ignore("test runners must not instantiate and run this directly, only via suites we build")
-// @Ignore affects the Android test runner, which respects JUnit 4 annotations on JUnit 3 tests.
-@SuppressWarnings("JUnit4ClassUsedInJUnit3")
 public class MapSerializationTester<K, V> extends AbstractMapTester<K, V> {
   @CollectionFeature.Require(SERIALIZABLE)
   public void testReserializeMap() {
-    Map<K, V> deserialized = SerializableTester.reserialize(getMap());
+    Map<K, V> deserialized = reserialize(getMap());
     new EqualsTester().addEqualityGroup(getMap(), deserialized).testEquals();
   }
 }

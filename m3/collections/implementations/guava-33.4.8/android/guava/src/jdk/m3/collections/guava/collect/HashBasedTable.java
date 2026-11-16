@@ -17,6 +17,7 @@
 package jdk.m3.collections.guava.collect;
 
 import static jdk.m3.collections.guava.collect.CollectPreconditions.checkNonnegative;
+import static jdk.m3.collections.guava.collect.Maps.newLinkedHashMapWithExpectedSize;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
@@ -48,9 +49,9 @@ import java.util.Map;
  * @author Jared Levy
  * @since 7.0
  */
-@GwtCompatible(serializable = true)
-public class HashBasedTable<R, C, V> extends StandardTable<R, C, V> {
-  private static class Factory<C, V> implements Supplier<Map<C, V>>, Serializable {
+@GwtCompatible
+public final class HashBasedTable<R, C, V> extends StandardTable<R, C, V> {
+  private static final class Factory<C, V> implements Supplier<Map<C, V>>, Serializable {
     final int expectedSize;
 
     Factory(int expectedSize) {
@@ -59,7 +60,7 @@ public class HashBasedTable<R, C, V> extends StandardTable<R, C, V> {
 
     @Override
     public Map<C, V> get() {
-      return Maps.newLinkedHashMapWithExpectedSize(expectedSize);
+      return newLinkedHashMapWithExpectedSize(expectedSize);
     }
 
     @GwtIncompatible @J2ktIncompatible private static final long serialVersionUID = 0;
@@ -81,8 +82,8 @@ public class HashBasedTable<R, C, V> extends StandardTable<R, C, V> {
   public static <R, C, V> HashBasedTable<R, C, V> create(
       int expectedRows, int expectedCellsPerRow) {
     checkNonnegative(expectedCellsPerRow, "expectedCellsPerRow");
-    Map<R, Map<C, V>> backingMap = Maps.newLinkedHashMapWithExpectedSize(expectedRows);
-    return new HashBasedTable<>(backingMap, new Factory<C, V>(expectedCellsPerRow));
+    Map<R, Map<C, V>> backingMap = newLinkedHashMapWithExpectedSize(expectedRows);
+    return new HashBasedTable<>(backingMap, new Factory<>(expectedCellsPerRow));
   }
 
   /**
@@ -99,7 +100,7 @@ public class HashBasedTable<R, C, V> extends StandardTable<R, C, V> {
     return result;
   }
 
-  HashBasedTable(Map<R, Map<C, V>> backingMap, Factory<C, V> factory) {
+  private HashBasedTable(Map<R, Map<C, V>> backingMap, Factory<C, V> factory) {
     super(backingMap, factory);
   }
 

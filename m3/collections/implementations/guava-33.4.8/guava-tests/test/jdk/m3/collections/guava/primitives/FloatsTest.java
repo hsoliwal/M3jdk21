@@ -16,24 +16,27 @@
 
 package jdk.m3.collections.guava.primitives;
 
+import static jdk.m3.collections.guava.collect.testing.Helpers.misleadingSizeCollection;
+import static jdk.m3.collections.guava.collect.testing.Helpers.testComparator;
 import static jdk.m3.collections.guava.primitives.Floats.max;
 import static jdk.m3.collections.guava.primitives.Floats.min;
-import static jdk.m3.collections.guava.primitives.ReflectionFreeAssertThrows.assertThrows;
-import static com.google.common.truth.Truth.assertThat;
-import static com.google.common.truth.Truth.assertWithMessage;
+import static jdk.m3.collections.guava.testing.SerializableTester.reserialize;
+import static jdk.m3.collections.guava.testing.SerializableTester.reserializeAndAssert;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
+import static jdk.m3.collections.guava.truth.Truth.assertWithMessage;
 import static java.lang.Float.NaN;
+import static java.util.Arrays.asList;
+import static java.util.Collections.emptyList;
+import static org.junit.Assert.assertThrows;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
 import jdk.m3.collections.guava.annotations.J2ktIncompatible;
 import jdk.m3.collections.guava.base.Converter;
 import jdk.m3.collections.guava.collect.ImmutableList;
-import jdk.m3.collections.guava.collect.testing.Helpers;
 import jdk.m3.collections.guava.testing.NullPointerTester;
-import jdk.m3.collections.guava.testing.SerializableTester;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import junit.framework.TestCase;
@@ -46,7 +49,7 @@ import org.jspecify.annotations.Nullable;
  * @author Kevin Bourrillion
  */
 @NullMarked
-@GwtCompatible(emulated = true)
+@GwtCompatible
 public class FloatsTest extends TestCase {
   private static final float[] EMPTY = {};
   private static final float[] ARRAY1 = {1.0f};
@@ -67,8 +70,8 @@ public class FloatsTest extends TestCase {
         GREATEST,
         Float.MIN_NORMAL,
         -Float.MIN_NORMAL,
-        Float.MIN_VALUE,
-        -Float.MIN_VALUE,
+        Floats.MIN_POSITIVE_VALUE,
+        -Floats.MIN_POSITIVE_VALUE,
         Integer.MIN_VALUE,
         Integer.MAX_VALUE,
         Long.MIN_VALUE,
@@ -77,16 +80,25 @@ public class FloatsTest extends TestCase {
 
   private static final float[] VALUES = Floats.concat(NUMBERS, new float[] {NaN});
 
+  @GwtIncompatible
+  // We want to test that we've defined the constant with the correct value.
+  @SuppressWarnings("TruthConstantAsserts")
+  public void testMinPositive() {
+    assertThat(Floats.MIN_POSITIVE_VALUE).isEqualTo(Math.nextUp(0.0f));
+  }
+
+  // We need to test that our method behaves like the JDK method.
+  @SuppressWarnings("InlineMeInliner")
   public void testHashCode() {
     for (float value : VALUES) {
       assertThat(Floats.hashCode(value)).isEqualTo(Float.hashCode(value));
     }
   }
 
+  @SuppressWarnings("InlineMeInliner") // We need to test our method.
   public void testIsFinite() {
     for (float value : NUMBERS) {
-      assertThat(Floats.isFinite(value))
-          .isEqualTo(!(Float.isInfinite(value) || Float.isNaN(value)));
+      assertThat(Floats.isFinite(value)).isEqualTo(Float.isFinite(value));
     }
   }
 
@@ -96,7 +108,7 @@ public class FloatsTest extends TestCase {
     for (float x : VALUES) {
       for (float y : VALUES) {
         // note: spec requires only that the sign is the same
-        assertWithMessage(x + ", " + y).that(Floats.compare(x, y)).isEqualTo(Float.compare(x, y));
+        assertWithMessage("%s, %s", x, y).that(Floats.compare(x, y)).isEqualTo(Float.compare(x, y));
       }
     }
   }
@@ -111,7 +123,7 @@ public class FloatsTest extends TestCase {
     assertThat(Floats.contains(ARRAY234, 4.0f)).isTrue();
 
     for (float value : NUMBERS) {
-      assertWithMessage("" + value).that(Floats.contains(new float[] {5f, value}, value)).isTrue();
+      assertWithMessage("%s", value).that(Floats.contains(new float[] {5f, value}, value)).isTrue();
     }
     assertThat(Floats.contains(new float[] {5f, NaN}, NaN)).isFalse();
   }
@@ -127,11 +139,38 @@ public class FloatsTest extends TestCase {
     assertThat(Floats.indexOf(new float[] {2.0f, 3.0f, 2.0f, 3.0f}, 3.0f)).isEqualTo(1);
 
     for (float value : NUMBERS) {
-      assertWithMessage("" + value)
+      assertWithMessage("%s", value)
           .that(Floats.indexOf(new float[] {5f, value}, value))
           .isEqualTo(1);
     }
     assertThat(Floats.indexOf(new float[] {5f, NaN}, NaN)).isEqualTo(-1);
+  }
+
+  public void testIndexOfIndexed() {
+    assertThat(Floats.indexOf(EMPTY, 1.0f, 0, 0)).isEqualTo(-1);
+    assertThat(Floats.indexOf(ARRAY1, 2.0f, 0, 1)).isEqualTo(-1);
+    assertThat(Floats.indexOf(ARRAY234, 1.0f, 0, 3)).isEqualTo(-1);
+    assertThat(Floats.indexOf(new float[] {-1.0f}, -1.0f, 0, 1)).isEqualTo(0);
+    assertThat(Floats.indexOf(ARRAY234, 2.0f, 0, 3)).isEqualTo(0);
+    assertThat(Floats.indexOf(ARRAY234, 2.0f, 0, 0)).isEqualTo(-1);
+    assertThat(Floats.indexOf(ARRAY234, 2.0f, 1, 3)).isEqualTo(-1);
+    assertThat(Floats.indexOf(ARRAY234, 3.0f, 1, 2)).isEqualTo(1);
+    assertThat(Floats.indexOf(ARRAY234, 3.0f, 0, 1)).isEqualTo(-1);
+    assertThat(Floats.indexOf(ARRAY234, 4.0f, 2, 3)).isEqualTo(2);
+    assertThat(Floats.indexOf(ARRAY234, 4.0f, 0, 2)).isEqualTo(-1);
+    assertThat(Floats.indexOf(new float[] {2.0f, 3.0f, 2.0f, 3.0f}, 3.0f, 2, 4)).isEqualTo(3);
+    assertThat(Floats.indexOf(new float[] {3.0f, 3.0f, 3.0f, 3.0f}, 3.0f, 1, 3)).isEqualTo(1);
+
+    for (float value : NUMBERS) {
+      assertWithMessage("%s", value)
+          .that(Floats.indexOf(new float[] {5f, value}, value, 1, 2))
+          .isEqualTo(1);
+    }
+    assertThat(Floats.indexOf(new float[] {5f, NaN}, NaN, 0, 2)).isEqualTo(-1);
+
+    assertThrows(IndexOutOfBoundsException.class, () -> Floats.indexOf(ARRAY234, 2.0f, -1, 1));
+    assertThrows(IndexOutOfBoundsException.class, () -> Floats.indexOf(ARRAY234, 2.0f, 0, 4));
+    assertThrows(IndexOutOfBoundsException.class, () -> Floats.indexOf(ARRAY234, 2.0f, 2, 1));
   }
 
   public void testIndexOf_arrayTarget() {
@@ -162,12 +201,86 @@ public class FloatsTest extends TestCase {
         .isEqualTo(-1);
 
     for (float value : NUMBERS) {
-      assertWithMessage("" + value)
+      assertWithMessage("%s", value)
           .that(Floats.indexOf(new float[] {5f, value, value, 5f}, new float[] {value, value}))
           .isEqualTo(1);
     }
     assertThat(Floats.indexOf(new float[] {5f, NaN, NaN, 5f}, new float[] {NaN, NaN}))
         .isEqualTo(-1);
+  }
+
+  public void testIndexOf_arrayTargetIndexed() {
+    assertThat(Floats.indexOf(EMPTY, EMPTY, 0, 0)).isEqualTo(0);
+    assertThat(Floats.indexOf(ARRAY234, EMPTY, 0, 3)).isEqualTo(0);
+    assertThat(Floats.indexOf(ARRAY234, EMPTY, 1, 3)).isEqualTo(1);
+    assertThat(Floats.indexOf(ARRAY234, EMPTY, 2, 2)).isEqualTo(2);
+    assertThat(Floats.indexOf(ARRAY234, EMPTY, 3, 3)).isEqualTo(3);
+    assertThat(Floats.indexOf(EMPTY, ARRAY234, 0, 0)).isEqualTo(-1);
+    assertThat(Floats.indexOf(ARRAY234, ARRAY1, 0, 3)).isEqualTo(-1);
+    assertThat(Floats.indexOf(ARRAY1, ARRAY234, 0, 1)).isEqualTo(-1);
+    assertThat(Floats.indexOf(ARRAY1, ARRAY1, 0, 1)).isEqualTo(0);
+    assertThat(Floats.indexOf(ARRAY1, ARRAY1, 0, 0)).isEqualTo(-1);
+    assertThat(Floats.indexOf(ARRAY1, ARRAY1, 1, 1)).isEqualTo(-1);
+    assertThat(Floats.indexOf(ARRAY234, ARRAY234, 0, 3)).isEqualTo(0);
+    assertThat(Floats.indexOf(ARRAY234, ARRAY234, 0, 2)).isEqualTo(-1);
+    assertThat(Floats.indexOf(ARRAY234, ARRAY234, 1, 3)).isEqualTo(-1);
+    assertThat(Floats.indexOf(ARRAY234, new float[] {2.0f, 3.0f}, 0, 3)).isEqualTo(0);
+    assertThat(Floats.indexOf(ARRAY234, new float[] {2.0f, 3.0f}, 0, 2)).isEqualTo(0);
+    assertThat(Floats.indexOf(ARRAY234, new float[] {2.0f, 3.0f}, 0, 1)).isEqualTo(-1);
+    assertThat(Floats.indexOf(ARRAY234, new float[] {2.0f, 3.0f}, 1, 3)).isEqualTo(-1);
+    assertThat(Floats.indexOf(ARRAY234, new float[] {3.0f, 4.0f}, 0, 3)).isEqualTo(1);
+    assertThat(Floats.indexOf(ARRAY234, new float[] {3.0f, 4.0f}, 1, 3)).isEqualTo(1);
+    assertThat(Floats.indexOf(ARRAY234, new float[] {3.0f, 4.0f}, 1, 2)).isEqualTo(-1);
+    assertThat(Floats.indexOf(ARRAY234, new float[] {3.0f}, 1, 2)).isEqualTo(1);
+    assertThat(Floats.indexOf(ARRAY234, new float[] {4.0f}, 2, 3)).isEqualTo(2);
+    assertThat(Floats.indexOf(new float[] {2.0f, 3.0f, 3.0f, 3.0f, 3.0f}, new float[] {3.0f}, 2, 5))
+        .isEqualTo(2);
+    assertThat(
+            Floats.indexOf(
+                new float[] {2.0f, 3.0f, 2.0f, 3.0f, 4.0f, 2.0f, 3.0f},
+                new float[] {2.0f, 3.0f, 4.0f},
+                0,
+                7))
+        .isEqualTo(2);
+    assertThat(
+            Floats.indexOf(
+                new float[] {2.0f, 3.0f, 2.0f, 3.0f, 4.0f, 2.0f, 3.0f},
+                new float[] {2.0f, 3.0f, 4.0f},
+                2,
+                5))
+        .isEqualTo(2);
+    assertThat(
+            Floats.indexOf(
+                new float[] {2.0f, 3.0f, 2.0f, 3.0f, 4.0f, 2.0f, 3.0f},
+                new float[] {2.0f, 3.0f, 4.0f},
+                2,
+                4))
+        .isEqualTo(-1);
+    assertThat(
+            Floats.indexOf(
+                new float[] {2.0f, 2.0f, 3.0f, 4.0f, 2.0f, 3.0f, 4.0f},
+                new float[] {2.0f, 3.0f, 4.0f},
+                2,
+                7))
+        .isEqualTo(4);
+    assertThat(Floats.indexOf(new float[] {4.0f, 3.0f, 2.0f}, new float[] {2.0f, 3.0f, 4.0f}, 0, 3))
+        .isEqualTo(-1);
+
+    for (float value : NUMBERS) {
+      assertWithMessage("%s", value)
+          .that(
+              Floats.indexOf(new float[] {5f, value, value, 5f}, new float[] {value, value}, 1, 3))
+          .isEqualTo(1);
+    }
+    assertThat(Floats.indexOf(new float[] {5f, NaN, NaN, 5f}, new float[] {NaN, NaN}, 0, 4))
+        .isEqualTo(-1);
+
+    assertThrows(IndexOutOfBoundsException.class, () -> Floats.indexOf(ARRAY234, ARRAY1, -1, 1));
+    assertThrows(IndexOutOfBoundsException.class, () -> Floats.indexOf(ARRAY234, ARRAY1, 0, 4));
+    assertThrows(IndexOutOfBoundsException.class, () -> Floats.indexOf(ARRAY234, ARRAY1, 2, 1));
+    assertThrows(IndexOutOfBoundsException.class, () -> Floats.indexOf(ARRAY234, EMPTY, -1, 1));
+    assertThrows(IndexOutOfBoundsException.class, () -> Floats.indexOf(ARRAY234, EMPTY, 0, 4));
+    assertThrows(IndexOutOfBoundsException.class, () -> Floats.indexOf(ARRAY234, EMPTY, 2, 1));
   }
 
   public void testLastIndexOf() {
@@ -181,11 +294,38 @@ public class FloatsTest extends TestCase {
     assertThat(Floats.lastIndexOf(new float[] {2.0f, 3.0f, 2.0f, 3.0f}, 3.0f)).isEqualTo(3);
 
     for (float value : NUMBERS) {
-      assertWithMessage("" + value)
+      assertWithMessage("%s", value)
           .that(Floats.lastIndexOf(new float[] {value, 5f}, value))
           .isEqualTo(0);
     }
     assertThat(Floats.lastIndexOf(new float[] {NaN, 5f}, NaN)).isEqualTo(-1);
+  }
+
+  public void testLastIndexOfIndexed() {
+    assertThat(Floats.lastIndexOf(EMPTY, 1.0f, 0, 0)).isEqualTo(-1);
+    assertThat(Floats.lastIndexOf(ARRAY1, 2.0f, 0, 1)).isEqualTo(-1);
+    assertThat(Floats.lastIndexOf(ARRAY234, 1.0f, 0, 3)).isEqualTo(-1);
+    assertThat(Floats.lastIndexOf(new float[] {-1.0f}, -1.0f, 0, 1)).isEqualTo(0);
+    assertThat(Floats.lastIndexOf(ARRAY234, 2.0f, 0, 3)).isEqualTo(0);
+    assertThat(Floats.lastIndexOf(ARRAY234, 2.0f, 0, 0)).isEqualTo(-1);
+    assertThat(Floats.lastIndexOf(ARRAY234, 2.0f, 1, 3)).isEqualTo(-1);
+    assertThat(Floats.lastIndexOf(ARRAY234, 3.0f, 1, 2)).isEqualTo(1);
+    assertThat(Floats.lastIndexOf(ARRAY234, 3.0f, 0, 1)).isEqualTo(-1);
+    assertThat(Floats.lastIndexOf(ARRAY234, 4.0f, 2, 3)).isEqualTo(2);
+    assertThat(Floats.lastIndexOf(ARRAY234, 4.0f, 0, 2)).isEqualTo(-1);
+    assertThat(Floats.lastIndexOf(new float[] {2.0f, 3.0f, 2.0f, 3.0f}, 3.0f, 0, 3)).isEqualTo(1);
+    assertThat(Floats.lastIndexOf(new float[] {3.0f, 3.0f, 3.0f, 3.0f}, 3.0f, 1, 3)).isEqualTo(2);
+
+    for (float value : NUMBERS) {
+      assertWithMessage("%s", value)
+          .that(Floats.lastIndexOf(new float[] {value, 5f}, value, 0, 1))
+          .isEqualTo(0);
+    }
+    assertThat(Floats.lastIndexOf(new float[] {NaN, 5f}, NaN, 0, 2)).isEqualTo(-1);
+
+    assertThrows(IndexOutOfBoundsException.class, () -> Floats.lastIndexOf(ARRAY234, 2.0f, -1, 1));
+    assertThrows(IndexOutOfBoundsException.class, () -> Floats.lastIndexOf(ARRAY234, 2.0f, 0, 4));
+    assertThrows(IndexOutOfBoundsException.class, () -> Floats.lastIndexOf(ARRAY234, 2.0f, 2, 1));
   }
 
   @GwtIncompatible
@@ -264,11 +404,7 @@ public class FloatsTest extends TestCase {
     float[] sharedArray = new float[arraysDim2];
     Arrays.fill(arrays, sharedArray);
 
-    try {
-      Floats.concat(arrays);
-      fail();
-    } catch (IllegalArgumentException expected) {
-    }
+    assertThrows(IllegalArgumentException.class, () -> Floats.concat(arrays));
   }
 
   public void testEnsureCapacity() {
@@ -294,7 +430,7 @@ public class FloatsTest extends TestCase {
 
   public void testLexicographicalComparator() {
     List<float[]> ordered =
-        Arrays.asList(
+        asList(
             new float[] {},
             new float[] {LEAST},
             new float[] {LEAST, LEAST},
@@ -306,14 +442,14 @@ public class FloatsTest extends TestCase {
             new float[] {GREATEST, GREATEST, GREATEST});
 
     Comparator<float[]> comparator = Floats.lexicographicalComparator();
-    Helpers.testComparator(comparator, ordered);
+    testComparator(comparator, ordered);
   }
 
   @J2ktIncompatible
   @GwtIncompatible // SerializableTester
   public void testLexicographicalComparatorSerializable() {
     Comparator<float[]> comparator = Floats.lexicographicalComparator();
-    assertThat(SerializableTester.reserialize(comparator)).isSameInstanceAs(comparator);
+    assertThat(reserialize(comparator)).isSameInstanceAs(comparator);
   }
 
   public void testReverse() {
@@ -359,17 +495,25 @@ public class FloatsTest extends TestCase {
     assertThat(input).isEqualTo(expectedOutput);
   }
 
-  public void testRotate() {
-    testRotate(new float[] {}, -1, new float[] {});
-    testRotate(new float[] {}, 0, new float[] {});
-    testRotate(new float[] {}, 1, new float[] {});
+  public void testRotate_emptyArray() {
+    float[] empty = {};
+    float[] expected = {};
+    testRotate(empty, -1, expected);
+    testRotate(empty, 0, expected);
+    testRotate(empty, 1, expected);
+  }
 
-    testRotate(new float[] {1}, -2, new float[] {1});
-    testRotate(new float[] {1}, -1, new float[] {1});
-    testRotate(new float[] {1}, 0, new float[] {1});
-    testRotate(new float[] {1}, 1, new float[] {1});
-    testRotate(new float[] {1}, 2, new float[] {1});
+  public void testRotate_singleElementArray() {
+    float[] single = {1};
+    float[] expected = {1};
+    testRotate(single, -2, expected);
+    testRotate(single, -1, expected);
+    testRotate(single, 0, expected);
+    testRotate(single, 1, expected);
+    testRotate(single, 2, expected);
+  }
 
+  public void testRotate_multiElementArray() {
     testRotate(new float[] {1, 2}, -3, new float[] {2, 1});
     testRotate(new float[] {1, 2}, -1, new float[] {2, 1});
     testRotate(new float[] {1, 2}, -2, new float[] {1, 2});
@@ -409,13 +553,39 @@ public class FloatsTest extends TestCase {
     testRotate(new float[] {1, 2, 3, 4, 5}, 6, new float[] {5, 1, 2, 3, 4});
   }
 
-  public void testRotateIndexed() {
-    testRotate(new float[] {}, 0, 0, 0, new float[] {});
+  public void testRotate_minValueDistance() {
+    testRotate(new float[] {1, 2, 3}, Integer.MIN_VALUE, new float[] {3, 1, 2});
+    testRotate(new float[] {0, 1, 2, 3, 4}, Integer.MIN_VALUE, 1, 4, new float[] {0, 3, 1, 2, 4});
+  }
 
-    testRotate(new float[] {1}, 0, 0, 1, new float[] {1});
-    testRotate(new float[] {1}, 1, 0, 1, new float[] {1});
-    testRotate(new float[] {1}, 1, 1, 1, new float[] {1});
+  public void testRotateIndexed_emptyRange() {
+    float[] empty = {};
+    float[] expectedEmpty = {};
+    testRotate(empty, 0, 0, 0, expectedEmpty);
 
+    float[] single = {1};
+    float[] expectedSingle = {1};
+    testRotate(single, 1, 1, 1, expectedSingle);
+
+    float[] array = {0, 1, 2};
+    float[] expectedArray = {0, 1, 2};
+    testRotate(array, 1, 1, 1, expectedArray);
+    testRotate(array, -1, 2, 2, expectedArray);
+  }
+
+  public void testRotateIndexed_singleElementRange() {
+    float[] single = {1};
+    float[] expectedSingle = {1};
+    testRotate(single, 0, 0, 1, expectedSingle);
+    testRotate(single, 1, 0, 1, expectedSingle);
+
+    float[] array = {0, 1, 2};
+    float[] expectedArray = {0, 1, 2};
+    testRotate(array, 1, 1, 2, expectedArray);
+    testRotate(array, -1, 2, 3, expectedArray);
+  }
+
+  public void testRotateIndexed_multiElementRange() {
     // Rotate the central 5 elements, leaving the ends as-is
     testRotate(new float[] {0, 1, 2, 3, 4, 5, 6}, -6, 1, 6, new float[] {0, 2, 3, 4, 5, 1, 6});
     testRotate(new float[] {0, 1, 2, 3, 4, 5, 6}, -1, 1, 6, new float[] {0, 2, 3, 4, 5, 1, 6});
@@ -485,20 +655,20 @@ public class FloatsTest extends TestCase {
   @J2ktIncompatible
   @GwtIncompatible // SerializableTester
   public void testStringConverterSerialization() {
-    SerializableTester.reserializeAndAssert(Floats.stringConverter());
+    reserializeAndAssert(Floats.stringConverter());
   }
 
   public void testToArray() {
     // need explicit type parameter to avoid javac warning!?
-    List<Float> none = Arrays.<Float>asList();
+    List<Float> none = Arrays.asList();
     assertThat(Floats.toArray(none)).isEqualTo(EMPTY);
 
-    List<Float> one = Arrays.asList(1.0f);
+    List<Float> one = asList(1.0f);
     assertThat(Floats.toArray(one)).isEqualTo(ARRAY1);
 
     float[] array = {0.0f, 1.0f, 3.0f};
 
-    List<Float> three = Arrays.asList(0.0f, 1.0f, 3.0f);
+    List<Float> three = asList(0.0f, 1.0f, 3.0f);
     assertThat(Floats.toArray(three)).isEqualTo(array);
 
     assertThat(Floats.toArray(Floats.asList(array))).isEqualTo(array);
@@ -508,7 +678,7 @@ public class FloatsTest extends TestCase {
     for (int delta : new int[] {+1, 0, -1}) {
       for (int i = 0; i < VALUES.length; i++) {
         List<Float> list = Floats.asList(VALUES).subList(0, i);
-        Collection<Float> misleadingSize = Helpers.misleadingSizeCollection(delta);
+        Collection<Float> misleadingSize = misleadingSizeCollection(delta);
         misleadingSize.addAll(list);
         float[] arr = Floats.toArray(misleadingSize);
         assertThat(arr.length).isEqualTo(i);
@@ -519,20 +689,21 @@ public class FloatsTest extends TestCase {
     }
   }
 
+  @SuppressWarnings("nullness") // test of a bogus call
   public void testToArray_withNull() {
-    List<@Nullable Float> list = Arrays.asList(0.0f, 1.0f, null);
+    List<@Nullable Float> list = asList(0.0f, 1.0f, null);
     assertThrows(NullPointerException.class, () -> Floats.toArray(list));
   }
 
   public void testToArray_withConversion() {
     float[] array = {0.0f, 1.0f, 2.0f};
 
-    List<Byte> bytes = Arrays.asList((byte) 0, (byte) 1, (byte) 2);
-    List<Short> shorts = Arrays.asList((short) 0, (short) 1, (short) 2);
-    List<Integer> ints = Arrays.asList(0, 1, 2);
-    List<Float> floats = Arrays.asList(0.0f, 1.0f, 2.0f);
-    List<Long> longs = Arrays.asList(0L, 1L, 2L);
-    List<Double> doubles = Arrays.asList(0.0, 1.0, 2.0);
+    List<Byte> bytes = asList((byte) 0, (byte) 1, (byte) 2);
+    List<Short> shorts = asList((short) 0, (short) 1, (short) 2);
+    List<Integer> ints = asList(0, 1, 2);
+    List<Float> floats = asList(0.0f, 1.0f, 2.0f);
+    List<Long> longs = asList(0L, 1L, 2L);
+    List<Double> doubles = asList(0.0, 1.0, 2.0);
 
     assertThat(Floats.toArray(bytes)).isEqualTo(array);
     assertThat(Floats.toArray(shorts)).isEqualTo(array);
@@ -572,8 +743,10 @@ public class FloatsTest extends TestCase {
     assertThat(Floats.toArray(list.subList(2, 2))).isEmpty();
   }
 
+  // `primitives` can't depend on `collect`, so this is what the prod code has to return.
+  @SuppressWarnings("EmptyList")
   public void testAsListEmpty() {
-    assertThat(Floats.asList(EMPTY)).isSameInstanceAs(Collections.emptyList());
+    assertThat(Floats.asList(EMPTY)).isSameInstanceAs(emptyList());
   }
 
   /**
@@ -621,7 +794,7 @@ public class FloatsTest extends TestCase {
     }
   }
 
-  @AndroidIncompatible // slow
+  @AndroidIncompatible // takes ~30s
   @GwtIncompatible // Floats.tryParse
   public void testTryParseAllCodePoints() {
     // Exercise non-ASCII digit test cases and the like.
@@ -727,7 +900,7 @@ public class FloatsTest extends TestCase {
 
   @J2ktIncompatible
   @GwtIncompatible // NullPointerTester
-  public void testStringConverter_nullPointerTester() throws Exception {
+  public void testStringConverter_nullPointerTester() {
     NullPointerTester tester = new NullPointerTester();
     tester.testAllPublicInstanceMethods(Floats.stringConverter());
   }

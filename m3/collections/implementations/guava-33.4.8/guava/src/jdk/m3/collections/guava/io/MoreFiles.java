@@ -19,6 +19,7 @@ package jdk.m3.collections.guava.io;
 import static jdk.m3.collections.guava.base.Preconditions.checkNotNull;
 import static jdk.m3.collections.guava.collect.Iterables.getOnlyElement;
 import static java.nio.file.LinkOption.NOFOLLOW_LINKS;
+import static java.util.Arrays.asList;
 import static java.util.Objects.requireNonNull;
 
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
@@ -329,7 +330,8 @@ public final class MoreFiles {
   /** Returns whether or not the file with the given name in the given dir is a directory. */
   private static boolean isDirectory(
       SecureDirectoryStream<Path> dir, Path name, LinkOption... options) throws IOException {
-    return dir.getFileAttributeView(name, BasicFileAttributeView.class, options)
+    // getFileAttributeView is required to return an instance for BasicFileAttributeView.class.
+    return requireNonNull(dir.getFileAttributeView(name, BasicFileAttributeView.class, options))
         .readAttributes()
         .isDirectory();
   }
@@ -523,32 +525,38 @@ public final class MoreFiles {
     }
 
     Collection<IOException> exceptions = null; // created lazily if needed
-    try {
-      boolean sdsSupported = false;
-      try (DirectoryStream<Path> parent = Files.newDirectoryStream(parentPath)) {
-        if (parent instanceof SecureDirectoryStream) {
-          sdsSupported = true;
-          exceptions =
-              deleteRecursivelySecure(
-                  (SecureDirectoryStream<Path>) parent,
-                  /*
-                   * requireNonNull is safe because paths have file names when they have parents,
-                   * and we checked for a parent at the beginning of the method.
-                   */
-                  requireNonNull(path.getFileName()));
-        }
+    /*
+     * If an `IOException` is thrown by any code below this comment but above `throwDeleteFailed`,
+     * then it must have come from `newDirectoryStream` or from the `!sdsSupported` case. In either
+     * case, `exceptions` is null, so we can just let the `IOException` propagate, rather than worry
+     * about having to mix it into `exceptions`.
+     *
+     * TODO(cpovirk): Simplify this code further if possible, along with the Google-internal copy of
+     * this method in TestDir.
+     */
+    boolean sdsSupported = false;
+    /*
+     * TODO(b/331925065): Should we catch any exception from this `newDirectoryStream` call (i.e.,
+     * the one for `parentPath`), too? We should see what `rm -f` does, especially if we make
+     * "ignore errors" behavior available to users of `deleteRecursively`.
+     */
+    try (DirectoryStream<Path> parent = Files.newDirectoryStream(parentPath)) {
+      if (parent instanceof SecureDirectoryStream) {
+        sdsSupported = true;
+        exceptions =
+            deleteRecursivelySecure(
+                (SecureDirectoryStream<Path>) parent,
+                /*
+                 * requireNonNull is safe because paths have file names when they have parents,
+                 * and we checked for a parent at the beginning of the method.
+                 */
+                requireNonNull(path.getFileName()));
       }
+    }
 
-      if (!sdsSupported) {
-        checkAllowsInsecure(path, options);
-        exceptions = deleteRecursivelyInsecure(path);
-      }
-    } catch (IOException e) {
-      if (exceptions == null) {
-        throw e;
-      } else {
-        exceptions.add(e);
-      }
+    if (!sdsSupported) {
+      checkAllowsInsecure(path, options);
+      exceptions = deleteRecursivelyInsecure(path);
     }
 
     if (exceptions != null) {
@@ -742,7 +750,7 @@ public final class MoreFiles {
   /** Checks that the given options allow an insecure delete, throwing an exception if not. */
   private static void checkAllowsInsecure(Path path, RecursiveDeleteOption[] options)
       throws InsecureRecursiveDeleteException {
-    if (!Arrays.asList(options).contains(RecursiveDeleteOption.ALLOW_INSECURE)) {
+    if (!asList(options).contains(RecursiveDeleteOption.ALLOW_INSECURE)) {
       throw new InsecureRecursiveDeleteException(path.toString());
     }
   }

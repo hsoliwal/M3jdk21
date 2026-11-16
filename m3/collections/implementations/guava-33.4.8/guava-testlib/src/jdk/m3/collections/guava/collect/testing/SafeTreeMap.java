@@ -16,6 +16,8 @@
 
 package jdk.m3.collections.guava.collect.testing;
 
+import static jdk.m3.collections.guava.base.Preconditions.checkNotNull;
+
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import java.io.Serializable;
@@ -41,12 +43,7 @@ import org.jspecify.annotations.Nullable;
 public final class SafeTreeMap<K, V> implements Serializable, NavigableMap<K, V> {
   @SuppressWarnings("unchecked")
   private static final Comparator<Object> NATURAL_ORDER =
-      new Comparator<Object>() {
-        @Override
-        public int compare(Object o1, Object o2) {
-          return ((Comparable<Object>) o1).compareTo(o2);
-        }
-      };
+      (o1, o2) -> ((Comparable<Object>) o1).compareTo(o2);
 
   private final NavigableMap<K, V> delegate;
 
@@ -67,10 +64,7 @@ public final class SafeTreeMap<K, V> implements Serializable, NavigableMap<K, V>
   }
 
   private SafeTreeMap(NavigableMap<K, V> delegate) {
-    this.delegate = delegate;
-    if (delegate == null) {
-      throw new NullPointerException();
-    }
+    this.delegate = checkNotNull(delegate);
     for (K k : keySet()) {
       checkValid(k);
     }
@@ -94,14 +88,14 @@ public final class SafeTreeMap<K, V> implements Serializable, NavigableMap<K, V>
   @Override
   public Comparator<? super K> comparator() {
     Comparator<? super K> comparator = delegate.comparator();
-    if (comparator == null) {
-      comparator = (Comparator<? super K>) NATURAL_ORDER;
+    if (comparator != null) {
+      return comparator;
     }
-    return comparator;
+    return NATURAL_ORDER;
   }
 
   @Override
-  public boolean containsKey(Object key) {
+  public boolean containsKey(@Nullable Object key) {
     try {
       return delegate.containsKey(checkValid(key));
     } catch (NullPointerException | ClassCastException e) {
@@ -110,7 +104,7 @@ public final class SafeTreeMap<K, V> implements Serializable, NavigableMap<K, V>
   }
 
   @Override
-  public boolean containsValue(Object value) {
+  public boolean containsValue(@Nullable Object value) {
     return delegate.containsValue(value);
   }
 
@@ -127,12 +121,12 @@ public final class SafeTreeMap<K, V> implements Serializable, NavigableMap<K, V>
   @Override
   public Set<Entry<K, V>> entrySet() {
     return new AbstractSet<Entry<K, V>>() {
-      private Set<Entry<K, V>> delegate() {
+      Set<Entry<K, V>> delegate() {
         return delegate.entrySet();
       }
 
       @Override
-      public boolean contains(Object object) {
+      public boolean contains(@Nullable Object object) {
         try {
           return delegate().contains(object);
         } catch (NullPointerException | ClassCastException e) {
@@ -151,7 +145,7 @@ public final class SafeTreeMap<K, V> implements Serializable, NavigableMap<K, V>
       }
 
       @Override
-      public boolean remove(Object o) {
+      public boolean remove(@Nullable Object o) {
         return delegate().remove(o);
       }
 
@@ -183,7 +177,7 @@ public final class SafeTreeMap<K, V> implements Serializable, NavigableMap<K, V>
   }
 
   @Override
-  public @Nullable V get(Object key) {
+  public @Nullable V get(@Nullable Object key) {
     return delegate.get(checkValid(key));
   }
 
@@ -266,7 +260,7 @@ public final class SafeTreeMap<K, V> implements Serializable, NavigableMap<K, V>
   }
 
   @Override
-  public @Nullable V remove(Object key) {
+  public @Nullable V remove(@Nullable Object key) {
     return delegate.remove(checkValid(key));
   }
 

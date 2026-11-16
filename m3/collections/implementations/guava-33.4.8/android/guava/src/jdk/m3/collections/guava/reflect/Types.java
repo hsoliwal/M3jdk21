@@ -16,16 +16,20 @@ package jdk.m3.collections.guava.reflect;
 
 import static jdk.m3.collections.guava.base.Preconditions.checkArgument;
 import static jdk.m3.collections.guava.base.Preconditions.checkNotNull;
+import static jdk.m3.collections.guava.base.Predicates.equalTo;
+import static jdk.m3.collections.guava.base.Predicates.not;
+import static jdk.m3.collections.guava.collect.Iterables.filter;
+import static jdk.m3.collections.guava.collect.Iterables.isEmpty;
+import static jdk.m3.collections.guava.collect.Iterables.size;
 import static jdk.m3.collections.guava.collect.Iterables.transform;
+import static java.util.Arrays.asList;
 import static java.util.Objects.requireNonNull;
 
 import jdk.m3.collections.guava.annotations.VisibleForTesting;
 import jdk.m3.collections.guava.base.Joiner;
-import jdk.m3.collections.guava.base.Objects;
-import jdk.m3.collections.guava.base.Predicates;
 import jdk.m3.collections.guava.collect.ImmutableList;
 import jdk.m3.collections.guava.collect.ImmutableMap;
-import jdk.m3.collections.guava.collect.Iterables;
+import com.google.errorprone.annotations.Keep;
 import java.io.Serializable;
 import java.lang.reflect.AnnotatedElement;
 import java.lang.reflect.Array;
@@ -39,10 +43,10 @@ import java.lang.reflect.Proxy;
 import java.lang.reflect.Type;
 import java.lang.reflect.TypeVariable;
 import java.lang.reflect.WildcardType;
-import java.security.AccessControlException;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Map.Entry;
+import java.util.Objects;
 import java.util.concurrent.atomic.AtomicReference;
 import org.jspecify.annotations.Nullable;
 
@@ -55,6 +59,8 @@ final class Types {
 
   /** Class#toString without the "class " and "interface " prefixes */
   private static final Joiner COMMA_JOINER = Joiner.on(", ").useForNull("null");
+
+  private static final Joiner AMPERSAND_JOINER = Joiner.on(" & ");
 
   /** Returns the array type of {@code componentType}. */
   static Type newArrayType(Type componentType) {
@@ -123,7 +129,7 @@ final class Types {
       // requireNonNull is safe because we're examining a type that's known to have a superclass.
       ParameterizedType parameterizedType =
           requireNonNull((ParameterizedType) subclass.getGenericSuperclass());
-      for (ClassOwnership behavior : ClassOwnership.values()) {
+      for (ClassOwnership behavior : values()) {
         if (behavior.getOwnerType(LocalClass.class) == parameterizedType.getOwnerType()) {
           return behavior;
         }
@@ -239,7 +245,7 @@ final class Types {
     public boolean equals(@Nullable Object obj) {
       if (obj instanceof GenericArrayType) {
         GenericArrayType that = (GenericArrayType) obj;
-        return Objects.equal(getGenericComponentType(), that.getGenericComponentType());
+        return Objects.equals(getGenericComponentType(), that.getGenericComponentType());
       }
       return false;
     }
@@ -300,12 +306,15 @@ final class Types {
 
     @Override
     public boolean equals(@Nullable Object other) {
+      if (other == this) {
+        return true;
+      }
       if (!(other instanceof ParameterizedType)) {
         return false;
       }
       ParameterizedType that = (ParameterizedType) other;
       return getRawType().equals(that.getRawType())
-          && Objects.equal(getOwnerType(), that.getOwnerType())
+          && Objects.equals(getOwnerType(), that.getOwnerType())
           && Arrays.equals(getActualTypeArguments(), that.getActualTypeArguments());
     }
 
@@ -323,32 +332,32 @@ final class Types {
   }
 
   /**
-   * Invocation handler to work around a compatibility problem between Java 7 and Java 8.
+   * Invocation handler to work around a compatibility problem between Android and Java.
    *
    * <p>Java 8 introduced a new method {@code getAnnotatedBounds()} in the {@link TypeVariable}
-   * interface, whose return type {@code AnnotatedType[]} is also new in Java 8. That means that we
-   * cannot implement that interface in source code in a way that will compile on both Java 7 and
-   * Java 8. If we include the {@code getAnnotatedBounds()} method then its return type means it
-   * won't compile on Java 7, while if we don't include the method then the compiler will complain
-   * that an abstract method is unimplemented. So instead we use a dynamic proxy to get an
-   * implementation. If the method being called on the {@code TypeVariable} instance has the same
-   * name as one of the public methods of {@link TypeVariableImpl}, the proxy calls the same method
-   * on its instance of {@code TypeVariableImpl}. Otherwise it throws {@link
-   * UnsupportedOperationException}; this should only apply to {@code getAnnotatedBounds()}. This
-   * does mean that users on Java 8 who obtain an instance of {@code TypeVariable} from {@link
-   * TypeResolver#resolveType} will not be able to call {@code getAnnotatedBounds()} on it, but that
-   * should hopefully be rare.
+   * interface, whose return type {@code AnnotatedType[]} is also new in Java 8. As of 2025, Android
+   * has not added {@link AnnotatedType}. That means that we cannot implement that interface in
+   * source code in a way that will compile on both Java and Android. If we include the {@code
+   * getAnnotatedBounds()} method, then its return type means it won't compile on Android, while if
+   * we don't include the method, then the compiler will complain that an abstract method is
+   * unimplemented. So instead we use a dynamic proxy to get an implementation. If the method being
+   * called on the {@code TypeVariable} instance has the same name as one of the public methods of
+   * {@link TypeVariableImpl}, the proxy calls the same method on its instance of {@code
+   * TypeVariableImpl}. Otherwise it throws {@link UnsupportedOperationException}; this should only
+   * apply to {@code getAnnotatedBounds()}. This does mean that users on Java who obtain an instance
+   * of {@code TypeVariable} from {@link TypeResolver#resolveType} will not be able to call {@code
+   * getAnnotatedBounds()} on it, but that should hopefully be rare.
    *
    * <p>TODO(b/147144588): We are currently also missing the methods inherited from {@link
    * AnnotatedElement}, which {@code TypeVariable} began to extend only in Java 8. Those methods
-   * refer only to types present in Java 7, so we could implement them in {@code TypeVariableImpl}
-   * today. (We could probably then make {@code TypeVariableImpl} implement {@code AnnotatedElement}
-   * so that we get partial compile-time checking.)
+   * refer only to types present under Android, so we could implement them in {@code
+   * TypeVariableImpl} today. (We could probably then make {@code TypeVariableImpl} implement {@code
+   * AnnotatedElement} so that we get partial compile-time checking.)
    *
-   * <p>This workaround should be removed at a distant future time when we no longer support Java
-   * versions earlier than 8.
+   * <p>This workaround should be removed at a distant future time when <a
+   * href="https://issuetracker.google.com/issues/115932459">Android supports {@code
+   * AnnotatedType}</a>.
    */
-  @SuppressWarnings("removal") // b/318391980
   private static final class TypeVariableInvocationHandler implements InvocationHandler {
     private static final ImmutableMap<String, Method> typeVariableMethods;
 
@@ -358,7 +367,10 @@ final class Types {
         if (method.getDeclaringClass().equals(TypeVariableImpl.class)) {
           try {
             method.setAccessible(true);
-          } catch (AccessControlException e) {
+          } catch (RuntimeException e) {
+            if (!e.getClass().getName().equals("java.security.AccessControlException")) {
+              throw e;
+            }
             // OK: the method is accessible to us anyway. The setAccessible call is only for
             // unusual execution environments where that might not be true.
           }
@@ -380,6 +392,18 @@ final class Types {
       String methodName = method.getName();
       Method typeVariableMethod = typeVariableMethods.get(methodName);
       if (typeVariableMethod == null) {
+        if (methodName.equals("getAnnotatedBounds")
+            || methodName.equals("isAnnotationPresent")
+            // Each of these prefixes is shared by a family of methods:
+            || methodName.startsWith("getAnnotation")
+            || methodName.startsWith("getDeclaredAnnotation")) {
+          throw new UnsupportedOperationException(
+              "Annotation methods are not supported on synthetic TypeVariables created during type"
+                  + " resolution. The semantics of annotations on resolved types with modified"
+                  + " bounds are undefined. Use the original TypeVariable for annotation access."
+                  + " See b/147144588.");
+        }
+        // If any other method appears or if we forgot one, include it in the exception message:
         throw new UnsupportedOperationException(methodName);
       } else {
         try {
@@ -404,18 +428,22 @@ final class Types {
       this.bounds = ImmutableList.copyOf(bounds);
     }
 
+    @Keep
     public Type[] getBounds() {
       return toArray(bounds);
     }
 
+    @Keep
     public D getGenericDeclaration() {
       return genericDeclaration;
     }
 
+    @Keep
     public String getName() {
       return name;
     }
 
+    @Keep
     public String getTypeName() {
       return name;
     }
@@ -481,10 +509,13 @@ final class Types {
 
     @Override
     public boolean equals(@Nullable Object obj) {
+      if (obj == this) {
+        return true;
+      }
       if (obj instanceof WildcardType) {
         WildcardType that = (WildcardType) obj;
-        return lowerBounds.equals(Arrays.asList(that.getLowerBounds()))
-            && upperBounds.equals(Arrays.asList(that.getUpperBounds()));
+        return lowerBounds.equals(asList(that.getLowerBounds()))
+            && upperBounds.equals(asList(that.getUpperBounds()));
       }
       return false;
     }
@@ -500,8 +531,11 @@ final class Types {
       for (Type lowerBound : lowerBounds) {
         builder.append(" super ").append(JavaVersion.CURRENT.typeName(lowerBound));
       }
-      for (Type upperBound : filterUpperBounds(upperBounds)) {
-        builder.append(" extends ").append(JavaVersion.CURRENT.typeName(upperBound));
+      Iterable<Type> filteredUpperBounds = filterUpperBounds(upperBounds);
+      if (!isEmpty(filteredUpperBounds)) {
+        builder.append(" extends ");
+        AMPERSAND_JOINER.appendTo(
+            builder, transform(filteredUpperBounds, JavaVersion.CURRENT::typeName));
       }
       return builder.toString();
     }
@@ -514,7 +548,10 @@ final class Types {
   }
 
   private static Iterable<Type> filterUpperBounds(Iterable<Type> bounds) {
-    return Iterables.filter(bounds, Predicates.not(Predicates.<Type>equalTo(Object.class)));
+    if (size(bounds) > 1) {
+      return bounds;
+    }
+    return filter(bounds, not(equalTo(Object.class)));
   }
 
   private static void disallowPrimitiveType(Type[] types, String usedAs) {
@@ -534,7 +571,10 @@ final class Types {
     return Array.newInstance(componentType, 0).getClass();
   }
 
-  // TODO(benyu): Once behavior is the same for all Java versions we support, delete this.
+  /*
+   * TODO(benyu): Once behavior is the same for all Java (and Android) versions we support, delete
+   * this. It is possible that one or both of JAVA6 and JAVA7 have become unnecessary already.
+   */
   enum JavaVersion {
     JAVA6 {
       @Override
@@ -580,16 +620,18 @@ final class Types {
         return JAVA7.usedInGenericType(type);
       }
 
+      /*
+       * We use this only when getTypeName is available.
+       *
+       * Well, really, we use this when we think we're running under Java 8, as determined by some
+       * logic in the static initializer, which does not check for getTypeName specifically. We
+       * should really validate that it works as desired for all Android versions that we support.
+       */
+      @IgnoreJRERequirement
+      @SuppressWarnings("NewApi")
       @Override
       String typeName(Type type) {
-        try {
-          Method getTypeName = Type.class.getMethod("getTypeName");
-          return (String) getTypeName.invoke(type);
-        } catch (NoSuchMethodException e) {
-          throw new AssertionError("Type.getTypeName should be available in Java 8");
-        } catch (InvocationTargetException | IllegalAccessException e) {
-          throw new RuntimeException(e);
-        }
+        return type.getTypeName();
       }
     },
     JAVA9 {
@@ -603,9 +645,11 @@ final class Types {
         return JAVA8.usedInGenericType(type);
       }
 
+      @IgnoreJRERequirement
+      @SuppressWarnings("NewApi") // see JAVA8.typeName
       @Override
       String typeName(Type type) {
-        return JAVA8.typeName(type);
+        return type.getTypeName();
       }
 
       @Override
@@ -617,6 +661,7 @@ final class Types {
     static final JavaVersion CURRENT;
 
     static {
+      // Under Android, TypeVariable does not implement AnnotatedElement even under recent versions.
       if (AnnotatedElement.class.isAssignableFrom(TypeVariable.class)) {
         if (new TypeCapture<Entry<String, int[][]>>() {}.capture()
             .toString()
@@ -662,10 +707,13 @@ final class Types {
    * unequal TypeVariable implementation unnecessarily. When the bounds do change, however, it's
    * fine for the synthetic TypeVariable to be unequal to any native TypeVariable anyway.
    */
+  @SuppressWarnings("UnusedTypeParameter") // It's used reflectively.
   static final class NativeTypeVariableEquals<X> {
     static final boolean NATIVE_TYPE_VARIABLE_ONLY =
         !NativeTypeVariableEquals.class.getTypeParameters()[0].equals(
             newArtificialTypeVariable(NativeTypeVariableEquals.class, "X"));
+
+    private NativeTypeVariableEquals() {}
   }
 
   private Types() {}

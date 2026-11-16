@@ -32,7 +32,6 @@ import jdk.m3.collections.guava.collect.testing.features.CollectionFeature;
 import jdk.m3.collections.guava.collect.testing.features.CollectionSize;
 import jdk.m3.collections.guava.collect.testing.features.MapFeature;
 import java.util.Iterator;
-import org.junit.Ignore;
 
 /**
  * Tester for {@code Multimap.entries}.
@@ -40,9 +39,6 @@ import org.junit.Ignore;
  * @author Louis Wasserman
  */
 @GwtCompatible
-@Ignore("test runners must not instantiate and run this directly, only via suites we build")
-// @Ignore affects the Android test runner, which respects JUnit 4 annotations on JUnit 3 tests.
-@SuppressWarnings("JUnit4ClassUsedInJUnit3")
 public class MultimapKeysTester<K, V> extends AbstractMultimapTester<K, V, Multimap<K, V>> {
   @CollectionSize.Require(SEVERAL)
   public void testKeys() {
@@ -64,7 +60,7 @@ public class MultimapKeysTester<K, V> extends AbstractMultimapTester<K, V, Multi
   @CollectionSize.Require(SEVERAL)
   @MapFeature.Require(ALLOWS_NULL_KEYS)
   public void testKeysWithNullKey() {
-    resetContainer(mapEntry((K) null, v0()), mapEntry((K) null, v1()), mapEntry(k1(), v0()));
+    resetContainer(mapEntry(null, v0()), mapEntry(null, v1()), mapEntry(k1(), v0()));
     Multiset<K> keys = multimap().keys();
     assertEquals(2, keys.count(null));
     assertEquals(1, keys.count(k1()));

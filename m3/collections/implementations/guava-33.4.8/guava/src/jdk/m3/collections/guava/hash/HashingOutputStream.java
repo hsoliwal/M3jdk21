@@ -17,6 +17,7 @@ package jdk.m3.collections.guava.hash;
 import static jdk.m3.collections.guava.base.Preconditions.checkNotNull;
 
 import jdk.m3.collections.guava.annotations.Beta;
+import jdk.m3.collections.guava.annotations.J2ktIncompatible;
 import java.io.FilterOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -27,6 +28,7 @@ import java.io.OutputStream;
  * @author Zoe Piepmeier
  * @since 16.0
  */
+@J2ktIncompatible
 @Beta
 public final class HashingOutputStream extends FilterOutputStream {
   private final Hasher hasher;

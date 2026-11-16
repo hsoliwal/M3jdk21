@@ -16,6 +16,7 @@
 
 package jdk.m3.collections.guava.io;
 
+import static jdk.m3.collections.guava.hash.Hashing.sha512;
 import static jdk.m3.collections.guava.io.SourceSinkFactory.ByteSourceFactory;
 import static jdk.m3.collections.guava.io.SourceSinkFactory.CharSourceFactory;
 import static java.nio.charset.StandardCharsets.UTF_8;
@@ -25,7 +26,6 @@ import static org.junit.Assert.assertThrows;
 import jdk.m3.collections.guava.base.Optional;
 import jdk.m3.collections.guava.collect.ImmutableList;
 import jdk.m3.collections.guava.hash.HashCode;
-import jdk.m3.collections.guava.hash.Hashing;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -119,7 +119,7 @@ public class ByteSourceTester extends SourceSinkTester<ByteSource, byte[], ByteS
   }
 
   @Override
-  public void setUp() throws IOException {
+  protected void setUp() throws IOException {
     source = factory.createSource(data);
   }
 
@@ -155,12 +155,12 @@ public class ByteSourceTester extends SourceSinkTester<ByteSource, byte[], ByteS
   }
 
   public void testCopyTo_byteSink() throws IOException {
-    final ByteArrayOutputStream out = new ByteArrayOutputStream();
+    ByteArrayOutputStream out = new ByteArrayOutputStream();
     // HERESY! but it's ok just for this I guess
     source.copyTo(
         new ByteSink() {
           @Override
-          public OutputStream openStream() throws IOException {
+          public OutputStream openStream() {
             return out;
           }
         });
@@ -175,7 +175,7 @@ public class ByteSourceTester extends SourceSinkTester<ByteSource, byte[], ByteS
     assertEquals(expected.length, source.size());
   }
 
-  public void testSizeIfKnown() throws IOException {
+  public void testSizeIfKnown() {
     Optional<Long> sizeIfKnown = source.sizeIfKnown();
     if (sizeIfKnown.isPresent()) {
       assertEquals(expected.length, (long) sizeIfKnown.get());
@@ -187,7 +187,7 @@ public class ByteSourceTester extends SourceSinkTester<ByteSource, byte[], ByteS
         source.contentEquals(
             new ByteSource() {
               @Override
-              public InputStream openStream() throws IOException {
+              public InputStream openStream() {
                 return new RandomAmountInputStream(
                     new ByteArrayInputStream(expected), new Random());
               }
@@ -201,7 +201,7 @@ public class ByteSourceTester extends SourceSinkTester<ByteSource, byte[], ByteS
               final ByteArrayOutputStream out = new ByteArrayOutputStream();
 
               @Override
-              public boolean processBytes(byte[] buf, int off, int len) throws IOException {
+              public boolean processBytes(byte[] buf, int off, int len) {
                 out.write(buf, off, len);
                 return true;
               }
@@ -216,8 +216,8 @@ public class ByteSourceTester extends SourceSinkTester<ByteSource, byte[], ByteS
   }
 
   public void testHash() throws IOException {
-    HashCode expectedHash = Hashing.md5().hashBytes(expected);
-    assertEquals(expectedHash, source.hash(Hashing.md5()));
+    HashCode expectedHash = sha512().hashBytes(expected);
+    assertEquals(expectedHash, source.hash(sha512()));
   }
 
   public void testSlice_illegalArguments() {

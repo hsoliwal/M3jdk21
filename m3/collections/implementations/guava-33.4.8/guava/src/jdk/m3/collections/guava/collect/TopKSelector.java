@@ -40,9 +40,9 @@ import org.jspecify.annotations.Nullable;
  * comparator. "Top" can mean the greatest or the lowest elements, specified in the factory used to
  * create the {@code TopKSelector} instance.
  *
- * <p>If your input data is available as a {@link Stream}, prefer passing {@link
- * Comparators#least(int)} to {@link Stream#collect(java.util.stream.Collector)}. If it is available
- * as an {@link Iterable} or {@link Iterator}, prefer {@link Ordering#leastOf(Iterable, int)}.
+ * <p>If your input data is available as a {@link Stream}, prefer passing {@link Comparators#least}
+ * to {@link Stream#collect(java.util.stream.Collector)}. If it is available as an {@link Iterable}
+ * or {@link Iterator}, prefer {@link Ordering#leastOf(Iterable, int)}.
  *
  * <p>This uses the same efficient implementation as {@link Ordering#leastOf(Iterable, int)},
  * offering expected O(n + k log k) performance (worst case O(n log k)) for n calls to {@link
@@ -127,7 +127,7 @@ final class TopKSelector<
     this.k = k;
     checkArgument(k >= 0, "k (%s) must be >= 0", k);
     checkArgument(k <= Integer.MAX_VALUE / 2, "k (%s) must be <= Integer.MAX_VALUE / 2", k);
-    this.buffer = (T[]) new Object[IntMath.checkedMultiply(k, 2)];
+    this.buffer = (T[]) new Object[Math.multiplyExact(k, 2)];
     this.bufferSize = 0;
     this.threshold = null;
   }
@@ -189,7 +189,7 @@ final class TopKSelector<
       iterations++;
       if (iterations >= maxIterations) {
         @SuppressWarnings("nullness") // safe because we pass sort() a range that contains real Ts
-        T[] castBuffer = (T[]) buffer;
+        T[] castBuffer = buffer;
         // We've already taken O(k log k), let's make sure we don't take longer than O(k log k).
         sort(castBuffer, left, right + 1, comparator);
         break;
@@ -232,6 +232,9 @@ final class TopKSelector<
   }
 
   private void swap(int i, int j) {
+    if (i == j) {
+      return;
+    }
     T tmp = buffer[i];
     buffer[i] = buffer[j];
     buffer[j] = tmp;
@@ -285,7 +288,7 @@ final class TopKSelector<
    */
   public List<T> topK() {
     @SuppressWarnings("nullness") // safe because we pass sort() a range that contains real Ts
-    T[] castBuffer = (T[]) buffer;
+    T[] castBuffer = buffer;
     sort(castBuffer, 0, bufferSize, comparator);
     if (bufferSize > k) {
       Arrays.fill(buffer, k, buffer.length, null);

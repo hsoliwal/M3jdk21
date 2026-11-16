@@ -17,8 +17,9 @@
 package jdk.m3.collections.guava.collect;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
+import jdk.m3.collections.guava.annotations.GwtIncompatible;
+import jdk.m3.collections.guava.annotations.J2ktIncompatible;
 import java.util.Collection;
-import java.util.Set;
 import java.util.SortedMap;
 import java.util.SortedSet;
 import org.jspecify.annotations.Nullable;
@@ -42,21 +43,18 @@ abstract class AbstractSortedKeySortedSetMultimap<
 
   @Override
   public SortedMap<K, Collection<V>> asMap() {
-    return (SortedMap<K, Collection<V>>) super.asMap();
+    return (SortedMap<K, Collection<V>>) createMaybeNavigableAsMap();
   }
 
   @Override
-  SortedMap<K, Collection<V>> backingMap() {
+  final SortedMap<K, Collection<V>> backingMap() {
     return (SortedMap<K, Collection<V>>) super.backingMap();
   }
 
   @Override
   public SortedSet<K> keySet() {
-    return (SortedSet<K>) super.keySet();
+    return (SortedSet<K>) createMaybeNavigableKeySet();
   }
 
-  @Override
-  Set<K> createKeySet() {
-    return createMaybeNavigableKeySet();
-  }
+  @GwtIncompatible @J2ktIncompatible   private static final long serialVersionUID = 5771213879749501946L;
 }

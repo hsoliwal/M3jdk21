@@ -16,9 +16,11 @@
 
 package jdk.m3.collections.guava.util.concurrent;
 
-import static com.google.common.truth.Truth.assertThat;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
 import static org.junit.Assert.assertThrows;
 
+import jdk.m3.collections.guava.annotations.GwtIncompatible;
+import jdk.m3.collections.guava.annotations.J2ktIncompatible;
 import com.google.errorprone.annotations.concurrent.GuardedBy;
 import java.lang.reflect.Method;
 import java.net.URLClassLoader;
@@ -32,9 +34,11 @@ import junit.framework.TestCase;
 import org.jspecify.annotations.NullUnmarked;
 
 /** Tests for {@link AbstractFuture} with the cancellation cause system property set */
-@AndroidIncompatible // custom classloading
+@AndroidIncompatible // custom classloading, though b/31360928 hides whatever the error is
 
 @NullUnmarked
+@GwtIncompatible
+@J2ktIncompatible
 public class AbstractFutureCancellationCauseTest extends TestCase {
 
   private ClassLoader oldClassLoader;
@@ -50,7 +54,7 @@ public class AbstractFutureCancellationCauseTest extends TestCase {
     // cause system property.  This allows us to run with both settings of the property in one jvm
     // without resorting to even crazier hacks to reset static final boolean fields.
     System.setProperty("guava.concurrent.generate_cancellation_cause", "true");
-    final String concurrentPackage = SettableFuture.class.getPackage().getName();
+    String concurrentPackage = SettableFuture.class.getPackage().getName();
     classReloader =
         new URLClassLoader(ClassPathUtil.getClassPathUrls()) {
           @GuardedBy("loadedClasses")
@@ -91,9 +95,9 @@ public class AbstractFutureCancellationCauseTest extends TestCase {
     assertTrue(future.cancel(false));
     assertTrue(future.isCancelled());
     assertTrue(future.isDone());
-    assertNull(tryInternalFastPathGetFailure(future));
-    CancellationException e = assertThrows(CancellationException.class, () -> future.get());
-    assertNotNull(e.getCause());
+    assertThat(tryInternalFastPathGetFailure(future)).isNull();
+    CancellationException e = assertThrows(CancellationException.class, future::get);
+    assertThat(e).hasCauseThat().isNotNull();
   }
 
   public void testCancel_notDoneInterrupt() throws Exception {
@@ -101,9 +105,9 @@ public class AbstractFutureCancellationCauseTest extends TestCase {
     assertTrue(future.cancel(true));
     assertTrue(future.isCancelled());
     assertTrue(future.isDone());
-    assertNull(tryInternalFastPathGetFailure(future));
-    CancellationException e = assertThrows(CancellationException.class, () -> future.get());
-    assertNotNull(e.getCause());
+    assertThat(tryInternalFastPathGetFailure(future)).isNull();
+    CancellationException e = assertThrows(CancellationException.class, future::get);
+    assertThat(e).hasCauseThat().isNotNull();
   }
 
   public void testSetFuture_misbehavingFutureDoesNotThrow() throws Exception {
@@ -146,7 +150,7 @@ public class AbstractFutureCancellationCauseTest extends TestCase {
             "setFuture",
             future.getClass().getClassLoader().loadClass(ListenableFuture.class.getName()))
         .invoke(future, badFuture);
-    CancellationException expected = assertThrows(CancellationException.class, () -> future.get());
+    CancellationException expected = assertThrows(CancellationException.class, future::get);
     assertThat(expected).hasCauseThat().isInstanceOf(IllegalArgumentException.class);
     assertThat(expected).hasCauseThat().hasMessageThat().contains(badFuture.toString());
   }

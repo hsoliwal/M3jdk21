@@ -14,8 +14,10 @@
 
 package jdk.m3.collections.guava.hash;
 
+import static jdk.m3.collections.guava.hash.Hashing.crc32c;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
+import jdk.m3.collections.guava.annotations.J2ktIncompatible;
 import java.util.Arrays;
 import java.util.Random;
 import junit.framework.TestCase;
@@ -28,6 +30,7 @@ import org.jspecify.annotations.NullUnmarked;
  * @author Kurt Alfred Kluever
  */
 @NullUnmarked
+@J2ktIncompatible
 public class Crc32cHashFunctionTest extends TestCase {
   public void testEmpty() {
     assertCrc(0, new byte[0]);
@@ -138,12 +141,12 @@ public class Crc32cHashFunctionTest extends TestCase {
    * @param data the data to run the checksum on.
    */
   private static void assertCrc(int expectedCrc, byte[] data) {
-    int actualCrc = Hashing.crc32c().hashBytes(data).asInt();
+    int actualCrc = crc32c().hashBytes(data).asInt();
     assertEquals(
         String.format("expected: %08x, actual: %08x", expectedCrc, actualCrc),
         expectedCrc,
         actualCrc);
-    int actualCrcHasher = Hashing.crc32c().newHasher().putBytes(data).hash().asInt();
+    int actualCrcHasher = crc32c().newHasher().putBytes(data).hash().asInt();
     assertEquals(
         String.format("expected: %08x, actual: %08x", expectedCrc, actualCrc),
         expectedCrc,
@@ -164,7 +167,7 @@ public class Crc32cHashFunctionTest extends TestCase {
       int crc = i;
       for (int j = 7; j >= 0; j--) {
         int mask = -(crc & 1);
-        crc = ((crc >>> 1) ^ (CRC32C_GENERATOR_FLIPPED & mask));
+        crc = (crc >>> 1) ^ (CRC32C_GENERATOR_FLIPPED & mask);
       }
       expected[i] = crc;
     }

@@ -32,11 +32,11 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Spliterator;
 import java.util.function.BinaryOperator;
 import java.util.function.Function;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
+import jsinterop.annotations.JsMethod;
 import org.jspecify.annotations.Nullable;
 
 /**
@@ -243,6 +243,13 @@ public abstract class ImmutableMap<K, V> implements Map<K, V>, Serializable {
     return new RegularImmutableMap<>(entries);
   }
 
+  /** ImmutableMap.ofEntries API that is friendly to use from JavaScript. */
+  @SuppressWarnings("unusable-by-js")
+  @JsMethod(name = "ofEntries")
+  static <K, V> ImmutableMap<K, V> jsOfEntries(Entry<? extends K, ? extends V>... entries) {
+    return new RegularImmutableMap<>(entries);
+  }
+
   public static <K, V> Builder<K, V> builder() {
     return new Builder<K, V>();
   }
@@ -276,16 +283,7 @@ public abstract class ImmutableMap<K, V> implements Map<K, V>, Serializable {
 
     @CanIgnoreReturnValue
     public Builder<K, V> put(Entry<? extends K, ? extends V> entry) {
-      if (entry instanceof ImmutableEntry) {
-        checkNotNull(entry.getKey());
-        checkNotNull(entry.getValue());
-        @SuppressWarnings("unchecked") // all supported methods are covariant
-        Entry<K, V> immutableEntry = (Entry<K, V>) entry;
-        entries.add(immutableEntry);
-      } else {
-        entries.add(entryOf((K) entry.getKey(), (V) entry.getValue()));
-      }
-      return this;
+      return put(entry.getKey(), entry.getValue());
     }
 
     @CanIgnoreReturnValue
@@ -321,8 +319,7 @@ public abstract class ImmutableMap<K, V> implements Map<K, V>, Serializable {
 
     private ImmutableMap<K, V> build(boolean throwIfDuplicateKeys) {
       if (valueComparator != null) {
-        Collections.sort(
-            entries, Ordering.from(valueComparator).onResultOf(Maps.<V>valueFunction()));
+        Collections.sort(entries, Ordering.from(valueComparator).onResultOf(Entry::getValue));
       }
       return fromEntryList(throwIfDuplicateKeys, entries);
     }
@@ -390,7 +387,7 @@ public abstract class ImmutableMap<K, V> implements Map<K, V>, Serializable {
         return of();
       case 1:
         Entry<? extends K, ? extends V> entry = getOnlyElement(map.entrySet());
-        return ImmutableMap.<K, V>of(entry.getKey(), entry.getValue());
+        return ImmutableMap.of(entry.getKey(), entry.getValue());
       default:
         Map<K, V> orderPreservingCopy = Maps.newLinkedHashMap();
         for (Entry<? extends K, ? extends V> e : map.entrySet()) {
@@ -411,18 +408,22 @@ public abstract class ImmutableMap<K, V> implements Map<K, V>, Serializable {
 
   abstract boolean isPartialView();
 
+  @Override
   public final @Nullable V put(K k, V v) {
     throw new UnsupportedOperationException();
   }
 
-  public final @Nullable V remove(Object o) {
+  @Override
+  public final @Nullable V remove(@Nullable Object o) {
     throw new UnsupportedOperationException();
   }
 
+  @Override
   public final void putAll(Map<? extends K, ? extends V> map) {
     throw new UnsupportedOperationException();
   }
 
+  @Override
   public final void clear() {
     throw new UnsupportedOperationException();
   }
@@ -442,8 +443,20 @@ public abstract class ImmutableMap<K, V> implements Map<K, V>, Serializable {
     return values().contains(value);
   }
 
+  @Override
+  public final @Nullable V getOrDefault(@Nullable Object key, @Nullable V defaultValue) {
+    V result = get(key);
+    // TODO(b/192579700): Use a ternary once it no longer confuses our nullness checker.
+    if (result != null) {
+      return result;
+    } else {
+      return defaultValue;
+    }
+  }
+
   private transient @Nullable ImmutableSet<Entry<K, V>> cachedEntrySet = null;
 
+  @Override
   public final ImmutableSet<Entry<K, V>> entrySet() {
     if (cachedEntrySet != null) {
       return cachedEntrySet;
@@ -455,6 +468,7 @@ public abstract class ImmutableMap<K, V> implements Map<K, V>, Serializable {
 
   private transient @Nullable ImmutableSet<K> cachedKeySet = null;
 
+  @Override
   public ImmutableSet<K> keySet() {
     if (cachedKeySet != null) {
       return cachedKeySet;
@@ -481,12 +495,9 @@ public abstract class ImmutableMap<K, V> implements Map<K, V>, Serializable {
     };
   }
 
-  Spliterator<K> keySpliterator() {
-    return CollectSpliterators.map(entrySet().spliterator(), Entry::getKey);
-  }
-
   private transient @Nullable ImmutableCollection<V> cachedValues = null;
 
+  @Override
   public ImmutableCollection<V> values() {
     if (cachedValues != null) {
       return cachedValues;

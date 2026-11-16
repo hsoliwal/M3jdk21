@@ -17,6 +17,7 @@ package jdk.m3.collections.guava.hash;
 import static jdk.m3.collections.guava.base.Preconditions.checkNotNull;
 import static jdk.m3.collections.guava.base.Preconditions.checkState;
 
+import jdk.m3.collections.guava.annotations.J2ktIncompatible;
 import com.google.errorprone.annotations.Immutable;
 import java.nio.ByteBuffer;
 import java.security.InvalidKeyException;
@@ -29,6 +30,7 @@ import javax.crypto.Mac;
  *
  * @author Kurt Alfred Kluever
  */
+@J2ktIncompatible
 @Immutable
 final class MacHashFunction extends AbstractHashFunction {
 

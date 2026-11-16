@@ -26,11 +26,14 @@ import java.io.Serializable;
 import org.jspecify.annotations.Nullable;
 
 /** An ordering that uses the natural order of the values. */
-@GwtCompatible(serializable = true)
+@GwtCompatible
 final class NaturalOrdering extends Ordering<Comparable<?>> implements Serializable {
   static final NaturalOrdering INSTANCE = new NaturalOrdering();
 
-  // TODO: b/287198172 - Consider eagerly initializing these (but think about serialization).
+  /*
+   * TODO(b/287198172): Consider eagerly initializing these, maybe making them static. But that
+   * would lead to at least slighly more work at startup time.
+   */
   @LazyInit private transient @Nullable Ordering<@Nullable Comparable<?>> nullsFirst;
   @LazyInit private transient @Nullable Ordering<@Nullable Comparable<?>> nullsLast;
 

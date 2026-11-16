@@ -16,7 +16,7 @@
 
 package jdk.m3.collections.guava.eventbus;
 
-import static com.google.common.truth.Truth.assertThat;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
 import static org.junit.Assert.assertThrows;
 
 import jdk.m3.collections.guava.testing.EqualsTester;
@@ -42,7 +42,7 @@ public class SubscriberTest extends TestCase {
   private @Nullable Object methodArgument;
 
   @Override
-  protected void setUp() throws Exception {
+  protected void setUp() {
     bus = new EventBus();
     methodCalled = false;
     methodArgument = null;
@@ -69,7 +69,7 @@ public class SubscriberTest extends TestCase {
         methodArgument == FIXTURE_ARGUMENT);
   }
 
-  public void testInvokeSubscriberMethod_exceptionWrapping() throws Throwable {
+  public void testInvokeSubscriberMethod_exceptionWrapping() {
     Method method = getTestSubscriberMethod("exceptionThrowingMethod");
     Subscriber subscriber = Subscriber.create(bus, this, method);
 
@@ -80,7 +80,7 @@ public class SubscriberTest extends TestCase {
     assertThat(expected).hasCauseThat().isInstanceOf(IntentionalException.class);
   }
 
-  public void testInvokeSubscriberMethod_errorPassthrough() throws Throwable {
+  public void testInvokeSubscriberMethod_errorPassthrough() {
     Method method = getTestSubscriberMethod("errorThrowingMethod");
     Subscriber subscriber = Subscriber.create(bus, this, method);
 
@@ -125,7 +125,7 @@ public class SubscriberTest extends TestCase {
   }
 
   /** Local exception subclass to check variety of exception thrown. */
-  class IntentionalException extends Exception {
+  static final class IntentionalException extends Exception {
 
     private static final long serialVersionUID = -2500191180248181379L;
   }
@@ -140,7 +140,7 @@ public class SubscriberTest extends TestCase {
   public void threadSafeMethod(Object arg) {}
 
   /** Local Error subclass to check variety of error thrown. */
-  class JudgmentError extends Error {
+  static final class JudgmentError extends Error {
 
     private static final long serialVersionUID = 634248373797713373L;
   }

@@ -21,6 +21,7 @@ import static jdk.m3.collections.guava.io.TestOption.CLOSE_THROWS;
 import static jdk.m3.collections.guava.io.TestOption.OPEN_THROWS;
 import static jdk.m3.collections.guava.io.TestOption.READ_THROWS;
 import static jdk.m3.collections.guava.io.TestOption.WRITE_THROWS;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
 import static org.junit.Assert.assertThrows;
 
 import jdk.m3.collections.guava.collect.ImmutableList;
@@ -43,7 +44,7 @@ public class CharSinkTest extends IoTestCase {
   private TestCharSink sink;
 
   @Override
-  public void setUp() {
+  protected void setUp() {
     sink = new TestCharSink();
   }
 
@@ -56,15 +57,15 @@ public class CharSinkTest extends IoTestCase {
     writer.close();
 
     assertTrue(sink.wasStreamClosed());
-    assertEquals(STRING, sink.getString());
+    assertThat(sink.getString()).isEqualTo(STRING);
   }
 
   public void testWrite_string() throws IOException {
-    assertEquals("", sink.getString());
+    assertThat(sink.getString()).isEqualTo("");
     sink.write(STRING);
 
     assertTrue(sink.wasStreamOpened() && sink.wasStreamClosed());
-    assertEquals(STRING, sink.getString());
+    assertThat(sink.getString()).isEqualTo(STRING);
   }
 
   public void testWriteFrom_reader() throws IOException {
@@ -72,7 +73,7 @@ public class CharSinkTest extends IoTestCase {
     sink.writeFrom(reader);
 
     assertTrue(sink.wasStreamOpened() && sink.wasStreamClosed());
-    assertEquals(STRING, sink.getString());
+    assertThat(sink.getString()).isEqualTo(STRING);
   }
 
   public void testWriteFromStream_doesNotCloseThatStream() throws IOException {
@@ -84,24 +85,26 @@ public class CharSinkTest extends IoTestCase {
 
   public void testWriteLines_withSpecificSeparator() throws IOException {
     sink.writeLines(ImmutableList.of("foo", "bar", "baz"), "\n");
-    assertEquals("foo\nbar\nbaz\n", sink.getString());
+    assertThat(sink.getString()).isEqualTo("foo\nbar\nbaz\n");
   }
 
   public void testWriteLines_withDefaultSeparator() throws IOException {
     sink.writeLines(ImmutableList.of("foo", "bar", "baz"));
     String separator = System.getProperty("line.separator");
-    assertEquals("foo" + separator + "bar" + separator + "baz" + separator, sink.getString());
+    assertThat(sink.getString())
+        .isEqualTo("foo" + separator + "bar" + separator + "baz" + separator);
   }
 
   public void testWriteLines_stream() throws IOException {
     sink.writeLines(ImmutableList.of("foo", "bar", "baz").stream());
     String separator = LINE_SEPARATOR.value();
-    assertEquals("foo" + separator + "bar" + separator + "baz" + separator, sink.getString());
+    assertThat(sink.getString())
+        .isEqualTo("foo" + separator + "bar" + separator + "baz" + separator);
   }
 
   public void testWriteLines_stream_separator() throws IOException {
     sink.writeLines(ImmutableList.of("foo", "bar", "baz").stream(), "!");
-    assertEquals("foo!bar!baz!", sink.getString());
+    assertThat(sink.getString()).isEqualTo("foo!bar!baz!");
   }
 
   public void testClosesOnErrors_copyingFromCharSourceThatThrows() {

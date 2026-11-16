@@ -16,7 +16,8 @@
 
 package jdk.m3.collections.guava.collect;
 
-import static jdk.m3.collections.guava.collect.ReflectionFreeAssertThrows.assertThrows;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
+import static org.junit.Assert.assertThrows;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import java.util.Iterator;
@@ -35,7 +36,7 @@ public class UnmodifiableIteratorTest extends TestCase {
 
   @SuppressWarnings("DoNotCall")
   public void testRemove() {
-    final String[] array = {"a", "b", "c"};
+    String[] array = {"a", "b", "c"};
 
     Iterator<String> iterator =
         new UnmodifiableIterator<String>() {
@@ -56,7 +57,7 @@ public class UnmodifiableIteratorTest extends TestCase {
         };
 
     assertTrue(iterator.hasNext());
-    assertEquals("a", iterator.next());
+    assertThat(iterator.next()).isEqualTo("a");
     assertThrows(UnsupportedOperationException.class, () -> iterator.remove());
   }
 }

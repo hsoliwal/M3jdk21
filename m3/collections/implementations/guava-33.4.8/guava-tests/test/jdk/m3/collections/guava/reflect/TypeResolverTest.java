@@ -16,6 +16,8 @@
 
 package jdk.m3.collections.guava.reflect;
 
+import static jdk.m3.collections.guava.reflect.Types.subtypeOf;
+import static jdk.m3.collections.guava.reflect.Types.supertypeOf;
 import static org.junit.Assert.assertThrows;
 
 import java.lang.reflect.ParameterizedType;
@@ -30,7 +32,6 @@ import org.jspecify.annotations.NullUnmarked;
  *
  * @author Ben Yu
  */
-@AndroidIncompatible // lots of failures, possibly some related to bad equals() implementations?
 @NullUnmarked
 public class TypeResolverTest extends TestCase {
 
@@ -119,14 +120,14 @@ public class TypeResolverTest extends TestCase {
                 new TypeCapture<List<String>>() {}.capture())
             .resolveType(t));
     assertEquals(
-        Types.subtypeOf(String.class),
+        subtypeOf(String.class),
         new TypeResolver()
             .where(
                 new TypeCapture<List<T>>() {}.capture(),
                 new TypeCapture<List<? extends String>>() {}.capture())
             .resolveType(t));
     assertEquals(
-        Types.supertypeOf(String.class),
+        supertypeOf(String.class),
         new TypeResolver()
             .where(
                 new TypeCapture<List<T>>() {}.capture(),

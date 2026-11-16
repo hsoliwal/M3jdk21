@@ -22,17 +22,13 @@ import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
 import jdk.m3.collections.guava.annotations.J2ktIncompatible;
 import java.lang.reflect.Method;
-import org.junit.Ignore;
 
 /**
  * Tests {@link java.util.List#hashCode}.
  *
  * @author George van den Driessche
  */
-@GwtCompatible(emulated = true)
-@Ignore("test runners must not instantiate and run this directly, only via suites we build")
-// @Ignore affects the Android test runner, which respects JUnit 4 annotations on JUnit 3 tests.
-@SuppressWarnings("JUnit4ClassUsedInJUnit3")
+@GwtCompatible
 public class ListHashCodeTester<E> extends AbstractListTester<E> {
   public void testHashCode() {
     int expectedHashCode = 1;

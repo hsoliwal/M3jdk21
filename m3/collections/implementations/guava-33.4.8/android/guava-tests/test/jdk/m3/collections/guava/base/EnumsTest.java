@@ -18,7 +18,8 @@ package jdk.m3.collections.guava.base;
 
 import static jdk.m3.collections.guava.base.StandardSystemProperty.JAVA_CLASS_PATH;
 import static jdk.m3.collections.guava.base.StandardSystemProperty.PATH_SEPARATOR;
-import static com.google.common.truth.Truth.assertThat;
+import static jdk.m3.collections.guava.testing.SerializableTester.reserializeAndAssert;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
 import static org.junit.Assert.assertThrows;
 
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
@@ -27,7 +28,6 @@ import jdk.m3.collections.guava.collect.ImmutableList;
 import jdk.m3.collections.guava.collect.ImmutableSet;
 import jdk.m3.collections.guava.testing.GcFinalization;
 import jdk.m3.collections.guava.testing.NullPointerTester;
-import jdk.m3.collections.guava.testing.SerializableTester;
 import java.io.File;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -81,9 +81,6 @@ public class EnumsTest extends TestCase {
     assertThat(Enums.getIfPresent(TestEnum.class, "WOMBAT")).isAbsent();
   }
 
-
-  @J2ktIncompatible
-  @GwtIncompatible // weak references
   @AndroidIncompatible // depends on details of GC and classloading
   public void testGetIfPresent_doesNotPreventClassUnloading() throws Exception {
     WeakReference<?> shadowLoaderReference = doTestClassUnloading();
@@ -95,14 +92,13 @@ public class EnumsTest extends TestCase {
   // new ClassLoader. If Enums.getIfPresent does caching that prevents the shadow TestEnum
   // (and therefore its ClassLoader) from being unloaded, then this WeakReference will never be
   // cleared.
-  @J2ktIncompatible
-  @GwtIncompatible // weak references
+
   private WeakReference<?> doTestClassUnloading() throws Exception {
     URLClassLoader shadowLoader = new URLClassLoader(getClassPathUrls(), null);
     @SuppressWarnings("unchecked")
     Class<TestEnum> shadowTestEnum =
         (Class<TestEnum>) Class.forName(TestEnum.class.getName(), false, shadowLoader);
-    assertNotSame(shadowTestEnum, TestEnum.class);
+    assertThat(shadowTestEnum).isNotEqualTo(TestEnum.class);
     // We can't write Set<TestEnum> because that is a Set of the TestEnum from the original
     // ClassLoader.
     Set<Object> shadowConstants = new HashSet<>();
@@ -117,60 +113,48 @@ public class EnumsTest extends TestCase {
     return new WeakReference<>(shadowLoader);
   }
 
-  @GwtIncompatible // stringConverter
   public void testStringConverter_convert() {
     Converter<String, TestEnum> converter = Enums.stringConverter(TestEnum.class);
-    assertEquals(TestEnum.CHEETO, converter.convert("CHEETO"));
-    assertEquals(TestEnum.HONDA, converter.convert("HONDA"));
-    assertEquals(TestEnum.POODLE, converter.convert("POODLE"));
-    assertNull(converter.convert(null));
-    assertNull(converter.reverse().convert(null));
+    assertThat(converter.convert("CHEETO")).isEqualTo(TestEnum.CHEETO);
+    assertThat(converter.convert("HONDA")).isEqualTo(TestEnum.HONDA);
+    assertThat(converter.convert("POODLE")).isEqualTo(TestEnum.POODLE);
+    assertThat(converter.convert(null)).isNull();
+    assertThat(converter.reverse().convert(null)).isNull();
   }
 
-  @GwtIncompatible // stringConverter
   public void testStringConverter_convertError() {
     Converter<String, TestEnum> converter = Enums.stringConverter(TestEnum.class);
     assertThrows(IllegalArgumentException.class, () -> converter.convert("xxx"));
   }
 
-  @GwtIncompatible // stringConverter
   public void testStringConverter_reverse() {
     Converter<String, TestEnum> converter = Enums.stringConverter(TestEnum.class);
-    assertEquals("CHEETO", converter.reverse().convert(TestEnum.CHEETO));
-    assertEquals("HONDA", converter.reverse().convert(TestEnum.HONDA));
-    assertEquals("POODLE", converter.reverse().convert(TestEnum.POODLE));
+    assertThat(converter.reverse().convert(TestEnum.CHEETO)).isEqualTo("CHEETO");
+    assertThat(converter.reverse().convert(TestEnum.HONDA)).isEqualTo("HONDA");
+    assertThat(converter.reverse().convert(TestEnum.POODLE)).isEqualTo("POODLE");
   }
 
-  @J2ktIncompatible
-  @GwtIncompatible // stringConverter
-  public void testStringConverter_nullPointerTester() throws Exception {
+  public void testStringConverter_nullPointerTester() {
     Converter<String, TestEnum> converter = Enums.stringConverter(TestEnum.class);
     NullPointerTester tester = new NullPointerTester();
     tester.testAllPublicInstanceMethods(converter);
   }
 
-  @GwtIncompatible // stringConverter
   public void testStringConverter_nullConversions() {
     Converter<String, TestEnum> converter = Enums.stringConverter(TestEnum.class);
-    assertNull(converter.convert(null));
-    assertNull(converter.reverse().convert(null));
+    assertThat(converter.convert(null)).isNull();
+    assertThat(converter.reverse().convert(null)).isNull();
   }
 
-  @J2ktIncompatible
-  @GwtIncompatible // Class.getName()
   public void testStringConverter_toString() {
-    assertEquals(
-        "Enums.stringConverter(jdk.m3.collections.guava.base.EnumsTest$TestEnum.class)",
-        Enums.stringConverter(TestEnum.class).toString());
+    assertThat(Enums.stringConverter(TestEnum.class).toString())
+        .isEqualTo("Enums.stringConverter(jdk.m3.collections.guava.base.EnumsTest$TestEnum.class)");
   }
 
-  @GwtIncompatible // stringConverter
   public void testStringConverter_serialization() {
-    SerializableTester.reserializeAndAssert(Enums.stringConverter(TestEnum.class));
+    reserializeAndAssert(Enums.stringConverter(TestEnum.class));
   }
 
-  @J2ktIncompatible
-  @GwtIncompatible // NullPointerTester
   public void testNullPointerExceptions() {
     NullPointerTester tester = new NullPointerTester();
     tester.testAllPublicStaticMethods(Enums.class);
@@ -185,20 +169,16 @@ public class EnumsTest extends TestCase {
     BAR
   }
 
-  @J2ktIncompatible
-  @GwtIncompatible // reflection
   public void testGetField() {
     Field foo = Enums.getField(AnEnum.FOO);
-    assertEquals("FOO", foo.getName());
+    assertThat(foo.getName()).isEqualTo("FOO");
     assertTrue(foo.isAnnotationPresent(ExampleAnnotation.class));
 
     Field bar = Enums.getField(AnEnum.BAR);
-    assertEquals("BAR", bar.getName());
+    assertThat(bar.getName()).isEqualTo("BAR");
     assertFalse(bar.isAnnotationPresent(ExampleAnnotation.class));
   }
 
-  @J2ktIncompatible
-  @GwtIncompatible // Class.getClassLoader()
   private URL[] getClassPathUrls() {
     ClassLoader classLoader = getClass().getClassLoader();
     return classLoader instanceof URLClassLoader
@@ -211,8 +191,7 @@ public class EnumsTest extends TestCase {
    * System#getProperty system property}.
    */
   // TODO(b/65488446): Make this a public API.
-  @J2ktIncompatible
-  @GwtIncompatible
+
   private static ImmutableList<URL> parseJavaClassPath() {
     ImmutableList.Builder<URL> urls = ImmutableList.builder();
     for (String entry : Splitter.on(PATH_SEPARATOR.value()).split(JAVA_CLASS_PATH.value())) {

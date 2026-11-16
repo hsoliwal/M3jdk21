@@ -20,12 +20,12 @@ import static jdk.m3.collections.guava.base.Preconditions.checkNotNull;
 
 import jdk.m3.collections.guava.collect.ImmutableList;
 import jdk.m3.collections.guava.collect.ImmutableMap;
-import jdk.m3.collections.guava.collect.Lists;
 import java.io.IOException;
 import java.io.Reader;
 import java.io.StringReader;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
+import java.util.ArrayList;
 import java.util.List;
 import junit.framework.TestCase;
 import org.jspecify.annotations.NullUnmarked;
@@ -73,9 +73,9 @@ public class SourceSinkTester<S, T, F extends SourceSinkFactory<S, T>> extends T
           .put("lorem ipsum", LOREM_IPSUM)
           .buildOrThrow();
 
-  protected final F factory;
-  protected final T data;
-  protected final T expected;
+  final F factory;
+  final T data;
+  final T expected;
 
   private final String suiteName;
   private final String caseDesc;
@@ -94,11 +94,11 @@ public class SourceSinkTester<S, T, F extends SourceSinkFactory<S, T>> extends T
     return super.getName() + " [" + suiteName + " [" + caseDesc + "]]";
   }
 
-  protected static ImmutableList<String> getLines(final String string) {
+  static ImmutableList<String> getLines(String string) {
     try {
       return new CharSource() {
         @Override
-        public Reader openStream() throws IOException {
+        public Reader openStream() {
           return new StringReader(string);
         }
       }.readLines();
@@ -108,12 +108,12 @@ public class SourceSinkTester<S, T, F extends SourceSinkFactory<S, T>> extends T
   }
 
   @Override
-  public void tearDown() throws IOException {
+  protected void tearDown() throws IOException {
     factory.tearDown();
   }
 
   static ImmutableList<Method> getTestMethods(Class<?> testClass) {
-    List<Method> result = Lists.newArrayList();
+    List<Method> result = new ArrayList<>();
     for (Method method : testClass.getDeclaredMethods()) {
       if (Modifier.isPublic(method.getModifiers())
           && method.getReturnType() == void.class

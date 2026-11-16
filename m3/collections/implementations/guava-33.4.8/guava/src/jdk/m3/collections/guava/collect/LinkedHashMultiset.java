@@ -15,7 +15,6 @@
  */
 
 // M3 array-storage adaptation; provenance: m3/array-storage-20261019/CONTRACT.md
-// Modified 2026 by Hitesh Soliwal and Synexia contributors: array storage.
 package jdk.m3.collections.guava.collect;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
@@ -40,7 +39,7 @@ import org.jspecify.annotations.Nullable;
  * @author Jared Levy
  * @since 2.0
  */
-@GwtCompatible(serializable = true, emulated = true)
+@GwtCompatible
 public final class LinkedHashMultiset<E extends @Nullable Object>
     extends AbstractMapBasedMultiset<E> {
 
@@ -86,18 +85,18 @@ public final class LinkedHashMultiset<E extends @Nullable Object>
    * @serialData the number of distinct elements, the first element, its count, the second element,
    *     its count, and so on
    */
-  @GwtIncompatible // java.io.ObjectOutputStream
+  @GwtIncompatible
   @J2ktIncompatible
   private void writeObject(ObjectOutputStream stream) throws IOException {
     stream.defaultWriteObject();
     Serialization.writeMultiset(this, stream);
   }
 
-  @GwtIncompatible // java.io.ObjectInputStream
+  @GwtIncompatible
   @J2ktIncompatible
   private void readObject(ObjectInputStream stream) throws IOException, ClassNotFoundException {
     stream.defaultReadObject();
-    int distinctElements = Serialization.readCount(stream);
+    int distinctElements = stream.readInt();
     setBackingMap(new ObjectCountLinkedHashMap<E>());
     Serialization.populateMultiset(this, stream, distinctElements);
   }

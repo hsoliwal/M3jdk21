@@ -15,6 +15,8 @@
 package jdk.m3.collections.guava.base;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
+import jdk.m3.collections.guava.annotations.GwtIncompatible;
+import jdk.m3.collections.guava.annotations.J2ktIncompatible;
 import org.jspecify.annotations.Nullable;
 
 /**
@@ -53,4 +55,6 @@ public class VerifyException extends RuntimeException {
   public VerifyException(@Nullable String message, @Nullable Throwable cause) {
     super(message, cause);
   }
+
+  @GwtIncompatible @J2ktIncompatible   private static final long serialVersionUID = -5555829855959801639L;
 }

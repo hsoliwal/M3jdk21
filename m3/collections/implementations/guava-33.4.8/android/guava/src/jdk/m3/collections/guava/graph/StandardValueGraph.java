@@ -16,6 +16,7 @@
 
 package jdk.m3.collections.guava.graph;
 
+import static jdk.m3.collections.guava.base.MoreObjects.firstNonNull;
 import static jdk.m3.collections.guava.base.Preconditions.checkNotNull;
 import static jdk.m3.collections.guava.graph.GraphConstants.DEFAULT_NODE_COUNT;
 import static jdk.m3.collections.guava.graph.Graphs.checkNonNegative;
@@ -56,8 +57,7 @@ class StandardValueGraph<N, V> extends AbstractValueGraph<N, V> {
   StandardValueGraph(AbstractGraphBuilder<? super N> builder) {
     this(
         builder,
-        builder.nodeOrder.<N, GraphConnections<N, V>>createMap(
-            builder.expectedNodeCount.or(DEFAULT_NODE_COUNT)),
+        builder.nodeOrder.createMap(firstNonNull(builder.expectedNodeCount, DEFAULT_NODE_COUNT)),
         0L);
   }
 
@@ -75,8 +75,8 @@ class StandardValueGraph<N, V> extends AbstractValueGraph<N, V> {
     // Prefer the heavier "MapRetrievalCache" for nodes if lookup is expensive.
     this.nodeConnections =
         (nodeConnections instanceof TreeMap)
-            ? new MapRetrievalCache<N, GraphConnections<N, V>>(nodeConnections)
-            : new MapIteratorCache<N, GraphConnections<N, V>>(nodeConnections);
+            ? new MapRetrievalCache<>(nodeConnections)
+            : new MapIteratorCache<>(nodeConnections);
     this.edgeCount = checkNonNegative(edgeCount);
   }
 
@@ -86,12 +86,12 @@ class StandardValueGraph<N, V> extends AbstractValueGraph<N, V> {
   }
 
   @Override
-  public boolean isDirected() {
+  public final boolean isDirected() {
     return isDirected;
   }
 
   @Override
-  public boolean allowsSelfLoops() {
+  public final boolean allowsSelfLoops() {
     return allowsSelfLoops;
   }
 
@@ -119,7 +119,7 @@ class StandardValueGraph<N, V> extends AbstractValueGraph<N, V> {
   public Set<EndpointPair<N>> incidentEdges(N node) {
     GraphConnections<N, V> connections = checkedConnections(node);
     IncidentEdgeSet<N> incident =
-        new IncidentEdgeSet<N>(this, node) {
+        new IncidentEdgeSet<N>(this, node, IncidentEdgeSet.EdgeType.BOTH) {
           @Override
           public Iterator<EndpointPair<N>> iterator() {
             return connections.incidentEdgeIterator(node);
@@ -165,7 +165,8 @@ class StandardValueGraph<N, V> extends AbstractValueGraph<N, V> {
     return connections;
   }
 
-  final boolean containsNode(@Nullable N node) {
+  final boolean containsNode(N node) {
+    checkNotNull(node);
     return nodeConnections.containsKey(node);
   }
 

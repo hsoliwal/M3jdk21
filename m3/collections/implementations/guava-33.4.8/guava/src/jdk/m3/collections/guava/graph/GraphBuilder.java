@@ -20,8 +20,6 @@ import static jdk.m3.collections.guava.base.Preconditions.checkArgument;
 import static jdk.m3.collections.guava.base.Preconditions.checkNotNull;
 import static jdk.m3.collections.guava.graph.Graphs.checkNonNegative;
 
-import jdk.m3.collections.guava.annotations.Beta;
-import jdk.m3.collections.guava.base.Optional;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import com.google.errorprone.annotations.DoNotMock;
 
@@ -69,7 +67,6 @@ import com.google.errorprone.annotations.DoNotMock;
  *     constructed based on an existing {@code Graph} using {@link #from(Graph)}.
  * @since 20.0
  */
-@Beta
 @DoNotMock
 public final class GraphBuilder<N> extends AbstractGraphBuilder<N> {
 
@@ -137,7 +134,7 @@ public final class GraphBuilder<N> extends AbstractGraphBuilder<N> {
    */
   @CanIgnoreReturnValue
   public GraphBuilder<N> expectedNodeCount(int expectedNodeCount) {
-    this.expectedNodeCount = Optional.of(checkNonNegative(expectedNodeCount));
+    this.expectedNodeCount = checkNonNegative(expectedNodeCount);
     return this;
   }
 

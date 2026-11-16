@@ -14,6 +14,9 @@
 
 package jdk.m3.collections.guava.collect;
 
+import static jdk.m3.collections.guava.collect.Lists.reverse;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
+
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
 import java.util.Iterator;
 import java.util.List;
@@ -68,10 +71,10 @@ public abstract class AbstractRangeSetTest extends TestCase {
       Range<C> span = rangeSet.span();
       assertEquals(expectedSpan, span);
     } catch (NoSuchElementException e) {
-      assertNull(expectedSpan);
+      assertThat(expectedSpan).isNull();
     }
 
     // test that asDescendingSetOfRanges is the reverse of asRanges
-    assertEquals(Lists.reverse(asRanges), ImmutableList.copyOf(rangeSet.asDescendingSetOfRanges()));
+    assertEquals(reverse(asRanges), ImmutableList.copyOf(rangeSet.asDescendingSetOfRanges()));
   }
 }

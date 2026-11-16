@@ -16,11 +16,11 @@
 
 package jdk.m3.collections.guava.eventbus.outside;
 
-import static com.google.common.truth.Truth.assertThat;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
 
-import jdk.m3.collections.guava.collect.Lists;
 import jdk.m3.collections.guava.eventbus.Subscribe;
 import jdk.m3.collections.guava.eventbus.outside.AnnotatedAndAbstractInSuperclassTest.SubClass;
+import java.util.ArrayList;
 import java.util.List;
 
 public class AnnotatedAndAbstractInSuperclassTest extends AbstractEventBusTest<SubClass> {
@@ -33,8 +33,8 @@ public class AnnotatedAndAbstractInSuperclassTest extends AbstractEventBusTest<S
   }
 
   static class SubClass extends SuperClass {
-    final List<Object> overriddenAndAnnotatedInSubclassEvents = Lists.newArrayList();
-    final List<Object> overriddenInSubclassEvents = Lists.newArrayList();
+    final List<Object> overriddenAndAnnotatedInSubclassEvents = new ArrayList<>();
+    final List<Object> overriddenInSubclassEvents = new ArrayList<>();
 
     @Subscribe
     @Override

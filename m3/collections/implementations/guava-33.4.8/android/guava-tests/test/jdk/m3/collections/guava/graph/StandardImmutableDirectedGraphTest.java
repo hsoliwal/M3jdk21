@@ -16,45 +16,37 @@
 
 package jdk.m3.collections.guava.graph;
 
-import java.util.Arrays;
-import java.util.Collection;
+import com.google.testing.junit.testparameterinjector.TestParameter;
+import com.google.testing.junit.testparameterinjector.TestParameterInjector;
 import org.jspecify.annotations.NullUnmarked;
 import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-import org.junit.runners.Parameterized.Parameters;
 
 /** Tests for a directed {@link StandardMutableGraph}. */
-@AndroidIncompatible
-@RunWith(Parameterized.class)
+@RunWith(TestParameterInjector.class)
 @NullUnmarked
 public final class StandardImmutableDirectedGraphTest extends AbstractStandardDirectedGraphTest {
-
-  @Parameters(name = "allowsSelfLoops={0}")
-  public static Collection<Object[]> parameters() {
-    return Arrays.asList(new Object[][] {{false}, {true}});
-  }
 
   private final boolean allowsSelfLoops;
   private ImmutableGraph.Builder<Integer> graphBuilder;
 
-  public StandardImmutableDirectedGraphTest(boolean allowsSelfLoops) {
+  public StandardImmutableDirectedGraphTest(@TestParameter boolean allowsSelfLoops) {
     this.allowsSelfLoops = allowsSelfLoops;
   }
 
   @Override
-  public Graph<Integer> createGraph() {
+  Graph<Integer> createGraph() {
     graphBuilder = GraphBuilder.directed().allowsSelfLoops(allowsSelfLoops).immutable();
     return graphBuilder.build();
   }
 
   @Override
-  final void addNode(Integer n) {
+  void addNode(Integer n) {
     graphBuilder.addNode(n);
     graph = graphBuilder.build();
   }
 
   @Override
-  final void putEdge(Integer n1, Integer n2) {
+  void putEdge(Integer n1, Integer n2) {
     graphBuilder.putEdge(n1, n2);
     graph = graphBuilder.build();
   }

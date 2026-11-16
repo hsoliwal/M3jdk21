@@ -16,7 +16,6 @@
 
 package jdk.m3.collections.guava.graph;
 
-import jdk.m3.collections.guava.annotations.Beta;
 import com.google.errorprone.annotations.DoNotMock;
 
 /**
@@ -26,7 +25,7 @@ import com.google.errorprone.annotations.DoNotMock;
  * <p>This interface is meant to be used as the type of a parameter to graph algorithms (such as
  * topological sort) that only need a way of accessing the predecessors of a node in a graph.
  *
- * <h3>Usage</h3>
+ * <h2>Usage</h2>
  *
  * Given an algorithm, for example:
  *
@@ -65,7 +64,7 @@ import com.google.errorprone.annotations.DoNotMock;
  * successors, iterating over the edges, etc.) should declare their input to be of a type that
  * provides those capabilities, such as {@link Graph}, {@link ValueGraph}, or {@link Network}.
  *
- * <h3>Additional documentation</h3>
+ * <h2>Additional documentation</h2>
  *
  * <p>See the Guava User Guide for the {@code common.graph} package (<a
  * href="https://github.com/google/guava/wiki/GraphsExplained">"Graphs Explained"</a>) for
@@ -78,7 +77,6 @@ import com.google.errorprone.annotations.DoNotMock;
  * @param <N> Node parameter type
  * @since 23.0
  */
-@Beta
 @DoNotMock("Implement with a lambda, or use GraphBuilder to build a Graph with the desired edges")
 public interface PredecessorsFunction<N> {
 

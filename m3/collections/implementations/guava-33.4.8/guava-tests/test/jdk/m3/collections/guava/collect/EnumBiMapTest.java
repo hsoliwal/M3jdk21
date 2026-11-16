@@ -16,10 +16,12 @@
 
 package jdk.m3.collections.guava.collect;
 
-import static jdk.m3.collections.guava.collect.ReflectionFreeAssertThrows.assertThrows;
+import static jdk.m3.collections.guava.collect.Sets.newIdentityHashSet;
 import static jdk.m3.collections.guava.collect.testing.Helpers.mapEntry;
 import static jdk.m3.collections.guava.collect.testing.Helpers.orderEntriesByKey;
-import static com.google.common.truth.Truth.assertThat;
+import static jdk.m3.collections.guava.testing.SerializableTester.reserializeAndAssert;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
+import static org.junit.Assert.assertThrows;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
@@ -32,7 +34,6 @@ import jdk.m3.collections.guava.collect.testing.google.BiMapTestSuiteBuilder;
 import jdk.m3.collections.guava.collect.testing.google.TestBiMapGenerator;
 import jdk.m3.collections.guava.testing.EqualsTester;
 import jdk.m3.collections.guava.testing.NullPointerTester;
-import jdk.m3.collections.guava.testing.SerializableTester;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
@@ -51,7 +52,7 @@ import org.jspecify.annotations.NullMarked;
  * @author Jared Levy
  */
 @J2ktIncompatible // EnumBimap
-@GwtCompatible(emulated = true)
+@GwtCompatible
 @NullMarked
 public class EnumBiMapTest extends TestCase {
   private enum Currency {
@@ -115,7 +116,6 @@ public class EnumBiMapTest extends TestCase {
     }
   }
 
-  @J2ktIncompatible
   @GwtIncompatible // suite
   @AndroidIncompatible // test-suite builders
   public static Test suite() {
@@ -137,11 +137,11 @@ public class EnumBiMapTest extends TestCase {
   public void testCreate() {
     EnumBiMap<Currency, Country> bimap = EnumBiMap.create(Currency.class, Country.class);
     assertTrue(bimap.isEmpty());
-    assertEquals("{}", bimap.toString());
+    assertThat(bimap.toString()).isEqualTo("{}");
     assertEquals(HashBiMap.create(), bimap);
     bimap.put(Currency.DOLLAR, Country.CANADA);
-    assertEquals(Country.CANADA, bimap.get(Currency.DOLLAR));
-    assertEquals(Currency.DOLLAR, bimap.inverse().get(Country.CANADA));
+    assertThat(bimap).containsEntry(Currency.DOLLAR, Country.CANADA);
+    assertThat(bimap.inverse()).containsEntry(Country.CANADA, Currency.DOLLAR);
   }
 
   public void testCreateFromMap() {
@@ -152,8 +152,8 @@ public class EnumBiMapTest extends TestCase {
             Currency.PESO, Country.CHILE,
             Currency.FRANC, Country.SWITZERLAND);
     EnumBiMap<Currency, Country> bimap = EnumBiMap.create(map);
-    assertEquals(Country.CANADA, bimap.get(Currency.DOLLAR));
-    assertEquals(Currency.DOLLAR, bimap.inverse().get(Country.CANADA));
+    assertThat(bimap).containsEntry(Currency.DOLLAR, Country.CANADA);
+    assertThat(bimap.inverse()).containsEntry(Country.CANADA, Currency.DOLLAR);
 
     /* Map must have at least one entry if not an EnumBiMap. */
     assertThrows(
@@ -174,11 +174,11 @@ public class EnumBiMapTest extends TestCase {
     EnumBiMap<Currency, Country> bimap1 = EnumBiMap.create(Currency.class, Country.class);
     bimap1.put(Currency.DOLLAR, Country.CANADA);
     EnumBiMap<Currency, Country> bimap2 = EnumBiMap.create(bimap1);
-    assertEquals(Country.CANADA, bimap2.get(Currency.DOLLAR));
+    assertThat(bimap2).containsEntry(Currency.DOLLAR, Country.CANADA);
     assertEquals(bimap1, bimap2);
     bimap2.inverse().put(Country.SWITZERLAND, Currency.FRANC);
-    assertEquals(Country.SWITZERLAND, bimap2.get(Currency.FRANC));
-    assertNull(bimap1.get(Currency.FRANC));
+    assertThat(bimap2).containsEntry(Currency.FRANC, Country.SWITZERLAND);
+    assertThat(bimap1).doesNotContainKey(Currency.FRANC);
     assertFalse(bimap2.equals(bimap1));
 
     /* Test that it can be empty. */
@@ -190,13 +190,13 @@ public class EnumBiMapTest extends TestCase {
   @GwtIncompatible // keyType
   public void testKeyType() {
     EnumBiMap<Currency, Country> bimap = EnumBiMap.create(Currency.class, Country.class);
-    assertEquals(Currency.class, bimap.keyType());
+    assertThat(bimap.keyType()).isEqualTo(Currency.class);
   }
 
   @GwtIncompatible // valueType
   public void testValueType() {
     EnumBiMap<Currency, Country> bimap = EnumBiMap.create(Currency.class, Country.class);
-    assertEquals(Country.class, bimap.valueType());
+    assertThat(bimap.valueType()).isEqualTo(Country.class);
   }
 
   public void testIterationOrder() {
@@ -238,7 +238,7 @@ public class EnumBiMapTest extends TestCase {
     EnumBiMap<Currency, Country> bimap = EnumBiMap.create(map);
 
     Iterator<Currency> iter = bimap.keySet().iterator();
-    assertEquals(Currency.DOLLAR, iter.next());
+    assertThat(iter.next()).isEqualTo(Currency.DOLLAR);
     iter.remove();
 
     // forward map ordered by currency
@@ -264,8 +264,8 @@ public class EnumBiMapTest extends TestCase {
     EnumBiMap<Currency, Country> bimap = EnumBiMap.create(map);
 
     Iterator<Currency> iter = bimap.keySet().iterator();
-    assertEquals(Currency.DOLLAR, iter.next());
-    assertEquals(Currency.FRANC, iter.next());
+    assertThat(iter.next()).isEqualTo(Currency.DOLLAR);
+    assertThat(iter.next()).isEqualTo(Currency.FRANC);
     iter.remove();
 
     // forward map ordered by currency
@@ -286,19 +286,16 @@ public class EnumBiMapTest extends TestCase {
             Currency.PESO, Country.CHILE,
             Currency.FRANC, Country.SWITZERLAND);
     EnumBiMap<Currency, Country> bimap = EnumBiMap.create(map);
-    Set<Object> uniqueEntries = Sets.newIdentityHashSet();
+    Set<Object> uniqueEntries = newIdentityHashSet();
     uniqueEntries.addAll(bimap.entrySet());
     assertEquals(3, uniqueEntries.size());
   }
 
-  @J2ktIncompatible
-  @GwtIncompatible // serialization
+  @GwtIncompatible
   public void testSerializable() {
-    SerializableTester.reserializeAndAssert(
-        EnumBiMap.create(ImmutableMap.of(Currency.DOLLAR, Country.CANADA)));
+    reserializeAndAssert(EnumBiMap.create(ImmutableMap.of(Currency.DOLLAR, Country.CANADA)));
   }
 
-  @J2ktIncompatible
   @GwtIncompatible // reflection
   public void testNulls() {
     new NullPointerTester().testAllPublicStaticMethods(EnumBiMap.class);

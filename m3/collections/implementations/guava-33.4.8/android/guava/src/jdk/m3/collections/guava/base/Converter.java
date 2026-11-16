@@ -27,6 +27,7 @@ import com.google.errorprone.annotations.concurrent.LazyInit;
 import com.google.j2objc.annotations.RetainedWith;
 import java.io.Serializable;
 import java.util.Iterator;
+import java.util.stream.Stream;
 import org.jspecify.annotations.Nullable;
 
 /**
@@ -34,7 +35,7 @@ import org.jspecify.annotations.Nullable;
  * to {@code A}; used for converting back and forth between <i>different representations of the same
  * information</i>.
  *
- * <h3>Invertibility</h3>
+ * <h2>Invertibility</h2>
  *
  * <p>The reverse operation <b>may</b> be a strict <i>inverse</i> (meaning that {@code
  * converter.reverse().convert(converter.convert(a)).equals(a)} is always true). However, it is very
@@ -50,7 +51,7 @@ import org.jspecify.annotations.Nullable;
  * <p>Note that it should still be the case that the round-tripped and original objects are
  * <i>similar</i>.
  *
- * <h3>Nullability</h3>
+ * <h2>Nullability</h2>
  *
  * <p>A converter always converts {@code null} to {@code null} and non-null references to non-null
  * references. It would not make sense to consider {@code null} and a non-null reference to be
@@ -59,7 +60,7 @@ import org.jspecify.annotations.Nullable;
  * behavior for all converters; implementations of {@link #doForward} and {@link #doBackward} are
  * guaranteed to never be passed {@code null}, and must never return {@code null}.
  *
- * <h3>Common ways to use</h3>
+ * <h2>Common ways to use</h2>
  *
  * <p>Getting a converter:
  *
@@ -71,9 +72,8 @@ import org.jspecify.annotations.Nullable;
  *       jdk.m3.collections.guava.collect.Maps#asConverter Maps.asConverter}. For example, use this to
  *       create a "fake" converter for a unit test. It is unnecessary (and confusing) to <i>mock</i>
  *       the {@code Converter} type using a mocking framework.
+ *   <li>Pass two lambda expressions or method references to the {@link #from from} factory method.
  *   <li>Extend this class and implement its {@link #doForward} and {@link #doBackward} methods.
- *   <li><b>Java 8+ users:</b> you may prefer to pass two lambda expressions or method references to
- *       the {@link #from from} factory method.
  * </ul>
  *
  * <p>Using a converter:
@@ -84,31 +84,33 @@ import org.jspecify.annotations.Nullable;
  *   <li>Convert in the "backward" direction using {@code converter.reverse().convert(b)} or {@code
  *       converter.reverse().convertAll(bs)}.
  *   <li>Use {@code converter} or {@code converter.reverse()} anywhere a {@link
- *       java.util.function.Function} is accepted (for example {@link java.util.stream.Stream#map
- *       Stream.map}).
+ *       java.util.function.Function} is accepted (for example {@link Stream#map Stream.map}).
  *   <li><b>Do not</b> call {@link #doForward} or {@link #doBackward} directly; these exist only to
  *       be overridden.
  * </ul>
  *
- * <h3>Example</h3>
- *
- * <pre>
- *   return new Converter&lt;Integer, String&gt;() {
- *     protected String doForward(Integer i) {
- *       return Integer.toHexString(i);
- *     }
- *
- *     protected Integer doBackward(String s) {
- *       return parseUnsignedInt(s, 16);
- *     }
- *   };</pre>
- *
- * <p>An alternative using Java 8:
+ * <h2>Example</h2>
  *
  * {@snippet :
  * return Converter.from(
  *     Integer::toHexString,
  *     s -> parseUnsignedInt(s, 16));
+ * }
+ *
+ * <p>An alternative using a subclass:
+ *
+ * {@snippet :
+ * return new Converter<Integer, String>() {
+ *   @Override
+ *   protected String doForward(Integer i) {
+ *     return Integer.toHexString(i);
+ *   }
+ *
+ *   @Override
+ *   protected Integer doBackward(String s) {
+ *     return parseUnsignedInt(s, 16);
+ *   }
+ * };
  * }
  *
  * @author Mike Ward
@@ -145,7 +147,7 @@ public abstract class Converter<A, B> implements Function<A, B> {
   private final boolean handleNullAutomatically;
 
   // We lazily cache the reverse view to avoid allocating on every call to reverse().
-  @LazyInit @RetainedWith private transient @Nullable Converter<B, A> reverse;
+  @LazyInit @RetainedWith private @Nullable Converter<B, A> reverse;
 
   /** Constructor for use by subclasses. */
   protected Converter() {
@@ -254,6 +256,9 @@ public abstract class Converter<A, B> implements Function<A, B> {
    * <p>The returned iterable's iterator supports {@code remove()} if the input iterator does. After
    * a successful {@code remove()} call, {@code fromIterable} no longer contains the corresponding
    * element.
+   *
+   * <p>We generally encourage using {@link Stream} over lazily computed views like this one. Here,
+   * that means using {@link Stream#map stream.map(converter)}.
    */
   /*
    * Just as Converter could implement `Function<@Nullable A, @Nullable B>` instead of `Function<A,
@@ -269,7 +274,7 @@ public abstract class Converter<A, B> implements Function<A, B> {
     checkNotNull(fromIterable, "fromIterable");
     return () ->
         new Iterator<B>() {
-          private final Iterator<? extends A> fromIterator = fromIterable.iterator();
+          final Iterator<? extends A> fromIterator = fromIterable.iterator();
 
           @Override
           public boolean hasNext() {
@@ -299,7 +304,10 @@ public abstract class Converter<A, B> implements Function<A, B> {
   @CheckReturnValue
   public Converter<B, A> reverse() {
     Converter<B, A> result = reverse;
-    return (result == null) ? reverse = new ReverseConverter<>(this) : result;
+    if (result == null) {
+      result = reverse = new ReverseConverter<>(this);
+    }
+    return result;
   }
 
   private static final class ReverseConverter<A, B> extends Converter<B, A>
@@ -468,15 +476,15 @@ public abstract class Converter<A, B> implements Function<A, B> {
   }
 
   /**
-   * Indicates whether another object is equal to this converter.
+   * <i>May</i> return {@code true} if {@code object} is a {@code Converter} that behaves
+   * identically to this converter.
    *
-   * <p>Most implementations will have no reason to override the behavior of {@link Object#equals}.
-   * However, an implementation may also choose to return {@code true} whenever {@code object} is a
-   * {@link Converter} that it considers <i>interchangeable</i> with this one. "Interchangeable"
-   * <i>typically</i> means that {@code Objects.equal(this.convert(a), that.convert(a))} is true for
-   * all {@code a} of type {@code A} (and similarly for {@code reverse}). Note that a {@code false}
-   * result from this method does not imply that the converters are known <i>not</i> to be
-   * interchangeable.
+   * <p><b>Warning: do not depend</b> on the behavior of this method.
+   *
+   * <p>Historically, {@code Converter} instances in this library have implemented this method to
+   * recognize certain cases where distinct {@code Converter} instances would in fact behave
+   * identically. However, this is not true of {@code Converter} implementations in general. It is
+   * best not to depend on it.
    */
   @Override
   public boolean equals(@Nullable Object object) {
@@ -546,6 +554,8 @@ public abstract class Converter<A, B> implements Function<A, B> {
     public String toString() {
       return "Converter.from(" + forwardFunction + ", " + backwardFunction + ")";
     }
+
+    @GwtIncompatible @J2ktIncompatible     private static final long serialVersionUID = 6500462374954026321L;
   }
 
   /** Returns a serializable converter that always converts or reverses an object to itself. */

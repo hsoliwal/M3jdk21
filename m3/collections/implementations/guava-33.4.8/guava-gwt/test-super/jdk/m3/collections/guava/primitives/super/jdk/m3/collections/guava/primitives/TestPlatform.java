@@ -18,9 +18,11 @@ package jdk.m3.collections.guava.primitives;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 
-@GwtCompatible(emulated = true)
-class TestPlatform {
+@GwtCompatible
+final class TestPlatform {
   static int reduceIterationsIfGwt(int iterations) {
     return iterations / 10;
   }
+
+  private TestPlatform() {}
 }

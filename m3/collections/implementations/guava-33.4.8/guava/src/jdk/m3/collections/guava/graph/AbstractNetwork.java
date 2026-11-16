@@ -18,6 +18,11 @@ package jdk.m3.collections.guava.graph;
 
 import static jdk.m3.collections.guava.base.Preconditions.checkArgument;
 import static jdk.m3.collections.guava.base.Preconditions.checkNotNull;
+import static jdk.m3.collections.guava.collect.Iterators.transform;
+import static jdk.m3.collections.guava.collect.Maps.asMap;
+import static jdk.m3.collections.guava.collect.Sets.difference;
+import static jdk.m3.collections.guava.collect.Sets.filter;
+import static jdk.m3.collections.guava.collect.Sets.union;
 import static jdk.m3.collections.guava.graph.GraphConstants.EDGE_REMOVED_FROM_GRAPH;
 import static jdk.m3.collections.guava.graph.GraphConstants.ENDPOINTS_MISMATCH;
 import static jdk.m3.collections.guava.graph.GraphConstants.MULTIPLE_EDGES_CONNECTING;
@@ -25,12 +30,8 @@ import static jdk.m3.collections.guava.graph.GraphConstants.NODE_PAIR_REMOVED_FR
 import static jdk.m3.collections.guava.graph.GraphConstants.NODE_REMOVED_FROM_GRAPH;
 import static java.util.Collections.unmodifiableSet;
 
-import jdk.m3.collections.guava.annotations.Beta;
 import jdk.m3.collections.guava.base.Predicate;
 import jdk.m3.collections.guava.collect.ImmutableSet;
-import jdk.m3.collections.guava.collect.Iterators;
-import jdk.m3.collections.guava.collect.Maps;
-import jdk.m3.collections.guava.collect.Sets;
 import jdk.m3.collections.guava.math.IntMath;
 import java.util.AbstractSet;
 import java.util.Iterator;
@@ -51,17 +52,17 @@ import org.jspecify.annotations.Nullable;
  * @param <E> Edge parameter type
  * @since 20.0
  */
-@Beta
 public abstract class AbstractNetwork<N, E> implements Network<N, E> {
   /** Constructor for use by subclasses. */
-  public AbstractNetwork() {}
+  protected AbstractNetwork() {}
 
   @Override
   public Graph<N> asGraph() {
+    Network<N, E> network = this;
     return new AbstractGraph<N>() {
       @Override
       public Set<N> nodes() {
-        return AbstractNetwork.this.nodes();
+        return network.nodes();
       }
 
       @Override
@@ -74,13 +75,12 @@ public abstract class AbstractNetwork<N, E> implements Network<N, E> {
         return new AbstractSet<EndpointPair<N>>() {
           @Override
           public Iterator<EndpointPair<N>> iterator() {
-            return Iterators.transform(
-                AbstractNetwork.this.edges().iterator(), edge -> incidentNodes(edge));
+            return transform(network.edges().iterator(), network::incidentNodes);
           }
 
           @Override
           public int size() {
-            return AbstractNetwork.this.edges().size();
+            return network.edges().size();
           }
 
           // Mostly safe: We check contains(u) before calling successors(u), so we perform unsafe
@@ -102,39 +102,38 @@ public abstract class AbstractNetwork<N, E> implements Network<N, E> {
 
       @Override
       public ElementOrder<N> nodeOrder() {
-        return AbstractNetwork.this.nodeOrder();
+        return network.nodeOrder();
       }
 
       @Override
       public ElementOrder<N> incidentEdgeOrder() {
-        // TODO(b/142723300): Return AbstractNetwork.this.incidentEdgeOrder() once Network has that
-        //   method.
+        // TODO(b/142723300): Return network.incidentEdgeOrder() once Network has that method.
         return ElementOrder.unordered();
       }
 
       @Override
       public boolean isDirected() {
-        return AbstractNetwork.this.isDirected();
+        return network.isDirected();
       }
 
       @Override
       public boolean allowsSelfLoops() {
-        return AbstractNetwork.this.allowsSelfLoops();
+        return network.allowsSelfLoops();
       }
 
       @Override
       public Set<N> adjacentNodes(N node) {
-        return AbstractNetwork.this.adjacentNodes(node);
+        return network.adjacentNodes(node);
       }
 
       @Override
       public Set<N> predecessors(N node) {
-        return AbstractNetwork.this.predecessors(node);
+        return network.predecessors(node);
       }
 
       @Override
       public Set<N> successors(N node) {
-        return AbstractNetwork.this.successors(node);
+        return network.successors(node);
       }
 
       // DO NOT override the AbstractGraph *degree() implementations.
@@ -164,19 +163,20 @@ public abstract class AbstractNetwork<N, E> implements Network<N, E> {
   public Set<E> adjacentEdges(E edge) {
     EndpointPair<N> endpointPair = incidentNodes(edge); // Verifies that edge is in this network.
     Set<E> endpointPairIncidentEdges =
-        Sets.union(incidentEdges(endpointPair.nodeU()), incidentEdges(endpointPair.nodeV()));
-    return edgeInvalidatableSet(
-        Sets.difference(endpointPairIncidentEdges, ImmutableSet.of(edge)), edge);
+        union(incidentEdges(endpointPair.nodeU()), incidentEdges(endpointPair.nodeV()));
+    return edgeInvalidatableSet(difference(endpointPairIncidentEdges, ImmutableSet.of(edge)), edge);
   }
 
   @Override
   public Set<E> edgesConnecting(N nodeU, N nodeV) {
+    checkNotNull(nodeU);
+    checkNotNull(nodeV);
     Set<E> outEdgesU = outEdges(nodeU);
     Set<E> inEdgesV = inEdges(nodeV);
     return nodePairInvalidatableSet(
         outEdgesU.size() <= inEdgesV.size()
-            ? unmodifiableSet(Sets.filter(outEdgesU, connectedPredicate(nodeU, nodeV)))
-            : unmodifiableSet(Sets.filter(inEdgesV, connectedPredicate(nodeV, nodeU))),
+            ? unmodifiableSet(filter(outEdgesU, connectedPredicate(nodeU, nodeV)))
+            : unmodifiableSet(filter(inEdgesV, connectedPredicate(nodeV, nodeU))),
         nodeU,
         nodeV);
   }
@@ -292,6 +292,7 @@ public abstract class AbstractNetwork<N, E> implements Network<N, E> {
    * @since 33.1.0
    */
   protected final <T> Set<T> edgeInvalidatableSet(Set<T> set, E edge) {
+    checkNotNull(edge);
     return InvalidatableSet.of(
         set, () -> edges().contains(edge), () -> String.format(EDGE_REMOVED_FROM_GRAPH, edge));
   }
@@ -303,6 +304,7 @@ public abstract class AbstractNetwork<N, E> implements Network<N, E> {
    * @since 33.1.0
    */
   protected final <T> Set<T> nodeInvalidatableSet(Set<T> set, N node) {
+    checkNotNull(node);
     return InvalidatableSet.of(
         set, () -> nodes().contains(node), () -> String.format(NODE_REMOVED_FROM_GRAPH, node));
   }
@@ -314,6 +316,8 @@ public abstract class AbstractNetwork<N, E> implements Network<N, E> {
    * @since 33.1.0
    */
   protected final <T> Set<T> nodePairInvalidatableSet(Set<T> set, N nodeU, N nodeV) {
+    checkNotNull(nodeU);
+    checkNotNull(nodeV);
     return InvalidatableSet.of(
         set,
         () -> nodes().contains(nodeU) && nodes().contains(nodeV),
@@ -321,6 +325,6 @@ public abstract class AbstractNetwork<N, E> implements Network<N, E> {
   }
 
   private static <N, E> Map<E, EndpointPair<N>> edgeIncidentNodesMap(Network<N, E> network) {
-    return Maps.asMap(network.edges(), network::incidentNodes);
+    return asMap(network.edges(), network::incidentNodes);
   }
 }

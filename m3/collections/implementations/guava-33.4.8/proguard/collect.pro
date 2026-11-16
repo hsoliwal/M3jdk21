@@ -8,24 +8,24 @@
 # optimized away.)
 #
 # This configuration is untested....
--keepclassmembernames class com.m3.collections.guava.collect.ImmutableMultimap {
+-keepclassmembernames class jdk.m3.collections.guava.collect.ImmutableMultimap {
   *** map;
   *** size;
 }
 # similarly:
--keepclassmembernames class com.m3.collections.guava.collect.ConcurrentHashMultiset {
+-keepclassmembernames class jdk.m3.collections.guava.collect.ConcurrentHashMultiset {
   *** countMap;
 }
 # similarly:
--keepclassmembernames class com.m3.collections.guava.collect.ImmutableSetMultimap {
+-keepclassmembernames class jdk.m3.collections.guava.collect.ImmutableSetMultimap {
   *** emptySet;
 }
 # similarly:
--keepclassmembernames class com.m3.collections.guava.collect.AbstractSortedMultiset {
+-keepclassmembernames class jdk.m3.collections.guava.collect.AbstractSortedMultiset {
   *** comparator;
 }
 # similarly:
--keepclassmembernames class com.m3.collections.guava.collect.TreeMultiset {
+-keepclassmembernames class jdk.m3.collections.guava.collect.TreeMultiset {
   *** range;
   *** rootReference;
   *** header;

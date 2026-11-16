@@ -22,6 +22,7 @@ import static java.util.Objects.requireNonNull;
 
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
 import jdk.m3.collections.guava.annotations.J2ktIncompatible;
+import com.google.errorprone.annotations.concurrent.GuardedBy;
 import java.io.IOException;
 import java.io.Reader;
 import java.nio.CharBuffer;
@@ -40,6 +41,8 @@ final class CharSequenceReader extends Reader {
 
   private @Nullable CharSequence seq;
   private int pos;
+
+  @GuardedBy("this")
   private int mark;
 
   /** Creates a new reader wrapping the given character sequence. */
@@ -145,7 +148,7 @@ final class CharSequenceReader extends Reader {
   }
 
   @Override
-  public synchronized void close() throws IOException {
+  public synchronized void close() {
     seq = null;
   }
 }

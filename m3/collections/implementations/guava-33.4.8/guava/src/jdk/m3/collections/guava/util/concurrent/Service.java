@@ -15,6 +15,7 @@
 package jdk.m3.collections.guava.util.concurrent;
 
 import static jdk.m3.collections.guava.util.concurrent.Internal.toNanosSaturated;
+import static java.util.concurrent.TimeUnit.NANOSECONDS;
 
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
 import jdk.m3.collections.guava.annotations.J2ktIncompatible;
@@ -111,7 +112,7 @@ public interface Service {
    * @since 28.0
    */
   default void awaitRunning(Duration timeout) throws TimeoutException {
-    awaitRunning(toNanosSaturated(timeout), TimeUnit.NANOSECONDS);
+    awaitRunning(toNanosSaturated(timeout), NANOSECONDS);
   }
 
   /**
@@ -147,7 +148,7 @@ public interface Service {
    * @since 28.0
    */
   default void awaitTerminated(Duration timeout) throws TimeoutException {
-    awaitTerminated(toNanosSaturated(timeout), TimeUnit.NANOSECONDS);
+    awaitTerminated(toNanosSaturated(timeout), NANOSECONDS);
   }
 
   /**
@@ -242,7 +243,7 @@ public interface Service {
    */
   abstract class Listener {
     /** Constructor for use by subclasses. */
-    public Listener() {}
+    protected Listener() {}
 
     /**
      * Called when the service transitions from {@linkplain State#NEW NEW} to {@linkplain

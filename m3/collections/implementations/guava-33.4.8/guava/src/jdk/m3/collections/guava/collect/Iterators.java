@@ -20,7 +20,9 @@ import static jdk.m3.collections.guava.base.Preconditions.checkArgument;
 import static jdk.m3.collections.guava.base.Preconditions.checkNotNull;
 import static jdk.m3.collections.guava.base.Preconditions.checkState;
 import static jdk.m3.collections.guava.base.Predicates.instanceOf;
+import static jdk.m3.collections.guava.collect.CollectPreconditions.checkNonnegativeIndex;
 import static jdk.m3.collections.guava.collect.CollectPreconditions.checkRemove;
+import static jdk.m3.collections.guava.collect.Lists.newArrayList;
 import static jdk.m3.collections.guava.collect.NullnessCasts.uncheckedCastNullableTToT;
 import static java.util.Arrays.asList;
 import static java.util.Collections.unmodifiableList;
@@ -29,7 +31,6 @@ import static java.util.Objects.requireNonNull;
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
 import jdk.m3.collections.guava.base.Function;
-import jdk.m3.collections.guava.base.Objects;
 import jdk.m3.collections.guava.base.Optional;
 import jdk.m3.collections.guava.base.Preconditions;
 import jdk.m3.collections.guava.base.Predicate;
@@ -46,6 +47,7 @@ import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Objects;
 import java.util.PriorityQueue;
 import java.util.Queue;
 import org.jspecify.annotations.NonNull;
@@ -68,7 +70,7 @@ import org.jspecify.annotations.Nullable;
  * @author Jared Levy
  * @since 2.0
  */
-@GwtCompatible(emulated = true)
+@GwtCompatible
 public final class Iterators {
   private Iterators() {}
 
@@ -276,7 +278,7 @@ public final class Iterators {
       }
       Object o1 = iterator1.next();
       Object o2 = iterator2.next();
-      if (!Objects.equal(o1, o2)) {
+      if (!Objects.equals(o1, o2)) {
         return false;
       }
     }
@@ -350,7 +352,7 @@ public final class Iterators {
   @GwtIncompatible // Array.newInstance(Class, int)
   public static <T extends @Nullable Object> T[] toArray(
       Iterator<? extends T> iterator, Class<@NonNull T> type) {
-    List<T> list = Lists.newArrayList(iterator);
+    List<T> list = newArrayList(iterator);
     return Iterables.<T>toArray(list, type);
   }
 
@@ -452,7 +454,7 @@ public final class Iterators {
    */
   @SafeVarargs
   public static <T extends @Nullable Object> Iterator<T> cycle(T... elements) {
-    return cycle(Lists.newArrayList(elements));
+    return cycle(newArrayList(elements));
   }
 
   /**
@@ -592,6 +594,9 @@ public final class Iterators {
    * <p><b>Note:</b> The current implementation eagerly allocates storage for {@code size} elements.
    * As a consequence, passing values like {@code Integer.MAX_VALUE} can lead to {@link
    * OutOfMemoryError}.
+   *
+   * <p><b>Java 24+ users:</b> The {@code Stream} equivalent of this method is {@code
+   * stream.gather(Gatherers.windowFixed(size))}.
    *
    * @param iterator the iterator to return a partitioned view of
    * @param size the desired size of each partition (the last may be smaller)
@@ -841,7 +846,7 @@ public final class Iterators {
    */
   @ParametricNullness
   public static <T extends @Nullable Object> T get(Iterator<T> iterator, int position) {
-    checkNonnegative(position);
+    checkNonnegativeIndex(position, "position");
     int skipped = advance(iterator, position);
     if (!iterator.hasNext()) {
       throw new IndexOutOfBoundsException(
@@ -869,15 +874,9 @@ public final class Iterators {
   @ParametricNullness
   public static <T extends @Nullable Object> T get(
       Iterator<? extends T> iterator, int position, @ParametricNullness T defaultValue) {
-    checkNonnegative(position);
+    checkNonnegativeIndex(position, "position");
     advance(iterator, position);
     return getNext(iterator, defaultValue);
-  }
-
-  static void checkNonnegative(int position) {
-    if (position < 0) {
-      throw new IndexOutOfBoundsException("position (" + position + ") must not be negative");
-    }
   }
 
   /**
@@ -958,7 +957,7 @@ public final class Iterators {
     checkNotNull(iterator);
     checkArgument(limitSize >= 0, "limit is negative");
     return new Iterator<T>() {
-      private int count;
+      int count;
 
       @Override
       public boolean hasNext() {
@@ -1086,7 +1085,7 @@ public final class Iterators {
 
     @Override
     @ParametricNullness
-    protected T get(int index) {
+    T get(int index) {
       return array[index];
     }
   }
@@ -1178,13 +1177,13 @@ public final class Iterators {
   }
 
   /** Implementation of PeekingIterator that avoids peeking unless necessary. */
-  private static class PeekingImpl<E extends @Nullable Object> implements PeekingIterator<E> {
+  private static final class PeekingImpl<E extends @Nullable Object> implements PeekingIterator<E> {
 
     private final Iterator<? extends E> iterator;
     private boolean hasPeeked;
     private @Nullable E peekedElement;
 
-    public PeekingImpl(Iterator<? extends E> iterator) {
+    PeekingImpl(Iterator<? extends E> iterator) {
       this.iterator = checkNotNull(iterator);
     }
 
@@ -1294,8 +1293,9 @@ public final class Iterators {
    * <p>Callers must ensure that the source {@code iterators} are in non-descending order as this
    * method does not sort its input.
    *
-   * <p>For any equivalent elements across all {@code iterators}, it is undefined which element is
-   * returned first.
+   * <p>For any equivalent elements across all {@code iterators}, elements are returned in the order
+   * of their source iterators. That is, if element A from iterator 1 and element B from iterator 2
+   * compare as equal, A will be returned before B if iterator 1 was passed before iterator 2.
    *
    * @since 11.0
    */
@@ -1316,22 +1316,40 @@ public final class Iterators {
    * iterators. (Retrieving all elements takes approximately O(N*log(M)) time, where N is the total
    * number of elements.)
    */
-  private static class MergingIterator<T extends @Nullable Object> extends UnmodifiableIterator<T> {
-    final Queue<PeekingIterator<T>> queue;
+  private static final class MergingIterator<T extends @Nullable Object>
+      extends UnmodifiableIterator<T> {
 
-    public MergingIterator(
+    // Wrapper class to track insertion order for stable sorting
+    private static final class IndexedIterator<E extends @Nullable Object> {
+      final PeekingIterator<E> iterator;
+      final int index;
+
+      IndexedIterator(PeekingIterator<E> iterator, int index) {
+        this.iterator = iterator;
+        this.index = index;
+      }
+    }
+
+    final Queue<IndexedIterator<T>> queue;
+
+    MergingIterator(
         Iterable<? extends Iterator<? extends T>> iterators, Comparator<? super T> itemComparator) {
       // A comparator that's used by the heap, allowing the heap
-      // to be sorted based on the top of each iterator.
-      Comparator<PeekingIterator<T>> heapComparator =
-          (PeekingIterator<T> o1, PeekingIterator<T> o2) ->
-              itemComparator.compare(o1.peek(), o2.peek());
+      // to be sorted based on the top of each iterator, with insertion order as tiebreaker
+      Comparator<IndexedIterator<T>> heapComparator =
+          (o1, o2) ->
+              ComparisonChain.start()
+                  .compare(o1.iterator.peek(), o2.iterator.peek(), itemComparator)
+                  // When elements are equal, use insertion order to maintain stability
+                  .compare(o1.index, o2.index)
+                  .result();
 
       queue = new PriorityQueue<>(2, heapComparator);
 
+      int index = 0;
       for (Iterator<? extends T> iterator : iterators) {
         if (iterator.hasNext()) {
-          queue.add(Iterators.peekingIterator(iterator));
+          queue.add(new IndexedIterator<>(peekingIterator(iterator), index++));
         }
       }
     }
@@ -1344,21 +1362,24 @@ public final class Iterators {
     @Override
     @ParametricNullness
     public T next() {
-      PeekingIterator<T> nextIter = queue.remove();
+      IndexedIterator<T> nextIndexed = queue.remove();
+      PeekingIterator<T> nextIter = nextIndexed.iterator;
       T next = nextIter.next();
       if (nextIter.hasNext()) {
-        queue.add(nextIter);
+        queue.add(nextIndexed);
       }
       return next;
     }
   }
 
-  private static class ConcatenatedIterator<T extends @Nullable Object> implements Iterator<T> {
+  private static final class ConcatenatedIterator<T extends @Nullable Object>
+      implements Iterator<T> {
     /* The last iterator to return an element.  Calls to remove() go to this iterator. */
     private @Nullable Iterator<? extends T> toRemove;
 
     /* The iterator currently returning elements. */
-    private Iterator<? extends T> iterator;
+    // For discussion of @Nullable, see the checkNotNull call in hasNext() below.
+    private @Nullable Iterator<? extends T> iterator;
 
     /*
      * We track the "meta iterators," the iterators-of-iterators, below.  Usually, topMetaIterator
@@ -1391,8 +1412,8 @@ public final class Iterators {
 
     @Override
     public boolean hasNext() {
-      while (!checkNotNull(iterator).hasNext()) {
-        // this weird checkNotNull positioning appears required by our tests, which expect
+      while (!requireNonNull(iterator).hasNext()) {
+        // This weird requireNonNull positioning appears to be required by our tests, which expect
         // both hasNext and next to throw NPE if an input iterator is null.
 
         topMetaIterator = getTopMetaIterator();
@@ -1432,7 +1453,8 @@ public final class Iterators {
     public T next() {
       if (hasNext()) {
         toRemove = iterator;
-        return iterator.next();
+        // For discussion of requireNonNull, see hasNext() above.
+        return requireNonNull(iterator).next();
       } else {
         throw new NoSuchElementException();
       }

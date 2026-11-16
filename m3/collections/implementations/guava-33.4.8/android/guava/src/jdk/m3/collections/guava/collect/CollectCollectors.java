@@ -40,7 +40,6 @@ import org.jspecify.annotations.Nullable;
 
 /** Collectors utilities for {@code common.collect} internals. */
 @GwtCompatible
-@SuppressWarnings("Java7ApiChecker")
 @IgnoreJRERequirement // used only from APIs with Java 8 types in them
 final class CollectCollectors {
 
@@ -265,10 +264,9 @@ final class CollectCollectors {
     checkNotNull(valueFunction);
     return Collector.of(
         () ->
-            new EnumMapAccumulator<K, V>(
-                (v1, v2) -> {
-                  throw new IllegalArgumentException("Multiple values for key: " + v1 + ", " + v2);
-                }),
+            new EnumMapAccumulator<K, V>((v1, v2) -> {
+              throw new IllegalArgumentException("Multiple values for key: " + v1 + ", " + v2);
+            }),
         (accum, t) -> {
           /*
            * We assign these to variables before calling checkNotNull to work around a bug in our
@@ -312,7 +310,7 @@ final class CollectCollectors {
   }
 
   @IgnoreJRERequirement // see enclosing class (whose annotation Animal Sniffer ignores here...)
-  private static class EnumMapAccumulator<K extends Enum<K>, V> {
+  private static final class EnumMapAccumulator<K extends Enum<K>, V> {
     private final BinaryOperator<V> mergeFunction;
     private @Nullable EnumMap<K, V> map = null;
 
@@ -340,7 +338,7 @@ final class CollectCollectors {
     }
 
     ImmutableMap<K, V> toImmutableMap() {
-      return (map == null) ? ImmutableMap.<K, V>of() : ImmutableEnumMap.asImmutable(map);
+      return (map == null) ? ImmutableMap.of() : ImmutableEnumMap.asImmutable(map);
     }
   }
 

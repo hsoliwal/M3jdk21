@@ -120,11 +120,12 @@ public class TestsForListsInJavaUtil {
     return emptySet();
   }
 
+  @SuppressWarnings("EmptyList") // We specifically want to test emptyList()
   public Test testsForEmptyList() {
     return ListTestSuiteBuilder.using(
             new TestStringListGenerator() {
               @Override
-              public List<String> create(String[] elements) {
+              protected List<String> create(String[] elements) {
                 return emptyList();
               }
             })
@@ -138,7 +139,7 @@ public class TestsForListsInJavaUtil {
     return ListTestSuiteBuilder.using(
             new TestStringListGenerator() {
               @Override
-              public List<String> create(String[] elements) {
+              protected List<String> create(String[] elements) {
                 return singletonList(elements[0]);
               }
             })
@@ -155,7 +156,7 @@ public class TestsForListsInJavaUtil {
     return ListTestSuiteBuilder.using(
             new TestStringListGenerator() {
               @Override
-              public List<String> create(String[] elements) {
+              protected List<String> create(String[] elements) {
                 return asList(elements.clone());
               }
             })
@@ -173,7 +174,7 @@ public class TestsForListsInJavaUtil {
     return ListTestSuiteBuilder.using(
             new TestStringListGenerator() {
               @Override
-              public List<String> create(String[] elements) {
+              protected List<String> create(String[] elements) {
                 return new ArrayList<>(MinimalCollection.of(elements));
               }
             })
@@ -194,7 +195,7 @@ public class TestsForListsInJavaUtil {
     return ListTestSuiteBuilder.using(
             new TestStringListGenerator() {
               @Override
-              public List<String> create(String[] elements) {
+              protected List<String> create(String[] elements) {
                 return new LinkedList<>(MinimalCollection.of(elements));
               }
             })
@@ -213,7 +214,7 @@ public class TestsForListsInJavaUtil {
     return ListTestSuiteBuilder.using(
             new TestStringListGenerator() {
               @Override
-              public List<String> create(String[] elements) {
+              protected List<String> create(String[] elements) {
                 return new CopyOnWriteArrayList<>(MinimalCollection.of(elements));
               }
             })
@@ -235,7 +236,7 @@ public class TestsForListsInJavaUtil {
     return ListTestSuiteBuilder.using(
             new TestStringListGenerator() {
               @Override
-              public List<String> create(String[] elements) {
+              protected List<String> create(String[] elements) {
                 List<String> innerList = new ArrayList<>();
                 Collections.addAll(innerList, elements);
                 return unmodifiableList(innerList);
@@ -254,7 +255,7 @@ public class TestsForListsInJavaUtil {
     return ListTestSuiteBuilder.using(
             new TestStringListGenerator() {
               @Override
-              public List<String> create(String[] elements) {
+              protected List<String> create(String[] elements) {
                 List<String> innerList = new ArrayList<>();
                 Collections.addAll(innerList, elements);
                 return Collections.checkedList(innerList, String.class);
@@ -341,6 +342,7 @@ public class TestsForListsInJavaUtil {
             CollectionFeature.FAILS_FAST_ON_CONCURRENT_MODIFICATION,
             CollectionFeature.SERIALIZABLE,
             CollectionSize.ANY)
+        .suppressing(suppressForVector())
         .createTestSuite();
   }
 }

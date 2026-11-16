@@ -16,6 +16,8 @@ package jdk.m3.collections.guava.math;
 
 import static jdk.m3.collections.guava.base.Preconditions.checkNotNull;
 import static jdk.m3.collections.guava.math.MathPreconditions.checkRoundingUnnecessary;
+import static java.lang.Math.nextDown;
+import static java.lang.Math.nextUp;
 
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
 import java.math.RoundingMode;
@@ -74,26 +76,20 @@ abstract class ToDoubleRounder<X extends Number & Comparable<X>> {
         checkRoundingUnnecessary(cmpXToRoundArbitrarily == 0);
         return roundArbitrarily;
       case FLOOR:
-        return (cmpXToRoundArbitrarily >= 0)
-            ? roundArbitrarily
-            : DoubleUtils.nextDown(roundArbitrarily);
+        return (cmpXToRoundArbitrarily >= 0) ? roundArbitrarily : nextDown(roundArbitrarily);
       case CEILING:
-        return (cmpXToRoundArbitrarily <= 0) ? roundArbitrarily : Math.nextUp(roundArbitrarily);
+        return (cmpXToRoundArbitrarily <= 0) ? roundArbitrarily : nextUp(roundArbitrarily);
       case DOWN:
         if (sign(x) >= 0) {
-          return (cmpXToRoundArbitrarily >= 0)
-              ? roundArbitrarily
-              : DoubleUtils.nextDown(roundArbitrarily);
+          return (cmpXToRoundArbitrarily >= 0) ? roundArbitrarily : nextDown(roundArbitrarily);
         } else {
-          return (cmpXToRoundArbitrarily <= 0) ? roundArbitrarily : Math.nextUp(roundArbitrarily);
+          return (cmpXToRoundArbitrarily <= 0) ? roundArbitrarily : nextUp(roundArbitrarily);
         }
       case UP:
         if (sign(x) >= 0) {
-          return (cmpXToRoundArbitrarily <= 0) ? roundArbitrarily : Math.nextUp(roundArbitrarily);
+          return (cmpXToRoundArbitrarily <= 0) ? roundArbitrarily : nextUp(roundArbitrarily);
         } else {
-          return (cmpXToRoundArbitrarily >= 0)
-              ? roundArbitrarily
-              : DoubleUtils.nextDown(roundArbitrarily);
+          return (cmpXToRoundArbitrarily >= 0) ? roundArbitrarily : nextDown(roundArbitrarily);
         }
       case HALF_DOWN:
       case HALF_UP:
@@ -107,7 +103,7 @@ abstract class ToDoubleRounder<X extends Number & Comparable<X>> {
           if (cmpXToRoundArbitrarily >= 0) {
             roundFloorAsDouble = roundArbitrarily;
             roundFloor = roundArbitrarilyAsX;
-            roundCeilingAsDouble = Math.nextUp(roundArbitrarily);
+            roundCeilingAsDouble = nextUp(roundArbitrarily);
             if (roundCeilingAsDouble == Double.POSITIVE_INFINITY) {
               return roundFloorAsDouble;
             }
@@ -115,7 +111,7 @@ abstract class ToDoubleRounder<X extends Number & Comparable<X>> {
           } else {
             roundCeilingAsDouble = roundArbitrarily;
             roundCeiling = roundArbitrarilyAsX;
-            roundFloorAsDouble = DoubleUtils.nextDown(roundArbitrarily);
+            roundFloorAsDouble = nextDown(roundArbitrarily);
             if (roundFloorAsDouble == Double.NEGATIVE_INFINITY) {
               return roundCeilingAsDouble;
             }

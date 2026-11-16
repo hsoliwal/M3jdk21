@@ -15,6 +15,8 @@
 package jdk.m3.collections.guava.escape;
 
 import static jdk.m3.collections.guava.base.Preconditions.checkNotNull;
+import static java.lang.Character.charCount;
+import static java.lang.System.arraycopy;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import org.jspecify.annotations.Nullable;
@@ -79,6 +81,10 @@ public abstract class UnicodeEscaper extends Escaper {
    */
   protected abstract char @Nullable [] escape(int cp);
 
+  final char @Nullable [] escapeInternal(int cp) {
+    return escape(cp);
+  }
+
   /**
    * Returns the escaped form of a given literal string.
    *
@@ -134,7 +140,7 @@ public abstract class UnicodeEscaper extends Escaper {
       if (cp < 0 || escape(cp) != null) {
         break;
       }
-      index += Character.isSupplementaryCodePoint(cp) ? 2 : 1;
+      index += charCount(cp);
     }
     return index;
   }
@@ -171,7 +177,7 @@ public abstract class UnicodeEscaper extends Escaper {
       // (for performance reasons) yield some false positives but it must never
       // give false negatives.
       char[] escaped = escape(cp);
-      int nextIndex = index + (Character.isSupplementaryCodePoint(cp) ? 2 : 1);
+      int nextIndex = index + charCount(cp);
       if (escaped != null) {
         int charsSkipped = index - unescapedChunkStart;
 
@@ -188,7 +194,7 @@ public abstract class UnicodeEscaper extends Escaper {
           destIndex += charsSkipped;
         }
         if (escaped.length > 0) {
-          System.arraycopy(escaped, 0, dest, destIndex, escaped.length);
+          arraycopy(escaped, 0, dest, destIndex, escaped.length);
           destIndex += escaped.length;
         }
         // If we dealt with an escaped character, reset the unescaped range.
@@ -285,6 +291,10 @@ public abstract class UnicodeEscaper extends Escaper {
     throw new IndexOutOfBoundsException("Index exceeds specified range");
   }
 
+  static int codePointAtInternal(CharSequence seq, int index, int end) {
+    return codePointAt(seq, index, end);
+  }
+
   /**
    * Helper method to grow the character buffer as needed, this only happens once in a while so it's
    * ok if it's in a method call. If the index passed in is 0 then no copying will be done.
@@ -295,7 +305,7 @@ public abstract class UnicodeEscaper extends Escaper {
     }
     char[] copy = new char[size];
     if (index > 0) {
-      System.arraycopy(dest, 0, copy, 0, index);
+      arraycopy(dest, 0, copy, 0, index);
     }
     return copy;
   }

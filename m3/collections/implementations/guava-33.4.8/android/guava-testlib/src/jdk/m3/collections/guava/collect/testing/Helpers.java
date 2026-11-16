@@ -16,10 +16,9 @@
 
 package jdk.m3.collections.guava.collect.testing;
 
-import static jdk.m3.collections.guava.collect.testing.Helpers.entryComparator;
+import static jdk.m3.collections.guava.base.Preconditions.checkNotNull;
 import static java.lang.Math.max;
 import static java.util.Arrays.asList;
-import static java.util.Collections.singletonMap;
 import static java.util.Collections.sort;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertFalse;
@@ -33,6 +32,7 @@ import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import java.io.Serializable;
 import java.lang.reflect.Method;
 import java.util.AbstractList;
+import java.util.AbstractMap.SimpleImmutableEntry;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -43,18 +43,14 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Objects;
 import java.util.Set;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
-@GwtCompatible(emulated = true)
+@GwtCompatible
 @NullMarked
 public class Helpers {
-  // Clone of Objects.equal
-  static boolean equal(@Nullable Object a, @Nullable Object b) {
-    return a == b || (a != null && a.equals(b));
-  }
-
   // Clone of Lists.newArrayList
   public static <E extends @Nullable Object> List<E> copyToList(Iterable<? extends E> elements) {
     List<E> list = new ArrayList<>();
@@ -77,10 +73,9 @@ public class Helpers {
     return copyToSet(asList(elements));
   }
 
-  // Would use Maps.immutableEntry
   public static <K extends @Nullable Object, V extends @Nullable Object> Entry<K, V> mapEntry(
       K key, V value) {
-    return singletonMap(key, value).entrySet().iterator().next();
+    return new SimpleImmutableEntry<>(key, value);
   }
 
   private static boolean isEmpty(Iterable<?> iterable) {
@@ -106,7 +101,7 @@ public class Helpers {
     Iterator<?> actualIter = actual.iterator();
 
     while (expectedIter.hasNext() && actualIter.hasNext()) {
-      if (!equal(expectedIter.next(), actualIter.next())) {
+      if (!Objects.equals(expectedIter.next(), actualIter.next())) {
         fail(
             "contents were not equal and in the same order: "
                 + "expected = "
@@ -127,7 +122,7 @@ public class Helpers {
     }
   }
 
-  public static void assertContentsInOrder(Iterable<?> actual, Object... expected) {
+  public static void assertContentsInOrder(Iterable<?> actual, @Nullable Object... expected) {
     assertEqualInOrder(asList(expected), actual);
   }
 
@@ -155,17 +150,17 @@ public class Helpers {
     assertTrue("unexpected elements: " + act, act.isEmpty());
   }
 
-  public static void assertContentsAnyOrder(Iterable<?> actual, Object... expected) {
+  public static void assertContentsAnyOrder(Iterable<?> actual, @Nullable Object... expected) {
     assertEqualIgnoringOrder(asList(expected), actual);
   }
 
-  public static void assertContains(Iterable<?> actual, Object expected) {
+  public static void assertContains(Iterable<?> actual, @Nullable Object expected) {
     boolean contained = false;
     if (actual instanceof Collection) {
       contained = ((Collection<?>) actual).contains(expected);
     } else {
       for (Object o : actual) {
-        if (equal(o, expected)) {
+        if (Objects.equals(o, expected)) {
           contained = true;
           break;
         }
@@ -177,7 +172,7 @@ public class Helpers {
     }
   }
 
-  public static void assertContainsAllOf(Iterable<?> actual, Object... expected) {
+  public static void assertContainsAllOf(Iterable<?> actual, @Nullable Object... expected) {
     List<Object> expectedList = new ArrayList<>(asList(expected));
 
     for (Object o : actual) {
@@ -202,7 +197,7 @@ public class Helpers {
   static <T extends @Nullable Object> Iterable<T> reverse(List<T> list) {
     return () ->
         new Iterator<T>() {
-          private final ListIterator<T> listIter = list.listIterator(list.size());
+          final ListIterator<T> listIter = list.listIterator(list.size());
 
           @Override
           public boolean hasNext() {
@@ -252,11 +247,11 @@ public class Helpers {
     return iterator.next();
   }
 
-  private static class EntryComparator<K extends @Nullable Object, V extends @Nullable Object>
+  private static final class EntryComparator<K extends @Nullable Object, V extends @Nullable Object>
       implements Comparator<Entry<K, V>> {
     final @Nullable Comparator<? super K> keyComparator;
 
-    public EntryComparator(@Nullable Comparator<? super K> keyComparator) {
+    EntryComparator(@Nullable Comparator<? super K> keyComparator) {
       this.keyComparator = keyComparator;
     }
 
@@ -362,7 +357,7 @@ public class Helpers {
     // iteration would work, but that would not be GWT-compatible.
     // We are not "just" inheriting from ArrayList here as this doesn't work for J2kt.
     return new AbstractList<T>() {
-      ArrayList<T> data = new ArrayList<>();
+      final ArrayList<T> data = new ArrayList<>();
 
       @Override
       public int size() {
@@ -432,7 +427,7 @@ public class Helpers {
           Entry<K, V> e = (Entry<K, V>) o;
           e.setValue(value); // muhahaha!
 
-          return equal(this.getKey(), e.getKey()) && equal(this.getValue(), e.getValue());
+          return Objects.equals(key, e.getKey()) && Objects.equals(value, e.getValue());
         }
         return false;
       }
@@ -466,16 +461,10 @@ public class Helpers {
   public static <K extends Comparable, V extends @Nullable Object>
       Iterable<Entry<K, V>> orderEntriesByKey(List<Entry<K, V>> insertionOrder) {
     @SuppressWarnings("unchecked") // assume any Comparable is Comparable<Self>
-    Comparator<? super K> keyComparator = (Comparator<? super K>) Comparable::compareTo;
+    Comparator<? super K> keyComparator = (o1, o2) -> o1.compareTo(o2);
     sort(insertionOrder, entryComparator(keyComparator));
     return insertionOrder;
   }
-
-  /**
-   * Private replacement for {@link com.google.gwt.user.client.rpc.GwtTransient} to work around
-   * build-system quirks.
-   */
-  private @interface GwtTransient {}
 
   /**
    * Compares strings in natural order except that null comes immediately before a given value. This
@@ -484,18 +473,10 @@ public class Helpers {
    * exercise null handling fail on those subcollections.
    */
   public abstract static class NullsBefore implements Comparator<@Nullable String>, Serializable {
-    /*
-     * We don't serialize this class in GWT, so we don't care about whether GWT will serialize this
-     * field.
-     */
-    @GwtTransient private final String justAfterNull;
+    private final String justAfterNull;
 
     protected NullsBefore(String justAfterNull) {
-      if (justAfterNull == null) {
-        throw new NullPointerException();
-      }
-
-      this.justAfterNull = justAfterNull;
+      this.justAfterNull = checkNotNull(justAfterNull);
     }
 
     @Override
@@ -562,4 +543,12 @@ public class Helpers {
       throw new IllegalArgumentException(e);
     }
   }
+
+  /**
+   * Useless constructor for a class of static utility methods.
+   *
+   * @deprecated Do not instantiate this utility class.
+   */
+  @Deprecated
+  public Helpers() {}
 }

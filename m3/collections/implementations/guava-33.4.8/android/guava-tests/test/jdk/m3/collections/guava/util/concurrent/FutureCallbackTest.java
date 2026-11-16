@@ -16,13 +16,14 @@
 
 package jdk.m3.collections.guava.util.concurrent;
 
-import static com.google.common.truth.Truth.assertThat;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
 import static jdk.m3.collections.guava.util.concurrent.Futures.addCallback;
 import static jdk.m3.collections.guava.util.concurrent.MoreExecutors.directExecutor;
-import static jdk.m3.collections.guava.util.concurrent.ReflectionFreeAssertThrows.assertThrows;
+import static org.junit.Assert.assertThrows;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.util.concurrent.TestExceptions.SomeError;
+import com.google.errorprone.annotations.concurrent.GuardedBy;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.Executor;
 import junit.framework.TestCase;
@@ -66,8 +67,10 @@ public class FutureCallbackTest extends TestCase {
     SettableFuture<String> f = SettableFuture.create();
     FutureCallback<String> callback =
         new FutureCallback<String>() {
-          private final Object monitor = new Object();
-          private boolean called = false;
+          final Object monitor = new Object();
+
+          @GuardedBy("monitor")
+          boolean called = false;
 
           @Override
           public void onSuccess(String result) {
@@ -122,7 +125,7 @@ public class FutureCallbackTest extends TestCase {
         };
     addCallback(future, callback, directExecutor());
     future.set(result);
-    assertEquals(result, future.get());
+    assertThat(future.get()).isEqualTo(result);
     assertThat(successCalls[0]).isEqualTo(1);
     assertThat(failureCalls[0]).isEqualTo(0);
   }
@@ -148,8 +151,8 @@ public class FutureCallbackTest extends TestCase {
         };
     addCallback(future, callback, directExecutor());
     SomeError e = assertThrows(SomeError.class, () -> future.set(result));
-    assertSame(error, e);
-    assertEquals(result, future.get());
+    assertThat(e).isEqualTo(error);
+    assertThat(future.get()).isEqualTo(result);
     assertThat(successCalls[0]).isEqualTo(1);
     assertThat(failureCalls[0]).isEqualTo(0);
   }
@@ -168,7 +171,7 @@ public class FutureCallbackTest extends TestCase {
     addCallback(f, callback, directExecutor());
   }
 
-  private class CountingSameThreadExecutor implements Executor {
+  private static final class CountingSameThreadExecutor implements Executor {
     int runCount = 0;
 
     @Override
@@ -178,17 +181,20 @@ public class FutureCallbackTest extends TestCase {
     }
   }
 
-  private final class MockCallback implements FutureCallback<String> {
+  private static final class MockCallback implements FutureCallback<String> {
     @Nullable private String value = null;
     @Nullable private Throwable failure = null;
+
+    @GuardedBy("monitor")
     private boolean wasCalled = false;
+
     private final Object monitor = new Object();
 
     MockCallback(String expectedValue) {
       this.value = expectedValue;
     }
 
-    public MockCallback(Throwable expectedFailure) {
+    MockCallback(Throwable expectedFailure) {
       this.failure = expectedFailure;
     }
 
@@ -197,7 +203,7 @@ public class FutureCallbackTest extends TestCase {
       synchronized (monitor) {
         assertFalse(wasCalled);
         wasCalled = true;
-        assertEquals(value, result);
+        assertThat(result).isEqualTo(value);
       }
     }
 
@@ -206,7 +212,7 @@ public class FutureCallbackTest extends TestCase {
       synchronized (monitor) {
         assertFalse(wasCalled);
         wasCalled = true;
-        assertEquals(failure, t);
+        assertThat(t).isEqualTo(failure);
       }
     }
   }

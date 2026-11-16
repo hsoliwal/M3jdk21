@@ -14,11 +14,13 @@
  * limitations under the License.
  */
 
+// Modified 2026: skip redundant linked-index lane clears after invalidating first/last.
 package jdk.m3.collections.guava.collect;
 
 import static java.util.Objects.requireNonNull;
 
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
+import jdk.m3.collections.guava.annotations.J2ktIncompatible;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import java.util.Arrays;
 import java.util.Collection;
@@ -50,7 +52,7 @@ import org.jspecify.annotations.Nullable;
  * @author Louis Wasserman
  */
 @GwtIncompatible // not worth using in GWT for now
-class CompactLinkedHashSet<E extends @Nullable Object> extends CompactHashSet<E> {
+final class CompactLinkedHashSet<E extends @Nullable Object> extends CompactHashSet<E> {
 
   /** Creates an empty {@code CompactLinkedHashSet} instance. */
   public static <E extends @Nullable Object> CompactLinkedHashSet<E> create() {
@@ -251,11 +253,11 @@ class CompactLinkedHashSet<E extends @Nullable Object> extends CompactHashSet<E>
     }
     this.firstEntry = ENDPOINT;
     this.lastEntry = ENDPOINT;
-    // Either both arrays are null or neither is, but we check both to satisfy the nullness checker.
-    if (predecessor != null && successor != null) {
-      Arrays.fill(predecessor, 0, size(), 0);
-      Arrays.fill(successor, 0, size(), 0);
-    }
+    // Only indexes below size() can be live. Insertion always rebinds both
+    // predecessor and successor for its new index, so clearing their old
+    // primitive values is unnecessary. The owned Object[] payload and hash
+    // table are still cleared by CompactHashSet.clear().
+    // Do not touch the lanes here: this saves two O(size) int-array writes.
     super.clear();
   }
 
@@ -277,4 +279,6 @@ class CompactLinkedHashSet<E extends @Nullable Object> extends CompactHashSet<E>
    * they're defined above -- including logic to add and subtract 1 to map between the values stored
    * in the predecessor/successor arrays and the indexes in the elements array that they identify.
    */
+
+  @J2ktIncompatible private static final long serialVersionUID = -3537819119711266145L;
 }

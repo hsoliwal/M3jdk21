@@ -14,7 +14,7 @@
 
 package jdk.m3.collections.guava.util.concurrent;
 
-import static com.google.common.truth.Truth.assertThat;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
 import static jdk.m3.collections.guava.util.concurrent.ClassPathUtil.parseJavaClassPath;
 import static jdk.m3.collections.guava.util.concurrent.Futures.getChecked;
 import static jdk.m3.collections.guava.util.concurrent.Futures.immediateFuture;
@@ -32,6 +32,8 @@ import static jdk.m3.collections.guava.util.concurrent.FuturesGetCheckedInputs.U
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.junit.Assert.assertThrows;
 
+import jdk.m3.collections.guava.annotations.GwtIncompatible;
+import jdk.m3.collections.guava.annotations.J2ktIncompatible;
 import jdk.m3.collections.guava.testing.GcFinalization;
 import jdk.m3.collections.guava.util.concurrent.FuturesGetCheckedInputs.ExceptionWithBadConstructor;
 import jdk.m3.collections.guava.util.concurrent.FuturesGetCheckedInputs.ExceptionWithGoodAndBadConstructor;
@@ -53,20 +55,24 @@ import org.jspecify.annotations.NullUnmarked;
 
 /** Unit tests for {@link Futures#getChecked(Future, Class)}. */
 @NullUnmarked
+@GwtIncompatible
+@J2ktIncompatible
 public class FuturesGetCheckedTest extends TestCase {
   // Boring untimed-get tests:
 
   public void testGetCheckedUntimed_success() throws TwoArgConstructorException {
-    assertEquals("foo", getChecked(immediateFuture("foo"), TwoArgConstructorException.class));
+    assertThat(getChecked(immediateFuture("foo"), TwoArgConstructorException.class))
+        .isEqualTo("foo");
   }
 
   public void testGetCheckedUntimed_interrupted() {
     SettableFuture<String> future = SettableFuture.create();
     Thread.currentThread().interrupt();
     try {
-      getChecked(future, TwoArgConstructorException.class);
-      fail();
-    } catch (TwoArgConstructorException expected) {
+      TwoArgConstructorException expected =
+          assertThrows(
+              TwoArgConstructorException.class,
+              () -> getChecked(future, TwoArgConstructorException.class));
       assertThat(expected).hasCauseThat().isInstanceOf(InterruptedException.class);
       assertTrue(Thread.currentThread().isInterrupted());
     } finally {
@@ -74,7 +80,7 @@ public class FuturesGetCheckedTest extends TestCase {
     }
   }
 
-  public void testGetCheckedUntimed_cancelled() throws TwoArgConstructorException {
+  public void testGetCheckedUntimed_cancelled() {
     SettableFuture<String> future = SettableFuture.create();
     future.cancel(true);
     assertThrows(
@@ -89,8 +95,7 @@ public class FuturesGetCheckedTest extends TestCase {
     assertThat(expected).hasCauseThat().isEqualTo(CHECKED_EXCEPTION);
   }
 
-  public void testGetCheckedUntimed_executionExceptionUnchecked()
-      throws TwoArgConstructorException {
+  public void testGetCheckedUntimed_executionExceptionUnchecked() {
     UncheckedExecutionException expected =
         assertThrows(
             UncheckedExecutionException.class,
@@ -98,7 +103,7 @@ public class FuturesGetCheckedTest extends TestCase {
     assertThat(expected).hasCauseThat().isEqualTo(UNCHECKED_EXCEPTION);
   }
 
-  public void testGetCheckedUntimed_executionExceptionError() throws TwoArgConstructorException {
+  public void testGetCheckedUntimed_executionExceptionError() {
     ExecutionError expected =
         assertThrows(
             ExecutionError.class,
@@ -114,7 +119,7 @@ public class FuturesGetCheckedTest extends TestCase {
     assertThat(expected).hasCauseThat().isEqualTo(OTHER_THROWABLE);
   }
 
-  public void testGetCheckedUntimed_runtimeException() throws TwoArgConstructorException {
+  public void testGetCheckedUntimed_runtimeException() {
     RuntimeException expected =
         assertThrows(
             RuntimeException.class,
@@ -122,54 +127,49 @@ public class FuturesGetCheckedTest extends TestCase {
     assertEquals(RUNTIME_EXCEPTION, expected);
   }
 
-  public void testGetCheckedUntimed_error() throws TwoArgConstructorException {
-    try {
-      getChecked(ERROR_FUTURE, TwoArgConstructorException.class);
-    } catch (Error expected) {
-      assertEquals(ERROR, expected);
-      return;
-    }
-    fail();
+  public void testGetCheckedUntimed_error() {
+    Error expected =
+        assertThrows(Error.class, () -> getChecked(ERROR_FUTURE, TwoArgConstructorException.class));
+    assertEquals(ERROR, expected);
   }
 
-  public void testGetCheckedUntimed_badExceptionConstructor_failsEvenForSuccessfulInput()
-      throws Exception {
+  public void testGetCheckedUntimed_badExceptionConstructor_failsEvenForSuccessfulInput() {
     assertThrows(
         IllegalArgumentException.class,
         () -> getChecked(immediateFuture("x"), ExceptionWithBadConstructor.class));
   }
 
-  public void testGetCheckedUntimed_badExceptionConstructor_wrapsOriginalChecked()
-      throws Exception {
+  public void testGetCheckedUntimed_badExceptionConstructor_wrapsOriginalChecked() {
     assertThrows(
         IllegalArgumentException.class,
         () -> getChecked(FAILED_FUTURE_CHECKED_EXCEPTION, ExceptionWithBadConstructor.class));
   }
 
-  public void testGetCheckedUntimed_withGoodAndBadExceptionConstructor() throws Exception {
+  public void testGetCheckedUntimed_withGoodAndBadExceptionConstructor() {
     ExceptionWithGoodAndBadConstructor expected =
         assertThrows(
             ExceptionWithGoodAndBadConstructor.class,
             () ->
                 getChecked(
                     FAILED_FUTURE_CHECKED_EXCEPTION, ExceptionWithGoodAndBadConstructor.class));
-    assertThat(expected).hasCauseThat().isSameInstanceAs(CHECKED_EXCEPTION);
+    assertThat(expected).hasCauseThat().isEqualTo(CHECKED_EXCEPTION);
   }
 
   // Boring timed-get tests:
 
   public void testGetCheckedTimed_success() throws TwoArgConstructorException {
-    assertEquals(
-        "foo", getChecked(immediateFuture("foo"), TwoArgConstructorException.class, 0, SECONDS));
+    assertThat(getChecked(immediateFuture("foo"), TwoArgConstructorException.class, 0, SECONDS))
+        .isEqualTo("foo");
   }
 
   public void testGetCheckedTimed_interrupted() {
     SettableFuture<String> future = SettableFuture.create();
     Thread.currentThread().interrupt();
     try {
-      getChecked(future, TwoArgConstructorException.class, 0, SECONDS);
-      fail();
-    } catch (TwoArgConstructorException expected) {
+      TwoArgConstructorException expected =
+          assertThrows(
+              TwoArgConstructorException.class,
+              () -> getChecked(future, TwoArgConstructorException.class, 0, SECONDS));
       assertThat(expected).hasCauseThat().isInstanceOf(InterruptedException.class);
       assertTrue(Thread.currentThread().isInterrupted());
     } finally {
@@ -177,7 +177,7 @@ public class FuturesGetCheckedTest extends TestCase {
     }
   }
 
-  public void testGetCheckedTimed_cancelled() throws TwoArgConstructorException {
+  public void testGetCheckedTimed_cancelled() {
     SettableFuture<String> future = SettableFuture.create();
     future.cancel(true);
     assertThrows(
@@ -195,7 +195,7 @@ public class FuturesGetCheckedTest extends TestCase {
     assertThat(expected).hasCauseThat().isEqualTo(CHECKED_EXCEPTION);
   }
 
-  public void testGetCheckedTimed_executionExceptionUnchecked() throws TwoArgConstructorException {
+  public void testGetCheckedTimed_executionExceptionUnchecked() {
     UncheckedExecutionException expected =
         assertThrows(
             UncheckedExecutionException.class,
@@ -208,7 +208,7 @@ public class FuturesGetCheckedTest extends TestCase {
     assertThat(expected).hasCauseThat().isEqualTo(UNCHECKED_EXCEPTION);
   }
 
-  public void testGetCheckedTimed_executionExceptionError() throws TwoArgConstructorException {
+  public void testGetCheckedTimed_executionExceptionError() {
     ExecutionError expected =
         assertThrows(
             ExecutionError.class,
@@ -226,7 +226,7 @@ public class FuturesGetCheckedTest extends TestCase {
     assertThat(expected).hasCauseThat().isEqualTo(OTHER_THROWABLE);
   }
 
-  public void testGetCheckedTimed_runtimeException() throws TwoArgConstructorException {
+  public void testGetCheckedTimed_runtimeException() {
     RuntimeException expected =
         assertThrows(
             RuntimeException.class,
@@ -235,14 +235,12 @@ public class FuturesGetCheckedTest extends TestCase {
     assertEquals(RUNTIME_EXCEPTION, expected);
   }
 
-  public void testGetCheckedTimed_error() throws TwoArgConstructorException {
-    try {
-      getChecked(ERROR_FUTURE, TwoArgConstructorException.class, 0, SECONDS);
-    } catch (Error expected) {
-      assertEquals(ERROR, expected);
-      return;
-    }
-    fail();
+  public void testGetCheckedTimed_error() {
+    Error expected =
+        assertThrows(
+            Error.class,
+            () -> getChecked(ERROR_FUTURE, TwoArgConstructorException.class, 0, SECONDS));
+    assertEquals(ERROR, expected);
   }
 
   public void testGetCheckedTimed_timeoutException() {
@@ -254,14 +252,13 @@ public class FuturesGetCheckedTest extends TestCase {
     assertThat(expected).hasCauseThat().isInstanceOf(TimeoutException.class);
   }
 
-  public void testGetCheckedTimed_badExceptionConstructor_failsEvenForSuccessfulInput()
-      throws Exception {
+  public void testGetCheckedTimed_badExceptionConstructor_failsEvenForSuccessfulInput() {
     assertThrows(
         IllegalArgumentException.class,
         () -> getChecked(immediateFuture("x"), ExceptionWithBadConstructor.class, 1, SECONDS));
   }
 
-  public void testGetCheckedTimed_badExceptionConstructor_wrapsOriginalChecked() throws Exception {
+  public void testGetCheckedTimed_badExceptionConstructor_wrapsOriginalChecked() {
     assertThrows(
         IllegalArgumentException.class,
         () ->
@@ -279,7 +276,7 @@ public class FuturesGetCheckedTest extends TestCase {
                     ExceptionWithGoodAndBadConstructor.class,
                     1,
                     SECONDS));
-    assertThat(expected).hasCauseThat().isSameInstanceAs(CHECKED_EXCEPTION);
+    assertThat(expected).hasCauseThat().isEqualTo(CHECKED_EXCEPTION);
   }
 
   // Edge case tests of the exception-construction code through untimed get():
@@ -300,16 +297,14 @@ public class FuturesGetCheckedTest extends TestCase {
   }
 
   @SuppressWarnings("FuturesGetCheckedIllegalExceptionType")
-  public void testGetCheckedUntimed_exceptionClassNoPublicConstructor()
-      throws ExceptionWithPrivateConstructor {
+  public void testGetCheckedUntimed_exceptionClassNoPublicConstructor() {
     assertThrows(
         IllegalArgumentException.class,
         () -> getChecked(FAILED_FUTURE_CHECKED_EXCEPTION, ExceptionWithPrivateConstructor.class));
   }
 
   @SuppressWarnings("FuturesGetCheckedIllegalExceptionType")
-  public void testGetCheckedUntimed_exceptionClassPublicConstructorWrongType()
-      throws ExceptionWithWrongTypesConstructor {
+  public void testGetCheckedUntimed_exceptionClassPublicConstructorWrongType() {
     assertThrows(
         IllegalArgumentException.class,
         () ->
@@ -351,7 +346,7 @@ public class FuturesGetCheckedTest extends TestCase {
 
   public static final class WillBeUnloadedException extends Exception {}
 
-  @AndroidIncompatible // "Parent ClassLoader may not be null"; maybe avoidable if we try?
+  @AndroidIncompatible // no class unloading? but error is hidden by b/31360928
   public void testGetChecked_classUnloading() throws Exception {
     WeakReference<?> classUsedByGetChecked = doTestClassUnloading();
     GcFinalization.awaitClear(classUsedByGetChecked);
@@ -363,13 +358,13 @@ public class FuturesGetCheckedTest extends TestCase {
    * test that the {@code ClassLoader} can still be GCed. The test amounts to a test that {@code
    * getChecked} holds no strong references to the class.
    */
-  private WeakReference<?> doTestClassUnloading() throws Exception {
+  private static WeakReference<?> doTestClassUnloading() throws Exception {
     URLClassLoader shadowLoader = new URLClassLoader(parseJavaClassPath(), null);
     @SuppressWarnings("unchecked")
     Class<WillBeUnloadedException> shadowClass =
         (Class<WillBeUnloadedException>)
             Class.forName(WillBeUnloadedException.class.getName(), false, shadowLoader);
-    assertNotSame(shadowClass, WillBeUnloadedException.class);
+    assertThat(shadowClass).isNotEqualTo(WillBeUnloadedException.class);
     getChecked(immediateFuture("foo"), shadowClass);
     return new WeakReference<>(shadowLoader);
   }

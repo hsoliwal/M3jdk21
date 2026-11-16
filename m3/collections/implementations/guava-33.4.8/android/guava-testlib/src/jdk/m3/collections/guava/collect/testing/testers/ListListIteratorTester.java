@@ -24,8 +24,8 @@ import static jdk.m3.collections.guava.collect.testing.features.CollectionFeatur
 import static jdk.m3.collections.guava.collect.testing.features.ListFeature.SUPPORTS_ADD_WITH_INDEX;
 import static jdk.m3.collections.guava.collect.testing.features.ListFeature.SUPPORTS_SET;
 import static jdk.m3.collections.guava.collect.testing.testers.Platform.listListIteratorTesterNumIterations;
-import static jdk.m3.collections.guava.collect.testing.testers.ReflectionFreeAssertThrows.assertThrows;
 import static java.util.Collections.singleton;
+import static org.junit.Assert.assertThrows;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
@@ -41,7 +41,6 @@ import java.util.Set;
 import java.util.concurrent.CopyOnWriteArraySet;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
-import org.junit.Ignore;
 
 /**
  * A generic JUnit test which tests {@code listIterator} operations on a list. Can't be invoked
@@ -50,10 +49,7 @@ import org.junit.Ignore;
  * @author Chris Povirk
  * @author Kevin Bourrillion
  */
-@GwtCompatible(emulated = true)
-@Ignore("test runners must not instantiate and run this directly, only via suites we build")
-// @Ignore affects the Android test runner, which respects JUnit 4 annotations on JUnit 3 tests.
-@SuppressWarnings("JUnit4ClassUsedInJUnit3")
+@GwtCompatible
 @NullMarked
 public class ListListIteratorTester<E extends @Nullable Object> extends AbstractListTester<E> {
   @CollectionFeature.Require(absent = SUPPORTS_REMOVE)
@@ -102,7 +98,7 @@ public class ListListIteratorTester<E extends @Nullable Object> extends Abstract
   }
 
   public void testListIterator_atSize() {
-    getList().listIterator(getNumElements());
+    assertNotNull(getList().listIterator(getNumElements()));
     // TODO: run the iterator through ListIteratorTester
   }
 

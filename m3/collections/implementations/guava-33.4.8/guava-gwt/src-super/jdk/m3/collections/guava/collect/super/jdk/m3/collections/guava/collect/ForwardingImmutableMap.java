@@ -18,9 +18,9 @@ package jdk.m3.collections.guava.collect;
 
 import static jdk.m3.collections.guava.base.Preconditions.checkNotNull;
 
+import jdk.m3.collections.guava.collect.ForwardingSet.SimpleForwardingSet;
 import java.util.Collections;
 import java.util.Map;
-import java.util.Set;
 import org.jspecify.annotations.Nullable;
 
 /**
@@ -49,22 +49,27 @@ public abstract class ForwardingImmutableMap<K, V> extends ImmutableMap<K, V> {
     this.delegate = Collections.unmodifiableMap(delegate);
   }
 
+  @Override
   boolean isPartialView() {
     return false;
   }
 
+  @Override
   public final boolean isEmpty() {
     return delegate.isEmpty();
   }
 
+  @Override
   public final boolean containsKey(@Nullable Object key) {
     return Maps.safeContainsKey(delegate, key);
   }
 
+  @Override
   public final boolean containsValue(@Nullable Object value) {
     return delegate.containsValue(value);
   }
 
+  @Override
   public @Nullable V get(@Nullable Object key) {
     return (key == null) ? null : Maps.safeGet(delegate, key);
   }
@@ -72,15 +77,10 @@ public abstract class ForwardingImmutableMap<K, V> extends ImmutableMap<K, V> {
   @Override
   ImmutableSet<Entry<K, V>> createEntrySet() {
     return ImmutableSet.unsafeDelegate(
-        new ForwardingSet<Entry<K, V>>() {
-          @Override
-          protected Set<Entry<K, V>> delegate() {
-            return delegate.entrySet();
-          }
-
+        new SimpleForwardingSet<Entry<K, V>>(delegate.entrySet()) {
           @Override
           public boolean contains(@Nullable Object object) {
-            if (object instanceof Entry<?, ?> && ((Entry<?, ?>) object).getKey() == null) {
+            if (object instanceof Entry && ((Entry<?, ?>) object).getKey() == null) {
               return false;
             }
             try {

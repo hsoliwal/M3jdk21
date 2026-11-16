@@ -16,14 +16,15 @@ package jdk.m3.collections.guava.collect;
 
 import static jdk.m3.collections.guava.collect.Streams.findLast;
 import static jdk.m3.collections.guava.collect.Streams.stream;
-import static com.google.common.truth.Truth.assertThat;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
 import static java.util.Arrays.asList;
+import static java.util.stream.Collectors.toCollection;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
 import jdk.m3.collections.guava.collect.testing.SpliteratorTester;
 import jdk.m3.collections.guava.primitives.Doubles;
-import com.google.common.truth.IterableSubject;
+import jdk.m3.collections.guava.truth.IterableSubject;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedHashSet;
@@ -34,7 +35,6 @@ import java.util.OptionalInt;
 import java.util.OptionalLong;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Function;
-import java.util.stream.Collectors;
 import java.util.stream.DoubleStream;
 import java.util.stream.IntStream;
 import java.util.stream.LongStream;
@@ -44,7 +44,7 @@ import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
 /** Unit test for {@link Streams}. */
-@GwtCompatible(emulated = true)
+@GwtCompatible
 @NullMarked
 public class StreamsTest extends TestCase {
   /*
@@ -94,7 +94,7 @@ public class StreamsTest extends TestCase {
     // test with a large, not-subsized Spliterator
     @SuppressWarnings("JdkObsolete")
     List<Integer> list =
-        IntStream.rangeClosed(0, 10000).boxed().collect(Collectors.toCollection(LinkedList::new));
+        IntStream.rangeClosed(0, 10000).boxed().collect(toCollection(LinkedList::new));
     assertThat(findLast(list.stream())).hasValue(10000);
 
     // no way to find out the stream is empty without walking its spliterator
@@ -108,7 +108,7 @@ public class StreamsTest extends TestCase {
     // test with a large, not-subsized Spliterator
     @SuppressWarnings("JdkObsolete")
     List<Integer> list =
-        IntStream.rangeClosed(0, 10000).boxed().collect(Collectors.toCollection(LinkedList::new));
+        IntStream.rangeClosed(0, 10000).boxed().collect(toCollection(LinkedList::new));
     assertThat(findLast(list.stream().mapToInt(i -> i))).isEqualTo(OptionalInt.of(10000));
 
     // no way to find out the stream is empty without walking its spliterator
@@ -123,7 +123,7 @@ public class StreamsTest extends TestCase {
     // test with a large, not-subsized Spliterator
     @SuppressWarnings("JdkObsolete")
     List<Long> list =
-        LongStream.rangeClosed(0, 10000).boxed().collect(Collectors.toCollection(LinkedList::new));
+        LongStream.rangeClosed(0, 10000).boxed().collect(toCollection(LinkedList::new));
     assertThat(findLast(list.stream().mapToLong(i -> i))).isEqualTo(OptionalLong.of(10000));
 
     // no way to find out the stream is empty without walking its spliterator
@@ -138,7 +138,7 @@ public class StreamsTest extends TestCase {
     // test with a large, not-subsized Spliterator
     @SuppressWarnings("JdkObsolete")
     List<Long> list =
-        LongStream.rangeClosed(0, 10000).boxed().collect(Collectors.toCollection(LinkedList::new));
+        LongStream.rangeClosed(0, 10000).boxed().collect(toCollection(LinkedList::new));
     assertThat(findLast(list.stream().mapToDouble(i -> i))).isEqualTo(OptionalDouble.of(10000));
 
     // no way to find out the stream is empty without walking its spliterator
@@ -150,10 +150,9 @@ public class StreamsTest extends TestCase {
     assertThat(Streams.concat(Stream.of("a"), Stream.of("b"), Stream.empty(), Stream.of("c", "d")))
         .containsExactly("a", "b", "c", "d")
         .inOrder();
-    SpliteratorTester.of(
-            () ->
-                Streams.concat(Stream.of("a"), Stream.of("b"), Stream.empty(), Stream.of("c", "d"))
-                    .spliterator())
+    SpliteratorTester.of(() ->
+            Streams.concat(Stream.of("a"), Stream.of("b"), Stream.empty(), Stream.of("c", "d"))
+                .spliterator())
         .expect("a", "b", "c", "d");
   }
 
@@ -299,19 +298,18 @@ public class StreamsTest extends TestCase {
         .inOrder();
   }
 
-  private void testMapWithIndex(Function<Collection<String>, Stream<String>> collectionImpl) {
-    SpliteratorTester.of(
-            () ->
-                Streams.mapWithIndex(
-                        collectionImpl.apply(ImmutableList.of()), (str, i) -> str + ":" + i)
-                    .spliterator())
+  private static void testMapWithIndex(
+      Function<Collection<String>, Stream<String>> collectionImpl) {
+    SpliteratorTester.of(() ->
+            Streams.mapWithIndex(
+                    collectionImpl.apply(ImmutableList.of()), (str, i) -> str + ":" + i)
+                .spliterator())
         .expect(ImmutableList.of());
-    SpliteratorTester.of(
-            () ->
-                Streams.mapWithIndex(
-                        collectionImpl.apply(ImmutableList.of("a", "b", "c", "d", "e")),
-                        (str, i) -> str + ":" + i)
-                    .spliterator())
+    SpliteratorTester.of(() ->
+            Streams.mapWithIndex(
+                    collectionImpl.apply(ImmutableList.of("a", "b", "c", "d", "e")),
+                    (str, i) -> str + ":" + i)
+                .spliterator())
         .expect("a:0", "b:1", "c:2", "d:3", "e:4");
   }
 
@@ -324,10 +322,9 @@ public class StreamsTest extends TestCase {
   }
 
   public void testMapWithIndex_unsizedSource() {
-    testMapWithIndex(
-        elems ->
-            Stream.<@Nullable Object>of((Object) null)
-                .flatMap(unused -> ImmutableList.copyOf(elems).stream()));
+    testMapWithIndex(elems ->
+        Stream.<@Nullable Object>of((Object) null)
+            .flatMap(unused -> ImmutableList.copyOf(elems).stream()));
   }
 
   public void testMapWithIndex_closeIsPropagated_sizedSource() {
@@ -339,7 +336,7 @@ public class StreamsTest extends TestCase {
         Stream.<@Nullable Object>of((Object) null).flatMap(unused -> Stream.of("a", "b", "c")));
   }
 
-  private void checkMapWithIndexCloseIsPropagated(Stream<String> source) {
+  private static void checkMapWithIndexCloseIsPropagated(Stream<String> source) {
     AtomicInteger stringsCloseCount = new AtomicInteger();
     Stream<String> strings = source.onClose(stringsCloseCount::incrementAndGet);
     Stream<String> withIndex = Streams.mapWithIndex(strings, (str, i) -> str + ":" + i);
@@ -364,7 +361,7 @@ public class StreamsTest extends TestCase {
         IntStream.of(0).flatMap(unused -> IntStream.of(1, 2, 3)));
   }
 
-  private void checkMapWithIndexIntStreamCloseIsPropagated(IntStream source) {
+  private static void checkMapWithIndexIntStreamCloseIsPropagated(IntStream source) {
     AtomicInteger intStreamCloseCount = new AtomicInteger();
     IntStream intStream = source.onClose(intStreamCloseCount::incrementAndGet);
     Stream<String> withIndex = Streams.mapWithIndex(intStream, (str, i) -> str + ":" + i);
@@ -389,7 +386,7 @@ public class StreamsTest extends TestCase {
         LongStream.of(0).flatMap(unused -> LongStream.of(1, 2, 3)));
   }
 
-  private void checkMapWithIndexLongStreamCloseIsPropagated(LongStream source) {
+  private static void checkMapWithIndexLongStreamCloseIsPropagated(LongStream source) {
     AtomicInteger longStreamCloseCount = new AtomicInteger();
     LongStream longStream = source.onClose(longStreamCloseCount::incrementAndGet);
     Stream<String> withIndex = Streams.mapWithIndex(longStream, (str, i) -> str + ":" + i);
@@ -401,9 +398,8 @@ public class StreamsTest extends TestCase {
 
   @GwtIncompatible // TODO(b/38490623): reenable after GWT double-to-string conversion is fixed
   public void testMapWithIndex_doubleStream() {
-    SpliteratorTester.of(
-            () ->
-                Streams.mapWithIndex(DoubleStream.of(0, 1, 2), (x, i) -> x + ":" + i).spliterator())
+    SpliteratorTester.of(() ->
+            Streams.mapWithIndex(DoubleStream.of(0, 1, 2), (x, i) -> x + ":" + i).spliterator())
         .expect("0.0:0", "1.0:1", "2.0:2");
   }
 
@@ -416,7 +412,7 @@ public class StreamsTest extends TestCase {
         DoubleStream.of(0).flatMap(unused -> DoubleStream.of(1, 2, 3)));
   }
 
-  private void checkMapWithIndexDoubleStreamCloseIsPropagated(DoubleStream source) {
+  private static void checkMapWithIndexDoubleStreamCloseIsPropagated(DoubleStream source) {
     AtomicInteger doubleStreamCloseCount = new AtomicInteger();
     DoubleStream doubleStream = source.onClose(doubleStreamCloseCount::incrementAndGet);
     Stream<String> withIndex = Streams.mapWithIndex(doubleStream, (str, i) -> str + ":" + i);

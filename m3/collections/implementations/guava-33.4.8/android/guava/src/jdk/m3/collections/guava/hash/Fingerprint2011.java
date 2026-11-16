@@ -7,6 +7,7 @@ import static jdk.m3.collections.guava.hash.LittleEndianByteArray.load64;
 import static jdk.m3.collections.guava.hash.LittleEndianByteArray.load64Safely;
 import static java.lang.Long.rotateRight;
 
+import jdk.m3.collections.guava.annotations.J2ktIncompatible;
 import jdk.m3.collections.guava.annotations.VisibleForTesting;
 
 /**
@@ -28,6 +29,7 @@ import jdk.m3.collections.guava.annotations.VisibleForTesting;
  * @author kylemaddison@google.com (Kyle Maddison)
  * @author gpike@google.com (Geoff Pike)
  */
+@J2ktIncompatible
 final class Fingerprint2011 extends AbstractNonStreamingHashFunction {
   static final HashFunction FINGERPRINT_2011 = new Fingerprint2011();
 
@@ -81,9 +83,9 @@ final class Fingerprint2011 extends AbstractNonStreamingHashFunction {
   @VisibleForTesting
   static long hash128to64(long high, long low) {
     long a = (low ^ high) * K3;
-    a ^= (a >>> 47);
+    a ^= a >>> 47;
     long b = (high ^ a) * K3;
-    b ^= (b >>> 47);
+    b ^= b >>> 47;
     b *= K3;
     return b;
   }

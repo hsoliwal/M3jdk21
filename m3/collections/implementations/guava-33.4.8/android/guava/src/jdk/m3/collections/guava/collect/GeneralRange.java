@@ -21,10 +21,10 @@ import static jdk.m3.collections.guava.collect.BoundType.OPEN;
 import static jdk.m3.collections.guava.collect.NullnessCasts.uncheckedCastNullableTToT;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
-import jdk.m3.collections.guava.base.Objects;
 import com.google.errorprone.annotations.concurrent.LazyInit;
 import java.io.Serializable;
 import java.util.Comparator;
+import java.util.Objects;
 import org.jspecify.annotations.Nullable;
 
 /**
@@ -36,7 +36,7 @@ import org.jspecify.annotations.Nullable;
  *
  * @author Louis Wasserman
  */
-@GwtCompatible(serializable = true)
+@GwtCompatible
 final class GeneralRange<T extends @Nullable Object> implements Serializable {
   /** Converts a Range to a GeneralRange. */
   @SuppressWarnings("rawtypes") // https://github.com/google/guava/issues/989
@@ -247,15 +247,15 @@ final class GeneralRange<T extends @Nullable Object> implements Serializable {
           && hasUpperBound == r.hasUpperBound
           && getLowerBoundType().equals(r.getLowerBoundType())
           && getUpperBoundType().equals(r.getUpperBoundType())
-          && Objects.equal(getLowerEndpoint(), r.getLowerEndpoint())
-          && Objects.equal(getUpperEndpoint(), r.getUpperEndpoint());
+          && Objects.equals(getLowerEndpoint(), r.getLowerEndpoint())
+          && Objects.equals(getUpperEndpoint(), r.getUpperEndpoint());
     }
     return false;
   }
 
   @Override
   public int hashCode() {
-    return Objects.hashCode(
+    return Objects.hash(
         comparator,
         getLowerEndpoint(),
         getLowerBoundType(),
@@ -279,7 +279,7 @@ final class GeneralRange<T extends @Nullable Object> implements Serializable {
               getLowerEndpoint(),
               getLowerBoundType());
       result.reverse = this;
-      return this.reverse = result;
+      this.reverse = result;
     }
     return result;
   }

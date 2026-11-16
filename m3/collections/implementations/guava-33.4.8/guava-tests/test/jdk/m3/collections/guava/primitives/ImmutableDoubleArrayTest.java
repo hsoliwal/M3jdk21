@@ -14,11 +14,13 @@
 
 package jdk.m3.collections.guava.primitives;
 
-import static jdk.m3.collections.guava.primitives.ReflectionFreeAssertThrows.assertThrows;
 import static jdk.m3.collections.guava.primitives.TestPlatform.reduceIterationsIfGwt;
 import static jdk.m3.collections.guava.testing.SerializableTester.reserialize;
-import static com.google.common.truth.Truth.assertThat;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
+import static java.util.Arrays.asList;
 import static java.util.Arrays.stream;
+import static java.util.Collections.emptySet;
+import static org.junit.Assert.assertThrows;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
@@ -32,11 +34,11 @@ import jdk.m3.collections.guava.collect.testing.features.CollectionFeature;
 import jdk.m3.collections.guava.collect.testing.features.CollectionSize;
 import jdk.m3.collections.guava.testing.EqualsTester;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.PrimitiveIterator;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.DoubleStream;
@@ -48,7 +50,7 @@ import org.jspecify.annotations.NullUnmarked;
 /**
  * @author Kevin Bourrillion
  */
-@GwtCompatible(emulated = true)
+@GwtCompatible
 @NullUnmarked
 public class ImmutableDoubleArrayTest extends TestCase {
   // Test all creation paths very lazily: by assuming asList() works
@@ -93,6 +95,15 @@ public class ImmutableDoubleArrayTest extends TestCase {
         .inOrder();
   }
 
+  public void testAsListIterator() {
+    PrimitiveIterator.OfDouble doubleIterator =
+        (PrimitiveIterator.OfDouble) ImmutableDoubleArray.of(1.0, 2.0, 3.0).asList().iterator();
+    assertThat(doubleIterator.nextDouble()).isEqualTo(1.0);
+    assertThat(doubleIterator.nextDouble()).isEqualTo(2.0);
+    assertThat(doubleIterator.nextDouble()).isEqualTo(3.0);
+    assertThat(doubleIterator.hasNext()).isFalse();
+  }
+
   public void testCopyOf_array_empty() {
     /*
      * We don't guarantee the same-as property, so we aren't obligated to test it. However, it's
@@ -110,36 +121,36 @@ public class ImmutableDoubleArrayTest extends TestCase {
   }
 
   public void testCopyOf_iterable_notCollection_empty() {
-    Iterable<Double> iterable = iterable(Collections.<Double>emptySet());
+    Iterable<Double> iterable = iterable(Collections.emptySet());
     assertThat(ImmutableDoubleArray.copyOf(iterable)).isSameInstanceAs(ImmutableDoubleArray.of());
   }
 
   public void testCopyOf_iterable_notCollection_nonempty() {
-    List<Double> list = Arrays.asList(0.0, 1.0, 3.0);
+    List<Double> list = asList(0.0, 1.0, 3.0);
     ImmutableDoubleArray iia = ImmutableDoubleArray.copyOf(iterable(list));
     list.set(2, 2.0);
     assertThat(iia.asList()).containsExactly(0.0, 1.0, 3.0).inOrder();
   }
 
   public void testCopyOf_iterable_collection_empty() {
-    Iterable<Double> iterable = Collections.emptySet();
+    Iterable<Double> iterable = emptySet();
     assertThat(ImmutableDoubleArray.copyOf(iterable)).isSameInstanceAs(ImmutableDoubleArray.of());
   }
 
   public void testCopyOf_iterable_collection_nonempty() {
-    List<Double> list = Arrays.asList(0.0, 1.0, 3.0);
+    List<Double> list = asList(0.0, 1.0, 3.0);
     ImmutableDoubleArray iia = ImmutableDoubleArray.copyOf((Iterable<Double>) list);
     list.set(2, 2.0);
     assertThat(iia.asList()).containsExactly(0.0, 1.0, 3.0).inOrder();
   }
 
   public void testCopyOf_collection_empty() {
-    Collection<Double> iterable = Collections.emptySet();
+    Collection<Double> iterable = emptySet();
     assertThat(ImmutableDoubleArray.copyOf(iterable)).isSameInstanceAs(ImmutableDoubleArray.of());
   }
 
   public void testCopyOf_collection_nonempty() {
-    List<Double> list = Arrays.asList(0.0, 1.0, 3.0);
+    List<Double> list = asList(0.0, 1.0, 3.0);
     ImmutableDoubleArray iia = ImmutableDoubleArray.copyOf(list);
     list.set(2, 2.0);
     assertThat(iia.asList()).containsExactly(0.0, 1.0, 3.0).inOrder();
@@ -375,7 +386,7 @@ public class ImmutableDoubleArrayTest extends TestCase {
    * (so much for "black box") and try instances that both do and don't pass the check. The "don't"
    * half of that is more awkward to arrange...
    */
-  private static <T> Iterable<T> iterable(final Collection<T> collection) {
+  private static <T> Iterable<T> iterable(Collection<T> collection) {
     // return collection::iterator;
     return new Iterable<T>() {
       @Override
@@ -480,7 +491,7 @@ public class ImmutableDoubleArrayTest extends TestCase {
   @GwtIncompatible // used only from suite
   @AndroidIncompatible
   private static ImmutableDoubleArray makeArray(Double[] values) {
-    return ImmutableDoubleArray.copyOf(Arrays.asList(values));
+    return ImmutableDoubleArray.copyOf(asList(values));
   }
 
   // Test generators.  To let the GWT test suite generator access them, they need to be public named
@@ -491,7 +502,7 @@ public class ImmutableDoubleArrayTest extends TestCase {
   @AndroidIncompatible
   public static final class ImmutableDoubleArrayAsListGenerator extends TestDoubleListGenerator {
     @Override
-    protected List<Double> create(Double[] elements) {
+    List<Double> create(Double[] elements) {
       return makeArray(elements).asList();
     }
   }
@@ -502,8 +513,8 @@ public class ImmutableDoubleArrayTest extends TestCase {
   public static final class ImmutableDoubleArrayHeadSubListAsListGenerator
       extends TestDoubleListGenerator {
     @Override
-    protected List<Double> create(Double[] elements) {
-      Double[] suffix = {Double.MIN_VALUE, Double.MAX_VALUE};
+    List<Double> create(Double[] elements) {
+      Double[] suffix = {Doubles.MIN_POSITIVE_VALUE, Double.MAX_VALUE};
       Double[] all = concat(elements, suffix);
       return makeArray(all).subArray(0, elements.length).asList();
     }
@@ -515,7 +526,7 @@ public class ImmutableDoubleArrayTest extends TestCase {
   public static final class ImmutableDoubleArrayTailSubListAsListGenerator
       extends TestDoubleListGenerator {
     @Override
-    protected List<Double> create(Double[] elements) {
+    List<Double> create(Double[] elements) {
       Double[] prefix = {86.0, 99.0};
       Double[] all = concat(prefix, elements);
       return makeArray(all).subArray(2, elements.length + 2).asList();
@@ -528,8 +539,8 @@ public class ImmutableDoubleArrayTest extends TestCase {
   public static final class ImmutableDoubleArrayMiddleSubListAsListGenerator
       extends TestDoubleListGenerator {
     @Override
-    protected List<Double> create(Double[] elements) {
-      Double[] prefix = {Double.MIN_VALUE, Double.MAX_VALUE};
+    List<Double> create(Double[] elements) {
+      Double[] prefix = {Doubles.MIN_POSITIVE_VALUE, Double.MAX_VALUE};
       Double[] suffix = {86.0, 99.0};
       Double[] all = concat(concat(prefix, elements), suffix);
       return makeArray(all).subArray(2, elements.length + 2).asList();
@@ -566,7 +577,7 @@ public class ImmutableDoubleArrayTest extends TestCase {
      * Creates a new collection containing the given elements; implement this method instead of
      * {@link #create(Object...)}.
      */
-    protected abstract List<Double> create(Double[] elements);
+    abstract List<Double> create(Double[] elements);
 
     @Override
     public Double[] createArray(int length) {

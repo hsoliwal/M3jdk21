@@ -17,7 +17,7 @@
 package jdk.m3.collections.guava.reflect;
 
 import static jdk.m3.collections.guava.collect.Maps.immutableEntry;
-import static com.google.common.truth.Truth.assertThat;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
 import static org.junit.Assert.assertThrows;
 
 import jdk.m3.collections.guava.collect.ImmutableList;
@@ -79,7 +79,7 @@ public class MutableTypeToInstanceMapTest extends TestCase {
   private TypeToInstanceMap<Object> map;
 
   @Override
-  protected void setUp() throws Exception {
+  protected void setUp() {
     map = new MutableTypeToInstanceMap<>();
   }
 
@@ -122,7 +122,7 @@ public class MutableTypeToInstanceMapTest extends TestCase {
   }
 
   public void testPutAndGetInstance() {
-    assertNull(map.putInstance(Integer.class, Integer.valueOf(5)));
+    assertThat(map.putInstance(Integer.class, Integer.valueOf(5))).isNull();
 
     Integer oldValue = map.putInstance(Integer.class, Integer.valueOf(7));
     assertEquals(5, (int) oldValue);
@@ -141,22 +141,22 @@ public class MutableTypeToInstanceMapTest extends TestCase {
     map.putInstance(Integer.class, null);
     assertTrue(map.containsKey(TypeToken.of(Integer.class)));
     assertTrue(map.entrySet().contains(immutableEntry(TypeToken.of(Integer.class), null)));
-    assertNull(map.get(TypeToken.of(Integer.class)));
-    assertNull(map.getInstance(Integer.class));
+    assertThat(map.get(TypeToken.of(Integer.class))).isNull();
+    assertThat(map.getInstance(Integer.class)).isNull();
 
     map.putInstance(Long.class, null);
     assertTrue(map.containsKey(TypeToken.of(Long.class)));
     assertTrue(map.entrySet().contains(immutableEntry(TypeToken.of(Long.class), null)));
-    assertNull(map.get(TypeToken.of(Long.class)));
-    assertNull(map.getInstance(Long.class));
+    assertThat(map.get(TypeToken.of(Long.class))).isNull();
+    assertThat(map.getInstance(Long.class)).isNull();
   }
 
   public void testPrimitiveAndWrapper() {
-    assertNull(map.getInstance(int.class));
-    assertNull(map.getInstance(Integer.class));
+    assertThat(map.getInstance(int.class)).isNull();
+    assertThat(map.getInstance(Integer.class)).isNull();
 
-    assertNull(map.putInstance(int.class, 0));
-    assertNull(map.putInstance(Integer.class, 1));
+    assertThat(map.putInstance(int.class, 0)).isNull();
+    assertThat(map.putInstance(Integer.class, 1)).isNull();
     assertEquals(2, map.size());
 
     assertEquals(0, (int) map.getInstance(int.class));
@@ -165,8 +165,8 @@ public class MutableTypeToInstanceMapTest extends TestCase {
     assertEquals(0, (int) map.putInstance(int.class, null));
     assertEquals(1, (int) map.putInstance(Integer.class, null));
 
-    assertNull(map.getInstance(int.class));
-    assertNull(map.getInstance(Integer.class));
+    assertThat(map.getInstance(int.class)).isNull();
+    assertThat(map.getInstance(Integer.class)).isNull();
     assertEquals(2, map.size());
   }
 
@@ -195,17 +195,16 @@ public class MutableTypeToInstanceMapTest extends TestCase {
   }
 
   public void testGetInstance_withTypeVariable() {
-    assertThrows(
-        IllegalArgumentException.class, () -> map.getInstance(this.<Number>anyIterableType()));
+    assertThrows(IllegalArgumentException.class, () -> map.getInstance(anyIterableType()));
   }
 
   public void testPutInstance_withTypeVariable() {
     assertThrows(
         IllegalArgumentException.class,
-        () -> map.putInstance(this.<Integer>anyIterableType(), ImmutableList.of(1)));
+        () -> map.putInstance(anyIterableType(), ImmutableList.of(1)));
   }
 
-  private <T> TypeToken<Iterable<T>> anyIterableType() {
+  private static <T> TypeToken<Iterable<T>> anyIterableType() {
     return new TypeToken<Iterable<T>>() {};
   }
 }

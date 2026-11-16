@@ -67,7 +67,7 @@ public abstract class PerCollectionSizeTestSuiteBuilder<
     logger.fine(" Testing: " + name);
 
     // Split out all the specified sizes.
-    Set<Feature<?>> sizesToTest = Helpers.<Feature<?>>copyToSet(CollectionSize.values());
+    Set<Feature<?>> sizesToTest = copyToSet(CollectionSize.values());
     sizesToTest.retainAll(features);
     features.removeAll(sizesToTest);
 
@@ -126,7 +126,7 @@ public abstract class PerCollectionSizeTestSuiteBuilder<
     private final List<Class<? extends AbstractTester>> testers;
 
     @SuppressWarnings("rawtypes") // class literals
-    public OneSizeTestSuiteBuilder(List<Class<? extends AbstractTester>> testers) {
+    OneSizeTestSuiteBuilder(List<Class<? extends AbstractTester>> testers) {
       this.testers = testers;
     }
 

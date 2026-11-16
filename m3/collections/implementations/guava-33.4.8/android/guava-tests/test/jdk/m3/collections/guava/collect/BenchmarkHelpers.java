@@ -17,12 +17,15 @@
 package jdk.m3.collections.guava.collect;
 
 import static jdk.m3.collections.guava.base.Preconditions.checkState;
+import static jdk.m3.collections.guava.collect.Maps.newTreeMap;
 import static java.util.Collections.synchronizedSet;
 import static java.util.Collections.unmodifiableSet;
 
 import jdk.m3.collections.guava.base.Equivalence;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Queue;
@@ -191,13 +194,13 @@ final class BenchmarkHelpers {
     HashMapImpl {
       @Override
       public <K extends Comparable<K>, V> Map<K, V> create(Map<K, V> map) {
-        return Maps.newHashMap(map);
+        return new HashMap<>(map);
       }
     },
     LinkedHashMapImpl {
       @Override
       public <K extends Comparable<K>, V> Map<K, V> create(Map<K, V> map) {
-        return Maps.newLinkedHashMap(map);
+        return new LinkedHashMap<>(map);
       }
     },
     ConcurrentHashMapImpl {
@@ -255,7 +258,7 @@ final class BenchmarkHelpers {
     TreeMapImpl {
       @Override
       public <K extends Comparable<K>, V> SortedMap<K, V> create(Map<K, V> map) {
-        SortedMap<K, V> result = Maps.newTreeMap();
+        SortedMap<K, V> result = newTreeMap();
         result.putAll(map);
         return result;
       }
@@ -428,4 +431,6 @@ final class BenchmarkHelpers {
       return random.nextInt(max - min + 1) + min;
     }
   }
+
+  private BenchmarkHelpers() {}
 }

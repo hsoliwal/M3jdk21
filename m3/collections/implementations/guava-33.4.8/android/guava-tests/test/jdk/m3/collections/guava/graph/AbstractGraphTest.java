@@ -20,8 +20,8 @@ import static jdk.m3.collections.guava.graph.TestUtil.assertNodeNotInGraphErrorM
 import static jdk.m3.collections.guava.graph.TestUtil.assertNodeRemovedFromGraphErrorMessage;
 import static jdk.m3.collections.guava.graph.TestUtil.assertStronglyEquivalent;
 import static jdk.m3.collections.guava.graph.TestUtil.sanityCheckSet;
-import static com.google.common.truth.Truth.assertThat;
-import static com.google.common.truth.TruthJUnit.assume;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
+import static jdk.m3.collections.guava.truth.TruthJUnit.assume;
 import static org.junit.Assert.assertThrows;
 
 import jdk.m3.collections.guava.collect.ImmutableSet;
@@ -120,6 +120,17 @@ public abstract class AbstractGraphTest {
     int nodeStart = graphString.indexOf("nodes:");
     int edgeStart = graphString.indexOf("edges:");
     String nodeString = graphString.substring(nodeStart, edgeStart);
+
+    Network<N, EndpointPair<N>> asNetwork = graph.asNetwork();
+    // Don't call AbstractNetworkTest.validateNetwork(asNetwork).  Mutual recursion.
+    assertThat(graph.nodes()).isEqualTo(asNetwork.nodes());
+    assertThat(graph.edges()).hasSize(asNetwork.edges().size());
+    assertThat(graph.nodeOrder()).isEqualTo(asNetwork.nodeOrder());
+    assertThat(graph.isDirected()).isEqualTo(asNetwork.isDirected());
+    assertThat(graph.allowsSelfLoops()).isEqualTo(asNetwork.allowsSelfLoops());
+    assertThat(asNetwork.edgeOrder()).isEqualTo(ElementOrder.unordered());
+    assertThat(asNetwork.allowsParallelEdges()).isFalse();
+    assertThat(asNetwork.asGraph()).isEqualTo(graph);
 
     Set<EndpointPair<N>> allEndpointPairs = new HashSet<>();
 

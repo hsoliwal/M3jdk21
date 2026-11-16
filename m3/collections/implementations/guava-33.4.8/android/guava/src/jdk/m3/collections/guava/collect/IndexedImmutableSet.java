@@ -21,7 +21,7 @@ import jdk.m3.collections.guava.annotations.GwtIncompatible;
 import jdk.m3.collections.guava.annotations.J2ktIncompatible;
 import org.jspecify.annotations.Nullable;
 
-@GwtCompatible(emulated = true)
+@GwtCompatible
 abstract class IndexedImmutableSet<E> extends ImmutableSet<E> {
   abstract E get(int index);
 
@@ -38,6 +38,7 @@ abstract class IndexedImmutableSet<E> extends ImmutableSet<E> {
 
   @Override
   ImmutableList<E> createAsList() {
+    // TODO(cpovirk): Use ImmutableAsList, as in the mainline?
     return new ImmutableList<E>() {
       @Override
       public E get(int index) {

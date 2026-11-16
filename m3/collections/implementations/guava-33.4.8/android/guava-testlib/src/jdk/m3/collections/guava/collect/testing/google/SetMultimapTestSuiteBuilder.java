@@ -107,11 +107,11 @@ public class SetMultimapTestSuiteBuilder<K, V>
         .createTestSuite();
   }
 
-  private static class EntriesGenerator<K, V>
+  private static final class EntriesGenerator<K, V>
       extends MultimapTestSuiteBuilder.EntriesGenerator<K, V, SetMultimap<K, V>>
       implements TestSetGenerator<Entry<K, V>> {
 
-    public EntriesGenerator(
+    EntriesGenerator(
         OneSizeTestContainerGenerator<SetMultimap<K, V>, Entry<K, V>> multimapGenerator) {
       super(multimapGenerator);
     }
@@ -122,7 +122,7 @@ public class SetMultimapTestSuiteBuilder<K, V>
     }
   }
 
-  static class MultimapGetGenerator<K, V>
+  static final class MultimapGetGenerator<K, V>
       extends MultimapTestSuiteBuilder.MultimapGetGenerator<K, V, SetMultimap<K, V>>
       implements TestSetGenerator<V> {
     public MultimapGetGenerator(
@@ -136,7 +136,7 @@ public class SetMultimapTestSuiteBuilder<K, V>
     }
   }
 
-  static class MultimapAsMapGetGenerator<K, V>
+  static final class MultimapAsMapGetGenerator<K, V>
       extends MultimapTestSuiteBuilder.MultimapAsMapGetGenerator<K, V, SetMultimap<K, V>>
       implements TestSetGenerator<V> {
     public MultimapAsMapGetGenerator(

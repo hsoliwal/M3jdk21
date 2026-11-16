@@ -33,6 +33,7 @@ import java.util.function.IntFunction;
 import java.util.function.LongConsumer;
 import java.util.function.Predicate;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 import org.jspecify.annotations.Nullable;
 
 /** Spliterator utilities for {@code common.collect} internals. */
@@ -53,7 +54,7 @@ final class CollectSpliterators {
     if (comparator != null) {
       checkArgument((extraCharacteristics & Spliterator.SORTED) != 0);
     }
-    class WithCharacteristics implements Spliterator<T> {
+    final class WithCharacteristics implements Spliterator<T> {
       private final Spliterator.OfInt delegate;
 
       WithCharacteristics(Spliterator.OfInt delegate) {
@@ -108,6 +109,7 @@ final class CollectSpliterators {
   static <InElementT extends @Nullable Object, OutElementT extends @Nullable Object>
       Spliterator<OutElementT> map(
           Spliterator<InElementT> fromSpliterator,
+          int characteristics,
           Function<? super InElementT, ? extends OutElementT> function) {
     checkNotNull(fromSpliterator);
     checkNotNull(function);
@@ -127,7 +129,7 @@ final class CollectSpliterators {
       @Override
       public @Nullable Spliterator<OutElementT> trySplit() {
         Spliterator<InElementT> fromSplit = fromSpliterator.trySplit();
-        return (fromSplit != null) ? map(fromSplit, function) : null;
+        return (fromSplit != null) ? map(fromSplit, characteristics, function) : null;
       }
 
       @Override
@@ -137,8 +139,15 @@ final class CollectSpliterators {
 
       @Override
       public int characteristics() {
-        return fromSpliterator.characteristics()
-            & ~(Spliterator.DISTINCT | Spliterator.NONNULL | Spliterator.SORTED);
+        int backingCharacteristics = fromSpliterator.characteristics();
+        // the following are inherently inherited:
+        backingCharacteristics &=
+            Spliterator.SIZED
+                | Spliterator.SUBSIZED
+                | Spliterator.ORDERED
+                | Spliterator.IMMUTABLE
+                | Spliterator.CONCURRENT;
+        return characteristics | backingCharacteristics;
       }
     };
   }
@@ -148,7 +157,7 @@ final class CollectSpliterators {
       Spliterator<T> fromSpliterator, Predicate<? super T> predicate) {
     checkNotNull(fromSpliterator);
     checkNotNull(predicate);
-    class Splitr implements Spliterator<T>, Consumer<T> {
+    final class Splitr implements Spliterator<T>, Consumer<T> {
       @Nullable T holder = null;
 
       @Override
@@ -363,13 +372,12 @@ final class CollectSpliterators {
         prefix.forEachRemaining(action);
         prefix = null;
       }
-      from.forEachRemaining(
-          fromElement -> {
-            Spliterator<OutElementT> elements = function.apply(fromElement);
-            if (elements != null) {
-              elements.forEachRemaining(action);
-            }
-          });
+      from.forEachRemaining(fromElement -> {
+        Spliterator<OutElementT> elements = function.apply(fromElement);
+        if (elements != null) {
+          elements.forEachRemaining(action);
+        }
+      });
       estimatedSize = 0;
     }
 
@@ -487,13 +495,12 @@ final class CollectSpliterators {
         prefix.forEachRemaining(action);
         prefix = null;
       }
-      from.forEachRemaining(
-          fromElement -> {
-            OutSpliteratorT elements = function.apply(fromElement);
-            if (elements != null) {
-              elements.forEachRemaining(action);
-            }
-          });
+      from.forEachRemaining(fromElement -> {
+        OutSpliteratorT elements = function.apply(fromElement);
+        if (elements != null) {
+          elements.forEachRemaining(action);
+        }
+      });
       estimatedSize = 0;
     }
   }

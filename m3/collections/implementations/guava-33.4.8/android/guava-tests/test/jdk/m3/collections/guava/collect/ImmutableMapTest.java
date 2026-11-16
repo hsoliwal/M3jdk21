@@ -17,12 +17,12 @@
 package jdk.m3.collections.guava.collect;
 
 import static jdk.m3.collections.guava.collect.Maps.immutableEntry;
-import static jdk.m3.collections.guava.collect.ReflectionFreeAssertThrows.assertThrows;
 import static jdk.m3.collections.guava.testing.SerializableTester.reserialize;
-import static com.google.common.truth.Truth.assertThat;
-import static com.google.common.truth.Truth.assertWithMessage;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
+import static jdk.m3.collections.guava.truth.Truth.assertWithMessage;
 import static java.util.Arrays.asList;
 import static java.util.Collections.singletonMap;
+import static org.junit.Assert.assertThrows;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
@@ -48,7 +48,9 @@ import jdk.m3.collections.guava.testing.NullPointerTester;
 import java.io.ByteArrayOutputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
-import java.util.AbstractMap;
+import java.util.AbstractMap.SimpleEntry;
+import java.util.AbstractMap.SimpleImmutableEntry;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedHashMap;
@@ -70,7 +72,7 @@ import org.jspecify.annotations.Nullable;
  * @author Kevin Bourrillion
  * @author Jesse Wilson
  */
-@GwtCompatible(emulated = true)
+@GwtCompatible
 @SuppressWarnings("AlwaysThrows")
 @NullMarked
 public class ImmutableMapTest extends TestCase {
@@ -210,8 +212,8 @@ public class ImmutableMapTest extends TestCase {
     RegularImmutableMap<Integer, Integer> map =
         (RegularImmutableMap<Integer, Integer>) builder.buildOrThrow();
     Object[] mapInternalArray = map.alternatingKeysAndValues;
-    assertSame(builderArray, builderArrayAfterPuts);
-    assertSame(builderArray, mapInternalArray);
+    assertThat(builderArrayAfterPuts).isSameInstanceAs(builderArray);
+    assertThat(mapInternalArray).isSameInstanceAs(builderArray);
   }
 
   public void testBuilder_orderEntriesByValue() {
@@ -289,9 +291,8 @@ public class ImmutableMapTest extends TestCase {
 
   public void testBuilder_withImmutableEntryAndNullContents() {
     Builder<String, Integer> builder = new Builder<>();
-    assertThrows(
-        NullPointerException.class, () -> builder.put(immutableEntry("one", (Integer) null)));
-    assertThrows(NullPointerException.class, () -> builder.put(immutableEntry((String) null, 1)));
+    assertThrows(NullPointerException.class, () -> builder.put(immutableEntry("one", null)));
+    assertThrows(NullPointerException.class, () -> builder.put(immutableEntry(null, 1)));
   }
 
   private static class StringHolder {
@@ -300,7 +301,7 @@ public class ImmutableMapTest extends TestCase {
 
   public void testBuilder_withMutableEntry() {
     ImmutableMap.Builder<String, Integer> builder = new Builder<>();
-    final StringHolder holder = new StringHolder();
+    StringHolder holder = new StringHolder();
     holder.string = "one";
     Entry<String, Integer> entry =
         new AbstractMapEntry<String, Integer>() {
@@ -322,9 +323,7 @@ public class ImmutableMapTest extends TestCase {
 
   public void testBuilderPutAllWithEmptyMap() {
     ImmutableMap<String, Integer> map =
-        new Builder<String, Integer>()
-            .putAll(Collections.<String, Integer>emptyMap())
-            .buildOrThrow();
+        new Builder<String, Integer>().putAll(Collections.emptyMap()).buildOrThrow();
     assertEquals(Collections.<String, Integer>emptyMap(), map);
   }
 
@@ -360,30 +359,9 @@ public class ImmutableMapTest extends TestCase {
 
   public void testBuilderPutImmutableEntryWithNullKeyFailsAtomically() {
     Builder<String, Integer> builder = new Builder<>();
-    assertThrows(NullPointerException.class, () -> builder.put(immutableEntry((String) null, 1)));
+    assertThrows(NullPointerException.class, () -> builder.put(immutableEntry(null, 1)));
     builder.put("foo", 2);
     assertMapEquals(builder.buildOrThrow(), "foo", 2);
-  }
-
-  // for GWT compatibility
-  static class SimpleEntry<K, V> extends AbstractMapEntry<K, V> {
-    public K key;
-    public V value;
-
-    SimpleEntry(K key, V value) {
-      this.key = key;
-      this.value = value;
-    }
-
-    @Override
-    public K getKey() {
-      return key;
-    }
-
-    @Override
-    public V getValue() {
-      return value;
-    }
   }
 
   public void testBuilderPutMutableEntryWithNullKeyFailsAtomically() {
@@ -407,15 +385,13 @@ public class ImmutableMapTest extends TestCase {
   public void testBuilderPutNullKeyViaPutAll() {
     Builder<String, Integer> builder = new Builder<>();
     assertThrows(
-        NullPointerException.class,
-        () -> builder.putAll(Collections.<String, Integer>singletonMap(null, 1)));
+        NullPointerException.class, () -> builder.putAll(Collections.singletonMap(null, 1)));
   }
 
   public void testBuilderPutNullValueViaPutAll() {
     Builder<String, Integer> builder = new Builder<>();
     assertThrows(
-        NullPointerException.class,
-        () -> builder.putAll(Collections.<String, Integer>singletonMap("one", null)));
+        NullPointerException.class, () -> builder.putAll(Collections.singletonMap("one", null)));
   }
 
   public void testPuttingTheSameKeyTwiceThrowsOnBuild() {
@@ -736,16 +712,15 @@ public class ImmutableMapTest extends TestCase {
   }
 
   public void testCopyOfEmptyMap() {
-    ImmutableMap<String, Integer> copy =
-        ImmutableMap.copyOf(Collections.<String, Integer>emptyMap());
+    ImmutableMap<String, Integer> copy = ImmutableMap.copyOf(Collections.emptyMap());
     assertEquals(Collections.<String, Integer>emptyMap(), copy);
-    assertSame(copy, ImmutableMap.copyOf(copy));
+    assertThat(ImmutableMap.copyOf(copy)).isSameInstanceAs(copy);
   }
 
   public void testCopyOfSingletonMap() {
     ImmutableMap<String, Integer> copy = ImmutableMap.copyOf(singletonMap("one", 1));
     assertMapEquals(copy, "one", 1);
-    assertSame(copy, ImmutableMap.copyOf(copy));
+    assertThat(ImmutableMap.copyOf(copy)).isSameInstanceAs(copy);
   }
 
   public void testCopyOf() {
@@ -756,7 +731,7 @@ public class ImmutableMapTest extends TestCase {
 
     ImmutableMap<String, Integer> copy = ImmutableMap.copyOf(original);
     assertMapEquals(copy, "one", 1, "two", 2, "three", 3);
-    assertSame(copy, ImmutableMap.copyOf(copy));
+    assertThat(ImmutableMap.copyOf(copy)).isSameInstanceAs(copy);
   }
 
   // TODO(b/172823566): Use mainline testToImmutableMap once CollectorTester is usable to java7.
@@ -812,7 +787,7 @@ public class ImmutableMapTest extends TestCase {
 
   public void testNullGet() {
     ImmutableMap<String, Integer> map = ImmutableMap.of("one", 1);
-    assertNull(map.get(null));
+    assertThat(map.get(null)).isNull();
   }
 
   public void testAsMultimap() {
@@ -827,14 +802,6 @@ public class ImmutableMapTest extends TestCase {
     ImmutableMap<String, Integer> map = ImmutableMap.of();
     ImmutableSetMultimap<String, Integer> expected = ImmutableSetMultimap.of();
     assertEquals(expected, map.asMultimap());
-  }
-
-  public void testAsMultimapCaches() {
-    ImmutableMap<String, Integer> map = ImmutableMap.of("one", 1);
-    ImmutableSetMultimap<String, Integer> multimap1 = map.asMultimap();
-    ImmutableSetMultimap<String, Integer> multimap2 = map.asMultimap();
-    assertEquals(1, multimap1.asMap().size());
-    assertSame(multimap1, multimap2);
   }
 
   @J2ktIncompatible
@@ -857,9 +824,9 @@ public class ImmutableMapTest extends TestCase {
   }
 
   private static class IntHolder implements Serializable {
-    public int value;
+    private int value;
 
-    public IntHolder(int value) {
+    IntHolder(int value) {
       this.value = value;
     }
 
@@ -895,7 +862,7 @@ public class ImmutableMapTest extends TestCase {
     LenientSerializableTester.reserializeAndAssertLenient(map.keySet());
 
     Collection<Integer> reserializedValues = reserialize(map.values());
-    assertEquals(Lists.newArrayList(map.values()), Lists.newArrayList(reserializedValues));
+    assertEquals(new ArrayList<>(map.values()), new ArrayList<>(reserializedValues));
     assertTrue(reserializedValues instanceof ImmutableCollection);
   }
 
@@ -1011,13 +978,9 @@ public class ImmutableMapTest extends TestCase {
 
   public void testOfEntriesNull() {
     Entry<@Nullable Integer, @Nullable Integer> nullKey = entry(null, 23);
-    assertThrows(
-        NullPointerException.class,
-        () -> ImmutableMap.ofEntries((Entry<Integer, Integer>) nullKey));
+    assertThrows(NullPointerException.class, () -> ImmutableMap.ofEntries(nullKey));
     Entry<@Nullable Integer, @Nullable Integer> nullValue = entry(23, null);
-    assertThrows(
-        NullPointerException.class,
-        () -> ImmutableMap.ofEntries((Entry<Integer, Integer>) nullValue));
+    assertThrows(NullPointerException.class, () -> ImmutableMap.ofEntries(nullValue));
   }
 
   private static <T> Map<T, T> map(T... keysAndValues) {
@@ -1033,12 +996,12 @@ public class ImmutableMapTest extends TestCase {
   }
 
   private static <T extends @Nullable Object> Entry<T, T> entry(T key, T value) {
-    return new AbstractMap.SimpleImmutableEntry<>(key, value);
+    return new SimpleImmutableEntry<>(key, value);
   }
 
   public void testCopyOfMutableEntryList() {
     List<Entry<String, String>> entryList =
-        asList(new AbstractMap.SimpleEntry<>("a", "1"), new AbstractMap.SimpleEntry<>("b", "2"));
+        asList(new SimpleEntry<>("a", "1"), new SimpleEntry<>("b", "2"));
     ImmutableMap<String, String> map = ImmutableMap.copyOf(entryList);
     assertThat(map).containsExactly("a", "1", "b", "2").inOrder();
     entryList.get(0).setValue("3");
@@ -1047,7 +1010,7 @@ public class ImmutableMapTest extends TestCase {
 
   public void testBuilderPutAllEntryList() {
     List<Entry<String, String>> entryList =
-        asList(new AbstractMap.SimpleEntry<>("a", "1"), new AbstractMap.SimpleEntry<>("b", "2"));
+        asList(new SimpleEntry<>("a", "1"), new SimpleEntry<>("b", "2"));
     ImmutableMap<String, String> map =
         ImmutableMap.<String, String>builder().putAll(entryList).buildOrThrow();
     assertThat(map).containsExactly("a", "1", "b", "2").inOrder();

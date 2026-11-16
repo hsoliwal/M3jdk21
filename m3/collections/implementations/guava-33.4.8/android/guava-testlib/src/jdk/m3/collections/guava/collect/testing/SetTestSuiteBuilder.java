@@ -19,6 +19,7 @@ package jdk.m3.collections.guava.collect.testing;
 import static jdk.m3.collections.guava.collect.testing.Helpers.copyToList;
 import static jdk.m3.collections.guava.collect.testing.features.CollectionFeature.SERIALIZABLE;
 import static jdk.m3.collections.guava.collect.testing.features.CollectionFeature.SERIALIZABLE_INCLUDING_VIEWS;
+import static jdk.m3.collections.guava.testing.SerializableTester.reserialize;
 
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
 import jdk.m3.collections.guava.collect.testing.features.Feature;
@@ -29,7 +30,6 @@ import jdk.m3.collections.guava.collect.testing.testers.SetCreationTester;
 import jdk.m3.collections.guava.collect.testing.testers.SetEqualsTester;
 import jdk.m3.collections.guava.collect.testing.testers.SetHashCodeTester;
 import jdk.m3.collections.guava.collect.testing.testers.SetRemoveTester;
-import jdk.m3.collections.guava.testing.SerializableTester;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
@@ -75,8 +75,7 @@ public class SetTestSuiteBuilder<E>
 
     if (parentBuilder.getFeatures().contains(SERIALIZABLE)) {
       derivedSuites.add(
-          SetTestSuiteBuilder.using(
-                  new ReserializedSetGenerator<E>(parentBuilder.getSubjectGenerator()))
+          using(new ReserializedSetGenerator<E>(parentBuilder.getSubjectGenerator()))
               .named(getName() + " reserialized")
               .withFeatures(computeReserializedCollectionFeatures(parentBuilder.getFeatures()))
               .suppressing(parentBuilder.getSuppressedTests())
@@ -87,7 +86,7 @@ public class SetTestSuiteBuilder<E>
     return derivedSuites;
   }
 
-  static class ReserializedSetGenerator<E> implements TestSetGenerator<E> {
+  private static final class ReserializedSetGenerator<E> implements TestSetGenerator<E> {
     final OneSizeTestContainerGenerator<Collection<E>, E> gen;
 
     private ReserializedSetGenerator(OneSizeTestContainerGenerator<Collection<E>, E> gen) {
@@ -101,7 +100,7 @@ public class SetTestSuiteBuilder<E>
 
     @Override
     public Set<E> create(Object... elements) {
-      return (Set<E>) SerializableTester.reserialize(gen.create(elements));
+      return (Set<E>) reserialize(gen.create(elements));
     }
 
     @Override

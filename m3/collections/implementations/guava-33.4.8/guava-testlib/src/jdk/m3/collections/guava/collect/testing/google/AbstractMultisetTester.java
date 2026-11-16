@@ -19,7 +19,6 @@ package jdk.m3.collections.guava.collect.testing.google;
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.collect.Multiset;
 import jdk.m3.collections.guava.collect.testing.AbstractCollectionTester;
-import org.junit.Ignore;
 
 /**
  * Base class for multiset collection tests.
@@ -27,9 +26,6 @@ import org.junit.Ignore;
  * @author Jared Levy
  */
 @GwtCompatible
-@Ignore("test runners must not instantiate and run this directly, only via suites we build")
-// @Ignore affects the Android test runner, which respects JUnit 4 annotations on JUnit 3 tests.
-@SuppressWarnings("JUnit4ClassUsedInJUnit3")
 public class AbstractMultisetTester<E> extends AbstractCollectionTester<E> {
   protected final Multiset<E> getMultiset() {
     return (Multiset<E>) collection;

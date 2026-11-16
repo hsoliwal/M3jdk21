@@ -20,8 +20,6 @@ import static jdk.m3.collections.guava.base.Preconditions.checkArgument;
 import static jdk.m3.collections.guava.base.Preconditions.checkNotNull;
 import static jdk.m3.collections.guava.graph.Graphs.checkNonNegative;
 
-import jdk.m3.collections.guava.annotations.Beta;
-import jdk.m3.collections.guava.base.Optional;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 
 /**
@@ -72,7 +70,6 @@ import com.google.errorprone.annotations.CanIgnoreReturnValue;
  *     #from(ValueGraph)}.
  * @since 20.0
  */
-@Beta
 public final class ValueGraphBuilder<N, V> extends AbstractGraphBuilder<N> {
 
   /** Creates a new instance with the specified edge directionality. */
@@ -141,7 +138,7 @@ public final class ValueGraphBuilder<N, V> extends AbstractGraphBuilder<N> {
    */
   @CanIgnoreReturnValue
   public ValueGraphBuilder<N, V> expectedNodeCount(int expectedNodeCount) {
-    this.expectedNodeCount = Optional.of(checkNonNegative(expectedNodeCount));
+    this.expectedNodeCount = checkNonNegative(expectedNodeCount);
     return this;
   }
 

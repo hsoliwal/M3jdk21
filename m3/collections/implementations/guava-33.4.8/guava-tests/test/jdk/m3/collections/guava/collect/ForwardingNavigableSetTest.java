@@ -16,9 +16,11 @@
 
 package jdk.m3.collections.guava.collect;
 
+import static jdk.m3.collections.guava.collect.Sets.newTreeSet;
 import static java.util.Arrays.asList;
 
 import jdk.m3.collections.guava.base.Function;
+import jdk.m3.collections.guava.collect.ForwardingNavigableSet.SimpleForwardingNavigableSet;
 import jdk.m3.collections.guava.collect.testing.SafeTreeSet;
 import jdk.m3.collections.guava.collect.testing.SetTestSuiteBuilder;
 import jdk.m3.collections.guava.collect.testing.TestStringSetGenerator;
@@ -26,6 +28,7 @@ import jdk.m3.collections.guava.collect.testing.features.CollectionFeature;
 import jdk.m3.collections.guava.collect.testing.features.CollectionSize;
 import jdk.m3.collections.guava.testing.EqualsTester;
 import jdk.m3.collections.guava.testing.ForwardingWrapperTester;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -45,16 +48,9 @@ import org.jspecify.annotations.Nullable;
  */
 @NullUnmarked
 public class ForwardingNavigableSetTest extends TestCase {
-  static class StandardImplForwardingNavigableSet<T> extends ForwardingNavigableSet<T> {
-    private final NavigableSet<T> backingSet;
-
+  static class StandardImplForwardingNavigableSet<T> extends SimpleForwardingNavigableSet<T> {
     StandardImplForwardingNavigableSet(NavigableSet<T> backingSet) {
-      this.backingSet = backingSet;
-    }
-
-    @Override
-    protected NavigableSet<T> delegate() {
-      return backingSet;
+      super(backingSet);
     }
 
     @Override
@@ -179,7 +175,7 @@ public class ForwardingNavigableSetTest extends TestCase {
 
                   @Override
                   public List<String> order(List<String> insertionOrder) {
-                    return Lists.newArrayList(Sets.newTreeSet(insertionOrder));
+                    return new ArrayList<>(newTreeSet(insertionOrder));
                   }
                 })
             .named("ForwardingNavigableSet[SafeTreeSet] with standard implementations")
@@ -200,7 +196,7 @@ public class ForwardingNavigableSetTest extends TestCase {
 
                   @Override
                   public List<String> order(List<String> insertionOrder) {
-                    return Lists.newArrayList(Sets.newTreeSet(insertionOrder));
+                    return new ArrayList<>(newTreeSet(insertionOrder));
                   }
                 })
             .named(
@@ -238,7 +234,7 @@ public class ForwardingNavigableSetTest extends TestCase {
         .testEquals();
   }
 
-  private static <T> NavigableSet<T> wrap(final NavigableSet<T> delegate) {
+  private static <T> NavigableSet<T> wrap(NavigableSet<T> delegate) {
     return new ForwardingNavigableSet<T>() {
       @Override
       protected NavigableSet<T> delegate() {

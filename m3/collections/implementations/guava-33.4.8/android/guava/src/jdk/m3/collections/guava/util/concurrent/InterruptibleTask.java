@@ -25,13 +25,11 @@ import java.util.concurrent.locks.AbstractOwnableSynchronizer;
 import java.util.concurrent.locks.LockSupport;
 import org.jspecify.annotations.Nullable;
 
-@GwtCompatible(emulated = true)
+@GwtCompatible
 @ReflectionSupport(value = ReflectionSupport.Level.FULL)
-// Some Android 5.0.x Samsung devices have bugs in JDK reflection APIs that cause
-// getDeclaredField to throw a NoSuchFieldException when the field is definitely there.
-// Since this class only needs CAS on one field, we can avoid this bug by extending AtomicReference
-// instead of using an AtomicReferenceFieldUpdater. This reference stores Thread instances
-// and DONE/INTERRUPTED - they have a common ancestor of Runnable.
+// Extending AtomicReference avoids needing an AtomicReferenceFieldUpdater. This reference stores
+// Thread instances and DONE/PARKED/Blocker - they have a common ancestor of Runnable.
+// TODO(b/542711604): Consider AtomicReferenceFieldUpdater (and VarHandle?) anyway for clarity.
 abstract class InterruptibleTask<T extends @Nullable Object>
     extends AtomicReference<@Nullable Runnable> implements Runnable {
   static {
@@ -94,7 +92,7 @@ abstract class InterruptibleTask<T extends @Nullable Object>
 
   @SuppressWarnings({
     "Interruption", // We are restoring an interrupt on this thread.
-    "ThreadPriorityCheck", // TODO: b/175898629 - Consider onSpinWait.
+    "ThreadPriorityCheck", // TODO(b/175898629): Consider onSpinWait.
   })
   private void waitForInterrupt(Thread currentThread) {
     /*
@@ -156,9 +154,9 @@ abstract class InterruptibleTask<T extends @Nullable Object>
       currentThread.interrupt();
     }
     /*
-     * TODO(cpovirk): Clear interrupt status here? We currently don't, which means that an interrupt
-     * before, during, or after runInterruptibly() (unless it produced an InterruptedException
-     * caught above) can linger and affect listeners.
+     * TODO(cpovirk): Clear interrupted status here? We currently don't, which means that an
+     * interrupt before, during, or after runInterruptibly() (unless it produced an
+     * InterruptedException caught above) can linger and affect listeners.
      */
   }
 
@@ -219,7 +217,7 @@ abstract class InterruptibleTask<T extends @Nullable Object>
 
   /**
    * Using this as the blocker object allows introspection and debugging tools to see that the
-   * currentRunner thread is blocked on the progress of the interruptor thread, which can help
+   * currentRunner thread is blocked on the progress of the interrupter thread, which can help
    * identify deadlocks.
    */
   @VisibleForTesting

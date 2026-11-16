@@ -17,6 +17,7 @@ package jdk.m3.collections.guava.primitives;
 import static jdk.m3.collections.guava.base.Preconditions.checkArgument;
 import static jdk.m3.collections.guava.base.Preconditions.checkNotNull;
 import static jdk.m3.collections.guava.base.Preconditions.checkPositionIndexes;
+import static java.lang.Long.parseLong;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
@@ -198,8 +199,6 @@ public final class UnsignedInts {
     INSTANCE;
 
     @Override
-    // A call to bare "min" or "max" would resolve to our varargs method, not to any static import.
-    @SuppressWarnings("StaticImportPreferred")
     public int compare(int[] left, int[] right) {
       int minLength = Math.min(left.length, right.length);
       for (int i = 0; i < minLength; i++) {
@@ -360,7 +359,7 @@ public final class UnsignedInts {
   @CanIgnoreReturnValue
   public static int parseUnsignedInt(String string, int radix) {
     checkNotNull(string);
-    long result = Long.parseLong(string, radix);
+    long result = parseLong(string, radix);
     if ((result & INT_MASK) != result) {
       throw new NumberFormatException(
           "Input " + string + " in base " + radix + " is not in the range of an unsigned integer");

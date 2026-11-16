@@ -16,17 +16,19 @@ package jdk.m3.collections.guava.net;
 
 import static jdk.m3.collections.guava.base.Preconditions.checkArgument;
 import static jdk.m3.collections.guava.base.Preconditions.checkNotNull;
+import static jdk.m3.collections.guava.hash.Hashing.murmur3_32_fixed;
+import static jdk.m3.collections.guava.io.ByteStreams.newDataInput;
 import static java.lang.Math.max;
+import static java.lang.System.arraycopy;
 import static java.util.Objects.requireNonNull;
 
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
 import jdk.m3.collections.guava.annotations.J2ktIncompatible;
 import jdk.m3.collections.guava.base.CharMatcher;
 import jdk.m3.collections.guava.base.MoreObjects;
-import jdk.m3.collections.guava.hash.Hashing;
-import jdk.m3.collections.guava.io.ByteStreams;
 import jdk.m3.collections.guava.primitives.Ints;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
+import com.google.errorprone.annotations.FormatMethod;
 import java.math.BigInteger;
 import java.net.Inet4Address;
 import java.net.Inet6Address;
@@ -136,6 +138,10 @@ public final class InetAddresses {
    *
    * <p>This deliberately avoids all nameservice lookups (e.g. no DNS).
    *
+   * <p>IPv4-mapped IPv6 addresses (e.g. {@code "::ffff:192.168.0.1"}) are returned as {@link
+   * Inet4Address} objects, not {@link Inet6Address}. This is consistent with the behavior of {@link
+   * InetAddress}.
+   *
    * <p>This method accepts non-ASCII digits, for example {@code "１９２.１６８.０.１"} (those are fullwidth
    * characters). That is consistent with {@link InetAddress}, but not with various RFCs. If you
    * want to accept ASCII digits only, you can use something like {@code
@@ -187,7 +193,7 @@ public final class InetAddresses {
   }
 
   private static final class Scope {
-    private String scope;
+    private @Nullable String scope;
   }
 
   /** Returns {@code null} if unable to parse into a {@code byte[]}. */
@@ -375,10 +381,9 @@ public final class InetAddresses {
 
   /** Returns a -1 if unable to parse */
   private static int tryParseDecimal(String string, int start, int end) {
-    int decimal = 0;
-    int max = Integer.MAX_VALUE / 10; // for int overflow detection
+    long decimal = 0;
     for (int i = start; i < end; i++) {
-      if (decimal > max) {
+      if (decimal > Integer.MAX_VALUE) {
         return -1;
       }
       decimal *= 10;
@@ -388,7 +393,7 @@ public final class InetAddresses {
       }
       decimal += digit;
     }
-    return decimal;
+    return decimal > Integer.MAX_VALUE ? -1 : (int) decimal;
   }
 
   // Parse a hextet out of the ipString from start (inclusive) to end (exclusive)
@@ -826,10 +831,10 @@ public final class InetAddresses {
     byte[] bytes = ip.getAddress();
     Inet4Address server = getInet4Address(Arrays.copyOfRange(bytes, 4, 8));
 
-    int flags = ByteStreams.newDataInput(bytes, 8).readShort() & 0xffff;
+    int flags = newDataInput(bytes, 8).readShort() & 0xffff;
 
     // Teredo obfuscates the mapped client port, per section 4 of the RFC.
-    int port = ~ByteStreams.newDataInput(bytes, 10).readShort() & 0xffff;
+    int port = ~newDataInput(bytes, 10).readShort() & 0xffff;
 
     byte[] clientBytes = Arrays.copyOfRange(bytes, 12, 16);
     for (int i = 0; i < clientBytes.length; i++) {
@@ -1024,7 +1029,7 @@ public final class InetAddresses {
     }
 
     // Many strategies for hashing are possible. This might suffice for now.
-    int coercedHash = Hashing.murmur3_32_fixed().hashLong(addressAsLong).asInt();
+    int coercedHash = murmur3_32_fixed().hashLong(addressAsLong).asInt();
 
     // Squash into 224/4 Multicast and 240/4 Reserved space (i.e. 224/3).
     coercedHash |= 0xe0000000;
@@ -1057,7 +1062,7 @@ public final class InetAddresses {
    * @since 7.0
    */
   public static int coerceToInteger(InetAddress ip) {
-    return ByteStreams.newDataInput(getCoercedIPv4Address(ip).getAddress()).readInt();
+    return newDataInput(getCoercedIPv4Address(ip).getAddress()).readInt();
   }
 
   /**
@@ -1140,7 +1145,7 @@ public final class InetAddresses {
     }
 
     // Copy the bytes into the least significant positions.
-    System.arraycopy(addressBytes, srcPos, targetCopyArray, destPos, copyLength);
+    arraycopy(addressBytes, srcPos, targetCopyArray, destPos, copyLength);
 
     try {
       return InetAddress.getByAddress(targetCopyArray);
@@ -1231,6 +1236,7 @@ public final class InetAddresses {
     return true;
   }
 
+  @FormatMethod
   private static IllegalArgumentException formatIllegalArgumentException(
       String format, Object... args) {
     return new IllegalArgumentException(String.format(Locale.ROOT, format, args));

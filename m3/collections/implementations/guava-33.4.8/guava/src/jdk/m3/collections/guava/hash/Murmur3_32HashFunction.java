@@ -27,9 +27,11 @@ package jdk.m3.collections.guava.hash;
 
 import static jdk.m3.collections.guava.base.Preconditions.checkPositionIndexes;
 import static jdk.m3.collections.guava.base.Preconditions.checkState;
-import static jdk.m3.collections.guava.primitives.UnsignedBytes.toInt;
+import static jdk.m3.collections.guava.hash.Hashing.GOOD_FAST_HASH_SEED;
+import static java.lang.Byte.toUnsignedInt;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
+import jdk.m3.collections.guava.annotations.J2ktIncompatible;
 import jdk.m3.collections.guava.primitives.Chars;
 import jdk.m3.collections.guava.primitives.Ints;
 import jdk.m3.collections.guava.primitives.Longs;
@@ -50,6 +52,7 @@ import org.jspecify.annotations.Nullable;
  * @author Dimitris Andreou
  * @author Kurt Alfred Kluever
  */
+@J2ktIncompatible
 @Immutable
 @SuppressWarnings("IdentifierName") // the best we could do for adjacent digit blocks
 final class Murmur3_32HashFunction extends AbstractHashFunction implements Serializable {
@@ -61,7 +64,7 @@ final class Murmur3_32HashFunction extends AbstractHashFunction implements Seria
   // We can include the non-BMP fix here because Hashing.goodFastHash stresses that the hash is a
   // temporary-use one. Therefore it shouldn't be persisted.
   static final HashFunction GOOD_FAST_HASH_32 =
-      new Murmur3_32HashFunction(Hashing.GOOD_FAST_HASH_SEED, /* supplementaryPlaneFix= */ true);
+      new Murmur3_32HashFunction(GOOD_FAST_HASH_SEED, /* supplementaryPlaneFix= */ true);
 
   private static final int CHUNK_SIZE = 4;
 
@@ -231,7 +234,7 @@ final class Murmur3_32HashFunction extends AbstractHashFunction implements Seria
 
     int k1 = 0;
     for (int shift = 0; i < len; i++, shift += 8) {
-      k1 ^= toInt(input[off + i]) << shift;
+      k1 ^= toUnsignedInt(input[off + i]) << shift;
     }
     h1 ^= mixK1(k1);
     return fmix(h1, len);

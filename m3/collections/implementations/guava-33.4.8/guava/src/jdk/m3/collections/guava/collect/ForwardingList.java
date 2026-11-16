@@ -16,6 +16,15 @@
 
 package jdk.m3.collections.guava.collect;
 
+import static jdk.m3.collections.guava.base.Preconditions.checkNotNull;
+import static jdk.m3.collections.guava.collect.Lists.addAllImpl;
+import static jdk.m3.collections.guava.collect.Lists.equalsImpl;
+import static jdk.m3.collections.guava.collect.Lists.hashCodeImpl;
+import static jdk.m3.collections.guava.collect.Lists.indexOfImpl;
+import static jdk.m3.collections.guava.collect.Lists.lastIndexOfImpl;
+import static jdk.m3.collections.guava.collect.Lists.listIteratorImpl;
+import static jdk.m3.collections.guava.collect.Lists.subListImpl;
+
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import java.util.Collection;
@@ -146,7 +155,7 @@ public abstract class ForwardingList<E extends @Nullable Object> extends Forward
    * @since 7.0
    */
   protected boolean standardAddAll(int index, Iterable<? extends E> elements) {
-    return Lists.addAllImpl(this, index, elements);
+    return addAllImpl(this, index, elements);
   }
 
   /**
@@ -157,7 +166,7 @@ public abstract class ForwardingList<E extends @Nullable Object> extends Forward
    * @since 7.0
    */
   protected int standardIndexOf(@Nullable Object element) {
-    return Lists.indexOfImpl(this, element);
+    return indexOfImpl(this, element);
   }
 
   /**
@@ -168,7 +177,7 @@ public abstract class ForwardingList<E extends @Nullable Object> extends Forward
    * @since 7.0
    */
   protected int standardLastIndexOf(@Nullable Object element) {
-    return Lists.lastIndexOfImpl(this, element);
+    return lastIndexOfImpl(this, element);
   }
 
   /**
@@ -202,7 +211,7 @@ public abstract class ForwardingList<E extends @Nullable Object> extends Forward
    * @since 7.0
    */
   protected ListIterator<E> standardListIterator(int start) {
-    return Lists.listIteratorImpl(this, start);
+    return listIteratorImpl(this, start);
   }
 
   /**
@@ -212,7 +221,7 @@ public abstract class ForwardingList<E extends @Nullable Object> extends Forward
    * @since 7.0
    */
   protected List<E> standardSubList(int fromIndex, int toIndex) {
-    return Lists.subListImpl(this, fromIndex, toIndex);
+    return subListImpl(this, fromIndex, toIndex);
   }
 
   /**
@@ -223,7 +232,7 @@ public abstract class ForwardingList<E extends @Nullable Object> extends Forward
    * @since 7.0
    */
   protected boolean standardEquals(@Nullable Object object) {
-    return Lists.equalsImpl(this, object);
+    return equalsImpl(this, object);
   }
 
   /**
@@ -234,6 +243,27 @@ public abstract class ForwardingList<E extends @Nullable Object> extends Forward
    * @since 7.0
    */
   protected int standardHashCode() {
-    return Lists.hashCodeImpl(this);
+    return hashCodeImpl(this);
+  }
+
+  /**
+   * A simplified version of {@link ForwardingList} where subclasses can pass in an already
+   * constructed {@link List} as the delegate.
+   *
+   * <p>TODO(b/3417232): Consider making this public, but take into consideration whether it would
+   * then appear as a user-visible supertype for any classes.
+   */
+  abstract static class SimpleForwardingList<E extends @Nullable Object> extends ForwardingList<E> {
+    private final List<E> delegate;
+
+    /** Constructor for use by subclasses. */
+    SimpleForwardingList(List<E> delegate) {
+      this.delegate = checkNotNull(delegate);
+    }
+
+    @Override
+    protected final List<E> delegate() {
+      return delegate;
+    }
   }
 }

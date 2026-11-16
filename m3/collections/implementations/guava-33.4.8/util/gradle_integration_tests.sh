@@ -2,13 +2,30 @@
 
 set -eu
 
-./mvnw clean install --projects '!guava-testlib,!guava-tests,!guava-bom,!guava-gwt' -Dmaven.test.skip=true -Dmaven.javadoc.skip=true
-./mvnw clean install --projects '!guava-testlib,!guava-tests,!guava-bom' -Dmaven.test.skip=true -Dmaven.javadoc.skip=true -f android
+./mvnw \
+  --projects '!guava-testlib,!guava-tests,!guava-bom,!guava-gwt' \
+  -Dmaven.test.skip=true \
+  -Dmaven.javadoc.skip=true \
+  clean install
+./mvnw \
+  -f android \
+  --projects '!guava-testlib,!guava-tests,!guava-bom' \
+  -Dmaven.test.skip=true \
+  -Dmaven.javadoc.skip=true \
+  clean install
 
-# We run this separately so that its change to the default toolchain doesn't affect anything else.
-# (And we run it after the main build so that that build has already downloaded Java 11 if necessary.)
-./mvnw --projects '!guava-testlib,!guava-tests,!guava-bom,!guava-gwt' initialize -P print-java-11-home
-export JAVA_HOME=$(<target/java_11_home)
+# We run these separately so that their changes to the default toolchain doesn't affect anything else.
+# (And we run them after the main build so that that build has already downloaded Java 11/17 if necessary.)
+
+./mvnw \
+  --projects '!guava-testlib,!guava-tests,!guava-bom,!guava-gwt' \
+  initialize -P print-java-11-home
+JAVA_11_HOME=$(<target/java_11_home)
+
+./mvnw \
+  --projects '!guava-testlib,!guava-tests,!guava-bom,!guava-gwt' \
+  initialize -P print-java-17-home
+JAVA_17_HOME=$(<target/java_17_home)
 
 # Gradle Wrapper overwrites some files when it runs.
 # To avoid modifying the Git client, we copy everything we need to another directory.
@@ -25,9 +42,8 @@ export JAVA_HOME=$(<target/java_11_home)
 GRADLE_TEMP="$(mktemp -d)"
 trap 'rm -rf "${GRADLE_TEMP}"' EXIT
 
-# The Gradle tests need the pom.xml only to read its version number.
+# The Gradle tests need the pom.xml to read dependency version numbers.
 # (And the file needs to be two directory levels up from the Gradle build file.)
-# TODO(cpovirk): Find a better way to give them that information.
 cp pom.xml "${GRADLE_TEMP}"
 
 for version in 5.6.4 7.0.2; do
@@ -35,7 +51,7 @@ for version in 5.6.4 7.0.2; do
   (
     cp -r integration-tests "${GRADLE_TEMP}/${version}"
     cd "${GRADLE_TEMP}/${version}/gradle"
-    ./gradlew wrapper --gradle-version="${version}"
-    ./gradlew testClasspath
+    JAVA_HOME="${JAVA_17_HOME}" ./gradlew wrapper --gradle-version="${version}"
+    JAVA_HOME="${JAVA_11_HOME}" ./gradlew testClasspath
   )
 done

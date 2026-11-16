@@ -14,11 +14,13 @@
 
 package jdk.m3.collections.guava.primitives;
 
-import static jdk.m3.collections.guava.primitives.ReflectionFreeAssertThrows.assertThrows;
 import static jdk.m3.collections.guava.primitives.TestPlatform.reduceIterationsIfGwt;
 import static jdk.m3.collections.guava.testing.SerializableTester.reserialize;
-import static com.google.common.truth.Truth.assertThat;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
+import static java.util.Arrays.asList;
 import static java.util.Arrays.stream;
+import static java.util.Collections.emptySet;
+import static org.junit.Assert.assertThrows;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
@@ -32,11 +34,11 @@ import jdk.m3.collections.guava.collect.testing.features.CollectionFeature;
 import jdk.m3.collections.guava.collect.testing.features.CollectionSize;
 import jdk.m3.collections.guava.testing.EqualsTester;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.PrimitiveIterator;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.IntStream;
@@ -48,7 +50,7 @@ import org.jspecify.annotations.NullUnmarked;
 /**
  * @author Kevin Bourrillion
  */
-@GwtCompatible(emulated = true)
+@GwtCompatible
 @NullUnmarked
 public class ImmutableIntArrayTest extends TestCase {
   // Test all creation paths very lazily: by assuming asList() works
@@ -91,6 +93,15 @@ public class ImmutableIntArrayTest extends TestCase {
         .inOrder();
   }
 
+  public void testAsListIterator() {
+    PrimitiveIterator.OfInt intIterator =
+        (PrimitiveIterator.OfInt) ImmutableIntArray.of(1, 2, 3).asList().iterator();
+    assertThat(intIterator.nextInt()).isEqualTo(1);
+    assertThat(intIterator.nextInt()).isEqualTo(2);
+    assertThat(intIterator.nextInt()).isEqualTo(3);
+    assertThat(intIterator.hasNext()).isFalse();
+  }
+
   public void testCopyOf_array_empty() {
     /*
      * We don't guarantee the same-as property, so we aren't obligated to test it. However, it's
@@ -107,36 +118,36 @@ public class ImmutableIntArrayTest extends TestCase {
   }
 
   public void testCopyOf_iterable_notCollection_empty() {
-    Iterable<Integer> iterable = iterable(Collections.<Integer>emptySet());
+    Iterable<Integer> iterable = iterable(Collections.emptySet());
     assertThat(ImmutableIntArray.copyOf(iterable)).isSameInstanceAs(ImmutableIntArray.of());
   }
 
   public void testCopyOf_iterable_notCollection_nonempty() {
-    List<Integer> list = Arrays.asList(0, 1, 3);
+    List<Integer> list = asList(0, 1, 3);
     ImmutableIntArray iia = ImmutableIntArray.copyOf(iterable(list));
     list.set(2, 2);
     assertThat(iia.asList()).containsExactly(0, 1, 3).inOrder();
   }
 
   public void testCopyOf_iterable_collection_empty() {
-    Iterable<Integer> iterable = Collections.emptySet();
+    Iterable<Integer> iterable = emptySet();
     assertThat(ImmutableIntArray.copyOf(iterable)).isSameInstanceAs(ImmutableIntArray.of());
   }
 
   public void testCopyOf_iterable_collection_nonempty() {
-    List<Integer> list = Arrays.asList(0, 1, 3);
+    List<Integer> list = asList(0, 1, 3);
     ImmutableIntArray iia = ImmutableIntArray.copyOf((Iterable<Integer>) list);
     list.set(2, 2);
     assertThat(iia.asList()).containsExactly(0, 1, 3).inOrder();
   }
 
   public void testCopyOf_collection_empty() {
-    Collection<Integer> iterable = Collections.emptySet();
+    Collection<Integer> iterable = emptySet();
     assertThat(ImmutableIntArray.copyOf(iterable)).isSameInstanceAs(ImmutableIntArray.of());
   }
 
   public void testCopyOf_collection_nonempty() {
-    List<Integer> list = Arrays.asList(0, 1, 3);
+    List<Integer> list = asList(0, 1, 3);
     ImmutableIntArray iia = ImmutableIntArray.copyOf(list);
     list.set(2, 2);
     assertThat(iia.asList()).containsExactly(0, 1, 3).inOrder();
@@ -360,7 +371,7 @@ public class ImmutableIntArrayTest extends TestCase {
    * (so much for "black box") and try instances that both do and don't pass the check. The "don't"
    * half of that is more awkward to arrange...
    */
-  private static <T> Iterable<T> iterable(final Collection<T> collection) {
+  private static <T> Iterable<T> iterable(Collection<T> collection) {
     // return collection::iterator;
     return new Iterable<T>() {
       @Override
@@ -464,7 +475,7 @@ public class ImmutableIntArrayTest extends TestCase {
   @J2ktIncompatible
   @GwtIncompatible // used only from suite
   private static ImmutableIntArray makeArray(Integer[] values) {
-    return ImmutableIntArray.copyOf(Arrays.asList(values));
+    return ImmutableIntArray.copyOf(asList(values));
   }
 
   // Test generators.  To let the GWT test suite generator access them, they need to be public named
@@ -474,7 +485,7 @@ public class ImmutableIntArrayTest extends TestCase {
   @GwtIncompatible // used only from suite
   public static final class ImmutableIntArrayAsListGenerator extends TestIntegerListGenerator {
     @Override
-    protected List<Integer> create(Integer[] elements) {
+    List<Integer> create(Integer[] elements) {
       return makeArray(elements).asList();
     }
   }
@@ -484,7 +495,7 @@ public class ImmutableIntArrayTest extends TestCase {
   public static final class ImmutableIntArrayHeadSubListAsListGenerator
       extends TestIntegerListGenerator {
     @Override
-    protected List<Integer> create(Integer[] elements) {
+    List<Integer> create(Integer[] elements) {
       Integer[] suffix = {Integer.MIN_VALUE, Integer.MAX_VALUE};
       Integer[] all = concat(elements, suffix);
       return makeArray(all).subArray(0, elements.length).asList();
@@ -496,7 +507,7 @@ public class ImmutableIntArrayTest extends TestCase {
   public static final class ImmutableIntArrayTailSubListAsListGenerator
       extends TestIntegerListGenerator {
     @Override
-    protected List<Integer> create(Integer[] elements) {
+    List<Integer> create(Integer[] elements) {
       Integer[] prefix = {86, 99};
       Integer[] all = concat(prefix, elements);
       return makeArray(all).subArray(2, elements.length + 2).asList();
@@ -508,7 +519,7 @@ public class ImmutableIntArrayTest extends TestCase {
   public static final class ImmutableIntArrayMiddleSubListAsListGenerator
       extends TestIntegerListGenerator {
     @Override
-    protected List<Integer> create(Integer[] elements) {
+    List<Integer> create(Integer[] elements) {
       Integer[] prefix = {Integer.MIN_VALUE, Integer.MAX_VALUE};
       Integer[] suffix = {86, 99};
       Integer[] all = concat(concat(prefix, elements), suffix);
@@ -544,7 +555,7 @@ public class ImmutableIntArrayTest extends TestCase {
      * Creates a new collection containing the given elements; implement this method instead of
      * {@link #create(Object...)}.
      */
-    protected abstract List<Integer> create(Integer[] elements);
+    abstract List<Integer> create(Integer[] elements);
 
     @Override
     public Integer[] createArray(int length) {

@@ -17,13 +17,12 @@
 package jdk.m3.collections.guava.collect.testing.google;
 
 import static jdk.m3.collections.guava.collect.testing.features.CollectionFeature.SUPPORTS_ADD;
-import static jdk.m3.collections.guava.collect.testing.google.ReflectionFreeAssertThrows.assertThrows;
 import static java.util.Arrays.asList;
+import static java.util.Collections.emptySet;
+import static org.junit.Assert.assertThrows;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.collect.testing.features.CollectionFeature;
-import java.util.Collections;
-import org.junit.Ignore;
 
 /**
  * Tests for {@code Multiset.add}.
@@ -31,9 +30,6 @@ import org.junit.Ignore;
  * @author Jared Levy
  */
 @GwtCompatible
-@Ignore("test runners must not instantiate and run this directly, only via suites we build")
-// @Ignore affects the Android test runner, which respects JUnit 4 annotations on JUnit 3 tests.
-@SuppressWarnings("JUnit4ClassUsedInJUnit3")
 public class MultisetAddTester<E> extends AbstractMultisetTester<E> {
   @CollectionFeature.Require(absent = SUPPORTS_ADD)
   public void testAddUnsupported() {
@@ -90,7 +86,7 @@ public class MultisetAddTester<E> extends AbstractMultisetTester<E> {
 
   @CollectionFeature.Require(SUPPORTS_ADD)
   public void testAddAll_emptySet() {
-    assertFalse(getMultiset().addAll(Collections.<E>emptySet()));
+    assertFalse(getMultiset().addAll(emptySet()));
     expectUnchanged();
   }
 

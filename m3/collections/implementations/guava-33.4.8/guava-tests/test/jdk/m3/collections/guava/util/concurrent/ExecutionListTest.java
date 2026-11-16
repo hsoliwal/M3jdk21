@@ -17,12 +17,14 @@
 package jdk.m3.collections.guava.util.concurrent;
 
 import static jdk.m3.collections.guava.util.concurrent.MoreExecutors.directExecutor;
+import static java.util.concurrent.Executors.newCachedThreadPool;
 import static java.util.concurrent.TimeUnit.SECONDS;
 
+import jdk.m3.collections.guava.annotations.GwtIncompatible;
+import jdk.m3.collections.guava.annotations.J2ktIncompatible;
 import jdk.m3.collections.guava.testing.NullPointerTester;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.Executor;
-import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicInteger;
 import junit.framework.TestCase;
 import org.jspecify.annotations.NullUnmarked;
@@ -34,12 +36,18 @@ import org.jspecify.annotations.NullUnmarked;
  * @author Sven Mawson
  */
 @NullUnmarked
+@GwtIncompatible
 public class ExecutionListTest extends TestCase {
-
   private final ExecutionList list = new ExecutionList();
 
+  @J2ktIncompatible
   public void testRunOnPopulatedList() throws Exception {
-    Executor exec = Executors.newCachedThreadPool();
+    doTestRunOnPopulatedList();
+  }
+
+  @J2ktIncompatible
+  private void doTestRunOnPopulatedList() throws Exception {
+    Executor exec = newCachedThreadPool();
     CountDownLatch countDownLatch = new CountDownLatch(3);
     list.add(new MockRunnable(countDownLatch), exec);
     list.add(new MockRunnable(countDownLatch), exec);
@@ -53,45 +61,30 @@ public class ExecutionListTest extends TestCase {
   }
 
   public void testExecute_idempotent() {
-    final AtomicInteger runCalled = new AtomicInteger();
-    list.add(
-        new Runnable() {
-          @Override
-          public void run() {
-            runCalled.getAndIncrement();
-          }
-        },
-        directExecutor());
+    AtomicInteger runCalled = new AtomicInteger();
+    list.add(runCalled::getAndIncrement, directExecutor());
     list.execute();
     assertEquals(1, runCalled.get());
     list.execute();
     assertEquals(1, runCalled.get());
   }
 
+  @J2ktIncompatible
   public void testExecute_idempotentConcurrently() throws InterruptedException {
-    final CountDownLatch okayToRun = new CountDownLatch(1);
-    final AtomicInteger runCalled = new AtomicInteger();
+    CountDownLatch okayToRun = new CountDownLatch(1);
+    AtomicInteger runCalled = new AtomicInteger();
     list.add(
-        new Runnable() {
-          @Override
-          public void run() {
-            try {
-              okayToRun.await();
-            } catch (InterruptedException e) {
-              Thread.currentThread().interrupt();
-              throw new RuntimeException(e);
-            }
-            runCalled.getAndIncrement();
+        () -> {
+          try {
+            okayToRun.await();
+          } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            throw new RuntimeException(e);
           }
+          runCalled.getAndIncrement();
         },
         directExecutor());
-    Runnable execute =
-        new Runnable() {
-          @Override
-          public void run() {
-            list.execute();
-          }
-        };
+    Runnable execute = list::execute;
     Thread thread1 = new Thread(execute);
     Thread thread2 = new Thread(execute);
     thread1.start();
@@ -103,35 +96,29 @@ public class ExecutionListTest extends TestCase {
     assertEquals(1, runCalled.get());
   }
 
+  @J2ktIncompatible
   public void testAddAfterRun() throws Exception {
-    // Run the previous test
-    testRunOnPopulatedList();
+    // Run the same logic as testRunOnPopulatedList().
+    doTestRunOnPopulatedList();
 
     // If it passed, then verify an Add will be executed without calling run
     CountDownLatch countDownLatch = new CountDownLatch(1);
-    list.add(new MockRunnable(countDownLatch), Executors.newCachedThreadPool());
+    list.add(new MockRunnable(countDownLatch), newCachedThreadPool());
     assertTrue(countDownLatch.await(1L, SECONDS));
   }
 
-  public void testOrdering() throws Exception {
-    final AtomicInteger integer = new AtomicInteger();
+  public void testOrdering() {
+    AtomicInteger integer = new AtomicInteger();
     for (int i = 0; i < 10; i++) {
-      final int expectedCount = i;
-      list.add(
-          new Runnable() {
-            @Override
-            public void run() {
-              integer.compareAndSet(expectedCount, expectedCount + 1);
-            }
-          },
-          directExecutor());
+      int expectedCount = i;
+      list.add(() -> integer.compareAndSet(expectedCount, expectedCount + 1), directExecutor());
     }
     list.execute();
     assertEquals(10, integer.get());
   }
 
-  private class MockRunnable implements Runnable {
-    CountDownLatch countDownLatch;
+  private static final class MockRunnable implements Runnable {
+    final CountDownLatch countDownLatch;
 
     MockRunnable(CountDownLatch countDownLatch) {
       this.countDownLatch = countDownLatch;
@@ -149,15 +136,13 @@ public class ExecutionListTest extends TestCase {
     list.add(THROWING_RUNNABLE, directExecutor());
   }
 
+  @J2ktIncompatible
   public void testNulls() {
     new NullPointerTester().testAllPublicInstanceMethods(new ExecutionList());
   }
 
   private static final Runnable THROWING_RUNNABLE =
-      new Runnable() {
-        @Override
-        public void run() {
-          throw new RuntimeException();
-        }
+      () -> {
+        throw new RuntimeException();
       };
 }

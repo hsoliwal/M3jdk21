@@ -16,12 +16,20 @@
 
 package jdk.m3.collections.guava.collect;
 
+import static jdk.m3.collections.guava.base.Preconditions.checkNotNull;
+import static jdk.m3.collections.guava.collect.Maps.containsKeyImpl;
+import static jdk.m3.collections.guava.collect.Maps.containsValueImpl;
+import static jdk.m3.collections.guava.collect.Maps.equalsImpl;
+import static jdk.m3.collections.guava.collect.Maps.putAllImpl;
+import static jdk.m3.collections.guava.collect.Maps.toStringImpl;
+import static jdk.m3.collections.guava.collect.Sets.hashCodeImpl;
+
 import jdk.m3.collections.guava.annotations.GwtCompatible;
-import jdk.m3.collections.guava.base.Objects;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import org.jspecify.annotations.Nullable;
 
@@ -40,7 +48,7 @@ import org.jspecify.annotations.Nullable;
  * default} methods. Instead, it inherits their default implementations. When those implementations
  * invoke methods, they invoke methods on the {@code ForwardingMap}.
  *
- * <p>Each of the {@code standard} methods, where appropriate, use {@link Objects#equal} to test
+ * <p>Each of the {@code standard} methods, where appropriate, use {@link Objects#equals} to test
  * equality for both keys and values. This may not be the desired behavior for map implementations
  * that use non-standard notions of key equality, such as a {@code SortedMap} whose comparator is
  * not consistent with {@code equals}.
@@ -144,7 +152,7 @@ public abstract class ForwardingMap<K extends @Nullable Object, V extends @Nulla
    * @since 7.0
    */
   protected void standardPutAll(Map<? extends K, ? extends V> map) {
-    Maps.putAllImpl(this, map);
+    putAllImpl(this, map);
   }
 
   /**
@@ -161,7 +169,7 @@ public abstract class ForwardingMap<K extends @Nullable Object, V extends @Nulla
     Iterator<Entry<K, V>> entryIterator = entrySet().iterator();
     while (entryIterator.hasNext()) {
       Entry<K, V> entry = entryIterator.next();
-      if (Objects.equal(entry.getKey(), key)) {
+      if (Objects.equals(entry.getKey(), key)) {
         V value = entry.getValue();
         entryIterator.remove();
         return value;
@@ -205,7 +213,7 @@ public abstract class ForwardingMap<K extends @Nullable Object, V extends @Nulla
    * @since 7.0
    */
   protected boolean standardContainsKey(@Nullable Object key) {
-    return Maps.containsKeyImpl(this, key);
+    return containsKeyImpl(this, key);
   }
 
   /**
@@ -232,7 +240,7 @@ public abstract class ForwardingMap<K extends @Nullable Object, V extends @Nulla
    * @since 7.0
    */
   protected boolean standardContainsValue(@Nullable Object value) {
-    return Maps.containsValueImpl(this, value);
+    return containsValueImpl(this, value);
   }
 
   /**
@@ -273,7 +281,7 @@ public abstract class ForwardingMap<K extends @Nullable Object, V extends @Nulla
    * @since 7.0
    */
   protected boolean standardEquals(@Nullable Object object) {
-    return Maps.equalsImpl(this, object);
+    return equalsImpl(this, object);
   }
 
   /**
@@ -284,7 +292,7 @@ public abstract class ForwardingMap<K extends @Nullable Object, V extends @Nulla
    * @since 7.0
    */
   protected int standardHashCode() {
-    return Sets.hashCodeImpl(entrySet());
+    return hashCodeImpl(entrySet());
   }
 
   /**
@@ -295,6 +303,28 @@ public abstract class ForwardingMap<K extends @Nullable Object, V extends @Nulla
    * @since 7.0
    */
   protected String standardToString() {
-    return Maps.toStringImpl(this);
+    return toStringImpl(this);
+  }
+
+  /**
+   * A simplified version of {@link ForwardingMap} where subclasses can pass in an already
+   * constructed {@link Map} as the delegate.
+   *
+   * <p>TODO(b/3417232): Consider making this public, but take into consideration whether it would
+   * then appear as a user-visible supertype for any classes.
+   */
+  abstract static class SimpleForwardingMap<K extends @Nullable Object, V extends @Nullable Object>
+      extends ForwardingMap<K, V> {
+    private final Map<K, V> delegate;
+
+    /** Constructor for use by subclasses. */
+    SimpleForwardingMap(Map<K, V> delegate) {
+      this.delegate = checkNotNull(delegate);
+    }
+
+    @Override
+    protected final Map<K, V> delegate() {
+      return delegate;
+    }
   }
 }

@@ -16,21 +16,21 @@ package jdk.m3.collections.guava.collect.testing.google;
 
 import static jdk.m3.collections.guava.collect.BoundType.CLOSED;
 import static jdk.m3.collections.guava.collect.BoundType.OPEN;
+import static jdk.m3.collections.guava.collect.Lists.newArrayList;
 import static jdk.m3.collections.guava.collect.testing.Helpers.copyToList;
 import static jdk.m3.collections.guava.collect.testing.features.CollectionFeature.SUPPORTS_ADD;
 import static jdk.m3.collections.guava.collect.testing.features.CollectionFeature.SUPPORTS_REMOVE;
 import static jdk.m3.collections.guava.collect.testing.features.CollectionSize.ONE;
 import static jdk.m3.collections.guava.collect.testing.features.CollectionSize.SEVERAL;
 import static jdk.m3.collections.guava.collect.testing.features.CollectionSize.ZERO;
-import static jdk.m3.collections.guava.collect.testing.google.ReflectionFreeAssertThrows.assertThrows;
 import static java.util.Arrays.asList;
 import static java.util.Collections.nCopies;
 import static java.util.Collections.singletonList;
 import static java.util.Collections.sort;
+import static org.junit.Assert.assertThrows;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.collect.BoundType;
-import jdk.m3.collections.guava.collect.Iterators;
 import jdk.m3.collections.guava.collect.Multiset.Entry;
 import jdk.m3.collections.guava.collect.Multisets;
 import jdk.m3.collections.guava.collect.SortedMultiset;
@@ -40,7 +40,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.NoSuchElementException;
-import org.junit.Ignore;
 
 /**
  * Tester for navigation of SortedMultisets.
@@ -48,9 +47,6 @@ import org.junit.Ignore;
  * @author Louis Wasserman
  */
 @GwtCompatible
-@Ignore("test runners must not instantiate and run this directly, only via suites we build")
-// @Ignore affects the Android test runner, which respects JUnit 4 annotations on JUnit 3 tests.
-@SuppressWarnings("JUnit4ClassUsedInJUnit3")
 public class MultisetNavigationTester<E> extends AbstractMultisetTester<E> {
   private SortedMultiset<E> sortedMultiset;
   private List<E> entries;
@@ -224,50 +220,37 @@ public class MultisetNavigationTester<E> extends AbstractMultisetTester<E> {
 
   @CollectionSize.Require(SEVERAL)
   public void testDescendingNavigation() {
-    List<Entry<E>> ascending = new ArrayList<>();
-    Iterators.addAll(ascending, sortedMultiset.entrySet().iterator());
-    List<Entry<E>> descending = new ArrayList<>();
-    Iterators.addAll(descending, sortedMultiset.descendingMultiset().entrySet().iterator());
+    List<Entry<E>> ascending = newArrayList(sortedMultiset.entrySet().iterator());
+    List<Entry<E>> descending =
+        newArrayList(sortedMultiset.descendingMultiset().entrySet().iterator());
     Collections.reverse(descending);
     assertEquals(ascending, descending);
   }
 
-  void expectAddFailure(SortedMultiset<E> multiset, Entry<E> entry) {
-    try {
-      multiset.add(entry.getElement(), entry.getCount());
-      fail("Expected IllegalArgumentException");
-    } catch (IllegalArgumentException expected) {
-    }
+  final void expectAddFailure(SortedMultiset<E> multiset, Entry<E> entry) {
+    assertThrows(
+        IllegalArgumentException.class, () -> multiset.add(entry.getElement(), entry.getCount()));
 
-    try {
-      multiset.add(entry.getElement());
-      fail("Expected IllegalArgumentException");
-    } catch (IllegalArgumentException expected) {
-    }
+    assertThrows(IllegalArgumentException.class, () -> multiset.add(entry.getElement()));
 
-    try {
-      multiset.addAll(singletonList(entry.getElement()));
-      fail("Expected IllegalArgumentException");
-    } catch (IllegalArgumentException expected) {
-    }
+    assertThrows(
+        IllegalArgumentException.class, () -> multiset.addAll(singletonList(entry.getElement())));
   }
 
-  void expectRemoveZero(SortedMultiset<E> multiset, Entry<E> entry) {
+  final void expectRemoveZero(SortedMultiset<E> multiset, Entry<E> entry) {
     assertEquals(0, multiset.remove(entry.getElement(), entry.getCount()));
     assertFalse(multiset.remove(entry.getElement()));
     assertFalse(multiset.elementSet().remove(entry.getElement()));
   }
 
-  void expectSetCountFailure(SortedMultiset<E> multiset, Entry<E> entry) {
+  final void expectSetCountFailure(SortedMultiset<E> multiset, Entry<E> entry) {
     try {
       multiset.setCount(entry.getElement(), multiset.count(entry.getElement()));
     } catch (IllegalArgumentException acceptable) {
     }
-    try {
-      multiset.setCount(entry.getElement(), multiset.count(entry.getElement()) + 1);
-      fail("Expected IllegalArgumentException");
-    } catch (IllegalArgumentException expected) {
-    }
+    assertThrows(
+        IllegalArgumentException.class,
+        () -> multiset.setCount(entry.getElement(), multiset.count(entry.getElement()) + 1));
   }
 
   @CollectionSize.Require(ONE)

@@ -16,22 +16,25 @@
 
 package jdk.m3.collections.guava.primitives;
 
-import static jdk.m3.collections.guava.primitives.ReflectionFreeAssertThrows.assertThrows;
+import static jdk.m3.collections.guava.collect.testing.Helpers.misleadingSizeCollection;
+import static jdk.m3.collections.guava.collect.testing.Helpers.testComparator;
 import static jdk.m3.collections.guava.primitives.Shorts.max;
 import static jdk.m3.collections.guava.primitives.Shorts.min;
-import static com.google.common.truth.Truth.assertThat;
-import static com.google.common.truth.Truth.assertWithMessage;
+import static jdk.m3.collections.guava.testing.SerializableTester.reserialize;
+import static jdk.m3.collections.guava.testing.SerializableTester.reserializeAndAssert;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
+import static jdk.m3.collections.guava.truth.Truth.assertWithMessage;
+import static java.util.Arrays.asList;
+import static java.util.Collections.emptyList;
+import static org.junit.Assert.assertThrows;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
 import jdk.m3.collections.guava.annotations.J2ktIncompatible;
 import jdk.m3.collections.guava.base.Converter;
-import jdk.m3.collections.guava.collect.testing.Helpers;
 import jdk.m3.collections.guava.testing.NullPointerTester;
-import jdk.m3.collections.guava.testing.SerializableTester;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Random;
@@ -45,7 +48,7 @@ import org.jspecify.annotations.Nullable;
  * @author Kevin Bourrillion
  */
 @NullMarked
-@GwtCompatible(emulated = true)
+@GwtCompatible
 public class ShortsTest extends TestCase {
   private static final short[] EMPTY = {};
   private static final short[] ARRAY1 = {(short) 1};
@@ -56,9 +59,11 @@ public class ShortsTest extends TestCase {
 
   private static final short[] VALUES = {LEAST, (short) -1, (short) 0, (short) 1, GREATEST};
 
+  // We need to test that our method behaves like the JDK method.
+  @SuppressWarnings("InlineMeInliner")
   public void testHashCode() {
     for (short value : VALUES) {
-      assertThat(Shorts.hashCode(value)).isEqualTo(((Short) value).hashCode());
+      assertThat(Shorts.hashCode(value)).isEqualTo(Short.hashCode(value));
     }
   }
 
@@ -83,14 +88,9 @@ public class ShortsTest extends TestCase {
   }
 
   private static void assertCastFails(long value) {
-    try {
-      Shorts.checkedCast(value);
-      fail("Cast to short should have failed: " + value);
-    } catch (IllegalArgumentException ex) {
-      assertWithMessage(value + " not found in exception text: " + ex.getMessage())
-          .that(ex.getMessage().contains(String.valueOf(value)))
-          .isTrue();
-    }
+    IllegalArgumentException ex =
+        assertThrows(IllegalArgumentException.class, () -> Shorts.checkedCast(value));
+    assertThat(ex).hasMessageThat().contains(String.valueOf(value));
   }
 
   // We need to test that our method behaves like the JDK method.
@@ -102,13 +102,13 @@ public class ShortsTest extends TestCase {
         int expected = Short.compare(x, y);
         int actual = Shorts.compare(x, y);
         if (expected == 0) {
-          assertWithMessage(x + ", " + y).that(actual).isEqualTo(expected);
+          assertWithMessage("%s, %s", x, y).that(actual).isEqualTo(expected);
         } else if (expected < 0) {
-          assertWithMessage(x + ", " + y + " (expected: " + expected + ", actual" + actual + ")")
+          assertWithMessage("%s, %s (expected: %s, actual%s)", x, y, expected, actual)
               .that(actual < 0)
               .isTrue();
         } else {
-          assertWithMessage(x + ", " + y + " (expected: " + expected + ", actual" + actual + ")")
+          assertWithMessage("%s, %s (expected: %s, actual%s)", x, y, expected, actual)
               .that(actual > 0)
               .isTrue();
         }
@@ -136,6 +136,32 @@ public class ShortsTest extends TestCase {
     assertThat(Shorts.indexOf(ARRAY234, (short) 4)).isEqualTo(2);
     assertThat(Shorts.indexOf(new short[] {(short) 2, (short) 3, (short) 2, (short) 3}, (short) 3))
         .isEqualTo(1);
+  }
+
+  public void testIndexOfIndexed() {
+    assertThat(Shorts.indexOf(EMPTY, (short) 1, 0, 0)).isEqualTo(-1);
+    assertThat(Shorts.indexOf(ARRAY1, (short) 2, 0, 1)).isEqualTo(-1);
+    assertThat(Shorts.indexOf(ARRAY234, (short) 1, 0, 3)).isEqualTo(-1);
+    assertThat(Shorts.indexOf(new short[] {(short) -1}, (short) -1, 0, 1)).isEqualTo(0);
+    assertThat(Shorts.indexOf(ARRAY234, (short) 2, 0, 3)).isEqualTo(0);
+    assertThat(Shorts.indexOf(ARRAY234, (short) 2, 0, 0)).isEqualTo(-1);
+    assertThat(Shorts.indexOf(ARRAY234, (short) 2, 1, 3)).isEqualTo(-1);
+    assertThat(Shorts.indexOf(ARRAY234, (short) 3, 1, 2)).isEqualTo(1);
+    assertThat(Shorts.indexOf(ARRAY234, (short) 3, 0, 1)).isEqualTo(-1);
+    assertThat(Shorts.indexOf(ARRAY234, (short) 4, 2, 3)).isEqualTo(2);
+    assertThat(Shorts.indexOf(ARRAY234, (short) 4, 0, 2)).isEqualTo(-1);
+    assertThat(
+            Shorts.indexOf(
+                new short[] {(short) 2, (short) 3, (short) 2, (short) 3}, (short) 3, 2, 4))
+        .isEqualTo(3);
+    assertThat(
+            Shorts.indexOf(
+                new short[] {(short) 3, (short) 3, (short) 3, (short) 3}, (short) 3, 1, 3))
+        .isEqualTo(1);
+
+    assertThrows(IndexOutOfBoundsException.class, () -> Shorts.indexOf(ARRAY234, (short) 2, -1, 1));
+    assertThrows(IndexOutOfBoundsException.class, () -> Shorts.indexOf(ARRAY234, (short) 2, 0, 4));
+    assertThrows(IndexOutOfBoundsException.class, () -> Shorts.indexOf(ARRAY234, (short) 2, 2, 1));
   }
 
   public void testIndexOf_arrayTarget() {
@@ -176,6 +202,89 @@ public class ShortsTest extends TestCase {
         .isEqualTo(-1);
   }
 
+  public void testIndexOf_arrayTargetIndexed() {
+    assertThat(Shorts.indexOf(EMPTY, EMPTY, 0, 0)).isEqualTo(0);
+    assertThat(Shorts.indexOf(ARRAY234, EMPTY, 0, 3)).isEqualTo(0);
+    assertThat(Shorts.indexOf(ARRAY234, EMPTY, 1, 3)).isEqualTo(1);
+    assertThat(Shorts.indexOf(ARRAY234, EMPTY, 2, 2)).isEqualTo(2);
+    assertThat(Shorts.indexOf(ARRAY234, EMPTY, 3, 3)).isEqualTo(3);
+    assertThat(Shorts.indexOf(EMPTY, ARRAY234, 0, 0)).isEqualTo(-1);
+    assertThat(Shorts.indexOf(ARRAY234, ARRAY1, 0, 3)).isEqualTo(-1);
+    assertThat(Shorts.indexOf(ARRAY1, ARRAY234, 0, 1)).isEqualTo(-1);
+    assertThat(Shorts.indexOf(ARRAY1, ARRAY1, 0, 1)).isEqualTo(0);
+    assertThat(Shorts.indexOf(ARRAY1, ARRAY1, 0, 0)).isEqualTo(-1);
+    assertThat(Shorts.indexOf(ARRAY1, ARRAY1, 1, 1)).isEqualTo(-1);
+    assertThat(Shorts.indexOf(ARRAY234, ARRAY234, 0, 3)).isEqualTo(0);
+    assertThat(Shorts.indexOf(ARRAY234, ARRAY234, 0, 2)).isEqualTo(-1);
+    assertThat(Shorts.indexOf(ARRAY234, ARRAY234, 1, 3)).isEqualTo(-1);
+    assertThat(Shorts.indexOf(ARRAY234, new short[] {(short) 2, (short) 3}, 0, 3)).isEqualTo(0);
+    assertThat(Shorts.indexOf(ARRAY234, new short[] {(short) 2, (short) 3}, 0, 2)).isEqualTo(0);
+    assertThat(Shorts.indexOf(ARRAY234, new short[] {(short) 2, (short) 3}, 0, 1)).isEqualTo(-1);
+    assertThat(Shorts.indexOf(ARRAY234, new short[] {(short) 2, (short) 3}, 1, 3)).isEqualTo(-1);
+    assertThat(Shorts.indexOf(ARRAY234, new short[] {(short) 3, (short) 4}, 0, 3)).isEqualTo(1);
+    assertThat(Shorts.indexOf(ARRAY234, new short[] {(short) 3, (short) 4}, 1, 3)).isEqualTo(1);
+    assertThat(Shorts.indexOf(ARRAY234, new short[] {(short) 3, (short) 4}, 1, 2)).isEqualTo(-1);
+    assertThat(Shorts.indexOf(ARRAY234, new short[] {(short) 3}, 1, 2)).isEqualTo(1);
+    assertThat(Shorts.indexOf(ARRAY234, new short[] {(short) 4}, 2, 3)).isEqualTo(2);
+    assertThat(
+            Shorts.indexOf(
+                new short[] {(short) 2, (short) 3, (short) 3, (short) 3, (short) 3},
+                new short[] {(short) 3},
+                2,
+                5))
+        .isEqualTo(2);
+    assertThat(
+            Shorts.indexOf(
+                new short[] {
+                  (short) 2, (short) 3, (short) 2, (short) 3, (short) 4, (short) 2, (short) 3
+                },
+                new short[] {(short) 2, (short) 3, (short) 4},
+                0,
+                7))
+        .isEqualTo(2);
+    assertThat(
+            Shorts.indexOf(
+                new short[] {
+                  (short) 2, (short) 3, (short) 2, (short) 3, (short) 4, (short) 2, (short) 3
+                },
+                new short[] {(short) 2, (short) 3, (short) 4},
+                2,
+                5))
+        .isEqualTo(2);
+    assertThat(
+            Shorts.indexOf(
+                new short[] {
+                  (short) 2, (short) 3, (short) 2, (short) 3, (short) 4, (short) 2, (short) 3
+                },
+                new short[] {(short) 2, (short) 3, (short) 4},
+                2,
+                4))
+        .isEqualTo(-1);
+    assertThat(
+            Shorts.indexOf(
+                new short[] {
+                  (short) 2, (short) 2, (short) 3, (short) 4, (short) 2, (short) 3, (short) 4
+                },
+                new short[] {(short) 2, (short) 3, (short) 4},
+                2,
+                7))
+        .isEqualTo(4);
+    assertThat(
+            Shorts.indexOf(
+                new short[] {(short) 4, (short) 3, (short) 2},
+                new short[] {(short) 2, (short) 3, (short) 4},
+                0,
+                3))
+        .isEqualTo(-1);
+
+    assertThrows(IndexOutOfBoundsException.class, () -> Shorts.indexOf(ARRAY234, ARRAY1, -1, 1));
+    assertThrows(IndexOutOfBoundsException.class, () -> Shorts.indexOf(ARRAY234, ARRAY1, 0, 4));
+    assertThrows(IndexOutOfBoundsException.class, () -> Shorts.indexOf(ARRAY234, ARRAY1, 2, 1));
+    assertThrows(IndexOutOfBoundsException.class, () -> Shorts.indexOf(ARRAY234, EMPTY, -1, 1));
+    assertThrows(IndexOutOfBoundsException.class, () -> Shorts.indexOf(ARRAY234, EMPTY, 0, 4));
+    assertThrows(IndexOutOfBoundsException.class, () -> Shorts.indexOf(ARRAY234, EMPTY, 2, 1));
+  }
+
   public void testLastIndexOf() {
     assertThat(Shorts.lastIndexOf(EMPTY, (short) 1)).isEqualTo(-1);
     assertThat(Shorts.lastIndexOf(ARRAY1, (short) 2)).isEqualTo(-1);
@@ -187,6 +296,35 @@ public class ShortsTest extends TestCase {
     assertThat(
             Shorts.lastIndexOf(new short[] {(short) 2, (short) 3, (short) 2, (short) 3}, (short) 3))
         .isEqualTo(3);
+  }
+
+  public void testLastIndexOfIndexed() {
+    assertThat(Shorts.lastIndexOf(EMPTY, (short) 1, 0, 0)).isEqualTo(-1);
+    assertThat(Shorts.lastIndexOf(ARRAY1, (short) 2, 0, 1)).isEqualTo(-1);
+    assertThat(Shorts.lastIndexOf(ARRAY234, (short) 1, 0, 3)).isEqualTo(-1);
+    assertThat(Shorts.lastIndexOf(new short[] {(short) -1}, (short) -1, 0, 1)).isEqualTo(0);
+    assertThat(Shorts.lastIndexOf(ARRAY234, (short) 2, 0, 3)).isEqualTo(0);
+    assertThat(Shorts.lastIndexOf(ARRAY234, (short) 2, 0, 0)).isEqualTo(-1);
+    assertThat(Shorts.lastIndexOf(ARRAY234, (short) 2, 1, 3)).isEqualTo(-1);
+    assertThat(Shorts.lastIndexOf(ARRAY234, (short) 3, 1, 2)).isEqualTo(1);
+    assertThat(Shorts.lastIndexOf(ARRAY234, (short) 3, 0, 1)).isEqualTo(-1);
+    assertThat(Shorts.lastIndexOf(ARRAY234, (short) 4, 2, 3)).isEqualTo(2);
+    assertThat(Shorts.lastIndexOf(ARRAY234, (short) 4, 0, 2)).isEqualTo(-1);
+    assertThat(
+            Shorts.lastIndexOf(
+                new short[] {(short) 2, (short) 3, (short) 2, (short) 3}, (short) 3, 0, 3))
+        .isEqualTo(1);
+    assertThat(
+            Shorts.lastIndexOf(
+                new short[] {(short) 3, (short) 3, (short) 3, (short) 3}, (short) 3, 1, 3))
+        .isEqualTo(2);
+
+    assertThrows(
+        IndexOutOfBoundsException.class, () -> Shorts.lastIndexOf(ARRAY234, (short) 2, -1, 1));
+    assertThrows(
+        IndexOutOfBoundsException.class, () -> Shorts.lastIndexOf(ARRAY234, (short) 2, 0, 4));
+    assertThrows(
+        IndexOutOfBoundsException.class, () -> Shorts.lastIndexOf(ARRAY234, (short) 2, 2, 1));
   }
 
   @GwtIncompatible
@@ -261,11 +399,7 @@ public class ShortsTest extends TestCase {
     short[] sharedArray = new short[arraysDim2];
     Arrays.fill(arrays, sharedArray);
 
-    try {
-      Shorts.concat(arrays);
-      fail();
-    } catch (IllegalArgumentException expected) {
-    }
+    assertThrows(IllegalArgumentException.class, () -> Shorts.concat(arrays));
   }
 
   @GwtIncompatible // Shorts.toByteArray
@@ -329,7 +463,7 @@ public class ShortsTest extends TestCase {
 
   public void testLexicographicalComparator() {
     List<short[]> ordered =
-        Arrays.asList(
+        asList(
             new short[] {},
             new short[] {LEAST},
             new short[] {LEAST, LEAST},
@@ -341,14 +475,14 @@ public class ShortsTest extends TestCase {
             new short[] {GREATEST, GREATEST, GREATEST});
 
     Comparator<short[]> comparator = Shorts.lexicographicalComparator();
-    Helpers.testComparator(comparator, ordered);
+    testComparator(comparator, ordered);
   }
 
   @J2ktIncompatible
   @GwtIncompatible // SerializableTester
   public void testLexicographicalComparatorSerializable() {
     Comparator<short[]> comparator = Shorts.lexicographicalComparator();
-    assertThat(SerializableTester.reserialize(comparator)).isSameInstanceAs(comparator);
+    assertThat(reserialize(comparator)).isSameInstanceAs(comparator);
   }
 
   public void testReverse() {
@@ -394,17 +528,25 @@ public class ShortsTest extends TestCase {
     assertThat(input).isEqualTo(expectedOutput);
   }
 
-  public void testRotate() {
-    testRotate(new short[] {}, -1, new short[] {});
-    testRotate(new short[] {}, 0, new short[] {});
-    testRotate(new short[] {}, 1, new short[] {});
+  public void testRotate_emptyArray() {
+    short[] empty = {};
+    short[] expected = {};
+    testRotate(empty, -1, expected);
+    testRotate(empty, 0, expected);
+    testRotate(empty, 1, expected);
+  }
 
-    testRotate(new short[] {1}, -2, new short[] {1});
-    testRotate(new short[] {1}, -1, new short[] {1});
-    testRotate(new short[] {1}, 0, new short[] {1});
-    testRotate(new short[] {1}, 1, new short[] {1});
-    testRotate(new short[] {1}, 2, new short[] {1});
+  public void testRotate_singleElementArray() {
+    short[] single = {1};
+    short[] expected = {1};
+    testRotate(single, -2, expected);
+    testRotate(single, -1, expected);
+    testRotate(single, 0, expected);
+    testRotate(single, 1, expected);
+    testRotate(single, 2, expected);
+  }
 
+  public void testRotate_multiElementArray() {
     testRotate(new short[] {1, 2}, -3, new short[] {2, 1});
     testRotate(new short[] {1, 2}, -1, new short[] {2, 1});
     testRotate(new short[] {1, 2}, -2, new short[] {1, 2});
@@ -444,13 +586,39 @@ public class ShortsTest extends TestCase {
     testRotate(new short[] {1, 2, 3, 4, 5}, 6, new short[] {5, 1, 2, 3, 4});
   }
 
-  public void testRotateIndexed() {
-    testRotate(new short[] {}, 0, 0, 0, new short[] {});
+  public void testRotate_minValueDistance() {
+    testRotate(new short[] {1, 2, 3}, Integer.MIN_VALUE, new short[] {3, 1, 2});
+    testRotate(new short[] {0, 1, 2, 3, 4}, Integer.MIN_VALUE, 1, 4, new short[] {0, 3, 1, 2, 4});
+  }
 
-    testRotate(new short[] {1}, 0, 0, 1, new short[] {1});
-    testRotate(new short[] {1}, 1, 0, 1, new short[] {1});
-    testRotate(new short[] {1}, 1, 1, 1, new short[] {1});
+  public void testRotateIndexed_emptyRange() {
+    short[] empty = {};
+    short[] expectedEmpty = {};
+    testRotate(empty, 0, 0, 0, expectedEmpty);
 
+    short[] single = {1};
+    short[] expectedSingle = {1};
+    testRotate(single, 1, 1, 1, expectedSingle);
+
+    short[] array = {0, 1, 2};
+    short[] expectedArray = {0, 1, 2};
+    testRotate(array, 1, 1, 1, expectedArray);
+    testRotate(array, -1, 2, 2, expectedArray);
+  }
+
+  public void testRotateIndexed_singleElementRange() {
+    short[] single = {1};
+    short[] expectedSingle = {1};
+    testRotate(single, 0, 0, 1, expectedSingle);
+    testRotate(single, 1, 0, 1, expectedSingle);
+
+    short[] array = {0, 1, 2};
+    short[] expectedArray = {0, 1, 2};
+    testRotate(array, 1, 1, 2, expectedArray);
+    testRotate(array, -1, 2, 3, expectedArray);
+  }
+
+  public void testRotateIndexed_multiElementRange() {
     // Rotate the central 5 elements, leaving the ends as-is
     testRotate(new short[] {0, 1, 2, 3, 4, 5, 6}, -6, 1, 6, new short[] {0, 2, 3, 4, 5, 1, 6});
     testRotate(new short[] {0, 1, 2, 3, 4, 5, 6}, -1, 1, 6, new short[] {0, 2, 3, 4, 5, 1, 6});
@@ -511,20 +679,20 @@ public class ShortsTest extends TestCase {
   @J2ktIncompatible
   @GwtIncompatible // SerializableTester
   public void testStringConverterSerialization() {
-    SerializableTester.reserializeAndAssert(Shorts.stringConverter());
+    reserializeAndAssert(Shorts.stringConverter());
   }
 
   public void testToArray() {
     // need explicit type parameter to avoid javac warning!?
-    List<Short> none = Arrays.<Short>asList();
+    List<Short> none = Arrays.asList();
     assertThat(Shorts.toArray(none)).isEqualTo(EMPTY);
 
-    List<Short> one = Arrays.asList((short) 1);
+    List<Short> one = asList((short) 1);
     assertThat(Shorts.toArray(one)).isEqualTo(ARRAY1);
 
     short[] array = {(short) 0, (short) 1, (short) 3};
 
-    List<Short> three = Arrays.asList((short) 0, (short) 1, (short) 3);
+    List<Short> three = asList((short) 0, (short) 1, (short) 3);
     assertThat(Shorts.toArray(three)).isEqualTo(array);
 
     assertThat(Shorts.toArray(Shorts.asList(array))).isEqualTo(array);
@@ -534,7 +702,7 @@ public class ShortsTest extends TestCase {
     for (int delta : new int[] {+1, 0, -1}) {
       for (int i = 0; i < VALUES.length; i++) {
         List<Short> list = Shorts.asList(VALUES).subList(0, i);
-        Collection<Short> misleadingSize = Helpers.misleadingSizeCollection(delta);
+        Collection<Short> misleadingSize = misleadingSizeCollection(delta);
         misleadingSize.addAll(list);
         short[] arr = Shorts.toArray(misleadingSize);
         assertThat(arr).hasLength(i);
@@ -545,20 +713,21 @@ public class ShortsTest extends TestCase {
     }
   }
 
+  @SuppressWarnings("nullness") // test of a bogus call
   public void testToArray_withNull() {
-    List<@Nullable Short> list = Arrays.asList((short) 0, (short) 1, null);
+    List<@Nullable Short> list = asList((short) 0, (short) 1, null);
     assertThrows(NullPointerException.class, () -> Shorts.toArray(list));
   }
 
   public void testToArray_withConversion() {
     short[] array = {(short) 0, (short) 1, (short) 2};
 
-    List<Byte> bytes = Arrays.asList((byte) 0, (byte) 1, (byte) 2);
-    List<Short> shorts = Arrays.asList((short) 0, (short) 1, (short) 2);
-    List<Integer> ints = Arrays.asList(0, 1, 2);
-    List<Float> floats = Arrays.asList(0.0f, 1.0f, 2.0f);
-    List<Long> longs = Arrays.asList(0L, 1L, 2L);
-    List<Double> doubles = Arrays.asList(0.0, 1.0, 2.0);
+    List<Byte> bytes = asList((byte) 0, (byte) 1, (byte) 2);
+    List<Short> shorts = asList((short) 0, (short) 1, (short) 2);
+    List<Integer> ints = asList(0, 1, 2);
+    List<Float> floats = asList(0.0f, 1.0f, 2.0f);
+    List<Long> longs = asList(0L, 1L, 2L);
+    List<Double> doubles = asList(0.0, 1.0, 2.0);
 
     assertThat(Shorts.toArray(bytes)).isEqualTo(array);
     assertThat(Shorts.toArray(shorts)).isEqualTo(array);
@@ -598,8 +767,10 @@ public class ShortsTest extends TestCase {
     assertThat(Shorts.toArray(list.subList(2, 2))).isEqualTo(new short[] {});
   }
 
+  // `primitives` can't depend on `collect`, so this is what the prod code has to return.
+  @SuppressWarnings("EmptyList")
   public void testAsListEmpty() {
-    assertThat(Shorts.asList(EMPTY)).isSameInstanceAs(Collections.emptyList());
+    assertThat(Shorts.asList(EMPTY)).isSameInstanceAs(emptyList());
   }
 
   @J2ktIncompatible
@@ -642,7 +813,7 @@ public class ShortsTest extends TestCase {
 
   @J2ktIncompatible
   @GwtIncompatible // NullPointerTester
-  public void testStringConverter_nullPointerTester() throws Exception {
+  public void testStringConverter_nullPointerTester() {
     NullPointerTester tester = new NullPointerTester();
     tester.testAllPublicInstanceMethods(Shorts.stringConverter());
   }

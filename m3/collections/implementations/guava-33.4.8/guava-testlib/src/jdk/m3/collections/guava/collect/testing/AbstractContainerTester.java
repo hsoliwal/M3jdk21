@@ -29,7 +29,6 @@ import java.util.Collection;
 import java.util.List;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
-import org.junit.Ignore;
 
 /**
  * Base class for testers of classes (including {@link Collection} and {@link java.util.Map Map})
@@ -40,9 +39,6 @@ import org.junit.Ignore;
  * @author George van den Driessche
  */
 @GwtCompatible
-@Ignore("test runners must not instantiate and run this directly, only via suites we build")
-// @Ignore affects the Android test runner, which respects JUnit 4 annotations on JUnit 3 tests.
-@SuppressWarnings("JUnit4ClassUsedInJUnit3")
 @NullMarked
 public abstract class AbstractContainerTester<C, E extends @Nullable Object>
     extends AbstractTester<OneSizeTestContainerGenerator<C, E>> {
@@ -182,7 +178,7 @@ public abstract class AbstractContainerTester<C, E extends @Nullable Object>
     return array;
   }
 
-  public static class ArrayWithDuplicate<E extends @Nullable Object> {
+  public static final class ArrayWithDuplicate<E extends @Nullable Object> {
     public final E[] elements;
     public final E duplicate;
 
@@ -242,7 +238,7 @@ public abstract class AbstractContainerTester<C, E extends @Nullable Object>
   }
 
   protected MinimalCollection<E> emptyCollection() {
-    return MinimalCollection.<E>of();
+    return MinimalCollection.of();
   }
 
   protected final E e0() {

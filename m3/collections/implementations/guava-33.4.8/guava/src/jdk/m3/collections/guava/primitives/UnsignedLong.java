@@ -18,6 +18,8 @@ import static jdk.m3.collections.guava.base.Preconditions.checkArgument;
 import static jdk.m3.collections.guava.base.Preconditions.checkNotNull;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
+import jdk.m3.collections.guava.annotations.GwtIncompatible;
+import jdk.m3.collections.guava.annotations.J2ktIncompatible;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import java.math.BigInteger;
 import org.jspecify.annotations.Nullable;
@@ -36,13 +38,18 @@ import org.jspecify.annotations.Nullable;
  * @author Colin Evans
  * @since 11.0
  */
-@GwtCompatible(serializable = true)
+@GwtCompatible
 public final class UnsignedLong extends Number implements Comparable<UnsignedLong> {
 
   private static final long UNSIGNED_MASK = 0x7fffffffffffffffL;
 
+  /** An {@code UnsignedLong} constant holding the value 0. */
   public static final UnsignedLong ZERO = new UnsignedLong(0);
+
+  /** An {@code UnsignedLong} constant holding the value 1. */
   public static final UnsignedLong ONE = new UnsignedLong(1);
+
+  /** An {@code UnsignedLong} constant holding the maximum value, 2^64 - 1. */
   public static final UnsignedLong MAX_VALUE = new UnsignedLong(-1L);
 
   private final long value;
@@ -236,7 +243,7 @@ public final class UnsignedLong extends Number implements Comparable<UnsignedLon
 
   @Override
   public int hashCode() {
-    return Longs.hashCode(value);
+    return Long.hashCode(value);
   }
 
   @Override
@@ -262,4 +269,6 @@ public final class UnsignedLong extends Number implements Comparable<UnsignedLon
   public String toString(int radix) {
     return UnsignedLongs.toString(value, radix);
   }
+
+  @GwtIncompatible @J2ktIncompatible   private static final long serialVersionUID = 389107927943716141L;
 }

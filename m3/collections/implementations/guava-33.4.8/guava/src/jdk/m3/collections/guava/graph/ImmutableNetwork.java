@@ -17,11 +17,10 @@
 package jdk.m3.collections.guava.graph;
 
 import static jdk.m3.collections.guava.base.Preconditions.checkNotNull;
+import static jdk.m3.collections.guava.collect.Maps.asMap;
 
-import jdk.m3.collections.guava.annotations.Beta;
 import jdk.m3.collections.guava.base.Function;
 import jdk.m3.collections.guava.collect.ImmutableMap;
-import jdk.m3.collections.guava.collect.Maps;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import com.google.errorprone.annotations.Immutable;
 import com.google.errorprone.annotations.InlineMe;
@@ -44,7 +43,6 @@ import java.util.Map;
  * @param <E> Edge parameter type
  * @since 20.0
  */
-@Beta
 @Immutable(containerOf = {"N", "E"})
 @SuppressWarnings("Immutable") // Extends StandardNetwork but uses ImmutableMaps.
 public final class ImmutableNetwork<N, E> extends StandardNetwork<N, E> {
@@ -103,15 +101,14 @@ public final class ImmutableNetwork<N, E> extends StandardNetwork<N, E> {
 
   private static <N, E> NetworkConnections<N, E> connectionsOf(Network<N, E> network, N node) {
     if (network.isDirected()) {
-      Map<E, N> inEdgeMap = Maps.asMap(network.inEdges(node), sourceNodeFn(network));
-      Map<E, N> outEdgeMap = Maps.asMap(network.outEdges(node), targetNodeFn(network));
+      Map<E, N> inEdgeMap = asMap(network.inEdges(node), sourceNodeFn(network));
+      Map<E, N> outEdgeMap = asMap(network.outEdges(node), targetNodeFn(network));
       int selfLoopCount = network.edgesConnecting(node, node).size();
       return network.allowsParallelEdges()
           ? DirectedMultiNetworkConnections.ofImmutable(inEdgeMap, outEdgeMap, selfLoopCount)
           : DirectedNetworkConnections.ofImmutable(inEdgeMap, outEdgeMap, selfLoopCount);
     } else {
-      Map<E, N> incidentEdgeMap =
-          Maps.asMap(network.incidentEdges(node), adjacentNodeFn(network, node));
+      Map<E, N> incidentEdgeMap = asMap(network.incidentEdges(node), adjacentNodeFn(network, node));
       return network.allowsParallelEdges()
           ? UndirectedMultiNetworkConnections.ofImmutable(incidentEdgeMap)
           : UndirectedNetworkConnections.ofImmutable(incidentEdgeMap);
@@ -153,7 +150,7 @@ public final class ImmutableNetwork<N, E> extends StandardNetwork<N, E> {
    *
    * @since 28.0
    */
-  public static class Builder<N, E> {
+  public static final class Builder<N, E> {
 
     private final MutableNetwork<N, E> mutableNetwork;
 
@@ -237,7 +234,7 @@ public final class ImmutableNetwork<N, E> extends StandardNetwork<N, E> {
      * Builder}.
      */
     public ImmutableNetwork<N, E> build() {
-      return ImmutableNetwork.copyOf(mutableNetwork);
+      return copyOf(mutableNetwork);
     }
   }
 }

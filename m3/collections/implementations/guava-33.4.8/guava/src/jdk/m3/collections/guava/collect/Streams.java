@@ -312,9 +312,9 @@ public final class Streams {
    *
    * {@snippet :
    * Streams.zip(
-   *   Stream.of("foo1", "foo2", "foo3"),
-   *   Stream.of("bar1", "bar2"),
-   *   (arg1, arg2) -> arg1 + ":" + arg2)
+   *     Stream.of("foo1", "foo2", "foo3"),
+   *     Stream.of("bar1", "bar2"),
+   *     (arg1, arg2) -> arg1 + ":" + arg2)
    * }
    *
    * <p>will return {@code Stream.of("foo1:bar1", "foo2:bar2")}.
@@ -370,9 +370,9 @@ public final class Streams {
    *
    * {@snippet :
    * Streams.forEachPair(
-   *   Stream.of("foo1", "foo2", "foo3"),
-   *   Stream.of("bar1", "bar2"),
-   *   (arg1, arg2) -> System.out.println(arg1 + ":" + arg2)
+   *     Stream.of("foo1", "foo2", "foo3"),
+   *     Stream.of("bar1", "bar2"),
+   *     (arg1, arg2) -> System.out.println(arg1 + ":" + arg2)
    * }
    *
    * <p>will print:
@@ -409,7 +409,7 @@ public final class Streams {
   }
 
   // Use this carefully - it doesn't implement value semantics
-  private static class TemporaryPair<A extends @Nullable Object, B extends @Nullable Object> {
+  private static final class TemporaryPair<A extends @Nullable Object, B extends @Nullable Object> {
     @ParametricNullness final A a;
     @ParametricNullness final B b;
 
@@ -468,7 +468,8 @@ public final class Streams {
               isParallel)
           .onClose(stream::close);
     }
-    class Splitr extends MapWithIndexSpliterator<Spliterator<T>, R, Splitr> implements Consumer<T> {
+    final class Splitr extends MapWithIndexSpliterator<Spliterator<T>, R, Splitr>
+        implements Consumer<T> {
       @Nullable T holder;
 
       Splitr(Spliterator<T> splitr, long index) {
@@ -551,7 +552,7 @@ public final class Streams {
               isParallel)
           .onClose(stream::close);
     }
-    class Splitr extends MapWithIndexSpliterator<Spliterator.OfInt, R, Splitr>
+    final class Splitr extends MapWithIndexSpliterator<Spliterator.OfInt, R, Splitr>
         implements IntConsumer {
       int holder;
 
@@ -630,7 +631,7 @@ public final class Streams {
               isParallel)
           .onClose(stream::close);
     }
-    class Splitr extends MapWithIndexSpliterator<Spliterator.OfLong, R, Splitr>
+    final class Splitr extends MapWithIndexSpliterator<Spliterator.OfLong, R, Splitr>
         implements LongConsumer {
       long holder;
 
@@ -709,7 +710,7 @@ public final class Streams {
               isParallel)
           .onClose(stream::close);
     }
-    class Splitr extends MapWithIndexSpliterator<Spliterator.OfDouble, R, Splitr>
+    final class Splitr extends MapWithIndexSpliterator<Spliterator.OfDouble, R, Splitr>
         implements DoubleConsumer {
       double holder;
 
@@ -753,7 +754,7 @@ public final class Streams {
     R apply(@ParametricNullness T from, long index);
   }
 
-  private abstract static class MapWithIndexSpliterator<
+  abstract static class MapWithIndexSpliterator<
           F extends Spliterator<?>,
           R extends @Nullable Object,
           S extends MapWithIndexSpliterator<F, R, S>>
@@ -769,7 +770,7 @@ public final class Streams {
     abstract S createSplit(F from, long i);
 
     @Override
-    public @Nullable S trySplit() {
+    public final @Nullable S trySplit() {
       Spliterator<?> splitOrNull = fromSpliterator.trySplit();
       if (splitOrNull == null) {
         return null;
@@ -782,12 +783,12 @@ public final class Streams {
     }
 
     @Override
-    public long estimateSize() {
+    public final long estimateSize() {
       return fromSpliterator.estimateSize();
     }
 
     @Override
-    public int characteristics() {
+    public final int characteristics() {
       return fromSpliterator.characteristics()
           & (Spliterator.ORDERED | Spliterator.SIZED | Spliterator.SUBSIZED);
     }
@@ -861,7 +862,7 @@ public final class Streams {
    * element in the prior one.")
    */
   public static <T> java.util.Optional<T> findLast(Stream<T> stream) {
-    class OptionalState {
+    final class OptionalState {
       boolean set = false;
       @Nullable T value = null;
 
@@ -878,6 +879,8 @@ public final class Streams {
          */
         return requireNonNull(value);
       }
+
+      OptionalState() {}
     }
     OptionalState state = new OptionalState();
 

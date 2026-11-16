@@ -15,15 +15,16 @@
 package jdk.m3.collections.guava.util.concurrent;
 
 import static jdk.m3.collections.guava.base.Preconditions.checkNotNull;
+import static jdk.m3.collections.guava.collect.Maps.transformValues;
+import static java.util.Collections.unmodifiableMap;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
+import jdk.m3.collections.guava.annotations.GwtIncompatible;
 import jdk.m3.collections.guava.annotations.J2ktIncompatible;
 import jdk.m3.collections.guava.base.Function;
-import jdk.m3.collections.guava.collect.Maps;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import com.google.errorprone.annotations.concurrent.LazyInit;
 import java.io.Serializable;
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -57,7 +58,6 @@ import org.jspecify.annotations.Nullable;
  * @since 11.0
  */
 @GwtCompatible
-@J2ktIncompatible
 public final class AtomicLongMap<K> implements Serializable {
   private final ConcurrentHashMap<K, AtomicLong> map;
 
@@ -289,7 +289,7 @@ public final class AtomicLongMap<K> implements Serializable {
   }
 
   /**
-   * Atomically remove {@code key} from the map iff its associated value is 0.
+   * Removes {@code key} from the map if its associated value is 0.
    *
    * @since 20.0
    */
@@ -333,12 +333,15 @@ public final class AtomicLongMap<K> implements Serializable {
   /** Returns a live, read-only view of the map backing this {@code AtomicLongMap}. */
   public Map<K, Long> asMap() {
     Map<K, Long> result = asMap;
-    return (result == null) ? asMap = createAsMap() : result;
+    if (result == null) {
+      result = asMap = createAsMap();
+    }
+    return result;
   }
 
   private Map<K, Long> createAsMap() {
-    return Collections.unmodifiableMap(
-        Maps.transformValues(
+    return unmodifiableMap(
+        transformValues(
             map,
             new Function<AtomicLong, Long>() {
               @Override
@@ -449,4 +452,6 @@ public final class AtomicLongMap<K> implements Serializable {
       return (atomic == null) ? false : atomic.compareAndSet(expectedOldValue, newValue);
     }
   }
+
+  @GwtIncompatible @J2ktIncompatible   private static final long serialVersionUID = -193610662228457848L;
 }

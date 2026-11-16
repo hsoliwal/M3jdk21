@@ -31,7 +31,7 @@ import java.util.Spliterator;
  *
  * @author Hayward Chan
  */
-@GwtCompatible(serializable = true, emulated = true)
+@GwtCompatible
 @SuppressWarnings("serial") // uses writeReplace(), not default serialization
 final class SingletonImmutableList<E> extends ImmutableList<E> {
 
@@ -65,7 +65,7 @@ final class SingletonImmutableList<E> extends ImmutableList<E> {
   @Override
   public ImmutableList<E> subList(int fromIndex, int toIndex) {
     Preconditions.checkPositionIndexes(fromIndex, toIndex, 1);
-    return (fromIndex == toIndex) ? ImmutableList.<E>of() : this;
+    return (fromIndex == toIndex) ? ImmutableList.of() : this;
   }
 
   @Override

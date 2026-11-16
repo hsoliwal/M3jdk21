@@ -15,7 +15,6 @@
  */
 
 // M3 array-storage adaptation; provenance: m3/array-storage-20261019/CONTRACT.md
-// Modified 2026 by Hitesh Soliwal and Synexia contributors: array storage.
 package jdk.m3.collections.guava.collect;
 
 import static jdk.m3.collections.guava.base.Preconditions.checkArgument;
@@ -47,7 +46,7 @@ import org.jspecify.annotations.Nullable;
  *
  * @author Kevin Bourrillion
  */
-@GwtCompatible(emulated = true)
+@GwtCompatible
 abstract class AbstractMapBasedMultiset<E extends @Nullable Object> extends AbstractMultiset<E>
     implements Serializable {
 
@@ -72,7 +71,7 @@ abstract class AbstractMapBasedMultiset<E extends @Nullable Object> extends Abst
    * was retrieved.
    */
   @Override
-  public Set<Multiset.Entry<E>> entrySet() {
+  public final Set<Entry<E>> entrySet() {
     return super.entrySet();
   }
 
@@ -107,7 +106,7 @@ abstract class AbstractMapBasedMultiset<E extends @Nullable Object> extends Abst
    */
   @CanIgnoreReturnValue
   @Override
-  public int add(@ParametricNullness E element, int occurrences) {
+  public final int add(@ParametricNullness E element, int occurrences) {
     if (occurrences == 0) {
       return count(element);
     }
@@ -128,7 +127,7 @@ abstract class AbstractMapBasedMultiset<E extends @Nullable Object> extends Abst
 
   @CanIgnoreReturnValue
   @Override
-  public int remove(@Nullable Object element, int occurrences) {
+  public final int remove(@Nullable Object element, int occurrences) {
     if (occurrences == 0) {
       return count(element);
     }
@@ -152,7 +151,7 @@ abstract class AbstractMapBasedMultiset<E extends @Nullable Object> extends Abst
 
   @CanIgnoreReturnValue
   @Override
-  public int setCount(@ParametricNullness E element, int count) {
+  public final int setCount(@ParametricNullness E element, int count) {
     checkNonnegative(count, "count");
     int oldCount = (count == 0) ? backingMap.remove(element) : backingMap.put(element, count);
     size += (count - oldCount);
@@ -224,7 +223,7 @@ abstract class AbstractMapBasedMultiset<E extends @Nullable Object> extends Abst
   }
 
   @Override
-  final Iterator<Entry<E>> entryIterator() {
+  final Iterator<Entry<E>> internalEntryIterator() {
     return new Itr<Entry<E>>() {
       @Override
       Entry<E> result(int entryIndex) {
@@ -234,7 +233,7 @@ abstract class AbstractMapBasedMultiset<E extends @Nullable Object> extends Abst
   }
 
   @Override
-  final int distinctElements() {
+  final int internalDistinctElements() {
     return backingMap.size();
   }
 
@@ -250,7 +249,7 @@ abstract class AbstractMapBasedMultiset<E extends @Nullable Object> extends Abst
 
   /** Occurrence iteration keeps count edits nonstructural and repairs moved slots on removal. */
   private final class MapBasedMultisetIterator implements Iterator<E> {
-    private final Iterator<Entry<E>> entryIterator = entryIterator();
+    private final Iterator<Entry<E>> entryIterator = internalEntryIterator();
     private @Nullable Entry<E> currentEntry;
     private int occurrencesLeft;
     private boolean canRemove;
@@ -291,7 +290,7 @@ abstract class AbstractMapBasedMultiset<E extends @Nullable Object> extends Abst
   }
 
   // Don't allow default serialization.
-  @GwtIncompatible // java.io.ObjectStreamException
+  @GwtIncompatible
   @J2ktIncompatible
   private void readObjectNoData() throws ObjectStreamException {
     throw new InvalidObjectException("Stream data required");

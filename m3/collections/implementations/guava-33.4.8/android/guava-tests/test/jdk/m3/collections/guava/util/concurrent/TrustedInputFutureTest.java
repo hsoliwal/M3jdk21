@@ -18,7 +18,9 @@ package jdk.m3.collections.guava.util.concurrent;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.util.concurrent.AbstractFuture.TrustedFuture;
+import jdk.m3.collections.guava.util.concurrent.SettableAbstractFuture.TrustedAbstractFuture;
 import org.jspecify.annotations.NullUnmarked;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Tests for {@link AbstractFuture} that use a {@link TrustedFuture} for {@link
@@ -26,11 +28,12 @@ import org.jspecify.annotations.NullUnmarked;
  */
 @GwtCompatible
 @NullUnmarked
-public class TrustedInputFutureTest extends AbstractAbstractFutureTest {
+public class TrustedInputFutureTest
+    extends AbstractAbstractFutureTest<TrustedAbstractFuture<@Nullable Integer>> {
   @Override
-  AbstractFuture<Integer> newDelegate() {
-    AbstractFuture<Integer> future = new TrustedFuture<Integer>() {};
-    assertTrue(future instanceof TrustedFuture); // sanity check
+  TrustedAbstractFuture<@Nullable Integer> newDelegate() {
+    TrustedAbstractFuture<@Nullable Integer> future = new TrustedAbstractFuture<>();
+    TrustedFuture<@Nullable Integer> unused = future; // sanity check
     return future;
   }
 }

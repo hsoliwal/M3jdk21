@@ -18,16 +18,28 @@ package jdk.m3.collections.guava.collect;
 
 import static jdk.m3.collections.guava.base.Preconditions.checkArgument;
 import static jdk.m3.collections.guava.base.Preconditions.checkNotNull;
+import static jdk.m3.collections.guava.base.Predicates.and;
 import static jdk.m3.collections.guava.collect.CollectPreconditions.checkNonnegative;
+import static jdk.m3.collections.guava.collect.Iterables.find;
+import static jdk.m3.collections.guava.collect.Iterators.addAll;
+import static jdk.m3.collections.guava.collect.Iterators.find;
+import static jdk.m3.collections.guava.collect.Iterators.removeAll;
+import static jdk.m3.collections.guava.collect.Iterators.unmodifiableIterator;
+import static jdk.m3.collections.guava.collect.Lists.newArrayList;
+import static jdk.m3.collections.guava.collect.Maps.capacity;
+import static jdk.m3.collections.guava.collect.Maps.indexMap;
+import static jdk.m3.collections.guava.math.IntMath.saturatedAdd;
+import static java.lang.Math.max;
 import static java.lang.Math.min;
 import static java.util.Arrays.asList;
+import static java.util.Collections.unmodifiableSortedSet;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
 import jdk.m3.collections.guava.annotations.J2ktIncompatible;
 import jdk.m3.collections.guava.base.Predicate;
-import jdk.m3.collections.guava.base.Predicates;
 import jdk.m3.collections.guava.collect.Collections2.FilteredCollection;
+import jdk.m3.collections.guava.collect.ForwardingCollection.SimpleForwardingCollection;
 import jdk.m3.collections.guava.math.IntMath;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import com.google.errorprone.annotations.DoNotCall;
@@ -42,6 +54,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.EnumSet;
 import java.util.HashSet;
+import java.util.IdentityHashMap;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -71,7 +84,7 @@ import org.jspecify.annotations.Nullable;
  * @author Chris Povirk
  * @since 2.0
  */
-@GwtCompatible(emulated = true)
+@GwtCompatible
 public final class Sets {
   private Sets() {}
 
@@ -102,7 +115,6 @@ public final class Sets {
    * @param otherElements the rest of the elements the set should contain
    * @return an immutable set containing those elements, minus duplicates
    */
-  @GwtCompatible(serializable = true)
   public static <E extends Enum<E>> ImmutableSet<E> immutableEnumSet(
       E anElement, E... otherElements) {
     return ImmutableEnumSet.asImmutable(EnumSet.of(anElement, otherElements));
@@ -118,7 +130,6 @@ public final class Sets {
    * @param elements the elements, all of the same {@code enum} type, that the set should contain
    * @return an immutable set containing those elements, minus duplicates
    */
-  @GwtCompatible(serializable = true)
   public static <E extends Enum<E>> ImmutableSet<E> immutableEnumSet(Iterable<E> elements) {
     if (elements instanceof ImmutableEnumSet) {
       return (ImmutableEnumSet<E>) elements;
@@ -133,7 +144,7 @@ public final class Sets {
       Iterator<E> itr = elements.iterator();
       if (itr.hasNext()) {
         EnumSet<E> enumSet = EnumSet.of(itr.next());
-        Iterators.addAll(enumSet, itr);
+        addAll(enumSet, itr);
         return ImmutableEnumSet.asImmutable(enumSet);
       } else {
         return ImmutableSet.of();
@@ -210,8 +221,7 @@ public final class Sets {
    * Iterables#addAll}.
    *
    * <p><b>Note:</b> if mutability is not required and the elements are non-null, use {@link
-   * ImmutableSet#copyOf(Iterable)} instead. (Or, change {@code elements} to be a {@link
-   * FluentIterable} and call {@code elements.toSet()}.)
+   * ImmutableSet#copyOf(Iterable)} instead.
    *
    * <p><b>Note:</b> if {@code E} is an {@link Enum} type, use {@link #newEnumSet(Iterable, Class)}
    * instead.
@@ -226,7 +236,7 @@ public final class Sets {
   @SuppressWarnings("NonApiType") // acts as a direct substitute for a constructor call
   public static <E extends @Nullable Object> HashSet<E> newHashSet(Iterable<? extends E> elements) {
     return (elements instanceof Collection)
-        ? new HashSet<E>((Collection<? extends E>) elements)
+        ? new HashSet<>((Collection<? extends E>) elements)
         : newHashSet(elements.iterator());
   }
 
@@ -244,8 +254,8 @@ public final class Sets {
    */
   @SuppressWarnings("NonApiType") // acts as a direct substitute for a constructor call
   public static <E extends @Nullable Object> HashSet<E> newHashSet(Iterator<? extends E> elements) {
-    HashSet<E> set = newHashSet();
-    Iterators.addAll(set, elements);
+    HashSet<E> set = new HashSet<>();
+    addAll(set, elements);
     return set;
   }
 
@@ -256,6 +266,8 @@ public final class Sets {
    *
    * <p>This behavior can't be broadly guaranteed, but has been tested with OpenJDK 1.7 and 1.8.
    *
+   * <p><b>Java 19+ users</b>: prefer {@code HashSet.newHashSet(expectedSize)}.
+   *
    * @param expectedSize the number of elements you expect to add to the returned set
    * @return a new, empty hash set with enough capacity to hold {@code expectedSize} elements
    *     without resizing
@@ -264,7 +276,7 @@ public final class Sets {
   @SuppressWarnings("NonApiType") // acts as a direct substitute for a constructor call
   public static <E extends @Nullable Object> HashSet<E> newHashSetWithExpectedSize(
       int expectedSize) {
-    return new HashSet<>(Maps.capacity(expectedSize));
+    return new HashSet<>(capacity(expectedSize));
   }
 
   /**
@@ -341,7 +353,7 @@ public final class Sets {
     if (elements instanceof Collection) {
       return new LinkedHashSet<>((Collection<? extends E>) elements);
     }
-    LinkedHashSet<E> set = newLinkedHashSet();
+    LinkedHashSet<E> set = new LinkedHashSet<>();
     Iterables.addAll(set, elements);
     return set;
   }
@@ -352,6 +364,8 @@ public final class Sets {
    * broadly guaranteed, but it is observed to be true for OpenJDK 1.7. It also can't be guaranteed
    * that the method isn't inadvertently <i>oversizing</i> the returned set.
    *
+   * <p><b>Java 19+ users</b>: prefer {@code LinkedHashSet.newLinkedHashSet(expectedSize)}.
+   *
    * @param expectedSize the number of elements you expect to add to the returned set
    * @return a new, empty {@code LinkedHashSet} with enough capacity to hold {@code expectedSize}
    *     elements without resizing
@@ -361,7 +375,7 @@ public final class Sets {
   @SuppressWarnings("NonApiType") // acts as a direct substitute for a constructor call
   public static <E extends @Nullable Object> LinkedHashSet<E> newLinkedHashSetWithExpectedSize(
       int expectedSize) {
-    return new LinkedHashSet<>(Maps.capacity(expectedSize));
+    return new LinkedHashSet<>(capacity(expectedSize));
   }
 
   // TreeSet
@@ -452,7 +466,7 @@ public final class Sets {
    * @since 8.0
    */
   public static <E extends @Nullable Object> Set<E> newIdentityHashSet() {
-    return Collections.newSetFromMap(Maps.<E, Boolean>newIdentityHashMap());
+    return Collections.newSetFromMap(new IdentityHashMap<>());
   }
 
   /**
@@ -486,7 +500,7 @@ public final class Sets {
     Collection<? extends E> elementsCollection =
         (elements instanceof Collection)
             ? (Collection<? extends E>) elements
-            : Lists.newArrayList(elements);
+            : newArrayList(elements);
     return new CopyOnWriteArraySet<>(elementsCollection);
   }
 
@@ -562,8 +576,7 @@ public final class Sets {
    * in the following code fragment:
    *
    * {@snippet :
-   * Set<Object> identityHashSet = Sets.newSetFromMap(
-   *     new IdentityHashMap<Object, Boolean>());
+   * Set<Object> identityHashSet = Sets.newSetFromMap(new IdentityHashMap<>());
    * }
    *
    * <p>The returned set is serializable if the backing map is.
@@ -602,12 +615,11 @@ public final class Sets {
      */
     public ImmutableSet<@NonNull E> immutableCopy() {
       // Not using ImmutableSet.copyOf() to avoid iterating thrice (isEmpty, size, iterator).
-      int upperBoundSize = upperBoundSize();
-      if (upperBoundSize == 0) {
+      int maxSize = maxSize();
+      if (maxSize == 0) {
         return ImmutableSet.of();
       }
-      ImmutableSet.Builder<@NonNull E> builder =
-          ImmutableSet.builderWithExpectedSize(upperBoundSize);
+      ImmutableSet.Builder<@NonNull E> builder = ImmutableSet.builderWithExpectedSize(maxSize);
       for (E element : this) {
         builder.add(checkNotNull(element));
       }
@@ -734,16 +746,88 @@ public final class Sets {
     @Override
     public abstract UnmodifiableIterator<E> iterator();
 
-    /**
-     * Returns the upper bound on the size of this set view.
-     *
-     * <p>This method is used to presize the underlying collection when converting to an {@link
-     * ImmutableSet}.
-     */
-    abstract int upperBoundSize();
+    @Override
+    @SuppressWarnings("EqualsHashCode") // same semantics
+    public final boolean equals(@Nullable Object object) {
+      if (object == this) {
+        return true;
+      }
+      if (!(object instanceof Set)) {
+        return false;
+      }
+      Set<?> that = (Set<?>) object;
 
-    static int upperBoundSize(Set<?> set) {
-      return set instanceof SetView ? ((SetView) set).upperBoundSize() : set.size();
+      int thatMaxSize = maxSize(that);
+      if (minSize() > thatMaxSize) {
+        return false; // this.size() > that.size()
+      }
+      int thatMinSize = minSize(that);
+      if (maxSize() < thatMinSize) {
+        return false; // this.size() < that.size()
+      }
+
+      // the base implementation from AbstractSet uses size() and containsAll()
+      // both require iterating over the entire SetView
+      // we avoid iterating twice by doing the equivalent of both in one iteration
+      int thisSize = 0;
+      for (E e : this) {
+        try {
+          if (!that.contains(e)) {
+            return false;
+          }
+        } catch (NullPointerException | ClassCastException ignored) {
+          return false;
+        }
+        thisSize++;
+      } // that.containsAll(this) so that.size() >= this.size()
+
+      if (thisSize == thatMaxSize) {
+        // this.size() == maxSize(that) >= that.size() >= this.size()
+        return true; // this.size() == that.size()
+      } else if (thisSize < thatMinSize) {
+        // this.size() < minSize(that) <= that.size()
+        return false; // this.size() < that.size()
+      } else { // that can only be a SetView at this point
+        int thatSize = 0;
+        for (Object unused : that) {
+          if (++thatSize > thisSize) {
+            return false;
+          }
+        }
+        return true; // that.size() == this.size()
+      }
+    }
+
+    /**
+     * Returns a lower bound for {@link #size()} based on the sizes of the backing sets.
+     *
+     * <p>This is more efficient than {@link #size()}, which iterates over the entire {@link
+     * SetView}.
+     */
+    abstract int minSize();
+
+    /**
+     * Returns the {@link #minSize()} of {@code set} if it is a {@link SetView}, or the exact {@link
+     * #size()} of {@code set} otherwise.
+     */
+    static int minSize(Set<?> set) {
+      return set instanceof SetView ? ((SetView<?>) set).minSize() : set.size();
+    }
+
+    /**
+     * Returns an upper bound for {@link #size()} based on the sizes of the backing sets.
+     *
+     * <p>This is more efficient than {@link #size()}, which iterates over the entire {@link
+     * SetView}.
+     */
+    abstract int maxSize();
+
+    /**
+     * Returns the {@link #maxSize()} of {@code set} if it is a {@link SetView}, or the exact {@link
+     * #size()} of {@code set} otherwise.
+     */
+    static int maxSize(Set<?> set) {
+      return set instanceof SetView ? ((SetView<?>) set).maxSize() : set.size();
     }
   }
 
@@ -824,8 +908,13 @@ public final class Sets {
       }
 
       @Override
-      int upperBoundSize() {
-        return upperBoundSize(set1) + upperBoundSize(set2);
+      int minSize() {
+        return max(minSize(set1), minSize(set2));
+      }
+
+      @Override
+      int maxSize() {
+        return saturatedAdd(maxSize(set1), maxSize(set2));
       }
     };
   }
@@ -851,8 +940,7 @@ public final class Sets {
    *
    * // impossible for a non-String to be in the intersection
    * SuppressWarnings("unchecked")
-   * Set<String> badStrings = (Set) Sets.intersection(
-   *     aFewBadObjects, manyBadStrings);
+   * Set<String> badStrings = (Set) Sets.intersection(aFewBadObjects, manyBadStrings);
    * }
    *
    * <p>This is unfortunate, but should come up only very rarely.
@@ -917,8 +1005,13 @@ public final class Sets {
       }
 
       @Override
-      int upperBoundSize() {
-        return min(upperBoundSize(set1), upperBoundSize(set2));
+      int minSize() {
+        return 0;
+      }
+
+      @Override
+      int maxSize() {
+        return min(maxSize(set1), maxSize(set2));
       }
     };
   }
@@ -988,8 +1081,13 @@ public final class Sets {
       }
 
       @Override
-      int upperBoundSize() {
-        return upperBoundSize(set1);
+      int minSize() {
+        return max(minSize(set1) - maxSize(set2), 0);
+      }
+
+      @Override
+      int maxSize() {
+        return maxSize(set1);
       }
     };
   }
@@ -1017,7 +1115,7 @@ public final class Sets {
         Iterator<? extends E> itr2 = set2.iterator();
         return new AbstractIterator<E>() {
           @Override
-          public @Nullable E computeNext() {
+          protected @Nullable E computeNext() {
             while (itr1.hasNext()) {
               E elem1 = itr1.next();
               if (!set2.contains(elem1)) {
@@ -1062,8 +1160,14 @@ public final class Sets {
       }
 
       @Override
-      int upperBoundSize() {
-        return upperBoundSize(set1) + upperBoundSize(set2);
+      int minSize() {
+        int difference = minSize(set1) - maxSize(set2);
+        return difference >= 0 ? difference : max(minSize(set2) - maxSize(set1), 0);
+      }
+
+      @Override
+      int maxSize() {
+        return saturatedAdd(maxSize(set1), maxSize(set2));
       }
     };
   }
@@ -1104,7 +1208,7 @@ public final class Sets {
       // Support clear(), removeAll(), and retainAll() when filtering a filtered
       // collection.
       FilteredSet<E> filtered = (FilteredSet<E>) unfiltered;
-      Predicate<E> combinedPredicate = Predicates.and(filtered.predicate, predicate);
+      Predicate<E> combinedPredicate = and(filtered.predicate, predicate);
       return new FilteredSet<>((Set<E>) filtered.unfiltered, combinedPredicate);
     }
 
@@ -1141,7 +1245,7 @@ public final class Sets {
       // Support clear(), removeAll(), and retainAll() when filtering a filtered
       // collection.
       FilteredSet<E> filtered = (FilteredSet<E>) unfiltered;
-      Predicate<E> combinedPredicate = Predicates.and(filtered.predicate, predicate);
+      Predicate<E> combinedPredicate = and(filtered.predicate, predicate);
       return new FilteredSortedSet<>((SortedSet<E>) filtered.unfiltered, combinedPredicate);
     }
 
@@ -1179,7 +1283,7 @@ public final class Sets {
       // Support clear(), removeAll(), and retainAll() when filtering a filtered
       // collection.
       FilteredSet<E> filtered = (FilteredSet<E>) unfiltered;
-      Predicate<E> combinedPredicate = Predicates.and(filtered.predicate, predicate);
+      Predicate<E> combinedPredicate = and(filtered.predicate, predicate);
       return new FilteredNavigableSet<>((NavigableSet<E>) filtered.unfiltered, combinedPredicate);
     }
 
@@ -1193,12 +1297,12 @@ public final class Sets {
     }
 
     @Override
-    public boolean equals(@Nullable Object object) {
+    public final boolean equals(@Nullable Object object) {
       return equalsImpl(this, object);
     }
 
     @Override
-    public int hashCode() {
+    public final int hashCode() {
       return hashCodeImpl(this);
     }
   }
@@ -1211,30 +1315,31 @@ public final class Sets {
     }
 
     @Override
-    public @Nullable Comparator<? super E> comparator() {
+    public final @Nullable Comparator<? super E> comparator() {
       return ((SortedSet<E>) unfiltered).comparator();
     }
 
     @Override
-    public SortedSet<E> subSet(@ParametricNullness E fromElement, @ParametricNullness E toElement) {
+    public final SortedSet<E> subSet(
+        @ParametricNullness E fromElement, @ParametricNullness E toElement) {
       return new FilteredSortedSet<>(
           ((SortedSet<E>) unfiltered).subSet(fromElement, toElement), predicate);
     }
 
     @Override
-    public SortedSet<E> headSet(@ParametricNullness E toElement) {
+    public final SortedSet<E> headSet(@ParametricNullness E toElement) {
       return new FilteredSortedSet<>(((SortedSet<E>) unfiltered).headSet(toElement), predicate);
     }
 
     @Override
-    public SortedSet<E> tailSet(@ParametricNullness E fromElement) {
+    public final SortedSet<E> tailSet(@ParametricNullness E fromElement) {
       return new FilteredSortedSet<>(((SortedSet<E>) unfiltered).tailSet(fromElement), predicate);
     }
 
     @Override
     @ParametricNullness
-    public E first() {
-      return Iterators.find(unfiltered.iterator(), predicate);
+    public final E first() {
+      return find(unfiltered.iterator(), predicate);
     }
 
     @Override
@@ -1252,8 +1357,8 @@ public final class Sets {
   }
 
   @GwtIncompatible // NavigableSet
-  private static class FilteredNavigableSet<E extends @Nullable Object> extends FilteredSortedSet<E>
-      implements NavigableSet<E> {
+  private static final class FilteredNavigableSet<E extends @Nullable Object>
+      extends FilteredSortedSet<E> implements NavigableSet<E> {
     FilteredNavigableSet(NavigableSet<E> unfiltered, Predicate<? super E> predicate) {
       super(unfiltered, predicate);
     }
@@ -1264,37 +1369,37 @@ public final class Sets {
 
     @Override
     public @Nullable E lower(@ParametricNullness E e) {
-      return Iterators.find(unfiltered().headSet(e, false).descendingIterator(), predicate, null);
+      return find(unfiltered().headSet(e, false).descendingIterator(), predicate, null);
     }
 
     @Override
     public @Nullable E floor(@ParametricNullness E e) {
-      return Iterators.find(unfiltered().headSet(e, true).descendingIterator(), predicate, null);
+      return find(unfiltered().headSet(e, true).descendingIterator(), predicate, null);
     }
 
     @Override
     public @Nullable E ceiling(@ParametricNullness E e) {
-      return Iterables.find(unfiltered().tailSet(e, true), predicate, null);
+      return find(unfiltered().tailSet(e, true), predicate, null);
     }
 
     @Override
     public @Nullable E higher(@ParametricNullness E e) {
-      return Iterables.find(unfiltered().tailSet(e, false), predicate, null);
+      return find(unfiltered().tailSet(e, false), predicate, null);
     }
 
     @Override
     public @Nullable E pollFirst() {
-      return Iterables.removeFirstMatching(unfiltered(), predicate);
+      return pollFirstMatching(unfiltered(), predicate);
     }
 
     @Override
     public @Nullable E pollLast() {
-      return Iterables.removeFirstMatching(unfiltered().descendingSet(), predicate);
+      return pollFirstMatching(unfiltered().descendingSet(), predicate);
     }
 
     @Override
     public NavigableSet<E> descendingSet() {
-      return Sets.filter(unfiltered().descendingSet(), predicate);
+      return filter(unfiltered().descendingSet(), predicate);
     }
 
     @Override
@@ -1305,7 +1410,7 @@ public final class Sets {
     @Override
     @ParametricNullness
     public E last() {
-      return Iterators.find(unfiltered().descendingIterator(), predicate);
+      return find(unfiltered().descendingIterator(), predicate);
     }
 
     @Override
@@ -1335,9 +1440,7 @@ public final class Sets {
    * product</a>" of the sets. For example:
    *
    * {@snippet :
-   * Sets.cartesianProduct(ImmutableList.of(
-   *     ImmutableSet.of(1, 2),
-   *     ImmutableSet.of("A", "B", "C")))
+   * Sets.cartesianProduct(ImmutableList.of(ImmutableSet.of(1, 2), ImmutableSet.of("A", "B", "C")))
    * }
    *
    * <p>returns a set containing six lists:
@@ -1392,9 +1495,7 @@ public final class Sets {
    * product</a>" of the sets. For example:
    *
    * {@snippet :
-   * Sets.cartesianProduct(
-   *     ImmutableSet.of(1, 2),
-   *     ImmutableSet.of("A", "B", "C"))
+   * Sets.cartesianProduct(ImmutableSet.of(1, 2), ImmutableSet.of("A", "B", "C"))
    * }
    *
    * <p>returns a set containing six lists:
@@ -1444,10 +1545,9 @@ public final class Sets {
     return cartesianProduct(asList(sets));
   }
 
-  private static final class CartesianSet<E> extends ForwardingCollection<List<E>>
+  private static final class CartesianSet<E> extends SimpleForwardingCollection<List<E>>
       implements Set<List<E>> {
-    private final transient ImmutableList<ImmutableSet<E>> axes;
-    private final transient CartesianList<E> delegate;
+    private final ImmutableList<ImmutableSet<E>> axes;
 
     static <E> Set<List<E>> create(List<? extends Set<? extends E>> sets) {
       ImmutableList.Builder<ImmutableSet<E>> axesBuilder = new ImmutableList.Builder<>(sets.size());
@@ -1485,17 +1585,12 @@ public final class Sets {
               return super.writeReplace();
             }
           };
-      return new CartesianSet<E>(axes, new CartesianList<E>(listAxes));
+      return new CartesianSet<>(axes, new CartesianList<>(listAxes));
     }
 
     private CartesianSet(ImmutableList<ImmutableSet<E>> axes, CartesianList<E> delegate) {
+      super(delegate);
       this.axes = axes;
-      this.delegate = delegate;
-    }
-
-    @Override
-    protected Collection<List<E>> delegate() {
-      return delegate;
     }
 
     @Override
@@ -1579,9 +1674,8 @@ public final class Sets {
    * @see <a href="http://en.wikipedia.org/wiki/Power_set">Power set article at Wikipedia</a>
    * @since 4.0
    */
-  @GwtCompatible(serializable = false)
   public static <E> Set<Set<E>> powerSet(Set<E> set) {
-    return new PowerSet<E>(set);
+    return new PowerSet<>(set);
   }
 
   private static final class SubSet<E> extends AbstractSet<E> {
@@ -1634,7 +1728,7 @@ public final class Sets {
     PowerSet(Set<E> input) {
       checkArgument(
           input.size() <= 30, "Too many elements to create power set: %s > 30", input.size());
-      this.inputSet = Maps.indexMap(input);
+      this.inputSet = indexMap(input);
     }
 
     @Override
@@ -1651,7 +1745,7 @@ public final class Sets {
     public Iterator<Set<E>> iterator() {
       return new AbstractIndexedListIterator<Set<E>>(size()) {
         @Override
-        protected Set<E> get(int setBits) {
+        Set<E> get(int setBits) {
           return new SubSet<>(inputSet, setBits);
         }
       };
@@ -1716,13 +1810,13 @@ public final class Sets {
    * @since 23.0
    */
   public static <E> Set<Set<E>> combinations(Set<E> set, int size) {
-    ImmutableMap<E, Integer> index = Maps.indexMap(set);
+    ImmutableMap<E, Integer> index = indexMap(set);
     checkNonnegative(size, "size");
     checkArgument(size <= index.size(), "size (%s) must be <= set.size() (%s)", size, index.size());
     if (size == 0) {
-      return ImmutableSet.<Set<E>>of(ImmutableSet.<E>of());
+      return ImmutableSet.of(ImmutableSet.of());
     } else if (size == index.size()) {
-      return ImmutableSet.<Set<E>>of(index.keySet());
+      return ImmutableSet.of(index.keySet());
     }
     return new AbstractSet<Set<E>>() {
       @Override
@@ -1826,6 +1920,7 @@ public final class Sets {
   }
 
   /** An implementation for {@link Set#equals(Object)}. */
+  @SuppressWarnings("ReferenceEquality") // == fast path
   static boolean equalsImpl(Set<?> s, @Nullable Object object) {
     if (s == object) {
       return true;
@@ -1872,7 +1967,7 @@ public final class Sets {
 
     UnmodifiableNavigableSet(NavigableSet<E> delegate) {
       this.delegate = checkNotNull(delegate);
-      this.unmodifiableDelegate = Collections.unmodifiableSortedSet(delegate);
+      this.unmodifiableDelegate = unmodifiableSortedSet(delegate);
     }
 
     @Override
@@ -1946,7 +2041,7 @@ public final class Sets {
 
     @Override
     public Iterator<E> descendingIterator() {
-      return Iterators.unmodifiableIterator(delegate.descendingIterator());
+      return unmodifiableIterator(delegate.descendingIterator());
     }
 
     @Override
@@ -1982,7 +2077,7 @@ public final class Sets {
    * {@code tailSet} views.
    *
    * {@snippet :
-   * NavigableSet<E> set = synchronizedNavigableSet(new TreeSet<E>());
+   * NavigableSet<E> set = synchronizedNavigableSet(new TreeSet<>());
    *  ...
    * synchronized (set) {
    *   // Must be in the synchronized block
@@ -1996,9 +2091,9 @@ public final class Sets {
    * <p>or:
    *
    * {@snippet :
-   * NavigableSet<E> set = synchronizedNavigableSet(new TreeSet<E>());
+   * NavigableSet<E> set = synchronizedNavigableSet(new TreeSet<>());
    * NavigableSet<E> set2 = set.descendingSet().headSet(foo);
-   *  ...
+   * ...
    * synchronized (set) { // Note: set, not set2!!!
    *   // Must be in the synchronized block
    *   Iterator<E> it = set2.descendingIterator();
@@ -2048,7 +2143,7 @@ public final class Sets {
      * https://github.com/google/guava/issues/1013
      */
     if (collection instanceof Set && collection.size() > set.size()) {
-      return Iterators.removeAll(set.iterator(), collection);
+      return removeAll(set.iterator(), collection);
     } else {
       return removeAllImpl(set, collection.iterator());
     }
@@ -2146,7 +2241,7 @@ public final class Sets {
     public Comparator<? super E> comparator() {
       Comparator<? super E> forwardComparator = forward.comparator();
       if (forwardComparator == null) {
-        return (Comparator) Ordering.natural().reverse();
+        return (Comparator<? super E>) Ordering.natural().reverse();
       } else {
         return reverse(forwardComparator);
       }
@@ -2230,5 +2325,19 @@ public final class Sets {
       return set.headSet(range.upperEndpoint(), range.upperBoundType() == BoundType.CLOSED);
     }
     return checkNotNull(set);
+  }
+
+  /** Removes and returns the first matching element, or returns {@code null} if there is none. */
+  private static <T extends @Nullable Object> @Nullable T pollFirstMatching(
+      Iterable<T> removeFrom, Predicate<? super T> predicate) {
+    checkNotNull(predicate);
+    for (Iterator<T> iterator = removeFrom.iterator(); iterator.hasNext(); ) {
+      T next = iterator.next();
+      if (predicate.apply(next)) {
+        iterator.remove();
+        return next;
+      }
+    }
+    return null;
   }
 }

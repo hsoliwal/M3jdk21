@@ -21,6 +21,10 @@ import static jdk.m3.collections.guava.base.Predicates.equalTo;
 import static jdk.m3.collections.guava.base.Predicates.in;
 import static jdk.m3.collections.guava.base.Predicates.instanceOf;
 import static jdk.m3.collections.guava.base.Predicates.not;
+import static jdk.m3.collections.guava.collect.Collections2.filter;
+import static jdk.m3.collections.guava.collect.Lists.newArrayListWithCapacity;
+import static jdk.m3.collections.guava.collect.Maps.immutableEntry;
+import static jdk.m3.collections.guava.collect.Multimaps.filterKeys;
 import static jdk.m3.collections.guava.util.concurrent.Internal.toNanosSaturated;
 import static jdk.m3.collections.guava.util.concurrent.MoreExecutors.directExecutor;
 import static jdk.m3.collections.guava.util.concurrent.Service.State.FAILED;
@@ -31,21 +35,19 @@ import static jdk.m3.collections.guava.util.concurrent.Service.State.STOPPING;
 import static jdk.m3.collections.guava.util.concurrent.Service.State.TERMINATED;
 import static java.util.Collections.sort;
 import static java.util.concurrent.TimeUnit.MILLISECONDS;
+import static java.util.concurrent.TimeUnit.NANOSECONDS;
 
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
 import jdk.m3.collections.guava.annotations.J2ktIncompatible;
 import jdk.m3.collections.guava.base.MoreObjects;
 import jdk.m3.collections.guava.base.Stopwatch;
-import jdk.m3.collections.guava.collect.Collections2;
 import jdk.m3.collections.guava.collect.ImmutableCollection;
 import jdk.m3.collections.guava.collect.ImmutableList;
 import jdk.m3.collections.guava.collect.ImmutableMap;
 import jdk.m3.collections.guava.collect.ImmutableSet;
 import jdk.m3.collections.guava.collect.ImmutableSetMultimap;
-import jdk.m3.collections.guava.collect.Lists;
 import jdk.m3.collections.guava.collect.Maps;
 import jdk.m3.collections.guava.collect.MultimapBuilder;
-import jdk.m3.collections.guava.collect.Multimaps;
 import jdk.m3.collections.guava.collect.Multiset;
 import jdk.m3.collections.guava.collect.Ordering;
 import jdk.m3.collections.guava.collect.SetMultimap;
@@ -56,6 +58,7 @@ import com.google.j2objc.annotations.J2ObjCIncompatible;
 import com.google.j2objc.annotations.WeakOuter;
 import java.lang.ref.WeakReference;
 import java.time.Duration;
+import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.IdentityHashMap;
 import java.util.List;
@@ -108,7 +111,7 @@ import java.util.logging.Level;
  *         }
  *       }
  *     });
- *     manager.startAsync();  // start all the services asynchronously
+ *     manager.startAsync(); // start all the services asynchronously
  *   }
  * }
  * }
@@ -159,7 +162,7 @@ public final class ServiceManager implements ServiceManagerBridge {
    */
   public abstract static class Listener {
     /** Constructor for use by subclasses. */
-    public Listener() {}
+    protected Listener() {}
 
     /**
      * Called when the service initially becomes healthy.
@@ -215,7 +218,7 @@ public final class ServiceManager implements ServiceManagerBridge {
               "ServiceManager configured with no services.  Is your application configured"
                   + " properly?",
               new EmptyServiceManagerWarning());
-      copy = ImmutableList.<Service>of(new NoOpService());
+      copy = ImmutableList.of(new NoOpService());
     }
     this.state = new ServiceManagerState(copy);
     this.services = copy;
@@ -311,7 +314,7 @@ public final class ServiceManager implements ServiceManagerBridge {
    * @since 28.0 (but only since 33.4.0 in the Android flavor)
    */
   public void awaitHealthy(Duration timeout) throws TimeoutException {
-    awaitHealthy(toNanosSaturated(timeout), TimeUnit.NANOSECONDS);
+    awaitHealthy(toNanosSaturated(timeout), NANOSECONDS);
   }
 
   /**
@@ -363,7 +366,7 @@ public final class ServiceManager implements ServiceManagerBridge {
    * @since 28.0 (but only since 33.4.0 in the Android flavor)
    */
   public void awaitStopped(Duration timeout) throws TimeoutException {
-    awaitStopped(toNanosSaturated(timeout), TimeUnit.NANOSECONDS);
+    awaitStopped(toNanosSaturated(timeout), NANOSECONDS);
   }
 
   /**
@@ -436,7 +439,7 @@ public final class ServiceManager implements ServiceManagerBridge {
   @Override
   public String toString() {
     return MoreObjects.toStringHelper(ServiceManager.class)
-        .add("services", Collections2.filter(services, not(instanceOf(NoOpService.class))))
+        .add("services", filter(services, not(instanceOf(NoOpService.class))))
         .toString();
   }
 
@@ -559,7 +562,7 @@ public final class ServiceManager implements ServiceManagerBridge {
           ready = true;
         } else {
           // This should be an extremely rare race condition.
-          List<Service> servicesInBadStates = Lists.newArrayList();
+          List<Service> servicesInBadStates = new ArrayList<>();
           for (Service service : servicesByState().values()) {
             if (service.state() != NEW) {
               servicesInBadStates.add(service);
@@ -595,7 +598,7 @@ public final class ServiceManager implements ServiceManagerBridge {
           throw new TimeoutException(
               "Timeout waiting for the services to become healthy. The "
                   + "following services have not started: "
-                  + Multimaps.filterKeys(servicesByState, in(ImmutableSet.of(NEW, STARTING))));
+                  + filterKeys(servicesByState, in(ImmutableSet.of(NEW, STARTING))));
         }
         checkHealthy();
       } finally {
@@ -615,7 +618,7 @@ public final class ServiceManager implements ServiceManagerBridge {
           throw new TimeoutException(
               "Timeout waiting for the services to stop. The following "
                   + "services have not stopped: "
-                  + Multimaps.filterKeys(servicesByState, not(in(EnumSet.of(TERMINATED, FAILED)))));
+                  + filterKeys(servicesByState, not(in(EnumSet.of(TERMINATED, FAILED)))));
         }
       } finally {
         monitor.leave();
@@ -641,13 +644,13 @@ public final class ServiceManager implements ServiceManagerBridge {
       List<Entry<Service, Long>> loadTimes;
       monitor.enter();
       try {
-        loadTimes = Lists.newArrayListWithCapacity(startupTimers.size());
+        loadTimes = newArrayListWithCapacity(startupTimers.size());
         // N.B. There will only be an entry in the map if the service has started
         for (Entry<Service, Stopwatch> entry : startupTimers.entrySet()) {
           Service service = entry.getKey();
           Stopwatch stopwatch = entry.getValue();
           if (!stopwatch.isRunning() && !(service instanceof NoOpService)) {
-            loadTimes.add(Maps.immutableEntry(service, stopwatch.elapsed(MILLISECONDS)));
+            loadTimes.add(immutableEntry(service, stopwatch.elapsed(MILLISECONDS)));
           }
         }
       } finally {
@@ -761,7 +764,7 @@ public final class ServiceManager implements ServiceManagerBridge {
         IllegalStateException exception =
             new IllegalStateException(
                 "Expected to be healthy after starting. The following services are not running: "
-                    + Multimaps.filterKeys(servicesByState, not(equalTo(RUNNING))));
+                    + filterKeys(servicesByState, not(equalTo(RUNNING))));
         for (Service service : servicesByState.get(State.FAILED)) {
           exception.addSuppressed(new FailedService(service));
         }

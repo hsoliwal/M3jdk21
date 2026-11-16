@@ -22,7 +22,6 @@ import jdk.m3.collections.guava.annotations.GwtIncompatible;
 import jdk.m3.collections.guava.annotations.J2ktIncompatible;
 import jdk.m3.collections.guava.annotations.VisibleForTesting;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
-import com.google.j2objc.annotations.WeakOuter;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.LinkedHashMap;
@@ -54,7 +53,7 @@ import org.jspecify.annotations.Nullable;
  */
 @J2ktIncompatible // no support for access-order mode in LinkedHashMap delegate
 @GwtIncompatible // not worth using in GWT for now
-class CompactLinkedHashMap<K extends @Nullable Object, V extends @Nullable Object>
+final class CompactLinkedHashMap<K extends @Nullable Object, V extends @Nullable Object>
     extends CompactHashMap<K, V> {
   // TODO(lowasser): implement removeEldestEntry so this can be used as a drop-in replacement
 
@@ -228,9 +227,8 @@ class CompactLinkedHashMap<K extends @Nullable Object, V extends @Nullable Objec
   }
 
   @Override
-  Set<Entry<K, V>> createEntrySet() {
-    @WeakOuter
-    class EntrySetImpl extends EntrySetView {
+  public Set<Entry<K, V>> entrySet() {
+    final class EntrySetImpl extends EntrySetView {
       @Override
       public Spliterator<Entry<K, V>> spliterator() {
         return Spliterators.spliterator(this, Spliterator.ORDERED | Spliterator.DISTINCT);
@@ -240,9 +238,8 @@ class CompactLinkedHashMap<K extends @Nullable Object, V extends @Nullable Objec
   }
 
   @Override
-  Set<K> createKeySet() {
-    @WeakOuter
-    class KeySetImpl extends KeySetView {
+  public Set<K> keySet() {
+    final class KeySetImpl extends KeySetView {
       @Override
       public @Nullable Object[] toArray() {
         return ObjectArrays.toArrayImpl(this);
@@ -263,9 +260,8 @@ class CompactLinkedHashMap<K extends @Nullable Object, V extends @Nullable Objec
   }
 
   @Override
-  Collection<V> createValues() {
-    @WeakOuter
-    class ValuesImpl extends ValuesView {
+  public Collection<V> values() {
+    final class ValuesImpl extends ValuesView {
       @Override
       public @Nullable Object[] toArray() {
         return ObjectArrays.toArrayImpl(this);
@@ -320,4 +316,6 @@ class CompactLinkedHashMap<K extends @Nullable Object, V extends @Nullable Objec
    * they're defined above -- including logic to add and subtract 1 to map between the values stored
    * in the predecessor/successor arrays and the indexes in the elements array that they identify.
    */
+
+  private static final long serialVersionUID = 2360971274758481122L;
 }

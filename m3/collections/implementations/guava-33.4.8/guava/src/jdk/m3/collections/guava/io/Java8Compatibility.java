@@ -19,8 +19,8 @@ import jdk.m3.collections.guava.annotations.J2ktIncompatible;
 import java.nio.Buffer;
 
 /**
- * Wrappers around {@link Buffer} methods that are covariantly overridden in Java 9+. See
- * https://github.com/google/guava/issues/3990
+ * Wrappers around {@link Buffer} methods that are covariantly overridden in Java 9+. See <a
+ * href="https://github.com/google/guava/issues/3990">Guava issue 3990</a>.
  */
 @J2ktIncompatible
 @GwtIncompatible

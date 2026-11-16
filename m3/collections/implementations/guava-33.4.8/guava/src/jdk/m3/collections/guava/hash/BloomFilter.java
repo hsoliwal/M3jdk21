@@ -16,15 +16,18 @@ package jdk.m3.collections.guava.hash;
 
 import static jdk.m3.collections.guava.base.Preconditions.checkArgument;
 import static jdk.m3.collections.guava.base.Preconditions.checkNotNull;
+import static java.lang.Byte.toUnsignedInt;
+import static java.lang.Math.log;
 import static java.lang.Math.max;
+import static java.lang.Math.round;
 
 import jdk.m3.collections.guava.annotations.Beta;
+import jdk.m3.collections.guava.annotations.J2ktIncompatible;
 import jdk.m3.collections.guava.annotations.VisibleForTesting;
-import jdk.m3.collections.guava.base.Objects;
 import jdk.m3.collections.guava.base.Predicate;
 import jdk.m3.collections.guava.hash.BloomFilterStrategies.LockFreeBitArray;
 import jdk.m3.collections.guava.math.DoubleMath;
-import jdk.m3.collections.guava.math.LongMath;
+import jdk.m3.collections.guava.primitives.Doubles;
 import jdk.m3.collections.guava.primitives.SignedBytes;
 import jdk.m3.collections.guava.primitives.UnsignedBytes;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
@@ -38,6 +41,7 @@ import java.io.ObjectInputStream;
 import java.io.OutputStream;
 import java.io.Serializable;
 import java.math.RoundingMode;
+import java.util.Objects;
 import java.util.stream.Collector;
 import org.jspecify.annotations.Nullable;
 
@@ -51,8 +55,8 @@ import org.jspecify.annotations.Nullable;
  * they work.
  *
  * <p>The false positive probability ({@code FPP}) of a Bloom filter is defined as the probability
- * that {@linkplain #mightContain(Object)} will erroneously return {@code true} for an object that
- * has not actually been put in the {@code BloomFilter}.
+ * that {@link #mightContain(Object)} will erroneously return {@code true} for an object that has
+ * not actually been put in the {@code BloomFilter}.
  *
  * <p>Bloom filters are serializable. They also support a more compact serial representation via the
  * {@link #writeTo} and {@link #readFrom} methods. Both serialized forms will continue to be
@@ -68,6 +72,7 @@ import org.jspecify.annotations.Nullable;
  * @author Kevin Bourrillion
  * @since 11.0 (thread-safe since 23.0)
  */
+@J2ktIncompatible
 @Beta
 public final class BloomFilter<T extends @Nullable Object> implements Predicate<T>, Serializable {
   /**
@@ -75,7 +80,7 @@ public final class BloomFilter<T extends @Nullable Object> implements Predicate<
    *
    * <p>Implementations should be collections of pure functions (i.e. stateless).
    */
-  interface Strategy extends java.io.Serializable {
+  interface Strategy extends Serializable {
 
     /**
      * Sets {@code numHashFunctions} bits of the given bit array, by hashing a user element.
@@ -121,7 +126,7 @@ public final class BloomFilter<T extends @Nullable Object> implements Predicate<
   private final Strategy strategy;
 
   /** Natural logarithm of 2, used to optimize calculations in Bloom filter sizing. */
-  private static final double LOG_TWO = Math.log(2);
+  private static final double LOG_TWO = log(2);
 
   /** Square of the natural logarithm of 2, reused to optimize the bit size calculation. */
   private static final double SQUARED_LOG_TWO = LOG_TWO * LOG_TWO;
@@ -196,10 +201,10 @@ public final class BloomFilter<T extends @Nullable Object> implements Predicate<
   }
 
   /**
-   * Returns the probability that {@linkplain #mightContain(Object)} will erroneously return {@code
-   * true} for an object that has not actually been put in the {@code BloomFilter}.
+   * Returns the probability that {@link #mightContain(Object)} will erroneously return {@code true}
+   * for an object that has not actually been put in the {@code BloomFilter}.
    *
-   * <p>Ideally, this number should be close to the {@code fpp} parameter passed in {@linkplain
+   * <p>Ideally, this number should be close to the {@code fpp} parameter passed in {@link
    * #create(Funnel, int, double)}, or smaller. If it is significantly higher, it is usually the
    * case that too many elements (more than expected) have been put in the {@code BloomFilter},
    * degenerating it.
@@ -236,6 +241,25 @@ public final class BloomFilter<T extends @Nullable Object> implements Predicate<
   @VisibleForTesting
   long bitSize() {
     return bits.bitSize();
+  }
+
+  /**
+   * Returns the number of bytes required to serialize this bloom filter using the {@link
+   * #writeTo(OutputStream)} method. This method can be useful if you need to know the serialization
+   * size before writing to pre-allocated space (e.g., for memory-mapped files or fixed-size
+   * records).
+   *
+   * @since 33.6.0
+   */
+  public long serializedSize() {
+    // We return a long (and not an int) because the max serialized size is approximately
+    // 17 billion bytes (2^31 * 8 bytes).
+
+    // The serialization header is 6 bytes:
+    //   1 byte for the strategy
+    //   1 byte for the number of hash functions
+    //   4 bytes for the array length
+    return (bits.bitSize() / 8) + 6;
   }
 
   /**
@@ -297,6 +321,11 @@ public final class BloomFilter<T extends @Nullable Object> implements Predicate<
     this.bits.putAll(that.bits);
   }
 
+  /**
+   * Indicates whether another object is equal to this Bloom filter; <b>discouraged</b>. This method
+   * performs a potentially expensive comparison of all data and configuration of the two Bloom
+   * filters.
+   */
   @Override
   public boolean equals(@Nullable Object object) {
     if (object == this) {
@@ -312,9 +341,13 @@ public final class BloomFilter<T extends @Nullable Object> implements Predicate<
     return false;
   }
 
+  /**
+   * Returns a hash code value for this Bloom filter; <b>discouraged</b>. This method performs a
+   * potentially expensive hashing operation on all data and configuration of this Bloom filter.
+   */
   @Override
   public int hashCode() {
-    return Objects.hashCode(numHashFunctions, funnel, strategy, bits);
+    return Objects.hash(numHashFunctions, funnel, strategy, bits);
   }
 
   /**
@@ -373,7 +406,7 @@ public final class BloomFilter<T extends @Nullable Object> implements Predicate<
     checkArgument(fpp > 0.0, "False positive probability (%s) must be > 0.0", fpp);
     checkArgument(fpp < 1.0, "False positive probability (%s) must be < 1.0", fpp);
     return Collector.of(
-        () -> BloomFilter.create(funnel, expectedInsertions, fpp),
+        () -> create(funnel, expectedInsertions, fpp),
         BloomFilter::put,
         (bf1, bf2) -> {
           bf1.putAll(bf2);
@@ -532,7 +565,7 @@ public final class BloomFilter<T extends @Nullable Object> implements Predicate<
   @VisibleForTesting
   static int optimalNumOfHashFunctions(double p) {
     // -log(p) / log(2), ensuring the result is rounded to avoid truncation.
-    return max(1, (int) Math.round(-Math.log(p) / LOG_TWO));
+    return max(1, (int) round(-log(p) / LOG_TWO));
   }
 
   /**
@@ -548,20 +581,20 @@ public final class BloomFilter<T extends @Nullable Object> implements Predicate<
   @VisibleForTesting
   static long optimalNumOfBits(long n, double p) {
     if (p == 0) {
-      p = Double.MIN_VALUE;
+      p = Doubles.MIN_POSITIVE_VALUE;
     }
-    return (long) (-n * Math.log(p) / SQUARED_LOG_TWO);
+    return (long) (-n * log(p) / SQUARED_LOG_TWO);
   }
 
-  private Object writeReplace() {
+    private Object writeReplace() {
     return new SerialForm<T>(this);
   }
 
-  private void readObject(ObjectInputStream stream) throws InvalidObjectException {
+    private void readObject(ObjectInputStream stream) throws InvalidObjectException {
     throw new InvalidObjectException("Use SerializedForm");
   }
 
-  private static class SerialForm<T extends @Nullable Object> implements Serializable {
+  private static final class SerialForm<T extends @Nullable Object> implements Serializable {
     final long[] data;
     final int numHashFunctions;
     final Funnel<? super T> funnel;
@@ -586,7 +619,7 @@ public final class BloomFilter<T extends @Nullable Object> implements Predicate<
    * serialization). This has been measured to save at least 400 bytes compared to regular
    * serialization.
    *
-   * <p>Use {@linkplain #readFrom(InputStream, Funnel)} to reconstruct the written BloomFilter.
+   * <p>Use {@link #readFrom(InputStream, Funnel)} to reconstruct the written BloomFilter.
    */
   public void writeTo(OutputStream out) throws IOException {
     // Serial form:
@@ -604,32 +637,64 @@ public final class BloomFilter<T extends @Nullable Object> implements Predicate<
   }
 
   /**
-   * Reads a byte stream, which was written by {@linkplain #writeTo(OutputStream)}, into a {@code
-   * BloomFilter}.
+   * Reads a byte stream, which was written by {@link #writeTo(OutputStream)}, into a {@code
+   * BloomFilter}, allocating as much memory as the byte stream requests.
    *
    * <p>The {@code Funnel} to be used is not encoded in the stream, so it must be provided here.
    * <b>Warning:</b> the funnel provided <b>must</b> behave identically to the one used to populate
    * the original Bloom filter!
    *
    * @throws IOException if the InputStream throws an {@code IOException}, or if its data does not
-   *     appear to be a BloomFilter serialized using the {@linkplain #writeTo(OutputStream)} method.
+   *     appear to be a BloomFilter serialized using the {@link #writeTo(OutputStream)} method.
    */
   @SuppressWarnings("CatchingUnchecked") // sneaky checked exception
   public static <T extends @Nullable Object> BloomFilter<T> readFrom(
       InputStream in, Funnel<? super T> funnel) throws IOException {
+    return readFrom(in, funnel, Long.MAX_VALUE);
+  }
+
+  /**
+   * Reads a byte stream, which was written by {@link #writeTo(OutputStream)}, into a {@code
+   * BloomFilter}, allocating at most {@code maxAllowedSizeInBits} for the backing array.
+   *
+   * <p>The {@code Funnel} to be used is not encoded in the stream, so it must be provided here.
+   * <b>Warning:</b> the funnel provided <b>must</b> behave identically to the one used to populate
+   * the original Bloom filter!
+   *
+   * @param in the InputStream to read from
+   * @param funnel the funnel to use for the Bloom filter
+   * @param maxAllowedSizeInBits the maximum number of bits that the Bloom filter can have
+   * @throws IOException if the InputStream throws an {@code IOException}, or if its data does not
+   *     appear to be a BloomFilter serialized using the {@link #writeTo(OutputStream)} method.
+   * @throws IllegalArgumentException if {@code maxAllowedSizeInBits} is negative, or if the number
+   *     of bits in the stream is greater than {@code maxAllowedSizeInBits}.
+   * @since 33.7.0
+   */
+  @SuppressWarnings("CatchingUnchecked") // sneaky checked exception
+  public static <T extends @Nullable Object> BloomFilter<T> readFrom(
+      InputStream in, Funnel<? super T> funnel, long maxAllowedSizeInBits) throws IOException {
     checkNotNull(in, "InputStream");
     checkNotNull(funnel, "Funnel");
+    checkArgument(
+        maxAllowedSizeInBits >= 0, "maxAllowedSizeInBits (%s) must be >= 0", maxAllowedSizeInBits);
     int strategyOrdinal = -1;
     int numHashFunctions = -1;
-    int dataLength = -1;
+    int longArraySize = -1;
     try {
       DataInputStream din = new DataInputStream(in);
       // currently this assumes there is no negative ordinal; will have to be updated if we
       // add non-stateless strategies (for which we've reserved negative ordinals; see
       // Strategy.ordinal()).
       strategyOrdinal = din.readByte();
-      numHashFunctions = UnsignedBytes.toInt(din.readByte());
-      dataLength = din.readInt();
+      numHashFunctions = toUnsignedInt(din.readByte());
+      longArraySize = din.readInt();
+
+      checkArgument(longArraySize >= 0, "longArraySize (%s) must be >= 0", longArraySize);
+      checkArgument(
+          longArraySize <= maxAllowedSizeInBits / 64,
+          "longArraySize (%s) must be <= %s",
+          longArraySize,
+          maxAllowedSizeInBits / 64);
 
       /*
        * We document in BloomFilterStrategies that we must not change the ordering, and we have a
@@ -638,8 +703,8 @@ public final class BloomFilter<T extends @Nullable Object> implements Predicate<
       @SuppressWarnings("EnumOrdinal")
       Strategy strategy = BloomFilterStrategies.values()[strategyOrdinal];
 
-      LockFreeBitArray dataArray = new LockFreeBitArray(LongMath.checkedMultiply(dataLength, 64L));
-      for (int i = 0; i < dataLength; i++) {
+      LockFreeBitArray dataArray = new LockFreeBitArray(Math.multiplyExact(longArraySize, 64L));
+      for (int i = 0; i < longArraySize; i++) {
         dataArray.putData(i, din.readLong());
       }
 
@@ -653,8 +718,8 @@ public final class BloomFilter<T extends @Nullable Object> implements Predicate<
               + strategyOrdinal
               + " numHashFunctions: "
               + numHashFunctions
-              + " dataLength: "
-              + dataLength;
+              + " longArraySize: "
+              + longArraySize;
       throw new IOException(message, e);
     }
   }

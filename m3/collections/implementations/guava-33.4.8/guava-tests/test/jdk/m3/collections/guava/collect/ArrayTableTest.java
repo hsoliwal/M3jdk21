@@ -16,21 +16,22 @@
 
 package jdk.m3.collections.guava.collect;
 
-import static jdk.m3.collections.guava.collect.ReflectionFreeAssertThrows.assertThrows;
 import static jdk.m3.collections.guava.collect.Tables.immutableCell;
-import static com.google.common.truth.Truth.assertThat;
+import static jdk.m3.collections.guava.testing.SerializableTester.reserializeAndAssert;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
 import static java.util.Arrays.asList;
+import static org.junit.Assert.assertThrows;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
 import jdk.m3.collections.guava.annotations.J2ktIncompatible;
-import jdk.m3.collections.guava.base.Objects;
 import jdk.m3.collections.guava.collect.Table.Cell;
 import jdk.m3.collections.guava.testing.EqualsTester;
 import jdk.m3.collections.guava.testing.NullPointerTester;
-import jdk.m3.collections.guava.testing.SerializableTester;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
@@ -39,12 +40,12 @@ import org.jspecify.annotations.Nullable;
  *
  * @author Jared Levy
  */
-@GwtCompatible(emulated = true)
+@GwtCompatible
 @NullMarked
 public class ArrayTableTest extends AbstractTableTest<@Nullable Character> {
 
   @Override
-  protected ArrayTable<String, Integer, Character> create(@Nullable Object... data) {
+  ArrayTable<String, Integer, Character> create(@Nullable Object... data) {
     // TODO: Specify different numbers of rows and columns, to detect problems
     // that arise when the wrong size is used.
     ArrayTable<String, Integer, Character> table =
@@ -54,17 +55,17 @@ public class ArrayTableTest extends AbstractTableTest<@Nullable Character> {
   }
 
   @Override
-  protected void assertSize(int expectedSize) {
+  void assertSize(int expectedSize) {
     assertEquals(9, table.size());
   }
 
   @Override
-  protected boolean supportsRemove() {
+  boolean supportsRemove() {
     return false;
   }
 
   @Override
-  protected boolean supportsNullValues() {
+  boolean supportsNullValues() {
     return true;
   }
 
@@ -155,17 +156,17 @@ public class ArrayTableTest extends AbstractTableTest<@Nullable Character> {
     table.put("bar", 1, 'b');
     table.put("foo", 3, 'c');
     int expected =
-        Objects.hashCode("foo", 1, 'a')
-            + Objects.hashCode("bar", 1, 'b')
-            + Objects.hashCode("foo", 3, 'c')
-            + Objects.hashCode("bar", 3, 0);
+        Objects.hash("foo", 1, 'a')
+            + Objects.hash("bar", 1, 'b')
+            + Objects.hash("foo", 3, 'c')
+            + Objects.hash("bar", 3, 0);
     assertEquals(expected, table.hashCode());
   }
 
   @Override
   public void testRow() {
     table = create("foo", 1, 'a', "bar", 1, 'b', "foo", 3, 'c');
-    Map<Integer, @Nullable Character> expected = Maps.newHashMap();
+    Map<Integer, @Nullable Character> expected = new HashMap<>();
     expected.put(1, 'a');
     expected.put(3, 'c');
     expected.put(2, null);
@@ -175,7 +176,7 @@ public class ArrayTableTest extends AbstractTableTest<@Nullable Character> {
   @Override
   public void testColumn() {
     table = create("foo", 1, 'a', "bar", 1, 'b', "foo", 3, 'c');
-    Map<String, @Nullable Character> expected = Maps.newHashMap();
+    Map<String, @Nullable Character> expected = new HashMap<>();
     expected.put("foo", 'a');
     expected.put("bar", 'b');
     expected.put("cat", null);
@@ -186,7 +187,7 @@ public class ArrayTableTest extends AbstractTableTest<@Nullable Character> {
   public void testToStringSize1() {
     table = ArrayTable.create(ImmutableList.of("foo"), ImmutableList.of(1));
     table.put("foo", 1, 'a');
-    assertEquals("{foo={1=a}}", table.toString());
+    assertThat(table.toString()).isEqualTo("{foo={1=a}}");
   }
 
   public void testCreateDuplicateRows() {
@@ -215,7 +216,7 @@ public class ArrayTableTest extends AbstractTableTest<@Nullable Character> {
 
   public void testCreateEmptyRowsXColumns() {
     ArrayTable<String, String, Character> table =
-        ArrayTable.create(Arrays.<String>asList(), Arrays.<String>asList());
+        ArrayTable.create(Arrays.asList(), Arrays.asList());
     assertThat(table).isEmpty();
     assertThat(table).hasSize(0);
     assertThat(table.columnKeyList()).isEmpty();
@@ -228,7 +229,7 @@ public class ArrayTableTest extends AbstractTableTest<@Nullable Character> {
   @GwtIncompatible // toArray
   public void testEmptyToArry() {
     ArrayTable<String, String, Character> table =
-        ArrayTable.create(Arrays.<String>asList(), Arrays.<String>asList());
+        ArrayTable.create(Arrays.asList(), Arrays.asList());
     assertThat(table.toArray(Character.class)).asList().isEmpty();
   }
 
@@ -254,7 +255,7 @@ public class ArrayTableTest extends AbstractTableTest<@Nullable Character> {
     assertEquals((Character) 'a', copy.get("foo", 1));
     assertEquals((Character) 'b', copy.get("bar", 1));
     assertEquals((Character) 'c', copy.get("foo", 3));
-    assertNull(copy.get("bar", 3));
+    assertThat(copy.get("bar", 3)).isNull();
     original.put("foo", 1, 'd');
     assertEquals((Character) 'd', original.get("foo", 1));
     assertEquals((Character) 'a', copy.get("foo", 1));
@@ -273,7 +274,7 @@ public class ArrayTableTest extends AbstractTableTest<@Nullable Character> {
 
   public void testCreateCopyEmptyArrayTable() {
     Table<String, Integer, @Nullable Character> original =
-        ArrayTable.create(Arrays.<String>asList(), Arrays.<Integer>asList());
+        ArrayTable.create(Arrays.asList(), Arrays.asList());
     ArrayTable<String, Integer, Character> copy = ArrayTable.create(original);
     assertThat(copy).isEqualTo(original);
     assertThat(copy).isEmpty();
@@ -281,7 +282,7 @@ public class ArrayTableTest extends AbstractTableTest<@Nullable Character> {
 
   public void testSerialization() {
     table = create("foo", 1, 'a', "bar", 1, 'b', "foo", 3, 'c');
-    SerializableTester.reserializeAndAssert(table);
+    reserializeAndAssert(table);
   }
 
   @J2ktIncompatible
@@ -292,40 +293,41 @@ public class ArrayTableTest extends AbstractTableTest<@Nullable Character> {
 
   public void testToString_ordered() {
     table = create("foo", 1, 'a', "bar", 1, 'b', "foo", 3, 'c');
-    assertEquals(
-        "{foo={1=a, 2=null, 3=c}, "
-            + "bar={1=b, 2=null, 3=null}, "
-            + "cat={1=null, 2=null, 3=null}}",
-        table.toString());
-    assertEquals(
-        "{foo={1=a, 2=null, 3=c}, "
-            + "bar={1=b, 2=null, 3=null}, "
-            + "cat={1=null, 2=null, 3=null}}",
-        table.rowMap().toString());
+    assertThat(table.toString())
+        .isEqualTo(
+            "{foo={1=a, 2=null, 3=c}, "
+                + "bar={1=b, 2=null, 3=null}, "
+                + "cat={1=null, 2=null, 3=null}}");
+    assertThat(table.rowMap().toString())
+        .isEqualTo(
+            "{foo={1=a, 2=null, 3=c}, "
+                + "bar={1=b, 2=null, 3=null}, "
+                + "cat={1=null, 2=null, 3=null}}");
   }
 
   public void testCellSetToString_ordered() {
     table = create("foo", 1, 'a', "bar", 1, 'b', "foo", 3, 'c');
-    assertEquals(
-        "[(foo,1)=a, (foo,2)=null, (foo,3)=c, "
-            + "(bar,1)=b, (bar,2)=null, (bar,3)=null, "
-            + "(cat,1)=null, (cat,2)=null, (cat,3)=null]",
-        table.cellSet().toString());
+    assertThat(table.cellSet().toString())
+        .isEqualTo(
+            "[(foo,1)=a, (foo,2)=null, (foo,3)=c, "
+                + "(bar,1)=b, (bar,2)=null, (bar,3)=null, "
+                + "(cat,1)=null, (cat,2)=null, (cat,3)=null]");
   }
 
   public void testRowKeySetToString_ordered() {
     table = create("foo", 1, 'a', "bar", 1, 'b', "foo", 3, 'c');
-    assertEquals("[foo, bar, cat]", table.rowKeySet().toString());
+    assertThat(table.rowKeySet().toString()).isEqualTo("[foo, bar, cat]");
   }
 
   public void testColumnKeySetToString_ordered() {
     table = create("foo", 1, 'a', "bar", 1, 'b', "foo", 3, 'c');
-    assertEquals("[1, 2, 3]", table.columnKeySet().toString());
+    assertThat(table.columnKeySet().toString()).isEqualTo("[1, 2, 3]");
   }
 
   public void testValuesToString_ordered() {
     table = create("foo", 1, 'a', "bar", 1, 'b', "foo", 3, 'c');
-    assertEquals("[a, null, c, b, null, null, null, null, null]", table.values().toString());
+    assertThat(table.values().toString())
+        .isEqualTo("[a, null, c, b, null, null, null, null, null]");
   }
 
   public void testRowKeyList() {
@@ -342,8 +344,8 @@ public class ArrayTableTest extends AbstractTableTest<@Nullable Character> {
 
   public void testGetMissingKeys() {
     table = create("foo", 1, 'a', "bar", 1, 'b', "foo", 3, 'c');
-    assertNull(table.get("dog", 1));
-    assertNull(table.get("foo", 4));
+    assertThat(table.get("dog", 1)).isNull();
+    assertThat(table.get("foo", 4)).isNull();
   }
 
   public void testAt() {
@@ -351,7 +353,7 @@ public class ArrayTableTest extends AbstractTableTest<@Nullable Character> {
         create("foo", 1, 'a', "bar", 1, 'b', "foo", 3, 'c');
     assertEquals((Character) 'b', table.at(1, 0));
     assertEquals((Character) 'c', table.at(0, 2));
-    assertNull(table.at(1, 2));
+    assertThat(table.at(1, 2)).isNull();
     assertThrows(IndexOutOfBoundsException.class, () -> table.at(1, 3));
     assertThrows(IndexOutOfBoundsException.class, () -> table.at(1, -1));
     assertThrows(IndexOutOfBoundsException.class, () -> table.at(3, 2));
@@ -363,10 +365,10 @@ public class ArrayTableTest extends AbstractTableTest<@Nullable Character> {
         create("foo", 1, 'a', "bar", 1, 'b', "foo", 3, 'c');
     assertEquals((Character) 'b', table.set(1, 0, 'd'));
     assertEquals((Character) 'd', table.get("bar", 1));
-    assertNull(table.set(2, 0, 'e'));
+    assertThat(table.set(2, 0, 'e')).isNull();
     assertEquals((Character) 'e', table.get("cat", 1));
     assertEquals((Character) 'a', table.set(0, 0, null));
-    assertNull(table.get("foo", 1));
+    assertThat(table.get("foo", 1)).isNull();
     assertThrows(IndexOutOfBoundsException.class, () -> table.set(1, 3, 'z'));
     assertThrows(IndexOutOfBoundsException.class, () -> table.set(1, -1, 'z'));
     assertThrows(IndexOutOfBoundsException.class, () -> table.set(3, 2, 'z'));
@@ -379,7 +381,7 @@ public class ArrayTableTest extends AbstractTableTest<@Nullable Character> {
         create("foo", 1, 'a', "bar", 1, 'b', "foo", 3, 'c');
     table.eraseAll();
     assertEquals(9, table.size());
-    assertNull(table.get("bar", 1));
+    assertThat(table.get("bar", 1)).isNull();
     assertTrue(table.containsRow("foo"));
     assertFalse(table.containsValue('a'));
   }
@@ -398,14 +400,14 @@ public class ArrayTableTest extends AbstractTableTest<@Nullable Character> {
     ArrayTable<String, Integer, Character> table =
         create("foo", 1, 'a', "bar", 1, 'b', "foo", 3, 'c');
     assertEquals((Character) 'b', table.erase("bar", 1));
-    assertNull(table.get("bar", 1));
+    assertThat(table.get("bar", 1)).isNull();
     assertEquals(9, table.size());
-    assertNull(table.erase("bar", 1));
-    assertNull(table.erase("foo", 2));
-    assertNull(table.erase("dog", 1));
-    assertNull(table.erase("bar", 5));
-    assertNull(table.erase(null, 1));
-    assertNull(table.erase("bar", null));
+    assertThat(table.erase("bar", 1)).isNull();
+    assertThat(table.erase("foo", 2)).isNull();
+    assertThat(table.erase("dog", 1)).isNull();
+    assertThat(table.erase("bar", 5)).isNull();
+    assertThat(table.erase(null, 1)).isNull();
+    assertThat(table.erase("bar", null)).isNull();
   }
 
   @GwtIncompatible // ArrayTable.toArray(Class)
@@ -467,9 +469,9 @@ public class ArrayTableTest extends AbstractTableTest<@Nullable Character> {
     new NullPointerTester().testAllPublicInstanceMethods(create());
   }
 
+  @GwtIncompatible
   @J2ktIncompatible
-  @GwtIncompatible // serialize
   public void testSerializable() {
-    SerializableTester.reserializeAndAssert(create());
+    reserializeAndAssert(create());
   }
 }

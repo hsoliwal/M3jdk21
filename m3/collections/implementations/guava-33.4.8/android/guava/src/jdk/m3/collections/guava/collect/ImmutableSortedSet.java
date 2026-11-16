@@ -18,6 +18,7 @@ package jdk.m3.collections.guava.collect;
 
 import static jdk.m3.collections.guava.base.Preconditions.checkArgument;
 import static jdk.m3.collections.guava.base.Preconditions.checkNotNull;
+import static jdk.m3.collections.guava.collect.ImmutableList.asImmutableList;
 import static jdk.m3.collections.guava.collect.ObjectArrays.checkElementsNotNull;
 import static java.lang.System.arraycopy;
 import static java.util.Arrays.sort;
@@ -59,7 +60,7 @@ import org.jspecify.annotations.Nullable;
  * @since 2.0 (implements {@code NavigableSet} since 12.0)
  */
 // TODO(benyu): benchmark and optimize all creation paths, which are a mess now
-@GwtCompatible(serializable = true, emulated = true)
+@GwtCompatible
 @SuppressWarnings("serial") // we're overriding default serialization
 public abstract class ImmutableSortedSet<E> extends ImmutableSet<E>
     implements NavigableSet<E>, SortedIterable<E> {
@@ -72,7 +73,6 @@ public abstract class ImmutableSortedSet<E> extends ImmutableSet<E>
    *
    * @since 33.2.0 (available since 21.0 in guava-jre)
    */
-  @SuppressWarnings("Java7ApiChecker")
   @IgnoreJRERequirement // Users will use this only if they're already using streams.
   public static <E> Collector<E, ?, ImmutableSortedSet<E>> toImmutableSortedSet(
       Comparator<? super E> comparator) {
@@ -382,8 +382,7 @@ public abstract class ImmutableSortedSet<E> extends ImmutableSet<E>
       // large array relative to the number of elements, so we cap the ratio.
       contents = Arrays.copyOf(contents, uniques);
     }
-    return new RegularImmutableSortedSet<E>(
-        ImmutableList.<E>asImmutableList(contents, uniques), comparator);
+    return new RegularImmutableSortedSet<>(asImmutableList(contents, uniques), comparator);
   }
 
   /**
@@ -539,7 +538,7 @@ public abstract class ImmutableSortedSet<E> extends ImmutableSet<E>
     }
   }
 
-  int unsafeCompare(Object a, @Nullable Object b) {
+  final int unsafeCompare(Object a, @Nullable Object b) {
     return unsafeCompare(comparator, a, b);
   }
 
@@ -564,7 +563,7 @@ public abstract class ImmutableSortedSet<E> extends ImmutableSet<E>
    * SortedSet#comparator()}, which returns {@code null} to indicate natural ordering.
    */
   @Override
-  public Comparator<? super E> comparator() {
+  public final Comparator<? super E> comparator() {
     return comparator;
   }
 
@@ -776,11 +775,11 @@ public abstract class ImmutableSortedSet<E> extends ImmutableSet<E>
    * implementation type is an implementation detail.
    */
   @J2ktIncompatible // serialization
-  private static class SerializedForm<E> implements Serializable {
+  private static final class SerializedForm<E> implements Serializable {
     final Comparator<? super E> comparator;
     final Object[] elements;
 
-    public SerializedForm(Comparator<? super E> comparator, Object[] elements) {
+    SerializedForm(Comparator<? super E> comparator, Object[] elements) {
       this.comparator = comparator;
       this.elements = elements;
     }
@@ -790,7 +789,7 @@ public abstract class ImmutableSortedSet<E> extends ImmutableSet<E>
       return new Builder<E>(comparator).add((E[]) elements).build();
     }
 
-    @GwtIncompatible @J2ktIncompatible private static final long serialVersionUID = 0;
+    @GwtIncompatible private static final long serialVersionUID = 0;
   }
 
   @J2ktIncompatible // serialization
@@ -814,7 +813,6 @@ public abstract class ImmutableSortedSet<E> extends ImmutableSet<E>
    */
   @DoNotCall("Use toImmutableSortedSet")
   @Deprecated
-  @SuppressWarnings("Java7ApiChecker")
   @IgnoreJRERequirement // Users will use this only if they're already using streams.
   public static <E> Collector<E, ?, ImmutableSet<E>> toImmutableSet() {
     throw new UnsupportedOperationException();
@@ -913,7 +911,7 @@ public abstract class ImmutableSortedSet<E> extends ImmutableSet<E>
    *
    * @throws UnsupportedOperationException always
    * @deprecated <b>Pass the parameters of type {@code Comparable} to use {@link
-   *     ImmutableSortedSet#of( Comparable, Comparable, Comparable, Comparable, Comparable)}. </b>
+   *     ImmutableSortedSet#of(Comparable, Comparable, Comparable, Comparable, Comparable)}. </b>
    */
   @DoNotCall("Pass parameters of type Comparable")
   @Deprecated

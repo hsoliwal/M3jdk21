@@ -22,7 +22,7 @@ import static java.util.Arrays.asList;
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.collect.BiMap;
 import jdk.m3.collections.guava.collect.ImmutableBiMap;
-import jdk.m3.collections.guava.collect.Maps;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 import org.jspecify.annotations.NullMarked;
@@ -51,7 +51,7 @@ public class BiMapGenerators {
   public static class ImmutableBiMapCopyOfGenerator extends TestStringBiMapGenerator {
     @Override
     protected BiMap<String, String> create(Entry<String, String>[] entries) {
-      Map<String, String> builder = Maps.newLinkedHashMap();
+      Map<String, String> builder = new LinkedHashMap<>();
       for (Entry<String, String> entry : entries) {
         builder.put(entry.getKey(), entry.getValue());
       }
@@ -65,4 +65,12 @@ public class BiMapGenerators {
       return ImmutableBiMap.copyOf(asList(entries));
     }
   }
+
+  /**
+   * Useless constructor for a class of static utility methods.
+   *
+   * @deprecated Do not instantiate this utility class.
+   */
+  @Deprecated
+  public BiMapGenerators() {}
 }

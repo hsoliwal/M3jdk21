@@ -26,9 +26,9 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Objects;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
-import org.junit.Ignore;
 
 /**
  * Base class for map testers.
@@ -41,9 +41,6 @@ import org.junit.Ignore;
  * @author George van den Driessche
  */
 @GwtCompatible
-@Ignore("test runners must not instantiate and run this directly, only via suites we build")
-// @Ignore affects the Android test runner, which respects JUnit 4 annotations on JUnit 3 tests.
-@SuppressWarnings("JUnit4ClassUsedInJUnit3")
 @NullMarked
 public abstract class AbstractMapTester<K extends @Nullable Object, V extends @Nullable Object>
     extends AbstractContainerTester<Map<K, V>, Entry<K, V>> {
@@ -176,12 +173,8 @@ public abstract class AbstractMapTester<K extends @Nullable Object, V extends @N
       assertFalse("Should not contain entry " + entry, actualContents().contains(entry));
       assertFalse(
           "Should not contain key " + entry.getKey() + " mapped to value " + entry.getValue(),
-          equal(getMap().get(entry.getKey()), entry.getValue()));
+          Objects.equals(getMap().get(entry.getKey()), entry.getValue()));
     }
-  }
-
-  private static boolean equal(@Nullable Object a, @Nullable Object b) {
-    return a == b || (a != null && a.equals(b));
   }
 
   // This one-liner saves us from some ugly casts
@@ -207,7 +200,7 @@ public abstract class AbstractMapTester<K extends @Nullable Object, V extends @N
 
   private void replaceValue(List<Entry<K, V>> expected, Entry<K, V> newEntry) {
     for (ListIterator<Entry<K, V>> i = expected.listIterator(); i.hasNext(); ) {
-      if (Helpers.equal(i.next().getKey(), newEntry.getKey())) {
+      if (Objects.equals(i.next().getKey(), newEntry.getKey())) {
         i.set(newEntry);
         return;
       }

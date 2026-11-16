@@ -16,8 +16,8 @@ package jdk.m3.collections.guava.math;
 
 import static jdk.m3.collections.guava.base.Preconditions.checkState;
 import static jdk.m3.collections.guava.math.DoubleUtils.ensureNonNegative;
-import static jdk.m3.collections.guava.primitives.Doubles.isFinite;
 import static java.lang.Double.NaN;
+import static java.lang.Double.isFinite;
 import static java.lang.Double.isNaN;
 
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
@@ -233,7 +233,7 @@ public final class StatsAccumulator {
    * <p>If these values are a sample drawn from a population, this is also an unbiased estimator of
    * the arithmetic mean of the population.
    *
-   * <h3>Non-finite values</h3>
+   * <h4>Non-finite values</h4>
    *
    * <p>If the dataset contains {@link Double#NaN} then the result is {@link Double#NaN}. If it
    * contains both {@link Double#POSITIVE_INFINITY} and {@link Double#NEGATIVE_INFINITY} then the
@@ -252,7 +252,7 @@ public final class StatsAccumulator {
   /**
    * Returns the sum of the values.
    *
-   * <h3>Non-finite values</h3>
+   * <h4>Non-finite values</h4>
    *
    * <p>If the dataset contains {@link Double#NaN} then the result is {@link Double#NaN}. If it
    * contains both {@link Double#POSITIVE_INFINITY} and {@link Double#NEGATIVE_INFINITY} then the
@@ -261,7 +261,7 @@ public final class StatsAccumulator {
    * If it contains {@link Double#NEGATIVE_INFINITY} and finite values only or {@link
    * Double#NEGATIVE_INFINITY} only, the result is {@link Double#NEGATIVE_INFINITY}.
    */
-  public final double sum() {
+  public double sum() {
     return mean * count;
   }
 
@@ -273,14 +273,14 @@ public final class StatsAccumulator {
    * is not guaranteed to return zero when the dataset consists of the same value multiple times,
    * due to numerical errors. However, it is guaranteed never to return a negative result.
    *
-   * <h3>Non-finite values</h3>
+   * <h4>Non-finite values</h4>
    *
    * <p>If the dataset contains any non-finite values ({@link Double#POSITIVE_INFINITY}, {@link
    * Double#NEGATIVE_INFINITY}, or {@link Double#NaN}) then the result is {@link Double#NaN}.
    *
    * @throws IllegalStateException if the dataset is empty
    */
-  public final double populationVariance() {
+  public double populationVariance() {
     checkState(count != 0);
     if (isNaN(sumOfSquaresOfDeltas)) {
       return NaN;
@@ -300,14 +300,14 @@ public final class StatsAccumulator {
    * is not guaranteed to return zero when the dataset consists of the same value multiple times,
    * due to numerical errors. However, it is guaranteed never to return a negative result.
    *
-   * <h3>Non-finite values</h3>
+   * <h4>Non-finite values</h4>
    *
    * <p>If the dataset contains any non-finite values ({@link Double#POSITIVE_INFINITY}, {@link
    * Double#NEGATIVE_INFINITY}, or {@link Double#NaN}) then the result is {@link Double#NaN}.
    *
    * @throws IllegalStateException if the dataset is empty
    */
-  public final double populationStandardDeviation() {
+  public double populationStandardDeviation() {
     return Math.sqrt(populationVariance());
   }
 
@@ -320,14 +320,14 @@ public final class StatsAccumulator {
    * <p>This is not guaranteed to return zero when the dataset consists of the same value multiple
    * times, due to numerical errors. However, it is guaranteed never to return a negative result.
    *
-   * <h3>Non-finite values</h3>
+   * <h4>Non-finite values</h4>
    *
    * <p>If the dataset contains any non-finite values ({@link Double#POSITIVE_INFINITY}, {@link
    * Double#NEGATIVE_INFINITY}, or {@link Double#NaN}) then the result is {@link Double#NaN}.
    *
    * @throws IllegalStateException if the dataset is empty or contains a single value
    */
-  public final double sampleVariance() {
+  public double sampleVariance() {
     checkState(count > 1);
     if (isNaN(sumOfSquaresOfDeltas)) {
       return NaN;
@@ -346,21 +346,21 @@ public final class StatsAccumulator {
    * <p>This is not guaranteed to return zero when the dataset consists of the same value multiple
    * times, due to numerical errors. However, it is guaranteed never to return a negative result.
    *
-   * <h3>Non-finite values</h3>
+   * <h4>Non-finite values</h4>
    *
    * <p>If the dataset contains any non-finite values ({@link Double#POSITIVE_INFINITY}, {@link
    * Double#NEGATIVE_INFINITY}, or {@link Double#NaN}) then the result is {@link Double#NaN}.
    *
    * @throws IllegalStateException if the dataset is empty or contains a single value
    */
-  public final double sampleStandardDeviation() {
+  public double sampleStandardDeviation() {
     return Math.sqrt(sampleVariance());
   }
 
   /**
    * Returns the lowest value in the dataset. The count must be non-zero.
    *
-   * <h3>Non-finite values</h3>
+   * <h4>Non-finite values</h4>
    *
    * <p>If the dataset contains {@link Double#NaN} then the result is {@link Double#NaN}. If it
    * contains {@link Double#NEGATIVE_INFINITY} and not {@link Double#NaN} then the result is {@link
@@ -378,7 +378,7 @@ public final class StatsAccumulator {
   /**
    * Returns the highest value in the dataset. The count must be non-zero.
    *
-   * <h3>Non-finite values</h3>
+   * <h4>Non-finite values</h4>
    *
    * <p>If the dataset contains {@link Double#NaN} then the result is {@link Double#NaN}. If it
    * contains {@link Double#POSITIVE_INFINITY} and not {@link Double#NaN} then the result is {@link

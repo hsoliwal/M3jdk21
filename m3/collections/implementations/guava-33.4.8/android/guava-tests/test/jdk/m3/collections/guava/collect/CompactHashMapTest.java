@@ -17,14 +17,23 @@
 package jdk.m3.collections.guava.collect;
 
 import static jdk.m3.collections.guava.collect.Iterables.getOnlyElement;
-import static com.google.common.truth.Truth.assertThat;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
 import static java.lang.Math.max;
+import static org.junit.Assert.assertThrows;
 
+import jdk.m3.collections.guava.annotations.GwtIncompatible;
+import jdk.m3.collections.guava.annotations.J2ktIncompatible;
 import jdk.m3.collections.guava.collect.testing.MapTestSuiteBuilder;
 import jdk.m3.collections.guava.collect.testing.TestStringMapGenerator;
 import jdk.m3.collections.guava.collect.testing.features.CollectionFeature;
 import jdk.m3.collections.guava.collect.testing.features.CollectionSize;
 import jdk.m3.collections.guava.collect.testing.features.MapFeature;
+import jdk.m3.collections.guava.testing.EqualsTester;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.Map;
 import java.util.Map.Entry;
 import junit.framework.Test;
@@ -78,7 +87,7 @@ public class CompactHashMapTest extends TestCase {
     assertThat(map.values).hasLength(10);
     assertEquals(10, map.size());
     for (int i = 0; i < 10; i++) {
-      assertEquals(Integer.toString(i), map.get(i));
+      assertThat(map.get(i)).isEqualTo(Integer.toString(i));
     }
   }
 
@@ -119,6 +128,53 @@ public class CompactHashMapTest extends TestCase {
       assertThat(map.entries).hasLength(expectedSize);
       assertThat(map.keys).hasLength(expectedSize);
       assertThat(map.values).hasLength(expectedSize);
+    }
+  }
+
+  public void testEquals() {
+    /*
+     * We get extensive testing of `equals` through the generated suite. Here, we mostly just need
+     * something to prevent `PackageSanityTest` from running its automated equality checking, which
+     * would call `createWithExpectedSize(1)` and `createWithExpectedSize(2)` and expect the results
+     * to be non-equal. The test here also provides some very basic coverage for environments under
+     * which we don't run the suite, like Android.
+     *
+     * (Perhaps `PackageSanityTest` should be made to automatically skip its testing on collection
+     * classes.)
+     */
+
+    Map<Integer, String> map1 = CompactHashMap.create();
+    map1.put(1, "one");
+    map1.put(2, "two");
+
+    Map<Integer, String> map2 = CompactHashMap.create();
+    map2.put(2, "two");
+    map2.put(1, "one");
+
+    new EqualsTester()
+        .addEqualityGroup(CompactHashMap.create(), ImmutableMap.of())
+        .addEqualityGroup(map1, map2)
+        .testEquals();
+  }
+
+  @J2ktIncompatible
+  @GwtIncompatible // java.io.ObjectInputStream
+  public void testDeserializeWithHugeSize() throws Exception {
+    CompactHashMap<Integer, String> map = CompactHashMap.create();
+    map.put(1, "1");
+    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+    try (ObjectOutputStream oos = new ObjectOutputStream(baos)) {
+      oos.writeObject(map);
+    }
+    try (ObjectInputStream ois =
+        new ObjectInputStream(new ByteArrayInputStream(baos.toByteArray())) {
+          @Override
+          public int readInt() throws IOException {
+            int unused = super.readInt();
+            return Integer.MAX_VALUE;
+          }
+        }) {
+      assertThrows(IOException.class, ois::readObject);
     }
   }
 }

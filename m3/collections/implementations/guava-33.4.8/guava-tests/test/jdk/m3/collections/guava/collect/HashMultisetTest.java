@@ -16,6 +16,8 @@
 
 package jdk.m3.collections.guava.collect;
 
+import static jdk.m3.collections.guava.testing.SerializableTester.reserialize;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
 import static java.util.Arrays.asList;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
@@ -26,7 +28,6 @@ import jdk.m3.collections.guava.collect.testing.features.CollectionSize;
 import jdk.m3.collections.guava.collect.testing.google.MultisetFeature;
 import jdk.m3.collections.guava.collect.testing.google.MultisetTestSuiteBuilder;
 import jdk.m3.collections.guava.collect.testing.google.TestStringMultisetGenerator;
-import jdk.m3.collections.guava.testing.SerializableTester;
 import java.io.Serializable;
 import junit.framework.Test;
 import junit.framework.TestCase;
@@ -39,7 +40,7 @@ import org.jspecify.annotations.NullMarked;
  * @author Kevin Bourrillion
  * @author Jared Levy
  */
-@GwtCompatible(emulated = true)
+@GwtCompatible
 @NullMarked
 public class HashMultisetTest extends TestCase {
 
@@ -101,21 +102,21 @@ public class HashMultisetTest extends TestCase {
   public void testSerializationContainingSelf() {
     Multiset<Multiset<?>> multiset = HashMultiset.create();
     multiset.add(multiset, 2);
-    Multiset<Multiset<?>> copy = SerializableTester.reserialize(multiset);
+    Multiset<Multiset<?>> copy = reserialize(multiset);
     assertEquals(2, copy.size());
-    assertSame(copy, copy.iterator().next());
+    assertThat(copy.iterator().next()).isSameInstanceAs(copy);
   }
 
   @J2ktIncompatible
   @GwtIncompatible // Only used by @GwtIncompatible code
   private static class MultisetHolder implements Serializable {
-    public Multiset<?> member;
+    private final Multiset<?> member;
 
     MultisetHolder(Multiset<?> multiset) {
       this.member = multiset;
     }
 
-    @GwtIncompatible @J2ktIncompatible private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
   }
 
   @J2ktIncompatible
@@ -124,9 +125,9 @@ public class HashMultisetTest extends TestCase {
     Multiset<MultisetHolder> multiset = HashMultiset.create();
     MultisetHolder holder = new MultisetHolder(multiset);
     multiset.add(holder, 2);
-    Multiset<MultisetHolder> copy = SerializableTester.reserialize(multiset);
+    Multiset<MultisetHolder> copy = reserialize(multiset);
     assertEquals(2, copy.size());
-    assertSame(copy, copy.iterator().next().member);
+    assertThat(copy.iterator().next().member).isSameInstanceAs(copy);
   }
 
   /*

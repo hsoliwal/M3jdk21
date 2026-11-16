@@ -16,9 +16,11 @@
 
 package jdk.m3.collections.guava.base;
 
-import static jdk.m3.collections.guava.base.ReflectionFreeAssertThrows.assertThrows;
 import static jdk.m3.collections.guava.collect.Lists.newArrayList;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
+import static java.util.Arrays.asList;
 import static java.util.Collections.unmodifiableList;
+import static org.junit.Assert.assertThrows;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
@@ -27,10 +29,10 @@ import jdk.m3.collections.guava.base.Joiner.MapJoiner;
 import jdk.m3.collections.guava.collect.ForwardingList;
 import jdk.m3.collections.guava.collect.ImmutableMap;
 import jdk.m3.collections.guava.collect.ImmutableMultimap;
-import jdk.m3.collections.guava.collect.Maps;
 import jdk.m3.collections.guava.testing.NullPointerTester;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -44,24 +46,23 @@ import org.jspecify.annotations.Nullable;
  *
  * @author Kevin Bourrillion
  */
-@GwtCompatible(emulated = true)
+@GwtCompatible
 @NullMarked
 public class JoinerTest extends TestCase {
   private static final Joiner J = Joiner.on("-");
 
   // <Integer> needed to prevent warning :(
-  private static final Iterable<Integer> iterable = Arrays.<Integer>asList();
-  private static final Iterable<Integer> iterable1 = Arrays.asList(1);
-  private static final Iterable<Integer> iterable12 = Arrays.asList(1, 2);
-  private static final Iterable<Integer> iterable123 = Arrays.asList(1, 2, 3);
-  private static final Iterable<@Nullable Integer> iterableNull = Arrays.asList((Integer) null);
-  private static final Iterable<@Nullable Integer> iterableNullNull =
-      Arrays.asList((Integer) null, null);
-  private static final Iterable<@Nullable Integer> iterableNull1 = Arrays.asList(null, 1);
-  private static final Iterable<@Nullable Integer> iterable1Null = Arrays.asList(1, null);
-  private static final Iterable<@Nullable Integer> iterable1Null2 = Arrays.asList(1, null, 2);
+  private static final Iterable<Integer> iterable = Arrays.asList();
+  private static final Iterable<Integer> iterable1 = asList(1);
+  private static final Iterable<Integer> iterable12 = asList(1, 2);
+  private static final Iterable<Integer> iterable123 = asList(1, 2, 3);
+  private static final Iterable<@Nullable Integer> iterableNull = asList((Integer) null);
+  private static final Iterable<@Nullable Integer> iterableNullNull = asList((Integer) null, null);
+  private static final Iterable<@Nullable Integer> iterableNull1 = asList(null, 1);
+  private static final Iterable<@Nullable Integer> iterable1Null = asList(1, null);
+  private static final Iterable<@Nullable Integer> iterable1Null2 = asList(1, null, 2);
   private static final Iterable<@Nullable Integer> iterableFourNulls =
-      Arrays.asList((Integer) null, null, null, null);
+      asList((Integer) null, null, null, null);
 
   /*
    * Both of these fields *are* immutable/constant. They don't use the type ImmutableList because
@@ -74,7 +75,7 @@ public class JoinerTest extends TestCase {
   private static final List<Integer> OVERREPORTING_SIZE_LIST;
 
   static {
-    List<Integer> collection123 = Arrays.asList(1, 2, 3);
+    List<Integer> collection123 = asList(1, 2, 3);
     UNDERREPORTING_SIZE_LIST = unmodifiableList(new MisleadingSizeList<>(collection123, -1));
     OVERREPORTING_SIZE_LIST = unmodifiableList(new MisleadingSizeList<>(collection123, 1));
   }
@@ -163,23 +164,24 @@ public class JoinerTest extends TestCase {
     checkResult(zeroForNull, iterableFourNulls, "0-0-0-0");
   }
 
-  private static void checkNoOutput(Joiner joiner, Iterable<Integer> set) {
-    assertEquals("", joiner.join(set));
-    assertEquals("", joiner.join(set.iterator()));
+  @SuppressWarnings("AppendIterableIterator") // We intentionally test the Iterator overload.
+  private static void checkNoOutput(Joiner joiner, Iterable<? extends @Nullable Integer> set) {
+    assertThat(joiner.join(set)).isEqualTo("");
+    assertThat(joiner.join(set.iterator())).isEqualTo("");
 
-    Object[] array = newArrayList(set).toArray(new Integer[0]);
-    assertEquals("", joiner.join(array));
+    @Nullable Integer[] array = newArrayList(set).toArray(new @Nullable Integer[0]);
+    assertThat(joiner.join(array)).isEqualTo("");
 
     StringBuilder sb1FromIterable = new StringBuilder();
-    assertSame(sb1FromIterable, joiner.appendTo(sb1FromIterable, set));
+    assertThat(joiner.appendTo(sb1FromIterable, set)).isSameInstanceAs(sb1FromIterable);
     assertEquals(0, sb1FromIterable.length());
 
     StringBuilder sb1FromIterator = new StringBuilder();
-    assertSame(sb1FromIterator, joiner.appendTo(sb1FromIterator, set));
+    assertThat(joiner.appendTo(sb1FromIterator, set)).isSameInstanceAs(sb1FromIterator);
     assertEquals(0, sb1FromIterator.length());
 
     StringBuilder sb2 = new StringBuilder();
-    assertSame(sb2, joiner.appendTo(sb2, array));
+    assertThat(joiner.appendTo(sb2, array)).isSameInstanceAs(sb2);
     assertEquals(0, sb2.length());
 
     try {
@@ -220,38 +222,40 @@ public class JoinerTest extends TestCase {
         }
       };
 
-  private static void checkResult(Joiner joiner, Iterable<Integer> parts, String expected) {
-    assertEquals(expected, joiner.join(parts));
-    assertEquals(expected, joiner.join(parts.iterator()));
+  private static void checkResult(
+      Joiner joiner, Iterable<? extends @Nullable Integer> parts, String expected) {
+    assertThat(joiner.join(parts)).isEqualTo(expected);
+    assertThat(joiner.join(parts.iterator())).isEqualTo(expected);
 
     StringBuilder sb1FromIterable = new StringBuilder().append('x');
     joiner.appendTo(sb1FromIterable, parts);
-    assertEquals("x" + expected, sb1FromIterable.toString());
+    assertThat(sb1FromIterable.toString()).isEqualTo("x" + expected);
 
     StringBuilder sb1FromIterator = new StringBuilder().append('x');
     joiner.appendTo(sb1FromIterator, parts.iterator());
-    assertEquals("x" + expected, sb1FromIterator.toString());
+    assertThat(sb1FromIterator.toString()).isEqualTo("x" + expected);
 
     // The use of iterator() works around J2KT b/381065164.
-    Integer[] partsArray = newArrayList(parts.iterator()).toArray(new Integer[0]);
-    assertEquals(expected, joiner.join(partsArray));
+    @Nullable Integer[] partsArray =
+        newArrayList(parts.iterator()).toArray(new @Nullable Integer[0]);
+    assertThat(joiner.join(partsArray)).isEqualTo(expected);
 
     StringBuilder sb2 = new StringBuilder().append('x');
     joiner.appendTo(sb2, partsArray);
-    assertEquals("x" + expected, sb2.toString());
+    assertThat(sb2.toString()).isEqualTo("x" + expected);
 
     int num = partsArray.length - 2;
     if (num >= 0) {
-      Object[] rest = new Integer[num];
+      @Nullable Object[] rest = new @Nullable Object[num];
       for (int i = 0; i < num; i++) {
         rest[i] = partsArray[i + 2];
       }
 
-      assertEquals(expected, joiner.join(partsArray[0], partsArray[1], rest));
+      assertThat(joiner.join(partsArray[0], partsArray[1], rest)).isEqualTo(expected);
 
       StringBuilder sb3 = new StringBuilder().append('x');
       joiner.appendTo(sb3, partsArray[0], partsArray[1], rest);
-      assertEquals("x" + expected, sb3.toString());
+      assertThat(sb3.toString()).isEqualTo("x" + expected);
     }
   }
 
@@ -272,50 +276,51 @@ public class JoinerTest extends TestCase {
 
   public void testMap() {
     MapJoiner j = Joiner.on(';').withKeyValueSeparator(':');
-    assertEquals("", j.join(ImmutableMap.of()));
-    assertEquals(":", j.join(ImmutableMap.of("", "")));
+    assertThat(j.join(ImmutableMap.of())).isEqualTo("");
+    assertThat(j.join(ImmutableMap.of("", ""))).isEqualTo(":");
 
-    Map<@Nullable String, @Nullable String> mapWithNulls = Maps.newLinkedHashMap();
+    Map<@Nullable String, @Nullable String> mapWithNulls = new LinkedHashMap<>();
     mapWithNulls.put("a", null);
     mapWithNulls.put(null, "b");
 
     assertThrows(NullPointerException.class, () -> j.join(mapWithNulls));
 
-    assertEquals("a:00;00:b", j.useForNull("00").join(mapWithNulls));
+    assertThat(j.useForNull("00").join(mapWithNulls)).isEqualTo("a:00;00:b");
 
     StringBuilder sb = new StringBuilder();
     j.appendTo(sb, ImmutableMap.of(1, 2, 3, 4, 5, 6));
-    assertEquals("1:2;3:4;5:6", sb.toString());
+    assertThat(sb.toString()).isEqualTo("1:2;3:4;5:6");
   }
 
   public void testEntries() {
     MapJoiner j = Joiner.on(";").withKeyValueSeparator(":");
-    assertEquals("", j.join(ImmutableMultimap.of().entries()));
-    assertEquals("", j.join(ImmutableMultimap.of().entries().iterator()));
-    assertEquals(":", j.join(ImmutableMultimap.of("", "").entries()));
-    assertEquals(":", j.join(ImmutableMultimap.of("", "").entries().iterator()));
-    assertEquals("1:a;1:b", j.join(ImmutableMultimap.of("1", "a", "1", "b").entries()));
-    assertEquals("1:a;1:b", j.join(ImmutableMultimap.of("1", "a", "1", "b").entries().iterator()));
+    assertThat(j.join(ImmutableMultimap.of().entries())).isEqualTo("");
+    assertThat(j.join(ImmutableMultimap.of().entries().iterator())).isEqualTo("");
+    assertThat(j.join(ImmutableMultimap.of("", "").entries())).isEqualTo(":");
+    assertThat(j.join(ImmutableMultimap.of("", "").entries().iterator())).isEqualTo(":");
+    assertThat(j.join(ImmutableMultimap.of("1", "a", "1", "b").entries())).isEqualTo("1:a;1:b");
+    assertThat(j.join(ImmutableMultimap.of("1", "a", "1", "b").entries().iterator()))
+        .isEqualTo("1:a;1:b");
 
-    Map<@Nullable String, @Nullable String> mapWithNulls = Maps.newLinkedHashMap();
+    Map<@Nullable String, @Nullable String> mapWithNulls = new LinkedHashMap<>();
     mapWithNulls.put("a", null);
     mapWithNulls.put(null, "b");
-    Set<Entry<String, String>> entriesWithNulls = mapWithNulls.entrySet();
+    Set<Entry<@Nullable String, @Nullable String>> entriesWithNulls = mapWithNulls.entrySet();
 
     assertThrows(NullPointerException.class, () -> j.join(entriesWithNulls));
 
     assertThrows(NullPointerException.class, () -> j.join(entriesWithNulls.iterator()));
 
-    assertEquals("a:00;00:b", j.useForNull("00").join(entriesWithNulls));
-    assertEquals("a:00;00:b", j.useForNull("00").join(entriesWithNulls.iterator()));
+    assertThat(j.useForNull("00").join(entriesWithNulls)).isEqualTo("a:00;00:b");
+    assertThat(j.useForNull("00").join(entriesWithNulls.iterator())).isEqualTo("a:00;00:b");
 
     StringBuilder sb1 = new StringBuilder();
     j.appendTo(sb1, ImmutableMultimap.of(1, 2, 3, 4, 5, 6, 1, 3, 5, 10).entries());
-    assertEquals("1:2;1:3;3:4;5:6;5:10", sb1.toString());
+    assertThat(sb1.toString()).isEqualTo("1:2;1:3;3:4;5:6;5:10");
 
     StringBuilder sb2 = new StringBuilder();
     j.appendTo(sb2, ImmutableMultimap.of(1, 2, 3, 4, 5, 6, 1, 3, 5, 10).entries().iterator());
-    assertEquals("1:2;1:3;3:4;5:6;5:10", sb2.toString());
+    assertThat(sb2.toString()).isEqualTo("1:2;1:3;3:4;5:6;5:10");
   }
 
   public void test_skipNulls_onMap() {

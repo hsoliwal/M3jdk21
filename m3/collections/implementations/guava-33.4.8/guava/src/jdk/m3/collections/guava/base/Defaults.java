@@ -39,7 +39,15 @@ public final class Defaults {
    * false} for {@code boolean} and {@code '\0'} for {@code char}. For non-primitive types and
    * {@code void}, {@code null} is returned.
    */
-  @SuppressWarnings("unchecked")
+  @SuppressWarnings({
+    /*
+     * `type.cast(...)` would be wrong because `type` is a primitive. We'd need
+     * `c.g.c.primitives.Primitives.wrap(type).cast(...)`, and we can't depend on `primitives` from
+     * `base`.
+     */
+    "unchecked",
+    "BooleanLiteral" // `(T) false` would produce an error
+  })
   public static <T> @Nullable T defaultValue(Class<T> type) {
     checkNotNull(type);
     if (type.isPrimitive()) {

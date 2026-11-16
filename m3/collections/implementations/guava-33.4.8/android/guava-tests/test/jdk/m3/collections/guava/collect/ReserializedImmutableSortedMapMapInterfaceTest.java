@@ -16,8 +16,9 @@
 
 package jdk.m3.collections.guava.collect;
 
+import static jdk.m3.collections.guava.testing.SerializableTester.reserialize;
+
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
-import jdk.m3.collections.guava.testing.SerializableTester;
 import java.util.SortedMap;
 import org.jspecify.annotations.NullUnmarked;
 
@@ -27,7 +28,7 @@ public class ReserializedImmutableSortedMapMapInterfaceTest
     extends AbstractImmutableSortedMapMapInterfaceTest<String, Integer> {
   @Override
   protected SortedMap<String, Integer> makePopulatedMap() {
-    return SerializableTester.reserialize(ImmutableSortedMap.of("one", 1, "two", 2, "three", 3));
+    return reserialize(ImmutableSortedMap.of("one", 1, "two", 2, "three", 3));
   }
 
   @Override

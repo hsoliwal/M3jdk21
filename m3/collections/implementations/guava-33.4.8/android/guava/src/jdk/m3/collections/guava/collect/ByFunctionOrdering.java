@@ -22,15 +22,15 @@ import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
 import jdk.m3.collections.guava.annotations.J2ktIncompatible;
 import jdk.m3.collections.guava.base.Function;
-import jdk.m3.collections.guava.base.Objects;
 import java.io.Serializable;
+import java.util.Objects;
 import org.jspecify.annotations.Nullable;
 
 /**
  * An ordering that orders elements by applying an order to the result of a function on those
  * elements.
  */
-@GwtCompatible(serializable = true)
+@GwtCompatible
 final class ByFunctionOrdering<F extends @Nullable Object, T extends @Nullable Object>
     extends Ordering<F> implements Serializable {
   final Function<F, ? extends T> function;
@@ -60,7 +60,7 @@ final class ByFunctionOrdering<F extends @Nullable Object, T extends @Nullable O
 
   @Override
   public int hashCode() {
-    return Objects.hashCode(function, ordering);
+    return Objects.hash(function, ordering);
   }
 
   @Override

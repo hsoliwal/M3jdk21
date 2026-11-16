@@ -18,9 +18,9 @@ package jdk.m3.collections.guava.graph;
 
 import static jdk.m3.collections.guava.base.Preconditions.checkNotNull;
 import static jdk.m3.collections.guava.base.Preconditions.checkState;
+import static java.util.Collections.unmodifiableSet;
 import static java.util.Objects.requireNonNull;
 
-import java.util.Collections;
 import java.util.Map;
 import java.util.Set;
 import org.jspecify.annotations.Nullable;
@@ -51,8 +51,8 @@ abstract class AbstractUndirectedNetworkConnections<N, E> implements NetworkConn
   }
 
   @Override
-  public Set<E> incidentEdges() {
-    return Collections.unmodifiableSet(incidentEdgeMap.keySet());
+  public final Set<E> incidentEdges() {
+    return unmodifiableSet(incidentEdgeMap.keySet());
   }
 
   @Override
@@ -73,6 +73,7 @@ abstract class AbstractUndirectedNetworkConnections<N, E> implements NetworkConn
 
   @Override
   public @Nullable N removeInEdge(E edge, boolean isSelfLoop) {
+    checkNotNull(edge);
     if (!isSelfLoop) {
       return removeOutEdge(edge);
     }
@@ -88,6 +89,8 @@ abstract class AbstractUndirectedNetworkConnections<N, E> implements NetworkConn
 
   @Override
   public void addInEdge(E edge, N node, boolean isSelfLoop) {
+    checkNotNull(edge);
+    checkNotNull(node);
     if (!isSelfLoop) {
       addOutEdge(edge, node);
     }
@@ -95,6 +98,8 @@ abstract class AbstractUndirectedNetworkConnections<N, E> implements NetworkConn
 
   @Override
   public void addOutEdge(E edge, N node) {
+    checkNotNull(edge);
+    checkNotNull(node);
     N previousNode = incidentEdgeMap.put(edge, node);
     checkState(previousNode == null);
   }

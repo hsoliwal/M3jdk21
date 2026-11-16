@@ -31,7 +31,7 @@ import org.jspecify.annotations.Nullable;
  * @author Jared Levy
  * @author Louis Wasserman
  */
-@GwtCompatible(serializable = true, emulated = true)
+@GwtCompatible
 @SuppressWarnings("serial")
 abstract class ImmutableAsList<E> extends ImmutableList<E> {
   abstract ImmutableCollection<E> delegateCollection();
@@ -44,24 +44,24 @@ abstract class ImmutableAsList<E> extends ImmutableList<E> {
   }
 
   @Override
-  public int size() {
+  public final int size() {
     return delegateCollection().size();
   }
 
   @Override
-  public boolean isEmpty() {
+  public final boolean isEmpty() {
     return delegateCollection().isEmpty();
   }
 
   @Override
-  boolean isPartialView() {
+  final boolean isPartialView() {
     return delegateCollection().isPartialView();
   }
 
   /** Serialized form that leads to the same performance as the original list. */
-  @GwtIncompatible // serialization
+  @GwtIncompatible
   @J2ktIncompatible
-  static class SerializedForm implements Serializable {
+  private static final class SerializedForm implements Serializable {
     final ImmutableCollection<?> collection;
 
     SerializedForm(ImmutableCollection<?> collection) {
@@ -72,18 +72,18 @@ abstract class ImmutableAsList<E> extends ImmutableList<E> {
       return collection.asList();
     }
 
-    @GwtIncompatible @J2ktIncompatible private static final long serialVersionUID = 0;
+    private static final long serialVersionUID = 0;
   }
 
-  @GwtIncompatible // serialization
+  @GwtIncompatible
   @J2ktIncompatible
-  private void readObject(ObjectInputStream stream) throws InvalidObjectException {
+    private void readObject(ObjectInputStream stream) throws InvalidObjectException {
     throw new InvalidObjectException("Use SerializedForm");
   }
 
-  @GwtIncompatible // serialization
+  @GwtIncompatible
   @J2ktIncompatible
-  @Override
+    @Override
   Object writeReplace() {
     return new SerializedForm(delegateCollection());
   }

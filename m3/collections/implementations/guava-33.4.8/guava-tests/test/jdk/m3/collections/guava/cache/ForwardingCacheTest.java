@@ -16,13 +16,17 @@
 
 package jdk.m3.collections.guava.cache;
 
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import jdk.m3.collections.guava.annotations.GwtIncompatible;
+import jdk.m3.collections.guava.annotations.J2ktIncompatible;
 import jdk.m3.collections.guava.collect.ImmutableList;
 import jdk.m3.collections.guava.collect.ImmutableMap;
-import java.util.concurrent.ExecutionException;
+import com.google.errorprone.annotations.Keep;
+import java.util.concurrent.ConcurrentHashMap;
 import junit.framework.TestCase;
 import org.jspecify.annotations.NullUnmarked;
 
@@ -31,6 +35,8 @@ import org.jspecify.annotations.NullUnmarked;
  *
  * @author Charles Fry
  */
+@GwtIncompatible
+@J2ktIncompatible
 @NullUnmarked
 public class ForwardingCacheTest extends TestCase {
   private Cache<String, Boolean> forward;
@@ -38,7 +44,7 @@ public class ForwardingCacheTest extends TestCase {
 
   @SuppressWarnings({"unchecked", "DoNotMock"}) // mock
   @Override
-  public void setUp() throws Exception {
+  protected void setUp() throws Exception {
     super.setUp();
     /*
      * Class parameters must be raw, so we can't create a proxy with generic
@@ -55,16 +61,14 @@ public class ForwardingCacheTest extends TestCase {
         };
   }
 
-  public void testGetIfPresent() throws ExecutionException {
-    when(mock.getIfPresent("key")).thenReturn(Boolean.TRUE);
-    assertSame(Boolean.TRUE, forward.getIfPresent("key"));
+  public void testGetIfPresent() {
+    when(mock.getIfPresent("key")).thenReturn(true);
+    assertThat(forward.getIfPresent("key")).isEqualTo(true);
   }
 
-  public void testGetAllPresent() throws ExecutionException {
-    when(mock.getAllPresent(ImmutableList.of("key")))
-        .thenReturn(ImmutableMap.of("key", Boolean.TRUE));
-    assertEquals(
-        ImmutableMap.of("key", Boolean.TRUE), forward.getAllPresent(ImmutableList.of("key")));
+  public void testGetAllPresent() {
+    when(mock.getAllPresent(ImmutableList.of("key"))).thenReturn(ImmutableMap.of("key", true));
+    assertThat(forward.getAllPresent(ImmutableList.of("key"))).containsExactly("key", true);
   }
 
   public void testInvalidate() {
@@ -83,18 +87,19 @@ public class ForwardingCacheTest extends TestCase {
   }
 
   public void testSize() {
-    when(mock.size()).thenReturn(0L);
-    assertEquals(0, forward.size());
+    when(mock.size()).thenReturn(42L);
+    assertThat(forward.size()).isEqualTo(42);
   }
 
   public void testStats() {
-    when(mock.stats()).thenReturn(null);
-    assertNull(forward.stats());
+    CacheStats stats = new CacheStats(0, 0, 0, 0, 0, 0);
+    when(mock.stats()).thenReturn(stats);
+    assertThat(forward.stats()).isEqualTo(stats);
   }
 
   public void testAsMap() {
-    when(mock.asMap()).thenReturn(null);
-    assertNull(forward.asMap());
+    when(mock.asMap()).thenReturn(new ConcurrentHashMap<>(ImmutableMap.of("key", true)));
+    assertThat(forward.asMap()).containsExactly("key", true);
   }
 
   public void testCleanUp() {
@@ -103,6 +108,7 @@ public class ForwardingCacheTest extends TestCase {
   }
 
   /** Make sure that all methods are forwarded. */
+  @Keep
   private static class OnlyGet<K, V> extends ForwardingCache<K, V> {
     @Override
     protected Cache<K, V> delegate() {

@@ -17,6 +17,7 @@ package jdk.m3.collections.guava.io;
 import static jdk.m3.collections.guava.base.Preconditions.checkArgument;
 import static jdk.m3.collections.guava.base.Preconditions.checkNotNull;
 import static jdk.m3.collections.guava.io.FileWriteMode.APPEND;
+import static java.util.Arrays.asList;
 import static java.util.Collections.unmodifiableList;
 
 import jdk.m3.collections.guava.annotations.Beta;
@@ -28,7 +29,6 @@ import jdk.m3.collections.guava.base.Predicate;
 import jdk.m3.collections.guava.base.Splitter;
 import jdk.m3.collections.guava.collect.ImmutableList;
 import jdk.m3.collections.guava.collect.ImmutableSet;
-import jdk.m3.collections.guava.collect.Lists;
 import jdk.m3.collections.guava.graph.SuccessorsFunction;
 import jdk.m3.collections.guava.graph.Traverser;
 import jdk.m3.collections.guava.hash.HashCode;
@@ -53,7 +53,6 @@ import java.nio.channels.FileChannel.MapMode;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import org.jspecify.annotations.Nullable;
 
@@ -353,8 +352,7 @@ public final class Files {
    * @param charset the charset used to encode the output stream; see {@link StandardCharsets} for
    *     helpful predefined constants
    * @throws IOException if an I/O error occurs
-   * @deprecated Prefer {@code asCharSink(to, charset, FileWriteMode.APPEND).write(from)}. This
-   *     method is scheduled to be removed in October 2019.
+   * @deprecated Prefer {@code asCharSink(to, charset, FileWriteMode.APPEND).write(from)}.
    */
   @Deprecated
   @InlineMe(
@@ -370,6 +368,8 @@ public final class Files {
    *
    * @throws IOException if an I/O error occurs
    */
+  // performance optimization to avoid lexicographical comparison in File.equals
+  @SuppressWarnings("ReferenceEquality")
   public static boolean equal(File file1, File file2) throws IOException {
     checkNotNull(file1);
     checkNotNull(file2);
@@ -548,7 +548,7 @@ public final class Files {
     return asCharSource(file, charset)
         .readLines(
             new LineProcessor<List<String>>() {
-              final List<String> result = Lists.newArrayList();
+              final List<String> result = new ArrayList<>();
 
               @Override
               public boolean processLine(String line) {
@@ -734,7 +734,7 @@ public final class Files {
    */
   public static String simplifyPath(String pathname) {
     checkNotNull(pathname);
-    if (pathname.length() == 0) {
+    if (pathname.isEmpty()) {
       return ".";
     }
 
@@ -850,7 +850,7 @@ public final class Files {
         if (file.isDirectory()) {
           File[] files = file.listFiles();
           if (files != null) {
-            return unmodifiableList(Arrays.asList(files));
+            return unmodifiableList(asList(files));
           }
         }
 

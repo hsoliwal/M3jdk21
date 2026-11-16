@@ -1,9 +1,10 @@
 package jdk.m3.collections.guava.graph;
 
-import static com.google.common.truth.Truth.assertThat;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
 import static org.junit.Assert.assertThrows;
 
 import jdk.m3.collections.guava.collect.ImmutableSet;
+import jdk.m3.collections.guava.testing.EqualsTester;
 import java.util.HashSet;
 import java.util.Set;
 import org.jspecify.annotations.NullUnmarked;
@@ -32,14 +33,13 @@ public final class InvalidatableSetTest {
   }
 
   @Test
-  @SuppressWarnings("TruthSelfEquals")
+  @SuppressWarnings("SelfEquals") // test of our equals() implementation
   public void testEquals() {
     // sanity check on construction of copyOfWrappedSet
     assertThat(wrappedSet).isEqualTo(copyOfWrappedSet);
 
     // test that setToTest is still valid
-    assertThat(setToTest).isEqualTo(wrappedSet);
-    assertThat(setToTest).isEqualTo(copyOfWrappedSet);
+    new EqualsTester().addEqualityGroup(setToTest, wrappedSet, copyOfWrappedSet).testEquals();
 
     // invalidate setToTest
     wrappedSet.remove(1);
@@ -51,7 +51,7 @@ public final class InvalidatableSetTest {
     assertThat(wrappedSet).isEqualTo(copyOfModifiedSet);
 
     // setToTest should throw when it calls equals(), or equals is called on it, except for itself
-    assertThat(setToTest).isEqualTo(setToTest);
+    assertThat(setToTest.equals(setToTest)).isTrue();
     assertThrows(IllegalStateException.class, () -> setToTest.equals(wrappedSet));
     assertThrows(IllegalStateException.class, () -> setToTest.equals(copyOfWrappedSet));
     assertThrows(IllegalStateException.class, () -> setToTest.equals(copyOfModifiedSet));

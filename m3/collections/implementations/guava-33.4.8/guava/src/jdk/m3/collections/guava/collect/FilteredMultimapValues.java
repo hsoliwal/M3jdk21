@@ -18,16 +18,16 @@ import static jdk.m3.collections.guava.base.Preconditions.checkNotNull;
 import static jdk.m3.collections.guava.base.Predicates.and;
 import static jdk.m3.collections.guava.base.Predicates.in;
 import static jdk.m3.collections.guava.base.Predicates.not;
+import static jdk.m3.collections.guava.collect.Maps.valueIterator;
 import static jdk.m3.collections.guava.collect.Maps.valuePredicateOnEntries;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
-import jdk.m3.collections.guava.base.Objects;
 import jdk.m3.collections.guava.base.Predicate;
-import com.google.j2objc.annotations.Weak;
 import java.util.AbstractCollection;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.Map.Entry;
+import java.util.Objects;
 import org.jspecify.annotations.Nullable;
 
 /**
@@ -38,7 +38,7 @@ import org.jspecify.annotations.Nullable;
 @GwtCompatible
 final class FilteredMultimapValues<K extends @Nullable Object, V extends @Nullable Object>
     extends AbstractCollection<V> {
-  @Weak private final FilteredMultimap<K, V> multimap;
+  private final FilteredMultimap<K, V> multimap;
 
   FilteredMultimapValues(FilteredMultimap<K, V> multimap) {
     this.multimap = checkNotNull(multimap);
@@ -46,7 +46,7 @@ final class FilteredMultimapValues<K extends @Nullable Object, V extends @Nullab
 
   @Override
   public Iterator<V> iterator() {
-    return Maps.valueIterator(multimap.entries().iterator());
+    return valueIterator(multimap.entries().iterator());
   }
 
   @Override
@@ -65,7 +65,7 @@ final class FilteredMultimapValues<K extends @Nullable Object, V extends @Nullab
     for (Iterator<Entry<K, V>> unfilteredItr = multimap.unfiltered().entries().iterator();
         unfilteredItr.hasNext(); ) {
       Entry<K, V> entry = unfilteredItr.next();
-      if (entryPredicate.apply(entry) && Objects.equal(entry.getValue(), o)) {
+      if (entryPredicate.apply(entry) && Objects.equals(entry.getValue(), o)) {
         unfilteredItr.remove();
         return true;
       }

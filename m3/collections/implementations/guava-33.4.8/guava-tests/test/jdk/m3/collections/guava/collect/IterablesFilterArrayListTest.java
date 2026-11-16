@@ -16,6 +16,8 @@
 
 package jdk.m3.collections.guava.collect;
 
+import static jdk.m3.collections.guava.collect.Lists.newArrayList;
+
 import jdk.m3.collections.guava.base.Predicate;
 import jdk.m3.collections.guava.collect.FilteredCollectionsTestUtil.AbstractFilteredIterableTest;
 import org.jspecify.annotations.NullUnmarked;
@@ -25,7 +27,7 @@ public final class IterablesFilterArrayListTest
     extends AbstractFilteredIterableTest<Iterable<Integer>> {
   @Override
   Iterable<Integer> createUnfiltered(Iterable<Integer> contents) {
-    return Lists.newArrayList(contents);
+    return newArrayList(contents);
   }
 
   @Override

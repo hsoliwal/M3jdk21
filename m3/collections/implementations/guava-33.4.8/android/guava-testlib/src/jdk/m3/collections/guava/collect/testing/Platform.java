@@ -17,6 +17,7 @@
 package jdk.m3.collections.guava.collect.testing;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
+import com.google.errorprone.annotations.FormatMethod;
 import java.util.Locale;
 
 /**
@@ -37,6 +38,7 @@ final class Platform {
     Object unused = clazz.cast(obj);
   }
 
+  @FormatMethod
   static String format(String template, Object... args) {
     return String.format(Locale.ROOT, template, args);
   }

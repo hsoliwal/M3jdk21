@@ -16,10 +16,12 @@
 
 package jdk.m3.collections.guava.math;
 
-import static jdk.m3.collections.guava.math.ReflectionFreeAssertThrows.assertThrows;
-import static com.google.common.truth.Truth.assertThat;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
+import static org.junit.Assert.assertThrows;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
+import jdk.m3.collections.guava.primitives.Doubles;
+import jdk.m3.collections.guava.primitives.Floats;
 import java.math.BigInteger;
 import java.math.RoundingMode;
 import junit.framework.TestCase;
@@ -164,7 +166,7 @@ public class MathPreconditionsTest extends TestCase {
   }
 
   public void testCheckNonNegative_minFloat() {
-    MathPreconditions.checkNonNegative("float", Float.MIN_VALUE);
+    MathPreconditions.checkNonNegative("float", Floats.MIN_POSITIVE_VALUE);
   }
 
   public void testCheckNonNegative_positiveFloat() {
@@ -191,7 +193,7 @@ public class MathPreconditionsTest extends TestCase {
   }
 
   public void testCheckNonNegative_minDouble() {
-    MathPreconditions.checkNonNegative("double", Double.MIN_VALUE);
+    MathPreconditions.checkNonNegative("double", Doubles.MIN_POSITIVE_VALUE);
   }
 
   public void testCheckNonNegative_positiveDouble() {
@@ -227,7 +229,8 @@ public class MathPreconditionsTest extends TestCase {
         assertThrows(
             ArithmeticException.class,
             () -> MathPreconditions.checkInRangeForRoundingInputs(false, 1.0, RoundingMode.UP));
-    assertThat(expected).hasMessageThat().contains("1.0");
+    // b/38490623: The string contains "1.0" under most environment but just "1" under J2CL.
+    assertThat(expected).hasMessageThat().contains("1");
     assertThat(expected).hasMessageThat().contains("UP");
   }
 

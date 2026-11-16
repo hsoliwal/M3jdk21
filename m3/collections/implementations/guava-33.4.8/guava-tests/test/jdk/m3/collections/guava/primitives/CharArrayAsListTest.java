@@ -17,6 +17,7 @@
 package jdk.m3.collections.guava.primitives;
 
 import static jdk.m3.collections.guava.base.Preconditions.checkNotNull;
+import static java.lang.System.arraycopy;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
@@ -39,7 +40,7 @@ import org.jspecify.annotations.NullUnmarked;
  *
  * @author Kevin Bourrillion
  */
-@GwtCompatible(emulated = true)
+@GwtCompatible
 @NullUnmarked
 @AndroidIncompatible // test-suite builders
 public class CharArrayAsListTest extends TestCase {
@@ -84,14 +85,14 @@ public class CharArrayAsListTest extends TestCase {
 
   public static final class CharsAsListGenerator extends TestCharListGenerator {
     @Override
-    protected List<Character> create(Character[] elements) {
+    List<Character> create(Character[] elements) {
       return asList(elements);
     }
   }
 
   public static final class CharsAsListHeadSubListGenerator extends TestCharListGenerator {
     @Override
-    protected List<Character> create(Character[] elements) {
+    List<Character> create(Character[] elements) {
       Character[] suffix = {Character.MIN_VALUE, Character.MAX_VALUE};
       Character[] all = concat(elements, suffix);
       return asList(all).subList(0, elements.length);
@@ -100,7 +101,7 @@ public class CharArrayAsListTest extends TestCase {
 
   public static final class CharsAsListTailSubListGenerator extends TestCharListGenerator {
     @Override
-    protected List<Character> create(Character[] elements) {
+    List<Character> create(Character[] elements) {
       Character[] prefix = {(char) 86, (char) 99};
       Character[] all = concat(prefix, elements);
       return asList(all).subList(2, elements.length + 2);
@@ -109,7 +110,7 @@ public class CharArrayAsListTest extends TestCase {
 
   public static final class CharsAsListMiddleSubListGenerator extends TestCharListGenerator {
     @Override
-    protected List<Character> create(Character[] elements) {
+    List<Character> create(Character[] elements) {
       Character[] prefix = {Character.MIN_VALUE, Character.MAX_VALUE};
       Character[] suffix = {(char) 86, (char) 99};
       Character[] all = concat(concat(prefix, elements), suffix);
@@ -119,8 +120,8 @@ public class CharArrayAsListTest extends TestCase {
 
   private static Character[] concat(Character[] left, Character[] right) {
     Character[] result = new Character[left.length + right.length];
-    System.arraycopy(left, 0, result, 0, left.length);
-    System.arraycopy(right, 0, result, left.length, right.length);
+    arraycopy(left, 0, result, 0, left.length);
+    arraycopy(right, 0, result, left.length, right.length);
     return result;
   }
 
@@ -144,7 +145,7 @@ public class CharArrayAsListTest extends TestCase {
      * Creates a new collection containing the given elements; implement this method instead of
      * {@link #create(Object...)}.
      */
-    protected abstract List<Character> create(Character[] elements);
+    abstract List<Character> create(Character[] elements);
 
     @Override
     public Character[] createArray(int length) {

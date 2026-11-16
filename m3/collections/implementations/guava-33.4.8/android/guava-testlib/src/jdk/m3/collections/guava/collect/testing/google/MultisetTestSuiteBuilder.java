@@ -18,6 +18,7 @@ package jdk.m3.collections.guava.collect.testing.google;
 
 import static jdk.m3.collections.guava.base.Preconditions.checkArgument;
 import static jdk.m3.collections.guava.collect.testing.Helpers.copyToList;
+import static jdk.m3.collections.guava.testing.SerializableTester.reserialize;
 import static java.util.Collections.emptySet;
 
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
@@ -34,7 +35,6 @@ import jdk.m3.collections.guava.collect.testing.TestSetGenerator;
 import jdk.m3.collections.guava.collect.testing.features.CollectionFeature;
 import jdk.m3.collections.guava.collect.testing.features.Feature;
 import jdk.m3.collections.guava.collect.testing.testers.CollectionSerializationEqualTester;
-import jdk.m3.collections.guava.testing.SerializableTester;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
@@ -138,8 +138,7 @@ public class MultisetTestSuiteBuilder<E>
 
     if (parentBuilder.getFeatures().contains(CollectionFeature.SERIALIZABLE)) {
       derivedSuites.add(
-          MultisetTestSuiteBuilder.using(
-                  new ReserializedMultisetGenerator<E>(parentBuilder.getSubjectGenerator()))
+          using(new ReserializedMultisetGenerator<E>(parentBuilder.getSubjectGenerator()))
               .named(getName() + " reserialized")
               .withFeatures(computeReserializedMultisetFeatures(parentBuilder.getFeatures()))
               .suppressing(parentBuilder.getSuppressedTests())
@@ -163,7 +162,7 @@ public class MultisetTestSuiteBuilder<E>
         .createTestSuite();
   }
 
-  static class ElementSetGenerator<E> implements TestSetGenerator<E> {
+  static final class ElementSetGenerator<E> implements TestSetGenerator<E> {
     final OneSizeTestContainerGenerator<Collection<E>, E> gen;
 
     ElementSetGenerator(OneSizeTestContainerGenerator<Collection<E>, E> gen) {
@@ -196,7 +195,7 @@ public class MultisetTestSuiteBuilder<E>
     }
   }
 
-  static class EntrySetGenerator<E> implements TestSetGenerator<Multiset.Entry<E>> {
+  private static final class EntrySetGenerator<E> implements TestSetGenerator<Multiset.Entry<E>> {
     final OneSizeTestContainerGenerator<Collection<E>, E> gen;
 
     private EntrySetGenerator(OneSizeTestContainerGenerator<Collection<E>, E> gen) {
@@ -255,7 +254,7 @@ public class MultisetTestSuiteBuilder<E>
     }
   }
 
-  static class ReserializedMultisetGenerator<E> implements TestMultisetGenerator<E> {
+  private static final class ReserializedMultisetGenerator<E> implements TestMultisetGenerator<E> {
     final OneSizeTestContainerGenerator<Collection<E>, E> gen;
 
     private ReserializedMultisetGenerator(OneSizeTestContainerGenerator<Collection<E>, E> gen) {
@@ -269,7 +268,7 @@ public class MultisetTestSuiteBuilder<E>
 
     @Override
     public Multiset<E> create(Object... elements) {
-      return (Multiset<E>) SerializableTester.reserialize(gen.create(elements));
+      return (Multiset<E>) reserialize(gen.create(elements));
     }
 
     @Override

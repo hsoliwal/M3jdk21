@@ -16,16 +16,17 @@
 
 package jdk.m3.collections.guava.collect;
 
+import static jdk.m3.collections.guava.base.Predicates.and;
+import static jdk.m3.collections.guava.base.Predicates.in;
 import static jdk.m3.collections.guava.base.Predicates.not;
-import static jdk.m3.collections.guava.collect.Sets.newHashSet;
-import static com.google.common.truth.Truth.assertThat;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
 import static org.junit.Assert.assertThrows;
 
 import jdk.m3.collections.guava.base.Predicate;
-import jdk.m3.collections.guava.base.Predicates;
 import jdk.m3.collections.guava.testing.EqualsTester;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.NavigableSet;
@@ -55,11 +56,11 @@ public final class FilteredCollectionsTestUtil {
         }
       };
 
-  private static final Predicate<Integer> PRIME_DIGIT = Predicates.in(ImmutableSet.of(2, 3, 5, 7));
+  private static final Predicate<Integer> PRIME_DIGIT = in(ImmutableSet.of(2, 3, 5, 7));
 
   private static final ImmutableList<? extends List<Integer>> SAMPLE_INPUTS =
       ImmutableList.of(
-          ImmutableList.<Integer>of(),
+          ImmutableList.of(),
           ImmutableList.of(1),
           ImmutableList.of(2),
           ImmutableList.of(2, 3),
@@ -101,11 +102,10 @@ public final class FilteredCollectionsTestUtil {
         C unfiltered = createUnfiltered(contents);
         C filtered = filter(unfiltered, EVEN);
         List<Integer> foundElements = new ArrayList<>();
-        filtered.forEach(
-            (Integer i) -> {
-              assertTrue("Unexpected element: " + i, EVEN.apply(i));
-              foundElements.add(i);
-            });
+        filtered.forEach((Integer i) -> {
+          assertTrue("Unexpected element: " + i, EVEN.apply(i));
+          foundElements.add(i);
+        });
         assertEquals(ImmutableList.copyOf(filtered), foundElements);
       }
     }
@@ -120,7 +120,7 @@ public final class FilteredCollectionsTestUtil {
         C filterThenAdd = filter(unfiltered, EVEN);
         unfiltered.add(4);
 
-        List<Integer> target = Lists.newArrayList(contents);
+        List<Integer> target = new ArrayList<>(contents);
         target.add(4);
         C addThenFilter = filter(createUnfiltered(target), EVEN);
 
@@ -202,8 +202,7 @@ public final class FilteredCollectionsTestUtil {
         C filtered1 = filter(unfiltered, EVEN);
         C filtered2 = filter(filtered1, PRIME_DIGIT);
 
-        C inverseFiltered =
-            filter(createUnfiltered(contents), not(Predicates.and(EVEN, PRIME_DIGIT)));
+        C inverseFiltered = filter(createUnfiltered(contents), not(and(EVEN, PRIME_DIGIT)));
 
         filtered2.clear();
         assertThat(unfiltered).containsExactlyElementsIn(inverseFiltered);
@@ -215,7 +214,7 @@ public final class FilteredCollectionsTestUtil {
       extends AbstractFilteredCollectionTest<C> {
     public void testEqualsAndHashCode() {
       for (List<Integer> contents : SAMPLE_INPUTS) {
-        Set<Integer> expected = newHashSet();
+        Set<Integer> expected = new HashSet<>();
         for (Integer i : contents) {
           if (EVEN.apply(i)) {
             expected.add(i);

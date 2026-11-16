@@ -13,7 +13,6 @@
  */
 
 // M3 immutable-count array adaptation; provenance: m3/immutable-count-arrays-20261019/CONTRACT.md
-// Modified 2026 by Hitesh Soliwal and Synexia contributors: array storage.
 package jdk.m3.collections.guava.collect;
 
 import static jdk.m3.collections.guava.base.Preconditions.checkNotNull;
@@ -32,7 +31,7 @@ import org.jspecify.annotations.Nullable;
  * @author Jared Levy
  * @author Louis Wasserman
  */
-@GwtCompatible(emulated = true, serializable = true)
+@GwtCompatible
 @SuppressWarnings("serial") // uses writeReplace(), not default serialization
 final class RegularImmutableMultiset<E> extends ImmutableMultiset<E> {
   static final ImmutableMultiset<Object> EMPTY =

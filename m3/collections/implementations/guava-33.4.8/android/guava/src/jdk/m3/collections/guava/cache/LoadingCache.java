@@ -15,6 +15,8 @@
 package jdk.m3.collections.guava.cache;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
+import jdk.m3.collections.guava.annotations.GwtIncompatible;
+import jdk.m3.collections.guava.annotations.J2ktIncompatible;
 import jdk.m3.collections.guava.base.Function;
 import jdk.m3.collections.guava.collect.ImmutableMap;
 import jdk.m3.collections.guava.util.concurrent.ExecutionError;
@@ -153,6 +155,8 @@ public interface LoadingCache<K, V> extends Cache<K, V>, Function<K, V> {
    *
    * @since 11.0
    */
+  @GwtIncompatible
+  @J2ktIncompatible
   void refresh(K key);
 
   /**
@@ -162,5 +166,6 @@ public interface LoadingCache<K, V> extends Cache<K, V>, Function<K, V> {
    * cause entries to be automatically loaded.</b>
    */
   @Override
+  @J2ktIncompatible
   ConcurrentMap<K, V> asMap();
 }

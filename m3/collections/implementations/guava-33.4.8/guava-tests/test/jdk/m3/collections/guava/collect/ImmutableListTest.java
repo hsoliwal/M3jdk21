@@ -18,15 +18,18 @@ package jdk.m3.collections.guava.collect;
 
 import static jdk.m3.collections.guava.collect.Iterators.emptyIterator;
 import static jdk.m3.collections.guava.collect.Iterators.singletonIterator;
-import static jdk.m3.collections.guava.collect.ReflectionFreeAssertThrows.assertThrows;
+import static jdk.m3.collections.guava.collect.Lists.newArrayList;
 import static jdk.m3.collections.guava.collect.testing.Helpers.misleadingSizeCollection;
 import static jdk.m3.collections.guava.collect.testing.features.CollectionFeature.ALLOWS_NULL_QUERIES;
 import static jdk.m3.collections.guava.collect.testing.features.CollectionFeature.SERIALIZABLE;
-import static com.google.common.truth.Truth.assertThat;
+import static jdk.m3.collections.guava.testing.SerializableTester.reserialize;
+import static jdk.m3.collections.guava.testing.SerializableTester.reserializeAndAssert;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
 import static java.util.Arrays.asList;
 import static java.util.Collections.emptyList;
 import static java.util.Collections.nCopies;
 import static java.util.Collections.singletonList;
+import static org.junit.Assert.assertThrows;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
@@ -44,8 +47,8 @@ import jdk.m3.collections.guava.collect.testing.google.ListGenerators.ImmutableL
 import jdk.m3.collections.guava.collect.testing.google.ListGenerators.UnhashableElementsImmutableListGenerator;
 import jdk.m3.collections.guava.collect.testing.testers.ListHashCodeTester;
 import jdk.m3.collections.guava.testing.CollectorTester;
+import jdk.m3.collections.guava.testing.EqualsTester;
 import jdk.m3.collections.guava.testing.NullPointerTester;
-import jdk.m3.collections.guava.testing.SerializableTester;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Iterator;
@@ -63,7 +66,7 @@ import org.jspecify.annotations.Nullable;
  * @author George van den Driessche
  * @author Jared Levy
  */
-@GwtCompatible(emulated = true)
+@GwtCompatible
 @NullMarked
 public class ImmutableListTest extends TestCase {
 
@@ -130,52 +133,52 @@ public class ImmutableListTest extends TestCase {
 
   public void testCreation_twoElements() {
     List<String> list = ImmutableList.of("a", "b");
-    assertEquals(Lists.newArrayList("a", "b"), list);
+    assertEquals(newArrayList("a", "b"), list);
   }
 
   public void testCreation_threeElements() {
     List<String> list = ImmutableList.of("a", "b", "c");
-    assertEquals(Lists.newArrayList("a", "b", "c"), list);
+    assertEquals(newArrayList("a", "b", "c"), list);
   }
 
   public void testCreation_fourElements() {
     List<String> list = ImmutableList.of("a", "b", "c", "d");
-    assertEquals(Lists.newArrayList("a", "b", "c", "d"), list);
+    assertEquals(newArrayList("a", "b", "c", "d"), list);
   }
 
   public void testCreation_fiveElements() {
     List<String> list = ImmutableList.of("a", "b", "c", "d", "e");
-    assertEquals(Lists.newArrayList("a", "b", "c", "d", "e"), list);
+    assertEquals(newArrayList("a", "b", "c", "d", "e"), list);
   }
 
   public void testCreation_sixElements() {
     List<String> list = ImmutableList.of("a", "b", "c", "d", "e", "f");
-    assertEquals(Lists.newArrayList("a", "b", "c", "d", "e", "f"), list);
+    assertEquals(newArrayList("a", "b", "c", "d", "e", "f"), list);
   }
 
   public void testCreation_sevenElements() {
     List<String> list = ImmutableList.of("a", "b", "c", "d", "e", "f", "g");
-    assertEquals(Lists.newArrayList("a", "b", "c", "d", "e", "f", "g"), list);
+    assertEquals(newArrayList("a", "b", "c", "d", "e", "f", "g"), list);
   }
 
   public void testCreation_eightElements() {
     List<String> list = ImmutableList.of("a", "b", "c", "d", "e", "f", "g", "h");
-    assertEquals(Lists.newArrayList("a", "b", "c", "d", "e", "f", "g", "h"), list);
+    assertEquals(newArrayList("a", "b", "c", "d", "e", "f", "g", "h"), list);
   }
 
   public void testCreation_nineElements() {
     List<String> list = ImmutableList.of("a", "b", "c", "d", "e", "f", "g", "h", "i");
-    assertEquals(Lists.newArrayList("a", "b", "c", "d", "e", "f", "g", "h", "i"), list);
+    assertEquals(newArrayList("a", "b", "c", "d", "e", "f", "g", "h", "i"), list);
   }
 
   public void testCreation_tenElements() {
     List<String> list = ImmutableList.of("a", "b", "c", "d", "e", "f", "g", "h", "i", "j");
-    assertEquals(Lists.newArrayList("a", "b", "c", "d", "e", "f", "g", "h", "i", "j"), list);
+    assertEquals(newArrayList("a", "b", "c", "d", "e", "f", "g", "h", "i", "j"), list);
   }
 
   public void testCreation_elevenElements() {
     List<String> list = ImmutableList.of("a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k");
-    assertEquals(Lists.newArrayList("a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k"), list);
+    assertEquals(newArrayList("a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k"), list);
   }
 
   // Varargs versions
@@ -183,23 +186,21 @@ public class ImmutableListTest extends TestCase {
   public void testCreation_twelveElements() {
     List<String> list =
         ImmutableList.of("a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l");
-    assertEquals(
-        Lists.newArrayList("a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l"), list);
+    assertEquals(newArrayList("a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l"), list);
   }
 
   public void testCreation_thirteenElements() {
     List<String> list =
         ImmutableList.of("a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m");
     assertEquals(
-        Lists.newArrayList("a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m"), list);
+        newArrayList("a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m"), list);
   }
 
   public void testCreation_fourteenElements() {
     List<String> list =
         ImmutableList.of("a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n");
     assertEquals(
-        Lists.newArrayList("a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n"),
-        list);
+        newArrayList("a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n"), list);
   }
 
   public void testCreation_singletonNull() {
@@ -218,7 +219,7 @@ public class ImmutableListTest extends TestCase {
 
   public void testCreation_arrayOfArray() {
     String[] array = new String[] {"a"};
-    List<String[]> list = ImmutableList.<String[]>of(array);
+    List<String[]> list = ImmutableList.of(array);
     assertEquals(singletonList(array), list);
   }
 
@@ -240,7 +241,7 @@ public class ImmutableListTest extends TestCase {
 
   public void testCopyOf_arrayContainingOnlyNull() {
     @Nullable String[] array = new @Nullable String[] {null};
-    assertThrows(NullPointerException.class, () -> ImmutableList.copyOf((String[]) array));
+    assertThrows(NullPointerException.class, () -> ImmutableList.copyOf(array));
   }
 
   public void testCopyOf_collection_empty() {
@@ -267,7 +268,7 @@ public class ImmutableListTest extends TestCase {
 
   public void testCopyOf_collectionContainingNull() {
     Collection<@Nullable String> c = MinimalCollection.of("a", null, "b");
-    assertThrows(NullPointerException.class, () -> ImmutableList.copyOf((Collection<String>) c));
+    assertThrows(NullPointerException.class, () -> ImmutableList.copyOf(c));
   }
 
   public void testCopyOf_iterator_empty() {
@@ -291,8 +292,7 @@ public class ImmutableListTest extends TestCase {
   public void testCopyOf_iteratorContainingNull() {
     Iterator<@Nullable String> iterator =
         Arrays.<@Nullable String>asList("a", null, "b").iterator();
-    assertThrows(
-        NullPointerException.class, () -> ImmutableList.copyOf((Iterator<String>) iterator));
+    assertThrows(NullPointerException.class, () -> ImmutableList.copyOf(iterator));
   }
 
   public void testCopyOf_iteratorNull() {
@@ -300,7 +300,7 @@ public class ImmutableListTest extends TestCase {
   }
 
   public void testCopyOf_concurrentlyMutating() {
-    List<String> sample = Lists.newArrayList("a", "b", "c");
+    List<String> sample = newArrayList("a", "b", "c");
     for (int delta : new int[] {-1, 0, 1}) {
       for (int i = 0; i < sample.size(); i++) {
         Collection<String> misleading = misleadingSizeCollection(delta);
@@ -336,23 +336,23 @@ public class ImmutableListTest extends TestCase {
 
   public void testCopyOf_shortcut_empty() {
     Collection<String> c = ImmutableList.of();
-    assertSame(c, ImmutableList.copyOf(c));
+    assertThat(ImmutableList.copyOf(c)).isSameInstanceAs(c);
   }
 
   public void testCopyOf_shortcut_singleton() {
     Collection<String> c = ImmutableList.of("a");
-    assertSame(c, ImmutableList.copyOf(c));
+    assertThat(ImmutableList.copyOf(c)).isSameInstanceAs(c);
   }
 
   public void testCopyOf_shortcut_immutableList() {
     Collection<String> c = ImmutableList.of("a", "b", "c");
-    assertSame(c, ImmutableList.copyOf(c));
+    assertThat(ImmutableList.copyOf(c)).isSameInstanceAs(c);
   }
 
   public void testBuilderAddArrayHandlesNulls() {
     @Nullable String[] elements = new @Nullable String[] {"a", null, "b"};
     ImmutableList.Builder<String> builder = ImmutableList.builder();
-    assertThrows(NullPointerException.class, () -> builder.add((String[]) elements));
+    assertThrows(NullPointerException.class, () -> builder.add(elements));
     ImmutableList<String> result = builder.build();
 
     /*
@@ -369,7 +369,7 @@ public class ImmutableListTest extends TestCase {
   public void testBuilderAddCollectionHandlesNulls() {
     List<@Nullable String> elements = asList("a", null, "b");
     ImmutableList.Builder<String> builder = ImmutableList.builder();
-    assertThrows(NullPointerException.class, () -> builder.addAll((List<String>) elements));
+    assertThrows(NullPointerException.class, () -> builder.addAll(elements));
     ImmutableList<String> result = builder.build();
     assertEquals(ImmutableList.of("a"), result);
     assertEquals(1, result.size());
@@ -395,8 +395,7 @@ public class ImmutableListTest extends TestCase {
 
   public void testSortedCopyOf_natural_containsNull() {
     Collection<@Nullable Integer> c = MinimalCollection.of(1, 3, null, 2);
-    assertThrows(
-        NullPointerException.class, () -> ImmutableList.sortedCopyOf((Collection<Integer>) c));
+    assertThrows(NullPointerException.class, () -> ImmutableList.sortedCopyOf(c));
   }
 
   public void testSortedCopyOf() {
@@ -421,7 +420,7 @@ public class ImmutableListTest extends TestCase {
     Collection<@Nullable String> c = MinimalCollection.of("a", "b", "A", null, "c");
     assertThrows(
         NullPointerException.class,
-        () -> ImmutableList.sortedCopyOf(String.CASE_INSENSITIVE_ORDER, (Collection<String>) c));
+        () -> ImmutableList.sortedCopyOf(String.CASE_INSENSITIVE_ORDER, c));
   }
 
   public void testToImmutableList() {
@@ -443,29 +442,30 @@ public class ImmutableListTest extends TestCase {
   @GwtIncompatible // SerializableTester
   public void testSerialization_empty() {
     Collection<String> c = ImmutableList.of();
-    assertSame(c, SerializableTester.reserialize(c));
+    assertThat(reserialize(c)).isSameInstanceAs(c);
   }
 
   @J2ktIncompatible
   @GwtIncompatible // SerializableTester
   public void testSerialization_singleton() {
     Collection<String> c = ImmutableList.of("a");
-    SerializableTester.reserializeAndAssert(c);
+    reserializeAndAssert(c);
   }
 
   @J2ktIncompatible
   @GwtIncompatible // SerializableTester
   public void testSerialization_multiple() {
     Collection<String> c = ImmutableList.of("a", "b", "c");
-    SerializableTester.reserializeAndAssert(c);
+    reserializeAndAssert(c);
   }
 
   public void testEquals_immutableList() {
-    Collection<String> c = ImmutableList.of("a", "b", "c");
-    assertTrue(c.equals(ImmutableList.of("a", "b", "c")));
-    assertFalse(c.equals(ImmutableList.of("a", "c", "b")));
-    assertFalse(c.equals(ImmutableList.of("a", "b")));
-    assertFalse(c.equals(ImmutableList.of("a", "b", "c", "d")));
+    new EqualsTester()
+        .addEqualityGroup(ImmutableList.of("a", "b", "c"), ImmutableList.of("a", "b", "c"))
+        .addEqualityGroup(ImmutableList.of("a", "c", "b"))
+        .addEqualityGroup(ImmutableList.of("a", "b"))
+        .addEqualityGroup(ImmutableList.of("a", "b", "c", "d"))
+        .testEquals();
   }
 
   public void testBuilderAdd() {
@@ -474,13 +474,13 @@ public class ImmutableListTest extends TestCase {
     assertEquals(asList("a", "b", "a", "c"), list);
   }
 
-  @GwtIncompatible("Builder impl")
+  @GwtIncompatible // Builder impl
   public void testBuilderForceCopy() {
     ImmutableList.Builder<Integer> builder = ImmutableList.builder();
     Object[] prevArray = null;
     for (int i = 0; i < 10; i++) {
       builder.add(i);
-      assertNotSame(builder.contents, prevArray);
+      assertThat(builder.contents).isNotSameInstanceAs(prevArray);
       prevArray = builder.contents;
       ImmutableList<Integer> unused = builder.build();
     }
@@ -496,8 +496,8 @@ public class ImmutableListTest extends TestCase {
     Object[] builderArrayAfterAdds = builder.contents;
     RegularImmutableList<Integer> list = (RegularImmutableList<Integer>) builder.build();
     Object[] listInternalArray = list.array;
-    assertSame(builderArray, builderArrayAfterAdds);
-    assertSame(builderArray, listInternalArray);
+    assertThat(builderArrayAfterAdds).isSameInstanceAs(builderArray);
+    assertThat(listInternalArray).isSameInstanceAs(builderArray);
   }
 
   public void testBuilderAdd_varargs() {
@@ -547,7 +547,7 @@ public class ImmutableListTest extends TestCase {
     assertEquals(0x003300, (int) webSafeColors.get(6));
     ImmutableList<Integer> addedColor = webSafeColorsBuilder.add(0x00BFFF).build();
     assertEquals(
-        "Modifying the builder should not have changed any already" + " built sets",
+        "Modifying the builder should not have changed any already built sets",
         216,
         webSafeColors.size());
     assertEquals("the new array should be one bigger than webSafeColors", 217, addedColor.size());
@@ -578,22 +578,20 @@ public class ImmutableListTest extends TestCase {
     {
       ImmutableList.Builder<String> builder = ImmutableList.builder();
       List<@Nullable String> listWithNulls = asList("a", null, "b");
-      assertThrows(NullPointerException.class, () -> builder.addAll((List<String>) listWithNulls));
+      assertThrows(NullPointerException.class, () -> builder.addAll(listWithNulls));
     }
 
     {
       ImmutableList.Builder<String> builder = ImmutableList.builder();
       Iterator<@Nullable String> iteratorWithNulls =
           Arrays.<@Nullable String>asList("a", null, "b").iterator();
-      assertThrows(
-          NullPointerException.class, () -> builder.addAll((Iterator<String>) iteratorWithNulls));
+      assertThrows(NullPointerException.class, () -> builder.addAll(iteratorWithNulls));
     }
 
     {
       ImmutableList.Builder<String> builder = ImmutableList.builder();
       Iterable<@Nullable String> iterableWithNulls = MinimalIterable.of("a", null, "b");
-      assertThrows(
-          NullPointerException.class, () -> builder.addAll((Iterable<String>) iterableWithNulls));
+      assertThrows(NullPointerException.class, () -> builder.addAll(iterableWithNulls));
     }
   }
 
@@ -601,7 +599,7 @@ public class ImmutableListTest extends TestCase {
   @SuppressWarnings("InlineMeInliner")
   public void testAsList() {
     ImmutableList<String> list = ImmutableList.of("a", "b");
-    assertSame(list, list.asList());
+    assertThat(list.asList()).isSameInstanceAs(list);
   }
 
   @SuppressWarnings("ModifiedButNotUsed")

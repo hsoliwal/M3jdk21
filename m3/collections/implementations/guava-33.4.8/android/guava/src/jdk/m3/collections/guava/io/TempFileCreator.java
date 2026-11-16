@@ -17,6 +17,9 @@ package jdk.m3.collections.guava.io;
 import static jdk.m3.collections.guava.base.StandardSystemProperty.JAVA_IO_TMPDIR;
 import static jdk.m3.collections.guava.base.StandardSystemProperty.USER_NAME;
 import static jdk.m3.collections.guava.base.Throwables.throwIfUnchecked;
+import static java.nio.file.StandardOpenOption.CREATE_NEW;
+import static java.nio.file.StandardOpenOption.READ;
+import static java.nio.file.StandardOpenOption.WRITE;
 import static java.nio.file.attribute.AclEntryFlag.DIRECTORY_INHERIT;
 import static java.nio.file.attribute.AclEntryFlag.FILE_INHERIT;
 import static java.nio.file.attribute.AclEntryType.ALLOW;
@@ -28,17 +31,24 @@ import jdk.m3.collections.guava.annotations.J2ktIncompatible;
 import jdk.m3.collections.guava.annotations.VisibleForTesting;
 import jdk.m3.collections.guava.collect.ImmutableList;
 import com.google.j2objc.annotations.J2ObjCIncompatible;
+import java.io.Closeable;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.RandomAccessFile;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.nio.channels.FileChannel;
+import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.FileSystems;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.attribute.AclEntry;
 import java.nio.file.attribute.AclEntryPermission;
 import java.nio.file.attribute.FileAttribute;
 import java.nio.file.attribute.PosixFilePermissions;
 import java.nio.file.attribute.UserPrincipal;
+import java.security.SecureRandom;
 import java.util.EnumSet;
 import java.util.Set;
 
@@ -54,6 +64,32 @@ import java.util.Set;
 abstract class TempFileCreator {
   static final TempFileCreator INSTANCE = pickSecureCreator();
 
+  static final class TempFileAndChannel implements Closeable {
+    final File file;
+    final FileChannel channel;
+
+    TempFileAndChannel(File file, FileChannel channel) {
+      this.file = file;
+      this.channel = channel;
+    }
+
+    @Override
+    public void close() throws IOException {
+      /*
+       * The natural thing to do would be `try (channel) { if (!file.delete()) { throw ...; } }`.
+       * However, that would perform the delete before the close, and that's bad under Windows.
+       */
+      try (Closeable deleteFile =
+          () -> {
+            if (!file.delete()) {
+              throw new IOException("Could not delete: " + file);
+            }
+          }) {
+        channel.close();
+      }
+    }
+  }
+
   /**
    * @throws IllegalStateException if the directory could not be created (to implement the contract
    *     of {@link Files#createTempDir()}, such as if the system does not support creating temporary
@@ -61,7 +97,7 @@ abstract class TempFileCreator {
    */
   abstract File createTempDir();
 
-  abstract File createTempFile(String prefix) throws IOException;
+  abstract TempFileAndChannel openTempFile(String prefix) throws IOException;
 
   private static TempFileCreator pickSecureCreator() {
     try {
@@ -82,17 +118,8 @@ abstract class TempFileCreator {
       if (version < jellyBean) {
         return new ThrowingCreator();
       }
-
-      // Don't merge these catch() blocks, let alone use ReflectiveOperationException directly:
-      // b/65343391
-    } catch (NoSuchFieldException e) {
-      // The JELLY_BEAN field doesn't exist because we're running on a version before Jelly Bean :)
-      return new ThrowingCreator();
-    } catch (ClassNotFoundException e) {
+    } catch (ReflectiveOperationException e) {
       // Should be impossible, but we want to return *something* so that class init succeeds.
-      return new ThrowingCreator();
-    } catch (IllegalAccessException e) {
-      // ditto
       return new ThrowingCreator();
     }
 
@@ -129,14 +156,29 @@ abstract class TempFileCreator {
       }
     }
 
+    private static final class RandomHolder {
+      static final SecureRandom random = new SecureRandom();
+    }
+
     @Override
-    File createTempFile(String prefix) throws IOException {
-      return java.nio.file.Files.createTempFile(
-              Paths.get(JAVA_IO_TMPDIR.value()),
-              /* prefix= */ prefix,
-              /* suffix= */ null,
-              filePermissions.get())
-          .toFile();
+    TempFileAndChannel openTempFile(String prefix) throws IOException {
+      Path dir = Paths.get(JAVA_IO_TMPDIR.value());
+      FileAttribute<?> permissions = filePermissions.get();
+      while (true) {
+        long n = RandomHolder.random.nextLong();
+        Path name = dir.getFileSystem().getPath(prefix + Long.toUnsignedString(n) + ".tmp");
+        if (name.getParent() != null) {
+          throw new IllegalArgumentException("Invalid prefix: " + prefix);
+        }
+        Path path = dir.resolve(name);
+        try {
+          FileChannel channel =
+              FileChannel.open(path, EnumSet.of(CREATE_NEW, READ, WRITE), permissions);
+          return new TempFileAndChannel(path.toFile(), channel);
+        } catch (FileAlreadyExistsException e) {
+          // Try another random name.
+        }
+      }
     }
 
     @IgnoreJRERequirement // see enclosing class (whose annotation Animal Sniffer ignores here...)
@@ -242,14 +284,7 @@ abstract class TempFileCreator {
       } catch (InvocationTargetException e) {
         throwIfUnchecked(e.getCause()); // in case it's an Error or something
         return fromSystemProperty; // should be impossible
-      } catch (NoSuchMethodException shouldBeImpossible) {
-        return fromSystemProperty;
-      } catch (IllegalAccessException shouldBeImpossible) {
-        /*
-         * We don't merge these into `catch (ReflectiveOperationException ...)` or an equivalent
-         * multicatch because ReflectiveOperationException isn't available under Android:
-         * b/124188803
-         */
+      } catch (NoSuchMethodException | IllegalAccessException shouldBeImpossible) {
         return fromSystemProperty;
       }
     }
@@ -280,11 +315,19 @@ abstract class TempFileCreator {
     }
 
     @Override
-    File createTempFile(String prefix) throws IOException {
-      return File.createTempFile(
-          /* prefix= */ prefix,
-          /* suffix= */ null,
-          /* directory= */ null /* defaults to java.io.tmpdir */);
+    TempFileAndChannel openTempFile(String prefix) throws IOException {
+      File file =
+          File.createTempFile(
+              /* prefix= */ prefix,
+              /* suffix= */ null,
+              /* directory= */ null /* defaults to java.io.tmpdir */);
+      try {
+        FileChannel channel = new RandomAccessFile(file, "rw").getChannel();
+        return new TempFileAndChannel(file, channel);
+      } catch (FileNotFoundException e) {
+        file.delete();
+        throw e;
+      }
     }
 
     /** Maximum loop count when creating temp directories. */
@@ -304,7 +347,7 @@ abstract class TempFileCreator {
     }
 
     @Override
-    File createTempFile(String prefix) throws IOException {
+    TempFileAndChannel openTempFile(String prefix) throws IOException {
       throw new IOException(MESSAGE);
     }
   }

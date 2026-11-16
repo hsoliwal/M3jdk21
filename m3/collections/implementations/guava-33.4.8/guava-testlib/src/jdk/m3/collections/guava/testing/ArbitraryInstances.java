@@ -17,7 +17,16 @@
 package jdk.m3.collections.guava.testing;
 
 import static jdk.m3.collections.guava.base.Preconditions.checkArgument;
+import static jdk.m3.collections.guava.base.Predicates.alwaysTrue;
+import static jdk.m3.collections.guava.collect.Iterators.peekingIterator;
+import static jdk.m3.collections.guava.collect.Maps.difference;
+import static jdk.m3.collections.guava.collect.Maps.newTreeMap;
+import static jdk.m3.collections.guava.collect.Maps.unmodifiableNavigableMap;
+import static jdk.m3.collections.guava.collect.Sets.newTreeSet;
+import static jdk.m3.collections.guava.collect.Sets.unmodifiableNavigableSet;
+import static jdk.m3.collections.guava.collect.Tables.unmodifiableRowSortedTable;
 import static java.nio.charset.StandardCharsets.UTF_8;
+import static java.util.Arrays.sort;
 import static java.util.Objects.requireNonNull;
 import static java.util.concurrent.TimeUnit.SECONDS;
 
@@ -28,7 +37,6 @@ import jdk.m3.collections.guava.base.Defaults;
 import jdk.m3.collections.guava.base.Equivalence;
 import jdk.m3.collections.guava.base.Joiner;
 import jdk.m3.collections.guava.base.Predicate;
-import jdk.m3.collections.guava.base.Predicates;
 import jdk.m3.collections.guava.base.Splitter;
 import jdk.m3.collections.guava.base.Stopwatch;
 import jdk.m3.collections.guava.base.Ticker;
@@ -48,10 +56,8 @@ import jdk.m3.collections.guava.collect.ImmutableSortedMap;
 import jdk.m3.collections.guava.collect.ImmutableSortedMultiset;
 import jdk.m3.collections.guava.collect.ImmutableSortedSet;
 import jdk.m3.collections.guava.collect.ImmutableTable;
-import jdk.m3.collections.guava.collect.Iterators;
 import jdk.m3.collections.guava.collect.ListMultimap;
 import jdk.m3.collections.guava.collect.MapDifference;
-import jdk.m3.collections.guava.collect.Maps;
 import jdk.m3.collections.guava.collect.Multimap;
 import jdk.m3.collections.guava.collect.Multimaps;
 import jdk.m3.collections.guava.collect.Multiset;
@@ -60,12 +66,10 @@ import jdk.m3.collections.guava.collect.PeekingIterator;
 import jdk.m3.collections.guava.collect.Range;
 import jdk.m3.collections.guava.collect.RowSortedTable;
 import jdk.m3.collections.guava.collect.SetMultimap;
-import jdk.m3.collections.guava.collect.Sets;
 import jdk.m3.collections.guava.collect.SortedMapDifference;
 import jdk.m3.collections.guava.collect.SortedMultiset;
 import jdk.m3.collections.guava.collect.SortedSetMultimap;
 import jdk.m3.collections.guava.collect.Table;
-import jdk.m3.collections.guava.collect.Tables;
 import jdk.m3.collections.guava.collect.TreeBasedTable;
 import jdk.m3.collections.guava.collect.TreeMultimap;
 import jdk.m3.collections.guava.io.ByteSink;
@@ -109,7 +113,6 @@ import java.nio.LongBuffer;
 import java.nio.ShortBuffer;
 import java.nio.charset.Charset;
 import java.util.ArrayDeque;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.Currency;
@@ -193,12 +196,15 @@ public final class ArbitraryInstances {
    * in Android) requires a successful match in order to generate a {@code MatchResult}:
    * https://cs.android.com/android/platform/superproject/+/android-2.3.7_r1:libcore/luni/src/main/java/java/util/regex/Matcher.java;l=550;drc=5850271b4ab93ebc27c1d49169a348c6be3c7f04
    */
+  @SuppressWarnings("BareDotMetacharacter") // A trivial match is fine for our purposes.
   private static MatchResult createMatchResult() {
     Matcher matcher = Pattern.compile(".").matcher("X");
     matcher.find();
     return matcher.toMatchResult();
   }
 
+  // We intentionally create empty MapDifference instances.
+  @SuppressWarnings("DistinctVarargsChecker")
   private static final ClassToInstanceMap<Object> DEFAULTS =
       ImmutableClassToInstanceMap.builder()
           // primitives
@@ -214,7 +220,7 @@ public final class ArbitraryInstances {
           .put(MatchResult.class, createMatchResult())
           .put(TimeUnit.class, SECONDS)
           .put(Charset.class, UTF_8)
-          .put(Currency.class, Currency.getInstance(Locale.US))
+          .put(Currency.class, requireNonNull(Currency.getInstance(Locale.US)))
           .put(Locale.class, Locale.US)
           .put(Optional.class, Optional.empty())
           .put(OptionalInt.class, OptionalInt.empty())
@@ -226,7 +232,7 @@ public final class ArbitraryInstances {
           .put(Joiner.class, Joiner.on(','))
           .put(Splitter.class, Splitter.on(','))
           .put(jdk.m3.collections.guava.base.Optional.class, jdk.m3.collections.guava.base.Optional.absent())
-          .put(Predicate.class, Predicates.alwaysTrue())
+          .put(Predicate.class, alwaysTrue())
           .put(Equivalence.class, Equivalence.equals())
           .put(Ticker.class, Ticker.systemTicker())
           .put(Stopwatch.class, Stopwatch.createUnstarted())
@@ -251,7 +257,7 @@ public final class ArbitraryInstances {
           .put(CharSink.class, NullByteSink.INSTANCE.asCharSink(UTF_8))
           // All collections are immutable empty. So safe for any type parameter.
           .put(Iterator.class, ImmutableSet.of().iterator())
-          .put(PeekingIterator.class, Iterators.peekingIterator(ImmutableSet.of().iterator()))
+          .put(PeekingIterator.class, peekingIterator(ImmutableSet.of().iterator()))
           .put(ListIterator.class, ImmutableList.of().listIterator())
           .put(Iterable.class, ImmutableSet.of())
           .put(Collection.class, ImmutableList.of())
@@ -262,12 +268,12 @@ public final class ArbitraryInstances {
           .put(ImmutableSet.class, ImmutableSet.of())
           .put(SortedSet.class, ImmutableSortedSet.of())
           .put(ImmutableSortedSet.class, ImmutableSortedSet.of())
-          .put(NavigableSet.class, Sets.unmodifiableNavigableSet(Sets.newTreeSet()))
+          .put(NavigableSet.class, unmodifiableNavigableSet(newTreeSet()))
           .put(Map.class, ImmutableMap.of())
           .put(ImmutableMap.class, ImmutableMap.of())
           .put(SortedMap.class, ImmutableSortedMap.of())
           .put(ImmutableSortedMap.class, ImmutableSortedMap.of())
-          .put(NavigableMap.class, Maps.unmodifiableNavigableMap(Maps.newTreeMap()))
+          .put(NavigableMap.class, unmodifiableNavigableMap(newTreeMap()))
           .put(Multimap.class, ImmutableMultimap.of())
           .put(ImmutableMultimap.class, ImmutableMultimap.of())
           .put(ListMultimap.class, ImmutableListMultimap.of())
@@ -285,17 +291,17 @@ public final class ArbitraryInstances {
           .put(ImmutableBiMap.class, ImmutableBiMap.of())
           .put(Table.class, ImmutableTable.of())
           .put(ImmutableTable.class, ImmutableTable.of())
-          .put(RowSortedTable.class, Tables.unmodifiableRowSortedTable(TreeBasedTable.create()))
+          .put(RowSortedTable.class, unmodifiableRowSortedTable(TreeBasedTable.create()))
           .put(ClassToInstanceMap.class, ImmutableClassToInstanceMap.builder().build())
           .put(ImmutableClassToInstanceMap.class, ImmutableClassToInstanceMap.builder().build())
           .put(Comparable.class, ByToString.INSTANCE)
           .put(Comparator.class, AlwaysEqual.INSTANCE)
           .put(Ordering.class, AlwaysEqual.INSTANCE)
           .put(Range.class, Range.all())
-          .put(MapDifference.class, Maps.difference(ImmutableMap.of(), ImmutableMap.of()))
+          .put(MapDifference.class, difference(ImmutableMap.of(), ImmutableMap.of()))
           .put(
               SortedMapDifference.class,
-              Maps.difference(ImmutableSortedMap.of(), ImmutableSortedMap.of()))
+              difference(ImmutableSortedMap.of(), ImmutableSortedMap.of()))
           // reflect
           .put(AnnotatedElement.class, Object.class)
           .put(GenericDeclaration.class, Object.class)
@@ -306,7 +312,8 @@ public final class ArbitraryInstances {
    * type → implementation. Inherently mutable interfaces and abstract classes are mapped to their
    * default implementations and are "new"d upon get().
    */
-  private static final ConcurrentMap<Class<?>, Class<?>> implementations = Maps.newConcurrentMap();
+  private static final ConcurrentMap<Class<?>, Class<?>> implementations =
+      new ConcurrentHashMap<>();
 
   private static <T> void setImplementation(Class<T> type, Class<? extends T> implementation) {
     checkArgument(type != implementation, "Don't register %s to itself!", type);
@@ -340,9 +347,9 @@ public final class ArbitraryInstances {
     setImplementation(Executor.class, Dummies.DummyExecutor.class);
   }
 
-  @SuppressWarnings("unchecked") // it's a subtype map
   private static <T> @Nullable Class<? extends T> getImplementation(Class<T> type) {
-    return (Class<? extends T>) implementations.get(type);
+    Class<?> result = implementations.get(type);
+    return result == null ? null : result.asSubclass(type);
   }
 
   private static final Logger logger = Logger.getLogger(ArbitraryInstances.class.getName());
@@ -396,7 +403,7 @@ public final class ArbitraryInstances {
 
   private static <T> @Nullable T arbitraryConstantInstanceOrNull(Class<T> type) {
     Field[] fields = type.getDeclaredFields();
-    Arrays.sort(fields, BY_FIELD_NAME);
+    sort(fields, BY_FIELD_NAME);
     for (Field field : fields) {
       if (Modifier.isPublic(field.getModifiers())
           && Modifier.isStatic(field.getModifiers())
@@ -425,18 +432,23 @@ public final class ArbitraryInstances {
   // Internal implementations of some classes, with public default constructor that get() needs.
   private static final class Dummies {
 
+    @Keep
     public static final class InMemoryPrintStream extends PrintStream {
+      @Keep
       public InMemoryPrintStream() {
         super(new ByteArrayOutputStream());
       }
     }
 
+    @Keep
     public static final class InMemoryPrintWriter extends PrintWriter {
+      @Keep
       public InMemoryPrintWriter() {
         super(new StringWriter());
       }
     }
 
+    @Keep
     public static final class DeterministicRandom extends Random {
       @Keep
       public DeterministicRandom() {
@@ -444,23 +456,29 @@ public final class ArbitraryInstances {
       }
     }
 
+    @Keep
     public static final class DummyScheduledThreadPoolExecutor extends ScheduledThreadPoolExecutor {
+      @Keep
       public DummyScheduledThreadPoolExecutor() {
         super(1);
       }
     }
 
+    @Keep
     public static final class DummyCountDownLatch extends CountDownLatch {
+      @Keep
       public DummyCountDownLatch() {
         super(0);
       }
     }
 
+    @Keep
     public static final class DummyRunnable implements Runnable, Serializable {
       @Override
       public void run() {}
     }
 
+    @Keep
     public static final class DummyThreadFactory implements ThreadFactory, Serializable {
       @Override
       public Thread newThread(Runnable r) {
@@ -468,6 +486,7 @@ public final class ArbitraryInstances {
       }
     }
 
+    @Keep
     public static final class DummyExecutor implements Executor, Serializable {
       @Override
       public void execute(Runnable command) {}

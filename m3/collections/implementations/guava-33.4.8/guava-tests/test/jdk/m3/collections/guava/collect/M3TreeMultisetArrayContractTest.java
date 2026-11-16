@@ -1,17 +1,18 @@
-/*******************************************************************************
- * Copyright (c) 2026 Synexia, Hitesh Soliwal (hsoliwal@gmail.com) and others.
+/*
+ * Copyright 2026 Hitesh Soliwal and Contributors to the Synexia Project
  *
- * This program and the accompanying materials are made available under the
- * terms of the Apache License, Version 2.0, or (at your option) the Eclipse
- * Public License 2.0, which are available at
- * https://www.apache.org/licenses/LICENSE-2.0 and
- * https://www.eclipse.org/legal/epl-2.0/
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- * SPDX-License-Identifier: Apache-2.0 OR EPL-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
- * Contributors:
- *     Hitesh Soliwal (Synexia) - initial API and implementation
- *******************************************************************************/
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package jdk.m3.collections.guava.collect;
 
 import static org.junit.Assert.assertEquals;
@@ -43,6 +44,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.Set;
 import java.util.function.ObjIntConsumer;
+import org.jspecify.annotations.Nullable;
 import org.junit.Test;
 
 /** Partial AVL topology, exported-count lifetime, frozen-oracle and callback contracts. */
@@ -814,7 +816,7 @@ public final class M3TreeMultisetArrayContractTest {
   }
 
   private static Object mutate(
-      Object target, int operation, Object element, int amount, int expectedCount)
+      Object target, int operation, @Nullable Object element, int amount, int expectedCount)
       throws Exception {
     try {
       switch (operation) {

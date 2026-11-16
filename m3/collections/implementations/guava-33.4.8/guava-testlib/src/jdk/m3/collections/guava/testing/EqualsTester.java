@@ -17,13 +17,13 @@
 package jdk.m3.collections.guava.testing;
 
 import static jdk.m3.collections.guava.base.Preconditions.checkNotNull;
+import static jdk.m3.collections.guava.collect.Iterables.concat;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertTrue;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.base.Equivalence;
-import jdk.m3.collections.guava.collect.Iterables;
-import jdk.m3.collections.guava.collect.Lists;
+import jdk.m3.collections.guava.testing.RelationshipTester.Item;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import java.util.ArrayList;
 import java.util.List;
@@ -81,12 +81,12 @@ import org.jspecify.annotations.Nullable;
 public final class EqualsTester {
   private static final int REPETITIONS = 3;
 
-  private final List<List<Object>> equalityGroups = Lists.newArrayList();
+  private final List<List<Object>> equalityGroups = new ArrayList<>();
   private final RelationshipTester.ItemReporter itemReporter;
 
   /** Constructs an empty EqualsTester instance */
   public EqualsTester() {
-    this(new RelationshipTester.ItemReporter());
+    this(/* itemReporter= */ Item::toString);
   }
 
   EqualsTester(RelationshipTester.ItemReporter itemReporter) {
@@ -139,7 +139,7 @@ public final class EqualsTester {
   }
 
   private void testItems() {
-    for (Object item : Iterables.concat(equalityGroups)) {
+    for (Object item : concat(equalityGroups)) {
       assertTrue(item + " must not be Object#equals to null", !item.equals(null));
       assertTrue(
           item + " must not be Object#equals to an arbitrary object of another class",

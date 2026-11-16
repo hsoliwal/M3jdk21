@@ -16,7 +16,9 @@ package jdk.m3.collections.guava.hash;
 
 import static jdk.m3.collections.guava.hash.Hashing.ChecksumType.ADLER_32;
 import static jdk.m3.collections.guava.hash.Hashing.ChecksumType.CRC_32;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
 
+import jdk.m3.collections.guava.annotations.J2ktIncompatible;
 import java.util.zip.Checksum;
 import junit.framework.TestCase;
 import org.jspecify.annotations.NullUnmarked;
@@ -27,21 +29,22 @@ import org.jspecify.annotations.NullUnmarked;
  * @author Colin Decker
  */
 @NullUnmarked
+@J2ktIncompatible
 public class ChecksumHashFunctionTest extends TestCase {
 
-  public void testCrc32_equalsChecksumValue() throws Exception {
+  public void testCrc32_equalsChecksumValue() {
     assertChecksum(CRC_32, "");
     assertChecksum(CRC_32, "Z");
     assertChecksum(CRC_32, "foobar");
   }
 
-  public void testAdler32_equalsChecksumValue() throws Exception {
+  public void testAdler32_equalsChecksumValue() {
     assertChecksum(ADLER_32, "");
     assertChecksum(ADLER_32, "Z");
     assertChecksum(ADLER_32, "foobar");
   }
 
-  public void testCrc32_knownValues() throws Exception {
+  public void testCrc32_knownValues() {
     assertHash32(0x1C8600E3, CRC_32, "hell");
     assertHash32(0x3610A686, CRC_32, "hello");
     assertHash32(0xED81F9F6, CRC_32, "hello ");
@@ -52,7 +55,7 @@ public class ChecksumHashFunctionTest extends TestCase {
     assertHash32(0x4400B5BC, CRC_32, "The quick brown fox jumps over the lazy cog");
   }
 
-  public void testAdler32_knownValues() throws Exception {
+  public void testAdler32_knownValues() {
     assertHash32(0x041701A6, ADLER_32, "hell");
     assertHash32(0x062C0215, ADLER_32, "hello");
     assertHash32(0x08610235, ADLER_32, "hello ");
@@ -72,7 +75,7 @@ public class ChecksumHashFunctionTest extends TestCase {
 
     String toString = "name";
     HashFunction func = new ChecksumHashFunction(supplier, 32, toString);
-    assertEquals(toString, func.toString());
+    assertThat(func.toString()).isEqualTo(toString);
     assertEquals(value, func.hashBytes(bytes).padToLong());
   }
 
@@ -82,6 +85,6 @@ public class ChecksumHashFunctionTest extends TestCase {
     String toString = "name";
     HashFunction func = new ChecksumHashFunction(supplier, 32, toString);
     assertEquals(expected, func.hashBytes(bytes).asInt());
-    assertEquals(toString, func.toString());
+    assertThat(func.toString()).isEqualTo(toString);
   }
 }

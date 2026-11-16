@@ -27,7 +27,7 @@ import org.jspecify.annotations.Nullable;
  * that of its keys. This constraint enables bimaps to support an "inverse view", which is another
  * bimap containing the same entries as this bimap but with reversed keys and values.
  *
- * <h3>Implementations</h3>
+ * <h2>Implementations</h2>
  *
  * <ul>
  *   <li>{@link ImmutableBiMap}
@@ -108,8 +108,8 @@ public interface BiMap<K extends @Nullable Object, V extends @Nullable Object> e
    * associated key. The two bimaps are backed by the same data; any changes to one will appear in
    * the other.
    *
-   * <p><b>Note:</b>There is no guaranteed correspondence between the iteration order of a bimap and
-   * that of its inverse.
+   * <p><b>Note:</b> There is no guaranteed correspondence between the iteration order of a bimap
+   * and that of its inverse.
    *
    * @return the inverse view of this bimap
    */

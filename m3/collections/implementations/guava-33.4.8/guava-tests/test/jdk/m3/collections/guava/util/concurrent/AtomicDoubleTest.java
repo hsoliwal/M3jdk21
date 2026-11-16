@@ -13,13 +13,19 @@
 
 package jdk.m3.collections.guava.util.concurrent;
 
-import static com.google.common.truth.Truth.assertThat;
+import static jdk.m3.collections.guava.testing.SerializableTester.reserialize;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
 import static java.lang.Math.max;
 
+import jdk.m3.collections.guava.annotations.GwtIncompatible;
+import jdk.m3.collections.guava.annotations.J2ktIncompatible;
+import jdk.m3.collections.guava.primitives.Doubles;
 import org.jspecify.annotations.NullUnmarked;
 
 /** Unit test for {@link AtomicDouble}. */
 @NullUnmarked
+@GwtIncompatible
+@J2ktIncompatible
 public class AtomicDoubleTest extends JSR166TestCase {
 
   private static final double[] VALUES = {
@@ -29,10 +35,10 @@ public class AtomicDoubleTest extends JSR166TestCase {
     (double) Integer.MIN_VALUE,
     -Math.PI,
     -1.0,
-    -Double.MIN_VALUE,
+    -Doubles.MIN_POSITIVE_VALUE,
     -0.0,
     +0.0,
-    Double.MIN_VALUE,
+    Doubles.MIN_POSITIVE_VALUE,
     1.0,
     Math.PI,
     (double) Integer.MAX_VALUE,
@@ -42,11 +48,6 @@ public class AtomicDoubleTest extends JSR166TestCase {
     Double.NaN,
     Float.MAX_VALUE,
   };
-
-  /** The notion of equality used by AtomicDouble */
-  static boolean bitEquals(double x, double y) {
-    return Double.doubleToRawLongBits(x) == Double.doubleToRawLongBits(y);
-  }
 
   static void assertBitEquals(double x, double y) {
     assertEquals(Double.doubleToRawLongBits(x), Double.doubleToRawLongBits(y));
@@ -102,19 +103,15 @@ public class AtomicDoubleTest extends JSR166TestCase {
   }
 
   /** compareAndSet in one thread enables another waiting for value to succeed */
-  public void testCompareAndSetInMultipleThreads() throws Exception {
-    final AtomicDouble at = new AtomicDouble(1.0);
+  public void testCompareAndSetInMultipleThreads() {
+    AtomicDouble at = new AtomicDouble(1.0);
+    @SuppressWarnings("ThreadPriorityCheck") // doing our best to test for races
     Thread t =
-        newStartedThread(
-            new CheckedRunnable() {
-              @Override
-              @SuppressWarnings("ThreadPriorityCheck") // doing our best to test for races
-              public void realRun() {
-                while (!at.compareAndSet(2.0, 3.0)) {
-                  Thread.yield();
-                }
-              }
-            });
+        newStartedThread(() -> {
+          while (!at.compareAndSet(2.0, 3.0)) {
+            Thread.yield();
+          }
+        });
 
     assertTrue(at.compareAndSet(1.0, 2.0));
     awaitTermination(t);
@@ -130,9 +127,7 @@ public class AtomicDoubleTest extends JSR166TestCase {
       assertBitEquals(prev, at.get());
       assertFalse(at.weakCompareAndSet(unused, x));
       assertBitEquals(prev, at.get());
-      while (!at.weakCompareAndSet(prev, x)) {
-        ;
-      }
+      while (!at.weakCompareAndSet(prev, x)) {}
       assertBitEquals(x, at.get());
       prev = x;
     }
@@ -275,29 +270,29 @@ public class AtomicDoubleTest extends JSR166TestCase {
   }
 
   /** a deserialized serialized atomic holds same value */
-  public void testSerialization() throws Exception {
+  public void testSerialization() {
     AtomicDouble a = new AtomicDouble();
-    AtomicDouble b = serialClone(a);
-    assertNotSame(a, b);
+    AtomicDouble b = reserialize(a);
+    assertThat(b).isNotSameInstanceAs(a);
     a.set(-22.0);
-    AtomicDouble c = serialClone(a);
-    assertNotSame(b, c);
+    AtomicDouble c = reserialize(a);
+    assertThat(c).isNotSameInstanceAs(b);
     assertBitEquals(-22.0, a.get());
     assertBitEquals(0.0, b.get());
     assertBitEquals(-22.0, c.get());
     for (double x : VALUES) {
       AtomicDouble d = new AtomicDouble(x);
-      assertBitEquals(serialClone(d).get(), d.get());
+      assertBitEquals(reserialize(d).get(), d.get());
     }
   }
 
   /** toString returns current value */
   public void testToString() {
     AtomicDouble at = new AtomicDouble();
-    assertEquals("0.0", at.toString());
+    assertThat(at.toString()).isEqualTo("0.0");
     for (double x : VALUES) {
       at.set(x);
-      assertEquals(Double.toString(x), at.toString());
+      assertThat(at.toString()).isEqualTo(Double.toString(x));
     }
   }
 
@@ -324,10 +319,10 @@ public class AtomicDoubleTest extends JSR166TestCase {
   /** floatValue returns current value. */
   public void testFloatValue() {
     AtomicDouble at = new AtomicDouble();
-    assertEquals(0.0f, at.floatValue());
+    assertThat(at.floatValue()).isEqualTo(0.0f);
     for (double x : VALUES) {
       at.set(x);
-      assertEquals((float) x, at.floatValue());
+      assertThat(at.floatValue()).isEqualTo((float) x);
     }
   }
 

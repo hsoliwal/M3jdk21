@@ -17,6 +17,7 @@
 package jdk.m3.collections.guava.primitives;
 
 import static jdk.m3.collections.guava.base.Preconditions.checkNotNull;
+import static java.lang.System.arraycopy;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
@@ -39,7 +40,7 @@ import org.jspecify.annotations.NullUnmarked;
  *
  * @author Kevin Bourrillion
  */
-@GwtCompatible(emulated = true)
+@GwtCompatible
 @NullUnmarked
 @AndroidIncompatible // test-suite builders
 public class ByteArrayAsListTest extends TestCase {
@@ -84,14 +85,14 @@ public class ByteArrayAsListTest extends TestCase {
 
   public static final class BytesAsListGenerator extends TestByteListGenerator {
     @Override
-    protected List<Byte> create(Byte[] elements) {
+    List<Byte> create(Byte[] elements) {
       return asList(elements);
     }
   }
 
   public static final class BytesAsListHeadSubListGenerator extends TestByteListGenerator {
     @Override
-    protected List<Byte> create(Byte[] elements) {
+    List<Byte> create(Byte[] elements) {
       Byte[] suffix = {Byte.MIN_VALUE, Byte.MAX_VALUE};
       Byte[] all = concat(elements, suffix);
       return asList(all).subList(0, elements.length);
@@ -100,7 +101,7 @@ public class ByteArrayAsListTest extends TestCase {
 
   public static final class BytesAsListTailSubListGenerator extends TestByteListGenerator {
     @Override
-    protected List<Byte> create(Byte[] elements) {
+    List<Byte> create(Byte[] elements) {
       Byte[] prefix = {(byte) 86, (byte) 99};
       Byte[] all = concat(prefix, elements);
       return asList(all).subList(2, elements.length + 2);
@@ -109,7 +110,7 @@ public class ByteArrayAsListTest extends TestCase {
 
   public static final class BytesAsListMiddleSubListGenerator extends TestByteListGenerator {
     @Override
-    protected List<Byte> create(Byte[] elements) {
+    List<Byte> create(Byte[] elements) {
       Byte[] prefix = {Byte.MIN_VALUE, Byte.MAX_VALUE};
       Byte[] suffix = {(byte) 86, (byte) 99};
       Byte[] all = concat(concat(prefix, elements), suffix);
@@ -119,8 +120,8 @@ public class ByteArrayAsListTest extends TestCase {
 
   private static Byte[] concat(Byte[] left, Byte[] right) {
     Byte[] result = new Byte[left.length + right.length];
-    System.arraycopy(left, 0, result, 0, left.length);
-    System.arraycopy(right, 0, result, left.length, right.length);
+    arraycopy(left, 0, result, 0, left.length);
+    arraycopy(right, 0, result, left.length, right.length);
     return result;
   }
 
@@ -144,7 +145,7 @@ public class ByteArrayAsListTest extends TestCase {
      * Creates a new collection containing the given elements; implement this method instead of
      * {@link #create(Object...)}.
      */
-    protected abstract List<Byte> create(Byte[] elements);
+    abstract List<Byte> create(Byte[] elements);
 
     @Override
     public Byte[] createArray(int length) {

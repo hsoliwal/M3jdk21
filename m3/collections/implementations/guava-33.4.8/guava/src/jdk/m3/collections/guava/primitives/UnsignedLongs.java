@@ -51,7 +51,8 @@ import java.util.Comparator;
 public final class UnsignedLongs {
   private UnsignedLongs() {}
 
-  public static final long MAX_VALUE = -1L; // Equivalent to 2^64 - 1
+  /** A constant holding the maximum value an unsigned {@code long} can have, 2^64 - 1. */
+  public static final long MAX_VALUE = -1L;
 
   /**
    * A (self-inverse) bijection which converts the ordering on unsigned longs to the ordering on
@@ -339,7 +340,7 @@ public final class UnsignedLongs {
   @CanIgnoreReturnValue
   public static long parseUnsignedLong(String string, int radix) {
     checkNotNull(string);
-    if (string.length() == 0) {
+    if (string.isEmpty()) {
       throw new NumberFormatException("empty string");
     }
     if (radix < Character.MIN_RADIX || radix > Character.MAX_RADIX) {
@@ -405,7 +406,7 @@ public final class UnsignedLongs {
     static final int[] maxSafeDigits = new int[Character.MAX_RADIX + 1];
 
     static {
-      BigInteger overflow = new BigInteger("10000000000000000", 16);
+      BigInteger overflow = BigInteger.ONE.shiftLeft(64);
       for (int i = Character.MIN_RADIX; i <= Character.MAX_RADIX; i++) {
         maxValueDivs[i] = divide(MAX_VALUE, i);
         maxValueMods[i] = (int) remainder(MAX_VALUE, i);
@@ -428,7 +429,7 @@ public final class UnsignedLongs {
           return true;
         }
         // current == maxValueDivs[radix]
-        return (digit > maxValueMods[radix]);
+        return digit > maxValueMods[radix];
       }
 
       // current < 0: high bit is set

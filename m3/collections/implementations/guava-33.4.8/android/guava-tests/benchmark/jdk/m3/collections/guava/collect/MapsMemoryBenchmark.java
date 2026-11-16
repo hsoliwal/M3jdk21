@@ -29,6 +29,7 @@ import jdk.m3.collections.guava.collect.BenchmarkHelpers.MapImpl;
 import jdk.m3.collections.guava.collect.BenchmarkHelpers.MapsImplEnum;
 import jdk.m3.collections.guava.collect.BenchmarkHelpers.SortedMapImpl;
 import jdk.m3.collections.guava.collect.CollectionBenchmarkSampleData.Element;
+import java.util.HashMap;
 import java.util.Map;
 import org.jspecify.annotations.NullUnmarked;
 
@@ -37,7 +38,7 @@ import org.jspecify.annotations.NullUnmarked;
 public class MapsMemoryBenchmark {
   static final Map<String, MapsImplEnum> mapEnums =
       uniqueIndex(
-          Iterables.<MapsImplEnum>concat(
+          Iterables.concat(
               asList(MapImpl.values()), asList(SortedMapImpl.values()), asList(BiMapImpl.values())),
           toStringFunction());
 
@@ -77,10 +78,10 @@ public class MapsMemoryBenchmark {
   int elements;
 
   @BeforeExperiment
-  public void prepareContents() throws Exception {
+  public void prepareContents() {
     mapsImpl = mapEnums.get(implName);
     elems = new CollectionBenchmarkSampleData(elements);
-    contents = Maps.newHashMap();
+    contents = new HashMap<>();
     for (Element key : elems.getValuesInSet()) {
       contents.put(key, key);
     }
@@ -89,7 +90,7 @@ public class MapsMemoryBenchmark {
 
   @Benchmark
   @Footprint(exclude = Element.class)
-  public Map<Element, Element> create() throws Exception {
+  public Map<Element, Element> create() {
     return mapsImpl.create(contents);
   }
 

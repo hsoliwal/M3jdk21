@@ -17,12 +17,12 @@
 package jdk.m3.collections.guava.collect;
 
 import static jdk.m3.collections.guava.collect.Tables.immutableCell;
-import static com.google.common.truth.Truth.assertThat;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
-import jdk.m3.collections.guava.base.Objects;
 import jdk.m3.collections.guava.testing.EqualsTester;
+import java.util.Objects;
 import org.jspecify.annotations.NullMarked;
 
 /**
@@ -30,14 +30,14 @@ import org.jspecify.annotations.NullMarked;
  *
  * @author Gregory Kick
  */
-@GwtCompatible(emulated = true)
+@GwtCompatible
 @NullMarked
 public class SingletonImmutableTableTest extends AbstractImmutableTableTest {
   private final ImmutableTable<Character, Integer, String> testTable =
       new SingletonImmutableTable<>('a', 1, "blah");
 
   public void testHashCode() {
-    assertEquals(Objects.hashCode('a', 1, "blah"), testTable.hashCode());
+    assertEquals(Objects.hash('a', 1, "blah"), testTable.hashCode());
   }
 
   public void testCellSet() {
@@ -87,7 +87,7 @@ public class SingletonImmutableTableTest extends AbstractImmutableTableTest {
   }
 
   public void testToString() {
-    assertEquals("{a={1=blah}}", testTable.toString());
+    assertThat(testTable.toString()).isEqualTo("{a={1=blah}}");
   }
 
   public void testContains() {
@@ -113,10 +113,10 @@ public class SingletonImmutableTableTest extends AbstractImmutableTableTest {
   }
 
   public void testGet() {
-    assertEquals("blah", testTable.get('a', 1));
-    assertNull(testTable.get('a', 2));
-    assertNull(testTable.get('A', 1));
-    assertNull(testTable.get('A', 2));
+    assertThat(testTable.get('a', 1)).isEqualTo("blah");
+    assertThat(testTable.get('a', 2)).isNull();
+    assertThat(testTable.get('A', 1)).isNull();
+    assertThat(testTable.get('A', 2)).isNull();
   }
 
   public void testIsEmpty() {

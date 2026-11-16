@@ -17,13 +17,12 @@
 package jdk.m3.collections.guava.collect.testing.google;
 
 import static jdk.m3.collections.guava.collect.testing.features.CollectionFeature.SERIALIZABLE_INCLUDING_VIEWS;
+import static jdk.m3.collections.guava.testing.SerializableTester.reserialize;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.collect.Multiset;
 import jdk.m3.collections.guava.collect.testing.features.CollectionFeature;
-import jdk.m3.collections.guava.testing.SerializableTester;
 import java.util.Set;
-import org.junit.Ignore;
 
 /**
  * A generic JUnit test which tests multiset-specific serialization. Can't be invoked directly;
@@ -32,19 +31,16 @@ import org.junit.Ignore;
  * @author Louis Wasserman
  */
 @GwtCompatible // but no-op
-@Ignore("test runners must not instantiate and run this directly, only via suites we build")
-// @Ignore affects the Android test runner, which respects JUnit 4 annotations on JUnit 3 tests.
-@SuppressWarnings("JUnit4ClassUsedInJUnit3")
 public class MultisetSerializationTester<E> extends AbstractMultisetTester<E> {
   @CollectionFeature.Require(SERIALIZABLE_INCLUDING_VIEWS)
   public void testEntrySetSerialization() {
     Set<Multiset.Entry<E>> expected = getMultiset().entrySet();
-    assertEquals(expected, SerializableTester.reserialize(expected));
+    assertEquals(expected, reserialize(expected));
   }
 
   @CollectionFeature.Require(SERIALIZABLE_INCLUDING_VIEWS)
   public void testElementSetSerialization() {
     Set<E> expected = getMultiset().elementSet();
-    assertEquals(expected, SerializableTester.reserialize(expected));
+    assertEquals(expected, reserialize(expected));
   }
 }

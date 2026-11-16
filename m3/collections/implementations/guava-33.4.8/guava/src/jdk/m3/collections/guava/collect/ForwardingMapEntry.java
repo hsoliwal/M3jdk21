@@ -16,11 +16,13 @@
 
 package jdk.m3.collections.guava.collect;
 
+import static jdk.m3.collections.guava.base.Preconditions.checkNotNull;
+
 import jdk.m3.collections.guava.annotations.GwtCompatible;
-import jdk.m3.collections.guava.base.Objects;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Objects;
 import org.jspecify.annotations.Nullable;
 
 /**
@@ -34,7 +36,7 @@ import org.jspecify.annotations.Nullable;
  * should override {@code equals} as well, either providing your own implementation, or delegating
  * to the provided {@code standardEquals} method.
  *
- * <p>Each of the {@code standard} methods, where appropriate, use {@link Objects#equal} to test
+ * <p>Each of the {@code standard} methods, where appropriate, use {@link Objects#equals} to test
  * equality for both keys and values. This may not be the desired behavior for map implementations
  * that use non-standard notions of key equality, such as the entry of a {@code SortedMap} whose
  * comparator is not consistent with {@code equals}.
@@ -96,8 +98,8 @@ public abstract class ForwardingMapEntry<K extends @Nullable Object, V extends @
   protected boolean standardEquals(@Nullable Object object) {
     if (object instanceof Entry) {
       Entry<?, ?> that = (Entry<?, ?>) object;
-      return Objects.equal(this.getKey(), that.getKey())
-          && Objects.equal(this.getValue(), that.getValue());
+      return Objects.equals(this.getKey(), that.getKey())
+          && Objects.equals(this.getValue(), that.getValue());
     }
     return false;
   }
@@ -124,5 +126,28 @@ public abstract class ForwardingMapEntry<K extends @Nullable Object, V extends @
    */
   protected String standardToString() {
     return getKey() + "=" + getValue();
+  }
+
+  /**
+   * A simplified version of {@link ForwardingMapEntry} where subclasses can pass in an already
+   * constructed {@link Entry} as the delegate.
+   *
+   * <p>TODO(b/3417232): Consider making this public, but take into consideration whether it would
+   * then appear as a user-visible supertype for any classes.
+   */
+  abstract static class SimpleForwardingMapEntry<
+          K extends @Nullable Object, V extends @Nullable Object>
+      extends ForwardingMapEntry<K, V> {
+    private final Entry<K, V> delegate;
+
+    /** Constructor for use by subclasses. */
+    SimpleForwardingMapEntry(Entry<K, V> delegate) {
+      this.delegate = checkNotNull(delegate);
+    }
+
+    @Override
+    protected final Entry<K, V> delegate() {
+      return delegate;
+    }
   }
 }

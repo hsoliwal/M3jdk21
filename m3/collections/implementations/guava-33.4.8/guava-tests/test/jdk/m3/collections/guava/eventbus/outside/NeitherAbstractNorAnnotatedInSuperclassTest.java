@@ -16,18 +16,18 @@
 
 package jdk.m3.collections.guava.eventbus.outside;
 
-import static com.google.common.truth.Truth.assertThat;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
 
-import jdk.m3.collections.guava.collect.Lists;
 import jdk.m3.collections.guava.eventbus.Subscribe;
 import jdk.m3.collections.guava.eventbus.outside.NeitherAbstractNorAnnotatedInSuperclassTest.SubClass;
+import java.util.ArrayList;
 import java.util.List;
 
 public class NeitherAbstractNorAnnotatedInSuperclassTest extends AbstractEventBusTest<SubClass> {
   static class SuperClass {
-    final List<Object> neitherOverriddenNorAnnotatedEvents = Lists.newArrayList();
-    final List<Object> overriddenInSubclassNowhereAnnotatedEvents = Lists.newArrayList();
-    final List<Object> overriddenAndAnnotatedInSubclassEvents = Lists.newArrayList();
+    final List<Object> neitherOverriddenNorAnnotatedEvents = new ArrayList<>();
+    final List<Object> overriddenInSubclassNowhereAnnotatedEvents = new ArrayList<>();
+    final List<Object> overriddenAndAnnotatedInSubclassEvents = new ArrayList<>();
 
     public void neitherOverriddenNorAnnotated(Object o) {
       neitherOverriddenNorAnnotatedEvents.add(o);

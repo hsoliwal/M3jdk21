@@ -14,7 +14,10 @@
 
 package jdk.m3.collections.guava.reflect;
 
+import static jdk.m3.collections.guava.base.Preconditions.checkArgument;
 import static jdk.m3.collections.guava.base.Preconditions.checkNotNull;
+import static jdk.m3.collections.guava.reflect.Types.newParameterizedType;
+import static java.lang.System.arraycopy;
 
 import jdk.m3.collections.guava.collect.ImmutableList;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
@@ -207,7 +210,7 @@ public abstract class Invokable<T, R> implements AnnotatedElement, Member {
   }
 
   @Override
-  public boolean equals(@Nullable Object obj) {
+  public final boolean equals(@Nullable Object obj) {
     if (obj instanceof Invokable) {
       Invokable<?, ?> that = (Invokable<?, ?>) obj;
       return getOwnerType().equals(that.getOwnerType()) && member.equals(that.member);
@@ -216,7 +219,7 @@ public abstract class Invokable<T, R> implements AnnotatedElement, Member {
   }
 
   @Override
-  public int hashCode() {
+  public final int hashCode() {
     return member.hashCode();
   }
 
@@ -309,10 +312,11 @@ public abstract class Invokable<T, R> implements AnnotatedElement, Member {
 
   /** Explicitly specifies the return type of this {@code Invokable}. */
   public final <R1 extends R> Invokable<T, R1> returning(TypeToken<R1> returnType) {
-    if (!returnType.isSupertypeOf(getReturnType())) {
-      throw new IllegalArgumentException(
-          "Invokable is known to return " + getReturnType() + ", not " + returnType);
-    }
+    checkArgument(
+        returnType.isSupertypeOf(getReturnType()),
+        "Invokable is known to return %s, not %s",
+        getReturnType(),
+        returnType);
     @SuppressWarnings("unchecked") // guarded by previous check
     Invokable<T, R1> specialized = (Invokable<T, R1>) this;
     return specialized;
@@ -425,7 +429,7 @@ public abstract class Invokable<T, R> implements AnnotatedElement, Member {
       Class<?> declaringClass = getDeclaringClass();
       TypeVariable<?>[] typeParams = declaringClass.getTypeParameters();
       if (typeParams.length > 0) {
-        return Types.newParameterizedType(declaringClass, typeParams);
+        return newParameterizedType(declaringClass, typeParams);
       } else {
         return declaringClass;
       }
@@ -470,8 +474,8 @@ public abstract class Invokable<T, R> implements AnnotatedElement, Member {
       TypeVariable<?>[] declaredByConstructor = constructor.getTypeParameters();
       TypeVariable<?>[] result =
           new TypeVariable<?>[declaredByClass.length + declaredByConstructor.length];
-      System.arraycopy(declaredByClass, 0, result, 0, declaredByClass.length);
-      System.arraycopy(
+      arraycopy(declaredByClass, 0, result, 0, declaredByClass.length);
+      arraycopy(
           declaredByConstructor, 0, result, declaredByClass.length, declaredByConstructor.length);
       return result;
     }

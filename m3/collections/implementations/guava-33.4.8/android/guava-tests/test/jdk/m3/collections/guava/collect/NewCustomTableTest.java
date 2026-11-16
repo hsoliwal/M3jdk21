@@ -16,11 +16,13 @@
 
 package jdk.m3.collections.guava.collect;
 
+import static jdk.m3.collections.guava.collect.Maps.newTreeMap;
 import static jdk.m3.collections.guava.collect.Tables.newCustomTable;
-import static com.google.common.truth.Truth.assertThat;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.base.Supplier;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.TreeMap;
 import org.jspecify.annotations.NullMarked;
@@ -36,15 +38,15 @@ import org.jspecify.annotations.Nullable;
 public class NewCustomTableTest extends AbstractTableTest<Character> {
 
   @Override
-  protected Table<String, Integer, Character> create(@Nullable Object... data) {
+  Table<String, Integer, Character> create(@Nullable Object... data) {
     Supplier<TreeMap<Integer, Character>> factory =
         new Supplier<TreeMap<Integer, Character>>() {
           @Override
           public TreeMap<Integer, Character> get() {
-            return Maps.newTreeMap();
+            return newTreeMap();
           }
         };
-    Map<String, Map<Integer, Character>> backingMap = Maps.newLinkedHashMap();
+    Map<String, Map<Integer, Character>> backingMap = new LinkedHashMap<>();
     Table<String, Integer, Character> table = newCustomTable(backingMap, factory);
     populate(table, data);
     return table;

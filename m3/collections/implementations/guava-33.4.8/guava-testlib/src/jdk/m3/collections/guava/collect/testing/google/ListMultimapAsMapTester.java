@@ -14,7 +14,7 @@
 
 package jdk.m3.collections.guava.collect.testing.google;
 
-import static jdk.m3.collections.guava.collect.Sets.newHashSet;
+import static jdk.m3.collections.guava.collect.Lists.newArrayList;
 import static jdk.m3.collections.guava.collect.testing.Helpers.mapEntry;
 import static jdk.m3.collections.guava.collect.testing.features.CollectionSize.SEVERAL;
 import static jdk.m3.collections.guava.collect.testing.features.MapFeature.SUPPORTS_REMOVE;
@@ -22,20 +22,19 @@ import static java.util.Collections.singletonList;
 import static java.util.Collections.singletonMap;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
-import jdk.m3.collections.guava.collect.Lists;
-import jdk.m3.collections.guava.collect.Maps;
 import jdk.m3.collections.guava.collect.testing.features.CollectionSize;
 import jdk.m3.collections.guava.collect.testing.features.MapFeature;
 import jdk.m3.collections.guava.testing.EqualsTester;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
-import org.junit.Ignore;
 
 /**
  * Testers for {@link jdk.m3.collections.guava.collect.ListMultimap#asMap}.
@@ -45,9 +44,6 @@ import org.junit.Ignore;
  * @param <V> The value type of the tested multimap.
  */
 @GwtCompatible
-@Ignore("test runners must not instantiate and run this directly, only via suites we build")
-// @Ignore affects the Android test runner, which respects JUnit 4 annotations on JUnit 3 tests.
-@SuppressWarnings("JUnit4ClassUsedInJUnit3")
 @NullMarked
 public class ListMultimapAsMapTester<K extends @Nullable Object, V extends @Nullable Object>
     extends AbstractListMultimapTester<K, V> {
@@ -75,18 +71,18 @@ public class ListMultimapAsMapTester<K extends @Nullable Object, V extends @Null
   @CollectionSize.Require(SEVERAL)
   public void testEquals() {
     resetContainer(mapEntry(k0(), v0()), mapEntry(k1(), v0()), mapEntry(k0(), v3()));
-    Map<K, Collection<V>> expected = Maps.newHashMap();
-    expected.put(k0(), Lists.newArrayList(v0(), v3()));
-    expected.put(k1(), Lists.newArrayList(v0()));
+    Map<K, Collection<V>> expected = new HashMap<>();
+    expected.put(k0(), newArrayList(v0(), v3()));
+    expected.put(k1(), newArrayList(v0()));
     new EqualsTester().addEqualityGroup(expected, multimap().asMap()).testEquals();
   }
 
   @CollectionSize.Require(SEVERAL)
   public void testEntrySetEquals() {
     resetContainer(mapEntry(k0(), v0()), mapEntry(k1(), v0()), mapEntry(k0(), v3()));
-    Set<Entry<K, Collection<V>>> expected = newHashSet();
-    expected.add(mapEntry(k0(), (Collection<V>) Lists.newArrayList(v0(), v3())));
-    expected.add(mapEntry(k1(), (Collection<V>) Lists.newArrayList(v0())));
+    Set<Entry<K, Collection<V>>> expected = new HashSet<>();
+    expected.add(mapEntry(k0(), newArrayList(v0(), v3())));
+    expected.add(mapEntry(k1(), newArrayList(v0())));
     new EqualsTester().addEqualityGroup(expected, multimap().asMap().entrySet()).testEquals();
   }
 
@@ -102,6 +98,6 @@ public class ListMultimapAsMapTester<K extends @Nullable Object, V extends @Null
     resetContainer(mapEntry(k0(), v0()), mapEntry(k1(), v0()), mapEntry(k0(), v3()));
     assertTrue(multimap().asMap().values().remove(singletonList(v0())));
     assertEquals(2, multimap().size());
-    assertEquals(singletonMap(k0(), Lists.newArrayList(v0(), v3())), multimap().asMap());
+    assertEquals(singletonMap(k0(), newArrayList(v0(), v3())), multimap().asMap());
   }
 }

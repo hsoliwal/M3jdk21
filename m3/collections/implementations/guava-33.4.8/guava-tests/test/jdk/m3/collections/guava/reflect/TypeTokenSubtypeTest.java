@@ -16,7 +16,7 @@
 
 package jdk.m3.collections.guava.reflect;
 
-import static com.google.common.truth.Truth.assertThat;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
 import static org.junit.Assert.assertThrows;
 
 import java.io.Serializable;
@@ -25,7 +25,6 @@ import java.util.List;
 import junit.framework.TestCase;
 import org.jspecify.annotations.NullUnmarked;
 
-@AndroidIncompatible // lots of failures, possibly some related to bad equals() implementations?
 @NullUnmarked
 public class TypeTokenSubtypeTest extends TestCase {
 
@@ -41,43 +40,38 @@ public class TypeTokenSubtypeTest extends TestCase {
    * This test reproduces the bug in canonicalizeWildcardType() when the type variable is
    * recursively bounded.
    */
-  public void testRecursiveWildcardSubtypeBug() throws Exception {
+  public void testRecursiveWildcardSubtypeBug() {
     Exception e =
         assertThrows(
             Exception.class, () -> new RecursiveTypeBoundBugExample<>().testAllDeclarations());
     assertThat(e).hasCauseThat().isInstanceOf(AssertionError.class);
   }
 
-  @SuppressWarnings("RestrictedApiChecker") // crashes under JDK8, which EP no longer supports
   public void testSubtypeOfInnerClass_nonStaticAnonymousClass() {
     TypeToken<?> supertype = new TypeToken<Mall<Outdoor>.Shop<Electronics>>() {};
     Class<?> subclass = new Mall<Outdoor>().new Shop<Electronics>() {}.getClass();
     assertTrue(TypeToken.of(subclass).isSubtypeOf(supertype));
   }
 
-  @SuppressWarnings("RestrictedApiChecker") // crashes under JDK8, which EP no longer supports
   public void testSubtypeOfInnerClass_nonStaticAnonymousClass_typeParameterOfOwnerTypeNotMatch() {
     TypeToken<?> supertype = new TypeToken<Mall<Outdoor>.Shop<Electronics>>() {};
     Class<?> subclass = new Mall<Indoor>().new Shop<Electronics>() {}.getClass();
     assertFalse(TypeToken.of(subclass).isSubtypeOf(supertype));
   }
 
-  @SuppressWarnings("RestrictedApiChecker") // crashes under JDK8, which EP no longer supports
   public void testSubtypeOfInnerClass_nonStaticAnonymousClass_typeParameterOfInnerTypeNotMatch() {
     TypeToken<?> supertype = new TypeToken<Mall<Outdoor>.Shop<Electronics>>() {};
     Class<?> subclass = new Mall<Outdoor>().new Shop<Grocery>() {}.getClass();
     assertFalse(TypeToken.of(subclass).isSubtypeOf(supertype));
   }
 
-  @SuppressWarnings("RestrictedApiChecker") // crashes under JDK8, which EP no longer supports
-  public static void testSubtypeOfInnerClass_staticAnonymousClass() {
+  public void testSubtypeOfInnerClass_staticAnonymousClass() {
     TypeToken<?> supertype = new TypeToken<Mall<Outdoor>.Shop<Electronics>>() {};
     Class<?> subclass = new Mall<Outdoor>().new Shop<Electronics>() {}.getClass();
     assertTrue(TypeToken.of(subclass).isSubtypeOf(supertype));
   }
 
-  @SuppressWarnings("RestrictedApiChecker") // crashes under JDK8, which EP no longer supports
-  public static void testSubtypeOfStaticAnonymousClass() {
+  public void testSubtypeOfStaticAnonymousClass() {
     Class<?> superclass = new Mall<Outdoor>().new Shop<Electronics>() {}.getClass();
     assertTrue(TypeToken.of(superclass).isSubtypeOf(superclass));
     assertFalse(
@@ -85,7 +79,6 @@ public class TypeTokenSubtypeTest extends TestCase {
             .isSubtypeOf(superclass));
   }
 
-  @SuppressWarnings("RestrictedApiChecker") // crashes under JDK8, which EP no longer supports
   public void testSubtypeOfNonStaticAnonymousClass() {
     Class<?> superclass = new Mall<Outdoor>().new Shop<Electronics>() {}.getClass();
     assertTrue(TypeToken.of(superclass).isSubtypeOf(superclass));

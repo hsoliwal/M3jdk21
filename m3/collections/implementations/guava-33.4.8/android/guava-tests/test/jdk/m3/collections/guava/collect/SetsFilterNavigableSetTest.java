@@ -16,6 +16,8 @@
 
 package jdk.m3.collections.guava.collect;
 
+import static jdk.m3.collections.guava.collect.Sets.newTreeSet;
+
 import jdk.m3.collections.guava.base.Predicate;
 import jdk.m3.collections.guava.collect.FilteredCollectionsTestUtil.AbstractFilteredNavigableSetTest;
 import java.util.NavigableSet;
@@ -25,7 +27,7 @@ import org.jspecify.annotations.NullUnmarked;
 public final class SetsFilterNavigableSetTest extends AbstractFilteredNavigableSetTest {
   @Override
   NavigableSet<Integer> createUnfiltered(Iterable<Integer> contents) {
-    return Sets.newTreeSet(contents);
+    return newTreeSet(contents);
   }
 
   @Override

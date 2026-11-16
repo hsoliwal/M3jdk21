@@ -14,6 +14,8 @@
 
 package jdk.m3.collections.guava.util.concurrent;
 
+import static jdk.m3.collections.guava.util.concurrent.MoreExecutors.newThread;
+import static jdk.m3.collections.guava.util.concurrent.MoreExecutors.renamingDecorator;
 import static jdk.m3.collections.guava.util.concurrent.Platform.restoreInterruptIfIsInterruptedException;
 
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
@@ -54,33 +56,31 @@ public abstract class AbstractIdleService implements Service {
   @WeakOuter
   private final class DelegateService extends AbstractService {
     @Override
-    protected final void doStart() {
-      MoreExecutors.renamingDecorator(executor(), threadNameSupplier)
-          .execute(
-              () -> {
-                try {
-                  startUp();
-                  notifyStarted();
-                } catch (Throwable t) {
-                  restoreInterruptIfIsInterruptedException(t);
-                  notifyFailed(t);
-                }
-              });
+    protected void doStart() {
+      renamingDecorator(executor(), threadNameSupplier)
+          .execute(() -> {
+            try {
+              startUp();
+              notifyStarted();
+            } catch (Throwable t) {
+              restoreInterruptIfIsInterruptedException(t);
+              notifyFailed(t);
+            }
+          });
     }
 
     @Override
-    protected final void doStop() {
-      MoreExecutors.renamingDecorator(executor(), threadNameSupplier)
-          .execute(
-              () -> {
-                try {
-                  shutDown();
-                  notifyStopped();
-                } catch (Throwable t) {
-                  restoreInterruptIfIsInterruptedException(t);
-                  notifyFailed(t);
-                }
-              });
+    protected void doStop() {
+      renamingDecorator(executor(), threadNameSupplier)
+          .execute(() -> {
+            try {
+              shutDown();
+              notifyStopped();
+            } catch (Throwable t) {
+              restoreInterruptIfIsInterruptedException(t);
+              notifyFailed(t);
+            }
+          });
     }
 
     @Override
@@ -106,7 +106,7 @@ public abstract class AbstractIdleService implements Service {
    * stopped, and should return promptly.
    */
   protected Executor executor() {
-    return command -> MoreExecutors.newThread(threadNameSupplier.get(), command).start();
+    return command -> newThread(threadNameSupplier.get(), command).start();
   }
 
   @Override

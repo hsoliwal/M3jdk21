@@ -14,6 +14,8 @@
 
 package jdk.m3.collections.guava.base.internal;
 
+import static java.util.Objects.requireNonNull;
+
 import java.lang.ref.PhantomReference;
 import java.lang.ref.Reference;
 import java.lang.ref.ReferenceQueue;
@@ -43,12 +45,9 @@ import org.jspecify.annotations.Nullable;
  * collected, and this class can detect when the main class loader has been garbage collected and
  * stop itself.
  */
-public class Finalizer implements Runnable {
+public final class Finalizer implements Runnable {
 
   private static final Logger logger = Logger.getLogger(Finalizer.class.getName());
-
-  /** Name of FinalizableReference.class. */
-  private static final String FINALIZABLE_REFERENCE = "jdk.m3.collections.guava.base.FinalizableReference";
 
   /**
    * Starts the Finalizer thread. FinalizableReferenceQueue calls this method reflectively.
@@ -64,19 +63,16 @@ public class Finalizer implements Runnable {
       ReferenceQueue<Object> queue,
       PhantomReference<Object> frqReference) {
     /*
-     * We use FinalizableReference.class for two things:
+     * We use finalizableReferenceClass for two things:
      *
      * 1) To invoke FinalizableReference.finalizeReferent()
      *
      * 2) To detect when FinalizableReference's class loader has to be garbage collected, at which
      * point, Finalizer can stop running
      */
-    if (!finalizableReferenceClass.getName().equals(FINALIZABLE_REFERENCE)) {
-      throw new IllegalArgumentException("Expected " + FINALIZABLE_REFERENCE + ".");
-    }
 
     Finalizer finalizer = new Finalizer(finalizableReferenceClass, queue, frqReference);
-    String threadName = Finalizer.class.getName();
+    String threadName = "jdk.m3.collections.guava.base.internal.Finalizer";
     Thread thread = null;
     if (bigThreadConstructor != null) {
       try {
@@ -230,6 +226,16 @@ public class Finalizer implements Runnable {
   }
 
   private static @Nullable Field getInheritableThreadLocalsField() {
+    if (isAndroid()) {
+      /*
+       * We need not worry about class unloading under Android. Plus, this approach doesn't always
+       * work under Android.
+       *
+       * (Clearing inheritableThreadLocals could still be useful independent of class unloading, but
+       * that's a larger problem, which we don't attempt to solve anywhere else in Guava.)
+       */
+      return null;
+    }
     try {
       Field inheritableThreadLocals = Thread.class.getDeclaredField("inheritableThreadLocals");
       inheritableThreadLocals.setAccessible(true);
@@ -251,5 +257,9 @@ public class Finalizer implements Runnable {
       // Probably pre Java 9. We'll fall back to Thread.inheritableThreadLocals.
       return null;
     }
+  }
+
+  private static boolean isAndroid() {
+    return requireNonNull(System.getProperty("java.runtime.name", "")).contains("Android");
   }
 }

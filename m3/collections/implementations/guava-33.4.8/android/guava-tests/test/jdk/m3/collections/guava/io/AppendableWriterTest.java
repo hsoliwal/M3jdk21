@@ -16,6 +16,7 @@
 
 package jdk.m3.collections.guava.io;
 
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
 import static org.junit.Assert.assertThrows;
 
 import java.io.Closeable;
@@ -36,7 +37,7 @@ public class AppendableWriterTest extends IoTestCase {
   private static class SpyAppendable implements Appendable, Flushable, Closeable {
     boolean flushed;
     boolean closed;
-    StringBuilder result = new StringBuilder();
+    final StringBuilder result = new StringBuilder();
 
     @Override
     public Appendable append(CharSequence csq) {
@@ -78,7 +79,7 @@ public class AppendableWriterTest extends IoTestCase {
     writer.write("Whirled".toCharArray(), 3, 2);
     writer.write("Mad! Mad, I say", 2, 2);
 
-    assertEquals("Hello, World!", builder.toString());
+    assertThat(builder.toString()).isEqualTo("Hello, World!");
   }
 
   public void testAppendMethods() throws IOException {
@@ -90,7 +91,7 @@ public class AppendableWriterTest extends IoTestCase {
     writer.append("The World Wide Web", 4, 9);
     writer.append("!");
 
-    assertEquals("Hello, World!", builder.toString());
+    assertThat(builder.toString()).isEqualTo("Hello, World!");
   }
 
   public void testCloseFlush() throws IOException {
@@ -119,7 +120,7 @@ public class AppendableWriterTest extends IoTestCase {
 
     assertThrows(IOException.class, () -> writer.write(" Greg"));
 
-    assertThrows(IOException.class, () -> writer.flush());
+    assertThrows(IOException.class, writer::flush);
 
     // close()ing already closed writer is allowed
     writer.close();

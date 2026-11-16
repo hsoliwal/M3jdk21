@@ -17,12 +17,12 @@
 package jdk.m3.collections.guava.testing;
 
 import static jdk.m3.collections.guava.base.Preconditions.checkNotNull;
+import static java.util.Arrays.asList;
 import static junit.framework.Assert.assertTrue;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
@@ -44,7 +44,7 @@ import org.jspecify.annotations.Nullable;
  * </pre>
  *
  * @author Louis Wasserman
- * @since 21.0
+ * @since 21.0 (but since 33.5.0 in the Android flavor)
  */
 @GwtCompatible
 @NullMarked
@@ -86,8 +86,8 @@ public final class CollectorTester<
     /** Get one accumulator and accumulate the elements into it sequentially. */
     SEQUENTIAL {
       @Override
-      final <T extends @Nullable Object, A extends @Nullable Object, R extends @Nullable Object>
-          A result(Collector<T, A, R> collector, Iterable<T> inputs) {
+      <T extends @Nullable Object, A extends @Nullable Object, R extends @Nullable Object> A result(
+          Collector<T, A, R> collector, Iterable<T> inputs) {
         A accum = collector.supplier().get();
         for (T input : inputs) {
           collector.accumulator().accept(accum, input);
@@ -98,8 +98,8 @@ public final class CollectorTester<
     /** Get one accumulator for each element and merge the accumulators left-to-right. */
     MERGE_LEFT_ASSOCIATIVE {
       @Override
-      final <T extends @Nullable Object, A extends @Nullable Object, R extends @Nullable Object>
-          A result(Collector<T, A, R> collector, Iterable<T> inputs) {
+      <T extends @Nullable Object, A extends @Nullable Object, R extends @Nullable Object> A result(
+          Collector<T, A, R> collector, Iterable<T> inputs) {
         A accum = collector.supplier().get();
         for (T input : inputs) {
           A newAccum = collector.supplier().get();
@@ -112,8 +112,8 @@ public final class CollectorTester<
     /** Get one accumulator for each element and merge the accumulators right-to-left. */
     MERGE_RIGHT_ASSOCIATIVE {
       @Override
-      final <T extends @Nullable Object, A extends @Nullable Object, R extends @Nullable Object>
-          A result(Collector<T, A, R> collector, Iterable<T> inputs) {
+      <T extends @Nullable Object, A extends @Nullable Object, R extends @Nullable Object> A result(
+          Collector<T, A, R> collector, Iterable<T> inputs) {
         List<A> stack = new ArrayList<>();
         for (T input : inputs) {
           A newAccum = collector.supplier().get();
@@ -150,7 +150,7 @@ public final class CollectorTester<
   @CanIgnoreReturnValue
   @SuppressWarnings("nullness") // TODO(cpovirk): Remove after we fix whatever the bug is.
   public final CollectorTester<T, A, R> expectCollects(R expectedResult, T... inputs) {
-    List<T> list = Arrays.asList(inputs);
+    List<T> list = asList(inputs);
     doExpectCollects(expectedResult, list);
     if (collector.characteristics().contains(Collector.Characteristics.UNORDERED)) {
       Collections.reverse(list);

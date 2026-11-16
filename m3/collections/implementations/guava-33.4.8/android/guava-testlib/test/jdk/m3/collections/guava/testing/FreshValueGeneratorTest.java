@@ -16,6 +16,8 @@
 
 package jdk.m3.collections.guava.testing;
 
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
+
 import jdk.m3.collections.guava.base.CharMatcher;
 import jdk.m3.collections.guava.base.Equivalence;
 import jdk.m3.collections.guava.base.Function;
@@ -45,7 +47,6 @@ import jdk.m3.collections.guava.collect.ImmutableTable;
 import jdk.m3.collections.guava.collect.LinkedHashMultimap;
 import jdk.m3.collections.guava.collect.LinkedHashMultiset;
 import jdk.m3.collections.guava.collect.ListMultimap;
-import jdk.m3.collections.guava.collect.Maps;
 import jdk.m3.collections.guava.collect.Multimap;
 import jdk.m3.collections.guava.collect.Multiset;
 import jdk.m3.collections.guava.collect.Ordering;
@@ -101,6 +102,7 @@ import java.util.SortedMap;
 import java.util.SortedSet;
 import java.util.TreeMap;
 import java.util.TreeSet;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.MatchResult;
@@ -116,7 +118,6 @@ import org.jspecify.annotations.NullUnmarked;
 @NullUnmarked
 public class FreshValueGeneratorTest extends TestCase {
 
-  @AndroidIncompatible // problem with equality of Type objects?
   public void testFreshInstance() {
     assertFreshInstances(
         String.class,
@@ -359,7 +360,7 @@ public class FreshValueGeneratorTest extends TestCase {
   public void testConcurrentMap() {
     assertFreshInstance(new TypeToken<ConcurrentMap<String, ?>>() {});
     assertCanGenerateOnly(
-        new TypeToken<ConcurrentMap<EmptyEnum, String>>() {}, Maps.newConcurrentMap());
+        new TypeToken<ConcurrentMap<EmptyEnum, String>>() {}, new ConcurrentHashMap<>());
   }
 
   public void testMultimap() {
@@ -427,7 +428,6 @@ public class FreshValueGeneratorTest extends TestCase {
     assertFreshInstance(new TypeToken<List<TwoConstantEnum>>() {}, 2);
   }
 
-  @AndroidIncompatible // problem with equality of Type objects?
   public void testGoogleOptional() {
     FreshValueGenerator generator = new FreshValueGenerator();
     assertEquals(
@@ -452,32 +452,31 @@ public class FreshValueGeneratorTest extends TestCase {
   public void testAddSampleInstances_twoInstances() {
     FreshValueGenerator generator = new FreshValueGenerator();
     generator.addSampleInstances(String.class, ImmutableList.of("a", "b"));
-    assertEquals("a", generator.generateFresh(String.class));
-    assertEquals("b", generator.generateFresh(String.class));
-    assertEquals("a", generator.generateFresh(String.class));
+    assertThat(generator.generateFresh(String.class)).isEqualTo("a");
+    assertThat(generator.generateFresh(String.class)).isEqualTo("b");
+    assertThat(generator.generateFresh(String.class)).isEqualTo("a");
   }
 
   public void testAddSampleInstances_oneInstance() {
     FreshValueGenerator generator = new FreshValueGenerator();
     generator.addSampleInstances(String.class, ImmutableList.of("a"));
-    assertEquals("a", generator.generateFresh(String.class));
-    assertEquals("a", generator.generateFresh(String.class));
+    assertThat(generator.generateFresh(String.class)).isEqualTo("a");
+    assertThat(generator.generateFresh(String.class)).isEqualTo("a");
   }
 
   public void testAddSampleInstances_noInstance() {
     FreshValueGenerator generator = new FreshValueGenerator();
-    generator.addSampleInstances(String.class, ImmutableList.<String>of());
-    assertEquals(
-        new FreshValueGenerator().generateFresh(String.class),
-        generator.generateFresh(String.class));
+    generator.addSampleInstances(String.class, ImmutableList.of());
+    assertThat(generator.generateFresh(String.class))
+        .isEqualTo(new FreshValueGenerator().generateFresh(String.class));
   }
 
   public void testFreshCurrency() {
     FreshValueGenerator generator = new FreshValueGenerator();
     // repeat a few times to make sure we don't stumble upon a bad Locale
-    assertNotNull(generator.generateFresh(Currency.class));
-    assertNotNull(generator.generateFresh(Currency.class));
-    assertNotNull(generator.generateFresh(Currency.class));
+    assertThat(generator.generateFresh(Currency.class)).isNotNull();
+    assertThat(generator.generateFresh(Currency.class)).isNotNull();
+    assertThat(generator.generateFresh(Currency.class)).isNotNull();
   }
 
   public void testNulls() throws Exception {
@@ -529,15 +528,15 @@ public class FreshValueGeneratorTest extends TestCase {
   private static void assertCanGenerateOnly(TypeToken<?> type, Object expected) {
     FreshValueGenerator generator = new FreshValueGenerator();
     assertValueAndTypeEquals(expected, generator.generateFresh(type));
-    assertNull(generator.generateFresh(type));
+    assertThat(generator.generateFresh(type)).isNull();
   }
 
   private static void assertNotInstantiable(TypeToken<?> type) {
-    assertNull(new FreshValueGenerator().generateFresh(type));
+    assertThat(new FreshValueGenerator().generateFresh(type)).isNull();
   }
 
   private static void assertValueAndTypeEquals(Object expected, Object actual) {
     assertEquals(expected, actual);
-    assertEquals(expected.getClass(), actual.getClass());
+    assertThat(actual.getClass()).isEqualTo(expected.getClass());
   }
 }

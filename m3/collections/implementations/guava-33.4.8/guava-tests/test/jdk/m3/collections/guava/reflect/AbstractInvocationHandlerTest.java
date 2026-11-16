@@ -17,10 +17,11 @@
 package jdk.m3.collections.guava.reflect;
 
 import static jdk.m3.collections.guava.base.Preconditions.checkNotNull;
+import static jdk.m3.collections.guava.testing.SerializableTester.reserialize;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
 
 import jdk.m3.collections.guava.collect.ImmutableList;
 import jdk.m3.collections.guava.testing.EqualsTester;
-import jdk.m3.collections.guava.testing.SerializableTester;
 import java.io.Serializable;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
@@ -47,7 +48,7 @@ public class AbstractInvocationHandlerTest extends TestCase {
 
   public void testToString() {
     List<String> proxy = newDelegatingList(LIST1);
-    assertEquals(Proxy.getInvocationHandler(proxy).toString(), proxy.toString());
+    assertThat(proxy.toString()).isEqualTo(Proxy.getInvocationHandler(proxy).toString());
   }
 
   interface A {}
@@ -68,7 +69,7 @@ public class AbstractInvocationHandlerTest extends TestCase {
         .addEqualityGroup(
             newDelegatingListWithEquals(LIST1),
             newDelegatingListWithEquals(LIST1),
-            SerializableTester.reserialize(newDelegatingListWithEquals(LIST1)))
+            reserialize(newDelegatingListWithEquals(LIST1)))
         .addEqualityGroup(
             newDelegatingListWithEquals(LIST2),
             newProxyWithSubHandler1(LIST2), // Makes sure type of handler doesn't affect equality

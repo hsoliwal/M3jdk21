@@ -22,7 +22,7 @@ import static jdk.m3.collections.guava.collect.testing.features.MapFeature.ALLOW
 import static jdk.m3.collections.guava.collect.testing.features.MapFeature.ALLOWS_NULL_VALUES;
 import static jdk.m3.collections.guava.collect.testing.features.MapFeature.SUPPORTS_PUT;
 import static jdk.m3.collections.guava.collect.testing.features.MapFeature.SUPPORTS_REMOVE;
-import static jdk.m3.collections.guava.collect.testing.testers.ReflectionFreeAssertThrows.assertThrows;
+import static org.junit.Assert.assertThrows;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
@@ -35,7 +35,6 @@ import java.lang.reflect.Method;
 import java.util.Hashtable;
 import java.util.Map;
 import junit.framework.AssertionFailedError;
-import org.junit.Ignore;
 
 /**
  * A generic JUnit test which tests {@link Map#merge}. Can't be invoked directly; please see {@link
@@ -43,10 +42,7 @@ import org.junit.Ignore;
  *
  * @author Louis Wasserman
  */
-@GwtCompatible(emulated = true)
-@Ignore("test runners must not instantiate and run this directly, only via suites we build")
-// @Ignore affects the Android test runner, which respects JUnit 4 annotations on JUnit 3 tests.
-@SuppressWarnings("JUnit4ClassUsedInJUnit3")
+@GwtCompatible
 public class MapMergeTester<K, V> extends AbstractMapTester<K, V> {
   @MapFeature.Require(SUPPORTS_PUT)
   public void testAbsent() {
@@ -152,24 +148,30 @@ public class MapMergeTester<K, V> extends AbstractMapTester<K, V> {
   }
 
   public void testMergeNullValue() {
-    try {
-      getMap()
-          .merge(
-              k0(),
-              null,
-              (oldV, newV) -> {
-                throw new AssertionFailedError("Should not call merge function if value was null");
-              });
-      fail("Expected NullPointerException or UnsupportedOperationException");
-    } catch (NullPointerException | UnsupportedOperationException expected) {
+    RuntimeException expected =
+        assertThrows(
+            RuntimeException.class,
+            () ->
+                getMap()
+                    .merge(
+                        k0(),
+                        null,
+                        (oldV, newV) -> {
+                          throw new AssertionFailedError(
+                              "Should not call merge function if value was null");
+                        }));
+    if (!(expected instanceof NullPointerException
+        || expected instanceof UnsupportedOperationException)) {
+      throw expected;
     }
   }
 
   public void testMergeNullFunction() {
-    try {
-      getMap().merge(k0(), v3(), null);
-      fail("Expected NullPointerException or UnsupportedOperationException");
-    } catch (NullPointerException | UnsupportedOperationException expected) {
+    RuntimeException expected =
+        assertThrows(RuntimeException.class, () -> getMap().merge(k0(), v3(), null));
+    if (!(expected instanceof NullPointerException
+        || expected instanceof UnsupportedOperationException)) {
+      throw expected;
     }
   }
 

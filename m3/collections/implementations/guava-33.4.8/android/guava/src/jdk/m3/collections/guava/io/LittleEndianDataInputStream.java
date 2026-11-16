@@ -14,6 +14,8 @@
 
 package jdk.m3.collections.guava.io;
 
+import static java.util.Objects.requireNonNull;
+
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
 import jdk.m3.collections.guava.annotations.J2ktIncompatible;
 import jdk.m3.collections.guava.base.Preconditions;
@@ -52,6 +54,10 @@ public final class LittleEndianDataInputStream extends FilterInputStream impleme
     super(Preconditions.checkNotNull(in));
   }
 
+  private InputStream in() {
+    return requireNonNull(in); // guaranteed safe by the constructor
+  }
+
   /** This method will throw an {@link UnsupportedOperationException}. */
   @CanIgnoreReturnValue // to skip a line
   @Override
@@ -70,15 +76,22 @@ public final class LittleEndianDataInputStream extends FilterInputStream impleme
     ByteStreams.readFully(this, b, off, len);
   }
 
+  /**
+   * {@inheritDoc}
+   *
+   * <p>{@link LittleEndianDataInputStream} ignores negative values of {@code n} (returning zero).
+   * Otherwise, it skips the full requested number of bytes unless it reaches end of file or throws
+   * an exception.
+   */
   @Override
   public int skipBytes(int n) throws IOException {
-    return (int) in.skip(n);
+    return (int) ByteStreams.skipUpTo(in(), n);
   }
 
   @CanIgnoreReturnValue // to skip a byte
   @Override
   public int readUnsignedByte() throws IOException {
-    int b1 = in.read();
+    int b1 = in().read();
     if (b1 < 0) {
       throw new EOFException();
     }
@@ -176,7 +189,7 @@ public final class LittleEndianDataInputStream extends FilterInputStream impleme
   @CanIgnoreReturnValue // to skip a field
   @Override
   public String readUTF() throws IOException {
-    return new DataInputStream(in).readUTF();
+    return new DataInputStream(in()).readUTF();
   }
 
   /**
@@ -227,8 +240,8 @@ public final class LittleEndianDataInputStream extends FilterInputStream impleme
    * @throws IOException if an error is encountered while reading
    * @throws EOFException if the end of file (EOF) is encountered.
    */
-  private byte readAndCheckByte() throws IOException, EOFException {
-    int b1 = in.read();
+  private byte readAndCheckByte() throws IOException {
+    int b1 = in().read();
 
     if (b1 == -1) {
       throw new EOFException();

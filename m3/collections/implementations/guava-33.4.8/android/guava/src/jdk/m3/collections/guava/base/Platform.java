@@ -25,7 +25,7 @@ import org.jspecify.annotations.Nullable;
  *
  * @author Jesse Wilson
  */
-@GwtCompatible(emulated = true)
+@GwtCompatible
 final class Platform {
   private static final PatternCompiler patternCompiler = loadPatternCompiler();
 
@@ -78,7 +78,8 @@ final class Platform {
     return stringIsNullOrEmpty(string) ? null : string;
   }
 
-  static String lenientFormat(@Nullable String template, @Nullable Object @Nullable ... args) {
+  static String lenientFormat(
+      @Nullable String template, @Nullable Object @Nullable ... args) {
     return Strings.lenientFormat(template, args);
   }
 
@@ -96,11 +97,11 @@ final class Platform {
   }
 
   private static PatternCompiler loadPatternCompiler() {
-    /*
-     * We'd normally use ServiceLoader here, but it hurts Android startup performance. To avoid
-     * that, we hardcode the JDK Pattern compiler on Android (and, inadvertently, on App Engine and
-     * in Guava, at least for now).
-     */
+    // We want the JDK Pattern compiler:
+    // - under Android (where it hurts startup performance)
+    // - even for the JVM in our open-source release (https://github.com/google/guava/issues/3147)
+    // If anyone in our monorepo uses the Android copy of Guava on a JVM, that would be unfortunate.
+    // But that is only likely to happen in Robolectric tests, where the risks of JDK regex are low.
     return new JdkPatternCompiler();
   }
 

@@ -16,6 +16,7 @@ package jdk.m3.collections.guava.io;
 
 import static jdk.m3.collections.guava.base.Preconditions.checkArgument;
 import static jdk.m3.collections.guava.base.Preconditions.checkNotNull;
+import static jdk.m3.collections.guava.hash.Funnels.asOutputStream;
 import static jdk.m3.collections.guava.io.ByteStreams.skipUpTo;
 import static java.lang.Math.min;
 
@@ -24,7 +25,6 @@ import jdk.m3.collections.guava.annotations.J2ktIncompatible;
 import jdk.m3.collections.guava.base.Ascii;
 import jdk.m3.collections.guava.base.Optional;
 import jdk.m3.collections.guava.collect.ImmutableList;
-import jdk.m3.collections.guava.hash.Funnels;
 import jdk.m3.collections.guava.hash.HashCode;
 import jdk.m3.collections.guava.hash.HashFunction;
 import jdk.m3.collections.guava.hash.Hasher;
@@ -229,7 +229,7 @@ public abstract class ByteSource {
   }
 
   /** Counts the bytes in the given input stream using skip if possible. */
-  private long countBySkipping(InputStream in) throws IOException {
+  private static long countBySkipping(InputStream in) throws IOException {
     long count = 0;
     long skipped;
     while ((skipped = skipUpTo(in, Integer.MAX_VALUE)) > 0) {
@@ -336,7 +336,7 @@ public abstract class ByteSource {
    */
   public HashCode hash(HashFunction hashFunction) throws IOException {
     Hasher hasher = hashFunction.newHasher();
-    copyTo(Funnels.asOutputStream(hasher));
+    copyTo(asOutputStream(hasher));
     return hasher.hash();
   }
 
@@ -474,8 +474,8 @@ public abstract class ByteSource {
     }
 
     @Override
-    public String toString() {
-      return ByteSource.this.toString() + ".asCharSource(" + charset + ")";
+    public final String toString() {
+      return ByteSource.this + ".asCharSource(" + charset + ")";
     }
   }
 
@@ -554,7 +554,7 @@ public abstract class ByteSource {
 
     @Override
     public String toString() {
-      return ByteSource.this.toString() + ".slice(" + offset + ", " + length + ")";
+      return ByteSource.this + ".slice(" + offset + ", " + length + ")";
     }
   }
 
@@ -578,7 +578,7 @@ public abstract class ByteSource {
     }
 
     @Override
-    public InputStream openStream() {
+    public final InputStream openStream() {
       return new ByteArrayInputStream(bytes, offset, length);
     }
 
@@ -622,7 +622,7 @@ public abstract class ByteSource {
     }
 
     @Override
-    public HashCode hash(HashFunction hashFunction) throws IOException {
+    public HashCode hash(HashFunction hashFunction) {
       return hashFunction.hashBytes(bytes, offset, length);
     }
 

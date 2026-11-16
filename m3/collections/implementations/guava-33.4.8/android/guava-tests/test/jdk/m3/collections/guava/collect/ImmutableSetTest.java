@@ -16,7 +16,8 @@
 
 package jdk.m3.collections.guava.collect;
 
-import static com.google.common.truth.Truth.assertThat;
+import static jdk.m3.collections.guava.collect.Lists.newArrayList;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
 import static java.util.Collections.singleton;
 import static org.junit.Assert.assertThrows;
 
@@ -37,6 +38,7 @@ import jdk.m3.collections.guava.collect.testing.google.SetGenerators.ImmutableSe
 import jdk.m3.collections.guava.collect.testing.google.SetGenerators.ImmutableSetUnsizedBuilderGenerator;
 import jdk.m3.collections.guava.collect.testing.google.SetGenerators.ImmutableSetWithBadHashesGenerator;
 import jdk.m3.collections.guava.testing.EqualsTester;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.Set;
@@ -51,7 +53,7 @@ import org.jspecify.annotations.NullMarked;
  * @author Jared Levy
  * @author Nick Kralevich
  */
-@GwtCompatible(emulated = true)
+@GwtCompatible
 @NullMarked
 public class ImmutableSetTest extends AbstractImmutableSetTest {
 
@@ -145,65 +147,64 @@ public class ImmutableSetTest extends AbstractImmutableSetTest {
   }
 
   @Override
-  protected <E extends Comparable<? super E>> Set<E> of() {
+  <E extends Comparable<? super E>> Set<E> of() {
     return ImmutableSet.of();
   }
 
   @Override
-  protected <E extends Comparable<? super E>> Set<E> of(E e) {
+  <E extends Comparable<? super E>> Set<E> of(E e) {
     return ImmutableSet.of(e);
   }
 
   @Override
-  protected <E extends Comparable<? super E>> Set<E> of(E e1, E e2) {
+  <E extends Comparable<? super E>> Set<E> of(E e1, E e2) {
     return ImmutableSet.of(e1, e2);
   }
 
   @Override
-  protected <E extends Comparable<? super E>> Set<E> of(E e1, E e2, E e3) {
+  <E extends Comparable<? super E>> Set<E> of(E e1, E e2, E e3) {
     return ImmutableSet.of(e1, e2, e3);
   }
 
   @Override
-  protected <E extends Comparable<? super E>> Set<E> of(E e1, E e2, E e3, E e4) {
+  <E extends Comparable<? super E>> Set<E> of(E e1, E e2, E e3, E e4) {
     return ImmutableSet.of(e1, e2, e3, e4);
   }
 
   @Override
-  protected <E extends Comparable<? super E>> Set<E> of(E e1, E e2, E e3, E e4, E e5) {
+  <E extends Comparable<? super E>> Set<E> of(E e1, E e2, E e3, E e4, E e5) {
     return ImmutableSet.of(e1, e2, e3, e4, e5);
   }
 
   @Override
-  protected <E extends Comparable<? super E>> Set<E> of(
-      E e1, E e2, E e3, E e4, E e5, E e6, E... rest) {
+  <E extends Comparable<? super E>> Set<E> of(E e1, E e2, E e3, E e4, E e5, E e6, E... rest) {
     return ImmutableSet.of(e1, e2, e3, e4, e5, e6, rest);
   }
 
   @Override
-  protected <E extends Comparable<? super E>> Set<E> copyOf(E[] elements) {
+  <E extends Comparable<? super E>> Set<E> copyOf(E[] elements) {
     return ImmutableSet.copyOf(elements);
   }
 
   @Override
-  protected <E extends Comparable<? super E>> Set<E> copyOf(Collection<? extends E> elements) {
+  <E extends Comparable<? super E>> Set<E> copyOf(Collection<? extends E> elements) {
     return ImmutableSet.copyOf(elements);
   }
 
   @Override
-  protected <E extends Comparable<? super E>> Set<E> copyOf(Iterable<? extends E> elements) {
+  <E extends Comparable<? super E>> Set<E> copyOf(Iterable<? extends E> elements) {
     return ImmutableSet.copyOf(elements);
   }
 
   @Override
-  protected <E extends Comparable<? super E>> Set<E> copyOf(Iterator<? extends E> elements) {
+  <E extends Comparable<? super E>> Set<E> copyOf(Iterator<? extends E> elements) {
     return ImmutableSet.copyOf(elements);
   }
 
   public void testCreation_allDuplicates() {
-    ImmutableSet<String> set = ImmutableSet.copyOf(Lists.newArrayList("a", "a"));
+    ImmutableSet<String> set = ImmutableSet.copyOf(newArrayList("a", "a"));
     assertTrue(set instanceof SingletonImmutableSet);
-    assertEquals(Lists.newArrayList("a"), Lists.newArrayList(set));
+    assertEquals(newArrayList("a"), new ArrayList<>(set));
   }
 
   public void testCreation_oneDuplicate() {
@@ -212,8 +213,8 @@ public class ImmutableSetTest extends AbstractImmutableSetTest {
     ImmutableSet<String> set =
         ImmutableSet.of("a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "a");
     assertEquals(
-        Lists.newArrayList("a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m"),
-        Lists.newArrayList(set));
+        newArrayList("a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m"),
+        new ArrayList<>(set));
   }
 
   public void testCreation_manyDuplicates() {
@@ -224,7 +225,7 @@ public class ImmutableSetTest extends AbstractImmutableSetTest {
     assertThat(set).containsExactly("a", "b", "c").inOrder();
   }
 
-  @GwtIncompatible("Builder impl")
+  @GwtIncompatible // Builder impl
   public void testBuilderForceCopy() {
     ImmutableSet.Builder<Integer> builder = ImmutableSet.builder();
     builder.add(-1);
@@ -237,7 +238,7 @@ public class ImmutableSetTest extends AbstractImmutableSetTest {
     }
   }
 
-  @GwtIncompatible("Builder impl")
+  @GwtIncompatible // Builder impl
   public void testPresizedBuilderDedups() {
     ImmutableSet.Builder<String> builder = ImmutableSet.builderWithExpectedSize(4);
     builder.add("a");
@@ -251,7 +252,7 @@ public class ImmutableSetTest extends AbstractImmutableSetTest {
     assertSame(table, ((RegularImmutableSet<String>) builder.build()).table);
   }
 
-  @GwtIncompatible("Builder impl")
+  @GwtIncompatible // Builder impl
   public void testPresizedBuilderForceCopy() {
     for (int expectedSize = 1; expectedSize < 4; expectedSize++) {
       ImmutableSet.Builder<Integer> builder = ImmutableSet.builderWithExpectedSize(expectedSize);
@@ -269,7 +270,7 @@ public class ImmutableSetTest extends AbstractImmutableSetTest {
 
   public void testCreation_arrayOfArray() {
     String[] array = new String[] {"a"};
-    Set<String[]> set = ImmutableSet.<String[]>of(array);
+    Set<String[]> set = ImmutableSet.of(array);
     assertEquals(singleton(array), set);
   }
 
@@ -305,7 +306,7 @@ public class ImmutableSetTest extends AbstractImmutableSetTest {
   }
 
   @GwtIncompatible // RegularImmutableSet.table not in emulation
-  private void verifyTableSize(int inputSize, int setSize, int tableSize) {
+  private static void verifyTableSize(int inputSize, int setSize, int tableSize) {
     Builder<Integer> builder = ImmutableSet.builder();
     for (int i = 0; i < inputSize; i++) {
       builder.add(i % setSize);
@@ -321,7 +322,7 @@ public class ImmutableSetTest extends AbstractImmutableSetTest {
   public void testCopyOf_copiesImmutableSortedSet() {
     ImmutableSortedSet<String> sortedSet = ImmutableSortedSet.of("a");
     ImmutableSet<String> copy = ImmutableSet.copyOf(sortedSet);
-    assertNotSame(sortedSet, copy);
+    assertThat(copy).isNotSameInstanceAs(sortedSet);
   }
 
   // TODO(b/172823566): Use mainline testToImmutableSet once CollectorTester is usable to java7.
@@ -351,7 +352,7 @@ public class ImmutableSetTest extends AbstractImmutableSetTest {
         .testEquals();
   }
 
-  @GwtIncompatible("internals")
+  @GwtIncompatible // internals
   public void testControlsArraySize() {
     ImmutableSet.Builder<String> builder = new ImmutableSet.Builder<String>();
     for (int i = 0; i < 10; i++) {
@@ -362,7 +363,7 @@ public class ImmutableSetTest extends AbstractImmutableSetTest {
     assertTrue(set.elements.length <= 2 * set.size());
   }
 
-  @GwtIncompatible("internals")
+  @GwtIncompatible // internals
   public void testReusedBuilder() {
     ImmutableSet.Builder<String> builder = new ImmutableSet.Builder<String>();
     for (int i = 0; i < 10; i++) {

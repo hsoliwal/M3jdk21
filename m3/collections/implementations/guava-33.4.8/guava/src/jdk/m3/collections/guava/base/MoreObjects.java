@@ -22,6 +22,7 @@ import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Map;
+import java.util.Objects;
 import java.util.OptionalDouble;
 import java.util.OptionalInt;
 import java.util.OptionalLong;
@@ -29,7 +30,7 @@ import org.jspecify.annotations.Nullable;
 
 /**
  * Helper functions that operate on any {@code Object}, and are not already provided in {@link
- * java.util.Objects}.
+ * Objects}.
  *
  * <p>See the Guava User Guide on <a
  * href="https://github.com/google/guava/wiki/CommonObjectUtilitiesExplained">writing {@code Object}
@@ -53,12 +54,13 @@ public final class MoreObjects {
    * lazy evaluation of the fallback instance, using {@link Optional#or(Supplier)
    * first.or(supplier)}.
    *
-   * <p><b>Java 9 users:</b> use {@code java.util.Objects.requireNonNullElse(first, second)}
-   * instead.
+   * <p><b>Java 9 users:</b> use {@link Objects#requireNonNullElse} instead. For lazy evaluation of
+   * the fallback, use {@link Objects#requireNonNullElseGet Objects.requireNonNullElseGet(first, ()
+   * -> second)}}.
    *
    * @return {@code first} if it is non-null; otherwise {@code second} if it is non-null
    * @throws NullPointerException if both {@code first} and {@code second} are null
-   * @since 18.0 (since 3.0 as {@code Objects.firstNonNull()}).
+   * @since 18.0 (since 3.0 as {@code Objects.firstNonNull}).
    */
   public static <T> T firstNonNull(@Nullable T first, @Nullable T second) {
     if (first != null) {
@@ -108,7 +110,7 @@ public final class MoreObjects {
    *
    * @param self the object to generate the string for (typically {@code this}), used only for its
    *     class name
-   * @since 18.0 (since 2.0 as {@code Objects.toStringHelper()}).
+   * @since 18.0 (since 2.0 as {@code Objects.toStringHelper}).
    */
   public static ToStringHelper toStringHelper(Object self) {
     return new ToStringHelper(self.getClass().getSimpleName());
@@ -122,7 +124,7 @@ public final class MoreObjects {
    * <p>Note that in GWT, class names are often obfuscated.
    *
    * @param clazz the {@link Class} of the instance
-   * @since 18.0 (since 7.0 as {@code Objects.toStringHelper()}).
+   * @since 18.0 (since 7.0 as {@code Objects.toStringHelper}).
    */
   public static ToStringHelper toStringHelper(Class<?> clazz) {
     return new ToStringHelper(clazz.getSimpleName());
@@ -134,7 +136,7 @@ public final class MoreObjects {
    * Object#getClass()}.
    *
    * @param className the name of the instance type
-   * @since 18.0 (since 7.0 as {@code Objects.toStringHelper()}).
+   * @since 18.0 (since 7.0 as {@code Objects.toStringHelper}).
    */
   public static ToStringHelper toStringHelper(String className) {
     return new ToStringHelper(className);
@@ -163,7 +165,7 @@ public final class MoreObjects {
      * value. The order of calling this method, relative to the {@code add()}/{@code addValue()}
      * methods, is not significant.
      *
-     * @since 18.0 (since 12.0 as {@code Objects.ToStringHelper.omitNullValues()}).
+     * @since 18.0 (since 12.0 as {@code Objects.ToStringHelper.omitNullValues}).
      */
     @CanIgnoreReturnValue
     public ToStringHelper omitNullValues() {
@@ -202,7 +204,7 @@ public final class MoreObjects {
     /**
      * Adds a name/value pair to the formatted output in {@code name=value} format.
      *
-     * @since 18.0 (since 11.0 as {@code Objects.ToStringHelper.add()}).
+     * @since 18.0 (since 11.0 as {@code Objects.ToStringHelper.add}).
      */
     @CanIgnoreReturnValue
     public ToStringHelper add(String name, boolean value) {
@@ -212,7 +214,7 @@ public final class MoreObjects {
     /**
      * Adds a name/value pair to the formatted output in {@code name=value} format.
      *
-     * @since 18.0 (since 11.0 as {@code Objects.ToStringHelper.add()}).
+     * @since 18.0 (since 11.0 as {@code Objects.ToStringHelper.add}).
      */
     @CanIgnoreReturnValue
     public ToStringHelper add(String name, char value) {
@@ -222,7 +224,7 @@ public final class MoreObjects {
     /**
      * Adds a name/value pair to the formatted output in {@code name=value} format.
      *
-     * @since 18.0 (since 11.0 as {@code Objects.ToStringHelper.add()}).
+     * @since 18.0 (since 11.0 as {@code Objects.ToStringHelper.add}).
      */
     @CanIgnoreReturnValue
     public ToStringHelper add(String name, double value) {
@@ -232,7 +234,7 @@ public final class MoreObjects {
     /**
      * Adds a name/value pair to the formatted output in {@code name=value} format.
      *
-     * @since 18.0 (since 11.0 as {@code Objects.ToStringHelper.add()}).
+     * @since 18.0 (since 11.0 as {@code Objects.ToStringHelper.add}).
      */
     @CanIgnoreReturnValue
     public ToStringHelper add(String name, float value) {
@@ -242,7 +244,7 @@ public final class MoreObjects {
     /**
      * Adds a name/value pair to the formatted output in {@code name=value} format.
      *
-     * @since 18.0 (since 11.0 as {@code Objects.ToStringHelper.add()}).
+     * @since 18.0 (since 11.0 as {@code Objects.ToStringHelper.add}).
      */
     @CanIgnoreReturnValue
     public ToStringHelper add(String name, int value) {
@@ -252,7 +254,7 @@ public final class MoreObjects {
     /**
      * Adds a name/value pair to the formatted output in {@code name=value} format.
      *
-     * @since 18.0 (since 11.0 as {@code Objects.ToStringHelper.add()}).
+     * @since 18.0 (since 11.0 as {@code Objects.ToStringHelper.add}).
      */
     @CanIgnoreReturnValue
     public ToStringHelper add(String name, long value) {
@@ -276,7 +278,7 @@ public final class MoreObjects {
      * <p>It is strongly encouraged to use {@link #add(String, boolean)} instead and give value a
      * readable name.
      *
-     * @since 18.0 (since 11.0 as {@code Objects.ToStringHelper.addValue()}).
+     * @since 18.0 (since 11.0 as {@code Objects.ToStringHelper.addValue}).
      */
     @CanIgnoreReturnValue
     public ToStringHelper addValue(boolean value) {
@@ -289,7 +291,7 @@ public final class MoreObjects {
      * <p>It is strongly encouraged to use {@link #add(String, char)} instead and give value a
      * readable name.
      *
-     * @since 18.0 (since 11.0 as {@code Objects.ToStringHelper.addValue()}).
+     * @since 18.0 (since 11.0 as {@code Objects.ToStringHelper.addValue}).
      */
     @CanIgnoreReturnValue
     public ToStringHelper addValue(char value) {
@@ -302,7 +304,7 @@ public final class MoreObjects {
      * <p>It is strongly encouraged to use {@link #add(String, double)} instead and give value a
      * readable name.
      *
-     * @since 18.0 (since 11.0 as {@code Objects.ToStringHelper.addValue()}).
+     * @since 18.0 (since 11.0 as {@code Objects.ToStringHelper.addValue}).
      */
     @CanIgnoreReturnValue
     public ToStringHelper addValue(double value) {
@@ -315,7 +317,7 @@ public final class MoreObjects {
      * <p>It is strongly encouraged to use {@link #add(String, float)} instead and give value a
      * readable name.
      *
-     * @since 18.0 (since 11.0 as {@code Objects.ToStringHelper.addValue()}).
+     * @since 18.0 (since 11.0 as {@code Objects.ToStringHelper.addValue}).
      */
     @CanIgnoreReturnValue
     public ToStringHelper addValue(float value) {
@@ -328,7 +330,7 @@ public final class MoreObjects {
      * <p>It is strongly encouraged to use {@link #add(String, int)} instead and give value a
      * readable name.
      *
-     * @since 18.0 (since 11.0 as {@code Objects.ToStringHelper.addValue()}).
+     * @since 18.0 (since 11.0 as {@code Objects.ToStringHelper.addValue}).
      */
     @CanIgnoreReturnValue
     public ToStringHelper addValue(int value) {
@@ -341,7 +343,7 @@ public final class MoreObjects {
      * <p>It is strongly encouraged to use {@link #add(String, long)} instead and give value a
      * readable name.
      *
-     * @since 18.0 (since 11.0 as {@code Objects.ToStringHelper.addValue()}).
+     * @since 18.0 (since 11.0 as {@code Objects.ToStringHelper.addValue}).
      */
     @CanIgnoreReturnValue
     public ToStringHelper addValue(long value) {
@@ -365,7 +367,7 @@ public final class MoreObjects {
       } else if (value instanceof OptionalDouble) {
         return !((OptionalDouble) value).isPresent();
       } else if (value instanceof Optional) {
-        return !((Optional) value).isPresent();
+        return !((Optional<?>) value).isPresent();
       } else if (value.getClass().isArray()) {
         return Array.getLength(value) == 0;
       }
@@ -460,6 +462,8 @@ public final class MoreObjects {
       @Nullable String name;
       @Nullable Object value;
       @Nullable ValueHolder next;
+
+      ValueHolder() {}
     }
 
     /**

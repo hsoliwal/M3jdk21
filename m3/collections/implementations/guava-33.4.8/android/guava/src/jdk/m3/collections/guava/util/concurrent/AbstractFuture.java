@@ -15,6 +15,7 @@
 package jdk.m3.collections.guava.util.concurrent;
 
 import static jdk.m3.collections.guava.base.Preconditions.checkNotNull;
+import static jdk.m3.collections.guava.base.Strings.emptyToNull;
 import static jdk.m3.collections.guava.util.concurrent.NullnessCasts.uncheckedNull;
 import static jdk.m3.collections.guava.util.concurrent.Platform.interruptCurrentThread;
 import static jdk.m3.collections.guava.util.concurrent.Platform.rethrowIfErrorOtherThanStackOverflow;
@@ -25,7 +26,6 @@ import static java.util.concurrent.TimeUnit.MILLISECONDS;
 import static java.util.logging.Level.SEVERE;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
-import jdk.m3.collections.guava.base.Strings;
 import jdk.m3.collections.guava.util.concurrent.internal.InternalFutureFailureAccess;
 import jdk.m3.collections.guava.util.concurrent.internal.InternalFutures;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
@@ -163,6 +163,10 @@ public abstract class AbstractFuture<V extends @Nullable Object> extends Abstrac
     Failure(Throwable exception) {
       this.exception = checkNotNull(exception);
     }
+
+    ExecutionException newExecutionException() {
+      return new ExecutionException(exception);
+    }
   }
 
   /** A special value to represent cancellation and the 'wasInterrupted' bit. */
@@ -187,6 +191,12 @@ public abstract class AbstractFuture<V extends @Nullable Object> extends Abstrac
     Cancellation(boolean wasInterrupted, @Nullable Throwable cause) {
       this.wasInterrupted = wasInterrupted;
       this.cause = cause;
+    }
+
+    CancellationException newCancellationException() {
+      CancellationException exception = new CancellationException("Task was cancelled.");
+      exception.initCause(cause);
+      return exception;
     }
   }
 
@@ -228,7 +238,7 @@ public abstract class AbstractFuture<V extends @Nullable Object> extends Abstrac
    * <p>The default {@link AbstractFuture} implementation throws {@code InterruptedException} if the
    * current thread is interrupted during the call, even if the value is already available.
    *
-   * @throws CancellationException {@inheritDoc}
+   * @throws CancellationException if the computation was cancelled
    */
   @CanIgnoreReturnValue
   @Override
@@ -244,7 +254,7 @@ public abstract class AbstractFuture<V extends @Nullable Object> extends Abstrac
    * <p>The default {@link AbstractFuture} implementation throws {@code InterruptedException} if the
    * current thread is interrupted during the call, even if the value is already available.
    *
-   * @throws CancellationException {@inheritDoc}
+   * @throws CancellationException if the computation was cancelled
    */
   @CanIgnoreReturnValue
   @Override
@@ -265,7 +275,7 @@ public abstract class AbstractFuture<V extends @Nullable Object> extends Abstrac
   @ParametricNullness
   @SuppressWarnings("nullness") // TODO(b/147136275): Remove once our checker understands & and |.
   /*
-   * TODO: b/112550045 - Use this from Futures.getDone when applicable? Note the small difference in
+   * TODO(b/112550045): Use this from Futures.getDone when applicable? Note the small difference in
    * failure message between the two at present.
    */
   final V getFromAlreadyDoneTrustedFuture() throws ExecutionException {
@@ -283,14 +293,21 @@ public abstract class AbstractFuture<V extends @Nullable Object> extends Abstrac
     // While this seems like it might be too branch-y, simple benchmarking proves it to be
     // unmeasurable (comparing done AbstractFutures with immediateFuture)
     if (obj instanceof Cancellation) {
-      Cancellation cancellation = (Cancellation) obj;
-      Throwable cause = cancellation.cause;
-      throw cancellationExceptionWithCause("Task was cancelled.", cause);
+      throw ((Cancellation) obj).newCancellationException();
     } else if (obj instanceof Failure) {
-      Failure failure = (Failure) obj;
-      Throwable exception = failure.exception;
-      throw new ExecutionException(exception);
-    } else if (obj == NULL) {
+      throw ((Failure) obj).newExecutionException();
+    } else {
+      return getKnownSuccessfulDoneValue(obj);
+    }
+  }
+
+  /**
+   * Unboxes {@code obj}. Assumes that obj is not {@code null}, a {@link DelegatingToFuture}, a
+   * {@link Cancellation}, or a {@link Failure}.
+   */
+  @SuppressWarnings("TypeParameterUnusedInFormals") // sorry not sorry
+  private static <V extends @Nullable Object> V getKnownSuccessfulDoneValue(Object obj) {
+    if (obj == NULL) {
       /*
        * It's safe to return null because we would only have stored it in the first place if it were
        * a valid value for V.
@@ -373,7 +390,7 @@ public abstract class AbstractFuture<V extends @Nullable Object> extends Abstrac
           if (localValue instanceof DelegatingToFuture) {
             // propagate cancellation to the future set in setfuture, this is racy, and we don't
             // care if we are successful or not.
-            ListenableFuture<?> futureToPropagateTo = ((DelegatingToFuture) localValue).future;
+            ListenableFuture<?> futureToPropagateTo = ((DelegatingToFuture<?>) localValue).future;
             if (futureToPropagateTo instanceof Trusted) {
               // If the future is a Trusted instance then we specifically avoid calling cancel()
               // this has 2 benefits
@@ -433,6 +450,10 @@ public abstract class AbstractFuture<V extends @Nullable Object> extends Abstrac
     return (localValue instanceof Cancellation) && ((Cancellation) localValue).wasInterrupted;
   }
 
+  final boolean wasInterruptedInternal() {
+    return wasInterrupted();
+  }
+
   /**
    * {@inheritDoc}
    *
@@ -486,12 +507,17 @@ public abstract class AbstractFuture<V extends @Nullable Object> extends Abstrac
    */
   @CanIgnoreReturnValue
   protected boolean set(@ParametricNullness V value) {
-    Object valueToSet = value == null ? NULL : value;
+    Object valueToSet = maskNull(value);
     if (casValue(this, null, valueToSet)) {
       complete(this, /* callInterruptTask= */ false);
       return true;
     }
     return false;
+  }
+
+  @CanIgnoreReturnValue
+  final boolean setInternal(@ParametricNullness V value) {
+    return set(value);
   }
 
   /**
@@ -511,12 +537,17 @@ public abstract class AbstractFuture<V extends @Nullable Object> extends Abstrac
    */
   @CanIgnoreReturnValue
   protected boolean setException(Throwable throwable) {
-    Object valueToSet = new Failure(checkNotNull(throwable));
+    Object valueToSet = new Failure(throwable);
     if (casValue(this, null, valueToSet)) {
       complete(this, /* callInterruptTask= */ false);
       return true;
     }
     return false;
+  }
+
+  @CanIgnoreReturnValue
+  final boolean setExceptionInternal(Throwable throwable) {
+    return setException(throwable);
   }
 
   /**
@@ -602,6 +633,11 @@ public abstract class AbstractFuture<V extends @Nullable Object> extends Abstrac
     return false;
   }
 
+  @CanIgnoreReturnValue
+  final boolean setFutureInternal(ListenableFuture<? extends V> future) {
+    return setFuture(future);
+  }
+
   /**
    * Returns a value that satisfies the contract of the {@link #value} field based on the state of
    * given future.
@@ -657,7 +693,7 @@ public abstract class AbstractFuture<V extends @Nullable Object> extends Abstrac
                     + "isCancelled() == true: "
                     + future));
       }
-      return v == null ? NULL : v;
+      return maskNull(v);
     } catch (ExecutionException exception) {
       if (wasCancelled) {
         return new Cancellation(
@@ -709,7 +745,7 @@ public abstract class AbstractFuture<V extends @Nullable Object> extends Abstrac
   /** Unblocks all threads and runs all listeners. */
   private static void complete(AbstractFuture<?> param, boolean callInterruptTask) {
     // Declare a "true" local variable so that the Checker Framework will infer nullness.
-    AbstractFuture<?> future = param;
+    @RetainedLocalRef AbstractFuture<?> future = param;
 
     @RetainedLocalRef Listener next = null;
     outer:
@@ -737,7 +773,7 @@ public abstract class AbstractFuture<V extends @Nullable Object> extends Abstrac
       next = future.clearListeners(next);
       future = null;
       while (next != null) {
-        Listener curr = next;
+        @RetainedLocalRef Listener curr = next;
         next = next.next;
         /*
          * requireNonNull is safe because the listener stack never contains TOMBSTONE until after
@@ -883,9 +919,9 @@ public abstract class AbstractFuture<V extends @Nullable Object> extends Abstrac
    * @since 23.0
    */
   protected @Nullable String pendingToString() {
-    // TODO(diamondm) consider moving this into addPendingString so it's always in the output
+    // TODO(diamondm): consider moving this into addPendingString so it's always in the output
     if (this instanceof ScheduledFuture) {
-      return "remaining delay=[" + ((ScheduledFuture) this).getDelay(MILLISECONDS) + " ms]";
+      return "remaining delay=[" + ((ScheduledFuture<?>) this).getDelay(MILLISECONDS) + " ms]";
     }
     return null;
   }
@@ -901,12 +937,12 @@ public abstract class AbstractFuture<V extends @Nullable Object> extends Abstrac
     @RetainedLocalRef Object localValue = value();
     if (localValue instanceof DelegatingToFuture) {
       builder.append(", setFuture=[");
-      appendUserObject(builder, ((DelegatingToFuture) localValue).future);
+      appendUserObject(builder, ((DelegatingToFuture<?>) localValue).future);
       builder.append("]");
     } else {
       String pendingDescription;
       try {
-        pendingDescription = Strings.emptyToNull(pendingToString());
+        pendingDescription = emptyToNull(pendingToString());
       } catch (Throwable e) {
         /*
          * We want to catch (Exception | StackOverflowError), but we can't under environments where
@@ -1016,10 +1052,7 @@ public abstract class AbstractFuture<V extends @Nullable Object> extends Abstrac
     }
   }
 
-  private static CancellationException cancellationExceptionWithCause(
-      String message, @Nullable Throwable cause) {
-    CancellationException exception = new CancellationException(message);
-    exception.initCause(cause);
-    return exception;
+  private static Object maskNull(@Nullable Object v) {
+    return v == null ? NULL : v;
   }
 }

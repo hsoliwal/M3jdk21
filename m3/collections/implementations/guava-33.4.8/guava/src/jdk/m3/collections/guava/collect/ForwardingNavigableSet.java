@@ -16,6 +16,10 @@
 
 package jdk.m3.collections.guava.collect;
 
+import static jdk.m3.collections.guava.base.Preconditions.checkNotNull;
+import static jdk.m3.collections.guava.collect.Iterators.getNext;
+import static jdk.m3.collections.guava.collect.Iterators.pollNext;
+
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
 import java.util.Iterator;
 import java.util.NavigableSet;
@@ -69,7 +73,7 @@ public abstract class ForwardingNavigableSet<E extends @Nullable Object>
    * wish to override {@link #lower} to forward to this implementation.
    */
   protected @Nullable E standardLower(@ParametricNullness E e) {
-    return Iterators.getNext(headSet(e, false).descendingIterator(), null);
+    return getNext(headSet(e, false).descendingIterator(), null);
   }
 
   @Override
@@ -83,7 +87,7 @@ public abstract class ForwardingNavigableSet<E extends @Nullable Object>
    * wish to override {@link #floor} to forward to this implementation.
    */
   protected @Nullable E standardFloor(@ParametricNullness E e) {
-    return Iterators.getNext(headSet(e, true).descendingIterator(), null);
+    return getNext(headSet(e, true).descendingIterator(), null);
   }
 
   @Override
@@ -97,7 +101,7 @@ public abstract class ForwardingNavigableSet<E extends @Nullable Object>
    * override {@link #ceiling} to forward to this implementation.
    */
   protected @Nullable E standardCeiling(@ParametricNullness E e) {
-    return Iterators.getNext(tailSet(e, true).iterator(), null);
+    return getNext(tailSet(e, true).iterator(), null);
   }
 
   @Override
@@ -111,7 +115,7 @@ public abstract class ForwardingNavigableSet<E extends @Nullable Object>
    * override {@link #higher} to forward to this implementation.
    */
   protected @Nullable E standardHigher(@ParametricNullness E e) {
-    return Iterators.getNext(tailSet(e, false).iterator(), null);
+    return getNext(tailSet(e, false).iterator(), null);
   }
 
   @Override
@@ -125,7 +129,7 @@ public abstract class ForwardingNavigableSet<E extends @Nullable Object>
    * implementation.
    */
   protected @Nullable E standardPollFirst() {
-    return Iterators.pollNext(iterator());
+    return pollNext(iterator());
   }
 
   @Override
@@ -139,7 +143,7 @@ public abstract class ForwardingNavigableSet<E extends @Nullable Object>
    * forward to this implementation.
    */
   protected @Nullable E standardPollLast() {
-    return Iterators.pollNext(descendingIterator());
+    return pollNext(descendingIterator());
   }
 
   @ParametricNullness
@@ -238,5 +242,27 @@ public abstract class ForwardingNavigableSet<E extends @Nullable Object>
    */
   protected SortedSet<E> standardTailSet(@ParametricNullness E fromElement) {
     return tailSet(fromElement, true);
+  }
+
+  /**
+   * A simplified version of {@link ForwardingNavigableSet} where subclasses can pass in an already
+   * constructed {@link NavigableSet} as the delegate.
+   *
+   * <p>TODO(b/3417232): Consider making this public, but take into consideration whether it would
+   * then appear as a user-visible supertype for any classes.
+   */
+  abstract static class SimpleForwardingNavigableSet<E extends @Nullable Object>
+      extends ForwardingNavigableSet<E> {
+    private final NavigableSet<E> delegate;
+
+    /** Constructor for use by subclasses. */
+    SimpleForwardingNavigableSet(NavigableSet<E> delegate) {
+      this.delegate = checkNotNull(delegate);
+    }
+
+    @Override
+    protected final NavigableSet<E> delegate() {
+      return delegate;
+    }
   }
 }

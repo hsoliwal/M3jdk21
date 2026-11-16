@@ -37,12 +37,7 @@ import org.jspecify.annotations.Nullable;
 public final class SafeTreeSet<E> implements Serializable, NavigableSet<E> {
   @SuppressWarnings("unchecked")
   private static final Comparator<Object> NATURAL_ORDER =
-      new Comparator<Object>() {
-        @Override
-        public int compare(Object o1, Object o2) {
-          return ((Comparable<Object>) o1).compareTo(o2);
-        }
-      };
+      (o1, o2) -> ((Comparable<Object>) o1).compareTo(o2);
 
   private final NavigableSet<E> delegate;
 
@@ -95,10 +90,10 @@ public final class SafeTreeSet<E> implements Serializable, NavigableSet<E> {
   @Override
   public Comparator<? super E> comparator() {
     Comparator<? super E> comparator = delegate.comparator();
-    if (comparator == null) {
-      comparator = (Comparator<? super E>) NATURAL_ORDER;
+    if (comparator != null) {
+      return comparator;
     }
-    return comparator;
+    return NATURAL_ORDER;
   }
 
   @Override

@@ -14,6 +14,8 @@
 
 package jdk.m3.collections.guava.util.concurrent;
 
+import static jdk.m3.collections.guava.util.concurrent.MoreExecutors.newThread;
+import static jdk.m3.collections.guava.util.concurrent.MoreExecutors.renamingDecorator;
 import static jdk.m3.collections.guava.util.concurrent.Platform.restoreInterruptIfIsInterruptedException;
 
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
@@ -38,38 +40,37 @@ public abstract class AbstractExecutionThreadService implements Service {
   private final Service delegate =
       new AbstractService() {
         @Override
-        protected final void doStart() {
-          Executor executor = MoreExecutors.renamingDecorator(executor(), () -> serviceName());
-          executor.execute(
-              () -> {
+        protected void doStart() {
+          Executor executor = renamingDecorator(executor(), () -> serviceName());
+          executor.execute(() -> {
+            try {
+              startUp();
+              notifyStarted();
+              // If stopAsync() is called while starting we may be in the STOPPING state in
+              // which case we should skip right down to shutdown.
+              if (isRunning()) {
                 try {
-                  startUp();
-                  notifyStarted();
-                  // If stopAsync() is called while starting we may be in the STOPPING state in
-                  // which case we should skip right down to shutdown.
-                  if (isRunning()) {
-                    try {
-                      AbstractExecutionThreadService.this.run();
-                    } catch (Throwable t) {
-                      restoreInterruptIfIsInterruptedException(t);
-                      try {
-                        shutDown();
-                      } catch (Exception ignored) {
-                        restoreInterruptIfIsInterruptedException(ignored);
-                        t.addSuppressed(ignored);
-                      }
-                      notifyFailed(t);
-                      return;
-                    }
-                  }
-
-                  shutDown();
-                  notifyStopped();
+                  AbstractExecutionThreadService.this.run();
                 } catch (Throwable t) {
                   restoreInterruptIfIsInterruptedException(t);
+                  try {
+                    shutDown();
+                  } catch (Exception ignored) {
+                    restoreInterruptIfIsInterruptedException(ignored);
+                    t.addSuppressed(ignored);
+                  }
                   notifyFailed(t);
+                  return;
                 }
-              });
+              }
+
+              shutDown();
+              notifyStopped();
+            } catch (Throwable t) {
+              restoreInterruptIfIsInterruptedException(t);
+              notifyFailed(t);
+            }
+          });
         }
 
         @Override
@@ -124,7 +125,7 @@ public abstract class AbstractExecutionThreadService implements Service {
    * <p>By default this method does nothing.
    *
    * <p>Currently, this method is invoked while holding a lock. If an implementation of this method
-   * blocks, it can prevent this service from changing state. If you need to performing a blocking
+   * blocks, it can prevent this service from changing state. If you need to perform a blocking
    * operation in order to trigger shutdown, consider instead registering a listener and
    * implementing {@code stopping}. Note, however, that {@code stopping} does not run at exactly the
    * same times as {@code triggerShutdown}.
@@ -142,7 +143,7 @@ public abstract class AbstractExecutionThreadService implements Service {
    * to the string returned by {@link #serviceName}
    */
   protected Executor executor() {
-    return command -> MoreExecutors.newThread(serviceName(), command).start();
+    return command -> newThread(serviceName(), command).start();
   }
 
   @Override

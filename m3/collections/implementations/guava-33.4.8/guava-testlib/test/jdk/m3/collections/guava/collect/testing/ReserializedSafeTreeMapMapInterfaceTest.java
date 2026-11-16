@@ -16,8 +16,9 @@
 
 package jdk.m3.collections.guava.collect.testing;
 
+import static jdk.m3.collections.guava.testing.SerializableTester.reserialize;
+
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
-import jdk.m3.collections.guava.testing.SerializableTester;
 import java.util.NavigableMap;
 import java.util.SortedMap;
 
@@ -34,13 +35,13 @@ public class ReserializedSafeTreeMapMapInterfaceTest
     map.put("one", 1);
     map.put("two", 2);
     map.put("three", 3);
-    return SerializableTester.reserialize(map);
+    return reserialize(map);
   }
 
   @Override
-  protected SortedMap<String, Integer> makeEmptyMap() throws UnsupportedOperationException {
+  protected SortedMap<String, Integer> makeEmptyMap() {
     NavigableMap<String, Integer> map = new SafeTreeMap<>();
-    return SerializableTester.reserialize(map);
+    return reserialize(map);
   }
 
   @Override

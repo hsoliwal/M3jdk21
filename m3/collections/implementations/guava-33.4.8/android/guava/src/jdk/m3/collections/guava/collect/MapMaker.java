@@ -87,7 +87,7 @@ import org.jspecify.annotations.Nullable;
  * @since 2.0
  */
 @J2ktIncompatible
-@GwtCompatible(emulated = true)
+@GwtCompatible
 public final class MapMaker {
   private static final int DEFAULT_INITIAL_CAPACITY = 16;
   private static final int DEFAULT_CONCURRENCY_LEVEL = 4;
@@ -116,7 +116,7 @@ public final class MapMaker {
    *
    * <p>By default, the map uses {@link Equivalence#identity} to determine key equality when {@link
    * #weakKeys} is specified, and {@link Equivalence#equals()} otherwise. The only place this is
-   * used is in {@link Interners.WeakInterner}.
+   * used is in {@link Interners}.
    */
   @CanIgnoreReturnValue
   @GwtIncompatible // To be supported

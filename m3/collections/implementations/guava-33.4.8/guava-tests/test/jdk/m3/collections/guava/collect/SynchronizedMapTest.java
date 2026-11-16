@@ -17,10 +17,13 @@
 package jdk.m3.collections.guava.collect;
 
 import static jdk.m3.collections.guava.base.Preconditions.checkNotNull;
+import static jdk.m3.collections.guava.testing.SerializableTester.reserializeAndAssert;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
+import static java.util.Collections.singletonMap;
 
 import jdk.m3.collections.guava.collect.Synchronized.SynchronizedCollection;
 import jdk.m3.collections.guava.collect.Synchronized.SynchronizedSet;
-import jdk.m3.collections.guava.testing.SerializableTester;
+import jdk.m3.collections.guava.testing.EqualsTester;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.HashMap;
@@ -40,7 +43,7 @@ import org.jspecify.annotations.Nullable;
 public class SynchronizedMapTest extends TestCase {
   public final Object mutex = new Object[0]; // something Serializable
 
-  protected <K, V> Map<K, V> create() {
+  <K, V> Map<K, V> create() {
     TestMap<K, V> inner = new TestMap<>(new HashMap<K, V>(), mutex);
     Map<K, V> outer = Synchronized.map(inner, mutex);
     return outer;
@@ -48,7 +51,7 @@ public class SynchronizedMapTest extends TestCase {
 
   static class TestMap<K, V> extends ForwardingMap<K, V> implements Serializable {
     public final Object mutex;
-    private Map<K, V> delegate;
+    private final Map<K, V> delegate;
 
     public TestMap(Map<K, V> delegate, Object mutex) {
       checkNotNull(mutex);
@@ -74,7 +77,7 @@ public class SynchronizedMapTest extends TestCase {
     }
 
     @Override
-    public @Nullable V remove(Object object) {
+    public @Nullable V remove(@Nullable Object object) {
       assertTrue(Thread.holdsLock(mutex));
       return super.remove(object);
     }
@@ -86,19 +89,19 @@ public class SynchronizedMapTest extends TestCase {
     }
 
     @Override
-    public boolean containsKey(Object key) {
+    public boolean containsKey(@Nullable Object key) {
       assertTrue(Thread.holdsLock(mutex));
       return super.containsKey(key);
     }
 
     @Override
-    public boolean containsValue(Object value) {
+    public boolean containsValue(@Nullable Object value) {
       assertTrue(Thread.holdsLock(mutex));
       return super.containsValue(value);
     }
 
     @Override
-    public @Nullable V get(Object key) {
+    public @Nullable V get(@Nullable Object key) {
       assertTrue(Thread.holdsLock(mutex));
       return super.get(key);
     }
@@ -186,7 +189,7 @@ public class SynchronizedMapTest extends TestCase {
   }
 
   public void testGet() {
-    create().get(null);
+    Object unused = create().get(null);
   }
 
   public void testPut() {
@@ -201,29 +204,28 @@ public class SynchronizedMapTest extends TestCase {
     Map<String, Integer> map = create();
     Set<String> keySet = map.keySet();
     assertTrue(keySet instanceof SynchronizedSet);
-    assertSame(mutex, ((SynchronizedSet<?>) keySet).mutex);
+    assertThat(((SynchronizedSet<?>) keySet).mutex).isSameInstanceAs(mutex);
   }
 
   public void testValues() {
     Map<String, Integer> map = create();
     Collection<Integer> values = map.values();
     assertTrue(values instanceof SynchronizedCollection);
-    assertSame(mutex, ((SynchronizedCollection<?>) values).mutex);
+    assertThat(((SynchronizedCollection<?>) values).mutex).isSameInstanceAs(mutex);
   }
 
   public void testEntrySet() {
     Map<String, Integer> map = create();
     Set<Entry<String, Integer>> entrySet = map.entrySet();
     assertTrue(entrySet instanceof SynchronizedSet);
-    assertSame(mutex, ((SynchronizedSet<?>) entrySet).mutex);
+    assertThat(((SynchronizedSet<?>) entrySet).mutex).isSameInstanceAs(mutex);
   }
 
   public void testEquals() {
-    boolean unused = create().equals(new HashMap<String, Integer>());
-  }
-
-  public void testHashCode() {
-    int unused = create().hashCode();
+    new EqualsTester()
+        .addEqualityGroup(create(), new HashMap<>())
+        .addEqualityGroup(singletonMap("a", 1))
+        .testEquals();
   }
 
   public void testToString() {
@@ -231,6 +233,6 @@ public class SynchronizedMapTest extends TestCase {
   }
 
   public void testSerialization() {
-    SerializableTester.reserializeAndAssert(create());
+    reserializeAndAssert(create());
   }
 }

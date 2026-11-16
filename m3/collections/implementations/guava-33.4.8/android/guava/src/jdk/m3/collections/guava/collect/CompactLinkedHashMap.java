@@ -49,7 +49,7 @@ import org.jspecify.annotations.Nullable;
  */
 @J2ktIncompatible // no support for access-order mode in LinkedHashMap delegate
 @GwtIncompatible // not worth using in GWT for now
-class CompactLinkedHashMap<K extends @Nullable Object, V extends @Nullable Object>
+final class CompactLinkedHashMap<K extends @Nullable Object, V extends @Nullable Object>
     extends CompactHashMap<K, V> {
   // TODO(lowasser): implement removeEldestEntry so this can be used as a drop-in replacement
 
@@ -257,4 +257,6 @@ class CompactLinkedHashMap<K extends @Nullable Object, V extends @Nullable Objec
    * they're defined above -- including logic to add and subtract 1 to map between the values stored
    * in the predecessor/successor arrays and the indexes in the elements array that they identify.
    */
+
+  private static final long serialVersionUID = 2360971274758481122L;
 }

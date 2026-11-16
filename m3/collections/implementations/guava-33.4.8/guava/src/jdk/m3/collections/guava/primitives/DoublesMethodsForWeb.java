@@ -20,5 +20,5 @@ import jdk.m3.collections.guava.annotations.GwtCompatible;
  * Holder for web specializations of methods of {@code Doubles}. Intended to be empty for regular
  * version.
  */
-@GwtCompatible(emulated = true)
+@GwtCompatible
 abstract class DoublesMethodsForWeb {}

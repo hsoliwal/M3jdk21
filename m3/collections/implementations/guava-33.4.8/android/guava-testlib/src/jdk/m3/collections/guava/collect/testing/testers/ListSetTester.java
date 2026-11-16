@@ -20,7 +20,7 @@ import static jdk.m3.collections.guava.collect.testing.Helpers.getMethod;
 import static jdk.m3.collections.guava.collect.testing.features.CollectionFeature.ALLOWS_NULL_VALUES;
 import static jdk.m3.collections.guava.collect.testing.features.CollectionSize.ZERO;
 import static jdk.m3.collections.guava.collect.testing.features.ListFeature.SUPPORTS_SET;
-import static jdk.m3.collections.guava.collect.testing.testers.ReflectionFreeAssertThrows.assertThrows;
+import static org.junit.Assert.assertThrows;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
@@ -29,7 +29,6 @@ import jdk.m3.collections.guava.collect.testing.features.CollectionFeature;
 import jdk.m3.collections.guava.collect.testing.features.CollectionSize;
 import jdk.m3.collections.guava.collect.testing.features.ListFeature;
 import java.lang.reflect.Method;
-import org.junit.Ignore;
 
 /**
  * A generic JUnit test which tests {@code set()} operations on a list. Can't be invoked directly;
@@ -37,10 +36,7 @@ import org.junit.Ignore;
  *
  * @author George van den Driessche
  */
-@GwtCompatible(emulated = true)
-@Ignore("test runners must not instantiate and run this directly, only via suites we build")
-// @Ignore affects the Android test runner, which respects JUnit 4 annotations on JUnit 3 tests.
-@SuppressWarnings("JUnit4ClassUsedInJUnit3")
+@GwtCompatible
 public class ListSetTester<E> extends AbstractListTester<E> {
   @ListFeature.Require(SUPPORTS_SET)
   @CollectionSize.Require(absent = ZERO)
@@ -101,10 +97,10 @@ public class ListSetTester<E> extends AbstractListTester<E> {
   @CollectionSize.Require(ZERO)
   @ListFeature.Require(absent = SUPPORTS_SET)
   public void testSet_unsupportedByEmptyList() {
-    try {
-      getList().set(0, e3());
-      fail("set() should throw UnsupportedOperationException or IndexOutOfBoundsException");
-    } catch (UnsupportedOperationException | IndexOutOfBoundsException expected) {
+    RuntimeException expected = assertThrows(RuntimeException.class, () -> getList().set(0, e3()));
+    if (!(expected instanceof UnsupportedOperationException
+        || expected instanceof IndexOutOfBoundsException)) {
+      throw expected;
     }
     expectUnchanged();
   }

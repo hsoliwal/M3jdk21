@@ -33,7 +33,7 @@ import org.jspecify.annotations.Nullable;
  *
  * <p>This class is GWT-compatible.
  *
- * <h3>Purpose</h3>
+ * <h2>Purpose</h2>
  *
  * <p>The main purpose of {@code ListenableFuture} is to help you chain together a graph of
  * asynchronous operations. You can chain them together manually with calls to methods like {@link
@@ -46,6 +46,10 @@ import org.jspecify.annotations.Nullable;
  * <ul>
  *   <li><a href="https://dagger.dev/producers.html">Dagger Producers</a>
  * </ul>
+ *
+ * <p>If the operations in your chain create objects that must be closed when the computation is
+ * done, such as database connections or file handles, consider {@link ClosingFuture}. It closes
+ * them once the whole computation completes, fails, or is cancelled.
  *
  * <p>The main purpose of {@link #addListener addListener} is to support this chaining. You will
  * rarely use it directly, in part because it does not provide direct access to the {@code Future}
@@ -66,7 +70,7 @@ import org.jspecify.annotations.Nullable;
  * }, executor);
  * }
  *
- * <h3>How to get an instance</h3>
+ * <h2>How to get an instance</h2>
  *
  * <p>We encourage you to return {@code ListenableFuture} from your methods so that your users can
  * take advantage of the {@linkplain Futures utilities built atop the class}. The way that you will
@@ -97,6 +101,10 @@ import org.jspecify.annotations.Nullable;
  * the return type. For this case, we provide a more expensive workaround in {@code
  * JdkFutureAdapters}. However, when possible, it is more efficient and reliable to create a {@code
  * ListenableFuture} directly.
+ *
+ * <p><b>{@link java.util.concurrent.CompletableFuture}</b>: If you need to adapt between {@link
+ * ListenableFuture} and {@code CompletableFuture}, consider <a
+ * href="https://github.com/lukas-krecan/future-converter">Future Converter</a>.
  *
  * @author Sven Mawson
  * @author Nishant Thakkar
@@ -143,7 +151,7 @@ public interface ListenableFuture<V extends @Nullable Object> extends Future<V> 
    * Futures#addCallback addCallback()}.
    *
    * <p>Memory consistency effects: Actions in a thread prior to adding a listener <a
-   * href="https://docs.oracle.com/javase/specs/jls/se7/html/jls-17.html#jls-17.4.5">
+   * href="https://docs.oracle.com/javase/specs/jls/se27/html/jls-17.html#jls-17.4.5">
    * <i>happen-before</i></a> its execution begins, perhaps in another thread.
    *
    * <p>Guava implementations of {@code ListenableFuture} promptly release references to listeners

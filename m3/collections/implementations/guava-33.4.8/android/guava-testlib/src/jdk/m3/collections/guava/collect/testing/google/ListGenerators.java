@@ -53,7 +53,7 @@ public final class ListGenerators {
   public static class BuilderAddListGenerator extends TestStringListGenerator {
     @Override
     protected List<String> create(String[] elements) {
-      ImmutableList.Builder<String> builder = ImmutableList.<String>builder();
+      ImmutableList.Builder<String> builder = ImmutableList.builder();
       for (String element : elements) {
         builder.add(element);
       }
@@ -132,11 +132,9 @@ public final class ListGenerators {
     }
   }
 
-  private abstract static class TestUnhashableListGenerator
+  public static class UnhashableElementsImmutableListGenerator
       extends TestUnhashableCollectionGenerator<List<UnhashableObject>>
-      implements TestListGenerator<UnhashableObject> {}
-
-  public static class UnhashableElementsImmutableListGenerator extends TestUnhashableListGenerator {
+      implements TestListGenerator<UnhashableObject> {
     @Override
     public List<UnhashableObject> create(UnhashableObject[] elements) {
       return ImmutableList.copyOf(elements);

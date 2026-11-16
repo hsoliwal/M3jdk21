@@ -15,7 +15,7 @@
 package jdk.m3.collections.guava.collect;
 
 import static jdk.m3.collections.guava.collect.Maps.immutableEntry;
-import static com.google.common.truth.Truth.assertThat;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
 import static java.lang.Math.max;
 
 import jdk.m3.collections.guava.collect.testing.MapTestSuiteBuilder;
@@ -23,6 +23,7 @@ import jdk.m3.collections.guava.collect.testing.TestStringMapGenerator;
 import jdk.m3.collections.guava.collect.testing.features.CollectionFeature;
 import jdk.m3.collections.guava.collect.testing.features.CollectionSize;
 import jdk.m3.collections.guava.collect.testing.features.MapFeature;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -154,13 +155,13 @@ public class CompactLinkedHashMapTest extends TestCase {
     testHasMapEntriesInOrder(map, 1, "a", 4, "b", 3, "d", 2, "c");
   }
 
-  private void testHasMapEntriesInOrder(Map<?, ?> map, Object... alternatingKeysAndValues) {
-    List<? extends Entry<?, ?>> entries = Lists.newArrayList(map.entrySet());
-    List<Object> keys = Lists.newArrayList(map.keySet());
-    List<Object> values = Lists.newArrayList(map.values());
-    assertEquals(2 * entries.size(), alternatingKeysAndValues.length);
-    assertEquals(2 * keys.size(), alternatingKeysAndValues.length);
-    assertEquals(2 * values.size(), alternatingKeysAndValues.length);
+  private static void testHasMapEntriesInOrder(Map<?, ?> map, Object... alternatingKeysAndValues) {
+    List<? extends Entry<?, ?>> entries = new ArrayList<>(map.entrySet());
+    List<Object> keys = new ArrayList<>(map.keySet());
+    List<Object> values = new ArrayList<>(map.values());
+    assertThat(alternatingKeysAndValues).hasLength(2 * entries.size());
+    assertThat(alternatingKeysAndValues).hasLength(2 * keys.size());
+    assertThat(alternatingKeysAndValues).hasLength(2 * values.size());
     for (int i = 0; i < map.size(); i++) {
       Object expectedKey = alternatingKeysAndValues[2 * i];
       Object expectedValue = alternatingKeysAndValues[2 * i + 1];

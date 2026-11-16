@@ -19,7 +19,6 @@ import jdk.m3.collections.guava.annotations.GwtIncompatible;
 import jdk.m3.collections.guava.annotations.J2ktIncompatible;
 import jdk.m3.collections.guava.collect.Multiset.Entry;
 import jdk.m3.collections.guava.primitives.Ints;
-import com.google.errorprone.annotations.concurrent.LazyInit;
 import com.google.j2objc.annotations.WeakOuter;
 import java.io.Serializable;
 import org.jspecify.annotations.Nullable;
@@ -30,16 +29,14 @@ import org.jspecify.annotations.Nullable;
  * @author Jared Levy
  * @author Louis Wasserman
  */
-@GwtCompatible(emulated = true, serializable = true)
+@GwtCompatible
 @SuppressWarnings("serial") // uses writeReplace(), not default serialization
-class RegularImmutableMultiset<E> extends ImmutableMultiset<E> {
+final class RegularImmutableMultiset<E> extends ImmutableMultiset<E> {
   static final RegularImmutableMultiset<Object> EMPTY =
       new RegularImmutableMultiset<>(ObjectCountHashMap.create());
 
   final transient ObjectCountHashMap<E> contents;
   private final transient int size;
-
-  @LazyInit private transient @Nullable ImmutableSet<E> elementSet;
 
   RegularImmutableMultiset(ObjectCountHashMap<E> contents) {
     this.contents = contents;
@@ -67,8 +64,7 @@ class RegularImmutableMultiset<E> extends ImmutableMultiset<E> {
 
   @Override
   public ImmutableSet<E> elementSet() {
-    ImmutableSet<E> result = elementSet;
-    return (result == null) ? elementSet = new ElementSet() : result;
+    return new ElementSet();
   }
 
   @WeakOuter
@@ -97,9 +93,9 @@ class RegularImmutableMultiset<E> extends ImmutableMultiset<E> {
     // redeclare to help optimizers with b/310253115
     @SuppressWarnings("RedundantOverride")
     @Override
-    @J2ktIncompatible // serialization
-    @GwtIncompatible // serialization
-    Object writeReplace() {
+    @GwtIncompatible
+    @J2ktIncompatible
+        Object writeReplace() {
       return super.writeReplace();
     }
   }

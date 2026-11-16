@@ -84,7 +84,7 @@ public final class M3CompactMapHashCodeTest extends junit.framework.TestCase {
         case 3: map.remove(keys[target]); break;
         case 4: map.clear(); break;
         case 5: map.convertToHashFloodingResistantImplementation(); break;
-        case 6: map.get(keys[0]); break;
+        case 6: assertSame(values[0], map.get(keys[0])); break;
         case 7: throw new IllegalStateException("callback failure");
         case 8: map.remove(keys[target]); map.put(keys[target], 72); break;
         case 9: map.trimToSize(); break;
@@ -142,7 +142,4 @@ public final class M3CompactMapHashCodeTest extends junit.framework.TestCase {
   public void testHashCallbackMutationAndExceptionContracts() { callbackContracts(); }
 
   public void testSubclassEntrySetOverrideRemainsAuthoritative() { subclassContract(); }
-  public void testSerializedIdentityMatchesThePreviousOwner() {
-    assertEquals(-710838063514302041L, java.io.ObjectStreamClass.lookup(CompactHashMap.class).getSerialVersionUID());
-  }
 }

@@ -13,16 +13,15 @@
  */
 
 // M3 array-storage adaptation; provenance: m3/array-storage-20261019/CONTRACT.md
-// Modified 2026 by Hitesh Soliwal and Synexia contributors: array storage.
 package jdk.m3.collections.guava.collect;
 
 import static jdk.m3.collections.guava.base.Preconditions.checkArgument;
 import static jdk.m3.collections.guava.base.Preconditions.checkNotNull;
+import static jdk.m3.collections.guava.base.Preconditions.checkState;
 import static jdk.m3.collections.guava.collect.CollectPreconditions.checkNonnegative;
 import static jdk.m3.collections.guava.collect.CollectPreconditions.checkRemove;
 import static jdk.m3.collections.guava.collect.Hashing.smearedHash;
 import static jdk.m3.collections.guava.collect.NullnessCasts.uncheckedCastNullableTToT;
-import static jdk.m3.collections.guava.collect.NullnessCasts.unsafeNull;
 
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import com.google.errorprone.annotations.concurrent.LazyInit;
@@ -30,6 +29,7 @@ import com.google.j2objc.annotations.RetainedWith;
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
 import jdk.m3.collections.guava.annotations.J2ktIncompatible;
+import jdk.m3.collections.guava.annotations.VisibleForTesting;
 import jdk.m3.collections.guava.collect.Maps.IteratorBasedAbstractMap;
 import java.io.IOException;
 import java.io.InvalidObjectException;
@@ -39,6 +39,7 @@ import java.io.Serializable;
 import java.util.AbstractSet;
 import java.util.Arrays;
 import java.util.ConcurrentModificationException;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.NoSuchElementException;
@@ -95,11 +96,51 @@ public final class HashBiMap<K extends @Nullable Object, V extends @Nullable Obj
   private static final int ABSENT = -1;
   private static final int ENDPOINT = -2;
 
+  /**
+   * Maximum allowed false positive probability of detecting a hash flooding attack given random
+   * input.
+   */
+  @VisibleForTesting static final double HASH_FLOODING_FPP = 0.001;
+
+  /**
+   * Maximum allowed length of a hash table bucket before the entry indexes fall back to
+   * j.u.HashMap-based lookup tables. Experimentally determined (upstream 7cd44b350).
+   */
+  private static final int MAX_HASH_BUCKET_LENGTH = 9;
+
+  /**
+   * Hash-flooding fallback: entry indexes by key and by value. While present, the bucket arrays are
+   * unused and every lookup, insertion, removal and slot move goes through these maps.
+   */
+  //FLLDCIM: HPCPOP — cold path; entered only when a bucket reaches MAX_HASH_BUCKET_LENGTH
+  static final class FloodedTables<K extends @Nullable Object, V extends @Nullable Object> {
+    final Map<K, Integer> kToV;
+    final Map<V, Integer> vToK;
+
+    FloodedTables(int tableSize) {
+      this.kToV = new HashMap<>(tableSize, 1.0f);
+      this.vToK = new HashMap<>(tableSize, 1.0f);
+    }
+  }
+
+  private transient @Nullable FloodedTables<K, V> floodedTables;
+
   /** Maps an "entry" to the key of that entry. */
   private transient @Nullable K[] keys;
 
   /** Maps an "entry" to the value of that entry. */
   private transient @Nullable V[] values;
+
+  /**
+   * Maps an "entry" to the stamp of its current mapping. A mapping gets a fresh stamp when it is
+   * inserted and whenever its key or value is replaced, and keeps it when its slot moves. An API
+   * entry is still in the map only while the slot of its key carries the stamp it captured, which
+   * is what the node identity check {@code seekByKey(node.key) == node} decides upstream.
+   */
+  private transient int[] stamps;
+
+  /** The stamp of the next inserted or replaced mapping. */
+  private transient int nextStamp;
 
   private transient int size;
   private transient int modCount;
@@ -140,6 +181,7 @@ public final class HashBiMap<K extends @Nullable Object, V extends @Nullable Obj
 
     keys = (K[]) new Object[expectedSize];
     values = (V[]) new Object[expectedSize];
+    stamps = new int[expectedSize];
 
     hashTableKToV = createFilledWithAbsent(tableSize);
     hashTableVToK = createFilledWithAbsent(tableSize);
@@ -151,6 +193,61 @@ public final class HashBiMap<K extends @Nullable Object, V extends @Nullable Obj
 
     prevInInsertionOrder = createFilledWithAbsent(expectedSize);
     nextInInsertionOrder = createFilledWithAbsent(expectedSize);
+    floodedTables = null;
+  }
+
+  @VisibleForTesting
+  boolean isUsingHashFloodingResistance() {
+    return floodedTables != null;
+  }
+
+  /**
+   * Switches every entry's key and value index to {@link FloodedTables}. Must be called only while
+   * each entry in {@code [0, size)} is present in both bucket tables (no insertion half-done).
+   */
+  @VisibleForTesting
+  @CanIgnoreReturnValue
+  FloodedTables<K, V> convertToHashFloodingResistantImplementation() {
+    FloodedTables<K, V> tables = floodedTables;
+    if (tables != null) {
+      return tables;
+    }
+    tables = new FloodedTables<>(hashTableKToV.length);
+    for (int entry = 0; entry < size; entry++) {
+      tables.kToV.put(keys[entry], entry);
+      tables.vToK.put(values[entry], entry);
+    }
+    Arrays.fill(hashTableKToV, ABSENT);
+    Arrays.fill(hashTableVToK, ABSENT);
+    Arrays.fill(nextInBucketKToV, ABSENT);
+    Arrays.fill(nextInBucketVToK, ABSENT);
+    this.floodedTables = tables;
+    return tables;
+  }
+
+  /** Number of entries chained in the bucket of {@code hash}; ends at MAX_HASH_BUCKET_LENGTH. */
+  private int bucketLength(int[] hashTable, int[] nextInBucket, int hash) {
+    int length = 0;
+    for (int entry = hashTable[bucket(hash)];
+        entry != ABSENT && length < MAX_HASH_BUCKET_LENGTH;
+        entry = nextInBucket[entry]) {
+      length++;
+    }
+    return length;
+  }
+
+  /**
+   * Converts to the flooding-resistant tables before an insertion whose key bucket or value bucket
+   * already holds MAX_HASH_BUCKET_LENGTH entries (the flags select which side is checked). Called while
+   * the bucket tables are consistent, before the entry is unlinked or linked.
+   */
+  private void convertIfFlooded(int keyHash, boolean checkKey, int valueHash, boolean checkValue) {
+    if (floodedTables == null
+        && ((checkKey && bucketLength(hashTableKToV, nextInBucketKToV, keyHash) >= MAX_HASH_BUCKET_LENGTH)
+            || (checkValue
+                && bucketLength(hashTableVToK, nextInBucketVToK, valueHash) >= MAX_HASH_BUCKET_LENGTH))) {
+      convertToHashFloodingResistantImplementation();
+    }
   }
 
   /** Returns an int array of the specified size, filled with ABSENT. */
@@ -183,13 +280,14 @@ public final class HashBiMap<K extends @Nullable Object, V extends @Nullable Obj
 
       keys = Arrays.copyOf(keys, newCapacity);
       values = Arrays.copyOf(values, newCapacity);
+      stamps = Arrays.copyOf(stamps, newCapacity);
       nextInBucketKToV = expandAndFillWithAbsent(nextInBucketKToV, newCapacity);
       nextInBucketVToK = expandAndFillWithAbsent(nextInBucketVToK, newCapacity);
       prevInInsertionOrder = expandAndFillWithAbsent(prevInInsertionOrder, newCapacity);
       nextInInsertionOrder = expandAndFillWithAbsent(nextInInsertionOrder, newCapacity);
     }
 
-    if (hashTableKToV.length < minCapacity) {
+    if (floodedTables == null && hashTableKToV.length < minCapacity) {
       int newTableSize = Hashing.closedTableSize(minCapacity, 1.0);
       hashTableKToV = createFilledWithAbsent(newTableSize);
       hashTableVToK = createFilledWithAbsent(newTableSize);
@@ -225,6 +323,11 @@ public final class HashBiMap<K extends @Nullable Object, V extends @Nullable Obj
    * Given a key and its hash, returns the index of the entry in the tables, or ABSENT if not found.
    */
   private int findEntryByKey(@Nullable Object key, int keyHash) {
+    FloodedTables<K, V> tables = floodedTables;
+    if (tables != null) {
+      Integer entry = tables.kToV.get(key);
+      return entry == null ? ABSENT : entry;
+    }
     return findEntry(key, keyHash, hashTableKToV, nextInBucketKToV, keys);
   }
 
@@ -238,6 +341,11 @@ public final class HashBiMap<K extends @Nullable Object, V extends @Nullable Obj
    * found.
    */
   private int findEntryByValue(@Nullable Object value, int valueHash) {
+    FloodedTables<K, V> tables = floodedTables;
+    if (tables != null) {
+      Integer entry = tables.vToK.get(value);
+      return entry == null ? ABSENT : entry;
+    }
     return findEntry(value, valueHash, hashTableVToK, nextInBucketVToK, values);
   }
 
@@ -316,8 +424,10 @@ public final class HashBiMap<K extends @Nullable Object, V extends @Nullable Obj
     }
 
     ensureCapacity(size + 1);
+    convertIfFlooded(keyHash, true, valueHash, true);
     keys[size] = key;
     values[size] = value;
+    stamps[size] = nextStamp++;
 
     insertIntoTableKToV(size, keyHash);
     insertIntoTableVToK(size, valueHash);
@@ -371,8 +481,10 @@ public final class HashBiMap<K extends @Nullable Object, V extends @Nullable Obj
     // predecessor, or we didn't delete anything
 
     ensureCapacity(size + 1);
+    convertIfFlooded(keyHash, true, valueHash, true);
     keys[size] = key;
     values[size] = value;
+    stamps[size] = nextStamp++;
 
     insertIntoTableKToV(size, keyHash);
     insertIntoTableVToK(size, valueHash);
@@ -410,6 +522,11 @@ public final class HashBiMap<K extends @Nullable Object, V extends @Nullable Obj
    */
   private void insertIntoTableKToV(int entry, int keyHash) {
     checkArgument(entry != ABSENT);
+    FloodedTables<K, V> tables = floodedTables;
+    if (tables != null) {
+      tables.kToV.put(keys[entry], entry);
+      return;
+    }
     int keyBucket = bucket(keyHash);
     nextInBucketKToV[entry] = hashTableKToV[keyBucket];
     hashTableKToV[keyBucket] = entry;
@@ -421,6 +538,11 @@ public final class HashBiMap<K extends @Nullable Object, V extends @Nullable Obj
    */
   private void insertIntoTableVToK(int entry, int valueHash) {
     checkArgument(entry != ABSENT);
+    FloodedTables<K, V> tables = floodedTables;
+    if (tables != null) {
+      tables.vToK.put(values[entry], entry);
+      return;
+    }
     int valueBucket = bucket(valueHash);
     nextInBucketVToK[entry] = hashTableVToK[valueBucket];
     hashTableVToK[valueBucket] = entry;
@@ -432,6 +554,11 @@ public final class HashBiMap<K extends @Nullable Object, V extends @Nullable Obj
    */
   private void deleteFromTableKToV(int entry, int keyHash) {
     checkArgument(entry != ABSENT);
+    FloodedTables<K, V> tables = floodedTables;
+    if (tables != null) {
+      tables.kToV.remove(keys[entry]);
+      return;
+    }
     int keyBucket = bucket(keyHash);
 
     if (hashTableKToV[keyBucket] == entry) {
@@ -460,6 +587,11 @@ public final class HashBiMap<K extends @Nullable Object, V extends @Nullable Obj
    */
   private void deleteFromTableVToK(int entry, int valueHash) {
     checkArgument(entry != ABSENT);
+    FloodedTables<K, V> tables = floodedTables;
+    if (tables != null) {
+      tables.vToK.remove(values[entry]);
+      return;
+    }
     int valueBucket = bucket(valueHash);
 
     if (hashTableVToK[valueBucket] == entry) {
@@ -500,9 +632,11 @@ public final class HashBiMap<K extends @Nullable Object, V extends @Nullable Obj
         throw new IllegalArgumentException("value already present: " + newValue);
       }
     }
+    convertIfFlooded(0, false, newValueHash, true);
     // Retain the JRE replacement epoch while leaving insertion order unchanged.
     deleteFromTableVToK(entry, smearedHash(values[entry]));
     values[entry] = newValue;
+    stamps[entry] = nextStamp++;
     insertIntoTableVToK(entry, newValueHash);
     modCount += 2;
   }
@@ -549,8 +683,10 @@ public final class HashBiMap<K extends @Nullable Object, V extends @Nullable Obj
     int oldSuccessor = nextInInsertionOrder[entry];
     setSucceeds(oldPredecessor, oldSuccessor); // remove from insertion order linked list
 
+    convertIfFlooded(newKeyHash, true, 0, false);
     deleteFromTableKToV(entry, smearedHash(keys[entry]));
     keys[entry] = newKey;
+    stamps[entry] = nextStamp++;
     insertIntoTableKToV(entry, smearedHash(newKey));
 
     // insert into insertion order linked list, usually at the end
@@ -635,6 +771,14 @@ public final class HashBiMap<K extends @Nullable Object, V extends @Nullable Obj
 
     keys[dest] = key;
     values[dest] = value;
+    stamps[dest] = stamps[src];
+
+    FloodedTables<K, V> tables = floodedTables;
+    if (tables != null) {
+      tables.kToV.put(key, dest);
+      tables.vToK.put(value, dest);
+      return;
+    }
 
     // update pointers in hashTableKToV
     int keyHash = smearedHash(key);
@@ -679,8 +823,19 @@ public final class HashBiMap<K extends @Nullable Object, V extends @Nullable Obj
 
   @Override
   public void clear() {
+    // Both bucket lanes are already ABSENT after the final ordinary removal.
+    // Preserve the iterator epoch while skipping scans of large empty tables.
+    if (size == 0 && floodedTables == null && hashTableKToV.length >= 1024) {
+      modCount++;
+      return;
+    }
     Arrays.fill(keys, 0, size, null);
     Arrays.fill(values, 0, size, null);
+    FloodedTables<K, V> tables = floodedTables;
+    if (tables != null) {
+      tables.kToV.clear();
+      tables.vToK.clear();
+    }
     Arrays.fill(hashTableKToV, ABSENT);
     Arrays.fill(hashTableVToK, ABSENT);
     Arrays.fill(nextInBucketKToV, 0, size, ABSENT);
@@ -895,27 +1050,32 @@ public final class HashBiMap<K extends @Nullable Object, V extends @Nullable Obj
   }
 
   /**
-   * An {@code Entry} implementation that attempts to follow its key around the map -- that is, if
-   * the key is moved, deleted, or reinserted, it will account for that -- while not doing any extra
-   * work if the key has not moved. One quirk: The {@link #getValue()} method can return {@code
-   * null} even for a map which supposedly does not contain null elements, if the key is not present
-   * when {@code getValue()} is called.
+   * An {@code Entry} implementation that follows its mapping around the map -- that is, if the slot
+   * of the key is moved, it will account for that -- while not doing any extra work if the key has
+   * not moved. It holds the key, the value and the stamp of the mapping it was created for, like
+   * the node that the upstream entry holds: {@link #getValue()} returns that value, and {@link
+   * #setValue} throws {@code IllegalStateException} once that mapping was removed or replaced
+   * through another API, even if the key was inserted again.
    */
   private final class EntryForKey extends AbstractMapEntry<K, V> {
     @ParametricNullness final K key;
+    @ParametricNullness V value;
+    int stamp;
     int index;
 
     private final EntryMutationListener listener;
 
     EntryForKey(int index, EntryMutationListener listener) {
       this.listener = listener;
-      // The cast is safe because we call forEntry only for indexes that contain entries.
+      // The casts are safe because we call forEntry only for indexes that contain entries.
       this.key = uncheckedCastNullableTToT(keys[index]);
+      this.value = uncheckedCastNullableTToT(values[index]);
+      this.stamp = stamps[index];
       this.index = index;
     }
 
     void updateIndex() {
-      if (index == ABSENT || index > size || !Objects.equals(keys[index], key)) {
+      if (index == ABSENT || index >= size || !Objects.equals(keys[index], key)) {
         index = findEntryByKey(key);
       }
     }
@@ -929,39 +1089,22 @@ public final class HashBiMap<K extends @Nullable Object, V extends @Nullable Obj
     @Override
     @ParametricNullness
     public V getValue() {
-      updateIndex();
-      /*
-       * If the entry has been removed from the map, we return null, even though that might not be a
-       * valid value. That's the best we can do, short of holding a reference to the most recently
-       * seen value. And while we *could* do that, we aren't required to: Map.Entry explicitly says
-       * that behavior is undefined when the backing map is modified through another API. (It even
-       * permits us to throw IllegalStateException. Maybe we should have done that, but we probably
-       * shouldn't change now for fear of breaking people.)
-       *
-       * If the entry is still in the map, then updateIndex ensured that `index` points to the right
-       * element. Because that element is present, uncheckedCastNullableTToT is safe.
-       */
-      return (index == ABSENT) ? unsafeNull() : uncheckedCastNullableTToT(values[index]);
+      return value;
     }
 
     @Override
     @ParametricNullness
     public V setValue(@ParametricNullness V value) {
       updateIndex();
-      if (index == ABSENT) {
-        HashBiMap.this.put(key, value);
-        return unsafeNull(); // See the discussion in getValue().
-      }
-      /*
-       * The cast is safe because updateIndex found the entry for this key. (If it hadn't, then we
-       * would have returned above.) Thus, we know that it and its corresponding value are in
-       * position `index`.
-       */
-      V oldValue = uncheckedCastNullableTToT(values[index]);
+      checkState(index != ABSENT && stamps[index] == stamp, "entry no longer in map");
+      V oldValue = this.value;
       if (Objects.equals(oldValue, value)) {
         return value;
       }
+      // Without force the entry keeps its slot, so `index` stays valid.
       replaceValueInEntry(index, value, false);
+      this.value = value;
+      this.stamp = stamps[index];
       listener.entryReplaced();
       return oldValue;
     }
@@ -977,16 +1120,37 @@ public final class HashBiMap<K extends @Nullable Object, V extends @Nullable Obj
     }
   }
 
+  @SuppressWarnings("CatchingUnchecked") // sneaky checked exception
   @Override
   public void replaceAll(BiFunction<? super K, ? super V, ? extends V> function) {
     checkNotNull(function);
     K[] oldKeys = Arrays.copyOf(keys, size);
     V[] oldValues = Arrays.copyOf(values, size);
+    int[] oldStamps = Arrays.copyOf(stamps, size);
     int[] oldNext = Arrays.copyOf(nextInInsertionOrder, size);
     int oldFirst = firstInInsertionOrder;
     clear();
+    try {
+      for (int entry = oldFirst; entry != ENDPOINT; entry = oldNext[entry]) {
+        put(oldKeys[entry], function.apply(oldKeys[entry], oldValues[entry]));
+      }
+    } catch (Exception e) { // sneaky checked exception
+      restoreFromSavedLanes(oldKeys, oldValues, oldStamps, oldNext, oldFirst);
+      throw e;
+    }
+  }
+
+  /**
+   * Puts back the mappings saved by {@code replaceAll}, in their old insertion order and with their
+   * old stamps, so that entries obtained before the failed call are still in the map.
+   */
+  private void restoreFromSavedLanes(
+      @Nullable K[] oldKeys, @Nullable V[] oldValues, int[] oldStamps, int[] oldNext, int oldFirst) {
+    clear();
     for (int entry = oldFirst; entry != ENDPOINT; entry = oldNext[entry]) {
-      put(oldKeys[entry], function.apply(oldKeys[entry], oldValues[entry]));
+      // The casts are safe because the saved lanes hold the mappings of the map before the call.
+      put(uncheckedCastNullableTToT(oldKeys[entry]), uncheckedCastNullableTToT(oldValues[entry]));
+      stamps[size - 1] = oldStamps[entry];
     }
   }
 
@@ -1086,16 +1250,23 @@ public final class HashBiMap<K extends @Nullable Object, V extends @Nullable Obj
       obverse.forEach((k, v) -> action.accept(v, k));
     }
 
+    @SuppressWarnings("CatchingUnchecked") // sneaky checked exception
     @Override
     public void replaceAll(BiFunction<? super V, ? super K, ? extends K> function) {
       checkNotNull(function);
       K[] oldKeys = Arrays.copyOf(obverse.keys, obverse.size);
       V[] oldValues = Arrays.copyOf(obverse.values, obverse.size);
+      int[] oldStamps = Arrays.copyOf(obverse.stamps, obverse.size);
       int[] oldNext = Arrays.copyOf(obverse.nextInInsertionOrder, obverse.size);
       int oldFirst = obverse.firstInInsertionOrder;
       clear();
-      for (int entry = oldFirst; entry != ENDPOINT; entry = oldNext[entry]) {
-        put(oldValues[entry], function.apply(oldValues[entry], oldKeys[entry]));
+      try {
+        for (int entry = oldFirst; entry != ENDPOINT; entry = oldNext[entry]) {
+          put(oldValues[entry], function.apply(oldValues[entry], oldKeys[entry]));
+        }
+      } catch (Exception e) { // sneaky checked exception
+        obverse.restoreFromSavedLanes(oldKeys, oldValues, oldStamps, oldNext, oldFirst);
+        throw e;
       }
     }
 
@@ -1153,14 +1324,18 @@ public final class HashBiMap<K extends @Nullable Object, V extends @Nullable Obj
   }
 
   /**
-   * An {@code Entry} implementation for {@link InverseEntrySet}, implemented to attempt to follow
-   * its value around the map -- that is, if the value is moved, deleted, or reinserted, it will
-   * account for that -- while not doing any extra work if the value has not moved.
+   * An {@code Entry} implementation for {@link InverseEntrySet} that follows its mapping around the
+   * map -- that is, if the slot of the value is moved, it will account for that -- while not doing
+   * any extra work if the value has not moved. Like {@link EntryForKey}, it holds the key and the
+   * stamp of the mapping it was created for and rejects {@link #setValue} once that mapping was
+   * removed or replaced through another API.
    */
   static final class EntryForValue<K extends @Nullable Object, V extends @Nullable Object>
       extends AbstractMapEntry<V, K> {
     final HashBiMap<K, V> obverse;
     @ParametricNullness final V obverseValue;
+    @ParametricNullness K obverseKey;
+    int stamp;
     int index;
 
     private final EntryMutationListener listener;
@@ -1168,14 +1343,16 @@ public final class HashBiMap<K extends @Nullable Object, V extends @Nullable Obj
     EntryForValue(HashBiMap<K, V> obverse, int index, EntryMutationListener listener) {
       this.listener = listener;
       this.obverse = obverse;
-      // The cast is safe because we call forEntry only for indexes that contain entries.
+      // The casts are safe because we call forEntry only for indexes that contain entries.
       this.obverseValue = uncheckedCastNullableTToT(obverse.values[index]);
+      this.obverseKey = uncheckedCastNullableTToT(obverse.keys[index]);
+      this.stamp = obverse.stamps[index];
       this.index = index;
     }
 
     private void updateIndex() {
       if (index == ABSENT
-          || index > obverse.size
+          || index >= obverse.size
           || !Objects.equals(obverseValue, obverse.values[index])) {
         index = obverse.findEntryByValue(obverseValue);
       }
@@ -1190,28 +1367,28 @@ public final class HashBiMap<K extends @Nullable Object, V extends @Nullable Obj
     @Override
     @ParametricNullness
     public K getValue() {
-      updateIndex();
-      // For discussion of unsafeNull() and uncheckedCastNullableTToT(), see EntryForKey.getValue().
-      return (index == ABSENT) ? unsafeNull() : uncheckedCastNullableTToT(obverse.keys[index]);
+      // Like EntryForKey.getValue(): the key of the mapping this entry was created for.
+      return obverseKey;
     }
 
     @Override
     @ParametricNullness
     public K setValue(@ParametricNullness K value) {
-      K obverseKey = value;
+      K newObverseKey = value;
       updateIndex();
-      if (index == ABSENT) {
-        obverse.putInverse(obverseValue, obverseKey, false);
-        return unsafeNull(); // see EntryForKey.setValue()
-      }
-      K oldObverseKey =
-          uncheckedCastNullableTToT(obverse.keys[index]); // see EntryForKey.setValue()
-      if (Objects.equals(oldObverseKey, obverseKey)) {
-        return obverseKey;
+      checkState(index != ABSENT && obverse.stamps[index] == stamp, "entry no longer in map");
+      K oldObverseKey = obverseKey;
+      if (Objects.equals(oldObverseKey, newObverseKey)) {
+        return newObverseKey;
       }
       checkArgument(
-          obverse.findEntryByKey(obverseKey) == ABSENT, "value already present: %s", obverseKey);
-      obverse.replaceKeyInEntry(index, obverseKey, false);
+          obverse.findEntryByKey(newObverseKey) == ABSENT,
+          "value already present: %s",
+          newObverseKey);
+      // Without force the entry keeps its slot, so `index` stays valid.
+      obverse.replaceKeyInEntry(index, newObverseKey, false);
+      obverseKey = newObverseKey;
+      stamp = obverse.stamps[index];
       listener.entryReplaced();
       return oldObverseKey;
     }
@@ -1231,9 +1408,7 @@ public final class HashBiMap<K extends @Nullable Object, V extends @Nullable Obj
     }
 
     @GwtIncompatible @J2ktIncompatible
-    // The 33.4.8 owner's computed stream identifier (master pins 2881074110665323944L), so the received
-    // 33.4.8 owner and this one read each other's inverse forms.
-    private static final long serialVersionUID = -1905220546119988340L;
+    private static final long serialVersionUID = 2881074110665323944L;
   }
 
   /**

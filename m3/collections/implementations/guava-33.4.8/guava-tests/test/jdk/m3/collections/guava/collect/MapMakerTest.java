@@ -16,8 +16,9 @@
 
 package jdk.m3.collections.guava.collect;
 
-import static jdk.m3.collections.guava.collect.ReflectionFreeAssertThrows.assertThrows;
 import static jdk.m3.collections.guava.util.concurrent.Uninterruptibles.awaitUninterruptibly;
+import static java.util.Objects.requireNonNull;
+import static org.junit.Assert.assertThrows;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
@@ -34,12 +35,12 @@ import org.jspecify.annotations.NullUnmarked;
 /**
  * @author Charles Fry
  */
-@GwtCompatible(emulated = true)
+@GwtCompatible
 @J2ktIncompatible // MapMaker
 @NullUnmarked
 public class MapMakerTest extends TestCase {
   @GwtIncompatible // NullPointerTester
-  public void testNullParameters() throws Exception {
+  public void testNullParameters() {
     NullPointerTester tester = new NullPointerTester();
     tester.testAllPublicInstanceMethods(new MapMaker());
   }
@@ -73,16 +74,16 @@ public class MapMakerTest extends TestCase {
   // TODO(cpovirk): enable when ready (apparently after a change to our GWT emulation)
   public void xtestInitialCapacity_setTwice() {
     MapMaker maker = new MapMaker().initialCapacity(16);
-    try {
-      // even to the same value is not allowed
-      maker.initialCapacity(16);
-      fail();
-    } catch (IllegalStateException expected) {
-    }
+    // even to the same value is not allowed
+    assertThrows(IllegalStateException.class, () -> maker.initialCapacity(16));
   }
 
   public void testReturnsPlainConcurrentHashMapWhenPossible() {
     Map<?, ?> map = new MapMaker().initialCapacity(5).makeMap();
     assertTrue(map instanceof ConcurrentHashMap);
+  }
+
+  private static boolean isAndroid() {
+    return requireNonNull(System.getProperty("java.runtime.name", "")).contains("Android");
   }
 }

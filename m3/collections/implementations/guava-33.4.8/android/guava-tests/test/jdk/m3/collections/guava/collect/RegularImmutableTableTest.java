@@ -17,7 +17,7 @@
 package jdk.m3.collections.guava.collect;
 
 import static jdk.m3.collections.guava.collect.Tables.immutableCell;
-import static com.google.common.truth.Truth.assertThat;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.collect.Table.Cell;
@@ -45,7 +45,7 @@ public class RegularImmutableTableTest extends AbstractImmutableTableTest {
 
   @Override
   Iterable<ImmutableTable<Character, Integer, String>> getTestInstances() {
-    return ImmutableList.<ImmutableTable<Character, Integer, String>>of(SPARSE, DENSE);
+    return ImmutableList.of(SPARSE, DENSE);
   }
 
   public void testCellSet() {
@@ -82,23 +82,23 @@ public class RegularImmutableTableTest extends AbstractImmutableTableTest {
   }
 
   public void testForCells() {
-    assertTrue(RegularImmutableTable.forCells(CELLS) instanceof DenseImmutableTable<?, ?, ?>);
-    assertTrue(
-        RegularImmutableTable.forCells(
+    assertThat(RegularImmutableTable.forCells(CELLS)).isInstanceOf(DenseImmutableTable.class);
+    assertThat(
+            RegularImmutableTable.forCells(
                 ImmutableSet.of(
                     immutableCell('a', 1, "blah"),
                     immutableCell('b', 2, "blah"),
-                    immutableCell('c', 3, "blah")))
-            instanceof SparseImmutableTable<?, ?, ?>);
+                    immutableCell('c', 3, "blah"))))
+        .isInstanceOf(SparseImmutableTable.class);
   }
 
   public void testGet() {
     for (ImmutableTable<Character, Integer, String> testInstance : getTestInstances()) {
-      assertEquals("foo", testInstance.get('a', 1));
-      assertEquals("bar", testInstance.get('b', 1));
-      assertEquals("baz", testInstance.get('a', 2));
-      assertNull(testInstance.get('b', 2));
-      assertNull(testInstance.get('c', 3));
+      assertThat(testInstance.get('a', 1)).isEqualTo("foo");
+      assertThat(testInstance.get('b', 1)).isEqualTo("bar");
+      assertThat(testInstance.get('a', 2)).isEqualTo("baz");
+      assertThat(testInstance.get('b', 2)).isNull();
+      assertThat(testInstance.get('c', 3)).isNull();
     }
   }
 

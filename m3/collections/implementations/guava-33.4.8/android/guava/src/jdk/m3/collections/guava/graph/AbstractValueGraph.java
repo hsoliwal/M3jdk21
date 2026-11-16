@@ -16,10 +16,9 @@
 
 package jdk.m3.collections.guava.graph;
 
+import static jdk.m3.collections.guava.collect.Maps.asMap;
 import static java.util.Objects.requireNonNull;
 
-import jdk.m3.collections.guava.annotations.Beta;
-import jdk.m3.collections.guava.collect.Maps;
 import java.util.Map;
 import java.util.Set;
 import org.jspecify.annotations.Nullable;
@@ -36,11 +35,10 @@ import org.jspecify.annotations.Nullable;
  * @param <V> Value parameter type
  * @since 20.0
  */
-@Beta
 public abstract class AbstractValueGraph<N, V> extends AbstractBaseGraph<N>
     implements ValueGraph<N, V> {
   /** Constructor for use by subclasses. */
-  public AbstractValueGraph() {}
+  protected AbstractValueGraph() {}
 
   @Override
   public Graph<N> asGraph() {
@@ -141,7 +139,7 @@ public abstract class AbstractValueGraph<N, V> extends AbstractBaseGraph<N>
   }
 
   private static <N, V> Map<EndpointPair<N>, V> edgeValueMap(ValueGraph<N, V> graph) {
-    return Maps.asMap(
+    return asMap(
         graph.edges(),
         edge ->
             // requireNonNull is safe because the endpoint pair comes from the graph.

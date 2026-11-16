@@ -43,7 +43,7 @@ import org.jspecify.annotations.Nullable;
  * ordering or by supplied comparators. When constructing a {@code TreeBasedTable}, you may provide
  * comparators for the row keys and the column keys, or you may use natural ordering for both.
  *
- * <p>The {@link #rowKeySet} method returns a {@link SortedSet} and the {@link #rowMap} method
+ * <p>The {@link #rowKeySet()} method returns a {@link SortedSet} and the {@link #rowMap()} method
  * returns a {@link SortedMap}, instead of the {@link Set} and {@link Map} specified by the {@link
  * Table} interface.
  *
@@ -70,11 +70,11 @@ import org.jspecify.annotations.Nullable;
  * @author Louis Wasserman
  * @since 7.0
  */
-@GwtCompatible(serializable = true)
-public class TreeBasedTable<R, C, V> extends StandardRowSortedTable<R, C, V> {
+@GwtCompatible
+public final class TreeBasedTable<R, C, V> extends StandardRowSortedTable<R, C, V> {
   private final Comparator<? super C> columnComparator;
 
-  private static class Factory<C, V> implements Supplier<Map<C, V>>, Serializable {
+  private static final class Factory<C, V> implements Supplier<Map<C, V>>, Serializable {
     final Comparator<? super C> comparator;
 
     Factory(Comparator<? super C> comparator) {
@@ -145,7 +145,7 @@ public class TreeBasedTable<R, C, V> extends StandardRowSortedTable<R, C, V> {
       replacement = "requireNonNull(this.rowKeySet().comparator())",
       staticImports = "java.util.Objects.requireNonNull")
   @Deprecated
-  public final Comparator<? super R> rowComparator() {
+  public Comparator<? super R> rowComparator() {
     /*
      * requireNonNull is safe because the factories require non-null Comparators, which they pass on
      * to the backing collections.
@@ -183,7 +183,7 @@ public class TreeBasedTable<R, C, V> extends StandardRowSortedTable<R, C, V> {
     return new TreeRow(rowKey);
   }
 
-  private class TreeRow extends Row implements SortedMap<C, V> {
+  private final class TreeRow extends Row implements SortedMap<C, V> {
     final @Nullable C lowerBound;
     final @Nullable C upperBound;
 
@@ -258,7 +258,7 @@ public class TreeBasedTable<R, C, V> extends StandardRowSortedTable<R, C, V> {
       return ((SortedMap<C, V>) backingRowMap).lastKey();
     }
 
-    transient @Nullable SortedMap<C, V> wholeRow;
+    @Nullable SortedMap<C, V> wholeRow;
 
     // If the row was previously empty, we check if there's a new row here every time we're queried.
     void updateWholeRowField() {

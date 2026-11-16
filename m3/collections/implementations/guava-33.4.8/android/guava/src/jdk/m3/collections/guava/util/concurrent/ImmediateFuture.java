@@ -18,7 +18,6 @@ import static jdk.m3.collections.guava.base.Preconditions.checkNotNull;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.util.concurrent.AbstractFuture.TrustedFuture;
-import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executor;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
@@ -26,8 +25,7 @@ import org.jspecify.annotations.Nullable;
 
 /** Implementation of {@link Futures#immediateFuture}. */
 @GwtCompatible
-// TODO(cpovirk): Make this final (but that may break Mockito spy calls).
-class ImmediateFuture<V extends @Nullable Object> implements ListenableFuture<V> {
+final class ImmediateFuture<V extends @Nullable Object> implements ListenableFuture<V> {
   static final ListenableFuture<?> NULL = new ImmediateFuture<@Nullable Object>(null);
 
   private static final LazyLogger log = new LazyLogger(ImmediateFuture.class);
@@ -73,7 +71,7 @@ class ImmediateFuture<V extends @Nullable Object> implements ListenableFuture<V>
 
   @Override
   @ParametricNullness
-  public V get(long timeout, TimeUnit unit) throws ExecutionException {
+  public V get(long timeout, TimeUnit unit) {
     checkNotNull(unit);
     return get();
   }

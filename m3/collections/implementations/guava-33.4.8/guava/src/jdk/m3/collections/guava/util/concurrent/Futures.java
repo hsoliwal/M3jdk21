@@ -20,6 +20,8 @@ import static jdk.m3.collections.guava.util.concurrent.Internal.toNanosSaturated
 import static jdk.m3.collections.guava.util.concurrent.MoreExecutors.directExecutor;
 import static jdk.m3.collections.guava.util.concurrent.Uninterruptibles.getUninterruptibly;
 import static java.util.Objects.requireNonNull;
+import static java.util.concurrent.Executors.callable;
+import static java.util.concurrent.TimeUnit.NANOSECONDS;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
@@ -54,6 +56,8 @@ import org.jspecify.annotations.Nullable;
 /**
  * Static utility methods pertaining to the {@link Future} interface.
  *
+ * <p>For uninterruptible operations, see {@link Uninterruptibles#getUninterruptibly}.
+ *
  * <p>Many of these methods use the {@link ListenableFuture} API; consult the Guava User Guide
  * article on <a href="https://github.com/google/guava/wiki/ListenableFutureExplained">{@code
  * ListenableFuture}</a>.
@@ -68,14 +72,16 @@ import org.jspecify.annotations.Nullable;
  *   <li><a href="https://dagger.dev/producers.html">Dagger Producers</a>
  * </ul>
  *
- * <p>If you do chain your operations manually, you may want to use {@link FluentFuture}.
+ * <p>If you do chain your operations manually, you may want to use {@link FluentFuture}. If those
+ * operations create objects that must be closed when the computation is done, see {@link
+ * ClosingFuture}.
  *
  * @author Kevin Bourrillion
  * @author Nishant Thakkar
  * @author Sven Mawson
  * @since 1.0
  */
-@GwtCompatible(emulated = true)
+@GwtCompatible
 public final class Futures extends GwtFuturesCatchingSpecialization {
 
   // A note on memory visibility.
@@ -231,7 +237,7 @@ public final class Futures extends GwtFuturesCatchingSpecialization {
   // TODO(cpovirk): Return ListenableScheduledFuture?
   public static <O extends @Nullable Object> ListenableFuture<O> scheduleAsync(
       AsyncCallable<O> callable, Duration delay, ScheduledExecutorService executorService) {
-    return scheduleAsync(callable, toNanosSaturated(delay), TimeUnit.NANOSECONDS, executorService);
+    return scheduleAsync(callable, toNanosSaturated(delay), NANOSECONDS, executorService);
   }
 
   /**
@@ -385,7 +391,7 @@ public final class Futures extends GwtFuturesCatchingSpecialization {
   @GwtIncompatible // java.util.concurrent.ScheduledExecutorService
   public static <V extends @Nullable Object> ListenableFuture<V> withTimeout(
       ListenableFuture<V> delegate, Duration time, ScheduledExecutorService scheduledExecutor) {
-    return withTimeout(delegate, toNanosSaturated(time), TimeUnit.NANOSECONDS, scheduledExecutor);
+    return withTimeout(delegate, toNanosSaturated(time), NANOSECONDS, scheduledExecutor);
   }
 
   /**
@@ -408,6 +414,8 @@ public final class Futures extends GwtFuturesCatchingSpecialization {
       long time,
       TimeUnit unit,
       ScheduledExecutorService scheduledExecutor) {
+    checkNotNull(unit);
+    checkNotNull(scheduledExecutor);
     if (delegate.isDone()) {
       return delegate;
     }
@@ -417,7 +425,8 @@ public final class Futures extends GwtFuturesCatchingSpecialization {
   /**
    * Returns a new {@code Future} whose result is asynchronously derived from the result of the
    * given {@code Future}. If the given {@code Future} fails, the returned {@code Future} fails with
-   * the same exception (and the function is not invoked).
+   * the same exception (and the function is not invoked). If the function throws an exception, the
+   * returned {@code Future} fails with that exception.
    *
    * <p>More precisely, the returned {@code Future} takes its result from a {@code Future} produced
    * by applying the given {@code AsyncFunction} to the result of the original {@code Future}.
@@ -457,7 +466,8 @@ public final class Futures extends GwtFuturesCatchingSpecialization {
   /**
    * Returns a new {@code Future} whose result is derived from the result of the given {@code
    * Future}. If {@code input} fails, the returned {@code Future} fails with the same exception (and
-   * the function is not invoked). Example usage:
+   * the function is not invoked). If the function throws an exception, the returned {@code Future}
+   * fails with that exception. Example usage:
    *
    * {@snippet :
    * ListenableFuture<QueryResult> queryFuture = ...;
@@ -543,7 +553,7 @@ public final class Futures extends GwtFuturesCatchingSpecialization {
         return applyTransformation(input.get(timeout, unit));
       }
 
-      private O applyTransformation(I input) throws ExecutionException {
+      O applyTransformation(I input) throws ExecutionException {
         try {
           return function.apply(input);
         } catch (Throwable t) {
@@ -763,15 +773,7 @@ public final class Futures extends GwtFuturesCatchingSpecialization {
      *     href="https://errorprone.info/bugpattern/FutureReturnValueIgnored">https://errorprone.info/bugpattern/FutureReturnValueIgnored</a>.
      */
     public ListenableFuture<?> run(Runnable combiner, Executor executor) {
-      return call(
-          new Callable<@Nullable Void>() {
-            @Override
-            public @Nullable Void call() throws Exception {
-              combiner.run();
-              return null;
-            }
-          },
-          executor);
+      return call(callable(combiner), executor);
     }
   }
 
@@ -922,7 +924,7 @@ public final class Futures extends GwtFuturesCatchingSpecialization {
       copy[i].addListener(() -> state.recordInputCompletion(delegates, localI), directExecutor());
     }
 
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings("unchecked") // safe covariant cast
     ImmutableList<ListenableFuture<T>> delegatesCast = (ImmutableList) delegates;
     return delegatesCast;
   }
@@ -1026,7 +1028,7 @@ public final class Futures extends GwtFuturesCatchingSpecialization {
       // Null out our reference to this future, so it can be GCed
       inputFutures[inputFutureIndex] = null;
       for (int i = delegateIndex; i < delegates.size(); i++) {
-        if (delegates.get(i).setFuture(inputFuture)) {
+        if (delegates.get(i).setFutureInternal(inputFuture)) {
           recordCompletion();
           // this is technically unnecessary, but should speed up later accesses
           delegateIndex = i + 1;
@@ -1100,10 +1102,10 @@ public final class Futures extends GwtFuturesCatchingSpecialization {
 
   /** See {@link #addCallback(ListenableFuture, FutureCallback, Executor)} for behavioral notes. */
   private static final class CallbackListener<V extends @Nullable Object> implements Runnable {
-    final Future<V> future;
+    final ListenableFuture<V> future;
     final FutureCallback<? super V> callback;
 
-    CallbackListener(Future<V> future, FutureCallback<? super V> callback) {
+    CallbackListener(ListenableFuture<V> future, FutureCallback<? super V> callback) {
       this.future = future;
       this.callback = callback;
     }
@@ -1275,7 +1277,7 @@ public final class Futures extends GwtFuturesCatchingSpecialization {
   @ParametricNullness
   public static <V extends @Nullable Object, X extends Exception> V getChecked(
       Future<V> future, Class<X> exceptionClass, Duration timeout) throws X {
-    return getChecked(future, exceptionClass, toNanosSaturated(timeout), TimeUnit.NANOSECONDS);
+    return getChecked(future, exceptionClass, toNanosSaturated(timeout), NANOSECONDS);
   }
 
   /**
@@ -1393,6 +1395,6 @@ public final class Futures extends GwtFuturesCatchingSpecialization {
    * try-catch block.
    *
    * If you think you would use this method, let us know. You might also look into the
-   * Fork-Join framework: http://docs.oracle.com/javase/tutorial/essential/concurrency/forkjoin.html
+   * Fork-Join framework: https://docs.oracle.com/javase/tutorial/essential/concurrency/forkjoin.html
    */
 }

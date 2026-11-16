@@ -15,6 +15,7 @@
 package jdk.m3.collections.guava.cache;
 
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
+import jdk.m3.collections.guava.annotations.J2ktIncompatible;
 import jdk.m3.collections.guava.base.Preconditions;
 import jdk.m3.collections.guava.collect.ImmutableMap;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
@@ -32,6 +33,7 @@ import java.util.concurrent.ExecutionException;
  * @since 11.0
  */
 @GwtIncompatible
+@J2ktIncompatible // Compiles fine, but hidden for safety because the tests have not been ported
 public abstract class ForwardingLoadingCache<K, V> extends ForwardingCache<K, V>
     implements LoadingCache<K, V> {
 
@@ -79,6 +81,7 @@ public abstract class ForwardingLoadingCache<K, V> extends ForwardingCache<K, V>
       extends ForwardingLoadingCache<K, V> {
     private final LoadingCache<K, V> delegate;
 
+    /** Constructor for use by subclasses. */
     protected SimpleForwardingLoadingCache(LoadingCache<K, V> delegate) {
       this.delegate = Preconditions.checkNotNull(delegate);
     }

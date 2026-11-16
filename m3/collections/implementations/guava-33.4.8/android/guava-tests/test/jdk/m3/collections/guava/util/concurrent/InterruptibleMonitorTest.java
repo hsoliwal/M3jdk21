@@ -16,6 +16,8 @@
 
 package jdk.m3.collections.guava.util.concurrent;
 
+import jdk.m3.collections.guava.annotations.GwtIncompatible;
+import jdk.m3.collections.guava.annotations.J2ktIncompatible;
 import org.jspecify.annotations.NullUnmarked;
 
 /**
@@ -24,6 +26,8 @@ import org.jspecify.annotations.NullUnmarked;
  * @author Justin T. Sampson
  */
 @NullUnmarked
+@GwtIncompatible
+@J2ktIncompatible
 public class InterruptibleMonitorTest extends MonitorTestCase {
 
   public InterruptibleMonitorTest() {

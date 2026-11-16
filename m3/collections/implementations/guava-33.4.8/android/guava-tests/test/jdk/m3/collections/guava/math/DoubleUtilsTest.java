@@ -17,12 +17,12 @@
 package jdk.m3.collections.guava.math;
 
 import static jdk.m3.collections.guava.math.MathTesting.ALL_BIGINTEGER_CANDIDATES;
-import static jdk.m3.collections.guava.math.MathTesting.FINITE_DOUBLE_CANDIDATES;
 import static jdk.m3.collections.guava.math.MathTesting.POSITIVE_FINITE_DOUBLE_CANDIDATES;
-import static com.google.common.truth.Truth.assertThat;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
 import static org.junit.Assert.assertThrows;
 
-import java.lang.reflect.Method;
+import jdk.m3.collections.guava.annotations.GwtIncompatible;
+import com.google.errorprone.annotations.FormatMethod;
 import java.math.BigInteger;
 import junit.framework.TestCase;
 import org.jspecify.annotations.NullUnmarked;
@@ -32,24 +32,9 @@ import org.jspecify.annotations.NullUnmarked;
  *
  * @author Louis Wasserman
  */
+@GwtIncompatible
 @NullUnmarked
 public class DoubleUtilsTest extends TestCase {
-  @AndroidIncompatible // no FpUtils and no Math.nextDown in old versions
-  public void testNextDown() throws Exception {
-    Method jdkNextDown = getJdkNextDown();
-    for (double d : FINITE_DOUBLE_CANDIDATES) {
-      assertEquals(jdkNextDown.invoke(null, d), DoubleUtils.nextDown(d));
-    }
-  }
-
-  private static Method getJdkNextDown() throws Exception {
-    try {
-      return Math.class.getMethod("nextDown", double.class);
-    } catch (NoSuchMethodException expectedBeforeJava8) {
-      return Class.forName("sun.misc.FpUtils").getMethod("nextDown", double.class);
-    }
-  }
-
   @AndroidIncompatible // TODO(cpovirk): File bug for BigDecimal.doubleValue().
   public void testBigToDouble() {
     for (BigInteger b : ALL_BIGINTEGER_CANDIDATES) {
@@ -76,6 +61,7 @@ public class DoubleUtilsTest extends TestCase {
     assertEquals(DoubleUtils.ONE_BITS, Double.doubleToRawLongBits(1.0));
   }
 
+  @FormatMethod
   private static void failFormat(String template, Object... args) {
     fail(String.format(template, args));
   }

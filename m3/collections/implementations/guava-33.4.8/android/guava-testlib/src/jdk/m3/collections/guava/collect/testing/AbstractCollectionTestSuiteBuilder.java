@@ -16,6 +16,8 @@
 
 package jdk.m3.collections.guava.collect.testing;
 
+import static java.util.Arrays.asList;
+
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
 import jdk.m3.collections.guava.collect.testing.testers.CollectionAddAllTester;
 import jdk.m3.collections.guava.collect.testing.testers.CollectionAddTester;
@@ -33,7 +35,6 @@ import jdk.m3.collections.guava.collect.testing.testers.CollectionSerializationT
 import jdk.m3.collections.guava.collect.testing.testers.CollectionSizeTester;
 import jdk.m3.collections.guava.collect.testing.testers.CollectionToArrayTester;
 import jdk.m3.collections.guava.collect.testing.testers.CollectionToStringTester;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
@@ -49,7 +50,7 @@ public abstract class AbstractCollectionTestSuiteBuilder<
   @SuppressWarnings("rawtypes") // class literals
   @Override
   protected List<Class<? extends AbstractTester>> getTesters() {
-    return Arrays.<Class<? extends AbstractTester>>asList(
+    return asList(
         CollectionAddAllTester.class,
         CollectionAddTester.class,
         CollectionClearTester.class,

@@ -16,6 +16,7 @@
 
 package jdk.m3.collections.guava.util.concurrent;
 
+import static jdk.m3.collections.guava.base.Preconditions.checkNotNull;
 import static jdk.m3.collections.guava.util.concurrent.MoreExecutors.directExecutor;
 import static java.util.concurrent.TimeUnit.SECONDS;
 
@@ -25,10 +26,9 @@ import com.google.caliper.Benchmark;
 import com.google.caliper.Param;
 import com.google.caliper.api.Footprint;
 import com.google.caliper.api.VmOptions;
-import jdk.m3.collections.guava.base.Preconditions;
-import jdk.m3.collections.guava.collect.Lists;
 import jdk.m3.collections.guava.util.concurrent.AbstractFutureBenchmarks.OldAbstractFuture;
 import com.google.errorprone.annotations.concurrent.GuardedBy;
+import java.util.LinkedList;
 import java.util.Queue;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.CountDownLatch;
@@ -229,7 +229,7 @@ public class ExecutionListBenchmark {
             SECONDS,
             new ArrayBlockingQueue<Runnable>(1000));
     executorService.prestartAllCoreThreads();
-    final AtomicInteger integer = new AtomicInteger();
+    AtomicInteger integer = new AtomicInteger();
     // Execute a bunch of tasks to ensure that our threads are allocated and hot
     for (int i = 0; i < NUM_THREADS * 10; i++) {
       @SuppressWarnings("unused") // https://errorprone.info/bugpattern/FutureReturnValueIgnored
@@ -245,7 +245,7 @@ public class ExecutionListBenchmark {
   }
 
   @AfterExperiment
-  void tearDown() throws Exception {
+  void tearDown() {
     executorService.shutdown();
   }
 
@@ -299,7 +299,7 @@ public class ExecutionListBenchmark {
       };
 
   @Benchmark
-  int addThenExecute_multiThreaded(final int reps) throws InterruptedException {
+  int addThenExecute_multiThreaded(int reps) throws InterruptedException {
     Runnable addTask =
         new Runnable() {
           @Override
@@ -326,7 +326,7 @@ public class ExecutionListBenchmark {
   }
 
   @Benchmark
-  int executeThenAdd_multiThreaded(final int reps) throws InterruptedException {
+  int executeThenAdd_multiThreaded(int reps) throws InterruptedException {
     Runnable addTask =
         new Runnable() {
           @Override
@@ -355,29 +355,26 @@ public class ExecutionListBenchmark {
   // This is the old implementation of ExecutionList using a LinkedList.
   private static final class OldExecutionList {
     static final Logger log = Logger.getLogger(OldExecutionList.class.getName());
-    final Queue<OldExecutionList.RunnableExecutorPair> runnables = Lists.newLinkedList();
+    final Queue<OldExecutionList.RunnableExecutorPair> runnables = new LinkedList<>();
+
+    @GuardedBy("runnables")
     boolean executed = false;
 
-    public void add(Runnable runnable, Executor executor) {
-      Preconditions.checkNotNull(runnable, "Runnable was null.");
-      Preconditions.checkNotNull(executor, "Executor was null.");
-
-      boolean executeImmediate = false;
+    void add(Runnable runnable, Executor executor) {
+      checkNotNull(runnable, "Runnable was null.");
+      checkNotNull(executor, "Executor was null.");
 
       synchronized (runnables) {
         if (!executed) {
           runnables.add(new RunnableExecutorPair(runnable, executor));
-        } else {
-          executeImmediate = true;
+          return;
         }
       }
 
-      if (executeImmediate) {
-        new RunnableExecutorPair(runnable, executor).execute();
-      }
+      new RunnableExecutorPair(runnable, executor).execute();
     }
 
-    public void execute() {
+    void execute() {
       synchronized (runnables) {
         if (executed) {
           return;
@@ -425,9 +422,9 @@ public class ExecutionListBenchmark {
     @GuardedBy("this")
     private boolean executed;
 
-    public void add(Runnable runnable, Executor executor) {
-      Preconditions.checkNotNull(runnable, "Runnable was null.");
-      Preconditions.checkNotNull(executor, "Executor was null.");
+    void add(Runnable runnable, Executor executor) {
+      checkNotNull(runnable, "Runnable was null.");
+      checkNotNull(executor, "Executor was null.");
 
       synchronized (this) {
         if (!executed) {
@@ -438,7 +435,7 @@ public class ExecutionListBenchmark {
       executeListener(runnable, executor);
     }
 
-    public void execute() {
+    void execute() {
       RunnableExecutorPair list;
       synchronized (this) {
         if (executed) {
@@ -468,7 +465,7 @@ public class ExecutionListBenchmark {
     private static final class RunnableExecutorPair {
       final Runnable runnable;
       final Executor executor;
-      @Nullable RunnableExecutorPair next;
+      @Nullable final RunnableExecutorPair next;
 
       RunnableExecutorPair(Runnable runnable, Executor executor, RunnableExecutorPair next) {
         this.runnable = runnable;
@@ -492,9 +489,9 @@ public class ExecutionListBenchmark {
     @GuardedBy("this")
     private boolean executed;
 
-    public void add(Runnable runnable, Executor executor) {
-      Preconditions.checkNotNull(runnable, "Runnable was null.");
-      Preconditions.checkNotNull(executor, "Executor was null.");
+    void add(Runnable runnable, Executor executor) {
+      checkNotNull(runnable, "Runnable was null.");
+      checkNotNull(executor, "Executor was null.");
 
       synchronized (this) {
         if (!executed) {
@@ -512,7 +509,7 @@ public class ExecutionListBenchmark {
       executeListener(runnable, executor);
     }
 
-    public void execute() {
+    void execute() {
       RunnableExecutorPair list;
       synchronized (this) {
         if (executed) {
@@ -541,8 +538,8 @@ public class ExecutionListBenchmark {
     }
 
     private static final class RunnableExecutorPair {
-      Runnable runnable;
-      Executor executor;
+      final Runnable runnable;
+      final Executor executor;
       @Nullable RunnableExecutorPair next;
 
       RunnableExecutorPair(Runnable runnable, Executor executor) {

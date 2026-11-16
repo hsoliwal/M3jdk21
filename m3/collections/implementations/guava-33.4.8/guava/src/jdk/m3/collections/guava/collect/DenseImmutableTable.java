@@ -15,6 +15,7 @@
 package jdk.m3.collections.guava.collect;
 
 import static jdk.m3.collections.guava.collect.Maps.immutableEntry;
+import static jdk.m3.collections.guava.collect.Maps.indexMap;
 import static java.util.Objects.requireNonNull;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
@@ -59,8 +60,8 @@ final class DenseImmutableTable<R, C, V> extends RegularImmutableTable<R, C, V> 
     @SuppressWarnings("unchecked")
     @Nullable V[][] array = (@Nullable V[][]) new Object[rowSpace.size()][columnSpace.size()];
     this.values = array;
-    this.rowKeyToIndex = Maps.indexMap(rowSpace);
-    this.columnKeyToIndex = Maps.indexMap(columnSpace);
+    this.rowKeyToIndex = indexMap(rowSpace);
+    this.columnKeyToIndex = indexMap(columnSpace);
     rowCounts = new int[rowKeyToIndex.size()];
     columnCounts = new int[columnKeyToIndex.size()];
     int[] cellRowIndices = new int[cellList.size()];
@@ -101,7 +102,7 @@ final class DenseImmutableTable<R, C, V> extends RegularImmutableTable<R, C, V> 
       return size == keyToIndex().size();
     }
 
-    K getKey(int index) {
+    final K getKey(int index) {
       return keyToIndex().keySet().asList().get(index);
     }
 
@@ -113,12 +114,12 @@ final class DenseImmutableTable<R, C, V> extends RegularImmutableTable<R, C, V> 
     }
 
     @Override
-    public int size() {
+    public final int size() {
       return size;
     }
 
     @Override
-    public @Nullable V get(@Nullable Object key) {
+    public final @Nullable V get(@Nullable Object key) {
       Integer keyIndex = keyToIndex().get(key);
       return (keyIndex == null) ? null : getValue(keyIndex);
     }
@@ -126,8 +127,8 @@ final class DenseImmutableTable<R, C, V> extends RegularImmutableTable<R, C, V> 
     @Override
     UnmodifiableIterator<Entry<K, V>> entryIterator() {
       return new AbstractIterator<Entry<K, V>>() {
-        private int index = -1;
-        private final int maxIndex = keyToIndex().size();
+        int index = -1;
+        final int maxIndex = keyToIndex().size();
 
         @Override
         protected @Nullable Entry<K, V> computeNext() {
@@ -283,15 +284,13 @@ final class DenseImmutableTable<R, C, V> extends RegularImmutableTable<R, C, V> 
   @Override
   public ImmutableMap<C, Map<R, V>> columnMap() {
     // Casts without copying.
-    ImmutableMap<C, ImmutableMap<R, V>> columnMap = this.columnMap;
-    return ImmutableMap.<C, Map<R, V>>copyOf(columnMap);
+    return ImmutableMap.copyOf(columnMap);
   }
 
   @Override
   public ImmutableMap<R, Map<C, V>> rowMap() {
     // Casts without copying.
-    ImmutableMap<R, ImmutableMap<C, V>> rowMap = this.rowMap;
-    return ImmutableMap.<R, Map<C, V>>copyOf(rowMap);
+    return ImmutableMap.copyOf(rowMap);
   }
 
   @Override

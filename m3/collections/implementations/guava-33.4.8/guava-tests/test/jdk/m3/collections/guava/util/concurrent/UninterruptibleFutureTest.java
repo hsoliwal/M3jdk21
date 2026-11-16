@@ -16,19 +16,20 @@
 
 package jdk.m3.collections.guava.util.concurrent;
 
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
 import static jdk.m3.collections.guava.util.concurrent.InterruptionUtil.repeatedlyInterruptTestThread;
 import static jdk.m3.collections.guava.util.concurrent.Uninterruptibles.getUninterruptibly;
+import static java.util.concurrent.Executors.newSingleThreadExecutor;
 import static java.util.concurrent.TimeUnit.MILLISECONDS;
 import static java.util.concurrent.TimeUnit.MINUTES;
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.junit.Assert.assertThrows;
 
-import jdk.m3.collections.guava.testing.TearDown;
+import jdk.m3.collections.guava.annotations.GwtIncompatible;
+import jdk.m3.collections.guava.annotations.J2ktIncompatible;
 import jdk.m3.collections.guava.testing.TearDownStack;
-import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.FutureTask;
 import java.util.concurrent.TimeoutException;
@@ -43,6 +44,8 @@ import org.jspecify.annotations.NullUnmarked;
  * @author Chris Povirk
  */
 @NullUnmarked
+@GwtIncompatible
+@J2ktIncompatible
 public class UninterruptibleFutureTest extends TestCase {
   private SleepingRunnable sleeper;
   private Future<Boolean> delayedFuture;
@@ -51,24 +54,12 @@ public class UninterruptibleFutureTest extends TestCase {
 
   @Override
   protected void setUp() {
-    final ExecutorService executor = Executors.newSingleThreadExecutor();
-    tearDownStack.addTearDown(
-        new TearDown() {
-          @Override
-          public void tearDown() {
-            executor.shutdownNow();
-          }
-        });
+    ExecutorService executor = newSingleThreadExecutor();
+    tearDownStack.addTearDown(executor::shutdownNow);
     sleeper = new SleepingRunnable(1000);
     delayedFuture = executor.submit(sleeper, true);
 
-    tearDownStack.addTearDown(
-        new TearDown() {
-          @Override
-          public void tearDown() {
-            Thread.interrupted();
-          }
-        });
+    tearDownStack.addTearDown(() -> Thread.interrupted());
   }
 
   @Override
@@ -81,7 +72,6 @@ public class UninterruptibleFutureTest extends TestCase {
    * behavior of futures so that you can contrast the next test with it.
    */
   public void testRegularFutureInterrupted() throws ExecutionException {
-
     /*
      * Here's the order of events that we want.
      *
@@ -98,13 +88,7 @@ public class UninterruptibleFutureTest extends TestCase {
     InterruptionUtil.requestInterruptIn(200, MILLISECONDS);
 
     assertFalse(Thread.interrupted());
-    try {
-      delayedFuture.get(20000, MILLISECONDS);
-      fail("expected to be interrupted");
-    } catch (InterruptedException expected) {
-    } catch (TimeoutException e) {
-      throw new RuntimeException(e);
-    }
+    assertThrows(InterruptedException.class, () -> delayedFuture.get(20000, MILLISECONDS));
 
     // we were interrupted, but it's been cleared now
     assertFalse(Thread.interrupted());
@@ -120,8 +104,7 @@ public class UninterruptibleFutureTest extends TestCase {
 
   public void testMakeUninterruptible_timeoutPreservedThroughInterruption()
       throws ExecutionException {
-
-    repeatedlyInterruptTestThread(100, tearDownStack);
+    repeatedlyInterruptTestThread(tearDownStack);
 
     assertThrows(
         TimeoutException.class, () -> getUninterruptibly(delayedFuture, 500, MILLISECONDS));
@@ -138,7 +121,7 @@ public class UninterruptibleFutureTest extends TestCase {
     final int millis;
     volatile boolean completed;
 
-    public SleepingRunnable(int millis) {
+    SleepingRunnable(int millis) {
       this.millis = millis;
     }
 
@@ -210,15 +193,14 @@ public class UninterruptibleFutureTest extends TestCase {
   /**
    * Confirms that the test code triggers {@link InterruptedException} in a standard {@link Future}.
    */
-  public void testMakeUninterruptible_plainFutureSanityCheck() throws Exception {
+  public void testMakeUninterruptible_plainFutureSanityCheck() {
     SettableFuture<String> future = SettableFuture.create();
     FutureTask<Boolean> wasInterrupted = untimedInterruptReporter(future, true);
 
     Thread waitingThread = new Thread(wasInterrupted);
     waitingThread.start();
     waitingThread.interrupt();
-    ExecutionException expected =
-        assertThrows(ExecutionException.class, () -> wasInterrupted.get());
+    ExecutionException expected = assertThrows(ExecutionException.class, wasInterrupted::get);
     assertTrue(expected.getCause().toString(), expected.getCause() instanceof InterruptedException);
   }
 
@@ -231,7 +213,7 @@ public class UninterruptibleFutureTest extends TestCase {
      * wait of 0 seconds (and it should succeed, since the result is already
      * available).
      */
-    assertEquals(RESULT, getUninterruptibly(future, 0, SECONDS));
+    assertThat(getUninterruptibly(future, 0, SECONDS)).isEqualTo(RESULT);
   }
 
   public void testMakeUninterruptible_timedGetNegativeTimeoutAttempted()
@@ -243,36 +225,28 @@ public class UninterruptibleFutureTest extends TestCase {
      * wait of -1 seconds (and it should succeed, since the result is already
      * available).
      */
-    assertEquals(RESULT, getUninterruptibly(future, -1, SECONDS));
+    assertThat(getUninterruptibly(future, -1, SECONDS)).isEqualTo(RESULT);
   }
 
   private static FutureTask<Boolean> untimedInterruptReporter(
-      final Future<?> future, final boolean allowInterruption) {
-    return new FutureTask<>(
-        new Callable<Boolean>() {
-          @Override
-          public Boolean call() throws Exception {
-            Object actual;
-            if (allowInterruption) {
-              actual = future.get();
-            } else {
-              actual = getUninterruptibly(future);
-            }
-            assertEquals(RESULT, actual);
-            return Thread.interrupted();
-          }
-        });
+      Future<?> future, boolean allowInterruption) {
+    return new FutureTask<>(() -> {
+      Object actual;
+      if (allowInterruption) {
+        actual = future.get();
+      } else {
+        actual = getUninterruptibly(future);
+      }
+      assertEquals(RESULT, actual);
+      return Thread.interrupted();
+    });
   }
 
-  private static FutureTask<Boolean> timedInterruptReporter(final Future<?> future) {
-    return new FutureTask<>(
-        new Callable<Boolean>() {
-          @Override
-          public Boolean call() throws Exception {
-            assertEquals(RESULT, getUninterruptibly(future, 10, MINUTES));
-            return Thread.interrupted();
-          }
-        });
+  private static FutureTask<Boolean> timedInterruptReporter(Future<?> future) {
+    return new FutureTask<>(() -> {
+      assertEquals(RESULT, getUninterruptibly(future, 10, MINUTES));
+      return Thread.interrupted();
+    });
   }
 
   private static final String RESULT = "result";

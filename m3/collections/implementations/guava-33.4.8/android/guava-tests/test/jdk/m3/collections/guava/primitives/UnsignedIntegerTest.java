@@ -14,9 +14,10 @@
 
 package jdk.m3.collections.guava.primitives;
 
-import static jdk.m3.collections.guava.primitives.ReflectionFreeAssertThrows.assertThrows;
-import static com.google.common.truth.Truth.assertThat;
-import static com.google.common.truth.Truth.assertWithMessage;
+import static jdk.m3.collections.guava.testing.SerializableTester.reserializeAndAssert;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
+import static jdk.m3.collections.guava.truth.Truth.assertWithMessage;
+import static org.junit.Assert.assertThrows;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
@@ -24,7 +25,6 @@ import jdk.m3.collections.guava.annotations.J2ktIncompatible;
 import jdk.m3.collections.guava.collect.ImmutableSet;
 import jdk.m3.collections.guava.testing.EqualsTester;
 import jdk.m3.collections.guava.testing.NullPointerTester;
-import jdk.m3.collections.guava.testing.SerializableTester;
 import java.math.BigInteger;
 import junit.framework.TestCase;
 import org.jspecify.annotations.NullUnmarked;
@@ -34,7 +34,7 @@ import org.jspecify.annotations.NullUnmarked;
  *
  * @author Louis Wasserman
  */
-@GwtCompatible(emulated = true)
+@GwtCompatible
 @NullUnmarked
 public class UnsignedIntegerTest extends TestCase {
   private static final ImmutableSet<Integer> TEST_INTS;
@@ -187,7 +187,7 @@ public class UnsignedIntegerTest extends TestCase {
         int expected =
             force32(aUnsigned.bigIntegerValue().multiply(bUnsigned.bigIntegerValue()).intValue());
         UnsignedInteger unsignedMul = aUnsigned.times(bUnsigned);
-        assertWithMessage(aUnsigned + " * " + bUnsigned)
+        assertWithMessage("%s * %s", aUnsigned, bUnsigned)
             .that(unsignedMul.intValue())
             .isEqualTo(expected);
       }
@@ -212,9 +212,7 @@ public class UnsignedIntegerTest extends TestCase {
     for (int a : TEST_INTS) {
       assertThrows(
           ArithmeticException.class,
-          () -> {
-            UnsignedInteger unused = UnsignedInteger.fromIntBits(a).dividedBy(UnsignedInteger.ZERO);
-          });
+          () -> UnsignedInteger.fromIntBits(a).dividedBy(UnsignedInteger.ZERO));
     }
   }
 
@@ -274,11 +272,11 @@ public class UnsignedIntegerTest extends TestCase {
     }
   }
 
+  @GwtIncompatible
   @J2ktIncompatible
-  @GwtIncompatible // serialization
   public void testSerialization() {
     for (int a : TEST_INTS) {
-      SerializableTester.reserializeAndAssert(UnsignedInteger.fromIntBits(a));
+      reserializeAndAssert(UnsignedInteger.fromIntBits(a));
     }
   }
 

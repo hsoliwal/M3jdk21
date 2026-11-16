@@ -16,6 +16,7 @@
 
 package jdk.m3.collections.guava.io;
 
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
 import static org.junit.Assert.assertThrows;
 
 import java.io.IOException;
@@ -52,28 +53,28 @@ public class CharSequenceReaderTest extends TestCase {
     CharSequenceReader reader = new CharSequenceReader(string);
     assertTrue(reader.markSupported());
 
-    assertEquals(string, readFully(reader));
+    assertThat(readFully(reader)).isEqualTo(string);
     assertFullyRead(reader);
 
     // reset and read again
     reader.reset();
-    assertEquals(string, readFully(reader));
+    assertThat(readFully(reader)).isEqualTo(string);
     assertFullyRead(reader);
 
     // reset, skip, mark, then read the rest
     reader.reset();
     assertEquals(5, reader.skip(5));
     reader.mark(Integer.MAX_VALUE);
-    assertEquals(string.substring(5), readFully(reader));
+    assertThat(readFully(reader)).isEqualTo(string.substring(5));
     assertFullyRead(reader);
 
     // reset to the mark and then read the rest
     reader.reset();
-    assertEquals(string.substring(5), readFully(reader));
+    assertThat(readFully(reader)).isEqualTo(string.substring(5));
     assertFullyRead(reader);
   }
 
-  public void testIllegalArguments() throws IOException {
+  public void testIllegalArguments() {
     CharSequenceReader reader = new CharSequenceReader("12345");
 
     char[] buf = new char[10];
@@ -94,11 +95,11 @@ public class CharSequenceReaderTest extends TestCase {
     assertThrows(IllegalArgumentException.class, () -> reader.mark(-1));
   }
 
-  public void testMethodsThrowWhenClosed() throws IOException {
+  public void testMethodsThrowWhenClosed() {
     CharSequenceReader reader = new CharSequenceReader("");
     reader.close();
 
-    assertThrows(IOException.class, () -> reader.read());
+    assertThrows(IOException.class, reader::read);
 
     assertThrows(IOException.class, () -> reader.read(new char[10]));
 
@@ -108,11 +109,11 @@ public class CharSequenceReaderTest extends TestCase {
 
     assertThrows(IOException.class, () -> reader.skip(10));
 
-    assertThrows(IOException.class, () -> reader.ready());
+    assertThrows(IOException.class, reader::ready);
 
     assertThrows(IOException.class, () -> reader.mark(10));
 
-    assertThrows(IOException.class, () -> reader.reset());
+    assertThrows(IOException.class, reader::reset);
   }
 
   /**
@@ -132,8 +133,8 @@ public class CharSequenceReaderTest extends TestCase {
     // read all to one array
     reader = new CharSequenceReader(charSequence);
     char[] buf = new char[expected.length()];
-    assertEquals(expected.length() == 0 ? -1 : expected.length(), reader.read(buf));
-    assertEquals(expected, new String(buf));
+    assertEquals(expected.isEmpty() ? -1 : expected.length(), reader.read(buf));
+    assertThat(new String(buf)).isEqualTo(expected);
     assertFullyRead(reader);
 
     // read in chunks to fixed array
@@ -144,15 +145,15 @@ public class CharSequenceReaderTest extends TestCase {
     while ((read = reader.read(buf, 0, buf.length)) != -1) {
       builder.append(buf, 0, read);
     }
-    assertEquals(expected, builder.toString());
+    assertThat(builder.toString()).isEqualTo(expected);
     assertFullyRead(reader);
 
     // read all to one CharBuffer
     reader = new CharSequenceReader(charSequence);
     CharBuffer buf2 = CharBuffer.allocate(expected.length());
-    assertEquals(expected.length() == 0 ? -1 : expected.length(), reader.read(buf2));
+    assertEquals(expected.isEmpty() ? -1 : expected.length(), reader.read(buf2));
     Java8Compatibility.flip(buf2);
-    assertEquals(expected, buf2.toString());
+    assertThat(buf2.toString()).isEqualTo(expected);
     assertFullyRead(reader);
 
     // read in chunks to fixed CharBuffer
@@ -164,7 +165,7 @@ public class CharSequenceReaderTest extends TestCase {
       builder.append(buf2);
       Java8Compatibility.clear(buf2);
     }
-    assertEquals(expected, builder.toString());
+    assertThat(builder.toString()).isEqualTo(expected);
     assertFullyRead(reader);
 
     // skip fully
@@ -179,7 +180,7 @@ public class CharSequenceReaderTest extends TestCase {
 
       buf = new char[expected.length() - 5];
       assertEquals(buf.length, reader.read(buf, 0, buf.length));
-      assertEquals(expected.substring(5), new String(buf));
+      assertThat(new String(buf)).isEqualTo(expected.substring(5));
       assertFullyRead(reader);
     }
   }

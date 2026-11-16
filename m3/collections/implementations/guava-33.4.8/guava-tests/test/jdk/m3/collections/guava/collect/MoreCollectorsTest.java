@@ -18,8 +18,8 @@ package jdk.m3.collections.guava.collect;
 
 import static jdk.m3.collections.guava.collect.MoreCollectors.onlyElement;
 import static jdk.m3.collections.guava.collect.MoreCollectors.toOptional;
-import static jdk.m3.collections.guava.collect.ReflectionFreeAssertThrows.assertThrows;
-import static com.google.common.truth.Truth.assertThat;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
+import static org.junit.Assert.assertThrows;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import java.util.NoSuchElementException;

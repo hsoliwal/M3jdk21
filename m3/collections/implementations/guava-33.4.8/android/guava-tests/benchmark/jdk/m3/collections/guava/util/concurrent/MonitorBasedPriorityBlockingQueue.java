@@ -16,8 +16,11 @@
 
 package jdk.m3.collections.guava.util.concurrent;
 
+import static jdk.m3.collections.guava.base.Preconditions.checkArgument;
 import static jdk.m3.collections.guava.base.Preconditions.checkNotNull;
 
+import jdk.m3.collections.guava.annotations.GwtIncompatible;
+import jdk.m3.collections.guava.annotations.J2ktIncompatible;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import java.util.AbstractQueue;
 import java.util.Collection;
@@ -85,6 +88,8 @@ import org.jspecify.annotations.Nullable;
  * @param <E> the type of elements held in this collection
  */
 @NullUnmarked
+@GwtIncompatible
+@J2ktIncompatible
 public class MonitorBasedPriorityBlockingQueue<E> extends AbstractQueue<E>
     implements BlockingQueue<E> {
 
@@ -178,7 +183,7 @@ public class MonitorBasedPriorityBlockingQueue<E> extends AbstractQueue<E>
   @CanIgnoreReturnValue // pushed down from class to method
   @Override
   public boolean offer(E e) {
-    final Monitor monitor = this.monitor;
+    Monitor monitor = this.monitor;
     monitor.enter();
     try {
       boolean ok = q.offer(e);
@@ -227,7 +232,7 @@ public class MonitorBasedPriorityBlockingQueue<E> extends AbstractQueue<E>
   @CanIgnoreReturnValue // pushed down from class to method
   @Override
   public @Nullable E poll() {
-    final Monitor monitor = this.monitor;
+    Monitor monitor = this.monitor;
     monitor.enter();
     try {
       return q.poll();
@@ -239,7 +244,7 @@ public class MonitorBasedPriorityBlockingQueue<E> extends AbstractQueue<E>
   @CanIgnoreReturnValue // pushed down from class to method
   @Override
   public @Nullable E poll(long timeout, TimeUnit unit) throws InterruptedException {
-    final Monitor monitor = this.monitor;
+    Monitor monitor = this.monitor;
     if (monitor.enterWhen(notEmpty, timeout, unit)) {
       try {
         return q.poll();
@@ -254,7 +259,7 @@ public class MonitorBasedPriorityBlockingQueue<E> extends AbstractQueue<E>
   @CanIgnoreReturnValue // pushed down from class to method
   @Override
   public E take() throws InterruptedException {
-    final Monitor monitor = this.monitor;
+    Monitor monitor = this.monitor;
     monitor.enterWhen(notEmpty);
     try {
       return q.poll();
@@ -266,7 +271,7 @@ public class MonitorBasedPriorityBlockingQueue<E> extends AbstractQueue<E>
   @CanIgnoreReturnValue // pushed down from class to method
   @Override
   public @Nullable E peek() {
-    final Monitor monitor = this.monitor;
+    Monitor monitor = this.monitor;
     monitor.enter();
     try {
       return q.peek();
@@ -290,7 +295,7 @@ public class MonitorBasedPriorityBlockingQueue<E> extends AbstractQueue<E>
   @CanIgnoreReturnValue // pushed down from class to method
   @Override
   public int size() {
-    final Monitor monitor = this.monitor;
+    Monitor monitor = this.monitor;
     monitor.enter();
     try {
       return q.size();
@@ -323,7 +328,7 @@ public class MonitorBasedPriorityBlockingQueue<E> extends AbstractQueue<E>
   @CanIgnoreReturnValue // pushed down from class to method
   @Override
   public boolean remove(@Nullable Object o) {
-    final Monitor monitor = this.monitor;
+    Monitor monitor = this.monitor;
     monitor.enter();
     try {
       return q.remove(o);
@@ -343,7 +348,7 @@ public class MonitorBasedPriorityBlockingQueue<E> extends AbstractQueue<E>
   @CanIgnoreReturnValue // pushed down from class to method
   @Override
   public boolean contains(@Nullable Object o) {
-    final Monitor monitor = this.monitor;
+    Monitor monitor = this.monitor;
     monitor.enter();
     try {
       return q.contains(o);
@@ -367,7 +372,7 @@ public class MonitorBasedPriorityBlockingQueue<E> extends AbstractQueue<E>
   @CanIgnoreReturnValue // pushed down from class to method
   @Override
   public Object[] toArray() {
-    final Monitor monitor = this.monitor;
+    Monitor monitor = this.monitor;
     monitor.enter();
     try {
       return q.toArray();
@@ -408,7 +413,7 @@ public class MonitorBasedPriorityBlockingQueue<E> extends AbstractQueue<E>
   @CanIgnoreReturnValue // pushed down from class to method
   @Override
   public <T> T[] toArray(T[] a) {
-    final Monitor monitor = this.monitor;
+    Monitor monitor = this.monitor;
     monitor.enter();
     try {
       return q.toArray(a);
@@ -420,7 +425,7 @@ public class MonitorBasedPriorityBlockingQueue<E> extends AbstractQueue<E>
   @CanIgnoreReturnValue // pushed down from class to method
   @Override
   public String toString() {
-    final Monitor monitor = this.monitor;
+    Monitor monitor = this.monitor;
     monitor.enter();
     try {
       return q.toString();
@@ -438,9 +443,9 @@ public class MonitorBasedPriorityBlockingQueue<E> extends AbstractQueue<E>
   @CanIgnoreReturnValue // pushed down from class to method
   @Override
   public int drainTo(Collection<? super E> c) {
-    if (c == null) throw new NullPointerException();
-    if (c == this) throw new IllegalArgumentException();
-    final Monitor monitor = this.monitor;
+    checkNotNull(c);
+    checkArgument(c != this);
+    Monitor monitor = this.monitor;
     monitor.enter();
     try {
       int n = 0;
@@ -464,10 +469,10 @@ public class MonitorBasedPriorityBlockingQueue<E> extends AbstractQueue<E>
   @CanIgnoreReturnValue // pushed down from class to method
   @Override
   public int drainTo(Collection<? super E> c, int maxElements) {
-    if (c == null) throw new NullPointerException();
-    if (c == this) throw new IllegalArgumentException();
+    checkNotNull(c);
+    checkArgument(c != this);
     if (maxElements <= 0) return 0;
-    final Monitor monitor = this.monitor;
+    Monitor monitor = this.monitor;
     monitor.enter();
     try {
       int n = 0;
@@ -488,7 +493,7 @@ public class MonitorBasedPriorityBlockingQueue<E> extends AbstractQueue<E>
    */
   @Override
   public void clear() {
-    final Monitor monitor = this.monitor;
+    Monitor monitor = this.monitor;
     monitor.enter();
     try {
       q.clear();

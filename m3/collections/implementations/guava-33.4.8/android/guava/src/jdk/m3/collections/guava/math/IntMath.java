@@ -29,6 +29,7 @@ import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
 import jdk.m3.collections.guava.annotations.VisibleForTesting;
 import jdk.m3.collections.guava.primitives.Ints;
+import com.google.errorprone.annotations.InlineMe;
 import java.math.BigInteger;
 import java.math.RoundingMode;
 
@@ -46,7 +47,7 @@ import java.math.RoundingMode;
  * @author Louis Wasserman
  * @since 11.0
  */
-@GwtCompatible(emulated = true)
+@GwtCompatible
 public final class IntMath {
   @VisibleForTesting static final int MAX_SIGNED_POWER_OF_TWO = 1 << (Integer.SIZE - 2);
 
@@ -300,7 +301,9 @@ public final class IntMath {
 
   /**
    * Returns the result of dividing {@code p} by {@code q}, rounding using the specified {@code
-   * RoundingMode}.
+   * RoundingMode}. If the {@code RoundingMode} is {@link RoundingMode#DOWN}, then this method is
+   * equivalent to regular Java division, {@code p / q}; and if it is {@link RoundingMode#FLOOR},
+   * then this method is equivalent to {@link Math#floorDiv(int,int) Math.floorDiv}{@code (p, q)}.
    *
    * @throws ArithmeticException if {@code q == 0}, or if {@code mode == UNNECESSARY} and {@code a}
    *     is not an integer multiple of {@code b}
@@ -365,7 +368,9 @@ public final class IntMath {
 
   /**
    * Returns {@code x mod m}, a non-negative value less than {@code m}. This differs from {@code x %
-   * m}, which might be negative.
+   * m}, which might be negative. This method is equivalent to {@code Math.floorMod(x, m)} except
+   * that that method also allows negative {@code m}. {@code Math.floorMod} should be preferred when
+   * {@code m} is known to be positive.
    *
    * <p>For example:
    *
@@ -378,15 +383,14 @@ public final class IntMath {
    * }
    *
    * @throws ArithmeticException if {@code m <= 0}
-   * @see <a href="http://docs.oracle.com/javase/specs/jls/se7/html/jls-15.html#jls-15.17.3">
+   * @see <a href="https://docs.oracle.com/javase/specs/jls/se27/html/jls-15.html#jls-15.17.3">
    *     Remainder Operator</a>
    */
   public static int mod(int x, int m) {
     if (m <= 0) {
       throw new ArithmeticException("Modulus " + m + " must be > 0");
     }
-    int result = x % m;
-    return (result >= 0) ? result : result + m;
+    return Math.floorMod(x, m);
   }
 
   /**
@@ -443,40 +447,48 @@ public final class IntMath {
   /**
    * Returns the sum of {@code a} and {@code b}, provided it does not overflow.
    *
+   * <p><b>Note:</b> this method is now unnecessary and should be treated as deprecated; use {@link
+   * Math#addExact(int, int)} instead.
+   *
    * @throws ArithmeticException if {@code a + b} overflows in signed {@code int} arithmetic
    */
+  @InlineMe(replacement = "Math.addExact(a, b)")
   public static int checkedAdd(int a, int b) {
-    long result = (long) a + b;
-    checkNoOverflow(result == (int) result, "checkedAdd", a, b);
-    return (int) result;
+    return Math.addExact(a, b);
   }
 
   /**
    * Returns the difference of {@code a} and {@code b}, provided it does not overflow.
    *
+   * <p><b>Note:</b> this method is now unnecessary and should be treated as deprecated; use {@link
+   * Math#subtractExact(int, int)} instead.
+   *
    * @throws ArithmeticException if {@code a - b} overflows in signed {@code int} arithmetic
    */
+  @InlineMe(replacement = "Math.subtractExact(a, b)")
   public static int checkedSubtract(int a, int b) {
-    long result = (long) a - b;
-    checkNoOverflow(result == (int) result, "checkedSubtract", a, b);
-    return (int) result;
+    return Math.subtractExact(a, b);
   }
 
   /**
    * Returns the product of {@code a} and {@code b}, provided it does not overflow.
    *
+   * <p><b>Note:</b> this method is now unnecessary and should be treated as deprecated; use {@link
+   * Math#multiplyExact(int, int)} instead.
+   *
    * @throws ArithmeticException if {@code a * b} overflows in signed {@code int} arithmetic
    */
+  @InlineMe(replacement = "Math.multiplyExact(a, b)")
   public static int checkedMultiply(int a, int b) {
-    long result = (long) a * b;
-    checkNoOverflow(result == (int) result, "checkedMultiply", a, b);
-    return (int) result;
+    return Math.multiplyExact(a, b);
   }
 
   /**
    * Returns the {@code b} to the {@code k}th power, provided it does not overflow.
    *
    * <p>{@link #pow} may be faster, but does not check for overflow.
+   *
+   * <p><b>Java 25+ users:</b> Prefer {@link Math#powExact(int, int)}.
    *
    * @throws ArithmeticException if {@code b} to the {@code k}th power overflows in signed {@code
    *     int} arithmetic
@@ -507,10 +519,10 @@ public final class IntMath {
         case 0:
           return accum;
         case 1:
-          return checkedMultiply(accum, b);
+          return Math.multiplyExact(accum, b);
         default:
           if ((k & 1) != 0) {
-            accum = checkedMultiply(accum, b);
+            accum = Math.multiplyExact(accum, b);
           }
           k >>= 1;
           if (k > 0) {
@@ -583,7 +595,7 @@ public final class IntMath {
     }
     int accum = 1;
     // if b is negative and k is odd then the limit is MIN otherwise the limit is MAX
-    int limit = Integer.MAX_VALUE + ((b >>> Integer.SIZE - 1) & (k & 1));
+    int limit = Integer.MAX_VALUE + ((b >>> (Integer.SIZE - 1)) & (k & 1));
     while (true) {
       switch (k) {
         case 0:
@@ -715,6 +727,37 @@ public final class IntMath {
   @GwtIncompatible // TODO
   public static boolean isPrime(int n) {
     return LongMath.isPrime(n);
+  }
+
+  /**
+   * Returns the closest representable {@code int} to the absolute value of {@code x}.
+   *
+   * <p>This is the same thing as the true absolute value of {@code x} except in the case when
+   * {@code x} is {@link Integer#MIN_VALUE}, in which case this returns {@link Integer#MAX_VALUE}.
+   * (Note that {@code Integer.MAX_VALUE} is mathematically equal to {@code -Integer.MIN_VALUE -
+   * 1}.)
+   *
+   * <p>There are three common APIs for determining the absolute value of an integer, all of which
+   * behave identically except when passed {@code Integer.MIN_VALUE}. Those methods are:
+   *
+   * <ul>
+   *   <li>{@link Math#abs(int)}, which returns {@code Integer.MIN_VALUE} when passed {@code
+   *       Integer.MIN_VALUE}
+   *   <li>{@link Math#absExact(int)}, which throws {@link ArithmeticException} when passed {@code
+   *       Integer.MIN_VALUE}
+   *   <li>this method, {@code IntMath.saturatedAbs(int)}, which returns {@code Integer.MAX_VALUE}
+   *       when passed {@code Integer.MIN_VALUE}
+   * </ul>
+   *
+   * <p>Note that if your only goal is to turn a well-distributed {@code int} (such as a random
+   * number or hash code) into a well-distributed nonnegative number, the most even distribution is
+   * achieved not by this method or other absolute value methods, but by {@code x &
+   * Integer.MAX_VALUE}.
+   *
+   * @since 33.5.0
+   */
+  public static int saturatedAbs(int x) {
+    return (x == Integer.MIN_VALUE) ? Integer.MAX_VALUE : Math.abs(x);
   }
 
   private IntMath() {}

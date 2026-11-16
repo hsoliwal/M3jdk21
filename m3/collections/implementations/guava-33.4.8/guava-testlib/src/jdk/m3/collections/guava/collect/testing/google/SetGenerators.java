@@ -35,10 +35,8 @@ import jdk.m3.collections.guava.collect.ContiguousSet;
 import jdk.m3.collections.guava.collect.DiscreteDomain;
 import jdk.m3.collections.guava.collect.ImmutableSet;
 import jdk.m3.collections.guava.collect.ImmutableSortedSet;
-import jdk.m3.collections.guava.collect.Lists;
 import jdk.m3.collections.guava.collect.Ordering;
 import jdk.m3.collections.guava.collect.Range;
-import jdk.m3.collections.guava.collect.Sets;
 import jdk.m3.collections.guava.collect.testing.TestCollidingSetGenerator;
 import jdk.m3.collections.guava.collect.testing.TestIntegerSortedSetGenerator;
 import jdk.m3.collections.guava.collect.testing.TestSetGenerator;
@@ -47,8 +45,10 @@ import jdk.m3.collections.guava.collect.testing.TestStringSetGenerator;
 import jdk.m3.collections.guava.collect.testing.TestStringSortedSetGenerator;
 import jdk.m3.collections.guava.collect.testing.TestUnhashableCollectionGenerator;
 import jdk.m3.collections.guava.collect.testing.UnhashableObject;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.SortedSet;
@@ -61,7 +61,7 @@ import org.jspecify.annotations.NullMarked;
  * @author Jared Levy
  * @author Hayward Chan
  */
-@GwtCompatible(emulated = true)
+@GwtCompatible
 @NullMarked
 public class SetGenerators {
 
@@ -144,7 +144,7 @@ public class SetGenerators {
   public static class ImmutableSortedSetHeadsetGenerator extends TestStringSortedSetGenerator {
     @Override
     protected SortedSet<String> create(String[] elements) {
-      List<String> list = Lists.newArrayList(elements);
+      List<String> list = newArrayList(elements);
       list.add("zzz");
       return ImmutableSortedSet.copyOf(list).headSet("zzy");
     }
@@ -153,7 +153,7 @@ public class SetGenerators {
   public static class ImmutableSortedSetTailsetGenerator extends TestStringSortedSetGenerator {
     @Override
     protected SortedSet<String> create(String[] elements) {
-      List<String> list = Lists.newArrayList(elements);
+      List<String> list = newArrayList(elements);
       list.add("\0");
       return ImmutableSortedSet.copyOf(list).tailSet("\0\0");
     }
@@ -162,7 +162,7 @@ public class SetGenerators {
   public static class ImmutableSortedSetSubsetGenerator extends TestStringSortedSetGenerator {
     @Override
     protected SortedSet<String> create(String[] elements) {
-      List<String> list = Lists.newArrayList(elements);
+      List<String> list = newArrayList(elements);
       list.add("\0");
       list.add("zzz");
       return ImmutableSortedSet.copyOf(list).subSet("\0\0", "zzy");
@@ -318,13 +318,13 @@ public class SetGenerators {
   private static Ordering<String> createExplicitComparator(String[] elements) {
     // Collapse equal elements, which Ordering.explicit() doesn't support, while
     // maintaining the ordering by first occurrence.
-    Set<String> elementsPlus = Sets.newLinkedHashSet();
+    Set<String> elementsPlus = new LinkedHashSet<>();
     elementsPlus.add(BEFORE_FIRST);
     elementsPlus.add(BEFORE_FIRST_2);
     elementsPlus.addAll(asList(elements));
     elementsPlus.add(AFTER_LAST);
     elementsPlus.add(AFTER_LAST_2);
-    return Ordering.explicit(Lists.newArrayList(elementsPlus));
+    return Ordering.explicit(new ArrayList<>(elementsPlus));
   }
 
   /*
@@ -412,8 +412,8 @@ public class SetGenerators {
 
   private abstract static class AbstractContiguousSetGenerator
       extends TestIntegerSortedSetGenerator {
-    protected final ContiguousSet<Integer> checkedCreate(SortedSet<Integer> elementsSet) {
-      List<Integer> elements = newArrayList(elementsSet);
+    static final ContiguousSet<Integer> checkedCreate(SortedSet<Integer> elementsSet) {
+      List<Integer> elements = new ArrayList<>(elementsSet);
       /*
        * A ContiguousSet can't have holes. If a test demands a hole, it should be changed so that it
        * doesn't need one, or it should be suppressed for ContiguousSet.
@@ -426,4 +426,12 @@ public class SetGenerators {
       return ContiguousSet.create(range, DiscreteDomain.integers());
     }
   }
+
+  /**
+   * Useless constructor for a class of static utility methods.
+   *
+   * @deprecated Do not instantiate this utility class.
+   */
+  @Deprecated
+  public SetGenerators() {}
 }

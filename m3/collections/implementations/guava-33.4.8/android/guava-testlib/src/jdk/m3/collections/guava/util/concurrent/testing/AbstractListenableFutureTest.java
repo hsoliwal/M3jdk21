@@ -16,6 +16,8 @@
 
 package jdk.m3.collections.guava.util.concurrent.testing;
 
+import static java.util.concurrent.Executors.newCachedThreadPool;
+import static java.util.concurrent.Executors.newSingleThreadExecutor;
 import static java.util.concurrent.TimeUnit.MILLISECONDS;
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.junit.Assert.assertThrows;
@@ -26,7 +28,6 @@ import java.util.concurrent.CancellationException;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
@@ -48,7 +49,6 @@ public abstract class AbstractListenableFutureTest extends TestCase {
 
   @Override
   protected void setUp() throws Exception {
-
     // Create a latch and a future that waits on the latch.
     latch = new CountDownLatch(1);
     future = createListenableFuture(Boolean.TRUE, null, latch);
@@ -71,7 +71,7 @@ public abstract class AbstractListenableFutureTest extends TestCase {
     assertFalse(future.isDone());
     assertFalse(future.isCancelled());
 
-    ExecutorService executor = Executors.newSingleThreadExecutor();
+    ExecutorService executor = newSingleThreadExecutor();
 
     try {
       Future<Boolean> getResult = executor.submit(() -> future.get());
@@ -89,13 +89,10 @@ public abstract class AbstractListenableFutureTest extends TestCase {
   }
 
   /** Tests that the {@link Future#get(long, TimeUnit)} method times out correctly. */
-  public void testTimeoutOnGetWorksCorrectly() throws InterruptedException, ExecutionException {
-
+  public void testTimeoutOnGetWorksCorrectly() {
     // The task thread waits for the latch, so we expect a timeout here.
     try {
-      future.get(20, MILLISECONDS);
-      fail("Should have timed out trying to get the value.");
-    } catch (TimeoutException expected) {
+      assertThrows(TimeoutException.class, () -> future.get(20, MILLISECONDS));
     } finally {
       latch.countDown();
     }
@@ -138,7 +135,7 @@ public abstract class AbstractListenableFutureTest extends TestCase {
     CountDownLatch successLatch = new CountDownLatch(1);
     CountDownLatch listenerLatch = new CountDownLatch(1);
 
-    ExecutorService exec = Executors.newCachedThreadPool();
+    ExecutorService exec = newCachedThreadPool();
 
     future.addListener(listenerLatch::countDown, exec);
 
@@ -171,7 +168,7 @@ public abstract class AbstractListenableFutureTest extends TestCase {
   public void testAllListenersCompleteSuccessfully()
       throws InterruptedException, ExecutionException {
 
-    ExecutorService exec = Executors.newCachedThreadPool();
+    ExecutorService exec = newCachedThreadPool();
 
     int listenerCount = 20;
     CountDownLatch listenerLatch = new CountDownLatch(listenerCount);

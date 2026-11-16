@@ -16,7 +16,6 @@
 
 package jdk.m3.collections.guava.base;
 
-import static jdk.m3.collections.guava.base.ReflectionFreeAssertThrows.assertThrows;
 import static jdk.m3.collections.guava.base.StandardSystemProperty.JAVA_SPECIFICATION_VERSION;
 import static jdk.m3.collections.guava.base.Throwables.getCausalChain;
 import static jdk.m3.collections.guava.base.Throwables.getCauseAs;
@@ -29,8 +28,9 @@ import static jdk.m3.collections.guava.base.Throwables.propagateIfInstanceOf;
 import static jdk.m3.collections.guava.base.Throwables.propagateIfPossible;
 import static jdk.m3.collections.guava.base.Throwables.throwIfInstanceOf;
 import static jdk.m3.collections.guava.base.Throwables.throwIfUnchecked;
-import static com.google.common.truth.Truth.assertThat;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
 import static java.util.regex.Pattern.quote;
+import static org.junit.Assert.assertThrows;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
@@ -41,8 +41,6 @@ import jdk.m3.collections.guava.base.TestExceptions.SomeError;
 import jdk.m3.collections.guava.base.TestExceptions.SomeOtherCheckedException;
 import jdk.m3.collections.guava.base.TestExceptions.SomeUncheckedException;
 import jdk.m3.collections.guava.base.TestExceptions.YetAnotherCheckedException;
-import jdk.m3.collections.guava.collect.Iterables;
-import jdk.m3.collections.guava.primitives.Ints;
 import jdk.m3.collections.guava.testing.NullPointerTester;
 import java.util.List;
 import junit.framework.TestCase;
@@ -53,8 +51,11 @@ import org.jspecify.annotations.NullUnmarked;
  *
  * @author Kevin Bourrillion
  */
-@GwtCompatible(emulated = true)
-@SuppressWarnings("deprecation") // tests of numerous deprecated methods
+@GwtCompatible
+@SuppressWarnings({
+  "deprecation", // tests of numerous deprecated methods
+  "nullness", // TODO(cpovirk): fix errors
+})
 @NullUnmarked
 public class ThrowablesTest extends TestCase {
   // We're testing that the method is in fact equivalent to throwing the exception directly.
@@ -264,19 +265,19 @@ public class ThrowablesTest extends TestCase {
 
   public void testGetRootCause_noCause() {
     SomeCheckedException exception = new SomeCheckedException();
-    assertSame(exception, getRootCause(exception));
+    assertThat(getRootCause(exception)).isEqualTo(exception);
   }
 
   public void testGetRootCause_singleWrapped() {
     SomeCheckedException cause = new SomeCheckedException();
     SomeChainingException exception = new SomeChainingException(cause);
-    assertSame(cause, getRootCause(exception));
+    assertThat(getRootCause(exception)).isEqualTo(cause);
   }
 
   public void testGetRootCause_doubleWrapped() {
     SomeCheckedException cause = new SomeCheckedException();
     SomeChainingException exception = new SomeChainingException(new SomeChainingException(cause));
-    assertSame(cause, getRootCause(exception));
+    assertThat(getRootCause(exception)).isEqualTo(cause);
   }
 
   public void testGetRootCause_loop() {
@@ -285,7 +286,7 @@ public class ThrowablesTest extends TestCase {
     cause.initCause(exception);
     IllegalArgumentException expected =
         assertThrows(IllegalArgumentException.class, () -> getRootCause(cause));
-    assertThat(expected).hasCauseThat().isSameInstanceAs(cause);
+    assertThat(expected).hasCauseThat().isEqualTo(cause);
   }
 
   @J2ktIncompatible // Format does not match
@@ -314,7 +315,7 @@ public class ThrowablesTest extends TestCase {
     IllegalStateException ex = new IllegalStateException(re);
 
     assertThat(getCausalChain(ex)).containsExactly(ex, re, iae, sue).inOrder();
-    assertSame(sue, Iterables.getOnlyElement(getCausalChain(sue)));
+    assertThat(getCausalChain(sue)).containsExactly(sue);
 
     List<Throwable> causes = getCausalChain(ex);
     assertThrows(UnsupportedOperationException.class, () -> causes.add(new RuntimeException()));
@@ -330,7 +331,7 @@ public class ThrowablesTest extends TestCase {
     cause.initCause(exception);
     IllegalArgumentException expected =
         assertThrows(IllegalArgumentException.class, () -> getCausalChain(cause));
-    assertThat(expected).hasCauseThat().isSameInstanceAs(cause);
+    assertThat(expected).hasCauseThat().isEqualTo(cause);
   }
 
   @GwtIncompatible // getCauseAs(Throwable, Class)
@@ -338,27 +339,22 @@ public class ThrowablesTest extends TestCase {
     SomeCheckedException cause = new SomeCheckedException();
     SomeChainingException thrown = new SomeChainingException(cause);
 
-    assertThat(thrown).hasCauseThat().isSameInstanceAs(cause);
-    assertThat(getCauseAs(thrown, SomeCheckedException.class)).isSameInstanceAs(cause);
-    assertThat(getCauseAs(thrown, Exception.class)).isSameInstanceAs(cause);
+    assertThat(thrown).hasCauseThat().isEqualTo(cause);
+    assertThat(getCauseAs(thrown, SomeCheckedException.class)).isEqualTo(cause);
+    assertThat(getCauseAs(thrown, Exception.class)).isEqualTo(cause);
 
     ClassCastException expected =
         assertThrows(
             ClassCastException.class, () -> getCauseAs(thrown, IllegalStateException.class));
-    assertThat(expected).hasCauseThat().isSameInstanceAs(thrown);
+    assertThat(expected).hasCauseThat().isEqualTo(thrown);
   }
 
-  @AndroidIncompatible // No getJavaLangAccess in Android (at least not in the version we use).
   @J2ktIncompatible
   @GwtIncompatible // lazyStackTraceIsLazy()
   public void testLazyStackTraceWorksInProd() {
-    // TODO(b/64442212): Remove this guard once lazyStackTrace() works in Java 9+.
-    Integer javaVersion = Ints.tryParse(JAVA_SPECIFICATION_VERSION.value());
-    if (javaVersion != null && javaVersion >= 9) {
-      return;
-    }
-    // Obviously this isn't guaranteed in every environment, but it works well enough for now:
-    assertTrue(lazyStackTraceIsLazy());
+    String javaVersion = JAVA_SPECIFICATION_VERSION.value();
+    assertThat(lazyStackTraceIsLazy()).isEqualTo(isJava8());
+    // TODO(b/64442212): Someday make lazyStackTrace() works in Java 9+?
   }
 
   @J2ktIncompatible
@@ -385,5 +381,10 @@ public class ThrowablesTest extends TestCase {
   @GwtIncompatible // NullPointerTester
   public void testNullPointers() {
     new NullPointerTester().testAllPublicStaticMethods(Throwables.class);
+  }
+
+  @GwtIncompatible
+  private static boolean isJava8() {
+    return JAVA_SPECIFICATION_VERSION.value().equals("1.8");
   }
 }

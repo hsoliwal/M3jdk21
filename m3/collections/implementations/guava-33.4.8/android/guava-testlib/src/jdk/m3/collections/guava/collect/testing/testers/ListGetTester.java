@@ -16,10 +16,9 @@
 
 package jdk.m3.collections.guava.collect.testing.testers;
 
-import static jdk.m3.collections.guava.collect.testing.testers.ReflectionFreeAssertThrows.assertThrows;
+import static org.junit.Assert.assertThrows;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
-import org.junit.Ignore;
 
 /**
  * A generic JUnit test which tests {@code get()} operations on a list. Can't be invoked directly;
@@ -28,9 +27,6 @@ import org.junit.Ignore;
  * @author Chris Povirk
  */
 @GwtCompatible
-@Ignore("test runners must not instantiate and run this directly, only via suites we build")
-// @Ignore affects the Android test runner, which respects JUnit 4 annotations on JUnit 3 tests.
-@SuppressWarnings("JUnit4ClassUsedInJUnit3")
 public class ListGetTester<E> extends AbstractListTester<E> {
   public void testGet_valid() {
     // This calls get() on each index and checks the result:

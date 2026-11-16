@@ -56,6 +56,7 @@ final class FuturesGetCheckedInputs {
   }
 
   public static final class ExceptionWithPrivateConstructor extends Exception {
+    @SuppressWarnings("UnusedMethod")
     private ExceptionWithPrivateConstructor(String message, Throwable cause) {
       super(message, cause);
     }
@@ -97,7 +98,7 @@ final class FuturesGetCheckedInputs {
       super(message);
     }
 
-    public Throwable getAntecedent() {
+    public @Nullable Throwable getAntecedent() {
       return antecedent;
     }
   }

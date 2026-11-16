@@ -132,13 +132,15 @@ public final class Parameter implements AnnotatedElement {
    *
    * @since 25.1 for guava-jre
    */
-  @SuppressWarnings("Java7ApiChecker")
   public AnnotatedType getAnnotatedType() {
     return requireNonNull((AnnotatedType) annotatedType);
   }
 
   @Override
   public boolean equals(@Nullable Object obj) {
+    if (obj == this) {
+      return true;
+    }
     if (obj instanceof Parameter) {
       Parameter that = (Parameter) obj;
       return position == that.position && declaration.equals(that.declaration);

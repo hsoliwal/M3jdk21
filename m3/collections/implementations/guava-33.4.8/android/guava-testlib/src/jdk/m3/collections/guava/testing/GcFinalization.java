@@ -16,21 +16,31 @@
 
 package jdk.m3.collections.guava.testing;
 
+import static jdk.m3.collections.guava.base.Throwables.throwIfUnchecked;
+import static jdk.m3.collections.guava.collect.Sets.newConcurrentHashSet;
 import static java.lang.Math.max;
 import static java.util.concurrent.TimeUnit.SECONDS;
 
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
 import jdk.m3.collections.guava.annotations.J2ktIncompatible;
+import jdk.m3.collections.guava.base.FinalizablePhantomReference;
+import jdk.m3.collections.guava.base.FinalizableReferenceQueue;
 import com.google.errorprone.annotations.DoNotMock;
+import com.google.errorprone.annotations.FormatMethod;
 import com.google.j2objc.annotations.J2ObjCIncompatible;
+import java.lang.ref.Reference;
 import java.lang.ref.WeakReference;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.Locale;
+import java.util.Set;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeoutException;
 import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Testing utilities relating to garbage collection finalization.
@@ -62,7 +72,7 @@ import org.jspecify.annotations.NullMarked;
  *   ...
  *   protected void finalize() { latch.countDown(); ... }
  * };
- * x = null;  // Hint to the JIT that x is stack-unreachable
+ * x = null; // Hint to the JIT that x is stack-unreachable
  * GcFinalization.await(latch);
  * }
  *
@@ -87,7 +97,7 @@ import org.jspecify.annotations.NullMarked;
  *   Foo x = ....;
  *   WeakReference<Foo> weakRef = new WeakReference<>(x);
  *   // ... use x ...
- *   x = null;  // Hint to the JIT that x is stack-unreachable
+ *   x = null; // Hint to the JIT that x is stack-unreachable
  *   return weakRef;
  * }
  * public void testFooLeak() {
@@ -137,7 +147,6 @@ public final class GcFinalization {
    *
    * @throws RuntimeException if timed out or interrupted while waiting
    */
-  @SuppressWarnings("removal") // b/260137033
   public static void awaitDone(Future<?> future) {
     if (future.isDone()) {
       return;
@@ -145,7 +154,7 @@ public final class GcFinalization {
     long timeoutSeconds = timeoutSeconds();
     long deadline = System.nanoTime() + SECONDS.toNanos(timeoutSeconds);
     do {
-      System.runFinalization();
+      runFinalization();
       if (future.isDone()) {
         return;
       }
@@ -170,7 +179,6 @@ public final class GcFinalization {
    *
    * @throws RuntimeException if timed out or interrupted while waiting
    */
-  @SuppressWarnings("removal") // b/260137033
   public static void awaitDone(FinalizationPredicate predicate) {
     if (predicate.isDone()) {
       return;
@@ -178,7 +186,7 @@ public final class GcFinalization {
     long timeoutSeconds = timeoutSeconds();
     long deadline = System.nanoTime() + SECONDS.toNanos(timeoutSeconds);
     do {
-      System.runFinalization();
+      runFinalization();
       if (predicate.isDone()) {
         return;
       }
@@ -199,7 +207,6 @@ public final class GcFinalization {
    *
    * @throws RuntimeException if timed out or interrupted while waiting
    */
-  @SuppressWarnings("removal") // b/260137033
   public static void await(CountDownLatch latch) {
     if (latch.getCount() == 0) {
       return;
@@ -207,7 +214,7 @@ public final class GcFinalization {
     long timeoutSeconds = timeoutSeconds();
     long deadline = System.nanoTime() + SECONDS.toNanos(timeoutSeconds);
     do {
-      System.runFinalization();
+      runFinalization();
       if (latch.getCount() == 0) {
         return;
       }
@@ -229,14 +236,7 @@ public final class GcFinalization {
    * separate method to make it somewhat more likely to be unreachable.
    */
   private static void createUnreachableLatchFinalizer(CountDownLatch latch) {
-    Object unused =
-        new Object() {
-          @SuppressWarnings({"removal", "Finalize"}) // b/260137033
-          @Override
-          protected void finalize() {
-            latch.countDown();
-          }
-        };
+    FinalizableReference.register(new Object(), latch);
   }
 
   /**
@@ -252,6 +252,7 @@ public final class GcFinalization {
    */
   @DoNotMock("Implement with a lambda")
   public interface FinalizationPredicate {
+    /** Returns {@code true} if the finalization condition is met. */
     boolean isDone();
   }
 
@@ -297,26 +298,117 @@ public final class GcFinalization {
    * @throws RuntimeException if timed out or interrupted while waiting
    * @since 12.0
    */
-  @SuppressWarnings({"removal", "Finalize"}) // b/260137033
   public static void awaitFullGc() {
     CountDownLatch finalizerRan = new CountDownLatch(1);
-    WeakReference<Object> ref =
-        new WeakReference<>(
-            new Object() {
-              @Override
-              protected void finalize() {
-                finalizerRan.countDown();
-              }
-            });
+    WeakReference<Object> ref = createWeakReferenceWithFinalizer(finalizerRan);
 
     await(finalizerRan);
     awaitClear(ref);
 
     // Hope to catch some stragglers queued up behind our finalizable object
-    System.runFinalization();
+    runFinalization();
   }
 
+  private static WeakReference<Object> createWeakReferenceWithFinalizer(
+      CountDownLatch finalizerRan) {
+    Object referent = new Object();
+    FinalizableReference.register(referent, finalizerRan);
+    return new WeakReference<>(referent);
+  }
+
+  private static final class FinalizableReference extends FinalizablePhantomReference<Object> {
+    static final FinalizableReferenceQueue referenceQueue = new FinalizableReferenceQueue();
+    static final Set<FinalizableReference> references = newConcurrentHashSet();
+
+    static void register(Object referent, CountDownLatch latch) {
+      try {
+        references.add(new FinalizableReference(referent, latch));
+      } finally {
+        GcFinalization.reachabilityFence(referent);
+      }
+    }
+
+    final CountDownLatch latch;
+
+    FinalizableReference(Object referent, CountDownLatch latch) {
+      super(referent, referenceQueue);
+      this.latch = latch;
+    }
+
+    @Override
+    public void finalizeReferent() {
+      references.remove(this);
+      latch.countDown();
+    }
+  }
+
+  @FormatMethod
   private static RuntimeException formatRuntimeException(String format, Object... args) {
     return new RuntimeException(String.format(Locale.ROOT, format, args));
+  }
+
+  private static final @Nullable Method runFinalizationMethod = getRunFinalizationMethod();
+
+  private static @Nullable Method getRunFinalizationMethod() {
+    try {
+      return System.class.getMethod("runFinalization");
+    } catch (NoSuchMethodException | SecurityException e) {
+      return null;
+    }
+  }
+
+  private static void runFinalization() {
+    if (runFinalizationMethod == null) {
+      return;
+    }
+    try {
+      runFinalizationMethod.invoke(null);
+    } catch (InvocationTargetException e) {
+      throwIfUnchecked(e.getCause());
+      throw new AssertionError(e.getCause());
+    } catch (IllegalAccessException e) {
+      throw new AssertionError(e);
+    }
+  }
+
+  // We call the method only after checking that it's present.
+  @IgnoreJRERequirement
+  @SuppressWarnings({
+    "Java8ApiChecker",
+    "NewApi",
+    // This method is a helper, which we call from a `finally` block, as recommended.
+    "ReachabilityFenceUsage",
+  })
+  static void reachabilityFence(@Nullable Object o) {
+    if (IS_REACHABILITY_FENCE_METHOD_USABLE) {
+      Reference.reachabilityFence(o);
+    }
+  }
+
+  private static final boolean IS_REACHABILITY_FENCE_METHOD_USABLE =
+      computeIsReachabilityFenceMethodUsable();
+
+  private static boolean computeIsReachabilityFenceMethodUsable() {
+    try {
+      Method method = Reference.class.getMethod("reachabilityFence", Object.class);
+      method.invoke(null, GcFinalization.class); // to make sure the method is accessible
+      return true;
+    } catch (NoSuchMethodException | IllegalAccessException probablyBeforeJava9OrAndroid28) {
+      /*
+       * It's theoretically possible for Reference.reachabilityFence to exist under older VMs in an
+       * inaccessible form.
+       */
+      return false;
+    } catch (InvocationTargetException e) {
+      /*
+       * It's theoretically possible for Reference.reachabilityFence to exist under older VMs but
+       * not work. (Under Android in particular, we really should check the API Level instead of
+       * probing for methods....) But it's hard to imagine how reachabilityFence in particular could
+       * exist but throw, so we propagate anything that's thrown, presumably an unchecked Exception
+       * or Error.
+       */
+      throwIfUnchecked(e.getCause());
+      throw new AssertionError(e.getCause());
+    }
   }
 }

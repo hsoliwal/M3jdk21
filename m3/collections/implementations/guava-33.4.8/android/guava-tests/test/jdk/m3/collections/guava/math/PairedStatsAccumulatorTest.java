@@ -42,12 +42,14 @@ import static jdk.m3.collections.guava.math.StatsTesting.assertStatsApproxEqual;
 import static jdk.m3.collections.guava.math.StatsTesting.assertVerticalLinearTransformation;
 import static jdk.m3.collections.guava.math.StatsTesting.createFilledPairedStatsAccumulator;
 import static jdk.m3.collections.guava.math.StatsTesting.createPartitionedFilledPairedStatsAccumulator;
-import static com.google.common.truth.Truth.assertThat;
-import static com.google.common.truth.Truth.assertWithMessage;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
+import static jdk.m3.collections.guava.truth.Truth.assertWithMessage;
+import static java.util.Collections.nCopies;
 import static org.junit.Assert.assertThrows;
 
+import jdk.m3.collections.guava.annotations.GwtIncompatible;
+import jdk.m3.collections.guava.annotations.J2ktIncompatible;
 import jdk.m3.collections.guava.math.StatsTesting.ManyValues;
-import java.util.Collections;
 import junit.framework.TestCase;
 import org.jspecify.annotations.NullUnmarked;
 
@@ -60,6 +62,8 @@ import org.jspecify.annotations.NullUnmarked;
  * @author Pete Gillin
  */
 @NullUnmarked
+@J2ktIncompatible
+@GwtIncompatible
 public class PairedStatsAccumulatorTest extends TestCase {
 
   private PairedStatsAccumulator emptyAccumulator;
@@ -103,27 +107,24 @@ public class PairedStatsAccumulatorTest extends TestCase {
 
     horizontalValuesAccumulator =
         createFilledPairedStatsAccumulator(
-            MANY_VALUES, Collections.nCopies(MANY_VALUES_COUNT, OTHER_ONE_VALUE));
+            MANY_VALUES, nCopies(MANY_VALUES_COUNT, OTHER_ONE_VALUE));
     horizontalValuesAccumulatorByAddAllPartitionedPairedStats =
         createPartitionedFilledPairedStatsAccumulator(
-            MANY_VALUES, Collections.nCopies(MANY_VALUES_COUNT, OTHER_ONE_VALUE), 2);
+            MANY_VALUES, nCopies(MANY_VALUES_COUNT, OTHER_ONE_VALUE), 2);
 
     verticalValuesAccumulator =
         createFilledPairedStatsAccumulator(
-            Collections.nCopies(OTHER_MANY_VALUES_COUNT, ONE_VALUE), OTHER_MANY_VALUES);
+            nCopies(OTHER_MANY_VALUES_COUNT, ONE_VALUE), OTHER_MANY_VALUES);
     verticalValuesAccumulatorByAddAllPartitionedPairedStats =
         createPartitionedFilledPairedStatsAccumulator(
-            Collections.nCopies(OTHER_MANY_VALUES_COUNT, ONE_VALUE), OTHER_MANY_VALUES, 2);
+            nCopies(OTHER_MANY_VALUES_COUNT, ONE_VALUE), OTHER_MANY_VALUES, 2);
 
     constantValuesAccumulator =
         createFilledPairedStatsAccumulator(
-            Collections.nCopies(MANY_VALUES_COUNT, ONE_VALUE),
-            Collections.nCopies(MANY_VALUES_COUNT, OTHER_ONE_VALUE));
+            nCopies(MANY_VALUES_COUNT, ONE_VALUE), nCopies(MANY_VALUES_COUNT, OTHER_ONE_VALUE));
     constantValuesAccumulatorByAddAllPartitionedPairedStats =
         createPartitionedFilledPairedStatsAccumulator(
-            Collections.nCopies(MANY_VALUES_COUNT, ONE_VALUE),
-            Collections.nCopies(MANY_VALUES_COUNT, OTHER_ONE_VALUE),
-            2);
+            nCopies(MANY_VALUES_COUNT, ONE_VALUE), nCopies(MANY_VALUES_COUNT, OTHER_ONE_VALUE), 2);
   }
 
   public void testCount() {
@@ -206,16 +207,16 @@ public class PairedStatsAccumulatorTest extends TestCase {
       double populationCovarianceByAddAllPartitionedPairedStats =
           accumulatorByAddAllPartitionedPairedStats.populationCovariance();
       if (values.hasAnyNonFinite()) {
-        assertWithMessage("population covariance of " + values).that(populationCovariance).isNaN();
-        assertWithMessage("population covariance by addAll(PairedStats) of " + values)
+        assertWithMessage("population covariance of %s", values).that(populationCovariance).isNaN();
+        assertWithMessage("population covariance by addAll(PairedStats) of %s", values)
             .that(populationCovarianceByAddAllPartitionedPairedStats)
             .isNaN();
       } else {
-        assertWithMessage("population covariance of " + values)
+        assertWithMessage("population covariance of %s", values)
             .that(populationCovariance)
             .isWithin(ALLOWED_ERROR)
             .of(MANY_VALUES_SUM_OF_PRODUCTS_OF_DELTAS / MANY_VALUES_COUNT);
-        assertWithMessage("population covariance by addAll(PairedStats) of " + values)
+        assertWithMessage("population covariance by addAll(PairedStats) of %s", values)
             .that(populationCovarianceByAddAllPartitionedPairedStats)
             .isWithin(ALLOWED_ERROR)
             .of(MANY_VALUES_SUM_OF_PRODUCTS_OF_DELTAS / MANY_VALUES_COUNT);
@@ -314,21 +315,21 @@ public class PairedStatsAccumulatorTest extends TestCase {
       double pearsonsCorrelationCoefficientByAddAllPartitionedPairedStats =
           accumulatorByAddAllPartitionedPairedStats.pearsonsCorrelationCoefficient();
       if (values.hasAnyNonFinite()) {
-        assertWithMessage("Pearson's correlation coefficient of " + values)
+        assertWithMessage("Pearson's correlation coefficient of %s", values)
             .that(pearsonsCorrelationCoefficient)
             .isNaN();
-        assertWithMessage("Pearson's correlation coefficient by addAll(PairedStats) of " + values)
+        assertWithMessage("Pearson's correlation coefficient by addAll(PairedStats) of %s", values)
             .that(pearsonsCorrelationCoefficient)
             .isNaN();
       } else {
-        assertWithMessage("Pearson's correlation coefficient of " + values)
+        assertWithMessage("Pearson's correlation coefficient of %s", values)
             .that(pearsonsCorrelationCoefficient)
             .isWithin(ALLOWED_ERROR)
             .of(
                 accumulator.populationCovariance()
                     / (accumulator.xStats().populationStandardDeviation()
                         * accumulator.yStats().populationStandardDeviation()));
-        assertWithMessage("Pearson's correlation coefficient by addAll(PairedStats) of " + values)
+        assertWithMessage("Pearson's correlation coefficient by addAll(PairedStats) of %s", values)
             .that(pearsonsCorrelationCoefficientByAddAllPartitionedPairedStats)
             .isWithin(ALLOWED_ERROR)
             .of(

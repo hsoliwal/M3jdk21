@@ -16,11 +16,12 @@
 
 package jdk.m3.collections.guava.collect;
 
-import static jdk.m3.collections.guava.collect.Sets.newHashSet;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.base.Joiner;
 import jdk.m3.collections.guava.collect.testing.SortedMapInterfaceTest;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.SortedMap;
@@ -30,7 +31,7 @@ import org.jspecify.annotations.NullUnmarked;
 @NullUnmarked
 public abstract class AbstractImmutableSortedMapMapInterfaceTest<K, V>
     extends SortedMapInterfaceTest<K, V> {
-  public AbstractImmutableSortedMapMapInterfaceTest() {
+  AbstractImmutableSortedMapMapInterfaceTest() {
     super(false, false, false, false, false);
   }
 
@@ -45,15 +46,15 @@ public abstract class AbstractImmutableSortedMapMapInterfaceTest<K, V>
   protected void assertMoreInvariants(Map<K, V> map) {
     // TODO: can these be moved to MapInterfaceTest?
     for (Entry<K, V> entry : map.entrySet()) {
-      assertEquals(entry.getKey() + "=" + entry.getValue(), entry.toString());
+      assertThat(entry.toString()).isEqualTo(entry.getKey() + "=" + entry.getValue());
     }
 
-    assertEquals("{" + JOINER.join(map.entrySet()) + "}", map.toString());
-    assertEquals("[" + JOINER.join(map.entrySet()) + "]", map.entrySet().toString());
-    assertEquals("[" + JOINER.join(map.keySet()) + "]", map.keySet().toString());
-    assertEquals("[" + JOINER.join(map.values()) + "]", map.values().toString());
+    assertThat(map.toString()).isEqualTo("{" + JOINER.join(map.entrySet()) + "}");
+    assertThat(map.entrySet().toString()).isEqualTo("[" + JOINER.join(map.entrySet()) + "]");
+    assertThat(map.keySet().toString()).isEqualTo("[" + JOINER.join(map.keySet()) + "]");
+    assertThat(map.values().toString()).isEqualTo("[" + JOINER.join(map.values()) + "]");
 
-    assertEquals(newHashSet(map.entrySet()), map.entrySet());
-    assertEquals(newHashSet(map.keySet()), map.keySet());
+    assertEquals(new HashSet<>(map.entrySet()), map.entrySet());
+    assertEquals(new HashSet<>(map.keySet()), map.keySet());
   }
 }

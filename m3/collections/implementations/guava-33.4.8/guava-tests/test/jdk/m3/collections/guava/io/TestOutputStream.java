@@ -18,57 +18,77 @@ package jdk.m3.collections.guava.io;
 
 import static jdk.m3.collections.guava.base.Preconditions.checkNotNull;
 import static jdk.m3.collections.guava.io.TestOption.CLOSE_THROWS;
+import static jdk.m3.collections.guava.io.TestOption.FLUSH_THROWS;
 import static jdk.m3.collections.guava.io.TestOption.OPEN_THROWS;
 import static jdk.m3.collections.guava.io.TestOption.WRITE_THROWS;
+import static java.util.Arrays.asList;
 
 import jdk.m3.collections.guava.collect.ImmutableSet;
-import java.io.FilterOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.util.Arrays;
 import org.jspecify.annotations.NullUnmarked;
 
 /**
  * @author Colin Decker
  */
 @NullUnmarked
-public class TestOutputStream extends FilterOutputStream {
-
+final class TestOutputStream extends OutputStream {
+  private final OutputStream delegate;
   private final ImmutableSet<TestOption> options;
   private boolean closed;
+  private boolean flushed;
 
-  public TestOutputStream(OutputStream out, TestOption... options) throws IOException {
-    this(out, Arrays.asList(options));
+  TestOutputStream(OutputStream delegate, TestOption... options) throws IOException {
+    this(delegate, asList(options));
   }
 
-  public TestOutputStream(OutputStream out, Iterable<TestOption> options) throws IOException {
-    super(checkNotNull(out));
+  TestOutputStream(OutputStream delegate, Iterable<TestOption> options) throws IOException {
+    this.delegate = checkNotNull(delegate);
     this.options = ImmutableSet.copyOf(options);
     throwIf(OPEN_THROWS);
   }
 
-  public boolean closed() {
+  boolean closed() {
     return closed;
+  }
+
+  boolean flushed() {
+    return flushed;
+  }
+
+  @Override
+  public void write(byte[] b) throws IOException {
+    throwIf(closed);
+    throwIf(WRITE_THROWS);
+    delegate.write(b);
   }
 
   @Override
   public void write(byte[] b, int off, int len) throws IOException {
     throwIf(closed);
     throwIf(WRITE_THROWS);
-    super.write(b, off, len);
+    delegate.write(b, off, len);
   }
 
   @Override
   public void write(int b) throws IOException {
     throwIf(closed);
     throwIf(WRITE_THROWS);
-    super.write(b);
+    delegate.write(b);
+  }
+
+  @Override
+  public void flush() throws IOException {
+    throwIf(closed);
+    flushed = true;
+    delegate.flush();
+    throwIf(FLUSH_THROWS);
   }
 
   @Override
   public void close() throws IOException {
     closed = true;
-    super.close();
+    delegate.close();
     throwIf(CLOSE_THROWS);
   }
 

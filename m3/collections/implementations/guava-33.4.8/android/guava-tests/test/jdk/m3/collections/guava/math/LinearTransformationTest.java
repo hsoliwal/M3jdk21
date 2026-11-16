@@ -20,9 +20,12 @@ import static jdk.m3.collections.guava.math.StatsTesting.assertDiagonalLinearTra
 import static jdk.m3.collections.guava.math.StatsTesting.assertHorizontalLinearTransformation;
 import static jdk.m3.collections.guava.math.StatsTesting.assertLinearTransformationNaN;
 import static jdk.m3.collections.guava.math.StatsTesting.assertVerticalLinearTransformation;
-import static com.google.common.truth.Truth.assertThat;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
 import static org.junit.Assert.assertThrows;
 
+import jdk.m3.collections.guava.annotations.GwtIncompatible;
+import jdk.m3.collections.guava.annotations.J2ktIncompatible;
+import jdk.m3.collections.guava.primitives.Doubles;
 import junit.framework.TestCase;
 import org.jspecify.annotations.NullUnmarked;
 
@@ -31,6 +34,8 @@ import org.jspecify.annotations.NullUnmarked;
  *
  * @author Pete Gillin
  */
+@GwtIncompatible
+@J2ktIncompatible
 @NullUnmarked
 public class LinearTransformationTest extends TestCase {
 
@@ -112,10 +117,7 @@ public class LinearTransformationTest extends TestCase {
     double x = 1.2;
     double y = 3.4;
     assertThrows(
-        IllegalArgumentException.class,
-        () -> {
-          LinearTransformation.mapping(x, y).and(x, y);
-        });
+        IllegalArgumentException.class, () -> LinearTransformation.mapping(x, y).and(x, y));
   }
 
   public void testMappingWithSlope_regular() {
@@ -145,7 +147,7 @@ public class LinearTransformationTest extends TestCase {
   public void testMappingWithSlope_minimalSlope() {
     double x1 = 1.2;
     double y1 = 3.4;
-    double slope = Double.MIN_VALUE;
+    double slope = Doubles.MIN_POSITIVE_VALUE;
     LinearTransformation transformation = LinearTransformation.mapping(x1, y1).withSlope(slope);
     assertThat(transformation.isVertical()).isFalse();
     assertThat(transformation.isHorizontal()).isFalse();

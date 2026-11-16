@@ -16,8 +16,10 @@
 
 package jdk.m3.collections.guava.math;
 
+import static jdk.m3.collections.guava.collect.Iterables.concat;
 import static jdk.m3.collections.guava.collect.Iterables.get;
 import static jdk.m3.collections.guava.collect.Iterables.size;
+import static jdk.m3.collections.guava.math.DoubleMath.isMathematicalInteger;
 import static jdk.m3.collections.guava.math.MathTesting.ALL_DOUBLE_CANDIDATES;
 import static jdk.m3.collections.guava.math.MathTesting.ALL_ROUNDING_MODES;
 import static jdk.m3.collections.guava.math.MathTesting.ALL_SAFE_ROUNDING_MODES;
@@ -28,8 +30,7 @@ import static jdk.m3.collections.guava.math.MathTesting.INFINITIES;
 import static jdk.m3.collections.guava.math.MathTesting.INTEGRAL_DOUBLE_CANDIDATES;
 import static jdk.m3.collections.guava.math.MathTesting.NEGATIVE_INTEGER_CANDIDATES;
 import static jdk.m3.collections.guava.math.MathTesting.POSITIVE_FINITE_DOUBLE_CANDIDATES;
-import static jdk.m3.collections.guava.math.ReflectionFreeAssertThrows.assertThrows;
-import static com.google.common.truth.Truth.assertThat;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
 import static java.math.RoundingMode.CEILING;
 import static java.math.RoundingMode.DOWN;
 import static java.math.RoundingMode.FLOOR;
@@ -39,18 +40,17 @@ import static java.math.RoundingMode.HALF_UP;
 import static java.math.RoundingMode.UNNECESSARY;
 import static java.math.RoundingMode.UP;
 import static java.util.Arrays.asList;
+import static org.junit.Assert.assertThrows;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
 import jdk.m3.collections.guava.annotations.J2ktIncompatible;
 import jdk.m3.collections.guava.collect.ImmutableList;
-import jdk.m3.collections.guava.collect.Iterables;
 import jdk.m3.collections.guava.primitives.Doubles;
 import jdk.m3.collections.guava.testing.NullPointerTester;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.math.RoundingMode;
-import java.util.Arrays;
 import junit.framework.TestCase;
 import org.jspecify.annotations.NullUnmarked;
 
@@ -59,7 +59,7 @@ import org.jspecify.annotations.NullUnmarked;
  *
  * @author Louis Wasserman
  */
-@GwtCompatible(emulated = true)
+@GwtCompatible
 @NullUnmarked
 public class DoubleMathTest extends TestCase {
 
@@ -71,9 +71,9 @@ public class DoubleMathTest extends TestCase {
 
   public void testConstantsMaxFactorial() {
     BigInteger maxDoubleValue = BigDecimal.valueOf(Double.MAX_VALUE).toBigInteger();
-    assertTrue(BigIntegerMath.factorial(DoubleMath.MAX_FACTORIAL).compareTo(maxDoubleValue) <= 0);
-    assertTrue(
-        BigIntegerMath.factorial(DoubleMath.MAX_FACTORIAL + 1).compareTo(maxDoubleValue) > 0);
+    assertThat(BigIntegerMath.factorial(DoubleMath.MAX_FACTORIAL)).isAtMost(maxDoubleValue);
+    assertThat(BigIntegerMath.factorial(DoubleMath.MAX_FACTORIAL + 1))
+        .isGreaterThan(maxDoubleValue);
   }
 
   public void testConstantsEverySixteenthFactorial() {
@@ -449,7 +449,7 @@ public class DoubleMathTest extends TestCase {
 
   @GwtIncompatible // StrictMath
   @SuppressWarnings("strictfp") // Guava still supports Java 8
-  private strictfp double trueLog2(double d) {
+  private static strictfp double trueLog2(double d) {
     double trueLog2 = StrictMath.log(d) / StrictMath.log(2);
     // increment until it's >= the true value
     while (StrictMath.pow(2.0, trueLog2) < d) {
@@ -469,21 +469,21 @@ public class DoubleMathTest extends TestCase {
   @GwtIncompatible // DoubleMath.isMathematicalInteger
   public void testIsMathematicalIntegerIntegral() {
     for (double d : INTEGRAL_DOUBLE_CANDIDATES) {
-      assertTrue(DoubleMath.isMathematicalInteger(d));
+      assertTrue(isMathematicalInteger(d));
     }
   }
 
   @GwtIncompatible // DoubleMath.isMathematicalInteger
   public void testIsMathematicalIntegerFractional() {
     for (double d : FRACTIONAL_DOUBLE_CANDIDATES) {
-      assertFalse(DoubleMath.isMathematicalInteger(d));
+      assertFalse(isMathematicalInteger(d));
     }
   }
 
   @GwtIncompatible // DoubleMath.isMathematicalInteger
   public void testIsMathematicalIntegerNotFinite() {
-    for (double d : Arrays.asList(Double.POSITIVE_INFINITY, Double.NEGATIVE_INFINITY, Double.NaN)) {
-      assertFalse(DoubleMath.isMathematicalInteger(d));
+    for (double d : asList(Double.POSITIVE_INFINITY, Double.NEGATIVE_INFINITY, Double.NaN)) {
+      assertFalse(isMathematicalInteger(d));
     }
   }
 
@@ -512,13 +512,12 @@ public class DoubleMathTest extends TestCase {
 
   private static final Iterable<Double> TOLERANCE_CANDIDATES =
       ImmutableList.copyOf(
-          Iterables.concat(
-              FINITE_TOLERANCE_CANDIDATES, ImmutableList.of(Double.POSITIVE_INFINITY)));
+          concat(FINITE_TOLERANCE_CANDIDATES, ImmutableList.of(Double.POSITIVE_INFINITY)));
 
   private static final ImmutableList<Double> BAD_TOLERANCE_CANDIDATES =
       ImmutableList.copyOf(
           Doubles.asList(
-              -Double.MIN_VALUE,
+              -Doubles.MIN_POSITIVE_VALUE,
               -Double.MIN_NORMAL,
               -1,
               -20,
@@ -653,6 +652,7 @@ public class DoubleMathTest extends TestCase {
 
   @GwtIncompatible // DoubleMath.mean
   @SuppressWarnings("deprecation") // test of deprecated method
+  @J2ktIncompatible // b/480968849
   public void testMean_doubleVarargs() {
     assertThat(DoubleMath.mean(1.1, -2.2, 4.4, -8.8)).isWithin(1.0e-10).of(-1.375);
     assertThat(DoubleMath.mean(1.1)).isWithin(1.0e-10).of(1.1);
@@ -682,6 +682,7 @@ public class DoubleMathTest extends TestCase {
 
   @GwtIncompatible // DoubleMath.mean
   @SuppressWarnings("deprecation") // test of deprecated method
+  @J2ktIncompatible // b/480968849
   public void testMean_doubleIterable() {
     assertThat(DoubleMath.mean(ImmutableList.of(1.1, -2.2, 4.4, -8.8)))
         .isWithin(1.0e-10)
@@ -697,6 +698,7 @@ public class DoubleMathTest extends TestCase {
 
   @GwtIncompatible // DoubleMath.mean
   @SuppressWarnings("deprecation") // test of deprecated method
+  @J2ktIncompatible // b/480968849
   public void testMean_intIterable() {
     assertThat(DoubleMath.mean(ImmutableList.of(11, -22, 44, -88))).isWithin(1.0e-10).of(-13.75);
     assertThat(DoubleMath.mean(ImmutableList.of(11))).isWithin(1.0e-10).of(11);
@@ -706,6 +708,7 @@ public class DoubleMathTest extends TestCase {
 
   @GwtIncompatible // DoubleMath.mean
   @SuppressWarnings("deprecation") // test of deprecated method
+  @J2ktIncompatible // b/480968849
   public void testMean_longIterable() {
     assertThat(DoubleMath.mean(ImmutableList.of(11L, -22L, 44L, -88L)))
         .isWithin(1.0e-10)
@@ -716,6 +719,7 @@ public class DoubleMathTest extends TestCase {
 
   @GwtIncompatible // DoubleMath.mean
   @SuppressWarnings("deprecation") // test of deprecated method
+  @J2ktIncompatible // b/480968849
   public void testMean_intIterator() {
     assertThat(DoubleMath.mean(ImmutableList.of(11, -22, 44, -88).iterator()))
         .isWithin(1.0e-10)
@@ -728,6 +732,7 @@ public class DoubleMathTest extends TestCase {
 
   @GwtIncompatible // DoubleMath.mean
   @SuppressWarnings("deprecation") // test of deprecated method
+  @J2ktIncompatible // b/480968849
   public void testMean_longIterator() {
     assertThat(DoubleMath.mean(ImmutableList.of(11L, -22L, 44L, -88L).iterator()))
         .isWithin(1.0e-10)

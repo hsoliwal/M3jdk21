@@ -29,13 +29,14 @@ import static jdk.m3.collections.guava.collect.testing.features.FeatureUtilTest.
 import static jdk.m3.collections.guava.collect.testing.features.FeatureUtilTest.ExampleFeature.IMPLIES_FOO;
 import static jdk.m3.collections.guava.collect.testing.features.FeatureUtilTest.ExampleFeature.IMPLIES_IMPLIES_FOO;
 import static jdk.m3.collections.guava.collect.testing.features.FeatureUtilTest.ExampleFeature.IMPLIES_IMPLIES_FOO_AND_IMPLIES_BAR;
-import static com.google.common.truth.Truth.assertThat;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 import static org.junit.Assert.assertThrows;
 
 import jdk.m3.collections.guava.collect.ImmutableSet;
 import jdk.m3.collections.guava.collect.testing.features.FeatureUtilTest.ExampleFeature.NotTesterAnnotation;
 import jdk.m3.collections.guava.collect.testing.features.FeatureUtilTest.ExampleFeature.Require;
+import com.google.errorprone.annotations.Keep;
 import java.lang.annotation.Inherited;
 import java.lang.annotation.Retention;
 import java.lang.reflect.Method;
@@ -175,6 +176,7 @@ public class FeatureUtilTest extends TestCase {
   public void testBuildTesterRequirements_class_present_method_present() throws Exception {
     @Require(IMPLIES_BAR)
     class Tester {
+      @Keep
       @Require(IMPLIES_IMPLIES_FOO)
       public void test() {}
     }
@@ -189,6 +191,7 @@ public class FeatureUtilTest extends TestCase {
   public void testBuildTesterRequirements_class_absent_method_absent() throws Exception {
     @Require(absent = IMPLIES_BAR)
     class Tester {
+      @Keep
       @Require(absent = IMPLIES_IMPLIES_FOO)
       public void test() {}
     }
@@ -202,6 +205,7 @@ public class FeatureUtilTest extends TestCase {
   public void testBuildTesterRequirements_class_present_method_absent() throws Exception {
     @Require(IMPLIES_IMPLIES_FOO)
     class Tester {
+      @Keep
       @Require(absent = IMPLIES_IMPLIES_FOO_AND_IMPLIES_BAR)
       public void test() {}
     }
@@ -217,6 +221,7 @@ public class FeatureUtilTest extends TestCase {
   public void testBuildTesterRequirements_class_absent_method_present() throws Exception {
     @Require(absent = IMPLIES_IMPLIES_FOO_AND_IMPLIES_BAR)
     class Tester {
+      @Keep
       @Require(IMPLIES_IMPLIES_FOO)
       public void test() {}
     }
@@ -267,6 +272,7 @@ public class FeatureUtilTest extends TestCase {
   public void testBuildTesterRequirements_methodClassConflict() throws Exception {
     @Require(IMPLIES_FOO)
     class Tester {
+      @Keep
       @Require(absent = FOO)
       public void test() {}
     }
@@ -301,6 +307,7 @@ public class FeatureUtilTest extends TestCase {
 
   public void testGetTesterAnnotations_method() throws Exception {
     class Tester {
+      @Keep
       @Require
       @NotTesterAnnotation
       public void test() {}

@@ -16,6 +16,7 @@
 
 package jdk.m3.collections.guava.collect.testing;
 
+import static jdk.m3.collections.guava.base.Preconditions.checkArgument;
 import static jdk.m3.collections.guava.collect.testing.Helpers.copyToSet;
 import static jdk.m3.collections.guava.collect.testing.Helpers.getMethod;
 import static jdk.m3.collections.guava.collect.testing.features.FeatureUtil.addImpliedFeatures;
@@ -68,9 +69,9 @@ public abstract class FeatureSpecificTestSuiteBuilder<
 
   private @Nullable G subjectGenerator;
   // Gets run before every test.
-  private Runnable setUp;
+  private @Nullable Runnable setUp;
   // Gets run at the conclusion of every test.
-  private Runnable tearDown;
+  private @Nullable Runnable tearDown;
 
   @CanIgnoreReturnValue
   protected B usingGenerator(G subjectGenerator) {
@@ -83,22 +84,22 @@ public abstract class FeatureSpecificTestSuiteBuilder<
   }
 
   @CanIgnoreReturnValue
-  public B withSetUp(Runnable setUp) {
+  public B withSetUp(@Nullable Runnable setUp) {
     this.setUp = setUp;
     return self();
   }
 
-  public Runnable getSetUp() {
+  public @Nullable Runnable getSetUp() {
     return setUp;
   }
 
   @CanIgnoreReturnValue
-  public B withTearDown(Runnable tearDown) {
+  public B withTearDown(@Nullable Runnable tearDown) {
     this.tearDown = tearDown;
     return self();
   }
 
-  public Runnable getTearDown() {
+  public @Nullable Runnable getTearDown() {
     return tearDown;
   }
 
@@ -134,11 +135,10 @@ public abstract class FeatureSpecificTestSuiteBuilder<
   /** Configures this builder produce a TestSuite with the given name. */
   @CanIgnoreReturnValue
   public B named(String name) {
-    if (name.contains("(")) {
-      throw new IllegalArgumentException(
-          "Eclipse hides all characters after "
-              + "'('; please use '[]' or other characters instead of parentheses");
-    }
+    checkArgument(
+        !name.contains("("),
+        "Eclipse hides all characters after "
+            + "'('; please use '[]' or other characters instead of parentheses");
     this.name = name;
     return self();
   }

@@ -17,12 +17,14 @@ package jdk.m3.collections.guava.reflect;
 import static jdk.m3.collections.guava.base.Preconditions.checkArgument;
 import static jdk.m3.collections.guava.base.Preconditions.checkNotNull;
 import static jdk.m3.collections.guava.base.Preconditions.checkState;
+import static jdk.m3.collections.guava.reflect.Types.getComponentType;
+import static jdk.m3.collections.guava.reflect.Types.newArrayType;
+import static jdk.m3.collections.guava.reflect.Types.newArtificialTypeVariable;
+import static jdk.m3.collections.guava.reflect.Types.newParameterizedTypeWithOwner;
 import static java.util.Arrays.asList;
 
 import jdk.m3.collections.guava.base.Joiner;
-import jdk.m3.collections.guava.base.Objects;
 import jdk.m3.collections.guava.collect.ImmutableMap;
-import jdk.m3.collections.guava.collect.Maps;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import java.lang.reflect.GenericArrayType;
 import java.lang.reflect.ParameterizedType;
@@ -30,9 +32,11 @@ import java.lang.reflect.Type;
 import java.lang.reflect.TypeVariable;
 import java.lang.reflect.WildcardType;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
 import org.jspecify.annotations.Nullable;
@@ -55,6 +59,7 @@ public final class TypeResolver {
 
   private final TypeTable typeTable;
 
+  /** Constructs a new {@code TypeResolver} with no type mappings. */
   public TypeResolver() {
     this.typeTable = new TypeTable();
   }
@@ -110,7 +115,7 @@ public final class TypeResolver {
    *     corresponding mappings exist in the current {@code TypeResolver} instance.
    */
   public TypeResolver where(Type formal, Type actual) {
-    Map<TypeVariableKey, Type> mappings = Maps.newHashMap();
+    Map<TypeVariableKey, Type> mappings = new HashMap<>();
     populateTypeMappings(mappings, checkNotNull(formal), checkNotNull(actual));
     return where(mappings);
   }
@@ -188,7 +193,7 @@ public final class TypeResolver {
         if (to instanceof WildcardType) {
           return; // Okay to say A[] is <?>
         }
-        Type componentType = Types.getComponentType(to);
+        Type componentType = getComponentType(to);
         checkArgument(componentType != null, "%s is not an array type.", to);
         populateTypeMappings(mappings, fromArrayType.getGenericComponentType(), componentType);
       }
@@ -251,7 +256,7 @@ public final class TypeResolver {
   private Type resolveGenericArrayType(GenericArrayType type) {
     Type componentType = type.getGenericComponentType();
     Type resolvedComponentType = resolveType(componentType);
-    return Types.newArrayType(resolvedComponentType);
+    return newArrayType(resolvedComponentType);
   }
 
   private ParameterizedType resolveParameterizedType(ParameterizedType type) {
@@ -261,8 +266,7 @@ public final class TypeResolver {
 
     Type[] args = type.getActualTypeArguments();
     Type[] resolvedArgs = resolveTypes(args);
-    return Types.newParameterizedTypeWithOwner(
-        resolvedOwner, (Class<?>) resolvedRawType, resolvedArgs);
+    return newParameterizedTypeWithOwner(resolvedOwner, (Class<?>) resolvedRawType, resolvedArgs);
   }
 
   private static <T> T expectArgument(Class<T> type, Object arg) {
@@ -303,7 +307,7 @@ public final class TypeResolver {
       TypeTable guarded =
           new TypeTable() {
             @Override
-            public Type resolveInternal(TypeVariable<?> intermediateVar, TypeTable forDependent) {
+            Type resolveInternal(TypeVariable<?> intermediateVar, TypeTable forDependent) {
               if (intermediateVar.getGenericDeclaration().equals(var.getGenericDeclaration())) {
                 return intermediateVar;
               }
@@ -331,17 +335,28 @@ public final class TypeResolver {
         Type[] resolvedBounds = new TypeResolver(forDependants).resolveTypes(bounds);
         /*
          * We'd like to simply create our own TypeVariable with the newly resolved bounds. There's
-         * just one problem: Starting with JDK 7u51, the JDK TypeVariable's equals() method doesn't
-         * recognize instances of our TypeVariable implementation. This is a problem because users
-         * compare TypeVariables from the JDK against TypeVariables returned by TypeResolver. To
-         * work with all JDK versions, TypeResolver must return the appropriate TypeVariable
+         * just one problem: We want to interoperate properly with the platform's built-in
+         * implementation of TypeVariable, but the behavior of the built-in implementation differs
+         * across platforms:
+         *
+         * - Under the JDK, the built-in TypeVariable's equals() method doesn't recognize instances
+         *   of our TypeVariable implementation.
+         *
+         * - Under Android, it does.
+         *
+         * We want users to see the same behavior when they compare a built-in TypeVariable against
+         * ours as they do when they perform the same comparison in reverse. To provide that
+         * behavior on all platforms, TypeResolver must return the appropriate TypeVariable
          * implementation in each of the three possible cases:
          *
-         * 1. Prior to JDK 7u51, the JDK TypeVariable implementation interoperates with ours.
-         * Therefore, we can always create our own TypeVariable.
+         * 1. Under Android, the built-in TypeVariable implementation interoperates with ours.
+         * Therefore, we can always create our own TypeVariable. (One downside of our TypeVariable
+         * in some situations is that it does not support the AnnotatedType API. However, those
+         * situations don't arise under Android because Android does not provide the AnnotatedType
+         * API at all.)
          *
-         * 2. Starting with JDK 7u51, the JDK TypeVariable implementations does not interoperate
-         * with ours. Therefore, we have to be careful about whether we create our own TypeVariable:
+         * 2. Under the JDK, the built-in TypeVariable implementation does not interoperate with
+         * ours. Therefore, we have to be careful about whether we create our own TypeVariable:
          *
          * 2a. If the resolved types are identical to the original types, then we can return the
          * original, identical JDK TypeVariable. By doing so, we sidestep the problem entirely.
@@ -356,12 +371,20 @@ public final class TypeResolver {
          * new TypeVariable _will_ be equal to is an equivalent TypeVariable that was also created
          * by us. And that equality is guaranteed to hold because it doesn't involve the JDK
          * TypeVariable implementation at all.
+         *
+         * NOTE: b/147144588 - Custom TypeVariables created by Guava do not preserve
+         * annotations. This is intentional. The semantics of annotation handling during
+         * type resolution are unclear and have changed across Java versions. Until there's
+         * a clear specification for what annotations should mean on resolved TypeVariables
+         * with modified bounds, annotation methods will throw
+         * UnsupportedOperationException. Frameworks requiring annotation preservation
+         * should use the original TypeVariable when bounds haven't changed.
          */
         if (Types.NativeTypeVariableEquals.NATIVE_TYPE_VARIABLE_ONLY
             && Arrays.equals(bounds, resolvedBounds)) {
           return var;
         }
-        return Types.newArtificialTypeVariable(
+        return newArtificialTypeVariable(
             var.getGenericDeclaration(), var.getName(), resolvedBounds);
       }
       // in case the type is yet another type variable.
@@ -371,7 +394,7 @@ public final class TypeResolver {
 
   private static final class TypeMappingIntrospector extends TypeVisitor {
 
-    private final Map<TypeVariableKey, Type> mappings = Maps.newHashMap();
+    private final Map<TypeVariableKey, Type> mappings = new HashMap<>();
 
     /**
      * Returns type mappings using type parameters and type arguments found in the generic
@@ -468,8 +491,7 @@ public final class TypeResolver {
       }
       if (type instanceof GenericArrayType) {
         GenericArrayType arrayType = (GenericArrayType) type;
-        return Types.newArrayType(
-            notForTypeVariable().capture(arrayType.getGenericComponentType()));
+        return newArrayType(notForTypeVariable().capture(arrayType.getGenericComponentType()));
       }
       if (type instanceof ParameterizedType) {
         ParameterizedType parameterizedType = (ParameterizedType) type;
@@ -479,7 +501,7 @@ public final class TypeResolver {
         for (int i = 0; i < typeArgs.length; i++) {
           typeArgs[i] = forTypeVariable(typeVars[i]).capture(typeArgs[i]);
         }
-        return Types.newParameterizedTypeWithOwner(
+        return newParameterizedTypeWithOwner(
             notForTypeVariable().captureNullable(parameterizedType.getOwnerType()),
             rawType,
             typeArgs);
@@ -500,7 +522,7 @@ public final class TypeResolver {
     TypeVariable<?> captureAsTypeVariable(Type[] upperBounds) {
       String name =
           "capture#" + id.incrementAndGet() + "-of ? extends " + Joiner.on('&').join(upperBounds);
-      return Types.newArtificialTypeVariable(WildcardCapturer.class, name, upperBounds);
+      return newArtificialTypeVariable(WildcardCapturer.class, name, upperBounds);
     }
 
     private WildcardCapturer forTypeVariable(TypeVariable<?> typeParam) {
@@ -557,7 +579,7 @@ public final class TypeResolver {
 
     @Override
     public int hashCode() {
-      return Objects.hashCode(var.getGenericDeclaration(), var.getName());
+      return Objects.hash(var.getGenericDeclaration(), var.getName());
     }
 
     @Override

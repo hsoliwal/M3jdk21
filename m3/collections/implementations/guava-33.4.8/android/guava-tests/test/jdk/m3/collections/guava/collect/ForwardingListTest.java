@@ -16,7 +16,10 @@
 
 package jdk.m3.collections.guava.collect;
 
+import static jdk.m3.collections.guava.collect.Lists.newArrayList;
+
 import jdk.m3.collections.guava.base.Function;
+import jdk.m3.collections.guava.collect.ForwardingList.SimpleForwardingList;
 import jdk.m3.collections.guava.collect.testing.ListTestSuiteBuilder;
 import jdk.m3.collections.guava.collect.testing.TestStringListGenerator;
 import jdk.m3.collections.guava.collect.testing.features.CollectionFeature;
@@ -42,16 +45,9 @@ import org.jspecify.annotations.Nullable;
  */
 @NullUnmarked
 public class ForwardingListTest extends TestCase {
-  static final class StandardImplForwardingList<T> extends ForwardingList<T> {
-    private final List<T> backingList;
-
+  static final class StandardImplForwardingList<T> extends SimpleForwardingList<T> {
     StandardImplForwardingList(List<T> backingList) {
-      this.backingList = backingList;
-    }
-
-    @Override
-    protected List<T> delegate() {
-      return backingList;
+      super(backingList);
     }
 
     @Override
@@ -166,7 +162,7 @@ public class ForwardingListTest extends TestCase {
 
                   @Override
                   protected List<String> create(String[] elements) {
-                    return new StandardImplForwardingList<>(Lists.newArrayList(elements));
+                    return new StandardImplForwardingList<>(newArrayList(elements));
                   }
                 })
             .named("ForwardingList[ArrayList] with standard implementations")
@@ -213,7 +209,7 @@ public class ForwardingListTest extends TestCase {
         .testEquals();
   }
 
-  private static <T> List<T> wrap(final List<T> delegate) {
+  private static <T> List<T> wrap(List<T> delegate) {
     return new ForwardingList<T>() {
       @Override
       protected List<T> delegate() {

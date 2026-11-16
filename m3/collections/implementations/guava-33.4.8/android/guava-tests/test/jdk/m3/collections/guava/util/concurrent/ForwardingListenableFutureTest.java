@@ -16,6 +16,8 @@
 
 package jdk.m3.collections.guava.util.concurrent;
 
+import jdk.m3.collections.guava.annotations.GwtIncompatible;
+import jdk.m3.collections.guava.annotations.J2ktIncompatible;
 import junit.framework.TestCase;
 import org.jspecify.annotations.NullUnmarked;
 
@@ -25,6 +27,8 @@ import org.jspecify.annotations.NullUnmarked;
  * @author Ben Yu
  */
 @NullUnmarked
+@GwtIncompatible
+@J2ktIncompatible
 public class ForwardingListenableFutureTest extends TestCase {
   public void testForwarding() {
     ForwardingObjectTester.testForwardingObject(ForwardingListenableFuture.class);

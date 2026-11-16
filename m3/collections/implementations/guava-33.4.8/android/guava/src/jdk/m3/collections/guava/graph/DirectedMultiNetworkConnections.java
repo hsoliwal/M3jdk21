@@ -19,6 +19,7 @@ package jdk.m3.collections.guava.graph;
 import static jdk.m3.collections.guava.base.Preconditions.checkState;
 import static jdk.m3.collections.guava.graph.GraphConstants.INNER_CAPACITY;
 import static jdk.m3.collections.guava.graph.GraphConstants.INNER_LOAD_FACTOR;
+import static java.util.Collections.unmodifiableSet;
 
 import jdk.m3.collections.guava.collect.HashMultiset;
 import jdk.m3.collections.guava.collect.ImmutableMap;
@@ -26,7 +27,6 @@ import jdk.m3.collections.guava.collect.Multiset;
 import com.google.errorprone.annotations.concurrent.LazyInit;
 import java.lang.ref.Reference;
 import java.lang.ref.SoftReference;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -59,11 +59,11 @@ final class DirectedMultiNetworkConnections<N, E> extends AbstractDirectedNetwor
         ImmutableMap.copyOf(inEdges), ImmutableMap.copyOf(outEdges), selfLoopCount);
   }
 
-  @LazyInit private transient @Nullable Reference<Multiset<N>> predecessorsReference;
+  @LazyInit private @Nullable Reference<Multiset<N>> predecessorsReference;
 
   @Override
   public Set<N> predecessors() {
-    return Collections.unmodifiableSet(predecessorsMultiset().elementSet());
+    return unmodifiableSet(predecessorsMultiset().elementSet());
   }
 
   private Multiset<N> predecessorsMultiset() {
@@ -75,11 +75,11 @@ final class DirectedMultiNetworkConnections<N, E> extends AbstractDirectedNetwor
     return predecessors;
   }
 
-  @LazyInit private transient @Nullable Reference<Multiset<N>> successorsReference;
+  @LazyInit private @Nullable Reference<Multiset<N>> successorsReference;
 
   @Override
   public Set<N> successors() {
-    return Collections.unmodifiableSet(successorsMultiset().elementSet());
+    return unmodifiableSet(successorsMultiset().elementSet());
   }
 
   private Multiset<N> successorsMultiset() {

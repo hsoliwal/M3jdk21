@@ -16,6 +16,9 @@
 
 package jdk.m3.collections.guava.base;
 
+import static jdk.m3.collections.guava.testing.SerializableTester.reserializeAndAssert;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
+
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.annotations.GwtIncompatible;
 import jdk.m3.collections.guava.annotations.J2ktIncompatible;
@@ -24,7 +27,6 @@ import jdk.m3.collections.guava.collect.ImmutableList;
 import jdk.m3.collections.guava.testing.EqualsTester;
 import jdk.m3.collections.guava.testing.EquivalenceTester;
 import jdk.m3.collections.guava.testing.NullPointerTester;
-import jdk.m3.collections.guava.testing.SerializableTester;
 import junit.framework.TestCase;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
@@ -35,7 +37,7 @@ import org.jspecify.annotations.Nullable;
  * @author Jige Yu
  */
 @NullMarked
-@GwtCompatible(emulated = true)
+@GwtCompatible
 public class EquivalenceTest extends TestCase {
   public void testPairwiseEquivalent() {
     EquivalenceTester.of(Equivalence.equals().<String>pairwise())
@@ -83,15 +85,15 @@ public class EquivalenceTest extends TestCase {
   public void testWrap_get() {
     String test = "test";
     Wrapper<String> wrapper = LENGTH_EQUIVALENCE.wrap(test);
-    assertSame(test, wrapper.get());
+    assertThat(wrapper.get()).isSameInstanceAs(test);
   }
 
   @J2ktIncompatible
   @GwtIncompatible // SerializableTester
   public void testSerialization() {
-    SerializableTester.reserializeAndAssert(LENGTH_EQUIVALENCE.wrap("hello"));
-    SerializableTester.reserializeAndAssert(Equivalence.equals());
-    SerializableTester.reserializeAndAssert(Equivalence.identity());
+    reserializeAndAssert(LENGTH_EQUIVALENCE.wrap("hello"));
+    reserializeAndAssert(Equivalence.equals());
+    reserializeAndAssert(Equivalence.identity());
   }
 
   private static class IntValue {
@@ -142,24 +144,24 @@ public class EquivalenceTest extends TestCase {
   }
 
   /*
-   * We use large numbers to avoid the integer cache. Normally, we'd accomplish that merely by using
-   * `new Integer` (as we do) instead of `Integer.valueOf`. However, under J2KT, `new Integer`
-   * gets translated back to `Integer.valueOf` because that is the only thing J2KT can support. And
-   * anyway, it's nice to avoid `Integer.valueOf` because the Android toolchain optimizes multiple
-   * `Integer.valueOf` calls into one! So we stick with the deprecated `Integer` constructor.
+   * We use MyInteger to avoid the integer cache. Normally, we'd accomplish that merely by using
+   * `new Integer` instead of `Integer.valueOf`. However, under J2KT, `new Integer` gets translated
+   * back to `Integer.valueOf` because that is the only thing J2KT can support. And anyway, it's
+   * nice to avoid `Integer.valueOf` because the Android toolchain optimizes multiple
+   * `Integer.valueOf` calls into one! So we use a custom class.
    */
 
   public void testEqualsEquivalent() {
     EquivalenceTester.of(Equivalence.equals())
-        .addEquivalenceGroup(new Integer(42_000_000), 42_000_000)
+        .addEquivalenceGroup(new MyInteger(42_000_000), new MyInteger(42_000_000))
         .addEquivalenceGroup("a")
         .test();
   }
 
   public void testIdentityEquivalent() {
     EquivalenceTester.of(Equivalence.identity())
-        .addEquivalenceGroup(new Integer(42_000_000))
-        .addEquivalenceGroup(new Integer(42_000_000))
+        .addEquivalenceGroup(new MyInteger(42_000_000))
+        .addEquivalenceGroup(new MyInteger(42_000_000))
         .addEquivalenceGroup("a")
         .test();
   }
@@ -182,5 +184,26 @@ public class EquivalenceTest extends TestCase {
     tester.testAllPublicStaticMethods(Equivalence.class);
     tester.testAllPublicInstanceMethods(Equivalence.equals());
     tester.testAllPublicInstanceMethods(Equivalence.identity());
+  }
+
+  private static final class MyInteger {
+    final int value;
+
+    MyInteger(int value) {
+      this.value = value;
+    }
+
+    @Override
+    public boolean equals(@Nullable Object obj) {
+      if (obj instanceof MyInteger) {
+        return value == ((MyInteger) obj).value;
+      }
+      return false;
+    }
+
+    @Override
+    public int hashCode() {
+      return value;
+    }
   }
 }

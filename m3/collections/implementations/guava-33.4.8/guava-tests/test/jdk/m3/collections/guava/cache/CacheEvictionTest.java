@@ -19,10 +19,12 @@ import static jdk.m3.collections.guava.cache.TestingRemovalListeners.countingRem
 import static jdk.m3.collections.guava.cache.TestingWeighers.constantWeigher;
 import static jdk.m3.collections.guava.cache.TestingWeighers.intKeyWeigher;
 import static jdk.m3.collections.guava.cache.TestingWeighers.intValueWeigher;
-import static com.google.common.truth.Truth.assertThat;
+import static jdk.m3.collections.guava.truth.Truth.assertThat;
 import static java.lang.Math.min;
 import static java.util.Arrays.asList;
 
+import jdk.m3.collections.guava.annotations.GwtIncompatible;
+import jdk.m3.collections.guava.annotations.J2ktIncompatible;
 import jdk.m3.collections.guava.cache.CacheTesting.Receiver;
 import jdk.m3.collections.guava.cache.TestingCacheLoaders.IdentityLoader;
 import jdk.m3.collections.guava.cache.TestingRemovalListeners.CountingRemovalListener;
@@ -37,6 +39,8 @@ import org.jspecify.annotations.NullUnmarked;
  *
  * @author mike nonemacher
  */
+@GwtIncompatible
+@J2ktIncompatible
 @NullUnmarked
 public class CacheEvictionTest extends TestCase {
   static final int MAX_SIZE = 100;
@@ -45,7 +49,7 @@ public class CacheEvictionTest extends TestCase {
     IdentityLoader<Object> loader = identityLoader();
     for (int i = 1; i < 1000; i++) {
       LoadingCache<Object, Object> cache = CacheBuilder.newBuilder().maximumSize(i).build(loader);
-      assertEquals(i, CacheTesting.getTotalSegmentSize(cache));
+      assertThat(CacheTesting.getTotalSegmentSize(cache)).isEqualTo(i);
     }
   }
 
@@ -54,7 +58,7 @@ public class CacheEvictionTest extends TestCase {
     for (int i = 1; i < 1000; i++) {
       LoadingCache<Object, Object> cache =
           CacheBuilder.newBuilder().maximumWeight(i).weigher(constantWeigher(1)).build(loader);
-      assertEquals(i, CacheTesting.getTotalSegmentSize(cache));
+      assertThat(CacheTesting.getTotalSegmentSize(cache)).isEqualTo(i);
     }
   }
 
@@ -64,10 +68,10 @@ public class CacheEvictionTest extends TestCase {
         CacheBuilder.newBuilder().concurrencyLevel(1).maximumSize(MAX_SIZE).build(loader);
     for (int i = 0; i < 2 * MAX_SIZE; i++) {
       cache.getUnchecked(i);
-      assertEquals(min(i + 1, MAX_SIZE), cache.size());
+      assertThat(cache.size()).isEqualTo(min(i + 1, MAX_SIZE));
     }
 
-    assertEquals(MAX_SIZE, cache.size());
+    assertThat(cache.size()).isEqualTo(MAX_SIZE);
     CacheTesting.checkValidState(cache);
   }
 
@@ -81,10 +85,10 @@ public class CacheEvictionTest extends TestCase {
             .build(loader);
     for (int i = 0; i < 2 * MAX_SIZE; i++) {
       cache.getUnchecked(i);
-      assertEquals(min(i + 1, MAX_SIZE), cache.size());
+      assertThat(cache.size()).isEqualTo(min(i + 1, MAX_SIZE));
     }
 
-    assertEquals(MAX_SIZE, cache.size());
+    assertThat(cache.size()).isEqualTo(MAX_SIZE);
     CacheTesting.checkValidState(cache);
   }
 
@@ -98,13 +102,13 @@ public class CacheEvictionTest extends TestCase {
             .build(loader);
     for (int i = 0; i < 2 * MAX_SIZE; i++) {
       cache.getUnchecked(i);
-      assertTrue(cache.size() <= MAX_SIZE);
+      assertThat(cache.size()).isAtMost(MAX_SIZE);
     }
 
-    assertEquals(MAX_SIZE, CacheTesting.accessQueueSize(cache));
-    assertEquals(MAX_SIZE, cache.size());
+    assertThat(CacheTesting.accessQueueSize(cache)).isEqualTo(MAX_SIZE);
+    assertThat(cache.size()).isEqualTo(MAX_SIZE);
     CacheTesting.processPendingNotifications(cache);
-    assertEquals(MAX_SIZE, removalListener.getCount());
+    assertThat(removalListener.getCount()).isEqualTo(MAX_SIZE);
     CacheTesting.checkValidState(cache);
   }
 
@@ -119,13 +123,13 @@ public class CacheEvictionTest extends TestCase {
             .build(loader);
     for (int i = 0; i < 2 * MAX_SIZE; i++) {
       cache.getUnchecked(i);
-      assertTrue(cache.size() <= MAX_SIZE);
+      assertThat(cache.size()).isAtMost(MAX_SIZE);
     }
 
-    assertEquals(MAX_SIZE, CacheTesting.accessQueueSize(cache));
-    assertEquals(MAX_SIZE, cache.size());
+    assertThat(CacheTesting.accessQueueSize(cache)).isEqualTo(MAX_SIZE);
+    assertThat(cache.size()).isEqualTo(MAX_SIZE);
     CacheTesting.processPendingNotifications(cache);
-    assertEquals(MAX_SIZE, removalListener.getCount());
+    assertThat(removalListener.getCount()).isEqualTo(MAX_SIZE);
     CacheTesting.checkValidState(cache);
   }
 
@@ -138,13 +142,7 @@ public class CacheEvictionTest extends TestCase {
     IdentityLoader<Integer> loader = identityLoader();
 
     // Even numbers are free, odd are too expensive
-    Weigher<Integer, Integer> evensOnly =
-        new Weigher<Integer, Integer>() {
-          @Override
-          public int weigh(Integer k, Integer v) {
-            return k % 2;
-          }
-        };
+    Weigher<Integer, Integer> evensOnly = (k, v) -> k % 2;
 
     LoadingCache<Integer, Integer> cache =
         CacheBuilder.newBuilder()
@@ -255,12 +253,12 @@ public class CacheEvictionTest extends TestCase {
     cache.getUnchecked(objectWithHash(0));
     cache.getUnchecked(objectWithHash(0));
     CacheTesting.processPendingNotifications(cache);
-    assertEquals(1, removalListener.getCount());
+    assertThat(removalListener.getCount()).isEqualTo(1);
   }
 
   public void testUpdateRecency_onGet() {
     IdentityLoader<Integer> loader = identityLoader();
-    final LoadingCache<Integer, Integer> cache =
+    LoadingCache<Integer, Integer> cache =
         CacheBuilder.newBuilder().maximumSize(MAX_SIZE).build(loader);
     CacheTesting.checkRecency(
         cache,
@@ -275,7 +273,7 @@ public class CacheEvictionTest extends TestCase {
 
   public void testUpdateRecency_onInvalidate() {
     IdentityLoader<Integer> loader = identityLoader();
-    final LoadingCache<Integer, Integer> cache =
+    LoadingCache<Integer, Integer> cache =
         CacheBuilder.newBuilder().maximumSize(MAX_SIZE).concurrencyLevel(1).build(loader);
     CacheTesting.checkRecency(
         cache,
@@ -418,7 +416,7 @@ public class CacheEvictionTest extends TestCase {
     }
   }
 
-  private Object objectWithHash(final int hash) {
+  private static Object objectWithHash(int hash) {
     return new Object() {
       @Override
       public int hashCode() {
