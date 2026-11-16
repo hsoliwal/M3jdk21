@@ -29,6 +29,11 @@ final class PackedSlotStates {
         return length;
     }
 
+    /** Bytes of the packed words this lane retains. */
+    long bytes() {
+        return (long) words.length * Long.BYTES;
+    }
+
     byte get(int index) {
         return (byte) ((words[index >>> 5] >>> ((index & 31) << 1)) & 3L);
     }

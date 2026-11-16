@@ -125,6 +125,15 @@ public final class LongHashSet implements LongCollection {
         return keys.length;
     }
 
+    //FLLDCIM: CONVERGE - com.synexia.primitives.LongHashSet.payloadBytes(), the one public member this owner lacked
+    /**
+     * Bytes of primitive payload this set retains now: the key lane plus the packed state lane. The value depends
+     * on the capacity only, so it changes when the table is rebuilt and not when a key is added or removed.
+     */
+    public long payloadBytes() {
+        return (long) keys.length * Long.BYTES + states.bytes();
+    }
+
     @Override
     public void clear() {
         if (size == 0 && occupied == 0) {
