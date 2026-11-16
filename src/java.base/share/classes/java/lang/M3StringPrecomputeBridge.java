@@ -145,30 +145,119 @@ final class M3StringPrecomputeBridge {
     }
 
     static String trim(String original, M3String source) {
-        M3StringFacts facts = source.facts();
-        if (facts.trimStart == 0 && facts.trimEnd == source.length()) return original;
-        if (facts.trimStart == source.length()) return "";
-        return new String(source.slice(facts.trimStart, facts.trimEnd));
+        return bothEdges(original, source, false);
     }
 
     static String strip(String original, M3String source) {
-        M3StringFacts facts = source.facts();
-        if (facts.stripStart == 0 && facts.stripEnd == source.length()) return original;
-        if (facts.stripStart == source.length()) return "";
-        return new String(source.slice(facts.stripStart, facts.stripEnd));
+        return bothEdges(original, source, true);
+    }
+
+    private static String bothEdges(String original, M3String source, boolean strip) {
+        int start = edgeStart(source, strip);
+        int end = start == source.length() ? 0 : edgeEnd(source, strip);
+        if (start == 0 && end == source.length()) return original;
+        if (start == source.length()) return "";
+        return new String(source.slice(start, end));
     }
 
     static String stripLeading(String original, M3String source) {
-        int start = source.facts().stripStart;
+        int start = edgeStart(source, true);
         if (start == 0) return original;
         if (start == source.length()) return "";
         return new String(source.slice(start, source.length()));
     }
 
     static String stripTrailing(String original, M3String source) {
-        int end = source.facts().stripEnd;
+        int end = edgeEnd(source, true);
         if (end == source.length()) return original;
         if (end == 0) return "";
         return new String(source.slice(0, end));
+    }
+
+    /** Longest edge run that is read unit by unit before the cached facts are prepared. */
+    private static final int EDGE_SCAN_UNITS = 64;
+    /** Result of an edge scan that reached its bound before the edge was decided. */
+    static final int EDGE_UNDECIDED = -1;
+
+    /**
+     * Leading edge of {@code strip} (code points, {@link Character#isWhitespace(int)}) or of
+     * {@code trim} (units up to U+0020): the index of the first unit that stays, or the length
+     * when none stays. Reads the prepared measure when there is one, else scans at most
+     * {@link #EDGE_SCAN_UNITS} units, and prepares the facts only for a longer run.
+     */
+    static int edgeStart(M3String source, boolean strip) {
+        M3StringFacts prepared = source.factsIfPrepared();
+        if (prepared == null) {
+            int edge = leadingEdge(source, strip, EDGE_SCAN_UNITS);
+            if (edge != EDGE_UNDECIDED) return edge;
+            prepared = source.facts();
+        }
+        return strip ? prepared.stripStart : prepared.trimStart;
+    }
+
+    /**
+     * Trailing edge, with the rules of {@link #edgeStart}: the end-exclusive index of the last
+     * unit that stays, or 0 when none stays.
+     */
+    static int edgeEnd(M3String source, boolean strip) {
+        M3StringFacts prepared = source.factsIfPrepared();
+        if (prepared == null) {
+            int edge = trailingEdge(source, strip, EDGE_SCAN_UNITS);
+            if (edge != EDGE_UNDECIDED) return edge;
+            prepared = source.facts();
+        }
+        return strip ? prepared.stripEnd : prepared.trimEnd;
+    }
+
+    /** Bounded leading scan: gives up before it reads the unit at index {@code bound}. */
+    static int leadingEdge(CharSequence units, boolean strip, int bound) {
+        int length = units.length();
+        int index = 0;
+        while (index < length) {
+            if (index >= bound) return EDGE_UNDECIDED;
+            int step = strip ? stripStepForward(units, index, length)
+                    : (units.charAt(index) <= ' ' ? 1 : 0);
+            if (step == 0) return index;
+            index += step;
+        }
+        return length;
+    }
+
+    /** Bounded trailing scan: gives up once {@code bound} units have been removed. */
+    static int trailingEdge(CharSequence units, boolean strip, int bound) {
+        int length = units.length();
+        int end = length;
+        while (end > 0) {
+            if (length - end >= bound) return EDGE_UNDECIDED;
+            int step = strip ? stripStepBackward(units, end)
+                    : (units.charAt(end - 1) <= ' ' ? 1 : 0);
+            if (step == 0) return end;
+            end -= step;
+        }
+        return 0;
+    }
+
+    /** Units of the white-space code point that starts at {@code index}; 0 when it is none. */
+    private static int stripStepForward(CharSequence units, int index, int length) {
+        char unit = units.charAt(index);
+        if (Character.isHighSurrogate(unit) && index + 1 < length) {
+            char next = units.charAt(index + 1);
+            if (Character.isLowSurrogate(next)) {
+                return Character.isWhitespace(Character.toCodePoint(unit, next)) ? 2 : 0;
+            }
+        }
+        return Character.isWhitespace(unit) ? 1 : 0;
+    }
+
+    /** Units of the white-space code point that ends before {@code end}; 0 when it is none. */
+    private static int stripStepBackward(CharSequence units, int end) {
+        char unit = units.charAt(end - 1);
+        if (Character.isLowSurrogate(unit) && end > 1) {
+            char previous = units.charAt(end - 2);
+            if (Character.isHighSurrogate(previous)) {
+                return Character.isWhitespace(Character.toCodePoint(previous, unit)) ? 2 : 0;
+            }
+        }
+        return Character.isWhitespace(unit) ? 1 : 0;
     }
 }

@@ -4579,7 +4579,7 @@ public final class String
 
     private int indexOfNonWhitespace() {
         M3String storage = m3();
-        if (storage != null) return storage.facts().stripStart;
+        if (storage != null) return M3StringPrecomputeBridge.edgeStart(storage, true);
         byte[] currentValue = value();
         return isLatin1() ? StringLatin1.indexOfNonWhitespace(currentValue)
                           : StringUTF16.indexOfNonWhitespace(currentValue);
@@ -4587,7 +4587,7 @@ public final class String
 
     private int lastIndexOfNonWhitespace() {
         M3String storage = m3();
-        if (storage != null) return storage.facts().stripEnd;
+        if (storage != null) return M3StringPrecomputeBridge.edgeEnd(storage, true);
         byte[] currentValue = value();
         return isLatin1() ? StringLatin1.lastIndexOfNonWhitespace(currentValue)
                           : StringUTF16.lastIndexOfNonWhitespace(currentValue);
