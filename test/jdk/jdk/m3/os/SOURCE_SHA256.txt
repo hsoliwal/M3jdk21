@@ -1,0 +1,8 @@
+df1967460d93df2e8c72a56035bcfc90bddfa01d61af120b79e3bc95ae3c7c26  src/jdk.m3.io/share/classes/module-info.java
+0b23e10bad0d5e2e91084e360589455c1d68bd1c2d9a190016e3e27ef6039b16  src/jdk.m3.io/share/classes/jdk/m3/optane/PmemCapabilities.java
+d0c34602409f90427850b1a441dde88d75e2ccd6e1403d6c53948820a8827def  src/jdk.m3.io/share/classes/jdk/m3/os/NativeProbe.java
+e0b1b1635b2bfc390f63d6c70ff1ddf93a9383765b432b0e951e2287ee1b66cd  src/jdk.m3.io/share/classes/jdk/m3/os/OSCapabilities.java
+1b605270666758d97609ee3d4ecc7003db7cf53b0f625d88bdd8556d64bf8d06  src/jdk.m3.io/share/native/libm3osprobe/m3osprobe.c
+88ea27bd81b47909fedac22943e8f860af1a045602f306c22add05b4d54da9ff  make/modules/jdk.m3.io/Lib.gmk
+59222ee15658403ac7030d1d9a67e917013a9134c394ba7edb239f8ea57180bb  test/jdk/jdk/m3/os/OSCapabilitiesTest.java
+0a0f8662295864720674790ceb9173fbf522883f9cdf1a03c8d9d391315490bb  test/jdk/jdk/m3/os/validate-java21-linux.sh
