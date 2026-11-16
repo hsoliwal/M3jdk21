@@ -4464,11 +4464,16 @@ public final class String
     private static final class M3LinesSpliterator
             extends Spliterators.AbstractSpliterator<String> {
         private final String source;
+        /** True when prepared facts prove the source holds no LF and no CR. */
+        private final boolean terminatorFree;
         private int index;
 
         M3LinesSpliterator(String source) {
             super(source.length(), Spliterator.ORDERED | Spliterator.IMMUTABLE | Spliterator.NONNULL);
             this.source = source;
+            M3String storage = source.m3();
+            M3StringFacts facts = storage == null ? null : storage.factsIfPrepared();
+            this.terminatorFree = facts != null && facts.lineTerminatorCount == 0;
         }
 
         @Override
@@ -4478,7 +4483,7 @@ public final class String
             if (index >= length) return false;
 
             int start = index;
-            int end = start;
+            int end = terminatorFree ? length : start;
             while (end < length) {
                 char unit = source.charAt(end);
                 if (unit == '\n' || unit == '\r') break;

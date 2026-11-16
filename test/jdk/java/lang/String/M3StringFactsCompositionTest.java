@@ -68,6 +68,10 @@ public class M3StringFactsCompositionTest {
         assertComposedFacts(fresh("\ud83d"), fresh("\ude42"), "split supplementary");
         assertComposedFacts(fresh(" \u2003"), fresh("alpha\u2002 "), "whitespace seam");
         assertComposedFacts(fresh("\u0000\u00ff"), fresh("\u0100\ud83d\ude42"), "width seam");
+        assertComposedFacts(fresh("alpha\r"), fresh("\nomega"), "CR LF seam");
+        assertComposedFacts(fresh("alpha\n"), fresh("\romega"), "LF CR seam");
+        assertComposedFacts(fresh("\r\r"), fresh("\n\n"), "terminator run seam");
+        assertComposedFacts(fresh("one\r\ntwo\n"), fresh("three\rfour"), "mixed terminators");
 
         String tuple = fresh(" \ud83d").concat(fresh("\ude42alpha\u2003 "));
         for (int begin = 0; begin <= tuple.length(); begin++) {
