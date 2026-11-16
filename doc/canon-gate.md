@@ -95,3 +95,5 @@ Inventory runs add `INVENTORY.tsv`, `CLUSTERS_EXACT.tsv`, `CLUSTERS_NORMALIZED.t
 
 The same sources ship in the M3 Maven fork as `tools/m3-smart-builder/src/main/java/io/synexia/maven/smart/canon`;
 the two copies differ only in their package line.
+
+The gate reads `ATOM_PATTERN.tsv` one UTF-8 row at a time instead of retaining every input line at once. Source coverage, source digests and hash-plane clusters are still retained for deterministic results, so this is not a claim of constant memory for the whole run.
