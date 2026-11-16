@@ -272,4 +272,3 @@ public interface CellExtractor extends IndexExtractor {
         return this;
     }
 }
-
