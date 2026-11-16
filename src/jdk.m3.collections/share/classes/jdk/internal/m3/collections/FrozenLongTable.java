@@ -4,97 +4,148 @@
  */
 package jdk.internal.m3.collections;
 
+import java.util.Arrays;
+import java.util.Objects;
+
 /**
- * M3 five-library superset scaffold {@code FrozenLongTable}: API group {@code FROZEN_LONG_TABLE} over arrays and state masks.
+ * Immutable full-width long table with packed CSR cell lanes.
  *
- * <p>Provider lineage (LIBRARY_API_MATRIX.tsv, run 20261017-m3-to-public/LIB-SUPERSET):
- * <ul>
- *   <li>GUAVA ImmutableTable: frozen table [license Apache-2.0; NEW_OWNER (LS3 family; donor foss/FrozenLongTable@e02549f8); priority P1; matrix owner frozen CSR lanes]</li>
- * </ul>
- *
- * <p>DOOP mapping: lane kind LONG; lanes {@code long[] rowLane;int[] rowOffsetLane;long[] columnLane;long[] valueLane}; offset scheme CSR: row ordinal -&gt; [rowOffset[r], rowOffset[r+1]) cells sorted by column; state-mask bits FROZEN; stored nodes NONE; API entry objects TRANSIENT_FACADE(Cell) (transient facades over slots, never the stored representation); matrix note: frozen row offsets + col lane + value lane / FROZEN=1.
- *
- * <p>Status: SCAFFOLD. Every public atom throws {@link NotYetReceived} until this owner is received through a hash-pinned Synexia recipe with its own
- * provider oracle (never inferred from another provider). Not a {@code java.util} replacement.
+ * <p>Rows retain first encounter order, as in the existing primitive multimap
+ * owner. Each row's columns are sorted in signed order as required by this
+ * owner's CSR contract. The existing stable primitive permutation, ordinal
+ * index and bisection owners provide construction and lookup; no boxed key or
+ * cell object is retained. Duplicate coordinates are rejected even when their
+ * values match. All input arrays are copied before construction.
  */
 public final class FrozenLongTable {
-    /** State-mask bit {@code FROZEN} (per-slot state word, bit 0). */
-    static final long STATE_FROZEN = 1L << 0;
+    static final long STATE_FROZEN = 1L;
+    private final long[] rowLane;
+    private final int[] rowOffsetLane;
+    private final long[] columnLane;
+    private final long[] valueLane;
+    private final long[] stateMaskWords;
+    private final PackedLongRowIndex rowOrdinals;
+    private final int size;
 
-    /** Storage lane {@code rowLane}: dynamic primitive/reference array lane. */
-    private long[] rowLane = new long[0];
-    /** Storage lane {@code rowOffsetLane}: dynamic primitive/reference array lane. */
-    private int[] rowOffsetLane = new int[0];
-    /** Storage lane {@code columnLane}: dynamic primitive/reference array lane. */
-    private long[] columnLane = new long[0];
-    /** Storage lane {@code valueLane}: dynamic primitive/reference array lane. */
-    private long[] valueLane = new long[0];
-    /** Per-slot state words (FROZEN); one bit set per slot and state. */
-    private long[] stateMaskWords = new long[0];
-    /** Live slot count. */
-    private int size;
-
-    /** Creates an empty scaffold owner; lanes grow by copy once received. */
+    /** Creates a valid immutable empty table, including its terminal offset. */
     public FrozenLongTable() {
+        this(new long[0], new int[] {0}, new long[0], new long[0],
+                new PackedLongRowIndex(0));
     }
 
-    /** Reports the declared state-mask bits and lanes for ledgers; never allocates per element. */
+    private FrozenLongTable(long[] rows, int[] offsets, long[] columns,
+            long[] values, PackedLongRowIndex ordinals) {
+        rowLane = rows;
+        rowOffsetLane = offsets;
+        columnLane = columns;
+        valueLane = values;
+        rowOrdinals = ordinals;
+        size = values.length;
+        stateMaskWords = new long[(int) (((long) size + 63) >>> 6)];
+        Arrays.fill(stateMaskWords, -1L);
+        if ((size & 63) != 0) {
+            stateMaskWords[stateMaskWords.length - 1] = (1L << (size & 63)) - 1;
+        }
+    }
+
+    /** Retained compatibility descriptor; it does not describe admission status. */
     public static String scaffoldDescriptor() {
         return "M3FrozenLongTable|FROZEN_LONG_TABLE|LONG|FROZEN|long[] rowLane;int[] rowOffsetLane;long[] columnLane;long[] valueLane";
     }
 
-    /** Guava ImmutableTable.copyOf (cells) (scaffold: not yet received). */
+    /** Copies parallel cell lanes; construction is unpublished until validated. */
     public static FrozenLongTable copyOf(long[] rows, long[] columns, long[] values) {
-        throw new NotYetReceived("M3FrozenLongTable.copyOf");
+        Objects.requireNonNull(rows, "rows");
+        Objects.requireNonNull(columns, "columns");
+        Objects.requireNonNull(values, "values");
+        if (rows.length != columns.length || rows.length != values.length) {
+            throw new IllegalArgumentException("cell lane lengths differ");
+        }
+        if (rows.length == 0) { return new FrozenLongTable(); }
+        long[] sourceRows = rows.clone();
+        long[] sourceColumns = columns.clone();
+        long[] sourceValues = values.clone();
+        long[] encountered = new long[rows.length];
+        long[] cellRows = new long[rows.length];
+        PackedLongRowIndex ordinals = new PackedLongRowIndex(0);
+        int distinct = 0;
+        for (int cell = 0; cell < sourceRows.length; cell++) {
+            long key = sourceRows[cell];
+            int ordinal = ordinals.find(key, encountered);
+            if (ordinal < 0) {
+                ordinals.ensure(distinct + 1, encountered);
+                ordinal = distinct++;
+                encountered[ordinal] = key;
+                ordinals.insert(ordinal, encountered);
+            }
+            cellRows[cell] = ordinal;
+        }
+        if (distinct == Integer.MAX_VALUE) {
+            throw new OutOfMemoryError("FrozenLongTable offset capacity exhausted");
+        }
+        int[] order = LongKeyOrder.lexicographic(cellRows, sourceColumns);
+        int[] offsets = new int[distinct + 1];
+        long[] packedColumns = new long[order.length];
+        long[] packedValues = new long[order.length];
+        int previousRow = -1;
+        for (int cell = 0; cell < order.length; cell++) {
+            int source = order[cell];
+            int row = (int) cellRows[source];
+            long column = sourceColumns[source];
+            if (row != previousRow) {
+                offsets[row] = cell;
+                previousRow = row;
+            } else if (packedColumns[cell - 1] == column) {
+                throw new IllegalArgumentException("duplicate table coordinate");
+            }
+            packedColumns[cell] = column;
+            packedValues[cell] = sourceValues[source];
+        }
+        offsets[distinct] = order.length;
+        return new FrozenLongTable(Arrays.copyOf(encountered, distinct), offsets,
+                packedColumns, packedValues, ordinals);
     }
 
-    /** Table.size (scaffold: not yet received). */
-    public int size() {
-        throw new NotYetReceived("M3FrozenLongTable.size");
-    }
+    public int size() { return size; }
+    public int rowCount() { return rowLane.length; }
 
-    /** Table.contains (scaffold: not yet received). */
-    public boolean contains(long row, long column) {
-        throw new NotYetReceived("M3FrozenLongTable.contains");
-    }
+    public boolean contains(long row, long column) { return cell(row, column) >= 0; }
 
-    /** Table.get (scaffold: not yet received). */
     public long getOrDefault(long row, long column, long defaultValue) {
-        throw new NotYetReceived("M3FrozenLongTable.getOrDefault");
+        int cell = cell(row, column);
+        return cell < 0 ? defaultValue : valueLane[cell];
     }
 
-    /** Table.rowKeySet().size (scaffold: not yet received). */
-    public int rowCount() {
-        throw new NotYetReceived("M3FrozenLongTable.rowCount");
+    private int cell(long row, long column) {
+        int ordinal = rowOrdinals.find(row, rowLane);
+        if (ordinal < 0) { return -1; }
+        int end = rowOffsetLane[ordinal + 1];
+        int at = LaneSearch.lowerBound(columnLane, rowOffsetLane[ordinal], end, column);
+        return at < end && columnLane[at] == column ? at : -1;
     }
 
-    /** CSR row ordinal (scaffold: not yet received). */
     public long rowAt(int rowOrdinal) {
-        throw new NotYetReceived("M3FrozenLongTable.rowAt");
+        return rowLane[Objects.checkIndex(rowOrdinal, rowLane.length)];
     }
 
-    /** CSR offset lane (scaffold: not yet received). */
+    /** Includes the terminal boundary at {@code rowCount()}, equal to size. */
     public int rowOffsetAt(int rowOrdinal) {
-        throw new NotYetReceived("M3FrozenLongTable.rowOffsetAt");
+        return rowOffsetLane[Objects.checkIndex(rowOrdinal, rowOffsetLane.length)];
     }
 
-    /** CSR column lane (scaffold: not yet received). */
     public long columnAt(int cellOrdinal) {
-        throw new NotYetReceived("M3FrozenLongTable.columnAt");
+        return columnLane[Objects.checkIndex(cellOrdinal, columnLane.length)];
     }
 
-    /** CSR value lane (scaffold: not yet received). */
     public long valueAt(int cellOrdinal) {
-        throw new NotYetReceived("M3FrozenLongTable.valueAt");
+        return valueLane[Objects.checkIndex(cellOrdinal, valueLane.length)];
     }
 
-    /** UOE contract once received (scaffold: not yet received). */
     public long put(long row, long column, long value) {
-        throw new NotYetReceived("M3FrozenLongTable.put");
+        throw new UnsupportedOperationException("immutable table");
     }
 
-    /** UOE contract once received (scaffold: not yet received). */
     public long remove(long row, long column) {
-        throw new NotYetReceived("M3FrozenLongTable.remove");
+        throw new UnsupportedOperationException("immutable table");
     }
 }

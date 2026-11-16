@@ -4,89 +4,116 @@
  */
 package jdk.internal.m3.collections;
 
+import java.util.AbstractSet;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+import java.util.Objects;
+import java.util.Set;
+import java.util.Spliterator;
+import java.util.Spliterators;
+import jdk.m3.collections.ObjectIntHashMap;
+
 /**
- * M3 five-library superset scaffold {@code FrozenSet}: API group {@code FROZEN_SET} over arrays and state masks.
+ * Immutable set with first-encounter ordinals and a private object-to-int index.
  *
- * <p>Provider lineage (LIBRARY_API_MATRIX.tsv, run 20261017-m3-to-public/LIB-SUPERSET):
- * <ul>
- *   <li>JDK List.of/Set.of/Map.of: JEP269 immutable; UOE mutate; null-hostile; dup-reject [license GPLv2+CPE; NEW_OWNER (LS1); priority P1; matrix owner PROPOSED:M3FrozenLongList/Set/Map]</li>
- *   <li>GUAVA ImmutableSet: frozen set; iteration = insertion order; hash flooding guard [license Apache-2.0; NEW_OWNER (LS1); priority P1; matrix owner PROPOSED:M3FrozenLongSet]</li>
- * </ul>
+ * <p>Admission rejects nulls and collapses equal duplicates, retaining the first
+ * representative as Set.copyOf/ImmutableSet.copyOf permit. Null queries find no
+ * member. Exports are detached; set and iterator facades preserve encounter order
+ * and reject all mutation. Payload and lookup storage use existing array owners,
+ * with no retained per-element node or entry.
  *
- * <p>DOOP mapping: lane kind OBJECT; lanes {@code Object[] valueLane;int[] hashIndexLane}; offset scheme insertion ordinal + open-address hash index; state-mask bits FROZEN; stored nodes NONE; API entry objects TRANSIENT_FACADE(Map.Entry) (transient facades over slots, never the stored representation); matrix note: frozen sorted/dense lanes; ordinal offsets; build-time copy / FROZEN=1 word; occupancy implicit ALL.
- *
- * <p>Status: SCAFFOLD. Every public atom throws {@link NotYetReceived} until this owner is received through a hash-pinned Synexia recipe with its own
- * provider oracle (never inferred from another provider). Not a {@code java.util} replacement.
+ * <p>This receives the selected JDK/Guava immutable-set contracts into the
+ * existing internal M3 owner. It does not implement the Guava interface or claim
+ * Guava's separate hash-flood mitigation or complete provider integration. The
+ * original JEP269/ImmutableSet lineage and compatibility descriptor are retained.
  */
 public final class FrozenSet<E> {
-    /** State-mask bit {@code FROZEN} (per-slot state word, bit 0). */
     static final long STATE_FROZEN = 1L << 0;
+    private static final Object[] EMPTY = new Object[0];
 
-    /** Storage lane {@code valueLane}: dynamic primitive/reference array lane. */
-    private Object[] valueLane = new Object[0];
-    /** Storage lane {@code hashIndexLane}: dynamic primitive/reference array lane. */
-    private int[] hashIndexLane = new int[0];
-    /** Per-slot state words (FROZEN); one bit set per slot and state. */
-    private long[] stateMaskWords = new long[0];
-    /** Live slot count. */
-    private int size;
+    private final Object[] valueLane;
+    private final ObjectIntHashMap<Object> ordinals;
+    private final long[] stateMaskWords;
+    private final int size;
 
-    /** Creates an empty scaffold owner; lanes grow by copy once received. */
-    public FrozenSet() {
+    public FrozenSet() { this(EMPTY, new ObjectIntHashMap<>(0)); }
+
+    private FrozenSet(Object[] values, ObjectIntHashMap<Object> index) {
+        valueLane = values;
+        ordinals = index;
+        size = values.length;
+        int tail = size & 63;
+        stateMaskWords = new long[(size >>> 6) + (tail == 0 ? 0 : 1)];
+        Arrays.fill(stateMaskWords, -1L);
+        if (tail != 0) stateMaskWords[stateMaskWords.length - 1] = (1L << tail) - 1;
     }
 
-    /** Reports the declared state-mask bits and lanes for ledgers; never allocates per element. */
+    /** Retained compatibility descriptor; lookup lanes are owned by ObjectIntHashMap. */
     public static String scaffoldDescriptor() {
         return "M3FrozenSet|FROZEN_SET|OBJECT|FROZEN|Object[] valueLane;int[] hashIndexLane";
     }
 
-    /** JDK Set.copyOf / Guava ImmutableSet.copyOf (scaffold: not yet received). */
-    public static <E> FrozenSet<E> copyOf(java.util.Collection<? extends E> source) {
-        throw new NotYetReceived("M3FrozenSet.copyOf");
+    public static <E> FrozenSet<E> copyOf(Collection<? extends E> source) {
+        Objects.requireNonNull(source, "source");
+        ArrayList<Object> values = new ArrayList<>();
+        ObjectIntHashMap<Object> index = new ObjectIntHashMap<>(0);
+        for (E element : source) {
+            Objects.requireNonNull(element, "element");
+            if (index.getOrDefault(element, -1) < 0) {
+                index.put(element, values.size());
+                values.add(element);
+            }
+        }
+        return new FrozenSet<>(values.toArray(), index);
     }
 
-    /** Set.size (scaffold: not yet received). */
-    public int size() {
-        throw new NotYetReceived("M3FrozenSet.size");
-    }
+    public int size() { return size; }
+    public boolean isEmpty() { return size == 0; }
 
-    /** Set.isEmpty (scaffold: not yet received). */
-    public boolean isEmpty() {
-        throw new NotYetReceived("M3FrozenSet.isEmpty");
-    }
-
-    /** Set.contains (scaffold: not yet received). */
     public boolean contains(Object element) {
-        throw new NotYetReceived("M3FrozenSet.contains");
+        return element != null && ordinals.getOrDefault(element, -1) >= 0;
     }
 
-    /** ImmutableSet.asList().get (insertion order) (scaffold: not yet received). */
+    @SuppressWarnings("unchecked")
     public E get(int ordinal) {
-        throw new NotYetReceived("M3FrozenSet.get");
+        return (E) valueLane[Objects.checkIndex(ordinal, size)];
     }
 
-    /** Set.toArray (scaffold: not yet received). */
-    public Object[] toArray() {
-        throw new NotYetReceived("M3FrozenSet.toArray");
+    public Object[] toArray() { return valueLane.clone(); }
+
+    public Set<E> asSet() {
+        return Collections.unmodifiableSet(new AbstractSet<>() {
+            @Override public int size() { return size; }
+            @Override public boolean contains(Object element) { return FrozenSet.this.contains(element); }
+            @Override public Iterator<E> iterator() { return FrozenSet.this.iterator(); }
+            @Override public Object[] toArray() { return FrozenSet.this.toArray(); }
+            @Override public Spliterator<E> spliterator() {
+                return Spliterators.spliterator(iterator(), size,
+                        Spliterator.ORDERED | Spliterator.DISTINCT | Spliterator.IMMUTABLE | Spliterator.NONNULL);
+            }
+        });
     }
 
-    /** java.util.Set facade (scaffold: not yet received). */
-    public java.util.Set<E> asSet() {
-        throw new NotYetReceived("M3FrozenSet.asSet");
+    public Iterator<E> iterator() {
+        return new Iterator<>() {
+            private int cursor;
+            @Override public boolean hasNext() { return cursor < size; }
+            @Override public E next() {
+                if (!hasNext()) throw new NoSuchElementException();
+                return get(cursor++);
+            }
+        };
     }
 
-    /** Set.iterator (scaffold: not yet received). */
-    public java.util.Iterator<E> iterator() {
-        throw new NotYetReceived("M3FrozenSet.iterator");
-    }
-
-    /** UOE contract once received (JEP269) (scaffold: not yet received). */
     public boolean add(E element) {
-        throw new NotYetReceived("M3FrozenSet.add");
+        throw new UnsupportedOperationException("immutable set");
     }
 
-    /** UOE contract once received (JEP269) (scaffold: not yet received). */
     public boolean remove(Object element) {
-        throw new NotYetReceived("M3FrozenSet.remove");
+        throw new UnsupportedOperationException("immutable set");
     }
 }

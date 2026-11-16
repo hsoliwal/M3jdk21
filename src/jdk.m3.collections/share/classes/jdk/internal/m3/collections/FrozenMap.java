@@ -4,106 +4,189 @@
  */
 package jdk.internal.m3.collections;
 
+import java.util.AbstractCollection;
+import java.util.AbstractMap;
+import java.util.AbstractSet;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.NoSuchElementException;
+import java.util.Objects;
+import java.util.Set;
+import java.util.Spliterator;
+import java.util.Spliterators;
+import jdk.m3.collections.ObjectIntHashMap;
+
 /**
- * M3 five-library superset scaffold {@code FrozenMap}: API group {@code FROZEN_MAP} over arrays and state masks.
+ * Immutable encounter-ordered object map over private key/value lanes.
  *
- * <p>Provider lineage (LIBRARY_API_MATRIX.tsv, run 20261017-m3-to-public/LIB-SUPERSET):
- * <ul>
- *   <li>JDK List.of/Set.of/Map.of: JEP269 immutable; UOE mutate; null-hostile; dup-reject [license GPLv2+CPE; NEW_OWNER (LS1); priority P1; matrix owner PROPOSED:M3FrozenLongList/Set/Map]</li>
- *   <li>GUAVA ImmutableMap/ImmutableSortedMap: frozen map; entry order stable; dup-reject [license Apache-2.0; NEW_OWNER (LS1 family; donor PackedFrozenLongMap@50729509); priority P1; matrix owner PROPOSED:M3FrozenLongMap]</li>
- * </ul>
+ * <p>The existing object-to-int owner indexes keys to immutable ordinals.
+ * Construction rejects null keys/values and duplicate equal keys, even for a
+ * source map with identity semantics. Null queries find no mapping. Facades
+ * preserve the source encounter order and reject every mutator; entries are
+ * fresh immutable projections created only when an entry is requested.
  *
- * <p>DOOP mapping: lane kind OBJECT; lanes {@code Object[] keyLane;Object[] valueLane;int[] hashIndexLane}; offset scheme insertion ordinal + open-address hash index; state-mask bits FROZEN; stored nodes NONE; API entry objects TRANSIENT_FACADE(Map.Entry) (transient facades over slots, never the stored representation); matrix note: frozen sorted/dense lanes; ordinal offsets; build-time copy / FROZEN=1 word; occupancy implicit ALL.
- *
- * <p>Status: SCAFFOLD. Every public atom throws {@link NotYetReceived} until this owner is received through a hash-pinned Synexia recipe with its own
- * provider oracle (never inferred from another provider). Not a {@code java.util} replacement.
+ * <p>This implements the selected Map.copyOf/ImmutableMap operation contracts
+ * of the existing internal M3 owner. It is not an ImmutableSortedMap, a Guava
+ * interface implementation, or a replacement public JDK map. The JEP269 and
+ * Guava provider lineage and original descriptor are retained as history.
  */
 public final class FrozenMap<K, V> {
-    /** State-mask bit {@code FROZEN} (per-slot state word, bit 0). */
     static final long STATE_FROZEN = 1L << 0;
+    private static final Object[] EMPTY = new Object[0];
 
-    /** Storage lane {@code keyLane}: dynamic primitive/reference array lane. */
-    private Object[] keyLane = new Object[0];
-    /** Storage lane {@code valueLane}: dynamic primitive/reference array lane. */
-    private Object[] valueLane = new Object[0];
-    /** Storage lane {@code hashIndexLane}: dynamic primitive/reference array lane. */
-    private int[] hashIndexLane = new int[0];
-    /** Per-slot state words (FROZEN); one bit set per slot and state. */
-    private long[] stateMaskWords = new long[0];
-    /** Live slot count. */
-    private int size;
+    private final Object[] keyLane;
+    private final Object[] valueLane;
+    private final ObjectIntHashMap<Object> ordinals;
+    private final long[] stateMaskWords;
+    private final int size;
 
-    /** Creates an empty scaffold owner; lanes grow by copy once received. */
-    public FrozenMap() {
+    public FrozenMap() { this(EMPTY, EMPTY, new ObjectIntHashMap<>(0)); }
+
+    private FrozenMap(Object[] keys, Object[] values, ObjectIntHashMap<Object> index) {
+        keyLane = keys;
+        valueLane = values;
+        ordinals = index;
+        size = keys.length;
+        int tail = size & 63;
+        stateMaskWords = new long[(size >>> 6) + (tail == 0 ? 0 : 1)];
+        Arrays.fill(stateMaskWords, -1L);
+        if (tail != 0) stateMaskWords[stateMaskWords.length - 1] = (1L << tail) - 1;
     }
 
-    /** Reports the declared state-mask bits and lanes for ledgers; never allocates per element. */
+    /** Retained compatibility descriptor; lookup lanes are owned by ObjectIntHashMap. */
     public static String scaffoldDescriptor() {
         return "M3FrozenMap|FROZEN_MAP|OBJECT|FROZEN|Object[] keyLane;Object[] valueLane;int[] hashIndexLane";
     }
 
-    /** JDK Map.copyOf / Guava ImmutableMap.copyOf (scaffold: not yet received). */
-    public static <K, V> FrozenMap<K, V> copyOf(java.util.Map<? extends K, ? extends V> source) {
-        throw new NotYetReceived("M3FrozenMap.copyOf");
+    public static <K, V> FrozenMap<K, V> copyOf(Map<? extends K, ? extends V> source) {
+        Objects.requireNonNull(source, "source");
+        ArrayList<Object> keys = new ArrayList<>();
+        ArrayList<Object> values = new ArrayList<>();
+        ObjectIntHashMap<Object> index = new ObjectIntHashMap<>(0);
+        for (Map.Entry<? extends K, ? extends V> entry : source.entrySet()) {
+            Objects.requireNonNull(entry, "entry");
+            K key = Objects.requireNonNull(entry.getKey(), "key");
+            V value = Objects.requireNonNull(entry.getValue(), "value");
+            if (index.getOrDefault(key, -1) >= 0) {
+                throw new IllegalArgumentException("duplicate equal key");
+            }
+            index.put(key, keys.size());
+            keys.add(key);
+            values.add(value);
+        }
+        return new FrozenMap<>(keys.toArray(), values.toArray(), index);
     }
 
-    /** Map.size (scaffold: not yet received). */
-    public int size() {
-        throw new NotYetReceived("M3FrozenMap.size");
-    }
+    public int size() { return size; }
+    public boolean isEmpty() { return size == 0; }
+    private int ordinal(Object key) { return key == null ? -1 : ordinals.getOrDefault(key, -1); }
+    public boolean containsKey(Object key) { return ordinal(key) >= 0; }
 
-    /** Map.isEmpty (scaffold: not yet received). */
-    public boolean isEmpty() {
-        throw new NotYetReceived("M3FrozenMap.isEmpty");
-    }
-
-    /** Map.containsKey (scaffold: not yet received). */
-    public boolean containsKey(Object key) {
-        throw new NotYetReceived("M3FrozenMap.containsKey");
-    }
-
-    /** Map.containsValue (scaffold: not yet received). */
     public boolean containsValue(Object value) {
-        throw new NotYetReceived("M3FrozenMap.containsValue");
+        if (value == null) return false;
+        for (Object element : valueLane) if (value.equals(element)) return true;
+        return false;
     }
 
-    /** Map.get (scaffold: not yet received). */
-    public V get(Object key) {
-        throw new NotYetReceived("M3FrozenMap.get");
-    }
+    public V get(Object key) { return getOrDefault(key, null); }
 
-    /** Map.getOrDefault (scaffold: not yet received). */
     public V getOrDefault(Object key, V defaultValue) {
-        throw new NotYetReceived("M3FrozenMap.getOrDefault");
+        int ordinal = ordinal(key);
+        return ordinal < 0 ? defaultValue : valueAt(ordinal);
     }
 
-    /** ImmutableMap.keySet().asList().get (scaffold: not yet received). */
-    public K keyAt(int ordinal) {
-        throw new NotYetReceived("M3FrozenMap.keyAt");
+    @SuppressWarnings("unchecked")
+    public K keyAt(int ordinal) { return (K) keyLane[Objects.checkIndex(ordinal, size)]; }
+
+    @SuppressWarnings("unchecked")
+    public V valueAt(int ordinal) { return (V) valueLane[Objects.checkIndex(ordinal, size)]; }
+
+    public Set<Map.Entry<K, V>> entrySet() {
+        return Collections.unmodifiableSet(new AbstractSet<>() {
+            @Override public int size() { return size; }
+            @Override public boolean contains(Object candidate) {
+                if (!(candidate instanceof Map.Entry<?, ?> entry)) return false;
+                int ordinal = ordinal(entry.getKey());
+                return ordinal >= 0 && Objects.equals(valueLane[ordinal], entry.getValue());
+            }
+            @Override public Iterator<Map.Entry<K, V>> iterator() {
+                return new Iterator<>() {
+                    private int cursor;
+                    @Override public boolean hasNext() { return cursor < size; }
+                    @Override public Map.Entry<K, V> next() {
+                        if (!hasNext()) throw new NoSuchElementException();
+                        int ordinal = cursor++;
+                        return new AbstractMap.SimpleImmutableEntry<>(keyAt(ordinal), valueAt(ordinal));
+                    }
+                };
+            }
+            @Override public Spliterator<Map.Entry<K, V>> spliterator() {
+                return Spliterators.spliterator(iterator(), size,
+                        Spliterator.ORDERED | Spliterator.DISTINCT | Spliterator.IMMUTABLE | Spliterator.NONNULL);
+            }
+        });
     }
 
-    /** ImmutableMap.values().asList().get (scaffold: not yet received). */
-    public V valueAt(int ordinal) {
-        throw new NotYetReceived("M3FrozenMap.valueAt");
+    public Map<K, V> asMap() {
+        return Collections.unmodifiableMap(new AbstractMap<>() {
+            @Override public int size() { return size; }
+            @Override public V get(Object key) { return FrozenMap.this.get(key); }
+            @Override public V getOrDefault(Object key, V defaultValue) { return FrozenMap.this.getOrDefault(key, defaultValue); }
+            @Override public boolean containsKey(Object key) { return FrozenMap.this.containsKey(key); }
+            @Override public boolean containsValue(Object value) { return FrozenMap.this.containsValue(value); }
+            @Override public Set<Map.Entry<K, V>> entrySet() { return FrozenMap.this.entrySet(); }
+            @Override public Set<K> keySet() {
+                return Collections.unmodifiableSet(new AbstractSet<>() {
+                    @Override public int size() { return size; }
+                    @Override public boolean contains(Object key) { return FrozenMap.this.containsKey(key); }
+                    @Override public Iterator<K> iterator() {
+                        return new Iterator<>() {
+                            private int cursor;
+                            @Override public boolean hasNext() { return cursor < size; }
+                            @Override public K next() {
+                                if (!hasNext()) throw new NoSuchElementException();
+                                return keyAt(cursor++);
+                            }
+                        };
+                    }
+                    @Override public Spliterator<K> spliterator() {
+                        return Spliterators.spliterator(iterator(), size,
+                                Spliterator.ORDERED | Spliterator.DISTINCT | Spliterator.IMMUTABLE | Spliterator.NONNULL);
+                    }
+                });
+            }
+            @Override public Collection<V> values() {
+                return Collections.unmodifiableCollection(new AbstractCollection<>() {
+                    @Override public int size() { return size; }
+                    @Override public boolean contains(Object value) { return FrozenMap.this.containsValue(value); }
+                    @Override public Iterator<V> iterator() {
+                        return new Iterator<>() {
+                            private int cursor;
+                            @Override public boolean hasNext() { return cursor < size; }
+                            @Override public V next() {
+                                if (!hasNext()) throw new NoSuchElementException();
+                                return valueAt(cursor++);
+                            }
+                        };
+                    }
+                    @Override public Spliterator<V> spliterator() {
+                        return Spliterators.spliterator(iterator(), size,
+                                Spliterator.ORDERED | Spliterator.IMMUTABLE | Spliterator.NONNULL);
+                    }
+                });
+            }
+        });
     }
 
-    /** Map.entrySet (transient Entry facades over slots) (scaffold: not yet received). */
-    public java.util.Set<java.util.Map.Entry<K, V>> entrySet() {
-        throw new NotYetReceived("M3FrozenMap.entrySet");
-    }
-
-    /** java.util.Map facade (scaffold: not yet received). */
-    public java.util.Map<K, V> asMap() {
-        throw new NotYetReceived("M3FrozenMap.asMap");
-    }
-
-    /** UOE contract once received (JEP269) (scaffold: not yet received). */
     public V put(K key, V value) {
-        throw new NotYetReceived("M3FrozenMap.put");
+        throw new UnsupportedOperationException("immutable map");
     }
 
-    /** UOE contract once received (JEP269) (scaffold: not yet received). */
     public V remove(Object key) {
-        throw new NotYetReceived("M3FrozenMap.remove");
+        throw new UnsupportedOperationException("immutable map");
     }
 }

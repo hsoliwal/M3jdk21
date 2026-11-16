@@ -4,96 +4,176 @@
  */
 package jdk.internal.m3.collections;
 
+import java.util.AbstractSet;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+import java.util.Objects;
+import java.util.Set;
+import java.util.Spliterator;
+import java.util.Spliterators;
+import jdk.m3.collections.ObjectIntHashMap;
+
 /**
- * M3 five-library superset scaffold {@code FrozenBag}: API group {@code FROZEN_BAG} over arrays and state masks.
+ * Immutable object counts with first-encounter distinct ordinals.
  *
- * <p>Provider lineage (LIBRARY_API_MATRIX.tsv, run 20261017-m3-to-public/LIB-SUPERSET):
- * <ul>
- *   <li>GUAVA ImmutableMultiset: frozen counts; iteration = first-insert order [license Apache-2.0; NEW_OWNER (LS2 family); priority P1; matrix owner PROPOSED:FrozenLongBag]</li>
- *   <li>ECLIPSE ImmutableList/Set/Map/Bag/SortedSet/SortedMap/SortedBag/Multimap: frozen families; toImmutable() everywhere; UOE mutate [license EPL-2.0|EDL-1.0; NEW_OWNER (LS1-LS3 claim EC frozen contracts via own oracles); priority P1; matrix owner PROPOSED:M3Frozen* family (same owners as LS1-LS3)]</li>
- * </ul>
+ * <p>The existing object-to-int owner indexes elements into exact element and
+ * count lanes. No entry or node object is retained for each distinct element.
+ * Set facades and iterators are projected on demand. Copies own their structural
+ * storage and retain the first encountered representative of each equality
+ * group. Element objects remain shallow references and require stable equality
+ * and hash codes while used as keys.
  *
- * <p>DOOP mapping: lane kind OBJECT; lanes {@code Object[] elementLane;int[] countLane;int[] hashIndexLane}; offset scheme insertion ordinal + hash index; count parallel; state-mask bits FROZEN; stored nodes NONE; API entry objects TRANSIENT_FACADE (transient facades over slots, never the stored representation); matrix note: frozen element+count lanes; ordinal offsets / FROZEN=1.
- *
- * <p>Status: SCAFFOLD. Every public atom throws {@link NotYetReceived} until this owner is received through a hash-pinned Synexia recipe with its own
- * provider oracle (never inferred from another provider). Not a {@code java.util} replacement.
+ * <p>Null source elements are rejected; null and missing queries return count
+ * zero. Counts fit an int, and total size saturates at Integer.MAX_VALUE, as in
+ * Guava ImmutableMultiset. Every mutation request throws, including no-ops.
+ * This is the existing internal M3 API, not a Guava or Eclipse interface.
  */
 public final class FrozenBag<E> {
-    /** State-mask bit {@code FROZEN} (per-slot state word, bit 0). */
     static final long STATE_FROZEN = 1L << 0;
 
-    /** Storage lane {@code elementLane}: dynamic primitive/reference array lane. */
-    private Object[] elementLane = new Object[0];
-    /** Storage lane {@code countLane}: dynamic primitive/reference array lane. */
-    private int[] countLane = new int[0];
-    /** Storage lane {@code hashIndexLane}: dynamic primitive/reference array lane. */
-    private int[] hashIndexLane = new int[0];
-    /** Per-slot state words (FROZEN); one bit set per slot and state. */
-    private long[] stateMaskWords = new long[0];
-    /** Live slot count. */
-    private int size;
+    private final Object[] elementLane;
+    private final int[] countLane;
+    private final long[] stateMaskWords;
+    private final ObjectIntHashMap<Object> elementOrdinals;
+    private final int size;
 
-    /** Creates an empty scaffold owner; lanes grow by copy once received. */
+    /** Creates a valid immutable empty owner. */
     public FrozenBag() {
+        this(new Object[0], new int[0], new ObjectIntHashMap<>(0), 0);
     }
 
-    /** Reports the declared state-mask bits and lanes for ledgers; never allocates per element. */
+    private FrozenBag(Object[] elements, int[] counts,
+            ObjectIntHashMap<Object> ordinals, int total) {
+        elementLane = elements;
+        countLane = counts;
+        elementOrdinals = ordinals;
+        size = total;
+        stateMaskWords = new long[(int) (((long) elements.length + 63) >>> 6)];
+        Arrays.fill(stateMaskWords, -1L);
+        if ((elements.length & 63) != 0) {
+            stateMaskWords[stateMaskWords.length - 1] = (1L << (elements.length & 63)) - 1;
+        }
+    }
+
+    /** Retained compatibility descriptor; it does not describe admission status. */
     public static String scaffoldDescriptor() {
         return "M3FrozenBag|FROZEN_BAG|OBJECT|FROZEN|Object[] elementLane;int[] countLane;int[] hashIndexLane";
     }
 
-    /** Guava ImmutableMultiset.copyOf / EC ImmutableBag (scaffold: not yet received). */
-    public static <E> FrozenBag<E> copyOf(java.util.Collection<? extends E> source) {
-        throw new NotYetReceived("M3FrozenBag.copyOf");
+    /**
+     * Copies encounter-ordered counts without trusting the reported collection
+     * size. Construction stays private until traversal, callbacks and every
+     * allocation succeed. A single element count cannot exceed Integer.MAX_VALUE.
+     */
+    public static <E> FrozenBag<E> copyOf(Collection<? extends E> source) {
+        Objects.requireNonNull(source, "source");
+        ArrayList<E> elements = new ArrayList<>();
+        ObjectIntHashMap<Object> ordinals = new ObjectIntHashMap<>(0);
+        int[] counts = new int[8];
+        int total = 0;
+        for (E element : source) {
+            Objects.requireNonNull(element, "element");
+            int ordinal = ordinals.getOrDefault(element, -1);
+            if (ordinal >= 0) {
+                if (counts[ordinal] == Integer.MAX_VALUE) {
+                    throw new IllegalArgumentException("too many occurrences of one element");
+                }
+                counts[ordinal]++;
+            } else {
+                ordinal = elements.size();
+                if (ordinal == counts.length) {
+                    int capacity = Math.toIntExact(Math.min(Integer.MAX_VALUE - 8L,
+                            Math.max((long) ordinal + 1,
+                                    (long) counts.length + (counts.length >>> 1) + 1)));
+                    if (capacity <= ordinal) {
+                        throw new OutOfMemoryError("FrozenBag count capacity exhausted");
+                    }
+                    counts = Arrays.copyOf(counts, capacity);
+                }
+                ordinals.put(element, ordinal);
+                elements.add(element);
+                counts[ordinal] = 1;
+            }
+            if (total != Integer.MAX_VALUE) {
+                total++;
+            }
+        }
+        return new FrozenBag<>(elements.toArray(), Arrays.copyOf(counts, elements.size()),
+                ordinals, total);
     }
 
-    /** Multiset.size (total occurrences) (scaffold: not yet received). */
+    /** Total occurrences, saturated at Integer.MAX_VALUE. */
     public int size() {
-        throw new NotYetReceived("M3FrozenBag.size");
+        return size;
     }
 
-    /** Multiset.elementSet().size (scaffold: not yet received). */
     public int distinctSize() {
-        throw new NotYetReceived("M3FrozenBag.distinctSize");
+        return elementLane.length;
     }
 
-    /** Multiset.count (scaffold: not yet received). */
     public int count(Object element) {
-        throw new NotYetReceived("M3FrozenBag.count");
+        int ordinal = elementOrdinals.getOrDefault(element, -1);
+        return ordinal < 0 ? 0 : countLane[ordinal];
     }
 
-    /** Multiset.contains (scaffold: not yet received). */
     public boolean contains(Object element) {
-        throw new NotYetReceived("M3FrozenBag.contains");
+        return count(element) != 0;
     }
 
-    /** first-insert ordinal (scaffold: not yet received). */
+    /** First-encounter distinct ordinal. */
+    @SuppressWarnings("unchecked")
     public E elementAt(int ordinal) {
-        throw new NotYetReceived("M3FrozenBag.elementAt");
+        return (E) elementLane[Objects.checkIndex(ordinal, elementLane.length)];
     }
 
-    /** count parallel to element ordinal (scaffold: not yet received). */
     public int countAt(int ordinal) {
-        throw new NotYetReceived("M3FrozenBag.countAt");
+        return countLane[Objects.checkIndex(ordinal, countLane.length)];
     }
 
-    /** Multiset.elementSet (facade) (scaffold: not yet received). */
-    public java.util.Set<E> elementSet() {
-        throw new NotYetReceived("M3FrozenBag.elementSet");
+    /** Immutable encounter-ordered facade over the distinct element lane. */
+    public Set<E> elementSet() {
+        return Collections.unmodifiableSet(new AbstractSet<>() {
+            @Override public int size() {
+                return elementLane.length;
+            }
+            @Override public boolean contains(Object element) {
+                return FrozenBag.this.contains(element);
+            }
+            @Override public Iterator<E> iterator() {
+                return new Iterator<>() {
+                    private int cursor;
+                    @Override public boolean hasNext() {
+                        return cursor < elementLane.length;
+                    }
+                    @Override public E next() {
+                        if (!hasNext()) {
+                            throw new NoSuchElementException();
+                        }
+                        return elementAt(cursor++);
+                    }
+                };
+            }
+            @Override public Spliterator<E> spliterator() {
+                return Spliterators.spliterator(iterator(), elementLane.length,
+                        Spliterator.ORDERED | Spliterator.DISTINCT
+                                | Spliterator.IMMUTABLE | Spliterator.NONNULL);
+            }
+        });
     }
 
-    /** UOE contract once received (scaffold: not yet received). */
     public int add(E element, int occurrences) {
-        throw new NotYetReceived("M3FrozenBag.add");
+        throw new UnsupportedOperationException("immutable bag");
     }
 
-    /** UOE contract once received (scaffold: not yet received). */
     public int remove(Object element, int occurrences) {
-        throw new NotYetReceived("M3FrozenBag.remove");
+        throw new UnsupportedOperationException("immutable bag");
     }
 
-    /** UOE contract once received (scaffold: not yet received). */
     public int setCount(E element, int count) {
-        throw new NotYetReceived("M3FrozenBag.setCount");
+        throw new UnsupportedOperationException("immutable bag");
     }
 }

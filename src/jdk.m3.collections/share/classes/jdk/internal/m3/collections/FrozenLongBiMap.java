@@ -4,102 +4,114 @@
  */
 package jdk.internal.m3.collections;
 
+import java.util.Arrays;
+import java.util.Objects;
+
 /**
- * M3 five-library superset scaffold {@code FrozenLongBiMap}: API group {@code FROZEN_LONG_BIMAP} over arrays and state masks.
+ * Immutable primitive bijection preserving its input pair ordinals.
  *
- * <p>Provider lineage (LIBRARY_API_MATRIX.tsv, run 20261017-m3-to-public/LIB-SUPERSET):
- * <ul>
- *   <li>GUAVA ImmutableBiMap: frozen bijection [license Apache-2.0; NEW_OWNER (LS2 family); priority P1; matrix owner PROPOSED:frozen dual lanes]</li>
- * </ul>
+ * <p>Private long lanes contain each key and value once. The existing packed
+ * row index stores only integer ordinals and handles zero and all signed-long
+ * values without a payload sentinel. A cached reciprocal inverse swaps the
+ * same two payload lanes and their indexes; no payload is copied for a view.
  *
- * <p>DOOP mapping: lane kind LONG; lanes {@code long[] keyLane;long[] valueLane;int[] forwardIndexLane;int[] inverseIndexLane}; offset scheme ordinal slot + two open-address index lanes; state-mask bits FROZEN; stored nodes NONE; API entry objects TRANSIENT_FACADE (transient facades over slots, never the stored representation); matrix note: frozen key+value lanes + two frozen hash index lanes / FROZEN=1.
- *
- * <p>Status: SCAFFOLD. Every public atom throws {@link NotYetReceived} until this owner is received through a hash-pinned Synexia recipe with its own
- * provider oracle (never inferred from another provider). Not a {@code java.util} replacement.
+ * <p>The selected Guava ImmutableBiMap frozen-bijection lineage is retained
+ * from the existing FROZEN_LONG_BIMAP owner and LIBRARY_API_MATRIX.tsv, run
+ * 20261017-m3-to-public/LIB-SUPERSET. This is a primitive projection of that
+ * selected contract, not a Guava interface or a public JDK map replacement.
  */
 public final class FrozenLongBiMap {
-    /** State-mask bit {@code FROZEN} (per-slot state word, bit 0). */
     static final long STATE_FROZEN = 1L << 0;
+    private static final long[] EMPTY = new long[0];
 
-    /** Storage lane {@code keyLane}: dynamic primitive/reference array lane. */
-    private long[] keyLane = new long[0];
-    /** Storage lane {@code valueLane}: dynamic primitive/reference array lane. */
-    private long[] valueLane = new long[0];
-    /** Storage lane {@code forwardIndexLane}: dynamic primitive/reference array lane. */
-    private int[] forwardIndexLane = new int[0];
-    /** Storage lane {@code inverseIndexLane}: dynamic primitive/reference array lane. */
-    private int[] inverseIndexLane = new int[0];
-    /** Per-slot state words (FROZEN); one bit set per slot and state. */
-    private long[] stateMaskWords = new long[0];
-    /** Live slot count. */
-    private int size;
+    private final long[] keyLane;
+    private final long[] valueLane;
+    private final PackedLongRowIndex forwardIndex;
+    private final PackedLongRowIndex inverseIndex;
+    private final long[] stateMaskWords;
+    private final int size;
+    private final FrozenLongBiMap inverse;
 
-    /** Creates an empty scaffold owner; lanes grow by copy once received. */
     public FrozenLongBiMap() {
+        this(EMPTY, EMPTY, new PackedLongRowIndex(0), new PackedLongRowIndex(0), null);
     }
 
-    /** Reports the declared state-mask bits and lanes for ledgers; never allocates per element. */
+    private FrozenLongBiMap(long[] keys, long[] values, PackedLongRowIndex forward,
+            PackedLongRowIndex reverse, FrozenLongBiMap inverseOf) {
+        keyLane = keys;
+        valueLane = values;
+        forwardIndex = forward;
+        inverseIndex = reverse;
+        size = keys.length;
+        if (inverseOf != null) {
+            stateMaskWords = inverseOf.stateMaskWords;
+        } else {
+            int tail = size & 63;
+            stateMaskWords = new long[(size >>> 6) + (tail == 0 ? 0 : 1)];
+            Arrays.fill(stateMaskWords, -1L);
+            if (tail != 0) stateMaskWords[stateMaskWords.length - 1] = (1L << tail) - 1;
+        }
+        inverse = inverseOf != null ? inverseOf : size == 0 ? this
+                : new FrozenLongBiMap(values, keys, reverse, forward, this);
+    }
+
+    /** Retained compatibility descriptor; packed indexes own the integer lanes. */
     public static String scaffoldDescriptor() {
         return "M3FrozenLongBiMap|FROZEN_LONG_BIMAP|LONG|FROZEN|long[] keyLane;long[] valueLane;int[] forwardIndexLane;int[] inverseIndexLane";
     }
 
-    /** Guava ImmutableBiMap.copyOf (scaffold: not yet received). */
     public static FrozenLongBiMap copyOf(long[] keys, long[] values) {
-        throw new NotYetReceived("M3FrozenLongBiMap.copyOf");
+        Objects.requireNonNull(keys, "keys");
+        Objects.requireNonNull(values, "values");
+        if (keys.length != values.length) {
+            throw new IllegalArgumentException("key/value length mismatch");
+        }
+        // Refuse unsupported index sizes before allocating detached payloads.
+        PackedLongRowIndex.capacityFor(keys.length);
+        long[] keyCopy = keys.clone();
+        long[] valueCopy = values.clone();
+        PackedLongRowIndex forward = new PackedLongRowIndex(keyCopy.length);
+        PackedLongRowIndex reverse = new PackedLongRowIndex(keyCopy.length);
+        for (int ordinal = 0; ordinal < keyCopy.length; ordinal++) {
+            if (forward.find(keyCopy[ordinal], keyCopy) >= 0) {
+                throw new IllegalArgumentException("duplicate key");
+            }
+            if (reverse.find(valueCopy[ordinal], valueCopy) >= 0) {
+                throw new IllegalArgumentException("duplicate value");
+            }
+            forward.insert(ordinal, keyCopy);
+            reverse.insert(ordinal, valueCopy);
+        }
+        return new FrozenLongBiMap(keyCopy, valueCopy, forward, reverse, null);
     }
 
-    /** BiMap.size (scaffold: not yet received). */
-    public int size() {
-        throw new NotYetReceived("M3FrozenLongBiMap.size");
-    }
+    public int size() { return size; }
+    public boolean containsKey(long key) { return forwardIndex.find(key, keyLane) >= 0; }
+    public boolean containsValue(long value) { return inverseIndex.find(value, valueLane) >= 0; }
 
-    /** BiMap.containsKey (scaffold: not yet received). */
-    public boolean containsKey(long key) {
-        throw new NotYetReceived("M3FrozenLongBiMap.containsKey");
-    }
-
-    /** BiMap.containsValue (scaffold: not yet received). */
-    public boolean containsValue(long value) {
-        throw new NotYetReceived("M3FrozenLongBiMap.containsValue");
-    }
-
-    /** BiMap.get (scaffold: not yet received). */
     public long getOrDefault(long key, long defaultValue) {
-        throw new NotYetReceived("M3FrozenLongBiMap.getOrDefault");
+        int ordinal = forwardIndex.find(key, keyLane);
+        return ordinal < 0 ? defaultValue : valueLane[ordinal];
     }
 
-    /** BiMap.inverse().get (scaffold: not yet received). */
     public long inverseGetOrDefault(long value, long defaultKey) {
-        throw new NotYetReceived("M3FrozenLongBiMap.inverseGetOrDefault");
+        int ordinal = inverseIndex.find(value, valueLane);
+        return ordinal < 0 ? defaultKey : keyLane[ordinal];
     }
 
-    /** ordinal access (scaffold: not yet received). */
-    public long keyAt(int ordinal) {
-        throw new NotYetReceived("M3FrozenLongBiMap.keyAt");
-    }
+    public long keyAt(int ordinal) { return keyLane[Objects.checkIndex(ordinal, size)]; }
+    public long valueAt(int ordinal) { return valueLane[Objects.checkIndex(ordinal, size)]; }
+    public FrozenLongBiMap inverse() { return inverse; }
 
-    /** ordinal access (scaffold: not yet received). */
-    public long valueAt(int ordinal) {
-        throw new NotYetReceived("M3FrozenLongBiMap.valueAt");
-    }
-
-    /** BiMap.inverse (frozen view sharing lanes) (scaffold: not yet received). */
-    public FrozenLongBiMap inverse() {
-        throw new NotYetReceived("M3FrozenLongBiMap.inverse");
-    }
-
-    /** UOE contract once received (scaffold: not yet received). */
     public long put(long key, long value) {
-        throw new NotYetReceived("M3FrozenLongBiMap.put");
+        throw new UnsupportedOperationException("immutable bimap");
     }
 
-    /** UOE contract once received (scaffold: not yet received). */
     public long forcePut(long key, long value) {
-        throw new NotYetReceived("M3FrozenLongBiMap.forcePut");
+        throw new UnsupportedOperationException("immutable bimap");
     }
 
-    /** UOE contract once received (scaffold: not yet received). */
     public long remove(long key) {
-        throw new NotYetReceived("M3FrozenLongBiMap.remove");
+        throw new UnsupportedOperationException("immutable bimap");
     }
 }
