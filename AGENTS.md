@@ -204,3 +204,21 @@ canonical Synexia recipes with provenance, licensing and target tests. Fix
 demonstrated defects in the existing owner/recipe first, retain regressions and
 previously proven capabilities, and never infer M3-extension rejection solely
 from stock-JDK inexpressibility or a Java 21 backport rejection.
+
+## Compatible defaults, overloads and abstract classes
+
+Follow [compatible API evolution](doc/api-evolution.md) for API additions. Use
+useful interface defaults and delegating overloads, and concrete fallbacks in
+existing abstract classes. New skeletal bases are optional; preserve direct
+implementations and established superclass choices. Do not impose new abstract
+obligations on existing concrete providers. Preserve existing descriptors,
+virtual hooks, validation owners, callback order and specified behavior.
+
+Check old binary execution, unchanged-source recompilation and behavioral
+equivalence separately. Check null/lambda/method-reference overload selection,
+erasure, inherited default conflicts and class-method precedence where relevant.
+A Java binary-compatible classification alone is not complete compatibility
+evidence. Retain negative fixtures for unsafe additions. Existing ProgressMonitor
+and monitored-I/O owners are the implementation examples; no parallel API family
+is required. Recipes and proof records remain exclusively in Synexia; product
+sources, documentation and target regression tests are received here.

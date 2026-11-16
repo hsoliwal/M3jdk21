@@ -1,0 +1,122 @@
+<!-- SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors -->
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+# Compatible API evolution in M3JDK21
+
+M3JDK21 may extend its existing API owners with useful interface defaults,
+delegating overloads and optional skeletal abstract classes. Preserve the
+supported Java 21 subset and previously accepted fork extensions. An addition
+must preserve existing implementation obligations, subclass hooks and specified
+observable behavior. New extension calls need not run on stock Java 21.
+
+## Choose the extension mechanism
+
+| Mechanism | Required design |
+| --- | --- |
+| Interface default | Derive a valid fallback from established operations; check inherited-method collisions. |
+| Convenience overload | Supply documented default values and invoke the established virtual operation. |
+| Existing abstract base | Add concrete behavior without imposing new abstract obligations on existing concrete subclasses. |
+| Optional skeletal base | Keep adoption optional; preserve direct implementations and existing superclass choices. |
+| Specialized implementation | Override the fallback only while preserving its declared contract. |
+| Capability without a valid fallback | Specify an explicit opt-in extension boundary. |
+
+The `default` modifier belongs to interface methods. Abstract classes provide
+fallbacks using ordinary concrete methods. Overloads can express default choices
+without changing the Java 21 language syntax.
+
+## Preserve dispatch and behavior
+
+A convenience overload normally delegates to the existing virtual method. Its
+implementation specification must state the forwarded arguments, call count,
+validation owner and failure behavior. Do not route around a provider override,
+add lifecycle callbacks, change cancellation checks, clear interruption, or finish
+a borrowed resource merely because a shorter entry point was introduced.
+
+The progress SPI applies this rule directly:
+
+```java
+default void begin(String task) {
+    begin(task, UNKNOWN_WORK);
+}
+
+default void worked() {
+    worked(1L);
+}
+```
+
+The full-argument hooks retain task validation and progress semantics, including
+the handling of a null task. The default overloads add no monitor state or
+callbacks. Existing concrete class methods retain Java's normal precedence.
+
+The existing whole-array monitored I/O overloads in `InputStream`, `OutputStream`,
+`Reader` and `Writer` provide the corresponding concrete-method pattern. Keep
+their established virtual hooks and regression tests. A new abstract base is not
+required to obtain this behavior.
+
+An unsupported-operation fallback is valid only where the new API explicitly
+defines that operation as optional. A no-op is valid only where it satisfies the
+declared contract. Do not invent a successful result or silently discard options.
+
+## Additive changes still require compatibility evidence
+
+Java's binary-compatibility classification is narrower than complete application
+compatibility. The acceptance record must distinguish:
+
+1. Existing binaries linking and executing against the candidate API.
+2. Existing source recompiling, with the intended overload and inherited-method
+   selection.
+3. Existing behavior, including exceptions, callback order, mutation, ownership,
+   cancellation, threading and serialization where applicable.
+
+For example, adding `read(char[])` beside `read(CharBuffer)` would make an existing
+`read(null)` expression ambiguous. It is rejected for `Readable`; this change does
+not add either array overload to that interface. Test null arguments, lambdas,
+method references, boxing, widening, varargs, erasure and inherited methods when
+they are relevant to the candidate overload set.
+
+Unrelated inherited defaults can conflict at compilation and can cause an
+`IncompatibleClassChangeError` when an old binary invokes the method. A superclass
+abstract declaration can also prevent an interface default from satisfying a
+subclass's implementation obligation. Do not assume that a default repairs an
+arbitrary abstract-class hierarchy. Retain functional-interface status where
+existing lambdas rely on it.
+
+Changing an established concrete method to abstract, making an extension hook
+final, or changing static/instance status is outside this compatibility-preserving
+addition policy. Preserve existing descriptors, constructors, accessibility and
+the documented provider contract.
+
+## Required proof for a candidate
+
+Compile representative callers and providers against the exact baseline and
+retain their class files. Run those unchanged binaries against the candidate,
+then recompile their unchanged sources and compare behavior and dispatch.
+Compile and run callers of the new operations. Include concrete and abstract
+superclasses, direct providers and relevant negative collision fixtures.
+
+Use API comparisons as one input; compilation success alone does not establish
+behavioral equivalence. Exercise reflection, proxy dispatch, serialization,
+service loading, module access or JNI when the changed contract affects them.
+Identify the actual tested providers and platform scope. A finite corpus does
+not establish compatibility with every unknown third-party implementation or
+every program that enumerates all methods reflectively.
+
+The reusable Maven/OpenRewrite recipe, frozen before/after sources, refusal and
+fixed-point tests, category decisions and execution evidence remain in Synexia.
+M3JDK21 receives exact emitted product sources, this product documentation and
+target-owned regression tests. Independent target compiler, jtreg and runtime
+checks remain required; recipe execution is not a replacement for those checks.
+
+Focused target tests:
+
+- `test/jdk/java/util/concurrent/ProgressMonitor/DefaultOverloads.java`
+- `test/langtools/tools/javac/compatibility/DefaultApiEvolution.java`
+- Existing `test/jdk/java/io/MonitoredIoArrayOverloads.java`
+- Existing progress-provider and `ProgressJob` regressions
+
+## Java 21 specification references
+
+- [JLS 13.5.7: interface method evolution](https://docs.oracle.com/javase/specs/jls/se21/html/jls-13.html#jls-13.5.7)
+- [JLS 13.4.23: overload evolution](https://docs.oracle.com/javase/specs/jls/se21/html/jls-13.html#jls-13.4.23)
+- [JLS 8.4.8.4: inherited methods and abstract superclasses](https://docs.oracle.com/javase/specs/jls/se21/html/jls-8.html#jls-8.4.8.4)
+- [JLS 9.8: functional interfaces](https://docs.oracle.com/javase/specs/jls/se21/html/jls-9.html#jls-9.8)
+- [JLS 15.12.2.5: most-specific overload selection](https://docs.oracle.com/javase/specs/jls/se21/html/jls-15.html#jls-15.12.2.5)
