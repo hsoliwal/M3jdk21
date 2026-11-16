@@ -4,77 +4,189 @@
  */
 package jdk.internal.m3.collections;
 
+import java.util.AbstractCollection;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+import java.util.Objects;
+import java.util.function.Function;
+
 /**
- * M3 five-library superset scaffold {@code IndexedCollectionView}: API group {@code INDEXED_COLLECTION} over arrays and state masks.
- *
- * <p>Provider lineage (LIBRARY_API_MATRIX.tsv, run 20261017-m3-to-public/LIB-SUPERSET):
- * <ul>
- *   <li>COMMONS IndexedCollection: maintained secondary index over collection [license Apache-2.0; SUPERSET_VIEW VIEW_OF:owner + PackedLongLaneIndex donor; priority P2; matrix owner index lane over base]</li>
- * </ul>
- *
- * <p>DOOP mapping: lane kind OBJECT; lanes {@code Object[] elementLane;Object[] indexKeyLane;int[] indexOffsetLane}; offset scheme element slot + secondary key index; state-mask bits OCCUPIED,INDEX_DIRTY; stored nodes NONE; API entry objects NONE (transient facades over slots, never the stored representation); matrix note: base lanes + key index lane / index dirty mask.
- *
- * <p>Status: SCAFFOLD. Every public atom throws {@link NotYetReceived} until this owner is received through a hash-pinned Synexia recipe with its own
- * provider oracle (never inferred from another provider). Not a {@code java.util} replacement.
+ * Indexed collection with array-owned element, key and primitive offset lanes.
+ * It does not retain a Map<K, Collection<E>> or per-element entry/node graph.
+ * Lookup uses a compact open-addressed int[] of the first ordinal per key.
+ * Keys are cached until explicitly reindexed after external key mutation.
  */
 public final class IndexedCollectionView<K, E> {
-    /** State-mask bit {@code OCCUPIED} (per-slot state word, bit 0). */
     static final long STATE_OCCUPIED = 1L << 0;
-    /** State-mask bit {@code INDEX_DIRTY} (per-slot state word, bit 1). */
     static final long STATE_INDEX_DIRTY = 1L << 1;
-
-    /** Storage lane {@code elementLane}: dynamic primitive/reference array lane. */
     private Object[] elementLane = new Object[0];
-    /** Storage lane {@code indexKeyLane}: dynamic primitive/reference array lane. */
     private Object[] indexKeyLane = new Object[0];
-    /** Storage lane {@code indexOffsetLane}: dynamic primitive/reference array lane. */
     private int[] indexOffsetLane = new int[0];
-    /** Per-slot state words (OCCUPIED,INDEX_DIRTY); one bit set per slot and state. */
-    private long[] stateMaskWords = new long[0];
-    /** Live slot count. */
+    private long[] stateMaskWords = {STATE_OCCUPIED};
     private int size;
+    private final Function<? super E, ? extends K> keyTransformer;
+    private final boolean uniqueKeys;
 
-    /** Creates an empty scaffold owner; lanes grow by copy once received. */
-    public IndexedCollectionView() {
+    /** Backward-compatible no-arg constructor uses the element as its key. */
+    @SuppressWarnings("unchecked")
+    public IndexedCollectionView() { this(value -> (K) value, false); }
+
+    public IndexedCollectionView(Function<? super E, ? extends K> keyTransformer) {
+        this(keyTransformer, false);
     }
 
-    /** Reports the declared state-mask bits and lanes for ledgers; never allocates per element. */
+    public IndexedCollectionView(Function<? super E, ? extends K> keyTransformer,
+                                 boolean uniqueKeys) {
+        this.keyTransformer = Objects.requireNonNull(keyTransformer, "keyTransformer");
+        this.uniqueKeys = uniqueKeys;
+    }
+
     public static String scaffoldDescriptor() {
         return "M3IndexedCollectionView|INDEXED_COLLECTION|OBJECT|OCCUPIED,INDEX_DIRTY|Object[] elementLane;Object[] indexKeyLane;int[] indexOffsetLane";
     }
 
-    /** IndexedCollection.add (maintains index) (scaffold: not yet received). */
+    private static int hash(Object value) {
+        int h = value == null ? 0 : value.hashCode();
+        return h ^ (h >>> 16);
+    }
+
+    private static int find(Object key, Object[] keys, int[] offsets) {
+        if (offsets.length == 0) return -1;
+        int mask = offsets.length - 1;
+        int bucket = hash(key) & mask;
+        for (int slot; (slot = offsets[bucket]) != 0; bucket = (bucket + 1) & mask) {
+            if (Objects.equals(key, keys[slot - 1])) return slot - 1;
+        }
+        return -1;
+    }
+
+    private static void putIndex(Object[] keys, int[] offsets, int ordinal) {
+        int mask = offsets.length - 1;
+        int bucket = hash(keys[ordinal]) & mask;
+        while (offsets[bucket] != 0) {
+            if (Objects.equals(keys[ordinal], keys[offsets[bucket] - 1])) return;
+            bucket = (bucket + 1) & mask;
+        }
+        offsets[bucket] = ordinal + 1;
+    }
+
+    private void reserve(int required) {
+        if (required > elementLane.length) {
+            long expanded = elementLane.length == 0 ? 8L
+                    : (long) elementLane.length + (elementLane.length >>> 1) + 1;
+            int capacity = (int) Math.min(Integer.MAX_VALUE, Math.max(expanded, required));
+            elementLane = Arrays.copyOf(elementLane, capacity);
+            indexKeyLane = Arrays.copyOf(indexKeyLane, capacity);
+        }
+        if ((long) required * 2 > indexOffsetLane.length) {
+            int next = Math.max(16, indexOffsetLane.length);
+            while ((long) required * 2 > next) next <<= 1;
+            int[] replacement = new int[next];
+            for (int i = 0; i < size; i++) putIndex(indexKeyLane, replacement, i);
+            indexOffsetLane = replacement;
+        }
+    }
+
     public boolean add(E element) {
-        throw new NotYetReceived("M3IndexedCollectionView.add");
+        K key = keyTransformer.apply(element);
+        if (uniqueKeys && find(key, indexKeyLane, indexOffsetLane) >= 0) {
+            throw new IllegalArgumentException("Duplicate key in uniquely indexed collection.");
+        }
+        reserve(Math.addExact(size, 1));
+        elementLane[size] = element;
+        indexKeyLane[size] = key;
+        putIndex(indexKeyLane, indexOffsetLane, size);
+        size++;
+        return true;
     }
 
-    /** IndexedCollection.remove (scaffold: not yet received). */
     public boolean remove(Object element) {
-        throw new NotYetReceived("M3IndexedCollectionView.remove");
+        for (int i = 0; i < size; i++) {
+            if (Objects.equals(element, elementLane[i])) {
+                System.arraycopy(elementLane, i + 1, elementLane, i, size - i - 1);
+                System.arraycopy(indexKeyLane, i + 1, indexKeyLane, i, size - i - 1);
+                elementLane[--size] = null;
+                indexKeyLane[size] = null;
+                Arrays.fill(indexOffsetLane, 0);
+                for (int j = 0; j < size; j++) putIndex(indexKeyLane, indexOffsetLane, j);
+                return true;
+            }
+        }
+        return false;
     }
 
-    /** IndexedCollection.get (scaffold: not yet received). */
+    @SuppressWarnings("unchecked")
     public E get(K key) {
-        throw new NotYetReceived("M3IndexedCollectionView.get");
+        int index = find(key, indexKeyLane, indexOffsetLane);
+        return index < 0 ? null : (E) elementLane[index];
     }
 
-    /** IndexedCollection.values (scaffold: not yet received). */
-    public java.util.Collection<E> values(K key) {
-        throw new NotYetReceived("M3IndexedCollectionView.values");
+    /** Live, read-only view; absent keys return null as in Commons IndexedCollection. */
+    public Collection<E> values(K key) {
+        if (find(key, indexKeyLane, indexOffsetLane) < 0) return null;
+        return new AbstractCollection<>() {
+            @Override public int size() {
+                int count = 0;
+                for (int i = 0; i < IndexedCollectionView.this.size; i++) {
+                    if (Objects.equals(key, indexKeyLane[i])) count++;
+                }
+                return count;
+            }
+            @Override public Iterator<E> iterator() {
+                return new Iterator<>() {
+                    int cursor;
+                    private int advance(int from) {
+                        while (from < IndexedCollectionView.this.size
+                                && !Objects.equals(key, indexKeyLane[from])) from++;
+                        return from;
+                    }
+                    @Override public boolean hasNext() {
+                        return advance(cursor) < IndexedCollectionView.this.size;
+                    }
+                    @SuppressWarnings("unchecked")
+                    @Override public E next() {
+                        int next = advance(cursor);
+                        if (next >= IndexedCollectionView.this.size) throw new NoSuchElementException();
+                        cursor = next + 1;
+                        return (E) elementLane[next];
+                    }
+                };
+            }
+        };
     }
 
-    /** IndexedCollection.reindex (scaffold: not yet received). */
+    /** Atomic refresh of all extractor-produced keys and their indexed positions. */
+    @SuppressWarnings("unchecked")
     public void reindex() {
-        throw new NotYetReceived("M3IndexedCollectionView.reindex");
+        Object[] newKeys = Arrays.copyOf(indexKeyLane, indexKeyLane.length);
+        int[] replacement = new int[indexOffsetLane.length];
+        for (int i = 0; i < size; i++) {
+            Object key = keyTransformer.apply((E) elementLane[i]);
+            if (uniqueKeys && find(key, newKeys, replacement) >= 0) {
+                throw new IllegalArgumentException("Duplicate key in uniquely indexed collection.");
+            }
+            newKeys[i] = key;
+            putIndex(newKeys, replacement, i);
+        }
+        indexKeyLane = newKeys;
+        indexOffsetLane = replacement;
     }
 
-    /** Collection.contains (scaffold: not yet received). */
+    /** Commons semantics: membership is evaluated using the derived key. */
+    @SuppressWarnings("unchecked")
     public boolean contains(Object element) {
-        throw new NotYetReceived("M3IndexedCollectionView.contains");
+        K key = keyTransformer.apply((E) element);
+        return find(key, indexKeyLane, indexOffsetLane) >= 0;
     }
 
-    /** Collection.size (scaffold: not yet received). */
-    public int size() {
-        throw new NotYetReceived("M3IndexedCollectionView.size");
+    public int size() { return size; }
+
+    public void clear() {
+        Arrays.fill(elementLane, 0, size, null);
+        Arrays.fill(indexKeyLane, 0, size, null);
+        Arrays.fill(indexOffsetLane, 0);
+        size = 0;
     }
 }
