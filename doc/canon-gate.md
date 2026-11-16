@@ -56,6 +56,8 @@ The `atom_pattern` stage must write `$CANON_RUN_DIR/ATOM_PATTERN.tsv`, tab-separ
 - Only canonical repository-relative paths may appear in atom rows: reject absolute paths, `.`/`..`,
   empty path components, backslashes, colons and control characters. A symlink cannot be
   treated as an ordinary source file merely because its target has a matching digest.
+  Check every component including intermediate directories without following symbolic links:
+  a row through an ancestor link fails with `ATOM_NONREGULAR_ROW`, even if the target is Java.
 - The current table has no deletion or nonregular-path evidence schema. **Changed deleted
   files, symlinks, gitlinks and directories fail closed** with `ATOM_NONREGULAR_CHANGE`
   until a versioned and tested deletion-proof representation is explicitly added.
@@ -68,7 +70,7 @@ The `atom_pattern` stage must write `$CANON_RUN_DIR/ATOM_PATTERN.tsv`, tab-separ
 
 `STAGE_FAILED`, `HEAD_MOVED`, `DRY_RUN_MUTATION`, `OUT_OF_SCOPE`, `EXCLUDED_PATH`, `DISABLED_PATH`, `BUILD_SCRIPT_LOCKED`
 (a build script changes without being named in `targets.files`), `ATOM_PATTERN_SCHEMA`, `ATOM_STALE`, `PATTERN_UNKNOWN`,
-`PATTERN_NOT_ADMITTED`, `ATOM_PLANES_MISSING`, `ATOM_UNCOVERED`, `ATOM_PATTERN_MISSING`, `ATOM_NONREGULAR_CHANGE`,
+`PATTERN_NOT_ADMITTED`, `ATOM_PLANES_MISSING`, `ATOM_UNCOVERED`, `ATOM_PATTERN_MISSING`, `ATOM_NONREGULAR_ROW`, `ATOM_NONREGULAR_CHANGE`,
 `NON_IDEMPOTENT`, `BASELINE_UNREADABLE`, `OUTPUT_CONTRACT_MISSING`.
 
 ## Artifacts
