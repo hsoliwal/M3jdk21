@@ -2578,6 +2578,16 @@ public final class String
         if (sourceM3 != null) {
             return M3StringPrecomputeBridge.startsWith(sourceM3, prefix, toffset);
         }
+        M3String prefixM3 = prefix.m3();
+        if (prefixM3 != null) {
+            // A flat receiver compares an M3-backed prefix by content. The prefix is not
+            // flattened, and its coder is not tested: a range reports the coder of its
+            // owner, so Latin-1 content can sit behind a UTF-16 coder.
+            int count = prefix.length();
+            return toffset == 0
+                    ? prefixM3.compareFlatPrefix(this, count) == 0
+                    : regionMatches(toffset, prefix, 0, count);
+        }
         byte[] ta = value();
         byte[] pa = prefix.value();
         int po = 0;
