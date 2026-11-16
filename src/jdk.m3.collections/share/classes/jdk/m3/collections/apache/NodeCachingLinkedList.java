@@ -47,7 +47,7 @@ import java.util.stream.StreamSupport;
  * @param <E> element type
  */
 @Deprecated
-public final class M3NodeCachingLinkedList<E> extends AbstractSequentialList<E>
+public final class NodeCachingLinkedList<E> extends AbstractSequentialList<E>
         implements Iterable<E>, Collection<E>, List<E>, SequencedCollection<E>, Serializable {
 
     @Serial
@@ -74,7 +74,7 @@ public final class M3NodeCachingLinkedList<E> extends AbstractSequentialList<E>
     private transient int size;
 
     /** Constructs an empty list with the default recycled-slot capacity hint. */
-    public M3NodeCachingLinkedList() {
+    public NodeCachingLinkedList() {
         this(DEFAULT_CACHE_HINT);
     }
 
@@ -83,7 +83,7 @@ public final class M3NodeCachingLinkedList<E> extends AbstractSequentialList<E>
      *
      * @param maximumCacheSize advisory recycled-slot capacity
      */
-    public M3NodeCachingLinkedList(int maximumCacheSize) {
+    public NodeCachingLinkedList(int maximumCacheSize) {
         this.maximumCacheSize = maximumCacheSize;
     }
 
@@ -92,7 +92,7 @@ public final class M3NodeCachingLinkedList<E> extends AbstractSequentialList<E>
      *
      * @param source values to copy in their encounter order
      */
-    public M3NodeCachingLinkedList(Collection<? extends E> source) {
+    public NodeCachingLinkedList(Collection<? extends E> source) {
         this(DEFAULT_CACHE_HINT);
         addAll(source);
     }
@@ -378,7 +378,7 @@ public final class M3NodeCachingLinkedList<E> extends AbstractSequentialList<E>
                 throw new NoSuchElementException();
             }
             lastReturned = nextSlot;
-            nextSlot = M3NodeCachingLinkedList.this.next[nextSlot];
+            nextSlot = NodeCachingLinkedList.this.next[nextSlot];
             nextIndex++;
             return elementAt(lastReturned);
         }
@@ -394,7 +394,7 @@ public final class M3NodeCachingLinkedList<E> extends AbstractSequentialList<E>
             if (!hasPrevious()) {
                 throw new NoSuchElementException();
             }
-            nextSlot = nextSlot == NONE ? last : M3NodeCachingLinkedList.this.previous[nextSlot];
+            nextSlot = nextSlot == NONE ? last : NodeCachingLinkedList.this.previous[nextSlot];
             lastReturned = nextSlot;
             nextIndex--;
             return elementAt(lastReturned);
@@ -416,7 +416,7 @@ public final class M3NodeCachingLinkedList<E> extends AbstractSequentialList<E>
             if (lastReturned == NONE) {
                 throw new IllegalStateException();
             }
-            int nextAfterRemoved = M3NodeCachingLinkedList.this.next[lastReturned];
+            int nextAfterRemoved = NodeCachingLinkedList.this.next[lastReturned];
             if (nextSlot == lastReturned) {
                 nextSlot = nextAfterRemoved;
             } else {

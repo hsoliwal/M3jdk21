@@ -2,7 +2,8 @@
  * SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
  * SPDX-License-Identifier: Apache-2.0
  */
-import jdk.m3.collections.apache.M3TreeList;
+import jdk.m3.collections.apache.TreeList;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.ConcurrentModificationException;
@@ -13,7 +14,7 @@ import java.util.Objects;
 import java.util.Random;
 
 /** Tests the production array-index cursor, not a synthetic tree implementation. */
-public final class M3TreeListCursorContract {
+public final class TreeListCursorContract {
     private static long checks;
     private static void ok(boolean pass, String reason) {
         checks++;
@@ -36,7 +37,7 @@ public final class M3TreeListCursorContract {
             default -> random.nextInt(100) - 50;
         };
     }
-    private static void compare(ArrayList<Object> model, M3TreeList<Object> actual) {
+    private static void compare(ArrayList<Object> model, TreeList<Object> actual) {
         ok(model.size() == actual.size(), "size");
         ok(model.equals(actual), "logical equals");
         ok(model.hashCode() == actual.hashCode(), "hash");
@@ -56,7 +57,7 @@ public final class M3TreeListCursorContract {
         ok(!observed.hasNext(), "iterator exhaustion");
         throwsType(NoSuchElementException.class, observed::next);
     }
-    private static void iteratorRemoves(ArrayList<Object> model, M3TreeList<Object> actual) {
+    private static void iteratorRemoves(ArrayList<Object> model, TreeList<Object> actual) {
         Iterator<Object> expected = model.iterator();
         Iterator<Object> observed = actual.iterator();
         throwsType(IllegalStateException.class, observed::remove);
@@ -73,7 +74,7 @@ public final class M3TreeListCursorContract {
         ok(!observed.hasNext(), "mutable iterator completed");
         compare(model, actual);
     }
-    private static void structuralFailure(ArrayList<Object> model, M3TreeList<Object> actual) {
+    private static void structuralFailure(ArrayList<Object> model, TreeList<Object> actual) {
         if (model.isEmpty()) {
             model.add("item"); actual.add("item");
         }
@@ -87,7 +88,7 @@ public final class M3TreeListCursorContract {
         throwsType(ConcurrentModificationException.class, expected::remove);
         throwsType(ConcurrentModificationException.class, observed::remove);
     }
-    private static void nonStructuralSet(ArrayList<Object> model, M3TreeList<Object> actual) {
+    private static void nonStructuralSet(ArrayList<Object> model, TreeList<Object> actual) {
         if (model.size() < 2) return;
         Iterator<Object> expected = model.iterator();
         Iterator<Object> observed = actual.iterator();
@@ -100,7 +101,7 @@ public final class M3TreeListCursorContract {
     public static void main(String[] args) {
         Random random = new Random(0x13f11e48L);
         ArrayList<Object> oracle = new ArrayList<>();
-        M3TreeList<Object> tree = new M3TreeList<>();
+        TreeList<Object> tree = new TreeList<>();
         long transitions = 0;
         for (int size : new int[]{0, 1, 7, 8, 31, 32, 63, 64, 65, 127, 128, 255, 256, 511, 512}) {
             oracle.clear(); tree.clear();

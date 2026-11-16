@@ -2,9 +2,10 @@
  * Copyright 2026 Hitesh Soliwal and contributors
  * SPDX-License-Identifier: Apache-2.0
  */
+import jdk.m3.collections.apache.TreeList;
+
 import java.lang.reflect.Field;
 import java.util.ListIterator;
-import jdk.m3.collections.apache.M3TreeList;
 
 /** Injects path-growth failures into disposable, explicitly instrumented source only. */
 public final class TreeListCursorAllocationFailure {
@@ -14,13 +15,13 @@ public final class TreeListCursorAllocationFailure {
     }
 
     private static Field field(String name) throws Exception {
-        Field field = M3TreeList.class.getDeclaredField(name);
+        Field field = TreeList.class.getDeclaredField(name);
         field.setAccessible(true);
         return field;
     }
 
-    private static M3TreeList<Integer> skewed(boolean leftSkew, int size) throws Exception {
-        M3TreeList<Integer> list = new M3TreeList<>();
+    private static TreeList<Integer> skewed(boolean leftSkew, int size) throws Exception {
+        TreeList<Integer> list = new TreeList<>();
         Object[] elements = new Object[size];
         int[] left = new int[size];
         int[] right = new int[size];
@@ -54,7 +55,7 @@ public final class TreeListCursorAllocationFailure {
             for (boolean backwards : new boolean[] {false, true}) {
                 for (int failAt = 1; failAt <= 15; failAt++) {
                     int size = 4096;
-                    M3TreeList<Integer> list = skewed(leftSkew, size);
+                    TreeList<Integer> list = skewed(leftSkew, size);
                     ListIterator<Integer> cursor = list.listIterator(backwards ? size : 0);
                     failure.setInt(null, failAt);
                     for (int step = 0; step < size; step++) {
