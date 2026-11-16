@@ -80,13 +80,30 @@ public class M3ArrayListBulkMembershipTest {
         }
     }
 
+    /**
+     * Independent AbstractCollection oracle reproducing the old inherited
+     * removeAll/retainAll dispatch. JDK ArrayList uses a different bulk path.
+     */
+    static final class OriginalFallback extends java.util.AbstractList<Object> {
+        final ArrayList<Object> values;
+        OriginalFallback(ArrayList<Object> input) {
+            values = new ArrayList<>(input);
+        }
+        @Override public Object get(int index) { return values.get(index); }
+        @Override public int size() { return values.size(); }
+        @Override public Object remove(int index) {
+            modCount++;
+            return values.remove(index);
+        }
+    }
+
     static void opaqueFallback() {
         ArrayList<Object> original = new ArrayList<>();
         ArrayList<Object> members = new ArrayList<>();
         for (int i = 0; i < 8192; i++) original.add(new Probe(i % 83));
         for (int i = 0; i < 512; i++) members.add(new Probe(i % 83));
         for (boolean retain : new boolean[] {true, false}) {
-            ArrayList<Object> expected = new ArrayList<>(original);
+            OriginalFallback expected = new OriginalFallback(original);
             M3ArrayList<Object> actual = new M3ArrayList<>(original);
             Probe.equalsCalls = Probe.hashCalls = 0;
             boolean changed1 = retain ? expected.retainAll(members) : expected.removeAll(members);
@@ -95,9 +112,9 @@ public class M3ArrayListBulkMembershipTest {
             Probe.equalsCalls = Probe.hashCalls = 0;
             boolean changed2 = retain ? actual.retainAll(members) : actual.removeAll(members);
             check(changed1 == changed2, "opaque changed");
-            same(expected, actual);
-            check(Probe.equalsCalls == eq, "opaque equals callback order/count");
-            check(Probe.hashCalls == hash, "opaque hash callback count");
+            same(expected.values, actual);
+            check(Probe.equalsCalls == eq, "opaque equals callback parity");
+            check(Probe.hashCalls == hash, "opaque hash callback parity");
         }
     }
 
