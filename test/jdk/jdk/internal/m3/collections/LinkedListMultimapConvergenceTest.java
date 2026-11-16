@@ -221,6 +221,7 @@ public class LinkedListMultimapConvergenceTest {
         eq(4, map.size());
         Object value = new Object() {
             @Override public boolean equals(Object other) { map.put("bad", "bad"); return false; }
+            @Override public int hashCode() { return System.identityHashCode(this); }
         };
         expect(ConcurrentModificationException.class, () -> map.containsEntry(b, value));
         eq(false, map.containsKey("bad"));
