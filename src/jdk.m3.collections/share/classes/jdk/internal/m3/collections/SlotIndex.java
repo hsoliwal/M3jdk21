@@ -48,14 +48,43 @@ final class SlotIndex {
 
     /** Returns the slot of {@code key}, or -1; the lookup key is the receiver of {@code equals}. */
     static int find(int[] index, int[] hashLane, Object[] keyLane, Object key, int hash) {
+        int at = position(index, hashLane, keyLane, key, hash);
+        return at < 0 ? ABSENT : index[at] - 1;
+    }
+
+    /** Returns the index lane position that holds the slot of {@code key}, or -1; an empty index lane holds nothing. */
+    static int position(int[] index, int[] hashLane, Object[] keyLane, Object key, int hash) {
         int mask = index.length - 1;
-        for (int at = mix(hash) & mask; index[at] != 0; at = at + 1 & mask) {
+        for (int at = mix(hash) & mask; mask >= 0 && index[at] != 0; at = at + 1 & mask) {
             int slot = index[at] - 1;
             if (hashLane[slot] == hash && (key == keyLane[slot] || key != null && key.equals(keyLane[slot]))) {
-                return slot;
+                return at;
             }
         }
         return ABSENT;
+    }
+
+    /** Returns the index lane position that holds {@code slot}; the slot must be indexed. */
+    static int positionOf(int[] index, int[] hashLane, int slot) {
+        int mask = index.length - 1;
+        int at = mix(hashLane[slot]) & mask;
+        while (index[at] != slot + 1) {
+            at = at + 1 & mask;
+        }
+        return at;
+    }
+
+    /** Empties position {@code at} and moves later entries of the same run back, so no probe meets a dead entry. */
+    static void unindex(int[] index, int[] hashLane, int at) {
+        int mask = index.length - 1;
+        for (int probe = at + 1 & mask; index[probe] != 0; probe = probe + 1 & mask) {
+            int home = mix(hashLane[index[probe] - 1]) & mask;
+            if ((probe - home & mask) >= (probe - at & mask)) {
+                index[at] = index[probe];
+                at = probe;
+            }
+        }
+        index[at] = 0;
     }
 
     /** Stores {@code slot} at the first empty position of the probe run of its hash. */

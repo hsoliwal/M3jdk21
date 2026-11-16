@@ -39,8 +39,6 @@ public final class LruMap<K, V> {
     private static final int MIN_SLOTS = 4;
     private static final int MAX_SLOTS = 1 << 29;
     private static final int NONE = -1;
-    private static final int GOLDEN_RATIO_32 = 0x9E3779B9;
-    private static final int FOLD_SHIFT = 16;
 
     /** Storage lane {@code keyLane}: the key of each slot. */
     private Object[] keyLane = new Object[0];
@@ -112,7 +110,7 @@ public final class LruMap<K, V> {
      * @param updateToMRU whether a found mapping becomes the most recently used one
      */
     public V get(Object key, boolean updateToMRU) {
-        int at = find(key, hash(key));
+        int at = find(key, SlotIndex.hash(key));
         if (at < 0) {
             return null;
         }
@@ -130,7 +128,7 @@ public final class LruMap<K, V> {
      * @return the value the key had, or null
      */
     public V put(K key, V value) {
-        int hash = hash(key);
+        int hash = SlotIndex.hash(key);
         int at = find(key, hash);
         if (at < 0) {
             insert(key, value, hash);
@@ -149,13 +147,13 @@ public final class LruMap<K, V> {
      * @return the value the key had, or null
      */
     public V remove(Object key) {
-        int at = find(key, hash(key));
+        int at = find(key, SlotIndex.hash(key));
         return at < 0 ? null : erase(at);
     }
 
     /** Returns whether {@code key} is mapped; the recency order does not change. */
     public boolean containsKey(Object key) {
-        return find(key, hash(key)) >= 0;
+        return find(key, SlotIndex.hash(key)) >= 0;
     }
 
     /**
@@ -206,16 +204,6 @@ public final class LruMap<K, V> {
         modCount++;
     }
 
-    private static int hash(Object key) {
-        return key == null ? 0 : key.hashCode();
-    }
-
-    /** Spreads a hash over the hash lane: one multiplication, then the high half folded onto the low half. */
-    private static int mix(int hash) {
-        int spread = hash * GOLDEN_RATIO_32;
-        return spread ^ spread >>> FOLD_SHIFT;
-    }
-
     @SuppressWarnings("unchecked")
     private K key(int slot) {
         return (K) keyLane[slot];
@@ -233,50 +221,17 @@ public final class LruMap<K, V> {
         return slot;
     }
 
-    /** The hash lane position of {@code key}, or -1; the lookup key is the receiver of {@code equals}. */
+    /** The hash lane position of {@code key}, or -1. */
     private int find(Object key, int hash) {
-        int[] index = hashIndexLane;
-        int mask = index.length - 1;
-        for (int at = mix(hash) & mask; mask >= 0 && index[at] != 0; at = at + 1 & mask) {
-            int slot = index[at] - 1;
-            if (hashLane[slot] == hash && (key == keyLane[slot] || key != null && key.equals(keyLane[slot]))) {
-                return at;
-            }
-        }
-        return NONE;
+        return SlotIndex.position(hashIndexLane, hashLane, keyLane, key, hash);
     }
 
-    /** The hash lane position that holds {@code slot}. */
     private int positionOf(int slot) {
-        int mask = hashIndexLane.length - 1;
-        int at = mix(hashLane[slot]) & mask;
-        while (hashIndexLane[at] != slot + 1) {
-            at = at + 1 & mask;
-        }
-        return at;
+        return SlotIndex.positionOf(hashIndexLane, hashLane, slot);
     }
 
-    private void place(int[] index, int slot) {
-        int mask = index.length - 1;
-        int at = mix(hashLane[slot]) & mask;
-        while (index[at] != 0) {
-            at = at + 1 & mask;
-        }
-        index[at] = slot + 1;
-    }
-
-    /** Empties position {@code at} and moves later entries of the same run back, so no probe meets a dead entry. */
     private void unindex(int at) {
-        int[] index = hashIndexLane;
-        int mask = index.length - 1;
-        for (int probe = at + 1 & mask; index[probe] != 0; probe = probe + 1 & mask) {
-            int home = mix(hashLane[index[probe] - 1]) & mask;
-            if ((probe - home & mask) >= (probe - at & mask)) {
-                index[at] = index[probe];
-                at = probe;
-            }
-        }
-        index[at] = 0;
+        SlotIndex.unindex(hashIndexLane, hashLane, at);
     }
 
     private void append(int slot) {
@@ -319,7 +274,7 @@ public final class LruMap<K, V> {
         keyLane[slot] = key;
         valueLane[slot] = value;
         hashLane[slot] = hash;
-        place(hashIndexLane, slot);
+        SlotIndex.place(hashIndexLane, hashLane, slot);
         append(slot);
         modCount++;
     }
@@ -377,9 +332,9 @@ public final class LruMap<K, V> {
 
     /** A hash lane for {@code slots} slots, at most half full, holding every linked slot. */
     private int[] indexOf(int slots) {
-        int[] index = new int[Integer.highestOneBit(Math.max(2 * slots, 2 * MIN_SLOTS) - 1) << 1];
+        int[] index = new int[SlotIndex.length(slots)];
         for (int slot = head; slot >= 0; slot = nextLane[slot]) {
-            place(index, slot);
+            SlotIndex.place(index, hashLane, slot);
         }
         return index;
     }
