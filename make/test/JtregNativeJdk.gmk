@@ -70,6 +70,7 @@ ifeq ($(call isTargetOs, windows), true)
   BUILD_JDK_JTREG_EXECUTABLES_LIBS_exeNullCallerTest := $(LIBCXX) jvm.lib
   BUILD_JDK_JTREG_EXECUTABLES_LIBS_exerevokeall := advapi32.lib
   BUILD_JDK_JTREG_EXECUTABLES_CFLAGS_exeNullCallerTest := /EHsc
+  BUILD_JDK_JTREG_LIBRARIES_CFLAGS_libM3TQTest += /EHsc
   BUILD_JDK_JTREG_LIBRARIES_LIBS_libTracePinnedThreads := jvm.lib
   BUILD_JDK_JTREG_LIBRARIES_LIBS_libNewDirectByteBuffer := $(WIN_LIB_JAVA)
   BUILD_JDK_JTREG_LIBRARIES_LIBS_libGetXSpace := $(WIN_LIB_JAVA)
