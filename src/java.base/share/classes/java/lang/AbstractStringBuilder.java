@@ -1964,6 +1964,13 @@ abstract sealed class AbstractStringBuilder implements Appendable, CharSequence
     private final void appendChars(String s, int off, int end) {
         M3String storage = s.m3();
         if (storage != null && isLatin1() && !s.isLatin1()) {
+            // Prepared facts of the whole value prove every range Latin-1, without a slice.
+            M3StringFacts whole = storage.factsIfPrepared();
+            if (whole != null && whole.latin1) {
+                storage.getBytes(this.value, off, this.count, LATIN1, end - off);
+                count += end - off;
+                return;
+            }
             M3String range = storage.slice(off, end);
             M3StringFacts prepared = range.factsIfPrepared();
             if (prepared != null && prepared.latin1) {
@@ -2006,7 +2013,12 @@ abstract sealed class AbstractStringBuilder implements Appendable, CharSequence
                 }
             }
         } else if (s.isLatin1()) {
-            StringUTF16.putCharsSB(this.value, this.count, s, off, end);
+            if (storage != null) {
+                // One bulk inflate from the owner in place of a charAt dispatch per unit.
+                s.getBytes(this.value, off, this.count, UTF16, end - off);
+            } else {
+                StringUTF16.putCharsSB(this.value, this.count, s, off, end);
+            }
         } else if (storage != null) {
             s.getBytes(this.value, off, this.count, UTF16, end - off);
         } else { // both UTF16
