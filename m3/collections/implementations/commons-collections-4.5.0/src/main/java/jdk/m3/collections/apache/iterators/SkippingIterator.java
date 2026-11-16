@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -26,7 +26,7 @@ import java.util.Iterator;
  * before that position.
  * </p>
  *
- * @param <E> the type of elements returned by this iterator.
+ * @param <E> The type of elements returned by this iterator.
  * @since 4.1
  */
 public class SkippingIterator<E> extends AbstractIteratorDecorator<E> {
@@ -44,8 +44,8 @@ public class SkippingIterator<E> extends AbstractIteratorDecorator<E> {
      * The iterator is immediately advanced until it reaches the position at {@code offset},
      * incurring O(n) time.
      *
-     * @param iterator  the iterator to be decorated
-     * @param offset  the index of the first element of the decorated iterator to return
+     * @param iterator  The iterator to be decorated
+     * @param offset  The index of the first element of the decorated iterator to return
      * @throws NullPointerException if iterator is null
      * @throws IllegalArgumentException if offset is negative
      */

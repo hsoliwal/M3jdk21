@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -24,7 +24,7 @@ import jdk.m3.collections.apache.FunctorException;
 /**
  * Closure implementation that always throws an exception.
  *
- * @param <T> the type of the input to the operation.
+ * @param <T> The type of the input to the operation.
  * @since 3.0
  */
 public final class ExceptionClosure<T> implements Closure<T>, Serializable {
@@ -39,8 +39,8 @@ public final class ExceptionClosure<T> implements Closure<T>, Serializable {
     /**
      * Factory returning the singleton instance.
      *
-     * @param <T> the type of the input to the operation.
-     * @return the singleton instance
+     * @param <T> The type of the input to the operation.
+     * @return The singleton instance
      * @since 3.1
      */
     public static <T> Closure<T> exceptionClosure() {
@@ -56,7 +56,7 @@ public final class ExceptionClosure<T> implements Closure<T>, Serializable {
     /**
      * Always throw an exception.
      *
-     * @param input  the input object
+     * @param input  The input object
      * @throws FunctorException always
      */
     @Override
@@ -67,7 +67,7 @@ public final class ExceptionClosure<T> implements Closure<T>, Serializable {
     /**
      * Returns the singleton instance.
      *
-     * @return the singleton instance.
+     * @return The singleton instance.
      */
     private Object readResolve() {
         return INSTANCE;

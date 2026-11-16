@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -37,15 +37,16 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
+import jdk.m3.collections.apache.AbstractObjectTest;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.DynamicTest;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestFactory;
 
 /**
- * Tests for {@link jdk.m3.collections.apache.keyvalue.MultiKey}.
+ * Tests for {@link MultiKey}.
  */
-public class MultiKeyTest {
+class MultiKeyTest {
 
     static class DerivedMultiKey<T> extends MultiKey<T> {
 
@@ -100,7 +101,7 @@ public class MultiKeyTest {
     Integer FIVE = Integer.valueOf(5);
 
     @Test
-    public void testConstructors() throws Exception {
+    void testConstructors() throws Exception {
         MultiKey<Integer> mk;
         mk = new MultiKey<>(ONE, TWO);
         assertArrayEquals(new Object[]{ONE, TWO}, mk.getKeys());
@@ -119,7 +120,7 @@ public class MultiKeyTest {
     }
 
     @Test
-    public void testConstructorsByArray() throws Exception {
+    void testConstructorsByArray() throws Exception {
         MultiKey<Integer> mk;
         Integer[] keys = { THREE, FOUR, ONE, TWO };
         mk = new MultiKey<>(keys);
@@ -163,7 +164,7 @@ public class MultiKeyTest {
     }
 
     @Test
-    public void testEquals() {
+    void testEquals() {
         final MultiKey<Integer> mk1 = new MultiKey<>(ONE, TWO);
         final MultiKey<Integer> mk2 = new MultiKey<>(ONE, TWO);
         final MultiKey<Object> mk3 = new MultiKey<>(ONE, "TWO");
@@ -176,7 +177,7 @@ public class MultiKeyTest {
     }
 
     @Test
-    public void testEqualsAfterSerialization() throws IOException, ClassNotFoundException {
+    void testEqualsAfterSerialization() throws IOException, ClassNotFoundException {
         SystemHashCodeSimulatingKey sysKey = new SystemHashCodeSimulatingKey("test");
         final MultiKey<?> mk = new MultiKey<Object>(ONE, sysKey);
         final Map<MultiKey<?>, Integer> map = new HashMap<>();
@@ -203,21 +204,10 @@ public class MultiKeyTest {
     }
 
     @Test
-    public void testEqualsAfterSerializationOfDerivedClass() throws IOException, ClassNotFoundException {
+    void testEqualsAfterSerializationOfDerivedClass() throws IOException, ClassNotFoundException {
         final DerivedMultiKey<?> mk = new DerivedMultiKey<>("A", "B");
-
-        // serialize
-        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        final ObjectOutputStream out = new ObjectOutputStream(baos);
-        out.writeObject(mk);
-        out.close();
-
         // deserialize
-        final ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
-        final ObjectInputStream in = new ObjectInputStream(bais);
-        final DerivedMultiKey<?> mk2 = (DerivedMultiKey<?>) in.readObject();
-        in.close();
-
+        final DerivedMultiKey<?> mk2 = AbstractObjectTest.serializeDeserialize(mk);
         assertEquals(mk.hashCode(), mk2.hashCode());
     }
 
@@ -241,7 +231,7 @@ public class MultiKeyTest {
     }
 
     @Test
-    public void testGetKeysArrayConstructorCloned() {
+    void testGetKeysArrayConstructorCloned() {
         final Integer[] keys = { ONE, TWO };
         final MultiKey<Integer> mk = new MultiKey<>(keys, true);
         final Object[] array = mk.getKeys();
@@ -253,7 +243,7 @@ public class MultiKeyTest {
     }
 
     @Test
-    public void testGetKeysArrayConstructorNonCloned() {
+    void testGetKeysArrayConstructorNonCloned() {
         final Integer[] keys = { ONE, TWO };
         final MultiKey<Integer> mk = new MultiKey<>(keys, false);
         final Object[] array = mk.getKeys();
@@ -265,7 +255,7 @@ public class MultiKeyTest {
     }
 
     @Test
-    public void testGetKeysSimpleConstructor() {
+    void testGetKeysSimpleConstructor() {
         final MultiKey<Integer> mk = new MultiKey<>(ONE, TWO);
         final Object[] array = mk.getKeys();
         assertSame(ONE, array[0]);
@@ -274,7 +264,7 @@ public class MultiKeyTest {
     }
 
     @Test
-    public void testHashCode() {
+    void testHashCode() {
         final MultiKey<Integer> mk1 = new MultiKey<>(ONE, TWO);
         final MultiKey<Integer> mk2 = new MultiKey<>(ONE, TWO);
         final MultiKey<Object> mk3 = new MultiKey<>(ONE, "TWO");
@@ -288,7 +278,7 @@ public class MultiKeyTest {
     }
 
     @Test
-    public void testSize() {
+    void testSize() {
         assertEquals(2, new MultiKey<>(ONE, TWO).size());
         assertEquals(2, new MultiKey<>(null, null).size());
         assertEquals(3, new MultiKey<>(ONE, TWO, THREE).size());
@@ -305,7 +295,7 @@ public class MultiKeyTest {
     }
 
     @Test
-    public void testTwoArgCtor() {
+    void testTwoArgCtor() {
         final MultiKeyTest key1 = new MultiKeyTest();
         final MultiKeyTest key2 = new MultiKeyTest();
         final MultiKeyTest[] keys = new MultiKey<>(key1, key2).getKeys();

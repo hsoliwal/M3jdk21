@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -23,7 +23,10 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -34,8 +37,8 @@ import org.junit.jupiter.api.Test;
 /**
  * JUnit tests.
  *
- * @param <K> the key type.
- * @param <V> the value type.
+ * @param <K> The key type.
+ * @param <V> The value type.
  */
 public class PassiveExpiringMapTest<K, V> extends AbstractMapTest<PassiveExpiringMap<K, V>, K, V> {
 
@@ -59,7 +62,7 @@ public class PassiveExpiringMapTest<K, V> extends AbstractMapTest<PassiveExpirin
         }
     }
 
-//    public void testCreate() throws Exception {
+//    void testCreate() throws Exception {
 //        writeExternalFormToDisk((java.io.Serializable) makeObject(),
 //                "src/test/resources/data/test/PassiveExpiringMap.emptyCollection.version4.obj");
 //
@@ -70,6 +73,17 @@ public class PassiveExpiringMapTest<K, V> extends AbstractMapTest<PassiveExpirin
     @Override
     public String getCompatibilityVersion() {
         return "4";
+    }
+
+    @SuppressWarnings("unchecked")
+    private Map<Object, Long> getExpirationMap(final PassiveExpiringMap<?, ?> map) {
+        try {
+            final java.lang.reflect.Field field = PassiveExpiringMap.class.getDeclaredField("expirationMap");
+            field.setAccessible(true);
+            return (Map<Object, Long>) field.get(map);
+        } catch (final Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
@@ -106,7 +120,105 @@ public class PassiveExpiringMapTest<K, V> extends AbstractMapTest<PassiveExpirin
     }
 
     @Test
-    public void testConstructors() {
+    void testCollectionsSynchronizedMapExpiration() throws InterruptedException {
+        final Map<String, String> map = Collections.synchronizedMap(new PassiveExpiringMap<>(50L));
+        map.put("a", "b");
+        map.put("c", "d");
+        assertEquals(2, map.size());
+        // Cache the views in SynchronizedMap before they expire
+        final Collection<Map.Entry<String, String>> entrySet = map.entrySet();
+        final Collection<String> keySet = map.keySet();
+        final Collection<String> values = map.values();
+        Thread.sleep(100L);
+        // entrySet view access triggers expiration
+        synchronized (map) {
+            assertTrue(entrySet.isEmpty());
+            assertTrue(keySet.isEmpty());
+            assertTrue(values.isEmpty());
+        }
+        map.put("a", "b");
+        map.put("c", "d");
+        assertEquals(2, map.size());
+        Thread.sleep(100L);
+        // keySet view access triggers expiration
+        synchronized (map) {
+            assertTrue(entrySet.isEmpty());
+            assertTrue(keySet.isEmpty());
+            assertTrue(values.isEmpty());
+        }
+        map.put("a", "b");
+        map.put("c", "d");
+        assertEquals(2, map.size());
+        Thread.sleep(100L);
+        // values view access triggers expiration
+        synchronized (map) {
+            assertTrue(entrySet.isEmpty());
+            assertTrue(keySet.isEmpty());
+            assertTrue(values.isEmpty());
+        }
+    }
+
+    @Test
+    void testCollectionViewIteratorExpiration() throws InterruptedException {
+        final PassiveExpiringMap<String, String> map = new PassiveExpiringMap<>(50L);
+        map.put("a", "b");
+
+        final Collection<Map.Entry<String, String>> entrySet = map.entrySet();
+        final Collection<String> keySet = map.keySet();
+        final Collection<String> values = map.values();
+
+        Thread.sleep(100L);
+
+        // The iterators should trigger expiration and not return any elements
+        assertFalse(entrySet.iterator().hasNext());
+        assertFalse(keySet.iterator().hasNext());
+        assertFalse(values.iterator().hasNext());
+    }
+
+    @Test
+    void testCollectionViewNullInputs() {
+        final PassiveExpiringMap<String, String> map = new PassiveExpiringMap<>(10000L);
+        map.put("a", "b");
+        // entrySet
+        assertThrows(NullPointerException.class, () -> map.entrySet().removeAll(null));
+        assertThrows(NullPointerException.class, () -> map.entrySet().retainAll(null));
+        // keySet
+        assertThrows(NullPointerException.class, () -> map.keySet().removeAll(null));
+        assertThrows(NullPointerException.class, () -> map.keySet().retainAll(null));
+        // values
+        assertThrows(NullPointerException.class, () -> map.values().removeAll(null));
+        assertThrows(NullPointerException.class, () -> map.values().retainAll(null));
+    }
+
+    @Test
+    void testCollectionViewRemoval() {
+        final PassiveExpiringMap<String, String> map = new PassiveExpiringMap<>(10000L);
+        map.put("a", "b");
+        map.put("c", "d");
+        map.put("e", "f");
+        // Remove via entrySet iterator
+        final Iterator<Map.Entry<String, String>> entryIter = map.entrySet().iterator();
+        assertTrue(entryIter.hasNext());
+        final Map.Entry<String, String> entry = entryIter.next();
+        final String removedKey = entry.getKey();
+        entryIter.remove();
+        assertFalse(map.containsKey(removedKey));
+        // Remove via keySet iterator
+        final Iterator<String> keyIter = map.keySet().iterator();
+        assertTrue(keyIter.hasNext());
+        final String key = keyIter.next();
+        keyIter.remove();
+        assertFalse(map.containsKey(key));
+        // Remove via values iterator
+        final Iterator<String> valIter = map.values().iterator();
+        assertTrue(valIter.hasNext());
+        final String val = valIter.next();
+        valIter.remove();
+        assertFalse(map.containsValue(val));
+    }
+
+    @Test
+    void testConstructors() {
         assertThrows(NullPointerException.class, () -> {
             final Map<String, String> map = null;
             new PassiveExpiringMap<>(map);
@@ -122,7 +234,7 @@ public class PassiveExpiringMapTest<K, V> extends AbstractMapTest<PassiveExpirin
     }
 
     @Test
-    public void testContainsKey() {
+    void testContainsKey() {
         final Map<Integer, String> m = makeTestMap();
         assertFalse(m.containsKey(Integer.valueOf(1)));
         assertFalse(m.containsKey(Integer.valueOf(3)));
@@ -133,7 +245,7 @@ public class PassiveExpiringMapTest<K, V> extends AbstractMapTest<PassiveExpirin
     }
 
     @Test
-    public void testContainsValue() {
+    void testContainsValue() {
         final Map<Integer, String> m = makeTestMap();
         assertFalse(m.containsValue("one"));
         assertFalse(m.containsValue("three"));
@@ -144,7 +256,7 @@ public class PassiveExpiringMapTest<K, V> extends AbstractMapTest<PassiveExpirin
     }
 
     @Test
-    public void testDecoratedMap() {
+    void testDecoratedMap() {
         // entries shouldn't expire
         final Map<Integer, String> m = makeDecoratedTestMap();
         assertEquals(6, m.size());
@@ -174,13 +286,13 @@ public class PassiveExpiringMapTest<K, V> extends AbstractMapTest<PassiveExpirin
     }
 
     @Test
-    public void testEntrySet() {
+    void testEntrySet() {
         final Map<Integer, String> m = makeTestMap();
         assertEquals(3, m.entrySet().size());
     }
 
     @Test
-    public void testExpiration() throws InterruptedException {
+    void testExpiration() throws InterruptedException {
         validateExpiration(new PassiveExpiringMap<>(500), 500);
         validateExpiration(new PassiveExpiringMap<>(1000), 1000);
         validateExpiration(new PassiveExpiringMap<>(new PassiveExpiringMap.ConstantTimeToLiveExpirationPolicy<>(500)), 500);
@@ -188,7 +300,79 @@ public class PassiveExpiringMapTest<K, V> extends AbstractMapTest<PassiveExpirin
     }
 
     @Test
-    public void testGet() {
+    void testExpirationMapCleanup() {
+        final PassiveExpiringMap<String, String> map = new PassiveExpiringMap<>(10000L);
+        final Map<Object, Long> expirationMap = getExpirationMap(map);
+
+        // Verify initial size
+        assertEquals(0, expirationMap.size());
+
+        // Verify cleanup on put and remove
+        map.put("a", "b");
+        map.put("c", "d");
+        assertEquals(2, expirationMap.size());
+        map.remove("a");
+        assertEquals(1, expirationMap.size());
+        assertFalse(expirationMap.containsKey("a"));
+
+        // Verify cleanup on clear
+        map.put("a", "b");
+        assertEquals(2, expirationMap.size());
+        map.clear();
+        assertEquals(0, expirationMap.size());
+
+        // Verify cleanup on entrySet remove
+        map.put("a", "b");
+        map.put("c", "d");
+        assertEquals(2, expirationMap.size());
+        map.entrySet().remove(map.entrySet().iterator().next());
+        assertEquals(1, expirationMap.size());
+
+        // Verify cleanup on keySet remove
+        map.put("e", "f");
+        assertEquals(2, expirationMap.size());
+        map.keySet().remove("e");
+        assertEquals(1, expirationMap.size());
+        assertFalse(expirationMap.containsKey("e"));
+
+        // Verify cleanup on values remove
+        map.put("g", "h");
+        assertEquals(2, expirationMap.size());
+        map.values().remove("h");
+        assertEquals(1, expirationMap.size());
+        assertFalse(expirationMap.containsKey("g"));
+
+        // Verify cleanup on removeAll
+        map.put("i", "j");
+        map.put("k", "l");
+        assertEquals(3, expirationMap.size());
+        map.keySet().removeAll(Collections.singleton("i"));
+        assertEquals(2, expirationMap.size());
+        assertFalse(expirationMap.containsKey("i"));
+
+        // Verify cleanup on retainAll
+        map.keySet().retainAll(Collections.singleton("k"));
+        assertEquals(1, expirationMap.size());
+        assertTrue(expirationMap.containsKey("k"));
+
+        // Verify cleanup on removeIf
+        map.keySet().removeIf(k -> k.equals("k"));
+        assertEquals(0, expirationMap.size());
+
+        // Verify cleanup on iterator remove
+        map.put("a", "b");
+        map.put("c", "d");
+        assertEquals(2, expirationMap.size());
+        final Iterator<String> iterator = map.keySet().iterator();
+        assertTrue(iterator.hasNext());
+        final String removedKey = iterator.next();
+        iterator.remove();
+        assertEquals(1, expirationMap.size());
+        assertFalse(expirationMap.containsKey(removedKey));
+    }
+
+    @Test
+    void testGet() {
         final Map<Integer, String> m = makeTestMap();
         assertNull(m.get(Integer.valueOf(1)));
         assertEquals("two", m.get(Integer.valueOf(2)));
@@ -199,7 +383,7 @@ public class PassiveExpiringMapTest<K, V> extends AbstractMapTest<PassiveExpirin
     }
 
     @Test
-    public void testIsEmpty() {
+    void testIsEmpty() {
         Map<Integer, String> m = makeTestMap();
         assertFalse(m.isEmpty());
 
@@ -212,13 +396,13 @@ public class PassiveExpiringMapTest<K, V> extends AbstractMapTest<PassiveExpirin
     }
 
     @Test
-    public void testKeySet() {
+    void testKeySet() {
         final Map<Integer, String> m = makeTestMap();
         assertEquals(3, m.size());
     }
 
     @Test
-    public void testPut() {
+    void testPut() {
         final Map<Integer, String> m = makeTestMap();
         assertNull(m.put(Integer.valueOf(1), "ONE"));
         assertEquals("two", m.put(Integer.valueOf(2), "TWO"));
@@ -229,19 +413,19 @@ public class PassiveExpiringMapTest<K, V> extends AbstractMapTest<PassiveExpirin
     }
 
     @Test
-    public void testSize() {
+    void testSize() {
         final Map<Integer, String> m = makeTestMap();
         assertEquals(3, m.size());
     }
 
     @Test
-    public void testValues() {
+    void testValues() {
         final Map<Integer, String> m = makeTestMap();
         assertEquals(3, m.size());
     }
 
     @Test
-    public void testZeroTimeToLive() {
+    void testZeroTimeToLive() {
         // item should not be available
         final PassiveExpiringMap<String, String> m = new PassiveExpiringMap<>(0L);
         m.put("a", "b");

@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -26,8 +26,8 @@ import jdk.m3.collections.apache.Transformer;
  * Transformer implementation that will call one of two closures based on whether a predicate evaluates
  * as true or false.
  *
- * @param <T> the type of the input to the function.
- * @param <R> the type of the result of the function.
+ * @param <T> The type of the input to the function.
+ * @param <R> The type of the result of the function.
  * @since 4.1
  */
 public class IfTransformer<T, R> implements Transformer<T, R>, Serializable {
@@ -43,7 +43,7 @@ public class IfTransformer<T, R> implements Transformer<T, R>, Serializable {
      * @param predicate  predicate to switch on
      * @param trueTransformer  transformer used if true
      * @param falseTransformer  transformer used if false
-     * @return the {@code if} transformer
+     * @return The {@code if} transformer
      * @throws NullPointerException if either argument is null
      */
     public static <I, O> Transformer<I, O> ifTransformer(final Predicate<? super I> predicate,
@@ -53,16 +53,18 @@ public class IfTransformer<T, R> implements Transformer<T, R>, Serializable {
                 Objects.requireNonNull(trueTransformer, "trueTransformer"),
                 Objects.requireNonNull(falseTransformer, "falseTransformer"));
     }
+
     /**
      * Factory method that performs validation.
      * <p>
      * This factory creates a transformer that just returns the input object when
      * the predicate is false.
+     * </p>
      *
      * @param <T>  input and output type for the transformer
      * @param predicate  predicate to switch on
      * @param trueTransformer  transformer used if true
-     * @return the {@code if} transformer
+     * @return The {@code if} transformer
      * @throws NullPointerException if either argument is null
      */
     public static <T> Transformer<T, T> ifTransformer(
@@ -71,6 +73,7 @@ public class IfTransformer<T, R> implements Transformer<T, R>, Serializable {
         return new IfTransformer<>(Objects.requireNonNull(predicate, "predicate"),
                 Objects.requireNonNull(trueTransformer, "trueTransformer"), NOPTransformer.<T>nopTransformer());
     }
+
     /** The test */
     private final Predicate<? super T> iPredicate;
 
@@ -100,7 +103,7 @@ public class IfTransformer<T, R> implements Transformer<T, R>, Serializable {
     /**
      * Gets the transformer used when false.
      *
-     * @return the transformer
+     * @return The transformer
      */
     public Transformer<? super T, ? extends R> getFalseTransformer() {
         return iFalseTransformer;
@@ -109,7 +112,7 @@ public class IfTransformer<T, R> implements Transformer<T, R>, Serializable {
     /**
      * Gets the predicate.
      *
-     * @return the predicate
+     * @return The predicate
      */
     public Predicate<? super T> getPredicate() {
         return iPredicate;
@@ -118,7 +121,7 @@ public class IfTransformer<T, R> implements Transformer<T, R>, Serializable {
     /**
      * Gets the transformer used when true.
      *
-     * @return the transformer
+     * @return The transformer
      */
     public Transformer<? super T, ? extends R> getTrueTransformer() {
         return iTrueTransformer;
@@ -127,8 +130,8 @@ public class IfTransformer<T, R> implements Transformer<T, R>, Serializable {
     /**
      * Transforms the input using the true or false transformer based to the result of the predicate.
      *
-     * @param input  the input object to transform
-     * @return the transformed result
+     * @param input  The input object to transform
+     * @return The transformed result
      */
     @Override
     public R transform(final T input) {

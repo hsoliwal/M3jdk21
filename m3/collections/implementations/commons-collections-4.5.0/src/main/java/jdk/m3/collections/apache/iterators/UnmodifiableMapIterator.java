@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -27,8 +27,8 @@ import jdk.m3.collections.apache.Unmodifiable;
  * Attempts to modify it will result in an UnsupportedOperationException.
  * </p>
  *
- * @param <K> the type of keys
- * @param <V> the type of mapped values
+ * @param <K> The type of keys.
+ * @param <V> The type of mapped values.
  * @since 3.0
  */
 public final class UnmodifiableMapIterator<K, V> implements MapIterator<K, V>, Unmodifiable {
@@ -36,11 +36,11 @@ public final class UnmodifiableMapIterator<K, V> implements MapIterator<K, V>, U
     /**
      * Decorates the specified iterator such that it cannot be modified.
      *
-     * @param <K>  the key type
-     * @param <V>  the value type
-     * @param iterator  the iterator to decorate
-     * @return a new unmodifiable map iterator
-     * @throws NullPointerException if the iterator is null
+     * @param <K>  The key type.
+     * @param <V>  The value type.
+     * @param iterator  The iterator to decorate.
+     * @return A new unmodifiable map iterator.
+     * @throws NullPointerException If the iterator is null.
      */
     public static <K, V> MapIterator<K, V> unmodifiableMapIterator(
             final MapIterator<? extends K, ? extends V> iterator) {
@@ -59,7 +59,7 @@ public final class UnmodifiableMapIterator<K, V> implements MapIterator<K, V>, U
     /**
      * Constructs a new instance.
      *
-     * @param iterator  the iterator to decorate
+     * @param iterator  The iterator to decorate
      */
     private UnmodifiableMapIterator(final MapIterator<? extends K, ? extends V> iterator) {
         this.iterator = iterator;
@@ -85,11 +85,22 @@ public final class UnmodifiableMapIterator<K, V> implements MapIterator<K, V>, U
         return iterator.next();
     }
 
+    /**
+     * Always throws {@link UnsupportedOperationException}.
+     *
+     * @throws UnsupportedOperationException Always thrown.
+     */
     @Override
     public void remove() {
         throw new UnsupportedOperationException("remove() is not supported");
     }
 
+    /**
+     * Always throws {@link UnsupportedOperationException}.
+     *
+     * @param value Ignored.
+     * @throws UnsupportedOperationException Always thrown.
+     */
     @Override
     public V setValue(final V value) {
         throw new UnsupportedOperationException("setValue() is not supported");

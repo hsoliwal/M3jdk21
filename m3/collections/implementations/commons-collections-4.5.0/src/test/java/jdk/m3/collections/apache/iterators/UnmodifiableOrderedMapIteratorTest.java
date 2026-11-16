@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -34,8 +34,8 @@ import org.junit.jupiter.api.Test;
 /**
  * Tests the UnmodifiableOrderedMapIterator.
  *
- * @param <K> the type of the keys in the maps tested.
- * @param <V> the type of the values in the maps tested.
+ * @param <K> The type of the keys in the maps tested.
+ * @param <V> The type of the values in the maps tested.
  */
 public class UnmodifiableOrderedMapIteratorTest<K, V> extends AbstractOrderedMapIteratorTest<K, V> {
 
@@ -81,7 +81,7 @@ public class UnmodifiableOrderedMapIteratorTest<K, V> extends AbstractOrderedMap
     }
 
     @Test
-    public void testDecorateFactory() {
+    void testDecorateFactory() {
         OrderedMapIterator<K, V> it = makeObject();
         assertSame(it, UnmodifiableOrderedMapIterator.unmodifiableOrderedMapIterator(it));
 
@@ -92,7 +92,7 @@ public class UnmodifiableOrderedMapIteratorTest<K, V> extends AbstractOrderedMap
     }
 
     @Test
-    public void testOrderedMapIterator() {
+    void testOrderedMapIterator() {
         assertTrue(makeEmptyIterator() instanceof Unmodifiable);
     }
 

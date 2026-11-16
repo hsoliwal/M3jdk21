@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -53,8 +53,8 @@ import jdk.m3.collections.apache.set.UnmodifiableSet;
  * This class is Serializable from Commons Collections 3.1.
  * </p>
  *
- * @param <K> the type of the keys in this map
- * @param <V> the type of the values in this map
+ * @param <K> The type of the keys in this map
+ * @param <V> The type of the values in this map
  * @since 3.0
  */
 public class FixedSizeMap<K, V>
@@ -69,8 +69,8 @@ public class FixedSizeMap<K, V>
      *
      * @param <K>  the key type
      * @param <V>  the value type
-     * @param map  the map to decorate, must not be null
-     * @return a new fixed size map
+     * @param map  The map to decorate, must not be null
+     * @return A new fixed size map
      * @throws NullPointerException if map is null
      * @since 4.0
      */
@@ -81,13 +81,18 @@ public class FixedSizeMap<K, V>
     /**
      * Constructor that wraps (not copies).
      *
-     * @param map  the map to decorate, must not be null
+     * @param map  The map to decorate, must not be null
      * @throws NullPointerException if map is null
      */
     protected FixedSizeMap(final Map<K, V> map) {
         super(map);
     }
 
+    /**
+     * Always throws {@link UnsupportedOperationException}.
+     *
+     * @throws UnsupportedOperationException Always thrown.
+     */
     @Override
     public void clear() {
         throw new UnsupportedOperationException("Map is fixed size");
@@ -137,8 +142,8 @@ public class FixedSizeMap<K, V>
     /**
      * Deserializes the map in using a custom routine.
      *
-     * @param in  the input stream
-     * @throws IOException if an error occurs while reading from the stream
+     * @param in  The input stream
+     * @throws IOException Thrown if an error occurs while reading from the stream
      * @throws ClassNotFoundException if an object read from the stream cannot be loaded
      * @since 3.1
      */
@@ -148,6 +153,12 @@ public class FixedSizeMap<K, V>
         map = (Map<K, V>) in.readObject(); // (1)
     }
 
+    /**
+     * Always throws {@link UnsupportedOperationException}.
+     *
+     * @param key Ignored.
+     * @throws UnsupportedOperationException Always thrown.
+     */
     @Override
     public V remove(final Object key) {
         throw new UnsupportedOperationException("Map is fixed size");
@@ -155,14 +166,13 @@ public class FixedSizeMap<K, V>
 
     @Override
     public Collection<V> values() {
-        final Collection<V> coll = map.values();
-        return UnmodifiableCollection.unmodifiableCollection(coll);
+        return UnmodifiableCollection.unmodifiableCollection(map.values());
     }
 
     /**
      * Serializes this object to an ObjectOutputStream.
      *
-     * @param out the target ObjectOutputStream.
+     * @param out The target ObjectOutputStream.
      * @throws IOException thrown when an I/O errors occur writing to the target stream.
      * @since 3.1
      */

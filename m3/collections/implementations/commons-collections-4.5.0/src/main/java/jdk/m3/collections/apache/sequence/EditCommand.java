@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -17,7 +17,7 @@
 package jdk.m3.collections.apache.sequence;
 
 /**
- * Abstract base class for all commands used to transform an objects sequence
+ * Abstract class for all commands used to transform an objects sequence
  * into another one.
  * <p>
  * When two objects sequences are compared through the
@@ -41,7 +41,7 @@ package jdk.m3.collections.apache.sequence;
  * and the {@code equals} method is specialized.
  * </p>
  *
- * @param <T> the type of object to apply this command.
+ * @param <T> The type of object to apply this command.
  * @see SequencesComparator
  * @see EditScript
  * @since 4.0
@@ -67,14 +67,14 @@ public abstract class EditCommand<T> {
      * This method is invoked for each command belonging to
      * an {@link EditScript EditScript}, in order to implement the visitor design pattern
      *
-     * @param visitor  the visitor to be accepted
+     * @param visitor  The visitor to be accepted
      */
     public abstract void accept(CommandVisitor<T> visitor);
 
     /**
      * Gets the object associated with this command.
      *
-     * @return the object on which the command is applied
+     * @return The object on which the command is applied
      */
     protected T getObject() {
         return object;

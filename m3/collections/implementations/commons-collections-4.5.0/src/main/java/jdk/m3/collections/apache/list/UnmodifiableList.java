@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -35,7 +35,7 @@ import jdk.m3.collections.apache.iterators.UnmodifiableListIterator;
  * Attempts to modify it will result in an UnsupportedOperationException.
  * </p>
  *
- * @param <E> the type of the elements in the list.
+ * @param <E> The type of the elements in the list.
  * @since 3.0
  */
 public final class UnmodifiableList<E>
@@ -48,9 +48,9 @@ public final class UnmodifiableList<E>
     /**
      * Factory method to create an unmodifiable list.
      *
-     * @param <E> the type of the elements in the list
-     * @param list  the list to decorate, must not be null
-     * @return a new unmodifiable list
+     * @param <E> The type of the elements in the list
+     * @param list  The list to decorate, must not be null
+     * @return A new unmodifiable list
      * @throws NullPointerException if list is null
      * @since 4.0
      */
@@ -66,7 +66,7 @@ public final class UnmodifiableList<E>
     /**
      * Constructor that wraps (not copies).
      *
-     * @param list  the list to decorate, must not be null
+     * @param list  The list to decorate, must not be null
      * @throws NullPointerException if list is null
      */
     @SuppressWarnings("unchecked") // safe to upcast
@@ -74,26 +74,57 @@ public final class UnmodifiableList<E>
         super((List<E>) list);
     }
 
+    /**
+     * Always throws {@link UnsupportedOperationException}.
+     *
+     * @param index Ignored.
+     * @param object Ignored.
+     * @throws UnsupportedOperationException Always thrown.
+     */
     @Override
     public void add(final int index, final E object) {
         throw new UnsupportedOperationException();
     }
 
+    /**
+     * Always throws {@link UnsupportedOperationException}.
+     *
+     * @param object Ignored.
+     * @throws UnsupportedOperationException Always thrown.
+     */
     @Override
     public boolean add(final Object object) {
         throw new UnsupportedOperationException();
     }
 
+    /**
+     * Always throws {@link UnsupportedOperationException}.
+     *
+     * @param coll Ignored.
+     * @throws UnsupportedOperationException Always thrown.
+     */
     @Override
     public boolean addAll(final Collection<? extends E> coll) {
         throw new UnsupportedOperationException();
     }
 
+    /**
+     * Always throws {@link UnsupportedOperationException}.
+     *
+     * @param index Ignored.
+     * @param coll Ignored.
+     * @throws UnsupportedOperationException Always thrown.
+     */
     @Override
     public boolean addAll(final int index, final Collection<? extends E> coll) {
         throw new UnsupportedOperationException();
     }
 
+    /**
+     * Always throws {@link UnsupportedOperationException}.
+     *
+     * @throws UnsupportedOperationException Always thrown.
+     */
     @Override
     public void clear() {
         throw new UnsupportedOperationException();
@@ -114,22 +145,44 @@ public final class UnmodifiableList<E>
         return UnmodifiableListIterator.unmodifiableListIterator(decorated().listIterator(index));
     }
 
+    /**
+     * Always throws {@link UnsupportedOperationException}.
+     *
+     * @param index Ignored.
+     * @throws UnsupportedOperationException Always thrown.
+     */
     @Override
     public E remove(final int index) {
         throw new UnsupportedOperationException();
     }
 
+    /**
+     * Always throws {@link UnsupportedOperationException}.
+     *
+     * @param object Ignored.
+     * @throws UnsupportedOperationException Always thrown.
+     */
     @Override
     public boolean remove(final Object object) {
         throw new UnsupportedOperationException();
     }
 
+    /**
+     * Always throws {@link UnsupportedOperationException}.
+     *
+     * @param coll Ignored.
+     * @throws UnsupportedOperationException Always thrown.
+     */
     @Override
     public boolean removeAll(final Collection<?> coll) {
         throw new UnsupportedOperationException();
     }
 
     /**
+     * Always throws {@link UnsupportedOperationException}.
+     *
+     * @param filter Ignored.
+     * @throws UnsupportedOperationException Always thrown.
      * @since 4.4
      */
     @Override
@@ -137,11 +190,24 @@ public final class UnmodifiableList<E>
         throw new UnsupportedOperationException();
     }
 
+    /**
+     * Always throws {@link UnsupportedOperationException}.
+     *
+     * @param coll Ignored.
+     * @throws UnsupportedOperationException Always thrown.
+     */
     @Override
     public boolean retainAll(final Collection<?> coll) {
         throw new UnsupportedOperationException();
     }
 
+    /**
+     * Always throws {@link UnsupportedOperationException}.
+     *
+     * @param index Ignored.
+     * @param object Ignored.
+     * @throws UnsupportedOperationException Always thrown.
+     */
     @Override
     public E set(final int index, final E object) {
         throw new UnsupportedOperationException();
@@ -149,8 +215,7 @@ public final class UnmodifiableList<E>
 
     @Override
     public List<E> subList(final int fromIndex, final int toIndex) {
-        final List<E> sub = decorated().subList(fromIndex, toIndex);
-        return new UnmodifiableList<>(sub);
+        return new UnmodifiableList<>(decorated().subList(fromIndex, toIndex));
     }
 
 }

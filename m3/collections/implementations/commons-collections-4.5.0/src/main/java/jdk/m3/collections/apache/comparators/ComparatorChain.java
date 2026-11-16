@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -48,7 +48,7 @@ import java.util.Objects;
  * multiple comparisons after all the setup operations are complete.
  * </p>
  *
- * @param <E> the type of objects compared by this comparator
+ * @param <E> The type of objects compared by this comparator
  * @since 2.0
  */
 public class ComparatorChain<E> implements Comparator<E>, Serializable {
@@ -58,15 +58,17 @@ public class ComparatorChain<E> implements Comparator<E>, Serializable {
 
     /** The list of comparators in the chain. */
     private final List<Comparator<E>> comparatorChain;
+
     /** Order - false (clear) = ascend; true (set) = descend. */
     private final BitSet orderingBits;
-   /** Whether the chain has been "locked". */
+
+    /** Whether the chain has been "locked". */
     private boolean isLocked;
 
     /**
      * Constructs a ComparatorChain with no Comparators.
      * You must add at least one Comparator before calling
-     * the compare(Object,Object) method, or an
+     * the compare(Object, Object) method, or an
      * UnsupportedOperationException is thrown
      */
     public ComparatorChain() {
@@ -182,10 +184,10 @@ public class ComparatorChain<E> implements Comparator<E>, Serializable {
 
     /**
      * Perform comparisons on the Objects as per
-     * Comparator.compare(o1,o2).
+     * Comparator.compare(o1, o2).
      *
-     * @param o1  the first object to compare
-     * @param o2  the second object to compare
+     * @param o1  The first object to compare
+     * @param o2  The second object to compare
      * @return -1, 0, or 1
      * @throws UnsupportedOperationException if the ComparatorChain does not contain at least one Comparator
      */
@@ -231,7 +233,7 @@ public class ComparatorChain<E> implements Comparator<E>, Serializable {
      * Subclasses may want to override this behavior to remain consistent
      * with the {@link Comparator#equals(Object)} contract.
      *
-     * @param object  the object to compare with
+     * @param object  The object to compare with
      * @return true if equal
      * @since 3.0
      */
@@ -240,7 +242,7 @@ public class ComparatorChain<E> implements Comparator<E>, Serializable {
         if (this == object) {
             return true;
         }
-        if (null == object) {
+        if (object == null) {
             return false;
         }
         if (object.getClass().equals(this.getClass())) {
@@ -255,16 +257,16 @@ public class ComparatorChain<E> implements Comparator<E>, Serializable {
      * Implement a hash code for this comparator that is consistent with
      * {@link #equals(Object) equals}.
      *
-     * @return a suitable hash code
+     * @return A suitable hash code
      * @since 3.0
      */
     @Override
     public int hashCode() {
         int hash = 0;
-        if (null != comparatorChain) {
+        if (comparatorChain != null) {
             hash ^= comparatorChain.hashCode();
         }
-        if (null != orderingBits) {
+        if (orderingBits != null) {
             hash ^= orderingBits.hashCode();
         }
         return hash;
@@ -292,7 +294,7 @@ public class ComparatorChain<E> implements Comparator<E>, Serializable {
      *                   if index &lt; 0 or index &gt;= size()
      */
     public void setComparator(final int index, final Comparator<E> comparator) throws IndexOutOfBoundsException {
-        setComparator(index, comparator, false);
+        setComparator(index, comparator, orderingBits.get(index));
     }
 
     /**

@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -35,8 +35,8 @@ public final class InstanceofPredicate extends AbstractPredicate<Object> impleme
     /**
      * Creates the identity predicate.
      *
-     * @param type  the type to check for, may not be null
-     * @return the predicate
+     * @param type  The type to check for, may not be null
+     * @return The predicate
      * @throws NullPointerException if the class is null
      */
     public static Predicate<Object> instanceOfPredicate(final Class<?> type) {
@@ -50,7 +50,7 @@ public final class InstanceofPredicate extends AbstractPredicate<Object> impleme
      * Constructor that performs no validation.
      * Use {@code instanceOfPredicate} if you want that.
      *
-     * @param type  the type to check for
+     * @param type  The type to check for
      */
     public InstanceofPredicate(final Class<?> type) {
         iType = type;
@@ -59,7 +59,7 @@ public final class InstanceofPredicate extends AbstractPredicate<Object> impleme
     /**
      * Gets the type to compare to.
      *
-     * @return the type
+     * @return The type
      * @since 3.1
      */
     public Class<?> getType() {
@@ -69,7 +69,7 @@ public final class InstanceofPredicate extends AbstractPredicate<Object> impleme
     /**
      * Evaluates the predicate returning true if the input object is of the correct type.
      *
-     * @param object  the input object
+     * @param object  The input object
      * @return true if input is of stored type
      */
     @Override

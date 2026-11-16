@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -25,6 +25,7 @@ import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import jdk.m3.collections.apache.MultiMapUtils;
 import jdk.m3.collections.apache.MultiValuedMap;
 
 /**
@@ -38,8 +39,8 @@ import jdk.m3.collections.apache.MultiValuedMap;
  * exceptions when accessed by concurrent threads without synchronization.
  * </p>
  *
- * @param <K> the type of the keys in this map
- * @param <V> the type of the values in this map
+ * @param <K> The type of the keys in this map
+ * @param <V> The type of the values in this map
  * @since 4.5.0-M3
  */
 public class ArrayListValuedLinkedHashMap<K, V> extends AbstractListValuedMap<K, V>
@@ -75,7 +76,7 @@ public class ArrayListValuedLinkedHashMap<K, V> extends AbstractListValuedMap<K,
      * Creates an empty ArrayListValuedHashMap with the default initial
      * map capacity (16) and the specified initial list capacity.
      *
-     * @param initialListCapacity  the initial capacity used for value collections
+     * @param initialListCapacity  The initial capacity used for value collections
      */
     public ArrayListValuedLinkedHashMap(final int initialListCapacity) {
         this(DEFAULT_INITIAL_MAP_CAPACITY, initialListCapacity);
@@ -85,8 +86,8 @@ public class ArrayListValuedLinkedHashMap<K, V> extends AbstractListValuedMap<K,
      * Creates an empty ArrayListValuedHashMap with the specified initial
      * map and list capacities.
      *
-     * @param initialMapCapacity  the initial hashmap capacity
-     * @param initialListCapacity  the initial capacity used for value collections
+     * @param initialMapCapacity  The initial hashmap capacity
+     * @param initialListCapacity  The initial capacity used for value collections
      */
     public ArrayListValuedLinkedHashMap(final int initialMapCapacity, final int initialListCapacity) {
         super(new LinkedHashMap<>(initialMapCapacity));
@@ -96,7 +97,7 @@ public class ArrayListValuedLinkedHashMap<K, V> extends AbstractListValuedMap<K,
     /**
      * Creates an ArrayListValuedHashMap copying all the mappings of the given map.
      *
-     * @param map a {@code Map} to copy into this map
+     * @param map A {@code Map} to copy into this map
      */
     public ArrayListValuedLinkedHashMap(final Map<? extends K, ? extends V> map) {
         this(map.size(), DEFAULT_INITIAL_LIST_CAPACITY);
@@ -106,7 +107,7 @@ public class ArrayListValuedLinkedHashMap<K, V> extends AbstractListValuedMap<K,
     /**
      * Creates an ArrayListValuedHashMap copying all the mappings of the given map.
      *
-     * @param map a {@code MultiValuedMap} to copy into this map
+     * @param map A {@code MultiValuedMap} to copy into this map
      */
     public ArrayListValuedLinkedHashMap(final MultiValuedMap<? extends K, ? extends V> map) {
         this(map.size(), DEFAULT_INITIAL_LIST_CAPACITY);
@@ -116,6 +117,11 @@ public class ArrayListValuedLinkedHashMap<K, V> extends AbstractListValuedMap<K,
     @Override
     protected ArrayList<V> createCollection() {
         return new ArrayList<>(initialListCapacity);
+    }
+
+    @Override
+    public ArrayListValuedLinkedHashMap<V, K> inverted() {
+        return MultiMapUtils.invert(this, new ArrayListValuedLinkedHashMap<>());
     }
 
     /**
@@ -144,7 +150,7 @@ public class ArrayListValuedLinkedHashMap<K, V> extends AbstractListValuedMap<K,
     /**
      * Serializes this object to an ObjectOutputStream.
      *
-     * @param out the target ObjectOutputStream.
+     * @param out The target ObjectOutputStream.
      * @throws IOException thrown when an I/O errors occur writing to the target stream.
      */
     private void writeObject(final ObjectOutputStream out) throws IOException {

@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -43,8 +43,8 @@ import jdk.m3.collections.apache.Transformer;
  * This class is Serializable from Commons Collections 3.1.
  * </p>
  *
- * @param <K> the type of the keys in this map
- * @param <V> the type of the values in this map
+ * @param <K> The type of the keys in this map
+ * @param <V> The type of the values in this map
  * @see jdk.m3.collections.apache.splitmap.TransformedSplitMap
  * @since 3.0
  */
@@ -66,10 +66,10 @@ public class TransformedMap<K, V>
      *
      * @param <K>  the key type
      * @param <V>  the value type
-     * @param map  the map to decorate, must not be null
-     * @param keyTransformer  the transformer to use for key conversion, null means no transformation
-     * @param valueTransformer  the transformer to use for value conversion, null means no transformation
-     * @return a new transformed map
+     * @param map  The map to decorate, must not be null
+     * @param keyTransformer  The transformer to use for key conversion, null means no transformation
+     * @param valueTransformer  The transformer to use for value conversion, null means no transformation
+     * @return A new transformed map
      * @throws NullPointerException if map is null
      * @since 4.0
      */
@@ -84,6 +84,7 @@ public class TransformedMap<K, V>
         }
         return decorated;
     }
+
     /**
      * Factory method to create a transforming map.
      * <p>
@@ -94,10 +95,10 @@ public class TransformedMap<K, V>
      *
      * @param <K>  the key type
      * @param <V>  the value type
-     * @param map  the map to decorate, must not be null
-     * @param keyTransformer  the transformer to use for key conversion, null means no transformation
-     * @param valueTransformer  the transformer to use for value conversion, null means no transformation
-     * @return a new transformed map
+     * @param map  The map to decorate, must not be null
+     * @param keyTransformer  The transformer to use for key conversion, null means no transformation
+     * @param valueTransformer  The transformer to use for value conversion, null means no transformation
+     * @return A new transformed map
      * @throws NullPointerException if map is null
      * @since 4.0
      */
@@ -120,9 +121,9 @@ public class TransformedMap<K, V>
      * are NOT transformed.
      * </p>
      *
-     * @param map  the map to decorate, must not be null
-     * @param keyTransformer  the transformer to use for key conversion, null means no conversion
-     * @param valueTransformer  the transformer to use for value conversion, null means no conversion
+     * @param map  The map to decorate, must not be null
+     * @param keyTransformer  The transformer to use for key conversion, null means no conversion
+     * @param valueTransformer  The transformer to use for value conversion, null means no conversion
      * @throws NullPointerException if map is null
      */
     protected TransformedMap(final Map<K, V> map, final Transformer<? super K, ? extends K> keyTransformer,
@@ -135,8 +136,8 @@ public class TransformedMap<K, V>
     /**
      * Override to transform the value when using {@code setValue}.
      *
-     * @param value  the value to transform
-     * @return the transformed value
+     * @param value  The value to transform
+     * @return The transformed value
      * @since 3.1
      */
     @Override
@@ -171,8 +172,8 @@ public class TransformedMap<K, V>
     /**
      * Deserializes the map in using a custom routine.
      *
-     * @param in  the input stream
-     * @throws IOException if an error occurs while reading from the stream
+     * @param in  The input stream
+     * @throws IOException Thrown if an error occurs while reading from the stream
      * @throws ClassNotFoundException if an object read from the stream cannot be loaded
      * @since 3.1
      */
@@ -187,8 +188,8 @@ public class TransformedMap<K, V>
      * <p>
      * The transformer itself may throw an exception if necessary.
      *
-     * @param object  the object to transform
-     * @return the transformed object
+     * @param object  The object to transform
+     * @return The transformed object
      */
     protected K transformKey(final K object) {
         if (keyTransformer == null) {
@@ -203,8 +204,8 @@ public class TransformedMap<K, V>
      * The transformer itself may throw an exception if necessary.
      * </p>
      *
-     * @param map  the map to transform
-     * @return the transformed object
+     * @param map  The map to transform
+     * @return The transformed object
      */
     @SuppressWarnings("unchecked")
     protected Map<K, V> transformMap(final Map<? extends K, ? extends V> map) {
@@ -225,8 +226,8 @@ public class TransformedMap<K, V>
      * The transformer itself may throw an exception if necessary.
      * </p>
      *
-     * @param object  the object to transform
-     * @return the transformed object
+     * @param object  The object to transform
+     * @return The transformed object
      */
     protected V transformValue(final V object) {
         if (valueTransformer == null) {
@@ -238,7 +239,7 @@ public class TransformedMap<K, V>
     /**
      * Serializes this object to an ObjectOutputStream.
      *
-     * @param out the target ObjectOutputStream.
+     * @param out The target ObjectOutputStream.
      * @throws IOException thrown when an I/O errors occur writing to the target stream.
      * @since 3.1
      */

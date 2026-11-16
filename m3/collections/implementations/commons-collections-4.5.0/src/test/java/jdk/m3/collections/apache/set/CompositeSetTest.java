@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -21,8 +21,11 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.AbstractSet;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -34,6 +37,22 @@ import org.junit.jupiter.api.Test;
  * {@link CompositeSet} implementation.
  */
 public class CompositeSetTest<E> extends AbstractSetTest<E> {
+
+    /** An empty-iterating set that reports {@code Integer.MAX_VALUE} elements. */
+    private static Set<String> maxSizeSet() {
+        return new AbstractSet<String>() {
+
+            @Override
+            public Iterator<String> iterator() {
+                return Collections.emptyIterator();
+            }
+
+            @Override
+            public int size() {
+                return Integer.MAX_VALUE;
+            }
+        };
+    }
 
     @SuppressWarnings("unchecked")
     public Set<E> buildOne() {
@@ -71,7 +90,7 @@ public class CompositeSetTest<E> extends AbstractSetTest<E> {
 
     @Test
     @SuppressWarnings("unchecked")
-    public void testAddComposited() {
+    void testAddComposited() {
         final Set<E> one = buildOne();
         final Set<E> two = buildTwo();
         final CompositeSet<E> set = new CompositeSet<>();
@@ -98,7 +117,7 @@ public class CompositeSetTest<E> extends AbstractSetTest<E> {
 
     @Test
     @SuppressWarnings("unchecked")
-    public void testAddCompositedCollision() {
+    void testAddCompositedCollision() {
         final HashSet<E> set1 = new HashSet<>();
         set1.add((E) "1");
         set1.add((E) "2");
@@ -114,21 +133,21 @@ public class CompositeSetTest<E> extends AbstractSetTest<E> {
 
     @Test
     @SuppressWarnings("unchecked")
-    public void testContains() {
+    void testContains() {
         final CompositeSet<E> set = new CompositeSet<>(buildOne(), buildTwo());
         assertTrue(set.contains("1"));
     }
 
     @Test
     @SuppressWarnings("unchecked")
-    public void testContainsAll() {
+    void testContainsAll() {
         final CompositeSet<E> set = new CompositeSet<>(buildOne(), buildTwo());
         assertFalse(set.containsAll(null));
     }
 
     @Test
     @SuppressWarnings("unchecked")
-    public void testFailedCollisionResolution() {
+    void testFailedCollisionResolution() {
         final Set<E> one = buildOne();
         final Set<E> two = buildTwo();
         final CompositeSet<E> set = new CompositeSet<>(one, two);
@@ -162,14 +181,14 @@ public class CompositeSetTest<E> extends AbstractSetTest<E> {
 
     @Test
     @SuppressWarnings("unchecked")
-    public void testRemoveAll() {
+    void testRemoveAll() {
         final CompositeSet<E> set = new CompositeSet<>(buildOne(), buildTwo());
         assertFalse(set.removeAll(null));
     }
 
     @Test
     @SuppressWarnings("unchecked")
-    public void testRemoveComposited() {
+    void testRemoveComposited() {
         final Set<E> one = buildOne();
         final Set<E> two = buildTwo();
         final CompositeSet<E> set = new CompositeSet<>(one, two);
@@ -182,7 +201,7 @@ public class CompositeSetTest<E> extends AbstractSetTest<E> {
 
     @Test
     @SuppressWarnings("unchecked")
-    public void testRemoveUnderlying() {
+    void testRemoveUnderlying() {
         final Set<E> one = buildOne();
         final Set<E> two = buildTwo();
         final CompositeSet<E> set = new CompositeSet<>(one, two);
@@ -193,7 +212,14 @@ public class CompositeSetTest<E> extends AbstractSetTest<E> {
         assertFalse(set.contains("3"));
     }
 
-//    public void testCreate() throws Exception {
+    @Test
+    void testSizeClampsToIntegerMaxValue() {
+        final CompositeSet<String> set = new CompositeSet<>(maxSizeSet());
+        set.addComposited(maxSizeSet());
+        assertEquals(Integer.MAX_VALUE, set.size());
+    }
+
+//    void testCreate() throws Exception {
 //        resetEmpty();
 //        writeExternalFormToDisk((java.io.Serializable) getCollection(), "src/test/resources/data/test/CompositeSet.emptyCollection.version4.obj");
 //        resetFull();

@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -33,7 +33,7 @@ import jdk.m3.collections.apache.iterators.UnmodifiableIterator;
  * Attempts to modify it will result in an UnsupportedOperationException.
  * </p>
  *
- * @param <E> the type of the elements in this set
+ * @param <E> The type of the elements in this set
  * @since 3.0
  */
 public final class UnmodifiableSet<E>
@@ -46,9 +46,9 @@ public final class UnmodifiableSet<E>
     /**
      * Factory method to create an unmodifiable set.
      *
-     * @param <E> the element type
-     * @param set  the set to decorate, must not be null
-     * @return a new unmodifiable set
+     * @param <E> The element type
+     * @param set  The set to decorate, must not be null
+     * @return A new unmodifiable set
      * @throws NullPointerException if set is null
      * @since 4.0
      */
@@ -64,7 +64,7 @@ public final class UnmodifiableSet<E>
     /**
      * Constructor that wraps (not copies).
      *
-     * @param set  the set to decorate, must not be null
+     * @param set  The set to decorate, must not be null
      * @throws NullPointerException if set is null
      */
     @SuppressWarnings("unchecked") // safe to upcast
@@ -72,16 +72,33 @@ public final class UnmodifiableSet<E>
         super((Set<E>) set);
     }
 
+    /**
+     * Always throws {@link UnsupportedOperationException}.
+     *
+     * @param object Ignored.
+     * @throws UnsupportedOperationException Always thrown.
+     */
     @Override
     public boolean add(final E object) {
         throw new UnsupportedOperationException();
     }
 
+    /**
+     * Always throws {@link UnsupportedOperationException}.
+     *
+     * @param coll Ignored.
+     * @throws UnsupportedOperationException Always thrown.
+     */
     @Override
     public boolean addAll(final Collection<? extends E> coll) {
         throw new UnsupportedOperationException();
     }
 
+    /**
+     * Always throws {@link UnsupportedOperationException}.
+     *
+     * @throws UnsupportedOperationException Always thrown.
+     */
     @Override
     public void clear() {
         throw new UnsupportedOperationException();
@@ -92,17 +109,33 @@ public final class UnmodifiableSet<E>
         return UnmodifiableIterator.unmodifiableIterator(decorated().iterator());
     }
 
+    /**
+     * Always throws {@link UnsupportedOperationException}.
+     *
+     * @param object Ignored.
+     * @throws UnsupportedOperationException Always thrown.
+     */
     @Override
     public boolean remove(final Object object) {
         throw new UnsupportedOperationException();
     }
 
+    /**
+     * Always throws {@link UnsupportedOperationException}.
+     *
+     * @param coll Ignored.
+     * @throws UnsupportedOperationException Always thrown.
+     */
     @Override
     public boolean removeAll(final Collection<?> coll) {
         throw new UnsupportedOperationException();
     }
 
     /**
+     * Always throws {@link UnsupportedOperationException}.
+     *
+     * @param filter Ignored.
+     * @throws UnsupportedOperationException Always thrown.
      * @since 4.4
      */
     @Override
@@ -110,6 +143,12 @@ public final class UnmodifiableSet<E>
         throw new UnsupportedOperationException();
     }
 
+    /**
+     * Always throws {@link UnsupportedOperationException}.
+     *
+     * @param coll Ignored.
+     * @throws UnsupportedOperationException Always thrown.
+     */
     @Override
     public boolean retainAll(final Collection<?> coll) {
         throw new UnsupportedOperationException();

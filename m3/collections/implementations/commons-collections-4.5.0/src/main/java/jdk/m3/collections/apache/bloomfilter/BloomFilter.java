@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -22,6 +22,13 @@ import java.util.Objects;
  * The interface that describes a Bloom filter.
  * <p>
  * <em>See implementation notes for {@link BitMapExtractor} and {@link IndexExtractor}.</em>
+ * </p>
+ * <p>
+ * The {@code merge} operations enable bit indexes one at a time and are not atomic. If an index is out of
+ * range an {@link IllegalArgumentException} is raised, but indexes processed before the bad one may already
+ * have been enabled. By design the filter is not rolled back: such an exception signals misuse with bad
+ * indexes and must not be ignored. A filter that throws during a merge should be considered invalid, since
+ * it may hold bits that do not correspond to any valid hashed value.
  * </p>
  *
  * @param <T> The BloomFilter type.
@@ -45,7 +52,7 @@ public interface BloomFilter<T extends BloomFilter<T>> extends IndexExtractor, B
      *
      * <p>This is also known as the Hamming value or Hamming number.</p>
      *
-     * @return the cardinality of this filter
+     * @return The cardinality of this filter
      */
     int cardinality();
 
@@ -57,7 +64,7 @@ public interface BloomFilter<T extends BloomFilter<T>> extends IndexExtractor, B
      * Characteristics are defined as bits within the characteristics integer.
      * </p>
      *
-     * @return the characteristics for this bloom filter.
+     * @return The characteristics for this bloom filter.
      */
     int characteristics();
 
@@ -70,7 +77,7 @@ public interface BloomFilter<T extends BloomFilter<T>> extends IndexExtractor, B
      * Returns {@code true} if this filter contains the bits specified in the bit maps produced by the
      * bitMapExtractor.
      *
-     * @param bitMapExtractor the {@code BitMapExtractor} to provide the bit maps.
+     * @param bitMapExtractor The {@code BitMapExtractor} to provide the bit maps.
      * @return {@code true} if this filter is enabled for all bits specified by the bit maps
      */
     default boolean contains(final BitMapExtractor bitMapExtractor) {
@@ -85,7 +92,7 @@ public interface BloomFilter<T extends BloomFilter<T>> extends IndexExtractor, B
      * {@code other} filter. Using the bit representations this is
      * effectively {@code (this AND other) == other}.</p>
      *
-     * @param other the other Bloom filter
+     * @param other The other Bloom filter
      * @return true if all enabled bits in the other filter are enabled in this filter.
      */
     default boolean contains(final BloomFilter<?> other) {
@@ -100,7 +107,7 @@ public interface BloomFilter<T extends BloomFilter<T>> extends IndexExtractor, B
      * identified by the {@code hasher}. Using the bit map representations this is
      * effectively {@code (this AND hasher) == hasher}.</p>
      *
-     * @param hasher the hasher to provide the indexes
+     * @param hasher The hasher to provide the indexes
      * @return true if this filter is enabled for all bits specified by the hasher
      */
     default boolean contains(final Hasher hasher) {
@@ -115,7 +122,7 @@ public interface BloomFilter<T extends BloomFilter<T>> extends IndexExtractor, B
      * <p>Specifically this returns {@code true} if this filter is enabled for all bit indexes
      * identified by the {@code IndexExtractor}.</p>
      *
-     * @param indexExtractor the IndexExtractor to provide the indexes
+     * @param indexExtractor The IndexExtractor to provide the indexes
      * @return {@code true} if this filter is enabled for all bits specified by the IndexExtractor
      */
     boolean contains(IndexExtractor indexExtractor);
@@ -123,7 +130,7 @@ public interface BloomFilter<T extends BloomFilter<T>> extends IndexExtractor, B
     /**
      * Creates a new instance of this {@link BloomFilter} with the same properties as the current one.
      *
-     * @return a copy of this {@link BloomFilter}.
+     * @return A copy of this {@link BloomFilter}.
      */
     T copy();
 
@@ -140,7 +147,7 @@ public interface BloomFilter<T extends BloomFilter<T>> extends IndexExtractor, B
      * may be thrown.</em></p>
      *
      * @param other The other Bloom filter
-     * @return an estimate of the number of items in the intersection. If the calculated estimate is larger than Integer.MAX_VALUE then MAX_VALUE is returned.
+     * @return An estimate of the number of items in the intersection. If the calculated estimate is larger than Integer.MAX_VALUE then MAX_VALUE is returned.
      * @throws IllegalArgumentException if the estimated N for the union of the filters is infinite.
      * @see #estimateN()
      * @see Shape
@@ -189,7 +196,7 @@ public interface BloomFilter<T extends BloomFilter<T>> extends IndexExtractor, B
      * <li>if cardinality &gt; numberOfBits, then an IllegalArgumentException is thrown.</li>
      * </ul>
      *
-     * @return an estimate of the number of items in the bloom filter.  Will return Integer.MAX_VALUE if the
+     * @return An estimate of the number of items in the bloom filter.  Will return Integer.MAX_VALUE if the
      * estimate is larger than Integer.MAX_VALUE.
      * @throws IllegalArgumentException if the cardinality is &gt; numberOfBits as defined in Shape.
      * @see Shape#estimateN(int)
@@ -218,7 +225,7 @@ public interface BloomFilter<T extends BloomFilter<T>> extends IndexExtractor, B
      * may be thrown.</em></p>
      *
      * @param other The other Bloom filter
-     * @return an estimate of the number of items in the union.  Will return Integer.MAX_VALUE if the
+     * @return An estimate of the number of items in the union.  Will return Integer.MAX_VALUE if the
      * estimate is larger than Integer.MAX_VALUE.
      * @see #estimateN()
      * @see Shape
@@ -232,6 +239,7 @@ public interface BloomFilter<T extends BloomFilter<T>> extends IndexExtractor, B
 
     /**
      * Gets the shape that was used when the filter was built.
+     *
      * @return The shape the filter was built with.
      */
     Shape getShape();

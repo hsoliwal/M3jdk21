@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -19,6 +19,7 @@ package jdk.m3.collections.apache.list;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -102,7 +103,7 @@ public class TreeListTest<E> extends AbstractListTest<E> {
 
     @Test
     @SuppressWarnings("unchecked")
-    public void testAddMultiple() {
+    void testAddMultiple() {
         final List<E> l = makeObject();
         l.add((E) "hugo");
         l.add((E) "erna");
@@ -119,7 +120,7 @@ public class TreeListTest<E> extends AbstractListTest<E> {
     }
 
     @Test
-    public void testBug35258() {
+    void testBug35258() {
         final Object objectToRemove = Integer.valueOf(3);
 
         final List<Integer> treelist = new TreeList<>();
@@ -150,7 +151,7 @@ public class TreeListTest<E> extends AbstractListTest<E> {
     }
 
     @Test
-    public void testBugCollections447() {
+    void testBugCollections447() {
         final List<String> treeList = new TreeList<>();
         treeList.add("A");
         treeList.add("B");
@@ -171,8 +172,27 @@ public class TreeListTest<E> extends AbstractListTest<E> {
     }
 
     @Test
+    void testFailedIndexedChangeKeepsIteratorValid() {
+        final List<String> list = new TreeList<>();
+        list.add("a");
+        list.add("b");
+
+        // a rejected add(index) is a no-op and must not invalidate a live iterator
+        final ListIterator<String> addIt = list.listIterator();
+        assertThrows(IndexOutOfBoundsException.class, () -> list.add(5, "x"));
+        assertEquals(2, list.size());
+        assertEquals("a", addIt.next());
+
+        // same for a rejected remove(index)
+        final ListIterator<String> removeIt = list.listIterator();
+        assertThrows(IndexOutOfBoundsException.class, () -> list.remove(10));
+        assertEquals(2, list.size());
+        assertEquals("a", removeIt.next());
+    }
+
+    @Test
     @SuppressWarnings("unchecked")
-    public void testIndexOf() {
+    void testIndexOf() {
         final List<E> l = makeObject();
         l.add((E) "0");
         l.add((E) "1");
@@ -202,7 +222,17 @@ public class TreeListTest<E> extends AbstractListTest<E> {
         assertEquals(0, l.indexOf("3"));
     }
 
-//    public void testCheck() {
+    @Test
+    @SuppressWarnings("unchecked")
+    void testInsertBefore() {
+        final List<E> l = makeObject();
+        l.add((E) "erna");
+        l.add(0, (E) "hugo");
+        assertEquals("hugo", l.get(0));
+        assertEquals("erna", l.get(1));
+    }
+
+//    void testCheck() {
 //        List l = makeEmptyList();
 //        l.add("A1");
 //        l.add("A2");
@@ -213,18 +243,8 @@ public class TreeListTest<E> extends AbstractListTest<E> {
 //    }
 
     @Test
-    @SuppressWarnings("unchecked")
-    public void testInsertBefore() {
-        final List<E> l = makeObject();
-        l.add((E) "erna");
-        l.add(0, (E) "hugo");
-        assertEquals("hugo", l.get(0));
-        assertEquals("erna", l.get(1));
-    }
-
-    @Test
     @SuppressWarnings("boxing") // OK in test code
-    public void testIterationOrder() {
+    void testIterationOrder() {
         // COLLECTIONS-433:
         // ensure that the iteration order of elements is correct
         // when initializing the TreeList with another collection
@@ -251,7 +271,7 @@ public class TreeListTest<E> extends AbstractListTest<E> {
 
     @Test
     @SuppressWarnings("boxing") // OK in test code
-    public void testIterationOrderAfterAddAll() {
+    void testIterationOrderAfterAddAll() {
         // COLLECTIONS-433:
         // ensure that the iteration order of elements is correct
         // when calling addAll on the TreeList
@@ -288,7 +308,7 @@ public class TreeListTest<E> extends AbstractListTest<E> {
 
     @Test
     @SuppressWarnings("unchecked")
-    public void testRemove() {
+    void testRemove() {
         final List<E> l = makeObject();
         l.add((E) "hugo");
         l.add((E) "erna");
@@ -324,6 +344,17 @@ public class TreeListTest<E> extends AbstractListTest<E> {
         assertEquals("hugo", l.get(i++));
         assertEquals("daniel", l.get(i++));
         assertEquals("harald", l.get(i++));
+    }
+
+    @Test
+    void testTreeListIteratorConstruction() throws Throwable {
+        final TreeList<String> treeList = new TreeList<>();
+        treeList.add("a");
+        treeList.add("b");
+        assertThrows(IndexOutOfBoundsException.class, () -> treeList.listIterator(3).previous());
+        assertThrows(IndexOutOfBoundsException.class, () -> new TreeList.TreeListIterator<String>(treeList, 3));
+        // Test doesn't get to previous()
+        assertThrows(IndexOutOfBoundsException.class, () -> new TreeList.TreeListIterator<String>(treeList, 3).previous());
     }
 
 }

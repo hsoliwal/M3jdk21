@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -24,7 +24,7 @@ import jdk.m3.collections.apache.SortedBag;
 
 /**
  * Abstract test class for
- * {@link jdk.m3.collections.apache.SortedBag SortedBag}
+ * {@link SortedBag SortedBag}
  * methods and contracts.
  */
 public abstract class AbstractSortedBagTest<T> extends AbstractBagTest<T> {
@@ -32,7 +32,7 @@ public abstract class AbstractSortedBagTest<T> extends AbstractBagTest<T> {
     /**
      * Returns the {@link #collection} field cast to a {@link SortedBag}.
      *
-     * @return the collection field as a SortedBag
+     * @return The collection field as a SortedBag
      */
     @Override
     public SortedBag<T> getCollection() {
@@ -78,7 +78,7 @@ public abstract class AbstractSortedBagTest<T> extends AbstractBagTest<T> {
     /**
      * Returns an empty {@link TreeBag} for use in modification testing.
      *
-     * @return a confirmed empty collection
+     * @return A confirmed empty collection
      */
     @Override
     public SortedBag<T> makeConfirmedCollection() {

@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -24,7 +24,7 @@ import jdk.m3.collections.apache.Predicate;
  * Predicate implementation that returns true if the input is the same object
  * as the one stored in this predicate.
  *
- * @param <T> the type of the input to the predicate.
+ * @param <T> The type of the input to the predicate.
  * @since 3.0
  */
 public final class IdentityPredicate<T> extends AbstractPredicate<T> implements Serializable {
@@ -35,9 +35,9 @@ public final class IdentityPredicate<T> extends AbstractPredicate<T> implements 
     /**
      * Creates the identity predicate.
      *
-     * @param <T> the type that the predicate queries
-     * @param object  the object to compare to
-     * @return the predicate
+     * @param <T> The type that the predicate queries
+     * @param object  The object to compare to
+     * @return The predicate
      */
     public static <T> Predicate<T> identityPredicate(final T object) {
         if (object == null) {
@@ -53,7 +53,7 @@ public final class IdentityPredicate<T> extends AbstractPredicate<T> implements 
      * Constructor that performs no validation.
      * Use {@code identityPredicate} if you want that.
      *
-     * @param object  the object to compare to
+     * @param object  The object to compare to
      */
     public IdentityPredicate(final T object) {
         iValue = object;
@@ -62,7 +62,7 @@ public final class IdentityPredicate<T> extends AbstractPredicate<T> implements 
     /**
      * Gets the value.
      *
-     * @return the value
+     * @return The value
      * @since 3.1
      */
     public T getValue() {
@@ -73,7 +73,7 @@ public final class IdentityPredicate<T> extends AbstractPredicate<T> implements 
      * Evaluates the predicate returning true if the input object is identical to
      * the stored object.
      *
-     * @param object  the input object
+     * @param object  The input object
      * @return true if input is the same object as the stored value
      */
     @Override

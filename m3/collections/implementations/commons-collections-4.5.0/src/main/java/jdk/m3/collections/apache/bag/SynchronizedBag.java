@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -20,6 +20,7 @@ import java.util.Set;
 
 import jdk.m3.collections.apache.Bag;
 import jdk.m3.collections.apache.collection.SynchronizedCollection;
+import jdk.m3.collections.apache.multiset.SynchronizedMultiSet;
 
 /**
  * Decorates another {@link Bag} to synchronize its behavior
@@ -32,22 +33,26 @@ import jdk.m3.collections.apache.collection.SynchronizedCollection;
  * This class is Serializable from Commons Collections 3.1.
  * </p>
  *
- * @param <E> the type of elements in this bag
+ * @param <E> The type of elements in this bag
  * @since 3.0
+ * @deprecated Since 4.6.0, use {@link SynchronizedMultiSet} instead.
  */
+@Deprecated
 public class SynchronizedBag<E> extends SynchronizedCollection<E> implements Bag<E> {
 
     /**
      * Synchronized Set for the Bag class.
      */
     final class SynchronizedBagSet extends SynchronizedCollection<E> implements Set<E> {
+
         /** Serialization version */
         private static final long serialVersionUID = 2990565892366827855L;
 
         /**
          * Constructs a new instance.
-         * @param set  the set to decorate
-         * @param lock  the lock to use, shared with the bag
+         *
+         * @param set  The set to decorate
+         * @param lock  The lock to use, shared with the bag
          */
         SynchronizedBagSet(final Set<E> set, final Object lock) {
             super(set, lock);
@@ -60,9 +65,9 @@ public class SynchronizedBag<E> extends SynchronizedCollection<E> implements Bag
     /**
      * Factory method to create a synchronized bag.
      *
-     * @param <E> the type of the elements in the bag
-     * @param bag  the bag to decorate, must not be null
-     * @return a new synchronized Bag
+     * @param <E> The type of the elements in the bag
+     * @param bag  The bag to decorate, must not be null
+     * @return A new synchronized Bag
      * @throws NullPointerException if bag is null
      * @since 4.0
      */
@@ -73,7 +78,7 @@ public class SynchronizedBag<E> extends SynchronizedCollection<E> implements Bag
     /**
      * Constructor that wraps (not copies).
      *
-     * @param bag  the bag to decorate, must not be null
+     * @param bag  The bag to decorate, must not be null
      * @throws NullPointerException if bag is null
      */
     protected SynchronizedBag(final Bag<E> bag) {
@@ -83,8 +88,8 @@ public class SynchronizedBag<E> extends SynchronizedCollection<E> implements Bag
     /**
      * Constructor that wraps (not copies).
      *
-     * @param bag  the bag to decorate, must not be null
-     * @param lock  the lock to use, must not be null
+     * @param bag  The bag to decorate, must not be null
+     * @param lock  The lock to use, must not be null
      * @throws NullPointerException if bag or lock is null
      */
     protected SynchronizedBag(final Bag<E> bag, final Object lock) {
@@ -111,7 +116,7 @@ public class SynchronizedBag<E> extends SynchronizedCollection<E> implements Bag
     /**
      * Gets the bag being decorated.
      *
-     * @return the decorated bag
+     * @return The decorated bag
      */
     protected Bag<E> getBag() {
         return (Bag<E>) decorated();

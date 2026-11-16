@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -21,6 +21,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import java.io.InvalidObjectException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -31,17 +32,21 @@ import jdk.m3.collections.apache.MapIterator;
 import jdk.m3.collections.apache.OrderedMap;
 import jdk.m3.collections.apache.ResettableIterator;
 import jdk.m3.collections.apache.list.AbstractListTest;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 /**
  * JUnit tests.
  *
- * @param <K> the key type.
- * @param <V> the value type.
+ * @param <K> The key type.
+ * @param <V> The value type.
  */
 public class LinkedMapTest<K, V> extends AbstractOrderedMapTest<K, V> {
 
-    public class TestListView extends AbstractListTest<K> {
+    @Nested
+    public class ListViewTest extends AbstractListTest<K> {
 
         @Override
         public K[] getFullElements() {
@@ -85,7 +90,7 @@ public class LinkedMapTest<K, V> extends AbstractOrderedMapTest<K, V> {
     }
 
     public BulkTest bulkTestListView() {
-        return new TestListView();
+        return new ListViewTest();
     }
 
     @Override
@@ -116,7 +121,7 @@ public class LinkedMapTest<K, V> extends AbstractOrderedMapTest<K, V> {
 
     @Test
     @SuppressWarnings("unchecked")
-    public void testClone() {
+    void testClone() {
         final LinkedMap<K, V> map = new LinkedMap<>(10);
         map.put((K) "1", (V) "1");
         final Map<K, V> cloned = map.clone();
@@ -124,8 +129,20 @@ public class LinkedMapTest<K, V> extends AbstractOrderedMapTest<K, V> {
         assertSame(map.get("1"), cloned.get("1"));
     }
 
+    /**
+     * A crafted stream can carry a load factor the constructor rejects. AbstractHashedMap.doReadObject
+     * must reapply that contract on read.
+     */
+    @ParameterizedTest
+    @ValueSource(floats = {0.0f, -1.0f, Float.NaN})
+    void testDeserializeRejectsInvalidLoadFactor(final float badLoadFactor) {
+        final LinkedMap<K, V> map = new LinkedMap<>();
+        map.loadFactor = badLoadFactor;
+        assertThrows(InvalidObjectException.class, () -> serializeDeserialize(map));
+    }
+
     @Test
-    public void testGetByIndex() {
+    void testGetByIndex() {
         resetEmpty();
         assertThrows(IndexOutOfBoundsException.class, () -> getMap().get(0));
         assertThrows(IndexOutOfBoundsException.class, () -> getMap().get(-1));
@@ -140,7 +157,7 @@ public class LinkedMapTest<K, V> extends AbstractOrderedMapTest<K, V> {
     }
 
     @Test
-    public void testGetValueByIndex() {
+    void testGetValueByIndex() {
         resetEmpty();
         assertThrows(IndexOutOfBoundsException.class, () -> getMap().getValue(0));
         assertThrows(IndexOutOfBoundsException.class, () -> getMap().getValue(-1));
@@ -156,7 +173,7 @@ public class LinkedMapTest<K, V> extends AbstractOrderedMapTest<K, V> {
     }
 
     @Test
-    public void testIndexOf() {
+    void testIndexOf() {
         resetEmpty();
         LinkedMap<K, V> lm = getMap();
         assertEquals(-1, lm.indexOf(getOtherKeys()));
@@ -176,13 +193,13 @@ public class LinkedMapTest<K, V> extends AbstractOrderedMapTest<K, V> {
      * Test for <a href="https://issues.apache.org/jira/browse/COLLECTIONS-323">COLLECTIONS-323</a>.
      */
     @Test
-    public void testInitialCapacityZero() {
+    void testInitialCapacityZero() {
         final LinkedMap<String, String> map = new LinkedMap<>(0);
         assertEquals(1, map.data.length);
     }
 
     @Test
-    public void testInsertionOrder() {
+    void testInsertionOrder() {
         if (!isPutAddSupported() || !isPutChangeSupported()) {
             return;
         }
@@ -229,7 +246,7 @@ public class LinkedMapTest<K, V> extends AbstractOrderedMapTest<K, V> {
         assertSame(values[2], valueIter.next());
     }
 
-//    public void testCreate() throws Exception {
+//    void testCreate() throws Exception {
 //        resetEmpty();
 //        writeExternalFormToDisk((java.io.Serializable) map, "src/test/resources/data/test/LinkedMap.emptyCollection.version4.obj");
 //        resetFull();
@@ -237,7 +254,7 @@ public class LinkedMapTest<K, V> extends AbstractOrderedMapTest<K, V> {
 //    }
 
     @Test
-    public void testRemoveByIndex() {
+    void testRemoveByIndex() {
         resetEmpty();
         assertThrows(IndexOutOfBoundsException.class, () -> getMap().remove(0));
         assertThrows(IndexOutOfBoundsException.class, () -> getMap().remove(-1));
@@ -260,7 +277,7 @@ public class LinkedMapTest<K, V> extends AbstractOrderedMapTest<K, V> {
 
     @Test
     @SuppressWarnings("unchecked")
-    public void testReset() {
+    void testReset() {
         resetEmpty();
         OrderedMap<K, V> ordered = getMap();
         ((ResettableIterator<K>) ordered.mapIterator()).reset();

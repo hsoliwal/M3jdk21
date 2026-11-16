@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -25,8 +25,8 @@ import jdk.m3.collections.apache.Transformer;
 /**
  * Transformer implementation that calls a Factory and returns the result.
  *
- * @param <T> the type of the input to the function.
- * @param <R> the type of the result of the function.
+ * @param <T> The type of the input to the function.
+ * @param <R> The type of the result of the function.
  * @since 3.0
  */
 public class FactoryTransformer<T, R> implements Transformer<T, R>, Serializable {
@@ -39,8 +39,8 @@ public class FactoryTransformer<T, R> implements Transformer<T, R>, Serializable
      *
      * @param <I>  the input type
      * @param <O>  the output type
-     * @param factory  the factory to call, not null
-     * @return the {@code factory} transformer
+     * @param factory  The factory to call, not null
+     * @return The {@code factory} transformer
      * @throws NullPointerException if the factory is null
      */
     public static <I, O> Transformer<I, O> factoryTransformer(final Factory<? extends O> factory) {
@@ -54,7 +54,7 @@ public class FactoryTransformer<T, R> implements Transformer<T, R>, Serializable
      * Constructor that performs no validation.
      * Use {@code factoryTransformer} if you want that.
      *
-     * @param factory  the factory to call, not null
+     * @param factory  The factory to call, not null
      */
     public FactoryTransformer(final Factory<? extends R> factory) {
         iFactory = factory;
@@ -63,7 +63,7 @@ public class FactoryTransformer<T, R> implements Transformer<T, R>, Serializable
     /**
      * Gets the factory.
      *
-     * @return the factory
+     * @return The factory
      * @since 3.1
      */
     public Factory<? extends R> getFactory() {
@@ -74,8 +74,8 @@ public class FactoryTransformer<T, R> implements Transformer<T, R>, Serializable
      * Transforms the input by ignoring the input and returning the result of
      * calling the decorated factory.
      *
-     * @param input  the input object to transform
-     * @return the transformed result
+     * @param input  The input object to transform
+     * @return The transformed result
      */
     @Override
     public R transform(final T input) {

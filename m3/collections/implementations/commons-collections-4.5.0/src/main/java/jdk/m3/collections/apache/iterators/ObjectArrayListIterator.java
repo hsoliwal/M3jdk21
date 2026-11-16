@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,12 +16,13 @@
  */
 package jdk.m3.collections.apache.iterators;
 
+import java.util.ListIterator;
 import java.util.NoSuchElementException;
 
 import jdk.m3.collections.apache.ResettableListIterator;
 
 /**
- * Implements a {@link java.util.ListIterator} over an array of objects.
+ * Implements a {@link ListIterator} over an array of objects.
  * <p>
  * This iterator does not support {@link #add} or {@link #remove}, as the object array
  * cannot be structurally modified. The {@link #set} method is supported however.
@@ -31,7 +32,7 @@ import jdk.m3.collections.apache.ResettableListIterator;
  * back to the start if required.
  * </p>
  *
- * @param <E> the type of elements returned by this iterator.
+ * @param <E> The type of elements returned by this iterator.
  * @see jdk.m3.collections.apache.iterators.ObjectArrayIterator
  * @see java.util.Iterator
  * @see java.util.ListIterator
@@ -52,7 +53,7 @@ public class ObjectArrayListIterator<E> extends ObjectArrayIterator<E>
      * Constructs an ObjectArrayListIterator that will iterate over the values in the
      * specified array.
      *
-     * @param array the array to iterate over
+     * @param array The array to iterate over
      * @throws NullPointerException if {@code array} is {@code null}
      */
     public ObjectArrayListIterator(final E... array) {
@@ -63,8 +64,8 @@ public class ObjectArrayListIterator<E> extends ObjectArrayIterator<E>
      * Constructs an ObjectArrayListIterator that will iterate over the values in the
      * specified array from a specific start index.
      *
-     * @param array  the array to iterate over
-     * @param start  the index to start iterating at
+     * @param array  The array to iterate over
+     * @param start  The index to start iterating at
      * @throws NullPointerException if {@code array} is {@code null}
      * @throws IndexOutOfBoundsException if the start index is out of bounds
      */
@@ -76,9 +77,9 @@ public class ObjectArrayListIterator<E> extends ObjectArrayIterator<E>
      * Constructs an ObjectArrayListIterator that will iterate over a range of values
      * in the specified array.
      *
-     * @param array  the array to iterate over
-     * @param start  the index to start iterating at
-     * @param end  the index (exclusive) to finish iterating at
+     * @param array  The array to iterate over
+     * @param start  The index to start iterating at
+     * @param end  The index (exclusive) to finish iterating at
      * @throws IndexOutOfBoundsException if the start or end index is out of bounds
      * @throws IllegalArgumentException if end index is before the start
      * @throws NullPointerException if {@code array} is {@code null}
@@ -88,11 +89,10 @@ public class ObjectArrayListIterator<E> extends ObjectArrayIterator<E>
     }
 
     /**
-     * This iterator does not support modification of its backing array's size, and so will
-     * always throw an {@link UnsupportedOperationException} when this method is invoked.
+     * Always throws {@link UnsupportedOperationException}.
      *
-     * @param obj  the object to add
-     * @throws UnsupportedOperationException always thrown.
+     * @param obj Ignored.
+     * @throws UnsupportedOperationException Always thrown.
      */
     @Override
     public void add(final E obj) {
@@ -112,7 +112,7 @@ public class ObjectArrayListIterator<E> extends ObjectArrayIterator<E>
     /**
      * Gets the next element from the array.
      *
-     * @return the next element
+     * @return The next element
      * @throws NoSuchElementException if there is no next element
      */
     @Override
@@ -127,7 +127,7 @@ public class ObjectArrayListIterator<E> extends ObjectArrayIterator<E>
     /**
      * Gets the next index to be retrieved.
      *
-     * @return the index of the item to be retrieved next
+     * @return The index of the item to be retrieved next
      */
     @Override
     public int nextIndex() {
@@ -137,7 +137,7 @@ public class ObjectArrayListIterator<E> extends ObjectArrayIterator<E>
     /**
      * Gets the previous element from the array.
      *
-     * @return the previous element
+     * @return The previous element
      * @throws NoSuchElementException if there is no previous element
      */
     @Override
@@ -152,7 +152,7 @@ public class ObjectArrayListIterator<E> extends ObjectArrayIterator<E>
     /**
      * Gets the index of the item to be retrieved if {@link #previous()} is called.
      *
-     * @return the index of the item to be retrieved next
+     * @return The index of the item to be retrieved next
      */
     @Override
     public int previousIndex() {
@@ -175,15 +175,15 @@ public class ObjectArrayListIterator<E> extends ObjectArrayIterator<E>
      * to {@link #next()} of {@link #previous()}.
      * </p>
      * <p>
-     * <strong>Note:</strong> {@link java.util.ListIterator} implementations that support {@code add()}
+     * <strong>Note:</strong> {@link ListIterator} implementations that support {@code add()}
      * and {@code remove()} only allow {@code set()} to be called once per call
-     * to {@code next()} or {@code previous} (see the {@link java.util.ListIterator}
+     * to {@code next()} or {@code previous} (see the {@link ListIterator}
      * Javadoc for more details). Since this implementation does not support
      * {@code add()} or {@code remove()}, {@code set()} may be
      * called as often as desired.
      * </p>
      *
-     * @param obj  the object to set into the array
+     * @param obj  The object to set into the array
      * @throws IllegalStateException if next() has not yet been called.
      * @throws ClassCastException if the object type is unsuitable for the array
      */

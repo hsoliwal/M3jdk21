@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -35,7 +35,7 @@ public abstract class AbstractCompositePredicateTest<T> extends AbstractMockPred
     /**
      * Creates a new {@code TestCompositePredicate}.
      *
-     * @param testValue the value which the mock predicates should expect to see (may be null).
+     * @param testValue The value which the mock predicates should expect to see (may be null).
      */
     protected AbstractCompositePredicateTest(final T testValue) {
         super(testValue);
@@ -44,10 +44,10 @@ public abstract class AbstractCompositePredicateTest<T> extends AbstractMockPred
     /**
      * Creates an instance of the predicate to test.
      *
-     * @param mockReturnValues the return values for the mock predicates, or null if that mock is not expected
+     * @param mockReturnValues The return values for the mock predicates, or null if that mock is not expected
      *                         to be called
      *
-     * @return a predicate to test.
+     * @return A predicate to test.
      */
     protected final Predicate<T> getPredicateInstance(final Boolean... mockReturnValues) {
         final List<Predicate<T>> predicates = new ArrayList<>();
@@ -60,16 +60,16 @@ public abstract class AbstractCompositePredicateTest<T> extends AbstractMockPred
     /**
      * Creates an instance of the predicate to test.
      *
-     * @param predicates the argument to {@code getInstance}.
-     * @return a predicate to test.
+     * @param predicates The argument to {@code getInstance}.
+     * @return A predicate to test.
      */
     protected abstract Predicate<T> getPredicateInstance(Collection<Predicate<T>> predicates);
 
     /**
      * Creates an instance of the predicate to test.
      *
-     * @param predicates the arguments to {@code getInstance}.
-     * @return a predicate to test.
+     * @param predicates The arguments to {@code getInstance}.
+     * @return A predicate to test.
      */
     protected abstract Predicate<T> getPredicateInstance(Predicate<? super T>... predicates);
 
@@ -77,7 +77,7 @@ public abstract class AbstractCompositePredicateTest<T> extends AbstractMockPred
      * Tests {@code getInstance} with a null predicate array.
      */
     @Test
-    public final void nullArrayToGetInstance() {
+    final void nullArrayToGetInstance() {
         assertThrows(NullPointerException.class, () -> getPredicateInstance((Predicate<T>[]) null));
     }
 
@@ -85,7 +85,7 @@ public abstract class AbstractCompositePredicateTest<T> extends AbstractMockPred
      * Tests {@code getInstance} with a null predicate collection
      */
     @Test
-    public final void nullCollectionToGetInstance() {
+    final void nullCollectionToGetInstance() {
         assertThrows(NullPointerException.class, () -> getPredicateInstance((Collection<Predicate<T>>) null));
     }
 
@@ -94,7 +94,7 @@ public abstract class AbstractCompositePredicateTest<T> extends AbstractMockPred
      */
     @SuppressWarnings({"unchecked"})
     @Test
-    public final void nullElementInArrayToGetInstance() {
+    final void nullElementInArrayToGetInstance() {
         assertThrows(NullPointerException.class, () -> getPredicateInstance(new Predicate[] { null }));
     }
 
@@ -103,7 +103,7 @@ public abstract class AbstractCompositePredicateTest<T> extends AbstractMockPred
      */
     @SuppressWarnings({"unchecked"})
     @Test
-    public final void nullElementsInArrayToGetInstance() {
+    final void nullElementsInArrayToGetInstance() {
         assertThrows(NullPointerException.class, () -> getPredicateInstance(new Predicate[] { null, null }));
     }
 
@@ -111,7 +111,7 @@ public abstract class AbstractCompositePredicateTest<T> extends AbstractMockPred
      * Tests {@code getInstance} with a predicate collection that contains null elements
      */
     @Test
-    public final void nullElementsInCollectionToGetInstance() {
+    final void nullElementsInCollectionToGetInstance() {
         final Collection<Predicate<T>> coll = new ArrayList<>();
         coll.add(null);
         coll.add(null);

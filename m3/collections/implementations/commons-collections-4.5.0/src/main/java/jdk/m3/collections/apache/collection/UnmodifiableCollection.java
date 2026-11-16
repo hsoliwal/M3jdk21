@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -32,7 +32,7 @@ import jdk.m3.collections.apache.iterators.UnmodifiableIterator;
  * Attempts to modify it will result in an UnsupportedOperationException.
  * </p>
  *
- * @param <E> the type of the elements in the collection
+ * @param <E> The type of the elements in the collection.
  * @since 3.0
  */
 public final class UnmodifiableCollection<E>
@@ -43,14 +43,15 @@ public final class UnmodifiableCollection<E>
     private static final long serialVersionUID = -239892006883819945L;
 
     /**
-     * Factory method to create an unmodifiable collection.
+     * Creates an unmodifiable collection.
      * <p>
      * If the collection passed in is already unmodifiable, it is returned.
+     * </p>
      *
-     * @param <T> the type of the elements in the collection
-     * @param coll  the collection to decorate, must not be null
-     * @return an unmodifiable collection
-     * @throws NullPointerException if collection is null
+     * @param <T> The type of the elements in the collection.
+     * @param coll  The collection to decorate, must not be null.
+     * @return An unmodifiable collection.
+     * @throws NullPointerException if collection is null.
      * @since 4.0
      */
     public static <T> Collection<T> unmodifiableCollection(final Collection<? extends T> coll) {
@@ -63,26 +64,42 @@ public final class UnmodifiableCollection<E>
     }
 
     /**
-     * Constructor that wraps (not copies).
+     * Constructs and wraps (not copies).
      *
-     * @param coll  the collection to decorate, must not be null
-     * @throws NullPointerException if collection is null
+     * @param coll  The collection to decorate, must not be null.
+     * @throws NullPointerException if collection is null.
      */
     @SuppressWarnings("unchecked") // safe to upcast
     private UnmodifiableCollection(final Collection<? extends E> coll) {
         super((Collection<E>) coll);
     }
 
+    /**
+     * Always throws {@link UnsupportedOperationException}.
+     *
+     * @param object Ignored.
+     * @throws UnsupportedOperationException Always thrown.
+     */
     @Override
     public boolean add(final E object) {
         throw new UnsupportedOperationException();
     }
 
+    /**
+     * Always throws {@link UnsupportedOperationException}.
+     *
+     * @throws UnsupportedOperationException Always thrown.
+     */
     @Override
     public boolean addAll(final Collection<? extends E> coll) {
         throw new UnsupportedOperationException();
     }
 
+    /**
+     * Always throws {@link UnsupportedOperationException}.
+     *
+     * @throws UnsupportedOperationException Always thrown.
+     */
     @Override
     public void clear() {
         throw new UnsupportedOperationException();
@@ -93,17 +110,33 @@ public final class UnmodifiableCollection<E>
         return UnmodifiableIterator.unmodifiableIterator(decorated().iterator());
     }
 
+    /**
+     * Always throws {@link UnsupportedOperationException}.
+     *
+     * @param object Ignored.
+     * @throws UnsupportedOperationException Always thrown.
+     */
     @Override
     public boolean remove(final Object object) {
         throw new UnsupportedOperationException();
     }
 
+    /**
+     * Always throws {@link UnsupportedOperationException}.
+     *
+     * @param coll Ignored.
+     * @throws UnsupportedOperationException Always thrown.
+     */
     @Override
     public boolean removeAll(final Collection<?> coll) {
         throw new UnsupportedOperationException();
     }
 
     /**
+     * Always throws {@link UnsupportedOperationException}.
+     *
+     * @param filter Ignored.
+     * @throws UnsupportedOperationException Always thrown.
      * @since 4.4
      */
     @Override
@@ -111,6 +144,12 @@ public final class UnmodifiableCollection<E>
         throw new UnsupportedOperationException();
     }
 
+    /**
+     * Always throws {@link UnsupportedOperationException}.
+     *
+     * @param coll Ignored.
+     * @throws UnsupportedOperationException Always thrown.
+     */
     @Override
     public boolean retainAll(final Collection<?> coll) {
         throw new UnsupportedOperationException();

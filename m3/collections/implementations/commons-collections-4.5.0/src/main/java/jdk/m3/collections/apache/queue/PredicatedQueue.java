@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -34,7 +34,7 @@ import jdk.m3.collections.apache.collection.PredicatedCollection;
  * </p>
  * <pre>Queue queue = PredicatedQueue.predicatedQueue(new UnboundedFifoQueue(), NotNullPredicate.INSTANCE);</pre>
  *
- * @param <E> the type of elements held in this queue
+ * @param <E> The type of elements held in this queue
  * @since 4.0
  */
 public class PredicatedQueue<E> extends PredicatedCollection<E> implements Queue<E> {
@@ -48,10 +48,10 @@ public class PredicatedQueue<E> extends PredicatedCollection<E> implements Queue
      * If there are any elements already in the queue being decorated, they
      * are validated.
      *
-     * @param <E> the type of the elements in the queue
-     * @param Queue  the queue to decorate, must not be null
-     * @param predicate  the predicate to use for validation, must not be null
-     * @return a new predicated queue
+     * @param <E> The type of the elements in the queue
+     * @param Queue  The queue to decorate, must not be null
+     * @param predicate  The predicate to use for validation, must not be null
+     * @return A new predicated queue
      * @throws NullPointerException if queue or predicate is null
      * @throws IllegalArgumentException if the queue contains invalid elements
      */
@@ -66,8 +66,8 @@ public class PredicatedQueue<E> extends PredicatedCollection<E> implements Queue
      * If there are any elements already in the collection being decorated, they
      * are validated.
      *
-     * @param queue  the queue to decorate, must not be null
-     * @param predicate  the predicate to use for validation, must not be null
+     * @param queue  The queue to decorate, must not be null
+     * @param predicate  The predicate to use for validation, must not be null
      * @throws NullPointerException if queue or predicate is null
      * @throws IllegalArgumentException if the Queue contains invalid elements
      */
@@ -78,7 +78,7 @@ public class PredicatedQueue<E> extends PredicatedCollection<E> implements Queue
     /**
      * Gets the queue being decorated.
      *
-     * @return the decorated queue
+     * @return The decorated queue
      */
     @Override
     protected Queue<E> decorated() {
@@ -94,8 +94,8 @@ public class PredicatedQueue<E> extends PredicatedCollection<E> implements Queue
      * Override to validate the object being added to ensure it matches
      * the predicate.
      *
-     * @param object  the object being added
-     * @return the result of adding to the underlying queue
+     * @param object  The object being added
+     * @return The result of adding to the underlying queue
      * @throws IllegalArgumentException if the add is invalid
      */
     @Override

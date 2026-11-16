@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -25,19 +25,19 @@ import jdk.m3.collections.apache.functors.PrototypeFactory;
  * {@code FactoryUtils} provides reference implementations and utilities
  * for the Factory functor interface. The supplied factories are:
  * <ul>
- * <li>Prototype - clones a specified object
- * <li>Instantiate - creates objects using reflection
- * <li>Constant - always returns the same object
- * <li>Null - always returns null
- * <li>Exception - always throws an exception
+ * <li>Prototype - clones a specified object</li>
+ * <li>Instantiate - creates objects using reflection</li>
+ * <li>Constant - always returns the same object</li>
+ * <li>Null - always returns null</li>
+ * <li>Exception - always throws an exception</li>
  * </ul>
  * <p>
  * Since v4.1 only factories which are considered to be safe are
  * Serializable. Factories considered to be unsafe for serialization are:
  * </p>
  * <ul>
- * <li>Prototype
- * <li>Instantiate
+ * <li>Prototype</li>
+ * <li>Instantiate</li>
  * </ul>
  *
  * @since 3.0
@@ -51,9 +51,9 @@ public class FactoryUtils {
      * use the prototype factory.
      *
      * @see jdk.m3.collections.apache.functors.ConstantFactory
-     * @param <T> the type that the factory creates
-     * @param constantToReturn  the constant object to return each time in the factory
-     * @return the {@code constant} factory.
+     * @param <T> The type that the factory creates
+     * @param constantToReturn  The constant object to return each time in the factory
+     * @return The {@code constant} factory.
      */
     public static <T> Factory<T> constantFactory(final T constantToReturn) {
         return ConstantFactory.constantFactory(constantToReturn);
@@ -64,8 +64,8 @@ public class FactoryUtils {
      * This could be useful during testing as a placeholder.
      *
      * @see jdk.m3.collections.apache.functors.ExceptionFactory
-     * @param <T> the type that the factory creates
-     * @return the factory
+     * @param <T> The type that the factory creates
+     * @return The factory
      */
     public static <T> Factory<T> exceptionFactory() {
         return ExceptionFactory.<T>exceptionFactory();
@@ -76,9 +76,9 @@ public class FactoryUtils {
      * a no-args constructor.
      *
      * @see jdk.m3.collections.apache.functors.InstantiateFactory
-     * @param <T> the type that the factory creates
-     * @param classToInstantiate  the Class to instantiate each time in the factory
-     * @return the {@code reflection} factory
+     * @param <T> The type that the factory creates
+     * @param classToInstantiate  The Class to instantiate each time in the factory
+     * @return The {@code reflection} factory
      * @throws NullPointerException if the classToInstantiate is null
      */
     public static <T> Factory<T> instantiateFactory(final Class<T> classToInstantiate) {
@@ -90,11 +90,11 @@ public class FactoryUtils {
      * the arguments specified to this method.
      *
      * @see jdk.m3.collections.apache.functors.InstantiateFactory
-     * @param <T> the type that the factory creates
-     * @param classToInstantiate  the Class to instantiate each time in the factory
+     * @param <T> The type that the factory creates
+     * @param classToInstantiate  The Class to instantiate each time in the factory
      * @param paramTypes  parameter types for the constructor, can be null
-     * @param args  the arguments to pass to the constructor, can be null
-     * @return the {@code reflection} factory
+     * @param args  The arguments to pass to the constructor, can be null
+     * @return The {@code reflection} factory
      * @throws NullPointerException if the classToInstantiate is null
      * @throws IllegalArgumentException if the paramTypes and args don't match
      * @throws IllegalArgumentException if the constructor doesn't exist
@@ -109,8 +109,8 @@ public class FactoryUtils {
      * This could be useful during testing as a placeholder.
      *
      * @see jdk.m3.collections.apache.functors.ConstantFactory
-     * @param <T> the "type" of null object the factory should return.
-     * @return the factory
+     * @param <T> The "type" of null object the factory should return.
+     * @return The factory
      */
     public static <T> Factory<T> nullFactory() {
         return ConstantFactory.<T>constantFactory(null);
@@ -128,9 +128,9 @@ public class FactoryUtils {
      * </ul>
      *
      * @see jdk.m3.collections.apache.functors.PrototypeFactory
-     * @param <T> the type that the factory creates
-     * @param prototype  the object to clone each time in the factory
-     * @return the {@code prototype} factory, or a {@link ConstantFactory#NULL_INSTANCE} if
+     * @param <T> The type that the factory creates
+     * @param prototype  The object to clone each time in the factory
+     * @return The {@code prototype} factory, or a {@link ConstantFactory#NULL_INSTANCE} if
      * the {@code prototype} is {@code null}
      * @throws IllegalArgumentException if the prototype cannot be cloned
      */

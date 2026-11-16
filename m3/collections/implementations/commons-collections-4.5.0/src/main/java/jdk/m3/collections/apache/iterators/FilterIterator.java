@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -29,7 +29,7 @@ import jdk.m3.collections.apache.functors.TruePredicate;
  * those elements that match the specified {@link Predicate Predicate}.
  * </p>
  *
- * @param <E> the type of elements returned by this iterator.
+ * @param <E> The type of elements returned by this iterator.
  * @since 1.0
  */
 public class FilterIterator<E> implements IteratorOperations<E> {
@@ -57,7 +57,7 @@ public class FilterIterator<E> implements IteratorOperations<E> {
      * Constructs a new {@code FilterIterator} that will not function
      * until {@link #setPredicate(Predicate) setPredicate} is invoked.
      *
-     * @param iterator  the iterator to use
+     * @param iterator  The iterator to use
      */
     public FilterIterator(final Iterator<? extends E> iterator) {
         this.iterator = iterator;
@@ -67,8 +67,8 @@ public class FilterIterator<E> implements IteratorOperations<E> {
      * Constructs a new {@code FilterIterator} that will use the
      * given iterator and predicate.
      *
-     * @param iterator  the iterator to use
-     * @param predicate  the predicate to use, null accepts all values.
+     * @param iterator  The iterator to use
+     * @param predicate  The predicate to use, null accepts all values.
      */
     public FilterIterator(final Iterator<? extends E> iterator, final Predicate<? super E> predicate) {
         this.iterator = iterator;
@@ -78,7 +78,7 @@ public class FilterIterator<E> implements IteratorOperations<E> {
     /**
      * Gets the iterator this iterator is using.
      *
-     * @return the underlying iterator.
+     * @return The underlying iterator.
      */
     public Iterator<? extends E> getIterator() {
         return iterator;
@@ -87,7 +87,7 @@ public class FilterIterator<E> implements IteratorOperations<E> {
     /**
      * Gets the predicate this iterator is using.
      *
-     * @return the filtering predicate.
+     * @return The filtering predicate.
      */
     public Predicate<? super E> getPredicate() {
         return predicate;
@@ -108,7 +108,7 @@ public class FilterIterator<E> implements IteratorOperations<E> {
     /**
      * Returns the next object that matches the predicate.
      *
-     * @return the next object which matches the given predicate
+     * @return The next object which matches the given predicate
      * @throws NullPointerException if either the iterator or predicate are null
      * @throws NoSuchElementException if there are no more elements that
      *  match the predicate
@@ -149,7 +149,7 @@ public class FilterIterator<E> implements IteratorOperations<E> {
      * Sets the iterator for this iterator to use.
      * If iteration has started, this effectively resets the iterator.
      *
-     * @param iterator  the iterator to use
+     * @param iterator  The iterator to use
      */
     public void setIterator(final Iterator<? extends E> iterator) {
         this.iterator = iterator;
@@ -176,7 +176,7 @@ public class FilterIterator<E> implements IteratorOperations<E> {
     /**
      * Sets the predicate this the iterator to use where null accepts all values.
      *
-     * @param predicate  the predicate to use, null accepts all values.
+     * @param predicate  The predicate to use, null accepts all values.
      */
     public void setPredicate(final Predicate<? super E> predicate) {
         this.predicate = safePredicate(predicate);

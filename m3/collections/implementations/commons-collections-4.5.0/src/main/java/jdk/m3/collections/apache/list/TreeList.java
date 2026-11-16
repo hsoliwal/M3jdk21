@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,12 +16,25 @@
  */
 // Modified 2026 by Hitesh Soliwal and Contributors to the Synexia Project:
 // array slot/index/mask lowering of the existing ranked, threaded AVL algorithm.
+// Modified 2026 by Hitesh Soliwal and Synexia contributors: iterative ranked and extremal slot traversal.
+// Modified 2026 by Hitesh Soliwal and Synexia contributors: nonrecursive threaded indexOf.
+// Modified 2026 by Hitesh Soliwal and Synexia contributors: single-reservation bulk slot growth.
+// Modified 2026 by Hitesh Soliwal and contributors: bounded bulk rollback through initialized child links.
+// Modified 2026 by Hitesh Soliwal and Synexia contributors: single-pass removal and nonredundant AVL height updates.
+// Modified 2026 by Hitesh Soliwal and contributors: allocation-free reversed-spine AVL joins.
+// Modified 2026 by Hitesh Soliwal and contributors: array-backed linear bulk range removal.
+// Modified 2026 by Hitesh Soliwal and contributors: guarded bulk membership compaction.
+// Modified 2026 by Synexia contributors: reuse a temporary owner-state membership mask.
+// Modified 2026 by Hitesh Soliwal and contributors: linear indexed bulk insertion into reusable slots.
+// Modified 2026 by Synexia contributors: direct threaded reverse search and List hashing without iterator allocation.
 package jdk.m3.collections.apache.list;
 
 import java.util.AbstractList;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.ConcurrentModificationException;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.ListIterator;
 import java.util.NoSuchElementException;
@@ -59,7 +72,7 @@ import jdk.m3.collections.apache.OrderedIterator;
  * Deleted slots are reused, and {@link #clear()} releases the backing arrays.
  * </p>
  *
- * @param <E> the type of the elements in the list.
+ * @param <E> The type of the elements in the list.
  * @since 3.1
  */
 public class TreeList<E> extends AbstractList<E> {
@@ -78,6 +91,8 @@ public class TreeList<E> extends AbstractList<E> {
         private static final int LEFT_PREVIOUS = 1;
         private static final int RIGHT_NEXT = 2;
         private static final int LIVE = 4;
+        /** Temporary per-slot decision bit; cleared before any public callback. */
+        private static final int MARK_REMOVED = 8;
         private static final Object[] EMPTY_VALUES = new Object[0];
         private static final int[] EMPTY_INTS = new int[0];
         private static final byte[] EMPTY_BYTES = new byte[0];
@@ -91,13 +106,23 @@ public class TreeList<E> extends AbstractList<E> {
         private int free = NONE;
         private int detached = NONE;
 
-        /** Publishes new lanes together, after every allocation succeeds. */
-        private void grow() {
-            final long proposed = Math.max(8L, values.length + (long) (values.length >>> 1));
-            final int capacity = (int) Math.min(Integer.MAX_VALUE - 8L, proposed);
-            if (capacity <= values.length) {
-                throw new OutOfMemoryError("TreeList slot capacity exhausted");
-            }
+        /**
+         * Reserve the remaining build demand at the first exhausted fresh slot.
+         * Advance the original geometric policy without copying intermediate lanes.
+         * Publish all six new lanes together, after every allocation succeeds.
+         */
+        private void grow(final int remaining) {
+            final long required = (long) used + remaining;
+            long proposed = values.length;
+            do {
+                final long next = Math.min(Integer.MAX_VALUE - 8L,
+                        Math.max(8L, proposed + (proposed >>> 1)));
+                if (next <= proposed) {
+                    throw new OutOfMemoryError("TreeList slot capacity exhausted");
+                }
+                proposed = next;
+            } while (proposed < required);
+            final int capacity = (int) proposed;
             final Object[] newValues = Arrays.copyOf(values, capacity);
             final int[] newLeft = Arrays.copyOf(left, capacity);
             final int[] newRight = Arrays.copyOf(right, capacity);
@@ -112,16 +137,16 @@ public class TreeList<E> extends AbstractList<E> {
             state = newState;
         }
 
-        private int freshSlot() {
+        private int freshSlot(final int remaining) {
             if (used == values.length) {
-                grow();
+                grow(remaining);
             }
             return used++;
         }
 
-        private int acquireSlot() {
+        private int acquireSlot(final int remaining) {
             if (free == NONE) {
-                return freshSlot();
+                return freshSlot(remaining);
             }
             final int slot = free;
             free = left[slot];
@@ -129,7 +154,7 @@ public class TreeList<E> extends AbstractList<E> {
         }
 
         private int newLeaf(final int position, final E value, final int next, final int previous) {
-            final int slot = acquireSlot();
+            final int slot = acquireSlot(1);
             relativePosition[slot] = position;
             values[slot] = value;
             left[slot] = previous;
@@ -139,31 +164,85 @@ public class TreeList<E> extends AbstractList<E> {
             return slot;
         }
 
-        /** Reuse slots while journaling this build's ownership for failure cleanup. */
+        /** Reuse initialized child links for large-build rollback ownership. */
         private int build(final Collection<? extends E> source) {
             final Iterator<? extends E> iterator = source.iterator();
             final int end = source.size() - 1;
-            final long journalLength = Math.max(1L, end + 1L) + 1L;
-            if (journalLength > Integer.MAX_VALUE - 8L) {
+            final long buildLength = Math.max(1L, end + 1L) + 1L;
+            if (buildLength > Integer.MAX_VALUE - 8L) {
                 throw new OutOfMemoryError("TreeList build capacity exhausted");
             }
-            // Cell zero is the initialized prefix length; remaining cells are slot IDs.
-            final int[] acquired = new int[(int) journalLength];
-            try {
-                return build(iterator, 0, end, 0, NONE, NONE, acquired);
-            } catch (final RuntimeException | Error failure) {
-                // Only this uncommitted subtree is released. Reversing acquisition
-                // restores the popped free-slot order without retaining partial input.
-                for (int index = acquired[0]; index > 0; index--) {
-                    releaseSlot(acquired[index]);
+            if (end < 8) {
+                // At most nine integers; retain the existing small-build path.
+                final int[] acquired = new int[(int) buildLength];
+                try {
+                    return build(iterator, 0, end, 0, NONE, NONE, acquired);
+                } catch (final RuntimeException | Error failure) {
+                    for (int index = acquired[0]; index > 0; index--) {
+                        releaseSlot(acquired[index]);
+                    }
+                    throw failure;
                 }
+            }
+            final int slot = acquireBuildSlot(NONE, NONE, (int) buildLength - 1);
+            try {
+                build(iterator, slot, 0, end, 0, (int) buildLength - 2);
+                return slot;
+            } catch (final RuntimeException | Error failure) {
+                // Acquisition is preorder; right/left/root restores its exact reverse.
+                releaseBuildTree(slot);
                 throw failure;
+            }
+        }
+
+        /** Initialize both threads before publishing an uncommitted child link. */
+        private int acquireBuildSlot(final int previous, final int next, final int remaining) {
+            final int slot = acquireSlot(remaining);
+            state[slot] = LEFT_PREVIOUS | RIGHT_NEXT | LIVE;
+            left[slot] = previous;
+            right[slot] = next;
+            return slot;
+        }
+
+        /** Carry the remaining acquisition count without a retained counter or journal. */
+        private void build(final Iterator<? extends E> iterator, final int slot,
+                final int start, final int end, final int parentPosition, int remaining) {
+            final int mid = start + (end - start) / 2;
+            if (start < mid) {
+                final int child = acquireBuildSlot(left[slot], slot, remaining);
+                left[slot] = child;
+                state[slot] &= ~LEFT_PREVIOUS;
+                build(iterator, child, start, mid - 1, mid, remaining - 1);
+                remaining -= mid - start;
+            }
+            final E value = iterator.next();
+            values[slot] = value;
+            relativePosition[slot] = mid - parentPosition;
+            if (mid < end) {
+                final int child = acquireBuildSlot(slot, right[slot], remaining);
+                right[slot] = child;
+                state[slot] &= ~RIGHT_NEXT;
+                build(iterator, child, mid + 1, end, mid, remaining - 1);
+            }
+            recalcHeight(slot);
+        }
+
+        /** Release only the uncommitted balanced subtree, never its thread targets. */
+        private void releaseBuildTree(final int slot) {
+            if (slot != NONE) {
+                final int leftChild = leftSubTree(slot);
+                final int rightChild = rightSubTree(slot);
+                releaseBuildTree(rightChild);
+                releaseBuildTree(leftChild);
+                releaseSlot(slot);
             }
         }
 
         private int build(final Iterator<? extends E> iterator, final int start, final int end,
                 final int parentPosition, final int previous, final int next, final int[] acquired) {
-            final int slot = acquireSlot();
+            // The existing journal already records the whole build's remaining demand.
+            // Recycled slots are still consumed before any fresh capacity is reserved.
+            final int slot = acquireSlot(acquired.length - 1 - acquired[0]);
             acquired[++acquired[0]] = slot;
             final int mid = start + (end - start) / 2;
             state[slot] = LIVE;
@@ -235,32 +314,37 @@ public class TreeList<E> extends AbstractList<E> {
             return (E) values[slot];
         }
 
-        private int get(int slot, int index) {
-            while (true) {
-                final int relative = index - relativePosition[slot];
+        private int get(final int slot, final int index) {
+            int current = slot;
+            int position = index;
+            for (;;) {
+                final int relative = position - relativePosition[current];
                 if (relative == 0) {
-                    return slot;
+                    return current;
                 }
-                slot = relative < 0 ? leftSubTree(slot) : rightSubTree(slot);
-                if (slot == NONE) {
+                final int next = relative < 0 ? leftSubTree(current) : rightSubTree(current);
+                if (next == NONE) {
                     return NONE;
                 }
-                index = relative;
+                current = next;
+                position = relative;
             }
         }
 
-        private int min(int slot) {
-            while (leftSubTree(slot) != NONE) {
-                slot = left[slot];
+        private int min(final int slot) {
+            int current = slot;
+            while (leftSubTree(current) != NONE) {
+                current = left[current];
             }
-            return slot;
+            return current;
         }
 
-        private int max(int slot) {
-            while (rightSubTree(slot) != NONE) {
-                slot = right[slot];
+        private int max(final int slot) {
+            int current = slot;
+            while (rightSubTree(current) != NONE) {
+                current = right[current];
             }
-            return slot;
+            return current;
         }
 
         private int next(final int slot) {
@@ -271,20 +355,32 @@ public class TreeList<E> extends AbstractList<E> {
             return (state[slot] & LEFT_PREVIOUS) != 0 || left[slot] == NONE ? left[slot] : max(left[slot]);
         }
 
+        /**
+         * Scan the existing threaded AVL slots in encounter order. This uses
+         * primitive slot offsets instead of recursive Java stack frames, and
+         * retains the incumbent stored-value-first equality callback order.
+         */
         private int indexOf(final int slot, final Object object, final int index) {
-            if (leftSubTree(slot) != NONE) {
-                final int found = indexOf(left[slot], object, index + relativePosition[left[slot]]);
-                if (found != -1) {
-                    return found;
+            int cursor = slot;
+            int position = index;
+            while (leftSubTree(cursor) != NONE) {
+                cursor = left[cursor];
+                position += relativePosition[cursor];
+            }
+            while (cursor != NONE) {
+                if (Objects.equals(values[cursor], object)) {
+                    return position;
                 }
+                cursor = next(cursor);
+                position++;
             }
-            if (Objects.equals(values[slot], object)) {
-                return index;
-            }
-            return rightSubTree(slot) == NONE ? -1
-                    : indexOf(right[slot], object, index + relativePosition[right[slot]]);
+            return -1;
         }
 
+        /**
+         * Original rank-addressed recursive export, retained for subclasses.
+         * Subclasses can override size() and observe its original failure order.
+         */
         private void toArray(final int slot, final Object[] array, final int index) {
             array[index] = values[slot];
             if (leftSubTree(slot) != NONE) {
@@ -292,6 +388,24 @@ public class TreeList<E> extends AbstractList<E> {
             }
             if (rightSubTree(slot) != NONE) {
                 toArray(right[slot], array, index + relativePosition[right[slot]]);
+            }
+        }
+
+        /**
+         * Export the array-owned AVL slots without recursive stack frames.
+         * Descend to the first live slot once; thereafter follow the existing
+         * threaded successor indexes, keeping exactly the original list order.
+         */
+        private void toArrayThreaded(final int slot, final Object[] array, final int index) {
+            int cursor = slot;
+            int position = index;
+            while (leftSubTree(cursor) != NONE) {
+                cursor = left[cursor];
+                position += relativePosition[cursor];
+            }
+            while (cursor != NONE) {
+                array[position++] = values[cursor];
+                cursor = next(cursor);
             }
         }
 
@@ -340,7 +454,7 @@ public class TreeList<E> extends AbstractList<E> {
                 }
                 return rotateLeft(slot);
             default:
-                throw new IllegalStateException("tree inconsistent!");
+                throw new IllegalStateException("tree inconsistent.");
             }
         }
 
@@ -359,9 +473,7 @@ public class TreeList<E> extends AbstractList<E> {
                     relativePosition[slot]--;
                 }
             }
-            final int result = balance(slot);
-            recalcHeight(slot);
-            return result;
+            return balance(slot);
         }
 
         private int remove(final int slot, final int index) {
@@ -380,7 +492,6 @@ public class TreeList<E> extends AbstractList<E> {
                     relativePosition[slot]--;
                 }
             }
-            recalcHeight(slot);
             return balance(slot);
         }
 
@@ -392,7 +503,6 @@ public class TreeList<E> extends AbstractList<E> {
             if (relativePosition[slot] < 0) {
                 relativePosition[slot]++;
             }
-            recalcHeight(slot);
             return balance(slot);
         }
 
@@ -404,7 +514,6 @@ public class TreeList<E> extends AbstractList<E> {
             if (relativePosition[slot] > 0) {
                 relativePosition[slot]--;
             }
-            recalcHeight(slot);
             return balance(slot);
         }
 
@@ -428,6 +537,7 @@ public class TreeList<E> extends AbstractList<E> {
                 detached = slot;
                 return right[slot];
             }
+            final Object removedValue = values[slot];
             if (heightRightMinusLeft(slot) > 0) {
                 final int successor = min(right[slot]);
                 values[slot] = values[successor];
@@ -454,6 +564,9 @@ public class TreeList<E> extends AbstractList<E> {
                     relativePosition[slot]--;
                 }
             }
+            // Carry the logical removal result in the existing detached slot.
+            // No caller observes it before releaseDetached clears the payload.
+            values[detached] = removedValue;
             recalcHeight(slot);
             return slot;
         }
@@ -468,16 +581,164 @@ public class TreeList<E> extends AbstractList<E> {
             free = slot;
         }
 
+        /** Splice exact-owner payloads into existing slots before rebuilding the ranked threads. */
+        private int insertRange(final int root, final int index, final Collection<? extends E> source,
+                final int added, final int totalSize) {
+            int first = min(root);
+            int last = NONE;
+            int after = NONE;
+            int position = 0;
+            int current = first;
+            while (current != NONE) {
+                final int successor = next(current);
+                if (position++ == index) {
+                    after = current;
+                }
+                left[current] = last;
+                if (last != NONE) {
+                    right[last] = current;
+                }
+                state[current] = LEFT_PREVIOUS | RIGHT_NEXT | LIVE;
+                last = current;
+                current = successor;
+            }
+            right[last] = NONE;
+            int previous = after == NONE ? last : left[after];
+            final TreeList<? extends E> sourceTree = source.getClass() == TreeList.class
+                    ? (TreeList<? extends E>) source : null;
+            final ArrayList<? extends E> sourceArray =
+                    sourceTree == null ? (ArrayList<? extends E>) source : null;
+            int sourceSlot = sourceTree == null ? NONE : sourceTree.slots.min(sourceTree.root);
+            for (int i = 0; i < added; i++) {
+                // Exact-owner access invokes no user callback; the caller proves capacity.
+                final E value;
+                if (sourceTree == null) {
+                    value = sourceArray.get(i);
+                } else {
+                    value = sourceTree.slots.value(sourceSlot);
+                    sourceSlot = sourceTree.slots.next(sourceSlot);
+                }
+                final int slot = newLeaf(0, value, after, previous);
+                if (previous == NONE) {
+                    first = slot;
+                } else {
+                    right[previous] = slot;
+                }
+                previous = slot;
+            }
+            if (after != NONE) {
+                left[after] = previous;
+            }
+            return (int) (rebuildRange(first, totalSize) >>> 32);
+        }
+
+        /** Release a large range and thread the surviving slots without allocation. */
+        private int removeRange(final int root, final int fromIndex, final int toIndex, final int remainingSize) {
+            int first = NONE;
+            int last = NONE;
+            int index = 0;
+            int current = min(root);
+            while (current != NONE) {
+                // Compute the original successor before changing either link lane.
+                final int successor = next(current);
+                if (index >= fromIndex && index < toIndex) {
+                    releaseSlot(current);
+                } else {
+                    left[current] = last;
+                    if (last == NONE) {
+                        first = current;
+                    } else {
+                        right[last] = current;
+                    }
+                    state[current] = LEFT_PREVIOUS | RIGHT_NEXT | LIVE;
+                    last = current;
+                }
+                index++;
+                current = successor;
+            }
+            if (last != NONE) {
+                right[last] = NONE;
+            }
+            return (int) (rebuildRange(first, remainingSize) >>> 32);
+        }
+
+        /** Clear transient membership decisions before inherited dispatch or failure. */
+        private void clearMembershipMarks(final int root) {
+            for (int current = min(root); current != NONE; current = next(current)) {
+                state[current] &= ~MARK_REMOVED;
+            }
+        }
+
+        /** Consume the decisions already made during the callback-free preflight. */
+        private int removeMarkedMembership(final int root, final int remainingSize) {
+            int first = NONE;
+            int last = NONE;
+            int current = min(root);
+            while (current != NONE) {
+                final int successor = next(current);
+                if ((state[current] & MARK_REMOVED) != 0) {
+                    releaseSlot(current);
+                } else {
+                    left[current] = last;
+                    if (last == NONE) {
+                        first = current;
+                    } else {
+                        right[last] = current;
+                    }
+                    state[current] = LEFT_PREVIOUS | RIGHT_NEXT | LIVE;
+                    last = current;
+                }
+                current = successor;
+            }
+            if (last != NONE) {
+                right[last] = NONE;
+            }
+            return (int) (rebuildRange(first, remainingSize) >>> 32);
+        }
+
+        /** Pack the rebuilt root and the unconsumed chain head into one primitive. */
+        private long rebuildRange(final int first, final int length) {
+            if (length == 0) {
+                return ((long) NONE << 32) | (first & 0xffffffffL);
+            }
+            final int leftSize = length >>> 1;
+            final long prefix = rebuildRange(first, leftSize);
+            final int leftRoot = (int) (prefix >>> 32);
+            final int root = (int) prefix;
+            final long suffix = rebuildRange(right[root], length - leftSize - 1);
+            final int rightRoot = (int) (suffix >>> 32);
+            state[root] = LIVE;
+            if (leftRoot == NONE) {
+                state[root] |= LEFT_PREVIOUS;
+            } else {
+                left[root] = leftRoot;
+                relativePosition[leftRoot] -= leftSize;
+            }
+            if (rightRoot == NONE) {
+                state[root] |= RIGHT_NEXT;
+            } else {
+                right[root] = rightRoot;
+                relativePosition[rightRoot]++;
+            }
+            relativePosition[root] = leftSize;
+            recalcHeight(root);
+            return ((long) root << 32) | (suffix & 0xffffffffL);
+        }
+
         private void releaseDetached() {
             releaseSlot(detached);
             detached = NONE;
         }
 
-        /** Height-matched AVL join from the original owner, using a primitive ancestor stack. */
-        private int addAll(final int root, int other, final int currentSize, final int[] ancestors) {
+        /**
+         * Height-matched AVL join with the traversed spine as its own ancestor stack.
+         * Reverse only the child lane being descended, then restore each link before
+         * balancing. No allocation or external callback occurs while links are reversed.
+         */
+        private int addAll(final int root, int other, final int currentSize) {
             final int maximum = max(root);
             final int otherMinimum = min(other);
-            int depth = 0;
+            int ancestor = NONE;
             if (height(other) > height(root)) {
                 final int leftTree = removeMax(root);
                 int subtree = other;
@@ -485,8 +746,10 @@ public class TreeList<E> extends AbstractList<E> {
                 int parentAbsolute = 0;
                 while (subtree != NONE && height(subtree) > height(leftTree)) {
                     parentAbsolute = absolute;
-                    ancestors[depth++] = subtree;
-                    subtree = left[subtree];
+                    final int child = left[subtree];
+                    left[subtree] = ancestor;
+                    ancestor = subtree;
+                    subtree = child;
                     if (subtree != NONE) {
                         absolute += relativePosition[subtree];
                     }
@@ -504,10 +767,11 @@ public class TreeList<E> extends AbstractList<E> {
                 relativePosition[maximum] = currentSize - 1 - parentAbsolute;
                 relativePosition[other] += currentSize;
                 subtree = maximum;
-                while (depth != 0) {
-                    final int ancestor = ancestors[--depth];
+                while (ancestor != NONE) {
+                    final int previous = left[ancestor];
                     setLeft(ancestor, subtree, NONE);
                     subtree = balance(ancestor);
+                    ancestor = previous;
                 }
                 detached = NONE;
                 return subtree;
@@ -518,8 +782,10 @@ public class TreeList<E> extends AbstractList<E> {
             int parentAbsolute = 0;
             while (subtree != NONE && height(subtree) > height(other)) {
                 parentAbsolute = absolute;
-                ancestors[depth++] = subtree;
-                subtree = right[subtree];
+                final int child = right[subtree];
+                right[subtree] = ancestor;
+                ancestor = subtree;
+                subtree = child;
                 if (subtree != NONE) {
                     absolute += relativePosition[subtree];
                 }
@@ -536,10 +802,11 @@ public class TreeList<E> extends AbstractList<E> {
             }
             relativePosition[otherMinimum] = currentSize - parentAbsolute;
             subtree = otherMinimum;
-            while (depth != 0) {
-                final int ancestor = ancestors[--depth];
+            while (ancestor != NONE) {
+                final int previous = right[ancestor];
                 setRight(ancestor, subtree, NONE);
                 subtree = balance(ancestor);
+                ancestor = previous;
             }
             detached = NONE;
             return subtree;
@@ -562,8 +829,10 @@ public class TreeList<E> extends AbstractList<E> {
      * A list iterator over the linked list.
      */
     static class TreeListIterator<E> implements ListIterator<E>, OrderedIterator<E> {
+
         /** The parent list */
         private final TreeList<E> parent;
+
         /**
          * Cache of the next node that will be returned by {@link #next()}.
          */
@@ -573,6 +842,7 @@ public class TreeList<E> extends AbstractList<E> {
          * The index of the next node to be returned.
          */
         private int nextIndex;
+
         /**
          * Cache of the last node that was returned by {@link #next()}
          * or {@link #previous()}.
@@ -583,10 +853,11 @@ public class TreeList<E> extends AbstractList<E> {
          * The index of the last node that was returned.
          */
         private int currentIndex;
+
         /**
          * The modification count that the list is expected to have. If the list
          * doesn't have this count, then a
-         * {@link java.util.ConcurrentModificationException} may be thrown by
+         * {@link ConcurrentModificationException} may be thrown by
          * the operations.
          */
         private int expectedModCount;
@@ -594,10 +865,11 @@ public class TreeList<E> extends AbstractList<E> {
         /**
          * Create a ListIterator for a list.
          *
-         * @param parent  the parent list
-         * @param fromIndex  the index to start at
+         * @param parent  The parent list
+         * @param fromIndex  The index to start from
          */
         protected TreeListIterator(final TreeList<E> parent, final int fromIndex) {
+            checkInterval(fromIndex, 0, parent.size(), parent.size());
             this.parent = parent;
             this.expectedModCount = parent.modCount;
             this.next = parent.root == -1 ? -1 : parent.slots.get(parent.root, fromIndex);
@@ -710,6 +982,21 @@ public class TreeList<E> extends AbstractList<E> {
         }
     }
 
+    /**
+     * Checks whether the index is valid.
+     *
+     * @param index  The index to check.
+     * @param startIndex  The first allowed index.
+     * @param endIndex  The last allowed index.
+     * @param endIndex  The size.
+     * @throws IndexOutOfBoundsException if the index is invalid
+     */
+    private static void checkInterval(final int index, final int startIndex, final int endIndex, final int size) {
+        if (index < startIndex || index > endIndex) {
+            throw new IndexOutOfBoundsException("Invalid index:" + index + ", size=" + size);
+        }
+    }
+
     /** The root node in the AVL tree */
     private int root = -1;
 
@@ -728,7 +1015,7 @@ public class TreeList<E> extends AbstractList<E> {
     /**
      * Constructs a new empty list that copies the specified collection.
      *
-     * @param coll  the collection to copy
+     * @param coll  The collection to copy
      * @throws NullPointerException if the collection is null
      */
     public TreeList(final Collection<? extends E> coll) {
@@ -741,13 +1028,13 @@ public class TreeList<E> extends AbstractList<E> {
     /**
      * Adds a new element to the list.
      *
-     * @param index  the index to add before
-     * @param obj  the element to add
+     * @param index  The index to add before
+     * @param obj  The element to add
      */
     @Override
     public void add(final int index, final E obj) {
-        modCount++;
         checkInterval(index, 0, size());
+        modCount++;
         if (root == -1) {
             root = slots.newLeaf(index, obj, -1, -1);
         } else {
@@ -762,8 +1049,9 @@ public class TreeList<E> extends AbstractList<E> {
      * <p>
      * This method runs in O(n + log m) time, where m is
      * the size of this list and n is the size of {@code c}.
+     * </p>
      *
-     * @param c  the collection to be added to this list
+     * @param c  The collection to be added to this list
      * @return {@code true} if this list changed as a result of the call
      * @throws NullPointerException if the specified collection contains a
      *         null element and this collection does not permit null elements,
@@ -775,26 +1063,47 @@ public class TreeList<E> extends AbstractList<E> {
             return false;
         }
         modCount += c.size();
-        // Allocate the bounded join scratch before a new subtree can own payload.
-        final int[] ancestors = new int[64];
         final int cTree = slots.build(c);
-        root = root == -1 ? cTree : slots.addAll(root, cTree, size, ancestors);
+        root = root == -1 ? cTree : slots.addAll(root, cTree, size);
         size += c.size();
+        return true;
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * <p>Large indexed inserts from an exact ArrayList or a different exact TreeList
+     * reuse existing slots in one linear pass when no capacity growth is necessary.
+     * Other inputs preserve inherited dispatch and failure behavior.</p>
+     */
+    @Override
+    public boolean addAll(final int index, final Collection<? extends E> c) {
+        if (getClass() != TreeList.class || c == null || c == this
+                || (c.getClass() != ArrayList.class && c.getClass() != TreeList.class)
+                || index < 0 || index > size || size < 4096) {
+            return super.addAll(index, c);
+        }
+        final int added = c.size();
+        if (added < size - (size >>> 1) || (long) size + added > slots.values.length) {
+            return super.addAll(index, c);
+        }
+        // No snapshot, growth, or user callbacks occur on this exact-class path.
+        root = slots.insertRange(root, index, c, added, size + added);
+        size += added;
+        modCount += added;
         return true;
     }
 
     /**
      * Checks whether the index is valid.
      *
-     * @param index  the index to check
-     * @param startIndex  the first allowed index
-     * @param endIndex  the last allowed index
+     * @param index  The index to check
+     * @param startIndex  The first allowed index
+     * @param endIndex  The last allowed index
      * @throws IndexOutOfBoundsException if the index is invalid
      */
     private void checkInterval(final int index, final int startIndex, final int endIndex) {
-        if (index < startIndex || index > endIndex) {
-            throw new IndexOutOfBoundsException("Invalid index:" + index + ", size=" + size());
-        }
+        checkInterval(index, startIndex, endIndex, size());
     }
 
     /**
@@ -811,7 +1120,7 @@ public class TreeList<E> extends AbstractList<E> {
     /**
      * Searches for the presence of an object in the list.
      *
-     * @param object  the object to check
+     * @param object  The object to check
      * @return true if the object is found
      */
     @Override
@@ -822,8 +1131,8 @@ public class TreeList<E> extends AbstractList<E> {
     /**
      * Gets the element at the specified index.
      *
-     * @param index  the index to retrieve
-     * @return the element at the specified index
+     * @param index  The index to retrieve
+     * @return The element at the specified index
      */
     @Override
     public E get(final int index) {
@@ -834,8 +1143,8 @@ public class TreeList<E> extends AbstractList<E> {
     /**
      * Searches for the index of an object in the list.
      *
-     * @param object  the object to search
-     * @return the index of the object, -1 if not found
+     * @param object  The object to search
+     * @return The index of the object, -1 if not found
      */
     @Override
     public int indexOf(final Object object) {
@@ -847,9 +1156,85 @@ public class TreeList<E> extends AbstractList<E> {
     }
 
     /**
+     * Hash the existing threaded AVL slots without creating a ListIterator.
+     * The exact owner retains the List hash contract and its fail-fast timing,
+     * while subclasses keep their inherited iterator/size overrides.
+     *
+     * @return the ordered List hash
+     */
+    @Override
+    public int hashCode() {
+        if (getClass() != TreeList.class) {
+            return super.hashCode();
+        }
+        final int expectedModCount = modCount;
+        int hash = 1;
+        int index = 0;
+        int cursor = root == -1 ? -1 : slots.min(root);
+        while (index < size) {
+            if (modCount != expectedModCount) {
+                throw new ConcurrentModificationException();
+            }
+            final Object value = slots.values[cursor];
+            hash = 31 * hash + (value == null ? 0 : value.hashCode());
+            index++;
+            // After the final element, inherited hasNext() returns false
+            // without checking modCount again, even after a user callback.
+            if (index >= size) {
+                break;
+            }
+            if (modCount != expectedModCount) {
+                throw new ConcurrentModificationException();
+            }
+            cursor = slots.next(cursor);
+        }
+        return hash;
+    }
+
+    /**
+     * Finds the final occurrence by walking the existing threaded AVL slots.
+     * Exact instances avoid allocating a ListIterator. Subclasses retain
+     * inherited iterator dispatch and its overrides.
+     *
+     * @param object The object to search for
+     * @return the final matching index, or -1
+     */
+    @Override
+    public int lastIndexOf(final Object object) {
+        if (getClass() != TreeList.class) {
+            return super.lastIndexOf(object);
+        }
+        final int expectedModCount = modCount;
+        int index = size;
+        int cursor = root == -1 ? -1 : slots.max(root);
+        while (cursor != -1) {
+            index--;
+            if (modCount != expectedModCount) {
+                throw new ConcurrentModificationException();
+            }
+            final Object value = slots.values[cursor];
+            // AbstractList.lastIndexOf invokes the *search* object's equals,
+            // unlike this class's historical indexOf implementation.
+            if (object == null ? value == null : object.equals(value)) {
+                return index;
+            }
+            // AbstractList.hasPrevious() ends without another fail-fast check
+            // after comparing the first element, even if equals modified the list.
+            if (index == 0) {
+                return -1;
+            }
+            if (modCount != expectedModCount) {
+                throw new ConcurrentModificationException();
+            }
+            cursor = slots.previous(cursor);
+        }
+        return -1;
+    }
+
+    /**
      * Gets an iterator over the list.
      *
-     * @return an iterator over the list
+     * @return An iterator over the list
      */
     @Override
     public Iterator<E> iterator() {
@@ -860,7 +1245,7 @@ public class TreeList<E> extends AbstractList<E> {
     /**
      * Gets a ListIterator over the list.
      *
-     * @return the new iterator
+     * @return The new iterator
      */
     @Override
     public ListIterator<E> listIterator() {
@@ -871,27 +1256,34 @@ public class TreeList<E> extends AbstractList<E> {
     /**
      * Gets a ListIterator over the list.
      *
-     * @param fromIndex  the index to start from
-     * @return the new iterator
+     * @param fromIndex  The index to start from.
+     * @return The new iterator.
      */
     @Override
     public ListIterator<E> listIterator(final int fromIndex) {
         // override to go 75% faster
         // cannot use EmptyIterator as iterator.add() must work
-        checkInterval(fromIndex, 0, size());
         return new TreeListIterator<>(this, fromIndex);
     }
 
     /**
      * Removes the element at the specified index.
      *
-     * @param index  the index to remove
-     * @return the previous object at that index
+     * @param index  The index to remove
+     * @return The previous object at that index
      */
     @Override
     public E remove(final int index) {
-        modCount++;
         checkInterval(index, 0, size() - 1);
+        modCount++;
+        if (getClass() == TreeList.class) {
+            root = slots.remove(root, index);
+            final E result = slots.value(slots.detached);
+            slots.releaseDetached();
+            size--;
+            return result;
+        }
+        // Preserve subclass get() callbacks, including their return value and failures.
         final E result = get(index);
         root = slots.remove(root, index);
         slots.releaseDetached();
@@ -900,11 +1292,98 @@ public class TreeList<E> extends AbstractList<E> {
     }
 
     /**
+     * Attempts dense membership compaction only when all membership lookups are
+     * free of user callbacks. Other collections, payloads and subclasses retain
+     * the inherited encounter-order callbacks and partial-failure behavior.
+     *
+     * @return the removed count, or -1 when inherited dispatch is required
+     */
+    private int removeMembership(final Collection<?> membership, final boolean retain) {
+        if (size < 4096 || getClass() != TreeList.class || membership == null
+                || membership.getClass() != HashSet.class) {
+            return -1;
+        }
+        // Avoid a full preflight for the usual small-remove/large-retain inputs.
+        if (retain ? membership.size() > size / 2 : membership.size() < size / 2) {
+            return -1;
+        }
+        int removed = 0;
+        boolean committed = false;
+        try {
+            for (int slot = slots.min(root); slot != -1; slot = slots.next(slot)) {
+                final Object value = slots.values[slot];
+                if (value != null && value.getClass() != Integer.class
+                        && value.getClass() != Long.class && value.getClass() != String.class) {
+                    return -1;
+                }
+                // Exact HashSet and final immutable value classes cannot dispatch
+                // user equality callbacks. Store the decision in a spare state bit
+                // rather than repeating the hash lookup during compaction.
+                if (membership.contains(value) != retain) {
+                    slots.state[slot] |= SlotStore.MARK_REMOVED;
+                    removed++;
+                }
+            }
+            if (removed == 0) {
+                return 0;
+            }
+            if (removed < size - (size >>> 1)) {
+                return -1;
+            }
+            // From this point no external callback or allocation is performed.
+            committed = true;
+            root = slots.removeMarkedMembership(root, size - removed);
+            size -= removed;
+            modCount += removed;
+            return removed;
+        } finally {
+            if (!committed && removed != 0) {
+                slots.clearMembershipMarks(root);
+            }
+        }
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public boolean removeAll(final Collection<?> collection) {
+        final int removed = removeMembership(collection, false);
+        return removed < 0 ? super.removeAll(collection) : removed != 0;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public boolean retainAll(final Collection<?> collection) {
+        final int removed = removeMembership(collection, true);
+        return removed < 0 ? super.retainAll(collection) : removed != 0;
+    }
+
+    /**
+     * Removes large contiguous ranges in linear time using the existing slots.
+     * Small ranges and subclasses retain the inherited iterator/removal dispatch.
+     *
+     * @param fromIndex the first index to remove
+     * @param toIndex the first index to retain after the range
+     */
+    @Override
+    protected void removeRange(final int fromIndex, final int toIndex) {
+        final int removed = toIndex - fromIndex;
+        if (getClass() != TreeList.class || fromIndex < 0 || toIndex > size || fromIndex > toIndex
+                || size < 4096 || removed < size - (size >>> 1)) {
+            super.removeRange(fromIndex, toIndex);
+            return;
+        }
+        // No user callbacks occur in the exact-class path. Reuse every storage lane.
+        root = slots.removeRange(root, fromIndex, toIndex, size - removed);
+        size -= removed;
+        modCount += removed;
+    }
+
+    /**
      * Sets the element at the specified index.
      *
-     * @param index  the index to set
-     * @param obj  the object to store at the specified index
-     * @return the previous object at that index
+     * @param index  The index to set
+     * @param obj  The object to store at the specified index
+     * @return The previous object at that index
      * @throws IndexOutOfBoundsException if the index is invalid
      */
     @Override
@@ -919,7 +1398,7 @@ public class TreeList<E> extends AbstractList<E> {
     /**
      * Gets the current size of the list.
      *
-     * @return the current size
+     * @return The current size
      */
     @Override
     public int size() {
@@ -929,16 +1408,52 @@ public class TreeList<E> extends AbstractList<E> {
     /**
      * Converts the list into an array.
      *
-     * @return the list as an array
+     * @return The list as an array
      */
     @Override
     public Object[] toArray() {
         // override to go 20% faster
         final Object[] array = new Object[size()];
         if (root != -1) {
-            slots.toArray(root, array, slots.relativePosition[root]);
+            if (getClass() == TreeList.class) {
+                slots.toArrayThreaded(root, array, slots.relativePosition[root]);
+            } else {
+                // Preserve the original rank-addressed export for subclasses.
+                slots.toArray(root, array, slots.relativePosition[root]);
+            }
         }
         return array;
+    }
+
+    /**
+     * Copies the encounter order into an array of the requested runtime type.
+     * Subclasses retain the inherited size and iterator dispatch.
+     *
+     * @param <T> the array component type
+     * @param array the destination, or the runtime type of a new destination
+     * @return the destination containing the elements in list order
+     * @throws NullPointerException if the array is null
+     * @throws ArrayStoreException if an element is incompatible with the array
+     */
+    @Override
+    @SuppressWarnings("unchecked")
+    public <T> T[] toArray(final T[] array) {
+        if (getClass() != TreeList.class) {
+            return super.toArray(array);
+        }
+        final int length = size;
+        final T[] result = array.length >= length ? array
+                : (T[]) java.lang.reflect.Array.newInstance(array.getClass().getComponentType(), length);
+        int slot = root == -1 ? -1 : slots.min(root);
+        for (int index = 0; index < length; index++) {
+            // Store in encounter order, preserving the successful prefix on a type failure.
+            result[index] = (T) slots.values[slot];
+            slot = slots.next(slot);
+        }
+        if (result.length > length) {
+            result[length] = null;
+        }
+        return result;
     }
 
 }

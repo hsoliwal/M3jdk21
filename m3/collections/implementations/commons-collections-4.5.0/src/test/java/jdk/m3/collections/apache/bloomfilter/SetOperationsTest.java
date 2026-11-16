@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -26,7 +26,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Test {@link SetOperations}.
  */
-public class SetOperationsTest {
+class SetOperationsTest {
 
     private static void assertSymmetricOperation(final double expected, final ToDoubleBiFunction<BloomFilter, BloomFilter> operation,
             final BloomFilter filter1, final BloomFilter filter2) {
@@ -55,7 +55,7 @@ public class SetOperationsTest {
     }
 
     @Test
-    public final void testAndCardinality() {
+    final void testAndCardinality() {
         final Shape shape = Shape.fromKM(3, 128);
         BloomFilter filter1 = createFilter(shape, IndexExtractor.fromIndexArray(1, 63, 64));
         BloomFilter filter2 = createFilter(shape, IndexExtractor.fromIndexArray(5, 64, 69));
@@ -71,7 +71,7 @@ public class SetOperationsTest {
     }
 
     @Test
-    public final void testAndCardinalityWithDifferentLengthFilters() {
+    final void testAndCardinalityWithDifferentLengthFilters() {
         final Shape shape = Shape.fromKM(3, 128);
         final Shape shape2 = Shape.fromKM(3, 192);
         BloomFilter filter1 = createFilter(shape, IndexExtractor.fromIndexArray(1, 63, 64));
@@ -88,7 +88,7 @@ public class SetOperationsTest {
     }
 
     @Test
-    public final void testCommutativityOnMismatchedSizes() {
+    final void testCommutativityOnMismatchedSizes() {
         final BitMapExtractor p1 = BitMapExtractor.fromBitMapArray(0x3L, 0x5L);
         final BitMapExtractor p2 = BitMapExtractor.fromBitMapArray(0x1L);
 
@@ -106,7 +106,7 @@ public class SetOperationsTest {
      * Tests that the Cosine similarity is correctly calculated.
      */
     @Test
-    public final void testCosineDistance() {
+    final void testCosineDistance() {
 
         BloomFilter filter1 = createFilter(shape, TestingHashers.FROM1);
         BloomFilter filter2 = createFilter(shape, TestingHashers.FROM1);
@@ -154,7 +154,7 @@ public class SetOperationsTest {
      * Tests that the Cosine similarity is correctly calculated.
      */
     @Test
-    public final void testCosineSimilarity() {
+    final void testCosineSimilarity() {
         BloomFilter filter1 = createFilter(shape, TestingHashers.FROM1);
         BloomFilter filter2 = createFilter(shape, TestingHashers.FROM1);
 
@@ -180,11 +180,37 @@ public class SetOperationsTest {
         assertSymmetricOperation(0.0, SetOperations::cosineSimilarity, filter1, filter3);
     }
 
+    @Test
+    final void testCosineSimilarityLargeCardinalityNoOverflow() {
+        // Create two identical BitMapExtractors with cardinality > 46341 each.
+        // Each long has 64 bits. We want cardinality = 50000.
+        // 781 * 64 = 49984, plus 16 more bits = 50000.
+        final long[] bitMaps = new long[782];
+        for (int i = 0; i < 781; i++) {
+            bitMaps[i] = -1L; // all 64 bits set
+        }
+        // Last word: 16 bits set = 0xFFFF
+        bitMaps[781] = 0xFFFFL;
+
+        final BitMapExtractor extractor = BitMapExtractor.fromBitMapArray(bitMaps);
+        // Verify cardinality is 50000
+        assertEquals(50000, SetOperations.cardinality(extractor));
+
+        // Cosine similarity of two identical non-empty extractors should be 1.0.
+        // With integer overflow: 50000 * 50000 = 2,500,000,000 > Integer.MAX_VALUE, overflows to negative,
+        // Math.sqrt(negative) = NaN, so the result would be NaN instead of 1.0.
+        final double similarity = SetOperations.cosineSimilarity(extractor, extractor);
+        assertEquals(1.0, similarity, 1e-9, "cosineSimilarity of identical large-cardinality extractors should be 1.0, not NaN");
+
+        final double distance = SetOperations.cosineDistance(extractor, extractor);
+        assertEquals(0.0, distance, 1e-9, "cosineDistance of identical large-cardinality extractors should be 0.0, not NaN");
+    }
+
     /**
      * Tests that the Hamming distance is correctly calculated.
      */
     @Test
-    public final void testHammingDistance() {
+    final void testHammingDistance() {
         final BloomFilter filter1 = createFilter(shape, TestingHashers.FROM1);
         BloomFilter filter2 = createFilter(shape, TestingHashers.FROM1);
 
@@ -200,7 +226,7 @@ public class SetOperationsTest {
      * Tests that the Jaccard distance is correctly calculated.
      */
     @Test
-    public final void testJaccardDistance() {
+    final void testJaccardDistance() {
         BloomFilter filter1 = createFilter(shape, TestingHashers.FROM1);
         BloomFilter filter2 = createFilter(shape, TestingHashers.FROM1);
 
@@ -227,7 +253,7 @@ public class SetOperationsTest {
      * Tests that the Jaccard similarity is correctly calculated.
      */
     @Test
-    public final void testJaccardSimilarity() {
+    final void testJaccardSimilarity() {
         BloomFilter filter1 = createFilter(shape, TestingHashers.FROM1);
         BloomFilter filter2 = createFilter(shape, TestingHashers.FROM1);
 
@@ -254,7 +280,7 @@ public class SetOperationsTest {
     }
 
     @Test
-    public final void testOrCardinality() {
+    final void testOrCardinality() {
         final Shape shape = Shape.fromKM(3, 128);
         BloomFilter filter1 = createFilter(shape, IndexExtractor.fromIndexArray(1, 63, 64));
         BloomFilter filter2 = createFilter(shape, IndexExtractor.fromIndexArray(5, 64, 69));
@@ -270,7 +296,7 @@ public class SetOperationsTest {
     }
 
     @Test
-    public final void testOrCardinalityWithDifferentLengthFilters() {
+    final void testOrCardinalityWithDifferentLengthFilters() {
         final Shape shape = Shape.fromKM(3, 128);
         final Shape shape2 = Shape.fromKM(3, 192);
         BloomFilter filter1 = createFilter(shape, IndexExtractor.fromIndexArray(1, 63, 64));
@@ -287,7 +313,7 @@ public class SetOperationsTest {
     }
 
     @Test
-    public final void testXorCardinality() {
+    final void testXorCardinality() {
         final Shape shape = Shape.fromKM(3, 128);
         BloomFilter filter1 = createFilter(shape, IndexExtractor.fromIndexArray(1, 63, 64));
         BloomFilter filter2 = createFilter(shape, IndexExtractor.fromIndexArray(5, 64, 69));
@@ -308,7 +334,7 @@ public class SetOperationsTest {
     }
 
     @Test
-    public final void testXorCardinalityWithDifferentLengthFilters() {
+    final void testXorCardinalityWithDifferentLengthFilters() {
         final Shape shape = Shape.fromKM(3, 128);
         final Shape shape2 = Shape.fromKM(3, 192);
 

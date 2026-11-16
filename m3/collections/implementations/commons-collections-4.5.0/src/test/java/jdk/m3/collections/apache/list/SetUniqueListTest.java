@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -22,6 +22,7 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.io.InvalidObjectException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -42,6 +43,7 @@ import org.junit.jupiter.api.Test;
 public class SetUniqueListTest<E> extends AbstractListTest<E> {
 
     final class SetUniqueList307 extends SetUniqueList<E> {
+
         /**
          * Generated serial version ID.
          */
@@ -85,13 +87,24 @@ public class SetUniqueListTest<E> extends AbstractListTest<E> {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
+    protected E getListIteratorAddSetValue() {
+        return (E) Long.valueOf(1000);
+    }
+
+    @Override
+    protected boolean isListIteratorSetSupported() {
+        return false;
+    }
+
+    @Override
     public List<E> makeObject() {
         return new SetUniqueList<>(new ArrayList<>(), new HashSet<>());
     }
 
     @Test
     @SuppressWarnings("unchecked")
-    public void testAdd() {
+    void testAdd() {
         final SetUniqueList<E> lset = new SetUniqueList<>(new ArrayList<>(), new HashSet<>());
 
         // Duplicate element
@@ -107,7 +120,7 @@ public class SetUniqueListTest<E> extends AbstractListTest<E> {
 
     @Test
     @SuppressWarnings("unchecked")
-    public void testAddAll() {
+    void testAddAll() {
         final SetUniqueList<E> lset = new SetUniqueList<>(new ArrayList<>(), new HashSet<>());
 
         lset.addAll(
@@ -156,8 +169,9 @@ public class SetUniqueListTest<E> extends AbstractListTest<E> {
             extraVerify = true;
         }
     }
+
     @Test
-    public void testCollections304() {
+    void testCollections304() {
         final List<String> list = new LinkedList<>();
         final SetUniqueList<String> decoratedList = SetUniqueList.setUniqueList(list);
         final String s1 = "Apple";
@@ -179,10 +193,9 @@ public class SetUniqueListTest<E> extends AbstractListTest<E> {
         decoratedList.add(1, s2);
         assertEquals(4, decoratedList.size());
     }
-
     @Test
     @SuppressWarnings("unchecked")
-    public void testCollections307() {
+    void testCollections307() {
         List<E> list = new ArrayList<>();
         List<E> uniqueList = SetUniqueList.setUniqueList(list);
 
@@ -223,7 +236,7 @@ public class SetUniqueListTest<E> extends AbstractListTest<E> {
     }
 
     @Test
-    public void testCollections701() {
+    void testCollections701() {
         final SetUniqueList<Object> uniqueList = new SetUniqueList<>(new ArrayList<>(), new HashSet<>());
         final Integer obj1 = Integer.valueOf(1);
         final Integer obj2 = Integer.valueOf(2);
@@ -250,7 +263,7 @@ public class SetUniqueListTest<E> extends AbstractListTest<E> {
 
     @Test
     @SuppressWarnings("unchecked")
-    public void testCreateSetBasedOnList() {
+    void testCreateSetBasedOnList() {
         final List<String> list = new ArrayList<>();
         list.add("One");
         list.add("Two");
@@ -277,7 +290,18 @@ public class SetUniqueListTest<E> extends AbstractListTest<E> {
     }
 
     @Test
-    public void testFactory() {
+    void testDeserializeRejectsDuplicateInBackingList() throws Exception {
+        final SetUniqueList<String> list = SetUniqueList.setUniqueList(new ArrayList<>());
+        list.add("alpha");
+        list.add("beta");
+        // push a duplicate straight onto the decorated list, bypassing the uniqueness set
+        list.decorated().add("alpha");
+        assertThrows(InvalidObjectException.class, () -> serializeDeserialize(list));
+
+    }
+
+    @Test
+    void testFactory() {
         final Integer[] array = { Integer.valueOf(1), Integer.valueOf(2), Integer.valueOf(1) };
         final ArrayList<Integer> list = new ArrayList<>(Arrays.asList(array));
         final SetUniqueList<Integer> lset = SetUniqueList.setUniqueList(list);
@@ -290,7 +314,7 @@ public class SetUniqueListTest<E> extends AbstractListTest<E> {
     }
 
     @Test
-    public void testIntCollectionAddAll() {
+    void testIntCollectionAddAll() {
         // make a SetUniqueList with one element
         final List<Integer> list = new SetUniqueList<>(new ArrayList<>(), new HashSet<>());
         final Integer existingElement = Integer.valueOf(1);
@@ -316,8 +340,29 @@ public class SetUniqueListTest<E> extends AbstractListTest<E> {
     }
 
     @Test
+    void testIntCollectionAddAllOutOfBoundsIndex() {
+        final SetUniqueList<Integer> list = new SetUniqueList<>(new ArrayList<>(), new HashSet<>());
+        list.add(Integer.valueOf(1));
+        final Integer newElement = Integer.valueOf(2);
+
+        // an out-of-range index must be rejected before the uniqueness set is mutated
+        assertThrows(IndexOutOfBoundsException.class, () -> list.add(5, newElement));
+        assertFalse(list.contains(newElement), "rejected element leaked into the uniqueness set");
+        assertEquals(list.size(), list.asSet().size(), "list and uniqueness set diverged");
+        // otherwise the element is silently dropped on the next add
+        assertTrue(list.add(newElement));
+        assertEquals(newElement, list.get(1));
+
+        assertThrows(IndexOutOfBoundsException.class,
+                () -> list.addAll(9, Arrays.asList(Integer.valueOf(3), Integer.valueOf(4))));
+        assertFalse(list.contains(Integer.valueOf(3)));
+        assertFalse(list.contains(Integer.valueOf(4)));
+        assertEquals(list.size(), list.asSet().size(), "list and uniqueness set diverged");
+    }
+
+    @Test
     @SuppressWarnings("unchecked")
-    public void testListIterator() {
+    void testListIterator() {
         final SetUniqueList<E> lset = new SetUniqueList<>(new ArrayList<>(), new HashSet<>());
 
         final E obj1 = (E) Integer.valueOf(1);
@@ -396,7 +441,7 @@ public class SetUniqueListTest<E> extends AbstractListTest<E> {
 
     @Test
     @SuppressWarnings("unchecked")
-    public void testRetainAll() {
+    void testRetainAll() {
         final List<E> list = new ArrayList<>(10);
         final SetUniqueList<E> uniqueList = SetUniqueList.setUniqueList(list);
         for (int i = 0; i < 10; ++i) {
@@ -419,7 +464,7 @@ public class SetUniqueListTest<E> extends AbstractListTest<E> {
 
     @Test
     @SuppressWarnings("unchecked")
-    public void testRetainAllWithInitialList() {
+    void testRetainAllWithInitialList() {
         // initialized with empty list
         final List<E> list = new ArrayList<>(10);
         for (int i = 0; i < 5; ++i) {
@@ -446,7 +491,7 @@ public class SetUniqueListTest<E> extends AbstractListTest<E> {
 
     @Test
     @SuppressWarnings("unchecked")
-    public void testSet() {
+    void testSet() {
         final SetUniqueList<E> lset = new SetUniqueList<>(new ArrayList<>(), new HashSet<>());
 
         // Duplicate element
@@ -485,7 +530,7 @@ public class SetUniqueListTest<E> extends AbstractListTest<E> {
     }
 
     @Test
-    public void testSetCollections444() {
+    void testSetCollections444() {
         final SetUniqueList<Integer> lset = new SetUniqueList<>(new ArrayList<>(), new HashSet<>());
 
         // Duplicate element
@@ -504,7 +549,7 @@ public class SetUniqueListTest<E> extends AbstractListTest<E> {
     }
     @Test
     @SuppressWarnings("unchecked")
-    public void testSetDownwardsInList() {
+    void testSetDownwardsInList() {
         /*
          * Checks the following semantics
          * [a,b]
@@ -534,7 +579,7 @@ public class SetUniqueListTest<E> extends AbstractListTest<E> {
 
     @Test
     @SuppressWarnings("unchecked")
-    public void testSetInBiggerList() {
+    void testSetInBiggerList() {
         /*
          * Checks the following semantics
          * [a,b,c]
@@ -571,7 +616,7 @@ public class SetUniqueListTest<E> extends AbstractListTest<E> {
 
     @Test
     @SuppressWarnings("unchecked")
-    public void testSetUpwardsInList() {
+    void testSetUpwardsInList() {
         /*
          * Checks the following semantics
          * [a,b,c]
@@ -607,7 +652,7 @@ public class SetUniqueListTest<E> extends AbstractListTest<E> {
     }
 
     @Test
-    public void testSubListIsUnmodifiable() {
+    void testSubListIsUnmodifiable() {
         resetFull();
         final List<E> subList = getCollection().subList(1, 3);
         assertEquals(2, subList.size());
@@ -616,7 +661,7 @@ public class SetUniqueListTest<E> extends AbstractListTest<E> {
 
     @Test
     @SuppressWarnings("unchecked")
-    public void testUniqueListDoubleInsert() {
+    void testUniqueListDoubleInsert() {
         final List<E> l = SetUniqueList.setUniqueList(new LinkedList<>());
         l.add((E) new Object());
         l.add((E) new Object());
@@ -632,7 +677,7 @@ public class SetUniqueListTest<E> extends AbstractListTest<E> {
 
     @Test
     @SuppressWarnings("unchecked")
-    public void testUniqueListReInsert() {
+    void testUniqueListReInsert() {
         final List<E> l = SetUniqueList.setUniqueList(new LinkedList<>());
         l.add((E) new Object());
         l.add((E) new Object());

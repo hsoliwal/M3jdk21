@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -28,7 +28,7 @@ import jdk.m3.collections.apache.ResettableListIterator;
  * due to issues with {@code IteratorUtils}.
  * </p>
  *
- * @param <E> the type of elements returned by this iterator.
+ * @param <E> The type of elements returned by this iterator.
  * @since 2.1.1 and 3.1
  */
 public class EmptyListIterator<E> extends AbstractEmptyIterator<E> implements ResettableListIterator<E> {
@@ -52,7 +52,7 @@ public class EmptyListIterator<E> extends AbstractEmptyIterator<E> implements Re
     /**
      * Gets a typed instance of the iterator.
      *
-     * @param <E> the element type
+     * @param <E> The element type
      * @return {@link ListIterator}&lt;E&gt;
      */
     public static <E> ListIterator<E> emptyListIterator() {
@@ -62,7 +62,7 @@ public class EmptyListIterator<E> extends AbstractEmptyIterator<E> implements Re
     /**
      * Gets a typed instance of the iterator.
      *
-     * @param <E> the element type
+     * @param <E> The element type
      * @return {@link ResettableListIterator}&lt;E&gt;
      */
     public static <E> ResettableListIterator<E> resettableEmptyListIterator() {

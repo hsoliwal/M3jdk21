@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -34,7 +34,7 @@ import jdk.m3.collections.apache.BulkTest;
  */
 public abstract class AbstractNavigableSetTest<E> extends AbstractSortedSetTest<E> {
 
-    public class TestNavigableSetSubSet extends AbstractNavigableSetTest<E> {
+    public abstract class NavigableSetSubSet extends AbstractNavigableSetTest<E> {
 
         static final int TYPE_SUBSET = 0;
         static final int TYPE_TAILSET = 1;
@@ -49,7 +49,7 @@ public abstract class AbstractNavigableSetTest<E> extends AbstractSortedSetTest<
 
         private final boolean inclusive;
         @SuppressWarnings("unchecked")
-        public TestNavigableSetSubSet(final int bound, final boolean head, final boolean inclusive) {
+        public NavigableSetSubSet(final int bound, final boolean head, final boolean inclusive) {
             if (head) {
                 this.type = TYPE_HEADSET;
                 this.inclusive = inclusive;
@@ -76,7 +76,7 @@ public abstract class AbstractNavigableSetTest<E> extends AbstractSortedSetTest<
 
         } //type
         @SuppressWarnings("unchecked")
-        public TestNavigableSetSubSet(final int loBound, final int hiBound, final boolean inclusive) {
+        public NavigableSetSubSet(final int loBound, final int hiBound, final boolean inclusive) {
             this.type = TYPE_SUBSET;
             this.lowBound = loBound;
             this.highBound = hiBound;
@@ -181,14 +181,15 @@ public abstract class AbstractNavigableSetTest<E> extends AbstractSortedSetTest<
      * After modification operations, {@link #verify()} is invoked to ensure
      * that the set and the other collection views are still valid.
      *
-     * @return a {@link AbstractNavigableSetTest} instance for testing a headset.
+     * @return A {@link AbstractNavigableSetTest} instance for testing a headset.
      */
     public BulkTest bulkTestNavigableSetHeadSet() {
         final int length = getFullElements().length;
 
         final int loBound = length / 3;
         final int hiBound = loBound * 2;
-        return new TestNavigableSetSubSet(hiBound, true, true);
+        return new NavigableSetSubSet(hiBound, true, true) {
+        };
     }
 
     /**
@@ -197,14 +198,15 @@ public abstract class AbstractNavigableSetTest<E> extends AbstractSortedSetTest<
      * After modification operations, {@link #verify()} is invoked to ensure
      * that the set and the other collection views are still valid.
      *
-     * @return a {@link AbstractNavigableSetTest} instance for testing a subset.
+     * @return A {@link AbstractNavigableSetTest} instance for testing a subset.
      */
     public BulkTest bulkTestNavigableSetSubSet() {
         final int length = getFullElements().length;
 
         final int loBound = length / 3;
         final int hiBound = loBound * 2;
-        return new TestNavigableSetSubSet(loBound, hiBound, false);
+        return new NavigableSetSubSet(loBound, hiBound, false) {
+        };
     }
 
     /**
@@ -213,12 +215,13 @@ public abstract class AbstractNavigableSetTest<E> extends AbstractSortedSetTest<
      * After modification operations, {@link #verify()} is invoked to ensure
      * that the set and the other collection views are still valid.
      *
-     * @return a {@link AbstractNavigableSetTest} instance for testing a tailset.
+     * @return A {@link AbstractNavigableSetTest} instance for testing a tailset.
      */
     public BulkTest bulkTestNavigableSetTailSet() {
         final int length = getFullElements().length;
         final int loBound = length / 3;
-        return new TestNavigableSetSubSet(loBound, false, false);
+        return new NavigableSetSubSet(loBound, false, false) {
+        };
     }
 
     /**
@@ -267,7 +270,7 @@ public abstract class AbstractNavigableSetTest<E> extends AbstractSortedSetTest<
     /**
      * Returns an empty {@link TreeSet} for use in modification testing.
      *
-     * @return a confirmed empty collection
+     * @return A confirmed empty collection
      */
     @Override
     public NavigableSet<E> makeConfirmedCollection() {

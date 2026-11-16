@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -14,23 +14,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+// Modified 2026 by Hitesh Soliwal and contributors: stable paged replay storage.
 package jdk.m3.collections.apache.iterators;
 
 import java.text.MessageFormat;
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
-import java.util.List;
 import java.util.ListIterator;
 import java.util.NoSuchElementException;
 import java.util.Objects;
 
+import jdk.m3.collections.apache.ResettableIterator;
 import jdk.m3.collections.apache.ResettableListIterator;
 
 /**
  * Converts an {@link Iterator} into a {@link ResettableListIterator}.
  * For plain {@code Iterator}s this is accomplished by caching the returned
  * elements.  This class can also be used to simply add
- * {@link jdk.m3.collections.apache.ResettableIterator ResettableIterator}
+ * {@link ResettableIterator ResettableIterator}
  * functionality to a given {@link ListIterator}.
  * <p>
  * The {@code ListIterator} interface has additional useful methods
@@ -46,7 +47,7 @@ import jdk.m3.collections.apache.ResettableListIterator;
  * This class implements ResettableListIterator from Commons Collections 3.2.
  * </p>
  *
- * @param <E> the type of elements in this iterator.
+ * @param <E> The type of elements in this iterator.
  * @since 2.1
  */
 public class ListIteratorWrapper<E> implements ResettableListIterator<E> {
@@ -60,13 +61,25 @@ public class ListIteratorWrapper<E> implements ResettableListIterator<E> {
 
     /** The underlying iterator being decorated. */
     private final Iterator<? extends E> iterator;
-    /** The list being used to cache the iterator. */
-    private final List<E> list = new ArrayList<>();
+
+    /** Payload pages never move after reaching their bounded size. */
+    private static final int PAGE_SHIFT = 10;
+    private static final int PAGE_SIZE = 1 << PAGE_SHIFT;
+    private static final int PAGE_MASK = PAGE_SIZE - 1;
+    private static final Object[][] EMPTY_PAGES = new Object[0][];
+
+    /** Native ListIterator delegation never allocates replay storage. */
+    private Object[][] pages = EMPTY_PAGES;
+
+    /** Kept separate from cursor state because child callbacks may reenter. */
+    private int cacheSize;
 
     /** The current index of this iterator. */
     private int currentIndex;
+
     /** The current index of the wrapped iterator. */
     private int wrappedIteratorIndex;
+
     /** Recall whether the wrapped iterator's "cursor" is in such a state as to allow remove() to be called */
     private boolean removeState;
 
@@ -74,7 +87,7 @@ public class ListIteratorWrapper<E> implements ResettableListIterator<E> {
      * Constructs a new {@code ListIteratorWrapper} that will wrap
      * the given iterator.
      *
-     * @param iterator  the iterator to wrap
+     * @param iterator  The iterator to wrap
      * @throws NullPointerException if the iterator is null
      */
     public ListIteratorWrapper(final Iterator<? extends E> iterator) {
@@ -85,7 +98,7 @@ public class ListIteratorWrapper<E> implements ResettableListIterator<E> {
      * Throws {@link UnsupportedOperationException}
      * unless the underlying {@code Iterator} is a {@code ListIterator}.
      *
-     * @param obj  the object to add
+     * @param obj  The object to add
      * @throws UnsupportedOperationException if the underlying iterator is not of
      * type {@link ListIterator}
      */
@@ -130,7 +143,7 @@ public class ListIteratorWrapper<E> implements ResettableListIterator<E> {
     /**
      * Returns the next element from the iterator.
      *
-     * @return the next element from the iterator
+     * @return The next element
      * @throws NoSuchElementException if there are no more elements
      */
     @Override
@@ -141,11 +154,11 @@ public class ListIteratorWrapper<E> implements ResettableListIterator<E> {
 
         if (currentIndex < wrappedIteratorIndex) {
             ++currentIndex;
-            return list.get(currentIndex - 1);
+            return cached(currentIndex - 1);
         }
 
         final E retval = iterator.next();
-        list.add(retval);
+        cache(retval);
         ++currentIndex;
         ++wrappedIteratorIndex;
         removeState = true;
@@ -155,7 +168,7 @@ public class ListIteratorWrapper<E> implements ResettableListIterator<E> {
     /**
      * Returns the index of the next element.
      *
-     * @return the index of the next element
+     * @return The index of the next element
      */
     @Override
     public int nextIndex() {
@@ -169,7 +182,7 @@ public class ListIteratorWrapper<E> implements ResettableListIterator<E> {
     /**
      * Returns the previous element.
      *
-     * @return the previous element
+     * @return The previous element
      * @throws NoSuchElementException  if there are no previous elements
      */
     @Override
@@ -184,7 +197,7 @@ public class ListIteratorWrapper<E> implements ResettableListIterator<E> {
             throw new NoSuchElementException();
         }
         removeState = wrappedIteratorIndex == currentIndex;
-        return list.get(--currentIndex);
+        return cached(--currentIndex);
     }
 
     /**
@@ -221,7 +234,7 @@ public class ListIteratorWrapper<E> implements ResettableListIterator<E> {
             throw new IllegalStateException(MessageFormat.format(CANNOT_REMOVE_MESSAGE, Integer.valueOf(removeIndex)));
         }
         iterator.remove();
-        list.remove(removeIndex);
+        removeCached(removeIndex);
         currentIndex = removeIndex;
         wrappedIteratorIndex--;
         removeState = false;
@@ -249,7 +262,7 @@ public class ListIteratorWrapper<E> implements ResettableListIterator<E> {
      * Throws {@link UnsupportedOperationException}
      * unless the underlying {@code Iterator} is a {@code ListIterator}.
      *
-     * @param obj  the object to set
+     * @param obj  The object to set
      * @throws UnsupportedOperationException if the underlying iterator is not of
      * type {@link ListIterator}
      */
@@ -262,6 +275,68 @@ public class ListIteratorWrapper<E> implements ResettableListIterator<E> {
             return;
         }
         throw new UnsupportedOperationException(UNSUPPORTED_OPERATION_MESSAGE);
+    }
+
+    /** Retrieve by logical index without traversing a page directory. */
+    @SuppressWarnings("unchecked")
+    private E cached(final int index) {
+        checkCacheIndex(index);
+        return (E) pages[index >>> PAGE_SHIFT][index & PAGE_MASK];
+    }
+
+    private void checkCacheIndex(final int index) {
+        if (index < 0 || index >= cacheSize) {
+            throw new IndexOutOfBoundsException("Index " + index + " out of bounds for length " + cacheSize);
+        }
+    }
+
+    /** Grow only the page directory; full payload pages are never recopied. */
+    private void cache(final E value) {
+        if (cacheSize == Integer.MAX_VALUE) {
+            throw new OutOfMemoryError("ListIteratorWrapper cache capacity exhausted");
+        }
+        final int pageIndex = cacheSize >>> PAGE_SHIFT;
+        final int offset = cacheSize & PAGE_MASK;
+        Object[][] directory = pages;
+        Object[] page = pageIndex < directory.length ? directory[pageIndex] : null;
+        if (page == null) {
+            // Preserve small-cache economy without a separate list owner.
+            page = new Object[pageIndex < 2 ? 10 : PAGE_SIZE];
+            if (pageIndex >= directory.length) {
+                final int capacity = Math.max(pageIndex + 1,
+                        directory.length + (directory.length >>> 1));
+                directory = Arrays.copyOf(directory, capacity);
+            }
+            directory[pageIndex] = page;
+            pages = directory;
+        } else if (offset == page.length) {
+            // Only the first two pages use bounded geometric growth.
+            final int capacity = Math.min(PAGE_SIZE, page.length + (page.length >>> 1));
+            page = Arrays.copyOf(page, capacity);
+            directory[pageIndex] = page;
+        }
+        page[offset] = value;
+        cacheSize++;
+    }
+
+    /**
+     * Ordinarily removes the cached tail. Reentrant child removal may append
+     * more values first, so preserve the former list's arbitrary-index removal.
+     */
+    private void removeCached(final int index) {
+        checkCacheIndex(index);
+        final int last = cacheSize - 1;
+        int destination = index;
+        while (destination < last) {
+            final int source = destination + 1;
+            final int length = Math.min(last - destination,
+                    Math.min(PAGE_SIZE - (destination & PAGE_MASK), PAGE_SIZE - (source & PAGE_MASK)));
+            System.arraycopy(pages[source >>> PAGE_SHIFT], source & PAGE_MASK,
+                    pages[destination >>> PAGE_SHIFT], destination & PAGE_MASK, length);
+            destination += length;
+        }
+        pages[last >>> PAGE_SHIFT][last & PAGE_MASK] = null;
+        cacheSize = last;
     }
 
 }

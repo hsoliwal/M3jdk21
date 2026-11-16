@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -31,6 +31,7 @@ import jdk.m3.collections.apache.BulkTest;
 import jdk.m3.collections.apache.MapIterator;
 import jdk.m3.collections.apache.OrderedBidiMap;
 import jdk.m3.collections.apache.iterators.AbstractMapIteratorTest;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -38,7 +39,8 @@ import org.junit.jupiter.api.Test;
  */
 public abstract class AbstractOrderedBidiMapTest<K, V> extends AbstractBidiMapTest<K, V> {
 
-    public class TestBidiOrderedMapIterator extends AbstractMapIteratorTest<K, V> {
+    @Nested
+    public class BidiOrderedMapIteratorTest extends AbstractMapIteratorTest<K, V> {
 
         @Override
         public V[] addSetValues() {
@@ -88,7 +90,7 @@ public abstract class AbstractOrderedBidiMapTest<K, V> extends AbstractBidiMapTe
     }
 
     public BulkTest bulkTestOrderedMapIterator() {
-        return new TestBidiOrderedMapIterator();
+        return new BidiOrderedMapIteratorTest();
     }
 
     /**
@@ -100,7 +102,7 @@ public abstract class AbstractOrderedBidiMapTest<K, V> extends AbstractBidiMapTe
     }
 
     @Test
-    public void testFirstKey() {
+    void testFirstKey() {
         resetEmpty();
         OrderedBidiMap<K, V> bidi = getMap();
 
@@ -114,7 +116,7 @@ public abstract class AbstractOrderedBidiMapTest<K, V> extends AbstractBidiMapTe
     }
 
     @Test
-    public void testLastKey() {
+    void testLastKey() {
         resetEmpty();
         OrderedBidiMap<K, V> bidi = getMap();
 
@@ -131,7 +133,7 @@ public abstract class AbstractOrderedBidiMapTest<K, V> extends AbstractBidiMapTe
     }
 
     @Test
-    public void testNextKey() {
+    void testNextKey() {
         resetEmpty();
         OrderedBidiMap<K, V> bidi = (OrderedBidiMap<K, V>) map;
         assertNull(bidi.nextKey(getOtherKeys()[0]));
@@ -155,6 +157,8 @@ public abstract class AbstractOrderedBidiMapTest<K, V> extends AbstractBidiMapTe
             confirmedLast = confirmedObject;
         }
         assertNull(bidi.nextKey(confirmedLast));
+        // a key that is not in the map has no next key
+        assertNull(bidi.nextKey(getOtherKeys()[0]));
 
         if (!isAllowNullKey()) {
             final OrderedBidiMap<K, V> finalBidi = bidi;
@@ -166,7 +170,7 @@ public abstract class AbstractOrderedBidiMapTest<K, V> extends AbstractBidiMapTe
     }
 
     @Test
-    public void testPreviousKey() {
+    void testPreviousKey() {
         resetEmpty();
         OrderedBidiMap<K, V> bidi = getMap();
         assertNull(bidi.previousKey(getOtherKeys()[0]));

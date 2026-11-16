@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -29,7 +29,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Test the ArrayListIterator class.
  *
- * @param <E> the type of elements tested by this iterator.
+ * @param <E> The type of elements tested by this iterator.
  */
 public class ArrayListIteratorTest<E> extends ArrayIteratorTest<E> {
 
@@ -57,7 +57,7 @@ public class ArrayListIteratorTest<E> extends ArrayIteratorTest<E> {
      * {@code previous()}.
      */
     @Test
-    public void testListIterator() {
+    void testListIterator() {
         final ListIterator<E> iter = makeObject();
         // TestArrayIterator#testIterator() has already tested the iterator forward,
         //  now we need to test it in reverse
@@ -79,7 +79,7 @@ public class ArrayListIteratorTest<E> extends ArrayIteratorTest<E> {
      */
     @Test
     @SuppressWarnings("unchecked")
-    public void testListIteratorSet() {
+    void testListIteratorSet() {
         final String[] testData = { "a", "b", "c" };
 
         final String[] result = { "0", "1", "2" };

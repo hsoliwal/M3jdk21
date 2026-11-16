@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -31,8 +31,8 @@ import jdk.m3.collections.apache.SetValuedMap;
  * the Set implementation to use as values.
  * </p>
  *
- * @param <K> the type of the keys in this map
- * @param <V> the type of the values in this map
+ * @param <K> The type of the keys in this map
+ * @param <V> The type of the values in this map
  * @since 4.1
  */
 public abstract class AbstractSetValuedMap<K, V> extends AbstractMultiValuedMap<K, V>
@@ -78,7 +78,7 @@ public abstract class AbstractSetValuedMap<K, V> extends AbstractMultiValuedMap<
     /**
      * A constructor that wraps, not copies
      *
-     * @param map  the map to wrap, must not be null
+     * @param map  The map to wrap, must not be null
      * @throws NullPointerException if the map is null
      */
     protected AbstractSetValuedMap(final Map<K, ? extends Set<V>> map) {
@@ -87,7 +87,8 @@ public abstract class AbstractSetValuedMap<K, V> extends AbstractMultiValuedMap<
 
     /**
      * Creates a new value collection using the provided factory.
-     * @return a new set
+     *
+     * @return A new set
      */
     @Override
     protected abstract Set<V> createCollection();
@@ -96,8 +97,8 @@ public abstract class AbstractSetValuedMap<K, V> extends AbstractMultiValuedMap<
      * Gets the set of values associated with the specified key. This would
      * return an empty set in case the mapping is not present
      *
-     * @param key  the key to retrieve
-     * @return the {@code Set} of values, will return an empty
+     * @param key  The key to retrieve
+     * @return The {@code Set} of values, will return an empty
      *   {@code Set} for no mapping
      */
     @Override
@@ -117,8 +118,8 @@ public abstract class AbstractSetValuedMap<K, V> extends AbstractMultiValuedMap<
      * A subsequent {@code get(Object)} would return an empty set.
      * </p>
      *
-     * @param key the key to remove values from
-     * @return the {@code Set} of values removed, will return an empty,
+     * @param key The key to remove values from
+     * @return The {@code Set} of values removed, will return an empty,
      *   unmodifiable set for no mapping found.
      */
     @Override

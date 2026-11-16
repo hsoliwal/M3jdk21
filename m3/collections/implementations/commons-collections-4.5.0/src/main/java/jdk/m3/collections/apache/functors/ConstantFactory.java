@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -28,7 +28,7 @@ import jdk.m3.collections.apache.Factory;
  * use the prototype factory.
  * </p>
  *
- * @param <T> the type of results supplied by this supplier.
+ * @param <T> The type of results supplied by this supplier.
  * @since 3.0
  */
 public class ConstantFactory<T> implements Factory<T>, Serializable {
@@ -44,8 +44,8 @@ public class ConstantFactory<T> implements Factory<T>, Serializable {
      * Factory method that performs validation.
      *
      * @param <T>  the type of the constant
-     * @param constantToReturn  the constant object to return each time in the factory
-     * @return the {@code constant} factory.
+     * @param constantToReturn  The constant object to return each time in the factory
+     * @return The {@code constant} factory.
      */
     public static <T> Factory<T> constantFactory(final T constantToReturn) {
         if (constantToReturn == null) {
@@ -61,7 +61,7 @@ public class ConstantFactory<T> implements Factory<T>, Serializable {
      * Constructor that performs no validation.
      * Use {@code constantFactory} if you want that.
      *
-     * @param constantToReturn  the constant to return each time
+     * @param constantToReturn  The constant to return each time
      */
     public ConstantFactory(final T constantToReturn) {
         iConstant = constantToReturn;
@@ -70,7 +70,7 @@ public class ConstantFactory<T> implements Factory<T>, Serializable {
     /**
      * Always return constant.
      *
-     * @return the stored constant value
+     * @return The stored constant value
      */
     @Override
     public T create() {
@@ -80,7 +80,7 @@ public class ConstantFactory<T> implements Factory<T>, Serializable {
     /**
      * Gets the constant.
      *
-     * @return the constant
+     * @return The constant
      * @since 3.1
      */
     public T getConstant() {

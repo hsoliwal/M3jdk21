@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -50,7 +50,7 @@ import java.util.function.Supplier;
  * </ol>
  *
  *
- * @param <T> the {@link BloomFilter} type.
+ * @param <T> The {@link BloomFilter} type.
  * @since 4.5.0-M1
  */
 public class LayerManager<T extends BloomFilter<T>> implements BloomFilterExtractor {
@@ -58,7 +58,7 @@ public class LayerManager<T extends BloomFilter<T>> implements BloomFilterExtrac
     /**
      * Builds new instances of {@link LayerManager}.
      *
-     * @param <T> the {@link BloomFilter} type.
+     * @param <T> The {@link BloomFilter} type.
      */
     public static class Builder<T extends BloomFilter<T>> implements Supplier<LayerManager<T>> {
 
@@ -74,7 +74,7 @@ public class LayerManager<T extends BloomFilter<T>> implements BloomFilterExtrac
         /**
          * Builds the layer manager with the specified properties.
          *
-         * @return a new LayerManager.
+         * @return A new LayerManager.
          */
         @Override
         public LayerManager<T> get() {
@@ -84,7 +84,7 @@ public class LayerManager<T extends BloomFilter<T>> implements BloomFilterExtrac
         /**
          * Sets the Consumer that cleans the list of Bloom filters.
          *
-         * @param cleanup the Consumer that will modify the list of filters removing out
+         * @param cleanup The Consumer that will modify the list of filters removing out
          *                dated or stale filters.
          * @return {@code this} instance.
          */
@@ -138,11 +138,11 @@ public class LayerManager<T extends BloomFilter<T>> implements BloomFilterExtrac
         }
 
         /**
-         * Removes the earliest filters in the list when the the number of filters
+         * Removes the earliest filters in the list when the number of filters
          * exceeds maxSize.
          *
          * @param <T> Type of BloomFilter.
-         * @param maxSize the maximum number of filters for the list. Must be greater
+         * @param maxSize The maximum number of filters for the list. Must be greater
          *                than 0
          * @return A Consumer suitable for the LayerManager {@code cleanup} parameter.
          * @throws IllegalArgumentException if {@code maxSize <= 0}.
@@ -199,7 +199,7 @@ public class LayerManager<T extends BloomFilter<T>> implements BloomFilterExtrac
          * the current target.
          *
          * @param <T> Type of BloomFilter.
-         * @param breakAt the number of filters to merge into each filter in the list.
+         * @param breakAt The number of filters to merge into each filter in the list.
          * @return A Predicate suitable for the LayerManager {@code extendCheck} parameter.
          * @throws IllegalArgumentException if {@code breakAt <= 0}
          */
@@ -239,7 +239,7 @@ public class LayerManager<T extends BloomFilter<T>> implements BloomFilterExtrac
          * {@code ExtendCheck.advanceOnSaturation(shape.estimateMaxN()) }</p>
          *
          * @param <T> Type of BloomFilter.
-         * @param maxN the maximum number of estimated items in the filter.
+         * @param maxN The maximum number of estimated items in the filter.
          * @return A Predicate suitable for the LayerManager {@code extendCheck} parameter.
          * @throws IllegalArgumentException if {@code maxN <= 0}
          */
@@ -292,11 +292,11 @@ public class LayerManager<T extends BloomFilter<T>> implements BloomFilterExtrac
     /**
      * Constructs a new instance.
      *
-     * @param filterSupplier the non-null supplier of new Bloom filters to add the the list
+     * @param filterSupplier The non-null supplier of new Bloom filters to add the list
      *                       when necessary.
      * @param extendCheck    The non-null predicate that checks if a new filter should be
      *                       added to the list.
-     * @param filterCleanup  the non-null consumer that removes any old filters from the
+     * @param filterCleanup  The non-null consumer that removes any old filters from the
      *                       list.
      * @param initialize     true if the filter list should be initialized.
      */
@@ -348,7 +348,7 @@ public class LayerManager<T extends BloomFilter<T>> implements BloomFilterExtrac
      * The {@code filterSupplier}, {@code extendCheck}, and the {@code filterCleanup} are shared between the copy and this instance.
      * </p>
      *
-     * @return a copy of this {@link LayerManager}.
+     * @return A copy of this {@link LayerManager}.
      */
     public LayerManager<T> copy() {
         final LayerManager<T> newMgr = new LayerManager<>(filterSupplier, extendCheck, filterCleanup, false);
@@ -361,6 +361,7 @@ public class LayerManager<T extends BloomFilter<T>> implements BloomFilterExtrac
     /**
      * Gets the Bloom filter from the first layer.
      * No extension check is performed during this call.
+     *
      * @return The Bloom filter from the first layer.
      * @see #getTarget()
      */
@@ -372,8 +373,8 @@ public class LayerManager<T extends BloomFilter<T>> implements BloomFilterExtrac
      * Gets the Bloom filter at the specified depth. The filter at depth 0 is the
      * oldest filter.
      *
-     * @param depth the depth at which the desired filter is to be found.
-     * @return the filter.
+     * @param depth The depth at which the desired filter is to be found.
+     * @return The filter.
      * @throws NoSuchElementException if depth is not in the range
      *                                [0,filters.size())
      */
@@ -388,7 +389,7 @@ public class LayerManager<T extends BloomFilter<T>> implements BloomFilterExtrac
      * Gets the number of filters in the LayerManager.  In the default LayerManager implementation
      * there is always at least one layer.
      *
-     * @return the current depth.
+     * @return The current depth.
      */
     public final int getDepth() {
         return filters.size();
@@ -398,7 +399,7 @@ public class LayerManager<T extends BloomFilter<T>> implements BloomFilterExtrac
      * Gets the current target filter. If a new filter should be created based on
      * {@code extendCheck} it will be created before this method returns.
      *
-     * @return the current target filter after any extension.
+     * @return The current target filter after any extension.
      */
     public final T getTarget() {
         if (extendCheck.test(this)) {
@@ -439,7 +440,7 @@ public class LayerManager<T extends BloomFilter<T>> implements BloomFilterExtrac
      * Executes a Bloom filter Predicate on each Bloom filter in the manager in
      * depth order. Oldest filter first.
      *
-     * @param bloomFilterPredicate the predicate to evaluate each Bloom filter with.
+     * @param bloomFilterPredicate The predicate to evaluate each Bloom filter with.
      * @return {@code false} when the a filter fails the predicate test. Returns
      *         {@code true} if all filters pass the test.
      */

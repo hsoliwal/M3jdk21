@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -14,10 +14,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+// Modified 2026 by Synexia contributors: indexed ancestors and stack-bounded exact-owner traversal.
 package jdk.m3.collections.apache.iterators;
 
-import java.util.ArrayDeque;
-import java.util.Deque;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
@@ -77,24 +77,33 @@ import jdk.m3.collections.apache.Transformer;
  * more efficient (and convenient) than using nested for loops to extract a list.
  * </p>
  *
- * @param <E> the type of elements returned by this iterator.
+ * @param <E> The type of elements returned by this iterator.
  * @since 3.1
  */
 public class ObjectGraphIterator<E> implements Iterator<E> {
 
-    /** The stack of iterators */
-    private final Deque<Iterator<? extends E>> stack = new ArrayDeque<>(8);
+    /** Empty traversal does not allocate an ancestor container. */
+    private static final Iterator<?>[] EMPTY_ITERATORS = new Iterator<?>[0];
+
+    /** Parent-owned ancestor references, cleared as they are popped. */
+    private Iterator<?>[] stack = EMPTY_ITERATORS;
+    private int stackSize;
+
     /** The root object in the tree */
     private E root;
+
     /** The transformer to use */
     private final Transformer<? super E, ? extends E> transformer;
 
     /** Whether there is another element in the iteration */
     private boolean hasNext;
+
     /** The current iterator */
     private Iterator<? extends E> currentIterator;
+
     /** The current value */
     private E currentValue;
+
     /** The last used iterator, needed for remove() */
     private Iterator<? extends E> lastUsedIterator;
 
@@ -104,8 +113,8 @@ public class ObjectGraphIterator<E> implements Iterator<E> {
      * The root object can be an iterator, in which case it will be immediately
      * looped around.
      *
-     * @param root  the root object, null will result in an empty iterator
-     * @param transformer  the transformer to use, null will use a no effect transformer
+     * @param root  The root object, null will result in an empty iterator
+     * @param transformer  The transformer to use, null will use a no effect transformer
      */
     @SuppressWarnings("unchecked")
     public ObjectGraphIterator(final E root, final Transformer<? super E, ? extends E> transformer) {
@@ -126,7 +135,7 @@ public class ObjectGraphIterator<E> implements Iterator<E> {
      * iterators.
      * </p>
      *
-     * @param rootIterator  the root iterator, null will result in an empty iterator
+     * @param rootIterator  The root iterator, null will result in an empty iterator
      */
     public ObjectGraphIterator(final Iterator<? extends E> rootIterator) {
         this.currentIterator = rootIterator;
@@ -136,7 +145,7 @@ public class ObjectGraphIterator<E> implements Iterator<E> {
     /**
      * Finds the next object in the iteration given any start object.
      *
-     * @param value  the value to start from
+     * @param value  The value to start from
      */
     @SuppressWarnings("unchecked")
     protected void findNext(final E value) {
@@ -153,13 +162,17 @@ public class ObjectGraphIterator<E> implements Iterator<E> {
     /**
      * Finds the next object in the iteration given an iterator.
      *
-     * @param iterator  the iterator to start from
+     * @param iterator  The iterator to start from
      */
     protected void findNextByIterator(final Iterator<? extends E> iterator) {
+        if (getClass() == ObjectGraphIterator.class) {
+            findNextIteratively(iterator);
+            return;
+        }
         if (iterator != currentIterator) {
             // recurse a level
             if (currentIterator != null) {
-                stack.push(currentIterator);
+                pushIterator(currentIterator);
             }
             currentIterator = iterator;
         }
@@ -172,10 +185,73 @@ public class ObjectGraphIterator<E> implements Iterator<E> {
             findNext(next);
         }
         // if we haven't found the next value and iterators are not yet exhausted
-        if (!hasNext && !stack.isEmpty()) {
+        if (!hasNext && stackSize != 0) {
             // current iterator exhausted, go up a level
-            currentIterator = stack.pop();
+            currentIterator = popIterator();
             findNextByIterator(currentIterator);
+        }
+    }
+
+    private void pushIterator(final Iterator<? extends E> iterator) {
+        if (stackSize == stack.length) {
+            final long capacity = Math.max(8L, (long) stack.length + (stack.length >>> 1));
+            if (capacity > Integer.MAX_VALUE - 8L) {
+                throw new OutOfMemoryError("ObjectGraphIterator ancestor capacity exhausted");
+            }
+            stack = Arrays.copyOf(stack, (int) capacity);
+        }
+        stack[stackSize++] = iterator;
+    }
+
+    @SuppressWarnings("unchecked")
+    private Iterator<? extends E> popIterator() {
+        final int index = --stackSize;
+        final Iterator<? extends E> iterator = (Iterator<? extends E>) stack[index];
+        stack[index] = null;
+        return iterator;
+    }
+
+    /**
+     * Each nested descent leaves one while-loop continuation. Tail returns need
+     * no frame. Keep the original hasNext-before-cache-check evaluation order,
+     * including the repeated child callbacks while those continuations unwind.
+     * Subclasses retain the original protected recursive dispatch above.
+     */
+    @SuppressWarnings("unchecked")
+    private void findNextIteratively(final Iterator<? extends E> iterator) {
+        if (iterator != currentIterator) {
+            if (currentIterator != null) {
+                pushIterator(currentIterator);
+            }
+            currentIterator = iterator;
+        }
+        long continuations = 0;
+        for (;;) {
+            while (currentIterator.hasNext() && !hasNext) {
+                E next = currentIterator.next();
+                if (transformer != null) {
+                    next = transformer.apply(next);
+                }
+                if (next instanceof Iterator) {
+                    continuations++;
+                    final Iterator<? extends E> child = (Iterator<? extends E>) next;
+                    if (child != currentIterator) {
+                        pushIterator(currentIterator);
+                        currentIterator = child;
+                    }
+                } else {
+                    currentValue = next;
+                    hasNext = true;
+                }
+            }
+            if (!hasNext && stackSize != 0) {
+                currentIterator = popIterator();
+                continue;
+            }
+            if (continuations == 0) {
+                return;
+            }
+            continuations--;
         }
     }
 
@@ -193,7 +269,7 @@ public class ObjectGraphIterator<E> implements Iterator<E> {
     /**
      * Gets the next element of the iteration.
      *
-     * @return the next element from the iteration
+     * @return The next element from the iteration
      * @throws NoSuchElementException if all the Iterators are exhausted
      */
     @Override

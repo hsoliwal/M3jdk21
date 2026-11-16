@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -41,8 +41,8 @@ import org.junit.jupiter.api.Test;
  * They must also specify certain details of how the list iterator operates by
  * overriding the supportsXxx() methods if necessary.
  *
- * @param <K> the type of the keys in the maps tested.
- * @param <V> the type of the values in the maps tested.
+ * @param <K> The type of the keys in the maps tested.
+ * @param <V> The type of the values in the maps tested.
  */
 public abstract class AbstractOrderedMapIteratorTest<K, V> extends AbstractMapIteratorTest<K, V> {
 
@@ -130,7 +130,7 @@ public abstract class AbstractOrderedMapIteratorTest<K, V> extends AbstractMapIt
      * Test that the iterator order matches the keySet order.
      */
     @Test
-    public void testMapIteratorOrder() {
+    void testMapIteratorOrder() {
         if (!supportsFullIterator()) {
             return;
         }

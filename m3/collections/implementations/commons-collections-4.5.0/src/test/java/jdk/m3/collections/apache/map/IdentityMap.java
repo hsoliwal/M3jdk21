@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -40,8 +40,8 @@ import java.util.Map;
  * From 4.0, this class is replaced by java.util.IdentityHashMap but kept as a
  * test-class because it is still used by the ReferenceIdentityMapTest.
  *
- * @param <K> the type of the keys in this map
- * @param <V> the type of the values in this map
+ * @param <K> The type of the keys in this map
+ * @param <V> The type of the values in this map
  */
 public class IdentityMap<K, V>
         extends AbstractHashedMap<K, V> implements Serializable, Cloneable {
@@ -49,8 +49,8 @@ public class IdentityMap<K, V>
     /**
      * HashEntry.
      *
-     * @param <K> the key type.
-     * @param <V> the value type.
+     * @param <K> The key type.
+     * @param <V> The value type.
      */
     protected static class IdentityEntry<K, V> extends HashEntry<K, V> {
 
@@ -92,7 +92,7 @@ public class IdentityMap<K, V>
     /**
      * Constructs a new, empty map with the specified initial capacity.
      *
-     * @param initialCapacity  the initial capacity
+     * @param initialCapacity  The initial capacity
      * @throws IllegalArgumentException if the initial capacity is negative
      */
     public IdentityMap(final int initialCapacity) {
@@ -103,8 +103,8 @@ public class IdentityMap<K, V>
      * Constructs a new, empty map with the specified initial capacity and
      * load factor.
      *
-     * @param initialCapacity  the initial capacity
-     * @param loadFactor  the load factor
+     * @param initialCapacity  The initial capacity
+     * @param loadFactor  The load factor
      * @throws IllegalArgumentException if the initial capacity is negative
      * @throws IllegalArgumentException if the load factor is less than zero
      */
@@ -115,7 +115,7 @@ public class IdentityMap<K, V>
     /**
      * Constructor copying elements from another map.
      *
-     * @param map  the map to copy
+     * @param map  The map to copy
      * @throws NullPointerException if the map is null
      */
     public IdentityMap(final Map<K, V> map) {
@@ -125,7 +125,7 @@ public class IdentityMap<K, V>
     /**
      * Clones the map without cloning the keys or values.
      *
-     * @return a shallow clone
+     * @return A shallow clone
      */
     @Override
     public IdentityMap<K, V> clone() {
@@ -136,11 +136,11 @@ public class IdentityMap<K, V>
      * Creates an entry to store the data.
      * This implementation creates an IdentityEntry instance.
      *
-     * @param next  the next entry in sequence
-     * @param hashCode  the hash code to use
-     * @param key  the key to store
-     * @param value  the value to store
-     * @return the newly created entry
+     * @param next  The next entry in sequence
+     * @param hashCode  The hash code to use
+     * @param key  The key to store
+     * @param value  The value to store
+     * @return The newly created entry
      */
     @Override
     protected IdentityEntry<K, V> createEntry(final HashEntry<K, V> next, final int hashCode,
@@ -152,8 +152,8 @@ public class IdentityMap<K, V>
      * Gets the hash code for the key specified.
      * This implementation uses the identity hash code.
      *
-     * @param key  the key to get a hash code for
-     * @return the hash code
+     * @param key  The key to get a hash code for
+     * @return The hash code
      */
     @Override
     protected int hash(final Object key) {
@@ -164,8 +164,8 @@ public class IdentityMap<K, V>
      * Compares two keys for equals.
      * This implementation uses {@code ==}.
      *
-     * @param key1  the first key to compare
-     * @param key2  the second key to compare
+     * @param key1  The first key to compare
+     * @param key2  The second key to compare
      * @return true if equal by identity
      */
     @Override
@@ -177,8 +177,8 @@ public class IdentityMap<K, V>
      * Compares two values for equals.
      * This implementation uses {@code ==}.
      *
-     * @param value1  the first value to compare
-     * @param value2  the second value to compare
+     * @param value1  The first value to compare
+     * @param value2  The second value to compare
      * @return true if equal by identity
      */
     @Override
@@ -201,7 +201,7 @@ public class IdentityMap<K, V>
     /**
      * Serializes this object to an ObjectOutputStream.
      *
-     * @param out the target ObjectOutputStream.
+     * @param out The target ObjectOutputStream.
      * @throws IOException thrown when an I/O errors occur writing to the target stream.
      */
     private void writeObject(final ObjectOutputStream out) throws IOException {

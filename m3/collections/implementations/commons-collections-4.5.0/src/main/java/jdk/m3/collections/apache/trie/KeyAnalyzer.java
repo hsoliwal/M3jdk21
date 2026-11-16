@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -19,8 +19,10 @@ package jdk.m3.collections.apache.trie;
 import java.io.Serializable;
 import java.util.Comparator;
 
+import jdk.m3.collections.apache.Trie;
+
 /**
- * Defines the interface to analyze {@link jdk.m3.collections.apache.Trie Trie} keys on a bit level.
+ * Defines the interface to analyze {@link Trie Trie} keys on a bit level.
  * {@link KeyAnalyzer}'s methods return the length of the key in bits, whether or not a bit is set,
  * and bits per element in the key.
  * <p>
@@ -30,7 +32,7 @@ import java.util.Comparator;
  * {@link #EQUAL_BIT_KEY}).
  * </p>
  *
- * @param <K> the type of objects that may be compared by this analyzer
+ * @param <K> The type of objects that may be compared by this analyzer
  * @since 4.0
  */
 public abstract class KeyAnalyzer<K> implements Comparator<K>, Serializable {
@@ -96,13 +98,13 @@ public abstract class KeyAnalyzer<K> implements Comparator<K>, Serializable {
      * key at 'offsetInBits' and goes for 'lengthInBits' bits, and compares to the other key starting
      * at 'otherOffsetInBits' and going for 'otherLengthInBits' bits.
      *
-     * @param key  the key to use
-     * @param offsetInBits  the bit offset in the key
-     * @param lengthInBits  the maximum key length in bits to use
-     * @param other  the other key to use
-     * @param otherOffsetInBits  the bit offset in the other key
-     * @param otherLengthInBits  the maximum key length in bits for the other key
-     * @return the bit index where the key and other first differ
+     * @param key  The key to use
+     * @param offsetInBits  The bit offset in the key
+     * @param lengthInBits  The maximum key length in bits to use
+     * @param other  The other key to use
+     * @param otherOffsetInBits  The bit offset in the other key
+     * @param otherLengthInBits  The maximum key length in bits for the other key
+     * @return The bit index where the key and other first differ
      */
     public abstract int bitIndex(K key, int offsetInBits, int lengthInBits,
                                  K other, int otherOffsetInBits, int otherLengthInBits);
@@ -111,7 +113,7 @@ public abstract class KeyAnalyzer<K> implements Comparator<K>, Serializable {
      * Returns the number of bits per element in the key.
      * This is only useful for variable-length keys, such as Strings.
      *
-     * @return the number of bits per element
+     * @return The number of bits per element
      */
     public abstract int bitsPerElement();
 
@@ -131,9 +133,9 @@ public abstract class KeyAnalyzer<K> implements Comparator<K>, Serializable {
     /**
      * Returns whether or not a bit is set.
      *
-     * @param key  the key to check, may not be null
-     * @param bitIndex  the bit index to check
-     * @param lengthInBits  the maximum key length in bits to check
+     * @param key  The key to check, may not be null
+     * @param bitIndex  The bit index to check
+     * @param lengthInBits  The maximum key length in bits to check
      * @return {@code true} if the bit is set in the given key and
      *   {@code bitIndex} &lt; {@code lengthInBits}, {@code false} otherwise.
      */
@@ -142,10 +144,10 @@ public abstract class KeyAnalyzer<K> implements Comparator<K>, Serializable {
     /**
      * Determines whether or not the given prefix (from offset to length) is a prefix of the given key.
      *
-     * @param prefix  the prefix to check
-     * @param offsetInBits  the bit offset in the key
-     * @param lengthInBits  the maximum key length in bits to use
-     * @param key  the key to check
+     * @param prefix  The prefix to check
+     * @param offsetInBits  The bit offset in the key
+     * @param lengthInBits  The maximum key length in bits to use
+     * @param key  The key to check
      * @return {@code true} if this is a valid prefix for the given key
      */
     public abstract boolean isPrefix(K prefix, int offsetInBits, int lengthInBits, K key);
@@ -153,8 +155,8 @@ public abstract class KeyAnalyzer<K> implements Comparator<K>, Serializable {
     /**
      * Returns the length of the Key in bits.
      *
-     * @param key  the key
-     * @return the bit length of the key
+     * @param key  The key
+     * @return The bit length of the key
      */
     public abstract int lengthInBits(K key);
 

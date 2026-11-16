@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -14,9 +14,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+// Modified 2026-11-15 by Hitesh Soliwal and Synexia contributors: own iterator metadata arrays.
 package jdk.m3.collections.apache.iterators;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -65,7 +67,7 @@ import java.util.Objects;
  * infinite.
  * </p>
  *
- * @param <E> the type of the objects being permuted
+ * @param <E> The type of the objects being permuted
  * @since 4.5.0-M3
  */
 public class CartesianProductIterator<E> implements Iterator<List<E>> {
@@ -73,12 +75,15 @@ public class CartesianProductIterator<E> implements Iterator<List<E>> {
     /**
      * The iterables to create the Cartesian product from.
      */
-    private final List<Iterable<? extends E>> iterables;
+    private final Iterable<? extends E>[] iterables;
 
     /**
      * The iterators to generate the Cartesian product tuple from.
      */
-    private final List<Iterator<? extends E>> iterators;
+    private final Iterator<? extends E>[] iterators;
+
+    /** The number of active input iterators, or zero for an empty product. */
+    private final int iteratorCount;
 
     /**
      * The previous generated tuple of elements.
@@ -88,24 +93,28 @@ public class CartesianProductIterator<E> implements Iterator<List<E>> {
     /**
      * Constructs a new {@code CartesianProductIterator} instance with given iterables.
      *
-     * @param iterables the iterables to create the Cartesian product from
+     * @param iterables The iterables to create the Cartesian product from
      * @throws NullPointerException if any of the iterables is null
      */
     @SafeVarargs
+    @SuppressWarnings("unchecked")
     public CartesianProductIterator(final Iterable<? extends E>... iterables) {
         Objects.requireNonNull(iterables, "iterables");
-        this.iterables = new ArrayList<>(iterables.length);
-        this.iterators = new ArrayList<>(iterables.length);
+        this.iterables = (Iterable<? extends E>[]) new Iterable<?>[iterables.length];
+        this.iterators = (Iterator<? extends E>[]) new Iterator<?>[iterables.length];
+        int count = 0;
         for (final Iterable<? extends E> iterable : iterables) {
             Objects.requireNonNull(iterable, "iterable");
-            this.iterables.add(iterable);
+            this.iterables[count] = iterable;
             final Iterator<? extends E> iterator = iterable.iterator();
             if (!iterator.hasNext()) {
-                iterators.clear();
+                Arrays.fill(this.iterators, 0, count, null);
+                count = 0;
                 break;
             }
-            iterators.add(iterator);
+            this.iterators[count++] = iterator;
         }
+        iteratorCount = count;
     }
 
     /**
@@ -115,13 +124,18 @@ public class CartesianProductIterator<E> implements Iterator<List<E>> {
      */
     @Override
     public boolean hasNext() {
-        return iterators.stream().anyMatch(Iterator::hasNext);
+        for (int i = 0; i < iteratorCount; i++) {
+            if (iterators[i].hasNext()) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
      * Returns the next tuple of the input iterables.
      *
-     * @return a list of the input iterables' elements
+     * @return A list of the input iterables' elements
      * @throws NoSuchElementException if there are no more tuples
      */
     @Override
@@ -130,25 +144,30 @@ public class CartesianProductIterator<E> implements Iterator<List<E>> {
             throw new NoSuchElementException();
         }
         if (previousTuple == null) {
-            previousTuple = new ArrayList<>(iterables.size());
-            for (final Iterator<? extends E> iterator : iterators) {
-                previousTuple.add(iterator.next());
+            previousTuple = new ArrayList<>(iterables.length);
+            for (int i = 0; i < iteratorCount; i++) {
+                previousTuple.add(iterators[i].next());
             }
             return new ArrayList<>(previousTuple);
         }
-        for (int i = iterators.size() - 1; i >= 0; i--) {
-            Iterator<? extends E> iterator = iterators.get(i);
+        for (int i = iteratorCount - 1; i >= 0; i--) {
+            Iterator<? extends E> iterator = iterators[i];
             if (iterator.hasNext()) {
                 previousTuple.set(i, iterator.next());
                 return new ArrayList<>(previousTuple);
             }
-            iterator = iterables.get(i).iterator();
-            iterators.set(i, iterator);
+            iterator = iterables[i].iterator();
+            iterators[i] = iterator;
             previousTuple.set(i, iterator.next());
         }
         throw new IllegalStateException("reached unreachable code");
     }
 
+    /**
+     * Always throws {@link UnsupportedOperationException}.
+     *
+     * @throws UnsupportedOperationException Always thrown.
+     */
     @Override
     public void remove() {
         throw new UnsupportedOperationException("remove");

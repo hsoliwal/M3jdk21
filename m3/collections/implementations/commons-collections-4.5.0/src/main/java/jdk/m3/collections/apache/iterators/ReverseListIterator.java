@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -35,22 +35,24 @@ import jdk.m3.collections.apache.ResettableListIterator;
  * continues. The previous methods work similarly.
  * </p>
  *
- * @param <E> the type of elements returned by this iterator.
+ * @param <E> The type of elements returned by this iterator.
  * @since 3.2
  */
 public class ReverseListIterator<E> implements ResettableListIterator<E> {
 
     /** The list being wrapped. */
     private final List<E> list;
+
     /** The list iterator being wrapped. */
     private ListIterator<E> iterator;
+
     /** Flag to indicate if updating is possible at the moment. */
     private boolean validForUpdate = true;
 
     /**
      * Constructor that wraps a list.
      *
-     * @param list  the list to create a reversed iterator for
+     * @param list  The list to create a reversed iterator for
      * @throws NullPointerException if the list is null
      */
     public ReverseListIterator(final List<E> list) {
@@ -61,7 +63,7 @@ public class ReverseListIterator<E> implements ResettableListIterator<E> {
     /**
      * Adds a new element to the list between the next and previous elements.
      *
-     * @param obj  the object to add
+     * @param obj  The object to add
      * @throws UnsupportedOperationException if the list is unmodifiable
      * @throws IllegalStateException if the iterator is not in a valid state for set
      */
@@ -101,7 +103,7 @@ public class ReverseListIterator<E> implements ResettableListIterator<E> {
      * Gets the next element.
      * The next element is the previous in the list.
      *
-     * @return the next element in the iterator
+     * @return The next element in the iterator
      */
     @Override
     public E next() {
@@ -113,7 +115,7 @@ public class ReverseListIterator<E> implements ResettableListIterator<E> {
     /**
      * Gets the index of the next element.
      *
-     * @return the index of the next element in the iterator
+     * @return The index of the next element in the iterator
      */
     @Override
     public int nextIndex() {
@@ -124,7 +126,7 @@ public class ReverseListIterator<E> implements ResettableListIterator<E> {
      * Gets the previous element.
      * The next element is the previous in the list.
      *
-     * @return the previous element in the iterator
+     * @return The previous element in the iterator
      */
     @Override
     public E previous() {
@@ -136,7 +138,7 @@ public class ReverseListIterator<E> implements ResettableListIterator<E> {
     /**
      * Gets the index of the previous element.
      *
-     * @return the index of the previous element in the iterator
+     * @return The index of the previous element in the iterator
      */
     @Override
     public int previousIndex() {
@@ -169,7 +171,7 @@ public class ReverseListIterator<E> implements ResettableListIterator<E> {
     /**
      * Replaces the last returned element.
      *
-     * @param obj  the object to set
+     * @param obj  The object to set
      * @throws UnsupportedOperationException if the list is unmodifiable
      * @throws IllegalStateException if the iterator is not in a valid state for set
      */

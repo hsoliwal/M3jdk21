@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -26,6 +26,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Objects;
 
+import jdk.m3.collections.apache.comparators.ComparableComparator;
 import jdk.m3.collections.apache.list.UnmodifiableList;
 
 /**
@@ -37,7 +38,7 @@ import jdk.m3.collections.apache.list.UnmodifiableList;
  * lesser of {@code A.next()} and {@code B.next()}.
  * </p>
  *
- * @param <E> the type of elements returned by this iterator.
+ * @param <E> The type of elements returned by this iterator.
  * @since 2.1
  */
 public class CollatingIterator<E> implements Iterator<E> {
@@ -76,7 +77,7 @@ public class CollatingIterator<E> implements Iterator<E> {
      * specified comparator for ordering. Child iterators will have to be
      * manually added using the {@link #addIterator(Iterator)} method.
      *
-     * @param comp the comparator to use to sort; must not be null,
+     * @param comp The comparator to use to sort; must not be null,
      *   unless you'll be invoking {@link #setComparator(Comparator)} later on.
      */
     public CollatingIterator(final Comparator<? super E> comp) {
@@ -88,9 +89,9 @@ public class CollatingIterator<E> implements Iterator<E> {
      * specified comparator to provide ordered iteration over the collection of
      * iterators.
      *
-     * @param comp the comparator to use to sort; must not be null,
+     * @param comp The comparator to use to sort; must not be null,
      *   unless you'll be invoking {@link #setComparator(Comparator)} later on.
-     * @param iterators the collection of iterators
+     * @param iterators The collection of iterators
      * @throws NullPointerException if the iterators collection is or contains null
      * @throws ClassCastException if the iterators collection contains an
      *   element that's not an {@link Iterator}
@@ -108,9 +109,9 @@ public class CollatingIterator<E> implements Iterator<E> {
      * capacity. Child iterators will have to be manually added using the
      * {@link #addIterator(Iterator)} method.
      *
-     * @param comp the comparator to use to sort; must not be null,
+     * @param comp The comparator to use to sort; must not be null,
      *   unless you'll be invoking {@link #setComparator(Comparator)} later on.
-     * @param initIterCapacity the initial capacity for the internal list of
+     * @param initIterCapacity The initial capacity for the internal list of
      *   child iterators
      */
     public CollatingIterator(final Comparator<? super E> comp, final int initIterCapacity) {
@@ -123,10 +124,10 @@ public class CollatingIterator<E> implements Iterator<E> {
      * specified comparator to provide ordered iteration over the two given
      * iterators.
      *
-     * @param comp the comparator to use to sort; must not be null,
+     * @param comp The comparator to use to sort; must not be null,
      *   unless you'll be invoking {@link #setComparator(Comparator)} later on.
-     * @param a the first child ordered iterator
-     * @param b the second child ordered iterator
+     * @param a The first child ordered iterator
+     * @param b The second child ordered iterator
      * @throws NullPointerException if either iterator is null
      */
     public CollatingIterator(final Comparator<? super E> comp, final Iterator<? extends E> a,
@@ -141,9 +142,9 @@ public class CollatingIterator<E> implements Iterator<E> {
      * specified comparator to provide ordered iteration over the array of
      * iterators.
      *
-     * @param comp the comparator to use to sort; must not be null,
+     * @param comp The comparator to use to sort; must not be null,
      *   unless you'll be invoking {@link #setComparator(Comparator)} later on.
-     * @param iterators the array of iterators
+     * @param iterators The array of iterators
      * @throws NullPointerException if iterators array is or contains null
      */
     public CollatingIterator(final Comparator<? super E> comp, final Iterator<? extends E>[] iterators) {
@@ -156,7 +157,7 @@ public class CollatingIterator<E> implements Iterator<E> {
     /**
      * Adds the given {@link Iterator} to the iterators being collated.
      *
-     * @param iterator the iterator to add to the collation, must not be null
+     * @param iterator The iterator to add to the collation, must not be null
      * @throws IllegalStateException if iteration has started
      * @throws NullPointerException if the iterator is null
      */
@@ -211,7 +212,7 @@ public class CollatingIterator<E> implements Iterator<E> {
     /**
      * Gets the {@link Comparator} by which collation occurs.
      *
-     * @return the {@link Comparator}
+     * @return The {@link Comparator}
      */
     public Comparator<? super E> getComparator() {
         return comparator;
@@ -220,7 +221,7 @@ public class CollatingIterator<E> implements Iterator<E> {
     /**
      * Gets the index of the iterator that returned the last element.
      *
-     * @return the index of the iterator that returned the last element
+     * @return The index of the iterator that returned the last element
      * @throws IllegalStateException if there is no last returned element
      */
     public int getIteratorIndex() {
@@ -234,7 +235,7 @@ public class CollatingIterator<E> implements Iterator<E> {
     /**
      * Gets the list of Iterators (unmodifiable).
      *
-     * @return the unmodifiable list of iterators added
+     * @return The unmodifiable list of iterators added
      */
     public List<Iterator<? extends E>> getIterators() {
         return UnmodifiableList.unmodifiableList(iterators);
@@ -284,7 +285,7 @@ public class CollatingIterator<E> implements Iterator<E> {
     /**
      * Returns the next ordered element from a child iterator.
      *
-     * @return the next ordered element
+     * @return The next ordered element
      * @throws NoSuchElementException if no child iterator has any more elements
      */
     @Override
@@ -341,9 +342,9 @@ public class CollatingIterator<E> implements Iterator<E> {
      * would like to use the natural sort order (or, in other words,
      * if the elements in the iterators are implementing the
      * {@link Comparable} interface), then use the
-     * {@link jdk.m3.collections.apache.comparators.ComparableComparator}.
+     * {@link ComparableComparator}.
      *
-     * @param comp the {@link Comparator} to set
+     * @param comp The {@link Comparator} to set
      * @throws IllegalStateException if iteration has started
      */
     public void setComparator(final Comparator<? super E> comp) {

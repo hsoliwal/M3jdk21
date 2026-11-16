@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -17,11 +17,14 @@
 package jdk.m3.collections.apache.set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.io.InvalidObjectException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -93,7 +96,7 @@ public class ListOrderedSetTest<E>
     }
 
     @Test
-    public void testDecorator() {
+    void testDecorator() {
         assertThrows(NullPointerException.class, () -> ListOrderedSet.listOrderedSet((List<E>) null));
         assertThrows(NullPointerException.class, () -> ListOrderedSet.listOrderedSet((Set<E>) null));
         assertThrows(NullPointerException.class, () -> ListOrderedSet.listOrderedSet(null, null));
@@ -102,8 +105,18 @@ public class ListOrderedSetTest<E>
     }
 
     @Test
+    void testDeserializeRejectsOrderMismatch() throws Exception {
+        final ListOrderedSet<String> set = ListOrderedSet.listOrderedSet(new HashSet<>());
+        set.add("red");
+        set.add("green");
+        // remove an element from the decorated set only; the order list keeps naming it
+        set.decorated().remove("red");
+        assertThrows(InvalidObjectException.class, () -> serializeDeserialize(set));
+    }
+
+    @Test
     @SuppressWarnings("unchecked")
-    public void testDuplicates() {
+    void testDuplicates() {
         final List<E> list = new ArrayList<>(10);
         list.add((E) Integer.valueOf(1));
         list.add((E) Integer.valueOf(2));
@@ -123,7 +136,7 @@ public class ListOrderedSetTest<E>
 
     @Test
     @SuppressWarnings("unchecked")
-    public void testListAddIndexed() {
+    void testListAddIndexed() {
         final ListOrderedSet<E> set = makeObject();
         set.add((E) ZERO);
         set.add((E) TWO);
@@ -162,7 +175,29 @@ public class ListOrderedSetTest<E>
 
     @Test
     @SuppressWarnings("unchecked")
-    public void testListAddRemove() {
+    void testListAddIndexedOutOfBounds() {
+        final ListOrderedSet<E> set = makeObject();
+        set.add((E) ZERO);
+
+        // an out-of-range index is rejected before the backing set is touched
+        assertThrows(IndexOutOfBoundsException.class, () -> set.add(5, (E) ONE));
+        assertFalse(set.contains(ONE), "rejected element leaked into the backing set");
+        assertEquals(set.size(), set.asList().size(), "backing set and order list diverged");
+        // the element is still insertable afterwards
+        assertTrue(set.add((E) ONE));
+        assertSame(ONE, set.get(1));
+
+        final ListOrderedSet<E> other = makeObject();
+        other.add((E) ZERO);
+        assertThrows(IndexOutOfBoundsException.class, () -> other.addAll(9, Arrays.asList((E) ONE, (E) TWO)));
+        assertFalse(other.contains(ONE));
+        assertFalse(other.contains(TWO));
+        assertEquals(other.size(), other.asList().size(), "backing set and order list diverged");
+    }
+
+    @Test
+    @SuppressWarnings("unchecked")
+    void testListAddRemove() {
         final ListOrderedSet<E> set = makeObject();
         final List<E> view = set.asList();
         set.add((E) ZERO);
@@ -193,7 +228,7 @@ public class ListOrderedSetTest<E>
 
     @Test
     @SuppressWarnings("unchecked")
-    public void testListAddReplacing() {
+    void testListAddReplacing() {
         final ListOrderedSet<E> set = makeObject();
         final A a = new A();
         final B b = new B();
@@ -209,7 +244,7 @@ public class ListOrderedSetTest<E>
 
     @Test
     @SuppressWarnings("unchecked")
-    public void testOrdering() {
+    void testOrdering() {
         final ListOrderedSet<E> set = setupSet();
         Iterator<E> it = set.iterator();
 
@@ -245,7 +280,7 @@ public class ListOrderedSetTest<E>
 
     @Test
     @SuppressWarnings("unchecked")
-    public void testRetainAll() {
+    void testRetainAll() {
         final List<E> list = new ArrayList<>(10);
         final Set<E> set = new HashSet<>(10);
         final ListOrderedSet<E> orderedSet = ListOrderedSet.listOrderedSet(set, list);
@@ -268,7 +303,7 @@ public class ListOrderedSetTest<E>
         assertEquals(Integer.valueOf(0), orderedSet.get(4));
     }
 
-//    public void testCreate() throws Exception {
+//    void testCreate() throws Exception {
 //        resetEmpty();
 //        writeExternalFormToDisk((java.io.Serializable) getCollection(), "src/test/resources/data/test/ListOrderedSet.emptyCollection.version4.obj");
 //        resetFull();

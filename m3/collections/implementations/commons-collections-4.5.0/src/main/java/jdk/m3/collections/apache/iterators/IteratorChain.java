@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,14 +15,18 @@
  * limitations under the License.
  */
 // Modified 2026 by Hitesh Soliwal and Contributors to the Synexia Project:
-// array-backed pending iterator storage (ArrayDeque).
+// preserve owner-indexed pending arrays with upstream nested-chain and cycle fixes.
 package jdk.m3.collections.apache.iterators;
 
 import java.util.ArrayDeque;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Deque;
+import java.util.IdentityHashMap;
 import java.util.Iterator;
 import java.util.Objects;
-import java.util.Queue;
+import java.util.Set;
 
 /**
  * An IteratorChain is an Iterator that wraps a number of Iterators.
@@ -42,6 +46,11 @@ import java.util.Queue;
  * interface has been called</i> will result in an UnsupportedOperationException.
  * </p>
  * <p>
+ * Nested chains must not form cycles. If a cycle is detected during traversal or removal,
+ * an {@link IllegalStateException} is thrown. Subclasses and other iterator implementations
+ * are invoked normally and are responsible for their own cycle handling.
+ * </p>
+ * <p>
  * NOTE: As from version 3.0, the IteratorChain may contain no iterators. In
  * this case the class will function as an empty iterator.
  * </p>
@@ -53,28 +62,50 @@ import java.util.Queue;
  * the queue.
  * </p>
  *
- * @param <E> the type of elements in this iterator.
+ * @param <E> The type of elements in this iterator.
  * @since 2.1
  */
 public class IteratorChain<E> implements Iterator<E> {
 
-    /** The chain of iterators */
-    private final Queue<Iterator<? extends E>> iteratorQueue = new ArrayDeque<>();
+    /**
+     * Gets a nested chain that can be traversed without invoking overridden methods.
+     * Unmodifiable decorators forward hasNext() and next(), but must still be retained for remove().
+     */
+    private static <E> IteratorChain<? extends E> asIteratorChain(final Iterator<? extends E> iterator) {
+        Iterator<? extends E> unwrapped = iterator;
+        while (unwrapped instanceof UnmodifiableIterator) {
+            unwrapped = ((UnmodifiableIterator<? extends E, ?>) unwrapped).unwrap();
+        }
+        // Subclasses may override any iterator method or updateCurrentIterator().
+        return unwrapped.getClass() == IteratorChain.class ? (IteratorChain<? extends E>) unwrapped : null;
+    }
+
+    /** Shared empty storage; no deque or payload array is allocated by an empty chain. */
+    private static final Iterator<?>[] EMPTY_ITERATORS = new Iterator<?>[0];
+
+    /** Parent-owned pending iterators, in the live span starting at queueHead. */
+    private Iterator<?>[] iteratorQueue = EMPTY_ITERATORS;
+    private int queueHead;
+    private int queueSize;
 
     /** The current iterator */
     private Iterator<? extends E> currentIterator;
 
     /**
-     * The "last used" Iterator is the Iterator upon which next() or hasNext()
+     * The "last used" Iterator is the Iterator upon which next()
      * was most recently called used for the remove() operation only
      */
     private Iterator<? extends E> lastUsedIterator;
 
     /**
-     * ComparatorChain is "locked" after the first time compare(Object,Object)
-     * is called
+     * The chain is locked after the first call to an Iterator interface method.
      */
     private boolean isLocked;
+
+    /**
+     * Contains the result of the last hasNext() call until next() is invoked
+     */
+    private Boolean cachedHasNextValue;
 
     /**
      * Constructs an IteratorChain with no Iterators.
@@ -94,7 +125,7 @@ public class IteratorChain<E> implements Iterator<E> {
      * iterator will iterate through each one of the input iterators in turn.
      * </p>
      *
-     * @param iteratorQueue the collection of iterators, not null
+     * @param iteratorQueue The collection of iterators, not null
      * @throws NullPointerException if iterators collection is or contains null
      * @throws ClassCastException if iterators collection doesn't contain an
      * iterator
@@ -117,7 +148,7 @@ public class IteratorChain<E> implements Iterator<E> {
      * iterators after using this constructor.
      * </p>
      *
-     * @param iterator the first child iterator in the IteratorChain, not null
+     * @param iterator The first child iterator in the IteratorChain, not null
      * @throws NullPointerException if the iterator is null
      */
     public IteratorChain(final Iterator<? extends E> iterator) {
@@ -131,7 +162,7 @@ public class IteratorChain<E> implements Iterator<E> {
      * will iterate through each one of the input iterators in turn.
      * </p>
      *
-     * @param iteratorQueue the array of iterators, not null
+     * @param iteratorQueue The array of iterators, not null
      * @throws NullPointerException if iterators array is or contains null
      */
     public IteratorChain(final Iterator<? extends E>... iteratorQueue) {
@@ -147,8 +178,8 @@ public class IteratorChain<E> implements Iterator<E> {
      * iterate through each one of the input iterators in turn.
      * </p>
      *
-     * @param first the first child iterator in the IteratorChain, not null
-     * @param second the second child iterator in the IteratorChain, not null
+     * @param first The first child iterator in the IteratorChain, not null
+     * @param second The second child iterator in the IteratorChain, not null
      * @throws NullPointerException if either iterator is null
      */
     public IteratorChain(final Iterator<? extends E> first, final Iterator<? extends E> second) {
@@ -157,15 +188,61 @@ public class IteratorChain<E> implements Iterator<E> {
     }
 
     /**
-     * Add an Iterator to the end of the chain
+     * Adds an Iterator to the end of the chain.
+     * <p>
+     * The iterator is retained, not copied. If it is another {@code IteratorChain}, iterators added to that child before it is locked are also visited.
+     * Subclasses retain their iterator behavior when used as children.
+     * </p>
      *
      * @param iterator Iterator to add
-     * @throws IllegalStateException if I've already started iterating
+     * @throws UnsupportedOperationException if this chain is already locked
      * @throws NullPointerException if the iterator is null
      */
     public void addIterator(final Iterator<? extends E> iterator) {
         checkLocked();
-        iteratorQueue.add(Objects.requireNonNull(iterator, "iterator"));
+        // Retain the iterator itself so subclass behavior and later additions to a child chain are preserved.
+        appendIterator(Objects.requireNonNull(iterator, "iterator"));
+    }
+
+    /** Reserve the pending span before publishing any new child. */
+    private void reservePending(final long required) {
+        if (required <= iteratorQueue.length - queueHead) {
+            return;
+        }
+        if (required <= iteratorQueue.length) {
+            System.arraycopy(iteratorQueue, queueHead, iteratorQueue, 0, queueSize);
+            Arrays.fill(iteratorQueue, queueSize, queueHead + queueSize, null);
+        } else {
+            final long maximum = Integer.MAX_VALUE - 8L;
+            if (required > maximum) {
+                throw new OutOfMemoryError("IteratorChain pending capacity exhausted");
+            }
+            final int capacity = (int) Math.min(maximum, Math.max(required,
+                    Math.max(8L, iteratorQueue.length + (iteratorQueue.length >>> 1))));
+            final Iterator<?>[] grown = new Iterator<?>[capacity];
+            System.arraycopy(iteratorQueue, queueHead, grown, 0, queueSize);
+            iteratorQueue = grown;
+        }
+        queueHead = 0;
+    }
+
+    private void appendIterator(final Iterator<? extends E> iterator) {
+        reservePending((long) queueSize + 1L);
+        iteratorQueue[queueHead + queueSize++] = iterator;
+    }
+
+    @SuppressWarnings("unchecked")
+    private Iterator<? extends E> pendingAt(final int index) {
+        return (Iterator<? extends E>) iteratorQueue[queueHead + index];
+    }
+
+    private Iterator<? extends E> removePending() {
+        final Iterator<? extends E> iterator = pendingAt(0);
+        iteratorQueue[queueHead++] = null;
+        if (--queueSize == 0) {
+            queueHead = 0;
+        }
+        return iterator;
     }
 
     /**
@@ -181,13 +258,24 @@ public class IteratorChain<E> implements Iterator<E> {
      * Return true if any Iterator in the IteratorChain has a remaining element.
      *
      * @return true if elements remain
+     * @throws IllegalStateException if a cycle is detected in the nested chains
      */
     @Override
     public boolean hasNext() {
         lockChain();
-        updateCurrentIterator();
-        lastUsedIterator = currentIterator;
-        return currentIterator.hasNext();
+        if (cachedHasNextValue == null) {
+            updateCurrentIterator();
+        }
+        return cachedHasNextValue;
+    }
+
+    /**
+     * Initializes the current iterator without inspecting its contents.
+     */
+    private void initializeCurrentIterator() {
+        if (currentIterator == null) {
+            pollCurrentIterator();
+        }
     }
 
     /**
@@ -217,14 +305,36 @@ public class IteratorChain<E> implements Iterator<E> {
      * @return Object from the current Iterator
      * @throws java.util.NoSuchElementException if all the Iterators are
      * exhausted
+     * @throws IllegalStateException if a cycle is detected in the nested chains
      */
     @Override
     public E next() {
-        lockChain();
-        updateCurrentIterator();
-        lastUsedIterator = currentIterator;
+        Iterator<? extends E> iterator = nextIterator();
+        IteratorChain<? extends E> chain;
+        while ((chain = asIteratorChain(iterator)) != null) {
+            iterator = chain.nextIterator();
+        }
+        return iterator.next();
+    }
 
-        return currentIterator.next();
+    /**
+     * Prepares this chain for next() while retaining the actual child for remove().
+     */
+    private Iterator<? extends E> nextIterator() {
+        lockChain();
+        if (cachedHasNextValue == null) {
+            updateCurrentIterator();
+        }
+        lastUsedIterator = currentIterator;
+        cachedHasNextValue = null;
+        return currentIterator;
+    }
+
+    /**
+     * Advances to the next queued iterator, or an empty iterator if the queue is empty.
+     */
+    private void pollCurrentIterator() {
+        currentIterator = queueSize == 0 ? EmptyIterator.<E>emptyIterator() : removePending();
     }
 
     /**
@@ -238,44 +348,108 @@ public class IteratorChain<E> implements Iterator<E> {
      * supported by the underlying Iterator
      * @throws IllegalStateException if the next method has not yet been called,
      * or the remove method has already been called after the last call to the
-     * next method.
+     * next method, or a cycle is detected in the nested chains.
      */
     @Override
     public void remove() {
         lockChain();
-        if (currentIterator == null) {
-            updateCurrentIterator();
+        if (lastUsedIterator == null) {
+            throw new IllegalStateException("remove() has been invoked without next()");
         }
-        lastUsedIterator.remove();
+        // Flat removal needs no traversal state, and must still delegate to subclasses and decorators.
+        if (lastUsedIterator.getClass() != IteratorChain.class) {
+            lastUsedIterator.remove();
+            lastUsedIterator = null;
+            return;
+        }
+        final Deque<IteratorChain<?>> chains = new ArrayDeque<>();
+        final Set<IteratorChain<?>> active = Collections.newSetFromMap(new IdentityHashMap<>());
+        IteratorChain<?> chain = this;
+        while (true) {
+            if (!active.add(chain)) {
+                throw new IllegalStateException("Cyclic IteratorChain");
+            }
+            chain.lockChain();
+            if (chain.lastUsedIterator == null) {
+                throw new IllegalStateException("remove() has been invoked without next()");
+            }
+            chains.push(chain);
+            final Iterator<?> iterator = chain.lastUsedIterator;
+            // Do not unwrap unmodifiable decorators or bypass a subclass's remove() method.
+            if (iterator.getClass() != IteratorChain.class) {
+                iterator.remove();
+                break;
+            }
+            chain = (IteratorChain<?>) iterator;
+        }
+        // Only clear removal state after the underlying remove() succeeds.
+        for (final IteratorChain<?> usedChain : chains) {
+            usedChain.lastUsedIterator = null;
+        }
     }
 
     /**
-     * Returns the remaining number of Iterators in the current IteratorChain.
+     * Gets the number of iterators remaining in this chain's queue.
+     * <p>
+     * The current iterator is excluded. A nested chain counts as one iterator, regardless of its contents.
+     * </p>
      *
      * @return Iterator count
      */
     public int size() {
-        return iteratorQueue.size();
+        return queueSize;
     }
 
     /**
-     * Updates the current iterator field to ensure that the current Iterator is
-     * not exhausted
+     * Updates the current iterator field to ensure that the current Iterator is not exhausted.
+     * Nested instances of this class are traversed iteratively; subclasses are invoked normally to preserve their overrides.
+     *
+     * @throws IllegalStateException if a cycle is detected in the nested chains
      */
     protected void updateCurrentIterator() {
-        if (currentIterator == null) {
-            if (iteratorQueue.isEmpty()) {
-                currentIterator = EmptyIterator.<E>emptyIterator();
+        Deque<IteratorChain<? extends E>> parents = null;
+        Set<IteratorChain<? extends E>> active = null;
+        IteratorChain<? extends E> chain = this;
+        while (true) {
+            chain.initializeCurrentIterator();
+            final IteratorChain<? extends E> child = asIteratorChain(chain.currentIterator);
+            if (child == null) {
+                chain.cachedHasNextValue = chain.currentIterator.hasNext();
             } else {
-                currentIterator = iteratorQueue.remove();
+                child.lockChain();
+                // A cached result must not conceal a link back to an active ancestor.
+                if (child == chain || active != null && active.contains(child)) {
+                    // Discard intermediate results so a retry also detects the cycle.
+                    chain.cachedHasNextValue = null;
+                    if (parents != null) {
+                        for (final IteratorChain<?> parent : parents) {
+                            parent.cachedHasNextValue = null;
+                        }
+                    }
+                    throw new IllegalStateException("Cyclic IteratorChain");
+                }
+                if (child.cachedHasNextValue == null) {
+                    if (parents == null) {
+                        parents = new ArrayDeque<>();
+                        active = Collections.newSetFromMap(new IdentityHashMap<>());
+                        active.add(chain);
+                    }
+                    active.add(child);
+                    parents.push(chain);
+                    chain = child;
+                    continue;
+                }
+                chain.cachedHasNextValue = child.cachedHasNextValue;
             }
-            // set last used iterator here, in case the user calls remove
-            // before calling hasNext() or next() (although they shouldn't)
-            lastUsedIterator = currentIterator;
-        }
-        while (!currentIterator.hasNext() && !iteratorQueue.isEmpty()) {
-            currentIterator = iteratorQueue.remove();
+            if (!chain.cachedHasNextValue && chain.queueSize != 0) {
+                chain.pollCurrentIterator();
+                continue;
+            }
+            if (parents == null || parents.isEmpty()) {
+                return;
+            }
+            active.remove(chain);
+            chain = parents.pop();
         }
     }
-
 }

@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -17,6 +17,7 @@
 package jdk.m3.collections.apache.map;
 
 import java.io.IOException;
+import java.io.InvalidObjectException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
@@ -25,6 +26,8 @@ import java.util.AbstractSet;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.IdentityHashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
@@ -62,13 +65,13 @@ import jdk.m3.collections.apache.list.UnmodifiableList;
  * </p>
  * <p>
  * <strong>Note that ListOrderedMap doesn't work with
- * {@link java.util.IdentityHashMap IdentityHashMap}, {@link CaseInsensitiveMap},
- * or similar maps that violate the general contract of {@link java.util.Map}.</strong>
+ * {@link IdentityHashMap IdentityHashMap}, {@link CaseInsensitiveMap},
+ * or similar maps that violate the general contract of {@link Map}.</strong>
  * The {@code ListOrderedMap} (or, more precisely, the underlying {@code List})
  * is relying on {@link Object#equals(Object) equals()}. This is fine, as long as the
  * decorated {@code Map} is also based on {@link Object#equals(Object) equals()},
  * and {@link Object#hashCode() hashCode()}, which
- * {@link java.util.IdentityHashMap IdentityHashMap}, and
+ * {@link IdentityHashMap IdentityHashMap}, and
  * {@link CaseInsensitiveMap} don't: The former uses {@code ==}, and
  * the latter uses {@link Object#equals(Object) equals()} on a lower-cased
  * key.
@@ -77,8 +80,8 @@ import jdk.m3.collections.apache.list.UnmodifiableList;
  * This class is {@link Serializable} starting with Commons Collections 3.1.
  * </p>
  *
- * @param <K> the type of the keys in this map
- * @param <V> the type of the values in this map
+ * @param <K> The type of the keys in this map
+ * @param <V> The type of the values in this map
  * @since 3.0
  */
 public class ListOrderedMap<K, V>
@@ -384,8 +387,8 @@ public class ListOrderedMap<K, V>
      *
      * @param <K>  the key type
      * @param <V>  the value type
-     * @param map  the map to decorate, must not be null
-     * @return a new list ordered map
+     * @param map  The map to decorate, must not be null
+     * @return A new list ordered map
      * @throws NullPointerException if map is null
      * @since 4.0
      */
@@ -409,7 +412,7 @@ public class ListOrderedMap<K, V>
     /**
      * Constructor that wraps (not copies).
      *
-     * @param map  the map to decorate, must not be null
+     * @param map  The map to decorate, must not be null
      * @throws NullPointerException if map is null
      */
     protected ListOrderedMap(final Map<K, V> map) {
@@ -452,7 +455,7 @@ public class ListOrderedMap<K, V>
      * The Set will be ordered by object insertion into the map.
      * </p>
      *
-     * @return the fully modifiable set view over the entries
+     * @return The fully modifiable set view over the entries
      */
     @Override
     public Set<Map.Entry<K, V>> entrySet() {
@@ -462,7 +465,7 @@ public class ListOrderedMap<K, V>
     /**
      * Gets the first key in this map by insert order.
      *
-     * @return the first key currently in this map
+     * @return The first key currently in this map
      * @throws NoSuchElementException if this map is empty
      */
     @Override
@@ -476,8 +479,8 @@ public class ListOrderedMap<K, V>
     /**
      * Gets the key at the specified index.
      *
-     * @param index  the index to retrieve
-     * @return the key at the specified index
+     * @param index  The index to retrieve
+     * @return The key at the specified index
      * @throws IndexOutOfBoundsException if the index is invalid
      */
     public K get(final int index) {
@@ -487,8 +490,8 @@ public class ListOrderedMap<K, V>
     /**
      * Gets the value at the specified index.
      *
-     * @param index  the index to retrieve
-     * @return the key at the specified index
+     * @param index  The index to retrieve
+     * @return The key at the specified index
      * @throws IndexOutOfBoundsException if the index is invalid
      */
     public V getValue(final int index) {
@@ -498,8 +501,8 @@ public class ListOrderedMap<K, V>
     /**
      * Gets the index of the specified key.
      *
-     * @param key  the key to find the index of
-     * @return the index, or -1 if not found
+     * @param key  The key to find the index of
+     * @return The index, or -1 if not found
      */
     public int indexOf(final Object key) {
         return insertOrder.indexOf(key);
@@ -513,7 +516,7 @@ public class ListOrderedMap<K, V>
      * </p>
      *
      * @see #keySet()
-     * @return the unmodifiable list view over the keys
+     * @return The unmodifiable list view over the keys
      * @since 3.2
      */
     public List<K> keyList() {
@@ -527,7 +530,7 @@ public class ListOrderedMap<K, V>
      * </p>
      *
      * @see #keyList()
-     * @return the fully modifiable collection view over the keys
+     * @return The fully modifiable collection view over the keys
      */
     @Override
     public Set<K> keySet() {
@@ -537,7 +540,7 @@ public class ListOrderedMap<K, V>
     /**
      * Gets the last key in this map by insert order.
      *
-     * @return the last key currently in this map
+     * @return The last key currently in this map
      * @throws NoSuchElementException if this map is empty
      */
     @Override
@@ -557,8 +560,8 @@ public class ListOrderedMap<K, V>
      * Gets the next key to the one specified using insert order.
      * This method performs a list search to find the key and is O(n).
      *
-     * @param key  the key to find previous for
-     * @return the next key, null if no match or at start
+     * @param key  The key to find previous for
+     * @return The next key, null if no match or at start
      */
     @Override
     public K nextKey(final Object key) {
@@ -573,8 +576,8 @@ public class ListOrderedMap<K, V>
      * Gets the previous key to the one specified using insert order.
      * This method performs a list search to find the key and is O(n).
      *
-     * @param key  the key to find previous for
-     * @return the previous key, null if no match or at start
+     * @param key  The key to find previous for
+     * @return The previous key, null if no match or at start
      */
     @Override
     public K previousKey(final Object key) {
@@ -599,10 +602,10 @@ public class ListOrderedMap<K, V>
      * would have been inserted had the remove not occurred.
      * </p>
      *
-     * @param index  the index at which the mapping should be inserted
-     * @param key  the key
-     * @param value  the value
-     * @return the value previously mapped to the key
+     * @param index  The index at which the mapping should be inserted
+     * @param key  The key
+     * @param value  The value
+     * @return The value previously mapped to the key
      * @throws IndexOutOfBoundsException if the index is out of range [0, size]
      * @since 3.2
      */
@@ -644,8 +647,8 @@ public class ListOrderedMap<K, V>
      * Puts the values contained in a supplied Map into the Map starting at
      * the specified index.
      *
-     * @param index the index in the Map to start at.
-     * @param map the Map containing the entries to be added.
+     * @param index The index in the Map to start at.
+     * @param map The Map containing the entries to be added.
      * @throws IndexOutOfBoundsException if the index is out of range [0, size]
      */
     public void putAll(int index, final Map<? extends K, ? extends V> map) {
@@ -678,8 +681,8 @@ public class ListOrderedMap<K, V>
     /**
      * Deserializes the map in using a custom routine.
      *
-     * @param in  the input stream
-     * @throws IOException if an error occurs while reading from the stream
+     * @param in  The input stream
+     * @throws IOException Thrown if an error occurs while reading from the stream
      * @throws ClassNotFoundException if an object read from the stream cannot be loaded
      * @since 3.1
      */
@@ -687,13 +690,16 @@ public class ListOrderedMap<K, V>
     private void readObject(final ObjectInputStream in) throws IOException, ClassNotFoundException {
         in.defaultReadObject();
         map = (Map<K, V>) in.readObject(); // (1)
+        if (insertOrder.size() != map.size() || !new HashSet<>(insertOrder).equals(map.keySet())) {
+            throw new InvalidObjectException("Inconsistent ListOrderedMap deserialized: key order does not match the map keys");
+        }
     }
 
     /**
      * Removes the element at the specified index.
      *
-     * @param index  the index of the object to remove
-     * @return the removed value, or {@code null} if none existed
+     * @param index  The index of the object to remove
+     * @return The removed value, or {@code null} if none existed
      * @throws IndexOutOfBoundsException if the index is invalid
      */
     public V remove(final int index) {
@@ -713,9 +719,9 @@ public class ListOrderedMap<K, V>
     /**
      * Sets the value at the specified index.
      *
-     * @param index  the index of the value to set
-     * @param value  the new value to set
-     * @return the previous value at that index
+     * @param index  The index of the value to set
+     * @param value  The new value to set
+     * @return The previous value at that index
      * @throws IndexOutOfBoundsException if the index is invalid
      * @since 3.2
      */
@@ -727,7 +733,7 @@ public class ListOrderedMap<K, V>
     /**
      * Returns the Map as a string.
      *
-     * @return the Map as a String
+     * @return The Map as a String
      */
     @Override
     public String toString() {
@@ -761,7 +767,7 @@ public class ListOrderedMap<K, V>
      * </p>
      *
      * @see #values()
-     * @return the partially modifiable list view over the values
+     * @return The partially modifiable list view over the values
      * @since 3.2
      */
     public List<V> valueList() {
@@ -779,7 +785,7 @@ public class ListOrderedMap<K, V>
      * </p>
      *
      * @see #valueList()
-     * @return the fully modifiable collection view over the values
+     * @return The fully modifiable collection view over the values
      */
     @Override
     public Collection<V> values() {
@@ -789,7 +795,7 @@ public class ListOrderedMap<K, V>
     /**
      * Serializes this object to an ObjectOutputStream.
      *
-     * @param out the target ObjectOutputStream.
+     * @param out The target ObjectOutputStream.
      * @throws IOException thrown when an I/O errors occur writing to the target stream.
      * @since 3.1
      */

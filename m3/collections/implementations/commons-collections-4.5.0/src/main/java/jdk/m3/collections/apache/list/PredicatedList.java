@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -45,7 +45,7 @@ import jdk.m3.collections.apache.iterators.AbstractListIteratorDecorator;
  * This class is Serializable from Commons Collections 3.1.
  * </p>
  *
- * @param <E> the type of the elements in the list.
+ * @param <E> The type of the elements in the list.
  * @since 3.0
  */
 public class PredicatedList<E> extends PredicatedCollection<E> implements List<E> {
@@ -58,7 +58,7 @@ public class PredicatedList<E> extends PredicatedCollection<E> implements List<E
         /**
          * Create a new predicated list iterator.
          *
-         * @param iterator  the list iterator to decorate
+         * @param iterator  The list iterator to decorate
          */
         protected PredicatedListIterator(final ListIterator<E> iterator) {
             super(iterator);
@@ -86,10 +86,10 @@ public class PredicatedList<E> extends PredicatedCollection<E> implements List<E
      * If there are any elements already in the list being decorated, they
      * are validated.
      *
-     * @param <T> the type of the elements in the list
-     * @param list  the list to decorate, must not be null
-     * @param predicate  the predicate to use for validation, must not be null
-     * @return a new predicated list
+     * @param <T> The type of the elements in the list
+     * @param list  The list to decorate, must not be null
+     * @param predicate  The predicate to use for validation, must not be null
+     * @return A new predicated list
      * @throws NullPointerException if list or predicate is null
      * @throws IllegalArgumentException if the list contains invalid elements
      * @since 4.0
@@ -104,8 +104,8 @@ public class PredicatedList<E> extends PredicatedCollection<E> implements List<E
      * If there are any elements already in the list being decorated, they
      * are validated.
      *
-     * @param list  the list to decorate, must not be null
-     * @param predicate  the predicate to use for validation, must not be null
+     * @param list  The list to decorate, must not be null
+     * @param predicate  The predicate to use for validation, must not be null
      * @throws NullPointerException if list or predicate is null
      * @throws IllegalArgumentException if the list contains invalid elements
      */
@@ -130,7 +130,7 @@ public class PredicatedList<E> extends PredicatedCollection<E> implements List<E
     /**
      * Gets the list being decorated.
      *
-     * @return the decorated list
+     * @return The decorated list
      */
     @Override
     protected List<E> decorated() {

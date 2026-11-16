@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -32,8 +32,8 @@ import jdk.m3.collections.apache.BidiMap;
  * This provides fast lookups at the expense of storing two sets of map entries and two linked lists.
  * </p>
  *
- * @param <K> the type of the keys in the map
- * @param <V> the type of the values in the map
+ * @param <K> The type of the keys in the map
+ * @param <V> The type of the values in the map
  * @since 4.0
  */
 public class DualLinkedHashBidiMap<K, V> extends AbstractDualBidiMap<K, V> implements Serializable {
@@ -52,7 +52,7 @@ public class DualLinkedHashBidiMap<K, V> extends AbstractDualBidiMap<K, V> imple
      * Constructs a {@code LinkedHashBidiMap} and copies the mappings from
      * specified {@link Map}.
      *
-     * @param map the map whose mappings are to be placed in this map
+     * @param map The map whose mappings are to be placed in this map
      */
     public DualLinkedHashBidiMap(final Map<? extends K, ? extends V> map) {
         super(new LinkedHashMap<>(), new LinkedHashMap<>());
@@ -62,9 +62,9 @@ public class DualLinkedHashBidiMap<K, V> extends AbstractDualBidiMap<K, V> imple
     /**
      * Constructs a {@code LinkedHashBidiMap} that decorates the specified maps.
      *
-     * @param normalMap      the normal direction map
-     * @param reverseMap     the reverse direction map
-     * @param inverseBidiMap the inverse BidiMap
+     * @param normalMap      The normal direction map
+     * @param reverseMap     The reverse direction map
+     * @param inverseBidiMap The inverse BidiMap
      */
     protected DualLinkedHashBidiMap(final Map<K, V> normalMap, final Map<V, K> reverseMap,
                                     final BidiMap<V, K> inverseBidiMap) {
@@ -74,9 +74,9 @@ public class DualLinkedHashBidiMap<K, V> extends AbstractDualBidiMap<K, V> imple
     /**
      * Creates a new instance of this object.
      *
-     * @param normalMap      the normal direction map
-     * @param reverseMap     the reverse direction map
-     * @param inverseBidiMap the inverse BidiMap
+     * @param normalMap      The normal direction map
+     * @param reverseMap     The reverse direction map
+     * @param inverseBidiMap The inverse BidiMap
      * @return new bidi map
      */
     @Override
@@ -104,7 +104,7 @@ public class DualLinkedHashBidiMap<K, V> extends AbstractDualBidiMap<K, V> imple
     /**
      * Serializes this object to an ObjectOutputStream.
      *
-     * @param out the target ObjectOutputStream.
+     * @param out The target ObjectOutputStream.
      * @throws IOException thrown when an I/O errors occur writing to the target stream.
      */
     private void writeObject(final ObjectOutputStream out) throws IOException {

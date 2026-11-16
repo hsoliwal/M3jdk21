@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -32,6 +32,7 @@ import org.junit.jupiter.api.BeforeEach;
  * provides methods to create and verify mock predicates to which to delegate.
  */
 public abstract class AbstractMockPredicateTest<T> {
+
     /**
      * Mock predicates created by a single test case which need to be verified after the test completes.
      */
@@ -45,7 +46,7 @@ public abstract class AbstractMockPredicateTest<T> {
     /**
      * Creates a new {@code PredicateTestBase}.
      *
-     * @param testValue the value to pass to mock predicates.
+     * @param testValue The value to pass to mock predicates.
      */
     protected AbstractMockPredicateTest(final T testValue) {
         this.testValue = testValue;
@@ -54,8 +55,8 @@ public abstract class AbstractMockPredicateTest<T> {
     /**
      * Creates a single mock predicate.
      *
-     * @param returnValue the return value for the mock predicate, or null if the mock is not expected to be called.
-     * @return a single mock predicate.
+     * @param returnValue The return value for the mock predicate, or null if the mock is not expected to be called.
+     * @return A single mock predicate.
      */
     @SuppressWarnings({"boxing"})
     protected final Predicate<T> createMockPredicate(final Boolean returnValue) {
@@ -80,7 +81,7 @@ public abstract class AbstractMockPredicateTest<T> {
     /**
      * Gets the value which will be passed to the mock predicates.
      *
-     * @return the test value.
+     * @return The test value.
      */
     protected final T getTestValue() {
         return testValue;

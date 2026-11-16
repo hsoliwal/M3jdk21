@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -14,10 +14,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+// Modified 2026-11-15 by Hitesh Soliwal and Synexia contributors: defer and own pushback storage.
 package jdk.m3.collections.apache.iterators;
 
-import java.util.ArrayDeque;
-import java.util.Deque;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Objects;
 
@@ -32,10 +32,13 @@ import java.util.Objects;
  * result in an {@link UnsupportedOperationException}.
  * </p>
  *
- * @param <E> the type of elements returned by this iterator.
+ * @param <E> The type of elements returned by this iterator.
  * @since 4.0
  */
 public class PushbackIterator<E> implements Iterator<E> {
+
+    /** Shared storage before an item is pushed back. */
+    private static final Object[] EMPTY_ITEMS = new Object[0];
 
     /**
      * Decorates the specified iterator to support one-element lookahead.
@@ -44,8 +47,8 @@ public class PushbackIterator<E> implements Iterator<E> {
      * </p>
      *
      * @param <E>  the element type
-     * @param iterator  the iterator to decorate
-     * @return a new peeking iterator
+     * @param iterator  The iterator to decorate
+     * @return A new peeking iterator
      * @throws NullPointerException if the iterator is null
      */
     public static <E> PushbackIterator<E> pushbackIterator(final Iterator<? extends E> iterator) {
@@ -61,13 +64,16 @@ public class PushbackIterator<E> implements Iterator<E> {
     /** The iterator being decorated. */
     private final Iterator<? extends E> iterator;
 
-    /** The LIFO queue containing the pushed back items. */
-    private final Deque<E> items = new ArrayDeque<>();
+    /** The owned LIFO storage containing the pushed back items. */
+    private Object[] items = EMPTY_ITEMS;
+
+    /** The number of pushed back items. */
+    private int itemCount;
 
     /**
      * Constructs a new instance.
      *
-     * @param iterator  the iterator to decorate
+     * @param iterator  The iterator to decorate
      */
     public PushbackIterator(final Iterator<? extends E> iterator) {
         this.iterator = iterator;
@@ -75,12 +81,18 @@ public class PushbackIterator<E> implements Iterator<E> {
 
     @Override
     public boolean hasNext() {
-        return !items.isEmpty() || iterator.hasNext();
+        return itemCount != 0 || iterator.hasNext();
     }
 
     @Override
     public E next() {
-        return !items.isEmpty() ? items.pop() : iterator.next();
+        if (itemCount == 0) {
+            return iterator.next();
+        }
+        @SuppressWarnings("unchecked")
+        final E item = (E) items[--itemCount];
+        items[itemCount] = null;
+        return item;
     }
 
     /**
@@ -89,16 +101,27 @@ public class PushbackIterator<E> implements Iterator<E> {
      * Calling {@link #next()} immediately afterwards will return exactly this element.
      * </p>
      *
-     * @param item  the element to push back to the iterator
+     * @param item  The element to push back to the iterator
      */
     public void pushback(final E item) {
-        items.push(item);
+        Objects.requireNonNull(item);
+        if (itemCount == items.length) {
+            final long required = (long) itemCount + 1;
+            final long maximum = Integer.MAX_VALUE - 8L;
+            if (required > maximum) {
+                throw new OutOfMemoryError("PushbackIterator item capacity exhausted");
+            }
+            final int capacity = (int) Math.min(maximum,
+                    Math.max(required, Math.max(8L, (long) items.length + (items.length >>> 1))));
+            items = Arrays.copyOf(items, capacity);
+        }
+        items[itemCount++] = item;
     }
 
     /**
-     * This iterator will always throw an {@link UnsupportedOperationException}.
+     * Always throws {@link UnsupportedOperationException}.
      *
-     * @throws UnsupportedOperationException always
+     * @throws UnsupportedOperationException Always thrown.
      */
     @Override
     public void remove() {

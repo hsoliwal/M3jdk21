@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -30,8 +30,8 @@ public class TrieUtils {
      *
      * @param <K>  the key type
      * @param <V>  the value type
-     * @param trie  the trie to make unmodifiable, must not be null
-     * @return an unmodifiable trie backed by the given trie
+     * @param trie  The trie to make unmodifiable, must not be null
+     * @return An unmodifiable trie backed by the given trie
      * @throws NullPointerException if trie is null
      * @see java.util.Collections#unmodifiableMap(java.util.Map)
      */

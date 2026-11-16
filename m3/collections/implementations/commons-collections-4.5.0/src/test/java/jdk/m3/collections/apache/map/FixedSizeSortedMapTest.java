@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,15 +16,23 @@
  */
 package jdk.m3.collections.apache.map;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import java.util.Collections;
 import java.util.SortedMap;
 import java.util.TreeMap;
+
+import org.junit.jupiter.api.Test;
 
 /**
  * Extension of {@link AbstractSortedMapTest} for exercising the {@link FixedSizeSortedMap}
  * implementation.
  *
- * @param <K> the key type.
- * @param <V> the value type.
+ * @param <K> The key type.
+ * @param <V> The value type.
  */
 public class FixedSizeSortedMapTest<K, V> extends AbstractSortedMapTest<K, V> {
 
@@ -61,7 +69,41 @@ public class FixedSizeSortedMapTest<K, V> extends AbstractSortedMapTest<K, V> {
         return FixedSizeSortedMap.fixedSizeSortedMap(new TreeMap<>());
     }
 
-//    public void testCreate() throws Exception {
+    @Test
+    void testNextKey() {
+        final SortedMap<String, String> base = new TreeMap<>();
+        base.put("a", "1");
+        base.put("c", "3");
+        base.put("e", "5");
+        final FixedSizeSortedMap<String, String> fixed = FixedSizeSortedMap.fixedSizeSortedMap(base);
+        // a present key returns its successor, or null once at the end
+        assertEquals("c", fixed.nextKey("a"));
+        assertEquals("e", fixed.nextKey("c"));
+        assertNull(fixed.nextKey("e"));
+        // a key that is not in the map has no next key, whether it is in range or past the end
+        assertNull(fixed.nextKey("b"));
+        assertNull(fixed.nextKey("z"));
+        assertNull(FixedSizeSortedMap.fixedSizeSortedMap(new TreeMap<String, String>()).nextKey("a"));
+    }
+
+    @Test
+    void testPutAllAllowsUpdatesRejectsNewKeys() {
+        final SortedMap<String, String> base = new TreeMap<>();
+        base.put("a", "1");
+        final SortedMap<String, String> fixed = FixedSizeSortedMap.fixedSizeSortedMap(base);
+        // updating the value of an existing key is allowed
+        fixed.putAll(Collections.singletonMap("a", "2"));
+        assertEquals("2", fixed.get("a"));
+        // an empty map is a no-op, not a rejection
+        fixed.putAll(Collections.emptyMap());
+        assertEquals(1, fixed.size());
+        // a new key must be rejected and must not grow the map
+        assertThrows(IllegalArgumentException.class, () -> fixed.putAll(Collections.singletonMap("b", "9")));
+        assertEquals(1, fixed.size());
+        assertFalse(fixed.containsKey("b"));
+    }
+
+//    void testCreate() throws Exception {
 //        resetEmpty();
 //        writeExternalFormToDisk(
 //            (java.io.Serializable) map,

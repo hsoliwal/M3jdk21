@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -27,8 +27,8 @@ import jdk.m3.collections.apache.Unmodifiable;
  * Attempts to modify it will result in an UnsupportedOperationException.
  * </p>
  *
- * @param <K> the type of keys
- * @param <V> the type of mapped values
+ * @param <K> The type of keys
+ * @param <V> The type of mapped values
  * @since 3.0
  */
 public final class UnmodifiableOrderedMapIterator<K, V> implements OrderedMapIterator<K, V>,
@@ -39,8 +39,8 @@ public final class UnmodifiableOrderedMapIterator<K, V> implements OrderedMapIte
      *
      * @param <K>  the key type
      * @param <V>  the value type
-     * @param iterator  the iterator to decorate
-     * @return a new unmodifiable ordered map iterator
+     * @param iterator  The iterator to decorate
+     * @return A new unmodifiable ordered map iterator
      * @throws NullPointerException if the iterator is null
      */
     public static <K, V> OrderedMapIterator<K, V> unmodifiableOrderedMapIterator(
@@ -60,7 +60,7 @@ public final class UnmodifiableOrderedMapIterator<K, V> implements OrderedMapIte
     /**
      * Constructs a new instance.
      *
-     * @param iterator  the iterator to decorate
+     * @param iterator  The iterator to decorate
      */
     private UnmodifiableOrderedMapIterator(final OrderedMapIterator<K, ? extends V> iterator) {
         this.iterator = iterator;
@@ -96,11 +96,22 @@ public final class UnmodifiableOrderedMapIterator<K, V> implements OrderedMapIte
         return iterator.previous();
     }
 
+    /**
+     * Always throws {@link UnsupportedOperationException}.
+     *
+     * @throws UnsupportedOperationException Always thrown.
+     */
     @Override
     public void remove() {
         throw new UnsupportedOperationException("remove() is not supported");
     }
 
+    /**
+     * Always throws {@link UnsupportedOperationException}.
+     *
+     * @param value Ignored.
+     * @throws UnsupportedOperationException Always thrown.
+     */
     @Override
     public V setValue(final V value) {
         throw new UnsupportedOperationException("setValue() is not supported");

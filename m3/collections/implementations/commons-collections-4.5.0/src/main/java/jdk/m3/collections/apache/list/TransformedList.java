@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -36,7 +36,7 @@ import jdk.m3.collections.apache.iterators.AbstractListIteratorDecorator;
  * This class is Serializable from Commons Collections 3.1.
  * </p>
  *
- * @param <E> the type of the elements in the list.
+ * @param <E> The type of the elements in the list.
  * @since 3.0
  */
 public class TransformedList<E> extends TransformedCollection<E> implements List<E> {
@@ -49,7 +49,7 @@ public class TransformedList<E> extends TransformedCollection<E> implements List
         /**
          * Create a new transformed list iterator.
          *
-         * @param iterator  the list iterator to decorate
+         * @param iterator  The list iterator to decorate
          */
         protected TransformedListIterator(final ListIterator<E> iterator) {
             super(iterator);
@@ -78,10 +78,10 @@ public class TransformedList<E> extends TransformedCollection<E> implements List
      * will be transformed by this method.
      * Contrast this with {@link #transformingList(List, Transformer)}.
      *
-     * @param <E> the type of the elements in the list
-     * @param list  the list to decorate, must not be null
-     * @param transformer  the transformer to use for conversion, must not be null
-     * @return a new transformed List
+     * @param <E> The type of the elements in the list
+     * @param list  The list to decorate, must not be null
+     * @param transformer  The transformer to use for conversion, must not be null
+     * @return A new transformed List
      * @throws NullPointerException if list or transformer is null
      * @since 4.0
      */
@@ -106,10 +106,10 @@ public class TransformedList<E> extends TransformedCollection<E> implements List
      * are NOT transformed.
      * Contrast this with {@link #transformedList(List, Transformer)}.
      *
-     * @param <E> the type of the elements in the list
-     * @param list  the list to decorate, must not be null
-     * @param transformer  the transformer to use for conversion, must not be null
-     * @return a new transformed list
+     * @param <E> The type of the elements in the list
+     * @param list  The list to decorate, must not be null
+     * @param transformer  The transformer to use for conversion, must not be null
+     * @return A new transformed list
      * @throws NullPointerException if list or transformer is null
      * @since 4.0
      */
@@ -124,8 +124,8 @@ public class TransformedList<E> extends TransformedCollection<E> implements List
      * If there are any elements already in the list being decorated, they
      * are NOT transformed.
      *
-     * @param list  the list to decorate, must not be null
-     * @param transformer  the transformer to use for conversion, must not be null
+     * @param list  The list to decorate, must not be null
+     * @param transformer  The transformer to use for conversion, must not be null
      * @throws NullPointerException if list or transformer is null
      */
     protected TransformedList(final List<E> list, final Transformer<? super E, ? extends E> transformer) {
@@ -157,7 +157,7 @@ public class TransformedList<E> extends TransformedCollection<E> implements List
     /**
      * Gets the decorated list.
      *
-     * @return the decorated list
+     * @return The decorated list
      */
     protected List<E> getList() {
         return (List<E>) decorated();

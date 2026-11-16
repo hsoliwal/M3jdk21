@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -25,7 +25,7 @@ import java.util.NavigableSet;
  * Methods are forwarded directly to the decorated set.
  * </p>
  *
- * @param <E> the type of the elements in the navigable set
+ * @param <E> The type of the elements in the navigable set
  * @since 4.1
  */
 public abstract class AbstractNavigableSetDecorator<E>
@@ -44,7 +44,7 @@ public abstract class AbstractNavigableSetDecorator<E>
     /**
      * Constructor that wraps (not copies).
      *
-     * @param set  the set to decorate, must not be null
+     * @param set  The set to decorate, must not be null
      * @throws NullPointerException if set is null
      */
     protected AbstractNavigableSetDecorator(final NavigableSet<E> set) {
@@ -59,7 +59,7 @@ public abstract class AbstractNavigableSetDecorator<E>
     /**
      * Gets the set being decorated.
      *
-     * @return the decorated set
+     * @return The decorated set
      */
     @Override
     protected NavigableSet<E> decorated() {

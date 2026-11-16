@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -22,12 +22,14 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.Map;
 
+import jdk.m3.collections.apache.MapIterator;
+
 /**
  * A {@code Map} implementation that is a general purpose alternative
  * to {@code HashMap}.
  * <p>
  * This implementation improves on the JDK1.4 HashMap by adding the
- * {@link jdk.m3.collections.apache.MapIterator MapIterator}
+ * {@link MapIterator MapIterator}
  * functionality and many methods for subclassing.
  * </p>
  * <p>
@@ -38,8 +40,8 @@ import java.util.Map;
  * exceptions when accessed by concurrent threads without synchronization.
  * </p>
  *
- * @param <K> the type of the keys in this map
- * @param <V> the type of the values in this map
+ * @param <K> The type of the keys in this map
+ * @param <V> The type of the values in this map
  * @since 3.0
  */
 public class HashedMap<K, V>
@@ -58,7 +60,7 @@ public class HashedMap<K, V>
     /**
      * Constructs a new, empty map with the specified initial capacity.
      *
-     * @param initialCapacity  the initial capacity
+     * @param initialCapacity  The initial capacity
      * @throws IllegalArgumentException if the initial capacity is negative
      */
     public HashedMap(final int initialCapacity) {
@@ -69,8 +71,8 @@ public class HashedMap<K, V>
      * Constructs a new, empty map with the specified initial capacity and
      * load factor.
      *
-     * @param initialCapacity  the initial capacity
-     * @param loadFactor  the load factor
+     * @param initialCapacity  The initial capacity
+     * @param loadFactor  The load factor
      * @throws IllegalArgumentException if the initial capacity is negative
      * @throws IllegalArgumentException if the load factor is less than zero
      */
@@ -81,7 +83,7 @@ public class HashedMap<K, V>
     /**
      * Constructor copying elements from another map.
      *
-     * @param map  the map to copy
+     * @param map  The map to copy
      * @throws NullPointerException if the map is null
      */
     public HashedMap(final Map<? extends K, ? extends V> map) {
@@ -91,7 +93,7 @@ public class HashedMap<K, V>
     /**
      * Clones the map without cloning the keys or values.
      *
-     * @return a shallow clone
+     * @return A shallow clone
      */
     @Override
     public HashedMap<K, V> clone() {
@@ -101,8 +103,8 @@ public class HashedMap<K, V>
     /**
      * Deserializes the map in using a custom routine.
      *
-     * @param in the input stream
-     * @throws IOException if an error occurs while reading from the stream
+     * @param in The input stream
+     * @throws IOException Thrown if an error occurs while reading from the stream
      * @throws ClassNotFoundException if an object read from the stream cannot be loaded
      */
     private void readObject(final ObjectInputStream in) throws IOException, ClassNotFoundException {
@@ -113,7 +115,7 @@ public class HashedMap<K, V>
     /**
      * Serializes this object to an ObjectOutputStream.
      *
-     * @param out the target ObjectOutputStream.
+     * @param out The target ObjectOutputStream.
      * @throws IOException thrown when an I/O errors occur writing to the target stream.
      */
     private void writeObject(final ObjectOutputStream out) throws IOException {

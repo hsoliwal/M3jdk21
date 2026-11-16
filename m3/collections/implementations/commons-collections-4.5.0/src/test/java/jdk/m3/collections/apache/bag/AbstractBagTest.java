@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -39,10 +39,11 @@ import jdk.m3.collections.apache.BulkTest;
 import jdk.m3.collections.apache.collection.AbstractCollectionTest;
 import jdk.m3.collections.apache.set.AbstractSetTest;
 import org.apache.commons.lang3.ArrayUtils;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 /**
- * Tests {@link jdk.m3.collections.apache.Bag Bag}.
+ * Tests {@link Bag}.
  * <p>
  * To use, simply extend this class, and implement
  * the {@link #makeObject} method.
@@ -68,7 +69,8 @@ import org.junit.jupiter.api.Test;
  */
 public abstract class AbstractBagTest<T> extends AbstractCollectionTest<T> {
 
-    public class TestBagUniqueSet extends AbstractSetTest<T> {
+    @Nested
+    public class BagUniqueSetTest extends AbstractSetTest<T> {
 
         @Override
         public T[] getFullElements() {
@@ -118,15 +120,15 @@ public abstract class AbstractBagTest<T> extends AbstractCollectionTest<T> {
         @Override
         public void resetEmpty() {
             AbstractBagTest.this.resetEmpty();
-            TestBagUniqueSet.this.setCollection(AbstractBagTest.this.getCollection().uniqueSet());
-            TestBagUniqueSet.this.setConfirmed(new HashSet<>(AbstractBagTest.this.getConfirmed()));
+            BagUniqueSetTest.this.setCollection(AbstractBagTest.this.getCollection().uniqueSet());
+            BagUniqueSetTest.this.setConfirmed(new HashSet<>(AbstractBagTest.this.getConfirmed()));
         }
 
         @Override
         public void resetFull() {
             AbstractBagTest.this.resetFull();
-            TestBagUniqueSet.this.setCollection(AbstractBagTest.this.getCollection().uniqueSet());
-            TestBagUniqueSet.this.setConfirmed(new HashSet<>(AbstractBagTest.this.getConfirmed()));
+            BagUniqueSetTest.this.setCollection(AbstractBagTest.this.getCollection().uniqueSet());
+            BagUniqueSetTest.this.setConfirmed(new HashSet<>(AbstractBagTest.this.getConfirmed()));
         }
 
         @Override
@@ -147,16 +149,16 @@ public abstract class AbstractBagTest<T> extends AbstractCollectionTest<T> {
      * After modification operations, {@link #verify()} is invoked to ensure
      * that the bag and the other collection views are still valid.
      *
-     * @return a {@link AbstractSetTest} instance for testing the bag's unique set
+     * @return A {@link AbstractSetTest} instance for testing the bag's unique set
      */
     public BulkTest bulkTestBagUniqueSet() {
-        return new TestBagUniqueSet();
+        return new BagUniqueSetTest();
     }
 
     /**
      * Returns the {@link #collection} field cast to a {@link Bag}.
      *
-     * @return the collection field as a Bag
+     * @return The collection field as a Bag
      */
     @Override
     public Bag<T> getCollection() {
@@ -194,7 +196,7 @@ public abstract class AbstractBagTest<T> extends AbstractCollectionTest<T> {
     /**
      * Return a new, empty bag to used for testing.
      *
-     * @return the bag to be tested
+     * @return The bag to be tested
      */
     @Override
     public abstract Bag<T> makeObject();
@@ -213,7 +215,7 @@ public abstract class AbstractBagTest<T> extends AbstractCollectionTest<T> {
 
     @Test
     @SuppressWarnings("unchecked")
-    public void testBagAdd() {
+    void testBagAdd() {
         if (!isAddSupported()) {
             return;
         }
@@ -232,7 +234,7 @@ public abstract class AbstractBagTest<T> extends AbstractCollectionTest<T> {
 
     @Test
     @SuppressWarnings("unchecked")
-    public void testBagContains() {
+    void testBagContains() {
         if (!isAddSupported()) {
             return;
         }
@@ -257,7 +259,7 @@ public abstract class AbstractBagTest<T> extends AbstractCollectionTest<T> {
 
     @Test
     @SuppressWarnings("unchecked")
-    public void testBagContainsAll() {
+    void testBagContainsAll() {
         if (!isAddSupported()) {
             return;
         }
@@ -312,7 +314,7 @@ public abstract class AbstractBagTest<T> extends AbstractCollectionTest<T> {
 
     @Test
     @SuppressWarnings("unchecked")
-    public void testBagEquals() {
+    void testBagEquals() {
         if (!isAddSupported()) {
             return;
         }
@@ -337,7 +339,7 @@ public abstract class AbstractBagTest<T> extends AbstractCollectionTest<T> {
 
     @Test
     @SuppressWarnings("unchecked")
-    public void testBagEqualsHashBag() {
+    void testBagEqualsHashBag() {
         if (!isAddSupported()) {
             return;
         }
@@ -362,7 +364,7 @@ public abstract class AbstractBagTest<T> extends AbstractCollectionTest<T> {
 
     @Test
     @SuppressWarnings("unchecked")
-    public void testBagEqualsSelf() {
+    void testBagEqualsSelf() {
         final Bag<T> bag = makeObject();
         assertEquals(bag, bag);
 
@@ -380,7 +382,7 @@ public abstract class AbstractBagTest<T> extends AbstractCollectionTest<T> {
 
     @Test
     @SuppressWarnings("unchecked")
-    public void testBagHashCode() {
+    void testBagHashCode() {
         if (!isAddSupported()) {
             return;
         }
@@ -412,7 +414,7 @@ public abstract class AbstractBagTest<T> extends AbstractCollectionTest<T> {
 
     @Test
     @SuppressWarnings("unchecked")
-    public void testBagIterator() {
+    void testBagIterator() {
         if (!isAddSupported()) {
             return;
         }
@@ -444,7 +446,7 @@ public abstract class AbstractBagTest<T> extends AbstractCollectionTest<T> {
 
     @Test
     @SuppressWarnings("unchecked")
-    public void testBagIteratorFail() {
+    void testBagIteratorFail() {
         if (!isAddSupported()) {
             return;
         }
@@ -462,7 +464,7 @@ public abstract class AbstractBagTest<T> extends AbstractCollectionTest<T> {
 
     @Test
     @SuppressWarnings("unchecked")
-    public void testBagIteratorFailDoubleRemove() {
+    void testBagIteratorFailDoubleRemove() {
         if (!isAddSupported()) {
             return;
         }
@@ -488,7 +490,7 @@ public abstract class AbstractBagTest<T> extends AbstractCollectionTest<T> {
 
     @Test
     @SuppressWarnings("unchecked")
-    public void testBagIteratorFailNoMore() {
+    void testBagIteratorFailNoMore() {
         if (!isAddSupported()) {
             return;
         }
@@ -507,7 +509,7 @@ public abstract class AbstractBagTest<T> extends AbstractCollectionTest<T> {
 
     @Test
     @SuppressWarnings("unchecked")
-    public void testBagIteratorRemoveProtectsInvariants() {
+    void testBagIteratorRemoveProtectsInvariants() {
         if (!isAddSupported()) {
             return;
         }
@@ -534,7 +536,7 @@ public abstract class AbstractBagTest<T> extends AbstractCollectionTest<T> {
 
     @Test
     @SuppressWarnings("unchecked")
-    public void testBagRemove() {
+    void testBagRemove() {
         if (!isRemoveSupported()) {
             return;
         }
@@ -559,7 +561,7 @@ public abstract class AbstractBagTest<T> extends AbstractCollectionTest<T> {
 
     @Test
     @SuppressWarnings("unchecked")
-    public void testBagRemoveAll() {
+    void testBagRemoveAll() {
         if (!isRemoveSupported()) {
             return;
         }
@@ -582,7 +584,7 @@ public abstract class AbstractBagTest<T> extends AbstractCollectionTest<T> {
 
     @Test
     @SuppressWarnings("unchecked")
-    public void testBagRetainAll() {
+    void testBagRetainAll() {
         if (!isAddSupported()) {
             return;
         }
@@ -603,7 +605,26 @@ public abstract class AbstractBagTest<T> extends AbstractCollectionTest<T> {
 
     @Test
     @SuppressWarnings("unchecked")
-    public void testBagSize() {
+    void testBagRetainAllOtherHasMoreCopies() {
+        if (!isAddSupported()) {
+            return;
+        }
+        final Bag<T> bag = makeObject();
+        bag.add((T) "A", 2);
+        bag.add((T) "B", 3);
+        final Bag<T> other = makeObject();
+        other.add((T) "A", 5);
+        other.add((T) "B", 10);
+        bag.retainAll(other);
+        // When other has MORE copies, we should keep ALL of ours (the intersection keeps min)
+        assertEquals(2, bag.getCount("A"), "Should keep 2 copies of A when other has 5");
+        assertEquals(3, bag.getCount("B"), "Should keep 3 copies of B when other has 10");
+        assertEquals(5, bag.size(), "Should have 5 total items");
+    }
+
+    @Test
+    @SuppressWarnings("unchecked")
+    void testBagSize() {
         if (!isAddSupported()) {
             return;
         }
@@ -629,7 +650,7 @@ public abstract class AbstractBagTest<T> extends AbstractCollectionTest<T> {
 
     @Test
     @SuppressWarnings("unchecked")
-    public void testBagToArray() {
+    void testBagToArray() {
         if (!isAddSupported()) {
             return;
         }
@@ -656,7 +677,7 @@ public abstract class AbstractBagTest<T> extends AbstractCollectionTest<T> {
 
     @Test
     @SuppressWarnings("unchecked")
-    public void testBagToArrayPopulate() {
+    void testBagToArrayPopulate() {
         if (!isAddSupported()) {
             return;
         }
@@ -686,7 +707,7 @@ public abstract class AbstractBagTest<T> extends AbstractCollectionTest<T> {
      * against the canonical version in SCM.
      */
     @Test
-    public void testEmptyBagCompatibility() throws IOException, ClassNotFoundException {
+    void testEmptyBagCompatibility() throws IOException, ClassNotFoundException {
         // test to make sure the canonical form has been preserved
         final Bag<T> bag = makeObject();
         if (bag instanceof Serializable && !skipSerializedCanonicalTests() && isTestSerialization()) {
@@ -696,12 +717,13 @@ public abstract class AbstractBagTest<T> extends AbstractCollectionTest<T> {
         }
     }
 
+
     /**
      * Compare the current serialized form of the Bag
      * against the canonical version in SCM.
      */
     @Test
-    public void testFullBagCompatibility() throws IOException, ClassNotFoundException {
+    void testFullBagCompatibility() throws IOException, ClassNotFoundException {
         // test to make sure the canonical form has been preserved
         final Bag<T> bag = makeFullCollection();
         if (bag instanceof Serializable && !skipSerializedCanonicalTests() && isTestSerialization()) {
@@ -710,5 +732,4 @@ public abstract class AbstractBagTest<T> extends AbstractCollectionTest<T> {
             assertEquals(bag, bag2);
         }
     }
-
 }

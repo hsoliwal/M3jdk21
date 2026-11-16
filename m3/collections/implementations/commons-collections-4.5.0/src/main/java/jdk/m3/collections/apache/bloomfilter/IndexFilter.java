@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -32,6 +32,7 @@ public final class IndexFilter {
     /**
      * An IndexTracker implementation that uses an array of integers to track whether or not a
      * number has been seen. Suitable for Shapes that have few hash functions.
+     *
      * @since 4.5.0
      */
     static class ArrayTracker implements IntPredicate {
@@ -40,7 +41,8 @@ public final class IndexFilter {
 
         /**
          * Constructs the tracker based on the shape.
-         * @param shape the shape to build the tracker for.
+         *
+         * @param shape The shape to build the tracker for.
          */
         ArrayTracker(final Shape shape) {
             seen = new int[shape.getNumberOfHashFunctions()];
@@ -70,6 +72,7 @@ public final class IndexFilter {
 
         /**
          * Constructs a bit map based tracker for the specified shape.
+         *
          * @param shape The shape that is being generated.
          */
         BitMapTracker(final Shape shape) {
@@ -89,7 +92,7 @@ public final class IndexFilter {
      *
      * @param shape The shape that is being generated.
      * @param consumer The consumer to accept the values.
-     * @return an IndexFilter optimized for the specified shape.
+     * @return An IndexFilter optimized for the specified shape.
      */
     public static IntPredicate create(final Shape shape, final IntPredicate consumer) {
         return new IndexFilter(shape, consumer)::test;
@@ -125,7 +128,7 @@ public final class IndexFilter {
      *
      * <p><em>If the input is not in the range [0,size) an IndexOutOfBoundsException exception is thrown.</em></p>
      *
-     * @param number the number to check.
+     * @param number The number to check.
      * @return {@code true} if processing should continue, {@code false} otherwise.
      */
     public boolean test(final int number) {

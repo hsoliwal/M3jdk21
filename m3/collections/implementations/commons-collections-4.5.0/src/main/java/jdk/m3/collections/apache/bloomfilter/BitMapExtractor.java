@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -42,8 +42,8 @@ public interface BitMapExtractor {
     /**
      * Creates a BitMapExtractor from an array of Long.
      *
-     * @param bitMaps the bit maps to return.
-     * @return a BitMapExtractor.
+     * @param bitMaps The bit maps to return.
+     * @return A BitMapExtractor.
      */
     static BitMapExtractor fromBitMapArray(final long... bitMaps) {
         return new BitMapExtractor() {
@@ -73,8 +73,8 @@ public interface BitMapExtractor {
     /**
      * Creates a BitMapExtractor from an IndexExtractor.
      *
-     * @param extractor the IndexExtractor that specifies the indexes of the bits to enable.
-     * @param numberOfBits the number of bits in the Bloom filter.
+     * @param extractor The IndexExtractor that specifies the indexes of the bits to enable.
+     * @param numberOfBits The number of bits in the Bloom filter.
      * @return A BitMapExtractor that produces the bit maps equivalent of the Indices from the extractor.
      */
     static BitMapExtractor fromIndexExtractor(final IndexExtractor extractor, final int numberOfBits) {
@@ -94,6 +94,7 @@ public interface BitMapExtractor {
      * The default implementation of this method is slow. It is recommended
      * that implementing classes reimplement this method.
      * </p>
+     *
      * @return An array of bit map data.
      */
     default long[] asBitMapArray() {
@@ -131,7 +132,7 @@ public interface BitMapExtractor {
      * arrays reimplement this method.</em>
      * </p>
      *
-     * @param other The other BitMapExtractor that provides the y values in the (x,y) pair.
+     * @param other The other BitMapExtractor that provides the y values in the (x, y) pair.
      * @param func  The function to apply.
      * @return A LongPredicate that tests this BitMapExtractor's bitmap values in order.
      */
@@ -149,7 +150,7 @@ public interface BitMapExtractor {
      *
      * <p>Any exceptions thrown by the action are relayed to the caller.</p>
      *
-     * @param predicate the function to execute
+     * @param predicate The function to execute
      * @return {@code true} if all bit maps returned {@code true}, {@code false} otherwise.
      * @throws NullPointerException if the specified consumer is null
      */

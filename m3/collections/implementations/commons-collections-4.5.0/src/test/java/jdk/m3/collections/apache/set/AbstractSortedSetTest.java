@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -34,7 +34,7 @@ import jdk.m3.collections.apache.BulkTest;
  */
 public abstract class AbstractSortedSetTest<E> extends AbstractSetTest<E> {
 
-    public class TestSortedSetSubSet extends AbstractSortedSetTest<E> {
+    public abstract class SortedSetSubSet extends AbstractSortedSetTest<E> {
 
         static final int TYPE_SUBSET = 0;
         static final int TYPE_TAILSET = 1;
@@ -48,7 +48,7 @@ public abstract class AbstractSortedSetTest<E> extends AbstractSetTest<E> {
 
         private final E[] otherElements;
         @SuppressWarnings("unchecked")
-        public TestSortedSetSubSet(final int bound, final boolean head) {
+        public SortedSetSubSet(final int bound, final boolean head) {
             if (head) {
                 //System.out.println("HEADSET");
                 this.type = TYPE_HEADSET;
@@ -81,7 +81,7 @@ public abstract class AbstractSortedSetTest<E> extends AbstractSetTest<E> {
 
         } //type
         @SuppressWarnings("unchecked")
-        public TestSortedSetSubSet(final int loBound, final int hiBound) {
+        public SortedSetSubSet(final int loBound, final int hiBound) {
             //System.out.println("SUBSET");
             this.type = TYPE_SUBSET;
             this.lowBound = loBound;
@@ -175,14 +175,15 @@ public abstract class AbstractSortedSetTest<E> extends AbstractSetTest<E> {
      * After modification operations, {@link #verify()} is invoked to ensure
      * that the set and the other collection views are still valid.
      *
-     * @return a {@link AbstractSetTest} instance for testing a headset.
+     * @return A {@link AbstractSetTest} instance for testing a headset.
      */
     public BulkTest bulkTestSortedSetHeadSet() {
         final int length = getFullElements().length;
 
         final int loBound = length / 3;
         final int hiBound = loBound * 2;
-        return new TestSortedSetSubSet(hiBound, true);
+        return new SortedSetSubSet(hiBound, true) {
+        };
     }
 
     /**
@@ -191,14 +192,15 @@ public abstract class AbstractSortedSetTest<E> extends AbstractSetTest<E> {
      * After modification operations, {@link #verify()} is invoked to ensure
      * that the set and the other collection views are still valid.
      *
-     * @return a {@link AbstractSetTest} instance for testing a subset.
+     * @return A {@link AbstractSetTest} instance for testing a subset.
      */
     public BulkTest bulkTestSortedSetSubSet() {
         final int length = getFullElements().length;
 
         final int loBound = length / 3;
         final int hiBound = loBound * 2;
-        return new TestSortedSetSubSet(loBound, hiBound);
+        return new SortedSetSubSet(loBound, hiBound) {
+        };
 
     }
 
@@ -208,12 +210,13 @@ public abstract class AbstractSortedSetTest<E> extends AbstractSetTest<E> {
      * After modification operations, {@link #verify()} is invoked to ensure
      * that the set and the other collection views are still valid.
      *
-     * @return a {@link AbstractSetTest} instance for testing a tailset.
+     * @return A {@link AbstractSetTest} instance for testing a tailset.
      */
     public BulkTest bulkTestSortedSetTailSet() {
         final int length = getFullElements().length;
         final int loBound = length / 3;
-        return new TestSortedSetSubSet(loBound, false);
+        return new SortedSetSubSet(loBound, false) {
+        };
     }
 
     /**
@@ -271,7 +274,7 @@ public abstract class AbstractSortedSetTest<E> extends AbstractSetTest<E> {
     /**
      * Returns an empty {@link TreeSet} for use in modification testing.
      *
-     * @return a confirmed empty collection
+     * @return A confirmed empty collection
      */
     @Override
     public SortedSet<E> makeConfirmedCollection() {

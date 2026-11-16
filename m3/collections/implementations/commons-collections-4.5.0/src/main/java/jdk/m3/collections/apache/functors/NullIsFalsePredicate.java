@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -24,7 +24,7 @@ import jdk.m3.collections.apache.Predicate;
 /**
  * Predicate implementation that returns false if the input is null.
  *
- * @param <T> the type of the input to the predicate.
+ * @param <T> The type of the input to the predicate.
  * @since 3.0
  */
 public final class NullIsFalsePredicate<T> extends AbstractPredicate<T> implements PredicateDecorator<T>, Serializable {
@@ -35,9 +35,9 @@ public final class NullIsFalsePredicate<T> extends AbstractPredicate<T> implemen
     /**
      * Creates the null false predicate.
      *
-     * @param <T> the type that the predicate queries
-     * @param predicate  the predicate to decorate, not null
-     * @return the predicate
+     * @param <T> The type that the predicate queries
+     * @param predicate  The predicate to decorate, not null
+     * @return The predicate
      * @throws NullPointerException if the predicate is null
      */
     public static <T> Predicate<T> nullIsFalsePredicate(final Predicate<? super T> predicate) {
@@ -51,7 +51,7 @@ public final class NullIsFalsePredicate<T> extends AbstractPredicate<T> implemen
      * Constructor that performs no validation.
      * Use {@code nullIsFalsePredicate} if you want that.
      *
-     * @param predicate  the predicate to call after the null check
+     * @param predicate  The predicate to call after the null check
      */
     public NullIsFalsePredicate(final Predicate<? super T> predicate) {
         iPredicate = predicate;
@@ -60,7 +60,7 @@ public final class NullIsFalsePredicate<T> extends AbstractPredicate<T> implemen
     /**
      * Gets the predicate being decorated.
      *
-     * @return the predicate as the only element in an array
+     * @return The predicate as the only element in an array
      * @since 3.1
      */
     @Override
@@ -73,7 +73,7 @@ public final class NullIsFalsePredicate<T> extends AbstractPredicate<T> implemen
      * Evaluates the predicate returning the result of the decorated predicate
      * once a null check is performed.
      *
-     * @param object  the input object
+     * @param object  The input object
      * @return true if decorated predicate returns true, false if input is null
      */
     @Override

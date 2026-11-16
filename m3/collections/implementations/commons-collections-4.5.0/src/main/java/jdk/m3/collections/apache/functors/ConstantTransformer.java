@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -29,8 +29,8 @@ import jdk.m3.collections.apache.Transformer;
  * use the prototype factory.
  * </p>
  *
- * @param <T> the type of the input to the function.
- * @param <R> the type of the result of the function.
+ * @param <T> The type of the input to the function.
+ * @param <R> The type of the result of the function.
  * @since 3.0
  */
 public class ConstantTransformer<T, R> implements Transformer<T, R>, Serializable {
@@ -47,8 +47,8 @@ public class ConstantTransformer<T, R> implements Transformer<T, R>, Serializabl
      *
      * @param <I>  the input type
      * @param <O>  the output type
-     * @param constantToReturn  the constant object to return each time in the factory
-     * @return the {@code constant} factory.
+     * @param constantToReturn  The constant object to return each time in the factory
+     * @return The {@code constant} factory.
      */
     public static <I, O> Transformer<I, O> constantTransformer(final O constantToReturn) {
         if (constantToReturn == null) {
@@ -75,7 +75,7 @@ public class ConstantTransformer<T, R> implements Transformer<T, R>, Serializabl
      * Constructor that performs no validation.
      * Use {@code constantTransformer} if you want that.
      *
-     * @param constantToReturn  the constant to return each time
+     * @param constantToReturn  The constant to return each time
      */
     public ConstantTransformer(final R constantToReturn) {
         iConstant = constantToReturn;
@@ -99,7 +99,7 @@ public class ConstantTransformer<T, R> implements Transformer<T, R>, Serializabl
     /**
      * Gets the constant.
      *
-     * @return the constant
+     * @return The constant
      * @since 3.1
      */
     public R getConstant() {
@@ -121,8 +121,8 @@ public class ConstantTransformer<T, R> implements Transformer<T, R>, Serializabl
     /**
      * Transforms the input by ignoring it and returning the stored constant instead.
      *
-     * @param input  the input object which is ignored
-     * @return the stored constant
+     * @param input  The input object which is ignored
+     * @return The stored constant
      */
     @Override
     public R transform(final T input) {

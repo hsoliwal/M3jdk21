@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -27,7 +27,7 @@ import java.util.function.Predicate;
  * processRemaining} method can be called to execute the @{code test} with a
  * {@code null} value for each remaining {@code idx} value.
  *
- * @param <T> the type of object being compared.
+ * @param <T> The type of object being compared.
  */
 class CountingPredicate<T> implements Predicate<T> {
     private int idx;

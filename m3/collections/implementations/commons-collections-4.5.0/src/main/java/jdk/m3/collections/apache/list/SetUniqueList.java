@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,6 +16,9 @@
  */
 package jdk.m3.collections.apache.list;
 
+import java.io.IOException;
+import java.io.InvalidObjectException;
+import java.io.ObjectInputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -30,6 +33,7 @@ import java.util.function.Predicate;
 import jdk.m3.collections.apache.ListUtils;
 import jdk.m3.collections.apache.iterators.AbstractIteratorDecorator;
 import jdk.m3.collections.apache.iterators.AbstractListIteratorDecorator;
+import jdk.m3.collections.apache.set.ListOrderedSet;
 import jdk.m3.collections.apache.set.UnmodifiableSet;
 
 /**
@@ -43,7 +47,7 @@ import jdk.m3.collections.apache.set.UnmodifiableSet;
  * function correctly.
  * </p>
  * <p>
- * The {@link jdk.m3.collections.apache.set.ListOrderedSet ListOrderedSet}
+ * The {@link ListOrderedSet ListOrderedSet}
  * class provides an alternative approach, by wrapping an existing Set and
  * retaining insertion order in the iterator.
  * </p>
@@ -51,7 +55,7 @@ import jdk.m3.collections.apache.set.UnmodifiableSet;
  * This class is Serializable from Commons Collections 3.1.
  * </p>
  *
- * @param <E> the type of the elements in the list.
+ * @param <E> The type of the elements in the list.
  * @since 3.0
  */
 public class SetUniqueList<E> extends AbstractSerializableListDecorator<E> {
@@ -124,6 +128,12 @@ public class SetUniqueList<E> extends AbstractSerializableListDecorator<E> {
             last = null;
         }
 
+        /**
+         * Always throws {@link UnsupportedOperationException}.
+         *
+         * @param object Ignored.
+         * @throws UnsupportedOperationException Always thrown.
+         */
         @Override
         public void set(final E object) {
             throw new UnsupportedOperationException("ListIterator does not support set");
@@ -140,8 +150,8 @@ public class SetUniqueList<E> extends AbstractSerializableListDecorator<E> {
      * kept). A {@code HashSet} is used for the set behavior.
      *
      * @param <E>  the element type
-     * @param list  the list to decorate, must not be null
-     * @return a new {@link SetUniqueList}
+     * @param list  The list to decorate, must not be null
+     * @return A new {@link SetUniqueList}
      * @throws NullPointerException if list is null
      * @since 4.0
      */
@@ -165,8 +175,8 @@ public class SetUniqueList<E> extends AbstractSerializableListDecorator<E> {
      * <p>
      * The set and list must both be correctly initialized to the same elements.
      *
-     * @param set  the set to decorate, must not be null
-     * @param list  the list to decorate, must not be null
+     * @param set  The set to decorate, must not be null
+     * @param list  The list to decorate, must not be null
      * @throws NullPointerException if set or list is null
      */
     protected SetUniqueList(final List<E> list, final Set<E> set) {
@@ -181,7 +191,7 @@ public class SetUniqueList<E> extends AbstractSerializableListDecorator<E> {
      * method returns {@code true} always. However, this class may return
      * {@code false} because of the {@code Set} behavior.
      *
-     * @param object  the object to add
+     * @param object  The object to add
      * @return true if object was added
      */
     @Override
@@ -204,11 +214,14 @@ public class SetUniqueList<E> extends AbstractSerializableListDecorator<E> {
      * that the element is always inserted. This may not happen with this
      * implementation.
      *
-     * @param index  the index to insert at
-     * @param object  the object to add
+     * @param index  The index to insert at
+     * @param object  The object to add
      */
     @Override
     public void add(final int index, final E object) {
+        if (index < 0 || index > size()) {
+            throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + size());
+        }
         // adds element if it is not contained already
         if (!set.contains(object)) {
             set.add(object);
@@ -226,7 +239,7 @@ public class SetUniqueList<E> extends AbstractSerializableListDecorator<E> {
      * that the elements are always inserted. This may not happen with this
      * implementation.
      *
-     * @param coll  the collection to add in iterator order
+     * @param coll  The collection to add in iterator order
      * @return true if this collection changed
      */
     @Override
@@ -245,12 +258,15 @@ public class SetUniqueList<E> extends AbstractSerializableListDecorator<E> {
      * that the elements are always inserted. This may not happen with this
      * implementation.
      *
-     * @param index  the index to insert at
-     * @param coll  the collection to add in iterator order
+     * @param index  The index to insert at
+     * @param coll  The collection to add in iterator order
      * @return true if this collection changed
      */
     @Override
     public boolean addAll(final int index, final Collection<? extends E> coll) {
+        if (index < 0 || index > size()) {
+            throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + size());
+        }
         final List<E> temp = new ArrayList<>();
         for (final E e : coll) {
             if (set.add(e)) {
@@ -263,7 +279,7 @@ public class SetUniqueList<E> extends AbstractSerializableListDecorator<E> {
     /**
      * Gets an unmodifiable view as a Set.
      *
-     * @return an unmodifiable set view
+     * @return An unmodifiable set view
      */
     public Set<E> asSet() {
         return UnmodifiableSet.unmodifiableSet(set);
@@ -289,9 +305,9 @@ public class SetUniqueList<E> extends AbstractSerializableListDecorator<E> {
      * Create a new {@link Set} with the same type as the provided {@code set}
      * and populate it with all elements of {@code list}.
      *
-     * @param set  the {@link Set} to be used as return type, must not be null
-     * @param list  the {@link List} to populate the {@link Set}
-     * @return a new {@link Set} populated with all elements of the provided
+     * @param set  The {@link Set} to be used as return type, must not be null
+     * @param list  The {@link List} to populate the {@link Set}
+     * @return A new {@link Set} populated with all elements of the provided
      *   {@link List}
      */
     protected Set<E> createSetBasedOnList(final Set<E> set, final List<E> list) {
@@ -327,6 +343,21 @@ public class SetUniqueList<E> extends AbstractSerializableListDecorator<E> {
         return new SetListListIterator<>(super.listIterator(index), set);
     }
 
+    /**
+     * Deserializes the list and re-checks the no-duplicate invariant the
+     * constructors guarantee.
+     *
+     * @param in  The input stream
+     * @throws IOException Thrown if an error occurs while reading from the stream
+     * @throws ClassNotFoundException if a class read from the stream cannot be loaded
+     */
+    private void readObject(final ObjectInputStream in) throws IOException, ClassNotFoundException {
+        in.defaultReadObject();
+        if (set.size() != size() || !new HashSet<>(decorated()).equals(set)) {
+            throw new InvalidObjectException("Inconsistent SetUniqueList deserialized: backing list does not match the uniqueness set");
+        }
+    }
+
     @Override
     public E remove(final int index) {
         final E result = super.remove(index);
@@ -343,8 +374,54 @@ public class SetUniqueList<E> extends AbstractSerializableListDecorator<E> {
         return result;
     }
 
+    /** Stable final-value equality is required before reordering individual removals. */
+    private static boolean isStableBulkValue(final Object value) {
+        return value == null || value.getClass() == String.class
+                || value.getClass() == Integer.class || value.getClass() == Long.class;
+    }
+
     @Override
     public boolean removeAll(final Collection<?> coll) {
+        // The exact ArrayList/HashSet combination can compact one backing-array
+        // span instead of repeatedly scanning and shifting it for every key.
+        // Preserve virtual list/set, subclass, and custom-equals behavior.
+        if (getClass() == SetUniqueList.class
+                && decorated().getClass() == ArrayList.class
+                && set.getClass() == HashSet.class
+                && coll.getClass() == HashSet.class
+                && size() >= 8192 && coll.size() >= 1024
+                && (long) size() * coll.size() >= 12_000_000L) {
+            final List<E> list = decorated();
+            if (set.size() == list.size()) {
+                // A caller can still mutate the externally supplied backing
+                // list. Admit only the exact, duplicate-free set/list identity.
+                final Set<Object> observed = new HashSet<>(list.size());
+                boolean safe = true;
+                for (final E element : list) {
+                    if (!isStableBulkValue(element)
+                            || !observed.add(element) || !set.contains(element)) {
+                        safe = false;
+                        break;
+                    }
+                }
+                if (safe) {
+                    for (final Object element : coll) {
+                        if (!isStableBulkValue(element)) {
+                            safe = false;
+                            break;
+                        }
+                    }
+                }
+                if (safe) {
+                    final boolean changed = list.removeAll(coll);
+                    if (changed) {
+                        set.removeAll(coll);
+                    }
+                    return changed;
+                }
+            }
+        }
+
         boolean result = false;
         for (final Object name : coll) {
             result |= remove(name);
@@ -393,9 +470,9 @@ public class SetUniqueList<E> extends AbstractSerializableListDecorator<E> {
      * duplicate is removed. If the object is not already in the list then a
      * normal set occurs. If it is present, then the old version is removed.
      *
-     * @param index  the index to insert at
-     * @param object  the object to set
-     * @return the previous object
+     * @param index  The index to insert at
+     * @param object  The object to set
+     * @return The previous object
      */
     @Override
     public E set(final int index, final E object) {

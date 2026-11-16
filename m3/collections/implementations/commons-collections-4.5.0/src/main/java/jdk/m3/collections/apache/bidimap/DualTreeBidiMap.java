@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -25,6 +25,7 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.ListIterator;
 import java.util.Map;
+import java.util.NavigableMap;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
@@ -52,8 +53,8 @@ import jdk.m3.collections.apache.map.AbstractSortedMapDecorator;
  * and the flawed {@code createMap} method is ignored.
  * </p>
  *
- * @param <K> the type of the keys in this map
- * @param <V> the type of the values in this map
+ * @param <K> The type of the keys in this map
+ * @param <V> The type of the values in this map
  * @since 3.0
  */
 public class DualTreeBidiMap<K, V> extends AbstractDualBidiMap<K, V>
@@ -62,8 +63,8 @@ public class DualTreeBidiMap<K, V> extends AbstractDualBidiMap<K, V>
     /**
      * Inner class MapIterator.
      *
-     * @param <K> the type of the keys.
-     * @param <V> the type of the values.
+     * @param <K> The type of the keys.
+     * @param <V> The type of the values.
      */
     protected static class BidiOrderedMapIterator<K, V> implements OrderedMapIterator<K, V>, ResettableIterator<K> {
 
@@ -78,7 +79,8 @@ public class DualTreeBidiMap<K, V> extends AbstractDualBidiMap<K, V>
 
         /**
          * Constructs a new instance.
-         * @param parent  the parent map
+         *
+         * @param parent  The parent map
          */
         protected BidiOrderedMapIterator(final AbstractDualBidiMap<K, V> parent) {
             this.parent = parent;
@@ -168,14 +170,16 @@ public class DualTreeBidiMap<K, V> extends AbstractDualBidiMap<K, V>
     /**
      * Internal sorted map view.
      *
-     * @param <K> the type of the keys.
-     * @param <V> the type of the values.
+     * @param <K> The type of the keys.
+     * @param <V> The type of the values.
      */
     protected static class ViewMap<K, V> extends AbstractSortedMapDecorator<K, V> {
+
         /**
          * Constructs a new instance.
-         * @param bidi  the parent bidi map
-         * @param sm  the subMap sorted map
+         *
+         * @param bidi  The parent bidi map
+         * @param sm  The subMap sorted map
          */
         protected ViewMap(final DualTreeBidiMap<K, V> bidi, final SortedMap<K, V> sm) {
             // the implementation is not great here...
@@ -251,8 +255,8 @@ public class DualTreeBidiMap<K, V> extends AbstractDualBidiMap<K, V>
     /**
      * Constructs a {@link DualTreeBidiMap} using the specified {@link Comparator}.
      *
-     * @param keyComparator  the comparator
-     * @param valueComparator  the values comparator to use
+     * @param keyComparator  The comparator
+     * @param valueComparator  The values comparator to use
      */
     public DualTreeBidiMap(final Comparator<? super K> keyComparator, final Comparator<? super V> valueComparator) {
         super(new TreeMap<>(keyComparator), new TreeMap<>(valueComparator));
@@ -264,7 +268,7 @@ public class DualTreeBidiMap<K, V> extends AbstractDualBidiMap<K, V>
      * Constructs a {@link DualTreeBidiMap} and copies the mappings from
      * specified {@link Map}.
      *
-     * @param map  the map whose mappings are to be placed in this map
+     * @param map  The map whose mappings are to be placed in this map
      */
     public DualTreeBidiMap(final Map<? extends K, ? extends V> map) {
         super(new TreeMap<>(), new TreeMap<>());
@@ -276,9 +280,9 @@ public class DualTreeBidiMap<K, V> extends AbstractDualBidiMap<K, V>
     /**
      * Constructs a {@link DualTreeBidiMap} that decorates the specified maps.
      *
-     * @param normalMap  the normal direction map
-     * @param reverseMap  the reverse direction map
-     * @param inverseBidiMap  the inverse BidiMap
+     * @param normalMap  The normal direction map
+     * @param reverseMap  The reverse direction map
+     * @param inverseBidiMap  The inverse BidiMap
      */
     protected DualTreeBidiMap(final Map<K, V> normalMap, final Map<V, K> reverseMap,
                               final BidiMap<V, K> inverseBidiMap) {
@@ -295,9 +299,9 @@ public class DualTreeBidiMap<K, V> extends AbstractDualBidiMap<K, V>
     /**
      * Creates a new instance of this object.
      *
-     * @param normalMap  the normal direction map
-     * @param reverseMap  the reverse direction map
-     * @param inverseMap  the inverse BidiMap
+     * @param normalMap  The normal direction map
+     * @param reverseMap  The reverse direction map
+     * @param inverseMap  The inverse BidiMap
      * @return new bidi map
      */
     @Override
@@ -352,7 +356,7 @@ public class DualTreeBidiMap<K, V> extends AbstractDualBidiMap<K, V>
      * provide the forward/backward behavior.
      * </p>
      *
-     * @return a new ordered map iterator
+     * @return A new ordered map iterator
      */
     @Override
     public OrderedMapIterator<K, V> mapIterator() {
@@ -361,13 +365,16 @@ public class DualTreeBidiMap<K, V> extends AbstractDualBidiMap<K, V>
 
     @Override
     public K nextKey(final K key) {
-        if (isEmpty()) {
+        if (isEmpty() || !normalMap.containsKey(key)) {
             return null;
         }
         if (normalMap instanceof OrderedMap) {
             return ((OrderedMap<K, ?>) normalMap).nextKey(key);
         }
         final SortedMap<K, V> sm = (SortedMap<K, V>) normalMap;
+        if (sm instanceof NavigableMap) {
+            return ((NavigableMap<K, V>) sm).higherKey(key);
+        }
         final Iterator<K> it = sm.tailMap(key).keySet().iterator();
         it.next();
         if (it.hasNext()) {
@@ -428,7 +435,7 @@ public class DualTreeBidiMap<K, V> extends AbstractDualBidiMap<K, V>
     /**
      * Serializes this object to an ObjectOutputStream.
      *
-     * @param out the target ObjectOutputStream.
+     * @param out The target ObjectOutputStream.
      * @throws IOException thrown when an I/O errors occur writing to the target stream.
      */
     private void writeObject(final ObjectOutputStream out) throws IOException {

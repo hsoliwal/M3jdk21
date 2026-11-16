@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -47,7 +47,7 @@ import java.util.Iterator;
  * function as an empty iterator.
  * </p>
  *
- * @param <E> the type of elements in this iterator.
+ * @param <E> The type of elements in this iterator.
  * @since 4.0
  */
 public abstract class LazyIteratorChain<E> implements Iterator<E> {
@@ -105,8 +105,8 @@ public abstract class LazyIteratorChain<E> implements Iterator<E> {
      * This method <strong>MUST</strong> return null when there are no more iterators.
      * </p>
      *
-     * @param count the number of time this method has been called (starts with 1)
-     * @return the next iterator, or null if there are no more.
+     * @param count The number of time this method has been called (starts with 1)
+     * @return The next iterator, or null if there are no more.
      */
     protected abstract Iterator<? extends E> nextIterator(int count);
 

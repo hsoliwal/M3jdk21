@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -27,6 +27,7 @@ import java.util.function.Predicate;
 import jdk.m3.collections.apache.Bag;
 import jdk.m3.collections.apache.Unmodifiable;
 import jdk.m3.collections.apache.iterators.UnmodifiableIterator;
+import jdk.m3.collections.apache.multiset.UnmodifiableMultiSet;
 import jdk.m3.collections.apache.set.UnmodifiableSet;
 
 /**
@@ -38,9 +39,11 @@ import jdk.m3.collections.apache.set.UnmodifiableSet;
  * Attempts to modify it will result in an UnsupportedOperationException.
  * </p>
  *
- * @param <E> the type of elements in this bag
+ * @param <E> The type of elements in this bag
  * @since 3.0
+ * @deprecated Since 4.6.0, use {@link UnmodifiableMultiSet} instead.
  */
+@Deprecated
 public final class UnmodifiableBag<E>
         extends AbstractBagDecorator<E> implements Unmodifiable {
 
@@ -52,9 +55,9 @@ public final class UnmodifiableBag<E>
      * <p>
      * If the bag passed in is already unmodifiable, it is returned.
      *
-     * @param <E> the type of the elements in the bag
-     * @param bag  the bag to decorate, must not be null
-     * @return an unmodifiable Bag
+     * @param <E> The type of the elements in the bag
+     * @param bag  The bag to decorate, must not be null
+     * @return An unmodifiable Bag
      * @throws NullPointerException if bag is null
      * @since 4.0
      */
@@ -70,7 +73,7 @@ public final class UnmodifiableBag<E>
     /**
      * Constructor that wraps (not copies).
      *
-     * @param bag  the bag to decorate, must not be null
+     * @param bag  The bag to decorate, must not be null
      * @throws NullPointerException if bag is null
      */
     @SuppressWarnings("unchecked") // safe to upcast
@@ -78,21 +81,45 @@ public final class UnmodifiableBag<E>
         super((Bag<E>) bag);
     }
 
+    /**
+     * Always throws {@link UnsupportedOperationException}.
+     *
+     * @param object Ignored.
+     * @throws UnsupportedOperationException Always thrown.
+     */
     @Override
     public boolean add(final E object) {
         throw new UnsupportedOperationException();
     }
 
+    /**
+     * Always throws {@link UnsupportedOperationException}.
+     *
+     * @param object Ignored.
+     * @param count Ignored.
+     * @throws UnsupportedOperationException Always thrown.
+     */
     @Override
     public boolean add(final E object, final int count) {
         throw new UnsupportedOperationException();
     }
 
+    /**
+     * Always throws {@link UnsupportedOperationException}.
+     *
+     * @param coll Ignored.
+     * @throws UnsupportedOperationException Always thrown.
+     */
     @Override
     public boolean addAll(final Collection<? extends E> coll) {
         throw new UnsupportedOperationException();
     }
 
+    /**
+     * Always throws {@link UnsupportedOperationException}.
+     *
+     * @throws UnsupportedOperationException Always thrown.
+     */
     @Override
     public void clear() {
         throw new UnsupportedOperationException();
@@ -106,8 +133,8 @@ public final class UnmodifiableBag<E>
     /**
      * Deserializes the collection in using a custom routine.
      *
-     * @param in  the input stream
-     * @throws IOException if an error occurs while reading from the stream
+     * @param in  The input stream
+     * @throws IOException Thrown if an error occurs while reading from the stream
      * @throws ClassNotFoundException if an object read from the stream cannot be loaded
      * @throws ClassCastException if deserialized object has wrong type
      */
@@ -117,22 +144,45 @@ public final class UnmodifiableBag<E>
         setCollection((Collection<E>) in.readObject());
     }
 
+    /**
+     * Always throws {@link UnsupportedOperationException}.
+     *
+     * @param object Ignored.
+     * @throws UnsupportedOperationException Always thrown.
+     */
     @Override
     public boolean remove(final Object object) {
         throw new UnsupportedOperationException();
     }
 
+    /**
+     * Always throws {@link UnsupportedOperationException}.
+     *
+     * @param object Ignored.
+     * @param count Ignored.
+     * @throws UnsupportedOperationException Always thrown.
+     */
     @Override
     public boolean remove(final Object object, final int count) {
         throw new UnsupportedOperationException();
     }
 
+    /**
+     * Always throws {@link UnsupportedOperationException}.
+     *
+     * @param coll Ignored.
+     * @throws UnsupportedOperationException Always thrown.
+     */
     @Override
     public boolean removeAll(final Collection<?> coll) {
         throw new UnsupportedOperationException();
     }
 
     /**
+     * Always throws {@link UnsupportedOperationException}.
+     *
+     * @param filter Ignored.
+     * @throws UnsupportedOperationException Always thrown.
      * @since 4.4
      */
     @Override
@@ -140,6 +190,12 @@ public final class UnmodifiableBag<E>
         throw new UnsupportedOperationException();
     }
 
+    /**
+     * Always throws {@link UnsupportedOperationException}.
+     *
+     * @param coll Ignored.
+     * @throws UnsupportedOperationException Always thrown.
+     */
     @Override
     public boolean retainAll(final Collection<?> coll) {
         throw new UnsupportedOperationException();
@@ -147,14 +203,13 @@ public final class UnmodifiableBag<E>
 
     @Override
     public Set<E> uniqueSet() {
-        final Set<E> set = decorated().uniqueSet();
-        return UnmodifiableSet.<E>unmodifiableSet(set);
+        return UnmodifiableSet.<E>unmodifiableSet(decorated().uniqueSet());
     }
 
     /**
      * Serializes this object to an ObjectOutputStream.
      *
-     * @param out the target ObjectOutputStream.
+     * @param out The target ObjectOutputStream.
      * @throws IOException thrown when an I/O errors occur writing to the target stream.
      */
     private void writeObject(final ObjectOutputStream out) throws IOException {

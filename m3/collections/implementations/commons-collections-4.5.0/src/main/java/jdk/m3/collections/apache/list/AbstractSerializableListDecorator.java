@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -25,7 +25,7 @@ import java.util.List;
 /**
  * Serializable subclass of AbstractListDecorator.
  *
- * @param <E> the type of the elements in the list.
+ * @param <E> The type of the elements in the list.
  * @since 3.1
  */
 public abstract class AbstractSerializableListDecorator<E> extends AbstractListDecorator<E> {
@@ -36,7 +36,7 @@ public abstract class AbstractSerializableListDecorator<E> extends AbstractListD
     /**
      * Constructor that wraps (not copies).
      *
-     * @param list  the list to decorate, must not be null
+     * @param list  The list to decorate, must not be null
      * @throws NullPointerException if list is null
      */
     protected AbstractSerializableListDecorator(final List<E> list) {
@@ -46,8 +46,8 @@ public abstract class AbstractSerializableListDecorator<E> extends AbstractListD
     /**
      * Deserializes the list in using a custom routine.
      *
-     * @param in  the input stream
-     * @throws IOException if an error occurs while reading from the stream
+     * @param in  The input stream
+     * @throws IOException Thrown if an error occurs while reading from the stream
      * @throws ClassNotFoundException if an object read from the stream cannot be loaded
      */
     @SuppressWarnings("unchecked")
@@ -59,7 +59,7 @@ public abstract class AbstractSerializableListDecorator<E> extends AbstractListD
     /**
      * Serializes this object to an ObjectOutputStream.
      *
-     * @param out the target ObjectOutputStream.
+     * @param out The target ObjectOutputStream.
      * @throws IOException thrown when an I/O errors occur writing to the target stream.
      */
     private void writeObject(final ObjectOutputStream out) throws IOException {

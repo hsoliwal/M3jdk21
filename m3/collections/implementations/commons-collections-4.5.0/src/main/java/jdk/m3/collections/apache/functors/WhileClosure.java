@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -31,7 +31,7 @@ import jdk.m3.collections.apache.Predicate;
  * for more details.
  * </p>
  *
- * @param <T> the type of the input to the operation.
+ * @param <T> The type of the input to the operation.
  * @since 3.0
  */
 public class WhileClosure<T> implements Closure<T> {
@@ -39,11 +39,11 @@ public class WhileClosure<T> implements Closure<T> {
     /**
      * Factory method that performs validation.
      *
-     * @param <E> the type that the closure acts on
-     * @param predicate  the predicate used to evaluate when the loop terminates, not null
-     * @param closure  the closure to execute, not null
+     * @param <E> The type that the closure acts on
+     * @param predicate  The predicate used to evaluate when the loop terminates, not null
+     * @param closure  The closure to execute, not null
      * @param doLoop  true to act as a do-while loop, always executing the closure once
-     * @return the {@code while} closure
+     * @return The {@code while} closure
      * @throws NullPointerException if the predicate or closure is null
      */
     public static <E> Closure<E> whileClosure(final Predicate<? super E> predicate,
@@ -51,8 +51,10 @@ public class WhileClosure<T> implements Closure<T> {
         return new WhileClosure<>(Objects.requireNonNull(predicate, "predicate"),
                 Objects.requireNonNull(closure, "closure"), doLoop);
     }
+
     /** The test condition */
     private final Predicate<? super T> iPredicate;
+
     /** The closure to call */
     private final Closure<? super T> iClosure;
 
@@ -63,8 +65,8 @@ public class WhileClosure<T> implements Closure<T> {
      * Constructor that performs no validation.
      * Use {@code whileClosure} if you want that.
      *
-     * @param predicate  the predicate used to evaluate when the loop terminates, not null
-     * @param closure  the closure to execute, not null
+     * @param predicate  The predicate used to evaluate when the loop terminates, not null
+     * @param closure  The closure to execute, not null
      * @param doLoop  true to act as a do-while loop, always executing the closure once
      */
     public WhileClosure(final Predicate<? super T> predicate, final Closure<? super T> closure, final boolean doLoop) {
@@ -76,7 +78,7 @@ public class WhileClosure<T> implements Closure<T> {
     /**
      * Executes the closure until the predicate is false.
      *
-     * @param input  the input object
+     * @param input  The input object
      */
     @Override
     public void execute(final T input) {
@@ -91,7 +93,7 @@ public class WhileClosure<T> implements Closure<T> {
     /**
      * Gets the closure.
      *
-     * @return the closure
+     * @return The closure
      * @since 3.1
      */
     public Closure<? super T> getClosure() {
@@ -101,7 +103,7 @@ public class WhileClosure<T> implements Closure<T> {
     /**
      * Gets the predicate in use.
      *
-     * @return the predicate
+     * @return The predicate
      * @since 3.1
      */
     public Predicate<? super T> getPredicate() {

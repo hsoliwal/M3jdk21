@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -29,7 +29,7 @@ import jdk.m3.collections.apache.Transformer;
  * is passed to the second transformer and so on.
  * </p>
  *
- * @param <T> the type of the input and result to the function.
+ * @param <T> The type of the input and result to the function.
  * @since 3.0
  */
 public class ChainedTransformer<T> implements Transformer<T, T>, Serializable {
@@ -46,8 +46,8 @@ public class ChainedTransformer<T> implements Transformer<T, T>, Serializable {
      * method on the collection.
      *
      * @param <T>  the object type
-     * @param transformers  a collection of transformers to chain
-     * @return the {@code chained} transformer
+     * @param transformers  A collection of transformers to chain
+     * @return The {@code chained} transformer
      * @throws NullPointerException if the transformers collection is null
      * @throws NullPointerException if any transformer in the collection is null
      */
@@ -67,8 +67,8 @@ public class ChainedTransformer<T> implements Transformer<T, T>, Serializable {
      * Factory method that performs validation and copies the parameter array.
      *
      * @param <T>  the object type
-     * @param transformers  the transformers to chain, copied, no nulls
-     * @return the {@code chained} transformer
+     * @param transformers  The transformers to chain, copied, no nulls
+     * @return The {@code chained} transformer
      * @throws NullPointerException if the transformers array is null
      * @throws NullPointerException if any transformer in the array is null
      */
@@ -87,7 +87,7 @@ public class ChainedTransformer<T> implements Transformer<T, T>, Serializable {
      * Hidden constructor for the use by the static factory methods.
      *
      * @param clone  if {@code true} the input argument will be cloned
-     * @param transformers  the transformers to chain, no nulls
+     * @param transformers  The transformers to chain, no nulls
      */
     private ChainedTransformer(final boolean clone, final Transformer<? super T, ? extends T>[] transformers) {
         iTransformers = clone ? FunctorUtils.copy(transformers) : transformers;
@@ -97,7 +97,7 @@ public class ChainedTransformer<T> implements Transformer<T, T>, Serializable {
      * Constructor that performs no validation.
      * Use {@code chainedTransformer} if you want that.
      *
-     * @param transformers  the transformers to chain, copied, no nulls
+     * @param transformers  The transformers to chain, copied, no nulls
      */
     public ChainedTransformer(final Transformer<? super T, ? extends T>... transformers) {
         this(true, transformers);
@@ -106,7 +106,7 @@ public class ChainedTransformer<T> implements Transformer<T, T>, Serializable {
     /**
      * Gets the transformers.
      *
-     * @return a copy of the transformers
+     * @return A copy of the transformers
      * @since 3.1
      */
     public Transformer<? super T, ? extends T>[] getTransformers() {
@@ -116,8 +116,8 @@ public class ChainedTransformer<T> implements Transformer<T, T>, Serializable {
     /**
      * Transforms the input to result via each decorated transformer
      *
-     * @param object  the input object passed to the first transformer
-     * @return the transformed result
+     * @param object  The input object passed to the first transformer
+     * @return The transformed result
      */
     @Override
     public T transform(T object) {

@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -20,6 +20,7 @@ import java.util.Comparator;
 
 import jdk.m3.collections.apache.Bag;
 import jdk.m3.collections.apache.SortedBag;
+import jdk.m3.collections.apache.multiset.SynchronizedSortedMultiSet;
 
 /**
  * Decorates another {@link SortedBag} to synchronize its behavior
@@ -32,9 +33,11 @@ import jdk.m3.collections.apache.SortedBag;
  * This class is Serializable from Commons Collections 3.1.
  * </p>
  *
- * @param <E> the type of elements in this bag
+ * @param <E> The type of elements in this bag
  * @since 3.0
+ * @deprecated Since 4.6.0, use {@link SynchronizedSortedMultiSet} instead.
  */
+@Deprecated
 public class SynchronizedSortedBag<E> extends SynchronizedBag<E> implements SortedBag<E> {
 
     /** Serialization version */
@@ -43,9 +46,9 @@ public class SynchronizedSortedBag<E> extends SynchronizedBag<E> implements Sort
     /**
      * Factory method to create a synchronized sorted bag.
      *
-     * @param <E> the type of the elements in the bag
-     * @param bag  the bag to decorate, must not be null
-     * @return a new synchronized SortedBag
+     * @param <E> The type of the elements in the bag
+     * @param bag  The bag to decorate, must not be null
+     * @return A new synchronized SortedBag
      * @throws NullPointerException if bag is null
      * @since 4.0
      */
@@ -56,8 +59,8 @@ public class SynchronizedSortedBag<E> extends SynchronizedBag<E> implements Sort
     /**
      * Constructor that wraps (not copies).
      *
-     * @param bag  the bag to decorate, must not be null
-     * @param lock  the lock to use, must not be null
+     * @param bag  The bag to decorate, must not be null
+     * @param lock  The lock to use, must not be null
      * @throws NullPointerException if bag or lock is null
      */
     protected SynchronizedSortedBag(final Bag<E> bag, final Object lock) {
@@ -67,7 +70,7 @@ public class SynchronizedSortedBag<E> extends SynchronizedBag<E> implements Sort
     /**
      * Constructor that wraps (not copies).
      *
-     * @param bag  the bag to decorate, must not be null
+     * @param bag  The bag to decorate, must not be null
      * @throws NullPointerException if bag is null
      */
     protected SynchronizedSortedBag(final SortedBag<E> bag) {
@@ -91,7 +94,7 @@ public class SynchronizedSortedBag<E> extends SynchronizedBag<E> implements Sort
     /**
      * Gets the bag being decorated.
      *
-     * @return the decorated bag
+     * @return The decorated bag
      */
     protected SortedBag<E> getSortedBag() {
         return (SortedBag<E>) decorated();

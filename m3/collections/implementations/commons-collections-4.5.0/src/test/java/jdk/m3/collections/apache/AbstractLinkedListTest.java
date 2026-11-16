@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -29,7 +29,7 @@ import jdk.m3.collections.apache.list.AbstractListTest;
 import org.junit.jupiter.api.Test;
 
 /**
- * Tests base {@link java.util.LinkedList} methods and contracts.
+ * Tests base {@link LinkedList} methods and contracts.
  * <p>
  * To use, simply extend this class, and implement the {@link #makeObject()} method.
  * </p>
@@ -43,7 +43,7 @@ public abstract class AbstractLinkedListTest<T> extends AbstractListTest<T> {
     /**
      * Returns the {@link #collection} field cast to a {@link LinkedList}.
      *
-     * @return the collection field as a List
+     * @return The collection field as a List
      */
     @Override
     public LinkedList<T> getCollection() {
@@ -53,7 +53,7 @@ public abstract class AbstractLinkedListTest<T> extends AbstractListTest<T> {
     /**
      * Returns the {@link #confirmed} field cast to a {@link LinkedList}.
      *
-     * @return the confirmed field as a List
+     * @return The confirmed field as a List
      */
     protected LinkedList<T> getConfirmedLinkedList() {
         return (LinkedList<T>) getConfirmed();
@@ -83,7 +83,7 @@ public abstract class AbstractLinkedListTest<T> extends AbstractListTest<T> {
      */
     @Test
     @SuppressWarnings("unchecked")
-    public void testLinkedListAddFirst() {
+    void testLinkedListAddFirst() {
         if (!isAddSupported()) {
             return;
         }
@@ -105,7 +105,7 @@ public abstract class AbstractLinkedListTest<T> extends AbstractListTest<T> {
      */
     @Test
     @SuppressWarnings("unchecked")
-    public void testLinkedListAddLast() {
+    void testLinkedListAddLast() {
         if (!isAddSupported()) {
             return;
         }
@@ -126,7 +126,7 @@ public abstract class AbstractLinkedListTest<T> extends AbstractListTest<T> {
      * Tests {@link LinkedList#getFirst()}.
      */
     @Test
-    public void testLinkedListGetFirst() {
+    void testLinkedListGetFirst() {
         resetEmpty();
         assertThrows(NoSuchElementException.class, () -> getCollection().getFirst(), "getFirst() should throw a NoSuchElementException for an empty list.");
         verify();
@@ -142,7 +142,7 @@ public abstract class AbstractLinkedListTest<T> extends AbstractListTest<T> {
      * Tests {@link LinkedList#getLast()}.
      */
     @Test
-    public void testLinkedListGetLast() {
+    void testLinkedListGetLast() {
         resetEmpty();
         assertThrows(NoSuchElementException.class, () -> getCollection().getLast(), "getLast() should throw a NoSuchElementException for an empty list.");
         verify();
@@ -158,7 +158,7 @@ public abstract class AbstractLinkedListTest<T> extends AbstractListTest<T> {
      * Tests {@link LinkedList#removeFirst()}.
      */
     @Test
-    public void testLinkedListRemoveFirst() {
+    void testLinkedListRemoveFirst() {
         if (!isRemoveSupported()) {
             return;
         }
@@ -179,7 +179,7 @@ public abstract class AbstractLinkedListTest<T> extends AbstractListTest<T> {
      * Tests {@link LinkedList#removeLast()}.
      */
     @Test
-    public void testLinkedListRemoveLast() {
+    void testLinkedListRemoveLast() {
         if (!isRemoveSupported()) {
             return;
         }

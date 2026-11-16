@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -49,8 +49,8 @@ import jdk.m3.collections.apache.Predicate;
  * This class is Serializable from Commons Collections 3.1.
  * </p>
  *
- * @param <K> the type of the keys in this map
- * @param <V> the type of the values in this map
+ * @param <K> The type of the keys in this map
+ * @param <V> The type of the values in this map
  * @since 3.0
  */
 public class PredicatedSortedMap<K, V> extends PredicatedMap<K, V> implements SortedMap<K, V> {
@@ -67,10 +67,10 @@ public class PredicatedSortedMap<K, V> extends PredicatedMap<K, V> implements So
      *
      * @param <K>  the key type
      * @param <V>  the value type
-     * @param map  the map to decorate, must not be null
-     * @param keyPredicate  the predicate to validate the keys, null means no check
-     * @param valuePredicate  the predicate to validate to values, null means no check
-     * @return a new predicated sorted map
+     * @param map  The map to decorate, must not be null
+     * @param keyPredicate  The predicate to validate the keys, null means no check
+     * @param valuePredicate  The predicate to validate to values, null means no check
+     * @return A new predicated sorted map
      * @throws NullPointerException if the map is null
      * @since 4.0
      */
@@ -82,9 +82,9 @@ public class PredicatedSortedMap<K, V> extends PredicatedMap<K, V> implements So
     /**
      * Constructor that wraps (not copies).
      *
-     * @param map  the map to decorate, must not be null
-     * @param keyPredicate  the predicate to validate the keys, null means no check
-     * @param valuePredicate  the predicate to validate to values, null means no check
+     * @param map  The map to decorate, must not be null
+     * @param keyPredicate  The predicate to validate the keys, null means no check
+     * @param valuePredicate  The predicate to validate to values, null means no check
      * @throws NullPointerException if the map is null
      */
     protected PredicatedSortedMap(final SortedMap<K, V> map, final Predicate<? super K> keyPredicate,
@@ -105,7 +105,7 @@ public class PredicatedSortedMap<K, V> extends PredicatedMap<K, V> implements So
     /**
      * Gets the map being decorated.
      *
-     * @return the decorated map
+     * @return The decorated map
      */
     protected SortedMap<K, V> getSortedMap() {
         return (SortedMap<K, V>) map;

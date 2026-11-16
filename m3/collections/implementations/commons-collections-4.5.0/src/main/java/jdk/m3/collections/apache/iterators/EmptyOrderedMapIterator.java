@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -21,8 +21,8 @@ import jdk.m3.collections.apache.OrderedMapIterator;
 /**
  * Provides an implementation of an empty ordered map iterator.
  *
- * @param <K> the type of keys
- * @param <V> the type of mapped values
+ * @param <K> The type of keys
+ * @param <V> The type of mapped values
  * @since 3.1
  */
 public class EmptyOrderedMapIterator<K, V> extends AbstractEmptyMapIterator<K, V>
@@ -30,6 +30,7 @@ public class EmptyOrderedMapIterator<K, V> extends AbstractEmptyMapIterator<K, V
 
     /**
      * Singleton instance of the iterator.
+     *
      * @since 3.1
      */
     @SuppressWarnings("rawtypes")
@@ -37,8 +38,9 @@ public class EmptyOrderedMapIterator<K, V> extends AbstractEmptyMapIterator<K, V
 
     /**
      * Gets a typed instance of the iterator.
-     * @param <K> the key type
-     * @param <V> the value type
+     *
+     * @param <K> The key type
+     * @param <V> The value type
      * @return {@link OrderedMapIterator}&lt;K, V&gt;
      */
     public static <K, V> OrderedMapIterator<K, V> emptyOrderedMapIterator() {

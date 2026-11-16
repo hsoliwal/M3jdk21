@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -26,7 +26,9 @@ import java.util.Objects;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
+import jdk.m3.collections.apache.Bag;
 import jdk.m3.collections.apache.SortedBag;
+import jdk.m3.collections.apache.multiset.TreeMultiSet;
 
 /**
  * Implements {@link SortedBag}, using a {@link TreeMap} to provide the data storage.
@@ -35,15 +37,26 @@ import jdk.m3.collections.apache.SortedBag;
  * Order will be maintained among the bag members and can be viewed through the iterator.
  * </p>
  * <p>
- * A {@link jdk.m3.collections.apache.Bag Bag} stores each object in the collection
+ * A {@link Bag Bag} stores each object in the collection
  * together with a count of occurrences. Extra methods on the interface allow multiple
  * copies of an object to be added or removed at once. It is important to read the interface
  * Javadoc carefully as several methods violate the {@link Collection} interface specification.
  * </p>
+ * <p>
+ * <strong>Note that TreeBag is not synchronized and is not thread-safe.</strong>
+ * If you wish to use this bag from multiple threads concurrently, you must use
+ * appropriate synchronization. The simplest approach is to wrap this bag using
+ * {@link jdk.m3.collections.apache.BagUtils#synchronizedSortedBag(SortedBag)}.
+ * Unsynchronized concurrent modification can corrupt the structure of the backing
+ * {@link TreeMap}, and a malformed tree may cause subsequent operations, including
+ * reads, to enter an infinite loop.
+ * </p>
  *
- * @param <E> the type of elements in this bag
+ * @param <E> The type of elements in this bag
  * @since 3.0 (previously in main package v2.0)
+ * @deprecated Since 4.6.0, use {@link TreeMultiSet} instead.
  */
+@Deprecated
 public class TreeBag<E> extends AbstractMapBag<E> implements SortedBag<E>, Serializable {
 
     /** Serial version lock */
@@ -60,7 +73,7 @@ public class TreeBag<E> extends AbstractMapBag<E> implements SortedBag<E>, Seria
      * Constructs a {@link TreeBag} containing all the members of the
      * specified collection.
      *
-     * @param coll the collection to copy into the bag
+     * @param coll The collection to copy into the bag
      */
     public TreeBag(final Collection<? extends E> coll) {
         this();
@@ -71,7 +84,7 @@ public class TreeBag<E> extends AbstractMapBag<E> implements SortedBag<E>, Seria
      * Constructs an empty bag that maintains order on its unique representative
      * members according to the given {@link Comparator}.
      *
-     * @param comparator the comparator to use
+     * @param comparator The comparator to use
      */
     public TreeBag(final Comparator<? super E> comparator) {
         super(new TreeMap<>(comparator));
@@ -80,7 +93,7 @@ public class TreeBag<E> extends AbstractMapBag<E> implements SortedBag<E>, Seria
     /**
      * Constructs a bag containing all the members of the given Iterable.
      *
-     * @param iterable an iterable to copy into this bag.
+     * @param iterable An iterable to copy into this bag.
      * @since 4.5.0-M3
      */
     public TreeBag(final Iterable<? extends E> iterable) {
@@ -128,8 +141,8 @@ public class TreeBag<E> extends AbstractMapBag<E> implements SortedBag<E>, Seria
     /**
      * Deserializes the bag in using a custom routine.
      *
-     * @param in  the input stream
-     * @throws IOException if an error occurs while reading from the stream
+     * @param in  The input stream
+     * @throws IOException Thrown if an error occurs while reading from the stream
      * @throws ClassNotFoundException if an object read from the stream cannot be loaded
      */
     private void readObject(final ObjectInputStream in) throws IOException, ClassNotFoundException {
@@ -142,7 +155,7 @@ public class TreeBag<E> extends AbstractMapBag<E> implements SortedBag<E>, Seria
     /**
      * Serializes this object to an ObjectOutputStream.
      *
-     * @param out the target ObjectOutputStream.
+     * @param out The target ObjectOutputStream.
      * @throws IOException thrown when an I/O errors occur writing to the target stream.
      */
     private void writeObject(final ObjectOutputStream out) throws IOException {

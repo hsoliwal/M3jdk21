@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -18,8 +18,10 @@ package jdk.m3.collections.apache.map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.io.InvalidObjectException;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -27,12 +29,14 @@ import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 /**
  * Tests for the {@link CaseInsensitiveMap} implementation.
  *
- * @param <K> the key type.
- * @param <V> the value type.
+ * @param <K> The key type.
+ * @param <V> The value type.
  */
 public class CaseInsensitiveMapTest<K, V> extends AbstractIterableMapTest<K, V> {
 
@@ -48,7 +52,7 @@ public class CaseInsensitiveMapTest<K, V> extends AbstractIterableMapTest<K, V> 
 
     @Test
     @SuppressWarnings("unchecked")
-    public void testCaseInsensitive() {
+    void testCaseInsensitive() {
         final Map<K, V> map = makeObject();
         map.put((K) "One", (V) "One");
         map.put((K) "Two", (V) "Two");
@@ -60,7 +64,7 @@ public class CaseInsensitiveMapTest<K, V> extends AbstractIterableMapTest<K, V> 
 
     @Test
     @SuppressWarnings("unchecked")
-    public void testClone() {
+    void testClone() {
         final CaseInsensitiveMap<K, V> map = new CaseInsensitiveMap<>(10);
         map.put((K) "1", (V) "1");
         final CaseInsensitiveMap<K, V> cloned = map.clone();
@@ -69,17 +73,29 @@ public class CaseInsensitiveMapTest<K, V> extends AbstractIterableMapTest<K, V> 
     }
 
     /**
+     * A crafted stream can carry a load factor the constructor rejects. AbstractHashedMap.doReadObject
+     * must reapply that contract on read.
+     */
+    @ParameterizedTest
+    @ValueSource(floats = {0.0f, -1.0f, Float.NaN})
+    void testDeserializeRejectsInvalidLoadFactor(final float badLoadFactor) {
+        final CaseInsensitiveMap<K, V> map = new CaseInsensitiveMap<>();
+        map.loadFactor = badLoadFactor;
+        assertThrows(InvalidObjectException.class, () -> serializeDeserialize(map));
+    }
+
+    /**
      * Test for <a href="https://issues.apache.org/jira/browse/COLLECTIONS-323">COLLECTIONS-323</a>.
      */
     @Test
-    public void testInitialCapacityZero() {
+    void testInitialCapacityZero() {
         final CaseInsensitiveMap<String, String> map = new CaseInsensitiveMap<>(0);
         assertEquals(1, map.data.length);
     }
 
     // COLLECTIONS-294
     @Test
-    public void testLocaleIndependence() {
+    void testLocaleIndependence() {
         final Locale orig = Locale.getDefault();
 
         final Locale[] locales = { Locale.ENGLISH, new Locale("tr", StringUtils.EMPTY, StringUtils.EMPTY), Locale.getDefault() };
@@ -106,7 +122,7 @@ public class CaseInsensitiveMapTest<K, V> extends AbstractIterableMapTest<K, V> 
         }
     }
 
-//    public void testCreate() throws Exception {
+//    void testCreate() throws Exception {
 //        resetEmpty();
 //        writeExternalFormToDisk((java.io.Serializable) map, "src/test/resources/data/test/CaseInsensitiveMap.emptyCollection.version4.obj");
 //        resetFull();
@@ -115,7 +131,7 @@ public class CaseInsensitiveMapTest<K, V> extends AbstractIterableMapTest<K, V> 
 
     @Test
     @SuppressWarnings("unchecked")
-    public void testNullHandling() {
+    void testNullHandling() {
         final Map<K, V> map = makeObject();
         map.put((K) "One", (V) "One");
         map.put((K) "Two", (V) "Two");
@@ -131,7 +147,7 @@ public class CaseInsensitiveMapTest<K, V> extends AbstractIterableMapTest<K, V> 
     }
 
     @Test
-    public void testPutAll() {
+    void testPutAll() {
         final Map<Object, String> map = new HashMap<>();
         map.put("One", "One");
         map.put("Two", "Two");

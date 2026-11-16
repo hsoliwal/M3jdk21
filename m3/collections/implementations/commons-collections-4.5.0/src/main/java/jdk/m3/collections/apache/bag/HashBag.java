@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -23,6 +23,8 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.HashMap;
 
+import jdk.m3.collections.apache.multiset.HashMultiSet;
+
 /**
  * Implements {@code Bag}, using a {@link HashMap} to provide the
  * data storage. This is the standard implementation of a bag.
@@ -33,10 +35,22 @@ import java.util.HashMap;
  * interface Javadoc carefully as several methods violate the
  * {@link Collection} interface specification.
  * </p>
+ * <p>
+ * <strong>Note that HashBag is not synchronized and is not thread-safe.</strong>
+ * If you wish to use this bag from multiple threads concurrently, you must use
+ * appropriate synchronization. The simplest approach is to wrap this bag using
+ * {@link jdk.m3.collections.apache.BagUtils#synchronizedBag(jdk.m3.collections.apache.Bag)
+ * BagUtils.synchronizedBag(Bag)}.
+ * Unsynchronized concurrent modification can corrupt the structure of the backing
+ * {@link HashMap}, which may cause subsequent operations to throw exceptions,
+ * return incorrect results, or loop indefinitely.
+ * </p>
  *
- * @param <E> the type of elements in this bag
+ * @param <E> The type of elements in this bag
  * @since 3.0 (previously in main package v2.0)
+ * @deprecated Since 4.6.0, use {@link HashMultiSet} instead.
  */
+@Deprecated
 public class HashBag<E> extends AbstractMapBag<E> implements Serializable {
 
     /** Serial version lock */
@@ -52,7 +66,7 @@ public class HashBag<E> extends AbstractMapBag<E> implements Serializable {
     /**
      * Constructs a bag containing all the members of the given Collection.
      *
-     * @param collection a collection to copy into this bag.
+     * @param collection A collection to copy into this bag.
      */
     public HashBag(final Collection<? extends E> collection) {
         this();
@@ -62,7 +76,7 @@ public class HashBag<E> extends AbstractMapBag<E> implements Serializable {
     /**
      * Constructs a bag containing all the members of the given Iterable.
      *
-     * @param iterable an iterable to copy into this bag.
+     * @param iterable An iterable to copy into this bag.
      * @since 4.5.0-M3
      */
     public HashBag(final Iterable<? extends E> iterable) {
@@ -72,8 +86,8 @@ public class HashBag<E> extends AbstractMapBag<E> implements Serializable {
     /**
      * Deserializes the bag in using a custom routine.
      *
-     * @param in  the input stream
-     * @throws IOException if an error occurs while reading from the stream
+     * @param in  The input stream
+     * @throws IOException Thrown if an error occurs while reading from the stream
      * @throws ClassNotFoundException if an object read from the stream cannot be loaded
      */
     private void readObject(final ObjectInputStream in) throws IOException, ClassNotFoundException {
@@ -84,7 +98,7 @@ public class HashBag<E> extends AbstractMapBag<E> implements Serializable {
     /**
      * Serializes this object to an ObjectOutputStream.
      *
-     * @param out the target ObjectOutputStream.
+     * @param out The target ObjectOutputStream.
      * @throws IOException thrown when an I/O errors occur writing to the target stream.
      */
     private void writeObject(final ObjectOutputStream out) throws IOException {

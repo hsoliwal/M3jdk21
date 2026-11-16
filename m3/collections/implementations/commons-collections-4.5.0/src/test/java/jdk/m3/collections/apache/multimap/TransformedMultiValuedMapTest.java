@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -19,8 +19,10 @@ package jdk.m3.collections.apache.multimap;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.Arrays;
 import java.util.Collection;
 
 import jdk.m3.collections.apache.MultiValuedMap;
@@ -48,7 +50,7 @@ public class TransformedMultiValuedMapTest<K, V> extends AbstractMultiValuedMapT
 
     @Test
     @SuppressWarnings("unchecked")
-    public void testFactory_Decorate() {
+    void testFactory_Decorate() {
         final MultiValuedMap<K, V> base = new ArrayListValuedHashMap<>();
         base.put((K) "A", (V) "1");
         base.put((K) "B", (V) "2");
@@ -69,7 +71,7 @@ public class TransformedMultiValuedMapTest<K, V> extends AbstractMultiValuedMapT
 
     @Test
     @SuppressWarnings("unchecked")
-    public void testFactory_decorateTransform() {
+    void testFactory_decorateTransform() {
         final MultiValuedMap<K, V> base = new ArrayListValuedHashMap<>();
         base.put((K) "A", (V) "1");
         base.put((K) "B", (V) "2");
@@ -100,8 +102,13 @@ public class TransformedMultiValuedMapTest<K, V> extends AbstractMultiValuedMapT
     }
 
     @Test
+    void testInvertedIsUnsupportedByDefault() {
+        assertThrows(UnsupportedOperationException.class, () -> makeObject().inverted());
+    }
+
+    @Test
     @SuppressWarnings("unchecked")
-    public void testKeyTransformedMap() {
+    void testKeyTransformedMap() {
         final Object[] els = { "1", "3", "5", "7", "2", "4", "6" };
 
         final MultiValuedMap<K, V> map = TransformedMultiValuedMap.transformingMap(
@@ -126,7 +133,32 @@ public class TransformedMultiValuedMapTest<K, V> extends AbstractMultiValuedMapT
 
     @Test
     @SuppressWarnings("unchecked")
-    public void testValueTransformedMap() {
+    void testPutAllIterableAppliesTransformValueOverride() {
+        final TransformedMultiValuedMap<K, V> map = new TransformedMultiValuedMap<K, V>(
+                new ArrayListValuedHashMap<>(), null, null) {
+            private static final long serialVersionUID = 1L;
+
+            @Override
+            protected V transformValue(final V object) {
+                return (V) String.valueOf(object);
+            }
+        };
+        assertTrue(map.putAll((K) "k", Arrays.asList((V) Integer.valueOf(1), (V) Integer.valueOf(2))));
+        assertEquals(Arrays.asList("1", "2"), map.get((K) "k"));
+    }
+
+    @Test
+    @SuppressWarnings("unchecked")
+    void testPutAllIterableWithNullTransformers() {
+        final MultiValuedMap<K, V> map = TransformedMultiValuedMap.transformingMap(
+                new ArrayListValuedHashMap<>(), null, null);
+        assertTrue(map.putAll((K) "k", Arrays.asList((V) "a", (V) "b")));
+        assertEquals(Arrays.asList("a", "b"), map.get((K) "k"));
+    }
+
+    @Test
+    @SuppressWarnings("unchecked")
+    void testValueTransformedMap() {
         final Object[] els = { "1", "3", "5", "7", "2", "4", "6" };
 
         final MultiValuedMap<K, V> map = TransformedMultiValuedMap.transformingMap(
@@ -144,7 +176,7 @@ public class TransformedMultiValuedMapTest<K, V> extends AbstractMultiValuedMapT
         assertTrue(map.remove(els[0]).contains(Integer.valueOf((String) els[0])));
     }
 
-//    public void testCreate() throws Exception {
+//    void testCreate() throws Exception {
 //        writeExternalFormToDisk((java.io.Serializable) makeObject(),
 //                "src/test/resources/data/test/TransformedMultiValuedMap.emptyCollection.version4.1.obj");
 //        writeExternalFormToDisk((java.io.Serializable) makeFullMap(),

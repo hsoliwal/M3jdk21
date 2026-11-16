@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -47,6 +47,8 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.Set;
+import java.util.WeakHashMap;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.function.BiFunction;
@@ -58,11 +60,11 @@ import java.util.function.Supplier;
  * and adjustable expected concurrency for updates.
  * <p>
  * This map is designed around specific advanced use-cases. If there is any doubt whether this map is for you, you most likely should be using
- * {@link java.util.concurrent.ConcurrentHashMap} instead.
+ * {@link ConcurrentHashMap} instead.
  * </p>
  * <p>
  * This map supports strong, weak, and soft keys and values. By default, keys are weak, and values are strong. Such a configuration offers similar behavior to
- * {@link java.util.WeakHashMap}, entries of this map are periodically removed once their corresponding keys are no longer referenced outside of this map. In
+ * {@link WeakHashMap}, entries of this map are periodically removed once their corresponding keys are no longer referenced outside of this map. In
  * other words, this map will not prevent a key from being discarded by the garbage collector. Once a key has been discarded by the collector, the corresponding
  * entry is no longer visible to this map; however, the entry may occupy space until a future map operation decides to reclaim it. For this reason, summary
  * functions such as {@code size} and {@code isEmpty} might return a value greater than the observed number of entries. In order to support a high level of
@@ -80,11 +82,11 @@ import java.util.function.Supplier;
  * non-strong values may disappear before their corresponding key.
  * </p>
  * <p>
- * While this map does allow the use of both strong keys and values, it is recommended you use {@link java.util.concurrent.ConcurrentHashMap} for such a
+ * While this map does allow the use of both strong keys and values, it is recommended you use {@link ConcurrentHashMap} for such a
  * configuration, since it is optimized for that case.
  * </p>
  * <p>
- * Just like {@link java.util.concurrent.ConcurrentHashMap}, this class obeys the same functional specification as {@link Hashtable}, and includes versions of
+ * Just like {@link ConcurrentHashMap}, this class obeys the same functional specification as {@link Hashtable}, and includes versions of
  * methods corresponding to each method of {@code Hashtable}. However, even though all operations are thread-safe, retrieval operations do <em>not</em> entail
  * locking, and there is <em>not</em> any support for locking the entire map in a way that prevents all access. This class is fully interoperable with
  * {@code Hashtable} in programs that rely on its thread safety but not on its synchronization details.
@@ -116,8 +118,8 @@ import java.util.function.Supplier;
  * assistance from members of JCP JSR-166, and Hazelcast.
  * </p>
  *
- * @param <K> the type of keys maintained by this map.
- * @param <V> the type of mapped values.
+ * @param <K> The type of keys maintained by this map.
+ * @param <V> The type of mapped values.
  */
 public class ConcurrentReferenceHashMap<K, V> extends AbstractMap<K, V> implements ConcurrentMap<K, V> {
 
@@ -139,8 +141,8 @@ public class ConcurrentReferenceHashMap<K, V> extends AbstractMap<K, V> implemen
      * <li>value reference type: {@link ReferenceType#STRONG}</li>
      * </ul>
      *
-     * @param <K> the type of keys.
-     * @param <V> the type of values.
+     * @param <K> The type of keys.
+     * @param <V> The type of values.
      */
     public static class Builder<K, V> implements Supplier<ConcurrentReferenceHashMap<K, V>> {
 
@@ -194,7 +196,7 @@ public class ConcurrentReferenceHashMap<K, V> extends AbstractMap<K, V> implemen
          * Sets the estimated number of concurrently updating threads. The implementation performs internal sizing to try to accommodate this many threads.
          *
          * @param concurrencyLevel estimated number of concurrently updating threads
-         * @return this instance.
+         * @return {@code this} instance.
          */
         public Builder<K, V> setConcurrencyLevel(final int concurrencyLevel) {
             this.concurrencyLevel = concurrencyLevel;
@@ -204,8 +206,8 @@ public class ConcurrentReferenceHashMap<K, V> extends AbstractMap<K, V> implemen
         /**
          * Sets the initial capacity. The implementation performs internal sizing to accommodate this many elements.
          *
-         * @param initialCapacity the initial capacity.
-         * @return this instance.
+         * @param initialCapacity The initial capacity.
+         * @return {@code this} instance.
          */
         public Builder<K, V> setInitialCapacity(final int initialCapacity) {
             this.initialCapacity = initialCapacity;
@@ -215,8 +217,8 @@ public class ConcurrentReferenceHashMap<K, V> extends AbstractMap<K, V> implemen
         /**
          * Sets the reference type to use for keys.
          *
-         * @param keyReferenceType the reference type to use for keys.
-         * @return this instance.
+         * @param keyReferenceType The reference type to use for keys.
+         * @return {@code this} instance.
          */
         public Builder<K, V> setKeyReferenceType(final ReferenceType keyReferenceType) {
             this.keyReferenceType = keyReferenceType;
@@ -224,10 +226,10 @@ public class ConcurrentReferenceHashMap<K, V> extends AbstractMap<K, V> implemen
         }
 
         /**
-         * Sets the load factor factor, used to control resizing. Resizing may be performed when the average number of elements per bin exceeds this threshold.
+         * Sets the load factor, used to control resizing. Resizing may be performed when the average number of elements per bin exceeds this threshold.
          *
-         * @param loadFactor the load factor factor, used to control resizing
-         * @return this instance.
+         * @param loadFactor The load factor factor, used to control resizing
+         * @return {@code this} instance.
          */
         public Builder<K, V> setLoadFactor(final float loadFactor) {
             this.loadFactor = loadFactor;
@@ -237,8 +239,8 @@ public class ConcurrentReferenceHashMap<K, V> extends AbstractMap<K, V> implemen
         /**
          * Sets the behavioral options.
          *
-         * @param options the behavioral options.
-         * @return this instance.
+         * @param options The behavioral options.
+         * @return {@code this} instance.
          */
         public Builder<K, V> setOptions(final EnumSet<Option> options) {
             this.options = options;
@@ -248,8 +250,8 @@ public class ConcurrentReferenceHashMap<K, V> extends AbstractMap<K, V> implemen
         /**
          * Sets the values to load into a new map.
          *
-         * @param sourceMap the values to load into a new map.
-         * @return this instance.
+         * @param sourceMap The values to load into a new map.
+         * @return {@code this} instance.
          */
         public Builder<K, V> setSourceMap(final Map<? extends K, ? extends V> sourceMap) {
             this.sourceMap = sourceMap;
@@ -259,8 +261,8 @@ public class ConcurrentReferenceHashMap<K, V> extends AbstractMap<K, V> implemen
         /**
          * Sets the reference type to use for values.
          *
-         * @param valueReferenceType the reference type to use for values.
-         * @return this instance.
+         * @param valueReferenceType The reference type to use for values.
+         * @return {@code this} instance.
          */
         public Builder<K, V> setValueReferenceType(final ReferenceType valueReferenceType) {
             this.valueReferenceType = valueReferenceType;
@@ -270,7 +272,7 @@ public class ConcurrentReferenceHashMap<K, V> extends AbstractMap<K, V> implemen
         /**
          * Sets key reference type to {@link ReferenceType#SOFT}.
          *
-         * @return this instance.
+         * @return {@code this} instance.
          */
         public Builder<K, V> softKeys() {
             setKeyReferenceType(ReferenceType.SOFT);
@@ -280,7 +282,7 @@ public class ConcurrentReferenceHashMap<K, V> extends AbstractMap<K, V> implemen
         /**
          * Sets value reference type to {@link ReferenceType#SOFT}.
          *
-         * @return this instance.
+         * @return {@code this} instance.
          */
         public Builder<K, V> softValues() {
             setValueReferenceType(ReferenceType.SOFT);
@@ -290,7 +292,7 @@ public class ConcurrentReferenceHashMap<K, V> extends AbstractMap<K, V> implemen
         /**
          * Sets key reference type to {@link ReferenceType#STRONG}.
          *
-         * @return this instance.
+         * @return {@code this} instance.
          */
         public Builder<K, V> strongKeys() {
             setKeyReferenceType(ReferenceType.STRONG);
@@ -300,7 +302,7 @@ public class ConcurrentReferenceHashMap<K, V> extends AbstractMap<K, V> implemen
         /**
          * Sets value reference type to {@link ReferenceType#STRONG}.
          *
-         * @return this instance.
+         * @return {@code this} instance.
          */
         public Builder<K, V> strongValues() {
             setValueReferenceType(ReferenceType.STRONG);
@@ -310,7 +312,7 @@ public class ConcurrentReferenceHashMap<K, V> extends AbstractMap<K, V> implemen
         /**
          * Sets key reference type to {@link ReferenceType#WEAK}.
          *
-         * @return this instance.
+         * @return {@code this} instance.
          */
         public Builder<K, V> weakKeys() {
             setKeyReferenceType(ReferenceType.WEAK);
@@ -320,7 +322,7 @@ public class ConcurrentReferenceHashMap<K, V> extends AbstractMap<K, V> implemen
         /**
          * Sets value reference type to {@link ReferenceType#WEAK}.
          *
-         * @return this instance.
+         * @return {@code this} instance.
          */
         public Builder<K, V> weakValues() {
             setValueReferenceType(ReferenceType.WEAK);
@@ -400,9 +402,9 @@ public class ConcurrentReferenceHashMap<K, V> extends AbstractMap<K, V> implemen
     /**
      * ConcurrentReferenceHashMap list entry. Note that this is never exported out as a user-visible Map.Entry.
      * <p>
-     * Because the value field is volatile, not final, it is legal wrt the Java Memory Model for an unsynchronized reader to see null instead of initial value
-     * when read via a data race. Although a reordering leading to this is not likely to ever actually occur, the Segment.readValueUnderLock method is used as a
-     * backup in case a null (pre-initialized) value is ever seen in an unsynchronized access method.
+     * Because the value field is volatile, not final, it is legal with respect to the Java Memory Model for an unsynchronized reader to see null instead of
+     * initial value when read via a data race. Although a reordering leading to this is not likely to ever actually occur, the Segment.readValueUnderLock
+     * method is used as a backup in case a null (pre-initialized) value is ever seen in an unsynchronized access method.
      * </p>
      */
     private static final class HashEntry<K, V> {
@@ -565,6 +567,12 @@ public class ConcurrentReferenceHashMap<K, V> extends AbstractMap<K, V> implemen
             return this;
         }
 
+        /**
+         * Always throws {@link UnsupportedOperationException}.
+         *
+         * @param value Ignored.
+         * @throws UnsupportedOperationException Always thrown.
+         */
         @Override
         public V setValue(final V value) {
             throw new UnsupportedOperationException();
@@ -622,9 +630,10 @@ public class ConcurrentReferenceHashMap<K, V> extends AbstractMap<K, V> implemen
     }
 
     /**
-     * Behavior-changing configuration options for the map
+     * Enumerates eehavior-changing configuration options for the map.
      */
     public enum Option {
+
         /**
          * Indicates that referential-equality (== instead of .equals()) should be used when locating keys. This offers similar behavior to
          * {@link IdentityHashMap}
@@ -633,17 +642,20 @@ public class ConcurrentReferenceHashMap<K, V> extends AbstractMap<K, V> implemen
     }
 
     /**
-     * An option specifying which Java reference type should be used to refer to a key and/or value.
+     * Enumerates which Java reference type should be used to refer to a key and/or value.
      */
     public enum ReferenceType {
+
         /**
          * Indicates a normal Java strong reference should be used
          */
         STRONG,
+
         /**
          * Indicates a {@link WeakReference} should be used
          */
         WEAK,
+
         /**
          * Indicates a {@link SoftReference} should be used
          */
@@ -675,8 +687,8 @@ public class ConcurrentReferenceHashMap<K, V> extends AbstractMap<K, V> implemen
      * As a guide, all critical volatile reads and writes to the count field are marked in code comments.
      * </p>
      *
-     * @param <K> the type of keys maintained by this Segment.
-     * @param <V> the type of mapped values.
+     * @param <K> The type of keys maintained by this Segment.
+     * @param <V> The type of mapped values.
      */
     private static final class Segment<K, V> extends ReentrantLock {
 
@@ -878,7 +890,7 @@ public class ConcurrentReferenceHashMap<K, V> extends AbstractMap<K, V> implemen
         }
 
         /**
-         * This method must be called with exactly one of <code>value</code> and <code>function</code> non-null.
+         * This method must be called with exactly one of {@code value} and {@code function} non-null.
          **/
         V put(final K key, final int hash, final V value, final Function<? super K, ? extends V> function, final boolean onlyIfAbsent) {
             lock();
@@ -1373,9 +1385,9 @@ public class ConcurrentReferenceHashMap<K, V> extends AbstractMap<K, V> implemen
      * <li>value reference type: {@link ReferenceType#STRONG}</li>
      * </ul>
      *
-     * @param <K> the type of keys.
-     * @param <V> the type of values.
-     * @return a new Builder.
+     * @param <K> The type of keys.
+     * @param <V> The type of values.
+     * @return A new Builder.
      */
     public static <K, V> Builder<K, V> builder() {
         return new Builder<>();
@@ -1426,14 +1438,14 @@ public class ConcurrentReferenceHashMap<K, V> extends AbstractMap<K, V> implemen
      * Behavioral changing options such as {@link Option#IDENTITY_COMPARISONS} can also be specified.
      * </p>
      *
-     * @param initialCapacity  the initial capacity. The implementation performs internal sizing to accommodate this many elements.
-     * @param loadFactor       the load factor threshold, used to control resizing. Resizing may be performed when the average number of elements per bin
+     * @param initialCapacity  The initial capacity. The implementation performs internal sizing to accommodate this many elements.
+     * @param loadFactor       The load factor threshold, used to control resizing. Resizing may be performed when the average number of elements per bin
      *                         exceeds this threshold.
-     * @param concurrencyLevel the estimated number of concurrently updating threads. The implementation performs internal sizing to try to accommodate this
+     * @param concurrencyLevel The estimated number of concurrently updating threads. The implementation performs internal sizing to try to accommodate this
      *                         many threads.
-     * @param keyType          the reference type to use for keys.
-     * @param valueType        the reference type to use for values.
-     * @param options          the behavioral options.
+     * @param keyType          The reference type to use for keys.
+     * @param valueType        The reference type to use for values.
+     * @param options          The behavioral options.
      * @throws IllegalArgumentException if the initial capacity is negative or the load factor or concurrencyLevel are nonpositive.
      */
     private ConcurrentReferenceHashMap(int initialCapacity, final float loadFactor, int concurrencyLevel, final ReferenceType keyType,
@@ -1483,9 +1495,8 @@ public class ConcurrentReferenceHashMap<K, V> extends AbstractMap<K, V> implemen
 
     @Override
     public V compute(final K key, final BiFunction<? super K, ? super V, ? extends V> remappingFunction) {
-        Objects.requireNonNull(key);
-        Objects.requireNonNull(remappingFunction);
-
+        Objects.requireNonNull(key, "key");
+        Objects.requireNonNull(remappingFunction, "remappingFunction");
         final int hash = hashOf(key);
         final Segment<K, V> segment = segmentFor(hash);
         return segment.apply(key, hash, remappingFunction);
@@ -1511,9 +1522,8 @@ public class ConcurrentReferenceHashMap<K, V> extends AbstractMap<K, V> implemen
      */
     @Override
     public V computeIfAbsent(final K key, final Function<? super K, ? extends V> mappingFunction) {
-        Objects.requireNonNull(key);
-        Objects.requireNonNull(mappingFunction);
-
+        Objects.requireNonNull(key, "key");
+        Objects.requireNonNull(mappingFunction, "mappingFunction");
         final int hash = hashOf(key);
         final Segment<K, V> segment = segmentFor(hash);
         final V v = segment.get(key, hash);
@@ -1522,16 +1532,14 @@ public class ConcurrentReferenceHashMap<K, V> extends AbstractMap<K, V> implemen
 
     @Override
     public V computeIfPresent(final K key, final BiFunction<? super K, ? super V, ? extends V> remappingFunction) {
-        Objects.requireNonNull(key);
-        Objects.requireNonNull(remappingFunction);
-
+        Objects.requireNonNull(key, "key");
+        Objects.requireNonNull(remappingFunction, "remappingFunction");
         final int hash = hashOf(key);
         final Segment<K, V> segment = segmentFor(hash);
         final V v = segment.get(key, hash);
         if (v == null) {
             return null;
         }
-
         return segmentFor(hash).applyIfPresent(key, hash, remappingFunction);
     }
 
@@ -1638,7 +1646,16 @@ public class ConcurrentReferenceHashMap<K, V> extends AbstractMap<K, V> implemen
         return segmentFor(hash).get(key, hash);
     }
 
+    /**
+     * Returns the hash code of the given key, which is either the result of calling {@code hashCode} or {@code System.identityHashCode} depending on
+     * {@code identityComparisons}.
+     *
+     * @param key The key to hash.
+     * @return The hash code of the given key.
+     * @throws NullPointerException if the specified key is null.
+     */
     private int hashOf(final Object key) {
+        Objects.requireNonNull(key, "key");
         return hash(identityComparisons ? System.identityHashCode(key) : key.hashCode());
     }
 
@@ -1713,7 +1730,7 @@ public class ConcurrentReferenceHashMap<K, V> extends AbstractMap<K, V> implemen
      *
      * @param key   key with which the specified value is to be associated
      * @param value value to be associated with the specified key
-     * @return the previous value associated with {@code key}, or {@code null} if there was no mapping for {@code key}
+     * @return The previous value associated with {@code key}, or {@code null} if there was no mapping for {@code key}
      * @throws NullPointerException if the specified key or value is null
      */
     @Override
@@ -1740,7 +1757,7 @@ public class ConcurrentReferenceHashMap<K, V> extends AbstractMap<K, V> implemen
     /**
      * {@inheritDoc}
      *
-     * @return the previous value associated with the specified key, or {@code null} if there was no mapping for the key
+     * @return The previous value associated with the specified key, or {@code null} if there was no mapping for the key
      * @throws NullPointerException if the specified key or value is null
      */
     @Override
@@ -1753,8 +1770,8 @@ public class ConcurrentReferenceHashMap<K, V> extends AbstractMap<K, V> implemen
     /**
      * Removes the key (and its corresponding value) from this map. This method does nothing if the key is not in the map.
      *
-     * @param key the key that needs to be removed
-     * @return the previous value associated with {@code key}, or {@code null} if there was no mapping for {@code key}
+     * @param key The key that needs to be removed
+     * @return The previous value associated with {@code key}, or {@code null} if there was no mapping for {@code key}
      * @throws NullPointerException if the specified key is null
      */
     @Override
@@ -1780,7 +1797,7 @@ public class ConcurrentReferenceHashMap<K, V> extends AbstractMap<K, V> implemen
     /**
      * {@inheritDoc}
      *
-     * @return the previous value associated with the specified key, or {@code null} if there was no mapping for the key
+     * @return The previous value associated with the specified key, or {@code null} if there was no mapping for the key
      * @throws NullPointerException if the specified key or value is null
      */
     @Override
@@ -1806,8 +1823,8 @@ public class ConcurrentReferenceHashMap<K, V> extends AbstractMap<K, V> implemen
     /**
      * Returns the segment that should be used for key with given hash
      *
-     * @param hash the hash code for the key
-     * @return the segment
+     * @param hash The hash code for the key
+     * @return The segment
      */
     private Segment<K, V> segmentFor(final int hash) {
         return segments[hash >>> segmentShift & segmentMask];
@@ -1817,7 +1834,7 @@ public class ConcurrentReferenceHashMap<K, V> extends AbstractMap<K, V> implemen
      * Returns the number of key-value mappings in this map. If the map contains more than {@code Integer.MAX_VALUE} elements, returns
      * {@code Integer.MAX_VALUE}.
      *
-     * @return the number of key-value mappings in this map
+     * @return The number of key-value mappings in this map
      */
     @Override
     public int size() {

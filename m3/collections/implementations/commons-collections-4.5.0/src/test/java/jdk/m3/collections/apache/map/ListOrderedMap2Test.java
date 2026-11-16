@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -27,17 +27,19 @@ import java.util.List;
 import jdk.m3.collections.apache.BulkTest;
 import jdk.m3.collections.apache.MapIterator;
 import jdk.m3.collections.apache.list.AbstractListTest;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 /**
  * Extension of {@link AbstractOrderedMapTest} for exercising the {@link ListOrderedMap} implementation.
  *
- * @param <K> the key type.
- * @param <V> the value type.
+ * @param <K> The key type.
+ * @param <V> The value type.
  */
 public class ListOrderedMap2Test<K, V> extends AbstractOrderedMapTest<K, V> {
 
-    public class TestListView extends AbstractListTest<K> {
+    @Nested
+    public class ListViewTest extends AbstractListTest<K> {
 
         @Override
         public K[] getFullElements() {
@@ -81,7 +83,7 @@ public class ListOrderedMap2Test<K, V> extends AbstractOrderedMapTest<K, V> {
     }
 
     public BulkTest bulkTestListView() {
-        return new TestListView();
+        return new ListViewTest();
     }
 
     @Override
@@ -111,7 +113,7 @@ public class ListOrderedMap2Test<K, V> extends AbstractOrderedMapTest<K, V> {
     }
 
     @Test
-    public void testGetByIndex() {
+    void testGetByIndex() {
         resetEmpty();
         assertThrows(IndexOutOfBoundsException.class, () -> getMap().get(0));
         assertThrows(IndexOutOfBoundsException.class, () -> getMap().get(-1));
@@ -126,7 +128,7 @@ public class ListOrderedMap2Test<K, V> extends AbstractOrderedMapTest<K, V> {
     }
 
     @Test
-    public void testGetValueByIndex() {
+    void testGetValueByIndex() {
         resetEmpty();
         assertThrows(IndexOutOfBoundsException.class, () -> getMap().getValue(0));
         assertThrows(IndexOutOfBoundsException.class, () -> getMap().getValue(-1));
@@ -142,7 +144,7 @@ public class ListOrderedMap2Test<K, V> extends AbstractOrderedMapTest<K, V> {
     }
 
     @Test
-    public void testIndexOf() {
+    void testIndexOf() {
         resetEmpty();
         ListOrderedMap<K, V> lom = getMap();
         assertEquals(-1, lom.indexOf(getOtherKeys()));
@@ -158,7 +160,7 @@ public class ListOrderedMap2Test<K, V> extends AbstractOrderedMapTest<K, V> {
         }
     }
 
-//    public void testCreate() throws Exception {
+//    void testCreate() throws Exception {
 //        resetEmpty();
 //        writeExternalFormToDisk(
 //            (java.io.Serializable) map,
@@ -170,7 +172,7 @@ public class ListOrderedMap2Test<K, V> extends AbstractOrderedMapTest<K, V> {
 //    }
 
     @Test
-    public void testRemoveByIndex() {
+    void testRemoveByIndex() {
         resetEmpty();
         assertThrows(IndexOutOfBoundsException.class, () -> getMap().remove(0));
         assertThrows(IndexOutOfBoundsException.class, () -> getMap().remove(-1));

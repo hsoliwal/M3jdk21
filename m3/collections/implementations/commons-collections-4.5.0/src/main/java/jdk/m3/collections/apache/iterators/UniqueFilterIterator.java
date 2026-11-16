@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -25,15 +25,15 @@ import jdk.m3.collections.apache.functors.UniquePredicate;
  * the Iterator maintains a Set of objects it has already encountered,
  * and duplicate Objects are skipped.
  *
- * @param <E> the type of elements returned by this iterator.
+ * @param <E> The type of elements returned by this iterator.
  * @since 2.1
  */
 public class UniqueFilterIterator<E> extends FilterIterator<E> {
 
     /**
-     *  Constructs a new {@code UniqueFilterIterator}.
+     * Constructs a new {@code UniqueFilterIterator}.
      *
-     *  @param iterator  the iterator to use
+     * @param iterator  The iterator to use
      */
     public UniqueFilterIterator(final Iterator<? extends E> iterator) {
         super(iterator, UniquePredicate.uniquePredicate());

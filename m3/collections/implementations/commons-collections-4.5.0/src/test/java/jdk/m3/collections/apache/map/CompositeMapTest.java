@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -21,20 +21,51 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.AbstractMap;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 /**
  * Extension of {@link AbstractMapTest} for exercising the {@link CompositeMap} implementation.
  *
- * @param <K> the key type.
- * @param <V> the value type.
+ * @param <K> The key type.
+ * @param <V> The value type.
  */
 public class CompositeMapTest<K, V> extends AbstractIterableMapTest<K, V> {
+
+    @Nested
+    public class MapValuesTest extends AbstractMapTest.MapValuesTest {
+        @Test
+        @Override
+        public void testUnsupportedRemove() {
+            resetFull();
+            assertThrows(UnsupportedOperationException.class, () -> getCollection().remove(null));
+            verify();
+        }
+    }
+
+    /** An empty-iterating map that reports {@code Integer.MAX_VALUE} mappings. */
+    private static Map<String, String> maxSizeMap() {
+        return new AbstractMap<String, String>() {
+
+            @Override
+            public Set<Map.Entry<String, String>> entrySet() {
+                return Collections.emptySet();
+            }
+
+            @Override
+            public int size() {
+                return Integer.MAX_VALUE;
+            }
+        };
+    }
 
     /** Used as a flag in MapMutator tests */
     private boolean pass;
@@ -61,6 +92,11 @@ public class CompositeMapTest<K, V> extends AbstractIterableMapTest<K, V> {
     }
 
     @Override
+    public boolean isValuesRemoveSupported() {
+        return false;
+    }
+
+    @Override
     public CompositeMap<K, V> makeObject() {
         final CompositeMap<K, V> map = new CompositeMap<>();
         map.addComposited(new HashMap<>());
@@ -75,7 +111,7 @@ public class CompositeMapTest<K, V> extends AbstractIterableMapTest<K, V> {
 
     @Test
     @SuppressWarnings("unchecked")
-    public void testAddComposited() {
+    void testAddComposited() {
         final CompositeMap<K, V> map = new CompositeMap<>(buildOne(), buildTwo());
         final HashMap<K, V> three = new HashMap<>();
         three.put((K) "5", (V) "five");
@@ -87,7 +123,7 @@ public class CompositeMapTest<K, V> extends AbstractIterableMapTest<K, V> {
     }
 
     @Test
-    public void testGet() {
+    void testGet() {
         final CompositeMap<K, V> map = new CompositeMap<>(buildOne(), buildTwo());
         assertEquals("one", map.get("1"));
         assertEquals("four", map.get("4"));
@@ -95,7 +131,7 @@ public class CompositeMapTest<K, V> extends AbstractIterableMapTest<K, V> {
 
     @Test
     @SuppressWarnings("unchecked")
-    public void testPut() {
+    void testPut() {
         final CompositeMap<K, V> map = new CompositeMap<>(buildOne(), buildTwo(), new CompositeMap.MapMutator<K, V>() {
             private static final long serialVersionUID = 1L;
 
@@ -121,7 +157,7 @@ public class CompositeMapTest<K, V> extends AbstractIterableMapTest<K, V> {
     }
 
     @Test
-    public void testPutAll() {
+    void testPutAll() {
         final CompositeMap<K, V> map = new CompositeMap<>(buildOne(), buildTwo(), new CompositeMap.MapMutator<K, V>() {
             private static final long serialVersionUID = 1L;
 
@@ -147,7 +183,7 @@ public class CompositeMapTest<K, V> extends AbstractIterableMapTest<K, V> {
 
     @Test
     @SuppressWarnings("unchecked")
-    public void testRemoveComposited() {
+    void testRemoveComposited() {
         final CompositeMap<K, V> map = new CompositeMap<>(buildOne(), buildTwo());
         final HashMap<K, V> three = new HashMap<>();
         three.put((K) "5", (V) "five");
@@ -165,7 +201,7 @@ public class CompositeMapTest<K, V> extends AbstractIterableMapTest<K, V> {
 
     @Test
     @SuppressWarnings("unchecked")
-    public void testRemoveFromComposited() {
+    void testRemoveFromComposited() {
         final CompositeMap<K, V> map = new CompositeMap<>(buildOne(), buildTwo());
         final HashMap<K, V> three = new HashMap<>();
         three.put((K) "5", (V) "five");
@@ -180,7 +216,7 @@ public class CompositeMapTest<K, V> extends AbstractIterableMapTest<K, V> {
 
     @Test
     @SuppressWarnings("unchecked")
-    public void testRemoveFromUnderlying() {
+    void testRemoveFromUnderlying() {
         final CompositeMap<K, V> map = new CompositeMap<>(buildOne(), buildTwo());
         final HashMap<K, V> three = new HashMap<>();
         three.put((K) "5", (V) "five");
@@ -194,7 +230,7 @@ public class CompositeMapTest<K, V> extends AbstractIterableMapTest<K, V> {
     }
 
     @Test
-    public void testResolveCollision() {
+    void testResolveCollision() {
         final CompositeMap<K, V> map = new CompositeMap<>(buildOne(), buildTwo(), new CompositeMap.MapMutator<K, V>() {
             private static final long serialVersionUID = 1L;
 
@@ -218,7 +254,13 @@ public class CompositeMapTest<K, V> extends AbstractIterableMapTest<K, V> {
         assertTrue(pass);
     }
 
-//    public void testCreate() throws Exception {
+    @Test
+    void testSizeClampsToIntegerMaxValue() {
+        final CompositeMap<String, String> map = new CompositeMap<>(maxSizeMap(), maxSizeMap());
+        assertEquals(Integer.MAX_VALUE, map.size());
+    }
+
+//    void testCreate() throws Exception {
 //        resetEmpty();
 //        writeExternalFormToDisk((java.io.Serializable) map, "src/test/resources/data/test/CompositeMap.emptyCollection.version4.obj");
 //        resetFull();

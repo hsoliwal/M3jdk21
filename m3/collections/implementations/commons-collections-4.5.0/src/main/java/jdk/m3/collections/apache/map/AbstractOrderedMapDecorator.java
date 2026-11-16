@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -33,8 +33,8 @@ import jdk.m3.collections.apache.OrderedMapIterator;
  * But, you might want that loophole, so this class is kept simple.
  * </p>
  *
- * @param <K> the type of the keys in this map
- * @param <V> the type of the values in this map
+ * @param <K> The type of the keys in this map
+ * @param <V> The type of the values in this map
  * @since 3.0
  */
 public abstract class AbstractOrderedMapDecorator<K, V> extends AbstractMapDecorator<K, V>
@@ -42,6 +42,7 @@ public abstract class AbstractOrderedMapDecorator<K, V> extends AbstractMapDecor
 
     /**
      * Constructor only used in deserialization, do not use otherwise.
+     *
      * @since 3.1
      */
     protected AbstractOrderedMapDecorator() {
@@ -50,7 +51,7 @@ public abstract class AbstractOrderedMapDecorator<K, V> extends AbstractMapDecor
     /**
      * Constructor that wraps (not copies).
      *
-     * @param map  the map to decorate, must not be null
+     * @param map  The map to decorate, must not be null
      * @throws NullPointerException if the map is null
      */
     public AbstractOrderedMapDecorator(final OrderedMap<K, V> map) {
@@ -60,7 +61,7 @@ public abstract class AbstractOrderedMapDecorator<K, V> extends AbstractMapDecor
     /**
      * Gets the map being decorated.
      *
-     * @return the decorated map
+     * @return The decorated map
      */
     @Override
     protected OrderedMap<K, V> decorated() {

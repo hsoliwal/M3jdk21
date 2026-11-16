@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,6 +15,14 @@
  * limitations under the License.
  */
 package jdk.m3.collections.apache;
+
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 /**
  * This class is left over from the JUnit 3 implementation.
@@ -26,6 +34,29 @@ public class BulkTest {
 
     /** Path to test properties resources. */
     public static final String TEST_PROPERTIES_PATH = "src/test/resources/jdk/m3/collections/apache/properties/";
+
+    @SuppressWarnings("unchecked")
+    public static <T> T deserialize(final byte[] serialized) throws IOException, ClassNotFoundException {
+        try (ObjectInputStream in = new ObjectInputStream(new ByteArrayInputStream(serialized))) {
+            return (T) in.readObject();
+        }
+    }
+
+    public static Object deserialize(final Path path) throws IOException, ClassNotFoundException {
+        return deserialize(Files.readAllBytes(path));
+    }
+
+    public static byte[] serialize(final Object object) throws IOException {
+        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        try (ObjectOutputStream oos = new ObjectOutputStream(baos)) {
+            oos.writeObject(object);
+        }
+        return baos.toByteArray();
+    }
+
+    public static <T> T serializeDeserialize(final T obj) throws IOException, ClassNotFoundException {
+        return deserialize(serialize(obj));
+    }
 
     /**
      * The full name of this bulk test instance.
@@ -48,7 +79,7 @@ public class BulkTest {
     /**
      * Gets the name of the simple test method of this {@code BulkTest}.
      *
-     * @return the name of the simple test method of this {@code BulkTest}.
+     * @return The name of the simple test method of this {@code BulkTest}.
      */
     public String getName() {
         return name;
@@ -57,7 +88,7 @@ public class BulkTest {
     /**
      * Gets the display name of this {@code BulkTest}.
      *
-     * @return the display name of this {@code BulkTest}.
+     * @return The display name of this {@code BulkTest}.
      */
     @Override
     public String toString() {
