@@ -38,7 +38,7 @@ import org.junit.jupiter.api.Test;
  * run time from the hash-pinned fixture into a separate package and class loader) must produce byte-identical
  * dumps over {@value #OPS} seeded operations drawn from put, remove(key), remove(key, expected), getOrDefault,
  * containsKey and size. The live bytecode must call {@code find} once and neither {@code containsKey} nor
- * {@code getOrDefault} before delegating to {@code remove(int)} (the class is final and {@code find} is private,
+ * {@code getOrDefault} and call {@code shiftKeys(int)} once while retaining only the zero-key {@code remove(int)} delegation (the class is final and {@code find} is private,
  * so the probe count is asserted on the javap listing rather than through a runtime hook).</p>
  */
 final class IntIntHashMapConditionalRemoveDifferentialTest {
@@ -76,7 +76,7 @@ final class IntIntHashMapConditionalRemoveDifferentialTest {
     }
 
     @Test
-    void liveConditionalRemoveProbesOnceBeforeDelegating() throws Exception {
+    void liveConditionalRemoveUsesFoundSlotDirectly() throws Exception {
         java.util.spi.ToolProvider javap = java.util.spi.ToolProvider.findFirst("javap").orElseThrow();
         Path classFile = Path.of(IntIntHashMap.class.getProtectionDomain().getCodeSource().getLocation().toURI())
                 .resolve("jdk/m3/collections/IntIntHashMap.class");
@@ -93,7 +93,8 @@ final class IntIntHashMapConditionalRemoveDifferentialTest {
         assertEquals(1, count(body, "Method find:(I)I"), body);
         assertEquals(0, count(body, "containsKey"), body);
         assertEquals(0, count(body, "getOrDefault"), body);
-        assertEquals(2, count(body, "Method remove:(I)Z"), body);
+        assertEquals(1, count(body, "Method remove:(I)Z"), body);
+        assertEquals(1, count(body, "Method shiftKeys:(I)V"), body);
     }
 
     static int count(String text, String needle) {

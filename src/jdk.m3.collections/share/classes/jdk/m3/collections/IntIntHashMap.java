@@ -173,7 +173,11 @@ public final class IntIntHashMap {
         if (pos < 0 || values[pos] != expectedValue) {
             return false;
         }
-        return remove(key);
+        // Reuse the located physical slot; a second find would repeat the same probe run.
+        shiftKeys(pos);
+        size--;
+        modCount++;
+        return true;
     }
 
     public int size() {
