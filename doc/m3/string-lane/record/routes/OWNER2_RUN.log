@@ -1,0 +1,7 @@
+START 2026-11-16T16:58:39+05:30
+materialize	0	2026-11-16T17:02:36+05:30	owner2 files 552 (added 420)
+atomize	1	2026-11-16T17:09:30+05:30	recipe com.synexia.rewrite.M3AtomizeInventory: parsed 552 of 552, tables 40, changed 0, errors 8 -> I:\m3-scratch\string-converge-20261116\owner2\az
+planes	0	2026-11-16T17:09:33+05:30	atoms 19443 | EXACT:1249 clusters/3989 atoms LOGIC:880 clusters/7040 atoms STRUCTURE:207 clusters/477 atoms SIMHASH:131 clusters/15062 atoms
+join	0	2026-11-16T17:13:13+05:30	joined 37377 atoms: {'NEAR': 31322, 'LOGIC': 2829, 'EXACT': 2503, 'ABSENT': 723}
+converge	0	2026-11-16T17:15:36+05:30	types 1813: CONVERGE_TO_OWNER 25 types / 246 specific atoms, SHARED_LOGIC 495 types / 13847 specific atoms, ABSORB 1293 types / 18526 specific atoms, KEEP 0 types / 0 specific atoms
+END failed=1 2026-11-16T17:15:36+05:30

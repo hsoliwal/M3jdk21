@@ -1,0 +1,8 @@
+library	main_files	files_with_sites	toCharArray	charAt	getChars	new_String	intern	getBytes	substring	indexOf	append
+commons-lang3-3.17.0	250	61	30	210	14	31	0	2	125	85	395
+commons-text	107	38	21	95	25	28	0	1	24	4	132
+commons-io-2.18.0	262	38	3	15	4	24	0	16	18	15	91
+guava	621	89	20	124	5	10	1	10	39	46	290
+jackson-core-2.19.2	143	47	7	86	29	30	2	2	26	3	167
+jackson-databind-2.19.2	482	68	6	68	0	3	0	0	56	18	286
+univocity-parsers	216	50	6	46	5	14	1	0	10	22	160

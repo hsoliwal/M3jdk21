@@ -1,0 +1,195 @@
+SCOUT NOTES
+Read-only; nothing was built, compiled, run or measured, so every gain is unmeasured. Master sources: String.java and M3StringFacts.java from leaf1/head; the other java.lang owners from master-java-lang; Matcher.java and M3RX7.java from the owner folder. Everything under K:/m3-work/wt-fix3 is the 2026-11-14 checkout, two days older than master.
+
+What the code establishes
+
+(1) JavaLangAccess (K:/m3-work/wt-fix3/src/java.base/share/classes/jdk/internal/access/JavaLangAccess.java 479-538, implemented in java/lang/System.java 2538-2569) exposes five M3 String entries:
+- stringConcatUsesM3Storage: called by java.lang.invoke.StringConcatFactory:492.
+- stringCodeUnitCursor: called by java.io.StringReader:57 and java.nio.StringCharBuffer:44.
+- stringM3TrigramFacts: called by java.util.regex.Matcher:1805 and 1826 (same lines in the master copy).
+- m3StringAsciiTokens: called by jdk.internal.mindex.M3RX7:647 (same in the master copy).
+- stringM3LeafRanges: no Java caller found under src/.
+None exposes a class mask, the ascii or latin1 flag, a strip or trim edge, or a compare kernel. trigramFactsIfPrepared hands out the M3StringFacts object typed as LongPredicate (M3StringPrecomputeBridge 25-29), so only test(long) is usable outside java.lang.
+
+(2) In java.base's module-info.java, a case-insensitive search for "m3" or "mindex" has zero matches, also in the unix and windows module-info.java.extra files. So jdk.internal.mindex and jdk.internal.m3.* are exported to no module. jdk.internal.access goes to 12 stock modules (lines 154-166), none of them jdk.m3.*. The only opening is the test launcher make/m3/test-local.sh (--add-exports java.base/jdk.internal.m3=ALL-UNNAMED).
+
+(3) Build status of the utility classes:
+- In the image (make/conf/module-loader-map.conf 86-91): jdk.m3.annotations, jdk.m3.collections, jdk.m3.graphics, jdk.m3.io, jdk.m3.logging, jdk.m3.paradigm. None imports SharedSecrets, jdk.internal.access or jdk.internal.mindex.
+- java.util.Strings is a public class inside java.base, so it can use SharedSecrets. No caller of it was found under src/.
+- Relocated libraries under m3/vendor/third_party-m3/relocated (commons-lang3 as module jdk.m3.lang3 with packages jdk.m3.lib.lang3.*, commons-codec, and others) carry a module-info but are "optional JMODs built by lib-intake; NOT in make's image today" (make/m3/integrate/RULES.tsv 22-23; the move into src/ is HOLD_APPROVAL). Today they can use public API only.
+- The Guava, Spring and Eclipse Collections copies under m3/collections/implementations are "in no reactor and not in src/jdk.m3.collections" (RULES.tsv 19): not shipped.
+
+(4) What a utility gets by calling public String methods on an M3-backed String:
+- Free, no flatten: indexOf(String), contains, lastIndexOf(String) (signal gates plus M3StringSearchPrecompute); indexOf(int); equals, compareTo and contentEquals(String) (comparePrefix / compareFlatPrefix); chars and codePoints (cursor spliterators); repeat, concat, substring (composite); lines; split with a one-char or literal separator; getChars (window copy); hashCode; matches with a literal or a one-class regex when facts are prepared.
+- Correct but weak: isBlank, strip, trim (force a full facts scan when cold: BRIDGE-1); exact regionMatches (per-unit charAt: BRIDGE-2); regionMatches(true), equalsIgnoreCase, compareToIgnoreCase (per-unit: BRIDGE-3); startsWith/endsWith with a flat receiver and an M3 argument (flattens the argument: BRIDGE-4).
+- toCharArray is a whole copy by definition (charShadow).
+
+Order: BRIDGE-1 should land before the isBlank routing in BRIDGE-5; otherwise routing makes cold M3 calls slower.
+
+Not established
+- Whether java.util.Strings, JavaLangAccess, System.java and module-info.java are unchanged on master; the master folders supplied do not contain them.
+- SharedSecrets.java itself was not opened, only its call sites.
+- Tests and native code were not searched for stringM3LeafRanges callers (the search under test/ timed out).
+- The lib-intake build scripts were not read, so whether any release image includes the relocated JMODs rests on RULES.tsv alone.
+- The Guava and Spring utility sources were not read (search on K: timed out).
+- That no supplementary code point is whitespace under Character.isWhitespace is asserted from the Unicode categories, not executed; it is a required check in the BRIDGE-1 proof.
+- How often a flat receiver meets an M3-backed argument, and how deep real tuple owners are.
+- AbstractStringBuilder and StringBuilder were not read, so java.util.Strings.reverse was not assessed.
+
+Operation catalogue from Synexia (names only): E:/ws2/com.synexia/synexia-common/src/main/java/com/synexia/common/utils/StringOps.java (path parts, case conversion, join, split, pad, center), TextOps.java (indent, dedent, lines, wrap, stripMargin, line filters), CsvOps.java, CompactStringOps.java, and validation/StringValidator.java (notBlank, alphanumeric, numeric, identifier, startsWith, endsWith, contains).
+
+SCOUT NOTES
+SCOPE AND LIMITS
+- Read-only. Nothing compiled, run or timed: every gain is NOT_RUN. No file written.
+- String.java and M3StringFacts.java lines are from leaf1/head (master). Other java.lang owners are from master-java-lang. Library lines are from K:/m3-work/wt-fix3, the M3jdk21 checkout of 2026-11-14, two days older than master.
+- java.util.Strings (public, java.base, 28 public methods) exists in the 2026-11-14 checkout. The master material given has no java/util folder, so its presence on master is unverified.
+- commons-lang3 ships as module jdk.m3.lang3 (module-info.java 10-30); Guava and Spring sit under m3/collections/implementations. All are outside java.base, so a facts-based answer needs a jdk.internal seam (precedent: JavaLangAccess.stringM3TrigramFacts :498, stringM3LeafRanges :538). Exports of jdk.internal.access to those modules were not checked.
+- Not read: Guava Splitter and Joiner bodies, WordUtils, CharUtils, the Levenshtein / Jaro-Winkler / fuzzy bodies, commons-lang replace / replaceEach / overlay / abbreviate / wrap bodies, most Spring bodies, Synexia bodies (names only), commons-codec / classgraph / fastfilter StringUtils. Rows marked [S] are signature-only; [R] means the body was read.
+
+FACTS THAT DECIDE EXACTNESS
+- Class bits are set only on ASCII units (M3StringFacts.java 344-379). (regexAllClasses & X) != 0 on a non-empty String proves every unit is ASCII and in X. A clear all-bit proves "not all" only when facts.ascii. The empty String has every all-bit set (scan starts from REGEX_CLASSES): guard length > 0.
+- REGEX_SPACE is space plus U+0009..U+000D. Character.isWhitespace is also true for U+001C..U+001F and for non-ASCII separators. The SPACE mask therefore answers whitespace questions only in the "true" direction, even for ASCII text. The exact whitespace measures are stripStart / stripEnd.
+- Character.isDigit / isLetter / isLetterOrDigit / isLowerCase / isUpperCase restricted to ASCII equal DIGIT / ALPHA / ALNUM / LOWER / UPPER (from the Character definitions; not executed here).
+- bitSignal64 folds A-Z onto a-z (M3StringFacts.java 605-610): unit presence is ASCII-case-blind and is a rejection gate only.
+- asciiLowerHash folds only A-Z on every unit: an exact rejection for Guava Ascii.equalsIgnoreCase on any text, but for String.equalsIgnoreCase only when both sides are ascii (already coded so, String.java 2491-2495).
+- charAt on a tuple descends the DAG per unit (M3StringTuple.java 35-39). CodeUnitCursor (M3String.java 862-915) reads by scalar run.
+- M3String.asciiCase (M3String.java 1728-1751) has no caller in the java.lang files read.
+- String.isBlank / strip / trim on an M3-backed String call facts(), which prepares everything (candidate SU-1).
+
+CATALOGUE. Format: operation | library | implementation there | what an M3-backed String can answer it from | exactness.
+CL = commons-lang3 3.17.0 StringUtils, GV = Guava 33.4.8 base, SP = Spring core 6.2.0 StringUtils, JU = java.util.Strings (2026-11-14), SX = Synexia StringOps / TextOps.
+
+1. Emptiness and blank
+- isEmpty / isNotEmpty / hasLength / isNullOrEmpty | CL 3655 [R], SP [S], GV 70 [S], JU 30 [R] | length() == 0 | String.length M3 path (String.java 1592-1608), O(1) | exact.
+- isBlank / isNotBlank / isAllBlank / isAnyBlank / defaultIfBlank / firstNonBlank | CL 3623-3634 [R] | charAt loop, Character.isWhitespace(char), early exit | stripStart == utf16Length (String.isBlank 4418, 4563) | exact for all Unicode provided no supplementary code point is whitespace (not checked against this tree).
+- hasText(String) | SP 201-203 [R] | !str.isBlank() | same measure; today prepares full facts | exact.
+- hasText(CharSequence) | SP 170-186 [R] | charAt loop | same | exact.
+- isNullOrBlank / hasText | JU 62-80 [R] | Character.codePointAt loop even for a String | String.isBlank | exact.
+- isWhitespace | CL 3902-3913 [R] | charAt loop, all whitespace, empty gives true | stripStart == length | exact; not from the SPACE mask.
+
+2. Character-class tests
+- isNumeric | CL 3827-3838 [R] | charAt + Character.isDigit | DIGIT all-bit | true when bit set and length > 0; false when ascii and bit clear; otherwise loop.
+- isAlpha / isAlphanumeric / isAllLowerCase / isAllUpperCase | CL 3379 / 3414 / 3311 / 3346 [R] | charAt loops | ALPHA / ALNUM / LOWER / UPPER all-bit | same rule.
+- isMixedCase | CL 3682-3701 [R] | charAt loop | any UPPER and any LOWER | true when both set; false when ascii and not both.
+- isAsciiPrintable | CL 3592-3603 [R] | charAt + CharUtils | facts.ascii | only "not ascii gives false"; no mask for 32..126.
+- isAlphaSpace / isAlphanumericSpace / isNumericSpace | CL [S] | not read | nothing (no "class or space" mask) | none.
+- containsWhitespace | CL 1394-1405, SP 212-224 [R] | charAt loop | any SPACE bit | true direction only.
+- CharMatcher.ascii().matchesAllOf | GV 510-517 [R, default body] | charAt loop from the end | facts.ascii | exact.
+- CharMatcher.matchesNoneOf / indexIn / lastIndexIn | GV 530-591 [R] | charAt loops | for is(c): unit signal gate + M3String.indexOf(char) (M3String.java 1437); general matcher: nothing | gate is rejection only.
+- isAlphanumeric (CompactStringOps) | SX [S] | not read | ALNUM all-bit | as isAlphanumeric.
+
+3. Contains
+- contains(seq, CharSequence) | CL -> CharSequenceUtils.indexOf 49-59 [R] | String.indexOf(String,int) | M3StringPrecomputeBridge.indexOf 103-122: unit, bigram, trigram gates, then M3StringSearchPrecompute.indexOf :279 | exact.
+- contains(seq, int) | CL -> CharSequenceUtils.indexOf 112-115 [R] | String.indexOf(int,int) | unit signal + position blocks | exact.
+- containsAny / containsNone(cs, char...) | CL 1047-1074, 1258-1285 [R] | nested loop charAt x set | per set unit: signal gate, then indexOf(char) | exact with the surrogate-pair check kept; gate is rejection only.
+- containsAny(cs, String) / containsNone(cs, String) / containsOnly(cs, String) | CL 1109, 1314, 1380 [R] | toCharArray on the set argument | same | same.
+- containsOnly | CL 1339-1351 [R] | indexOfAnyBut | nothing in general; an all-mask when the set is exactly a class | exact only for class-shaped sets.
+- containsAny(cs, CharSequence...) | CL 1136-1165 [R] | loop of contains | one search per needle; no multi-pattern kernel | exact.
+- containsIgnoreCase | CL 1221-1233 [R], JU 389-391 [R] | sliding regionMatches(true) at every index | case-blind unit signal as rejection; String.regionMatches M3 loop | gate only when source ascii and needle ASCII.
+
+4. Counting
+- countMatches(cs, char) | CL 1493-1505 [R] | charAt loop | 0 when the unit signal rejects; popcount of exact block masks (M3StringPositionPrecompute.java 185-224, sources of 256..32,768 units); for LF, lineTerminatorCount when the signal proves CR absent | exact under those conditions; nothing wired.
+- countMatches(cs, CharSequence) | CL 1529-1540 [R] | indexOf loop | search kernel per hit; trigram gate gives 0 | exact.
+- countOccurrences | JU 298-311 [R] | indexOf loop | same | exact.
+- countOccurrencesOf | SP [S]. CharMatcher.countIn | GV 598-606 [R] | charAt loop | as countMatches for is(c).
+- lineCount | SX [S] | not read | lineTerminatorCount + 1 when the last unit is neither LF nor CR and length > 0 | exact for String.lines() semantics.
+
+5. Index searches
+- indexOf / lastIndexOf (char, String) | CL -> String | M3 kernels above | exact.
+- indexOfAny(cs, char...) | CL 2806-2829 [R] | nested loop | OR of per-unit block masks would give the first hit; nothing wired | exact if built.
+- indexOfAny(str, CharSequence...) | CL 2858-2882 [R] | one full indexOf per needle, minimum | search kernel per needle | exact.
+- indexOfAnyBut | CL 2938 [S] | not read | nothing.
+- ordinalIndexOf / lastOrdinalIndexOf | CL 5628-5651 [R] | repeated indexOf from index + 1 | search kernel per step; reuse of the search plan across steps unverified | exact.
+- indexOfDifference(cs1, cs2) | CL 3122-3139 [R] | charAt on both | comparePrefix / compareScalarRange / M3StringAtom.compareRange (M3String.java 1069-1104) find the first difference but return only its value; sameCoordinate gives -1 | needs a mismatch-index variant.
+- indexOfIgnoreCase | CL 3203 [S], JU 356-366 [R] | sliding regionMatches(true) | as containsIgnoreCase.
+
+6. Prefix and suffix
+- startsWith / endsWith | CL 8037-8047, 1755-1764 [R] -> CharSequenceUtils.regionMatches 294-298 [R] | String.regionMatches | hash, prefix4, suffix4 gates then run compare (M3StringPrecomputeBridge.startsWith 67-97) | exact.
+- startsWithAny / endsWithAny | CL [S] | loop | per-needle gates | exact.
+- removeStart / removeEnd | CL 6170-6178 [R]; removePrefix / removeSuffix JU 202-221 [R] | startsWith + substring | gates + slice | exact, composite.
+- getCommonPrefix | CL 2097-2115 [R] | indexOfDifference over the array | as indexOfDifference.
+- commonPrefix / commonSuffix | GV 183-219 [R], JU 162-192 [R] | charAt loops on both | forward run compare; no reverse compare kernel | needs mismatch index.
+- startsWithIgnoreCase / endsWithIgnoreCase | CL (regionMatches true), SP [S], JU 322-343 [R] | String.regionMatches(true) | ASCII lower / upper / title hash rejection then per-unit loop (String.java 2487-2533) | rejection only when both ascii.
+- appendIfMissing / prependIfMissing | CL [S] | not read | endsWith / startsWith gates + concat.
+
+7. Substring families
+- substringBefore / After / BeforeLast / AfterLast | CL 8731-8743 [R], JU 232-287 [R] | indexOf + substring | search kernel + slice (M3StringPrecomputeBridge.substring 143-145) | exact, no copy.
+- substringBetween / substringsBetween | CL [S] | not read | same kernels.
+- left / right / mid / substring / truncate | CL [S] | substring | slice | exact.
+- abbreviate / abbreviateMiddle | CL [S] | not read | slice + concat (String.concat M3 path 3238-3249).
+- Ascii.truncate GV [S]; truncate SP [S].
+
+8. Trimming and stripping
+- trim / trimToNull / trimToEmpty | CL 9071-9073 [R] | str.trim() | trimStart / trimEnd (bridge 147-152) | exact.
+- strip / stripStart / stripEnd with null set | CL 8277-8295 [R] | charAt from the edge + Character.isWhitespace | stripStart / stripEnd | exact.
+- strip / stripStart / stripEnd with a set | CL 8283-8293 [R] | stripChars.indexOf(str.charAt(i)) | nothing (edge probe only).
+- trimWhitespace / trimLeadingWhitespace / trimTrailingWhitespace | SP 245-324 [R] | strip() / stripLeading() / stripTrailing() | strip edges | exact.
+- stripToNull / stripToEmpty | JU 413-427 [R] | strip() | same.
+- CharMatcher.trimFrom / trimLeadingFrom / trimTrailingFrom | GV [S].
+- stripAccents | CL 8185-8192 [R] | Normalizer NFKD + StringBuilder + regex replaceAll | facts.ascii implies unchanged content | content-equal only; the conversion table was read only to line 1420.
+- chomp | CL 692-716 [R] | charAt at the end + substring | lastUtf16Unit, suffix4 | exact.
+- chop | CL [S].
+- deleteWhitespace | CL 1653-1672 [R] | charAt twice per unit into char[] + new String | nothing exact for "no whitespace anywhere"; composite of slices around runs possible.
+- trimAllWhitespace | SP 262-276 [R] | charAt + StringBuilder | same.
+- normalizeSpace | CL 5528-5557 [R] | charAt into char[] + new String + trim | nothing yet.
+- CharMatcher.removeFrom / retainFrom | GV 618-659 [R] | indexIn then toCharArray (charShadow flatten) | slices around hits.
+
+9. Padding, centering, repeat
+- repeat(String, int) | CL 6259-6289 [R, to the default branch] | char[] or StringBuilder | String.repeat -> M3String.repeat (String.java 5288-5291) | equal for valid sizes; overflow behaviour differs.
+- repeat(char, int) | CL 6234-6239 [R] | new String(filled char[]) | repeat of a unit.
+- Strings.repeat | GV 150-174 [R] | getChars + arraycopy doubling + new String(char[]) | String.repeat | exception type differs on overflow. JU 113-115 [R] already calls String.repeat.
+- leftPad / rightPad / center | CL [S; padStr.toCharArray at 5321, 7249] | not read | repeat + concat.
+- padStart / padEnd | GV 92-134 [R] StringBuilder append loop; JU 128-151 [R] valueOf(pad).repeat(n).concat(source) | M3 repeat + concat | exact.
+- padLeft / padRight / center | SX [signature lines read] | repeat + concatenation.
+
+10. Case
+- lowerCase / upperCase | CL 5366, 9387 [lines read] | toLowerCase() / toUpperCase() | caseMap scans (M3String.java 1616-1687); no-op from ascii + any UPPER / LOWER bit | exact only when ascii (SU-3).
+- Ascii.toLowerCase / toUpperCase(String) | GV 407-422 [R] | charAt until the first upper unit, then toCharArray + String.valueOf | no-op when the any UPPER (or LOWER) bit is clear | exact on any text: Guava folds only A-Z.
+- Ascii.equalsIgnoreCase | GV 601-625 [R] | charAt on both | asciiLowerHash differs gives false | exact rejection on any text.
+- equalsIgnoreCase | CL 1952-1963 [R] | regionMatches(true) | hash rejection | only when both ascii.
+- compareIgnoreCase | CL 953-964 [R] | String.compareToIgnoreCase | CaseInsensitiveComparator M3 loop (String.java 2274-2296) | no measure; run reads possible.
+- compare | CL 860-871 [R] | compareTo | bridge compareTo 44-65, run compare | exact.
+- capitalize / uncapitalize | CL 537-559 [R], SP [S], SX [signature lines] | codePointAt(0); when changed, int[] of all code points + new String | no-op from the first unit; otherwise mapped unit + slice | exact.
+- swapCase | CL 8929-8951 [R] | codePointAt loop into int[] + new String | ascii with no ALPHA any-bit gives unchanged content | content-equal only.
+- toCamelCase / toSnakeCase / toKebabCase | SX [signature lines] | regex replaceAll + toLowerCase | regex lane + SU-3.
+
+11. Splitting and joining
+- split(str, char) / splitPreserveAllTokens | CL 7866-7898 [R] | charAt per unit + substring | String.indexOf(int,int) kernel + slices | exact (SU-2).
+- split(str, String, max) | CL [S] | not read.
+- splitByWholeSeparator | CL [S] | not read | search kernel + slices.
+- splitByCharacterType / CamelCase | CL 7460 [line read] | str.toCharArray() (flatten) | nothing yet.
+- String.split fast path | JDK String.java 3760-3883 [R] | indexOf(ch, off) per token + substring | M3 path exists; per-call window copy (SU-2) | exact.
+- Splitter | GV [S]. tokenizeToStringArray | SP [S] | java.util.StringTokenizer, which reads str.charAt per unit (StringTokenizer.java 251-288, grep lines only).
+- join | CL 4720-4723 [R] | Streams + LangCollectors.joining | String.join -> M3String.joinDesignated (String.java 4002) composes; the library path does not reach it | exact if routed.
+- Joiner.join | GV [S]. join | SX [signature line] | String.join.
+
+12. Replacing
+- replace(text, search, replacement[, max]) | CL 6349, 6381 [S; 6421 lower-cases for ignore-case] | not read | String.replace(CharSequence, CharSequence) -> m3Replace (String.java 3545-3556) composes slices.
+- replaceChars(str, char, char) | CL 6519-6524 [R] | String.replace(char, char) | M3String.replace 1753-1772 | exact.
+- replaceChars(str, String, String) | CL 6562-6589 [R] | charAt + searchChars.indexOf + StringBuilder | nothing yet.
+- replaceEach / replaceEachRepeatedly / replaceOnce / overlay | CL [S] | not read | no multi-pattern kernel (HANDOVER section 3).
+- remove(str, char) | CL 5832-5844 [R] | indexOf, then toCharArray (charShadow flatten) + new String | slices around hits (replaceMatches 1850-1884 shape) | exact.
+- remove(str, String) | CL 5869-5874 [R] | replace(..., EMPTY, -1).
+- removeAll / replaceAll / replacePattern | CL 5923, 6496, 7062 [lines read] | RegExUtils | regex lane (I9).
+- replace / delete / deleteAny | SP [S].
+
+13. Reversing and rotating
+- reverse | CL 7079-7084 [R], JU 401-405 [R] | new StringBuilder(str).reverse().toString() | builder lane reverse (AbstractStringBuilder.java 1728-1733; lane body not read).
+- reverseDelimited | CL [S].
+- rotate | CL 7282-7297 [R] | StringBuilder append of two substrings | concat of two slices (coordinate work only) | exact.
+
+14. Distances and similarity
+- getLevenshteinDistance (with and without threshold), getJaroWinklerDistance | CL 2384, 2475, 2331 [S] | not read | nothing; shortcuts from sameCoordinate and lengths only.
+- getFuzzyDistance | CL 2184-2197 [lines read] | lower-cases both arguments first | SU-3 gate.
+- Hamming, LCS | not in the vendored StringUtils (commons-text not searched).
+- lineSimilarity | SX [S].
+
+15. Wrapping and unwrapping
+- wrap / wrapIfMissing / unwrap | CL 9312-9564 [S] | not read | first and last unit, prefix4, suffix4 for the "missing" test; concat and slice for the result.
+- WordUtils.wrap (jdk.m3.lib.lang3.text), wrap SX, quote SP | not read.
+
+16. Default-value helpers
+- defaultString / defaultIfEmpty / defaultIfBlank / firstNonEmpty / getIfBlank | CL [S]; nullToEmpty / emptyToNull GV [S]; JU 40-102 [R] | null and length tests | length O(1); blank as in family 1 | exact.
+
+RANKING OF THE CANDIDATES
+SU-1 to SU-4 need no seam and no new member outside java.lang: they sit behind existing String methods. SU-5 needs the internal seam. SU-6 is the admission list. None adds a measure, so I4 ("a measure lands with its first reader") is not triggered; SU-3 gives regexAnyClasses its first reader outside the regex DP.

@@ -1,0 +1,311 @@
+diff --git a/base/src/java.base/share/classes/java/lang/M3StringPrecomputeBridge.java b/head/src/java.base/share/classes/java/lang/M3StringPrecomputeBridge.java
+index 2f9ff61..551216e 100644
+--- a/base/src/java.base/share/classes/java/lang/M3StringPrecomputeBridge.java
++++ b/head/src/java.base/share/classes/java/lang/M3StringPrecomputeBridge.java
+@@ -145,30 +145,119 @@ final class M3StringPrecomputeBridge {
+     }
+ 
+     static String trim(String original, M3String source) {
+-        M3StringFacts facts = source.facts();
+-        if (facts.trimStart == 0 && facts.trimEnd == source.length()) return original;
+-        if (facts.trimStart == source.length()) return "";
+-        return new String(source.slice(facts.trimStart, facts.trimEnd));
++        return bothEdges(original, source, false);
+     }
+ 
+     static String strip(String original, M3String source) {
+-        M3StringFacts facts = source.facts();
+-        if (facts.stripStart == 0 && facts.stripEnd == source.length()) return original;
+-        if (facts.stripStart == source.length()) return "";
+-        return new String(source.slice(facts.stripStart, facts.stripEnd));
++        return bothEdges(original, source, true);
++    }
++
++    private static String bothEdges(String original, M3String source, boolean strip) {
++        int start = edgeStart(source, strip);
++        int end = start == source.length() ? 0 : edgeEnd(source, strip);
++        if (start == 0 && end == source.length()) return original;
++        if (start == source.length()) return "";
++        return new String(source.slice(start, end));
+     }
+ 
+     static String stripLeading(String original, M3String source) {
+-        int start = source.facts().stripStart;
++        int start = edgeStart(source, true);
+         if (start == 0) return original;
+         if (start == source.length()) return "";
+         return new String(source.slice(start, source.length()));
+     }
+ 
+     static String stripTrailing(String original, M3String source) {
+-        int end = source.facts().stripEnd;
++        int end = edgeEnd(source, true);
+         if (end == source.length()) return original;
+         if (end == 0) return "";
+         return new String(source.slice(0, end));
+     }
++
++    /** Longest edge run that is read unit by unit before the cached facts are prepared. */
++    private static final int EDGE_SCAN_UNITS = 64;
++    /** Result of an edge scan that reached its bound before the edge was decided. */
++    static final int EDGE_UNDECIDED = -1;
++
++    /**
++     * Leading edge of {@code strip} (code points, {@link Character#isWhitespace(int)}) or of
++     * {@code trim} (units up to U+0020): the index of the first unit that stays, or the length
++     * when none stays. Reads the prepared measure when there is one, else scans at most
++     * {@link #EDGE_SCAN_UNITS} units, and prepares the facts only for a longer run.
++     */
++    static int edgeStart(M3String source, boolean strip) {
++        M3StringFacts prepared = source.factsIfPrepared();
++        if (prepared == null) {
++            int edge = leadingEdge(source, strip, EDGE_SCAN_UNITS);
++            if (edge != EDGE_UNDECIDED) return edge;
++            prepared = source.facts();
++        }
++        return strip ? prepared.stripStart : prepared.trimStart;
++    }
++
++    /**
++     * Trailing edge, with the rules of {@link #edgeStart}: the end-exclusive index of the last
++     * unit that stays, or 0 when none stays.
++     */
++    static int edgeEnd(M3String source, boolean strip) {
++        M3StringFacts prepared = source.factsIfPrepared();
++        if (prepared == null) {
++            int edge = trailingEdge(source, strip, EDGE_SCAN_UNITS);
++            if (edge != EDGE_UNDECIDED) return edge;
++            prepared = source.facts();
++        }
++        return strip ? prepared.stripEnd : prepared.trimEnd;
++    }
++
++    /** Bounded leading scan: gives up before it reads the unit at index {@code bound}. */
++    static int leadingEdge(CharSequence units, boolean strip, int bound) {
++        int length = units.length();
++        int index = 0;
++        while (index < length) {
++            if (index >= bound) return EDGE_UNDECIDED;
++            int step = strip ? stripStepForward(units, index, length)
++                    : (units.charAt(index) <= ' ' ? 1 : 0);
++            if (step == 0) return index;
++            index += step;
++        }
++        return length;
++    }
++
++    /** Bounded trailing scan: gives up once {@code bound} units have been removed. */
++    static int trailingEdge(CharSequence units, boolean strip, int bound) {
++        int length = units.length();
++        int end = length;
++        while (end > 0) {
++            if (length - end >= bound) return EDGE_UNDECIDED;
++            int step = strip ? stripStepBackward(units, end)
++                    : (units.charAt(end - 1) <= ' ' ? 1 : 0);
++            if (step == 0) return end;
++            end -= step;
++        }
++        return 0;
++    }
++
++    /** Units of the white-space code point that starts at {@code index}; 0 when it is none. */
++    private static int stripStepForward(CharSequence units, int index, int length) {
++        char unit = units.charAt(index);
++        if (Character.isHighSurrogate(unit) && index + 1 < length) {
++            char next = units.charAt(index + 1);
++            if (Character.isLowSurrogate(next)) {
++                return Character.isWhitespace(Character.toCodePoint(unit, next)) ? 2 : 0;
++            }
++        }
++        return Character.isWhitespace(unit) ? 1 : 0;
++    }
++
++    /** Units of the white-space code point that ends before {@code end}; 0 when it is none. */
++    private static int stripStepBackward(CharSequence units, int end) {
++        char unit = units.charAt(end - 1);
++        if (Character.isLowSurrogate(unit) && end > 1) {
++            char previous = units.charAt(end - 2);
++            if (Character.isHighSurrogate(previous)) {
++                return Character.isWhitespace(Character.toCodePoint(previous, unit)) ? 2 : 0;
++            }
++        }
++        return Character.isWhitespace(unit) ? 1 : 0;
++    }
+ }
+diff --git a/base/src/java.base/share/classes/java/lang/String.java b/head/src/java.base/share/classes/java/lang/String.java
+index 3d589eb..f0ae1fc 100644
+--- a/base/src/java.base/share/classes/java/lang/String.java
++++ b/head/src/java.base/share/classes/java/lang/String.java
+@@ -4579,7 +4579,7 @@ public final class String
+ 
+     private int indexOfNonWhitespace() {
+         M3String storage = m3();
+-        if (storage != null) return storage.facts().stripStart;
++        if (storage != null) return M3StringPrecomputeBridge.edgeStart(storage, true);
+         byte[] currentValue = value();
+         return isLatin1() ? StringLatin1.indexOfNonWhitespace(currentValue)
+                           : StringUTF16.indexOfNonWhitespace(currentValue);
+@@ -4587,7 +4587,7 @@ public final class String
+ 
+     private int lastIndexOfNonWhitespace() {
+         M3String storage = m3();
+-        if (storage != null) return storage.facts().stripEnd;
++        if (storage != null) return M3StringPrecomputeBridge.edgeEnd(storage, true);
+         byte[] currentValue = value();
+         return isLatin1() ? StringLatin1.lastIndexOfNonWhitespace(currentValue)
+                           : StringUTF16.lastIndexOfNonWhitespace(currentValue);
+diff --git a/head/test/jdk/java/lang/String/M3StringEdgeScanTest.java b/head/test/jdk/java/lang/String/M3StringEdgeScanTest.java
+new file mode 100644
+index 0000000..f966466
+--- /dev/null
++++ b/head/test/jdk/java/lang/String/M3StringEdgeScanTest.java
+@@ -0,0 +1,149 @@
++/*
++ * Copyright (c) 2026, Hitesh Soliwal. All rights reserved.
++ * GPLv2 with the Classpath exception.
++ *
++ * @test
++ * @summary strip, trim and isBlank of M3-backed Strings match a flat peer with and without facts
++ * @modules java.base/java.lang:+open
++ * @run main/othervm -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage M3StringEdgeScanTest
++ * @run main/othervm -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage -XX:-CompactStrings M3StringEdgeScanTest
++ */
++
++import java.lang.reflect.Field;
++import java.lang.reflect.Method;
++import java.util.Arrays;
++import java.util.List;
++import java.util.function.Function;
++import java.util.stream.IntStream;
++import java.util.stream.Stream;
++
++/**
++ * The white-space edges of an M3-backed String come from a bounded edge scan when no facts are
++ * prepared, and from the facts otherwise. Both must give the results of a flat String. Every
++ * text is checked as a whole admitted String and as a range of a longer one, first without and
++ * then with prepared facts. Edge runs of 63, 64 and 65 units cross the scan bound.
++ */
++public class M3StringEdgeScanTest {
++    private static final char[] UNITS = {
++        'a', ' ', '\t', (char) 0x1C, (char) 0xA0, (char) 0x2028, (char) 0x3000, (char) 0xD800,
++        (char) 0xDC00
++    };
++    private static final int EXHAUSTIVE_LENGTH = 4;
++    private static final List<Integer> RUNS = List.of(0, 1, 63, 64, 65, 130);
++    private static final Field STRING_M3 = optionalField("java.lang.String", "m3");
++    private static final List<Function<String, Object>> OPERATIONS = List.of(
++            String::strip, String::stripLeading, String::stripTrailing, String::trim,
++            String::isBlank);
++    private static int checks;
++    private static int prepared;
++
++    public static void main(String[] args) throws Exception {
++        List<char[]> texts = Stream.concat(exhaustive(), longRuns()).toList();
++        for (char[] units : texts) {
++            String flat = flat(units);
++            checkAll(new String(units), flat);
++            checkAll(range(units), flat);
++        }
++        System.out.println("PASS texts=" + texts.size() + "|checks=" + checks
++                + "|preparedFacts=" + prepared);
++    }
++
++    private static Stream<char[]> exhaustive() {
++        return IntStream.rangeClosed(0, EXHAUSTIVE_LENGTH).boxed()
++                .flatMap(length -> IntStream.range(0, (int) Math.pow(UNITS.length, length))
++                        .mapToObj(code -> digits(code, length)));
++    }
++
++    private static char[] digits(int code, int length) {
++        char[] units = new char[length];
++        int[] rest = {code};
++        IntStream.range(0, length).forEach(index -> {
++            units[index] = UNITS[rest[0] % UNITS.length];
++            rest[0] /= UNITS.length;
++        });
++        return units;
++    }
++
++    /** Blank runs on both sides of one letter, and all-blank texts, around the scan bound. */
++    private static Stream<char[]> longRuns() {
++        Stream<char[]> framed = RUNS.stream().flatMap(left -> RUNS.stream()
++                .map(right -> (" ".repeat(left) + "a" + "\t".repeat(right)).toCharArray()));
++        return Stream.concat(framed, RUNS.stream().map(run -> " ".repeat(run).toCharArray()));
++    }
++
++    /** The same text as a range of a longer admitted String. */
++    private static String range(char[] units) {
++        String framed = new String(("x" + new String(units) + "y").toCharArray());
++        return framed.substring(1, 1 + units.length);
++    }
++
++    private static void checkAll(String subject, String flat) throws Exception {
++        OPERATIONS.forEach(operation -> same(operation.apply(subject), operation.apply(flat)));
++        if (prepareFacts(subject)) {
++            prepared++;
++            OPERATIONS.forEach(operation -> same(operation.apply(subject), operation.apply(flat)));
++        }
++        boolean unchanged = !flat.isEmpty() && flat.strip().length() == flat.length();
++        if (unchanged && (subject.strip() != subject || subject.trim() != subject)) {
++            throw new AssertionError("strip and trim of a text without blank edges return this");
++        }
++    }
++
++    private static void same(Object actual, Object expected) {
++        checks++;
++        boolean equal = actual instanceof String text
++                ? Arrays.equals(units(text), units((String) expected))
++                : actual.equals(expected);
++        if (!equal) {
++            throw new AssertionError("expected " + show(expected) + " but was " + show(actual));
++        }
++    }
++
++    private static char[] units(String text) {
++        char[] units = new char[text.length()];
++        IntStream.range(0, units.length).forEach(index -> units[index] = text.charAt(index));
++        return units;
++    }
++
++    private static String show(Object value) {
++        return value instanceof String text ? Arrays.toString(text.chars().toArray())
++                : String.valueOf(value);
++    }
++
++    /** Prepares the facts of an M3-backed String; false when the String has no M3 owner. */
++    private static boolean prepareFacts(String value) throws Exception {
++        Object storage = STRING_M3 == null ? null : STRING_M3.get(value);
++        if (storage == null) return false;
++        Method facts = storage.getClass().getDeclaredMethod("facts");
++        facts.setAccessible(true);
++        facts.invoke(storage);
++        return true;
++    }
++
++    /** The per-thread admission guard gives a flat peer, as a bootstrap or refused String is. */
++    @SuppressWarnings("unchecked")
++    private static String flat(char[] units) throws Exception {
++        Field field = optionalField("java.lang.M3String", "ADMITTING");
++        if (field == null) return new String(units);
++        ThreadLocal<Boolean> admitting = (ThreadLocal<Boolean>) field.get(null);
++        Boolean previous = admitting.get();
++        admitting.set(Boolean.TRUE);
++        try {
++            return new String(units);
++        } finally {
++            if (previous == null) admitting.remove();
++            else admitting.set(previous);
++        }
++    }
++
++    /** Null on a JDK without the M3 String owners, so the oracle itself can run anywhere. */
++    private static Field optionalField(String owner, String name) {
++        try {
++            Field field = Class.forName(owner).getDeclaredField(name);
++            field.setAccessible(true);
++            return field;
++        } catch (ClassNotFoundException | NoSuchFieldException absent) {
++            return null;
++        }
++    }
++}

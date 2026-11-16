@@ -1,0 +1,162 @@
+// SPDX-License-Identifier: Apache-2.0 OR EPL-2.0
+// Copyright (c) 2026 Synexia, Hitesh Soliwal (hsoliwal@gmail.com) and others
+
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.PrintStream;
+import java.io.Writer;
+import java.nio.charset.Charset;
+import java.security.MessageDigest;
+import java.util.ArrayList;
+import java.util.HexFormat;
+import java.util.List;
+import java.util.stream.IntStream;
+
+/**
+ * Differential harness for OutputStreamWriter.write(String). It uses public API only and is run
+ * three times by run_proof.sh on the same stock JVM: unpatched (the stock StreamEncoder), with
+ * the base StreamEncoder of the fork patched in, and with the head one. Mode "cases" writes one
+ * row per case: id, SHA-256 of the bytes that reached the stream, SHA-256 of the sequence of
+ * write lengths. Mode "time" prints nanoseconds per write for three message kinds.
+ */
+public final class EncoderProof {
+    private static final List<String> CHARSETS = List.of(
+            "UTF-8", "ISO-8859-1", "US-ASCII", "UTF-16", "UTF-16LE", "windows-1252", "Shift_JIS",
+            "ISO-2022-JP", "GB18030", "EUC-KR", "UTF-32");
+    private static final List<Integer> LENGTHS = List.of(
+            0, 1, 2, 100, 511, 512, 513, 8190, 8191, 8192, 8193, 8194, 16383, 16384, 16385, 20000);
+    private static final List<String> KINDS = List.of(
+            "ascii", "latin1", "cjk", "pairs", "pairAtSeam", "loneHighAtSeam", "loneLowFirst",
+            "loneHighLast");
+    private static final int SEAM = 8192;
+    private static final char HIGH = (char) 0xD83D;
+    private static final char LOW = (char) 0xDE42;
+    private static final int TIMED_WRITES = 2_000_000;
+    private static final int TIMED_CHARS = 120;
+
+    /** Records every byte and the length of every write call that reaches the stream. */
+    private static final class Recorder extends OutputStream {
+        private final MessageDigest bytes = digest();
+        private final StringBuilder lengths = new StringBuilder();
+
+        @Override
+        public void write(int value) {
+            bytes.update((byte) value);
+            lengths.append("1,");
+        }
+
+        @Override
+        public void write(byte[] source, int offset, int length) {
+            bytes.update(source, offset, length);
+            lengths.append(length).append(',');
+        }
+
+        String row(String id) {
+            byte[] shape = digest().digest(lengths.toString().getBytes());
+            return id + "\t" + HexFormat.of().formatHex(bytes.digest()) + "\t"
+                    + HexFormat.of().formatHex(shape);
+        }
+    }
+
+    private EncoderProof() {}
+
+    public static void main(String[] args) throws IOException {
+        if (args[0].equals("time")) {
+            List.of("ascii", "latin1", "cjk").forEach(EncoderProof::time);
+            return;
+        }
+        List<String> rows = new ArrayList<>();
+        CHARSETS.stream().filter(Charset::isSupported).forEach(charset ->
+                KINDS.forEach(kind -> LENGTHS.forEach(length ->
+                        IntStream.range(0, 5).forEach(pattern ->
+                                rows.add(run(charset, kind, length, pattern))))));
+        try (PrintStream out = new PrintStream(args[1], "UTF-8")) {
+            rows.forEach(out::println);
+        }
+        System.out.println("cases\t" + rows.size());
+    }
+
+    private static MessageDigest digest() {
+        try {
+            return MessageDigest.getInstance("SHA-256");
+        } catch (java.security.NoSuchAlgorithmException impossible) {
+            throw new IllegalStateException(impossible);
+        }
+    }
+
+    static String text(String kind, int length) {
+        char[] units = new char[length];
+        IntStream.range(0, length).forEach(index -> units[index] = unit(kind, index, length));
+        return new String(units);
+    }
+
+    private static char unit(String kind, int index, int length) {
+        return switch (kind) {
+            case "latin1" -> (char) (index % 7 == 0 ? 0xE9 : 'a' + index % 26);
+            case "cjk" -> (char) (index % 5 == 0 ? 0x4E2D + index % 50 : 'a' + index % 26);
+            case "pairs" -> index % 2 == 0 && index + 1 < length ? HIGH
+                    : index % 2 == 1 ? LOW : 'z';
+            case "pairAtSeam" -> index == SEAM - 1 && index + 1 < length ? HIGH
+                    : index == SEAM && length > SEAM ? LOW : (char) ('a' + index % 26);
+            case "loneHighAtSeam" -> index == SEAM - 1 ? HIGH : (char) ('a' + index % 26);
+            case "loneLowFirst" -> index == 0 ? LOW : (char) ('a' + index % 26);
+            case "loneHighLast" -> index == length - 1 ? HIGH : (char) ('a' + index % 26);
+            default -> (char) ('a' + index % 26);
+        };
+    }
+
+    private static String run(String charset, String kind, int length, int pattern) {
+        Recorder recorder = new Recorder();
+        String text = text(kind, length);
+        try (Writer writer = new OutputStreamWriter(recorder, charset)) {
+            write(writer, text, pattern);
+        } catch (IOException failure) {
+            recorder.lengths.append(failure.getClass().getSimpleName());
+        }
+        return recorder.row(charset + "|" + kind + "|" + length + "|" + pattern);
+    }
+
+    /** Whole, inner range, split in the middle, a leftover high surrogate first, with empties. */
+    private static void write(Writer writer, String text, int pattern) throws IOException {
+        int length = text.length();
+        switch (pattern) {
+            case 0 -> writer.write(text);
+            case 1 -> writer.write(text, Math.min(1, length), Math.max(0, length - 2));
+            case 2 -> {
+                writer.write(text, 0, length / 2);
+                writer.write(text, length / 2, length - length / 2);
+            }
+            case 3 -> {
+                writer.write(HIGH);
+                writer.write(LOW + text);
+            }
+            default -> {
+                writer.write("");
+                writer.write(text, 0, Math.min(SEAM, length));
+                writer.write("");
+                writer.write(text, Math.min(SEAM, length), length - Math.min(SEAM, length));
+            }
+        }
+    }
+
+    private static void time(String kind) {
+        String message = text(kind, TIMED_CHARS);
+        OutputStream discard = OutputStream.nullOutputStream();
+        try (Writer writer = new OutputStreamWriter(discard, "UTF-8")) {
+            timed(writer, message);
+            long start = System.nanoTime();
+            timed(writer, message);
+            long nanos = System.nanoTime() - start;
+            System.out.println("ns_per_write\t" + kind + "\t" + nanos / TIMED_WRITES);
+        } catch (IOException failure) {
+            throw new java.io.UncheckedIOException(failure);
+        }
+    }
+
+    private static void timed(Writer writer, String message) throws IOException {
+        for (int index = 0; index < TIMED_WRITES; index++) {
+            writer.write(message);
+        }
+    }
+}

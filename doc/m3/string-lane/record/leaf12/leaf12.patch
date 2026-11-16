@@ -1,0 +1,163 @@
+diff --git a/base/src/java.base/share/classes/java/lang/String.java b/head/src/java.base/share/classes/java/lang/String.java
+index 9be24ae..d61b741 100644
+--- a/base/src/java.base/share/classes/java/lang/String.java
++++ b/head/src/java.base/share/classes/java/lang/String.java
+@@ -3324,6 +3324,42 @@ public final class String
+         return true;
+     }
+ 
++    /**
++     * The compiled form of the regex argument of {@link #matches}, {@link #replaceFirst},
++     * {@link #replaceAll} and {@link #split(String, int)}. A regex is compiled once, stored,
++     * and read back by later calls with an equal regex, together with everything the
++     * compilation derived. A {@code null} regex and a very long one go to
++     * {@link Pattern#compile(String)} as before; so does an invalid one, on every call,
++     * with its exception.
++     */
++    private static Pattern compiledRegex(String regex) {
++        if (regex == null || regex.length() > RegexMemo.MAX_REGEX_UNITS) {
++            return Pattern.compile(regex);
++        }
++        return RegexMemo.compiled(regex);
++    }
++
++    /** Recently compiled regex arguments: softly held, one per slot of a direct-mapped table. */
++    private static final class RegexMemo {
++        static final int MAX_REGEX_UNITS = 256;
++        private static final int SLOTS = 256;
++        private static final java.util.concurrent.atomic.AtomicReferenceArray<
++                java.lang.ref.SoftReference<Pattern>> TABLE =
++                new java.util.concurrent.atomic.AtomicReferenceArray<>(SLOTS);
++
++        private RegexMemo() {}
++
++        static Pattern compiled(String regex) {
++            int slot = regex.hashCode() & (SLOTS - 1);
++            java.lang.ref.SoftReference<Pattern> stored = TABLE.get(slot);
++            Pattern known = stored == null ? null : stored.get();
++            if (known != null && known.pattern().equals(regex)) return known;
++            Pattern compiled = Pattern.compile(regex);
++            TABLE.set(slot, new java.lang.ref.SoftReference<>(compiled));
++            return compiled;
++        }
++    }
++
+     /**
+      * Tells whether or not this string matches the given <a
+      * href="../util/regex/Pattern.html#sum">regular expression</a>.
+@@ -3362,7 +3398,7 @@ public final class String
+                 return decision == M3StringRegexDp.MATCH;
+             }
+         }
+-        return Pattern.matches(regex, this);
++        return compiledRegex(regex).asMatchPredicate().test(this);
+     }
+ 
+     /**
+@@ -3481,7 +3517,7 @@ public final class String
+             String replaced = storage.replaceLiteralRegex(this, regex, replacement, true);
+             if (replaced != null) return replaced;
+         }
+-        return Pattern.compile(regex).matcher(this).replaceFirst(replacement);
++        return compiledRegex(regex).matcher(this).replaceFirst(replacement);
+     }
+ 
+     /**
+@@ -3530,7 +3566,7 @@ public final class String
+             String replaced = storage.replaceLiteralRegex(this, regex, replacement, false);
+             if (replaced != null) return replaced;
+         }
+-        return Pattern.compile(regex).matcher(this).replaceAll(replacement);
++        return compiledRegex(regex).matcher(this).replaceAll(replacement);
+     }
+ 
+     /**
+@@ -3862,7 +3898,7 @@ public final class String
+         if (M3String.isLiteralRegex(regex)) {
+             return splitLiteral(regex, limit, withDelimiters);
+         }
+-        Pattern pattern = Pattern.compile(regex);
++        Pattern pattern = compiledRegex(regex);
+         return withDelimiters
+                 ? pattern.splitWithDelimiters(this, limit)
+                 : pattern.split(this, limit);
+diff --git a/head/test/jdk/java/lang/String/RegexArgumentMemo.java b/head/test/jdk/java/lang/String/RegexArgumentMemo.java
+new file mode 100644
+index 0000000..3d793bd
+--- /dev/null
++++ b/head/test/jdk/java/lang/String/RegexArgumentMemo.java
+@@ -0,0 +1,74 @@
++/*
++ * Copyright (c) 2026, Hitesh Soliwal. All rights reserved.
++ * GPLv2 with the Classpath exception.
++ *
++ * @test
++ * @summary Repeated regex arguments of String methods give the results of a fresh Pattern
++ * @run main RegexArgumentMemo
++ * @run main/othervm -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage
++ *      RegexArgumentMemo
++ */
++
++import java.util.Arrays;
++import java.util.List;
++import java.util.function.Supplier;
++import java.util.regex.Pattern;
++import java.util.stream.IntStream;
++import java.util.stream.Stream;
++
++/**
++ * matches, replaceFirst, replaceAll and split keep the compiled form of a regex argument. Each
++ * result, and each exception, must be that of a Pattern compiled for the call: on the first use,
++ * on later uses, after other regexes took the same slot, for an invalid regex every time, for a
++ * regex too long to keep and for a regex that is a new String object with equal content.
++ */
++public class RegexArgumentMemo {
++    private static final List<String> FIXED = List.of(
++            "", "a", ",", "\\s+", "[,;]", "a|b", "(\\w+)@(\\w+)", "^x", "x$", "(?i)abc", "a*",
++            "(a)(b)?", "(x)\\1", ".", "\\.", "(", "[a", "*a", "\\", "a{2,1}", "y".repeat(300));
++    private static final List<String> INPUTS = List.of(
++            "", "a", "abc", "ABC", "a,b;c,,d", "x  y\tz", "user@host and me@there", "xx", "aab",
++            "xaxbx", "aaaa", "y".repeat(300), "ab ab ab");
++    private static final List<String> REPLACEMENTS = List.of("-", "$1", "");
++    private static final int GENERATED = 600;
++    private static final int ROUNDS = 3;
++    private static int checks;
++
++    public static void main(String[] args) {
++        List<String> regexes = Stream.concat(FIXED.stream(),
++                IntStream.range(0, GENERATED).mapToObj(n -> "x{" + n + "}y?")).toList();
++        IntStream.range(0, ROUNDS).forEach(round -> regexes.forEach(regex ->
++                INPUTS.forEach(input -> check(new String(regex.toCharArray()), input))));
++        System.out.println("PASS checks=" + checks);
++    }
++
++    private static void check(String regex, String input) {
++        same(() -> input.matches(regex), () -> Pattern.compile(regex).matcher(input).matches());
++        REPLACEMENTS.forEach(with -> {
++            same(() -> input.replaceFirst(regex, with),
++                    () -> Pattern.compile(regex).matcher(input).replaceFirst(with));
++            same(() -> input.replaceAll(regex, with),
++                    () -> Pattern.compile(regex).matcher(input).replaceAll(with));
++        });
++        List.of(0, -1, 2).forEach(limit -> same(
++                () -> Arrays.toString(input.split(regex, limit)),
++                () -> Arrays.toString(Pattern.compile(regex).split(input, limit))));
++    }
++
++    private static void same(Supplier<Object> actual, Supplier<Object> expected) {
++        checks++;
++        String got = outcome(actual);
++        String wanted = outcome(expected);
++        if (!got.equals(wanted)) {
++            throw new AssertionError("expected " + wanted + " but was " + got);
++        }
++    }
++
++    private static String outcome(Supplier<Object> call) {
++        try {
++            return String.valueOf(call.get());
++        } catch (RuntimeException failure) {
++            return failure.getClass().getName() + ": " + failure.getMessage();
++        }
++    }
++}

@@ -1,0 +1,173 @@
+donor	family	operation	overloads	source_lines	toCharArray	charAt	same_name_in_String	proposed_route
+commons-lang3 3.17.0 CharSequenceUtils	OTHER	subSequence	1	11	0	0	yes	DELEGATE
+commons-lang3 3.17.0 CharSequenceUtils	OTHER	toCharArray	1	30	1	1	yes	DELEGATE
+commons-lang3 3.17.0 StringUtils	BUILD	appendIfMissing	1	38	0	0	no	ABSORB
+commons-lang3 3.17.0 StringUtils	BUILD	appendIfMissingIgnoreCase	1	25	0	0	no	ABSORB
+commons-lang3 3.17.0 StringUtils	BUILD	center	3	108	0	0	no	ABSORB
+commons-lang3 3.17.0 StringUtils	BUILD	leftPad	3	104	1	1	no	ABSORB
+commons-lang3 3.17.0 StringUtils	BUILD	prependIfMissing	1	38	0	0	no	ABSORB
+commons-lang3 3.17.0 StringUtils	BUILD	prependIfMissingIgnoreCase	1	23	0	0	no	ABSORB
+commons-lang3 3.17.0 StringUtils	BUILD	repeat	3	115	0	4	yes	DELEGATE
+commons-lang3 3.17.0 StringUtils	BUILD	reverse	1	26	0	0	no	ABSORB
+commons-lang3 3.17.0 StringUtils	BUILD	reverseDelimited	1	26	0	0	no	ABSORB
+commons-lang3 3.17.0 StringUtils	BUILD	rightPad	3	119	1	1	no	ABSORB
+commons-lang3 3.17.0 StringUtils	BUILD	rotate	1	39	0	0	no	ABSORB
+commons-lang3 3.17.0 StringUtils	BUILD	wrap	2	70	0	0	no	ABSORB
+commons-lang3 3.17.0 StringUtils	BUILD	wrapIfMissing	2	89	0	2	no	ABSORB
+commons-lang3 3.17.0 StringUtils	CASE	capitalize	1	47	0	0	no	ABSORB
+commons-lang3 3.17.0 StringUtils	CASE	lowerCase	2	110	0	6	no	ABSORB
+commons-lang3 3.17.0 StringUtils	CASE	swapCase	1	40	0	0	no	ABSORB
+commons-lang3 3.17.0 StringUtils	CASE	toRootLowerCase	1	11	0	0	no	ABSORB
+commons-lang3 3.17.0 StringUtils	CASE	toRootUpperCase	1	18	0	0	no	ABSORB
+commons-lang3 3.17.0 StringUtils	CASE	uncapitalize	1	48	0	0	no	ABSORB
+commons-lang3 3.17.0 StringUtils	CASE	upperCase	2	38	0	0	no	ABSORB
+commons-lang3 3.17.0 StringUtils	CLASS_TEST	isAllLowerCase	1	35	0	1	no	ABSORB
+commons-lang3 3.17.0 StringUtils	CLASS_TEST	isAllUpperCase	1	33	0	1	no	ABSORB
+commons-lang3 3.17.0 StringUtils	CLASS_TEST	isAlpha	1	35	0	1	no	ABSORB
+commons-lang3 3.17.0 StringUtils	CLASS_TEST	isAlphaSpace	1	37	0	1	no	ABSORB
+commons-lang3 3.17.0 StringUtils	CLASS_TEST	isAlphanumeric	1	35	0	1	no	ABSORB
+commons-lang3 3.17.0 StringUtils	CLASS_TEST	isAlphanumericSpace	1	36	0	1	no	ABSORB
+commons-lang3 3.17.0 StringUtils	CLASS_TEST	isAsciiPrintable	1	31	0	1	no	ABSORB
+commons-lang3 3.17.0 StringUtils	CLASS_TEST	isMixedCase	1	44	0	1	no	ABSORB
+commons-lang3 3.17.0 StringUtils	CLASS_TEST	isNumeric	1	39	0	1	no	ABSORB
+commons-lang3 3.17.0 StringUtils	CLASS_TEST	isNumericSpace	1	36	0	1	no	ABSORB
+commons-lang3 3.17.0 StringUtils	CLASS_TEST	isWhitespace	1	35	0	1	no	ABSORB
+commons-lang3 3.17.0 StringUtils	COMPARE	compare	2	88	0	0	no	ABSORB
+commons-lang3 3.17.0 StringUtils	COMPARE	compareIgnoreCase	2	78	0	0	no	ABSORB
+commons-lang3 3.17.0 StringUtils	COMPARE	difference	1	38	0	0	no	ABSORB
+commons-lang3 3.17.0 StringUtils	COMPARE	equals	1	42	0	2	yes	DELEGATE
+commons-lang3 3.17.0 StringUtils	COMPARE	equalsAny	1	30	0	0	no	ABSORB
+commons-lang3 3.17.0 StringUtils	COMPARE	equalsAnyIgnoreCase	1	32	0	0	no	ABSORB
+commons-lang3 3.17.0 StringUtils	COMPARE	equalsIgnoreCase	1	39	0	0	yes	DELEGATE
+commons-lang3 3.17.0 StringUtils	COMPARE	getCommonPrefix	1	42	0	0	no	ABSORB
+commons-lang3 3.17.0 StringUtils	DISTANCE	getFuzzyDistance	1	79	0	2	no	ABSORB
+commons-lang3 3.17.0 StringUtils	DISTANCE	getJaroWinklerDistance	1	53	0	0	no	ABSORB
+commons-lang3 3.17.0 StringUtils	DISTANCE	getLevenshteinDistance	2	249	0	4	no	ABSORB
+commons-lang3 3.17.0 StringUtils	EDGE	chomp	2	81	0	3	no	ABSORB
+commons-lang3 3.17.0 StringUtils	EDGE	chop	1	49	0	2	no	ABSORB
+commons-lang3 3.17.0 StringUtils	EDGE	deleteWhitespace	1	49	0	2	no	ABSORB
+commons-lang3 3.17.0 StringUtils	EDGE	normalizeSpace	1	81	0	2	no	ABSORB
+commons-lang3 3.17.0 StringUtils	EDGE	strip	2	54	0	0	yes	DELEGATE
+commons-lang3 3.17.0 StringUtils	EDGE	stripAccents	1	28	0	0	no	ABSORB
+commons-lang3 3.17.0 StringUtils	EDGE	stripAll	2	64	0	0	no	ABSORB
+commons-lang3 3.17.0 StringUtils	EDGE	stripEnd	1	44	0	2	no	ABSORB
+commons-lang3 3.17.0 StringUtils	EDGE	stripStart	1	42	0	2	no	ABSORB
+commons-lang3 3.17.0 StringUtils	EDGE	stripToEmpty	1	27	0	0	no	ABSORB
+commons-lang3 3.17.0 StringUtils	EDGE	stripToNull	1	32	0	0	no	ABSORB
+commons-lang3 3.17.0 StringUtils	EDGE	trim	1	25	0	0	yes	DELEGATE
+commons-lang3 3.17.0 StringUtils	EDGE	trimToEmpty	1	26	0	0	no	ABSORB
+commons-lang3 3.17.0 StringUtils	EDGE	trimToNull	1	37	0	0	no	ABSORB
+commons-lang3 3.17.0 StringUtils	EMPTY_BLANK	defaultIfBlank	1	22	0	0	no	ABSORB
+commons-lang3 3.17.0 StringUtils	EMPTY_BLANK	defaultIfEmpty	1	20	0	0	no	ABSORB
+commons-lang3 3.17.0 StringUtils	EMPTY_BLANK	defaultString	2	49	0	0	no	ABSORB
+commons-lang3 3.17.0 StringUtils	EMPTY_BLANK	firstNonBlank	1	35	0	0	no	ABSORB
+commons-lang3 3.17.0 StringUtils	EMPTY_BLANK	firstNonEmpty	1	20	0	0	no	ABSORB
+commons-lang3 3.17.0 StringUtils	EMPTY_BLANK	getIfBlank	1	28	0	0	no	ABSORB
+commons-lang3 3.17.0 StringUtils	EMPTY_BLANK	getIfEmpty	1	40	0	0	no	ABSORB
+commons-lang3 3.17.0 StringUtils	EMPTY_BLANK	isAllBlank	1	31	0	0	no	ABSORB
+commons-lang3 3.17.0 StringUtils	EMPTY_BLANK	isAllEmpty	1	34	0	0	no	ABSORB
+commons-lang3 3.17.0 StringUtils	EMPTY_BLANK	isAnyBlank	1	32	0	0	no	ABSORB
+commons-lang3 3.17.0 StringUtils	EMPTY_BLANK	isAnyEmpty	1	38	0	0	no	ABSORB
+commons-lang3 3.17.0 StringUtils	EMPTY_BLANK	isBlank	1	32	0	1	yes	DELEGATE
+commons-lang3 3.17.0 StringUtils	EMPTY_BLANK	isEmpty	1	27	0	0	yes	DELEGATE
+commons-lang3 3.17.0 StringUtils	EMPTY_BLANK	isNoneBlank	1	24	0	0	no	ABSORB
+commons-lang3 3.17.0 StringUtils	EMPTY_BLANK	isNoneEmpty	1	23	0	0	no	ABSORB
+commons-lang3 3.17.0 StringUtils	EMPTY_BLANK	isNotBlank	1	19	0	0	no	ABSORB
+commons-lang3 3.17.0 StringUtils	EMPTY_BLANK	isNotEmpty	1	35	0	0	no	ABSORB
+commons-lang3 3.17.0 StringUtils	EMPTY_BLANK	length	1	23	0	0	yes	DELEGATE
+commons-lang3 3.17.0 StringUtils	OTHER	getBytes	2	51	0	0	yes	DELEGATE
+commons-lang3 3.17.0 StringUtils	OTHER	getDigits	1	45	0	1	no	ABSORB
+commons-lang3 3.17.0 StringUtils	OTHER	toCodePoints	1	31	0	0	no	ABSORB
+commons-lang3 3.17.0 StringUtils	OTHER	toEncodedString	1	11	0	0	no	ABSORB
+commons-lang3 3.17.0 StringUtils	OTHER	toString	1	31	0	0	yes	DELEGATE
+commons-lang3 3.17.0 StringUtils	OTHER	valueOf	1	23	0	0	yes	DELEGATE
+commons-lang3 3.17.0 StringUtils	REPLACE	replace	2	146	0	0	yes	DELEGATE
+commons-lang3 3.17.0 StringUtils	REPLACE	replaceAll	1	24	0	0	yes	DELEGATE
+commons-lang3 3.17.0 StringUtils	REPLACE	replaceChars	2	109	0	2	no	ABSORB
+commons-lang3 3.17.0 StringUtils	REPLACE	replaceEach	1	217	0	2	no	ABSORB
+commons-lang3 3.17.0 StringUtils	REPLACE	replaceEachRepeatedly	1	53	0	0	no	ABSORB
+commons-lang3 3.17.0 StringUtils	REPLACE	replaceFirst	1	61	0	0	yes	DELEGATE
+commons-lang3 3.17.0 StringUtils	REPLACE	replaceIgnoreCase	1	27	0	0	no	ABSORB
+commons-lang3 3.17.0 StringUtils	REPLACE	replaceOnce	1	29	0	0	no	ABSORB
+commons-lang3 3.17.0 StringUtils	REPLACE	replaceOnceIgnoreCase	1	46	0	0	no	ABSORB
+commons-lang3 3.17.0 StringUtils	REPLACE	replacePattern	1	18	0	0	no	ABSORB
+commons-lang3 3.17.0 StringUtils	SEARCH	contains	2	59	0	0	yes	DELEGATE
+commons-lang3 3.17.0 StringUtils	SEARCH	containsAny	3	146	0	2	no	ABSORB
+commons-lang3 3.17.0 StringUtils	SEARCH	containsAnyIgnoreCase	1	28	0	0	no	ABSORB
+commons-lang3 3.17.0 StringUtils	SEARCH	containsIgnoreCase	1	37	0	0	no	ABSORB
+commons-lang3 3.17.0 StringUtils	SEARCH	containsNone	2	81	1	2	no	ABSORB
+commons-lang3 3.17.0 StringUtils	SEARCH	containsOnly	2	55	1	0	no	ABSORB
+commons-lang3 3.17.0 StringUtils	SEARCH	containsWhitespace	1	99	0	2	no	ABSORB
+commons-lang3 3.17.0 StringUtils	SEARCH	countMatches	2	69	1	1	no	ABSORB
+commons-lang3 3.17.0 StringUtils	SEARCH	endsWith	1	47	0	0	yes	DELEGATE
+commons-lang3 3.17.0 StringUtils	SEARCH	endsWithAny	1	35	0	0	no	ABSORB
+commons-lang3 3.17.0 StringUtils	SEARCH	endsWithIgnoreCase	1	26	0	0	no	ABSORB
+commons-lang3 3.17.0 StringUtils	SEARCH	indexOf	4	173	0	2	yes	DELEGATE
+commons-lang3 3.17.0 StringUtils	SEARCH	indexOfAny	3	132	1	2	no	ABSORB
+commons-lang3 3.17.0 StringUtils	SEARCH	indexOfAnyBut	2	101	0	4	no	ABSORB
+commons-lang3 3.17.0 StringUtils	SEARCH	indexOfDifference	2	128	0	4	no	ABSORB
+commons-lang3 3.17.0 StringUtils	SEARCH	indexOfIgnoreCase	2	79	0	0	no	ABSORB
+commons-lang3 3.17.0 StringUtils	SEARCH	lastIndexOf	4	164	0	2	yes	DELEGATE
+commons-lang3 3.17.0 StringUtils	SEARCH	lastIndexOfAny	1	41	0	0	no	ABSORB
+commons-lang3 3.17.0 StringUtils	SEARCH	lastIndexOfIgnoreCase	2	97	0	0	no	ABSORB
+commons-lang3 3.17.0 StringUtils	SEARCH	lastOrdinalIndexOf	1	24	0	0	no	ABSORB
+commons-lang3 3.17.0 StringUtils	SEARCH	ordinalIndexOf	1	73	0	0	no	ABSORB
+commons-lang3 3.17.0 StringUtils	SEARCH	startsWith	1	49	0	0	yes	DELEGATE
+commons-lang3 3.17.0 StringUtils	SEARCH	startsWithAny	1	34	0	0	no	ABSORB
+commons-lang3 3.17.0 StringUtils	SEARCH	startsWithIgnoreCase	1	26	0	0	no	ABSORB
+commons-lang3 3.17.0 StringUtils	SLICE	abbreviate	4	184	0	0	no	ABSORB
+commons-lang3 3.17.0 StringUtils	SLICE	abbreviateMiddle	1	69	0	0	no	ABSORB
+commons-lang3 3.17.0 StringUtils	SLICE	left	1	32	0	0	no	ABSORB
+commons-lang3 3.17.0 StringUtils	SLICE	mid	1	56	0	0	no	ABSORB
+commons-lang3 3.17.0 StringUtils	SLICE	overlay	1	89	0	0	no	ABSORB
+commons-lang3 3.17.0 StringUtils	SLICE	remove	2	90	1	0	no	ABSORB
+commons-lang3 3.17.0 StringUtils	SLICE	removeAll	1	28	0	0	no	ABSORB
+commons-lang3 3.17.0 StringUtils	SLICE	removeEnd	1	36	0	0	no	ABSORB
+commons-lang3 3.17.0 StringUtils	SLICE	removeEndIgnoreCase	1	55	0	0	no	ABSORB
+commons-lang3 3.17.0 StringUtils	SLICE	removeFirst	1	35	0	0	no	ABSORB
+commons-lang3 3.17.0 StringUtils	SLICE	removeIgnoreCase	1	36	0	0	no	ABSORB
+commons-lang3 3.17.0 StringUtils	SLICE	removePattern	1	27	0	0	no	ABSORB
+commons-lang3 3.17.0 StringUtils	SLICE	removeStart	2	66	0	1	no	ABSORB
+commons-lang3 3.17.0 StringUtils	SLICE	removeStartIgnoreCase	1	29	0	0	no	ABSORB
+commons-lang3 3.17.0 StringUtils	SLICE	right	1	32	0	0	no	ABSORB
+commons-lang3 3.17.0 StringUtils	SLICE	substring	2	113	0	0	yes	DELEGATE
+commons-lang3 3.17.0 StringUtils	SLICE	substringAfter	2	79	0	0	no	ABSORB
+commons-lang3 3.17.0 StringUtils	SLICE	substringAfterLast	2	79	0	0	no	ABSORB
+commons-lang3 3.17.0 StringUtils	SLICE	substringBefore	2	79	0	0	no	ABSORB
+commons-lang3 3.17.0 StringUtils	SLICE	substringBeforeLast	1	32	0	0	no	ABSORB
+commons-lang3 3.17.0 StringUtils	SLICE	substringBetween	2	67	0	0	no	ABSORB
+commons-lang3 3.17.0 StringUtils	SLICE	substringsBetween	1	58	0	0	no	ABSORB
+commons-lang3 3.17.0 StringUtils	SLICE	truncate	2	105	0	0	no	ABSORB
+commons-lang3 3.17.0 StringUtils	SLICE	unwrap	2	71	0	2	no	ABSORB
+commons-lang3 3.17.0 StringUtils	SPLIT_JOIN	join	27	910	0	0	yes	DELEGATE
+commons-lang3 3.17.0 StringUtils	SPLIT_JOIN	joinWith	1	30	0	0	no	ABSORB
+commons-lang3 3.17.0 StringUtils	SPLIT_JOIN	split	4	114	0	0	yes	DELEGATE
+commons-lang3 3.17.0 StringUtils	SPLIT_JOIN	splitByCharacterType	1	74	1	0	no	ABSORB
+commons-lang3 3.17.0 StringUtils	SPLIT_JOIN	splitByCharacterTypeCamelCase	1	27	0	0	no	ABSORB
+commons-lang3 3.17.0 StringUtils	SPLIT_JOIN	splitByWholeSeparator	2	60	0	0	no	ABSORB
+commons-lang3 3.17.0 StringUtils	SPLIT_JOIN	splitByWholeSeparatorPreserveAllTokens	2	141	0	0	no	ABSORB
+commons-lang3 3.17.0 StringUtils	SPLIT_JOIN	splitPreserveAllTokens	4	285	0	5	no	ABSORB
+commons-text WordUtils	BUILD	wrap	3	290	0	0	no	ABSORB
+commons-text WordUtils	CASE	capitalize	2	82	0	0	no	ABSORB
+commons-text WordUtils	CASE	capitalizeFully	2	58	0	0	no	ABSORB
+commons-text WordUtils	CASE	swapCase	1	48	0	0	no	ABSORB
+commons-text WordUtils	CASE	uncapitalize	2	108	0	0	no	ABSORB
+commons-text WordUtils	OTHER	initials	2	65	0	0	no	ABSORB
+commons-text WordUtils	OTHER	isDelimiter	2	56	0	0	no	ABSORB
+commons-text WordUtils	SEARCH	containsAllWords	1	59	0	0	no	ABSORB
+commons-text WordUtils	SLICE	abbreviate	1	57	0	0	no	ABSORB
+guava Ascii	COMPARE	equalsIgnoreCase	1	36	0	2	yes	DELEGATE
+guava Ascii	OTHER	isLowerCase	1	11	0	0	no	ABSORB
+guava Ascii	OTHER	isUpperCase	1	36	0	0	no	ABSORB
+guava Ascii	OTHER	toLowerCase	3	48	1	2	yes	DELEGATE
+guava Ascii	OTHER	toUpperCase	3	48	1	2	yes	DELEGATE
+guava Ascii	SLICE	truncate	1	51	0	0	no	ABSORB
+guava Strings	BUILD	repeat	1	33	0	0	yes	DELEGATE
+guava Strings	EMPTY_BLANK	isNullOrEmpty	1	22	0	0	no	ABSORB
+guava Strings	OTHER	commonPrefix	1	22	0	2	no	ABSORB
+guava Strings	OTHER	commonSuffix	1	61	0	4	no	ABSORB
+guava Strings	OTHER	emptyToNull	1	15	0	0	no	ABSORB
+guava Strings	OTHER	lenientFormat	1	59	0	0	no	ABSORB
+guava Strings	OTHER	nullToEmpty	1	11	0	0	no	ABSORB
+guava Strings	OTHER	padEnd	1	27	0	0	no	ABSORB
+guava Strings	OTHER	padStart	1	31	0	0	no	ABSORB

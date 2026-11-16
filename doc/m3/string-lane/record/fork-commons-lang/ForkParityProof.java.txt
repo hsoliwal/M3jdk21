@@ -1,0 +1,88 @@
+// SPDX-License-Identifier: Apache-2.0 OR EPL-2.0
+// Copyright (c) 2026 Synexia, Hitesh Soliwal (hsoliwal@gmail.com) and others
+
+import java.lang.reflect.Method;
+import java.net.URL;
+import java.net.URLClassLoader;
+import java.nio.file.Path;
+import java.util.List;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
+
+/**
+ * Parity of the fork's StringUtils with the released commons-lang3 jar for the methods that now
+ * call java.lang.String. usage: ForkParityProof <fork-classes-dir> <released.jar>. Both classes
+ * are loaded in their own loader; every input is passed as a String and as a StringBuilder, and
+ * null is included. Prints one row per method: name, cases, mismatches. Exit 1 on a mismatch.
+ */
+public final class ForkParityProof {
+    private static final char[] UNITS = {
+        'a', ' ', '\t', '\n', (char) 0x1C, (char) 0xA0, (char) 0x2028, (char) 0x3000, (char) 0xD83D,
+        (char) 0xDE42
+    };
+    private static final int MAX_LENGTH = 5;
+    private static final List<Character> WANTED =
+            List.of('a', ' ', (char) 0xA0, (char) 0xD83D, (char) 0xDE42, 'z', (char) 0x100);
+
+    private ForkParityProof() {}
+
+    public static void main(String[] args) throws Exception {
+        Class<?> fork = load(Path.of(args[0]).toUri().toURL());
+        Class<?> released = load(Path.of(args[1]).toUri().toURL());
+        List<CharSequence> inputs = inputs();
+        long blank = mismatches(fork, released, "isBlank", inputs, null);
+        long count = WANTED.stream().mapToLong(ch -> mismatches(fork, released, "countMatches", inputs, ch)).sum();
+        System.out.println("isBlank\t" + inputs.size() + "\t" + blank);
+        System.out.println("countMatches\t" + inputs.size() * WANTED.size() + "\t" + count);
+        System.out.println("RESULT\t" + (blank + count == 0 ? "PASS" : "FAIL"));
+        System.exit(blank + count == 0 ? 0 : 1);
+    }
+
+    private static Class<?> load(URL location) throws Exception {
+        ClassLoader loader = new URLClassLoader(new URL[] {location}, ClassLoader.getPlatformClassLoader());
+        return loader.loadClass("org.apache.commons.lang3.StringUtils");
+    }
+
+    /** Every text up to the bound as a String and as a StringBuilder, plus null. */
+    private static List<CharSequence> inputs() {
+        Stream<String> texts = IntStream.rangeClosed(0, MAX_LENGTH).boxed()
+                .flatMap(length -> IntStream.range(0, (int) Math.pow(UNITS.length, length))
+                        .mapToObj(code -> digits(code, length)));
+        Stream<CharSequence> both = texts.flatMap(text -> Stream.of(text, new StringBuilder(text)));
+        return Stream.concat(both, Stream.of((CharSequence) null)).toList();
+    }
+
+    private static String digits(int code, int length) {
+        char[] units = new char[length];
+        int[] rest = {code};
+        IntStream.range(0, length).forEach(index -> {
+            units[index] = UNITS[rest[0] % UNITS.length];
+            rest[0] /= UNITS.length;
+        });
+        return new String(units);
+    }
+
+    private static long mismatches(Class<?> fork, Class<?> released, String name,
+            List<CharSequence> inputs, Character ch) {
+        Method mine = method(fork, name, ch);
+        Method theirs = method(released, name, ch);
+        return inputs.stream().filter(input -> !call(mine, input, ch).equals(call(theirs, input, ch))).count();
+    }
+
+    private static Method method(Class<?> owner, String name, Character ch) {
+        try {
+            return ch == null ? owner.getMethod(name, CharSequence.class)
+                    : owner.getMethod(name, CharSequence.class, char.class);
+        } catch (NoSuchMethodException failure) {
+            throw new IllegalStateException(failure);
+        }
+    }
+
+    private static Object call(Method method, CharSequence input, Character ch) {
+        try {
+            return ch == null ? method.invoke(null, input) : method.invoke(null, input, ch);
+        } catch (ReflectiveOperationException failure) {
+            return String.valueOf(failure.getCause());
+        }
+    }
+}

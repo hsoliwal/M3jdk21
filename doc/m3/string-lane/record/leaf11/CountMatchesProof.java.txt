@@ -1,0 +1,114 @@
+// SPDX-License-Identifier: Apache-2.0 OR EPL-2.0
+// Copyright (c) 2026 Synexia, Hitesh Soliwal (hsoliwal@gmail.com) and others
+
+import java.lang.reflect.Method;
+import java.util.List;
+import java.util.Random;
+import java.util.function.Predicate;
+import java.util.stream.IntStream;
+import org.apache.commons.lang3.StringUtils;
+
+/**
+ * Proof of String.countMatches(int) on a stock JVM whose java.lang.String carries the method
+ * text of the head source (run_proof.sh inserts the copied text into the stock String.java and
+ * adds a null-returning m3() shim). Oracles: a naive count over the char array, the code point
+ * stream for supplementary characters, and the donor operation, commons-lang3
+ * StringUtils.countMatches, for char arguments. Prints one row per check: name, cases,
+ * mismatches. Exit 1 on a mismatch or a surviving discriminator.
+ */
+public final class CountMatchesProof {
+    private static final char HIGH = (char) 0xD83D;
+    private static final char LOW = (char) 0xDE42;
+    private static final int PAIR = Character.toCodePoint(HIGH, LOW);
+    private static final char[] UNITS = {'a', 'b', (char) 0xE9, (char) 0x4E2D, HIGH, LOW};
+    private static final List<Integer> WANTED =
+            List.of((int) 'a', (int) 'z', 0xE9, 0x4E2D, 0x100, (int) HIGH, (int) LOW, PAIR,
+                    0x10000, -1, Character.MAX_CODE_POINT + 1);
+    private static final int EXHAUSTIVE_LENGTH = 6;
+    private static final int RANDOM_CASES = 20_000;
+    private static final long SEED = 20261116L;
+    private static final Method HOPS = hops();
+    private static int failures;
+
+    private CountMatchesProof() {}
+
+    public static void main(String[] args) {
+        List<String> corpus = corpus();
+        report("public_vs_naive_or_code_points", corpus,
+                text -> WANTED.stream().allMatch(ch -> text.countMatches(ch) == oracle(text, ch)));
+        report("hop_kernel_vs_public", corpus,
+                text -> WANTED.stream().allMatch(ch -> hopCount(text, ch) == text.countMatches(ch)));
+        report("donor_StringUtils_countMatches_char", corpus,
+                text -> WANTED.stream().filter(Character::isBmpCodePoint).allMatch(ch ->
+                        StringUtils.countMatches(text, (char) (int) ch) == text.countMatches(ch)));
+        discriminator("paired_surrogate_unit_is_counted", (HIGH + "" + LOW).countMatches(HIGH) == 1);
+        discriminator("pair_counts_once", ("x" + HIGH + LOW + HIGH + LOW).countMatches(PAIR) == 2);
+        discriminator("lone_high_then_pair", ("" + HIGH + HIGH + LOW).countMatches(PAIR) == 1);
+        discriminator("wide_unit_never_in_latin1", "abc".countMatches(0x100) == 0);
+        discriminator("invalid_code_point", "abc".countMatches(-1) == 0);
+        System.out.println("RESULT\t" + (failures == 0 ? "PASS" : "FAIL") + "\tfailures=" + failures);
+        System.exit(failures == 0 ? 0 : 1);
+    }
+
+    private static List<String> corpus() {
+        Random random = new Random(SEED);
+        List<String> exhaustive = IntStream.rangeClosed(0, EXHAUSTIVE_LENGTH).boxed()
+                .flatMap(length -> IntStream.range(0, (int) Math.pow(UNITS.length, length))
+                        .mapToObj(code -> digits(code, length)))
+                .toList();
+        List<String> randoms = IntStream.range(0, RANDOM_CASES).mapToObj(index -> {
+            char[] units = new char[random.nextInt(600)];
+            int alphabet = random.nextBoolean() ? 3 : UNITS.length;
+            IntStream.range(0, units.length)
+                    .forEach(at -> units[at] = UNITS[random.nextInt(alphabet)]);
+            return new String(units);
+        }).toList();
+        return java.util.stream.Stream.concat(exhaustive.stream(), randoms.stream()).toList();
+    }
+
+    private static String digits(int code, int length) {
+        char[] units = new char[length];
+        int[] rest = {code};
+        IntStream.range(0, length).forEach(index -> {
+            units[index] = UNITS[rest[0] % UNITS.length];
+            rest[0] /= UNITS.length;
+        });
+        return new String(units);
+    }
+
+    private static int oracle(String text, int ch) {
+        if (!Character.isValidCodePoint(ch)) return 0;
+        return Character.isBmpCodePoint(ch)
+                ? (int) text.chars().filter(unit -> unit == ch).count()
+                : (int) text.codePoints().filter(point -> point == ch).count();
+    }
+
+    private static Method hops() {
+        try {
+            Method method = String.class.getDeclaredMethod("countByIndexOf", int.class);
+            method.setAccessible(true);
+            return method;
+        } catch (ReflectiveOperationException failure) {
+            throw new IllegalStateException(failure);
+        }
+    }
+
+    private static int hopCount(String text, int ch) {
+        try {
+            return (int) HOPS.invoke(text, ch);
+        } catch (ReflectiveOperationException failure) {
+            throw new IllegalStateException(failure);
+        }
+    }
+
+    private static void report(String name, List<String> corpus, Predicate<String> check) {
+        long mismatches = corpus.stream().filter(check.negate()).count();
+        failures += mismatches == 0 ? 0 : 1;
+        System.out.println(name + "\t" + corpus.size() + "\t" + mismatches);
+    }
+
+    private static void discriminator(String name, boolean detected) {
+        failures += detected ? 0 : 1;
+        System.out.println("discriminator:" + name + "\t1\t" + (detected ? "KILLED" : "SURVIVED"));
+    }
+}

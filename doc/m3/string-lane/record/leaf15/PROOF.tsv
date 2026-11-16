@@ -1,0 +1,11 @@
+method_text_verbatim_in_head	1
+public_vs_naive_all_pairs	21911761	0
+donor_StringUtils_indexOfDifference	21911761	0
+any_storage_kernel_counts_common_units	21911761	0
+long_texts_every_difference_position	8742	0
+discriminator:proper_prefix_gives_shorter_length	1	KILLED
+discriminator:equal_content_gives_minus_one	1	KILLED
+discriminator:second_byte_of_a_wide_unit	1	KILLED
+discriminator:difference_inside_a_pair_reports_the_high_surrogate	1	KILLED
+discriminator:mixed_coders	1	KILLED
+RESULT	PASS	failures=0

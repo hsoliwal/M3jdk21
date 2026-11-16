@@ -1,0 +1,42 @@
+// SPDX-License-Identifier: Apache-2.0 OR EPL-2.0
+// Copyright (c) 2026 Synexia, Hitesh Soliwal (hsoliwal@gmail.com) and others
+package java.lang;
+
+/**
+ * Proof stub, never shipped: the three members of java.lang.M3String that the linear search
+ * kernels of M3StringPositionPrecompute call, over a char array, with counters. It is compiled
+ * into java.lang of a stock JDK with --patch-module so the copied kernel text links against the
+ * stock StringLatin1 and StringUTF16 helpers.
+ */
+final class M3String {
+    private final char[] units;
+    private final byte coder;
+    long copiedUnits;
+    int windows;
+
+    M3String(char[] units, byte coder) {
+        this.units = units;
+        this.coder = coder;
+    }
+
+    byte coder() {
+        return coder;
+    }
+
+    int length() {
+        return units.length;
+    }
+
+    void getBytes(byte[] destination, int sourceBegin, int destinationBegin, byte destinationCoder,
+            int count) {
+        java.util.Objects.checkFromIndexSize(sourceBegin, count, units.length);
+        java.util.Objects.checkFromIndexSize(destinationBegin, count, destination.length >> destinationCoder);
+        windows++;
+        copiedUnits += count;
+        java.util.stream.IntStream.range(0, count).forEach(index -> {
+            char unit = units[sourceBegin + index];
+            if (destinationCoder == String.LATIN1) destination[destinationBegin + index] = (byte) unit;
+            else StringUTF16.putChar(destination, destinationBegin + index, unit);
+        });
+    }
+}

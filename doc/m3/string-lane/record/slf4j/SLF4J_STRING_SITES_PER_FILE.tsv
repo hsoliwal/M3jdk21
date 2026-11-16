@@ -1,0 +1,8 @@
+call_sites	file
+49	m3/vendor/third_party/slf4j-api-2.0.12/src/main/java/org/slf4j/helpers/MessageFormatter.java
+9	m3/vendor/third_party/slf4j-api-2.0.12/src/main/java/org/slf4j/spi/DefaultLoggingEventBuilder.java
+5	m3/vendor/third_party/slf4j-api-2.0.12/src/main/java/org/slf4j/helpers/BasicMarker.java
+5	m3/vendor/third_party/slf4j-api-2.0.12/src/main/java/org/slf4j/LoggerFactory.java
+3	m3/vendor/third_party/slf4j-api-2.0.12/src/main/java/org/slf4j/helpers/Reporter.java
+1	m3/vendor/third_party/slf4j-api-2.0.12/src/main/java/org/slf4j/helpers/Util.java
+1	m3/vendor/third_party/slf4j-api-2.0.12/src/main/java/org/slf4j/event/KeyValuePair.java

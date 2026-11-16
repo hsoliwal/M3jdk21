@@ -1,0 +1,50 @@
+    /**
+     * Returns the index at which this string and the specified string begin to differ.
+     * <p>
+     * The result is the smallest index {@code k} at which the two strings have different
+     * {@code char} values, with one exception that keeps a surrogate pair whole: when the
+     * {@code char} before {@code k} is a high surrogate and either string has a low surrogate
+     * at {@code k}, the result is {@code k - 1}, the index of the high surrogate. When no
+     * {@code char} differs within the shorter string, the result is the length of the shorter
+     * string, or {@code -1} when the two strings have the same length and so the same content.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API. It is the common
+     * entry point for the first-difference operation that utility libraries provide.
+     *
+     * @param   other   the string to compare with this string.
+     * @return  the index of the first difference, or {@code -1} if the strings are equal.
+     * @throws  NullPointerException if {@code other} is {@code null}.
+     * @see     #regionMatches(int, String, int, int)
+     * @since   21
+     */
+    public int indexOfDifference(String other) {
+        if (this == other) return -1;
+        int length = length();
+        int otherLength = other.length();
+        int limit = Math.min(length, otherLength);
+        boolean flatSameCoder = m3() == null && other.m3() == null && coder == other.coder;
+        int same = flatSameCoder ? commonFlatUnits(value, other.value, limit, coder)
+                : commonUnits(other, limit);
+        if (same == limit) return length == otherLength ? -1 : limit;
+        boolean insidePair = same > 0 && Character.isHighSurrogate(charAt(same - 1))
+                && (Character.isLowSurrogate(charAt(same))
+                        || Character.isLowSurrogate(other.charAt(same)));
+        return insidePair ? same - 1 : same;
+    }
+
+    /** Leading units two flat arrays of one coder share, up to {@code limit} units. */
+    private static int commonFlatUnits(byte[] left, byte[] right, int limit, byte coder) {
+        int at = ArraysSupport.mismatch(left, right, limit << coder);
+        return at < 0 ? limit : at >> coder;
+    }
+
+    /** Leading units this string and {@code other} share, up to {@code limit}: any storage. */
+    private int commonUnits(String other, int limit) {
+        int index = 0;
+        while (index < limit && charAt(index) == other.charAt(index)) {
+            index++;
+        }
+        return index;
+    }
+

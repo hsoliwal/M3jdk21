@@ -1,0 +1,138 @@
+diff --git a/base/src/java.base/share/classes/java/lang/M3StringFacts.java b/head/src/java.base/share/classes/java/lang/M3StringFacts.java
+index 1982345..2d03a36 100644
+--- a/base/src/java.base/share/classes/java/lang/M3StringFacts.java
++++ b/head/src/java.base/share/classes/java/lang/M3StringFacts.java
+@@ -76,6 +76,11 @@ final class M3StringFacts implements java.util.function.LongPredicate {
+     final int stripStart;
+     /** End-exclusive code-unit index whose code point is not Character.isWhitespace. */
+     final int stripEnd;
++    /**
++     * Number of line terminators as {@link String#lines()} defines them: LF, CR, or CR LF as
++     * one. Zero means the whole value is a single line.
++     */
++    final int lineTerminatorCount;
+ 
+     private M3StringFacts(
+             int utf16Length,
+@@ -102,7 +107,8 @@ final class M3StringFacts implements java.util.function.LongPredicate {
+             int stripStart,
+             int stripEnd,
+             int regexAllClasses,
+-            int regexAnyClasses) {
++            int regexAnyClasses,
++            int lineTerminatorCount) {
+         this.utf16Length = utf16Length;
+         this.utf8Length = utf8Length;
+         this.modifiedUtf8Length = modifiedUtf8Length;
+@@ -128,6 +134,7 @@ final class M3StringFacts implements java.util.function.LongPredicate {
+         this.stripEnd = stripEnd;
+         this.regexAllClasses = regexAllClasses;
+         this.regexAnyClasses = regexAnyClasses;
++        this.lineTerminatorCount = lineTerminatorCount;
+     }
+ 
+     /**
+@@ -184,6 +191,7 @@ final class M3StringFacts implements java.util.function.LongPredicate {
+         int trimStart = 0;
+         int trimEnd = 0;
+         boolean leadingTrim = true;
++        int lineTerminators = 0;
+ 
+         char[] window = new char[Math.min(length, SCAN_WINDOW)];
+         for (int base = 0; base < length; base += window.length) {
+@@ -205,6 +213,9 @@ final class M3StringFacts implements java.util.function.LongPredicate {
+                 int regexClasses = regexClasses(unit);
+                 regexAll &= regexClasses;
+                 regexAny |= regexClasses;
++                if ((regexClasses & REGEX_VERTICAL) != 0) {
++                    lineTerminators += lineTerminatorStep(previous1, unit);
++                }
+                 upperHash = 31 * upperHash + asciiUpper(unit);
+                 lowerHash = 31 * lowerHash + asciiLower(unit);
+                 titleHash = 31 * titleHash + (index == 0 ? asciiUpper(unit) : asciiLower(unit));
+@@ -303,7 +314,25 @@ final class M3StringFacts implements java.util.function.LongPredicate {
+                 stripStart,
+                 stripEnd,
+                 regexAll,
+-                regexAny);
++                regexAny,
++                lineTerminators);
++    }
++
++    /**
++     * One step of the line-terminator fold. LF directly after CR completes the CR LF terminator
++     * that the CR already counted.
++     */
++    static int lineTerminatorStep(char previous, char unit) {
++        if (unit == '\n') return previous == '\r' ? 0 : 1;
++        return unit == '\r' ? 1 : 0;
++    }
++
++    /**
++     * Seam rule of the line-terminator measure for two non-empty sides. CR ending the left side
++     * and LF starting the right side were counted once on each side and are one terminator.
++     */
++    static int lineTerminatorSeam(int leftCount, char leftLast, int rightCount, char rightFirst) {
++        return leftCount + rightCount - (leftLast == '\r' && rightFirst == '\n' ? 1 : 0);
+     }
+ 
+ 
+@@ -440,7 +469,12 @@ final class M3StringFacts implements java.util.function.LongPredicate {
+                 stripStart,
+                 stripEnd,
+                 left.regexAllClasses & right.regexAllClasses,
+-                left.regexAnyClasses | right.regexAnyClasses);
++                left.regexAnyClasses | right.regexAnyClasses,
++                lineTerminatorSeam(
++                        left.lineTerminatorCount,
++                        left.lastUtf16Unit,
++                        right.lineTerminatorCount,
++                        right.firstUtf16Unit));
+     }
+ 
+     /**
+diff --git a/base/src/java.base/share/classes/java/lang/String.java b/head/src/java.base/share/classes/java/lang/String.java
+index 43ad621..6fd6e3e 100644
+--- a/base/src/java.base/share/classes/java/lang/String.java
++++ b/head/src/java.base/share/classes/java/lang/String.java
+@@ -4464,11 +4464,16 @@ public final class String
+     private static final class M3LinesSpliterator
+             extends Spliterators.AbstractSpliterator<String> {
+         private final String source;
++        /** True when prepared facts prove the source holds no LF and no CR. */
++        private final boolean terminatorFree;
+         private int index;
+ 
+         M3LinesSpliterator(String source) {
+             super(source.length(), Spliterator.ORDERED | Spliterator.IMMUTABLE | Spliterator.NONNULL);
+             this.source = source;
++            M3String storage = source.m3();
++            M3StringFacts facts = storage == null ? null : storage.factsIfPrepared();
++            this.terminatorFree = facts != null && facts.lineTerminatorCount == 0;
+         }
+ 
+         @Override
+@@ -4478,7 +4483,7 @@ public final class String
+             if (index >= length) return false;
+ 
+             int start = index;
+-            int end = start;
++            int end = terminatorFree ? length : start;
+             while (end < length) {
+                 char unit = source.charAt(end);
+                 if (unit == '\n' || unit == '\r') break;
+diff --git a/base/test/jdk/java/lang/String/M3StringFactsCompositionTest.java b/head/test/jdk/java/lang/String/M3StringFactsCompositionTest.java
+index 31df815..5ccb987 100644
+--- a/base/test/jdk/java/lang/String/M3StringFactsCompositionTest.java
++++ b/head/test/jdk/java/lang/String/M3StringFactsCompositionTest.java
+@@ -68,6 +68,10 @@ public class M3StringFactsCompositionTest {
+         assertComposedFacts(fresh("\ud83d"), fresh("\ude42"), "split supplementary");
+         assertComposedFacts(fresh(" \u2003"), fresh("alpha\u2002 "), "whitespace seam");
+         assertComposedFacts(fresh("\u0000\u00ff"), fresh("\u0100\ud83d\ude42"), "width seam");
++        assertComposedFacts(fresh("alpha\r"), fresh("\nomega"), "CR LF seam");
++        assertComposedFacts(fresh("alpha\n"), fresh("\romega"), "LF CR seam");
++        assertComposedFacts(fresh("\r\r"), fresh("\n\n"), "terminator run seam");
++        assertComposedFacts(fresh("one\r\ntwo\n"), fresh("three\rfour"), "mixed terminators");
+ 
+         String tuple = fresh(" \ud83d").concat(fresh("\ude42alpha\u2003 "));
+         for (int begin = 0; begin <= tuple.length(); begin++) {

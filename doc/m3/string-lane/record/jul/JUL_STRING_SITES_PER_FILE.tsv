@@ -1,0 +1,10 @@
+call_sites	file
+70	src/java.logging/share/classes/java/util/logging/XMLFormatter.java
+30	src/java.logging/share/classes/sun/net/www/protocol/http/logging/HttpLogFormatter.java
+26	src/java.logging/share/classes/java/util/logging/LogManager.java
+9	src/java.logging/share/classes/java/util/logging/FileHandler.java
+4	src/java.logging/share/classes/java/util/logging/Formatter.java
+3	src/java.logging/share/classes/java/util/logging/Level.java
+2	src/java.logging/share/classes/java/util/logging/Logger.java
+1	src/java.logging/share/classes/java/util/logging/SimpleFormatter.java
+1	src/java.logging/share/classes/java/util/logging/LogRecord.java

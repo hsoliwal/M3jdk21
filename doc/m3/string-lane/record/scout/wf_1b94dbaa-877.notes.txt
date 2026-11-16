@@ -1,0 +1,175 @@
+SCOUT NOTES
+Scope and limits: read-only analysis; nothing was compiled or run. String.java line numbers are from the CURRENT file (leaf1/head); M3* owner line numbers are from master-java-lang. FLAT-01 to FLAT-04 are whole-value flattens (JNI shadow or builder flatten). FLAT-05 is a whole-needle copy plus cost defects in the guard branch of sites 3015/3110. FLAT-06 is NOT a flatten; it is the per-unit loop that replaced one. No candidate adds a measure, so I4 is not engaged; none adds a public or protected member (I7).
+
+Verdict for the 20 unresolved rows (reachable with an M3 owner?):
+- 1005 getBytesUTF8NoRepl s.value(): NO. Else arm of 'storage != null ? storage.encodeUtf8NoRepl() : ...'; the M3 arm encodes from the composite (M3String.java 1262-1303).
+- 1033 getBytesNoRepl1 s.value(): NO. Early 'return storage.encodeNoRepl(cs)' at 1030-1032.
+- 2062 nonSyncContentEquals value(): NO for the receiver (block 2054-2061 returns). But 2063 sb.getValue() flattens a composite builder: FLAT-04.
+- 2122 contentEquals(CharSequence) value(): NO. Block 2114-2121 returns (per-unit charAt loop).
+- 2240 compareTo anotherString.value(): NO. Guard 2235 is 'leftM3 != null || rightM3 != null' and returns through the bridge (compareFlatPrefix / comparePrefix, no flatten).
+- 2297, 2298 CASE_INSENSITIVE_ORDER.compare: NO. Guard 2275 is an OR and the block returns at 2295.
+- 2403 regionMatches other.value(): NO. Guard 2385 is an OR and returns at 2400.
+- 2535, 2536 regionMatches(ignoreCase): NO. The table picked the inner AND at 2486; the outer guard at 2485 is an OR and the block returns at 2533.
+- 2575 startsWith prefix.value(): YES (flat receiver, M3 prefix): FLAT-01.
+- 3015 static indexOf tgtStr.value(): NO. 'if (target != null) return M3StringSearchPrecompute.indexOf(...)' at 3009-3013.
+- 3110 static lastIndexOf tgtStr.value(): NO. Same guard at 3104-3108.
+- 3498, 3499, 3501, 3502 replace trgtStr/replStr.value(): YES when m3Replace returns null (refused admission): FLAT-02. The rows 3497 and 3500 (receiver, listed FLAT_RETURN) are reachable for the same reason; the table is wrong there.
+- 4456 lines: NO. Returns the M3LinesSpliterator at 4453-4455.
+- 4566, 4574 indexOfNonWhitespace / lastIndexOfNonWhitespace: NO. 'if (storage != null) return storage.facts().stripStart/stripEnd'.
+I also re-read every FLAT_RETURN and FLAT_TERNARY row (getBytes x3, indexOf(int) x2, lastIndexOf(int), indexOf(String) x2, lastIndexOf(String), substring, replace(char,char), toLowerCase, toUpperCase, trim, strip, stripLeading, stripTrailing, chars, codePoints, toCharArray, repeat): each guard block returns on every path, so those value() calls run only on flat receivers. The only value() callers outside String.java (AbstractStringBuilder.appendChars 1978, 1995, 2012; M3String 259, 396, 421) sit in 'storage == null' arms.
+
+Cross-cutting finding used by FLAT-01, FLAT-02 and FLAT-05: for an M3-backed String, coder() is the owner's coder, not a property of the visible range. Any stock shortcut of the form 'Latin-1 receiver and UTF16 argument means no match' is unsafe once an M3 operand reaches it. Derived from String.java 5587-5590, M3String.java 649-651 and M3StringTuple.java 25; not executed.
+
+Unverified: whether VM-created Strings (literals, class names) are flat in a running M3JDK (decides how often the flat-receiver cases occur); the byte layout nativeByteShadow returns; all timings.
+
+Adjacent per-unit loops seen while resolving the sites (no flatten, not listed as candidates): M3LinesSpliterator.tryAdvance 4487-4491 (per-unit charAt unless facts prove no terminator; M3String.indexOf(char, from, end) with the block position precompute or a CodeUnitCursor would serve); contentEquals(CharSequence) 2115-2119; regionMatches(ignoreCase) 2506-2532 and CASE_INSENSITIVE_ORDER 2280-2294 (up to four charAt / codePointAt dispatches per unit); M3String.compareFlatPrefix 1107-1118, which carries mixed equals and compareTo, the most frequent mixed call of all; M3String.encodeSingleByte 1216-1229 and encodeUtf8NoRepl 1276-1298 use charAt where encodeUtf8 1175-1200 uses a cursor.
+
+SCOUT NOTES
+Read-only review; nothing was compiled, run or timed. String.java and M3StringFacts.java were read from leaf1/head, the other owners from master-java-lang. All gains are estimates from reading the code.
+
+New measures proposed (two): asciiSet (two long words, OR-monoid, readers in candidate facts-05) and lineBreakUnitCount (additive, reader M3String.indent in candidate facts-06).
+
+Prepared-population caveat, which decides how much the factsIfPrepared gates are worth: facts are prepared today only by getBytes/encode (M3String.java 1165, 1208, 1243, 1254, 1263, 1337), strip/trim/isBlank, hashCodeValue on ranges (and so every concat with a slice child), AbstractStringBuilder.inflateIfNeededFor, the per-line facts in indent/stripIndent, codePointCount on values over 32,768 units, asciiCase and M3StringRegexRowPrecompute. M3StringPool never prepares them. Candidates 01 to 03 remove three of these producers, so the gates in search, startsWith, equals, lines() and candidates 04 and 05 will fire less often unless facts are prepared somewhere on purpose. One place to consider: atom admission, where M3StringAtom.local (M3StringAtom.java 52-85) already walks the content for javaHash and the native copy.
+
+Verdict on the other items the task asked to check:
+- Already reading a measure, no change needed: String.lines() (lineTerminatorCount), offsetByCodePoints (codePointCount), UTF-8 getBytes sizing (utf8Length through facts(), acceptable because it encodes every unit anyway), equalsIgnoreCase (three ASCII hashes when both sides are prepared and ASCII), matches for one-class patterns (regexAllClasses, regexAnyClasses, codePointCount in M3StringRegexDp 243-257, prepared facts only), indexOf(char) and replace(char, char) (bitSignal64). chars().count() is already sized. isEmpty is O(1). repeat needs no measure (tuple facts compose in O(log n)).
+- Measures with no reader outside M3StringFacts in java.lang: prefix4, suffix4, firstUtf16Unit, lastUtf16Unit (grep over master-java-lang and the current String.java). Two readers worth a later leaf: (a) startsWith/endsWith with a prefix or suffix of at most 4 units is answered exactly by prefix4/suffix4 when facts are prepared, but M3StringPrecomputeBridge.startsWith (67-97) uses them only as a reject and then compares by charAt; (b) compareTo could decide from prefix4 of both sides when the first four units differ, before allocating cursors (bridge 44-65).
+- asciiCase (M3String.java 1728-1751) has no caller in java.lang; asciiTitleHash is read only as a third reject next to the lower and upper hashes (String.java 2493-2495).
+- split on a single char goes through indexOf(char) and its gate; lineTerminatorCount could size the result for '\n' only when the value has no CR. Low value.
+- codePoints().count() scans because the M3 code-point spliterator is not sized; see the optional part of candidate facts-04.
+
+Per-unit charAt loops on composites seen while reading, outside this angle (no measure answers them; a run cursor or bulk windows would): String.regionMatches case-sensitive 2397-2399, nonSyncContentEquals 2054-2060, contentEquals(CharSequence) 2114-2120, CaseInsensitiveComparator 2275-2296, M3String.encodeSingleByte 1216-1229, encodeNoRepl 1249-1251, encodeUtf8NoRepl 1276-1298, and the flat-needle search in M3StringSearchPrecompute.indexOf 287-288, which tests the first needle unit one source unit at a time and does not hop through M3StringPositionPrecompute.
+
+Handover leaf 3 says lineTerminatorCount can replace the indent pre-pass. That is only half true: it gives the line count (with lastUtf16Unit) but not the content length, which also needs the number of CR LF pairs; hence lineBreakUnitCount in candidate facts-06.
+
+SCOUT NOTES
+Read-only review. Nothing was built, compiled or run, and no timing was measured; every gain is derived from the code read. String.java and M3StringFacts.java were read from leaf1/head, the other java.lang owners from master-java-lang, and M3TQ from owner/src. M3RegexDpPlan, M3RunTable, M3Token*, M3CI, M3RX7*, java.util.regex, M3FrozenLexiconIndex, M3StringTokenRegex and M3StringRegexRowPrecompute were not read in full.
+
+Already present, so not proposed:
+- KMP, adaptive BMH for M3 needles of 8+ units, the trigram gates and the flat-needle gate (M3StringSearchPrecompute).
+- Two-Way search with constant scratch (M3StringBuilderLane 181-265).
+- Bulk-window facts scan (M3StringFacts.scan).
+- Galloping merge in M3TQ.Facts.containsAll.
+- Rank/select by binary search (M3StringCodePointPrecompute).
+- Balanced join, O(log n) repeat doubling and the binary-counter fold (M3String.join, joinDesignated, joinCharRanges).
+- Streaming KMP and prefix sums in M3StringProjection.
+
+Further findings that did not fit in six, with lines read:
+1. Long needles fall to a naive O(n x m) loop with per-unit charAt and no cursor when prepare() returns null (needle over 8192 units, or OOM): M3String.java 1514-1523 and 1540-1548; cap at M3StringSearchPrecompute.java 57-59. Flat needles over 8192 units never reach KMP (286, 323, 371-373). The Two-Way kernel in M3StringBuilderLane could be lifted to a shared reader (CodeUnitCursor already implements IntUnaryOperator) for O(n + m) with O(1) space.
+2. M3StringRegexDp.rolling (603-630) is the LeetCode 10 row DP, O(n x atoms), used above MAX_BIT_ATOMS = 32 (line 42). The bit-parallel close() at 595-600 looks valid up to 62 atoms in a long. Unverified: why 32 was chosen and what the native advance0 kernel assumes.
+3. Per-unit charAt scans over composites for a one- or two-unit delimiter: M3String.indent 455-526, stripIndent 528-609, translateEscapes 1551-1609; String.M3LinesSpliterator 4479-4504; encodeSingleByte 1216-1229; String.contentEquals 2054-2060 and 2114-2120; CaseInsensitiveComparator 2275-2296; regionMatches(ignoreCase) 2503-2533. These overlap handover leaf 3 (readers of lineTerminatorCount). The position kernel fixed by S1, or bulk windows, would serve them.
+4. The builder's Two-Way and reverse do a binary search over pieces plus String.charAt per unit: M3StringBuilderLane 215-218 with 122-143, and 274-301. A piece cursor makes them linear.
+5. M3String.replaceMatches (1857-1874) restarts the search per occurrence and recomputes the gates each time (M3StringFacts.mayContain(String) is O(m) per call; the Plan trigram containsAll likewise). One streaming pass that carries the KMP state would avoid this.
+6. M3StringAffixPrecompute.sort (176-208) compares rows by per-unit charAt; forward order could use comparePrefix.
+7. M3StringPositionPrecompute.exactBlock (200-217) uses linear insertion with array shifts, bounded at 64 units, and ExactBlock.mask (304-319) does one source.charAt per binary-search probe. Small.
+8. M3String.asciiCase (1728-1751) scans by charAt and has no caller in the folders searched. If wired, regexAnyClasses answers the no-change case in O(1).
+
+Dependencies: S2 gains more once S6 lands. Using the position kernel to find first-unit candidates in the flat-needle lane (an alternative for S4) needs S1 first.
+
+SCOUT NOTES
+Sources and dates. Compile-time port and javac owners were read from the 2026-11-14 checkout K:/m3-work/wt-fix3, two days older than master. By file name the master listing (M3JDK_MASTER_JAVA.txt) still has the same 35 port files and the same javac files, but contents were not compared. All counts and timings quoted from the port come from its 2026-10-13 run on stock Oracle JDK 21.0.9 (m3/docs/m3-compiletime-precompute.md and m3/ports/compiletime/evidence/*.tsv), not from M3JDK. Nothing was compiled or run; the only computation was awk over the evidence key table. Candidates are in leaf order, smallest first; the largest runtime gain is in CT2 and CT3, not CT1.
+
+(1) What the harvest writes, where, and who loads it.
+- Regex: M3ConstantRegexHarvester (a standalone main, ASM over class files, needs --add-opens java.base/java.util.regex) writes constant-regex.m3ctrx into --out (default target/constant-regex) with CONSTANT_REGEX_IMAGE_KEYS.tsv, INPUT_SAMPLE.tsv, INPUT_SET_MANIFEST.tsv, HARVEST_RECEIPT.tsv. Format M3CTRX01, little-endian int32: header[32] (magic 0x4d334354 'M3CT', 0x52583031 'RX01', version 1, 32, entries, slots, programInts, atoms, unitInts, trigrams, then Pattern.class SHA-256 at ints 11-18 and input-set SHA-256 at 19-26), table[slots] (entry ordinal + 1, linear probing on h1), entries[n][8] (h1 lo/hi, h2 lo/hi, UTF-16 length, flags, kind bits, program offset), postfix program (ATOM, AND(n), OR(n)), atoms[m][4] (unit offset, unit length, trigram offset, trigram count), units (derived literals only, two units per int), trigrams (M3TQ keys c0<<32|c1<<16|c2, sorted unique per atom), trailer SHA-256.
+- Facts per constant regex: kind (PURE_LITERAL, REQUIRED, UNCONSTRAINED, REFUSED, INVALID) in the low 4 bits, matcher-state admission bit 0x10, the literal requirement formula, the literal atoms, their trigram keys. The key is M3ContentKey: FNV-1a 64 and a second 64-bit hash over UTF-16 units, plus length and flags; the flags are the compile argument, not Pattern.flags(). The key spelling is not stored.
+- Not in the image: literal prefix or suffix position, minimum or maximum length, anchors (only the single admission bit), class masks, the BooleanPlan masks, BnM tables, any NFA or DFA rows.
+- Strings: M3GvasLiteralHarvester writes literals.m3gvas (M3GVAS01): per distinct ldc literal a row of payload offset, UTF-16 length, Java hash, 31^length, code point count, ASCII/Latin-1/surrogate flags, first and last unit, plus one UTF-16LE payload. That is a subset of M3StringFacts (no unit, bigram or trigram signals, no class masks, no UTF-8 lengths, no trim/strip edges, no line terminator count). Its reader is jdk.m3.text.M3GvasLiteralImage under m3/core, outside java.base.
+- Loader: only M3ConstantRegexGate.configuredImage() in the port, through -Dm3.precompute.constantRegex.image. Grep over java.lang (master blobs and the leaf-1 head), java.util.regex and jdk.internal.* found no reader of M3CTRX01 or M3GVAS01 and no reference to the property. The javac side (M3ASTPC, M3PrimitiveImageCompiler, M3CompilerPatternHints, com.sun.source.util.M3AST) has no string or regex projection; M3PrimitiveImageCompiler explicitly drops String constants. The handover names com.sun.tools.javac.m3.M3AST; in this checkout and in the master listing M3AST is com.sun.source.util.M3AST and the javac m3 package holds three files.
+
+(2) What Pattern.compile recomputes that the image holds.
+- Holds: the admission decision of M3PatternQuery.derive (Start or BnM root, no requireEnd node, all node classes known: the port's class list and the runtime's list are the same by reading), the requirement walk, and the per-literal trigram keys (the same contract as M3TQ.uniqueTrigrams). For LITERAL patterns M3TQ.fromExact(pattern) is likewise covered by the atom trigram lane.
+- The image holds more than the runtime derives: literal atoms shorter than 3 units and the atom text itself (the runtime keeps trigram sets only), and requirements for keys that are not matcher-state admitted (usable only where the Matcher never escapes).
+- The image does not hold what else compile computes: the node tree, BnM, M3TQ.ScanPlan DNF, and the BooleanPlan with its ASCII masks. The parse can therefore not be skipped by this image.
+- Separate from Pattern, the runtime classifies regex text by hand in five places (String.isConservativeLiteralRegex, M3String.isLiteralRegex, the split fast path, M3StringRegexDp.prepare/commonClass, M3StringRegexRowPrecompute.prepare). The image's PURE_LITERAL kind covers escaped literals those miss: 17 of the 54 PURE_LITERAL keys (24 of 102 sites) contain escapes, for example the pattern backslash-dot. Routing them to the literal lanes needs a trusted positive entry or the tree, so it belongs with CT4, not CT1.
+
+(3) Smallest correct consumer: CT1. Lookup in the private Pattern constructor with the raw flags argument, consumed at the derive site (Pattern.java 1995), negative answers only, every failure mode falling through to today's code. Proof is a with/without differential in which results are identical for any image content, including deliberately wrong images.
+
+Findings that cut across the candidates.
+- A positive use of the image as it stands is not exact: identity is two non-cryptographic hashes, and staleness rests on a SHA-256 of Pattern.class that the reader computes with getResourceAsStream and MessageDigest. Inside java.base that is a bootstrap and re-entrancy hazard, and any edit to Pattern.java invalidates all images. Hence the split in the candidates: fail-safe uses first (CT1 negative seed, CT2/CT3 admission and index for Patterns compiled by this VM), positive facts derived by the runtime itself (CT4), image encoded by the target runtime with exact keys (CT5).
+- The port's reader decodes into Optional, record, String[] and long[][] on every lookup; an in-JDK reader must return an int ordinal and read lanes in place.
+- Most of the benefit of CT2 and CT3 does not depend on the image; a small direct-mapped table gives it too. The image contributes admission of compile-time constants only and a collision-free dense index.
+- Observed but outside this angle: M3PatternQuery.BooleanPlan.matches and M3StringRegexRowPrecompute.contains/equalRange loop charAt over the input, which on a composite is one owner dispatch per unit.
+
+Not established from the sources.
+- Whether any build, jlink or CDS step produces an image for M3JDK (none found by name), and whether the port's twin walk agrees with M3PatternQuery on the M3JDK Pattern (never run here).
+- The in-JDK cost of M3PatternQuery.derive and deriveBoolean (only the port's reflective walk was measured).
+- JavaLangAccess.stringM3TrigramFacts and System.java were not among the sources, so what Matcher receives for an M3 String is inferred from M3StringPrecomputeBridge.trigramFactsIfPrepared.
+- Whether ldc pattern Strings are M3-backed or flat at run time; which boot paths call Pattern.compile; whether jdk.internal.mindex is exported to other modules.
+- Callers of M3RegExpCompiler and M3RunTable outside java.lang, java.util.regex and jdk.internal main sources (tests exist by name).
+- I7 placement: a package-private reader in java.util.regex (CT1, CT2) follows the M3PatternQuery precedent but I7 as worded names java.lang and jdk.internal only; sharing one reader with java.lang (CT3 variant 2, CT4 for replaceAll) needs the owner's admission of either a public final class in the non-exported jdk.internal.mindex or one JavaLangAccess method.
+
+SKEPTIC MISSED
+None of the six is refuted outright; sub-claims that failed are in each verdict.
+
+Overlap with staged work: I:/m3-scratch/string-converge-20261116/leaf2 (PR_BODY.md, base/ and head/, files dated today) already holds the facts-04 gates (1) and (2) and the facts-02 coder gate as leaves 2 and 3. Do not schedule them again.
+
+Systemic point: candidates 01, 02 and 03 each remove a producer of prepared facts. Every factsIfPrepared reader then fires less often: the search gates, the regex trigram gate (bridge 25-29), lines(), candidate 05 and the staged codePointCount gate. A decision on where facts are prepared on purpose has to accompany them.
+
+Candidates of the same angle that the scout did not list:
+
+1. ISO-8859-1 encode on a LATIN1-coded owner prepares full facts for a flag the coder answers. M3String.encodeSingleByte (M3String.java 1207-1213) and encodeNoRepl (1242-1248) call facts() and then do a bulk copy. With coder() == LATIN1 the copy can run directly, as stock does. Same gate as facts-02, reached from getBytes (String.java 1953-1956). US_ASCII still needs the ascii flag.
+
+2. String.equals with two M3 sides never compares the two wrappers' cached hash fields. The bridge reads String.hash only when one side is flat (M3StringPrecomputeBridge.java 31-40), and M3String.contentEquals reads only owner hashes or prepared facts (M3String.java 1047-1056). When both String.hash values are already computed and differ, the answer is false in O(1) with no facts. This also offsets the side effect lost by facts-01.
+
+3. codePointCount on values over 32,768 units (String.java 1755) prepares full facts of an arbitrary slice for one int and rotates the range cache. A count-only pass over bulk windows, or a descent that takes codePointCount from children with prepared facts and applies the surrogate seam rule (M3StringFacts.java 385-387, 450), answers it. Same shape as facts-01.
+
+4. translateEscapes (M3String.java 1551-1558) finds the backslash by per-unit charAt. M3String.indexOf('\\', from, end) (1437-1441) already has the prepared-signal reject and the bulk-window search (M3StringPositionPrecompute.java 235-249). The scout tied this reader to the new asciiSet measure; it needs no new measure.
+
+5. prefix4 and suffix4 answer short affixes exactly, not only as a reject. For a prefix of at most four units at offset 0, or a suffix of at most four units at the end, a true prefixMayMatch or suffixMayMatch is equality, yet the code continues into a charAt compare (M3StringPrecomputeBridge.java 73-96, M3String.java 1408-1434). The scout mentions this in its notes but did not rank it; it is a cleaner reader than either proposed new measure. It needs prepared facts.
+
+6. M3LinesSpliterator uses lineTerminatorCount only as a zero test (String.java 4475-4476) and scans by per-unit charAt (4486-4491). Used as a countdown, the prepared count removes the scan of the text after the last terminator; LF and CR hops through M3String.indexOf replace the charAt loop. Handover leaf 3 asks for more readers of this measure.
+
+7. AbstractStringBuilder.appendChars(String, int, int): when range facts are not prepared (AbstractStringBuilder.java 1964-1971), a UTF-16 coded M3 String falls to a per-unit s.charAt loop (1984-1988). A bulk window with the canEncode test does the same work without per-unit owner dispatch. This is a scan fix, not a measure reader.
+
+SKEPTIC MISSED
+Same angle, read in the source, best first. Paths are under I:/m3-scratch/string-converge-20261116/master-java-lang/ unless marked head (leaf1/head/src/java.base/share/classes/java/lang/). Nothing was measured.
+
+1. Atom bulk copies are per-byte Unsafe loops; no copyMemory or copySwapMemory is used anywhere in the M3String* owners (grep: zero hits). M3StringAtom.java 66-76 (local(): putByte per byte when an atom is created), 438-452 (getChars), 472-478 (getBytes, width 1 to LATIN1). Every 'cheap bulk window' sits on these: M3StringFacts.scan (head M3StringFacts.java 196-199), the linearIndexOf window, materialize, builder copyOut. Fix: Unsafe.copyMemory for width 1 to byte[], copySwapMemory (element size 2) for big-endian width-2 atoms on a little-endian host; keep the loop for very short counts. Same results, package-private, likely the widest constant-factor gain in the lane.
+
+2. A one-unit flat needle bypasses the position kernel. M3StringPrecomputeBridge.java 112-121 and 124-140 send it to the per-unit loop (M3StringSearchPrecompute.java 287-294, 324-332), while an M3 needle of one unit is routed to indexOf(char) (M3String.java 1505, 1531) and String.indexOf(String,int,int) has the shortcut (head String.java 2974-2977). Affects s.indexOf("x"), contains("x"), lastIndexOf("x"), and replace("x","yy") through m3Replace -> replaceFlatTarget (head String.java 3547-3555; M3String.java 1871-1872). Fix: one dispatch line to source.indexOf(char, from, end) / lastIndexOf(char, start). Needs S1 first, or the repeated-call window cost moves here.
+
+3. Dense replace fragments the result. M3String.replace(char,char) 1753-1772 and replaceMatches 1850-1884 emit 2k+1 pieces for k hits and joinValues (424-436) runs about 2k internTuple calls (M3StringPool.java 643-693: boxed route key, 8 joinedCharAt reads, synchronized bucket, a WeakReference per tuple); each slice's hash forces a full facts scan (M3String.hashCodeValue 690-692 -> M3StringOwner.rangeFacts 103-130). Two pointers plus a pending chunk: when the gap between hits is short, copy units into a bounded chunk (the pattern exists at M3StringBuilderLane.java 362-386 with COPY_CHUNK_UNITS = 1024) and emit one atom per chunk. I2 holds (bounded windows, no whole flatten).
+
+4. Slice facts are scanned twice. M3StringOwner keeps four range-fact slots (27-30, 103-130). internTuple and the tuple constructor take the javaHash of each child (M3StringPool.java 646-647; M3StringTuple.java 26), which for a slice computes full range facts; M3StringTuple.computeFacts (72-74) asks for them again later, after the four slots have been overwritten by the other slices. Fix: when both child facts are in hand at interning, compose and store the tuple facts then (O(1)), or compute a hash-only fold for slice hashes.
+
+5. Needles over 8,192 units: M3String.java 1514-1523 and 1540-1548 are a naive O(n x m) loop with per-unit charAt and no cursor when prepare() returns null (M3StringSearchPrecompute.java 57-59, 63-67); flat needles over 8,192 units never reach KMP (286, 323, 371-373). The Two-Way kernel with constant scratch exists at M3StringBuilderLane.java 181-265 and can be lifted to a shared reader (CodeUnitCursor implements IntUnaryOperator, M3String.java 862-876). The scout found this and left it out of the six; it ranks above S6.
+
+6. Flat multi-unit needle, alternative to S4: find first-unit candidates through M3String.indexOf(char, from, end) (position blocks or bulk windows), or run the stock StringLatin1/StringUTF16.indexOf over bulk windows with an overlap of m-1 units; the flat needle already has its bytes. M3StringSearchPrecompute.java 279-312. No table, no per-call fixed cost once S1 lands.
+
+7. The search plan is built eagerly: prepareAllocated (M3StringSearchPrecompute.java 82-115) builds the prefix table, the reverse prefix table, the skip table and trigram facts for every new needle; a forward search of an 8+ unit needle reads only the skip table unless the hand-off at 483-485 fires, and only lastIndexOf reads the reverse table. Build each table on first use (publish safely: the fields are final today).
+
+8. Per-unit String.charAt over an M3 value where a cursor or a kernel exists: head String.java nonSyncContentEquals 2054-2060 and contentEquals(CharSequence) 2114-2120; M3String.translateEscapes 1551-1609 (jump between backslashes with indexOf('\\', ...) and return this in O(1) when prepared facts say the unit is absent).
+
+9. Small: ExactBlock.mask (M3StringPositionPrecompute.java 304-319) calls source.charAt once per binary-search probe, an O(depth) descent each on a tuple, up to 6 probes per block per call.
+
+SKEPTIC MISSED
+Nothing was executed; all items are by reading. Paths: M3 owners in I:/m3-scratch/string-converge-20261116/master-java-lang/, String.java in I:/m3-scratch/string-converge-20261116/leaf1/head/src/java.base/share/classes/java/lang/, Matcher/Pattern in I:/m3-scratch/string-converge-20261116/owner/src/src/java.base/share/classes/java/util/regex/.
+
+The scout's 'not reachable' verdicts for rows 1005, 1033, 2062, 2122, 2240, 2297-2298, 2403, 2535-2536, 3015, 3110, 4456, 4566 and 4574 hold; I re-read each guard. ensureM3 has one caller (m3AdmitNative, String.java 5544-5551), so no lazy attach turns a flat-path value() into a flatten.
+
+1. Mixed equals and compareTo, the hottest mixed call. M3String.compareFlatPrefix (M3String.java 1107-1118) is a per-unit loop even for a single atom owner. It is reached from String.equals (String.java 2004-2009, bridge 31-42, M3String.contentEquals 1057-1062) and compareTo (2235-2237, bridge 51-56): map-key equality between a literal and a computed String lands here once the hash gate passes. The scout listed it only as an adjacent note. It should be the first consumer of the flat-versus-atom vectorizedMismatch kernel and rank above FLAT-01 step 3.
+
+2. M3/M3 startsWith and endsWith. M3String.startsWith(M3String,int) (M3String.java 1402-1435) compares per unit even atom against atom (1431-1433), while slice(offset, offset+n).comparePrefix(prefix, n) == 0 (1069-1091) is run-wise and vectorized. No new member. The M3-source, flat-prefix loop in M3StringPrecomputeBridge.java 86-96 is the same shape.
+
+3. Read-only builder operations that flatten a composite builder (I8). AbstractStringBuilder.java: substring(int), substring(int,int) and subSequence (1172-1228), getChars (579-590), codePointCount (514-521), offsetByCodePoints (542-549), compareTo (177-203: flattens this and takes a detached whole copy of the peer); StringBuffer.substring(int) (StringBuffer.java 506-509); chars() and codePoints() copy the whole builder through lane.detached (AbstractStringBuilder.java 1768-1822, M3StringBuilderLane.java 446-451). Regex over a builder reaches substring through Matcher.getSubSequence (Matcher.java 1913-1914; group at 714 and 748) and Pattern.split (Pattern.java 1421-1442). Composite paths exist: a ranged form of lane.copyOut (417-430), lane.compose(...).slice(start, end), lane.charAt. More common in real programs than FLAT-03 and FLAT-04.
+
+4. Non-canonical coder reaching result construction (same root cause as FLAT-01's wrong false). String.join takes icoder |= el.coder() (String.java 3982-3996) and uses it in the flat fallback (4007-4026) when joinDesignated returns null; StringConcatHelper.mix does the same (StringConcatHelper.java 122-127). With a Latin-1-content range of a UTF16 owner the flat result is built as UTF16; String(byte[], byte) keeps that coder when maybeAdmit is refused (String.java 5470-5475); flat/flat equals compares coders (2010-2011), so the result would not equal the canonical flat String with the same text. Needs a pool refusal; lower confidence.
+
+5. AbstractStringBuilder.appendChars(String,int,int): a UTF16 builder with an M3 source whose owner coder is LATIN1 goes to StringUTF16.putCharsSB, one s.charAt per unit (AbstractStringBuilder.java 2006-2007), although the bulk storage.getBytes(..., UTF16, ...) arm is the next branch (2008-2009); testing storage != null first fixes it. Lines 1984-1985 are the same per-unit shape for a Latin-1 builder when range facts are not prepared. Reached from append(CharSequence, int, int) (795-816).
+
+SKEPTIC MISSED
+Source dates: the compile-time port, the javac owners and the evidence TSVs were read from the 2026-11-14 checkout (K:/m3-work/wt-fix3), two days older than master. All harvest counts come from its 2026-10-13 run on Oracle JDK 21.0.9. Nothing was compiled or run; the only computation was awk over CONSTANT_REGEX_IMAGE_KEYS.tsv. Overall finding: on this evidence the harvest is most useful as a census of which constant regex shapes recur, not as a runtime image. The candidates below use it that way and need no image. Best first.
+
+1. Class-facts gate for split, replaceAll and replaceFirst on single-class regexes. The top harvested String-API keys are '\\s+' (56 sites), '\\s' (27), '\\s*,\\s*' (12), '\\r?\\n' (7), '[,:]', ' +'. M3StringFacts already holds the exact measure: regexAnyClasses (M3StringFacts.java 39-59; REGEX_SPACE is exactly [ \\t\\n\\x0B\\f\\r] at line 372), and M3StringRegexDp.commonClass already classifies the regex text (M3StringRegexDp.java 260-345), but only matches uses it (243-257). At String.java 3403-3410, 3452-3459 and 3785-3790: when factsIfPrepared() is non-null and the class bit is absent from regexAnyClasses, return this (or the one-element array) with no Pattern. No new measure, no scan, no preparation. Restrict to positive ASCII classes; negated classes match supplementary code points. Guard the empty regex before charAt(0). Second step: a class-run splitter over leaf windows, proven against Pattern.split for all limits.
+
+2. Anchored-literal lanes in java.lang for replaceAll and replaceFirst: see the CT4 correction (22 of the 36 keys CT4 cannot reach; String.java 3403-3410 and 3452-3459, beside M3String.isLiteralRegex).
+
+3. Lazy derive and lazy BooleanPlan (Pattern.java 1995-2011; readers at Matcher.java 1853 and Pattern.java 6057 only): see the CT1 correction. This removes an IdentityHashMap, an ArrayDeque and a walk from every String.matches call, and up to 128 x atoms predicate calls plus a long[136] from every compile whose plan is never read.
+
+4. deriveBoolean refuses 'X+'. M3PatternQuery.java 67-84 admits CharPropertyGreedy only with cmin == 0, and '+' builds the same node with cmin 1 (Pattern.java 3468-3477, 4482-4489). 14 of the 53 harvested matches keys fail only for that reason ('[0-9]+', '\\d+', '\\w+', '[A-Z_]+', '[a-zA-Z0-9_-]+', '\\p{Alpha}+', '.*\\s+.*', ...). For a Boolean full match X+ equals X X*, so admit it as one mandatory atom plus one starred atom. About 9 more keys are refused only for a leading '^' (Begin) or a trailing '$'; for a full match with flags 0 both look like no-ops at the chain ends, but that is unverified and needs the differential (inputs ending in a line terminator, empty input).
+
+5. BooleanPlan.matches reads input.charAt(offset) once per unit (M3PatternQuery.java 192-193, 268, 325), which on a composite String is an owner dispatch per unit. Read through String.getChars windows instead; that is public API, so no cross-package access is needed.
+
+6. Producer side: M3ASTPC.java 193-196 already service-loads M3AST.Consumer; the scout's CT5 overlooked it (see the CT5 correction).
+
+7. String side of the same angle (the scout offered no candidate): the existing lexicon reader recomputes what its image holds. M3StringPool.java 1209-1230 rescans every record with scanMappedGeometry even when the version 2 directory carries the Java hash, in addition to a whole-image digest (1202-1207). The M3GVAS01 literal row (hash, 31^length, code point count, ASCII/Latin-1 flags, first and last unit; M3GvasLiteralImageWriter.java 29-31) is the natural directory for a lexicon whose facts are seeded under the digest instead of rescanned. Unverified: whether M3StringFacts can be seeded partially, and who builds the lexicon today.

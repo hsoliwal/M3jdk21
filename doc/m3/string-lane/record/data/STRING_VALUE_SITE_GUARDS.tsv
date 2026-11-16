@@ -1,0 +1,53 @@
+string_method	line	receiver	class	guard
+getBytesUTF8NoRepl	1005	s	OTHER_RECEIVER	
+getBytesNoRepl1	1033	s	OTHER_RECEIVER	
+getBytes	1932	this	FLAT_TERNARY	
+getBytes	1956	this	FLAT_TERNARY	
+getBytes	1976	this	FLAT_TERNARY	
+nonSyncContentEquals	2062	this	NO_GUARD	
+contentEquals	2122	this	NO_GUARD	
+compareTo	2239	this	FLAT_RETURN	2235: if (leftM3 != null || rightM3 != null)
+compareTo	2240	anotherString	OTHER_RECEIVER	
+compareTo	2297	s1	OTHER_RECEIVER	
+compareTo	2298	s2	OTHER_RECEIVER	
+regionMatches	2402	this	FLAT_RETURN	2385: if (leftM3 != null || rightM3 != null)
+regionMatches	2403	other	OTHER_RECEIVER	
+regionMatches	2535	this	MIXED_GUARD	2486: if (leftM3 != null && rightM3 != null)
+regionMatches	2536	other	OTHER_RECEIVER	
+startsWith	2574	this	FLAT_RETURN	2571: if (sourceM3 != null)
+startsWith	2575	prefix	OTHER_RECEIVER	
+indexOf	2759	this	FLAT_RETURN	2751: if (storage != null)
+indexOf	2760	this	FLAT_RETURN	2751: if (storage != null)
+indexOf	2812	this	FLAT_RETURN	2806: if (storage != null)
+indexOf	2813	this	FLAT_RETURN	2806: if (storage != null)
+lastIndexOf	2887	this	FLAT_RETURN	2879: if (storage != null)
+lastIndexOf	2888	this	FLAT_RETURN	2879: if (storage != null)
+indexOf	2946	this	FLAT_RETURN	2942: if (sourceM3 != null)
+indexOf	2984	this	FLAT_RETURN	2980: if (sourceM3 != null)
+indexOf	3015	tgtStr	OTHER_RECEIVER	
+lastIndexOf	3071	this	FLAT_RETURN	3068: if (storage != null)
+lastIndexOf	3110	tgtStr	OTHER_RECEIVER	
+substring	3181	this	FLAT_RETURN	3178: if (storage != null)
+replace	3287	this	FLAT_RETURN	3283: if (storage != null)
+replace	3497	this	FLAT_RETURN	3488: if (storage != null || targetM3 != null || replacementM3 != null)
+replace	3498	trgtStr	OTHER_RECEIVER	
+replace	3499	replStr	OTHER_RECEIVER	
+replace	3500	this	FLAT_RETURN	3488: if (storage != null || targetM3 != null || replacementM3 != null)
+replace	3501	trgtStr	OTHER_RECEIVER	
+replace	3502	replStr	OTHER_RECEIVER	
+toLowerCase	4140	this	FLAT_RETURN	4136: if (storage != null)
+toUpperCase	4227	this	FLAT_RETURN	4223: if (storage != null)
+trim	4292	this	FLAT_RETURN	4289: if (storage != null)
+strip	4329	this	FLAT_RETURN	4326: if (storage != null)
+stripLeading	4364	this	FLAT_RETURN	4361: if (storage != null)
+stripTrailing	4399	this	FLAT_RETURN	4396: if (storage != null)
+lines	4456	this	NO_GUARD	
+indexOfNonWhitespace	4566	this	NO_GUARD	
+lastIndexOfNonWhitespace	4574	this	NO_GUARD	
+chars	4917	this	FLAT_RETURN	4913: if (storage != null)
+chars	4918	this	FLAT_RETURN	4913: if (storage != null)
+codePoints	4941	this	FLAT_RETURN	4937: if (storage != null)
+codePoints	4942	this	FLAT_RETURN	4937: if (storage != null)
+toCharArray	4958	this	FLAT_RETURN	4955: if (storage != null)
+repeat	5292	this	FLAT_RETURN	5289: if (storage != null)
+value	5592	this	ACCESSOR	

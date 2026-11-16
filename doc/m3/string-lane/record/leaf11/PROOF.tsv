@@ -1,0 +1,10 @@
+method_text_verbatim_in_head	1
+public_vs_naive_or_code_points	75987	0
+hop_kernel_vs_public	75987	0
+donor_StringUtils_countMatches_char	75987	0
+discriminator:paired_surrogate_unit_is_counted	1	KILLED
+discriminator:pair_counts_once	1	KILLED
+discriminator:lone_high_then_pair	1	KILLED
+discriminator:wide_unit_never_in_latin1	1	KILLED
+discriminator:invalid_code_point	1	KILLED
+RESULT	PASS	failures=0

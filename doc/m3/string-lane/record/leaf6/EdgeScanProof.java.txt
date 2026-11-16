@@ -1,0 +1,117 @@
+// SPDX-License-Identifier: Apache-2.0 OR EPL-2.0
+// Copyright (c) 2026 Synexia, Hitesh Soliwal (hsoliwal@gmail.com) and others
+
+import java.util.List;
+import java.util.function.Predicate;
+import java.util.stream.IntStream;
+
+/**
+ * Stock-JVM proof of the bounded edge scans of M3StringPrecomputeBridge. EdgeKernel is generated
+ * by run_proof.sh from the head source (the method text is copied, never retyped). The oracle is
+ * stock String: stripLeading, stripTrailing, strip and trim. Prints one row per check: name,
+ * cases, mismatches. Exit 1 on a mismatch or a surviving discriminator.
+ */
+public final class EdgeScanProof {
+    private static final char[] UNITS = {
+        'a', ' ', '\t', (char) 0x1C, (char) 0xA0, (char) 0x2028, (char) 0x3000, (char) 0xD800,
+        (char) 0xDC00
+    };
+    private static final int MAX_LENGTH = 6;
+    private static final int UNBOUNDED = Integer.MAX_VALUE;
+    private static final List<Integer> BOUNDS = List.of(0, 1, 2, 3, 5);
+    private static final int NONE = EdgeKernel.EDGE_UNDECIDED;
+    private static int failures;
+
+    private EdgeScanProof() {}
+
+    public static void main(String[] args) {
+        List<String> corpus = corpus();
+        report("strip_leading_vs_stock", corpus, text -> lead(text, true, UNBOUNDED)
+                == text.length() - text.stripLeading().length());
+        report("strip_trailing_vs_stock", corpus, text -> trail(text, true, UNBOUNDED)
+                == text.stripTrailing().length());
+        report("strip_result_vs_stock", corpus, text -> cut(text, true).equals(text.strip()));
+        report("trim_edges_vs_naive", corpus, EdgeScanProof::trimEdges);
+        report("trim_result_vs_stock", corpus, text -> cut(text, false).equals(text.trim()));
+        report("bounded_leading_decides_exactly", corpus, text -> bounded(text, true));
+        report("bounded_trailing_decides_exactly", corpus, text -> bounded(text, false));
+        discriminator("trim_rule_differs_from_strip_rule",
+                lead(text(0x2028, 'a'), true, UNBOUNDED) == 1
+                        && lead(text(0x2028, 'a'), false, UNBOUNDED) == 0);
+        discriminator("lone_surrogate_is_not_white_space",
+                trail(text('a', 0xD800, ' '), true, UNBOUNDED) == 2
+                        && lead(text(0xDC00, 'a'), true, UNBOUNDED) == 0);
+        discriminator("no_break_space_stays", lead(text(0xA0, 'a'), true, UNBOUNDED) == 0);
+        discriminator("bound_zero_never_reads", lead(" a", true, 0) == NONE
+                && trail("a ", true, 0) == NONE && lead("", true, 0) == 0);
+        System.out.println("RESULT\t" + (failures == 0 ? "PASS" : "FAIL") + "\tfailures=" + failures);
+        System.exit(failures == 0 ? 0 : 1);
+    }
+
+    private static List<String> corpus() {
+        return IntStream.rangeClosed(0, MAX_LENGTH).boxed()
+                .flatMap(length -> IntStream.range(0, (int) Math.pow(UNITS.length, length))
+                        .mapToObj(code -> digits(code, length)))
+                .toList();
+    }
+
+    private static String digits(int code, int length) {
+        char[] units = new char[length];
+        int[] rest = {code};
+        IntStream.range(0, length).forEach(index -> {
+            units[index] = UNITS[rest[0] % UNITS.length];
+            rest[0] /= UNITS.length;
+        });
+        return new String(units);
+    }
+
+    private static String text(int... units) {
+        return new String(units, 0, units.length);
+    }
+
+    private static int lead(String text, boolean strip, int bound) {
+        return EdgeKernel.leadingEdge(text, strip, bound);
+    }
+
+    private static int trail(String text, boolean strip, int bound) {
+        return EdgeKernel.trailingEdge(text, strip, bound);
+    }
+
+    /** The result the bridge builds from the two edges. */
+    private static String cut(String text, boolean strip) {
+        int start = lead(text, strip, UNBOUNDED);
+        int end = start == text.length() ? 0 : trail(text, strip, UNBOUNDED);
+        return start == text.length() ? "" : text.substring(start, end);
+    }
+
+    private static boolean trimEdges(String text) {
+        int first = IntStream.range(0, text.length()).filter(i -> text.charAt(i) > ' ')
+                .findFirst().orElse(text.length());
+        int last = IntStream.range(0, text.length()).filter(i -> text.charAt(i) > ' ')
+                .max().orElse(-1);
+        return lead(text, false, UNBOUNDED) == first && trail(text, false, UNBOUNDED) == last + 1;
+    }
+
+    /** A bounded scan answers exactly when the edge run is shorter than the bound. */
+    private static boolean bounded(String text, boolean leading) {
+        return BOUNDS.stream().allMatch(bound -> List.of(true, false).stream().allMatch(strip -> {
+            int exact = leading ? lead(text, strip, UNBOUNDED) : trail(text, strip, UNBOUNDED);
+            int removed = leading ? exact : text.length() - exact;
+            boolean all = removed == text.length();
+            boolean mustGiveUp = all ? text.length() > bound : removed >= bound;
+            int actual = leading ? lead(text, strip, bound) : trail(text, strip, bound);
+            return mustGiveUp ? actual == NONE : actual == exact;
+        }));
+    }
+
+    private static void report(String name, List<String> corpus, Predicate<String> check) {
+        long mismatches = corpus.stream().filter(check.negate()).count();
+        failures += mismatches == 0 ? 0 : 1;
+        System.out.println(name + "\t" + corpus.size() + "\t" + mismatches);
+    }
+
+    private static void discriminator(String name, boolean detected) {
+        failures += detected ? 0 : 1;
+        System.out.println("discriminator:" + name + "\t1\t" + (detected ? "KILLED" : "SURVIVED"));
+    }
+}

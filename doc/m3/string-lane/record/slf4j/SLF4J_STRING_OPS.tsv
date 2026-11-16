@@ -1,0 +1,9 @@
+call_sites	operation
+57	append
+4	new StringBuilder
+4	equalsIgnoreCase
+4	String.format
+2	charAt
+2	String.valueOf
+1	startsWith
+1	indexOf

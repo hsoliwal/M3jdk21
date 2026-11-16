@@ -1,0 +1,16 @@
+consumer_line_present	1
+fold_gated_vs_regex_small	29524	0
+fold_gated_vs_regex_wide	200000	0
+fold_ungated_vs_gated_wide	200000	0
+lines_count_relation_small	29524	0
+lines_count_relation_wide	200000	0
+compose_every_cut_small	29524	0
+compose_every_cut_wide	200000	0
+compose_associative_small	29524	0
+lines_consumer_flag_false_small	29524	0
+lines_consumer_flag_measure_small	29524	0
+lines_consumer_flag_measure_wide	200000	0
+discriminator:naive_sum_without_seam_rule	1	KILLED
+discriminator:forced_flag_on_text_with_terminator	1	KILLED
+discriminator:step_without_cr_memory	1	KILLED
+RESULT	PASS	failures=0

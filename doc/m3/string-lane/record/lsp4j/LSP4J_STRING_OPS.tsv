@@ -1,0 +1,16 @@
+call_sites	operation
+93	append
+12	new StringBuilder
+10	String.format
+6	substring
+6	String.valueOf
+4	replace
+3	trim
+3	startsWith
+2	toLowerCase
+2	repeat
+2	indexOf
+2	getBytes
+1	toUpperCase
+1	new StringBuffer
+1	Pattern.compile
