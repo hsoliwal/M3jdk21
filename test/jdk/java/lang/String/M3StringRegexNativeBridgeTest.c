@@ -2,6 +2,7 @@
  * Copyright (c) 2026, Hitesh Soliwal and contributors. All rights reserved.
  * GPLv2 with the Classpath exception.
  * JNI proof only: no native regex replacement and no retained string pointer.
+ * Modified 2026-11-15: exercise critical access before other String projections.
  */
 #include <jni.h>
 #include <stdint.h>
@@ -22,14 +23,15 @@ Java_M3StringRegexNativeBridgeTest_digests(JNIEnv *env, jclass unused, jstring t
     (void) unused;
     if (text == NULL) return NULL;
     const jsize length = (*env)->GetStringLength(env, text);
-    const jchar *chars = (*env)->GetStringChars(env, text, NULL);
-    if (chars == NULL) return NULL;
-    const uint64_t copied = checksum(chars, length);
-    (*env)->ReleaseStringChars(env, text, chars);
+    /* Exercise the untouched String through critical access before another projection. */
     const jchar *critical = (*env)->GetStringCritical(env, text, NULL);
     if (critical == NULL) return NULL;
     const uint64_t pinned = checksum(critical, length);
     (*env)->ReleaseStringCritical(env, text, critical);
+    const jchar *chars = (*env)->GetStringChars(env, text, NULL);
+    if (chars == NULL) return NULL;
+    const uint64_t copied = checksum(chars, length);
+    (*env)->ReleaseStringChars(env, text, chars);
     uint64_t region = OFFSET;
     jchar local[128];
     for (jsize at = 0; at < length;) {

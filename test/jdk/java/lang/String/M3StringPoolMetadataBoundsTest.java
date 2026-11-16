@@ -1,5 +1,6 @@
 /*
  * Copyright (c) 2026, M3 contributors. All rights reserved.
+ * Modified 2026-11-15: select native admission for the zero-native-budget metadata test.
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
  *
  * This code is free software; you can redistribute it and/or modify it
@@ -17,7 +18,7 @@
  * @test
  * @summary Refused local atoms and uncached tuples do not retain empty map buckets
  * @modules java.base/java.lang:+open
- * @run main/othervm -XX:+UnlockExperimentalVMOptions -XX:-UseM3StringStorage -Dm3.string.pool.maxBytes=0 -Dm3.string.pool.maxTuples=0 M3StringPoolMetadataBoundsTest
+ * @run main/othervm -XX:+UnlockExperimentalVMOptions -XX:-UseM3StringStorage -Dm3.string.immediate=false -Dm3.string.pool.maxBytes=0 -Dm3.string.pool.maxTuples=0 M3StringPoolMetadataBoundsTest
  */
 
 import java.lang.reflect.Field;

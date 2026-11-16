@@ -3994,15 +3994,18 @@ public final class String
             icoder |= el.coder();
         }
         byte coder = (byte) icoder;
-        // long len overflow check, char -> byte length, int len overflow check
-        // (before the M3 branch too: M3 storage must not exceed the String length limit)
-        if (len < 0L || (len <<= coder) != (int) len) {
-            throw new OutOfMemoryError("Requested string length exceeds VM limit");
-        }
         if (m3JoinedStringsEnabled()) {
+            // Modified 2026-11-15: bound M3 joins by logical UTF-16 units before flat conversion.
+            if (len < 0L || len > Integer.MAX_VALUE) {
+                throw new OutOfMemoryError("Required length exceeds implementation limit");
+            }
             M3String storage = M3String.joinDesignated(prefix, suffix, delimiter, elements, size);
             // null: the pool refused a flat piece (budget); the flat path below builds the result.
             if (storage != null) return new String(storage);
+        }
+        // long len overflow check, char -> byte length, int len overflow check for flat storage
+        if (len < 0L || (len <<= coder) != (int) len) {
+            throw new OutOfMemoryError("Requested string length exceeds VM limit");
         }
         byte[] value = StringConcatHelper.newArray(len);
 
