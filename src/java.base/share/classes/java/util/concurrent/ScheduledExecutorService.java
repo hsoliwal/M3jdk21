@@ -206,4 +206,110 @@ public interface ScheduledExecutorService extends ExecutorService {
                                                      long delay,
                                                      TimeUnit unit);
 
+    /**
+     * Schedules a one-shot action with a borrowed progress monitor bound
+     * only while the action executes. The monitor is not completed by the
+     * executor. Monitor cancellation is cooperative and remains distinct
+     * from cancellation of the returned future.
+     *
+     * @implSpec
+     * The default implementation delegates to
+     * {@link #schedule(Runnable, long, TimeUnit)} with the runnable returned
+     * by {@link ProgressMonitors#wrap(Runnable, ProgressMonitor)}.
+     *
+     * @param command the action to execute
+     * @param delay the delay before execution
+     * @param unit the unit of the delay
+     * @param monitor the borrowed monitor
+     * @return the future returned by the delegated schedule operation
+     * @throws NullPointerException if command, unit, or monitor is null
+     * @throws RejectedExecutionException if scheduling is rejected
+     */
+    default ScheduledFuture<?> scheduleMonitored(
+            Runnable command, long delay, TimeUnit unit,
+            ProgressMonitor monitor) {
+        return schedule(ProgressMonitors.wrap(command, monitor), delay, unit);
+    }
+
+    /**
+     * Schedules a value-returning task with a borrowed progress monitor
+     * bound only while the task executes. Checked exceptions and the
+     * returned future retain the delegate's behavior.
+     *
+     * @implSpec
+     * The default implementation delegates to
+     * {@link #schedule(Callable, long, TimeUnit)} with the callable returned
+     * by {@link ProgressMonitors#wrap(Callable, ProgressMonitor)}.
+     *
+     * @param <V> the result type
+     * @param callable the task to execute
+     * @param delay the delay before execution
+     * @param unit the unit of the delay
+     * @param monitor the borrowed monitor
+     * @return the future returned by the delegated schedule operation
+     * @throws NullPointerException if callable, unit, or monitor is null
+     * @throws RejectedExecutionException if scheduling is rejected
+     */
+    default <V> ScheduledFuture<V> scheduleMonitored(
+            Callable<V> callable, long delay, TimeUnit unit,
+            ProgressMonitor monitor) {
+        return schedule(ProgressMonitors.wrap(callable, monitor), delay, unit);
+    }
+
+    /**
+     * Schedules a fixed-rate action with a borrowed monitor bound separately
+     * for each execution. Cancellation reported by the monitor terminates
+     * an execution exceptionally; it does not call {@link Future#cancel}.
+     *
+     * @implSpec
+     * The default implementation delegates to
+     * {@link #scheduleAtFixedRate(Runnable, long, long, TimeUnit)} with the
+     * runnable returned by
+     * {@link ProgressMonitors#wrap(Runnable, ProgressMonitor)}.
+     *
+     * @param command the periodic action
+     * @param initialDelay the delay before the first execution
+     * @param period the period between execution start times
+     * @param unit the unit of both delays
+     * @param monitor the borrowed monitor
+     * @return the future returned by the delegated schedule operation
+     * @throws NullPointerException if command, unit, or monitor is null
+     * @throws IllegalArgumentException if period is not positive
+     * @throws RejectedExecutionException if scheduling is rejected
+     */
+    default ScheduledFuture<?> scheduleAtFixedRateMonitored(
+            Runnable command, long initialDelay, long period, TimeUnit unit,
+            ProgressMonitor monitor) {
+        return scheduleAtFixedRate(ProgressMonitors.wrap(command, monitor),
+                initialDelay, period, unit);
+    }
+
+    /**
+     * Schedules a fixed-delay action with a borrowed monitor bound separately
+     * for each execution. The executor retains the original fixed-delay
+     * timing, exception, and future-cancellation contracts.
+     *
+     * @implSpec
+     * The default implementation delegates to
+     * {@link #scheduleWithFixedDelay(Runnable, long, long, TimeUnit)} with the
+     * runnable returned by
+     * {@link ProgressMonitors#wrap(Runnable, ProgressMonitor)}.
+     *
+     * @param command the periodic action
+     * @param initialDelay the delay before the first execution
+     * @param delay the delay between executions
+     * @param unit the unit of both delays
+     * @param monitor the borrowed monitor
+     * @return the future returned by the delegated schedule operation
+     * @throws NullPointerException if command, unit, or monitor is null
+     * @throws IllegalArgumentException if delay is not positive
+     * @throws RejectedExecutionException if scheduling is rejected
+     */
+    default ScheduledFuture<?> scheduleWithFixedDelayMonitored(
+            Runnable command, long initialDelay, long delay, TimeUnit unit,
+            ProgressMonitor monitor) {
+        return scheduleWithFixedDelay(ProgressMonitors.wrap(command, monitor),
+                initialDelay, delay, unit);
+    }
+
 }
