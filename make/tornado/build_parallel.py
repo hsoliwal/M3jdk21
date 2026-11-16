@@ -27,8 +27,10 @@ import json
 import os
 from pathlib import Path, PurePosixPath
 import re
+import stat
 import subprocess
 import sys
+import zipfile
 
 
 PRODUCT_ROOT = Path(__file__).resolve().parents[2]
@@ -43,12 +45,14 @@ FORK_MODULES = frozenset({
 })
 PRODUCT_SOURCE_ROOTS = {
     "m3.parallel": (
-        "m3/ports/parallel/src/main/java",
+        "src/m3.parallel/share/classes",
+    ),
+    "m3.parallel.bulk.provider": (
+        "src/m3.parallel.bulk.provider/share/classes",
     ),
     "jdk.m3.tornado": (
         "src/jdk.m3.tornado/share/classes",
         "m3/ports/tornadovm-bulk/src/main/java",
-        "m3/ports/parallel-bulk/src/main/java",
     ),
 }
 LEGAL_FILES = ("LICENSE_APACHE2", "THIRD_PARTY_NOTICES")
@@ -57,7 +61,7 @@ JAVA_FLAGS = (
     "--add-modules=jdk.m3.tornado,tornado.runtime,tornado.drivers.opencl",
     "--enable-native-access=jdk.m3.tornado,tornado.api,tornado.runtime,"
     "tornado.drivers.common,tornado.drivers.opencl",
-    "--add-exports=java.base/jdk.internal.vm.parallel=jdk.m3.tornado",
+    "--add-exports=java.base/jdk.internal.vm.parallel=jdk.m3.tornado,m3.parallel.bulk.provider",
     "-Dtornado.recover.bailout=false",
     "-Dtornado.virtual.device=false",
 )
@@ -303,6 +307,7 @@ def product_notices(product):
     result = {}
     for module, relative in (
             ("m3.parallel", "m3/ports/parallel"),
+            ("m3.parallel.bulk.provider", "m3/ports/parallel"),
             ("jdk.m3.tornado", "m3/ports/tornadovm-bulk")):
         directory = checked_path(product, relative, directory=True)
         notices = {}
@@ -310,6 +315,47 @@ def product_notices(product):
             notices[name] = checked_path(product, relative + "/" + name).read_bytes()
         result[module] = notices
     return result
+
+
+def installed_product_modules(jdk, tools, environment, own_sources, own_notices):
+    """Reuse intact source-built modules whose source and notices match this tree.
+
+    java.base can record hashes of these modules. Rebuilding their JMODs would
+    break that dependency even when their Java sources have not changed.
+    """
+    names = frozenset({"m3.parallel", "m3.parallel.bulk.provider"})
+    installed = execute([tools["java"], "--list-modules"], environment)
+    installed_names = {line.split()[0].split("@", 1)[0]
+                       for line in installed.splitlines() if line.strip()}
+    present = names & installed_names
+    supplied = {name for name in names if (jdk / "jmods" / (name + ".jmod")).exists()}
+    if not present and not supplied:
+        return frozenset()
+    if present != names or supplied != names:
+        raise BuildError("the base JDK must contain both promoted parallel modules or neither")
+    try:
+        with zipfile.ZipFile(checked_path(jdk, "lib/src.zip")) as sources:
+            for module in sorted(names):
+                prefix = module + "/"
+                entries = [entry for entry in sources.infolist()
+                           if entry.filename.startswith(prefix) and entry.filename.endswith(".java")]
+                expected = {prefix + relative: data for relative, data in own_sources[module].items()}
+                if len(entries) != len(expected) or {entry.filename for entry in entries} != set(expected):
+                    raise BuildError("installed source inventory differs for " + module)
+                for entry in entries:
+                    if stat.S_ISLNK(entry.external_attr >> 16) or sources.read(entry) != expected[entry.filename]:
+                        raise BuildError("installed source differs: " + entry.filename)
+                jmod = checked_path(jdk, "jmods/" + module + ".jmod")
+                with zipfile.ZipFile(jmod) as archive:
+                    for name, data in own_notices[module].items():
+                        relative = "legal/" + module + "-" + name.lower() + ".md"
+                        notices = [entry for entry in archive.infolist() if entry.filename == relative]
+                        if (len(notices) != 1 or stat.S_ISLNK(notices[0].external_attr >> 16)
+                                or archive.read(notices[0]) != data):
+                            raise BuildError("installed legal notice differs: " + module + "/" + relative)
+    except zipfile.BadZipFile as error:
+        raise BuildError("installed source or JMOD archive is invalid") from error
+    return names
 
 
 def write_bytes(path, data):
@@ -355,6 +401,7 @@ def build(source, jdk, out, product=PRODUCT_ROOT, verify_only=False):
     product_license = checked_path(product, "LICENSE").read_bytes()
     environment = clean_java_environment()
     tools = jdk_tools(jdk, environment)
+    reused_modules = installed_product_modules(jdk, tools, environment, own_sources, own_notices)
     original_vm = vm_images(jdk)
     if verify_only:
         print("Verified pinned TornadoVM source closure and installed M3JDK21 bulk API.")
@@ -368,12 +415,16 @@ def build(source, jdk, out, product=PRODUCT_ROOT, verify_only=False):
         if entry["kind"] == "java":
             write_bytes(sources / entry["module"] / entry["relative"], data)
     for module, files in own_sources.items():
+        if module in reused_modules:
+            continue
         for relative, data in files.items():
             write_bytes(sources / module / relative, data)
-    modules = sorted(FORK_MODULES | set(own_sources))
+    modules = sorted((FORK_MODULES | set(own_sources)) - reused_modules)
+    if reused_modules:
+        print("Reusing source-verified base JMODs: " + ", ".join(sorted(reused_modules)), flush=True)
     print("Compiling " + str(len(modules)) + " modules from pinned sources.", flush=True)
     execute([tools["javac"], "--enable-preview", "-source", "21", "-target", "21",
-             "--add-exports", "java.base/jdk.internal.vm.parallel=jdk.m3.tornado",
+             "--add-exports", "java.base/jdk.internal.vm.parallel=jdk.m3.tornado,m3.parallel.bulk.provider",
              "--module-source-path", sources, "-d", classes,
              "--module", ",".join(modules)], environment, out / "javac.log")
     for entry, data in fork_files.values():
@@ -410,7 +461,7 @@ def build(source, jdk, out, product=PRODUCT_ROOT, verify_only=False):
     # The first whitespace-delimited token owns the name and optional version.
     installed_names = {line.split()[0].split("@", 1)[0]
                        for line in installed.splitlines() if line.strip()}
-    if not set(modules).issubset(installed_names):
+    if not (set(modules) | reused_modules).issubset(installed_names):
         raise BuildError("linked image omits required parallel modules")
     print("Built " + str(image) + " from TornadoVM " + lock["commit"])
     print("Preserved every supplied JVM library byte-for-byte; OpenCL uses the host loader and ICD.")

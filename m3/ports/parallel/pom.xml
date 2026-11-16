@@ -19,16 +19,18 @@
     <maven.compiler.release>21</maven.compiler.release>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <junit.version>5.10.2</junit.version>
+    <junit.artifact.version>${junit.version}-m3-source-1</junit.artifact.version>
   </properties>
   <dependencies>
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter</artifactId>
-      <version>${junit.version}-m3-source-1</version>
+      <version>${junit.artifact.version}</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
   <build>
+    <sourceDirectory>${project.basedir}/../../../src/m3.parallel/share/classes</sourceDirectory>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>

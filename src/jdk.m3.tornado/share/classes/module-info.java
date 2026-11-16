@@ -22,11 +22,11 @@
 module jdk.m3.tornado {
     requires transitive tornado.api;
     requires transitive m3.parallel;
+    requires transitive m3.parallel.bulk.provider;
     requires static tornado.runtime;
 
     exports jdk.m3.tornado;
     exports jdk.internal.m3.cpugpu;
-    exports jdk.m3.parallel.bulk;
 
     opens jdk.internal.m3.cpugpu to tornado.runtime;
     opens jdk.internal.m3.tornado.parallel to tornado.runtime;

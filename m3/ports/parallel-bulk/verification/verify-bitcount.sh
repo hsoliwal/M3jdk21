@@ -3,7 +3,7 @@
 set -euo pipefail
 ROOT=$(cd "$(dirname "$0")/../../../.." && pwd)
 MODULE="$ROOT/m3/ports/parallel-bulk"
-PARALLEL="$ROOT/m3/ports/parallel"
+PARALLEL="$ROOT/src/m3.parallel/share/classes"
 BUILD="${BUILD_DIR:-$MODULE/target/verify-bitcount}"
 rm -rf "$BUILD"
 mkdir -p "$BUILD/patch-src/jdk/internal/vm/parallel" "$BUILD/patch" "$BUILD/classes"
@@ -14,13 +14,13 @@ done
 javac -source 21 -target 21 -proc:none -Xlint:all,-module -Werror \
   --patch-module "java.base=$BUILD/patch-src" -d "$BUILD/patch" \
   "$BUILD"/patch-src/jdk/internal/vm/parallel/*.java
-mapfile -d '' SOURCES < <(find "$PARALLEL/src/main/java/com" -name '*.java' -print0 | sort -z)
+mapfile -d '' SOURCES < <(find "$PARALLEL/jdk" -name '*.java' -print0 | sort -z)
 javac --release 21 -proc:none -Xlint:all,-module -Werror -d "$BUILD/classes" "${SOURCES[@]}"
 javac -source 21 -target 21 -proc:none -Xlint:all,-module -Werror \
   --patch-module "java.base=$BUILD/patch" \
   --add-exports java.base/jdk.internal.vm.parallel=ALL-UNNAMED \
   -cp "$BUILD/classes" -d "$BUILD/classes" \
-  "$MODULE/src/main/java/jdk/m3/parallel/bulk/M3ParallelBitCountProvider.java" \
+  "$ROOT/src/m3.parallel.bulk.provider/share/classes/jdk/m3/parallel/bulk/M3ParallelBitCountProvider.java" \
   "$MODULE/src/test/java/jdk/m3/parallel/bulk/M3ParallelBitCountProof.java"
 java --patch-module "java.base=$BUILD/patch" \
   --add-exports java.base/jdk.internal.vm.parallel=ALL-UNNAMED \

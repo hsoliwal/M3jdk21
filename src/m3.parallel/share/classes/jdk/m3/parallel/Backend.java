@@ -10,18 +10,22 @@ import java.util.EnumSet;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
+import java.util.regex.Pattern;
 
 /**
  * Handle of an execution backend.
  *
  * <p>The pure-Java CPU reference ({@value #REFERENCE_ID}) is always present. Other backends are discovered once per
  * process through {@link java.util.ServiceLoader} and {@link BackendProvider}; a provider whose probe fails, throws, or
- * whose id is invalid, reserved or ambiguous is recorded as unavailable and never selected. Backends are compared by
- * identity; there is one instance per id.</p>
+ * whose id is invalid, reserved or ambiguous is recorded as unavailable and never selected. Discovered backends have
+ * one instance per id. {@link #fromProvider(BackendProvider)} creates an independent, explicitly supplied backend
+ * without changing process-wide discovery. Backends are compared by identity.</p>
  */
 public final class Backend {
     /** Id of the built-in pure-Java CPU reference backend. */
     public static final String REFERENCE_ID = "java";
+
+    private static final Pattern PROVIDER_ID = Pattern.compile("[a-z0-9][a-z0-9._-]{0,63}");
 
     /** Backend selection policy. */
     public enum Policy {
@@ -82,6 +86,50 @@ public final class Backend {
     }
 
     /**
+     * Creates an independent backend from an explicitly supplied engine provider.
+     *
+     * <p>The provider's id, capabilities and score are snapshotted, and its runtime must be available. This method
+     * neither installs nor replaces a process-wide provider. Choose the returned backend when building a new
+     * {@link Plan}; already prepared plans retain their original backend and device storage. The caller owns any
+     * provider-wide resources; each plan owns and closes only its prepared device program.</p>
+     *
+     * @param provider stateless provider factory
+     * @return a backend for this provider
+     * @throws NullPointerException if the provider or its capabilities are null
+     * @throws IllegalArgumentException if the id is invalid or reserved, or the provider claims the reference role
+     * @throws IllegalStateException if the runtime is unavailable or its probe fails
+     */
+    public static Backend fromProvider(BackendProvider provider) {
+        Objects.requireNonNull(provider, "provider");
+        String id = provider.id();
+        if (!validProviderId(id)) {
+            throw new IllegalArgumentException("invalid backend id: " + id);
+        }
+        if (REFERENCE_ID.equals(id)) {
+            throw new IllegalArgumentException("backend id " + id + " is reserved for the CPU reference");
+        }
+        Set<Capability> capabilities = Set.copyOf(provider.capabilities());
+        if (capabilities.contains(Capability.REFERENCE)) {
+            throw new IllegalArgumentException("the reference capability is reserved for the CPU reference");
+        }
+        int score = provider.score();
+        Probe probe;
+        try {
+            probe = Objects.requireNonNull(provider.probe(), "probe");
+        } catch (RuntimeException | LinkageError failure) {
+            throw new IllegalStateException("backend " + id + " probe failed", failure);
+        }
+        if (!probe.available()) {
+            throw new IllegalStateException("backend " + id + " is unavailable: " + probe.reason());
+        }
+        return new Backend(id, provider, capabilities, score);
+    }
+
+    static boolean validProviderId(String id) {
+        return id != null && PROVIDER_ID.matcher(id).matches();
+    }
+
+    /**
      * Selects a backend by policy.
      *
      * @param policy selection policy
@@ -90,6 +138,23 @@ public final class Backend {
      */
     public static Backend select(Policy policy) {
         return BackendRegistry.select(Objects.requireNonNull(policy, "policy"));
+    }
+
+    /**
+     * Selects an available backend that supports the requested kernel.
+     *
+     * <p>Preference and tie-breaking are identical to {@link #select(Policy)}, after excluding unsupported kernels.
+     * Selection happens before plan preparation. A later preparation or execution failure is reported to the caller;
+     * it never retries the operation on another backend.</p>
+     *
+     * @param policy selection policy
+     * @param kernel required kernel
+     * @return the selected backend
+     * @throws IllegalStateException if no backend allowed by the policy supports the kernel
+     */
+    public static Backend select(Policy policy, KernelId kernel) {
+        return BackendRegistry.select(Objects.requireNonNull(policy, "policy"),
+                Objects.requireNonNull(kernel, "kernel"));
     }
 
     /**

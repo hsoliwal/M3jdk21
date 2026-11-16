@@ -3,6 +3,9 @@ name: M3 Parallel Bitcount Provider
 on:
   pull_request:
     paths:
+      - 'src/m3.parallel/**'
+      - 'src/m3.parallel.bulk.provider/**'
+      - 'test/jdk/jdk/m3/parallel/**'
       - 'm3/ports/parallel-bulk/src/main/java/jdk/m3/parallel/bulk/M3ParallelBitCountProvider.java'
       - 'm3/ports/parallel-bulk/src/test/java/jdk/m3/parallel/bulk/M3ParallelBitCount*.java'
       - 'm3/ports/parallel-bulk/verification/*bitcount*'

@@ -1,0 +1,8 @@
+#
+# SPDX-License-Identifier: Apache-2.0
+# Copyright 2026 Hitesh Soliwal and contributors
+#
+
+# Preserve the existing m3.parallel module identity. Match the other M3 modules:
+# only the module-name style warning is disabled; all other javac checks remain.
+DISABLED_WARNINGS_java += module

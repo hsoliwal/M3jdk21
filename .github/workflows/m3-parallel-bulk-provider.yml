@@ -3,6 +3,13 @@ name: M3 Parallel Bulk Provider
 on:
   pull_request:
     paths:
+      - 'src/m3.parallel/**'
+      - 'src/m3.parallel.bulk.provider/**'
+      - 'src/java.base/share/classes/jdk/internal/vm/parallel/**'
+      - 'src/java.base/share/classes/module-info.java'
+      - 'test/jdk/jdk/internal/vm/parallel/**'
+      - 'test/jdk/jdk/m3/parallel/**'
+      - 'm3/ports/parallel/**'
       - 'm3/ports/parallel-bulk/**'
       - 'm3/docs/name-mapping.json'
       - 'm3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3ParallelBulkBridgeReceiverRecipe.java'
@@ -34,6 +41,48 @@ jobs:
           java-version: '21'
       - name: Strict Java21 JDK patch, actual M3 parallel source and CPU oracle
         run: bash m3/ports/parallel-bulk/verification/verify.sh
+      - name: Named modules and interchangeable provider contracts
+        shell: bash
+        run: |
+          set -euo pipefail
+          build="$RUNNER_TEMP/m3-parallel-provider"
+          mkdir -p "$build/base" "$build/modules/m3.parallel" \
+            "$build/modules/m3.parallel.bulk.provider" "$build/tests"
+          javac --release 21 -Xlint:all -Werror -d "$build/base" \
+            src/java.base/share/classes/jdk/internal/vm/parallel/*.java
+          javac --release 21 -Xlint:all,-module -Werror \
+            -d "$build/modules/m3.parallel" \
+            src/m3.parallel/share/classes/module-info.java \
+            src/m3.parallel/share/classes/jdk/m3/parallel/*.java \
+            src/m3.parallel/share/classes/jdk/m3/parallel/spi/*.java
+          javac -source 21 -target 21 -Xlint:all,-module -Werror \
+            --patch-module "java.base=$build/base" \
+            --add-exports java.base/jdk.internal.vm.parallel=m3.parallel.bulk.provider \
+            --module-path "$build/modules" \
+            -d "$build/modules/m3.parallel.bulk.provider" \
+            src/m3.parallel.bulk.provider/share/classes/module-info.java \
+            src/m3.parallel.bulk.provider/share/classes/jdk/m3/parallel/bulk/*.java
+          javac -source 21 -target 21 -Xlint:all -Werror \
+            --patch-module "java.base=$build/base" \
+            --add-exports java.base/jdk.internal.vm.parallel=ALL-UNNAMED,m3.parallel.bulk.provider \
+            --module-path "$build/modules" --add-modules m3.parallel,m3.parallel.bulk.provider \
+            -d "$build/tests" \
+            test/jdk/jdk/internal/vm/parallel/*.java \
+            test/jdk/jdk/m3/parallel/BackendSwapTest.java \
+            test/jdk/jdk/m3/parallel/CanonicalKernelConflictTest.java \
+            test/jdk/jdk/m3/parallel/BulkBackendBridgeTest.java
+          for test in BulkExecutionIsolationTest BulkExecutorTest BulkOutputMetadataTest \
+              BulkProviderSelectionTest BulkProviderStableIdentityTest BulkSchedulerTest \
+              BackendSwapTest CanonicalKernelConflictTest BulkBackendBridgeTest; do
+            java --patch-module "java.base=$build/base" \
+              --add-exports java.base/jdk.internal.vm.parallel=ALL-UNNAMED,m3.parallel.bulk.provider \
+              --module-path "$build/modules" --add-modules m3.parallel,m3.parallel.bulk.provider \
+              -cp "$build/tests" "$test"
+          done
+          jlink --module-path "$JAVA_HOME/jmods:$build/modules" \
+            --add-modules m3.parallel --output "$build/image"
+          "$build/image/bin/java" --add-modules m3.parallel \
+            -cp "$build/tests" BackendSwapTest
 
   module-junit:
     runs-on: ubuntu-24.04
