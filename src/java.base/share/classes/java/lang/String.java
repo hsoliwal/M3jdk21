@@ -3366,6 +3366,64 @@ public final class String
     }
 
     /**
+     * Returns the number of times the specified character occurs in this string.
+     * <p>
+     * The result is the number of indexes that successive calls of
+     * {@link #indexOf(int, int)} find when each search starts after the previous
+     * occurrence. A character in the range from 0 to 0xFFFF (inclusive) is counted
+     * wherever a {@code char} of that value occurs, a surrogate value included. A
+     * supplementary code point is counted wherever its surrogate pair occurs. A value
+     * that is not a valid Unicode code point does not occur in any string.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API. It is the common
+     * entry point for the counting operation that utility libraries provide.
+     *
+     * @param   ch   a character (Unicode code point).
+     * @return  the number of occurrences of the character in this string, or
+     *          {@code 0} if it does not occur.
+     * @see     #indexOf(int, int)
+     * @since   21
+     */
+    public int countMatches(int ch) {
+        if (m3() == null && Character.isBmpCodePoint(ch)) {
+            return isLatin1() ? countLatin1(value, (char) ch) : countUtf16(value, (char) ch);
+        }
+        return countByIndexOf(ch);
+    }
+
+    /** Occurrences found by {@code indexOf} hops: any storage and any code point. */
+    private int countByIndexOf(int ch) {
+        int step = Character.isSupplementaryCodePoint(ch) ? 2 : 1;
+        int count = 0;
+        for (int index = indexOf(ch); index >= 0; index = indexOf(ch, index + step)) {
+            count++;
+        }
+        return count;
+    }
+
+    /** Units equal to {@code unit} in flat Latin-1 storage; a wider unit never occurs. */
+    private static int countLatin1(byte[] value, char unit) {
+        if (!StringLatin1.canEncode(unit)) return 0;
+        byte wanted = (byte) unit;
+        int count = 0;
+        for (byte stored : value) {
+            if (stored == wanted) count++;
+        }
+        return count;
+    }
+
+    /** Units equal to {@code unit} in flat UTF-16 storage. */
+    private static int countUtf16(byte[] value, char unit) {
+        int length = value.length >> UTF16;
+        int count = 0;
+        for (int index = 0; index < length; index++) {
+            if (StringUTF16.getChar(value, index) == unit) count++;
+        }
+        return count;
+    }
+
+    /**
      * Returns true if and only if this string contains the specified
      * sequence of char values.
      *
