@@ -1747,6 +1747,13 @@ public final class String
         Objects.checkFromToIndex(beginIndex, endIndex, length());
         M3String storage = m3();
         if (storage != null) {
+            // Same exact gates as offsetByCodePoints: without a surrogate pair in the value,
+            // every range holds one code point per unit.
+            M3StringFacts prepared = storage.factsIfPrepared();
+            if (storage.coder() == LATIN1
+                    || (prepared != null && prepared.codePointCount == storage.length())) {
+                return endIndex - beginIndex;
+            }
             M3StringCodePointPrecompute.Geometry geometry =
                     M3StringCodePointPrecompute.prepare(storage);
             if (geometry != null) {
