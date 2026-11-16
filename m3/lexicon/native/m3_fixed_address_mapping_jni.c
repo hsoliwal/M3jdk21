@@ -77,6 +77,10 @@ static char *platform_path(JNIEnv *env, jstring path) {
 static int valid_range(jlong base, jlong length) {
     return base > 0 && length > 0 && length <= INT_MAX
             && (uint64_t)base % UINT64_C(65536) == 0
+#if UINTPTR_MAX < INT64_MAX
+            && (uint64_t)base <= (uint64_t)UINTPTR_MAX
+            && (uint64_t)length <= (uint64_t)UINTPTR_MAX - (uint64_t)base
+#endif
             && (uint64_t)base <= (uint64_t)INT64_MAX - (uint64_t)length;
 }
 
