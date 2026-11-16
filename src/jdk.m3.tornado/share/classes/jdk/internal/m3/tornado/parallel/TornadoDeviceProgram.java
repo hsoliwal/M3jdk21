@@ -43,7 +43,8 @@ final class TornadoDeviceProgram implements DeviceProgram {
         Objects.requireNonNull(device, "device");
         long header = TornadoNativeArray.ARRAY_HEADER;
         if (header < Long.BYTES || header > Integer.MAX_VALUE || header % Integer.BYTES != 0) {
-            throw new IllegalArgumentException("unsupported Tornado native-array header size: " + header);
+            throw new IllegalArgumentException(
+                    "unsupported Tornado native-array header size: " + header);
         }
 
         Arena allocation = Arena.ofShared();
@@ -51,7 +52,8 @@ final class TornadoDeviceProgram implements DeviceProgram {
         TornadoExecutionPlan created = null;
         try {
             for (int slot = 0; slot < storage.length; slot++) {
-                long bytes = Math.addExact(header, Math.multiplyExact((long) lengths[slot], Integer.BYTES));
+                long bytes = Math.addExact(
+                        header, Math.multiplyExact((long) lengths[slot], Integer.BYTES));
                 storage[slot] = IntArray.fromSegmentShallow(allocation.allocate(bytes, Long.BYTES));
             }
             // Arena storage starts at zero. Inputs uploaded before the first
@@ -91,11 +93,13 @@ final class TornadoDeviceProgram implements DeviceProgram {
         int count = switch (kernel.name()) {
             case TornadoBackendProvider.INT_ADD -> 3;
             case TornadoBackendProvider.INT_BITCOUNT -> 2;
-            default -> throw new IllegalArgumentException("unsupported Tornado parallel kernel: " + kernel);
+            default -> throw new IllegalArgumentException(
+                    "unsupported Tornado parallel kernel: " + kernel);
         };
         if (grid.global() > TornadoBackendProvider.MAX_ITEMS
                 || grid.local() > TornadoBackendProvider.MAX_ITEMS) {
-            throw new IllegalArgumentException("Tornado integer kernel exceeds its reviewed work bound");
+            throw new IllegalArgumentException(
+                    "Tornado integer kernel exceeds its reviewed work bound");
         }
         if (lengths.length != count) {
             throw new IllegalArgumentException("kernel requires " + count + " buffer bindings");
@@ -128,7 +132,8 @@ final class TornadoDeviceProgram implements DeviceProgram {
     public void download(int slot, IntBuffer host) {
         IntArray array = binding(slot, host);
         if (lastResult == null) {
-            throw new IllegalStateException("a completed Tornado launch is required before download");
+            throw new IllegalStateException(
+                    "a completed Tornado launch is required before download");
         }
         lastResult.transferToHost(array);
         for (int index = 0; index < host.length(); index++) {
@@ -183,7 +188,7 @@ final class TornadoDeviceProgram implements DeviceProgram {
     }
 
     private static void closeFailedConstruction(TornadoExecutionPlan created, Arena allocation,
-            Throwable failure) {
+                                                Throwable failure) {
         if (created != null) {
             try {
                 created.close();
