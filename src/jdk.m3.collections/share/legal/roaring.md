@@ -1,4 +1,4 @@
-## RoaringBitmap (development state after release 1.6.29)
+## RoaringBitmap (release 1.6.30 on Maven Central, plus one later commit)
 
 ### Origin
 
@@ -6,9 +6,13 @@ The Java sources under `providers/classes/jdk/m3/collections/roaring` of the mod
 from RoaringBitmap (https://github.com/RoaringBitmap/RoaringBitmap) at commit
 `5268d7178913d3a9137fd3400736dd1b93309b62` (2026-11-14) of its branch `master`. The fork
 https://github.com/hsoliwal/RoaringBitmap is identical to the library at that commit: nothing was changed in the fork.
-The commit is release 1.6.29 plus two commits: the version number of the build set to 1.6.30, which is not a
-release, and "Prevent run container iterators from rewinding in advanceIfNeeded" (#909), which changes `RunContainer`
-and `buffer.MappeableRunContainer`.
+
+The sources are those of the release published on Maven Central as version 1.6.30 (2026-11-14) plus one commit,
+"Prevent run container iterators from rewinding in advanceIfNeeded" (#909), which changes `RunContainer` and
+`buffer.MappeableRunContainer`: the sources jar of 1.6.30 differs from the main sources of this commit in these two
+files only. The names in the library's GitHub repository are one step behind Maven Central: the tag named `1.6.29`
+(`e0c9d3c4ac49`) is the state Maven Central has as 1.6.30, the commit after it sets the version number to 1.6.30,
+and there is no tag `1.6.30`. Maven Central's 1.6.29 is the release before.
 
 Taken are 114 sources of two of the repository's projects:
 
@@ -27,21 +31,37 @@ sources carry the header "(c) the authors Licensed under the Apache License, Ver
 `roaringbitmap`, all 9 of `bsi`) carry no license header. The headers are unchanged. The repository's `AUTHORS` file,
 "the official list of authors for copyright purposes", is reproduced below. The repository has no NOTICE file.
 
+Two sources of `bsi` state another origin in their documentation and carry no header:
+
+- `bsi.WritableUtils`: "copy from org.apache.hadoop.io.WritableUtils" (Apache Hadoop);
+- `bsi.Pair`: "Copied from org.apache.hadoop.hbase.util.Pair" (Apache HBase).
+
+Both projects are licensed under the Apache License, Version 2.0, and their files carry the header of the Apache
+Software Foundation, which the copies in the library do not have. The attributions of their NOTICE files are
+reproduced below.
+
+The sources also point to other work without copying a file: the comparators of the bit-sliced index refer to
+https://github.com/lemire/BitSliceIndex (five links, kept as they are), `longlong.RoaringIntPacking` cites a Stack
+Overflow answer for a one-line method, and `longlong.Roaring64NavigableMap` says of a private binary search "From
+Arrays.binarySearch (Comparator)".
+
 ### Changes made by Synexia (2026-11-17)
 
 The changes were mechanical (com.synexia repository, recipe crate `inverse-package-relocation-20261116`,
 `provider_pipeline.sh`):
 
-- the package `org.roaringbitmap` is named `jdk.m3.collections.roaring`;
+- the package `org.roaringbitmap` is named `jdk.m3.collections.roaring`, in package and import declarations,
+  qualified names and documentation. Five links in comments of `bsi` that hold the path `org/roaringbitmap` of
+  another repository are not renamed;
 - 12 top-level types that shared a source file with another type were moved to files of their own, with the header
   and the imports of the file they came from: the two character iterators of each of `ArrayContainer`,
   `BitmapContainer`, `RunContainer`, `buffer.MappeableArrayContainer`, `buffer.MappeableBitmapContainer` and
   `buffer.MappeableRunContainer`. javac warns when such a type is used from another file, and the JDK build treats
   warnings as errors. Nothing inside a type changed;
 - `@SuppressWarnings` was added to 42 top-level types for the lint categories the JDK build reports as errors;
-- documentation, for doclint: one bare `<` was written as `&lt;` (`BatchIterator`); in
-  `bsi.longlong.Roaring64NavigableMapSliceIndex` nine `</br>` became `<br>` and one `</p>` that closes nothing was
-  removed.
+- documentation, for doclint: one bare `<` was written as `&lt;` (`SuccinctRank`, in
+  `Returns the number of integers <= x.`); in `bsi.longlong.Roaring64NavigableMapSliceIndex` nine `</br>` became
+  `<br>` and one `</p>` that closes nothing was removed.
 
 Compiled before and after these changes, every one of the 191 classes has the same members and the same
 instructions.
@@ -57,8 +77,27 @@ Exported are the four packages the library's own module descriptor exports (`roa
 ### Beside this provider
 
 The module has two classes of its own named `RoaringBitmap` and `Roaring64Bitmap` in the package
-`jdk.internal.m3.collections.bits`, which is not exported. They are scaffolds whose methods throw `NotYetReceived`.
-They are not this library and do not use it.
+`jdk.internal.m3.collections.bits`, which is not exported. They are scaffolds whose instance methods throw
+`NotYetReceived`. Its exported package `jdk.m3.collections.bits` has `RoaringIntSet` and `RoaringLongSet`,
+implementations of its own. None of the four is this library or uses it.
+
+### Notices of Apache Hadoop and Apache HBase (for `bsi.WritableUtils` and `bsi.Pair`)
+
+```
+Apache Hadoop
+Copyright 2006 and onwards The Apache Software Foundation.
+
+This product includes software developed at
+The Apache Software Foundation (http://www.apache.org/).
+```
+
+```
+Apache HBase
+Copyright 2007-2026 The Apache Software Foundation
+
+This product includes software developed at
+The Apache Software Foundation (http://www.apache.org/).
+```
 
 ### Authors
 

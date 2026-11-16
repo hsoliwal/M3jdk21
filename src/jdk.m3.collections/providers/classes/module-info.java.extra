@@ -713,9 +713,9 @@ exports jdk.m3.collections.disruptor;
 exports jdk.m3.collections.disruptor.dsl;
 exports jdk.m3.collections.disruptor.util;
 
-// RoaringBitmap, development state after release 1.6.29 (legal/roaring.md): the four packages its own descriptor
-// exports and the three of its bit-sliced index (bsi), which has no descriptor. jdk.m3.collections.roaring.art is
-// not exported, as in the library
+// RoaringBitmap, release 1.6.30 of Maven Central plus one later commit (legal/roaring.md): the four packages its own
+// descriptor exports and the three of its bit-sliced index (bsi), which has no descriptor.
+// jdk.m3.collections.roaring.art is not exported, as in the library
 exports jdk.m3.collections.roaring;
 exports jdk.m3.collections.roaring.bsi;
 exports jdk.m3.collections.roaring.bsi.buffer;

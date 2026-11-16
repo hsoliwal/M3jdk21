@@ -453,7 +453,7 @@ public class Roaring64NavigableMapSliceIndex {
    * @param predicate the value we found filter
    * @param foundSet  columnId set we want compare,using RoaringBitmap to express
    * @return columnId set we found in this bsi with giving conditions, using RoaringBitmap to express
-   * see https://github.com/lemire/BitSliceIndex/blob/master/src/main/java/jdk/m3/collections/roaring/circuits/comparator/BasicComparator.java
+   * see https://github.com/lemire/BitSliceIndex/blob/master/src/main/java/org/roaringbitmap/circuits/comparator/BasicComparator.java
    */
   private Roaring64NavigableMap oNeilCompare(
       BitmapSliceIndex.Operation operation, long predicate, Roaring64NavigableMap foundSet) {

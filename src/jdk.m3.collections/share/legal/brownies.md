@@ -15,7 +15,10 @@ sources are:
 - 88 with a copyright line of Thomas Mauch (2010: 2, 2012: 22, 2013: 37, 2014: 21, 2015: 3, 2023: 3) and the Apache
   License header;
 - `helper.SortedLists`: "Copyright (C) 2010 The Guava Authors", Apache License header. Its first lines say it was
-  copied from `com.google.common.collect.SortedLists` of Guava because that class is not public;
+  copied from `com.google.common.collect.SortedLists` of Guava because that class is not public. The eight classes
+  `helper.primitive.BooleanBinarySearch`, `ByteBinarySearch`, `CharBinarySearch`, `DoubleBinarySearch`,
+  `FloatBinarySearch`, `IntBinarySearch`, `LongBinarySearch` and `ShortBinarySearch` follow the same Guava class
+  (its documentation text and its comments are in them); they are among the 88 and name Thomas Mauch only;
 - `helper.MutableInt`: the header of the Apache Software Foundation ("Licensed to the Apache Software Foundation
   (ASF) under one or more contributor license agreements. See the NOTICE file distributed with this work ..."). Its
   first lines say it was copied from `org.apache.commons.lang3.mutable.MutableInt` of Apache Commons Lang and
@@ -29,10 +32,35 @@ sources are:
   1998-2006"; it has no license statement (read 2026-11-17). Brownies Collections distributes these files as part
   of the library under its Apache License; neither the files nor the page state terms of their own.
 
+Three more origins are not stated in a header. They are among the 88 sources that name Thomas Mauch only:
+
+- the tree node of `BigList` (`BigList.BlockNode`) and of the eight primitive big lists (`primitive.BooleanBigList`
+  to `primitive.ShortBigList`, their `...BlockNode` classes) is adapted from `TreeList.AVLNode` of Apache Commons
+  Collections: its documentation ("Implements an AVLNode ...", the "faedelung" flags) and its comments are those of
+  that class, which carries the header of the Apache Software Foundation (Apache License, Version 2.0). The
+  attribution of the NOTICE file of Apache Commons Collections is reproduced below;
+- `KeyCollectionAsMap.equals` is, by its own comment, "Copied from AbstractMap" (`java.util.AbstractMap`), and the
+  private class `helper.GapLists.CollectorImpl` follows `java.util.stream.Collectors.CollectorImpl`. Method
+  documentation in `IList` and the primitive `I...List` classes repeats text of the `java.util` documentation. The
+  origin is the JDK (OpenJDK: GNU General Public License, version 2, with the Classpath exception, the license of
+  this repository);
+- the library does not say which release of Guava, Apache Commons Lang or Apache Commons Collections it copied
+  from.
+
 ### Notice of Apache Commons Lang (for `helper.MutableInt`)
 
 ```
 Apache Commons Lang
+Copyright 2001-2026 The Apache Software Foundation
+
+This product includes software developed at
+The Apache Software Foundation (https://www.apache.org/).
+```
+
+### Notice of Apache Commons Collections (for the tree node of the big lists)
+
+```
+Apache Commons Collections
 Copyright 2001-2026 The Apache Software Foundation
 
 This product includes software developed at
@@ -50,8 +78,8 @@ The changes were mechanical (com.synexia repository, recipe crate `inverse-packa
   `IDoubleListable`, `IFloatListable`, `IIntListable`, `ILongListable` and `IShortListable`, each from the file of its
   `I...List` class. javac warns when such a type is used from another file, and the JDK build treats warnings as
   errors. Nothing inside a type changed;
-- `@SuppressWarnings` was added to 71 top-level types and extended on 8 that had one, for the lint categories the JDK
-  build reports as errors;
+- `@SuppressWarnings` was added to 71 top-level types and extended on 5 of the 8 that had one, for the lint
+  categories the JDK build reports as errors;
 - white space, for the repository's rule for Java sources (`.jcheck/conf`: no tab, no trailing blank, no carriage
   return): the line ends of 79 files were CR LF (71) or mixed (8) and are LF; tabs became spaces at four-column
   stops and trailing blanks went, in 99 files (24,263 lines);
@@ -79,10 +107,18 @@ The library has no module descriptor; its manifest exports all five packages, an
 
 - The interfaces `primitive.I...Listable` are package-private and appear in public signatures of the public
   `I...List` classes: code outside the package cannot name them.
-- After many inserts and removes at random places (300,000 and 100,000 in the test), sorting a copy of the list
-  fails: `IntBigList.copy().sort()` with `ArrayIndexOutOfBoundsException`, `BigList.copy().sort(null)` with
-  `NullPointerException`. Sorting the list itself works. The library's classes, compiled from its unchanged sources,
-  fail the same way in the same test.
+- A copy of a `BigList` or of a primitive `...BigList` (`copy()`) is not independent of the list. Sorting the copy of
+  a list that fits in one block sorts the list as well: after `BigList.create(3, 1, 2).copy().sort(null)` the
+  list reads `[1, 2, 3]` (`GapList` keeps `[3, 1, 2]`). After many inserts and removes at random places (300,000
+  and 100,000 in the test) a copy cannot be sorted: `IntBigList.copy().sort()` fails with
+  `ArrayIndexOutOfBoundsException`, `BigList.copy().sort(null)` with `NullPointerException`; an independent test found
+  such a copy unreadable before any sort. The list itself stays readable and sortable. The library's classes,
+  compiled from its unchanged sources, behave the same in the same tests.
+- An independent random test of 322,493 calls found no difference between the library and this provider, and met
+  further defects that both have (a `KeyCollection` that cannot be iterated after `removeIf` or `retainAll` in some
+  states, among others). This list is not complete.
+- `primitive.GapListPrimitives` is in the sources of the tag and is here, but it is not in the released jar
+  (`brownies-collections-0.9.24.jar` on Maven Central); nothing else in the library uses it.
 
 ### Beside this provider
 

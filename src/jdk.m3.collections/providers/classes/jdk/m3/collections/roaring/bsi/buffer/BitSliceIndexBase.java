@@ -186,7 +186,7 @@ public class BitSliceIndexBase {
    * @param predicate
    * @param foundSet
    * @return ImmutableRoaringBitmap
-   * see https://github.com/lemire/BitSliceIndex/blob/master/src/main/java/jdk/m3/collections/roaring/circuits/comparator/BasicComparator.java
+   * see https://github.com/lemire/BitSliceIndex/blob/master/src/main/java/org/roaringbitmap/circuits/comparator/BasicComparator.java
    */
   private ImmutableRoaringBitmap oNeilCompare(
       BitmapSliceIndex.Operation operation, int predicate, ImmutableRoaringBitmap foundSet) {
@@ -236,7 +236,7 @@ public class BitSliceIndexBase {
    *
    * @param predicate >=predicate
    * @return ImmutableRoaringBitmap
-   * see https://github.com/lemire/BitSliceIndex/blob/master/src/main/java/jdk/m3/collections/roaring/circuits/comparator/OwenComparator.java
+   * see https://github.com/lemire/BitSliceIndex/blob/master/src/main/java/org/roaringbitmap/circuits/comparator/OwenComparator.java
    */
   private ImmutableRoaringBitmap owenGreatEqual(int predicate, ImmutableRoaringBitmap foundSet) {
     ImmutableRoaringBitmap lastSpineGate = null;
