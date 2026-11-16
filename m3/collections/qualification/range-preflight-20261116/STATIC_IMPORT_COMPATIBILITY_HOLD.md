@@ -28,3 +28,17 @@ static-import source ambiguity is acceptable for the additive M3-specific
 API. Fully qualified calls can be migrated explicitly, but this is not
 transparent backward compatibility. Never silently remove published
 methods or claim universal source compatibility from binary-linkage results.
+
+## Explicitly qualified-call regression
+
+The same stock-Java21 verifier now compiles both an explicitly qualified
+`legacy.other.RangeOps.forEachRange(...)` call and a separately qualified
+`jdk.m3.collections.CollectionViews.forEachRange(...)` call while both wildcard
+static imports remain present. Both run with the expected output. This is an
+opt-in source migration path, **not** transparent compatibility for the
+unchanged ambiguous call. The verifier additionally seals the actual product
+owner's SHA-256 and refuses unexpected source drift before testing its bounded
+method-resolution models.
+
+The hosted CI gate and installed-image qualification remain distinct from this
+negative/positive source-resolution fixture.
