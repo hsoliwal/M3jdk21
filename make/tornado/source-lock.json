@@ -1,7 +1,7 @@
 {
   "schema": "m3jdk21-tornado-parallel-source-lock/1",
   "repository": "hsoliwal/synexia-tornadovm",
-  "commit": "89e16dda92328038309d6c3667605b3ebc13dc91",
+  "commit": "97adc5e43fb69099f2b850575e739f4d1f621f8a",
   "modules": [
     {
       "name": "tornado.api",
@@ -153,6 +153,13 @@
       "sha256": "7b5b4954a1bf1e7d4b85a5f48d8f61abec37431c7358c73acd2094768ea445c5"
     },
     {
+      "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/HostTaskGraph.java",
+      "kind": "java",
+      "module": "tornado.api",
+      "relative": "uk/ac/manchester/tornado/api/HostTaskGraph.java",
+      "sha256": "e493dc93f6c84430706522782cfe9cb20d38e9a0ca92bf037286ed05f04871a6"
+    },
+    {
       "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/ImmutableTaskGraph.java",
       "kind": "java",
       "module": "tornado.api",
@@ -171,7 +178,7 @@
       "kind": "java",
       "module": "tornado.api",
       "relative": "uk/ac/manchester/tornado/api/TaskGraph.java",
-      "sha256": "704b7dd4af9be48bd51957a1501ffa91a4a6785aa3bb7657ed9d3f9e97f12bd6"
+      "sha256": "6394824ba3938121e088a7f881eb7cb548e295524f2b9bce66cb700730fae02d"
     },
     {
       "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/TaskGraphInterface.java",
@@ -206,7 +213,7 @@
       "kind": "java",
       "module": "tornado.api",
       "relative": "uk/ac/manchester/tornado/api/TornadoExecutionPlan.java",
-      "sha256": "7bfc44a8ddef11ea9c24847c115dc2e78e4872d7156ac9ebd6571a665cf571a3"
+      "sha256": "8adf7d249384ff47edcccc6b69bb6b21e0291ce00791cc3c2e06d34096cdf4c2"
     },
     {
       "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/TornadoExecutionResult.java",
@@ -220,7 +227,7 @@
       "kind": "java",
       "module": "tornado.api",
       "relative": "uk/ac/manchester/tornado/api/TornadoExecutor.java",
-      "sha256": "ed6f16db93f6d38baa84c24fd2a15641d652d4d2fe08198bd2928be9693621d3"
+      "sha256": "8ce504eefd7d05c88676b918753f93ae5de11fc0894e0f33dc923576ef65b9e4"
     },
     {
       "path": "tornado-api/src/main/java/uk/ac/manchester/tornado/api/TornadoProfilerResult.java",
