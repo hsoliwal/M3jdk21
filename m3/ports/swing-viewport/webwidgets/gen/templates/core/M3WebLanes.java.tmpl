@@ -185,7 +185,11 @@ public abstract class M3WebLanes implements M3WebApi {
 			damageAll();
 		} else {
 			flags[item] = now;
-			damageItem(item);
+			if (((old ^ now) & (M3WebStates.OPEN | M3WebStates.HIDDEN)) != 0) {
+				layout(width, height);
+			} else {
+				damageItem(item);
+			}
 		}
 		fire(item, D_STATE);
 	}
