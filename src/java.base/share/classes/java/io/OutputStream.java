@@ -239,4 +239,41 @@ public abstract class OutputStream implements Closeable, Flushable {
         monitor.checkCancelled();
     }
 
+    /*
+     * Whole-array monitored I/O additions:
+     * Copyright (c) 2026, Hitesh Soliwal and Contributors to the Synexia Project.
+     * The original OpenJDK copyright and license notices above are retained.
+     */
+
+    /**
+     * Writes the supplied byte array with caller-owned progress.
+     *
+     * <p>When the inherited four-argument implementation is selected,
+     * this operation writes bounded chunks and credits progress only
+     * after each complete write succeeds. Cooperative cancellation
+     * follows that implementation's contract. The monitor, flushing
+     * and closing remain caller-owned.
+     *
+     * @implSpec
+     * This implementation invokes {@code writeMonitored(bytes, 0, bytes.length, monitor)}
+     * exactly once when the array is nonnull, using virtual dispatch.
+     * The monitor is forwarded unchanged, including when null; the selected
+     * implementation owns its validation. A null array fails before that
+     * invocation. This method adds no progress, cancellation or lifecycle
+     * callbacks, and propagates failures from the selected implementation.
+     *
+     * @param bytes source array
+     * @param monitor monitor passed to the selected four-argument implementation
+     * @throws IOException if the selected implementation throws it
+     * @throws NullPointerException if {@code bytes} is null; the inherited
+     *         four-argument implementation also rejects a null monitor
+     * @throws java.util.concurrent.CancellationException if the selected
+     *         implementation reports cancellation
+     * @see #writeMonitored(byte[], int, int, java.util.concurrent.ProgressMonitor)
+     */
+    public void writeMonitored(byte[] bytes,
+            java.util.concurrent.ProgressMonitor monitor) throws IOException {
+        writeMonitored(bytes, 0, bytes.length, monitor);
+    }
+
 }

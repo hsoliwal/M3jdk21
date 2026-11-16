@@ -900,4 +900,77 @@ public abstract class InputStream implements Closeable {
         return transferred;
     }
 
+    /*
+     * Whole-array monitored I/O additions:
+     * Copyright (c) 2026, Hitesh Soliwal and Contributors to the Synexia Project.
+     * The original OpenJDK copyright and license notices above are retained.
+     */
+
+    /**
+     * Reads bytes into the supplied array with caller-owned progress.
+     *
+     * <p>When the inherited four-argument implementation is selected,
+     * this operation performs at most one bounded read and can return
+     * fewer bytes than the array's length. It does not promise to fill
+     * the array. Progress and cooperative cancellation follow that
+     * implementation's contract.
+     *
+     * @implSpec
+     * This implementation invokes {@code readMonitored(bytes, 0, bytes.length, monitor)}
+     * exactly once when the array is nonnull, using virtual dispatch.
+     * It returns the selected implementation's result unchanged.
+     * The monitor is forwarded unchanged, including when null; the selected
+     * implementation owns its validation. A null array fails before that
+     * invocation. This method adds no progress, cancellation or lifecycle
+     * callbacks, and propagates failures from the selected implementation.
+     *
+     * @param bytes destination array
+     * @param monitor monitor passed to the selected four-argument implementation
+     * @return the selected implementation's result, which is the number of
+     *         bytes read or {@code -1} at end of input for the inherited implementation
+     * @throws IOException if the selected implementation throws it
+     * @throws NullPointerException if {@code bytes} is null; the inherited
+     *         four-argument implementation also rejects a null monitor
+     * @throws java.util.concurrent.CancellationException if the selected
+     *         implementation reports cancellation
+     * @see #readMonitored(byte[], int, int, java.util.concurrent.ProgressMonitor)
+     */
+    public int readMonitored(byte[] bytes,
+            java.util.concurrent.ProgressMonitor monitor) throws IOException {
+        return readMonitored(bytes, 0, bytes.length, monitor);
+    }
+
+    /**
+     * Reads up to the supplied array's length with caller-owned progress.
+     *
+     * <p>When the inherited four-argument implementation is selected,
+     * this operation uses bounded reads until the array is filled or
+     * end of input is reached. Progress and cooperative cancellation
+     * follow that implementation's contract.
+     *
+     * @implSpec
+     * This implementation invokes {@code readNBytesMonitored(bytes, 0, bytes.length, monitor)}
+     * exactly once when the array is nonnull, using virtual dispatch.
+     * It returns the selected implementation's result unchanged.
+     * The monitor is forwarded unchanged, including when null; the selected
+     * implementation owns its validation. A null array fails before that
+     * invocation. This method adds no progress, cancellation or lifecycle
+     * callbacks, and propagates failures from the selected implementation.
+     *
+     * @param bytes destination array
+     * @param monitor monitor passed to the selected four-argument implementation
+     * @return the selected implementation's result, which is the number of
+     *         bytes read, possibly zero at end of input, for the inherited implementation
+     * @throws IOException if the selected implementation throws it
+     * @throws NullPointerException if {@code bytes} is null; the inherited
+     *         four-argument implementation also rejects a null monitor
+     * @throws java.util.concurrent.CancellationException if the selected
+     *         implementation reports cancellation
+     * @see #readNBytesMonitored(byte[], int, int, java.util.concurrent.ProgressMonitor)
+     */
+    public int readNBytesMonitored(byte[] bytes,
+            java.util.concurrent.ProgressMonitor monitor) throws IOException {
+        return readNBytesMonitored(bytes, 0, bytes.length, monitor);
+    }
+
 }
