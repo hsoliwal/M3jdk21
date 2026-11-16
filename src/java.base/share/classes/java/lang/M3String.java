@@ -1205,6 +1205,12 @@ final class M3String implements CharSequence {
     }
 
     private byte[] encodeSingleByte(boolean asciiOnly) {
+        if (!asciiOnly && coder() == String.LATIN1) {
+            // A Latin-1 coded owner holds no wider unit: copy without preparing facts.
+            byte[] output = new byte[length()];
+            getBytes(output, 0, 0, String.LATIN1, length());
+            return output;
+        }
         M3StringFacts prepared = facts();
         if ((asciiOnly && prepared.ascii) || (!asciiOnly && prepared.latin1)) {
             byte[] output = new byte[length()];
@@ -1240,8 +1246,8 @@ final class M3String implements CharSequence {
             return encodeUtf8NoRepl();
         }
         if (checked == StandardCharsets.ISO_8859_1) {
-            M3StringFacts prepared = facts();
-            if (prepared.latin1) {
+            // The coder answers for a Latin-1 coded owner; facts are read only for UTF-16.
+            if (coder() == String.LATIN1 || facts().latin1) {
                 byte[] output = new byte[length()];
                 getBytes(output, 0, 0, String.LATIN1, length());
                 return output;
