@@ -1916,7 +1916,9 @@ abstract sealed class AbstractStringBuilder implements Appendable, CharSequence
         }
         M3String storage = input.m3();
         if (storage != null) {
-            if (!storage.facts().latin1) {
+            // A Latin-1 coded owner holds no wider unit, so the coder answers without
+            // preparing facts; only a UTF-16 coded value needs the latin1 measure.
+            if (storage.coder() != LATIN1 && !storage.facts().latin1) {
                 inflate();
             }
         } else if (coder != input.coder()) {
