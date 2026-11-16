@@ -13,7 +13,8 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
-import jdk.m3.collections.tooling.M3CountedCatalogue;
+
+import jdk.m3.collections.tooling.CountedCatalogue;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
@@ -38,12 +39,12 @@ final class CountedCatalogueTest {
     @Test void malformedRowsAndArgumentsRefuse(@TempDir Path dir) throws IOException {
         Path narrow = dir.resolve("narrow.tsv");
         Files.writeString(narrow, "a\tb\tc\n", StandardCharsets.UTF_8);
-        assertThrows(IOException.class, () -> M3CountedCatalogue.main(new String[] {narrow.toString()}));
+        assertThrows(IOException.class, () -> CountedCatalogue.main(new String[] {narrow.toString()}));
         Path blank = dir.resolve("blank.tsv");
         Files.writeString(blank, "a\tb\tc\td\te\tf\tg\t\n", StandardCharsets.UTF_8);
-        assertThrows(IOException.class, () -> M3CountedCatalogue.main(new String[] {blank.toString()}));
-        assertThrows(IllegalArgumentException.class, () -> M3CountedCatalogue.main(new String[0]));
-        assertThrows(IllegalArgumentException.class, () -> M3CountedCatalogue.main(new String[] {"a", "b", "c"}));
+        assertThrows(IOException.class, () -> CountedCatalogue.main(new String[] {blank.toString()}));
+        assertThrows(IllegalArgumentException.class, () -> CountedCatalogue.main(new String[0]));
+        assertThrows(IllegalArgumentException.class, () -> CountedCatalogue.main(new String[] {"a", "b", "c"}));
     }
 
     private static Path restoredLedger(Path dir) throws IOException {
@@ -60,7 +61,7 @@ final class CountedCatalogueTest {
         ByteArrayOutputStream captured = new ByteArrayOutputStream();
         System.setOut(new PrintStream(captured, true, StandardCharsets.UTF_8));
         try {
-            M3CountedCatalogue.main(args);
+            CountedCatalogue.main(args);
         } finally {
             System.setOut(original);
         }

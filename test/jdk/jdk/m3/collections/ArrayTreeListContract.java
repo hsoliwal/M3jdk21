@@ -2,6 +2,8 @@
  * Copyright 2026 Hitesh Soliwal and contributors
  * SPDX-License-Identifier: Apache-2.0
  */
+import jdk.m3.collections.apache.TreeList;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.ObjectInputStream;
@@ -16,7 +18,6 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.Objects;
 import java.util.Random;
-import jdk.m3.collections.apache.M3TreeList;
 
 /** Differential behavior and physical-slot ownership proof for the Apache arrayified owner. */
 @SuppressWarnings("deprecation")
@@ -62,18 +63,18 @@ public final class ArrayTreeListContract {
     }
 
     @SuppressWarnings("unchecked")
-    private static void roundTrip(M3TreeList<Object> actual,
+    private static void roundTrip(TreeList<Object> actual,
             ArrayList<Object> expected) throws Exception {
         byte[] bytes = serialize(actual);
         try (ObjectInputStream in = new ObjectInputStream(new ByteArrayInputStream(bytes))) {
             Object object = in.readObject();
-            require(object instanceof M3TreeList, "serialized type");
-            equal(expected, (M3TreeList<Object>) object);
+            require(object instanceof TreeList, "serialized type");
+            equal(expected, (TreeList<Object>) object);
         }
     }
 
     private static void iteratorMutation(ArrayList<Object> expected,
-            M3TreeList<Object> actual, Random random) {
+            TreeList<Object> actual, Random random) {
         int index = random.nextInt(expected.size() + 1);
         ListIterator<Object> e = expected.listIterator(index);
         ListIterator<Object> a = actual.listIterator(index);
@@ -116,14 +117,14 @@ public final class ArrayTreeListContract {
         }
     }
 
-    private static void storageProof(M3TreeList<?> actual) throws Exception {
+    private static void storageProof(TreeList<?> actual) throws Exception {
         boolean objectLane = false;
         boolean leftLane = false;
         boolean rightLane = false;
         boolean weightLane = false;
         boolean priorityLane = false;
         boolean bitmap = false;
-        for (Field field : M3TreeList.class.getDeclaredFields()) {
+        for (Field field : TreeList.class.getDeclaredFields()) {
             require(!field.getType().getSimpleName().contains("Node"), "node-owned field");
             require(!field.getType().getSimpleName().contains("Entry"), "entry-owned field");
             if (field.getName().equals("elements")) objectLane = field.getType() == Object[].class;
@@ -134,7 +135,7 @@ public final class ArrayTreeListContract {
             if (field.getName().equals("markMask")) bitmap = field.getType() == long[].class;
         }
         require(objectLane && leftLane && rightLane && weightLane && priorityLane && bitmap, "array lanes");
-        Field elements = M3TreeList.class.getDeclaredField("elements");
+        Field elements = TreeList.class.getDeclaredField("elements");
         elements.setAccessible(true);
         Object[] lane = (Object[]) elements.get(actual);
         int liveCount = 0;
@@ -151,7 +152,7 @@ public final class ArrayTreeListContract {
     public static void main(String[] args) throws Exception {
         Random random = new Random(0x4d3341525241594cL);
         ArrayList<Object> expected = new ArrayList<>();
-        M3TreeList<Object> actual = new M3TreeList<>();
+        TreeList<Object> actual = new TreeList<>();
         require(actual.isEmpty(), "initial empty");
         require(actual.reversed().isEmpty(), "initial reversed");
         for (int step = 0; step < 60_000; step++) {

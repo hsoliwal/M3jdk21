@@ -44,7 +44,7 @@ import java.util.stream.Stream;
  * @param <E> type of each element
  */
 @Deprecated
-public final class M3ArrayStack<E> extends AbstractList<E>
+public final class ArrayStack<E> extends AbstractList<E>
         implements RandomAccess, Cloneable, Serializable, SequencedCollection<E> {
 
     @Serial
@@ -58,7 +58,7 @@ public final class M3ArrayStack<E> extends AbstractList<E>
     private transient int size;
 
     /** Constructs an empty stack without allocating a backing array. */
-    public M3ArrayStack() {
+    public ArrayStack() {
         elements = EMPTY;
     }
 
@@ -68,7 +68,7 @@ public final class M3ArrayStack<E> extends AbstractList<E>
      * @param initialCapacity initial array capacity
      * @throws IllegalArgumentException if the capacity is negative
      */
-    public M3ArrayStack(int initialCapacity) {
+    public ArrayStack(int initialCapacity) {
         if (initialCapacity < 0) {
             throw new IllegalArgumentException("negative initialCapacity");
         }
@@ -524,7 +524,7 @@ public final class M3ArrayStack<E> extends AbstractList<E>
     public Object clone() {
         try {
             @SuppressWarnings("unchecked")
-            M3ArrayStack<E> clone = (M3ArrayStack<E>) super.clone();
+            ArrayStack<E> clone = (ArrayStack<E>) super.clone();
             clone.elements = size == 0 ? EMPTY : Arrays.copyOf(elements, elements.length);
             clone.modCount = 0;
             return clone;

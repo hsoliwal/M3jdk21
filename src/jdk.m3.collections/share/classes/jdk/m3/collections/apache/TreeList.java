@@ -46,7 +46,7 @@ import java.util.stream.StreamSupport;
  *
  * @param <E> element type
  */
-public final class M3TreeList<E> extends AbstractList<E>
+public final class TreeList<E> extends AbstractList<E>
         implements Iterable<E>, Collection<E>, List<E>, SequencedCollection<E>, Serializable {
 
     @Serial
@@ -73,7 +73,7 @@ public final class M3TreeList<E> extends AbstractList<E>
     private transient long sequence;
 
     /** Constructs an empty list, deferring all payload allocation. */
-    public M3TreeList() {
+    public TreeList() {
     }
 
     /**
@@ -81,7 +81,7 @@ public final class M3TreeList<E> extends AbstractList<E>
      *
      * @param source source values in encounter order
      */
-    public M3TreeList(Collection<? extends E> source) {
+    public TreeList(Collection<? extends E> source) {
         addAll(source);
     }
 
@@ -545,7 +545,7 @@ public final class M3TreeList<E> extends AbstractList<E>
             }
             checkForComodification();
             try {
-                M3TreeList.this.remove(lastReturned);
+                TreeList.this.remove(lastReturned);
                 if (lastReturned < cursor) {
                     cursor--;
                 }
@@ -723,7 +723,7 @@ public final class M3TreeList<E> extends AbstractList<E>
             checkForComodification();
             try {
                 int index = cursor;
-                M3TreeList.this.add(index, element);
+                TreeList.this.add(index, element);
                 lastReturned = NONE;
                 cursor = index + 1;
                 expectedModCount = modCount;

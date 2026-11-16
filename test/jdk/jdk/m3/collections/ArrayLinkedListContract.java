@@ -2,6 +2,8 @@
  * Copyright 2026 Hitesh Soliwal and contributors
  * SPDX-License-Identifier: Apache-2.0
  */
+import jdk.m3.collections.apache.NodeCachingLinkedList;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.ObjectInputStream;
@@ -16,7 +18,6 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.Objects;
 import java.util.Random;
-import jdk.m3.collections.apache.M3NodeCachingLinkedList;
 
 /** Differential behavior and physical-slot ownership proof for the Apache arrayified owner. */
 @SuppressWarnings("deprecation")
@@ -62,18 +63,18 @@ public final class ArrayLinkedListContract {
     }
 
     @SuppressWarnings("unchecked")
-    private static void roundTrip(M3NodeCachingLinkedList<Object> actual,
+    private static void roundTrip(NodeCachingLinkedList<Object> actual,
             LinkedList<Object> expected) throws Exception {
         byte[] bytes = serialize(actual);
         try (ObjectInputStream in = new ObjectInputStream(new ByteArrayInputStream(bytes))) {
             Object object = in.readObject();
-            require(object instanceof M3NodeCachingLinkedList, "serialized type");
-            equal(expected, (M3NodeCachingLinkedList<Object>) object);
+            require(object instanceof NodeCachingLinkedList, "serialized type");
+            equal(expected, (NodeCachingLinkedList<Object>) object);
         }
     }
 
     private static void iteratorMutation(LinkedList<Object> expected,
-            M3NodeCachingLinkedList<Object> actual, Random random) {
+            NodeCachingLinkedList<Object> actual, Random random) {
         int index = random.nextInt(expected.size() + 1);
         ListIterator<Object> e = expected.listIterator(index);
         ListIterator<Object> a = actual.listIterator(index);
@@ -116,12 +117,12 @@ public final class ArrayLinkedListContract {
         }
     }
 
-    private static void storageProof(M3NodeCachingLinkedList<?> actual) throws Exception {
+    private static void storageProof(NodeCachingLinkedList<?> actual) throws Exception {
         boolean objectLane = false;
         boolean prevLane = false;
         boolean nextLane = false;
         boolean bitmap = false;
-        for (Field field : M3NodeCachingLinkedList.class.getDeclaredFields()) {
+        for (Field field : NodeCachingLinkedList.class.getDeclaredFields()) {
             require(!field.getType().getSimpleName().contains("Node"), "node-owned field");
             require(!field.getType().getSimpleName().contains("Entry"), "entry-owned field");
             if (field.getName().equals("elements")) objectLane = field.getType() == Object[].class;
@@ -130,7 +131,7 @@ public final class ArrayLinkedListContract {
             if (field.getName().equals("markMask")) bitmap = field.getType() == long[].class;
         }
         require(objectLane && prevLane && nextLane && bitmap, "array lanes");
-        Field elements = M3NodeCachingLinkedList.class.getDeclaredField("elements");
+        Field elements = NodeCachingLinkedList.class.getDeclaredField("elements");
         elements.setAccessible(true);
         Object[] lane = (Object[]) elements.get(actual);
         int liveCount = 0;
@@ -147,7 +148,7 @@ public final class ArrayLinkedListContract {
     public static void main(String[] args) throws Exception {
         Random random = new Random(0x4d3341525241594cL);
         LinkedList<Object> expected = new LinkedList<>();
-        M3NodeCachingLinkedList<Object> actual = new M3NodeCachingLinkedList<>();
+        NodeCachingLinkedList<Object> actual = new NodeCachingLinkedList<>();
         require(actual.isEmpty(), "initial empty");
         require(actual.reversed().isEmpty(), "initial reversed");
         for (int step = 0; step < 60_000; step++) {

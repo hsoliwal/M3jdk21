@@ -2,6 +2,8 @@
  * Copyright 2026 Hitesh Soliwal and contributors
  * SPDX-License-Identifier: Apache-2.0
  */
+import jdk.m3.collections.apache.ArrayStack;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.ObjectInputStream;
@@ -19,7 +21,6 @@ import java.util.ListIterator;
 import java.util.Objects;
 import java.util.Random;
 import java.util.Set;
-import jdk.m3.collections.apache.M3ArrayStack;
 
 /** Deterministic, independent JDK ArrayList and stack-protocol differential. */
 @SuppressWarnings("deprecation")
@@ -51,7 +52,7 @@ public final class ArrayStackContract {
         return -1;
     }
 
-    private static void assertEquivalent(List<Object> expected, M3ArrayStack<Object> actual) {
+    private static void assertEquivalent(List<Object> expected, ArrayStack<Object> actual) {
         check(expected.equals(actual), "List.equals");
         check(actual.equals(expected), "symmetric equals");
         check(actual.hashCode() == expected.hashCode(), "hashCode");
@@ -61,7 +62,7 @@ public final class ArrayStackContract {
         check(actual.toString().equals(expected.toString()), "toString");
     }
 
-    private static void roundTrip(M3ArrayStack<Object> actual, List<Object> expected)
+    private static void roundTrip(ArrayStack<Object> actual, List<Object> expected)
             throws Exception {
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
         try (ObjectOutputStream out = new ObjectOutputStream(bytes)) {
@@ -70,15 +71,15 @@ public final class ArrayStackContract {
         try (ObjectInputStream in = new ObjectInputStream(
                 new ByteArrayInputStream(bytes.toByteArray()))) {
             Object copy = in.readObject();
-            check(copy instanceof M3ArrayStack, "serialized type");
+            check(copy instanceof ArrayStack, "serialized type");
             check(expected.equals(copy), "serialized sequence");
             check(copy != actual, "detached owner");
         }
     }
 
-    private static void laneProof(M3ArrayStack<?> actual) throws Exception {
+    private static void laneProof(ArrayStack<?> actual) throws Exception {
         int payloadFields = 0;
-        for (Field field : M3ArrayStack.class.getDeclaredFields()) {
+        for (Field field : ArrayStack.class.getDeclaredFields()) {
             if (field.getName().equals("elements")) {
                 check(field.getType() == Object[].class, "Object[] owner");
                 payloadFields++;
@@ -87,7 +88,7 @@ public final class ArrayStackContract {
             check(!field.getType().getSimpleName().contains("Entry"), "no Entry field");
         }
         check(payloadFields == 1, "single payload owner");
-        Field elements = M3ArrayStack.class.getDeclaredField("elements");
+        Field elements = ArrayStack.class.getDeclaredField("elements");
         elements.setAccessible(true);
         actual.clear();
         for (Object value : (Object[]) elements.get(actual)) {
@@ -95,7 +96,7 @@ public final class ArrayStackContract {
         }
     }
 
-    private static void checkedExceptions(M3ArrayStack<Object> stack) {
+    private static void checkedExceptions(ArrayStack<Object> stack) {
         stack.clear();
         try {
             stack.peek();
@@ -126,7 +127,7 @@ public final class ArrayStackContract {
     public static void main(String[] args) throws Exception {
         Random random = new Random(0x4d33415252415953L);
         ArrayList<Object> expected = new ArrayList<>();
-        M3ArrayStack<Object> actual = new M3ArrayStack<>();
+        ArrayStack<Object> actual = new ArrayStack<>();
         for (int step = 0; step < 60_000; step++) {
             if (expected.size() > 500) {
                 expected.clear();
@@ -222,7 +223,7 @@ public final class ArrayStackContract {
                 }
                 case 15 -> {
                     Object copy = actual.clone();
-                    check(copy instanceof M3ArrayStack, "clone type");
+                    check(copy instanceof ArrayStack, "clone type");
                     check(expected.equals(copy), "clone content");
                     check(copy != actual, "clone detached");
                 }
