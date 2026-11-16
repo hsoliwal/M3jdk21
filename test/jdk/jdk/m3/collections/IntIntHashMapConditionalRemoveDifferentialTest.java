@@ -38,7 +38,9 @@ import org.junit.jupiter.api.Test;
  * run time from the hash-pinned fixture into a separate package and class loader) must produce byte-identical
  * dumps over {@value #OPS} seeded operations drawn from put, remove(key), remove(key, expected), getOrDefault,
  * containsKey and size. The live bytecode must call {@code find} once and neither {@code containsKey} nor
- * {@code getOrDefault} and call {@code shiftKeys(int)} once while retaining only the zero-key {@code remove(int)} delegation (the class is final and {@code find} is private,
+ * {@code getOrDefault}. It must call {@code shiftKeys(int)} once while
+ * retaining only the zero-key {@code remove(int)} delegation (the class
+ * is final and {@code find} is private,
  * so the probe count is asserted on the javap listing rather than through a runtime hook).</p>
  */
 final class IntIntHashMapConditionalRemoveDifferentialTest {
