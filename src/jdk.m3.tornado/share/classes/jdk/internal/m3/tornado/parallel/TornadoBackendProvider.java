@@ -14,6 +14,7 @@ import jdk.m3.parallel.spi.BackendProvider;
 import jdk.m3.parallel.spi.DeviceProgram;
 import jdk.m3.parallel.spi.Probe;
 import uk.ac.manchester.tornado.api.TornadoRuntime;
+import uk.ac.manchester.tornado.api.TornadoTargetDevice;
 import uk.ac.manchester.tornado.api.common.TornadoDevice;
 import uk.ac.manchester.tornado.api.enums.TornadoDeviceType;
 import uk.ac.manchester.tornado.api.enums.TornadoVMBackendType;
@@ -87,7 +88,17 @@ public final class TornadoBackendProvider implements BackendProvider {
         long[] dimensions = observed.device().getDeviceMaxWorkgroupDimensions();
         if (dimensions != null && dimensions.length != 0
                 && dimensions[0] > 0 && grid.local() > dimensions[0]) {
-            throw new IllegalArgumentException("local work exceeds the selected device limit");
+            throw new IllegalArgumentException(
+                    "local work exceeds the selected device dimension limit");
+        }
+        // The first-axis work-item limit can exceed the total work-group limit.
+        // Refuse that shape here before the runtime can replace the local grid.
+        TornadoTargetDevice physical = observed.device().getPhysicalDevice();
+        long[] groupSize = physical == null ? null : physical.getDeviceMaxWorkGroupSize();
+        if (groupSize != null && groupSize.length != 0
+                && groupSize[0] > 0 && grid.local() > groupSize[0]) {
+            throw new IllegalArgumentException(
+                    "local work exceeds the selected device total work-group limit");
         }
         return new TornadoDeviceProgram(kernel, grid, lengths, observed.device());
     }

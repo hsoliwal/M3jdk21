@@ -5,12 +5,14 @@
 package jdk.m3.tooling.naming;
 
 import java.io.IOException;
+import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -40,6 +42,10 @@ public final class NamingScan {
             "source_sha256", "final_", "readback");
     static final String SELF_PREFIX = "m3/tooling/jdk-naming/";
     static final Set<String> SELF = Set.of("m3/release/check_standalone.py", "m3/release/test_check_standalone.py");
+    private static final String KEEP_FILE = SELF_PREFIX + "NAMING_KEEP.tsv";
+    private static final String KEEP_HEADER = "path\treason_class\treason";
+    private static final Set<String> KEEP_CLASSES = Set.of("DETECTOR", "PIN", "DONOR_DIFFERENTIAL",
+            "MAVEN_COORDINATE", "LINEAGE_ID");
     /** Every rule contains one of these literals; a line without them is conformant (the recipe's QUICK). */
     static final Pattern QUICK = Pattern.compile("(?i)synexia|com[./_]{1,2}m3[./_]|m3([-_./])m3\\1|m3[ _-]?jdk");
     private static final int EXCERPT = 160;
@@ -54,6 +60,10 @@ public final class NamingScan {
 
     static boolean isSelf(String path) {
         return path.startsWith(SELF_PREFIX) || SELF.contains(path);
+    }
+
+    private static boolean isSelf(String path, Set<String> kept) {
+        return isSelf(path) || kept.contains(path);
     }
 
     static boolean isLineage(String path) {
@@ -77,6 +87,53 @@ public final class NamingScan {
         String suffix = name.lastIndexOf('.') < 0 ? "" : name.substring(name.lastIndexOf('.')).toLowerCase(Locale.ROOT);
         return TEXT_SUFFIXES.contains(suffix) || name.equals("pom.xml")
                 || isServiceDescriptor(path);
+    }
+
+    private static boolean inScope(String path, Set<String> kept) {
+        return !kept.contains(path) && inScope(path);
+    }
+
+    /**
+     * Loads the existing explicit KEEP policy for this scan only. Revision scans read the policy from the same
+     * revision as their source blobs; a working-tree edit or another scanner cannot change those exemptions.
+     * An absent table grants no exemptions, as in the Python loader. Listed files must belong to the scanned tree.
+     */
+    private Set<String> keptFiles(String rev, List<String> tracked) throws IOException, InterruptedException {
+        Set<String> present = Set.copyOf(tracked);
+        String text;
+        if (rev == null) {
+            Path file = root.resolve(KEEP_FILE);
+            if (!Files.exists(file)) {
+                return Set.of();
+            }
+            text = Files.readString(file, StandardCharsets.UTF_8);
+        } else {
+            if (!present.contains(KEEP_FILE)) {
+                return Set.of();
+            }
+            byte[][] content = new byte[1][];
+            BlobReader.read(root, rev, List.of(KEEP_FILE), (path, bytes) -> content[0] = bytes);
+            text = StandardCharsets.UTF_8.newDecoder().decode(ByteBuffer.wrap(content[0])).toString();
+        }
+        List<String> lines = text.lines().toList();
+        if (lines.isEmpty() || !KEEP_HEADER.equals(lines.getFirst())) {
+            throw new IOException("NAMING_KEEP: bad header");
+        }
+        Set<String> kept = new HashSet<>();
+        for (int index = 1; index < lines.size(); index++) {
+            String[] fields = lines.get(index).split("\t", -1);
+            if (fields.length != 3 || !KEEP_CLASSES.contains(fields[1]) || fields[2].isBlank()
+                    || !kept.add(fields[0])) {
+                throw new IOException("NAMING_KEEP: bad row at line " + (index + 1));
+            }
+            if (!present.contains(fields[0])) {
+                throw new IOException("NAMING_KEEP: stale path " + fields[0]);
+            }
+            if (rev == null && !Files.isRegularFile(root.resolve(fields[0]))) {
+                throw new IOException("NAMING_KEEP: missing working-tree file " + fields[0]);
+            }
+        }
+        return Set.copyOf(kept);
     }
 
     /**
@@ -105,10 +162,11 @@ public final class NamingScan {
     /** Every violation in the tracked files that are checked out, paths first. */
     public List<Violation> scan() throws IOException, InterruptedException {
         List<String> tracked = tracked(null);
-        List<Violation> violations = pathViolations(tracked);
+        Set<String> kept = keptFiles(null, tracked);
+        List<Violation> violations = pathViolations(tracked, kept);
         for (String path : tracked) {
             Path file = root.resolve(path);
-            if (inScope(path) && Files.isRegularFile(file)) {
+            if (inScope(path, kept) && Files.isRegularFile(file)) {
                 scanFile(path, Files.readAllBytes(file), violations);
             }
         }
@@ -121,23 +179,24 @@ public final class NamingScan {
      */
     public List<Violation> scan(String rev) throws IOException, InterruptedException {
         List<String> tracked = tracked(rev);
-        List<Violation> violations = pathViolations(tracked);
-        List<String> scoped = tracked.stream().filter(NamingScan::inScope).toList();
+        Set<String> kept = keptFiles(rev, tracked);
+        List<Violation> violations = pathViolations(tracked, kept);
+        List<String> scoped = tracked.stream().filter(path -> inScope(path, kept)).toList();
         BlobReader.read(root, rev, scoped, (path, bytes) -> scanFile(path, bytes, violations));
         return violations;
     }
 
-    private List<Violation> pathViolations(List<String> tracked) {
+    private List<Violation> pathViolations(List<String> tracked, Set<String> kept) {
         Map<String, Integer> claims = new HashMap<>();
         for (String path : tracked) {
-            if (!isSelf(path)) {
+            if (!isSelf(path, kept)) {
                 claims.merge(targetPath(path), 1, Integer::sum);
             }
         }
         Set<String> existing = Set.copyOf(tracked);
         List<Violation> violations = new ArrayList<>();
         for (String path : tracked) {
-            if (!pathConformant(path, existing, claims)) {
+            if (!kept.contains(path) && !pathConformant(path, existing, claims)) {
                 violations.add(new Violation(path, 0, "PATH", rules.renamedPath(path)));
             }
         }

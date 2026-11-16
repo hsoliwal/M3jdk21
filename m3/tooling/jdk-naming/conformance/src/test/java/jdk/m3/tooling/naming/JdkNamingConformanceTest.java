@@ -6,11 +6,14 @@ package jdk.m3.tooling.naming;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,6 +21,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 /**
  * The repository conforms to the M3JDK21 naming standard, and this executor agrees with the rename recipe on the
@@ -27,6 +31,13 @@ class JdkNamingConformanceTest {
 
     private static Path root;
     private static NamingRules rules;
+    private static final String KEEP_FILE = "m3/tooling/jdk-naming/NAMING_KEEP.tsv";
+    private static final String KEEP_HEADER = "path\treason_class\treason\n";
+    private static final String KEPT_PATH = "m3/x/SynexiaPinned.java";
+    private static final String LEGACY_SOURCE = "import com.synexia.x.SynexiaRule;\n";
+
+    @TempDir
+    Path fixtures;
 
     @BeforeAll
     static void load() throws IOException {
@@ -75,6 +86,158 @@ class JdkNamingConformanceTest {
                 rewritten("// the Synexia tool, see vendor/synexia/lib and Synexia-NOTICE"));
         assertTrue(rules.keepsPath("m3/x/Synexia-NOTICE"));
         assertTrue(rules.keepsPath("M3-SYNEXIA-NOTICE.md"));
+    }
+
+    @Test
+    void theTornadoForkIdentityIsPreservedAsAnExactSpan() {
+        String repository = "hsoliwal/synexia-tornadovm";
+        List<String> references = List.of(repository,
+                "https://github.com/" + repository + "/blob/pin/src/SynexiaKernel.java",
+                "https://raw.githubusercontent.com/" + repository + "/pin/synexia-kernel.java",
+                "https://api.github.com/repos/" + repository + "/git/refs/heads/synexia-main",
+                "https://github.com/" + repository + ".git");
+        for (String reference : references) {
+            String before = "repository = \"" + reference + "\"; artifact = \"synexia-tool\"";
+            String after = "repository = \"" + reference + "\"; artifact = \"m3-tool\"";
+            Map<String, Integer> counts = new HashMap<>();
+            assertEquals(after, rules.rewrite(before, counts), reference);
+            assertEquals(Map.of("KEBAB", 1), counts, reference);
+        }
+        for (String other : List.of("other/synexia-tornadovm", "xhsoliwal/synexia-tornadovm",
+                repository + "-other", repository + "_other", repository + ".other",
+                "https://github.com/" + repository + "-other/blob/pin/SynexiaKernel.java",
+                "https://github.com/other/" + repository, "https://example.test/" + repository,
+                "https://github.com/" + repository + "%2Dother",
+                "git@elsewhere.example:" + repository + ".git",
+                "synexia-tornadovm")) {
+            assertFalse(other.equals(rewritten(other)), other);
+        }
+        assertEquals(repository + ".", rewritten(repository + "."));
+        assertEquals("if lock.get(\"repository\") != \"" + repository + "\":",
+                rewritten("if lock.get(\"repository\") != \"" + repository + "\":"));
+    }
+
+    private Path fixture(String name, Map<String, String> files) throws IOException, InterruptedException {
+        Path repo = Files.createDirectory(fixtures.resolve(name));
+        for (Map.Entry<String, String> entry : files.entrySet()) {
+            Path path = repo.resolve(entry.getKey());
+            Files.createDirectories(path.getParent());
+            Files.writeString(path, entry.getValue());
+        }
+        git(repo, "init", "-q");
+        git(repo, "config", "core.autocrlf", "false");
+        git(repo, "add", "--all");
+        return repo;
+    }
+
+    private static String git(Path repo, String... arguments) throws IOException, InterruptedException {
+        List<String> command = new ArrayList<>(List.of("git", "-C", repo.toString()));
+        command.addAll(List.of(arguments));
+        Process process = new ProcessBuilder(command).redirectErrorStream(true).start();
+        String output = new String(process.getInputStream().readAllBytes(), StandardCharsets.UTF_8);
+        assertEquals(0, process.waitFor(), String.join(" ", command) + "\n" + output);
+        return output.strip();
+    }
+
+    private static String commit(Path repo) throws IOException, InterruptedException {
+        git(repo, "-c", "user.name=Naming fixture", "-c", "user.email=naming@example.invalid",
+                "commit", "--no-gpg-sign", "-q", "-m", "fixture");
+        return git(repo, "rev-parse", "HEAD");
+    }
+
+    @Test
+    void keepRowsProtectOnlyTheirExactFiles() throws IOException, InterruptedException {
+        Map<String, String> files = new HashMap<>();
+        StringBuilder table = new StringBuilder(KEEP_HEADER);
+        List<String> reasons = List.of("DETECTOR", "PIN", "DONOR_DIFFERENTIAL",
+                "MAVEN_COORDINATE", "LINEAGE_ID");
+        for (int index = 0; index < reasons.size(); index++) {
+            String path = "m3/x/SynexiaKeep" + index + ".java";
+            files.put(path, LEGACY_SOURCE);
+            table.append(path).append('\t').append(reasons.get(index)).append("\tretained identity\n");
+        }
+        String sibling = "m3/x/SynexiaKeep0Sibling.java";
+        files.put(sibling, LEGACY_SOURCE);
+        files.put(KEEP_FILE, table.toString());
+        Path repo = fixture("exact", files);
+        NamingScan scan = new NamingScan(rules, repo);
+        for (List<NamingScan.Violation> found : List.of(scan.scan(), scan.scan(commit(repo)))) {
+            assertEquals(2, found.size(), "the unlisted sibling retains its path and content violations");
+            assertEquals(Set.of(sibling), found.stream().map(NamingScan.Violation::path).collect(Collectors.toSet()));
+            assertEquals(Set.of(0, 1), found.stream().map(NamingScan.Violation::line).collect(Collectors.toSet()));
+        }
+    }
+
+    @Test
+    void malformedKeepRowsRefuseForWorkingTreesAndRevisions() throws IOException, InterruptedException {
+        String row = KEPT_PATH + "\tPIN\tretained identity\n";
+        List<String> invalid = List.of("", "unexpected header\n", KEEP_HEADER + KEPT_PATH + "\tPIN\n",
+                KEEP_HEADER + KEPT_PATH + "\tPIN\treason\textra\n",
+                KEEP_HEADER + KEPT_PATH + "\tFAVOURITE\treason\n",
+                KEEP_HEADER + KEPT_PATH + "\tPIN\t \n", KEEP_HEADER + row + row,
+                KEEP_HEADER + "\n" + row);
+        for (int index = 0; index < invalid.size(); index++) {
+            Path repo = fixture("bad-" + index,
+                    Map.of(KEPT_PATH, LEGACY_SOURCE, KEEP_FILE, invalid.get(index)));
+            NamingScan scan = new NamingScan(rules, repo);
+            String rev = commit(repo);
+            assertTrue(assertThrows(IOException.class, scan::scan).getMessage().startsWith("NAMING_KEEP:"));
+            assertTrue(assertThrows(IOException.class, () -> scan.scan(rev)).getMessage()
+                    .startsWith("NAMING_KEEP:"));
+        }
+    }
+
+    @Test
+    void keepRowsRequireTrackedExistingFiles() throws IOException, InterruptedException {
+        Path repo = fixture("stale", Map.of(KEEP_FILE,
+                KEEP_HEADER + KEPT_PATH + "\tPIN\tretained identity\n"));
+        NamingScan scan = new NamingScan(rules, repo);
+        String stale = commit(repo);
+        assertTrue(assertThrows(IOException.class, scan::scan).getMessage().contains("stale path"));
+        assertTrue(assertThrows(IOException.class, () -> scan.scan(stale)).getMessage().contains("stale path"));
+        Path source = repo.resolve(KEPT_PATH);
+        Files.createDirectories(source.getParent());
+        Files.writeString(source, LEGACY_SOURCE);
+        assertTrue(assertThrows(IOException.class, scan::scan).getMessage().contains("stale path"),
+                "an untracked file cannot satisfy a tracked-tree KEEP row");
+        git(repo, "add", KEPT_PATH);
+        Files.delete(source);
+        assertTrue(assertThrows(IOException.class, scan::scan).getMessage().contains("missing working-tree file"));
+        assertTrue(scan.scan(commit(repo)).isEmpty(), "the revision owns its blob even when not checked out");
+    }
+
+    @Test
+    void keepPolicyIsIsolatedAndReloadedPerRoot() throws IOException, InterruptedException {
+        Path first = fixture("first", Map.of(KEPT_PATH, LEGACY_SOURCE, KEEP_FILE,
+                KEEP_HEADER + KEPT_PATH + "\tPIN\tretained identity\n"));
+        Path second = fixture("second", Map.of(KEPT_PATH, LEGACY_SOURCE));
+        NamingScan firstScan = new NamingScan(rules, first);
+        NamingScan secondScan = new NamingScan(rules, second);
+        assertTrue(firstScan.scan().isEmpty());
+        assertEquals(2, secondScan.scan().size(), "a root without a table inherits no exemptions");
+        assertTrue(firstScan.scan().isEmpty());
+        Files.writeString(first.resolve(KEEP_FILE), KEEP_HEADER);
+        assertEquals(2, firstScan.scan().size(), "a reused scanner observes removal of a working-tree entry");
+        Files.writeString(first.resolve(KEEP_FILE), "invalid header\n");
+        assertThrows(IOException.class, firstScan::scan);
+        assertEquals(2, secondScan.scan().size(), "another root's malformed policy does not change this scan");
+    }
+
+    @Test
+    void revisionScanUsesItsOwnKeepTable() throws IOException, InterruptedException {
+        Path repo = fixture("revisions", Map.of(KEPT_PATH, LEGACY_SOURCE, KEEP_FILE,
+                KEEP_HEADER + KEPT_PATH + "\tPIN\tretained identity\n"));
+        String keptRevision = commit(repo);
+        Files.writeString(repo.resolve(KEEP_FILE), KEEP_HEADER);
+        git(repo, "add", KEEP_FILE);
+        String liveRevision = commit(repo);
+        Files.writeString(repo.resolve(KEEP_FILE), "invalid current policy\n");
+        Files.delete(repo.resolve(KEPT_PATH));
+        NamingScan scan = new NamingScan(rules, repo);
+        assertTrue(scan.scan(keptRevision).isEmpty());
+        assertEquals(2, scan.scan(liveRevision).size(), "a later revision removed the exemption");
+        assertTrue(scan.scan(keptRevision).isEmpty(), "the preceding scan cannot leak revision policy");
+        assertThrows(IOException.class, scan::scan, "the dirty working-tree policy is still rejected");
     }
 
     @Test
