@@ -683,6 +683,13 @@ AC_DEFUN([TOOLCHAIN_CHECK_MOBILE_COMPILER],
         [AC_MSG_ERROR([The $1 compiler must target iOS $OPENJDK_TARGET_CPU with an iOS SDK])])
     AC_COMPUTE_INT([MOBILE_COMPILER_LEVEL], [__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__], [],
         [AC_MSG_ERROR([Cannot determine iOS deployment target from the $1 compiler])])
+    AC_COMPUTE_INT([MOBILE_COMPILER_SIMULATOR], [TARGET_OS_SIMULATOR],
+        [[#include <TargetConditionals.h>]],
+        [AC_MSG_ERROR([Cannot determine iOS device or simulator target from the $1 compiler])])
+    case "$MOBILE_COMPILER_SIMULATOR" in
+      0|1) ;;
+      *) AC_MSG_ERROR([Invalid iOS simulator target from the $1 compiler]) ;;
+    esac
   fi
   AC_LANG_POP([$1])
 ])
@@ -691,6 +698,7 @@ AC_DEFUN([TOOLCHAIN_CHECK_MOBILE_TARGET],
 [
   OPENJDK_TARGET_ANDROID_API=
   OPENJDK_TARGET_IOS_DEPLOYMENT_TARGET=
+  OPENJDK_TARGET_IOS_SIMULATOR=
   if test "x$OPENJDK_TARGET_OS" = xandroid || test "x$OPENJDK_TARGET_OS" = xios; then
     if test "x$TOOLCHAIN_TYPE" != xclang; then
       AC_MSG_ERROR([Mobile targets require a Clang toolchain])
@@ -704,6 +712,9 @@ AC_DEFUN([TOOLCHAIN_CHECK_MOBILE_TARGET],
     esac
     TOOLCHAIN_CHECK_MOBILE_COMPILER([C])
     MOBILE_C_LEVEL=$MOBILE_COMPILER_LEVEL
+    if test "x$OPENJDK_TARGET_OS" = xios; then
+      MOBILE_C_SIMULATOR=$MOBILE_COMPILER_SIMULATOR
+    fi
     TOOLCHAIN_CHECK_MOBILE_COMPILER([C++])
     if test "x$MOBILE_C_LEVEL" != "x$MOBILE_COMPILER_LEVEL"; then
       AC_MSG_ERROR([C and C++ mobile deployment targets differ])
@@ -712,12 +723,18 @@ AC_DEFUN([TOOLCHAIN_CHECK_MOBILE_TARGET],
       OPENJDK_TARGET_ANDROID_API=$MOBILE_COMPILER_LEVEL
       AC_MSG_NOTICE([Android API level selected by the compilers: $OPENJDK_TARGET_ANDROID_API])
     else
+      if test "x$MOBILE_C_SIMULATOR" != "x$MOBILE_COMPILER_SIMULATOR"; then
+        AC_MSG_ERROR([C and C++ iOS device or simulator targets differ])
+      fi
       OPENJDK_TARGET_IOS_DEPLOYMENT_TARGET=$MOBILE_COMPILER_LEVEL
+      OPENJDK_TARGET_IOS_SIMULATOR=$MOBILE_COMPILER_SIMULATOR
       AC_MSG_NOTICE([iOS deployment target selected by the compilers: $OPENJDK_TARGET_IOS_DEPLOYMENT_TARGET])
+      AC_MSG_NOTICE([iOS simulator target selected by the compilers: $OPENJDK_TARGET_IOS_SIMULATOR])
     fi
   fi
   AC_SUBST(OPENJDK_TARGET_ANDROID_API)
   AC_SUBST(OPENJDK_TARGET_IOS_DEPLOYMENT_TARGET)
+  AC_SUBST(OPENJDK_TARGET_IOS_SIMULATOR)
 ])
 
 # Detect the core components of the toolchain, i.e. the compilers (CC and CXX),

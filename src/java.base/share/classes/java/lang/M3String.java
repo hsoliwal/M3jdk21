@@ -1608,6 +1608,122 @@ final class M3String implements CharSequence {
         return joinValues(pieces);
     }
 
+    /**
+     * Unicode/locale case mapping over canonical UTF-16 coordinates. The original String is
+     * used only by the JDK's context-sensitive rules; its character/code-point readers access
+     * these same canonical owners. No whole-input compatibility shadow is requested.
+     */
+    M3String caseMap(String source, java.util.Locale locale, boolean upper) {
+        Objects.requireNonNull(locale, "locale");
+        CodeUnitCursor units = new CodeUnitCursor(this);
+        int length = length();
+        int first = 0;
+        // Match StringUTF16's first-change scan before invoking conditional rules. In particular,
+        // Lithuanian dot removal alone must not initiate an otherwise unchanged mapping pass.
+        while (first < length) {
+            char unit = units.at(first);
+            if (Character.isSurrogate(unit)
+                    || unit != (upper ? Character.toUpperCaseEx(unit)
+                                      : Character.toLowerCase(unit))) break;
+            first++;
+        }
+        if (first == length) return this;
+
+        String language = locale.getLanguage();
+        boolean localeDependent = language == "tr" || language == "az" || language == "lt";
+        ArrayList<M3String> pieces = null;
+        char[] output = null;
+        int used = 0;
+        int unchanged = 0;
+        for (int index = first; index < length;) {
+            int codePoint = units.at(index);
+            int count = 1;
+            if (Character.isHighSurrogate((char) codePoint) && index + 1 < length) {
+                char low = units.at(index + 1);
+                if (Character.isLowSurrogate(low)) {
+                    codePoint = Character.toCodePoint((char) codePoint, low);
+                    count = 2;
+                }
+            }
+            boolean conditional = localeDependent
+                    || (!upper && (codePoint == '\u03a3' || codePoint == '\u0130'));
+            int mapped = upper
+                    ? (conditional ? ConditionalSpecialCasing.toUpperCaseEx(source, index, locale)
+                                   : Character.toUpperCaseEx(codePoint))
+                    : (conditional ? ConditionalSpecialCasing.toLowerCaseEx(source, index, locale)
+                                   : Character.toLowerCase(codePoint));
+            if (mapped != codePoint) {
+                if (pieces == null) {
+                    pieces = new ArrayList<>();
+                    output = new char[1024];
+                }
+                used = appendCaseRange(pieces, output, used, units, unchanged, index);
+                if (mapped == Character.ERROR) {
+                    char[] expansion = upper
+                            ? (conditional
+                                    ? ConditionalSpecialCasing.toUpperCaseCharArray(source, index, locale)
+                                    : Character.toUpperCaseCharArray(codePoint))
+                            : ConditionalSpecialCasing.toLowerCaseCharArray(source, index, locale);
+                    for (char unit : expansion) {
+                        used = appendCaseUnit(pieces, output, used, unit);
+                    }
+                } else if (Character.isBmpCodePoint(mapped)) {
+                    used = appendCaseUnit(pieces, output, used, (char) mapped);
+                } else {
+                    used = appendCaseUnit(pieces, output, used, Character.highSurrogate(mapped));
+                    used = appendCaseUnit(pieces, output, used, Character.lowSurrogate(mapped));
+                }
+                unchanged = index + count;
+            }
+            index += count;
+        }
+        // The only unchanged input reaching this point was stopped by a surrogate. The JDK
+        // UTF-16 extended path returns a fresh String for it; share payload, not wrapper identity.
+        if (pieces == null) return new M3String(owner, value);
+        used = appendCaseRange(pieces, output, used, units, unchanged, length);
+        if (used != 0) flushCaseChunk(pieces, output, used);
+        return joinValues(pieces);
+    }
+
+    /** Preserve long unchanged runs; absorb short runs into the bounded output chunk. */
+    private int appendCaseRange(ArrayList<M3String> pieces, char[] output, int used,
+                                CodeUnitCursor units, int begin, int end) {
+        if (end - begin >= output.length) {
+            if (used != 0) flushCaseChunk(pieces, output, used);
+            pieces.add(slice(begin, end));
+            return 0;
+        }
+        for (int index = begin; index < end; index++) {
+            used = appendCaseUnit(pieces, output, used, units.at(index));
+        }
+        return used;
+    }
+
+    private static int appendCaseUnit(ArrayList<M3String> pieces, char[] output,
+                                      int used, char unit) {
+        if (used == output.length) {
+            flushCaseChunk(pieces, output, used);
+            used = 0;
+        }
+        output[used++] = unit;
+        return used;
+    }
+
+    private static void flushCaseChunk(ArrayList<M3String> pieces, char[] output, int used) {
+        M3String chunk = M3StringPool.internChars(output, 0, used);
+        if (chunk == null) {
+            // Pool budgets may refuse a multi-unit atom. The existing single-unit lane never
+            // refuses; compose at most one bounded chunk of those canonical units at a time.
+            // This rare path retains more tuple metadata, but never a full spelling shadow.
+            ArrayList<M3String> units = new ArrayList<>(used);
+            for (int index = 0; index < used; index++) {
+                units.add(M3StringPool.internUnit(output[index]));
+            }
+            chunk = joinValues(units);
+        }
+        pieces.add(chunk);
+    }
+
     M3String asciiCase(boolean upper) {
         M3StringFacts prepared = facts();
         if (!prepared.ascii) {

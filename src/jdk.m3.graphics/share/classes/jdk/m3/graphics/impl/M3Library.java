@@ -9,9 +9,11 @@ import java.util.*;
 public class M3Library {
     public static volatile boolean _loaded = false;
     public static final String LIBRARY_NAME = "skija";
+    private static final String NATIVE_LIBRARY_NAME = "m3graphics";
+    private static boolean loading;
 
     public static void staticLoad() {
-        if (!_loaded && !"false".equals(System.getProperty("skija.staticLoad"))) load();
+        if (!_loaded && !"false".equals(property("staticLoad"))) load();
     }
 
     public static String readResource(URL url) {
@@ -28,100 +30,87 @@ public class M3Library {
     }
 
     public static synchronized void load() {
-        try {
-            if (_loaded) return;
-            // If `skija.loadFromLibraryPath` is set to true, use System.loadLibrary to load the native library
-            String loadFromLibraryPath = System.getProperty("skija.loadFromLibraryPath");
-            if ("true".equals(loadFromLibraryPath)) {
-                _loadFromLibraryPath();
-                return;
-            }
-            // If `skija.library.path` is set, load the native library from this path
-            String libraryPath = System.getProperty("skija.library.path");
-            if (libraryPath != null) {
-                _loadFromDir(new File(libraryPath));
-                return;
-            }
-            boolean failedLoadFromLibraryPath = false;
-            // If skija is bundled in JRE, try to load the bundled native library
-            // User can disable this behavior by set `skija.loadFromLibraryPath` to false
-            if (loadFromLibraryPath == null) {
-                URL theClassFile = M3Library.class.getResource("M3Library.class");
-                if (theClassFile != null && "jrt".equals(theClassFile.getProtocol())) {
-                    try {
-                        _loadFromLibraryPath();
-                        return;
-                    } catch (UnsatisfiedLinkError e) {
-                        failedLoadFromLibraryPath = true;
-                        M3Log.warn("Please use skija platform jmod when using jlink");
-                    }
-                }
-            }
-            String osName = M3OperatingSystem.CURRENT.name().toLowerCase(Locale.ROOT);
-            String archName = M3Architecture.CURRENT.name().toLowerCase(Locale.ROOT);
-            String moduleName = "io.github.humbleui.skija." + osName + "." + archName;
-            String basePath = moduleName.replace('.', '/') + "/";
-            try (M3ResourceFinder finder = new M3ResourceFinder(moduleName)) {
-                URL versionFile = finder.findResource(basePath + "skija.version");
-                // The platform library is bundled in the JRE, but the skija shared is not bundled.
-                // Platforms without official support can provide native libraries in this way.
-                if (loadFromLibraryPath == null && !failedLoadFromLibraryPath && versionFile != null && "jrt".equals(versionFile.getProtocol())) {
-                    try {
-                        _loadFromLibraryPath();
-                        return;
-                    } catch (UnsatisfiedLinkError e) {
-                        failedLoadFromLibraryPath = true;
-                        M3Log.warn("Please use skija platform jmod when using jlink");
-                    }
-                }
-                // Finally, try to load the bundled native library
-                String version = versionFile != null ? readResource(versionFile) : null;
-                boolean isSnapshot = version == null || version.endsWith("SNAPSHOT");
-                File tempDir = new File(System.getProperty("java.io.tmpdir"), "skija_" + (isSnapshot ? String.valueOf(System.nanoTime()) : version + "_" + archName));
-                File libFile = _extract(finder, basePath, System.mapLibraryName(LIBRARY_NAME), tempDir);
-                if (M3OperatingSystem.CURRENT == M3OperatingSystem.WINDOWS) {
-                    _extract(finder, basePath, "icudtl.dat", tempDir);
-                }
-                if (isSnapshot && tempDir.exists()) {
-                    Runtime.getRuntime().addShutdownHook(new Thread(() -> {
-                        try {
-                            Files.walk(tempDir.toPath()).map(Path::toFile).sorted(Comparator.reverseOrder()).forEach(f -> {
-                                M3Log.debug("Deleting " + f);
-                                f.delete();
-                            });
-                        } catch (IOException ex) {
-                            ex.printStackTrace();
-                        }
-                    }));
-                }
-                _loadFromFile(libFile);
-            }
-        } catch (final java.lang.Throwable $ex) {
-            throw M3SneakyThrow.sneakyThrow($ex);
+        // FindClass during native initialization can initialize another graphics class.
+        // Preserve the original reentrant bootstrap behavior.
+        if (_loaded || loading) return;
+        String loadFromLibraryPath = property("loadFromLibraryPath");
+        if ("true".equals(loadFromLibraryPath)) {
+            _loadFromLibraryPath();
+            return;
+        }
+        String libraryPath = property("library.path");
+        if (libraryPath != null) {
+            _loadFromDir(new File(libraryPath));
+            return;
+        }
+        File runtimeDir = new File(System.getProperty("java.home"),
+                M3OperatingSystem.CURRENT == M3OperatingSystem.WINDOWS ? "bin" : "lib");
+        File installed = new File(runtimeDir, System.mapLibraryName(NATIVE_LIBRARY_NAME));
+        if (installed.isFile()) {
+            _loadFromFile(installed);
+        } else if (!"false".equals(loadFromLibraryPath)) {
+            loadNative(() -> System.loadLibrary(NATIVE_LIBRARY_NAME));
+        } else {
+            throw new UnsatisfiedLinkError("jdk.m3.graphics native library is not installed: " + installed);
         }
     }
 
     public static void _loadFromLibraryPath() {
-        M3Log.debug("Loading skija native library from library path");
-        System.loadLibrary(LIBRARY_NAME);
-        _loaded = true;
-        _nAfterLoad();
+        loadNative(() -> {
+            M3Log.debug("Loading jdk.m3.graphics native library from library path");
+            try {
+                System.loadLibrary(NATIVE_LIBRARY_NAME);
+            } catch (UnsatisfiedLinkError missing) {
+                // Preserve explicitly requested installations using the historic filename.
+                // Their JNI exports must still implement this module's descriptors.
+                try {
+                    System.loadLibrary(LIBRARY_NAME);
+                } catch (UnsatisfiedLinkError legacyMissing) {
+                    missing.addSuppressed(legacyMissing);
+                    throw missing;
+                }
+            }
+        });
     }
 
     public static void _loadFromDir(File dir) {
-        String libPath = new File(dir, System.mapLibraryName(LIBRARY_NAME)).getAbsolutePath();
-        M3Log.debug("Loading " + libPath);
-        System.load(libPath);
-        _loaded = true;
-        _nAfterLoad();
+        File library = new File(dir, System.mapLibraryName(NATIVE_LIBRARY_NAME));
+        if (!library.isFile()) {
+            File legacy = new File(dir, System.mapLibraryName(LIBRARY_NAME));
+            if (legacy.isFile()) library = legacy;
+        }
+        _loadFromFile(library);
     }
 
     public static void _loadFromFile(File file) {
         String libPath = file.getAbsolutePath();
-        M3Log.debug("Loading " + libPath);
-        System.load(libPath);
-        _loaded = true;
-        _nAfterLoad();
+        loadNative(() -> {
+            M3Log.debug("Loading " + libPath);
+            System.load(libPath);
+        });
+    }
+
+    private static String property(String suffix) {
+        String value = System.getProperty("m3.graphics." + suffix);
+        return value != null ? value : System.getProperty("skija." + suffix);
+    }
+
+    private static synchronized void loadNative(Runnable loader) {
+        if (_loaded || loading) return;
+        loading = true;
+        boolean initialized = false;
+        try {
+            loader.run();
+            // JNI resolves graphics classes whose initializers call staticLoad().
+            // Publish the loaded library as before, then roll back on init failure.
+            // Waiting here in another class initializer can deadlock FindClass.
+            _loaded = true;
+            _nAfterLoad();
+            initialized = true;
+        } finally {
+            if (!initialized) _loaded = false;
+            loading = false;
+        }
     }
 
     public static File _extract(M3ResourceFinder finder, String resourcePath, String fileName, File tempDir) {

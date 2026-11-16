@@ -199,7 +199,7 @@ public final class M3SparseSizes {
 
     /** {@code SizeSequence.insertEntries}: {@code n} entries of {@code value} before {@code start}. */
     public void insertEntries(int start, int n, int value) {
-        if (start < 0 || start > length || n < 0) {
+        if (start < 0 || start > length || n < 0 || n > Integer.MAX_VALUE - length) {
             throw new IndexOutOfBoundsException("insert " + n + " at " + start + " of " + length);
         }
         if (dense == null && value != defaultSize && count + (long) n > LIMIT) {
@@ -225,7 +225,7 @@ public final class M3SparseSizes {
 
     /** {@code SizeSequence.removeEntries}: the {@code n} entries from {@code start}. */
     public void removeEntries(int start, int n) {
-        if (start < 0 || n < 0 || start + n > length) {
+        if (start < 0 || n < 0 || (long) start + n > length) {
             throw new IndexOutOfBoundsException("remove " + n + " at " + start + " of " + length);
         }
         if (dense != null) {

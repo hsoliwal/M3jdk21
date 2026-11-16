@@ -187,7 +187,7 @@ public class M3WebComponent<M extends M3WebModel> extends JComponent {
 	/** PartVisible-aware hook: one flush and one repaint when the component starts showing. */
 	protected void setPartVisible(boolean visible) {
 		partVisible = visible;
-		if (visible && pending) {
+		if (visible && (pending || model.isAnimating())) {
 			pending = false;
 			changed(-1, 0);
 		}

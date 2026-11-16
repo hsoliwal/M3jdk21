@@ -1,0 +1,8 @@
+#
+# SPDX-License-Identifier: Apache-2.0
+# Copyright 2026 Hitesh Soliwal and contributors
+#
+
+# Preserve the bridge's established m3.parallel.bulk.provider module identity.
+# Only the module-name style warning is disabled, as in the other M3 modules.
+DISABLED_WARNINGS_java += module

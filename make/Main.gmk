@@ -458,6 +458,18 @@ $(eval $(call SetupTarget, jdk-image, \
     DEPS := jmods zip-source demos release-file, \
 ))
 
+# Build the optional current-fork parallel image from this source-built JDK.
+# The ordinary jdk-image target has no dependency on the TornadoVM source tree.
+TORNADO_PYTHON ?= python3
+
+tornado-parallel-image: jdk-image
+	$(if $(strip $(TORNADO_SOURCE)),,$(error TORNADO_SOURCE must name the source-locked TornadoVM fork))
+	$(TORNADO_PYTHON) "$(TOPDIR)/make/tornado/build_parallel.py" \
+	    --tornado-source "$(TORNADO_SOURCE)" --jdk-home "$(JDK_IMAGE_DIR)" \
+	    --out "$(OUTPUTDIR)/tornado-parallel"
+
+ALL_TARGETS += tornado-parallel-image
+
 $(eval $(call SetupTarget, legacy-jre-image, \
     MAKEFILE := Images, \
     TARGET := jre, \

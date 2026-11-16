@@ -12,6 +12,8 @@
     <maven.compiler.source>21</maven.compiler.source>
     <maven.compiler.target>21</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <junit.version>5.10.2</junit.version>
+    <junit.artifact.version>${junit.version}-m3-source-1</junit.artifact.version>
   </properties>
   <dependencies>
     <dependency>
@@ -22,11 +24,12 @@
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter</artifactId>
-      <version>5.10.2-m3-source-1</version>
+      <version>${junit.artifact.version}</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
   <build>
+    <sourceDirectory>${project.basedir}/../../../src/m3.parallel.bulk.provider/share/classes</sourceDirectory>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -76,7 +79,7 @@
           <compilerArgs>
             <!-- //FLLDCIM: MRL - reactor-unhold-20261107 ports/parallel-bulk: one-token option=value form (javac accepts it); the two-token form (option, value) makes maven-compiler-plugin 3.13.0 and 3.15.0 testCompile build META-INF/jpms.args and NPE in AbstractCompilerMojo.execute (getPathElements() is null for a test compile without a module descriptor) -->
             <arg>--patch-module=java.base=${project.build.directory}/bulk-patch-classes</arg>
-            <arg>--add-exports=java.base/jdk.internal.vm.parallel=ALL-UNNAMED</arg>
+            <arg>--add-exports=java.base/jdk.internal.vm.parallel=m3.parallel.bulk.provider,ALL-UNNAMED</arg>
             <arg>-Xlint:all,-module</arg>
             <arg>-Werror</arg>
           </compilerArgs>
@@ -87,7 +90,7 @@
         <artifactId>maven-surefire-plugin</artifactId>
         <version>3.2.5</version>
         <configuration>
-          <argLine>--patch-module java.base=${project.build.directory}/bulk-patch-classes --add-exports java.base/jdk.internal.vm.parallel=ALL-UNNAMED</argLine>
+          <argLine>--patch-module java.base=${project.build.directory}/bulk-patch-classes --add-exports java.base/jdk.internal.vm.parallel=m3.parallel.bulk.provider,ALL-UNNAMED</argLine>
         </configuration>
       </plugin>
     </plugins>

@@ -28,13 +28,13 @@ CURRENT_V3_RECEIPT_BLOB = "cacfab995ec8746c5d5db65cc5a3df12f03dc41a"
 BEFORE_V2_BLOB = "d07a222453c53bff7a5784e05cec8f868c5d3a07"
 SUCCESSIONS = ("m3/collections/interop/qualification/"
                "current-source-successors-v4-20261031/SOURCE_SUCCESSIONS_20261113.tsv")
-SUCCESSIONS_SHA256 = "4796402ab39dcc91e0902312b1878a53fb6a1048397a59371b543afc0a682c98"
+SUCCESSIONS_SHA256 = "589ea2b652b3e9d39818ef2df23ac5ba80443865be791f8977a07b68adc17713"
 APPROVED_PREFIX = "m3/collections/interop/src/"
 DISPOSITIONS = {
-    "NAMESPACE": 44,
+    "NAMESPACE": 43,
     "NAMESPACE_AND_TYPE_NAMES": 32,
     "NAMESPACE_TYPE_NAMES_AND_COMMENTS": 4,
-    "QUALIFIED_SOURCE_SUCCESSOR": 4,
+    "QUALIFIED_SOURCE_SUCCESSOR": 5,
     "V4_ADDITION": 2,
     "LATER_QUALIFIED_ADDITION": 4,
 }
@@ -50,7 +50,7 @@ ATTRIBUTIONS = {
     "m3/collections/qualification/foldaudit-collections-20261107/EDITS.tsv":
         "92e1957330a6b8c5874a4452bb258b9fe772342c87a27c61f0e5bd34f7cf66da",
     "m3/collections/interop/qualification/bindings-gating-20261107/EDITS.tsv":
-        "d39d7503ca53aa2a696e46760bff70d911a69ab909360c60f1090179b99b9b18",
+        "902dbfa584571bb07a5248af9c7d4fc5dc6113af8df95380aa53ac5ba0066ffe",
 }
 HEX40 = re.compile(r"[0-9a-f]{40}\Z")
 HEX64 = re.compile(r"[0-9a-f]{64}\Z")

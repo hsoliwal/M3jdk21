@@ -43,6 +43,7 @@ public final class BulkScheduler implements BulkExecutor {
                     .thenComparing(Registration::id);
 
     private final List<Registration> registrations;
+    private final Registration selected;
 
     public BulkScheduler(List<? extends BulkExecutorProvider> providers) {
         Objects.requireNonNull(providers, "providers");
@@ -58,6 +59,36 @@ public final class BulkScheduler implements BulkExecutor {
         if (copy.isEmpty()) throw new IllegalArgumentException("providers");
         copy.sort(ORDER);
         this.registrations = List.copyOf(copy);
+        this.selected = null;
+    }
+
+    private BulkScheduler(List<Registration> registrations, Registration selected) {
+        this.registrations = registrations;
+        this.selected = selected;
+    }
+
+    /**
+     * Returns a scheduler bound to one of this scheduler's registered providers.
+     *
+     * <p>The returned scheduler retains the original registration identities and
+     * priorities. Binding does not change this scheduler or an execution already
+     * in progress. An unsupported operation or provider failure is reported to
+     * the caller; another provider is never used by a bound scheduler.</p>
+     *
+     * @param providerId the registered provider identity
+     * @return an immutable scheduler selection
+     * @throws IllegalArgumentException if the identity is invalid or unregistered
+     * @throws IllegalStateException if the provider registration has changed
+     */
+    public BulkScheduler withProvider(String providerId) {
+        String checked = BulkTask.identifier(providerId, "providerId");
+        for (Registration item : registrations) {
+            if (item.id().equals(checked)) {
+                item.requireStable();
+                return item == selected ? this : new BulkScheduler(registrations, item);
+            }
+        }
+        throw new IllegalArgumentException("unknown provider: " + checked);
     }
 
     public List<String> providerIds() {
@@ -70,6 +101,14 @@ public final class BulkScheduler implements BulkExecutor {
 
     private Registration registration(BulkTask task) {
         Objects.requireNonNull(task, "task");
+        if (selected != null) {
+            selected.requireStable();
+            boolean supported = selected.provider().supports(task);
+            selected.requireStable();
+            if (supported) return selected;
+            throw new IllegalStateException("provider " + selected.id()
+                    + " does not support: " + task.operationId());
+        }
         for (Registration item : registrations) {
             item.requireStable();
             if (item.provider().supports(task)) {
