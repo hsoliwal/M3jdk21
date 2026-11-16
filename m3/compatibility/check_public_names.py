@@ -48,7 +48,7 @@ def passive_data_receipt(path: str) -> bool:
 
 
 JDK_PRODUCT_SOURCE = re.compile(
-    r"^src/(?!m3[.])[^/]+/(?:share|unix|linux|windows|macosx|bsd)/classes/.+\.java$"
+    r"^src/(?!m3[.])[^/]+/(?:share|providers|unix|linux|windows|macosx|bsd)/classes/.+\.java$"
 )
 DONOR_REFERENCE = re.compile(
     r"(?<![A-Za-z0-9_$.])(?:com\.synexia|com\.m3|com\.google\.common|"

@@ -45,6 +45,8 @@ expect(BASE + ["m3/arrays/qualification/y/recipe/src/main/java/jdk/m3/zzz/Copy.j
        "new evidence copy root (a root, not a product package)")
 expect(BASE + ["m3/search/src/main/java/jdk/m3/search/M3Bmh.java"], ["NEW_PREFIXED_TYPE"], "new M3-prefixed type")
 expect(BASE + ["test/jdk/jdk/internal/m3/zip/M3CodecTest.java"], ["NEW_PREFIXED_TYPE"], "new prefixed test type")
+expect(BASE + ["src/jdk.m3.collections/providers/classes/jdk/m3/collections/guava/base/M3Joiner.java"],
+       ["NEW_PREFIXED_TYPE"], "new prefixed type in the provider root of a JDK module")
 expect([p for p in BASE if not p.endswith("M3Codec.java")]
        + ["src/java.base/share/classes/jdk/internal/m3/zip/Codec.java"], [], "legacy prefixed type renamed")
 expect(BASE + ["src/java.base/share/classes/java/lang/M3StringFacts.java"], [], "M3 prefix outside M3 packages kept")

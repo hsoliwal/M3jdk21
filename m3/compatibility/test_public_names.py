@@ -28,6 +28,12 @@ class PublicNamesTest(unittest.TestCase):
         self.assertTrue(self.issue("src/java.base/share/classes/java/util/M3HashMap.java",
                                    "package java.util; public class M3HashMap {}"))
 
+    def test_provider_root_of_a_jdk_module_is_jdk_product_source(self):
+        path = "src/jdk.m3.collections/providers/classes/jdk/m3/collections/guava/base/Joiner.java"
+        self.assertIsNotNone(GATE.JDK_PRODUCT_SOURCE.fullmatch(path))
+        self.assertTrue(self.issue(path, "package jdk.m3.collections.guava.base; "
+                                         "public class Joiner { com.google.common.base.Joiner twin; }"))
+
     def test_internal_m3_owner_allowed(self):
         self.assertFalse(self.issue("src/java.base/share/classes/jdk/internal/mindex/M3BitLane.java",
                                    "package jdk.internal.mindex; final class M3BitLane {}"))
