@@ -4,79 +4,104 @@
  */
 package jdk.m3.collections;
 
-import jdk.internal.m3.collections.NotYetReceived;
+import java.util.Arrays;
+import java.util.NoSuchElementException;
+import java.util.Objects;
+import java.util.PrimitiveIterator;
+import java.util.function.IntConsumer;
+import jdk.internal.m3.collections.LaneSearch;
 
 /**
- * M3 five-library superset scaffold {@code FrozenIntSet}: API group {@code FROZEN_INT_SET} over arrays and state masks.
+ * Immutable, ascending, duplicate-free int values in one dense primitive lane.
  *
- * <p>Provider lineage (LIBRARY_API_MATRIX.tsv, run 20261017-m3-to-public/LIB-SUPERSET):
- * <ul>
- *   <li>JDK List.of/Set.of/Map.of: JEP269 immutable; UOE mutate; null-hostile; dup-reject [license GPLv2+CPE; NEW_OWNER (LS1); priority P1; matrix owner PROPOSED:FrozenLongList/Set/Map]</li>
- *   <li>ECLIPSE Primitive sorted/immutable families (x8): LongArrayList.toImmutable, sorted sets/maps [license EPL-2.0|EDL-1.0; NEW_OWNER (LS1 covers long; other widths follow template); priority P1; matrix owner frozen primitive lanes (LS1 family) + sorted owners]</li>
- * </ul>
+ * <p>Construction copies the source and collapses duplicates, as Set.copyOf does.
+ * Ascending ordinal order is an explicit M3 contract. This class is not a boxed
+ * java.util.Set implementation. Input and exported arrays never alias the owner.
+ * The existing FrozenLongSet and LaneSearch supply the collection algorithms;
+ * no provider implementation source is copied.
  *
- * <p>DOOP mapping: lane kind INT; lanes {@code int[] valueLane}; offset scheme sorted ordinal slot; binary-search offsets; state-mask bits FROZEN; stored nodes NONE; API entry objects TRANSIENT_FACADE(Map.Entry) (transient facades over slots, never the stored representation); matrix note: frozen sorted/dense lanes; ordinal offsets; build-time copy / FROZEN=1 word; occupancy implicit ALL.
- *
- * <p>Status: SCAFFOLD. Every public atom throws {@link NotYetReceived} until this owner is received through a hash-pinned Synexia recipe with its own
- * provider oracle (never inferred from another provider). Not a {@code java.util} replacement.
+ * <p>Storage is one int array and a shared frozen state word. There are no
+ * retained entry/node objects, per-slot state arrays or redundant hash indexes.
  */
 public final class FrozenIntSet {
-    /** State-mask bit {@code FROZEN} (per-slot state word, bit 0). */
     static final long STATE_FROZEN = 1L << 0;
+    private static final int[] EMPTY_LANE = new int[0];
+    private static final long[] FROZEN_STATE = {STATE_FROZEN};
+    private static final FrozenIntSet EMPTY = new FrozenIntSet();
 
-    /** Storage lane {@code valueLane}: dynamic primitive/reference array lane. */
-    private int[] valueLane = new int[0];
-    /** Per-slot state words (FROZEN); one bit set per slot and state. */
-    private long[] stateMaskWords = new long[0];
-    /** Live slot count. */
-    private int size;
+    private final int[] valueLane;
+    private final long[] stateMaskWords = FROZEN_STATE;
+    private final int size;
 
-    /** Creates an empty scaffold owner; lanes grow by copy once received. */
+    /** Creates an empty immutable set. */
     public FrozenIntSet() {
+        this(EMPTY_LANE);
     }
 
-    /** Reports the declared state-mask bits and lanes for ledgers; never allocates per element. */
+    private FrozenIntSet(int[] values) {
+        valueLane = values;
+        size = values.length;
+    }
+
+    /** Historical descriptor identity retained for existing callers. */
     public static String scaffoldDescriptor() {
         return "M3FrozenIntSet|FROZEN_INT_SET|INT|FROZEN|int[] valueLane";
     }
 
-    /** JDK Set.copyOf (int lane) (scaffold: not yet received). */
+    /** Sorted defensive copy; duplicates collapse and a null source is rejected. */
     public static FrozenIntSet copyOf(int[] source) {
-        throw new NotYetReceived("M3FrozenIntSet.copyOf");
+        Objects.requireNonNull(source, "source");
+        if (source.length == 0) return EMPTY;
+        int[] values = source.clone();
+        Arrays.sort(values);
+        int count = 1;
+        for (int index = 1; index < values.length; index++) {
+            if (values[index] != values[count - 1]) values[count++] = values[index];
+        }
+        return new FrozenIntSet(count == values.length ? values : Arrays.copyOf(values, count));
     }
 
-    /** Set.size (scaffold: not yet received). */
     public int size() {
-        throw new NotYetReceived("M3FrozenIntSet.size");
+        return size;
     }
 
-    /** Set.contains (scaffold: not yet received). */
     public boolean contains(int value) {
-        throw new NotYetReceived("M3FrozenIntSet.contains");
+        int index = LaneSearch.lowerBound(valueLane, 0, size, value);
+        return index < size && valueLane[index] == value;
     }
 
-    /** sorted ordinal access (scaffold: not yet received). */
+    /** Value at the zero-based ascending ordinal. */
     public int get(int ordinal) {
-        throw new NotYetReceived("M3FrozenIntSet.get");
+        return valueLane[Objects.checkIndex(ordinal, size)];
     }
 
-    /** Set.toArray (defensive copy) (scaffold: not yet received). */
     public int[] toArray() {
-        throw new NotYetReceived("M3FrozenIntSet.toArray");
+        return valueLane.clone();
     }
 
-    /** Iterable.forEach (scaffold: not yet received). */
-    public void forEach(java.util.function.IntConsumer action) {
-        throw new NotYetReceived("M3FrozenIntSet.forEach");
+    public void forEach(IntConsumer action) {
+        Objects.requireNonNull(action, "action");
+        for (int index = 0; index < size; index++) action.accept(valueLane[index]);
     }
 
-    /** Set.iterator (ascending) (scaffold: not yet received). */
-    public java.util.PrimitiveIterator.OfInt iterator() {
-        throw new NotYetReceived("M3FrozenIntSet.iterator");
+    /** One cursor per traversal; no allocation or boxing per element. */
+    public PrimitiveIterator.OfInt iterator() {
+        return new PrimitiveIterator.OfInt() {
+            private int cursor;
+
+            @Override public boolean hasNext() {
+                return cursor < size;
+            }
+
+            @Override public int nextInt() {
+                if (cursor >= size) throw new NoSuchElementException();
+                return valueLane[cursor++];
+            }
+        };
     }
 
-    /** UOE contract once received (JEP269) (scaffold: not yet received). */
+    /** Always rejected, including an already-present value. */
     public boolean add(int value) {
-        throw new NotYetReceived("M3FrozenIntSet.add");
+        throw new UnsupportedOperationException("M3FrozenIntSet is immutable");
     }
 }

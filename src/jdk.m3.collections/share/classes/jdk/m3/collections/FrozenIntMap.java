@@ -4,82 +4,95 @@
  */
 package jdk.m3.collections;
 
-import jdk.internal.m3.collections.NotYetReceived;
+import java.util.Objects;
+import jdk.internal.m3.collections.LaneSearch;
 
 /**
- * M3 five-library superset scaffold {@code FrozenIntMap}: API group {@code FROZEN_INT_MAP} over arrays and state masks.
+ * Immutable paired int lanes sorted by ascending key.
  *
- * <p>Provider lineage (LIBRARY_API_MATRIX.tsv, run 20261017-m3-to-public/LIB-SUPERSET):
- * <ul>
- *   <li>JDK List.of/Set.of/Map.of: JEP269 immutable; UOE mutate; null-hostile; dup-reject [license GPLv2+CPE; NEW_OWNER (LS1); priority P1; matrix owner PROPOSED:FrozenLongList/Set/Map]</li>
- * </ul>
+ * <p>Construction copies both inputs, preserves key/value association and rejects
+ * duplicate keys, including duplicates whose values happen to match. Ordinal
+ * access and primitive callbacks use ascending key order. This M3 API does not
+ * implement the boxed java.util.Map interface.
  *
- * <p>DOOP mapping: lane kind INT; lanes {@code int[] keyLane;int[] valueLane;int[] hashIndexLane}; offset scheme sorted key ordinal + open-address hash index; state-mask bits FROZEN; stored nodes NONE; API entry objects TRANSIENT_FACADE(Map.Entry) (transient facades over slots, never the stored representation); matrix note: frozen sorted/dense lanes; ordinal offsets; build-time copy / FROZEN=1 word; occupancy implicit ALL.
- *
- * <p>Status: SCAFFOLD. Every public atom throws {@link NotYetReceived} until this owner is received through a hash-pinned Synexia recipe with its own
- * provider oracle (never inferred from another provider). Not a {@code java.util} replacement.
+ * <p>The existing PrimitiveFrozenMap paired heap-sort kernel performs construction;
+ * LaneSearch performs lookup. Retained payload is exactly two int arrays,
+ * with a shared frozen state word and no entry/node or hash-index objects.
+ * JDK immutable-map operations and the existing PackedFrozenLongMap are the
+ * contract references. No third-party source or runtime dependency is added.
  */
 public final class FrozenIntMap {
-    /** State-mask bit {@code FROZEN} (per-slot state word, bit 0). */
     static final long STATE_FROZEN = 1L << 0;
+    private static final int[] EMPTY_LANE = new int[0];
+    private static final long[] FROZEN_STATE = {STATE_FROZEN};
 
-    /** Storage lane {@code keyLane}: dynamic primitive/reference array lane. */
-    private int[] keyLane = new int[0];
-    /** Storage lane {@code valueLane}: dynamic primitive/reference array lane. */
-    private int[] valueLane = new int[0];
-    /** Storage lane {@code hashIndexLane}: dynamic primitive/reference array lane. */
-    private int[] hashIndexLane = new int[0];
-    /** Per-slot state words (FROZEN); one bit set per slot and state. */
-    private long[] stateMaskWords = new long[0];
-    /** Live slot count. */
-    private int size;
+    private final int[] keyLane;
+    private final int[] valueLane;
+    private final long[] stateMaskWords = FROZEN_STATE;
+    private final int size;
 
-    /** Creates an empty scaffold owner; lanes grow by copy once received. */
+    /** Creates an empty immutable map. */
     public FrozenIntMap() {
+        this(EMPTY_LANE, EMPTY_LANE);
     }
 
-    /** Reports the declared state-mask bits and lanes for ledgers; never allocates per element. */
+    private FrozenIntMap(int[] keys, int[] values) {
+        keyLane = keys;
+        valueLane = values;
+        size = keys.length;
+    }
+
+    /** Historical descriptor identity; the implementation needs no hash-index lane. */
     public static String scaffoldDescriptor() {
         return "M3FrozenIntMap|FROZEN_INT_MAP|INT|FROZEN|int[] keyLane;int[] valueLane;int[] hashIndexLane";
     }
 
-    /** JDK Map.copyOf (int lanes) (scaffold: not yet received). */
     public static FrozenIntMap copyOf(int[] keys, int[] values) {
-        throw new NotYetReceived("M3FrozenIntMap.copyOf");
+        Objects.requireNonNull(keys, "keys");
+        Objects.requireNonNull(values, "values");
+        if (keys.length != values.length) throw new IllegalArgumentException("lane lengths");
+        int[] copiedKeys = keys.clone();
+        int[] copiedValues = values.clone();
+        PrimitiveFrozenMap.heapSortPairs(PrimitiveKind.INT, PrimitiveKind.INT,
+                copiedKeys, copiedValues, copiedKeys.length);
+        for (int index = 1; index < copiedKeys.length; index++) {
+            if (copiedKeys[index - 1] == copiedKeys[index]) {
+                throw new IllegalArgumentException("duplicate key: " + copiedKeys[index]);
+            }
+        }
+        return new FrozenIntMap(copiedKeys, copiedValues);
     }
 
-    /** Map.size (scaffold: not yet received). */
     public int size() {
-        throw new NotYetReceived("M3FrozenIntMap.size");
+        return size;
     }
 
-    /** Map.containsKey (scaffold: not yet received). */
     public boolean containsKey(int key) {
-        throw new NotYetReceived("M3FrozenIntMap.containsKey");
+        int index = LaneSearch.lowerBound(keyLane, 0, size, key);
+        return index < size && keyLane[index] == key;
     }
 
-    /** Map.getOrDefault (scaffold: not yet received). */
     public int getOrDefault(int key, int defaultValue) {
-        throw new NotYetReceived("M3FrozenIntMap.getOrDefault");
+        int index = LaneSearch.lowerBound(keyLane, 0, size, key);
+        return index < size && keyLane[index] == key ? valueLane[index] : defaultValue;
     }
 
-    /** sorted ordinal access (scaffold: not yet received). */
     public int keyAt(int ordinal) {
-        throw new NotYetReceived("M3FrozenIntMap.keyAt");
+        return keyLane[Objects.checkIndex(ordinal, size)];
     }
 
-    /** sorted ordinal access (scaffold: not yet received). */
     public int valueAt(int ordinal) {
-        throw new NotYetReceived("M3FrozenIntMap.valueAt");
+        return valueLane[Objects.checkIndex(ordinal, size)];
     }
 
-    /** Map.forEach (primitive) (scaffold: not yet received). */
     public void forEach(IntIntConsumer action) {
-        throw new NotYetReceived("M3FrozenIntMap.forEach");
+        Objects.requireNonNull(action, "action");
+        for (int index = 0; index < size; index++) action.accept(keyLane[index], valueLane[index]);
     }
 
-    /** UOE contract once received (JEP269) (scaffold: not yet received). */
+    /** Always rejected, including an already-present key with an equal value. */
     public int put(int key, int value) {
-        throw new NotYetReceived("M3FrozenIntMap.put");
+        throw new UnsupportedOperationException("M3FrozenIntMap is immutable");
     }
+
 }

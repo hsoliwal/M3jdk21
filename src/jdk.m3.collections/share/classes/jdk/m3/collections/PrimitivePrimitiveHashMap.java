@@ -82,9 +82,10 @@ public final class PrimitivePrimitiveHashMap {
         if (isZeroKey(keyBits)) {
             long previous = hasZeroKey ? zeroValueBits : absentValueBits;
             if (!hasZeroKey) {
+                // Allocate both lanes before publishing the off-lane key.
+                if (size + 1 > threshold) rehash(capacity() << 1);
                 hasZeroKey = true;
                 size++;
-                if (size > threshold) rehash(capacity() << 1);
             }
             zeroValueBits = valueKind.storageBits(valueBits);
             return previous;
@@ -100,6 +101,12 @@ public final class PrimitivePrimitiveHashMap {
             }
             position = (position + 1) & mask;
         }
+        insertAbsentBits(position, keyBits, valueBits);
+        return absentValueBits;
+    }
+
+    /** Reuse the discovered empty slot unless growth invalidates its coordinate. */
+    private void insertAbsentBits(int position, long keyBits, long valueBits) {
         if (size + 1 > threshold) {
             rehash(capacity() << 1);
             position = keyKind.hashBits(keyBits) & mask;
@@ -110,7 +117,6 @@ public final class PrimitivePrimitiveHashMap {
         keyKind.writeBits(keys, position, keyBits);
         valueKind.writeBits(values, position, valueBits);
         size++;
-        return absentValueBits;
     }
 
     public boolean containsValueBits(long valueBits) {
@@ -134,7 +140,7 @@ public final class PrimitivePrimitiveHashMap {
         }
         int position = findNonZero(keyBits);
         if (position >= 0) return valueKind.readBits(values, position);
-        putBits(keyBits, valueBits, absentValueBits);
+        insertAbsentBits(~position, keyBits, valueBits);
         return absentValueBits;
     }
 
@@ -190,7 +196,12 @@ public final class PrimitivePrimitiveHashMap {
     public long computeIfAbsentBits(
             long keyBits, LongUnaryOperator mappingFunction) {
         Objects.requireNonNull(mappingFunction, "mappingFunction");
-        if (containsKeyBits(keyBits)) return getOrDefaultBits(keyBits, 0L);
+        if (isZeroKey(keyBits)) {
+            if (hasZeroKey) return zeroValueBits;
+        } else {
+            int position = findNonZero(keyBits);
+            if (position >= 0) return valueKind.readBits(values, position);
+        }
         long valueBits = mappingFunction.applyAsLong(keyBits);
         putBits(keyBits, valueBits, 0L);
         return valueBits;
@@ -199,8 +210,15 @@ public final class PrimitivePrimitiveHashMap {
     public long computeIfPresentBits(
             long keyBits, long absentValueBits, LongBinaryOperator remappingFunction) {
         Objects.requireNonNull(remappingFunction, "remappingFunction");
-        if (!containsKeyBits(keyBits)) return absentValueBits;
-        long previous = getOrDefaultBits(keyBits, absentValueBits);
+        long previous;
+        if (isZeroKey(keyBits)) {
+            if (!hasZeroKey) return absentValueBits;
+            previous = zeroValueBits;
+        } else {
+            int position = findNonZero(keyBits);
+            if (position < 0) return absentValueBits;
+            previous = valueKind.readBits(values, position);
+        }
         long nextValue = remappingFunction.applyAsLong(keyBits, previous);
         replaceOrDefaultBits(keyBits, nextValue, absentValueBits);
         return nextValue;
@@ -218,12 +236,22 @@ public final class PrimitivePrimitiveHashMap {
     public long mergeBits(
             long keyBits, long valueBits, LongBinaryOperator mergeFunction) {
         Objects.requireNonNull(mergeFunction, "mergeFunction");
-        if (!containsKeyBits(keyBits)) {
-            putBits(keyBits, valueBits, 0L);
-            return valueBits;
+        long previous;
+        if (isZeroKey(keyBits)) {
+            if (!hasZeroKey) {
+                putBits(keyBits, valueBits, 0L);
+                return valueBits;
+            }
+            previous = zeroValueBits;
+        } else {
+            int position = findNonZero(keyBits);
+            if (position < 0) {
+                insertAbsentBits(~position, keyBits, valueBits);
+                return valueBits;
+            }
+            previous = valueKind.readBits(values, position);
         }
-        long merged = mergeFunction.applyAsLong(
-                getOrDefaultBits(keyBits, 0L), valueBits);
+        long merged = mergeFunction.applyAsLong(previous, valueBits);
         replaceOrDefaultBits(keyBits, merged, 0L);
         return merged;
     }
@@ -340,7 +368,9 @@ public final class PrimitivePrimitiveHashMap {
             if (keyKind.equalBits(current, keyBits)) return position;
             position = (position + 1) & mask;
         }
-        return -1;
+        // Negative coordinates preserve the missing-key contract and encode
+        // the already discovered insertion slot for callback-free callers.
+        return ~position;
     }
 
     private void shiftKeys(int position) {
@@ -370,20 +400,26 @@ public final class PrimitivePrimitiveHashMap {
         Object oldKeys = keys;
         Object oldValues = values;
         int oldCapacity = capacity();
-        keys = keyKind.newArray(newCapacity);
-        values = valueKind.newArray(newCapacity);
-        mask = newCapacity - 1;
-        threshold = DenseHash.threshold(newCapacity, loadFactor);
+        Object nextKeys = keyKind.newArray(newCapacity);
+        Object nextValues = valueKind.newArray(newCapacity);
+        int nextMask = newCapacity - 1;
+        int nextThreshold = DenseHash.threshold(newCapacity, loadFactor);
         for (int i = 0; i < oldCapacity; i++) {
             long key = keyKind.readBits(oldKeys, i);
             if (isZeroStored(key)) continue;
-            int position = keyKind.hashBits(key) & mask;
-            while (!isZeroStored(keyKind.readBits(keys, position))) {
-                position = (position + 1) & mask;
+            int position = keyKind.hashBits(key) & nextMask;
+            while (!isZeroStored(keyKind.readBits(nextKeys, position))) {
+                position = (position + 1) & nextMask;
             }
-            keyKind.writeBits(keys, position, key);
-            valueKind.writeBits(values, position, valueKind.readBits(oldValues, i));
+            keyKind.writeBits(nextKeys, position, key);
+            valueKind.writeBits(nextValues, position, valueKind.readBits(oldValues, i));
         }
+        // Publish a complete replacement image. An allocation failure above
+        // leaves the old lane identities, values, size and threshold untouched.
+        keys = nextKeys;
+        values = nextValues;
+        mask = nextMask;
+        threshold = nextThreshold;
     }
 
     private boolean isZeroKey(long bits) {
