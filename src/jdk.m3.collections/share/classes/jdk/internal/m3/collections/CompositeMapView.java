@@ -4,76 +4,111 @@
  */
 package jdk.internal.m3.collections;
 
-/**
- * M3 five-library superset scaffold {@code CompositeMapView}: API group {@code COMPOSITE_MAP} over arrays and state masks.
- *
- * <p>Provider lineage (LIBRARY_API_MATRIX.tsv, run 20261017-m3-to-public/LIB-SUPERSET):
- * <ul>
- *   <li>COMMONS CompositeMap/CompositeCollection: union view over several backings [license Apache-2.0; SUPERSET_VIEW VIEW_OF:multiple owners; priority P2; matrix owner mask-selected union of lane sets]</li>
- * </ul>
- *
- * <p>DOOP mapping: lane kind OBJECT; lanes {@code Object[] backingLane}; offset scheme per-backing precedence offsets; state-mask bits SELECTED; stored nodes NONE; API entry objects TRANSIENT_FACADE (transient facades over slots, never the stored representation); matrix note: per-backing lane refs + precedence offsets / per-backing selection masks.
- *
- * <p>Status: SCAFFOLD. Every public atom throws {@link NotYetReceived} until this owner is received through a hash-pinned Synexia recipe with its own
- * provider oracle (never inferred from another provider). Not a {@code java.util} replacement.
- */
-public final class CompositeMapView<K, V> {
-    /** State-mask bit {@code SELECTED} (per-slot state word, bit 0). */
-    static final long STATE_SELECTED = 1L << 0;
+import java.util.Arrays;
+import java.util.Map;
+import java.util.Objects;
 
-    /** Storage lane {@code backingLane}: dynamic primitive/reference array lane. */
+/** Live ordered composition of maps without storing a second copy of their keys. */
+public final class CompositeMapView<K, V> {
+    static final long STATE_SELECTED = 1L << 0;
     private Object[] backingLane = new Object[0];
-    /** Per-slot state words (SELECTED); one bit set per slot and state. */
     private long[] stateMaskWords = new long[0];
-    /** Live slot count. */
     private int size;
 
-    /** Creates an empty scaffold owner; lanes grow by copy once received. */
-    public CompositeMapView() {
-    }
+    public CompositeMapView() { }
 
-    /** Reports the declared state-mask bits and lanes for ledgers; never allocates per element. */
     public static String scaffoldDescriptor() {
         return "M3CompositeMapView|COMPOSITE_MAP|OBJECT|SELECTED|Object[] backingLane";
     }
 
-    /** CompositeMap.addComposited (scaffold: not yet received). */
-    public void addComposited(java.util.Map<K, V> map) {
-        throw new NotYetReceived("M3CompositeMapView.addComposited");
+    /** Null backing is ignored. Reject key overlap before changing registry. */
+    @SuppressWarnings("unchecked")
+    public synchronized void addComposited(Map<K, V> incoming) {
+        if (incoming == null) return;
+        for (int i = size - 1; i >= 0; i--) {
+            Map<K, V> existing = (Map<K, V>) backingLane[i];
+            for (K key : incoming.keySet()) {
+                if (existing.containsKey(key)) {
+                    throw new IllegalArgumentException("Key collision adding Map to CompositeMap");
+                }
+            }
+        }
+        if (size == backingLane.length) {
+            long grown = size == 0 ? 4L : (long) size + (size >>> 1) + 1;
+            backingLane = Arrays.copyOf(backingLane, (int) Math.min(grown, Integer.MAX_VALUE));
+        }
+        backingLane[size++] = incoming;
     }
 
-    /** CompositeMap.removeComposited (scaffold: not yet received). */
-    public java.util.Map<K, V> removeComposited(java.util.Map<K, V> map) {
-        throw new NotYetReceived("M3CompositeMapView.removeComposited");
+    /** Remove the first map comparing equal, returning the caller's argument. */
+    public synchronized Map<K, V> removeComposited(Map<K, V> backing) {
+        for (int i = 0; i < size; i++) {
+            if (Objects.equals(backingLane[i], backing)) {
+                System.arraycopy(backingLane, i + 1, backingLane, i, size - i - 1);
+                backingLane[--size] = null;
+                return backing;
+            }
+        }
+        return null;
     }
 
-    /** CompositeMap.get (first match) (scaffold: not yet received). */
+    /** Last registered backing has precedence, including explicit null mappings. */
+    @SuppressWarnings("unchecked")
     public V get(Object key) {
-        throw new NotYetReceived("M3CompositeMapView.get");
+        for (int i = size - 1; i >= 0; i--) {
+            Map<K, V> map = (Map<K, V>) backingLane[i];
+            if (map.containsKey(key)) return map.get(key);
+        }
+        return null;
     }
 
-    /** CompositeMap.put (mutator required) (scaffold: not yet received). */
+    /** Commons CompositeMap defaults to refusing insertion without a mutator. */
     public V put(K key, V value) {
-        throw new NotYetReceived("M3CompositeMapView.put");
+        throw new UnsupportedOperationException("No mutator specified");
     }
 
-    /** CompositeMap.remove (scaffold: not yet received). */
+    /** The highest-precedence backing is the owner of an existing mapping. */
+    @SuppressWarnings("unchecked")
     public V remove(Object key) {
-        throw new NotYetReceived("M3CompositeMapView.remove");
+        for (int i = size - 1; i >= 0; i--) {
+            Map<K, V> map = (Map<K, V>) backingLane[i];
+            if (map.containsKey(key)) return map.remove(key);
+        }
+        return null;
     }
 
-    /** CompositeMap.containsKey (scaffold: not yet received). */
+    @SuppressWarnings("unchecked")
     public boolean containsKey(Object key) {
-        throw new NotYetReceived("M3CompositeMapView.containsKey");
+        for (int i = size - 1; i >= 0; i--) {
+            if (((Map<K, V>) backingLane[i]).containsKey(key)) return true;
+        }
+        return false;
     }
 
-    /** CompositeMap.size (scaffold: not yet received). */
+    /** Provider contract counts all registered backings, saturating at int maximum. */
+    @SuppressWarnings("unchecked")
     public int size() {
-        throw new NotYetReceived("M3CompositeMapView.size");
+        long count = 0L;
+        for (int i = size - 1; i >= 0; i--) {
+            count += ((Map<K, V>) backingLane[i]).size();
+            if (count >= Integer.MAX_VALUE) return Integer.MAX_VALUE;
+        }
+        return (int) count;
     }
 
-    /** CompositeMap.isEmpty (scaffold: not yet received). */
+    @SuppressWarnings("unchecked")
     public boolean isEmpty() {
-        throw new NotYetReceived("M3CompositeMapView.isEmpty");
+        for (int i = size - 1; i >= 0; i--) {
+            if (!((Map<K, V>) backingLane[i]).isEmpty()) return false;
+        }
+        return true;
+    }
+
+    /** Additive operation present on the Commons donor, mutating each backing. */
+    @SuppressWarnings("unchecked")
+    public void clear() {
+        for (int i = size - 1; i >= 0; i--) {
+            ((Map<K, V>) backingLane[i]).clear();
+        }
     }
 }

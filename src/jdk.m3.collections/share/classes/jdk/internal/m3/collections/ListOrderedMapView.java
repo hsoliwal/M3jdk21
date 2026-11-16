@@ -4,99 +4,184 @@
  */
 package jdk.internal.m3.collections;
 
-/**
- * M3 five-library superset scaffold {@code ListOrderedMapView}: API group {@code LIST_ORDERED_MAP} over arrays and state masks.
- *
- * <p>Provider lineage (LIBRARY_API_MATRIX.tsv, run 20261017-m3-to-public/LIB-SUPERSET):
- * <ul>
- *   <li>COMMONS ListOrderedMap/ListOrderedSet: insertion-order decorator with index access [license Apache-2.0; SUPERSET_VIEW VIEW_OF:M3OrderedSlotMap; priority P2; matrix owner ordered slot owners]</li>
- * </ul>
- *
- * <p>DOOP mapping: lane kind OBJECT; lanes {@code Object[] keyLane;Object[] valueLane;int[] orderLane;int[] hashIndexLane}; offset scheme slot + insertion order lane with ordinal access; state-mask bits OCCUPIED,DELETED; stored nodes NONE; API entry objects TRANSIENT_FACADE (transient facades over slots, never the stored representation); matrix note: lanes + order link lanes + ordinal offsets / occupancy mask.
- *
- * <p>Status: SCAFFOLD. Every public atom throws {@link NotYetReceived} until this owner is received through a hash-pinned Synexia recipe with its own
- * provider oracle (never inferred from another provider). Not a {@code java.util} replacement.
- */
-public final class ListOrderedMapView<K, V> {
-    /** State-mask bit {@code OCCUPIED} (per-slot state word, bit 0). */
-    static final long STATE_OCCUPIED = 1L << 0;
-    /** State-mask bit {@code DELETED} (per-slot state word, bit 1). */
-    static final long STATE_DELETED = 1L << 1;
+import java.util.AbstractList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Objects;
 
-    /** Storage lane {@code keyLane}: dynamic primitive/reference array lane. */
+/** Insertion-ordered, key-unique map stored as parallel arrays, without entries. */
+public final class ListOrderedMapView<K, V> {
+    static final long STATE_OCCUPIED = 1L << 0;
+    static final long STATE_DELETED = 1L << 1;
     private Object[] keyLane = new Object[0];
-    /** Storage lane {@code valueLane}: dynamic primitive/reference array lane. */
     private Object[] valueLane = new Object[0];
-    /** Storage lane {@code orderLane}: dynamic primitive/reference array lane. */
     private int[] orderLane = new int[0];
-    /** Storage lane {@code hashIndexLane}: dynamic primitive/reference array lane. */
     private int[] hashIndexLane = new int[0];
-    /** Per-slot state words (OCCUPIED,DELETED); one bit set per slot and state. */
     private long[] stateMaskWords = new long[0];
-    /** Live slot count. */
     private int size;
 
-    /** Creates an empty scaffold owner; lanes grow by copy once received. */
-    public ListOrderedMapView() {
-    }
+    public ListOrderedMapView() { }
 
-    /** Reports the declared state-mask bits and lanes for ledgers; never allocates per element. */
     public static String scaffoldDescriptor() {
         return "M3ListOrderedMapView|LIST_ORDERED_MAP|OBJECT|OCCUPIED,DELETED|Object[] keyLane;Object[] valueLane;int[] orderLane;int[] hashIndexLane";
     }
 
-    /** ListOrderedMap.put (append order) (scaffold: not yet received). */
-    public V put(K key, V value) {
-        throw new NotYetReceived("M3ListOrderedMapView.put");
+    private static boolean stable(Object x) {
+        return x == null || x.getClass() == String.class || x.getClass() == Integer.class
+                || x.getClass() == Long.class;
     }
 
-    /** ListOrderedMap.put(index,key,value) (scaffold: not yet received). */
-    public V put(int index, K key, V value) {
-        throw new NotYetReceived("M3ListOrderedMapView.put");
+    private static int hash(Object x) {
+        int h = x == null ? 0 : x.hashCode();
+        return h ^ (h >>> 16);
     }
 
-    /** Map.get (scaffold: not yet received). */
-    public V get(Object key) {
-        throw new NotYetReceived("M3ListOrderedMapView.get");
+    private void indexIfEligible() {
+        if (hashIndexLane.length > 0 || size < 64 || size > (1 << 28)) return;
+        for (int i = 0; i < size; i++) if (!stable(keyLane[i])) return;
+        int capacity = 128;
+        while (capacity < (long) size * 2) capacity <<= 1;
+        int[] index = new int[capacity];
+        for (int i = 0; i < size; i++) {
+            int bucket = hash(keyLane[i]) & (capacity - 1);
+            while (index[bucket] != 0) bucket = (bucket + 1) & (capacity - 1);
+            index[bucket] = i + 1;
+        }
+        hashIndexLane = index;
     }
 
-    /** ListOrderedMap.get(index) (scaffold: not yet received). */
-    public K get(int index) {
-        throw new NotYetReceived("M3ListOrderedMapView.get");
-    }
-
-    /** ListOrderedMap.getValue(index) (scaffold: not yet received). */
-    public V getValue(int index) {
-        throw new NotYetReceived("M3ListOrderedMapView.getValue");
-    }
-
-    /** ListOrderedMap.indexOf (scaffold: not yet received). */
     public int indexOf(Object key) {
-        throw new NotYetReceived("M3ListOrderedMapView.indexOf");
+        if (stable(key)) {
+            indexIfEligible();
+            if (hashIndexLane.length != 0) {
+                int mask = hashIndexLane.length - 1;
+                int bucket = hash(key) & mask;
+                for (int entry; (entry = hashIndexLane[bucket]) != 0;
+                        bucket = (bucket + 1) & mask) {
+                    if (Objects.equals(key, keyLane[entry - 1])) return entry - 1;
+                }
+                return -1;
+            }
+        }
+        for (int i = 0; i < size; i++) if (Objects.equals(key, keyLane[i])) return i;
+        return -1;
     }
 
-    /** ListOrderedMap.remove(index) (scaffold: not yet received). */
-    public V remove(int index) {
-        throw new NotYetReceived("M3ListOrderedMapView.remove");
+    private void reserve(int required) {
+        if (required <= keyLane.length) return;
+        long capacity = keyLane.length == 0 ? 8L : (long) keyLane.length + (keyLane.length >>> 1) + 1;
+        int length = (int) Math.min(Integer.MAX_VALUE, Math.max(capacity, required));
+        keyLane = Arrays.copyOf(keyLane, length);
+        valueLane = Arrays.copyOf(valueLane, length);
     }
 
-    /** Map.remove (scaffold: not yet received). */
+    private void changed() { hashIndexLane = new int[0]; }
+
+    @SuppressWarnings("unchecked")
+    public V put(K key, V value) {
+        int oldIndex = indexOf(key);
+        if (oldIndex >= 0) {
+            V oldValue = (V) valueLane[oldIndex];
+            valueLane[oldIndex] = value;
+            return oldValue;
+        }
+        reserve(Math.addExact(size, 1));
+        boolean keepIndex = hashIndexLane.length != 0 && stable(key)
+                && (long) (size + 1) * 2 <= hashIndexLane.length;
+        keyLane[size] = key;
+        valueLane[size++] = value;
+        if (keepIndex) {
+            int mask = hashIndexLane.length - 1;
+            int bucket = hash(key) & mask;
+            while (hashIndexLane[bucket] != 0) bucket = (bucket + 1) & mask;
+            hashIndexLane[bucket] = size;
+        } else {
+            changed();
+        }
+        return null;
+    }
+
+    /** A previous key moves to the requested ordinal; earlier removal shifts it left. */
+    @SuppressWarnings("unchecked")
+    public V put(int index, K key, V value) {
+        if (index < 0 || index > size) throw new IndexOutOfBoundsException(index);
+        int previousIndex = indexOf(key);
+        V previous = null;
+        if (previousIndex >= 0) {
+            previous = (V) valueLane[previousIndex];
+            removeAt(previousIndex);
+            if (previousIndex < index) index--;
+        }
+        reserve(Math.addExact(size, 1));
+        System.arraycopy(keyLane, index, keyLane, index + 1, size - index);
+        System.arraycopy(valueLane, index, valueLane, index + 1, size - index);
+        keyLane[index] = key;
+        valueLane[index] = value;
+        size++;
+        changed();
+        return previous;
+    }
+
+    @SuppressWarnings("unchecked")
+    public V get(Object key) {
+        int index = indexOf(key);
+        return index < 0 ? null : (V) valueLane[index];
+    }
+
+    @SuppressWarnings("unchecked")
+    public K get(int index) { return (K) keyLane[Objects.checkIndex(index, size)]; }
+
+    @SuppressWarnings("unchecked")
+    public V getValue(int index) { return (V) valueLane[Objects.checkIndex(index, size)]; }
+
+    @SuppressWarnings("unchecked")
+    private V removeAt(int index) {
+        V previous = (V) valueLane[index];
+        System.arraycopy(keyLane, index + 1, keyLane, index, size - index - 1);
+        System.arraycopy(valueLane, index + 1, valueLane, index, size - index - 1);
+        keyLane[--size] = null;
+        valueLane[size] = null;
+        changed();
+        return previous;
+    }
+
+    public V remove(int index) { Objects.checkIndex(index, size); return removeAt(index); }
+
     public V remove(Object key) {
-        throw new NotYetReceived("M3ListOrderedMapView.remove");
+        int index = indexOf(key);
+        return index < 0 ? null : removeAt(index);
     }
 
-    /** ListOrderedMap.keyList (scaffold: not yet received). */
-    public java.util.List<K> keyList() {
-        throw new NotYetReceived("M3ListOrderedMapView.keyList");
+    public List<K> keyList() {
+        return Collections.unmodifiableList(new AbstractList<>() {
+            @Override public K get(int index) { return ListOrderedMapView.this.get(index); }
+            @Override public int size() { return ListOrderedMapView.this.size; }
+        });
     }
 
-    /** ListOrderedMap.valueList (scaffold: not yet received). */
-    public java.util.List<V> valueList() {
-        throw new NotYetReceived("M3ListOrderedMapView.valueList");
+    /** Live values with indexed set/remove but no index-changing insertion. */
+    public List<V> valueList() {
+        return new AbstractList<>() {
+            @Override public V get(int index) { return getValue(index); }
+            @Override public int size() { return ListOrderedMapView.this.size; }
+            @SuppressWarnings("unchecked")
+            @Override public V set(int index, V value) {
+                Objects.checkIndex(index, ListOrderedMapView.this.size);
+                V previous = (V) valueLane[index];
+                valueLane[index] = value;
+                return previous;
+            }
+            @Override public V remove(int index) { return ListOrderedMapView.this.remove(index); }
+        };
     }
 
-    /** Map.size (scaffold: not yet received). */
-    public int size() {
-        throw new NotYetReceived("M3ListOrderedMapView.size");
+    public int size() { return size; }
+
+    public void clear() {
+        Arrays.fill(keyLane, 0, size, null);
+        Arrays.fill(valueLane, 0, size, null);
+        size = 0;
+        changed();
     }
 }
