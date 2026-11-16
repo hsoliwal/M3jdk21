@@ -4,93 +4,127 @@
  */
 package jdk.internal.m3.collections;
 
+import java.util.Arrays;
+import java.util.Objects;
+import java.util.function.LongConsumer;
+
 /**
- * M3 five-library superset scaffold {@code FrozenLongBag}: API group {@code FROZEN_LONG_BAG} over arrays and state masks.
+ * Immutable primitive long counts in exact signed-sorted element and count lanes.
  *
- * <p>Provider lineage (LIBRARY_API_MATRIX.tsv, run 20261017-m3-to-public/LIB-SUPERSET):
- * <ul>
- *   <li>GUAVA ImmutableMultiset: frozen counts; iteration = first-insert order [license Apache-2.0; NEW_OWNER (LS2 family); priority P1; matrix owner PROPOSED:FrozenLongBag]</li>
- * </ul>
+ * <p>The original elementAt contract and lane layout specify sorted distinct
+ * ordinals. That order is preserved independently of Guava ImmutableMultiset's
+ * first-encounter order. The provider's count semantics are projected onto this
+ * existing M3 API; the class does not implement a provider interface.
  *
- * <p>DOOP mapping: lane kind LONG; lanes {@code long[] elementLane;int[] countLane}; offset scheme sorted element ordinal; count parallel; state-mask bits FROZEN; stored nodes NONE; API entry objects TRANSIENT_FACADE (transient facades over slots, never the stored representation); matrix note: frozen element+count lanes; ordinal offsets / FROZEN=1.
- *
- * <p>Status: SCAFFOLD. Every public atom throws {@link NotYetReceived} until this owner is received through a hash-pinned Synexia recipe with its own
- * provider oracle (never inferred from another provider). Not a {@code java.util} replacement.
+ * <p>Construction clones its input, sorts the private lane, and packs equal
+ * runs. Exports are independent copies, mutations always throw, and no entry
+ * object or boxed long is retained for an element or occurrence.
  */
 public final class FrozenLongBag {
-    /** State-mask bit {@code FROZEN} (per-slot state word, bit 0). */
     static final long STATE_FROZEN = 1L << 0;
 
-    /** Storage lane {@code elementLane}: dynamic primitive/reference array lane. */
-    private long[] elementLane = new long[0];
-    /** Storage lane {@code countLane}: dynamic primitive/reference array lane. */
-    private int[] countLane = new int[0];
-    /** Per-slot state words (FROZEN); one bit set per slot and state. */
-    private long[] stateMaskWords = new long[0];
-    /** Live slot count. */
-    private int size;
+    private final long[] elementLane;
+    private final int[] countLane;
+    private final long[] stateMaskWords;
+    private final int size;
 
-    /** Creates an empty scaffold owner; lanes grow by copy once received. */
+    /** Creates a valid immutable empty owner. */
     public FrozenLongBag() {
+        this(new long[0], new int[0], 0);
     }
 
-    /** Reports the declared state-mask bits and lanes for ledgers; never allocates per element. */
+    private FrozenLongBag(long[] elements, int[] counts, int total) {
+        elementLane = elements;
+        countLane = counts;
+        size = total;
+        stateMaskWords = new long[(int) (((long) elements.length + 63) >>> 6)];
+        Arrays.fill(stateMaskWords, -1L);
+        if ((elements.length & 63) != 0) {
+            stateMaskWords[stateMaskWords.length - 1] = (1L << (elements.length & 63)) - 1;
+        }
+    }
+
+    /** Retained compatibility descriptor; it does not describe admission status. */
     public static String scaffoldDescriptor() {
         return "M3FrozenLongBag|FROZEN_LONG_BAG|LONG|FROZEN|long[] elementLane;int[] countLane";
     }
 
-    /** Guava ImmutableMultiset.copyOf / EC ImmutableLongBag (scaffold: not yet received). */
+    /** Copies input values and freezes counts in signed-sorted distinct order. */
     public static FrozenLongBag copyOf(long[] source) {
-        throw new NotYetReceived("M3FrozenLongBag.copyOf");
+        Objects.requireNonNull(source, "source");
+        if (source.length == 0) {
+            return new FrozenLongBag();
+        }
+        long[] elements = source.clone();
+        Arrays.sort(elements);
+        int distinct = 1;
+        for (int index = 1; index < elements.length; index++) {
+            if (elements[index] != elements[index - 1]) {
+                distinct++;
+            }
+        }
+        int[] counts = new int[distinct];
+        int ordinal = 0;
+        long previous = elements[0];
+        counts[0] = 1;
+        for (int index = 1; index < elements.length; index++) {
+            long element = elements[index];
+            if (element == previous) {
+                counts[ordinal]++;
+            } else {
+                previous = element;
+                elements[++ordinal] = element;
+                counts[ordinal] = 1;
+            }
+        }
+        return new FrozenLongBag(distinct == elements.length
+                ? elements : Arrays.copyOf(elements, distinct), counts, source.length);
     }
 
-    /** Multiset.size (total occurrences) (scaffold: not yet received). */
     public int size() {
-        throw new NotYetReceived("M3FrozenLongBag.size");
+        return size;
     }
 
-    /** Multiset.elementSet().size (scaffold: not yet received). */
     public int distinctSize() {
-        throw new NotYetReceived("M3FrozenLongBag.distinctSize");
+        return elementLane.length;
     }
 
-    /** Multiset.count / Bag.getCount (scaffold: not yet received). */
     public int occurrencesOf(long element) {
-        throw new NotYetReceived("M3FrozenLongBag.occurrencesOf");
+        int ordinal = LaneSearch.lowerBound(elementLane, 0, elementLane.length, element);
+        return ordinal < elementLane.length && elementLane[ordinal] == element
+                ? countLane[ordinal] : 0;
     }
 
-    /** Multiset.contains (scaffold: not yet received). */
     public boolean contains(long element) {
-        throw new NotYetReceived("M3FrozenLongBag.contains");
+        return occurrencesOf(element) != 0;
     }
 
-    /** sorted distinct ordinal (scaffold: not yet received). */
+    /** Signed-sorted distinct ordinal, as required by the original method contract. */
     public long elementAt(int ordinal) {
-        throw new NotYetReceived("M3FrozenLongBag.elementAt");
+        return elementLane[Objects.checkIndex(ordinal, elementLane.length)];
     }
 
-    /** count parallel to element ordinal (scaffold: not yet received). */
     public int countAt(int ordinal) {
-        throw new NotYetReceived("M3FrozenLongBag.countAt");
+        return countLane[Objects.checkIndex(ordinal, countLane.length)];
     }
 
-    /** Multiset.elementSet().toArray (scaffold: not yet received). */
     public long[] distinctToArray() {
-        throw new NotYetReceived("M3FrozenLongBag.distinctToArray");
+        return elementLane.clone();
     }
 
-    /** EC forEachWithOccurrences (distinct) (scaffold: not yet received). */
-    public void forEachDistinct(java.util.function.LongConsumer action) {
-        throw new NotYetReceived("M3FrozenLongBag.forEachDistinct");
+    /** Calls the consumer once per distinct element in signed-sorted order. */
+    public void forEachDistinct(LongConsumer action) {
+        Objects.requireNonNull(action, "action");
+        for (long element : elementLane) {
+            action.accept(element);
+        }
     }
 
-    /** UOE contract once received (scaffold: not yet received). */
     public int addOccurrences(long element, int occurrences) {
-        throw new NotYetReceived("M3FrozenLongBag.addOccurrences");
+        throw new UnsupportedOperationException("immutable bag");
     }
 
-    /** UOE contract once received (scaffold: not yet received). */
     public boolean removeOccurrences(long element, int occurrences) {
-        throw new NotYetReceived("M3FrozenLongBag.removeOccurrences");
+        throw new UnsupportedOperationException("immutable bag");
     }
 }

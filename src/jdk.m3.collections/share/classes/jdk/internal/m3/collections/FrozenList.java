@@ -4,92 +4,187 @@
  */
 package jdk.internal.m3.collections;
 
+import java.util.AbstractList;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Comparator;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
+import java.util.NoSuchElementException;
+import java.util.Objects;
+import java.util.RandomAccess;
+import java.util.Spliterator;
+import java.util.Spliterators;
+import java.util.function.Predicate;
+import java.util.function.UnaryOperator;
+
 /**
- * M3 five-library superset scaffold {@code FrozenList}: API group {@code FROZEN_LIST} over arrays and state masks.
+ * Immutable encounter-ordered list over a private dense object lane.
  *
- * <p>Provider lineage (LIBRARY_API_MATRIX.tsv, run 20261017-m3-to-public/LIB-SUPERSET):
- * <ul>
- *   <li>JDK List.of/Set.of/Map.of: JEP269 immutable; UOE mutate; null-hostile; dup-reject [license GPLv2+CPE; NEW_OWNER (LS1); priority P1; matrix owner PROPOSED:M3FrozenLongList/Set/Map]</li>
- *   <li>GUAVA ImmutableList: frozen list; subList views; asList everywhere [license Apache-2.0; NEW_OWNER (LS1 family); priority P1; matrix owner PROPOSED:M3FrozenLongList]</li>
- * </ul>
+ * <p>Admission copies the source structure, rejects null elements, and preserves
+ * duplicates and element identities. Null queries find no element. Array exports
+ * are detached copies; list and iterator facades share this immutable owner.
+ * Mutators always throw, including requests that would make no change.
  *
- * <p>DOOP mapping: lane kind OBJECT; lanes {@code Object[] valueLane}; offset scheme ordinal slot (dense 0..size); state-mask bits FROZEN; stored nodes NONE; API entry objects TRANSIENT_FACADE(Map.Entry) (transient facades over slots, never the stored representation); matrix note: frozen sorted/dense lanes; ordinal offsets; build-time copy / FROZEN=1 word; occupancy implicit ALL.
- *
- * <p>Status: SCAFFOLD. Every public atom throws {@link NotYetReceived} until this owner is received through a hash-pinned Synexia recipe with its own
- * provider oracle (never inferred from another provider). Not a {@code java.util} replacement.
+ * <p>This implements the selected List.copyOf and Guava ImmutableList operation
+ * contracts of the existing internal M3 owner. Null queries follow Guava's absence
+ * semantics. It is not a replacement for a public JDK or Guava class. The original
+ * JEP269/ImmutableList lineage and compatibility descriptor remain authoritative
+ * history; no donor implementation source is copied.
  */
 public final class FrozenList<E> {
-    /** State-mask bit {@code FROZEN} (per-slot state word, bit 0). */
     static final long STATE_FROZEN = 1L << 0;
+    private static final long[] FROZEN_STATE = {STATE_FROZEN};
+    private static final Object[] EMPTY = new Object[0];
 
-    /** Storage lane {@code valueLane}: dynamic primitive/reference array lane. */
-    private Object[] valueLane = new Object[0];
-    /** Per-slot state words (FROZEN); one bit set per slot and state. */
-    private long[] stateMaskWords = new long[0];
-    /** Live slot count. */
-    private int size;
+    private final Object[] valueLane;
+    private final long[] stateMaskWords = FROZEN_STATE;
+    private final int size;
 
-    /** Creates an empty scaffold owner; lanes grow by copy once received. */
-    public FrozenList() {
+    /** Creates a valid immutable empty owner. */
+    public FrozenList() { this(EMPTY); }
+
+    private FrozenList(Object[] values) {
+        valueLane = values;
+        size = values.length;
     }
 
-    /** Reports the declared state-mask bits and lanes for ledgers; never allocates per element. */
+    /** Retained compatibility descriptor; it does not describe admission status. */
     public static String scaffoldDescriptor() {
         return "M3FrozenList|FROZEN_LIST|OBJECT|FROZEN|Object[] valueLane";
     }
 
-    /** JDK List.copyOf / Guava ImmutableList.copyOf (scaffold: not yet received). */
-    public static <E> FrozenList<E> copyOf(java.util.Collection<? extends E> source) {
-        throw new NotYetReceived("M3FrozenList.copyOf");
+    /** Copies the actual traversal once; no owner is published on admission failure. */
+    public static <E> FrozenList<E> copyOf(Collection<? extends E> source) {
+        Objects.requireNonNull(source, "source");
+        ArrayList<Object> values = new ArrayList<>();
+        for (E element : source) values.add(Objects.requireNonNull(element, "element"));
+        return new FrozenList<>(values.toArray());
     }
 
-    /** List.size (scaffold: not yet received). */
-    public int size() {
-        throw new NotYetReceived("M3FrozenList.size");
-    }
+    public int size() { return size; }
+    public boolean isEmpty() { return size == 0; }
 
-    /** List.isEmpty (scaffold: not yet received). */
-    public boolean isEmpty() {
-        throw new NotYetReceived("M3FrozenList.isEmpty");
-    }
-
-    /** List.get (scaffold: not yet received). */
+    @SuppressWarnings("unchecked")
     public E get(int index) {
-        throw new NotYetReceived("M3FrozenList.get");
+        return (E) valueLane[Objects.checkIndex(index, size)];
     }
 
-    /** List.indexOf (scaffold: not yet received). */
     public int indexOf(Object element) {
-        throw new NotYetReceived("M3FrozenList.indexOf");
+        if (element == null) return -1;
+        for (int index = 0; index < size; index++) {
+            if (element.equals(valueLane[index])) return index;
+        }
+        return -1;
     }
 
-    /** List.contains (scaffold: not yet received). */
-    public boolean contains(Object element) {
-        throw new NotYetReceived("M3FrozenList.contains");
+    public boolean contains(Object element) { return indexOf(element) >= 0; }
+    public Object[] toArray() { return valueLane.clone(); }
+
+    /** The facade owns no element storage and cannot mutate this snapshot. */
+    public List<E> asList() { return new ListView(0, size, false, null); }
+
+    private final class ListView extends AbstractList<E> implements RandomAccess {
+        private final int from;
+        private final int to;
+        private final boolean reverse;
+        private final ListView reverseOf;
+
+        ListView(int from, int to, boolean reverse, ListView reverseOf) {
+            this.from = from;
+            this.to = to;
+            this.reverse = reverse;
+            this.reverseOf = reverseOf;
+        }
+
+        @Override public int size() { return to - from; }
+        @Override public E get(int index) {
+            Objects.checkIndex(index, size());
+            return FrozenList.this.get(reverse ? to - 1 - index : from + index);
+        }
+        @Override public int indexOf(Object element) {
+            if (element == null) return -1;
+            for (int index = 0; index < size(); index++) {
+                if (element.equals(get(index))) return index;
+            }
+            return -1;
+        }
+        @Override public boolean contains(Object element) { return indexOf(element) >= 0; }
+        @Override public Object[] toArray() {
+            Object[] values = new Object[size()];
+            for (int index = 0; index < values.length; index++) values[index] = get(index);
+            return values;
+        }
+        @Override public List<E> subList(int fromIndex, int toIndex) {
+            if (fromIndex < 0 || toIndex > size()) throw new IndexOutOfBoundsException();
+            if (fromIndex > toIndex) throw new IllegalArgumentException("fromIndex > toIndex");
+            return reverse
+                    ? new ListView(to - toIndex, to - fromIndex, true, null)
+                    : new ListView(from + fromIndex, from + toIndex, false, null);
+        }
+        @Override public List<E> reversed() {
+            return reverseOf != null ? reverseOf : new ListView(from, to, !reverse, this);
+        }
+        @Override public Iterator<E> iterator() { return listIterator(0); }
+        @Override public ListIterator<E> listIterator(int index) {
+            if (index < 0 || index > size()) throw new IndexOutOfBoundsException(index);
+            return new ListIterator<>() {
+                private int cursor = index;
+                @Override public boolean hasNext() { return cursor < size(); }
+                @Override public E next() {
+                    if (!hasNext()) throw new NoSuchElementException();
+                    return get(cursor++);
+                }
+                @Override public boolean hasPrevious() { return cursor > 0; }
+                @Override public E previous() {
+                    if (!hasPrevious()) throw new NoSuchElementException();
+                    return get(--cursor);
+                }
+                @Override public int nextIndex() { return cursor; }
+                @Override public int previousIndex() { return cursor - 1; }
+                @Override public void remove() { throw immutable(); }
+                @Override public void set(E value) { throw immutable(); }
+                @Override public void add(E value) { throw immutable(); }
+            };
+        }
+        @Override public Spliterator<E> spliterator() {
+            return Spliterators.spliterator(iterator(), size(),
+                    Spliterator.ORDERED | Spliterator.IMMUTABLE | Spliterator.NONNULL);
+        }
+
+        // Guard mutation at the view itself: JDK21's default reversed view can
+        // return without calling its unmodifiable base for an empty bulk edit.
+        @Override public boolean add(E element) { throw immutable(); }
+        @Override public void add(int index, E element) { throw immutable(); }
+        @Override public boolean addAll(Collection<? extends E> values) { throw immutable(); }
+        @Override public boolean addAll(int index, Collection<? extends E> values) { throw immutable(); }
+        @Override public E set(int index, E element) { throw immutable(); }
+        @Override public E remove(int index) { throw immutable(); }
+        @Override public boolean remove(Object value) { throw immutable(); }
+        @Override public boolean removeAll(Collection<?> values) { throw immutable(); }
+        @Override public boolean retainAll(Collection<?> values) { throw immutable(); }
+        @Override public boolean removeIf(Predicate<? super E> filter) { throw immutable(); }
+        @Override public void replaceAll(UnaryOperator<E> operator) { throw immutable(); }
+        @Override public void sort(Comparator<? super E> comparator) { throw immutable(); }
+        @Override public void clear() { throw immutable(); }
+        @Override public void addFirst(E element) { throw immutable(); }
+        @Override public void addLast(E element) { throw immutable(); }
+        @Override public E removeFirst() { throw immutable(); }
+        @Override public E removeLast() { throw immutable(); }
     }
 
-    /** List.toArray (scaffold: not yet received). */
-    public Object[] toArray() {
-        throw new NotYetReceived("M3FrozenList.toArray");
+    public Iterator<E> iterator() { return asList().iterator(); }
+
+    private static UnsupportedOperationException immutable() {
+        return new UnsupportedOperationException("immutable list");
     }
 
-    /** Guava ImmutableCollection.asList (facade) (scaffold: not yet received). */
-    public java.util.List<E> asList() {
-        throw new NotYetReceived("M3FrozenList.asList");
-    }
-
-    /** List.iterator (scaffold: not yet received). */
-    public java.util.Iterator<E> iterator() {
-        throw new NotYetReceived("M3FrozenList.iterator");
-    }
-
-    /** UOE contract once received (JEP269) (scaffold: not yet received). */
     public boolean add(E element) {
-        throw new NotYetReceived("M3FrozenList.add");
+        throw immutable();
     }
 
-    /** UOE contract once received (JEP269) (scaffold: not yet received). */
     public E set(int index, E element) {
-        throw new NotYetReceived("M3FrozenList.set");
+        throw immutable();
     }
 }
