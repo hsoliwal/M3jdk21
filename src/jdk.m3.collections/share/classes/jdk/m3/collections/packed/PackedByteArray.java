@@ -22,7 +22,7 @@ import jdk.internal.m3.collections.bits.PrimitiveBits;
 
 /**
  * Fixed-size byte-packed integers, including 24/40/48/56-bit widths.
- * Byte order is explicit; no alignment padding or overread is required.
+ * Byte order is explicit; no alignment padding is required and no read leaves the payload.
  * Instances are not safe for concurrent mutation.
  *
  * <p>Lineage: absorbed from Synexia {@code m3-primitives/src/main/java/jdk/internal/m3/primitives/PackedByteArray.java}
@@ -65,15 +65,18 @@ public final class PackedByteArray {
 
     public long get(int index) {
         int offset = Objects.checkIndex(index, size()) * bytesPerValue;
-        if (bitsPerValue == Long.SIZE) {
-            return order == ByteOrder.LITTLE_ENDIAN
-                    ? (long) LONG_LE.get(bytes, offset)
-                    : (long) LONG_BE.get(bytes, offset);
-        }
-        long raw = 0L;
-        for (int i = 0; i < bytesPerValue; i++) {
-            int source = order == ByteOrder.LITTLE_ENDIAN ? i : bytesPerValue - 1 - i;
-            raw |= (bytes[offset + source] & 0xffL) << (i * Byte.SIZE);
+        boolean little = order == ByteOrder.LITTLE_ENDIAN;
+        int spare = Long.SIZE - bitsPerValue;
+        long raw;
+        if (offset <= bytes.length - Long.BYTES) {
+            // Word-at-a-time: one load, then drop the neighbouring bytes beyond the width.
+            raw = little ? (long) LONG_LE.get(bytes, offset) & (-1L >>> spare) : (long) LONG_BE.get(bytes, offset) >>> spare;
+            if (spare == 0) return raw;
+        } else {
+            raw = 0L; // only the last seven bytes of the payload take the byte loop
+            for (int i = 0; i < bytesPerValue; i++) {
+                raw |= (bytes[offset + (little ? i : bytesPerValue - 1 - i)] & 0xffL) << (i * Byte.SIZE);
+            }
         }
         return signed ? PrimitiveBits.signExtend(raw, bitsPerValue) : raw;
     }

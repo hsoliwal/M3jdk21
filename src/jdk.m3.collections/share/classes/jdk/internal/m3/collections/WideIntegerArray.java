@@ -14,6 +14,9 @@
  *******************************************************************************/
 package jdk.internal.m3.collections;
 
+import java.lang.invoke.MethodHandles;
+import java.lang.invoke.VarHandle;
+import java.nio.ByteOrder;
 import java.util.Objects;
 
 /**
@@ -38,6 +41,7 @@ import java.util.Objects;
 public final class WideIntegerArray {
     private static final long MASK32 = 0xffff_ffffL;
     private static final int MAX_ARRAY_LENGTH = Integer.MAX_VALUE - 8;
+    private static final VarHandle WORDS = MethodHandles.byteArrayViewVarHandle(long[].class, ByteOrder.LITTLE_ENDIAN);
 
     private final int bitsPerValue;
     private final int size;
@@ -403,7 +407,11 @@ public final class WideIntegerArray {
         return readLane(offset + Long.BYTES, bytesPerValue - Long.BYTES);
     }
 
+    /** Word-at-a-time: one little-endian load when a full word is available; the loop serves the last high lane. */
     private long readLane(int offset, int byteCount) {
+        if (offset <= values.length - Long.BYTES) {
+            return (long) WORDS.get(values, offset) & (-1L >>> (Long.SIZE - byteCount * Byte.SIZE));
+        }
         long result = 0;
         for (int i = 0; i < byteCount; i++) {
             result |= (values[offset + i] & 0xffL) << (i * Byte.SIZE);
@@ -416,7 +424,12 @@ public final class WideIntegerArray {
         writeLane(offset + Long.BYTES, bytesPerValue - Long.BYTES, high & highMask);
     }
 
+    /** A full lane is one word store; a shorter high lane keeps the byte loop so the next entry is untouched. */
     private void writeLane(int offset, int byteCount, long value) {
+        if (byteCount == Long.BYTES) {
+            WORDS.set(values, offset, value);
+            return;
+        }
         for (int i = 0; i < byteCount; i++) {
             values[offset + i] = (byte) (value >>> (i * Byte.SIZE));
         }
