@@ -71,6 +71,22 @@ public final class FrozenLongMultimap {
         LongIntHashMap ordinals = new LongIntHashMap(0);
         long[] encountered = new long[keys.length];
         int[] counts = new int[keys.length];
+        int distinct = distinctOf(keys, ordinals, encountered, counts);
+        int[] offsets = new int[distinct + 1];
+        for (int i = 0; i < distinct; i++) {
+            offsets[i + 1] = offsets[i] + counts[i];
+        }
+        int[] next = Arrays.copyOf(offsets, distinct);
+        long[] packedValues = new long[values.length];
+        for (int i = 0; i < keys.length; i++) {
+            int ordinal = ordinals.get(keys[i]);
+            packedValues[next[ordinal]++] = values[i];
+        }
+        return new FrozenLongMultimap(Arrays.copyOf(encountered, distinct),
+                offsets, packedValues, ordinals);
+    }
+
+    private static int distinctOf(long[] keys, LongIntHashMap ordinals, long[] encountered, int[] counts) {
         int distinct = 0;
         for (long key : keys) {
             int ordinal = ordinals.getOrDefault(key, -1);
@@ -85,18 +101,7 @@ public final class FrozenLongMultimap {
         if (distinct == Integer.MAX_VALUE) {
             throw new OutOfMemoryError("FrozenLongMultimap offset capacity exhausted");
         }
-        int[] offsets = new int[distinct + 1];
-        for (int i = 0; i < distinct; i++) {
-            offsets[i + 1] = offsets[i] + counts[i];
-        }
-        int[] next = Arrays.copyOf(offsets, distinct);
-        long[] packedValues = new long[values.length];
-        for (int i = 0; i < keys.length; i++) {
-            int ordinal = ordinals.get(keys[i]);
-            packedValues[next[ordinal]++] = values[i];
-        }
-        return new FrozenLongMultimap(Arrays.copyOf(encountered, distinct),
-                offsets, packedValues, ordinals);
+        return distinct;
     }
 
     public int size() { return size; }

@@ -71,6 +71,11 @@ public final class FrozenLongBiMap {
         long[] keyCopy = keys.clone();
         long[] valueCopy = values.clone();
         PackedLongRowIndex forward = new PackedLongRowIndex(keyCopy.length);
+        PackedLongRowIndex reverse = reverseOf(keyCopy, valueCopy, forward);
+        return new FrozenLongBiMap(keyCopy, valueCopy, forward, reverse, null);
+    }
+
+    private static PackedLongRowIndex reverseOf(long[] keyCopy, long[] valueCopy, PackedLongRowIndex forward) {
         PackedLongRowIndex reverse = new PackedLongRowIndex(keyCopy.length);
         for (int ordinal = 0; ordinal < keyCopy.length; ordinal++) {
             if (forward.find(keyCopy[ordinal], keyCopy) >= 0) {
@@ -82,7 +87,7 @@ public final class FrozenLongBiMap {
             forward.insert(ordinal, keyCopy);
             reverse.insert(ordinal, valueCopy);
         }
-        return new FrozenLongBiMap(keyCopy, valueCopy, forward, reverse, null);
+        return reverse;
     }
 
     public int size() { return size; }

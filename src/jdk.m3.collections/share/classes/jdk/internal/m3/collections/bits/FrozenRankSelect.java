@@ -135,6 +135,23 @@ public final class FrozenRankSelect {
 
     /** Zero-based ordinal of a clear bit -> bit index. */
     public int select0(int ordinal) {
+        int block = blockOf(ordinal);
+        int remaining = ordinal - (bitPrefixForBlock(block) - superRanks[block]);
+        int startWord = block * WORDS_PER_SUPERBLOCK;
+        int endWord = Math.min(words.length, startWord + WORDS_PER_SUPERBLOCK);
+        for (int word = startWord; word < endWord; word++) {
+            int validBits = validBitsInWord(word);
+            long zeroBits = ~words[word] & lowMask(validBits);
+            int count = Long.bitCount(zeroBits);
+            if (remaining < count) {
+                return (word << WORD_SHIFT) + selectInWord(zeroBits, remaining);
+            }
+            remaining -= count;
+        }
+        throw new IllegalStateException("rank/select directory corrupted");
+    }
+
+    private int blockOf(int ordinal) {
         int zeros = zeros();
         if (ordinal < 0 || ordinal >= zeros) {
             throw new IndexOutOfBoundsException("ordinal=" + ordinal);
@@ -149,19 +166,7 @@ public final class FrozenRankSelect {
         }
 
         int block = lo;
-        int remaining = ordinal - (bitPrefixForBlock(block) - superRanks[block]);
-        int startWord = block * WORDS_PER_SUPERBLOCK;
-        int endWord = Math.min(words.length, startWord + WORDS_PER_SUPERBLOCK);
-        for (int word = startWord; word < endWord; word++) {
-            int validBits = validBitsInWord(word);
-            long zeroBits = ~words[word] & lowMask(validBits);
-            int count = Long.bitCount(zeroBits);
-            if (remaining < count) {
-                return (word << WORD_SHIFT) + selectInWord(zeroBits, remaining);
-            }
-            remaining -= count;
-        }
-        throw new IllegalStateException("rank/select directory corrupted");
+        return block;
     }
 
     public long[] toLongArray() {
