@@ -2,12 +2,17 @@
 // SPDX-License-Identifier: Apache-2.0
 /*
  * @test
- * @summary Unit admission shares existing canonical owners across public constructors and pool lanes
+ * @summary Unit admission shares existing canonical owners across public constructors
+ *          and pool lanes
  * @modules java.base/java.lang:+open
- * @run main/othervm -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage M3StringUnitAdmissionTest
- * @run main/othervm -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage -Dm3.string.immediate=false M3StringUnitAdmissionTest
- * @run main/othervm -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage -XX:-CompactStrings M3StringUnitAdmissionTest
- * @run main/othervm -XX:+UnlockExperimentalVMOptions -XX:-UseM3StringStorage -Dm3.string.pool.maxBytes=0 M3StringUnitAdmissionTest zero
+ * @run main/othervm -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage
+ *      M3StringUnitAdmissionTest
+ * @run main/othervm -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage
+ *      -Dm3.string.immediate=false M3StringUnitAdmissionTest
+ * @run main/othervm -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage
+ *      -XX:-CompactStrings M3StringUnitAdmissionTest
+ * @run main/othervm -XX:+UnlockExperimentalVMOptions -XX:-UseM3StringStorage
+ *      -Dm3.string.pool.maxBytes=0 M3StringUnitAdmissionTest zero
  */
 
 import java.lang.reflect.Field;
@@ -44,7 +49,8 @@ public class M3StringUnitAdmissionTest {
             UNIT = method(POOL, "internUnit", char.class);
             CHARS = method(POOL, "internChars", char[].class, int.class, int.class);
             LATIN1 = method(POOL, "internLatin1Bytes", byte[].class, int.class, int.class);
-            COMPACT = method(POOL, "internCompactBytes", byte[].class, int.class, int.class, byte.class);
+            COMPACT = method(POOL, "internCompactBytes", byte[].class, int.class,
+                    int.class, byte.class);
             POINTS = method(POOL, "internCodePoints", int[].class, int.class, int.class);
             BYTES = method(POOL, "localNativeBytes");
             COMPACT_STRINGS = field(String.class, "COMPACT_STRINGS").getBoolean(null);
@@ -87,7 +93,8 @@ public class M3StringUnitAdmissionTest {
         check(owner(points) == canonical, "code point constructor owner identity");
         source[1] = (char) (unit ^ 1);
         check(ranged.length() == 1 && ranged.charAt(0) == unit, "mutable char input snapshotted");
-        check(scalar.equals(direct) && scalar.hashCode() == unit, "unit content and Java hash exact");
+        check(scalar.equals(direct) && scalar.hashCode() == unit,
+                "unit content and Java hash exact");
         check(scalar.intern() == direct.intern(), "unit String intern identity");
         check((byte) CODER.get(canonical) == (COMPACT_STRINGS && unit <= 0xff ? 0 : 1),
                 "canonical coder preserved");
@@ -99,7 +106,8 @@ public class M3StringUnitAdmissionTest {
             String decoded = new String(bytes, StandardCharsets.ISO_8859_1);
             check(owner(decoded) == canonical, "Latin-1 byte constructor owner identity");
             bytes[0] ^= 1;
-            check(decoded.length() == 1 && decoded.charAt(0) == unit, "mutable byte input snapshotted");
+            check(decoded.length() == 1 && decoded.charAt(0) == unit,
+                    "mutable byte input snapshotted");
         }
         HOLDS.add(scalar);
         HOLDS.add(direct);
@@ -125,7 +133,8 @@ public class M3StringUnitAdmissionTest {
             Object compact = COMPACT.invoke(null, new byte[] {(byte) unit}, 0, 1, (byte) 0);
             Object points = POINTS.invoke(null, new int[] {unit}, 0, 1);
             for (Object peer : new Object[] {chars, latin, compact, points}) {
-                check(peer != null && OWNER.get(peer) == canonical, "zero-cost ingress shares unit owner");
+                check(peer != null && OWNER.get(peer) == canonical,
+                        "zero-cost ingress shares unit owner");
             }
             check(((CharSequence) value).length() == 1 && ((CharSequence) value).charAt(0) == unit,
                     "all Latin-1 unit values exact");

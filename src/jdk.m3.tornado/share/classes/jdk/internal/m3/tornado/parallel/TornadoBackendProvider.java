@@ -80,7 +80,8 @@ public final class TornadoBackendProvider implements BackendProvider {
 
         Selection observed = selection();
         if (!observed.probe().available()) {
-            throw new IllegalStateException("Tornado backend unavailable: " + observed.probe().reason());
+            throw new IllegalStateException(
+                    "Tornado backend unavailable: " + observed.probe().reason());
         }
         requireDeviceExecution();
         long[] dimensions = observed.device().getDeviceMaxWorkgroupDimensions();
@@ -115,16 +116,21 @@ public final class TornadoBackendProvider implements BackendProvider {
             if (runtime.getNumBackends() == 0) {
                 return Selection.unavailable("no Tornado accelerator backend is installed");
             }
-            TornadoDevice device = Objects.requireNonNull(runtime.getDefaultDevice(), "Tornado device");
+            TornadoDevice device = Objects.requireNonNull(
+                    runtime.getDefaultDevice(), "Tornado device");
             TornadoVMBackendType backend = Objects.requireNonNull(
                     device.getTornadoVMBackend(), "Tornado backend type");
             if (backend == TornadoVMBackendType.JAVA || backend == TornadoVMBackendType.VIRTUAL) {
-                return Selection.unavailable("the selected Tornado backend is not an execution device: " + backend);
+                return Selection.unavailable(
+                        "the selected Tornado backend is not an execution device: " + backend);
             }
-            TornadoDeviceType type = Objects.requireNonNull(device.getDeviceType(), "Tornado device type");
+            TornadoDeviceType type = Objects.requireNonNull(
+                    device.getDeviceType(), "Tornado device type");
             return switch (type) {
-                case CPU -> new Selection(device, Set.of(Backend.Capability.CPU), 10, Probe.ready());
-                case GPU -> new Selection(device, Set.of(Backend.Capability.GPU), 100, Probe.ready());
+                case CPU -> new Selection(
+                        device, Set.of(Backend.Capability.CPU), 10, Probe.ready());
+                case GPU -> new Selection(
+                        device, Set.of(Backend.Capability.GPU), 100, Probe.ready());
                 case ACCELERATOR -> new Selection(device, Set.of(), 50, Probe.ready());
                 default -> Selection.unavailable("unqualified Tornado device type: " + type);
             };
@@ -147,7 +153,8 @@ public final class TornadoBackendProvider implements BackendProvider {
 
     private static void requireDisabledSystemMode(String property) {
         if (Boolean.getBoolean(property)) {
-            throw new IllegalStateException(property + " must be false for the Tornado parallel backend");
+            throw new IllegalStateException(
+                    property + " must be false for the Tornado parallel backend");
         }
     }
 
