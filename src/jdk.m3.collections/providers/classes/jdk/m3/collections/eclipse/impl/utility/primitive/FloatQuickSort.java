@@ -1,0 +1,162 @@
+/*
+ * Copyright (c) 2026 Goldman Sachs.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * and Eclipse Distribution License v. 1.0 which accompany this distribution.
+ * The Eclipse Public License is available at http://www.eclipse.org/legal/epl-v10.html
+ * and the Eclipse Distribution License is available at
+ * http://www.eclipse.org/org/documents/edl-v10.php.
+ */
+
+package jdk.m3.collections.eclipse.impl.utility.primitive;
+
+import jdk.m3.collections.eclipse.api.block.comparator.primitive.FloatComparator;
+
+/**
+ * FloatQuickSort is an implementation of the Quick Sort algorithm as described in Donald Knuth's TAOCP with some
+ * optimizations. It supports indirect array sorting based on primitive comparators and/or key values extracted from
+ * the array values if a sort order other than the natural one of the array elements is required.
+ *
+ * Note: This QuickSort implementation is not stable. It does not guarantee that the relative order of equal elements
+ * is preserved. This may be important when using a custom comparator.
+ *
+ * This file was automatically generated from template file primitiveSort.stg.
+ */
+public final class FloatQuickSort
+{
+    private static final int SORT_SMALL_SIZE = 9;
+
+    private FloatQuickSort()
+    {
+        throw new AssertionError("Suppress default constructor for noninstantiability");
+    }
+
+    public static void sort(float[] array, int left, int right, FloatComparator comparator)
+    {
+        // Use a loop to handle the larger partition iteratively (Tail Recursion Elimination)
+        while (right - left + 1 > FloatQuickSort.SORT_SMALL_SIZE)
+        {
+            // Initialize new stage
+            int mid = (right - (right / 2)) + (left / 2);
+            float leftVal = array[left];
+            float rightVal = array[right];
+            float midVal = array[mid];
+
+            int swapIndex = -1;
+
+            if (comparator.compare(leftVal, midVal) > 0 && comparator.compare(leftVal, rightVal) > 0)
+            {
+                swapIndex = (comparator.compare(midVal, rightVal) < 0) ? right : mid;
+            }
+            else if (comparator.compare(leftVal, midVal) < 0 && comparator.compare(leftVal, rightVal) < 0)
+            {
+                swapIndex = (comparator.compare(midVal, rightVal) < 0) ? mid : right;
+            }
+
+            if (swapIndex > 0)
+            {
+                swap(array, left, swapIndex);
+            }
+
+            float pivot = array[left];
+
+            int i = left + 1;
+            int j = right;
+
+            while (i < j)
+            {
+                // Compare: Key(i) : Key, skip all which are <= pivot or until hit j
+                while (comparator.compare(array[i], pivot) <= 0 && i < j)
+                {
+                    i++;
+                }
+
+                // Compare Key : Key(j), skip all which are > pivot or until hit i
+                while (comparator.compare(pivot, array[j]) < 0 && j > i - 1)
+                {
+                    j--;
+                }
+
+                if (i < j)
+                {
+                    swap(array, i, j);
+                }
+                else
+                {
+                    swap(array, left, j);
+                }
+            }
+
+            // Calculate the start of the right partition (skipping duplicates)
+            int effectiveRightStart = j + 1;
+            while (right > effectiveRightStart && comparator.compare(pivot, array[effectiveRightStart]) == 0)
+            {
+                effectiveRightStart++;
+            }
+
+            // Calculate the end of the left partition (skipping duplicates)
+            int effectiveLeftEnd = j - 1;
+            while (effectiveLeftEnd > left && comparator.compare(pivot, array[effectiveLeftEnd]) == 0)
+            {
+                effectiveLeftEnd--;
+            }
+
+            // OPTIMIZATION: Recurse on the smaller partition, Loop on the larger partition
+            // This prevents StackOverflowError by limiting recursion depth to log(N)
+            int leftLength = effectiveLeftEnd - left;
+            int rightLength = right - effectiveRightStart;
+
+            if (leftLength < rightLength)
+            {
+                // Recurse Left
+                if (leftLength > 0)
+                {
+                    FloatQuickSort.sort(array, left, effectiveLeftEnd, comparator);
+                }
+                // Loop Right (update 'left' to process the right side in the next iteration)
+                left = effectiveRightStart;
+            }
+            else
+            {
+                // Recurse Right
+                if (rightLength > 0)
+                {
+                    FloatQuickSort.sort(array, effectiveRightStart, right, comparator);
+                }
+                // Loop Left (update 'right' to process the left side in the next iteration)
+                right = effectiveLeftEnd;
+            }
+        }
+
+        // Base case: Use Insertion Sort for small arrays
+        FloatQuickSort.insertionSort(array, left, right, comparator);
+    }
+
+    private static void insertionSort(float[] array, int left, int right, FloatComparator comparator)
+    {
+        for (int j = left + 1; j <= right; j++)
+        {
+            if (comparator.compare(array[j - 1], array[j]) > 0)
+            {
+                float key = array[j];
+                int i = j - 1;
+
+                do
+                {
+                    array[i + 1] = array[i];
+                    i--;
+                }
+                while (i > -1 && comparator.compare(key, array[i]) < 0);
+
+                array[i + 1] = key;
+            }
+        }
+    }
+
+    private static void swap(float[] array, int i1, int i2)
+    {
+        float value = array[i1];
+        array[i1] = array[i2];
+        array[i2] = value;
+    }
+}
