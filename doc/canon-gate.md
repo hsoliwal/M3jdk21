@@ -110,3 +110,8 @@ nonregular or noncanonical entries report `MISSING`,
 silently skipped. These dispositions do not count as verified atoms.
 The current inventory still materializes bytes for normalized clustering;
 bounded-memory source indexing and race-free file opening need separate work.
+The disposition `path` column encodes a literal backslash and ISO control
+characters as four-digit `\\uXXXX` sequences. This preserves tabs,
+newlines and carriage returns as printable data rather than creating extra
+TSV fields or records, while the underlying source still remains unsafe
+and unadmitted. The original `INVENTORY.tsv` and atom schema are unchanged.
