@@ -3325,6 +3325,42 @@ public final class String
     }
 
     /**
+     * The compiled form of the regex argument of {@link #matches}, {@link #replaceFirst},
+     * {@link #replaceAll} and {@link #split(String, int)}. A regex is compiled once, stored,
+     * and read back by later calls with an equal regex, together with everything the
+     * compilation derived. A {@code null} regex and a very long one go to
+     * {@link Pattern#compile(String)} as before; so does an invalid one, on every call,
+     * with its exception.
+     */
+    private static Pattern compiledRegex(String regex) {
+        if (regex == null || regex.length() > RegexMemo.MAX_REGEX_UNITS) {
+            return Pattern.compile(regex);
+        }
+        return RegexMemo.compiled(regex);
+    }
+
+    /** Recently compiled regex arguments: softly held, one per slot of a direct-mapped table. */
+    private static final class RegexMemo {
+        static final int MAX_REGEX_UNITS = 256;
+        private static final int SLOTS = 256;
+        private static final java.util.concurrent.atomic.AtomicReferenceArray<
+                java.lang.ref.SoftReference<Pattern>> TABLE =
+                new java.util.concurrent.atomic.AtomicReferenceArray<>(SLOTS);
+
+        private RegexMemo() {}
+
+        static Pattern compiled(String regex) {
+            int slot = regex.hashCode() & (SLOTS - 1);
+            java.lang.ref.SoftReference<Pattern> stored = TABLE.get(slot);
+            Pattern known = stored == null ? null : stored.get();
+            if (known != null && known.pattern().equals(regex)) return known;
+            Pattern compiled = Pattern.compile(regex);
+            TABLE.set(slot, new java.lang.ref.SoftReference<>(compiled));
+            return compiled;
+        }
+    }
+
+    /**
      * Tells whether or not this string matches the given <a
      * href="../util/regex/Pattern.html#sum">regular expression</a>.
      *
@@ -3362,7 +3398,7 @@ public final class String
                 return decision == M3StringRegexDp.MATCH;
             }
         }
-        return Pattern.matches(regex, this);
+        return compiledRegex(regex).asMatchPredicate().test(this);
     }
 
     /**
@@ -3481,7 +3517,7 @@ public final class String
             String replaced = storage.replaceLiteralRegex(this, regex, replacement, true);
             if (replaced != null) return replaced;
         }
-        return Pattern.compile(regex).matcher(this).replaceFirst(replacement);
+        return compiledRegex(regex).matcher(this).replaceFirst(replacement);
     }
 
     /**
@@ -3530,7 +3566,7 @@ public final class String
             String replaced = storage.replaceLiteralRegex(this, regex, replacement, false);
             if (replaced != null) return replaced;
         }
-        return Pattern.compile(regex).matcher(this).replaceAll(replacement);
+        return compiledRegex(regex).matcher(this).replaceAll(replacement);
     }
 
     /**
@@ -3862,7 +3898,7 @@ public final class String
         if (M3String.isLiteralRegex(regex)) {
             return splitLiteral(regex, limit, withDelimiters);
         }
-        Pattern pattern = Pattern.compile(regex);
+        Pattern pattern = compiledRegex(regex);
         return withDelimiters
                 ? pattern.splitWithDelimiters(this, limit)
                 : pattern.split(this, limit);
