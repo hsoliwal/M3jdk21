@@ -13,7 +13,7 @@
 
     <parent>
         <artifactId>eclipse-collections-parent</artifactId>
-        <groupId>org.eclipse.collections</groupId>
+        <groupId>jdk.m3.collections.eclipse</groupId>
         <version>14.0.0-SNAPSHOT</version>
     </parent>
 
@@ -67,34 +67,34 @@
                                 <failOnWarning>true</failOnWarning>
                                 <ignoredUnusedDeclaredDependencies>
                                     <ignoredUnusedDeclaredDependency>
-                                        org.eclipse.collections:eclipse-collections-code-generator:jar
+                                        jdk.m3.collections.eclipse:eclipse-collections-code-generator:jar
                                     </ignoredUnusedDeclaredDependency>
                                     <ignoredUnusedDeclaredDependency>
-                                        org.eclipse.collections:eclipse-collections-api:jar
+                                        jdk.m3.collections.eclipse:eclipse-collections-api:jar
                                     </ignoredUnusedDeclaredDependency>
                                     <ignoredUnusedDeclaredDependency>
-                                        org.eclipse.collections:eclipse-collections:jar
+                                        jdk.m3.collections.eclipse:eclipse-collections:jar
                                     </ignoredUnusedDeclaredDependency>
                                     <ignoredUnusedDeclaredDependency>
-                                        org.eclipse.collections:eclipse-collections-testutils:jar
+                                        jdk.m3.collections.eclipse:eclipse-collections-testutils:jar
                                     </ignoredUnusedDeclaredDependency>
                                     <ignoredUnusedDeclaredDependency>
-                                        org.eclipse.collections:eclipse-collections-forkjoin:jar
+                                        jdk.m3.collections.eclipse:eclipse-collections-forkjoin:jar
                                     </ignoredUnusedDeclaredDependency>
                                     <ignoredUnusedDeclaredDependency>
-                                        org.eclipse.collections:unit-tests:jar
+                                        jdk.m3.collections.eclipse:unit-tests:jar
                                     </ignoredUnusedDeclaredDependency>
                                     <ignoredUnusedDeclaredDependency>
-                                        org.eclipse.collections:serialization-tests:jar
+                                        jdk.m3.collections.eclipse:serialization-tests:jar
                                     </ignoredUnusedDeclaredDependency>
                                     <ignoredUnusedDeclaredDependency>
-                                        org.eclipse.collections:jcstress-tests:jar
+                                        jdk.m3.collections.eclipse:jcstress-tests:jar
                                     </ignoredUnusedDeclaredDependency>
                                     <ignoredUnusedDeclaredDependency>
-                                        org.eclipse.collections:unit-tests-java8:jar
+                                        jdk.m3.collections.eclipse:unit-tests-java8:jar
                                     </ignoredUnusedDeclaredDependency>
                                     <ignoredUnusedDeclaredDependency>
-                                        org.eclipse.collections:unit-tests-thread-safety:jar
+                                        jdk.m3.collections.eclipse:unit-tests-thread-safety:jar
                                     </ignoredUnusedDeclaredDependency>
                                 </ignoredUnusedDeclaredDependencies>
                             </configuration>

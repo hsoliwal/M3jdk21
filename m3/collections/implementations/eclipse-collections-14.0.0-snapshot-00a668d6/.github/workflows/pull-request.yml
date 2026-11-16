@@ -31,7 +31,7 @@ jobs:
           MAVEN_OPTS: '-Xmx1g'
 
       - name: 'Clean Maven cache'
-        run: rm -rf ~/.m2/repository/org/eclipse/collections
+        run: rm -rf ~/.m2/repository/jdk/m3/collections/eclipse
 
   enforcer:
     runs-on: ubuntu-latest
@@ -59,7 +59,7 @@ jobs:
           MAVEN_OPTS: '-Xmx1g'
 
       - name: 'Clean Maven cache'
-        run: rm -rf ~/.m2/repository/org/eclipse/collections
+        run: rm -rf ~/.m2/repository/jdk/m3/collections/eclipse
 
   dependency:
     runs-on: ubuntu-latest
@@ -87,7 +87,7 @@ jobs:
           MAVEN_OPTS: '-Xmx1g'
 
       - name: 'Clean Maven cache'
-        run: rm -rf ~/.m2/repository/org/eclipse/collections
+        run: rm -rf ~/.m2/repository/jdk/m3/collections/eclipse
 
   unit-tests-no-p2:
     name: Unit Tests ${{ matrix.java-version }}
@@ -119,7 +119,7 @@ jobs:
           MAVEN_OPTS: '-Xmx1g'
 
       - name: 'Clean Maven cache'
-        run: rm -rf ~/.m2/repository/org/eclipse/collections
+        run: rm -rf ~/.m2/repository/jdk/m3/collections/eclipse
 
   unit-tests-early-access:
     name: Unit Test Early Access
@@ -181,7 +181,7 @@ jobs:
           MAVEN_OPTS: '-Xmx1g'
 
       - name: 'Clean Maven cache'
-        run: rm -rf ~/.m2/repository/org/eclipse/collections
+        run: rm -rf ~/.m2/repository/jdk/m3/collections/eclipse
 
   performance-tests:
     name: Performance Tests
@@ -209,7 +209,7 @@ jobs:
           MAVEN_OPTS: '-Xmx1g'
 
       - name: 'Clean Maven cache'
-        run: rm -rf ~/.m2/repository/org/eclipse/collections
+        run: rm -rf ~/.m2/repository/jdk/m3/collections/eclipse
 
   checkstyle:
     name: Checkstyle
@@ -253,7 +253,7 @@ jobs:
           MAVEN_OPTS: '-Xmx2g'
 
       - name: 'Clean Maven cache'
-        run: rm -rf ~/.m2/repository/org/eclipse/collections
+        run: rm -rf ~/.m2/repository/jdk/m3/collections/eclipse
 
   javadoc:
     name: Javadoc 17
@@ -287,7 +287,7 @@ jobs:
           MAVEN_OPTS: '-Xmx1g'
 
       - name: 'Clean Maven cache'
-        run: rm -rf ~/.m2/repository/org/eclipse/collections
+        run: rm -rf ~/.m2/repository/jdk/m3/collections/eclipse
 
   javadoc-17:
     name: Javadoc 17
@@ -321,7 +321,7 @@ jobs:
           MAVEN_OPTS: '-Xmx1g'
 
       - name: 'Clean Maven cache'
-        run: rm -rf ~/.m2/repository/org/eclipse/collections
+        run: rm -rf ~/.m2/repository/jdk/m3/collections/eclipse
 
 
   javadoc-early-access:
@@ -360,4 +360,4 @@ jobs:
         env:
           MAVEN_OPTS: '-Xmx2g'
       - name: 'Clean Maven cache'
-        run: rm -rf ~/.m2/repository/org/eclipse/collections
+        run: rm -rf ~/.m2/repository/jdk/m3/collections/eclipse

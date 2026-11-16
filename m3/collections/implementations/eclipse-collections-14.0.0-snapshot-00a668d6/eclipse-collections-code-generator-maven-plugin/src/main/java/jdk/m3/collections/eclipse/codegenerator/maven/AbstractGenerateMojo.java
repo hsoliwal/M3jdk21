@@ -16,12 +16,12 @@ import java.net.URLClassLoader;
 import java.util.Arrays;
 import java.util.List;
 
-import jdk.m3.collections.eclipse.codegenerator.EclipseCollectionsCodeGenerator;
-import jdk.m3.collections.eclipse.codegenerator.ErrorListener;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.project.MavenProject;
+import jdk.m3.collections.eclipse.codegenerator.EclipseCollectionsCodeGenerator;
+import jdk.m3.collections.eclipse.codegenerator.ErrorListener;
 
 public abstract class AbstractGenerateMojo extends AbstractMojo
 {

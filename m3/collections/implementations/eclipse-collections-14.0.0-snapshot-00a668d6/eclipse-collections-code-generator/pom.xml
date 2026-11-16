@@ -15,7 +15,7 @@
 
     <parent>
         <artifactId>eclipse-collections-parent</artifactId>
-        <groupId>org.eclipse.collections</groupId>
+        <groupId>jdk.m3.collections.eclipse</groupId>
         <version>14.0.0-SNAPSHOT</version>
     </parent>
 

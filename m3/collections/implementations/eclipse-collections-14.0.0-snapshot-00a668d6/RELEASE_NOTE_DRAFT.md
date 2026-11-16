@@ -2,8 +2,12 @@
 
 ## Bug Fixes
 * Fixed `SynchronizedMutableMap` (and `SynchronizedBiMap`, `SynchronizedSortedMap`) so that `computeIfAbsent`, `computeIfPresent`, `compute`, `replaceAll`, and `putIfAbsent` hold the lock across the entire operation. The Java default implementations were not atomic because they invoked `get()` and `put()` as two separate synchronized calls. ([#147](https://github.com/eclipse-collections/eclipse-collections/issues/147), [#500](https://github.com/eclipse-collections/eclipse-collections/issues/500))
+* Fixed `ObjectBooleanHashMap` and `ObjectBooleanHashMapWithHashingStrategy` so that their `keysView()` iterators return `null` instead of an internal sentinel object for a null key. ([#2001](https://github.com/eclipse-collections/eclipse-collections/pull/2001))
 
 ## Performance Improvements
+* Exact `FastList` receivers reduce repeated reference copying for growing indexed insertion from exact `ArrayList` sources when the source is shorter than the suffix. Capacity, subclass callbacks and conversion-failure behavior remain unchanged.
+* `BooleanArrayList.chunk` builds each batch from one word-level slice of the backing `BitSet` instead of adding elements one at a time. Batch type, contents and independence from the source are unchanged.
+* `FastList.addAll(index, FastList)` copies existing elements directly to their final positions when an indexed insertion grows the backing array, while preserving the existing subclass capacity callback.
 * `UnifiedMap` and `UnifiedMapWithHashingStrategy` now provide single-lookup overrides for `computeIfAbsent`, `computeIfPresent`, and `compute`, reducing hash lookups from 2–3 (Java default) to 1. ([#147](https://github.com/eclipse-collections/eclipse-collections/issues/147), [#500](https://github.com/eclipse-collections/eclipse-collections/issues/500))
 
 ## Documentation Changes
@@ -42,7 +46,7 @@ The Eclipse Collections team gives a huge thank you to everyone who participated
 * Upgraded the minimum Java version to Java 17.
 * Build a maven p2 site from the reactor content. Fixes #1411, #288
 * Upgrade bnd plugin to 7.1.0.
-* Publish p2 artifacts to maven central. Fixes #294 . Example [here](https://central.sonatype.com/artifact/org.eclipse.collections/p2-site)
+* Publish p2 artifacts to maven central. Fixes #294 . Example [here](https://central.sonatype.com/artifact/jdk.m3.collections.eclipse/p2-site)
 
 
 # API Changes
@@ -71,32 +75,32 @@ Acquiring Eclipse Collections
 
 ```xml
 <dependency>
-    <groupId>org.eclipse.collections</groupId>
+    <groupId>jdk.m3.collections.eclipse</groupId>
     <artifactId>eclipse-collections-api</artifactId>
     <version>13.0.0</version>
 </dependency>
 
 <dependency>
-    <groupId>org.eclipse.collections</groupId>
+    <groupId>jdk.m3.collections.eclipse</groupId>
     <artifactId>eclipse-collections</artifactId>
     <version>13.0.0</version>
 </dependency>
 
 <dependency>
-    <groupId>org.eclipse.collections</groupId>
+    <groupId>jdk.m3.collections.eclipse</groupId>
     <artifactId>eclipse-collections-testutils</artifactId>
     <version>13.0.0</version>
     <scope>test</scope>
 </dependency>
 
 <dependency>
-    <groupId>org.eclipse.collections</groupId>
+    <groupId>jdk.m3.collections.eclipse</groupId>
     <artifactId>p2-site</artifactId>
     <version>13.0.0</version>
 </dependency>
 
 <dependency>
-    <groupId>org.eclipse.collections</groupId>
+    <groupId>jdk.m3.collections.eclipse</groupId>
     <artifactId>eclipse-collections-forkjoin</artifactId>
     <version>13.0.0</version>
 </dependency>
@@ -105,19 +109,19 @@ Acquiring Eclipse Collections
 ### Gradle
 
 ```groovy
-implementation 'org.eclipse.collections:eclipse-collections-api:13.0.0'
-implementation 'org.eclipse.collections:eclipse-collections:13.0.0'
-testImplementation 'org.eclipse.collections:eclipse-collections-testutils:13.0.0'
-implementation 'org.eclipse.collections:p2-site:13.0.0'
-implementation 'org.eclipse.collections:eclipse-collections-forkjoin:13.0.0'
+implementation 'jdk.m3.collections.eclipse:eclipse-collections-api:13.0.0'
+implementation 'jdk.m3.collections.eclipse:eclipse-collections:13.0.0'
+testImplementation 'jdk.m3.collections.eclipse:eclipse-collections-testutils:13.0.0'
+implementation 'jdk.m3.collections.eclipse:p2-site:13.0.0'
+implementation 'jdk.m3.collections.eclipse:eclipse-collections-forkjoin:13.0.0'
 ```
 
 ### Ivy
 
 ```xml
-<dependency org="org.eclipse.collections" name="eclipse-collections-api" rev="13.0.0" />
-<dependency org="org.eclipse.collections" name="eclipse-collections" rev="13.0.0" />
-<dependency org="org.eclipse.collections" name="eclipse-collections-testutils" rev="13.0.0" />
-<dependency org="org.eclipse.collections" name="p2-site" rev="13.0.0" />
-<dependency org="org.eclipse.collections" name="eclipse-collections-forkjoin" rev="13.0.0"/>
+<dependency org="jdk.m3.collections.eclipse" name="eclipse-collections-api" rev="13.0.0" />
+<dependency org="jdk.m3.collections.eclipse" name="eclipse-collections" rev="13.0.0" />
+<dependency org="jdk.m3.collections.eclipse" name="eclipse-collections-testutils" rev="13.0.0" />
+<dependency org="jdk.m3.collections.eclipse" name="p2-site" rev="13.0.0" />
+<dependency org="jdk.m3.collections.eclipse" name="eclipse-collections-forkjoin" rev="13.0.0"/>
 ```

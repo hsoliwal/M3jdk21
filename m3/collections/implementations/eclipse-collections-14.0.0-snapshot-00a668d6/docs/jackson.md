@@ -18,11 +18,11 @@ In this article we will cover the basics of Eclipse Collections, Jackson and tha
 Eclipse Collections replaces many of the familiar container types from the standard library with new and improved versions. For this article, we will look at three variants of the `List` type:
 
 ```java
-import org.eclipse.collections.api.factory.Lists;
-import org.eclipse.collections.api.list.ImmutableList;
-import org.eclipse.collections.api.list.MutableList;
-import org.eclipse.collections.api.list.primitive.IntList;
-import org.eclipse.collections.impl.factory.primitive.IntLists;
+import jdk.m3.collections.eclipse.api.factory.Lists;
+import jdk.m3.collections.eclipse.api.list.ImmutableList;
+import jdk.m3.collections.eclipse.api.list.MutableList;
+import jdk.m3.collections.eclipse.api.list.primitive.IntList;
+import jdk.m3.collections.eclipse.impl.factory.primitive.IntLists;
 
 MutableList<String> mutable = Lists.mutable.of("foo", "bar");
 ImmutableList<String> immutable = Lists.immutable.of("foo", "bar");

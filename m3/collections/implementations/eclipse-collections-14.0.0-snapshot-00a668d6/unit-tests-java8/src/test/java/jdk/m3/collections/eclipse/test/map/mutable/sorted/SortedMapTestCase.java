@@ -20,8 +20,8 @@ import jdk.m3.collections.eclipse.impl.block.factory.Comparators;
 import jdk.m3.collections.eclipse.test.map.mutable.MapTestCase;
 import org.junit.jupiter.api.Test;
 
-import static jdk.m3.collections.eclipse.test.IterableTestCase.assertIterablesEqual;
 import static org.assertj.core.api.Assertions.assertThat;
+import static jdk.m3.collections.eclipse.test.IterableTestCase.assertIterablesEqual;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 

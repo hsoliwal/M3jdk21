@@ -23,6 +23,7 @@ import jdk.m3.collections.eclipse.api.block.function.primitive.DoubleFunction;
 import jdk.m3.collections.eclipse.api.block.function.primitive.FloatFunction;
 import jdk.m3.collections.eclipse.api.block.function.primitive.IntFunction;
 import jdk.m3.collections.eclipse.api.block.function.primitive.LongFunction;
+import jdk.m3.collections.eclipse.api.block.function.primitive.ObjectIntToObjectFunction;
 import jdk.m3.collections.eclipse.api.block.function.primitive.ShortFunction;
 import jdk.m3.collections.eclipse.api.block.predicate.Predicate;
 import jdk.m3.collections.eclipse.api.block.predicate.Predicate2;
@@ -262,6 +263,13 @@ public interface MutableOrderedMap<K, V> extends OrderedMap<K, V>, MutableMapIte
 
     @Override
     <VV> MutableList<VV> collect(Function<? super V, ? extends VV> function);
+
+    @Override
+    default <VV> MutableList<VV> collectWithIndex(ObjectIntToObjectFunction<? super V, ? extends VV> function)
+    {
+        int[] index = {0};
+        return this.collect(each -> function.valueOf(each, index[0]++));
+    }
 
     @Override
     <P, V1> MutableList<V1> collectWith(Function2<? super V, ? super P, ? extends V1> function, P parameter);
