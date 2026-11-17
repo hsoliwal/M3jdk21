@@ -44,7 +44,8 @@ public final class FrozenTable<R, C, V> {
     private final Object[] distinctColumnLane;
     private final Object[] cellRowLane;
     private final int[] columnOrdinalLane;
-    private final int[] sourceOrderLane;
+    private final int[] columnOffsetLane;
+    private final int[] columnCellLane;
     private final long[] stateMaskWords;
     private final ObjectIntHashMap<Object> rowOrdinals;
     private final ObjectIntHashMap<Object> columnOrdinals;
@@ -69,16 +70,47 @@ public final class FrozenTable<R, C, V> {
         distinctColumnLane = distinctColumns;
         cellRowLane = cellRows;
         columnOrdinalLane = columnIds;
-        sourceOrderLane = sourceOrder;
+        columnOffsetLane = columnOffsets(distinctColumns.length, columnIds);
+        columnCellLane = columnCells(columnOffsetLane, columnIds, sourceOrder, dense);
         rowOrdinals = rowIndex;
         columnOrdinals = columnIndex;
         denseOrder = dense;
         size = values.length;
-        stateMaskWords = new long[(int) (((long) size + 63) >>> 6)];
-        Arrays.fill(stateMaskWords, -1L);
-        if ((size & 63) != 0) {
-            stateMaskWords[stateMaskWords.length - 1] = (1L << (size & 63)) - 1;
+        stateMaskWords = frozenMask(size);
+    }
+
+    /** Live-cell mask: one set bit per frozen cell; the tail word keeps count % 64 low bits. */
+    private static long[] frozenMask(int count) {
+        long[] words = new long[(int) (((long) count + 63) >>> 6)];
+        Arrays.fill(words, -1L);
+        if ((count & 63) != 0) {
+            words[words.length - 1] = (1L << (count & 63)) - 1;
         }
+        return words;
+    }
+
+    /**
+     * Counting pass of the column offset lane: entry c ends as the exclusive end of
+     * column c, and the last entry holds the cell count.
+     */
+    private static int[] columnOffsets(int columns, int[] ids) {
+        int[] offsets = new int[columns + 1];
+        for (int id : ids) { offsets[id]++; }
+        for (int c = 1; c <= columns; c++) { offsets[c] += offsets[c - 1]; }
+        return offsets;
+    }
+
+    /**
+     * Stable reverse scatter of packed cell slots in column-view order (packed order when
+     * dense, source order when sparse); turns every end offset into its column start.
+     */
+    private static int[] columnCells(int[] offsets, int[] ids, int[] sourceOrder, boolean dense) {
+        int[] cells = new int[ids.length];
+        for (int index = ids.length - 1; index >= 0; index--) {
+            int slot = dense ? index : sourceOrder[index];
+            cells[--offsets[ids[slot]]] = slot;
+        }
+        return cells;
     }
 
     /** Retained compatibility descriptor; it does not describe admission status. */
@@ -261,46 +293,35 @@ public final class FrozenTable<R, C, V> {
     public Map<R, V> column(C columnKey) {
         Objects.requireNonNull(columnKey, "column");
         int ordinal = columnOrdinal(columnKey);
-        if (ordinal < 0) { return emptyMap(); }
-        int matches = 0;
-        int first = -1;
-        for (int at = 0; at < columnOrdinalLane.length; at++) {
-            if (columnOrdinalLane[at] == ordinal) { matches++; if (first < 0) { first = at; } }
-        }
-        final int count = matches;
-        final int firstCell = first;
+        return ordinal < 0 ? emptyMap() : columnView(ordinal);
+    }
+
+    /** Column view over one offset-lane slice; every known column owns at least one cell. */
+    private Map<R, V> columnView(int ordinal) {
+        int start = columnOffsetLane[ordinal];
+        int end = columnOffsetLane[ordinal + 1];
         return Collections.unmodifiableMap(new ProjectionMap<>(!denseOrder || size <= 1) {
-            @Override public int size() { return count; }
-            @Override public V get(Object key) {
-                if ((!denseOrder || size == 1) && count == 1) {
-                    return cellRowLane[firstCell].equals(key) ? valueAt(firstCell) : null;
-                }
-                int at = cell(rowOrdinal(key), ordinal);
-                return at < 0 ? null : valueAt(at);
-            }
+            @Override public int size() { return end - start; }
+            @Override public V get(Object key) { return columnValue(ordinal, start, end, key); }
             @Override public Set<Entry<R, V>> entrySet() {
                 return new OrderedSet<>() {
-                    @Override public int size() { return count; }
+                    @Override public int size() { return end - start; }
                     @Override public Iterator<Entry<R, V>> iterator() {
-                        return new Iterator<>() {
-                            private int next = advance(0);
-                            private int slot(int index) { return denseOrder ? index : sourceOrderLane[index]; }
-                            private int advance(int index) {
-                                while (index < size && columnOrdinalLane[slot(index)] != ordinal) { index++; }
-                                return index;
-                            }
-                            @Override public boolean hasNext() { return next < size; }
-                            @Override public Entry<R, V> next() {
-                                if (!hasNext()) { throw new NoSuchElementException(); }
-                                int at = slot(next);
-                                next = advance(next + 1);
-                                return new SimpleImmutableEntry<>(cellRowAt(at), valueAt(at));
-                            }
-                        };
+                        return columnCursor(start, end);
                     }
                 };
             }
         });
+    }
+
+    /** Column lookup; a single-cell sparse or singleton column compares its one stored row key. */
+    private V columnValue(int ordinal, int start, int end, Object key) {
+        if ((!denseOrder || size == 1) && end - start == 1) {
+            int only = columnCellLane[start];
+            return cellRowLane[only].equals(key) ? valueAt(only) : null;
+        }
+        int at = cell(rowOrdinal(key), ordinal);
+        return at < 0 ? null : valueAt(at);
     }
 
     public Set<R> rowKeySet() { return keySet(rowLane, rowOrdinals); }
@@ -360,6 +381,19 @@ public final class FrozenTable<R, C, V> {
                 };
             }
         });
+    }
+
+    /** Walks one column slice of packed cell slots in frozen column order. */
+    private Iterator<Map.Entry<R, V>> columnCursor(int start, int end) {
+        return new Iterator<>() {
+            private int at = start;
+            @Override public boolean hasNext() { return at < end; }
+            @Override public Map.Entry<R, V> next() {
+                if (!hasNext()) { throw new NoSuchElementException(); }
+                int slot = columnCellLane[at++];
+                return new AbstractMap.SimpleImmutableEntry<>(cellRowAt(slot), valueAt(slot));
+            }
+        };
     }
 
     private abstract static class OrderedSet<E> extends AbstractSet<E> {
