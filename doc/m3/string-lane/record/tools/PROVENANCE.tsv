@@ -73,3 +73,24 @@ compareToIgnoreAsciiCase	ASCII case folding definition (UTF-16 unit order)
 commonPrefix	Guava 33.7.2 Strings.commonPrefix; Kotlin 2.2.20 CharSequence.commonPrefixWith
 commonSuffix	Guava 33.7.2 Strings.commonSuffix; Kotlin 2.2.20 CharSequence.commonSuffixWith
 canonicalEquals	CPython 3.12 unicodedata.normalize('NFC') equality
+left	commons-lang3 3.22.0 StringUtils.left
+right	commons-lang3 3.22.0 StringUtils.right
+mid	commons-lang3 3.22.0 StringUtils.mid
+truncate	commons-lang3 3.22.0 StringUtils.truncate
+drop	Kotlin 2.2.20 String.drop
+dropLast	Kotlin 2.2.20 String.dropLast
+takeWhile	Kotlin 2.2.20 String.takeWhile
+dropWhile	Kotlin 2.2.20 String.dropWhile
+takeLastWhile	Kotlin 2.2.20 String.takeLastWhile
+dropLastWhile	Kotlin 2.2.20 String.dropLastWhile
+substringBefore	commons-lang3 3.22.0 StringUtils.substringBefore; Kotlin 2.2.20 substringBefore(delimiter, missingDelimiterValue)
+substringAfter	commons-lang3 3.22.0 StringUtils.substringAfter; Kotlin 2.2.20 substringAfter(delimiter, missingDelimiterValue)
+substringBeforeLast	commons-lang3 3.22.0 StringUtils.substringBeforeLast; Kotlin 2.2.20 substringBeforeLast(delimiter, missingDelimiterValue)
+substringAfterLast	commons-lang3 3.22.0 StringUtils.substringAfterLast; Kotlin 2.2.20 substringAfterLast(delimiter, missingDelimiterValue)
+substringBetween	commons-lang3 3.22.0 StringUtils.substringBetween
+removeStart	commons-lang3 3.22.0 StringUtils.removeStart; Python 3.12 str.removeprefix
+removeEnd	commons-lang3 3.22.0 StringUtils.removeEnd; Python 3.12 str.removesuffix
+removeStartIgnoreCase	commons-lang3 3.22.0 StringUtils.removeStartIgnoreCase
+removeEndIgnoreCase	commons-lang3 3.22.0 StringUtils.removeEndIgnoreCase
+removeSurrounding	Kotlin 2.2.20 String.removeSurrounding
+unwrap	commons-lang3 3.22.0 StringUtils.unwrap

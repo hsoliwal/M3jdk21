@@ -1,0 +1,32 @@
+method_texts_verbatim_in_head	4
+lint	javac -Xlint:all,-this-escape -Werror: no warnings
+== SliceFamilyProof flat -XX:+CompactStrings
+left(0)	3033	0	-
+unwrap("a")	3033	0	-
+checks	321	texts	3033
+RESULT	PASS	failures=0
+== SliceFamilyProof flat -XX:-CompactStrings
+left(0)	3033	0	-
+unwrap("a")	3033	0	-
+checks	321	texts	3033
+RESULT	PASS	failures=0
+== SliceFamilyProof m3-facts -XX:+CompactStrings
+left(0)	3033	0	-
+unwrap("a")	3033	0	-
+checks	321	texts	3033
+RESULT	PASS	failures=0
+== SliceFamilyProof m3-facts -XX:-CompactStrings
+left(0)	3033	0	-
+unwrap("a")	3033	0	-
+checks	321	texts	3033
+RESULT	PASS	failures=0
+== SliceFamilyProof m3-scan -XX:+CompactStrings
+left(0)	3033	0	-
+unwrap("a")	3033	0	-
+checks	321	texts	3033
+RESULT	PASS	failures=0
+== SliceFamilyProof m3-scan -XX:-CompactStrings
+left(0)	3033	0	-
+unwrap("a")	3033	0	-
+checks	321	texts	3033
+RESULT	PASS	failures=0

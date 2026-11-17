@@ -1,0 +1,162 @@
+// SPDX-License-Identifier: Apache-2.0 OR EPL-2.0
+// Copyright (c) 2026 Synexia, Hitesh Soliwal and others
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.util.function.Function;
+import java.util.function.IntPredicate;
+import kotlin.text.StringsKt;
+import org.apache.commons.lang3.StringUtils;
+
+/**
+ * Donor-oracle proof of the SLICE family on a stock JVM whose String carries the head method text. Texts: every string
+ * of 0..4 units over UNITS (letters, a comma, the halves of a surrogate pair) plus window-seam texts of 505..520 and
+ * 1018..1030 units. Oracles: commons-lang3 3.22.0 (left, right, mid, truncate, substringBefore/After[Last] with String
+ * and code point separators, substringBetween, removeStart/End[IgnoreCase], unwrap) and Kotlin stdlib 2.2.20 (drop,
+ * dropLast, takeWhile, dropWhile, takeLastWhile, dropLastWhile, substringBefore/After[Last] with ifAbsent,
+ * removeSurrounding). Exceptions compare by class. Exit 1 on a mismatch.
+ */
+public final class SliceFamilyProof {
+    private static final char HIGH = (char) 0xD83D, LOW = (char) 0xDE00;
+    private static final char[] UNITS = {'a', 'b', 'A', ',', HIGH, LOW, 'x'};
+    private static final String[] SEPARATORS = {"", "a", "ab", ",", "b,", "" + HIGH + LOW, "" + HIGH, "zz", "aA"};
+    private static final int[] POINTS = {'a', ',', 0x1F600, HIGH, 'z'};
+    private static int failures;
+
+    private SliceFamilyProof() {}
+
+    public static void main(String[] args) {
+        List<String> texts = strings(4);
+        for (int k = 505; k <= 1030; k += (k == 520 ? 498 : 1)) {
+            for (String tail : new String[] {"" + HIGH + LOW, ",b", "aA", ""}) {
+                texts.add("x".repeat(k) + tail);
+                texts.add(tail + "x".repeat(k));
+            }
+        }
+        List<Check> checks = new ArrayList<>();
+        for (int n = -1; n <= 5; n++) {
+            int len = n;
+            checks.add(new Check("left(" + n + ")", s -> s.left(len), s -> StringUtils.left(s, len)));
+            checks.add(new Check("right(" + n + ")", s -> s.right(len), s -> StringUtils.right(s, len)));
+            for (int p = -1; p <= 5; p++) {
+                int pos = p;
+                checks.add(new Check("mid(" + p + "," + n + ")", s -> s.mid(pos, len), s -> StringUtils.mid(s, pos, len)));
+                checks.add(new Check("truncate(" + p + "," + n + ")", s -> s.truncate(pos, len),
+                        s -> StringUtils.truncate(s, pos, len)));
+            }
+            checks.add(new Check("truncate(" + n + ")", s -> s.truncate(len), s -> StringUtils.truncate(s, len)));
+            checks.add(new Check("drop(" + n + ")", s -> s.drop(len), s -> StringsKt.drop(s, len)));
+            checks.add(new Check("dropLast(" + n + ")", s -> s.dropLast(len), s -> StringsKt.dropLast(s, len)));
+        }
+        IntPredicate[] tests = {Character::isLetter, c -> c == 'a', c -> Character.isHighSurrogate((char) c)};
+        String[] testNames = {"isLetter", "=='a'", "isHighSurrogate"};
+        for (int t = 0; t < tests.length; t++) {
+            IntPredicate test = tests[t];
+            String name = testNames[t];
+            checks.add(new Check("takeWhile " + name, s -> s.takeWhile(test), s -> StringsKt.takeWhile(s, c -> test.test(c))));
+            checks.add(new Check("dropWhile " + name, s -> s.dropWhile(test), s -> StringsKt.dropWhile(s, c -> test.test(c))));
+            checks.add(new Check("takeLastWhile " + name, s -> s.takeLastWhile(test),
+                    s -> StringsKt.takeLastWhile(s, c -> test.test(c))));
+            checks.add(new Check("dropLastWhile " + name, s -> s.dropLastWhile(test),
+                    s -> StringsKt.dropLastWhile(s, c -> test.test(c))));
+        }
+        for (String sep : SEPARATORS) {
+            String q = show(sep);
+            checks.add(new Check("substringBefore(" + q + ")", s -> s.substringBefore(sep), s -> StringUtils.substringBefore(s, sep)));
+            checks.add(new Check("substringAfter(" + q + ")", s -> s.substringAfter(sep), s -> StringUtils.substringAfter(s, sep)));
+            checks.add(new Check("substringBeforeLast(" + q + ")", s -> s.substringBeforeLast(sep),
+                    s -> StringUtils.substringBeforeLast(s, sep)));
+            checks.add(new Check("substringAfterLast(" + q + ")", s -> s.substringAfterLast(sep),
+                    s -> StringUtils.substringAfterLast(s, sep)));
+            checks.add(new Check("substringBefore(" + q + ",ifAbsent)", s -> s.substringBefore(sep, "#"),
+                    s -> StringsKt.substringBefore(s, sep, "#")));
+            checks.add(new Check("substringAfter(" + q + ",ifAbsent)", s -> s.substringAfter(sep, "#"),
+                    s -> StringsKt.substringAfter(s, sep, "#")));
+            checks.add(new Check("substringBeforeLast(" + q + ",ifAbsent)", s -> s.substringBeforeLast(sep, "#"),
+                    s -> StringsKt.substringBeforeLast(s, sep, "#")));
+            checks.add(new Check("substringAfterLast(" + q + ",ifAbsent)", s -> s.substringAfterLast(sep, "#"),
+                    s -> StringsKt.substringAfterLast(s, sep, "#")));
+            checks.add(new Check("substringBetween(" + q + ")", s -> s.substringBetween(sep),
+                    s -> StringUtils.substringBetween(s, sep)));
+            checks.add(new Check("substringBetween(" + q + ",\",\")", s -> s.substringBetween(sep, ","),
+                    s -> StringUtils.substringBetween(s, sep, ",")));
+            checks.add(new Check("removeStart(" + q + ")", s -> s.removeStart(sep), s -> StringUtils.removeStart(s, sep)));
+            checks.add(new Check("removeEnd(" + q + ")", s -> s.removeEnd(sep), s -> StringUtils.removeEnd(s, sep)));
+            checks.add(new Check("removeStartIgnoreCase(" + q + ")", s -> s.removeStartIgnoreCase(sep),
+                    s -> StringUtils.removeStartIgnoreCase(s, sep)));
+            checks.add(new Check("removeEndIgnoreCase(" + q + ")", s -> s.removeEndIgnoreCase(sep),
+                    s -> StringUtils.removeEndIgnoreCase(s, sep)));
+            checks.add(new Check("removeSurrounding(" + q + ")", s -> s.removeSurrounding(sep),
+                    s -> StringsKt.removeSurrounding(s, sep)));
+            checks.add(new Check("removeSurrounding(" + q + ",\"a\")", s -> s.removeSurrounding(sep, "a"),
+                    s -> StringsKt.removeSurrounding(s, sep, "a")));
+            checks.add(new Check("unwrap(" + q + ")", s -> s.unwrap(sep), s -> StringUtils.unwrap(s, sep)));
+        }
+        for (int point : POINTS) {
+            String q = Integer.toHexString(point);
+            checks.add(new Check("substringBefore(U+" + q + ")", s -> s.substringBefore(point),
+                    s -> StringUtils.substringBefore(s, point)));
+            checks.add(new Check("substringAfter(U+" + q + ")", s -> s.substringAfter(point),
+                    s -> StringUtils.substringAfter(s, point)));
+            checks.add(new Check("substringAfterLast(U+" + q + ")", s -> s.substringAfterLast(point),
+                    s -> StringUtils.substringAfterLast(s, point)));
+        }
+        for (char c : new char[] {'a', ',', HIGH, (char) 0}) {
+            checks.add(new Check("unwrap('" + Integer.toHexString(c) + "')", s -> s.unwrap(c), s -> StringUtils.unwrap(s, c)));
+            checks.add(new Check("removeStart('" + Integer.toHexString(c) + "')", s -> s.removeStart(c),
+                    s -> StringUtils.removeStart(s, c)));
+        }
+        for (Check check : checks) {
+            long mismatches = 0;
+            String first = "-";
+            for (String text : texts) {
+                Object mine = result(check.mine, text), donor = result(check.donor, text);
+                if (!Objects.equals(mine, donor) && mismatches++ == 0) {
+                    first = show(text.length() > 40 ? text.substring(0, 20) + "..." + text.substring(text.length() - 6) : text)
+                            + " -> " + show(String.valueOf(mine)) + " vs " + show(String.valueOf(donor));
+                }
+            }
+            failures += mismatches == 0 ? 0 : 1;
+            if (mismatches != 0 || check.name.startsWith("left(0") || check.name.equals("unwrap(\"a\")")) {
+                System.out.println(check.name + "\t" + texts.size() + "\t" + mismatches + "\t" + first);
+            }
+        }
+        System.out.println("checks\t" + checks.size() + "\ttexts\t" + texts.size());
+        System.out.println("RESULT\t" + (failures == 0 ? "PASS" : "FAIL") + "\tfailures=" + failures);
+        System.exit(failures == 0 ? 0 : 1);
+    }
+
+    private record Check(String name, Function<String, Object> mine, Function<String, Object> donor) {}
+
+    private static Object result(Function<String, Object> f, String text) {
+        try {
+            return f.apply(text);
+        } catch (RuntimeException e) {
+            return e.getClass().getSimpleName();
+        }
+    }
+
+    private static List<String> strings(int maxLength) {
+        List<String> out = new ArrayList<>();
+        for (int length = 0; length <= maxLength; length++) {
+            int total = (int) Math.pow(UNITS.length, length);
+            for (int code = 0; code < total; code++) {
+                char[] units = new char[length];
+                int rest = code;
+                for (int i = 0; i < length; i++) {
+                    units[i] = UNITS[rest % UNITS.length];
+                    rest /= UNITS.length;
+                }
+                out.add(new String(units));
+            }
+        }
+        return out;
+    }
+
+    private static String show(String s) {
+        StringBuilder out = new StringBuilder("\"");
+        for (char c : s.toCharArray()) out.append(c >= 32 && c < 127 ? String.valueOf(c) : String.format("<%04X>", (int) c));
+        return out.append('"').toString();
+    }
+}

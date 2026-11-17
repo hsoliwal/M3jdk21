@@ -7,8 +7,8 @@ of one String family into a JDK JUnit class, mechanically (CPU only; no LLM, no 
 
   spec.tsv rows: <donor-op> TAB STATIC|INSTANCE TAB <java-op> TAB <null-rule>
     STATIC    StringUtils.op(a, b...) -> String.<java-op>(a, b...)
-    INSTANCE  StringUtils.op(r, a...) -> s(r).<java-op>(a...); a null receiver cannot be ported (skipped, reason
-              NULL_RECEIVER); s(CharSequence) is a helper returning toString()
+    INSTANCE  StringUtils.op(r, a...) -> asString(r).<java-op>(a...); a null receiver cannot be ported (skipped, reason
+              NULL_RECEIVER); asString(CharSequence) is a helper returning toString()
     null-rule NPE_ARG: a literal null argument (or, for varargs, a lone null or (T[]) null) means the JDK method throws
               NullPointerException, so the assertion becomes assertThrows(NullPointerException.class, () -> call);
               SAME: null arguments keep the donor's answer
@@ -102,7 +102,7 @@ def translate(stmt):
             if not args or args[0] == "null" or re.match(r"^\(\s*(String|CharSequence)\s*\)\s*null$", args[0]):
                 return None, "NULL_RECEIVER"
             rest = args[1:]
-            call = f"s({args[0]}).{java}({', '.join(rest)})"
+            call = f"asString({args[0]}).{java}({', '.join(rest)})"
         else:
             rest = args
             call = f"String.{java}({', '.join(args)})"
@@ -113,12 +113,11 @@ def translate(stmt):
         out += stmt[i:m.start()] + call
         i = end + 1
     if throws:
-        call = re.search(r"\b(?:String|s\([^;]*?\))\.\w+\(.*\)", out)
         m = re.match(r"\s*assert\w+\((.*)\)\s*$", out, re.S)
         if not m:
             return None, "NPE_NOT_IN_ASSERT"
         inner_args = split_top(m.group(1), ",")
-        target = next((a.strip() for a in inner_args if re.search(r"\b(String|s\()", a)), None)
+        target = next((a.strip() for a in inner_args if re.search(r"\b(String\.|asString\()", a)), None)
         if target is None:
             return None, "NPE_TARGET_NOT_FOUND"
         out = f"assertThrows(NullPointerException.class, () -> {target})"
@@ -194,13 +193,37 @@ def mask_literals(text):
     return "".join(out)
 
 
+def squeeze_outside_literals(text):
+    """The text with each whitespace run outside string and char literals turned into one space, trimmed."""
+    out, i, pending = [], 0, False
+    while i < len(text):
+        c = text[i]
+        if c in "\"'":
+            j = skip_literal(text, i)
+            if pending and out:
+                out.append(" ")
+            pending = False
+            out.append(text[i:j])
+            i = j
+        elif c.isspace():
+            pending = True
+            i += 1
+        else:
+            if pending and out:
+                out.append(" ")
+            pending = False
+            out.append(c)
+            i += 1
+    return "".join(out)
+
+
 LOCAL_DECL = re.compile(r"^(?:final\s+)?(String|char|int|char\[\]|String\[\])\s+(\w+)\s*=")
 for donor in DONORS:
     source = open(donor, encoding="utf-8").read()
     for name, body in methods(source):
         kept, locals_ = [], {}
         for raw in split_top(body, ";"):
-            stmt = " ".join(raw.split())
+            stmt = squeeze_outside_literals(raw)
             decl = LOCAL_DECL.match(stmt)
             if decl and "StringUtils." not in stmt:
                 locals_[decl.group(2)] = stmt + ";"
@@ -209,13 +232,15 @@ for donor in DONORS:
                 continue
             if not any(f"StringUtils.{op}(" in stmt for op in spec):
                 continue
+            stmt = re.sub(r"\bassert(IllegalArgument|NullPointer)Exception\(",
+                          lambda m: "assertThrows(" + m.group(1) + "Exception.class, ", stmt)
             new, reason = translate(stmt)
             if reason is None:
                 masked = mask_literals(new)
-                idents = set(re.findall(r"\b[A-Z][A-Z0-9_]+\b", masked))
+                idents = set(re.findall(r"(?<![.\w])[A-Z][A-Z0-9_]+\b", masked))
                 missing = [x for x in idents if x not in known and x not in ("ROOT", "US", "ENGLISH")]
                 lowers = set(re.findall(r"(?<![.\w])([a-z]\w*)\b(?!\s*\()", masked)) - {
-                    "s", "null", "true", "false", "new", "assertEquals", "assertTrue", "assertFalse",
+                    "asString", "null", "true", "false", "new", "assertEquals", "assertTrue", "assertFalse",
                     "assertNull", "assertThrows", "int", "char", "length", "class", "toUpperCase",
                     "toLowerCase"}
                 undeclared = sorted(x for x in lowers if x not in locals_ and not x.startswith("assert"))
@@ -307,13 +332,17 @@ with open(OUT, "w", encoding="utf-8", newline="") as w:
             f" * reasons are listed in the string-lane record.\n */\npublic class {CLASS} {{\n")
     for decl in sorted(set(used.values())):
         w.write("    " + re.sub(r"^\s*(private |protected |public )?", "private ", decl) + "\n")
-    w.write("\n    private static String s(CharSequence text) {\n        return text.toString();\n    }\n")
+    w.write("\n    private static String asString(CharSequence text) {\n        return text.toString();\n    }\n")
     for cls in nested:
         w.write("\n" + cls + "\n")
     for donor, name, kept in tests:
         w.write(f"\n    @Test\n    void {donor[:1].lower() + donor[1:]}_{name}() {{\n")
         for stmt in kept:
-            w.write("\n".join(wrap(stmt)) + "\n")
+            units = stmt.encode("utf-16-le", "surrogatepass")
+            ascii_stmt = "".join(
+                chr(u) if u < 128 else "\\u%04x" % u
+                for u in (int.from_bytes(units[i:i + 2], "little") for i in range(0, len(units), 2)))
+            w.write("\n".join(wrap(ascii_stmt)) + "\n")
         w.write("    }\n")
     w.write("}\n")
 with open(SKIPPED, "w", encoding="utf-8", newline="") as w:
