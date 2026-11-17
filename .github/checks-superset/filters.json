@@ -551,6 +551,9 @@
      "m3/**",
      "src/java.base/share/classes/jdk/m3/precompute/**",
      "test/jdk/jdk/m3/precompute/**",
+     "src/java.base/share/classes/jdk/m3/db/**",
+     "src/java.base/share/classes/jdk/internal/m3/db/**",
+     "test/jdk/jdk/m3/db/**",
      ".github/workflows/m3-first-release-admission.yml",
      ".github/workflows/m3-release.yml"
     ]
@@ -828,6 +831,9 @@
    "pull_request": {
     "paths": [
      "m3/indexdb/**",
+     "src/java.base/share/classes/jdk/m3/db/**",
+     "src/java.base/share/classes/jdk/internal/m3/db/**",
+     "test/jdk/jdk/m3/db/**",
      "m3/compatibility/m3-m3indexdb-v1-pin.tsv",
      "m3/compatibility/check_m3_m3indexdb_v1.py",
      "m3/compatibility/m3-canonical-residue-gitblobs.tsv",
@@ -927,6 +933,9 @@
    "pull_request": {
     "paths": [
      "m3/indexdb/**",
+     "src/java.base/share/classes/jdk/m3/db/**",
+     "src/java.base/share/classes/jdk/internal/m3/db/**",
+     "test/jdk/jdk/m3/db/**",
      ".github/workflows/m3-indexdb-build-state-20261020.yml"
     ]
    },
@@ -1936,6 +1945,7 @@
      "src/java.base/share/classes/jdk/m3/**",
      "src/java.base/share/native/libm3*/**",
      "test/jdk/jdk/internal/m3/**",
+     "test/jdk/jdk/m3/db/**",
      "make/m3/**",
      ".github/workflows/m3-java-base-internals.yml"
     ]
@@ -1949,6 +1959,7 @@
      "src/java.base/share/classes/jdk/m3/**",
      "src/java.base/share/native/libm3*/**",
      "test/jdk/jdk/internal/m3/**",
+     "test/jdk/jdk/m3/db/**",
      "make/m3/**"
     ]
    },

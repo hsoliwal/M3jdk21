@@ -2637,11 +2637,11 @@ jobs:
           set -euo pipefail
           mkdir -p build/m3-build-state
           javac --release 21 -Xlint:all -Werror -d build/m3-build-state \
-            m3/indexdb/src/main/java/jdk/m3/indexdb/M3IndexDbArtifact.java \
-            m3/indexdb/src/main/java/jdk/m3/indexdb/M3IndexDB.java \
-            m3/indexdb/src/main/java/jdk/m3/indexdb/M3BuildState.java \
-            m3/indexdb/src/test/java/jdk/m3/indexdb/M3BuildStateContract.java
-          java -cp build/m3-build-state jdk.m3.indexdb.M3BuildStateContract
+            src/java.base/share/classes/jdk/m3/db/Artifact.java \
+            src/java.base/share/classes/jdk/m3/db/M3DB.java \
+            src/java.base/share/classes/jdk/m3/db/BuildState.java \
+            test/jdk/jdk/m3/db/BuildStateContract.java
+          java -cp build/m3-build-state jdk.m3.db.BuildStateContract
 
   m3-indexdb-build-state-20261020__full-indexdb-coverage:
     name: "M3JDK21 indexed build-state contract / full-indexdb-coverage"

@@ -15,8 +15,9 @@ The borrowing rule is consumer-only for reusable M3 code.
 
 - `hsoliwal/com.synexia` is the canonical Apache-2.0 owner for reusable Maven/OpenRewrite recipe
   implementations, recipe DAGs, atom/pattern/IOP mastery logic and shared M3Index modules.
-- `com.synexia:synexia-m3index-db` is the canonical M3Index DB coordinate; the M3JDK21-local
-  `m3/indexdb/**` tree is migration/proof residue and must not evolve into a competing owner.
+- M3JDK is the canonical owner of M3DB (owner decision 2026-11-17): `jdk.m3.db` and `jdk.internal.m3.db` in
+  java.base, built as `com.m3:m3indexdb` by `m3/indexdb/pom.xml`. It is not migration residue;
+  `com.synexia:synexia-m3index-db` keeps its own copy until it consumes M3DB.
 - `com.synexia:synexia-m3index-jdk-bridge` is the canonical reusable JDK-facing M3Index bridge.
 - New generic recipe logic must be authored/proved in Synexia first. M3JDK21 may retain only
   JDK-specific backport/receiver mechanics, thin adapters, fixtures, manifests and proof harnesses.
@@ -42,8 +43,7 @@ It records the exact Git blob SHA-1 for every current reusable residue implement
 - `scope/**`;
 - `semantic/**`;
 - `a3/**`;
-- the target-local Java21 convergence catalogue/orchestrator copies;
-- `m3/indexdb/src/main/java/**`.
+- the target-local Java21 convergence catalogue/orchestrator copies.
 
 The M3 tooling JUnit proof recomputes Git blob identity directly from checkout bytes and requires the
 sealed set to equal the current residue set. Therefore:

@@ -9,6 +9,16 @@
 
 This reference describes the complete public-repository bodies of `M3IndexDB`, `M3IndexDbArtifact` and package-private `M3IndexDbSemanticCodec`, with the six graph/fingerprint owners covered in the [companion reference](indexdb-semantic-reference.md#nine-owner-coverage-map). Source pin: `1dce82bfb7f1058d74f7503c4cd54fa7d431c032`, inspected 14 October 2026. All nine production blobs match the original `278b221e8365ebeb6095a3a5643b38a0564258b5` inventory.
 
+**Location and names since 2026-11-17.** The sources reviewed here are M3DB in `java.base` (not exported):
+`src/java.base/share/classes/jdk/m3/db` and `src/java.base/share/classes/jdk/internal/m3/db`, with the tests and
+fixtures in `test/jdk/jdk/m3/db`; `m3/indexdb/pom.xml` builds the same artifact from there.
+`M3IndexDB` is `M3DB`, the `M3IndexDb*` types drop that stem (`Artifact`, `SemanticIndex`, `SemanticCodec`,
+`SemanticEdge`, `SemanticNode`, `SemanticKind`, `SemanticFingerprint`, `ChunkSimHash`), `M3BuildState` and the
+hash family drop the `M3` prefix (`MinHash`, `MinHashLsh`, `LogicHash`, `HammingTopK`, `HashDistances`,
+`HashLanes`, `LaneFnv1a`, `LHashTokens`, `ChunkCdc`, `ChunkSha`), and `M3IndexDbFingerprintV1` is
+`jdk.internal.m3.db.LegacyFingerprint`; the tests follow their classes.
+The links and names in this reference stay at the pinned commit.
+
 This is a filesystem content store plus an in-memory semantic snapshot. There is no JDBC connection, SQL engine, transaction object, mmap coordinate table, incremental graph update or persistent query-index API in these bodies. Store handles retain paths and a closed flag; decoded graphs are detached Java values. Names such as “native”, “database” and “immutable refs” in older summaries do not add durability, transaction or lifetime guarantees to the implementation.
 
 The public-target [porting invariant][policy], [naming map][names], [convergence model][convergence] and [receiver map][receiver] remain authoritative. The invariant classifies `m3/indexdb` as migration/proof residue of the reusable DB family, with M3JDK21 responsible for target acceptance. Keep the delivered `com.synexia.mindex.db` compatibility spelling. This documentation neither changes canonical ownership nor advances the ordered String → arrays → collections → AST/compiler → remaining-families receiving phases.

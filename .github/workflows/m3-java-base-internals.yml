@@ -58,3 +58,8 @@ jobs:
             "$RUNNER_TEMP/m3-intern"
       - name: indexstring (jdk.internal.m3.indexstring, with jdk.m3.precompute)
         run: bash make/m3/indexstring/test-java-base.sh "$RUNNER_TEMP/m3-indexstring"
+      - name: M3DB (jdk.m3.db, jdk.internal.m3.db)
+        run: |
+          bash make/m3/indexdb/test-java-base.sh \
+            "$HOME/.m2/repository/org/junit/platform/junit-platform-console-standalone/1.11.4/junit-platform-console-standalone-1.11.4.jar" \
+            "$RUNNER_TEMP/m3-db"
