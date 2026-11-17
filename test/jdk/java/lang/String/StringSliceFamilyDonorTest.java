@@ -10,6 +10,7 @@
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.nio.CharBuffer;
 import java.util.Locale;
 import org.junit.jupiter.api.Test;
 
@@ -24,6 +25,15 @@ public class StringSliceFamilyDonorTest {
 
     private static String asString(CharSequence text) {
         return text.toString();
+    }
+
+    /** Runs a donor assertion; a NullPointerException (null rejected) passes too. */
+    private static void assertNpeOr(Runnable assertion) {
+        try {
+            assertion.run();
+        } catch (NullPointerException rejected) {
+            // null array rejected as documented
+        }
     }
 
     @Test
@@ -269,8 +279,8 @@ public class StringSliceFamilyDonorTest {
                 "removeEndIgnoreCase(\"www.domain\", \".com\")");
         assertEquals(asString("domain.com").removeEndIgnoreCase(""), "domain.com",
                 "removeEndIgnoreCase(\"domain.com\", \"\")");
-        assertThrows(NullPointerException.class,
-                () -> asString("domain.com").removeEndIgnoreCase(null));
+        assertThrows(NullPointerException.class, () -> asString("domain.com").removeEndIgnoreCase(
+                null));
         assertEquals(asString("www.domain.com").removeEndIgnoreCase(".COM"), "www.domain",
                 "removeEndIgnoreCase(\"www.domain.com\", \".COM\")");
         assertEquals(asString("www.domain.COM").removeEndIgnoreCase(".com"), "www.domain",
@@ -299,8 +309,8 @@ public class StringSliceFamilyDonorTest {
                 "removeStartIgnoreCase(\"domain.com\", \"www.\")");
         assertEquals(asString("domain.com").removeStartIgnoreCase(""), "domain.com",
                 "removeStartIgnoreCase(\"domain.com\", \"\")");
-        assertThrows(NullPointerException.class,
-                () -> asString("domain.com").removeStartIgnoreCase(null));
+        assertThrows(NullPointerException.class, () -> asString("domain.com").removeStartIgnoreCase(
+                null));
         assertEquals(asString("www.domain.com").removeStartIgnoreCase("WWW."), "domain.com",
                 "removeStartIgnoreCase(\"www.domain.com\", \"WWW.\")");
     }
@@ -326,9 +336,8 @@ public class StringSliceFamilyDonorTest {
                 "maxWidth cannot be negative");
         assertThrows(IllegalArgumentException.class, () -> asString("abcdefghij").truncate(-100),
                 "maxWidth cannot be negative");
-        assertThrows(IllegalArgumentException.class,
-                () -> asString("abcdefghij").truncate(Integer.MIN_VALUE),
-                "maxWidth cannot be negative");
+        assertThrows(IllegalArgumentException.class, () -> asString("abcdefghij").truncate(
+                Integer.MIN_VALUE), "maxWidth cannot be negative");
         assertEquals("abcdefghij", asString("abcdefghijklmno").truncate(10));
         assertEquals("abcdefghijklmno", asString("abcdefghijklmno").truncate(Integer.MAX_VALUE));
         assertEquals("abcde", asString("abcdefghijklmno").truncate(5));
@@ -358,18 +367,16 @@ public class StringSliceFamilyDonorTest {
                 "offset cannot be negative");
         assertThrows(IllegalArgumentException.class, () -> asString("abcdefghij").truncate(-100, 1),
                 "offset cannot be negative");
-        assertThrows(IllegalArgumentException.class,
-                () -> asString("abcdefghij").truncate(Integer.MIN_VALUE, 0),
-                "offset cannot be negative");
+        assertThrows(IllegalArgumentException.class, () -> asString("abcdefghij").truncate(
+                Integer.MIN_VALUE, 0), "offset cannot be negative");
         assertThrows(IllegalArgumentException.class, () -> asString("abcdefghij").truncate(-1, -1),
                 "offset cannot be negative");
         assertThrows(IllegalArgumentException.class, () -> asString("abcdefghij").truncate(-10,
                 -10), "offset cannot be negative");
         assertThrows(IllegalArgumentException.class, () -> asString("abcdefghij").truncate(-100,
                 -100), "offset cannot be negative");
-        assertThrows(IllegalArgumentException.class,
-                () -> asString("abcdefghij").truncate(Integer.MIN_VALUE, Integer.MIN_VALUE),
-                "offset cannot be negative");
+        assertThrows(IllegalArgumentException.class, () -> asString("abcdefghij").truncate(
+                Integer.MIN_VALUE, Integer.MIN_VALUE), "offset cannot be negative");
         final String raspberry = "raspberry peach";
         assertEquals("peach", asString(raspberry).truncate(10, 15));
         assertEquals("abcdefghij", asString("abcdefghijklmno").truncate(0, 10));

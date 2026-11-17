@@ -1,0 +1,87 @@
+// SPDX-License-Identifier: Apache-2.0 OR EPL-2.0
+// Copyright (c) 2026 Synexia, Hitesh Soliwal and others
+
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.function.Function;
+import org.apache.commons.lang3.StringUtils;
+
+/**
+ * Window-seam proof of the M3 paths of the SEARCH and EDGE families (bulk reads of 512 units): every text puts the unit
+ * that decides the answer at an index of 505..520 or 1018..1030, in Latin-1 and in UTF-16 text, at the start, in the
+ * middle or at the end, and compares each method with commons-lang3 3.22.0. Exit 1 on a mismatch.
+ */
+public final class M3SeamProof {
+    private static int failures;
+
+    private M3SeamProof() {}
+
+    public static void main(String[] args) {
+        String pair = new String(Character.toChars(0x1D400));
+        String[] marks = {"ZQX", "zqx", "Zq", pair, pair + "q", "" + (char) 0xD835, "" + (char) 0xDC00, "\t", " ",
+            "  ", "" + (char) 0x00A0, "" + (char) 0xE9, "" + (char) 0x212A, "" + (char) 0x017F + "t", "#", "1"};
+        List<String> texts = new ArrayList<>();
+        for (int k = 505; k <= 1030; k += (k == 520 ? 498 : 1)) {
+            for (String mark : marks) {
+                texts.add("x".repeat(k) + mark);
+                texts.add("x".repeat(k) + mark + "yz");
+                texts.add((char) 0x0436 + "x".repeat(k - 1) + mark + "y");
+                texts.add(mark + "x".repeat(k));
+                texts.add("x ".repeat(k / 2) + mark + " y");
+            }
+        }
+        char[][] sets = {{'#'}, {'z', 'Q'}, {(char) 0xD835, (char) 0xDC00}, {(char) 0xD835}, {(char) 0xE9, '1'},
+            {'x', 'y', 'z'}, {'x', ' ', 'y'}, {'x', (char) 0x0436, 'y'}};
+        String[] searches = {"zqx", "ZQ", "k", "st", pair, "x#", ""};
+        Map<String, Function<String, Object>[]> checks = new LinkedHashMap<>();
+        for (char[] set : sets) {
+            String name = new String(set).codePoints().mapToObj(c -> String.format("%04X", c)).toList().toString();
+            add(checks, "indexOfAny" + name, s -> s.indexOfAny(set), s -> StringUtils.indexOfAny(s, set));
+            add(checks, "indexOfAnyBut" + name, s -> s.indexOfAnyBut(set), s -> StringUtils.indexOfAnyBut(s, set));
+            add(checks, "containsOnly" + name, s -> s.containsOnly(set), s -> StringUtils.containsOnly(s, set));
+            add(checks, "containsNone" + name, s -> s.containsNone(set), s -> StringUtils.containsNone(s, set));
+        }
+        for (String search : searches) {
+            add(checks, "indexOfIgnoreCase(" + search + ")", s -> s.indexOfIgnoreCase(search),
+                    s -> StringUtils.indexOfIgnoreCase(s, search));
+            add(checks, "lastIndexOfIgnoreCase(" + search + ")", s -> s.lastIndexOfIgnoreCase(search),
+                    s -> StringUtils.lastIndexOfIgnoreCase(s, search));
+            add(checks, "indexOfIgnoreCase(" + search + ", 600)", s -> s.indexOfIgnoreCase(search, 600),
+                    s -> StringUtils.indexOfIgnoreCase(s, search, 600));
+            add(checks, "lastIndexOfIgnoreCase(" + search + ", 515)", s -> s.lastIndexOfIgnoreCase(search, 515),
+                    s -> StringUtils.lastIndexOfIgnoreCase(s, search, 515));
+        }
+        add(checks, "containsWhitespace", String::containsWhitespace, StringUtils::containsWhitespace);
+        add(checks, "normalizeSpace", String::normalizeSpace, StringUtils::normalizeSpace);
+        add(checks, "stripAccents", String::stripAccents, StringUtils::stripAccents);
+        checks.forEach((name, pairOf) -> {
+            long mismatches = 0;
+            String first = "-";
+            for (String text : texts) {
+                if (!Objects.equals(pairOf[0].apply(text), pairOf[1].apply(text)) && mismatches++ == 0) {
+                    first = "length " + text.length() + " mark at " + firstOther(text);
+                }
+            }
+            failures += mismatches == 0 ? 0 : 1;
+            System.out.println(name + "\t" + texts.size() + "\t" + mismatches + "\t" + first);
+        });
+        System.out.println("RESULT\t" + (failures == 0 ? "PASS" : "FAIL") + "\tfailures=" + failures);
+        System.exit(failures == 0 ? 0 : 1);
+    }
+
+    private static int firstOther(String text) {
+        for (int i = 1; i < text.length(); i++) {
+            if (text.charAt(i) != 'x') return i;
+        }
+        return -1;
+    }
+
+    @SuppressWarnings("unchecked")
+    private static void add(Map<String, Function<String, Object>[]> checks, String name, Function<String, Object> mine,
+            Function<String, Object> donor) {
+        checks.put(name, new Function[] {mine, donor});
+    }
+}

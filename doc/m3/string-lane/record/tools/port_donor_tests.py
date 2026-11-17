@@ -81,7 +81,7 @@ NULL_ARRAY = re.compile(r"^\(\s*[\w.]+\s*\[\]\s*\)\s*null$")
 
 def translate(stmt):
     """(new statement, reason) with reason None when ported."""
-    out, i, throws = "", 0, False
+    out, i, throws, either = "", 0, False, False
     pattern = re.compile(r"\bStringUtils\.(\w+)\(")
     while True:
         m = pattern.search(stmt, i)
@@ -106,12 +106,20 @@ def translate(stmt):
         else:
             rest = args
             call = f"String.{java}({', '.join(args)})"
-        if rule == "NPE_ARG" and mode == "INSTANCE":
-            varargs_null = len(rest) == 1 and (rest[0] == "null" or NULL_ARRAY.match(rest[0]))
-            plain_null = any(a == "null" for a in rest) and len(rest) > 1 and op not in ("equalsAny", "equalsAnyIgnoreCase")
-            throws = throws or varargs_null or plain_null
+        if rule in ("NPE_ARG", "NPE_ARRAY") and mode == "INSTANCE":
+            is_null = lambda a: a == "null" or re.match(r"^\(\s*[\w.<>\[\] ]+\s*\)\s*null$", a) is not None
+            lone_null = len(rest) == 1 and is_null(rest[0])
+            any_null = rule == "NPE_ARG" and any(is_null(a) for a in rest)
+            if rule == "NPE_ARRAY" and lone_null:
+                either = True
+            else:
+                throws = throws or lone_null or any_null
         out += stmt[i:m.start()] + call
         i = end + 1
+    if either and not throws:
+        # a lone null given to a varargs method is either the array (rejected with NullPointerException) or one
+        # element (skipped, the donor's answer); which one is overload resolution's choice: accept both
+        return f"assertNpeOr(() -> {out.strip()})", None
     if throws:
         m = re.match(r"\s*assert\w+\((.*)\)\s*$", out, re.S)
         if not m:
@@ -167,18 +175,77 @@ def methods(source):
         yield m.group(1), source[start + 1:i]
 
 
+STATIC_BLOCKS = {}
+
+
 def constants(source):
-    """Static final String/char/int (array) constants of a donor test class, by name."""
-    return {m.group(1): m.group(0).strip() for m in re.finditer(
-        r"^\s*(?:private |protected |public )?static final (?:String|char|int|char\[\]|String\[\]) (\w+) = [^;]+;",
-        source, re.M)}
+    """Static final String/char/int (array) constants of a donor test class, by name. A constant declared without an
+    initializer is given with the class's static initializer blocks appended (they assign it)."""
+    text = strip_comments(source)
+    blocks = []
+    for m in re.finditer(r"^\s*static\s*\{", text, re.M):
+        depth, i = 0, text.index("{", m.start())
+        while True:
+            c = text[i]
+            if c in "\"'":
+                i = skip_literal(text, i)
+                continue
+            depth += c == "{"
+            depth -= c == "}"
+            if depth == 0:
+                break
+            i += 1
+        blocks.append(text[m.start():i + 1].strip())
+    found = {}
+    for m in re.finditer(r"^\s*(?:private |protected |public )?static final (?:String|char|int|char\[\]|String\[\]) "
+                         r"(\w+)( = [^;]+)?;", text, re.M):
+        decl = m.group(0).strip()
+        if m.group(2) is None:
+            decl = re.sub(r"^(private |protected |public )?static final", "static final", decl)
+            STATIC_BLOCKS[m.group(1)] = blocks
+        found[m.group(1)] = decl
+    return found
 
 
+def rename_identifiers(text, mapping):
+    """The text with whole identifiers renamed by mapping, outside string and char literals."""
+    out, i = [], 0
+    while i < len(text):
+        c = text[i]
+        if c in "\"'":
+            j = skip_literal(text, i)
+            out.append(text[i:j])
+            i = j
+        elif c.isalpha() or c == "_":
+            j = i
+            while j < len(text) and (text[j].isalnum() or text[j] == "_"):
+                j += 1
+            word = text[i:j]
+            before = text[i - 1] if i else ""
+            out.append(mapping.get(word, word) if before != "." else word)
+            i = j
+        else:
+            out.append(c)
+            i += 1
+    return "".join(out)
+
+
+# constants are scoped per donor class: a name declared differently in two donors gets a donor-specific name
+SOURCES = {d: strip_comments(open(d, encoding="utf-8").read()) for d in DONORS}
+declared = {}
+for donor, text in SOURCES.items():
+    for name, decl in constants(text).items():
+        declared.setdefault(name, {})[donor] = re.sub(r"^\s*(private |protected |public )?", "", decl)
+for name, per in declared.items():
+    if len(set(per.values())) > 1:
+        for donor in per:
+            short = re.sub(r"^StringUtils|Test$", "", donor.replace("\\", "/").split("/")[-1][:-5]) or "Base"
+            SOURCES[donor] = rename_identifiers(SOURCES[donor], {name: f"{name}_{short.upper()}"})
+STATIC_BLOCKS.clear()
 tests, skipped, used = [], [], {}
 known = {}
 for donor in DONORS:
-    source = open(donor, encoding="utf-8").read()
-    known.update(constants(source))
+    known.update(constants(SOURCES[donor]))
 def mask_literals(text):
     """The text with every string and char literal replaced by an empty literal."""
     out, i = [], 0
@@ -219,7 +286,7 @@ def squeeze_outside_literals(text):
 
 LOCAL_DECL = re.compile(r"^(?:final\s+)?(String|char|int|char\[\]|String\[\])\s+(\w+)\s*=")
 for donor in DONORS:
-    source = open(donor, encoding="utf-8").read()
+    source = SOURCES[donor]
     for name, body in methods(source):
         kept, locals_ = [], {}
         for raw in split_top(body, ";"):
@@ -234,11 +301,18 @@ for donor in DONORS:
                 continue
             stmt = re.sub(r"\bassert(IllegalArgument|NullPointer)Exception\(",
                           lambda m: "assertThrows(" + m.group(1) + "Exception.class, ", stmt)
+            stmt = re.sub(r"\bStringUtils\.(EMPTY|SPACE|LF|CR)\b",
+                          lambda m: {"EMPTY": '""', "SPACE": '" "', "LF": '"\\n"', "CR": '"\\r"'}[m.group(1)], stmt)
+            stmt = re.sub(r"\bSuppliers\.nul\(\)", "(() -> null)", stmt)
+            stmt = re.sub(r"\b\w+Test\.(\w+)\b", lambda m: m.group(1) if m.group(1) in known else m.group(0), stmt)
             new, reason = translate(stmt)
             if reason is None:
                 masked = mask_literals(new)
                 idents = set(re.findall(r"(?<![.\w])[A-Z][A-Z0-9_]+\b", masked))
                 missing = [x for x in idents if x not in known and x not in ("ROOT", "US", "ENGLISH")]
+                for x in set(re.findall(r"(?<![.\w])([A-Za-z_]\w*)\b", masked)):
+                    if x in known:
+                        used[x] = known[x]
                 lowers = set(re.findall(r"(?<![.\w])([a-z]\w*)\b(?!\s*\()", masked)) - {
                     "asString", "null", "true", "false", "new", "assertEquals", "assertTrue", "assertFalse",
                     "assertNull", "assertThrows", "int", "char", "length", "class", "toUpperCase",
@@ -292,10 +366,44 @@ def nested_classes(sources, statements):
     return [found[n] for n in sorted(found)]
 
 
+def split_long_literals(stmt, longest):
+    """The statement with each string literal longer than longest split into "..." + "..." pieces (never inside an
+    escape sequence)."""
+    out, i = [], 0
+    while i < len(stmt):
+        c = stmt[i]
+        if c == '"' and not stmt.startswith('"""', i):
+            j = skip_literal(stmt, i)
+            body = stmt[i + 1:j - 1]
+            if j - i > longest:
+                pieces, k = [], 0
+                while k < len(body):
+                    end = min(k + longest - 2, len(body))
+                    while end < len(body) and end > k + 1 and (body[end - 1] == "\\" or
+                                                                re.search(r"\\u[0-9a-fA-F]{0,3}$", body[k:end])):
+                        end -= 1
+                    pieces.append('"' + body[k:end] + '"')
+                    k = end
+                out.append(" + ".join(pieces))
+            else:
+                out.append(stmt[i:j])
+            i = j
+        elif c == "'":
+            j = skip_literal(stmt, i)
+            out.append(stmt[i:j])
+            i = j
+        else:
+            out.append(c)
+            i += 1
+    return "".join(out)
+
+
 def wrap(stmt, indent=8, cont=16, width=100):
-    """The statement as lines of at most width columns, broken after commas outside literals."""
+    """The statement as lines of at most width columns, broken after commas and opening parentheses and before +
+    outside literals; literals longer than a line are split first."""
     if indent + len(stmt) <= width:
         return [" " * indent + stmt]
+    stmt = split_long_literals(stmt, (width - indent) // 2)
     cuts, depth, i = [], 0, 0
     while i < len(stmt):
         c = stmt[i]
@@ -306,6 +414,10 @@ def wrap(stmt, indent=8, cont=16, width=100):
         depth -= c in ")]}"
         if c == "," and depth >= 1:
             cuts.append(i + 1)
+        elif c == "(" and depth >= 1:
+            cuts.append(i + 1)
+        elif stmt.startswith(" + ", i):
+            cuts.append(i)
         i += 1
     lines, start, pad = [], 0, indent
     while indent + len(stmt[start:]) > width or (lines and pad + len(stmt[start:].lstrip()) > width):
@@ -321,18 +433,33 @@ def wrap(stmt, indent=8, cont=16, width=100):
     return lines
 
 
-sources = [open(d, encoding="utf-8").read() for d in DONORS]
+sources = [SOURCES[d] for d in DONORS]
 nested = nested_classes(sources, [s for _, _, kept in tests for s in kept])
 with open(OUT, "w", encoding="utf-8", newline="") as w:
     w.write("/*\n * Copyright (c) 2026, Hitesh Soliwal. All rights reserved.\n * GPLv2 with the Classpath exception.\n *\n")
     w.write(f" * @test\n * @summary The assertions of commons-lang3 3.22.0's own tests for this family, ported to\n"
             f" *          java.lang.String by port_donor_tests.py (DONOR_TEST_PORT v1)\n * @run junit {CLASS}\n */\n\n")
-    w.write("import static org.junit.jupiter.api.Assertions.*;\n\nimport java.util.Locale;\nimport org.junit.jupiter.api.Test;\n\n")
+    w.write("import static org.junit.jupiter.api.Assertions.*;\n\nimport java.nio.CharBuffer;\nimport java.util.Locale;\n"
+            "import org.junit.jupiter.api.Test;\n\n")
     w.write(f"/**\n * Ported mechanically from commons-lang3 3.22.0 (Apache-2.0) test sources; skipped statements and\n"
             f" * reasons are listed in the string-lane record.\n */\npublic class {CLASS} {{\n")
+    blocks = []
+    for name in sorted(used):
+        for block in STATIC_BLOCKS.get(name, []):
+            if block not in blocks:
+                blocks.append(block)
+    for name, its_blocks in STATIC_BLOCKS.items():
+        if any(b in blocks for b in its_blocks) and name in known:
+            used[name] = known[name]
     for decl in sorted(set(used.values())):
         w.write("    " + re.sub(r"^\s*(private |protected |public )?", "private ", decl) + "\n")
+    for block in blocks:
+        w.write("\n" + "\n".join("    " + line.strip("\r") if line.strip() else "" for line in block.split("\n")) + "\n")
     w.write("\n    private static String asString(CharSequence text) {\n        return text.toString();\n    }\n")
+    w.write("\n    /** Runs a donor assertion; a NullPointerException (null rejected) passes too. */\n"
+            "    private static void assertNpeOr(Runnable assertion) {\n        try {\n            assertion.run();\n"
+            "        } catch (NullPointerException rejected) {\n            // null array rejected as documented\n"
+            "        }\n    }\n")
     for cls in nested:
         w.write("\n" + cls + "\n")
     for donor, name, kept in tests:

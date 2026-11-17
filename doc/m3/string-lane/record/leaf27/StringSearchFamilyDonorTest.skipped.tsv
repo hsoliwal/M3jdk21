@@ -1,0 +1,134 @@
+donor_file	method	reason	statement
+StringUtilsContainsTest.java	testContainsAny_StringCharArray	NULL_RECEIVER	assertFalse(StringUtils.containsAny(null, (char[]) null))
+StringUtilsContainsTest.java	testContainsAny_StringCharArray	NULL_RECEIVER	assertFalse(StringUtils.containsAny(null, new char[0]))
+StringUtilsContainsTest.java	testContainsAny_StringCharArray	NULL_RECEIVER	assertFalse(StringUtils.containsAny(null, 'a', 'b'))
+StringUtilsContainsTest.java	testContainsAny_StringString	NULL_RECEIVER	assertFalse(StringUtils.containsAny(null, (String) null))
+StringUtilsContainsTest.java	testContainsAny_StringString	NULL_RECEIVER	assertFalse(StringUtils.containsAny(null, ""))
+StringUtilsContainsTest.java	testContainsAny_StringString	NULL_RECEIVER	assertFalse(StringUtils.containsAny(null, "ab"))
+StringUtilsContainsTest.java	testContainsAny_StringStringArray	NULL_RECEIVER	assertFalse(StringUtils.containsAny(null, (String[]) null))
+StringUtilsContainsTest.java	testContainsAny_StringStringArray	NULL_RECEIVER	assertFalse(StringUtils.containsAny(null, new String[0]))
+StringUtilsContainsTest.java	testContainsAny_StringStringArray	NULL_RECEIVER	assertFalse(StringUtils.containsAny(null, new String[] { "hello" }))
+StringUtilsContainsTest.java	testContainsAnyIgnoreCase_StringStringArray	NULL_RECEIVER	assertFalse(StringUtils.containsAnyIgnoreCase(null, (String[]) null))
+StringUtilsContainsTest.java	testContainsAnyIgnoreCase_StringStringArray	NULL_RECEIVER	assertFalse(StringUtils.containsAnyIgnoreCase(null, new String[0]))
+StringUtilsContainsTest.java	testContainsAnyIgnoreCase_StringStringArray	NULL_RECEIVER	assertFalse(StringUtils.containsAnyIgnoreCase(null, new String[] { "hello" }))
+StringUtilsContainsTest.java	testContainsIgnoreCase_LocaleIndependence	LOCAL_STATE:fdata,final,j,locales,tdata,testLocale	for (final Locale testLocale : locales) { Locale.setDefault(testLocale); for (int j = 0; j < tdata.length; j++) { assertTrue(StringUtils.containsIgnoreCase(tdata[j][0], tdata[j][1]), Locale.getDefault
+StringUtilsContainsTest.java	testContainsIgnoreCase_StringString	NULL_RECEIVER	assertFalse(StringUtils.containsIgnoreCase(null, null))
+StringUtilsContainsTest.java	testContainsIgnoreCase_StringString	NULL_RECEIVER	assertFalse(StringUtils.containsIgnoreCase(null, ""))
+StringUtilsContainsTest.java	testContainsIgnoreCase_StringString	NULL_RECEIVER	assertFalse(StringUtils.containsIgnoreCase(null, "a"))
+StringUtilsContainsTest.java	testContainsIgnoreCase_StringString	NULL_RECEIVER	assertFalse(StringUtils.containsIgnoreCase(null, "abc"))
+StringUtilsContainsTest.java	testContainsNone_CharArray	NULL_RECEIVER	assertTrue(StringUtils.containsNone(null, (char[]) null))
+StringUtilsContainsTest.java	testContainsNone_CharArray	NULL_RECEIVER	assertTrue(StringUtils.containsNone(null, emptyChars))
+StringUtilsContainsTest.java	testContainsNone_String	NULL_RECEIVER	assertTrue(StringUtils.containsNone(null, (String) null))
+StringUtilsContainsTest.java	testContainsNone_String	NULL_RECEIVER	assertTrue(StringUtils.containsNone(null, ""))
+StringUtilsContainsTest.java	testContainsOnly_CharArray	NULL_RECEIVER	assertFalse(StringUtils.containsOnly(null, (char[]) null))
+StringUtilsContainsTest.java	testContainsOnly_CharArray	NULL_RECEIVER	assertFalse(StringUtils.containsOnly(null, emptyChars))
+StringUtilsContainsTest.java	testContainsOnly_String	NULL_RECEIVER	assertFalse(StringUtils.containsOnly(null, (String) null))
+StringUtilsContainsTest.java	testContainsOnly_String	NULL_RECEIVER	assertFalse(StringUtils.containsOnly(null, ""))
+StringUtilsEqualsIndexOfTest.java	testIndexOfAny_StringCharArray	NULL_RECEIVER	assertEquals(-1, StringUtils.indexOfAny(null, (char[]) null))
+StringUtilsEqualsIndexOfTest.java	testIndexOfAny_StringCharArray	NULL_RECEIVER	assertEquals(-1, StringUtils.indexOfAny(null, new char[0]))
+StringUtilsEqualsIndexOfTest.java	testIndexOfAny_StringCharArray	NULL_RECEIVER	assertEquals(-1, StringUtils.indexOfAny(null, 'a', 'b'))
+StringUtilsEqualsIndexOfTest.java	testIndexOfAny_StringIntCharArray	NULL_RECEIVER	assertEquals(-1, StringUtils.indexOfAny(null, 0, (char[]) null))
+StringUtilsEqualsIndexOfTest.java	testIndexOfAny_StringIntCharArray	NULL_RECEIVER	assertEquals(-1, StringUtils.indexOfAny(null, 0, new char[0]))
+StringUtilsEqualsIndexOfTest.java	testIndexOfAny_StringIntCharArray	NULL_RECEIVER	assertEquals(-1, StringUtils.indexOfAny(null, 0, 'a', 'b'))
+StringUtilsEqualsIndexOfTest.java	testIndexOfAny_StringIntCharArray	NULL_RECEIVER	assertEquals(-1, StringUtils.indexOfAny(null, 1, (char[]) null))
+StringUtilsEqualsIndexOfTest.java	testIndexOfAny_StringIntCharArray	NULL_RECEIVER	assertEquals(-1, StringUtils.indexOfAny(null, 1, new char[0]))
+StringUtilsEqualsIndexOfTest.java	testIndexOfAny_StringIntCharArray	NULL_RECEIVER	assertEquals(-1, StringUtils.indexOfAny(null, 1, 'a', 'b'))
+StringUtilsEqualsIndexOfTest.java	testIndexOfAny_StringString	NULL_RECEIVER	assertEquals(-1, StringUtils.indexOfAny(null, (String) null))
+StringUtilsEqualsIndexOfTest.java	testIndexOfAny_StringString	NULL_RECEIVER	assertEquals(-1, StringUtils.indexOfAny(null, ""))
+StringUtilsEqualsIndexOfTest.java	testIndexOfAny_StringString	NULL_RECEIVER	assertEquals(-1, StringUtils.indexOfAny(null, "ab"))
+StringUtilsEqualsIndexOfTest.java	testIndexOfAny_StringStringArray	NULL_RECEIVER	assertEquals(-1, StringUtils.indexOfAny(null, (String[]) null))
+StringUtilsEqualsIndexOfTest.java	testIndexOfAny_StringStringArray	NULL_RECEIVER	assertEquals(-1, StringUtils.indexOfAny(null, FOOBAR_SUB_ARRAY))
+StringUtilsEqualsIndexOfTest.java	testIndexOfAny_StringStringArray	NULL_RECEIVER	assertEquals(-1, StringUtils.indexOfAny(null, new String[0]))
+StringUtilsEqualsIndexOfTest.java	testIndexOfAny_StringStringArray	NULL_RECEIVER	assertEquals(-1, StringUtils.indexOfAny(null, new String[] {null}))
+StringUtilsEqualsIndexOfTest.java	testIndexOfAnyBut_StringCharArray	NULL_RECEIVER	assertEquals(-1, StringUtils.indexOfAnyBut(null, (char[]) null))
+StringUtilsEqualsIndexOfTest.java	testIndexOfAnyBut_StringCharArray	NULL_RECEIVER	assertEquals(-1, StringUtils.indexOfAnyBut(null))
+StringUtilsEqualsIndexOfTest.java	testIndexOfAnyBut_StringCharArray	NULL_RECEIVER	assertEquals(-1, StringUtils.indexOfAnyBut(null, 'a', 'b'))
+StringUtilsEqualsIndexOfTest.java	testIndexOfAnyBut_StringString	NULL_RECEIVER	assertEquals(-1, StringUtils.indexOfAnyBut(null, (String) null))
+StringUtilsEqualsIndexOfTest.java	testIndexOfAnyBut_StringString	NULL_RECEIVER	assertEquals(-1, StringUtils.indexOfAnyBut(null, ""))
+StringUtilsEqualsIndexOfTest.java	testIndexOfAnyBut_StringString	NULL_RECEIVER	assertEquals(-1, StringUtils.indexOfAnyBut(null, "ab"))
+StringUtilsEqualsIndexOfTest.java	testIndexOfIgnoreCase_String	NULL_RECEIVER	assertEquals(-1, StringUtils.indexOfIgnoreCase(null, null))
+StringUtilsEqualsIndexOfTest.java	testIndexOfIgnoreCase_String	NULL_RECEIVER	assertEquals(-1, StringUtils.indexOfIgnoreCase(null, ""))
+StringUtilsEqualsIndexOfTest.java	testLastIndexOfAny_StringStringArray	NULL_RECEIVER	assertEquals(-1, StringUtils.lastIndexOfAny(null, (CharSequence) null))
+StringUtilsEqualsIndexOfTest.java	testLastIndexOfAny_StringStringArray	NULL_RECEIVER	assertEquals(-1, StringUtils.lastIndexOfAny(null, (CharSequence[]) null))
+StringUtilsEqualsIndexOfTest.java	testLastIndexOfAny_StringStringArray	NULL_RECEIVER	assertEquals(-1, StringUtils.lastIndexOfAny(null))
+StringUtilsEqualsIndexOfTest.java	testLastIndexOfAny_StringStringArray	NULL_RECEIVER	assertEquals(-1, StringUtils.lastIndexOfAny(null, FOOBAR_SUB_ARRAY))
+StringUtilsEqualsIndexOfTest.java	testLastIndexOfAny_StringStringArray	NULL_RECEIVER	assertEquals(-1, StringUtils.lastIndexOfAny(null, new String[0]))
+StringUtilsEqualsIndexOfTest.java	testLastIndexOfAny_StringStringArray	NULL_RECEIVER	assertEquals(-1, StringUtils.lastIndexOfAny(null, new String[] {null}))
+StringUtilsEqualsIndexOfTest.java	testLastIndexOfIgnoreCase_String	NULL_RECEIVER	assertEquals(-1, StringUtils.lastIndexOfIgnoreCase(null, null))
+StringUtilsEqualsIndexOfTest.java	testLastIndexOfIgnoreCase_String	NULL_RECEIVER	assertEquals(-1, StringUtils.lastIndexOfIgnoreCase(null, ""))
+StringUtilsEqualsIndexOfTest.java	testLastIndexOfIgnoreCase_StringInt	NULL_RECEIVER	assertEquals(-1, StringUtils.lastIndexOfIgnoreCase(null, null, 0))
+StringUtilsEqualsIndexOfTest.java	testLastIndexOfIgnoreCase_StringInt	NULL_RECEIVER	assertEquals(-1, StringUtils.lastIndexOfIgnoreCase(null, null, -1))
+StringUtilsEqualsIndexOfTest.java	testLastIndexOfIgnoreCase_StringInt	NULL_RECEIVER	assertEquals(-1, StringUtils.lastIndexOfIgnoreCase(null, "", 0))
+StringUtilsEqualsIndexOfTest.java	testLastIndexOfIgnoreCase_StringInt	NULL_RECEIVER	assertEquals(-1, StringUtils.lastIndexOfIgnoreCase(null, "", -1))
+StringUtilsEqualsIndexOfTest.java	testLastOrdinalIndexOf	NULL_RECEIVER	assertEquals(-1, StringUtils.lastOrdinalIndexOf(null, "*", 42))
+StringUtilsEqualsIndexOfTest.java	testOrdinalIndexOf	NULL_RECEIVER	assertEquals(-1, StringUtils.ordinalIndexOf(null, null, Integer.MIN_VALUE))
+StringUtilsEqualsIndexOfTest.java	testOrdinalIndexOf	NULL_RECEIVER	assertEquals(-1, StringUtils.ordinalIndexOf(null, null, -1))
+StringUtilsEqualsIndexOfTest.java	testOrdinalIndexOf	NULL_RECEIVER	assertEquals(-1, StringUtils.ordinalIndexOf(null, null, 0))
+StringUtilsEqualsIndexOfTest.java	testOrdinalIndexOf	NULL_RECEIVER	assertEquals(-1, StringUtils.ordinalIndexOf(null, null, 1))
+StringUtilsEqualsIndexOfTest.java	testOrdinalIndexOf	NULL_RECEIVER	assertEquals(-1, StringUtils.ordinalIndexOf(null, null, 2))
+StringUtilsEqualsIndexOfTest.java	testOrdinalIndexOf	NULL_RECEIVER	assertEquals(-1, StringUtils.ordinalIndexOf(null, null, Integer.MAX_VALUE))
+StringUtilsStartsEndsWithTest.java	testEndsWithAny	NULL_RECEIVER	assertFalse(StringUtils.endsWithAny(null, (String) null), "StringUtils.endsWithAny(null, null)")
+StringUtilsStartsEndsWithTest.java	testEndsWithAny	NULL_RECEIVER	assertFalse(StringUtils.endsWithAny(null, "abc"), "StringUtils.endsWithAny(null, new String[] {abc})")
+StringUtilsStartsEndsWithTest.java	testEndsWithIgnoreCase	NULL_RECEIVER	assertTrue(StringUtils.endsWithIgnoreCase(null, null), "endsWithIgnoreCase(null, null)")
+StringUtilsStartsEndsWithTest.java	testEndsWithIgnoreCase	NULL_RECEIVER	assertFalse(StringUtils.endsWithIgnoreCase(null, FOO), "endsWithIgnoreCase(null, FOO)")
+StringUtilsStartsEndsWithTest.java	testEndsWithIgnoreCase	LOCAL_STATE:foo,foobar	assertFalse(StringUtils.endsWithIgnoreCase(foobar, foo), "endsWithIgnoreCase(foobar, foo)")
+StringUtilsStartsEndsWithTest.java	testEndsWithIgnoreCase	LOCAL_STATE:foobar	assertFalse(StringUtils.endsWithIgnoreCase(foobar, FOO), "endsWithIgnoreCase(foobar, FOO)")
+StringUtilsStartsEndsWithTest.java	testEndsWithIgnoreCase	LOCAL_STATE:foo	assertFalse(StringUtils.endsWithIgnoreCase(FOOBAR_STARTSENDSWITH, foo), "endsWithIgnoreCase(FOOBAR, foo)")
+StringUtilsStartsEndsWithTest.java	testEndsWithIgnoreCase	LOCAL_STATE:foo,foobar	assertFalse(StringUtils.endsWithIgnoreCase(foo, foobar), "endsWithIgnoreCase(foo, foobar)")
+StringUtilsStartsEndsWithTest.java	testEndsWithIgnoreCase	LOCAL_STATE:bar,foobar	assertFalse(StringUtils.endsWithIgnoreCase(bar, foobar), "endsWithIgnoreCase(foo, foobar)")
+StringUtilsStartsEndsWithTest.java	testEndsWithIgnoreCase	LOCAL_STATE:bar,foobar	assertTrue(StringUtils.endsWithIgnoreCase(foobar, bar), "endsWithIgnoreCase(foobar, bar)")
+StringUtilsStartsEndsWithTest.java	testEndsWithIgnoreCase	LOCAL_STATE:foobar	assertTrue(StringUtils.endsWithIgnoreCase(foobar, BAR), "endsWithIgnoreCase(foobar, BAR)")
+StringUtilsStartsEndsWithTest.java	testEndsWithIgnoreCase	LOCAL_STATE:bar	assertTrue(StringUtils.endsWithIgnoreCase(FOOBAR_STARTSENDSWITH, bar), "endsWithIgnoreCase(FOOBAR, bar)")
+StringUtilsStartsEndsWithTest.java	testStartsWithAny	NULL_RECEIVER	assertFalse(StringUtils.startsWithAny(null, (String[]) null))
+StringUtilsStartsEndsWithTest.java	testStartsWithAny	NULL_RECEIVER	assertFalse(StringUtils.startsWithAny(null, "abc"))
+StringUtilsStartsEndsWithTest.java	testStartsWithIgnoreCase	NULL_RECEIVER	assertTrue(StringUtils.startsWithIgnoreCase(null, null), "startsWithIgnoreCase(null, null)")
+StringUtilsStartsEndsWithTest.java	testStartsWithIgnoreCase	NULL_RECEIVER	assertFalse(StringUtils.startsWithIgnoreCase(null, FOO), "startsWithIgnoreCase(null, FOO)")
+StringUtilsStartsEndsWithTest.java	testStartsWithIgnoreCase	LOCAL_STATE:foo,foobar	assertTrue(StringUtils.startsWithIgnoreCase(foobar, foo), "startsWithIgnoreCase(foobar, foo)")
+StringUtilsStartsEndsWithTest.java	testStartsWithIgnoreCase	LOCAL_STATE:foobar	assertTrue(StringUtils.startsWithIgnoreCase(foobar, FOO), "startsWithIgnoreCase(foobar, FOO)")
+StringUtilsStartsEndsWithTest.java	testStartsWithIgnoreCase	LOCAL_STATE:foo	assertTrue(StringUtils.startsWithIgnoreCase(FOOBAR_STARTSENDSWITH, foo), "startsWithIgnoreCase(FOOBAR, foo)")
+StringUtilsStartsEndsWithTest.java	testStartsWithIgnoreCase	LOCAL_STATE:foo,foobar	assertFalse(StringUtils.startsWithIgnoreCase(foo, foobar), "startsWithIgnoreCase(foo, foobar)")
+StringUtilsStartsEndsWithTest.java	testStartsWithIgnoreCase	LOCAL_STATE:bar,foobar	assertFalse(StringUtils.startsWithIgnoreCase(bar, foobar), "startsWithIgnoreCase(foo, foobar)")
+StringUtilsStartsEndsWithTest.java	testStartsWithIgnoreCase	LOCAL_STATE:bar,foobar	assertFalse(StringUtils.startsWithIgnoreCase(foobar, bar), "startsWithIgnoreCase(foobar, bar)")
+StringUtilsStartsEndsWithTest.java	testStartsWithIgnoreCase	LOCAL_STATE:foobar	assertFalse(StringUtils.startsWithIgnoreCase(foobar, BAR), "startsWithIgnoreCase(foobar, BAR)")
+StringUtilsStartsEndsWithTest.java	testStartsWithIgnoreCase	LOCAL_STATE:bar	assertFalse(StringUtils.startsWithIgnoreCase(FOOBAR_STARTSENDSWITH, bar), "startsWithIgnoreCase(FOOBAR, bar)")
+StringUtilsTest.java	testDifferenceAt_StringArray	NULL_RECEIVER	assertEquals(-1, StringUtils.indexOfDifference())
+StringUtilsTest.java	testDifferenceAt_StringArray	NULL_RECEIVER	assertEquals(-1, StringUtils.indexOfDifference(null, null))
+StringUtilsTest.java	testDifferenceAt_StringArray	NULL_RECEIVER	assertEquals(0, StringUtils.indexOfDifference(null, null, "abc"))
+StringUtilsTest.java	testDifferenceAt_StringString	NULL_RECEIVER	assertEquals(-1, StringUtils.indexOfDifference(null, null))
+StringUtilsTest.java	testDifferenceAt_StringString	NULL_RECEIVER	assertEquals(0, StringUtils.indexOfDifference(null, "i am a robot"))
+StringUtilsTest.java	testGeorgianSample	OTHER_STRINGUTILS:compareIgnoreCase	for (final char i : arrayI) { for (final char j : arrayJ) { final String si = String.valueOf(i); final String sj = String.valueOf(j); final boolean res1 = si.equalsIgnoreCase(sj); final CharSequence c
+StringUtilsTest.java	testLeftPad_StringIntChar	LOCAL_STATE:str	assertTrue(StringUtils.containsOnly(str, 'a'))
+StringUtilsTest.java	testRepeat_StringInt	LOCAL_STATE:str	assertTrue(StringUtils.containsOnly(str, 'a'))
+StringUtilsTest.java	testRightPad_StringIntChar	LOCAL_STATE:str	assertTrue(StringUtils.containsOnly(str, 'a'))
+StringSearchFamilyDonorTest.java	-	COMPILE:no suitable method found for indexOfAny(int,char)	assertEquals(0, asString("abc").indexOfAny(Integer.MIN_VALUE, 'a'));
+StringSearchFamilyDonorTest.java	-	COMPILE:no suitable method found for indexOfAny(int,char)	assertEquals(0, asString("abc").indexOfAny(-1, 'a'));
+StringSearchFamilyDonorTest.java	-	COMPILE:no suitable method found for indexOfAny(int,char)	assertEquals(0, asString("abc").indexOfAny(-1, 'a'));
+StringSearchFamilyDonorTest.java	-	COMPILE:no suitable method found for indexOfAny(int,char)	assertEquals(1, asString("abc").indexOfAny(1, 'b'));
+StringSearchFamilyDonorTest.java	-	COMPILE:no suitable method found for indexOfAny(int,char)	assertEquals(1, asString("abc").indexOfAny(0, 'b'));
+StringSearchFamilyDonorTest.java	-	COMPILE:no suitable method found for indexOfAny(int,char[])	assertEquals(-1, asString("").indexOfAny(0, (char[]) null));
+StringSearchFamilyDonorTest.java	-	COMPILE:no suitable method found for indexOfAny(int,char[])	assertEquals(-1, asString("").indexOfAny(0, new char[0]));
+StringSearchFamilyDonorTest.java	-	COMPILE:no suitable method found for indexOfAny(int,char,char)	assertEquals(-1, asString("").indexOfAny(0, 'a', 'b'));
+StringSearchFamilyDonorTest.java	-	COMPILE:no suitable method found for indexOfAny(int,char[])	assertEquals(-1, asString("zzabyycdxx").indexOfAny(0, (char[]) null));
+StringSearchFamilyDonorTest.java	-	COMPILE:no suitable method found for indexOfAny(int,char[])	assertEquals(-1, asString("zzabyycdxx").indexOfAny(0, new char[0]));
+StringSearchFamilyDonorTest.java	-	COMPILE:no suitable method found for indexOfAny(int,char,char)	assertEquals(0, asString("zzabyycdxx").indexOfAny(0, 'z', 'a'));
+StringSearchFamilyDonorTest.java	-	COMPILE:no suitable method found for indexOfAny(int,char,char)	assertEquals(3, asString("zzabyycdxx").indexOfAny(0, 'b', 'y'));
+StringSearchFamilyDonorTest.java	-	COMPILE:no suitable method found for indexOfAny(int,char)	assertEquals(-1, asString("ab").indexOfAny(0, 'z'));
+StringSearchFamilyDonorTest.java	-	COMPILE:no suitable method found for indexOfAny(int,char,char,char,char)	assertEquals(0, asString("abcd").indexOfAny(0, 'a', 'b', 'c', 'd'));
+StringSearchFamilyDonorTest.java	-	COMPILE:no suitable method found for indexOfAny(int,char,char,char,char)	assertEquals(0, asString("bcda").indexOfAny(0, 'a', 'b', 'c', 'd'));
+StringSearchFamilyDonorTest.java	-	COMPILE:no suitable method found for indexOfAny(int,char,char,char,char)	assertEquals(0, asString("cbda").indexOfAny(0, 'a', 'b', 'c', 'd'));
+StringSearchFamilyDonorTest.java	-	COMPILE:no suitable method found for indexOfAny(int,char[])	assertEquals(-1, asString("").indexOfAny(1, (char[]) null));
+StringSearchFamilyDonorTest.java	-	COMPILE:no suitable method found for indexOfAny(int,char[])	assertEquals(-1, asString("").indexOfAny(1, new char[0]));
+StringSearchFamilyDonorTest.java	-	COMPILE:no suitable method found for indexOfAny(int,char,char)	assertEquals(-1, asString("").indexOfAny(1, 'a', 'b'));
+StringSearchFamilyDonorTest.java	-	COMPILE:no suitable method found for indexOfAny(int,char[])	assertEquals(-1, asString("zzabyycdxx").indexOfAny(1, (char[]) null));
+StringSearchFamilyDonorTest.java	-	COMPILE:no suitable method found for indexOfAny(int,char[])	assertEquals(-1, asString("zzabyycdxx").indexOfAny(1, new char[0]));
+StringSearchFamilyDonorTest.java	-	COMPILE:no suitable method found for indexOfAny(int,char,char)	assertEquals(1, asString("zzabyycdxx").indexOfAny(1, 'z', 'a'));
+StringSearchFamilyDonorTest.java	-	COMPILE:no suitable method found for indexOfAny(int,char,char)	assertEquals(3, asString("zzabyycdxx").indexOfAny(1, 'b', 'y'));
+StringSearchFamilyDonorTest.java	-	COMPILE:no suitable method found for indexOfAny(int,char)	assertEquals(-1, asString("ab").indexOfAny(1, 'z'));
+StringSearchFamilyDonorTest.java	-	COMPILE:no suitable method found for indexOfAny(int,char,char,char,char)	assertEquals(1, asString("abcd").indexOfAny(1, 'a', 'b', 'c', 'd'));
+StringSearchFamilyDonorTest.java	-	COMPILE:no suitable method found for indexOfAny(int,char,char,char,char)	assertEquals(1, asString("bcda").indexOfAny(1, 'a', 'b', 'c', 'd'));
+StringSearchFamilyDonorTest.java	-	COMPILE:no suitable method found for indexOfAny(int,char,char,char,char)	assertEquals(1, asString("cbda").indexOfAny(1, 'a', 'b', 'c', 'd'));
+StringSearchFamilyDonorTest.java	-	COMPILE:incompatible types: String[] cannot be converted to CharSequence	assertEquals(-1, asString((String[]) null).indexOfDifference());
+StringSearchFamilyDonorTest.java	-	COMPILE:method indexOfDifference in class String cannot be applied to given types;	assertEquals(-1, asString("abc").indexOfDifference());
+StringSearchFamilyDonorTest.java	-	COMPILE:method indexOfDifference in class String cannot be applied to given types;	assertThrows(NullPointerException.class, () -> asString("abc").indexOfDifference(null, null));
+StringSearchFamilyDonorTest.java	-	COMPILE:incompatible types: String[] cannot be converted to CharSequence	assertEquals(0, asString(new String[] {cp10400, cp10401}).indexOfDifference());
+StringSearchFamilyDonorTest.java	-	COMPILE:incompatible types: String[] cannot be converted to CharSequence	assertEquals(2, asString(new String[] {cp10400 + "X", cp10400 + "Y"}).indexOfDifference());
