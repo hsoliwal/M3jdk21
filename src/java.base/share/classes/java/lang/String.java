@@ -5565,13 +5565,15 @@ public final class String
     /** The number of leading units all {@code strings} share, at most {@code limit}. */
     private static int commonPrefixLength(String[] strings, int limit) {
         String first = strings[0];
-        for (int index = 0; index < limit; index++) {
-            char unit = first.charAt(index);
-            for (int k = 1; k < strings.length; k++) {
-                if (strings[k].charAt(index) != unit) return index;
-            }
+        boolean flat = first.m3() == null;
+        int common = limit;
+        for (int k = 1; k < strings.length && common > 0; k++) {
+            String other = strings[k];
+            common = flat && other.m3() == null && first.coder == other.coder
+                    ? commonFlatUnits(first.value, other.value, common, first.coder)
+                    : first.commonUnits(other, common);
         }
-        return limit;
+        return common;
     }
 
     /**
