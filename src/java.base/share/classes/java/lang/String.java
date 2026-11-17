@@ -1637,10 +1637,7 @@ public final class String
      *             string.
      */
     public char charAt(int index) {
-        M3String storage = m3();
-        if (storage != null) {
-            return storage.charAt(index);
-        }
+        //FLLDCIM: LAYOUT - decision 50: an M3-backed String reads value with its canonical coder
         if (isLatin1()) {
             return StringLatin1.charAt(value, index);
         } else {
@@ -1671,17 +1668,6 @@ public final class String
      * @since      1.5
      */
     public int codePointAt(int index) {
-        if (m3() != null) {
-            checkIndex(index, length());
-            char first = charAt(index);
-            if (Character.isHighSurrogate(first) && index + 1 < length()) {
-                char second = charAt(index + 1);
-                if (Character.isLowSurrogate(second)) {
-                    return Character.toCodePoint(first, second);
-                }
-            }
-            return first;
-        }
         if (isLatin1()) {
             checkIndex(index, value.length);
             return value[index] & 0xff;
@@ -1716,16 +1702,6 @@ public final class String
     public int codePointBefore(int index) {
         int i = index - 1;
         checkIndex(i, length());
-        if (m3() != null) {
-            char second = charAt(i);
-            if (Character.isLowSurrogate(second) && i > 0) {
-                char first = charAt(i - 1);
-                if (Character.isHighSurrogate(first)) {
-                    return Character.toCodePoint(first, second);
-                }
-            }
-            return second;
-        }
         if (isLatin1()) {
             return (value[i] & 0xff);
         }
@@ -1755,13 +1731,15 @@ public final class String
      */
     public int codePointCount(int beginIndex, int endIndex) {
         Objects.checkFromToIndex(beginIndex, endIndex, length());
+        if (isLatin1()) {
+            return endIndex - beginIndex;
+        }
         M3String storage = m3();
         if (storage != null) {
-            // Same exact gates as offsetByCodePoints: without a surrogate pair in the value,
-            // every range holds one code point per unit.
+            // Same exact gate as offsetByCodePoints: without a surrogate pair in the value,
+            // every range holds one code point per unit. The geometry answers repeated queries.
             M3StringFacts prepared = storage.factsIfPrepared();
-            if (storage.coder() == LATIN1
-                    || (prepared != null && prepared.codePointCount == storage.length())) {
+            if (prepared != null && prepared.codePointCount == storage.length()) {
                 return endIndex - beginIndex;
             }
             M3StringCodePointPrecompute.Geometry geometry =
@@ -1769,11 +1747,8 @@ public final class String
             if (geometry != null) {
                 return geometry.codePointCount(beginIndex, endIndex);
             }
-            return storage.slice(beginIndex, endIndex).facts().codePointCount;
         }
-        if (isLatin1()) {
-            return endIndex - beginIndex;
-        }
+        //FLLDCIM: LAYOUT - decision 50: counted over value, no facts scan of the range
         return StringUTF16.codePointCount(value, beginIndex, endIndex);
     }
 
@@ -1802,7 +1777,7 @@ public final class String
         if (storage != null && index >= 0 && index <= storage.length()) {
             M3StringFacts prepared = storage.factsIfPrepared();
             boolean oneUnitPerCodePoint =
-                    storage.coder() == LATIN1
+                    isLatin1()
                             || (prepared != null
                                     && prepared.codePointCount == storage.length());
             if (oneUnitPerCodePoint) {
@@ -1858,10 +1833,7 @@ public final class String
             System.arraycopy(chars, srcBegin, dst, dstBegin, srcEnd - srcBegin);
             return;
         }
-        M3String storage = m3();
-        if (storage != null) {
-            storage.getChars(srcBegin, srcEnd, dst, dstBegin);
-        } else if (isLatin1()) {
+        if (isLatin1()) {
             StringLatin1.getChars(value, srcBegin, srcEnd, dst, dstBegin);
         } else {
             StringUTF16.getChars(value, srcBegin, srcEnd, dst, dstBegin);
@@ -2685,7 +2657,8 @@ public final class String
         int h = hash;
         if (h == 0 && !hashIsZero) {
             M3String storage = m3();
-            h = storage != null
+            //FLLDCIM: LAYOUT - decision 50: an unknown M3 range hash hashes value (vectorized)
+            h = storage != null && storage.hashKnown()
                     ? M3StringPrecomputeBridge.hashCodeValue(storage)
                     : (isLatin1() ? StringLatin1.hashCode(value)
                                   : StringUTF16.hashCode(value));
@@ -13989,7 +13962,7 @@ public final class String
     private char[] constChars() {
         char[] chars = chValue;
         if (chars == null) {
-            chars = layoutChars(value, coder, m3());
+            chars = layoutChars(value, coder);
             jdk.internal.misc.Unsafe.getUnsafe().storeStoreFence();
             chValue = chars;
         }
@@ -13997,12 +13970,12 @@ public final class String
     }
 
     /**
-     * The chars of the layout invariant for a String under construction: the JNI char shadow
-     * of its M3 text when it is M3-backed, otherwise its bytes inflated to UTF-16 units.
+     * The chars of the layout invariant: the bytes of {@link #value} inflated to UTF-16 units.
+     * An M3-backed String inflates them too: its value and coder agree (decision 50).
      */
-    private static char[] layoutChars(byte[] bytes, byte coder, M3String storage) {
+    private static char[] layoutChars(byte[] bytes, byte coder) {
         //FLLDCIM: LAYOUT - decision 51: called once per String by chars(), never at construction
-        if (storage != null) return storage.charShadow();
+        //FLLDCIM: LAYOUT - decision 50: M3-backed Strings inflate value; no owner walk
         return COMPACT_STRINGS && coder == LATIN1 ? StringLatin1.toChars(bytes)
                                                  : StringUTF16.toChars(bytes);
     }

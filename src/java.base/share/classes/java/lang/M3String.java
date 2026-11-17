@@ -732,6 +732,14 @@ final class M3String implements CharSequence {
     }
 
     /**
+     * True when {@link #hashCodeValue()} answers in O(1): a whole owner, or prepared range facts.
+     * Never prepares facts.
+     */
+    boolean hashKnown() {
+        return isWholeOwner() || factsIfPrepared() != null;
+    }
+
+    /**
      * True when this String's canonical Java hash is already known (whole owner, or prepared range
      * facts) and differs from {@code hash}. Never prepares facts; absence proves nothing.
      */
