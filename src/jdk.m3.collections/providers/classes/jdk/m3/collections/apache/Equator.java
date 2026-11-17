@@ -19,6 +19,7 @@ package jdk.m3.collections.apache;
 import java.util.Comparator;
 
 import jdk.m3.collections.apache.map.HashedMap;
+import jdk.m3.collections.eclipse.api.block.HashingStrategy;
 /**
  * An equation function, which determines equality between objects of type T.
  * <p>
@@ -50,4 +51,36 @@ public interface Equator<T> {
      * @return The hash of the object.
      */
     int hash(T o);
+
+    /**
+     * Returns this equator as a {@link HashingStrategy}, the equality strategy the collections of
+     * the module {@code jdk.m3.collections} share: its {@code equals} is {@link #equate(Object,
+     * Object)} and its {@code computeHashCode} is {@link #hash(Object)}. Nulls are passed on as
+     * they come, so the strategy handles them as this equator does.
+     * <p>
+     * An equator made by {@link #of(HashingStrategy)} returns the strategy it was made from. The
+     * strategy is serializable when this equator is.
+     * </p>
+     *
+     * @return this equator as a hashing strategy
+     */
+    default HashingStrategy<T> asHashingStrategy() {
+        return EquatorStrategies.toStrategy(this);
+    }
+
+    /**
+     * Returns the {@link HashingStrategy} as an equator: {@link #equate(Object, Object)} is its
+     * {@code equals} and {@link #hash(Object)} is its {@code computeHashCode}.
+     * <p>
+     * A strategy made by {@link #asHashingStrategy()} gives back the equator it was made from.
+     * </p>
+     *
+     * @param <T> the type of the objects the strategy evaluates
+     * @param strategy the hashing strategy, not null
+     * @return the strategy as an equator
+     * @throws NullPointerException if the strategy is null
+     */
+    static <T> Equator<T> of(final HashingStrategy<T> strategy) {
+        return EquatorStrategies.toEquator(strategy);
+    }
 }

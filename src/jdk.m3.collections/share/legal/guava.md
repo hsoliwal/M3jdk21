@@ -26,6 +26,18 @@ Compiled before and after these changes, every one of the 1,921 classes has the 
 instructions. The 15 `package-info` classes of the original are not generated any more: they existed only to carry a
 nullness annotation.
 
+### Later changes made by Synexia (2026-11-17)
+
+The module shares one equality strategy among its collection providers, Eclipse Collections'
+`HashingStrategy` (owner's decision, 2026-11-17). Added, by hand:
+
+- `base.Equivalence`: the public methods `asHashingStrategy()` (this equivalence as a `HashingStrategy`) and
+  `static of(HashingStrategy)` (a strategy as an equivalence); converting twice gives back the original object;
+- `base.EquivalenceStrategies`: a new package-private class holding the two adapters (Apache License, Version 2.0,
+  Synexia).
+
+Nothing else in `Equivalence` changed; the classes of the provider are otherwise as compiled from the library.
+
 ### License
 
 ```
