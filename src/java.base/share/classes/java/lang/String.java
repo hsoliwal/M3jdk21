@@ -1998,8 +1998,11 @@ public final class String
         M3String leftStorage = m3();
         M3String rightStorage = aString.m3();
         if (leftStorage != null || rightStorage != null) {
-            return M3StringPrecomputeBridge.contentEquals(
-                    this, aString, leftStorage, rightStorage);
+            //FLLDCIM: LAYOUT - decision 50: O(1) gates, then the stock compare of the values
+            int known = M3String.equalityGate(this, leftStorage, aString, rightStorage);
+            if (known != M3String.GATE_UNKNOWN) {
+                return known == M3String.GATE_EQUAL;
+            }
         }
         return (!COMPACT_STRINGS || this.coder == aString.coder)
                 && StringLatin1.equals(value, aString.value);
@@ -2044,14 +2047,6 @@ public final class String
         int len = length();
         if (len != sb.length()) {
             return false;
-        }
-        if (m3() != null) {
-            for (int index = 0; index < len; index++) {
-                if (charAt(index) != sb.charAt(index)) {
-                    return false;
-                }
-            }
-            return true;
         }
         byte[] v1 = value();
         byte[] v2 = sb.getValue();
@@ -2104,14 +2099,6 @@ public final class String
         int n = cs.length();
         if (n != length()) {
             return false;
-        }
-        if (m3() != null) {
-            for (int i = 0; i < n; i++) {
-                if (charAt(i) != cs.charAt(i)) {
-                    return false;
-                }
-            }
-            return true;
         }
         byte[] val = value();
         if (isLatin1()) {
@@ -2225,11 +2212,10 @@ public final class String
      */
     public int compareTo(String anotherString) {
         M3String leftM3 = m3();
-        M3String rightM3 = anotherString.m3();
-        if (leftM3 != null || rightM3 != null) {
-            return M3StringPrecomputeBridge.compareTo(
-                    this, anotherString, leftM3, rightM3);
+        if (leftM3 != null && leftM3.sameCoordinate(anotherString.m3())) {
+            return 0;
         }
+        //FLLDCIM: LAYOUT - decision 50: M3-backed Strings compare their values like flat ones
         byte[] v1 = value();
         byte[] v2 = anotherString.value();
         byte coder = coder();
@@ -2266,28 +2252,6 @@ public final class String
         private static final long serialVersionUID = 8575799808933029326L;
 
         public int compare(String s1, String s2) {
-            if (s1.m3() != null || s2.m3() != null) {
-                int i1 = 0;
-                int i2 = 0;
-                int n1 = s1.length();
-                int n2 = s2.length();
-                while (i1 < n1 && i2 < n2) {
-                    int c1 = s1.codePointAt(i1);
-                    int c2 = s2.codePointAt(i2);
-                    if (c1 != c2) {
-                        int u1 = Character.toUpperCase(c1);
-                        int u2 = Character.toUpperCase(c2);
-                        if (u1 != u2) {
-                            int l1 = Character.toLowerCase(u1);
-                            int l2 = Character.toLowerCase(u2);
-                            if (l1 != l2) return l1 - l2;
-                        }
-                    }
-                    i1 += Character.charCount(c1);
-                    i2 += Character.charCount(c2);
-                }
-                return n1 - n2;
-            }
             byte[] v1 = s1.value();
             byte[] v2 = s2.value();
             byte coder = s1.coder();
@@ -2376,23 +2340,18 @@ public final class String
         }
         M3String leftM3 = m3();
         M3String rightM3 = other.m3();
-        if (leftM3 != null || rightM3 != null) {
-            if (leftM3 != null && rightM3 != null) {
-                M3String leftRange = leftM3.slice(toffset, toffset + len);
-                M3String rightRange = rightM3.slice(ooffset, ooffset + len);
-                if (leftRange.sameCoordinate(rightRange)) return true;
-                M3StringFacts leftFacts = leftRange.factsIfPrepared();
-                M3StringFacts rightFacts = rightRange.factsIfPrepared();
-                if (leftFacts != null && rightFacts != null
-                        && leftFacts.javaHash != rightFacts.javaHash) {
-                    return false;
-                }
+        if (leftM3 != null && rightM3 != null) {
+            M3String leftRange = leftM3.slice(toffset, toffset + len);
+            M3String rightRange = rightM3.slice(ooffset, ooffset + len);
+            if (leftRange.sameCoordinate(rightRange)) return true;
+            M3StringFacts leftFacts = leftRange.factsIfPrepared();
+            M3StringFacts rightFacts = rightRange.factsIfPrepared();
+            if (leftFacts != null && rightFacts != null
+                    && leftFacts.javaHash != rightFacts.javaHash) {
+                return false;
             }
-            for (int index = 0; index < len; index++) {
-                if (charAt(toffset + index) != other.charAt(ooffset + index)) return false;
-            }
-            return true;
         }
+        //FLLDCIM: LAYOUT - decision 50: after the O(1) gates, the stock compare of the values
         byte[] tv = value();
         byte[] ov = other.value();
         byte coder = coder();
@@ -2476,7 +2435,7 @@ public final class String
         }
         M3String leftM3 = m3();
         M3String rightM3 = other.m3();
-        if (leftM3 != null || rightM3 != null) {
+        if (len > 0 && (leftM3 != null || rightM3 != null)) {
             if (leftM3 != null && rightM3 != null) {
                 M3StringFacts leftFacts =
                         leftM3.slice(toffset, toffset + len).factsIfPrepared();
@@ -2494,38 +2453,8 @@ public final class String
                     : mixedAsciiCaseHashDiffers(rightM3, ooffset, this, toffset, len)) {
                 return false;
             }
-            int t = toffset;
-            int o = ooffset;
-            int remaining = len;
-            while (remaining > 0) {
-                int tc = charAt(t);
-                int oc = other.charAt(o);
-                int tcp = tc;
-                int ocp = oc;
-                int tw = 1;
-                int ow = 1;
-                if (Character.isHighSurrogate((char) tc) && remaining > 1
-                        && Character.isLowSurrogate(charAt(t + 1))) {
-                    tcp = Character.toCodePoint((char) tc, charAt(t + 1));
-                    tw = 2;
-                }
-                if (Character.isHighSurrogate((char) oc) && remaining > 1
-                        && Character.isLowSurrogate(other.charAt(o + 1))) {
-                    ocp = Character.toCodePoint((char) oc, other.charAt(o + 1));
-                    ow = 2;
-                }
-                if (tcp != ocp) {
-                    int tu = Character.toUpperCase(tcp);
-                    int ou = Character.toUpperCase(ocp);
-                    if (tu != ou && Character.toLowerCase(tu) != Character.toLowerCase(ou)) return false;
-                }
-                if (tw != ow) return false;
-                t += tw;
-                o += ow;
-                remaining -= tw;
-            }
-            return true;
         }
+        //FLLDCIM: LAYOUT - decision 50: after the O(1) gates, the stock compare of the values
         byte[] tv = value();
         byte[] ov = other.value();
         byte coder = coder();

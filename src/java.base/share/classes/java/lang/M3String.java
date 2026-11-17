@@ -1082,6 +1082,44 @@ final class M3String implements CharSequence {
         return start() == 0 && length() == owner.length;
     }
 
+    /** {@link #equalityGate}: the gates prove neither equal nor unequal text. */
+    static final int GATE_UNKNOWN = -1;
+    /** {@link #equalityGate}: the gates prove unequal text. */
+    static final int GATE_UNEQUAL = 0;
+    /** {@link #equalityGate}: the gates prove equal text. */
+    static final int GATE_EQUAL = 1;
+
+    /**
+     * The O(1) equality gates of two Strings of which at least one is M3-backed, in front of
+     * the stock comparison of their values (decision 50): equal for the same coordinate or the
+     * same immediate text; unequal for different lengths, different whole-owner Java hashes,
+     * different prepared range Java hashes, or a cached flat hash that differs from a known M3
+     * hash. Never prepares facts and never reads the text.
+     */
+    static int equalityGate(
+            String left, M3String leftStorage, String right, M3String rightStorage) {
+        if (leftStorage == null || rightStorage == null) {
+            M3String storage = leftStorage != null ? leftStorage : rightStorage;
+            String flat = leftStorage != null ? right : left;
+            return flat.length() != storage.length() || flat.cachedHashDiffers(storage)
+                    ? GATE_UNEQUAL : GATE_UNKNOWN;
+        }
+        if (leftStorage.sameCoordinate(rightStorage)) return GATE_EQUAL;
+        boolean whole = leftStorage.isWholeOwner() && rightStorage.isWholeOwner();
+        if (whole && M3StringImmediate.sameText(leftStorage.owner, rightStorage.owner)) {
+            return GATE_EQUAL;
+        }
+        if (leftStorage.length() != rightStorage.length()) return GATE_UNEQUAL;
+        if (whole) {
+            return leftStorage.owner.javaHash != rightStorage.owner.javaHash
+                    ? GATE_UNEQUAL : GATE_UNKNOWN;
+        }
+        M3StringFacts leftFacts = leftStorage.factsIfPrepared();
+        M3StringFacts rightFacts = rightStorage.factsIfPrepared();
+        return leftFacts != null && rightFacts != null && leftFacts.javaHash != rightFacts.javaHash
+                ? GATE_UNEQUAL : GATE_UNKNOWN;
+    }
+
     boolean contentEquals(String other) {
         Objects.requireNonNull(other, "other");
         M3String that = other.m3();
