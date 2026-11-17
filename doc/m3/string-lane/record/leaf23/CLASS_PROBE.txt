@@ -1,0 +1,23 @@
+isAlpha	empty=false	null=false	bmpUnitRuleDiffers=0 -	pairs=U+1D400:true U+1D41A:true U+1D7CE:false U+10400:true U+10428:true U+1F600:false 
+isAlphaSpace	empty=true	null=false	bmpUnitRuleDiffers=0 -	pairs=U+1D400:true U+1D41A:true U+1D7CE:false U+10400:true U+10428:true U+1F600:false 
+isAlphanumeric	empty=false	null=false	bmpUnitRuleDiffers=0 -	pairs=U+1D400:true U+1D41A:true U+1D7CE:true U+10400:true U+10428:true U+1F600:false 
+isAlphanumericSpace	empty=true	null=false	bmpUnitRuleDiffers=0 -	pairs=U+1D400:true U+1D41A:true U+1D7CE:true U+10400:true U+10428:true U+1F600:false 
+isAsciiPrintable	empty=true	null=false	bmpUnitRuleDiffers=0 -	pairs=U+1D400:false U+1D41A:false U+1D7CE:false U+10400:false U+10428:false U+1F600:false 
+isNumeric	empty=false	null=false	bmpUnitRuleDiffers=0 -	pairs=U+1D400:false U+1D41A:false U+1D7CE:true U+10400:false U+10428:false U+1F600:false 
+isNumericSpace	empty=true	null=false	bmpUnitRuleDiffers=0 -	pairs=U+1D400:false U+1D41A:false U+1D7CE:true U+10400:false U+10428:false U+1F600:false 
+isWhitespace	empty=true	null=false	bmpUnitRuleDiffers=0 -	pairs=U+1D400:false U+1D41A:false U+1D7CE:false U+10400:false U+10428:false U+1F600:false 
+isAllLowerCase	empty=false	null=false	bmpUnitRuleDiffers=0 -	pairs=U+1D400:false U+1D41A:true U+1D7CE:false U+10400:false U+10428:true U+1F600:false 
+isAllUpperCase	empty=false	null=false	bmpUnitRuleDiffers=0 -	pairs=U+1D400:true U+1D41A:false U+1D7CE:false U+10400:true U+10428:false U+1F600:false 
+isMixedCase	empty=false	null=false	pairs=U+1D400:false U+1D41A:false U+1D7CE:false U+10400:false U+10428:false U+1F600:false 
+isMixedCase	"a"	false
+isMixedCase	"A"	false
+isMixedCase	"aA"	true
+isMixedCase	"a1"	false
+isMixedCase	"A1"	false
+isMixedCase	"a A"	true
+isMixedCase	"1"	false
+isMixedCase	"aB1"	true
+isMixedCase	" "	false
+isMixedCase	"ab"	false
+isMixedCase	"AB"	false
+isMixedCase	"È…"	true

@@ -1,0 +1,80 @@
+method_text_verbatim_in_head	1
+lint	javac -Xlint:all,-this-escape -Werror: no warnings
+== ClassFamilyProof flat -XX:+CompactStrings
+isAlpha	2390750	0	-
+isAlphaSpace	2390750	0	-
+isAlphanumeric	2390750	0	-
+isAlphanumericSpace	2390750	0	-
+isAsciiPrintable	2390750	0	-
+isNumeric	2390750	0	-
+isNumericSpace	2390750	0	-
+isAllLowerCase	2390750	0	-
+isAllUpperCase	2390750	0	-
+isMixedCase	2390750	0	-
+isBlank = StringUtils.isWhitespace	2390750	0	-
+RESULT	PASS	failures=0
+== ClassFamilyProof flat -XX:-CompactStrings
+isAlpha	2390750	0	-
+isAlphaSpace	2390750	0	-
+isAlphanumeric	2390750	0	-
+isAlphanumericSpace	2390750	0	-
+isAsciiPrintable	2390750	0	-
+isNumeric	2390750	0	-
+isNumericSpace	2390750	0	-
+isAllLowerCase	2390750	0	-
+isAllUpperCase	2390750	0	-
+isMixedCase	2390750	0	-
+isBlank = StringUtils.isWhitespace	2390750	0	-
+RESULT	PASS	failures=0
+== ClassFamilyProof m3-facts -XX:+CompactStrings
+isAlpha	2390750	0	-
+isAlphaSpace	2390750	0	-
+isAlphanumeric	2390750	0	-
+isAlphanumericSpace	2390750	0	-
+isAsciiPrintable	2390750	0	-
+isNumeric	2390750	0	-
+isNumericSpace	2390750	0	-
+isAllLowerCase	2390750	0	-
+isAllUpperCase	2390750	0	-
+isMixedCase	2390750	0	-
+isBlank = StringUtils.isWhitespace	2390750	0	-
+RESULT	PASS	failures=0
+== ClassFamilyProof m3-facts -XX:-CompactStrings
+isAlpha	2390750	0	-
+isAlphaSpace	2390750	0	-
+isAlphanumeric	2390750	0	-
+isAlphanumericSpace	2390750	0	-
+isAsciiPrintable	2390750	0	-
+isNumeric	2390750	0	-
+isNumericSpace	2390750	0	-
+isAllLowerCase	2390750	0	-
+isAllUpperCase	2390750	0	-
+isMixedCase	2390750	0	-
+isBlank = StringUtils.isWhitespace	2390750	0	-
+RESULT	PASS	failures=0
+== ClassFamilyProof m3-scan -XX:+CompactStrings
+isAlpha	2390750	0	-
+isAlphaSpace	2390750	0	-
+isAlphanumeric	2390750	0	-
+isAlphanumericSpace	2390750	0	-
+isAsciiPrintable	2390750	0	-
+isNumeric	2390750	0	-
+isNumericSpace	2390750	0	-
+isAllLowerCase	2390750	0	-
+isAllUpperCase	2390750	0	-
+isMixedCase	2390750	0	-
+isBlank = StringUtils.isWhitespace	2390750	0	-
+RESULT	PASS	failures=0
+== ClassFamilyProof m3-scan -XX:-CompactStrings
+isAlpha	2390750	0	-
+isAlphaSpace	2390750	0	-
+isAlphanumeric	2390750	0	-
+isAlphanumericSpace	2390750	0	-
+isAsciiPrintable	2390750	0	-
+isNumeric	2390750	0	-
+isNumericSpace	2390750	0	-
+isAllLowerCase	2390750	0	-
+isAllUpperCase	2390750	0	-
+isMixedCase	2390750	0	-
+isBlank = StringUtils.isWhitespace	2390750	0	-
+RESULT	PASS	failures=0

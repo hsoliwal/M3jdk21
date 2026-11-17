@@ -4887,6 +4887,269 @@ public final class String
     }
 
     /**
+     * Returns {@code true} if this string is not empty and every character is a letter, as
+     * {@link Character#isLetter(int)} defines it. The string is read as code points: a surrogate
+     * pair is one character, a lone surrogate is a character of its own.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @return  {@code true} if this string is a non-empty run of letters.
+     * @since   21
+     */
+    public boolean isAlpha() {
+        return !isEmpty() && allInClass(CLASS_LETTER);
+    }
+
+    /**
+     * Returns {@code true} if every character of this string is a letter or the space
+     * {@code U+0020}, read as code points; an empty string answers {@code true}.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @return  {@code true} if this string holds only letters and spaces.
+     * @since   21
+     */
+    public boolean isAlphaSpace() {
+        return allInClass(CLASS_LETTER | CLASS_SPACE);
+    }
+
+    /**
+     * Returns {@code true} if this string is not empty and every character is a letter or a
+     * digit, as {@link Character#isLetterOrDigit(int)} defines them, read as code points.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @return  {@code true} if this string is a non-empty run of letters and digits.
+     * @since   21
+     */
+    public boolean isAlphanumeric() {
+        return !isEmpty() && allInClass(CLASS_LETTER | CLASS_DIGIT);
+    }
+
+    /**
+     * Returns {@code true} if every character of this string is a letter, a digit or the space
+     * {@code U+0020}, read as code points; an empty string answers {@code true}.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @return  {@code true} if this string holds only letters, digits and spaces.
+     * @since   21
+     */
+    public boolean isAlphanumericSpace() {
+        return allInClass(CLASS_LETTER | CLASS_DIGIT | CLASS_SPACE);
+    }
+
+    /**
+     * Returns {@code true} if every character of this string is a printable ASCII character,
+     * {@code U+0020} to {@code U+007E}; an empty string answers {@code true}.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @return  {@code true} if this string holds only printable ASCII characters.
+     * @since   21
+     */
+    public boolean isAsciiPrintable() {
+        return allInClass(CLASS_PRINTABLE);
+    }
+
+    /**
+     * Returns {@code true} if this string is not empty and every character is a digit, as
+     * {@link Character#isDigit(int)} defines it (any Unicode decimal digit), read as code points.
+     * A sign or a decimal point is not a digit.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @return  {@code true} if this string is a non-empty run of digits.
+     * @since   21
+     */
+    public boolean isNumeric() {
+        return !isEmpty() && allInClass(CLASS_DIGIT);
+    }
+
+    /**
+     * Returns {@code true} if every character of this string is a digit or the space
+     * {@code U+0020}, read as code points; an empty string answers {@code true}.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @return  {@code true} if this string holds only digits and spaces.
+     * @since   21
+     */
+    public boolean isNumericSpace() {
+        return allInClass(CLASS_DIGIT | CLASS_SPACE);
+    }
+
+    /**
+     * Returns {@code true} if this string is not empty and every character is lower case, as
+     * {@link Character#isLowerCase(int)} defines it, read as code points.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @return  {@code true} if this string is a non-empty run of lower-case characters.
+     * @since   21
+     */
+    public boolean isAllLowerCase() {
+        return !isEmpty() && allInClass(CLASS_LOWER);
+    }
+
+    /**
+     * Returns {@code true} if this string is not empty and every character is upper case, as
+     * {@link Character#isUpperCase(int)} defines it, read as code points.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @return  {@code true} if this string is a non-empty run of upper-case characters.
+     * @since   21
+     */
+    public boolean isAllUpperCase() {
+        return !isEmpty() && allInClass(CLASS_UPPER);
+    }
+
+
+    /**
+     * Returns {@code true} if this string holds at least one upper-case and at least one
+     * lower-case character, as {@link Character#isUpperCase(int)} and
+     * {@link Character#isLowerCase(int)} define them, read as code points; other characters do
+     * not count.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @return  {@code true} if this string mixes upper and lower case.
+     * @since   21
+     */
+    public boolean isMixedCase() {
+        return foldClasses(CLASS_LOWER | CLASS_UPPER, false) == (CLASS_LOWER | CLASS_UPPER);
+    }
+
+    /** Character classes of the class-test methods, as bits. */
+    private static final int CLASS_LETTER = 1;
+    private static final int CLASS_DIGIT = 2;
+    private static final int CLASS_SPACE = 4;
+    private static final int CLASS_PRINTABLE = 8;
+    private static final int CLASS_LOWER = 16;
+    private static final int CLASS_UPPER = 32;
+    /** {@link #foldClasses(int, boolean)}: a code point is in none of the classes. */
+    private static final int CLASS_MISSING = -1;
+    /** {@link #classesFromFacts}: the facts do not decide. */
+    private static final int CLASS_UNKNOWN = -2;
+    /** Units copied per bulk read of UTF-16 or M3 storage by the scanning methods. */
+    private static final int SCAN_WINDOW = 512;
+
+    /** Whether every code point of this string is in one of the given classes. */
+    private boolean allInClass(int classes) {
+        return foldClasses(classes, true) != CLASS_MISSING;
+    }
+
+    /**
+     * The union of {@code classes} over the classes of this string's code points. With
+     * {@code each}, {@link #CLASS_MISSING} as soon as a code point is in none of them; without,
+     * the scan stops once the union is complete. Prepared M3 facts answer without a scan when
+     * they decide; a flat Latin-1 string is read on its bytes; UTF-16 and M3 storage are read
+     * in bulk windows, a surrogate pair never split between two windows.
+     */
+    private int foldClasses(int classes, boolean each) {
+        M3String storage = m3();
+        M3StringFacts facts = storage == null ? null : storage.factsIfPrepared();
+        int known = facts == null ? CLASS_UNKNOWN : classesFromFacts(facts, classes, each);
+        if (known != CLASS_UNKNOWN) return known;
+        int length = length();
+        int seen = 0;
+        if (storage == null && isLatin1()) {
+            byte[] bits = Latin1Classes.BITS;
+            byte[] bytes = value;
+            for (int index = 0; index < length && (each || seen != classes); index++) {
+                int found = bits[bytes[index] & 0xFF] & classes;
+                if (each && found == 0) return CLASS_MISSING;
+                seen |= found;
+            }
+            return seen;
+        }
+        char[] window = new char[Math.min(length, SCAN_WINDOW)];
+        for (int from = 0; from < length && (each || seen != classes); ) {
+            int to = Math.min(length, from + window.length);
+            getChars(from, to, window, 0);
+            int count = to - from;
+            if (to < length && count > 1 && Character.isHighSurrogate(window[count - 1])) count--;
+            for (int at = 0; at < count && (each || seen != classes); ) {
+                char unit = window[at];
+                int point = Character.isHighSurrogate(unit) && at + 1 < count
+                        && Character.isLowSurrogate(window[at + 1])
+                        ? Character.toCodePoint(unit, window[at + 1]) : unit;
+                int found = classesIn(point, classes);
+                if (each && found == 0) return CLASS_MISSING;
+                seen |= found;
+                at += Character.charCount(point);
+            }
+            from += count;
+        }
+        return seen;
+    }
+
+    /**
+     * {@link #foldClasses(int, boolean)} answered from prepared M3 facts, or
+     * {@link #CLASS_UNKNOWN}. Facts carry exact ASCII regex classes: on ASCII text a letter is
+     * ALPHA, a digit DIGIT, a letter or digit ALNUM, lower and upper case LOWER and UPPER.
+     */
+    private static int classesFromFacts(M3StringFacts facts, int classes, boolean each) {
+        if (each) {
+            int regex = switch (classes) {
+                case CLASS_LETTER -> M3StringFacts.REGEX_ALPHA;
+                case CLASS_DIGIT -> M3StringFacts.REGEX_DIGIT;
+                case CLASS_LETTER | CLASS_DIGIT -> M3StringFacts.REGEX_ALNUM;
+                case CLASS_LOWER -> M3StringFacts.REGEX_LOWER;
+                case CLASS_UPPER -> M3StringFacts.REGEX_UPPER;
+                default -> 0;
+            };
+            if (regex == 0 || !facts.ascii) return CLASS_UNKNOWN;
+            return (facts.regexAllClasses & regex) != 0 ? classes : CLASS_MISSING;
+        }
+        if (classes != (CLASS_LOWER | CLASS_UPPER)) return CLASS_UNKNOWN;
+        int seen = ((facts.regexAnyClasses & M3StringFacts.REGEX_LOWER) != 0 ? CLASS_LOWER : 0)
+                | ((facts.regexAnyClasses & M3StringFacts.REGEX_UPPER) != 0 ? CLASS_UPPER : 0);
+        return seen == classes || facts.ascii ? seen : CLASS_UNKNOWN;
+    }
+
+    /** The classes among {@code classes} that one code point is in, testing only those. */
+    private static int classesIn(int point, int classes) {
+        if (point < Latin1Classes.BITS.length) return Latin1Classes.BITS[point] & classes;
+        int found = (classes & CLASS_LETTER) != 0 && Character.isLetter(point) ? CLASS_LETTER : 0;
+        found |= (classes & CLASS_DIGIT) != 0 && Character.isDigit(point) ? CLASS_DIGIT : 0;
+        found |= (classes & CLASS_LOWER) != 0 && Character.isLowerCase(point) ? CLASS_LOWER : 0;
+        return found | ((classes & CLASS_UPPER) != 0 && Character.isUpperCase(point)
+                ? CLASS_UPPER : 0);
+    }
+
+    /** The classes of one code point. */
+    private static int classesOf(int point) {
+        int classes = Character.isLetter(point) ? CLASS_LETTER : 0;
+        classes |= Character.isDigit(point) ? CLASS_DIGIT : 0;
+        classes |= point == ' ' ? CLASS_SPACE : 0;
+        classes |= point >= ' ' && point <= '~' ? CLASS_PRINTABLE : 0;
+        classes |= Character.isLowerCase(point) ? CLASS_LOWER : 0;
+        return classes | (Character.isUpperCase(point) ? CLASS_UPPER : 0);
+    }
+
+    /** The classes of each Latin-1 unit, built once from {@link #classesOf(int)}. */
+    private static final class Latin1Classes {
+        static final byte[] BITS = new byte[256];
+        static {
+            for (int unit = 0; unit < BITS.length; unit++) {
+                BITS[unit] = (byte) classesOf(unit);
+            }
+        }
+    }
+
+    /**
      * Returns true if and only if this string contains the specified
      * sequence of char values.
      *
