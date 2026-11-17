@@ -22,7 +22,9 @@ import java.util.Objects;
  * Sorted row permutation over one shared long lane.
  *
  * <p>Binary search is O(log n). Insert/delete/update use arraycopy and are O(n) worst case.
- * No payload value is duplicated into the index.
+ * No payload value is duplicated into the index. Registration bulk-loads with one stable
+ * merge sort (O(n log n)); an update moves its row with one arraycopy of the span between
+ * the old and new rank (O(log n + span)); a store filter tombstones ranks and compacts once.
  *
  * <p>Lineage: absorbed from Synexia {@code m3-common/src/main/java/jdk/internal/m3/common/collections/PackedLongLaneSortedIndex.java}
  * blob {@code 9729e0e5e3bbeb8953bd337d14439c0e428821f2} at com.synexia develop {@code 5ab05fd05653} by
@@ -209,14 +211,15 @@ public final class PackedLongLaneSortedIndex implements PackedLongLaneIndex {
     @Override
     public void beforeUpdate(int row, int updatedLane) {
         if (updatedLane == lane) {
-            remove(row);
+            position(row); // same missing-row check as remove(row); the row keeps its rank
         }
     }
 
     @Override
     public void afterUpdate(int row, int updatedLane) {
         if (updatedLane == lane) {
-            insert(row);
+            int from = position(row);
+            moveRank(from, upperBoundExcluding(store.valueAtUnchecked(row, lane), from));
         }
     }
 
@@ -253,6 +256,43 @@ public final class PackedLongLaneSortedIndex implements PackedLongLaneIndex {
         return 4L * (order.length + positionByRow.length);
     }
 
+    /** Registration: rows 0..count-1 by key, equal keys in ascending row order. */
+    //FLLDCIM: LEETCODIFY — one stable sort replaces count shifting inserts, O(n^2) -> O(n log n)
+    void bulkLoad(int count) {
+        ensureOrderCapacity(count);
+        long[] keys = new long[count];
+        for (int row = 0; row < count; row++) {
+            order[row] = row;
+            keys[row] = sortKey(row);
+        }
+        sortByKey(keys, count);
+        if (unique) {
+            requireDistinct(keys, count);
+        }
+        renumber(0, count);
+        size = count;
+    }
+
+    /** Store filter: marks the row's rank dead (-1) without shifting. */
+    void tombstone(int row) {
+        order[position(row)] = -1;
+        positionByRow[row] = -1;
+    }
+
+    /** Closes every tombstone in one stable pass and renumbers the survivors. */
+    //FLLDCIM: LEETCODIFY — COMPACT, O(n) once per filter instead of O(n) per removed row
+    void compactTombstones() {
+        int write = 0;
+        for (int rank = 0; rank < size; rank++) {
+            int row = order[rank];
+            if (row >= 0) {
+                order[write] = row;
+                positionByRow[row] = write++;
+            }
+        }
+        size = write;
+    }
+
     private int position(int row) {
         if (row < 0 || row >= positionByRow.length
                 || positionByRow[row] < 0) {
@@ -276,5 +316,99 @@ public final class PackedLongLaneSortedIndex implements PackedLongLaneIndex {
         order = Arrays.copyOf(
                 order,
                 PackedSupport.growArrayCapacity(order.length, required));
+    }
+
+    /** Signed-order key: unsigned lanes flip the sign bit so one signed compare serves both. */
+    private long sortKey(int row) {
+        long value = store.valueAtUnchecked(row, lane);
+        return unsigned ? value ^ Long.MIN_VALUE : value;
+    }
+
+    /** Stable bottom-up merge sort of keys[0..count) with order; ordered pairs are skipped. */
+    //FLLDCIM: LEETCODIFY — stable merge sort, O(n) on nondecreasing input
+    private void sortByKey(long[] keys, int count) {
+        long[] keyBuffer = new long[Integer.highestOneBit(Math.max(1, count - 1))];
+        int[] rowBuffer = new int[keyBuffer.length];
+        for (int width = 1; width > 0 && width < count; width <<= 1) {
+            for (int low = 0; low < count - width; ) {
+                int mid = low + width;
+                int high = mid + Math.min(width, count - mid);
+                if (keys[mid - 1] > keys[mid]) {
+                    mergeRuns(keys, keyBuffer, rowBuffer, low, mid, high);
+                }
+                low = high;
+            }
+        }
+    }
+
+    /** Merges runs [low, mid) and [mid, high) in place; the left run (lower rows) wins ties. */
+    private void mergeRuns(long[] keys, long[] keyBuffer, int[] rowBuffer,
+            int low, int mid, int high) {
+        int length = mid - low;
+        System.arraycopy(keys, low, keyBuffer, 0, length);
+        System.arraycopy(order, low, rowBuffer, 0, length);
+        int left = 0;
+        int right = mid;
+        int write = low;
+        while (left < length && right < high) {
+            boolean takeRight = keys[right] < keyBuffer[left];
+            keys[write] = takeRight ? keys[right] : keyBuffer[left];
+            order[write++] = takeRight ? order[right++] : rowBuffer[left++];
+        }
+        System.arraycopy(keyBuffer, left, keys, write, length - left);
+        System.arraycopy(rowBuffer, left, order, write, length - left);
+    }
+
+    /** The row one-by-one registration rejects first: least row after an equal key. */
+    private void requireDistinct(long[] keys, int count) {
+        int culprit = Integer.MAX_VALUE;
+        for (int rank = 1; rank < count; rank++) {
+            if (keys[rank - 1] == keys[rank] && order[rank] < culprit) {
+                culprit = order[rank];
+            }
+        }
+        if (culprit != Integer.MAX_VALUE) {
+            throw new IllegalArgumentException(
+                    "duplicate sorted-index value: " + store.valueAtUnchecked(culprit, lane));
+        }
+    }
+
+    /** upperBound with rank {@code skip} left out: the rank remove+insert would pick. */
+    //FLLDCIM: LEETCODIFY — BINARY_SEARCH over a virtual array without the moving row
+    private int upperBoundExcluding(long value, int skip) {
+        int low = 0;
+        int high = size - 1;
+        while (low < high) {
+            int middle = (low + high) >>> 1;
+            int rank = middle < skip ? middle : middle + 1;
+            if (compareValueAt(order[rank], value) <= 0) {
+                low = middle + 1;
+            } else {
+                high = middle;
+            }
+        }
+        return low;
+    }
+
+    /** Moves the entry at rank {@code from} to rank {@code to} with one arraycopy of the span. */
+    //FLLDCIM: LEETCODIFY — one System.arraycopy of |to - from| instead of two full shifts
+    private void moveRank(int from, int to) {
+        if (from == to) {
+            return;
+        }
+        int row = order[from];
+        if (to < from) {
+            System.arraycopy(order, to, order, to + 1, from - to);
+        } else {
+            System.arraycopy(order, from + 1, order, from, to - from);
+        }
+        order[to] = row;
+        renumber(Math.min(from, to), Math.max(from, to) + 1);
+    }
+
+    private void renumber(int fromRank, int toRank) {
+        for (int rank = fromRank; rank < toRank; rank++) {
+            positionByRow[order[rank]] = rank;
+        }
     }
 }

@@ -157,24 +157,47 @@ public final class PackedLongLaneStore {
     public int removeSwap(int row) {
         writable();
         checkRow(row);
+        return swapOut(row, false);
+    }
+
+    /**
+     * One swap-remove: every index drops {@code row}, then the tail row moves into its slot.
+     * With {@code deferSorted} a sorted index only tombstones the rank (no shift); the caller
+     * closes the gaps once with {@code compactSortedIndexes()}.
+     */
+    //FLLDCIM: LEETCODIFY — DIRECT_ACCESS swap-remove; sorted shift deferred to one COMPACT pass
+    private int swapOut(int row, boolean deferSorted) {
         mutating = true;
         try {
             int tail = size - 1;
             for (int i = 0; i < indexCount; i++) {
-                indexes[i].remove(row);
+                detach(indexes[i], row, deferSorted);
             }
             if (row != tail) {
-                for (int i = 0; i < indexCount; i++) {
-                    indexes[i].relocate(tail, row);
-                }
-                for (long[] lane : lanes) {
-                    lane[row] = lane[tail];
-                }
+                moveRow(tail, row);
             }
             size = tail;
             return tail;
         } finally {
             mutating = false;
+        }
+    }
+
+    private static void detach(PackedLongLaneIndex index, int row, boolean deferSorted) {
+        if (deferSorted && index instanceof PackedLongLaneSortedIndex sorted) {
+            sorted.tombstone(row);
+        } else {
+            index.remove(row);
+        }
+    }
+
+    /** Relocates the tail row into {@code row} in every index, then copies it in every lane. */
+    private void moveRow(int tail, int row) {
+        for (int i = 0; i < indexCount; i++) {
+            indexes[i].relocate(tail, row);
+        }
+        for (long[] lane : lanes) {
+            lane[row] = lane[tail];
         }
     }
 
@@ -186,6 +209,16 @@ public final class PackedLongLaneStore {
         writable();
         Objects.requireNonNull(predicate, "predicate");
         long[] rejected = new long[(size + 63) >>> 6];
+        int removed = markRejected(predicate, rejected);
+        if (removed != 0) {
+            removeRejected(rejected);
+        }
+        return removed;
+    }
+
+    /** Predicate pass in row order; each rejected row becomes one bit of the mask. */
+    //FLLDCIM: LEETCODIFY — MASK one bit per rejected row
+    private int markRejected(LongLaneRowPredicate predicate, long[] rejected) {
         int removed = 0;
         callbacks++;
         try {
@@ -198,15 +231,32 @@ public final class PackedLongLaneStore {
         } finally {
             callbacks--;
         }
-        if (removed == 0) {
-            return 0;
+        return removed;
+    }
+
+    /**
+     * Swap-removes the rejected rows in descending row order (words high to low, high bit
+     * first), the exact sequence of the per-row loop, then compacts each sorted index once.
+     */
+    //FLLDCIM: LEETCODIFY — MASK word walk; COMPACT each sorted index once, O(n) not O(r*n)
+    private void removeRejected(long[] rejected) {
+        try {
+            for (int word = rejected.length - 1; word >= 0; word--) {
+                for (long bits = rejected[word]; bits != 0L; bits &= ~Long.highestOneBit(bits)) {
+                    swapOut((word << 6) + 63 - Long.numberOfLeadingZeros(bits), true);
+                }
+            }
+        } finally {
+            compactSortedIndexes();
         }
-        for (int row = size - 1; row >= 0; row--) {
-            if ((rejected[row >>> 6] & (1L << (row & 63))) != 0L) {
-                removeSwap(row);
+    }
+
+    private void compactSortedIndexes() {
+        for (int i = 0; i < indexCount; i++) {
+            if (indexes[i] instanceof PackedLongLaneSortedIndex sorted) {
+                sorted.compactTombstones();
             }
         }
-        return removed;
     }
 
     public void clear() {
@@ -306,15 +356,25 @@ public final class PackedLongLaneStore {
     private <T extends PackedLongLaneIndex> T register(T index) {
         writable();
         index.ensureRowCapacity(capacity());
-        for (int row = 0; row < size; row++) {
-            index.validateInsert(row);
-            index.insert(row);
-        }
+        loadRows(index);
         if (indexCount == indexes.length) {
             indexes = Arrays.copyOf(indexes, indexes.length << 1);
         }
         indexes[indexCount++] = index;
         return index;
+    }
+
+    /** Feeds the live rows to a new index; a sorted index takes one stable sort instead. */
+    //FLLDCIM: LEETCODIFY — bulk registration, O(n log n) instead of n shifting inserts
+    private void loadRows(PackedLongLaneIndex index) {
+        if (index instanceof PackedLongLaneSortedIndex sorted) {
+            sorted.bulkLoad(size);
+            return;
+        }
+        for (int row = 0; row < size; row++) {
+            index.validateInsert(row);
+            index.insert(row);
+        }
     }
 
     private void ensureCapacity(int required) {
