@@ -123,6 +123,12 @@ public class LinkedHashMultimapLanesTest {
         suspended();
         retention();
         growth();
+        valueStreams();
+        copyReserved();
+        forEachEmptied();
+        emptiedByRemove();
+        keyRetention();
+        flooding();
         System.out.println("LinkedHashMultimapLanesTest: " + checks + " checks passed");
     }
 
@@ -264,7 +270,7 @@ public class LinkedHashMultimapLanesTest {
                 "a fresh slot is taken while the lanes have one");
         same("[k=a0] then ConcurrentModificationException", forEachReuse(),
                 "forEach whose callback frees the current slot and a put takes it");
-                Iterator<Object> values = m.get("k").iterator();
+        Iterator<Object> values = m.get("k").iterator();
         values.next();
         m.put("k", "other");
         try {
@@ -421,6 +427,115 @@ public class LinkedHashMultimapLanesTest {
         m.put("k", 1);
         m.remove("k", 1);
         same(1, capacity.getInt(m), "lanes of 64 slots or fewer kept when emptied");
+        for (int i = 0; i < 58; i++) {
+            m.put("k" + (i % 13), i);
+        }
+        same(58, capacity.getInt(m), "58 slots");
+        m.clear();
+        same(58, capacity.getInt(m), "lanes of 58 slots kept when emptied");
+    }
+
+    /** values() streams and spliterators: contents, characteristics, one value under two keys. */
+    static void valueStreams() {
+        LinkedHashMultimap<Object, Object> m = LinkedHashMultimap.create();
+        m.put("k1", "v");
+        m.put("k2", "v");
+        m.put("k1", "w");
+        same("[v, v, w]", m.values().stream().toList(), "values().stream() contents");
+        same(2L, m.values().stream().distinct().count(), "distinct over a value under two keys");
+        same(java.util.Spliterator.ORDERED | java.util.Spliterator.SIZED
+                | java.util.Spliterator.SUBSIZED, m.values().spliterator().characteristics(),
+                "values().spliterator() characteristics");
+        List<Object> seen = new ArrayList<>();
+        m.values().spliterator().forEachRemaining(seen::add);
+        same("[v, v, w]", seen, "values().spliterator() contents");
+    }
+
+    /** create(Multimap) reserves the copied size at once (growth steps would give 112). */
+    static void copyReserved() throws ReflectiveOperationException {
+        java.lang.reflect.Field capacity = LinkedHashMultimap.class.getDeclaredField("capacity");
+        capacity.setAccessible(true);
+        LinkedHashMultimap<Object, Object> source = LinkedHashMultimap.create();
+        for (int i = 0; i < 100; i++) {
+            source.put("k" + (i % 7), i);
+        }
+        LinkedHashMultimap<Object, Object> copy = LinkedHashMultimap.create(source);
+        same(100, capacity.getInt(copy), "a copy reserves its size at once");
+        same(source.entries().toString(), copy.entries().toString(), "a copy keeps the order");
+    }
+
+    /** A forEach whose callback empties a multimap of 100 slots and puts values back ends. */
+    static void forEachEmptied() {
+        LinkedHashMultimap<Object, Object> m = LinkedHashMultimap.create();
+        for (int i = 0; i < 100; i++) {
+            m.put("k" + (i % 3), i);
+        }
+        List<Object> seen = new ArrayList<>();
+        m.forEach((k, v) -> {
+            seen.add(v);
+            if (seen.size() == 1) {
+                m.clear();
+                for (int i = 0; i < 3; i++) {
+                    m.put("n", "n" + i);
+                }
+            }
+        });
+        same("[0]", seen, "forEach ends when its callback empties the multimap");
+    }
+
+    /** Emptying through remove() drops lanes above 64 slots and ends a suspended iteration. */
+    static void emptiedByRemove() throws ReflectiveOperationException {
+        java.lang.reflect.Field capacity = LinkedHashMultimap.class.getDeclaredField("capacity");
+        capacity.setAccessible(true);
+        LinkedHashMultimap<Object, Object> m = LinkedHashMultimap.create();
+        for (int i = 0; i < 100; i++) {
+            m.put("k" + (i % 3), i);
+        }
+        Iterator<Map.Entry<Object, Object>> it = m.entries().iterator();
+        it.next();
+        for (int i = 0; i < 100; i++) {
+            m.remove("k" + (i % 3), i);
+        }
+        same(0, capacity.getInt(m), "lanes above 64 slots dropped when remove() empties");
+        same("k1=1", it.next(), "the entry reached before the removals is still returned");
+        same(false, it.hasNext(), "emptying through remove() then ends the iteration");
+    }
+
+    /** A removed key becomes collectable: a freed slot keeps no key. */
+    static void keyRetention() {
+        LinkedHashMultimap<Object, Object> m = LinkedHashMultimap.create();
+        for (int i = 0; i < 10; i++) {
+            m.put("k" + i, i);
+        }
+        WeakReference<Object> held = putFreshKey(m);
+        m.remove("held key", "v");
+        for (int i = 0; i < 50 && held.get() != null; i++) {
+            System.gc();
+        }
+        same(null, held.get(), "key kept after its removal");
+    }
+
+    static WeakReference<Object> putFreshKey(LinkedHashMultimap<Object, Object> m) {
+        Object key = new String("held key");
+        m.put(key, "v");
+        return new WeakReference<>(key);
+    }
+
+    /** Values colliding in one bucket switch the key's value set to the HashMap fallback. */
+    static void flooding() throws ReflectiveOperationException {
+        LinkedHashMultimap<Object, Object> m = LinkedHashMultimap.create();
+        for (int i = 0; i < 40; i++) {
+            m.put("k", new V(i, 7));
+        }
+        Class<?> base = Class.forName("jdk.m3.collections.guava.collect.AbstractMapBasedMultimap");
+        java.lang.reflect.Method backing = base.getDeclaredMethod("backingMap");
+        backing.setAccessible(true);
+        Object valueSet = ((Map<?, ?>) backing.invoke(m)).get("k");
+        java.lang.reflect.Method delegate = valueSet.getClass().getDeclaredMethod("delegateOrNull");
+        delegate.setAccessible(true);
+        same(true, delegate.invoke(valueSet) != null, "colliding values switch to the fallback");
+        same(40, m.get("k").size(), "every colliding value kept");
+        same(new V(0, 7), m.get("k").iterator().next(), "insertion order kept");
     }
 
     static String scenario(int row) {

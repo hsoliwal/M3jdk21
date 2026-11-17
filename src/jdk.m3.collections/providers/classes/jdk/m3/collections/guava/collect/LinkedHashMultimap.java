@@ -82,15 +82,17 @@ import java.util.function.Consumer;
  * result.
  *
  * <p>The values live in two arrays shared by the multimap, one slot per value, with no entry
- * object. While an iteration of {@code entries()}, {@code values()} or {@code keys()} (also
- * through their spliterators and streams) or a {@code forEach} is suspended, changes made other
- * than through it are seen this way: the entry it returns next is returned even if it was removed
- * meanwhile; if that entry was removed, the entries removed after it before the iteration moves on
- * are skipped (upstream returned them); emptying the multimap, even briefly (as {@code removeAll}
- * or {@code replaceValues} of its only key does), ends the iteration; and if the entry it returns
- * next was removed and its slot taken by a new entry before the iteration moved on, it throws
- * {@link ConcurrentModificationException}. Entries returned by {@code entries()} are {@code
- * AbstractMap.SimpleImmutableEntry} objects rather than entries of this class.
+ * object. The arrays keep their capacity until the multimap empties, and hold at most 306,783,377
+ * values ({@code put} then throws {@link IllegalStateException}). While an iteration of {@code
+ * entries()}, {@code values()} or {@code keys()} (also through their spliterators and streams) is
+ * suspended, or while a {@code forEach} callback runs, changes made other than through it are seen
+ * this way: the entry it returns next is returned even if it was removed meanwhile; if that entry
+ * was removed, the entries removed after it before the iteration moves on are skipped (upstream
+ * returned them); emptying the multimap, even briefly (as {@code removeAll} or {@code
+ * replaceValues} of its only key does), ends the iteration; and if the entry it would return next
+ * was removed and its slot taken by a new entry before the iteration moved on, it throws {@link
+ * ConcurrentModificationException} instead of returning it. Entries returned by {@code entries()}
+ * are {@code AbstractMap.SimpleImmutableEntry} objects rather than entries of this class.
  *
  * <p>See the Guava User Guide article on <a href=
  * "https://github.com/google/guava/wiki/NewCollectionTypesExplained#multimap">{@code Multimap}</a>.
@@ -136,6 +138,7 @@ public final class LinkedHashMultimap<K extends Object, V extends Object>
       LinkedHashMultimap<K, V> create(Multimap<? extends K, ? extends V> multimap) {
     LinkedHashMultimap<K, V> result =
         create(multimap.keySet().size(), DEFAULT_EXPECTED_VALUES_PER_KEY);
+    result.reserve(multimap.size());
     result.putAll(multimap);
     return result;
   }
@@ -145,8 +148,8 @@ public final class LinkedHashMultimap<K extends Object, V extends Object>
    * refs holds the key and the value of slot s at 2s and 2s + 1; ints holds INTS ints of slot s
    * from INTS * s: the smeared hash of the value, the next slot in the bucket of the key's value
    * table, the neighbours in the insertion order of the key's values and in the insertion order of
-   * the whole multimap, and a stamp. There is no entry object per value, and the ints of one slot
-   * share a cache line.
+   * the whole multimap, and a stamp. There is no entry object per value; the ints of one slot are
+   * contiguous (28 bytes).
    *
    * A removed slot keeps its forward links (successor in its value set and in the multimap), so an
    * iteration suspended on it can go on, as upstream's removed entries kept theirs; its key and
@@ -158,7 +161,8 @@ public final class LinkedHashMultimap<K extends Object, V extends Object>
    * through slots freed after it, never through one taken again before it, so skipping freed slots
    * while the head slot's stamp is unchanged is sound. A last-in-first-out free list would break
    * that. The lanes start with one slot and grow by two slots or a quarter, whichever is more (at
-   * most 45 bytes of lanes per value from 13 values on), keep their capacity until the multimap
+   * most 45 bytes of lanes per value from 13 values on while the multimap only grows; a copy
+   * made by create(Multimap) is reserved at once), keep their capacity until the multimap
    * empties (as ArrayList and HashMap keep theirs; renumbering slots would end iterations in
    * progress), and an emptied multimap keeps lanes of up to 64 slots and drops larger ones.
    */
@@ -318,6 +322,18 @@ public final class LinkedHashMultimap<K extends Object, V extends Object>
     refs = newRefs;
     ints = newInts;
     capacity = slots;
+  }
+
+  /** Grows the lanes at once to at least {@code slots} slots, an upper bound known in advance. */
+  private void reserve(int slots) {
+    int wanted = Math.min(slots, MAX_SLOTS);
+    if (wanted > capacity) {
+      Object[] newRefs = Arrays.copyOf(refs, 2 * wanted);
+      int[] newInts = Arrays.copyOf(ints, INTS * wanted);
+      refs = newRefs;
+      ints = newInts;
+      capacity = wanted;
+    }
   }
 
   @SuppressWarnings("unchecked")

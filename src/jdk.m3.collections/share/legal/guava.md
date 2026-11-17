@@ -54,12 +54,14 @@ The source retains its original copyright and license and records this additiona
 `collect.LinkedHashMultimap` stores its values in two arrays shared by the multimap, one slot per value (the key
 and the value in an `Object[]`, the hash and the links in an `int[]`), instead of one `ValueEntry` object each. Its
 public and package-private members, its iteration orders and its serialized form are unchanged. The arrays grow
-by two slots or a quarter and keep their capacity until the multimap empties. While an iteration of `entries()`,
-`values()` or `keys()` (also through their spliterators and streams) or a `forEach` is suspended, changes made
-other than through it are seen this way: the entry it returns next is returned even if it was removed meanwhile
-(as before); if that entry was removed, the entries removed after it are skipped (upstream returned them);
-emptying the multimap, even briefly, ends the iteration; and if the entry it returns next was removed and its
-slot taken by a new entry, it throws `ConcurrentModificationException`. `entries()` returns
+by two slots or a quarter (`create(Multimap)` reserves the copied size at once), keep their capacity until the
+multimap empties, and hold at most 306,783,377 values (`put` then throws `IllegalStateException`; the former class
+was limited by the heap only). While an iteration of `entries()`, `values()` or `keys()` (also through their
+spliterators and streams) is suspended, or while a `forEach` callback runs, changes made other than through it are
+seen this way: the entry it returns next is returned even if it was removed meanwhile (as before); if that entry
+was removed, the entries removed after it are skipped (upstream returned them); emptying the multimap, even
+briefly, ends the iteration; and if the entry it would return next was removed and its slot taken by a new entry,
+it throws `ConcurrentModificationException` instead of returning it. `entries()` returns
 `AbstractMap.SimpleImmutableEntry` objects instead of the class's former `ValueEntry` objects. The source retains
 its original copyright and license and records this modification.
 
