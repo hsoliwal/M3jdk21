@@ -95,7 +95,8 @@ final class Flat3MapReference<K, V> {
         return prior;
     }
 
-    //FLLDCIM: MRL - L075 method split: remove(Object) and removeSlot(int) share the two removal bodies
+    //FLLDCIM: MRL - L075 method split: remove(Object) and removeSlot(int) share the two
+    // removal bodies
     private void removeHashed(int slot) {
         keyLane[slot] = null;
         valueLane[slot] = null;
@@ -136,7 +137,8 @@ final class Flat3MapReference<K, V> {
 
     public void clear() { reset(); }
 
-    //FLLDCIM: MRL - L075 single owner: slot cursor for the Commons facade jdk.m3.collections.apache.M3Flat3Map
+    //FLLDCIM: MRL - L075 single owner: slot cursor for the Commons facade
+    // jdk.m3.collections.apache.M3Flat3Map
     /**
      * Returns the first live slot at or after {@code from}, or -1 when there is none. Ascending
      * slot
