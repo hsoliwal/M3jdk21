@@ -27,7 +27,7 @@ import org.junit.jupiter.api.Test;
  * return value, and the batch arrays untouched.
  */
 //FLLDCIM: LEETCODIFY — differential proof for PackedLongLongSortedMap.putAll
-class PackedLongLongSortedMapPutAllTest {
+class PackedSortedMapPutAllTest {
 
     private static void compare(PackedLongLongSortedMap map, PackedLongLongSortedMap twin,
             long[] keys, long[] values, String at) {
