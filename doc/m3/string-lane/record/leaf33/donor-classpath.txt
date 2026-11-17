@@ -1,0 +1,1 @@
+C:/Users/hsoliwal/.m2/repository/com/google/guava/guava/33.7.2-jre/guava-33.7.2-jre.jar;C:/Users/hsoliwal/.m2/repository/org/freemarker/freemarker/2.3.35/freemarker-2.3.35.jar;J:/m3-scratch/donors-20261117/jars/unbescape-1.1.8.RELEASE.jar

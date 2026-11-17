@@ -169,3 +169,16 @@ unescapeProperties()	org.unbescape:unbescape:1.1.8.RELEASE PropertiesEscape.unes
 translateEscapes(EscapeSyntax) FTL	org.freemarker:freemarker:2.3.35 freemarker.template.utility.StringUtil.FTLStringLiteralDec(String) (ParseException read as IllegalArgumentException)
 translateEscapes(EscapeSyntax) ST	org.antlr:ST4:4.3.4 org.stringtemplate.v4.compiler.STLexer.mSTRING (STRING token of <"body">, antlr-runtime 3.5.3; lexer error read as IllegalArgumentException)
 EscapeSyntax	public nested enum of the two proven syntaxes (FTL, ST); catalogue TEMPLATE_ENGINES_OPERATIONS.tsv rows 145 and 147
+encodePercent()	CPython 3.12.6 urllib.parse.quote(s, safe=''); RFC 3986 section 2.3 unreserved set; Guava 33.7.2 PercentEscaper("-._~", false)
+encodePercent(String)	CPython 3.12.6 urllib.parse.quote(s, safe); Guava PercentEscaper(safe + "-._~", false); Go 1.26.2 url.PathEscape = encodePercent("$&+:=@"); Guava urlPathSegmentEscaper / unbescape 1.1.8 escapeUriPathSegment = encodePercent("!$&'()*+,;=:@"); Guava urlFragmentEscaper / unbescape escapeUriFragmentId = encodePercent("!$&'()*+,;=:@/?")
+encodePercentPlus()	CPython 3.12.6 urllib.parse.quote_plus(s); Go 1.26.2 url.QueryEscape; Guava PercentEscaper("-._~", true)
+encodePercentPlus(String)	CPython 3.12.6 urllib.parse.quote_plus(s, safe)
+decodePercent()	CPython 3.12.6 urllib.parse.unquote(s) (encoding='utf-8', errors='replace')
+decodePercentPlus()	CPython 3.12.6 urllib.parse.unquote_plus(s)
+encodeUriComponent()	ECMAScript encodeURIComponent (node 25.9.0, V8 14.1); FreeMarker 2.3.35 ?url / StringUtil.URLEnc(s, "UTF-8") on well-formed text; URIError -> IllegalArgumentException
+encodeUri()	ECMAScript encodeURI (node 25.9.0); URIError -> IllegalArgumentException
+decodeUriComponent()	ECMAScript decodeURIComponent (node 25.9.0); URIError -> IllegalArgumentException
+decodeUri()	ECMAScript decodeURI (node 25.9.0); URIError -> IllegalArgumentException
+toWellFormed()	ECMAScript String.prototype.toWellFormed (node 25.9.0)
+utf8Length()	Guava 33.7.2 Utf8.encodedLength; CPython len(s.encode('utf-8')) (UnicodeEncodeError -> IllegalArgumentException)
+rot13()	CPython 3.12.6 codecs.encode(s, 'rot13'); PHP str_rot13 (catalogue row, no PHP oracle run)

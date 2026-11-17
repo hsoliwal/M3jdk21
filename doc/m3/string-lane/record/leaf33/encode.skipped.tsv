@@ -1,0 +1,4 @@
+donor_file	method	reason	statement
+Utf8Test.java	testEncodedLength_validStrings2	LOCAL_STATE:codePoints,i,j,randomCodePoint,repro,rnd,sb,trial,utf8Length,utf8Lengths	for (int trial = 0; trial < 100; trial++) { sb.setLength(0); int utf8Length = 0; for (int i = 0; i < 6; i++) { Integer randomCodePoint = codePoints[rnd.nextInt(codePoints.length)]; sb.appendCodePoint(
+UrlEscaperTesting_pathSegment.java	assertBasicUrlEscaperExceptPercent	NULL_RECEIVER	assertThrows(NullPointerException.class, () -> StringUtils.encodePercent((String) null, "!$&'()*+,;=:@"))
+UrlEscaperTesting_fragment.java	assertBasicUrlEscaperExceptPercent	NULL_RECEIVER	assertThrows(NullPointerException.class, () -> StringUtils.encodePercent((String) null, "!$&'()*+,;=:@/?"))

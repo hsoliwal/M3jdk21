@@ -1,0 +1,3 @@
+# ENCODE family, Guava 33.7.2 Utf8Test, UrlEscapersTest and UrlEscaperTesting (rewritten to StringUtils. by tools/port_guava_donor.py): donor op, mode, java op, null rule
+encodedLength	INSTANCE	utf8Length	NPE_ARG
+encodePercent	INSTANCE	encodePercent	NPE_ARG

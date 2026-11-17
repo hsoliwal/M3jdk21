@@ -1,0 +1,4 @@
+| this PR (`leaf32/`) |
+---
+| M3jdk21 #3266, merged `57f56502b465` (`leaf32/`) |
+| ENCODE family (superset of JavaScript, CPython 3.12 urllib.parse, Go net/url, Guava UrlEscapers, unbescape and FreeMarker URL escapes): `encodePercent()` and `encodePercent(String safe)` (RFC 3986 unreserved; Python `quote`), `encodePercentPlus()`/`encodePercentPlus(String)` (Python `quote_plus`), `decodePercent()`, `decodePercentPlus()` (Python `unquote`/`unquote_plus`, errors=replace per Unicode 3.9), `encodeUriComponent()`, `encodeUri()`, `decodeUriComponent()`, `decodeUri()` (JavaScript; a lone surrogate throws IllegalArgumentException), `toWellFormed()` (JavaScript), `utf8Length()`, `rot13()` | 13 public methods | this PR (`leaf33/`) |

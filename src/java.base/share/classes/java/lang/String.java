@@ -9657,6 +9657,599 @@ public final class String
     }
 
     /**
+     * Returns this string percent-encoded as RFC 3986 section 2 defines it for data: each
+     * unreserved character ({@code A-Z a-z 0-9 - . _ ~}) is kept, and every other character is
+     * written as the {@code %HH} escapes of its UTF-8 bytes, with upper-case hex digits. The
+     * string is read as code points: a surrogate pair is one character.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API; Python's
+     * {@code urllib.parse.quote(s, safe='')} has the same result.
+     * {@link java.net.URLEncoder} encodes HTML form data instead.
+     *
+     * @return  this string percent-encoded; this string when every character is unreserved.
+     * @throws  IllegalArgumentException if this string holds a lone surrogate.
+     * @since   21
+     */
+    public String encodePercent() {
+        return percentEncoded(UNRESERVED_LOW, UNRESERVED_HIGH, false);
+    }
+
+    /**
+     * Returns this string percent-encoded as {@link #encodePercent()} encodes it, except that
+     * each ASCII character of {@code safe} is kept as well; a character of {@code safe} outside
+     * ASCII is ignored.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API; Python's
+     * {@code urllib.parse.quote(s, safe)} has the same result. With {@code safe} equal to
+     * {@code "$&+:=@"} it is Go's {@code url.PathEscape}; with {@code "!$&'()*+,;=:@"} (the
+     * characters of an RFC 3986 path segment) it is Guava's {@code urlPathSegmentEscaper()}, and
+     * with {@code "!$&'()*+,;=:@/?"} its {@code urlFragmentEscaper()}.
+     *
+     * @param   safe   the characters to keep besides the unreserved ones.
+     * @return  this string percent-encoded; this string when every character is kept.
+     * @throws  NullPointerException if {@code safe} is {@code null}.
+     * @throws  IllegalArgumentException if this string holds a lone surrogate.
+     * @since   21
+     */
+    public String encodePercent(String safe) {
+        char[] kept = java.util.Objects.requireNonNull(safe, "safe").toCharArray();
+        return percentEncoded(UNRESERVED_LOW | asciiMask(kept, 0),
+                UNRESERVED_HIGH | asciiMask(kept, 64), false);
+    }
+
+    /**
+     * Returns this string percent-encoded as {@link #encodePercent()} encodes it, except that
+     * each space {@code U+0020} becomes a plus sign {@code '+'}.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API; Python's
+     * {@code urllib.parse.quote_plus(s)} and Go's {@code url.QueryEscape} have the same result.
+     * {@link java.net.URLEncoder} differs: it keeps {@code '*'} and encodes {@code '~'}.
+     *
+     * @return  this string percent-encoded with spaces as plus signs; this string when every
+     *          character is unreserved.
+     * @throws  IllegalArgumentException if this string holds a lone surrogate.
+     * @since   21
+     */
+    public String encodePercentPlus() {
+        return percentEncoded(UNRESERVED_LOW, UNRESERVED_HIGH, true);
+    }
+
+    /**
+     * Returns this string percent-encoded as {@link #encodePercent(String)} encodes it with
+     * {@code safe}, except that each space {@code U+0020} becomes a plus sign {@code '+'}, also
+     * when {@code safe} holds a space.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API; Python's
+     * {@code urllib.parse.quote_plus(s, safe)} has the same result.
+     *
+     * @param   safe   the characters to keep besides the unreserved ones.
+     * @return  this string percent-encoded with spaces as plus signs; this string when every
+     *          character is kept.
+     * @throws  NullPointerException if {@code safe} is {@code null}.
+     * @throws  IllegalArgumentException if this string holds a lone surrogate.
+     * @since   21
+     */
+    public String encodePercentPlus(String safe) {
+        char[] kept = java.util.Objects.requireNonNull(safe, "safe").toCharArray();
+        return percentEncoded(UNRESERVED_LOW | asciiMask(kept, 0),
+                UNRESERVED_HIGH | asciiMask(kept, 64), true);
+    }
+
+    /**
+     * Returns this string with its percent escapes decoded: each {@code '%'} followed by two hex
+     * digits of either case gives the byte they spell, and the bytes of each run of adjacent
+     * escapes are decoded as UTF-8, each maximal ill-formed subpart (Unicode section 3.9)
+     * replaced by one {@code U+FFFD}. A {@code '%'} not followed by two hex digits, and every
+     * other character, is kept as it is.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API; Python's
+     * {@code urllib.parse.unquote(s)} has the same result. It never fails;
+     * {@link #decodeUriComponent()} rejects a malformed escape instead.
+     *
+     * @return  this string with its escapes decoded; this string when it has none.
+     * @since   21
+     */
+    public String decodePercent() {
+        return percentDecoded(false);
+    }
+
+    /**
+     * Returns this string with each plus sign {@code '+'} changed to a space {@code U+0020} and
+     * its percent escapes then decoded as {@link #decodePercent()} decodes them, so an escape
+     * {@code %2B} gives a plus sign.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API; Python's
+     * {@code urllib.parse.unquote_plus(s)} has the same result. {@link java.net.URLDecoder}
+     * differs: it rejects a {@code '%'} not followed by two hex digits.
+     *
+     * @return  this string with plus signs as spaces and its escapes decoded; this string when it
+     *          has neither.
+     * @since   21
+     */
+    public String decodePercentPlus() {
+        return percentDecoded(true);
+    }
+
+    /**
+     * Returns this string encoded as ECMAScript's {@code encodeURIComponent} encodes it: each
+     * character of {@code A-Z a-z 0-9 - _ . ! ~ * ' ( )} is kept, and every other character is
+     * written as the {@code %HH} escapes of its UTF-8 bytes, with upper-case hex digits. The
+     * string is read as code points.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API. Where ECMAScript throws a
+     * {@code URIError} for a lone surrogate, this method throws an
+     * {@code IllegalArgumentException}.
+     *
+     * @return  this string encoded as a URI component; this string when every character is kept.
+     * @throws  IllegalArgumentException if this string holds a lone surrogate.
+     * @since   21
+     */
+    public String encodeUriComponent() {
+        return percentEncoded(URI_COMPONENT_LOW, URI_COMPONENT_HIGH, false);
+    }
+
+    /**
+     * Returns this string encoded as ECMAScript's {@code encodeURI} encodes it: as
+     * {@link #encodeUriComponent()} encodes it, except that the reserved characters
+     * {@code ; / ? : @ & = + $ ,} and {@code #} are kept as well.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API. Where ECMAScript throws a
+     * {@code URIError} for a lone surrogate, this method throws an
+     * {@code IllegalArgumentException}.
+     *
+     * @return  this string encoded as a URI; this string when every character is kept.
+     * @throws  IllegalArgumentException if this string holds a lone surrogate.
+     * @since   21
+     */
+    public String encodeUri() {
+        return percentEncoded(URI_COMPONENT_LOW | URI_RESERVED_LOW,
+                URI_COMPONENT_HIGH | URI_RESERVED_HIGH, false);
+    }
+
+    /**
+     * Returns this string decoded as ECMAScript's {@code decodeURIComponent} decodes it: each
+     * {@code '%'} must start a run of escapes {@code %HH} (two hex digits of either case) that
+     * spells one character in UTF-8, which replaces the run; every other character is kept as
+     * it is.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API. Where ECMAScript throws a
+     * {@code URIError}, this method throws an {@code IllegalArgumentException}.
+     *
+     * @return  this string with its escapes decoded; this string when it has none.
+     * @throws  IllegalArgumentException if a {@code '%'} is not followed by two hex digits, or
+     *          the escapes starting there do not spell a character in UTF-8 (a lone or
+     *          overlong sequence, a surrogate, or a value above {@code U+10FFFF}).
+     * @since   21
+     */
+    public String decodeUriComponent() {
+        return uriDecoded(false);
+    }
+
+    /**
+     * Returns this string decoded as ECMAScript's {@code decodeURI} decodes it: as
+     * {@link #decodeUriComponent()} decodes it, except that an escape spelling one of the
+     * reserved characters {@code ; / ? : @ & = + $ ,} or {@code #} is kept as it is written.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API. Where ECMAScript throws a
+     * {@code URIError}, this method throws an {@code IllegalArgumentException}.
+     *
+     * @return  this string with its escapes decoded; this string when nothing is decoded.
+     * @throws  IllegalArgumentException if a {@code '%'} is not followed by two hex digits, or
+     *          the escapes starting there do not spell a character in UTF-8.
+     * @since   21
+     */
+    public String decodeUri() {
+        return uriDecoded(true);
+    }
+
+    /**
+     * Returns this string with each lone surrogate replaced by the replacement character
+     * {@code U+FFFD}; a surrogate pair is kept.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API; ECMAScript's
+     * {@code String.prototype.toWellFormed} has the same result.
+     *
+     * @return  this string without lone surrogates; this string when it has none.
+     * @since   21
+     */
+    public String toWellFormed() {
+        M3String storage = m3();
+        M3StringFacts facts = storage == null ? null : storage.factsIfPrepared();
+        if (facts != null && facts.latin1 || storage == null && isLatin1()) return this;
+        int length = length();
+        StringBuilder out = null;
+        int copied = 0;
+        char[] window = new char[Math.min(length, SCAN_WINDOW)];
+        for (int from = 0; from < length; ) {
+            int to = Math.min(length, from + window.length);
+            getChars(from, to, window, 0);
+            int count = to - from;
+            if (to < length && count > 1 && Character.isHighSurrogate(window[count - 1])) count--;
+            for (int at = 0; at < count; at++) {
+                char unit = window[at];
+                if (!Character.isSurrogate(unit)) continue;
+                if (Character.isHighSurrogate(unit) && at + 1 < count
+                        && Character.isLowSurrogate(window[at + 1])) {
+                    at++;
+                    continue;
+                }
+                if (out == null) out = new StringBuilder(length);
+                out.append(this, copied, from + at).append((char) 0xFFFD);
+                copied = from + at + 1;
+            }
+            from += count;
+        }
+        return out == null ? this : out.append(this, copied, length).toString();
+    }
+
+    /**
+     * Returns the number of bytes of this string in UTF-8: one for each character below
+     * {@code U+0080}, two below {@code U+0800}, three for the rest of the Basic Multilingual
+     * Plane and four for a surrogate pair.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API; Guava's
+     * {@code Utf8.encodedLength} has the same result, and so has Python's
+     * {@code len(s.encode('utf-8'))}, which also rejects a lone surrogate.
+     *
+     * @return  the length of this string in UTF-8.
+     * @throws  IllegalArgumentException if this string holds a lone surrogate, or its length in
+     *          UTF-8 is above {@link Integer#MAX_VALUE}.
+     * @since   21
+     */
+    public int utf8Length() {
+        M3String storage = m3();
+        M3StringFacts facts = storage == null ? null : storage.factsIfPrepared();
+        int length = length();
+        if (facts != null && facts.ascii) return length;
+        long bytes = length;
+        if (storage == null && isLatin1()) {
+            byte[] units = value;
+            for (int index = 0; index < length; index++) {
+                if (units[index] < 0) bytes++;
+            }
+            return utf8LengthOf(bytes);
+        }
+        char[] window = new char[Math.min(length, SCAN_WINDOW)];
+        for (int from = 0; from < length; ) {
+            int to = Math.min(length, from + window.length);
+            getChars(from, to, window, 0);
+            int count = to - from;
+            if (to < length && count > 1 && Character.isHighSurrogate(window[count - 1])) count--;
+            for (int at = 0; at < count; at++) {
+                char unit = window[at];
+                if (unit < 0x80) continue;
+                if (unit < 0x800 || !Character.isSurrogate(unit)) {
+                    bytes += unit < 0x800 ? 1 : 2;
+                } else if (Character.isHighSurrogate(unit) && at + 1 < count
+                        && Character.isLowSurrogate(window[at + 1])) {
+                    bytes += 2;
+                    at++;
+                } else {
+                    throw unpairedSurrogate(from + at);
+                }
+            }
+            from += count;
+        }
+        return utf8LengthOf(bytes);
+    }
+
+    /**
+     * Returns this string with each ASCII letter moved 13 places along the alphabet, keeping its
+     * case ({@code 'a'} and {@code 'n'} swap, as do {@code 'A'} and {@code 'N'}); every other
+     * character is kept. Applying it twice gives this string back.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API; Python's
+     * {@code codecs.encode(s, 'rot13')} has the same result.
+     *
+     * @return  this string in ROT13; this string when it has no ASCII letter.
+     * @since   21
+     */
+    public String rot13() {
+        if (asciiWithout(M3StringFacts.REGEX_ALPHA)) return this;
+        int first = firstUnitIn(0L, ASCII_LETTERS_HIGH, false);
+        if (first < 0) return this;
+        char[] units = toCharArray();
+        for (int index = first; index < units.length; index++) {
+            int lower = units[index] | 0x20;
+            if (lower >= 'a' && lower <= 'z') {
+                units[index] = (char) (units[index] + (lower <= 'm' ? 13 : -13));
+            }
+        }
+        return new String(units);
+    }
+
+    /** The RFC 3986 unreserved characters {@code A-Z a-z 0-9 - . _ ~}, units 0 to 63. */
+    private static final long UNRESERVED_LOW = 0x03FF600000000000L;
+    /** The RFC 3986 unreserved characters, units 64 to 127. */
+    private static final long UNRESERVED_HIGH = 0x47FFFFFE87FFFFFEL;
+    /** The characters {@code encodeURIComponent} keeps, {@code A-Z a-z 0-9 - _ . ! ~ * ' ( )}. */
+    private static final long URI_COMPONENT_LOW = 0x03FF678200000000L;
+    /** The characters {@code encodeURIComponent} keeps, units 64 to 127. */
+    private static final long URI_COMPONENT_HIGH = 0x47FFFFFE87FFFFFEL;
+    /** The reserved characters {@code ; / ? : @ & = + $ , #} of {@code encodeURI}. */
+    private static final long URI_RESERVED_LOW = 0xAC00985800000000L;
+    /** The reserved characters of {@code encodeURI}, units 64 to 127. */
+    private static final long URI_RESERVED_HIGH = 0x0000000000000001L;
+    /** The ASCII letters, units 64 to 127 (none is below 64). */
+    private static final long ASCII_LETTERS_HIGH = 0x07FFFFFE07FFFFFEL;
+
+    /**
+     * The percent encoders: a unit in the ASCII set given by {@code kept} (units 0 to 63) and
+     * {@code high} (units 64 to 127) is kept, except that a space becomes {@code '+'} when
+     * {@code plus}; every other code point is written
+     * as the upper-case {@code %HH} escapes of its UTF-8 bytes. Prepared M3 facts answer when
+     * they show an ASCII string of word characters, which every set keeps. Otherwise the first
+     * unit to encode is found on the bytes of a flat Latin-1 string or in bulk windows; the
+     * clean prefix is copied as one range, and the rest is read in bulk windows, a surrogate pair
+     * never split between two windows, kept runs copied as ranges.
+     */
+    private String percentEncoded(long kept, long high, boolean plus) {
+        M3String storage = m3();
+        M3StringFacts facts = storage == null ? null : storage.factsIfPrepared();
+        if (facts != null && facts.ascii
+                && (facts.regexAllClasses & M3StringFacts.REGEX_WORD) != 0) {
+            return this;
+        }
+        long low = plus ? kept & ~(1L << ' ') : kept;
+        int first = firstUnitIn(~low, ~high, true);
+        if (first < 0) return this;
+        int length = length();
+        StringBuilder out = new StringBuilder(length + 16).append(this, 0, first);
+        int copied = first;
+        char[] window = new char[Math.min(length - first, SCAN_WINDOW)];
+        for (int from = first; from < length; ) {
+            int to = Math.min(length, from + window.length);
+            getChars(from, to, window, 0);
+            int count = to - from;
+            if (to < length && count > 1 && Character.isHighSurrogate(window[count - 1])) count--;
+            for (int at = 0; at < count; at++) {
+                char unit = window[at];
+                if (unit < 0x80 && inMask(unit, low, high)) continue;
+                out.append(this, copied, from + at);
+                copied = from + at + 1;
+                if (unit == ' ' && plus) {
+                    out.append('+');
+                } else if (!Character.isSurrogate(unit)) {
+                    appendPercentUtf8(out, unit);
+                } else if (Character.isHighSurrogate(unit) && at + 1 < count
+                        && Character.isLowSurrogate(window[at + 1])) {
+                    appendPercentUtf8(out, Character.toCodePoint(unit, window[++at]));
+                    copied++;
+                } else {
+                    throw unpairedSurrogate(from + at);
+                }
+            }
+            from += count;
+        }
+        return out.append(this, copied, length).toString();
+    }
+
+    /**
+     * The index of the first unit of this string that is in the ASCII set given by {@code low}
+     * and {@code high}, or outside ASCII when {@code wide}; -1 when there is none. A flat
+     * Latin-1 string is read on its bytes, UTF-16 and M3 storage in bulk windows.
+     */
+    private int firstUnitIn(long low, long high, boolean wide) {
+        int length = length();
+        if (m3() == null && isLatin1()) {
+            byte[] units = value;
+            for (int index = 0; index < length; index++) {
+                int unit = units[index] & 0xFF;
+                if (unit < 0x80 ? inMask((char) unit, low, high) : wide) return index;
+            }
+            return -1;
+        }
+        char[] window = new char[Math.min(length, SCAN_WINDOW)];
+        for (int from = 0; from < length; from += window.length) {
+            int count = Math.min(window.length, length - from);
+            getChars(from, from + count, window, 0);
+            for (int at = 0; at < count; at++) {
+                char unit = window[at];
+                if (unit < 0x80 ? inMask(unit, low, high) : wide) return from + at;
+            }
+        }
+        return -1;
+    }
+
+    /** Appends the upper-case {@code %HH} escapes of the UTF-8 bytes of {@code point}. */
+    private static void appendPercentUtf8(StringBuilder out, int point) {
+        if (point < 0x80) {
+            appendPercentByte(out, point);
+        } else if (point < 0x800) {
+            appendPercentByte(out, 0xC0 | (point >> 6));
+            appendPercentByte(out, 0x80 | (point & 0x3F));
+        } else if (point < 0x10000) {
+            appendPercentByte(out, 0xE0 | (point >> 12));
+            appendPercentByte(out, 0x80 | ((point >> 6) & 0x3F));
+            appendPercentByte(out, 0x80 | (point & 0x3F));
+        } else {
+            appendPercentByte(out, 0xF0 | (point >> 18));
+            appendPercentByte(out, 0x80 | ((point >> 12) & 0x3F));
+            appendPercentByte(out, 0x80 | ((point >> 6) & 0x3F));
+            appendPercentByte(out, 0x80 | (point & 0x3F));
+        }
+    }
+
+    /** Appends the escape {@code %HH} of the byte {@code value}, in upper-case hex. */
+    private static void appendPercentByte(StringBuilder out, int value) {
+        out.append('%').append(uppercaseHex(value >> 4)).append(uppercaseHex(value & 0xF));
+    }
+
+    /** The upper-case hex digit of {@code digit}, 0 to 15. */
+    private static char uppercaseHex(int digit) {
+        return (char) (digit < 10 ? '0' + digit : 'A' - 10 + digit);
+    }
+
+    /** The value of the ASCII hex digit {@code unit} of either case, or -1. */
+    private static int hexDigitValue(char unit) {
+        if (unit >= '0' && unit <= '9') return unit - '0';
+        int lower = unit | 0x20;
+        return lower >= 'a' && lower <= 'f' ? lower - 'a' + 10 : -1;
+    }
+
+    /** The byte of the escape {@code %HH} at {@code index}, or -1 when no escape starts there. */
+    private int escapedByteAt(int index) {
+        if (index + 2 >= length() || charAt(index) != '%') return -1;
+        int high = hexDigitValue(charAt(index + 1));
+        int low = hexDigitValue(charAt(index + 2));
+        return high < 0 || low < 0 ? -1 : high << 4 | low;
+    }
+
+    /**
+     * {@link #decodePercent()}, and {@link #decodePercentPlus()} when {@code plus}. Prepared M3
+     * facts answer when they show no {@code '%'} (nor {@code '+'}); otherwise the next of each
+     * is found with {@link #indexOf(int, int)}, the text between copied as one range. The bytes
+     * of adjacent escapes are held and decoded together once another character or the end
+     * follows; an ASCII character can never continue a UTF-8 sequence.
+     */
+    private String percentDecoded(boolean plus) {
+        boolean percent = mayContainUnit('%');
+        if (!percent && !(plus && mayContainUnit('+'))) return this;
+        int length = length();
+        int nextPercent = percent ? indexOf('%') : -1;
+        int nextPlus = plus ? indexOf('+') : -1;
+        StringBuilder out = null;
+        byte[] held = null;
+        int count = 0;
+        int copied = 0;
+        while (nextPercent >= 0 || nextPlus >= 0) {
+            boolean space = nextPercent < 0 || nextPlus >= 0 && nextPlus < nextPercent;
+            int at = space ? nextPlus : nextPercent;
+            int value = space ? ' ' : escapedByteAt(at);
+            int end = space ? at + 1 : at + 3;
+            if (space) {
+                nextPlus = indexOf('+', end);
+            } else if (value < 0) {
+                nextPercent = indexOf('%', at + 1);
+                continue;
+            } else {
+                nextPercent = indexOf('%', end);
+            }
+            if (out == null) out = new StringBuilder(length);
+            if (at > copied || value < 0x80) {
+                count = heldBytesDecoded(out, held, count);
+                out.append(this, copied, at);
+            }
+            if (value < 0x80) {
+                out.append((char) value);
+            } else {
+                if (held == null) held = new byte[(length - at) / 3];
+                held[count++] = (byte) value;
+            }
+            copied = end;
+        }
+        if (out == null) return this;
+        heldBytesDecoded(out, held, count);
+        return out.append(this, copied, length).toString();
+    }
+
+    /**
+     * Appends the first {@code count} bytes of {@code held}, all at least {@code 0x80}, decoded
+     * as UTF-8 with each maximal ill-formed subpart replaced by {@code U+FFFD}; returns 0.
+     */
+    private static int heldBytesDecoded(StringBuilder out, byte[] held, int count) {
+        for (int at = 0; at < count; ) {
+            int lead = held[at] & 0xFF;
+            int need = lead < 0xC2 ? -1 : lead < 0xE0 ? 1 : lead < 0xF0 ? 2 : lead < 0xF5 ? 3 : -1;
+            int next = at + 1;
+            int point = lead & (0x3F >> Math.max(need, 0));
+            int least = lead == 0xE0 ? 0xA0 : lead == 0xF0 ? 0x90 : 0x80;
+            int most = lead == 0xED ? 0x9F : lead == 0xF4 ? 0x8F : 0xBF;
+            boolean whole = need > 0;
+            for (int k = 0; k < need; k++, next++) {
+                int unit = next < count ? held[next] & 0xFF : -1;
+                if (unit < (k == 0 ? least : 0x80) || unit > (k == 0 ? most : 0xBF)) {
+                    whole = false;
+                    break;
+                }
+                point = point << 6 | (unit & 0x3F);
+            }
+            if (whole) {
+                out.appendCodePoint(point);
+            } else {
+                out.append((char) 0xFFFD);
+            }
+            at = next;
+        }
+        return 0;
+    }
+
+    /**
+     * {@link #decodeUriComponent()}, and {@link #decodeUri()} when {@code keepReserved}: the
+     * ECMAScript Decode operation. Prepared M3 facts answer when they show no {@code '%'};
+     * otherwise each {@code '%'} is found with {@link #indexOf(int, int)} and the text between
+     * escapes is copied as one range.
+     */
+    private String uriDecoded(boolean keepReserved) {
+        if (!mayContainUnit('%')) return this;
+        int length = length();
+        StringBuilder out = null;
+        int copied = 0;
+        for (int at = indexOf('%'); at >= 0; ) {
+            int lead = escapedByteAt(at);
+            if (lead < 0) throw malformedEscape(at);
+            int end = at + 3;
+            int point = lead;
+            if (lead < 0x80) {
+                if (keepReserved && inMask((char) lead, URI_RESERVED_LOW, URI_RESERVED_HIGH)) {
+                    at = indexOf('%', end);
+                    continue;
+                }
+            } else {
+                int bytes = Integer.numberOfLeadingZeros(~lead & 0xFF) - 24;
+                if (bytes == 1 || bytes > 4) throw malformedEscape(at);
+                point = lead & (0x7F >> bytes);
+                for (int k = 1; k < bytes; k++, end += 3) {
+                    int next = escapedByteAt(end);
+                    if ((next & 0xC0) != 0x80) throw malformedEscape(at);
+                    point = point << 6 | (next & 0x3F);
+                }
+                int least = bytes == 2 ? 0x80 : bytes == 3 ? 0x800 : 0x10000;
+                if (point < least || point > Character.MAX_CODE_POINT
+                        || bytes == 3 && Character.isSurrogate((char) point)) {
+                    throw malformedEscape(at);
+                }
+            }
+            if (out == null) out = new StringBuilder(length);
+            out.append(this, copied, at).appendCodePoint(point);
+            copied = end;
+            at = indexOf('%', end);
+        }
+        return out == null ? this : out.append(this, copied, length).toString();
+    }
+
+    /** The exception for a lone surrogate at {@code index}. */
+    private static IllegalArgumentException unpairedSurrogate(int index) {
+        return new IllegalArgumentException("Unpaired surrogate at index " + index);
+    }
+
+    /** The exception for an escape at {@code index} that does not decode. */
+    private static IllegalArgumentException malformedEscape(int index) {
+        return new IllegalArgumentException("Malformed percent escape at index " + index);
+    }
+
+    /** {@code bytes} as the length of a string in UTF-8. */
+    private static int utf8LengthOf(long bytes) {
+        if (bytes > Integer.MAX_VALUE) {
+            throw new IllegalArgumentException("UTF-8 length does not fit in int: " + bytes);
+        }
+        return (int) bytes;
+    }
+
+    /**
      * Returns true if and only if this string contains the specified
      * sequence of char values.
      *

@@ -1,0 +1,25 @@
+method_texts_verbatim_in_head	11
+lint	javac -Xlint:all,-this-escape -Werror: no warnings
+corpus	enc_texts	109548	safe_texts	22807	safes	11	dec_texts	112035
+python 3.12.6 enc_texts 109548 safes 11 safe_texts 22807 dec_texts 112035
+node v25.9.0 v8 14.1.146.11-node.25 enc_texts 109548 dec_texts 112035
+go go1.26.2 enc_texts 109548 well_formed 92440
+== EncodeFamilyProof flat -XX:+CompactStrings
+checks	71	enc_texts	109548	safe_texts	22807	dec_texts	112035	code_points	1114112
+RESULT	PASS	failures=0
+== EncodeFamilyProof flat -XX:-CompactStrings
+checks	71	enc_texts	109548	safe_texts	22807	dec_texts	112035	code_points	1114112
+RESULT	PASS	failures=0
+== EncodeFamilyProof m3-facts -XX:+CompactStrings
+checks	71	enc_texts	109548	safe_texts	22807	dec_texts	112035	code_points	1114112
+RESULT	PASS	failures=0
+== EncodeFamilyProof m3-facts -XX:-CompactStrings
+checks	71	enc_texts	109548	safe_texts	22807	dec_texts	112035	code_points	1114112
+RESULT	PASS	failures=0
+== EncodeFamilyProof m3-scan -XX:+CompactStrings
+checks	71	enc_texts	109548	safe_texts	22807	dec_texts	112035	code_points	1114112
+RESULT	PASS	failures=0
+== EncodeFamilyProof m3-scan -XX:-CompactStrings
+checks	71	enc_texts	109548	safe_texts	22807	dec_texts	112035	code_points	1114112
+RESULT	PASS	failures=0
+proof exit 0
