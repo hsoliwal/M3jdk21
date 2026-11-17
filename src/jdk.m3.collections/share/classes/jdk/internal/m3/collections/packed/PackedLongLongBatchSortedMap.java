@@ -27,13 +27,18 @@ import java.util.Objects;
  *
  * <p>Hot new-key insertion appends to primitive pending lanes. Ordered operations flush by sorting
  * key/value lanes together and backward-merging into the dense sorted lanes. No mapping object is
- * retained. Pending lookup is O(batchSize); dense lookup is O(log n).
+ * retained. Pending lookup scans up to 32 keys, then probes a lane-ordinal slot index
+ * (power-of-two mask, linear probe, load at most 1/2): expected O(1), worst case O(pending).
+ * Dense lookup is O(log n).
  *
  * <p>Lineage: absorbed from Synexia {@code m3-common/src/main/java/jdk/internal/m3/common/collections/PackedLongLongBatchSortedMap.java}
  * blob {@code 4a70383f7d2e73e00893f00e8061c4f269182beb} at com.synexia develop {@code 5ab05fd05653} by
  * RELOCATE_M3_OWNER v4 (U1 batch (v6): identifiers and package only; bytecode equal to the source modulo names).
  */
 public final class PackedLongLongBatchSortedMap implements LongLongSortedMap {
+    private static final int[] NO_SLOTS = new int[0];
+    private static final int PENDING_SCAN_LIMIT = 32;
+    private static final int MAX_INDEXED_PENDING = 1 << 29;
     private long[] sortedKeys;
     private long[] sortedValues;
     private int sortedSize;
@@ -41,6 +46,9 @@ public final class PackedLongLongBatchSortedMap implements LongLongSortedMap {
     private long[] pendingValues;
     private int pendingSize;
     private boolean pendingOrdered = true;
+    // Lane-ordinal slot index over pendingKeys[0, pendingSize); trusted only while pendingIndexed.
+    private int[] pendingSlots = NO_SLOTS;
+    private boolean pendingIndexed;
     private final int batchSize;
     private final LongLongPredicate admission;
     private int callbacks;
@@ -81,9 +89,7 @@ public final class PackedLongLongBatchSortedMap implements LongLongSortedMap {
         int pending = pendingIndex(key);
         if (pending >= 0) { pendingValues[pending] = value; return false; }
 
-        ensurePendingCapacity(PackedArrayCapacity.required(pendingSize, 1));
-        if (pendingSize > 0 && pendingKeys[pendingSize - 1] > key) pendingOrdered = false;
-        pendingKeys[pendingSize] = key; pendingValues[pendingSize] = value; pendingSize++;
+        appendPending(key, value);
         if (pendingSize >= batchSize) flush();
         return true;
     }
@@ -125,13 +131,7 @@ public final class PackedLongLongBatchSortedMap implements LongLongSortedMap {
         }
         int pending = pendingIndex(key);
         if (pending < 0) return false;
-        int moved = pendingSize - pending - 1;
-        if (moved > 0) {
-            System.arraycopy(pendingKeys, pending + 1, pendingKeys, pending, moved);
-            System.arraycopy(pendingValues, pending + 1, pendingValues, pending, moved);
-        }
-        pendingSize--;
-        if (pendingSize < 2) pendingOrdered = true;
+        removePendingAt(pending);
         return true;
     }
 
@@ -139,10 +139,18 @@ public final class PackedLongLongBatchSortedMap implements LongLongSortedMap {
     public void flush() {
         if (pendingSize == 0) return;
         writable();
+        // The sort below permutes the pending lanes; the slot index is rebuilt by a later append.
+        pendingIndexed = false;
         if (!pendingOrdered) sortPending();
         int required = PackedArrayCapacity.required(sortedSize, pendingSize);
         ensureSortedCapacity(required);
+        mergePending(required);
+        sortedSize = required;
+        pendingSize = 0;
+        pendingOrdered = true;
+    }
 
+    private void mergePending(int required) {
         int left = sortedSize - 1, right = pendingSize - 1, write = required - 1;
         while (left >= 0 && right >= 0) {
             long a = sortedKeys[left], b = pendingKeys[right];
@@ -158,9 +166,6 @@ public final class PackedLongLongBatchSortedMap implements LongLongSortedMap {
             sortedKeys[write] = pendingKeys[right];
             sortedValues[write--] = pendingValues[right--];
         }
-        sortedSize = required;
-        pendingSize = 0;
-        pendingOrdered = true;
     }
 
     @Override public long firstKey() {
@@ -221,7 +226,7 @@ public final class PackedLongLongBatchSortedMap implements LongLongSortedMap {
     }
 
     @Override public void clear() {
-        writable(); sortedSize = 0; pendingSize = 0; pendingOrdered = true;
+        writable(); sortedSize = 0; pendingSize = 0; pendingOrdered = true; pendingIndexed = false;
     }
 
     public void trimToSize() {
@@ -230,6 +235,7 @@ public final class PackedLongLongBatchSortedMap implements LongLongSortedMap {
         sortedValues = Arrays.copyOf(sortedValues, sortedKeys.length);
         pendingKeys = new long[Math.max(1, batchSize)];
         pendingValues = new long[pendingKeys.length];
+        pendingSlots = NO_SLOTS; pendingIndexed = false;
     }
 
     @Override public long[] keysToArray() {
@@ -251,8 +257,44 @@ public final class PackedLongLongBatchSortedMap implements LongLongSortedMap {
         return Arrays.binarySearch(sortedKeys, 0, sortedSize, key);
     }
     private int pendingIndex(long key) {
+        if (pendingIndexed) return PackedHashAtoms.findLaneIndex(pendingSlots, pendingKeys, key);
         for (int i = 0; i < pendingSize; i++) if (pendingKeys[i] == key) return i;
         return -1;
+    }
+    /** Appends one proven-new mapping; the slot index covers the lane once it outgrows a scan. */
+    private void appendPending(long key, long value) {
+        ensurePendingCapacity(PackedArrayCapacity.required(pendingSize, 1));
+        preparePendingIndex(pendingSize + 1);
+        if (pendingSize > 0 && pendingKeys[pendingSize - 1] > key) pendingOrdered = false;
+        pendingKeys[pendingSize] = key; pendingValues[pendingSize] = value; pendingSize++;
+        if (pendingIndexed) {
+            PackedHashAtoms.placeLaneIndex(pendingSlots, pendingKeys, pendingSize - 1);
+        }
+    }
+    /** Builds or grows the slot index before the lanes hold {@code count} mappings. */
+    private void preparePendingIndex(int count) {
+        // A batch-closing append flushes at once, so it neither builds nor keeps an index.
+        if (count >= batchSize || count > MAX_INDEXED_PENDING
+                || (!pendingIndexed && count <= PENDING_SCAN_LIMIT)) {
+            pendingIndexed = false; return;
+        }
+        if (!pendingIndexed || count > (pendingSlots.length >>> 1)) {
+            pendingSlots = PackedHashAtoms.rebuildLaneIndex(
+                    pendingSlots, pendingKeys, pendingSize, PackedHashAtoms.laneIndexLength(count));
+            pendingIndexed = true;
+        }
+    }
+    /** Removes pending entry {@code index} keeping lane order; the slot index follows. */
+    private void removePendingAt(int index) {
+        if (pendingIndexed) PackedHashAtoms.deleteLaneIndex(pendingSlots, pendingKeys, index);
+        int moved = pendingSize - index - 1;
+        if (moved > 0) {
+            System.arraycopy(pendingKeys, index + 1, pendingKeys, index, moved);
+            System.arraycopy(pendingValues, index + 1, pendingValues, index, moved);
+            if (pendingIndexed) PackedHashAtoms.shiftLaneIndexes(pendingSlots, index);
+        }
+        pendingSize--;
+        if (pendingSize < 2) pendingOrdered = true;
     }
 
     private void ensureSortedCapacity(int required) {

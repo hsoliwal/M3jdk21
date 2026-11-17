@@ -32,17 +32,27 @@ import java.util.function.LongPredicate;
  *
  * <p>An optional collection-level filter is evaluated before retention.
  *
+ * <p>Pending lookup scans up to 32 values; past that a lane-ordinal slot index (power-of-two
+ * mask, linear probe, load at most 1/2) answers in expected O(1), worst case O(pending). The
+ * pending lane keeps insertion order, so flush and every observable result are unchanged.
+ *
  * <p>Lineage: absorbed from Synexia {@code m3-common/src/main/java/jdk/internal/m3/common/collections/PackedLongBatchSortedSet.java}
  * blob {@code bd23b4cbb87277cc5bf19ab3154ecf7a17e21fbd} at com.synexia develop {@code 5ab05fd05653} by
  * RELOCATE_M3_OWNER v4 (common.collections batch 2: identifiers and package only; bytecode equal to the source modulo names).
  */
 public final class PackedLongBatchSortedSet implements LongSortedSet {
+    private static final int[] NO_SLOTS = new int[0];
+    private static final int PENDING_SCAN_LIMIT = 32;
+    private static final int MAX_INDEXED_PENDING = 1 << 29;
     private long[] sorted;
     private int sortedSize;
     private long[] pending;
     private int pendingSize;
     // Conservative owner-local fact. No cache or per-entry metadata survives outside this lane.
     private boolean pendingOrdered = true;
+    // Lane-ordinal slot index over pending[0, pendingSize); trusted only while pendingIndexed.
+    private int[] pendingSlots = NO_SLOTS;
+    private boolean pendingIndexed;
     private final int batchSize;
     private final LongPredicate filter;
 
@@ -73,14 +83,10 @@ public final class PackedLongBatchSortedSet implements LongSortedSet {
         if (Arrays.binarySearch(sorted, 0, sortedSize, value) >= 0) {
             return false;
         }
-        for (int i = 0; i < pendingSize; i++) {
-            if (pending[i] == value) {
-                return false;
-            }
+        if (pendingIndex(value) >= 0) {
+            return false;
         }
-        ensurePendingCapacity(PackedArrayCapacity.required(pendingSize, 1));
-        if (pendingSize > 0 && pending[pendingSize - 1] > value) { pendingOrdered = false; }
-        pending[pendingSize++] = value;
+        appendPending(value);
         if (pendingSize >= batchSize) {
             flush();
         }
@@ -105,10 +111,17 @@ public final class PackedLongBatchSortedSet implements LongSortedSet {
         if (pendingSize == 0) {
             return;
         }
+        // The sort below permutes pending; the slot index is rebuilt by a later append.
+        pendingIndexed = false;
         // add() already proves uniqueness and disjointness from the sorted lane.
         int unique = pendingOrdered
                 ? pendingSize : PackedLongArrayOps.sortUniqueUnchecked(pending, pendingSize);
-        int required = PackedArrayCapacity.required(sortedSize, unique);
+        mergePending(unique, PackedArrayCapacity.required(sortedSize, unique));
+        pendingSize = 0;
+        pendingOrdered = true;
+    }
+
+    private void mergePending(int unique, int required) {
         if (sortedSize == 0 || sorted[sortedSize - 1] < pending[0]) {
             if (required > sorted.length) { sorted = Arrays.copyOf(sorted, required); }
             System.arraycopy(pending, 0, sorted, sortedSize, unique);
@@ -123,8 +136,6 @@ public final class PackedLongBatchSortedSet implements LongSortedSet {
             sortedSize = PackedLongArrayOps.unionUniqueUnchecked(sorted, sortedSize, pending, unique, merged);
             sorted = merged;
         }
-        pendingSize = 0;
-        pendingOrdered = true;
     }
 
     @Override
@@ -132,12 +143,7 @@ public final class PackedLongBatchSortedSet implements LongSortedSet {
         if (Arrays.binarySearch(sorted, 0, sortedSize, value) >= 0) {
             return true;
         }
-        for (int i = 0; i < pendingSize; i++) {
-            if (pending[i] == value) {
-                return true;
-            }
-        }
-        return false;
+        return pendingIndex(value) >= 0;
     }
 
     public boolean remove(long value) {
@@ -150,18 +156,12 @@ public final class PackedLongBatchSortedSet implements LongSortedSet {
             sortedSize--;
             return true;
         }
-        for (int i = 0; i < pendingSize; i++) {
-            if (pending[i] == value) {
-                int moved = pendingSize - i - 1;
-                if (moved > 0) {
-                    System.arraycopy(pending, i + 1, pending, i, moved);
-                }
-                pendingSize--;
-                if (pendingSize < 2) { pendingOrdered = true; }
-                return true;
-            }
+        int index = pendingIndex(value);
+        if (index < 0) {
+            return false;
         }
-        return false;
+        removePendingAt(index);
+        return true;
     }
 
     /**
@@ -266,12 +266,15 @@ public final class PackedLongBatchSortedSet implements LongSortedSet {
         sortedSize = 0;
         pendingSize = 0;
         pendingOrdered = true;
+        pendingIndexed = false;
     }
 
     public void trimToSize() {
         flush();
         sorted = Arrays.copyOf(sorted, Math.max(1, sortedSize));
         pending = new long[Math.max(1, batchSize)];
+        pendingSlots = NO_SLOTS;
+        pendingIndexed = false;
     }
 
     @Override
@@ -299,6 +302,61 @@ public final class PackedLongBatchSortedSet implements LongSortedSet {
                 return sorted[index++];
             }
         };
+    }
+
+    /** Pending lane index of {@code value} or -1: a short scan, else the slot index. */
+    private int pendingIndex(long value) {
+        if (pendingIndexed) {
+            return PackedHashAtoms.findLaneIndex(pendingSlots, pending, value);
+        }
+        for (int i = 0; i < pendingSize; i++) {
+            if (pending[i] == value) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    /** Appends one proven-new value; the slot index covers the lane once it outgrows a scan. */
+    private void appendPending(long value) {
+        ensurePendingCapacity(PackedArrayCapacity.required(pendingSize, 1));
+        preparePendingIndex(pendingSize + 1);
+        if (pendingSize > 0 && pending[pendingSize - 1] > value) { pendingOrdered = false; }
+        pending[pendingSize++] = value;
+        if (pendingIndexed) {
+            PackedHashAtoms.placeLaneIndex(pendingSlots, pending, pendingSize - 1);
+        }
+    }
+
+    /** Builds or grows the slot index before the lane holds {@code count} values. */
+    private void preparePendingIndex(int count) {
+        // A batch-closing append flushes at once, so it neither builds nor keeps an index.
+        if (count >= batchSize || count > MAX_INDEXED_PENDING
+                || (!pendingIndexed && count <= PENDING_SCAN_LIMIT)) {
+            pendingIndexed = false;
+            return;
+        }
+        if (!pendingIndexed || count > (pendingSlots.length >>> 1)) {
+            pendingSlots = PackedHashAtoms.rebuildLaneIndex(
+                    pendingSlots, pending, pendingSize, PackedHashAtoms.laneIndexLength(count));
+            pendingIndexed = true;
+        }
+    }
+
+    /** Removes pending[index] keeping lane order; the slot index is rebased in step. */
+    private void removePendingAt(int index) {
+        if (pendingIndexed) {
+            PackedHashAtoms.deleteLaneIndex(pendingSlots, pending, index);
+        }
+        int moved = pendingSize - index - 1;
+        if (moved > 0) {
+            System.arraycopy(pending, index + 1, pending, index, moved);
+            if (pendingIndexed) {
+                PackedHashAtoms.shiftLaneIndexes(pendingSlots, index);
+            }
+        }
+        pendingSize--;
+        if (pendingSize < 2) { pendingOrdered = true; }
     }
 
     private void ensurePendingCapacity(int minimumCapacity) {
