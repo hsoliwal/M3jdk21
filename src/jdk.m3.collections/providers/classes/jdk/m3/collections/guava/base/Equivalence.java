@@ -1,5 +1,7 @@
 /*
  * Copyright (C) 2010 The Guava Authors
+ * Modifications Copyright 2026 Hitesh Soliwal and contributors
+ * Modified to add paired Java functional equality and hashing strategies.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
  * in compliance with the License. You may obtain a copy of the License at
@@ -23,6 +25,7 @@ import jdk.m3.collections.guava.annotations.J2ktIncompatible;
 import java.io.Serializable;
 import java.util.Objects;
 import java.util.function.BiPredicate;
+import java.util.function.ToIntFunction;
 import jdk.m3.collections.eclipse.api.block.HashingStrategy;
 
 /**
@@ -400,6 +403,68 @@ public abstract class Equivalence<T> implements BiPredicate<T, T> {
    */
   public static <T> Equivalence<T> fromHashingStrategy(HashingStrategy<? super T> strategy) {
     return EquivalenceStrategies.toEquivalence(strategy);
+  }
+
+  /**
+   * Returns a new equivalence whose non-null comparisons and hashes are supplied by the given
+   * functions.
+   *
+   * <p>The {@code equality} predicate must define a stable equivalence relation, and equivalent
+   * values must receive the same result from {@code hashFunction}. Unequal values may have the
+   * same hash. These laws are the caller's responsibility; this factory does not verify them.
+   *
+   * <p>The inherited reference and null rules still apply: identical references are equivalent,
+   * one null and one non-null reference are not equivalent, and the hash of null is zero. Neither
+   * callback is invoked for these cases. For distinct non-null references, {@code equality} is
+   * invoked exactly once in argument order; for a non-null hash input, {@code hashFunction} is
+   * invoked exactly once. Callback exceptions propagate unchanged. Results are not cached.
+   *
+   * <p>Each call creates a distinct strategy with identity-based strategy equality, even when
+   * the same callbacks are supplied. Reuse one strategy when creating wrappers that should
+   * compare equal. The returned strategy is not serializable. Its thread safety and stability
+   * depend on the supplied callbacks and their captured state.
+   *
+   * <p>For example, the following groups strings by length, including through {@link #wrap}:
+   *
+   * {@snippet :
+   * Equivalence<String> sameLength = Equivalence.fromFunctions(
+   *     (left, right) -> left.length() == right.length(), String::length);
+   * }
+   *
+   * @param <T> the type of values to compare
+   * @param equality the predicate for distinct, non-null references
+   * @param hashFunction the hash function for non-null references
+   * @return a new strategy using the supplied functions
+   * @throws NullPointerException if either callback is null; {@code equality} is checked first
+   * @since M3JDK 21
+   */
+  public static <T> Equivalence<T> fromFunctions(
+      BiPredicate<? super T, ? super T> equality, ToIntFunction<? super T> hashFunction) {
+    return new CallbackEquivalence<>(
+        Objects.requireNonNull(equality, "equality"),
+        Objects.requireNonNull(hashFunction, "hashFunction"));
+  }
+
+  /** Holds only the explicit callback pair; the superclass owns null and reference handling. */
+  private static final class CallbackEquivalence<T> extends Equivalence<T> {
+    private final BiPredicate<? super T, ? super T> equality;
+    private final ToIntFunction<? super T> hashFunction;
+
+    private CallbackEquivalence(
+        BiPredicate<? super T, ? super T> equality, ToIntFunction<? super T> hashFunction) {
+      this.equality = equality;
+      this.hashFunction = hashFunction;
+    }
+
+    @Override
+    protected boolean doEquivalent(T a, T b) {
+      return equality.test(a, b);
+    }
+
+    @Override
+    protected int doHash(T value) {
+      return hashFunction.applyAsInt(value);
+    }
   }
 
   static final class Equals extends Equivalence<Object> implements Serializable {
