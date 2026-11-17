@@ -25,9 +25,12 @@ import java.util.Objects;
 /**
  * Frozen predicate vocabulary with explicit inverse/opposite and algebraic contracts.
  *
- * <p>Lineage: absorbed from Synexia {@code m3-mat-value/src/main/java/jdk/internal/m3/matvalue/PredicateLexicon.java}
- * blob {@code 7697533102c662f197c2e0639d61c632ffd00b7c} at com.synexia develop {@code 35474ccf8dafbe80feb55f1d82cb1136eeec119d} by
- * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source modulo names).
+ * <p>Lineage: absorbed from Synexia {@code
+ * m3-mat-value/src/main/java/jdk/internal/m3/matvalue/PredicateLexicon.java}
+ * blob {@code 7697533102c662f197c2e0639d61c632ffd00b7c} at com.synexia develop {@code
+ * 35474ccf8dafbe80feb55f1d82cb1136eeec119d} by
+ * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source
+ * modulo names).
  */
 public final class PredicateLexicon {
     private final StaticLexicon lexicon;

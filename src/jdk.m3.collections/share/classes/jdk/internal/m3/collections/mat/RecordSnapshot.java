@@ -19,9 +19,12 @@ import java.util.Objects;
 /**
  * Immutable primitive snapshot of live arena records, stored lane-major.
  *
- * <p>Lineage: absorbed from Synexia {@code m3-mat-collections/src/main/java/jdk/internal/m3/matcollections/RecordSnapshot.java}
- * blob {@code c53a6ba6443909a374ec5abd675293d43d594b51} at com.synexia develop {@code 35474ccf8dafbe80feb55f1d82cb1136eeec119d} by
- * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source modulo names).
+ * <p>Lineage: absorbed from Synexia {@code
+ * m3-mat-collections/src/main/java/jdk/internal/m3/matcollections/RecordSnapshot.java}
+ * blob {@code c53a6ba6443909a374ec5abd675293d43d594b51} at com.synexia develop {@code
+ * 35474ccf8dafbe80feb55f1d82cb1136eeec119d} by
+ * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source
+ * modulo names).
  */
 public final class RecordSnapshot {
     private final int lanes;

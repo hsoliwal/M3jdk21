@@ -21,9 +21,11 @@ import java.util.Objects;
  * Immutable non-overlapping half-open int range map.
  * Adjacent equal-valued ranges are merged at build time.
  *
- * <p>Lineage: absorbed from Synexia {@code m3-mat-collections/src/main/java/jdk/internal/m3/matcollections/IntRangeMap.java}
+ * <p>Lineage: absorbed from Synexia {@code
+ * m3-mat-collections/src/main/java/jdk/internal/m3/matcollections/IntRangeMap.java}
  * blob {@code a0c01a9fbbec641774dbbe617d53b2399b6df6b6} at com.synexia develop {@code 35474ccf} by
- * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source modulo names).
+ * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source
+ * modulo names).
  */
 public final class IntRangeMap {
     private static final long MIN = Integer.MIN_VALUE;
@@ -64,7 +66,8 @@ public final class IntRangeMap {
         return index >= 0 && (long) key < ends[index] ? index : -1;
     }
 
-    /** Returns only overlapping source range indexes; retained payload is exactly four bytes per match. */
+    /** Returns only overlapping source range indexes; retained payload is exactly four bytes per
+     * match. */
     public IntList overlappingRangeIndexes(long fromInclusive, long toExclusive) {
         check(fromInclusive, toExclusive);
         int first = firstEndAfter(fromInclusive);
@@ -106,7 +109,8 @@ public final class IntRangeMap {
     }
 
     public static final class Builder {
-        /** Creates an instance (explicit form of the default constructor; required by -Xlint:all -Werror). */
+        /** Creates an instance (explicit form of the default constructor; required by -Xlint:all
+         * -Werror). */
         public Builder() {
         }
 

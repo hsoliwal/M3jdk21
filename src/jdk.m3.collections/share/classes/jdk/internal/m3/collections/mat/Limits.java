@@ -17,9 +17,12 @@ package jdk.internal.m3.collections.mat;
 /**
  * Finite work/retention limits for canonical immutable-value structures.
  *
- * <p>Lineage: absorbed from Synexia {@code m3-mat-value/src/main/java/jdk/internal/m3/matvalue/Limits.java}
- * blob {@code 3d435b69034d3e0d83c315a3c9c37c1d0e8a6ee7} at com.synexia develop {@code 35474ccf8dafbe80feb55f1d82cb1136eeec119d} by
- * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source modulo names).
+ * <p>Lineage: absorbed from Synexia {@code
+ * m3-mat-value/src/main/java/jdk/internal/m3/matvalue/Limits.java}
+ * blob {@code 3d435b69034d3e0d83c315a3c9c37c1d0e8a6ee7} at com.synexia develop {@code
+ * 35474ccf8dafbe80feb55f1d82cb1136eeec119d} by
+ * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source
+ * modulo names).
  */
 public record Limits(
         int maxEntries,

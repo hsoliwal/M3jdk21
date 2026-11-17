@@ -20,9 +20,12 @@ import java.util.Objects;
 /**
  * Keeps direct evidence, contradiction and explicit logical derivation as separate signals.
  *
- * <p>Lineage: absorbed from Synexia {@code m3-mat-value/src/main/java/jdk/internal/m3/matvalue/StatementEvaluator.java}
- * blob {@code 776f080603743aae3ce253bfae0dd38c8be9e0a2} at com.synexia develop {@code 35474ccf8dafbe80feb55f1d82cb1136eeec119d} by
- * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source modulo names).
+ * <p>Lineage: absorbed from Synexia {@code
+ * m3-mat-value/src/main/java/jdk/internal/m3/matvalue/StatementEvaluator.java}
+ * blob {@code 776f080603743aae3ce253bfae0dd38c8be9e0a2} at com.synexia develop {@code
+ * 35474ccf8dafbe80feb55f1d82cb1136eeec119d} by
+ * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source
+ * modulo names).
  */
 public final class StatementEvaluator {
     private final PredicateLexicon predicates;

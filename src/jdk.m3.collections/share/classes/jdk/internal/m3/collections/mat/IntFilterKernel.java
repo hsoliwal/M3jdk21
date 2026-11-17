@@ -24,9 +24,12 @@ import java.util.Objects;
  * <p>The native backend is considered only for 4096+ entries to avoid tiny JNI calls. That
  * threshold is a conservative policy, not a measured speedup claim.</p>
  *
- * <p>Lineage: absorbed from Synexia {@code m3-mat-collections/src/main/java/jdk/internal/m3/matcollections/IntFilterKernel.java}
- * blob {@code 40f49f3b55abdad8364ee9af36131cb9d8195db6} at com.synexia develop {@code 35474ccf8dafbe80feb55f1d82cb1136eeec119d} by
- * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source modulo names).
+ * <p>Lineage: absorbed from Synexia {@code
+ * m3-mat-collections/src/main/java/jdk/internal/m3/matcollections/IntFilterKernel.java}
+ * blob {@code 40f49f3b55abdad8364ee9af36131cb9d8195db6} at com.synexia develop {@code
+ * 35474ccf8dafbe80feb55f1d82cb1136eeec119d} by
+ * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source
+ * modulo names).
  */
 public final class IntFilterKernel {
     private static final int JNI_MIN_ITEMS = 4096;
@@ -62,10 +65,12 @@ public final class IntFilterKernel {
     /** Executes actual native code or fails if the optional library was not loaded. */
     public static int[] indicesGreaterOrEqualNative(int[] values, int threshold) {
         Objects.requireNonNull(values, "values");
-        if (!NATIVE_AVAILABLE) throw new IllegalStateException("m3_matfilter JNI library unavailable");
+        if (!NATIVE_AVAILABLE) throw new IllegalStateException
+                ("m3_matfilter JNI library unavailable");
         int[] positions = new int[values.length];
         int used = selectGreaterOrEqualNative(values, threshold, positions);
-        if (used < 0 || used > positions.length) throw new IllegalStateException("invalid native selection count");
+        if (used < 0 || used > positions.length) throw new IllegalStateException
+                ("invalid native selection count");
         return Arrays.copyOf(positions, used);
     }
 

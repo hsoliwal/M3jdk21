@@ -21,9 +21,11 @@ import java.util.Objects;
 /**
  * Compact in-memory enum vector; persistent enum identity remains name-based in Codecs.enumCodec.
  *
- * <p>Lineage: absorbed from Synexia {@code m3-mat-value/src/main/java/jdk/internal/m3/matvalue/EnumVector.java}
+ * <p>Lineage: absorbed from Synexia {@code
+ * m3-mat-value/src/main/java/jdk/internal/m3/matvalue/EnumVector.java}
  * blob {@code f1e7568420f3947d78e68505dac6531a605e0b69} at com.synexia develop {@code 35474ccf} by
- * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source modulo names).
+ * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source
+ * modulo names).
  */
 public final class EnumVector<E extends Enum<E>> {
     private final Class<E> type;
@@ -33,7 +35,8 @@ public final class EnumVector<E extends Enum<E>> {
     public EnumVector(Class<E> type,int size){
         this.type=Objects.requireNonNull(type,"type");
         this.constants=type.getEnumConstants();
-        if(constants==null || constants.length==0) throw new IllegalArgumentException("enum has no constants");
+        if(constants==null || constants.length==0) throw new IllegalArgumentException
+                ("enum has no constants");
         int width=Math.max(1,32-Integer.numberOfLeadingZeros(constants.length-1));
         this.ordinals=PackedLongVector.unsigned(size,width);
     }
@@ -43,12 +46,14 @@ public final class EnumVector<E extends Enum<E>> {
     public E get(int index){ return constants[(int)ordinals.get(index)]; }
     public void set(int index,E value){
         Objects.requireNonNull(value,"value");
-        if(value.getDeclaringClass()!=type) throw new IllegalArgumentException("different enum type");
+        if(value.getDeclaringClass()!=type) throw new IllegalArgumentException
+                ("different enum type");
         ordinals.set(index,value.ordinal());
     }
     public SelectionBits equalTo(E value){
         Objects.requireNonNull(value,"value");
-        if(value.getDeclaringClass()!=type) throw new IllegalArgumentException("different enum type");
+        if(value.getDeclaringClass()!=type) throw new IllegalArgumentException
+                ("different enum type");
         return ordinals.equalTo(value.ordinal());
     }
 }

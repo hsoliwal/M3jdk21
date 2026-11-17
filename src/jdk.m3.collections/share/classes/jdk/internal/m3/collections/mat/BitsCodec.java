@@ -26,9 +26,11 @@ import java.util.Objects;
  * universe size are significant; nonzero padding bits are rejected on decode.
  * This optional codec reuses {@link Pool}, without a second intern table.</p>
  *
- * <p>Lineage: absorbed from Synexia {@code m3-mat-value/src/main/java/jdk/internal/m3/matvalue/BitsCodec.java}
+ * <p>Lineage: absorbed from Synexia {@code
+ * m3-mat-value/src/main/java/jdk/internal/m3/matvalue/BitsCodec.java}
  * blob {@code 5b28947ef6bab63201d78a89284913778582c0cf} at com.synexia develop {@code 35474ccf} by
- * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source modulo names).
+ * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source
+ * modulo names).
  */
 public final class BitsCodec implements Codec<SelectionBits> {
     public static final BitsCodec INSTANCE = new BitsCodec();

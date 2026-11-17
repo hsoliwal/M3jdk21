@@ -23,9 +23,12 @@ import java.util.Objects;
  * <p>Useful when a semantic/type pair can select a precompiled integer operator without a map,
  * virtual dispatch or repeated branching.</p>
  *
- * <p>Lineage: absorbed from Synexia {@code m3-mat-value/src/main/java/jdk/internal/m3/matvalue/OperatorTable.java}
- * blob {@code 1a25ef96db13865844c6f7290ec93f17d07b7e11} at com.synexia develop {@code 35474ccf8dafbe80feb55f1d82cb1136eeec119d} by
- * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source modulo names).
+ * <p>Lineage: absorbed from Synexia {@code
+ * m3-mat-value/src/main/java/jdk/internal/m3/matvalue/OperatorTable.java}
+ * blob {@code 1a25ef96db13865844c6f7290ec93f17d07b7e11} at com.synexia develop {@code
+ * 35474ccf8dafbe80feb55f1d82cb1136eeec119d} by
+ * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source
+ * modulo names).
  */
 public final class OperatorTable {
     private final int classCount;
@@ -68,7 +71,8 @@ public final class OperatorTable {
         private Builder(int classCount, int defaultOperator) {
             if (classCount <= 0) throw new IllegalArgumentException("classCount must be positive");
             long cells = Math.multiplyExact((long) classCount, (long) classCount);
-            if (cells > Integer.MAX_VALUE) throw new IllegalArgumentException("operator table too large");
+            if (cells > Integer.MAX_VALUE) throw new IllegalArgumentException
+                    ("operator table too large");
             this.classCount = classCount;
             this.operators = new int[(int) cells];
             Arrays.fill(operators, defaultOperator);

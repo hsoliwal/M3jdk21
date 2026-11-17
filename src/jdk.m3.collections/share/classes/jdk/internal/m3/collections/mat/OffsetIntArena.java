@@ -23,9 +23,12 @@ import java.util.Objects;
  * <p>This is the common physical shape for children, adjacency, tuples, posting lists and any
  * variable-length immutable integer relation.</p>
  *
- * <p>Lineage: absorbed from Synexia {@code m3-mat-value/src/main/java/jdk/internal/m3/matvalue/OffsetIntArena.java}
- * blob {@code 5aaa17e9f579d4f5368f619535d3804482aec175} at com.synexia develop {@code 35474ccf8dafbe80feb55f1d82cb1136eeec119d} by
- * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source modulo names).
+ * <p>Lineage: absorbed from Synexia {@code
+ * m3-mat-value/src/main/java/jdk/internal/m3/matvalue/OffsetIntArena.java}
+ * blob {@code 5aaa17e9f579d4f5368f619535d3804482aec175} at com.synexia develop {@code
+ * 35474ccf8dafbe80feb55f1d82cb1136eeec119d} by
+ * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source
+ * modulo names).
  */
 public final class OffsetIntArena {
     private final int[] offsets;

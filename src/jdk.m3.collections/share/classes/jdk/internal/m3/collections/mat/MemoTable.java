@@ -24,15 +24,19 @@ import java.util.function.IntSupplier;
  *
  * <p>The operation id must include semantic/version context. Callers may use this only for pure
  * computations whose result is determined entirely by the supplied immutable handles and operation
- * id. Time, I/O, randomness, ambient context and other effects are intentionally outside this API.</p>
+ * id. Time, I/O, randomness, ambient context and other effects are intentionally outside this
+ * API.</p>
  *
  * <p>Retained keys use pool-identity and id lanes in fixed-size pages. Primitive entry offsets,
  * hash chains and result ids replace per-entry key, handle-array, node and boxed-value objects.
  * Hashes select candidates only; every argument is confirmed against its exact pool and id.</p>
  *
- * <p>Original absorption lineage: absorbed from Synexia {@code m3-mat-value/src/main/java/jdk/internal/m3/matvalue/MemoTable.java}
- * blob {@code 92cc01cc8a83e26888d8154c001742a836e29e03} at com.synexia develop {@code 35474ccf8dafbe80feb55f1d82cb1136eeec119d} by
- * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source modulo names).
+ * <p>Original absorption lineage: absorbed from Synexia {@code
+ * m3-mat-value/src/main/java/jdk/internal/m3/matvalue/MemoTable.java}
+ * blob {@code 92cc01cc8a83e26888d8154c001742a836e29e03} at com.synexia develop {@code
+ * 35474ccf8dafbe80feb55f1d82cb1136eeec119d} by
+ * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source
+ * modulo names).
  */
 public final class MemoTable<R> {
     private static final int PAGE_SHIFT = 8;

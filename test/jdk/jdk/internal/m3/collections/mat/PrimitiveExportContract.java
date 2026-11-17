@@ -7,7 +7,8 @@
  * @summary Preserve immutable sparse-vector and sorted primitive-map exports.
  * @modules jdk.m3.collections/jdk.internal.m3.collections.mat
  * @compile --patch-module jdk.m3.collections=${test.src} PrimitiveExportContract.java
- * @run main/othervm --patch-module jdk.m3.collections=${test.classes} jdk.internal.m3.collections.mat.PrimitiveExportContract
+ * @run main/othervm --patch-module jdk.m3.collections=${test.classes}
+ * jdk.internal.m3.collections.mat.PrimitiveExportContract
  */
 package jdk.internal.m3.collections.mat;
 
@@ -61,7 +62,8 @@ public final class PrimitiveExportContract {
                 for (int density : new int[] {0, 1, 20, 50, 100}) {
                     int[] dense = new int[size];
                     for (int i = 0; i < size; i++) {
-                        dense[i] = RANDOM.nextInt(100) < density ? i ^ defaultValue ^ 63 : defaultValue;
+                        dense[i] = RANDOM.nextInt(100) < density ? i ^ defaultValue ^ 63 :
+                                defaultValue;
                     }
                     int[] expected = dense.clone();
                     SparseIntVector vector = SparseIntVector.fromDense(dense, defaultValue);

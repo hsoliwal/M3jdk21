@@ -69,9 +69,12 @@ import java.util.TreeMap;
  * semantic equivalence, safe refactoring, total order or admissible metric. Existing MAT and
  * source-structure owners remain the value, graph and sort authorities.</p>
  *
- * <p>Lineage: absorbed from Synexia {@code m3-mat-collections/src/main/java/jdk/internal/m3/matcollections/SignalCategoryCatalogue.java}
- * blob {@code 7f589997ef6770a249dc7dbdd3cbcaa2754a17bb} at com.synexia develop {@code 35474ccf8dafbe80feb55f1d82cb1136eeec119d} by
- * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source modulo names).
+ * <p>Lineage: absorbed from Synexia {@code
+ * m3-mat-collections/src/main/java/jdk/internal/m3/matcollections/SignalCategoryCatalogue.java}
+ * blob {@code 7f589997ef6770a249dc7dbdd3cbcaa2754a17bb} at com.synexia develop {@code
+ * 35474ccf8dafbe80feb55f1d82cb1136eeec119d} by
+ * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source
+ * modulo names).
  */
 public final class SignalCategoryCatalogue {
     public static final String VERSION = "M3_SIGNAL_CATEGORY_CATALOGUE_V1";
@@ -101,56 +104,106 @@ public final class SignalCategoryCatalogue {
     private static List<Descriptor> buildEntries() {
         List<Descriptor> result = new ArrayList<>();
         // Source-parsed counts and sketches are declaration facts, not semantic equivalence.
-        result.add(d("name.package-depth", PACKAGE, SOURCE_PARSE, COUNT, EXACT_DECLARATION, SOURCE_ROOT, "segments"));
-        result.add(d("name.type-tokens", TYPE, SOURCE_PARSE, SKETCH, HEURISTIC, SOURCE_ROOT, "tokens"));
-        result.add(d("name.method-ngrams", METHOD, SOURCE_PARSE, SKETCH, HEURISTIC, SOURCE_ROOT, "ngrams"));
-        result.add(d("name.field-ngrams", FIELD, SOURCE_PARSE, SKETCH, HEURISTIC, SOURCE_ROOT, "ngrams"));
-        result.add(d("signature.method-arity", METHOD, SOURCE_PARSE, COUNT, EXACT_DECLARATION, SOURCE_ROOT, "parameters"));
-        result.add(d("signature.generic-parameters", TYPE, SOURCE_PARSE, COUNT, EXACT_DECLARATION, SOURCE_ROOT, "parameters"));
-        result.add(d("signature.thrown-types", METHOD, SOURCE_PARSE, COUNT, EXACT_DECLARATION, SOURCE_ROOT, "types"));
-        result.add(d("signature.annotations", METHOD, SOURCE_PARSE, COUNT, EXACT_DECLARATION, SOURCE_ROOT, "annotations"));
-        result.add(d("type.field-count", TYPE, SOURCE_PARSE, COUNT, EXACT_DECLARATION, SOURCE_ROOT, "fields"));
-        result.add(d("type.method-count", TYPE, SOURCE_PARSE, COUNT, EXACT_DECLARATION, SOURCE_ROOT, "methods"));
-        result.add(d("type.inheritance-depth-estimate", TYPE, SOURCE_PARSE, COUNT, HEURISTIC, SOURCE_ROOT, "levels"));
-        result.add(d("type.mutable-field-count", TYPE, SOURCE_PARSE, COUNT, EXACT_DECLARATION, SOURCE_ROOT, "fields"));
-        result.add(d("control.branches", METHOD, SOURCE_PARSE, COUNT, EXACT_DECLARATION, SOURCE_ROOT, "syntax-nodes"));
-        result.add(d("control.loops", METHOD, SOURCE_PARSE, COUNT, EXACT_DECLARATION, SOURCE_ROOT, "syntax-nodes"));
-        result.add(d("control.nesting-depth", METHOD, SOURCE_PARSE, COUNT, EXACT_DECLARATION, SOURCE_ROOT, "levels"));
-        result.add(d("control.switch-arms", METHOD, SOURCE_PARSE, COUNT, EXACT_DECLARATION, SOURCE_ROOT, "syntax-nodes"));
-        result.add(d("control.cyclomatic-estimate", METHOD, SOURCE_PARSE, WEIGHT, HEURISTIC, SOURCE_ROOT, "points"));
-        result.add(d("control.exception-handlers", METHOD, SOURCE_PARSE, COUNT, EXACT_DECLARATION, SOURCE_ROOT, "handlers"));
-        result.add(d("control.synchronized-blocks", METHOD, SOURCE_PARSE, COUNT, EXACT_DECLARATION, SOURCE_ROOT, "syntax-nodes"));
-        result.add(d("control.lambda-count", METHOD, SOURCE_PARSE, COUNT, EXACT_DECLARATION, SOURCE_ROOT, "syntax-nodes"));
-        result.add(d("allocation.new-expressions", METHOD, SOURCE_PARSE, COUNT, EXACT_DECLARATION, SOURCE_ROOT, "syntax-nodes"));
-        result.add(d("allocation.estimated-bytes", METHOD, RUNTIME_OBSERVED, COST, OBSERVED_SAMPLE, RUNTIME_EPOCH, "bytes"));
-        result.add(d("effects.may-write-fields", METHOD, COMPILER_ATTRIBUTED, FLAG, STATIC_POSSIBLE, CLASSPATH_AND_SOURCE, "boolean"));
-        result.add(d("effects.may-throw", METHOD, COMPILER_ATTRIBUTED, FLAG, STATIC_POSSIBLE, CLASSPATH_AND_SOURCE, "boolean"));
-        result.add(d("effects.may-io", METHOD, COMPILER_ATTRIBUTED, FLAG, HEURISTIC, CLASSPATH_AND_SOURCE, "boolean"));
-        result.add(d("dataflow.def-use-count", METHOD, COMPILER_ATTRIBUTED, COUNT, STATIC_POSSIBLE, CLASSPATH_AND_SOURCE, "edges"));
-        result.add(d("dataflow.escape-candidates", METHOD, COMPILER_ATTRIBUTED, COUNT, STATIC_POSSIBLE, CLASSPATH_AND_SOURCE, "objects"));
-        result.add(d("call.attributed-sites", METHOD, COMPILER_ATTRIBUTED, COUNT, EXACT_DECLARATION, CLASSPATH_AND_SOURCE, "call-sites"));
-        result.add(d("call.possible-dispatch-targets", EDGE, COMPILER_ATTRIBUTED, COUNT, STATIC_POSSIBLE, CLASSPATH_AND_SOURCE, "targets"));
-        result.add(d("graph.in-degree", GRAPH, SOURCE_PARSE, COUNT, EXACT_DECLARATION, SOURCE_ROOT, "edges"));
-        result.add(d("graph.out-degree", GRAPH, SOURCE_PARSE, COUNT, EXACT_DECLARATION, SOURCE_ROOT, "edges"));
-        result.add(d("graph.scc-size", GRAPH, SOURCE_PARSE, COUNT, EXACT_DECLARATION, SOURCE_ROOT, "nodes"));
-        result.add(d("graph.change-impact-estimate", GRAPH, SOURCE_PARSE, WEIGHT, HEURISTIC, SOURCE_ROOT, "relative"));
-        result.add(d("graph.centrality-estimate", GRAPH, SOURCE_PARSE, WEIGHT, HEURISTIC, SOURCE_ROOT, "relative"));
-        result.add(d("api.descriptor-delta", METHOD, BYTECODE, COUNT, EXACT_DECLARATION, BINARY_ROOT, "descriptors"));
-        result.add(d("api.compatibility-risk", METHOD, BYTECODE, WEIGHT, HEURISTIC, BINARY_ROOT, "relative"));
-        result.add(d("test.coverage-sampled", METHOD, RUNTIME_OBSERVED, CONFIDENCE, OBSERVED_SAMPLE, RUNTIME_EPOCH, "fraction"));
-        result.add(d("test.failure-frequency", METHOD, RUNTIME_OBSERVED, WEIGHT, OBSERVED_SAMPLE, RUNTIME_EPOCH, "per-run"));
-        result.add(d("runtime.cpu-time", METHOD, RUNTIME_OBSERVED, COST, OBSERVED_SAMPLE, RUNTIME_EPOCH, "ns"));
-        result.add(d("runtime.cache-misses", METHOD, RUNTIME_OBSERVED, COST, OBSERVED_SAMPLE, RUNTIME_EPOCH, "events"));
-        result.add(d("runtime.lock-contention", METHOD, RUNTIME_OBSERVED, COST, OBSERVED_SAMPLE, RUNTIME_EPOCH, "ns"));
-        result.add(d("runtime.reuse-distance", OBJECT, RUNTIME_OBSERVED, WEIGHT, OBSERVED_SAMPLE, RUNTIME_EPOCH, "accesses"));
-        result.add(d("runtime.heap-headroom", COLLECTION, RUNTIME_OBSERVED, COST, OBSERVED_SAMPLE, RUNTIME_EPOCH, "bytes"));
-        result.add(d("query.edit-distance", QUERY, QUERY_RELATIVE, DISTANCE, DOMAIN_ASSERTED, QUERY_AND_SOURCE, "edits"));
-        result.add(d("query.semantic-similarity", QUERY, QUERY_RELATIVE, WEIGHT, HEURISTIC, QUERY_AND_SOURCE, "relative"));
-        result.add(d("query.regex-candidate", QUERY, QUERY_RELATIVE, FLAG, HEURISTIC, QUERY_AND_SOURCE, "boolean"));
-        result.add(d("domain.absolute-weight", OBJECT, DOMAIN_DECLARED, WEIGHT, DOMAIN_ASSERTED, OBJECT_VERSION, "domain"));
-        result.add(d("domain.distance", OBJECT, DOMAIN_DECLARED, DISTANCE, DOMAIN_ASSERTED, OBJECT_VERSION, "domain"));
-        result.add(d("domain.lexical-ordinal", OBJECT, DOMAIN_DECLARED, ORDINAL, DOMAIN_ASSERTED, OBJECT_VERSION, "lexical"));
-        result.add(d("domain.relevance-confidence", OBJECT, DOMAIN_DECLARED, CONFIDENCE, DOMAIN_ASSERTED, OBJECT_VERSION, "fraction"));
+        result.add(d("name.package-depth", PACKAGE, SOURCE_PARSE, COUNT, EXACT_DECLARATION,
+                SOURCE_ROOT, "segments"));
+        result.add(d("name.type-tokens", TYPE, SOURCE_PARSE, SKETCH, HEURISTIC, SOURCE_ROOT,
+                "tokens"));
+        result.add(d("name.method-ngrams", METHOD, SOURCE_PARSE, SKETCH, HEURISTIC, SOURCE_ROOT,
+                "ngrams"));
+        result.add(d("name.field-ngrams", FIELD, SOURCE_PARSE, SKETCH, HEURISTIC, SOURCE_ROOT,
+                "ngrams"));
+        result.add(d("signature.method-arity", METHOD, SOURCE_PARSE, COUNT, EXACT_DECLARATION,
+                SOURCE_ROOT, "parameters"));
+        result.add(d("signature.generic-parameters", TYPE, SOURCE_PARSE, COUNT, EXACT_DECLARATION,
+                SOURCE_ROOT, "parameters"));
+        result.add(d("signature.thrown-types", METHOD, SOURCE_PARSE, COUNT, EXACT_DECLARATION,
+                SOURCE_ROOT, "types"));
+        result.add(d("signature.annotations", METHOD, SOURCE_PARSE, COUNT, EXACT_DECLARATION,
+                SOURCE_ROOT, "annotations"));
+        result.add(d("type.field-count", TYPE, SOURCE_PARSE, COUNT, EXACT_DECLARATION, SOURCE_ROOT,
+                "fields"));
+        result.add(d("type.method-count", TYPE, SOURCE_PARSE, COUNT, EXACT_DECLARATION, SOURCE_ROOT,
+                "methods"));
+        result.add(d("type.inheritance-depth-estimate", TYPE, SOURCE_PARSE, COUNT, HEURISTIC,
+                SOURCE_ROOT, "levels"));
+        result.add(d("type.mutable-field-count", TYPE, SOURCE_PARSE, COUNT, EXACT_DECLARATION,
+                SOURCE_ROOT, "fields"));
+        result.add(d("control.branches", METHOD, SOURCE_PARSE, COUNT, EXACT_DECLARATION,
+                SOURCE_ROOT, "syntax-nodes"));
+        result.add(d("control.loops", METHOD, SOURCE_PARSE, COUNT, EXACT_DECLARATION, SOURCE_ROOT,
+                "syntax-nodes"));
+        result.add(d("control.nesting-depth", METHOD, SOURCE_PARSE, COUNT, EXACT_DECLARATION,
+                SOURCE_ROOT, "levels"));
+        result.add(d("control.switch-arms", METHOD, SOURCE_PARSE, COUNT, EXACT_DECLARATION,
+                SOURCE_ROOT, "syntax-nodes"));
+        result.add(d("control.cyclomatic-estimate", METHOD, SOURCE_PARSE, WEIGHT, HEURISTIC,
+                SOURCE_ROOT, "points"));
+        result.add(d("control.exception-handlers", METHOD, SOURCE_PARSE, COUNT, EXACT_DECLARATION,
+                SOURCE_ROOT, "handlers"));
+        result.add(d("control.synchronized-blocks", METHOD, SOURCE_PARSE, COUNT, EXACT_DECLARATION,
+                SOURCE_ROOT, "syntax-nodes"));
+        result.add(d("control.lambda-count", METHOD, SOURCE_PARSE, COUNT, EXACT_DECLARATION,
+                SOURCE_ROOT, "syntax-nodes"));
+        result.add(d("allocation.new-expressions", METHOD, SOURCE_PARSE, COUNT, EXACT_DECLARATION,
+                SOURCE_ROOT, "syntax-nodes"));
+        result.add(d("allocation.estimated-bytes", METHOD, RUNTIME_OBSERVED, COST, OBSERVED_SAMPLE,
+                RUNTIME_EPOCH, "bytes"));
+        result.add(d("effects.may-write-fields", METHOD, COMPILER_ATTRIBUTED, FLAG, STATIC_POSSIBLE,
+                CLASSPATH_AND_SOURCE, "boolean"));
+        result.add(d("effects.may-throw", METHOD, COMPILER_ATTRIBUTED, FLAG, STATIC_POSSIBLE,
+                CLASSPATH_AND_SOURCE, "boolean"));
+        result.add(d("effects.may-io", METHOD, COMPILER_ATTRIBUTED, FLAG, HEURISTIC,
+                CLASSPATH_AND_SOURCE, "boolean"));
+        result.add(d("dataflow.def-use-count", METHOD, COMPILER_ATTRIBUTED, COUNT, STATIC_POSSIBLE,
+                CLASSPATH_AND_SOURCE, "edges"));
+        result.add(d("dataflow.escape-candidates", METHOD, COMPILER_ATTRIBUTED, COUNT,
+                STATIC_POSSIBLE, CLASSPATH_AND_SOURCE, "objects"));
+        result.add(d("call.attributed-sites", METHOD, COMPILER_ATTRIBUTED, COUNT, EXACT_DECLARATION,
+                CLASSPATH_AND_SOURCE, "call-sites"));
+        result.add(d("call.possible-dispatch-targets", EDGE, COMPILER_ATTRIBUTED, COUNT,
+                STATIC_POSSIBLE, CLASSPATH_AND_SOURCE, "targets"));
+        result.add(d("graph.in-degree", GRAPH, SOURCE_PARSE, COUNT, EXACT_DECLARATION, SOURCE_ROOT,
+                "edges"));
+        result.add(d("graph.out-degree", GRAPH, SOURCE_PARSE, COUNT, EXACT_DECLARATION, SOURCE_ROOT,
+                "edges"));
+        result.add(d("graph.scc-size", GRAPH, SOURCE_PARSE, COUNT, EXACT_DECLARATION, SOURCE_ROOT,
+                "nodes"));
+        result.add(d("graph.change-impact-estimate", GRAPH, SOURCE_PARSE, WEIGHT, HEURISTIC,
+                SOURCE_ROOT, "relative"));
+        result.add(d("graph.centrality-estimate", GRAPH, SOURCE_PARSE, WEIGHT, HEURISTIC,
+                SOURCE_ROOT, "relative"));
+        result.add(d("api.descriptor-delta", METHOD, BYTECODE, COUNT, EXACT_DECLARATION,
+                BINARY_ROOT, "descriptors"));
+        result.add(d("api.compatibility-risk", METHOD, BYTECODE, WEIGHT, HEURISTIC, BINARY_ROOT,
+                "relative"));
+        result.add(d("test.coverage-sampled", METHOD, RUNTIME_OBSERVED, CONFIDENCE, OBSERVED_SAMPLE,
+                RUNTIME_EPOCH, "fraction"));
+        result.add(d("test.failure-frequency", METHOD, RUNTIME_OBSERVED, WEIGHT, OBSERVED_SAMPLE,
+                RUNTIME_EPOCH, "per-run"));
+        result.add(d("runtime.cpu-time", METHOD, RUNTIME_OBSERVED, COST, OBSERVED_SAMPLE,
+                RUNTIME_EPOCH, "ns"));
+        result.add(d("runtime.cache-misses", METHOD, RUNTIME_OBSERVED, COST, OBSERVED_SAMPLE,
+                RUNTIME_EPOCH, "events"));
+        result.add(d("runtime.lock-contention", METHOD, RUNTIME_OBSERVED, COST, OBSERVED_SAMPLE,
+                RUNTIME_EPOCH, "ns"));
+        result.add(d("runtime.reuse-distance", OBJECT, RUNTIME_OBSERVED, WEIGHT, OBSERVED_SAMPLE,
+                RUNTIME_EPOCH, "accesses"));
+        result.add(d("runtime.heap-headroom", COLLECTION, RUNTIME_OBSERVED, COST, OBSERVED_SAMPLE,
+                RUNTIME_EPOCH, "bytes"));
+        result.add(d("query.edit-distance", QUERY, QUERY_RELATIVE, DISTANCE, DOMAIN_ASSERTED,
+                QUERY_AND_SOURCE, "edits"));
+        result.add(d("query.semantic-similarity", QUERY, QUERY_RELATIVE, WEIGHT, HEURISTIC,
+                QUERY_AND_SOURCE, "relative"));
+        result.add(d("query.regex-candidate", QUERY, QUERY_RELATIVE, FLAG, HEURISTIC,
+                QUERY_AND_SOURCE, "boolean"));
+        result.add(d("domain.absolute-weight", OBJECT, DOMAIN_DECLARED, WEIGHT, DOMAIN_ASSERTED,
+                OBJECT_VERSION, "domain"));
+        result.add(d("domain.distance", OBJECT, DOMAIN_DECLARED, DISTANCE, DOMAIN_ASSERTED,
+                OBJECT_VERSION, "domain"));
+        result.add(d("domain.lexical-ordinal", OBJECT, DOMAIN_DECLARED, ORDINAL, DOMAIN_ASSERTED,
+                OBJECT_VERSION, "lexical"));
+        result.add(d("domain.relevance-confidence", OBJECT, DOMAIN_DECLARED, CONFIDENCE,
+                DOMAIN_ASSERTED, OBJECT_VERSION, "fraction"));
         result.sort(Comparator.comparing(Descriptor::id));
         return List.copyOf(result);
     }

@@ -21,9 +21,11 @@ import java.util.Objects;
 /**
  * Direct-addressed int map over pool IDs plus a presence bitmap.
  *
- * <p>Lineage: absorbed from Synexia {@code m3-mat-value/src/main/java/jdk/internal/m3/matvalue/IdIntMap.java}
+ * <p>Lineage: absorbed from Synexia {@code
+ * m3-mat-value/src/main/java/jdk/internal/m3/matvalue/IdIntMap.java}
  * blob {@code 1be80983f33c1ecb4c8dac1ae641459180610c16} at com.synexia develop {@code 35474ccf} by
- * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source modulo names).
+ * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source
+ * modulo names).
  */
 public final class IdIntMap<T> {
     private final Pool<T> pool;

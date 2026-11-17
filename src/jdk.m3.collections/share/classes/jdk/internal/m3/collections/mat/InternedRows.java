@@ -24,9 +24,12 @@ import java.util.Objects;
  * the built pool is immutable and permits concurrent reads. Hashes select candidates
  * only: an equal hash is always followed by element-by-element equality.</p>
  *
- * <p>Lineage: absorbed from Synexia {@code m3-mat-value/src/main/java/jdk/internal/m3/matvalue/InternedRows.java}
- * blob {@code 00a551e81ccf22c59fe78a58b9a42e012d2f93ad} at com.synexia develop {@code 35474ccf8dafbe80feb55f1d82cb1136eeec119d} by
- * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source modulo names).
+ * <p>Lineage: absorbed from Synexia {@code
+ * m3-mat-value/src/main/java/jdk/internal/m3/matvalue/InternedRows.java}
+ * blob {@code 00a551e81ccf22c59fe78a58b9a42e012d2f93ad} at com.synexia develop {@code
+ * 35474ccf8dafbe80feb55f1d82cb1136eeec119d} by
+ * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source
+ * modulo names).
  */
 public final class InternedRows {
     private final OffsetIntArena rows;
@@ -197,7 +200,8 @@ public final class InternedRows {
         }
 
         private static int capacity(int current, int required) {
-            long candidate = Math.max((long) required, Math.max(2L, current + (current >>> 1) + 1L));
+            long candidate = Math.max((long) required, Math.max(2L, current + (current >>> 1) + 1L))
+                    ;
             if (candidate > Integer.MAX_VALUE - 8L) {
                 throw new IllegalStateException("interned row capacity overflow");
             }

@@ -19,9 +19,11 @@ import java.util.Objects;
 /**
  * Uniform facade over selected finite/adaptive int-set implementations.
  *
- * <p>Lineage: absorbed from Synexia {@code m3-mat-collections/src/main/java/jdk/internal/m3/matcollections/PlannedIntSet.java}
+ * <p>Lineage: absorbed from Synexia {@code
+ * m3-mat-collections/src/main/java/jdk/internal/m3/matcollections/PlannedIntSet.java}
  * blob {@code ef12abadb7b9305ad8136ebaaa9220fb9254bce1} at com.synexia develop {@code 35474ccf} by
- * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source modulo names).
+ * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source
+ * modulo names).
  */
 public final class PlannedIntSet {
     public enum Kind { ADAPTIVE_FINITE, ROARING_SIGNED }
@@ -53,7 +55,8 @@ public final class PlannedIntSet {
         return kind == Kind.ADAPTIVE_FINITE ? adaptive.toArray() : roaring.toArray();
     }
     public long primitivePayloadBytes() {
-        return kind == Kind.ADAPTIVE_FINITE ? adaptive.primitivePayloadBytes() : roaring.primitivePayloadBytes();
+        return kind == Kind.ADAPTIVE_FINITE ? adaptive.primitivePayloadBytes() :
+                roaring.primitivePayloadBytes();
     }
     public RoaringIntSet roaring() {
         if (kind != Kind.ROARING_SIGNED) {

@@ -31,9 +31,11 @@ import java.util.stream.StreamSupport;
  * Frozen state contains no object per chunk. Set algebra is performed container-wise:
  * only one 65,536-value chunk is expanded to temporary machine words at a time.</p>
  *
- * <p>Lineage: absorbed from Synexia {@code m3-mat-collections/src/main/java/jdk/internal/m3/matcollections/RoaringIntSet.java}
+ * <p>Lineage: absorbed from Synexia {@code
+ * m3-mat-collections/src/main/java/jdk/internal/m3/matcollections/RoaringIntSet.java}
  * blob {@code 04f03658aaa65d294e37bcc83c4da57c0ac19e59} at com.synexia develop {@code 35474ccf} by
- * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source modulo names).
+ * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source
+ * modulo names).
  */
 public final class RoaringIntSet {
     public enum ContainerKind { ARRAY, RUNS, BITMAP }
@@ -98,7 +100,8 @@ public final class RoaringIntSet {
         while (position < unique) {
             int key = (values[position] ^ Integer.MIN_VALUE) >>> 16;
             int start = position;
-            while (position < unique && ((values[position] ^ Integer.MIN_VALUE) >>> 16) == key) position++;
+            while (position < unique && ((values[position] ^ Integer.MIN_VALUE) >>> 16) == key)
+                    position++;
             chunks.add(chunkFromSorted(key, values, start, position));
         }
         return chunks;
@@ -198,8 +201,10 @@ public final class RoaringIntSet {
     }
 
     public long primitivePayloadBytes() {
-        return 4L * (chunkKeys.length + offsets.length + dataLengths.length + counts.length + prefix.length)
-                + kinds.length + 2L * arrayData.length + 4L * runData.length + 8L * bitmapData.length;
+        return 4L * (chunkKeys.length + offsets.length + dataLengths.length + counts.length +
+                prefix.length)
+                + kinds.length + 2L * arrayData.length + 4L * runData.length + 8L *
+                        bitmapData.length;
     }
 
     public boolean contains(int value) {
@@ -410,7 +415,8 @@ public final class RoaringIntSet {
     }
 
     public RoaringIntSet range(long fromInclusive, long toExclusive) {
-        if (fromInclusive < Integer.MIN_VALUE || toExclusive > INT_MAX_EXCLUSIVE || fromInclusive > toExclusive) {
+        if (fromInclusive < Integer.MIN_VALUE || toExclusive > INT_MAX_EXCLUSIVE || fromInclusive >
+                toExclusive) {
             throw new IllegalArgumentException("range outside int domain");
         }
         if (fromInclusive == toExclusive || size == 0) return of();
@@ -482,7 +488,8 @@ public final class RoaringIntSet {
     private boolean containsLow(int chunk, int low) {
         return switch (kinds[chunk]) {
             case ARRAY -> Arrays.binarySearch(
-                    arrayData, offsets[chunk], offsets[chunk] + dataLengths[chunk], (char) low) >= 0;
+                    arrayData, offsets[chunk], offsets[chunk] + dataLengths[chunk], (char) low) >=
+                            0;
             case RUNS -> containsRun(chunk, low);
             case BITMAP -> (bitmapData[offsets[chunk] + (low >>> 6)] & (1L << (low & 63))) != 0L;
             default -> throw new IllegalStateException("container kind");
@@ -631,7 +638,8 @@ public final class RoaringIntSet {
         int count = 0;
         for (int i = 0; i < word; i++) count += Long.bitCount(bitmapData[base + i]);
         int remainder = low & 63;
-        if (remainder != 0) count += Long.bitCount(bitmapData[base + word] & ((1L << remainder) - 1L));
+        if (remainder != 0) count += Long.bitCount(bitmapData[base + word] & ((1L << remainder) - 1L
+                ));
         return count;
     }
 

@@ -14,9 +14,12 @@
  *******************************************************************************/
 package jdk.internal.m3.collections.mat;
 /**
- * <p>Lineage: absorbed from Synexia {@code m3-mat-collections/src/main/java/jdk/internal/m3/matcollections/CollectionPlan.java}
- * blob {@code 8533a83f504de89abc2103cb1499033240dc6362} at com.synexia develop {@code 35474ccf8dafbe80feb55f1d82cb1136eeec119d} by
- * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source modulo names).
+ * <p>Lineage: absorbed from Synexia {@code
+ * m3-mat-collections/src/main/java/jdk/internal/m3/matcollections/CollectionPlan.java}
+ * blob {@code 8533a83f504de89abc2103cb1499033240dc6362} at com.synexia develop {@code
+ * 35474ccf8dafbe80feb55f1d82cb1136eeec119d} by
+ * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source
+ * modulo names).
  */
 public record CollectionPlan(
         StorageKind kind, long primitivePayloadBytes, int size, long domainSpan, String detail) {

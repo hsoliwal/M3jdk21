@@ -20,18 +20,23 @@ import java.util.Objects;
 /**
  * Portable value address: immutable pool-image digest + canonical type + dense value id.
  *
- * <p>Lineage: absorbed from Synexia {@code m3-mat-value/src/main/java/jdk/internal/m3/matvalue/PortableRef.java}
- * blob {@code c4f97ba07322208eca4326c4c391397e9f54c1d9} at com.synexia develop {@code 35474ccf8dafbe80feb55f1d82cb1136eeec119d} by
- * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source modulo names).
+ * <p>Lineage: absorbed from Synexia {@code
+ * m3-mat-value/src/main/java/jdk/internal/m3/matvalue/PortableRef.java}
+ * blob {@code c4f97ba07322208eca4326c4c391397e9f54c1d9} at com.synexia develop {@code
+ * 35474ccf8dafbe80feb55f1d82cb1136eeec119d} by
+ * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source
+ * modulo names).
  */
 public record PortableRef(String typeId, String imageSha256, int id) {
     public PortableRef {
         typeId = Objects.requireNonNull(typeId, "typeId");
         imageSha256 = Objects.requireNonNull(imageSha256, "imageSha256");
         if (typeId.isBlank()) throw new IllegalArgumentException("blank typeId");
-        if (imageSha256.length() != 64) throw new IllegalArgumentException("SHA-256 must be 64 hex characters");
+        if (imageSha256.length() != 64) throw new IllegalArgumentException
+                ("SHA-256 must be 64 hex characters");
         try { HexFormat.of().parseHex(imageSha256); }
-        catch (IllegalArgumentException failure) { throw new IllegalArgumentException("invalid SHA-256 hex", failure); }
+        catch (IllegalArgumentException failure) { throw new IllegalArgumentException
+                ("invalid SHA-256 hex", failure); }
         if (id < 0) throw new IllegalArgumentException("negative id");
     }
 }

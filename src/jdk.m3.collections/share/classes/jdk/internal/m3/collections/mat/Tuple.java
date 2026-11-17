@@ -20,9 +20,12 @@ import java.util.Objects;
 /**
  * Immutable tuple of IDs from one pool; no object references per element.
  *
- * <p>Lineage: absorbed from Synexia {@code m3-mat-value/src/main/java/jdk/internal/m3/matvalue/Tuple.java}
- * blob {@code 62d08c9508a1328bf18958643ecbe2c7fdf3d3ce} at com.synexia develop {@code 35474ccf8dafbe80feb55f1d82cb1136eeec119d} by
- * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source modulo names).
+ * <p>Lineage: absorbed from Synexia {@code
+ * m3-mat-value/src/main/java/jdk/internal/m3/matvalue/Tuple.java}
+ * blob {@code 62d08c9508a1328bf18958643ecbe2c7fdf3d3ce} at com.synexia develop {@code
+ * 35474ccf8dafbe80feb55f1d82cb1136eeec119d} by
+ * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source
+ * modulo names).
  */
 public final class Tuple<T> {
     private final Pool<T> pool;
@@ -42,7 +45,8 @@ public final class Tuple<T> {
 
     @Override
     public boolean equals(Object other) {
-        return this == other || other instanceof Tuple<?> tuple && pool == tuple.pool && Arrays.equals(ids, tuple.ids);
+        return this == other || other instanceof Tuple<?> tuple && pool == tuple.pool &&
+                Arrays.equals(ids, tuple.ids);
     }
 
     @Override

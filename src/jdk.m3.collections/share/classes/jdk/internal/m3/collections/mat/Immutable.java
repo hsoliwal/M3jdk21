@@ -22,9 +22,11 @@ import java.lang.annotation.Target;
 /**
  * Opt-in request for a direct generated canonical codec for an immutable Java record.
  *
- * <p>Lineage: absorbed from Synexia {@code m3-mat-value/src/main/java/jdk/internal/m3/matvalue/Immutable.java}
+ * <p>Lineage: absorbed from Synexia {@code
+ * m3-mat-value/src/main/java/jdk/internal/m3/matvalue/Immutable.java}
  * blob {@code d6acaa3976b36f9f1d2dd64c698c3ccf82ec908d} at com.synexia develop {@code 35474ccf} by
- * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source modulo names).
+ * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source
+ * modulo names).
  */
 @Retention(RetentionPolicy.SOURCE)
 @Target(ElementType.TYPE)

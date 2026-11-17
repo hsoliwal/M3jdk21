@@ -24,9 +24,11 @@ import java.util.stream.IntStream;
  * Immutable finite-universe bitmap with fixed 512-bit rank superblocks.
  * No boxed bit positions or java.util.BitSet are retained.
  *
- * <p>Lineage: absorbed from Synexia {@code m3-mat-collections/src/main/java/jdk/internal/m3/matcollections/RankSelectBitVector.java}
+ * <p>Lineage: absorbed from Synexia {@code
+ * m3-mat-collections/src/main/java/jdk/internal/m3/matcollections/RankSelectBitVector.java}
  * blob {@code 0f571f976d1ff313a3205b0e6bf54d2d607bcae4} at com.synexia develop {@code 35474ccf} by
- * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source modulo names).
+ * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source
+ * modulo names).
  */
 public final class RankSelectBitVector {
     private static final int WORDS_PER_SUPERBLOCK = 8;

@@ -12,9 +12,11 @@ final class BitMatrixTileJUnitTest {
     void denseAndSparseTransposeParity() throws Exception {
         boolean required = Boolean.getBoolean("m3.bitmatrix.requireNative");
         if (required) {
-            assertTrue(BitMatrix.nativeAvailable(), "native matrix test was requested but cannot be skipped");
+            assertTrue(BitMatrix.nativeAvailable(),
+                    "native matrix test was requested but cannot be skipped");
         } else {
-            assumeTrue(BitMatrix.nativeAvailable(), "optional source-built matrix JNI library not loaded");
+            assumeTrue(BitMatrix.nativeAvailable(),
+                    "optional source-built matrix JNI library not loaded");
         }
         BitMatrixTileContract.runAll();
     }

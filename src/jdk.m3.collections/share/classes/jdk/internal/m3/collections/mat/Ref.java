@@ -19,9 +19,12 @@ import java.util.Objects;
 /**
  * O(1) immutable handle into one exact Pool.
  *
- * <p>Lineage: absorbed from Synexia {@code m3-mat-value/src/main/java/jdk/internal/m3/matvalue/Ref.java}
- * blob {@code 9f2cf9e66a511608d3134b0da473d08874a105d5} at com.synexia develop {@code 35474ccf8dafbe80feb55f1d82cb1136eeec119d} by
- * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source modulo names).
+ * <p>Lineage: absorbed from Synexia {@code
+ * m3-mat-value/src/main/java/jdk/internal/m3/matvalue/Ref.java}
+ * blob {@code 9f2cf9e66a511608d3134b0da473d08874a105d5} at com.synexia develop {@code
+ * 35474ccf8dafbe80feb55f1d82cb1136eeec119d} by
+ * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source
+ * modulo names).
  */
 public final class Ref<T> {
     private final Pool<T> pool;

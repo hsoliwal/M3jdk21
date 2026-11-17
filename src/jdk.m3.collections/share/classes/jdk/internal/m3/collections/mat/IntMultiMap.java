@@ -15,22 +15,33 @@
 package jdk.internal.m3.collections.mat;
 import java.util.Arrays;
 /**
- * <p>Lineage: absorbed from Synexia {@code m3-mat-collections/src/main/java/jdk/internal/m3/matcollections/IntMultiMap.java}
+ * <p>Lineage: absorbed from Synexia {@code
+ * m3-mat-collections/src/main/java/jdk/internal/m3/matcollections/IntMultiMap.java}
  * blob {@code 5f03bc719e8f7a42fec6fbf653fc82acc558feb0} at com.synexia develop {@code 35474ccf} by
- * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source modulo names).
+ * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source
+ * modulo names).
  */
 public final class IntMultiMap{
   private final int[] keys,offsets,values;private final CollectionPlan plan;
-  private IntMultiMap(int[] keys,int[] offsets,int[] values){this.keys=keys;this.offsets=offsets;this.values=values;long b=4L*(keys.length+offsets.length+values.length);this.plan=new CollectionPlan(StorageKind.MULTIMAP_CSR,b,values.length,keys.length,"sorted keys + offsets + flat values");}
-  public static Builder builder(){return new Builder();} public int keyCount(){return keys.length;}public int pairCount(){return values.length;}public int[] keys(){return keys.clone();}public CollectionPlan plan(){return plan;}public long primitivePayloadBytes(){return plan.primitivePayloadBytes();}
-  public IntList values(int key){int i=Arrays.binarySearch(keys,key);return i<0?new IntList(new int[0]):IntList.trustedView(values,offsets[i],offsets[i+1]-offsets[i]);}
+  private IntMultiMap(int[] keys,int[] offsets,int[] values){this.keys=keys;this.offsets=offsets;
+          this.values=values;long b=4L*(keys.length+offsets.length+values.length);this.plan=new
+          CollectionPlan(StorageKind.MULTIMAP_CSR,b,values.length,
+          keys.length,"sorted keys + offsets + flat values");}
+  public static Builder builder(){return new Builder();} public int keyCount(){return keys.length;}
+          public int pairCount(){return values.length;}public int[] keys(){return keys.clone();}
+          public CollectionPlan plan(){return plan;}public long primitivePayloadBytes(){return
+          plan.primitivePayloadBytes();}
+  public IntList values(int key){int i=Arrays.binarySearch(keys,key);return i<0?new IntList(new
+          int[0]):IntList.trustedView(values,offsets[i],offsets[i+1]-offsets[i]);}
   public static final class Builder{
-      /** Creates an instance (explicit form of the default constructor; required by -Xlint:all -Werror). */
+      /** Creates an instance (explicit form of the default constructor; required by -Xlint:all
+       * -Werror). */
       public Builder() {
       }
 
     private int[] k=new int[16],v=new int[16];private int size;
-    public Builder put(int key,int value){if(size==k.length){k=Arrays.copyOf(k,k.length*2);v=Arrays.copyOf(v,v.length*2);}k[size]=key;v[size]=value;size++;return this;}
+    public Builder put(int key,int value){if(size==k.length){k=Arrays.copyOf(k,k.length*2);
+            v=Arrays.copyOf(v,v.length*2);}k[size]=key;v[size]=value;size++;return this;}
     /** Sort by signed key, then original insertion index, without boxing row ordinals. */
     public IntMultiMap build(){
       if(size==0)return new IntMultiMap(new int[0],new int[]{0},new int[0]);

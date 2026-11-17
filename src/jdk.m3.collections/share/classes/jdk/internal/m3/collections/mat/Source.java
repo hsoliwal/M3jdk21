@@ -21,9 +21,12 @@ import java.util.Objects;
 /**
  * Checked reader for canonical Mat codec payloads.
  *
- * <p>Lineage: absorbed from Synexia {@code m3-mat-value/src/main/java/jdk/internal/m3/matvalue/Source.java}
- * blob {@code 962d120f127919a1b388522451995a13094dd1d8} at com.synexia develop {@code 35474ccf8dafbe80feb55f1d82cb1136eeec119d} by
- * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source modulo names).
+ * <p>Lineage: absorbed from Synexia {@code
+ * m3-mat-value/src/main/java/jdk/internal/m3/matvalue/Source.java}
+ * blob {@code 962d120f127919a1b388522451995a13094dd1d8} at com.synexia develop {@code
+ * 35474ccf8dafbe80feb55f1d82cb1136eeec119d} by
+ * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source
+ * modulo names).
  */
 public final class Source {
     private final byte[] bytes;
@@ -81,10 +84,12 @@ public final class Source {
     }
 
     public void end() {
-        if (position != bytes.length) throw new IllegalArgumentException("trailing canonical bytes");
+        if (position != bytes.length) throw new IllegalArgumentException("trailing canonical bytes")
+                ;
     }
 
     private void require(int count) {
-        if (count < 0 || count > bytes.length - position) throw new IllegalArgumentException("truncated canonical bytes");
+        if (count < 0 || count > bytes.length - position) throw new IllegalArgumentException
+                ("truncated canonical bytes");
     }
 }

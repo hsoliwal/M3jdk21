@@ -51,9 +51,12 @@ final class BlockIntVectorBoundaryTest {
                     assertEquals(length, vector.size());
                     assertEquals(size, vector.blockSize());
                     assertEquals(((long) length + size - 1L) / size, vector.blocks());
-                    assertArrayEquals(values, vector.toArray(), "length=" + length + ", blockSize=" + size);
-                    for (int index = 0; index < length; index++) assertEquals(values[index], vector.get(index));
-                    assertEquals(vector.blocks(), vector.constantBlocks() + vector.packedBlocks() + vector.plainBlocks());
+                    assertArrayEquals(values, vector.toArray(), "length=" + length + ", blockSize="
+                            + size);
+                    for (int index = 0; index < length; index++) assertEquals(values[index],
+                            vector.get(index));
+                    assertEquals(vector.blocks(), vector.constantBlocks() + vector.packedBlocks() +
+                            vector.plainBlocks());
                     assertTrue(vector.primitivePayloadBytes() >= 0);
                 }
             }

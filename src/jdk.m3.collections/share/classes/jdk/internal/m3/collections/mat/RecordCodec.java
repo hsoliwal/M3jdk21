@@ -23,9 +23,12 @@ import java.util.Objects;
  * Correctness-oriented reflective codec for Java records.
  * Generated codecs should replace it on hot paths, but they must preserve these bytes.
  *
- * <p>Lineage: absorbed from Synexia {@code m3-mat-value/src/main/java/jdk/internal/m3/matvalue/RecordCodec.java}
- * blob {@code 5a7d53bbbec2dc0ac7b7e8f0576675b8b7df2bc9} at com.synexia develop {@code 35474ccf8dafbe80feb55f1d82cb1136eeec119d} by
- * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source modulo names).
+ * <p>Lineage: absorbed from Synexia {@code
+ * m3-mat-value/src/main/java/jdk/internal/m3/matvalue/RecordCodec.java}
+ * blob {@code 5a7d53bbbec2dc0ac7b7e8f0576675b8b7df2bc9} at com.synexia develop {@code
+ * 35474ccf8dafbe80feb55f1d82cb1136eeec119d} by
+ * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source
+ * modulo names).
  */
 public final class RecordCodec<R extends Record> implements Codec<R> {
     private final Class<R> type;
@@ -59,7 +62,8 @@ public final class RecordCodec<R extends Record> implements Codec<R> {
             this.constructor=type.getDeclaredConstructor(parameterTypes);
             if (!constructor.canAccess(null)) constructor.setAccessible(true);
         } catch (ReflectiveOperationException | SecurityException e) {
-            throw new IllegalArgumentException("record canonical constructor inaccessible: "+type.getName(),e);
+            throw new IllegalArgumentException
+                    ("record canonical constructor inaccessible: "+type.getName(),e);
         }
     }
 
@@ -78,7 +82,8 @@ public final class RecordCodec<R extends Record> implements Codec<R> {
                 Object field=components[i].getAccessor().invoke(value);
                 codecs[i].encode(field,sink);
             } catch (ReflectiveOperationException e) {
-                throw new IllegalArgumentException("record accessor failed: "+components[i].getName(),e);
+                throw new IllegalArgumentException("record accessor failed: "+components[i].getName(
+                        ),e);
             }
         }
     }

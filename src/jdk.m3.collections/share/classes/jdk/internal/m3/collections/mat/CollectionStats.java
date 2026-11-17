@@ -14,9 +14,12 @@
  *******************************************************************************/
 package jdk.internal.m3.collections.mat;
 /**
- * <p>Lineage: absorbed from Synexia {@code m3-mat-collections/src/main/java/jdk/internal/m3/matcollections/CollectionStats.java}
- * blob {@code 37f0558b5910a1b6fdd196a5ef69a10f61b20455} at com.synexia develop {@code 35474ccf8dafbe80feb55f1d82cb1136eeec119d} by
- * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source modulo names).
+ * <p>Lineage: absorbed from Synexia {@code
+ * m3-mat-collections/src/main/java/jdk/internal/m3/matcollections/CollectionStats.java}
+ * blob {@code 37f0558b5910a1b6fdd196a5ef69a10f61b20455} at com.synexia develop {@code
+ * 35474ccf8dafbe80feb55f1d82cb1136eeec119d} by
+ * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source
+ * modulo names).
  */
 public record CollectionStats(int size, int distinct, int min, int max, int runs) {
     public static CollectionStats of(int[] values) {

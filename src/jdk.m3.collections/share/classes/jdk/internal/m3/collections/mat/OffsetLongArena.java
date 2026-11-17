@@ -20,9 +20,12 @@ import java.util.Objects;
 /**
  * Immutable variable-width long rows encoded as offsets into one contiguous arena.
  *
- * <p>Lineage: absorbed from Synexia {@code m3-mat-value/src/main/java/jdk/internal/m3/matvalue/OffsetLongArena.java}
- * blob {@code 0a32bab82b8e48e65aa932c20791762cfd84e208} at com.synexia develop {@code 35474ccf8dafbe80feb55f1d82cb1136eeec119d} by
- * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source modulo names).
+ * <p>Lineage: absorbed from Synexia {@code
+ * m3-mat-value/src/main/java/jdk/internal/m3/matvalue/OffsetLongArena.java}
+ * blob {@code 0a32bab82b8e48e65aa932c20791762cfd84e208} at com.synexia develop {@code
+ * 35474ccf8dafbe80feb55f1d82cb1136eeec119d} by
+ * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source
+ * modulo names).
  */
 public final class OffsetLongArena {
     private final int[] offsets;

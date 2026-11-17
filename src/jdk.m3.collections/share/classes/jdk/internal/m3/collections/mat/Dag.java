@@ -24,9 +24,12 @@ import java.util.Objects;
  * references to existing nodes only, preserving DAG topology and excluding cycles.
  * Payload ID -1 means there is no leaf. IDs are local to one DAG, never portable.</p>
  *
- * <p>Lineage: absorbed from Synexia {@code m3-mat-value/src/main/java/jdk/internal/m3/matvalue/Dag.java}
- * blob {@code ef7d17f925ce18e79f756535bb82dfd67dedb2e5} at com.synexia develop {@code 35474ccf8dafbe80feb55f1d82cb1136eeec119d} by
- * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source modulo names).
+ * <p>Lineage: absorbed from Synexia {@code
+ * m3-mat-value/src/main/java/jdk/internal/m3/matvalue/Dag.java}
+ * blob {@code ef7d17f925ce18e79f756535bb82dfd67dedb2e5} at com.synexia develop {@code
+ * 35474ccf8dafbe80feb55f1d82cb1136eeec119d} by
+ * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source
+ * modulo names).
  */
 public final class Dag<T> {
     private final Pool<T> payloads;

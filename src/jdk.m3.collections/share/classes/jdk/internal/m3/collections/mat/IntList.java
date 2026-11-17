@@ -18,24 +18,32 @@ import java.util.Objects;
 import java.util.PrimitiveIterator;
 import java.util.stream.IntStream;
 /**
- * <p>Lineage: absorbed from Synexia {@code m3-mat-collections/src/main/java/jdk/internal/m3/matcollections/IntList.java}
+ * <p>Lineage: absorbed from Synexia {@code
+ * m3-mat-collections/src/main/java/jdk/internal/m3/matcollections/IntList.java}
  * blob {@code 821f776b5eaef9923ebd1b27bc11bf488fe15a8a} at com.synexia develop {@code 35474ccf} by
- * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source modulo names).
+ * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source
+ * modulo names).
  */
 public final class IntList implements Iterable<Integer> {
     private final int[] values; private final int offset; private final int size;
-    public IntList(int[] values){ this(Objects.requireNonNull(values,"values").clone(),0,values.length,true); }
+    public IntList(int[] values){ this(Objects.requireNonNull(values,"values").clone(),0,
+            values.length,true); }
     private IntList(int[] values,int offset,int size,boolean trusted){
-        this.values=values;this.offset=offset;this.size=size;Objects.checkFromIndexSize(offset,size,values.length);
+        this.values=values;this.offset=offset;this.size=size;Objects.checkFromIndexSize(offset,size,
+                values.length);
     }
-    static IntList trustedView(int[] values,int offset,int size){ return new IntList(values,offset,size,true); }
+    static IntList trustedView(int[] values,int offset,int size){ return new IntList(values,offset,
+            size,true); }
     public int size(){return size;} public boolean isEmpty(){return size==0;}
     public int getInt(int index){return values[offset+Objects.checkIndex(index,size)];}
     public Integer get(int index){return getInt(index);}
     public long primitivePayloadBytes(){return values.length*4L;}
-    public CollectionPlan plan(){return new CollectionPlan(StorageKind.PRIMITIVE_INT_LIST,primitivePayloadBytes(),size,size,"int[] owner/view");}
-    public IntList slice(int from,int to){Objects.checkFromToIndex(from,to,size);return trustedView(values,offset+from,to-from);}
-    public int indexOf(int value){for(int i=0;i<size;i++)if(values[offset+i]==value)return i;return -1;}
+    public CollectionPlan plan(){return new CollectionPlan(StorageKind.PRIMITIVE_INT_LIST,
+            primitivePayloadBytes(),size,size,"int[] owner/view");}
+    public IntList slice(int from,int to){Objects.checkFromToIndex(from,to,size);return trustedView(
+            values,offset+from,to-from);}
+    public int indexOf(int value){for(int i=0;i<size;i++)if(values[offset+i]==value)return i;return
+            -1;}
     public boolean contains(int value){return indexOf(value)>=0;}
     public int[] toArray(){return Arrays.copyOfRange(values,offset,offset+size);}
     public IntStream intStream(){return Arrays.stream(values,offset,offset+size);}

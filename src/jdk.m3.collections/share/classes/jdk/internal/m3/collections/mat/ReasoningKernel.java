@@ -21,9 +21,12 @@ import java.util.Objects;
  * One explicit facade for the three deterministic statement operations:
  * peer comparison, evidence lookup, and bounded logical derivation.
  *
- * <p>Lineage: absorbed from Synexia {@code m3-mat-value/src/main/java/jdk/internal/m3/matvalue/ReasoningKernel.java}
- * blob {@code 6acbd5f0323130544a8b5d98301aadb08eb1c69c} at com.synexia develop {@code 35474ccf8dafbe80feb55f1d82cb1136eeec119d} by
- * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source modulo names).
+ * <p>Lineage: absorbed from Synexia {@code
+ * m3-mat-value/src/main/java/jdk/internal/m3/matvalue/ReasoningKernel.java}
+ * blob {@code 6acbd5f0323130544a8b5d98301aadb08eb1c69c} at com.synexia develop {@code
+ * 35474ccf8dafbe80feb55f1d82cb1136eeec119d} by
+ * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source
+ * modulo names).
  */
 public final class ReasoningKernel {
     private final PredicateLexicon predicates;

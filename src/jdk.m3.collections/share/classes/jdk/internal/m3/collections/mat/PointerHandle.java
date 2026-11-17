@@ -17,9 +17,12 @@ package jdk.internal.m3.collections.mat;
 /**
  * Opaque generational handle used to lower pointer identity into stable primitive coordinates.
  *
- * <p>Lineage: absorbed from Synexia {@code m3-mat-collections/src/main/java/jdk/internal/m3/matcollections/PointerHandle.java}
- * blob {@code 14704d778097d200151b44351c8279ef5eae4f75} at com.synexia develop {@code 35474ccf8dafbe80feb55f1d82cb1136eeec119d} by
- * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source modulo names).
+ * <p>Lineage: absorbed from Synexia {@code
+ * m3-mat-collections/src/main/java/jdk/internal/m3/matcollections/PointerHandle.java}
+ * blob {@code 14704d778097d200151b44351c8279ef5eae4f75} at com.synexia develop {@code
+ * 35474ccf8dafbe80feb55f1d82cb1136eeec119d} by
+ * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source
+ * modulo names).
  */
 public final class PointerHandle {
     public static final long NULL = 0L;
@@ -50,7 +53,8 @@ public final class PointerHandle {
     public static int generation(long handle) {
         if (handle == NULL) throw new IllegalArgumentException("null handle");
         int generation = (int) (handle >>> 32);
-        if (generation == 0) throw new IllegalArgumentException("invalid pointer handle generation");
+        if (generation == 0) throw new IllegalArgumentException("invalid pointer handle generation")
+                ;
         return generation;
     }
 }

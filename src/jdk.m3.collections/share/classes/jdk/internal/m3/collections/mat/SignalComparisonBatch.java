@@ -21,9 +21,12 @@ import java.util.Objects;
  * The caller owns every input and output array. No per-pair object is allocated or retained.
  * Distance is scalar separation, not a semantic metric or proof of object equality.
  *
- * <p>Lineage: absorbed from Synexia {@code m3-mat-collections/src/main/java/jdk/internal/m3/matcollections/SignalComparisonBatch.java}
- * blob {@code ae3838458a1ae8e24b6ce9131b879273a3c5315e} at com.synexia develop {@code 35474ccf8dafbe80feb55f1d82cb1136eeec119d} by
- * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source modulo names).
+ * <p>Lineage: absorbed from Synexia {@code
+ * m3-mat-collections/src/main/java/jdk/internal/m3/matcollections/SignalComparisonBatch.java}
+ * blob {@code ae3838458a1ae8e24b6ce9131b879273a3c5315e} at com.synexia develop {@code
+ * 35474ccf8dafbe80feb55f1d82cb1136eeec119d} by
+ * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source
+ * modulo names).
  */
 public final class SignalComparisonBatch {
     private SignalComparisonBatch() {}

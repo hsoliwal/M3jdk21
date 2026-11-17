@@ -17,9 +17,12 @@ package jdk.internal.m3.collections.mat;
 /**
  * Immutable primitive-coordinate statement: subject, predicate, object and explicit context.
  *
- * <p>Lineage: absorbed from Synexia {@code m3-mat-value/src/main/java/jdk/internal/m3/matvalue/Statement.java}
- * blob {@code 0cd52259c9cfa778e69cb113d38db88de804d309} at com.synexia develop {@code 35474ccf8dafbe80feb55f1d82cb1136eeec119d} by
- * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source modulo names).
+ * <p>Lineage: absorbed from Synexia {@code
+ * m3-mat-value/src/main/java/jdk/internal/m3/matvalue/Statement.java}
+ * blob {@code 0cd52259c9cfa778e69cb113d38db88de804d309} at com.synexia develop {@code
+ * 35474ccf8dafbe80feb55f1d82cb1136eeec119d} by
+ * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source
+ * modulo names).
  */
 public record Statement(long subject, int predicate, long object, long context) {
     public Statement {

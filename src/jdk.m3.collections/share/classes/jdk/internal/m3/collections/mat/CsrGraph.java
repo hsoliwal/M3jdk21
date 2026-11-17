@@ -23,9 +23,11 @@ import java.util.Objects;
  * Immutable directed int-node graph in compressed sparse row form.
  * Each adjacency is sorted and deduplicated; all retained data is primitive arrays.
  *
- * <p>Lineage: absorbed from Synexia {@code m3-mat-collections/src/main/java/jdk/internal/m3/matcollections/CsrGraph.java}
+ * <p>Lineage: absorbed from Synexia {@code
+ * m3-mat-collections/src/main/java/jdk/internal/m3/matcollections/CsrGraph.java}
  * blob {@code bad047aab7d8adda8034b330fbcd193135bbbb09} at com.synexia develop {@code 35474ccf} by
- * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source modulo names).
+ * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source
+ * modulo names).
  */
 public final class CsrGraph {
     /** Native execution is explicit; JAVA never attempts library loading. */
@@ -96,7 +98,8 @@ public final class CsrGraph {
         return Arrays.binarySearch(targets, offsets[from], offsets[from + 1], to) >= 0;
     }
 
-    public long primitivePayloadBytes() { return Integer.BYTES * ((long) offsets.length + targets.length); }
+    public long primitivePayloadBytes() { return Integer.BYTES * ((long) offsets.length +
+            targets.length); }
 
     /** Returns a CSR with every edge reversed in O(nodes + edges) time. */
     public CsrGraph transpose() { return transpose(Backend.JAVA); }

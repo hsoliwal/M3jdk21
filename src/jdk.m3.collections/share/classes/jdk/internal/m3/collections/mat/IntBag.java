@@ -19,19 +19,24 @@ import java.util.Objects;
 /**
  * Immutable primitive multiset frozen as an adaptive primitive value->count map.
  *
- * <p>Lineage: absorbed from Synexia {@code m3-mat-collections/src/main/java/jdk/internal/m3/matcollections/IntBag.java}
- * blob {@code 313731d4ad55f6780f8c975e95fc1b8a9aaa3121} at com.synexia develop {@code 35474ccf8dafbe80feb55f1d82cb1136eeec119d} by
- * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source modulo names).
+ * <p>Lineage: absorbed from Synexia {@code
+ * m3-mat-collections/src/main/java/jdk/internal/m3/matcollections/IntBag.java}
+ * blob {@code 313731d4ad55f6780f8c975e95fc1b8a9aaa3121} at com.synexia develop {@code
+ * 35474ccf8dafbe80feb55f1d82cb1136eeec119d} by
+ * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source
+ * modulo names).
  */
 public final class IntBag {
     private final AdaptiveIntToIntMap counts;
     private final long size;
 
-    private IntBag(AdaptiveIntToIntMap counts, long size) { this.counts = counts; this.size = size; }
+    private IntBag(AdaptiveIntToIntMap counts, long size) { this.counts = counts; this.size = size;
+            }
 
     public static IntBag of(int... values) {
         Objects.requireNonNull(values, "values");
-        AdaptiveIntToIntMap.Builder builder = AdaptiveIntToIntMap.builder(CollectionPolicy.MIN_MEMORY);
+        AdaptiveIntToIntMap.Builder builder = AdaptiveIntToIntMap.builder(
+                CollectionPolicy.MIN_MEMORY);
         for (int value : values) builder.incrementCount(value);
         return new IntBag(builder.build(), values.length);
     }

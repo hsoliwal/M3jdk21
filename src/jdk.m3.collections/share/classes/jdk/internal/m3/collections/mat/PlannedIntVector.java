@@ -19,9 +19,11 @@ import java.util.Objects;
 /**
  * Uniform facade over one selected immutable primitive int-vector representation.
  *
- * <p>Lineage: absorbed from Synexia {@code m3-mat-collections/src/main/java/jdk/internal/m3/matcollections/PlannedIntVector.java}
+ * <p>Lineage: absorbed from Synexia {@code
+ * m3-mat-collections/src/main/java/jdk/internal/m3/matcollections/PlannedIntVector.java}
  * blob {@code f1c6e7a883a0d323b21257e00fb0abdbeb91d828} at com.synexia develop {@code 35474ccf} by
- * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source modulo names).
+ * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source
+ * modulo names).
  */
 public final class PlannedIntVector {
     public enum Kind { ADAPTIVE, BLOCK, SPARSE }
@@ -46,7 +48,8 @@ public final class PlannedIntVector {
     }
 
     static PlannedIntVector adaptive(AdaptiveIntVector value) {
-        return new PlannedIntVector(Kind.ADAPTIVE, value, null, null, value.primitivePayloadBytes());
+        return new PlannedIntVector(Kind.ADAPTIVE, value, null, null, value.primitivePayloadBytes())
+                ;
     }
 
     static PlannedIntVector block(BlockIntVector value) {

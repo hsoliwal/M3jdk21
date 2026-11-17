@@ -24,9 +24,12 @@ import java.util.regex.Pattern;
  * <p>Rows and numeric values remain in existing MAT primitive owners. A descriptor is shared
  * schema-level metadata, never a retained structural object per element.</p>
  *
- * <p>Lineage: absorbed from Synexia {@code m3-mat-collections/src/main/java/jdk/internal/m3/matcollections/SignalSemantics.java}
- * blob {@code 9450ae632b891f200668b227e4425731163d9257} at com.synexia develop {@code 35474ccf8dafbe80feb55f1d82cb1136eeec119d} by
- * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source modulo names).
+ * <p>Lineage: absorbed from Synexia {@code
+ * m3-mat-collections/src/main/java/jdk/internal/m3/matcollections/SignalSemantics.java}
+ * blob {@code 9450ae632b891f200668b227e4425731163d9257} at com.synexia develop {@code
+ * 35474ccf8dafbe80feb55f1d82cb1136eeec119d} by
+ * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source
+ * modulo names).
  */
 public final class SignalSemantics {
     private static final Pattern ID = Pattern.compile("[a-z][a-z0-9]*(?:[.-][a-z0-9]+)*");
@@ -82,7 +85,8 @@ public final class SignalSemantics {
                 throw new IllegalArgumentException("only ordinals may claim exact ordering");
             }
             if (admissibleBoundClaim && role != Role.LOWER_BOUND) {
-                throw new IllegalArgumentException("only lower bounds may claim admissible pruning");
+                throw new IllegalArgumentException("only lower bounds may claim admissible pruning")
+                        ;
             }
             if ((exactOrderClaim || admissibleBoundClaim)
                     && evidence != Evidence.EXACT_DECLARATION
@@ -99,7 +103,8 @@ public final class SignalSemantics {
             }
             if (stage == Stage.COMPILER_ATTRIBUTED
                     && invalidation != Invalidation.CLASSPATH_AND_SOURCE) {
-                throw new IllegalArgumentException("attributed facts require classpath invalidation");
+                throw new IllegalArgumentException
+                        ("attributed facts require classpath invalidation");
             }
             if (stage == Stage.SOURCE_PARSE
                     && invalidation != Invalidation.SOURCE_ROOT) {

@@ -20,9 +20,12 @@ import java.util.Objects;
 /**
  * Immutable long->long map with direct, sorted and primitive open-addressed hash layouts.
  *
- * <p>Lineage: absorbed from Synexia {@code m3-mat-collections/src/main/java/jdk/internal/m3/matcollections/AdaptiveLongToLongMap.java}
- * blob {@code 23c1729dae892dfc70041df8741cf1e75687d7b1} at com.synexia develop {@code 35474ccf8dafbe80feb55f1d82cb1136eeec119d} by
- * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source modulo names).
+ * <p>Lineage: absorbed from Synexia {@code
+ * m3-mat-collections/src/main/java/jdk/internal/m3/matcollections/AdaptiveLongToLongMap.java}
+ * blob {@code 23c1729dae892dfc70041df8741cf1e75687d7b1} at com.synexia develop {@code
+ * 35474ccf8dafbe80feb55f1d82cb1136eeec119d} by
+ * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source
+ * modulo names).
  */
 public final class AdaptiveLongToLongMap {
     public enum Encoding { DIRECT, SORTED, HASH }
@@ -54,7 +57,8 @@ public final class AdaptiveLongToLongMap {
         if(slot<0)throw new IllegalArgumentException("missing key: "+key);
         return values[slot];
     }
-    public long getOrDefault(long key,long fallback){int slot=locate(key);return slot<0?fallback:values[slot];}
+    public long getOrDefault(long key,long fallback){int slot=locate(key);return slot<0?fallback
+            :values[slot];}
 
     public long[] keys(){
         if(encoding==Encoding.SORTED)return keys.clone();
@@ -139,7 +143,8 @@ public final class AdaptiveLongToLongMap {
     }
 
     public static final class Builder {
-        /** Creates an instance (explicit form of the default constructor; required by -Xlint:all -Werror). */
+        /** Creates an instance (explicit form of the default constructor; required by -Xlint:all
+         * -Werror). */
         public Builder() {
         }
 

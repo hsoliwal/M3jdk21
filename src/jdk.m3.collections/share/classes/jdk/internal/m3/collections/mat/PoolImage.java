@@ -31,9 +31,12 @@ import java.util.Objects;
 /**
  * Deterministic SHA-256-trailed immutable image for one exact typed Pool.
  *
- * <p>Lineage: absorbed from Synexia {@code m3-mat-value/src/main/java/jdk/internal/m3/matvalue/PoolImage.java}
- * blob {@code 6a5c8f9fa5f09b0dfd911ada5e35bf6e4d720ff0} at com.synexia develop {@code 35474ccf8dafbe80feb55f1d82cb1136eeec119d} by
- * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source modulo names).
+ * <p>Lineage: absorbed from Synexia {@code
+ * m3-mat-value/src/main/java/jdk/internal/m3/matvalue/PoolImage.java}
+ * blob {@code 6a5c8f9fa5f09b0dfd911ada5e35bf6e4d720ff0} at com.synexia develop {@code
+ * 35474ccf8dafbe80feb55f1d82cb1136eeec119d} by
+ * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source
+ * modulo names).
  */
 public final class PoolImage {
     static final byte[] MAGIC = {'S','N','X','M','A','T','P','1'};
@@ -49,7 +52,8 @@ public final class PoolImage {
         int[] offsets = pool.offsetsCopy();
         long[] hashes = pool.hashesCopy();
         int[] slots = pool.slotsCopy();
-        if (type.length == 0 || type.length > 65_535) throw new IllegalArgumentException("type ID byte length");
+        if (type.length == 0 || type.length > 65_535) throw new IllegalArgumentException
+                ("type ID byte length");
 
         long total = MAGIC.length + 4L + 4L + type.length + 4L + 4L + 4L
                 + 4L * offsets.length + 8L * hashes.length + 4L * slots.length

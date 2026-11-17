@@ -26,9 +26,12 @@ import java.util.concurrent.ConcurrentHashMap;
 /**
  * Exact built-in canonical codecs and bounded reflective enum/record discovery.
  *
- * <p>Lineage: absorbed from Synexia {@code m3-mat-value/src/main/java/jdk/internal/m3/matvalue/Codecs.java}
- * blob {@code 418994fab452e7928a15c81044119322c56b2105} at com.synexia develop {@code 35474ccf8dafbe80feb55f1d82cb1136eeec119d} by
- * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source modulo names).
+ * <p>Lineage: absorbed from Synexia {@code
+ * m3-mat-value/src/main/java/jdk/internal/m3/matvalue/Codecs.java}
+ * blob {@code 418994fab452e7928a15c81044119322c56b2105} at com.synexia develop {@code
+ * 35474ccf8dafbe80feb55f1d82cb1136eeec119d} by
+ * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source
+ * modulo names).
  */
 public final class Codecs {
     private Codecs() { }
@@ -52,7 +55,8 @@ public final class Codecs {
     public static final Codec<Float> FLOAT_RAW = fixed("synex:float32-raw/1", Float.class,
             (v, s) -> s.i32(Float.floatToRawIntBits(v)), src -> Float.intBitsToFloat(src.i32()));
     public static final Codec<Double> DOUBLE_RAW = fixed("synex:float64-raw/1", Double.class,
-            (v, s) -> s.i64(Double.doubleToRawLongBits(v)), src -> Double.longBitsToDouble(src.i64()));
+            (v, s) -> s.i64(Double.doubleToRawLongBits(v)), src -> Double.longBitsToDouble(src.i64()
+                    ));
     public static final Codec<String> STRING = fixed("synex:string-utf8/1", String.class,
             (v, s) -> s.utf8(v), Source::utf8);
     public static final Codec<byte[]> BYTES = new Codec<>() {
@@ -135,7 +139,8 @@ public final class Codecs {
     public static <T> Codec<T> nullable(Codec<T> delegate) {
         Objects.requireNonNull(delegate, "delegate");
         return new Codec<>() {
-            @Override public String typeId() { return "synex:nullable/1(" + delegate.typeId() + ")"; }
+            @Override public String typeId() { return "synex:nullable/1(" + delegate.typeId() + ")";
+                    }
             @Override public Class<T> javaType() { return delegate.javaType(); }
             @Override public void encode(T value, Sink sink) {
                 if (value == null) {

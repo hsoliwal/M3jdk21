@@ -20,9 +20,12 @@ import java.util.Objects;
 /**
  * Immutable sparse int vector: scalar default plus sorted position/value planes.
  *
- * <p>Lineage: absorbed from Synexia {@code m3-mat-collections/src/main/java/jdk/internal/m3/matcollections/SparseIntVector.java}
- * blob {@code ac9cf7aea70009dfc051673144b2046934514718} at com.synexia develop {@code 35474ccf8dafbe80feb55f1d82cb1136eeec119d} by
- * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source modulo names).
+ * <p>Lineage: absorbed from Synexia {@code
+ * m3-mat-collections/src/main/java/jdk/internal/m3/matcollections/SparseIntVector.java}
+ * blob {@code ac9cf7aea70009dfc051673144b2046934514718} at com.synexia develop {@code
+ * 35474ccf8dafbe80feb55f1d82cb1136eeec119d} by
+ * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source
+ * modulo names).
  */
 public final class SparseIntVector {
     private final int size,defaultValue;
@@ -41,8 +44,10 @@ public final class SparseIntVector {
         this.values=owned?values:values.clone();
         for(int i=0;i<this.positions.length;i++){
             int p=this.positions[i];
-            if(p<0||p>=size||i>0&&p<=this.positions[i-1])throw new IllegalArgumentException("positions must be strict sorted");
-            if(this.values[i]==defaultValue)throw new IllegalArgumentException("explicit default wastes sparse slot");
+            if(p<0||p>=size||i>0&&p<=this.positions[i-1])throw new IllegalArgumentException
+                    ("positions must be strict sorted");
+            if(this.values[i]==defaultValue)throw new IllegalArgumentException
+                    ("explicit default wastes sparse slot");
         }
     }
 
@@ -57,7 +62,9 @@ public final class SparseIntVector {
     public int size(){return size;}
     public int defaultValue(){return defaultValue;}
     public int explicitCount(){return positions.length;}
-    public int get(int index){Objects.checkIndex(index,size);int i=Arrays.binarySearch(positions,index);return i<0?defaultValue:values[i];}
-    public int[] toArray(){int[] a=new int[size];if(defaultValue!=0)Arrays.fill(a,defaultValue);for(int i=0;i<positions.length;i++)a[positions[i]]=values[i];return a;}
+    public int get(int index){Objects.checkIndex(index,size);int i=Arrays.binarySearch(positions,
+            index);return i<0?defaultValue:values[i];}
+    public int[] toArray(){int[] a=new int[size];if(defaultValue!=0)Arrays.fill(a,defaultValue);for(
+            int i=0;i<positions.length;i++)a[positions[i]]=values[i];return a;}
     public long primitivePayloadBytes(){return 4L+8L*positions.length;}
 }

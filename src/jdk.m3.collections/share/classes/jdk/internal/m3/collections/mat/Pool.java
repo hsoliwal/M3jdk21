@@ -26,9 +26,12 @@ import java.util.function.LongConsumer;
  * Immutable exact pool of canonical values. Frozen state retains no domain object per value:
  * only one byte arena, offsets, hashes, and a primitive open-addressed index.
  *
- * <p>Lineage: absorbed from Synexia {@code m3-mat-value/src/main/java/jdk/internal/m3/matvalue/Pool.java}
- * blob {@code b833ef35d4709747e72d6c2f1c757c97d2186036} at com.synexia develop {@code 35474ccf8dafbe80feb55f1d82cb1136eeec119d} by
- * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source modulo names).
+ * <p>Lineage: absorbed from Synexia {@code
+ * m3-mat-value/src/main/java/jdk/internal/m3/matvalue/Pool.java}
+ * blob {@code b833ef35d4709747e72d6c2f1c757c97d2186036} at com.synexia develop {@code
+ * 35474ccf8dafbe80feb55f1d82cb1136eeec119d} by
+ * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source
+ * modulo names).
  */
 public final class Pool<T> {
     private final Codec<T> codec;
@@ -118,7 +121,8 @@ public final class Pool<T> {
         return extend(additions, () -> false, ignored -> { });
     }
 
-    /** Cancellable/observable extension using JDK callbacks; adapters can delegate to Synexia Progress. */
+    /** Cancellable/observable extension using JDK callbacks; adapters can delegate to Synexia
+     * Progress. */
     public Pool<T> extend(
             Iterable<? extends T> additions, BooleanSupplier canceled, LongConsumer worked) {
         Objects.requireNonNull(additions, "additions");
@@ -252,7 +256,8 @@ public final class Pool<T> {
             }
             previous = end;
         }
-        if (previous != arena.length) throw new IllegalArgumentException("unaddressed pool arena tail");
+        if (previous != arena.length) throw new IllegalArgumentException
+                ("unaddressed pool arena tail");
     }
 
     /** Transient builder. Frozen pool retains only primitive arrays. */

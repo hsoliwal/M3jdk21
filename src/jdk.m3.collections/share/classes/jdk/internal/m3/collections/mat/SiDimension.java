@@ -17,9 +17,12 @@ package jdk.internal.m3.collections.mat;
 /**
  * Seven SI base-dimension exponents packed into one long (one signed byte per axis).
  *
- * <p>Lineage: absorbed from Synexia {@code m3-mat-value/src/main/java/jdk/internal/m3/matvalue/SiDimension.java}
- * blob {@code bf31ae771c899a78012f0c6695aeaf9a4e9f2211} at com.synexia develop {@code 35474ccf8dafbe80feb55f1d82cb1136eeec119d} by
- * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source modulo names).
+ * <p>Lineage: absorbed from Synexia {@code
+ * m3-mat-value/src/main/java/jdk/internal/m3/matvalue/SiDimension.java}
+ * blob {@code bf31ae771c899a78012f0c6695aeaf9a4e9f2211} at com.synexia develop {@code
+ * 35474ccf8dafbe80feb55f1d82cb1136eeec119d} by
+ * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source
+ * modulo names).
  */
 public final class SiDimension {
     public static final int TIME_AXIS = 0;

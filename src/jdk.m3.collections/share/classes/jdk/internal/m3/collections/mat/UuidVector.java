@@ -27,9 +27,11 @@ import java.util.UUID;
  * one compact presence bitmap is added. No 36-character spelling and no per-row
  * UUID object is retained; Java UUID objects are materialized only at the object boundary.</p>
  *
- * <p>Lineage: absorbed from Synexia {@code m3-mat-value/src/main/java/jdk/internal/m3/matvalue/UuidVector.java}
+ * <p>Lineage: absorbed from Synexia {@code
+ * m3-mat-value/src/main/java/jdk/internal/m3/matvalue/UuidVector.java}
  * blob {@code 200c850a71df8cc9db6e3c32f588e510264ec44f} at com.synexia develop {@code 35474ccf} by
- * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source modulo names).
+ * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source
+ * modulo names).
  */
 public final class UuidVector {
     private final long[] most;

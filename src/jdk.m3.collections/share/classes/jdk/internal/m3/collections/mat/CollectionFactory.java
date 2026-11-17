@@ -23,9 +23,11 @@ import java.util.Objects;
  * Deterministic fuzzy factory. It chooses from admitted physical implementations using actual
  * primitive-payload measurements plus declared workload requirements.
  *
- * <p>Lineage: absorbed from Synexia {@code m3-mat-collections/src/main/java/jdk/internal/m3/matcollections/CollectionFactory.java}
+ * <p>Lineage: absorbed from Synexia {@code
+ * m3-mat-collections/src/main/java/jdk/internal/m3/matcollections/CollectionFactory.java}
  * blob {@code d3d4d5704a6f2e405145320c7a13a4c660122a4e} at com.synexia develop {@code 35474ccf} by
- * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source modulo names).
+ * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source
+ * modulo names).
  */
 public final class CollectionFactory {
     private CollectionFactory() { }
@@ -53,7 +55,8 @@ public final class CollectionFactory {
             selected = adaptiveBytes <= blockBytes * 2L
                     ? PlannedIntVector.adaptive(adaptive)
                     : PlannedIntVector.block(block);
-        } else if (requirements.accessPattern() == CollectionRequirements.AccessPattern.ITERATION_HEAVY) {
+        } else if (requirements.accessPattern() ==
+                CollectionRequirements.AccessPattern.ITERATION_HEAVY) {
             selected = adaptiveBytes <= blockBytes
                     ? PlannedIntVector.adaptive(adaptive)
                     : PlannedIntVector.block(block);
@@ -269,8 +272,10 @@ public final class CollectionFactory {
             throw new IllegalArgumentException(
                     "requirements shape " + requirements.shape() + " != " + expected);
         }
-        if (requirements.mutationModel() != CollectionRequirements.MutationModel.BUILD_THEN_FREEZE) {
-            throw new IllegalArgumentException("this factory method publishes immutable collections");
+        if (requirements.mutationModel() != CollectionRequirements.MutationModel.BUILD_THEN_FREEZE)
+                {
+            throw new IllegalArgumentException
+                    ("this factory method publishes immutable collections");
         }
     }
 }

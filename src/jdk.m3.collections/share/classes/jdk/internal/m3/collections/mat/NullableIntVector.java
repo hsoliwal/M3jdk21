@@ -21,9 +21,11 @@ import java.util.Objects;
 /**
  * Int values plus independent presence bitmap: absent is never conflated with zero.
  *
- * <p>Lineage: absorbed from Synexia {@code m3-mat-collections/src/main/java/jdk/internal/m3/matcollections/NullableIntVector.java}
+ * <p>Lineage: absorbed from Synexia {@code
+ * m3-mat-collections/src/main/java/jdk/internal/m3/matcollections/NullableIntVector.java}
  * blob {@code f66269f55f2cb79c3a383b5b872bb1f919d5a6e7} at com.synexia develop {@code 35474ccf} by
- * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source modulo names).
+ * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source
+ * modulo names).
  */
 public final class NullableIntVector {
     private final int[] values;
@@ -32,7 +34,8 @@ public final class NullableIntVector {
     public NullableIntVector(int[] values, IntSelection present) {
         this.values = Objects.requireNonNull(values, "values").clone();
         this.present = Objects.requireNonNull(present, "present");
-        if (present.rows() != values.length) throw new IllegalArgumentException("universe mismatch");
+        if (present.rows() != values.length) throw new IllegalArgumentException("universe mismatch")
+                ;
     }
 
     public int size() { return values.length; }
@@ -47,5 +50,6 @@ public final class NullableIntVector {
         return present.contains(index) ? values[index] : fallback;
     }
     public IntSelection present() { return present; }
-    public long primitivePayloadBytes() { return 4L * values.length + present.primitivePayloadBytes(); }
+    public long primitivePayloadBytes() { return 4L * values.length + present.primitivePayloadBytes(
+            ); }
 }

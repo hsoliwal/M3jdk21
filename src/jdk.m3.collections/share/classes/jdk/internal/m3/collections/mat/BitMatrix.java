@@ -22,9 +22,11 @@ import java.util.Objects;
 /**
  * Immutable dense Boolean matrix retained as row-major machine words.
  *
- * <p>Lineage: absorbed from Synexia {@code m3-mat-collections/src/main/java/jdk/internal/m3/matcollections/BitMatrix.java}
+ * <p>Lineage: absorbed from Synexia {@code
+ * m3-mat-collections/src/main/java/jdk/internal/m3/matcollections/BitMatrix.java}
  * blob {@code b242a869e88f95f32ef700916d56bbfb0e43fb9d} at com.synexia develop {@code 35474ccf} by
- * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source modulo names).
+ * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source
+ * modulo names).
  */
 public final class BitMatrix {
     /** Java is the unconditional default; native use requires explicit caller selection. */
@@ -156,7 +158,8 @@ public final class BitMatrix {
                         transposeTile64(tile);
                         int firstColumn = word << 6;
                         for (int local = 0; local < 64; local++) {
-                            target[(firstColumn + local) * targetWordsPerRow + targetWord] = tile[local];
+                            target[(firstColumn + local) * targetWordsPerRow + targetWord] =
+                                    tile[local];
                         }
                         continue;
                     }
@@ -181,7 +184,8 @@ public final class BitMatrix {
                 long bits = source[base + word];
                 while (bits != 0L) {
                     int column = (word << 6) + Long.numberOfTrailingZeros(bits);
-                    if (column < columns) target[column * targetWordsPerRow + targetWord] |= rowMask;
+                    if (column < columns) target[column * targetWordsPerRow + targetWord] |=
+                            rowMask;
                     bits &= bits - 1L;
                 }
             }
@@ -248,7 +252,8 @@ public final class BitMatrix {
         private final long[] words;
 
         private Builder(int rows, int columns) {
-            if (rows < 0 || columns < 0) throw new IllegalArgumentException("negative matrix dimension");
+            if (rows < 0 || columns < 0) throw new IllegalArgumentException
+                    ("negative matrix dimension");
             this.rows = rows;
             this.columns = columns;
             this.wordsPerRow = wordsFor(columns);

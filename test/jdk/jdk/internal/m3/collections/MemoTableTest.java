@@ -125,20 +125,23 @@ final class MemoTableTest {
                 () -> table.find((Ref<?>[]) null)).getMessage());
         assertEquals("argument", assertThrows(NullPointerException.class,
                 () -> table.find((Ref<?>) null)).getMessage());
-        assertEquals("memo arity budget exceeded: 3 > 2", assertThrows(IllegalArgumentException.class,
+        assertEquals("memo arity budget exceeded: 3 > 2", assertThrows(
+                IllegalArgumentException.class,
                 () -> table.find(new Ref<?>[3])).getMessage());
         assertThrows(IllegalArgumentException.class,
                 () -> table.getOrCompute(() -> 1, new Ref<?>[3]));
         assertEquals(new MemoTable.Stats(0, 0, 0, 2), table.stats());
         assertEquals(1, table.getOrCompute(() -> 1, pool.ref(0)));
         AtomicInteger invoked = new AtomicInteger();
-        assertEquals("memo entry budget exceeded: 2 > 1", assertThrows(IllegalArgumentException.class,
+        assertEquals("memo entry budget exceeded: 2 > 1", assertThrows(
+                IllegalArgumentException.class,
                 () -> table.getOrCompute(invoked::incrementAndGet, pool.ref(1))).getMessage());
         assertEquals(0, invoked.get());
         assertEquals(1, table.getOrCompute(() -> 2, pool.ref(0)));
         assertEquals(new MemoTable.Stats(1, 1, 1, 2), table.stats());
         assertThrows(NullPointerException.class, () -> new MemoTable<>(null, pool, limits(1, 1)));
-        assertThrows(IllegalArgumentException.class, () -> new MemoTable<>(" \t", pool, limits(1, 1)));
+        assertThrows(IllegalArgumentException.class, () -> new MemoTable<>(" \t", pool, limits(1, 1)
+                ));
         assertThrows(IllegalArgumentException.class,
                 () -> new MemoTable<>("a".repeat(257), pool, limits(1, 1)));
         assertThrows(IllegalArgumentException.class, () -> new MemoTable.Stats(-1, 0, 0, 0));
@@ -224,7 +227,8 @@ final class MemoTableTest {
         int length = id % 23 == 0 ? 256 : 1 + id % 19;
         Ref<?>[] tuple = new Ref<?>[length];
         tuple[0] = pool.ref(id);
-        for (int index = 1; index < length; index++) tuple[index] = pool.ref((id + index) % pool.size());
+        for (int index = 1; index < length; index++) tuple[index] = pool.ref((id + index) %
+                pool.size());
         return tuple;
     }
 
@@ -286,11 +290,13 @@ final class MemoTableTest {
             for (int worker = 0; worker < 8; worker++) results.add(threads.submit(() -> {
                 ready.countDown();
                 if (!start.await(5, TimeUnit.SECONDS)) throw new AssertionError("start timeout");
-                return table.getOrCompute(() -> { invocations.incrementAndGet(); return 31; }, pool.ref(17));
+                return table.getOrCompute(() -> { invocations.incrementAndGet(); return 31; },
+                        pool.ref(17));
             }));
             assertTrue(ready.await(5, TimeUnit.SECONDS));
             start.countDown();
-            for (Future<Integer> result : results) assertEquals(31, result.get(5, TimeUnit.SECONDS).intValue());
+            for (Future<Integer> result : results) assertEquals(31, result.get(5, TimeUnit.SECONDS)
+                    .intValue());
             assertEquals(1, invocations.get());
             assertEquals(new MemoTable.Stats(1, 7, 1, 0), table.stats());
         } finally {
@@ -307,7 +313,8 @@ final class MemoTableTest {
         for (int id = 0; id < 1024; id++) table.getOrCompute(() -> 0, pool.ref(id));
         for (Field field : MemoTable.class.getDeclaredFields()) {
             if (Modifier.isStatic(field.getModifiers())) continue;
-            assertFalse(Map.class.isAssignableFrom(field.getType()), "retained per-entry map nodes");
+            assertFalse(Map.class.isAssignableFrom(field.getType()), "retained per-entry map nodes")
+                    ;
             field.setAccessible(true);
             Object value = field.get(table);
             if (field.getType().isArray()) assertPoolOrPrimitiveLeaves(value);
@@ -328,7 +335,8 @@ final class MemoTableTest {
         for (Object element : (Object[]) value) {
             if (element == null) continue;
             if (element.getClass().isArray()) assertPoolOrPrimitiveLeaves(element);
-            else assertInstanceOf(Pool.class, element, "only pool identity is retained in reference lanes");
+            else assertInstanceOf(Pool.class, element,
+                    "only pool identity is retained in reference lanes");
         }
     }
 }

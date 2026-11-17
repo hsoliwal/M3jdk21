@@ -19,9 +19,11 @@ import java.util.Objects;
 /**
  * Adaptive immutable directed graph: sparse CSR or dense bit matrix.
  *
- * <p>Lineage: absorbed from Synexia {@code m3-mat-collections/src/main/java/jdk/internal/m3/matcollections/AdaptiveIntGraph.java}
+ * <p>Lineage: absorbed from Synexia {@code
+ * m3-mat-collections/src/main/java/jdk/internal/m3/matcollections/AdaptiveIntGraph.java}
  * blob {@code fcd25f33adba6f6edf630d0ebb02a84e3960352a} at com.synexia develop {@code 35474ccf} by
- * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source modulo names).
+ * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source
+ * modulo names).
  */
 public final class AdaptiveIntGraph {
     public enum Encoding { CSR, BIT_MATRIX }
@@ -73,7 +75,8 @@ public final class AdaptiveIntGraph {
     public int edges() { return edges; }
     public Encoding encoding() { return encoding; }
     public long primitivePayloadBytes() {
-        return encoding == Encoding.CSR ? csr.primitivePayloadBytes() : matrix.primitivePayloadBytes();
+        return encoding == Encoding.CSR ? csr.primitivePayloadBytes() : matrix.primitivePayloadBytes
+                ();
     }
 
     public boolean containsEdge(int from, int to) {

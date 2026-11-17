@@ -26,9 +26,11 @@ import java.util.Objects;
  * smaller encoding is chosen deterministically, with dense winning ties.
  * This is an opt-in codec for the existing {@link Pool}, not a new interner.</p>
  *
- * <p>Lineage: absorbed from Synexia {@code m3-mat-value/src/main/java/jdk/internal/m3/matvalue/BitsAdaptiveCodec.java}
+ * <p>Lineage: absorbed from Synexia {@code
+ * m3-mat-value/src/main/java/jdk/internal/m3/matvalue/BitsAdaptiveCodec.java}
  * blob {@code 45fc409b6ec0d27db9159dee127232651387bae4} at com.synexia develop {@code 35474ccf} by
- * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source modulo names).
+ * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source
+ * modulo names).
  */
 public final class BitsAdaptiveCodec implements Codec<SelectionBits> {
     private static final int MODE_DENSE = 0;
@@ -112,7 +114,8 @@ public final class BitsAdaptiveCodec implements Codec<SelectionBits> {
             for (int index = 0; index < count; index++) {
                 long gap = readVarint(source);
                 long bit = previous + 1L + gap;
-                if (bit >= universe) throw new IllegalArgumentException("sparse bit outside universe");
+                if (bit >= universe) throw new IllegalArgumentException
+                        ("sparse bit outside universe");
                 bits.set((int) bit);
                 length += varintLength(gap);
                 previous = bit;
@@ -169,7 +172,8 @@ public final class BitsAdaptiveCodec implements Codec<SelectionBits> {
         for (int index = 0; index < 5; index++) {
             int next = source.u8();
             value |= (long) (next & 0x7f) << (index * 7);
-            if (value > Integer.MAX_VALUE) throw new IllegalArgumentException("oversized sparse gap");
+            if (value > Integer.MAX_VALUE) throw new IllegalArgumentException
+                    ("oversized sparse gap");
             if ((next & 0x80) == 0) {
                 if (index != 0 && (next & 0x7f) == 0) {
                     throw new IllegalArgumentException("nonminimal sparse varint");

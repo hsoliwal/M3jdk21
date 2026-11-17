@@ -18,19 +18,27 @@ import java.util.Objects;
 import java.util.PrimitiveIterator;
 import java.util.stream.LongStream;
 /**
- * <p>Lineage: absorbed from Synexia {@code m3-mat-collections/src/main/java/jdk/internal/m3/matcollections/LongList.java}
+ * <p>Lineage: absorbed from Synexia {@code
+ * m3-mat-collections/src/main/java/jdk/internal/m3/matcollections/LongList.java}
  * blob {@code dd3023a92ef5aca867b5ef1654da821b04e72dfa} at com.synexia develop {@code 35474ccf} by
- * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source modulo names).
+ * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source
+ * modulo names).
  */
 public final class LongList implements Iterable<Long>{
     private final long[] values;private final int offset;private final int size;
-    public LongList(long[] values){this(Objects.requireNonNull(values,"values").clone(),0,values.length);}
-    private LongList(long[] values,int offset,int size){Objects.checkFromIndexSize(offset,size,values.length);this.values=values;this.offset=offset;this.size=size;}
-    public int size(){return size;} public long getLong(int index){return values[offset+Objects.checkIndex(index,size)];}
-    public Long get(int index){return getLong(index);} public long[] toArray(){return Arrays.copyOfRange(values,offset,offset+size);}
-    public LongList slice(int from,int to){Objects.checkFromToIndex(from,to,size);return new LongList(values,offset+from,to-from);}
+    public LongList(long[] values){this(Objects.requireNonNull(values,"values").clone(),0,
+            values.length);}
+    private LongList(long[] values,int offset,int size){Objects.checkFromIndexSize(offset,size,
+            values.length);this.values=values;this.offset=offset;this.size=size;}
+    public int size(){return size;} public long getLong(int index){return
+            values[offset+Objects.checkIndex(index,size)];}
+    public Long get(int index){return getLong(index);} public long[] toArray(){return
+            Arrays.copyOfRange(values,offset,offset+size);}
+    public LongList slice(int from,int to){Objects.checkFromToIndex(from,to,size);return new
+            LongList(values,offset+from,to-from);}
     public LongStream longStream(){return Arrays.stream(values,offset,offset+size);}
     public long primitivePayloadBytes(){return values.length*8L;}
-    public CollectionPlan plan(){return new CollectionPlan(StorageKind.PRIMITIVE_LONG_LIST,primitivePayloadBytes(),size,size,"long[] owner/view");}
+    public CollectionPlan plan(){return new CollectionPlan(StorageKind.PRIMITIVE_LONG_LIST,
+            primitivePayloadBytes(),size,size,"long[] owner/view");}
     @Override public PrimitiveIterator.OfLong iterator(){return longStream().iterator();}
 }

@@ -21,9 +21,12 @@ import java.util.Objects;
 /**
  * Deterministic big-endian canonical byte sink.
  *
- * <p>Lineage: absorbed from Synexia {@code m3-mat-value/src/main/java/jdk/internal/m3/matvalue/Sink.java}
- * blob {@code fd2045dfa2a5cd8247f3aa507d1c3fe9eb4885b4} at com.synexia develop {@code 35474ccf8dafbe80feb55f1d82cb1136eeec119d} by
- * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source modulo names).
+ * <p>Lineage: absorbed from Synexia {@code
+ * m3-mat-value/src/main/java/jdk/internal/m3/matvalue/Sink.java}
+ * blob {@code fd2045dfa2a5cd8247f3aa507d1c3fe9eb4885b4} at com.synexia develop {@code
+ * 35474ccf8dafbe80feb55f1d82cb1136eeec119d} by
+ * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source
+ * modulo names).
  */
 public final class Sink {
     private byte[] bytes;

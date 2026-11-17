@@ -23,9 +23,11 @@ import java.util.function.LongUnaryOperator;
 /**
  * Primitive long vector with signed and unsigned bitmap predicates.
  *
- * <p>Lineage: absorbed from Synexia {@code m3-mat-value/src/main/java/jdk/internal/m3/matvalue/LongVector.java}
+ * <p>Lineage: absorbed from Synexia {@code
+ * m3-mat-value/src/main/java/jdk/internal/m3/matvalue/LongVector.java}
  * blob {@code c7800c8a1cf65115f760aa772a492abd39f5b605} at com.synexia develop {@code 35474ccf} by
- * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source modulo names).
+ * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source
+ * modulo names).
  */
 public final class LongVector {
     private final long[] values;
@@ -62,7 +64,8 @@ public final class LongVector {
         return new LongVector(result);
     }
     @Override public boolean equals(Object other){
-        return this==other || other instanceof LongVector vector && Arrays.equals(values,vector.values);
+        return this==other || other instanceof LongVector vector && Arrays.equals(values,
+                vector.values);
     }
     @Override public int hashCode(){ return Arrays.hashCode(values); }
 }

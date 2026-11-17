@@ -22,9 +22,11 @@ import java.util.Objects;
  * Fixed-width packed long values, 1..64 bits, supporting signed or unsigned interpretation.
  * Width 64 stores every raw long bit pattern.
  *
- * <p>Lineage: absorbed from Synexia {@code m3-mat-value/src/main/java/jdk/internal/m3/matvalue/PackedLongVector.java}
+ * <p>Lineage: absorbed from Synexia {@code
+ * m3-mat-value/src/main/java/jdk/internal/m3/matvalue/PackedLongVector.java}
  * blob {@code 473dcd516e995f8ebf12cb3d8eb2830c517d3a22} at com.synexia develop {@code 35474ccf} by
- * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source modulo names).
+ * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source
+ * modulo names).
  */
 public final class PackedLongVector {
     private final int size;
@@ -36,15 +38,18 @@ public final class PackedLongVector {
         if(size<0) throw new IllegalArgumentException("negative size");
         if(width<1 || width>64) throw new IllegalArgumentException("width must be 1..64");
         long bits=Math.multiplyExact((long)size,width);
-        if(bits>Integer.MAX_VALUE*64L) throw new IllegalArgumentException("packed vector too large");
+        if(bits>Integer.MAX_VALUE*64L) throw new IllegalArgumentException("packed vector too large")
+                ;
         this.size=size;
         this.width=width;
         this.signed=signed;
         this.words=new long[(int)((bits+63)>>>6)];
     }
 
-    public static PackedLongVector unsigned(int size,int width){ return new PackedLongVector(size,width,false); }
-    public static PackedLongVector signed(int size,int width){ return new PackedLongVector(size,width,true); }
+    public static PackedLongVector unsigned(int size,int width){ return new PackedLongVector(size,
+            width,false); }
+    public static PackedLongVector signed(int size,int width){ return new PackedLongVector(size,
+            width,true); }
 
     public int size(){ return size; }
     public int width(){ return width; }
@@ -108,7 +113,8 @@ public final class PackedLongVector {
         if(width==64) return;
         if(signed){
             long bound=1L<<(width-1);
-            if(value < -bound || value >= bound) throw new IllegalArgumentException("signed value exceeds width");
+            if(value < -bound || value >= bound) throw new IllegalArgumentException
+                    ("signed value exceeds width");
         }else if(value<0 || (value & ~mask(width))!=0){
             throw new IllegalArgumentException("unsigned value exceeds width");
         }

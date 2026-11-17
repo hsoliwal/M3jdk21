@@ -19,9 +19,12 @@ import java.util.Objects;
 /**
  * O(1) handle into a heterogeneous AnyPool.
  *
- * <p>Lineage: absorbed from Synexia {@code m3-mat-value/src/main/java/jdk/internal/m3/matvalue/AnyRef.java}
- * blob {@code 75de3bfff2b2984c1ed76065805961f72da42801} at com.synexia develop {@code 35474ccf8dafbe80feb55f1d82cb1136eeec119d} by
- * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source modulo names).
+ * <p>Lineage: absorbed from Synexia {@code
+ * m3-mat-value/src/main/java/jdk/internal/m3/matvalue/AnyRef.java}
+ * blob {@code 75de3bfff2b2984c1ed76065805961f72da42801} at com.synexia develop {@code
+ * 35474ccf8dafbe80feb55f1d82cb1136eeec119d} by
+ * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source
+ * modulo names).
  */
 public final class AnyRef {
     private final AnyPool pool;

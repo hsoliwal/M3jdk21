@@ -24,9 +24,11 @@ import java.util.Objects;
  * <p>No streams, iterators, boxing or intermediate row objects are used. Candidate bitmaps skip
  * non-candidate rows word-by-word; selected rows are processed with integer arithmetic only.</p>
  *
- * <p>Lineage: absorbed from Synexia {@code m3-mat-value/src/main/java/jdk/internal/m3/matvalue/PrimitiveKernel.java}
+ * <p>Lineage: absorbed from Synexia {@code
+ * m3-mat-value/src/main/java/jdk/internal/m3/matvalue/PrimitiveKernel.java}
  * blob {@code 93f4ecd85938ae76c7b798acec714bcd46137341} at com.synexia develop {@code 35474ccf} by
- * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source modulo names).
+ * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source
+ * modulo names).
  */
 public final class PrimitiveKernel {
     private PrimitiveKernel() { }

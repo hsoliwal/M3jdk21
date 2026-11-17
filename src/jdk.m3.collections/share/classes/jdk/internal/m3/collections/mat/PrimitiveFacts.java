@@ -21,9 +21,12 @@ package jdk.internal.m3.collections.mat;
  * class therefore derives facts from bits instead of allocating wrapper objects or enormous
  * lookup tables.</p>
  *
- * <p>Lineage: absorbed from Synexia {@code m3-mat-value/src/main/java/jdk/internal/m3/matvalue/PrimitiveFacts.java}
- * blob {@code 7d0abed542624448f8fa54396f10c8277ccbe9fe} at com.synexia develop {@code 35474ccf8dafbe80feb55f1d82cb1136eeec119d} by
- * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source modulo names).
+ * <p>Lineage: absorbed from Synexia {@code
+ * m3-mat-value/src/main/java/jdk/internal/m3/matvalue/PrimitiveFacts.java}
+ * blob {@code 7d0abed542624448f8fa54396f10c8277ccbe9fe} at com.synexia develop {@code
+ * 35474ccf8dafbe80feb55f1d82cb1136eeec119d} by
+ * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source
+ * modulo names).
  */
 public final class PrimitiveFacts {
     public static final int ZERO = 1 << 0;

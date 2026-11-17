@@ -22,9 +22,11 @@ import java.util.Objects;
  * Unsigned bit-sliced values. Plane p stores bit p for up to 64 rows per machine word.
  * Equality/comparison/addition operate over rows word-wise.
  *
- * <p>Lineage: absorbed from Synexia {@code m3-mat-value/src/main/java/jdk/internal/m3/matvalue/BitSliceLongVector.java}
+ * <p>Lineage: absorbed from Synexia {@code
+ * m3-mat-value/src/main/java/jdk/internal/m3/matvalue/BitSliceLongVector.java}
  * blob {@code 756b5d82a0dab21c73790e9c8f2df04855e6f5e7} at com.synexia develop {@code 35474ccf} by
- * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source modulo names).
+ * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source
+ * modulo names).
  */
 public final class BitSliceLongVector {
     public record Addition(BitSliceLongVector values, SelectionBits overflow) { }
@@ -148,7 +150,8 @@ public final class BitSliceLongVector {
 
     public Addition add(BitSliceLongVector other,boolean saturating){
         Objects.requireNonNull(other,"other");
-        if(size!=other.size || width!=other.width) throw new IllegalArgumentException("layout mismatch");
+        if(size!=other.size || width!=other.width) throw new IllegalArgumentException
+                ("layout mismatch");
         BitSliceLongVector out=new BitSliceLongVector(size,width);
         long[] overflowWords=new long[words];
         for(int w=0;w<words;w++){

@@ -26,9 +26,12 @@ import java.util.Set;
  *
  * <p>No semantic rule is inferred from spelling, similarity, statistics or model output.</p>
  *
- * <p>Lineage: absorbed from Synexia {@code m3-mat-value/src/main/java/jdk/internal/m3/matvalue/LogicEngine.java}
- * blob {@code 4ff6f042abf7d34b63ddd886c865ec31a72772cb} at com.synexia develop {@code 35474ccf8dafbe80feb55f1d82cb1136eeec119d} by
- * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source modulo names).
+ * <p>Lineage: absorbed from Synexia {@code
+ * m3-mat-value/src/main/java/jdk/internal/m3/matvalue/LogicEngine.java}
+ * blob {@code 4ff6f042abf7d34b63ddd886c865ec31a72772cb} at com.synexia develop {@code
+ * 35474ccf8dafbe80feb55f1d82cb1136eeec119d} by
+ * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source
+ * modulo names).
  */
 public final class LogicEngine {
     private final PredicateLexicon predicates;

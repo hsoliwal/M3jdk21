@@ -25,9 +25,11 @@ import java.util.Objects;
  * <p>Hot predicates are bit arithmetic only. The builder is transient; frozen state is one
  * contiguous long array.</p>
  *
- * <p>Lineage: absorbed from Synexia {@code m3-mat-value/src/main/java/jdk/internal/m3/matvalue/FlagVector.java}
+ * <p>Lineage: absorbed from Synexia {@code
+ * m3-mat-value/src/main/java/jdk/internal/m3/matvalue/FlagVector.java}
  * blob {@code 86e6f724419f8b4b8dee3d43955529a70006f74b} at com.synexia develop {@code 35474ccf} by
- * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source modulo names).
+ * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source
+ * modulo names).
  */
 public final class FlagVector {
     private final long[] flags;

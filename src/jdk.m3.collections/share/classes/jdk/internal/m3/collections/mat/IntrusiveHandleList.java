@@ -22,9 +22,12 @@ import java.util.concurrent.atomic.AtomicLong;
  * <p>One set of next/previous/owner lanes represents one intrusive membership slot per record. A
  * node must be removed before it is freed from the arena.</p>
  *
- * <p>Lineage: absorbed from Synexia {@code m3-mat-collections/src/main/java/jdk/internal/m3/matcollections/IntrusiveHandleList.java}
- * blob {@code bf14f94235af08eb694505671a586147c88351e0} at com.synexia develop {@code 35474ccf8dafbe80feb55f1d82cb1136eeec119d} by
- * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source modulo names).
+ * <p>Lineage: absorbed from Synexia {@code
+ * m3-mat-collections/src/main/java/jdk/internal/m3/matcollections/IntrusiveHandleList.java}
+ * blob {@code bf14f94235af08eb694505671a586147c88351e0} at com.synexia develop {@code
+ * 35474ccf8dafbe80feb55f1d82cb1136eeec119d} by
+ * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source
+ * modulo names).
  */
 public final class IntrusiveHandleList {
     private static final AtomicLong NEXT_OWNER = new AtomicLong(1L);

@@ -27,9 +27,12 @@ import java.util.function.LongConsumer;
 /**
  * Heterogeneous immutable value pool. Type ID participates in canonical identity.
  *
- * <p>Lineage: absorbed from Synexia {@code m3-mat-value/src/main/java/jdk/internal/m3/matvalue/AnyPool.java}
- * blob {@code f122941ae98bea330ea64e02ed44ab6e7536c9e4} at com.synexia develop {@code 35474ccf8dafbe80feb55f1d82cb1136eeec119d} by
- * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source modulo names).
+ * <p>Lineage: absorbed from Synexia {@code
+ * m3-mat-value/src/main/java/jdk/internal/m3/matvalue/AnyPool.java}
+ * blob {@code f122941ae98bea330ea64e02ed44ab6e7536c9e4} at com.synexia develop {@code
+ * 35474ccf8dafbe80feb55f1d82cb1136eeec119d} by
+ * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source
+ * modulo names).
  */
 public final class AnyPool {
     private final byte[] arena;

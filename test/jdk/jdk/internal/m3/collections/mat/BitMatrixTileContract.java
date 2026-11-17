@@ -81,11 +81,15 @@ public final class BitMatrixTileContract {
         Method nativeFn = BitMatrix.class.getDeclaredMethod("transposeNative0",
                 long[].class, int.class, int.class, int.class, int.class);
         nativeFn.setAccessible(true);
-        require(nativeFn.invoke(null, new long[0], 0, 0, 0, 0) instanceof long[], "valid empty JNI");
-        require(nativeFn.invoke(null, new long[0], 1, 1, 0, 1) == null, "wrong input width refused");
+        require(nativeFn.invoke(null, new long[0], 0, 0, 0, 0) instanceof long[], "valid empty JNI")
+                ;
+        require(nativeFn.invoke(null, new long[0], 1, 1, 0, 1) == null, "wrong input width refused")
+                ;
         require(nativeFn.invoke(null, new long[0], 1, 1, 1, 1) == null, "wrong length refused");
-        require(nativeFn.invoke(null, new long[0], -1, 1, 1, 1) == null, "negative row count refused");
-        require(nativeFn.invoke(null, new long[0], 1, -1, 1, 1) == null, "negative column count refused");
+        require(nativeFn.invoke(null, new long[0], -1, 1, 1, 1) == null,
+                "negative row count refused");
+        require(nativeFn.invoke(null, new long[0], 1, -1, 1, 1) == null,
+                "negative column count refused");
         long[] source = {-1L, 0x0102030405060708L};
         long[] before = source.clone();
         Object result = nativeFn.invoke(null, source, 2, 64, 1, 1);
@@ -116,7 +120,8 @@ public final class BitMatrixTileContract {
                     return completed;
                 }));
             }
-            for (Future<Integer> future : tasks) require(future.get() == 120, "concurrent read count");
+            for (Future<Integer> future : tasks) require(future.get() == 120,
+                    "concurrent read count");
         } finally {
             pool.shutdownNow();
         }
@@ -125,8 +130,10 @@ public final class BitMatrixTileContract {
     public static void runAll() throws Exception {
         require(BitMatrix.nativeAvailable(), "explicit native library is mandatory");
         int[] sizes = {0, 1, 31, 63, 64, 65, 95, 127, 128, 129, 191, 192, 193, 256, 257};
-        for (int rows : sizes) for (int cols : sizes) for (int density = 0; density < 6; density++) {
-            scenario(rows, cols, density, 0x4d3354494c453634L ^ (rows * 131L + cols * 17L + density));
+        for (int rows : sizes) for (int cols : sizes) for (int density = 0; density < 6; density++)
+                {
+            scenario(rows, cols, density, 0x4d3354494c453634L ^ (rows * 131L + cols * 17L + density)
+                    );
         }
         Random random = new Random(0x4d3354494c454f52L);
         for (int i = 0; i < 400; i++) {

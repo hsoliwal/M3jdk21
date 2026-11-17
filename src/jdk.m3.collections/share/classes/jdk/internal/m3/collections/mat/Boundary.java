@@ -13,15 +13,22 @@
  *     Hitesh Soliwal (Synexia) - initial API and implementation
  *******************************************************************************/
 package jdk.internal.m3.collections.mat;
-import java.util.ArrayList;import java.util.LinkedHashMap;import java.util.LinkedHashSet;import java.util.List;import java.util.Map;import java.util.Set;
+import java.util.ArrayList;import java.util.LinkedHashMap;import java.util.LinkedHashSet;import
+        java.util.List;import java.util.Map;import java.util.Set;
 /**
- * <p>Lineage: absorbed from Synexia {@code m3-mat-collections/src/main/java/jdk/internal/m3/matcollections/Boundary.java}
+ * <p>Lineage: absorbed from Synexia {@code
+ * m3-mat-collections/src/main/java/jdk/internal/m3/matcollections/Boundary.java}
  * blob {@code 746715994bb9ca2f7c4cbdbe7693436698d58ffa} at com.synexia develop {@code 35474ccf} by
- * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source modulo names).
+ * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source
+ * modulo names).
  */
 public final class Boundary{
   private Boundary(){}
-  public static List<Integer> toList(IntList v){ArrayList<Integer>r=new ArrayList<>(v.size());v.intStream().forEach(r::add);return List.copyOf(r);}
-  public static Set<Integer> toSet(AdaptiveIntSet v){LinkedHashSet<Integer>r=new LinkedHashSet<>();v.intStream().forEach(r::add);return Set.copyOf(r);}
-  public static Map<Integer,Integer> toMap(AdaptiveIntToIntMap v){LinkedHashMap<Integer,Integer>r=new LinkedHashMap<>();for(int k:v.keys())r.put(k,v.get(k));return Map.copyOf(r);}
+  public static List<Integer> toList(IntList v){ArrayList<Integer>r=new ArrayList<>(v.size());
+          v.intStream().forEach(r::add);return List.copyOf(r);}
+  public static Set<Integer> toSet(AdaptiveIntSet v){LinkedHashSet<Integer>r=new LinkedHashSet<>();
+          v.intStream().forEach(r::add);return Set.copyOf(r);}
+  public static Map<Integer,Integer> toMap(AdaptiveIntToIntMap v){LinkedHashMap<Integer,
+          Integer>r=new LinkedHashMap<>();for(int k:v.keys())r.put(k,v.get(k));return Map.copyOf(r);
+          }
 }

@@ -26,9 +26,11 @@ import java.util.UUID;
  * Immutable columnar store for one Java record type.
  * Frozen state retains one compact column per component and no record object per row.
  *
- * <p>Lineage: absorbed from Synexia {@code m3-mat-value/src/main/java/jdk/internal/m3/matvalue/RecordStore.java}
+ * <p>Lineage: absorbed from Synexia {@code
+ * m3-mat-value/src/main/java/jdk/internal/m3/matvalue/RecordStore.java}
  * blob {@code 4e7df5eaf02f4b419f9ce682d5160f40ea4549d0} at com.synexia develop {@code 35474ccf} by
- * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source modulo names).
+ * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source
+ * modulo names).
  */
 public final class RecordStore<R extends Record> {
     private interface Column {
@@ -77,7 +79,8 @@ public final class RecordStore<R extends Record> {
         Object[][] transientValues = new Object[components.length][records.size()];
         for (int row = 0; row < records.size(); row++) {
             R record = Objects.requireNonNull(records.get(row), "record");
-            if (record.getClass() != type) throw new IllegalArgumentException("record subtype mismatch");
+            if (record.getClass() != type) throw new IllegalArgumentException
+                    ("record subtype mismatch");
             for (int component = 0; component < components.length; component++) {
                 try {
                     transientValues[component][row] =

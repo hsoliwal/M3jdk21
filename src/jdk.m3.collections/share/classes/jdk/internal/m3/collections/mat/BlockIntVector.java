@@ -21,9 +21,12 @@ import java.util.Objects;
 /**
  * Mixed-range vector: every fixed block independently chooses CONSTANT, PACKED, or PLAIN.
  *
- * <p>Lineage: absorbed from Synexia {@code m3-mat-collections/src/main/java/jdk/internal/m3/matcollections/BlockIntVector.java}
- * blob {@code 8995c943158d62b5b6941242f819e074e942a14c} at com.synexia develop {@code 35474ccf8dafbe80feb55f1d82cb1136eeec119d} by
- * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source modulo names).
+ * <p>Lineage: absorbed from Synexia {@code
+ * m3-mat-collections/src/main/java/jdk/internal/m3/matcollections/BlockIntVector.java}
+ * blob {@code 8995c943158d62b5b6941242f819e074e942a14c} at com.synexia develop {@code
+ * 35474ccf8dafbe80feb55f1d82cb1136eeec119d} by
+ * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source
+ * modulo names).
  */
 public final class BlockIntVector {
     public static final int DEFAULT_BLOCK_SIZE=256;
@@ -61,7 +64,8 @@ public final class BlockIntVector {
             int width=64-Long.numberOfLeadingZeros(delta);
             long words=((long)(to-from)*width+63)>>>6;
             if(8L*words+8<4L*(to-from)){
-                kinds[b]=PACKED;widths[b]=width;offsets[b]=Math.toIntExact(packedWords);packedWords+=words;
+                kinds[b]=PACKED;widths[b]=width;offsets[b]=Math.toIntExact(packedWords);
+                        packedWords+=words;
             }else{
                 kinds[b]=PLAIN;offsets[b]=plainCount;plainCount+=to-from;
             }
@@ -75,7 +79,8 @@ public final class BlockIntVector {
             }else if(kinds[b]==PACKED){
                 int width=widths[b];
                 long[] temp=new long[(int)(((long)(to-from)*width+63)>>>6)];
-                for(int i=from;i<to;i++)write(temp,(long)(i-from)*width,width,(long)values[i]-bases[b]);
+                for(int i=from;i<to;i++)write(temp,(long)(i-from)*width,width,(long)
+                        values[i]-bases[b]);
                 System.arraycopy(temp,0,packed,offsets[b],temp.length);
             }
         }
@@ -91,12 +96,14 @@ public final class BlockIntVector {
         return switch(kinds[b]){
             case CONSTANT->bases[b];
             case PLAIN->plainData[offsets[b]+within];
-            case PACKED->{int w=widths[b];yield (int)(bases[b]+read(packedData,((long)offsets[b]<<6)+(long)within*w,w));}
+            case PACKED->{int w=widths[b];yield (int)(bases[b]+read(packedData,((long)offsets[b]<<6)
+                    +(long)within*w,w));}
             default->throw new IllegalStateException();
         };
     }
     public int[] toArray(){int[] a=new int[size];for(int i=0;i<size;i++)a[i]=get(i);return a;}
-    public long primitivePayloadBytes(){return kinds.length+12L*kinds.length+8L*packedData.length+4L*plainData.length;}
+    public long primitivePayloadBytes(){return
+            kinds.length+12L*kinds.length+8L*packedData.length+4L*plainData.length;}
     public int constantBlocks(){return count(CONSTANT);}
     public int packedBlocks(){return count(PACKED);}
     public int plainBlocks(){return count(PLAIN);}

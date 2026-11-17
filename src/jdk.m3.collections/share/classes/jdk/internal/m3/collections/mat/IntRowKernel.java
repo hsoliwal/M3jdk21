@@ -32,9 +32,12 @@ import java.util.Objects;
  * load. JNI accesses Java arrays only during each synchronous call and retains
  * no pointer, global reference, or persistent backing-store ownership.</p>
  *
- * <p>Lineage: absorbed from Synexia {@code m3-mat-value/src/main/java/jdk/internal/m3/matvalue/IntRowKernel.java}
- * blob {@code 25a432eb3b045c57547ad4eb80e53df8fe624bfc} at com.synexia develop {@code 35474ccf8dafbe80feb55f1d82cb1136eeec119d} by
- * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source modulo names).
+ * <p>Lineage: absorbed from Synexia {@code
+ * m3-mat-value/src/main/java/jdk/internal/m3/matvalue/IntRowKernel.java}
+ * blob {@code 25a432eb3b045c57547ad4eb80e53df8fe624bfc} at com.synexia develop {@code
+ * 35474ccf8dafbe80feb55f1d82cb1136eeec119d} by
+ * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source
+ * modulo names).
  */
 public final class IntRowKernel {
     private static final long FNV_OFFSET = 0xcbf29ce484222325L;
@@ -86,7 +89,8 @@ public final class IntRowKernel {
         Objects.requireNonNull(library, "library");
         Objects.requireNonNull(expectedSha256, "expectedSha256");
         if (!expectedSha256.matches("[0-9a-f]{64}")) {
-            throw new IllegalArgumentException("expected SHA-256 must contain 64 lowercase hex digits");
+            throw new IllegalArgumentException
+                    ("expected SHA-256 must contain 64 lowercase hex digits");
         }
         if (!library.isAbsolute() || Files.isSymbolicLink(library)
                 || !Files.isRegularFile(library, LinkOption.NOFOLLOW_LINKS)) {
@@ -99,7 +103,8 @@ public final class IntRowKernel {
         }
         if (nativeLoaded) {
             if (!libraryPath.equals(checked) || !librarySha.equals(actual)) {
-                throw new IllegalStateException("MAT native library already pinned to another binary");
+                throw new IllegalStateException
+                        ("MAT native library already pinned to another binary");
             }
             return;
         }

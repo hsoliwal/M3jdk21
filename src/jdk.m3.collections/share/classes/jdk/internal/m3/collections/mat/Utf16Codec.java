@@ -24,9 +24,12 @@ import java.util.Objects;
  * The encoded format is a signed 32-bit length followed by unsigned,
  * big-endian 16-bit code units. It changes no existing codec or JDK API.</p>
  *
- * <p>Lineage: absorbed from Synexia {@code m3-mat-value/src/main/java/jdk/internal/m3/matvalue/Utf16Codec.java}
- * blob {@code 2e44a5f40c70c60321825250d9f4cdb023b3afac} at com.synexia develop {@code 35474ccf8dafbe80feb55f1d82cb1136eeec119d} by
- * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source modulo names).
+ * <p>Lineage: absorbed from Synexia {@code
+ * m3-mat-value/src/main/java/jdk/internal/m3/matvalue/Utf16Codec.java}
+ * blob {@code 2e44a5f40c70c60321825250d9f4cdb023b3afac} at com.synexia develop {@code
+ * 35474ccf8dafbe80feb55f1d82cb1136eeec119d} by
+ * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source
+ * modulo names).
  */
 public final class Utf16Codec implements Codec<String> {
     public static final Utf16Codec INSTANCE = new Utf16Codec();

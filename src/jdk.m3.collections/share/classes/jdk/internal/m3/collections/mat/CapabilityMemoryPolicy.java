@@ -21,9 +21,12 @@ import java.util.Objects;
  * Never destroys canonical values, assumes reference counts, or silently spills objects.
  * The container/owner performs any independently proven action.
  *
- * <p>Lineage: absorbed from Synexia {@code m3-mat-collections/src/main/java/jdk/internal/m3/matcollections/CapabilityMemoryPolicy.java}
- * blob {@code 458a0c55c50599766608016ac738de3e1cd72666} at com.synexia develop {@code 35474ccf8dafbe80feb55f1d82cb1136eeec119d} by
- * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source modulo names).
+ * <p>Lineage: absorbed from Synexia {@code
+ * m3-mat-collections/src/main/java/jdk/internal/m3/matcollections/CapabilityMemoryPolicy.java}
+ * blob {@code 458a0c55c50599766608016ac738de3e1cd72666} at com.synexia develop {@code
+ * 35474ccf8dafbe80feb55f1d82cb1136eeec119d} by
+ * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source
+ * modulo names).
  */
 public final class CapabilityMemoryPolicy {
     public enum Action {

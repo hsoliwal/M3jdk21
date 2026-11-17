@@ -32,9 +32,12 @@ import java.util.Objects;
  *
  * <p>Format: token TAB semantic-id [TAB flags]. No network access is performed.</p>
  *
- * <p>Lineage: absorbed from Synexia {@code m3-mat-value/src/main/java/jdk/internal/m3/matvalue/LexiconTsv.java}
- * blob {@code 1a9a043160a432e05cdf56a1ea209838635654bf} at com.synexia develop {@code 35474ccf8dafbe80feb55f1d82cb1136eeec119d} by
- * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source modulo names).
+ * <p>Lineage: absorbed from Synexia {@code
+ * m3-mat-value/src/main/java/jdk/internal/m3/matvalue/LexiconTsv.java}
+ * blob {@code 1a9a043160a432e05cdf56a1ea209838635654bf} at com.synexia develop {@code
+ * 35474ccf8dafbe80feb55f1d82cb1136eeec119d} by
+ * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source
+ * modulo names).
  */
 public final class LexiconTsv {
     private LexiconTsv() { }

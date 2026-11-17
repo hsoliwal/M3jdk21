@@ -21,9 +21,11 @@ import java.util.OptionalInt;
 /**
  * Immutable canonical disjoint half-open ranges over the full Java int domain.
  *
- * <p>Lineage: absorbed from Synexia {@code m3-mat-collections/src/main/java/jdk/internal/m3/matcollections/IntRangeSet.java}
+ * <p>Lineage: absorbed from Synexia {@code
+ * m3-mat-collections/src/main/java/jdk/internal/m3/matcollections/IntRangeSet.java}
  * blob {@code 1915e7b9cd0930249abe2a68db8093fbf9a0a7ff} at com.synexia develop {@code 35474ccf} by
- * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source modulo names).
+ * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source
+ * modulo names).
  */
 public final class IntRangeSet {
     private static final long MIN = Integer.MIN_VALUE;
@@ -49,8 +51,10 @@ public final class IntRangeSet {
     public int ranges() { return starts.length; }
     public long cardinality() { return cardinality; }
     public long primitivePayloadBytes() { return 16L * starts.length; }
-    public long start(int rangeIndex) { return starts[Objects.checkIndex(rangeIndex, starts.length)]; }
-    public long endExclusive(int rangeIndex) { return ends[Objects.checkIndex(rangeIndex, ends.length)]; }
+    public long start(int rangeIndex) { return starts[Objects.checkIndex(rangeIndex, starts.length)
+            ]; }
+    public long endExclusive(int rangeIndex) { return ends[Objects.checkIndex(rangeIndex,
+            ends.length)]; }
 
     public boolean contains(int value) {
         int index = floorRange(value);
@@ -114,7 +118,8 @@ public final class IntRangeSet {
             while (b < other.ranges() && other.ends[b] <= cursor) b++;
             int probe = b;
             while (probe < other.ranges() && other.starts[probe] < end) {
-                if (other.starts[probe] > cursor) appendCanonical(builder, cursor, Math.min(end, other.starts[probe]));
+                if (other.starts[probe] > cursor) appendCanonical(builder, cursor, Math.min(end,
+                        other.starts[probe]));
                 cursor = Math.max(cursor, other.ends[probe]);
                 if (cursor >= end) break;
                 probe++;
@@ -154,7 +159,8 @@ public final class IntRangeSet {
     }
 
     public static final class Builder {
-        /** Creates an instance (explicit form of the default constructor; required by -Xlint:all -Werror). */
+        /** Creates an instance (explicit form of the default constructor; required by -Xlint:all
+         * -Werror). */
         public Builder() {
         }
 

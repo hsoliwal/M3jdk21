@@ -19,9 +19,12 @@ import java.util.List;
 /**
  * Frozen SI base and coherent-derived unit symbols mapped to packed SI dimensions.
  *
- * <p>Lineage: absorbed from Synexia {@code m3-mat-value/src/main/java/jdk/internal/m3/matvalue/SiUnitLexicon.java}
- * blob {@code 92855d2817e791b9d6d063c65183172ea435c80f} at com.synexia develop {@code 35474ccf8dafbe80feb55f1d82cb1136eeec119d} by
- * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source modulo names).
+ * <p>Lineage: absorbed from Synexia {@code
+ * m3-mat-value/src/main/java/jdk/internal/m3/matvalue/SiUnitLexicon.java}
+ * blob {@code 92855d2817e791b9d6d063c65183172ea435c80f} at com.synexia develop {@code
+ * 35474ccf8dafbe80feb55f1d82cb1136eeec119d} by
+ * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source
+ * modulo names).
  */
 public final class SiUnitLexicon {
     public static final long BASE_UNIT = 1L;

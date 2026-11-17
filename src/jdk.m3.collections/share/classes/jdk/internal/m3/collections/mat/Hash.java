@@ -17,9 +17,12 @@ package jdk.internal.m3.collections.mat;
 import java.nio.ByteBuffer;
 
 /**
- * <p>Lineage: absorbed from Synexia {@code m3-mat-value/src/main/java/jdk/internal/m3/matvalue/Hash.java}
- * blob {@code ed5e061f3e91c48146473939b42acdc026902517} at com.synexia develop {@code 35474ccf8dafbe80feb55f1d82cb1136eeec119d} by
- * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source modulo names).
+ * <p>Lineage: absorbed from Synexia {@code
+ * m3-mat-value/src/main/java/jdk/internal/m3/matvalue/Hash.java}
+ * blob {@code ed5e061f3e91c48146473939b42acdc026902517} at com.synexia develop {@code
+ * 35474ccf8dafbe80feb55f1d82cb1136eeec119d} by
+ * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source
+ * modulo names).
  */
 final class Hash {
     private Hash() { }

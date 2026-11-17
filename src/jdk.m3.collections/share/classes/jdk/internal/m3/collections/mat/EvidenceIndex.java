@@ -24,9 +24,12 @@ import java.util.Objects;
  *
  * <p>Statement hashes narrow candidates; exact coordinates determine support/contradiction.</p>
  *
- * <p>Lineage: absorbed from Synexia {@code m3-mat-value/src/main/java/jdk/internal/m3/matvalue/EvidenceIndex.java}
- * blob {@code 93dc0ca01445ee73297ae785930276719a0fcb7b} at com.synexia develop {@code 35474ccf8dafbe80feb55f1d82cb1136eeec119d} by
- * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source modulo names).
+ * <p>Lineage: absorbed from Synexia {@code
+ * m3-mat-value/src/main/java/jdk/internal/m3/matvalue/EvidenceIndex.java}
+ * blob {@code 93dc0ca01445ee73297ae785930276719a0fcb7b} at com.synexia develop {@code
+ * 35474ccf8dafbe80feb55f1d82cb1136eeec119d} by
+ * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source
+ * modulo names).
  */
 public final class EvidenceIndex {
     public static final long DIRECT = 1L;
@@ -181,7 +184,8 @@ public final class EvidenceIndex {
     }
 
     public static final class Builder {
-        /** Creates an instance (explicit form of the default constructor; required by -Xlint:all -Werror). */
+        /** Creates an instance (explicit form of the default constructor; required by -Xlint:all
+         * -Werror). */
         public Builder() {
         }
 
@@ -218,7 +222,8 @@ public final class EvidenceIndex {
                 if (compared != 0) {
                     return compared;
                 }
-                compared = Integer.compare(left.statement().predicate(), right.statement().predicate());
+                compared = Integer.compare(left.statement().predicate(), right.statement().predicate
+                        ());
                 if (compared != 0) {
                     return compared;
                 }

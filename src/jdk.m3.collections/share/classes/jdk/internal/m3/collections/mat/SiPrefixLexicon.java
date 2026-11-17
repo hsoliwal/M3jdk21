@@ -19,9 +19,12 @@ import java.util.List;
 /**
  * Frozen official SI decimal-prefix symbols mapped to base-10 exponents.
  *
- * <p>Lineage: absorbed from Synexia {@code m3-mat-value/src/main/java/jdk/internal/m3/matvalue/SiPrefixLexicon.java}
- * blob {@code 56ad18a5f529a8605099a5387279dcfefaa53d4c} at com.synexia develop {@code 35474ccf8dafbe80feb55f1d82cb1136eeec119d} by
- * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source modulo names).
+ * <p>Lineage: absorbed from Synexia {@code
+ * m3-mat-value/src/main/java/jdk/internal/m3/matvalue/SiPrefixLexicon.java}
+ * blob {@code 56ad18a5f529a8605099a5387279dcfefaa53d4c} at com.synexia develop {@code
+ * 35474ccf8dafbe80feb55f1d82cb1136eeec119d} by
+ * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source
+ * modulo names).
  */
 public final class SiPrefixLexicon {
     private static final StaticLexicon LEXICON = StaticLexicon.compile(

@@ -23,9 +23,11 @@ import java.util.function.IntUnaryOperator;
 /**
  * Primitive int vector: integers remain integers; no boxing and no redundant interning.
  *
- * <p>Lineage: absorbed from Synexia {@code m3-mat-value/src/main/java/jdk/internal/m3/matvalue/IntVector.java}
+ * <p>Lineage: absorbed from Synexia {@code
+ * m3-mat-value/src/main/java/jdk/internal/m3/matvalue/IntVector.java}
  * blob {@code 2ec541a7c4859fabd6c7ad0745a5b76a090f3c59} at com.synexia develop {@code 35474ccf} by
- * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source modulo names).
+ * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source
+ * modulo names).
  */
 public final class IntVector {
     private final int[] values;
@@ -66,7 +68,8 @@ public final class IntVector {
     }
 
     @Override public boolean equals(Object other) {
-        return this==other || other instanceof IntVector vector && Arrays.equals(values,vector.values);
+        return this==other || other instanceof IntVector vector && Arrays.equals(values,
+                vector.values);
     }
     @Override public int hashCode(){ return Arrays.hashCode(values); }
 }

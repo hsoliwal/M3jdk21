@@ -21,9 +21,11 @@ import java.util.Objects;
 /**
  * Bitmap set over one immutable value pool.
  *
- * <p>Lineage: absorbed from Synexia {@code m3-mat-value/src/main/java/jdk/internal/m3/matvalue/IdSet.java}
+ * <p>Lineage: absorbed from Synexia {@code
+ * m3-mat-value/src/main/java/jdk/internal/m3/matvalue/IdSet.java}
  * blob {@code 7c20f01fcb64ab6d14609f1d3e99b962298ae897} at com.synexia develop {@code 35474ccf} by
- * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source modulo names).
+ * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source
+ * modulo names).
  */
 public final class IdSet<T> {
     private final Pool<T> pool;
@@ -43,10 +45,14 @@ public final class IdSet<T> {
         return ref.pool() == pool && bits.get(ref.id());
     }
     public SelectionBits bits() { return SelectionBits.ofWords(bits.size(), bits.wordsCopy()); }
-    public IdSet<T> union(IdSet<T> other) { require(other); return new IdSet<>(pool, bits.or(other.bits)); }
-    public IdSet<T> intersect(IdSet<T> other) { require(other); return new IdSet<>(pool, bits.and(other.bits)); }
-    public IdSet<T> xor(IdSet<T> other) { require(other); return new IdSet<>(pool, bits.xor(other.bits)); }
-    public IdSet<T> minus(IdSet<T> other) { require(other); return new IdSet<>(pool, bits.andNot(other.bits)); }
+    public IdSet<T> union(IdSet<T> other) { require(other); return new IdSet<>(pool, bits.or(
+            other.bits)); }
+    public IdSet<T> intersect(IdSet<T> other) { require(other); return new IdSet<>(pool, bits.and(
+            other.bits)); }
+    public IdSet<T> xor(IdSet<T> other) { require(other); return new IdSet<>(pool, bits.xor(
+            other.bits)); }
+    public IdSet<T> minus(IdSet<T> other) { require(other); return new IdSet<>(pool, bits.andNot(
+            other.bits)); }
 
     private void require(IdSet<T> other) {
         Objects.requireNonNull(other, "other");

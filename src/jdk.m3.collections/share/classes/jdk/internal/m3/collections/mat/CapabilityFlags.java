@@ -19,9 +19,12 @@ package jdk.internal.m3.collections.mat;
  * Bits express declared eligibility, not proof of safe allocation, distance or eviction.
  * None is stored per collection entry.
  *
- * <p>Lineage: absorbed from Synexia {@code m3-mat-collections/src/main/java/jdk/internal/m3/matcollections/CapabilityFlags.java}
- * blob {@code 93e722dcab087c147850cfc809bc2d21f3d45bae} at com.synexia develop {@code 35474ccf8dafbe80feb55f1d82cb1136eeec119d} by
- * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source modulo names).
+ * <p>Lineage: absorbed from Synexia {@code
+ * m3-mat-collections/src/main/java/jdk/internal/m3/matcollections/CapabilityFlags.java}
+ * blob {@code 93e722dcab087c147850cfc809bc2d21f3d45bae} at com.synexia develop {@code
+ * 35474ccf8dafbe80feb55f1d82cb1136eeec119d} by
+ * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source
+ * modulo names).
  */
 public final class CapabilityFlags {
     public static final int SCHEMA_VERSION = 1;

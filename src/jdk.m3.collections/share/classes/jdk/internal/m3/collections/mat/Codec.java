@@ -21,9 +21,12 @@ import java.util.Objects;
  *
  * @param <T> logical Java value type
  *
- * <p>Lineage: absorbed from Synexia {@code m3-mat-value/src/main/java/jdk/internal/m3/matvalue/Codec.java}
- * blob {@code 59aaf4a63b78e0e355b28455b7850d18846f6bd8} at com.synexia develop {@code 35474ccf8dafbe80feb55f1d82cb1136eeec119d} by
- * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source modulo names).
+ * <p>Lineage: absorbed from Synexia {@code
+ * m3-mat-value/src/main/java/jdk/internal/m3/matvalue/Codec.java}
+ * blob {@code 59aaf4a63b78e0e355b28455b7850d18846f6bd8} at com.synexia develop {@code
+ * 35474ccf8dafbe80feb55f1d82cb1136eeec119d} by
+ * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source
+ * modulo names).
  */
 public interface Codec<T> {
     /** Stable schema/type identity. */

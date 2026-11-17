@@ -23,9 +23,12 @@ import java.util.Objects;
  * <p>Handle zero is NULL. Slot reuse increments the generation so a stale handle cannot alias a
  * newly allocated record. Live record fields stay in one lane-major primitive array.</p>
  *
- * <p>Lineage: absorbed from Synexia {@code m3-mat-collections/src/main/java/jdk/internal/m3/matcollections/RecordArena.java}
- * blob {@code f0f525599a9d5d5d761c9ee81ecec8bb821cd481} at com.synexia develop {@code 35474ccf8dafbe80feb55f1d82cb1136eeec119d} by
- * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source modulo names).
+ * <p>Lineage: absorbed from Synexia {@code
+ * m3-mat-collections/src/main/java/jdk/internal/m3/matcollections/RecordArena.java}
+ * blob {@code f0f525599a9d5d5d761c9ee81ecec8bb821cd481} at com.synexia develop {@code
+ * 35474ccf8dafbe80feb55f1d82cb1136eeec119d} by
+ * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source
+ * modulo names).
  */
 public final class RecordArena {
     private static final int DEFAULT_CAPACITY = 16;

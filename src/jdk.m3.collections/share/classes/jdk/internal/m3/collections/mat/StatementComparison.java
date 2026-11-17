@@ -19,9 +19,12 @@ import java.util.Objects;
 /**
  * Deterministic structural comparison of two primitive-coordinate statements.
  *
- * <p>Lineage: absorbed from Synexia {@code m3-mat-value/src/main/java/jdk/internal/m3/matvalue/StatementComparison.java}
- * blob {@code 2189bc25aeb723422bbbc94dbf4f67aec14e00e9} at com.synexia develop {@code 35474ccf8dafbe80feb55f1d82cb1136eeec119d} by
- * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source modulo names).
+ * <p>Lineage: absorbed from Synexia {@code
+ * m3-mat-value/src/main/java/jdk/internal/m3/matvalue/StatementComparison.java}
+ * blob {@code 2189bc25aeb723422bbbc94dbf4f67aec14e00e9} at com.synexia develop {@code
+ * 35474ccf8dafbe80feb55f1d82cb1136eeec119d} by
+ * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source
+ * modulo names).
  */
 public final class StatementComparison {
     public static final int EXACT = 1 << 0;

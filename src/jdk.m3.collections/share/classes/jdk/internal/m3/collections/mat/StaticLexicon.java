@@ -27,9 +27,12 @@ import java.util.Objects;
  *
  * <p>IDs are unsigned-UTF-8 lexical ranks. Input Strings are not retained per lexeme.</p>
  *
- * <p>Lineage: absorbed from Synexia {@code m3-mat-value/src/main/java/jdk/internal/m3/matvalue/StaticLexicon.java}
- * blob {@code 58e162aa9f12bacecc90d28ded7cf0700f6936b1} at com.synexia develop {@code 35474ccf8dafbe80feb55f1d82cb1136eeec119d} by
- * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source modulo names).
+ * <p>Lineage: absorbed from Synexia {@code
+ * m3-mat-value/src/main/java/jdk/internal/m3/matvalue/StaticLexicon.java}
+ * blob {@code 58e162aa9f12bacecc90d28ded7cf0700f6936b1} at com.synexia develop {@code
+ * 35474ccf8dafbe80feb55f1d82cb1136eeec119d} by
+ * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source
+ * modulo names).
  */
 public final class StaticLexicon {
     private static final int FNV_OFFSET = 0x811c9dc5;
@@ -81,7 +84,8 @@ public final class StaticLexicon {
         EncodedEntry previous = null;
         for (EncodedEntry entry : encoded) {
             if (previous != null && compareUnsigned(previous.bytes(), entry.bytes()) == 0) {
-                if (previous.semanticId() != entry.semanticId() || previous.flags() != entry.flags()) {
+                if (previous.semanticId() != entry.semanticId() || previous.flags() != entry.flags()
+                        ) {
                     throw new IllegalArgumentException(
                             "Conflicting metadata for duplicate lexicon token");
                 }
@@ -224,7 +228,8 @@ public final class StaticLexicon {
             char current = value.charAt(index);
             if (Character.isHighSurrogate(current)) {
                 if (++index >= value.length() || !Character.isLowSurrogate(value.charAt(index))) {
-                    throw new IllegalArgumentException("Lexicon token contains an unpaired surrogate");
+                    throw new IllegalArgumentException
+                            ("Lexicon token contains an unpaired surrogate");
                 }
             } else if (Character.isLowSurrogate(current)) {
                 throw new IllegalArgumentException("Lexicon token contains an unpaired surrogate");

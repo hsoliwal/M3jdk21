@@ -20,9 +20,12 @@ package jdk.internal.m3.collections.mat;
  * <p>The scalar code point is the ID. Metadata comes from the JDK Unicode tables and arithmetic,
  * so no per-code-point object or lookup table is retained by MAT.</p>
  *
- * <p>Lineage: absorbed from Synexia {@code m3-mat-value/src/main/java/jdk/internal/m3/matvalue/UnicodeLexicon.java}
- * blob {@code a3b2cfc6264cb98e4ca6d1807c8a80403fa64896} at com.synexia develop {@code 35474ccf8dafbe80feb55f1d82cb1136eeec119d} by
- * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source modulo names).
+ * <p>Lineage: absorbed from Synexia {@code
+ * m3-mat-value/src/main/java/jdk/internal/m3/matvalue/UnicodeLexicon.java}
+ * blob {@code a3b2cfc6264cb98e4ca6d1807c8a80403fa64896} at com.synexia develop {@code
+ * 35474ccf8dafbe80feb55f1d82cb1136eeec119d} by
+ * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source
+ * modulo names).
  */
 public final class UnicodeLexicon {
     public static final int LETTER = 1 << 0;
