@@ -79,7 +79,7 @@ public final class PrimitiveExportContract {
             for (int round = 0; round < 100; round++) {
                 CollectionPolicy policy = mode == 2
                         ? CollectionPolicy.BALANCED : CollectionPolicy.MIN_MEMORY;
-                AdaptiveIntIntMap.Builder builder = AdaptiveIntIntMap.builder(policy);
+                AdaptiveIntToIntMap.Builder builder = AdaptiveIntToIntMap.builder(policy);
                 TreeMap<Integer, Integer> truth = new TreeMap<>();
                 int size = mode == 0 ? 80 : mode == 1 ? 24 : 150;
                 for (int i = size - 1; i >= 0; i--) {
@@ -94,7 +94,7 @@ public final class PrimitiveExportContract {
                         truth.put(key, value + 1);
                     }
                 }
-                AdaptiveIntIntMap map = builder.build();
+                AdaptiveIntToIntMap map = builder.build();
                 yes(map.encoding().ordinal() == mode);
                 int[] keys = map.keys(), values = map.valuesBySortedKey();
                 int j = 0;
@@ -184,9 +184,9 @@ public final class PrimitiveExportContract {
 
     private static void emptyMaps() {
         for (CollectionPolicy policy : CollectionPolicy.values()) {
-            AdaptiveIntIntMap map = AdaptiveIntIntMap.builder(policy).build();
+            AdaptiveIntToIntMap map = AdaptiveIntToIntMap.builder(policy).build();
             yes(map.size() == 0);
-            yes(map.encoding() == AdaptiveIntIntMap.Encoding.SORTED);
+            yes(map.encoding() == AdaptiveIntToIntMap.Encoding.SORTED);
             yes(map.keys().length == 0);
             yes(map.valuesBySortedKey().length == 0);
             yes(map.keys() != map.keys());
@@ -200,8 +200,8 @@ public final class PrimitiveExportContract {
     private static void directMapHoles() {
         int[] offsets = {0, 1, 31, 32, 63, 64, 65, 126, 127, 128, 129};
         for (int base : new int[] {Integer.MIN_VALUE, -65, Integer.MAX_VALUE - 129}) {
-            AdaptiveIntIntMap.Builder builder =
-                    AdaptiveIntIntMap.builder(CollectionPolicy.FAST_LOOKUP).maxDirectSpan(130);
+            AdaptiveIntToIntMap.Builder builder =
+                    AdaptiveIntToIntMap.builder(CollectionPolicy.FAST_LOOKUP).maxDirectSpan(130);
             TreeMap<Integer, Integer> truth = new TreeMap<>();
             for (int i = offsets.length - 1; i >= 0; i--) {
                 int key = base + offsets[i];
@@ -216,8 +216,8 @@ public final class PrimitiveExportContract {
             }
             builder.put(base + 64, 700);
             truth.put(base + 64, 700);
-            AdaptiveIntIntMap map = builder.build();
-            yes(map.encoding() == AdaptiveIntIntMap.Encoding.DIRECT);
+            AdaptiveIntToIntMap map = builder.build();
+            yes(map.encoding() == AdaptiveIntToIntMap.Encoding.DIRECT);
             checkMap(map, truth);
             for (int offset = 0; offset < 130; offset++) {
                 int key = base + offset;
@@ -240,8 +240,8 @@ public final class PrimitiveExportContract {
                 1, Integer.MAX_VALUE - 1, Integer.MAX_VALUE};
         for (CollectionPolicy policy : new CollectionPolicy[] {
                 CollectionPolicy.MIN_MEMORY, CollectionPolicy.FAST_LOOKUP}) {
-            AdaptiveIntIntMap.Builder builder =
-                    AdaptiveIntIntMap.builder(policy).maxDirectSpan(0);
+            AdaptiveIntToIntMap.Builder builder =
+                    AdaptiveIntToIntMap.builder(policy).maxDirectSpan(0);
             TreeMap<Integer, Integer> truth = new TreeMap<>();
             for (int i = keys.length - 1; i >= 0; i--) {
                 builder.put(keys[i], keys[i] ^ 0x5a5a5a5a);
@@ -249,9 +249,9 @@ public final class PrimitiveExportContract {
             }
             builder.put(-1, 0);
             truth.put(-1, 0);
-            AdaptiveIntIntMap map = builder.build();
+            AdaptiveIntToIntMap map = builder.build();
             yes(map.encoding() == (policy == CollectionPolicy.MIN_MEMORY
-                    ? AdaptiveIntIntMap.Encoding.SORTED : AdaptiveIntIntMap.Encoding.HASH));
+                    ? AdaptiveIntToIntMap.Encoding.SORTED : AdaptiveIntToIntMap.Encoding.HASH));
             checkMap(map, truth);
             yes(!map.containsKey(2));
             yes(map.getOrDefault(2, -35) == -35);
@@ -259,7 +259,7 @@ public final class PrimitiveExportContract {
         }
     }
 
-    private static void checkMap(AdaptiveIntIntMap map, TreeMap<Integer, Integer> truth) {
+    private static void checkMap(AdaptiveIntToIntMap map, TreeMap<Integer, Integer> truth) {
         int[] keys = map.keys();
         int[] values = map.valuesBySortedKey();
         yes(map.size() == truth.size());

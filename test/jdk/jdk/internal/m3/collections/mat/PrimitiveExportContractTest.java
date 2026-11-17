@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 /** Runs the same target contract through the existing collections Maven suite. */
 final class PrimitiveExportContractTest {
     @Test
-    void immutablePrimitiveExportsPreserveTheirContracts() {
+    void primitiveExportsKeepContracts() {
         assertTrue(PrimitiveExportContract.verify() > 211_200L,
                 "the retained oracle and the target edge cases must all run");
     }

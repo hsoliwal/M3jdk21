@@ -23,5 +23,5 @@ public final class Boundary{
   private Boundary(){}
   public static List<Integer> toList(IntList v){ArrayList<Integer>r=new ArrayList<>(v.size());v.intStream().forEach(r::add);return List.copyOf(r);}
   public static Set<Integer> toSet(AdaptiveIntSet v){LinkedHashSet<Integer>r=new LinkedHashSet<>();v.intStream().forEach(r::add);return Set.copyOf(r);}
-  public static Map<Integer,Integer> toMap(AdaptiveIntIntMap v){LinkedHashMap<Integer,Integer>r=new LinkedHashMap<>();for(int k:v.keys())r.put(k,v.get(k));return Map.copyOf(r);}
+  public static Map<Integer,Integer> toMap(AdaptiveIntToIntMap v){LinkedHashMap<Integer,Integer>r=new LinkedHashMap<>();for(int k:v.keys())r.put(k,v.get(k));return Map.copyOf(r);}
 }

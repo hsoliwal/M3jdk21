@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 /** Explicit native test gate; -Dm3.bitmatrix.requireNative=true forbids assumption skips. */
 final class BitMatrixTileJUnitTest {
     @Test
-    void sourceSealedDenseAndSparseMatrixTransposeParity() throws Exception {
+    void denseAndSparseTransposeParity() throws Exception {
         boolean required = Boolean.getBoolean("m3.bitmatrix.requireNative");
         if (required) {
             assertTrue(BitMatrix.nativeAvailable(), "native matrix test was requested but cannot be skipped");

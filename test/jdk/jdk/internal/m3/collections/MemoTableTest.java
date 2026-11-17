@@ -4,7 +4,13 @@
  */
 package jdk.internal.m3.collections;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
@@ -50,7 +56,7 @@ final class MemoTableTest {
                 Integer.MAX_VALUE);
     }
 
-    @Test void exactPoolIdentityTupleOrderAndFreshHandles() {
+    @Test void poolIdentityTupleOrderFreshHandles() {
         Pool<Integer> first = pool(40);
         Pool<Integer> second = pool(40);
         MemoTable<Integer> table = new MemoTable<>("  operation/v7  ", first,
@@ -66,7 +72,7 @@ final class MemoTableTest {
         assertEquals(new MemoTable.Stats(2, 1, 2, 0), table.stats());
     }
 
-    @Test void fullHashCollisionsStillCompareEveryArgument() {
+    @Test void hashCollisionsCompareEveryArgument() {
         Pool<Integer> pool = pool(100);
         MemoTable<Integer> table = new MemoTable<>("collision/v1", pool,
                 Limits.DEFAULT);
@@ -81,7 +87,7 @@ final class MemoTableTest {
         assertEquals(new MemoTable.Stats(2, 2, 2, 0), table.stats());
     }
 
-    @Test void snapshotsCallerArrayBeforeRunningSupplier() {
+    @Test void snapshotsCallerArrayBeforeSupplier() {
         Pool<Integer> pool = pool(8);
         MemoTable<Integer> table = new MemoTable<>("snapshot/v1", pool,
                 Limits.DEFAULT);
@@ -96,7 +102,7 @@ final class MemoTableTest {
         assertThrows(NullPointerException.class, () -> table.find(arguments));
     }
 
-    @Test void emptyTupleResultZeroAndClearKeepStatistics() {
+    @Test void emptyTupleAndClearKeepStatistics() {
         Pool<Integer> pool = pool(3);
         MemoTable<Integer> table = new MemoTable<>("empty/v1", pool, limits(1, 0));
         assertEquals(OptionalInt.empty(), table.find());
@@ -110,7 +116,7 @@ final class MemoTableTest {
         assertEquals(new MemoTable.Stats(1, 2, 2, 0), table.stats());
     }
 
-    @Test void validationOrderAndRejectAccountingStayUnchanged() {
+    @Test void validationOrderAndRejectCounts() {
         Pool<Integer> pool = pool(4);
         MemoTable<Integer> table = new MemoTable<>("validation/v1", pool, limits(1, 2));
         assertEquals("computation", assertThrows(NullPointerException.class,
@@ -138,7 +144,7 @@ final class MemoTableTest {
         assertThrows(IllegalArgumentException.class, () -> new MemoTable.Stats(-1, 0, 0, 0));
     }
 
-    @Test void failedSupplierAndInvalidResultDoNotCacheOrCountAMiss() {
+    @Test void failuresNeitherCacheNorCountMiss() {
         Pool<Integer> pool = pool(4);
         MemoTable<Integer> table = new MemoTable<>("failure/v1", pool, limits(1, 1));
         RuntimeException failure = new RuntimeException("supplier failure");
@@ -152,7 +158,7 @@ final class MemoTableTest {
         assertEquals(3, table.getOrCompute(() -> 3, pool.ref(0)));
     }
 
-    @Test void reentrantInsertOverwriteResizeAndClearMatchMapPut() {
+    @Test void reentrantInsertMatchesMapPut() {
         Pool<Integer> pool = pool(1101);
         MemoTable<Integer> table = new MemoTable<>("reentrant/v1", pool,
                 Limits.DEFAULT);
@@ -180,7 +186,7 @@ final class MemoTableTest {
         assertEquals(OptionalInt.of(3), table.find(pool.ref(2)));
     }
 
-    @Test void entryBudgetRetainsItsExistingPreSupplierTiming() {
+    @Test void entryBudgetKeepsPreSupplierTiming() {
         Pool<Integer> pool = pool(4);
         MemoTable<Integer> table = new MemoTable<>("reentrant-budget/v1", pool,
                 limits(1, 1));
@@ -195,7 +201,7 @@ final class MemoTableTest {
         assertEquals(OptionalInt.of(2), table.find(pool.ref(1)));
     }
 
-    @Test void entryAndArgumentPageBoundariesSurviveGrowthAndReuse() {
+    @Test void pageBoundariesSurviveGrowthAndReuse() {
         Pool<Integer> pool = pool(6501);
         MemoTable<Integer> table = new MemoTable<>("growth/v1", pool,
                 Limits.DEFAULT);
@@ -222,7 +228,7 @@ final class MemoTableTest {
         return tuple;
     }
 
-    @Test void deterministicStateMachineMatchesIndependentListKeyOracle() {
+    @Test void stateMachineMatchesListKeyOracle() {
         Pool<Integer> first = pool(300);
         Pool<Integer> second = pool(300);
         MemoTable<Integer> table = new MemoTable<>("state-machine/v1", first,
@@ -267,7 +273,7 @@ final class MemoTableTest {
         }
     }
 
-    @Test void synchronizedConcurrentMissComputesExactlyOnce() throws Exception {
+    @Test void concurrentMissComputesExactlyOnce() throws Exception {
         Pool<Integer> pool = pool(40);
         MemoTable<Integer> table = new MemoTable<>("threads/v1", pool,
                 Limits.DEFAULT);
@@ -294,7 +300,7 @@ final class MemoTableTest {
         }
     }
 
-    @Test void retainedStateContainsNoEntryWrappersAndClearReleasesPoolLanes() throws Exception {
+    @Test void noEntryWrappersClearReleasesLanes() throws Exception {
         Pool<Integer> pool = pool(1025);
         MemoTable<Integer> table = new MemoTable<>("storage/v1", pool,
                 Limits.DEFAULT);

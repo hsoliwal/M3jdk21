@@ -16,15 +16,15 @@ package jdk.internal.m3.collections.mat;
 import java.util.Arrays;
 import java.util.Objects;
 /**
- * <p>Lineage: absorbed from Synexia {@code m3-mat-collections/src/main/java/jdk/internal/m3/matcollections/AdaptiveIntIntMap.java}
+ * <p>Lineage: absorbed from Synexia {@code m3-mat-collections/src/main/java/jdk/internal/m3/matcollections/AdaptiveIntToIntMap.java}
  * blob {@code 3c734139c82ee9c103c0a7965cdfcc42c1cb2f0c} at com.synexia develop {@code 35474ccf8dafbe80feb55f1d82cb1136eeec119d} by
  * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source modulo names).
  */
-public final class AdaptiveIntIntMap {
+public final class AdaptiveIntToIntMap {
   public enum Encoding { DIRECT, SORTED, HASH }
   private final Encoding encoding; private final int size; private final int minKey;
   private final int[] keys,values,states; private final long[] presence; private final CollectionPlan plan;
-  private AdaptiveIntIntMap(Encoding e,int size,int minKey,int[] keys,int[] values,long[] presence,int[] states,CollectionPlan plan){
+  private AdaptiveIntToIntMap(Encoding e,int size,int minKey,int[] keys,int[] values,long[] presence,int[] states,CollectionPlan plan){
     this.encoding=e;this.size=size;this.minKey=minKey;this.keys=keys;this.values=values;this.presence=presence;this.states=states;this.plan=plan;
   }
   public static Builder builder(){return new Builder();} public static Builder builder(CollectionPolicy p){return new Builder().policy(p);}
@@ -71,13 +71,13 @@ public final class AdaptiveIntIntMap {
       k[size]=key;v[size]=value;lookup[slot]=++size;
       if(size*2>lookup.length)rehash();
     }
-    public AdaptiveIntIntMap build(){
-      if(size==0)return new AdaptiveIntIntMap(Encoding.SORTED,0,0,new int[0],new int[0],null,null,new CollectionPlan(StorageKind.MAP_SORTED,0,0,0,"empty"));
+    public AdaptiveIntToIntMap build(){
+      if(size==0)return new AdaptiveIntToIntMap(Encoding.SORTED,0,0,new int[0],new int[0],null,null,new CollectionPlan(StorageKind.MAP_SORTED,0,0,0,"empty"));
       int[] sk=Arrays.copyOf(k,size),sv=Arrays.copyOf(v,size);sort(sk,sv,0,size-1);int min=sk[0],max=sk[size-1];long span=(long)max-min+1,sortedBytes=8L*size,directBytes=span<=maxDirect&&span<=Integer.MAX_VALUE?4L*span+8L*((span+63)>>>6):Long.MAX_VALUE;int hc=cap(size);long hashBytes=12L*hc;
       Encoding e=switch(policy){case MIN_MEMORY->directBytes<sortedBytes&&directBytes<=hashBytes?Encoding.DIRECT:sortedBytes<=hashBytes?Encoding.SORTED:Encoding.HASH;case FAST_LOOKUP->directBytes<=hashBytes*2?Encoding.DIRECT:Encoding.HASH;case BALANCED->directBytes<=sortedBytes*2?Encoding.DIRECT:size>=128?Encoding.HASH:Encoding.SORTED;};
-      if(e==Encoding.DIRECT){int[] vals=new int[(int)span];long[] pres=new long[(int)((span+63)>>>6)];for(int i=0;i<size;i++){int o=(int)((long)sk[i]-min);vals[o]=sv[i];pres[o>>>6]|=1L<<(o&63);}return new AdaptiveIntIntMap(e,size,min,null,vals,pres,null,new CollectionPlan(StorageKind.MAP_DIRECT,directBytes,size,span,"direct values+presence"));}
-      if(e==Encoding.SORTED)return new AdaptiveIntIntMap(e,size,0,sk,sv,null,null,new CollectionPlan(StorageKind.MAP_SORTED,sortedBytes,size,span,"parallel sorted int[]"));
-      int[] hk=new int[hc],hv=new int[hc],st=new int[hc];int m=hc-1;for(int i=0;i<size;i++){int key=sk[i],value=sv[i],s=mix(key)&m,d=1;while(st[s]!=0){if(st[s]<d){int swap=hk[s];hk[s]=key;key=swap;swap=hv[s];hv[s]=value;value=swap;int resident=st[s];st[s]=d;d=resident;}s=(s+1)&m;if(d==Integer.MAX_VALUE)throw new IllegalStateException("hash probe distance exhausted");d++;}st[s]=d;hk[s]=key;hv[s]=value;}return new AdaptiveIntIntMap(e,size,0,hk,hv,null,st,new CollectionPlan(StorageKind.MAP_HASH,hashBytes,size,span,"primitive Robin-Hood open addressing"));
+      if(e==Encoding.DIRECT){int[] vals=new int[(int)span];long[] pres=new long[(int)((span+63)>>>6)];for(int i=0;i<size;i++){int o=(int)((long)sk[i]-min);vals[o]=sv[i];pres[o>>>6]|=1L<<(o&63);}return new AdaptiveIntToIntMap(e,size,min,null,vals,pres,null,new CollectionPlan(StorageKind.MAP_DIRECT,directBytes,size,span,"direct values+presence"));}
+      if(e==Encoding.SORTED)return new AdaptiveIntToIntMap(e,size,0,sk,sv,null,null,new CollectionPlan(StorageKind.MAP_SORTED,sortedBytes,size,span,"parallel sorted int[]"));
+      int[] hk=new int[hc],hv=new int[hc],st=new int[hc];int m=hc-1;for(int i=0;i<size;i++){int key=sk[i],value=sv[i],s=mix(key)&m,d=1;while(st[s]!=0){if(st[s]<d){int swap=hk[s];hk[s]=key;key=swap;swap=hv[s];hv[s]=value;value=swap;int resident=st[s];st[s]=d;d=resident;}s=(s+1)&m;if(d==Integer.MAX_VALUE)throw new IllegalStateException("hash probe distance exhausted");d++;}st[s]=d;hk[s]=key;hv[s]=value;}return new AdaptiveIntToIntMap(e,size,0,hk,hv,null,st,new CollectionPlan(StorageKind.MAP_HASH,hashBytes,size,span,"primitive Robin-Hood open addressing"));
     }
     /** Package-private deterministic copy-failure seam; public contract is unchanged. */
     @FunctionalInterface interface IntCopier { int[] copy(int[] source, int capacity); }

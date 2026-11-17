@@ -14,7 +14,7 @@ import org.junit.jupiter.api.Test;
 /** Regression for valid large block sizes and independent array-observation parity. */
 final class BlockIntVectorBoundaryTest {
     @Test
-    void twoValuesAcceptTheLargestPositiveBlockSize() {
+    void twoValuesAcceptLargestBlockSize() {
         int[] values = {1, 2};
         BlockIntVector vector = BlockIntVector.of(values, Integer.MAX_VALUE);
         assertArrayEquals(values, vector.toArray());
@@ -23,7 +23,7 @@ final class BlockIntVectorBoundaryTest {
     }
 
     @Test
-    void fourValuesCannotSilentlyLoseTheirOnlyBlock() {
+    void fourValuesKeepTheirOnlyBlock() {
         int[] values = {Integer.MIN_VALUE, -1, 0, Integer.MAX_VALUE};
         BlockIntVector vector = BlockIntVector.of(values, Integer.MAX_VALUE);
         assertEquals(1, vector.blocks());
@@ -31,7 +31,7 @@ final class BlockIntVectorBoundaryTest {
     }
 
     @Test
-    void largeAndOrdinaryBlockSizesPreserveEveryInputValue() {
+    void blockSizesPreserveEveryValue() {
         Random random = new Random(0x4d33424c4f434bL);
         int[] sizes = {1, 2, 3, 7, 8, 17, 63, 64, 65, 255, 256, 257,
                 1 << 30, Integer.MAX_VALUE - 1, Integer.MAX_VALUE};
@@ -61,7 +61,7 @@ final class BlockIntVectorBoundaryTest {
     }
 
     @Test
-    void constantPackedAndPlainCapabilitiesRemainAvailable() {
+    void constantPackedPlainCapabilities() {
         int[] values = new int[3 * BlockIntVector.DEFAULT_BLOCK_SIZE];
         Arrays.fill(values, 0, 256, 9);
         for (int index = 256; index < 512; index++) values[index] = (index & 7) - 4;
@@ -76,7 +76,7 @@ final class BlockIntVectorBoundaryTest {
     }
 
     @Test
-    void callerAndReturnedArraysDoNotAliasCanonicalValues() {
+    void arraysDoNotAliasCanonicalValues() {
         int[] input = {3, 4, 5};
         BlockIntVector vector = BlockIntVector.of(input, Integer.MAX_VALUE);
         input[0] = 99;
@@ -86,7 +86,7 @@ final class BlockIntVectorBoundaryTest {
     }
 
     @Test
-    void emptyInputAcceptsEveryPositiveBoundarySize() {
+    void emptyInputAcceptsEveryBlockSize() {
         for (int size : new int[] {1, 256, Integer.MAX_VALUE}) {
             BlockIntVector vector = BlockIntVector.of(new int[0], size);
             assertEquals(0, vector.size());
@@ -97,7 +97,7 @@ final class BlockIntVectorBoundaryTest {
     }
 
     @Test
-    void nullAndBlockValidationKeepTheirOrderAndMessages() {
+    void validationKeepsOrderAndMessages() {
         assertEquals("values", assertThrows(NullPointerException.class,
                 () -> BlockIntVector.of(null, 0)).getMessage());
         for (int size : new int[] {0, -1, Integer.MIN_VALUE}) {

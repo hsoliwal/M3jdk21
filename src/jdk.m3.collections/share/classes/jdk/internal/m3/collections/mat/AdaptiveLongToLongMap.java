@@ -20,11 +20,11 @@ import java.util.Objects;
 /**
  * Immutable long->long map with direct, sorted and primitive open-addressed hash layouts.
  *
- * <p>Lineage: absorbed from Synexia {@code m3-mat-collections/src/main/java/jdk/internal/m3/matcollections/AdaptiveLongLongMap.java}
+ * <p>Lineage: absorbed from Synexia {@code m3-mat-collections/src/main/java/jdk/internal/m3/matcollections/AdaptiveLongToLongMap.java}
  * blob {@code 23c1729dae892dfc70041df8741cf1e75687d7b1} at com.synexia develop {@code 35474ccf8dafbe80feb55f1d82cb1136eeec119d} by
  * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source modulo names).
  */
-public final class AdaptiveLongLongMap {
+public final class AdaptiveLongToLongMap {
     public enum Encoding { DIRECT, SORTED, HASH }
     private static final long MAX_DIRECT_SPAN = 1L << 20;
     private final Encoding encoding;
@@ -36,7 +36,7 @@ public final class AdaptiveLongLongMap {
     private final int[] states;
     private final long[] presence;
 
-    private AdaptiveLongLongMap(
+    private AdaptiveLongToLongMap(
             Encoding encoding, CollectionPolicy policy, int size, long minKey,
             long[] keys, long[] values, int[] states, long[] presence) {
         this.encoding=encoding; this.policy=policy; this.size=size; this.minKey=minKey;
@@ -165,8 +165,8 @@ public final class AdaptiveLongLongMap {
             return this;
         }
 
-        public AdaptiveLongLongMap build(){
-            if(size==0)return new AdaptiveLongLongMap(
+        public AdaptiveLongToLongMap build(){
+            if(size==0)return new AdaptiveLongToLongMap(
                     Encoding.SORTED,policy,0,0,new long[0],new long[0],new int[0],new long[0]);
             long[] sk=Arrays.copyOf(keys,size),sv=Arrays.copyOf(values,size);
             sort(sk,sv,0,size-1);
@@ -186,7 +186,7 @@ public final class AdaptiveLongLongMap {
                         ?Encoding.DIRECT:size<128?Encoding.SORTED:Encoding.HASH;
                 case FAST_LOOKUP->directBytes!=Long.MAX_VALUE?Encoding.DIRECT:Encoding.HASH;
             };
-            if(enc==Encoding.SORTED)return new AdaptiveLongLongMap(
+            if(enc==Encoding.SORTED)return new AdaptiveLongToLongMap(
                     enc,policy,size,0,sk,sv,new int[0],new long[0]);
             if(enc==Encoding.DIRECT){
                 int s=(int)span;
@@ -194,7 +194,7 @@ public final class AdaptiveLongLongMap {
                 for(int i=0;i<size;i++){
                     int d=(int)(sk[i]-min);vals[d]=sv[i];present[d>>>6]|=1L<<(d&63);
                 }
-                return new AdaptiveLongLongMap(
+                return new AdaptiveLongToLongMap(
                         enc,policy,size,min,new long[0],vals,new int[0],present);
             }
             long[] hk=new long[hc],hv=new long[hc];
@@ -215,7 +215,7 @@ public final class AdaptiveLongLongMap {
                 }
                 st[slot]=distance;hk[slot]=key;hv[slot]=value;
             }
-            return new AdaptiveLongLongMap(enc,policy,size,0,hk,hv,st,new long[0]);
+            return new AdaptiveLongToLongMap(enc,policy,size,0,hk,hv,st,new long[0]);
         }
 
         private int find(long key){

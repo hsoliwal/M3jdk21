@@ -17,8 +17,8 @@ import java.util.Random;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
-import jdk.internal.m3.collections.mat.AdaptiveIntIntMap;
-import jdk.internal.m3.collections.mat.AdaptiveLongLongMap;
+import jdk.internal.m3.collections.mat.AdaptiveIntToIntMap;
+import jdk.internal.m3.collections.mat.AdaptiveLongToLongMap;
 import jdk.internal.m3.collections.mat.CollectionPolicy;
 import jdk.internal.m3.collections.mat.StorageKind;
 
@@ -82,7 +82,7 @@ public final class MapValuesExportTest {
     private static void verifyClassOrigins() {
         String expectedModule = System.getProperty("mat.test.expectedModule");
         for (Class<?> type : new Class<?>[] {
-                AdaptiveIntIntMap.class, AdaptiveLongLongMap.class}) {
+                AdaptiveIntToIntMap.class, AdaptiveLongToLongMap.class}) {
             String module = type.getModule().getName();
             System.out.println("class=" + type.getName() + " module=" + module
                     + " origin=" + type.getResource(type.getSimpleName() + ".class"));
@@ -198,7 +198,7 @@ public final class MapValuesExportTest {
         String label = "int/" + policy + "/" + name;
         trace(label);
         cases++;
-        AdaptiveIntIntMap.Builder builder = AdaptiveIntIntMap.builder(policy);
+        AdaptiveIntToIntMap.Builder builder = AdaptiveIntToIntMap.builder(policy);
         if (disableDirect) {
             builder.maxDirectSpan(0);
         }
@@ -211,7 +211,7 @@ public final class MapValuesExportTest {
             oracle.put(key, ~value);
             oracle.put(key, value);
         }
-        AdaptiveIntIntMap first = builder.build();
+        AdaptiveIntToIntMap first = builder.build();
         check(first.encoding().name().equals(expectedEncoding), label + " encoding");
         INT_ENCODINGS[policy.ordinal()][first.encoding().ordinal()]++;
         verifyInt(first, oracle, label + "/first");
@@ -229,7 +229,7 @@ public final class MapValuesExportTest {
         }
         builder.put(absent, Integer.MIN_VALUE);
         oracle.put(absent, Integer.MIN_VALUE);
-        AdaptiveIntIntMap second = builder.build();
+        AdaptiveIntToIntMap second = builder.build();
         check(first != second, label + " independent builds");
         verifyInt(first, frozen, label + "/after-builder-reuse");
         verifyInt(second, oracle, label + "/rebuilt");
@@ -240,7 +240,7 @@ public final class MapValuesExportTest {
         String label = "long/" + policy + "/" + name;
         trace(label);
         cases++;
-        AdaptiveLongLongMap.Builder builder = AdaptiveLongLongMap.builder(policy);
+        AdaptiveLongToLongMap.Builder builder = AdaptiveLongToLongMap.builder(policy);
         TreeMap<Long, Long> oracle = new TreeMap<>();
         for (int index : insertionOrder(input.length, name)) {
             long key = input[index];
@@ -249,7 +249,7 @@ public final class MapValuesExportTest {
             oracle.put(key, ~value);
             oracle.put(key, value);
         }
-        AdaptiveLongLongMap first = builder.build();
+        AdaptiveLongToLongMap first = builder.build();
         check(first.encoding().name().equals(expectedEncoding), label + " encoding");
         LONG_ENCODINGS[policy.ordinal()][first.encoding().ordinal()]++;
         verifyLong(first, oracle, policy, label + "/first");
@@ -267,13 +267,13 @@ public final class MapValuesExportTest {
         }
         builder.put(absent, Long.MIN_VALUE);
         oracle.put(absent, Long.MIN_VALUE);
-        AdaptiveLongLongMap second = builder.build();
+        AdaptiveLongToLongMap second = builder.build();
         check(first != second, label + " independent builds");
         verifyLong(first, frozen, policy, label + "/after-builder-reuse");
         verifyLong(second, oracle, policy, label + "/rebuilt");
     }
 
-    private static void verifyInt(AdaptiveIntIntMap map, TreeMap<Integer, Integer> oracle,
+    private static void verifyInt(AdaptiveIntToIntMap map, TreeMap<Integer, Integer> oracle,
                                   String label) {
         equal(oracle.size(), map.size(), label + " size");
         equal(oracle.size(), map.plan().size(), label + " plan size");
@@ -334,7 +334,7 @@ public final class MapValuesExportTest {
         }
     }
 
-    private static void verifyLong(AdaptiveLongLongMap map, TreeMap<Long, Long> oracle,
+    private static void verifyLong(AdaptiveLongToLongMap map, TreeMap<Long, Long> oracle,
                                    CollectionPolicy policy, String label) {
         equal(oracle.size(), map.size(), label + " size");
         check(map.policy() == policy, label + " policy preserved");

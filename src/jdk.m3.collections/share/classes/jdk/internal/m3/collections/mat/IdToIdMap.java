@@ -20,16 +20,16 @@ import java.util.Objects;
 /**
  * Immutable pool-ID -> pool-ID map over two exact MAT pools.
  *
- * <p>Lineage: absorbed from Synexia {@code m3-mat-collections/src/main/java/jdk/internal/m3/matcollections/IdIdMap.java}
+ * <p>Lineage: absorbed from Synexia {@code m3-mat-collections/src/main/java/jdk/internal/m3/matcollections/IdToIdMap.java}
  * blob {@code cf79e16c3a0b98a3c8c21eac85c14f34bdebe418} at com.synexia develop {@code 35474ccf8dafbe80feb55f1d82cb1136eeec119d} by
  * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source modulo names).
  */
-public final class IdIdMap<K,V> {
+public final class IdToIdMap<K,V> {
     private final Pool<K> keyPool;
     private final Pool<V> valuePool;
-    private final AdaptiveIntIntMap map;
+    private final AdaptiveIntToIntMap map;
 
-    private IdIdMap(Pool<K> keyPool, Pool<V> valuePool, AdaptiveIntIntMap map) {
+    private IdToIdMap(Pool<K> keyPool, Pool<V> valuePool, AdaptiveIntToIntMap map) {
         this.keyPool = keyPool; this.valuePool = valuePool; this.map = map;
     }
 
@@ -72,10 +72,10 @@ public final class IdIdMap<K,V> {
             return this;
         }
 
-        public IdIdMap<K,V> build() {
-            AdaptiveIntIntMap.Builder builder = AdaptiveIntIntMap.builder(CollectionPolicy.BALANCED);
+        public IdToIdMap<K,V> build() {
+            AdaptiveIntToIntMap.Builder builder = AdaptiveIntToIntMap.builder(CollectionPolicy.BALANCED);
             for (int i=0;i<size;i++) builder.put(keys[i], values[i]);
-            return new IdIdMap<>(keyPool, valuePool, builder.build());
+            return new IdToIdMap<>(keyPool, valuePool, builder.build());
         }
     }
 }

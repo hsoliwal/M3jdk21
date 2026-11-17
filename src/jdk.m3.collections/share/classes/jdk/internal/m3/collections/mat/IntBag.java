@@ -24,14 +24,14 @@ import java.util.Objects;
  * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source modulo names).
  */
 public final class IntBag {
-    private final AdaptiveIntIntMap counts;
+    private final AdaptiveIntToIntMap counts;
     private final long size;
 
-    private IntBag(AdaptiveIntIntMap counts, long size) { this.counts = counts; this.size = size; }
+    private IntBag(AdaptiveIntToIntMap counts, long size) { this.counts = counts; this.size = size; }
 
     public static IntBag of(int... values) {
         Objects.requireNonNull(values, "values");
-        AdaptiveIntIntMap.Builder builder = AdaptiveIntIntMap.builder(CollectionPolicy.MIN_MEMORY);
+        AdaptiveIntToIntMap.Builder builder = AdaptiveIntToIntMap.builder(CollectionPolicy.MIN_MEMORY);
         for (int value : values) builder.incrementCount(value);
         return new IntBag(builder.build(), values.length);
     }

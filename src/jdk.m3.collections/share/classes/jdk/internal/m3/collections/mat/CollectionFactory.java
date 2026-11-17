@@ -122,15 +122,15 @@ public final class CollectionFactory {
         return new Planned<>(selected, receipt);
     }
 
-    public static Planned<AdaptiveIntIntMap> intIntMap(
+    public static Planned<AdaptiveIntToIntMap> intToIntMap(
             int[] keys, int[] values, CollectionRequirements requirements) {
         Objects.requireNonNull(keys, "keys");
         Objects.requireNonNull(values, "values");
         requireShape(requirements, CollectionRequirements.Shape.MAP);
         if (keys.length != values.length) throw new IllegalArgumentException("length mismatch");
-        AdaptiveIntIntMap.Builder builder = AdaptiveIntIntMap.builder(requirements.policy());
+        AdaptiveIntToIntMap.Builder builder = AdaptiveIntToIntMap.builder(requirements.policy());
         for (int i = 0; i < keys.length; i++) builder.put(keys[i], values[i]);
-        AdaptiveIntIntMap map = builder.build();
+        AdaptiveIntToIntMap map = builder.build();
         CollectionStats stats = CollectionStats.of(keys);
         CollectionPlanReceipt receipt = CollectionPlanReceipt.of(
                 requirements,
