@@ -1,0 +1,1 @@
+javac -Xlint:all,-this-escape -Werror (java.base flags) of the stock String.java with families 1 and 2: exit 0, no warnings

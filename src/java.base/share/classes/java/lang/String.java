@@ -4135,6 +4135,625 @@ public final class String
     }
 
     /**
+     * Returns this string without one line terminator at its end: {@code "\r\n"}, {@code "\n"} or
+     * {@code "\r"}. A string with no terminator at its end is returned unchanged.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @return  this string without its final line terminator.
+     * @since   21
+     */
+    public String chomp() {
+        int length = length();
+        if (length == 0) return this;
+        char last = charAt(length - 1);
+        if (last == '\n') {
+            return substring(0, length > 1 && charAt(length - 2) == '\r' ? length - 2 : length - 1);
+        }
+        return last == '\r' ? substring(0, length - 1) : this;
+    }
+
+    /**
+     * Returns this string without its last character; a final {@code "\r\n"} is removed as one.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @return  this string without its last character, or the empty string.
+     * @since   21
+     */
+    public String chop() {
+        int length = length();
+        if (length < 2) return "";
+        boolean crlf = charAt(length - 1) == '\n' && charAt(length - 2) == '\r';
+        return substring(0, crlf ? length - 2 : length - 1);
+    }
+
+    /**
+     * Returns this string without its whitespace characters, as
+     * {@link Character#isWhitespace(char)} defines them.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @return  this string without whitespace.
+     * @since   21
+     */
+    public String deleteWhitespace() {
+        int length = length();
+        int first = 0;
+        while (first < length && !Character.isWhitespace(charAt(first))) {
+            first++;
+        }
+        if (first == length) return this;
+        StringBuilder kept = new StringBuilder(length - 1).append(this, 0, first);
+        for (int index = first + 1; index < length; index++) {
+            char unit = charAt(index);
+            if (!Character.isWhitespace(unit)) kept.append(unit);
+        }
+        return kept.toString();
+    }
+
+    /**
+     * Returns this string with its whitespace normalized: each run of whitespace characters (as
+     * {@link Character#isWhitespace(char)} defines them) becomes one space, a no-break space
+     * ({@code U+00A0}) becomes a space, and the result is {@linkplain #trim() trimmed}.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @return  this string with normalized whitespace.
+     * @since   21
+     */
+    public String normalizeSpace() {
+        int length = length();
+        StringBuilder out = new StringBuilder(length);
+        boolean leading = true;
+        boolean pending = false;
+        for (int index = 0; index < length; index++) {
+            char unit = charAt(index);
+            if (Character.isWhitespace(unit)) {
+                pending = !leading;
+            } else {
+                if (pending) out.append(' ');
+                out.append(unit == (char) 0x00A0 ? ' ' : unit);
+                leading = false;
+                pending = false;
+            }
+        }
+        return leading ? "" : out.toString().trim();
+    }
+
+    /**
+     * Returns this string without diacritical marks: the compatibility decomposition
+     * ({@link java.text.Normalizer.Form#NFKD}) without the combining diacritical marks of the block
+     * {@code U+0300..U+036F}, composed again ({@link java.text.Normalizer.Form#NFC}), with the
+     * letters that carry a stroke or bar mapped to their base letter: {@code U+0110 U+0111 U+0141
+     * U+0142 U+0166 U+0167 U+0197 U+0244 U+0268 U+0289 U+1D7B U+1D7E} become
+     * {@code D d L l T t I U i u I U}.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @return  this string without diacritical marks.
+     * @since   21
+     */
+    public String stripAccents() {
+        int length = length();
+        int index = 0;
+        while (index < length && charAt(index) < 0x80) {
+            index++;
+        }
+        if (index == length) return this;
+        String decomposed = java.text.Normalizer.normalize(this, java.text.Normalizer.Form.NFKD);
+        StringBuilder kept = new StringBuilder(decomposed.length());
+        for (int at = 0; at < decomposed.length(); at++) {
+            char unit = decomposed.charAt(at);
+            if (unit < 0x0300 || unit > 0x036F) kept.append(unit);
+        }
+        String composed = java.text.Normalizer.normalize(kept, java.text.Normalizer.Form.NFC);
+        StringBuilder out = new StringBuilder(composed.length());
+        for (int at = 0; at < composed.length(); at++) {
+            out.append(baseOfStroked(composed.charAt(at)));
+        }
+        return out.toString();
+    }
+
+    /** The base letter of a letter with stroke or bar that stripAccents maps, else {@code unit}. */
+    private static char baseOfStroked(char unit) {
+        return switch (unit) {
+            case (char) 0x0110 -> 'D';
+            case (char) 0x0111 -> 'd';
+            case (char) 0x0141 -> 'L';
+            case (char) 0x0142 -> 'l';
+            case (char) 0x0166 -> 'T';
+            case (char) 0x0167 -> 't';
+            case (char) 0x0197, (char) 0x1D7B -> 'I';
+            case (char) 0x0244, (char) 0x1D7E -> 'U';
+            case (char) 0x0268 -> 'i';
+            case (char) 0x0289 -> 'u';
+            default -> unit;
+        };
+    }
+
+    /**
+     * Returns this string without the given characters at its start and its end.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API; {@link #strip()} removes
+     * whitespace.
+     *
+     * @param   chars   the characters to remove.
+     * @return  this string without those characters at either end.
+     * @throws  NullPointerException if {@code chars} is {@code null}.
+     * @since   21
+     */
+    public String strip(String chars) {
+        return stripStart(chars).stripEnd(chars);
+    }
+
+    /**
+     * Returns this string without the given characters at its start.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API; {@link #stripLeading()} removes
+     * whitespace.
+     *
+     * @param   chars   the characters to remove.
+     * @return  this string without those characters at its start.
+     * @throws  NullPointerException if {@code chars} is {@code null}.
+     * @since   21
+     */
+    public String stripStart(String chars) {
+        int length = length();
+        int start = 0;
+        if (!chars.isEmpty()) {
+            while (start < length && chars.indexOf(charAt(start)) >= 0) {
+                start++;
+            }
+        }
+        return substring(start);
+    }
+
+    /**
+     * Returns this string without the given characters at its end.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API; {@link #stripTrailing()} removes
+     * whitespace.
+     *
+     * @param   chars   the characters to remove.
+     * @return  this string without those characters at its end.
+     * @throws  NullPointerException if {@code chars} is {@code null}.
+     * @since   21
+     */
+    public String stripEnd(String chars) {
+        int end = length();
+        if (!chars.isEmpty()) {
+            while (end > 0 && chars.indexOf(charAt(end - 1)) >= 0) {
+                end--;
+            }
+        }
+        return substring(0, end);
+    }
+
+    /**
+     * Returns {@code true} if this string is not {@linkplain #isBlank() blank}.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @return  {@code true} if this string holds a character that is not whitespace.
+     * @since   21
+     */
+    public boolean isNotBlank() {
+        return !isBlank();
+    }
+
+    /**
+     * Returns {@code true} if this string is not {@linkplain #isEmpty() empty}.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @return  {@code true} if {@link #length()} is greater than 0.
+     * @since   21
+     */
+    public boolean isNotEmpty() {
+        return !isEmpty();
+    }
+
+    /**
+     * Returns {@code true} if {@code s} is {@code null} or empty.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   s   the string, or {@code null}.
+     * @return  {@code true} if {@code s} is {@code null} or empty.
+     * @since   21
+     */
+    public static boolean isNullOrEmpty(String s) {
+        return s == null || s.isEmpty();
+    }
+
+    /**
+     * Returns {@code true} if any of the given sequences is blank: {@code null}, empty, or only
+     * whitespace as {@link Character#isWhitespace(char)} defines it. A {@code null} or empty array
+     * gives {@code false}.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   sequences   the sequences, or {@code null}.
+     * @return  {@code true} if any sequence is blank.
+     * @since   21
+     */
+    public static boolean isAnyBlank(CharSequence... sequences) {
+        if (sequences == null) return false;
+        for (CharSequence sequence : sequences) {
+            if (blank(sequence)) return true;
+        }
+        return false;
+    }
+
+    /**
+     * Returns {@code true} if every given sequence is blank. A {@code null} or empty array gives
+     * {@code true}.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   sequences   the sequences, or {@code null}.
+     * @return  {@code true} if every sequence is blank.
+     * @since   21
+     */
+    public static boolean isAllBlank(CharSequence... sequences) {
+        if (sequences == null) return true;
+        for (CharSequence sequence : sequences) {
+            if (!blank(sequence)) return false;
+        }
+        return true;
+    }
+
+    /**
+     * Returns {@code true} if none of the given sequences is blank: the negation of
+     * {@link #isAnyBlank(CharSequence...)}.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   sequences   the sequences, or {@code null}.
+     * @return  {@code true} if no sequence is blank.
+     * @since   21
+     */
+    public static boolean isNoneBlank(CharSequence... sequences) {
+        return !isAnyBlank(sequences);
+    }
+
+    /**
+     * Returns {@code true} if any of the given sequences is {@code null} or empty. A {@code null}
+     * or empty array gives {@code false}.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   sequences   the sequences, or {@code null}.
+     * @return  {@code true} if any sequence is empty.
+     * @since   21
+     */
+    public static boolean isAnyEmpty(CharSequence... sequences) {
+        if (sequences == null) return false;
+        for (CharSequence sequence : sequences) {
+            if (sequence == null || sequence.length() == 0) return true;
+        }
+        return false;
+    }
+
+    /**
+     * Returns {@code true} if every given sequence is {@code null} or empty. A {@code null} or
+     * empty array gives {@code true}.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   sequences   the sequences, or {@code null}.
+     * @return  {@code true} if every sequence is empty.
+     * @since   21
+     */
+    public static boolean isAllEmpty(CharSequence... sequences) {
+        if (sequences == null) return true;
+        for (CharSequence sequence : sequences) {
+            if (sequence != null && sequence.length() > 0) return false;
+        }
+        return true;
+    }
+
+    /**
+     * Returns {@code true} if none of the given sequences is {@code null} or empty: the negation of
+     * {@link #isAnyEmpty(CharSequence...)}.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   sequences   the sequences, or {@code null}.
+     * @return  {@code true} if no sequence is empty.
+     * @since   21
+     */
+    public static boolean isNoneEmpty(CharSequence... sequences) {
+        return !isAnyEmpty(sequences);
+    }
+
+    /**
+     * Returns {@code value}, or {@code defaultValue} if {@code value} is blank.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   <T>            the type of the sequences.
+     * @param   value          the sequence, or {@code null}.
+     * @param   defaultValue   the sequence for a blank {@code value}, or {@code null}.
+     * @return  {@code value} unless it is blank, else {@code defaultValue}.
+     * @since   21
+     */
+    public static <T extends CharSequence> T defaultIfBlank(T value, T defaultValue) {
+        return blank(value) ? defaultValue : value;
+    }
+
+    /**
+     * Returns {@code value}, or {@code defaultValue} if {@code value} is {@code null} or empty.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   <T>            the type of the sequences.
+     * @param   value          the sequence, or {@code null}.
+     * @param   defaultValue   the sequence for an empty {@code value}, or {@code null}.
+     * @return  {@code value} unless it is empty, else {@code defaultValue}.
+     * @since   21
+     */
+    public static <T extends CharSequence> T defaultIfEmpty(T value, T defaultValue) {
+        return value == null || value.length() == 0 ? defaultValue : value;
+    }
+
+    /**
+     * Returns {@code value}, or the empty string if {@code value} is {@code null}.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   value   the string, or {@code null}.
+     * @return  {@code value}, or {@code ""}.
+     * @since   21
+     */
+    public static String defaultString(String value) {
+        return value == null ? "" : value;
+    }
+
+    /**
+     * Returns {@code value}, or {@code nullDefault} if {@code value} is {@code null}.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   value         the string, or {@code null}.
+     * @param   nullDefault   the string for a {@code null} {@code value}.
+     * @return  {@code value}, or {@code nullDefault}.
+     * @since   21
+     */
+    public static String defaultString(String value, String nullDefault) {
+        return value == null ? nullDefault : value;
+    }
+
+    /**
+     * Returns the first of the given values that is not blank, or {@code null} if there is none or
+     * the array is {@code null}.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   <T>      the type of the values.
+     * @param   values   the values, or {@code null}.
+     * @return  the first value that is not blank, or {@code null}.
+     * @since   21
+     */
+    @SafeVarargs
+    public static <T extends CharSequence> T firstNonBlank(T... values) {
+        if (values == null) return null;
+        for (T value : values) {
+            if (!blank(value)) return value;
+        }
+        return null;
+    }
+
+    /**
+     * Returns the first of the given values that is neither {@code null} nor empty, or
+     * {@code null} if there is none or the array is {@code null}.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   <T>      the type of the values.
+     * @param   values   the values, or {@code null}.
+     * @return  the first value that is not empty, or {@code null}.
+     * @since   21
+     */
+    @SafeVarargs
+    public static <T extends CharSequence> T firstNonEmpty(T... values) {
+        if (values == null) return null;
+        for (T value : values) {
+            if (value != null && value.length() > 0) return value;
+        }
+        return null;
+    }
+
+    /**
+     * Returns {@code value}, or the value of {@code defaultSupplier} if {@code value} is blank;
+     * {@code null} if then {@code defaultSupplier} is {@code null}.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   <T>               the type of the values.
+     * @param   value             the sequence, or {@code null}.
+     * @param   defaultSupplier   supplies the value for a blank {@code value}, or {@code null}.
+     * @return  {@code value} unless it is blank, else the supplied value.
+     * @since   21
+     */
+    public static <T extends CharSequence> T getIfBlank(T value,
+            java.util.function.Supplier<T> defaultSupplier) {
+        if (!blank(value)) return value;
+        return defaultSupplier == null ? null : defaultSupplier.get();
+    }
+
+    /**
+     * Returns {@code value}, or the value of {@code defaultSupplier} if {@code value} is
+     * {@code null} or empty; {@code null} if then {@code defaultSupplier} is {@code null}.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   <T>               the type of the values.
+     * @param   value             the sequence, or {@code null}.
+     * @param   defaultSupplier   supplies the value for an empty {@code value}, or {@code null}.
+     * @return  {@code value} unless it is empty, else the supplied value.
+     * @since   21
+     */
+    public static <T extends CharSequence> T getIfEmpty(T value,
+            java.util.function.Supplier<T> defaultSupplier) {
+        if (value != null && value.length() > 0) return value;
+        return defaultSupplier == null ? null : defaultSupplier.get();
+    }
+
+    /**
+     * Returns a new array of the given strings {@linkplain #strip() stripped} of whitespace;
+     * {@code null} elements stay {@code null}. A {@code null} array gives {@code null}, an empty
+     * array is returned as it is.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   strings   the strings, or {@code null}.
+     * @return  the stripped strings.
+     * @since   21
+     */
+    public static String[] stripAll(String... strings) {
+        return stripAll(strings, null);
+    }
+
+    /**
+     * Returns a new array of the given strings without the given characters at either end, or
+     * without whitespace when {@code chars} is {@code null}; {@code null} elements stay
+     * {@code null}. A {@code null} array gives {@code null}, an empty array is returned as it is.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   strings   the strings, or {@code null}.
+     * @param   chars     the characters to remove, or {@code null} for whitespace.
+     * @return  the stripped strings.
+     * @since   21
+     */
+    public static String[] stripAll(String[] strings, String chars) {
+        if (strings == null || strings.length == 0) return strings;
+        String[] out = new String[strings.length];
+        for (int index = 0; index < strings.length; index++) {
+            String value = strings[index];
+            out[index] = value == null ? null : chars == null ? stripWhitespace(value)
+                    : value.strip(chars);
+        }
+        return out;
+    }
+
+    /**
+     * Returns {@code value} {@linkplain #strip() stripped} of whitespace, or the empty string if
+     * {@code value} is {@code null}.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   value   the string, or {@code null}.
+     * @return  the stripped string, never {@code null}.
+     * @since   21
+     */
+    public static String stripToEmpty(String value) {
+        return value == null ? "" : stripWhitespace(value);
+    }
+
+    /**
+     * Returns {@code value} stripped of whitespace, or {@code null} if that leaves it empty or
+     * {@code value} is {@code null}.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   value   the string, or {@code null}.
+     * @return  the stripped string, or {@code null}.
+     * @since   21
+     */
+    public static String stripToNull(String value) {
+        if (value == null) return null;
+        String stripped = stripWhitespace(value);
+        return stripped.isEmpty() ? null : stripped;
+    }
+
+    /**
+     * Returns {@code value} {@linkplain #trim() trimmed}, or the empty string if {@code value} is
+     * {@code null}.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   value   the string, or {@code null}.
+     * @return  the trimmed string, never {@code null}.
+     * @since   21
+     */
+    public static String trimToEmpty(String value) {
+        return value == null ? "" : value.trim();
+    }
+
+    /**
+     * Returns {@code value} {@linkplain #trim() trimmed}, or {@code null} if that leaves it empty
+     * or {@code value} is {@code null}.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   value   the string, or {@code null}.
+     * @return  the trimmed string, or {@code null}.
+     * @since   21
+     */
+    public static String trimToNull(String value) {
+        if (value == null) return null;
+        String trimmed = value.trim();
+        return trimmed.isEmpty() ? null : trimmed;
+    }
+
+    /** Whether {@code sequence} is {@code null}, empty, or only whitespace by code unit. */
+    private static boolean blank(CharSequence sequence) {
+        if (sequence == null) return true;
+        int length = sequence.length();
+        for (int index = 0; index < length; index++) {
+            if (!Character.isWhitespace(sequence.charAt(index))) return false;
+        }
+        return true;
+    }
+
+    /** {@code value} without whitespace (by code unit) at either end. */
+    private static String stripWhitespace(String value) {
+        int start = 0;
+        int end = value.length();
+        while (start < end && Character.isWhitespace(value.charAt(start))) {
+            start++;
+        }
+        while (end > start && Character.isWhitespace(value.charAt(end - 1))) {
+            end--;
+        }
+        return value.substring(start, end);
+    }
+
+    /**
      * Returns true if and only if this string contains the specified
      * sequence of char values.
      *

@@ -1,0 +1,48 @@
+method_text_verbatim_in_head	1
+chomp	135753	0	-
+chop	135753	0	-
+deleteWhitespace	135753	0	-
+normalizeSpace	135753	0	-
+stripAccents	201289	0	-
+strip("")	4681	0	-
+stripStart("")	4681	0	-
+stripEnd("")	4681	0	-
+strip(" ")	4681	0	-
+stripStart(" ")	4681	0	-
+stripEnd(" ")	4681	0	-
+strip("a")	4681	0	-
+stripStart("a")	4681	0	-
+stripEnd("a")	4681	0	-
+strip(" a")	4681	0	-
+stripStart(" a")	4681	0	-
+stripEnd(" a")	4681	0	-
+strip("\u000D\u000A")	4681	0	-
+stripStart("\u000D\u000A")	4681	0	-
+stripEnd("\u000D\u000A")	4681	0	-
+strip("\u00A0\u0009")	4681	0	-
+stripStart("\u00A0\u0009")	4681	0	-
+stripEnd("\u00A0\u0009")	4681	0	-
+isNotBlank	135753	0	-
+isNotEmpty	4681	0	-
+stripToEmpty	135754	0	-
+stripToNull	135754	0	-
+trimToEmpty	135754	0	-
+trimToNull	135754	0	-
+defaultString	135754	0	-
+isNullOrEmpty	135754	0	-
+isAnyBlank	401	0	-
+isAllBlank	401	0	-
+isNoneBlank	401	0	-
+isAnyEmpty	401	0	-
+isAllEmpty	401	0	-
+isNoneEmpty	401	0	-
+firstNonBlank	401	0	-
+firstNonEmpty	401	0	-
+stripAll	401	0	-
+stripAll(null)	401	0	-
+stripAll("")	401	0	-
+stripAll(" a")	401	0	-
+stripAll("\u0009")	401	0	-
+stripAll empty array identity	1	0	-
+defaultIfBlank/defaultIfEmpty/defaultString/getIfBlank/getIfEmpty	294	0	-
+RESULT	PASS	failures=0
