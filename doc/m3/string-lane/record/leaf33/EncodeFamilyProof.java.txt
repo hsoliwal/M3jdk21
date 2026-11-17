@@ -1,0 +1,469 @@
+// SPDX-License-Identifier: Apache-2.0 OR EPL-2.0
+// Copyright (c) 2026 Synexia, Hitesh Soliwal and others
+
+import com.google.common.base.Utf8;
+import com.google.common.net.PercentEscaper;
+import com.google.common.net.UrlEscapers;
+import freemarker.template.utility.StringUtil;
+import java.io.IOException;
+import java.io.UncheckedIOException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.util.function.Function;
+import org.unbescape.uri.UriEscape;
+
+/**
+ * Donor-oracle proof of the ENCODE family on a stock JVM whose String carries the head method text.
+ * <p>{@code corpus <work>} writes the oracle corpus as UTF-16 code units in hex, one text per line: enc_texts.txt (every
+ * BMP unit alone, a sample of supplementary code points, every ordered pair of ASCII units, every string of 0..4 units
+ * over SMALL, encoder window-seam texts), safe_texts.txt (the SMALL strings, every ASCII unit, seams) with safes.txt (the
+ * safe sets), and dec_texts.txt (every '%' + two ASCII units, byte sequences over BYTES written as escapes, token
+ * sequences over TOKENS, decoder seam texts).
+ * <p>{@code check <work>} runs the checks. Out-of-JVM oracles: CPython 3.12 urllib.parse quote / quote_plus / unquote /
+ * unquote_plus, codecs rot13 and len(s.encode('utf-8')) (python_oracle.py), node encodeURIComponent / encodeURI /
+ * decodeURIComponent / decodeURI / String.prototype.toWellFormed (node_oracle.js), Go url.PathEscape / QueryEscape on
+ * well-formed texts (go_oracle.go). In-JVM oracles: Guava 33.7.2 PercentEscaper, UrlEscapers and Utf8.encodedLength on
+ * every code point and every text (lone surrogates included), FreeMarker 2.3.35 StringUtil.URLEnc and unbescape 1.1.8
+ * UriEscape on well-formed texts, java.net.URLEncoder / URLDecoder relations. Properties: round trips, and an unchanged
+ * result is this string. Exceptions compare by class (an oracle error is IllegalArgumentException). Exit 1 on a mismatch.
+ */
+public final class EncodeFamilyProof {
+    private static final char HIGH = (char) 0xD835, LOW1 = (char) 0xDD1E, LOW2 = (char) 0xDD1F;
+    private static final char[] SMALL = {'a', 'Z', '~', '*', ' ', '+', '%', '/', (char) 0xE9, HIGH, LOW1, LOW2};
+    static final String[] SAFES = {"", "/", "$&+:=@", "!$&'()*+,;=:@", "!$&'()*+,;=:@/?", " ", "%+ ", "~*\u00E9"
+        + HIGH + "/", "aZ09", "" + LOW1, "!$'()*,;:@/?"};
+    private static final int[] BYTES = {0x00, 0x23, 0x25, 0x2B, 0x2F, 0x41, 0x7F, 0x80, 0x8F, 0x90, 0x9F, 0xA0, 0xBF,
+        0xC0, 0xC2, 0xDF, 0xE0, 0xED, 0xEF, 0xF0, 0xF4, 0xF5, 0xFF};
+    private static final int[] LEADS4 = {0xF0, 0xF4, 0xF5, 0xE0, 0xED, 0xC2};
+    private static final String[] TOKENS = {"%C3", "%a9", "%A9", "%E9", "%ED%A0%80", "%F0%9D%94%9E", "%2f", "%2B",
+        "%23", "%25", "%", "%4", "%G0", "+", "a", "\u00E9", "" + HIGH, "" + LOW1, "" + LOW2, "%e2%82%ac"};
+    private static final String ERROR = "\u0000IllegalArgumentException";
+    private static int failures;
+    private static int checks;
+
+    private EncodeFamilyProof() {}
+
+    public static void main(String[] args) throws IOException {
+        Path work = Path.of(args[1]);
+        List<String> enc = encTexts();
+        List<String> safeTexts = safeTexts();
+        List<String> dec = decTexts();
+        if (args[0].equals("corpus")) {
+            write(work.resolve("enc_texts.txt"), enc);
+            write(work.resolve("safe_texts.txt"), safeTexts);
+            write(work.resolve("safes.txt"), List.of(SAFES));
+            write(work.resolve("dec_texts.txt"), dec);
+            System.out.println("corpus\tenc_texts\t" + enc.size() + "\tsafe_texts\t" + safeTexts.size() + "\tsafes\t"
+                    + SAFES.length + "\tdec_texts\t" + dec.size());
+            return;
+        }
+        pythonChecks(work, enc, safeTexts, dec);
+        nodeChecks(work, enc, dec);
+        goChecks(work, enc);
+        guavaChecks(enc, safeTexts);
+        engineChecks(enc, dec);
+        properties(enc, safeTexts, dec);
+        System.out.println("checks\t" + checks + "\tenc_texts\t" + enc.size() + "\tsafe_texts\t" + safeTexts.size()
+                + "\tdec_texts\t" + dec.size() + "\tcode_points\t" + 0x110000);
+        System.out.println("RESULT\t" + (failures == 0 ? "PASS" : "FAIL") + "\tfailures=" + failures);
+        System.exit(failures == 0 ? 0 : 1);
+    }
+
+    private static void pythonChecks(Path work, List<String> enc, List<String> safeTexts, List<String> dec) {
+        List<String[]> rows = rows(work.resolve("PY_ENC.txt"), enc.size(), 4);
+        compare("encodePercent() vs python quote(s, safe='')", enc, String::encodePercent, rows, 0);
+        compare("encodePercentPlus() vs python quote_plus(s)", enc, String::encodePercentPlus, rows, 1);
+        compare("rot13() vs python codecs rot13", enc, String::rot13, rows, 2);
+        compare("utf8Length() vs python len(s.encode('utf-8'))", enc, String::utf8Length, rows, 3);
+        List<String[]> safeRows = rows(work.resolve("PY_SAFE.txt"), safeTexts.size() * SAFES.length, 2);
+        for (int s = 0; s < SAFES.length; s++) {
+            String safe = SAFES[s];
+            List<String[]> part = safeRows.subList(s * safeTexts.size(), (s + 1) * safeTexts.size());
+            compare("encodePercent(" + show(safe) + ") vs python quote(s, safe)", safeTexts,
+                    t -> t.encodePercent(safe), part, 0);
+            compare("encodePercentPlus(" + show(safe) + ") vs python quote_plus(s, safe)", safeTexts,
+                    t -> t.encodePercentPlus(safe), part, 1);
+        }
+        List<String[]> decRows = rows(work.resolve("PY_DEC.txt"), dec.size(), 2);
+        compare("decodePercent() vs python unquote(s)", dec, String::decodePercent, decRows, 0);
+        compare("decodePercentPlus() vs python unquote_plus(s)", dec, String::decodePercentPlus, decRows, 1);
+    }
+
+    private static void nodeChecks(Path work, List<String> enc, List<String> dec) {
+        List<String[]> rows = rows(work.resolve("NODE_ENC.txt"), enc.size(), 3);
+        compare("encodeUriComponent() vs node encodeURIComponent", enc, String::encodeUriComponent, rows, 0);
+        compare("encodeUri() vs node encodeURI", enc, String::encodeUri, rows, 1);
+        compare("toWellFormed() vs node toWellFormed", enc, String::toWellFormed, rows, 2);
+        List<String[]> decRows = rows(work.resolve("NODE_DEC.txt"), dec.size(), 2);
+        compare("decodeUriComponent() vs node decodeURIComponent", dec, String::decodeUriComponent, decRows, 0);
+        compare("decodeUri() vs node decodeURI", dec, String::decodeUri, decRows, 1);
+    }
+
+    private static void goChecks(Path work, List<String> enc) {
+        List<String[]> rows = rows(work.resolve("GO_ENC.txt"), enc.size(), 2);
+        List<String> wellFormed = new ArrayList<>();
+        List<String[]> kept = new ArrayList<>();
+        for (int i = 0; i < enc.size(); i++) {
+            if (rows.get(i)[0].equals("-")) continue;
+            wellFormed.add(enc.get(i));
+            kept.add(rows.get(i));
+        }
+        compare("encodePercent(\"$&+:=@\") vs go url.PathEscape", wellFormed, t -> t.encodePercent("$&+:=@"), kept, 0);
+        compare("encodePercentPlus() vs go url.QueryEscape", wellFormed, String::encodePercentPlus, kept, 1);
+    }
+
+    private static void guavaChecks(List<String> enc, List<String> safeTexts) {
+        List<String> points = new ArrayList<>(0x110000);
+        for (int point = 0; point <= Character.MAX_CODE_POINT; point++) {
+            points.add(point <= 0xFFFF ? String.valueOf((char) point) : Character.toString(point));
+        }
+        List<String> all = concat(points, enc);
+        PercentEscaper unreserved = new PercentEscaper("-._~", false);
+        PercentEscaper unreservedPlus = new PercentEscaper("-._~", true);
+        PercentEscaper component = new PercentEscaper("-_.!~*'()", false);
+        PercentEscaper uri = new PercentEscaper("-_.!~*'();/?:@&=+$,#", false);
+        run("encodePercent() vs guava PercentEscaper(\"-._~\")", all, String::encodePercent, unreserved::escape);
+        run("encodePercentPlus() vs guava PercentEscaper(\"-._~\", plus)", all, String::encodePercentPlus,
+                unreservedPlus::escape);
+        run("encodeUriComponent() vs guava PercentEscaper(\"-_.!~*'()\")", all, String::encodeUriComponent,
+                component::escape);
+        run("encodeUri() vs guava PercentEscaper(\"-_.!~*'();/?:@&=+$,#\")", all, String::encodeUri, uri::escape);
+        run("encodePercent(pchar) vs guava urlPathSegmentEscaper", all, t -> t.encodePercent("!$&'()*+,;=:@"),
+                UrlEscapers.urlPathSegmentEscaper()::escape);
+        run("encodePercent(pchar/?) vs guava urlFragmentEscaper", all, t -> t.encodePercent("!$&'()*+,;=:@/?"),
+                UrlEscapers.urlFragmentEscaper()::escape);
+        run("utf8Length() vs guava Utf8.encodedLength", all, String::utf8Length, Utf8::encodedLength);
+        for (String safe : SAFES) {
+            if (!safe.chars().allMatch(c -> c < 128 && !Character.isLetterOrDigit(c))) continue;
+            PercentEscaper plain = new PercentEscaper(safe + "-._~", false);
+            run("encodePercent(" + show(safe) + ") vs guava PercentEscaper", safeTexts, t -> t.encodePercent(safe),
+                    plain::escape);
+            if (safe.indexOf(' ') >= 0) continue;
+            PercentEscaper plus = new PercentEscaper(safe + "-._~", true);
+            run("encodePercentPlus(" + show(safe) + ") vs guava PercentEscaper plus", safeTexts,
+                    t -> t.encodePercentPlus(safe), plus::escape);
+        }
+    }
+
+    private static void engineChecks(List<String> enc, List<String> dec) {
+        List<String> wellFormed = enc.stream().filter(EncodeFamilyProof::wellFormed).toList();
+        run("encodeUriComponent() vs freemarker StringUtil.URLEnc(UTF-8), well-formed", wellFormed,
+                String::encodeUriComponent, t -> urlEnc(t));
+        run("encodePercent(pchar) vs unbescape escapeUriPathSegment, well-formed", wellFormed,
+                t -> t.encodePercent("!$&'()*+,;=:@"), UriEscape::escapeUriPathSegment);
+        run("encodePercent(pchar/) vs unbescape escapeUriPath, well-formed", wellFormed,
+                t -> t.encodePercent("!$&'()*+,;=:@/"), UriEscape::escapeUriPath);
+        run("encodePercent(pchar/?) vs unbescape escapeUriFragmentId, well-formed", wellFormed,
+                t -> t.encodePercent("!$&'()*+,;=:@/?"), UriEscape::escapeUriFragmentId);
+        run("encodePercent(\"!$'()*,;:@/?\") vs unbescape escapeUriQueryParam, well-formed", wellFormed,
+                t -> t.encodePercent("!$'()*,;:@/?"), UriEscape::escapeUriQueryParam);
+        List<String> noTilde = wellFormed.stream().filter(t -> t.indexOf('~') < 0).toList();
+        run("encodePercentPlus(\"*\") vs URLEncoder.encode(UTF-8), well-formed without '~'", noTilde,
+                t -> t.encodePercentPlus("*"), t -> URLEncoder.encode(t, StandardCharsets.UTF_8));
+        List<String> encoded = new ArrayList<>();
+        for (String t : wellFormed) {
+            encoded.add(t.encodePercent());
+            encoded.add(t.encodePercentPlus());
+        }
+        run("decodePercentPlus() vs URLDecoder.decode(UTF-8), encoder outputs", encoded,
+                String::decodePercentPlus, t -> URLDecoder.decode(t, StandardCharsets.UTF_8));
+        // where they differ: URLDecoder rejects a '%' without two hex digits; the JDK's UTF-8 decoder gives one
+        // U+FFFD for an encoded surrogate (ED A0..BF ..), Python and decodePercent one per maximal subpart
+        List<String> differ = dec.stream().filter(EncodeFamilyProof::everyPercentEscapes)
+                .filter(t -> !Objects.equals(result(String::decodePercentPlus, t),
+                        result(s -> URLDecoder.decode(s, StandardCharsets.UTF_8), t)))
+                .filter(t -> !t.toUpperCase(java.util.Locale.ROOT).contains("%ED%A")
+                        && !t.toUpperCase(java.util.Locale.ROOT).contains("%ED%B")).toList();
+        report("decodePercentPlus() vs URLDecoder.decode(UTF-8) differ only on encoded surrogates "
+                + "(every '%' an ASCII-hex escape)", dec.size(), differ.size(),
+                differ.isEmpty() ? "-" : show(clip(differ.get(0))));
+    }
+
+    private static void properties(List<String> enc, List<String> safeTexts, List<String> dec) {
+        List<String> wellFormed = enc.stream().filter(EncodeFamilyProof::wellFormed).toList();
+        run("decodePercent(encodePercent(t)) == t", wellFormed, t -> t.encodePercent().decodePercent(), t -> t);
+        run("decodePercentPlus(encodePercentPlus(t)) == t", wellFormed,
+                t -> t.encodePercentPlus().decodePercentPlus(), t -> t);
+        run("decodeUriComponent(encodeUriComponent(t)) == t", wellFormed,
+                t -> t.encodeUriComponent().decodeUriComponent(), t -> t);
+        run("decodeUri(encodeUri(t)) == t (no '%' or reserved escape in t)", wellFormed.stream()
+                .filter(t -> t.indexOf('%') < 0).toList(), t -> t.encodeUri().decodeUri(), t -> t);
+        run("rot13(rot13(t)) == t", enc, t -> t.rot13().rot13(), t -> t);
+        List<Function<String, Object>> methods = List.of(String::encodePercent, String::encodePercentPlus,
+                String::encodeUriComponent, String::encodeUri, String::decodePercent, String::decodePercentPlus,
+                String::decodeUriComponent, String::decodeUri, String::toWellFormed, String::rot13,
+                t -> t.encodePercent("/"), t -> t.encodePercentPlus("%+ "));
+        List<String> texts = concat(concat(enc, dec), safeTexts);
+        long copies = 0;
+        String first = "-";
+        for (String text : texts) {
+            for (Function<String, Object> method : methods) {
+                Object result = result(method, text);
+                if (result instanceof String s && s.equals(text) && s != text && copies++ == 0) first = show(clip(text));
+            }
+        }
+        report("an unchanged result is this string (12 methods)", (long) texts.size() * methods.size(), copies, first);
+        List<Function<String, Object>> nulls = List.of(t -> t.encodePercent(null), t -> t.encodePercentPlus(null));
+        long missing = 0;
+        for (Function<String, Object> f : nulls) {
+            for (String text : List.of("", "a", "\u00E9")) {
+                if (!Objects.equals(result(f, text), "\u0000NullPointerException")) missing++;
+            }
+        }
+        report("a null safe set throws NullPointerException", 6, missing, missing == 0 ? "-" : "found");
+    }
+
+    private static List<String> encTexts() {
+        List<String> out = new ArrayList<>();
+        for (int unit = 0; unit <= 0xFFFF; unit++) out.add(String.valueOf((char) unit));
+        int[] extra = {0x10000, 0x1D51E, 0x1D51F, 0x1FFFF, 0xFFFFF, 0x10FFFF};
+        for (int point : extra) out.add(Character.toString(point));
+        for (int point = 0x10000; point <= 0x10FFFF; point += 0x111) out.add(Character.toString(point));
+        for (int a = 0; a < 128; a++) {
+            for (int b = 0; b < 128; b++) out.add("" + (char) a + (char) b);
+        }
+        out.addAll(strings(SMALL, 4));
+        String[] tails = {"" + HIGH + LOW1, "" + HIGH + LOW2 + "a", "\u00E9", " ", "+a", "" + HIGH, "" + LOW2,
+            HIGH + "a", "~", "*"};
+        for (int k : seamLengths()) {
+            for (String tail : tails) {
+                out.add("a".repeat(k) + tail);
+                out.add(" " + "a".repeat(k) + tail);
+                out.add("\u00E9".repeat(k) + tail);
+                out.add(tail + "a".repeat(k));
+            }
+        }
+        return out;
+    }
+
+    private static List<String> safeTexts() {
+        List<String> out = new ArrayList<>(strings(SMALL, 4));
+        for (int unit = 0; unit < 128; unit++) out.add(String.valueOf((char) unit));
+        for (int k : seamLengths()) {
+            out.add(" " + "a".repeat(k) + "/" + HIGH + LOW1);
+            out.add("/".repeat(k) + " \u00E9" + HIGH);
+        }
+        return out;
+    }
+
+    private static List<String> decTexts() {
+        List<String> out = new ArrayList<>(List.of("", "%", "%%", "%%%", "+", "++"));
+        for (int a = 0; a < 128; a++) {
+            out.add("%" + (char) a);
+            out.add((char) a + "%");
+            for (int b = 0; b < 128; b++) out.add("%" + (char) a + (char) b);
+        }
+        for (int a : BYTES) {
+            out.add(escape(a));
+            out.add(escape(a).toLowerCase(java.util.Locale.ROOT));
+            for (int b : BYTES) {
+                out.add(escape(a) + escape(b));
+                out.add((escape(a) + escape(b)).toLowerCase(java.util.Locale.ROOT));
+                for (int c : BYTES) out.add(escape(a) + escape(b) + escape(c));
+            }
+        }
+        for (int a : LEADS4) {
+            for (int b : BYTES) {
+                for (int c : BYTES) {
+                    for (int d : BYTES) out.add(escape(a) + escape(b) + escape(c) + escape(d));
+                }
+            }
+        }
+        for (int length = 1; length <= 3; length++) {
+            int total = (int) Math.pow(TOKENS.length, length);
+            for (int code = 0; code < total; code++) {
+                StringBuilder text = new StringBuilder();
+                for (int i = 0, rest = code; i < length; i++, rest /= TOKENS.length) text.append(TOKENS[rest % TOKENS.length]);
+                out.add(text.toString());
+            }
+        }
+        String[] tails = {"%C3%A9", "%", "%4", "%2f", "+", "" + HIGH + LOW1 + "%41", "%F0%9D%94%9E", "%ED%A0"};
+        for (int k : seamLengths()) {
+            for (String tail : tails) {
+                out.add("x".repeat(k) + tail);
+                out.add("\u00E9".repeat(k) + tail);
+                out.add("+".repeat(k) + tail);
+            }
+        }
+        return out;
+    }
+
+    private static int[] seamLengths() {
+        int[] out = new int[16 + 13];
+        for (int k = 505, i = 0; k <= 1030; k += (k == 520 ? 498 : 1)) out[i++] = k;
+        return out;
+    }
+
+    private static String escape(int b) {
+        return String.format("%%%02X", b);
+    }
+
+    private static boolean wellFormed(String t) {
+        for (int i = 0; i < t.length(); i++) {
+            char c = t.charAt(i);
+            if (Character.isHighSurrogate(c) && i + 1 < t.length() && Character.isLowSurrogate(t.charAt(i + 1))) {
+                i++;
+            } else if (Character.isSurrogate(c)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private static boolean everyPercentEscapes(String t) {
+        for (int i = t.indexOf('%'); i >= 0; i = t.indexOf('%', i + 1)) {
+            if (i + 2 >= t.length() || hex(t.charAt(i + 1)) < 0 || hex(t.charAt(i + 2)) < 0) return false;
+        }
+        return true;
+    }
+
+    private static int hex(char c) {
+        return c < 128 ? Character.digit(c, 16) : -1;
+    }
+
+    private static String urlEnc(String t) {
+        try {
+            return StringUtil.URLEnc(t, "UTF-8");
+        } catch (java.io.UnsupportedEncodingException e) {
+            throw new UncheckedIOException(e);
+        }
+    }
+
+    /** Compares a method with one column of oracle rows: '=' + ASCII text, 'h' + hex units, a number, or '!'. */
+    private static void compare(String name, List<String> texts, Function<String, Object> mine, List<String[]> rows,
+            int column) {
+        long mismatches = 0;
+        String first = "-";
+        for (int i = 0; i < texts.size(); i++) {
+            String text = texts.get(i);
+            Object expected = oracle(rows.get(i)[column]);
+            Object actual = result(mine, text);
+            if (!Objects.equals(actual, expected) && mismatches++ == 0) {
+                first = show(clip(text)) + " -> " + show(clip(String.valueOf(actual))) + " vs "
+                        + show(clip(String.valueOf(expected)));
+            }
+        }
+        report(name, texts.size(), mismatches, first);
+    }
+
+    private static Object oracle(String cell) {
+        if (cell.equals("!")) return ERROR;
+        if (cell.startsWith("=")) return cell.substring(1);
+        if (cell.startsWith("h")) return unhex(cell.substring(1));
+        return Integer.valueOf(cell);
+    }
+
+    private static void run(String name, List<String> texts, Function<String, Object> mine,
+            Function<String, Object> donor) {
+        long mismatches = 0;
+        String first = "-";
+        for (String text : texts) {
+            Object a = result(mine, text), b = result(donor, text);
+            if (!Objects.equals(a, b) && mismatches++ == 0) {
+                first = show(clip(text)) + " -> " + show(clip(String.valueOf(a))) + " vs " + show(clip(String.valueOf(b)));
+            }
+        }
+        report(name, texts.size(), mismatches, first);
+    }
+
+    private static void report(String name, long texts, long mismatches, String first) {
+        checks++;
+        failures += mismatches == 0 ? 0 : 1;
+        System.out.println(name + "\t" + texts + "\t" + mismatches + "\t" + first);
+    }
+
+    private static Object result(Function<String, Object> f, String text) {
+        try {
+            return f.apply(text);
+        } catch (RuntimeException e) {
+            return "\u0000" + e.getClass().getSimpleName();
+        }
+    }
+
+    private static List<String[]> rows(Path path, int expected, int columns) {
+        List<String[]> out = new ArrayList<>(expected);
+        for (String line : lines(path)) out.add(line.split("\t", -1));
+        if (out.size() != expected) throw new IllegalStateException(path + ": " + out.size() + " rows, not " + expected);
+        for (String[] row : out) {
+            if (row.length != columns) throw new IllegalStateException(path + ": a row of " + row.length);
+        }
+        return out;
+    }
+
+    private static List<String> strings(char[] units, int maxLength) {
+        List<String> out = new ArrayList<>();
+        for (int length = 0; length <= maxLength; length++) {
+            int total = (int) Math.pow(units.length, length);
+            for (int code = 0; code < total; code++) {
+                char[] chars = new char[length];
+                int rest = code;
+                for (int i = 0; i < length; i++) {
+                    chars[i] = units[rest % units.length];
+                    rest /= units.length;
+                }
+                out.add(new String(chars));
+            }
+        }
+        return out;
+    }
+
+    private static List<String> concat(List<String> a, List<String> b) {
+        List<String> out = new ArrayList<>(a);
+        out.addAll(b);
+        return out;
+    }
+
+    private static void write(Path path, List<String> texts) throws IOException {
+        StringBuilder out = new StringBuilder();
+        for (String text : texts) out.append(hex(text)).append('\n');
+        Files.writeString(path, out, StandardCharsets.US_ASCII);
+    }
+
+    private static List<String> lines(Path path) {
+        try {
+            String all = Files.readString(path, StandardCharsets.US_ASCII);
+            List<String> out = new ArrayList<>(List.of(all.split("\n", -1)));
+            out.remove(out.size() - 1);
+            return out;
+        } catch (IOException e) {
+            throw new UncheckedIOException(e);
+        }
+    }
+
+    private static final char[] DIGITS = "0123456789ABCDEF".toCharArray();
+
+    private static String hex(String text) {
+        char[] out = new char[text.length() * 4];
+        for (int i = 0; i < text.length(); i++) {
+            char c = text.charAt(i);
+            for (int k = 0; k < 4; k++) out[4 * i + k] = DIGITS[c >> (12 - 4 * k) & 15];
+        }
+        return new String(out);
+    }
+
+    private static String unhex(String hex) {
+        char[] units = new char[hex.length() / 4];
+        for (int i = 0; i < units.length; i++) {
+            int v = 0;
+            for (int k = 0; k < 4; k++) v = v << 4 | Character.digit(hex.charAt(4 * i + k), 16);
+            units[i] = (char) v;
+        }
+        return new String(units);
+    }
+
+    private static String clip(String s) {
+        return s.length() > 40 ? s.substring(0, 20) + "..." + s.substring(s.length() - 6) : s;
+    }
+
+    private static String show(String s) {
+        StringBuilder out = new StringBuilder("\"");
+        for (char c : s.toCharArray()) out.append(c >= 32 && c < 127 ? String.valueOf(c) : String.format("<%04X>", (int) c));
+        return out.append('"').toString();
+    }
+}

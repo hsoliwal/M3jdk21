@@ -1,0 +1,28 @@
+String: absorb the ENCODE family
+
+13 public methods, a superset of the JavaScript URI functions, CPython 3.12
+urllib.parse, Go net/url, Guava UrlEscapers, unbescape and FreeMarker:
+- encodePercent(), encodePercent(String safe): percent-encoding of UTF-8
+  bytes with RFC 3986 unreserved characters (plus the safe set) kept;
+  Python quote; Go PathEscape, Guava and unbescape rules are proven equal
+  to a named safe set (in the Javadoc), so they need no names of their own;
+- encodePercentPlus(), encodePercentPlus(String safe): Python quote_plus;
+- decodePercent(), decodePercentPlus(): Python unquote/unquote_plus with
+  errors='replace', one U+FFFD per maximal ill-formed subpart (Unicode
+  3.9; the JDK UTF-8 decoder differs on encoded surrogates);
+- encodeUriComponent(), encodeUri(), decodeUriComponent(), decodeUri():
+  JavaScript; a lone surrogate throws IllegalArgumentException (URIError);
+- toWellFormed(): JavaScript String.prototype.toWellFormed;
+- utf8Length(), rot13().
+URLEncoder/URLDecoder keep form encoding (proven equal where both apply).
+Encoders return this when nothing needs encoding.
+
+Proof (record doc/m3/string-lane/record/leaf33): 71 checks over 109,548
+encode, 22,807 safe-set and 112,035 decode texts plus every code point
+against node, CPython 3.12, Go and Guava: 0 mismatches in three modes
+(flat; stub M3 storage with facts; without facts), compact strings on and
+off. JUnit 1,900/1,900 in all six runs, including 80 assertions ported
+from Guava Utf8Test, UrlEscapersTest and UrlEscaperTesting (3 skipped).
+The head also compiles inside master's String.java with its M3 closure
+(-Xlint:all -Werror). Drafted by a workflow agent; integrated and
+re-proven on master.
