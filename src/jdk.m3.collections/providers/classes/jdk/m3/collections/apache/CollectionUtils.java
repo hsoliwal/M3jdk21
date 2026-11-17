@@ -598,24 +598,60 @@ public class CollectionUtils {
         if (coll2.isEmpty()) {
             return true;
         }
-        final Set<Object> elementsAlreadySeen = new HashSet<>();
-        for (final Object nextElement : coll2) {
-            if (elementsAlreadySeen.contains(nextElement)) {
+        return containsAllRest(coll1, coll2);
+    }
+
+    /**
+     * Walks {@code coll2} in order with one cursor over {@code coll1} that never restarts: every
+     * element the cursor passes is remembered, so {@code coll1} is read at most once (O(n + m)
+     * expected). An unseen element that the exhausted cursor did not find gets one full
+     * {@code equals} scan of {@code coll1}, so elements whose {@code hashCode} disagrees with
+     * {@code equals} answer as before; with a consistent {@code hashCode} that scan runs at most
+     * once, just before {@code false} is returned.
+     */
+    private static boolean containsAllRest(final Collection<?> coll1, final Collection<?> coll2) {
+        final Set<Object> seen = new HashSet<>();
+        Iterator<?> cursor = null;
+        for (final Object element : coll2) {
+            if (seen.contains(element)) {
                 continue;
             }
-            boolean foundCurrentElement = false;
-            for (final Object p : coll1) {
-                elementsAlreadySeen.add(p);
-                if (Objects.equals(nextElement, p)) {
-                    foundCurrentElement = true;
-                    break;
-                }
+            if (cursor == null) {
+                cursor = coll1.iterator();
             }
-            if (!foundCurrentElement) {
+            if (!advanceTo(cursor, element, seen) && !containsEqual(coll1, element)) {
                 return false;
             }
         }
         return true;
+    }
+
+    /**
+     * Advances {@code cursor} to the first element equal to {@code target}, adding every element it
+     * passes to {@code seen}.
+     */
+    private static boolean advanceTo(final Iterator<?> cursor, final Object target,
+            final Set<Object> seen) {
+        while (cursor.hasNext()) {
+            final Object candidate = cursor.next();
+            seen.add(candidate);
+            if (Objects.equals(target, candidate)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Returns whether {@code coll} holds an element equal to {@code target}, scanning all of it.
+     */
+    private static boolean containsEqual(final Collection<?> coll, final Object target) {
+        for (final Object candidate : coll) {
+            if (Objects.equals(target, candidate)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -1443,8 +1479,23 @@ public class CollectionUtils {
             throw new IndexOutOfBoundsException("The sum of start index and count can't be greater than the size of collection.");
         }
         final Collection<E> result = new ArrayList<>(count);
-        final Iterator<E> iterator = input.iterator();
-        return removeCountRest(count, startIndex, iterator, result);
+        if (count > 0 && startIndex + count > 0 && input.getClass() == ArrayList.class) {
+            return removeCountBulk((List<E>) input, startIndex, startIndex + count, result);
+        }
+        return removeCountRest(count, startIndex, input.iterator(), result);
+    }
+
+    /**
+     * Removes the range [{@code startIndex}, {@code endIndex}) of an exact {@link ArrayList} with
+     * one copy out and one tail shift, moving into {@code result} the same elements, in the same
+     * order, that one-at-a-time iterator removal would.
+     */
+    private static <E> Collection<E> removeCountBulk(final List<E> input, final int startIndex,
+            final int endIndex, final Collection<E> result) {
+        final List<E> range = input.subList(startIndex, endIndex);
+        result.addAll(range);
+        range.clear();
+        return result;
     }
 
     private static <E> Collection<E> removeCountRest(int count, int startIndex, final Iterator<E> iterator,

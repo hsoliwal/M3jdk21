@@ -27,6 +27,7 @@ import jdk.m3.collections.eclipse.api.collection.primitive.ImmutableIntCollectio
 import jdk.m3.collections.eclipse.api.collection.primitive.MutableIntCollection;
 import jdk.m3.collections.eclipse.api.factory.Bags;
 import jdk.m3.collections.eclipse.api.iterator.IntIterator;
+import jdk.m3.collections.eclipse.api.iterator.MutableIntIterator;
 import jdk.m3.collections.eclipse.api.list.MutableList;
 import jdk.m3.collections.eclipse.api.list.primitive.MutableIntList;
 import jdk.m3.collections.eclipse.api.map.primitive.MutableIntValuesMap;
@@ -38,6 +39,7 @@ import jdk.m3.collections.eclipse.impl.factory.Lists;
 import jdk.m3.collections.eclipse.impl.factory.primitive.IntBags;
 import jdk.m3.collections.eclipse.impl.factory.primitive.IntLists;
 import jdk.m3.collections.eclipse.impl.lazy.primitive.LazyIntIterableAdapter;
+import jdk.m3.collections.eclipse.impl.list.mutable.primitive.IntArrayList;
 import jdk.m3.collections.eclipse.impl.primitive.AbstractIntIterable;
 import jdk.m3.collections.eclipse.impl.set.mutable.primitive.IntHashSet;
 
@@ -49,6 +51,12 @@ import jdk.m3.collections.eclipse.impl.set.mutable.primitive.IntHashSet;
 @SuppressWarnings("missing-explicit-ctor")
 public abstract class AbstractMutableIntValuesMap extends AbstractIntIterable implements MutableIntValuesMap
 {
+    /**
+     * Smallest source size for which one value-lane pass beats per-element table scans.
+     */
+    //FLLDCIM: HPCPOP — below this the pre-patch per-element scan runs and nothing is allocated
+    private static final int LANE_PASS_MIN_SOURCE = 4;
+
     protected abstract int getOccupiedWithData();
 
     protected abstract SentinelValues getSentinelValues();
@@ -110,7 +118,50 @@ public abstract class AbstractMutableIntValuesMap extends AbstractIntIterable im
     @Override
     public boolean containsAll(IntIterable source)
     {
+        if (isLaneSource(source) && source.size() >= LANE_PASS_MIN_SOURCE
+                && isLaneOwner(this.getClass()))
+        {
+            //FLLDCIM: HPCPOP — O(capacity + m): one value-lane pass, O(1) membership per element
+            IntHashSet present = this.valueLaneSet();
+            return source.allSatisfy(present::contains);
+        }
         return source.allSatisfy((int value) -> AbstractMutableIntValuesMap.this.contains(value));
+    }
+
+    /**
+     * Snapshot of every live value (sentinel slots, then the slot-indexed value lane)
+     * for O(1) membership.
+     */
+    private IntHashSet valueLaneSet()
+    {
+        //FLLDCIM: OFFSET_ARRAY — single walk of the value lane via forEachValue
+        IntHashSet present = new IntHashSet(this.size());
+        this.forEachValue(present::add);
+        return present;
+    }
+
+    /**
+     * Exact module source classes: size, allSatisfy and contains run no foreign code
+     * and never alias a values map.
+     */
+    private static boolean isLaneSource(IntIterable source)
+    {
+        //FLLDCIM: MRL — exact-class gate; null and every other type keep the pre-patch path
+        Class<?> type = source == null ? null : source.getClass();
+        return type == IntHashSet.class || type == IntArrayList.class || type == IntHashBag.class;
+    }
+
+    /**
+     * Exact module map classes: contains, containsValue, forEachValue, removeKey and
+     * intIterator are not overridden.
+     */
+    private static boolean isLaneOwner(Class<?> owner)
+    {
+        //FLLDCIM: MRL — exact-class gate; external subclasses keep the pre-patch path
+        return owner == ByteIntHashMap.class || owner == CharIntHashMap.class
+                || owner == ShortIntHashMap.class || owner == IntIntHashMap.class
+                || owner == LongIntHashMap.class || owner == FloatIntHashMap.class
+                || owner == DoubleIntHashMap.class;
     }
 
     @Override
@@ -808,12 +859,48 @@ public abstract class AbstractMutableIntValuesMap extends AbstractIntIterable im
         @Override
         public boolean removeAll(IntIterable source)
         {
+            if (isLaneSource(source) && source.size() >= LANE_PASS_MIN_SOURCE && this.isLaneView())
+            {
+                return this.removeAllByLane(source);
+            }
             int oldSize = AbstractMutableIntValuesMap.this.size();
 
             IntIterator iterator = source.intIterator();
             while (iterator.hasNext())
             {
                 this.remove(iterator.next());
+            }
+            return oldSize != AbstractMutableIntValuesMap.this.size();
+        }
+
+        /**
+         * True only for the owner's own values view: a nest member of an exact module map class.
+         */
+        private boolean isLaneView()
+        {
+            //FLLDCIM: MRL — remove(int), intIterator() and removeKey are then module code
+            Class<?> owner = AbstractMutableIntValuesMap.this.getClass();
+            return isLaneOwner(owner) && this.getClass().getNestHost() == owner;
+        }
+
+        /**
+         * One pass over the live entries removing every entry whose value is in source;
+         * marks exactly the slots the per-element remove(int) scans mark (slot order
+         * instead of source order; no foreign code runs in between).
+         */
+        private boolean removeAllByLane(IntIterable source)
+        {
+            //FLLDCIM: COMPACT — O(capacity + m) instead of O(m * capacity)
+            int oldSize = AbstractMutableIntValuesMap.this.size();
+            IntIterable members = source instanceof IntArrayList
+                    ? IntHashSet.newSet(source) : source;
+            MutableIntIterator iterator = this.intIterator();
+            while (iterator.hasNext())
+            {
+                if (members.contains(iterator.next()))
+                {
+                    iterator.remove();
+                }
             }
             return oldSize != AbstractMutableIntValuesMap.this.size();
         }
