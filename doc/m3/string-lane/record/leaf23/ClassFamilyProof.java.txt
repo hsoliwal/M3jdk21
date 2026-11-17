@@ -1,0 +1,100 @@
+// SPDX-License-Identifier: Apache-2.0 OR EPL-2.0
+// Copyright (c) 2026 Synexia, Hitesh Soliwal and others
+
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.function.Predicate;
+import org.apache.commons.lang3.StringUtils;
+
+/**
+ * Donor-oracle proof of the CLASS_TEST family of new java.lang.String methods on a stock JVM whose String carries the
+ * head method text, against commons-lang3 3.22.0. Inputs: every string of length 0..4 over UNITS (letters, digits,
+ * space, Latin-1, an Arabic-Indic digit, the halves of two supplementary letters, tilde and DEL); every BMP unit
+ * alone, after "a", before "A" and after "1"; every supplementary code point alone and after "a". StringUtils
+ * isWhitespace is compared with String.isBlank. Prints: name, cases, mismatches, first mismatching input.
+ */
+public final class ClassFamilyProof {
+    private static final char[] UNITS = {
+        'a', 'A', '1', ' ', (char) 0xE9, (char) 0xC9, (char) 0x0663, (char) 0xD835, (char) 0xDC00,
+        (char) 0xDC1A, '_', '~', (char) 0x7F
+    };
+    private static int failures;
+
+    private ClassFamilyProof() {}
+
+    public static void main(String[] args) {
+        List<String> inputs = new ArrayList<>();
+        for (int length = 0; length <= 4; length++) {
+            int total = (int) Math.pow(UNITS.length, length);
+            for (int code = 0; code < total; code++) {
+                char[] units = new char[length];
+                int rest = code;
+                for (int i = 0; i < length; i++) { units[i] = UNITS[rest % UNITS.length]; rest /= UNITS.length; }
+                inputs.add(new String(units));
+            }
+        }
+        for (int c = 0; c < 0x10000; c++) {
+            String unit = String.valueOf((char) c);
+            inputs.add(unit);
+            inputs.add("a" + unit);
+            inputs.add(unit + "A");
+            inputs.add("1" + unit);
+        }
+        for (int p = 0x10000; p <= Character.MAX_CODE_POINT; p++) {
+            String point = new String(Character.toChars(p));
+            inputs.add(point);
+            inputs.add("a" + point);
+        }
+        // window seams of the bulk reads (512 units): a pair, a lone surrogate or a case change at 509..515
+        String bold = new String(Character.toChars(0x1D400));
+        String[] tails = {bold + "b", bold, "" + (char) 0xD835 + "a", "" + (char) 0xD835, "" + (char) 0xDC00 + "a",
+            "B", "1", " ", bold + bold + "A"};
+        for (int k = 505; k <= 1030; k += (k == 515 ? 508 : 1)) {
+            for (String tail : tails) {
+                inputs.add("a".repeat(k) + tail);
+                inputs.add("7".repeat(k) + tail);
+                inputs.add((char) 0x0436 + "a".repeat(k - 1) + tail);
+            }
+        }
+        Map<String, Predicate<String>[]> pairs = new LinkedHashMap<>();
+        add(pairs, "isAlpha", String::isAlpha, StringUtils::isAlpha);
+        add(pairs, "isAlphaSpace", String::isAlphaSpace, StringUtils::isAlphaSpace);
+        add(pairs, "isAlphanumeric", String::isAlphanumeric, StringUtils::isAlphanumeric);
+        add(pairs, "isAlphanumericSpace", String::isAlphanumericSpace, StringUtils::isAlphanumericSpace);
+        add(pairs, "isAsciiPrintable", String::isAsciiPrintable, StringUtils::isAsciiPrintable);
+        add(pairs, "isNumeric", String::isNumeric, StringUtils::isNumeric);
+        add(pairs, "isNumericSpace", String::isNumericSpace, StringUtils::isNumericSpace);
+        add(pairs, "isAllLowerCase", String::isAllLowerCase, StringUtils::isAllLowerCase);
+        add(pairs, "isAllUpperCase", String::isAllUpperCase, StringUtils::isAllUpperCase);
+        add(pairs, "isMixedCase", String::isMixedCase, StringUtils::isMixedCase);
+        add(pairs, "isBlank = StringUtils.isWhitespace", String::isBlank, StringUtils::isWhitespace);
+        pairs.forEach((name, pair) -> {
+            long mismatches = 0;
+            String first = "-";
+            for (String input : inputs) {
+                boolean mine = pair[0].test(input);
+                if (mine != pair[1].test(input) && mismatches++ == 0) first = show(input) + " -> " + mine;
+            }
+            failures += mismatches == 0 ? 0 : 1;
+            System.out.println(name + "\t" + inputs.size() + "\t" + mismatches + "\t" + first);
+        });
+        System.out.println("RESULT\t" + (failures == 0 ? "PASS" : "FAIL") + "\tfailures=" + failures);
+        System.exit(failures == 0 ? 0 : 1);
+    }
+
+    @SuppressWarnings("unchecked")
+    private static void add(Map<String, Predicate<String>[]> pairs, String name, Predicate<String> mine,
+            Predicate<String> donor) {
+        pairs.put(name, new Predicate[] {mine, donor});
+    }
+
+    private static String show(String value) {
+        StringBuilder out = new StringBuilder("\"");
+        for (char c : value.toCharArray()) {
+            out.append(c >= 32 && c < 127 ? String.valueOf(c) : String.format("<%04X>", (int) c));
+        }
+        return out.append('"').toString();
+    }
+}

@@ -1,0 +1,1 @@
+javac -Xlint:all,-this-escape -Werror (java.base flags) of the stock String.java with the CLASS_TEST text and the M3 test stub: exit 0, no warnings

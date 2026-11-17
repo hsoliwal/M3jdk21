@@ -1,0 +1,8 @@
+kernel	string ns	naive ns	donor ns	vs naive	vs donor
+isAlpha ASCII	1720	63900	5931	37.15x	3.45x
+isAlpha Latin-1	1746	61114	5474	35.00x	3.13x
+isAlpha UTF-16	7427	59520	5279	8.01x	0.71x
+isNumeric	1787	3049	2215	1.71x	1.24x
+isAsciiPrintable	2331	3495	2627	1.50x	1.13x
+isAllLowerCase	1634	12168	5050	7.44x	3.09x
+isMixedCase all lower	1400	3018	4981	2.16x	3.56x

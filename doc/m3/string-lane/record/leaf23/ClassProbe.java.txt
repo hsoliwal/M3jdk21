@@ -1,0 +1,66 @@
+// SPDX-License-Identifier: Apache-2.0 OR EPL-2.0
+// Copyright (c) 2026 Synexia, Hitesh Soliwal and others
+
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.function.IntPredicate;
+import java.util.function.Predicate;
+import org.apache.commons.lang3.StringUtils;
+
+/**
+ * Probe of the commons-lang3 3.22.0 CLASS_TEST family: empty-string answers, the per-unit rule on every BMP unit (as
+ * Character.isX(char) or not), and the answer on supplementary pairs (unit rule versus code-point rule).
+ */
+public final class ClassProbe {
+    private ClassProbe() {}
+
+    public static void main(String[] args) {
+        Map<String, Predicate<String>> donor = new LinkedHashMap<>();
+        donor.put("isAlpha", StringUtils::isAlpha);
+        donor.put("isAlphaSpace", StringUtils::isAlphaSpace);
+        donor.put("isAlphanumeric", StringUtils::isAlphanumeric);
+        donor.put("isAlphanumericSpace", StringUtils::isAlphanumericSpace);
+        donor.put("isAsciiPrintable", StringUtils::isAsciiPrintable);
+        donor.put("isNumeric", StringUtils::isNumeric);
+        donor.put("isNumericSpace", StringUtils::isNumericSpace);
+        donor.put("isWhitespace", StringUtils::isWhitespace);
+        donor.put("isAllLowerCase", StringUtils::isAllLowerCase);
+        donor.put("isAllUpperCase", StringUtils::isAllUpperCase);
+        donor.put("isMixedCase", StringUtils::isMixedCase);
+        Map<String, IntPredicate> unit = new LinkedHashMap<>();
+        unit.put("isAlpha", Character::isLetter);
+        unit.put("isAlphaSpace", c -> Character.isLetter(c) || c == ' ');
+        unit.put("isAlphanumeric", Character::isLetterOrDigit);
+        unit.put("isAlphanumericSpace", c -> Character.isLetterOrDigit(c) || c == ' ');
+        unit.put("isAsciiPrintable", c -> c >= 32 && c < 127);
+        unit.put("isNumeric", Character::isDigit);
+        unit.put("isNumericSpace", c -> Character.isDigit(c) || c == ' ');
+        unit.put("isWhitespace", Character::isWhitespace);
+        unit.put("isAllLowerCase", Character::isLowerCase);
+        unit.put("isAllUpperCase", Character::isUpperCase);
+        String[] pairs = {
+            new String(Character.toChars(0x1D400)), new String(Character.toChars(0x1D41A)),
+            new String(Character.toChars(0x1D7CE)), new String(Character.toChars(0x10400)),
+            new String(Character.toChars(0x10428)), new String(Character.toChars(0x1F600))
+        };
+        donor.forEach((name, test) -> {
+            StringBuilder line = new StringBuilder(name).append("\tempty=").append(test.test(""));
+            line.append("\tnull=").append(test.test(null));
+            IntPredicate rule = unit.get(name);
+            if (rule != null) {
+                int differ = 0;
+                String first = "-";
+                for (int c = 0; c < 0x10000; c++) {
+                    boolean d = test.test(String.valueOf((char) c));
+                    if (d != rule.test(c) && differ++ == 0) first = String.format("U+%04X donor=%s", c, d);
+                }
+                line.append("\tbmpUnitRuleDiffers=").append(differ).append(' ').append(first);
+            }
+            line.append("\tpairs=");
+            for (String p : pairs) line.append(String.format("U+%X:%s ", p.codePointAt(0), test.test(p)));
+            System.out.println(line);
+        });
+        String[] mixed = {"a", "A", "aA", "a1", "A1", "a A", "1", "aB1", " ", "ab", "AB", "éÉ"};
+        for (String m : mixed) System.out.println("isMixedCase\t\"" + m + "\"\t" + StringUtils.isMixedCase(m));
+    }
+}

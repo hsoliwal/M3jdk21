@@ -1,0 +1,92 @@
+// SPDX-License-Identifier: Apache-2.0 OR EPL-2.0
+// Copyright (c) 2026 Synexia, Hitesh Soliwal and others
+
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.function.Predicate;
+import org.apache.commons.lang3.StringUtils;
+
+/**
+ * Timing of the CLASS_TEST family on 4096-unit texts that pass the test (the whole text is read). side: "string"
+ * (java.lang.String as patched into this JVM), "naive" (codePoints().allMatch over Character), "donor" (commons-lang3
+ * 3.22.0). 3 warm-up and 7 measured rounds of at least 200 ms; median ns per call. Arguments: kernel index and side;
+ * no argument lists the kernels.
+ */
+public final class ClassBench {
+    private static final int SIZE = 4096;
+    private static long sink;
+
+    private ClassBench() {}
+
+    public static void main(String[] args) {
+        String letters = fill("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ");
+        String latin = fill("caf" + (char) 0xE9 + "d" + (char) 0xE9 + "j" + (char) 0xE0 + "vu");
+        String digits = fill("0123456789");
+        String prose = fill("The quick brown fox jumps over the lazy dog. ");
+        String lower = fill("abcdefghijklmnopqrstuvwxyz");
+        String cyrillic = fill("" + (char) 0x0436 + (char) 0x0444 + (char) 0x044B + (char) 0x0438);
+        Map<String, Object[]> kernels = new LinkedHashMap<>();
+        put(kernels, "isAlpha ASCII", letters, String::isAlpha, s -> naive(s, false, Character::isLetter),
+                StringUtils::isAlpha);
+        put(kernels, "isAlpha Latin-1", latin, String::isAlpha, s -> naive(s, false, Character::isLetter),
+                StringUtils::isAlpha);
+        put(kernels, "isAlpha UTF-16", cyrillic, String::isAlpha, s -> naive(s, false, Character::isLetter),
+                StringUtils::isAlpha);
+        put(kernels, "isNumeric", digits, String::isNumeric, s -> naive(s, false, Character::isDigit),
+                StringUtils::isNumeric);
+        put(kernels, "isAsciiPrintable", prose, String::isAsciiPrintable,
+                s -> naive(s, true, p -> p >= ' ' && p <= '~'), StringUtils::isAsciiPrintable);
+        put(kernels, "isAllLowerCase", lower, String::isAllLowerCase,
+                s -> naive(s, false, Character::isLowerCase), StringUtils::isAllLowerCase);
+        put(kernels, "isMixedCase all lower", lower, String::isMixedCase,
+                s -> s.codePoints().anyMatch(Character::isUpperCase)
+                        && s.codePoints().anyMatch(Character::isLowerCase), StringUtils::isMixedCase);
+        if (args.length == 0) {
+            kernels.keySet().forEach(System.out::println);
+            return;
+        }
+        String label = new ArrayList<>(kernels.keySet()).get(Integer.parseInt(args[0]));
+        Object[] row = kernels.get(label);
+        int side = List.of("string", "naive", "donor").indexOf(args[1]);
+        @SuppressWarnings("unchecked")
+        Predicate<String> kernel = (Predicate<String>) row[1 + side];
+        System.out.printf("%s\t%s\t%.1f\t%d%n", label, args[1], time(kernel, (String) row[0]), sink & 1);
+    }
+
+    private static boolean naive(String s, boolean emptyTrue, java.util.function.IntPredicate test) {
+        return (emptyTrue || !s.isEmpty()) && s.codePoints().allMatch(test);
+    }
+
+    private static void put(Map<String, Object[]> kernels, String label, String input, Predicate<String> mine,
+            Predicate<String> naive, Predicate<String> donor) {
+        kernels.put(label, new Object[] {input, mine, naive, donor});
+    }
+
+    private static String fill(String unit) {
+        StringBuilder out = new StringBuilder(SIZE + unit.length());
+        while (out.length() < SIZE) out.append(unit);
+        return out.substring(0, SIZE);
+    }
+
+    private static double time(Predicate<String> kernel, String input) {
+        long calls = 1;
+        while (round(kernel, input, calls) < 20_000_000L) calls *= 2;
+        calls *= 10;
+        List<Double> rounds = new ArrayList<>();
+        for (int round = 0; round < 10; round++) {
+            double ns = (double) round(kernel, input, calls) / calls;
+            if (round >= 3) rounds.add(ns);
+        }
+        return rounds.stream().mapToDouble(Double::doubleValue).sorted().toArray()[rounds.size() / 2];
+    }
+
+    private static long round(Predicate<String> kernel, String input, long calls) {
+        long start = System.nanoTime();
+        long sum = 0;
+        for (long call = 0; call < calls; call++) sum += kernel.test(input) ? 1 : 0;
+        sink += sum;
+        return System.nanoTime() - start;
+    }
+}
