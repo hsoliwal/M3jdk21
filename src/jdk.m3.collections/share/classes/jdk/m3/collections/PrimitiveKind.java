@@ -70,7 +70,15 @@ public enum PrimitiveKind {
         return (long) widthBytes * capacity;
     }
 
-    Object newArray(int length) {
+    /**
+     * Allocates the primitive storage array of this kind: {@code byte[]} for BOOLEAN and BYTE,
+     * otherwise the array of the matching primitive type.
+     *
+     * @param length number of lanes
+     * @return a new zero-filled storage array
+     * @throws NegativeArraySizeException if {@code length} is negative
+     */
+    public Object newArray(int length) {
         if (length < 0) throw new NegativeArraySizeException(Integer.toString(length));
         return switch (this) {
             case BOOLEAN, BYTE -> new byte[length];
@@ -83,7 +91,16 @@ public enum PrimitiveKind {
         };
     }
 
-    Object copyOf(Object array, int newLength) {
+    /**
+     * Copies a storage array of this kind to a new length, as {@link Arrays#copyOf(long[], int)}
+     * does.
+     *
+     * @param array storage array of this kind
+     * @param newLength length of the copy
+     * @return the copy, truncated or zero-padded
+     * @throws IllegalArgumentException if {@code array} is not storage of this kind
+     */
+    public Object copyOf(Object array, int newLength) {
         checkArray(array);
         return switch (this) {
             case BOOLEAN, BYTE -> Arrays.copyOf((byte[]) array, newLength);
@@ -96,7 +113,15 @@ public enum PrimitiveKind {
         };
     }
 
-    void clear(Object array, int from, int to) {
+    /**
+     * Zeroes the lanes {@code [from, to)} of a storage array of this kind.
+     *
+     * @param array storage array of this kind
+     * @param from first lane, inclusive
+     * @param to last lane, exclusive
+     * @throws IllegalArgumentException if {@code array} is not storage of this kind
+     */
+    public void clear(Object array, int from, int to) {
         checkArray(array);
         switch (this) {
             case BOOLEAN, BYTE -> Arrays.fill((byte[]) array, from, to, (byte) 0);
@@ -109,7 +134,17 @@ public enum PrimitiveKind {
         }
     }
 
-    long readBits(Object array, int index) {
+    /**
+     * Reads one lane as a 64-bit carrier: integral kinds sign- or zero-extend as Java widening
+     * does, BOOLEAN gives zero or one, FLOAT gives its raw IEEE-754 bits unsigned, DOUBLE its raw
+     * bits.
+     *
+     * @param array storage array of this kind
+     * @param index lane index
+     * @return the carrier bits of the lane
+     * @throws IllegalArgumentException if {@code array} is not storage of this kind
+     */
+    public long readBits(Object array, int index) {
         checkArray(array);
         return switch (this) {
             case BOOLEAN -> ((byte[]) array)[index] == 0 ? 0L : 1L;
@@ -123,7 +158,16 @@ public enum PrimitiveKind {
         };
     }
 
-    void writeBits(Object array, int index, long bits) {
+    /**
+     * Writes one lane from a 64-bit carrier: integral kinds narrow as Java casts do, BOOLEAN stores
+     * one for any non-zero carrier, FLOAT and DOUBLE store the raw bits.
+     *
+     * @param array storage array of this kind
+     * @param index lane index
+     * @param bits carrier bits
+     * @throws IllegalArgumentException if {@code array} is not storage of this kind
+     */
+    public void writeBits(Object array, int index, long bits) {
         checkArray(array);
         switch (this) {
             case BOOLEAN -> ((byte[]) array)[index] = (byte) (bits == 0L ? 0 : 1);
@@ -137,8 +181,18 @@ public enum PrimitiveKind {
         }
     }
 
-    /** Typed segment fill; preserves the existing raw floating storage contract. */
-    void fillBits(Object array, int from, int to, long bits) {
+    /**
+     * Fills the lanes {@code [from, to)} with one carrier value, storing it as {@link #writeBits}
+     * does; raw floating-point bits are preserved.
+     *
+     * @param array storage array of this kind
+     * @param from first lane, inclusive
+     * @param to last lane, exclusive
+     * @param bits carrier bits
+     * @throws IllegalArgumentException if {@code array} is not storage of this kind
+     * @throws IndexOutOfBoundsException if the range is not within the array
+     */
+    public void fillBits(Object array, int from, int to, long bits) {
         checkArray(array);
         java.util.Objects.checkFromToIndex(from, to, java.lang.reflect.Array.getLength(array));
         switch (this) {
@@ -153,8 +207,19 @@ public enum PrimitiveKind {
         }
     }
 
-    /** First equal position in a bounded physical page; canonical NaNs, distinct signed zeros. */
-    int indexOfBits(Object array, int from, int to, long bits) {
+    /**
+     * Returns the first lane in {@code [from, to)} equal to a carrier value: NaNs are equal to each
+     * other, {@code -0.0} and {@code 0.0} are distinct.
+     *
+     * @param array storage array of this kind
+     * @param from first lane, inclusive
+     * @param to last lane, exclusive
+     * @param bits carrier bits
+     * @return the lane index, or -1
+     * @throws IllegalArgumentException if {@code array} is not storage of this kind
+     * @throws IndexOutOfBoundsException if the range is not within the array
+     */
+    public int indexOfBits(Object array, int from, int to, long bits) {
         checkArray(array);
         java.util.Objects.checkFromToIndex(from, to, java.lang.reflect.Array.getLength(array));
         switch (this) {
@@ -197,7 +262,14 @@ public enum PrimitiveKind {
         return -1;
     }
 
-    long normalizeBits(long bits) {
+    /**
+     * Returns the canonical carrier used for equality and hashing: integral kinds narrowed, BOOLEAN
+     * as zero or one, floating-point NaNs collapsed to the canonical NaN.
+     *
+     * @param bits carrier bits
+     * @return the canonical carrier
+     */
+    public long normalizeBits(long bits) {
         return switch (this) {
             case BOOLEAN -> bits == 0L ? 0L : 1L;
             case BYTE -> (byte) bits;
@@ -211,12 +283,13 @@ public enum PrimitiveKind {
     }
 
     /**
-     * Carrier bits after one write/read through this exact-width storage kind.
+     * Returns the carrier after one write and read through storage of this kind. Unlike {@link
+     * #normalizeBits(long)}, floating-point NaN payload bits are preserved.
      *
-     * <p>Unlike normalizeBits, floating NaN payload bits are preserved because
-     * this models physical lane storage rather than equality/hash canonicalization.
+     * @param bits carrier bits
+     * @return the carrier as storage returns it
      */
-    long storageBits(long bits) {
+    public long storageBits(long bits) {
         return switch (this) {
             case BOOLEAN -> bits == 0L ? 0L : 1L;
             case BYTE -> (byte) bits;
@@ -229,7 +302,15 @@ public enum PrimitiveKind {
         };
     }
 
-    int compareBits(long left, long right) {
+    /**
+     * Compares two carriers in the natural order of this kind; FLOAT and DOUBLE follow {@link
+     * Float#compare(float, float)} and {@link Double#compare(double, double)}.
+     *
+     * @param left first carrier
+     * @param right second carrier
+     * @return a negative, zero or positive value
+     */
+    public int compareBits(long left, long right) {
         return switch (this) {
             case BOOLEAN -> Boolean.compare(left != 0L, right != 0L);
             case BYTE -> Byte.compare((byte) left, (byte) right);
@@ -242,11 +323,25 @@ public enum PrimitiveKind {
         };
     }
 
-    boolean equalBits(long left, long right) {
+    /**
+     * Tells whether two carriers are equal after {@link #normalizeBits(long)}.
+     *
+     * @param left first carrier
+     * @param right second carrier
+     * @return true if both canonical carriers are equal
+     */
+    public boolean equalBits(long left, long right) {
         return normalizeBits(left) == normalizeBits(right);
     }
 
-    int hashBits(long bits) {
+    /**
+     * Returns the hash of a carrier after {@link #normalizeBits(long)}, mixed as the dense hash
+     * tables of this package mix their keys.
+     *
+     * @param bits carrier bits
+     * @return the mixed hash
+     */
+    public int hashBits(long bits) {
         long normalized = normalizeBits(bits);
         return switch (this) {
             case BOOLEAN, BYTE, SHORT, CHAR, INT, FLOAT -> DenseHash.mix((int) normalized);
@@ -254,7 +349,16 @@ public enum PrimitiveKind {
         };
     }
 
-    void sort(Object array, int from, int to) {
+    /**
+     * Sorts the lanes {@code [from, to)} in ascending order with {@link Arrays}' primitive sort of
+     * the storage type.
+     *
+     * @param array storage array of this kind
+     * @param from first lane, inclusive
+     * @param to last lane, exclusive
+     * @throws IllegalArgumentException if {@code array} is not storage of this kind
+     */
+    public void sort(Object array, int from, int to) {
         checkArray(array);
         switch (this) {
             case BOOLEAN, BYTE -> Arrays.sort((byte[]) array, from, to);
@@ -267,7 +371,18 @@ public enum PrimitiveKind {
         }
     }
 
-    int binarySearch(Object array, int from, int to, long bits) {
+    /**
+     * Searches a sorted range for a carrier value with {@link Arrays}' primitive binary search of
+     * the storage type.
+     *
+     * @param array storage array of this kind, sorted in {@code [from, to)}
+     * @param from first lane, inclusive
+     * @param to last lane, exclusive
+     * @param bits carrier bits
+     * @return the index of the value, or {@code -(insertion point) - 1}
+     * @throws IllegalArgumentException if {@code array} is not storage of this kind
+     */
+    public int binarySearch(Object array, int from, int to, long bits) {
         checkArray(array);
         return switch (this) {
             case BOOLEAN -> Arrays.binarySearch((byte[]) array, from, to, (byte) (bits == 0L ? 0 : 1));
@@ -281,7 +396,13 @@ public enum PrimitiveKind {
         };
     }
 
-    void checkArray(Object array) {
+    /**
+     * Checks that an object is a storage array of this kind.
+     *
+     * @param array the object to check
+     * @throws IllegalArgumentException if it is not storage of this kind
+     */
+    public void checkArray(Object array) {
         boolean valid = switch (this) {
             case BOOLEAN, BYTE -> array instanceof byte[];
             case SHORT -> array instanceof short[];
@@ -311,24 +432,50 @@ public enum PrimitiveKind {
         return required > softLimit ? required : (int) Math.min(softLimit, Math.max(grown, required));
     }
 
-    /** Maps a legal circular offset without overflowing head + logical. */
-    static int ringIndex(int head, int logical, int capacity) {
+    /**
+     * Maps a logical offset of a circular range to its physical index without overflowing {@code
+     * head + logical}.
+     *
+     * @param head physical index of logical offset zero
+     * @param logical logical offset, {@code 0 <= logical < capacity}
+     * @param capacity ring capacity
+     * @return the physical index
+     */
+    public static int ringIndex(int head, int logical, int capacity) {
         int remaining = capacity - head;
         return logical < remaining ? head + logical : logical - remaining;
     }
 
-    /** Copies a logical circular range to a distinct linear array in at most two bulk copies. */
-    static void copyRing(Object source, int head, int length, int capacity, Object target, int offset) {
+    /**
+     * Copies a logical circular range into a distinct linear array, in at most two bulk copies.
+     *
+     * @param source ring storage
+     * @param head physical index of the first lane
+     * @param length number of lanes
+     * @param capacity ring capacity
+     * @param target destination array, distinct from {@code source}
+     * @param offset first destination index
+     */
+    public static void copyRing(Object source, int head, int length, int capacity, Object target,
+            int offset) {
         int first = Math.min(length, capacity - head);
         if (first > 0) System.arraycopy(source, head, target, offset, first);
         if (length > first) System.arraycopy(source, 0, target, offset + first, length - first);
     }
 
     /**
-     * Logical memmove within one ring. Owners validate ranges before calling this atom.
-     * Direction is chosen in logical coordinates; arraycopy handles overlap inside each span.
+     * Moves a logical range within one ring, as memmove does: overlapping ranges are handled. The
+     * caller validates the ranges first.
+     *
+     * @param array ring storage
+     * @param head physical index of logical offset zero
+     * @param capacity ring capacity
+     * @param source first logical offset to read
+     * @param target first logical offset to write
+     * @param length number of lanes
      */
-    static void moveRing(Object array, int head, int capacity, int source, int target, int length) {
+    public static void moveRing(Object array, int head, int capacity, int source, int target,
+            int length) {
         if (length == 0 || source == target) return;
         if (target < source) {
             int read = ringIndex(head, source, capacity);
@@ -357,16 +504,35 @@ public enum PrimitiveKind {
         }
     }
 
-    /** Validates a matching array slice before an owner changes retained state. */
-    int checkRange(Object array, int from, int length) {
+    /**
+     * Validates a slice of a storage array of this kind before the caller changes retained state.
+     *
+     * @param array storage array of this kind
+     * @param from first lane
+     * @param length number of lanes
+     * @return {@code length}
+     * @throws NullPointerException if {@code array} is null
+     * @throws IllegalArgumentException if {@code array} is not storage of this kind
+     * @throws IndexOutOfBoundsException if the slice is not within the array
+     */
+    public int checkRange(Object array, int from, int length) {
         java.util.Objects.requireNonNull(array, "source");
         checkArray(array);
         java.util.Objects.checkFromIndexSize(from, length, java.lang.reflect.Array.getLength(array));
         return length;
     }
 
-    /** Copies exact-width lanes; BOOLEAN source bytes are normalized to zero or one. */
-    void copyStorage(Object source, int from, Object target, int offset, int length) {
+    /**
+     * Copies lanes between storage arrays of this kind; BOOLEAN source bytes are normalized to zero
+     * or one, and an overlapping copy within one BOOLEAN array is handled.
+     *
+     * @param source source storage
+     * @param from first source lane
+     * @param target destination storage
+     * @param offset first destination lane
+     * @param length number of lanes
+     */
+    public void copyStorage(Object source, int from, Object target, int offset, int length) {
         if (this != BOOLEAN) {
             System.arraycopy(source, from, target, offset, length);
         } else {
@@ -381,8 +547,15 @@ public enum PrimitiveKind {
         }
     }
 
-    /** Clears only retained circular lanes, in at most two typed fills. */
-    void clearRing(Object array, int head, int length, int capacity) {
+    /**
+     * Zeroes the retained lanes of a circular range, in at most two fills.
+     *
+     * @param array ring storage of this kind
+     * @param head physical index of the first lane
+     * @param length number of lanes
+     * @param capacity ring capacity
+     */
+    public void clearRing(Object array, int head, int length, int capacity) {
         int first = Math.min(length, capacity - head);
         if (first > 0) clear(array, head, head + first);
         if (length > first) clear(array, 0, length - first);
