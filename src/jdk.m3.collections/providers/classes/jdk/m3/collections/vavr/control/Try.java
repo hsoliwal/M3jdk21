@@ -297,7 +297,7 @@ public interface Try<T extends Object> extends Value<T>, Serializable {
     /**
      * Performs the given {@link Runnable} if this {@code Try} is a {@link Success}.
      * <p>
-     * This is a shortcut for {@code andThenTry(runnable::run)}. If this {@code Try} is a {@link Failure}, it is returned unchanged.
+     * This is a shortcut for {@code andThenTry(() -> runnable.run())}. If this {@code Try} is a {@link Failure}, it is returned unchanged.
      * If the runnable throws a non-fatal exception, a {@link Failure} containing that exception is returned;
      * fatal throwables (see the class-level documentation) are rethrown instead.
      *
@@ -308,7 +308,7 @@ public interface Try<T extends Object> extends Value<T>, Serializable {
      */
     default Try<T> andThen(Runnable runnable) {
         Objects.requireNonNull(runnable, "runnable is null");
-        return andThenTry(runnable::run);
+        return andThenTry(() -> runnable.run());
     }
 
 

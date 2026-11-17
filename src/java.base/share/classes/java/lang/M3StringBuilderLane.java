@@ -174,94 +174,9 @@ final class M3StringBuilderLane {
                     : M3StringPrecomputeBridge.indexOf(cached, needle, start, length);
         }
         int first = backwards ? length - needleLength - start : start;
-        int found = twoWay(flat, flatCoder, length, needle, first, backwards);
+        int found = M3StringSearchPrecompute.twoWay(
+                flat, flatCoder, length, this, needle, first, backwards);
         return found < 0 || !backwards ? found : length - needleLength - found;
-    }
-
-    /** A maximal suffix and its period, packed as (critical position, period). */
-    private static long factor(String needle, boolean backwards, boolean oppositeOrder) {
-        int length = needle.length();
-        int suffix = -1;
-        int candidate = 0;
-        int offset = 1;
-        int period = 1;
-        while (offset < length - candidate) {
-            char next = needleUnit(needle, candidate + offset, backwards);
-            char previous = needleUnit(needle, suffix + offset, backwards);
-            if (next == previous) {
-                if (offset == period) {
-                    candidate += period;
-                    offset = 1;
-                } else {
-                    offset++;
-                }
-            } else if ((next < previous) != oppositeOrder) {
-                candidate += offset;
-                offset = 1;
-                period = candidate - suffix;
-            } else {
-                suffix = candidate;
-                candidate = suffix + 1;
-                offset = period = 1;
-            }
-        }
-        return ((long) (suffix + 1) << Integer.SIZE) | (period & 0xffff_ffffL);
-    }
-
-    private static char needleUnit(String needle, int index, boolean backwards) {
-        return needle.charAt(backwards ? needle.length() - 1 - index : index);
-    }
-
-    private char searchUnit(byte[] flat, byte flatCoder, int length, int index,
-            boolean backwards) {
-        return charAt(flat, flatCoder, backwards ? length - 1 - index : index);
-    }
-
-    /** Crochemore-Perrin critical factorization: linear unit comparisons, constant scratch. */
-    private int twoWay(byte[] flat, byte flatCoder, int length, String needle, int first,
-            boolean backwards) {
-        int size = needle.length();
-        long normal = factor(needle, backwards, false);
-        long opposite = factor(needle, backwards, true);
-        long selected = (normal >>> Integer.SIZE) >= (opposite >>> Integer.SIZE)
-                ? normal : opposite;
-        int critical = (int) (selected >>> Integer.SIZE);
-        int period = (int) selected;
-        boolean periodic = period <= size - critical;
-        for (int index = 0; periodic && index < critical; index++) {
-            periodic = needleUnit(needle, index, backwards)
-                    == needleUnit(needle, index + period, backwards);
-        }
-        if (!periodic) period = Math.max(critical - 1, size - critical) + 1;
-
-        int memory = 0;
-        int position = first;
-        int limit = length - size;
-        while (position <= limit) {
-            int index = Math.max(critical, memory);
-            while (index < size && needleUnit(needle, index, backwards)
-                    == searchUnit(flat, flatCoder, length, position + index, backwards)) {
-                index++;
-            }
-            int shift;
-            if (index < size) {
-                shift = index - critical + 1;
-                memory = 0;
-            } else {
-                index = critical;
-                while (index > memory && needleUnit(needle, index - 1, backwards)
-                        == searchUnit(flat, flatCoder, length, position + index - 1, backwards)) {
-                    index--;
-                }
-                if (index <= memory) return position;
-                shift = period;
-                memory = periodic ? size - period : 0;
-            }
-            // Avoid overflow at the maximum legal StringBuilder length.
-            if (shift > limit - position) return -1;
-            position += shift;
-        }
-        return -1;
     }
 
     /**

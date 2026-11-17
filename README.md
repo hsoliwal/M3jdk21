@@ -48,16 +48,16 @@ both the original contracts and additional fork behavior on the built runtime.
 | **Collections and arrays** — lean storage, indexed signals and mechanical improvement | [Collections workstream](m3/collections/) · [Array workstream](m3/arrays/) |
 | **Recipes and convergence** — transformations executed in Synexia; exact results received here | [Canonical Synexia recipes](https://github.com/hsoliwal/com.synexia/tree/develop/synexia-openrewrite-recipes) · [Receiving policy](AGENTS.md) |
 | **The actual runtime** — OpenJDK-derived Java 21 sources and M3 integration areas | [JDK sources](src/) · [M3 runtime integration](m3/runtime-integration/) |
-| **Release discipline** — what is admitted, tested, measured or still exploratory | [Release evidence](m3/release/README.md) · [Visible release queue](m3/release/queue/README.md) · [Machine-readable contract](m3/release/release-contract.json) |
+| **Release discipline** — what is admitted, tested, measured or still exploratory | [Release evidence](m3/release/README.md) · [Visible release queue](https://github.com/hsoliwal/com.synexia/tree/develop/synexia-openrewrite-recipes/recipe-crates/m3jdk21-release-admission-20261029/revisions/20261117/queue) · [Machine-readable contract](m3/release/release-contract.json) |
 
 <!-- fork-homepage-guide:begin -->
 ## A first experiment: learn the representation before the runtime
 
 This fork starts from [OpenJDK 21](https://github.com/openjdk/jdk21), then adds
 M3JDK21-owned libraries, runtime candidates, product tests and receipt references.
-Reusable recipes are authored and executed in Synexia. The independent
-text module is the smallest entry point: you can inspect its ownership model
-without installing a replacement JDK or changing your system Java.
+Reusable recipes are authored and executed in Synexia. The text foundation now
+lives in the JDK source layout under `src/java.base/share/classes/jdk/m3/text`.
+You can inspect its ownership model before building the modified runtime.
 
 ### Six concepts to keep separate
 
@@ -70,32 +70,34 @@ without installing a replacement JDK or changing your system Java.
 | Recipe/receipt | A reproducible transformation and its exact source/target record | Custody and transformation checks do not prove runtime behavior |
 | Matched image | Java classes, HotSpot and native pieces built together | A library JAR or unrelated stock VM is not this artifact |
 
-### Quickstart: the independent foundation
+### Quickstart: the current JDK build
 
-Use Git, Bash 4+ (the script uses `mapfile`), a full JDK 21, and the shell utilities
-used by [m3/build.sh](m3/build.sh), including `sha256sum`. Run from the checkout root:
+Follow the host prerequisites and platform instructions in the existing
+[OpenJDK build guide](doc/building.md). From the checkout root, configure a full
+JDK 21 boot installation and build the runtime image:
 
 ```sh
 git clone https://github.com/hsoliwal/M3jdk21.git
 cd M3jdk21
 git rev-parse HEAD
-export M3JDK=/absolute/path/to/jdk-21
-"$M3JDK/bin/java" -version
-bash m3/build.sh
+export M3_BOOT_JDK=/absolute/path/to/jdk-21
+"$M3_BOOT_JDK/bin/java" -version
+bash configure --with-boot-jdk="$M3_BOOT_JDK"
+make images
 ```
 
-The build script requires the exact environment variable `M3JDK` (not `M3_JDK`) and compiles the `jdk.m3.text` module.
+A completed image build places the runtime under `build/<configuration>/images/jdk`.
+Record the exact configure options and test results for that image. Optional
+native components need their own dependencies and qualification; a component
+disabled in one configuration remains outside that configuration's proof.
+The current release status and platform gaps are recorded in the canonical
+Synexia queue linked above.
 
-A successful script produces `m3/build/jdk.m3.text.jar`, logs under
-`m3/build/logs/`, and a small fixture image. Stop on failure and inspect the logs;
-the presence of an earlier JAR does not mean the full script passed. This route
-tests the separate module in several VM modes, not the modified JDK's acceptance.
-
-After a successful build, open JShell with the module:
-
-```sh
-"$M3JDK/bin/jshell" --module-path m3/build/jdk.m3.text.jar --add-modules jdk.m3.text
-```
+The former `m3/build.sh` quickstart still expects the historical `m3/core/src`
+layout and is not the current build route. Do not infer a working standalone
+`jdk.m3.text` JAR from those older instructions. The source example below explains
+ownership and UTF-16 ranges; it is not a verified JShell session or a public
+module-export guarantee.
 
 ```java
 import jdk.m3.text.*;
@@ -108,20 +110,35 @@ System.out.println(joined.flatten()); // expected: BCDE
 
 The original is copied into owned immutable storage. The two ranges share that
 storage; the join records leaves; each `flatten()` explicitly allocates a normal
-String. Follow [LocalM3Arena](m3/core/src/jdk/m3/text/LocalM3Arena.java),
-[M3StringPiece](m3/core/src/jdk/m3/text/M3StringPiece.java), and the
+String. Follow [LocalM3Arena](src/java.base/share/classes/jdk/m3/text/LocalM3Arena.java),
+[M3StringPiece](src/java.base/share/classes/jdk/m3/text/M3StringPiece.java), and the
 [worked source tour](m3/docs/first-session-guide.md) to see where each cost occurs.
 The comments are source-derived expectations, not captured output from this documentation update.
 
 ### Command and evidence cheat sheet
 
+The current [clean-output directive](AGENTS.md) keeps new release queues, logs,
+receipts and intermediate output in the canonical Synexia repository. Existing
+`m3/release/queue/` snapshots are historical inputs; do not create new files there.
+Before using the report command below, replace this absolute path with your
+Synexia checkout. Run the checker from the M3JDK21 checkout root.
+
+```sh
+export SYNEXIA_RELEASE_QUEUE="/absolute/path/to/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3jdk21-release-admission-20261029/revisions/20261117/queue/current"
+```
+
+The evidence manifest and its relative artifact paths belong to that external
+queue. Missing or stale evidence remains pending; creating a report does not
+qualify a release. The reviewed queue snapshot is linked above, while `current/`
+is the location for the next source-bound checker run.
+
 | Question | Command or route | What to read in the result |
 | --- | --- | --- |
 | Which checkout is this? | `git rev-parse HEAD` | Record the exact revision with every result |
 | Are package/class names mapped correctly? | `python3 m3/tooling/name-contract/check.py` | The canonical map and queued proposals; this does not approve a rename |
-| What is blocking release? | `python3 m3/release/verify_release_admission.py --root . --json-out m3/release/queue/current/admission.json --queue-out m3/release/queue/current/README.md` | Exact inspected revision, missing receipts, naming candidates and custody blockers |
-| Where are recipe proofs run? | [Synexia owner-naming crate](https://github.com/hsoliwal/com.synexia/tree/develop/synexia-openrewrite-recipes/crates/m3jdk21-owner-naming) | Maven/OpenRewrite execution, refusal and fixed-point proofs remain in Synexia |
-| How do I build the runtime? | [Native build guide](m3/docs/native-build.md) | Host prerequisites, boot JDK and matched-image output |
+| What is blocking release? | `python3 m3/release/verify_release_admission.py --root . --evidence "$SYNEXIA_RELEASE_QUEUE/evidence.json" --json-out "$SYNEXIA_RELEASE_QUEUE/admission.json" --queue-out "$SYNEXIA_RELEASE_QUEUE/README.md"` | Exact inspected revision, missing receipts, naming candidates and custody blockers |
+| Where are recipe proofs run? | [Synexia release-admission crate](https://github.com/hsoliwal/com.synexia/tree/develop/synexia-openrewrite-recipes/recipe-crates/m3jdk21-release-admission-20261029) | Maven/OpenRewrite execution, refusal and fixed-point proofs remain in Synexia |
+| How do I build the runtime? | [OpenJDK build guide](doc/building.md) | Host prerequisites, boot JDK, configure options and matched-image output |
 | What has actually been admitted? | [Release contract](m3/release/release-contract.json) and [current String phase](m3/m3-import/current-full-borrow/STRING_PHASE.md) | Exact scope and still-open gates |
 
 At the reviewed baseline, the release contract records the immutable text
@@ -129,7 +146,7 @@ foundation as implemented with a repository test surface. It explicitly does
 not claim full String replacement, full regex precompute, full jtreg compatibility,
 qualified arrays/collections/Eclipse integration, or performance superiority.
 Candidate source can exist without those gates being complete. Read the exact
-commit-bound receipts in the release queue; this guide grants no claim upgrade.
+commit-bound receipts in the [canonical Synexia release queue](https://github.com/hsoliwal/com.synexia/tree/develop/synexia-openrewrite-recipes/recipe-crates/m3jdk21-release-admission-20261029/revisions/20261117/queue); this guide grants no claim upgrade.
 The historical `m3/recipes/` scripts and recipe-bearing `m3/pom.xml` are
 inventoried migration residue, not supported product transformation commands.
 
@@ -145,7 +162,7 @@ to select the shell, JDK variables, logs and matching test configuration.
 
 | Task | Entry point | What it establishes |
 | --- | --- | --- |
-| Build the separate text foundation | [M3 module guide](m3/README.md#build-and-test) | A stock-Java module and fixture tests, not a replacement JDK |
+| Inspect the current text foundation | [Text source owners](src/java.base/share/classes/jdk/m3/text/) | Source-level ownership examples; access follows the built image's module exports |
 | Build or inspect the modified runtime | [Native build guide](m3/docs/native-build.md) and [runtime integration](m3/runtime-integration/README.md) | A matched Java/HotSpot image is required; feature gates remain explicit |
 | Trace String ownership or JNI | [Backing contract](doc/mindex-string-backing.md) and [JNI ingress/egress](m3/docs/mindex-jni-string-ingress.md) | Canonical owners, compatibility copies and native pointer lifetimes |
 | Work on separate collections | [Collection module](m3/collections/README.md) | Explicit library APIs; this does not replace `java.util` |
