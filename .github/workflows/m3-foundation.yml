@@ -23,7 +23,7 @@ jobs:
           persist-credentials: false
           sparse-checkout-cone-mode: false
           sparse-checkout: |
-            /m3/core/src/jdk/m3/text/M3InstanceIndexPrecompute.java
+            /src/java.base/share/classes/jdk/m3/text/M3InstanceIndexPrecompute.java
             /m3/core/test/M3InstanceIndexPrecomputeTest.java
       - name: Set up Java 21
         uses: actions/setup-java@b6effb05e454b25005698d916606bdc6ffcbf961
@@ -44,7 +44,7 @@ jobs:
           classes="$RUNNER_TEMP/m3-instance-index-contract"
           mkdir -p "$classes"
           javac --release 17 -Xlint:all -Werror -d "$classes" \
-            m3/core/src/jdk/m3/text/M3InstanceIndexPrecompute.java \
+            src/java.base/share/classes/jdk/m3/text/M3InstanceIndexPrecompute.java \
             m3/core/test/M3InstanceIndexPrecomputeTest.java
           output="$(java -ea -cp "$classes" M3InstanceIndexPrecomputeTest)"
           printf '%s\n' "$output"
@@ -78,15 +78,15 @@ jobs:
           set -euo pipefail
           printf 'M3_WORDROWS_SOURCE_COMMIT=%s\n' "$(git rev-parse HEAD)"
           git ls-tree HEAD -- \
-            m3/core/src/jdk/m3/text/M3WordRows.java \
-            m3/core/src/jdk/m3/text/M3WordRowsNative.java \
+            src/java.base/share/classes/jdk/m3/text/M3WordRows.java \
+            src/java.base/share/classes/jdk/m3/text/M3WordRowsNative.java \
             m3/core/test/M3WordRowsContractTest.java \
             m3/lexicon/native/m3_wordrows_jni.c \
             m3/lexicon/run-wordrows-proof.sh
           log="$RUNNER_TEMP/m3-wordrows-contract.log"
           sha256sum \
-            m3/core/src/jdk/m3/text/M3WordRows.java \
-            m3/core/src/jdk/m3/text/M3WordRowsNative.java \
+            src/java.base/share/classes/jdk/m3/text/M3WordRows.java \
+            src/java.base/share/classes/jdk/m3/text/M3WordRowsNative.java \
             m3/core/test/M3WordRowsContractTest.java \
             m3/lexicon/native/m3_wordrows_jni.c \
             m3/lexicon/run-wordrows-proof.sh

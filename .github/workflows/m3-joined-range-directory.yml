@@ -8,6 +8,7 @@ on:
       - '.github/workflows/m3-joined-range-directory.yml'
       - 'm3/tooling/joined-range-directory/**'
       - 'm3/core/**'
+      - 'src/java.base/share/classes/jdk/m3/text/**'
       - 'm3/build.sh'
       - 'm3/lexicon/english-demo.txt'
       - 'm3/lexicon/m3-number-target-map.tsv'
@@ -97,6 +98,7 @@ jobs:
             /.github/workflows/m3-joined-range-directory.yml
             /m3/tooling/joined-range-directory/
             /m3/core/
+            /src/java.base/share/classes/jdk/m3/text/
             /m3/build.sh
             /m3/lexicon/english-demo.txt
             /m3/lexicon/m3-number-target-map.tsv

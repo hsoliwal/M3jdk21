@@ -6,6 +6,7 @@ on:
       - 'm3/eclipse/optional-jmod/**'
       - 'm3/file/**'
       - 'm3/core/src/**'
+      - 'src/java.base/share/classes/jdk/m3/text/**'
       - 'm3/arrays/src/**'
       - 'm3/ast/src/**'
       - 'm3/collections/src/**'
@@ -82,7 +83,7 @@ jobs:
                   if x and not x.startswith('#')]
           assert len(rows) == 1, rows
           path, before, after, template = rows[0]
-          assert path == 'm3/core/src/jdk/m3/text/SharedLexiconPrecomputeCatalog.java'
+          assert path == 'src/java.base/share/classes/jdk/m3/text/SharedLexiconPrecomputeCatalog.java'
           fixture = Path('m3/eclipse/optional-jmod/recipe/src/test/resources/jdk/internal/m3/rewrite/m3-shared-lexicon-builder-explicit-ctor-20261018/SharedLexiconPrecomputeCatalog.java.before.txt')
           target = Path(path)
           postimage = root / template

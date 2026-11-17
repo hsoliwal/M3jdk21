@@ -51,7 +51,7 @@ def main():
         java = str(JDK / "bin/java")
         command(javac, "--release", "21", "-Xlint:all", "-Werror", "-h", str(work),
                 "-d", str(work),
-                str(ROOT / "core/src/jdk/m3/text/M3FixedAddressMapping.java"),
+                str(ROOT.parent / "src/java.base/share/classes/jdk/m3/text/M3FixedAddressMapping.java"),
                 str(ROOT / "core/test/jdk/m3/text/M3FixedAddressMappingContractTest.java"))
         library = work / "libm3gvas.so"
         command(CC, "-std=c11", "-Wall", "-Wextra", "-Werror", "-fPIC", "-shared",

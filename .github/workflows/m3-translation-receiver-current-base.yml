@@ -4,13 +4,13 @@ name: M3 translation receiver map
 on:
   pull_request:
     paths:
-      - "m3/core/src/jdk/m3/text/M3LexiconPrecompute.java"
-      - "m3/core/src/jdk/m3/text/SharedLexiconPrecomputeCatalog.java"
-      - "m3/core/src/jdk/m3/text/M3LanguageGrammarSupport.java"
-      - "m3/core/src/jdk/m3/text/M3NumberSpace.java"
+      - "src/java.base/share/classes/jdk/m3/text/M3LexiconPrecompute.java"
+      - "src/java.base/share/classes/jdk/m3/text/SharedLexiconPrecomputeCatalog.java"
+      - "src/java.base/share/classes/jdk/m3/text/M3LanguageGrammarSupport.java"
+      - "src/java.base/share/classes/jdk/m3/text/M3NumberSpace.java"
       - "m3/core/test/M3NumberSpaceContractTest.java"
       - "m3/core/test/M3NumberSpaceExportFixture.java"
-      - "m3/core/src/jdk/m3/text/M3PrecomputePayload.java"
+      - "src/java.base/share/classes/jdk/m3/text/M3PrecomputePayload.java"
       - "m3/core/test/M3TranslationReceiverMapTest.java"
       - "m3/lexicon/m3-precompute-field-map.tsv"
       - "m3/lexicon/m3-source-manifest.tsv"
@@ -26,13 +26,13 @@ on:
     branches:
       - codex/m3-translation-row-owner-map-20261011
     paths:
-      - "m3/core/src/jdk/m3/text/M3LexiconPrecompute.java"
-      - "m3/core/src/jdk/m3/text/SharedLexiconPrecomputeCatalog.java"
-      - "m3/core/src/jdk/m3/text/M3LanguageGrammarSupport.java"
-      - "m3/core/src/jdk/m3/text/M3NumberSpace.java"
+      - "src/java.base/share/classes/jdk/m3/text/M3LexiconPrecompute.java"
+      - "src/java.base/share/classes/jdk/m3/text/SharedLexiconPrecomputeCatalog.java"
+      - "src/java.base/share/classes/jdk/m3/text/M3LanguageGrammarSupport.java"
+      - "src/java.base/share/classes/jdk/m3/text/M3NumberSpace.java"
       - "m3/core/test/M3NumberSpaceContractTest.java"
       - "m3/core/test/M3NumberSpaceExportFixture.java"
-      - "m3/core/src/jdk/m3/text/M3PrecomputePayload.java"
+      - "src/java.base/share/classes/jdk/m3/text/M3PrecomputePayload.java"
       - "m3/core/test/M3TranslationReceiverMapTest.java"
       - "m3/lexicon/m3-precompute-field-map.tsv"
       - "m3/lexicon/m3-source-manifest.tsv"
