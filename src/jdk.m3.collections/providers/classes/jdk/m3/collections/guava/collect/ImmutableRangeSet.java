@@ -32,6 +32,7 @@ import jdk.m3.collections.guava.annotations.GwtIncompatible;
 import jdk.m3.collections.guava.annotations.J2ktIncompatible;
 import jdk.m3.collections.guava.collect.SortedLists.KeyAbsentBehavior;
 import jdk.m3.collections.guava.collect.SortedLists.KeyPresentBehavior;
+import jdk.m3.collections.guava.primitives.ImmutableLongArray;
 import jdk.m3.collections.guava.primitives.Ints;
 import java.io.InvalidObjectException;
 import java.io.ObjectInputStream;
@@ -195,19 +196,23 @@ public final class ImmutableRangeSet<C extends Comparable> extends AbstractRange
 
   @Override
   public Range<C> rangeContaining(C value) {
-    int index =
-        SortedLists.binarySearch(
-            ranges,
-            Range::lowerBound,
-            Cut.belowValue(value),
-            Ordering.natural(),
-            ANY_PRESENT,
-            NEXT_LOWER);
+    int index = floorRangeIndex(value);
     if (index != -1) {
       Range<C> range = ranges.get(index);
       return range.contains(value) ? range : null;
     }
     return null;
+  }
+
+  /** Index of the last range whose lower bound is at or below {@code value}, or -1 if none. */
+  private int floorRangeIndex(C value) {
+    return SortedLists.binarySearch(
+        ranges,
+        Range::lowerBound,
+        Cut.belowValue(value),
+        Ordering.natural(),
+        ANY_PRESENT,
+        NEXT_LOWER);
   }
 
   @Override
@@ -682,20 +687,42 @@ public final class ImmutableRangeSet<C extends Comparable> extends AbstractRange
 
     @Override
     int indexOf(Object target) {
-      if (contains(target)) {
-        @SuppressWarnings("unchecked") // if it's contained, it's definitely a C
-        C c = (C) requireNonNull(target);
-        long total = 0;
-        for (Range<C> range : ranges) {
-          if (range.contains(c)) {
-            return Ints.saturatedCast(total + ContiguousSet.create(range, domain).indexOf(c));
-          } else {
-            total += ContiguousSet.create(range, domain).size();
-          }
-        }
+      if (!contains(target)) {
+        return -1;
+      }
+      @SuppressWarnings("unchecked") // if it's contained, it's definitely a C
+      C c = (C) requireNonNull(target);
+      int index = floorRangeIndex(c);
+      if (index == -1) {
         throw new AssertionError("impossible");
       }
-      return -1;
+      long offset = rangeOffsets().get(index);
+      ContiguousSet<C> slice = ContiguousSet.create(ranges.get(index), domain);
+      return Ints.saturatedCast(offset + slice.indexOf(c));
+    }
+
+    //FLLDCIM: HPCPOP — OFFSET_ARRAY; slot i holds the exact long sum of sizes of ranges [0, i)
+    private transient ImmutableLongArray rangeOffsets;
+
+    /** Racy single-check; ImmutableLongArray's final fields publish the lane safely. */
+    private ImmutableLongArray rangeOffsets() {
+      ImmutableLongArray result = rangeOffsets;
+      if (result == null) {
+        result = rangeOffsets = buildRangeOffsets();
+      }
+      return result;
+    }
+
+    /** Prefix sums in one pass; exact capacity, so the builder never grows or copies. */
+    private ImmutableLongArray buildRangeOffsets() {
+      ImmutableLongArray.Builder lane = ImmutableLongArray.builder(ranges.size() + 1);
+      long total = 0;
+      lane.add(total);
+      for (Range<C> range : ranges) {
+        total += ContiguousSet.create(range, domain).size();
+        lane.add(total);
+      }
+      return lane.build();
     }
 
     @Override

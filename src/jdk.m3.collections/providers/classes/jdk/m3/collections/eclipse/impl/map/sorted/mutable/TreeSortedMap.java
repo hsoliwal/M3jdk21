@@ -8,6 +8,7 @@
  * http://www.eclipse.org/org/documents/edl-v10.php.
  */
 // Modified 2026 by Hitesh Soliwal and Synexia contributors: backed by IndexedSortedMap instead of java.util.TreeMap.
+// Modified 2026 by Hitesh Soliwal and contributors: getLast reads the highest tree slot.
 
 package jdk.m3.collections.eclipse.impl.map.sorted.mutable;
 
@@ -263,6 +264,13 @@ public class TreeSortedMap<K, V>
     public K lastKey()
     {
         return this.treeMap.lastKey();
+    }
+
+    @Override
+    public V getLast()
+    {
+        //FLLDCIM: HPCPOP - O(log n) highest-slot read; was an O(n) valuesView walk
+        return this.treeMap.lastValue();
     }
 
     @Override
