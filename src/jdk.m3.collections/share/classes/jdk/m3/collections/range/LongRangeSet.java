@@ -67,17 +67,21 @@ public final class LongRangeSet {
 
     private void reserve(int required) {
         if (required <= starts.length) return;
-        int old = starts.length;
+        int capacity = grownCapacity(starts.length, required);
+        long[] grownStarts = Arrays.copyOf(starts, capacity);
+        long[] grownEnds = Arrays.copyOf(ends, capacity);
+        starts = grownStarts;
+        ends = grownEnds;
+    }
+
+    /** The capacity reserve() grows {@code old} to for {@code required} ranges. */
+    private static int grownCapacity(int old, int required) {
         long proposed = Math.max((long) required, Math.max(8L, old + (long) (old >>> 1) + 1));
         if (proposed > Integer.MAX_VALUE - 8L) {
             if (required > Integer.MAX_VALUE - 8) throw new OutOfMemoryError("too many intervals");
             proposed = Integer.MAX_VALUE - 8L;
         }
-        int capacity = (int) proposed;
-        long[] grownStarts = Arrays.copyOf(starts, capacity);
-        long[] grownEnds = Arrays.copyOf(ends, capacity);
-        starts = grownStarts;
-        ends = grownEnds;
+        return (int) proposed;
     }
 
     /** Inserts a half-open range, merging overlaps and touching neighbors. */
@@ -262,15 +266,83 @@ public final class LongRangeSet {
 
     // API_UNION U6 (2026-11-09): members of Synexia primitives LongRangeSet, on the M3 lanes and conventions.
 
-    /** Adds every range of {@code source}; {@code source} may be this set. */
+    /** Fewer source ranges than this are added one by one (a binary search each). */
+    private static final int MERGE_THRESHOLD = 4;
+
+    /**
+     * Adds every range of {@code source}; {@code source} may be this set. From
+     * {@value #MERGE_THRESHOLD} source ranges on, both sorted lanes are merged in one pass,
+     * O(n + m) instead of one insertion per source range, with the ranges, capacity and payload
+     * that adding them one by one gives; a source that adds nothing changes and allocates nothing.
+     */
+    //FLLDCIM: LEETCODIFY — two-pointer union of sorted disjoint lanes with capacity replay
     public void addAll(LongRangeSet source) {
         Objects.requireNonNull(source, "source");
-        long[] sourceStarts = source.starts;
-        long[] sourceEnds = source.ends;
         int count = source.size;
-        for (int i = 0; i < count; i++) {
-            add(sourceStarts[i], sourceEnds[i]);
+        if (source == this || count == 0) {
+            return; // every range of this set is already in it
         }
+        if (count < MERGE_THRESHOLD) {
+            for (int i = 0; i < count; i++) {
+                add(source.starts[i], source.ends[i]);
+            }
+            return;
+        }
+        mergeAll(source.starts, source.ends, count);
+    }
+
+    /**
+     * One counting pass, then the union. Adding source range i one by one would absorb exactly
+     * the target ranges it touches (a component formed by earlier source ranges counts once and
+     * holds the one target range they share), so the sizes, the capacity growth and whether
+     * anything changes follow from the touched target ranges alone.
+     */
+    private void mergeAll(long[] sourceStarts, long[] sourceEnds, int count) {
+        int capacity = starts.length;
+        int resulting = size;
+        boolean changed = false;
+        int first = 0;
+        int last = 0;
+        for (int i = 0; i < count; i++) {
+            long from = sourceStarts[i];
+            long to = sourceEnds[i];
+            while (first < size && ends[first] < from) first++; // first range ending at/after from
+            // ranges below first end before from <= to, so this also passes them
+            while (last < size && starts[last] <= to) last++; // first range starting after to
+            int touched = last - first;
+            changed |= touched != 1 || starts[first] > from || ends[first] < to;
+            if (touched == 0 && resulting == capacity) {
+                capacity = grownCapacity(capacity, resulting + 1);
+            }
+            resulting += 1 - touched;
+        }
+        if (!changed) return;
+        long[] mergedStarts = new long[capacity];
+        long[] mergedEnds = new long[capacity];
+        size = union(sourceStarts, sourceEnds, count, mergedStarts, mergedEnds);
+        starts = mergedStarts;
+        ends = mergedEnds;
+        revision++;
+    }
+
+    /** Writes the union of both sets' ranges, touching ones coalesced; returns its size. */
+    private int union(long[] sourceStarts, long[] sourceEnds, int count,
+            long[] outStarts, long[] outEnds) {
+        int t = 0;
+        int s = 0;
+        int w = 0;
+        while (t < size || s < count) {
+            boolean target = s == count || t < size && starts[t] <= sourceStarts[s];
+            long from = target ? starts[t] : sourceStarts[s];
+            long to = target ? ends[t++] : sourceEnds[s++];
+            if (w > 0 && from <= outEnds[w - 1]) {
+                outEnds[w - 1] = Math.max(outEnds[w - 1], to);
+            } else {
+                outStarts[w] = from;
+                outEnds[w++] = to;
+            }
+        }
+        return w;
     }
 
     /** Returns whether one stored range contains all of [fromInclusive, toExclusive); an empty query is covered. */
