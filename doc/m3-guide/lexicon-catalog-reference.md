@@ -206,6 +206,48 @@ The image row is a physical coordinate, so `findMapping(sourceId, rank)` is the 
 word id. A Python run of the exporter on the same input needs the manifest and records
 files that this table describes. No relation sidecar and no payload field map are written.
 
+## Lexicon coordinates and the registry
+
+A persisted word identity is a coordinate `(lexicon number, rank)`. The rank is the word id
+of one frozen, frequency-ranked lexicon version (the `record_id` of its export). Image rows
+and CWIDs are never persisted: they change with every image generation.
+
+`m3/lexicon/m3-lexicon-registry.tsv` assigns the lexicon numbers. It sits beside
+`m3-source-manifest.tsv` and does not replace it.
+
+| Column | Value |
+| --- | --- |
+| `lexicon_num` | Positive, assigned in admission order, never reused; 0 is invalid |
+| `lexicon_key` | `source_id@version`; unique |
+| `source_id` | The catalog source id of the version's export |
+| `kind`, `language_tag` | Lexicon kind; BCP-47 tag, `mul` for tokenizer vocabularies, `zxx-x-<lang>` for programming languages |
+| `version` | Revision, sample or language version of the word set |
+| `rank_rule` | The count behind the rank: `local-count`, `source-count`, `codebase-token:<corpus>` or `oracle-count:<lexicon_key>` |
+| `export_sha256` | SHA-256 of the export's `m3.export.json`, which pins every shard and sidecar; `-` until the export exists |
+| `licence` | Recorded, never gating |
+| `status` | `ACTIVE`, or `RETIRED` for a replaced version that still decodes |
+
+A new revision, sample, rank rule or word set gets a new number; the old row becomes
+`RETIRED`. The registry generation is SHA-256 of the file with LF line ends (a CR LF pair
+counts as LF; any other CR is refused). Every image or sidecar that carries coordinates
+records it.
+
+| Form | Layout | Owner |
+| --- | --- | --- |
+| Wire | uLEB128(lexicon number) then uLEB128(rank): 2 bytes while both are below 128, 3 for a rank below 16,384, 4 below 2,097,152 | `SharedLexiconExport.LexiconCoordinate.writeWire` / `readWire` |
+| Image lane | One `int`: lexicon number in bits 31..24 (1..255), rank + 1 in bits 23..0 (rank at most 2^24 - 2); 0 is never a lane | `LexiconCoordinate.lane` / `ofLane` |
+| In memory | One `long`: lexicon number in bits 63..32, entry = rank + 1 in bits 31..0, both positive | `java.lang.M3StringPool.Lexicon.pack`, `lexiconId`, `entryId` |
+
+All codecs are package private and refuse rather than wrap: lexicon 0, a negative rank, a
+lane lexicon above 255, a lane rank above 2^24 - 2, a lane or a `long` whose lexicon or entry
+is 0, and a truncated, overlong or above-`int` uLEB128 form. So every coordinate has exactly
+one wire form. `SharedLexiconExport.varintLength`, `writeVarint` and `readVarint` are the
+uLEB128 primitives; `registryGeneration` computes the pin. The in-memory form ports the pure
+functions of the Synexia dictshared `LexiconCoordinate` (Apache-2.0, same owner).
+`m3/core/test/SharedLexiconCoordinateContractTest` covers every boundary (rank 0, 127, 128,
+16,383, 16,384, 2^21 - 1 and 2^24 - 2; lexicon 1, 127, 128 and 255), each refusal, a naive
+lane pack that the overflow inputs corrupt, the registry shape and the generation pin.
+
 ## Five-family file sidecars
 
 [SharedLexiconFamilySidecarCatalog][FAM] reads these fixed files as a complete bundle:

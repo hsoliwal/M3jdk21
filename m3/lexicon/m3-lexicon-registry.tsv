@@ -1,0 +1,60 @@
+lexicon_num	lexicon_key	source_id	kind	language_tag	version	rank_rule	export_sha256	licence	status
+1	grammar.java@8..21	grammar.java	programming-language	zxx-x-java	8..21	codebase-token:java.base/java/util@21.0.9	-	spec-derived (JLS)	ACTIVE
+2	grammar.java@10	grammar.java	programming-language	zxx-x-java	10	codebase-token:java.base/java/util@21.0.9	-	spec-derived (JLS)	ACTIVE
+3	grammar.java@11	grammar.java	programming-language	zxx-x-java	11	codebase-token:java.base/java/util@21.0.9	-	spec-derived (JLS)	ACTIVE
+4	grammar.java@12	grammar.java	programming-language	zxx-x-java	12	codebase-token:java.base/java/util@21.0.9	-	spec-derived (JLS)	ACTIVE
+5	grammar.java@13	grammar.java	programming-language	zxx-x-java	13	codebase-token:java.base/java/util@21.0.9	-	spec-derived (JLS)	ACTIVE
+6	grammar.java@14	grammar.java	programming-language	zxx-x-java	14	codebase-token:java.base/java/util@21.0.9	-	spec-derived (JLS)	ACTIVE
+7	grammar.java@15	grammar.java	programming-language	zxx-x-java	15	codebase-token:java.base/java/util@21.0.9	-	spec-derived (JLS)	ACTIVE
+8	grammar.java@16	grammar.java	programming-language	zxx-x-java	16	codebase-token:java.base/java/util@21.0.9	-	spec-derived (JLS)	ACTIVE
+9	grammar.java@17	grammar.java	programming-language	zxx-x-java	17	codebase-token:java.base/java/util@21.0.9	-	spec-derived (JLS)	ACTIVE
+10	grammar.java@18	grammar.java	programming-language	zxx-x-java	18	codebase-token:java.base/java/util@21.0.9	-	spec-derived (JLS)	ACTIVE
+11	grammar.java@19	grammar.java	programming-language	zxx-x-java	19	codebase-token:java.base/java/util@21.0.9	-	spec-derived (JLS)	ACTIVE
+12	grammar.java@20	grammar.java	programming-language	zxx-x-java	20	codebase-token:java.base/java/util@21.0.9	-	spec-derived (JLS)	ACTIVE
+13	grammar.java@21	grammar.java	programming-language	zxx-x-java	21	codebase-token:java.base/java/util@21.0.9	-	spec-derived (JLS)	ACTIVE
+14	grammar.java@8	grammar.java	programming-language	zxx-x-java	8	codebase-token:java.base/java/util@21.0.9	-	spec-derived (JLS)	ACTIVE
+15	grammar.java@9	grammar.java	programming-language	zxx-x-java	9	codebase-token:java.base/java/util@21.0.9	-	spec-derived (JLS)	ACTIVE
+16	grammar.python@3.8..3.13	grammar.python	programming-language	zxx-x-python	3.8..3.13	codebase-token:cpython/Lib@3.12.6	-	spec-derived (Python Language Reference)	ACTIVE
+17	grammar.python@3.10	grammar.python	programming-language	zxx-x-python	3.10	codebase-token:cpython/Lib@3.12.6	-	spec-derived (Python Language Reference)	ACTIVE
+18	grammar.python@3.11	grammar.python	programming-language	zxx-x-python	3.11	codebase-token:cpython/Lib@3.12.6	-	spec-derived (Python Language Reference)	ACTIVE
+19	grammar.python@3.12	grammar.python	programming-language	zxx-x-python	3.12	codebase-token:cpython/Lib@3.12.6	-	spec-derived (Python Language Reference)	ACTIVE
+20	grammar.python@3.13	grammar.python	programming-language	zxx-x-python	3.13	codebase-token:cpython/Lib@3.12.6	-	spec-derived (Python Language Reference)	ACTIVE
+21	grammar.python@3.8	grammar.python	programming-language	zxx-x-python	3.8	codebase-token:cpython/Lib@3.12.6	-	spec-derived (Python Language Reference)	ACTIVE
+22	grammar.python@3.9	grammar.python	programming-language	zxx-x-python	3.9	codebase-token:cpython/Lib@3.12.6	-	spec-derived (Python Language Reference)	ACTIVE
+23	hf.wiki.de@20231101/b04c8d1c/s1	hf.wiki.de	hf-frequency	de	20231101/b04c8d1c/s1	local-count	-	CC-BY-SA-3.0 AND GFDL	ACTIVE
+24	hf.wiki.en@20231101/b04c8d1c/s1	hf.wiki.en	hf-frequency	en	20231101/b04c8d1c/s1	local-count	-	CC-BY-SA-3.0 AND GFDL	ACTIVE
+25	hf.wiki.es@20231101/b04c8d1c/s1	hf.wiki.es	hf-frequency	es	20231101/b04c8d1c/s1	local-count	-	CC-BY-SA-3.0 AND GFDL	ACTIVE
+26	hf.wiki.fr@20231101/b04c8d1c/s1	hf.wiki.fr	hf-frequency	fr	20231101/b04c8d1c/s1	local-count	-	CC-BY-SA-3.0 AND GFDL	ACTIVE
+27	hf.wiki.hi@20231101/b04c8d1c/s1	hf.wiki.hi	hf-frequency	hi	20231101/b04c8d1c/s1	local-count	-	CC-BY-SA-3.0 AND GFDL	ACTIVE
+28	hf.wiki.ja@20231101/b04c8d1c/s1	hf.wiki.ja	hf-frequency	ja	20231101/b04c8d1c/s1	local-count	-	CC-BY-SA-3.0 AND GFDL	ACTIVE
+29	hf.wiki.ru@20231101/b04c8d1c/s1	hf.wiki.ru	hf-frequency	ru	20231101/b04c8d1c/s1	local-count	-	CC-BY-SA-3.0 AND GFDL	ACTIVE
+30	hf.wiki.zh@20231101/b04c8d1c/s1	hf.wiki.zh	hf-frequency	zh	20231101/b04c8d1c/s1	local-count	-	CC-BY-SA-3.0 AND GFDL	ACTIVE
+31	hf.tok.mbert@3f076fdb	hf.tok.mbert	hf-tokenizer	mul	3f076fdb	oracle-count:hf.wiki.*@20231101/b04c8d1c/s1	-	Apache-2.0	ACTIVE
+32	hf.tok.qwen@060db649	hf.tok.qwen	hf-tokenizer	mul	060db649	oracle-count:hf.wiki.*@20231101/b04c8d1c/s1	-	Apache-2.0	ACTIVE
+33	hf.tok.tinyllama@fe8a4ea1	hf.tok.tinyllama	hf-tokenizer	mul	fe8a4ea1	oracle-count:hf.wiki.*@20231101/b04c8d1c/s1	-	Apache-2.0	ACTIVE
+34	hf.tok.xlmr@e73636d4	hf.tok.xlmr	hf-tokenizer	mul	e73636d4	oracle-count:hf.wiki.*@20231101/b04c8d1c/s1	-	MIT	ACTIVE
+35	hunspell.de@8cfea406	hunspell.de	classic-dictionary	de	8cfea406	oracle-count:hf.wiki.de@20231101/b04c8d1c/s1	-	GPL-2.0 OR GPL-3.0 (igerman98)	ACTIVE
+36	hunspell.en@8cfea406	hunspell.en	classic-dictionary	en	8cfea406	oracle-count:hf.wiki.en@20231101/b04c8d1c/s1	-	SCOWL (BSD/MIT-style)	ACTIVE
+37	hunspell.es@8cfea406	hunspell.es	classic-dictionary	es	8cfea406	oracle-count:hf.wiki.es@20231101/b04c8d1c/s1	-	GPL-3.0-or-later OR LGPL-3.0-or-later OR MPL-1.1	ACTIVE
+38	hunspell.fr@8cfea406	hunspell.fr	classic-dictionary	fr	8cfea406	oracle-count:hf.wiki.fr@20231101/b04c8d1c/s1	-	MPL-2.0	ACTIVE
+39	hunspell.hi@c0865a85	hunspell.hi	classic-dictionary	hi	c0865a85	oracle-count:hf.wiki.hi@20231101/b04c8d1c/s1	-	GPL	ACTIVE
+40	hunspell.ru@8cfea406	hunspell.ru	classic-dictionary	ru	8cfea406	oracle-count:hf.wiki.ru@20231101/b04c8d1c/s1	-	BSD-style (Lebedev)	ACTIVE
+41	cldr.names.de@42.0.0	cldr.names.de	cldr	de	42.0.0	oracle-count:hf.wiki.de@20231101/b04c8d1c/s1	-	Unicode-3.0	ACTIVE
+42	cldr.names.en@42.0.0	cldr.names.en	cldr	en	42.0.0	oracle-count:hf.wiki.en@20231101/b04c8d1c/s1	-	Unicode-3.0	ACTIVE
+43	cldr.names.es@42.0.0	cldr.names.es	cldr	es	42.0.0	oracle-count:hf.wiki.es@20231101/b04c8d1c/s1	-	Unicode-3.0	ACTIVE
+44	cldr.names.fr@42.0.0	cldr.names.fr	cldr	fr	42.0.0	oracle-count:hf.wiki.fr@20231101/b04c8d1c/s1	-	Unicode-3.0	ACTIVE
+45	cldr.names.hi@42.0.0	cldr.names.hi	cldr	hi	42.0.0	oracle-count:hf.wiki.hi@20231101/b04c8d1c/s1	-	Unicode-3.0	ACTIVE
+46	cldr.names.ja@42.0.0	cldr.names.ja	cldr	ja	42.0.0	oracle-count:hf.wiki.ja@20231101/b04c8d1c/s1	-	Unicode-3.0	ACTIVE
+47	cldr.names.ru@42.0.0	cldr.names.ru	cldr	ru	42.0.0	oracle-count:hf.wiki.ru@20231101/b04c8d1c/s1	-	Unicode-3.0	ACTIVE
+48	cldr.names.zh@42.0.0	cldr.names.zh	cldr	zh	42.0.0	oracle-count:hf.wiki.zh@20231101/b04c8d1c/s1	-	Unicode-3.0	ACTIVE
+49	cldr.exemplar.de@42.0.0	cldr.exemplar.de	cldr	de	42.0.0	oracle-count:hf.wiki.de@20231101/b04c8d1c/s1	-	Unicode-3.0	ACTIVE
+50	cldr.exemplar.en@42.0.0	cldr.exemplar.en	cldr	en	42.0.0	oracle-count:hf.wiki.en@20231101/b04c8d1c/s1	-	Unicode-3.0	ACTIVE
+51	cldr.exemplar.es@42.0.0	cldr.exemplar.es	cldr	es	42.0.0	oracle-count:hf.wiki.es@20231101/b04c8d1c/s1	-	Unicode-3.0	ACTIVE
+52	cldr.exemplar.fr@42.0.0	cldr.exemplar.fr	cldr	fr	42.0.0	oracle-count:hf.wiki.fr@20231101/b04c8d1c/s1	-	Unicode-3.0	ACTIVE
+53	cldr.exemplar.hi@42.0.0	cldr.exemplar.hi	cldr	hi	42.0.0	oracle-count:hf.wiki.hi@20231101/b04c8d1c/s1	-	Unicode-3.0	ACTIVE
+54	cldr.exemplar.ja@42.0.0	cldr.exemplar.ja	cldr	ja	42.0.0	oracle-count:hf.wiki.ja@20231101/b04c8d1c/s1	-	Unicode-3.0	ACTIVE
+55	cldr.exemplar.ru@42.0.0	cldr.exemplar.ru	cldr	ru	42.0.0	oracle-count:hf.wiki.ru@20231101/b04c8d1c/s1	-	Unicode-3.0	ACTIVE
+56	cldr.exemplar.zh@42.0.0	cldr.exemplar.zh	cldr	zh	42.0.0	oracle-count:hf.wiki.zh@20231101/b04c8d1c/s1	-	Unicode-3.0	ACTIVE
+57	dictlang.dictionary.rank@0e98aa32	dictlang.dictionary.rank	catalog-source	en	0e98aa32	oracle-count:hf.wiki.en@20231101/b04c8d1c/s1	-	Public domain (US); Project Gutenberg License	ACTIVE
+58	dictlang.frequency.rank@05ccf20c	dictlang.frequency.rank	catalog-source	en	05ccf20c	source-count	-	MIT (hermitdave/FrequencyWords; OpenSubtitles 2018 via OPUS)	ACTIVE
+59	lexicon.english-demo@5ae4ecb8	lexicon.english-demo	catalog-source	en	5ae4ecb8	oracle-count:hf.wiki.en@20231101/b04c8d1c/s1	-	GPL-2.0 WITH Classpath-exception-2.0	ACTIVE
