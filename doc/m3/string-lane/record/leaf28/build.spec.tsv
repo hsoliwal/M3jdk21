@@ -1,0 +1,15 @@
+# BUILD family: donor op, mode, java op, null rule (repeat/3 = repeat(str, separator, count) only: DONOR_TEST_PORT v1.1)
+leftPad	INSTANCE	leftPad	NPE_ARG
+rightPad	INSTANCE	rightPad	NPE_ARG
+center	INSTANCE	center	NPE_ARG
+reverse	INSTANCE	reverse	NPE_ARG
+reverseDelimited	INSTANCE	reverseDelimited	NPE_ARG
+rotate	INSTANCE	rotate	NPE_ARG
+repeat/3	INSTANCE	repeat	NPE_ARG
+appendIfMissing	INSTANCE	appendIfMissing	NPE_ARG_ELEM
+appendIfMissingIgnoreCase	INSTANCE	appendIfMissingIgnoreCase	NPE_ARG_ELEM
+prependIfMissing	INSTANCE	prependIfMissing	NPE_ARG_ELEM
+prependIfMissingIgnoreCase	INSTANCE	prependIfMissingIgnoreCase	NPE_ARG_ELEM
+wrap	INSTANCE	wrap	NPE_ARG
+wrapIfMissing	INSTANCE	wrapIfMissing	NPE_ARG
+overlay	INSTANCE	overlay	NPE_ARG

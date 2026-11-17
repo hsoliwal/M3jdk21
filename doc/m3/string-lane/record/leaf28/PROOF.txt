@@ -1,0 +1,24 @@
+method_texts_verbatim_in_head	7
+lint	javac -Xlint:all,-this-escape -Werror: no warnings
+corpus	3033	params	103
+python 3.12.6 zfill rows 13 texts 3033
+node v25.9.0 pad rows 90 texts 3033
+== BuildFamilyProof flat -XX:+CompactStrings
+checks	1014	texts	3033
+RESULT	PASS	failures=0
+== BuildFamilyProof flat -XX:-CompactStrings
+checks	1014	texts	3033
+RESULT	PASS	failures=0
+== BuildFamilyProof m3-facts -XX:+CompactStrings
+checks	1014	texts	3033
+RESULT	PASS	failures=0
+== BuildFamilyProof m3-facts -XX:-CompactStrings
+checks	1014	texts	3033
+RESULT	PASS	failures=0
+== BuildFamilyProof m3-scan -XX:+CompactStrings
+checks	1014	texts	3033
+RESULT	PASS	failures=0
+== BuildFamilyProof m3-scan -XX:-CompactStrings
+checks	1014	texts	3033
+RESULT	PASS	failures=0
+exit 0

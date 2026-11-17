@@ -94,3 +94,20 @@ removeStartIgnoreCase	commons-lang3 3.22.0 StringUtils.removeStartIgnoreCase
 removeEndIgnoreCase	commons-lang3 3.22.0 StringUtils.removeEndIgnoreCase
 removeSurrounding	Kotlin 2.2.20 String.removeSurrounding
 unwrap	commons-lang3 3.22.0 StringUtils.unwrap
+leftPad	commons-lang3 3.22.0 StringUtils.leftPad(String, int[, char|String])
+rightPad	commons-lang3 3.22.0 StringUtils.rightPad(String, int[, char|String])
+center	commons-lang3 3.22.0 StringUtils.center(String, int[, char|String])
+padStart	JavaScript String.prototype.padStart(maxLength, fillString) (Node.js v25.9.0)
+padEnd	JavaScript String.prototype.padEnd(maxLength, fillString) (Node.js v25.9.0)
+zeroFill	CPython 3.12 str.zfill(width)
+repeat	commons-lang3 3.22.0 StringUtils.repeat(String, String, int)
+reverse	commons-lang3 3.22.0 StringUtils.reverse(String) (= StringBuilder.reverse; Kotlin CharSequence.reversed agrees)
+reverseDelimited	commons-lang3 3.22.0 StringUtils.reverseDelimited(String, char)
+rotate	commons-lang3 3.22.0 StringUtils.rotate(String, int)
+appendIfMissing	commons-lang3 3.22.0 StringUtils.appendIfMissing(String, CharSequence, CharSequence...) (Strings.CS)
+appendIfMissingIgnoreCase	commons-lang3 3.22.0 StringUtils.appendIfMissingIgnoreCase(String, CharSequence, CharSequence...) (Strings.CI)
+prependIfMissing	commons-lang3 3.22.0 StringUtils.prependIfMissing(String, CharSequence, CharSequence...) (Strings.CS)
+prependIfMissingIgnoreCase	commons-lang3 3.22.0 StringUtils.prependIfMissingIgnoreCase(String, CharSequence, CharSequence...) (Strings.CI)
+wrap	commons-lang3 3.22.0 StringUtils.wrap(String, char|String)
+wrapIfMissing	commons-lang3 3.22.0 StringUtils.wrapIfMissing(String, char|String)
+overlay	commons-lang3 3.22.0 StringUtils.overlay(String, String, int, int)
