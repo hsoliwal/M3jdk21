@@ -1,0 +1,20 @@
+donor	files	BASE	NEEDS	top_direct_blockers
+ST4	63	24	39	LIB:org.antlr.runtime 21, JDK:java.desktop 5
+attoparser	106	106	0	
+commons-jexl3	218	155	63	LIB:org.apache.commons 10, JDK:java.scripting 3, JDK:java.desktop 2, JDK:java.xml 1
+compiler	69	61	8	JDK:java.logging 2
+expressly	75	20	55	JDK:java.desktop 2
+freemarker	616	190	426	JDK:java.xml 20, JDK:java.desktop 18, LIB:org.python.core 12, JDK:javax.servlet 11, LIB:jakarta.servlet.jsp 10, JDK:java.sql 9
+handlebars	102	32	70	LIB:org.apache.commons 38, LIB:org.antlr.v4 12, LIB:org.slf4j.Logger 7, LIB:org.slf4j.LoggerFactory 7, JDK:java.scripting 2, LIB:jakarta.servlet.ServletContext 1
+jakarta.el-api	42	39	3	JDK:java.desktop 3
+jinjava	438	95	343	LIB:com.google.common 112, LIB:org.apache.commons 75, LIB:de.odysseus.el 53, JDK:javax.el 43, LIB:com.fasterxml.jackson 19, LIB:com.hubspot.algebra 8
+jte-runtime	44	44	0	
+mvel2	365	165	200	JDK:java.logging 6, JDK:java.scripting 4
+ognl	155	130	25	JDK:java.desktop 6, JDK:jdk.unsupported 1, LIB:javassist.CtNewMethod 1, LIB:javassist.NotFoundException 1, LIB:javassist.ClassPool 1, LIB:javassist.CannotCompileException 1
+pebble	232	50	182	LIB:org.slf4j.LoggerFactory 7, LIB:org.slf4j.Logger 7, LIB:com.github.benmanes 2, LIB:jakarta.servlet.ServletContext 1, JDK:javax.servlet 1
+spring-expression	123	12	111	LIB:org.jspecify.annotations 77, LIB:org.springframework.util 50, LIB:org.springframework.asm 43, LIB:org.springframework.core 29, LIB:org.springframework.lang 4, LIB:org.apache.commons 1
+thymeleaf	492	200	292	LIB:org.slf4j.Logger 48, LIB:org.slf4j.LoggerFactory 47, LIB:jakarta.servlet.http 4, JDK:javax.servlet.http 4, JDK:java.desktop 2, LIB:com.fasterxml.jackson 1
+unbescape	46	46	0	
+velocity-engine-core	220	59	161	LIB:org.slf4j.Logger 44, LIB:org.apache.commons 25, LIB:org.slf4j.LoggerFactory 5, JDK:java.sql 3, LIB:org.slf4j.MDC 1, JDK:java.naming 1
+velocity-tools-generic	59	25	34	LIB:org.apache.commons 10, LIB:org.slf4j.Logger 6, LIB:org.slf4j.LoggerFactory 5, JDK:java.xml 5, LIB:com.github.cliftonlabs 2
+TOTAL	3465	1453	2012	LIB:org.apache.commons 159, LIB:org.slf4j.Logger 114, LIB:com.google.common 112, LIB:org.jspecify.annotations 77, LIB:org.slf4j.LoggerFactory 73, LIB:de.odysseus.el 53, LIB:org.springframework.util 50, JDK:javax.el 45, LIB:org.springframework.asm 43, JDK:java.desktop 41, LIB:org.springframework.core 29, JDK:java.xml 26

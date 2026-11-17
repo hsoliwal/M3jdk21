@@ -1,0 +1,460 @@
+canonical	family	status	proposed_java	source_count	sources	semantic_conflicts	oracle
+repeat	BUILD	EXISTS:repeat	public String repeat(int count)	8	JS:repeat; Lo:_.repeat; Rb:*; PHP:str_repeat; Kt:repeat; Sw:init(repeating:count:); Rs:repeat; Go:Repeat		py: s*n
+rightPad	BUILD	NEW	public String rightPad(int size, String padStr) (+ char overload)	8	Py:str.ljust; JS:padEnd; Lo:_.padEnd; Rb:ljust; Kt:padEnd; NET:PadRight; PHP:str_pad; MB:mb_str_pad	str_pad LEFT/BOTH map to leftPad/center; PHP counts bytes	node: 'abc'.padEnd(6,'')==='abc'
+concat	BUILD	EXISTS:concat	public String concat(String str)	7	Rb:+; Kt:Char.plus/buildString; Sw:append/+; SF:appending/appendingFormat; RS:push/push_str; Cpp:append/+=; C:strcat/strncat/strcpy/strncpy		py: a+b
+leftPad	BUILD	NEW	public String leftPad(int size, String padStr) (+ char overload)	6	Py:str.rjust; JS:padStart; Lo:_.padStart; Rb:rjust; Kt:padStart; NET:PadLeft	empty pad: JS unchanged, PHP ValueError; .NET negative throws	node: 'abc'.padStart(10,'foo')
+insert	BUILD	NEW	public String insert(int index, CharSequence s)	5	Rb:insert; NET:Insert; Sw:insert; RS:insert/insert_str; Cpp:insert	Ruby negative index inserts after self[index]	dotnet: "abc".Insert(2,"XYZ")
+concatAll	BUILD	PARTIAL:concat: one String argument	public String concatAll(Object... values)	3	JS:concat; Rb:<< / concat; NET:Concat	Ruby integer args are code points; JS null->'null'; overload concat(Object...) would be ambiguous	node: 'a'.concat(1,null)==='a1null'
+center	BUILD	NEW	public String center(int size, String padStr)	3	Py:str.center; Lo:_.pad; Rb:center	Python odd split ('ab'.center(5,'*')=='**ab*') vs extra-on-right (lodash/Ruby/PHP BOTH)	py: 'abc'.center(6)
+reverse	BUILD	NEW	public String reverse()	3	Rb:reverse; Kt:reversed; PHP:strrev	PHP bytes; Kt may split surrogates; propose code point	py: s[::-1]
+valueOfCodePoints	BUILD	NEW	public static String valueOfCodePoints(int... codePoints)	2	JS:String.fromCodePoint; MB:mb_chr	JS accepts lone surrogates	node: String.fromCodePoint(0x1F600).length===2
+prepend	BUILD	NEW	public String prepend(String... prefixes)	1	Rb:prepend		spec: Ruby doc
+zfill	BUILD	NEW	public String zfill(int width)	1	Py:str.zfill	sign kept in front	py: '-42'.zfill(5)=='-0042'
+padOrTruncate	BUILD	NEW	public String padOrTruncate(int length, String pad, int padStartIndex)	1	SF:padding(toLength:withPad:startingAt:)		spec: Apple doc
+resize	BUILD	NEW	public String resize(int length, char padChar)	1	Cpp:resize		py: (s+c*n)[:n]
+fromCharCodes	BUILD	PARTIAL:valueOf(char[]): no ToUint16	public static String fromCharCodes(int... codeUnits)	1	JS:String.fromCharCode		node: String.fromCharCode(0x10041)==='A'
+fromScalarValue	BUILD	PARTIAL:Character.toChars: accepts surrogates	public static java.util.Optional<String> fromScalarValue(int codePoint)	1	Rc:from_u32		rustc: char::from_u32
+valueOfLatin1	BUILD	PARTIAL:valueOf(char): not modulo 256	public static String valueOfLatin1(int value)	1	PHP:chr		php: chr(65)
+rawTemplate	BUILD	NEW	public static String raw(String[] strings, Object... substitutions)	1	JS:String.raw	JS template-tag concept; low value	node: String.raw({raw:['a','b','c']},1,2,3)
+reverseGraphemes	BUILD	NEW	public String reverseGraphemes()	1	Sw:reversed()		node: Intl.Segmenter grapheme reversed
+concatNormalized	BUILD	NEW	public String concatNormalized(String other, java.text.Normalizer.Form form)	1	U15:§1.4/§9.1		py: unicodedata.normalize(f,a+b)
+caseConvertLocale	CASE	EXISTS:toLowerCase(Locale)/toUpperCase(Locale)	public String toLowerCase(java.util.Locale locale)	21	Py:str.lower; Py:str.upper; JS:toLowerCase; JS:toUpperCase; JS:toLocaleLowerCase; JS:toLocaleUpperCase; Lo:_.toLower; Lo:_.toUpper; Rb:downcase; Rb:upcase; MB:mb_strtolower; MB:mb_strtoupper; Kt:lowercase/uppercase; Kt:toLowerCase/toUpperCase(deprecated); NET:ToLower/ToUpper/Invariant; Sw:lowercased/uppercased; SF:lowercased(with:)/localized*; Rs:to_lowercase; Rs:to_uppercase; Go:ToLower/ToUpper(+Special); SQL:unquoted identifier folding	locale-independent sources need Locale.ROOT (no-arg Java uses default locale); Ruby :ascii/:fold options; Go Special; SQL folds upper, PostgreSQL lower	py: 'ß'.upper()=='SS'; node: 'İ'.toLowerCase().length===2
+capitalize	CASE	NEW	public String capitalize()	5	Lo:_.upperFirst; Ra:upcase_first; PHP:ucfirst; MB:mb_ucfirst; Kt:capitalize	Kt titlecases (not uppercases) and is locale-aware; PHP ucfirst ASCII byte only	py: s[:1].upper()+s[1:]; node lodash _.upperFirst
+uncapitalize	CASE	NEW	public String uncapitalize()	5	Lo:_.lowerFirst; Ra:downcase_first; PHP:lcfirst; MB:mb_lcfirst; Kt:decapitalize	PHP lcfirst ASCII only	py: s[:1].lower()+s[1:]
+toSentenceCase	CASE	NEW	public String toSentenceCase()	4	Py:str.capitalize; Lo:_.capitalize; Rb:capitalize; Rs:word_to_titlecase	Py/Rust titlecase first char (digraphs), lodash/Ruby uppercase it; Rust skips to first cased letter	py: 'hELLO'.capitalize()=='Hello'
+capitalizeFully	CASE	NEW	public String capitalizeFully(char... delimiters)	4	PyStr:string.capwords; Ra:titleize; MB:mb_convert_case; SF:capitalized	capwords(None) collapses whitespace runs and trims; titleize rewrites '-'/'_' and drops _id; mb_convert_case also has FOLD/SIMPLE modes	py: string.capwords('  hello   wORLD ')=='Hello World'
+toAsciiCase	CASE	NEW	public String toAsciiLowerCase() / public String toAsciiUpperCase()	4	PHP:strtolower; PHP:strtoupper; Rs:to_ascii_lowercase/uppercase; CT:tolower/toupper	C depends on C locale; PHP locale-independent since 8.2	rustc: s.to_ascii_lowercase()
+foldCase	CASE	NEW	public String foldCase()	3	Py:str.casefold; Rs:to_casefold_unnormalized; CF:full C+F	Turkic T mappings optional (CF); toLowerCase is not folding (U+1E9E)	py: 'ß'.casefold()=='ss'
+capitalizeWords	CASE	NEW	public String capitalizeWords(String delimiters)	2	PHP:ucwords; Go:strings.Title	first letter upper, rest untouched; PHP ASCII only; Go deprecated word rule	go: strings.Title; spec: php ucwords manual
+swapCase	CASE	NEW	public String swapCase()	2	Py:str.swapcase; Rb:swapcase	full mapping ('ß'->'SS'); not round-trip	py: 'ß'.swapcase()=='SS'
+codePointCaseMap	CASE	PARTIAL:Character.toUpperCase: 1:1 only	public static String toUpperCase(int codePoint, java.util.Locale locale)	2	Kt:Char.lowercase/uppercase/titlecase; Rc:to_lowercase/to_uppercase/to_titlecase		rustc: 'ß'.to_uppercase().collect::<String>()
+toCamelCase	CASE	NEW	public String toCamelCase(boolean capitalizeFirstLetter, char... delimiters)	2	Lo:_.camelCase; Ra:camelize	lodash word split on case changes; Rails '/'->'::' and SSLError->SslError	node lodash _.camelCase('--foo-bar--')==='fooBar'
+toSnakeCase	CASE	NEW	public String toSnakeCase()	2	Lo:_.snakeCase; Ra:underscore	Rails maps '::' to '/'	node lodash _.snakeCase('--FOO-BAR--')==='foo_bar'
+toTitleCase	CASE	NEW	public String toTitleCase()	1	Py:str.title	letter runs are words; apostrophes/digits break words ('3Rd') - differs from capitalizeFully	py: 'hello wORLD 3rd'.title()=='Hello World 3Rd'
+toTitleCaseAll	CASE	NEW	public String toTitleCaseAll()	1	Go:strings.ToTitle	maps every letter to titlecase, not word starts; Go row proposed toTitleCase (collides with Py title)	go: strings.ToTitle(s)
+foldCaseSimple	CASE	NEW	public String foldCaseSimple()	1	CF:simple C+S	1:1, length preserving; U+00DF unchanged	spec: CaseFolding.txt C+S; ICU4J UCharacter.foldCase
+toCaseOrdinal	CASE	NEW	public String toUpperCaseOrdinal()	1	NET:ToLowerOrdinal/ToUpperOrdinal (.NET 11 preview)	undocumented prerelease; hold	dotnet 11 preview only
+toKebabCase	CASE	NEW	public String toKebabCase()	1	Lo:_.kebabCase		node lodash _.kebabCase('fooBar')==='foo-bar'
+toLowerSpaceCase	CASE	NEW	public String toLowerSpaceCase()	1	Lo:_.lowerCase		node lodash _.lowerCase('--Foo-Bar--')==='foo bar'
+toUpperSpaceCase	CASE	NEW	public String toUpperSpaceCase()	1	Lo:_.upperCase		node lodash _.upperCase('fooBar')==='FOO BAR'
+toStartCase	CASE	NEW	public String toStartCase()	1	Lo:_.startCase	rest of word unchanged	node lodash _.startCase('fooBar')==='Foo Bar'
+dasherize	CASE	EXISTS:replace(char,char)	public String replace(char oldChar, char newChar) with ('_','-')	1	Ra:dasherize		py: s.replace('_','-')
+humanize	CASE	NEW	(not on String: Inflector) public String humanize()	1	Ra:humanize	inflection/acronym rules	spec: ActiveSupport docs
+asciiClassConstants	CLASS_TEST	NEW	(not on String: constants holder) ASCII_LETTERS, ASCII_LOWERCASE, ASCII_UPPERCASE, DIGITS, HEX_DIGITS, OCT_DIGITS, ASCII_PUNCTUATION, ASCII_PRINTABLE, ASCII_WHITESPACE	9	PyStr:ascii_letters; PyStr:ascii_lowercase; PyStr:ascii_uppercase; PyStr:digits; PyStr:hexdigits; PyStr:octdigits; PyStr:punctuation; PyStr:printable; PyStr:whitespace		py: string module constants
+allAnyNoneMatch	CLASS_TEST	NEW	public boolean allMatch(java.util.function.IntPredicate) / anyMatch / noneMatch	5	Kt:Char.isX predicates; Kt:all/any/none; Sw:contains(where:)/allSatisfy; Go:ContainsFunc; Rs:contains(pat)	Kt allMatch on '' true; units: Swift graphemes	go: strings.ContainsFunc
+isAscii	CLASS_TEST	NEW	public boolean isAscii()	4	Py:str.isascii; Rb:ascii_only?; Rs:is_ascii; SC:isASCII/asciiValue	empty -> true	py: ''.isascii()==True
+isUnicodeNumeric	CLASS_TEST	PARTIAL:isNumeric: Nd only	public boolean isUnicodeNumeric()	3	Py:str.isnumeric; Rc:is_numeric; SC:isNumber/isWholeNumber/wholeNumberValue	Py uses Numeric_Type; Rust uses gc Nd/Nl/No; Swift adds value	py: '⅕'.isnumeric()
+isUnicodeWhitespaceCodePoint	CLASS_TEST	PARTIAL:Character.isWhitespace: excludes no-break spaces	public static boolean isUnicodeWhitespace(int codePoint)	3	Kt:Char.isWhitespace; SC:isWhitespace; Rc:is_whitespace	Kt adds U+001C..U+001F; Rust White_Space	rustc: c.is_whitespace()
+isHexDigits	CLASS_TEST	NEW	public boolean isHexDigits()	3	SC:isHexDigit/hexDigitValue; Rc:is_ascii_hexdigit; CT:isxdigit	Swift accepts fullwidth hex? (Character property) - check	rustc: is_ascii_hexdigit
+isAsciiPunctuation	CLASS_TEST	NEW	public boolean isAsciiPunctuation()	3	Rc:is_ascii_punctuation; CT:ispunct; CM:§2.1 ASCII punctuation		py: s and all(c in string.punctuation for c in s)
+isAlpha	CLASS_TEST	EXISTS:isAlpha	public boolean isAlpha()	2	Py:str.isalpha; SC:isLetter	Swift per Character	py: 'abcÉ'.isalpha()
+isAlphanumericUnicode	CLASS_TEST	PARTIAL:isAlphanumeric: Character.isLetterOrDigit (Nd only)	public boolean isAlphanumericUnicode()	2	Py:str.isalnum; Rc:is_alphanumeric	Py alpha=L categories + numeric types; Rust Alphabetic property + N	py: 'a½'.isalnum()
+isPrintable	CLASS_TEST	PARTIAL:isAsciiPrintable: ASCII 32..126 only	public boolean isPrintable()	2	Py:str.isprintable; SV:IsPrint/IsGraphic	Py empty true, Z/C non-printable; Go IsGraphic adds Zs	py: 'é'.isprintable()
+isCasedCase	CLASS_TEST	PARTIAL:isAllLowerCase/isAllUpperCase: every char must be cased	public boolean isLowerCased() / isUpperCased()	2	Py:str.islower; Py:str.isupper	uncased chars ignored; needs >=1 cased	py: 'abc1'.islower()
+isAsciiAlpha	CLASS_TEST	NEW	public boolean isAsciiAlpha()	2	Rc:is_ascii_alphabetic; CT:isalpha	C locale-dependent	rustc: is_ascii_alphabetic
+isAsciiAlphanumeric	CLASS_TEST	NEW	public boolean isAsciiAlphanumeric()	2	Rc:is_ascii_alphanumeric; CT:isalnum		rustc
+isAsciiDigits	CLASS_TEST	NEW	public boolean isAsciiDigits()	2	Rc:is_ascii_digit; CT:isdigit		rustc
+isAsciiLowerUpper	CLASS_TEST	NEW	public boolean isAsciiLowerCase() / isAsciiUpperCase()	2	Rc:is_ascii_uppercase/lowercase; CT:islower/isupper		rustc
+isAsciiGraphic	CLASS_TEST	PARTIAL:isAsciiPrintable: includes space	public boolean isAsciiGraphic()	2	Rc:is_ascii_graphic; CT:isgraph		rustc
+isAsciiWhitespaceCodePoint	CLASS_TEST	NEW	public static boolean isAsciiWhitespace(int c)	2	Rc:is_ascii_whitespace; CT:isspace	C includes VT; Rust excludes VT	rustc; py-ctypes msvcrt.isspace
+isAsciiControl	CLASS_TEST	NEW	public static boolean isAsciiControl(int c)	2	Rc:is_ascii_control; CT:iscntrl		rustc
+isCasedCodePoint	CLASS_TEST	NEW	public static boolean isCased(int codePoint)	2	SC:isCased/isUppercase/isLowercase; Rc:is_lowercase/is_uppercase/is_titlecase/is_cased		rustc nightly is_cased; ICU UCHAR_CASED
+isNumeric	CLASS_TEST	EXISTS:isNumeric	public boolean isNumeric()	1	Py:str.isdecimal	M3 isNumeric == Python isdecimal (Nd), not isnumeric	py: '٠1'.isdecimal()
+isDigits	CLASS_TEST	PARTIAL:isNumeric: Nd only	public boolean isDigits()	1	Py:str.isdigit	Numeric_Type Digit|Decimal ('²')	py: '²'.isdigit()==True
+isAllAlphabetic	CLASS_TEST	PARTIAL:isAlpha: category L only	public boolean isAllAlphabetic()	1	Rc:is_alphabetic	Alphabetic property incl. Nl, Other_Alphabetic	rustc: c.is_alphabetic(); Character.isAlphabetic
+isWhitespacePython	CLASS_TEST	PARTIAL:isBlank: '' true; different set	public boolean isWhitespace()	1	Py:str.isspace	non-empty; Zs + bidi WS/B/S	py: '\x1c'.isspace()
+isCommonMarkWhitespace	CLASS_TEST	PARTIAL:containsWhitespace: different set	public boolean isUnicodeWhitespace()	1	CM:§2.1 Unicode whitespace	Zs + TAB LF FF CR	py: all(unicodedata.category(c)=='Zs' or c in '\t\n\x0c\r' for c in s)
+isXmlWhitespace	CLASS_TEST	PARTIAL:isBlank: wider set, '' true	public boolean isXmlWhitespace()	1	XML:[3] S	exactly SP TAB CR LF, non-empty	dotnet: XmlConvert.VerifyWhitespace
+isJavaWhitespace	CLASS_TEST	PARTIAL:isBlank: wider set	public boolean isJavaWhitespace()	1	JLS:§3.6	SP HT FF LF CR	py: all(c in ' \t\x0c\n\r' for c in s)
+isTitleCase	CLASS_TEST	NEW	public boolean isTitleCase()	1	Py:str.istitle		py: 'Hello World'.istitle()
+charCategory	CLASS_TEST	EXISTS:Character.getType/getDirectionality	public static int getType(int codePoint) (Character)	1	Kt:Char.category/directionality		JVM
+isControl	CLASS_TEST	EXISTS:Character.isISOControl	Character.isISOControl(int)	1	Rc:is_control		rustc
+isOctalDigits	CLASS_TEST	NEW	public boolean isOctalDigits()	1	Rc:is_ascii_octdigit		rustc nightly
+isUnicodePunctuation	CLASS_TEST	NEW	public boolean isUnicodePunctuation()	1	CM:§2.1 Unicode punctuation	P or S categories	py: all(unicodedata.category(c)[0] in 'PS' for c in s)
+isAllPunctuation	CLASS_TEST	NEW	public boolean isAllPunctuation()	1	SC:isPunctuation	P only (differs from CommonMark P+S)	spec: Apple doc
+isSpaceOrTab	CLASS_TEST	NEW	public static boolean isSpaceOrTab(int c)	1	CT:isblank		py-ctypes msvcrt.isblank
+isAsciiPrintable	CLASS_TEST	EXISTS:isAsciiPrintable	public boolean isAsciiPrintable()	1	CT:isprint		py-ctypes msvcrt.isprint
+isNewlineCodePoint	CLASS_TEST	NEW	public static boolean isNewline(int codePoint)	1	SC:isNewline		spec: Apple doc
+isSymbolCodePoint	CLASS_TEST	NEW	public static boolean isSymbol(int codePoint)	1	SC:isSymbol/isMathSymbol/isCurrencySymbol		py: unicodedata.category(c)[0]=='S'
+isDefaultIgnorable	CLASS_TEST	PARTIAL:Character.isDefined/getType: no ignorable query	public static boolean isDefaultIgnorable(int codePoint)	1	Rc:is_private_use/is_assigned/is_default_ignorable/is_case_ignorable		spec: DerivedCoreProperties.txt
+containsAnyBut	CLASS_TEST	PARTIAL:containsOnly: negation, but '' differs	public boolean containsAnyBut(char... chars)	1	NM:ContainsAnyExcept	empty -> false	dotnet: s.AsSpan().ContainsAnyExcept("ab")
+containsAnyInRange	CLASS_TEST	NEW	public boolean containsAnyInRange(char lowInclusive, char highInclusive)	1	NM:ContainsAnyInRange/ContainsAnyExceptInRange		dotnet
+needsShellQuoting	CLASS_TEST	NEW	public boolean needsShellQuoting()	1	SH:§2.2	context-special chars optional	py: shlex.quote(s)!=s
+compareRegion	COMPARE	PARTIAL:regionMatches: boolean only; compareTo: no ranges	public int compareRegion(int offset, String other, int otherOffset, int length, boolean ignoreCase)	7	NET:CompareOrdinal(substr); Cpp:compare(pos,count,...); PHP:substr_compare; PHP:strncmp; PHP:strncasecmp; C:strncmp; C:memcmp	PHP negative offset from end; strncasecmp ASCII fold; memcmp no NUL stop	py: (a[i:i+n]>b[j:j+n])-(a[i:i+n]<b[j:j+n])
+compareCollated	COMPARE	PARTIAL:compareTo: ordinal only	public int compareTo(String other, java.text.Collator collator)	7	JS:localeCompare; PHP:strcoll; NET:Compare/CompareTo; SF:compare(options:range:locale:); SF:localizedCompare; C:strcoll/strxfrm; NM:StartsWith/EndsWith/Equals/CompareTo(StringComparison)	option sets (diacritic/width/numeric) differ; belongs to java.text.Collator	node: 'a'.localeCompare('B'); java.text.Collator
+compareCodePoints	COMPARE	PARTIAL:compareTo: UTF-16 order differs for supplementary vs U+E000..U+FFFF; returns difference not sign	public int compareCodePoints(String other)	4	Go:Compare; Rb:<=>; PHP:strcmp; C:strcmp	Ruby nil for non-String; C row claimed EXISTS:compareTo (wrong for non-ASCII)	go: strings.Compare
+compareToIgnoreCase	COMPARE	EXISTS:compareToIgnoreCase	public int compareToIgnoreCase(String)	3	Kt:compareTo(ignoreCase); Rb:casecmp; SF:caseInsensitiveCompare	Ruby -1/0/1; Foundation folding	JVM kotlin-stdlib
+equalsFoldCase	COMPARE	PARTIAL:equalsIgnoreCase: per-char simple mapping ('ß' vs 'SS')	public boolean equalsFoldCase(String other)	3	Rb:casecmp?; Rs:eq_ignore_case_unnormalized; CF:caseless matching	full folding	py: a.casefold()==b.casefold()
+compareNatural	COMPARE	NEW	public int compareNatural(String other, boolean ignoreCase)	3	PHP:strnatcmp; PHP:strnatcasecmp; SF:localizedStandardCompare	Finder order is locale-aware	php manual examples img1<img2<img10
+commonPrefix	COMPARE	PARTIAL:indexOfDifference: index, -1 when equal, may split surrogates	public String commonPrefix(CharSequence other, boolean ignoreCase) (+ commonPrefixLength)	3	Kt:commonPrefixWith; SF:commonPrefix(with:); NM:CommonPrefixLength	.NET returns length	py: os.path.commonprefix([a,b])
+equals	COMPARE	EXISTS:equals	public boolean equals(Object)	2	Rb:==/===; Rb:eql?	Ruby encoding compatibility	py: a==b
+equalsNullSafe	COMPARE	PARTIAL:equalsIgnoreCase: not null-safe static	public static boolean equals(String a, String b, boolean ignoreCase)	2	Kt:equals(ignoreCase); NET:Equals(a,b,cmp)	.NET culture modes	JVM kotlin-stdlib StringsKt.equals
+collationUca	COMPARE	NEW	(not on String: Collator/ICU) compareCollated(String,int strength) + collationKey(int)	2	U10:§7 main algorithm; U10:§7.3 sort keys	java.text.Collator is not UCA/DUCET	ICU4J Collator.getInstance(ULocale.ROOT)
+compareTo	COMPARE	EXISTS:compareTo	public int compareTo(String)	1	Cpp:operator==..<=>		py: (a>b)-(a<b)
+compareToIgnoreAsciiCase	COMPARE	PARTIAL:compareToIgnoreCase: folds Unicode	public int compareToIgnoreAsciiCase(String other)	1	PHP:strcasecmp		php manual; py: a.encode().lower() cmp
+equalsIgnoreAsciiCase	COMPARE	NEW	public boolean equalsIgnoreAsciiCase(String other)	1	Rs:eq_ignore_ascii_case		rustc
+equalsSimpleFold	COMPARE	PARTIAL:equalsIgnoreCase: check İ and supplementary	public boolean equalsSimpleFold(String other)	1	Go:EqualFold	simple folding	go: strings.EqualFold
+contentEqualsIgnoreCase	COMPARE	PARTIAL:contentEquals: no ignoreCase	public boolean contentEqualsIgnoreCase(CharSequence cs)	1	Kt:contentEquals(ignoreCase)		JVM kotlin-stdlib
+regionMatches	COMPARE	EXISTS:regionMatches	public boolean regionMatches(boolean,int,String,int,int)	1	Kt:regionMatches		JVM
+commonSuffix	COMPARE	NEW	public String commonSuffix(CharSequence other, boolean ignoreCase)	1	Kt:commonSuffixWith		JVM kotlin-stdlib
+canonicalEquals	COMPARE	PARTIAL:equals: no canonical equivalence	public boolean canonicalEquals(String other)	1	Sw:== / <		py: normalize('NFD',a)==normalize('NFD',b)
+jsonStringEquals	COMPARE	PARTIAL:equals: needs unescape	public boolean jsonEquals(String otherLiteral)	1	JSON:§8.3		py: json.loads(a)==json.loads(b)
+javaIdentifierEquals	COMPARE	PARTIAL:equals: does not skip ignorables	public boolean javaIdentifierEquals(String other)	1	JLS:§3.8 identifier equality		javac duplicate-definition probe
+caseInsensitiveOrder	COMPARE	EXISTS:CASE_INSENSITIVE_ORDER	public static final Comparator<String> CASE_INSENSITIVE_ORDER	1	Kt:CASE_INSENSITIVE_ORDER		JVM
+levenshteinDistance	DISTANCE	NEW	public int levenshteinDistance(CharSequence other)	1	PHP:levenshtein	PHP bytes, custom costs; propose code points	py: dp; php levenshtein('kitten','sitting')==3
+similarText	DISTANCE	NEW	public int similarText(String other)	1	PHP:similar_text	asymmetric	php manual
+soundex	DISTANCE	NEW	public String soundex()	1	PHP:soundex		commons-codec Soundex; php soundex('Robert')=='R163'
+metaphone	DISTANCE	NEW	public String metaphone()	1	PHP:metaphone		commons-codec Metaphone
+difference	DISTANCE	NEW	public java.util.List<int[]> difference(String from)	1	Sw:difference(from:)/applying		py: difflib.SequenceMatcher(...).get_opcodes()
+stripCharSet	EDGE	EXISTS:strip(String)/stripStart(String)/stripEnd(String)	public String strip(String stripChars)	17	Py:str.strip; Py:str.lstrip; Py:str.rstrip; Lo:_.trim; Lo:_.trimStart; Lo:_.trimEnd; PHP:trim; PHP:ltrim; PHP:rtrim/chop; MB:mb_trim; MB:mb_ltrim; MB:mb_rtrim; NET:Trim; NET:TrimStart; NET:TrimEnd; Go:Trim/TrimLeft/TrimRight; JSON:§2 ws	set form identical; DEFAULT whitespace sets differ: Py isspace, JS WS, PHP ' tab LF CR NUL VT', mb_trim Unicode list, .NET Char.IsWhiteSpace, JSON 4 chars; PHP 'a..z' range syntax unsupported	py: 'www.example.com'.strip('cmowz.')=='example'
+stripPredicate	EDGE	NEW	public String strip(java.util.function.IntPredicate isStrip) / stripStart(IntPredicate) / stripEnd(IntPredicate)	12	Kt:trim(predicate); Kt:trimStart; Kt:trimEnd; Go:TrimFunc/TrimLeftFunc/TrimRightFunc; Rs:trim_matches/trim_start_matches/trim_end_matches; SF:trimmingCharacters(in:); JS:trim; JS:trimEnd; JS:trimStart; Rb:strip; Rb:lstrip; Rb:rstrip	JS set = ES WhiteSpace+LineTerminator; Ruby = NUL TAB LF VT FF CR SP; Rust &str pattern repeats whole substring	node: s.trim(); go: strings.TrimFunc
+removeStart	EDGE	NEW	public String removeStart(String prefix)	6	Py:str.removeprefix; Rb:delete_prefix; Kt:removePrefix; SP:trimmingPrefix; Rs:trim_prefix/trim_suffix; Go:TrimPrefix/TrimSuffix	Go/Rust rows also cover the suffix mirror (removeEnd)	py: 'TestHook'.removeprefix('Test')=='Hook'
+startsEndsWith	EDGE	EXISTS:startsWith/endsWith	public boolean startsWith(String prefix)	5	PHP:str_starts_with; PHP:str_ends_with; Go:HasPrefix/HasSuffix; Cpp:starts_with/ends_with; Sw:hasPrefix/hasSuffix	Swift compares Characters under canonical equivalence	py: s.startswith(p)
+startsEndsWithChar	EDGE	PARTIAL:startsWith/endsWith: no char overload	public boolean startsWith(char c) / endsWith(char c)	4	Kt:startsWith; Kt:endsWith; NET:StartsWith; NET:EndsWith	.NET culture comparison modes not adopted	dotnet: s.StartsWith('a')
+removeEnd	EDGE	NEW	public String removeEnd(String suffix)	3	Py:str.removesuffix; Rb:delete_suffix; Kt:removeSuffix		py: 'MiscTests'.removesuffix('Tests')=='Misc'
+startsWithWindow	EDGE	PARTIAL:startsWith(String,int): no end bound; negative offset false	public boolean startsWith(String prefix, int start, int end)	3	Py:str.startswith; JS:startsWith; Lo:_.startsWith	Py slice negatives + tuple; JS/lodash clamp position	py: 'abc'.startswith('b',1); node: 'abc'.startsWith('a',-1)
+endsWithWindow	EDGE	PARTIAL:endsWith: no endPosition	public boolean endsWith(String suffix, int endPosition)	3	Py:str.endswith; JS:endsWith; Lo:_.endsWith	Py also start bound, slice negatives, tuple	node: 'abc'.endsWith('b',2)===true
+cutPrefix	EDGE	NEW	public java.util.Optional<String> cutPrefix(String prefix) / cutSuffix(String)	2	Rs:strip_prefix/strip_suffix; Go:CutPrefix/CutSuffix	Go returns (s,found) pair; empty prefix found=true	rustc: s.strip_prefix(p); go: strings.CutPrefix
+stripUnicode	EDGE	PARTIAL:strip: Character.isWhitespace excludes U+0085/U+00A0 and includes U+001C..U+001F	public String stripUnicode()	2	Rs:trim/trim_start/trim_end; Go:TrimSpace	White_Space property	rustc: s.trim(); go: strings.TrimSpace
+startsEndsWithPredicate	EDGE	NEW	public boolean startsWith(java.util.function.IntPredicate) / endsWith(IntPredicate)	2	Rs:starts_with; Rs:ends_with		rustc: s.starts_with(char::is_numeric)
+startsEndsWithAny	EDGE	EXISTS:startsWithAny/endsWithAny	public boolean startsWithAny(CharSequence... prefixes)	2	Rb:start_with?; Rb:end_with?	Ruby Regexp arguments not supported	spec: Ruby doc
+removeSurrounding	EDGE	NEW	public String removeSurrounding(String prefix, String suffix)	1	Kt:removeSurrounding	unchanged when not both present; '[]' -> ''	JVM kotlin-stdlib StringsKt.removeSurrounding
+cutSurrounding	EDGE	NEW	public java.util.Optional<String> cutSurrounding(String prefix, String suffix)	1	Rs:strip_circumfix	None when prefix/suffix overlap (differs from removeSurrounding)	rustc nightly
+trimAscii	EDGE	PARTIAL:trim: trim removes every char <= U+0020	public String trimAscii()	1	Rs:trim_ascii	SP HT LF FF CR, no VT	rustc: s.trim_ascii()
+chompSeparator	EDGE	PARTIAL:chomp: no separator/paragraph forms	public String chomp(String separator)	1	Rb:chomp	chomp('') removes all trailing LF/CRLF	spec: Ruby doc 'abcdd'.chomp('d')=='abcd'
+chopCodePoint	EDGE	PARTIAL:chop: M3 removes one UTF-16 unit, splitting surrogate pairs	public String chop()	1	Rb:chop	fix existing chop to remove a whole code point	spec: Ruby doc
+removeByteOrderMark	EDGE	NEW	public String removeByteOrderMark()	1	JSON:§8.1 BOM	at most one U+FEFF	py: s[1:] if s.startswith('﻿') else s
+chompYaml	EDGE	PARTIAL:chomp: removes exactly one break	public String chompYaml(char indicator)	1	YAML:§8.1.1.2	strip/clip/keep	spec: YAML 1.2.2 chomping examples
+isBlankPredicate	EMPTY_BLANK	PARTIAL:isBlank: Character.isWhitespace excludes U+00A0/U+2007/U+202F/U+0085; no null-safe static	public boolean isBlank(java.util.function.IntPredicate isSpace) / public static boolean isNullOrBlank(CharSequence)	7	Ra:blank?; Kt:isBlank; Kt:isNotBlank; Kt:isNullOrBlank; Kt:ifBlank; NET:IsNullOrWhiteSpace; NM:IsWhiteSpace	each source has its own whitespace set	dotnet: string.IsNullOrWhiteSpace(" ")
+isEmpty	EMPTY_BLANK	EXISTS:isEmpty/isNotEmpty/isNullOrEmpty	public boolean isEmpty()	5	Rb:empty?; Kt:isEmpty/isNotEmpty/isNullOrEmpty; NET:IsNullOrEmpty; Sw:isEmpty; Rs:is_empty		py: len(s)==0
+emptyDefaults	EMPTY_BLANK	EXISTS:getIfEmpty/defaultString	public String getIfEmpty(java.util.function.Supplier<String>)	2	Kt:ifEmpty; Kt:orEmpty		JVM kotlin-stdlib
+isBlankLine	EMPTY_BLANK	EXISTS:containsOnly	public boolean containsOnly(" \t")	1	CM:§2.1 blank line	row said PARTIAL:isBlank; containsOnly(' tab') is exact (empty true)	py: s.strip(' \t')==''
+encodingViews	ENCODE	EXISTS:getBytes/chars/toCharArray/getChars/valueOf(char[])	public byte[] getBytes(java.nio.charset.Charset)	9	Rb:bytes; Rs:as_bytes/bytes; Rs:encode_utf16; Sw:unicodeScalars/utf16/utf8; PHP:utf8_decode; MB:mb_convert_encoding; Kt:concatToString/toCharArray; NET:ToCharArray/CopyTo; Cpp:copy	PHP utf8_decode replaces with '?'	py: s.encode('utf-8')
+utf8Length	ENCODE	PARTIAL:length: UTF-16 units	public int utf8Length() / public static int utf8Length(int codePoint)	5	Rb:bytesize; PHP:strlen; Rs:len; Rc:len_utf8/len_utf16; U8:RuneLen	Go -1 for invalid	py: len(s.encode('utf-8'))
+hexCodec	ENCODE	NEW	(not on String: java.util.HexFormat) toHex() / fromHex()	5	PHP:bin2hex; PHP:hex2bin; Kt:hexToByteArray...; B64:§8 base16 encode; B64:§8 base16 decode	PHP lowercase vs RFC uppercase	py: bytes.hex / base64.b16encode
+getBytesPolicy	ENCODE	PARTIAL:getBytes: always substitutes; no range/length query	public byte[] getBytes(java.nio.charset.Charset cs, java.nio.charset.CodingErrorAction onError) (+ encodedLength)	4	Py:str.encode; Rb:encode; Kt:encodeToByteArray; SF:data(using:)/cString/lengthOfBytes	Py xmlcharrefreplace/backslashreplace handlers; Ruby xml:/newline:	py: 'é'.encode('ascii','xmlcharrefreplace')
+toWellFormed	ENCODE	NEW	public String toWellFormed() / toWellFormed(String replacement)	4	JS:toWellFormed; Go:ToValidUTF8; Rb:scrub; MB:mb_scrub	JS per lone surrogate U+FFFD; Go one replacement per invalid run; mb_scrub '?'	node: 'ab\ud800'.toWellFormed()
+decodeStrict	ENCODE	PARTIAL:String(byte[],Charset): replaces malformed	public static java.util.Optional<String> decodeUtf8Strict(byte[] bytes)	3	Rs:from_utf8; Kt:decodeToString(throwOnInvalid); Sw:decodeCString	Swift NUL-terminated + repair flag	rustc: std::str::from_utf8
+legacyCharsetTools	ENCODE	NEW	(not proposed)	3	PHP:convert_cyr_string; MB:mb_detect_encoding; MB:mb_convert_kana	convert_kana is NORMALIZE width conversion; could map to NFKC subset	php
+decodeCharset	ENCODE	EXISTS:String(byte[],Charset)	new String(byte[], Charset)	2	RS:from_utf8_lossy; PHP:utf8_encode	replacement granularity per maximal subpart	rustc String::from_utf8_lossy
+base64Codec	ENCODE	NEW	(not on String: java.util.Base64) encodeBase64(byte[]) / decodeBase64()	2	B64:§4 encode; B64:§4 decode	strict alphabet/padding	py: base64.b64decode(s,validate=True)
+base64UrlCodec	ENCODE	NEW	(not on String: java.util.Base64.getUrlEncoder)	2	B64:§5 encode; B64:§5 decode	optional padding	py: base64.urlsafe_b64encode
+base32Codec	ENCODE	NEW	(not on String: base-N codec) encodeBase32/decodeBase32	2	B64:§6 encode; B64:§6 decode		py: base64.b32encode
+base32HexCodec	ENCODE	NEW	(not on String: base-N codec) encodeBase32Hex/decodeBase32Hex	2	B64:§7 encode; B64:§7 decode		py: base64.b32hexencode
+uuCodec	ENCODE	NEW	(not on String) uuencode/uudecode	2	PHP:convert_uuencode; PHP:convert_uudecode		py: binascii.b2a_uu
+quotedPrintable	ENCODE	NEW	(not on String) quotedPrintableEncode/Decode	2	PHP:quoted_printable_encode; PHP:quoted_printable_decode		py: quopri
+mimeHeader	ENCODE	NEW	(not on String: mail) encodeMimeHeader/decodeMimeHeader	2	MB:mb_encode_mimeheader; MB:mb_decode_mimeheader		py: email.header
+percentEncode	ENCODE	NEW	public String percentEncode(String safeChars)	2	URI:§2.1/2.3/2.5; SF:addingPercentEncoding	URLEncoder is form encoding (space '+')	py: urllib.parse.quote(s,safe='')
+percentDecode	ENCODE	NEW	public java.util.Optional<String> percentDecode()	2	URI:§2.1/2.4 decode; SF:removingPercentEncoding	stray '%' malformed; URLDecoder maps '+'	py: urllib.parse.unquote(s,errors='strict')
+decodeUtf16Strict	ENCODE	PARTIAL:String(char[]): accepts unpaired	public static java.util.Optional<String> decodeUtf16Strict(char[] units)	1	RS:from_utf16/lossy/le/be		rustc
+encodeRune	ENCODE	PARTIAL:Character.toChars+getBytes: no RuneError	public static byte[] encodeUtf8(int codePoint)	1	U8:AppendRune/EncodeRune		go: utf8.AppendRune
+rot13	ENCODE	NEW	public String rot13()	1	PHP:str_rot13		py: codecs.encode(s,'rot13')
+jsonPointerToUriFragment	ENCODE	NEW	public String toUriFragment()	1	R6901:§6		py: '#'+urllib.parse.quote(s,safe="/!$&'()*+,;=:@?")
+unpack	ENCODE	NEW	(not on String: binary codec) unpack(String template)	1	Rb:unpack/unpack1		spec: Ruby doc
+relabelEncoding	ENCODE	NEW	(not proposed: Java strings carry no byte encoding)	1	Rb:force_encoding/b		spec: Ruby doc
+canEncode	ENCODE	NEW	public boolean canEncode(java.nio.charset.Charset cs)	1	SF:canBeConverted(to:)		java: cs.newEncoder().canEncode(s)
+goQuote	ESCAPE	NEW	public String quote() / quoteToAscii() / quoteToGraphic() / static quoteChar(int)	4	SV:Quote; SV:QuoteToASCII; SV:QuoteToGraphic; SV:QuoteRune*	escape set by IsPrint/IsGraphic/ASCII	go: strconv.Quote
+rustEscapes	ESCAPE	NEW	public String escapeDefault() / escapeUnicode() / escapeDebug()	3	Rs:escape_default; Rs:escape_unicode; Rs:escape_debug	three different rules	rustc: s.escape_default().to_string()
+escapeHtmlMinimal	ESCAPE	NEW	public String escapeHtml()	2	Lo:_.escape; PHP:htmlspecialchars	apostrophe &#39; vs &#039;/&apos;; PHP flags/double_encode	py: html.escape(s)
+unescapeHtmlMinimal	ESCAPE	NEW	public String unescapeHtml()	2	Lo:_.unescape; PHP:htmlspecialchars_decode		php: htmlspecialchars_decode('&lt;p&gt;')
+escapeHtml4	ESCAPE	NEW	public String escapeHtml4()	2	PHP:htmlentities; PHP:get_html_translation_table	table accessor belongs in an entity-table class	php: htmlentities('é')=='&eacute;'
+escapeNumericCharRefs	ESCAPE	NEW	public String escapeXmlNonAscii() / encodeNumericEntities(int[] map, boolean hex)	2	XML:[66] CharRef; MB:mb_encode_numericentity	PHP map ranges + offset	py: s.encode('ascii','xmlcharrefreplace').decode()
+rubyDump	ESCAPE	NEW	public String dump() / undump()	2	Rb:dump; Rb:undump	undump vs translateEscapes lacks x/u escapes and quotes	spec: Ruby doc
+yamlDoubleQuoted	ESCAPE	PARTIAL:translateEscapes: lacks YAML escapes	public String escapeYaml() / unescapeYaml()	2	YAML:§7.3.1 escape; YAML:§5.7 unescape	PyYAML is 1.1 (no slash escape)	ruamel.yaml 1.2
+yamlSingleQuoted	ESCAPE	PARTIAL:replace: no folding	public String quoteYamlSingle() / unquoteYamlSingle()	2	YAML:§7.3.2 escape; YAML:§7.3.2 unescape	line folding	ruamel.yaml
+tomlBasic	ESCAPE	PARTIAL:translateEscapes: no u/U, accepts octal	public String escapeToml() / unescapeToml()	2	TOML:basic escape; TOML:basic unescape		py: tomllib.loads('k = "'+s+'"')
+propertiesEscape	ESCAPE	PARTIAL:translateEscapes: different escape set	public String escapeProperties(boolean key) / unescapeProperties()	2	PROP:store escaping; PROP:load escapes		java.util.Properties load/store
+markdownEscape	ESCAPE	NEW	public String escapeMarkdown() / unescapeMarkdown()	2	CM:§2.4 unescape; CM:§2.4 inverse		CommonMark spec.json
+sqlLiteral	ESCAPE	NEW	public String quoteSqlLiteral() / unquoteSqlLiteral()	2	SQL:'...' with '' doubling; SQL:string constant parsing	adjacent-literal concat needs newline	py sqlite3 quote(?)
+cEscapes	ESCAPE	PARTIAL:translateEscapes: lacks ? a v x u U	public String escapeC() / unescapeC()	2	C23:§6.4.4.5 unescape; C23:§6.4.5p4 escape	greedy hex escapes	gcc/clang printf round trip
+jsonPointerToken	ESCAPE	PARTIAL:replace: two chained calls, no stray-tilde check	public String escapeJsonPointer() / unescapeJsonPointer()	2	R6901:§3 escape; R6901:§4 decode	decode order ~1 then ~0	py: s.replace('~','~0').replace('/','~1')
+unescapeHtml4	ESCAPE	NEW	public String unescapeHtml4()	1	PHP:html_entity_decode	HTML4 table	php: html_entity_decode('&eacute;')
+unescapeHtml5	ESCAPE	NEW	public String unescapeHtml(boolean inAttribute)	1	HTML:§13.2.5.77-84	legacy names, 0x80-0x9F remap, attribute rule	py: html.unescape(s)
+escapeHtmlText	ESCAPE	NEW	public String escapeHtmlText()	1	HTML:§13.3 text mode	& U+00A0 < > only	browser textContent/innerHTML
+escapeHtmlAttribute	ESCAPE	NEW	public String escapeHtmlAttribute()	1	HTML:§13.3 attribute mode	adds &quot;, not apostrophe	browser setAttribute/outerHTML
+escapeXmlText	ESCAPE	NEW	public String escapeXml()	1	XML:§2.4 CharData	commons escapeXml10 also escapes quotes	py: xml.sax.saxutils.escape
+escapeXmlAttribute	ESCAPE	NEW	public String escapeXmlAttribute()	1	XML:[10] AttValue	TAB LF CR as char refs	py: xml.sax.saxutils.quoteattr
+unescapeXml	ESCAPE	NEW	public String unescapeXml()	1	XML:§4.6 + [66] CharRef	reject refs to non-Char	dotnet XmlReader; commons-text unescapeXml
+decodeNumericCharRefs	ESCAPE	NEW	public String decodeNumericEntities(int[] map)	1	MB:mb_decode_numericentity		php
+escapeRegexLodash	ESCAPE	NEW	public String escapeRegex()	1	Lo:_.escapeRegExp	includes {}|; Pattern.quote exists outside String	node lodash
+quoteMeta	ESCAPE	NEW	public String quoteMeta()	1	PHP:quotemeta	set . backslash + * ? [ ^ ] $ ( ) differs from lodash	php: quotemeta('1+1=2')
+addSlashes	ESCAPE	NEW	public String addSlashes()	1	PHP:addslashes		php
+stripSlashes	ESCAPE	NEW	public String stripSlashes()	1	PHP:stripslashes		php
+addCSlashes	ESCAPE	NEW	public String addCSlashes(String charList)	1	PHP:addcslashes		php manual (php not installed)
+stripCSlashes	ESCAPE	PARTIAL:translateEscapes: no hex, a, v	public String stripCSlashes()	1	PHP:stripcslashes		php
+nl2br	ESCAPE	NEW	public String nl2br(boolean xhtml)	1	PHP:nl2br		php
+stripTags	ESCAPE	NEW	public String stripTags(String... allowedTags)	1	PHP:strip_tags	not an XSS defence	php
+rubyInspect	ESCAPE	NEW	public String inspect()	1	Rb:inspect	keeps printable non-ASCII (dump escapes it)	spec: Ruby doc
+goUnquote	ESCAPE	PARTIAL:translateEscapes: no quotes, no error, no u escapes	public java.util.Optional<String> unquote()	1	SV:Unquote		go: strconv.Unquote
+translateEscapes	ESCAPE	EXISTS:translateEscapes	public String translateEscapes()	1	JLS:§3.10.7		javac
+escapeJava	ESCAPE	NEW	public String escapeJava()	1	JLS:§3.10.5/§3.10.4 inverse	commons escapes non-ASCII as u-escapes	round trip with translateEscapes
+translateUnicodeEscapes	ESCAPE	NEW	public String translateUnicodeEscapes()	1	JLS:§3.3	even-backslash eligibility	javac probe
+toUnicodeEscapes	ESCAPE	NEW	public String toUnicodeEscapes()	1	JLS:§3.1/§3.3 inverse		javac round trip
+escapeJson	ESCAPE	NEW	public String escapeJson()	1	JSON:§7 escape	'/' optional; ensure_ascii option	py: json.dumps(s,ensure_ascii=False)[1:-1]
+unescapeJson	ESCAPE	PARTIAL:translateEscapes: no slash/u escapes, accepts octal/s	public String unescapeJson()	1	JSON:§7 decode	lone surrogate escapes	py: json.loads('"'+s+'"')
+escapeCsv	ESCAPE	NEW	public String escapeCsv()	1	CSV:§2 rules 6-7		commons-text escapeCsv; py csv QUOTE_MINIMAL
+unescapeCsv	ESCAPE	NEW	public String unescapeCsv()	1	CSV:§2 rule 7		py: next(csv.reader([s]))[0]
+tomlMultilineBasic	ESCAPE	NEW	public String unescapeTomlMultiline()	1	TOML:multi-line basic	line-ending backslash	py: tomllib
+markdownCharRefs	ESCAPE	NEW	public String decodeMarkdownReferences()	1	CM:§2.5	semicolon required; HTML5 names	CommonMark spec.json
+shellQuoteSingle	ESCAPE	NEW	public String quoteShell()	1	SH:§2.2.2		py: shlex.quote
+shellQuoteDouble	ESCAPE	NEW	public String quoteShellDouble()	1	SH:§2.2.3		sh -c printf
+shellEscapeBackslash	ESCAPE	NEW	public String escapeShell()	1	SH:§2.2.1	newline needs quotes	sh -c printf
+shellDollarQuote	ESCAPE	PARTIAL:translateEscapes: lacks a e v cX xHH	public String decodeDollarQuote()	1	SH:§2.2.4	byte values	bash printf
+sqlIdentifierQuote	ESCAPE	NEW	public String quoteSqlIdentifier()	1	SQL:delimited identifier		PostgreSQL quote_ident
+sqlUnicodeEscapes	ESCAPE	NEW	public String decodeSqlUnicodeEscapes(char escape)	1	PG:§4.1.2.3 U&		PostgreSQL
+escapeLike	ESCAPE	NEW	public String escapeLike(char escape)	1	SQL:LIKE ESCAPE		py sqlite3 round trip
+formattedPrintf	FORMAT	EXISTS:formatted/format	public String formatted(Object... args)	6	PHP:sprintf; PHP:vsprintf; Kt:format; Sw:localizedStringWithFormat; C:strfromf/strfromd; Cpp:std::to_string	PHP custom pad and %b binary; Cpp to_string %f before C++26	py: '%05.1f' % 9.96
+pyTemplate	FORMAT	NEW	public String substitute(java.util.Map<String,?>) / safeSubstitute / isValidTemplate() / templateIdentifiers()	4	PyStr:Template.substitute; PyStr:Template.safe_substitute; PyStr:Template.is_valid; PyStr:Template.get_identifiers	commons-text StringSubstitutor uses ${}	py: string.Template
+formatFields	FORMAT	PARTIAL:formatted: printf specifiers, not {} fields	public String formatFields(Object... args) / formatMap(Map)	3	Py:str.format; Py:str.format_map; NET:String.Format	format-spec mini-languages differ; MessageFormat exists outside	py: '{0}'.format(3)
+wrap	FORMAT	NEW	public String wrap(int wrapLength, String newLineStr, boolean wrapLongWords) / List<String> wrapLines(int)	3	PyTW:fill; PyTW:wrap; PHP:wordwrap	textwrap options (replace_whitespace, drop_whitespace)	py: textwrap.fill
+indentPrefix	FORMAT	PARTIAL:indent(int): spaces only, normalizes, indents blank lines	public String indent(String prefix, java.util.function.Predicate<String> predicate)	3	PyTW:indent; Kt:prependIndent; Ra:indent	blank-line handling; Rails infers indent char	py: textwrap.indent
+ordinalSuffix	FORMAT	NEW	(not on String: number formatting) static ordinalSuffix(long) / ordinalize(long)	2	Ra:Inflector.ordinal; Ra:Inflector.ordinalize	I18n-dependent	spec: ActiveSupport docs
+formattedNamed	FORMAT	PARTIAL:formatted: no %(name)/%{name}	public String formatted(java.util.Map<String,?> named)	2	Py:str % mapping; Rb:%	Py %(k)s vs Ruby %{k}/%<k>s	py: '%(a)s' % {'a':1}
+truncate	FORMAT	NEW	public String truncate(int length, String omission, String separator)	2	Lo:_.truncate; Ra:truncate	commons truncate(int) has no omission; abbreviate is closest	node lodash _.truncate
+dedent	FORMAT	PARTIAL:stripIndent: counts last line, strips trailing ws, normalizes terminators	public String dedent()	2	PyTW:dedent; Ra:strip_heredoc		py: textwrap.dedent
+replaceIndent	FORMAT	NEW	public String replaceIndent(String newIndent) / replaceIndentByMargin(String,String)	2	Kt:replaceIndent; Kt:replaceIndentByMargin		JVM kotlin-stdlib
+quoteXmlLiteral	FORMAT	NEW	public java.util.Optional<String> quoteXmlLiteral()	1	XML:[11] SystemLiteral		spec productions [9]-[11]
+lodashTemplate	FORMAT	NEW	(not proposed: code-evaluating template)	1	Lo:_.template	insecure	node lodash
+shorten	FORMAT	NEW	public String shorten(int width, String placeholder)	1	PyTW:shorten		py: textwrap.shorten
+truncateWords	FORMAT	NEW	public String truncateWords(int count, String omission)	1	Ra:truncate_words		spec: ActiveSupport
+truncateUtf8Bytes	FORMAT	NEW	public String truncateUtf8Bytes(int maxBytes, String omission)	1	Ra:truncate_bytes	grapheme-safe	spec: ActiveSupport
+abbreviateWidth	FORMAT	NEW	public String abbreviateWidth(int start, int width, String trimMarker)	1	MB:mb_strimwidth		php
+displayWidth	FORMAT	NEW	public int displayWidth()	1	MB:mb_strwidth	UAX11 ranges	php; py wcwidth
+trimIndent	FORMAT	PARTIAL:stripIndent: keeps blank first/last lines	public String trimIndent()	1	Kt:trimIndent		JVM kotlin-stdlib
+trimMargin	FORMAT	NEW	public String trimMargin(String marginPrefix)	1	Kt:trimMargin		JVM kotlin-stdlib
+chunkSplit	FORMAT	NEW	public String chunkSplit(int length, String separator)	1	PHP:chunk_split	separator also after last chunk	php
+formatNumber	FORMAT	NEW	(not on String: java.text.NumberFormat) formatNumber(double,int,String,String)	1	PHP:number_format		php
+formatRadix	FORMAT	EXISTS:Long.toString(long,int) (outside String)	Long.toString(i, radix)	1	SV:FormatInt/FormatUint/Itoa		go: strconv.FormatInt
+parseLeadingLong	LEX	NEW	public java.util.OptionalLong parseLeadingLong(int radix)	7	Lo:_.parseInt; Rb:to_i; Rb:hex; Rb:oct; Cpp:stoi/stol/stoll/stoul; C:strtol...; C:atoi/atol/atoll/atof	failure: Ruby 0, atoi undefined/0, Cpp throws; whitespace skip; base 0 prefixes	py-ctypes msvcrt.strtol
+tomlLexical	LEX	NEW	isTomlLiteralSafe() / tomlMultilineLiteralValue() / isTomlBareKey() / splitTomlKey() / parseTomlInteger() / parseTomlFloat() / isTomlDateTime()	7	TOML:literal string; TOML:multi-line literal; TOML:bare keys; TOML:dotted keys; TOML:integer; TOML:float; TOML:date-time		py: tomllib.loads
+yamlLexical	LEX	NEW	isYamlPrintable() / isYamlPlainSafe(boolean) / yamlCoreTag() / yamlJsonTag() / leadingSpaceCount() / isYamlTagChars()	6	YAML:§5.1 c-printable; YAML:§7.3.3 plain; YAML:§10.3.2 core tags; YAML:§10.2.2 JSON tags; YAML:§6.1 indentation; YAML:§5.6 tag chars	PyYAML is 1.1	ruamel.yaml typ='safe'
+javaLexical	LEX	NEW	isJavaKeyword() / parseJavaIntegerLiteral() / parseJavaFloatLiteral() / stripJavaComments()	4	JLS:§3.9 keywords; JLS:§3.10.1 integer literals; JLS:§3.10.2 float literals; JLS:§3.7 comments		javax.lang.model.SourceVersion; javac
+parseLeadingDouble	LEX	NEW	public java.util.OptionalDouble parseLeadingDouble()	3	Rb:to_f/to_r/to_c; Cpp:stof/stod/stold; C:strtof/strtod/strtold	Ruby returns 0.0; underscores in to_r	py-ctypes msvcrt.strtod
+xsdNumericLexical	LEX	NEW	isXsdDecimal() / isXsdInteger() / parseXsdDouble()	3	XSD:§3.3.3 decimal; XSD:§3.4.13-25 integer types; XSD:§3.3.4-5 float/double	INF/NaN literals case-sensitive	dotnet XmlConvert.ToDecimal/ToInt64/ToDouble
+graphemeNav	LEX	PARTIAL:offsetByCodePoints: code points	public boolean isGraphemeBoundary(int index) / int[] graphemeRangeAt(int) / int offsetByGraphemes(int,int)	3	U29:boundary test; SF:rangeOfComposedCharacterSequence; Sw:index(_:offsetBy:)/distance	needs backward pass to safe start	ICU4J BreakIterator.getCharacterInstance
+propertiesLexical	LEX	NEW	(not on String: java.util.Properties) propertiesLogicalLines() / splitPropertiesEntry() / formatPropertiesComment()	3	PROP:logical lines; PROP:key/element split; PROP:comments		java.util.Properties load/store
+xsdTemporalLexical	LEX	NEW	(not on String: java.time) isXsdDuration() / isXsdDateTime()	2	XSD:§3.3.6 duration; XSD:§3.3.7-9 dateTime/time/date	24:00:00 allowed; differs from RFC 3339	Xerces-J
+scalarValues	LEX	PARTIAL:codePoints: lone surrogates yielded as-is	public java.util.stream.IntStream scalarValues()	2	NET:EnumerateRunes; Rc:decode_utf16	.NET replaces with U+FFFD; Rust yields Err	dotnet EnumerateRunes
+decodeCodePointWidth	LEX	PARTIAL:codePointAt/codePointBefore: no width/error	public long codePointAndWidthAt(int index) / lastCodePointAndWidth()	2	U8:DecodeRune; U8:DecodeLastRune		go: utf8.DecodeRuneInString
+goLiteralLex	LEX	NEW	public int unescapeCharAt(int index, char quote) / Optional<String> quotedPrefix()	2	SV:UnquoteChar; SV:QuotedPrefix		go: strconv
+cLexical	LEX	NEW	static concatCLiterals(String...) / spliceBackslashNewlines()	2	C23:§6.4.5p5-6 concatenation; C23:§5.1.1.2 phase 2		gcc -E / sizeof
+pyQueryAndScan	LEX	NEW	(not on String: URI/query parser) parseQueryString() ; scanf(String format)	2	PHP:parse_str; PHP:sscanf	two unrelated parsers grouped	php
+isJsonNumber	LEX	NEW	public boolean isJsonNumber()	1	JSON:§6 number		regex -?(0|[1-9][0-9]*)(\.[0-9]+)?([eE][-+]?[0-9]+)?
+lineRange	LEX	PARTIAL:lines: no index lookup	public int[] lineRange(int index)	1	SF:enumerateLines/lineRange/paragraphRange		spec: Apple doc
+codePointIndices	LEX	NEW	public java.util.stream.Stream<int[]> codePointIndices()	1	Rs:char_indices	Rust byte positions	rustc
+parseFormatFields	LEX	NEW	public java.util.List<String[]> parseFormatFields()	1	PyStr:Formatter.parse		py: list(string.Formatter().parse(s))
+classifyDelimiterRun	LEX	NEW	public boolean isLeftFlankingRun(int start, int end)	1	CM:§6.2		CommonMark spec.json
+normalize	NORMALIZE	NEW	public String normalize(java.text.Normalizer.Form form)	5	JS:normalize; Rb:unicode_normalize; NET:Normalize; SF:precomposed/decomposed*Mapping; U15:§1.2 forms	wraps java.text.Normalizer	py: unicodedata.normalize
+yamlFolding	NORMALIZE	PARTIAL:stripIndent: different indentation rule	public String foldYamlFlow() / foldYamlBlock() / yamlLiteralContent(int)	3	YAML:§6.5 flow folding; YAML:§8.1.3 folded; YAML:§8.1.2 literal		ruamel.yaml
+uriNormalize	NORMALIZE	NEW	public String normalizePercentEncoding() / removeDotSegments() / normalizeUri()	3	URI:§6.2.2.1-2; URI:§5.2.4; URI:§6.2.2-3	java.net.URI.normalize is not §5.2.4 exact	RFC 3986 §5.4 examples; py urljoin
+normalizeLineEndings	NORMALIZE	PARTIAL:stripIndent: also strips indentation	public String normalizeLineEndings()	2	XML:§2.11; YAML:§5.4		py: re.sub('\r\n?','\n',s)
+xsdWhiteSpace	NORMALIZE	PARTIAL:replace/normalizeSpace: wider set	public String whiteSpaceReplace() / whiteSpaceCollapse()	2	XSD:§4.3.6 replace; XSD:§4.3.6 collapse	collapse == XPath normalize-space	py lxml normalize-space()
+expandTabs	NORMALIZE	NEW	public String expandTabs(int tabSize)	2	Py:str.expandtabs; CM:§2.2 tabs	CM only for block structure	py: s.expandtabs(4)
+commonMarkNormalize	NORMALIZE	PARTIAL:normalizeSpace/toLowerCase: wider set, not folding	public String normalizeLinkLabel() / normalizeCodeSpan()	2	CM:§6.3 link label normalization; CM:§6.1 code spans		CommonMark spec.json
+normalizeXmlAttribute	NORMALIZE	PARTIAL:normalizeSpace: wider set	public String normalizeXmlAttribute(boolean cdata)	1	XML:§3.3.3	char refs exempt	dotnet XmlReader
+toStreamSafe	NORMALIZE	NEW	public String toStreamSafe()	1	U15:§13		UAX15-D4 over py unicodedata
+normalizeStabilized	NORMALIZE	NEW	public java.util.Optional<String> normalizeStabilized(java.text.Normalizer.Form)	1	U15:§12		py unicodedata + Cn check
+deburr	NORMALIZE	PARTIAL:stripAccents: table letters differ	public String deburr()	1	Lo:_.deburr		node lodash _.deburr
+transliterateAscii	NORMALIZE	PARTIAL:stripAccents: no letter mapping or replacement	public String transliterate(String replacement)	1	Ra:Inflector.transliterate	I18n locale rules	spec: ActiveSupport
+transliterateTransform	NORMALIZE	NEW	(not on String: ICU Transliterator) transliterate(String transformId, boolean reverse)	1	SF:applyingTransform		ICU4J Transliterator
+slugify	NORMALIZE	NEW	public String parameterize(String separator, boolean preserveCase)	1	Ra:parameterize		spec: ActiveSupport
+normalizeSpacePredicate	NORMALIZE	PARTIAL:normalizeSpace: set and U+00A0 handling	public String normalizeSpace(java.util.function.IntPredicate isSpace)	1	Ra:squish		spec: ActiveSupport
+foldOptions	NORMALIZE	NEW	public String fold(boolean caseInsensitive, boolean diacriticInsensitive, boolean widthInsensitive, java.util.Locale locale)	1	SF:folding(options:locale:)		spec: Apple doc
+textBlockValue	NORMALIZE	PARTIAL:stripIndent+translateEscapes: no opening-delimiter check	public String textBlockValue()	1	JLS:§3.10.6		javac vs s.stripIndent().translateEscapes()
+stripIndent	NORMALIZE	EXISTS:stripIndent	public String stripIndent()	1	JLS:§3.10.6 step 2		javac
+legacyNotProposed	OTHER	NEW	(not proposed)	17	Rb:crypt; PHP:crypt; PHP:hebrev; PHP:hebrevc; JS:anchor; JS:big; JS:blink; JS:bold; JS:fixed; JS:fontcolor; JS:fontsize; JS:italics; JS:link; JS:small; JS:strike; JS:sub; JS:sup	password hashing, bidi reordering (java.text.Bidi) and deprecated HTML wrappers	n/a
+iniKernel	OTHER	NEW	(not on String: config parser) iniSectionName / splitIniEntry / unquoteIniValue / isIniComment / interpolateIni / toIniBoolean / iniLogicalLines	7	INI:section header; INI:key=value; INI:quote handling; INI:comments; INI:interpolation; INI:getboolean; INI:multi-line values	no spec; Win32 vs configparser disagree (case, quotes)	py configparser; Win32 GetPrivateProfileStringW
+unicodeSecurity	OTHER	NEW	(not on String: jdk.m3 spoof/ICU SpoofChecker) confusableSkeleton() / isConfusableWith / isSingleScript / restrictionLevel / hasMixedNumberSystems / isAllowedIdentifier / hasSuspiciousCombiningMarks	7	U39:§4 skeleton; U39:§4 confusable; U39:§5.1 mixed-script; U39:§5.2 restriction level; U39:§5.3 mixed-number; U39:§3 Identifier_Status; U39:§5.4 optional detection	data-table driven (confusables.txt, IdentifierStatus.txt)	ICU4J SpoofChecker
+codePointCountAll	OTHER	PARTIAL:codePointCount(int,int): needs (0,length())	public int codePointCount()	5	Rb:length/size; MB:mb_strlen; U8:RuneCount; XSD:§4.3.1-3 length facets; JSS:§6.3.1-2 maxLength/minLength	XSD lists count items, binary counts octets; Go counts invalid bytes as 1	py: len(s)
+intern	OTHER	EXISTS:intern	public String intern()	4	Rb:-@/dedup; Rb:to_sym/intern; Kt:intern; NET:Intern/IsInterned	no non-inserting IsInterned; TIL forbids raw intern on hot paths	JVM identity
+checksumsDigests	OTHER	NEW	(not on String: java.util.zip.CRC32 / MessageDigest) crc32(), digestHex(String), byteSum(int)	4	PHP:crc32; PHP:md5; PHP:sha1; Rb:sum		java.util.zip.CRC32; py hashlib
+length	OTHER	EXISTS:length	public int length()	3	Cpp:empty/size/length; C:strlen/strnlen_s; Kt:lastIndex/indices		py: len(b)
+toString	OTHER	EXISTS:toString	public String toString()	3	JS:toString; JS:valueOf; Rb:to_s/to_str		node
+graphemeCount	OTHER	PARTIAL:codePointCount: not clusters	public int graphemeCount()	2	Sw:count; U29:cluster count		dotnet: new StringInfo(s).LengthInTextElements
+succ	OTHER	NEW	public String succ()	2	Rb:succ/next; PHP:str_increment	PHP ValueError on non-alnum; Ruby increments rightmost byte	spec: Ruby 'zz'.succ=='aaa'; php8.3
+inflectorPluralize	OTHER	NEW	(not on String: Inflector) pluralize()	1	Ra:pluralize	locale rule tables	spec: ActiveSupport docs
+inflectorSingularize	OTHER	NEW	(not on String: Inflector) singularize()	1	Ra:singularize		spec: ActiveSupport docs
+inflectorClassify	OTHER	NEW	(not on String: Inflector) classify()	1	Ra:classify		spec: ActiveSupport docs
+inflectorTableize	OTHER	NEW	(not on String: Inflector) tableize()	1	Ra:tableize		spec: ActiveSupport docs
+inflectorForeignKey	OTHER	NEW	(not on String: Inflector) foreignKey(boolean)	1	Ra:foreign_key		spec: ActiveSupport docs
+deconstantize	OTHER	NEW	(not on String) substringBeforeLast("::") with '' when absent	1	Ra:deconstantize		spec: ActiveSupport docs
+demodulize	OTHER	NEW	(not on String) substringAfterLast("::")	1	Ra:demodulize		spec: ActiveSupport docs
+partitionChars	OTHER	NEW	public java.util.Map.Entry<String,String> partitionChars(java.util.function.IntPredicate p)	1	Kt:partition(predicate)	Kt name collides with partition(String)	JVM kotlin-stdlib
+hashCode	OTHER	EXISTS:hashCode	public int hashCode()	1	Rb:hash	different algorithm	n/a
+copy	OTHER	PARTIAL:String(String) constructor	(not proposed) new String(s)	1	Go:Clone		go
+pred	OTHER	NEW	public String pred()	1	PHP:str_decrement		php8.3
+upTo	OTHER	NEW	public java.util.stream.Stream<String> upTo(String last, boolean exclusive)	1	Rb:upto		spec: Ruby doc
+shuffle	OTHER	NEW	public String shuffle(java.util.random.RandomGenerator random)	1	PHP:str_shuffle		php (property check)
+toPattern	OTHER	NEW	(not on String: Pattern.compile)	1	Kt:toRegex/toPattern		JVM
+zipChars	OTHER	NEW	(not on String: stream utility) zip(CharSequence, BiFunction)	1	Kt:zip/zipWithNext		JVM kotlin-stdlib
+singleChar	OTHER	NEW	public java.util.OptionalInt singleChar()	1	Kt:single/singleOrNull		JVM kotlin-stdlib
+overlay	REPLACE	NEW	public String overlay(String overlay, int start, int end)	7	Rb:[]=; PHP:substr_replace; Kt:replaceRange; Sw:replaceSubrange; SF:replacingCharacters(in:with:); RS:replace_range; Cpp:replace(pos,count,...)	PHP negatives from end; Kt throws if start>end, commons swaps	py: s[:a]+t+s[b:]
+removeRange	REPLACE	NEW	public String removeRange(int start, int end)	6	Kt:removeRange; NET:Remove; Sw:remove(at:)/removeSubrange; RS:remove(idx); RS:drain; Cpp:erase	.NET/Cpp (start,count); Kt IntRange inclusive	py: s[:a]+s[b:]
+replaceAllLiteral	REPLACE	EXISTS:replace(CharSequence,CharSequence)	public String replace(CharSequence target, CharSequence replacement)	4	JS:replaceAll; Go:ReplaceAll; Rs:replace; CM:§2.3 NUL replacement	JS expands $-patterns; Rust char-slice/closure patterns	node: 'abc'.replaceAll('','-')==='-a-b-c-'
+replaceMax	REPLACE	PARTIAL:replace: no max	public String replace(String searchString, String replacement, int max)	4	Py:str.replace; SP:replacing(maxReplacements:); Rs:replacen; Go:Replace(n)	Go n<0 unlimited; Swift subrange	py: 'aaa'.replace('a','b',2)=='bba'
+replaceIgnoreCase	REPLACE	NEW	public String replaceIgnoreCase(String searchString, String replacement)	4	PHP:str_ireplace; Kt:replace(ignoreCase); NET:Replace(StringComparison); SF:replacingOccurrences(options:)	PHP array forms; Foundation regex/anchored options	php: str_ireplace('L','x','Hello')=='Hexxo'
+replaceWithFunction	REPLACE	PARTIAL:replaceAll/replaceFirst: no Function form (Matcher has one)	public String replaceAll(String regex, java.util.function.Function<java.util.regex.MatchResult,String> replacer) (+ replaceFirst)	4	Rb:sub/sub!; Rb:gsub/gsub!; Kt:replace(regex,transform); MB:mb_ereg_replace_callback	Ruby literal String pattern and Hash replacement	py: re.sub(p,f,s)
+filterChars	REPLACE	NEW	public String filter(java.util.function.IntPredicate keep) / filterNot	4	Kt:filter/filterNot/filterIndexed; RS:retain; Sw:removeAll(where:); Cpp:std::erase/erase_if	Cpp returns count	py: ''.join(c for c in s if p(c))
+replaceBeforeAfter	REPLACE	NEW	public String replaceBefore(String,String) / replaceAfter / replaceBeforeLast / replaceAfterLast	4	Kt:replaceBefore; Kt:replaceAfter; Kt:replaceBeforeLast; Kt:replaceAfterLast		JVM kotlin-stdlib
+replaceOnce	REPLACE	PARTIAL:replaceFirst: regex	public String replaceOnce(String searchString, String replacement)	3	JS:replace; Lo:_.replace; Kt:replaceFirst(literal)	JS $-patterns; Kt ignoreCase	node: 'aXbX'.replace('X','Y')
+translateCodePoints	REPLACE	NEW	public String translate(java.util.function.IntFunction<String> table) (+ static makeTrans)	3	Py:str.translate; Py:str.maketrans; Go:Map	Py None deletes / LookupError keeps; Go negative drops	py: 'abc'.translate(str.maketrans('ab','xy','c'))=='xy'
+replaceRegex	REPLACE	EXISTS:replaceAll(String,String)	public String replaceAll(String regex, String replacement)	2	MB:mb_ereg_replace; MB:mb_eregi_replace	Oniguruma dialect; (?i)	php
+removeAll	REPLACE	NEW	public String remove(String remove)	2	Ra:remove; RS:remove_matches	Rails varargs + Regexp	py: s.replace(t,'')
+utf8ByteEdit	REPLACE	NEW	(not on String: byte[] utility) withUtf8Byte / utf8Splice	2	Rb:setbyte; Rb:bytesplice		spec: Ruby doc
+replaceLast	REPLACE	NEW	public String replaceLast(String searchString, String replacement)	1	RS:replace_first/replace_last	replace_first half maps to replaceOnce	rustc nightly
+replaceEachOnePass	REPLACE	NEW	public String replaceEach(String[] searchList, String[] replacementList)	1	Go:NewReplacer	argument-order priority	go: strings.NewReplacer
+replaceEachRepeatedly	REPLACE	PARTIAL:replace: single pair	public String replaceEachRepeatedly(String[] searchList, String[] replacementList)	1	PHP:str_replace	sequential cascade	php: str_replace(['A','B'],['B','C'],'A')=='C'
+replacePairsLongest	REPLACE	NEW	public String replacePairs(java.util.Map<String,String> pairs)	1	PHP:strtr(pairs)	longest key first, single pass	php manual example
+replaceChars	REPLACE	NEW	public String replaceChars(String searchChars, String replaceChars)	1	PHP:strtr(from,to)	PHP ignores extra chars; commons deletes when replaceChars shorter	php: strtr('abc','ab','xyz')=='xyc'
+trSets	REPLACE	NEW	public String tr(String fromSet, String toSet)	1	Rb:tr	ranges, ^ negation, pad with last	spec: Ruby doc
+trSqueeze	REPLACE	NEW	public String trSqueeze(String fromSet, String toSet)	1	Rb:tr_s		spec: Ruby doc
+squeeze	REPLACE	NEW	public String squeeze(String... set)	1	Rb:squeeze		spec: Ruby doc
+deleteCharSet	REPLACE	NEW	public String delete(String... set)	1	Rb:delete	set intersection; commons-lang deleteWhitespace only	spec: Ruby doc
+replaceFirstChar	REPLACE	NEW	public String replaceFirstChar(java.util.function.IntFunction<CharSequence> transform)	1	Kt:replaceFirstChar		JVM kotlin-stdlib
+replaceLineEndings	REPLACE	NEW	public String replaceLineEndings(String replacement)	1	NET:ReplaceLineEndings	CR LF CRLF NEL LS FF PS	dotnet: s.ReplaceLineEndings("\n")
+replaceAnyChar	REPLACE	NEW	public String replaceAny(String chars, char replacement)	1	NM:Replace/ReplaceAny/ReplaceAnyExcept		dotnet
+indexOf	SEARCH	EXISTS:indexOf/indexOfIgnoreCase	public int indexOf(String str, int fromIndex)	7	JS:indexOf; Cpp:find; C:strstr; C:strchr/strrchr/memchr; Go:Index/IndexByte/IndexRune; Kt:indexOf(ignoreCase); SP:contains/firstRange(of:)	Go/C byte indexes; npos/NULL vs -1	node: 'hello world'.indexOf('',13)===11
+contains	SEARCH	EXISTS:contains/containsIgnoreCase	public boolean contains(CharSequence s)	6	Rb:include?; PHP:str_contains; Go:Contains/ContainsRune; Cpp:contains; Kt:contains(ignoreCase); SF:contains(StringProtocol)	Foundation contains('') is false	py: t in s
+indexOfPredicate	SEARCH	NEW	public int indexOfFirst(java.util.function.IntPredicate p) / indexOfLast(IntPredicate)	6	Kt:indexOfFirst/indexOfLast; Sw:firstIndex/lastIndex(where:); Go:IndexFunc/LastIndexFunc; Rs:find(pat); Rs:rfind(pat); SF:rangeOfCharacter(from:)	Rust/Go byte indexes; Swift String.Index	go: strings.IndexFunc
+countSubstring	SEARCH	PARTIAL:countMatches: no window; empty-sub rule	public int countMatches(CharSequence sub, int start, int end)	5	Py:str.count; PHP:substr_count; MB:mb_substr_count; NM:Count; Go:Count	empty sub: Py len+1, Go runes+1, PHP ValueError, commons 0; Py slice negatives	py: 'aaaa'.count('aa')==2; ' a'.count('')==3
+indexOfIgnoreCaseUnits	SEARCH	EXISTS:indexOfIgnoreCase/lastIndexOfIgnoreCase	public int indexOfIgnoreCase(CharSequence, int)	4	PHP:stripos; MB:mb_stripos; PHP:strripos; MB:mb_strripos	false vs -1; byte/code-point units; negative offsets	php: stripos('ABC','b')==1
+lastIndexOfAnyChar	SEARCH	PARTIAL:lastIndexOfAny: substring form only	public int lastIndexOfAny(int fromIndex, char... chars)	4	Kt:lastIndexOfAny; NET:LastIndexOfAny; Go:LastIndexAny; Cpp:find_last_of		go: strings.LastIndexAny
+indexOfFromEnd	SEARCH	PARTIAL:indexOf: negative fromIndex clamps to 0	public int indexOfFromEnd(String str, int offset)	3	Rb:index; PHP:strpos; MB:mb_strpos	Ruby nil out of range; PHP ValueError offset>len; units byte/char	spec: Ruby 'foo'.index('o',-4)==nil; php strpos
+lastIndexOfFromEnd	SEARCH	PARTIAL:lastIndexOf: no negative-from-end offset	public int lastIndexOfFromEnd(String str, int offset)	3	Rb:rindex; PHP:strrpos; MB:mb_strrpos	PHP negative offset searches left of offset	php: strrpos('0123456789a123456789b','7')==17
+lastIndexOf	SEARCH	EXISTS:lastIndexOf/lastIndexOfIgnoreCase	public int lastIndexOf(String str, int fromIndex)	3	Cpp:rfind; Go:LastIndex/LastIndexByte; Kt:lastIndexOf(ignoreCase)		py: b.rfind(t)
+containsPattern	SEARCH	PARTIAL:matches: anchored to whole string	public boolean containsPattern(String regex)	3	Rb:match?; Kt:contains(regex); JSS:§6.3.3 pattern	JSON Schema uses ECMA-262 dialect	node: new RegExp(p,'u').test(s)
+indexOfAnyFrom	SEARCH	PARTIAL:indexOfAny: no fromIndex/window/ignoreCase	public int indexOfAny(int fromIndex, char... chars)	3	Kt:indexOfAny; NET:IndexOfAny(startIndex,count); Cpp:find_first_of	Kt strings overload takes first list element matching at position	dotnet: s.IndexOfAny(cs,i,n)
+countAnyChar	SEARCH	NEW	public int countAny(char... chars)	2	Rb:count; NM:CountAny	Ruby selector syntax (ranges, ^, intersection of sets)	dotnet: s.AsSpan().CountAny("ae")
+findSlice	SEARCH	PARTIAL:indexOf: throws on bad range; no negative-from-end; empty-sub past end	public int find(String sub, int start, int end)	2	Py:str.find; Py:str.rfind	rfind returns highest index	py: ('abc'.find('',3),'abc'.find('',4))==(3,-1)
+indexOfOrThrow	SEARCH	PARTIAL:indexOf/lastIndexOf: -1 instead of exception	public int indexOfOrThrow(String sub, int start, int end) / lastIndexOfOrThrow	2	Py:str.index; Py:str.rindex		py: 'abc'.index('z') raises ValueError
+indexOfWindowIgnoreCase	SEARCH	PARTIAL:indexOf(str,begin,end): no ignoreCase	public int indexOf(String str, int beginIndex, int endIndex, boolean ignoreCase)	2	NET:IndexOf(startIndex,count,cmp); SF:range(of:options:range:locale:)	.NET count not end; options backwards/anchored/regex	dotnet: s.IndexOf(v,i,n,StringComparison.OrdinalIgnoreCase)
+containsCollated	SEARCH	PARTIAL:containsIgnoreCase: not locale-aware	public boolean contains(CharSequence s, java.text.Collator collator)	2	NET:Contains(StringComparison); SF:localizedCaseInsensitiveContains/localizedStandardContains	Foundation empty -> false	dotnet: s.Contains(v,StringComparison.CurrentCultureIgnoreCase)
+matchFirst	SEARCH	PARTIAL:matches: boolean whole-string	public java.util.Optional<java.util.regex.MatchResult> match(String regex, int offset)	2	JS:match; Rb:match	JS global flag returns all strings	node: 'abc'.match(/z/)===null
+matchAll	SEARCH	NEW	public java.util.stream.Stream<java.util.regex.MatchResult> matchAll(String regex)	2	JS:matchAll; Rb:scan	Ruby returns strings/group arrays	py: list(re.finditer(p,s))
+searchRegex	SEARCH	NEW	public int search(String regex)	2	JS:search; Rb:=~	Ruby nil	node: 'abc'.search('c')===2
+containsAny	SEARCH	EXISTS:containsAny	public boolean containsAny(CharSequence...)	2	NM:ContainsAny; Go:ContainsAny		go: strings.ContainsAny
+indexOfAnyChars	SEARCH	EXISTS:indexOfAny	public int indexOfAny(char... chars)	2	Go:IndexAny; C:strpbrk		go: strings.IndexAny
+lastIndexOfAnyBut	SEARCH	NEW	public int lastIndexOfAnyBut(char... chars)	2	Cpp:find_last_not_of; NM:IndexOfAnyExcept/LastIndexOfAnyExcept		dotnet: s.AsSpan().LastIndexOfAnyExcept(' ')
+findFirstChar	SEARCH	NEW	public java.util.OptionalInt findFirst(java.util.function.IntPredicate p) / findLast	2	Kt:find/findLast; Sw:first/last(where:)		JVM kotlin-stdlib
+indicesOf	SEARCH	NEW	public int[] indicesOf(String sub)	2	SP:ranges(of:); Rs:match_indices/rmatch_indices	non-overlapping	py: [m.start() for m in re.finditer(re.escape(t),s)]
+spanInSet	SEARCH	PARTIAL:indexOfAnyBut: -1 instead of length	public int span(String chars)	2	PHP:strspn; C:strspn	PHP offset/length window	py-ctypes msvcrt.strspn
+spanNotInSet	SEARCH	PARTIAL:indexOfAny: -1 instead of length	public int complementSpan(String chars)	2	PHP:strcspn; C:strcspn		py-ctypes msvcrt.strcspn
+utf8IndexOf	SEARCH	NEW	(not on String: UTF-8 byte view) utf8IndexOf/utf8LastIndexOf(String,int)	2	Rb:byteindex; Rb:byterindex		spec: Ruby doc
+countPredicate	SEARCH	NEW	public int count(java.util.function.IntPredicate p)	1	Kt:count(predicate)		JVM kotlin-stdlib
+byteFrequencies	SEARCH	NEW	(not on String: byte[] utility) int[] byteFrequencies()	1	PHP:count_chars	modes 0-4	php manual
+lastIndexOfCountWindow	SEARCH	PARTIAL:lastIndexOf: no backward count window	public int lastIndexOf(String str, int fromIndex, int count, boolean ignoreCase)	1	NET:LastIndexOf(startIndex,count,cmp)		dotnet: s.LastIndexOf(v,i,n)
+lastIndexOfClamped	SEARCH	PARTIAL:lastIndexOf: negative fromIndex -> -1 (JS clamps to 0)	public int lastIndexOfClamped(String str, int position)	1	JS:lastIndexOf		node: 'abc'.lastIndexOf('a',-5)===0
+containsFrom	SEARCH	PARTIAL:contains: no position	public boolean contains(CharSequence s, int fromIndex)	1	JS:includes	empty search true past end	node: 'abc'.includes('',99)===true
+notContains	SEARCH	NEW	public boolean excludes(CharSequence s)	1	Ra:exclude?	trivial !contains; not planned	py: t not in s
+indexOfAnyButFrom	SEARCH	PARTIAL:indexOfAnyBut: no fromIndex	public int indexOfAnyBut(int fromIndex, char... chars)	1	Cpp:find_first_not_of		py scan
+indexOfAnyInRange	SEARCH	NEW	public int indexOfAnyInRange(char lowInclusive, char highInclusive)	1	NM:IndexOfAnyInRange/ExceptInRange/LastIndexOfAny(Except)InRange		dotnet
+indexOfWhitespace	SEARCH	PARTIAL:containsWhitespace: no index form	public int indexOfWhitespace()	1	NM:IndexOfAnyWhiteSpace etc (.NET 11)	undocumented prerelease	dotnet 11 preview
+findAnyOf	SEARCH	NEW	public java.util.Optional<java.util.Map.Entry<Integer,String>> findAnyOf(java.util.Collection<String> strings, int fromIndex, boolean ignoreCase)	1	Kt:findAnyOf/findLastAnyOf		JVM kotlin-stdlib
+findAll	SEARCH	NEW	public java.util.List<String> findAll(java.util.function.IntPredicate p)	1	Rs:matches/rmatches	Rust pattern may be &str	rustc: s.matches(char::is_numeric)
+substringFromAny	SEARCH	NEW	public String substringFromAny(String chars)	1	PHP:strpbrk	false when absent	php manual
+sqlLike	SEARCH	NEW	public boolean like(String pattern, char escape)	1	SQL:LIKE	PostgreSQL default escape backslash	py sqlite3 LIKE with case_sensitive_like=ON
+left	SLICE	NEW	public String left(int len)	6	Ra:first; Kt:take; Rb:chr; C:strdup/strndup; Sw:prefix(_:)/suffix(_:); RS:truncate	negative: Rails/Kt throw; Rust panics off char boundary; Swift suffix(n) maps to right	py: s[:n]
+substrStartLength	SLICE	NEW	public String substr(int start, int length)	4	JS:substr; PHP:substr; MB:mb_substr; Rb:[]/slice/slice!	PHP negative length omits from end, JS length<=0 -> ''; Ruby nil for start>len and regex/range forms	py: php-like model; node: 'abcdef'.substr(-2)
+substring	SLICE	EXISTS:substring/subSequence	public String substring(int,int)	4	Kt:substring/subSequence; Sw:prefix(upTo:)/suffix(from:); SF:substring(from:/to:/with:); Cpp:subview	Cpp subview is non-owning	py: s[a:b]
+codePointAt	SLICE	EXISTS:codePointAt/codePointBefore/codePointCount/offsetByCodePoints	public int codePointAt(int)	4	JS:codePointAt; Rb:ord; MB:mb_ord; Kt:codePointAt/Before/Count/offsetByCodePoints	JS undefined out of range	node: '\u{1F600}'.codePointAt(1)===56832
+substringBeforeAfter	SLICE	NEW	public String substringBefore(String) / substringAfter(String) / substringBeforeLast(String) / substringAfterLast(String)	4	Kt:substringBefore; Kt:substringAfter; Kt:substringBeforeLast; Kt:substringAfterLast	missing delimiter: Kt returns original (missingDelimiterValue), commons-lang returns '' for After/AfterLast	JVM kotlin-stdlib vs commons-lang3
+utf8ByteSlice	SLICE	NEW	(not on String: UTF-8 view) utf8Slice/utf8ByteAt	4	Rb:byteslice; MB:mb_strcut; Rb:getbyte; PHP:ord	mb_strcut adjusts to boundaries; PHP ord returns first byte	spec: Ruby doc; php
+dropLast	SLICE	NEW	public String dropLast(int n)	3	Kt:dropLast; RS:pop; Cpp:remove_prefix/remove_suffix	Rust pop returns the char; Cpp count not match	py: s[:-n] if n else s
+right	SLICE	NEW	public String right(int len)	2	Ra:last; Kt:takeLast		py: s[-n:] if n else ''
+drop	SLICE	PARTIAL:substring(int): throws when n > length	public String drop(int n)	2	Kt:drop; Sw:dropFirst/dropLast/removeFirst/removeLast		py: s[n:]
+takeWhile	SLICE	NEW	public String takeWhile(java.util.function.IntPredicate p) / takeLastWhile	2	Kt:takeWhile/takeLastWhile; Sw:prefix(while:)		py: itertools.takewhile
+dropWhile	SLICE	NEW	public String dropWhile(java.util.function.IntPredicate p) / dropLastWhile	2	Kt:dropWhile/dropLastWhile; Sw:drop(while:)/trimmingPrefix(while:)		py: itertools.dropwhile
+substringOfLength	SLICE	PARTIAL:substring: takes (begin,end)	public String substringOfLength(int start, int length)	2	NET:Substring(start,length); Cpp:substr(pos,count)	Cpp clamps count, .NET throws	dotnet: s.Substring(i,n)
+atNegative	SLICE	NEW	public String at(int index)	2	JS:at; Ra:at	JS returns one code unit, Rails one char plus range/regex forms; JS row proposed char return	node: 'abc'.at(-1)==='c'
+charAtOrElse	SLICE	PARTIAL:charAt: throws	public int charAtOrElse(int index, int defaultValue)	2	Kt:getOrNull/getOrElse/elementAt*; JS:charCodeAt	JS NaN; JS row proposed int charAt(int) which cannot overload char charAt(int)	node: Number.isNaN('abc'.charCodeAt(5))
+substringFrom	SLICE	NEW	public String substringFrom(String needle)	2	PHP:strstr/strchr; MB:mb_strstr	before_needle form; false when absent	php: strstr('name@example.com','@')
+substringFromIgnoreCase	SLICE	NEW	public String substringFromIgnoreCase(String needle)	2	PHP:stristr; MB:mb_stristr		php manual
+substringFromLast	SLICE	NEW	public String substringFromLast(String needle)	2	PHP:strrchr; MB:mb_strrchr	PHP uses only the FIRST char of needle	php: strrchr('somefile.txt','.')
+splitAt	SLICE	NEW	public String[] splitAt(int index)	2	Rs:split_at/split_at_checked; RS:split_off		rustc: s.split_at(i)
+sliceJs	SLICE	NEW	public String slice(int beginIndex, int endIndex)	1	JS:slice	negatives from end, never throws	node: 'abcdef'.slice(-5,-1)
+sliceIndices	SLICE	NEW	public String sliceIndices(int... indices)	1	Kt:slice(indices|range)	name collides with JS slice; rename	JVM kotlin-stdlib
+substringClamped	SLICE	PARTIAL:substring: throws	public String substringClamped(int beginIndex, int endIndex)	1	JS:substring	swaps reversed bounds	node: 'Mozilla'.substring(7,4)==='lla'
+trySubstring	SLICE	PARTIAL:substring: throws	public java.util.Optional<String> trySubstring(int beginIndex, int endIndex)	1	Rs:get(range)		rustc: s.get(a..b)
+charAt	SLICE	EXISTS:charAt	public char charAt(int)	1	Cpp:at/operator[]/front/back		py: s[i]
+charAtOrEmpty	SLICE	PARTIAL:charAt: throws	public String charAtOrEmpty(int index)	1	JS:charAt		node: 'abc'.charAt(5)===''
+firstLastChar	SLICE	PARTIAL:charAt: throws on empty	public java.util.OptionalInt firstChar() / lastChar()	1	Kt:first/firstOrNull/last/lastOrNull		JVM kotlin-stdlib
+fromPosition	SLICE	NEW	public String from(int position)	1	Ra:from	negative from end	py: s[p:]
+toPosition	SLICE	NEW	public String to(int position)	1	Ra:to	inclusive	py: s[:p+1]
+substringFromLastIgnoreCase	SLICE	NEW	public String substringFromLastIgnoreCase(String needle)	1	MB:mb_strrichr		php manual
+codePointBoundaryRound	SLICE	NEW	public int floorCodePointBoundary(int index) / ceilCodePointBoundary	1	Rs:floor_char_boundary/ceil_char_boundary		rustc
+splitLiteralAllTokens	SPLIT_JOIN	PARTIAL:split: regex separator; trailing empties dropped at limit 0	public String[] splitByWholeSeparatorPreserveAllTokens(String separator, int max)	13	Py:str.split; JS:split; Lo:_.split; Rb:split; PHP:explode; NET:Split; SF:components(separatedBy:String); SP:split(separator:Collection); Sw:split(separator:Character); Rs:split; Rs:splitn/rsplitn; Go:Split/SplitSeq; Go:SplitN	limit: Py/Rust/Go remainder in last, JS/lodash truncate, PHP negative drops last n, Go n==0 nil; Py sep=None and Ruby ' ' whitespace-run modes; Swift omits empties by default; ''.split rules differ	py: '1,2,,3,'.split(',')
+csvKernel	SPLIT_JOIN	PARTIAL:split: ignores quoting	public String[] splitCsv() / static joinCsv(Iterable) / isCsvField() / Stream<String[]> csvRecords()	5	CSV:record split; PHP:str_getcsv; CSV:file records; CSV:join; CSV:isCsvField	PHP backslash escape char default	py: csv.reader/csv.writer(lineterminator='\r\n')
+splitOnce	SPLIT_JOIN	NEW	public java.util.Optional<String[]> splitOnce(String separator) / splitOnceLast	3	Rs:split_once/rsplit_once; Go:Cut; Go:CutLast	Go returns (s,'',false)	go: strings.Cut
+chunk	SPLIT_JOIN	NEW	public String[] chunk(int length)	3	PHP:str_split; MB:mb_str_split; Kt:chunked	'' -> [] (PHP 8.2) vs ['']	php8.2: str_split('Hello Friend',3)
+lines	SPLIT_JOIN	EXISTS:lines	public java.util.stream.Stream<String> lines()	3	CM:§2.1 line endings; JLS:§3.4; Kt:lines/lineSequence	Kt returns List and keeps a trailing empty line	py: re.split('\r\n|\r|\n',s)
+join	SPLIT_JOIN	EXISTS:join	public static String join(CharSequence, Iterable)	3	Py:str.join; PHP:implode/join; Go:Join	Py raises on None, Java appends 'null'	py: ','.join(xs)
+tsvKernel	SPLIT_JOIN	PARTIAL:split/join: regex, no rejection	public String[] splitTsv() / static joinTsv(Iterable) / isTsvField()	3	TSV:record/field; TSV:no tabs rule; TSV:join		py: line.split('\t')
+splitRegexKeepTrailing	SPLIT_JOIN	EXISTS:split(String,int) with limit -1	public String[] split(String regex, int limit)	2	MB:mb_split; Kt:split(regex,limit)	dialects	JVM
+splitWhitespace	SPLIT_JOIN	NEW	public String[] splitWhitespace()	2	Rs:split_whitespace; Go:Fields/FieldsSeq	White_Space vs unicode.IsSpace	go: strings.Fields
+tokenizeChars	SPLIT_JOIN	NEW	public String[] tokenize(String delimiterChars)	2	PHP:strtok; C:strtok/strtok_s	no empty tokens; commons split(str,chars) semantics but name split collides with regex split	py: [t for t in re.split('['+re.escape(d)+']',s) if t]
+rsplit	SPLIT_JOIN	NEW	public String[] rsplit(String separator, int maxSplit)	2	Py:str.rsplit; Rs:rsplit	Rust yields reverse order	py: 'a b c'.rsplit(None,1)
+partition	SPLIT_JOIN	NEW	public String[] partition(String separator)	2	Py:str.partition; Rb:partition	Ruby regexp form	py: 'abc'.partition('x')
+rpartition	SPLIT_JOIN	NEW	public String[] rpartition(String separator)	2	Py:str.rpartition; Rb:rpartition		py: 'a.b.c'.rpartition('.')
+splitInclusive	SPLIT_JOIN	PARTIAL:splitWithDelimiters: delimiters separate	public java.util.List<String> splitInclusive(String separator)	2	Rs:split_inclusive; Go:SplitAfter/SplitAfterN	Go yields trailing '' after final sep; Rust does not	go: strings.SplitAfter
+linesKeepEnds	SPLIT_JOIN	PARTIAL:lines: drops terminators	public java.util.List<String> lines(String separator, boolean chomp)	2	Rb:lines/each_line; Go:Lines	Ruby paragraph mode, custom separator	go: strings.Lines
+codePointStrings	SPLIT_JOIN	PARTIAL:codePoints: ints not strings	public java.util.stream.Stream<String> codePointStrings()	2	JS:[Symbol.iterator]; Rb:chars		node: [...s]
+codePoints	SPLIT_JOIN	EXISTS:codePoints	public java.util.stream.IntStream codePoints()	2	Rb:codepoints; Rs:chars		py: [ord(c) for c in s]
+graphemes	SPLIT_JOIN	NEW	public java.util.stream.Stream<String> graphemes()	2	Rb:grapheme_clusters; U29:§3 grapheme clusters	BreakIterator not UAX29-extended	node: [...new Intl.Segmenter(undefined,{granularity:'grapheme'}).segment(s)]
+wordsUax29	SPLIT_JOIN	NEW	public java.util.stream.Stream<String> words()	2	U29:§4 word boundaries; SF:enumerateSubstrings(in:options:)	ICU dictionary tailoring for CJK	node: Intl.Segmenter granularity word
+shellSplit	SPLIT_JOIN	NEW	public String[] shellSplit() / splitFields(String ifs)	2	SH:§2.6.7 quote removal; SH:§2.6.5 field splitting	IFS whitespace vs non-whitespace	py: shlex.split(s,posix=True)
+splitMultiLiteral	SPLIT_JOIN	PARTIAL:split: regex, no ignoreCase	public java.util.List<String> split(boolean ignoreCase, int limit, String... delimiters)	1	Kt:split(vararg delimiters)		JVM kotlin-stdlib
+splitAsciiWhitespace	SPLIT_JOIN	NEW	public String[] splitAsciiWhitespace()	1	Rs:split_ascii_whitespace	no VT	rustc
+splitByPredicate	SPLIT_JOIN	NEW	public String[] splitByPredicate(java.util.function.IntPredicate isSeparator)	1	Go:FieldsFunc/FieldsFuncSeq		go: strings.FieldsFunc
+splitPreserveAllTokensChars	SPLIT_JOIN	NEW	public String[] splitPreserveAllTokens(String separatorChars)	1	SF:components(separatedBy:CharacterSet)		py: re.split('['+re.escape(chars)+']',s)
+splitTerminator	SPLIT_JOIN	NEW	public java.util.List<String> splitTerminator(String terminator)	1	Rs:split_terminator/rsplit_terminator		rustc
+windowed	SPLIT_JOIN	NEW	public java.util.List<String> windowed(int size, int step, boolean partialWindows)	1	Kt:windowed		JVM kotlin-stdlib
+splitLinesPython	SPLIT_JOIN	PARTIAL:lines: only LF/CR/CRLF, no keepEnds	public java.util.List<String> splitLines(boolean keepEnds)	1	Py:str.splitlines	VT FF FS GS RS NEL LS PS	py: s.splitlines()
+linesUnicodeNet	SPLIT_JOIN	PARTIAL:lines: CR/LF/CRLF only	public java.util.stream.Stream<String> linesUnicode()	1	NM:EnumerateLines	CR LF CRLF NEL LS FF PS (no VT)	dotnet
+linesLf	SPLIT_JOIN	PARTIAL:lines: splits lone CR	public java.util.stream.Stream<String> linesLf()	1	Rs:lines		rustc: s.lines()
+wordsLodash	SPLIT_JOIN	NEW	public java.util.List<String> wordsByPattern()	1	Lo:_.words	case-change splitting; collides with words()	node lodash _.words
+wordCountPhp	SPLIT_JOIN	NEW	public int wordCount()	1	PHP:str_word_count	letters plus inner ' and -, locale	php manual
+sentences	SPLIT_JOIN	NEW	public java.util.stream.Stream<String> sentences()	1	U29:§5		node: Intl.Segmenter granularity sentence
+joinSlice	SPLIT_JOIN	PARTIAL:join: no char separator/slice	public static String join(char sep, String[] values, int start, int count)	1	NET:Join(sep,values,start,count)		dotnet
+splitRanges	SPLIT_JOIN	NEW	public int[] splitRanges(char separator)	1	NM:Split/SplitAny(ranges)	allocation-free	dotnet
+xsdListItems	SPLIT_JOIN	NEW	public String[] xsdListItems()	1	XSD:§3.4.5/3.4.10/3.4.12 lists		py: collapse(s).split(' ')
+splitUri	SPLIT_JOIN	NEW	public String[] splitUri()	1	URI:Appendix B	absent vs empty	py: urllib.parse.urlsplit
+splitJsonPointer	SPLIT_JOIN	NEW	public String[] splitJsonPointer()	1	R6901:§3/§4		py jsonpointer
+splitJavaLines	SPLIT_JOIN	EXISTS:lines	public java.util.stream.Stream<String> lines()	1	JLS:§3.4 line terminators		py re.split
+jsonSchemaFormats	VALIDATE	NEW	isRfc3339DateTime() / isRfc3339Date() / isRfc3339Time() / isIsoDuration() / isEmailAddress() / isIdnEmailAddress() / isHostname() / isIdnHostname() / isUuid() / isUriTemplate() / isJsonPointer() / isRelativeJsonPointer() / isEcmaRegex()	13	R3339:date-time; R3339:date; R3339:time; R3339:duration; JSS:email; JSS:idn-email; JSS:hostname; JSS:idn-hostname; JSS:uuid; JSS:uri-template; JSS:json-pointer; JSS:relative-json-pointer; JSS:regex	distinct grammars grouped as one kernel batch; date/time belong to java.time	JSON-Schema-Test-Suite draft2020-12/optional/format/*.json
+xsdLexicalTypes	VALIDATE	NEW	isXmlToken() / isXmlLanguage() / isXmlNCName() / isXmlQName() / isXmlAnyURI() / parseXsdBoolean() / isXsdHexBinary() / isXsdBase64Binary()	8	XSD:§3.4.2 token; XSD:§3.4.3 language; XSD:§3.4.7 NCName/ID/IDREF/ENTITY; XSD:§3.3.18 QName; XSD:§3.3.17 anyURI; XSD:§3.3.2 boolean; XSD:§3.3.15 hexBinary; XSD:§3.3.16 base64Binary	distinct lexical rules grouped as one kernel batch	dotnet XmlConvert.Verify*/XmlSchema; Xerces-J
+isWellFormed	VALIDATE	NEW	public boolean isWellFormed()	5	JS:isWellFormed; Rb:valid_encoding?; Ra:is_utf8?; MB:mb_check_encoding; U8:Valid/ValidString	byte sources validate encodings; Java form = no lone surrogates	node: 'ab\ud800'.isWellFormed()===false
+uriValidators	VALIDATE	NEW	isUriScheme() / isUriRegName() / isUri(boolean allowRelative)	5	URI:§3.1 scheme; URI:§3.2.2 reg-name; URI:§3/§4.1 URI-reference; JSS:format uri; JSS:format uri-reference	java.net.URI is lenient	JSON-Schema-Test-Suite uri*.json
+commonMarkValidators	VALIDATE	NEW	isLinkLabel() / isAbsoluteUri() / isEmailAutolink() / isLinkDestination()	4	CM:§6.3 link label; CM:§6.5 URI autolink; CM:§6.5 email autolink; CM:§6.3 link destination		CommonMark spec.json
+isNormalized	VALIDATE	NEW	public boolean isNormalized(java.text.Normalizer.Form form)	3	Rb:unicode_normalized?; NET:IsNormalized; U15:§9 quickCheck		py: unicodedata.is_normalized
+tryParseInteger	VALIDATE	NEW	public java.util.OptionalLong tryParseLong(int radix)	3	Kt:toInt..OrNull; Rs:parse; SV:ParseInt/ParseUint/Atoi	Go base 0 prefix detection, bit size	go: strconv.ParseInt
+isCodePointBoundary	VALIDATE	NEW	public boolean isCodePointBoundary(int index)	2	Rs:is_char_boundary; U8:RuneStart		rustc
+digitValue	VALIDATE	PARTIAL:Character.digit: -1 not exception; accepts non-ASCII	public static java.util.OptionalInt digitValue(int codePoint, int radix)	2	Kt:digitToInt/digitToIntOrNull; Rc:from_digit/is_digit/to_digit	Rust ASCII-only	rustc: c.to_digit(r)
+tryParseDouble	VALIDATE	NEW	public java.util.OptionalDouble tryParseDouble()	2	Kt:toDoubleOrNull...; SV:ParseFloat/FormatFloat	Go hex floats	go: strconv.ParseFloat
+isXmlName	VALIDATE	NEW	public boolean isXmlName()	2	XML:[4]-[5] Name; XSD:§3.4.6 Name	XSD collapses whitespace first	dotnet XmlConvert.VerifyName
+isXmlNmtoken	VALIDATE	NEW	public boolean isXmlNmtoken()	2	XML:[7] Nmtoken; XSD:§3.4.4 NMTOKEN	XSD collapse	dotnet XmlConvert.VerifyNMTOKEN
+isIri	VALIDATE	NEW	public boolean isIri(boolean allowRelative)	2	JSS:format iri; JSS:format iri-reference		JSON-Schema-Test-Suite
+isIPv4Address	VALIDATE	NEW	public boolean isIPv4Address()	2	URI:§3.2.2 IPv4address; JSS:format ipv4	no leading zeros	py: ipaddress.IPv4Address
+isIPv6Address	VALIDATE	NEW	public boolean isIPv6Address()	2	URI:Appendix A IPv6address; JSS:format ipv6	no zone ids	py: ipaddress.IPv6Address
+isPythonIdentifier	VALIDATE	NEW	public boolean isUnicodeIdentifier()	1	Py:str.isidentifier	XID + NFKC; keywords not excluded	py: s.isidentifier()
+isJavaIdentifier	VALIDATE	NEW	public boolean isJavaIdentifier()	1	JLS:§3.8	excludes keywords	SourceVersion.isName(s, RELEASE_21)
+isCIdentifier	VALIDATE	NEW	public boolean isCIdentifier()	1	C23:§6.4.2.1	NFC required	gcc -std=c23
+isSqlIdentifier	VALIDATE	NEW	public boolean isSqlIdentifier()	1	SQL:regular identifier	reserved words; PG 63 bytes	PostgreSQL
+hasSurrogatePairAt	VALIDATE	NEW	public boolean hasSurrogatePairAt(int index)	1	Kt:hasSurrogatePairAt		JVM kotlin-stdlib
+isScalarValue	VALIDATE	PARTIAL:Character.isValidCodePoint: accepts surrogates	public static boolean isScalarValue(int codePoint)	1	U8:ValidRune		go: utf8.ValidRune
+isCompleteSequence	VALIDATE	NEW	public boolean endsWithCompleteCodePoint()	1	U8:FullRune	byte concept	go
+toBooleanLenient	VALIDATE	NEW	public boolean toBoolean()	1	Kt:toBoolean	== Boolean.parseBoolean	JVM Boolean.parseBoolean
+toBooleanStrict	VALIDATE	NEW	public java.util.Optional<Boolean> tryParseBooleanStrict()	1	Kt:toBooleanStrict/OrNull		JVM kotlin-stdlib
+parseBoolGo	VALIDATE	NEW	public java.util.Optional<Boolean> tryParseBoolean()	1	SV:ParseBool	accepts 1/t/T/TRUE/True...	go: strconv.ParseBool
+canBackquote	VALIDATE	NEW	public boolean canBackquote()	1	SV:CanBackquote		go
+regexMatchForms	VALIDATE	PARTIAL:matches: whole-match only	public boolean lookingAt(String regex)	1	SP:wholeMatch/prefixMatch/firstMatch/matches(of:)		java Matcher.lookingAt
+matchesRegex	VALIDATE	EXISTS:matches	public boolean matches(String regex)	1	Kt:matches(regex)		JVM
+isJsonString	VALIDATE	NEW	public boolean isJsonString()	1	JSON:§7 string		py: json.loads
+isXmlChars	VALIDATE	NEW	public boolean isXmlChars()	1	XML:[2] Char		dotnet XmlConvert.VerifyXmlChars
+isXmlNames	VALIDATE	NEW	public boolean isXmlNames()	1	XML:[6] Names		dotnet VerifyName per part
+isXmlNmtokens	VALIDATE	NEW	public boolean isXmlNmtokens()	1	XML:[8] Nmtokens		dotnet
+isXmlCharData	VALIDATE	NEW	public boolean isXmlCharData()	1	XML:[14] CharData		py: '<' not in s and '&' not in s and ']]>' not in s
+isXmlPubid	VALIDATE	NEW	public boolean isXmlPubidChars()	1	XML:[12]-[13]		regex
+isXmlEncName	VALIDATE	NEW	public boolean isXmlEncName()	1	XML:[81] EncName		regex [A-Za-z][A-Za-z0-9._-]*
+isXmlVersionNum	VALIDATE	NEW	public boolean isXmlVersionNum()	1	XML:[26] VersionNum		regex 1\.[0-9]+
+isNormalizedString	VALIDATE	EXISTS:containsNone	public boolean containsNone("\t\n\r")	1	XSD:§3.4.1	also requires XML Char	py
+isBase64	VALIDATE	NEW	public boolean isBase64(boolean urlAlphabet)	1	B64:§3.2/3.3/3.5		py: b64encode(b64decode(s,validate=True))==s
