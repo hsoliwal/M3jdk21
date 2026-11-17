@@ -1,0 +1,8 @@
+# ESCAPE_MARKUP family, commons-text 1.15.0 StringEscapeUtils (tests rewritten to StringUtils. by prefix): donor op, mode, java op, null rule
+escapeHtml3	INSTANCE	escapeHtml3	NPE_ARG
+escapeHtml4	INSTANCE	escapeHtml4	NPE_ARG
+unescapeHtml3	INSTANCE	unescapeHtml3	NPE_ARG
+unescapeHtml4	INSTANCE	unescapeHtml4	NPE_ARG
+escapeXml10	INSTANCE	escapeXml10	NPE_ARG
+escapeXml11	INSTANCE	escapeXml11	NPE_ARG
+unescapeXml	INSTANCE	unescapeXml	NPE_ARG
