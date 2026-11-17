@@ -105,7 +105,14 @@ bool ArchiveHeapWriter::is_string_too_large_to_archive(oop string) {
     return true;
   }
   typeArrayOop value = java_lang_String::value_no_keepalive(string);
-  return is_too_large_to_archive(value);
+  if (is_too_large_to_archive(value)) {
+    return true;
+  }
+  // M3JDK layout invariant (decision 51, stage J0): a chValue filled at dump time is archived
+  // with the String. At 2 bytes a char it can be twice the size of a Latin-1 value, so it is
+  // checked too: a String whose const chars exceed the region alignment is not archived.
+  typeArrayOop chars = java_lang_String::char_value(string);
+  return chars != nullptr && is_too_large_to_archive(chars);
 }
 
 bool ArchiveHeapWriter::is_too_large_to_archive(size_t size) {
