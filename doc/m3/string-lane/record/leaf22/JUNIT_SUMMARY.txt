@@ -1,0 +1,5 @@
+JUnit 5 console 1.11.4, stock JDK 21 with the head method text in java.lang.String (--patch-module),
+StringSearchFamilyTest + StringEdgeFamilyTest, each with -XX:+CompactStrings and -XX:-CompactStrings:
+[      1178 tests found           ]
+[      1178 tests successful      ]
+[         0 tests failed          ]

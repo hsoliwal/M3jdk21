@@ -120,6 +120,14 @@ public class StringEdgeFamilyTest {
                 "compatibility decomposition");
         String ascii = "plain ascii";
         assertSame(ascii, ascii.stripAccents());
+        String latin = "" + (char) 0xBD + (char) 0xA8 + (char) 0xB5 + (char) 0xFF + (char) 0xC7;
+        assertEquals("1" + (char) 0x2044 + "2 " + (char) 0x03BC + "yC", latin.stripAccents(),
+                "Latin-1 units map one by one");
+        String normalized = "a b" + (char) 0xE9 + " c";
+        assertSame(normalized, normalized.normalizeSpace(), "a normalized string is returned");
+        assertEquals("a", ((char) 0x01 + "a").normalizeSpace(),
+                "control characters at the ends go");
+        assertEquals("a b", ("a" + (char) 0x2000 + "b").normalizeSpace());
         assertEquals("b", "aaba".strip("a"));
         assertEquals("ba", "aaba".stripStart("a"));
         assertEquals("aab", "aaba".stripEnd("a"));

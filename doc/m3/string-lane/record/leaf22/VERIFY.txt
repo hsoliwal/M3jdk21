@@ -1,0 +1,12 @@
+Re-verification of this record on a healthy NTFS scratch drive (2026-11-17)
+
+The first run of this leaf wrote its scratch files to a drive that was under a read-only hold (exFAT, dirty bit set).
+Everything was then rebuilt from git on a healthy NTFS drive:
+- String.java of this commit = base String.java + apply_speed.py applied to leaf20/search_family.txt and
+  leaf21/edge_family.txt: blob b35853ac6289 reproduced byte for byte; search_family.txt and edge_family.txt too.
+- run_proof.sh from this record, harnesses from this record: all six proof runs PASS; PROOF.tsv identical.
+- JUnit (the committed StringSearchFamilyTest and StringEdgeFamilyTest): 1178/1178 with compact strings on and off.
+- javac -Xlint:all,-this-escape -Werror: no warnings.
+- Timings re-recorded there: BENCH.tsv and BENCH_TABLE.tsv in this folder are from that run. The commons-lang3 timings
+  are bimodal across JVMs (for example containsWhitespace 3.7 or 31 microseconds per call), so the table gives the
+  donor's minimum and maximum over the 3 forks and compares the new code with the donor's fastest fork.

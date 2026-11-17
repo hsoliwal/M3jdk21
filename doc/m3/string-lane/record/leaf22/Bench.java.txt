@@ -1,0 +1,95 @@
+// SPDX-License-Identifier: Apache-2.0 OR EPL-2.0
+// Copyright (c) 2026 Synexia, Hitesh Soliwal and others
+
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.function.ToIntFunction;
+import org.apache.commons.lang3.StringUtils;
+
+/**
+ * Timing of the SEARCH and EDGE hot paths on 4096-unit texts: each kernel runs 3 warm-up rounds and 7 measured rounds
+ * of at least 200 ms; the median ns per call is printed as "label TAB side TAB ns". side is "string" (java.lang.String
+ * as patched into this JVM) or "donor" (commons-lang3 3.22.0). Not a JMH run: one JVM, one fork, results summed into a
+ * sink to keep the calls live. Arguments: kernel index and side, one kernel per JVM; no argument lists the kernels.
+ */
+public final class Bench {
+    private static final int SIZE = 4096;
+    private static long sink;
+
+    private Bench() {}
+
+    public static void main(String[] args) {
+        String prose = fill("the quick brown fox jumps over the lazy dog ").strip();
+        String noSpace = prose.replace(' ', '_');
+        String french = fill("" + "l" + (char) 0xE9 + "l" + (char) 0xE8 + "ve au caf" + (char) 0xE9 + " "
+                + (char) 0xE0 + " c" + (char) 0xF4 + "t" + (char) 0xE9 + " de la for" + (char) 0xEA + "t ");
+        String wide = fill("the quick brown fox " + (char) 0x0436 + (char) 0x0444 + " jumps over ");
+        char[] absent = {'#', '@', '%'};
+        char[] letters = "abcdefghijklmnopqrstuvwxyz ".toCharArray();
+        Map<String, ToIntFunction<String>[]> kernels = new LinkedHashMap<>();
+        put(kernels, "indexOfAny(char...) miss", s -> s.indexOfAny(absent), s -> StringUtils.indexOfAny(s, absent));
+        put(kernels, "indexOfAnyBut(char...) miss", s -> s.indexOfAnyBut(letters),
+                s -> StringUtils.indexOfAnyBut(s, letters));
+        put(kernels, "containsWhitespace miss", s -> s.containsWhitespace() ? 1 : 0,
+                s -> StringUtils.containsWhitespace(s) ? 1 : 0);
+        put(kernels, "indexOfIgnoreCase miss", s -> s.indexOfIgnoreCase("ZQX"),
+                s -> StringUtils.indexOfIgnoreCase(s, "ZQX"));
+        put(kernels, "lastIndexOfIgnoreCase miss", s -> s.lastIndexOfIgnoreCase("ZQX"),
+                s -> StringUtils.lastIndexOfIgnoreCase(s, "ZQX"));
+        put(kernels, "normalizeSpace unchanged", s -> s.normalizeSpace().length(),
+                s -> StringUtils.normalizeSpace(s).length());
+        put(kernels, "stripAccents Latin-1", s -> s.stripAccents().length(),
+                s -> StringUtils.stripAccents(s).length());
+        Map<String, String> inputs = Map.of(
+                "indexOfAny(char...) miss", prose, "indexOfAnyBut(char...) miss", prose,
+                "containsWhitespace miss", noSpace, "indexOfIgnoreCase miss", prose,
+                "lastIndexOfIgnoreCase miss", prose, "normalizeSpace unchanged", prose,
+                "stripAccents Latin-1", french);
+        put(kernels, "indexOfIgnoreCase miss UTF-16", s -> s.indexOfIgnoreCase("ZQX"),
+                s -> StringUtils.indexOfIgnoreCase(s, "ZQX"));
+        Map<String, String> all = new LinkedHashMap<>(inputs);
+        all.put("indexOfIgnoreCase miss UTF-16", wide);
+        if (args.length == 0) {
+            kernels.keySet().forEach(System.out::println);
+            return;
+        }
+        String label = new ArrayList<>(kernels.keySet()).get(Integer.parseInt(args[0]));
+        double ns = time(kernels.get(label)[args[1].equals("donor") ? 1 : 0], all.get(label));
+        System.out.printf("%s\t%s\t%.1f\t%d%n", label, args[1], ns, sink & 1);
+    }
+
+    @SuppressWarnings("unchecked")
+    private static void put(Map<String, ToIntFunction<String>[]> kernels, String label, ToIntFunction<String> mine,
+            ToIntFunction<String> donor) {
+        kernels.put(label, new ToIntFunction[] {mine, donor});
+    }
+
+    private static String fill(String unit) {
+        StringBuilder out = new StringBuilder(SIZE + unit.length());
+        while (out.length() < SIZE) out.append(unit);
+        return out.substring(0, SIZE);
+    }
+
+    private static double time(ToIntFunction<String> kernel, String input) {
+        long calls = 1;
+        while (round(kernel, input, calls) < 20_000_000L) calls *= 2;
+        calls *= 10;
+        List<Double> rounds = new ArrayList<>();
+        for (int round = 0; round < 10; round++) {
+            double ns = (double) round(kernel, input, calls) / calls;
+            if (round >= 3) rounds.add(ns);
+        }
+        double[] sorted = rounds.stream().mapToDouble(Double::doubleValue).sorted().toArray();
+        return sorted[sorted.length / 2];
+    }
+
+    private static long round(ToIntFunction<String> kernel, String input, long calls) {
+        long start = System.nanoTime();
+        long sum = 0;
+        for (long call = 0; call < calls; call++) sum += kernel.applyAsInt(input);
+        sink += sum;
+        return System.nanoTime() - start;
+    }
+}
