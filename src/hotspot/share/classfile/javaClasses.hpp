@@ -64,8 +64,6 @@ class java_lang_String : AllStatic {
   static bool _initialized;
 
   static Handle basic_create(int length, bool byte_arr, TRAPS);
-  // M3JDK layout invariant: fills the private final char[] chValue from the finished value bytes.
-  static void fill_char_value(Handle java_string, TRAPS);
 
   static inline void set_coder(oop string, jbyte coder);
 
@@ -102,6 +100,10 @@ class java_lang_String : AllStatic {
   static oop    create_oop_from_str(const char* utf8_str, TRAPS);
   static Handle create_from_symbol(Symbol* symbol, TRAPS);
   static Handle create_from_platform_dependent_str(const char* str, TRAPS);
+  // M3JDK layout invariant (decision 51): returns the const chars (chValue), filling them once
+  // when still null; null for a String allocated but never constructed (JNI AllocObject).
+  // Allocates: the caller holds java_string in a Handle and is outside any JNI critical region.
+  static typeArrayOop fill_char_value(Handle java_string, TRAPS);
 
   static void set_compact_strings(bool value);
   static void set_m3_joined_strings(bool value);
@@ -129,6 +131,10 @@ class java_lang_String : AllStatic {
   // Accessors
   static inline typeArrayOop value(oop java_string);
   static inline typeArrayOop value_no_keepalive(oop java_string);
+  // M3JDK layout invariant (decision 51): the const chars (chValue), null until first filled.
+  static inline typeArrayOop char_value(oop java_string);
+  static inline typeArrayOop cmpxchg_char_value(oop java_string, typeArrayOop expected,
+                                                typeArrayOop chars);
   static inline oop m3_storage(oop java_string);
   static inline oop m3_storage_no_keepalive(oop java_string);
   static inline bool is_m3_joined(oop java_string);

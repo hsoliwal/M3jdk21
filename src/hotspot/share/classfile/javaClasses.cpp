@@ -315,21 +315,22 @@ Handle java_lang_String::basic_create(int length, bool is_latin1, TRAPS) {
 // chValue is a const char[] filled lazily, once, on the first whole-string char demand.
 // Java fills it in String.constChars(); this fills it for the VM's own demands (the JNI
 // string accessors) when it is still null. The array is never written again.
-void java_lang_String::fill_char_value(Handle java_string, TRAPS) {
-  int length = java_lang_String::length(java_string());
-  typeArrayOop chars = oopFactory::new_charArray(length, CHECK);
-  oop obj = java_string();
-  typeArrayOop bytes = value(obj);
-  if (is_latin1(obj)) {
-    for (int index = 0; index < length; index++) {
-      chars->char_at_put(index, ((jchar) bytes->byte_at(index)) & 0xff);
-    }
-  } else {
-    for (int index = 0; index < length; index++) {
-      chars->char_at_put(index, bytes->char_at(index));
-    }
+// Stage J: the chars come from copy_chars (flat Latin-1, flat UTF-16 or M3 storage) and are
+// published by an exchange that only succeeds on null; the winner of a racing fill is
+// returned, so a present array is never replaced.
+typeArrayOop java_lang_String::fill_char_value(Handle java_string, TRAPS) {
+  typeArrayOop present = char_value(java_string());
+  if (present != nullptr || value(java_string()) == nullptr) {
+    return present;  // Filled already, or allocated but never constructed: nothing to fill.
   }
-  obj->obj_field_put(_chValue_offset, chars);
+  int length = java_lang_String::length(java_string());
+  typeArrayOop chars = oopFactory::new_charArray(length, CHECK_NULL);
+  // No safepoint from here to the exchange: chars and java_string() stay raw.
+  if (length > 0) {
+    copy_chars(java_string(), 0, length, chars->char_at_addr(0));
+  }
+  typeArrayOop witness = cmpxchg_char_value(java_string(), nullptr, chars);
+  return witness == nullptr ? chars : witness;
 }
 
 Handle java_lang_String::create_from_unicode(const jchar* unicode, int length, TRAPS) {

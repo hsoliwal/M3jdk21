@@ -2178,6 +2178,25 @@ JNI_ENTRY(jstring, jni_NewString(JNIEnv *env, const jchar *unicodeChars, jsize l
 JNI_END
 
 
+// M3JDK layout invariant (decision 51, stage J): the const chars (chValue) of a String when they
+// are present and hold its length; null otherwise. Only GetStringCritical fills them.
+static typeArrayOop m3_const_chars(oop string, int length) {
+  typeArrayOop chars = java_lang_String::char_value(string);
+  return (chars != nullptr && chars->length() == length) ? chars : nullptr;
+}
+
+// Copies chars [start, start + len) of a String to buf: one memcpy out of the const chars when
+// present, else the canonical flat/M3 copier. A read never fills chValue.
+static void m3_copy_string_chars(oop string, int length, int start, int len, jchar* buf) {
+  typeArrayOop chars = m3_const_chars(string, length);
+  if (chars != nullptr) {
+    size_t offset = (size_t) typeArrayOopDesc::element_offset<jchar>(start);
+    ArrayAccess<>::arraycopy_to_native(chars, offset, buf, (size_t) len);
+  } else {
+    java_lang_String::copy_chars(string, start, len, buf);
+  }
+}
+
 JNI_ENTRY_NO_PRESERVE(jsize, jni_GetStringLength(JNIEnv *env, jstring string))
   HOTSPOT_JNI_GETSTRINGLENGTH_ENTRY(env, string);
   jsize ret = 0;
@@ -2193,17 +2212,20 @@ JNI_ENTRY_NO_PRESERVE(const jchar*, jni_GetStringChars(
  HOTSPOT_JNI_GETSTRINGCHARS_ENTRY(env, string, (uintptr_t *) isCopy);
   jchar* buf = nullptr;
   oop s = JNIHandles::resolve_non_null(string);
-  int s_len = java_lang_String::length(s);
-  buf = NEW_C_HEAP_ARRAY_RETURN_NULL(jchar, s_len + 1, mtInternal);  // add one for zero termination
-  /* JNI Specification states return null on OOM */
-  if (buf != nullptr) {
-    if (s_len > 0) {
-      java_lang_String::copy_chars(s, 0, s_len, buf);
-    }
-    buf[s_len] = 0;
-    //%note jni_5
-    if (isCopy != nullptr) {
-      *isCopy = JNI_TRUE;
+  // A String allocated but never constructed (JNI AllocObject) has no chars: null, as JDK 21.
+  if (java_lang_String::value(s) != nullptr || java_lang_String::is_m3_joined(s)) {
+    int s_len = java_lang_String::length(s);
+    buf = NEW_C_HEAP_ARRAY_RETURN_NULL(jchar, s_len + 1, mtInternal);  // add one for zero termination
+    /* JNI Specification states return null on OOM */
+    if (buf != nullptr) {
+      if (s_len > 0) {
+        m3_copy_string_chars(s, s_len, 0, s_len, buf);
+      }
+      buf[s_len] = 0;
+      //%note jni_5
+      if (isCopy != nullptr) {
+        *isCopy = JNI_TRUE;
+      }
     }
   }
   HOTSPOT_JNI_GETSTRINGCHARS_RETURN(buf);
@@ -2777,7 +2799,7 @@ JNI_ENTRY(void, jni_GetStringRegion(JNIEnv *env, jstring string, jsize start, js
   if (start < 0 || len < 0 || start > s_len - len) {
     THROW(vmSymbols::java_lang_StringIndexOutOfBoundsException());
   } else if (len > 0) {
-    java_lang_String::copy_chars(s, start, len, buf);
+    m3_copy_string_chars(s, s_len, start, len, buf);
   }
 JNI_END
 
@@ -2835,25 +2857,37 @@ JNI_END
 
 JNI_ENTRY(const jchar*, jni_GetStringCritical(JNIEnv *env, jstring string, jboolean *isCopy))
   HOTSPOT_JNI_GETSTRINGCRITICAL_ENTRY(env, string, (uintptr_t *) isCopy);
-  oop s = JNIHandles::resolve_non_null(string);
+  // M3JDK layout invariant (decision 51, stage J): the critical chars are the String's const
+  // chars (chValue), pinned exactly as JDK 21 pins a UTF-16 value array, for every coder and
+  // for M3 storage alike. A null chValue is allocated and filled here, before the critical
+  // region is entered. Inside a critical region (a nested call) an allocation could wait for a
+  // GC that this thread blocks, so a String without chValue keeps the native copy there, as do
+  // an unconstructed String and a full Java heap (JDK 21 never throws here).
+  Handle s(thread, JNIHandles::resolve_non_null(string));
+  int s_len = java_lang_String::length(s());
+  if (m3_const_chars(s(), s_len) == nullptr && !thread->in_critical()) {
+    java_lang_String::fill_char_value(s, THREAD);
+    if (HAS_PENDING_EXCEPTION) {
+      CLEAR_PENDING_EXCEPTION;
+    }
+  }
+  typeArrayOop present = m3_const_chars(s(), s_len);
   jchar* ret;
-  if (!UseM3StringStorage && !java_lang_String::is_latin1(s)) {
-    typeArrayHandle s_value(thread, java_lang_String::value(s));
+  if (present != nullptr) {
+    typeArrayHandle chars(thread, present);
 
-    // Pin value array
-    Universe::heap()->pin_object(thread, s_value());
+    // Pin the const chars
+    Universe::heap()->pin_object(thread, chars());
 
-    ret = (jchar*) s_value->base(T_CHAR);
+    ret = (jchar*) chars->base(T_CHAR);
     if (isCopy != nullptr) *isCopy = JNI_FALSE;
   } else {
     // Copy segmented content or inflate latin1 to UTF16; never expose leaf arrays.
-    typeArrayOop s_value = java_lang_String::value(s);
-    int s_len = java_lang_String::length(s, s_value);
     ret = NEW_C_HEAP_ARRAY_RETURN_NULL(jchar, s_len + 1, mtInternal);  // add one for zero termination
     /* JNI Specification states return null on OOM */
     if (ret != nullptr) {
       // Reuse the canonical flat/M3 range copier within the existing JNI lifetime.
-      java_lang_String::copy_chars(s, 0, s_len, ret);
+      java_lang_String::copy_chars(s(), 0, s_len, ret);
       ret[s_len] = 0;
     }
     if (isCopy != nullptr) *isCopy = JNI_TRUE;
@@ -2865,20 +2899,17 @@ JNI_END
 
 JNI_ENTRY(void, jni_ReleaseStringCritical(JNIEnv *env, jstring str, const jchar *chars))
   HOTSPOT_JNI_RELEASESTRINGCRITICAL_ENTRY(env, str, (uint16_t *) chars);
-  oop s = JNIHandles::resolve_non_null(str);
-  bool is_latin1 = java_lang_String::is_latin1(s);
-
-  if (UseM3StringStorage || is_latin1) {
-    // Latin1 and segmented Strings return a native copy from GetStringCritical.
-    // This assumes that ReleaseStringCritical bookends GetStringCritical.
-    FREE_C_HEAP_ARRAY(jchar, chars);
+  // M3JDK layout invariant (decision 51, stage J): GetStringCritical pinned the const chars or
+  // made a native copy. The pinned array is computed from the address handed out and never
+  // re-read from the String: string deduplication may have replaced chValue since.
+  address array = chars == nullptr
+      ? nullptr : (address)chars - arrayOopDesc::base_offset_in_bytes(T_CHAR);
+  if (array != nullptr && Universe::heap()->is_in(array)) {
+    // Unpin the const chars
+    Universe::heap()->unpin_object(thread, cast_to_oop(array));
   } else {
-    // StringDedup can have replaced the value array, so don't fetch the array from 's'.
-    // Instead, we calculate the address based on the jchar array exposed with GetStringCritical.
-    oop value = cast_to_oop((address)chars - arrayOopDesc::base_offset_in_bytes(T_CHAR));
-
-    // Unpin value array
-    Universe::heap()->unpin_object(thread, value);
+    // A native copy. This assumes that ReleaseStringCritical bookends GetStringCritical.
+    FREE_C_HEAP_ARRAY(jchar, chars);
   }
 HOTSPOT_JNI_RELEASESTRINGCRITICAL_RETURN();
 JNI_END
