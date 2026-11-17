@@ -1278,40 +1278,105 @@ interface TreeModule {
     }
 
     static <T extends Object> Stream<Node<T>> traversePreOrder(Node<T> node) {
-        return node.getChildren().foldLeft(Stream.of(node),
-                (acc, child) -> acc.appendAll(traversePreOrder(child)));
+        return Stream.ofAll(depthFirst(node, Order.PRE_ORDER));
     }
 
     static <T extends Object> Stream<Node<T>> traverseInOrder(Node<T> node) {
-        if (node.isLeaf()) {
-            return Stream.of(node);
-        } else {
-            final jdk.m3.collections.vavr.collection.List<Node<T>> children = node.getChildren();
-            return children
-                    .tail()
-                    .foldLeft(Stream.<Node<T>> empty(), (acc, child) -> acc.appendAll(traverseInOrder(child)))
-                    .prepend(node)
-                    .prependAll(traverseInOrder(children.head()));
-        }
+        return Stream.ofAll(depthFirst(node, Order.IN_ORDER));
     }
 
+    // The recursive fold this replaces returned an AppendElements stream whose base holds the
+    // post-order of the leftmost leaf's parent without that parent and whose queue holds the
+    // rest; rebuilding that shape keeps the toString() of a partly evaluated result unchanged.
     static <T extends Object> Stream<Node<T>> traversePostOrder(Node<T> node) {
-        return node
-                .getChildren()
-                .foldLeft(Stream.<Node<T>> empty(), (acc, child) -> acc.appendAll(traversePostOrder(child)))
-                .append(node);
+        if (node.isLeaf()) {
+            return Stream.of(node);
+        }
+        final ArrayList<Node<T>> out = depthFirst(node, Order.POST_ORDER);
+        final int split = postOrderSplit(node);
+        return Stream.ofAll(out.subList(0, split))
+                .append(out.get(split))
+                .appendAll(out.subList(split + 1, out.size()));
     }
 
     static <T extends Object> Stream<Node<T>> traverseLevelOrder(Node<T> node) {
-        Stream<Node<T>> result = Stream.empty();
-        final java.util.Queue<Node<T>> queue = new java.util.LinkedList<>();
-        queue.add(node);
-        while (!queue.isEmpty()) {
-            final Node<T> next = queue.remove();
-            result = result.prepend(next);
-            queue.addAll(next.getChildren().toJavaList());
+        final ArrayList<Node<T>> out = new ArrayList<>(node.length());
+        out.add(node);
+        for (int read = 0; read < out.size(); read++) {
+            for (List<Node<T>> it = out.get(read).getChildren(); !it.isEmpty(); it = it.tail()) {
+                out.add(it.head());
+            }
         }
-        return result.reverse();
+        return Stream.ofAll(out);
+    }
+
+    /**
+     * Fills an exact-size lane with the pre-, in- or post-order of {@code root} using
+     * (owner, children) frames.
+     */
+    @SuppressWarnings("unchecked")
+    private static <T extends Object> ArrayList<Node<T>> depthFirst(Node<T> root, Order order) {
+        final ArrayList<Node<T>> out = new ArrayList<>(root.length());
+        final ArrayDeque<Object> frames = new ArrayDeque<>();
+        descend(root, frames, out, order);
+        while (climb(frames, out, order)) {
+            descend(((List<Node<T>>) frames.peek()).head(), frames, out, order);
+        }
+        return out;
+    }
+
+    /**
+     * Pushes one (owner, children) frame per branch on the leftmost path from {@code start}, then
+     * emits its leaf.
+     */
+    private static <T extends Object> void descend(Node<T> start, ArrayDeque<Object> frames,
+            ArrayList<Node<T>> out, Order order) {
+        Node<T> node = start;
+        while (!node.isLeaf()) {
+            if (order == Order.PRE_ORDER) {
+                out.add(node);
+            }
+            frames.push(node);
+            frames.push(node.getChildren());
+            node = node.getChildren().head();
+        }
+        out.add(node);
+    }
+
+    /**
+     * Pops finished subtrees; emits an in-order owner after its first child and a post-order owner
+     * after its last.
+     */
+    @SuppressWarnings("unchecked")
+    private static <T extends Object> boolean climb(ArrayDeque<Object> frames,
+            ArrayList<Node<T>> out, Order order) {
+        while (!frames.isEmpty()) {
+            final List<Node<T>> current = (List<Node<T>>) frames.pop();
+            final Node<T> owner = (Node<T>) frames.peek();
+            final List<Node<T>> rest = current.tail();
+            if ((order == Order.IN_ORDER && current == owner.getChildren())
+                    || (order == Order.POST_ORDER && rest.isEmpty())) {
+                out.add(owner);
+            }
+            if (!rest.isEmpty()) {
+                frames.push(rest);
+                return true;
+            }
+            frames.pop();
+        }
+        return false;
+    }
+
+    /**
+     * Post-order offset where the old AppendElements queue began: size of the leftmost leaf's
+     * parent, minus one.
+     */
+    private static <T extends Object> int postOrderSplit(Node<T> node) {
+        Node<T> parent = node;
+        while (!parent.getChildren().head().isLeaf()) {
+            parent = parent.getChildren().head();
+        }
+        return parent.length() - 1;
     }
 
     static <T extends Object, T1 extends Object, T2 extends Object> Tuple2<Node<T1>, Node<T2>> unzip(Node<T> node,
