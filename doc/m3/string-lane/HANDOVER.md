@@ -82,6 +82,14 @@ plans). Its 26 classes are now `src/java.base/share/classes/jdk/m3/text` (not ex
 The tests stay in `m3/core/test` for now and the workflows compile the moved sources from java.base;
 record `synexia.lexicons.related-source-range` follows with a `REVIEW_REQUIRED` direct-copy row.
 
+**Lucene and OpenNLP (2026-11-17).** Owner's choices in question dialogs: ONE module `jdk.m3.search` carries them
+with their upstream packages in `src/jdk.m3.search/providers/classes` (the Guava-in-`jdk.m3.collections` layout),
+landed unchanged first, then moved onto M3 String one text carrier per leaf. The module is not resolved by default
+(`make/CreateJmods.gmk`), so it never shadows an application's own Lucene. First PR: Lucene 9.10.0 core, queries,
+sandbox, queryparser through the provider pipeline of the Guava inline (bytecode identical to the vendored sources;
+the Java 19-21 multi-release sources are not carried). Next: OpenNLP 2.4.0 with the SLF4J API it needs, Lucene
+analysis-opennlp and analysis-common.
+
 ## 2. Invariants
 
 Break one of these and the leaf is wrong, whatever its tests say.

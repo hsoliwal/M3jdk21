@@ -1,0 +1,107 @@
+/*
+ * SPDX-License-Identifier: Apache-2.0 OR EPL-2.0
+ * Copyright (c) 2026 Synexia, Hitesh Soliwal (hsoliwal@gmail.com) and others
+ */
+
+// The libraries of jdk.m3.search, carried in providers/classes with their upstream packages.
+// The JDK build merges these exports and services into the module descriptor (make/common/modules/GensrcModuleInfo.gmk);
+// share/classes/module-info.java alone stays a complete descriptor of the module's own packages.
+
+// Apache Lucene 9.10.0 (legal/lucene.md): core, queries, sandbox and queryparser. The packages their own
+// descriptors export, and their service uses and providers.
+exports org.apache.lucene.analysis;
+exports org.apache.lucene.analysis.standard;
+exports org.apache.lucene.analysis.tokenattributes;
+exports org.apache.lucene.codecs;
+exports org.apache.lucene.codecs.compressing;
+exports org.apache.lucene.codecs.lucene90;
+exports org.apache.lucene.codecs.lucene90.blocktree;
+exports org.apache.lucene.codecs.lucene90.compressing;
+exports org.apache.lucene.codecs.lucene94;
+exports org.apache.lucene.codecs.lucene95;
+exports org.apache.lucene.codecs.lucene99;
+exports org.apache.lucene.codecs.perfield;
+exports org.apache.lucene.document;
+exports org.apache.lucene.geo;
+exports org.apache.lucene.index;
+exports org.apache.lucene.payloads;
+exports org.apache.lucene.queries;
+exports org.apache.lucene.queries.function;
+exports org.apache.lucene.queries.function.docvalues;
+exports org.apache.lucene.queries.function.valuesource;
+exports org.apache.lucene.queries.intervals;
+exports org.apache.lucene.queries.mlt;
+exports org.apache.lucene.queries.payloads;
+exports org.apache.lucene.queries.spans;
+exports org.apache.lucene.queryparser.charstream;
+exports org.apache.lucene.queryparser.classic;
+exports org.apache.lucene.queryparser.complexPhrase;
+exports org.apache.lucene.queryparser.ext;
+exports org.apache.lucene.queryparser.flexible.core;
+exports org.apache.lucene.queryparser.flexible.core.builders;
+exports org.apache.lucene.queryparser.flexible.core.config;
+exports org.apache.lucene.queryparser.flexible.core.messages;
+exports org.apache.lucene.queryparser.flexible.core.nodes;
+exports org.apache.lucene.queryparser.flexible.core.parser;
+exports org.apache.lucene.queryparser.flexible.core.processors;
+exports org.apache.lucene.queryparser.flexible.core.util;
+exports org.apache.lucene.queryparser.flexible.messages;
+exports org.apache.lucene.queryparser.flexible.precedence;
+exports org.apache.lucene.queryparser.flexible.precedence.processors;
+exports org.apache.lucene.queryparser.flexible.standard;
+exports org.apache.lucene.queryparser.flexible.standard.builders;
+exports org.apache.lucene.queryparser.flexible.standard.config;
+exports org.apache.lucene.queryparser.flexible.standard.nodes;
+exports org.apache.lucene.queryparser.flexible.standard.nodes.intervalfn;
+exports org.apache.lucene.queryparser.flexible.standard.parser;
+exports org.apache.lucene.queryparser.flexible.standard.processors;
+exports org.apache.lucene.queryparser.simple;
+exports org.apache.lucene.queryparser.surround.parser;
+exports org.apache.lucene.queryparser.surround.query;
+exports org.apache.lucene.queryparser.xml;
+exports org.apache.lucene.queryparser.xml.builders;
+exports org.apache.lucene.sandbox.codecs.idversion;
+exports org.apache.lucene.sandbox.document;
+exports org.apache.lucene.sandbox.index;
+exports org.apache.lucene.sandbox.queries;
+exports org.apache.lucene.sandbox.search;
+exports org.apache.lucene.search;
+exports org.apache.lucene.search.comparators;
+exports org.apache.lucene.search.knn;
+exports org.apache.lucene.search.similarities;
+exports org.apache.lucene.store;
+exports org.apache.lucene.util;
+exports org.apache.lucene.util.automaton;
+exports org.apache.lucene.util.bkd;
+exports org.apache.lucene.util.compress;
+exports org.apache.lucene.util.fst;
+exports org.apache.lucene.util.graph;
+exports org.apache.lucene.util.hnsw;
+exports org.apache.lucene.util.hppc;
+exports org.apache.lucene.util.mutable;
+exports org.apache.lucene.util.packed;
+exports org.apache.lucene.util.quantization;
+uses org.apache.lucene.analysis.CharFilterFactory;
+uses org.apache.lucene.analysis.TokenFilterFactory;
+uses org.apache.lucene.analysis.TokenizerFactory;
+uses org.apache.lucene.codecs.Codec;
+uses org.apache.lucene.codecs.DocValuesFormat;
+uses org.apache.lucene.codecs.KnnVectorsFormat;
+uses org.apache.lucene.codecs.PostingsFormat;
+uses org.apache.lucene.index.SortFieldProvider;
+provides org.apache.lucene.analysis.TokenizerFactory with
+    org.apache.lucene.analysis.standard.StandardTokenizerFactory;
+provides org.apache.lucene.codecs.Codec with
+    org.apache.lucene.codecs.lucene99.Lucene99Codec;
+provides org.apache.lucene.codecs.DocValuesFormat with
+    org.apache.lucene.codecs.lucene90.Lucene90DocValuesFormat;
+provides org.apache.lucene.codecs.KnnVectorsFormat with
+    org.apache.lucene.codecs.lucene99.Lucene99HnswVectorsFormat,
+    org.apache.lucene.codecs.lucene99.Lucene99HnswScalarQuantizedVectorsFormat;
+provides org.apache.lucene.codecs.PostingsFormat with
+    org.apache.lucene.codecs.lucene99.Lucene99PostingsFormat,
+    org.apache.lucene.sandbox.codecs.idversion.IDVersionPostingsFormat;
+provides org.apache.lucene.index.SortFieldProvider with
+    org.apache.lucene.search.SortField.Provider,
+    org.apache.lucene.search.SortedNumericSortField.Provider,
+    org.apache.lucene.search.SortedSetSortField.Provider;
