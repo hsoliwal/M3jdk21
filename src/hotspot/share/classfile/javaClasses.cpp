@@ -194,6 +194,7 @@ void JavaClasses::compute_offset(int& dest_offset, InstanceKlass* ik,
 // java_lang_String
 
 int java_lang_String::_value_offset;
+int java_lang_String::_chValue_offset;
 int java_lang_String::_m3_offset;
 int java_lang_String::_hash_offset;
 int java_lang_String::_hashIsZero_offset;
@@ -217,6 +218,7 @@ bool java_lang_String::test_and_set_flag(oop java_string, uint8_t flag_mask) {
 
 #define STRING_FIELDS_DO(macro) \
   macro(_value_offset, k, vmSymbols::value_name(), byte_array_signature, false); \
+  macro(_chValue_offset, k, "chValue",     char_array_signature,    false); \
   macro(_m3_offset, k, "m3",              m3_string_signature,     false); \
   macro(_hash_offset,  k, "hash",                  int_signature,        false); \
   macro(_hashIsZero_offset, k, "hashIsZero",       bool_signature,       false); \
@@ -309,6 +311,27 @@ Handle java_lang_String::basic_create(int length, bool is_latin1, TRAPS) {
   return h_obj;
 }
 
+// M3JDK String layout invariant (doc/m3/string-lane/STRING_LAYOUT_INVARIANT.md): every
+// String holds its chars in the private final char[] chValue as well as its bytes in value.
+// A String the VM makes gets its chars here, once its bytes are final; the array is never
+// written again.
+void java_lang_String::fill_char_value(Handle java_string, TRAPS) {
+  int length = java_lang_String::length(java_string());
+  typeArrayOop chars = oopFactory::new_charArray(length, CHECK);
+  oop obj = java_string();
+  typeArrayOop bytes = value(obj);
+  if (is_latin1(obj)) {
+    for (int index = 0; index < length; index++) {
+      chars->char_at_put(index, ((jchar) bytes->byte_at(index)) & 0xff);
+    }
+  } else {
+    for (int index = 0; index < length; index++) {
+      chars->char_at_put(index, bytes->char_at(index));
+    }
+  }
+  obj->obj_field_put(_chValue_offset, chars);
+}
+
 Handle java_lang_String::create_from_unicode(const jchar* unicode, int length, TRAPS) {
   bool is_latin1 = CompactStrings && UNICODE::is_latin1(unicode, length);
   Handle h_obj = basic_create(length, is_latin1, CHECK_NH);
@@ -335,6 +358,7 @@ Handle java_lang_String::create_from_unicode(const jchar* unicode, int length, T
   }
 #endif
 
+  fill_char_value(h_obj, CHECK_NH);
   return h_obj;
 }
 
@@ -379,6 +403,7 @@ Handle java_lang_String::create_from_str(const char* utf8_str, TRAPS) {
   }
 #endif
 
+  fill_char_value(h_obj, CHECK_NH);
   return h_obj;
 }
 
@@ -421,6 +446,7 @@ Handle java_lang_String::create_from_symbol(Symbol* symbol, TRAPS) {
   }
 #endif
 
+  fill_char_value(h_obj, CHECK_NH);
   return h_obj;
 }
 

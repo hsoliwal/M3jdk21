@@ -42,8 +42,6 @@ import sun.nio.cs.ArrayEncoder;
 final class M3String implements CharSequence {
     private static final int SPAN_SHIFT = Integer.SIZE;
     private static final long SPAN_MASK = 0xffff_ffffL;
-    /** Shared zero-length VM compatibility shadow, created by JNI after M3 activation. */
-    private static volatile byte[] emptyCompatibilityShadow;
 
     private static final M3StringAtom EMPTY_OWNER =
             new M3StringAtom(
@@ -1374,21 +1372,6 @@ final class M3String implements CharSequence {
      */
     byte[] materialize() {
         return nativeByteShadow(this, 0, length(), coder());
-    }
-
-    byte[] compatibilityValue() {
-        // VM layout sentinel only. Canonical text lives behind owner+coordinate.
-        // Even the empty sentinel is created by the explicit JNI shadow boundary.
-        byte[] shadow = emptyCompatibilityShadow;
-        if (shadow != null) return shadow;
-        synchronized (M3String.class) {
-            shadow = emptyCompatibilityShadow;
-            if (shadow == null) {
-                shadow = nativeByteShadow(EMPTY, 0, 0, String.LATIN1);
-                emptyCompatibilityShadow = shadow;
-            }
-            return shadow;
-        }
     }
 
     /** JNI-created final Java UTF-16 array shadow. */

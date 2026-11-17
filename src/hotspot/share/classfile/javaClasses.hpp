@@ -54,6 +54,7 @@ class java_lang_Object : AllStatic {
 class java_lang_String : AllStatic {
  private:
   static int _value_offset;
+  static int _chValue_offset;
   static int _m3_offset;
   static int _hash_offset;
   static int _hashIsZero_offset;
@@ -63,6 +64,8 @@ class java_lang_String : AllStatic {
   static bool _initialized;
 
   static Handle basic_create(int length, bool byte_arr, TRAPS);
+  // M3JDK layout invariant: fills the private final char[] chValue from the finished value bytes.
+  static void fill_char_value(Handle java_string, TRAPS);
 
   static inline void set_coder(oop string, jbyte coder);
 
