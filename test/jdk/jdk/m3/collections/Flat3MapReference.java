@@ -50,7 +50,8 @@ final class Flat3MapReference<K, V> {
 
     /** Retains the existing scaffold metadata descriptor for compatible tooling. */
     public static String scaffoldDescriptor() {
-        return "M3Flat3Map|FLAT3_MAP|OBJECT|OCCUPIED,REGIME_FLAT,REGIME_HASH|Object[] keyLane;Object[] valueLane";
+        return "M3Flat3Map|FLAT3_MAP|OBJECT|OCCUPIED,REGIME_FLAT,REGIME_HASH|Object[] " +
+                "keyLane;Object[] valueLane";
     }
 
     /** Returns the existing mapping or null (also when a present key maps to null). */
@@ -137,7 +138,8 @@ final class Flat3MapReference<K, V> {
 
     //FLLDCIM: MRL - L075 single owner: slot cursor for the Commons facade jdk.m3.collections.apache.M3Flat3Map
     /**
-     * Returns the first live slot at or after {@code from}, or -1 when there is none. Ascending slot
+     * Returns the first live slot at or after {@code from}, or -1 when there is none. Ascending
+     * slot
      * order is this map's iteration order: insertion order while inline (a removal shifts the later
      * slots down), table order once hashed. A cursor stays valid across {@link #setSlotValue} and
      * {@link #removeSlot}; any other structural change ends it.
@@ -150,14 +152,17 @@ final class Flat3MapReference<K, V> {
         return -1;
     }
 
-    /** Returns the key of live slot {@code slot}; IllegalStateException when the slot is not live. */
+    /** Returns the key of live slot {@code slot}; IllegalStateException when the slot is not live.
+     * */
     @SuppressWarnings("unchecked")
     public K slotKey(int slot) { return (K) keyLane[liveSlot(slot)]; }
 
-    /** Returns the value of live slot {@code slot}; IllegalStateException when the slot is not live. */
+    /** Returns the value of live slot {@code slot}; IllegalStateException when the slot is not
+     * live. */
     public V slotValue(int slot) { return valueAt(liveSlot(slot)); }
 
-    /** Replaces the value of live slot {@code slot} without a structural change; returns the old value. */
+    /** Replaces the value of live slot {@code slot} without a structural change; returns the old
+     * value. */
     public V setSlotValue(int slot, V value) {
         V previous = valueAt(liveSlot(slot));
         valueLane[slot] = value;
@@ -165,8 +170,10 @@ final class Flat3MapReference<K, V> {
     }
 
     /**
-     * Removes the mapping of live slot {@code slot} without a key lookup and returns the slot a cursor
-     * resumes from: the same slot while inline (the later slots shift down), the next one once hashed.
+     * Removes the mapping of live slot {@code slot} without a key lookup and returns the slot a
+     * cursor
+     * resumes from: the same slot while inline (the later slots shift down), the next one once
+     * hashed.
      */
     public int removeSlot(int slot) {
         if (!hashed) {
