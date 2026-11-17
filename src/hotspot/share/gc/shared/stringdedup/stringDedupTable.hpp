@@ -76,6 +76,9 @@ private:
   // can provide the deduplication thread with access to a String that is
   // incompletely constructed; the value could be set before the coder.
   using TableValue = WeakHandle;
+  // M3JDK layout invariant (decision 51, stage I): the table also holds weak references to the
+  // char[] const chars (chValue) of Strings, hashed over their raw bytes; find() tells the two
+  // kinds apart by klass, so equal texts share one chValue as they share one value array.
 
   // Weak storage for the string data in the table.
   static OopStorage* _table_storage;
@@ -93,9 +96,12 @@ private:
   static uint compute_hash(typeArrayOop obj);
   static size_t hash_to_index(uint hash_code);
   static void add(TableValue tv, uint hash_code);
-  static TableValue find(typeArrayOop obj, uint hash_code);
+  static TableValue find(typeArrayOop obj, uint hash_code, const Klass* entry_klass);
   static void install(typeArrayOop obj, uint hash_code);
   static bool deduplicate_if_permitted(oop java_string, typeArrayOop value);
+  static void deduplicate_chars(oop java_string);
+  static bool deduplicate_chars_if_permitted(oop java_string, typeArrayOop expected,
+                                             typeArrayOop chars);
   static bool try_deduplicate_shared(oop java_string);
   static bool try_deduplicate_found_shared(oop java_string, oop found);
   static Bucket* make_buckets(size_t number_of_buckets, size_t reserve = 0);
@@ -114,7 +120,8 @@ public:
 
   // Deduplicate java_string.  If the table already contains the string's
   // data array, replace the string's data array with the one in the table.
-  // Otherwise, add the string's data array to the table.
+  // Otherwise, add the string's data array to the table.  The same for the
+  // string's const chars (chValue), see deduplicate_chars (M3JDK stage I).
   static void deduplicate(oop java_string);
 
   // Returns true if table needs to grow.
