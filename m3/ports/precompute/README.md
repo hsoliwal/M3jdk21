@@ -15,11 +15,23 @@ packages into the JDK.
 | Native library `m3_precompute` | `src/java.base/share/native/libm3precompute` (opt-in, built by `make/m3/precompute/CMakeLists.txt`; the C checks are in `test/jdk/jdk/m3/precompute/native`) |
 | Maven build, verify scripts, records | this folder; `pom.xml` builds the same artifact `com.m3:m3-precompute` from the folders above, and its `native` profile runs that CMake build |
 
-On an M3JDK image the package is loaded from java.base and is not exported, so a program on the class path
-that uses it needs `--add-exports java.base/jdk.m3.precompute=ALL-UNNAMED`. On any other JDK the Maven
-artifact behaves as before. From java.base, `System.loadLibrary("m3_precompute")` searches the JDK's own
-library directory; the explicit `m3.precompute.native.path` and `m3.precompute.native.pathFile` properties
-work as before.
+On any JDK other than M3JDK the Maven artifact behaves as before. On an M3JDK image (checked with the classes
+patched into a stock JDK 21's java.base, 2026-11-17):
+
+- The package is loaded from java.base and is not exported. A class-path program that uses it needs
+  `--add-exports java.base/jdk.m3.precompute=ALL-UNNAMED`, and so do class-path providers of
+  `IndexPrecomputeProvider` and `IndexPrecomputeAccelerator` (java.base declares `uses` for both; that part
+  is not run, because a stock JDK cannot patch a module descriptor).
+- The `IndexPrecomputeSnapshot$Bootstrap` premain agent needs
+  `--add-exports java.base/jdk.m3.precompute=java.instrument`.
+- This folder's Maven build and tests must run on a JDK that is not M3JDK: there, every class of package
+  `jdk.m3.precompute` is loaded from java.base, so the class-path tests and jar are never used.
+- From java.base, `System.loadLibrary` searches the JDK's own library directory, not `java.library.path`:
+  `m3_precompute`, `m3_literal_batch_probe` and `m3_utf16_sparse_probe` must be there, or, for
+  `m3_precompute` only, named by the `m3.precompute.native.path` / `.pathFile` properties.
+- `NativePrecomputeOps` (boot loader) and `jdk.m3.llm` (application loader) both load `m3_ncm`. A JVM
+  loads a native library into one class loader only, so in one process only the first of the two gets the
+  NCM native lane; the other uses its Java path (`M3NcmNative.load` fails). Open: owner decision.
 
 ## Ownership split
 
