@@ -1,0 +1,34 @@
+# SPDX-License-Identifier: Apache-2.0 OR EPL-2.0
+# Copyright (c) 2026 Synexia, Hitesh Soliwal and others
+#
+# M3AtomizeInventory without M3CartesianRecipeIdeaExpansionRecipe (2026-11-17): on Apache FreeMarker 2.3.35 sources
+# that recipe throws "IllegalArgumentException: CIR identity text" (CIR.text:513 from CIR.prepare:211) in its generate
+# phase and aborts the whole run before any table is written. The atom, plane, semantic and normal-form tables do not
+# need it. Same recipes, order and parameters as M3AtomizeInventory otherwise. Use: ATOMIZE_EXTRA_CP=<this folder>.
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.rewrite.M3AtomizeInventoryNoIdeas
+displayName: M3 atomize inventory without idea expansion
+description: M3AtomizeInventory without the Cartesian recipe-idea expansion, for sources on which that recipe fails.
+recipeList:
+  - com.synexia.rewrite.M3RecipeFirstJavaAtomInventoryRecipe
+  - com.synexia.rewrite.M3AtomStructureInventoryRecipe
+  - com.synexia.rewrite.M3SemanticCodeInventoryRecipe
+  - com.synexia.rewrite.M3CodeSplitJavaDonorReviewRecipe:
+      sourceFilePattern: "**/*.java"
+  - com.synexia.rewrite.M3CodeSplitRelationshipInventoryRecipe
+  - com.synexia.rewrite.M3CodeSignalTriggerRecipe:
+      sourceFilePattern: "**/*.java"
+  - com.synexia.rewrite.M3SignalChainRecipe:
+      sourceFilePattern: "**/*.java"
+      passBudget: 4
+      parallelism: 4
+  - com.synexia.rewrite.M3SemanticNormalFormRecipe:
+      sourceFilePattern: "**/*.java"
+  - com.synexia.rewrite.M3RepositorySemanticGraphRecipe
+  - com.synexia.rewrite.M3RelationshipPatternizerRecipe
+  - com.synexia.rewrite.M3AtomPatternFanInRecipe:
+      sourceFilePattern: "**/*.java"
+      minimumOccurrences: 2
+      passBudget: 4
+      parallelism: 4
