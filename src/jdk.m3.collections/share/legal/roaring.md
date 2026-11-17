@@ -9,10 +9,12 @@ https://github.com/hsoliwal/RoaringBitmap is identical to the library at that co
 
 The sources are those of the release published on Maven Central as version 1.6.30 (2026-11-14) plus one commit,
 "Prevent run container iterators from rewinding in advanceIfNeeded" (#909), which changes `RunContainer` and
-`buffer.MappeableRunContainer`: the sources jar of 1.6.30 differs from the main sources of this commit in these two
-files only. The names in the library's GitHub repository are one step behind Maven Central: the tag named `1.6.29`
-(`e0c9d3c4ac49`) is the state Maven Central has as 1.6.30, the commit after it sets the version number to 1.6.30,
-and there is no tag `1.6.30`. Maven Central's 1.6.29 is the release before.
+`buffer.MappeableRunContainer`: the sources jar of `RoaringBitmap` 1.6.30 differs from the main sources of this
+commit in these two files only, and the sources jar of `bsi` 1.6.30 not at all. (The sources jar holds only the Java 8
+`ArraysShim`; the Java 11 one is in the binary jar, under `META-INF/versions/11`.) The names in the library's GitHub
+repository are one step behind Maven Central: the tag named `1.6.29` (`e0c9d3c4ac49`) is the state Maven Central has
+as 1.6.30, the commit after it sets the version number to 1.6.30, and there is no tag `1.6.30`. Maven Central's
+1.6.29 is the release before.
 
 Taken are 114 sources of two of the repository's projects:
 
@@ -41,9 +43,11 @@ Software Foundation, which the copies in the library do not have. The attributio
 reproduced below.
 
 The sources also point to other work without copying a file: the comparators of the bit-sliced index refer to
-https://github.com/lemire/BitSliceIndex (five links, kept as they are), `longlong.RoaringIntPacking` cites a Stack
-Overflow answer for a one-line method, and `longlong.Roaring64NavigableMap` says of a private binary search "From
-Arrays.binarySearch (Comparator)".
+https://github.com/lemire/BitSliceIndex (five links, kept as they are); `longlong.Roaring64NavigableMap` refers to
+`roaring64map.hh` of CRoaring (the 64-bit format and two private methods), to an article on java-performance.info,
+and says of a private binary search "From Arrays.binarySearch (Comparator)";
+`bsi.longlong.Roaring64NavigableMapSliceIndex` refers to `bsi64.go` of RoaringBitmap/roaring (its format);
+`longlong.RoaringIntPacking` cites a Stack Overflow question for a one-line method.
 
 ### Changes made by Synexia (2026-11-17)
 
@@ -53,18 +57,19 @@ The changes were mechanical (com.synexia repository, recipe crate `inverse-packa
 - the package `org.roaringbitmap` is named `jdk.m3.collections.roaring`, in package and import declarations,
   qualified names and documentation. Five links in comments of `bsi` that hold the path `org/roaringbitmap` of
   another repository are not renamed;
-- 12 top-level types that shared a source file with another type were moved to files of their own, with the header
-  and the imports of the file they came from: the two character iterators of each of `ArrayContainer`,
-  `BitmapContainer`, `RunContainer`, `buffer.MappeableArrayContainer`, `buffer.MappeableBitmapContainer` and
-  `buffer.MappeableRunContainer`. javac warns when such a type is used from another file, and the JDK build treats
+- 12 top-level types that shared a source file with another type and are used from another file were moved to files
+  of their own, with the header and the imports of the file they came from: the two character iterators of each of
+  `ArrayContainer`, `BitmapContainer`, `RunContainer` and `buffer.MappeableBitmapContainer`, and two of the four of
+  each of `buffer.MappeableArrayContainer` and `buffer.MappeableRunContainer` (the two `Raw...` ones are used in
+  their own file only and stay). javac warns when such a type is used from another file, and the JDK build treats
   warnings as errors. Nothing inside a type changed;
 - `@SuppressWarnings` was added to 42 top-level types for the lint categories the JDK build reports as errors;
 - documentation, for doclint: one bare `<` was written as `&lt;` (`SuccinctRank`, in
   `Returns the number of integers <= x.`); in `bsi.longlong.Roaring64NavigableMapSliceIndex` nine `</br>` became
   `<br>` and one `</p>` that closes nothing was removed.
 
-Compiled before and after these changes, every one of the 191 classes has the same members and the same
-instructions.
+Compiled from the renamed, otherwise unedited sources and from these sources, every one of the 191 classes has the
+same members and the same instructions.
 
 ### Exported packages
 
@@ -79,7 +84,8 @@ Exported are the four packages the library's own module descriptor exports (`roa
 The module has two classes of its own named `RoaringBitmap` and `Roaring64Bitmap` in the package
 `jdk.internal.m3.collections.bits`, which is not exported. They are scaffolds whose instance methods throw
 `NotYetReceived`. Its exported package `jdk.m3.collections.bits` has `RoaringIntSet` and `RoaringLongSet`,
-implementations of its own. None of the four is this library or uses it.
+implementations of its own, and its exported package `jdk.m3.collections` has its own `IntIterator` and
+`LongIterator`. None of these is this library or uses it.
 
 ### Notices of Apache Hadoop and Apache HBase (for `bsi.WritableUtils` and `bsi.Pair`)
 

@@ -30,9 +30,16 @@ sources are:
   file has been copied from http://thomas.baudel.name/Visualisation/VisuTri/inplacestablesort.html". That page says
   "This code is litteraly copied from the C++ stl library and translated in Java" and "Copyright Thomas Baudel,
   1998-2006"; it has no license statement (read 2026-11-17). Brownies Collections distributes these files as part
-  of the library under its Apache License; neither the files nor the page state terms of their own.
+  of the library under its Apache License; neither the files nor the page state terms of their own. The code has
+  the structure of the C++ Standard Template Library's merge without a buffer (`__merge_without_buffer`: the names
+  `first_cut`, `second_cut`, `len11`, `len22`, lower and upper bound, rotation). The page does not name the STL
+  implementation it translated; the STL of Hewlett-Packard and Silicon Graphics, from which the common
+  implementations descend, carries the two notices reproduced below, which ask that they appear in all copies. Whether
+  they apply to this translation is a question for the owner; they are reproduced here so that nothing is missing if
+  they do.
 
-Three more origins are not stated in a header. They are among the 88 sources that name Thomas Mauch only:
+Two more origins are not stated in a header (the third, Guava's `SortedLists` for the eight binary search classes, is
+named above). They are among the 88 sources that name Thomas Mauch only:
 
 - the tree node of `BigList` (`BigList.BlockNode`) and of the eight primitive big lists (`primitive.BooleanBigList`
   to `primitive.ShortBigList`, their `...BlockNode` classes) is adapted from `TreeList.AVLNode` of Apache Commons
@@ -43,9 +50,9 @@ Three more origins are not stated in a header. They are among the 88 sources tha
   private class `helper.GapLists.CollectorImpl` follows `java.util.stream.Collectors.CollectorImpl`. Method
   documentation in `IList` and the primitive `I...List` classes repeats text of the `java.util` documentation. The
   origin is the JDK (OpenJDK: GNU General Public License, version 2, with the Classpath exception, the license of
-  this repository);
-- the library does not say which release of Guava, Apache Commons Lang or Apache Commons Collections it copied
-  from.
+  this repository).
+
+The library does not say which release of Guava, Apache Commons Lang or Apache Commons Collections it copied from.
 
 ### Notice of Apache Commons Lang (for `helper.MutableInt`)
 
@@ -55,6 +62,35 @@ Copyright 2001-2026 The Apache Software Foundation
 
 This product includes software developed at
 The Apache Software Foundation (https://www.apache.org/).
+```
+
+### Notices of the Standard Template Library (for the nine merge sort classes)
+
+As in `libstdc++-v3/include/bits/stl_algo.h` of GCC:
+
+```
+Copyright (c) 1994
+Hewlett-Packard Company
+
+Permission to use, copy, modify, distribute and sell this software
+and its documentation for any purpose is hereby granted without fee,
+provided that the above copyright notice appear in all copies and
+that both that copyright notice and this permission notice appear
+in supporting documentation.  Hewlett-Packard Company makes no
+representations about the suitability of this software for any
+purpose.  It is provided "as is" without express or implied warranty.
+
+
+Copyright (c) 1996
+Silicon Graphics Computer Systems, Inc.
+
+Permission to use, copy, modify, distribute and sell this software
+and its documentation for any purpose is hereby granted without fee,
+provided that the above copyright notice appear in all copies and
+that both that copyright notice and this permission notice appear
+in supporting documentation.  Silicon Graphics makes no
+representations about the suitability of this software for any
+purpose.  It is provided "as is" without express or implied warranty.
 ```
 
 ### Notice of Apache Commons Collections (for the tree node of the big lists)
@@ -96,8 +132,8 @@ The changes were mechanical (com.synexia repository, recipe crate `inverse-packa
     `@param comparator`);
   - 9 `<p>` that open no paragraph were removed.
 
-Compiled before and after these changes, every one of the 240 classes has the same members and the same
-instructions.
+Compiled from the renamed, otherwise unedited sources and from these sources, every one of the 240 classes has the
+same members and the same instructions.
 
 ### Exported packages
 
@@ -108,8 +144,9 @@ The library has no module descriptor; its manifest exports all five packages, an
 - The interfaces `primitive.I...Listable` are package-private and appear in public signatures of the public
   `I...List` classes: code outside the package cannot name them.
 - A copy of a `BigList` or of a primitive `...BigList` (`copy()`) is not independent of the list. Sorting the copy of
-  a list that fits in one block sorts the list as well: after `BigList.create(3, 1, 2).copy().sort(null)` the
-  list reads `[1, 2, 3]` (`GapList` keeps `[3, 1, 2]`). After many inserts and removes at random places (300,000
+  a small list sorts the list as well (up to 950 elements with the default block size of 1000, in an independent
+  test): after `BigList.create(3, 1, 2).copy().sort(null)` the list reads `[1, 2, 3]` (`GapList` keeps
+  `[3, 1, 2]`). After many inserts and removes at random places (300,000
   and 100,000 in the test) a copy cannot be sorted: `IntBigList.copy().sort()` fails with
   `ArrayIndexOutOfBoundsException`, `BigList.copy().sort(null)` with `NullPointerException`; an independent test found
   such a copy unreadable before any sort. The list itself stays readable and sortable. The library's classes,
