@@ -16197,8 +16197,8 @@
           {
             "repo": "hsoliwal/M3jdk21",
             "commit": null,
-            "module": "m3/ports/precompute",
-            "path": "m3/ports/precompute/src/main/java/jdk/m3/precompute/NcmCodebook.java",
+            "module": "java.base",
+            "path": "src/java.base/share/classes/jdk/m3/precompute/NcmCodebook.java",
             "symbol": "jdk.m3.precompute.NcmCodebook",
             "signatures": [],
             "sha256": "28d388963a98b66612bd6af4a427bd24a9bc53326c46836369c335d0075dc53b",
@@ -16209,8 +16209,8 @@
           {
             "repo": "hsoliwal/M3jdk21",
             "commit": null,
-            "module": "m3/ports/precompute",
-            "path": "m3/ports/precompute/src/main/java/jdk/m3/precompute/NativePrecomputeOps.java",
+            "module": "java.base",
+            "path": "src/java.base/share/classes/jdk/m3/precompute/NativePrecomputeOps.java",
             "symbol": "jdk.m3.precompute.NativePrecomputeOps",
             "signatures": [],
             "sha256": "43f389d9903774b9e96ac6b0a2a1d510b54ba51f6a835a4d905df9c3745ce304",

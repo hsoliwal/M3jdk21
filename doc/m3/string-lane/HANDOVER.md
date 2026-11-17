@@ -55,6 +55,17 @@ tracked files, which the owner confirms per batch. Evidence gathered so far: sec
 (how a library becomes a module), section 5d (the forks and the pinned vendored copies), section 5f (the M3AST
 families).
 
+**Landed after that (2026-11-17): item 2 started with `m3/ports/precompute`.** Owner's choice in a question
+dialog: java.base with the package name kept. Its 68 classes are now `src/java.base/share/classes/jdk/m3/precompute`
+(not exported) and its 50 JUnit tests `test/jdk/jdk/m3/precompute`; `m3/ports/precompute/pom.xml`
+builds the same artifact from there, and the natives, verify scripts and records stay in that folder for
+now. The two current targets of `synexia.precompute.ncm-codebook` in `m3/docs/name-mapping.json` follow
+the move (its lineage keeps the old paths; pin in `m3/tooling/name-contract/name-plan.json` updated).
+Next in item 2: the natives into
+`src/java.base/share/native/libm3precompute`, then `m3/ports/indexstring` (16 of its 20 classes compile in
+java.base as they are; 4 take `jdk.m3.collections.ProgressMonitor`, which java.base cannot see, and the
+public-names check lists `jdk.internal.m3.indexstring` as a donor namespace).
+
 ## 2. Invariants
 
 Break one of these and the leaf is wrong, whatever its tests say.

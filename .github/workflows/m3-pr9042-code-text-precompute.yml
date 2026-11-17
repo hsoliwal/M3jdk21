@@ -8,6 +8,8 @@ on:
       - 'm3/compatibility/check_m3_pr9042_code_text_precompute.py'
       - 'm3/docs/m3-pr9042-code-text-precompute-handoff.md'
       - 'm3/ports/precompute/**'
+      - 'src/java.base/share/classes/jdk/m3/precompute/**'
+      - 'test/jdk/jdk/m3/precompute/**'
       - 'm3/tooling/migration-recipes/src/main/resources/**/m3-pr9042-precompute-handoff/**'
       - 'm3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-pr9042-precompute-handoff.yml'
       - '.github/workflows/m3-pr9042-code-text-precompute.yml'
