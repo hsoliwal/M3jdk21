@@ -37,14 +37,17 @@ import jdk.m3.collections.guava.annotations.GwtCompatible;
  * characters.
  *
  * <p>As there are important reasons, including potential security issues, to handle Unicode
- * correctly if you are considering implementing a new escaper you should favor using RefUnicodeEscaper
+ * correctly if you are considering implementing a new escaper you should favor using
+ * RefUnicodeEscaper
  * wherever possible.
  *
- * <p>A {@code RefUnicodeEscaper} instance is required to be stateless, and safe when used concurrently
+ * <p>A {@code RefUnicodeEscaper} instance is required to be stateless, and safe when used
+ * concurrently
  * by multiple threads.
  *
  * <p>Popular escapers are defined as constants in classes like {@link
- * jdk.m3.collections.guava.html.HtmlEscapers} and {@link jdk.m3.collections.guava.xml.XmlEscapers}. To create
+ * jdk.m3.collections.guava.html.HtmlEscapers} and {@link jdk.m3.collections.guava.xml.XmlEscapers}.
+ * To create
  * your own escapers extend this class and implement the {@link #escape(int)} method.
  *
  * @author David Beaumont
@@ -95,7 +98,8 @@ abstract class RefUnicodeEscaper extends Escaper {
    *
    * <p><b>Note:</b> When implementing an escaper it is a good idea to override this method for
    * efficiency by inlining the implementation of {@link #nextEscapeIndex(CharSequence, int, int)}
-   * directly. Doing this for {@link jdk.m3.collections.guava.net.PercentEscaper} more than doubled the
+   * directly. Doing this for {@link jdk.m3.collections.guava.net.PercentEscaper} more than doubled
+   * the
    * performance for unescaped strings (as measured by {@code CharEscapersBenchmark}).
    *
    * @param string the literal string to be escaped

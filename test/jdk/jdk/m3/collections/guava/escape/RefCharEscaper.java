@@ -29,11 +29,13 @@ import jdk.m3.collections.guava.annotations.GwtCompatible;
  * resulting XML document is parsed, the parser API will return this text as the original literal
  * string {@code "Foo<Bar>"}.
  *
- * <p>A {@code RefCharEscaper} instance is required to be stateless, and safe when used concurrently by
+ * <p>A {@code RefCharEscaper} instance is required to be stateless, and safe when used concurrently
+ * by
  * multiple threads.
  *
  * <p>Popular escapers are defined as constants in classes like {@link
- * jdk.m3.collections.guava.html.HtmlEscapers} and {@link jdk.m3.collections.guava.xml.XmlEscapers}. To create
+ * jdk.m3.collections.guava.html.HtmlEscapers} and {@link jdk.m3.collections.guava.xml.XmlEscapers}.
+ * To create
  * your own escapers extend this class and implement the {@link #escape(char)} method.
  *
  * @author Sven Mawson
