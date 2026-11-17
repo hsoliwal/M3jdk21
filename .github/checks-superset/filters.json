@@ -6633,6 +6633,8 @@
    "pull_request": {
     "paths": [
      "m3/ports/regex-cursor/**",
+     "src/java.base/share/classes/jdk/m3/regexcursor/**",
+     "test/jdk/jdk/m3/regexcursor/**",
      ".github/workflows/m3-seek-verification-order-20261102.yml"
     ]
    },

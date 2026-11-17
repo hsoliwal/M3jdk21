@@ -11,7 +11,8 @@
   <name>M3JDK :: Regex Cursor Port</name>
   <description>Regex over M3 strings and token-id lanes through a chunk cursor (pattern port of
     helix-editor/regex-cursor): precompute and literal gates, lazy DFA, PikeVM, stock
-    java.util.regex as oracle and last-resort engine. No java.base change.</description>
+    java.util.regex as oracle and last-resort engine. The sources are part of java.base
+    (package jdk.m3.regexcursor, not exported).</description>
   <properties>
     <maven.compiler.release>21</maven.compiler.release>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -28,6 +29,10 @@
     </dependency>
   </dependencies>
   <build>
+    <!-- The sources are part of java.base (src/java.base/share/classes/jdk/m3/regexcursor) and the
+         tests are in test/jdk/jdk/m3/regexcursor. This pom builds the same artifact from there. -->
+    <sourceDirectory>${project.basedir}/../../../src/java.base/share/classes/jdk/m3/regexcursor</sourceDirectory>
+    <testSourceDirectory>${project.basedir}/../../../test/jdk/jdk/m3/regexcursor</testSourceDirectory>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -49,6 +54,9 @@
         <configuration>
           <useModulePath>false</useModulePath>
           <argLine>-Xmx1g @{argLine}</argLine>
+          <systemPropertyVariables>
+            <m3.regexcursor.examples>${project.basedir}/../../../test/jdk/jdk/m3/regexcursor/examples</m3.regexcursor.examples>
+          </systemPropertyVariables>
         </configuration>
       </plugin>
       <plugin>

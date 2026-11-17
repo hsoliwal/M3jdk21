@@ -1,0 +1,3 @@
+(* A small expression grammar. LL(1) for the given tokens. *)
+expression = atom, { '+', atom } ;
+atom = IDENT | NUMBER ;

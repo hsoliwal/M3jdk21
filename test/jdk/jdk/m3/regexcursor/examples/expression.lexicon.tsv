@@ -1,0 +1,8 @@
+# Example data-only Java-like expression specification; not Java's complete grammar
+language	demo-expression
+revision	1.0
+literal	3	false	+
+regex	1	0	10	[A-Za-z_][A-Za-z0-9_]*
+regex	2	0	20	[0-9]+
+symbol	IDENT	1
+symbol	NUMBER	2

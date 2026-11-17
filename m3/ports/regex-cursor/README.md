@@ -2,9 +2,34 @@
 <!-- Copyright 2026 Hitesh Soliwal and contributors -->
 # M3JDK regex cursor port
 
-Status: isolated Apache-2.0 proving ground. Not on the bootstrap path, no `src/**` change, no
-public JDK API. Design: [`m3/docs/regex-cursor/DESIGN.md`](../../docs/regex-cursor/DESIGN.md).
+Status: part of `java.base` (package `jdk.m3.regexcursor`, not exported; the Apache-2.0 headers
+are kept). No public JDK API. Design: [`m3/docs/regex-cursor/DESIGN.md`](../../docs/regex-cursor/DESIGN.md).
 Donors: [`FOSS_REUSE_DECISION.tsv`](FOSS_REUSE_DECISION.tsv), [`NOTICE`](NOTICE).
+
+## Location
+
+| What | Where |
+|---|---|
+| Java sources | `src/java.base/share/classes/jdk/m3/regexcursor`, compiled into java.base by the JDK build |
+| JUnit tests and proofs | `test/jdk/jdk/m3/regexcursor` (grammar test data in its `examples/`), run by this folder's `pom.xml` (not by jtreg) |
+| Maven build, test-only JNI oracle (`src/test/native`), proof scripts, records | this folder; `pom.xml` builds the same artifact `com.m3:m3-regex-cursor` from the two folders above |
+
+On an M3JDK image the package is loaded from java.base and is not exported, so a program on the class path
+that uses it needs `--add-exports java.base/jdk.m3.regexcursor=ALL-UNNAMED`. On any other JDK the Maven
+artifact behaves as before. The scripts in `proofs/` still name `src/main/java` and the `M3`-prefixed
+class names of before the rename; they were not changed by the move.
+
+## Language-spec grammar precompute
+
+From com.synexia #18253: `GrammarSpecification` (versioned lexical rules over `StaticGrammarLexicon`
+and an LL(1) prediction table in packed arrays, with int, `IntBuffer`, long-index and streaming token
+views), `EbnfGrammar` (bounded BNF/EBNF import), `GrammarImageTool` (writes `.m3grammar` images) and
+`Rfc8259JsonGrammar` (RFC 8259 JSON); `GrammarTokenProjection` gained `projectPrepared` and
+`projectPreparedCompleteCursor`. A grammar image is read back only against a SHA-256 pinned outside the
+image. java.base copies only the resource extensions its build lists, so the RFC 8259 image is the
+Base64 constant in `Rfc8259JsonGrammarImage`. `GrammarSpecificationProof`, `GrammarEbnfProof`,
+`GrammarImageProof`, `GrammarImageV2Proof`, `GrammarStreamingProof` and `Rfc8259JsonProof` are standalone
+`main` programs, run from `test/jdk/jdk/m3/regexcursor` (they read `examples/`).
 
 | Class | Role |
 |---|---|
