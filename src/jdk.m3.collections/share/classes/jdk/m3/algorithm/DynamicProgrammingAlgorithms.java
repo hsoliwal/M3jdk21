@@ -210,23 +210,91 @@ public final class DynamicProgrammingAlgorithms {
             ProgressMonitor monitor) {
         Set<String> words = new HashSet<>(dictionary);
         int maxLength = words.stream().mapToInt(String::length).max().orElse(0);
+        ReversedTrie trie = new ReversedTrie(words);
         AlgorithmSupport.begin(monitor, "word-break", (long) value.length() * Math.max(1, maxLength));
         try {
             boolean[] reachable = new boolean[value.length() + 1];
             reachable[0] = true;
             for (int end = 1; end <= value.length(); end++) {
                 int startMin = Math.max(0, end - maxLength);
-                for (int start = end - 1; start >= startMin; start--) {
-                    AlgorithmSupport.tick(monitor);
-                    if (reachable[start] && words.contains(value.substring(start, end))) {
-                        reachable[end] = true;
-                        break;
-                    }
-                }
+                reachable[end] = endsAWord(value, end, startMin, reachable, trie, monitor);
             }
             return reachable[value.length()];
         } finally {
             monitor.done();
+        }
+    }
+
+    //FLLDCIM: LEETCODIFY — pattern TRIE_WALK
+    /** Whether a dictionary word ends at {@code end} and starts at a reachable position. */
+    private static boolean endsAWord(String value, int end, int startMin, boolean[] reachable,
+            ReversedTrie trie, ProgressMonitor monitor) {
+        int node = 0;
+        for (int start = end - 1; start >= startMin; start--) {
+            AlgorithmSupport.tick(monitor);
+            if (node >= 0) node = trie.child(node, value.charAt(start));
+            if (node >= 0 && reachable[start] && trie.terminal(node)) return true;
+        }
+        return false;
+    }
+
+    //FLLDCIM: LEETCODIFY — pattern MASK (open addressing) + BITMAP (terminal nodes)
+    /**
+     * A trie of the reversed words: the edge (node, char) is the key (node << 16 | char) + 1 of an
+     * open-addressing table sized to a power of two at least twice the edge count; terminal nodes
+     * are bits.
+     */
+    private static final class ReversedTrie {
+        private final long[] keys;
+        private final int[] children;
+        private final long[] terminal;
+        private final int mask;
+        private int nodes = 1;
+
+        ReversedTrie(Set<String> words) {
+            long chars = 0;
+            for (String word : words) chars += word.length();
+            long wanted = Math.max(4L, 2 * chars + 1); // load at most one half
+            int capacity = Integer.highestOneBit((int) Math.min(1 << 30, wanted) - 1) << 1;
+            keys = new long[capacity];
+            children = new int[capacity];
+            terminal = new long[(int) ((chars + 64) >>> 6)];
+            mask = capacity - 1;
+            for (String word : words) insert(word);
+        }
+
+        private void insert(String word) {
+            int node = 0;
+            for (int i = word.length() - 1; i >= 0; i--) node = childOrAdd(node, word.charAt(i));
+            terminal[node >>> 6] |= 1L << node;
+        }
+
+        /** The child of {@code node} along {@code c}, or -1. */
+        int child(int node, char c) {
+            long key = ((long) node << 16 | c) + 1;
+            for (int slot = slot(key); keys[slot] != 0; slot = (slot + 1) & mask) {
+                if (keys[slot] == key) return children[slot];
+            }
+            return -1;
+        }
+
+        private int childOrAdd(int node, char c) {
+            long key = ((long) node << 16 | c) + 1;
+            int slot = slot(key);
+            for (; keys[slot] != 0; slot = (slot + 1) & mask) {
+                if (keys[slot] == key) return children[slot];
+            }
+            keys[slot] = key;
+            children[slot] = nodes;
+            return nodes++;
+        }
+
+        boolean terminal(int node) {
+            return (terminal[node >>> 6] & 1L << node) != 0;
+        }
+
+        private int slot(long key) {
+            return (int) (key * 0x9E3779B97F4A7C15L >>> 32) & mask;
         }
     }
 
