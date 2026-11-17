@@ -1,0 +1,180 @@
+// SPDX-License-Identifier: Apache-2.0 OR EPL-2.0
+// Copyright (c) 2026 Synexia, Hitesh Soliwal and others
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.util.function.Function;
+import org.antlr.runtime.ANTLRStringStream;
+import org.antlr.runtime.Token;
+import org.stringtemplate.v4.STErrorListener;
+import org.stringtemplate.v4.compiler.STLexer;
+import org.stringtemplate.v4.misc.ErrorManager;
+import org.stringtemplate.v4.misc.STMessage;
+
+/**
+ * Engine-oracle proof of String.translateEscapes(EscapeSyntax) on a stock JVM whose String carries the head method
+ * text. FTL: FreeMarker 2.3.35 StringUtil.FTLStringLiteralDec (the decoder its parser applies to a non-raw string
+ * literal body); its ParseException answers as IllegalArgumentException. ST: StringTemplate 4.3.4 STLexer (with
+ * antlr-runtime 3.5.3) lexing the template {@code <"body">}: the STRING token's text without its quotes, or
+ * IllegalArgumentException when the lexer reports an error (EOF in string). ST bodies holding an unescaped quotation
+ * mark (no ST literal has one) or U+FFFF (STLexer reads it as its EOF char) have no engine answer and are left out.
+ * Texts: every string of 0..4 units over FTL_UNITS (every FTL escape letter, hex digits, the halves of two surrogate
+ * pairs sharing a high half, U+FFFF), x-escape templates, every string of 0..5 units over ST_UNITS, every BMP unit
+ * after a backslash and in two contexts, and window-seam texts (deciding unit at 505..520 and 1018..1030). Also
+ * checks that the answer is the receiver whenever it equals it. Exit 1 on a mismatch.
+ */
+public final class EscapeSyntaxProof {
+    private static final char HIGH = (char) 0xD835, LOW = (char) 0xDD1E, LOW_2 = (char) 0xDD1F;
+    private static final char[] FTL_UNITS = {'\\', '"', '\'', 'n', 'r', 't', 'f', 'b', 'g', 'l', 'a', '{', '=', 'x',
+        '0', '9', 'A', 'F', 'z', 'u', '$', HIGH, LOW, (char) 0xFFFF};
+    private static final char[] ST_UNITS = {'\\', 'n', 'r', 't', 'b', 'x', '"', '<', '>', '\'', HIGH, LOW, LOW_2};
+    private static final char[] HEX_LIKE = {'0', '9', 'a', 'F', 'g', '\\', HIGH};
+    private static int failures;
+    private static int checks;
+
+    private EscapeSyntaxProof() {}
+
+    public static void main(String[] args) {
+        List<String> ftl = new ArrayList<>(strings(FTL_UNITS, 4));
+        for (int n = 0; n <= 5; n++) {
+            for (String digits : stringsOfLength(HEX_LIKE, n)) {
+                ftl.add("\\x" + digits);
+                ftl.add("a\\x" + digits + "b");
+            }
+        }
+        List<String> st = new ArrayList<>();
+        for (String text : strings(ST_UNITS, 5)) {
+            if (stLiteralBody(text)) st.add(text);
+        }
+        for (int unit = 0; unit <= 0xFFFF; unit++) {
+            String c = String.valueOf((char) unit);
+            for (String text : new String[] {"\\" + c, "\\" + c + "0", "a" + c + "\\n"}) {
+                ftl.add(text);
+                if (stLiteralBody(text)) st.add(text);
+            }
+        }
+        String[] tails = {"\\n", "\\x41", "\\x4142", "\\" + HIGH + LOW, "" + HIGH + LOW, "\\\\", "\\", "\\l\\g\\a",
+            "\\q", "\\\"", "\\" + HIGH};
+        for (int k = 505; k <= 1030; k += (k == 520 ? 498 : 1)) {
+            for (String tail : tails) {
+                for (String text : new String[] {"x".repeat(k) + tail, tail + "x".repeat(k), "\\t".repeat(k / 2) + tail}) {
+                    ftl.add(text);
+                    if (stLiteralBody(text)) st.add(text);
+                }
+            }
+        }
+        run(new Check("translateEscapes(FTL)", s -> s.translateEscapes(String.EscapeSyntax.FTL),
+                EscapeSyntaxProof::ftl), ftl);
+        run(new Check("translateEscapes(ST)", s -> s.translateEscapes(String.EscapeSyntax.ST),
+                EscapeSyntaxProof::st), st);
+        Object npe = result(s -> s.translateEscapes(null), "a");
+        report("translateEscapes(null) throws NullPointerException", 1,
+                npe.equals("NullPointerException") ? 0 : 1, String.valueOf(npe));
+        System.out.println("checks\t" + checks + "\tftl_texts\t" + ftl.size() + "\tst_texts\t" + st.size());
+        System.out.println("RESULT\t" + (failures == 0 ? "PASS" : "FAIL") + "\tfailures=" + failures);
+        System.exit(failures == 0 ? 0 : 1);
+    }
+
+    private static Object ftl(String body) {
+        try {
+            return freemarker.template.utility.StringUtil.FTLStringLiteralDec(body);
+        } catch (freemarker.core.ParseException e) {
+            return "IllegalArgumentException";
+        }
+    }
+
+    private static Object st(String body) {
+        boolean[] error = {false};
+        STErrorListener listener = new STErrorListener() {
+            @Override public void compileTimeError(STMessage msg) { error[0] = true; }
+            @Override public void runTimeError(STMessage msg) { error[0] = true; }
+            @Override public void IOError(STMessage msg) { error[0] = true; }
+            @Override public void internalError(STMessage msg) { error[0] = true; }
+        };
+        STLexer lexer = new STLexer(new ErrorManager(listener), new ANTLRStringStream("<\"" + body + "\">"), null,
+                '<', '>');
+        for (int n = 0; n < 8; n++) {
+            Token token = lexer.nextToken();
+            if (token.getType() == STLexer.STRING) {
+                if (error[0]) return "IllegalArgumentException";
+                String text = token.getText();
+                return text.substring(1, text.length() - 1);
+            }
+        }
+        return error[0] ? "IllegalArgumentException" : "NO_STRING_TOKEN";
+    }
+
+    /** Whether the text can be the body of an ST string literal: no unescaped quotation mark, no U+FFFF. */
+    private static boolean stLiteralBody(String text) {
+        boolean escaped = false;
+        for (int i = 0; i < text.length(); i++) {
+            char c = text.charAt(i);
+            if (c == (char) 0xFFFF || c == '"' && !escaped) return false;
+            escaped = !escaped && c == '\\';
+        }
+        return true;
+    }
+
+    private record Check(String name, Function<String, Object> mine, Function<String, Object> donor) {}
+
+    private static void run(Check check, List<String> texts) {
+        long mismatches = 0, notSame = 0;
+        String first = "-", firstSame = "-";
+        for (String text : texts) {
+            Object mine = result(check.mine, text), donor = result(check.donor, text);
+            if (!Objects.equals(mine, donor) && mismatches++ == 0) {
+                first = show(clip(text)) + " -> " + show(clip(String.valueOf(mine))) + " vs "
+                        + show(clip(String.valueOf(donor)));
+            }
+            if (text.equals(mine) && mine != text && notSame++ == 0) firstSame = show(clip(text));
+        }
+        report(check.name, texts.size(), mismatches, first);
+        report(check.name + " returns this when unchanged", texts.size(), notSame, firstSame);
+    }
+
+    private static void report(String name, long texts, long mismatches, String first) {
+        checks++;
+        failures += mismatches == 0 ? 0 : 1;
+        System.out.println(name + "\t" + texts + "\t" + mismatches + "\t" + first);
+    }
+
+    private static Object result(Function<String, Object> f, String text) {
+        try {
+            return f.apply(text);
+        } catch (RuntimeException e) {
+            return e.getClass().getSimpleName();
+        }
+    }
+
+    private static List<String> strings(char[] units, int maxLength) {
+        List<String> out = new ArrayList<>();
+        for (int length = 0; length <= maxLength; length++) out.addAll(stringsOfLength(units, length));
+        return out;
+    }
+
+    private static List<String> stringsOfLength(char[] units, int length) {
+        List<String> out = new ArrayList<>();
+        int total = (int) Math.pow(units.length, length);
+        for (int code = 0; code < total; code++) {
+            char[] chars = new char[length];
+            int rest = code;
+            for (int i = 0; i < length; i++) {
+                chars[i] = units[rest % units.length];
+                rest /= units.length;
+            }
+            out.add(new String(chars));
+        }
+        return out;
+    }
+
+    private static String clip(String s) {
+        return s.length() > 40 ? s.substring(0, 20) + "..." + s.substring(s.length() - 12) : s;
+    }
+
+    private static String show(String s) {
+        StringBuilder out = new StringBuilder("\"");
+        for (char c : s.toCharArray()) out.append(c >= 32 && c < 127 ? String.valueOf(c) : String.format("<%04X>", (int) c));
+        return out.append('"').toString();
+    }
+}

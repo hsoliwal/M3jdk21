@@ -1,0 +1,25 @@
+String: absorb the ESCAPE_CODE family
+
+17 public methods and the nested enum String.EscapeSyntax (owner decision 48),
+a superset of commons-text 1.15.0, unbescape 1.1.8, FreeMarker 2.3.35 and
+StringTemplate 4.3.4:
+- escapeJava()/unescapeJava(), escapeEcmaScript()/unescapeEcmaScript(),
+  escapeJson()/unescapeJson(), escapeCsv()/unescapeCsv(),
+  escapeXSI()/unescapeXSI(): commons-text StringEscapeUtils rules;
+- escapeCssString(), escapeCssIdentifier(), unescapeCss(),
+  escapePropertiesValue(), escapePropertiesKey(), unescapeProperties():
+  unbescape at its default level (LEVEL_2_ALL_NON_ASCII_PLUS_BASIC_ESCAPE_SET);
+- translateEscapes(EscapeSyntax) with FTL (FreeMarker string literals) and
+  ST (StringTemplate 4 expression strings); String.translateEscapes() is
+  unchanged. Escapers return this when nothing needs escaping; the first
+  unit to escape is found with a bulk-window or Latin-1 byte scan.
+
+Proof (record doc/m3/string-lane/record/leaf32): 33 checks over 3,378,801
+escape and 4,477,106 unescape texts plus 5 syntax checks over 1,058,967
+template-literal texts against the donors in the JVM: 0 mismatches in
+three modes (flat; stub M3 storage with facts; without facts), compact
+strings on and off. JUnit 30,964/30,964 in all six runs, including 80
+assertions ported from commons-text StringEscapeUtilsTest (15 skipped:
+11 null receivers, 4 local state). The head also compiles inside master's
+String.java with its M3 closure (-Xlint:all -Werror). Drafted by a
+workflow agent; integrated and re-proven on master.

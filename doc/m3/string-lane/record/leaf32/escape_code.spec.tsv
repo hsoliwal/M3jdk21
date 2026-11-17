@@ -1,0 +1,11 @@
+# ESCAPE_CODE family, commons-text 1.15.0 StringEscapeUtils (tests rewritten to StringUtils. by port_escape_donor.py): donor op, mode, java op, null rule
+escapeJava	INSTANCE	escapeJava	NPE_ARG
+unescapeJava	INSTANCE	unescapeJava	NPE_ARG
+escapeEcmaScript	INSTANCE	escapeEcmaScript	NPE_ARG
+unescapeEcmaScript	INSTANCE	unescapeEcmaScript	NPE_ARG
+escapeJson	INSTANCE	escapeJson	NPE_ARG
+unescapeJson	INSTANCE	unescapeJson	NPE_ARG
+escapeCsv	INSTANCE	escapeCsv	NPE_ARG
+unescapeCsv	INSTANCE	unescapeCsv	NPE_ARG
+escapeXSI	INSTANCE	escapeXSI	NPE_ARG
+unescapeXSI	INSTANCE	unescapeXSI	NPE_ARG

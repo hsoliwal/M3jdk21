@@ -1,0 +1,9 @@
+lookahead-1	flat	KILLED	escapeCssString()	3378801	16	""xxxxxxxxxxxxxxxxxxx...xxxxxxxx<D835><DD1E>0"" -> "\"xxxxxxxxxxxxxxxxxx...xxx\1D51E0\"" vs "\"xxxxxxxxxxxxxxxxxx...xx\1D
+json-no-delete	flat	KILLED	escapeJson()	3378801	28879	"<007F>" -> "<007F>" vs "\u007F"
+ident-dash-dash	flat	KILLED	escapeCssIdentifier()	3378801	1164	"--" -> "--" vs "\--"
+properties-three-digits	flat	KILLED	unescapeProperties()	4477106	3521	"\u000" -> "IndexOutOfBoundsException" vs "\u000"
+octal-any-first	flat	KILLED	unescapeJava()	4477106	116	"\400" -> "<0100>" vs " 0"
+facts-gate-ident	m3-facts	KILLED	escapeCssIdentifier()	3378801	16537	"0" -> "0" vs "\30"
+ftl-x-five-digits	flat	KILLED	translateEscapes(FTL)	582982	2304	"a\x0000b" -> "a<000B>" vs "a<0000>b"
+st-no-tab	flat	KILLED	translateEscapes(ST)	475985	6852	"\t" -> "t" vs "<0009>"
+exit 0

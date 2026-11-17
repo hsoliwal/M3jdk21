@@ -1,0 +1,4 @@
+| this PR (`leaf31/`) |
+---
+| M3jdk21 #3254, merged `cdd5f7005cbb` (`leaf31/`) |
+| ESCAPE_CODE family (superset of commons-text 1.15.0, unbescape 1.1.8, FreeMarker 2.3.35 and ST4 4.3.4): `escapeJava`/`unescapeJava`, `escapeEcmaScript`/`unescapeEcmaScript`, `escapeJson`/`unescapeJson`, `escapeCsv`/`unescapeCsv`, `escapeXSI`/`unescapeXSI` (commons-text); `escapeCssString`, `escapeCssIdentifier`, `unescapeCss`, `escapePropertiesValue`, `escapePropertiesKey`, `unescapeProperties` (unbescape default level 2); `translateEscapes(EscapeSyntax)` with `String.EscapeSyntax` FTL and ST (owner decision 48) | 17 public methods, 1 nested enum | this PR (`leaf32/`) |
