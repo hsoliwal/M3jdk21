@@ -106,7 +106,8 @@ endif
 SRC_SUBDIRS += share/classes
 # Provider sources a module carries beside its own (jdk.m3.collections: the superset of the collection libraries).
 # A second root of the same module: its package folders are apart from share/classes, and its exports are in
-# providers/classes/module-info.java.extra.
+# providers/classes/module-info.java.extra. A class of a share package that uses the providers lives here too
+# (jdk.internal.m3.collections.StrategyHashMap), so share/classes compiles without the providers.
 SRC_SUBDIRS += providers/classes
 
 SPEC_SUBDIRS += share/specs

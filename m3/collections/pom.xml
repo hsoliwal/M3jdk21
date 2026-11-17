@@ -68,9 +68,6 @@
               <sources>
                 <source>${project.basedir}/../../src/jdk.m3.collections/share/classes/jdk/internal/m3/collections</source>
                 <source>${project.basedir}/../../src/jdk.m3.collections/share/classes/jdk/m3/collections</source>
-                <!-- The library providers of the module (Eclipse Collections, Guava, Commons, HPPC, ...): share
-                     classes use the module's equality strategy, Eclipse HashingStrategy, from them. -->
-                <source>${project.basedir}/../../src/jdk.m3.collections/providers/classes/jdk/m3/collections</source>
               </sources>
             </configuration>
           </execution>
@@ -141,22 +138,22 @@
             <id>default-testCompile</id>
             <configuration>
               <useModulePath>false</useModulePath>
+              <!-- Tests of the library providers (test/jdk/jdk/m3/collections/providers) need the whole module,
+                   share/classes and providers/classes; jtreg runs them on the JDK image. This bridge compiles
+                   share/classes only. -->
+              <testExcludes>
+                <testExclude>**/providers/**</testExclude>
+              </testExcludes>
             </configuration>
           </execution>
         </executions>
         <configuration>
           <!-- Keep leaf-root package metadata identical to fresh javac. -->
           <createMissingPackageInfoClass>false</createMissingPackageInfoClass>
-          <!-- A forked javac: -XDignore.symbol.file=true below takes effect only on the javac command line, not in
-               the in-process compiler; 3g for the module's sources with the library providers. -->
-          <fork>true</fork>
-          <maxmem>3g</maxmem>
           <compilerArgs>
             <arg>-Xlint:all,-module</arg>
             <arg>-Werror</arg>
             <arg>-Xpkginfo:always</arg>
-            <!-- As the JDK build: the providers' sun.misc.Unsafe uses raise no proprietary-API warning. -->
-            <arg>-XDignore.symbol.file=true</arg>
           </compilerArgs>
         </configuration>
       </plugin>

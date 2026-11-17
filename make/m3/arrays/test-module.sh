@@ -20,18 +20,8 @@ case "$(uname -s)" in MINGW*|MSYS*|CYGWIN*) sep=';'; junit=$(cd "$(dirname "$jun
 rm -rf "$work"; mkdir -p "$work/module" "$work/main" "$work/test" "$work/native"
 case "$(uname -s)" in MINGW*|MSYS*|CYGWIN*) work=$(cd "$work" && pwd -W) ;; esac
 # 1. the module compiles as a module (descriptor + every package of the module)
-#    share/classes and the library providers of providers/classes (the share classes use them), with the descriptor
-#    as the JDK build merges it (make/common/modules/GensrcModuleInfo.gmk): share/classes/module-info.java with the
-#    directives of providers/classes/module-info.java.extra before its closing brace; -XDignore.symbol.file=true as
-#    the JDK build compiles (the providers' sun.misc.Unsafe uses then raise no proprietary-API warning)
-providers_src=$root/src/$module/providers/classes
-mkdir -p "$work/gensrc"
-awk -v extra="$providers_src/module-info.java.extra" '{ line[NR] = $0 } /^}[[:space:]]*$/ { close_at = NR }
-    END { for (i = 1; i < close_at; i++) print line[i]; while ((getline l < extra) > 0) print l
-          for (i = close_at; i <= NR; i++) print line[i] }' "$module_src/module-info.java" > "$work/gensrc/module-info.java"
-{ find "$module_src" "$providers_src" -name '*.java' ! -name module-info.java; echo "$work/gensrc/module-info.java"; } \
-    > "$work/module-sources.txt"
-javac -J-Xmx3g -XDignore.symbol.file=true -Xlint:all,-module -Werror -d "$work/module" @"$work/module-sources.txt"
+find "$module_src" -name '*.java' > "$work/module-sources.txt"
+javac -Xlint:all,-module -Werror -d "$work/module" @"$work/module-sources.txt"
 echo "M3_ARRAYS_MODULE_COMPILE PASS $(wc -l < "$work/module-sources.txt" | tr -d ' ') sources"
 # 2. the arrays packages on the class path (as Maven compiled them), then the tests against them
 find "$module_src/jdk/m3/arrays" -name '*.java' > "$work/main-sources.txt"
