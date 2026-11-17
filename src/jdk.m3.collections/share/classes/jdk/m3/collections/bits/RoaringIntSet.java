@@ -42,6 +42,10 @@ public final class RoaringIntSet {
     private static final int ARRAY_TO_BITMAP = 4096;
     private static final int BITMAP_TO_ARRAY = 2048;
     private static final int BITMAP_WORDS = 1 << 10;
+    /** Length of the char[] a new chunk starts with; merges replay growth from it. */
+    private static final int FRESH_ARRAY_LENGTH = 4;
+    /** Array intersection switches to binary search when one side is this many times longer. */
+    private static final int GALLOP_RATIO = 32;
 
     private int[] highKeys = new int[4];
     private byte[] types = new byte[4];
@@ -141,21 +145,38 @@ public final class RoaringIntSet {
         }
     }
 
+    //FLLDCIM: LEETCODIFY - chunk-key lane merge (MAX_VALUE ends a lane); lanes as copy() + adds
     public RoaringIntSet union(RoaringIntSet other) {
         Objects.requireNonNull(other, "other");
-        RoaringIntSet result = copy();
-        other.forEach(result::add);
+        RoaringIntSet result = new RoaringIntSet();
+        result.ensureContainerCapacity(containerCount); // directory capacity of copy()
+        int i = 0;
+        int j = 0;
+        while (i < containerCount || j < other.containerCount) {
+            int left = i < containerCount ? highKeys[i] : Integer.MAX_VALUE;
+            int right = j < other.containerCount ? other.highKeys[j] : Integer.MAX_VALUE;
+            if (left < right) result.appendCopy(this, i);
+            else if (left > right) result.appendFresh(other, j);
+            else result.appendUnion(this, i, other, j);
+            if (left <= right) i++;
+            if (left >= right) j++;
+        }
         return result;
     }
 
+    //FLLDCIM: LEETCODIFY - chunk-key lane walk; lanes as a new set fed the common values in order
     public RoaringIntSet intersection(RoaringIntSet other) {
         Objects.requireNonNull(other, "other");
         RoaringIntSet result = new RoaringIntSet();
-        RoaringIntSet smaller = cardinality <= other.cardinality ? this : other;
-        RoaringIntSet larger = smaller == this ? other : this;
-        smaller.forEach(value -> {
-            if (larger.contains(value)) result.add(value);
-        });
+        int i = 0;
+        int j = 0;
+        while (i < containerCount && j < other.containerCount) {
+            int left = highKeys[i];
+            int right = other.highKeys[j];
+            if (left == right) result.appendIntersection(this, i, other, j);
+            if (left <= right) i++;
+            if (left >= right) j++;
+        }
         return result;
     }
 
@@ -175,6 +196,251 @@ public final class RoaringIntSet {
         return result;
     }
 
+    /** Appends a chunk after the last slot (keys arrive ascending); grows as insertContainer. */
+    private void append(int high, byte type, Object container, int count) {
+        ensureContainerCapacity(containerCount + 1);
+        int slot = containerCount++;
+        highKeys[slot] = high;
+        types[slot] = type;
+        containers[slot] = container;
+        cardinalities[slot] = count;
+        cardinality += count;
+    }
+
+    /** Chunk only in {@code source}: kept exactly as copy() keeps it. */
+    private void appendCopy(RoaringIntSet source, int index) {
+        byte type = source.types[index];
+        Object container = type == ARRAY
+                ? ((char[]) source.containers[index]).clone()
+                : ((long[]) source.containers[index]).clone();
+        append(source.highKeys[index], type, container, source.cardinalities[index]);
+    }
+
+    /** Chunk only in {@code source}: laid out as a new chunk fed its values one by one. */
+    private void appendFresh(RoaringIntSet source, int index) {
+        int high = source.highKeys[index];
+        int count = source.cardinalities[index];
+        if (source.types[index] == BITMAP) {
+            long[] words = (long[]) source.containers[index];
+            long[] owned = count > ARRAY_TO_BITMAP ? words.clone() : words;
+            appendWords(high, owned, count, FRESH_ARRAY_LENGTH);
+            return;
+        }
+        char[] values = new char[grownLength(FRESH_ARRAY_LENGTH, count)];
+        System.arraycopy(source.containers[index], 0, values, 0, count);
+        append(high, ARRAY, values, count);
+    }
+
+    /** Chunk in both sets: copy() of the left chunk, then each right value added in order. */
+    private void appendUnion(RoaringIntSet left, int i, RoaringIntSet right, int j) {
+        int high = left.highKeys[i];
+        Object mine = left.containers[i];
+        Object theirs = right.containers[j];
+        int theirCount = right.cardinalities[j];
+        if (left.types[i] == BITMAP) {
+            long[] words = ((long[]) mine).clone();
+            orInto(words, theirs, right.types[j] == BITMAP, theirCount);
+            append(high, BITMAP, words, bitCount(words));
+        } else if (right.types[j] == BITMAP) {
+            appendArrayBitmapUnion(high, (char[]) mine, left.cardinalities[i], (long[]) theirs);
+        } else {
+            appendArrayUnion(high, (char[]) mine, left.cardinalities[i],
+                    (char[]) theirs, theirCount);
+        }
+    }
+
+    /** Left chunk an array, right chunk a bitmap: the length replays from the left array. */
+    private void appendArrayBitmapUnion(int high, char[] values, int count, long[] bitmap) {
+        long[] words = bitmap.clone();
+        setBits(words, values, count);
+        appendWords(high, words, bitCount(words), values.length);
+    }
+
+    /** Both chunks arrays: counted first, then merged into the replayed length or a bitmap. */
+    private void appendArrayUnion(int high, char[] left, int leftCount,
+            char[] right, int rightCount) {
+        int merged = unionCount(left, leftCount, right, rightCount);
+        if (merged > ARRAY_TO_BITMAP) {
+            long[] words = new long[BITMAP_WORDS];
+            setBits(words, left, leftCount);
+            setBits(words, right, rightCount);
+            append(high, BITMAP, words, merged);
+            return;
+        }
+        char[] values = new char[grownLength(left.length, merged)];
+        mergeArrays(left, leftCount, right, rightCount, values);
+        append(high, ARRAY, values, merged);
+    }
+
+    /**
+     * Private bitmap of {@code count} values for a chunk the per-value path holds as an array of
+     * {@code baseLength} first: kept as the bitmap above ARRAY_TO_BITMAP, else only decoded.
+     */
+    private void appendWords(int high, long[] words, int count, int baseLength) {
+        if (count == 0) return;
+        if (count > ARRAY_TO_BITMAP) {
+            append(high, BITMAP, words, count);
+            return;
+        }
+        char[] values = new char[grownLength(baseLength, count)];
+        decode(words, values);
+        append(high, ARRAY, values, count);
+    }
+
+    /** Chunk in both sets: a new chunk fed the common values; operand order is irrelevant. */
+    private void appendIntersection(RoaringIntSet left, int i, RoaringIntSet right, int j) {
+        if (left.types[i] == BITMAP && right.types[j] == ARRAY) {
+            appendIntersection(right, j, left, i);
+            return;
+        }
+        int high = left.highKeys[i];
+        Object theirs = right.containers[j];
+        if (left.types[i] == BITMAP) {
+            long[] words = andWords((long[]) left.containers[i], (long[]) theirs);
+            appendWords(high, words, bitCount(words), FRESH_ARRAY_LENGTH);
+        } else {
+            appendArrayIntersection(high, (char[]) left.containers[i], left.cardinalities[i],
+                    theirs, right.types[j] == BITMAP, right.cardinalities[j]);
+        }
+    }
+
+    /** Array chunk against an array or bitmap chunk; hits trimmed to the new-chunk length. */
+    private void appendArrayIntersection(int high, char[] values, int count,
+            Object other, boolean otherBitmap, int otherCount) {
+        char[] buffer = new char[grownLength(FRESH_ARRAY_LENGTH, Math.min(count, otherCount))];
+        int found = otherBitmap
+                ? filter(values, count, (long[]) other, buffer)
+                : intersectArrays(values, count, (char[]) other, otherCount, buffer);
+        if (found == 0) return;
+        int length = grownLength(FRESH_ARRAY_LENGTH, found);
+        char[] kept = length == buffer.length ? buffer : Arrays.copyOf(buffer, length);
+        append(high, ARRAY, kept, found);
+    }
+
+    /** Array values whose bit is set in {@code words}, in array order. */
+    private static int filter(char[] values, int count, long[] words, char[] out) {
+        int found = 0;
+        for (int k = 0; k < count; k++) {
+            int value = values[k];
+            if ((words[value >>> 6] & (1L << (value & 63))) != 0L) out[found++] = (char) value;
+        }
+        return found;
+    }
+
+    /** Sorted-array intersection: binary search when one side is GALLOP_RATIO times longer. */
+    private static int intersectArrays(char[] left, int leftCount, char[] right, int rightCount,
+            char[] out) {
+        if (leftCount > rightCount) {
+            return intersectArrays(right, rightCount, left, leftCount, out);
+        }
+        return leftCount * GALLOP_RATIO < rightCount
+                ? intersectSkewed(left, leftCount, right, rightCount, out)
+                : intersectLinear(left, leftCount, right, rightCount, out);
+    }
+
+    private static int intersectLinear(char[] left, int leftCount, char[] right, int rightCount,
+            char[] out) {
+        int i = 0;
+        int j = 0;
+        int found = 0;
+        while (i < leftCount && j < rightCount) {
+            char a = left[i];
+            char b = right[j];
+            if (a == b) out[found++] = a;
+            if (a <= b) i++;
+            if (b <= a) j++;
+        }
+        return found;
+    }
+
+    private static int intersectSkewed(char[] small, int smallCount, char[] large, int largeCount,
+            char[] out) {
+        int found = 0;
+        int from = 0;
+        for (int k = 0; k < smallCount && from < largeCount; k++) {
+            int at = Arrays.binarySearch(large, from, largeCount, small[k]);
+            if (at >= 0) out[found++] = small[k];
+            from = at >= 0 ? at + 1 : -at - 1;
+        }
+        return found;
+    }
+
+    /** Size of the union of two sorted arrays: both counts less the common values. */
+    private static int unionCount(char[] left, int leftCount, char[] right, int rightCount) {
+        int i = 0;
+        int j = 0;
+        int common = 0;
+        while (i < leftCount && j < rightCount) {
+            char a = left[i];
+            char b = right[j];
+            if (a == b) common++;
+            if (a <= b) i++;
+            if (b <= a) j++;
+        }
+        return leftCount + rightCount - common;
+    }
+
+    /** Merge of two sorted arrays without duplicates; the one remaining tail is copied whole. */
+    private static void mergeArrays(char[] left, int leftCount, char[] right, int rightCount,
+            char[] out) {
+        int i = 0;
+        int j = 0;
+        int n = 0;
+        while (i < leftCount && j < rightCount) {
+            char a = left[i];
+            char b = right[j];
+            out[n++] = a <= b ? a : b;
+            if (a <= b) i++;
+            if (b <= a) j++;
+        }
+        System.arraycopy(left, i, out, n, leftCount - i);
+        System.arraycopy(right, j, out, n + leftCount - i, rightCount - j);
+    }
+
+    private static void setBits(long[] words, char[] values, int count) {
+        for (int k = 0; k < count; k++) {
+            int value = values[k];
+            words[value >>> 6] |= 1L << (value & 63);
+        }
+    }
+
+    private static void orInto(long[] words, Object source, boolean bitmap, int count) {
+        if (!bitmap) {
+            setBits(words, (char[]) source, count);
+            return;
+        }
+        long[] other = (long[]) source;
+        for (int w = 0; w < BITMAP_WORDS; w++) words[w] |= other[w];
+    }
+
+    private static long[] andWords(long[] left, long[] right) {
+        long[] words = new long[BITMAP_WORDS];
+        for (int w = 0; w < BITMAP_WORDS; w++) words[w] = left[w] & right[w];
+        return words;
+    }
+
+    private static int bitCount(long[] words) {
+        int count = 0;
+        for (int w = 0; w < BITMAP_WORDS; w++) count += Long.bitCount(words[w]);
+        return count;
+    }
+
+    private static void decode(long[] words, char[] out) {
+        int n = 0;
+        for (int w = 0; w < BITMAP_WORDS; w++) {
+            for (long word = words[w]; word != 0L; word &= word - 1L) {
+                out[n++] = (char) ((w << 6) | Long.numberOfTrailingZeros(word));
+            }
+        }
+    }
+
+    /** The char[] length addArray reaches from {@code length} by holding {@code count} values. */
+    private static int grownLength(int length, int count) {
+        int next = length;
+        while (next < count) next = Math.min(ARRAY_TO_BITMAP + 1, next + (next >>> 1) + 1);
+        return next;
+    }
+
     private void insertContainer(int index, int high) {
         ensureContainerCapacity(containerCount + 1);
         int moved = containerCount - index;
@@ -186,7 +452,7 @@ public final class RoaringIntSet {
         }
         highKeys[index] = high;
         types[index] = ARRAY;
-        containers[index] = new char[4];
+        containers[index] = new char[FRESH_ARRAY_LENGTH];
         cardinalities[index] = 0;
         containerCount++;
     }
