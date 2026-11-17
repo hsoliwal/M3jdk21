@@ -89,21 +89,38 @@ public final class RoaringLongSet {
         }
     }
 
+    //FLLDCIM: LEETCODIFY - unsigned key lane merge; chunks as copy() + adds or new chunk + adds
     public RoaringLongSet union(RoaringLongSet other) {
         Objects.requireNonNull(other, "other");
-        RoaringLongSet result = copy();
-        other.forEach(result::add);
+        RoaringLongSet result = new RoaringLongSet();
+        result.ensureCapacity(containerCount); // directory capacity of copy()
+        int i = 0;
+        int j = 0;
+        while (i < containerCount || j < other.containerCount) {
+            int order = compareSlots(other, i, j);
+            int high = order > 0 ? other.highKeys[j] : highKeys[i];
+            result.append(high, unionChunk(other, order, i, j));
+            if (order <= 0) i++;
+            if (order >= 0) j++;
+        }
         return result;
     }
 
+    //FLLDCIM: LEETCODIFY - unsigned key lane walk; a chunk with no common value is never added
     public RoaringLongSet intersection(RoaringLongSet other) {
         Objects.requireNonNull(other, "other");
         RoaringLongSet result = new RoaringLongSet();
-        RoaringLongSet smaller = cardinality <= other.cardinality ? this : other;
-        RoaringLongSet larger = smaller == this ? other : this;
-        smaller.forEach(value -> {
-            if (larger.contains(value)) result.add(value);
-        });
+        int i = 0;
+        int j = 0;
+        while (i < containerCount && j < other.containerCount) {
+            int order = Integer.compareUnsigned(highKeys[i], other.highKeys[j]);
+            if (order == 0) {
+                RoaringIntSet low = container(i).intersection(other.container(j));
+                if (!low.isEmpty()) result.append(highKeys[i], low);
+            }
+            if (order <= 0) i++;
+            if (order >= 0) j++;
+        }
         return result;
     }
 
@@ -117,6 +134,28 @@ public final class RoaringLongSet {
             result.containers[i] = container(i).copy();
         }
         return result;
+    }
+
+    /** Order of slot i here against slot j of {@code other}; an exhausted lane sorts last. */
+    private int compareSlots(RoaringLongSet other, int i, int j) {
+        if (j == other.containerCount) return -1;
+        if (i == containerCount) return 1;
+        return Integer.compareUnsigned(highKeys[i], other.highKeys[j]);
+    }
+
+    /** Chunk the per-value union leaves: copy, new chunk fed the values, or chunk union. */
+    private RoaringIntSet unionChunk(RoaringLongSet other, int order, int i, int j) {
+        if (order < 0) return container(i).copy();
+        if (order > 0) return new RoaringIntSet().union(other.container(j));
+        return container(i).union(other.container(j));
+    }
+
+    /** Appends a chunk after the last slot (keys arrive ascending); grows as insertContainer. */
+    private void append(int high, RoaringIntSet low) {
+        ensureCapacity(containerCount + 1);
+        highKeys[containerCount] = high;
+        containers[containerCount++] = low;
+        cardinality += low.cardinality();
     }
 
     private int findHigh(int high) {
