@@ -6403,7 +6403,7 @@ public final class String
      */
     public String unwrap(String wrapToken) {
         java.util.Objects.requireNonNull(wrapToken, "wrapToken");
-        if (isEmpty() || wrapToken.isEmpty() || length() < 2 * wrapToken.length()) return this;
+        if (isEmpty() || wrapToken.isEmpty() || wrapToken.length() > length() / 2) return this;
         if (startsWith(wrapToken) && endsWith(wrapToken)) {
             return substring(wrapToken.length(), lastIndexOf(wrapToken));
         }
@@ -6689,16 +6689,17 @@ public final class String
      * @param   count       the number of repetitions.
      * @return  the repeated string.
      * @throws  NullPointerException if {@code separator} is {@code null}.
-     * @throws  IllegalArgumentException if {@code count} is greater than one and {@code count}
-     *          times the length of this string and the separator together is greater than
-     *          {@link Integer#MAX_VALUE}.
+     * @throws  IllegalArgumentException if {@code count} is greater than one and the result,
+     *          {@code count} times this string and {@code count - 1} times the separator, would be
+     *          longer than {@link Integer#MAX_VALUE}.
      * @since   21
      */
     public String repeat(String separator, int count) {
         java.util.Objects.requireNonNull(separator, "separator");
         if (count <= 0) return "";
         if (count == 1) return this;
-        if (((long) length() + separator.length()) * count > Integer.MAX_VALUE) {
+        if ((long) length() * count + (long) separator.length() * (count - 1)
+                > Integer.MAX_VALUE) {
             throw new IllegalArgumentException("The requested result is too large for a String.");
         }
         if (separator.isEmpty()) return repeat(count);
@@ -8323,8 +8324,9 @@ public final class String
     }
 
     /**
-     * Returns this string converted to lower case as {@link #toLowerCase()} does (the default
-     * locale), then with the first character of each word changed to title case as
+     * Returns this string converted to lower case in {@link java.util.Locale#ROOT} (as
+     * {@link #toLowerCase(java.util.Locale)} does), then with the first character of each word
+     * changed to title case as
      * {@link #capitalizeWords()} does.
      *
      * @apiNote
@@ -8334,12 +8336,13 @@ public final class String
      * @since   21
      */
     public String capitalizeFully() {
-        return toLowerCase().mapCodePoints(MAP_CAPITALIZE, null, false);
+        return toLowerCase(java.util.Locale.ROOT).mapCodePoints(MAP_CAPITALIZE, null, false);
     }
 
     /**
-     * Returns this string converted to lower case as {@link #toLowerCase()} does (the default
-     * locale), then with the first character of each word changed to title case as
+     * Returns this string converted to lower case in {@link java.util.Locale#ROOT} (as
+     * {@link #toLowerCase(java.util.Locale)} does), then with the first character of each word
+     * changed to title case as
      * {@link #capitalizeWords(char...)} does with the given delimiters.
      *
      * @apiNote
@@ -8352,7 +8355,7 @@ public final class String
      */
     public String capitalizeFully(char... delimiters) {
         java.util.Objects.requireNonNull(delimiters, "delimiters");
-        return toLowerCase().mapCodePoints(MAP_CAPITALIZE, delimiters, false);
+        return toLowerCase(java.util.Locale.ROOT).mapCodePoints(MAP_CAPITALIZE, delimiters, false);
     }
 
     /**
@@ -8422,8 +8425,8 @@ public final class String
     }
 
     /**
-     * Returns this string in camel case: converted to lower case as {@link #toLowerCase()} does
-     * (the default locale), with the space and the given delimiters removed, and the first
+     * Returns this string in camel case: converted to lower case in
+     * {@link java.util.Locale#ROOT}, with the space and the given delimiters removed, and the first
      * character after each removed run changed to title case ({@link Character#toTitleCase(int)}).
      * The first character of the result is in title case only when
      * {@code capitalizeFirstLetter}. Delimiters are read as {@link #capitalizeWords(char...)}
@@ -8440,7 +8443,8 @@ public final class String
      */
     public String toCamelCase(boolean capitalizeFirstLetter, char... delimiters) {
         java.util.Objects.requireNonNull(delimiters, "delimiters");
-        return toLowerCase().mapCodePoints(MAP_CAMEL, delimiters, capitalizeFirstLetter);
+        return toLowerCase(java.util.Locale.ROOT).mapCodePoints(MAP_CAMEL, delimiters,
+                capitalizeFirstLetter);
     }
 
     /**
