@@ -14,7 +14,8 @@
  * @test
  * @summary The ArraySizingStrategy factories equal their libraries' growth arithmetic for every
  *          current length incl. 0 (ArraysSupport.newLength, Eclipse FastList, Guava
- *          ImmutableCollection.Builder, Brownies CapacityHelper, HPPC's formula); ArrayList,
+ *          ImmutableCollection.Builder, Brownies CapacityHelper, HPPC's formula) and the four
+ *          library factories keep a length that holds what is needed; ArrayList,
  *          FastList, ImmutableList.Builder, GapList, ObjectArrayList and ObjectArrayDeque grow
  *          by them; overflow is refused; a lambda is a strategy; the enum constants are
  *          serializable singletons with their own accounting
@@ -206,13 +207,17 @@ public class ArraySizingStrategySupersetTest {
 
     static final int RANDOM = 300_000;
 
-    /** Each factory against its library at one (current, needed) pair, split at random. */
+    /**
+     * Each factory against its library at one (current, needed) pair, split at random. The
+     * libraries grow only when needed > current; otherwise the four library factories keep the
+     * current length (hppc() grows anyway, as HPPC's strategy does).
+     */
     static void pair(Random random, int current, int needed) {
         for (int f = 0; f < FACTORIES.length; f++) {
             int elements = (int) Math.min(needed, (long) (random.nextDouble() * (needed + 1L)));
             int additions = needed - elements;
             ArraySizingStrategy s = FACTORIES[f];
-            IntBinaryOperator oracle = ORACLES[f];
+            IntBinaryOperator oracle = needed <= current && f > 0 ? (c, n) -> c : ORACLES[f];
             same(outcome(() -> oracle.applyAsInt(current, needed)),
                     outcome(() -> s.grow(current, elements, additions)),
                     NAMES[f] + " " + current + "/" + elements + "/" + additions);
