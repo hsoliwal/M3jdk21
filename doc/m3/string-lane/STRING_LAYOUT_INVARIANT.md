@@ -25,7 +25,7 @@ The owner refined the invariant on 2026-11-17 ("or use const", "lazily filled"):
 - `chValue` is a const array:
   - It is `@Stable` and not final.
   - It is `null` until the first whole-string char demand.
-  - On that demand, `String.constChars()` fills it once from the chars of `value`, then a store-store fence publishes it.
+  - On that demand, `String.constChars()` fills it once from the chars of `value` and publishes it by one compare-and-set from `null`: of racing first callers exactly one installs its array and the others return it. The store-store fence and plain store this replaced let two first callers each install an equal array (VM-lane finding F3). Gate: `StringConstCharsOnceTest`.
   - It is never written again and never handed to a caller.
 - The demands that fill `chValue`:
   - `toCharArray()`, which returns a clone of it;

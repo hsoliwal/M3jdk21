@@ -168,8 +168,9 @@ public final class String
      * <p>A JNI-ready {@code char[]} of {@link #length()} UTF-16 units, filled lazily (owner
      * decision 51): it is {@code null} until the first whole-string char demand ({@link
      * #toCharArray()}, {@link #getChars(int, int, char[], int)} of the whole string, JNI), then
-     * written once with the chars of {@link #value} and never again: a const array. It is
-     * protected internally: never handed to a caller, which only ever receives a copy.</p>
+     * written once with the chars of {@link #value} and never again: a const array, published by
+     * one compare-and-set from {@code null} in {@link #constChars()}. It is protected
+     * internally: never handed to a caller, which only ever receives a copy.</p>
      */
     @Stable
     private char[] chValue;
@@ -13873,18 +13874,34 @@ public final class String
 
     /**
      * The const chars of this string (layout invariant, decision 51): fills {@link #chValue} once
-     * with the chars of {@link #value} on the first call, behind a store-store fence so that no
-     * thread sees the reference before the filled contents, and returns it. Callers copy out of
-     * it; it never leaves this class.
+     * with the chars of {@link #value} on the first call and returns it. The fill is published
+     * by one compare-and-set from {@code null}, so no thread sees the reference before the
+     * filled contents and racing first callers install one array: a caller that loses the race
+     * returns the winner's. Callers copy out of it; it never leaves this class.
      */
     private char[] constChars() {
         char[] chars = chValue;
         if (chars == null) {
+            //FLLDCIM: LAYOUT - decision 51: chValue is filled once; a lost race takes the winner
             chars = layoutChars(value, coder);
-            jdk.internal.misc.Unsafe.getUnsafe().storeStoreFence();
-            chValue = chars;
+            if (!ConstChars.UNSAFE.compareAndSetReference(this, ConstChars.OFFSET, null, chars)) {
+                chars = (char[]) ConstChars.UNSAFE.getReferenceAcquire(this, ConstChars.OFFSET);
+            }
         }
         return chars;
+    }
+
+    /**
+     * The offset of {@link #chValue} for the publishing compare-and-set of {@link #constChars()},
+     * computed once. A holder initialized on the first fill: the VM initializes String before
+     * jdk.internal.misc.UnsafeConstants, so the class initializer of String must not touch
+     * Unsafe.
+     */
+    private static final class ConstChars {
+        static final jdk.internal.misc.Unsafe UNSAFE = jdk.internal.misc.Unsafe.getUnsafe();
+        static final long OFFSET = UNSAFE.objectFieldOffset(String.class, "chValue");
+
+        private ConstChars() {}
     }
 
     /**
