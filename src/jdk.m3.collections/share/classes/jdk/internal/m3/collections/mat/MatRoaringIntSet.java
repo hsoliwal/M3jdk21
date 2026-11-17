@@ -19,7 +19,10 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.OptionalInt;
+import java.util.Spliterator;
+import java.util.function.IntConsumer;
 import java.util.stream.IntStream;
+import java.util.stream.StreamSupport;
 
 /**
  * Flattened roaring-style signed-int set.
@@ -84,21 +87,97 @@ public final class MatRoaringIntSet {
         for (int value : values) {
             if (unique == 0 || values[unique - 1] != value) values[unique++] = value;
         }
+        return flatten(chunksOfSorted(values, unique));
+    }
+
+    //FLLDCIM: LEETCODIFY — pattern OFFSET_ARRAY
+    /** One chunk per run of equal high 16 bits in the sorted, unique values[0, unique). */
+    private static List<Chunk> chunksOfSorted(int[] values, int unique) {
         ArrayList<Chunk> chunks = new ArrayList<>();
         int position = 0;
         while (position < unique) {
-            int normalized = values[position] ^ Integer.MIN_VALUE;
-            int key = normalized >>> 16;
+            int key = (values[position] ^ Integer.MIN_VALUE) >>> 16;
             int start = position;
             while (position < unique && ((values[position] ^ Integer.MIN_VALUE) >>> 16) == key) position++;
-            long[] words = new long[BITMAP_WORDS];
-            for (int i = start; i < position; i++) {
-                int low = (values[i] ^ Integer.MIN_VALUE) & 0xffff;
-                words[low >>> 6] |= 1L << (low & 63);
-            }
-            chunks.add(chunkFromBitmap(key, words));
+            chunks.add(chunkFromSorted(key, values, start, position));
         }
-        return flatten(chunks);
+        return chunks;
+    }
+
+    //FLLDCIM: LEETCODIFY — pattern CONTAINER_RULE
+    /**
+     * The chunk of the sorted, unique values[start, end) of one key: chunkFromBitmap's container
+     * (same sizes, same tie-breaks) and data; the bitmap is built only when it wins (over 4,096
+     * values).
+     */
+    private static Chunk chunkFromSorted(int key, int[] values, int start, int end) {
+        int cardinality = end - start;
+        int runs = runCount(values, start, end);
+        return switch (kindOf(cardinality, runs)) {
+            case ARRAY -> new Chunk(key, ARRAY, cardinality, lowsOf(values, start, end),
+                    null, null);
+            case RUNS -> new Chunk(key, RUNS, cardinality, null,
+                    runsOfSorted(values, start, end, runs), null);
+            default -> new Chunk(key, BITMAP, cardinality, null, null,
+                    bitmapOf(values, start, end));
+        };
+    }
+
+    //FLLDCIM: LEETCODIFY — pattern MASK
+    private static int low(int value) {
+        return value & 0xffff; // value ^ Integer.MIN_VALUE flips bit 31 only
+    }
+
+    //FLLDCIM: LEETCODIFY — pattern MASK
+    private static int value(int high, int low) {
+        return (high | low) ^ Integer.MIN_VALUE;
+    }
+
+    //FLLDCIM: LEETCODIFY — pattern MASK
+    private static long dropLowest(long bits, int k) {
+        long rest = bits;
+        for (int i = 0; i < k; i++) rest &= rest - 1;
+        return rest;
+    }
+
+    //FLLDCIM: LEETCODIFY — pattern RUN_WALK
+    private static int runCount(int[] values, int start, int end) {
+        int runs = 0;
+        int previous = -2;
+        for (int i = start; i < end; i++) {
+            int low = low(values[i]);
+            if (low != previous + 1) runs++;
+            previous = low;
+        }
+        return runs;
+    }
+
+    //FLLDCIM: LEETCODIFY — pattern ARRAY_COPY
+    private static char[] lowsOf(int[] values, int start, int end) {
+        char[] data = new char[end - start];
+        for (int i = start; i < end; i++) data[i - start] = (char) low(values[i]);
+        return data;
+    }
+
+    //FLLDCIM: LEETCODIFY — pattern RUN_WALK
+    private static int[] runsOfSorted(int[] values, int start, int end, int runs) {
+        int[] data = new int[runs * 2];
+        int out = -2;
+        int previous = -2;
+        for (int i = start; i < end; i++) {
+            int low = low(values[i]);
+            if (low != previous + 1) data[out += 2] = low;
+            data[out + 1]++;
+            previous = low;
+        }
+        return data;
+    }
+
+    //FLLDCIM: LEETCODIFY — pattern BITMAP_WALK
+    private static long[] bitmapOf(int[] values, int start, int end) {
+        long[] words = new long[BITMAP_WORDS];
+        for (int i = start; i < end; i++) setBit(words, low(values[i]));
+        return words;
     }
 
     public int size() { return size; }
@@ -150,14 +229,7 @@ public final class MatRoaringIntSet {
     /** Zero-based element ordinal in signed ascending order. */
     public int select(int ordinal) {
         Objects.checkIndex(ordinal, size);
-        int low = 0;
-        int high = prefix.length;
-        while (low < high) {
-            int middle = (low + high) >>> 1;
-            if (prefix[middle] <= ordinal) low = middle + 1;
-            else high = middle;
-        }
-        int chunk = low - 1;
+        int chunk = chunkOf(ordinal);
         int within = ordinal - prefix[chunk];
         int normalized = (chunkKeys[chunk] << 16) | selectLow(chunk, within);
         return normalized ^ Integer.MIN_VALUE;
@@ -196,13 +268,145 @@ public final class MatRoaringIntSet {
     }
 
     public int[] toArray() {
-        int[] result = new int[size];
-        for (int i = 0; i < size; i++) result[i] = select(i);
+        return decodeOrdinals(0, size);
+    }
+
+    /**
+     * Lazy, SIZED and splittable as before; a bulk traversal (forEach, toArray, sum, ...) decodes
+     * the containers in order instead of selecting every ordinal.
+     */
+    public IntStream intStream() {
+        return StreamSupport.intStream(new OrdinalSpliterator(0, size), false);
+    }
+
+    //FLLDCIM: LEETCODIFY — pattern OFFSET_ARRAY
+    /** The values of ordinals [from, to), ascending, decoded container by container. */
+    private int[] decodeOrdinals(int from, int to) {
+        int[] result = new int[to - from];
+        int chunk = from == to ? 0 : chunkOf(from);
+        int skip = from == to ? 0 : from - prefix[chunk];
+        for (int at = 0; at < result.length; chunk++, skip = 0) {
+            int take = Math.min(counts[chunk] - skip, result.length - at);
+            at = decodeInto(chunk, skip, at + take, result, at);
+        }
         return result;
     }
 
-    public IntStream intStream() {
-        return IntStream.range(0, size).map(this::select);
+    //FLLDCIM: LEETCODIFY — pattern OFFSET_ARRAY
+    private int chunkOf(int ordinal) {
+        int low = 0;
+        int high = prefix.length;
+        while (low < high) {
+            int middle = (low + high) >>> 1;
+            if (prefix[middle] <= ordinal) low = middle + 1;
+            else high = middle;
+        }
+        return low - 1;
+    }
+
+    /** Writes a chunk's values after its first {@code skip} into out[at, end); returns end. */
+    private int decodeInto(int chunk, int skip, int end, int[] out, int at) {
+        int high = chunkKeys[chunk] << 16;
+        return switch (kinds[chunk]) {
+            case ARRAY -> decodeArray(high, offsets[chunk] + skip, out, at, end);
+            case RUNS -> decodeRuns(high, offsets[chunk], skip, out, at, end);
+            case BITMAP -> decodeBitmap(high, offsets[chunk], skip, out, at, end);
+            default -> throw new IllegalStateException("container kind");
+        };
+    }
+
+    //FLLDCIM: LEETCODIFY — pattern ARRAY_COPY
+    private int decodeArray(int high, int from, int[] out, int at, int end) {
+        int position = at;
+        for (int i = from; position < end; i++) out[position++] = value(high, arrayData[i]);
+        return position;
+    }
+
+    //FLLDCIM: LEETCODIFY — pattern RUN_WALK
+    private int decodeRuns(int high, int pair, int skip, int[] out, int at, int end) {
+        int position = at;
+        int left = skip;
+        for (int run = pair; position < end; run += 2) {
+            int length = runData[run + 1];
+            if (left >= length) {
+                left -= length;
+                continue;
+            }
+            int stop = runData[run] + Math.min(length, left + end - position);
+            for (int low = runData[run] + left; low < stop; low++) {
+                out[position++] = value(high, low);
+            }
+            left = 0;
+        }
+        return position;
+    }
+
+    //FLLDCIM: LEETCODIFY — pattern BITMAP_WALK
+    private int decodeBitmap(int high, int base, int skip, int[] out, int at, int end) {
+        int position = at;
+        int left = skip;
+        for (int word = 0; position < end; word++) {
+            long bits = bitmapData[base + word];
+            int count = Long.bitCount(bits);
+            if (left >= count) {
+                left -= count;
+                continue;
+            }
+            for (bits = dropLowest(bits, left); bits != 0 && position < end; bits &= bits - 1) {
+                out[position++] = value(high, (word << 6) + Long.numberOfTrailingZeros(bits));
+            }
+            left = 0;
+        }
+        return position;
+    }
+
+    //FLLDCIM: LEETCODIFY — pattern SPLITERATOR
+    /** Ordinals [next, end): select one, decode blocks in bulk, halve on split. */
+    private final class OrdinalSpliterator implements Spliterator.OfInt {
+        private static final int BLOCK = 4096;
+        private int next;
+        private final int end;
+
+        OrdinalSpliterator(int next, int end) {
+            this.next = next;
+            this.end = end;
+        }
+
+        @Override
+        public boolean tryAdvance(IntConsumer action) {
+            Objects.requireNonNull(action, "action");
+            if (next >= end) return false;
+            action.accept(select(next++));
+            return true;
+        }
+
+        @Override
+        public void forEachRemaining(IntConsumer action) {
+            Objects.requireNonNull(action, "action");
+            for (int to; next < end; next = to) {
+                to = Math.min(end, next + BLOCK);
+                for (int value : decodeOrdinals(next, to)) action.accept(value);
+            }
+        }
+
+        @Override
+        public Spliterator.OfInt trySplit() {
+            int middle = (next + end) >>> 1;
+            if (middle <= next) return null;
+            OrdinalSpliterator first = new OrdinalSpliterator(next, middle);
+            next = middle;
+            return first;
+        }
+
+        @Override
+        public long estimateSize() {
+            return end - next;
+        }
+
+        @Override
+        public int characteristics() {
+            return ORDERED | SIZED | SUBSIZED | IMMUTABLE | NONNULL;
+        }
     }
 
     public MatRoaringIntSet range(long fromInclusive, long toExclusive) {
@@ -210,13 +414,8 @@ public final class MatRoaringIntSet {
             throw new IllegalArgumentException("range outside int domain");
         }
         if (fromInclusive == toExclusive || size == 0) return of();
-        int expected = Math.max(0, rankLong(toExclusive) - rankLong(fromInclusive));
-        int[] result = new int[expected];
-        int out = 0;
-        int ordinal = rankLong(fromInclusive);
-        int end = rankLong(toExclusive);
-        while (ordinal < end) result[out++] = select(ordinal++);
-        return of(result);
+        int from = rankLong(fromInclusive);
+        return of(decodeOrdinals(from, Math.max(from, rankLong(toExclusive))));
     }
 
     public MatRoaringIntSet union(MatRoaringIntSet other) { return combine(other, 0); }
@@ -227,40 +426,57 @@ public final class MatRoaringIntSet {
     private MatRoaringIntSet combine(MatRoaringIntSet other, int operation) {
         Objects.requireNonNull(other, "other");
         ArrayList<Chunk> chunks = new ArrayList<>();
-        int left = 0;
-        int right = 0;
-        while (left < this.chunks() || right < other.chunks()) {
-            int leftKey = left < this.chunks() ? chunkKeys[left] : Integer.MAX_VALUE;
-            int rightKey = right < other.chunks() ? other.chunkKeys[right] : Integer.MAX_VALUE;
-            if (left < this.chunks() && right < other.chunks() && leftKey == rightKey) {
-                long[] a = containerBitmap(left);
-                long[] b = other.containerBitmap(right);
-                for (int word = 0; word < BITMAP_WORDS; word++) {
-                    a[word] = switch (operation) {
-                        case 0 -> a[word] | b[word];
-                        case 1 -> a[word] & b[word];
-                        case 2 -> a[word] ^ b[word];
-                        case 3 -> a[word] & ~b[word];
-                        default -> throw new IllegalStateException("operation");
-                    };
-                }
-                Chunk result = chunkFromBitmap(leftKey, a);
-                if (result != null) chunks.add(result);
-                left++;
-                right++;
-            } else if (right >= other.chunks() || (left < this.chunks() && leftKey < rightKey)) {
-                if (operation == 0 || operation == 2 || operation == 3) {
-                    chunks.add(chunkFromBitmap(leftKey, containerBitmap(left)));
-                }
-                left++;
-            } else {
-                if (operation == 0 || operation == 2) {
-                    chunks.add(chunkFromBitmap(rightKey, other.containerBitmap(right)));
-                }
-                right++;
-            }
+        long cursors = cursors(0, 0);
+        while ((int) (cursors >>> 32) < this.chunks() || (int) cursors < other.chunks()) {
+            cursors = combineStep(other, operation, chunks, (int) (cursors >>> 32), (int) cursors);
         }
         return flatten(chunks);
+    }
+
+    //FLLDCIM: LEETCODIFY — pattern MASK
+    /** The left chunk cursor in the high 32 bits, the right one in the low 32 bits. */
+    private static long cursors(int left, int right) {
+        return (long) left << 32 | (right & 0xFFFF_FFFFL);
+    }
+
+    /** Emits the chunk of the lower key (of both keys when equal); returns the advanced cursors. */
+    private long combineStep(MatRoaringIntSet other, int operation, List<Chunk> chunks,
+            int left, int right) {
+        int leftKey = left < this.chunks() ? chunkKeys[left] : Integer.MAX_VALUE;
+        int rightKey = right < other.chunks() ? other.chunkKeys[right] : Integer.MAX_VALUE;
+        if (left < this.chunks() && right < other.chunks() && leftKey == rightKey) {
+            addIfAny(chunks, chunkFromBitmap(leftKey,
+                    combineWords(containerBitmap(left), other.containerBitmap(right), operation)));
+            return cursors(left + 1, right + 1);
+        }
+        if (right >= other.chunks() || (left < this.chunks() && leftKey < rightKey)) {
+            if (operation != 1) chunks.add(chunkFromBitmap(leftKey, containerBitmap(left)));
+            return cursors(left + 1, right);
+        }
+        if (operation == 0 || operation == 2) {
+            chunks.add(chunkFromBitmap(rightKey, other.containerBitmap(right)));
+        }
+        return cursors(left, right + 1);
+    }
+
+    /** Adds a combined chunk unless the operation left it empty. */
+    private static void addIfAny(List<Chunk> chunks, Chunk chunk) {
+        if (chunk != null) chunks.add(chunk);
+    }
+
+    //FLLDCIM: LEETCODIFY — pattern BITMAP_WALK
+    /** a := a op b word by word (0 union, 1 intersection, 2 symmetric difference, 3 difference). */
+    private static long[] combineWords(long[] a, long[] b, int operation) {
+        for (int word = 0; word < BITMAP_WORDS; word++) {
+            a[word] = switch (operation) {
+                case 0 -> a[word] | b[word];
+                case 1 -> a[word] & b[word];
+                case 2 -> a[word] ^ b[word];
+                case 3 -> a[word] & ~b[word];
+                default -> throw new IllegalStateException("operation");
+            };
+        }
+        return a;
     }
 
     private boolean containsLow(int chunk, int low) {
@@ -372,18 +588,24 @@ public final class MatRoaringIntSet {
         // Runs are sorted, disjoint and confined to the 16-bit low universe.
         int base = offsets[chunk];
         int pairs = dataLengths[chunk] / 2;
+        int left = runEndingAfter(base, pairs, low);
+        if (left == pairs) return -1;
+        int start = runData[base + left * 2];
+        return low < start ? start : low;
+    }
+
+    //FLLDCIM: LEETCODIFY — pattern RUN_WALK
+    /** The first of {@code pairs} runs from {@code base} ending after {@code low}. */
+    private int runEndingAfter(int base, int pairs, int low) {
         int left = 0;
         int right = pairs;
         while (left < right) {
             int middle = (left + right) >>> 1;
-            int start = runData[base + middle * 2];
-            int length = runData[base + middle * 2 + 1];
-            if (start + length <= low) left = middle + 1;
+            int end = runData[base + middle * 2] + runData[base + middle * 2 + 1];
+            if (end <= low) left = middle + 1;
             else right = middle;
         }
-        if (left == pairs) return -1;
-        int start = runData[base + left * 2];
-        return low < start ? start : low;
+        return left;
     }
 
     private int previousRun(int chunk, int low) {
@@ -455,134 +677,167 @@ public final class MatRoaringIntSet {
     private long[] containerBitmap(int chunk) {
         long[] result = new long[BITMAP_WORDS];
         switch (kinds[chunk]) {
-            case ARRAY -> {
-                int base = offsets[chunk];
-                for (int i = 0; i < dataLengths[chunk]; i++) {
-                    int low = arrayData[base + i];
-                    result[low >>> 6] |= 1L << (low & 63);
-                }
-            }
-            case RUNS -> {
-                int base = offsets[chunk];
-                int pairs = dataLengths[chunk] / 2;
-                for (int pair = 0; pair < pairs; pair++) {
-                    int start = runData[base + pair * 2];
-                    int end = start + runData[base + pair * 2 + 1];
-                    for (int low = start; low < end; low++) result[low >>> 6] |= 1L << (low & 63);
-                }
-            }
+            case ARRAY -> setArrayBits(result, offsets[chunk], dataLengths[chunk]);
+            case RUNS -> setRunBits(result, offsets[chunk], dataLengths[chunk] / 2);
             case BITMAP -> System.arraycopy(bitmapData, offsets[chunk], result, 0, BITMAP_WORDS);
             default -> throw new IllegalStateException("container kind");
         }
         return result;
     }
 
+    //FLLDCIM: LEETCODIFY — pattern BITMAP_WALK
+    private static void setBit(long[] words, int low) {
+        words[low >>> 6] |= 1L << (low & 63);
+    }
+
+    private void setArrayBits(long[] words, int base, int length) {
+        for (int i = 0; i < length; i++) setBit(words, arrayData[base + i]);
+    }
+
+    private void setRunBits(long[] words, int base, int pairs) {
+        for (int pair = 0; pair < pairs; pair++) {
+            int start = runData[base + pair * 2];
+            int end = start + runData[base + pair * 2 + 1];
+            for (int low = start; low < end; low++) setBit(words, low);
+        }
+    }
+
     private static Chunk chunkFromBitmap(int key, long[] words) {
         int cardinality = 0;
-        int runs = 0;
-        int previous = -2;
-        for (int word = 0; word < BITMAP_WORDS; word++) {
-            long value = words[word];
-            cardinality += Long.bitCount(value);
-            while (value != 0) {
-                int low = (word << 6) + Long.numberOfTrailingZeros(value);
-                if (low != previous + 1) runs++;
-                previous = low;
-                value &= value - 1;
-            }
-        }
+        for (long word : words) cardinality += Long.bitCount(word);
         if (cardinality == 0) return null;
+        int runs = runCountOfWords(words);
+        return switch (kindOf(cardinality, runs)) {
+            case ARRAY -> new Chunk(key, ARRAY, cardinality, lowsOfWords(words, cardinality),
+                    null, null);
+            case RUNS -> new Chunk(key, RUNS, cardinality, null, runsOfWords(words, runs), null);
+            default -> new Chunk(key, BITMAP, cardinality, null, null, words); // fresh array
+        };
+    }
+
+    //FLLDCIM: LEETCODIFY — pattern CONTAINER_RULE
+    /** The smallest of 2 bytes a value, 8 a run, 8 KiB; ties go to ARRAY, then to RUNS. */
+    private static byte kindOf(int cardinality, int runs) {
         long arrayBytes = 2L * cardinality;
         long runBytes = 8L * runs;
         long bitmapBytes = 8L * BITMAP_WORDS;
-        if (arrayBytes <= runBytes && arrayBytes <= bitmapBytes) {
-            char[] data = new char[cardinality];
-            int out = 0;
-            for (int word = 0; word < BITMAP_WORDS; word++) {
-                long value = words[word];
-                while (value != 0) {
-                    data[out++] = (char) ((word << 6) + Long.numberOfTrailingZeros(value));
-                    value &= value - 1;
-                }
+        if (arrayBytes <= runBytes && arrayBytes <= bitmapBytes) return ARRAY;
+        return runBytes <= bitmapBytes ? RUNS : BITMAP;
+    }
+
+    //FLLDCIM: LEETCODIFY — pattern BITMAP_WALK
+    private static int runCountOfWords(long[] words) {
+        int runs = 0;
+        int previous = -2;
+        for (int word = 0; word < BITMAP_WORDS; word++) {
+            for (long bits = words[word]; bits != 0; bits &= bits - 1) {
+                int low = (word << 6) + Long.numberOfTrailingZeros(bits);
+                if (low != previous + 1) runs++;
+                previous = low;
             }
-            return new Chunk(key, ARRAY, cardinality, data, null, null);
         }
-        if (runBytes <= bitmapBytes) {
-            int[] data = new int[runs * 2];
-            int out = 0;
-            int runStart = -1;
-            int last = -2;
-            for (int word = 0; word < BITMAP_WORDS; word++) {
-                long value = words[word];
-                while (value != 0) {
-                    int low = (word << 6) + Long.numberOfTrailingZeros(value);
-                    if (low != last + 1) {
-                        if (runStart >= 0) {
-                            data[out++] = runStart;
-                            data[out++] = last - runStart + 1;
-                        }
-                        runStart = low;
-                    }
-                    last = low;
-                    value &= value - 1;
-                }
+        return runs;
+    }
+
+    private static char[] lowsOfWords(long[] words, int cardinality) {
+        char[] data = new char[cardinality];
+        int out = 0;
+        for (int word = 0; word < BITMAP_WORDS; word++) {
+            for (long bits = words[word]; bits != 0; bits &= bits - 1) {
+                data[out++] = (char) ((word << 6) + Long.numberOfTrailingZeros(bits));
             }
-            data[out++] = runStart;
-            data[out] = last - runStart + 1;
-            return new Chunk(key, RUNS, cardinality, null, data, null);
         }
-        return new Chunk(key, BITMAP, cardinality, null, null, words.clone());
+        return data;
+    }
+
+    private static int[] runsOfWords(long[] words, int runs) {
+        int[] data = new int[runs * 2];
+        int out = -2;
+        int previous = -2;
+        for (int word = 0; word < BITMAP_WORDS; word++) {
+            for (long bits = words[word]; bits != 0; bits &= bits - 1) {
+                int low = (word << 6) + Long.numberOfTrailingZeros(bits);
+                if (low != previous + 1) data[out += 2] = low;
+                data[out + 1]++;
+                previous = low;
+            }
+        }
+        return data;
     }
 
     private static MatRoaringIntSet flatten(List<Chunk> chunks) {
-        int total = 0;
-        int arrayChars = 0;
-        int runInts = 0;
-        int bitmapWords = 0;
+        int[] sizes = laneSizes(chunks);
+        FlatLanes lanes = new FlatLanes(chunks.size(), sizes);
+        for (int i = 0; i < chunks.size(); i++) lanes.place(i, chunks.get(i));
+        return new MatRoaringIntSet(sizes[0], lanes.keys, lanes.kinds, lanes.offsets, lanes.lengths,
+                lanes.counts, lanes.prefix, lanes.arrays, lanes.runs, lanes.bitmaps);
+    }
+
+    //FLLDCIM: LEETCODIFY — pattern OFFSET_ARRAY
+    /** The value count, then the lengths of the ARRAY, RUNS and BITMAP lanes (index kind + 1). */
+    private static int[] laneSizes(List<Chunk> chunks) {
+        int[] sizes = new int[4];
         for (Chunk chunk : chunks) {
             if (chunk == null) continue;
-            total = Math.addExact(total, chunk.count);
-            if (chunk.kind == ARRAY) arrayChars = Math.addExact(arrayChars, chunk.array.length);
-            else if (chunk.kind == RUNS) runInts = Math.addExact(runInts, chunk.runs.length);
-            else bitmapWords = Math.addExact(bitmapWords, BITMAP_WORDS);
+            sizes[0] = Math.addExact(sizes[0], chunk.count);
+            int length = chunk.kind == ARRAY ? chunk.array.length
+                    : chunk.kind == RUNS ? chunk.runs.length : BITMAP_WORDS;
+            int lane = chunk.kind == ARRAY || chunk.kind == RUNS ? chunk.kind + 1 : 3;
+            sizes[lane] = Math.addExact(sizes[lane], length);
         }
-        int count = chunks.size();
-        int[] keys = new int[count];
-        byte[] kinds = new byte[count];
-        int[] offsets = new int[count];
-        int[] lengths = new int[count];
-        int[] counts = new int[count];
-        int[] prefix = new int[count + 1];
-        char[] arrays = new char[arrayChars];
-        int[] runs = new int[runInts];
-        long[] bitmaps = new long[bitmapWords];
-        int arrayOffset = 0;
-        int runOffset = 0;
-        int bitmapOffset = 0;
-        for (int i = 0; i < count; i++) {
-            Chunk chunk = chunks.get(i);
+        return sizes;
+    }
+
+    /** The flat lanes filled chunk by chunk, with each chunk's offset into its kind's lane. */
+    private static final class FlatLanes {
+        final int[] keys;
+        final byte[] kinds;
+        final int[] offsets;
+        final int[] lengths;
+        final int[] counts;
+        final int[] prefix;
+        final char[] arrays;
+        final int[] runs;
+        final long[] bitmaps;
+        private int arrayOffset;
+        private int runOffset;
+        private int bitmapOffset;
+
+        FlatLanes(int count, int[] sizes) {
+            keys = new int[count];
+            kinds = new byte[count];
+            offsets = new int[count];
+            lengths = new int[count];
+            counts = new int[count];
+            prefix = new int[count + 1];
+            arrays = new char[sizes[1]];
+            runs = new int[sizes[2]];
+            bitmaps = new long[sizes[3]];
+        }
+
+        void place(int i, Chunk chunk) {
             keys[i] = chunk.key;
             kinds[i] = chunk.kind;
             counts[i] = chunk.count;
             prefix[i + 1] = prefix[i] + chunk.count;
             if (chunk.kind == ARRAY) {
                 offsets[i] = arrayOffset;
-                lengths[i] = chunk.array.length;
-                System.arraycopy(chunk.array, 0, arrays, arrayOffset, chunk.array.length);
-                arrayOffset += chunk.array.length;
+                arrayOffset = append(chunk.array, arrays, arrayOffset, i, chunk.array.length);
             } else if (chunk.kind == RUNS) {
                 offsets[i] = runOffset;
-                lengths[i] = chunk.runs.length;
-                System.arraycopy(chunk.runs, 0, runs, runOffset, chunk.runs.length);
-                runOffset += chunk.runs.length;
+                runOffset = append(chunk.runs, runs, runOffset, i, chunk.runs.length);
             } else {
                 offsets[i] = bitmapOffset;
-                lengths[i] = BITMAP_WORDS;
-                System.arraycopy(chunk.bitmap, 0, bitmaps, bitmapOffset, BITMAP_WORDS);
-                bitmapOffset += BITMAP_WORDS;
+                bitmapOffset = append(chunk.bitmap, bitmaps, bitmapOffset, i, BITMAP_WORDS);
             }
         }
-        return new MatRoaringIntSet(total, keys, kinds, offsets, lengths, counts, prefix, arrays, runs, bitmaps);
+
+        /** Copies a chunk's data to the lane at {@code offset}; returns the lane's next offset. */
+        private int append(Object data, Object lane, int offset, int i, int length) {
+            lengths[i] = length;
+            System.arraycopy(data, 0, lane, offset, length);
+            return offset + length;
+        }
     }
 
     private static final class Chunk {
