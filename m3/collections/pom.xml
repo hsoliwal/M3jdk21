@@ -138,6 +138,12 @@
             <id>default-testCompile</id>
             <configuration>
               <useModulePath>false</useModulePath>
+              <!-- Tests of the library providers (test/jdk/jdk/m3/collections/providers) need the whole module,
+                   share/classes and providers/classes; jtreg runs them on the JDK image. This bridge compiles
+                   share/classes only. -->
+              <testExcludes>
+                <testExclude>**/providers/**</testExclude>
+              </testExcludes>
             </configuration>
           </execution>
         </executions>

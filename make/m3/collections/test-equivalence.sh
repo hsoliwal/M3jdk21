@@ -63,7 +63,7 @@ run_stage COMPILE-module "${compiler[@]}" "${flags[@]}" -Xdoclint:all/protected,
   -d "$work/module" "@$work/module-sources.txt"
 run_stage COMPILE-test "${compiler[@]}" "${flags[@]}" \
   --module-path "$work/module" --add-modules jdk.m3.collections -d "$work/test" \
-  "$root/test/jdk/jdk/m3/collections/EquivalenceFromFunctionsTest.java"
+  "$root/test/jdk/jdk/m3/collections/providers/EquivalenceFromFunctionsTest.java"
 if [[ ${2:-} == --stop-after-compile ]]; then
   echo "M3_EQUIVALENCE_COMPILE_PASS output=$work"
   exit 0
