@@ -370,7 +370,10 @@ class M3ExportTest(unittest.TestCase):
 
     def test_reviewed_source_manifest_has_explicit_owner_field_coverage(self):
         sources, _ = EXPORT.read_manifest(ROOT / "m3/lexicon/m3-source-manifest.tsv")
-        self.assertEqual(11, len(sources))
+        self.assertEqual(50, len(sources))
+        ranked = [s for s in sources.values() if s["record_id_field"] == "frequency_rank"]
+        self.assertEqual(39, len(ranked))
+        self.assertTrue(all(s["precompute_fields"] == "" for s in ranked))
         self.assertEqual(13, len(sources["dictlang.dictionary"]["precompute_fields"].split(",")))
         self.assertEqual(16, len(sources["dictlang.frequency"]["precompute_fields"].split(",")))
         self.assertEqual(10, len(sources["unicodex.langdex.lexemes"]["precompute_fields"].split(",")))

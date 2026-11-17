@@ -248,6 +248,45 @@ functions of the Synexia dictshared `LexiconCoordinate` (Apache-2.0, same owner)
 16,383, 16,384, 2^21 - 1 and 2^24 - 2; lexicon 1, 127, 128 and 255), each refusal, a naive
 lane pack that the overflow inputs corrupt, the registry shape and the generation pin.
 
+## Generated exports of the registry lexicons
+
+The catalog exports of the registry rows are generated output and are not checked in.
+`make/m3/lexicon/build-exports.sh INPUT_DIR OUTPUT_DIR [LEXICON_NUM ...]` rebuilds them from
+pinned inputs, one row at a time:
+
+1. It checks the measured word list named in `make/m3/lexicon/lexicon-inputs.tsv` against
+   its `input_sha256`.
+2. `frequency_counts.py` writes the `WORD TAB COUNT` file under the row's `rank_rule`, sorted
+   the way `build --frequency` ranks it, so line N holds rank N - 1. Words that hold a tab, CR
+   or LF cannot be such input and are left out (`excluded`). The file must match
+   `counts_sha256`.
+3. `LexiconTool build --frequency SOURCE_ID LANGUAGE_TAG` writes the export. Its
+   `m3.export.json` must match the registry's `export_sha256`.
+
+| `rank_rule` | Count of a word |
+| --- | --- |
+| `local-count`, `source-count` | The word's own count in the list |
+| `oracle-count:<lexicon_key>` | Its count in the named list (`hf.wiki.*`: summed over the eight Wikipedia lists); 0 when absent, so absent words follow in UTF-16 order |
+| `codebase-token:java.base/java/util@21.0.9` | Whole-token occurrences in the top-level `java.base/java/util/*.java` files of the JDK 21.0.9 `lib/src.zip`, comments and strings included: an edge that is a `[A-Za-z0-9_$]` character must not touch another one. For keywords this is the leaf-1 count (`if` 8,722) |
+| `codebase-token:cpython/Lib@3.12.6` | The same over the top-level `Lib/*.py` files of CPython 3.12.6, with `[A-Za-z0-9_]` |
+
+`lexicon-corpora.tsv` pins each corpus by the SHA-256 of its sorted `name TAB sha256` file
+list. `lexicon-receipts.tsv` holds one source receipt per word source and count source
+(provider, URI, full revision, licence, SHA-256 over the downloaded files, attribution, rights
+evidence). Licences are recorded, never gating. A pin of `-` makes the step report the actual
+value instead of checking it.
+
+Run on every row, the step also runs `WriteCorpusManifest.java`. It writes one
+`M3LanguageCorpusManifest` (`corpus-<root>.m3corpus`) with a DICTIONARY artifact (the export)
+and a WORD_FACTS artifact (the count file) per registry row. Both bind to the export's SHA-256,
+its first 64 bits as coordinate fingerprint, and generation = `lexicon_num`. The tool reads the
+file back and requires both planes for every row.
+
+Each source id has one `m3-source-manifest.tsv` row (`record_id_field = frequency_rank`,
+`precompute_fields = -`); a source with several versions (`grammar.java`) has one row and
+several registry rows. Where the exports and count files live is open (owner question Q3):
+in-tree data or a configure option.
+
 ## Five-family file sidecars
 
 [SharedLexiconFamilySidecarCatalog][FAM] reads these fixed files as a complete bundle:
