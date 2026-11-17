@@ -59,9 +59,15 @@ The module shares one equality strategy among its collection providers, Eclipse 
   gives back the original object;
 - `EquatorStrategies`: a new package-private class holding the two adapters (Apache License, Version
   2.0, Synexia).
+- `map.AbstractHashedMap` and `map.HashedMap`: a map may take its key equality as an `Equator`, as a
+  sorted map takes its ordering as a comparator: the protected constructor
+  `AbstractHashedMap(int, float, Equator)` and the public constructor `HashedMap(Equator)`; `hash`
+  and `isEqualKey` keep their signatures and use the equator when one was given; the null key stays
+  the map's own; a map with an equator writes it after its entries when serialized, and a map
+  without one writes what it wrote before.
 
-Nothing else in `Equator` changed; the classes of the provider are otherwise as compiled from the
-library.
+Nothing else in these classes changed; the classes of the provider are otherwise as compiled from
+the library.
 
 ### License
 

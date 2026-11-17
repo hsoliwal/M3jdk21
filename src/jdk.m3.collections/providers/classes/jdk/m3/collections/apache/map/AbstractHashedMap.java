@@ -14,11 +14,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+// Modified 2026 by Synexia contributors: key equality as a strategy (an Equator).
 package jdk.m3.collections.apache.map;
 
 import java.io.IOException;
 import java.io.InvalidObjectException;
 import java.io.ObjectInputStream;
+import java.io.OptionalDataException;
 import java.io.ObjectOutputStream;
 import java.util.AbstractCollection;
 import java.util.AbstractMap;
@@ -29,10 +31,12 @@ import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.NoSuchElementException;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
 import jdk.m3.collections.apache.CollectionUtils;
+import jdk.m3.collections.apache.Equator;
 import jdk.m3.collections.apache.IterableMap;
 import jdk.m3.collections.apache.KeyValue;
 import jdk.m3.collections.apache.MapIterator;
@@ -591,6 +595,9 @@ public class AbstractHashedMap<K, V> extends AbstractMap<K, V> implements Iterab
     /** Values */
     transient Values<V> values;
 
+    /** The equality of keys if the map was given one; null means equals and hashCode. */
+    transient Equator<? super K> keyEquator;
+
     /**
      * Constructor only used in deserialization, do not use otherwise.
      */
@@ -639,6 +646,26 @@ public class AbstractHashedMap<K, V> extends AbstractMap<K, V> implements Iterab
      * @param loadFactor  The load factor, must be &gt; 0.0f and generally &lt; 1.0f
      * @param threshold  The threshold, must be sensible
      */
+    /**
+     * Constructs a new, empty map whose keys are equal by an equality strategy, as the keys of a
+     * sorted map are ordered by a {@link java.util.Comparator}: {@link #hash(Object)} and {@link
+     * #isEqualKey(Object, Object)} use the equator. The null key is handled by the map, so the
+     * equator never sees it. A subclass that overrides those two methods decides itself whether to
+     * use the equator.
+     *
+     * @param initialCapacity  the initial capacity
+     * @param loadFactor  the load factor
+     * @param keyEquator  the equality of keys, not null
+     * @throws IllegalArgumentException if the initial capacity is negative
+     * @throws IllegalArgumentException if the load factor is less than or equal to zero
+     * @throws NullPointerException if the equator is null
+     */
+    protected AbstractHashedMap(final int initialCapacity, final float loadFactor,
+            final Equator<? super K> keyEquator) {
+        this(initialCapacity, loadFactor);
+        this.keyEquator = Objects.requireNonNull(keyEquator, "keyEquator");
+    }
+
     @SuppressWarnings("unchecked")
     protected AbstractHashedMap(final int initialCapacity, final float loadFactor, final int threshold) {
         this.loadFactor = loadFactor;
@@ -1200,7 +1227,7 @@ public class AbstractHashedMap<K, V> extends AbstractMap<K, V> implements Iterab
      */
     protected int hash(final Object key) {
         // same as JDK 1.4
-        int h = key.hashCode();
+        int h = keyEquator == null || key == NULL ? key.hashCode() : equatorHash(key);
         h += ~(h << 9);
         h ^=  h >>> 14;
         h +=  h << 4;
@@ -1263,7 +1290,67 @@ public class AbstractHashedMap<K, V> extends AbstractMap<K, V> implements Iterab
      * @return true if equal
      */
     protected boolean isEqualKey(final Object key1, final Object key2) {
-        return Objects.equals(key1, key2);
+        if (keyEquator == null || key1 == NULL || key2 == NULL) {
+            return Objects.equals(key1, key2);
+        }
+        return equatorEquate(key1, key2);
+    }
+
+    /** The equator's hash of a key that is not the null key's sentinel. */
+    @SuppressWarnings("unchecked")
+    private int equatorHash(final Object key) {
+        return keyEquator.hash((K) key);
+    }
+
+    /** The equator's equality of two keys that are not the null key's sentinel. */
+    @SuppressWarnings("unchecked")
+    private boolean equatorEquate(final Object key1, final Object key2) {
+        return keyEquator.equate((K) key1, (K) key2);
+    }
+
+    /**
+     * Reads the key equator a serializable subclass wrote after the entries, if there is one, and
+     * puts the entries again by it: they were put by {@code equals} and {@code hashCode} while they
+     * were read. A stream without an equator (from a map without one, or from an earlier version)
+     * leaves the map as it is.
+     *
+     * @param in  the stream, after the entries
+     * @throws IOException if an error occurs
+     * @throws ClassNotFoundException if the class of the equator is not found
+     */
+    @SuppressWarnings("unchecked")
+    void readKeyEquator(final ObjectInputStream in) throws IOException, ClassNotFoundException {
+        final Equator<? super K> equator;
+        try {
+            equator = (Equator<? super K>) in.readObject();
+        } catch (final OptionalDataException end) {
+            if (end.eof) {
+                return;
+            }
+            throw end;
+        }
+        final List<Map.Entry<K, V>> entries = new java.util.ArrayList<>(size);
+        for (final MapIterator<K, V> it = mapIterator(); it.hasNext();) {
+            entries.add(new java.util.AbstractMap.SimpleImmutableEntry<>(it.next(), it.getValue()));
+        }
+        clear();
+        keyEquator = equator;
+        for (final Map.Entry<K, V> entry : entries) {
+            put(entry.getKey(), entry.getValue());
+        }
+    }
+
+    /**
+     * Writes the key equator after the entries when the map has one; a map without one writes
+     * nothing, so its serialized form is the one of earlier versions.
+     *
+     * @param out  the stream, after the entries
+     * @throws IOException if an error occurs, or the equator is not serializable
+     */
+    void writeKeyEquator(final ObjectOutputStream out) throws IOException {
+        if (keyEquator != null) {
+            out.writeObject(keyEquator);
+        }
     }
 
     /**
