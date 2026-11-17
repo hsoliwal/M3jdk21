@@ -3574,7 +3574,7 @@ public final class String
      * @since   21
      */
     public boolean containsAny(CharSequence... searches) {
-        if (isEmpty() || searches.length == 0) return false;
+        if (searches.length == 0 || isEmpty()) return false;
         for (CharSequence search : searches) {
             if (search != null && indexOf(search.toString()) >= 0) return true;
         }
@@ -3596,7 +3596,7 @@ public final class String
      * @since   21
      */
     public boolean containsAnyIgnoreCase(CharSequence... searches) {
-        if (isEmpty() || searches.length == 0) return false;
+        if (searches.length == 0 || isEmpty()) return false;
         for (CharSequence search : searches) {
             if (search != null && containsIgnoreCase(search)) return true;
         }
@@ -3664,6 +3664,7 @@ public final class String
      * @since   21
      */
     public boolean containsOnly(char... chars) {
+        java.util.Objects.requireNonNull(chars, "chars");
         if (isEmpty()) return true;
         return chars.length > 0 && indexOfAnyBut(chars) < 0;
     }
@@ -3732,7 +3733,7 @@ public final class String
      */
     public int indexOfAny(char... chars) {
         int length = length();
-        if (length == 0 || chars.length == 0) return -1;
+        if (chars.length == 0 || length == 0) return -1;
         long low = asciiMask(chars, 0);
         long high = asciiMask(chars, 64);
         boolean wide = hasWideUnit(chars);
@@ -3818,7 +3819,7 @@ public final class String
      */
     public int indexOfAnyBut(char... chars) {
         int length = length();
-        if (length == 0 || chars.length == 0) return -1;
+        if (chars.length == 0 || length == 0) return -1;
         long low = asciiMask(chars, 0);
         long high = asciiMask(chars, 64);
         int[] wide = new String(chars).codePoints().filter(point -> point >= 128).toArray();
@@ -4182,7 +4183,7 @@ public final class String
      * @since   21
      */
     public boolean startsWithAny(CharSequence... prefixes) {
-        if (isEmpty() || prefixes.length == 0) return false;
+        if (prefixes.length == 0 || isEmpty()) return false;
         for (CharSequence prefix : prefixes) {
             if (prefix != null && startsWith(prefix.toString())) return true;
         }
@@ -4202,7 +4203,7 @@ public final class String
      * @since   21
      */
     public boolean endsWithAny(CharSequence... suffixes) {
-        if (isEmpty() || suffixes.length == 0) return false;
+        if (suffixes.length == 0 || isEmpty()) return false;
         for (CharSequence suffix : suffixes) {
             if (suffix != null && endsWith(suffix.toString())) return true;
         }
@@ -4351,7 +4352,8 @@ public final class String
     }
 
     /**
-     * Returns this string without its last character; a final {@code "\r\n"} is removed as one.
+     * Returns this string without its last character; a final {@code "\r\n"} is removed as one,
+     * and so is a final surrogate pair.
      *
      * @apiNote
      * This method is an M3JDK addition to the {@code String} API.
@@ -4362,8 +4364,10 @@ public final class String
     public String chop() {
         int length = length();
         if (length < 2) return "";
+        boolean pair = Character.isLowSurrogate(charAt(length - 1))
+                && Character.isHighSurrogate(charAt(length - 2));
         boolean crlf = charAt(length - 1) == '\n' && charAt(length - 2) == '\r';
-        return substring(0, crlf ? length - 2 : length - 1);
+        return substring(0, pair || crlf ? length - 2 : length - 1);
     }
 
     /**
@@ -4583,6 +4587,9 @@ public final class String
 
     /**
      * Returns this string without the given characters at its start and its end.
+     * This string is read as code points, and a code point is removed when {@code chars}
+     * contains it as {@link #indexOf(int)} finds it: a surrogate pair goes only when
+     * {@code chars} holds that pair.
      *
      * @apiNote
      * This method is an M3JDK addition to the {@code String} API; {@link #strip()} removes
@@ -4599,6 +4606,9 @@ public final class String
 
     /**
      * Returns this string without the given characters at its start.
+     * This string is read as code points, and a code point is removed when {@code chars}
+     * contains it as {@link #indexOf(int)} finds it: a surrogate pair goes only when
+     * {@code chars} holds that pair.
      *
      * @apiNote
      * This method is an M3JDK addition to the {@code String} API; {@link #stripLeading()} removes
@@ -4613,8 +4623,10 @@ public final class String
         int length = length();
         int start = 0;
         if (!chars.isEmpty()) {
-            while (start < length && chars.indexOf(charAt(start)) >= 0) {
-                start++;
+            while (start < length) {
+                int point = codePointAt(start);
+                if (chars.indexOf(point) < 0) break;
+                start += Character.charCount(point);
             }
         }
         return substring(start);
@@ -4622,6 +4634,9 @@ public final class String
 
     /**
      * Returns this string without the given characters at its end.
+     * This string is read as code points, and a code point is removed when {@code chars}
+     * contains it as {@link #indexOf(int)} finds it: a surrogate pair goes only when
+     * {@code chars} holds that pair.
      *
      * @apiNote
      * This method is an M3JDK addition to the {@code String} API; {@link #stripTrailing()} removes
@@ -4635,8 +4650,10 @@ public final class String
     public String stripEnd(String chars) {
         int end = length();
         if (!chars.isEmpty()) {
-            while (end > 0 && chars.indexOf(charAt(end - 1)) >= 0) {
-                end--;
+            while (end > 0) {
+                int point = codePointBefore(end);
+                if (chars.indexOf(point) < 0) break;
+                end -= Character.charCount(point);
             }
         }
         return substring(0, end);

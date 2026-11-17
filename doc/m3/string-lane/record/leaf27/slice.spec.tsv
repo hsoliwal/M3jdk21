@@ -1,0 +1,15 @@
+# SLICE family: donor op, mode, java op, null rule
+left	INSTANCE	left	NPE_ARG
+right	INSTANCE	right	NPE_ARG
+mid	INSTANCE	mid	NPE_ARG
+truncate	INSTANCE	truncate	NPE_ARG
+substringBefore	INSTANCE	substringBefore	NPE_ARG
+substringAfter	INSTANCE	substringAfter	NPE_ARG
+substringBeforeLast	INSTANCE	substringBeforeLast	NPE_ARG
+substringAfterLast	INSTANCE	substringAfterLast	NPE_ARG
+substringBetween	INSTANCE	substringBetween	NPE_ARG
+removeStart	INSTANCE	removeStart	NPE_ARG
+removeEnd	INSTANCE	removeEnd	NPE_ARG
+removeStartIgnoreCase	INSTANCE	removeStartIgnoreCase	NPE_ARG
+removeEndIgnoreCase	INSTANCE	removeEndIgnoreCase	NPE_ARG
+unwrap	INSTANCE	unwrap	NPE_ARG

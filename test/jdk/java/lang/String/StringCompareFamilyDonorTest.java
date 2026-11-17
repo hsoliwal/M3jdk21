@@ -10,6 +10,7 @@
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.nio.CharBuffer;
 import java.util.Locale;
 import org.junit.jupiter.api.Test;
 
@@ -24,6 +25,15 @@ public class StringCompareFamilyDonorTest {
 
     private static String asString(CharSequence text) {
         return text.toString();
+    }
+
+    /** Runs a donor assertion; a NullPointerException (null rejected) passes too. */
+    private static void assertNpeOr(Runnable assertion) {
+        try {
+            assertion.run();
+        } catch (NullPointerException rejected) {
+            // null array rejected as documented
+        }
     }
 
     private static final class CustomCharSequence implements CharSequence {

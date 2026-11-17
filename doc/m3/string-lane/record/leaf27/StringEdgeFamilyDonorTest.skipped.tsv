@@ -1,0 +1,51 @@
+donor_file	method	reason	statement
+StringUtilsStripTest.java	testStripAccents	NULL_RECEIVER	assertNull(StringUtils.stripAccents(null), "Failed null safety")
+StringUtilsStripTest.java	testStripEndStringString	NULL_RECEIVER	assertNull(StringUtils.stripEnd(null, null))
+StringUtilsStripTest.java	testStripEndStringString	NULL_RECEIVER	assertNull(StringUtils.stripEnd(null, ""))
+StringUtilsStripTest.java	testStripEndStringString	NULL_RECEIVER	assertNull(StringUtils.stripEnd(null, " "))
+StringUtilsStripTest.java	testStripEndStringString	NULL_RECEIVER	assertNull(StringUtils.stripEnd(null, "ab"))
+StringUtilsStripTest.java	testStripStartStringString	NULL_RECEIVER	assertNull(StringUtils.stripStart(null, null))
+StringUtilsStripTest.java	testStripStartStringString	NULL_RECEIVER	assertNull(StringUtils.stripStart(null, ""))
+StringUtilsStripTest.java	testStripStartStringString	NULL_RECEIVER	assertNull(StringUtils.stripStart(null, " "))
+StringUtilsStripTest.java	testStripStartStringString	NULL_RECEIVER	assertNull(StringUtils.stripStart(null, "ab"))
+StringUtilsStripTest.java	testStripString	NULL_RECEIVER	assertNull(StringUtils.strip(null))
+StringUtilsStripTest.java	testStripStringString	NULL_RECEIVER	assertNull(StringUtils.strip(null, null))
+StringUtilsStripTest.java	testStripStringString	NULL_RECEIVER	assertNull(StringUtils.strip(null, ""))
+StringUtilsStripTest.java	testStripStringString	NULL_RECEIVER	assertNull(StringUtils.strip(null, " "))
+StringUtilsStripTest.java	testStripStringString	NULL_RECEIVER	assertNull(StringUtils.strip(null, "ab"))
+StringUtilsEmptyBlankTest.java	testIsNotBlank	NULL_RECEIVER	assertFalse(StringUtils.isNotBlank(null))
+StringUtilsEmptyBlankTest.java	testIsNotEmpty	NULL_RECEIVER	assertFalse(StringUtils.isNotEmpty(null))
+StringUtilsTest.java	testChomp	LOCAL_STATE:chompCase,chompCases,expectedResult,final,original	for (final String[] chompCase : chompCases) { final String original = chompCase[0]; final String expectedResult = chompCase[1]; assertEquals(expectedResult, StringUtils.chomp(original), "chomp(String)
+StringUtilsTest.java	testChomp	NULL_RECEIVER	assertNull(StringUtils.chomp(null, "foo"), "chomp(String, String) failed")
+StringUtilsTest.java	testChomp	NULL_RECEIVER	assertNull(StringUtils.chomp(null, null), "chomp(String, String) failed")
+StringUtilsTest.java	testChomp	NULL_RECEIVER	assertNull(StringUtils.chomp(null, ""), "chomp(String, String) failed")
+StringUtilsTest.java	testChop	LOCAL_STATE:chopCase,chopCases,expectedResult,final,original	for (final String[] chopCase : chopCases) { final String original = chopCase[0]; final String expectedResult = chopCase[1]; assertEquals(expectedResult, StringUtils.chop(original), "chop(String) faile
+StringUtilsTest.java	testDefaultIfBlank_CharBuffers	LOCAL_STATE:final,s	final CharBuffer s = StringUtils.defaultIfBlank(CharBuffer.wrap("abc"), CharBuffer.wrap("NULL"))
+StringUtilsTest.java	testDefaultIfBlank_StringBuffers	LOCAL_STATE:final,s	final StringBuffer s = StringUtils.defaultIfBlank(new StringBuffer("abc"), new StringBuffer("NULL"))
+StringUtilsTest.java	testDefaultIfBlank_StringBuilders	LOCAL_STATE:final,s	final StringBuilder s = StringUtils.defaultIfBlank(new StringBuilder("abc"), new StringBuilder("NULL"))
+StringUtilsTest.java	testDefaultIfBlank_StringString	LOCAL_STATE:final,s	final String s = StringUtils.defaultIfBlank("abc", "NULL")
+StringUtilsTest.java	testDefaultIfEmpty_CharBuffers	LOCAL_STATE:final,s	final CharBuffer s = StringUtils.defaultIfEmpty(CharBuffer.wrap("abc"), CharBuffer.wrap("NULL"))
+StringUtilsTest.java	testDefaultIfEmpty_StringBuffers	LOCAL_STATE:final,s	final StringBuffer s = StringUtils.defaultIfEmpty(new StringBuffer("abc"), new StringBuffer("NULL"))
+StringUtilsTest.java	testDefaultIfEmpty_StringBuilders	LOCAL_STATE:final,s	final StringBuilder s = StringUtils.defaultIfEmpty(new StringBuilder("abc"), new StringBuilder("NULL"))
+StringUtilsTest.java	testDefaultIfEmpty_StringString	LOCAL_STATE:final,s	final String s = StringUtils.defaultIfEmpty("abc", "NULL")
+StringUtilsTest.java	testDeleteWhitespace_String	NULL_RECEIVER	assertNull(StringUtils.deleteWhitespace(null))
+StringUtilsTest.java	testGetIfBlank_StringStringSupplier	LOCAL_STATE:final,s	final String s = StringUtils.getIfBlank("abc", () -> "NULL")
+StringUtilsTest.java	testGetIfBlank_StringStringSupplier	LOCAL_STATE:countingDefaultSupplier	StringUtils.getIfBlank("abc", countingDefaultSupplier)
+StringUtilsTest.java	testGetIfBlank_StringStringSupplier	LOCAL_STATE:countingDefaultSupplier	StringUtils.getIfBlank("", countingDefaultSupplier)
+StringUtilsTest.java	testGetIfBlank_StringStringSupplier	LOCAL_STATE:countingDefaultSupplier	StringUtils.getIfBlank(" ", countingDefaultSupplier)
+StringUtilsTest.java	testGetIfBlank_StringStringSupplier	LOCAL_STATE:countingDefaultSupplier	StringUtils.getIfBlank(null, countingDefaultSupplier)
+StringUtilsTest.java	testGetIfEmpty_StringStringSupplier	LOCAL_STATE:final,s	final String s = StringUtils.getIfEmpty("abc", () -> "NULL")
+StringUtilsTest.java	testGetIfEmpty_StringStringSupplier	LOCAL_STATE:countingDefaultSupplier	StringUtils.getIfEmpty("abc", countingDefaultSupplier)
+StringUtilsTest.java	testGetIfEmpty_StringStringSupplier	LOCAL_STATE:countingDefaultSupplier	StringUtils.getIfEmpty("", countingDefaultSupplier)
+StringUtilsTest.java	testGetIfEmpty_StringStringSupplier	LOCAL_STATE:countingDefaultSupplier	StringUtils.getIfEmpty(null, countingDefaultSupplier)
+StringUtilsTest.java	testNormalizeSpace	NULL_RECEIVER	assertNull(StringUtils.normalizeSpace(null))
+StringEdgeFamilyDonorTest.java	-	COMPILE:method chomp in class String cannot be applied to given types;	assertEquals("foobar", asString("foobar").chomp("baz"), "chomp(String, String) failed");
+StringEdgeFamilyDonorTest.java	-	COMPILE:method chomp in class String cannot be applied to given types;	assertEquals("foo", asString("foo").chomp("foooo"), "chomp(String, String) failed");
+StringEdgeFamilyDonorTest.java	-	COMPILE:method chomp in class String cannot be applied to given types;	assertEquals("foobar", asString("foobar").chomp(""), "chomp(String, String) failed");
+StringEdgeFamilyDonorTest.java	-	COMPILE:method chomp in class String cannot be applied to given types;	assertThrows(NullPointerException.class, () -> asString("foobar").chomp(null));
+StringEdgeFamilyDonorTest.java	-	COMPILE:method chomp in class String cannot be applied to given types;	assertEquals("", asString("").chomp("foo"), "chomp(String, String) failed");
+StringEdgeFamilyDonorTest.java	-	COMPILE:method chomp in class String cannot be applied to given types;	assertThrows(NullPointerException.class, () -> asString("").chomp(null));
+StringEdgeFamilyDonorTest.java	-	COMPILE:method chomp in class String cannot be applied to given types;	assertEquals("", asString("").chomp(""), "chomp(String, String) failed");
+StringEdgeFamilyDonorTest.java	-	COMPILE:method chomp in class String cannot be applied to given types;	assertEquals("", asString("foo").chomp("foo"), "chomp(String, String) failed");
+StringEdgeFamilyDonorTest.java	-	COMPILE:method chomp in class String cannot be applied to given types;	assertEquals(" ", asString(" foo").chomp("foo"), "chomp(String, String) failed");
+StringEdgeFamilyDonorTest.java	-	COMPILE:method chomp in class String cannot be applied to given types;	assertEquals("foo ", asString("foo ").chomp("foo"), "chomp(String, String) failed");

@@ -1,0 +1,12 @@
+# CLASS_TEST family (landed #3227)
+isAlpha	INSTANCE	isAlpha	NPE_ARG
+isAlphaSpace	INSTANCE	isAlphaSpace	NPE_ARG
+isAlphanumeric	INSTANCE	isAlphanumeric	NPE_ARG
+isAlphanumericSpace	INSTANCE	isAlphanumericSpace	NPE_ARG
+isAsciiPrintable	INSTANCE	isAsciiPrintable	NPE_ARG
+isNumeric	INSTANCE	isNumeric	NPE_ARG
+isNumericSpace	INSTANCE	isNumericSpace	NPE_ARG
+isAllLowerCase	INSTANCE	isAllLowerCase	NPE_ARG
+isAllUpperCase	INSTANCE	isAllUpperCase	NPE_ARG
+isMixedCase	INSTANCE	isMixedCase	NPE_ARG
+isWhitespace	INSTANCE	isBlank	NPE_ARG

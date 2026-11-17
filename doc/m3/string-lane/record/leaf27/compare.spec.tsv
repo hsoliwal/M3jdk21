@@ -1,0 +1,7 @@
+# COMPARE family: donor op, mode, java op, null rule
+compare	STATIC	compare	SAME
+compareIgnoreCase	STATIC	compareIgnoreCase	SAME
+difference	INSTANCE	difference	NPE_ARG
+equalsAny	INSTANCE	equalsAny	NPE_ARRAY
+equalsAnyIgnoreCase	INSTANCE	equalsAnyIgnoreCase	NPE_ARRAY
+getCommonPrefix	STATIC	getCommonPrefix	SAME

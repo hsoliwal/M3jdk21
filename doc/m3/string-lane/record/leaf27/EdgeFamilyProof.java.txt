@@ -1,0 +1,161 @@
+// SPDX-License-Identifier: Apache-2.0 OR EPL-2.0
+// Copyright (c) 2026 Synexia, Hitesh Soliwal (hsoliwal@gmail.com) and others
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
+import java.util.function.Function;
+import org.apache.commons.lang3.StringUtils;
+
+/**
+ * Donor-oracle proof of the EDGE + EMPTY_BLANK family of new java.lang.String methods on a stock JVM whose String
+ * carries the head method text. Text operations: every string of length 0..4 over UNITS, and every BMP character alone,
+ * between "a" and "b", and (for stripAccents) followed by U+0301. Static operations: every array of length 0..3 over
+ * VALUES and the null array. Prints: name, cases, mismatches, first mismatching input. Exit 1 on a mismatch.
+ */
+public final class EdgeFamilyProof {
+    private static final char[] UNITS = {'a', ' ', '\t', '\r', '\n', (char) 0x00A0, (char) 0x0001,
+        (char) 0x00E9, (char) 0xD835, (char) 0xDD1E, (char) 0xDD1F};
+    private static final String[] VALUES = {null, "", " ", "a", " a ", " ", "\t\n"};
+    private static final String[] CHARS = {"", " ", "a", " a", "\r\n", " \t",
+        "" + (char) 0xD835 + (char) 0xDD1F, "" + (char) 0xD835 + (char) 0xDD1E, "" + (char) 0xD835,
+        "" + (char) 0xDD1E, "a" + (char) 0xD835 + (char) 0xDD1E};
+    private static int failures;
+
+    private EdgeFamilyProof() {}
+
+    public static void main(String[] args) {
+        List<String> texts = new ArrayList<>(strings(4));
+        List<String> bmp = new ArrayList<>();
+        for (int c = 0; c < 0x10000; c++) {
+            bmp.add(String.valueOf((char) c));
+            bmp.add("a" + (char) c + "b");
+        }
+        List<String> all = new ArrayList<>(texts);
+        all.addAll(bmp);
+        text("chomp", all, String::chomp, StringUtils::chomp);
+        text("chop", all, String::chop, StringUtils::chop);
+        text("deleteWhitespace", all, String::deleteWhitespace, StringUtils::deleteWhitespace);
+        text("normalizeSpace", all, String::normalizeSpace, StringUtils::normalizeSpace);
+        List<String> accents = new ArrayList<>(all);
+        for (int c = 0; c < 0x10000; c++) accents.add((char) c + "́");
+        text("stripAccents", accents, String::stripAccents, StringUtils::stripAccents);
+        for (String chars : CHARS) {
+            text("strip(" + show(chars) + ")", texts, s -> s.strip(chars), s -> StringUtils.strip(s, chars));
+            text("stripStart(" + show(chars) + ")", texts, s -> s.stripStart(chars), s -> StringUtils.stripStart(s, chars));
+            text("stripEnd(" + show(chars) + ")", texts, s -> s.stripEnd(chars), s -> StringUtils.stripEnd(s, chars));
+        }
+        text("isNotBlank", all, s -> String.valueOf(s.isNotBlank()), s -> String.valueOf(StringUtils.isNotBlank(s)));
+        text("isNotEmpty", texts, s -> String.valueOf(s.isNotEmpty()), s -> String.valueOf(StringUtils.isNotEmpty(s)));
+        List<String> withNull = new ArrayList<>(all);
+        withNull.add(null);
+        text("stripToEmpty", withNull, String::stripToEmpty, StringUtils::stripToEmpty);
+        text("stripToNull", withNull, String::stripToNull, StringUtils::stripToNull);
+        text("trimToEmpty", withNull, String::trimToEmpty, StringUtils::trimToEmpty);
+        text("trimToNull", withNull, String::trimToNull, StringUtils::trimToNull);
+        text("defaultString", withNull, String::defaultString, StringUtils::defaultString);
+        text("isNullOrEmpty", withNull, s -> String.valueOf(String.isNullOrEmpty(s)),
+                s -> String.valueOf(s == null || s.isEmpty()));
+        List<String[]> arrays = arrays();
+        array("isAnyBlank", arrays, a -> String.isAnyBlank(a), a -> StringUtils.isAnyBlank(a));
+        array("isAllBlank", arrays, a -> String.isAllBlank(a), a -> StringUtils.isAllBlank(a));
+        array("isNoneBlank", arrays, a -> String.isNoneBlank(a), a -> StringUtils.isNoneBlank(a));
+        array("isAnyEmpty", arrays, a -> String.isAnyEmpty(a), a -> StringUtils.isAnyEmpty(a));
+        array("isAllEmpty", arrays, a -> String.isAllEmpty(a), a -> StringUtils.isAllEmpty(a));
+        array("isNoneEmpty", arrays, a -> String.isNoneEmpty(a), a -> StringUtils.isNoneEmpty(a));
+        array("firstNonBlank", arrays, a -> String.firstNonBlank(a), a -> StringUtils.firstNonBlank(a));
+        array("firstNonEmpty", arrays, a -> String.firstNonEmpty(a), a -> StringUtils.firstNonEmpty(a));
+        array("stripAll", arrays, a -> show(String.stripAll(a)), a -> show(StringUtils.stripAll(a)));
+        for (String chars : new String[] {null, "", " a", "\t"}) {
+            array("stripAll(" + show(chars) + ")", arrays, a -> show(String.stripAll(a, chars)),
+                    a -> show(StringUtils.stripAll(a, chars)));
+        }
+        array("stripAll empty array identity", List.<String[]>of(new String[0]), a -> String.stripAll(a) == a,
+                a -> StringUtils.stripAll(a) == a);
+        long cases = 0, mismatches = 0;
+        String first = "-";
+        for (String value : VALUES) {
+            for (String fallback : VALUES) {
+                cases += 6;
+                boolean differ = !Objects.equals(String.defaultIfBlank(value, fallback), StringUtils.defaultIfBlank(value, fallback))
+                        | !Objects.equals(String.defaultIfEmpty(value, fallback), StringUtils.defaultIfEmpty(value, fallback))
+                        | !Objects.equals(String.defaultString(value, fallback), StringUtils.defaultString(value, fallback))
+                        | !Objects.equals(String.getIfBlank(value, () -> fallback), StringUtils.getIfBlank(value, () -> fallback))
+                        | !Objects.equals(String.getIfEmpty(value, () -> fallback), StringUtils.getIfEmpty(value, () -> fallback))
+                        | !Objects.equals(String.getIfBlank(value, null), StringUtils.getIfBlank(value, null));
+                if (differ && mismatches++ == 0) first = show(value) + " / " + show(fallback);
+            }
+        }
+        report("defaultIfBlank/defaultIfEmpty/defaultString/getIfBlank/getIfEmpty", cases, mismatches, first);
+        System.out.println("RESULT\t" + (failures == 0 ? "PASS" : "FAIL") + "\tfailures=" + failures);
+        System.exit(failures == 0 ? 0 : 1);
+    }
+
+    private static void text(String name, List<String> inputs, Function<String, String> mine,
+            Function<String, String> donor) {
+        long mismatches = 0;
+        String first = "-";
+        for (String input : inputs) {
+            if (!Objects.equals(mine.apply(input), donor.apply(input)) && mismatches++ == 0) {
+                first = show(input) + " -> " + show(mine.apply(input)) + " vs " + show(donor.apply(input));
+            }
+        }
+        report(name, inputs.size(), mismatches, first);
+    }
+
+    private static <R> void array(String name, List<String[]> inputs, Function<String[], R> mine,
+            Function<String[], R> donor) {
+        long mismatches = 0;
+        String first = "-";
+        for (String[] input : inputs) {
+            if (!Objects.equals(mine.apply(input), donor.apply(input)) && mismatches++ == 0) first = show(input);
+        }
+        report(name, inputs.size(), mismatches, first);
+    }
+
+    private static void report(String name, long cases, long mismatches, String first) {
+        failures += mismatches == 0 ? 0 : 1;
+        System.out.println(name + "\t" + cases + "\t" + mismatches + "\t" + first);
+    }
+
+    private static List<String> strings(int maxLength) {
+        List<String> out = new ArrayList<>();
+        for (int length = 0; length <= maxLength; length++) {
+            int total = (int) Math.pow(UNITS.length, length);
+            for (int code = 0; code < total; code++) {
+                char[] units = new char[length];
+                int rest = code;
+                for (int i = 0; i < length; i++) { units[i] = UNITS[rest % UNITS.length]; rest /= UNITS.length; }
+                out.add(new String(units));
+            }
+        }
+        return out;
+    }
+
+    private static List<String[]> arrays() {
+        List<String[]> out = new ArrayList<>();
+        out.add(null);
+        out.add(new String[0]);
+        for (String a : VALUES) {
+            out.add(new String[] {a});
+            for (String b : VALUES) {
+                out.add(new String[] {a, b});
+                for (String c : VALUES) out.add(new String[] {a, b, c});
+            }
+        }
+        return out;
+    }
+
+    private static String show(Object value) {
+        if (value == null) return "null";
+        if (value instanceof String[] array) {
+            List<String> parts = new ArrayList<>();
+            for (String item : array) parts.add(show(item));
+            return parts.toString();
+        }
+        StringBuilder out = new StringBuilder("\"");
+        for (char c : value.toString().toCharArray()) out.append(c >= 32 && c < 127 ? String.valueOf(c) : String.format("\\u%04X", (int) c));
+        return out.append('"').toString();
+    }
+}

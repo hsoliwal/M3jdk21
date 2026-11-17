@@ -1,0 +1,6 @@
+JUnit 5 console 1.11.4, stock JDK 21 with the head method text in java.lang.String (--patch-module): the five family tests,
+StringWindowSeamTest and the five donor tests ported from commons-lang3 3.22.0 own tests (port_donor_tests.py, then
+prune_uncompilable.py for overloads M3JDK does not have; skipped statements with reasons in *.skipped.tsv), in three modes
+(flat; -Dm3.stub.force=true -Dm3.stub.facts=true; -Dm3.stub.force=true), compact strings on and off:
+[      4652 tests successful      ]
+[         0 tests failed          ]
