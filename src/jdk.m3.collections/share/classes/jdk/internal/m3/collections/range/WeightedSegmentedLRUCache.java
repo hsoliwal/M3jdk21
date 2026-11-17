@@ -40,8 +40,9 @@ import java.util.function.Predicate;
  * each segment's recency list as two {@code int} lanes of slot indices and an open-addressing
  * {@code int} index from a key's hash to its slot; there is no node or map entry object per
  * resident. Freed slots are reused, the lanes double up to {@code maxEntries + 1} slots (at most
- * 2<sup>29</sup>) and are dropped when the cache empties (clear, trim, removeIf or the removal of
- * the last resident), and a key's {@code hashCode} is not called again after it was admitted.</p>
+ * 2<sup>29</sup>) and are dropped when an operation empties the cache (clear, trim, removeIf or
+ * the removal of the last resident; not a trimTo that throws ArithmeticException), and the index
+ * never calls a resident's {@code hashCode} again (the hashes are kept).</p>
  *
  * <p>Expected complexity is O(1) for get/put/remove and O(evicted) for trims. Predicate removal and
  * ordered snapshots are O(n).</p>
@@ -50,13 +51,16 @@ import java.util.function.Predicate;
  * results, segment order, counters and exceptions for keys that obey {@code equals} and
  * {@code hashCode}; {@code compareTo} is never consulted. Lookups call {@code hashCode} as
  * {@code HashMap} did; evictions and {@code removeIf} no longer call {@code hashCode} or
- * {@code equals} on the keys they remove. A key whose {@code equals} changes the cache during a
- * lookup gets a {@code ConcurrentModificationException}, and so does a {@code removeIf} predicate
+ * {@code equals} on the keys they remove. A key whose {@code equals} adds or removes a resident
+ * during a lookup, or whose {@code hashCode} does so while the key is admitted, gets a
+ * {@code ConcurrentModificationException}, and so does a {@code removeIf} predicate
  * that frees the next resident of its walk, moves it to the other segment, or frees the resident it
  * then matches; the node version failed there or went on over detached nodes. An
  * {@code ArithmeticException} from a weight total near {@code Long.MAX_VALUE} is thrown by the same
  * call as before; the lanes are left consistent (the node version could keep a resident on no
- * list).</p>
+ * list), and a put whose rebalance or trim threw it has first evicted as the hard trim does, so
+ * the limits hold afterwards (the node version could go on above them; a get only moves weight
+ * between the segments and cannot overflow then).</p>
  *
  * @param <K> key type
  * @param <V> value type
@@ -344,9 +348,14 @@ public final class WeightedSegmentedLRUCache<K, V> {
         int slot = slotOf(key);
         boolean replaced = slot != NONE;
         if (slot == NONE) {
-            // hashed first (a hashCode that throws or calls back finds nothing half done), then an
-            // overflowing probation weight throws before the entry is admitted
+            // hashed first (a hashCode that throws finds nothing half done; one that adds or
+            // removes a resident gets a CME), then an overflowing probation weight throws before
+            // the entry is admitted
+            int seen = structure;
             int hash = key.hashCode();
+            if (structure != seen) {
+                throw new ConcurrentModificationException("a key's hashCode changed the cache");
+            }
             Math.addExact(segmentWeight[PROBATION], candidateWeight);
             slot = admit(key, value, candidateWeight, hash);
             addToFront(slot);
@@ -366,7 +375,13 @@ public final class WeightedSegmentedLRUCache<K, V> {
         }
         puts++;
 
-        TrimResult trim = rebalanceProtected().plus(trimToInternal(maxEntries, maxWeight));
+        TrimResult trim;
+        try {
+            trim = rebalanceProtected().plus(trimToInternal(maxEntries, maxWeight));
+        } catch (ArithmeticException overflow) {
+            trimAfterOverflow();
+            throw overflow;
+        }
         return new PutResult(true, replaced, candidateWeight, trim);
     }
 
@@ -614,6 +629,26 @@ public final class WeightedSegmentedLRUCache<K, V> {
                 : new TrimResult(evictedEntries, evictedWeight, 0);
     }
 
+    /**
+     * After a weight total overflowed in a put or get: evicts as the hard trim does (probation LRU
+     * first) until the configured limits hold, comparing the totals without overflow; both totals
+     * are at most Long.MAX_VALUE, so {@code maxWeight - protected} cannot overflow.
+     */
+    private void trimAfterOverflow() {
+        while (size > 0 && (size > maxEntries
+                || segmentWeight[PROBATION] > maxWeight - segmentWeight[PROTECTED])) {
+            int victim = lru[PROBATION] != NONE ? lru[PROBATION] : lru[PROTECTED];
+            byte segment = segmentLane[victim];
+            release(victim);
+            evictions++;
+            if (segment == PROBATION) probationEvictions++;
+            else protectedEvictions++;
+        }
+        if (size == 0) {
+            dropLanes();
+        }
+    }
+
     /** Tests the keys of one segment from its least recently used on, removing the matches. */
     @SuppressWarnings("unchecked")
     private RemoveAccumulator removeIfFromList(byte segment, Predicate<? super K> predicate) {
@@ -678,7 +713,7 @@ public final class WeightedSegmentedLRUCache<K, V> {
      * The slot of a resident with the given hash and equal to {@code key} ({@code
      * key.equals(resident)}), or NONE.
      *
-     * @throws ConcurrentModificationException if a key's {@code equals} changes the cache
+     * @throws ConcurrentModificationException if a key's {@code equals} adds or removes a resident
      */
     private int find(Object key, int hash) {
         if (size == 0) {

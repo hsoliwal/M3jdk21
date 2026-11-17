@@ -51,6 +51,9 @@ public class WeightedSegmentedLRUCacheDifferentialTest {
     static final Field WEIGHT_LANE = lane("weightLane");
     static final Field SEGMENT_LANE = lane("segmentLane");
     static final Field SEGMENT_WEIGHT = lane("segmentWeight");
+    static final Field SEGMENT_ENTRIES = lane("segmentEntries");
+    static final Field STAMP_LANE = lane("stampLane");
+    static final Field INDEX = lane("index");
     static long checks;
     static String lastOp = "";
     /** Fresh caches after an overflow, a broken node walk or a corrupted reference. */
@@ -69,6 +72,8 @@ public class WeightedSegmentedLRUCacheDifferentialTest {
             + "a key's equals changed the cache";
     static final String WALK_CME = "threw java.util.ConcurrentModificationException: "
             + "the removeIf predicate removed a resident under the walk";
+    static final String HASH_CME = "threw java.util.ConcurrentModificationException: "
+            + "a key's hashCode changed the cache";
 
     static void same(Object expected, Object actual, String what) {
         checks++;
@@ -107,7 +112,8 @@ public class WeightedSegmentedLRUCacheDifferentialTest {
         String expected = outcome(0, reference);
         String actual = outcome(1, lanes);
         if (!expected.equals(actual)
-                && (actual.equals(EQUALS_CME) || expected.startsWith("threw ")
+                && (actual.equals(EQUALS_CME) || actual.equals(HASH_CME)
+                        || expected.startsWith("threw ")
                         && actual.startsWith("threw java.util.ConcurrentModificationException"))) {
             checks++;
             return DIVERGED;
@@ -243,6 +249,132 @@ public class WeightedSegmentedLRUCacheDifferentialTest {
         }
     }
 
+    /**
+     * The lanes' own invariants, checked whatever the reference did: every resident counted once
+     * and on the recency list, no two equal, stamps unique and nonzero on residents and 0 on free
+     * slots, the index sized for the lanes. Lanes above 64 slots are checked every 7 steps, above
+     * 256 every 97, above 4,096 every 997.
+     */
+    static void lanesSound(String at, WeightedSegmentedLRUCache<Key, String> cache, int step) {
+        try {
+            Object[] keys = (Object[]) KEY_LANE.get(cache);
+            int every = keys.length <= 64 ? 1 : keys.length <= 256 ? 7
+                    : keys.length <= 4_096 ? 97 : 997;
+            if (step % every != 0) {
+                return;
+            }
+            int[] stamps = (int[]) STAMP_LANE.get(cache);
+            // keys equal by id with different hashes break the hashCode contract (the tests make
+            // them on purpose); HashMap holds those twice too, so equal means same id and hash
+            long[] ids = new long[keys.length];
+            long[] residentStamps = new long[keys.length];
+            int residents = 0;
+            boolean freeStampsZero = true;
+            boolean stampsNonzero = true;
+            for (int slot = 0; slot < keys.length; slot++) {
+                if (keys[slot] == null) {
+                    freeStampsZero &= stamps[slot] == 0;
+                } else {
+                    Key k = (Key) keys[slot];
+                    ids[residents] = (long) k.id() << 32 | k.hash() & 0xFFFF_FFFFL;
+                    stampsNonzero &= stamps[slot] != 0;
+                    residentStamps[residents++] = stamps[slot];
+                }
+            }
+            same(cache.size(), residents, at + " lanes: residents counted once");
+            same(cache.size(), cache.keysInLruOrder().size(), at + " lanes: recency list");
+            same(true, freeStampsZero, at + " lanes: free slots have stamp 0");
+            same(true, distinct(ids, residents), at + " lanes: no two equal residents");
+            same(true, stampsNonzero && distinct(residentStamps, residents),
+                    at + " lanes: resident stamps unique and nonzero");
+            same(indexLength(keys.length, cache.maxEntries()), ((int[]) INDEX.get(cache)).length,
+                    at + " lanes: index length");
+            int[] entries = (int[]) SEGMENT_ENTRIES.get(cache);
+            byte[] segments = (byte[]) SEGMENT_LANE.get(cache);
+            int[] counts = new int[2];
+            for (int slot = 0; slot < keys.length; slot++) {
+                if (keys[slot] != null) {
+                    counts[segments[slot]]++;
+                }
+            }
+            same(entries[0] + "/" + entries[1], counts[0] + "/" + counts[1],
+                    at + " lanes: segment entry counts");
+        } catch (IllegalAccessException e) {
+            throw new AssertionError(e);
+        }
+    }
+
+    static boolean distinct(long[] values, int n) {
+        long[] sorted = java.util.Arrays.copyOf(values, n);
+        java.util.Arrays.sort(sorted);
+        for (int i = 1; i < n; i++) {
+            if (sorted[i] == sorted[i - 1]) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /** The index length grow() gives lanes of this length (none for dropped lanes). */
+    static int indexLength(int lanes, int maxEntries) {
+        if (lanes == 0) {
+            return 0;
+        }
+        long cells = Math.max(2 * Math.min(lanes, (long) maxEntries), lanes + 1L);
+        return 1 << (64 - Long.numberOfLeadingZeros(cells - 1));
+    }
+
+    /**
+     * A key whose hashCode puts an equal key into a cache that never admitted a key: the outer put
+     * gets a ConcurrentModificationException and the cache holds the inner key once.
+     */
+    static void firstAdmissionHashReentry() {
+        WeightedSegmentedLRUCache<Key, String> cache =
+                new WeightedSegmentedLRUCache<>(8, 100L, 0.5d, weigher(1, 1)::weightOf);
+        Key outer = new Key(7, 7, false);
+        HOOK_KEY[1] = outer;
+        HASH_HOOK[1] = () -> cache.put(new Key(7, 7, false), "inner");
+        same(HASH_CME, outcome(1, () -> cache.put(outer, "outer")),
+                "first admission: hashCode puts an equal key");
+        HOOK_KEY[1] = null;
+        same(1, cache.size(), "first admission: one resident");
+        lanesSound("first admission", cache, 0);
+        same(true, cache.containsKey(outer), "first admission: the inner key is resident");
+        cache.remove(outer);
+        same(false, cache.containsKey(outer), "first admission: removed once, gone");
+    }
+
+    /**
+     * A rebalance whose demotion overflows the probation total (the verifier's scenario): both
+     * sides throw ArithmeticException, then the lanes keep their limits and go on working; the
+     * node version is not compared after its overflow.
+     */
+    static void overflowThenContinue() {
+        long unit = Long.MAX_VALUE / 64;
+        WeightedSegmentedLRUCache<Key, String> cache = new WeightedSegmentedLRUCache<>(
+                2, Long.MAX_VALUE, 0.5d, weigher(unit, 1)::weightOf);
+        String[] actions = {"put a 30", "get a", "put b 34", "put a 33"};
+        String last = "";
+        for (String action : actions) {
+            String[] part = action.split(" ");
+            Key key = new Key(part[1].hashCode(), part[1].hashCode(), false);
+            last = part[0].equals("get") ? outcome(1, () -> cache.get(key))
+                    : outcome(1, () -> cache.put(key, "x".repeat(Integer.parseInt(part[2]) + 1)));
+        }
+        same(true, last.startsWith("threw java.lang.ArithmeticException"),
+                "the demotion overflows");
+        sound("overflow, then", cache);
+        for (int i = 0; i < 40; i++) {
+            Key key = new Key(100 + i, 100 + i, false);
+            String value = "x".repeat(i == 0 ? 30 : 2);
+            same(true, outcome(1, () -> cache.put(key, value)).startsWith("value "),
+                    "put " + i + " after the overflow");
+            same(true, cache.size() <= 2, "entry limit " + i + " after the overflow");
+            same(true, outcome(1, cache::weight).startsWith("value "), "weight " + i);
+            lanesSound("after the overflow " + i, cache, 0);
+        }
+    }
+
     /** The length of the lanes: 0 once an emptied cache dropped them. */
     static int lanes(WeightedSegmentedLRUCache<?, ?> cache) {
         try {
@@ -281,6 +413,8 @@ public class WeightedSegmentedLRUCacheDifferentialTest {
         run(101L, 100_000, 2, 10L, 0.5d, 3, 1L, 1);
         run(102L, 30_000, 70_000, Long.MAX_VALUE / 4, 0.8d, 0, 1L, 997);
         overflowScenarios();
+        overflowThenContinue();
+        firstAdmissionHashReentry();
         for (long seed = 200; seed < 260; seed++) {
             run(seed, 2_000, 6, Long.MAX_VALUE, 0.5d, 0, Long.MAX_VALUE / 64, 1);
         }
@@ -420,6 +554,7 @@ public class WeightedSegmentedLRUCacheDifferentialTest {
             String outcome = !big && random.nextInt(9) == 0
                     ? mutating(random, at, key, other, value, ref, cache, refActions, laneActions)
                     : step(random, at, key, value, maxEntries, maxWeight, scale, ref, cache, big);
+            lanesSound(at, cache, step);
             if (outcome.startsWith("threw java.lang.ArithmeticException")) {
                 // the overflow was compared; the lanes stay consistent, the reference may not
                 sound(at, cache);
@@ -468,6 +603,9 @@ public class WeightedSegmentedLRUCacheDifferentialTest {
             }
             same(totals[0] + "/" + totals[1], sums[0] + "/" + sums[1],
                     at + " lanes segment weights after the overflow (" + lastOp + ")");
+            same(true, cache.size() <= cache.maxEntries()
+                    && totals[0] <= cache.maxWeight() - totals[1],
+                    at + " the limits hold after the overflow (" + lastOp + ")");
         } catch (ReflectiveOperationException | ArithmeticException e) {
             throw new AssertionError(at + " lanes after the overflow", e);
         }
