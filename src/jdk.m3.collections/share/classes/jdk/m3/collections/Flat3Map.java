@@ -4,6 +4,7 @@
  */
 package jdk.m3.collections;
 
+import java.util.Arrays;
 import java.util.Objects;
 
 /**
@@ -22,23 +23,21 @@ public final class Flat3Map<K, V> {
     static final long STATE_REGIME_FLAT = 1L << 1;
     /** State-mask bit {@code REGIME_HASH} (per-slot state word, bit 2). */
     static final long STATE_REGIME_HASH = 1L << 2;
-    /** Each hash slot is encoded using two packed bits: 0 empty, 1 live, 2 deleted. */
-    private static final int SLOTS_PER_WORD_SHIFT = 5;
-    private static final int SLOTS_PER_WORD = 1 << SLOTS_PER_WORD_SHIFT;
-    private static final long PACKED_STATE_MASK = 3L;
-    private static final long PACKED_USED = 1L;
-    private static final long PACKED_DELETED = 2L;
+    /**
+     * Hashed-regime key-lane sentinels: a never-used slot holds EMPTY, a removed one REMOVED. null
+     * stays a real key; the sentinels never escape (only live slots are returned or compared).
+     */
+    //FLLDCIM: LEETCODIFY - EMPTY sentinel replaces the packed two-bit state lane
+    private static final Object EMPTY = new Object();
+    private static final Object REMOVED = new Object();
     private static final int INLINE_CAPACITY = 3;
     private static final int INITIAL_HASH_CAPACITY = 8;
-    private static final long[] EMPTY_STATES = new long[0];
     private static final String NOT_LIVE = "M3Flat3Map: slot is not live";
 
     /** Storage lane {@code keyLane}: no per-entry objects are retained. */
     private Object[] keyLane = new Object[0];
     /** Storage lane {@code valueLane}: aligned with {@code keyLane}. */
     private Object[] valueLane = new Object[0];
-    /** Packed two-bit hash states; inline regime uses size instead of a state array. */
-    private long[] stateMaskWords = new long[0];
     /** Live slot count. */
     private int size;
     /** Number of hashed slots occupied or tombstoned since last rehash. */
@@ -95,9 +94,8 @@ public final class Flat3Map<K, V> {
 
     //FLLDCIM: MRL - L075 method split: remove(Object) and removeSlot(int) share the two removal bodies
     private void removeHashed(int slot) {
-        keyLane[slot] = null;
+        keyLane[slot] = REMOVED;
         valueLane[slot] = null;
-        setState(stateMaskWords, slot, PACKED_DELETED);
         size--;
         if (size == 0) reset();
     }
@@ -122,8 +120,7 @@ public final class Flat3Map<K, V> {
             }
         } else {
             for (int i = 0; i < keyLane.length; i++) {
-                if (state(stateMaskWords, i) == PACKED_USED
-                        && Objects.equals(value, valueLane[i])) return true;
+                if (live(keyLane[i]) && Objects.equals(value, valueLane[i])) return true;
             }
         }
         return false;
@@ -144,7 +141,7 @@ public final class Flat3Map<K, V> {
     public int nextSlot(int from) {
         int end = hashed ? keyLane.length : size;
         for (int slot = Math.max(from, 0); slot < end; slot++) {
-            if (!hashed || state(stateMaskWords, slot) == PACKED_USED) return slot;
+            if (!hashed || live(keyLane[slot])) return slot;
         }
         return -1;
     }
@@ -181,7 +178,6 @@ public final class Flat3Map<K, V> {
         Flat3Map<K, V> copy = new Flat3Map<>();
         copy.keyLane = keyLane.clone();
         copy.valueLane = valueLane.clone();
-        copy.stateMaskWords = stateMaskWords.clone();
         copy.size = size;
         copy.occupied = occupied;
         copy.hashed = hashed;
@@ -190,7 +186,7 @@ public final class Flat3Map<K, V> {
 
     private int liveSlot(int slot) {
         if (slot < 0 || slot >= (hashed ? keyLane.length : size)
-                || hashed && state(stateMaskWords, slot) != PACKED_USED) {
+                || hashed && !live(keyLane[slot])) {
             throw new IllegalStateException(NOT_LIVE);
         }
         return slot;
@@ -199,7 +195,6 @@ public final class Flat3Map<K, V> {
     private void reset() {
         keyLane = SlotArrays.EMPTY_OBJECTS;
         valueLane = SlotArrays.EMPTY_OBJECTS;
-        stateMaskWords = EMPTY_STATES;
         size = 0;
         occupied = 0;
         hashed = false;
@@ -219,28 +214,23 @@ public final class Flat3Map<K, V> {
     private int findHashed(Object key) {
         int index = SlotArrays.hash(key) & (keyLane.length - 1);
         for (;;) {
-            long slotState = state(stateMaskWords, index);
-            if (slotState == 0) return -1;
-            if (slotState == PACKED_USED && Objects.equals(key, keyLane[index])) {
-                return index;
-            }
+            Object k = keyLane[index];
+            if (k == EMPTY) return -1;
+            if (k != REMOVED && Objects.equals(key, k)) return index;
             index = (index + 1) & (keyLane.length - 1);
         }
     }
 
     private void transitionToHash(K newKey, V newValue) {
-        Object[] keys = new Object[INITIAL_HASH_CAPACITY];
+        Object[] keys = emptyKeys(INITIAL_HASH_CAPACITY);
         Object[] values = new Object[INITIAL_HASH_CAPACITY];
-        long[] states = new long[wordsFor(INITIAL_HASH_CAPACITY)];
         for (int i = 0; i < size; i++) {
-            insertUnoccupied(keys, values, states, SlotArrays.hash(keyLane[i]),
-                    keyLane[i], valueLane[i]);
+            insertUnoccupied(keys, values, SlotArrays.hash(keyLane[i]), keyLane[i], valueLane[i]);
         }
-        insertUnoccupied(keys, values, states, SlotArrays.hash(newKey), newKey, newValue);
+        insertUnoccupied(keys, values, SlotArrays.hash(newKey), newKey, newValue);
         // Rehash can invoke user-defined hashCode: do not publish partial lanes.
         keyLane = keys;
         valueLane = values;
-        stateMaskWords = states;
         hashed = true;
         size++;
         occupied = size;
@@ -252,10 +242,10 @@ public final class Flat3Map<K, V> {
         int index = hash & mask;
         int deleted = -1;
         for (;;) {
-            long slotState = state(stateMaskWords, index);
-            if (slotState == 0) break;
-            if (slotState == PACKED_USED) {
-                if (Objects.equals(key, keyLane[index])) {
+            Object k = keyLane[index];
+            if (k == EMPTY) break;
+            if (k != REMOVED) {
+                if (Objects.equals(key, k)) {
                     V previous = valueAt(index);
                     valueLane[index] = value;
                     return previous;
@@ -271,56 +261,48 @@ public final class Flat3Map<K, V> {
             rehash(SlotArrays.doubled(keyLane.length));
             mask = keyLane.length - 1;
             index = hash & mask;
-            while (state(stateMaskWords, index) != 0) index = (index + 1) & mask;
+            while (keyLane[index] != EMPTY) index = (index + 1) & mask;
         }
-        if (state(stateMaskWords, index) == 0) occupied++;
+        if (keyLane[index] == EMPTY) occupied++;
         keyLane[index] = key;
         valueLane[index] = value;
-        setState(stateMaskWords, index, PACKED_USED);
         size++;
         return null;
     }
 
     private void rehash(int capacity) {
-        Object[] keys = new Object[capacity];
+        Object[] keys = emptyKeys(capacity);
         Object[] values = new Object[capacity];
-        long[] states = new long[wordsFor(capacity)];
         for (int i = 0; i < keyLane.length; i++) {
-            if (state(stateMaskWords, i) == PACKED_USED) {
-                insertUnoccupied(keys, values, states, SlotArrays.hash(keyLane[i]),
-                        keyLane[i], valueLane[i]);
+            if (live(keyLane[i])) {
+                insertUnoccupied(keys, values, SlotArrays.hash(keyLane[i]), keyLane[i],
+                        valueLane[i]);
             }
         }
         keyLane = keys;
         valueLane = values;
-        stateMaskWords = states;
         occupied = size;
     }
 
-    private static void insertUnoccupied(Object[] keys, Object[] values, long[] states,
-                                         int hash, Object key, Object value) {
+    private static void insertUnoccupied(Object[] keys, Object[] values, int hash, Object key,
+                                         Object value) {
         int mask = keys.length - 1;
         int index = hash & mask;
-        while (state(states, index) != 0) index = (index + 1) & mask;
+        while (keys[index] != EMPTY) index = (index + 1) & mask;
         keys[index] = key;
         values[index] = value;
-        setState(states, index, PACKED_USED);
     }
 
-    private static int wordsFor(int capacity) {
-        return (capacity + SLOTS_PER_WORD - 1) >>> SLOTS_PER_WORD_SHIFT;
+    /** A hashed key lane: every slot starts EMPTY (MASK addressing; capacity is a power of two). */
+    private static Object[] emptyKeys(int capacity) {
+        Object[] keys = new Object[capacity];
+        Arrays.fill(keys, EMPTY);
+        return keys;
     }
 
-    private static long state(long[] words, int slot) {
-        return (words[slot >>> SLOTS_PER_WORD_SHIFT]
-                >>> ((slot & (SLOTS_PER_WORD - 1)) << 1)) & PACKED_STATE_MASK;
-    }
-
-    private static void setState(long[] words, int slot, long value) {
-        int index = slot >>> SLOTS_PER_WORD_SHIFT;
-        int shift = (slot & (SLOTS_PER_WORD - 1)) << 1;
-        words[index] = (words[index] & ~(PACKED_STATE_MASK << shift))
-                | (value << shift);
+    /** A hashed slot is live when it holds neither sentinel (a live key may be null). */
+    private static boolean live(Object key) {
+        return key != EMPTY && key != REMOVED;
     }
 
     @SuppressWarnings("unchecked")
