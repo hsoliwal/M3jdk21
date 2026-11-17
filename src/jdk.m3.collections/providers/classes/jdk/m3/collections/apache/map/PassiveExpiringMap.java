@@ -628,7 +628,7 @@ public class PassiveExpiringMap<K, V>
      */
     private transient long minExpiration = Long.MAX_VALUE;
 
-    /** Incremented on every expiration-time write; a sweep raced by a write keeps the lower bound. */
+    /** Incremented on every expiration-time write; a raced sweep keeps the lower bound. */
     private transient long expirationStamp;
 
     /** The policy used to determine time-to-live values for map entries. */
