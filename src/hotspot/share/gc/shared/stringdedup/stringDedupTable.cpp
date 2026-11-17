@@ -36,6 +36,7 @@
 #include "gc/shared/stringdedup/stringDedupTable.hpp"
 #include "memory/allocation.hpp"
 #include "memory/resourceArea.hpp"
+#include "memory/universe.hpp"
 #include "logging/log.hpp"
 #include "logging/logStream.hpp"
 #include "oops/access.hpp"
@@ -129,7 +130,7 @@ public:
 
   void shrink();
 
-  TableValue find(typeArrayOop obj, uint hash_code) const;
+  TableValue find(typeArrayOop obj, uint hash_code, const Klass* entry_klass) const;
 
   void verify(size_t bucket_index, size_t bucket_count) const;
 };
@@ -163,14 +164,33 @@ void StringDedup::Table::Bucket::shrink() {
   _values.shrink_to_fit();
 }
 
+// M3JDK layout invariant (decision 51, stage I): the table holds the byte[] values and the
+// char[] const chars of Strings. An entry matches when it has the wanted klass and the same raw
+// bytes as obj, so a UTF-16 value also finds the char[] of its own text.
+static size_t raw_length_in_bytes(typeArrayOop array) {
+  BasicType type = TypeArrayKlass::cast(array->klass())->element_type();
+  return static_cast<size_t>(array->length()) * type2aelembytes(type);
+}
+
+static const void* raw_base(typeArrayOop array) {
+  return array->base(TypeArrayKlass::cast(array->klass())->element_type());
+}
+
+static bool same_raw_bytes(typeArrayOop obj, typeArrayOop entry, const Klass* entry_klass) {
+  size_t length = raw_length_in_bytes(obj);
+  return entry->klass() == entry_klass && raw_length_in_bytes(entry) == length &&
+         memcmp(raw_base(obj), raw_base(entry), length) == 0;
+}
+
 StringDedup::Table::TableValue
-StringDedup::Table::Bucket::find(typeArrayOop obj, uint hash_code) const {
+StringDedup::Table::Bucket::find(typeArrayOop obj, uint hash_code,
+                                 const Klass* entry_klass) const {
   int index = 0;
   for (uint cur_hash : _hashes) {
     if (cur_hash == hash_code) {
       typeArrayOop value = cast_from_oop<typeArrayOop>(_values.at(index).peek());
       if ((value != nullptr) &&
-          java_lang_String::value_equals(obj, value)) {
+          same_raw_bytes(obj, value, entry_klass)) {
         return _values.at(index);
       }
     }
@@ -281,7 +301,7 @@ protected:
 public:
   virtual ~CleanupState() = default;
   virtual bool step() = 0;
-  virtual TableValue find(typeArrayOop obj, uint hash_code) const = 0;
+  virtual TableValue find(typeArrayOop obj, uint hash_code, const Klass* entry_klass) const = 0;
   virtual void report_end() const = 0;
   virtual void verify() const = 0;
 };
@@ -312,8 +332,8 @@ public:
 
   virtual bool step();
 
-  virtual TableValue find(typeArrayOop obj, uint hash_code) const {
-    return _buckets[hash_code % _number_of_buckets].find(obj, hash_code);
+  virtual TableValue find(typeArrayOop obj, uint hash_code, const Klass* entry_klass) const {
+    return _buckets[hash_code % _number_of_buckets].find(obj, hash_code, entry_klass);
   }
 
   virtual void report_end() const {
@@ -376,7 +396,7 @@ public:
 
   virtual bool step();
 
-  virtual TableValue find(typeArrayOop obj, uint hash_code) const {
+  virtual TableValue find(typeArrayOop obj, uint hash_code, const Klass* entry_klass) const {
     return TableValue();
   }
 
@@ -460,9 +480,10 @@ void StringDedup::Table::free_buckets(Bucket* buckets, size_t number_of_buckets)
 // unbalanced bucket chains should be rare, and duplicate hash codes within
 // a bucket should be very rare.
 uint StringDedup::Table::compute_hash(typeArrayOop obj) {
-  int length = obj->length();
+  // Stage I: over the raw bytes, so a char[] and the UTF-16 byte[] of one text hash alike.
+  int length = checked_cast<int>(raw_length_in_bytes(obj));
   uint64_t hash_seed = Config::hash_seed();
-  const uint8_t* data = static_cast<uint8_t*>(obj->base(T_BYTE));
+  const uint8_t* data = static_cast<const uint8_t*>(raw_base(obj));
   return AltHashing::halfsiphash_32(hash_seed, data, length);
 }
 
@@ -492,13 +513,13 @@ bool StringDedup::Table::is_dead_entry_removal_needed() {
 }
 
 StringDedup::Table::TableValue
-StringDedup::Table::find(typeArrayOop obj, uint hash_code) {
+StringDedup::Table::find(typeArrayOop obj, uint hash_code, const Klass* entry_klass) {
   assert(obj != nullptr, "precondition");
   if (_cleanup_state != nullptr) {
-    TableValue tv = _cleanup_state->find(obj, hash_code);
+    TableValue tv = _cleanup_state->find(obj, hash_code, entry_klass);
     if (!tv.is_empty()) return tv;
   }
-  return _buckets[hash_to_index(hash_code)].find(obj, hash_code);
+  return _buckets[hash_to_index(hash_code)].find(obj, hash_code, entry_klass);
 }
 
 void StringDedup::Table::install(typeArrayOop obj, uint hash_code) {
@@ -607,6 +628,50 @@ bool StringDedup::Table::deduplicate_if_permitted(oop java_string,
   }
 }
 
+bool StringDedup::Table::deduplicate_chars_if_permitted(oop java_string,
+                                                        typeArrayOop expected,
+                                                        typeArrayOop chars) {
+  // The non-dedup check and the chValue exchange are under the lock that guards value; the
+  // exchange replaces only the array that was compared (or null), and never with null.
+  MutexLocker ml(StringDedupIntern_lock, Mutex::_no_safepoint_check_flag);
+  if (java_lang_String::deduplication_forbidden(java_string)) {
+    return false;
+  }
+  return java_lang_String::cmpxchg_char_value(java_string, expected, chars) == expected;
+}
+
+// M3JDK layout invariant (decision 51, stage I): equal texts share one const chars array as
+// they share one value array. A present chValue is replaced by the table's equal char[]. A null
+// chValue is seeded from the table only for a UTF-16 coder, whose value bytes are its chars; a
+// Latin-1 coder may still be the default of a String under construction, so it never seeds.
+// The table only holds arrays that are already filled, and nothing here allocates.
+void StringDedup::Table::deduplicate_chars(oop java_string) {
+  typeArrayOop chars = java_lang_String::char_value(java_string);
+  typeArrayOop key = chars;
+  if (key == nullptr) {
+    jbyte coder = java_string->byte_field(java_lang_String::coder_offset());
+    if (coder != java_lang_String::CODER_UTF16) {
+      return;
+    }
+    key = java_lang_String::value(java_string);
+  }
+  if (key == nullptr || raw_length_in_bytes(key) > static_cast<size_t>(max_jint)) {
+    return;                     // No text yet, or beyond the int length of the hash.
+  }
+  uint hash_code = compute_hash(key);
+  TableValue tv = find(key, hash_code, Universe::charArrayKlassObj());
+  if (tv.is_empty()) {
+    if (chars != nullptr) {
+      add(TableValue(_table_storage, chars), hash_code);
+    }
+    return;
+  }
+  typeArrayOop found = cast_from_oop<typeArrayOop>(tv.resolve());
+  if (found != nullptr && found != chars) {
+    deduplicate_chars_if_permitted(java_string, chars, found);
+  }
+}
+
 void StringDedup::Table::deduplicate(oop java_string) {
   assert(java_lang_String::is_instance(java_string), "precondition");
   if (java_lang_String::is_m3_joined(java_string)) {
@@ -615,13 +680,14 @@ void StringDedup::Table::deduplicate(oop java_string) {
     return;
   }
   _cur_stat.inc_inspected();
+  deduplicate_chars(java_string);
   if ((StringTable::shared_entry_count() > 0) &&
       try_deduplicate_shared(java_string)) {
     return;                     // Done if deduplicated against shared StringTable.
   }
   typeArrayOop value = java_lang_String::value(java_string);
   uint hash_code = compute_hash(value);
-  TableValue tv = find(value, hash_code);
+  TableValue tv = find(value, hash_code, value->klass());
   if (tv.is_empty()) {
     // Not in table.  Create a new table entry.
     install(value, hash_code);

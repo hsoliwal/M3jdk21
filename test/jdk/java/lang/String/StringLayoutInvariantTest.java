@@ -5,9 +5,10 @@
 
 /*
  * @test
- * @summary M3JDK String layout invariant (decisions 47, 51): every String holds its bytes in
- *          value from construction; chValue is a const char[] filled lazily, once, on the first
- *          whole-string char demand, equal to the chars and never handed to a caller
+ * @summary M3JDK String layout invariant (decisions 47, 50, 51): every String holds its bytes
+ *          in value from construction, laid out in the canonical coder that coder() reports;
+ *          chValue is a const char[] filled lazily, once, on the first whole-string char demand,
+ *          equal to the chars and never handed to a caller
  * @modules java.base/java.lang:open
  * @run main/othervm StringLayoutInvariantTest
  * @run main/othervm -XX:-CompactStrings StringLayoutInvariantTest
@@ -18,16 +19,26 @@
  *      StringLayoutInvariantTest
  */
 
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Supplier;
 
 public class StringLayoutInvariantTest {
     private static final Field CH_VALUE;
     private static final Field VALUE;
+    private static final Field M3;
+    private static final Method CODER;
+    private static final boolean COMPACT_STRINGS;
 
     static {
         try {
@@ -35,6 +46,13 @@ public class StringLayoutInvariantTest {
             CH_VALUE.setAccessible(true);
             VALUE = String.class.getDeclaredField("value");
             VALUE.setAccessible(true);
+            M3 = String.class.getDeclaredField("m3");
+            M3.setAccessible(true);
+            CODER = String.class.getDeclaredMethod("coder");
+            CODER.setAccessible(true);
+            Field compact = String.class.getDeclaredField("COMPACT_STRINGS");
+            compact.setAccessible(true);
+            COMPACT_STRINGS = compact.getBoolean(null);
         } catch (ReflectiveOperationException e) {
             throw new ExceptionInInitializerError(e);
         }
@@ -99,6 +117,8 @@ public class StringLayoutInvariantTest {
         check("StackTraceElement", new Throwable().getStackTrace()[0].getMethodName());
         check("intern", new String(chars).intern());
         check("new String(String literal)", new String("literal text"));
+        trustedUtf16Latin1(latin1);
+        m3Sites();
         System.out.println("checked " + checked + " Strings, failures " + FAILURES.size());
         if (!FAILURES.isEmpty()) {
             FAILURES.forEach(System.out::println);
@@ -121,6 +141,70 @@ public class StringLayoutInvariantTest {
         fresh.getChars(0, fresh.length(), new char[fresh.length()], 0);
         if (field(CH_VALUE, fresh) == null) {
             FAILURES.add("fresh String: a whole-string getChars did not fill chValue");
+        }
+    }
+
+    /**
+     * The facts map's L5 discriminator: the trusted String(byte[], byte) constructor given the
+     * UTF-16 bytes of all-Latin-1 text. A flat result keeps the caller's layout (value and
+     * coder agree); an M3-admitted one (flag on) must be laid out in the canonical coder the
+     * pool chose, not keep two bytes per unit under a Latin-1 coder (decision 50).
+     */
+    private static void trustedUtf16Latin1(byte[] latin1) throws Exception {
+        String text = new String(latin1, StandardCharsets.ISO_8859_1);
+        byte[] utf16 = new byte[2 * text.length()];
+        ByteBuffer.wrap(utf16).order(ByteOrder.nativeOrder()).asCharBuffer()
+                .put(text.toCharArray());
+        Constructor<String> trusted =
+                String.class.getDeclaredConstructor(byte[].class, byte.class);
+        trusted.setAccessible(true);
+        String made = trusted.newInstance(utf16, (byte) 1);
+        check("String(byte[] UTF-16 all-Latin-1, UTF16)", made, field(M3, made) != null);
+    }
+
+    /**
+     * M3-backed Strings built directly (on any VM, by reflection): an atom, a tuple of height 3,
+     * slices, and a slice of a UTF-16 owner that holds only Latin-1 text, whose owner coder is
+     * UTF-16 while its canonical coder is Latin-1 (decision 50).
+     */
+    private static void m3Sites() throws Exception {
+        Class<?> m3 = Class.forName("java.lang.M3String");
+        Class<?> pool = Class.forName("java.lang.M3StringPool");
+        Method intern = pool.getDeclaredMethod("internChars", char[].class, int.class, int.class);
+        Method concat = pool.getDeclaredMethod("concat", m3, m3);
+        Method slice = m3.getDeclaredMethod("slice", int.class, int.class);
+        Constructor<String> fromM3 = String.class.getDeclaredConstructor(m3);
+        for (java.lang.reflect.AccessibleObject member : List.of(intern, concat, slice, fromM3)) {
+            member.setAccessible(true);
+        }
+        String latin = "M3 Latin-1 text \u00e9\u00ff, long enough to stay an atom";
+        String wide = latin + " \u0101\u20ac \ud835\udd1e end";
+        Object[] parts = new Object[8];
+        for (int index = 0; index < parts.length; index++) {
+            int begin = wide.length() * index / parts.length;
+            int end = wide.length() * (index + 1) / parts.length;
+            char[] units = wide.substring(begin, end).toCharArray();
+            parts[index] = intern.invoke(null, units, 0, units.length);
+        }
+        Object tuple = parts[0];
+        for (int index = 1; index < parts.length; index++) {
+            tuple = concat.invoke(null, tuple, parts[index]);
+        }
+        char[] wideUnits = wide.toCharArray();
+        Object atom = intern.invoke(null, wideUnits, 0, wideUnits.length);
+        Map<String, Object> sites = new LinkedHashMap<>();
+        sites.put("M3 atom", atom);
+        sites.put("M3 tuple", tuple);
+        sites.put("M3 atom slice", slice.invoke(atom, 3, wide.length() - 2));
+        sites.put("M3 tuple slice", slice.invoke(tuple, 5, wide.length() - 1));
+        sites.put("M3 UTF-16 atom slice holding Latin-1", slice.invoke(atom, 0, latin.length()));
+        sites.put("M3 UTF-16 tuple slice holding Latin-1", slice.invoke(tuple, 1, latin.length()));
+        for (Map.Entry<String, Object> site : sites.entrySet()) {
+            try {
+                check(site.getKey(), fromM3.newInstance(site.getValue()));
+            } catch (InvocationTargetException e) {
+                FAILURES.add(site.getKey() + ": new String(M3String) threw " + e.getCause());
+            }
         }
     }
 
@@ -152,6 +236,15 @@ public class StringLayoutInvariantTest {
     }
 
     private static void check(String site, String s) {
+        check(site, s, true);
+    }
+
+    /**
+     * Checks one String. {@code canonical} also requires the canonical coder: Latin-1 exactly
+     * when Compact Strings are on and every char fits (decision 50); value and coder() must agree
+     * for every String.
+     */
+    private static void check(String site, String s, boolean canonical) {
         checked++;
         byte[] value = (byte[]) field(VALUE, s);
         if (value == null) {
@@ -187,8 +280,48 @@ public class StringLayoutInvariantTest {
             }
         }
         int units = s.length();
-        if (value.length != units && value.length != 2 * units) {
-            FAILURES.add(site + ": value holds " + value.length + " bytes for " + units + " chars");
+        byte coder = coder(s);
+        if (value.length != units << coder || !Arrays.equals(chars(value, coder), expected)) {
+            FAILURES.add(site + ": value holds " + value.length + " bytes for " + units
+                    + " chars, not the layout of coder() " + coder);
         }
+        int shift = canonicalShift(expected);
+        if (canonical && coder != shift) {
+            FAILURES.add(site + ": coder() " + coder + " is not the canonical coder " + shift);
+        }
+    }
+
+    private static byte coder(String s) {
+        try {
+            return (byte) CODER.invoke(s);
+        } catch (ReflectiveOperationException e) {
+            throw new AssertionError(e);
+        }
+    }
+
+    /** 0 (Latin-1) when Compact Strings are on and every char fits in a byte, else 1. */
+    private static int canonicalShift(char[] chars) {
+        if (!COMPACT_STRINGS) {
+            return 1;
+        }
+        for (char c : chars) {
+            if (c > 0xff) {
+                return 1;
+            }
+        }
+        return 0;
+    }
+
+    /** The chars of String bytes in the given coder (UTF-16 in StringUTF16's native order). */
+    private static char[] chars(byte[] value, byte coder) {
+        char[] chars = new char[value.length >> coder];
+        if (coder == 0) {
+            for (int index = 0; index < chars.length; index++) {
+                chars[index] = (char) (value[index] & 0xff);
+            }
+        } else {
+            ByteBuffer.wrap(value).order(ByteOrder.nativeOrder()).asCharBuffer().get(chars);
+        }
+        return chars;
     }
 }

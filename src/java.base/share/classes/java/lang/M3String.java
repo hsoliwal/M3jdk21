@@ -37,7 +37,8 @@ import sun.nio.cs.ArrayEncoder;
  *
  * <p>Text payload belongs to canonical native/mapped atom owners. Composition belongs to
  * persistent tuple owner nodes. This value retains no byte[], char[], segment[], offset[] or
- * end[] payload. Contiguous arrays exist only as explicit JNI compatibility shadows.</p>
+ * end[] payload. Contiguous arrays exist only as explicit compatibility shadows, which
+ * {@link #materialize()} and {@link #charShadow()} fill in Java.</p>
  */
 final class M3String implements CharSequence {
     private static final int SPAN_SHIFT = Integer.SIZE;
@@ -731,6 +732,14 @@ final class M3String implements CharSequence {
     }
 
     /**
+     * True when {@link #hashCodeValue()} answers in O(1): a whole owner, or prepared range facts.
+     * Never prepares facts.
+     */
+    boolean hashKnown() {
+        return isWholeOwner() || factsIfPrepared() != null;
+    }
+
+    /**
      * True when this String's canonical Java hash is already known (whole owner, or prepared range
      * facts) and differs from {@code hash}. Never prepares facts; absence proves nothing.
      */
@@ -1073,6 +1082,44 @@ final class M3String implements CharSequence {
         return start() == 0 && length() == owner.length;
     }
 
+    /** {@link #equalityGate}: the gates prove neither equal nor unequal text. */
+    static final int GATE_UNKNOWN = -1;
+    /** {@link #equalityGate}: the gates prove unequal text. */
+    static final int GATE_UNEQUAL = 0;
+    /** {@link #equalityGate}: the gates prove equal text. */
+    static final int GATE_EQUAL = 1;
+
+    /**
+     * The O(1) equality gates of two Strings of which at least one is M3-backed, in front of
+     * the stock comparison of their values (decision 50): equal for the same coordinate or the
+     * same immediate text; unequal for different lengths, different whole-owner Java hashes,
+     * different prepared range Java hashes, or a cached flat hash that differs from a known M3
+     * hash. Never prepares facts and never reads the text.
+     */
+    static int equalityGate(
+            String left, M3String leftStorage, String right, M3String rightStorage) {
+        if (leftStorage == null || rightStorage == null) {
+            M3String storage = leftStorage != null ? leftStorage : rightStorage;
+            String flat = leftStorage != null ? right : left;
+            return flat.length() != storage.length() || flat.cachedHashDiffers(storage)
+                    ? GATE_UNEQUAL : GATE_UNKNOWN;
+        }
+        if (leftStorage.sameCoordinate(rightStorage)) return GATE_EQUAL;
+        boolean whole = leftStorage.isWholeOwner() && rightStorage.isWholeOwner();
+        if (whole && M3StringImmediate.sameText(leftStorage.owner, rightStorage.owner)) {
+            return GATE_EQUAL;
+        }
+        if (leftStorage.length() != rightStorage.length()) return GATE_UNEQUAL;
+        if (whole) {
+            return leftStorage.owner.javaHash != rightStorage.owner.javaHash
+                    ? GATE_UNEQUAL : GATE_UNKNOWN;
+        }
+        M3StringFacts leftFacts = leftStorage.factsIfPrepared();
+        M3StringFacts rightFacts = rightStorage.factsIfPrepared();
+        return leftFacts != null && rightFacts != null && leftFacts.javaHash != rightFacts.javaHash
+                ? GATE_UNEQUAL : GATE_UNKNOWN;
+    }
+
     boolean contentEquals(String other) {
         Objects.requireNonNull(other, "other");
         M3String that = other.m3();
@@ -1409,15 +1456,37 @@ final class M3String implements CharSequence {
     }
 
     /**
-     * JNI-created Compact-String compatibility shadow. Never cached by M3String or its owners.
+     * Compact-String compatibility shadow in the canonical coder of this text: a fresh array
+     * filled in Java by the owners' bulk reads, Latin-1 exactly when Compact Strings are on and
+     * every unit fits, else UTF-16. The owner coder only bounds it: a UTF-16 owner (a tuple ORs
+     * its children's coders) can hold an all-Latin-1 range. Never cached by M3String or its
+     * owners.
      */
     byte[] materialize() {
-        return nativeByteShadow(this, 0, length(), coder());
+        //FLLDCIM: LAYOUT - decision 50: shadows are filled in Java; the JNI round trip is gone
+        //FLLDCIM: LAYOUT - decision 50: the shadow is laid out in the canonical coder
+        int length = length();
+        boolean latin1Owner = coder() == String.LATIN1;
+        M3StringFacts prepared = latin1Owner ? null : factsIfPrepared();
+        if (String.COMPACT_STRINGS && (latin1Owner || prepared != null && prepared.latin1)) {
+            byte[] latin1 = new byte[length];
+            if (length != 0) getBytes(latin1, 0, 0, String.LATIN1, length);
+            return latin1;
+        }
+        byte[] utf16 = StringUTF16.newBytesFor(length);
+        if (length == 0) return utf16;
+        getBytes(utf16, 0, 0, String.UTF16, length);
+        if (!String.COMPACT_STRINGS || prepared != null) return utf16;
+        byte[] latin1 = new byte[length];
+        return StringUTF16.compress(utf16, 0, latin1, 0, length) == length ? latin1 : utf16;
     }
 
-    /** JNI-created final Java UTF-16 array shadow. */
+    /** Fresh UTF-16 array shadow, filled in Java by the owners' bulk reads. */
     char[] charShadow() {
-        return nativeCharShadow(this, 0, length());
+        int length = length();
+        char[] chars = new char[length];
+        if (length != 0) getChars(0, length, chars, 0);
+        return chars;
     }
 
     boolean mayContain(M3String needle) {
@@ -1800,18 +1869,47 @@ final class M3String implements CharSequence {
         return joinValues(pieces);
     }
 
+    /** {@link #literalRegex}: a whole-input match of the regex is equality with it. */
+    static final int LITERAL_MATCHES = 1;
+    /** {@link #literalRegex}: find, split and replace see exactly its UTF-16 occurrences. */
+    static final int LITERAL_SEARCH = 2;
+    /** The metacharacters of a java.util.regex pattern outside a class, escape included. */
+    private static final String REGEX_METACHARACTERS = "\\.^$|?*+()[]{}";
+
     /**
-     * Conservative BMP literal subset of regex syntax: non-empty, no metacharacter, no escape
-     * and no surrogate, so {@code Pattern.compile(regex)} can only ever match the literal itself.
+     * The one owner of "this regex is a literal" (compile-time map G7): the literal rules that a
+     * regex compiled without flags meets, as bits.
+     * <ul>
+     * <li>{@link #LITERAL_MATCHES}: no metacharacter and no escape. A whole-input match then
+     *     compares the code points of the regex with those of the input, which are equal exactly
+     *     when the strings are equal: {@code Pattern.matches(regex, s) == regex.equals(s)}, for
+     *     the empty regex and for surrogates too.</li>
+     * <li>{@link #LITERAL_SEARCH}: also non-empty and free of surrogates. Find, split and
+     *     replace then see exactly the non-overlapping occurrences that {@code String.indexOf}
+     *     finds. A surrogate refuses, because regex search walks code points and never starts or
+     *     ends inside a pair; the empty regex refuses, because it matches between all units.</li>
+     * </ul>
+     * {@code null} meets neither rule.
      */
-    static boolean isLiteralRegex(String regex) {
-        if (regex == null || regex.isEmpty()) return false;
+    static int literalRegex(String regex) {
+        if (regex == null) return 0;
+        int rules = regex.isEmpty() ? LITERAL_MATCHES : LITERAL_MATCHES | LITERAL_SEARCH;
         for (int index = 0; index < regex.length(); index++) {
             char unit = regex.charAt(index);
-            // Regex observes code points: UTF-16 substring search can match half a pair.
-            if (Character.isSurrogate(unit) || "\\.^$|?*+()[]{}".indexOf(unit) >= 0) return false;
+            if (REGEX_METACHARACTERS.indexOf(unit) >= 0) return 0;
+            if (Character.isSurrogate(unit)) rules &= ~LITERAL_SEARCH;
         }
-        return true;
+        return rules;
+    }
+
+    /** The regex meets {@link #LITERAL_SEARCH}: find, split and replace are its occurrences. */
+    static boolean isLiteralRegex(String regex) {
+        return (literalRegex(regex) & LITERAL_SEARCH) != 0;
+    }
+
+    /** The regex meets {@link #LITERAL_MATCHES}: a whole-input match is equality with it. */
+    static boolean isLiteralMatchesRegex(String regex) {
+        return (literalRegex(regex) & LITERAL_MATCHES) != 0;
     }
 
     /** Conservative BMP literal subset; all regex/replacement syntax stays in Matcher. */
@@ -1918,10 +2016,4 @@ final class M3String implements CharSequence {
     private static int count(long coordinate) {
         return (int) (coordinate & SPAN_MASK);
     }
-
-    private static native byte[] nativeByteShadow(
-            M3String value, int start, int length, byte coder);
-
-    private static native char[] nativeCharShadow(
-            M3String value, int start, int length);
 }

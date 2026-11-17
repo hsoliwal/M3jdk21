@@ -14,7 +14,7 @@ Every `java.lang.String` holds its text twice in Java 21 form, and fills both ar
 
 Neither array is ever written again. `chValue` never leaves `String`: a caller only ever receives a copy.
 
-An M3-backed String keeps its canonical owner and coordinate in `m3` as well. Its `value` is then the JNI byte shadow of that text. The zero-length layout sentinel of the earlier M3 design is retired.
+An M3-backed String keeps its canonical owner and coordinate in `m3` as well. Its `value` is then the byte shadow of that text, filled in Java (decision 50). The zero-length layout sentinel of the earlier M3 design is retired.
 
 
 ## Decision 51: chValue is lazily filled and const (supersedes the eager fill below)
@@ -25,7 +25,7 @@ The owner refined the invariant on 2026-11-17 ("or use const", "lazily filled"):
 - `chValue` is a const array:
   - It is `@Stable` and not final.
   - It is `null` until the first whole-string char demand.
-  - On that demand, `String.constChars()` fills it once from the chars of `value`, then a store-store fence publishes it.
+  - On that demand, `String.constChars()` fills it once from the chars of `value` and publishes it by one compare-and-set from `null`: of racing first callers exactly one installs its array and the others return it. The store-store fence and plain store this replaced let two first callers each install an equal array (VM-lane finding F3). Gate: `StringConstCharsOnceTest`.
   - It is never written again and never handed to a caller.
 - The demands that fill `chValue`:
   - `toCharArray()`, which returns a clone of it;
@@ -45,6 +45,15 @@ Proof: `record/layout-invariant/LAZY_PROOF.txt`, run on master `9ed7c43441fa`.
   - `-Xcomp -XX:+OptimizeStringConcat`.
 - Every site passes, including the VM-made literals, because the lazy fill runs in Java.
 - Discriminator: the same test fails on the eager master.
+
+## Decision 50: the M3 shadows are Java; value and coder agree
+
+The owner's decision 50 (2026-11-17) keeps M3-backed Strings on the layout of every other String. Its parts, in landing order:
+
+- **Java shadows.** `M3String.materialize()` and `M3String.charShadow()` fill fresh arrays in Java from the owners' bulk reads, the same `getBytes` and `getChars` the JNI called back. The natives `nativeByteShadow` and `nativeCharShadow` are gone from `M3String.java`, and `String.c` is the upstream jdk21u file again. Gate: `M3StringJavaShadowTest`.
+- **Canonical coder.** `value` is laid out in the canonical coder of the text: Latin-1 exactly when Compact Strings are on and every unit fits, else UTF-16. `coder()` of every String reports the coder of its `value`, never the owner coder: a tuple ORs its children's coders, so a UTF-16 owner can hold an all-Latin-1 range, and `materialize()` lays such a range out in Latin-1. Admitted UTF-16 caller bytes that the pool found all Latin-1 are laid out again in Latin-1. Gates: `StringLayoutInvariantTest` (value and `coder()` agree, the coder is canonical) and `M3StringJavaShadowTest`.
+- **Unit reads read value.** `charAt`, `codePointAt` and `codePointBefore` of an M3-backed String take the stock paths; an out-of-range `charAt` throws the stock `StringIndexOutOfBoundsException`. `codePointCount` keeps its O(1) prepared-facts gate and the code point geometry, and otherwise counts over `value`. `hashCode` keeps the O(1) whole-owner or prepared hash and otherwise hashes `value` with the vectorized intrinsic. The const char fill and a partial `getChars` inflate `value` instead of walking the owners. Gate: `M3StringValueReadsTest`.
+- **Compare methods read value.** `equals`, `compareTo`, both `regionMatches`, both `contentEquals` and `CASE_INSENSITIVE_ORDER` compare the values through the stock `StringLatin1` and `StringUTF16` paths, behind their O(1) gates: `M3String.equalityGate` for `equals` (same coordinate, same immediate text, lengths, whole-owner and prepared range Java hashes, a cached flat hash), the same-coordinate gate of `compareTo`, and the prepared-facts gates of both `regionMatches`, now only for a positive length. Gate: `M3StringValueCompareTest`.
 
 The sections below describe the eager stage 1 (#3258) as it landed. They hold for `value`; for `chValue`, read "filled once on demand" wherever they say "filled at construction".
 

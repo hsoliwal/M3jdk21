@@ -71,6 +71,24 @@ typeArrayOop java_lang_String::value_no_keepalive(oop java_string) {
   return (typeArrayOop) java_string->obj_field_access<AS_NO_KEEPALIVE>(_value_offset);
 }
 
+// M3JDK layout invariant (decision 51): chValue is null or the chars of the String, and once
+// present it is never written back to null. The acquire load pairs with the exchange below and
+// with the compare-and-set from null of String.constChars().
+typeArrayOop java_lang_String::char_value(oop java_string) {
+  assert(is_instance(java_string), "must be java_string");
+  return (typeArrayOop) java_string->obj_field_acquire(_chValue_offset);
+}
+
+// Publishes the filled array chars when chValue is still expected, with a two-way fenced
+// exchange; returns the previous chValue (the winner when it is not expected).
+typeArrayOop java_lang_String::cmpxchg_char_value(oop java_string, typeArrayOop expected,
+                                                  typeArrayOop chars) {
+  assert(is_instance(java_string), "must be java_string");
+  assert(chars != nullptr, "chValue is never written back to null");
+  return (typeArrayOop) HeapAccess<>::oop_atomic_cmpxchg_at(java_string, _chValue_offset,
+                                                            oop(expected), oop(chars));
+}
+
 oop java_lang_String::m3_storage(oop java_string) {
   assert(is_instance(java_string), "must be java_string");
   return java_string->obj_field_acquire(_m3_offset);

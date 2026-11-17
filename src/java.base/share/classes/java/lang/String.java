@@ -168,8 +168,9 @@ public final class String
      * <p>A JNI-ready {@code char[]} of {@link #length()} UTF-16 units, filled lazily (owner
      * decision 51): it is {@code null} until the first whole-string char demand ({@link
      * #toCharArray()}, {@link #getChars(int, int, char[], int)} of the whole string, JNI), then
-     * written once with the chars of {@link #value} and never again: a const array. It is
-     * protected internally: never handed to a caller, which only ever receives a copy.</p>
+     * written once with the chars of {@link #value} and never again: a const array, published by
+     * one compare-and-set from {@code null} in {@link #constChars()}. It is protected
+     * internally: never handed to a caller, which only ever receives a copy.</p>
      */
     @Stable
     private char[] chValue;
@@ -292,7 +293,7 @@ public final class String
     public String(String original) {
         M3String storage = original.m3();
         this.value = original.value;
-        this.coder = storage == null ? original.coder : storage.coder();
+        this.coder = original.coder;
         this.m3 = storage;
         this.chValue = original.chValue;
         this.hash = original.hash;
@@ -382,7 +383,7 @@ public final class String
         M3String direct = maybeAdmitCodePoints(codePoints, offset, count);
         if (direct != null) {
             this.value = direct.materialize();
-            this.coder = direct.coder();
+            this.coder = shadowCoder(this.value, direct.length());
             this.m3 = direct;
             return;
         }
@@ -461,9 +462,11 @@ public final class String
             }
             candidateCoder = UTF16;
         }
+        // The candidate is canonical: Latin-1 for a zero high byte, else every unit is above
+        // 0xff (or Compact Strings are off), so its coder is the coder the pool chose.
         M3String storage = maybeAdmit(candidate, candidateCoder);
         this.value = candidate;
-        this.coder = storage == null ? candidateCoder : storage.coder();
+        this.coder = candidateCoder;
         this.m3 = storage;
     }
 
@@ -587,13 +590,15 @@ public final class String
     private String(M3Construction construction) {
         if (construction.storage != null) {
             this.value = construction.storage.materialize();
-            this.coder = construction.storage.coder();
+            this.coder = shadowCoder(this.value, construction.storage.length());
             this.m3 = construction.storage;
             return;
         }
         M3String storage = maybeAdmit(construction.value, construction.coder);
-        this.value = construction.value;
-        this.coder = storage == null ? construction.coder : storage.coder();
+        this.value = admittedBytes(construction.value, construction.coder, storage);
+        this.coder = this.value == construction.value
+                ? construction.coder
+                : shadowCoder(this.value, storage.length());
         this.m3 = storage;
     }
 
@@ -1633,10 +1638,7 @@ public final class String
      *             string.
      */
     public char charAt(int index) {
-        M3String storage = m3();
-        if (storage != null) {
-            return storage.charAt(index);
-        }
+        //FLLDCIM: LAYOUT - decision 50: an M3-backed String reads value with its canonical coder
         if (isLatin1()) {
             return StringLatin1.charAt(value, index);
         } else {
@@ -1667,17 +1669,6 @@ public final class String
      * @since      1.5
      */
     public int codePointAt(int index) {
-        if (m3() != null) {
-            checkIndex(index, length());
-            char first = charAt(index);
-            if (Character.isHighSurrogate(first) && index + 1 < length()) {
-                char second = charAt(index + 1);
-                if (Character.isLowSurrogate(second)) {
-                    return Character.toCodePoint(first, second);
-                }
-            }
-            return first;
-        }
         if (isLatin1()) {
             checkIndex(index, value.length);
             return value[index] & 0xff;
@@ -1712,16 +1703,6 @@ public final class String
     public int codePointBefore(int index) {
         int i = index - 1;
         checkIndex(i, length());
-        if (m3() != null) {
-            char second = charAt(i);
-            if (Character.isLowSurrogate(second) && i > 0) {
-                char first = charAt(i - 1);
-                if (Character.isHighSurrogate(first)) {
-                    return Character.toCodePoint(first, second);
-                }
-            }
-            return second;
-        }
         if (isLatin1()) {
             return (value[i] & 0xff);
         }
@@ -1751,13 +1732,15 @@ public final class String
      */
     public int codePointCount(int beginIndex, int endIndex) {
         Objects.checkFromToIndex(beginIndex, endIndex, length());
+        if (isLatin1()) {
+            return endIndex - beginIndex;
+        }
         M3String storage = m3();
         if (storage != null) {
-            // Same exact gates as offsetByCodePoints: without a surrogate pair in the value,
-            // every range holds one code point per unit.
+            // Same exact gate as offsetByCodePoints: without a surrogate pair in the value,
+            // every range holds one code point per unit. The geometry answers repeated queries.
             M3StringFacts prepared = storage.factsIfPrepared();
-            if (storage.coder() == LATIN1
-                    || (prepared != null && prepared.codePointCount == storage.length())) {
+            if (prepared != null && prepared.codePointCount == storage.length()) {
                 return endIndex - beginIndex;
             }
             M3StringCodePointPrecompute.Geometry geometry =
@@ -1765,11 +1748,8 @@ public final class String
             if (geometry != null) {
                 return geometry.codePointCount(beginIndex, endIndex);
             }
-            return storage.slice(beginIndex, endIndex).facts().codePointCount;
         }
-        if (isLatin1()) {
-            return endIndex - beginIndex;
-        }
+        //FLLDCIM: LAYOUT - decision 50: counted over value, no facts scan of the range
         return StringUTF16.codePointCount(value, beginIndex, endIndex);
     }
 
@@ -1798,7 +1778,7 @@ public final class String
         if (storage != null && index >= 0 && index <= storage.length()) {
             M3StringFacts prepared = storage.factsIfPrepared();
             boolean oneUnitPerCodePoint =
-                    storage.coder() == LATIN1
+                    isLatin1()
                             || (prepared != null
                                     && prepared.codePointCount == storage.length());
             if (oneUnitPerCodePoint) {
@@ -1854,10 +1834,7 @@ public final class String
             System.arraycopy(chars, srcBegin, dst, dstBegin, srcEnd - srcBegin);
             return;
         }
-        M3String storage = m3();
-        if (storage != null) {
-            storage.getChars(srcBegin, srcEnd, dst, dstBegin);
-        } else if (isLatin1()) {
+        if (isLatin1()) {
             StringLatin1.getChars(value, srcBegin, srcEnd, dst, dstBegin);
         } else {
             StringUTF16.getChars(value, srcBegin, srcEnd, dst, dstBegin);
@@ -2022,8 +1999,11 @@ public final class String
         M3String leftStorage = m3();
         M3String rightStorage = aString.m3();
         if (leftStorage != null || rightStorage != null) {
-            return M3StringPrecomputeBridge.contentEquals(
-                    this, aString, leftStorage, rightStorage);
+            //FLLDCIM: LAYOUT - decision 50: O(1) gates, then the stock compare of the values
+            int known = M3String.equalityGate(this, leftStorage, aString, rightStorage);
+            if (known != M3String.GATE_UNKNOWN) {
+                return known == M3String.GATE_EQUAL;
+            }
         }
         return (!COMPACT_STRINGS || this.coder == aString.coder)
                 && StringLatin1.equals(value, aString.value);
@@ -2068,14 +2048,6 @@ public final class String
         int len = length();
         if (len != sb.length()) {
             return false;
-        }
-        if (m3() != null) {
-            for (int index = 0; index < len; index++) {
-                if (charAt(index) != sb.charAt(index)) {
-                    return false;
-                }
-            }
-            return true;
         }
         byte[] v1 = value();
         byte[] v2 = sb.getValue();
@@ -2128,14 +2100,6 @@ public final class String
         int n = cs.length();
         if (n != length()) {
             return false;
-        }
-        if (m3() != null) {
-            for (int i = 0; i < n; i++) {
-                if (charAt(i) != cs.charAt(i)) {
-                    return false;
-                }
-            }
-            return true;
         }
         byte[] val = value();
         if (isLatin1()) {
@@ -2249,11 +2213,10 @@ public final class String
      */
     public int compareTo(String anotherString) {
         M3String leftM3 = m3();
-        M3String rightM3 = anotherString.m3();
-        if (leftM3 != null || rightM3 != null) {
-            return M3StringPrecomputeBridge.compareTo(
-                    this, anotherString, leftM3, rightM3);
+        if (leftM3 != null && leftM3.sameCoordinate(anotherString.m3())) {
+            return 0;
         }
+        //FLLDCIM: LAYOUT - decision 50: M3-backed Strings compare their values like flat ones
         byte[] v1 = value();
         byte[] v2 = anotherString.value();
         byte coder = coder();
@@ -2290,28 +2253,6 @@ public final class String
         private static final long serialVersionUID = 8575799808933029326L;
 
         public int compare(String s1, String s2) {
-            if (s1.m3() != null || s2.m3() != null) {
-                int i1 = 0;
-                int i2 = 0;
-                int n1 = s1.length();
-                int n2 = s2.length();
-                while (i1 < n1 && i2 < n2) {
-                    int c1 = s1.codePointAt(i1);
-                    int c2 = s2.codePointAt(i2);
-                    if (c1 != c2) {
-                        int u1 = Character.toUpperCase(c1);
-                        int u2 = Character.toUpperCase(c2);
-                        if (u1 != u2) {
-                            int l1 = Character.toLowerCase(u1);
-                            int l2 = Character.toLowerCase(u2);
-                            if (l1 != l2) return l1 - l2;
-                        }
-                    }
-                    i1 += Character.charCount(c1);
-                    i2 += Character.charCount(c2);
-                }
-                return n1 - n2;
-            }
             byte[] v1 = s1.value();
             byte[] v2 = s2.value();
             byte coder = s1.coder();
@@ -2400,23 +2341,18 @@ public final class String
         }
         M3String leftM3 = m3();
         M3String rightM3 = other.m3();
-        if (leftM3 != null || rightM3 != null) {
-            if (leftM3 != null && rightM3 != null) {
-                M3String leftRange = leftM3.slice(toffset, toffset + len);
-                M3String rightRange = rightM3.slice(ooffset, ooffset + len);
-                if (leftRange.sameCoordinate(rightRange)) return true;
-                M3StringFacts leftFacts = leftRange.factsIfPrepared();
-                M3StringFacts rightFacts = rightRange.factsIfPrepared();
-                if (leftFacts != null && rightFacts != null
-                        && leftFacts.javaHash != rightFacts.javaHash) {
-                    return false;
-                }
+        if (leftM3 != null && rightM3 != null) {
+            M3String leftRange = leftM3.slice(toffset, toffset + len);
+            M3String rightRange = rightM3.slice(ooffset, ooffset + len);
+            if (leftRange.sameCoordinate(rightRange)) return true;
+            M3StringFacts leftFacts = leftRange.factsIfPrepared();
+            M3StringFacts rightFacts = rightRange.factsIfPrepared();
+            if (leftFacts != null && rightFacts != null
+                    && leftFacts.javaHash != rightFacts.javaHash) {
+                return false;
             }
-            for (int index = 0; index < len; index++) {
-                if (charAt(toffset + index) != other.charAt(ooffset + index)) return false;
-            }
-            return true;
         }
+        //FLLDCIM: LAYOUT - decision 50: after the O(1) gates, the stock compare of the values
         byte[] tv = value();
         byte[] ov = other.value();
         byte coder = coder();
@@ -2500,7 +2436,7 @@ public final class String
         }
         M3String leftM3 = m3();
         M3String rightM3 = other.m3();
-        if (leftM3 != null || rightM3 != null) {
+        if (len > 0 && (leftM3 != null || rightM3 != null)) {
             if (leftM3 != null && rightM3 != null) {
                 M3StringFacts leftFacts =
                         leftM3.slice(toffset, toffset + len).factsIfPrepared();
@@ -2518,38 +2454,8 @@ public final class String
                     : mixedAsciiCaseHashDiffers(rightM3, ooffset, this, toffset, len)) {
                 return false;
             }
-            int t = toffset;
-            int o = ooffset;
-            int remaining = len;
-            while (remaining > 0) {
-                int tc = charAt(t);
-                int oc = other.charAt(o);
-                int tcp = tc;
-                int ocp = oc;
-                int tw = 1;
-                int ow = 1;
-                if (Character.isHighSurrogate((char) tc) && remaining > 1
-                        && Character.isLowSurrogate(charAt(t + 1))) {
-                    tcp = Character.toCodePoint((char) tc, charAt(t + 1));
-                    tw = 2;
-                }
-                if (Character.isHighSurrogate((char) oc) && remaining > 1
-                        && Character.isLowSurrogate(other.charAt(o + 1))) {
-                    ocp = Character.toCodePoint((char) oc, other.charAt(o + 1));
-                    ow = 2;
-                }
-                if (tcp != ocp) {
-                    int tu = Character.toUpperCase(tcp);
-                    int ou = Character.toUpperCase(ocp);
-                    if (tu != ou && Character.toLowerCase(tu) != Character.toLowerCase(ou)) return false;
-                }
-                if (tw != ow) return false;
-                t += tw;
-                o += ow;
-                remaining -= tw;
-            }
-            return true;
         }
+        //FLLDCIM: LAYOUT - decision 50: after the O(1) gates, the stock compare of the values
         byte[] tv = value();
         byte[] ov = other.value();
         byte coder = coder();
@@ -2681,7 +2587,8 @@ public final class String
         int h = hash;
         if (h == 0 && !hashIsZero) {
             M3String storage = m3();
-            h = storage != null
+            //FLLDCIM: LAYOUT - decision 50: an unknown M3 range hash hashes value (vectorized)
+            h = storage != null && storage.hashKnown()
                     ? M3StringPrecomputeBridge.hashCodeValue(storage)
                     : (isLatin1() ? StringLatin1.hashCode(value)
                                   : StringUTF16.hashCode(value));
@@ -3337,19 +3244,6 @@ public final class String
         return this;
     }
 
-    /*
-     * Return true only when the regex source is an ordinary literal whose exact
-     * UTF-16 spelling can be compared directly with M3-backed String storage.
-     * Pattern remains semantic authority for every syntax-bearing expression.
-     */
-    private static boolean isConservativeLiteralRegex(String regex) {
-        for (int index = 0; index < regex.length(); index++) {
-            char unit = regex.charAt(index);
-            if (unit == '\\' || ".^$|?*+()[]{}".indexOf(unit) >= 0) return false;
-        }
-        return true;
-    }
-
     /**
      * The compiled form of the regex argument of {@link #matches}, {@link #replaceFirst},
      * {@link #replaceAll} and {@link #split(String, int)}. A regex is compiled once, stored,
@@ -3415,8 +3309,10 @@ public final class String
     public boolean matches(String regex) {
         Objects.requireNonNull(regex);
         M3String storage = m3();
-        if (storage != null && isConservativeLiteralRegex(regex)) {
-            return storage.contentEquals(regex);
+        // The one literal-regex owner (M3String.literalRegex, rule LITERAL_MATCHES): a literal
+        // matches exactly the String equal to it; equals keeps its O(1) M3 gates.
+        if (storage != null && M3String.isLiteralMatchesRegex(regex)) {
+            return equals(regex);
         }
         if (storage != null) {
             int decision = M3StringRegexDp.tryMatch(storage, regex);
@@ -13834,7 +13730,7 @@ public final class String
         M3String direct = maybeAdmit(value, off, len);
         if (direct != null) {
             this.value = direct.materialize();
-            this.coder = direct.coder();
+            this.coder = shadowCoder(this.value, direct.length());
             this.m3 = direct;
             return;
         }
@@ -13871,7 +13767,7 @@ public final class String
                         asb.isLatin1() ? LATIN1 : UTF16);
         if (direct != null) {
             this.value = direct.materialize();
-            this.coder = direct.coder();
+            this.coder = shadowCoder(this.value, direct.length());
             this.m3 = direct;
             return;
         }
@@ -13902,9 +13798,29 @@ public final class String
     */
     String(byte[] value, byte coder) {
         M3String storage = maybeAdmit(value, coder);
-        this.value = value;
-        this.coder = storage == null ? coder : storage.coder();
+        this.value = admittedBytes(value, coder, storage);
+        this.coder = this.value == value ? coder : shadowCoder(this.value, storage.length());
         this.m3 = storage;
+    }
+
+    /**
+     * The coder of M3 shadow bytes of {@code length} units, which {@link M3String#materialize()}
+     * lays out in the canonical coder (decision 50): Latin-1 exactly when one byte per unit.
+     */
+    private static byte shadowCoder(byte[] shadow, int length) {
+        return COMPACT_STRINGS ? StringUTF16.coderFromArrayLen(shadow, length) : UTF16;
+    }
+
+    /**
+     * The bytes an admitted String keeps: the caller's bytes, unless they are UTF-16 and the
+     * pool found every unit Latin-1 (the pool canonicalises), in which case they are laid out
+     * again in Latin-1, so that value and coder agree with the canonical coder (decision 50).
+     */
+    private static byte[] admittedBytes(byte[] bytes, byte coder, M3String storage) {
+        return COMPACT_STRINGS && storage != null && coder == UTF16
+                        && storage.coder() == LATIN1 && storage.length() != 0
+                ? StringUTF16.compress(bytes, 0, storage.length())
+                : bytes;
     }
 
     private static M3String maybeAdmitCodePoints(
@@ -13948,7 +13864,7 @@ public final class String
     String(M3String storage) {
         M3String checked = Objects.requireNonNull(storage, "storage");
         this.value = checked.materialize();
-        this.coder = checked.coder();
+        this.coder = shadowCoder(this.value, checked.length());
         this.m3 = checked;
     }
 
@@ -13958,27 +13874,43 @@ public final class String
 
     /**
      * The const chars of this string (layout invariant, decision 51): fills {@link #chValue} once
-     * with the chars of {@link #value} on the first call, behind a store-store fence so that no
-     * thread sees the reference before the filled contents, and returns it. Callers copy out of
-     * it; it never leaves this class.
+     * with the chars of {@link #value} on the first call and returns it. The fill is published
+     * by one compare-and-set from {@code null}, so no thread sees the reference before the
+     * filled contents and racing first callers install one array: a caller that loses the race
+     * returns the winner's. Callers copy out of it; it never leaves this class.
      */
     private char[] constChars() {
         char[] chars = chValue;
         if (chars == null) {
-            chars = layoutChars(value, coder, m3());
-            jdk.internal.misc.Unsafe.getUnsafe().storeStoreFence();
-            chValue = chars;
+            //FLLDCIM: LAYOUT - decision 51: chValue is filled once; a lost race takes the winner
+            chars = layoutChars(value, coder);
+            if (!ConstChars.UNSAFE.compareAndSetReference(this, ConstChars.OFFSET, null, chars)) {
+                chars = (char[]) ConstChars.UNSAFE.getReferenceAcquire(this, ConstChars.OFFSET);
+            }
         }
         return chars;
     }
 
     /**
-     * The chars of the layout invariant for a String under construction: the JNI char shadow
-     * of its M3 text when it is M3-backed, otherwise its bytes inflated to UTF-16 units.
+     * The offset of {@link #chValue} for the publishing compare-and-set of {@link #constChars()},
+     * computed once. A holder initialized on the first fill: the VM initializes String before
+     * jdk.internal.misc.UnsafeConstants, so the class initializer of String must not touch
+     * Unsafe.
      */
-    private static char[] layoutChars(byte[] bytes, byte coder, M3String storage) {
+    private static final class ConstChars {
+        static final jdk.internal.misc.Unsafe UNSAFE = jdk.internal.misc.Unsafe.getUnsafe();
+        static final long OFFSET = UNSAFE.objectFieldOffset(String.class, "chValue");
+
+        private ConstChars() {}
+    }
+
+    /**
+     * The chars of the layout invariant: the bytes of {@link #value} inflated to UTF-16 units.
+     * An M3-backed String inflates them too: its value and coder agree (decision 50).
+     */
+    private static char[] layoutChars(byte[] bytes, byte coder) {
         //FLLDCIM: LAYOUT - decision 51: called once per String by chars(), never at construction
-        if (storage != null) return storage.charShadow();
+        //FLLDCIM: LAYOUT - decision 50: M3-backed Strings inflate value; no owner walk
         return COMPACT_STRINGS && coder == LATIN1 ? StringLatin1.toChars(bytes)
                                                  : StringUTF16.toChars(bytes);
     }
@@ -13990,7 +13922,7 @@ public final class String
                 && jdk.internal.misc.VM.isBooted()
                 && M3String.admissionEnabled()
                 && value.length != 0) {
-            storage = M3String.admit(value, rawCoder());
+            storage = M3String.admit(value, coder());
             m3 = storage;
         }
         return storage;
@@ -14038,13 +13970,12 @@ public final class String
         return storage == null ? null : new String(storage);
     }
 
-    private byte rawCoder() {
-        return COMPACT_STRINGS ? coder : UTF16;
-    }
-
+    /**
+     * The coder of {@link #value}, for every String the canonical coder of its text (decision
+     * 50): an M3-backed String reports its bytes' coder, never its owner's.
+     */
     byte coder() {
-        M3String storage = m3;
-        return storage == null ? rawCoder() : storage.coder();
+        return COMPACT_STRINGS ? coder : UTF16;
     }
 
     byte[] value() {
