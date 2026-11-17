@@ -48,14 +48,35 @@ Paths are relative to `src/jdk.m3.collections` (sources) and `test/jdk` (tests).
 | Keys are strictly increasing in [0, size) | `put`, `mergeBackward` | `PackedSortedMapPutAllTest` |
 | putAll equals sequential puts: last value wins, the same return value and capacity; the caller's arrays are untouched | `sortPairs` (stable), `lastOfEachKey`, capacity replay | `PackedSortedMapPutAllTest` |
 
-## MatRoaringIntSet (`share/classes/jdk/internal/m3/collections/mat/MatRoaringIntSet.java`)
+## RoaringIntSet (`share/classes/jdk/internal/m3/collections/mat/RoaringIntSet.java`)
 
 | Invariant | Kept by | Checked by |
 |---|---|---|
-| Chunk keys increase; prefix[i] is the number of values before chunk i | `flatten`, `FlatLanes.place` | `MatRoaringIntSetDecodeTest` |
-| A chunk's container is the smallest of 2 bytes a value, 8 a run, 8 KiB; ties go to ARRAY, then RUNS | `kindOf` (shared by both chunk builders) | `MatRoaringIntSetDecodeTest` (1,024 runs of 5) |
+| Chunk keys increase; prefix[i] is the number of values before chunk i | `flatten`, `FlatLanes.place` | `RoaringIntSetDecodeTest` |
+| A chunk's container is the smallest of 2 bytes a value, 8 a run, 8 KiB; ties go to ARRAY, then RUNS | `kindOf` (shared by both chunk builders) | `RoaringIntSetDecodeTest` (1,024 runs of 5) |
 | RUNS data are maximal ascending (start, length) pairs; ARRAY data ascending lows | `runsOfSorted`, `runsOfWords`, `lowsOf`, `lowsOfWords` | lanes compared with master's class |
 | Every method is at most 15 lines | atomization | `method_lengths.py` |
+
+## PackedLongBatchSortedSet and PackedLongLongBatchSortedMap (`share/classes/jdk/internal/m3/collections/packed/PackedLongBatchSortedSet.java`, `PackedLongLongBatchSortedMap.java`)
+
+| Invariant | Kept by | Checked by |
+|---|---|---|
+| The original private lanes (sorted and pending keys/values, sizes, capacities, garbage tails) equal the master class after every public call; results, exceptions, iteration and callback order are unchanged | the index lives in its own lanes (`pendingSlots`, `pendingIndexed`) | `BatchSortedIndexTest` against `BatchSetReference` and `BatchMapReference` |
+| pendingIndexed implies: `pendingSlots.length` is a power of two of at least 128, its nonzero slots are exactly 1..pendingSize once each, load at most 1/2, and the slot found for lane value i is i + 1 (MASK, OFFSET_ARRAY) | `PackedHashAtoms.laneIndexLength`, `findLaneIndex`, `placeLaneIndex`, `rebuildLaneIndex` | `BatchSortedIndexTest` (index checked after every operation) |
+| The index is dropped before anything that can fail or permute the pending lane: flush (before the sort and the capacity check), clear, trimToSize | `flush`, `clear`, `trimToSize` | mutants set-flush-keeps-index, set-clear-keeps-index, map-flush-invalidates-after-required |
+| Read paths never allocate or mutate; the index is built or grown only on the append path after the pending capacity is ensured | `pendingIndex`, `appendPending`, `preparePendingIndex` | `BatchSortedIndexTest` forced OutOfMemoryError cases |
+| Removal keeps lane order; slots above the removed lane index are rebased by `s -= (i + 1 - s) >>> 31` | `removePendingAt`, `deleteLaneIndex`, `shiftLaneIndexes` | mutants set-remove-skips-rebase, map-remove-skips-slot-delete, atoms-rebase-signed-shift |
+| Every new or changed method is at most 15 lines | atomization | `method_lengths.py` |
+
+## LongTimingWheel (`share/classes/jdk/m3/collections/LongTimingWheel.java`)
+
+| Invariant | Kept by | Checked by |
+|---|---|---|
+| The slot lanes (values, deadlineTick, next), grow(ArrayCopier) and payloadBytes() equal the master class; results, callback order and exceptions are unchanged | index lanes are separate and bucket-indexed | `LongTimingWheelParityTest` against `LongTimingWheelReference` |
+| indexed implies bucketMin[b] is the minimum deadline linked in bucket b (MAX when empty) and occupancy bit b is set iff the bucket is non-empty (MASK: group = b >>> 6) | `noteLinked`, `noteDetached` | `LongTimingWheelParityTest` (index recomputed after every operation) |
+| A group minimum is exact unless its dirty bit is set; after the dirty refresh a clear live bit means an empty group (BITMAP_WALK) | `refreshDirtyGroups`, `minLinkedTick` | `LongTimingWheelParityTest`; mutant detach-without-dirty-mark |
+| walkDepth counts the walks holding a detached chain and is restored on every exit; re-entrant clear(), unproven exits and OutOfMemoryError taint the wheel back to the original scan | `relink`, `restore`, `taint`, `clear`, `allocateIndex` | `LongTimingWheelSafeAdvanceTest`, `LongTimingWheelParityTest` (re-entrant clear scenario) |
+| Every new or changed method is at most 15 lines | atomization | `method_lengths.py` |
 
 ## ArraySizingStrategy and its adoptions (`providers/classes/jdk/m3/collections/hppc/...`)
 
