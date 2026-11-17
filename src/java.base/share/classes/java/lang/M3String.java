@@ -450,6 +450,47 @@ final class M3String implements CharSequence {
         return M3StringPool.concat(this, Objects.requireNonNull(other, "other"));
     }
 
+    /** Python-style tab expansion using only canonical owner/range compositions. */
+    M3String expandTabs(int tabSize) {
+        int sourceLength = length();
+        int width = Math.max(0, tabSize);
+        ArrayList<M3String> pieces = new ArrayList<>();
+        long outputLength = sourceLength;
+        long column = 0;
+        int start = 0;
+        boolean changed = false;
+        for (int index = 0; index < sourceLength;) {
+            int codePoint = Character.codePointAt(this, index);
+            if (codePoint == '\t') {
+                changed = true;
+                if (start != index) {
+                    pieces.add(slice(start, index));
+                }
+                long spaces = width == 0 ? 0 : (long) width - column % width;
+                outputLength += spaces - 1;
+                if (outputLength > Integer.MAX_VALUE) {
+                    throw new OutOfMemoryError("Expanded String exceeds implementation limit");
+                }
+                if (spaces != 0) {
+                    pieces.add(M3StringPool.internUnit(' ').repeat((int) spaces));
+                }
+                column += spaces;
+                index++;
+                start = index;
+            } else {
+                column = codePoint == '\r' || codePoint == '\n' ? 0 : column + 1;
+                index += Character.charCount(codePoint);
+            }
+        }
+        if (!changed) {
+            return this;
+        }
+        if (start != sourceLength) {
+            pieces.add(slice(start, sourceLength));
+        }
+        return joinValues(pieces);
+    }
+
     M3String indent(int amount) {
         if (length() == 0) return EMPTY;
 
