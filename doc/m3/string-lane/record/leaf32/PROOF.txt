@@ -1,0 +1,51 @@
+method_texts_verbatim_in_head	11
+lint	javac -Xlint:all,-this-escape -Werror: no warnings
+== EscapeCodeFamilyProof flat -XX:+CompactStrings
+excluded divergence: donor unescapeCsv("\"") fails, method returns it	1	0	"StringIndexOutOfBoundsException"
+checks	33	escape_texts	3378801	unescape_texts	4477106
+RESULT	PASS	failures=0
+== EscapeSyntaxProof flat -XX:+CompactStrings
+translateEscapes(null) throws NullPointerException	1	0	NullPointerException
+checks	5	ftl_texts	582982	st_texts	475985
+RESULT	PASS	failures=0
+== EscapeCodeFamilyProof flat -XX:-CompactStrings
+excluded divergence: donor unescapeCsv("\"") fails, method returns it	1	0	"StringIndexOutOfBoundsException"
+checks	33	escape_texts	3378801	unescape_texts	4477106
+RESULT	PASS	failures=0
+== EscapeSyntaxProof flat -XX:-CompactStrings
+translateEscapes(null) throws NullPointerException	1	0	NullPointerException
+checks	5	ftl_texts	582982	st_texts	475985
+RESULT	PASS	failures=0
+== EscapeCodeFamilyProof m3-facts -XX:+CompactStrings
+excluded divergence: donor unescapeCsv("\"") fails, method returns it	1	0	"StringIndexOutOfBoundsException"
+checks	33	escape_texts	3378801	unescape_texts	4477106
+RESULT	PASS	failures=0
+== EscapeSyntaxProof m3-facts -XX:+CompactStrings
+translateEscapes(null) throws NullPointerException	1	0	NullPointerException
+checks	5	ftl_texts	582982	st_texts	475985
+RESULT	PASS	failures=0
+== EscapeCodeFamilyProof m3-facts -XX:-CompactStrings
+excluded divergence: donor unescapeCsv("\"") fails, method returns it	1	0	"StringIndexOutOfBoundsException"
+checks	33	escape_texts	3378801	unescape_texts	4477106
+RESULT	PASS	failures=0
+== EscapeSyntaxProof m3-facts -XX:-CompactStrings
+translateEscapes(null) throws NullPointerException	1	0	NullPointerException
+checks	5	ftl_texts	582982	st_texts	475985
+RESULT	PASS	failures=0
+== EscapeCodeFamilyProof m3-scan -XX:+CompactStrings
+excluded divergence: donor unescapeCsv("\"") fails, method returns it	1	0	"StringIndexOutOfBoundsException"
+checks	33	escape_texts	3378801	unescape_texts	4477106
+RESULT	PASS	failures=0
+== EscapeSyntaxProof m3-scan -XX:+CompactStrings
+translateEscapes(null) throws NullPointerException	1	0	NullPointerException
+checks	5	ftl_texts	582982	st_texts	475985
+RESULT	PASS	failures=0
+== EscapeCodeFamilyProof m3-scan -XX:-CompactStrings
+excluded divergence: donor unescapeCsv("\"") fails, method returns it	1	0	"StringIndexOutOfBoundsException"
+checks	33	escape_texts	3378801	unescape_texts	4477106
+RESULT	PASS	failures=0
+== EscapeSyntaxProof m3-scan -XX:-CompactStrings
+translateEscapes(null) throws NullPointerException	1	0	NullPointerException
+checks	5	ftl_texts	582982	st_texts	475985
+RESULT	PASS	failures=0
+proof exit 0

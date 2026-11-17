@@ -1,0 +1,232 @@
+// SPDX-License-Identifier: Apache-2.0 OR EPL-2.0
+// Copyright (c) 2026 Synexia, Hitesh Soliwal and others
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.util.function.Function;
+import org.apache.commons.text.StringEscapeUtils;
+import org.unbescape.css.CssEscape;
+import org.unbescape.properties.PropertiesEscape;
+
+/**
+ * Donor-oracle proof of the ESCAPE_CODE family on a stock JVM whose String carries the head method text.
+ * <p>{@code check} runs every method and its donor on the same texts and counts the texts whose answers differ
+ * (exceptions compare by class). In-JVM oracles: commons-text 1.15.0 StringEscapeUtils (escapeJava, unescapeJava,
+ * escapeEcmaScript, unescapeEcmaScript, escapeJson, unescapeJson, escapeCsv, unescapeCsv, escapeXSI, unescapeXSI) and
+ * unbescape 1.1.8 CssEscape (escapeCssString, escapeCssIdentifier, unescapeCss) and PropertiesEscape
+ * (escapePropertiesValue, escapePropertiesKey, unescapeProperties). Texts: every string of 0..3 units over ESCAPE_UNITS
+ * (every unit an escaper treats specially, ASCII hex digits, C0/C1 edges, and the halves of two surrogate pairs that
+ * share a high half: D835 DD1E, D835 DD1F), every string of 4 units over ESCAPE_UNITS_4, every string of 0..4 units
+ * over UNESCAPE_UNITS and of 5 units over UNESCAPE_UNITS_5, unicode-escape templates (backslash, u-runs, an optional
+ * +, four characters over HEX_LIKE), CSS hex-escape templates (runs of 1..7 hex digits, each ending whitespace, and
+ * surrogate-pair escape pairs), every BMP unit in eight contexts, every supplementary code point alone, the donors'
+ * escape outputs of the 3-unit strings (as unescape inputs), and window-seam texts (the deciding unit at index
+ * 505..520 and 1018..1030). Also checks that a method returns its receiver whenever the answer equals it, and the one
+ * excluded divergence (commons-text unescapeCsv fails on a lone quotation mark; the method returns it). Exit 1 on a
+ * mismatch.
+ */
+public final class EscapeCodeFamilyProof {
+    private static final char HIGH = (char) 0xD835, LOW = (char) 0xDD1E, LOW_2 = (char) 0xDD1F;
+    private static final char[] ESCAPE_UNITS = {0, 8, '\t', '\n', 0x0B, '\f', '\r', 0x1F, ' ', '!', '"', '#', '$',
+        '%', '&', '\'', '(', ')', '*', '+', ',', '-', '.', '/', '0', '9', ':', ';', '<', '=', '>', '?', '@', 'A', 'F',
+        'G', '[', '\\', ']', '^', '_', '`', 'a', 'f', 'g', 'u', '{', '|', '}', '~', 0x7F, 0x80, 0x9F, 0xA0, 0xFF,
+        0x100, 0xFFFF, HIGH, LOW, LOW_2};
+    private static final char[] ESCAPE_UNITS_4 = {0, '\t', '\n', '\r', ' ', '"', '-', '0', ':', '_', 'a', 'F', '\\',
+        0x7F, HIGH, LOW, LOW_2};
+    private static final char[] UNESCAPE_UNITS = {'\\', 'u', '+', '-', '0', '3', '4', '7', '8', 'a', 'F', 'g', 'b',
+        'n', 't', 'f', 'r', '"', '\'', ',', ' ', '\n', '\r', '\f', '\t', (char) 0xFF11, HIGH, LOW};
+    private static final char[] UNESCAPE_UNITS_5 = {'\\', 'u', '0', '7', 'F', 'D', ' ', '"', ',', HIGH, LOW};
+    private static final char[] HEX_LIKE = {'0', '9', 'a', 'F', 'f', 'g', '+', '-', (char) 0xFF11, (char) 0x0661,
+        '\\', 'u', HIGH, 'D'};
+    private static final String[] CONTEXTS = {"%", "%0", "% ", "a%", "\\%", "\\%0", "-%", "%\n"};
+    private static int failures;
+    private static int checks;
+
+    private EscapeCodeFamilyProof() {}
+
+    public static void main(String[] args) {
+        List<String> escapeTexts = new ArrayList<>(strings(ESCAPE_UNITS, 3));
+        escapeTexts.addAll(stringsOfLength(ESCAPE_UNITS_4, 4));
+        List<String> unescapeTexts = new ArrayList<>(strings(UNESCAPE_UNITS, 4));
+        unescapeTexts.addAll(stringsOfLength(UNESCAPE_UNITS_5, 5));
+        unescapeTexts.addAll(unicodeTemplates());
+        unescapeTexts.addAll(cssTemplates());
+        List<String> units = new ArrayList<>();
+        for (int unit = 0; unit <= 0xFFFF; unit++) {
+            String c = String.valueOf((char) unit);
+            for (String context : CONTEXTS) units.add(context.replace("%", c));
+        }
+        List<String> points = new ArrayList<>();
+        for (int point = 0x10000; point <= Character.MAX_CODE_POINT; point++) points.add(Character.toString(point));
+        List<String> seams = seams();
+        List<String> escaped = new ArrayList<>();
+        for (String text : strings(ESCAPE_UNITS, 3)) {
+            escaped.add(StringEscapeUtils.escapeJava(text));
+            escaped.add(StringEscapeUtils.escapeEcmaScript(text));
+            escaped.add(CssEscape.escapeCssString(text));
+            escaped.add(CssEscape.escapeCssIdentifier(text));
+            escaped.add(PropertiesEscape.escapePropertiesKey(text));
+        }
+        List<String> forEscapers = concat(escapeTexts, unescapeTexts, units, points, seams);
+        List<String> forUnescapers = concat(unescapeTexts, escaped, escapeTexts, units, points, seams);
+        List<Check> escapers = List.of(
+            new Check("escapeJava()", String::escapeJava, StringEscapeUtils::escapeJava),
+            new Check("escapeEcmaScript()", String::escapeEcmaScript, StringEscapeUtils::escapeEcmaScript),
+            new Check("escapeJson()", String::escapeJson, StringEscapeUtils::escapeJson),
+            new Check("escapeCsv()", String::escapeCsv, StringEscapeUtils::escapeCsv),
+            new Check("escapeXSI()", String::escapeXSI, StringEscapeUtils::escapeXSI),
+            new Check("escapeCssString()", String::escapeCssString, CssEscape::escapeCssString),
+            new Check("escapeCssIdentifier()", String::escapeCssIdentifier, CssEscape::escapeCssIdentifier),
+            new Check("escapePropertiesValue()", String::escapePropertiesValue,
+                    PropertiesEscape::escapePropertiesValue),
+            new Check("escapePropertiesKey()", String::escapePropertiesKey, PropertiesEscape::escapePropertiesKey));
+        List<Check> unescapers = List.of(
+            new Check("unescapeJava()", String::unescapeJava, StringEscapeUtils::unescapeJava),
+            new Check("unescapeEcmaScript()", String::unescapeEcmaScript, StringEscapeUtils::unescapeEcmaScript),
+            new Check("unescapeJson()", String::unescapeJson, StringEscapeUtils::unescapeJson),
+            new Check("unescapeCsv()", String::unescapeCsv,
+                    s -> s.equals("\"") ? s : StringEscapeUtils.unescapeCsv(s)),
+            new Check("unescapeXSI()", String::unescapeXSI, StringEscapeUtils::unescapeXSI),
+            new Check("unescapeCss()", String::unescapeCss, CssEscape::unescapeCss),
+            new Check("unescapeProperties()", String::unescapeProperties, PropertiesEscape::unescapeProperties));
+        for (Check check : escapers) run(check, forEscapers);
+        for (Check check : unescapers) run(check, forUnescapers);
+        Object donor = result(StringEscapeUtils::unescapeCsv, "\"");
+        String lone = new String(new char[] {'"'});
+        report("excluded divergence: donor unescapeCsv(\"\\\"\") fails, method returns it", 1,
+                donor.equals("StringIndexOutOfBoundsException") && lone.unescapeCsv() == lone ? 0 : 1,
+                show(String.valueOf(donor)));
+        System.out.println("checks\t" + checks + "\tescape_texts\t" + forEscapers.size() + "\tunescape_texts\t"
+                + forUnescapers.size());
+        System.out.println("RESULT\t" + (failures == 0 ? "PASS" : "FAIL") + "\tfailures=" + failures);
+        System.exit(failures == 0 ? 0 : 1);
+    }
+
+    private record Check(String name, Function<String, Object> mine, Function<String, Object> donor) {}
+
+    private static void run(Check check, List<String> texts) {
+        long mismatches = 0, notSame = 0;
+        String first = "-", firstSame = "-";
+        for (String text : texts) {
+            Object mine = result(check.mine, text), donor = result(check.donor, text);
+            if (!Objects.equals(mine, donor) && mismatches++ == 0) {
+                first = show(clip(text)) + " -> " + show(clip(String.valueOf(mine))) + " vs "
+                        + show(clip(String.valueOf(donor)));
+            }
+            if (text.equals(mine) && mine != text && notSame++ == 0) firstSame = show(clip(text));
+        }
+        report(check.name, texts.size(), mismatches, first);
+        report(check.name + " returns this when unchanged", texts.size(), notSame, firstSame);
+    }
+
+    private static void report(String name, long texts, long mismatches, String first) {
+        checks++;
+        failures += mismatches == 0 ? 0 : 1;
+        System.out.println(name + "\t" + texts + "\t" + mismatches + "\t" + first);
+    }
+
+    private static Object result(Function<String, Object> f, String text) {
+        try {
+            return f.apply(text);
+        } catch (RuntimeException e) {
+            return e.getClass().getSimpleName();
+        }
+    }
+
+    /** Backslash, one or two u, an optional + (or two), and every four characters over HEX_LIKE; in two contexts. */
+    private static List<String> unicodeTemplates() {
+        List<String> out = new ArrayList<>();
+        String[] prefixes = {"\\u", "\\uu", "\\u+", "\\uu+", "\\u++"};
+        for (String prefix : prefixes) {
+            for (String body : stringsOfLength(HEX_LIKE, 4)) {
+                out.add(prefix + body);
+                out.add("x" + prefix + body + "y");
+            }
+            for (int n = 0; n < 4; n++) out.add(prefix + "0".repeat(n));
+        }
+        return out;
+    }
+
+    /** Hex-digit runs of 1..7 units after a backslash with each ending, and escape pairs of surrogate values. */
+    private static List<String> cssTemplates() {
+        List<String> out = new ArrayList<>();
+        String[] ends = {"", " ", "\t", "\n", "\f", "\r", "\r\n", "  ", "g", "0", "\\", "\\41"};
+        List<String> runs = new ArrayList<>();
+        for (int n = 1; n <= 4; n++) runs.addAll(stringsOfLength(new char[] {'0', '1', '9', 'a', 'F', 'D', '8', 'c'}, n));
+        for (int n = 5; n <= 7; n++) runs.addAll(stringsOfLength(new char[] {'0', 'F', '1', 'D'}, n));
+        for (String run : runs) {
+            for (String end : ends) out.add("\\" + run + end);
+        }
+        String[] highs = {"D7FF", "D800", "D835", "d835", "DBFF", "DC00", "0D835", "00D835", "110000", "0"};
+        String[] lows = {"DBFF", "DC00", "DD1E", "DFFF", "E000", "0DD1E", "DD1E0", "41"};
+        String[] spaces = {"", " ", "\r\n", "\t"};
+        for (String h : highs) {
+            for (String s : spaces) {
+                for (String l : lows) {
+                    for (String t : new String[] {"", " ", "x", "  "}) out.add("\\" + h + s + "\\" + l + t);
+                }
+                out.add("\\" + h + s);
+                out.add("\\" + h + s + "\\");
+                out.add("\\" + h + s + "\\g");
+            }
+        }
+        return out;
+    }
+
+    private static List<String> seams() {
+        List<String> out = new ArrayList<>();
+        String pair = "" + HIGH + LOW;
+        String[] tails = {pair, pair + "0", pair + " ", "" + HIGH, "" + LOW, "\r\n", "\n", "\r", "\"", "\\", "\\u0041",
+            "\\uu+00e9x", "\\D835\\DD1E", "\\D835 \\DD1E ", "\\41 x", "\\41\r\nx", "-0", "_", "\u00e9a", "\u00e90",
+            "\u00e9 ", ",", "\u007f", "\\377", "\\u12", "\"\"", "&0", "\\\r\n", "\t", ":=", "'"};
+        for (int k = 505; k <= 1030; k += (k == 520 ? 498 : 1)) {
+            for (String tail : tails) {
+                out.add("x".repeat(k) + tail);
+                out.add("\"" + "x".repeat(k) + tail + "\"");
+                out.add(tail + "x".repeat(k));
+                out.add("\\a".repeat(k / 2) + tail);
+                out.add("\u00e9".repeat(k) + tail);
+            }
+        }
+        return out;
+    }
+
+    private static List<String> strings(char[] units, int maxLength) {
+        List<String> out = new ArrayList<>();
+        for (int length = 0; length <= maxLength; length++) out.addAll(stringsOfLength(units, length));
+        return out;
+    }
+
+    private static List<String> stringsOfLength(char[] units, int length) {
+        List<String> out = new ArrayList<>();
+        int total = (int) Math.pow(units.length, length);
+        for (int code = 0; code < total; code++) {
+            char[] chars = new char[length];
+            int rest = code;
+            for (int i = 0; i < length; i++) {
+                chars[i] = units[rest % units.length];
+                rest /= units.length;
+            }
+            out.add(new String(chars));
+        }
+        return out;
+    }
+
+    @SafeVarargs
+    private static List<String> concat(List<String>... lists) {
+        List<String> out = new ArrayList<>();
+        for (List<String> list : lists) out.addAll(list);
+        return out;
+    }
+
+    private static String clip(String s) {
+        return s.length() > 40 ? s.substring(0, 20) + "..." + s.substring(s.length() - 12) : s;
+    }
+
+    private static String show(String s) {
+        StringBuilder out = new StringBuilder("\"");
+        for (char c : s.toCharArray()) out.append(c >= 32 && c < 127 ? String.valueOf(c) : String.format("<%04X>", (int) c));
+        return out.append('"').toString();
+    }
+}

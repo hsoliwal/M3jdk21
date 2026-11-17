@@ -1,0 +1,784 @@
+
+    /**
+     * Returns this string with the characters of a Java string literal escaped, as commons-text
+     * 1.15.0 {@code StringEscapeUtils.escapeJava} escapes them: a quotation mark and a backslash
+     * get a backslash; backspace, tab, line feed, form feed and carriage return become
+     * {@code \b}, {@code \t}, {@code \n}, {@code \f} and {@code \r}; every other unit below
+     * {@code U+0020} or above {@code U+007F} becomes {@code \u005Cu} and four upper-case hex
+     * digits, so a surrogate pair becomes two such escapes. {@code U+007F} is not escaped.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @return  this string escaped; this string when nothing in it needs escaping.
+     * @since   21
+     */
+    public String escapeJava() {
+        return escapedUnits(ESC_JAVA);
+    }
+
+    /**
+     * Returns this string with Java escapes translated, as commons-text 1.15.0
+     * {@code StringEscapeUtils.unescapeJava} translates them, from left to right: a backslash and
+     * one to three octal digits give the unit of that value (three digits only when the first is
+     * {@code 0} to {@code 3}); a backslash, one or more {@code u}, an optional {@code +} and four
+     * characters give the unit {@link Integer#parseInt(CharSequence, int, int, int)} reads from
+     * those four characters in radix 16, as a {@code char}; {@code \b}, {@code \t}, {@code \n},
+     * {@code \f} and {@code \r} give backspace, tab, line feed, form feed and carriage return; a
+     * backslash before a backslash, a quotation mark or an apostrophe gives that character; any
+     * other backslash is removed.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API. Unlike
+     * {@link #translateEscapes()}, it reads unicode escapes and removes a backslash it does not
+     * know instead of rejecting it.
+     *
+     * @return  this string with its escapes translated; this string when it has no backslash.
+     * @throws  IllegalArgumentException if fewer than four characters follow the {@code u} (and
+     *          {@code +}) of a unicode escape, or they are not a number in radix 16.
+     * @since   21
+     */
+    public String unescapeJava() {
+        int at = firstBackslash();
+        if (at < 0) return this;
+        int length = length();
+        StringBuilder out = new StringBuilder(length);
+        int copied = 0;
+        while (at >= 0) {
+            out.append(this, copied, at);
+            copied = at + appendJavaEscape(out, at, length);
+            at = indexOf('\\', copied);
+        }
+        return out.append(this, copied, length).toString();
+    }
+
+    /**
+     * Returns this string with the characters of an ECMAScript string literal escaped, as
+     * commons-text 1.15.0 {@code StringEscapeUtils.escapeEcmaScript} escapes them: as
+     * {@link #escapeJava()} does, and an apostrophe and a slash also get a backslash.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @return  this string escaped; this string when nothing in it needs escaping.
+     * @since   21
+     */
+    public String escapeEcmaScript() {
+        return escapedUnits(ESC_ECMASCRIPT);
+    }
+
+    /**
+     * Returns this string with ECMAScript escapes translated, as commons-text 1.15.0
+     * {@code StringEscapeUtils.unescapeEcmaScript} translates them: by the rules of
+     * {@link #unescapeJava()}.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @return  this string with its escapes translated; this string when it has no backslash.
+     * @throws  IllegalArgumentException as {@link #unescapeJava()} throws it.
+     * @since   21
+     */
+    public String unescapeEcmaScript() {
+        return unescapeJava();
+    }
+
+    /**
+     * Returns this string with the characters of a JSON string escaped, as commons-text 1.15.0
+     * {@code StringEscapeUtils.escapeJson} escapes them: a quotation mark, a backslash and a slash
+     * get a backslash; backspace, tab, line feed, form feed and carriage return become
+     * {@code \b}, {@code \t}, {@code \n}, {@code \f} and {@code \r}; every other unit below
+     * {@code U+0020} or above {@code U+007E} becomes {@code \u005Cu} and four upper-case hex
+     * digits.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @return  this string escaped; this string when nothing in it needs escaping.
+     * @since   21
+     */
+    public String escapeJson() {
+        return escapedUnits(ESC_JSON);
+    }
+
+    /**
+     * Returns this string with JSON escapes translated, as commons-text 1.15.0
+     * {@code StringEscapeUtils.unescapeJson} translates them: by the rules of
+     * {@link #unescapeJava()}.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @return  this string with its escapes translated; this string when it has no backslash.
+     * @throws  IllegalArgumentException as {@link #unescapeJava()} throws it.
+     * @since   21
+     */
+    public String unescapeJson() {
+        return unescapeJava();
+    }
+
+    /**
+     * Returns this string as one CSV field, as commons-text 1.15.0
+     * {@code StringEscapeUtils.escapeCsv} writes it: when it holds a comma, a quotation mark, a
+     * carriage return or a line feed, it is enclosed in quotation marks and each quotation mark
+     * in it is doubled; otherwise it is unchanged.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @return  this string as a CSV field; this string when it needs no quotes.
+     * @since   21
+     */
+    public String escapeCsv() {
+        return escapedUnits(ESC_CSV);
+    }
+
+    /**
+     * Returns the value of this string read as one CSV field, as commons-text 1.15.0
+     * {@code StringEscapeUtils.unescapeCsv} reads it: when it is at least two characters long and
+     * starts and ends with a quotation mark, those two are removed, and two quotation marks in a
+     * row in the rest become one when the rest holds a comma, a quotation mark, a carriage return
+     * or a line feed; otherwise it is unchanged.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API. The donor fails with an
+     * exception on a lone quotation mark; this method returns it unchanged.
+     *
+     * @return  the field value; this string when it is not enclosed in quotation marks.
+     * @since   21
+     */
+    public String unescapeCsv() {
+        int length = length();
+        if (length < 2 || charAt(0) != '"' || charAt(length - 1) != '"') return this;
+        String inner = substring(1, length - 1);
+        return inner.indexOfAny(',', '"', '\r', '\n') < 0 ? inner : inner.replace("\"\"", "\"");
+    }
+
+    /**
+     * Returns this string escaped for an XSI (POSIX) shell word, as commons-text 1.15.0
+     * {@code StringEscapeUtils.escapeXSI} escapes it: each of the characters {@code |&;<>()$`},
+     * backslash, quotation mark, apostrophe, space, tab and {@code *?[#~=%} gets a backslash; a
+     * line feed and a carriage return followed by a line feed are removed. A carriage return
+     * before any other character is unchanged.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @return  this string escaped; this string when nothing in it needs escaping.
+     * @since   21
+     */
+    public String escapeXSI() {
+        return escapedUnits(ESC_XSI);
+    }
+
+    /**
+     * Returns this string with XSI (POSIX) shell escapes translated, as commons-text 1.15.0
+     * {@code StringEscapeUtils.unescapeXSI} translates them: each backslash that is not itself
+     * escaped is removed, and the character after it is kept as it is.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @return  this string with its escapes translated; this string when it has no backslash.
+     * @since   21
+     */
+    public String unescapeXSI() {
+        int at = firstBackslash();
+        if (at < 0) return this;
+        int length = length();
+        StringBuilder out = new StringBuilder(length);
+        int copied = 0;
+        while (at >= 0) {
+            out.append(this, copied, at);
+            copied = at + 1;
+            at = indexOf('\\', at + 2);
+        }
+        return out.append(this, copied, length).toString();
+    }
+
+    /**
+     * Returns this string escaped for a CSS string literal, as unbescape 1.1.8
+     * {@code CssEscape.escapeCssString} escapes it at its default level (backslash escapes, else
+     * compact hex; level 2: basic escape set and all non-ASCII characters): a quotation mark,
+     * an apostrophe, a backslash, a slash and a semicolon get a backslash; {@code &}, {@code <},
+     * {@code >}, the units below {@code U+0020}, {@code U+007F} and every character above it
+     * become a backslash and the upper-case hex digits of the code point without leading zeros,
+     * followed by a space when the next unit is an ASCII hex digit or a space. The string is read
+     * as code points; a lone surrogate is a character of its own.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @return  this string escaped; this string when nothing in it needs escaping.
+     * @since   21
+     */
+    public String escapeCssString() {
+        return escapedUnits(ESC_CSS_STRING);
+    }
+
+    /**
+     * Returns this string escaped as a CSS identifier, as unbescape 1.1.8
+     * {@code CssEscape.escapeCssIdentifier} escapes it at its default level (backslash escapes,
+     * else compact hex; level 2: basic escape set and all non-ASCII characters): the space and
+     * ASCII punctuation get a backslash, except {@code &}, {@code :}, {@code <} and {@code >},
+     * which become a backslash and the upper-case hex digits of the code point without leading
+     * zeros, followed by a space when the next unit is an ASCII hex digit, as do the units below
+     * {@code U+0020}, {@code U+007F} and every character above it. A hyphen-minus is escaped
+     * only as the first character, when it is the only one or a hyphen-minus or a digit follows
+     * it; a low line only as the first character; a digit as the first character is escaped in
+     * hex. The string is read as code points.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @return  this string escaped; this string when nothing in it needs escaping.
+     * @since   21
+     */
+    public String escapeCssIdentifier() {
+        return escapedUnits(ESC_CSS_IDENTIFIER);
+    }
+
+    /**
+     * Returns this string with CSS escapes translated, as unbescape 1.1.8
+     * {@code CssEscape.unescapeCss} translates them, from left to right: a backslash before a
+     * line feed, a form feed, a carriage return or a carriage return and line feed is removed
+     * with them; a backslash and one to six ASCII hex digits, with one space, tab, line feed,
+     * form feed, carriage return or carriage return and line feed after them removed, give the
+     * code point of that value (a high surrogate value followed by such an escape of a low
+     * surrogate value gives their pair; zero, a surrogate value or a value above
+     * {@code U+10FFFF} gives {@code U+FFFD}); a backslash before any other unit gives that unit.
+     * A backslash at the end is kept.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @return  this string with its escapes translated; this string when it has no escape.
+     * @since   21
+     */
+    public String unescapeCss() {
+        int at = firstBackslash();
+        int length = length();
+        StringBuilder out = null;
+        int copied = 0;
+        while (at >= 0 && at + 1 < length) {
+            if (out == null) out = new StringBuilder(length);
+            out.append(this, copied, at);
+            char next = charAt(at + 1);
+            if (next == '\n' || next == '\f') {
+                copied = at + 2;
+            } else if (next == '\r') {
+                copied = at + 2 < length && charAt(at + 2) == '\n' ? at + 3 : at + 2;
+            } else if (isAsciiHexDigit(next)) {
+                copied = appendCssHexEscape(out, at + 1, length);
+            } else {
+                out.append(next);
+                copied = at + 2;
+            }
+            at = indexOf('\\', copied);
+        }
+        return out == null ? this : out.append(this, copied, length).toString();
+    }
+
+    /**
+     * Returns this string escaped as the value of a {@code .properties} entry, as unbescape 1.1.8
+     * {@code PropertiesEscape.escapePropertiesValue} escapes it at its default level (level 2:
+     * basic escape set and all non-ASCII characters): a backslash gets a backslash; tab, line
+     * feed, form feed and carriage return become {@code \t}, {@code \n}, {@code \f} and
+     * {@code \r}; every other unit below {@code U+0020}, {@code U+007F} and every unit above it
+     * become {@code \u005Cu} and four upper-case hex digits; a space, a colon or an equals sign
+     * that starts this string gets a backslash.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @return  this string escaped; this string when nothing in it needs escaping.
+     * @since   21
+     */
+    public String escapePropertiesValue() {
+        return escapedUnits(ESC_PROPERTIES_VALUE);
+    }
+
+    /**
+     * Returns this string escaped as the key of a {@code .properties} entry, as unbescape 1.1.8
+     * {@code PropertiesEscape.escapePropertiesKey} escapes it at its default level (level 2:
+     * basic escape set and all non-ASCII characters): a space, {@code !}, {@code #}, {@code :},
+     * {@code =} and a backslash get a backslash; tab, line feed, form feed and carriage return
+     * become {@code \t}, {@code \n}, {@code \f} and {@code \r}; every other unit below
+     * {@code U+0020}, {@code U+007F} and every unit above it become {@code \u005Cu} and four
+     * upper-case hex digits.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @return  this string escaped; this string when nothing in it needs escaping.
+     * @since   21
+     */
+    public String escapePropertiesKey() {
+        return escapedUnits(ESC_PROPERTIES_KEY);
+    }
+
+    /**
+     * Returns this string with {@code .properties} escapes translated, as unbescape 1.1.8
+     * {@code PropertiesEscape.unescapeProperties} translates them, from left to right:
+     * {@code \t}, {@code \n}, {@code \f} and {@code \r} give tab, line feed, form feed and
+     * carriage return; {@code \u005Cu} and four ASCII hex digits give the unit of that value; a
+     * {@code \u005Cu} with fewer hex digits is kept as it is; a backslash before any other unit
+     * gives that unit. A backslash at the end is kept.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API. Unlike
+     * {@link java.util.Properties#load(java.io.Reader)}, it never rejects a malformed escape.
+     *
+     * @return  this string with its escapes translated; this string when it has no escape.
+     * @since   21
+     */
+    public String unescapeProperties() {
+        int at = firstBackslash();
+        int length = length();
+        StringBuilder out = null;
+        int copied = 0;
+        while (at >= 0 && at + 1 < length) {
+            char next = charAt(at + 1);
+            int unit = switch (next) {
+                case 't' -> '\t';
+                case 'n' -> '\n';
+                case 'f' -> '\f';
+                case 'r' -> '\r';
+                default -> next;
+            };
+            int end = at + 2;
+            if (next == 'u') {
+                if (asciiHexRunEnd(at + 2, Math.min(length, at + 6)) < at + 6) {
+                    at = indexOf('\\', at + 2);
+                    continue;
+                }
+                unit = Integer.parseInt(this, at + 2, at + 6, 16);
+                end = at + 6;
+            }
+            if (out == null) out = new StringBuilder(length);
+            out.append(this, copied, at).append((char) unit);
+            copied = end;
+            at = indexOf('\\', end);
+        }
+        return out == null ? this : out.append(this, copied, length).toString();
+    }
+
+    /**
+     * Returns this string, the body of a string literal of a template language, with the escapes
+     * of that language translated, as the language's own lexer translates them.
+     * {@link EscapeSyntax#FTL}: as FreeMarker 2.3.35 {@code StringUtil.FTLStringLiteralDec};
+     * {@link EscapeSyntax#ST}: as StringTemplate 4.3.4 {@code STLexer} reads a string in an
+     * expression. The body is read from left to right; {@link #translateEscapes()} reads Java's
+     * own escapes.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   syntax   the language whose escapes are translated.
+     * @return  this string with its escapes translated; this string when it has no backslash.
+     * @throws  IllegalArgumentException if the body ends in a backslash that escapes nothing, or
+     *          (FTL) an escape is not one of the language's.
+     * @throws  NullPointerException if {@code syntax} is {@code null}.
+     * @since   21
+     */
+    public String translateEscapes(EscapeSyntax syntax) {
+        java.util.Objects.requireNonNull(syntax, "syntax");
+        int at = firstBackslash();
+        if (at < 0) return this;
+        int length = length();
+        StringBuilder out = new StringBuilder(length);
+        int copied = 0;
+        while (at >= 0) {
+            out.append(this, copied, at);
+            if (at + 1 == length) {
+                throw new IllegalArgumentException("The literal ends in a backslash");
+            }
+            char next = charAt(at + 1);
+            copied = syntax == EscapeSyntax.FTL ? appendFtlEscape(out, next, at, length) : at + 2;
+            if (syntax == EscapeSyntax.ST) {
+                out.append(next == 'n' ? '\n' : next == 'r' ? '\r' : next == 't' ? '\t' : next);
+            }
+            at = indexOf('\\', copied);
+        }
+        return out.append(this, copied, length).toString();
+    }
+
+    /**
+     * The string-literal escape syntaxes of template languages that
+     * {@link String#translateEscapes(EscapeSyntax)} translates.
+     *
+     * @apiNote
+     * This type is an M3JDK addition to the {@code String} API.
+     *
+     * @since   21
+     */
+    public enum EscapeSyntax {
+        /**
+         * FreeMarker (FTL) string literals: a backslash before a quotation mark, an apostrophe, a
+         * backslash, a left curly bracket or {@code =} gives that character; {@code \n},
+         * {@code \r}, {@code \t}, {@code \f} and {@code \b} give line feed, carriage return, tab,
+         * form feed and backspace; {@code \l}, {@code \g} and {@code \a} give {@code <},
+         * {@code >} and {@code &}; {@code \x} and one to four ASCII hex digits give the unit of
+         * that value; any other escape is rejected.
+         */
+        FTL,
+        /**
+         * StringTemplate 4 string literals in expressions: {@code \n}, {@code \r} and {@code \t}
+         * give line feed, carriage return and tab; a backslash before any other unit gives that
+         * unit.
+         */
+        ST
+    }
+
+    /**
+     * Appends the translation of the FTL escape at {@code at}, a backslash followed by
+     * {@code next}, as {@link #translateEscapes(EscapeSyntax)} reads it; returns the index after
+     * it.
+     */
+    private int appendFtlEscape(StringBuilder out, char next, int at, int length) {
+        int unit = switch (next) {
+            case '"', '\'', '\\', '{', '=' -> next;
+            case 'n' -> '\n';
+            case 'r' -> '\r';
+            case 't' -> '\t';
+            case 'f' -> '\f';
+            case 'b' -> '\b';
+            case 'g' -> '>';
+            case 'l' -> '<';
+            case 'a' -> '&';
+            default -> -1;
+        };
+        if (unit >= 0) {
+            out.append((char) unit);
+            return at + 2;
+        }
+        if (next != 'x') {
+            throw new IllegalArgumentException("Invalid escape sequence (\\" + next
+                    + ") in a string literal");
+        }
+        int end = asciiHexRunEnd(at + 2, Math.min(length, at + 6));
+        if (end == at + 2) {
+            throw new IllegalArgumentException("Invalid \\x escape in a string literal");
+        }
+        out.append((char) Integer.parseInt(this, at + 2, end, 16));
+        return end;
+    }
+
+    /** Escape rules of {@link #escapedUnits(int)}, the rows of {@link EscapeRules}. */
+    private static final int ESC_JAVA = 0;
+    private static final int ESC_ECMASCRIPT = 1;
+    private static final int ESC_JSON = 2;
+    private static final int ESC_XSI = 3;
+    private static final int ESC_CSS_STRING = 4;
+    private static final int ESC_CSS_IDENTIFIER = 5;
+    private static final int ESC_PROPERTIES_VALUE = 6;
+    private static final int ESC_PROPERTIES_KEY = 7;
+    private static final int ESC_CSV = 8;
+    /** Units after the last one each window of {@link #escapedUnits(int)} decides. */
+    private static final int ESC_LOOKAHEAD = 2;
+
+    /**
+     * This string escaped by {@code rule}. Prepared M3 facts answer when they show a string of
+     * ASCII letters, digits and low lines that the rule leaves alone; otherwise the string is
+     * read in bulk windows that keep {@link #ESC_LOOKAHEAD} units for the next window, so a
+     * surrogate pair and the unit after it are never split from the unit that decides. The clean
+     * runs between escapes are copied as ranges, and a string with nothing to escape is returned
+     * as it is.
+     */
+    private String escapedUnits(int rule) {
+        if (wordUnitsOnly() && (rule != ESC_CSS_IDENTIFIER || isEmpty()
+                || Character.isLetter(charAt(0)))) {
+            return this;
+        }
+        int length = length();
+        StringBuilder out = null;
+        int copied = 0;
+        char[] window = new char[Math.min(length, SCAN_WINDOW)];
+        for (int from = 0; from < length; ) {
+            int to = Math.min(length, from + window.length);
+            getChars(from, to, window, 0);
+            int read = to - from;
+            int count = to < length ? read - ESC_LOOKAHEAD : read;
+            int at = 0;
+            while (at < count) {
+                char unit = window[at];
+                int next = at + 1 < read ? window[at + 1] : -1;
+                if (!escapesAt(rule, from + at, unit, next)) {
+                    at++;
+                    continue;
+                }
+                if (out == null) {
+                    out = new StringBuilder(length + 16);
+                    if (rule == ESC_CSV) out.append('"');
+                }
+                out.append(this, copied, from + at);
+                int after = at + 2 < read ? window[at + 2] : -1;
+                at += appendEscape(out, rule, unit, next, after);
+                copied = from + at;
+            }
+            from += at;
+        }
+        if (out == null) return this;
+        out.append(this, copied, length);
+        return (rule == ESC_CSV ? out.append('"') : out).toString();
+    }
+
+    /**
+     * Whether {@code rule} escapes {@code unit} at {@code index}, followed by the unit
+     * {@code next} (-1 at the end).
+     */
+    private static boolean escapesAt(int rule, int index, char unit, int next) {
+        if (unit >= 128) return (EscapeRules.FLAGS[rule] & EscapeRules.NON_ASCII) != 0;
+        if (index == 0 && rule == ESC_CSS_IDENTIFIER) {
+            if (unit == '-') return next < 0 || next == '-' || next >= '0' && next <= '9';
+            if (unit == '_' || unit >= '0' && unit <= '9') return true;
+        }
+        if (index == 0 && rule == ESC_PROPERTIES_VALUE
+                && (unit == ' ' || unit == ':' || unit == '=')) {
+            return true;
+        }
+        if (rule == ESC_XSI && unit == '\r') return next == '\n';
+        return inMask(unit, EscapeRules.ESCAPED_LOW[rule], EscapeRules.ESCAPED_HIGH[rule]);
+    }
+
+    /**
+     * Appends the escape of {@code unit} under {@code rule}, the unit followed by {@code next}
+     * and {@code after} (-1 past the end); returns the number of units it stands for.
+     */
+    private static int appendEscape(StringBuilder out, int rule, char unit, int next,
+            int after) {
+        if (rule == ESC_CSV) {
+            out.append(unit);
+            if (unit == '"') out.append('"');
+            return 1;
+        }
+        if (rule == ESC_XSI && (unit == '\n' || unit == '\r')) return unit == '\r' ? 2 : 1;
+        if (unit < 128 && inMask(unit, EscapeRules.BACKSLASHED_LOW[rule],
+                EscapeRules.BACKSLASHED_HIGH[rule])) {
+            out.append('\\').append(unit);
+            return 1;
+        }
+        int flags = EscapeRules.FLAGS[rule];
+        int letter = switch (unit) {
+            case '\b' -> (flags & EscapeRules.SHORT_B) != 0 ? 'b' : 0;
+            case '\t' -> (flags & EscapeRules.SHORT_TNFR) != 0 ? 't' : 0;
+            case '\n' -> (flags & EscapeRules.SHORT_TNFR) != 0 ? 'n' : 0;
+            case '\f' -> (flags & EscapeRules.SHORT_TNFR) != 0 ? 'f' : 0;
+            case '\r' -> (flags & EscapeRules.SHORT_TNFR) != 0 ? 'r' : 0;
+            default -> 0;
+        };
+        out.append('\\');
+        if (letter != 0) {
+            out.append((char) letter);
+            return 1;
+        }
+        if ((flags & EscapeRules.CSS_HEX) == 0) {
+            out.append('u');
+            for (int shift = 12; shift >= 0; shift -= 4) out.append(upperHexDigit(unit >>> shift));
+            return 1;
+        }
+        int point = unit;
+        int width = 1;
+        if (Character.isHighSurrogate(unit) && next >= 0 && Character.isLowSurrogate((char) next)) {
+            point = Character.toCodePoint(unit, (char) next);
+            width = 2;
+            next = after;
+        }
+        int shift = 20;
+        while (shift > 0 && point >>> shift == 0) shift -= 4;
+        for (; shift >= 0; shift -= 4) out.append(upperHexDigit(point >>> shift));
+        if (next >= 0 && (isAsciiHexDigit(next)
+                || next == ' ' && (flags & EscapeRules.CSS_HEX_SPACE) != 0)) {
+            out.append(' ');
+        }
+        return width;
+    }
+
+    /** The upper-case hex digit of the low four bits of {@code value}. */
+    private static char upperHexDigit(int value) {
+        int digit = value & 15;
+        return (char) (digit < 10 ? '0' + digit : 'A' - 10 + digit);
+    }
+
+    /** Whether {@code unit} is {@code 0-9}, {@code A-F} or {@code a-f}. */
+    private static boolean isAsciiHexDigit(int unit) {
+        return unit >= '0' && unit <= '9' || (unit | 0x20) >= 'a' && (unit | 0x20) <= 'f';
+    }
+
+    /** The index after the run of ASCII hex digits from {@code from}, at most {@code max}. */
+    private int asciiHexRunEnd(int from, int max) {
+        int end = from;
+        while (end < max && isAsciiHexDigit(charAt(end))) end++;
+        return end;
+    }
+
+    /** Whether prepared M3 facts show this string is ASCII letters, digits and low lines only. */
+    private boolean wordUnitsOnly() {
+        M3String storage = m3();
+        M3StringFacts facts = storage == null ? null : storage.factsIfPrepared();
+        return facts != null && facts.ascii
+                && (facts.regexAllClasses & M3StringFacts.REGEX_WORD) != 0;
+    }
+
+    /**
+     * The index of the first backslash in this string, or -1; prepared M3 facts answer when they
+     * show the string has none.
+     */
+    private int firstBackslash() {
+        if (wordUnitsOnly()) return -1;
+        M3String storage = m3();
+        M3StringFacts facts = storage == null ? null : storage.factsIfPrepared();
+        return facts != null && !facts.mayContainCodeUnit('\\') ? -1 : indexOf('\\');
+    }
+
+    /**
+     * Appends the translation of the Java escape at {@code at}, a backslash, as
+     * {@link #unescapeJava()} reads it; returns its length in units.
+     */
+    private int appendJavaEscape(StringBuilder out, int at, int length) {
+        char next = at + 1 < length ? charAt(at + 1) : 0;
+        if (next >= '0' && next <= '7') {
+            int end = at + 2;
+            if (end < length && charAt(end) >= '0' && charAt(end) <= '7') {
+                end++;
+                if (end < length && next <= '3' && charAt(end) >= '0' && charAt(end) <= '7') end++;
+            }
+            out.append((char) Integer.parseInt(this, at + 1, end, 8));
+            return end - at;
+        }
+        if (next == 'u') {
+            int start = at + 2;
+            while (start < length && charAt(start) == 'u') start++;
+            if (start < length && charAt(start) == '+') start++;
+            if (start + 4 > length) {
+                throw new IllegalArgumentException("Less than 4 hex digits in unicode value: '"
+                        + substring(at) + "' due to end of CharSequence");
+            }
+            try {
+                out.append((char) Integer.parseInt(this, start, start + 4, 16));
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException("Unable to parse unicode value: "
+                        + substring(start, start + 4), e);
+            }
+            return start + 4 - at;
+        }
+        int unit = switch (next) {
+            case 'b' -> '\b';
+            case 't' -> '\t';
+            case 'n' -> '\n';
+            case 'f' -> '\f';
+            case 'r' -> '\r';
+            case '\\', '"', '\'' -> next;
+            default -> -1;
+        };
+        if (unit < 0) return 1;
+        out.append((char) unit);
+        return 2;
+    }
+
+    /**
+     * Appends the translation of the CSS hex escape whose digits start at {@code from}, as
+     * {@link #unescapeCss()} reads it; returns the index after it.
+     */
+    private int appendCssHexEscape(StringBuilder out, int from, int length) {
+        int end = asciiHexRunEnd(from, Math.min(length, from + 6));
+        int point = Integer.parseInt(this, from, end, 16);
+        end += cssWhitespaceAt(end, length);
+        if (point >= 0xD800 && point <= 0xDBFF && end + 1 < length && charAt(end) == '\\'
+                && isAsciiHexDigit(charAt(end + 1))) {
+            int lowEnd = asciiHexRunEnd(end + 1, Math.min(length, end + 7));
+            int low = Integer.parseInt(this, end + 1, lowEnd, 16);
+            if (low >= 0xDC00 && low <= 0xDFFF) {
+                point = Character.toCodePoint((char) point, (char) low);
+                end = lowEnd + cssWhitespaceAt(lowEnd, length);
+            }
+        }
+        if (point == 0 || point >= 0xD800 && point <= 0xDFFF || point > Character.MAX_CODE_POINT) {
+            point = 0xFFFD;
+        }
+        out.appendCodePoint(point);
+        return end;
+    }
+
+    /** The number of units of the CSS whitespace that ends a hex escape at {@code index}. */
+    private int cssWhitespaceAt(int index, int length) {
+        if (index >= length) return 0;
+        char unit = charAt(index);
+        if (unit == '\r') return index + 1 < length && charAt(index + 1) == '\n' ? 2 : 1;
+        return unit == ' ' || unit == '\t' || unit == '\n' || unit == '\f' ? 1 : 0;
+    }
+
+    /**
+     * The unit sets of the escape rules of {@link #escapedUnits(int)}, from the donor tables:
+     * per rule its flags, the ASCII units it escapes besides those of its flags, and the ASCII
+     * units it writes as a backslash and the unit; built once into two mask words each.
+     */
+    private static final class EscapeRules {
+        /** The rule escapes the units {@code U+0000} to {@code U+001F}. */
+        static final int CONTROLS = 1;
+        /** The rule escapes {@code U+007F}. */
+        static final int DELETE = 2;
+        /** The rule escapes every unit above {@code U+007F}. */
+        static final int NON_ASCII = 4;
+        /** The rule writes a backspace as {@code \b}. */
+        static final int SHORT_B = 8;
+        /** The rule writes tab, line feed, form feed, carriage return as {@code \t \n \f \r}. */
+        static final int SHORT_TNFR = 16;
+        /** The rule writes compact CSS hex escapes of code points, not unicode escapes. */
+        static final int CSS_HEX = 32;
+        /** A CSS hex escape before a space is ended by a space too. */
+        static final int CSS_HEX_SPACE = 64;
+        /** The flags of each rule, by rule number. */
+        static final int[] FLAGS = {
+            CONTROLS | NON_ASCII | SHORT_B | SHORT_TNFR,
+            CONTROLS | NON_ASCII | SHORT_B | SHORT_TNFR,
+            CONTROLS | DELETE | NON_ASCII | SHORT_B | SHORT_TNFR,
+            0,
+            CONTROLS | DELETE | NON_ASCII | CSS_HEX | CSS_HEX_SPACE,
+            CONTROLS | DELETE | NON_ASCII | CSS_HEX,
+            CONTROLS | DELETE | NON_ASCII | SHORT_TNFR,
+            CONTROLS | DELETE | NON_ASCII | SHORT_TNFR,
+            0
+        };
+        /** The ASCII units each rule escapes besides those of its flags. */
+        private static final String[] ESCAPED = {
+            "\"\\",
+            "\"\\'/",
+            "\"\\/",
+            "|&;<>()$`\\\"' \t\n*?[#~=%",
+            "\"'\\/&;<>",
+            " !\"#$%&'()*+,./:;<=>?@[\\]^`{|}~",
+            "\\",
+            " !#:=\\",
+            ",\"\r\n"
+        };
+        /** The ASCII units each rule writes as a backslash and the unit. */
+        private static final String[] BACKSLASHED = {
+            "\"\\",
+            "\"\\'/",
+            "\"\\/",
+            "|&;<>()$`\\\"' \t*?[#~=%",
+            "\"'\\/;",
+            " !\"#$%'()*+,-./;=?@[\\]^_`{|}~",
+            "\\ :=",
+            " !#:=\\",
+            ""
+        };
+        static final long[] ESCAPED_LOW = new long[FLAGS.length];
+        static final long[] ESCAPED_HIGH = new long[FLAGS.length];
+        static final long[] BACKSLASHED_LOW = new long[FLAGS.length];
+        static final long[] BACKSLASHED_HIGH = new long[FLAGS.length];
+
+        static {
+            for (int rule = 0; rule < FLAGS.length; rule++) {
+                char[] escaped = ESCAPED[rule].toCharArray();
+                char[] backslashed = BACKSLASHED[rule].toCharArray();
+                ESCAPED_LOW[rule] = asciiMask(escaped, 0)
+                        | ((FLAGS[rule] & CONTROLS) != 0 ? 0xFFFFFFFFL : 0L);
+                ESCAPED_HIGH[rule] = asciiMask(escaped, 64)
+                        | ((FLAGS[rule] & DELETE) != 0 ? 1L << 63 : 0L);
+                BACKSLASHED_LOW[rule] = asciiMask(backslashed, 0);
+                BACKSLASHED_HIGH[rule] = asciiMask(backslashed, 64);
+            }
+        }
+    }

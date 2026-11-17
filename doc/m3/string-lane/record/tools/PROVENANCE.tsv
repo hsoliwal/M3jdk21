@@ -149,3 +149,23 @@ toCamelCase	commons-text CaseUtils.toCamelCase
 caseFold	CPython 3.12 str.casefold (Unicode 15.0.0 CaseFolding.txt status C + F)
 equalsFoldCase	a.casefold() == b.casefold() (CPython 3.12)
 equalsSimpleFold	Go 1.26.2 strings.EqualFold (Unicode 15.0.0, status C + S)
+member	donor_api
+escapeJava()	org.apache.commons:commons-text:1.15.0 StringEscapeUtils.escapeJava(String) (ESCAPE_JAVA)
+unescapeJava()	org.apache.commons:commons-text:1.15.0 StringEscapeUtils.unescapeJava(String) (UNESCAPE_JAVA)
+escapeEcmaScript()	org.apache.commons:commons-text:1.15.0 StringEscapeUtils.escapeEcmaScript(String) (ESCAPE_ECMASCRIPT)
+unescapeEcmaScript()	org.apache.commons:commons-text:1.15.0 StringEscapeUtils.unescapeEcmaScript(String) (= UNESCAPE_JAVA)
+escapeJson()	org.apache.commons:commons-text:1.15.0 StringEscapeUtils.escapeJson(String) (ESCAPE_JSON)
+unescapeJson()	org.apache.commons:commons-text:1.15.0 StringEscapeUtils.unescapeJson(String) (= UNESCAPE_JAVA)
+escapeCsv()	org.apache.commons:commons-text:1.15.0 StringEscapeUtils.escapeCsv(String) (CsvTranslators.CsvEscaper)
+unescapeCsv()	org.apache.commons:commons-text:1.15.0 StringEscapeUtils.unescapeCsv(String) (CsvTranslators.CsvUnescaper); excluded divergence: a lone quotation mark (donor StringIndexOutOfBoundsException) is returned unchanged
+escapeXSI()	org.apache.commons:commons-text:1.15.0 StringEscapeUtils.escapeXSI(String) (ESCAPE_XSI)
+unescapeXSI()	org.apache.commons:commons-text:1.15.0 StringEscapeUtils.unescapeXSI(String) (XsiUnescaper)
+escapeCssString()	org.unbescape:unbescape:1.1.8.RELEASE CssEscape.escapeCssString(String) = escapeCssString(text, BACKSLASH_ESCAPES_DEFAULT_TO_COMPACT_HEXA, LEVEL_2_ALL_NON_ASCII_PLUS_BASIC_ESCAPE_SET)
+escapeCssIdentifier()	org.unbescape:unbescape:1.1.8.RELEASE CssEscape.escapeCssIdentifier(String) = escapeCssIdentifier(text, BACKSLASH_ESCAPES_DEFAULT_TO_COMPACT_HEXA, LEVEL_2_ALL_NON_ASCII_PLUS_BASIC_ESCAPE_SET)
+unescapeCss()	org.unbescape:unbescape:1.1.8.RELEASE CssEscape.unescapeCss(String) (CssUnescapeUtil.unescape)
+escapePropertiesValue()	org.unbescape:unbescape:1.1.8.RELEASE PropertiesEscape.escapePropertiesValue(String) = escapePropertiesValue(text, LEVEL_2_ALL_NON_ASCII_PLUS_BASIC_ESCAPE_SET)
+escapePropertiesKey()	org.unbescape:unbescape:1.1.8.RELEASE PropertiesEscape.escapePropertiesKey(String) = escapePropertiesKey(text, LEVEL_2_ALL_NON_ASCII_PLUS_BASIC_ESCAPE_SET)
+unescapeProperties()	org.unbescape:unbescape:1.1.8.RELEASE PropertiesEscape.unescapeProperties(String) (PropertiesUnescapeUtil.unescape)
+translateEscapes(EscapeSyntax) FTL	org.freemarker:freemarker:2.3.35 freemarker.template.utility.StringUtil.FTLStringLiteralDec(String) (ParseException read as IllegalArgumentException)
+translateEscapes(EscapeSyntax) ST	org.antlr:ST4:4.3.4 org.stringtemplate.v4.compiler.STLexer.mSTRING (STRING token of <"body">, antlr-runtime 3.5.3; lexer error read as IllegalArgumentException)
+EscapeSyntax	public nested enum of the two proven syntaxes (FTL, ST); catalogue TEMPLATE_ENGINES_OPERATIONS.tsv rows 145 and 147
