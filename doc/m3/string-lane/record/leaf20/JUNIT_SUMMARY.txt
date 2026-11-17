@@ -1,0 +1,5 @@
+JUnit 5 console 1.11.4 on a stock JDK 21 whose java.lang.String carries the head method text (--patch-module):
+[       588 tests found           ]
+[       588 tests successful      ]
+[         0 tests failed          ]
+(585 parameterized texts x 3 storage forms of each; characterSetRules, sequenceRules, nullArgumentsThrow)

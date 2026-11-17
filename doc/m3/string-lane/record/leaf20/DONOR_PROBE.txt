@@ -1,0 +1,27 @@
+HL: L[any=F idx=-1 none=T only=F but=0 butCs=0] H[any=F idx=-1 none=T only=F but=0 butCs=0] HL[any=T idx=0 none=F only=T but=-1 butCs=-1] aL[any=F idx=-1 none=T only=F but=0 butCs=0] Ha[any=F idx=-1 none=T only=F but=0 butCs=0] LH[any=F idx=-1 none=T only=F but=0 butCs=0] HLa[any=T idx=0 none=F only=F but=2 butCs=2] aH[any=F idx=-1 none=T only=F but=0 butCs=0] HH[any=F idx=-1 none=T only=F but=0 butCs=0] LL[any=F idx=-1 none=T only=F but=0 butCs=0]
+H: L[any=F idx=-1 none=T only=F but=0 butCs=0] H[any=T idx=0 none=F only=T but=-1 butCs=-1] HL[any=T idx=0 none=F only=F but=0 butCs=0] aL[any=F idx=-1 none=T only=F but=0 butCs=0] Ha[any=T idx=0 none=F only=F but=1 butCs=1] LH[any=T idx=1 none=F only=F but=0 butCs=0] HLa[any=T idx=0 none=F only=F but=0 butCs=0] aH[any=T idx=1 none=F only=F but=0 butCs=0] HH[any=T idx=0 none=F only=T but=-1 butCs=-1] LL[any=F idx=-1 none=T only=F but=0 butCs=0]
+L: L[any=T idx=0 none=F only=T but=-1 butCs=-1] H[any=F idx=-1 none=T only=F but=0 butCs=0] HL[any=T idx=1 none=F only=F but=0 butCs=0] aL[any=T idx=1 none=F only=F but=0 butCs=0] Ha[any=F idx=-1 none=T only=F but=0 butCs=0] LH[any=T idx=0 none=F only=F but=1 butCs=1] HLa[any=T idx=1 none=F only=F but=0 butCs=0] aH[any=F idx=-1 none=T only=F but=0 butCs=0] HH[any=F idx=-1 none=T only=F but=0 butCs=0] LL[any=T idx=0 none=F only=T but=-1 butCs=-1]
+Ha: L[any=F idx=-1 none=T only=F but=0 butCs=0] H[any=F idx=-1 none=T only=T but=-1 butCs=-1] HL[any=F idx=-1 none=T only=F but=0 butCs=0] aL[any=T idx=0 none=F only=F but=1 butCs=1] Ha[any=T idx=0 none=F only=T but=-1 butCs=-1] LH[any=F idx=-1 none=T only=F but=0 butCs=0] HLa[any=T idx=2 none=F only=F but=0 butCs=0] aH[any=T idx=0 none=F only=T but=-1 butCs=-1] HH[any=F idx=-1 none=T only=T but=-1 butCs=-1] LL[any=F idx=-1 none=T only=F but=0 butCs=0]
+La: L[any=T idx=0 none=F only=T but=-1 butCs=-1] H[any=F idx=-1 none=T only=F but=0 butCs=0] HL[any=T idx=1 none=F only=F but=0 butCs=0] aL[any=T idx=0 none=F only=T but=-1 butCs=-1] Ha[any=T idx=1 none=F only=F but=0 butCs=0] LH[any=T idx=0 none=F only=F but=1 butCs=1] HLa[any=T idx=1 none=F only=F but=0 butCs=0] aH[any=T idx=0 none=F only=F but=1 butCs=1] HH[any=F idx=-1 none=T only=F but=0 butCs=0] LL[any=T idx=0 none=F only=T but=-1 butCs=-1]
+aH: L[any=F idx=-1 none=T only=F but=0 butCs=0] H[any=T idx=0 none=F only=T but=-1 butCs=-1] HL[any=T idx=0 none=F only=F but=0 butCs=0] aL[any=T idx=0 none=F only=F but=1 butCs=1] Ha[any=T idx=0 none=F only=T but=-1 butCs=-1] LH[any=T idx=1 none=F only=F but=0 butCs=0] HLa[any=T idx=0 none=F only=F but=0 butCs=0] aH[any=T idx=0 none=F only=T but=-1 butCs=-1] HH[any=T idx=0 none=F only=T but=-1 butCs=-1] LL[any=F idx=-1 none=T only=F but=0 butCs=0]
+aL: L[any=T idx=0 none=F only=T but=-1 butCs=-1] H[any=F idx=-1 none=T only=F but=0 butCs=0] HL[any=T idx=1 none=F only=F but=0 butCs=0] aL[any=T idx=0 none=F only=T but=-1 butCs=-1] Ha[any=T idx=1 none=F only=F but=0 butCs=0] LH[any=T idx=0 none=F only=F but=1 butCs=1] HLa[any=T idx=1 none=F only=F but=0 butCs=0] aH[any=T idx=0 none=F only=F but=1 butCs=1] HH[any=F idx=-1 none=T only=F but=0 butCs=0] LL[any=T idx=0 none=F only=T but=-1 butCs=-1]
+LH: L[any=T idx=0 none=F only=T but=-1 butCs=-1] H[any=T idx=0 none=F only=T but=-1 butCs=-1] HL[any=T idx=0 none=F only=F but=0 butCs=0] aL[any=T idx=1 none=F only=F but=0 butCs=0] Ha[any=T idx=0 none=F only=F but=1 butCs=1] LH[any=T idx=0 none=F only=T but=-1 butCs=-1] HLa[any=T idx=0 none=F only=F but=0 butCs=0] aH[any=T idx=1 none=F only=F but=0 butCs=0] HH[any=T idx=0 none=F only=T but=-1 butCs=-1] LL[any=T idx=0 none=F only=T but=-1 butCs=-1]
+HH: L[any=F idx=-1 none=T only=F but=0 butCs=0] H[any=T idx=0 none=F only=T but=-1 butCs=-1] HL[any=T idx=0 none=F only=F but=0 butCs=0] aL[any=F idx=-1 none=T only=F but=0 butCs=0] Ha[any=T idx=0 none=F only=F but=1 butCs=1] LH[any=T idx=1 none=F only=F but=0 butCs=0] HLa[any=T idx=0 none=F only=F but=0 butCs=0] aH[any=T idx=1 none=F only=F but=0 butCs=0] HH[any=T idx=0 none=F only=T but=-1 butCs=-1] LL[any=F idx=-1 none=T only=F but=0 butCs=0]
+indexOfIgnoreCase(, "", -1)=0  indexOf(,"",-1)=0
+indexOfIgnoreCase(, "", 0)=0  indexOf(,"",0)=0
+indexOfIgnoreCase(, "", 1)=-1  indexOf(,"",1)=0
+indexOfIgnoreCase(, "", 2)=-1  indexOf(,"",2)=0
+indexOfIgnoreCase(, "", 3)=-1  indexOf(,"",3)=0
+indexOfIgnoreCase(, "", 4)=-1  indexOf(,"",4)=0
+indexOfIgnoreCase(a, "", -1)=0  indexOf(a,"",-1)=0
+indexOfIgnoreCase(a, "", 0)=0  indexOf(a,"",0)=0
+indexOfIgnoreCase(a, "", 1)=1  indexOf(a,"",1)=1
+indexOfIgnoreCase(a, "", 2)=-1  indexOf(a,"",2)=1
+indexOfIgnoreCase(a, "", 3)=-1  indexOf(a,"",3)=1
+indexOfIgnoreCase(a, "", 4)=-1  indexOf(a,"",4)=1
+indexOfIgnoreCase(ab, "", -1)=0  indexOf(ab,"",-1)=0
+indexOfIgnoreCase(ab, "", 0)=0  indexOf(ab,"",0)=0
+indexOfIgnoreCase(ab, "", 1)=1  indexOf(ab,"",1)=1
+indexOfIgnoreCase(ab, "", 2)=2  indexOf(ab,"",2)=2
+indexOfIgnoreCase(ab, "", 3)=-1  indexOf(ab,"",3)=2
+indexOfIgnoreCase(ab, "", 4)=-1  indexOf(ab,"",4)=2

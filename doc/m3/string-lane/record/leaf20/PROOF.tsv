@@ -1,0 +1,33 @@
+method_text_verbatim_in_head	1
+containsAny(char...)	355756	0	-
+containsAny(CharSequence)	341713	0	-
+containsAny(CharSequence...)	1516644	0	-
+containsAnyIgnoreCase(CharSequence...)	1516644	0	-
+containsIgnoreCase	341713	0	-
+containsNone(char...)	355756	0	-
+containsNone(String)	341713	0	-
+containsOnly(char...)	355756	0	-
+containsOnly(String)	341713	0	-
+containsWhitespace	4681	0	-
+indexOfAny(char...)	355756	0	-
+indexOfAny(String)	341713	0	-
+indexOfAny(CharSequence...)	1516644	0	-
+indexOfAnyBut(char...)	355756	0	-
+indexOfAnyBut(CharSequence)	341713	0	-
+lastIndexOfAny(CharSequence...)	1516644	0	-
+indexOfIgnoreCase	341713	0	-
+indexOfIgnoreCase(from)	2733704	0	-
+lastIndexOfIgnoreCase	341713	0	-
+lastIndexOfIgnoreCase(from)	2733704	0	-
+ordinalIndexOf	1366852	0	-
+lastOrdinalIndexOf	1366852	0	-
+startsWithAny	1516644	0	-
+endsWithAny	1516644	0	-
+startsWithIgnoreCase	341713	0	-
+endsWithIgnoreCase	341713	0	-
+containsAllWords	191921	0	-
+discriminator:null char array throws	1	HOLDS
+discriminator:null search throws	1	HOLDS
+discriminator:null element skipped	1	HOLDS
+discriminator:char set vs substring overloads	1	HOLDS
+RESULT	PASS	failures=0
