@@ -3243,19 +3243,6 @@ public final class String
         return this;
     }
 
-    /*
-     * Return true only when the regex source is an ordinary literal whose exact
-     * UTF-16 spelling can be compared directly with M3-backed String storage.
-     * Pattern remains semantic authority for every syntax-bearing expression.
-     */
-    private static boolean isConservativeLiteralRegex(String regex) {
-        for (int index = 0; index < regex.length(); index++) {
-            char unit = regex.charAt(index);
-            if (unit == '\\' || ".^$|?*+()[]{}".indexOf(unit) >= 0) return false;
-        }
-        return true;
-    }
-
     /**
      * The compiled form of the regex argument of {@link #matches}, {@link #replaceFirst},
      * {@link #replaceAll} and {@link #split(String, int)}. A regex is compiled once, stored,
@@ -3321,8 +3308,10 @@ public final class String
     public boolean matches(String regex) {
         Objects.requireNonNull(regex);
         M3String storage = m3();
-        if (storage != null && isConservativeLiteralRegex(regex)) {
-            return storage.contentEquals(regex);
+        // The one literal-regex owner (M3String.literalRegex, rule LITERAL_MATCHES): a literal
+        // matches exactly the String equal to it; equals keeps its O(1) M3 gates.
+        if (storage != null && M3String.isLiteralMatchesRegex(regex)) {
+            return equals(regex);
         }
         if (storage != null) {
             int decision = M3StringRegexDp.tryMatch(storage, regex);

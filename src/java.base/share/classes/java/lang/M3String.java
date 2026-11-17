@@ -1869,18 +1869,47 @@ final class M3String implements CharSequence {
         return joinValues(pieces);
     }
 
+    /** {@link #literalRegex}: a whole-input match of the regex is equality with it. */
+    static final int LITERAL_MATCHES = 1;
+    /** {@link #literalRegex}: find, split and replace see exactly its UTF-16 occurrences. */
+    static final int LITERAL_SEARCH = 2;
+    /** The metacharacters of a java.util.regex pattern outside a class, escape included. */
+    private static final String REGEX_METACHARACTERS = "\\.^$|?*+()[]{}";
+
     /**
-     * Conservative BMP literal subset of regex syntax: non-empty, no metacharacter, no escape
-     * and no surrogate, so {@code Pattern.compile(regex)} can only ever match the literal itself.
+     * The one owner of "this regex is a literal" (compile-time map G7): the literal rules that a
+     * regex compiled without flags meets, as bits.
+     * <ul>
+     * <li>{@link #LITERAL_MATCHES}: no metacharacter and no escape. A whole-input match then
+     *     compares the code points of the regex with those of the input, which are equal exactly
+     *     when the strings are equal: {@code Pattern.matches(regex, s) == regex.equals(s)}, for
+     *     the empty regex and for surrogates too.</li>
+     * <li>{@link #LITERAL_SEARCH}: also non-empty and free of surrogates. Find, split and
+     *     replace then see exactly the non-overlapping occurrences that {@code String.indexOf}
+     *     finds. A surrogate refuses, because regex search walks code points and never starts or
+     *     ends inside a pair; the empty regex refuses, because it matches between all units.</li>
+     * </ul>
+     * {@code null} meets neither rule.
      */
-    static boolean isLiteralRegex(String regex) {
-        if (regex == null || regex.isEmpty()) return false;
+    static int literalRegex(String regex) {
+        if (regex == null) return 0;
+        int rules = regex.isEmpty() ? LITERAL_MATCHES : LITERAL_MATCHES | LITERAL_SEARCH;
         for (int index = 0; index < regex.length(); index++) {
             char unit = regex.charAt(index);
-            // Regex observes code points: UTF-16 substring search can match half a pair.
-            if (Character.isSurrogate(unit) || "\\.^$|?*+()[]{}".indexOf(unit) >= 0) return false;
+            if (REGEX_METACHARACTERS.indexOf(unit) >= 0) return 0;
+            if (Character.isSurrogate(unit)) rules &= ~LITERAL_SEARCH;
         }
-        return true;
+        return rules;
+    }
+
+    /** The regex meets {@link #LITERAL_SEARCH}: find, split and replace are its occurrences. */
+    static boolean isLiteralRegex(String regex) {
+        return (literalRegex(regex) & LITERAL_SEARCH) != 0;
+    }
+
+    /** The regex meets {@link #LITERAL_MATCHES}: a whole-input match is equality with it. */
+    static boolean isLiteralMatchesRegex(String regex) {
+        return (literalRegex(regex) & LITERAL_MATCHES) != 0;
     }
 
     /** Conservative BMP literal subset; all regex/replacement syntax stays in Matcher. */
