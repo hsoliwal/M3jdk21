@@ -36,7 +36,7 @@ public final class CpuToolImageCompiler {
     }
 
     public static CpuToolPlan.Compiled compileTsv(String source) {
-        String[] lines = source.split("\\n", -1);
+        String[] lines = source.split("\n", -1);
         if (lines.length < 2 || !lines[0].equals(HEADER)) {
             throw new IllegalArgumentException("plan header");
         }
@@ -45,7 +45,7 @@ public final class CpuToolImageCompiler {
         for (int index = 1; index < lines.length; index++) {
             String line = lines[index];
             if (index == lines.length - 1 && line.isEmpty()) break;
-            String[] columns = line.split("\\t", -1);
+            String[] columns = line.split("\t", -1);
             if (columns.length != 6 || !columns[0].equals("M3_CPU_TOOL_DAG_V1")) {
                 throw new IllegalArgumentException("invalid tool row " + index);
             }

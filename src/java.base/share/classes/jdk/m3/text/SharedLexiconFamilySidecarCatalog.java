@@ -258,7 +258,7 @@ public final class SharedLexiconFamilySidecarCatalog {
         } catch (CharacterCodingException failure) {
             throw new IOException("sidecar is not valid UTF-8", failure);
         }
-        String[] lines = text.split("\\n", -1);
+        String[] lines = text.split("\n", -1);
         if (lines.length == 0 || !lines[0].equals(String.join("\t", header)))
             throw new IOException("sidecar header mismatch");
         int last = lines.length;

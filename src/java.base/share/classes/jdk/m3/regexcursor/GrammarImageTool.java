@@ -44,7 +44,7 @@ public final class GrammarImageTool {
         HashSet<Integer> lexicalIds = new HashSet<>();
         for (String line : Files.readAllLines(input, StandardCharsets.UTF_8)) {
             if (line.isBlank() || line.startsWith("#")) continue;
-            String[] parts = line.split("\\t", -1);
+            String[] parts = line.split("\t", -1);
             if (parts.length < 2) throw new IllegalArgumentException("malformed lexicon row");
             switch (parts[0]) {
                 case "language" -> {
