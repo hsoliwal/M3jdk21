@@ -37,6 +37,7 @@ make/jdk/src/classes/build/tools/canongate/RegexScope.java	split	af63c44c8601c3c
 make/jdk/src/classes/build/tools/canongate/RegexSiteTable.java	split	af63c44c8601c3c5:1d9b67ed2758e080:1:0	1	single-char-split	baseline-tooling
 make/jdk/src/classes/build/tools/canongate/RegexSpec.java	Pattern.compile	dyn-5508c66662531e00	1	dynamic	baseline-tooling
 make/jdk/src/classes/build/tools/canongate/RegexSpec.java	split	af63c44c8601c3c5:1d9b67ed2758e080:1:0	3	single-char-split	baseline-tooling
+make/jdk/src/classes/build/tools/canongate/RegexSpecCheck.java	split	af63c74c8601c8dc:4c9d94cf0132f43e:1:0	1	single-char-split	baseline-tooling
 make/jdk/src/classes/build/tools/canongate/Scope.java	Pattern.compile	9dc6f2f467bfcc33:24ed8c3eb2ad23d6:159:0	1	regex	baseline-tooling
 make/jdk/src/classes/build/tools/canongate/StampCheck.java	Pattern.compile	0b413a7ff2e9c801:8a43d712be755178:72:0	1	regex	baseline-tooling
 make/jdk/src/classes/build/tools/canongate/StampCheck.java	Pattern.compile	66fc5444edcfb6c7:feddc3315b61df52:16:0	1	regex	baseline-tooling

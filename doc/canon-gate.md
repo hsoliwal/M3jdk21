@@ -10,7 +10,7 @@ violation fails the run, and the final report is rendered from recorded evidence
 bash make/scripts/canon-gate.sh check <packet.tsv>
 bash make/scripts/canon-gate.sh run <packet.tsv> <run-dir> [<root>]
 bash make/scripts/canon-gate.sh selftest
-bash make/scripts/canon-gate.sh <stamp|extension_points|text_refs> <root> <base-ref> <out-dir> [<name>...]
+bash make/scripts/canon-gate.sh <stamp|extension_points|text_refs|regex_spec> <root> <base-ref> <out-dir> [<name>...]
 bash make/scripts/canon-gate.sh regex_sites <root> <out-dir> [<rev>]
 ```
 
@@ -32,7 +32,7 @@ comma-separated. Relative file paths resolve from the packet's directory; target
 | `run.profile` | `fast`, `full` (must include `test`) or `custom` |
 | `run.kind` | `change` (default) or `inventory` (dry-run only; adds the inventory artifacts) |
 | `atom.coverage` | `changed` (default): require every changed/untracked file; `selected`: also require atom rows for all tracked files in the chosen shard |
-| `checks`, `checks.renamed` | optional; `checks` lists [built-in checks](#built-in-checks) (`stamp`, `extension_points`, `text_refs`), `checks.renamed` lists the retired names and is given exactly when `text_refs` is listed |
+| `checks`, `checks.renamed` | optional; `checks` lists [built-in checks](#built-in-checks) (`stamp`, `extension_points`, `text_refs`, `regex_spec`), `checks.renamed` lists the retired names and is given exactly when `text_refs` is listed |
 | `run.workers`, `run.shard_count`, `run.shard_index` | integers; more than one worker or shard requires `compute_resources` |
 | `targets.modules`, `targets.files` | at least one; `.` names the whole repository |
 | `invariant_locks` | must contain `PUBLIC_API:LOCKED,EXTERNAL_BEHAVIOR:LOCKED,DISABLED_PATHS:FORBIDDEN,EXCLUDED_PATHS:FORBIDDEN,BUILD_SCRIPTS:LOCKED` |
@@ -87,6 +87,7 @@ a later stage cannot introduce what `lint` refused and every finding is in `FINA
 | `stamp` | a change that introduces a product stamp: a new path with a stamped segment the base does not have, or an added line with a stamped name that no other line of the tree contains. A stamped name the tree already has is listed as `CARRIED` and does not fail | `STAMP_NEW_PATH <path> <segment>`, `STAMP_NEW_NAME <path>:<line> <name>` | `STAMP_GATE.tsv` |
 | `extension_points` | a new abstract method on an interface or abstract class that exists on both sides of a modified Java file. Default methods and methods with a body are allowed and listed. New types, annotation types, concrete classes, static and private methods are not compared; comments and literals are blanked first | `EXTENSION_ABSTRACT_ADDED <path> <type> <signature>` | `EXTENSION_POINTS.tsv` |
 | `text_refs` | a workflow, make file, build descriptor, script or test list (tracked or untracked, at most 2 MiB) that still contains a name of `checks.renamed` as a whole word; the first such line of each file is reported. Java sources are left to the compiler | `TEXT_REF_STALE <path>:<line> <name>` | `TEXT_REFS.tsv` |
+| `regex_spec` | owner decision 46: a regex call site on an added line of a gated Java file (tracked or untracked) whose pattern has no row in `make/data/m3regex/REGEX_SPEC.tsv`, or that is not listed in `REGEX_SITES.tsv` (the file now has more sites of that call and row than the table lists), and any spec row that fails validation. A site whose call text is on the removed side of the patch is `MOVED` and passes with its row; comments and literals are not sites; sites added to baseline files are listed as `BASELINE` and do not fail | `REGEX_SPEC_NO_ROW <path>:<line> <id>`, `REGEX_SPEC_NO_SITE <path>:<line> <id>`, `REGEX_SPEC_INCOMPLETE`, `REGEX_SPEC_KEY`, `REGEX_SPEC_ORACLE`, `REGEX_SPEC_DUPLICATE` `<table>:<line> <id> <detail>` | `REGEX_SPEC_GATE.tsv` |
 
 `VERIFY_CONTRACT.tsv` has one `check` row per listed check and `PROVENANCE.tsv` a `checks` row with their summaries.
 A finding at the lint stage is also appended to the lint log as `path:line: error: CODE detail`, so it is a row of
@@ -97,6 +98,7 @@ Each check also runs on its own, outside a run:
 bash make/scripts/canon-gate.sh stamp <root> <base-ref> <out-dir>
 bash make/scripts/canon-gate.sh extension_points <root> <base-ref> <out-dir>
 bash make/scripts/canon-gate.sh text_refs <root> <base-ref> <out-dir> <name>...
+bash make/scripts/canon-gate.sh regex_spec <root> <base-ref> <out-dir>
 ```
 
 Exit status 0 no finding, 1 at least one finding (printed, and written to the evidence table in `<out-dir>`), 2 a
@@ -119,7 +121,8 @@ site has a valid row and no row is orphaned, 1 otherwise, 2 for a wrong invocati
 (a build script changes without being named in `targets.files`), `ATOM_PATTERN_SCHEMA`, `ATOM_STALE`, `PATTERN_UNKNOWN`,
 `PATTERN_NOT_ADMITTED`, `ATOM_PLANES_MISSING`, `ATOM_UNCOVERED`, `ATOM_PATTERN_MISSING`, `ATOM_NONREGULAR_ROW`, `ATOM_NONREGULAR_CHANGE`,
 `NON_IDEMPOTENT`, `BASELINE_UNREADABLE`, `OUTPUT_CONTRACT_MISSING`, and from the built-in checks `STAMP_NEW_PATH`,
-`STAMP_NEW_NAME`, `EXTENSION_ABSTRACT_ADDED`, `TEXT_REF_STALE`.
+`STAMP_NEW_NAME`, `EXTENSION_ABSTRACT_ADDED`, `TEXT_REF_STALE`, `REGEX_SPEC_NO_ROW`, `REGEX_SPEC_NO_SITE`,
+`REGEX_SPEC_INCOMPLETE`, `REGEX_SPEC_KEY`, `REGEX_SPEC_ORACLE`, `REGEX_SPEC_DUPLICATE`.
 
 ## Artifacts
 
@@ -127,7 +130,7 @@ Always: `STATUS.tsv` (append-only stage ledger), `RUN_CONTEXT.tsv`, `PROVENANCE.
 locks and the atom check), `OUTPUT_CONTRACT.tsv`, `FINAL_REPORT.md` (files changed, exact delta summary, exact
 verification executed, exact blockers/failures, artifact paths), `BUILD_LOG.tsv` (file, line, column, severity from every
 stage log), `PRE_HASH.tsv`/`POST_HASH.tsv`, `PRE_DIRTY.tsv`/`POST_DIRTY.tsv`, `SHARD_MANIFEST.txt`, `ATOM_CLUSTERS.tsv` and `logs/`.
-Built-in checks add `STAMP_GATE.tsv`, `EXTENSION_POINTS.tsv` and `TEXT_REFS.tsv`. Inventory runs add `INVENTORY.tsv`, `CLUSTERS_EXACT.tsv`, `CLUSTERS_NORMALIZED.tsv`, `ACTION_QUEUE.tsv` and
+Built-in checks add `STAMP_GATE.tsv`, `EXTENSION_POINTS.tsv`, `TEXT_REFS.tsv` and `REGEX_SPEC_GATE.tsv`. Inventory runs add `INVENTORY.tsv`, `CLUSTERS_EXACT.tsv`, `CLUSTERS_NORMALIZED.tsv`, `ACTION_QUEUE.tsv` and
 `SUMMARY.tsv`; every action is proposal-only and carries "These files may be similar. Please confirm via hash or diff."
 
 ## Not enforced by the gate

@@ -2,16 +2,18 @@
 // SPDX-License-Identifier: Apache-2.0
 package build.tools.canongate;
 
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 /**
  * Offline phases for the regex spec (owner decision 46), run by {@link CanonGateTest} on its
  * throw-away repository after its other phases: the site scanner, the content key, the literal
- * cells, the table validation and the generator {@code regex_sites}. Every case fails when the
- * law it names is no longer enforced.
+ * cells, the table validation, the generator {@code regex_sites} and the built-in check
+ * {@code regex_spec}. Every case fails when the law it names is no longer enforced.
  */
 final class RegexSpecTest {
     static final String CODE = "src/Rx.java";
@@ -30,6 +32,8 @@ final class RegexSpecTest {
             "}", "");
     private static final String VENDOR_TEXT =
             "final class V { boolean b(String s) { return s.matches(\"b+\"); } }\n";
+    private static final String AZ =
+            "class Az { boolean a(String s) { return s.matches(\"[a-z]+\"); } }\n";
 
     private RegexSpecTest() {
     }
@@ -40,6 +44,11 @@ final class RegexSpecTest {
         literals();
         validation();
         generator();
+        rowsAndSites();
+        movedLines();
+        notSites();
+        tableAndUntracked();
+        inPacket();
     }
 
     private static void scanner() {
@@ -148,6 +157,128 @@ final class RegexSpecTest {
         CanonGateTest.restore();
         CanonGateTest.write(RegexSpec.SITES, table);
         CanonGateTest.sh("git add -A && " + CanonGateTest.commit("regex-sites"));
+    }
+
+    /** A new site needs a spec row and a listed site; with both it passes. */
+    private static void rowsAndSites() throws Exception {
+        String key = RegexSites.contentKey("[a-z]+", 0);
+        String at = CODE + "\t6\tmatches\t" + key;
+        CanonGateTest.append(CODE, AZ);
+        CanonGateTest.expect(1, gate(), "a new regex without a row");
+        CanonGateTest.contains(gateTable(), "NO_ROW\t" + at, "row missing");
+        String row = row("[a-z]+", "-", RegexSpec.MATCHES, "\"az\"", "\"A\"");
+        CanonGateTest.append(RegexSpec.SPEC, row + "\n");
+        CanonGateTest.expect(1, gate(), "a row but no listed site");
+        CanonGateTest.contains(gateTable(), "NO_SITE\t" + at, "site missing");
+        CanonGateTest.append(RegexSpec.SITES, CODE + "\tmatches\t" + key + "\t1\tregex\tgated\n");
+        CanonGateTest.expect(0, gate(), "a row and a listed site");
+        CanonGateTest.contains(gateTable(), "LISTED\t" + at, "site listed");
+        CanonGateTest.append(CODE, AZ.replace("Az", "Bz"));
+        CanonGateTest.expect(1, gate(), "a second site of the same pattern is not listed");
+        CanonGateTest.restore();
+        Path dynamic = CanonGateTest.base.resolve("dynamic-out");
+        CanonGateTest.append(CODE, "class D { Object d(String o) { return Pattern.compile(o); } }"
+                + "\n");
+        CanonGateTest.expect(1, gate(dynamic), "a new dynamic site without a row");
+        CanonGateTest.contains(dynamic.resolve(RegexSpecCheck.TABLE), "NO_ROW\t" + CODE
+                + "\t6\tPattern.compile\t" + RegexSites.dynamicId("Pattern.compile(o)"),
+                "dynamic site keyed by its call text");
+        CanonGateTest.restore();
+    }
+
+    /** A site moved to another file passes with its row; the same line copied fails. */
+    private static void movedLines() throws Exception {
+        String moved = "src/Moved.java";
+        String hexLine = "    boolean hex(String s) { return s.matches(\"" + HEX + "\"); }\n";
+        CanonGateTest.write(moved, "final class Moved {\n" + hexLine + "}\n");
+        CanonGateTest.expect(1, gate(), "a copied site in a file the site table does not list");
+        CanonGateTest.contains(gateTable(), "NO_SITE\t" + moved + "\t2\tmatches",
+                "a copy is not a move");
+        CanonGateTest.write(CODE, RX.replace(hexLine, ""));
+        CanonGateTest.expect(0, gate(), "a moved site with its row");
+        CanonGateTest.contains(gateTable(), "MOVED\t" + moved + "\t2\tmatches\t"
+                + RegexSites.contentKey(HEX, 0), "moved site listed");
+        CanonGateTest.restore();
+    }
+
+    /** Comments, literals and Matcher replacements add no site; baseline files never fail. */
+    private static void notSites() throws Exception {
+        CanonGateTest.append(CODE, "// s.matches(\"[a-z]+\") in a comment\n"
+                + "class Q { String t = \"s.matches(\\\"[a-z]+\\\")\";\n"
+                + "    String m(java.util.regex.Matcher m) { return m.replaceAll(\"x\"); } }\n");
+        CanonGateTest.expect(0, gate(), "comment, string and Matcher replacement");
+        same(1, Files.readAllLines(gateTable()).size(), "no site judged");
+        CanonGateTest.restore();
+        CanonGateTest.append(VENDOR, AZ);
+        CanonGateTest.expect(0, gate(), "a new site in a vendored file");
+        CanonGateTest.contains(gateTable(), "BASELINE\t" + VENDOR + "\t2\tmatches",
+                "baseline site listed");
+        CanonGateTest.restore();
+    }
+
+    /** Every row is validated, and an untracked file is all added lines. */
+    private static void tableAndUntracked() throws Exception {
+        CanonGateTest.write(RegexSpec.SPEC, spec(true).replace("\"a\\tb\"", "\"ab\""));
+        CanonGateTest.expect(1, gate(), "an example the oracle refuses");
+        CanonGateTest.contains(gateTable(), "ORACLE\t" + RegexSpec.SPEC + "\t3\t-\t"
+                + RegexSites.contentKey("\t", 0), "row problem with its table line");
+        CanonGateTest.restore();
+        CanonGateTest.write("src/New.java", "final class New {\n"
+                + "    boolean n(String s) { return s.matches(\"x+y\"); }\n}\n");
+        CanonGateTest.expect(1, gate(), "an untracked file with a site without a row");
+        CanonGateTest.contains(gateTable(), "NO_ROW\tsrc/New.java\t2\tmatches", "untracked site");
+        CanonGateTest.restore();
+        String repo = CanonGateTest.repo.toString();
+        String out = CanonGateTest.base.resolve("regex-spec").toString();
+        CanonGateTest.expect(2, CanonGate.execute(new String[] {"regex_spec", repo, "HEAD"},
+                CanonGateTest.quiet()), "missing output directory");
+        String[] names = {"regex_spec", repo, "HEAD", out, "x"};
+        CanonGateTest.expect(2, CanonGate.execute(names, CanonGateTest.quiet()),
+                "names given to a check that takes none");
+    }
+
+    /** Listed in a packet, the check fails lint and its finding is a build log row. */
+    private static void inPacket() throws Exception {
+        CanonGateTest.append(CODE, AZ);
+        Map<String, String> p = packet(CODE);
+        p.put("verify.compile", "touch \"$CANON_RUN_DIR/compiled\"");
+        CanonGateTest.expect(1, CanonGateTest.run(p, "regex-no-row"),
+                "packet with a site without a row");
+        Path dir = CanonGateTest.base.resolve("runs/regex-no-row");
+        String key = RegexSites.contentKey("[a-z]+", 0);
+        CanonGateTest.contains(dir.resolve("FINAL_REPORT.md"),
+                "REGEX_SPEC_NO_ROW " + CODE + ":6 " + key, "violation in the final report");
+        CanonGateTest.contains(dir.resolve("BUILD_LOG.tsv"),
+                "lint\t" + CODE + "\t6\t-\terror\tREGEX_SPEC_NO_ROW " + key,
+                "finding is a build log row");
+        CanonGateTest.contains(dir.resolve("STATUS.tsv"), "\tlint\tFAIL\t", "finding fails lint");
+        if (Files.exists(dir.resolve("compiled"))) {
+            throw new AssertionError("compile ran after a regex spec finding");
+        }
+        CanonGateTest.restore();
+        CanonGateTest.append(CODE, "// a comment only\n");
+        CanonGateTest.expect(0, CanonGateTest.run(packet(CODE), "regex-clean"),
+                "packet with no new site");
+        CanonGateTest.contains(CanonGateTest.base.resolve("runs/regex-clean/VERIFY_CONTRACT.tsv"),
+                "check\tregex_spec\tno finding\tPASS", "check row in the verify contract");
+        CanonGateTest.restore();
+    }
+
+    private static Map<String, String> packet(String... changed) throws IOException {
+        Map<String, String> p = CanonGateTest.apply(CanonGateTest.atoms("VALUE_OBJECT", changed));
+        p.put("targets.modules", "src,lib,make");
+        p.put("checks", "regex_spec");
+        return p;
+    }
+
+    private static int gate(Path... out) {
+        Path dir = out.length == 0 ? CanonGateTest.base.resolve("regex-spec") : out[0];
+        return CanonGate.execute(new String[] {"regex_spec", CanonGateTest.repo.toString(), "HEAD",
+                dir.toString()}, CanonGateTest.quiet());
+    }
+
+    private static Path gateTable() {
+        return CanonGateTest.base.resolve("regex-spec").resolve(RegexSpecCheck.TABLE);
     }
 
     private static int sites(Path out, String... rev) {

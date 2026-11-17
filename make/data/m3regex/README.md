@@ -3,7 +3,8 @@
 Owner decision 46: every regex carries a spec row with its id, pattern, flavour, language and
 version, source, licence, positive and negative examples, and oracle. A regex without a row fails a
 gate. These tables are the rows. The canon gate in `make/jdk/src/classes/build/tools/canongate`
-reads them, and its command `regex_sites` generates the site table from the source tree.
+reads them, and its command `regex_sites` generates the site table from the source tree. Its
+built-in check `regex_spec` refuses a change that adds a regex without a row.
 
 | File | Kind | Content |
 | --- | --- | --- |
@@ -79,6 +80,25 @@ outside it too.
 5. Repeat until `regex_sites` exits 0. Exit status 0 means every site has a valid row and no row is
    orphaned, 1 means one of these conditions failed, and 2 means a wrong invocation or a read failure.
 
+## Gate
+
+The canon gate's built-in check `regex_spec` enforces the spec on changes:
+`bash make/scripts/canon-gate.sh regex_spec <root> <base-ref> <out-dir>`, or `checks regex_spec` in a task
+packet. It validates every row of `REGEX_SPEC.tsv`. Then it scans each gated Java file that the patch from
+`<base-ref>` adds lines to, and each untracked one, and judges every site that has a line on the added side:
+
+| Finding | Meaning | Fails |
+| --- | --- | --- |
+| `NO_ROW` | no spec row has the site's id | yes |
+| `NO_SITE` | the file now has more sites of that call and id than `REGEX_SITES.tsv` lists for it | yes |
+| `MOVED` | the same call text is on the removed side of the patch, and the row exists | no |
+| `LISTED` | the row exists and the site is listed | no |
+| `BASELINE` | a site added to a baseline file | no |
+| `INCOMPLETE`, `KEY`, `ORACLE`, `DUPLICATE` | a spec row fails validation | yes |
+
+The findings are written to `REGEX_SPEC_GATE.tsv`. Sites that are already on master are carried until a
+change touches their lines.
+
 ## Counts at generation
 
 The tables were generated from M3jdk21 master `6b2c6e5d25e` with the leaf that changed six `\\t` and
@@ -88,8 +108,8 @@ The tables were generated from M3jdk21 master `6b2c6e5d25e` with the leaf that c
 | --- | --- | --- |
 | gated | 177 (127 regex, 2 literal-only, 36 single-char-split, 12 dynamic) | |
 | baseline-provider | 172 (100 regex, 12 literal-only, 50 single-char-split, 10 dynamic) | |
-| baseline-tooling | 73 (37 regex, 2 literal-only, 32 single-char-split, 2 dynamic) | |
-| total | 422 | 195 |
+| baseline-tooling | 74 (37 regex, 2 literal-only, 33 single-char-split, 2 dynamic) | |
+| total | 423 | 196 |
 
 These sites give 230 rows: 212 literal rows with 813 examples verified by `java.util.regex` on JDK
 21.0.9, and 18 dynamic rows with `TODO`.
