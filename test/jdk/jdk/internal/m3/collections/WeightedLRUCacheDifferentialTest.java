@@ -61,7 +61,11 @@ public class WeightedLRUCacheDifferentialTest {
             + "a key's equals changed the cache";
     static final String WALK_CME = "threw java.util.ConcurrentModificationException: "
             + "the removeIf predicate removed a resident under the walk";
+    static final String HASH_CME = "threw java.util.ConcurrentModificationException: "
+            + "a key's hashCode changed the cache";
     static final Field KEY_LANE = keyLane();
+    static final Field STAMP_LANE = field("stampLane");
+    static final Field INDEX = field("index");
 
     static void same(Object expected, Object actual, String what) {
         checks++;
@@ -98,7 +102,8 @@ public class WeightedLRUCacheDifferentialTest {
         String expected = outcome(0, reference);
         String actual = outcome(1, lanes);
         if (!expected.equals(actual)
-                && (actual.equals(EQUALS_CME) || expected.startsWith("threw ")
+                && (actual.equals(EQUALS_CME) || actual.equals(HASH_CME)
+                        || expected.startsWith("threw ")
                         && actual.startsWith("threw java.util.ConcurrentModificationException"))) {
             checks++;
             return DIVERGED;
@@ -223,6 +228,101 @@ public class WeightedLRUCacheDifferentialTest {
         }
     }
 
+    static Field field(String name) {
+        try {
+            Field f = WeightedLRUCache.class.getDeclaredField(name);
+            f.setAccessible(true);
+            return f;
+        } catch (NoSuchFieldException e) {
+            throw new AssertionError(e);
+        }
+    }
+
+    /**
+     * The lanes' own invariants, checked whatever the reference did: every resident counted once
+     * and on the recency list, no two equal, stamps unique and nonzero on residents and 0 on free
+     * slots, the index sized for the lanes. Lanes above 64 slots are checked every 7 steps, above
+     * 256 every 97, above 4,096 every 997.
+     */
+    static void lanesSound(String at, WeightedLRUCache<Key, String> cache, int step) {
+        try {
+            Object[] keys = (Object[]) KEY_LANE.get(cache);
+            int every = keys.length <= 64 ? 1 : keys.length <= 256 ? 7
+                    : keys.length <= 4_096 ? 97 : 997;
+            if (step % every != 0) {
+                return;
+            }
+            int[] stamps = (int[]) STAMP_LANE.get(cache);
+            // keys equal by id with different hashes break the hashCode contract (the tests make
+            // them on purpose); HashMap holds those twice too, so equal means same id and hash
+            long[] ids = new long[keys.length];
+            long[] residentStamps = new long[keys.length];
+            int residents = 0;
+            boolean freeStampsZero = true;
+            boolean stampsNonzero = true;
+            for (int slot = 0; slot < keys.length; slot++) {
+                if (keys[slot] == null) {
+                    freeStampsZero &= stamps[slot] == 0;
+                } else {
+                    Key k = (Key) keys[slot];
+                    ids[residents] = (long) k.id() << 32 | k.hash() & 0xFFFF_FFFFL;
+                    stampsNonzero &= stamps[slot] != 0;
+                    residentStamps[residents++] = stamps[slot];
+                }
+            }
+            same(cache.size(), residents, at + " lanes: residents counted once");
+            same(cache.size(), cache.keysInLruOrder().size(), at + " lanes: recency list");
+            same(true, freeStampsZero, at + " lanes: free slots have stamp 0");
+            same(true, distinct(ids, residents), at + " lanes: no two equal residents");
+            same(true, stampsNonzero && distinct(residentStamps, residents),
+                    at + " lanes: resident stamps unique and nonzero");
+            same(indexLength(keys.length, cache.maxEntries()), ((int[]) INDEX.get(cache)).length,
+                    at + " lanes: index length");
+        } catch (IllegalAccessException e) {
+            throw new AssertionError(e);
+        }
+    }
+
+    static boolean distinct(long[] values, int n) {
+        long[] sorted = java.util.Arrays.copyOf(values, n);
+        java.util.Arrays.sort(sorted);
+        for (int i = 1; i < n; i++) {
+            if (sorted[i] == sorted[i - 1]) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /** The index length grow() gives lanes of this length (none for dropped lanes). */
+    static int indexLength(int lanes, int maxEntries) {
+        if (lanes == 0) {
+            return 0;
+        }
+        long cells = Math.max(2 * Math.min(lanes, (long) maxEntries), lanes + 1L);
+        return 1 << (64 - Long.numberOfLeadingZeros(cells - 1));
+    }
+
+    /**
+     * A key whose hashCode puts an equal key into a cache that never admitted a key: the outer put
+     * gets a ConcurrentModificationException and the cache holds the inner key once.
+     */
+    static void firstAdmissionHashReentry() {
+        WeightedLRUCache<Key, String> cache =
+                new WeightedLRUCache<>(8, 100L, weigher(1)::weightOf);
+        Key outer = new Key(7, 7, false);
+        HOOK_KEY[1] = outer;
+        HASH_HOOK[1] = () -> cache.put(new Key(7, 7, false), "inner");
+        same(HASH_CME, outcome(1, () -> cache.put(outer, "outer")),
+                "first admission: hashCode puts an equal key");
+        HOOK_KEY[1] = null;
+        same(1, cache.size(), "first admission: one resident");
+        lanesSound("first admission", cache, 0);
+        same(true, cache.containsKey(outer), "first admission: the inner key is resident");
+        cache.remove(outer);
+        same(false, cache.containsKey(outer), "first admission: removed once, gone");
+    }
+
     /** The length of the lanes: 0 once an emptied cache dropped them. */
     static int lanes(WeightedLRUCache<?, ?> cache) {
         try {
@@ -242,6 +342,8 @@ public class WeightedLRUCacheDifferentialTest {
         run(99L, 200_000, 4_000, 1_000_000L, 0, 1);
         run(100L, 100_000, 1, 10L, 1, 1);
         run(101L, 30_000, 70_000, Long.MAX_VALUE / 4, 0, 997);
+        run(102L, 20_000, 8, 2_000L, 2, 1); // a power of two: the index for the extra slot
+        firstAdmissionHashReentry();
         System.out.println("WeightedLRUCacheDifferentialTest: " + checks + " checks passed, "
                 + restarts + " restarts");
     }
@@ -306,6 +408,7 @@ public class WeightedLRUCacheDifferentialTest {
             String outcome = !big && random.nextInt(9) == 0
                     ? mutating(random, at, key, other, value, ref, cache, refActions, laneActions)
                     : step(random, at, key, value, maxEntries, maxWeight, ref, cache, big);
+            lanesSound(at, cache, step);
             if (outcome.equals(DIVERGED)) {
                 restarts++;
                 return step + 1;

@@ -35,16 +35,18 @@ import java.util.function.Predicate;
  * list as two {@code int} lanes of slot indices and an open-addressing {@code int} index from a
  * key's hash to its slot; there is no node or map entry object per resident. Freed slots are
  * reused, the lanes double up to {@code maxEntries + 1} slots (at most 2<sup>29</sup>) and are
- * dropped when the cache empties (clear, trim, removeIf or the removal of the last resident), and
- * a key's {@code hashCode} is not called again after it was admitted. Access order does not depend
- * on {@code LinkedHashMap} callbacks and trim operations return precise eviction evidence.</p>
+ * dropped when an operation empties the cache (clear, trim, removeIf or the removal of the last
+ * resident), and the index never calls a resident's {@code hashCode} again (the hashes are kept).
+ * Access order does not depend on {@code LinkedHashMap} callbacks and trim operations return
+ * precise eviction evidence.</p>
  *
  * <p>2026-11-17: storage rewritten onto array lanes (arrayify, leaf 1). Every method keeps its
  * results, recency order, counters and exceptions for keys that obey {@code equals} and
  * {@code hashCode}; {@code compareTo} is never consulted. Lookups call {@code hashCode} as
  * {@code HashMap} did; evictions and {@code removeIf} no longer call {@code hashCode} or
- * {@code equals} on the keys they remove. A key whose {@code equals} changes the cache during a
- * lookup gets a {@code ConcurrentModificationException}, and so does a {@code removeIf} predicate
+ * {@code equals} on the keys they remove. A key whose {@code equals} adds or removes a resident
+ * during a lookup, or whose {@code hashCode} does so while the key is admitted, gets a
+ * {@code ConcurrentModificationException}, and so does a {@code removeIf} predicate
  * that frees the next resident of its walk or the resident it then matches; the node version
  * failed there or went on over detached nodes.</p>
  *
@@ -511,7 +513,7 @@ public final class WeightedLRUCache<K, V> {
      * The slot of a resident with the given hash and equal to {@code key} ({@code
      * key.equals(resident)}), or NONE.
      *
-     * @throws ConcurrentModificationException if a key's {@code equals} changes the cache
+     * @throws ConcurrentModificationException if a key's {@code equals} adds or removes a resident
      */
     private int find(Object key, int hash) {
         if (size == 0) {
@@ -540,8 +542,13 @@ public final class WeightedLRUCache<K, V> {
 
     /** Stores a new resident in a free slot and indexes it; not yet in the recency list. */
     private int admit(K key, V value, long entryWeight) {
-        // hashed first: a hashCode that throws or calls back into the cache finds no slot taken
+        // hashed first: a hashCode that throws finds no slot taken; one that adds or removes a
+        // resident gets a CME (an equal key admitted meanwhile would be resident twice)
+        int seen = structure;
         int hash = key.hashCode();
+        if (structure != seen) {
+            throw new ConcurrentModificationException("a key's hashCode changed the cache");
+        }
         int slot = takeSlot();
         keyLane[slot] = key;
         valueLane[slot] = value;
