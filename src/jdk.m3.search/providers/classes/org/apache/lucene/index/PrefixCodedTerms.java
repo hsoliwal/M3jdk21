@@ -33,7 +33,6 @@ import org.apache.lucene.util.StringHelper;
  *
  * @lucene.internal
  */
-@SuppressWarnings("deprecation")
 public class PrefixCodedTerms implements Accountable {
   private final List<ByteBuffer> content;
   private final long size;

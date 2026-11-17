@@ -47,7 +47,7 @@ import org.apache.lucene.util.Version;
  * in the same order to the other indexes. <em>Failure to do so will result in undefined
  * behavior</em>.
  */
-@SuppressWarnings({"deprecation", "this-escape"})
+@SuppressWarnings("this-escape")
 public class ParallelLeafReader extends LeafReader {
   private final FieldInfos fieldInfos;
   private final LeafReader[] parallelReaders, storedFieldsReaders;

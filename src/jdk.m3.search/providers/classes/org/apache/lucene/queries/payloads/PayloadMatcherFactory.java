@@ -28,7 +28,7 @@ import org.apache.lucene.util.BytesRef;
  * Creates a payload matcher object based on a payload type and an operation. PayloadTypes of
  * INT,FLOAT, or STRING are supported. Inequality operations are supported.
  */
-@SuppressWarnings({"deprecation", "missing-explicit-ctor"})
+@SuppressWarnings("missing-explicit-ctor")
 public class PayloadMatcherFactory {
 
   private static final EnumMap<PayloadType, EnumMap<MatchOperation, PayloadMatcher>>

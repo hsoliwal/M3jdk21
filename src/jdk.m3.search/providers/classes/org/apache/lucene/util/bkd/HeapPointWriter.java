@@ -26,7 +26,6 @@ import org.apache.lucene.util.BytesRef;
  *
  * @lucene.internal
  */
-@SuppressWarnings("deprecation")
 public final class HeapPointWriter implements PointWriter {
   private final byte[] block;
   final int size;

@@ -40,7 +40,6 @@ import org.apache.lucene.util.packed.PackedLongValues;
  * Buffers up pending byte[]s per doc, deref and sorting via int ord, then flushes when segment
  * flushes.
  */
-@SuppressWarnings("deprecation")
 class SortedSetDocValuesWriter extends DocValuesWriter<SortedSetDocValues> {
   final BytesRefHash hash;
   private final PackedLongValues.Builder pending; // stream of all termIDs

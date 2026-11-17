@@ -45,7 +45,6 @@ import org.apache.lucene.util.IOUtils;
  *
  * @lucene.experimental
  */
-@SuppressWarnings("deprecation")
 public final class SegmentReader extends CodecReader {
 
   private final SegmentCommitInfo si;

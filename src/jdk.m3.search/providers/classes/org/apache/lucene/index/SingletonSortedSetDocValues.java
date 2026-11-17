@@ -25,7 +25,6 @@ import org.apache.lucene.util.BytesRef;
  * <p>This can be used if you want to have one multi-valued implementation that works for single or
  * multi-valued types.
  */
-@SuppressWarnings("deprecation")
 final class SingletonSortedSetDocValues extends SortedSetDocValues {
   private final SortedDocValues in;
   private long ord;

@@ -34,7 +34,6 @@ import org.apache.lucene.util.compress.LZ4;
  *
  * @lucene.experimental
  */
-@SuppressWarnings("deprecation")
 public abstract class CompressionMode {
 
   /**

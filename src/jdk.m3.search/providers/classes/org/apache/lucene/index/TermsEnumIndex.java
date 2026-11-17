@@ -29,7 +29,6 @@ import org.apache.lucene.util.BytesRefBuilder;
  * the current position of the {@link TermsEnum} must be performed via this wrapper class, not
  * directly on the wrapped {@link TermsEnum}.
  */
-@SuppressWarnings("deprecation")
 class TermsEnumIndex {
 
   static final TermsEnumIndex[] EMPTY_ARRAY = new TermsEnumIndex[0];

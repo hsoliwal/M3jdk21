@@ -46,7 +46,6 @@ import org.apache.lucene.util.NumericUtils;
  *
  * @see SortedNumericSelector
  */
-@SuppressWarnings("deprecation")
 public class SortedNumericSortField extends SortField {
 
   private final SortedNumericSelector.Type selector;

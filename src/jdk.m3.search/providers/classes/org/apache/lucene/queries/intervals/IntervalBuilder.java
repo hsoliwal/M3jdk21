@@ -65,7 +65,6 @@ import org.apache.lucene.util.graph.GraphTokenStreamFiniteStrings;
  * @see
  *     "https://github.com/elastic/elasticsearch/blob/7.10/server/src/main/java/org/elasticsearch/index/query/IntervalBuilder.java"
  */
-@SuppressWarnings("deprecation")
 final class IntervalBuilder {
   static IntervalsSource analyzeText(CachingTokenFilter stream, int maxGaps, boolean ordered)
       throws IOException {

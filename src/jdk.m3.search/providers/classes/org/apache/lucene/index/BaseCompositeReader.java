@@ -45,7 +45,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @see MultiReader
  * @lucene.internal
  */
-@SuppressWarnings({"deprecation", "this-escape"})
+@SuppressWarnings("this-escape")
 public abstract class BaseCompositeReader<R extends IndexReader> extends CompositeReader {
   private final R[] subReaders;
 

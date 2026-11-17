@@ -21,7 +21,6 @@ import java.io.IOException;
 import org.apache.lucene.search.KnnCollector;
 import org.apache.lucene.util.Bits;
 
-@SuppressWarnings("deprecation")
 abstract class DocValuesLeafReader extends LeafReader {
   @Override
   public final CacheHelper getCoreCacheHelper() {

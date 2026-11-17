@@ -39,7 +39,7 @@ import org.apache.lucene.util.Unwrappable;
  * reader, you could consider delegating calls to {@link #getCoreCacheHelper()} and {@link
  * #getReaderCacheHelper()}.
  */
-@SuppressWarnings({"deprecation", "this-escape"})
+@SuppressWarnings("this-escape")
 public abstract class FilterLeafReader extends LeafReader {
 
   /**

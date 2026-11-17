@@ -36,7 +36,6 @@ import org.apache.lucene.util.ArrayUtil;
 import org.apache.lucene.util.BytesRef;
 import org.apache.lucene.util.IOUtils;
 
-@SuppressWarnings("deprecation")
 final class SortingStoredFieldsConsumer extends StoredFieldsConsumer {
 
   static final CompressionMode NO_COMPRESSION =

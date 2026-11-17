@@ -53,7 +53,6 @@ import org.apache.lucene.util.packed.DirectMonotonicReader;
 import org.apache.lucene.util.packed.DirectReader;
 
 /** reader for {@link Lucene90DocValuesFormat} */
-@SuppressWarnings("deprecation")
 final class Lucene90DocValuesProducer extends DocValuesProducer {
   private final Map<String, NumericEntry> numerics;
   private final Map<String, BinaryEntry> binaries;
