@@ -26,6 +26,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Map;
+import java.util.NoSuchElementException;
 import java.util.function.Predicate;
 
 import jdk.m3.collections.apache.CollectionUtils;
@@ -75,6 +76,148 @@ public class LinkedMap<K, V> extends AbstractLinkedMap<K, V> implements Serializ
      * List view of map.
      */
     static class LinkedMapList<K> extends AbstractList<K> {
+
+        /**
+         * List iterator over the keys of a plain {@code LinkedMap} that follows the entry links:
+         * one link per step while the map's {@code modCount} is unchanged, the entry found again
+         * by index after a change. It returns and throws what {@code AbstractList}'s iterator
+         * does through {@code get(int)} and, like it, never throws
+         * {@code ConcurrentModificationException}. Its mutators are never reached, as
+         * {@code UnmodifiableListIterator} throws first.
+         *
+         * @param <K> The type of the keys
+         */
+        private static final class LinkWalkIterator<K> implements ListIterator<K> {
+
+            /** The map whose entry links are followed. */
+            private final LinkedMap<K, ?> parent;
+
+            /** The index of the key next() returns, as in AbstractList; never negative. */
+            private int cursor;
+
+            /** The entry at cursor (the header at the size), or null to find it again. */
+            private LinkEntry<K, ?> next;
+
+            /** The map's modCount when next was found. */
+            private int expectedModCount;
+
+            LinkWalkIterator(final LinkedMap<K, ?> parent, final int cursor) {
+                this.parent = parent;
+                this.cursor = cursor;
+            }
+
+            @Override
+            public void add(final K obj) {
+                throw new UnsupportedOperationException();
+            }
+
+            @Override
+            public boolean hasNext() {
+                return cursor != parent.size();
+            }
+
+            @Override
+            public boolean hasPrevious() {
+                return cursor != 0;
+            }
+
+            @Override
+            public K next() {
+                if (!positioned() || next == parent.header) {
+                    return nextByIndex();
+                }
+                final K key = next.getKey();
+                next = next.after;
+                cursor++;
+                return key;
+            }
+
+            /**
+             * AbstractList's next(): the key at cursor by get(int), its
+             * IndexOutOfBoundsException the cause of the NoSuchElementException.
+             *
+             * @return The key at cursor
+             */
+            private K nextByIndex() {
+                final int i = cursor;
+                try {
+                    final K key = parent.get(i);
+                    cursor = i + 1;
+                    next = null;
+                    return key;
+                } catch (final IndexOutOfBoundsException e) {
+                    throw new NoSuchElementException(e);
+                }
+            }
+
+            @Override
+            public int nextIndex() {
+                return cursor;
+            }
+
+            /**
+             * Tests whether next is the entry at cursor, finding it again after a change of
+             * the map: by getEntry(int)'s shorter walk below the size, the header at the size,
+             * none past it.
+             *
+             * @return Whether next is the entry at cursor
+             */
+            private boolean positioned() {
+                if (next != null && expectedModCount == parent.modCount) {
+                    return true;
+                }
+                expectedModCount = parent.modCount;
+                if (cursor < parent.size) {
+                    next = parent.getEntry(cursor);
+                } else {
+                    next = cursor == parent.size ? parent.header : null;
+                }
+                return next != null;
+            }
+
+            @Override
+            public K previous() {
+                if (!positioned() || cursor == 0) {
+                    return previousByIndex();
+                }
+                next = next.before;
+                cursor--;
+                return next.getKey();
+            }
+
+            /**
+             * AbstractList's previous(): the key before cursor by get(int), its
+             * IndexOutOfBoundsException the cause of the NoSuchElementException.
+             *
+             * @return The key before cursor
+             */
+            private K previousByIndex() {
+                final int i = cursor - 1;
+                try {
+                    final K key = parent.get(i);
+                    cursor = i;
+                    next = null;
+                    return key;
+                } catch (final IndexOutOfBoundsException e) {
+                    throw new NoSuchElementException(e);
+                }
+            }
+
+            @Override
+            public int previousIndex() {
+                return cursor - 1;
+            }
+
+            @Override
+            public void remove() {
+                throw new UnsupportedOperationException();
+            }
+
+            @Override
+            public void set(final K obj) {
+                throw new UnsupportedOperationException();
+            }
+        }
 
         private final LinkedMap<K, ?> parent;
 
@@ -129,7 +272,28 @@ public class LinkedMap<K, V> extends AbstractLinkedMap<K, V> implements Serializ
 
         @Override
         public ListIterator<K> listIterator(final int fromIndex) {
-            return UnmodifiableListIterator.unmodifiableListIterator(super.listIterator(fromIndex));
+            // a subclass may override get(int), size() or the links: AbstractList's iterator
+            final ListIterator<K> iterator;
+            if (parent.getClass() == LinkedMap.class) {
+                iterator = new LinkWalkIterator<>(parent, checkIteratorIndex(fromIndex));
+            } else {
+                iterator = super.listIterator(fromIndex);
+            }
+            return UnmodifiableListIterator.unmodifiableListIterator(iterator);
+        }
+
+        /**
+         * Checks the index of {@link #listIterator(int)} as {@code AbstractList} does.
+         *
+         * @param index The index of the key the iterator returns first
+         * @return The index
+         * @throws IndexOutOfBoundsException if {@code index < 0 || index > size()}
+         */
+        private int checkIteratorIndex(final int index) {
+            if (index < 0 || index > size()) {
+                throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + size());
+            }
+            return index;
         }
 
         /**
