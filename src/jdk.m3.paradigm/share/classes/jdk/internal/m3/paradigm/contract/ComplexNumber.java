@@ -32,7 +32,7 @@ package jdk.internal.m3.paradigm.contract;
  * blob {@code 11b3f87004bdc7999e30b09e4c50e03a96d77844} at com.synexia develop {@code 8ab80ea57d9f} by
  * RELOCATE_M3_OWNER v4 (paradigm IOP batch (jdk.m3.paradigm, contract) v6.3: identifiers and package only; bytecode equal to the source modulo names).
  */
-public record ComplexNumber(double real, double imag) {
+public record ComplexNumber(double real, double imag) implements IArithmeticDefaults<ComplexNumber> {
 
     /** Zero complex number.
      * @m3.pattern synexia:fop

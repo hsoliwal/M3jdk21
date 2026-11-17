@@ -5,12 +5,13 @@
 | Field | Value |
 | --- | --- |
 | Proposal | `M3JEP-LANG-001` (Synexia internal, **not** an OpenJDK JEP number) |
-| State | **Draft / implementation HOLD** |
+| State | **Draft / library named-default candidate; symbolic lowering HOLD** |
 | Author | Hitesh Soliwal and contributors to the Synexia Project |
 | Kind | M3JDK21 opt-in feature candidate |
 | Inspiration | Kotlin, Scala, C++ (ideas only; no third-party source copied) |
 | Owning component | `javac_m3_frontend` |
 | First receiving stage | `AST_COMPILER` |
+| Candidate product library | `jdk.m3.paradigm/jdk.internal.m3.paradigm.contract` |
 | Canonical catalogue ID | `LANG-001` |
 
 ## Summary
@@ -41,6 +42,39 @@ The Kotlin, Scala, C++ ecosystem motivates the **operators** problem category. M
 4. Preserve the baseline safeguard: **unchanged java21 operator resolution**. Specify null, error paths, side effects, evaluation order, generics/bridges and binary descriptors before lowering.
 5. Record source hashes, inferred atom/logic/structural fingerprints and a qualified versioned owner. Hash or SimHash similarity is evidence only, never equivalence.
 
+## Independent default-method capabilities
+
+An initial Java 21-compatible library candidate uses **existing** virtual arithmetic methods as semantic owners. It introduces no new Java operator grammar and never redefines built-in operations:
+
+| Future M3 expression | Opt-in interface | Existing hook | Java default alias |
+| --- | --- | --- | --- |
+| `left + right` | `IAdditive<T>` | `add(T)` | `plus(T)` |
+| `left - right` | `ISubtractive<T>` | `subtract(T)` | `minus(T)` |
+| `left * right` | `IMultiplicative<T>` | `multiply(T)` | `times(T)` |
+| `left / right` | `IDivisible<T>` | `divide(T)` | `div(T)` |
+| `left % right` | `IRemainder<T>` | `remainder(T)` | `rem(T)` |
+
+`IArithmeticDefaults<T>` combines only the first three, so independent operations remain available to partial implementations. Each default performs exactly one ordinary Java virtual call. Classes may override an alias using existing Java class-over-interface dispatch precedence. Division and remainder have no universal mathematical fallback, so they remain separate. No implicit conversion, boxing, mutation, checked exception, or public `java.lang.Object` extension is introduced.
+
+The existing **final** `ComplexNumber` record supports the first three by implementing the composite interface without changing its methods, components, constructor or record-final status. Other final types can use a separate explicitly selected adapter. `Object.toAdapter(Class)` and the existing `toAdpater(Class)` alias are preserved but are **not** automatically searched for operators; adapter ambiguity must fail closed at compile time. Method names are a Java API facility; the symbolic syntax above is reserved for a later typed M3-only compiler.
+
+## Collection and array operators: separate opt-in contracts
+
+Collections make overloading inherently non-uniform. The compiler must distinguish **structural composition** from element arithmetic and from mutation:
+
+| Type family | Potential M3 operator | Required explicit contract | Initial status |
+| --- | --- | --- | --- |
+| `List<E>`, ordered sequences | `a + b` | Ordered concatenation into a new logical composition, maintaining source order and duplicates | Design HOLD |
+| `Set<E>` | Union, intersection, difference, symmetric difference | Typed set algebra; preserve equality, iteration/comparator contracts | Design HOLD |
+| `Map<K,V>` | `a + b` | Explicit key collision policy and retention of map ordering/comparator semantics | No implicit default |
+| Primitive/offset arrays | `a + b` | Explicit concatenation view or materialization policy, bounds, aliasing, copy/JNI ownership | Design HOLD |
+| Numeric vectors/matrices | `a + b` | Element-wise typed arithmetic, shape/broadcast contract and overflow/rounding policy | Design HOLD |
+| Indexed containers | `a[i]` | Explicit read/write capability, index type, bounds and side-effect rules | Design HOLD |
+
+Candidate M3 set symbols are `|` for union, `&` for intersection, `-` for difference, and `^` for symmetric difference; these are not implemented or assigned to ordinary Java 21 sets. For an M3 list, concatenation should use the existing offset/range/segment composition substrate when possible; parent-owned dynamic arrays, bit masks, lazy materialization and memory-pressure residency must not change what callers observe. A mutable `add` operation cannot silently implement a pure `+` expression. A `Set` must not inherit `List` concatenation semantics by accident. An array `+` must not change Java's built-in numeric or string-concatenation behavior. Generic erasure, covariant arrays, nullable elements, comparator identity, iterator invalidation, concurrent modifications, and serialization are mandatory differential test cases.
+
+Future symbols are enabled only by explicit M3 language mode and an attributed, unambiguous capability or adapter match. A `List`/matrix ambiguity, `Map` collision without a policy, absent capability, or uncertain effect contract is a compile-time diagnostic—not a guessed overload. Ordinary Java 21 collection code remains byte-for-byte and behaviorally compatible.
+
 ## Compatibility
 
 The baseline is Java 21, including source and binary compatibility, verifier/linkage/reflection, JNI and GC, serialization, exception order and public API identity. The proposal is an *additive superset*, not a source-level reinterpretation.
@@ -50,6 +84,7 @@ The baseline is Java 21, including source and binary compatibility, verifier/lin
 - Mandatory differential oracle: **typed dispatch overflow null and effect order**.
 - Separate obligations: **JDK21 source, binary and observable effect compatibility**.
 - Unsupported mapping must fail closed with an attributed diagnostic, not silently select another operator, method or representation.
+- Source-first JDK sequencing is still `String → arrays → collections → AST/compiler → remaining`; the library candidate cannot authorize premature symbolic compiler promotion.
 
 ## Alternatives
 
@@ -61,9 +96,12 @@ Keep the present Java 21 API/library expression unchanged; provide explicit help
 2. Add simple, boundary, hostile and pathological tests for **typed dispatch overflow null and effect order**; retain exact source/output hashes and minimal failure counterexamples.
 3. Execute source-sealed Maven/OpenRewrite recipe, exact emitted output comparison, stale/duplicate refusal, fixed point and repeated deterministic schedules.
 4. At product admission: run JDK `javac --release 21` baseline, relevant jtreg, JNI/GC/native/runtime and installed-image gates; record actual resource measurements where applicable.
+5. Exercise partial-capability adapters, final-record client binaries, class overrides, NaN/signed zero, division-by-zero, interpreter/JIT parity, and every proposed collection conflict case before enabling syntax.
 
 ## Dependencies and delivery
 
 - Prerequisite: `STRING_ARRAY_COLLECTION_STAGE_ORDER`; receiving order: String → arrays → collections → AST/compiler → remaining.
-- Native/legal donor review: **NOT_RUN**. Canonical Maven/OpenRewrite qualification: **PENDING**. M3JDK21 product promotion: **HOLD**.
+- Named-method prototype: source-sealed `com.synexia.m3.OperatorDefaults20261117` Java LST recipe, eight candidate Java/JTReg files, and a precompiled legacy client differential oracle. This does **not** constitute a full source-built JDK admission.
+- Mapping review: candidate types use an already-owned `jdk.m3.paradigm` internal package and have no source-owner relocation; defer `m3/docs/name-mapping.json` migration records pending the normal explicit name/package review. Do not assert any new public name without that gate.
+- Native/legal donor review: **NOT_RUN**. Compiler lowering, source-built JDK, actual jtreg, JNI/GC/native, collection semantics, and full public API gates: **HOLD**.
 - Source catalogue: [`LANG-001`](../PROPOSALS.tsv); do not mutate this historical fact row to announce implementation.

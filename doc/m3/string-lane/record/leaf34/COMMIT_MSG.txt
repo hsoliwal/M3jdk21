@@ -1,0 +1,29 @@
+String: absorb the ESCAPE_MARKUP family
+
+16 public methods and 5 nested enums (owner decision 48), a superset of
+commons-text 1.15.0, unbescape 1.1.8 and CPython 3.12 html:
+- escapeHtml3()/unescapeHtml3(), escapeHtml4()/unescapeHtml4(),
+  escapeXml10(), escapeXml11(), unescapeXml(): commons-text rules;
+- escapeHtml4Xml(), escapeHtml5(), escapeHtml5Xml(),
+  escapeHtml(HtmlEscapeType, HtmlEscapeLevel), unescapeHtml() (the full
+  WHATWG table of 2231 names, unbescape's lookup quirks kept and stated),
+  escapeXml(XmlVersion, XmlEscapeType, XmlEscapeLevel, boolean attribute),
+  unescapeXmlStrict(): unbescape rules; the enum constants are unbescape's;
+- escapeHtml(boolean quote), unescapeHtml5Python(): CPython html.escape and
+  html.unescape, which differ from every rule above (proven distinct).
+commons escapeXml10/11 are proven equal to escapeXml(1.0/1.1, character
+entity references default to decimal, LEVEL_1, false) and share its engine.
+The entity tables are a private holder built once from compact table text
+generated from WHATWG entities.json (CC BY 4.0; sha256 in the record).
+Escapers return this when nothing needs escaping.
+
+Proof (record doc/m3/string-lane/record/leaf34): 127 checks over 239,292
+escape and 875,253 unescape texts plus all 1,048,576 supplementary code
+points against commons-text, unbescape and CPython 3.12: 0 mismatches in
+three modes (flat; stub M3 storage with facts; without facts), compact
+strings on and off; 13 mutants, 10 killed, 3 equivalent. JUnit
+10,501/10,501 in all six runs, including 77 assertions ported from
+commons-text StringEscapeUtilsTest (10 skipped) and 298 from CPython
+Lib/test/test_html.py. The head also compiles inside master's String.java
+with its M3 closure (-Xlint:all -Werror). Drafted by a workflow agent;
+integrated and re-proven on master.

@@ -1,0 +1,1477 @@
+
+    /**
+     * Returns this string with each character that has a named character reference in HTML 3.2
+     * replaced by that reference: {@code "} by {@code &quot;}, {@code &} by {@code &amp;},
+     * {@code <} by {@code &lt;}, {@code >} by {@code &gt;} and each of the 96 characters
+     * U+00A0..U+00FF by its ISO 8859-1 name (U+00E9 by {@code &eacute;}). Every other character,
+     * the apostrophe included, is left as it is.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API; Apache Commons Text's
+     * {@code StringEscapeUtils.escapeHtml3} has the same result.
+     *
+     * @return  this string with HTML 3.2 named references; this string when it has no character
+     *          to escape.
+     * @since   21
+     */
+    public String escapeHtml3() {
+        return escapeMarkup(MARKUP_HTML3);
+    }
+
+    /**
+     * Returns this string with each character that has a named character reference in HTML 4.01
+     * replaced by that reference: the characters {@link #escapeHtml3()} escapes and each of the
+     * 152 symbols, Greek letters and special characters of HTML 4.01 (U+20AC by
+     * {@code &euro;}, U+2329 by {@code &lang;}). Every other character, the apostrophe included,
+     * is left as it is.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API; Apache Commons Text's
+     * {@code StringEscapeUtils.escapeHtml4} has the same result.
+     *
+     * @return  this string with HTML 4.01 named references; this string when it has no character
+     *          to escape.
+     * @since   21
+     */
+    public String escapeHtml4() {
+        return escapeMarkup(MARKUP_HTML4);
+    }
+
+    /**
+     * Returns this string with each HTML 3.2 character reference replaced by the character it
+     * stands for. A named reference is {@code &}, one of the 100 names {@link #escapeHtml3()}
+     * writes, and {@code ;}. A numeric reference is read as {@link #unescapeHtml4()} reads it.
+     * Each reference is read once, from left to right; all other text is left as it is.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API; Apache Commons Text's
+     * {@code StringEscapeUtils.unescapeHtml3} has the same result.
+     *
+     * @return  this string with its references replaced; this string when it has none.
+     * @throws  IllegalArgumentException if a numeric reference has a value above U+10FFFF that
+     *          is not above {@link Integer#MAX_VALUE}.
+     * @since   21
+     */
+    public String unescapeHtml3() {
+        return unescapeMarkup(UNMARKUP_HTML3);
+    }
+
+    /**
+     * Returns this string with each HTML 4.01 character reference replaced by the character it
+     * stands for. A named reference is {@code &}, one of the 252 names {@link #escapeHtml4()}
+     * writes, and {@code ;}. A numeric reference is {@code &#}, then decimal digits or
+     * {@code x} or {@code X} and hexadecimal digits, then {@code ;}: a value up to U+FFFF gives
+     * that {@code char}, a surrogate included, a larger one a surrogate pair, and a value above
+     * {@link Integer#MAX_VALUE} leaves the reference as it is. Each reference is read once, from
+     * left to right; all other text is left as it is.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API; Apache Commons Text's
+     * {@code StringEscapeUtils.unescapeHtml4} has the same result.
+     *
+     * @return  this string with its references replaced; this string when it has none.
+     * @throws  IllegalArgumentException if a numeric reference has a value above U+10FFFF that
+     *          is not above {@link Integer#MAX_VALUE}.
+     * @since   21
+     */
+    public String unescapeHtml4() {
+        return unescapeMarkup(UNMARKUP_HTML4);
+    }
+
+    /**
+     * Returns this string escaped for XML 1.0: {@code "}, {@code &}, {@code '}, {@code <} and
+     * {@code >} become {@code &quot;}, {@code &amp;}, {@code &apos;}, {@code &lt;} and
+     * {@code &gt;}; U+007F..U+0084 and U+0086..U+009F become decimal references
+     * ({@code &#127;}); the characters XML 1.0 does not allow are removed: U+0000..U+0008,
+     * U+000B, U+000C, U+000E..U+001F, U+FFFE, U+FFFF and every unpaired surrogate. Every other
+     * character is left as it is.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API; Apache Commons Text's
+     * {@code StringEscapeUtils.escapeXml10} has the same result.
+     *
+     * @return  this string escaped for XML 1.0; this string when it has no character to escape
+     *          or remove.
+     * @since   21
+     */
+    public String escapeXml10() {
+        return escapeMarkup(MARKUP_XML | MARKUP_NAMED | 1 << MARKUP_LEVEL);
+    }
+
+    /**
+     * Returns this string escaped for XML 1.1: {@code "}, {@code &}, {@code '}, {@code <} and
+     * {@code >} become {@code &quot;}, {@code &amp;}, {@code &apos;}, {@code &lt;} and
+     * {@code &gt;}; U+0001..U+0008, U+000B, U+000C, U+000E..U+001F, U+007F..U+0084 and
+     * U+0086..U+009F become decimal references ({@code &#11;}); the characters XML 1.1 does not
+     * allow are removed: U+0000, U+FFFE, U+FFFF and every unpaired surrogate. Every other
+     * character is left as it is.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API; Apache Commons Text's
+     * {@code StringEscapeUtils.escapeXml11} has the same result.
+     *
+     * @return  this string escaped for XML 1.1; this string when it has no character to escape
+     *          or remove.
+     * @since   21
+     */
+    public String escapeXml11() {
+        return escapeMarkup(MARKUP_XML | MARKUP_NAMED | MARKUP_XML_1_1 | 1 << MARKUP_LEVEL);
+    }
+
+    /**
+     * Returns this string with each XML character reference replaced by the character it stands
+     * for: {@code &quot;}, {@code &amp;}, {@code &apos;}, {@code &lt;} and {@code &gt;}, and
+     * the numeric references {@link #unescapeHtml4()} reads. Each reference is read once, from
+     * left to right; all other text is left as it is.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API; Apache Commons Text's
+     * {@code StringEscapeUtils.unescapeXml} has the same result.
+     *
+     * @return  this string with its references replaced; this string when it has none.
+     * @throws  IllegalArgumentException if a numeric reference has a value above U+10FFFF that
+     *          is not above {@link Integer#MAX_VALUE}.
+     * @since   21
+     */
+    public String unescapeXml() {
+        return unescapeMarkup(UNMARKUP_XML);
+    }
+
+    /**
+     * Returns this string with its markup-significant characters escaped by HTML 4.01 named
+     * references: {@code &}, {@code <}, {@code >} and {@code "} become {@code &amp;},
+     * {@code &lt;}, {@code &gt;} and {@code &quot;}, and {@code '} becomes {@code &#39;}; so
+     * does U+0000 ({@code &#0;}) and every unpaired surrogate ({@code &#55349;}). This is
+     * {@code escapeHtml(HtmlEscapeType.HTML4_NAMED_REFERENCES_DEFAULT_TO_DECIMAL,
+     * HtmlEscapeLevel.LEVEL_1_ONLY_MARKUP_SIGNIFICANT)}.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API; unbescape's
+     * {@code HtmlEscape.escapeHtml4Xml} has the same result.
+     *
+     * @return  this string escaped; this string when it has no character to escape.
+     * @see     #escapeHtml(HtmlEscapeType, HtmlEscapeLevel)
+     * @since   21
+     */
+    public String escapeHtml4Xml() {
+        return escapeHtml(HtmlEscapeType.HTML4_NAMED_REFERENCES_DEFAULT_TO_DECIMAL,
+                HtmlEscapeLevel.LEVEL_1_ONLY_MARKUP_SIGNIFICANT);
+    }
+
+    /**
+     * Returns this string with its markup-significant characters escaped by HTML5 named
+     * references: {@code &}, {@code <}, {@code >}, {@code "} and {@code '} become
+     * {@code &amp;}, {@code &lt;}, {@code &gt;}, {@code &quot;} and {@code &apos;}; U+0000
+     * becomes {@code &#0;} and every unpaired surrogate a decimal reference. This is
+     * {@code escapeHtml(HtmlEscapeType.HTML5_NAMED_REFERENCES_DEFAULT_TO_DECIMAL,
+     * HtmlEscapeLevel.LEVEL_1_ONLY_MARKUP_SIGNIFICANT)}.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API; unbescape's
+     * {@code HtmlEscape.escapeHtml5Xml} has the same result.
+     *
+     * @return  this string escaped; this string when it has no character to escape.
+     * @see     #escapeHtml(HtmlEscapeType, HtmlEscapeLevel)
+     * @since   21
+     */
+    public String escapeHtml5Xml() {
+        return escapeHtml(HtmlEscapeType.HTML5_NAMED_REFERENCES_DEFAULT_TO_DECIMAL,
+                HtmlEscapeLevel.LEVEL_1_ONLY_MARKUP_SIGNIFICANT);
+    }
+
+    /**
+     * Returns this string with its markup-significant characters and every character above
+     * U+007F escaped, by an HTML5 named reference when there is one (U+00E9 by
+     * {@code &eacute;}, {@code '} by {@code &apos;}) and by a decimal reference otherwise
+     * (U+4E2D by {@code &#20013;}). The result is ASCII. This is
+     * {@code escapeHtml(HtmlEscapeType.HTML5_NAMED_REFERENCES_DEFAULT_TO_DECIMAL,
+     * HtmlEscapeLevel.LEVEL_2_ALL_NON_ASCII_PLUS_MARKUP_SIGNIFICANT)}.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API; unbescape's
+     * {@code HtmlEscape.escapeHtml5} has the same result.
+     *
+     * @return  this string escaped; this string when it has no character to escape.
+     * @see     #escapeHtml(HtmlEscapeType, HtmlEscapeLevel)
+     * @since   21
+     */
+    public String escapeHtml5() {
+        return escapeHtml(HtmlEscapeType.HTML5_NAMED_REFERENCES_DEFAULT_TO_DECIMAL,
+                HtmlEscapeLevel.LEVEL_2_ALL_NON_ASCII_PLUS_MARKUP_SIGNIFICANT);
+    }
+
+    /**
+     * Returns this string with the characters that {@code level} selects escaped by the
+     * references that {@code type} selects. The string is read as code points. U+0000 and every
+     * unpaired surrogate are escaped at every level. An escaped character becomes a named
+     * reference when {@code type} uses names and its table (HTML 4.01: 252 names, HTML5: one
+     * name for each of 1446 characters, among the names of the WHATWG table) has one, and a
+     * decimal ({@code &#233;}) or lower-case hexadecimal ({@code &#xe9;}) reference otherwise.
+     * Where HTML5 has several names for a character, the one unbescape 1.1.8 writes is written.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API; unbescape's
+     * {@code HtmlEscape.escapeHtml(text, type, level)} has the same result for non-null
+     * arguments.
+     *
+     * @param   type    the references to write.
+     * @param   level   the characters to escape.
+     * @return  this string escaped; this string when it has no character to escape.
+     * @throws  NullPointerException if {@code type} or {@code level} is {@code null}.
+     * @since   21
+     */
+    public String escapeHtml(HtmlEscapeType type, HtmlEscapeLevel level) {
+        java.util.Objects.requireNonNull(type, "type");
+        java.util.Objects.requireNonNull(level, "level");
+        return escapeMarkup(MARKUP_HTML | type.rule | level.rule);
+    }
+
+    /**
+     * Returns this string with each HTML5 character reference replaced by the character it
+     * stands for, as unbescape 1.1.8 reads them. An {@code &} followed by a space, LF, TAB, FF,
+     * {@code <} or {@code &} starts no reference. A numeric reference is {@code &#}, then
+     * decimal digits or {@code x} or {@code X} and hexadecimal digits, then an optional
+     * {@code ;}; a value of 0, of a surrogate or above U+10FFFF gives U+FFFD, and a value in
+     * U+0080..U+009F the Windows-1252 character (U+0080 gives U+20AC). A named reference is
+     * {@code &}, a run of ASCII letters and digits and an optional {@code ;}, looked up among
+     * the 2231 names of the WHATWG table; when it is not a name, one of the 106 names without
+     * {@code ;} that starts the run is taken where unbescape's binary search over the table, in
+     * its order, meets it, and the rest of the run is left as it is. All other text is left as it
+     * is.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API; unbescape's
+     * {@code HtmlEscape.unescapeHtml} has the same result.
+     *
+     * @return  this string with its references replaced; this string when it has none.
+     * @since   21
+     */
+    public String unescapeHtml() {
+        return unescapeMarkup(UNMARKUP_HTML);
+    }
+
+    /**
+     * Returns this string with the characters that {@code level} selects escaped for XML 1.0 or
+     * XML 1.1, as {@code version} says, by the references that {@code type} selects. The string
+     * is read as code points. The characters the version does not allow are removed at every
+     * level: for XML 1.0 U+0000..U+0008, U+000B, U+000C and U+000E..U+001F, for XML 1.1
+     * U+0000, for both U+FFFE, U+FFFF and every unpaired surrogate. Level 1 escapes
+     * {@code &}, {@code <}, {@code >}, {@code "}, {@code '}, U+007F..U+0084 and U+0086..U+009F,
+     * for XML 1.1 also U+0001..U+0008, U+000B, U+000C and U+000E..U+001F, and for an attribute
+     * value also TAB, LF and CR. An escaped character becomes {@code &amp;}, {@code &lt;},
+     * {@code &gt;}, {@code &quot;} or {@code &apos;} when {@code type} uses those and it is one
+     * of the five, and a decimal ({@code &#233;}) or lower-case hexadecimal ({@code &#xe9;})
+     * reference otherwise.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API; unbescape's
+     * {@code XmlEscape.escapeXml10}, {@code escapeXml11}, {@code escapeXml10Attribute} and
+     * {@code escapeXml11Attribute} with a type and a level have the same result for non-null
+     * arguments, and so, for each of their fixed type and level, do its other {@code escapeXml}
+     * methods ({@code escapeXml10Minimal} is {@code escapeXml(XmlVersion.XML_1_0,
+     * XmlEscapeType.CHARACTER_ENTITY_REFERENCES_DEFAULT_TO_HEXA,
+     * XmlEscapeLevel.LEVEL_1_ONLY_MARKUP_SIGNIFICANT, false)}).
+     *
+     * @param   version          the XML version.
+     * @param   type             the references to write.
+     * @param   level            the characters to escape.
+     * @param   attributeValue   whether TAB, LF and CR are escaped from level 1, for an
+     *                           attribute value.
+     * @return  this string escaped; this string when it has no character to escape or remove.
+     * @throws  NullPointerException if {@code version}, {@code type} or {@code level} is
+     *          {@code null}.
+     * @since   21
+     */
+    public String escapeXml(XmlVersion version, XmlEscapeType type, XmlEscapeLevel level,
+            boolean attributeValue) {
+        java.util.Objects.requireNonNull(version, "version");
+        java.util.Objects.requireNonNull(type, "type");
+        java.util.Objects.requireNonNull(level, "level");
+        return escapeMarkup(MARKUP_XML | version.rule | type.rule | level.rule
+                | (attributeValue ? MARKUP_ATTRIBUTE : 0));
+    }
+
+    /**
+     * Returns this string with each XML character reference replaced by the character it stands
+     * for, as the XML specification writes references: {@code &quot;}, {@code &amp;},
+     * {@code &apos;}, {@code &lt;} and {@code &gt;}, and the numeric references {@code &#},
+     * decimal digits, {@code ;} and {@code &#x} (lower-case {@code x}), hexadecimal digits,
+     * {@code ;}. Each reference is read once, from left to right; all other text is left as it
+     * is.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API; unbescape's
+     * {@code XmlEscape.unescapeXml} has the same result. Unlike {@link #unescapeXml()}, it
+     * rejects a reference to a character XML 1.1 does not allow.
+     *
+     * @return  this string with its references replaced; this string when it has none.
+     * @throws  IllegalArgumentException if a numeric reference has the value 0, the value of a
+     *          surrogate, U+FFFE or U+FFFF, or a value above U+10FFFF.
+     * @since   21
+     */
+    public String unescapeXmlStrict() {
+        return unescapeMarkup(UNMARKUP_XML_STRICT);
+    }
+
+    /**
+     * Returns this string with {@code &}, {@code <} and {@code >} replaced by {@code &amp;},
+     * {@code &lt;} and {@code &gt;}, and, when {@code quote} is {@code true}, {@code "} and
+     * {@code '} by {@code &quot;} and {@code &#x27;}. Every other character is left as it is.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API; Python's
+     * {@code html.escape(s, quote)} has the same result.
+     *
+     * @param   quote   whether the quotation marks are escaped too.
+     * @return  this string escaped; this string when it has no character to escape.
+     * @since   21
+     */
+    public String escapeHtml(boolean quote) {
+        return escapeMarkup(MARKUP_PYTHON | (quote ? MARKUP_QUOTE : 0));
+    }
+
+    /**
+     * Returns this string with each HTML5 character reference replaced by the character it
+     * stands for, as CPython 3.12 reads them. A numeric reference is {@code &#}, then decimal
+     * digits or {@code x} or {@code X} and hexadecimal digits, then an optional {@code ;}; a
+     * value of 0, of a surrogate or above U+10FFFF gives U+FFFD, a value in U+0080..U+009F the
+     * Windows-1252 character, and the references to U+0001..U+0008, U+000B, U+000E..U+001F,
+     * U+007F, U+FDD0..U+FDEF and the last two code points of each plane are removed. A named
+     * reference is {@code &}, a run of 1 to 32 code points other than TAB, LF, FF, space,
+     * {@code <}, {@code &}, {@code #} and {@code ;}, and an optional {@code ;}: when that is one
+     * of the 2231 names of the WHATWG table it is replaced, otherwise its longest prefix of two
+     * or more characters that is a name (a name without {@code ;}) is replaced and the rest is
+     * left as it is. All other text is left as it is.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API; Python's
+     * {@code html.unescape} (CPython 3.12) has the same result.
+     *
+     * @return  this string with its references replaced; this string when it has none.
+     * @since   21
+     */
+    public String unescapeHtml5Python() {
+        return unescapeMarkup(UNMARKUP_PYTHON);
+    }
+
+    /**
+     * The references {@link #escapeHtml(HtmlEscapeType, HtmlEscapeLevel)} writes for the
+     * characters it escapes; the constants are those of unbescape's {@code HtmlEscapeType}.
+     *
+     * @apiNote
+     * This type is an M3JDK addition to the {@code String} API.
+     *
+     * @since   21
+     */
+    public enum HtmlEscapeType {
+        /** HTML 4.01 named references, else decimal references. */
+        HTML4_NAMED_REFERENCES_DEFAULT_TO_DECIMAL(MARKUP_NAMED),
+        /** HTML 4.01 named references, else hexadecimal references. */
+        HTML4_NAMED_REFERENCES_DEFAULT_TO_HEXA(MARKUP_NAMED | MARKUP_HEX),
+        /** HTML5 named references, else decimal references. */
+        HTML5_NAMED_REFERENCES_DEFAULT_TO_DECIMAL(MARKUP_NAMED | MARKUP_HTML5),
+        /** HTML5 named references, else hexadecimal references. */
+        HTML5_NAMED_REFERENCES_DEFAULT_TO_HEXA(MARKUP_NAMED | MARKUP_HTML5 | MARKUP_HEX),
+        /** Decimal references only. */
+        DECIMAL_REFERENCES(0),
+        /** Hexadecimal references only. */
+        HEXADECIMAL_REFERENCES(MARKUP_HEX);
+
+        /** The bits of this type in an escape rule of {@link String#escapeMarkup(int)}. */
+        private final int rule;
+
+        HtmlEscapeType(int rule) {
+            this.rule = rule;
+        }
+    }
+
+    /**
+     * The characters {@link #escapeHtml(HtmlEscapeType, HtmlEscapeLevel)} escapes; each level
+     * escapes those of the levels below it too. The constants are those of unbescape's
+     * {@code HtmlEscapeLevel}.
+     *
+     * @apiNote
+     * This type is an M3JDK addition to the {@code String} API.
+     *
+     * @since   21
+     */
+    public enum HtmlEscapeLevel {
+        /** {@code &}, {@code <}, {@code >} and {@code "}. */
+        LEVEL_0_ONLY_MARKUP_SIGNIFICANT_EXCEPT_APOS(0),
+        /** Level 0 and {@code '}. */
+        LEVEL_1_ONLY_MARKUP_SIGNIFICANT(1),
+        /** Level 1 and every character above U+007F. */
+        LEVEL_2_ALL_NON_ASCII_PLUS_MARKUP_SIGNIFICANT(2),
+        /** Level 2 and every ASCII character but the letters and digits. */
+        LEVEL_3_ALL_NON_ALPHANUMERIC(3),
+        /** Every character. */
+        LEVEL_4_ALL_CHARACTERS(4);
+
+        /** The bits of this level in an escape rule of {@link String#escapeMarkup(int)}. */
+        private final int rule;
+
+        HtmlEscapeLevel(int level) {
+            this.rule = level << MARKUP_LEVEL;
+        }
+    }
+
+    /**
+     * The XML version {@link #escapeXml(XmlVersion, XmlEscapeType, XmlEscapeLevel, boolean)}
+     * escapes for.
+     *
+     * @apiNote
+     * This type is an M3JDK addition to the {@code String} API.
+     *
+     * @since   21
+     */
+    public enum XmlVersion {
+        /** XML 1.0. */
+        XML_1_0(0),
+        /** XML 1.1. */
+        XML_1_1(MARKUP_XML_1_1);
+
+        /** The bits of this version in an escape rule of {@link String#escapeMarkup(int)}. */
+        private final int rule;
+
+        XmlVersion(int rule) {
+            this.rule = rule;
+        }
+    }
+
+    /**
+     * The references {@link #escapeXml(XmlVersion, XmlEscapeType, XmlEscapeLevel, boolean)}
+     * writes for the characters it escapes; the constants are those of unbescape's
+     * {@code XmlEscapeType}.
+     *
+     * @apiNote
+     * This type is an M3JDK addition to the {@code String} API.
+     *
+     * @since   21
+     */
+    public enum XmlEscapeType {
+        /** The five predefined entity references, else decimal references. */
+        CHARACTER_ENTITY_REFERENCES_DEFAULT_TO_DECIMAL(MARKUP_NAMED),
+        /** The five predefined entity references, else hexadecimal references. */
+        CHARACTER_ENTITY_REFERENCES_DEFAULT_TO_HEXA(MARKUP_NAMED | MARKUP_HEX),
+        /** Decimal references only. */
+        DECIMAL_REFERENCES(0),
+        /** Hexadecimal references only. */
+        HEXADECIMAL_REFERENCES(MARKUP_HEX);
+
+        /** The bits of this type in an escape rule of {@link String#escapeMarkup(int)}. */
+        private final int rule;
+
+        XmlEscapeType(int rule) {
+            this.rule = rule;
+        }
+    }
+
+    /**
+     * The characters {@link #escapeXml(XmlVersion, XmlEscapeType, XmlEscapeLevel, boolean)}
+     * escapes besides those it removes; each level escapes those of the levels below it too. The
+     * constants are those of unbescape's {@code XmlEscapeLevel}.
+     *
+     * @apiNote
+     * This type is an M3JDK addition to the {@code String} API.
+     *
+     * @since   21
+     */
+    public enum XmlEscapeLevel {
+        /** The markup-significant characters and the controls the version escapes. */
+        LEVEL_1_ONLY_MARKUP_SIGNIFICANT(1),
+        /** Level 1 and every character above U+007F. */
+        LEVEL_2_ALL_NON_ASCII_PLUS_MARKUP_SIGNIFICANT(2),
+        /** Level 2 and every ASCII character but the letters and digits. */
+        LEVEL_3_ALL_NON_ALPHANUMERIC(3),
+        /** Every character. */
+        LEVEL_4_ALL_CHARACTERS(4);
+
+        /** The bits of this level in an escape rule of {@link String#escapeMarkup(int)}. */
+        private final int rule;
+
+        XmlEscapeLevel(int level) {
+            this.rule = level << MARKUP_LEVEL;
+        }
+    }
+
+    /** Escape rules of {@link #escapeMarkup(int)}: a kind (the low three bits) and options. */
+    private static final int MARKUP_KIND = 7;
+    /** Commons Text {@code escapeHtml3}. */
+    private static final int MARKUP_HTML3 = 0;
+    /** Commons Text {@code escapeHtml4}. */
+    private static final int MARKUP_HTML4 = 1;
+    /** Python {@code html.escape}. */
+    private static final int MARKUP_PYTHON = 2;
+    /** unbescape {@code HtmlEscape.escapeHtml}. */
+    private static final int MARKUP_HTML = 3;
+    /** unbescape {@code XmlEscape.escapeXml}, of which Commons Text's XML rules are points. */
+    private static final int MARKUP_XML = 4;
+    /** The shift of the level (0 to 4) in a rule. */
+    private static final int MARKUP_LEVEL = 3;
+    /** Option: hexadecimal, not decimal, references. */
+    private static final int MARKUP_HEX = 1 << 6;
+    /** Option: named references where the table has one. */
+    private static final int MARKUP_NAMED = 1 << 7;
+    /** Option: the HTML5 table, not the HTML 4.01 one. */
+    private static final int MARKUP_HTML5 = 1 << 8;
+    /** Option: XML 1.1, not XML 1.0. */
+    private static final int MARKUP_XML_1_1 = 1 << 9;
+    /** Option: an XML attribute value (TAB, LF and CR from level 1). */
+    private static final int MARKUP_ATTRIBUTE = 1 << 10;
+    /** Option: Python's {@code quote}. */
+    private static final int MARKUP_QUOTE = 1 << 11;
+    /** Unescape rules of {@link #unescapeMarkup(int)}. */
+    private static final int UNMARKUP_HTML3 = 0;
+    private static final int UNMARKUP_HTML4 = 1;
+    private static final int UNMARKUP_XML = 2;
+    private static final int UNMARKUP_HTML = 3;
+    private static final int UNMARKUP_XML_STRICT = 4;
+    private static final int UNMARKUP_PYTHON = 5;
+    /**
+     * The longest run of letters and digits a name lookup reads: longer than every name (31
+     * letters at most), so the lookup of a longer run is decided by its first units.
+     */
+    private static final int MARKUP_NAME_MAX = 40;
+    /** The characters Windows-1252 gives to the bytes 0x80..0x9F, as HTML5 maps references. */
+    private static final String MARKUP_C1 =
+            "\u20AC\u0081\u201A\u0192\u201E\u2026\u2020\u2021\u02C6\u2030\u0160\u2039\u0152" +
+            "\u008D\u017D\u008F\u0090\u2018\u2019\u201C\u201D\u2022\u2013\u2014\u02DC\u2122" +
+            "\u0161\u203A\u0153\u009D\u017E\u0178";
+
+    /**
+     * This string escaped by {@code rule}: each code point (an unpaired surrogate is one of its
+     * own) that the rule changes is replaced by its reference or removed. Prepared M3 facts
+     * answer when they show an ASCII string without a unit the rule changes; otherwise the
+     * string is read in bulk windows, a surrogate pair never split between two windows, and the
+     * first change is found before anything is copied. Unchanged runs are copied as ranges, and
+     * an unchanged string is returned as it is.
+     */
+    private String escapeMarkup(int rule) {
+        if (markupUntouched(rule)) return this;
+        int length = length();
+        StringBuilder out = null;
+        int copied = 0;
+        char[] window = new char[Math.min(length, SCAN_WINDOW)];
+        for (int from = 0; from < length; ) {
+            int to = Math.min(length, from + window.length);
+            getChars(from, to, window, 0);
+            int count = to - from;
+            if (to < length && count > 1 && Character.isHighSurrogate(window[count - 1])) count--;
+            for (int at = 0; at < count; ) {
+                int point = Character.codePointAt(window, at, count);
+                int width = Character.charCount(point);
+                if (!markupKeeps(rule, point)) {
+                    if (out == null) out = new StringBuilder(length + 16);
+                    out.append(this, copied, from + at);
+                    appendMarkup(out, rule, point);
+                    copied = from + at + width;
+                }
+                at += width;
+            }
+            from += count;
+        }
+        return out == null ? this : out.append(this, copied, length).toString();
+    }
+
+    /** Whether prepared M3 facts show this string is ASCII without a unit {@code rule} changes. */
+    private boolean markupUntouched(int rule) {
+        M3String storage = m3();
+        M3StringFacts facts = storage == null ? null : storage.factsIfPrepared();
+        if (facts == null || !facts.ascii) return false;
+        for (int unit = 0; unit < 0x80; unit++) {
+            if (!markupKeeps(rule, unit) && facts.mayContainCodeUnit((char) unit)) return false;
+        }
+        return true;
+    }
+
+    /** Whether escape rule {@code rule} leaves {@code point} as it is. */
+    private static boolean markupKeeps(int rule, int point) {
+        boolean markup = point == '"' || point == '&' || point == '<' || point == '>';
+        int level = rule >>> MARKUP_LEVEL & 7;
+        return switch (rule & MARKUP_KIND) {
+            case MARKUP_HTML3 -> point < 0xA0 ? !markup : point > 0xFF;
+            case MARKUP_HTML4 -> point < 0xA0 ? !markup
+                    : point > 0xFF && Html4Names.TABLE.escapeName(point) < 0;
+            case MARKUP_PYTHON -> !(point == '&' || point == '<' || point == '>'
+                    || (rule & MARKUP_QUOTE) != 0 && (point == '"' || point == '\''));
+            case MARKUP_HTML -> point < 0x80 ? point != 0 && level < markupHtmlLevel(point)
+                    : (point < 0xD800 || point > 0xDFFF) && level < 2;
+            default -> markupXmlAllowed(rule, point) && level < markupXmlLevel(rule, point);
+        };
+    }
+
+    /** The lowest unbescape HTML level that escapes ASCII character {@code point}. */
+    private static int markupHtmlLevel(int point) {
+        if (markupAlphanumeric(point)) return 4;
+        if (point == '\'') return 1;
+        return point == '"' || point == '&' || point == '<' || point == '>' ? 0 : 3;
+    }
+
+    /** The lowest unbescape XML level of {@code rule} that escapes {@code point}. */
+    private static int markupXmlLevel(int rule, int point) {
+        if (point >= 0x7F) return point >= 0xA0 || point == 0x85 ? 2 : 1;
+        if (markupAlphanumeric(point)) return 4;
+        if (markupEntity(point) != null) return 1;
+        if (point == '\t' || point == '\n' || point == '\r') {
+            return (rule & MARKUP_ATTRIBUTE) != 0 ? 1 : 3;
+        }
+        return point < 0x20 && (rule & MARKUP_XML_1_1) != 0 ? 1 : 3;
+    }
+
+    /** Whether the XML version of {@code rule} allows {@code point} (a lone surrogate never). */
+    private static boolean markupXmlAllowed(int rule, int point) {
+        if (point < 0x20) {
+            return point == '\t' || point == '\n' || point == '\r'
+                    || point != 0 && (rule & MARKUP_XML_1_1) != 0;
+        }
+        return (point < 0xD800 || point > 0xDFFF) && point != 0xFFFE && point != 0xFFFF;
+    }
+
+    /** Whether {@code point} is an ASCII letter or digit. */
+    private static boolean markupAlphanumeric(int point) {
+        return point >= '0' && point <= '9' || point >= 'A' && point <= 'Z'
+                || point >= 'a' && point <= 'z';
+    }
+
+    /** The predefined XML entity reference of {@code point}, or {@code null}. */
+    private static String markupEntity(int point) {
+        return switch (point) {
+            case '"' -> "&quot;";
+            case '&' -> "&amp;";
+            case '\'' -> "&apos;";
+            case '<' -> "&lt;";
+            case '>' -> "&gt;";
+            default -> null;
+        };
+    }
+
+    /** Appends what escape rule {@code rule} writes for {@code point}, which it changes. */
+    private static void appendMarkup(StringBuilder out, int rule, int point) {
+        int kind = rule & MARKUP_KIND;
+        if (kind == MARKUP_HTML3 || kind == MARKUP_HTML4) {
+            Html4Names.TABLE.appendName(out, Html4Names.TABLE.escapeName(point));
+        } else if (kind == MARKUP_PYTHON) {
+            out.append(point == '\'' ? "&#x27;" : markupEntity(point));
+        } else if (kind == MARKUP_XML) {
+            if (!markupXmlAllowed(rule, point)) return;
+            String entity = (rule & MARKUP_NAMED) != 0 ? markupEntity(point) : null;
+            if (entity != null) {
+                out.append(entity);
+            } else {
+                appendMarkupNumber(out, rule, point);
+            }
+        } else {
+            MarkupNames names = (rule & MARKUP_NAMED) == 0 ? null
+                    : (rule & MARKUP_HTML5) != 0 ? Html5Names.TABLE : Html4Names.TABLE;
+            int name = names == null ? -1 : names.escapeName(point);
+            if (name >= 0) {
+                names.appendName(out, name);
+            } else {
+                appendMarkupNumber(out, rule, point);
+            }
+        }
+    }
+
+    /** Appends the decimal or (with {@link #MARKUP_HEX}) hexadecimal reference to {@code point}. */
+    private static void appendMarkupNumber(StringBuilder out, int rule, int point) {
+        if ((rule & MARKUP_HEX) != 0) {
+            out.append("&#x").append(Integer.toHexString(point)).append(';');
+        } else {
+            out.append("&#").append(point).append(';');
+        }
+    }
+
+    /**
+     * This string unescaped by {@code rule}: each reference the rule reads is replaced by its
+     * characters (none when the rule removes it). Prepared M3 facts answer when they show no
+     * {@code &}; otherwise the references are found by {@link #indexOf(int, int)}, each read on
+     * its own units, and the text between them is copied as ranges. A string without a
+     * reference is returned as it is.
+     */
+    private String unescapeMarkup(int rule) {
+        if (!mayContainUnit('&')) return this;
+        int length = length();
+        StringBuilder out = null;
+        int copied = 0;
+        int[] value = new int[2];
+        for (int at = indexOf('&'); at >= 0; ) {
+            value[1] = -1;
+            int end = switch (rule) {
+                case UNMARKUP_HTML -> markupLenient(at, value);
+                case UNMARKUP_XML_STRICT -> markupStrict(at, value);
+                case UNMARKUP_PYTHON -> markupPython(at, value);
+                default -> markupCommons(rule, at, value);
+            };
+            if (end < 0) {
+                at = indexOf('&', at + 1);
+            } else {
+                if (out == null) out = new StringBuilder(length);
+                out.append(this, copied, at);
+                if (value[0] >= 0) out.appendCodePoint(value[0]);
+                if (value[1] >= 0) out.appendCodePoint(value[1]);
+                copied = end;
+                at = indexOf('&', end);
+            }
+        }
+        return out == null ? this : out.append(this, copied, length).toString();
+    }
+
+    /**
+     * The end of the reference at {@code at} as Commons Text reads it for {@code rule}, its
+     * character in {@code value[0]}; -1 when there is none. A name is one of the rule's names
+     * followed by {@code ;}; a number is read by {@link #markupCommonsNumber(int, int[])}.
+     */
+    private int markupCommons(int rule, int at, int[] value) {
+        int length = length();
+        if (at + 2 >= length) return -1;
+        if (charAt(at + 1) == '#') return markupCommonsNumber(at, value);
+        int end = at + 1;
+        while (end < length && end - at <= MARKUP_NAME_MAX && markupAlphanumeric(charAt(end))) {
+            end++;
+        }
+        if (end == at + 1 || end >= length || charAt(end) != ';') return -1;
+        int point;
+        if (rule == UNMARKUP_XML) {
+            point = markupEntityPoint(at + 1, end + 1);
+        } else {
+            int name = Html4Names.TABLE.find(this, at + 1, end + 1);
+            point = name < 0 ? -1 : Html4Names.TABLE.first(name);
+            if (rule == UNMARKUP_HTML3 && point > 0xFF) point = -1;
+        }
+        value[0] = point;
+        return point < 0 ? -1 : end + 1;
+    }
+
+    /**
+     * The end of the numeric reference at {@code at} as Commons Text reads it, its character in
+     * {@code value[0]}; -1 when there is none: {@code &#}, then ASCII hexadecimal digits (after
+     * {@code x} or {@code X}) or decimal ones, then {@code ;}, with a value that fits an int.
+     */
+    private int markupCommonsNumber(int at, int[] value) {
+        int length = length();
+        int start = at + 2;
+        boolean hex = charAt(start) == 'x' || charAt(start) == 'X';
+        if (hex && ++start == length) return -1;
+        int end = markupDigits(start, 16);
+        if (start == end || end == length || charAt(end) != ';') return -1;
+        int radix = hex ? 16 : 10;
+        long number = 0;
+        for (int index = start; index < end; index++) {
+            int digit = markupDigit(charAt(index), radix);
+            number = number * radix + digit;
+            if (digit < 0 || number > Integer.MAX_VALUE) return -1;
+        }
+        if (number > Character.MAX_CODE_POINT) {
+            throw new IllegalArgumentException("Not a valid Unicode code point: 0x"
+                    + Integer.toHexString((int) number).toUpperCase(java.util.Locale.ROOT));
+        }
+        value[0] = (int) number;
+        return end + 1;
+    }
+
+    /**
+     * The end of the reference at {@code at} as unbescape's {@code HtmlEscape.unescapeHtml}
+     * reads it, its characters in {@code value}; -1 when there is none.
+     */
+    private int markupLenient(int at, int[] value) {
+        int length = length();
+        if (at + 1 >= length) return -1;
+        char next = charAt(at + 1);
+        if (next == ' ' || next == '\n' || next == '\t' || next == '\f' || next == '<'
+                || next == '&') {
+            return -1;
+        }
+        if (next == '#') {
+            if (at + 2 >= length) return -1;
+            char kind = charAt(at + 2);
+            boolean hex = (kind == 'x' || kind == 'X') && at + 3 < length;
+            int start = hex ? at + 3 : at + 2;
+            int end = markupDigits(start, hex ? 16 : 10);
+            if (end == start) return -1;
+            value[0] = markupFixedPoint(markupNumber(start, end, hex ? 16 : 10));
+            return end < length && charAt(end) == ';' ? end + 1 : end;
+        }
+        int end = at + 1;
+        while (end < length && end - at <= MARKUP_NAME_MAX && markupAlphanumeric(charAt(end))) {
+            end++;
+        }
+        if (end == at + 1) return -1;
+        if (end < length && charAt(end) == ';') end++;
+        MarkupNames names = Html5Names.TABLE;
+        int found = names.findLenient(this, at + 1, end);
+        if (found == -1) return -1;
+        int name = found >= 0 ? found : -2 - found;
+        value[0] = names.first(name);
+        value[1] = names.second(name);
+        return found >= 0 ? end : at + 1 + names.length(name);
+    }
+
+    /**
+     * The end of the reference at {@code at} as unbescape's {@code XmlEscape.unescapeXml} reads
+     * it, its character in {@code value[0]}; -1 when there is none.
+     */
+    private int markupStrict(int at, int[] value) {
+        int length = length();
+        if (at + 2 >= length) return -1;
+        if (charAt(at + 1) == '#') {
+            boolean hex = charAt(at + 2) == 'x' && at + 3 < length;
+            int start = hex ? at + 3 : at + 2;
+            int end = markupDigits(start, hex ? 16 : 10);
+            if (end == start || end == length || charAt(end) != ';') return -1;
+            int point = markupNumber(start, end, hex ? 16 : 10);
+            if (point < 1 || point >= 0xD800 && point <= 0xDFFF || point == 0xFFFE
+                    || point == 0xFFFF || point > Character.MAX_CODE_POINT) {
+                throw new IllegalArgumentException("Not a valid XML char in character reference: 0x"
+                        + Integer.toHexString(point).toUpperCase(java.util.Locale.ROOT));
+            }
+            value[0] = point;
+            return end + 1;
+        }
+        int end = at + 1;
+        while (end < length && end - at <= MARKUP_NAME_MAX && markupAlphanumeric(charAt(end))) {
+            end++;
+        }
+        if (end == at + 1 || end == length || charAt(end) != ';') return -1;
+        value[0] = markupEntityPoint(at + 1, end + 1);
+        return value[0] < 0 ? -1 : end + 1;
+    }
+
+    /**
+     * The end of the reference at {@code at} as CPython 3.12's {@code html.unescape} reads it,
+     * its characters in {@code value} ({@code value[0]} is -1 when it is removed); -1 when there
+     * is none.
+     */
+    private int markupPython(int at, int[] value) {
+        int length = length();
+        if (at + 1 >= length) return -1;
+        if (charAt(at + 1) == '#') {
+            if (at + 2 >= length) return -1;
+            boolean hex = charAt(at + 2) == 'x' || charAt(at + 2) == 'X';
+            int start = hex ? at + 3 : at + 2;
+            int end = markupDigits(start, hex ? 16 : 10);
+            if (end == start) return -1;
+            int point = markupFixedPoint(markupNumber(start, end, hex ? 16 : 10));
+            boolean removed = point >= 1 && point <= 8 || point == 0x0B
+                    || point >= 0x0E && point <= 0x1F || point == 0x7F
+                    || point >= 0xFDD0 && point <= 0xFDEF || (point & 0xFFFE) == 0xFFFE;
+            value[0] = removed ? -1 : point;
+            return end < length && charAt(end) == ';' ? end + 1 : end;
+        }
+        int end = at + 1;
+        int points = 0;
+        int alphanumeric = -1;
+        while (end < length && points < 32) {
+            char unit = charAt(end);
+            if (unit == '\t' || unit == '\n' || unit == '\f' || unit == ' ' || unit == '<'
+                    || unit == '&' || unit == '#' || unit == ';') {
+                break;
+            }
+            if (alphanumeric < 0 && !markupAlphanumeric(unit)) alphanumeric = points;
+            end += Character.isHighSurrogate(unit) && end + 1 < length
+                    && Character.isLowSurrogate(charAt(end + 1)) ? 2 : 1;
+            points++;
+        }
+        if (points == 0) return -1;
+        boolean semicolon = end < length && charAt(end) == ';';
+        int longest = Math.min(alphanumeric < 0 ? points : alphanumeric,
+                semicolon ? points : points - 1);
+        MarkupNames names = Html5Names.TABLE;
+        int name = names.find(this, at + 1, semicolon ? end + 1 : end);
+        if (name >= 0) {
+            end = semicolon ? end + 1 : end;
+        } else {
+            for (end = at + 1 + longest; end >= at + 3; end--) {
+                name = names.find(this, at + 1, end);
+                if (name >= 0) break;
+            }
+            if (name < 0) return -1;
+        }
+        value[0] = names.first(name);
+        value[1] = names.second(name);
+        return end;
+    }
+
+    /** {@code point} as HTML5 fixes a numeric reference: U+FFFD for 0, a surrogate or above. */
+    private static int markupFixedPoint(int point) {
+        if (point == 0 || point >= 0xD800 && point <= 0xDFFF || point > Character.MAX_CODE_POINT) {
+            return 0xFFFD;
+        }
+        return point >= 0x80 && point <= 0x9F ? MARKUP_C1.charAt(point - 0x80) : point;
+    }
+
+    /** The predefined XML entity whose name and {@code ;} are at {@code [start, end)}, or -1. */
+    private int markupEntityPoint(int start, int end) {
+        return switch (end - start) {
+            case 3 -> regionMatches(start, "lt;", 0, 3) ? '<'
+                    : regionMatches(start, "gt;", 0, 3) ? '>' : -1;
+            case 4 -> regionMatches(start, "amp;", 0, 4) ? '&' : -1;
+            case 5 -> regionMatches(start, "quot;", 0, 5) ? '"'
+                    : regionMatches(start, "apos;", 0, 5) ? '\'' : -1;
+            default -> -1;
+        };
+    }
+
+    /** The end of the run of ASCII digits of {@code radix} (10 or 16) from {@code start}. */
+    private int markupDigits(int start, int radix) {
+        int end = start;
+        while (end < length() && markupDigit(charAt(end), radix) >= 0) end++;
+        return end;
+    }
+
+    /** The value of the ASCII digits at {@code [start, end)}, or U+10FFFF + 1 when larger. */
+    private int markupNumber(int start, int end, int radix) {
+        int number = 0;
+        for (int index = start; index < end && number <= Character.MAX_CODE_POINT; index++) {
+            number = number * radix + markupDigit(charAt(index), radix);
+        }
+        return Math.min(number, Character.MAX_CODE_POINT + 1);
+    }
+
+    /** The value of {@code unit} as an ASCII digit of {@code radix} (10 or 16), or -1. */
+    private static int markupDigit(char unit, int radix) {
+        int digit = unit >= '0' && unit <= '9' ? unit - '0'
+                : unit >= 'a' && unit <= 'f' ? unit - 'a' + 10
+                : unit >= 'A' && unit <= 'F' ? unit - 'A' + 10 : -1;
+        return digit < radix ? digit : -1;
+    }
+
+    /**
+     * A table of named character references, built once from a table text: the names in the
+     * order of unbescape's {@code HtmlEscapeSymbols} ({@code ;} sorts below the end of a name,
+     * the end below every other character), each with its one or two code points, and for each
+     * code point the name its escapers write. Table text: entries separated by a space, each a
+     * base-36 digit (the characters shared with the previous name), the rest of the name, a
+     * marker ({@code =} plain, {@code :} the escape name of its code point, {@code -} also a
+     * name without {@code ;}, {@code +} both), the code point in hexadecimal and optionally
+     * {@code /} and a second one. Every name of the text ends with {@code ;}, which it leaves
+     * out.
+     */
+    private static final class MarkupNames {
+        /** The characters of the names, each without its {@code &} and with its {@code ;}. */
+        private final char[] chars;
+        /** Where each name starts in {@link #chars}. */
+        private final int[] starts;
+        /** The length of each name. */
+        private final int[] lengths;
+        /** The first code point of each name. */
+        private final int[] firsts;
+        /** The second code point of each name, or -1. */
+        private final int[] seconds;
+        /** The code points with an escape name, ascending. */
+        private final int[] escapePoints;
+        /** The escape name of each of {@link #escapePoints}. */
+        private final int[] escapeNames;
+
+        MarkupNames(String text) {
+            int count = 0;
+            int escapes = 0;
+            int size = 0;
+            for (int at = 0; at < text.length(); ) {
+                int end = at + 1;
+                while (markupAlphanumeric(text.charAt(end))) end++;
+                char marker = text.charAt(end);
+                size += Character.digit(text.charAt(at), 36) + end - at;
+                count += marker == '-' || marker == '+' ? 2 : 1;
+                escapes += marker == ':' || marker == '+' ? 1 : 0;
+                int space = text.indexOf(' ', end);
+                at = space < 0 ? text.length() : space + 1;
+            }
+            chars = new char[size];
+            starts = new int[count];
+            lengths = new int[count];
+            firsts = new int[count];
+            seconds = new int[count];
+            long[] escape = new long[escapes];
+            int n = 0;
+            int e = 0;
+            int used = 0;
+            int previous = 0;
+            for (int at = 0; at < text.length(); ) {
+                int start = used;
+                int keep = Character.digit(text.charAt(at), 36);
+                System.arraycopy(chars, previous, chars, used, keep);
+                used += keep;
+                int end = at + 1;
+                while (markupAlphanumeric(text.charAt(end))) chars[used++] = text.charAt(end++);
+                chars[used++] = ';';
+                char marker = text.charAt(end);
+                boolean legacy = marker == '-' || marker == '+';
+                int first = 0;
+                int second = -1;
+                for (end++; end < text.length() && text.charAt(end) != ' '; end++) {
+                    char c = text.charAt(end);
+                    if (c == '/') {
+                        second = 0;
+                    } else if (second < 0) {
+                        first = first << 4 | Character.digit(c, 16);
+                    } else {
+                        second = second << 4 | Character.digit(c, 16);
+                    }
+                }
+                for (int twin = 0; twin <= (legacy ? 1 : 0); twin++) {
+                    starts[n] = start;
+                    lengths[n] = used - start - twin;
+                    firsts[n] = first;
+                    seconds[n++] = second;
+                }
+                if (marker == ':' || marker == '+') {
+                    escape[e++] = (long) first << 32 | (n - (legacy ? 2 : 1));
+                }
+                previous = start;
+                at = end + 1;
+            }
+            java.util.Arrays.sort(escape);
+            escapePoints = new int[escapes];
+            escapeNames = new int[escapes];
+            for (int i = 0; i < escapes; i++) {
+                escapePoints[i] = (int) (escape[i] >>> 32);
+                escapeNames[i] = (int) escape[i];
+            }
+        }
+
+        /** The first code point of name {@code name}. */
+        int first(int name) {
+            return firsts[name];
+        }
+
+        /** The second code point of name {@code name}, or -1. */
+        int second(int name) {
+            return seconds[name];
+        }
+
+        /** The length of name {@code name} with its {@code ;}, without its {@code &}. */
+        int length(int name) {
+            return lengths[name];
+        }
+
+        /** The escape name of {@code point}, or -1. */
+        int escapeName(int point) {
+            int i = java.util.Arrays.binarySearch(escapePoints, point);
+            return i < 0 ? -1 : escapeNames[i];
+        }
+
+        /** Appends {@code &} and name {@code name}. */
+        void appendName(StringBuilder out, int name) {
+            out.append('&').append(chars, starts[name], lengths[name]);
+        }
+
+        /** The name that is {@code text[start, end)}, or -1. */
+        int find(String text, int start, int end) {
+            int low = 0;
+            int high = starts.length - 1;
+            while (low <= high) {
+                int mid = (low + high) >>> 1;
+                int cmp = compare(mid, text, start, end);
+                if (cmp == 0) return mid;
+                if (cmp > 0) {
+                    high = mid - 1;
+                } else {
+                    low = mid + 1;
+                }
+            }
+            return -1;
+        }
+
+        /**
+         * unbescape's {@code HtmlEscapeSymbols.binarySearch} of {@code text[start, end)}: the
+         * name it is, else {@code -2 - name} for the longest name without {@code ;} that the
+         * search meets as a prefix of it, else -1.
+         */
+        int findLenient(String text, int start, int end) {
+            int low = 0;
+            int high = starts.length - 1;
+            int partial = -1;
+            int rank = Integer.MIN_VALUE;
+            while (low <= high) {
+                int mid = (low + high) >>> 1;
+                int cmp = compare(mid, text, start, end);
+                if (cmp == 0) return mid;
+                if (cmp == 1) {
+                    high = mid - 1;
+                } else {
+                    low = mid + 1;
+                    if (cmp < -10 && (partial < 0 || rank < cmp)) {
+                        partial = mid;
+                        rank = cmp;
+                    }
+                }
+            }
+            return partial < 0 ? -1 : -2 - partial;
+        }
+
+        /**
+         * unbescape's {@code HtmlEscapeSymbols.compare} of name {@code name} with
+         * {@code text[start, end)}: -1 or 1 as the name sorts before or after it, 0 when equal,
+         * and {@code -(10 + rest)} when the name is a prefix of it, not followed by {@code ;},
+         * with {@code rest} characters of the text left over.
+         */
+        private int compare(int name, String text, int start, int end) {
+            int length = lengths[name];
+            int textLength = end - start;
+            int common = Math.min(length, textLength);
+            int i = 0;
+            for (; i < common; i++) {
+                char n = chars[starts[name] + i];
+                char t = text.charAt(start + i);
+                if (n < t) return t == ';' ? 1 : -1;
+                if (n > t) return n == ';' ? -1 : 1;
+            }
+            if (length > i) return chars[starts[name] + i] == ';' ? -1 : 1;
+            if (textLength > i) return text.charAt(start + i) == ';' ? 1 : -(textLength - i + 10);
+            return 0;
+        }
+    }
+
+    /** The HTML 4.01 names (252), as unbescape 1.1.8 and Commons Text 1.15.0 have them. */
+    private static final class Html4Names {
+        /**
+         * Generated by tools/gen_markup_tables.py from the escape maps of unbescape 1.1.8 and
+         * Commons Text 1.15.0 (EntityArrays), which agree.
+         */
+        static final MarkupNames TABLE = new MarkupNames(
+                "0AElig:c6 1acute:c1 1circ:c2 1grave:c0 1lpha:391 1ring:c5 1tilde:c3 1uml:c4 " +
+                "0Beta:392 0Ccedil:c7 1hi:3a7 0Dagger:2021 1elta:394 0ETH:d0 1acute:c9 1circ:ca " +
+                "1grave:c8 1psilon:395 1ta:397 1uml:cb 0Gamma:393 0Iacute:cd 1circ:ce 1grave:cc " +
+                "1ota:399 1uml:cf 0Kappa:39a 0Lambda:39b 0Mu:39c 0Ntilde:d1 1u:39d 0OElig:152 " +
+                "1acute:d3 1circ:d4 1grave:d2 1mega:3a9 2icron:39f 1slash:d8 1tilde:d5 1uml:d6 " +
+                "0Phi:3a6 1i:3a0 1rime:2033 1si:3a8 0Rho:3a1 0Scaron:160 1igma:3a3 0THORN:de " +
+                "1au:3a4 1heta:398 0Uacute:da 1circ:db 1grave:d9 1psilon:3a5 1uml:dc 0Xi:39e " +
+                "0Yacute:dd 1uml:178 0Zeta:396 0aacute:e1 1circ:e2 2ute:b4 1elig:e6 1grave:e0 " +
+                "1lefsym:2135 2pha:3b1 1mp:26 1nd:2227 2g:2220 1ring:e5 1symp:2248 1tilde:e3 " +
+                "1uml:e4 0bdquo:201e 1eta:3b2 1rvbar:a6 1ull:2022 0cap:2229 1cedil:e7 1edil:b8 " +
+                "2nt:a2 1hi:3c7 1irc:2c6 1lubs:2663 1ong:2245 2py:a9 1rarr:21b5 1up:222a " +
+                "2rren:a4 0dArr:21d3 1agger:2020 2rr:2193 1eg:b0 2lta:3b4 1iams:2666 2vide:f7 " +
+                "0eacute:e9 1circ:ea 1grave:e8 1mpty:2205 2sp:2003 1nsp:2002 1psilon:3b5 " +
+                "1quiv:2261 1ta:3b7 2h:f0 1uml:eb 2ro:20ac 1xist:2203 0fnof:192 1orall:2200 " +
+                "1rac12:bd 54:bc 434:be 3sl:2044 0gamma:3b3 1e:2265 1t:3e 0hArr:21d4 1arr:2194 " +
+                "1earts:2665 2llip:2026 0iacute:ed 1circ:ee 1excl:a1 1grave:ec 1mage:2111 " +
+                "1nfin:221e 2t:222b 1ota:3b9 1quest:bf 1sin:2208 1uml:ef 0kappa:3ba 0lArr:21d0 " +
+                "1ambda:3bb 2ng:2329 2quo:ab 2rr:2190 1ceil:2308 1dquo:201c 1e:2264 1floor:230a " +
+                "1owast:2217 2z:25ca 1rm:200e 1saquo:2039 2quo:2018 1t:3c 0macr:af 1dash:2014 " +
+                "1icro:b5 2ddot:b7 2nus:2212 1u:3bc 0nabla:2207 1bsp:a0 1dash:2013 1e:2260 " +
+                "1i:220b 1ot:ac 3in:2209 1sub:2284 1tilde:f1 1u:3bd 0oacute:f3 1circ:f4 " +
+                "1elig:153 1grave:f2 1line:203e 1mega:3c9 2icron:3bf 1plus:2295 1r:2228 2df:aa " +
+                "3m:ba 1slash:f8 1tilde:f5 3mes:2297 1uml:f6 0para:b6 3t:2202 1ermil:2030 " +
+                "3p:22a5 1hi:3c6 1i:3c0 2v:3d6 1lusmn:b1 1ound:a3 1rime:2032 2od:220f 3p:221d " +
+                "1si:3c8 0quot:22 0rArr:21d2 1adic:221a 2ng:232a 2quo:bb 2rr:2192 1ceil:2309 " +
+                "1dquo:201d 1eal:211c 2g:ae 1floor:230b 1ho:3c1 1lm:200f 1saquo:203a 2quo:2019 " +
+                "0sbquo:201a 1caron:161 1dot:22c5 1ect:a7 1hy:ad 1igma:3c3 5f:3c2 2m:223c " +
+                "1pades:2660 1ub:2282 3e:2286 2m:2211 2p:2283 31:b9 32:b2 33:b3 3e:2287 1zlig:df " +
+                "0tau:3c4 1here4:2234 3ta:3b8 5sym:3d1 2insp:2009 2orn:fe 1ilde:2dc 2mes:d7 " +
+                "1rade:2122 0uArr:21d1 1acute:fa 2rr:2191 1circ:fb 1grave:f9 1ml:a8 1psih:3d2 " +
+                "4lon:3c5 1uml:fc 0weierp:2118 0xi:3be 0yacute:fd 1en:a5 1uml:ff 0zeta:3b6 " +
+                "1wj:200d 2nj:200c");
+    }
+
+    /** The HTML5 names (2231) of the WHATWG table, with the escape names of unbescape 1.1.8. */
+    private static final class Html5Names {
+        /**
+         * Generated by tools/gen_markup_tables.py from the WHATWG entities.json of SHA-256
+         * d741d877ac77c4194c4ad526b5b4a19aef8dfe411ab840a466891cdbb9f362e6, checked against
+         * unbescape 1.1.8 and CPython 3.12.6.
+         */
+        static final MarkupNames TABLE = new MarkupNames(
+                "0AElig+c6 1MP-26 1acute+c1 1breve:102 1circ+c2 2y:410 1fr:1d504 1grave+c0 " +
+                "1lpha:391 1macr:100 1nd:2a53 1ogon:104 2pf:1d538 1pplyFunction=2061 1ring+c5 " +
+                "1scr:1d49c 2sign=2254 1tilde+c3 1uml+c4 0Backslash=2216 2rv:2ae7 3wed=2306 " +
+                "1cy:411 1ecause=2235 2rnoullis=212c 2ta:392 1fr:1d505 1opf:1d539 1reve=2d8 " +
+                "1scr=212c 1umpeq=224e 0CHcy:427 1OPY-a9 1acute:106 2p:22d2 " +
+                "3italDifferentialD:2145 2yleys:212d 1caron:10c 2edil+c7 2irc:108 2onint:2230 " +
+                "1dot:10a 1edilla=b8 2nterDot=b7 1fr=212d 1hi:3a7 1ircleDot=2299 6Minus=2296 " +
+                "6Plus=2295 6Times=2297 1lockwiseContourIntegral=2232 3seCurlyDoubleQuote=201d " +
+                "aQuote=2019 1olon:2237 5e:2a74 2ngruent=2261 3int:222f 3tourIntegral=222e " +
+                "2pf=2102 3roduct=2210 2unterClockwiseContourIntegral=2233 1ross:2a2f 1scr:1d49e " +
+                "1up:22d3 3Cap=224d 0DD=2145 2otrahd:2911 1Jcy:402 1Scy:405 1Zcy:40f 1agger:2021 " +
+                "2rr:21a1 2shv:2ae4 1caron:10e 2y:414 1el=2207 3ta:394 1fr:1d507 " +
+                "1iacriticalAcute=b4 bDot=2d9 dubleAcute=2dd bGrave=60 bTilde=2dc 3mond=22c4 " +
+                "2fferentialD=2146 1opf:1d53b 2t=a8 3Dot:20dc 3Equal=2250 " +
+                "2ubleContourIntegral=222f 6Dot=a8 8wnArrow=21d3 6LeftArrow=21d0 " +
+                "aRightArrow=21d4 aTee=2ae4 7ongLeftArrow=27f8 eRightArrow=27fa aRightArrow=27f9 " +
+                "6RightArrow=21d2 bTee=22a8 6UpArrow=21d1 8DownArrow=21d5 6VerticalBar=2225 " +
+                "2wnArrow=2193 9Bar:2913 9UpArrow=21f5 4Breve:311 4LeftRightVector:2950 " +
+                "8TeeVector:295e 8Vector=21bd eBar:2956 4RightTeeVector:295f 9Vector=21c1 " +
+                "fBar:2957 4Tee=22a4 7Arrow=21a7 4arrow=21d3 1scr:1d49f 2trok:110 0ENG:14a " +
+                "1TH+d0 1acute+c9 1caron:11a 2irc+ca 2y:42d 1dot:116 1fr:1d508 1grave+c8 " +
+                "1lement=2208 1macr:112 2ptySmallSquare:25fb 5VerySmallSquare:25ab 1ogon:118 " +
+                "2pf:1d53c 1psilon:395 1qual:2a75 5Tilde=2242 3ilibrium=21cc 1scr=2130 2im:2a73 " +
+                "1ta:397 1uml+cb 1xists=2203 2ponentialE=2147 0Fcy:424 1fr:1d509 " +
+                "1illedSmallSquare:25fc 6VerySmallSquare=25aa 1opf:1d53d 2rAll=2200 " +
+                "2uriertrf:2131 1scr=2131 0GJcy:403 1T-3e 1amma:393 5d:3dc 1breve:11e 1cedil:122 " +
+                "2irc:11c 2y:413 1dot:120 1fr:1d50a 1g=22d9 1opf:1d53e 1reaterEqual=2265 " +
+                "cLess=22db 7FullEqual=2267 7Greater:2aa2 7Less=2277 7SlantEqual=2a7e " +
+                "7Tilde=2273 1scr:1d4a2 1t=226b 0HARDcy:42a 1acek=2c7 2t:5e 1circ:124 1fr:210c " +
+                "1ilbertSpace=210b 1opf=210d 2rizontalLine=2500 1scr=210b 2trok:126 " +
+                "1umpDownHump=224e 4Equal=224f 0IEcy:415 1Jlig:132 1Ocy:401 1acute+cd 1circ+ce " +
+                "2y:418 1dot:130 1fr=2111 1grave+cc 1m=2111 2acr:12a 3ginaryI=2148 2plies=21d2 " +
+                "1nt:222c 3egral=222b 4rsection=22c2 2visibleComma=2063 9Times=2062 1ogon:12e " +
+                "2pf:1d540 2ta:399 1scr=2110 1tilde:128 1ukcy:406 2ml+cf 0Jcirc:134 2y:419 " +
+                "1fr:1d50d 1opf:1d541 1scr:1d4a5 2ercy:408 1ukcy:404 0KHcy:425 1Jcy:40c " +
+                "1appa:39a 1cedil:136 2y:41a 1fr:1d50e 1opf:1d542 1scr:1d4a6 0LJcy:409 1T-3c " +
+                "1acute:139 2mbda:39b 2ng:27ea 2placetrf=2112 2rr=219e 1caron:13d 2edil:13b " +
+                "2y:41b 1eftAngleBracket=27e8 5rrow=2190 9Bar=21e4 9RightArrow=21c6 " +
+                "4Ceiling=2308 4DoubleBracket=27e6 6wnTeeVector:2961 8Vector=21c3 eBar:2959 " +
+                "4Floor=230a 4RightArrow=2194 9Vector:294e 4Tee=22a3 7Arrow=21a4 7Vector:295a " +
+                "5riangle=22b2 cBar:29cf cEqual=22b4 4UpDownVector:2951 6TeeVector:2960 " +
+                "6Vector=21bf cBar:2958 4Vector=21bc aBar:2952 4arrow=21d0 4rightarrow=21d4 " +
+                "2ssEqualGreater=22da 4FullEqual=2266 4Greater=2276 4Less:2aa1 4SlantEqual=2a7d " +
+                "4Tilde=2272 1fr:1d50f 1l:22d8 2eftarrow=21da 1midot:13f 1ongLeftArrow=27f5 " +
+                "8RightArrow=27f7 4RightArrow=27f6 4leftarrow=27f8 8rightarrow=27fa " +
+                "4rightarrow=27f9 2pf:1d543 2werLeftArrow=2199 5RightArrow=2198 1scr=2112 " +
+                "2h=21b0 2trok:141 1t=226a 0Map:2905 1cy:41c 1ediumSpace:205f 2llintrf=2133 " +
+                "1fr:1d510 1inusPlus=2213 1opf:1d544 1scr=2133 1u:39c 0NJcy:40a 1acute:143 " +
+                "1caron:147 2edil:145 2y:41d 1egativeMediumSpace:200b 8ThickSpace=200b " +
+                "bnSpace=200b 8VeryThinSpace=200b 2stedGreaterGreater=226b 6LessLess=226a " +
+                "2wLine:a 1fr:1d511 1oBreak:2060 2nBreakingSpace=a0 2pf=2115 2t:2aec " +
+                "3Congruent=2262 4upCap:226d 3DoubleVerticalBar=2226 3Element=2209 4qual=2260 " +
+                "8Tilde=2242/338 4xists=2204 3Greater=226f aEqual=2271 aFullEqual=2267/338 " +
+                "aGreater=226b/338 aLess=2279 aSlantEqual=2a7e/338 aTilde=2275 " +
+                "3HumpDownHump=224e/338 7Equal=224f/338 3LeftTriangle=22ea fBar=29cf/338 " +
+                "fEqual=22ec 5ss=226e 7Equal=2270 7Greater=2278 7Less=226a/338 " +
+                "7SlantEqual=2a7d/338 7Tilde=2274 3NestedGreaterGreater=2aa2/338 " +
+                "9LessLess=2aa1/338 3Precedes=2280 bEqual=2aaf/338 bSlantEqual=22e0 " +
+                "3ReverseElement=220c 4ightTriangle=22eb gBar=29d0/338 gEqual=22ed " +
+                "3SquareSubset=228f/338 fEqual=22e2 bperset=2290/338 hEqual=22e3 " +
+                "4ubset=2282/20d2 9Equal=2288 5cceeds=2281 bEqual=2ab0/338 bSlantEqual=22e1 " +
+                "bTilde=227f/338 5perset=2283/20d2 bEqual=2289 3Tilde=2241 8Equal=2244 " +
+                "8FullEqual=2247 8Tilde=2249 3VerticalBar=2224 1scr:1d4a9 1tilde+d1 1u:39d " +
+                "0OElig:152 1acute+d3 1circ+d4 2y:41e 1dblac:150 1fr:1d512 1grave+d2 1macr:14c " +
+                "2ega:3a9 2icron:39f 1opf:1d546 1penCurlyDoubleQuote=201c 9Quote=2018 1r:2a54 " +
+                "1scr:1d4aa 2lash+d8 1tilde+d5 3mes:2a37 1uml+d6 1verBar=203e 5race:23de " +
+                "8ket=23b4 4Parenthesis:23dc 0PartialD=2202 1cy:41f 1fr:1d513 1hi:3a6 1i:3a0 " +
+                "1lusMinus=b1 1oincareplane=210c 2pf=2119 1r:2abb 2ecedes=227a 8Equal=2aaf " +
+                "8SlantEqual=227c 8Tilde=227e 2ime:2033 2oduct=220f 3portion=2237 aal=221d " +
+                "1scr:1d4ab 2i:3a8 0QUOT-22 1fr:1d514 1opf=211a 1scr:1d4ac 0RBarr=2910 1EG-ae " +
+                "1acute:154 2ng:27eb 2rr=21a0 4tl:2916 1caron:158 2edil:156 2y:420 1e=211c " +
+                "2verseElement=220b 8quilibrium=21cb 7UpEquilibrium=296f 1fr=211c 1ho:3a1 " +
+                "1ightAngleBracket=27e9 6rrow=2192 aBar=21e5 aLeftArrow=21c4 5Ceiling=2309 " +
+                "5DoubleBracket=27e7 7wnTeeVector:295d 9Vector=21c2 fBar:2955 5Floor=230b " +
+                "5Tee=22a2 8Arrow=21a6 8Vector:295b 6riangle=22b3 dBar:29d0 dEqual=22b5 " +
+                "5UpDownVector:294f 7TeeVector:295c 7Vector=21be dBar:2954 5Vector=21c0 " +
+                "bBar:2953 5arrow=21d2 1opf=211d 2undImplies:2970 1rightarrow=21db 1scr=211b " +
+                "2h=21b1 1uleDelayed:29f4 0SHCHcy:429 2cy:428 1OFTcy:42c 1acute:15a 1c:2abc " +
+                "2aron:160 2edil:15e 2irc:15c 2y:421 1fr:1d516 1hortDownArrow=2193 " +
+                "5LeftArrow=2190 5RightArrow=2192 5UpArrow=2191 1igma:3a3 1mallCircle=2218 " +
+                "1opf:1d54a 1qrt=221a 2uare=25a1 6Intersection=2293 6Subset=228f cEqual=2291 " +
+                "8perset=2290 eEqual=2292 6Union=2294 1scr:1d4ae 1tar=22c6 1ub:22d0 3set=22d0 " +
+                "6Equal=2286 2cceeds=227b 8Equal=2ab0 8SlantEqual=227d 8Tilde=227f 3hThat=220b " +
+                "2m=2211 2p:22d1 3erset=2283 8Equal=2287 3set=22d1 0THORN+de 1RADE=2122 " +
+                "1SHcy:40b 2cy:426 1ab:9 2u:3a4 1caron:164 2edil:162 2y:422 1fr:1d517 " +
+                "1herefore=2234 3ta:398 2ickSpace=205f/200a 3nSpace=2009 1ilde=223c 5Equal=2243 " +
+                "5FullEqual=2245 5Tilde=2248 1opf:1d54b 1ripleDot=20db 1scr:1d4af 2trok:166 " +
+                "0Uacute+da 2rr:219f 4ocir:2949 1brcy:40e 3eve:16c 1circ+db 2y:423 1dblac:170 " +
+                "1fr:1d518 1grave+d9 1macr:16a 1nderBar=5f 6race:23df 9ket=23b5 " +
+                "5Parenthesis:23dd 2ion=22c3 5Plus=228e 1ogon:172 2pf:1d54c 1pArrow=2191 " +
+                "7Bar:2912 7DownArrow=21c5 2DownArrow=2195 2Equilibrium=296e 2Tee=22a5 " +
+                "5Arrow=21a5 2arrow=21d1 2downarrow=21d5 2perLeftArrow=2196 5RightArrow=2197 " +
+                "2si=3d2 4lon:3a5 1ring:16e 1scr:1d4b0 1tilde:168 1uml+dc 0VDash:22ab 1bar:2aeb " +
+                "1cy:412 1dash:22a9 5l:2ae6 1ee=22c1 2rbar:2016 3t=2016 4icalBar=2223 8Line=7c " +
+                "8Separator:2758 8Tilde=2240 3yThinSpace=200a 1fr:1d519 1opf:1d54d 1scr:1d4b1 " +
+                "1vdash:22aa 0Wcirc:174 1edge=22c0 1fr:1d51a 1opf:1d54e 1scr:1d4b2 0Xfr:1d51b " +
+                "1i:39e 1opf:1d54f 1scr:1d4b3 0YAcy:42f 1Icy:407 1Ucy:42e 1acute+dd 1circ:176 " +
+                "2y:42b 1fr:1d51c 1opf:1d550 1scr:1d4b4 1uml:178 0ZHcy:416 1acute:179 1caron:17d " +
+                "2y:417 1dot:17b 1eroWidthSpace=200b 2ta:396 1fr=2128 1opf=2124 1scr:1d4b5 " +
+                "0aacute+e1 1breve:103 1c:223e 2E=223e/333 2d:223f 2irc+e2 2ute+b4 2y:430 " +
+                "1elig+e6 1f:2061 2r:1d51e 1grave+e0 1lefsym:2135 3ph=2135 2pha:3b1 1macr:101 " +
+                "3lg:2a3f 2p+26 1nd:2227 3and:2a55 3d:2a5c 3slope:2a58 3v:2a5a 2g:2220 3e:29a4 " +
+                "3le=2220 3msd:2221 6aa:29a8 7b:29a9 7c:29aa 7d:29ab 7e:29ac 7f:29ad 7g:29ae " +
+                "7h:29af 3rt:221f 5vb:22be 7d:299d 3sph:2222 4t=c5 3zarr:237c 1ogon:105 " +
+                "2pf:1d552 1p=2248 2E:2a70 2acir:2a6f 2e:224a 2id:224b 2os:27 2prox=2248 " +
+                "6eq=224a 1ring+e5 1scr:1d4b6 2t:2a 2ymp:2248 5eq:224d 1tilde+e3 1uml+e4 " +
+                "1wconint:2233 2int:2a11 0bNot:2aed 1ackcong:224c 4epsilon:3f6 4prime:2035 " +
+                "4sim:223d 7eq:22cd 2rvee:22bd 3wed:2305 6ge=2305 1brk:23b5 4tbrk:23b6 " +
+                "1cong=224c 2y:431 1dquo:201e 1ecaus:2235 6e=2235 2mptyv:29b0 2psi=3f6 " +
+                "2rnou:212c 2ta:3b2 3h:2136 3ween:226c 1fr:1d51f 1igcap:22c2 4irc:25ef 4up:22c3 " +
+                "3odot:2a00 4plus:2a01 4times:2a02 3sqcup:2a06 4tar:2605 3triangledown:25bd " +
+                "bup:25b3 3uplus:2a04 3vee:22c1 3wedge:22c0 1karow:290d 1lacklozenge:29eb " +
+                "5square:25aa 5triangle:25b4 ddown:25be dleft:25c2 dright:25b8 3nk:2423 " +
+                "2k12:2592 44:2591 334:2593 2ock:2588 1ne=3d/20e5 3quiv=2261/20e5 2ot:2310 " +
+                "1opf:1d553 2t=22a5 3tom=22a5 2wtie:22c8 2xDL:2557 4R:2554 4l:2556 4r:2553 " +
+                "3H:2550 4D:2566 4U:2569 4d:2564 4u:2567 3UL:255d 4R:255a 4l:255c 4r:2559 " +
+                "3V:2551 4H:256c 4L:2563 4R:2560 4h:256b 4l:2562 4r:255f 3box:29c9 3dL:2555 " +
+                "4R:2552 4l:2510 4r:250c 3h:2500 4D:2565 4U:2568 4d:252c 4u:2534 3minus:229f " +
+                "3plus:229e 3times:22a0 3uL:255b 4R:2558 4l:2518 4r:2514 3v:2502 4H:256a 4L:2561 " +
+                "4R:255e 4h:253c 4l:2524 4r:251c 1prime=2035 1reve:2d8 2vbar+a6 1scr:1d4b7 " +
+                "2emi:204f 2im=223d 4e=22cd 2ol:5c 4b:29c5 4hsub:27c8 1ull:2022 4et=2022 " +
+                "2mp:224e 4E:2aae 4e:224f 5q=224f 0cacute:107 2p:2229 3and:2a44 3brcup:2a49 " +
+                "3cap:2a4b 4up:2a47 3dot:2a40 3s=2229/fe00 2ret:2041 3on:2c7 1caps:2a4d 3ron:10d " +
+                "2edil+e7 2irc:109 2ups:2a4c 5sm:2a50 1dot:10b 1edil+b8 2mptyv:29b2 2nt+a2 " +
+                "4erdot=b7 1fr:1d520 1hcy:447 2eck:2713 5mark=2713 2i:3c7 1ir:25cb 3E:29c3 " +
+                "3c:2c6 4eq:2257 4learrowleft:21ba bright:21bb 6dR=ae 7S:24c8 7ast:229b " +
+                "7circ:229a 7dash:229d 3e=2257 3fnint:2a10 3mid:2aef 3scir:29c2 1lubs:2663 " +
+                "5uit=2663 1olon:3a 5e:2254 6q=2254 2mma:2c 5t:40 3p:2201 4fn:2218 4lement=2201 " +
+                "6xes:2102 2ng:2245 4dot:2a6d 3int:222e 2pf:1d554 3rod:2210 3y+a9 4sr:2117 " +
+                "1rarr:21b5 2oss:2717 1scr:1d4b8 2ub:2acf 4e:2ad1 3p:2ad0 4e:2ad2 1tdot:22ef " +
+                "1udarrl:2938 6r:2935 2epr:22de 3sc:22df 2larr:21b6 6p:293d 2p:222a 3brcap:2a48 " +
+                "3cap:2a46 4up:2a4a 3dot:228d 3or:2a45 3s=222a/fe00 2rarr:21b7 6m:293c " +
+                "3lyeqprec=22de 7succ=22df 5vee:22ce 5wedge:22cf 3ren+a4 3vearrowleft=21b6 " +
+                "aright=21b7 2vee=22ce 2wed=22cf 1wconint:2232 2int:2231 1ylcty:232d 0dArr:21d3 " +
+                "1Har:2965 1agger:2020 2leth:2138 2rr:2193 2sh:2010 4v:22a3 1bkarow:290f " +
+                "2lac:2dd 1caron:10f 2y:434 1d:2146 2agger=2021 3rr:21ca 2otseq:2a77 1eg+b0 " +
+                "2lta:3b4 2mptyv:29b1 1fisht:297f 2r:1d521 1harl:21c3 4r:21c2 1iam:22c4 " +
+                "4ond=22c4 7suit=2666 4s:2666 2e=a8 2gamma:3dd 2sin:22f2 2v=f7 3ide+f7 " +
+                "6ontimes:22c7 3onx=22c7 1jcy:452 1lcorn:231e 3rop:230d 1ollar:24 2pf:1d555 " +
+                "2t:2d9 3eq:2250 5dot:2251 3minus:2238 3plus:2214 3square:22a1 " +
+                "2ublebarwedge:2306 2wnarrow=2193 4downarrows=21ca 4harpoonleft=21c3 bright=21c2 " +
+                "1rbkarow:2910 2corn:231f 3rop:230c 1scr:1d4b9 3y:455 2ol:29f6 2trok:111 " +
+                "1tdot:22f1 2ri:25bf 4f=25be 1uarr:21f5 2har:296f 1wangle:29a6 1zcy:45f " +
+                "2igrarr:27ff 0eDDot=2a77 2ot=2251 1acute+e9 2ster:2a6e 1caron:11b 2ir:2256 " +
+                "4c+ea 2olon:2255 2y:44d 1dot:117 1e:2147 1fDot:2252 2r:1d522 1g:2a9a 2rave+e8 " +
+                "2s:2a96 3dot:2a98 1l:2a99 2inters:23e7 2l:2113 2s:2a95 3dot:2a97 1macr:113 " +
+                "2pty:2205 5set=2205 5v=2205 2sp:2003 413:2004 54:2005 1ng:14b 2sp:2002 " +
+                "1ogon:119 2pf:1d556 1par:22d5 4sl:29e3 2lus:2a71 2si=3b5 4lon:3b5 4v:3f5 " +
+                "1qcirc=2256 3olon=2255 2sim:2242 3lantgtr=2a96 7less=2a95 2uals:3d 3est:225f " +
+                "3iv:2261 5DD:2a78 2vparsl:29e5 1rDot:2253 2arr:2971 1scr:212f 2dot=2250 " +
+                "2im=2242 1ta:3b7 2h+f0 1uml+eb 2ro:20ac 1xcl:21 2ist:2203 2pectation:2130 " +
+                "3onentiale=2147 0fallingdotseq=2252 1cy:444 1emale:2640 1filig:fb03 2lig:fb00 " +
+                "3lig:fb04 2r:1d523 1ilig:fb01 1jlig=66/6a 1lat:266d 2lig:fb02 2tns:25b1 " +
+                "1nof:192 1opf:1d557 2rall:2200 3k:22d4 4v:2ad9 1partint:2a0d 1rac12+bd 53:2153 " +
+                "54+bc 55:2155 56:2159 58:215b 423:2154 55:2156 434+be 55:2157 58:215c 445:2158 " +
+                "456:215a 58:215d 478:215e 3sl:2044 2own:2322 1scr:1d4bb 0gE:2267 2l:2a8c " +
+                "1acute:1f5 2mma:3b3 5d=3dd 2p:2a86 1breve:11f 1circ:11d 2y:433 1dot:121 1e:2265 " +
+                "2l:22db 2q=2265 3q=2267 3slant:2a7e 2s=2a7e 3cc:2aa9 3dot:2a80 6o:2a82 7l:2a84 " +
+                "3l=22db/fe00 4es:2a94 1fr:1d524 1g:226b 2g:22d9 1imel:2137 1jcy:453 1l:2277 " +
+                "2E:2a92 2a:2aa5 2j:2aa4 1nE:2269 2ap:2a8a 4prox=2a8a 2e:2a88 3q=2a88 4q=2269 " +
+                "2sim:22e7 1opf:1d558 1rave:60 1scr:210a 2im:2273 4e:2a8e 4l:2a90 1t+3e 2cc:2aa7 " +
+                "3ir:2a7a 2dot:22d7 2lPar:2995 2quest:2a7c 2rapprox=2a86 4rr:2978 3dot=22d7 " +
+                "3eqless=22db 5qless=2a8c 3less=2277 3sim=2273 1vertneqq=2269/fe00 2nE=2269/fe00 " +
+                "0hArr:21d4 1airsp:200a 2lf=bd 2milt:210b 2rdcy:44a 3r:2194 4cir:2948 4w:21ad " +
+                "1bar:210f 1circ:125 1earts:2665 6uit=2665 2llip:2026 2rcon:22b9 1fr:1d525 " +
+                "1ksearow:2925 3warow:2926 1oarr:21ff 2mtht:223b 2okleftarrow:21a9 " +
+                "4rightarrow:21aa 2pf:1d559 2rbar:2015 1scr:1d4bd 2lash=210f 2trok:127 " +
+                "1ybull:2043 2phen=2010 0iacute+ed 1c:2063 2irc+ee 2y:438 1ecy:435 2xcl+a1 " +
+                "1ff=21d4 2r:1d526 1grave+ec 1i:2148 2iint:2a0c 3nt:222d 2nfin:29dc 2ota:2129 " +
+                "1jlig:133 1macr:12b 3ge:2111 4line:2110 4part=2111 3th:131 2of:22b7 2ped:1b5 " +
+                "1n=2208 2care:2105 2fin:221e 5tie:29dd 2odot=131 2t:222b 3cal:22ba 3egers:2124 " +
+                "4rcal=22ba 3larhk:2a17 3prod:2a3c 1ocy:451 2gon:12f 2pf:1d55a 2ta:3b9 " +
+                "1prod=2a3c 1quest+bf 1scr:1d4be 2in:2208 4E:22f9 4dot:22f5 4s:22f4 5v:22f3 " +
+                "4v=2208 1t:2062 2ilde:129 1ukcy:456 2ml+ef 0jcirc:135 2y:439 1fr:1d527 " +
+                "1math:237 1opf:1d55b 1scr:1d4bf 2ercy:458 1ukcy:454 0kappa:3ba 5v:3f0 " +
+                "1cedil:137 2y:43a 1fr:1d528 1green:138 1hcy:445 1jcy:45c 1opf:1d55c 1scr:1d4c0 " +
+                "0lAarr:21da 2rr:21d0 2tail:291b 1Barr:290e 1E:2266 2g:2a8b 1Har:2962 1acute:13a " +
+                "2emptyv:29b4 2gran:2112 2mbda:3bb 2ng:27e8 4d:2991 4le=27e8 2p:2a85 2quo+ab " +
+                "2rr:2190 4b:21e4 5fs:291f 4fs:291d 4hk=21a9 4lp:21ab 4pl:2939 4sim:2973 " +
+                "4tl:21a2 2t:2aab 3ail:2919 3e:2aad 4s=2aad/fe00 1barr:290c 2brk:2772 2race:7b " +
+                "5k:5b 3ke:298b 4sld:298f 6u:298d 1caron:13e 2edil:13c 3il:2308 2ub=7b 2y:43b " +
+                "1dca:2936 2quo:201c 5r=201e 2rdhar:2967 3ushar:294b 2sh:21b2 1e:2264 " +
+                "2ftarrow=2190 9tail=21a2 4harpoondown:21bd bup:21bc 4leftarrows:21c7 " +
+                "4rightarrow=2194 es:21c6 9harpoons:21cb 9squigarrow=21ad 4threetimes:22cb " +
+                "2g:22da 2q=2264 3q=2266 3slant:2a7d 2s=2a7d 3cc:2aa8 3dot:2a7f 6o:2a81 7r:2a83 " +
+                "3g=22da/fe00 4es:2a93 3sapprox=2a85 4dot:22d6 4eqgtr=22da 6qgtr=2a8b 4gtr:2276 " +
+                "4sim:2272 1fisht:297c 2loor:230a 2r:1d529 1g=2276 2E:2a91 1hard=21bd 4u=21bc " +
+                "5l:296a 2blk:2584 1jcy:459 1l:226a 2arr=21c7 2corner=231e 2hard:296b 2tri:25fa " +
+                "1midot:140 2oust:23b0 6ache=23b0 1nE:2268 2ap:2a89 4prox=2a89 2e:2a87 3q=2a87 " +
+                "4q=2268 2sim:22e6 1oang:27ec 3rr:21fd 2brk:27e6 2ngleftarrow:27f5 " +
+                "8rightarrow:27f7 4mapsto:27fc 4rightarrow:27f6 2oparrowleft=21ab 9right:21ac " +
+                "2par:2985 3f:1d55d 3lus:2a2d 2times:2a34 2wast:2217 3bar:5f 2z:25ca 3enge=25ca " +
+                "3f=29eb 1par:28 4lt:2993 1rarr=21c6 2corner=231f 2har=21cb 5d:296d 2m:200e " +
+                "2tri:22bf 1saquo:2039 2cr:1d4c1 2h:21b0 2im=2272 4e:2a8d 4g:2a8f 2qb=5b " +
+                "3uo:2018 5r=201a 2trok:142 1t+3c 2cc:2aa6 3ir:2a79 2dot=22d6 2hree=22cb " +
+                "2imes:22c9 2larr:2976 2quest:2a7b 2rPar:2996 3i:25c3 4e:22b4 4f=25c2 " +
+                "1urdshar:294a 3uhar:2966 1vertneqq=2268/fe00 2nE=2268/fe00 0mDDot:223a 1acr+af " +
+                "2le:2642 3t:2720 4ese=2720 2p:21a6 3sto=21a6 6down:21a7 6left:21a4 6up:21a5 " +
+                "2rker:25ae 1comma:2a29 2y:43c 1dash:2014 1easuredangle=2221 1fr:1d52a 1ho:2127 " +
+                "1icro+b5 2d:2223 3ast=2a 3cir:2af0 3dot+b7 2nus:2212 5b=229f 5d=2238 6u:2a2a " +
+                "1lcp:2adb 2dr=2026 1nplus:2213 1odels:22a7 2pf:1d55e 1p=2213 1scr:1d4c2 " +
+                "2tpos=223e 1u:3bc 2ltimap:22b8 2map=22b8 0nGg=22d9/338 2t=226b/20d2 3v=226b/338 " +
+                "1Leftarrow:21cd 5rightarrow:21ce 2l=22d8/338 2t=226a/20d2 3v=226a/338 " +
+                "1Rightarrow:21cf 1VDash:22af 2dash:22ae 1abla:2207 2cute:144 2ng=2220/20d2 " +
+                "2p:2249 3E=2a70/338 3id=224b/338 3os:149 3prox=2249 2tur:266e 5al=266e 7s:2115 " +
+                "1bsp+a0 2ump=224e/338 5e=224f/338 1cap:2a43 3ron:148 2edil:146 2ong:2247 " +
+                "5dot=2a6d/338 2up:2a42 2y:43d 1dash:2013 1e:2260 2Arr:21d7 2arhk:2924 4r:2197 " +
+                "5ow=2197 2dot=2250/338 2quiv:2262 2sear:2928 3im=2242/338 2xist:2204 6s=2204 " +
+                "1fr:1d52b 1gE=2267/338 2e:2271 3q=2271 4q=2267/338 4slant=2a7e/338 3s=2a7e/338 " +
+                "2sim:2275 2t:226f 3r=226f 1hArr=21ce 2arr:21ae 2par:2af2 1i:220b 2s:22fc " +
+                "3d:22fa 2v=220b 1jcy:45a 1lArr=21cd 2E=2266/338 2arr:219a 2dr:2025 2e:2270 " +
+                "3ftarrow=219a 5rightarrow=21ae 3q=2270 4q=2266/338 4slant=2a7d/338 3s=2a7d/338 " +
+                "4s:226e 2sim:2274 2t=226e 3ri:22ea 5e:22ec 1mid:2224 1opf:1d55f 2t+ac 3in:2209 " +
+                "5E=22f9/338 5dot=22f5/338 5va=2209 6b:22f7 6c:22f6 3ni:220c 5va=220c 6b:22fe " +
+                "6c:22fd 1par:2226 4allel=2226 4sl=2afd/20e5 4t=2202/338 2olint:2a14 2r:2280 " +
+                "3cue:22e0 3e=2aaf/338 4c=2280 5eq=2aaf/338 1rArr=21cf 2arr:219b 5c=2933/338 " +
+                "5w=219d/338 2ightarrow=219b 2tri:22eb 5e:22ed 1sc:2281 3cue:22e1 3e=2ab0/338 " +
+                "3r:1d4c3 2hortmid=2224 6parallel=2226 2im:2241 4e:2244 5q=2244 2mid=2224 " +
+                "2par=2226 2qsube:22e2 5pe:22e3 2ub:2284 4E=2ac5/338 4e:2288 4set=2282/20d2 " +
+                "7eq=2288 9q=2ac5/338 3cc=2281 5eq=2ab0/338 3p:2285 4E=2ac6/338 4e:2289 " +
+                "4set=2283/20d2 7eq=2289 9q=2ac6/338 1tgl:2279 2ilde+f1 2lg:2278 " +
+                "2riangleleft=22ea deq=22ec 9right=22eb eeq=22ed 1u:3bd 2m:23 3ero:2116 3sp:2007 " +
+                "1vDash:22ad 2Harr:2904 2ap=224d/20d2 2dash:22ac 2ge=2265/20d2 3t=3e/20d2 " +
+                "2infin:29de 2lArr:2902 3e=2264/20d2 3t=3c/20d2 4rie=22b4/20d2 2rArr:2903 " +
+                "3trie=22b5/20d2 2sim=223c/20d2 1wArr:21d6 2arhk:2923 4r:2196 5ow=2196 " +
+                "2near:2927 0oS=24c8 1acute+f3 2st=229b 1cir=229a 4c+f4 2y:43e 1dash=229d " +
+                "2blac:151 2iv:2a38 2ot:2299 2sold:29bc 1elig:153 1fcir:29bf 2r:1d52c 1gon:2db " +
+                "2rave+f2 2t:29c1 1hbar:29b5 2m=3a9 1int=222e 1larr=21ba 2cir:29be 3ross:29bb " +
+                "2ine:203e 2t:29c0 1macr:14d 2ega:3c9 2icron:3bf 3d:29b6 3nus:2296 1opf:1d560 " +
+                "1par:29b7 2erp:29b9 2lus:2295 1r:2228 2arr=21bb 2d:2a5d 3er:2134 5of=2134 3f+aa " +
+                "3m+ba 2igof:22b6 2or:2a56 2slope:2a57 2v:2a5b 1scr=2134 2lash+f8 2ol:2298 " +
+                "1tilde+f5 3mes:2297 6as:2a36 1uml+f6 1vbar:233d 0par:2225 3a+b6 4llel=2225 " +
+                "3sim:2af3 4l:2afd 3t:2202 1cy:43f 1ercnt:25 3iod:2e 3mil:2030 3p:22a5 " +
+                "3tenk:2031 1fr:1d52d 1hi:3c6 3v:3d5 2mmat:2133 2one:260e 1i:3c0 2tchfork=22d4 " +
+                "2v:3d6 1lanck=210f 6h:210e 4kv=210f 2us:2b 4acir:2a23 4b=229e 4cir:2a22 " +
+                "4do=2214 5u:2a25 4e:2a72 4mn+b1 4sim:2a26 4two:2a27 1m=b1 1ointint:2a15 " +
+                "2pf:1d561 2und+a3 1r:227a 2E:2ab3 2ap:2ab7 2cue:227c 2e:2aaf 3c=227a " +
+                "4approx=2ab7 4curlyeq=227c 4eq=2aaf 4napprox:2ab9 5eqq:2ab5 5sim:22e8 4sim:227e " +
+                "2ime:2032 5s:2119 2nE=2ab5 3ap=2ab9 3sim=22e8 2od:220f 3falar:232e 4line:2312 " +
+                "4surf:2313 3p:221d 4to=221d 2sim=227e 2urel:22b0 1scr:1d4c5 2i:3c8 1uncsp:2008 " +
+                "0qfr:1d52e 1int=2a0c 1opf:1d562 1prime:2057 1scr:1d4c6 1uaternions:210d " +
+                "4int:2a16 2est:3f 5eq=225f 2ot+22 0rAarr:21db 2rr:21d2 2tail:291c 1Barr=290f " +
+                "1Har:2964 1ace=223d/331 3ute:155 2dic:221a 2emptyv:29b3 2ng:27e9 4d:2992 " +
+                "4e:29a5 4le=27e9 2quo+bb 2rr:2192 4ap:2975 4b:21e5 5fs:2920 4c:2933 4fs:291e " +
+                "4hk=21aa 4lp=21ac 4pl:2945 4sim:2974 4tl:21a3 4w:219d 2tail:291a 3io:2236 " +
+                "5nals:211a 1barr=290d 2brk:2773 2race:7d 5k:5d 3ke:298c 4sld:298e 6u:2990 " +
+                "1caron:159 2edil:157 3il:2309 2ub=7d 2y:440 1dca:2937 2ldhar:2969 2quo:201d " +
+                "5r=201d 2sh:21b3 1eal:211c 4ine:211b 4part=211c 4s:211d 2ct:25ad 2g+ae " +
+                "1fisht:297d 2loor:230b 2r:1d52f 1hard:21c1 4u:21c0 5l:296c 2o:3c1 3v:3f1 " +
+                "1ightarrow=2192 atail=21a3 5harpoondown=21c1 cup=21c0 5leftarrows:21c4 " +
+                "9harpoons:21cc 5rightarrows:21c9 5squigarrow=219d 5threetimes:22cc 2ng:2da " +
+                "2singdotseq=2253 1larr=21c4 2har=21cc 2m:200f 1moust:23b1 6ache=23b1 1nmid:2aee " +
+                "1oang:27ed 3rr:21fe 2brk:27e7 2par:2986 3f:1d563 3lus:2a2e 2times:2a35 1par:29 " +
+                "4gt:2994 2polint:2a12 1rarr=21c9 1saquo:203a 2cr:1d4c7 2h:21b1 2qb=5d 3uo:2019 " +
+                "5r=2019 1three=22cc 2imes:22ca 2ri:25b9 4e:22b5 4f=25b8 4ltri:29ce 1uluhar:2968 " +
+                "1x:211e 0sacute:15b 1bquo:201a 1c:227b 2E:2ab4 2ap:2ab8 3ron:161 2cue:227d " +
+                "2e:2ab0 3dil:15f 2irc:15d 2nE:2ab6 3ap:2aba 3sim:22e9 2polint:2a13 2sim:227f " +
+                "2y:441 1dot:22c5 4b=22a1 4e:2a66 1eArr:21d8 2arhk=2925 4r:2198 5ow=2198 2ct+a7 " +
+                "2mi:3b 2swar:2929 2tminus:2216 4n=2216 2xt:2736 1fr:1d530 3own=2322 1harp:266f " +
+                "2chcy:449 3y:448 2ortmid=2223 5parallel=2225 2y+ad 1igma:3c3 5f:3c2 5v=3c2 " +
+                "2m:223c 3dot:2a6a 3e:2243 4q=2243 3g:2a9e 4E:2aa0 3l:2a9d 4E:2a9f 3ne:2246 " +
+                "3plus:2a24 3rarr:2972 1larr=2190 1mallsetminus=2216 3shp:2a33 2eparsl:29e4 " +
+                "2id=2223 3le:2323 2t:2aaa 3e:2aac 4s=2aac/fe00 1oftcy:44c 2l:2f 3b:29c4 " +
+                "4ar:233f 2pf:1d564 1pades:2660 6uit=2660 3r=2225 1qcap:2293 5s=2293/fe00 " +
+                "3up:2294 5s=2294/fe00 2sub:228f 5e:2291 5set=228f 8eq=2291 4p:2290 5e:2292 " +
+                "5set=2290 8eq=2292 2u:25a1 3are=25a1 5f=25aa 3f=25aa 1rarr=2192 1scr:1d4c8 " +
+                "2etmn=2216 2mile=2323 2tarf:22c6 1tar:2606 4f=2605 2raightepsilon=3f5 8phi=3d5 " +
+                "3ns=af 1ub:2282 3E:2ac5 3dot:2abd 3e:2286 4dot:2ac3 3mult:2ac1 3nE:2acb 4e:228a " +
+                "3plus:2abf 3rarr:2979 3set=2282 6eq=2286 8q=2ac5 6neq=228a 9q=2acb 4im:2ac7 " +
+                "4ub:2ad5 5p:2ad3 2cc=227b 4approx=2ab8 4curlyeq=227d 4eq=2ab0 4napprox=2aba " +
+                "5eqq=2ab6 5sim=22e9 4sim=227f 2m:2211 2ng:266a 2p:2283 31+b9 32+b2 33+b3 " +
+                "3E:2ac6 3dot:2abe 4sub:2ad8 3e:2287 4dot:2ac4 3hsol:27c9 5ub:2ad7 3larr:297b " +
+                "3mult:2ac2 3nE:2acc 4e:228b 3plus:2ac0 3set=2283 6eq=2287 8q=2ac6 6neq=228b " +
+                "9q=2acc 4im:2ac8 4ub:2ad4 5p:2ad6 1wArr:21d9 2arhk=2926 4r:2199 5ow=2199 " +
+                "2nwar:292a 1zlig+df 0target:2316 2u:3c4 1brk:23b4 1caron:165 2edil:163 2y:442 " +
+                "1dot:20db 1elrec:2315 1fr:1d531 1here4:2234 5fore=2234 3ta:3b8 5sym:3d1 5v=3d1 " +
+                "2ickapprox=2248 5sim=223c 3nsp:2009 2kap=2248 3sim=223c 2orn+fe 1ilde:2dc " +
+                "2mes+d7 5b=22a0 6ar:2a31 5d:2a30 2nt=222d 1oea=2928 2p:22a4 3bot:2336 3cir:2af1 " +
+                "3f:1d565 4ork:2ada 2sa=2929 1prime:2034 1rade:2122 2iangle:25b5 8down=25bf " +
+                "8left=25c3 ceq=22b4 8q:225c 8right=25b9 deq=22b5 3dot:25ec 3e=225c 3minus:2a3a " +
+                "3plus:2a39 3sb:29cd 3time:2a3b 2pezium:23e2 1scr:1d4c9 3y:446 2hcy:45b " +
+                "2trok:167 1wixt=226c 2oheadleftarrow:219e 7rightarrow:21a0 0uArr:21d1 1Har:2963 " +
+                "1acute+fa 2rr:2191 1brcy:45e 3eve:16d 1circ+fb 2y:443 1darr:21c5 2blac:171 " +
+                "2har:296e 1fisht:297e 2r:1d532 1grave+f9 1harl:21bf 4r:21be 2blk:2580 " +
+                "1lcorn:231c 6er=231c 3rop:230f 2tri:25f8 1macr:16b 2l+a8 1ogon:173 2pf:1d566 " +
+                "1parrow=2191 2downarrow:2195 2harpoonleft=21bf 9right=21be 2lus:228e 2si=3c5 " +
+                "4h:3d2 4lon:3c5 2uparrows:21c8 1rcorn:231d 6er=231d 3rop:230e 2ing:16f " +
+                "2tri:25f9 1scr:1d4ca 1tdot:22f0 2ilde:169 2ri=25b5 4f=25b4 1uarr=21c8 2ml+fc " +
+                "1wangle:29a7 0vArr:21d5 1Bar:2ae8 4v:2ae9 1Dash:22a8 1angrt:299c 2repsilon=3f5 " +
+                "3kappa=3f0 3nothing=2205 3phi=3d5 4i=3d6 4ropto=221d 3r=2195 4ho=3f1 3sigma=3c2 " +
+                "4ubsetneq=228a/fe00 cq=2acb/fe00 5psetneq=228b/fe00 cq=2acc/fe00 3theta=3d1 " +
+                "4riangleleft:22b2 bright:22b3 1cy:432 1dash:22a2 1ee=2228 3bar:22bb 3eq:225a " +
+                "2llip:22ee 2rbar:7c 3t=7c 1fr:1d533 1ltri=22b2 1nsub=2282/20d2 4p=2283/20d2 " +
+                "1opf:1d567 1prop=221d 1rtri=22b3 1scr:1d4cb 2ubnE=2acb/fe00 5e=228a/fe00 " +
+                "3pnE=2acc/fe00 5e=228b/fe00 1zigzag:299a 0wcirc:175 1edbar:2a5f 3ge=2227 " +
+                "5q:2259 2ierp:2118 1fr:1d534 1opf:1d568 1p=2118 1r:2240 2eath=2240 1scr:1d4cc " +
+                "0xcap=22c2 2irc=25ef 2up=22c3 1dtri=25bd 1fr:1d535 1hArr:27fa 2arr=27f7 1i:3be " +
+                "1lArr:27f8 2arr=27f5 1map=27fc 1nis:22fb 1odot=2a00 2pf:1d569 3lus=2a01 " +
+                "2time=2a02 1rArr:27f9 2arr=27f6 1scr:1d4cd 2qcup=2a06 1uplus=2a04 2tri=25b3 " +
+                "1vee=22c1 1wedge=22c0 0yacute+fd 3y:44f 1circ:177 2y:44b 1en+a5 1fr:1d536 " +
+                "1icy:457 1opf:1d56a 1scr:1d4ce 1ucy:44e 2ml+ff 0zacute:17a 1caron:17e 2y:437 " +
+                "1dot:17c 1eetrf:2128 2ta:3b6 1fr:1d537 1hcy:436 1igrarr:21dd 1opf:1d56b " +
+                "1scr:1d4cf 1wj:200d 2nj:200c");
+    }

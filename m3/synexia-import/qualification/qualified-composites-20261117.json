@@ -1,0 +1,148 @@
+{
+  "schema": "M3JDK21_QUALIFIED_COMPOSITES_RECEIVER_V1",
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "license": "Apache-2.0",
+  "product_repository": "hsoliwal/M3jdk21",
+  "product_baseline_commit": "984f1b9bc5f83de4606a27ab7b58a4d3978fbc4c",
+  "canonical_recipe_repository": "hsoliwal/com.synexia",
+  "source_recipes": [
+    {
+      "id": "qualified-scope",
+      "pull_request": 18252,
+      "merged": true,
+      "head_commit": "e4be444b6a4aeb6e12728bfc5e5992c0ecfa21da",
+      "merge_commit": "8f8a26e14709c1053a909023a5905b6b3ee1ab1d",
+      "crate": "synexia-openrewrite-recipes/crates/m3-qualified-scope-20261117",
+      "source_manifest_git_blob": "e3029aab2490b59451bcbad8c135f05ee4215792",
+      "source_postimages": [
+        {
+          "name": "MIndexQualifiedScopeRegistry.java",
+          "sha256": "117d12c3c1b50f39935e0054fd7947ed9c29c36767af1628c45a4e55cb6f9174"
+        }
+      ],
+      "evidence": "LOCAL_JAVA21_ORACLE_305_CHECKS_COMPILE_ONLY_STUB",
+      "maven_openrewrite": "NOT_RUN",
+      "foundation_build": "NOT_RUN",
+      "installed_jdk": "NOT_RUN",
+      "product_admitted": false
+    },
+    {
+      "id": "qualified-bridges",
+      "pull_request": 18269,
+      "merged": true,
+      "head_commit": "a0839334816735ea7f5bf3b77ef67fb1c468a312",
+      "merge_commit": "751f371d1d0a94580dabd463a7f0556c85f8e546",
+      "crate": "synexia-openrewrite-recipes/crates/m3-qualified-bridges-20261117",
+      "source_manifest_git_blob": "6d80fa0b67acc1493c04f5fde2121fa963136515",
+      "source_postimages": [
+        {
+          "name": "MIndexCanonicalStructureBridge.java",
+          "sha256": "6dac081c324db73885762fb8e1d098e1c03e7ee69ba5ebb54f134485157ebd5e"
+        },
+        {
+          "name": "MIndexJvmDescriptorInterner.java",
+          "sha256": "f98ce4b005758f5790cd6d9c344159a2cb23af1d977e40565d14bd7f59b887cd"
+        }
+      ],
+      "evidence": "LOCAL_JAVA21_ORACLE_402_CHECKS_COMPILE_ONLY_STUB",
+      "maven_openrewrite": "NOT_RUN",
+      "foundation_build": "NOT_RUN",
+      "installed_jdk": "NOT_RUN",
+      "product_admitted": false
+    }
+  ],
+  "canonicalization": {
+    "immutable_leaf_qualification": "GLOBAL_CONTENT_ONLY_WITH_EXACT_EQUALITY",
+    "semantic_namespace": "VM_LOCAL_POSITIVE_LONG_UID",
+    "qualified_occurrence": "OWNER_GENERATION_OCCURRENCE",
+    "source_sha256": "PROVENANCE_CHECK_NOT_NAMESPACE_ID",
+    "class_runtime_identity": "BINARY_NAME_AND_DEFINING_CLASS_LOADER",
+    "source_scope_fields": [
+      "domain",
+      "program",
+      "module",
+      "library_coordinate",
+      "library_revision",
+      "defining_loader",
+      "filesystem_provider",
+      "schema_version",
+      "source_identity",
+      "source_sha256",
+      "source_generation"
+    ],
+    "const_alias_and_jni_array_lowering": "PROPOSAL_ONLY_NOT_JAVA21_ADMITTED"
+  },
+  "target_owner_preimages": [
+    {
+      "symbol": "java.lang.String",
+      "path": "src/java.base/share/classes/java/lang/String.java",
+      "git_blob": "e890f4cc4888a88214badf75d3d46e9addef3dd3"
+    },
+    {
+      "symbol": "java.lang.M3StringOwner",
+      "path": "src/java.base/share/classes/java/lang/M3StringOwner.java",
+      "git_blob": "329c0ba4d3751a2d76d686237439a2f94831658e"
+    },
+    {
+      "symbol": "jdk.internal.mindex.M3CI",
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3CI.java",
+      "git_blob": "31620898a75896f922ce7f4e663b0e9d9a5ae068"
+    },
+    {
+      "symbol": "jdk.internal.mindex.M3Class",
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3Class.java",
+      "git_blob": "b95eee3c820f6054b4f70507dee101c9f456302f"
+    },
+    {
+      "symbol": "jdk.internal.mindex.M3Method",
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3Method.java",
+      "git_blob": "6bc2fe9176bdd9c95d732ecad105f03b62f4385e"
+    },
+    {
+      "symbol": "jdk.internal.mindex.M3Descriptor",
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3Descriptor.java",
+      "git_blob": "92f4d7da32a3b8265675a413311fd304c6dc2dd2"
+    },
+    {
+      "symbol": "java.util.regex.Pattern",
+      "path": "src/java.base/share/classes/java/util/regex/Pattern.java",
+      "git_blob": "252e46fb57e824f30688eac3600bae9480511fc8"
+    }
+  ],
+  "families": [
+    { "name": "M3String", "stage": "STRING", "jdk_owner": "java.lang.String", "state": "PENDING_TARGET_ADMISSION" },
+    { "name": "M3Array", "stage": "ARRAYS", "jdk_owner": "Java arrays/HotSpot/JNI", "state": "PENDING_TARGET_ADMISSION" },
+    { "name": "M3Primitive", "stage": "ARRAYS", "jdk_owner": "java.lang/jdk.compiler/HotSpot", "state": "PENDING_TARGET_ADMISSION" },
+    { "name": "M3Path", "stage": "REMAINING", "jdk_owner": "java.nio.file.Path", "state": "PENDING_TARGET_ADMISSION" },
+    { "name": "M3URI_URL", "stage": "REMAINING", "jdk_owner": "java.net.URI/java.net.URL", "state": "PENDING_TARGET_ADMISSION" },
+    { "name": "M3List_Tree", "stage": "COLLECTIONS", "jdk_owner": "java.util.List/collections", "state": "PENDING_TARGET_ADMISSION" },
+    { "name": "M3Map_Set", "stage": "COLLECTIONS", "jdk_owner": "java.util.Map/java.util.Set", "state": "PENDING_TARGET_ADMISSION" },
+    { "name": "M3AST", "stage": "AST_COMPILER", "jdk_owner": "jdk.compiler/internal", "state": "PENDING_TARGET_ADMISSION" },
+    { "name": "M3Metadata", "stage": "REMAINING", "jdk_owner": "jdk.internal.mindex.M3CI", "state": "PENDING_TARGET_ADMISSION" },
+    { "name": "M3Class", "stage": "REMAINING", "jdk_owner": "java.lang.Class/jdk.internal.mindex.M3Class", "state": "PENDING_TARGET_ADMISSION" },
+    { "name": "M3Method", "stage": "REMAINING", "jdk_owner": "java.lang.reflect.Method/jdk.internal.mindex.M3Method", "state": "PENDING_TARGET_ADMISSION" },
+    { "name": "M3Module", "stage": "REMAINING", "jdk_owner": "java.lang.Module", "state": "PENDING_TARGET_ADMISSION" },
+    { "name": "M3Object", "stage": "REMAINING", "jdk_owner": "HotSpot/Java heap", "state": "PENDING_TARGET_ADMISSION" },
+    { "name": "M3Runtime", "stage": "REMAINING", "jdk_owner": "HotSpot/JNI/java.base", "state": "PENDING_TARGET_ADMISSION" },
+    { "name": "M3File", "stage": "REMAINING", "jdk_owner": "java.nio.file", "state": "PENDING_TARGET_ADMISSION" },
+    { "name": "M3SQL", "stage": "REMAINING", "jdk_owner": "M3JDK-owned optional module", "state": "PENDING_TARGET_ADMISSION" },
+    { "name": "M3Regex", "stage": "REMAINING", "jdk_owner": "java.util.regex.Pattern/Matcher", "state": "PENDING_TARGET_ADMISSION" },
+    { "name": "M3Graph", "stage": "REMAINING", "jdk_owner": "M3JDK-owned graph implementation", "state": "PENDING_TARGET_ADMISSION" },
+    { "name": "M3QualifiedLexicon", "stage": "REMAINING", "jdk_owner": "Existing canonical owner plus qualified metadata", "state": "PENDING_TARGET_ADMISSION" },
+    { "name": "M3Const", "stage": "REMAINING", "jdk_owner": "jdk.compiler/HotSpot/JNI", "state": "PENDING_TARGET_ADMISSION" }
+  ],
+  "qualification": {
+    "active_stage": "STRING",
+    "phase_advance": false,
+    "target_runtime_source_written_by_this_receipt": false,
+    "target_admission": false,
+    "source_recipe_replay": "NOT_RUN",
+    "target_java21_build": "NOT_RUN",
+    "target_jtreg": "NOT_RUN",
+    "target_jni_gc_hotspot": "NOT_RUN",
+    "installed_image_abi": "NOT_RUN",
+    "comparative_cpu_heap_native_memory": "NOT_RUN",
+    "license_review": "PENDING",
+    "status": "SOURCE_PINNED_RECEIVER_PLAN_ONLY"
+  }
+}
