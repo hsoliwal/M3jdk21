@@ -154,9 +154,9 @@ class PublicNamesTest(unittest.TestCase):
 
     def test_new_donor_imports_in_jdk_owner_refused(self):
         path = "src/java.base/share/classes/java/util/CollectionViews.java"
-        # Historical donor facts and the current refused receiver are separate cases.
-        for parts in (("com", "synexia", "indexstring"),
-                      ("jdk", "internal", "m3", "indexstring")):
+        # Historical donor facts stay refused. jdk.internal.m3.indexstring is a java.base package
+        # (owner, 2026-11-17) and is checked as allowed below.
+        for parts in (("com", "synexia", "indexstring"),):
             with self.subTest(namespace=parts):
                 donor = ".".join((*parts, "MIndexString"))
                 self.assertTrue(self.issue(
@@ -165,6 +165,9 @@ class PublicNamesTest(unittest.TestCase):
         self.assertTrue(self.issue(
             path, "package java.util;\nimport org.eclipse.collections.api.list.MutableList;\n"
                   "class CollectionViews {}"))
+        allowed = ".".join(("jdk", "internal", "m3", "indexstring", "FrozenChars"))
+        self.assertFalse(self.issue(
+            path, "package java.util;\nimport " + allowed + ";\nclass CollectionViews {}"))
 
     def test_fully_qualified_donor_reference_refused(self):
         path = "src/java.base/share/classes/jdk/internal/mindex/M3Bits.java"

@@ -3522,11 +3522,11 @@ PREFIXED	m3/ports/compiletime/src/test/java/jdk/m3/compiletime/M3GvasLiteralHarv
 PREFIXED	m3/ports/compiletime/src/test/java/jdk/m3/compiletime/M3ItemReferenceScanTest.java
 PREFIXED	m3/ports/compiletime/src/test/java/jdk/m3/compiletime/M3RegexRequirementTest.java
 PREFIXED	m3/ports/compiletime/src/test/java/jdk/m3/compiletime/ast/M3CapturedSourceHandoffContract.java
-PREFIXED	m3/ports/indexstring/src/main/java/jdk/internal/m3/indexstring/M3IndexCharacterFlags.java
+PREFIXED	src/java.base/share/classes/jdk/internal/m3/indexstring/M3IndexCharacterFlags.java
 PREFIXED	m3/ports/indexstring/src/main/java/jdk/m3/text/compat/M3Text.java
-PREFIXED	m3/ports/indexstring/src/test/java/jdk/internal/m3/indexstring/M3IndexCharacterFlagsCombineSmoke.java
-PREFIXED	m3/ports/indexstring/src/test/java/jdk/internal/m3/indexstring/M3IndexCharacterFlagsCombineSmokeMain.java
-PREFIXED	m3/ports/indexstring/src/test/java/jdk/internal/m3/indexstring/M3IndexCharacterFlagsDump.java
+PREFIXED	test/jdk/jdk/internal/m3/indexstring/M3IndexCharacterFlagsCombineSmoke.java
+PREFIXED	test/jdk/jdk/internal/m3/indexstring/M3IndexCharacterFlagsCombineSmokeMain.java
+PREFIXED	test/jdk/jdk/internal/m3/indexstring/M3IndexCharacterFlagsDump.java
 PREFIXED	m3/ports/jfx-viewport/src/main/java/jdk/m3/desktop/jfx/M3JavaFxViewport.java
 PREFIXED	m3/ports/parallel-bulk/src/main/java/jdk/m3/parallel/bulk/M3ParallelBitCountProvider.java
 PREFIXED	m3/ports/parallel-bulk/src/main/java/jdk/m3/parallel/bulk/M3ParallelIntAddProvider.java

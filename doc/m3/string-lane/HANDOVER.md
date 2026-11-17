@@ -66,6 +66,15 @@ Next in item 2: the natives into
 java.base as they are; 4 take `jdk.m3.collections.ProgressMonitor`, which java.base cannot see, and the
 public-names check lists `jdk.internal.m3.indexstring` as a donor namespace).
 
+**Then `m3/ports/indexstring` (same day).** Owner's choices in question dialogs: package name kept
+(`jdk.internal.m3.indexstring` + `.type`, 19 classes into java.base by renames); `check_public_names.py` no
+longer lists it as a donor namespace; the four classes that took `jdk.m3.collections.ProgressMonitor` take
+java.base's `java.util.concurrent.ProgressMonitor`, with a never-cancelling default when the caller passes
+none; the port's `pom.xml` is kept and documented as no longer building. The smoke tests moved to
+`test/jdk/jdk/internal/m3/indexstring` and run in `make/m3/indexstring/test-java-base.sh`
+(workflow `m3-java-base-internals`). `jdk.m3.text.compat.M3Text` stays in the port (a new java.base
+package was not admitted).
+
 ## 2. Invariants
 
 Break one of these and the leaf is wrong, whatever its tests say.

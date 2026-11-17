@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- SPDX-License-Identifier: Apache-2.0 -->
+<!--
+  This pom no longer builds (kept by the owner's decision of 2026-11-17). The package
+  jdk.internal.m3.indexstring is part of java.base: src/java.base/share/classes/jdk/internal/m3/indexstring,
+  tests in test/jdk/jdk/internal/m3/indexstring. Four of its classes take java.util.concurrent.ProgressMonitor,
+  which only M3JDK's java.base has, and on M3JDK the package belongs to java.base. The smoke tests below run
+  in make/m3/indexstring/test-java-base.sh (workflow m3-java-base-internals). jdk.m3.text.compat.M3Text and
+  PortMicrobench stay in this folder.
+-->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.m3.compat</groupId>

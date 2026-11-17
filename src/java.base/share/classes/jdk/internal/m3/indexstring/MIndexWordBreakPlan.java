@@ -2,15 +2,15 @@
 // SPDX-License-Identifier: Apache-2.0
 package jdk.internal.m3.indexstring;
 
-import jdk.m3.collections.DefaultProgressMonitor;
-import jdk.m3.collections.ProgressMonitor;
+import java.util.concurrent.ProgressMonitor;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
 /**
- * Frozen trie-guided dictionary segmentation for arbitrary UTF-16 CharSequence values (a String included).
+ * Frozen trie-guided dictionary segmentation for arbitrary UTF-16 CharSequence values
+ * (a String included).
  *
  * <p>The vocabulary trie is prepared once by the existing
  * {@link MIndexVocabularySearchTree} owner. Each query walks only reachable
@@ -104,14 +104,14 @@ public final class MIndexWordBreakPlan {
   }
 
   public static MIndexWordBreakPlan compile(MIndexVocabularySearchTree vocabulary) {
-    return compile(vocabulary, new DefaultProgressMonitor());
+    return compile(vocabulary, MIndexTrieNavigation.NO_PROGRESS);
   }
 
   public static MIndexWordBreakPlan compile(
       MIndexVocabularySearchTree vocabulary, ProgressMonitor monitor) {
     MIndexVocabularySearchTree words = Objects.requireNonNull(vocabulary, "vocabulary");
-    ProgressMonitor progress = monitor == null ? new DefaultProgressMonitor() : monitor;
-    progress.beginTask("compile MIndex word-break plan", words.size());
+    ProgressMonitor progress = monitor == null ? MIndexTrieNavigation.NO_PROGRESS : monitor;
+    progress.begin("compile MIndex word-break plan", words.size());
     try {
       MIndexTrieNavigation.check(progress);
       MIndexTrieNavigation trie =
@@ -134,7 +134,7 @@ public final class MIndexWordBreakPlan {
   }
 
   public Result segment(CharSequence input) {
-    return segment(input, new DefaultProgressMonitor());
+    return segment(input, MIndexTrieNavigation.NO_PROGRESS);
   }
 
   /**
@@ -176,7 +176,7 @@ public final class MIndexWordBreakPlan {
       CharSequence input, Limits limits, ProgressMonitor monitor, boolean minimum) {
     CharSequence source = Objects.requireNonNull(input, "input");
     Objects.requireNonNull(limits, "limits");
-    ProgressMonitor progress = monitor == null ? new DefaultProgressMonitor() : monitor;
+    ProgressMonitor progress = monitor == null ? MIndexTrieNavigation.NO_PROGRESS : monitor;
     MIndexTrieNavigation.check(progress);
     int length = source.length();
     MIndexTrieNavigation.check(progress);
@@ -197,11 +197,11 @@ public final class MIndexWordBreakPlan {
       throw new IllegalArgumentException("word-break workspace budget exceeded");
     }
 
-    progress.beginTask(
+    progress.begin(
         minimum ? "minimize MIndex word-break segments" : "segment CharSequence by vocabulary",
         length);
     try {
-      progress.subTask("prepare word-break positions");
+      progress.message("prepare word-break positions");
       MIndexTrieNavigation.check(progress);
       int[] predecessor = new int[(int) positions];
       int[] wordRow = new int[(int) positions];
@@ -264,7 +264,7 @@ public final class MIndexWordBreakPlan {
   private Result reconstruct(
       CharSequence source, int length, int[] predecessor, int[] wordRow,
       ProgressMonitor monitor) {
-    monitor.subTask("reconstruct word-break segments");
+    monitor.message("reconstruct word-break segments");
     MIndexTrieNavigation.check(monitor);
     int segments = 0;
     for (int at = length; at > 0; at = predecessor[at]) {

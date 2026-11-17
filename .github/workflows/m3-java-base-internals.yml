@@ -6,6 +6,7 @@ on:
     branches: [master]
     paths:
       - 'src/java.base/share/classes/jdk/internal/m3/**'
+      - 'src/java.base/share/classes/jdk/m3/**'
       - 'src/java.base/share/native/libm3*/**'
       - 'test/jdk/jdk/internal/m3/**'
       - 'make/m3/**'
@@ -14,6 +15,7 @@ on:
     branches: [master]
     paths:
       - 'src/java.base/share/classes/jdk/internal/m3/**'
+      - 'src/java.base/share/classes/jdk/m3/**'
       - 'src/java.base/share/native/libm3*/**'
       - 'test/jdk/jdk/internal/m3/**'
       - 'make/m3/**'
@@ -48,3 +50,5 @@ jobs:
           bash make/m3/intern/test-java-base.sh \
             "$HOME/.m2/repository/org/junit/platform/junit-platform-console-standalone/1.11.4/junit-platform-console-standalone-1.11.4.jar" \
             "$RUNNER_TEMP/m3-intern"
+      - name: indexstring (jdk.internal.m3.indexstring, with jdk.m3.precompute)
+        run: bash make/m3/indexstring/test-java-base.sh "$RUNNER_TEMP/m3-indexstring"
