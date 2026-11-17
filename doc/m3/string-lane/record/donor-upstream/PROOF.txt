@@ -1,0 +1,84 @@
+DONOR_UPSTREAM_FIXES proof (stock VM + java.base with the recipe applied to master)
+== small -Xmx256m
+small: 17 checks, 0 failures
+RESULT PASS
+== unwrap -Xmx1700m
+unwrap: 1 checks, 0 failures
+RESULT PASS
+== turkish -Duser.language=tr -Duser.country=TR
+turkish: 6 checks, 0 failures
+RESULT PASS
+
+DISCRIMINATOR: the same probe on unfixed master String (expected to fail)
+== small -Xmx256m
+small: 17 checks, 1 failures
+repeat accepts 21262215: java.lang.IllegalArgumentException: The requested result is too large for a String. instead of OutOfMemoryError
+RESULT FAIL
+== unwrap -Xmx1700m
+	at java.base/jdk.internal.util.Preconditions.outOfBounds(Preconditions.java:98)
+	at java.base/jdk.internal.util.Preconditions.outOfBoundsCheckFromToIndex(Preconditions.java:112)
+	at java.base/jdk.internal.util.Preconditions.checkFromToIndex(Preconditions.java:349)
+	at java.base/java.lang.String.checkBoundsBeginEnd(String.java:11144)
+	at java.base/java.lang.String.substring(String.java:3201)
+	at java.base/java.lang.String.unwrap(String.java:6395)
+	at DonorUpstreamFixProbe.unwrapOverflow(DonorUpstreamFixProbe.java:66)
+	at DonorUpstreamFixProbe.main(DonorUpstreamFixProbe.java:22)
+== turkish -Duser.language=tr -Duser.country=TR
+turkish: 6 checks, 3 failures
+toCamelCase TIP.TOP: expected [TipTop] got [T?pTop]
+capitalizeFully HELI WORLD: expected [Heli World] got [Hel? World]
+capitalizeFully(char...): expected [Heli.World] got [Hel?.World]
+RESULT FAIL
+
+PROVE_DONOR_UPSTREAM_FIXES v1 on origin/master aaddb844138ea2db8646a9035bd083e7c5b542f4
+== javac closure (unfixed): round 1 javac_exit=0 errors=0
+== unfixed small -Xmx256m
+small: 17 checks, 1 failures
+repeat accepts 21262215: java.lang.IllegalArgumentException: The requested result is too large for a String. instead of OutOfMemoryError
+RESULT FAIL
+Exception in thread "main" java.lang.AssertionError: 1 failures
+== unfixed unwrap -Xmx1700m
+Exception in thread "main" java.lang.OutOfMemoryError: Java heap space
+== unfixed turkish -Duser.language=tr -Duser.country=TR
+turkish: 6 checks, 3 failures
+toCamelCase TIP.TOP: expected [TipTop] got [T?pTop]
+capitalizeFully HELI WORLD: expected [Heli World] got [Hel? World]
+capitalizeFully(char...): expected [Heli.World] got [Hel?.World]
+RESULT FAIL
+Exception in thread "main" java.lang.AssertionError: 3 failures
+== javac closure (fixed): round 1 javac_exit=0 errors=0
+== fixed small -Xmx256m
+small: 17 checks, 0 failures
+RESULT PASS
+== fixed unwrap -Xmx1700m
+Exception in thread "main" java.lang.OutOfMemoryError: Java heap space
+== fixed turkish -Duser.language=tr -Duser.country=TR
+turkish: 6 checks, 0 failures
+RESULT PASS
+
+PROVE_DONOR_UPSTREAM_FIXES v1 on origin/master aaddb844138ea2db8646a9035bd083e7c5b542f4
+== javac closure (unfixed): round 1 javac_exit=0 errors=0
+== unfixed small -Xmx256m
+small: 17 checks, 1 failures
+repeat accepts 21262215: java.lang.IllegalArgumentException: The requested result is too large for a String. instead of OutOfMemoryError
+RESULT FAIL
+Exception in thread "main" java.lang.AssertionError: 1 failures
+== unfixed unwrap -Xmx3800m
+Exception in thread "main" java.lang.StringIndexOutOfBoundsException: Range [1073741824, 0) out of bounds for length 1073741824
+== unfixed turkish -Duser.language=tr -Duser.country=TR
+turkish: 6 checks, 3 failures
+toCamelCase TIP.TOP: expected [TipTop] got [T?pTop]
+capitalizeFully HELI WORLD: expected [Heli World] got [Hel? World]
+capitalizeFully(char...): expected [Heli.World] got [Hel?.World]
+RESULT FAIL
+Exception in thread "main" java.lang.AssertionError: 3 failures
+== javac closure (fixed): round 1 javac_exit=0 errors=0
+== fixed small -Xmx256m
+small: 17 checks, 0 failures
+RESULT PASS
+== fixed unwrap -Xmx3800m
+unwrap: 1 checks, 0 failures
+RESULT PASS
+== fixed turkish -Duser.language=tr -Duser.country=TR
+turkish: 6 checks, 0 failures
+RESULT PASS
