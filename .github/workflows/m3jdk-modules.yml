@@ -89,3 +89,7 @@ jobs:
             test "$output" = "M3_STATIC_RANGE_COMPAT_PASS checks=46"
           done
           echo "M3_REAL_MODULE_RANGE_TEST_PASS configurations=3 checks=138"
+
+      - name: Verify functional equivalence on the complete owning module
+        shell: bash
+        run: bash make/m3/collections/test-equivalence.sh "$RUNNER_TEMP/m3-equivalence"

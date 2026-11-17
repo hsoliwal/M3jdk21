@@ -38,8 +38,16 @@ The module shares one equality strategy among its collection providers, Eclipse 
 - `base.EquivalenceStrategies`: a new package-private class holding the two adapters (Apache
   License, Version 2.0, Synexia).
 
-Nothing else in `Equivalence` changed; the classes of the provider are otherwise as compiled from
-the library.
+In this adapter change, nothing else in `Equivalence` changed; the classes of the provider were
+otherwise as compiled from the library. The following separate addition extends that baseline.
+
+### Paired Java callbacks added by Synexia (2026-11-17)
+
+`base.Equivalence` additionally exposes `static fromFunctions(BiPredicate, ToIntFunction)`.
+It creates a fresh equivalence backed by the supplied equality and hash callbacks. The private
+`CallbackEquivalence` adapter retains the existing reference and null rules and does not
+implement `Serializable`. Existing members, including the two conversions above, are unchanged.
+The source retains its original copyright and license and records this additional modification.
 
 ### License
 
