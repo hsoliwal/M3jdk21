@@ -165,12 +165,14 @@ public final class String
     /**
      * The chars of this string: Java 21 compatibility is the interned chars.
      *
-     * <p>A JNI-ready {@code char[]} of {@link #length()} UTF-16 units, filled when the String is
-     * made (layout invariant, see {@link #value}) and protected internally: it is never handed to
-     * a caller, which only ever receives a copy, and never written after construction.</p>
+     * <p>A JNI-ready {@code char[]} of {@link #length()} UTF-16 units, filled lazily (owner
+     * decision 51): it is {@code null} until the first whole-string char demand ({@link
+     * #toCharArray()}, {@link #getChars(int, int, char[], int)} of the whole string, JNI), then
+     * written once with the chars of {@link #value} and never again: a const array. It is
+     * protected internally: never handed to a caller, which only ever receives a copy.</p>
      */
     @Stable
-    private final char[] chValue;
+    private char[] chValue;
 
     /**
      * Canonical M3JDK text value. Synexia MIndexString is the donor/reference structure; M3JDK
@@ -274,7 +276,6 @@ public final class String
         this.value = "".value;
         this.coder = "".coder;
         this.m3 = null;
-        this.chValue = layoutChars(this.value, this.coder, this.m3);
     }
 
     /**
@@ -375,7 +376,6 @@ public final class String
             this.value = "".value;
             this.coder = "".coder;
             this.m3 = null;
-            this.chValue = layoutChars(this.value, this.coder, this.m3);
             return;
         }
 
@@ -384,7 +384,6 @@ public final class String
             this.value = direct.materialize();
             this.coder = direct.coder();
             this.m3 = direct;
-            this.chValue = layoutChars(this.value, this.coder, this.m3);
             return;
         }
 
@@ -394,13 +393,11 @@ public final class String
             this.value = val;
             this.coder = StringUTF16.coderFromArrayLen(val, count);
             this.m3 = null;
-            this.chValue = layoutChars(this.value, this.coder, this.m3);
             return;
         }
         this.value = StringUTF16.toBytes(codePoints, offset, count);
         this.coder = UTF16;
         this.m3 = null;
-        this.chValue = layoutChars(this.value, this.coder, this.m3);
     }
 
     /**
@@ -449,7 +446,6 @@ public final class String
             this.value = "".value;
             this.coder = "".coder;
             this.m3 = null;
-            this.chValue = layoutChars(this.value, this.coder, this.m3);
             return;
         }
         byte[] candidate;
@@ -469,7 +465,6 @@ public final class String
         this.value = candidate;
         this.coder = storage == null ? candidateCoder : storage.coder();
         this.m3 = storage;
-        this.chValue = layoutChars(this.value, this.coder, this.m3);
     }
 
     /**
@@ -594,14 +589,12 @@ public final class String
             this.value = construction.storage.materialize();
             this.coder = construction.storage.coder();
             this.m3 = construction.storage;
-            this.chValue = layoutChars(this.value, this.coder, this.m3);
             return;
         }
         M3String storage = maybeAdmit(construction.value, construction.coder);
         this.value = construction.value;
         this.coder = storage == null ? construction.coder : storage.coder();
         this.m3 = storage;
-        this.chValue = layoutChars(this.value, this.coder, this.m3);
     }
 
     private static final class M3Construction {
@@ -1856,7 +1849,7 @@ public final class String
     public void getChars(int srcBegin, int srcEnd, char[] dst, int dstBegin) {
         checkBoundsBeginEnd(srcBegin, srcEnd, length());
         checkBoundsOffCount(dstBegin, srcEnd - srcBegin, dst.length);
-        char[] chars = chValue;
+        char[] chars = srcBegin == 0 && srcEnd == length() ? constChars() : chValue;
         if (chars != null) {
             System.arraycopy(chars, srcBegin, dst, dstBegin, srcEnd - srcBegin);
             return;
@@ -13329,15 +13322,7 @@ public final class String
      *          the character sequence represented by this string.
      */
     public char[] toCharArray() {
-        char[] chars = chValue;
-        if (chars != null) return chars.clone();
-        M3String storage = m3();
-        if (storage != null) {
-            return storage.charShadow();
-        }
-        byte[] currentValue = value();
-        return isLatin1() ? StringLatin1.toChars(currentValue)
-                          : StringUTF16.toChars(currentValue);
+        return constChars().clone();
     }
 
     /**
@@ -13775,7 +13760,6 @@ public final class String
             this.value = "".value;
             this.coder = "".coder;
             this.m3 = null;
-            this.chValue = layoutChars(this.value, this.coder, this.m3);
             return;
         }
 
@@ -13784,7 +13768,6 @@ public final class String
             this.value = direct.materialize();
             this.coder = direct.coder();
             this.m3 = direct;
-            this.chValue = layoutChars(this.value, this.coder, this.m3);
             return;
         }
 
@@ -13794,13 +13777,11 @@ public final class String
             this.value = val;
             this.coder = StringUTF16.coderFromArrayLen(val, len);
             this.m3 = null;
-            this.chValue = layoutChars(this.value, this.coder, this.m3);
             return;
         }
         this.value = StringUTF16.toBytes(value, off, len);
         this.coder = UTF16;
         this.m3 = null;
-        this.chValue = layoutChars(this.value, this.coder, this.m3);
     }
 
     /*
@@ -13824,7 +13805,6 @@ public final class String
             this.value = direct.materialize();
             this.coder = direct.coder();
             this.m3 = direct;
-            this.chValue = layoutChars(this.value, this.coder, this.m3);
             return;
         }
 
@@ -13847,7 +13827,6 @@ public final class String
         this.value = candidate;
         this.coder = candidateCoder;
         this.m3 = null;
-        this.chValue = layoutChars(this.value, this.coder, this.m3);
     }
 
    /*
@@ -13858,7 +13837,6 @@ public final class String
         this.value = value;
         this.coder = storage == null ? coder : storage.coder();
         this.m3 = storage;
-        this.chValue = layoutChars(this.value, this.coder, this.m3);
     }
 
     private static M3String maybeAdmitCodePoints(
@@ -13904,7 +13882,6 @@ public final class String
         this.value = checked.materialize();
         this.coder = checked.coder();
         this.m3 = checked;
-        this.chValue = layoutChars(this.value, this.coder, this.m3);
     }
 
     M3String m3() {
@@ -13912,10 +13889,27 @@ public final class String
     }
 
     /**
+     * The const chars of this string (layout invariant, decision 51): fills {@link #chValue} once
+     * with the chars of {@link #value} on the first call, behind a store-store fence so that no
+     * thread sees the reference before the filled contents, and returns it. Callers copy out of
+     * it; it never leaves this class.
+     */
+    private char[] constChars() {
+        char[] chars = chValue;
+        if (chars == null) {
+            chars = layoutChars(value, coder, m3());
+            jdk.internal.misc.Unsafe.getUnsafe().storeStoreFence();
+            chValue = chars;
+        }
+        return chars;
+    }
+
+    /**
      * The chars of the layout invariant for a String under construction: the JNI char shadow
      * of its M3 text when it is M3-backed, otherwise its bytes inflated to UTF-16 units.
      */
     private static char[] layoutChars(byte[] bytes, byte coder, M3String storage) {
+        //FLLDCIM: LAYOUT - decision 51: called once per String by chars(), never at construction
         if (storage != null) return storage.charShadow();
         return COMPACT_STRINGS && coder == LATIN1 ? StringLatin1.toChars(bytes)
                                                  : StringUTF16.toChars(bytes);

@@ -5,12 +5,15 @@
 
 /*
  * @test
- * @summary M3JDK String layout invariant: every String holds its bytes in value and its chars in
- *          chValue, filled at construction by every Java constructor and every VM site
+ * @summary M3JDK String layout invariant (decisions 47, 51): every String holds its bytes in
+ *          value from construction; chValue is a const char[] filled lazily, once, on the first
+ *          whole-string char demand, equal to the chars and never handed to a caller
  * @modules java.base/java.lang:open
  * @run main/othervm StringLayoutInvariantTest
  * @run main/othervm -XX:-CompactStrings StringLayoutInvariantTest
  * @run main/othervm -Xcomp -XX:-TieredCompilation StringLayoutInvariantTest
+ * @run main/othervm -Xcomp -XX:-TieredCompilation -XX:+OptimizeStringConcat
+ *      StringLayoutInvariantTest
  * @run main/othervm -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage
  *      StringLayoutInvariantTest
  */
@@ -40,71 +43,85 @@ public class StringLayoutInvariantTest {
     private static final List<String> FAILURES = new ArrayList<>();
     private static int checked;
 
-    /** -Dlayout.vmSites=false checks Java-made Strings only (a stock VM does not fill chValue). */
-    private static final boolean VM_SITES =
-            !"false".equals(System.getProperty("layout.vmSites"));
-
     public static void main(String[] args) throws Exception {
         String text = "Layout \u00e9t\u00e9 " + "\ud835\udd1e" + " end";
         char[] chars = text.toCharArray();
         byte[] utf8 = text.getBytes(StandardCharsets.UTF_8);
         byte[] latin1 = "plain latin \u00ff".getBytes(StandardCharsets.ISO_8859_1);
-        javaMade("new String()", () -> new String());
-        javaMade("new String(char[])", () -> new String(chars));
-        javaMade("new String(char[], off, len)", () -> new String(chars, 2, 9));
-        javaMade("new String(char[] empty)", () -> new String(new char[0]));
-        javaMade("new String(int[], off, len)",
+        lazyAtConstruction(chars);
+        site("new String()", () -> new String());
+        site("new String(char[])", () -> new String(chars));
+        site("new String(char[], off, len)", () -> new String(chars, 2, 9));
+        site("new String(char[] empty)", () -> new String(new char[0]));
+        site("new String(int[], off, len)",
                 () -> new String(text.codePoints().toArray(), 0, 5));
-        javaMade("new String(byte[], UTF_8)", () -> new String(utf8, StandardCharsets.UTF_8));
-        javaMade("new String(byte[], ISO_8859_1)",
+        site("new String(byte[], UTF_8)", () -> new String(utf8, StandardCharsets.UTF_8));
+        site("new String(byte[], ISO_8859_1)",
                 () -> new String(latin1, StandardCharsets.ISO_8859_1));
-        javaMade("new String(byte[], US_ASCII)",
+        site("new String(byte[], US_ASCII)",
                 () -> new String(latin1, StandardCharsets.US_ASCII));
-        javaMade("new String(byte[], UTF_16)", () ->
+        site("new String(byte[], UTF_16)", () ->
                 new String(text.getBytes(StandardCharsets.UTF_16), StandardCharsets.UTF_16));
-        javaMade("new String(byte[], hibyte)", () -> deprecatedHibyte(latin1));
-        javaMade("new String(StringBuilder)", () -> new String(new StringBuilder(text)));
-        javaMade("new String(StringBuffer)", () -> new String(new StringBuffer(text)));
-        javaMade("new String(String java-made)", () -> new String(new String(chars)));
-        javaMade("StringBuilder.toString", () -> new StringBuilder("a").append(42)
+        site("new String(byte[], hibyte)", () -> deprecatedHibyte(latin1));
+        site("new String(StringBuilder)", () -> new String(new StringBuilder(text)));
+        site("new String(StringBuffer)", () -> new String(new StringBuffer(text)));
+        site("new String(String java-made)", () -> new String(new String(chars)));
+        site("StringBuilder.toString", () -> new StringBuilder("a").append(42)
                 .append(text).toString());
-        javaMade("StringBuffer.toString", () -> new StringBuffer("b").append(7.5).toString());
-        javaMade("indy concat", () -> concat(text, 3));
-        javaMade("String.valueOf(char[])", () -> String.valueOf(chars));
-        javaMade("String.valueOf(int)", () -> String.valueOf(123456));
-        javaMade("Integer.toString", () -> Integer.toString(-98765, 16));
-        javaMade("Long.toString", () -> Long.toString(Long.MIN_VALUE));
-        javaMade("Double.toString", () -> Double.toString(Math.PI));
-        javaMade("substring", () -> text.substring(3, 12));
-        javaMade("repeat", () -> text.repeat(3));
-        javaMade("toUpperCase", () -> text.toUpperCase(java.util.Locale.ROOT));
-        javaMade("toLowerCase", () -> "MiXeD".toLowerCase(java.util.Locale.ROOT));
-        javaMade("strip", () -> ("  " + text + "  ").strip());
-        javaMade("replace", () -> text.replace('e', 'E'));
-        javaMade("String.join", () -> String.join("-", "x", text, "z"));
-        javaMade("String.format", () -> String.format("%s=%d", "n", 12));
-        javaMade("String.copyValueOf", () -> String.copyValueOf(chars, 1, 4));
-        javaMade("translateEscapes", () -> "a\\tb".translateEscapes());
+        site("StringBuffer.toString", () -> new StringBuffer("b").append(7.5).toString());
+        site("indy concat", () -> concat(text, 3));
+        site("String.valueOf(char[])", () -> String.valueOf(chars));
+        site("String.valueOf(int)", () -> String.valueOf(123456));
+        site("Integer.toString", () -> Integer.toString(-98765, 16));
+        site("Long.toString", () -> Long.toString(Long.MIN_VALUE));
+        site("Double.toString", () -> Double.toString(Math.PI));
+        site("substring", () -> text.substring(3, 12));
+        site("repeat", () -> text.repeat(3));
+        site("toUpperCase", () -> text.toUpperCase(java.util.Locale.ROOT));
+        site("toLowerCase", () -> "MiXeD".toLowerCase(java.util.Locale.ROOT));
+        site("strip", () -> ("  " + text + "  ").strip());
+        site("replace", () -> text.replace('e', 'E'));
+        site("String.join", () -> String.join("-", "x", text, "z"));
+        site("String.format", () -> String.format("%s=%d", "n", 12));
+        site("String.copyValueOf", () -> String.copyValueOf(chars, 1, 4));
+        site("translateEscapes", () -> "a\\tb".translateEscapes());
         for (int round = 0; round < 20_000; round++) {
-            // compiled StringBuilder chains and concatenations (C1/C2) must keep the invariant
-            check("compiled StringBuilder chain", builderChain(round), true);
-            check("compiled indy concat", concat(text, round), true);
+            // compiled StringBuilder chains and concatenations (C1/C2, with and without
+            // OptimizeStringConcat) keep the invariant
+            check("compiled StringBuilder chain", builderChain(round));
+            check("compiled indy concat", concat(text, round));
         }
-        vmMade("literal", "literal text");
-        vmMade("empty literal", "");
-        vmMade("Class.getName", StringLayoutInvariantTest.class.getName());
-        vmMade("System property", System.getProperty("java.version"));
-        vmMade("Thread.getName", Thread.currentThread().getName());
-        vmMade("StackTraceElement", new Throwable().getStackTrace()[0].getMethodName());
-        vmMade("intern", new String(chars).intern());
-        vmMade("new String(String literal)", new String("literal text"));
-        System.out.println("checked " + checked + " Strings, failures " + FAILURES.size()
-                + (VM_SITES ? "" : " (Java-made only: -Dlayout.vmSites=false)"));
+        check("literal", "literal text");
+        check("empty literal", "");
+        check("Class.getName", StringLayoutInvariantTest.class.getName());
+        check("System property", System.getProperty("java.version"));
+        check("Thread.getName", Thread.currentThread().getName());
+        check("StackTraceElement", new Throwable().getStackTrace()[0].getMethodName());
+        check("intern", new String(chars).intern());
+        check("new String(String literal)", new String("literal text"));
+        System.out.println("checked " + checked + " Strings, failures " + FAILURES.size());
         if (!FAILURES.isEmpty()) {
             FAILURES.forEach(System.out::println);
             throw new AssertionError(FAILURES.size() + " Strings break the layout invariant");
         }
         System.out.println("RESULT PASS");
+    }
+
+    /** Decision 51: a fresh String has no chars yet; a partial getChars does not fill them. */
+    private static void lazyAtConstruction(char[] chars) {
+        String fresh = new String(chars, 0, chars.length);
+        checked++;
+        if (field(CH_VALUE, fresh) != null) {
+            FAILURES.add("fresh String: chValue filled at construction (decision 51: lazy)");
+        }
+        fresh.getChars(1, 3, new char[2], 0);
+        if (field(CH_VALUE, fresh) != null) {
+            FAILURES.add("fresh String: a partial getChars filled the whole chValue");
+        }
+        fresh.getChars(0, fresh.length(), new char[fresh.length()], 0);
+        if (field(CH_VALUE, fresh) == null) {
+            FAILURES.add("fresh String: a whole-string getChars did not fill chValue");
+        }
     }
 
     @SuppressWarnings("deprecation")
@@ -122,30 +139,23 @@ public class StringLayoutInvariantTest {
         return builder.toString();
     }
 
-    private static void javaMade(String site, Supplier<String> maker) {
-        check(site, maker.get(), true);
+    private static void site(String site, Supplier<String> maker) {
+        check(site, maker.get());
     }
 
-    private static void vmMade(String site, String value) {
-        check(site, value, VM_SITES);
-    }
-
-    private static void check(String site, String s, boolean strict) {
-        checked++;
-        char[] chValue;
-        byte[] value;
+    private static Object field(Field field, String s) {
         try {
-            chValue = (char[]) CH_VALUE.get(s);
-            value = (byte[]) VALUE.get(s);
+            return field.get(s);
         } catch (IllegalAccessException e) {
             throw new AssertionError(e);
         }
+    }
+
+    private static void check(String site, String s) {
+        checked++;
+        byte[] value = (byte[]) field(VALUE, s);
         if (value == null) {
             FAILURES.add(site + ": value is null");
-            return;
-        }
-        if (chValue == null) {
-            if (strict) FAILURES.add(site + ": chValue is null");
             return;
         }
         // the expected chars come from charAt, which reads value, not chValue
@@ -153,11 +163,18 @@ public class StringLayoutInvariantTest {
         for (int index = 0; index < expected.length; index++) {
             expected[index] = s.charAt(index);
         }
-        if (!Arrays.equals(chValue, expected)) {
-            FAILURES.add(site + ": chValue " + Arrays.toString(chValue) + " != chars of " + s);
+        char[] before = (char[]) field(CH_VALUE, s);
+        if (before != null && !Arrays.equals(before, expected)) {
+            FAILURES.add(site + ": chValue " + Arrays.toString(before) + " != chars of " + s);
         }
         char[] copy = s.toCharArray();
-        if (copy == chValue || !Arrays.equals(copy, expected)) {
+        char[] after = (char[]) field(CH_VALUE, s);
+        if (after == null) {
+            FAILURES.add(site + ": chValue still null after toCharArray");
+        } else if (!Arrays.equals(after, expected) || before != null && before != after) {
+            FAILURES.add(site + ": chValue changed or holds other chars after toCharArray");
+        }
+        if (copy == after || !Arrays.equals(copy, expected)) {
             FAILURES.add(site + ": toCharArray handed out chValue itself or other chars");
         }
         if (expected.length > 2) {
