@@ -135,6 +135,13 @@ The changes were mechanical (com.synexia repository, recipe crate `inverse-packa
 Compiled from the renamed, otherwise unedited sources and from these sources, every one of the 240 classes has the
 same members and the same instructions.
 
+### Growth strategy for GapList by Synexia (2026-11-17)
+
+`GapList` has one more public constructor, `GapList(int capacity, ArraySizingStrategy sizing)`
+(`ArraySizingStrategy` is HPPC's, carried in this module): `calculateNewCapacity`, through which the list grows,
+then asks the strategy (it still never shrinks). Without a strategy it is unchanged. A list with a strategy refuses
+serialization (`NotSerializableException`) rather than lose the strategy. The source records this modification.
+
 ### Exported packages
 
 The library has no module descriptor; its manifest exports all five packages, and all five are exported here.

@@ -65,6 +65,14 @@ instructions. The class files of the 478 annotated types no longer carry the rem
   ("Found multiple implementations"); this is the library's own rule.
 - Serialized objects are not interchangeable with the library under its own package names.
 
+### Growth strategy for FastList by Synexia (2026-11-17)
+
+`impl.list.mutable.FastList` has one more public constructor, `FastList(int initialCapacity, ArraySizingStrategy
+sizing)` (`ArraySizingStrategy` is HPPC's, carried in this module): the list then grows by the strategy at each of
+its growth points (first add, `ensureCapacity`, insertion at an index, the two bulk insertions), as a sorted
+collection orders by a `Comparator`. Without a strategy every path is unchanged. A list with a strategy refuses
+serialization (`NotSerializableException`) rather than lose the strategy. The source records this modification.
+
 ### Eclipse Distribution License v1.0
 
 ```
