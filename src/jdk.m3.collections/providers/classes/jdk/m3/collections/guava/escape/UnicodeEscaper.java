@@ -16,7 +16,6 @@ package jdk.m3.collections.guava.escape;
 
 import static jdk.m3.collections.guava.base.Preconditions.checkNotNull;
 import static java.lang.Character.charCount;
-import static java.lang.System.arraycopy;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 
@@ -161,59 +160,40 @@ public abstract class UnicodeEscaper extends Escaper {
    */
   protected final String escapeSlow(String s, int index) {
     int end = s.length();
-
-    // Get a destination buffer and setup some loop variables.
     char[] dest = Platform.charBufferFromThreadLocal();
-    int destIndex = 0;
-    int unescapedChunkStart = 0;
+    return escapeFrom(s, index, end, dest, dest.length);
+  }
 
+  /**
+   * The escapeSlow loop. {@code cap} is the capacity lane: the length of the pre-change
+   * destination buffer, which starts as the thread-local buffer's length.
+   */
+  //FLLDCIM: DYNAMIC_ARRAY - same callback order; copies through Platform.reserve/append
+  private String escapeFrom(String s, int index, int end, char[] dest, int cap) {
+    int destIndex = 0;
+    int chunkStart = 0;
     while (index < end) {
-      int cp = codePointAt(s, index, end);
-      if (cp < 0) {
-        throw new IllegalArgumentException("Trailing high surrogate at end of input");
-      }
-      // It is possible for this to return null because nextEscapeIndex() may
-      // (for performance reasons) yield some false positives but it must never
-      // give false negatives.
-      char[] escaped = escape(cp);
+      int cp = checkedCodePointAt(s, index, end);
+      char[] escaped = escape(cp); // null on a false positive of nextEscapeIndex()
       int nextIndex = index + charCount(cp);
       if (escaped != null) {
-        int charsSkipped = index - unescapedChunkStart;
-
-        // This is the size needed to add the replacement, not the full
-        // size needed by the string. We only regrow when we absolutely must.
-        int sizeNeeded = destIndex + charsSkipped + escaped.length;
-        if (dest.length < sizeNeeded) {
-          int destLength = sizeNeeded + (end - index) + DEST_PAD;
-          dest = growBuffer(dest, destIndex, destLength);
-        }
-        // If we have skipped any characters, we need to copy them now.
-        if (charsSkipped > 0) {
-          s.getChars(unescapedChunkStart, index, dest, destIndex);
-          destIndex += charsSkipped;
-        }
-        if (escaped.length > 0) {
-          arraycopy(escaped, 0, dest, destIndex, escaped.length);
-          destIndex += escaped.length;
-        }
-        // If we dealt with an escaped character, reset the unescaped range.
-        unescapedChunkStart = nextIndex;
+        cap = shadowCap(cap, destIndex + (index - chunkStart) + escaped.length, end - index);
+        dest = Platform.reserve(dest, destIndex, index - chunkStart, escaped.length, cap);
+        destIndex = Platform.append(s, chunkStart, index, escaped, dest, destIndex);
+        chunkStart = nextIndex;
       }
       index = nextEscapeIndex(s, nextIndex, end);
     }
+    return Platform.finish(s, chunkStart, dest, destIndex, cap);
+  }
 
-    // Process trailing unescaped characters - no need to account for escaped
-    // length or padding the allocation.
-    int charsSkipped = end - unescapedChunkStart;
-    if (charsSkipped > 0) {
-      int endIndex = destIndex + charsSkipped;
-      if (dest.length < endIndex) {
-        dest = growBuffer(dest, destIndex, endIndex);
-      }
-      s.getChars(unescapedChunkStart, end, dest, destIndex);
-      destIndex = endIndex;
+  /** {@link #codePointAt}, rejecting a trailing high surrogate as escapeSlow always has. */
+  private static int checkedCodePointAt(String s, int index, int end) {
+    int cp = codePointAt(s, index, end);
+    if (cp < 0) {
+      throw new IllegalArgumentException("Trailing high surrogate at end of input");
     }
-    return new String(dest, 0, destIndex);
+    return cp;
   }
 
   /**
@@ -295,17 +275,15 @@ public abstract class UnicodeEscaper extends Escaper {
   }
 
   /**
-   * Helper method to grow the character buffer as needed, this only happens once in a while so it's
-   * ok if it's in a method call. If the index passed in is 0 then no copying will be done.
+   * The capacity lane: the destination length the pre-change escapeSlow holds after this escape.
+   * Same growth points and int arithmetic, so the overflow AssertionError is thrown at the same
+   * escape, before any allocation or copy.
    */
-  private static char[] growBuffer(char[] dest, int index, int size) {
-    if (size < 0) { // overflow - should be OutOfMemoryError but GWT/j2cl don't support it
-      throw new AssertionError("Cannot increase internal buffer any further");
+  //FLLDCIM: CAPACITY_LANE - pre-change growth rule replayed on one int, no allocation
+  private static int shadowCap(int cap, int sizeNeeded, int remaining) {
+    if (cap >= sizeNeeded) {
+      return cap;
     }
-    char[] copy = new char[size];
-    if (index > 0) {
-      arraycopy(dest, 0, copy, 0, index);
-    }
-    return copy;
+    return Platform.checkedSize(sizeNeeded + remaining + DEST_PAD);
   }
 }
