@@ -225,14 +225,14 @@ public final class M3LanguageCorpusManifest {
   public static M3LanguageCorpusManifest read(Path path) throws IOException {
     byte[] bytes = Files.readAllBytes(Objects.requireNonNull(path, "path"));
     String text = new String(bytes, StandardCharsets.UTF_8);
-    String[] lines = text.split("\\n", -1);
+    String[] lines = text.split("\n", -1);
     if (lines.length == 0 || !HEADER.equals(lines[0])) {
       throw new IOException("unsupported language corpus manifest");
     }
     ArrayList<Artifact> parsed = new ArrayList<>();
     for (int line = 1; line < lines.length; line++) {
       if (lines[line].isEmpty()) continue;
-      String[] fields = lines[line].split("\\t", -1);
+      String[] fields = lines[line].split("\t", -1);
       if (fields.length != 20 || !"artifact".equals(fields[0])) {
         throw new IOException("invalid corpus manifest line " + (line + 1));
       }
