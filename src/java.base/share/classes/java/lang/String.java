@@ -12876,6 +12876,74 @@ public final class String
     }
 
     /**
+     * Expands tab characters into spaces at tab stops eight columns apart.
+     *
+     * @return the expanded string, or this string if no tabs are present
+     * @see #expandTabs(int)
+     */
+    public String expandTabs() {
+        return expandTabs(8);
+    }
+
+    /**
+     * Expands each horizontal tab into spaces up to the next tab stop.
+     * The column starts at zero and resets after a carriage return or line feed.
+     * Every Unicode code point other than a tab or line terminator occupies one
+     * column, independently of its display width. A nonpositive tab size removes
+     * tabs. Other characters and line terminators are preserved exactly.
+     *
+     * <p>This opt-in operation follows the column rules of Python's
+     * {@code str.expandtabs}. M3-backed inputs retain their canonical range
+     * composition, including ill-formed UTF-16, without flattening the source.
+     *
+     * @param tabSize the number of columns between tab stops
+     * @return the expanded string, or this string if no tabs are present
+     * @throws OutOfMemoryError if the expanded result cannot fit a String
+     */
+    public String expandTabs(int tabSize) {
+        if (indexOf('\t') < 0) {
+            return this;
+        }
+        M3String storage = M3String.canonicalize(this);
+        if (storage != null) {
+            return new String(storage.expandTabs(tabSize));
+        }
+        return expandTabsFlat(tabSize);
+    }
+
+    /** Budget-refused flat compatibility path; the M3 path composes ranges. */
+    private String expandTabsFlat(int tabSize) {
+        int sourceLength = length();
+        int width = Math.max(0, tabSize);
+        StringBuilder expanded = new StringBuilder(sourceLength);
+        long resultLength = sourceLength;
+        long column = 0;
+        int start = 0;
+        for (int index = 0; index < sourceLength;) {
+            int codePoint = codePointAt(index);
+            if (codePoint == '\t') {
+                expanded.append(this, start, index);
+                long spaces = width == 0 ? 0 : (long) width - column % width;
+                resultLength += spaces - 1;
+                if (resultLength > Integer.MAX_VALUE) {
+                    throw new OutOfMemoryError("Expanded String exceeds implementation limit");
+                }
+                if (spaces != 0) {
+                    expanded.append(" ".repeat((int) spaces));
+                }
+                column += spaces;
+                index++;
+                start = index;
+            } else {
+                column = codePoint == '\r' || codePoint == '\n' ? 0 : column + 1;
+                index += Character.charCount(codePoint);
+            }
+        }
+        expanded.append(this, start, sourceLength);
+        return expanded.toString();
+    }
+
+    /**
      * Adjusts the indentation of each line of this string based on the value of
      * {@code n}, and normalizes line termination characters.
      * <p>
