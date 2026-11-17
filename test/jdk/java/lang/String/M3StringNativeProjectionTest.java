@@ -64,7 +64,7 @@ public final class M3StringNativeProjectionTest {
                 Arrays.copyOfRange(dagExpected, 3, dagExpected.length - 2), "DAG range");
         char[] ascii = {'a', 'b', 'c', 'd', 'e', 'f'};
         verify(new String(ascii), ascii, "compact ASCII");
-        check(projectionMask("", new char[0]) == 31, "empty JNI output");
+        check(projectionMask("", new char[0]) == 23, "empty JNI output");
         freshShadows(stringM3.get(scalar), original);
         System.out.println("M3_STRING_NATIVE_PROJECTION_PASS checks=" + checks);
     }
@@ -78,7 +78,8 @@ public final class M3StringNativeProjectionTest {
         check(layout.length == expected.length || layout.length == 2 * expected.length,
                 label + " holds its real bytes (layout invariant)");
         for (int round = 0; round < 8; round++) {
-            check(projectionMask(value, expected) == 31, label + " native projection mask");
+            // Stage J: GetStringCritical pins the const chars, so bit 8 (critical copy) is off.
+            check(projectionMask(value, expected) == 23, label + " native projection mask");
             char[] chars = value.toCharArray();
             char[] charsAgain = value.toCharArray();
             check(chars != charsAgain && Arrays.equals(chars, expected), label + " independent char result");
