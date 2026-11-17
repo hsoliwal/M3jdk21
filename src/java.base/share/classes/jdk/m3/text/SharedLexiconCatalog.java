@@ -32,21 +32,22 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
  * sidecar encoding mistake cannot become a live lookup owner.</p>
  */
 public final class SharedLexiconCatalog {
-    private static final String[] HEADER = {
+    // Sidecar headers; SharedLexiconExport writes the same arrays. Callers never mutate them.
+    static final String[] HEADER = {
             "shard_id", "file", "first_lexeme", "last_lexeme", "image_records",
             "utf16_units", "sha256"
     };
-    private static final String[] MAPPING_HEADER = {
+    static final String[] MAPPING_HEADER = {
             "source_id", "source_path", "source_kind", "language_tag", "record_id", "lexeme",
             "shard_id", "image_row", "mapping_id", "mapping_name", "translation_profile",
             "precompute_profile", "precompute_payload"
     };
-    private static final String[] PRECOMPUTE_HEADER = {
+    static final String[] PRECOMPUTE_HEADER = {
             "shard_id", "image_row", "utf16_units", "java_hash", "code_points",
             "unpaired_surrogates", "non_bmp_code_points", "ascii", "latin1",
             "contains_whitespace", "precompute_profile"
     };
-    private static final String[] PROFILE_HEADER = {
+    static final String[] PROFILE_HEADER = {
             "precompute_profile", "source_records", "image_records", "sha256"
     };
 
@@ -423,7 +424,8 @@ public final class SharedLexiconCatalog {
         for (int lineNumber = 1; lineNumber < lines.size(); lineNumber++) {
             String line = lines.get(lineNumber);
             if (line.isEmpty()) throw malformed(lineNumber, "empty row");
-            String[] fields = line.split("\\t", -1);
+            // The exporter's csv writer quotes a bound holding '"'; read it as other sidecars.
+            String[] fields = splitQuoted(line, HEADER.length, lineNumber);
             if (fields.length != HEADER.length) throw malformed(lineNumber, "wrong field count");
             int shardId = parseNonNegativeInt(fields[0], lineNumber, "shard_id");
             if (shardId != result.size()) throw malformed(lineNumber, "non-contiguous shard_id");
@@ -646,6 +648,15 @@ public final class SharedLexiconCatalog {
     }
 
     private static String[] splitSidecar(String line, int expectedFields, int lineNumber) throws IOException {
+        String[] fields = splitQuoted(line, expectedFields, lineNumber);
+        if (fields.length != expectedFields)
+            throw malformed(lineNumber, "wrong sidecar field count");
+        return fields;
+    }
+
+    /** Python csv QUOTE_MINIMAL cells: tab separated; a leading quote opens a quoted cell. */
+    private static String[] splitQuoted(String line, int expectedFields, int lineNumber)
+            throws IOException {
         if (line.isEmpty()) throw malformed(lineNumber, "empty sidecar row");
         ArrayList<String> fields = new ArrayList<>(expectedFields);
         StringBuilder field = new StringBuilder();
@@ -675,7 +686,6 @@ public final class SharedLexiconCatalog {
         }
         if (quoted) throw malformed(lineNumber, "unterminated quoted sidecar field");
         fields.add(field.toString());
-        if (fields.size() != expectedFields) throw malformed(lineNumber, "wrong sidecar field count");
         return fields.toArray(String[]::new);
     }
 

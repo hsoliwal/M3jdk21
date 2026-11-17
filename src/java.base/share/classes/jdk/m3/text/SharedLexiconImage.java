@@ -25,6 +25,8 @@ public final class SharedLexiconImage {
     private static final int HEADER = 64;
     public static final int MAX_IMAGE_BYTES = 64 * 1024 * 1024;
     public static final int MAX_RECORDS = 65536;
+    /** UTF-16 units a full v2 shard can still hold (export-m3-lexicon.py MAX_SHARD_UNITS). */
+    static final int MAX_V2_UNITS = (MAX_IMAGE_BYTES - HEADER - 12 * MAX_RECORDS) / 2;
     private final MappedByteBuffer mapping;
     private final int version;
     private final int[] offsets, lengths;
@@ -267,6 +269,21 @@ public final class SharedLexiconImage {
 
     /** Writes a new image only; never truncates or overwrites a mapped file. */
     public static void create(Path target, List<String> words) throws IOException {
+        ByteBuffer bytes = encode(words, 1);
+        try (FileChannel out = FileChannel.open(target, StandardOpenOption.CREATE_NEW,
+                StandardOpenOption.WRITE)) {
+            while (bytes.hasRemaining()) out.write(bytes);
+            out.force(true);
+        }
+    }
+
+    //FLLDCIM: TFG - one encoder for v1 create and v2 shards (export-m3-lexicon.py image_bytes)
+    /** Complete v2 image: each 12-byte directory row ends with the record's Java hash. */
+    static byte[] encodeCatalogShard(List<String> words) throws IOException {
+        return encode(words, 2).array();
+    }
+
+    private static ByteBuffer encode(List<String> words, int version) throws IOException {
         if (words.size() > MAX_RECORDS) throw new IOException("too many records");
         List<String> snapshot = List.copyOf(words);
         if (snapshot.size() > MAX_RECORDS) throw new IOException("too many records");
@@ -275,14 +292,19 @@ public final class SharedLexiconImage {
                 throw new IOException("records must be UTF-16 sorted");
         long units = 0;
         for (String word : snapshot) units = Math.addExact(units, word.length());
-        long payload = HEADER + 8L * snapshot.size(), size = payload + 2L * units;
+        int directoryBytes = version == 1 ? 8 : 12;
+        long payload = HEADER + (long) directoryBytes * snapshot.size();
+        long size = payload + 2L * units;
         if (size > MAX_IMAGE_BYTES) throw new IOException("image too large");
         ByteBuffer bytes = ByteBuffer.allocate((int)size).order(ByteOrder.BIG_ENDIAN);
-        bytes.putLong(MAGIC).putInt(1).putInt(snapshot.size()).putLong(payload).putLong(units);
+        bytes.putLong(MAGIC).putInt(version).putInt(snapshot.size()).putLong(payload)
+                .putLong(units);
         int offset = 0;
         for (int i = 0; i < snapshot.size(); i++) {
             String word = snapshot.get(i);
-            bytes.putInt(HEADER + i * 8, offset).putInt(HEADER + i * 8 + 4, word.length());
+            int entry = HEADER + i * directoryBytes;
+            bytes.putInt(entry, offset).putInt(entry + 4, word.length());
+            if (version == 2) bytes.putInt(entry + 8, word.hashCode());
             for (int j = 0; j < word.length(); j++) {
                 char c = word.charAt(j); int at = (int)payload + (offset + j) * 2;
                 bytes.put(at, (byte)c).put(at + 1, (byte)(c >>> 8));
@@ -290,10 +312,7 @@ public final class SharedLexiconImage {
             offset += word.length();
         }
         bytes.put(32, digestImage(bytes));bytes.position(0);
-        try (FileChannel out = FileChannel.open(target, StandardOpenOption.CREATE_NEW, StandardOpenOption.WRITE)) {
-            while (bytes.hasRemaining()) out.write(bytes);
-            out.force(true);
-        }
+        return bytes;
     }
     // Identity includes dimensions/version, not just bytes whose interpretation depends on them.
     private static byte[] digestImage(ByteBuffer bytes) {
