@@ -13,6 +13,7 @@
 package jdk.m3.collections.eclipse.impl.list.mutable.primitive;
 
 import java.io.Externalizable;
+import java.io.NotSerializableException;
 import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
@@ -52,6 +53,7 @@ import jdk.m3.collections.eclipse.impl.set.mutable.primitive.CharHashSet;
 import jdk.m3.collections.eclipse.impl.tuple.primitive.PrimitiveTuples;
 import jdk.m3.collections.eclipse.impl.utility.Iterate;
 import jdk.m3.collections.eclipse.impl.utility.primitive.CharQuickSort;
+import jdk.m3.collections.hppc.ArraySizingStrategy;
 
 /**
  * CharArrayList is similar to FastList, and is memory-optimized for char primitives.
@@ -69,9 +71,30 @@ public class CharArrayList extends AbstractCharIterable
 
     protected int size;
     protected transient char[] items = DEFAULT_SIZED_EMPTY_ARRAY;
+    // Modified 2026 by Synexia contributors: a growth policy may be given (ArraySizingStrategy).
+    /** The growth policy given at construction, or null for this class's own. */
+    private transient ArraySizingStrategy sizing;
 
     public CharArrayList()
     {
+    }
+
+    /**
+     * Creates an empty list with the given initial capacity that grows by the given strategy,
+     * as a {@link java.util.Comparator} orders a sorted collection: whenever the list must grow
+     * to hold {@code n} elements, its new capacity is
+     * {@code sizing.grow(capacity, size(), n - size())}. {@code ArraySizingStrategy.fastList()}
+     * grows as this class does without a strategy. A list with a strategy is not serializable:
+     * its strategy would be lost.
+     *
+     * @param initialCapacity the initial capacity
+     * @param sizing the growth policy
+     * @throws NullPointerException if {@code sizing} is null
+     */
+    public CharArrayList(int initialCapacity, ArraySizingStrategy sizing)
+    {
+        this(initialCapacity);
+        this.sizing = java.util.Objects.requireNonNull(sizing, "sizing");
     }
 
     public CharArrayList(int initialCapacity)
@@ -228,6 +251,21 @@ public class CharArrayList extends AbstractCharIterable
         return newItems;
     }
 
+    /**
+     * The capacity the strategy given at construction grows {@code capacity} to so that
+     * {@code elements + additions} elements fit.
+     */
+    private int grownBySizing(int capacity, int elements, int additions)
+    {
+        int grown = this.sizing.grow(capacity, elements, additions);
+        if (grown - additions < elements)
+        {
+            throw new IllegalStateException("ArraySizingStrategy " + this.sizing + " returned "
+                    + grown + " for " + elements + " + " + additions + " elements");
+        }
+        return grown;
+    }
+
     private int sizePlusFiftyPercent(int oldSize)
     {
         int result = oldSize + (oldSize >> 1) + 1;
@@ -239,7 +277,9 @@ public class CharArrayList extends AbstractCharIterable
         int oldCapacity = this.items.length;
         if (minCapacity > oldCapacity)
         {
-            int newCapacity = Math.max(this.sizePlusFiftyPercent(oldCapacity), minCapacity);
+            int newCapacity = this.sizing == null
+                    ? Math.max(this.sizePlusFiftyPercent(oldCapacity), minCapacity)
+                    : this.grownBySizing(oldCapacity, this.size, minCapacity - this.size);
             this.transferItemsToNewArrayWithCapacity(newCapacity);
         }
     }
@@ -252,7 +292,9 @@ public class CharArrayList extends AbstractCharIterable
         }
         else
         {
-            this.transferItemsToNewArrayWithCapacity(this.sizePlusFiftyPercent(this.size));
+            this.transferItemsToNewArrayWithCapacity(this.sizing == null
+                    ? this.sizePlusFiftyPercent(this.size)
+                    : this.grownBySizing(this.items.length, this.size, 1));
         }
     }
 
@@ -328,10 +370,16 @@ public class CharArrayList extends AbstractCharIterable
     private void addAtIndexLessThanSize(int index, char element)
     {
         int oldSize = this.size;
+        // The strategy is asked before the list changes: a refusal leaves it unchanged.
+        int grown = this.sizing == null || this.items.length != oldSize
+                ? 0
+                : this.grownBySizing(oldSize, oldSize, 1);
         this.size++;
         if (this.items.length == oldSize)
         {
-            char[] newItems = new char[this.sizePlusFiftyPercent(oldSize)];
+            char[] newItems = new char[this.sizing == null
+                    ? this.sizePlusFiftyPercent(oldSize)
+                    : grown];
             if (index > 0)
             {
                 System.arraycopy(this.items, 0, newItems, 0, index);
@@ -393,7 +441,9 @@ public class CharArrayList extends AbstractCharIterable
         // Subclasses retain ensureCapacity dispatch and its publication order.
         if (this.getClass() == CharArrayList.class && newSize > this.items.length && index < this.size)
         {
-            int newCapacity = Math.max(this.sizePlusFiftyPercent(this.items.length), newSize);
+            int newCapacity = this.sizing == null
+                    ? Math.max(this.sizePlusFiftyPercent(this.items.length), newSize)
+                    : this.grownBySizing(this.items.length, this.size, sourceSize);
             char[] newItems = new char[newCapacity];
             if (index > 0)
             {
@@ -974,6 +1024,11 @@ public class CharArrayList extends AbstractCharIterable
     @Override
     public void writeExternal(ObjectOutput out) throws IOException
     {
+        if (this.sizing != null)
+        {
+            throw new NotSerializableException(
+                    "a CharArrayList with an ArraySizingStrategy: the strategy would be lost");
+        }
         out.writeInt(this.size);
         for (int i = 0; i < this.size; i++)
         {

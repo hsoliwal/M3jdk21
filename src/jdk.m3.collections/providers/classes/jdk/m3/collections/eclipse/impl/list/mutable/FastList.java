@@ -1226,12 +1226,16 @@ public class FastList<T>
 
     private void addAtIndex(int index, T element)
     {
+        // The strategy is asked before the list changes: a refusal leaves it unchanged.
+        int grown = this.sizing == null || this.items.length != this.size
+                ? 0
+                : this.grownBySizing(this.size, this.size, 1);
         int oldSize = this.size++;
         if (this.items.length == oldSize)
         {
             T[] newItems = (T[]) new Object[this.sizing == null
                     ? this.sizePlusFiftyPercent(oldSize)
-                    : this.grownBySizing(oldSize, oldSize, 1)];
+                    : grown];
             if (index > 0)
             {
                 System.arraycopy(this.items, 0, newItems, 0, index);

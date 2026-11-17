@@ -142,6 +142,13 @@ same members and the same instructions.
 then asks the strategy (it still never shrinks). Without a strategy it is unchanged. A list with a strategy refuses
 serialization (`NotSerializableException`) rather than lose the strategy. The source records this modification.
 
+### Growth strategy for the primitive gap lists by Synexia (2026-11-17)
+
+`primitive.{Boolean,Byte,Char,Double,Float,Int,Long,Short}GapList` each have one more public constructor,
+`(int capacity, ArraySizingStrategy sizing)`, which grows the list as `GapList`'s does (through
+`calculateNewCapacity`, never shrinking). Without a strategy each list is unchanged. A list with a strategy refuses
+serialization (`NotSerializableException`). The sources record these modifications.
+
 ### Exported packages
 
 The library has no module descriptor; its manifest exports all five packages, and all five are exported here.
