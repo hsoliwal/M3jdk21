@@ -1,0 +1,19 @@
+== with provides
+adapter	OK	jdk.internal.search.slf4j.jul.JDK14LoggerAdapter
+records	OK	2
+message	OK	hello jul
+level	OK	INFO
+caller	OK	m3.jul.proof.JulDefaultProof
+debug level	OK	FINE
+debug message	OK	detail 1 2
+stderr	OK	
+RESULT	PASS	failures=0
+exit 0
+== without provides
+adapter	FAIL	jdk.internal.search.slf4j.helpers.NOPLogger
+records	FAIL	0
+stderr	FAIL	SLF4J(W): No SLF4J providers were found.
+SLF4J(W): Defaulting to no-operation (NOP) logger implementation
+SLF4J(W): See https://www.slf4j.org/codes.html#noProviders for further details.
+RESULT	FAIL	failures=3
+exit 1

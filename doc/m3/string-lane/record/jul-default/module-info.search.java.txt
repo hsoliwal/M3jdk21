@@ -1,0 +1,10 @@
+// SPDX-License-Identifier: Apache-2.0 OR EPL-2.0
+// Copyright (c) 2026 Synexia, Hitesh Soliwal and others
+// The SLF4J part of jdk.m3.search's descriptor (module-info.java.extra), with a qualified export for the proof.
+module jdk.m3.search {
+    requires java.logging;
+    exports jdk.internal.search.slf4j to m3.jul.proof;
+    uses jdk.internal.search.slf4j.spi.SLF4JServiceProvider;
+    provides jdk.internal.search.slf4j.spi.SLF4JServiceProvider
+        with jdk.internal.search.slf4j.jul.JULServiceProvider;
+}

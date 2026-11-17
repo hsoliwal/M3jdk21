@@ -14,6 +14,17 @@ under `m3/vendor/third_party/slf4j-api-2.0.12`. SLF4J is licensed under the MIT 
   its doclint refuses them, and the JDK repository's whitespace rule applied. The compiled classes are
   identical to those of the relocated sources (`javap -p -c`).
 
+### SLF4J JDK14 provider v2.0.12 (2026-11-17)
+
+java.util.logging is the default logger of M3JDK. The three sources under
+`providers/classes/jdk/internal/search/slf4j/jul` are `org.slf4j.jul.JDK14LoggerAdapter`, `JDK14LoggerFactory` and
+`JULServiceProvider` from the published `slf4j-jdk14-2.0.12-sources.jar` (Maven Central, SHA-1
+`0032c90b65495c108bee2697bb22074ba8c2000e`), MIT License as below. Changes made by Synexia: package names relocated
+from `org.slf4j` to `jdk.internal.search.slf4j`, the leading `/**` of the license header made a plain comment
+(doclint), line endings and trailing whitespace normalized. The module provides `JULServiceProvider` for the
+relocated `SLF4JServiceProvider`, so SLF4J inside `jdk.m3.search` logs through java.util.logging instead of falling
+back to its no-operation logger.
+
 ### MIT License
 
 <pre>
