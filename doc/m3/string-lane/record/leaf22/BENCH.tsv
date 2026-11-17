@@ -1,0 +1,72 @@
+old	1	indexOfAny(char...) miss	string	4182.5	1
+new	1	indexOfAny(char...) miss	string	2339.6	1
+donor	1	indexOfAny(char...) miss	donor	37680.0	1
+old	1	indexOfAnyBut(char...) miss	string	4257.5	1
+new	1	indexOfAnyBut(char...) miss	string	3500.1	1
+donor	1	indexOfAnyBut(char...) miss	donor	43190.0	1
+old	1	containsWhitespace miss	string	2830.2	0
+new	1	containsWhitespace miss	string	927.9	0
+donor	1	containsWhitespace miss	donor	20780.0	0
+old	1	indexOfIgnoreCase miss	string	5239.2	1
+new	1	indexOfIgnoreCase miss	string	2059.8	1
+donor	1	indexOfIgnoreCase miss	donor	31050.0	1
+old	1	lastIndexOfIgnoreCase miss	string	6053.5	1
+new	1	lastIndexOfIgnoreCase miss	string	2769.0	1
+donor	1	lastIndexOfIgnoreCase miss	donor	44410.0	1
+old	1	normalizeSpace unchanged	string	9728.4	1
+new	1	normalizeSpace unchanged	string	4584.6	1
+donor	1	normalizeSpace unchanged	donor	44230.0	1
+old	1	stripAccents Latin-1	string	31053.2	0
+new	1	stripAccents Latin-1	string	18816.2	0
+donor	1	stripAccents Latin-1	donor	306110.0	0
+old	1	indexOfIgnoreCase miss UTF-16	string	10242.6	1
+new	1	indexOfIgnoreCase miss UTF-16	string	7709.2	1
+donor	1	indexOfIgnoreCase miss UTF-16	donor	55190.0	1
+old	2	indexOfAny(char...) miss	string	4068.7	1
+new	2	indexOfAny(char...) miss	string	2643.9	1
+donor	2	indexOfAny(char...) miss	donor	52250.0	1
+old	2	indexOfAnyBut(char...) miss	string	4769.2	1
+new	2	indexOfAnyBut(char...) miss	string	3637.6	1
+donor	2	indexOfAnyBut(char...) miss	donor	52480.0	1
+old	2	containsWhitespace miss	string	3215.2	0
+new	2	containsWhitespace miss	string	1118.1	0
+donor	2	containsWhitespace miss	donor	30590.0	0
+old	2	indexOfIgnoreCase miss	string	6253.4	1
+new	2	indexOfIgnoreCase miss	string	2902.0	1
+donor	2	indexOfIgnoreCase miss	donor	74930.0	1
+old	2	lastIndexOfIgnoreCase miss	string	6879.8	1
+new	2	lastIndexOfIgnoreCase miss	string	2410.0	1
+donor	2	lastIndexOfIgnoreCase miss	donor	41350.0	1
+old	2	normalizeSpace unchanged	string	9929.5	1
+new	2	normalizeSpace unchanged	string	6008.1	1
+donor	2	normalizeSpace unchanged	donor	55880.0	1
+old	2	stripAccents Latin-1	string	65532.8	0
+new	2	stripAccents Latin-1	string	22213.2	0
+donor	2	stripAccents Latin-1	donor	311020.0	0
+old	2	indexOfIgnoreCase miss UTF-16	string	10488.3	1
+new	2	indexOfIgnoreCase miss UTF-16	string	6580.3	1
+donor	2	indexOfIgnoreCase miss UTF-16	donor	49400.0	1
+old	3	indexOfAny(char...) miss	string	3855.6	1
+new	3	indexOfAny(char...) miss	string	2092.8	1
+donor	3	indexOfAny(char...) miss	donor	49210.0	1
+old	3	indexOfAnyBut(char...) miss	string	4462.5	1
+new	3	indexOfAnyBut(char...) miss	string	3941.7	1
+donor	3	indexOfAnyBut(char...) miss	donor	50510.0	1
+old	3	containsWhitespace miss	string	4179.3	0
+new	3	containsWhitespace miss	string	1204.1	0
+donor	3	containsWhitespace miss	donor	31550.0	0
+old	3	indexOfIgnoreCase miss	string	6286.6	1
+new	3	indexOfIgnoreCase miss	string	2454.7	1
+donor	3	indexOfIgnoreCase miss	donor	59420.0	1
+old	3	lastIndexOfIgnoreCase miss	string	6798.4	1
+new	3	lastIndexOfIgnoreCase miss	string	3336.5	1
+donor	3	lastIndexOfIgnoreCase miss	donor	44280.0	1
+old	3	normalizeSpace unchanged	string	9912.0	1
+new	3	normalizeSpace unchanged	string	9921.4	1
+donor	3	normalizeSpace unchanged	donor	55970.0	1
+old	3	stripAccents Latin-1	string	234720.0	0
+new	3	stripAccents Latin-1	string	64354.8	0
+donor	3	stripAccents Latin-1	donor	299060.0	0
+old	3	indexOfIgnoreCase miss UTF-16	string	10785.9	1
+new	3	indexOfIgnoreCase miss UTF-16	string	5201.4	1
+donor	3	indexOfIgnoreCase miss UTF-16	donor	43580.0	1

@@ -1,0 +1,120 @@
+// SPDX-License-Identifier: Apache-2.0 OR EPL-2.0
+// Copyright (c) 2026 Synexia, Hitesh Soliwal and others
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.util.concurrent.atomic.AtomicLong;
+import java.util.function.Function;
+import java.util.stream.IntStream;
+import org.apache.commons.lang3.StringUtils;
+
+/**
+ * Discriminators for STRING_FAMILY_SPEED v1, run on a stock JVM whose String carries the head method text:
+ * (1) the ignoring-case first-unit prefilter never refuses a pair that regionMatches(true) accepts: every pair of BMP
+ * units a, b gives "a".indexOfIgnoreCase("b") and lastIndexOfIgnoreCase equal to regionMatches(true) on the pair;
+ * (2) the Latin-1 stripAccents table joins correctly: every Latin-1 pair, and every triple over U+00A0..U+00FF plus
+ * 'a' and ' ', equal commons-lang3 3.22.0; (3) normalizeSpace, and its unchanged-string shortcut, equal the donor on
+ * every string of length 0..5 over a wider whitespace alphabet. Exit 1 on a mismatch.
+ */
+public final class SpeedProof {
+    private static final char[] SPACE_UNITS = {
+        'a', ' ', '\t', (char) 0x00A0, (char) 0x01, (char) 0x2000, (char) 0x85, (char) 0x1C, (char) 0x3000
+    };
+    private static int failures;
+
+    private SpeedProof() {}
+
+    public static void main(String[] args) {
+        prefilter();
+        List<String> latin = new ArrayList<>();
+        for (int a = 0; a < 256; a++) {
+            for (int b = 0; b < 256; b++) latin.add("" + (char) a + (char) b);
+        }
+        for (int a = 0x9F; a < 256; a++) {
+            for (int b = 0x9F; b < 256; b++) {
+                for (int c = 0x9F; c < 256; c++) {
+                    latin.add("" + pick(a) + pick(b) + pick(c));
+                }
+            }
+        }
+        text("stripAccents Latin-1 pairs+triples", latin, String::stripAccents, StringUtils::stripAccents);
+        List<String> spaces = strings(SPACE_UNITS, 5);
+        text("normalizeSpace wide whitespace", spaces, String::normalizeSpace, StringUtils::normalizeSpace);
+        long same = spaces.stream().filter(s -> s.normalizeSpace() == s).count();
+        long unchanged = spaces.stream().filter(s -> s.equals(StringUtils.normalizeSpace(s))).count();
+        System.out.println("normalizeSpace same-instance\t" + same + "\tdonor-unchanged\t" + unchanged);
+        if (same != unchanged) failures++;
+        System.out.println("RESULT\t" + (failures == 0 ? "PASS" : "FAIL") + "\tfailures=" + failures);
+        System.exit(failures == 0 ? 0 : 1);
+    }
+
+    /** U+009F stands for 'a' and nothing else, so the triples also cross ASCII. */
+    private static char pick(int unit) {
+        return unit == 0x9F ? 'a' : (char) unit;
+    }
+
+    private static void prefilter() {
+        String[] units = new String[0x10000];
+        for (int c = 0; c < units.length; c++) units[c] = String.valueOf((char) c);
+        AtomicLong mismatches = new AtomicLong();
+        AtomicLong first = new AtomicLong(-1);
+        IntStream.range(0, units.length).parallel().forEach(a -> {
+            String left = units[a];
+            for (int b = 0; b < units.length; b++) {
+                String right = units[b];
+                int expected = left.regionMatches(true, 0, right, 0, 1) ? 0 : -1;
+                if (left.indexOfIgnoreCase(right) != expected || left.lastIndexOfIgnoreCase(right) != expected) {
+                    mismatches.incrementAndGet();
+                    first.compareAndSet(-1, ((long) a << 16) | b);
+                }
+            }
+        });
+        long f = first.get();
+        report("ignoreCase prefilter, all BMP unit pairs", 1L << 32, mismatches.get(),
+                f < 0 ? "-" : String.format("U+%04X / U+%04X", f >>> 16, f & 0xFFFF));
+    }
+
+    private static void text(String name, List<String> inputs, Function<String, String> mine,
+            Function<String, String> donor) {
+        long mismatches = 0;
+        String first = "-";
+        for (String input : inputs) {
+            if (!Objects.equals(mine.apply(input), donor.apply(input)) && mismatches++ == 0) {
+                first = show(input) + " -> " + show(mine.apply(input)) + " vs " + show(donor.apply(input));
+            }
+        }
+        report(name, inputs.size(), mismatches, first);
+    }
+
+    private static void report(String name, long cases, long mismatches, String first) {
+        failures += mismatches == 0 ? 0 : 1;
+        System.out.println(name + "\t" + cases + "\t" + mismatches + "\t" + first);
+    }
+
+    private static List<String> strings(char[] alphabet, int maxLength) {
+        List<String> out = new ArrayList<>();
+        for (int length = 0; length <= maxLength; length++) {
+            int total = (int) Math.pow(alphabet.length, length);
+            for (int code = 0; code < total; code++) {
+                char[] units = new char[length];
+                int rest = code;
+                for (int i = 0; i < length; i++) {
+                    units[i] = alphabet[rest % alphabet.length];
+                    rest /= alphabet.length;
+                }
+                out.add(new String(units));
+            }
+        }
+        return out;
+    }
+
+    private static String show(String value) {
+        if (value == null) return "null";
+        StringBuilder out = new StringBuilder("\"");
+        for (char c : value.toCharArray()) {
+            out.append(c >= 32 && c < 127 ? String.valueOf(c) : String.format("<%04X>", (int) c));
+        }
+        return out.append('"').toString();
+    }
+}

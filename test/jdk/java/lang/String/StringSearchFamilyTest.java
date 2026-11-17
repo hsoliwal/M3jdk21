@@ -141,6 +141,30 @@ public class StringSearchFamilyTest {
     }
 
     @Test
+    void longLatin1Scans() {
+        String latin = "a".repeat(300) + (char) 0xE9;
+        assertEquals(300, latin.indexOfAny((char) 0xE9, '#'));
+        assertEquals(300, latin.indexOfAnyBut('a'));
+        assertEquals(-1, latin.indexOfAnyBut('a', (char) 0xE9));
+        assertFalse(("x".repeat(300) + (char) 0xA0).containsWhitespace(), "NBSP is not whitespace");
+        assertTrue(("x".repeat(300) + (char) 0x1F).containsWhitespace());
+    }
+
+    @Test
+    void ignoreCaseFirstUnits() {
+        assertEquals(1, ("x" + (char) 0x017F + "t").indexOfIgnoreCase("ST"),
+                "U+017F matches by its upper case");
+        assertEquals(1, ("x" + (char) 0x212A).lastIndexOfIgnoreCase("k"),
+                "U+212A matches by the lower case of its upper case");
+        assertEquals(0, String.valueOf((char) 0x0131).indexOfIgnoreCase("I"));
+        assertEquals(1, ("a" + (char) 0xB5).indexOfIgnoreCase(String.valueOf((char) 0x039C)),
+                "a Latin-1 text and a UTF-16 search");
+        assertEquals(2, ("ab" + (char) 0x0178).lastIndexOfIgnoreCase(String.valueOf((char) 0xFF)));
+        assertEquals(1, ("a" + PAIR + "b").indexOfIgnoreCase(PAIR + "B"), "a pair as first unit");
+        assertEquals(-1, ("x".repeat(200) + "ZQ").indexOfIgnoreCase("zqx"));
+    }
+
+    @Test
     void sequenceRules() {
         assertTrue("ab".containsAny("ba"), "a single sequence argument is a character set");
         assertFalse("ab".containsAny("ba", "ca"), "two or more are substrings");

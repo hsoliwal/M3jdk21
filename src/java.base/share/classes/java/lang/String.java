@@ -3696,6 +3696,13 @@ public final class String
      */
     public boolean containsWhitespace() {
         int length = length();
+        if (m3() == null && isLatin1()) {
+            byte[] bytes = value;
+            for (int index = 0; index < length; index++) {
+                if (Character.isWhitespace((char) (bytes[index] & 0xFF))) return true;
+            }
+            return false;
+        }
         for (int index = 0; index < length; index++) {
             if (Character.isWhitespace(charAt(index))) return true;
         }
@@ -3721,6 +3728,17 @@ public final class String
         long low = asciiMask(chars, 0);
         long high = asciiMask(chars, 64);
         boolean wide = hasWideUnit(chars);
+        if (m3() == null && isLatin1()) {
+            byte[] bytes = value;
+            for (int index = 0; index < length; index++) {
+                char unit = (char) (bytes[index] & 0xFF);
+                if (unit < 128 ? inMask(unit, low, high)
+                        : wide && anyMatches(chars, unit, index, length)) {
+                    return index;
+                }
+            }
+            return -1;
+        }
         for (int index = 0; index < length; index++) {
             char unit = charAt(index);
             if (unit < 128) {
@@ -3790,6 +3808,16 @@ public final class String
         long low = asciiMask(chars, 0);
         long high = asciiMask(chars, 64);
         int[] wide = new String(chars).codePoints().filter(point -> point >= 128).toArray();
+        if (m3() == null && isLatin1()) {
+            byte[] bytes = value;
+            for (int index = 0; index < length; index++) {
+                int point = bytes[index] & 0xFF;
+                if (point < 128 ? !inMask((char) point, low, high) : !contains(wide, point)) {
+                    return index;
+                }
+            }
+            return -1;
+        }
         for (int index = 0; index < length; ) {
             int point = Character.codePointAt(this, index);
             boolean skipped = point < 128 ? inMask((char) point, low, high) : contains(wide, point);
@@ -3874,8 +3902,12 @@ public final class String
         if (start > length() - count) return -1;
         if (count == 0) return start;
         int end = length() - count + 1;
-        for (int index = start; index < end; index++) {
+        char first = target.charAt(0);
+        boolean ascii = first < 128;
+        int index = ascii ? nextCaseCandidate(start, end, 1, first) : start;
+        while (index < end) {
             if (regionMatches(true, index, target, 0, count)) return index;
+            index = ascii ? nextCaseCandidate(index + 1, end, 1, first) : index + 1;
         }
         return -1;
     }
@@ -3915,10 +3947,58 @@ public final class String
         int start = Math.min(fromIndex, length() - count);
         if (start < 0) return -1;
         if (count == 0) return start;
-        for (int index = start; index >= 0; index--) {
+        char first = target.charAt(0);
+        boolean ascii = first < 128;
+        int index = ascii ? nextCaseCandidate(start, -1, -1, first) : start;
+        while (index >= 0) {
             if (regionMatches(true, index, target, 0, count)) return index;
+            index = ascii ? nextCaseCandidate(index - 1, -1, -1, first) : index - 1;
         }
         return -1;
+    }
+
+    /**
+     * The first index from {@code from} towards {@code stop} (exclusive), moving by {@code step},
+     * whose unit can start an ignoring-case region match of the ASCII unit {@code first}, else
+     * {@code stop}. An ASCII unit can only by ASCII case; any other unit is judged by
+     * {@link #sameUnitIgnoreCase(char, char)}.
+     */
+    private int nextCaseCandidate(int from, int stop, int step, char first) {
+        char fold = asciiLower(first);
+        if (m3() == null && isLatin1()) {
+            byte[] bytes = value;
+            for (int index = from; index != stop; index += step) {
+                char unit = (char) (bytes[index] & 0xFF);
+                if (unit < 128 ? asciiLower(unit) == fold : sameUnitIgnoreCase(unit, first)) {
+                    return index;
+                }
+            }
+            return stop;
+        }
+        for (int index = from; index != stop; index += step) {
+            char unit = charAt(index);
+            if (unit < 128 ? asciiLower(unit) == fold : sameUnitIgnoreCase(unit, first)) {
+                return index;
+            }
+        }
+        return stop;
+    }
+
+    /** {@code unit} with an ASCII upper-case letter turned into lower case. */
+    private static char asciiLower(char unit) {
+        return unit >= 'A' && unit <= 'Z' ? (char) (unit - 'A' + 'a') : unit;
+    }
+
+    /**
+     * Whether two units can start an ignoring-case region match: {@code false} only when
+     * {@link #regionMatches(boolean, int, String, int, int)} with {@code ignoreCase} refuses them
+     * whatever units follow. A surrogate always passes; its comparison belongs to the region.
+     */
+    private static boolean sameUnitIgnoreCase(char a, char b) {
+        if (a == b || Character.isSurrogate(a) || Character.isSurrogate(b)) return true;
+        char upperA = Character.toUpperCase(a);
+        char upperB = Character.toUpperCase(b);
+        return upperA == upperB || Character.toLowerCase(upperA) == Character.toLowerCase(upperB);
     }
 
     /**
@@ -4208,6 +4288,7 @@ public final class String
      */
     public String normalizeSpace() {
         int length = length();
+        if (spaceNormalized(length)) return this;
         StringBuilder out = new StringBuilder(length);
         boolean leading = true;
         boolean pending = false;
@@ -4223,6 +4304,22 @@ public final class String
             }
         }
         return leading ? "" : out.toString().trim();
+    }
+
+    /**
+     * Whether normalizeSpace leaves this string as it is: no no-break space, whitespace only as
+     * single spaces between other characters, and no character at most U+0020 at either end.
+     */
+    private boolean spaceNormalized(int length) {
+        boolean previousSpace = true;
+        for (int index = 0; index < length; index++) {
+            char unit = charAt(index);
+            if (unit == (char) 0x00A0) return false;
+            boolean space = Character.isWhitespace(unit);
+            if (space && (unit != ' ' || previousSpace)) return false;
+            previousSpace = space;
+        }
+        return length == 0 || !previousSpace && charAt(0) > ' ' && charAt(length - 1) > ' ';
     }
 
     /**
@@ -4246,6 +4343,42 @@ public final class String
             index++;
         }
         if (index == length) return this;
+        if (latin1Units(index, length)) {
+            String[] table = Latin1Accents.TABLE;
+            StringBuilder out = new StringBuilder(length).append(this, 0, index);
+            for (int at = index; at < length; at++) {
+                out.append(table[charAt(at)]);
+            }
+            return out.toString();
+        }
+        return stripAccentsFull();
+    }
+
+    /** Whether every unit from {@code from} up to {@code length} is at most U+00FF. */
+    private boolean latin1Units(int from, int length) {
+        if (m3() == null && isLatin1()) return true;
+        for (int index = from; index < length; index++) {
+            if (charAt(index) > 0xFF) return false;
+        }
+        return true;
+    }
+
+    /**
+     * stripAccents of each Latin-1 unit alone, built once from the full algorithm. A string of
+     * Latin-1 units decomposes unit by unit into base characters and marks of U+0300..U+036F, and
+     * no two of the remaining base characters compose, so its result is the units' results joined.
+     */
+    private static final class Latin1Accents {
+        static final String[] TABLE = new String[256];
+        static {
+            for (int unit = 0; unit < 256; unit++) {
+                TABLE[unit] = String.valueOf((char) unit).stripAccentsFull();
+            }
+        }
+    }
+
+    /** stripAccents of any string: NFKD, marks U+0300..U+036F removed, NFC, stroke letters. */
+    private String stripAccentsFull() {
         String decomposed = java.text.Normalizer.normalize(this, java.text.Normalizer.Form.NFKD);
         StringBuilder kept = new StringBuilder(decomposed.length());
         for (int at = 0; at < decomposed.length(); at++) {

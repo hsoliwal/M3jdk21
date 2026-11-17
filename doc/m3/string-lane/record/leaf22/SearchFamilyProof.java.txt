@@ -1,0 +1,179 @@
+// SPDX-License-Identifier: Apache-2.0 OR EPL-2.0
+// Copyright (c) 2026 Synexia, Hitesh Soliwal (hsoliwal@gmail.com) and others
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
+import java.util.function.Supplier;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.text.WordUtils;
+
+/**
+ * Donor-oracle proof of the SEARCH family of new java.lang.String methods, run on a stock JVM whose String carries
+ * the method text of the head source. Every string of length 0..4 over UNITS is a receiver; character sets are all
+ * arrays of length 0..2 over UNITS (plus three of length 3); search sequences are all strings of length 0..2; pairs of
+ * searches are sampled. Each check compares the String method with commons-lang3 StringUtils (or commons-text
+ * WordUtils) and prints: name, cases, mismatches, first mismatching input. Exit 1 on a mismatch or a surviving
+ * discriminator.
+ */
+public final class SearchFamilyProof {
+    private static final char[] UNITS = {'a', 'A', 'b', ' ', (char) 0xE9, (char) 0xC9, (char) 0xD83D, (char) 0xDE42};
+    private static final List<String> TEXTS = strings(4);
+    private static final List<String> SEARCHES = strings(2);
+    private static final List<char[]> SETS = sets();
+    private static final List<CharSequence[]> PAIRS = pairs();
+    private static int failures;
+
+    private SearchFamilyProof() {}
+
+    private interface Check<T> {
+        boolean differs(String text, T argument);
+    }
+
+    public static void main(String[] args) {
+        check("containsAny(char...)", SETS, (s, c) -> s.containsAny(c) != StringUtils.containsAny(s, c));
+        check("containsAny(CharSequence)", SEARCHES, (s, c) -> s.containsAny((CharSequence) c)
+                != StringUtils.containsAny(s, (CharSequence) c));
+        check("containsAny(CharSequence...)", PAIRS, (s, p) -> s.containsAny(p) != StringUtils.containsAny(s, p));
+        check("containsAnyIgnoreCase(CharSequence...)", PAIRS,
+                (s, p) -> s.containsAnyIgnoreCase(p) != StringUtils.containsAnyIgnoreCase(s, p));
+        check("containsIgnoreCase", SEARCHES, (s, c) -> s.containsIgnoreCase(c) != StringUtils.containsIgnoreCase(s, c));
+        check("containsNone(char...)", SETS, (s, c) -> s.containsNone(c) != StringUtils.containsNone(s, c));
+        check("containsNone(String)", SEARCHES, (s, c) -> s.containsNone(c) != StringUtils.containsNone(s, c));
+        check("containsOnly(char...)", SETS, (s, c) -> s.containsOnly(c) != StringUtils.containsOnly(s, c));
+        check("containsOnly(String)", SEARCHES, (s, c) -> s.containsOnly(c) != StringUtils.containsOnly(s, c));
+        check("containsWhitespace", List.of(""), (s, c) -> s.containsWhitespace() != StringUtils.containsWhitespace(s));
+        check("indexOfAny(char...)", SETS, (s, c) -> s.indexOfAny(c) != StringUtils.indexOfAny(s, c));
+        check("indexOfAny(String)", SEARCHES, (s, c) -> s.indexOfAny(c) != StringUtils.indexOfAny(s, c));
+        check("indexOfAny(CharSequence...)", PAIRS, (s, p) -> s.indexOfAny(p) != StringUtils.indexOfAny(s, p));
+        check("indexOfAnyBut(char...)", SETS, (s, c) -> s.indexOfAnyBut(c) != StringUtils.indexOfAnyBut(s, c));
+        check("indexOfAnyBut(CharSequence)", SEARCHES,
+                (s, c) -> s.indexOfAnyBut((CharSequence) c) != StringUtils.indexOfAnyBut(s, (CharSequence) c));
+        check("lastIndexOfAny(CharSequence...)", PAIRS, (s, p) -> s.lastIndexOfAny(p) != StringUtils.lastIndexOfAny(s, p));
+        check("indexOfIgnoreCase", SEARCHES, (s, c) -> s.indexOfIgnoreCase(c) != StringUtils.indexOfIgnoreCase(s, c));
+        check("indexOfIgnoreCase(from)", fromCases(), (s, f) -> s.indexOfIgnoreCase(f.search, f.number)
+                != StringUtils.indexOfIgnoreCase(s, f.search, f.number));
+        check("lastIndexOfIgnoreCase", SEARCHES,
+                (s, c) -> s.lastIndexOfIgnoreCase(c) != StringUtils.lastIndexOfIgnoreCase(s, c));
+        check("lastIndexOfIgnoreCase(from)", fromCases(), (s, f) -> s.lastIndexOfIgnoreCase(f.search, f.number)
+                != StringUtils.lastIndexOfIgnoreCase(s, f.search, f.number));
+        check("ordinalIndexOf", ordinalCases(), (s, f) -> s.ordinalIndexOf(f.search, f.number)
+                != StringUtils.ordinalIndexOf(s, f.search, f.number));
+        check("lastOrdinalIndexOf", ordinalCases(), (s, f) -> s.lastOrdinalIndexOf(f.search, f.number)
+                != StringUtils.lastOrdinalIndexOf(s, f.search, f.number));
+        check("startsWithAny", PAIRS, (s, p) -> s.startsWithAny(p) != StringUtils.startsWithAny(s, p));
+        check("endsWithAny", PAIRS, (s, p) -> s.endsWithAny(p) != StringUtils.endsWithAny(s, p));
+        check("startsWithIgnoreCase", SEARCHES,
+                (s, c) -> s.startsWithIgnoreCase(c) != StringUtils.startsWithIgnoreCase(s, c));
+        check("endsWithIgnoreCase", SEARCHES, (s, c) -> s.endsWithIgnoreCase(c) != StringUtils.endsWithIgnoreCase(s, c));
+        check("containsAllWords", wordPairs(), (s, p) -> s.containsAllWords(p) != WordUtils.containsAllWords(s, p));
+        discriminator("null char array throws", throwsNpe(() -> "ab".containsAny((char[]) null)));
+        discriminator("null search throws", throwsNpe(() -> "ab".indexOfIgnoreCase(null)));
+        discriminator("null element skipped", "ab".containsAny(null, "b") && "ab".indexOfAny(null, "b") == 1);
+        discriminator("char set vs substring overloads", "ab".containsAny("ba") && !"ab".containsAny("ba", "ca"));
+        System.out.println("RESULT\t" + (failures == 0 ? "PASS" : "FAIL") + "\tfailures=" + failures);
+        System.exit(failures == 0 ? 0 : 1);
+    }
+
+    private static <T> void check(String name, List<T> arguments, Check<T> check) {
+        long cases = 0, mismatches = 0;
+        String first = "-";
+        for (String text : TEXTS) {
+            for (T argument : arguments) {
+                cases++;
+                if (check.differs(text, argument)) {
+                    if (mismatches++ == 0) first = show(text) + " / " + show(argument);
+                }
+            }
+        }
+        failures += mismatches == 0 ? 0 : 1;
+        System.out.println(name + "\t" + cases + "\t" + mismatches + "\t" + first);
+    }
+
+    private static boolean throwsNpe(Supplier<Object> call) {
+        try { call.get(); return false; } catch (NullPointerException expected) { return true; }
+    }
+
+    private static void discriminator(String name, boolean holds) {
+        failures += holds ? 0 : 1;
+        System.out.println("discriminator:" + name + "\t1\t" + (holds ? "HOLDS" : "FAILS"));
+    }
+
+    private static List<String> strings(int maxLength) {
+        List<String> out = new ArrayList<>();
+        for (int length = 0; length <= maxLength; length++) {
+            int total = (int) Math.pow(UNITS.length, length);
+            for (int code = 0; code < total; code++) {
+                char[] units = new char[length];
+                int rest = code;
+                for (int i = 0; i < length; i++) { units[i] = UNITS[rest % UNITS.length]; rest /= UNITS.length; }
+                out.add(new String(units));
+            }
+        }
+        return out;
+    }
+
+    private static List<char[]> sets() {
+        List<char[]> out = new ArrayList<>();
+        for (String s : SEARCHES) out.add(s.toCharArray());
+        out.add(new char[] {(char) 0xD83D, (char) 0xDE42, 'a'});
+        out.add(new char[] {'a', (char) 0xD83D, (char) 0xD83D});
+        out.add(new char[] {(char) 0xDE42, ' ', (char) 0xE9});
+        return out;
+    }
+
+    private static List<CharSequence[]> pairs() {
+        List<String> pick = new ArrayList<>(SEARCHES.subList(0, 9));
+        pick.addAll(List.of("ab", "Ab", " a", "🙂", "\uD83D", "aa", "bA", "éÉ"));
+        List<CharSequence[]> out = new ArrayList<>();
+        out.add(new CharSequence[0]);
+        for (String a : pick) {
+            out.add(new CharSequence[] {a});
+            out.add(new CharSequence[] {null, a});
+            for (String b : pick) out.add(new CharSequence[] {a, b});
+        }
+        return out;
+    }
+
+    private static List<CharSequence[]> wordPairs() {
+        List<CharSequence[]> out = new ArrayList<>();
+        out.add(new CharSequence[0]);
+        for (String a : List.of("a", "A", "b", "ab", " ", "a b", "é", "🙂")) {
+            out.add(new CharSequence[] {a});
+            for (String b : List.of("a", "b", "ba", "")) out.add(new CharSequence[] {a, b});
+        }
+        return out;
+    }
+
+    private record Numbered(String search, int number) {
+        @Override public String toString() { return show(search) + "@" + number; }
+    }
+
+    private static List<Numbered> fromCases() {
+        List<Numbered> out = new ArrayList<>();
+        for (String s : SEARCHES) for (int from = -1; from <= 6; from++) out.add(new Numbered(s, from));
+        return out;
+    }
+
+    private static List<Numbered> ordinalCases() {
+        List<Numbered> out = new ArrayList<>();
+        for (String s : SEARCHES) for (int ordinal = 0; ordinal <= 3; ordinal++) out.add(new Numbered(s, ordinal));
+        return out;
+    }
+
+    private static String show(Object value) {
+        if (value instanceof char[] chars) return show(new String(chars)) + "[chars]";
+        if (value instanceof CharSequence[] array) {
+            List<String> parts = new ArrayList<>();
+            for (CharSequence item : array) parts.add(item == null ? "null" : show(item.toString()));
+            return parts.toString();
+        }
+        if (value instanceof String text) {
+            StringBuilder out = new StringBuilder("\"");
+            for (char c : text.toCharArray()) out.append(c >= 32 && c < 127 ? String.valueOf(c) : String.format("\\u%04X", (int) c));
+            return out.append('"').toString();
+        }
+        return Objects.toString(value);
+    }
+}

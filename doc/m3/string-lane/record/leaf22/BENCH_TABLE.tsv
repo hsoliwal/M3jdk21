@@ -1,0 +1,9 @@
+kernel	old ns	new ns	donor ns	new vs old	new vs donor
+indexOfAny(char...) miss	4069	2340	49210	1.74x	21.03x
+indexOfAnyBut(char...) miss	4462	3638	50510	1.23x	13.89x
+containsWhitespace miss	3215	1118	30590	2.88x	27.36x
+indexOfIgnoreCase miss	6253	2455	59420	2.55x	24.21x
+lastIndexOfIgnoreCase miss	6798	2769	44280	2.46x	15.99x
+normalizeSpace unchanged	9912	6008	55880	1.65x	9.30x
+stripAccents Latin-1	65533	22213	306110	2.95x	13.78x
+indexOfIgnoreCase miss UTF-16	10488	6580	49400	1.59x	7.51x
