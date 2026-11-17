@@ -1517,16 +1517,7 @@ final class M3String implements CharSequence {
             return M3StringSearchPrecompute.indexOf(this, checked, plan, from, end);
         }
 
-        int limit = end - checked.length();
-        char first = checked.charAt(0);
-        for (int start = from; start <= limit; start++) {
-            if (charAt(start) != first) continue;
-            int index = 1;
-            while (index < checked.length()
-                    && charAt(start + index) == checked.charAt(index)) index++;
-            if (index == checked.length()) return start;
-        }
-        return -1;
+        return M3StringSearchPrecompute.indexOfNoPlan(this, checked, from, end);
     }
 
     int lastIndexOf(M3String needle, int fromIndex) {
@@ -1543,15 +1534,7 @@ final class M3String implements CharSequence {
             return M3StringSearchPrecompute.lastIndexOf(this, checked, plan, maximumStart);
         }
 
-        char first = checked.charAt(0);
-        for (int candidate = maximumStart; candidate >= 0; candidate--) {
-            if (charAt(candidate) != first) continue;
-            int index = 1;
-            while (index < checked.length()
-                    && charAt(candidate + index) == checked.charAt(index)) index++;
-            if (index == checked.length()) return candidate;
-        }
-        return -1;
+        return M3StringSearchPrecompute.lastIndexOfNoPlan(this, checked, maximumStart);
     }
 
     M3String translateEscapes() {

@@ -207,9 +207,18 @@ public class M3StringPrecomputeSearchTest {
 
         String coldAsciiCase = new String("AbC-xYz-123".toCharArray());
         check(!factsPrepared(coldAsciiCase), "cold ROOT ASCII facts initially absent");
-        check(coldAsciiCase.toLowerCase(Locale.ROOT).equals("abc-xyz-123"),
-                "cold ROOT ASCII lowercase");
-        check(factsPrepared(coldAsciiCase), "cold ROOT ASCII prepares canonical facts");
+        CanonicalState coldBefore = canonicalState(coldAsciiCase, "cold ROOT ASCII source");
+        String coldLowercase = coldAsciiCase.toLowerCase(Locale.ROOT);
+        check(coldLowercase.equals("abc-xyz-123"), "cold ROOT ASCII lowercase");
+        // General canonical caseMap supersedes the old facts-backed ASCII shortcut.
+        // Assert retained storage, not whether an optional facts cache was populated.
+        CanonicalState coldAfter = canonicalState(coldAsciiCase, "cold ROOT ASCII source after");
+        check(coldAfter.storage() == coldBefore.storage(), "cold case source storage unchanged");
+        check(coldAfter.owner() == coldBefore.owner(), "cold case source owner unchanged");
+        check(coldAfter.coordinate() == coldBefore.coordinate(),
+                "cold case source coordinate unchanged");
+        check(coldAfter.flat() == coldBefore.flat(), "cold case source flat sentinel unchanged");
+        canonicalState(coldLowercase, "cold ROOT ASCII result");
 
         String asciiCase = String.join("", "AbC", "-xYz-123");
         check(!asciiCase.isBlank(), "prepare ASCII case facts");
@@ -741,6 +750,25 @@ public class M3StringPrecomputeSearchTest {
             if (source[index] == high && source[index + 1] == low) return index;
         }
         return -1;
+    }
+
+    private record CanonicalState(Object storage, Object owner, long coordinate, byte[] flat) { }
+
+    private static CanonicalState canonicalState(String value, String label) throws Exception {
+        Field storageField = String.class.getDeclaredField("m3");
+        Field flatField = String.class.getDeclaredField("value");
+        storageField.setAccessible(true);
+        flatField.setAccessible(true);
+        Object storage = storageField.get(value);
+        check(storage != null, label + " remains canonically backed");
+        byte[] flat = (byte[]) flatField.get(value);
+        check(flat.length == 0, label + " has no retained flat payload");
+        Field ownerField = storage.getClass().getDeclaredField("owner");
+        Field coordinateField = storage.getClass().getDeclaredField("value");
+        ownerField.setAccessible(true);
+        coordinateField.setAccessible(true);
+        return new CanonicalState(storage, ownerField.get(storage),
+                coordinateField.getLong(storage), flat);
     }
 
     private static boolean factsPrepared(String value) throws Exception {

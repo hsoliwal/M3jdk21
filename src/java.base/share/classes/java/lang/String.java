@@ -3031,13 +3031,20 @@ public final class String
 
         byte[] tgt = tgtStr.value();
         byte tgtCoder = tgtStr.coder();
+        if (srcCoder != tgtCoder && srcCoder == LATIN1) {
+            return -1;
+        }
+        // Recipe-pinned to the existing DENSE_CANDIDATES work bound (8).
+        // Short needles or at most eight starts retain the stock intrinsic lane.
+        if (tgtCount > 8 && srcCount - tgtCount - fromIndex >= 8
+                && jdk.internal.misc.VM.isBooted()) {
+            return M3StringSearchPrecompute.twoWay(
+                    src, srcCoder, srcCount, null, tgtStr, fromIndex, false);
+        }
         if (srcCoder == tgtCoder) {
             return srcCoder == LATIN1
                 ? StringLatin1.indexOf(src, srcCount, tgt, tgtCount, fromIndex)
                 : StringUTF16.indexOf(src, srcCount, tgt, tgtCount, fromIndex);
-        }
-        if (srcCoder == LATIN1) {    //  && tgtCoder == UTF16
-            return -1;
         }
         // srcCoder == UTF16 && tgtCoder == LATIN1) {
         return StringUTF16.indexOfLatin1(src, srcCount, tgt, tgtCount, fromIndex);
@@ -3126,13 +3133,21 @@ public final class String
 
         byte[] tgt = tgtStr.value();
         byte tgtCoder = tgtStr.coder();
+        if (srcCoder != tgtCoder && srcCoder == LATIN1) {
+            return -1;
+        }
+        // Recipe-pinned to the existing DENSE_CANDIDATES work bound (8).
+        // Short needles or at most eight starts retain the stock intrinsic lane.
+        if (tgtCount > 8 && fromIndex >= 8 && jdk.internal.misc.VM.isBooted()) {
+            int first = srcCount - tgtCount - fromIndex;
+            int found = M3StringSearchPrecompute.twoWay(
+                    src, srcCoder, srcCount, null, tgtStr, first, true);
+            return found < 0 ? -1 : srcCount - tgtCount - found;
+        }
         if (srcCoder == tgtCoder) {
             return srcCoder == LATIN1
                 ? StringLatin1.lastIndexOf(src, srcCount, tgt, tgtCount, fromIndex)
                 : StringUTF16.lastIndexOf(src, srcCount, tgt, tgtCount, fromIndex);
-        }
-        if (srcCoder == LATIN1) {    // && tgtCoder == UTF16
-            return -1;
         }
         // srcCoder == UTF16 && tgtCoder == LATIN1
         return StringUTF16.lastIndexOfLatin1(src, srcCount, tgt, tgtCount, fromIndex);

@@ -40,6 +40,109 @@ final class M3StringSearchPrecompute {
 
     private M3StringSearchPrecompute() {}
 
+    /** A maximal suffix and its period, packed as (critical position, period). */
+    private static long factor(CharSequence needle, boolean backwards, boolean oppositeOrder) {
+        int length = needle.length();
+        int suffix = -1;
+        int candidate = 0;
+        int offset = 1;
+        int period = 1;
+        while (offset < length - candidate) {
+            char next = needleUnit(needle, candidate + offset, backwards);
+            char previous = needleUnit(needle, suffix + offset, backwards);
+            if (next == previous) {
+                if (offset == period) {
+                    candidate += period;
+                    offset = 1;
+                } else {
+                    offset++;
+                }
+            } else if ((next < previous) != oppositeOrder) {
+                candidate += offset;
+                offset = 1;
+                period = candidate - suffix;
+            } else {
+                suffix = candidate;
+                candidate = suffix + 1;
+                offset = period = 1;
+            }
+        }
+        return ((long) (suffix + 1) << Integer.SIZE) | (period & 0xffff_ffffL);
+    }
+
+    private static char needleUnit(CharSequence needle, int index, boolean backwards) {
+        return needle.charAt(backwards ? needle.length() - 1 - index : index);
+    }
+
+    private static char searchUnit(byte[] flat, byte flatCoder, int length,
+            M3StringBuilderLane lane, M3String canonical,
+            M3String.CodeUnitCursor cursor, int index, boolean backwards) {
+        int at = backwards ? length - 1 - index : index;
+        if (canonical != null) return sourceUnit(canonical, cursor, at);
+        return lane == null ? sourceUnit(flat, flatCoder, at) : lane.charAt(flat, flatCoder, at);
+    }
+
+    /**
+     * Shared builder/flat-source critical factorization with constant auxiliary space.
+     * The caller validates a nonempty needle and first candidate. A reversed result is
+     * an offset in the reversed source; the caller maps it back to its original coordinate.
+     * Reads never flatten a canonical needle or detach a builder's composite lane.
+     */
+    static int twoWay(byte[] flat, byte flatCoder, int length, M3StringBuilderLane lane,
+            CharSequence needle, int first, boolean backwards) {
+        return twoWay(flat, flatCoder, length, lane, null, null, needle, first, backwards);
+    }
+
+    /** One exact matcher for flat bytes, builder coordinates and canonical text. */
+    private static int twoWay(byte[] flat, byte flatCoder, int length,
+            M3StringBuilderLane lane, M3String canonical, M3String.CodeUnitCursor cursor,
+            CharSequence needle, int first, boolean backwards) {
+        int size = needle.length();
+        long normal = factor(needle, backwards, false);
+        long opposite = factor(needle, backwards, true);
+        long selected = (normal >>> Integer.SIZE) >= (opposite >>> Integer.SIZE)
+                ? normal : opposite;
+        int critical = (int) (selected >>> Integer.SIZE);
+        int period = (int) selected;
+        boolean periodic = period <= size - critical;
+        for (int index = 0; periodic && index < critical; index++) {
+            periodic = needleUnit(needle, index, backwards)
+                    == needleUnit(needle, index + period, backwards);
+        }
+        if (!periodic) period = Math.max(critical - 1, size - critical) + 1;
+
+        int memory = 0;
+        int position = first;
+        int limit = length - size;
+        while (position <= limit) {
+            int index = Math.max(critical, memory);
+            while (index < size && needleUnit(needle, index, backwards)
+                    == searchUnit(flat, flatCoder, length, lane, canonical, cursor,
+                            position + index, backwards)) {
+                index++;
+            }
+            int shift;
+            if (index < size) {
+                shift = index - critical + 1;
+                memory = 0;
+            } else {
+                index = critical;
+                while (index > memory && needleUnit(needle, index - 1, backwards)
+                        == searchUnit(flat, flatCoder, length, lane, canonical, cursor,
+                                position + index - 1, backwards)) {
+                    index--;
+                }
+                if (index <= memory) return position;
+                shift = period;
+                memory = periodic ? size - period : 0;
+            }
+            // Avoid overflow at the maximum legal StringBuilder length.
+            if (shift > limit - position) return -1;
+            position += shift;
+        }
+        return -1;
+    }
+
     /**
      * Conservative upper bound for primitive metadata retained by both direct-mapped caches.
      * Object/reference overhead is intentionally excluded; cache cardinality is separately fixed.
@@ -273,13 +376,16 @@ final class M3StringSearchPrecompute {
     /**
      * Exact search of a flat needle over canonical text. The bridge has already checked the
      * non-empty needle, range and optional facts. Sparse candidates and early matches use no
-     * prefix table. Dense failed comparisons switch to the existing KMP algorithm shape with
-     * one bounded, invocation-local table; the needle is neither interned nor retained.
+     * prefix table. Dense failures use bounded KMP; unavailable metadata and oversized
+     * needles use the shared constant-scratch matcher. No needle is interned or retained.
      */
     static int indexOf(M3String source, String pattern, int fromIndex, int endIndex) {
         int patternLength = pattern.length();
         int maximumStart = endIndex - patternLength;
         M3String.CodeUnitCursor units = flatSearchCursor(source, endIndex - fromIndex);
+        if (patternLength > MAX_PATTERN_UNITS) {
+            return twoWayCanonical(source, units, pattern, fromIndex, endIndex, false);
+        }
         char first = pattern.charAt(0);
         long failedComparisonWork = 0L;
         int failedCandidates = 0;
@@ -299,7 +405,8 @@ final class M3StringSearchPrecompute {
                                 > patternLength + 2L * (candidate - fromIndex + 1)) {
                     int[] prefix = flatPrefix(pattern, false);
                     if (prefix == null) {
-                        watching = false;
+                        return twoWayCanonical(source, units, pattern,
+                                candidate + 1, endIndex, false);
                     } else {
                         // Starts through candidate have been ruled out. Restart with no matched
                         // prefix at the next start so overlaps are still considered exactly.
@@ -317,6 +424,10 @@ final class M3StringSearchPrecompute {
         int last = patternLength - 1;
         M3String.CodeUnitCursor units =
                 flatSearchCursor(source, maximumStart + patternLength);
+        if (patternLength > MAX_PATTERN_UNITS) {
+            return twoWayCanonical(source, units, pattern, maximumStart,
+                    maximumStart + patternLength, true);
+        }
         char lastUnit = pattern.charAt(last);
         long failedComparisonWork = 0L;
         int failedCandidates = 0;
@@ -337,7 +448,8 @@ final class M3StringSearchPrecompute {
                                 > patternLength + 2L * (maximumStart - candidate + 1)) {
                     int[] prefix = flatPrefix(pattern, true);
                     if (prefix == null) {
-                        watching = false;
+                        return twoWayCanonical(source, units, pattern, candidate - 1,
+                                maximumStart + patternLength, true);
                     } else {
                         // Every candidate at or above this one failed. The next possible match
                         // ends one code unit earlier, even when adjacent candidates overlap.
@@ -360,6 +472,38 @@ final class M3StringSearchPrecompute {
         } catch (OutOfMemoryError unavailable) {
             return null;
         }
+    }
+
+    /**
+     * Search only the caller-validated prefix/range without materializing canonical text.
+     * Reuse an available tuple cursor; null preserves the allocation-free scalar fallback.
+     * No prefix table, text copy, retained field or new owner is required.
+     */
+    private static int twoWayCanonical(M3String source, M3String.CodeUnitCursor cursor,
+            CharSequence pattern, int candidate, int endIndex, boolean backwards) {
+        int size = pattern.length();
+        if (backwards ? candidate < 0 : candidate > endIndex - size) return -1;
+        int first = backwards ? endIndex - size - candidate : candidate;
+        int found = twoWay(null, (byte) 0, endIndex, null, source, cursor,
+                pattern, first, backwards);
+        return found < 0 || !backwards ? found : endIndex - size - found;
+    }
+
+    /**
+     * Exact no-plan search after M3String has validated its range, facts and needle.
+     * The canonical needle is read directly, never flattened or re-interned. The
+     * optional source cursor is bounded; failure to allocate it keeps scalar reads.
+     */
+    static int indexOfNoPlan(M3String source, M3String pattern, int fromIndex, int endIndex) {
+        M3String.CodeUnitCursor cursor = flatSearchCursor(source, endIndex - fromIndex);
+        return twoWayCanonical(source, cursor, pattern, fromIndex, endIndex, false);
+    }
+
+    /** Reverse no-plan counterpart; the caller supplies a validated candidate start. */
+    static int lastIndexOfNoPlan(M3String source, M3String pattern, int maximumStart) {
+        int endIndex = maximumStart + pattern.length();
+        M3String.CodeUnitCursor cursor = flatSearchCursor(source, endIndex);
+        return twoWayCanonical(source, cursor, pattern, maximumStart, endIndex, true);
     }
 
     private static char sourceUnit(
@@ -512,18 +656,7 @@ final class M3StringSearchPrecompute {
                     : kmp(source, sourceCoder, sourceCount, pattern, plan, from);
         }
 
-        int limit = sourceCount - patternLength;
-        char first = pattern.charAt(0);
-        for (int candidate = from; candidate <= limit; candidate++) {
-            if (sourceUnit(source, sourceCoder, candidate) != first) continue;
-            int index = 1;
-            while (index < patternLength
-                    && sourceUnit(source, sourceCoder, candidate + index) == pattern.charAt(index)) {
-                index++;
-            }
-            if (index == patternLength) return candidate;
-        }
-        return -1;
+        return twoWay(source, sourceCoder, sourceCount, null, pattern, from, false);
     }
 
     private static int kmp(
@@ -599,9 +732,13 @@ final class M3StringSearchPrecompute {
         int maximumStart = Math.min(fromIndex, sourceCount - patternLength);
         if (maximumStart < 0) return -1;
         if (patternLength == 0) return maximumStart;
+        if (patternLength > MAX_PATTERN_UNITS) {
+            return twoWayLastIndexOf(source, sourceCoder, sourceCount, pattern, maximumStart);
+        }
         char[] needle = units(pattern);
         if (needle == null) {
-            return perUnitLastIndexOf(source, sourceCoder, pattern, patternLength, maximumStart);
+            return perUnitLastIndexOf(
+                    source, sourceCoder, sourceCount, pattern, patternLength, maximumStart);
         }
         if (sourceCoder == String.LATIN1 && !latin1(needle)) return -1;
         if (patternLength == 1) return seekBackwards(source, sourceCoder, maximumStart, 0, needle[0]);
@@ -631,8 +768,8 @@ final class M3StringSearchPrecompute {
                 if (++candidates >= DENSE_CANDIDATES && compares >= scanStart - index + 1) {
                     Plan plan = prepare(pattern);
                     if (plan == null) {
-                        watching = false;
-                        continue;
+                        return twoWayLastIndexOf(
+                                source, sourceCoder, sourceCount, pattern, index - patternLength);
                     }
                     return reverseSkipSearch(source, sourceCoder, needle, plan, index - 1);
                 }
@@ -642,9 +779,10 @@ final class M3StringSearchPrecompute {
 
     /**
      * The needle's units read once in bulk (A43), or {@code null} when the copy cannot be
-     * allocated: the per-unit search then answers, precompute is never semantic authority.
+     * allocated or exceeds the plan budget. The exact no-copy fallback then answers.
      */
     private static char[] units(M3String pattern) {
+        if (pattern.length() > MAX_PATTERN_UNITS) return null;
         try {
             char[] out = new char[pattern.length()];
             pattern.getChars(0, out.length, out, 0);
@@ -706,8 +844,8 @@ final class M3StringSearchPrecompute {
     }
 
     /** The per-unit reverse search of master, kept for a needle whose units cannot be copied. */
-    private static int perUnitLastIndexOf(byte[] source, byte sourceCoder, M3String pattern,
-            int patternLength, int maximumStart) {
+    private static int perUnitLastIndexOf(byte[] source, byte sourceCoder, int sourceCount,
+            M3String pattern, int patternLength, int maximumStart) {
         if (patternLength == 1) {
             char wanted = pattern.charAt(0);
             for (int index = maximumStart; index >= 0; index--) {
@@ -731,17 +869,17 @@ final class M3StringSearchPrecompute {
             return -1;
         }
 
-        char first = pattern.charAt(0);
-        for (int candidate = maximumStart; candidate >= 0; candidate--) {
-            if (sourceUnit(source, sourceCoder, candidate) != first) continue;
-            int index = 1;
-            while (index < patternLength
-                    && sourceUnit(source, sourceCoder, candidate + index) == pattern.charAt(index)) {
-                index++;
-            }
-            if (index == patternLength) return candidate;
-        }
-        return -1;
+        return twoWayLastIndexOf(source, sourceCoder, sourceCount, pattern, maximumStart);
+    }
+
+    /** Map reverse search coordinates without a needle-sized temporary array. */
+    private static int twoWayLastIndexOf(byte[] source, byte sourceCoder, int sourceCount,
+            M3String pattern, int maximumStart) {
+        if (maximumStart < 0) return -1;
+        int patternLength = pattern.length();
+        int first = sourceCount - patternLength - maximumStart;
+        int found = twoWay(source, sourceCoder, sourceCount, null, pattern, first, true);
+        return found < 0 ? -1 : sourceCount - patternLength - found;
     }
 
     private static char sourceUnit(byte[] source, byte sourceCoder, int index) {
