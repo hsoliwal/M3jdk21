@@ -7475,6 +7475,13 @@ public final class String
         M3String storage = m3();
         M3StringFacts facts = storage == null ? null : storage.factsIfPrepared();
         if (facts != null && noSeparatorUnit(facts, chars)) return new String[] {this};
+        char[] units = chars == null ? new char[0] : chars.toCharArray();
+        long low = asciiMask(units, 0);
+        long high = asciiMask(units, 64);
+        long upper = asciiMask(units, 128);
+        long top = asciiMask(units, 192);
+        UnitSet set = units.length > UnitSet.FEW && hasWideUnit(units)
+                ? new UnitSet(units, UnitSet.UNITS) : null;
         ArrayList<String> parts = new ArrayList<>();
         int begin = 0;
         char[] window = new char[Math.min(length, SCAN_WINDOW)];
@@ -7484,7 +7491,9 @@ public final class String
             for (int k = 0; k < count; k++) {
                 char unit = window[k];
                 boolean separates = chars == null ? Character.isWhitespace(unit)
-                        : chars.indexOf(unit) >= 0;
+                        : unit < 128 ? inMask(unit, low, high)
+                        : unit < 256 ? inMask((char) (unit - 128), upper, top)
+                        : set == null ? chars.indexOf(unit) >= 0 : set.has(unit);
                 if (!separates) continue;
                 if (addPart(parts, begin, from + k, max, all)) return parts.toArray(new String[0]);
                 begin = from + k + 1;
