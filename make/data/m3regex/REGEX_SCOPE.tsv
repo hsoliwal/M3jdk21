@@ -1,0 +1,14 @@
+# Regex spec scope (owner decision 46): which Java sources the regex census reads; the first matching glob wins.
+# glob: "*" matches within one path segment, "**" as a whole segment matches any number of segments.
+# gated: the canon gate check regex_spec refuses a new site without a row. baseline-*: rows recorded, not gated.
+# A path that no glob matches is upstream OpenJDK source and outside the spec.
+glob	scope	owner
+src/*/providers/**	baseline-provider	vendored donor sources (Guava, Lucene, OpenNLP) kept as published upstream
+make/jdk/src/classes/build/tools/canongate/**	baseline-tooling	canon gate
+make/m3/**	baseline-tooling	M3 build recipes
+src/java.base/share/classes/java/lang/String.java	gated	String API sites
+src/java.base/share/classes/jdk/internal/mindex/**	gated	M3 index package
+src/jdk.m3.*/**	gated	M3 modules
+src/m3.*/**	gated	M3 modules
+src/**/m3/**	gated	m3 packages in JDK modules
+src/**/M3*	gated	M3 types in JDK packages

@@ -8,6 +8,7 @@
 #   bash make/scripts/canon-gate.sh run <packet.tsv> <run-dir> [<root>]
 #   bash make/scripts/canon-gate.sh selftest
 #   bash make/scripts/canon-gate.sh <stamp|extension_points|text_refs> <root> <base-ref> <out-dir> [<name>...]
+#   bash make/scripts/canon-gate.sh regex_sites <root> <out-dir> [<rev>]
 #
 # JAVA_HOME selects the JDK; otherwise java and javac come from PATH. <root> defaults to this
 # repository. The contract is documented in doc/canon-gate.md.
@@ -25,8 +26,8 @@ case "${1-}" in
   selftest) [ $# -eq 1 ] || { echo 'usage: canon-gate.sh selftest' >&2; exit 2; }
     sources+=("$topdir"/test/make/canongate/*.java)
     args=(); main=build.tools.canongate.CanonGateTest ;;
-  stamp|extension_points|text_refs) args=("$@"); main=build.tools.canongate.CanonGate ;;
-  *) echo 'usage: canon-gate.sh check|run|selftest|stamp|extension_points|text_refs ...' >&2; exit 2 ;;
+  stamp|extension_points|text_refs|regex_sites) args=("$@"); main=build.tools.canongate.CanonGate ;;
+  *) echo 'usage: canon-gate.sh check|run|selftest|stamp|extension_points|text_refs|regex_sites ...' >&2; exit 2 ;;
 esac
 
 classes=$(mktemp -d)

@@ -11,6 +11,7 @@ bash make/scripts/canon-gate.sh check <packet.tsv>
 bash make/scripts/canon-gate.sh run <packet.tsv> <run-dir> [<root>]
 bash make/scripts/canon-gate.sh selftest
 bash make/scripts/canon-gate.sh <stamp|extension_points|text_refs> <root> <base-ref> <out-dir> [<name>...]
+bash make/scripts/canon-gate.sh regex_sites <root> <out-dir> [<rev>]
 ```
 
 `JAVA_HOME` selects the JDK (17 or later); `<root>` defaults to this repository. Exit status: 0 pass, 1 stage, scope, atomization or contract failure, 2 invalid packet or invocation. The run directory
@@ -101,6 +102,16 @@ bash make/scripts/canon-gate.sh text_refs <root> <base-ref> <out-dir> <name>...
 Exit status 0 no finding, 1 at least one finding (printed, and written to the evidence table in `<out-dir>`), 2 a
 wrong invocation or a git failure. The checks only read: git is asked for the base tree, the patch and line counts;
 the index is not touched and nothing is fetched.
+
+## Regex spec tables
+
+`make/data/m3regex` holds the regex spec of owner decision 46: one row per distinct pattern, the generated site table
+and the scope ([README](../make/data/m3regex/README.md)). `regex_sites <root> <out-dir> [<rev>]` reads every Java file
+that `REGEX_SCOPE.tsv` covers, from the working tree or from the tree of `<rev>` (one `git cat-file --batch` process;
+nothing is checked out or fetched), validates every spec row (every field present, the id is the content key of the
+pattern and flags, every example agrees with `java.util.regex`) and writes `REGEX_SITES.tsv`, `REGEX_CENSUS.tsv`,
+`REGEX_SPEC_TODO.tsv`, `REGEX_SPEC_ORPHANS.tsv` and `REGEX_SPEC_PROBLEMS.tsv` to `<out-dir>`. Exit status 0 when every
+site has a valid row and no row is orphaned, 1 otherwise, 2 for a wrong invocation or a read failure.
 
 ## Violations
 
