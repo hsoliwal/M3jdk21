@@ -4646,7 +4646,7 @@ public final class String
      * @since   21
      */
     public String strip(String chars) {
-        return stripStart(chars).stripEnd(chars);
+        return stripped(chars, unitSetOver(chars));
     }
 
     /**
@@ -4665,16 +4665,7 @@ public final class String
      * @since   21
      */
     public String stripStart(String chars) {
-        int length = length();
-        int start = 0;
-        if (!chars.isEmpty()) {
-            while (start < length) {
-                int point = codePointAt(start);
-                if (chars.indexOf(point) < 0) break;
-                start += Character.charCount(point);
-            }
-        }
-        return substring(start);
+        return substring(strippedStart(chars, unitSetOver(chars)));
     }
 
     /**
@@ -4693,15 +4684,56 @@ public final class String
      * @since   21
      */
     public String stripEnd(String chars) {
-        int end = length();
-        if (!chars.isEmpty()) {
-            while (end > 0) {
-                int point = codePointBefore(end);
-                if (chars.indexOf(point) < 0) break;
-                end -= Character.charCount(point);
-            }
+        return substring(0, strippedEnd(chars, unitSetOver(chars), 0));
+    }
+
+    /**
+     * This string without the code points of {@code chars} at its start and its end, as
+     * {@link #strip(String)}: one range, found from both ends with {@code set} (when not
+     * {@code null}, the set of {@code chars} for a set of more than {@link UnitSet#FEW} units).
+     */
+    private String stripped(String chars, UnitSet set) {
+        int start = strippedStart(chars, set);
+        return substring(start, strippedEnd(chars, set, start));
+    }
+
+    /**
+     * The index of the first code point of this string that {@code chars} does not contain as
+     * {@link #indexOf(int)} finds it, looked up in {@code set} when it is not {@code null}.
+     */
+    private int strippedStart(String chars, UnitSet set) {
+        int length = length();
+        int start = 0;
+        while (start < length) {
+            int point = codePointAt(start);
+            if (set == null ? chars.indexOf(point) < 0 : !set.has(point)) break;
+            start += Character.charCount(point);
         }
-        return substring(0, end);
+        return start;
+    }
+
+    /**
+     * The end of this string without the code points of {@code chars} before it, as
+     * {@link #strippedStart(String, UnitSet)} finds them, never below {@code start}, the end of
+     * a stripped start (which never splits a surrogate pair).
+     */
+    private int strippedEnd(String chars, UnitSet set, int start) {
+        int end = length();
+        while (end > start) {
+            int point = codePointBefore(end);
+            if (set == null ? chars.indexOf(point) < 0 : !set.has(point)) break;
+            end -= Character.charCount(point);
+        }
+        return end;
+    }
+
+    /**
+     * The set of {@code chars} as {@link #indexOf(int)} finds code points in it, or {@code null}
+     * for at most {@link UnitSet#FEW} units, which the strip methods search directly.
+     */
+    private static UnitSet unitSetOver(String chars) {
+        return chars.length() <= UnitSet.FEW ? null
+                : new UnitSet(chars.toCharArray(), UnitSet.UNITS);
     }
 
     /**
@@ -5023,11 +5055,12 @@ public final class String
      */
     public static String[] stripAll(String[] strings, String chars) {
         if (strings == null || strings.length == 0) return strings;
+        UnitSet set = chars == null ? null : unitSetOver(chars);
         String[] out = new String[strings.length];
         for (int index = 0; index < strings.length; index++) {
             String value = strings[index];
             out[index] = value == null ? null : chars == null ? stripWhitespace(value)
-                    : value.strip(chars);
+                    : value.stripped(chars, set);
         }
         return out;
     }
