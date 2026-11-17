@@ -28,6 +28,25 @@
 
 #include "orderAccess_linux_zero.hpp"
 
+#if defined(__ANDROID__) && defined(__i386__) && defined(__clang__)
+// Android x86 permits four-byte-aligned 64-bit storage. These compiler-rt
+// entry points select an atomic implementation using the actual address.
+extern "C" {
+  void zero_atomic_load(int size, const volatile void* src, void* dest, int order)
+    __asm__("__atomic_load");
+  void zero_atomic_store(int size, volatile void* dest, const void* src, int order)
+    __asm__("__atomic_store");
+  int zero_atomic_compare_exchange(int size, volatile void* dest, void* expected,
+                                  const void* desired, int success, int failure)
+    __asm__("__atomic_compare_exchange");
+  void zero_atomic_exchange(int size, volatile void* dest, const void* value,
+                            void* previous, int order)
+    __asm__("__atomic_exchange");
+  uint64_t zero_atomic_fetch_add_8(volatile void* dest, uint64_t value, int order)
+    __asm__("__atomic_fetch_add_8");
+}
+#endif
+
 // Implementation of class atomic
 
 template<size_t byte_size>
@@ -60,7 +79,13 @@ inline D Atomic::PlatformAdd<8>::add_then_fetch(D volatile* dest, I add_value,
   STATIC_ASSERT(8 == sizeof(I));
   STATIC_ASSERT(8 == sizeof(D));
 
+#if defined(__ANDROID__) && defined(__i386__) && defined(__clang__)
+  uint64_t bits = PrimitiveConversions::cast<uint64_t>(add_value);
+  uint64_t previous = zero_atomic_fetch_add_8(dest, bits, __ATOMIC_RELEASE);
+  D res = PrimitiveConversions::cast<D>(previous + bits);
+#else
   D res = __atomic_add_fetch(dest, add_value, __ATOMIC_RELEASE);
+#endif
   FULL_MEM_BARRIER;
   return res;
 }
@@ -84,7 +109,12 @@ inline T Atomic::PlatformXchg<8>::operator()(T volatile* dest,
                                              atomic_memory_order order) const {
   STATIC_ASSERT(8 == sizeof(T));
   FULL_MEM_BARRIER;
+#if defined(__ANDROID__) && defined(__i386__) && defined(__clang__)
+  T result;
+  zero_atomic_exchange(8, dest, &exchange_value, &result, __ATOMIC_RELAXED);
+#else
   T result = __atomic_exchange_n(dest, exchange_value, __ATOMIC_RELAXED);
+#endif
   FULL_MEM_BARRIER;
   return result;
 }
@@ -119,17 +149,24 @@ inline T Atomic::PlatformCmpxchg<8>::operator()(T volatile* dest,
 
   FULL_MEM_BARRIER;
   T value = compare_value;
+#if defined(__ANDROID__) && defined(__i386__) && defined(__clang__)
+  zero_atomic_compare_exchange(8, dest, &value, &exchange_value,
+                               __ATOMIC_RELAXED, __ATOMIC_RELAXED);
+#else
   __atomic_compare_exchange(dest, &value, &exchange_value, /*weak*/false,
                             __ATOMIC_RELAXED, __ATOMIC_RELAXED);
+#endif
   FULL_MEM_BARRIER;
   return value;
 }
 
 // Atomically copy 64 bits of data
 inline void atomic_copy64(const volatile void *src, volatile void *dst) {
-  int64_t tmp;
-  __atomic_load(reinterpret_cast<const volatile int64_t*>(src), &tmp, __ATOMIC_RELAXED);
-  __atomic_store(reinterpret_cast<volatile int64_t*>(dst), &tmp, __ATOMIC_RELAXED);
+  // Copy's jlong entry points require both addresses to be 8-byte aligned.
+  typedef int64_t aligned_int64_t ATTRIBUTE_ALIGNED(8);
+  aligned_int64_t tmp;
+  __atomic_load(reinterpret_cast<const volatile aligned_int64_t*>(src), &tmp, __ATOMIC_RELAXED);
+  __atomic_store(reinterpret_cast<volatile aligned_int64_t*>(dst), &tmp, __ATOMIC_RELAXED);
 }
 
 template<>
@@ -137,7 +174,11 @@ template<typename T>
 inline T Atomic::PlatformLoad<8>::operator()(T const volatile* src) const {
   STATIC_ASSERT(8 == sizeof(T));
   T dest;
+#if defined(__ANDROID__) && defined(__i386__) && defined(__clang__)
+  zero_atomic_load(8, src, &dest, __ATOMIC_RELAXED);
+#else
   __atomic_load(const_cast<T*>(src), &dest, __ATOMIC_RELAXED);
+#endif
   return dest;
 }
 
@@ -146,7 +187,11 @@ template<typename T>
 inline void Atomic::PlatformStore<8>::operator()(T volatile* dest,
                                                  T store_value) const {
   STATIC_ASSERT(8 == sizeof(T));
+#if defined(__ANDROID__) && defined(__i386__) && defined(__clang__)
+  zero_atomic_store(8, dest, &store_value, __ATOMIC_RELAXED);
+#else
   __atomic_store(dest, &store_value, __ATOMIC_RELAXED);
+#endif
 }
 
 #endif // OS_CPU_LINUX_ZERO_ATOMIC_LINUX_ZERO_HPP

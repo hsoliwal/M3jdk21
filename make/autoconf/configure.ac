@@ -187,6 +187,8 @@ FLAGS_PRE_TOOLCHAIN
 # Then detect the actual binaries needed
 TOOLCHAIN_PRE_DETECTION
 TOOLCHAIN_DETECT_TOOLCHAIN_CORE
+# Mobile compiler prerequisites must follow discovery outside the core macro.
+TOOLCHAIN_CHECK_MOBILE_TARGET
 TOOLCHAIN_DETECT_TOOLCHAIN_EXTRA
 TOOLCHAIN_POST_DETECTION
 

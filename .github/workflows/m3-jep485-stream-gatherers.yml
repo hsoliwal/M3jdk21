@@ -61,10 +61,21 @@ jobs:
           path = Path("m3/backports/recipes/j485/WORKFLOW_VALIDATOR_RECEIVER.tsv")
           with path.open(encoding="utf-8", newline="") as handle:
               reader = csv.reader(handle, delimiter="\t")
-              header = next(reader, None)
-              if header != ["field", "value"]:
-                  raise SystemExit(f"JEP485 workflow receiver header drift: {header}")
-              rows = dict(reader)
+              first = next(reader, None)
+              if first == ["field", "value"]:
+                  entries = list(reader)
+              elif first is not None and len(first) == 2 and first[0] == "canonical_repository":
+                  # The retained J485 receipt predates the optional field/value header.
+                  entries = [first, *reader]
+              else:
+                  raise SystemExit(f"JEP485 workflow receiver header drift: {first}")
+              if any(len(row) != 2 for row in entries):
+                  raise SystemExit("JEP485 workflow receiver row width drift")
+              rows = {}
+              for key, value in entries:
+                  if key in rows:
+                      raise SystemExit(f"JEP485 workflow receiver duplicate field: {key}")
+                  rows[key] = value
           # Standalone (2026-10-31): the donor repository is lineage; it lives once in the
           # standalone ledger, not in this workflow (m3/tooling/standalone/M3_REFS.tsv).
           with Path("m3/tooling/standalone/LINEAGE_SOURCES.tsv").open(encoding="utf-8", newline="") as handle:
@@ -72,7 +83,7 @@ jobs:
           expected = {
               "canonical_repository": lineage["synexia"]["repository"],
               "canonical_commit": "0f0f9965092955c15f5c32f5eb102137fd0dbf8e",
-              "canonical_path": "m3-code-convergence/tools/WorkflowStructureCheck.java",
+              "canonical_path": "synexia-code-convergence/tools/WorkflowStructureCheck.java",
               "canonical_git_blob": "f61be81f5a15bea78f1c5ae7d5555844c9cd2ea7",
               "canonical_owner": "SYNEXIA",
               "target_role": "M3JDK21_THIN_RECEIVER",

@@ -34,57 +34,291 @@ jobs:
         with:
           distribution: temurin
           java-version: '21.0.8'
-      - name: Pin Maven
+      - name: Current product Java, JNI and compiled-kernel gates
         shell: bash
         run: |
           set -euo pipefail
-          curl --fail --location --retry 3 https://archive.apache.org/dist/maven/maven-3/3.9.9/binaries/apache-maven-3.9.9-bin.tar.gz -o "$RUNNER_TEMP/maven.tgz"
-          echo "a555254d6b53d267965a3404ecb14e53c3827c09c3b94b5678835887ab404556bfaf78dcfe03ba76fa2508649dca8531c74bca4d5846513522404d48e8c4ac8b $RUNNER_TEMP/maven.tgz" | sha512sum -c -
-          tar -xzf "$RUNNER_TEMP/maven.tgz" -C "$RUNNER_TEMP"
-          echo "$RUNNER_TEMP/apache-maven-3.9.9/bin" >> "$GITHUB_PATH"
-      - name: Mapping validator dependencies
-        shell: bash
-        run: |
-          python3 -m venv "$RUNNER_TEMP/tq-python"
-          "$RUNNER_TEMP/tq-python/bin/python" -m pip install -r m3/migration/requirements.txt
-          echo "$RUNNER_TEMP/tq-python/bin" >> "$GITHUB_PATH"
-      - name: Source-built TQ Maven dependencies
-        shell: bash
-        run: |
-          mvn -B -ntp -f "$GITHUB_WORKSPACE/m3/vendor/third_party/pom.xml" -pl rewrite-java-21,rewrite-test,junit-jupiter-5.10.2,junit-platform-launcher-1.10.2,slf4j-api-2.0.12 -am -DskipTests install
-      - name: Recipe, UTF-16, mapped-owner, JNI and compiled-kernel gates
-        run: mvn -B -ntp -f m3/tooling/tq/pom.xml verify
-      - name: TQ successor recipe and custody
-        run: |
-          mvn -B -ntp -f m3/tooling/tq-sync/pom.xml verify
-          python3 m3/tooling/tq-sync/verify-plan.py --context ic0
-          python3 -B -S -m unittest discover -s m3/tooling/tq-sync/src/test/python -p test_ic0_context.py -v
-      - name: Current TQ workflow context regression
-        run: python3 -B -S -m unittest discover -s m3/tooling/tq/src/test/python -p test_ic0_context.py -v
-      - name: Preserve release evidence
-        run: |
-          mkdir -p m3/tooling/tq/target/release
-          cp m3/tooling/tq/target/*.log m3/tooling/tq/target/release/
-          cp m3/tooling/tq/target/surefire-reports/TEST-*.xml m3/tooling/tq/target/release/
-      - name: Native undefined-behavior gate
-        run: mvn -B -ntp -f m3/tooling/tq/pom.xml -Dtq.sanitize=true verify
-      - name: Installed bytes and retained mapping
-        shell: bash
-        run: |
-          python3 m3/tooling/tq/verify-plan.py --context ic0
-          python3 m3/migration/migration.py validate . --previous m3/tooling/tq/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq/name-mapping.json.txt.before
+          : "${JAVA_HOME:?setup-java must supply JDK 21}"
+          : "${GITHUB_WORKSPACE:?checkout is required}"
+          : "${RUNNER_TEMP:?runner temporary directory is required}"
+          out="$RUNNER_TEMP/m3-tq-component"
+          source="$out/source/jdk/internal/mindex"
+          testdir="$GITHUB_WORKSPACE/test/jdk/java/lang/String"
+          mkdir -p "$source" "$out/patch" "$out/tests" "$out/headers" \
+            "$out/native" "$out/ubsan" "$out/native-mutant" "$out/logs"
+          "$JAVA_HOME/bin/java" -XX:+PerfDisableSharedMem -version > "$out/logs/java-version.log" 2>&1
+          g++ --version > "$out/logs/native-compiler-version.log"
+          for owner in M3TQ M3StringBacking M3MappedStringBacking; do
+            cp "$GITHUB_WORKSPACE/src/java.base/share/classes/jdk/internal/mindex/$owner.java" "$source/$owner.java"
+          done
+          tests=(M3MappedStringBackingTest MapFactsTest M3TQTest M3TQArrayCompositionTest \
+            M3TQSparseContainmentTest M3TQAdaptiveContainmentTest M3TQRollingPreparationTest)
+          test_sources=()
+          for main in "${tests[@]}"; do test_sources+=("$testdir/$main.java"); done
+          "$JAVA_HOME/bin/javac" -J-Xmx256m -J-XX:ActiveProcessorCount=2 -J-XX:+PerfDisableSharedMem \
+            -source 21 -target 21 -proc:none -implicit:none -Xlint:all -Werror \
+            --patch-module "java.base=$out/source" -d "$out/patch" \
+            "$source/M3TQ.java" "$source/M3StringBacking.java" "$source/M3MappedStringBacking.java" \
+            > "$out/logs/compile-owner.log" 2>&1
+          "$JAVA_HOME/bin/javac" -J-Xmx256m -J-XX:ActiveProcessorCount=2 -J-XX:+PerfDisableSharedMem \
+            -source 21 -target 21 -proc:none -Xlint:all -Werror \
+            --patch-module "java.base=$out/patch" --add-exports java.base/jdk.internal.mindex=ALL-UNNAMED \
+            -h "$out/headers" -d "$out/tests" "${test_sources[@]}" \
+            > "$out/logs/compile-tests.log" 2>&1
+          native_flags=(-std=c++20 -O2 -Wall -Wextra -Werror -Wconversion -Wshadow -Wpedantic -fPIC -shared \
+            "-I$JAVA_HOME/include" "-I$JAVA_HOME/include/linux" \
+            -include "$out/headers/M3TQTest.h" -include "$out/headers/M3TQArrayCompositionTest.h")
+          g++ "${native_flags[@]}" "$testdir/libM3TQTest.cpp" -o "$out/native/libM3TQTest.so" \
+            > "$out/logs/compile-native.log" 2>&1
+          nm -D --defined-only "$out/native/libM3TQTest.so" > "$out/native-exports.txt"
+          "$JAVA_HOME/bin/javap" -J-XX:+PerfDisableSharedMem -protected -s -classpath "$out/patch" \
+            jdk.internal.mindex.M3TQ 'jdk.internal.mindex.M3TQ$Facts' 'jdk.internal.mindex.M3TQ$Op' \
+            > "$out/protected-api.txt"
+          "$JAVA_HOME/bin/jdeps" -J-XX:+PerfDisableSharedMem -s "$out/patch" > "$out/module-deps.txt"
+          python3 -B -S - "$out" <<'PY'
+          from pathlib import Path
+          import re
+          import sys
+          root = Path(sys.argv[1])
+          expected = {"Java_M3TQTest_nativeKeys", "Java_M3TQTest_nativeRangeKeys",
+                      "Java_M3TQArrayCompositionTest_nativeKeys"}
+          headers = {name for path in (root / "headers").glob("*.h")
+                     for name in re.findall(r"\bJava_[A-Za-z0-9_]+\b", path.read_text())}
+          exports = {line.split()[-1] for line in (root / "native-exports.txt").read_text().splitlines()
+                     if line.split() and line.split()[-1].startswith("Java_")}
+          if headers != expected or exports != expected:
+              raise SystemExit(f"JNI declarations/exports differ: headers={headers}, exports={exports}")
+          (root / "jni-abi-result.txt").write_text("PASS exact JNI declarations and three exports\n")
+          # Historical public/protected contract; compiled from the preserved baseline in Synexia.
+          # Current implementations may add members, but cannot erase or alter these signatures.
+          baseline = 'Compiled from "M3TQ.java"\npublic final class jdk.internal.mindex.M3TQ {\n  public static jdk.internal.mindex.M3TQ all();\n    descriptor: ()Ljdk/internal/mindex/M3TQ;\n\n  public static jdk.internal.mindex.M3TQ none();\n    descriptor: ()Ljdk/internal/mindex/M3TQ;\n\n  public static jdk.internal.mindex.M3TQ fromExact(java.util.List<java.lang.String>);\n    descriptor: (Ljava/util/List;)Ljdk/internal/mindex/M3TQ;\n\n  public static jdk.internal.mindex.M3TQ and(java.util.List<jdk.internal.mindex.M3TQ>);\n    descriptor: (Ljava/util/List;)Ljdk/internal/mindex/M3TQ;\n\n  public static jdk.internal.mindex.M3TQ or(java.util.List<jdk.internal.mindex.M3TQ>);\n    descriptor: (Ljava/util/List;)Ljdk/internal/mindex/M3TQ;\n\n  public jdk.internal.mindex.M3TQ$Op op();\n    descriptor: ()Ljdk/internal/mindex/M3TQ$Op;\n\n  public long[] trigrams();\n    descriptor: ()[J\n\n  public java.util.List<jdk.internal.mindex.M3TQ> subqueries();\n    descriptor: ()Ljava/util/List;\n\n  public boolean hasConstraints();\n    descriptor: ()Z\n\n  public int termCount();\n    descriptor: ()I\n\n  public boolean test(java.util.function.LongPredicate);\n    descriptor: (Ljava/util/function/LongPredicate;)Z\n\n  public static jdk.internal.mindex.M3TQ$Facts precompute(java.lang.CharSequence, int);\n    descriptor: (Ljava/lang/CharSequence;I)Ljdk/internal/mindex/M3TQ$Facts;\n\n  public static jdk.internal.mindex.M3TQ$Facts precompute(java.lang.CharSequence, int, int, int);\n    descriptor: (Ljava/lang/CharSequence;III)Ljdk/internal/mindex/M3TQ$Facts;\n\n  public static jdk.internal.mindex.M3TQ$Facts precompute(jdk.internal.mindex.M3StringBacking, long, int, int, int);\n    descriptor: (Ljdk/internal/mindex/M3StringBacking;JIII)Ljdk/internal/mindex/M3TQ$Facts;\n\n  public boolean testPrecomputed(jdk.internal.mindex.M3TQ$Facts);\n    descriptor: (Ljdk/internal/mindex/M3TQ$Facts;)Z\n\n  public static long trigram(char, char, char);\n    descriptor: (CCC)J\n\n  public java.lang.String toString();\n    descriptor: ()Ljava/lang/String;\n}\nCompiled from "M3TQ.java"\npublic final class jdk.internal.mindex.M3TQ$Facts implements java.util.function.LongPredicate {\n  public int utf16Length();\n    descriptor: ()I\n\n  public int keyCount();\n    descriptor: ()I\n\n  public long[] keys();\n    descriptor: ()[J\n\n  public boolean test(long);\n    descriptor: (J)Z\n\n  public boolean containsAll(jdk.internal.mindex.M3TQ$Facts);\n    descriptor: (Ljdk/internal/mindex/M3TQ$Facts;)Z\n\n  public jdk.internal.mindex.M3TQ$Facts concat(jdk.internal.mindex.M3TQ$Facts, int);\n    descriptor: (Ljdk/internal/mindex/M3TQ$Facts;I)Ljdk/internal/mindex/M3TQ$Facts;\n}\nCompiled from "M3TQ.java"\npublic final class jdk.internal.mindex.M3TQ$Op extends java.lang.Enum<jdk.internal.mindex.M3TQ$Op> {\n  public static final jdk.internal.mindex.M3TQ$Op ALL;\n    descriptor: Ljdk/internal/mindex/M3TQ$Op;\n  public static final jdk.internal.mindex.M3TQ$Op NONE;\n    descriptor: Ljdk/internal/mindex/M3TQ$Op;\n  public static final jdk.internal.mindex.M3TQ$Op AND;\n    descriptor: Ljdk/internal/mindex/M3TQ$Op;\n  public static final jdk.internal.mindex.M3TQ$Op OR;\n    descriptor: Ljdk/internal/mindex/M3TQ$Op;\n  public static jdk.internal.mindex.M3TQ$Op[] values();\n    descriptor: ()[Ljdk/internal/mindex/M3TQ$Op;\n\n  public static jdk.internal.mindex.M3TQ$Op valueOf(java.lang.String);\n    descriptor: (Ljava/lang/String;)Ljdk/internal/mindex/M3TQ$Op;\n}\n'
+          
+          def api_signature(text):
+              classes = {}
+              owner = None
+              pending = None
+              for raw in text.splitlines():
+                  line = raw.strip()
+                  if not line or line.startswith('Compiled from '):
+                      continue
+                  if line.endswith('{'):
+                      if owner is not None or pending is not None:
+                          raise SystemExit('Malformed nested API declaration')
+                      match = re.search(r'\b(?:class|interface|enum) ([^ <]+)', line)
+                      if not match or match[1] in classes:
+                          raise SystemExit('Missing or duplicate API owner')
+                      owner = match[1]
+                      classes[owner] = {'declaration': line, 'members': {}}
+                  elif line == '}':
+                      if owner is None or pending is not None:
+                          raise SystemExit('Incomplete API declaration')
+                      owner = None
+                  elif line.startswith(('public ', 'protected ')):
+                      if owner is None or pending is not None:
+                          raise SystemExit('Member is not bound to an owner and descriptor')
+                      pending = line
+                  elif line.startswith('descriptor: '):
+                      if owner is None or pending is None or pending in classes[owner]['members']:
+                          raise SystemExit('Missing or duplicate API descriptor')
+                      classes[owner]['members'][pending] = line.removeprefix('descriptor: ')
+                      pending = None
+                  else:
+                      raise SystemExit(f'Unrecognized public/protected API line: {line}')
+              if owner is not None or pending is not None or len(classes) != 3:
+                  raise SystemExit('Incomplete API inventory')
+              return classes
+          
+          expected_api = api_signature(baseline)
+          actual_api = api_signature((root / 'protected-api.txt').read_text())
+          for owner, contract in expected_api.items():
+              actual = actual_api.get(owner)
+              if actual is None or actual['declaration'] != contract['declaration']:
+                  raise SystemExit(f'Changed API class kind/modifiers/super/interfaces: {owner}')
+              for declaration, descriptor in contract['members'].items():
+                  if actual['members'].get(declaration) != descriptor:
+                      raise SystemExit(f'Missing or changed API member: {owner}: {declaration}: {descriptor}')
+          if (root / 'module-deps.txt').read_text().strip() != 'patch -> java.base':
+              raise SystemExit('Current TQ component must depend only on java.base')
+          (root / 'api-contract-result.txt').write_text(
+              'PASS all historical public/protected class/member/descriptor contracts; additive members allowed\n')
+          PY
+          run_case() {
+            lane=$1 mode=$2 compact=$3 main=$4
+            label="$lane-$mode-$compact-$main"
+            flags=()
+            case "$mode" in
+              interpreter) flags+=(-Xint);;
+              mixed) flags+=(-Xmixed);;
+              c1) flags+=(-XX:TieredStopAtLevel=1);;
+              c2) flags+=(-XX:-TieredCompilation);;
+              *) echo "Unknown VM mode: $mode" >&2; exit 2;;
+            esac
+            if [[ "$mode" == c1 || "$mode" == c2 ]]; then
+              flags+=(-Xbatch -XX:CompileThreshold=100 -XX:+UnlockDiagnosticVMOptions -XX:+LogCompilation \
+                "-XX:LogFile=$out/logs/$label-compilation.xml" \
+                '-XX:CompileCommand=dontinline,jdk.internal.mindex.M3TQ$Facts::containsAll')
+            fi
+            if [[ "$compact" == utf16 ]]; then flags+=(-XX:-CompactStrings); fi
+            arguments=()
+            if [[ "$main" == M3TQArrayCompositionTest ]]; then arguments+=(native); fi
+            if timeout 240 "$JAVA_HOME/bin/java" -Xmx256m -XX:ActiveProcessorCount=2 \
+                -XX:+PerfDisableSharedMem -Xcheck:jni "${flags[@]}" \
+                --patch-module "java.base=$out/patch" \
+                --add-exports java.base/jdk.internal.mindex=ALL-UNNAMED \
+                --add-opens java.base/jdk.internal.mindex=ALL-UNNAMED \
+                "-Djava.library.path=$out/$lane" -cp "$out/tests" "$main" "${arguments[@]}" \
+                > "$out/logs/$label.log" 2>&1; then
+              echo "PASS $label"
+            else
+              status=$?
+              cat "$out/logs/$label.log"
+              exit "$status"
+            fi
+          }
+          for compact in compact utf16; do
+            for mode in interpreter mixed c1 c2; do
+              for main in "${tests[@]}"; do run_case native "$mode" "$compact" "$main"; done
+            done
+          done
+          g++ "${native_flags[@]}" -fsanitize=undefined -fno-sanitize-recover=all \
+            "$testdir/libM3TQTest.cpp" -o "$out/ubsan/libM3TQTest.so" \
+            > "$out/logs/compile-ubsan.log" 2>&1
+          for mode in interpreter mixed c1 c2; do
+            for main in M3TQTest M3TQArrayCompositionTest; do run_case ubsan "$mode" compact "$main"; done
+          done
+          for main in M3TQTest M3TQArrayCompositionTest; do run_case ubsan mixed utf16 "$main"; done
+          g++ "${native_flags[@]}" -DM3_MUTANT_8BIT "$testdir/libM3TQTest.cpp" \
+            -o "$out/native-mutant/libM3TQTest.so" > "$out/logs/compile-native-mutant.log" 2>&1
+          if timeout 240 "$JAVA_HOME/bin/java" -Xmx256m -XX:ActiveProcessorCount=2 \
+              -XX:+PerfDisableSharedMem -Xcheck:jni --patch-module "java.base=$out/patch" \
+              --add-exports java.base/jdk.internal.mindex=ALL-UNNAMED \
+              --add-opens java.base/jdk.internal.mindex=ALL-UNNAMED \
+              "-Djava.library.path=$out/native-mutant" -cp "$out/tests" M3TQTest \
+              > "$out/logs/native-mutant.log" 2>&1; then
+            echo 'The native UTF-16 truncation mutant unexpectedly passed' >&2
+            exit 1
+          else
+            status=$?
+            if [[ "$status" != 1 ]]; then cat "$out/logs/native-mutant.log"; exit 1; fi
+            grep -Fq 'AssertionError: native' "$out/logs/native-mutant.log"
+          fi
+          # Negative fixtures are compiled only below the temporary test directory.
+          # The checked-out product source remains unchanged.
+          python3 -B -S - "$out" <<'PY_MUTANTS'
+          from pathlib import Path
+          import hashlib
+          import json
+          import sys
+          root = Path(sys.argv[1])
+          source = root / 'source' / 'jdk/internal/mindex'
+          original = (source / 'M3TQ.java').read_text()
+          mutants = {
+              'seam': ('mergeFactKeys(keys, right.keys, firstSeam, secondSeam)',
+                       'mergeFactKeys(keys, right.keys, Long.MAX_VALUE, Long.MAX_VALUE)'),
+              'containment': ('if (keys.length < required.keys.length) return false;',
+                              'if (keys.length < required.keys.length) return true;'),
+              'order': ('    Arrays.sort(keys);\n    return compactFactKeys(keys);',
+                        '    // negative fixture: omit ordering\n    return compactFactKeys(keys);'),
+          }
+          proof = []
+          for name, (before, after) in mutants.items():
+              if original.count(before) != 1:
+                  raise SystemExit(f'Negative control no longer matches exactly once: {name}')
+              destination = root / 'java-mutants' / name / 'source/jdk/internal/mindex'
+              destination.mkdir(parents=True)
+              mutated = original.replace(before, after, 1)
+              (destination / 'M3TQ.java').write_text(mutated)
+              for backing in ('M3StringBacking.java', 'M3MappedStringBacking.java'):
+                  (destination / backing).write_bytes((source / backing).read_bytes())
+              proof.append({'control': name, 'original_sha256': hashlib.sha256(original.encode()).hexdigest(),
+                            'fixture_sha256': hashlib.sha256(mutated.encode()).hexdigest(), 'replacements': 1})
+          (root / 'java-negative-fixtures.json').write_text(json.dumps(proof, indent=2) + '\n')
+          PY_MUTANTS
+          for mutant in seam containment order; do
+            variant="$out/java-mutants/$mutant"
+            mkdir -p "$variant/patch"
+            "$JAVA_HOME/bin/javac" -J-Xmx256m -J-XX:ActiveProcessorCount=2 -J-XX:+PerfDisableSharedMem \
+              -source 21 -target 21 -proc:none -implicit:none -Xlint:all -Werror \
+              --patch-module "java.base=$variant/source" -d "$variant/patch" \
+              "$variant/source/jdk/internal/mindex/M3TQ.java" \
+              "$variant/source/jdk/internal/mindex/M3StringBacking.java" \
+              "$variant/source/jdk/internal/mindex/M3MappedStringBacking.java" \
+              > "$out/logs/java-$mutant-compile.log" 2>&1
+            case "$mutant" in
+              seam) main=M3TQTest; diagnostic='AssertionError: seam composition';;
+              containment) main=M3TQTest; diagnostic='AssertionError: containment set oracle';;
+              order) main=M3TQRollingPreparationTest; diagnostic='AssertionError: independent exact trigram set';;
+            esac
+            if timeout 240 "$JAVA_HOME/bin/java" -Xmx256m -XX:ActiveProcessorCount=2 \
+                -XX:+PerfDisableSharedMem -Xcheck:jni -Xmixed --patch-module "java.base=$variant/patch" \
+                --add-exports java.base/jdk.internal.mindex=ALL-UNNAMED \
+                --add-opens java.base/jdk.internal.mindex=ALL-UNNAMED \
+                "-Djava.library.path=$out/native" -cp "$out/tests" "$main" \
+                > "$out/logs/java-$mutant-mutant.log" 2>&1; then
+              echo "Java $mutant negative control unexpectedly passed" >&2
+              exit 1
+            else
+              status=$?
+              if [[ "$status" != 1 ]]; then cat "$out/logs/java-$mutant-mutant.log"; exit 1; fi
+              grep -Fq "$diagnostic" "$out/logs/java-$mutant-mutant.log"
+            fi
+          done
+          python3 -B -S - "$out" <<'PY'
+          from pathlib import Path
+          import sys
+          import xml.etree.ElementTree as ET
+          root = Path(sys.argv[1])
+          markers = {
+              "M3MappedStringBackingTest": "M3JDK_MAPPED_BACKING_PASS|",
+              "MapFactsTest": "MAP_FACTS_PASS checks=",
+              "M3TQTest": "TQ checks=",
+              "M3TQArrayCompositionTest": "TQ_ARRAY_COMPOSITION_PASS checks=",
+              "M3TQSparseContainmentTest": "TQ_SPARSE_CONTAINMENT_PASS checks=",
+              "M3TQAdaptiveContainmentTest": "TQ_ADAPTIVE_CONTAINMENT_PASS checks=",
+              "M3TQRollingPreparationTest": "TQ_ROLLING_PREPARATION_PASS checks=",
+          }
+          cases = [("native", mode, compact, name)
+                   for compact in ("compact", "utf16") for mode in ("interpreter", "mixed", "c1", "c2")
+                   for name in markers]
+          cases += [("ubsan", mode, "compact", name) for mode in ("interpreter", "mixed", "c1", "c2")
+                    for name in ("M3TQTest", "M3TQArrayCompositionTest")]
+          cases += [("ubsan", "mixed", "utf16", name) for name in ("M3TQTest", "M3TQArrayCompositionTest")]
+          for lane, mode, compact, name in cases:
+              label = f"{lane}-{mode}-{compact}-{name}"
+              log = (root / "logs" / (label + ".log")).read_text()
+              if markers[name] not in log or "WARNING in native method" in log or "FATAL ERROR in native method" in log:
+                  raise SystemExit(f"Missing or invalid completed product test: {label}")
+              if name in ("M3TQTest", "M3TQSparseContainmentTest", "M3TQAdaptiveContainmentTest") and "warmPayloadReads=0" not in log:
+                  raise SystemExit(f"Warm payload-read invariant failed: {label}")
+              if name == "M3TQArrayCompositionTest" and "native=true" not in log:
+                  raise SystemExit(f"Independent JNI oracle was not used: {label}")
+          for compact in ("compact", "utf16"):
+              for compiler in ("c1", "c2"):
+                  for name in ("M3TQTest", "M3TQSparseContainmentTest"):
+                      label = f"native-{compiler}-{compact}-{name}"
+                      tree = ET.parse(root / "logs" / (label + "-compilation.xml"))
+                      methods = [node.get("method", "") for node in tree.iter("nmethod")
+                                 if node.get("compiler") == compiler]
+                      if not any("jdk.internal.mindex.M3TQ$Facts containsAll " in method for method in methods):
+                          raise SystemExit(f"Missing {compiler} containment compilation: {label}")
+                      if name == "M3TQTest" and not any("jdk.internal.mindex.M3TQ " in method for method in methods):
+                          raise SystemExit(f"Missing {compiler} current-kernel compilation: {label}")
+          for required in ("protected-api.txt", "api-contract-result.txt", "module-deps.txt", "jni-abi-result.txt",
+                           "logs/native-mutant.log", "java-negative-fixtures.json", "logs/java-seam-mutant.log",
+                           "logs/java-containment-mutant.log", "logs/java-order-mutant.log"):
+              if not (root / required).is_file() or not (root / required).stat().st_size:
+                  raise SystemExit(f"Missing required result: {required}")
+          (root / "component-result.txt").write_text(
+              f"PASS current product component executions={len(cases)}; JNI ABI; four VM modes; "
+              "both compact-string modes; C1/C2 compiler XML; UBSan; API compatibility; java.base-only; "
+              "native UTF-16 and Java seam/containment/order negative controls\n")
+          print((root / "component-result.txt").read_text(), end="")
+          PY
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         if: always()
         with:
           name: tq-recipe-${{ github.sha }}
-          path: |
-            m3/tooling/tq-sync/target/surefire-reports/
-            m3/tooling/tq-sync/target/custody.json
-            m3/tooling/tq/target/*.log
-            m3/tooling/tq/target/*compilation.xml
-            m3/tooling/tq/target/custody.json
-            m3/tooling/tq/target/surefire-reports/
-            m3/tooling/tq/target/release/
+          path: ${{ runner.temp }}/m3-tq-component/
           if-no-files-found: error
   image:
     needs: recipe

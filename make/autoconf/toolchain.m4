@@ -754,8 +754,6 @@ AC_DEFUN_ONCE([TOOLCHAIN_DETECT_TOOLCHAIN_CORE],
   # Now that we have resolved CXX ourself, let autoconf have its go at it
   AC_PROG_CXX([$CXX])
 
-  TOOLCHAIN_CHECK_MOBILE_TARGET
-
   # This is the compiler version number on the form X.Y[.Z]
   AC_SUBST(CC_VERSION_NUMBER)
   AC_SUBST(CXX_VERSION_NUMBER)
