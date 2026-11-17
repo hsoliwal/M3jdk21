@@ -1,0 +1,11 @@
+STRING_LAYOUT_READERS v1 proof on origin/master da7ad0e4c3ec1cee59817cc5a3ae78dd42c0c69b
+== javac closure: round 1 javac_exit=0 errors=0
+== stock VM + java.base (layout + readers): -Dlayout.vmSites=false
+checked 40039 Strings, failures 0 (Java-made only: -Dlayout.vmSites=false)
+RESULT PASS
+== stock VM + java.base (layout + readers): -XX:-CompactStrings -Dlayout.vmSites=false
+checked 40039 Strings, failures 0 (Java-made only: -Dlayout.vmSites=false)
+RESULT PASS
+== stock VM + java.base (layout + readers): -Xcomp -XX:-TieredCompilation -XX:-OptimizeStringConcat -Dlayout.vmSites=false
+checked 40039 Strings, failures 0 (Java-made only: -Dlayout.vmSites=false)
+RESULT PASS

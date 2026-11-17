@@ -148,12 +148,26 @@ public class StringLayoutInvariantTest {
             if (strict) FAILURES.add(site + ": chValue is null");
             return;
         }
-        char[] copy = s.toCharArray();
-        if (!Arrays.equals(chValue, copy)) {
+        // the expected chars come from charAt, which reads value, not chValue
+        char[] expected = new char[s.length()];
+        for (int index = 0; index < expected.length; index++) {
+            expected[index] = s.charAt(index);
+        }
+        if (!Arrays.equals(chValue, expected)) {
             FAILURES.add(site + ": chValue " + Arrays.toString(chValue) + " != chars of " + s);
         }
-        if (copy == chValue) {
-            FAILURES.add(site + ": toCharArray handed out chValue itself");
+        char[] copy = s.toCharArray();
+        if (copy == chValue || !Arrays.equals(copy, expected)) {
+            FAILURES.add(site + ": toCharArray handed out chValue itself or other chars");
+        }
+        if (expected.length > 2) {
+            char[] part = new char[expected.length + 1];
+            s.getChars(1, expected.length - 1, part, 2);
+            char[] want = new char[part.length];
+            System.arraycopy(expected, 1, want, 2, expected.length - 2);
+            if (!Arrays.equals(part, want)) {
+                FAILURES.add(site + ": getChars(1, length - 1, dst, 2) copied other chars");
+            }
         }
         int units = s.length();
         if (value.length != units && value.length != 2 * units) {
