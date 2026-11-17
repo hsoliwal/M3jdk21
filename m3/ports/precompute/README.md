@@ -29,9 +29,10 @@ patched into a stock JDK 21's java.base, 2026-11-17):
 - From java.base, `System.loadLibrary` searches the JDK's own library directory, not `java.library.path`:
   `m3_precompute`, `m3_literal_batch_probe` and `m3_utf16_sparse_probe` must be there, or, for
   `m3_precompute` only, named by the `m3.precompute.native.path` / `.pathFile` properties.
-- `NativePrecomputeOps` (boot loader) and `jdk.m3.llm` (application loader) both load `m3_ncm`. A JVM
-  loads a native library into one class loader only, so in one process only the first of the two gets the
-  NCM native lane; the other uses its Java path (`M3NcmNative.load` fails). Open: owner decision.
+- `m3_ncm` belongs to `jdk.m3.llm` (application loader), and a JVM loads a native library into one class
+  loader only. `NativePrecomputeOps` (boot loader) therefore loads it only when `m3.ncm.library` or
+  `m3.ncm.library.pathFile` names it; otherwise it uses its Java path, with the same results. Naming it
+  while `jdk.m3.llm` also uses it in the same process still leaves one of the two on its Java path.
 
 ## Ownership split
 

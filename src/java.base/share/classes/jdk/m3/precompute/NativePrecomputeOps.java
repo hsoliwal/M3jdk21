@@ -69,6 +69,9 @@ public final class NativePrecomputeOps {
    * NCM codebook batches live in the single jdk.m3.llm NCM native owner (library
    * m3_ncm, built from m3/llm/src/main/native), not in m3_precompute. The configured
    * path is authoritative; a failed optional load keeps the Java oracle.
+   * <p>This class is in java.base (boot loader) and jdk.m3.llm (application loader) owns
+   * m3_ncm. A JVM lets one class loader load a native library, so java.base loads it only
+   * from an explicit path: there is no System.loadLibrary fallback.
    */
   private static void loadNcmLibrary() throws IOException {
     String explicit = System.getProperty("m3.ncm.library");
@@ -83,7 +86,8 @@ public final class NativePrecomputeOps {
       System.load(Path.of(path).toAbsolutePath().normalize().toString());
       return;
     }
-    System.loadLibrary("m3_ncm");
+    throw new UnsatisfiedLinkError(
+        "m3_ncm is loaded only from m3.ncm.library or m3.ncm.library.pathFile");
   }
 
   private NativePrecomputeOps() {}
