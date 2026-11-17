@@ -15,9 +15,9 @@
 package jdk.internal.m3.collections;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Arrays;
+import java.util.ConcurrentModificationException;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.OptionalLong;
@@ -31,9 +31,22 @@ import java.util.function.Predicate;
  * that contract. All get/put/remove/trim operations are O(1) amortized except predicate removal and
  * ordered-key snapshots, which are O(n).</p>
  *
- * <p>The implementation uses a hash table plus an intrusive doubly-linked recency list so access
- * order does not depend on {@code LinkedHashMap} callbacks and trim operations can return precise
- * eviction evidence.</p>
+ * <p>The residents live in array lanes, one slot each (key, value, weight, hash), with the recency
+ * list as two {@code int} lanes of slot indices and an open-addressing {@code int} index from a
+ * key's hash to its slot; there is no node or map entry object per resident. Freed slots are
+ * reused, the lanes double up to {@code maxEntries + 1} slots (at most 2<sup>29</sup>) and are
+ * dropped when the cache empties (clear, trim, removeIf or the removal of the last resident), and
+ * a key's {@code hashCode} is not called again after it was admitted. Access order does not depend
+ * on {@code LinkedHashMap} callbacks and trim operations return precise eviction evidence.</p>
+ *
+ * <p>2026-11-17: storage rewritten onto array lanes (arrayify, leaf 1). Every method keeps its
+ * results, recency order, counters and exceptions for keys that obey {@code equals} and
+ * {@code hashCode}; {@code compareTo} is never consulted. Lookups call {@code hashCode} as
+ * {@code HashMap} did; evictions and {@code removeIf} no longer call {@code hashCode} or
+ * {@code equals} on the keys they remove. A key whose {@code equals} changes the cache during a
+ * lookup gets a {@code ConcurrentModificationException}, and so does a {@code removeIf} predicate
+ * that frees the next resident of its walk or the resident it then matches; the node version
+ * failed there or went on over detached nodes.</p>
  *
  * @param <K> key type
  * @param <V> value type
@@ -162,12 +175,51 @@ public final class WeightedLRUCache<K, V> {
         }
     }
 
+    /** Slot index meaning "none" in the recency lanes, the free list and lookups. */
+    private static final int NONE = -1;
+    /** Slots of the first allocation; the lanes double up to {@code maxEntries + 1}. */
+    private static final int MIN_SLOTS = 8;
+    /** Largest number of slots: the index (2^30 entries at most) stays at most half full. */
+    private static final int MAX_SLOTS = 1 << 29;
+    /** The lanes of an empty cache. */
+    private static final Object[] NO_OBJECTS = {};
+    private static final long[] NO_LONGS = {};
+    private static final int[] NO_INTS = {};
+    /** Golden-ratio multiplier (2^32 / phi): Fibonacci hashing of a key's hash into the index. */
+    private static final int GOLDEN_RATIO = 0x9E3779B9;
+
     private final int maxEntries;
     private final long maxWeight;
     private final Weigher<K, V> weigher;
-    private final Map<K, Node<K, V>> nodes;
-    private final Node<K, V> head;
-    private final Node<K, V> tail;
+
+    /** Storage lanes of the residents, one slot per resident; a free slot holds nulls. */
+    private Object[] keyLane = NO_OBJECTS;
+    private Object[] valueLane = NO_OBJECTS;
+    private long[] weightLane = NO_LONGS;
+    /** {@code key.hashCode()} of each resident, kept: the index never calls it again. */
+    private int[] hashLane = NO_INTS;
+    /** Recency lanes: the neighbour toward the most- and toward the least-recently-used end. */
+    private int[] newerLane = NO_INTS;
+    private int[] olderLane = NO_INTS;
+    /** Open-addressing index, linear probing: from a key's hash to its slot plus one (0: empty). */
+    private int[] index = NO_INTS;
+    /** log2 of the index length. */
+    private int indexBits;
+    /** A key was admitted once: lookups call hashCode from then on, as HashMap after a put. */
+    private boolean hashing;
+    /** The value of {@code structure} when the slot's resident was admitted; 0 for a free slot. */
+    private int[] stampLane = NO_INTS;
+    /** Incremented by every admission, release and drop of the lanes; never reset. */
+    private int structure;
+
+    /** Most- and least-recently-used slot, or NONE. */
+    private int mru = NONE;
+    private int lru = NONE;
+    /** Top of the stack of free slots, linked through {@code olderLane}, or NONE. */
+    private int freeTop = NONE;
+    /** Slots ever handed out; slots at or above it are unused. */
+    private int used;
+    private int size;
 
     private long weight;
     private long hits;
@@ -190,23 +242,19 @@ public final class WeightedLRUCache<K, V> {
         this.maxEntries = maxEntries;
         this.maxWeight = maxWeight;
         this.weigher = Objects.requireNonNull(weigher, "weigher");
-        this.nodes = new HashMap<>();
-        this.head = new Node<>(null, null, 0L);
-        this.tail = new Node<>(null, null, 0L);
-        head.next = tail;
-        tail.previous = head;
     }
 
     /** Lookup and promote the key to most-recently-used position. */
+    @SuppressWarnings("unchecked")
     public synchronized Optional<V> get(K key) {
-        Node<K, V> node = nodes.get(key);
-        if (node == null) {
+        int slot = slotOf(key);
+        if (slot == NONE) {
             misses++;
             return Optional.empty();
         }
         hits++;
-        moveToFront(node);
-        return Optional.of(node.value);
+        moveToFront(slot);
+        return Optional.of((V) valueLane[slot]);
     }
 
     /**
@@ -215,6 +263,8 @@ public final class WeightedLRUCache<K, V> {
      * <p>An entry heavier than the configured absolute weight limit is rejected without evicting
      * existing entries. Accepted entries are promoted to MRU and the cache trims to both configured
      * limits.</p>
+     *
+     * @throws IllegalStateException if 2<sup>29</sup> residents already fill the lanes
      */
     public synchronized PutResult put(K key, V value) {
         Objects.requireNonNull(key, "key");
@@ -226,17 +276,16 @@ public final class WeightedLRUCache<K, V> {
             return new PutResult(false, false, 0L, TrimResult.none());
         }
 
-        Node<K, V> existing = nodes.get(key);
-        boolean replaced = existing != null;
-        if (existing == null) {
-            existing = new Node<>(key, value, candidateWeight);
-            nodes.put(key, existing);
-            addToFront(existing);
+        int slot = slotOf(key);
+        boolean replaced = slot != NONE;
+        if (slot == NONE) {
+            slot = admit(key, value, candidateWeight);
+            addToFront(slot);
         } else {
-            weight -= existing.weight;
-            existing.value = value;
-            existing.weight = candidateWeight;
-            moveToFront(existing);
+            weight -= weightLane[slot];
+            valueLane[slot] = value;
+            weightLane[slot] = candidateWeight;
+            moveToFront(slot);
             replacements++;
         }
         // The candidate is already MRU, but its new charge is not in weight yet.
@@ -255,17 +304,18 @@ public final class WeightedLRUCache<K, V> {
      * <p>This is intended for maintenance code such as pressure-driven representation demotion.
      * Normal callers should prefer {@code get(...)} so useful work contributes recency.</p>
      */
+    @SuppressWarnings("unchecked")
     public synchronized Optional<V> peek(K key) {
         Objects.requireNonNull(key, "key");
-        Node<K, V> node = nodes.get(key);
-        return node == null ? Optional.empty() : Optional.of(node.value);
+        int slot = slotOf(key);
+        return slot == NONE ? Optional.empty() : Optional.of((V) valueLane[slot]);
     }
 
     /** Observe one resident's admitted weight without changing recency or statistics. */
     public synchronized OptionalLong peekWeight(K key) {
         Objects.requireNonNull(key, "key");
-        Node<K, V> node = nodes.get(key);
-        return node == null ? OptionalLong.empty() : OptionalLong.of(node.weight);
+        int slot = slotOf(key);
+        return slot == NONE ? OptionalLong.empty() : OptionalLong.of(weightLane[slot]);
     }
 
     /**
@@ -280,49 +330,78 @@ public final class WeightedLRUCache<K, V> {
             K key, V replacement) {
         Objects.requireNonNull(key, "key");
         Objects.requireNonNull(replacement, "replacement");
-        Node<K, V> node = nodes.get(key);
-        if (node == null) return MaintenanceReplaceResult.absent();
+        int slot = slotOf(key);
+        if (slot == NONE) return MaintenanceReplaceResult.absent();
 
+        int stamp = stampLane[slot];
+        long residentWeight = weightLane[slot];
         long replacementWeight = requireWeight(weigher.weightOf(key, replacement));
-        long previousWeight = node.weight;
+        // A weigher that removed the resident (freeing, perhaps reusing, its slot) gets the result
+        // of the old resident and nothing is written, as the node version wrote a detached node.
+        boolean stillResident = holds(slot, stamp);
+        long previousWeight = stillResident ? weightLane[slot] : residentWeight;
         if (replacementWeight >= previousWeight) {
             return new MaintenanceReplaceResult(
                     true, false, previousWeight, replacementWeight, 0L);
         }
 
-        node.value = replacement;
-        node.weight = replacementWeight;
         long released = previousWeight - replacementWeight;
-        weight -= released;
+        if (stillResident) {
+            valueLane[slot] = replacement;
+            weightLane[slot] = replacementWeight;
+            weight -= released;
+        }
         return new MaintenanceReplaceResult(
                 true, true, previousWeight, replacementWeight, released);
     }
 
     /** Explicitly remove one key. */
+    @SuppressWarnings("unchecked")
     public synchronized Optional<V> remove(K key) {
-        Node<K, V> node = nodes.remove(key);
-        if (node == null) return Optional.empty();
-        unlink(node);
-        weight -= node.weight;
-        return Optional.of(node.value);
+        // as HashMap.remove: a key is hashed first, even before the first admission
+        int slot = key == null ? NONE : find(key, key.hashCode());
+        if (slot == NONE) {
+            return Optional.empty();
+        }
+        V value = (V) valueLane[slot];
+        weight -= weightLane[slot];
+        release(slot);
+        if (size == 0) {
+            dropLanes();
+        }
+        return Optional.of(value);
     }
 
-    /** Remove all keys matching the supplied predicate. */
+    /**
+     * Remove all keys matching the supplied predicate, tested from the least recently used on.
+     *
+     * @throws ConcurrentModificationException if the predicate frees the next resident of the walk
+     *     or the resident it then matches, itself or by {@code clear}, {@code trimTo} or an
+     *     eviction; a resident it removes and does not match is skipped
+     */
+    @SuppressWarnings("unchecked")
     public synchronized RemoveResult removeIf(Predicate<? super K> predicate) {
         Objects.requireNonNull(predicate, "predicate");
         int removedEntries = 0;
         long removedWeight = 0L;
-        Node<K, V> current = tail.previous;
-        while (current != head) {
-            Node<K, V> previous = current.previous;
-            if (predicate.test(current.key)) {
-                nodes.remove(current.key);
-                unlink(current);
+        int current = lru;
+        while (current != NONE) {
+            int newer = newerLane[current];
+            int stamp = stampLane[current];
+            int newerStamp = newer == NONE ? 0 : stampLane[newer];
+            boolean matches = predicate.test((K) keyLane[current]);
+            requireWalkIntact(current, stamp, matches, newer, newerStamp);
+            if (matches) {
+                long slotWeight = weightLane[current];
                 removedEntries++;
-                removedWeight = Math.addExact(removedWeight, current.weight);
-                weight -= current.weight;
+                removedWeight = Math.addExact(removedWeight, slotWeight);
+                weight -= slotWeight;
+                release(current);
             }
-            current = previous;
+            current = newer;
+        }
+        if (size == 0) {
+            dropLanes();
         }
         return new RemoveResult(removedEntries, removedWeight);
     }
@@ -342,27 +421,30 @@ public final class WeightedLRUCache<K, V> {
             throw new IllegalArgumentException(
                     "weightLimit must be between 0 and configured maxWeight");
         }
-        return trimToInternal(entryLimit, weightLimit);
+        TrimResult trim = trimToInternal(entryLimit, weightLimit);
+        if (size == 0) {
+            dropLanes();
+        }
+        return trim;
     }
 
-    /** Remove all cache ownership. */
+    /** Remove all cache ownership; the lanes are dropped with every reference they held. */
     public synchronized RemoveResult clear() {
-        int removedEntries = nodes.size();
+        int removedEntries = size;
         long removedWeight = weight;
-        nodes.clear();
-        head.next = tail;
-        tail.previous = head;
+        size = 0;
         weight = 0L;
+        dropLanes();
         return new RemoveResult(removedEntries, removedWeight);
     }
 
     /** Membership check that does not alter recency. */
     public synchronized boolean containsKey(K key) {
-        return nodes.containsKey(key);
+        return slotOf(key) != NONE;
     }
 
     public synchronized int size() {
-        return nodes.size();
+        return size;
     }
 
     public synchronized long weight() {
@@ -378,19 +460,18 @@ public final class WeightedLRUCache<K, V> {
     }
 
     /** LRU-to-MRU key order, primarily for deterministic diagnostics/tests. */
+    @SuppressWarnings("unchecked")
     public synchronized List<K> keysInLruOrder() {
-        ArrayList<K> keys = new ArrayList<>(nodes.size());
-        Node<K, V> current = tail.previous;
-        while (current != head) {
-            keys.add(current.key);
-            current = current.previous;
+        ArrayList<K> keys = new ArrayList<>(size);
+        for (int slot = lru; slot != NONE; slot = newerLane[slot]) {
+            keys.add((K) keyLane[slot]);
         }
         return List.copyOf(keys);
     }
 
     public synchronized Snapshot snapshot() {
         return new Snapshot(
-                nodes.size(),
+                size,
                 weight,
                 maxEntries,
                 maxWeight,
@@ -405,37 +486,230 @@ public final class WeightedLRUCache<K, V> {
     private TrimResult trimToInternal(int entryLimit, long weightLimit) {
         int evictedEntries = 0;
         long evictedWeight = 0L;
-        while (!nodes.isEmpty()
-                && (nodes.size() > entryLimit || weight > weightLimit)) {
-            Node<K, V> lru = tail.previous;
-            if (lru == head) break;
-            nodes.remove(lru.key);
-            unlink(lru);
-            weight -= lru.weight;
+        while (size > 0 && (size > entryLimit || weight > weightLimit)) {
+            int slot = lru;
+            long slotWeight = weightLane[slot];
+            weight -= slotWeight;
+            release(slot);
             evictedEntries++;
-            evictedWeight = Math.addExact(evictedWeight, lru.weight);
+            evictedWeight = Math.addExact(evictedWeight, slotWeight);
             evictions++;
         }
         return new TrimResult(evictedEntries, evictedWeight);
     }
 
-    private void moveToFront(Node<K, V> node) {
-        unlink(node);
-        addToFront(node);
+    /** The slot of a resident equal to {@code key}, or NONE; hashes as {@code HashMap.get}. */
+    private int slotOf(Object key) {
+        if (key == null || !hashing) {
+            // as HashMap: no hashCode call before the first admission, one per lookup after it
+            return NONE;
+        }
+        return find(key, key.hashCode());
     }
 
-    private void addToFront(Node<K, V> node) {
-        node.previous = head;
-        node.next = head.next;
-        head.next.previous = node;
-        head.next = node;
+    /**
+     * The slot of a resident with the given hash and equal to {@code key} ({@code
+     * key.equals(resident)}), or NONE.
+     *
+     * @throws ConcurrentModificationException if a key's {@code equals} changes the cache
+     */
+    private int find(Object key, int hash) {
+        if (size == 0) {
+            return NONE;
+        }
+        int seen = structure;
+        int mask = index.length - 1;
+        for (int i = home(hash); index[i] != 0; i = (i + 1) & mask) {
+            int slot = index[i] - 1;
+            if (hashLane[slot] == hash) {
+                Object resident = keyLane[slot];
+                if (resident == key) {
+                    return slot;
+                }
+                boolean equal = key.equals(resident);
+                if (structure != seen) {
+                    throw new ConcurrentModificationException("a key's equals changed the cache");
+                }
+                if (equal) {
+                    return slot;
+                }
+            }
+        }
+        return NONE;
     }
 
-    private static <K, V> void unlink(Node<K, V> node) {
-        node.previous.next = node.next;
-        node.next.previous = node.previous;
-        node.previous = null;
-        node.next = null;
+    /** Stores a new resident in a free slot and indexes it; not yet in the recency list. */
+    private int admit(K key, V value, long entryWeight) {
+        // hashed first: a hashCode that throws or calls back into the cache finds no slot taken
+        int hash = key.hashCode();
+        int slot = takeSlot();
+        keyLane[slot] = key;
+        valueLane[slot] = value;
+        weightLane[slot] = entryWeight;
+        hashLane[slot] = hash;
+        indexSlot(slot, hash);
+        if (++structure == 0) {
+            structure = 1;
+        }
+        stampLane[slot] = structure;
+        hashing = true;
+        size++;
+        return slot;
+    }
+
+    /** Unlinks, unindexes and frees a resident's slot. */
+    private void release(int slot) {
+        unlink(slot);
+        unindexSlot(slot);
+        keyLane[slot] = null;
+        valueLane[slot] = null;
+        stampLane[slot] = 0;
+        structure++;
+        olderLane[slot] = freeTop;
+        freeTop = slot;
+        size--;
+    }
+
+    private int takeSlot() {
+        if (freeTop != NONE) {
+            int slot = freeTop;
+            freeTop = olderLane[slot];
+            return slot;
+        }
+        if (used == keyLane.length) {
+            grow();
+        }
+        return used++;
+    }
+
+    /**
+     * Doubles the lanes, at most to maxEntries + 1 slots (a put adds before it trims). Every array
+     * is allocated before a field changes: an OutOfMemoryError leaves the cache as it was.
+     */
+    private void grow() {
+        long limit = Math.min((long) maxEntries + 1, MAX_SLOTS);
+        int capacity = (int) Math.min(Math.max(MIN_SLOTS, 2L * keyLane.length), limit);
+        if (capacity <= keyLane.length) {
+            throw new IllegalStateException("WeightedLRUCache lanes are full");
+        }
+        // the index is sized for at most maxEntries residents (load at most 1/2) and keeps one cell
+        // empty when the lanes hold the extra slot a put takes before it trims
+        long cells = Math.max(2 * Math.min(capacity, (long) maxEntries), capacity + 1L);
+        int bits = 64 - Long.numberOfLeadingZeros(cells - 1);
+        Object[] keys = Arrays.copyOf(keyLane, capacity);
+        Object[] values = Arrays.copyOf(valueLane, capacity);
+        long[] weights = Arrays.copyOf(weightLane, capacity);
+        int[] hashes = Arrays.copyOf(hashLane, capacity);
+        int[] newer = Arrays.copyOf(newerLane, capacity);
+        int[] older = Arrays.copyOf(olderLane, capacity);
+        int[] stamps = Arrays.copyOf(stampLane, capacity);
+        int[] fresh = bits > indexBits ? new int[1 << bits] : index;
+        keyLane = keys;
+        valueLane = values;
+        weightLane = weights;
+        hashLane = hashes;
+        newerLane = newer;
+        olderLane = older;
+        stampLane = stamps;
+        if (fresh != index) {
+            reindex(fresh, bits);
+        }
+    }
+
+    /** Takes a fresh index of 2^bits entries, filled from the kept hashes. */
+    private void reindex(int[] fresh, int bits) {
+        index = fresh;
+        indexBits = bits;
+        for (int slot = lru; slot != NONE; slot = newerLane[slot]) {
+            indexSlot(slot, hashLane[slot]);
+        }
+    }
+
+    private int home(int hash) {
+        return (hash * GOLDEN_RATIO) >>> (32 - indexBits);
+    }
+
+    private void indexSlot(int slot, int hash) {
+        int mask = index.length - 1;
+        int i = home(hash);
+        while (index[i] != 0) {
+            i = (i + 1) & mask;
+        }
+        index[i] = slot + 1;
+    }
+
+    /** Removes a slot from the index and shifts later entries of its run back (no tombstones). */
+    private void unindexSlot(int slot) {
+        int mask = index.length - 1;
+        int hole = home(hashLane[slot]);
+        while (index[hole] != slot + 1) {
+            hole = (hole + 1) & mask;
+        }
+        for (int i = (hole + 1) & mask; index[i] != 0; i = (i + 1) & mask) {
+            int wanted = home(hashLane[index[i] - 1]);
+            // the entry at i may move to the hole when its home is not within (hole, i]
+            if (((i - wanted) & mask) >= ((i - hole) & mask)) {
+                index[hole] = index[i];
+                hole = i;
+            }
+        }
+        index[hole] = 0;
+    }
+
+    // The recency list is the module's doubly-linked int-slot atom: the least recently used slot
+    // is its first, the most recently used its last, olderLane its previous and newerLane its next.
+
+    private void moveToFront(int slot) {
+        ends(PackedSlotLinkAtoms.moveLast(olderLane, newerLane, lru, mru, slot));
+    }
+
+    private void addToFront(int slot) {
+        ends(PackedSlotLinkAtoms.linkLast(olderLane, newerLane, lru, mru, slot));
+    }
+
+    private void unlink(int slot) {
+        ends(PackedSlotLinkAtoms.unlink(olderLane, newerLane, lru, mru, slot));
+    }
+
+    private void ends(long endpoints) {
+        lru = PackedSlotLinkAtoms.first(endpoints);
+        mru = PackedSlotLinkAtoms.last(endpoints);
+    }
+
+    /** Whether {@code slot} is a slot of the lanes still holding the resident of {@code stamp}. */
+    private boolean holds(int slot, int stamp) {
+        return slot < stampLane.length && stampLane[slot] == stamp;
+    }
+
+    /**
+     * Throws when a callback freed the next resident of a walk, or the resident under test that it
+     * then matched, even if a new resident took the slot. A resident removed but not matched is
+     * skipped, as the node-linked version did.
+     */
+    private void requireWalkIntact(
+            int current, int stamp, boolean matches, int newer, int newerStamp) {
+        if ((matches && !holds(current, stamp)) || (newer != NONE && !holds(newer, newerStamp))) {
+            throw new ConcurrentModificationException(
+                    "the removeIf predicate removed a resident under the walk");
+        }
+    }
+
+    /** Lets an empty cache drop its lanes and index; the next admission allocates them again. */
+    private void dropLanes() {
+        keyLane = NO_OBJECTS;
+        valueLane = NO_OBJECTS;
+        weightLane = NO_LONGS;
+        hashLane = NO_INTS;
+        newerLane = NO_INTS;
+        olderLane = NO_INTS;
+        stampLane = NO_INTS;
+        structure++;
+        index = NO_INTS;
+        indexBits = 0;
+        mru = NONE;
+        lru = NONE;
+        freeTop = NONE;
+        used = 0;
     }
 
     private static long requireWeight(long value) {
@@ -443,19 +717,5 @@ public final class WeightedLRUCache<K, V> {
             throw new IllegalArgumentException("entry weight must be > 0");
         }
         return value;
-    }
-
-    private static final class Node<K, V> {
-        private final K key;
-        private V value;
-        private long weight;
-        private Node<K, V> previous;
-        private Node<K, V> next;
-
-        private Node(K key, V value, long weight) {
-            this.key = key;
-            this.value = value;
-            this.weight = weight;
-        }
     }
 }
