@@ -60,8 +60,32 @@ public final class CompositeFastList<E>
     private static final Procedure<FastList<?>> REVERSE_LIST_PROCEDURE = FastList::reverseThis;
 
     private static final long serialVersionUID = 2L;
+    /**
+     * At or below this many lanes the linear lane walk is as fast as the offset tree, so none is
+     * built.
+     */
+    private static final int LINEAR_LANE_LIMIT = 8;
+    /** What offsetTree() returns when indexed access must walk the lanes. */
+    private static final long[] NO_TREE = {};
     private final FastList<FastList<E>> lists = FastList.newList();
     private int size;
+    // Modified 2026 by Synexia contributors: indexed access finds its lane through a transient
+    // Fenwick offset tree over the lane sizes, kept only while no lane came from a caller.
+    /**
+     * Offset tree mirroring the live lane sizes, or null when it must be rebuilt; never
+     * serialized.
+     */
+    private transient LaneOffsets offsets;
+    /**
+     * True while every lane was allocated here; false after addComposited, addAll(FastList),
+     * deserialization.
+     */
+    private transient boolean privateLanes = true;
+    /**
+     * Depth of bulk lane mutations that run caller code; indexed access walks the lanes while
+     * non-zero.
+     */
+    private transient int busyDepth;
 
     @Override
     public MutableList<E> clone()
@@ -111,6 +135,7 @@ public final class CompositeFastList<E>
     @Override
     public CompositeFastList<E> reverseThis()
     {
+        this.offsets = null;
         ParallelIterate.forEach(this.lists, REVERSE_LIST_PROCEDURE);
         this.lists.reverseThis();
         return this;
@@ -213,15 +238,37 @@ public final class CompositeFastList<E>
     {
         if (this.lists.isEmpty())
         {
-            this.addComposited(FastList.newList());
+            this.appendLane(FastList.newList());
         }
         Collection<E> list = this.lists.getLast();
+        LaneOffsets kept = this.detachOffsets();
         this.size++;
-        return list.add(object);
+        boolean added = list.add(object);
+        this.reattachOffsets(kept, this.lists.size() - 1, 1);
+        return added;
     }
 
     @Override
     public boolean remove(Object object)
+    {
+        this.busyDepth++;
+        this.offsets = null;
+        try
+        {
+            return this.removeFromLanes(object);
+        }
+        finally
+        {
+            this.busyDepth--;
+            this.offsets = null;
+        }
+    }
+
+    /**
+     * The original remove(Object) body; equals callbacks interleave with an untracked lane
+     * shrink.
+     */
+    private boolean removeFromLanes(Object object)
     {
         boolean removed = this.lists.anySatisfyWith(REMOVE_PREDICATE, object);
         if (removed)
@@ -238,9 +285,14 @@ public final class CompositeFastList<E>
         {
             return false;
         }
-        Collection<? extends E> collectionToAdd =
-                collection instanceof FastList ? collection : FastList.newList(collection);
-        this.addComposited(collectionToAdd);
+        if (collection instanceof FastList)
+        {
+            this.addComposited(collection);
+        }
+        else
+        {
+            this.appendLane(FastList.newList(collection));
+        }
         return true;
     }
 
@@ -273,8 +325,16 @@ public final class CompositeFastList<E>
         {
             throw new IllegalArgumentException("CompositeFastList can only add FastLists");
         }
-        this.size += collection.size();
-        this.lists.add((FastList<E>) collection);
+        this.privateLanes = false;
+        this.appendLane((FastList<E>) collection);
+    }
+
+    /** Appends a lane; the lane count changes, so the offset tree goes stale. */
+    private void appendLane(FastList<E> lane)
+    {
+        this.offsets = null;
+        this.size += lane.size();
+        this.lists.add(lane);
     }
 
     @Override
@@ -286,12 +346,28 @@ public final class CompositeFastList<E>
     @Override
     public void clear()
     {
+        this.offsets = null;
         this.lists.each(FastList::clear);
         this.size = 0;
     }
 
     @Override
     public boolean retainAll(Collection<?> collection)
+    {
+        this.busyDepth++;
+        this.offsets = null;
+        try
+        {
+            return this.retainAllLanes(collection);
+        }
+        finally
+        {
+            this.busyDepth--;
+            this.offsets = null;
+        }
+    }
+
+    private boolean retainAllLanes(Collection<?> collection)
     {
         boolean changed = false;
         for (int i = this.lists.size() - 1; i >= 0; i--)
@@ -312,6 +388,21 @@ public final class CompositeFastList<E>
         {
             return false;
         }
+        this.busyDepth++;
+        this.offsets = null;
+        try
+        {
+            return this.removeAllLanes(collection);
+        }
+        finally
+        {
+            this.busyDepth--;
+            this.offsets = null;
+        }
+    }
+
+    private boolean removeAllLanes(Collection<?> collection)
+    {
         boolean changed = false;
         for (int i = this.lists.size() - 1; i >= 0; i--)
         {
@@ -328,6 +419,35 @@ public final class CompositeFastList<E>
     public E get(int index)
     {
         this.rangeCheck(index);
+        long slot = this.slotOf(index);
+        return this.lists.get((int) (slot >>> 32)).items[(int) slot];
+    }
+
+    /**
+     * Packed {@code (lane << 32) | offset} of a checked index: the offset tree when usable, else
+     * the lane walk.
+     */
+    private long slotOf(int index)
+    {
+        long[] tree = this.offsetTree();
+        if (tree.length != 0)
+        {
+            long slot = CompositeFastList.locate(tree, index, 1);
+            if (slot >= 0)
+            {
+                return slot;
+            }
+            this.offsets = null;
+        }
+        return this.walkSlot(index);
+    }
+
+    /**
+     * The original linear lane walk with its exceptions, packed as
+     * {@code (lane << 32) | offset}.
+     */
+    private long walkSlot(int index)
+    {
         int p = 0;
         int currentSize = this.lists.getFirst().size();
         while (index >= currentSize)
@@ -335,7 +455,7 @@ public final class CompositeFastList<E>
             index -= currentSize;
             currentSize = this.lists.get(++p).size();
         }
-        return this.lists.get(p).items[index];
+        return ((long) p << 32) | index;
     }
 
     private void rangeCheck(int index)
@@ -350,14 +470,8 @@ public final class CompositeFastList<E>
     public E set(int index, E element)
     {
         this.rangeCheck(index);
-        int p = 0;
-        int currentSize = this.lists.getFirst().size();
-        while (index >= currentSize)
-        {
-            index -= currentSize;
-            currentSize = this.lists.get(++p).size();
-        }
-        return this.lists.get(p).set(index, element);
+        long slot = this.slotOf(index);
+        return this.lists.get((int) (slot >>> 32)).set((int) slot, element);
     }
 
     @Override
@@ -370,8 +484,35 @@ public final class CompositeFastList<E>
         }
         if (this.lists.isEmpty())
         {
-            this.addComposited(FastList.newList());
+            this.appendLane(FastList.newList());
         }
+        this.insert(index, element);
+    }
+
+    /**
+     * Inserts at a checked index into the lane the original loop picks: offset tree when usable,
+     * else that loop.
+     */
+    private void insert(int index, E element)
+    {
+        long[] tree = this.offsetTree();
+        long slot = tree.length == 0 ? -1L : CompositeFastList.locate(tree, index, 0);
+        if (slot < 0)
+        {
+            this.walkAdd(index, element);
+            return;
+        }
+        int lane = (int) (slot >>> 32);
+        LaneOffsets kept = this.detachOffsets();
+        this.lists.get(lane).add((int) slot, element);
+        this.size++;
+        this.reattachOffsets(kept, lane, 1);
+    }
+
+    /** The original add(int, E) lane loop; a silent no-op when the index is past every lane. */
+    private void walkAdd(int index, E element)
+    {
+        this.offsets = null;
         int max = 0;
         for (int i = 0; i < this.lists.size(); i++)
         {
@@ -391,15 +532,13 @@ public final class CompositeFastList<E>
     public E remove(int index)
     {
         this.rangeCheck(index);
-        int p = 0;
-        int currentSize = this.lists.getFirst().size();
-        while (index >= currentSize)
-        {
-            index -= currentSize;
-            currentSize = this.lists.get(++p).size();
-        }
+        long slot = this.slotOf(index);
+        int lane = (int) (slot >>> 32);
+        LaneOffsets kept = this.detachOffsets();
         this.size--;
-        return this.lists.get(p).remove(index);
+        E removed = this.lists.get(lane).remove((int) slot);
+        this.reattachOffsets(kept, lane, -1);
+        return removed;
     }
 
     @Override
@@ -452,8 +591,10 @@ public final class CompositeFastList<E>
         FastList<E> list = comparator == null
                 ? (FastList<E>) this.toSortedList()
                 : (FastList<E>) this.toSortedList(comparator);
+        this.offsets = null;
         this.lists.clear();
         this.lists.add(list);
+        this.privateLanes = list != null && list.getClass() == FastList.class;
     }
 
     /**
@@ -625,8 +766,10 @@ public final class CompositeFastList<E>
     private void flattenLists()
     {
         FastList<E> list = (FastList<E>) this.toList();
+        this.offsets = null;
         this.lists.clear();
         this.lists.add(list);
+        this.privateLanes = list != null && list.getClass() == FastList.class;
     }
 
     private final class CompositeIterator
@@ -681,6 +824,7 @@ public final class CompositeFastList<E>
         public void remove()
         {
             CompositeFastList.this.size--;
+            CompositeFastList.this.offsets = null;
             this.currentIterator.remove();
         }
     }
@@ -733,6 +877,121 @@ public final class CompositeFastList<E>
                         this.index);
                 this.index--;
             });
+        }
+    }
+
+    /**
+     * The offset tree when it mirrors the lanes; built here only while every lane is private, no
+     * bulk lane mutation is running and there are more than LINEAR_LANE_LIMIT lanes. NO_TREE means
+     * walk.
+     */
+    private long[] offsetTree()
+    {
+        LaneOffsets current = this.offsets;
+        int lanes = this.lists.size();
+        if (current != null && current.tree.length == lanes + 1)
+        {
+            return current.tree;
+        }
+        if (this.busyDepth != 0 || !this.privateLanes || lanes <= LINEAR_LANE_LIMIT)
+        {
+            return NO_TREE;
+        }
+        return this.buildTree();
+    }
+
+    /** One O(lanes) pass; a heap too full for the tree leaves indexed access on the lane walk. */
+    private long[] buildTree()
+    {
+        try
+        {
+            LaneOffsets built = new LaneOffsets(this.lists);
+            this.offsets = built;
+            return built.tree;
+        }
+        catch (OutOfMemoryError noRoomForTree)
+        {
+            return NO_TREE;
+        }
+    }
+
+    /**
+     * Fenwick descent by powers of two: {@code (lane << 32) | offset} of the first lane whose
+     * running total reaches {@code index + bias} (bias 1: the lane holding index; bias 0: the lane
+     * the original add(int, E) loop inserts into), or -1 when no lane does.
+     */
+    private static long locate(long[] tree, int index, int bias)
+    {
+        int lanes = tree.length - 1;
+        int pos = 0;
+        long rest = index;
+        for (int step = Integer.highestOneBit(lanes); step != 0; step >>>= 1)
+        {
+            int next = pos + step;
+            if (next <= lanes && tree[next] < rest + bias)
+            {
+                pos = next;
+                rest -= tree[next];
+            }
+        }
+        return pos < lanes ? ((long) pos << 32) | rest : -1L;
+    }
+
+    /**
+     * Takes the offset tree out while a lane changes size, so a change that throws leaves it
+     * stale.
+     */
+    private LaneOffsets detachOffsets()
+    {
+        LaneOffsets kept = this.offsets;
+        if (kept != null)
+        {
+            this.offsets = null;
+        }
+        return kept;
+    }
+
+    /** Puts a detached offset tree back with one lane's size moved by delta. */
+    private void reattachOffsets(LaneOffsets kept, int lane, int delta)
+    {
+        if (kept != null)
+        {
+            kept.shift(lane, delta);
+            this.offsets = kept;
+        }
+    }
+
+    /**
+     * Fenwick (binary indexed) tree over the lane sizes: {@code tree[i]} totals lanes
+     * {@code (i - (i & -i), i]}, 1-based. The final field publishes a tree built by one reader to
+     * all.
+     */
+    private static final class LaneOffsets
+    {
+        private final long[] tree;
+
+        private LaneOffsets(FastList<? extends FastList<?>> lanes)
+        {
+            int count = lanes.size();
+            long[] built = new long[count + 1];
+            for (int i = 1; i <= count; i++)
+            {
+                built[i] += lanes.get(i - 1).size();
+                int parent = i + (i & -i);
+                if (parent > 0 && parent <= count)
+                {
+                    built[parent] += built[i];
+                }
+            }
+            this.tree = built;
+        }
+
+        private void shift(int lane, int delta)
+        {
+            for (int i = lane + 1; i > 0 && i < this.tree.length; i += i & -i)
+            {
+                this.tree[i] += delta;
+            }
         }
     }
 
