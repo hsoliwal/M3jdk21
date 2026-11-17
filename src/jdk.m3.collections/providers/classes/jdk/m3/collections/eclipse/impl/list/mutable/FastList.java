@@ -12,6 +12,7 @@
 package jdk.m3.collections.eclipse.impl.list.mutable;
 
 import java.io.Externalizable;
+import java.io.NotSerializableException;
 import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
@@ -97,6 +98,7 @@ import jdk.m3.collections.eclipse.impl.utility.Iterate;
 import jdk.m3.collections.eclipse.impl.utility.ListIterate;
 import jdk.m3.collections.eclipse.impl.utility.internal.InternalArrayIterate;
 import jdk.m3.collections.eclipse.impl.utility.internal.RandomAccessListIterate;
+import jdk.m3.collections.hppc.ArraySizingStrategy;
 
 /**
  * FastList is an attempt to provide the same functionality as ArrayList without the support for concurrent
@@ -125,6 +127,9 @@ public class FastList<T>
 
     protected int size;
     protected transient T[] items = (T[]) DEFAULT_SIZED_EMPTY_ARRAY;
+    // Modified 2026 by Synexia contributors: a growth policy may be given (ArraySizingStrategy).
+    /** The growth policy given at construction, or null for FastList's own. */
+    private transient ArraySizingStrategy sizing;
 
     public FastList()
     {
@@ -137,6 +142,26 @@ public class FastList<T>
             throw new IllegalArgumentException("Expected initial capacity is greater than or equal to 0. Was: " + initialCapacity);
         }
         this.items = initialCapacity == 0 ? (T[]) ZERO_SIZED_ARRAY : (T[]) new Object[initialCapacity];
+    }
+
+    /**
+     * Creates an empty list with the given initial capacity that grows by the given strategy, as
+     * a {@link java.util.Comparator} orders a sorted collection: whenever the list must grow to
+     * hold {@code n} elements, its new capacity is
+     * {@code sizing.grow(capacity, size(), n - size())}.
+     * {@code ArraySizingStrategy.fastList()} grows as this class does without a strategy. Copies
+     * made by the list's methods grow by this class's own policy. A list with a strategy is not
+     * serializable: its strategy would be lost.
+     *
+     * @param initialCapacity the initial capacity, at least 0
+     * @param sizing the growth policy
+     * @throws IllegalArgumentException if {@code initialCapacity} is negative
+     * @throws NullPointerException if {@code sizing} is null
+     */
+    public FastList(int initialCapacity, ArraySizingStrategy sizing)
+    {
+        this(initialCapacity);
+        this.sizing = java.util.Objects.requireNonNull(sizing, "sizing");
     }
 
     protected FastList(T[] array)
@@ -466,7 +491,9 @@ public class FastList<T>
         }
         else
         {
-            this.transferItemsToNewArrayWithCapacity(this.sizePlusFiftyPercent(this.size));
+            this.transferItemsToNewArrayWithCapacity(this.sizing == null
+                    ? this.sizePlusFiftyPercent(this.size)
+                    : this.grownBySizing(this.items.length, this.size, 1));
         }
     }
 
@@ -483,7 +510,9 @@ public class FastList<T>
         int oldCapacity = this.items.length;
         if (minCapacity > oldCapacity)
         {
-            int newCapacity = Math.max(this.sizePlusFiftyPercent(oldCapacity), minCapacity);
+            int newCapacity = this.sizing == null
+                    ? Math.max(this.sizePlusFiftyPercent(oldCapacity), minCapacity)
+                    : this.grownBySizing(oldCapacity, this.size, minCapacity - this.size);
             this.transferItemsToNewArrayWithCapacity(newCapacity);
         }
     }
@@ -1200,7 +1229,9 @@ public class FastList<T>
         int oldSize = this.size++;
         if (this.items.length == oldSize)
         {
-            T[] newItems = (T[]) new Object[this.sizePlusFiftyPercent(oldSize)];
+            T[] newItems = (T[]) new Object[this.sizing == null
+                    ? this.sizePlusFiftyPercent(oldSize)
+                    : this.grownBySizing(oldSize, oldSize, 1)];
             if (index > 0)
             {
                 System.arraycopy(this.items, 0, newItems, 0, index);
@@ -1213,6 +1244,21 @@ public class FastList<T>
             System.arraycopy(this.items, index, this.items, index + 1, oldSize - index);
         }
         this.items[index] = element;
+    }
+
+    /**
+     * The capacity the strategy given at construction grows {@code capacity} to so that
+     * {@code elements + additions} elements fit.
+     */
+    private int grownBySizing(int capacity, int elements, int additions)
+    {
+        int grown = this.sizing.grow(capacity, elements, additions);
+        if (grown - additions < elements)
+        {
+            throw new IllegalStateException("ArraySizingStrategy " + this.sizing + " returned "
+                    + grown + " for " + elements + " + " + additions + " elements");
+        }
+        return grown;
     }
 
     private int sizePlusFiftyPercent(int oldSize)
@@ -1286,7 +1332,9 @@ public class FastList<T>
         // retain the existing ensureCapacity callback and publication sequence.
         if (this.getClass() == FastList.class && newSize > this.items.length && index < this.size)
         {
-            int newCapacity = Math.max(this.sizePlusFiftyPercent(this.items.length), newSize);
+            int newCapacity = this.sizing == null
+                    ? Math.max(this.sizePlusFiftyPercent(this.items.length), newSize)
+                    : this.grownBySizing(this.items.length, this.size, sourceSize);
             T[] newItems = (T[]) new Object[newCapacity];
             if (index > 0)
             {
@@ -1315,7 +1363,9 @@ public class FastList<T>
         // exceptional completion. Subclasses retain ensureCapacity dispatch.
         if (this.getClass() == FastList.class && newSize > this.items.length && sourceSize < this.size - index)
         {
-            int newCapacity = Math.max(this.sizePlusFiftyPercent(this.items.length), newSize);
+            int newCapacity = this.sizing == null
+                    ? Math.max(this.sizePlusFiftyPercent(this.items.length), newSize)
+                    : this.grownBySizing(this.items.length, this.size, sourceSize);
             T[] newItems = (T[]) new Object[newCapacity];
             System.arraycopy(this.items, 0, newItems, 0, index + sourceSize);
             System.arraycopy(this.items, index, newItems, index + sourceSize, this.size - index);
@@ -1732,6 +1782,11 @@ public class FastList<T>
     @Override
     public void writeExternal(ObjectOutput out) throws IOException
     {
+        if (this.sizing != null)
+        {
+            throw new NotSerializableException(
+                    "a FastList with an ArraySizingStrategy: the strategy would be lost");
+        }
         out.writeInt(this.size());
         for (int i = 0; i < this.size; i++)
         {
