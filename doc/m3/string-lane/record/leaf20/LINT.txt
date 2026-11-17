@@ -1,0 +1,1 @@
+javac -Xlint:all,-this-escape -Werror (the java.base flags) of the stock String.java with the method text inserted: exit 0, no warnings

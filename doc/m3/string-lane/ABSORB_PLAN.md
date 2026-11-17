@@ -99,12 +99,17 @@ library jar on the same inputs.
 |---|---|---|
 | `countMatches` | `public int countMatches(int ch)` | M3jdk21 #3175, merged `74ba211ea9c2` |
 | `indexOfDifference` | `public int indexOfDifference(String other)` | M3jdk21 #3186, merged `b7200d690615` |
+| SEARCH family: `containsAny` (3 overloads), `containsAnyIgnoreCase`, `containsIgnoreCase`, `containsNone` (2), `containsOnly` (2), `containsWhitespace`, `indexOfAny` (3), `indexOfAnyBut` (2), `lastIndexOfAny`, `indexOfIgnoreCase` (2), `lastIndexOfIgnoreCase` (2), `ordinalIndexOf`, `lastOrdinalIndexOf`, `startsWithAny`, `endsWithAny`, `startsWithIgnoreCase`, `endsWithIgnoreCase`, WordUtils `containsAllWords` | 27 public methods, same names and overloads as the donors minus the first parameter; null arguments throw | this PR (`leaf20/` in the record) |
 
 **Lesson from `indexOfDifference`: the library's behaviour is found by testing, not assumed.** A plain
 first-differing-char rule disagreed with commons-lang3 3.22.0 on 84,574 of 21.9 million pairs, and a pure
 code-point rule on 418. The library moves the result back onto a high surrogate only when the difference is
 found inside the shorter string. The JDK method documents and implements exactly that, so the library can
 delegate. Run the donor jar as an oracle before writing the Javadoc of any absorbed operation.
+
+**Lesson from the SEARCH family: commons-lang3 3.22 changed the surrogate rules of the character-set operations.** `containsAny`/`indexOfAny`/`containsNone` keep the older rule (a high surrogate in the set matches only before the character that follows it there, or alone at the end of the set) with one change: the low surrogate of a pair in the set no longer matches alone. `indexOfAnyBut`/`containsOnly` now read the text and the set as code points. `indexOfIgnoreCase` with an empty search returns `fromIndex` only up to the length. A probe table (`leaf20/DONOR_PROBE.txt`) found all three in one run; the first proof run had 11 failing checks, the second none.
+
+**Scope set by the owner on 2026-11-17** (after "all of string functionality every developer dreamed of" and "every language, every parser, every text tool and format is strings"): besides commons-lang `StringUtils`, the catalogue takes commons-text, Guava strings (`CharMatcher`, `Splitter`/`Joiner` options, `CaseFormat`), Spring `StringUtils`, the string APIs of Python, Kotlin, C#, Swift, Rust, Go, JavaScript, Ruby and PHP, and popular string libraries on GitHub; and String-level kernels for CSV/TSV, JSON, XML/HTML, Markdown, source lexing and config formats, plus com.synexia's string code. Landing: one PR per family with an oracle proof and JUnit tests.
 
 First fork change: hsoliwal/commons-lang #1, merged `db94e11f9ced`. `StringUtils.countMatches(CharSequence, char)`
 calls `String.countMatches(int)` and `isBlank(CharSequence)` calls `String.isBlank()` for a `String` argument; the

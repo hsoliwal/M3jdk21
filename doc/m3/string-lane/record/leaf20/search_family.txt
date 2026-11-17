@@ -1,0 +1,609 @@
+    /**
+     * Returns {@code true} if this string contains any of the given characters. A high surrogate in
+     * {@code chars} matches only where this string holds it followed by the character that follows
+     * it in {@code chars}, or alone when it ends {@code chars}; a low surrogate that follows a high
+     * surrogate in {@code chars} belongs to that pair and does not match alone.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API, the common entry point for the
+     * character-set search that utility libraries provide.
+     *
+     * @param   chars   the characters to search for.
+     * @return  {@code true} if any of the characters occurs; {@code false} if this string or
+     *          {@code chars} is empty.
+     * @throws  NullPointerException if {@code chars} is {@code null}.
+     * @since   21
+     */
+    public boolean containsAny(char... chars) {
+        return indexOfAny(chars) >= 0;
+    }
+
+    /**
+     * Returns {@code true} if this string contains any of the characters of {@code chars}, with the
+     * surrogate rule of {@link #containsAny(char...)}.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   chars   the characters to search for, as a sequence.
+     * @return  {@code true} if any of the characters occurs.
+     * @throws  NullPointerException if {@code chars} is {@code null}.
+     * @since   21
+     */
+    public boolean containsAny(CharSequence chars) {
+        return indexOfAny(unitsOf(chars)) >= 0;
+    }
+
+    /**
+     * Returns {@code true} if this string contains any of the given sequences. {@code null}
+     * elements are skipped; an empty sequence is contained in any non-empty string.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   searches   the sequences to search for.
+     * @return  {@code true} if any sequence occurs; {@code false} if this string or
+     *          {@code searches} is empty.
+     * @throws  NullPointerException if {@code searches} is {@code null}.
+     * @since   21
+     */
+    public boolean containsAny(CharSequence... searches) {
+        if (isEmpty() || searches.length == 0) return false;
+        for (CharSequence search : searches) {
+            if (search != null && indexOf(search.toString()) >= 0) return true;
+        }
+        return false;
+    }
+
+    /**
+     * Returns {@code true} if this string contains any of the given sequences, ignoring case as
+     * {@link #regionMatches(boolean, int, String, int, int)} does. {@code null} elements are
+     * skipped.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   searches   the sequences to search for.
+     * @return  {@code true} if any sequence occurs; {@code false} if this string or
+     *          {@code searches} is empty.
+     * @throws  NullPointerException if {@code searches} is {@code null}.
+     * @since   21
+     */
+    public boolean containsAnyIgnoreCase(CharSequence... searches) {
+        if (isEmpty() || searches.length == 0) return false;
+        for (CharSequence search : searches) {
+            if (search != null && containsIgnoreCase(search)) return true;
+        }
+        return false;
+    }
+
+    /**
+     * Returns {@code true} if this string contains {@code search}, ignoring case as
+     * {@link #regionMatches(boolean, int, String, int, int)} does.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   search   the sequence to search for.
+     * @return  {@code true} if {@code search} occurs, ignoring case.
+     * @throws  NullPointerException if {@code search} is {@code null}.
+     * @since   21
+     */
+    public boolean containsIgnoreCase(CharSequence search) {
+        return indexOfIgnoreCase(search, 0) >= 0;
+    }
+
+    /**
+     * Returns {@code true} if this string contains none of the given characters: the negation of
+     * {@link #containsAny(char...)}.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   chars   the characters that must not occur.
+     * @return  {@code true} if none of the characters occurs.
+     * @throws  NullPointerException if {@code chars} is {@code null}.
+     * @since   21
+     */
+    public boolean containsNone(char... chars) {
+        return indexOfAny(chars) < 0;
+    }
+
+    /**
+     * Returns {@code true} if this string contains none of the characters of {@code chars}.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   chars   the characters that must not occur, as a string.
+     * @return  {@code true} if none of the characters occurs.
+     * @throws  NullPointerException if {@code chars} is {@code null}.
+     * @since   21
+     */
+    public boolean containsNone(String chars) {
+        return indexOfAny(chars.toCharArray()) < 0;
+    }
+
+    /**
+     * Returns {@code true} if every character of this string is one of the given characters, read
+     * as code points as {@link #indexOfAnyBut(char...)} does. An empty string contains only valid
+     * characters; no character is valid when {@code chars} is empty.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   chars   the valid characters.
+     * @return  {@code true} if this string is empty or holds only valid characters.
+     * @throws  NullPointerException if {@code chars} is {@code null}.
+     * @since   21
+     */
+    public boolean containsOnly(char... chars) {
+        if (isEmpty()) return true;
+        return chars.length > 0 && indexOfAnyBut(chars) < 0;
+    }
+
+    /**
+     * Returns {@code true} if every character of this string is one of the characters of
+     * {@code chars}.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   chars   the valid characters, as a string.
+     * @return  {@code true} if this string is empty or holds only valid characters.
+     * @throws  NullPointerException if {@code chars} is {@code null}.
+     * @since   21
+     */
+    public boolean containsOnly(String chars) {
+        return containsOnly(chars.toCharArray());
+    }
+
+    /**
+     * Returns {@code true} if this string contains a whitespace character, as
+     * {@link Character#isWhitespace(char)} defines it.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @return  {@code true} if any character is whitespace.
+     * @since   21
+     */
+    public boolean containsWhitespace() {
+        int length = length();
+        for (int index = 0; index < length; index++) {
+            if (Character.isWhitespace(charAt(index))) return true;
+        }
+        return false;
+    }
+
+    /**
+     * Returns the index of the first character of this string that is one of the given characters,
+     * with the surrogate rule of {@link #containsAny(char...)}.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   chars   the characters to search for.
+     * @return  the index of the first match, or {@code -1} if there is none or this string or
+     *          {@code chars} is empty.
+     * @throws  NullPointerException if {@code chars} is {@code null}.
+     * @since   21
+     */
+    public int indexOfAny(char... chars) {
+        int length = length();
+        if (length == 0 || chars.length == 0) return -1;
+        long low = asciiMask(chars, 0);
+        long high = asciiMask(chars, 64);
+        boolean wide = hasWideUnit(chars);
+        for (int index = 0; index < length; index++) {
+            char unit = charAt(index);
+            if (unit < 128) {
+                if (inMask(unit, low, high)) return index;
+            } else if (wide && anyMatches(chars, unit, index, length)) {
+                return index;
+            }
+        }
+        return -1;
+    }
+
+    /**
+     * Returns the index of the first character of this string that is one of the characters of
+     * {@code chars}.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   chars   the characters to search for, as a string.
+     * @return  the index of the first match, or {@code -1}.
+     * @throws  NullPointerException if {@code chars} is {@code null}.
+     * @since   21
+     */
+    public int indexOfAny(String chars) {
+        return indexOfAny(chars.toCharArray());
+    }
+
+    /**
+     * Returns the smallest index at which any of the given sequences occurs in this string.
+     * {@code null} elements are skipped; an empty sequence occurs at index 0.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   searches   the sequences to search for.
+     * @return  the smallest index of an occurrence, or {@code -1}.
+     * @throws  NullPointerException if {@code searches} is {@code null}.
+     * @since   21
+     */
+    public int indexOfAny(CharSequence... searches) {
+        int best = Integer.MAX_VALUE;
+        for (CharSequence search : searches) {
+            if (search == null) continue;
+            int at = indexOf(search.toString());
+            if (at >= 0 && at < best) best = at;
+        }
+        return best == Integer.MAX_VALUE ? -1 : best;
+    }
+
+    /**
+     * Returns the index of the first character of this string that is not one of the given
+     * characters. Both this string and {@code chars} are read as code points: a surrogate pair is
+     * one character, a lone surrogate is a character of its own.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   chars   the characters to skip.
+     * @return  the index of the first other character, or {@code -1} if there is none or this
+     *          string or {@code chars} is empty.
+     * @throws  NullPointerException if {@code chars} is {@code null}.
+     * @since   21
+     */
+    public int indexOfAnyBut(char... chars) {
+        int length = length();
+        if (length == 0 || chars.length == 0) return -1;
+        long low = asciiMask(chars, 0);
+        long high = asciiMask(chars, 64);
+        int[] wide = new String(chars).codePoints().filter(point -> point >= 128).toArray();
+        for (int index = 0; index < length; ) {
+            int point = Character.codePointAt(this, index);
+            boolean skipped = point < 128 ? inMask((char) point, low, high) : contains(wide, point);
+            if (!skipped) return index;
+            index += Character.charCount(point);
+        }
+        return -1;
+    }
+
+    /**
+     * Returns the index of the first character of this string that does not occur in
+     * {@code chars}, read as code points as {@link #indexOfAnyBut(char...)} does.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   chars   the characters to skip, as a sequence.
+     * @return  the index of the first other character, or {@code -1}.
+     * @throws  NullPointerException if {@code chars} is {@code null}.
+     * @since   21
+     */
+    public int indexOfAnyBut(CharSequence chars) {
+        return indexOfAnyBut(unitsOf(chars));
+    }
+
+    /**
+     * Returns the largest index at which any of the given sequences occurs in this string.
+     * {@code null} elements are skipped; an empty sequence occurs at the end of this string.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   searches   the sequences to search for.
+     * @return  the largest index of an occurrence, or {@code -1}.
+     * @throws  NullPointerException if {@code searches} is {@code null}.
+     * @since   21
+     */
+    public int lastIndexOfAny(CharSequence... searches) {
+        int best = -1;
+        for (CharSequence search : searches) {
+            if (search == null) continue;
+            int at = lastIndexOf(search.toString());
+            if (at > best) best = at;
+        }
+        return best;
+    }
+
+    /**
+     * Returns the index of the first occurrence of {@code search} in this string, ignoring case as
+     * {@link #regionMatches(boolean, int, String, int, int)} does.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   search   the sequence to search for.
+     * @return  the index of the first occurrence, or {@code -1}.
+     * @throws  NullPointerException if {@code search} is {@code null}.
+     * @since   21
+     */
+    public int indexOfIgnoreCase(CharSequence search) {
+        return indexOfIgnoreCase(search, 0);
+    }
+
+    /**
+     * Returns the index of the first occurrence of {@code search} at or after {@code fromIndex},
+     * ignoring case. A negative {@code fromIndex} counts as 0. An empty {@code search} occurs at
+     * {@code fromIndex} when {@code fromIndex} is at most the length of this string.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   search      the sequence to search for.
+     * @param   fromIndex   the index to start at.
+     * @return  the index of the first occurrence, or {@code -1}.
+     * @throws  NullPointerException if {@code search} is {@code null}.
+     * @since   21
+     */
+    public int indexOfIgnoreCase(CharSequence search, int fromIndex) {
+        String target = search.toString();
+        int count = target.length();
+        int start = Math.max(fromIndex, 0);
+        if (start > length() - count) return -1;
+        if (count == 0) return start;
+        int end = length() - count + 1;
+        for (int index = start; index < end; index++) {
+            if (regionMatches(true, index, target, 0, count)) return index;
+        }
+        return -1;
+    }
+
+    /**
+     * Returns the index of the last occurrence of {@code search} in this string, ignoring case.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   search   the sequence to search for.
+     * @return  the index of the last occurrence, or {@code -1}.
+     * @throws  NullPointerException if {@code search} is {@code null}.
+     * @since   21
+     */
+    public int lastIndexOfIgnoreCase(CharSequence search) {
+        return lastIndexOfIgnoreCase(search, length());
+    }
+
+    /**
+     * Returns the index of the last occurrence of {@code search} that starts at or before
+     * {@code fromIndex}, ignoring case. An empty {@code search} occurs at {@code fromIndex}, capped
+     * at the length of this string.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   search      the sequence to search for.
+     * @param   fromIndex   the largest index to consider.
+     * @return  the index of the last occurrence, or {@code -1}.
+     * @throws  NullPointerException if {@code search} is {@code null}.
+     * @since   21
+     */
+    public int lastIndexOfIgnoreCase(CharSequence search, int fromIndex) {
+        String target = search.toString();
+        int count = target.length();
+        int start = Math.min(fromIndex, length() - count);
+        if (start < 0) return -1;
+        if (count == 0) return start;
+        for (int index = start; index >= 0; index--) {
+            if (regionMatches(true, index, target, 0, count)) return index;
+        }
+        return -1;
+    }
+
+    /**
+     * Returns the index of the {@code ordinal}-th occurrence of {@code search} in this string,
+     * counting occurrences that overlap. An empty {@code search} gives 0.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   search    the sequence to search for.
+     * @param   ordinal   which occurrence, from 1.
+     * @return  the index of that occurrence, or {@code -1} if there are fewer or {@code ordinal} is
+     *          not positive.
+     * @throws  NullPointerException if {@code search} is {@code null}.
+     * @since   21
+     */
+    public int ordinalIndexOf(CharSequence search, int ordinal) {
+        String target = search.toString();
+        if (ordinal <= 0) return -1;
+        if (target.isEmpty()) return 0;
+        int index = -1;
+        for (int found = 0; found < ordinal; found++) {
+            index = indexOf(target, index + 1);
+            if (index < 0) return -1;
+        }
+        return index;
+    }
+
+    /**
+     * Returns the index of the {@code ordinal}-th occurrence of {@code search} in this string,
+     * counting from the end and counting occurrences that overlap. An empty {@code search} gives
+     * the length of this string.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   search    the sequence to search for.
+     * @param   ordinal   which occurrence from the end, from 1.
+     * @return  the index of that occurrence, or {@code -1}.
+     * @throws  NullPointerException if {@code search} is {@code null}.
+     * @since   21
+     */
+    public int lastOrdinalIndexOf(CharSequence search, int ordinal) {
+        String target = search.toString();
+        if (ordinal <= 0) return -1;
+        if (target.isEmpty()) return length();
+        int index = length();
+        for (int found = 0; found < ordinal; found++) {
+            index = lastIndexOf(target, index - 1);
+            if (index < 0) return -1;
+        }
+        return index;
+    }
+
+    /**
+     * Returns {@code true} if this string starts with any of the given prefixes. {@code null}
+     * elements are skipped; an empty string starts with none.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   prefixes   the prefixes.
+     * @return  {@code true} if any prefix matches.
+     * @throws  NullPointerException if {@code prefixes} is {@code null}.
+     * @since   21
+     */
+    public boolean startsWithAny(CharSequence... prefixes) {
+        if (isEmpty() || prefixes.length == 0) return false;
+        for (CharSequence prefix : prefixes) {
+            if (prefix != null && startsWith(prefix.toString())) return true;
+        }
+        return false;
+    }
+
+    /**
+     * Returns {@code true} if this string ends with any of the given suffixes. {@code null}
+     * elements are skipped; an empty string ends with none.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   suffixes   the suffixes.
+     * @return  {@code true} if any suffix matches.
+     * @throws  NullPointerException if {@code suffixes} is {@code null}.
+     * @since   21
+     */
+    public boolean endsWithAny(CharSequence... suffixes) {
+        if (isEmpty() || suffixes.length == 0) return false;
+        for (CharSequence suffix : suffixes) {
+            if (suffix != null && endsWith(suffix.toString())) return true;
+        }
+        return false;
+    }
+
+    /**
+     * Returns {@code true} if this string starts with {@code prefix}, ignoring case as
+     * {@link #regionMatches(boolean, int, String, int, int)} does.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   prefix   the prefix.
+     * @return  {@code true} if this string starts with {@code prefix}, ignoring case.
+     * @throws  NullPointerException if {@code prefix} is {@code null}.
+     * @since   21
+     */
+    public boolean startsWithIgnoreCase(CharSequence prefix) {
+        String target = prefix.toString();
+        return target.length() <= length() && regionMatches(true, 0, target, 0, target.length());
+    }
+
+    /**
+     * Returns {@code true} if this string ends with {@code suffix}, ignoring case as
+     * {@link #regionMatches(boolean, int, String, int, int)} does.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   suffix   the suffix.
+     * @return  {@code true} if this string ends with {@code suffix}, ignoring case.
+     * @throws  NullPointerException if {@code suffix} is {@code null}.
+     * @since   21
+     */
+    public boolean endsWithIgnoreCase(CharSequence suffix) {
+        String target = suffix.toString();
+        int count = target.length();
+        return count <= length() && regionMatches(true, length() - count, target, 0, count);
+    }
+
+    /**
+     * Returns {@code true} if every given word occurs in this string as a whole word: between word
+     * boundaries in the sense of {@code \b} of {@link java.util.regex.Pattern}, on one line. An
+     * empty string, no words, or a blank word gives {@code false}.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   words   the words.
+     * @return  {@code true} if every word occurs as a whole word.
+     * @throws  NullPointerException if {@code words} or one of its elements is {@code null}.
+     * @since   21
+     */
+    public boolean containsAllWords(CharSequence... words) {
+        if (isEmpty() || words.length == 0) return false;
+        for (CharSequence word : words) {
+            if (word.toString().isBlank()) return false;
+            String regex = ".*\\b" + java.util.regex.Pattern.quote(word.toString()) + "\\b.*";
+            if (!java.util.regex.Pattern.compile(regex).matcher(this).matches()) return false;
+        }
+        return true;
+    }
+
+    /** The code units of {@code chars} as an array, for the character-set operations. */
+    private static char[] unitsOf(CharSequence chars) {
+        int count = chars.length();
+        char[] units = new char[count];
+        for (int index = 0; index < count; index++) {
+            units[index] = chars.charAt(index);
+        }
+        return units;
+    }
+
+    /** Bits {@code base .. base + 63} of the set of ASCII units in {@code chars}. */
+    private static long asciiMask(char[] chars, int base) {
+        long mask = 0L;
+        for (char unit : chars) {
+            if (unit >= base && unit < base + 64) mask |= 1L << (unit - base);
+        }
+        return mask;
+    }
+
+    /** Whether the ASCII unit {@code unit} is in the set given by its two mask words. */
+    private static boolean inMask(char unit, long low, long high) {
+        return unit < 64 ? (low & (1L << unit)) != 0 : (high & (1L << (unit - 64))) != 0;
+    }
+
+    /** Whether {@code chars} holds a unit outside ASCII. */
+    private static boolean hasWideUnit(char[] chars) {
+        for (char unit : chars) {
+            if (unit >= 128) return true;
+        }
+        return false;
+    }
+
+    /**
+     * Whether the non-ASCII unit at {@code index} matches {@code chars} for indexOfAny: a unit that
+     * is not a high surrogate matches when it is in {@code chars}, except a low surrogate that
+     * follows a high surrogate there; a high surrogate matches at a position of {@code chars} that
+     * ends the array or is followed there by the next unit of this string.
+     */
+    private boolean anyMatches(char[] chars, char unit, int index, int length) {
+        boolean pair = Character.isHighSurrogate(unit);
+        int last = chars.length - 1;
+        for (int j = 0; j <= last; j++) {
+            char candidate = chars[j];
+            if (candidate == unit && (!pair || j == last
+                    || index < length - 1 && chars[j + 1] == charAt(index + 1))) {
+                return true;
+            }
+            if (j < last && Character.isHighSurrogate(candidate)
+                    && Character.isLowSurrogate(chars[j + 1])) {
+                j++;   // the low surrogate of a pair in chars does not match alone
+            }
+        }
+        return false;
+    }
+
+    /** Whether {@code point} is in {@code points}. */
+    private static boolean contains(int[] points, int point) {
+        for (int candidate : points) {
+            if (candidate == point) return true;
+        }
+        return false;
+    }

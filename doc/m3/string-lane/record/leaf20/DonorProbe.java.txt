@@ -1,0 +1,39 @@
+// SPDX-License-Identifier: Apache-2.0 OR EPL-2.0
+// Copyright (c) 2026 Synexia, Hitesh Soliwal (hsoliwal@gmail.com) and others
+
+import org.apache.commons.lang3.StringUtils;
+
+/** Prints commons-lang3's answers on small surrogate and empty-search inputs, to read the rule off the oracle. */
+public final class DonorProbe {
+    private static final String H = "\uD83D", L = "\uDE42", P = H + L;
+
+    private DonorProbe() {}
+
+    public static void main(String[] args) {
+        String[] texts = {L, H, P, "a" + L, H + "a", L + H, P + "a", "a" + H, H + H, L + L};
+        String[] sets = {P, H, L, H + "a", L + "a", "a" + H, "a" + L, L + H, H + H};
+        for (String set : sets) {
+            StringBuilder row = new StringBuilder(show(set) + ":");
+            for (String text : texts) {
+                row.append(String.format(" %s[any=%s idx=%d none=%s only=%s but=%d butCs=%d]", show(text),
+                        StringUtils.containsAny(text, set.toCharArray()) ? "T" : "F",
+                        StringUtils.indexOfAny(text, set.toCharArray()),
+                        StringUtils.containsNone(text, set.toCharArray()) ? "T" : "F",
+                        StringUtils.containsOnly(text, set.toCharArray()) ? "T" : "F",
+                        StringUtils.indexOfAnyBut(text, set.toCharArray()),
+                        StringUtils.indexOfAnyBut(text, (CharSequence) set)));
+            }
+            System.out.println(row);
+        }
+        for (String text : new String[] {"", "a", "ab"}) {
+            for (int from = -1; from <= 4; from++) {
+                System.out.printf("indexOfIgnoreCase(%s, \"\", %d)=%d  indexOf(%s,\"\",%d)=%d%n", show(text), from,
+                        StringUtils.indexOfIgnoreCase(text, "", from), show(text), from, text.indexOf("", from));
+            }
+        }
+    }
+
+    private static String show(String s) {
+        return s.replace(H, "H").replace(L, "L");
+    }
+}
