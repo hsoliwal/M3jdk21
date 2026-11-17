@@ -16,6 +16,38 @@ Neither array is ever written again. `chValue` never leaves `String`: a caller o
 
 An M3-backed String keeps its canonical owner and coordinate in `m3` as well. Its `value` is then the JNI byte shadow of that text. The zero-length layout sentinel of the earlier M3 design is retired.
 
+
+## Decision 51: chValue is lazily filled and const (supersedes the eager fill below)
+
+The owner refined the invariant on 2026-11-17 ("or use const", "lazily filled"):
+
+- `value` is unchanged. It is final, holds the real bytes, and is filled at construction.
+- `chValue` is a const array:
+  - It is `@Stable` and not final.
+  - It is `null` until the first whole-string char demand.
+  - On that demand, `String.constChars()` fills it once from the chars of `value`, then a store-store fence publishes it.
+  - It is never written again and never handed to a caller.
+- The demands that fill `chValue`:
+  - `toCharArray()`, which returns a clone of it;
+  - `getChars(0, length(), ...)`.
+- A partial `getChars` copies from `chValue` when it is present. Otherwise it takes the previous paths, so a small range of a large string never allocates the whole `char[]`.
+- No constructor and no VM creation path fills `chValue` any more.
+  - `java_lang_String::fill_char_value` and the offset stay for the JNI string accessors (stage J).
+  - C2 `OptimizeStringConcat` is back to its stock default and stock man page text, because a String without `chValue` is a valid state.
+
+Proof: `record/layout-invariant/LAZY_PROOF.txt`, run on master `9ed7c43441fa`.
+
+- The javac closure exits 0.
+- `StringLayoutInvariantTest` passes 40,040 Strings in all four configurations:
+  - default;
+  - `-XX:-CompactStrings`;
+  - `-Xcomp`;
+  - `-Xcomp -XX:+OptimizeStringConcat`.
+- Every site passes, including the VM-made literals, because the lazy fill runs in Java.
+- Discriminator: the same test fails on the eager master.
+
+The sections below describe the eager stage 1 (#3258) as it landed. They hold for `value`; for `chValue`, read "filled once on demand" wherever they say "filled at construction".
+
 ## Sites that make a String
 
 | Site | Owner | Fill |

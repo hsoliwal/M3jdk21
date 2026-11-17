@@ -663,7 +663,9 @@ How to read this file:
 ### 1. Invariants (never break; a change that would break one needs the owner)
 
 1. **Everything converges into M3JDK.** That means java.base, OpenJDK layout, `src/<module>/share/classes`, with no new `m3/` source folders. A string operation becomes a public `java.lang.String` method, family by family.
-2. **String layout** (decision 47, #3258, #3260): `private final byte[] value` holds the bytes and `private final char[] chValue` holds the chars of every String.
+2. **String layout** (decision 47, #3258, #3260; decision 51): `private final byte[] value` holds the bytes of every String from construction.
+   - Since decision 51, `@Stable private char[] chValue` is const: filled once, lazily, on the first whole-string char demand (`String.constChars()`), and never handed out.
+   - The eager fill described in the bullets below is superseded for `chValue`.
    - Both are filled at construction:
      - by all 18 Java constructor paths;
      - by the VM's `create_from_unicode`, `create_from_str` and `create_from_symbol`.

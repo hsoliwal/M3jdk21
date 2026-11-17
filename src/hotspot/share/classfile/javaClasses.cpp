@@ -311,10 +311,10 @@ Handle java_lang_String::basic_create(int length, bool is_latin1, TRAPS) {
   return h_obj;
 }
 
-// M3JDK String layout invariant (doc/m3/string-lane/STRING_LAYOUT_INVARIANT.md): every
-// String holds its chars in the private final char[] chValue as well as its bytes in value.
-// A String the VM makes gets its chars here, once its bytes are final; the array is never
-// written again.
+// M3JDK String layout invariant (doc/m3/string-lane/STRING_LAYOUT_INVARIANT.md, decision 51):
+// chValue is a const char[] filled lazily, once, on the first whole-string char demand.
+// Java fills it in String.constChars(); this fills it for the VM's own demands (the JNI
+// string accessors) when it is still null. The array is never written again.
 void java_lang_String::fill_char_value(Handle java_string, TRAPS) {
   int length = java_lang_String::length(java_string());
   typeArrayOop chars = oopFactory::new_charArray(length, CHECK);
@@ -358,7 +358,6 @@ Handle java_lang_String::create_from_unicode(const jchar* unicode, int length, T
   }
 #endif
 
-  fill_char_value(h_obj, CHECK_NH);
   return h_obj;
 }
 
@@ -403,7 +402,6 @@ Handle java_lang_String::create_from_str(const char* utf8_str, TRAPS) {
   }
 #endif
 
-  fill_char_value(h_obj, CHECK_NH);
   return h_obj;
 }
 
@@ -446,7 +444,6 @@ Handle java_lang_String::create_from_symbol(Symbol* symbol, TRAPS) {
   }
 #endif
 
-  fill_char_value(h_obj, CHECK_NH);
   return h_obj;
 }
 

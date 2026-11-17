@@ -1,0 +1,25 @@
+PROVE_LAYOUT_LAZY v1 on origin/master 9ed7c43441fa6621a492912706550908649f66fe
+STRING_LAYOUT_LAZY v1 applied: 17 constructor fills removed
+VM_STRING_LAYOUT_LAZY v1 applied
+test/StringLayoutInvariantTest.java 0
+== javac closure, master (eager): round 1 javac_exit=0 errors=0
+== DISCRIMINATOR master java.base (eager fill): 
+StackTraceElement: chValue still null after toCharArray
+intern: chValue still null after toCharArray
+new String(String literal): chValue still null after toCharArray
+Exception in thread "main" java.lang.AssertionError: 10 Strings break the layout invariant
+	at StringLayoutInvariantTest.main(StringLayoutInvariantTest.java:105)
+== javac closure, lazy recipe: round 1 javac_exit=0 errors=0
+== lazy java.base: 
+checked 40040 Strings, failures 0
+RESULT PASS
+== lazy java.base: -XX:-CompactStrings
+checked 40040 Strings, failures 0
+RESULT PASS
+== lazy java.base: -Xcomp -XX:-TieredCompilation
+checked 40040 Strings, failures 0
+RESULT PASS
+== lazy java.base: -Xcomp -XX:-TieredCompilation -XX:+OptimizeStringConcat
+checked 40040 Strings, failures 0
+RESULT PASS
+PROVE_LAYOUT_LAZY done
