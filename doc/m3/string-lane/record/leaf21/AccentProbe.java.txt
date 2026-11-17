@@ -1,0 +1,47 @@
+// SPDX-License-Identifier: Apache-2.0 OR EPL-2.0
+// Copyright (c) 2026 Synexia, Hitesh Soliwal (hsoliwal@gmail.com) and others
+
+import java.text.Normalizer;
+import java.util.Map;
+import java.util.TreeMap;
+import org.apache.commons.lang3.StringUtils;
+
+/** Classifies commons-lang3 stripAccents over every BMP character against NFD and NFKD candidates. */
+public final class AccentProbe {
+    private AccentProbe() {}
+
+    private static String strip(String s, Normalizer.Form form) {
+        StringBuilder out = new StringBuilder();
+        for (char c : Normalizer.normalize(s, form).toCharArray()) {
+            if (c < 0x300 || c > 0x36F) out.append(c);
+        }
+        return out.toString();
+    }
+
+    public static void main(String[] args) {
+        int nfd = 0, nfkd = 0, neither = 0;
+        Map<String, String> odd = new TreeMap<>();
+        for (int c = 0; c < 0x10000; c++) {
+            String s = String.valueOf((char) c);
+            String donor = StringUtils.stripAccents(s);
+            boolean a = donor.equals(Normalizer.normalize(strip(s, Normalizer.Form.NFKD), Normalizer.Form.NFC));
+            boolean b = donor.equals(Normalizer.normalize(strip(s, Normalizer.Form.NFKD), Normalizer.Form.NFKC));
+            if (a) nfd++;
+            if (b) nfkd++;
+            if (!a && !b) {
+                neither++;
+                if (odd.size() < 400) odd.put(String.format("U+%04X", c), hex(donor) + " (nfd " + hex(strip(s, Normalizer.Form.NFD)) + ")");
+            }
+        }
+        System.out.println("matches NFD=" + nfd + " NFKD=" + nfkd + " neither=" + neither);
+        odd.forEach((k, v) -> System.out.println(k + " -> " + v));
+        String[] multi = {"a b", "a b", "ﬁ", "²", "Ａ", "ẛ̣"};
+        for (String m : multi) System.out.println(hex(m) + " -> " + hex(StringUtils.stripAccents(m)));
+    }
+
+    private static String hex(String s) {
+        StringBuilder out = new StringBuilder();
+        for (char c : s.toCharArray()) out.append(String.format("%04X ", (int) c));
+        return out.toString().trim();
+    }
+}

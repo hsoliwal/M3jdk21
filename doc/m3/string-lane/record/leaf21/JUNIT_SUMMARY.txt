@@ -1,0 +1,4 @@
+JUnit 5 console 1.11.4, stock JDK 21 with the head method text in java.lang.String (--patch-module):
+[       588 tests found           ]
+[       588 tests successful      ]
+[         0 tests failed          ]
