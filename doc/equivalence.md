@@ -119,11 +119,11 @@ on existing subclasses. Existing `equals`, `identity`, `onResultOf`, `pairwise`,
 `wrap`, `equivalentTo`, and `BiPredicate` bridge descriptors remain unchanged.
 
 The target regression is
-`test/jdk/jdk/m3/collections/EquivalenceFromFunctionsTest.java`. With a built
+`test/jdk/jdk/m3/collections/providers/EquivalenceFromFunctionsTest.java`. With a built
 M3JDK21 image and configured jtreg, run:
 
 ```sh
-make test TEST="test/jdk/jdk/m3/collections/EquivalenceFromFunctionsTest.java"
+make test TEST="test/jdk/jdk/m3/collections/providers/EquivalenceFromFunctionsTest.java"
 ```
 
 EqualsVerifier is used in the separate Synexia qualification suite to check real
