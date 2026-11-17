@@ -25,6 +25,7 @@ import java.util.Random;
 import java.util.TreeMap;
 import jdk.m3.collections.apache.Equator;
 import jdk.m3.collections.apache.map.HashedMap;
+import jdk.m3.collections.eclipse.impl.block.factory.HashingStrategies;
 import jdk.m3.collections.apache.map.ReferenceIdentityMap;
 
 public class HashedMapEquatorTest {
@@ -70,6 +71,8 @@ public class HashedMapEquatorTest {
         againstTreeMap(20261117L, 200_000);
         nullKey();
         serialization();
+        finerEquatorSerialization();
+        entryView();
         cloneKeepsEquator();
         unchangedWithoutEquator(5L, 100_000);
         subclassesUnaffected();
@@ -133,6 +136,43 @@ public class HashedMapEquatorTest {
         } catch (NotSerializableException expected) {
             checks++;
         }
+    }
+
+    /** An equator finer than equals (identity): reading back keeps every entry and its value. */
+    static void finerEquatorSerialization() throws Exception {
+        Equator<Object> identity =
+                Equator.fromHashingStrategy(HashingStrategies.identityStrategy());
+        HashedMap<Object, Integer> map = new HashedMap<>(identity);
+        for (int i = 0; i < 100; i++) {
+            map.put(new String("k"), i);
+        }
+        map.put(null, -1);
+        check(map.size() == 101, "one hundred distinct keys equal by equals");
+        HashedMap<Object, Integer> back = copy(map);
+        check(back.size() == 101, "size after reading back: " + back.size());
+        int sum = 0;
+        for (Map.Entry<Object, Integer> e : back.entrySet()) {
+            sum += e.getValue();
+        }
+        check(sum == 4950 - 1, "every value kept");
+        check(!back.containsKey(new String("k")) && back.get(null) == -1,
+                "identity after reading back");
+    }
+
+    /** The entry view matches keys by the equator, as TreeMap's matches them by its comparator. */
+    static void entryView() {
+        HashedMap<String, Integer> map = new HashedMap<>(new CaseInsensitive());
+        TreeMap<String, Integer> oracle = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
+        map.put("Pear", 1);
+        oracle.put("Pear", 1);
+        Map.Entry<String, Integer> probe = Map.entry("pear", 1);
+        check(map.entrySet().contains(probe) == oracle.entrySet().contains(probe), "contains");
+        check(!map.entrySet().contains(Map.entry("pear", 2)), "contains compares the value");
+        check(map.entrySet().remove(probe) == oracle.entrySet().remove(probe), "remove");
+        check(map.isEmpty() && oracle.isEmpty(), "removed");
+        HashedMap<String, Integer> plain = new HashedMap<>();
+        plain.put("Pear", 1);
+        check(!plain.entrySet().contains(probe), "without an equator, case matters");
     }
 
     static void cloneKeepsEquator() {
