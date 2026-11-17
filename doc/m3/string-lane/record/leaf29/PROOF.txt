@@ -1,0 +1,23 @@
+method_texts_verbatim_in_head	7
+lint	javac -Xlint:all,-this-escape -Werror: no warnings
+corpus	texts	14012
+python	3.12.6	texts	14012	answers	952816
+== SplitFamilyProof flat -XX:+CompactStrings
+checks	288	texts	14012	python_ops	68
+RESULT	PASS	failures=0
+== SplitFamilyProof flat -XX:-CompactStrings
+checks	288	texts	14012	python_ops	68
+RESULT	PASS	failures=0
+== SplitFamilyProof m3-facts -XX:+CompactStrings
+checks	288	texts	14012	python_ops	68
+RESULT	PASS	failures=0
+== SplitFamilyProof m3-facts -XX:-CompactStrings
+checks	288	texts	14012	python_ops	68
+RESULT	PASS	failures=0
+== SplitFamilyProof m3-scan -XX:+CompactStrings
+checks	288	texts	14012	python_ops	68
+RESULT	PASS	failures=0
+== SplitFamilyProof m3-scan -XX:-CompactStrings
+checks	288	texts	14012	python_ops	68
+RESULT	PASS	failures=0
+proof exit 0

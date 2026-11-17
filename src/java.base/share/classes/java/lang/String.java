@@ -7028,6 +7028,549 @@ public final class String
     }
 
     /**
+     * Splits this string around runs of whitespace, as {@link Character#isWhitespace(char)}
+     * defines it, unit by unit. Whitespace at the ends gives no empty part, and a run of
+     * whitespace separates once. An empty string gives an empty array.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API. Unlike
+     * {@link #split(String)}, it takes no regular expression.
+     *
+     * @return  the parts, each a range of this string.
+     * @since   21
+     */
+    public String[] split() {
+        return splitOnUnits(null, -1, false);
+    }
+
+    /**
+     * Splits this string around occurrences of {@code separatorChar}. Separators at the ends give
+     * no empty part, and adjacent separators separate once. An empty string gives an empty array.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API. Unlike
+     * {@link #split(String)}, it takes no regular expression.
+     *
+     * @param   separatorChar   the separator.
+     * @return  the parts, each a range of this string.
+     * @since   21
+     */
+    public String[] split(char separatorChar) {
+        return splitOnUnit(separatorChar, -1, false);
+    }
+
+    /**
+     * Splits this string at every whitespace unit, as {@link Character#isWhitespace(char)}
+     * defines it, keeping the empty parts between adjacent separators and at the ends. An empty
+     * string gives an empty array.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @return  the parts, each a range of this string.
+     * @since   21
+     */
+    public String[] splitPreserveAllTokens() {
+        return splitOnUnits(null, -1, true);
+    }
+
+    /**
+     * Splits this string at every occurrence of {@code separatorChar}, keeping the empty parts
+     * between adjacent separators and at the ends. An empty string gives an empty array.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   separatorChar   the separator.
+     * @return  the parts, each a range of this string.
+     * @since   21
+     */
+    public String[] splitPreserveAllTokens(char separatorChar) {
+        return splitOnUnit(separatorChar, -1, true);
+    }
+
+    /**
+     * Splits this string at every unit that occurs in {@code separatorChars}, keeping the empty
+     * parts between adjacent separators and at the ends. An empty string gives an empty array;
+     * empty {@code separatorChars} give this string as the only part.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   separatorChars   the separator units.
+     * @return  the parts, each a range of this string.
+     * @throws  NullPointerException if {@code separatorChars} is {@code null}.
+     * @since   21
+     */
+    public String[] splitPreserveAllTokens(String separatorChars) {
+        return splitPreserveAllTokens(separatorChars, -1);
+    }
+
+    /**
+     * Splits this string at every unit that occurs in {@code separatorChars} into at most
+     * {@code max} parts, keeping the empty parts between adjacent separators and at the ends.
+     * The last part is the rest of this string from where it starts, separators included; a
+     * {@code max} of zero or less sets no limit. An empty string gives an empty array.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   separatorChars   the separator units.
+     * @param   max              the most parts, or zero or less for no limit.
+     * @return  the parts, each a range of this string.
+     * @throws  NullPointerException if {@code separatorChars} is {@code null}.
+     * @since   21
+     */
+    public String[] splitPreserveAllTokens(String separatorChars, int max) {
+        java.util.Objects.requireNonNull(separatorChars, "separatorChars");
+        return splitOnUnits(separatorChars, max, true);
+    }
+
+    /**
+     * Splits this string around occurrences of {@code separator}, found left to right without
+     * overlap. Separators at the ends give no empty part, and adjacent separators separate once.
+     * An empty separator splits around runs of whitespace, as {@link #split()} does. An empty
+     * string gives an empty array.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   separator   the separator.
+     * @return  the parts, each a range of this string.
+     * @throws  NullPointerException if {@code separator} is {@code null}.
+     * @since   21
+     */
+    public String[] splitByWholeSeparator(String separator) {
+        return splitByWholeSeparator(separator, -1);
+    }
+
+    /**
+     * Splits this string around occurrences of {@code separator} into at most {@code max} parts,
+     * as {@link #splitByWholeSeparator(String)} does. The last part is the rest of this string
+     * from where it starts, separators included; a {@code max} of zero or less sets no limit.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   separator   the separator.
+     * @param   max         the most parts, or zero or less for no limit.
+     * @return  the parts, each a range of this string.
+     * @throws  NullPointerException if {@code separator} is {@code null}.
+     * @since   21
+     */
+    public String[] splitByWholeSeparator(String separator, int max) {
+        return wholeSeparatorParts(separator, max, false);
+    }
+
+    /**
+     * Splits this string at every occurrence of {@code separator}, found left to right without
+     * overlap, keeping the empty parts between adjacent separators and at the ends. An empty
+     * separator splits at every whitespace unit, as {@link #splitPreserveAllTokens()} does. An
+     * empty string gives an empty array.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   separator   the separator.
+     * @return  the parts, each a range of this string.
+     * @throws  NullPointerException if {@code separator} is {@code null}.
+     * @since   21
+     */
+    public String[] splitByWholeSeparatorPreserveAllTokens(String separator) {
+        return splitByWholeSeparatorPreserveAllTokens(separator, -1);
+    }
+
+    /**
+     * Splits this string at every occurrence of {@code separator} into at most {@code max}
+     * parts, as {@link #splitByWholeSeparatorPreserveAllTokens(String)} does. The last part is
+     * the rest of this string from where it starts, separators included; a {@code max} of zero
+     * or less sets no limit.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   separator   the separator.
+     * @param   max         the most parts, or zero or less for no limit.
+     * @return  the parts, each a range of this string.
+     * @throws  NullPointerException if {@code separator} is {@code null}.
+     * @since   21
+     */
+    public String[] splitByWholeSeparatorPreserveAllTokens(String separator, int max) {
+        return wholeSeparatorParts(separator, max, true);
+    }
+
+    /**
+     * Splits this string into runs of characters of one type, as {@link Character#getType(int)}
+     * gives it. The string is read as code points: a surrogate pair is one character, a lone
+     * surrogate is a character of its own. An empty string gives an empty array.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @return  the runs, each a range of this string.
+     * @since   21
+     */
+    public String[] splitByCharacterType() {
+        return characterTypeRuns(false);
+    }
+
+    /**
+     * Splits this string into runs of characters of one type, as
+     * {@link #splitByCharacterType()} does, except that an upper-case letter directly before a
+     * run of lower-case letters starts that run: {@code "ASFRules"} gives {@code "ASF"} and
+     * {@code "Rules"}.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @return  the runs, each a range of this string.
+     * @since   21
+     */
+    public String[] splitByCharacterTypeCamelCase() {
+        return characterTypeRuns(true);
+    }
+
+    /**
+     * Splits this string at the first occurrence of {@code separator} into three parts: the part
+     * before it, the separator and the part after it; when it does not occur, this string and two
+     * empty strings. As Python reads strings as code points, an occurrence that starts or ends
+     * between the two halves of a surrogate pair does not count.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API; Python's
+     * {@code str.partition} has the same result.
+     *
+     * @param   separator   the separator.
+     * @return  an array of three ranges of this string.
+     * @throws  NullPointerException if {@code separator} is {@code null}.
+     * @throws  IllegalArgumentException if {@code separator} is empty.
+     * @since   21
+     */
+    public String[] partition(String separator) {
+        int at = indexOfWhole(pythonSeparator(separator), 0);
+        if (at < 0) return new String[] {this, "", ""};
+        int end = at + separator.length();
+        return new String[] {substring(0, at), substring(at, end), substring(end)};
+    }
+
+    /**
+     * Splits this string at the last occurrence of {@code separator} into three parts: the part
+     * before it, the separator and the part after it; when it does not occur, two empty strings
+     * and this string. An occurrence that starts or ends between the two halves of a surrogate
+     * pair does not count.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API; Python's
+     * {@code str.rpartition} has the same result.
+     *
+     * @param   separator   the separator.
+     * @return  an array of three ranges of this string.
+     * @throws  NullPointerException if {@code separator} is {@code null}.
+     * @throws  IllegalArgumentException if {@code separator} is empty.
+     * @since   21
+     */
+    public String[] rpartition(String separator) {
+        int at = lastIndexOfWhole(pythonSeparator(separator), length());
+        if (at < 0) return new String[] {"", "", this};
+        int end = at + separator.length();
+        return new String[] {substring(0, at), substring(at, end), substring(end)};
+    }
+
+    /**
+     * Splits this string around occurrences of {@code separator}, found right to left without
+     * overlap, making at most {@code maxSplit} splits, the rightmost ones; a negative
+     * {@code maxSplit} sets no limit. Every separator separates, so empty parts are kept, and an
+     * empty string gives one empty part. An occurrence that starts or ends between the two
+     * halves of a surrogate pair does not count.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API; Python's
+     * {@code str.rsplit(sep, maxsplit)} has the same result.
+     *
+     * @param   separator   the separator.
+     * @param   maxSplit    the most splits, or a negative value for no limit.
+     * @return  the parts, left to right, each a range of this string.
+     * @throws  NullPointerException if {@code separator} is {@code null}.
+     * @throws  IllegalArgumentException if {@code separator} is empty.
+     * @since   21
+     */
+    public String[] rsplit(String separator, int maxSplit) {
+        int width = pythonSeparator(separator).length();
+        ArrayList<String> parts = new ArrayList<>();
+        int end = length();
+        for (int splits = 0; splits != maxSplit; splits++) {
+            int at = lastIndexOfWhole(separator, end);
+            if (at < 0) break;
+            parts.add(substring(at + width, end));
+            end = at;
+        }
+        parts.add(substring(0, end));
+        java.util.Collections.reverse(parts);
+        return parts.toArray(new String[0]);
+    }
+
+    /**
+     * Splits this string into lines at the line boundaries of Python's {@code str.splitlines}:
+     * {@code \n}, {@code \r}, {@code \r\n}, {@code U+000B}, {@code U+000C}, {@code U+001C},
+     * {@code U+001D}, {@code U+001E}, {@code U+0085}, {@code U+2028} and {@code U+2029}. A
+     * boundary at the end gives no empty last line; an empty string gives an empty array.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API; Python's
+     * {@code str.splitlines(keepends)} has the same result. Unlike {@link #lines()}, it knows
+     * every boundary above and can keep them.
+     *
+     * @param   keepEnds   whether each line keeps its boundary.
+     * @return  the lines, each a range of this string.
+     * @since   21
+     */
+    public String[] splitLines(boolean keepEnds) {
+        int length = length();
+        if (length == 0) return new String[0];
+        M3String storage = m3();
+        M3StringFacts facts = storage == null ? null : storage.factsIfPrepared();
+        if (facts != null && (facts.regexAnyClasses & M3StringFacts.REGEX_VERTICAL) == 0
+                && noUnitBetween(facts, (char) 0x1C, (char) 0x1E)) {
+            return new String[] {this};
+        }
+        ArrayList<String> lines = new ArrayList<>();
+        int begin = 0;
+        char[] window = new char[Math.min(length, SCAN_WINDOW)];
+        for (int from = 0; from < length; from += window.length) {
+            int count = Math.min(window.length, length - from);
+            getChars(from, from + count, window, 0);
+            for (int k = 0; k < count; k++) {
+                int at = from + k;
+                if (at < begin || !isPythonLineBoundary(window[k])) continue;
+                int next = at + 1;
+                if (window[k] == '\r' && next < length
+                        && (k + 1 < count ? window[k + 1] : charAt(next)) == '\n') {
+                    next++;
+                }
+                lines.add(substring(begin, keepEnds ? next : at));
+                begin = next;
+            }
+        }
+        if (begin < length) lines.add(substring(begin));
+        return lines.toArray(new String[0]);
+    }
+
+    /**
+     * Splits this string into chunks of {@code size} characters ({@code char} values), the last
+     * one shorter when the length is not a multiple of {@code size}. An empty string gives an
+     * empty array.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API; Kotlin's
+     * {@code CharSequence.chunked(size)} has the same result.
+     *
+     * @param   size   the length of each chunk.
+     * @return  the chunks, each a range of this string.
+     * @throws  IllegalArgumentException if {@code size} is not positive.
+     * @since   21
+     */
+    public String[] chunked(int size) {
+        if (size <= 0) {
+            throw new IllegalArgumentException("size " + size + " must be greater than zero.");
+        }
+        int length = length();
+        String[] chunks = new String[length / size + (length % size == 0 ? 0 : 1)];
+        for (int k = 0; k < chunks.length; k++) {
+            int begin = k * size;
+            chunks[k] = substring(begin, begin + Math.min(size, length - begin));
+        }
+        return chunks;
+    }
+
+    /**
+     * The parts of this string around separator units: whitespace units when {@code chars} is
+     * {@code null}, else the units of {@code chars}. Every separator ends a part when
+     * {@code all}; otherwise only a non-empty part counts and no empty part ends the string. The
+     * {@code max}-th part takes the rest of this string. Prepared M3 facts that rule out every
+     * separator give this string at once; else the text is read in bulk windows.
+     */
+    private String[] splitOnUnits(String chars, int max, boolean all) {
+        if (chars != null && chars.length() == 1) return splitOnUnit(chars.charAt(0), max, all);
+        int length = length();
+        if (length == 0) return new String[0];
+        M3String storage = m3();
+        M3StringFacts facts = storage == null ? null : storage.factsIfPrepared();
+        if (facts != null && noSeparatorUnit(facts, chars)) return new String[] {this};
+        ArrayList<String> parts = new ArrayList<>();
+        int begin = 0;
+        char[] window = new char[Math.min(length, SCAN_WINDOW)];
+        for (int from = 0; from < length; from += window.length) {
+            int count = Math.min(window.length, length - from);
+            getChars(from, from + count, window, 0);
+            for (int k = 0; k < count; k++) {
+                char unit = window[k];
+                boolean separates = chars == null ? Character.isWhitespace(unit)
+                        : chars.indexOf(unit) >= 0;
+                if (!separates) continue;
+                if (addPart(parts, begin, from + k, max, all)) return parts.toArray(new String[0]);
+                begin = from + k + 1;
+            }
+        }
+        return lastParts(parts, begin, all);
+    }
+
+    /**
+     * The parts of this string around the unit {@code separator}, by the rule of
+     * {@link #splitOnUnits}; the separators are found by {@link #indexOf(int, int)}.
+     */
+    private String[] splitOnUnit(char separator, int max, boolean all) {
+        if (isEmpty()) return new String[0];
+        ArrayList<String> parts = new ArrayList<>();
+        int begin = 0;
+        for (int at = indexOf(separator); at >= 0; at = indexOf(separator, at + 1)) {
+            if (addPart(parts, begin, at, max, all)) return parts.toArray(new String[0]);
+            begin = at + 1;
+        }
+        return lastParts(parts, begin, all);
+    }
+
+    /**
+     * The parts of this string around the non-overlapping occurrences of {@code separator}, by
+     * the rule of {@link #splitOnUnits}; an empty separator splits at whitespace units.
+     */
+    private String[] wholeSeparatorParts(String separator, int max, boolean all) {
+        java.util.Objects.requireNonNull(separator, "separator");
+        if (isEmpty()) return new String[0];
+        if (separator.isEmpty()) return splitOnUnits(null, max, all);
+        ArrayList<String> parts = new ArrayList<>();
+        int begin = 0;
+        for (int at = indexOf(separator); at >= 0; at = indexOf(separator, begin)) {
+            if (addPart(parts, begin, at, max, all)) return parts.toArray(new String[0]);
+            begin = at + separator.length();
+        }
+        return lastParts(parts, begin, all);
+    }
+
+    /**
+     * Adds the part from {@code begin} to the separator at {@code at} when it counts: always
+     * when {@code all}, else when it is not empty. Returns {@code true} when it was the
+     * {@code max}-th part, which then takes the rest of this string.
+     */
+    private boolean addPart(ArrayList<String> parts, int begin, int at, int max, boolean all) {
+        if (!all && at == begin) return false;
+        boolean last = parts.size() + 1 == max;
+        parts.add(last ? substring(begin) : substring(begin, at));
+        return last;
+    }
+
+    /** The parts with the rest of this string from {@code begin} when it counts, as an array. */
+    private String[] lastParts(ArrayList<String> parts, int begin, boolean all) {
+        if (all || begin < length()) parts.add(substring(begin));
+        return parts.toArray(new String[0]);
+    }
+
+    /**
+     * Whether prepared M3 facts rule out every separator unit: each unit of {@code chars}, or
+     * each whitespace unit when it is {@code null}. Whitespace outside ASCII is in the regex
+     * class HORIZONTAL or VERTICAL; in ASCII it is in SPACE or one of {@code U+001C..U+001F}.
+     */
+    private static boolean noSeparatorUnit(M3StringFacts facts, String chars) {
+        if (chars != null) return noUnitMayOccur(facts, chars.toCharArray());
+        int space = M3StringFacts.REGEX_SPACE | M3StringFacts.REGEX_HORIZONTAL
+                | M3StringFacts.REGEX_VERTICAL;
+        return (facts.regexAnyClasses & space) == 0
+                && noUnitBetween(facts, (char) 0x1C, (char) 0x1F);
+    }
+
+    /** Whether prepared M3 facts rule out every unit from {@code low} to {@code high}. */
+    private static boolean noUnitBetween(M3StringFacts facts, char low, char high) {
+        for (char unit = low; unit <= high; unit++) {
+            if (facts.mayContainCodeUnit(unit)) return false;
+        }
+        return true;
+    }
+
+    /**
+     * The runs of {@link #splitByCharacterType()}, or with {@code camelCase} of
+     * {@link #splitByCharacterTypeCamelCase()}. The text is read in bulk windows, a surrogate
+     * pair never split between two windows.
+     */
+    private String[] characterTypeRuns(boolean camelCase) {
+        int length = length();
+        if (length == 0) return new String[0];
+        ArrayList<String> runs = new ArrayList<>();
+        int begin = 0;
+        int previous = 0;
+        int runType = -1;
+        char[] window = new char[Math.min(length, SCAN_WINDOW)];
+        for (int from = 0; from < length; ) {
+            int to = Math.min(length, from + window.length);
+            getChars(from, to, window, 0);
+            int count = to - from;
+            if (to < length && count > 1 && Character.isHighSurrogate(window[count - 1])) count--;
+            for (int at = 0; at < count; ) {
+                char unit = window[at];
+                int point = Character.isHighSurrogate(unit) && at + 1 < count
+                        && Character.isLowSurrogate(window[at + 1])
+                        ? Character.toCodePoint(unit, window[at + 1]) : unit;
+                int type = Character.getType(point);
+                int index = from + at;
+                if (index > 0 && type != runType) {
+                    if (!camelCase || type != Character.LOWERCASE_LETTER
+                            || runType != Character.UPPERCASE_LETTER) {
+                        runs.add(substring(begin, index));
+                        begin = index;
+                    } else if (previous != begin) {
+                        runs.add(substring(begin, previous));
+                        begin = previous;
+                    }
+                }
+                runType = type;
+                previous = index;
+                at += Character.charCount(point);
+            }
+            from += count;
+        }
+        runs.add(substring(begin));
+        return runs.toArray(new String[0]);
+    }
+
+    /** {@code separator}, checked as Python checks one: not {@code null}, not empty. */
+    private static String pythonSeparator(String separator) {
+        java.util.Objects.requireNonNull(separator, "separator");
+        if (separator.isEmpty()) throw new IllegalArgumentException("empty separator");
+        return separator;
+    }
+
+    /**
+     * The index of the first occurrence of {@code separator} at or after {@code from} that
+     * neither starts nor ends between the two halves of a surrogate pair, as Python finds a
+     * string among code points; {@code -1} when there is none.
+     */
+    private int indexOfWhole(String separator, int from) {
+        int width = separator.length();
+        for (int at = indexOf(separator, from); at >= 0; at = indexOf(separator, at + 1)) {
+            if (!splitsPair(at) && !splitsPair(at + width)) return at;
+        }
+        return -1;
+    }
+
+    /**
+     * The index of the last occurrence of {@code separator} that ends at or before {@code end}
+     * and neither starts nor ends between the two halves of a surrogate pair; {@code -1} when
+     * there is none.
+     */
+    private int lastIndexOfWhole(String separator, int end) {
+        int width = separator.length();
+        for (int at = lastIndexOf(separator, end - width); at >= 0;
+                at = lastIndexOf(separator, at - 1)) {
+            if (!splitsPair(at) && !splitsPair(at + width)) return at;
+        }
+        return -1;
+    }
+
+    /** Whether {@code unit} is a line boundary of Python's {@code str.splitlines}. */
+    private static boolean isPythonLineBoundary(char unit) {
+        return (unit >= '\n' && unit <= '\r') || (unit >= (char) 0x1C && unit <= (char) 0x1E)
+                || unit == (char) 0x85 || unit == (char) 0x2028 || unit == (char) 0x2029;
+    }
+
+    /**
      * Returns true if and only if this string contains the specified
      * sequence of char values.
      *

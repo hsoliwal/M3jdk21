@@ -111,3 +111,14 @@ prependIfMissingIgnoreCase	commons-lang3 3.22.0 StringUtils.prependIfMissingIgno
 wrap	commons-lang3 3.22.0 StringUtils.wrap(String, char|String)
 wrapIfMissing	commons-lang3 3.22.0 StringUtils.wrapIfMissing(String, char|String)
 overlay	commons-lang3 3.22.0 StringUtils.overlay(String, String, int, int)
+split	commons-lang3 3.22.0 split(str): runs of whitespace (Character.isWhitespace(char), unit by unit); no empty parts
+splitPreserveAllTokens	commons splitPreserveAllTokens(str)
+splitByWholeSeparator	commons splitByWholeSeparator(str, sep); "" means whitespace
+splitByWholeSeparatorPreserveAllTokens	commons, same name
+splitByCharacterType	commons splitByCharacterType: code points by Character.getType
+splitByCharacterTypeCamelCase	commons splitByCharacterTypeCamelCase
+partition	CPython 3.12 str.partition
+rpartition	CPython 3.12 str.rpartition
+rsplit	CPython 3.12 str.rsplit(sep, maxsplit)
+splitLines	CPython 3.12 str.splitlines(keepends)
+chunked	Kotlin 2.2.20 CharSequence.chunked(size)
