@@ -24,6 +24,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
+import jdk.m3.collections.hppc.ArraySizingStrategy;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.Deque;
@@ -113,6 +114,9 @@ public class LongGapList extends ILongList {
      * Array holding raw data
      */
     private long[] values;
+    // Modified 2026 by Synexia contributors: a growth policy may be given (ArraySizingStrategy).
+    /** The growth policy given at construction, or null for this class's own. */
+    private transient ArraySizingStrategy sizing;
 
     /**
      * Number of elements stored in this LongGapList
@@ -333,6 +337,22 @@ public class LongGapList extends ILongList {
      */
     public LongGapList(int capacity) {
         init(new long[capacity], 0);
+    }
+
+    /**
+     * Construct a list with specified initial capacity that grows by the given strategy, as a
+     * {@link java.util.Comparator} orders a sorted collection: whenever the list must grow to hold
+     * {@code n} elements, its new capacity is {@code sizing.grow(capacity, size(), n - size())};
+     * it never shrinks. {@code ArraySizingStrategy.gapList()} grows as this class does without a
+     * strategy. A list with a strategy is not serializable: its strategy would be lost.
+     *
+     * @param capacity  capacity
+     * @param sizing    growth policy
+     * @throws NullPointerException if {@code sizing} is null
+     */
+    public LongGapList(int capacity, ArraySizingStrategy sizing) {
+        this(capacity);
+        this.sizing = java.util.Objects.requireNonNull(sizing, "sizing");
     }
 
     /**
@@ -1175,7 +1195,18 @@ public class LongGapList extends ILongList {
      * @return  the new capacity to use
      */
     int calculateNewCapacity(int minCapacity) {
-        return CapacityHelper.calculateCapacity(minCapacity, values.length, DEFAULT_CAPACITY);
+        if (sizing == null) {
+            return CapacityHelper.calculateCapacity(minCapacity, values.length, DEFAULT_CAPACITY);
+        }
+        if (minCapacity <= values.length) {
+            return values.length; // do not shrink
+        }
+        int grown = sizing.grow(values.length, size, minCapacity - size);
+        if (grown < minCapacity) {
+            throw new IllegalStateException("ArraySizingStrategy " + sizing + " returned " + grown
+                    + " for " + minCapacity + " elements");
+        }
+        return grown;
     }
 
     /**
@@ -1212,6 +1243,10 @@ public class LongGapList extends ILongList {
      * @throws     IOException if serialization fails
      */
     private void writeObject(ObjectOutputStream oos) throws IOException {
+        if (sizing != null) {
+            throw new java.io.NotSerializableException(
+                    "a LongGapList with an ArraySizingStrategy: the strategy would be lost");
+        }
         // Write out array length
         int size = size();
         oos.writeInt(size);

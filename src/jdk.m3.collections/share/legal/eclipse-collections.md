@@ -73,6 +73,15 @@ its growth points (first add, `ensureCapacity`, insertion at an index, the two b
 collection orders by a `Comparator`. Without a strategy every path is unchanged. A list with a strategy refuses
 serialization (`NotSerializableException`) rather than lose the strategy. The source records this modification.
 
+### Growth strategy for the primitive array lists by Synexia (2026-11-17)
+
+`impl.list.mutable.primitive.{Byte,Char,Double,Float,Int,Long,Short}ArrayList` each have one more public
+constructor, `(int initialCapacity, ArraySizingStrategy sizing)`, which grows the list as `FastList`'s does (first
+add, `ensureCapacity`, insertion at an index, bulk insertion at an index). `BooleanArrayList` keeps a `BitSet` and is
+unchanged. Without a strategy every path is unchanged. A list with a strategy refuses serialization
+(`NotSerializableException`). `FastList`'s insertion at an index now asks its strategy before the size changes, so
+that a strategy returning too little leaves the list unchanged. The sources record these modifications.
+
 ### Eclipse Distribution License v1.0
 
 ```
