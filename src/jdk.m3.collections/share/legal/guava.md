@@ -49,6 +49,20 @@ It creates a fresh equivalence backed by the supplied equality and hash callback
 implement `Serializable`. Existing members, including the two conversions above, are unchanged.
 The source retains its original copyright and license and records this additional modification.
 
+### LinkedHashMultimap on two arrays by Synexia (2026-11-17)
+
+`collect.LinkedHashMultimap` stores its values in two arrays shared by the multimap, one slot per value (the key
+and the value in an `Object[]`, the hash and the links in an `int[]`), instead of one `ValueEntry` object each. Its
+public and package-private members, its iteration orders and its serialized form are unchanged. The arrays grow
+by two slots or a quarter and keep their capacity until the multimap empties. While an iteration of `entries()`,
+`values()` or `keys()` (also through their spliterators and streams) or a `forEach` is suspended, changes made
+other than through it are seen this way: the entry it returns next is returned even if it was removed meanwhile
+(as before); if that entry was removed, the entries removed after it are skipped (upstream returned them);
+emptying the multimap, even briefly, ends the iteration; and if the entry it returns next was removed and its
+slot taken by a new entry, it throws `ConcurrentModificationException`. `entries()` returns
+`AbstractMap.SimpleImmutableEntry` objects instead of the class's former `ValueEntry` objects. The source retains
+its original copyright and license and records this modification.
+
 ### License
 
 ```
