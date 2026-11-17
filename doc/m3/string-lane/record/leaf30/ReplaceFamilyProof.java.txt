@@ -1,0 +1,350 @@
+// SPDX-License-Identifier: Apache-2.0 OR EPL-2.0
+// Copyright (c) 2026 Synexia, Hitesh Soliwal and others
+
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.function.Function;
+import java.util.function.IntUnaryOperator;
+import kotlin.jvm.functions.Function1;
+import kotlin.text.StringsKt;
+import org.apache.commons.lang3.StringUtils;
+
+/**
+ * Donor-oracle proof of the REPLACE family on a stock JVM whose String carries the head method text. Corpus A: every
+ * string of 0..4 units over UNITS_A (letters in two cases, a comma, the halves of a surrogate pair) plus window-seam
+ * texts of 505..520 and 1018..1030 units; corpus B: the same over UNITS_B (k, K, KELVIN SIGN, a, A and the halves of
+ * Deseret capital and small long I), for the ignoring-case rules. Oracles: commons-lang3 3.22.0 (replace with max,
+ * replaceOnce, replaceIgnoreCase, replaceOnceIgnoreCase, remove, removeIgnoreCase, replaceEach,
+ * replaceEachRepeatedly, replaceChars), Kotlin stdlib 2.2.20 (replaceFirstChar, replaceBefore/After[Last] with and
+ * without the missing-delimiter value) and CPython 3.12 str.translate (TRANSLATE.bin of python_oracle.py, args[0]).
+ * Exceptions compare by class. Every String answer equal to its text must be that text (unchanged gives this). A null
+ * argument must throw NullPointerException (where the donors answer the text). Exit 1 on a mismatch.
+ */
+public final class ReplaceFamilyProof {
+    private static final char HIGH = (char) 0xD83D, LOW = (char) 0xDE00;
+    private static final String PAIR = "" + HIGH + LOW;
+    private static final char KELVIN = (char) 0x212A, DH = (char) 0xD801, DL0 = (char) 0xDC00, DL1 = (char) 0xDC28;
+    private static final char[] UNITS_A = {'a', 'b', 'A', ',', HIGH, LOW, 'x'};
+    private static final char[] UNITS_B = {'a', 'A', 'k', KELVIN, DH, DL0, DL1};
+    private static final String[] TAILS_A = {PAIR, ",b", "aA", ""};
+    private static final String[] TAILS_B = {"" + DH + DL0, "kA", "" + KELVIN, ""};
+    private static final String[] SEARCHES_A = {"", "a", "ab", ",", "b,", PAIR, "" + HIGH, "" + LOW, "aA", "xx", "zz", "A"};
+    private static final String[] REPLACEMENTS = {"", "a", "Q", "aa", "" + HIGH, "A"};
+    private static final int[] MAXES = {-1, 0, 1, 2};
+    private static final String[] SEARCHES_B = {"k", "K", "" + KELVIN, "a", "A", "ak", "" + DH + DL0, "" + DH + DL1,
+        "" + DH, "" + DL1, "KA"};
+    private static final String[] REPLACEMENTS_B = {"", "Q", "k"};
+    private static final String[][][] EACH = {
+        {{"a"}, {"b"}}, {{"a", "b"}, {"b", "a"}}, {{"a", "ab"}, {"1", "2"}}, {{"ab", "a"}, {"2", "1"}},
+        {{"", "a"}, {"x", "y"}}, {{null, "a"}, {"x", "y"}}, {{"a", "b"}, {null, "y"}}, {{"a"}, {"a"}},
+        {{"a", "b"}, {"x"}}, {{}, {"x"}}, {{"a"}, {}}, {{"" + HIGH}, {"h"}}, {{"a", "b", "x"}, {"b", "x", "a"}},
+        {{"a", "b", "A", ",", "x", "" + HIGH, "" + LOW}, {"b", "A", ",", "x", "" + HIGH, "" + LOW, "q"}},
+        {{"aa"}, {"a"}}, {{"a", "b"}, {"", "ab"}}, {{"b,", "A"}, {",b", "q"}}, {{"x"}, {"xx"}},
+        {{PAIR, "" + LOW}, {"P", "l"}}, {{"ab", "b"}, {"b", "a"}}};
+    private static final String[] SEARCH_CHARS = {"", "a", "ab", "ba", "aa", "" + HIGH, "" + LOW, "a" + HIGH, "z", ",xA"};
+    private static final String[] REPLACE_CHARS = {"", "x", "xy", "xyz", "a", "b", "" + LOW};
+    private static final char[] REMOVE_CHARS = {'a', ',', HIGH, LOW, 'z', (char) 0, 'x'};
+    private static final IntUnaryOperator[] FIRST = {Character::toUpperCase, c -> c ^ 0x20, c -> 0x1F600, c -> c,
+        c -> Character.isHighSurrogate((char) c) ? 'H' : c};
+    private static final String[] FIRST_NAMES = {"toUpperCase", "^0x20", "0x1F600", "identity", "high->H"};
+    private static final String[] DELIMITER_REPLACEMENTS = {"", "Q", "aa", "a"};
+    private static final Method KT_FIRST;
+    private static int failures;
+
+    static {
+        try {
+            KT_FIRST = Class.forName("kotlin.text.StringsKt__StringsKt")
+                    .getDeclaredMethod("replaceFirstCharWithChar", String.class, Function1.class);
+            KT_FIRST.setAccessible(true);
+        } catch (ReflectiveOperationException e) {
+            throw new ExceptionInInitializerError(e);
+        }
+    }
+
+    private ReplaceFamilyProof() {}
+
+    public static void main(String[] args) throws Exception {
+        List<String> a = corpus(UNITS_A, TAILS_A);
+        List<String> b = corpus(UNITS_B, TAILS_B);
+        int checks = run(checksA(), a) + run(checksB(), b) + translateChecks(a, Path.of(args[0], "TRANSLATE.bin"));
+        checks += nullChecks();
+        System.out.println("checks\t" + checks + "\ttexts\t" + a.size() + "+" + b.size());
+        System.out.println("RESULT\t" + (failures == 0 ? "PASS" : "FAIL") + "\tfailures=" + failures);
+        System.exit(failures == 0 ? 0 : 1);
+    }
+
+    private static List<Check> checksA() {
+        List<Check> checks = new ArrayList<>();
+        for (String s : SEARCHES_A) {
+            String q = show(s);
+            for (String r : REPLACEMENTS) {
+                String qr = q + "," + show(r);
+                for (int max : MAXES) {
+                    checks.add(new Check("replace(" + qr + "," + max + ")", t -> t.replace(s, r, max),
+                            t -> StringUtils.replace(t, s, r, max)));
+                    checks.add(new Check("replaceIgnoreCase(" + qr + "," + max + ")", t -> t.replaceIgnoreCase(s, r, max),
+                            t -> StringUtils.replaceIgnoreCase(t, s, r, max)));
+                }
+                checks.add(new Check("replaceOnce(" + qr + ")", t -> t.replaceOnce(s, r), t -> StringUtils.replaceOnce(t, s, r)));
+                checks.add(new Check("replaceIgnoreCase(" + qr + ")", t -> t.replaceIgnoreCase(s, r),
+                        t -> StringUtils.replaceIgnoreCase(t, s, r)));
+                checks.add(new Check("replaceOnceIgnoreCase(" + qr + ")", t -> t.replaceOnceIgnoreCase(s, r),
+                        t -> StringUtils.replaceOnceIgnoreCase(t, s, r)));
+            }
+            checks.add(new Check("remove(" + q + ")", t -> t.remove(s), t -> StringUtils.remove(t, s)));
+            checks.add(new Check("removeIgnoreCase(" + q + ")", t -> t.removeIgnoreCase(s), t -> StringUtils.removeIgnoreCase(t, s)));
+            for (String r : DELIMITER_REPLACEMENTS) {
+                String qr = q + "," + show(r);
+                checks.add(new Check("replaceBefore(" + qr + ")", t -> t.replaceBefore(s, r), t -> StringsKt.replaceBefore(t, s, r, t)));
+                checks.add(new Check("replaceAfter(" + qr + ")", t -> t.replaceAfter(s, r), t -> StringsKt.replaceAfter(t, s, r, t)));
+                checks.add(new Check("replaceBeforeLast(" + qr + ")", t -> t.replaceBeforeLast(s, r),
+                        t -> StringsKt.replaceBeforeLast(t, s, r, t)));
+                checks.add(new Check("replaceAfterLast(" + qr + ")", t -> t.replaceAfterLast(s, r),
+                        t -> StringsKt.replaceAfterLast(t, s, r, t)));
+                checks.add(new Check("replaceBefore(" + qr + ",#)", t -> t.replaceBefore(s, r, "#"),
+                        t -> StringsKt.replaceBefore(t, s, r, "#")));
+                checks.add(new Check("replaceAfter(" + qr + ",#)", t -> t.replaceAfter(s, r, "#"),
+                        t -> StringsKt.replaceAfter(t, s, r, "#")));
+                checks.add(new Check("replaceBeforeLast(" + qr + ",#)", t -> t.replaceBeforeLast(s, r, "#"),
+                        t -> StringsKt.replaceBeforeLast(t, s, r, "#")));
+                checks.add(new Check("replaceAfterLast(" + qr + ",#)", t -> t.replaceAfterLast(s, r, "#"),
+                        t -> StringsKt.replaceAfterLast(t, s, r, "#")));
+            }
+        }
+        for (char c : REMOVE_CHARS) {
+            checks.add(new Check("remove('" + Integer.toHexString(c) + "')", t -> t.remove(c), t -> StringUtils.remove(t, c)));
+        }
+        for (String[][] pair : EACH) {
+            String q = show(java.util.Arrays.toString(pair[0])) + "->" + show(java.util.Arrays.toString(pair[1]));
+            checks.add(new Check("replaceEach" + q, t -> t.replaceEach(pair[0], pair[1]),
+                    t -> StringUtils.replaceEach(t, pair[0], pair[1])));
+            checks.add(new Check("replaceEachRepeatedly" + q, t -> t.replaceEachRepeatedly(pair[0], pair[1]),
+                    t -> StringUtils.replaceEachRepeatedly(t, pair[0], pair[1])));
+        }
+        for (String sc : SEARCH_CHARS) {
+            for (String rc : REPLACE_CHARS) {
+                checks.add(new Check("replaceChars(" + show(sc) + "," + show(rc) + ")", t -> t.replaceChars(sc, rc),
+                        t -> StringUtils.replaceChars(t, sc, rc)));
+            }
+        }
+        for (int f = 0; f < FIRST.length; f++) {
+            IntUnaryOperator op = FIRST[f];
+            checks.add(new Check("replaceFirstChar(" + FIRST_NAMES[f] + ")", t -> t.replaceFirstChar(op), t -> ktFirst(t, op)));
+        }
+        return checks;
+    }
+
+    private static List<Check> checksB() {
+        List<Check> checks = new ArrayList<>();
+        for (String s : SEARCHES_B) {
+            String q = show(s);
+            for (String r : REPLACEMENTS_B) {
+                String qr = q + "," + show(r);
+                for (int max : new int[] {-1, 1}) {
+                    checks.add(new Check("B replaceIgnoreCase(" + qr + "," + max + ")", t -> t.replaceIgnoreCase(s, r, max),
+                            t -> StringUtils.replaceIgnoreCase(t, s, r, max)));
+                }
+                checks.add(new Check("B replaceIgnoreCase(" + qr + ")", t -> t.replaceIgnoreCase(s, r),
+                        t -> StringUtils.replaceIgnoreCase(t, s, r)));
+                checks.add(new Check("B replaceOnceIgnoreCase(" + qr + ")", t -> t.replaceOnceIgnoreCase(s, r),
+                        t -> StringUtils.replaceOnceIgnoreCase(t, s, r)));
+                checks.add(new Check("B replace(" + qr + ",-1)", t -> t.replace(s, r, -1), t -> StringUtils.replace(t, s, r, -1)));
+            }
+            checks.add(new Check("B removeIgnoreCase(" + q + ")", t -> t.removeIgnoreCase(s), t -> StringUtils.removeIgnoreCase(t, s)));
+        }
+        return checks;
+    }
+
+    private static int run(List<Check> checks, List<String> texts) {
+        for (Check check : checks) {
+            long mismatches = 0;
+            String first = "-";
+            for (String text : texts) {
+                Object mine = result(check.mine, text), donor = result(check.donor, text);
+                boolean same = Objects.equals(mine, donor);
+                boolean kept = !(mine instanceof String m) || !m.equals(text) || m == text;
+                if ((!same || !kept) && mismatches++ == 0) {
+                    first = show(cut(text)) + " -> " + show(cut(String.valueOf(mine))) + " vs "
+                            + show(cut(String.valueOf(donor))) + (kept ? "" : " (equal, not this)");
+                }
+            }
+            failures += mismatches == 0 ? 0 : 1;
+            if (mismatches != 0) System.out.println(check.name + "\t" + texts.size() + "\t" + mismatches + "\t" + first);
+        }
+        return checks.size();
+    }
+
+    private static int translateChecks(List<String> texts, Path file) throws Exception {
+        ByteBuffer in = ByteBuffer.wrap(Files.readAllBytes(file)).order(ByteOrder.LITTLE_ENDIAN);
+        int count = in.getInt(), tables = in.getInt();
+        long corpusMismatch = 0;
+        for (int i = 0; i < count; i++) {
+            if (i >= texts.size() || !texts.get(i).equals(read(in))) corpusMismatch++;
+        }
+        if (count != texts.size() || corpusMismatch != 0) {
+            failures++;
+            System.out.println("translate corpus\t" + count + "\t" + corpusMismatch + "\tpython corpus differs");
+            return 1;
+        }
+        List<Map<Integer, String>> mine = tables();
+        if (mine.size() != tables) {
+            failures++;
+            System.out.println("translate tables\t" + tables + "\t1\tpython has another table count");
+            return 1;
+        }
+        for (int t = 0; t < tables; t++) {
+            Map<Integer, String> table = mine.get(t);
+            long mismatches = 0;
+            String first = "-";
+            for (String text : texts) {
+                String donor = read(in);
+                Object answer = result(s -> s.translate(table), text);
+                boolean kept = !(answer instanceof String m) || !m.equals(text) || m == text;
+                if ((!donor.equals(answer) || !kept) && mismatches++ == 0) {
+                    first = show(cut(text)) + " -> " + show(cut(String.valueOf(answer))) + " vs " + show(cut(donor))
+                            + (kept ? "" : " (equal, not this)");
+                }
+            }
+            failures += mismatches == 0 ? 0 : 1;
+            System.out.println("translate(table " + t + ")\t" + texts.size() + "\t" + mismatches + "\t" + first);
+        }
+        return tables;
+    }
+
+    /** The translate tables of python_oracle.py, in its order; HashMap keeps a null value as a key. */
+    private static List<Map<Integer, String>> tables() {
+        List<Map<Integer, String>> out = new ArrayList<>();
+        out.add(map('a', "xy", 'b', null, ',', ""));
+        out.add(map(0x1F600, "P", (int) HIGH, "h", 'A', "A"));
+        out.add(map('x', "" + HIGH, 'a', "" + LOW));
+        out.add(map());
+        out.add(map('a', "a", 'b', "b"));
+        out.add(map((int) LOW, null, 'x', "xx", (int) HIGH, PAIR));
+        return out;
+    }
+
+    private static Map<Integer, String> map(Object... keysAndValues) {
+        Map<Integer, String> out = new HashMap<>();
+        for (int i = 0; i < keysAndValues.length; i += 2) {
+            Object key = keysAndValues[i];
+            out.put(key instanceof Character c ? (int) c : (Integer) key, (String) keysAndValues[i + 1]);
+        }
+        return out;
+    }
+
+    private static int nullChecks() {
+        String[] one = {"a"};
+        List<Runnable> calls = new ArrayList<>();
+        for (String text : new String[] {"", "abc"}) {
+            calls.add(() -> text.replace(null, "x", 1));
+            calls.add(() -> text.replace("a", null, 1));
+            calls.add(() -> text.replaceOnce(null, "x"));
+            calls.add(() -> text.replaceOnce("a", null));
+            calls.add(() -> text.replaceIgnoreCase(null, "x"));
+            calls.add(() -> text.replaceIgnoreCase("a", null));
+            calls.add(() -> text.replaceIgnoreCase(null, "x", -1));
+            calls.add(() -> text.replaceIgnoreCase("a", null, 0));
+            calls.add(() -> text.replaceOnceIgnoreCase(null, "x"));
+            calls.add(() -> text.replaceOnceIgnoreCase("a", null));
+            calls.add(() -> text.remove((String) null));
+            calls.add(() -> text.removeIgnoreCase(null));
+            calls.add(() -> text.replaceEach(null, one));
+            calls.add(() -> text.replaceEach(one, null));
+            calls.add(() -> text.replaceEachRepeatedly(null, one));
+            calls.add(() -> text.replaceEachRepeatedly(one, null));
+            calls.add(() -> text.replaceChars(null, "x"));
+            calls.add(() -> text.replaceChars("a", null));
+            calls.add(() -> text.replaceFirstChar(null));
+            calls.add(() -> text.replaceBefore(null, "x"));
+            calls.add(() -> text.replaceBefore("a", null));
+            calls.add(() -> text.replaceAfter(null, "x", "#"));
+            calls.add(() -> text.replaceAfter("a", null, "#"));
+            calls.add(() -> text.replaceBeforeLast(null, "x"));
+            calls.add(() -> text.replaceBeforeLast("a", null));
+            calls.add(() -> text.replaceAfterLast(null, "x", "#"));
+            calls.add(() -> text.replaceAfterLast("a", null, "#"));
+            calls.add(() -> text.translate(null));
+        }
+        long missing = 0;
+        for (Runnable call : calls) {
+            try {
+                call.run();
+                missing++;
+            } catch (NullPointerException expected) {
+                // the rule
+            }
+        }
+        failures += missing == 0 ? 0 : 1;
+        System.out.println("null arguments throw NullPointerException\t" + calls.size() + "\t" + missing + "\t-");
+        return 1;
+    }
+
+    private record Check(String name, Function<String, Object> mine, Function<String, Object> donor) {}
+
+    private static String ktFirst(String text, IntUnaryOperator op) {
+        Function1<Character, Character> transform = c -> (char) op.applyAsInt(c);
+        try {
+            return (String) KT_FIRST.invoke(null, text, transform);
+        } catch (InvocationTargetException e) {
+            throw (RuntimeException) e.getCause();
+        } catch (IllegalAccessException e) {
+            throw new IllegalStateException(e);
+        }
+    }
+
+    private static Object result(Function<String, Object> f, String text) {
+        try {
+            return f.apply(text);
+        } catch (RuntimeException e) {
+            return e.getClass().getSimpleName();
+        }
+    }
+
+    private static String read(ByteBuffer in) {
+        char[] units = new char[in.getInt()];
+        for (int i = 0; i < units.length; i++) units[i] = in.getChar();
+        return new String(units);
+    }
+
+    private static List<String> corpus(char[] alphabet, String[] tails) {
+        List<String> out = new ArrayList<>();
+        for (int length = 0; length <= 4; length++) {
+            int total = (int) Math.pow(alphabet.length, length);
+            for (int code = 0; code < total; code++) {
+                char[] units = new char[length];
+                int rest = code;
+                for (int i = 0; i < length; i++) {
+                    units[i] = alphabet[rest % alphabet.length];
+                    rest /= alphabet.length;
+                }
+                out.add(new String(units));
+            }
+        }
+        for (int k = 505; k <= 1030; k += (k == 520 ? 498 : 1)) {
+            for (String tail : tails) {
+                out.add(new String(("x".repeat(k) + tail).toCharArray()));
+                out.add(new String((tail + "x".repeat(k)).toCharArray()));
+            }
+        }
+        return out;
+    }
+
+    private static String cut(String s) {
+        return s.length() > 40 ? s.substring(0, 20) + "..." + s.substring(s.length() - 6) : s;
+    }
+
+    private static String show(String s) {
+        StringBuilder out = new StringBuilder("\"");
+        for (char c : s.toCharArray()) out.append(c >= 32 && c < 127 ? String.valueOf(c) : String.format("<%04X>", (int) c));
+        return out.append('"').toString();
+    }
+}

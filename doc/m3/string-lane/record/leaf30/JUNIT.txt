@@ -1,0 +1,7 @@
+flat -XX:+CompactStrings	277 tests found,0 tests skipped,0 tests aborted,277 tests successful,0 tests failed
+flat -XX:-CompactStrings	277 tests found,0 tests skipped,0 tests aborted,277 tests successful,0 tests failed
+m3-facts -XX:+CompactStrings	277 tests found,0 tests skipped,0 tests aborted,277 tests successful,0 tests failed
+m3-facts -XX:-CompactStrings	277 tests found,0 tests skipped,0 tests aborted,277 tests successful,0 tests failed
+m3-scan -XX:+CompactStrings	277 tests found,0 tests skipped,0 tests aborted,277 tests successful,0 tests failed
+m3-scan -XX:-CompactStrings	277 tests found,0 tests skipped,0 tests aborted,277 tests successful,0 tests failed
+junit exit 0

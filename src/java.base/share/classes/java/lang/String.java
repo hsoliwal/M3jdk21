@@ -7571,6 +7571,632 @@ public final class String
     }
 
     /**
+     * Returns this string with the first {@code max} occurrences of {@code search} replaced by
+     * {@code replacement}, found from left to right without overlap; a negative {@code max}
+     * replaces every occurrence. Unlike {@link #replace(CharSequence, CharSequence)}, an empty
+     * {@code search} occurs nowhere, so it gives this string, as do a {@code max} of 0 and an
+     * empty string.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   search        the text to replace.
+     * @param   replacement   the text put in its place.
+     * @param   max           the most occurrences replaced, or a negative value for all.
+     * @return  the replaced text, or this string when nothing changes.
+     * @throws  NullPointerException if {@code search} or {@code replacement} is {@code null}.
+     * @since   21
+     */
+    public String replace(String search, String replacement, int max) {
+        return replaceOccurrences(search, replacement, max, false);
+    }
+
+    /**
+     * Returns this string with the first occurrence of {@code search} replaced by
+     * {@code replacement}; an empty {@code search} occurs nowhere.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   search        the text to replace.
+     * @param   replacement   the text put in its place.
+     * @return  the replaced text, or this string when nothing changes.
+     * @throws  NullPointerException if {@code search} or {@code replacement} is {@code null}.
+     * @since   21
+     */
+    public String replaceOnce(String search, String replacement) {
+        return replaceOccurrences(search, replacement, 1, false);
+    }
+
+    /**
+     * Returns this string with every occurrence of {@code search} replaced by
+     * {@code replacement}, found from left to right without overlap and ignoring case as
+     * {@link #regionMatches(boolean, int, String, int, int)} compares; an empty {@code search}
+     * occurs nowhere.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   search        the text to replace, in any case.
+     * @param   replacement   the text put in its place.
+     * @return  the replaced text, or this string when nothing changes.
+     * @throws  NullPointerException if {@code search} or {@code replacement} is {@code null}.
+     * @since   21
+     */
+    public String replaceIgnoreCase(String search, String replacement) {
+        return replaceOccurrences(search, replacement, -1, true);
+    }
+
+    /**
+     * Returns this string with the first {@code max} occurrences of {@code search} replaced by
+     * {@code replacement}, found from left to right without overlap and ignoring case as
+     * {@link #regionMatches(boolean, int, String, int, int)} compares; a negative {@code max}
+     * replaces every occurrence, and an empty {@code search} occurs nowhere.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   search        the text to replace, in any case.
+     * @param   replacement   the text put in its place.
+     * @param   max           the most occurrences replaced, or a negative value for all.
+     * @return  the replaced text, or this string when nothing changes.
+     * @throws  NullPointerException if {@code search} or {@code replacement} is {@code null}.
+     * @since   21
+     */
+    public String replaceIgnoreCase(String search, String replacement, int max) {
+        return replaceOccurrences(search, replacement, max, true);
+    }
+
+    /**
+     * Returns this string with the first occurrence of {@code search}, ignoring case as
+     * {@link #regionMatches(boolean, int, String, int, int)} compares, replaced by
+     * {@code replacement}; an empty {@code search} occurs nowhere.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   search        the text to replace, in any case.
+     * @param   replacement   the text put in its place.
+     * @return  the replaced text, or this string when nothing changes.
+     * @throws  NullPointerException if {@code search} or {@code replacement} is {@code null}.
+     * @since   21
+     */
+    public String replaceOnceIgnoreCase(String search, String replacement) {
+        return replaceOccurrences(search, replacement, 1, true);
+    }
+
+    /**
+     * Returns this string without every occurrence of {@code remove}, found from left to right
+     * without overlap; an empty {@code remove} occurs nowhere.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   remove   the text to remove.
+     * @return  the remaining text, or this string when nothing is removed.
+     * @throws  NullPointerException if {@code remove} is {@code null}.
+     * @since   21
+     */
+    public String remove(String remove) {
+        return replaceOccurrences(remove, "", -1, false);
+    }
+
+    /**
+     * Returns this string without every occurrence of {@code remove}, found from left to right
+     * without overlap and ignoring case as {@link #regionMatches(boolean, int, String, int, int)}
+     * compares; an empty {@code remove} occurs nowhere.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   remove   the text to remove, in any case.
+     * @return  the remaining text, or this string when nothing is removed.
+     * @throws  NullPointerException if {@code remove} is {@code null}.
+     * @since   21
+     */
+    public String removeIgnoreCase(String remove) {
+        return replaceOccurrences(remove, "", -1, true);
+    }
+
+    /**
+     * Returns this string without every occurrence of the character {@code remove}, a
+     * {@code char} value: a surrogate value removes that unit wherever it occurs.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   remove   the character to remove.
+     * @return  the remaining text, or this string when nothing is removed.
+     * @since   21
+     */
+    public String remove(char remove) {
+        return replaceOccurrences(String.valueOf(remove), "", -1, false);
+    }
+
+    /**
+     * The replace and remove methods: the first {@code max} (all when negative) occurrences of
+     * {@code search}, from left to right without overlap, found by {@link #indexOf(String, int)}
+     * or, when {@code ignoreCase}, by {@link #indexOfIgnoreCase(CharSequence, int)}, are replaced
+     * by {@code replacement}. An occurrence equal to the replacement is left as it is.
+     */
+    private String replaceOccurrences(String search, String replacement, int max,
+            boolean ignoreCase) {
+        java.util.Objects.requireNonNull(search, "search");
+        java.util.Objects.requireNonNull(replacement, "replacement");
+        if (isEmpty() || search.isEmpty() || max == 0) return this;
+        if (!ignoreCase && (search.equals(replacement) || !mayContainUnit(search.charAt(0)))) {
+            return this;
+        }
+        int count = search.length();
+        boolean sameLength = count == replacement.length();
+        Splicer edits = new Splicer(this);
+        int at = ignoreCase ? indexOfIgnoreCase(search, 0) : indexOf(search);
+        for (int left = max; at >= 0; ) {
+            if (!ignoreCase || !sameLength || !regionMatches(at, replacement, 0, count)) {
+                edits.edit(at, at + count, replacement);
+            }
+            if (--left == 0) break;
+            at = ignoreCase ? indexOfIgnoreCase(search, at + count) : indexOf(search, at + count);
+        }
+        return edits.result();
+    }
+
+    /** Whether prepared M3 facts leave open that {@code unit} occurs in this string. */
+    private boolean mayContainUnit(char unit) {
+        M3String storage = m3();
+        M3StringFacts facts = storage == null ? null : storage.factsIfPrepared();
+        return facts == null || facts.mayContainCodeUnit(unit);
+    }
+
+    /**
+     * Returns this string with every occurrence of each {@code searchList[i]} replaced by
+     * {@code replacementList[i]} in one pass from left to right: at each point the earliest
+     * occurrence of any pair is replaced (the lowest index wins a tie) and the search goes on after
+     * it, so a replacement is never searched again. A pair whose search is {@code null} or empty,
+     * or whose replacement is {@code null}, is left out. An empty string or an empty array gives
+     * this string.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   searchList        the texts to replace.
+     * @param   replacementList   the texts put in their places, by index.
+     * @return  the replaced text, or this string when nothing changes.
+     * @throws  NullPointerException if {@code searchList} or {@code replacementList} is
+     *          {@code null}.
+     * @throws  IllegalArgumentException if this string and both arrays are not empty and the
+     *          arrays differ in length.
+     * @since   21
+     */
+    public String replaceEach(String[] searchList, String[] replacementList) {
+        String result = replacedEach(searchList, replacementList);
+        if (result == null || result.length() == length() && result.equals(this)) return this;
+        return result;
+    }
+
+    /**
+     * Returns this string with {@link #replaceEach(String[], String[])} applied again to its own
+     * result until a pass replaces nothing, for at most six passes.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   searchList        the texts to replace.
+     * @param   replacementList   the texts put in their places, by index.
+     * @return  the text after the last pass, or this string when the first pass replaces nothing.
+     * @throws  NullPointerException if {@code searchList} or {@code replacementList} is
+     *          {@code null}.
+     * @throws  IllegalArgumentException if this string and both arrays are not empty and the
+     *          arrays differ in length.
+     * @throws  IllegalStateException if the sixth pass still replaces an occurrence, as a cycle of
+     *          replacements or a text replaced by itself does.
+     * @since   21
+     */
+    public String replaceEachRepeatedly(String[] searchList, String[] replacementList) {
+        String result = this;
+        for (int pass = 0; pass < EACH_PASSES; pass++) {
+            String next = result.replacedEach(searchList, replacementList);
+            if (next == result) return result;
+            if (next != null) result = next;
+        }
+        throw new IllegalStateException("Replacements still occur after " + EACH_PASSES
+                + " passes");
+    }
+
+    /** The passes {@link #replaceEachRepeatedly(String[], String[])} makes before it gives up. */
+    private static final int EACH_PASSES = 6;
+
+    /**
+     * One pass of {@link #replaceEach(String[], String[])}: this string when no pair occurs,
+     * {@code null} when each occurrence replaced equals its replacement, else the new text. The
+     * next occurrence of each pair is kept, and searched again only once the pass is past it.
+     */
+    private String replacedEach(String[] searchList, String[] replacementList) {
+        java.util.Objects.requireNonNull(searchList, "searchList");
+        java.util.Objects.requireNonNull(replacementList, "replacementList");
+        int pairs = searchList.length;
+        if (isEmpty() || pairs == 0 || replacementList.length == 0) return this;
+        if (pairs != replacementList.length) {
+            throw new IllegalArgumentException("Search and replacement arrays differ in length: "
+                    + pairs + " vs " + replacementList.length);
+        }
+        int[] next = new int[pairs];
+        for (int i = 0; i < pairs; i++) {
+            String search = searchList[i];
+            boolean live = search != null && !search.isEmpty() && replacementList[i] != null
+                    && mayContainUnit(search.charAt(0));
+            next[i] = live ? indexOf(search) : -1;
+        }
+        Splicer edits = new Splicer(this);
+        boolean replaced = false;
+        for (int pair = earliest(next); pair >= 0; pair = earliest(next)) {
+            String search = searchList[pair];
+            int end = next[pair] + search.length();
+            if (!search.equals(replacementList[pair])) {
+                edits.edit(next[pair], end, replacementList[pair]);
+            }
+            replaced = true;
+            for (int i = 0; i < pairs; i++) {
+                if (next[i] >= 0 && next[i] < end) next[i] = indexOf(searchList[i], end);
+            }
+        }
+        String result = edits.result();
+        return result == this && replaced ? null : result;
+    }
+
+    /** The index of the least non-negative value of {@code next}, the first on a tie, or -1. */
+    private static int earliest(int[] next) {
+        int best = -1;
+        for (int i = 0; i < next.length; i++) {
+            if (next[i] >= 0 && (best < 0 || next[i] < next[best])) best = i;
+        }
+        return best;
+    }
+
+    /**
+     * Returns this string with each character ({@code char} value) that occurs in
+     * {@code searchChars} replaced by the character at the same index of {@code replaceChars},
+     * the index of its first occurrence in {@code searchChars}; it is removed when
+     * {@code replaceChars} is not that long.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API. For one character,
+     * {@link #replace(char, char)} is the same operation.
+     *
+     * @param   searchChars    the characters to replace.
+     * @param   replaceChars   the characters put in their places, by index.
+     * @return  the replaced text, or this string when nothing changes.
+     * @throws  NullPointerException if {@code searchChars} or {@code replaceChars} is
+     *          {@code null}.
+     * @since   21
+     */
+    public String replaceChars(String searchChars, String replaceChars) {
+        java.util.Objects.requireNonNull(searchChars, "searchChars");
+        java.util.Objects.requireNonNull(replaceChars, "replaceChars");
+        if (isEmpty() || searchChars.isEmpty()) return this;
+        char[] set = searchChars.toCharArray();
+        M3String storage = m3();
+        M3StringFacts facts = storage == null ? null : storage.factsIfPrepared();
+        if (facts != null && noUnitMayOccur(facts, set)) return this;
+        long low = asciiMask(set, 0);
+        long high = asciiMask(set, 64);
+        boolean wide = hasWideUnit(set);
+        int length = length();
+        Splicer edits = new Splicer(this);
+        char[] window = new char[Math.min(length, SCAN_WINDOW)];
+        for (int from = 0; from < length; from += window.length) {
+            int count = Math.min(window.length, length - from);
+            getChars(from, from + count, window, 0);
+            for (int k = 0; k < count; k++) {
+                char unit = window[k];
+                int at = (unit < 128 ? inMask(unit, low, high) : wide)
+                        ? searchChars.indexOf(unit) : -1;
+                if (at >= replaceChars.length()) {
+                    edits.edit(from + k, from + k + 1, "");
+                } else if (at >= 0 && replaceChars.charAt(at) != unit) {
+                    edits.edit(from + k, replaceChars.charAt(at));
+                }
+            }
+        }
+        return edits.result();
+    }
+
+    /**
+     * Returns this string with its first character ({@code char} value) replaced by the value of
+     * {@code transform} for it, narrowed to a {@code char} as by a cast; an empty string gives
+     * itself.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   transform   the function of the first character.
+     * @return  the replaced text, or this string when nothing changes.
+     * @throws  NullPointerException if {@code transform} is {@code null}.
+     * @since   21
+     */
+    public String replaceFirstChar(java.util.function.IntUnaryOperator transform) {
+        java.util.Objects.requireNonNull(transform, "transform");
+        if (isEmpty()) return this;
+        char first = charAt(0);
+        char mapped = (char) transform.applyAsInt(first);
+        return mapped == first ? this : spliced(0, 1, String.valueOf(mapped));
+    }
+
+    /**
+     * Returns this string with the part before the first occurrence of {@code delimiter} replaced
+     * by {@code replacement}, or this string when the delimiter does not occur.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   delimiter     the delimiter.
+     * @param   replacement   the text put in place of the part.
+     * @return  the replaced text, or this string when nothing changes.
+     * @throws  NullPointerException if {@code delimiter} or {@code replacement} is {@code null}.
+     * @since   21
+     */
+    public String replaceBefore(String delimiter, String replacement) {
+        return replaceBefore(delimiter, replacement, this);
+    }
+
+    /**
+     * Returns this string with the part before the first occurrence of {@code delimiter} replaced
+     * by {@code replacement}, or {@code missingDelimiterValue} when the delimiter does not occur.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   delimiter               the delimiter.
+     * @param   replacement             the text put in place of the part.
+     * @param   missingDelimiterValue   the answer when the delimiter does not occur.
+     * @return  the replaced text (this string when nothing changes), or
+     *          {@code missingDelimiterValue}.
+     * @throws  NullPointerException if {@code delimiter} or {@code replacement} is {@code null}.
+     * @since   21
+     */
+    public String replaceBefore(String delimiter, String replacement,
+            String missingDelimiterValue) {
+        java.util.Objects.requireNonNull(replacement, "replacement");
+        int at = indexOf(delimiter);
+        return at < 0 ? missingDelimiterValue : spliced(0, at, replacement);
+    }
+
+    /**
+     * Returns this string with the part after the first occurrence of {@code delimiter} replaced
+     * by {@code replacement}, or this string when the delimiter does not occur.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   delimiter     the delimiter.
+     * @param   replacement   the text put in place of the part.
+     * @return  the replaced text, or this string when nothing changes.
+     * @throws  NullPointerException if {@code delimiter} or {@code replacement} is {@code null}.
+     * @since   21
+     */
+    public String replaceAfter(String delimiter, String replacement) {
+        return replaceAfter(delimiter, replacement, this);
+    }
+
+    /**
+     * Returns this string with the part after the first occurrence of {@code delimiter} replaced
+     * by {@code replacement}, or {@code missingDelimiterValue} when the delimiter does not occur.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   delimiter               the delimiter.
+     * @param   replacement             the text put in place of the part.
+     * @param   missingDelimiterValue   the answer when the delimiter does not occur.
+     * @return  the replaced text (this string when nothing changes), or
+     *          {@code missingDelimiterValue}.
+     * @throws  NullPointerException if {@code delimiter} or {@code replacement} is {@code null}.
+     * @since   21
+     */
+    public String replaceAfter(String delimiter, String replacement,
+            String missingDelimiterValue) {
+        java.util.Objects.requireNonNull(replacement, "replacement");
+        int at = indexOf(delimiter);
+        return at < 0 ? missingDelimiterValue
+                : spliced(at + delimiter.length(), length(), replacement);
+    }
+
+    /**
+     * Returns this string with the part before the last occurrence of {@code delimiter} that
+     * starts no later than the last character replaced by {@code replacement}, or this string
+     * when there is none (so an empty delimiter is found at the last character, and not at all in
+     * an empty string).
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   delimiter     the delimiter.
+     * @param   replacement   the text put in place of the part.
+     * @return  the replaced text, or this string when nothing changes.
+     * @throws  NullPointerException if {@code delimiter} or {@code replacement} is {@code null}.
+     * @since   21
+     */
+    public String replaceBeforeLast(String delimiter, String replacement) {
+        return replaceBeforeLast(delimiter, replacement, this);
+    }
+
+    /**
+     * Returns this string with the part before the last occurrence of {@code delimiter} that
+     * starts no later than the last character replaced by {@code replacement}, or
+     * {@code missingDelimiterValue} when there is none (so an empty delimiter is found at the
+     * last character, and not at all in an empty string).
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   delimiter               the delimiter.
+     * @param   replacement             the text put in place of the part.
+     * @param   missingDelimiterValue   the answer when the delimiter does not occur.
+     * @return  the replaced text (this string when nothing changes), or
+     *          {@code missingDelimiterValue}.
+     * @throws  NullPointerException if {@code delimiter} or {@code replacement} is {@code null}.
+     * @since   21
+     */
+    public String replaceBeforeLast(String delimiter, String replacement,
+            String missingDelimiterValue) {
+        java.util.Objects.requireNonNull(replacement, "replacement");
+        int at = lastIndexOf(delimiter, length() - 1);
+        return at < 0 ? missingDelimiterValue : spliced(0, at, replacement);
+    }
+
+    /**
+     * Returns this string with the part after the last occurrence of {@code delimiter} that
+     * starts no later than the last character replaced by {@code replacement}, or this string
+     * when there is none (so an empty delimiter is found at the last character, and not at all in
+     * an empty string).
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   delimiter     the delimiter.
+     * @param   replacement   the text put in place of the part.
+     * @return  the replaced text, or this string when nothing changes.
+     * @throws  NullPointerException if {@code delimiter} or {@code replacement} is {@code null}.
+     * @since   21
+     */
+    public String replaceAfterLast(String delimiter, String replacement) {
+        return replaceAfterLast(delimiter, replacement, this);
+    }
+
+    /**
+     * Returns this string with the part after the last occurrence of {@code delimiter} that
+     * starts no later than the last character replaced by {@code replacement}, or
+     * {@code missingDelimiterValue} when there is none (so an empty delimiter is found at the
+     * last character, and not at all in an empty string).
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   delimiter               the delimiter.
+     * @param   replacement             the text put in place of the part.
+     * @param   missingDelimiterValue   the answer when the delimiter does not occur.
+     * @return  the replaced text (this string when nothing changes), or
+     *          {@code missingDelimiterValue}.
+     * @throws  NullPointerException if {@code delimiter} or {@code replacement} is {@code null}.
+     * @since   21
+     */
+    public String replaceAfterLast(String delimiter, String replacement,
+            String missingDelimiterValue) {
+        java.util.Objects.requireNonNull(replacement, "replacement");
+        int at = lastIndexOf(delimiter, length() - 1);
+        return at < 0 ? missingDelimiterValue
+                : spliced(at + delimiter.length(), length(), replacement);
+    }
+
+    /**
+     * Returns this string with each character (Unicode code point) mapped through {@code table},
+     * as Python's {@code str.translate} maps it: a code point that is not a key is kept, one whose
+     * key maps to {@code null} is removed, and any other is replaced by the string it maps to. A
+     * surrogate pair is one code point; a lone surrogate is a code point of its own.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   table   the mapping from code points to their replacements.
+     * @return  the translated text, or this string when nothing changes.
+     * @throws  NullPointerException if {@code table} is {@code null}.
+     * @since   21
+     */
+    public String translate(java.util.Map<Integer, String> table) {
+        java.util.Objects.requireNonNull(table, "table");
+        int length = length();
+        Splicer edits = new Splicer(this);
+        char[] window = new char[Math.min(length, SCAN_WINDOW)];
+        for (int from = 0; from < length; ) {
+            int to = Math.min(length, from + window.length);
+            getChars(from, to, window, 0);
+            int count = to - from;
+            if (to < length && count > 1 && Character.isHighSurrogate(window[count - 1])) count--;
+            for (int at = 0; at < count; ) {
+                int point = Character.codePointAt(window, at, count);
+                int width = Character.charCount(point);
+                String mapped = table.get(point);
+                boolean kept = mapped == null ? !table.containsKey(point)
+                        : mapped.length() == width && mapped.charAt(0) == window[at]
+                                && (width == 1 || mapped.charAt(1) == window[at + 1]);
+                if (!kept) edits.edit(from + at, from + at + width, mapped == null ? "" : mapped);
+                at += width;
+            }
+            from += count;
+        }
+        String result = edits.result();
+        return result.length() == length && result.equals(this) ? this : result;
+    }
+
+    /**
+     * This string with the units from {@code start} to {@code end} replaced by
+     * {@code replacement}: this string when that changes nothing, a range of it when the
+     * replacement is empty and the part touches an end, else the replacement between the ranges
+     * before and after the part.
+     */
+    private String spliced(int start, int end, String replacement) {
+        int length = length();
+        int count = replacement.length();
+        if (end - start == count && regionMatches(start, replacement, 0, count)) return this;
+        if (start == 0 && end == length) return replacement;
+        if (count == 0 && start == 0) return substring(end);
+        if (count == 0 && end == length) return substring(0, start);
+        if (m3() != null) return substring(0, start).concat(replacement).concat(substring(end));
+        return new StringBuilder(length - (end - start) + count).append(this, 0, start)
+                .append(replacement).append(this, end, length).toString();
+    }
+
+    /**
+     * The edits of a builder method, given from left to right: one edit makes a
+     * {@link #spliced(int, int, String)} answer; more are written into one builder, with the
+     * ranges of the text between them.
+     */
+    private static final class Splicer {
+        private final String text;
+        private StringBuilder out;
+        private int copied;
+        private int start = -1;
+        private int end;
+        private String replacement;
+
+        Splicer(String text) {
+            this.text = text;
+        }
+
+        /** Replaces the units from {@code from} to {@code to}, after every earlier edit. */
+        void edit(int from, int to, String with) {
+            if (out == null && start < 0) {
+                start = from;
+                end = to;
+                replacement = with;
+                return;
+            }
+            if (out == null) {
+                out = new StringBuilder(text.length()).append(text, 0, start).append(replacement);
+                copied = end;
+            }
+            out.append(text, copied, from).append(with);
+            copied = to;
+        }
+
+        /** Replaces the unit at {@code index} by {@code unit}, after every earlier edit. */
+        void edit(int index, char unit) {
+            if (out == null) {
+                edit(index, index + 1, String.valueOf(unit));
+                return;
+            }
+            out.append(text, copied, index).append(unit);
+            copied = index + 1;
+        }
+
+        /** The text with every edit made. */
+        String result() {
+            if (out != null) return out.append(text, copied, text.length()).toString();
+            return start < 0 ? text : text.spliced(start, end, replacement);
+        }
+    }
+
+    /**
      * Returns true if and only if this string contains the specified
      * sequence of char values.
      *
