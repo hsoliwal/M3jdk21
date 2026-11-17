@@ -9,10 +9,10 @@ import java.util.Objects;
  *
  * <p>This is not a lexer. The authoritative parser supplies disjoint, ordered, half-open UTF-16
  * token spans and a code-token admission lane. The projector neither reparses source nor creates
- * substring objects: it only uses {@link M3StaticGrammarLexicon#exact(CharSequence, int, int)}.
+ * substring objects: it only uses {@link StaticGrammarLexicon#exact(CharSequence, int, int)}.
  * Skipped and unknown entries remain zero in the primitive output lane, which is NOT
- * a complete {@link M3TokenCursor} input: token regex patterns can match literal {@code <0>}.
- * Use {@link #projectComplete(M3StaticGrammarLexicon, CharSequence, int[], int[], byte[])}
+ * a complete {@link TokenCursor} input: token regex patterns can match literal {@code <0>}.
+ * Use {@link #projectComplete(StaticGrammarLexicon, CharSequence, int[], int[], byte[])}
  * for a token cursor, or retain {@link #project} for intentional sparse classification.
  * Contextual keywords are only candidates; semantic classification belongs to the parser.</p>
  *
@@ -57,7 +57,8 @@ final class GrammarTokenProjection {
      */
     static TokenCursor projectCompleteCursor(StaticGrammarLexicon grammar,
             CharSequence source, int[] starts, int[] ends, byte[] admission) {
-        return TokenCursor.ownedProjection(projectComplete(grammar, source, starts, ends, admission));
+        return TokenCursor.ownedProjection(projectComplete(grammar, source, starts, ends,
+                admission));
     }
 
     /**
@@ -99,5 +100,22 @@ final class GrammarTokenProjection {
             }
         }
         return projected;
+    }
+
+    /**
+     * The same original geometry check, with regex validators prepared once per
+     * grammar image. Existing exact-literal projection retains its original path.
+     * A zero symbol remains a hole and is not admitted to the token cursor.
+     */
+    static int[] projectPrepared(GrammarSpecification grammar, CharSequence source,
+            int[] starts, int[] ends, byte[] admission, boolean complete) {
+        return Objects.requireNonNull(grammar, "grammar").bind(source)
+                .project(starts, ends, admission, complete);
+    }
+    /** Hand the complete owned lane to the existing cursor, preserving stable facts. */
+    static TokenCursor projectPreparedCompleteCursor(GrammarSpecification grammar,
+            CharSequence source, int[] starts, int[] ends, byte[] admission) {
+        return TokenCursor.ownedProjection(
+                projectPrepared(grammar, source, starts, ends, admission, true));
     }
 }

@@ -93,6 +93,19 @@ concealed package `jdk.internal.search.slf4j` (owner's choice); deprecation lint
 its descriptor provides factories Lucene deprecates. Next: the M3 String leaves (Lucene CharTermAttribute and
 analyzers, OpenNLP tokenizer and sentence spans).
 
+**Then `m3/ports/regex-cursor`, with the language-spec grammar precompute (2026-11-17).** The method of
+`m3/ports/precompute`: package `jdk.m3.regexcursor` kept and not exported, its 27 classes now
+`src/java.base/share/classes/jdk/m3/regexcursor` and its 32 test sources `test/jdk/jdk/m3/regexcursor`;
+`m3/ports/regex-cursor/pom.xml` builds the same artifact from there, and the test-only JNI oracle, the proof
+scripts and the records stay in that folder. On top, the grammar precompute of com.synexia #18253
+(`GrammarSpecification`, `EbnfGrammar`, `GrammarImageTool`, `Rfc8259JsonGrammar`, two methods added to
+`GrammarTokenProjection`, six standalone proofs and their `examples/` data), compiled against the real
+`StaticGrammarLexicon` and `TokenCursor` (the candidate's test stand-ins are dropped). java.base copies only the
+resource extensions its build lists, so the pinned RFC 8259 image is the generated constant
+`Rfc8259JsonGrammarImage`, still read back only against the SHA-256 pinned in `Rfc8259JsonGrammar`. Proof on a
+stock JDK 21 with java.base patched: the same 54 JUnit tests pass before and after the move, and the six proofs
+pass against the real owners (444,893 assertions).
+
 ## 2. Invariants
 
 Break one of these and the leaf is wrong, whatever its tests say.
