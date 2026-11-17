@@ -24,8 +24,15 @@ import java.util.function.LongConsumer;
  * <p>Future rotations remain in the same modulo bucket and are reconsidered only
  * when that bucket comes around again. No scheduled-entry object is retained.
  *
- * <p>Lineage: absorbed from Synexia {@code m3-primitives/src/main/java/jdk/internal/m3/primitives/LongTimingWheel.java}
- * blob {@code 17ddb833f940a3439c185137d6105480e0def60a} at com.synexia develop {@code ded4a4acdffe5a27e1f2cedb02126762816b9850} by
+ * <p>A long-distance advance takes the earliest linked deadline from exact
+ * bucket-indexed lanes (bucket minimum, 64-bucket group minimum, occupancy,
+ * live and dirty bitsets) that the first clean full scan builds; slot-lane
+ * growth never touches them and payloadBytes() reports the same lanes as before.
+ *
+ * <p>Lineage: absorbed from Synexia {@code
+ * m3-primitives/src/main/java/jdk/internal/m3/primitives/LongTimingWheel.java}
+ * blob {@code 17ddb833f940a3439c185137d6105480e0def60a} at com.synexia develop {@code
+ * ded4a4acdffe5a27e1f2cedb02126762816b9850} by
  * RELOCATE_M3_OWNER v2 (identifiers only; bytecode equal to the source modulo names).
  */
 public final class LongTimingWheel {
@@ -42,6 +49,19 @@ public final class LongTimingWheel {
     private int highWater;
     private int freeHead = -1;
     private int size;
+
+    /** Exact minimum deadline per bucket while indexed; MAX for an empty bucket. */
+    private long[] bucketMin;
+    /** Per 64 buckets: [2g] group minimum, exact unless dirty; [2g + 1] occupancy. */
+    private long[] groupLane;
+    /** Per 64 groups: [2w] live-group bits, [2w + 1] dirty-group bits. */
+    private long[] groupBits;
+    /** Bucket walks holding a detached chain; non-zero while any callback runs. */
+    private int walkDepth;
+    /** The lanes exist, are exact and are maintained on every link and detach. */
+    private boolean indexed;
+    /** Re-entrant clear() or an unrestored walk exit: scan until a clean clear(). */
+    private boolean tainted;
 
     public LongTimingWheel(int wheelSize, long tickNanos, long startNanos) {
         if (wheelSize <= 0 || Integer.bitCount(wheelSize) != 1) {
@@ -76,9 +96,7 @@ public final class LongTimingWheel {
         int slot = allocate();
         values[slot] = value;
         deadlineTick[slot] = tick;
-        int bucket = (int) tick & mask;
-        next[slot] = bucketHead[bucket];
-        bucketHead[bucket] = slot;
+        relink(slot, (int) tick & mask);
         size++;
     }
 
@@ -92,56 +110,14 @@ public final class LongTimingWheel {
         long target = Math.floorDiv(nowNanos, tickNanos);
         int emitted = 0;
         while (!finalTickConsumed && currentTick <= target) {
-            // An empty wheel has no callbacks and no per-tick work. Preserve
-            // the exact cursor that the original tick-by-tick loop produced.
-            if (size == 0) {
+            // An empty wheel, or one whose earliest tick lies past target, has
+            // no per-tick work: preserve the exact cursor of the tick loop.
+            if (size == 0 || !seekDue(target)) {
                 advanceEmptyTo(target);
                 break;
             }
-            long distance = target - currentTick;
-            if (distance < 0 || distance >= (long) bucketHead.length * 2L) {
-                long nextDue = nextScheduledTick();
-                if (nextDue > currentTick) {
-                    if (nextDue > target) {
-                        advanceEmptyTo(target);
-                        break;
-                    }
-                    currentTick = nextDue;
-                }
-            }
-            int bucket = (int) currentTick & mask;
-            int slot = bucketHead[bucket];
-            bucketHead[bucket] = -1;
-            while (slot >= 0) {
-                int following = next[slot];
-                if (deadlineTick[slot] <= currentTick) {
-                    try {
-                        dueConsumer.accept(values[slot]);
-                    } catch (RuntimeException | Error failure) {
-                        // This bucket was detached before the callback. Restore
-                        // the failing node and every unvisited successor before
-                        // propagating the original failure. Nodes already
-                        // successfully emitted remain released.
-                        int tail = slot;
-                        while (next[tail] >= 0) tail = next[tail];
-                        next[tail] = bucketHead[bucket];
-                        bucketHead[bucket] = slot;
-                        throw failure;
-                    }
-                    release(slot);
-                    size--;
-                    emitted++;
-                } else {
-                    int targetBucket = (int) deadlineTick[slot] & mask;
-                    next[slot] = bucketHead[targetBucket];
-                    bucketHead[targetBucket] = slot;
-                }
-                slot = following;
-            }
-            // Incrementing Long.MAX_VALUE wraps to Long.MIN_VALUE and
-            // would reprocess the wheel for an effectively unbounded time.
-            if (currentTick == Long.MAX_VALUE) finalTickConsumed = true;
-            else currentTick++;
+            emitted += walkBucket((int) currentTick & mask, dueConsumer);
+            stepTick();
         }
         return emitted;
     }
@@ -157,11 +133,228 @@ public final class LongTimingWheel {
     }
 
     /**
+     * Long-distance skip. False when the earliest live tick lies past target,
+     * which is the same empty span as an empty wheel.
+     */
+    private boolean seekDue(long target) {
+        long distance = target - currentTick;
+        if (distance >= 0 && distance < (long) bucketHead.length * 2L) return true;
+        long nextDue = nextScheduledTick();
+        if (nextDue <= currentTick) return true;
+        if (nextDue > target) return false;
+        currentTick = nextDue;
+        return true;
+    }
+
+    /**
+     * Incrementing Long.MAX_VALUE wraps to Long.MIN_VALUE and would reprocess
+     * the wheel for an effectively unbounded time.
+     */
+    private void stepTick() {
+        if (currentTick == Long.MAX_VALUE) finalTickConsumed = true;
+        else currentTick++;
+    }
+
+    /** One tick: detach the bucket and walk it with the re-entry depth raised. */
+    private int walkBucket(int bucket, LongConsumer dueConsumer) {
+        int slot = detach(bucket);
+        if (slot < 0) return 0;
+        walkDepth++;
+        try {
+            int emitted = walkChain(slot, bucket, dueConsumer);
+            walkDepth--;
+            return emitted;
+        } catch (Throwable failure) {
+            walkDepth--;
+            if (!restored(failure)) taint();
+            throw failure;
+        }
+    }
+
+    /** Only a callback RuntimeException or non-VM Error is known to pass restore(). */
+    private static boolean restored(Throwable failure) {
+        return failure instanceof RuntimeException
+                || (failure instanceof Error && !(failure instanceof VirtualMachineError));
+    }
+
+    /** The verbatim scan answers every query until a clear() outside all walks. */
+    private void taint() {
+        tainted = true;
+        indexed = false;
+    }
+
+    /** LIFO chain walk: emit due nodes, relink later rotations to their bucket. */
+    private int walkChain(int slot, int bucket, LongConsumer dueConsumer) {
+        int emitted = 0;
+        while (slot >= 0) {
+            int following = next[slot];
+            if (deadlineTick[slot] <= currentTick) {
+                emit(slot, bucket, dueConsumer);
+                emitted++;
+            } else {
+                relink(slot, (int) deadlineTick[slot] & mask);
+            }
+            slot = following;
+        }
+        return emitted;
+    }
+
+    private void emit(int slot, int bucket, LongConsumer dueConsumer) {
+        try {
+            dueConsumer.accept(values[slot]);
+        } catch (RuntimeException | Error failure) {
+            // This bucket was detached before the callback. Restore the failing
+            // node and every unvisited successor before propagating the original
+            // failure. Nodes already successfully emitted remain released.
+            restore(slot, bucket);
+            throw failure;
+        }
+        release(slot);
+        size--;
+    }
+
+    /** Prepend the failing node and its unvisited successors; fold their minimum. */
+    private void restore(int slot, int bucket) {
+        int tail = slot;
+        long first = deadlineTick[slot];
+        while (next[tail] >= 0) {
+            tail = next[tail];
+            if (deadlineTick[tail] < first) first = deadlineTick[tail];
+        }
+        next[tail] = bucketHead[bucket];
+        bucketHead[bucket] = slot;
+        noteLinked(bucket, first);
+    }
+
+    private int detach(int bucket) {
+        int slot = bucketHead[bucket];
+        bucketHead[bucket] = -1;
+        if (slot >= 0) noteDetached(bucket);
+        return slot;
+    }
+
+    private void relink(int slot, int bucket) {
+        next[slot] = bucketHead[bucket];
+        bucketHead[bucket] = slot;
+        noteLinked(bucket, deadlineTick[slot]);
+    }
+
+    /** MASK: occupancy and live bits set; bucket and group minimum folded. */
+    private void noteLinked(int bucket, long tick) {
+        if (!indexed) return;
+        int pair = (bucket >>> 6) << 1;
+        groupLane[pair + 1] |= 1L << bucket;
+        if (tick < groupLane[pair]) groupLane[pair] = tick;
+        if (tick < bucketMin[bucket]) bucketMin[bucket] = tick;
+        groupBits[(bucket >>> 12) << 1] |= 1L << (bucket >>> 6);
+    }
+
+    /** MASK: occupancy cleared, bucket minimum retired, group marked dirty. */
+    private void noteDetached(int bucket) {
+        if (!indexed) return;
+        groupLane[((bucket >>> 6) << 1) + 1] &= ~(1L << bucket);
+        bucketMin[bucket] = Long.MAX_VALUE;
+        groupBits[((bucket >>> 12) << 1) + 1] |= 1L << (bucket >>> 6);
+    }
+
+    /**
+     * Earliest linked deadline for a long-distance advance. The lanes are exact;
+     * a query from inside a callback meets a detached chain and fails exactly as
+     * the scan does. Without lanes the scan answers and may build them.
+     */
+    private long nextScheduledTick() {
+        if (!indexed) return scanAndIndex();
+        if (walkDepth != 0) {
+            throw new IllegalStateException("invalid timing wheel occupancy");
+        }
+        refreshDirtyGroups();
+        return minLinkedTick();
+    }
+
+    /** A scan outside every walk of an untainted wheel builds the exact lanes. */
+    private long scanAndIndex() {
+        long first = scanScheduledTick();
+        if (walkDepth == 0 && !tainted) activate();
+        return first;
+    }
+
+    private void activate() {
+        if (bucketMin == null && !allocateIndex()) return;
+        resetIndex();
+        indexed = true;
+        for (int bucket = 0; bucket < bucketHead.length; bucket++) {
+            for (int slot = bucketHead[bucket]; slot >= 0; slot = next[slot]) {
+                noteLinked(bucket, deadlineTick[slot]);
+            }
+        }
+    }
+
+    /** OFFSET_ARRAY geometry; all lanes publish together or the scan stays owner. */
+    private boolean allocateIndex() {
+        int groups = (bucketHead.length + 63) >>> 6;
+        try {
+            long[] pairs = new long[groups << 1];
+            long[] words = new long[((groups + 63) >>> 6) << 1];
+            long[] minima = new long[bucketHead.length];
+            groupLane = pairs;
+            groupBits = words;
+            bucketMin = minima;
+            return true;
+        } catch (OutOfMemoryError exhausted) {
+            tainted = true;
+            return false;
+        }
+    }
+
+    private void resetIndex() {
+        Arrays.fill(bucketMin, Long.MAX_VALUE);
+        for (int pair = 0; pair < groupLane.length; pair += 2) {
+            groupLane[pair] = Long.MAX_VALUE;
+            groupLane[pair + 1] = 0L;
+        }
+        Arrays.fill(groupBits, 0L);
+    }
+
+    /** BITMAP_WALK over dirty-group words: every dirty group becomes exact. */
+    private void refreshDirtyGroups() {
+        for (int word = 0; word < groupBits.length; word += 2) {
+            for (long dirty = groupBits[word + 1]; dirty != 0L; dirty &= dirty - 1L) {
+                refreshGroup(((word >>> 1) << 6) + Long.numberOfTrailingZeros(dirty));
+            }
+            groupBits[word + 1] = 0L;
+        }
+    }
+
+    /** BITMAP_WALK over one group's occupied buckets; an empty group leaves the live set. */
+    private void refreshGroup(int group) {
+        long bits = groupLane[(group << 1) + 1];
+        long first = Long.MAX_VALUE;
+        for (long walk = bits; walk != 0L; walk &= walk - 1L) {
+            long tick = bucketMin[(group << 6) + Long.numberOfTrailingZeros(walk)];
+            if (tick < first) first = tick;
+        }
+        groupLane[group << 1] = first;
+        if (bits == 0L) groupBits[(group >>> 6) << 1] &= ~(1L << group);
+    }
+
+    /** BITMAP_WALK over live groups: the exact earliest linked deadline. */
+    private long minLinkedTick() {
+        long first = Long.MAX_VALUE;
+        for (int word = 0; word < groupBits.length; word += 2) {
+            for (long live = groupBits[word]; live != 0L; live &= live - 1L) {
+                int group = ((word >>> 1) << 6) + Long.numberOfTrailingZeros(live);
+                if (groupLane[group << 1] < first) first = groupLane[group << 1];
+            }
+        }
+        return first;
+    }
+
+    /**
      * Scan only on a long-distance advance: no payload is moved or copied.
      * The earliest due tick cannot be skipped, and the number of live slots
      * must equal the published primitive wheel size before a skip is allowed.
      */
-    private long nextScheduledTick() {
+    private long scanScheduledTick() {
         long first = Long.MAX_VALUE;
         int visited = 0;
         for (int head : bucketHead) {
@@ -186,6 +379,9 @@ public final class LongTimingWheel {
         highWater = 0;
         freeHead = -1;
         size = 0;
+        tainted = walkDepth != 0;
+        if (tainted) indexed = false;
+        else if (indexed) resetIndex();
     }
 
     private int allocate() {

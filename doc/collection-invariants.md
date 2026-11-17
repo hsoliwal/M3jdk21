@@ -68,6 +68,16 @@ Paths are relative to `src/jdk.m3.collections` (sources) and `test/jdk` (tests).
 | Removal keeps lane order; slots above the removed lane index are rebased by `s -= (i + 1 - s) >>> 31` | `removePendingAt`, `deleteLaneIndex`, `shiftLaneIndexes` | mutants set-remove-skips-rebase, map-remove-skips-slot-delete, atoms-rebase-signed-shift |
 | Every new or changed method is at most 15 lines | atomization | `method_lengths.py` |
 
+## LongTimingWheel (`share/classes/jdk/m3/collections/LongTimingWheel.java`)
+
+| Invariant | Kept by | Checked by |
+|---|---|---|
+| The slot lanes (values, deadlineTick, next), grow(ArrayCopier) and payloadBytes() equal the master class; results, callback order and exceptions are unchanged | index lanes are separate and bucket-indexed | `LongTimingWheelParityTest` against `LongTimingWheelReference` |
+| indexed implies bucketMin[b] is the minimum deadline linked in bucket b (MAX when empty) and occupancy bit b is set iff the bucket is non-empty (MASK: group = b >>> 6) | `noteLinked`, `noteDetached` | `LongTimingWheelParityTest` (index recomputed after every operation) |
+| A group minimum is exact unless its dirty bit is set; after the dirty refresh a clear live bit means an empty group (BITMAP_WALK) | `refreshDirtyGroups`, `minLinkedTick` | `LongTimingWheelParityTest`; mutant detach-without-dirty-mark |
+| walkDepth counts the walks holding a detached chain and is restored on every exit; re-entrant clear(), unproven exits and OutOfMemoryError taint the wheel back to the original scan | `relink`, `restore`, `taint`, `clear`, `allocateIndex` | `LongTimingWheelSafeAdvanceTest`, `LongTimingWheelParityTest` (re-entrant clear scenario) |
+| Every new or changed method is at most 15 lines | atomization | `method_lengths.py` |
+
 ## ArraySizingStrategy and its adoptions (`providers/classes/jdk/m3/collections/hppc/...`)
 
 | Invariant | Kept by | Checked by |
