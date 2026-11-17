@@ -87,8 +87,11 @@ with their upstream packages in `src/jdk.m3.search/providers/classes` (the Guava
 landed unchanged first, then moved onto M3 String one text carrier per leaf. The module is not resolved by default
 (`make/CreateJmods.gmk`), so it never shadows an application's own Lucene. First PR: Lucene 9.10.0 core, queries,
 sandbox, queryparser through the provider pipeline of the Guava inline (bytecode identical to the vendored sources;
-the Java 19-21 multi-release sources are not carried). Next: OpenNLP 2.4.0 with the SLF4J API it needs, Lucene
-analysis-opennlp and analysis-common.
+the Java 19-21 multi-release sources are not carried), #3213. Second PR: Lucene analysis-common (with the Snowball
+stemmers) and analysis-opennlp, OpenNLP Tools 2.4.0, and the SLF4J API 2.0.12 OpenNLP needs, relocated into the
+concealed package `jdk.internal.search.slf4j` (owner's choice); deprecation lint is off for the module because
+its descriptor provides factories Lucene deprecates. Next: the M3 String leaves (Lucene CharTermAttribute and
+analyzers, OpenNLP tokenizer and sentence spans).
 
 ## 2. Invariants
 

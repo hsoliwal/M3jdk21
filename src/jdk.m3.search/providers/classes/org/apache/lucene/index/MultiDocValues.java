@@ -33,7 +33,6 @@ import org.apache.lucene.util.packed.PackedInts;
  * @lucene.experimental
  * @lucene.internal
  */
-@SuppressWarnings("deprecation")
 public class MultiDocValues {
 
   /** No instantiation */

@@ -25,7 +25,6 @@ import java.util.Comparator;
  *
  * @lucene.internal
  */
-@SuppressWarnings("deprecation")
 public final class ArrayUtil {
 
   /** Maximum length for an array (Integer.MAX_VALUE - RamUsageEstimator.NUM_BYTES_ARRAY_HEADER). */

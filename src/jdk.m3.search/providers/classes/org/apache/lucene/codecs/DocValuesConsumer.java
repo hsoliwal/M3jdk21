@@ -66,7 +66,6 @@ import org.apache.lucene.util.packed.PackedInts;
  *
  * @lucene.experimental
  */
-@SuppressWarnings("deprecation")
 public abstract class DocValuesConsumer implements Closeable {
 
   /** Sole constructor. (For invocation by subclass constructors, typically implicit.) */

@@ -55,7 +55,7 @@ import org.apache.lucene.util.BytesRef;
  *
  * @see PointValues
  */
-@SuppressWarnings({"deprecation", "lossy-conversions"})
+@SuppressWarnings("lossy-conversions")
 public final class HalfFloatPoint extends Field {
 
   /** The number of bytes used to represent a half-float value. */

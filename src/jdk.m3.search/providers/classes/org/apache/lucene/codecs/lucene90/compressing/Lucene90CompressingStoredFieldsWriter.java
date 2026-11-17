@@ -53,7 +53,7 @@ import org.apache.lucene.util.packed.PackedInts;
  *
  * @lucene.experimental
  */
-@SuppressWarnings({"deprecation", "lossy-conversions"})
+@SuppressWarnings("lossy-conversions")
 public final class Lucene90CompressingStoredFieldsWriter extends StoredFieldsWriter {
 
   /** Extension of stored fields file */

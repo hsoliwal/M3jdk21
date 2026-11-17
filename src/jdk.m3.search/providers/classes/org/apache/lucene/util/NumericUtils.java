@@ -30,7 +30,7 @@ import java.util.Arrays;
  *
  * @lucene.internal
  */
-@SuppressWarnings({"deprecation", "lossy-conversions"})
+@SuppressWarnings("lossy-conversions")
 public final class NumericUtils {
 
   private NumericUtils() {} // no instance!

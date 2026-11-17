@@ -25,7 +25,7 @@ import org.apache.lucene.index.SortedSetDocValues;
 import org.apache.lucene.util.BytesRef;
 
 /** Selects a value from the document's set to use as the representative value */
-@SuppressWarnings({"deprecation", "missing-explicit-ctor"})
+@SuppressWarnings("missing-explicit-ctor")
 public class SortedSetSelector {
 
   /**

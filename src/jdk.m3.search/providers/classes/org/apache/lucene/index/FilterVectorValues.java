@@ -21,7 +21,6 @@ import java.io.IOException;
 import java.util.Objects;
 
 /** Delegates all methods to a wrapped {@link FloatVectorValues}. */
-@SuppressWarnings("deprecation")
 public abstract class FilterVectorValues extends VectorValues {
 
   /** Wrapped values */

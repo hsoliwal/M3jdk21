@@ -51,7 +51,6 @@ import org.apache.lucene.util.IOUtils;
  *
  * @lucene.experimental
  */
-@SuppressWarnings("deprecation")
 public class IDVersionPostingsFormat extends PostingsFormat {
 
   /** version must be &gt;= this. */

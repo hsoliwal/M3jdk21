@@ -35,7 +35,6 @@ import org.apache.lucene.util.compress.LZ4;
  *
  * @lucene.internal
  */
-@SuppressWarnings("deprecation")
 public final class LZ4WithPresetDictCompressionMode extends CompressionMode {
 
   // Shoot for 10 sub blocks

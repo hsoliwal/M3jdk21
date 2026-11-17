@@ -34,7 +34,6 @@ import java.util.Arrays;
  *
  * @lucene.internal
  */
-@SuppressWarnings("deprecation")
 public class BytesRefBlockPool implements Accountable {
 
   private static final long BASE_RAM_BYTES =

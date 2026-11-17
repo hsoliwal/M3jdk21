@@ -37,7 +37,6 @@ import org.apache.lucene.util.BytesRef;
  *
  * @lucene.internal
  */
-@SuppressWarnings("deprecation")
 public final class DeflateWithPresetDictCompressionMode extends CompressionMode {
 
   // Shoot for 10 sub blocks

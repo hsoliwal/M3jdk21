@@ -6,9 +6,12 @@
 # jdk.m3.search: Apache Lucene (and, later, Apache OpenNLP) carried in providers/classes with their upstream packages
 # (owner, 2026-11-17). The provider sources carry @SuppressWarnings for the lint kinds the JDK build reports and
 # doclint fixes made by the provider pipeline; the module name's "m3" component is the one lint kind disabled here,
-# and doclint runs as for jdk.m3.collections.
-DISABLED_WARNINGS_java += module
+# and doclint runs as for jdk.m3.collections. The libraries provide service factories they deprecate but still
+# register; the build's descriptor merge (GenModuleInfoSource) takes no annotation on the module declaration, so
+# deprecation is the second lint kind disabled.
+DISABLED_WARNINGS_java += module deprecation
 DOCLINT += -Xdoclint:all/protected,-missing
 
-# Resources the libraries read at run time: queryparser's message bundle and XML query DTDs.
-COPY += .properties .dtd
+# Resources the libraries read at run time: message bundles, XML DTDs and feature descriptors, word lists,
+# stemmer tables, OpenNLP's version file and GIS format note.
+COPY += .properties .dtd .xml .txt .rslp .version GISFormat

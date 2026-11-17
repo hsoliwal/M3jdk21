@@ -3,15 +3,82 @@
  * Copyright (c) 2026 Synexia, Hitesh Soliwal (hsoliwal@gmail.com) and others
  */
 
-// The libraries of jdk.m3.search, carried in providers/classes with their upstream packages.
+// The libraries of jdk.m3.search, carried in providers/classes with their upstream packages (SLF4J relocated).
 // The JDK build merges these exports and services into the module descriptor (make/common/modules/GensrcModuleInfo.gmk);
 // share/classes/module-info.java alone stays a complete descriptor of the module's own packages.
 
-// Apache Lucene 9.10.0 (legal/lucene.md): core, queries, sandbox and queryparser. The packages their own
-// descriptors export, and their service uses and providers.
+// Apache Lucene 9.10.0 (legal/lucene.md): core, queries, sandbox, queryparser, analysis-common,
+// analysis-opennlp. The packages their own descriptors export, and their service uses and providers.
 exports org.apache.lucene.analysis;
+exports org.apache.lucene.analysis.ar;
+exports org.apache.lucene.analysis.bg;
+exports org.apache.lucene.analysis.bn;
+exports org.apache.lucene.analysis.boost;
+exports org.apache.lucene.analysis.br;
+exports org.apache.lucene.analysis.ca;
+exports org.apache.lucene.analysis.charfilter;
+exports org.apache.lucene.analysis.cjk;
+exports org.apache.lucene.analysis.ckb;
+exports org.apache.lucene.analysis.classic;
+exports org.apache.lucene.analysis.commongrams;
+exports org.apache.lucene.analysis.compound;
+exports org.apache.lucene.analysis.compound.hyphenation;
+exports org.apache.lucene.analysis.core;
+exports org.apache.lucene.analysis.custom;
+exports org.apache.lucene.analysis.cz;
+exports org.apache.lucene.analysis.da;
+exports org.apache.lucene.analysis.de;
+exports org.apache.lucene.analysis.el;
+exports org.apache.lucene.analysis.email;
+exports org.apache.lucene.analysis.en;
+exports org.apache.lucene.analysis.es;
+exports org.apache.lucene.analysis.et;
+exports org.apache.lucene.analysis.eu;
+exports org.apache.lucene.analysis.fa;
+exports org.apache.lucene.analysis.fi;
+exports org.apache.lucene.analysis.fr;
+exports org.apache.lucene.analysis.ga;
+exports org.apache.lucene.analysis.gl;
+exports org.apache.lucene.analysis.hi;
+exports org.apache.lucene.analysis.hu;
+exports org.apache.lucene.analysis.hunspell;
+exports org.apache.lucene.analysis.hy;
+exports org.apache.lucene.analysis.id;
+exports org.apache.lucene.analysis.in;
+exports org.apache.lucene.analysis.it;
+exports org.apache.lucene.analysis.lt;
+exports org.apache.lucene.analysis.lv;
+exports org.apache.lucene.analysis.minhash;
+exports org.apache.lucene.analysis.miscellaneous;
+exports org.apache.lucene.analysis.ne;
+exports org.apache.lucene.analysis.ngram;
+exports org.apache.lucene.analysis.nl;
+exports org.apache.lucene.analysis.no;
+exports org.apache.lucene.analysis.opennlp;
+exports org.apache.lucene.analysis.opennlp.tools;
+exports org.apache.lucene.analysis.path;
+exports org.apache.lucene.analysis.pattern;
+exports org.apache.lucene.analysis.payloads;
+exports org.apache.lucene.analysis.pt;
+exports org.apache.lucene.analysis.query;
+exports org.apache.lucene.analysis.reverse;
+exports org.apache.lucene.analysis.ro;
+exports org.apache.lucene.analysis.ru;
+exports org.apache.lucene.analysis.shingle;
+exports org.apache.lucene.analysis.sinks;
+exports org.apache.lucene.analysis.snowball;
+exports org.apache.lucene.analysis.sr;
 exports org.apache.lucene.analysis.standard;
+exports org.apache.lucene.analysis.sv;
+exports org.apache.lucene.analysis.synonym;
+exports org.apache.lucene.analysis.synonym.word2vec;
+exports org.apache.lucene.analysis.ta;
+exports org.apache.lucene.analysis.te;
+exports org.apache.lucene.analysis.th;
 exports org.apache.lucene.analysis.tokenattributes;
+exports org.apache.lucene.analysis.tr;
+exports org.apache.lucene.analysis.util;
+exports org.apache.lucene.analysis.wikipedia;
 exports org.apache.lucene.codecs;
 exports org.apache.lucene.codecs.compressing;
 exports org.apache.lucene.codecs.lucene90;
@@ -21,6 +88,8 @@ exports org.apache.lucene.codecs.lucene94;
 exports org.apache.lucene.codecs.lucene95;
 exports org.apache.lucene.codecs.lucene99;
 exports org.apache.lucene.codecs.perfield;
+exports org.apache.lucene.collation;
+exports org.apache.lucene.collation.tokenattributes;
 exports org.apache.lucene.document;
 exports org.apache.lucene.geo;
 exports org.apache.lucene.index;
@@ -89,8 +158,143 @@ uses org.apache.lucene.codecs.DocValuesFormat;
 uses org.apache.lucene.codecs.KnnVectorsFormat;
 uses org.apache.lucene.codecs.PostingsFormat;
 uses org.apache.lucene.index.SortFieldProvider;
+provides org.apache.lucene.analysis.CharFilterFactory with
+    org.apache.lucene.analysis.charfilter.HTMLStripCharFilterFactory,
+    org.apache.lucene.analysis.charfilter.MappingCharFilterFactory,
+    org.apache.lucene.analysis.cjk.CJKWidthCharFilterFactory,
+    org.apache.lucene.analysis.fa.PersianCharFilterFactory,
+    org.apache.lucene.analysis.pattern.PatternReplaceCharFilterFactory;
+provides org.apache.lucene.analysis.TokenFilterFactory with
+    org.apache.lucene.analysis.tr.ApostropheFilterFactory,
+    org.apache.lucene.analysis.ar.ArabicNormalizationFilterFactory,
+    org.apache.lucene.analysis.ar.ArabicStemFilterFactory,
+    org.apache.lucene.analysis.bg.BulgarianStemFilterFactory,
+    org.apache.lucene.analysis.boost.DelimitedBoostTokenFilterFactory,
+    org.apache.lucene.analysis.bn.BengaliNormalizationFilterFactory,
+    org.apache.lucene.analysis.bn.BengaliStemFilterFactory,
+    org.apache.lucene.analysis.br.BrazilianStemFilterFactory,
+    org.apache.lucene.analysis.cjk.CJKBigramFilterFactory,
+    org.apache.lucene.analysis.cjk.CJKWidthFilterFactory,
+    org.apache.lucene.analysis.ckb.SoraniNormalizationFilterFactory,
+    org.apache.lucene.analysis.ckb.SoraniStemFilterFactory,
+    org.apache.lucene.analysis.classic.ClassicFilterFactory,
+    org.apache.lucene.analysis.commongrams.CommonGramsFilterFactory,
+    org.apache.lucene.analysis.commongrams.CommonGramsQueryFilterFactory,
+    org.apache.lucene.analysis.compound.DictionaryCompoundWordTokenFilterFactory,
+    org.apache.lucene.analysis.compound.HyphenationCompoundWordTokenFilterFactory,
+    org.apache.lucene.analysis.core.DecimalDigitFilterFactory,
+    org.apache.lucene.analysis.core.LowerCaseFilterFactory,
+    org.apache.lucene.analysis.core.StopFilterFactory,
+    org.apache.lucene.analysis.core.TypeTokenFilterFactory,
+    org.apache.lucene.analysis.core.UpperCaseFilterFactory,
+    org.apache.lucene.analysis.cz.CzechStemFilterFactory,
+    org.apache.lucene.analysis.de.GermanLightStemFilterFactory,
+    org.apache.lucene.analysis.de.GermanMinimalStemFilterFactory,
+    org.apache.lucene.analysis.de.GermanNormalizationFilterFactory,
+    org.apache.lucene.analysis.de.GermanStemFilterFactory,
+    org.apache.lucene.analysis.el.GreekLowerCaseFilterFactory,
+    org.apache.lucene.analysis.el.GreekStemFilterFactory,
+    org.apache.lucene.analysis.en.EnglishMinimalStemFilterFactory,
+    org.apache.lucene.analysis.en.EnglishPossessiveFilterFactory,
+    org.apache.lucene.analysis.en.KStemFilterFactory,
+    org.apache.lucene.analysis.en.PorterStemFilterFactory,
+    org.apache.lucene.analysis.es.SpanishLightStemFilterFactory,
+    org.apache.lucene.analysis.es.SpanishMinimalStemFilterFactory,
+    org.apache.lucene.analysis.es.SpanishPluralStemFilterFactory,
+    org.apache.lucene.analysis.fa.PersianNormalizationFilterFactory,
+    org.apache.lucene.analysis.fa.PersianStemFilterFactory,
+    org.apache.lucene.analysis.fi.FinnishLightStemFilterFactory,
+    org.apache.lucene.analysis.fr.FrenchLightStemFilterFactory,
+    org.apache.lucene.analysis.fr.FrenchMinimalStemFilterFactory,
+    org.apache.lucene.analysis.ga.IrishLowerCaseFilterFactory,
+    org.apache.lucene.analysis.gl.GalicianMinimalStemFilterFactory,
+    org.apache.lucene.analysis.gl.GalicianStemFilterFactory,
+    org.apache.lucene.analysis.hi.HindiNormalizationFilterFactory,
+    org.apache.lucene.analysis.hi.HindiStemFilterFactory,
+    org.apache.lucene.analysis.hu.HungarianLightStemFilterFactory,
+    org.apache.lucene.analysis.hunspell.HunspellStemFilterFactory,
+    org.apache.lucene.analysis.id.IndonesianStemFilterFactory,
+    org.apache.lucene.analysis.in.IndicNormalizationFilterFactory,
+    org.apache.lucene.analysis.it.ItalianLightStemFilterFactory,
+    org.apache.lucene.analysis.lv.LatvianStemFilterFactory,
+    org.apache.lucene.analysis.minhash.MinHashFilterFactory,
+    org.apache.lucene.analysis.miscellaneous.ASCIIFoldingFilterFactory,
+    org.apache.lucene.analysis.miscellaneous.CapitalizationFilterFactory,
+    org.apache.lucene.analysis.miscellaneous.CodepointCountFilterFactory,
+    org.apache.lucene.analysis.miscellaneous.ConcatenateGraphFilterFactory,
+    org.apache.lucene.analysis.miscellaneous.DateRecognizerFilterFactory,
+    org.apache.lucene.analysis.miscellaneous.DelimitedTermFrequencyTokenFilterFactory,
+    org.apache.lucene.analysis.miscellaneous.DropIfFlaggedFilterFactory,
+    org.apache.lucene.analysis.miscellaneous.FingerprintFilterFactory,
+    org.apache.lucene.analysis.miscellaneous.FixBrokenOffsetsFilterFactory,
+    org.apache.lucene.analysis.miscellaneous.HyphenatedWordsFilterFactory,
+    org.apache.lucene.analysis.miscellaneous.KeepWordFilterFactory,
+    org.apache.lucene.analysis.miscellaneous.KeywordMarkerFilterFactory,
+    org.apache.lucene.analysis.miscellaneous.KeywordRepeatFilterFactory,
+    org.apache.lucene.analysis.miscellaneous.LengthFilterFactory,
+    org.apache.lucene.analysis.miscellaneous.LimitTokenCountFilterFactory,
+    org.apache.lucene.analysis.miscellaneous.LimitTokenOffsetFilterFactory,
+    org.apache.lucene.analysis.miscellaneous.LimitTokenPositionFilterFactory,
+    org.apache.lucene.analysis.miscellaneous.RemoveDuplicatesTokenFilterFactory,
+    org.apache.lucene.analysis.miscellaneous.StemmerOverrideFilterFactory,
+    org.apache.lucene.analysis.miscellaneous.ProtectedTermFilterFactory,
+    org.apache.lucene.analysis.miscellaneous.TrimFilterFactory,
+    org.apache.lucene.analysis.miscellaneous.TruncateTokenFilterFactory,
+    org.apache.lucene.analysis.miscellaneous.TypeAsSynonymFilterFactory,
+    org.apache.lucene.analysis.miscellaneous.WordDelimiterFilterFactory,
+    org.apache.lucene.analysis.miscellaneous.WordDelimiterGraphFilterFactory,
+    org.apache.lucene.analysis.miscellaneous.ScandinavianFoldingFilterFactory,
+    org.apache.lucene.analysis.miscellaneous.ScandinavianNormalizationFilterFactory,
+    org.apache.lucene.analysis.ngram.EdgeNGramFilterFactory,
+    org.apache.lucene.analysis.ngram.NGramFilterFactory,
+    org.apache.lucene.analysis.no.NorwegianLightStemFilterFactory,
+    org.apache.lucene.analysis.no.NorwegianMinimalStemFilterFactory,
+    org.apache.lucene.analysis.no.NorwegianNormalizationFilterFactory,
+    org.apache.lucene.analysis.pattern.PatternReplaceFilterFactory,
+    org.apache.lucene.analysis.pattern.PatternCaptureGroupFilterFactory,
+    org.apache.lucene.analysis.pattern.PatternTypingFilterFactory,
+    org.apache.lucene.analysis.payloads.DelimitedPayloadTokenFilterFactory,
+    org.apache.lucene.analysis.payloads.NumericPayloadTokenFilterFactory,
+    org.apache.lucene.analysis.payloads.TokenOffsetPayloadTokenFilterFactory,
+    org.apache.lucene.analysis.payloads.TypeAsPayloadTokenFilterFactory,
+    org.apache.lucene.analysis.pt.PortugueseLightStemFilterFactory,
+    org.apache.lucene.analysis.pt.PortugueseMinimalStemFilterFactory,
+    org.apache.lucene.analysis.pt.PortugueseStemFilterFactory,
+    org.apache.lucene.analysis.reverse.ReverseStringFilterFactory,
+    org.apache.lucene.analysis.ru.RussianLightStemFilterFactory,
+    org.apache.lucene.analysis.shingle.ShingleFilterFactory,
+    org.apache.lucene.analysis.shingle.FixedShingleFilterFactory,
+    org.apache.lucene.analysis.snowball.SnowballPorterFilterFactory,
+    org.apache.lucene.analysis.sr.SerbianNormalizationFilterFactory,
+    org.apache.lucene.analysis.sv.SwedishLightStemFilterFactory,
+    org.apache.lucene.analysis.sv.SwedishMinimalStemFilterFactory,
+    org.apache.lucene.analysis.synonym.SynonymFilterFactory,
+    org.apache.lucene.analysis.synonym.SynonymGraphFilterFactory,
+    org.apache.lucene.analysis.synonym.word2vec.Word2VecSynonymFilterFactory,
+    org.apache.lucene.analysis.core.FlattenGraphFilterFactory,
+    org.apache.lucene.analysis.te.TeluguNormalizationFilterFactory,
+    org.apache.lucene.analysis.te.TeluguStemFilterFactory,
+    org.apache.lucene.analysis.tr.TurkishLowerCaseFilterFactory,
+    org.apache.lucene.analysis.util.ElisionFilterFactory,
+    org.apache.lucene.analysis.opennlp.OpenNLPChunkerFilterFactory,
+    org.apache.lucene.analysis.opennlp.OpenNLPLemmatizerFilterFactory,
+    org.apache.lucene.analysis.opennlp.OpenNLPPOSFilterFactory;
 provides org.apache.lucene.analysis.TokenizerFactory with
-    org.apache.lucene.analysis.standard.StandardTokenizerFactory;
+    org.apache.lucene.analysis.standard.StandardTokenizerFactory,
+    org.apache.lucene.analysis.classic.ClassicTokenizerFactory,
+    org.apache.lucene.analysis.core.KeywordTokenizerFactory,
+    org.apache.lucene.analysis.core.LetterTokenizerFactory,
+    org.apache.lucene.analysis.core.WhitespaceTokenizerFactory,
+    org.apache.lucene.analysis.email.UAX29URLEmailTokenizerFactory,
+    org.apache.lucene.analysis.ngram.EdgeNGramTokenizerFactory,
+    org.apache.lucene.analysis.ngram.NGramTokenizerFactory,
+    org.apache.lucene.analysis.path.PathHierarchyTokenizerFactory,
+    org.apache.lucene.analysis.pattern.PatternTokenizerFactory,
+    org.apache.lucene.analysis.pattern.SimplePatternSplitTokenizerFactory,
+    org.apache.lucene.analysis.pattern.SimplePatternTokenizerFactory,
+    org.apache.lucene.analysis.th.ThaiTokenizerFactory,
+    org.apache.lucene.analysis.wikipedia.WikipediaTokenizerFactory,
+    org.apache.lucene.analysis.opennlp.OpenNLPTokenizerFactory;
 provides org.apache.lucene.codecs.Codec with
     org.apache.lucene.codecs.lucene99.Lucene99Codec;
 provides org.apache.lucene.codecs.DocValuesFormat with
@@ -105,3 +309,83 @@ provides org.apache.lucene.index.SortFieldProvider with
     org.apache.lucene.search.SortField.Provider,
     org.apache.lucene.search.SortedNumericSortField.Provider,
     org.apache.lucene.search.SortedSetSortField.Provider;
+
+// Snowball stemmers, part of Lucene analysis-common (legal/lucene.md).
+exports org.tartarus.snowball;
+exports org.tartarus.snowball.ext;
+
+// Apache OpenNLP Tools 2.4.0 (legal/opennlp.md): every package, as its automatic module exports them.
+exports opennlp.tools.chunker;
+exports opennlp.tools.cmdline;
+exports opennlp.tools.cmdline.chunker;
+exports opennlp.tools.cmdline.dictionary;
+exports opennlp.tools.cmdline.doccat;
+exports opennlp.tools.cmdline.entitylinker;
+exports opennlp.tools.cmdline.langdetect;
+exports opennlp.tools.cmdline.languagemodel;
+exports opennlp.tools.cmdline.lemmatizer;
+exports opennlp.tools.cmdline.namefind;
+exports opennlp.tools.cmdline.params;
+exports opennlp.tools.cmdline.parser;
+exports opennlp.tools.cmdline.postag;
+exports opennlp.tools.cmdline.sentdetect;
+exports opennlp.tools.cmdline.tokenizer;
+exports opennlp.tools.commons;
+exports opennlp.tools.dictionary;
+exports opennlp.tools.dictionary.serializer;
+exports opennlp.tools.doccat;
+exports opennlp.tools.entitylinker;
+exports opennlp.tools.formats;
+exports opennlp.tools.formats.ad;
+exports opennlp.tools.formats.brat;
+exports opennlp.tools.formats.conllu;
+exports opennlp.tools.formats.convert;
+exports opennlp.tools.formats.frenchtreebank;
+exports opennlp.tools.formats.irishsentencebank;
+exports opennlp.tools.formats.leipzig;
+exports opennlp.tools.formats.letsmt;
+exports opennlp.tools.formats.masc;
+exports opennlp.tools.formats.moses;
+exports opennlp.tools.formats.muc;
+exports opennlp.tools.formats.nkjp;
+exports opennlp.tools.formats.ontonotes;
+exports opennlp.tools.langdetect;
+exports opennlp.tools.languagemodel;
+exports opennlp.tools.lemmatizer;
+exports opennlp.tools.log;
+exports opennlp.tools.ml;
+exports opennlp.tools.ml.maxent;
+exports opennlp.tools.ml.maxent.io;
+exports opennlp.tools.ml.maxent.quasinewton;
+exports opennlp.tools.ml.model;
+exports opennlp.tools.ml.naivebayes;
+exports opennlp.tools.ml.perceptron;
+exports opennlp.tools.namefind;
+exports opennlp.tools.ngram;
+exports opennlp.tools.parser;
+exports opennlp.tools.parser.chunking;
+exports opennlp.tools.parser.lang.en;
+exports opennlp.tools.parser.lang.es;
+exports opennlp.tools.parser.treeinsert;
+exports opennlp.tools.postag;
+exports opennlp.tools.sentdetect;
+exports opennlp.tools.sentdetect.lang;
+exports opennlp.tools.sentdetect.lang.th;
+exports opennlp.tools.stemmer;
+exports opennlp.tools.stemmer.snowball;
+exports opennlp.tools.tokenize;
+exports opennlp.tools.tokenize.lang;
+exports opennlp.tools.tokenize.lang.en;
+exports opennlp.tools.util;
+exports opennlp.tools.util.eval;
+exports opennlp.tools.util.ext;
+exports opennlp.tools.util.featuregen;
+exports opennlp.tools.util.java;
+exports opennlp.tools.util.jvm;
+exports opennlp.tools.util.model;
+exports opennlp.tools.util.normalizer;
+exports opennlp.tools.util.wordvector;
+
+// SLF4J API 2.0.12 (legal/slf4j.md), relocated into the concealed package jdk.internal.search.slf4j
+// for OpenNLP: not exported; its provider lookup needs the uses directive.
+uses jdk.internal.search.slf4j.spi.SLF4JServiceProvider;

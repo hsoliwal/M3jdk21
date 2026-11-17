@@ -41,7 +41,6 @@ import org.apache.lucene.util.StringHelper;
  *
  * @lucene.experimental
  */
-@SuppressWarnings("deprecation")
 public final class Automata {
   /**
    * {@link #makeStringUnion(Iterable)} limits terms of this max length to ensure the stack doesn't

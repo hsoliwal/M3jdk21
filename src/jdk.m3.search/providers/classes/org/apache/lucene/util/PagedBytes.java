@@ -29,7 +29,7 @@ import org.apache.lucene.store.IndexInput;
  */
 // TODO: refactor this, byteblockpool, fst.bytestore, and any
 // other "shift/mask big arrays". there are too many of these classes!
-@SuppressWarnings({"deprecation", "lossy-conversions", "missing-explicit-ctor"})
+@SuppressWarnings({"lossy-conversions", "missing-explicit-ctor"})
 public final class PagedBytes implements Accountable {
   private static final long BASE_RAM_BYTES_USED =
       RamUsageEstimator.shallowSizeOfInstance(PagedBytes.class);

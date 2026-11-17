@@ -32,7 +32,6 @@ import org.apache.lucene.util.BytesRef;
  *
  * @lucene.internal
  */
-@SuppressWarnings("deprecation")
 public final class OfflinePointReader implements PointReader {
 
   long countLeft;

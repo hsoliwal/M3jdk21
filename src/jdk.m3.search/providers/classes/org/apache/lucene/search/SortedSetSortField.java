@@ -43,7 +43,6 @@ import org.apache.lucene.store.DataOutput;
  *
  * @see SortedSetSelector
  */
-@SuppressWarnings("deprecation")
 public class SortedSetSortField extends SortField {
 
   private final SortedSetSelector.Type selector;
