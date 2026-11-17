@@ -101,6 +101,31 @@ final class M3RX7Transitions {
         return result;
     }
 
+    /**
+     * All-entry-state effect of an ASCII UTF-16 range. Each source unit is read
+     * exactly once and updates the existing primitive row. No source spelling is
+     * copied or retained. Null refuses non-ASCII input or excessive state/unit work.
+     * The caller owns source stability for the duration of the operation.
+     */
+    static short[] ascii(short[] rows, int states, CharSequence input,
+            int offset, int length) {
+        checkTable(rows, states, 128);
+        Objects.requireNonNull(input, "input");
+        Objects.checkFromIndexSize(offset, length, input.length());
+        if ((long) states * length > MAX_WORK) return null;
+        short[] result = identity(states);
+        for (int at = offset, end = offset + length; at < end; at++) {
+            char unit = input.charAt(at);
+            // Validate the whole admitted range, including units after all rows died.
+            if (unit >= 128) return null;
+            for (int state = 0; state < states; state++) {
+                int current = result[state];
+                if (current >= 0) result[state] = rows[current * 128 + unit];
+            }
+        }
+        return result;
+    }
+
     /** Left-to-right composition: the result for q is right[left[q]]. */
     static short[] compose(short[] left, short[] right) {
         int states = checkTransfer(left);
