@@ -121,7 +121,7 @@ class MatRoaringIntSetDecodeTest {
     }
 
     @Test
-    void ofRangeAndSetAlgebraAgainstMaster() {
+    void operationsAgainstMaster() {
         for (int seed = 0; seed < 400; seed++) {
             Random random = new Random(seed);
             boolean large = seed % 10 == 0;
