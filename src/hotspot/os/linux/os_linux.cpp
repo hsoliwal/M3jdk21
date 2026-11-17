@@ -2071,8 +2071,6 @@ void os::print_os_info(outputStream* st) {
 
   os::Posix::print_rlimit_info(st);
 
-  os::print_open_file_descriptors(st);
-
   os::Posix::print_load_average(st);
   st->cr();
 
