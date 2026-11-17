@@ -1,0 +1,60 @@
+lexicon_num	lexicon_key	source_id	kind	language_tag	version	rank_rule	export_sha256	licence	status
+1	grammar.java@8..21	grammar.java	programming-language	zxx-x-java	8..21	codebase-token:java.base/java/util@21.0.9	2c068ab98b165f13a90c6827ed1856ff17d62c2dbe8177f4e09d95bebe56dd6a	spec-derived (JLS)	ACTIVE
+2	grammar.java@10	grammar.java	programming-language	zxx-x-java	10	codebase-token:java.base/java/util@21.0.9	867b75fbc66e55a2b83c5be039478c456bfe662c994d488a4f0041b76777e9b0	spec-derived (JLS)	ACTIVE
+3	grammar.java@11	grammar.java	programming-language	zxx-x-java	11	codebase-token:java.base/java/util@21.0.9	cb6a1a1bf455e27485689cd42833138cad00d1e1ef0b8829f862f4d95b38f9aa	spec-derived (JLS)	ACTIVE
+4	grammar.java@12	grammar.java	programming-language	zxx-x-java	12	codebase-token:java.base/java/util@21.0.9	1556529af01102306682832a4435effe1e642b632debe12568c14d63f0e0b073	spec-derived (JLS)	ACTIVE
+5	grammar.java@13	grammar.java	programming-language	zxx-x-java	13	codebase-token:java.base/java/util@21.0.9	496a049c7111646e92fac907779383fdbe16fe4302e46a8877f3cd586cd66907	spec-derived (JLS)	ACTIVE
+6	grammar.java@14	grammar.java	programming-language	zxx-x-java	14	codebase-token:java.base/java/util@21.0.9	6187be62ad7afebf914f696ea6221242bfc55a4a32e523c9f3d6aeabbffb3eab	spec-derived (JLS)	ACTIVE
+7	grammar.java@15	grammar.java	programming-language	zxx-x-java	15	codebase-token:java.base/java/util@21.0.9	0509fab66eeffe7a69c515595015ba469f3603660e0d711656a8c630705f94ee	spec-derived (JLS)	ACTIVE
+8	grammar.java@16	grammar.java	programming-language	zxx-x-java	16	codebase-token:java.base/java/util@21.0.9	d0b34cfe17ae30a99c43537be11a98e5277e178a46faf866c1366f8bd948933b	spec-derived (JLS)	ACTIVE
+9	grammar.java@17	grammar.java	programming-language	zxx-x-java	17	codebase-token:java.base/java/util@21.0.9	d553dbaa10f0169bb8633c5a91b87050fed8fe8ed1382db452a41f31bcb180a7	spec-derived (JLS)	ACTIVE
+10	grammar.java@18	grammar.java	programming-language	zxx-x-java	18	codebase-token:java.base/java/util@21.0.9	8e101b3ec0094f9663bf7bd445ec9785c8a1d1b02fe02ac607fc99f5f65dc6c9	spec-derived (JLS)	ACTIVE
+11	grammar.java@19	grammar.java	programming-language	zxx-x-java	19	codebase-token:java.base/java/util@21.0.9	ddf26dd6c29ef2869e054b6065c3f62032b3ddbe3ba97f95c0ed0bd5713641db	spec-derived (JLS)	ACTIVE
+12	grammar.java@20	grammar.java	programming-language	zxx-x-java	20	codebase-token:java.base/java/util@21.0.9	5f01b723fb3c095ee45fb7b66bac46f3b43d7bd289c8911bd0fbb5129e6a04fc	spec-derived (JLS)	ACTIVE
+13	grammar.java@21	grammar.java	programming-language	zxx-x-java	21	codebase-token:java.base/java/util@21.0.9	9a026b096e8138d3fc87dd2b9213cb5c04856ad7479c39291b9d935a226c6443	spec-derived (JLS)	ACTIVE
+14	grammar.java@8	grammar.java	programming-language	zxx-x-java	8	codebase-token:java.base/java/util@21.0.9	bc1dcf844f69d5b84374065603823e57442a9f6524d2db5ca2016bc994432bf7	spec-derived (JLS)	ACTIVE
+15	grammar.java@9	grammar.java	programming-language	zxx-x-java	9	codebase-token:java.base/java/util@21.0.9	6b7de578c670c56beec33f335f2785ab952b3f3b951fee77576ea9aa01b74df7	spec-derived (JLS)	ACTIVE
+16	grammar.python@3.8..3.13	grammar.python	programming-language	zxx-x-python	3.8..3.13	codebase-token:cpython/Lib@3.12.6	5784b03042ed0e25d9058f2807ffe807c4f27912485633bad80f5e6d68f9b030	spec-derived (Python Language Reference)	ACTIVE
+17	grammar.python@3.10	grammar.python	programming-language	zxx-x-python	3.10	codebase-token:cpython/Lib@3.12.6	0625002436fa4ca7b8077f66d34634ab688b16afab03b918ccf5ad61580baf4a	spec-derived (Python Language Reference)	ACTIVE
+18	grammar.python@3.11	grammar.python	programming-language	zxx-x-python	3.11	codebase-token:cpython/Lib@3.12.6	349f9c01966477be1e371ea8e74b2b5f7fa92572b326419d5a04734b960683bd	spec-derived (Python Language Reference)	ACTIVE
+19	grammar.python@3.12	grammar.python	programming-language	zxx-x-python	3.12	codebase-token:cpython/Lib@3.12.6	a7afbee18d9d7b7a855ffb814d1b76ab0edff750bcf51ab143f0da1dfab84d6a	spec-derived (Python Language Reference)	ACTIVE
+20	grammar.python@3.13	grammar.python	programming-language	zxx-x-python	3.13	codebase-token:cpython/Lib@3.12.6	1541f70a0580ff736d997a0a2cbdf5dffe4355a9e07c1965ac3da6cae0e5a769	spec-derived (Python Language Reference)	ACTIVE
+21	grammar.python@3.8	grammar.python	programming-language	zxx-x-python	3.8	codebase-token:cpython/Lib@3.12.6	cf59324c06715f9b0d489be218b7a0661eb4923fe9c719d1776eaa9f15cc7ffb	spec-derived (Python Language Reference)	ACTIVE
+22	grammar.python@3.9	grammar.python	programming-language	zxx-x-python	3.9	codebase-token:cpython/Lib@3.12.6	22dd115143e89cae3bce1a14b689fc7fdc76c2acecd5397eec5cbc2b1b8734e1	spec-derived (Python Language Reference)	ACTIVE
+23	hf.wiki.de@20231101/b04c8d1c/s1	hf.wiki.de	hf-frequency	de	20231101/b04c8d1c/s1	local-count	f6ecc7c50fa0ba386b730a836938dd1f5c484cbd5a307dd7af37f6c5fc90a7cb	CC-BY-SA-3.0 AND GFDL	ACTIVE
+24	hf.wiki.en@20231101/b04c8d1c/s1	hf.wiki.en	hf-frequency	en	20231101/b04c8d1c/s1	local-count	fd7f90cfb8b6be116febdff259e10f929edc683ff3cc48f697cdcd19b2c5d0b6	CC-BY-SA-3.0 AND GFDL	ACTIVE
+25	hf.wiki.es@20231101/b04c8d1c/s1	hf.wiki.es	hf-frequency	es	20231101/b04c8d1c/s1	local-count	3bd648db30c0acfac4a7a687a58d49e69da26e4a5832a535f6e0a1d0022601f7	CC-BY-SA-3.0 AND GFDL	ACTIVE
+26	hf.wiki.fr@20231101/b04c8d1c/s1	hf.wiki.fr	hf-frequency	fr	20231101/b04c8d1c/s1	local-count	540b5649407ca979ee268d3332a6500b884c2dd7ec8351007dfb738089fcc756	CC-BY-SA-3.0 AND GFDL	ACTIVE
+27	hf.wiki.hi@20231101/b04c8d1c/s1	hf.wiki.hi	hf-frequency	hi	20231101/b04c8d1c/s1	local-count	bd32f587fc4678e59d995c0b9338fb5e1530ec41c88430554f46cc310bb57174	CC-BY-SA-3.0 AND GFDL	ACTIVE
+28	hf.wiki.ja@20231101/b04c8d1c/s1	hf.wiki.ja	hf-frequency	ja	20231101/b04c8d1c/s1	local-count	ae6dc1309d5971bd84120ac311599e0c31a86bfda58189ff5b6471935c07c254	CC-BY-SA-3.0 AND GFDL	ACTIVE
+29	hf.wiki.ru@20231101/b04c8d1c/s1	hf.wiki.ru	hf-frequency	ru	20231101/b04c8d1c/s1	local-count	b0a779f992c0584e1fd9a0b7bcf6de221c67362188c00e46568475ec1405f8aa	CC-BY-SA-3.0 AND GFDL	ACTIVE
+30	hf.wiki.zh@20231101/b04c8d1c/s1	hf.wiki.zh	hf-frequency	zh	20231101/b04c8d1c/s1	local-count	cd759c9f7ad374c000c3fec26af38c3a1e6beca233f453ef82b796147d9b1aba	CC-BY-SA-3.0 AND GFDL	ACTIVE
+31	hf.tok.mbert@3f076fdb	hf.tok.mbert	hf-tokenizer	mul	3f076fdb	oracle-count:hf.wiki.*@20231101/b04c8d1c/s1	e3619aa5346c2f020901e5fd0f77818a335a58403dde27192a5cc75a64235110	Apache-2.0	ACTIVE
+32	hf.tok.qwen@060db649	hf.tok.qwen	hf-tokenizer	mul	060db649	oracle-count:hf.wiki.*@20231101/b04c8d1c/s1	952fba13223cbbd4fb18964bcb39385d8512086a4f5bc38db28e9da68dae4fae	Apache-2.0	ACTIVE
+33	hf.tok.tinyllama@fe8a4ea1	hf.tok.tinyllama	hf-tokenizer	mul	fe8a4ea1	oracle-count:hf.wiki.*@20231101/b04c8d1c/s1	93d513e66a6d9b4079e5711038e13223102578744cfb7c554017909e2e6a41fb	Apache-2.0	ACTIVE
+34	hf.tok.xlmr@e73636d4	hf.tok.xlmr	hf-tokenizer	mul	e73636d4	oracle-count:hf.wiki.*@20231101/b04c8d1c/s1	364f805580bff68ea6907fb336b1d08f8e8465d2edf7f225898f1ce5296c8e32	MIT	ACTIVE
+35	hunspell.de@8cfea406	hunspell.de	classic-dictionary	de	8cfea406	oracle-count:hf.wiki.de@20231101/b04c8d1c/s1	73f398d04fe175b8f74d61ad087a735addacd58fd1a4854e0d651e30c368ffe4	GPL-2.0 OR GPL-3.0 (igerman98)	ACTIVE
+36	hunspell.en@8cfea406	hunspell.en	classic-dictionary	en	8cfea406	oracle-count:hf.wiki.en@20231101/b04c8d1c/s1	f875ea66135fa691e3a805454c10d94c9cbb9fabc00c71477edadffb159d5b1c	SCOWL (BSD/MIT-style)	ACTIVE
+37	hunspell.es@8cfea406	hunspell.es	classic-dictionary	es	8cfea406	oracle-count:hf.wiki.es@20231101/b04c8d1c/s1	a1e20570ddd13ce350bc4978edd1de7db8daf1e4aa88970a06a43a6d3e8cb211	GPL-3.0-or-later OR LGPL-3.0-or-later OR MPL-1.1	ACTIVE
+38	hunspell.fr@8cfea406	hunspell.fr	classic-dictionary	fr	8cfea406	oracle-count:hf.wiki.fr@20231101/b04c8d1c/s1	bb427451e34cd9bb63cd82089dcaa85dc31cc42fd349b366ba5b1891607a8fa3	MPL-2.0	ACTIVE
+39	hunspell.hi@c0865a85	hunspell.hi	classic-dictionary	hi	c0865a85	oracle-count:hf.wiki.hi@20231101/b04c8d1c/s1	6d1d97343e00b24044914e82f70f742b6852eb6ee189e59c1e9d640b7a362b90	GPL	ACTIVE
+40	hunspell.ru@8cfea406	hunspell.ru	classic-dictionary	ru	8cfea406	oracle-count:hf.wiki.ru@20231101/b04c8d1c/s1	df03659de9c728eeaa4f76257b5d1a296213599a742cbe87673c60e2eab7349d	BSD-style (Lebedev)	ACTIVE
+41	cldr.names.de@42.0.0	cldr.names.de	cldr	de	42.0.0	oracle-count:hf.wiki.de@20231101/b04c8d1c/s1	03e84324eeb9b0620ecb064768a06040e5cc01fc765930b08112d9140a1eb928	Unicode-3.0	ACTIVE
+42	cldr.names.en@42.0.0	cldr.names.en	cldr	en	42.0.0	oracle-count:hf.wiki.en@20231101/b04c8d1c/s1	f1f2a1f8f92f5b3ce02b0523e39fbba06743063f3bb404ea2ced796d6ae6bf23	Unicode-3.0	ACTIVE
+43	cldr.names.es@42.0.0	cldr.names.es	cldr	es	42.0.0	oracle-count:hf.wiki.es@20231101/b04c8d1c/s1	f14608fe02e7f68010667689b14b8c6da82d16ef5dc9515fd209dc4351d56916	Unicode-3.0	ACTIVE
+44	cldr.names.fr@42.0.0	cldr.names.fr	cldr	fr	42.0.0	oracle-count:hf.wiki.fr@20231101/b04c8d1c/s1	7405d07810464c409e0c407a48525b4f943dc725bbb164100a37622a92db3850	Unicode-3.0	ACTIVE
+45	cldr.names.hi@42.0.0	cldr.names.hi	cldr	hi	42.0.0	oracle-count:hf.wiki.hi@20231101/b04c8d1c/s1	ec58d34f78d308e8670eefda2ac6ef27a47bddfadc386d8ae6cf726e90e9e8b5	Unicode-3.0	ACTIVE
+46	cldr.names.ja@42.0.0	cldr.names.ja	cldr	ja	42.0.0	oracle-count:hf.wiki.ja@20231101/b04c8d1c/s1	709ac794c0f8116a0815ae0e16e202e994b31ea5bacca8af4a69d2a270580f34	Unicode-3.0	ACTIVE
+47	cldr.names.ru@42.0.0	cldr.names.ru	cldr	ru	42.0.0	oracle-count:hf.wiki.ru@20231101/b04c8d1c/s1	e5c25f0adacf84f41ffd655b7b0f00e5d60431413df9bd34ae5a593a179ca21b	Unicode-3.0	ACTIVE
+48	cldr.names.zh@42.0.0	cldr.names.zh	cldr	zh	42.0.0	oracle-count:hf.wiki.zh@20231101/b04c8d1c/s1	b9ff923d38e177cd92d89fa3f2335bf8b16c12424b8a7f7a980d57aeb4ccb394	Unicode-3.0	ACTIVE
+49	cldr.exemplar.de@42.0.0	cldr.exemplar.de	cldr	de	42.0.0	oracle-count:hf.wiki.de@20231101/b04c8d1c/s1	1d759b6de874c1fde3ba5bf89250e2e3176e0e242109b3e6e038ed7e431d9fd6	Unicode-3.0	ACTIVE
+50	cldr.exemplar.en@42.0.0	cldr.exemplar.en	cldr	en	42.0.0	oracle-count:hf.wiki.en@20231101/b04c8d1c/s1	026830a32f88a3cf78853b38142f8cf77c9a0ed1dd9e36b85362e2eb4a1e6046	Unicode-3.0	ACTIVE
+51	cldr.exemplar.es@42.0.0	cldr.exemplar.es	cldr	es	42.0.0	oracle-count:hf.wiki.es@20231101/b04c8d1c/s1	e113d919c35fec2f29b396a08c7df349bd4e49c2277d0b84b4739f031bbef799	Unicode-3.0	ACTIVE
+52	cldr.exemplar.fr@42.0.0	cldr.exemplar.fr	cldr	fr	42.0.0	oracle-count:hf.wiki.fr@20231101/b04c8d1c/s1	3e557b995233c559596ced94b643a7a47635e4f6b69e38e44abbe99065a4b44a	Unicode-3.0	ACTIVE
+53	cldr.exemplar.hi@42.0.0	cldr.exemplar.hi	cldr	hi	42.0.0	oracle-count:hf.wiki.hi@20231101/b04c8d1c/s1	b94e43fec035534a40c9800cea697722040edae2d3768d0f600aadf775ca343a	Unicode-3.0	ACTIVE
+54	cldr.exemplar.ja@42.0.0	cldr.exemplar.ja	cldr	ja	42.0.0	oracle-count:hf.wiki.ja@20231101/b04c8d1c/s1	e22bbb59d6a5c92a7469d7b89ad69de1bf1db944ace04b7e59d849e013ef9aed	Unicode-3.0	ACTIVE
+55	cldr.exemplar.ru@42.0.0	cldr.exemplar.ru	cldr	ru	42.0.0	oracle-count:hf.wiki.ru@20231101/b04c8d1c/s1	63e94a197821bffc8ef0ff842692e4e910923e517983d89201fbae8945103376	Unicode-3.0	ACTIVE
+56	cldr.exemplar.zh@42.0.0	cldr.exemplar.zh	cldr	zh	42.0.0	oracle-count:hf.wiki.zh@20231101/b04c8d1c/s1	fd9a96310bfbd4a7c8bec71f4cb8423d4c146c1e00e098b1ed2d1deee44445b6	Unicode-3.0	ACTIVE
+57	dictlang.dictionary.rank@0e98aa32	dictlang.dictionary.rank	catalog-source	en	0e98aa32	oracle-count:hf.wiki.en@20231101/b04c8d1c/s1	17dc1d9d2bd30a7d9c4e56457179fddca25cdeab051542922a4c483906d58477	Public domain (US); Project Gutenberg License	ACTIVE
+58	dictlang.frequency.rank@05ccf20c	dictlang.frequency.rank	catalog-source	en	05ccf20c	source-count	6d290e08713792fd17b38d4db0501a2f9fcb2b7f68564f0bd522f3b274ddea48	MIT (hermitdave/FrequencyWords; OpenSubtitles 2018 via OPUS)	ACTIVE
+59	lexicon.english-demo@5ae4ecb8	lexicon.english-demo	catalog-source	en	5ae4ecb8	oracle-count:hf.wiki.en@20231101/b04c8d1c/s1	bb501b32e7f844cf614557e21f5962da21eb234d4966beeefd0eceee86bcb157	GPL-2.0 WITH Classpath-exception-2.0	ACTIVE

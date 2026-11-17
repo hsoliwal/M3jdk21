@@ -206,6 +206,87 @@ The image row is a physical coordinate, so `findMapping(sourceId, rank)` is the 
 word id. A Python run of the exporter on the same input needs the manifest and records
 files that this table describes. No relation sidecar and no payload field map are written.
 
+## Lexicon coordinates and the registry
+
+A persisted word identity is a coordinate `(lexicon number, rank)`. The rank is the word id
+of one frozen, frequency-ranked lexicon version (the `record_id` of its export). Image rows
+and CWIDs are never persisted: they change with every image generation.
+
+`m3/lexicon/m3-lexicon-registry.tsv` assigns the lexicon numbers. It sits beside
+`m3-source-manifest.tsv` and does not replace it.
+
+| Column | Value |
+| --- | --- |
+| `lexicon_num` | Positive, assigned in admission order, never reused; 0 is invalid |
+| `lexicon_key` | `source_id@version`; unique |
+| `source_id` | The catalog source id of the version's export |
+| `kind`, `language_tag` | Lexicon kind; BCP-47 tag, `mul` for tokenizer vocabularies, `zxx-x-<lang>` for programming languages |
+| `version` | Revision, sample or language version of the word set |
+| `rank_rule` | The count behind the rank: `local-count`, `source-count`, `codebase-token:<corpus>` or `oracle-count:<lexicon_key>` |
+| `export_sha256` | SHA-256 of the export's `m3.export.json`, which pins every shard and sidecar; `-` until the export exists |
+| `licence` | Recorded, never gating |
+| `status` | `ACTIVE`, or `RETIRED` for a replaced version that still decodes |
+
+A new revision, sample, rank rule or word set gets a new number; the old row becomes
+`RETIRED`. The registry generation is SHA-256 of the file with LF line ends (a CR LF pair
+counts as LF; any other CR is refused). Every image or sidecar that carries coordinates
+records it.
+
+| Form | Layout | Owner |
+| --- | --- | --- |
+| Wire | uLEB128(lexicon number) then uLEB128(rank): 2 bytes while both are below 128, 3 for a rank below 16,384, 4 below 2,097,152 | `SharedLexiconExport.LexiconCoordinate.writeWire` / `readWire` |
+| Image lane | One `int`: lexicon number in bits 31..24 (1..255), rank + 1 in bits 23..0 (rank at most 2^24 - 2); 0 is never a lane | `LexiconCoordinate.lane` / `ofLane` |
+| In memory | One `long`: lexicon number in bits 63..32, entry = rank + 1 in bits 31..0, both positive | `java.lang.M3StringPool.Lexicon.pack`, `lexiconId`, `entryId` |
+
+All codecs are package private and refuse rather than wrap: lexicon 0, a negative rank, a
+lane lexicon above 255, a lane rank above 2^24 - 2, a lane or a `long` whose lexicon or entry
+is 0, and a truncated, overlong or above-`int` uLEB128 form. So every coordinate has exactly
+one wire form. `SharedLexiconExport.varintLength`, `writeVarint` and `readVarint` are the
+uLEB128 primitives; `registryGeneration` computes the pin. The in-memory form ports the pure
+functions of the Synexia dictshared `LexiconCoordinate` (Apache-2.0, same owner).
+`m3/core/test/SharedLexiconCoordinateContractTest` covers every boundary (rank 0, 127, 128,
+16,383, 16,384, 2^21 - 1 and 2^24 - 2; lexicon 1, 127, 128 and 255), each refusal, a naive
+lane pack that the overflow inputs corrupt, the registry shape and the generation pin.
+
+## Generated exports of the registry lexicons
+
+The catalog exports of the registry rows are generated output and are not checked in.
+`make/m3/lexicon/build-exports.sh INPUT_DIR OUTPUT_DIR [LEXICON_NUM ...]` rebuilds them from
+pinned inputs, one row at a time:
+
+1. It checks the measured word list named in `make/m3/lexicon/lexicon-inputs.tsv` against
+   its `input_sha256`.
+2. `frequency_counts.py` writes the `WORD TAB COUNT` file under the row's `rank_rule`, sorted
+   the way `build --frequency` ranks it, so line N holds rank N - 1. Words that hold a tab, CR
+   or LF cannot be such input and are left out (`excluded`). The file must match
+   `counts_sha256`.
+3. `LexiconTool build --frequency SOURCE_ID LANGUAGE_TAG` writes the export. Its
+   `m3.export.json` must match the registry's `export_sha256`.
+
+| `rank_rule` | Count of a word |
+| --- | --- |
+| `local-count`, `source-count` | The word's own count in the list |
+| `oracle-count:<lexicon_key>` | Its count in the named list (`hf.wiki.*`: summed over the eight Wikipedia lists); 0 when absent, so absent words follow in UTF-16 order |
+| `codebase-token:java.base/java/util@21.0.9` | Whole-token occurrences in the top-level `java.base/java/util/*.java` files of the JDK 21.0.9 `lib/src.zip`, comments and strings included: an edge that is a `[A-Za-z0-9_$]` character must not touch another one. For keywords this is the leaf-1 count (`if` 8,722) |
+| `codebase-token:cpython/Lib@3.12.6` | The same over the top-level `Lib/*.py` files of CPython 3.12.6, with `[A-Za-z0-9_]` |
+
+`lexicon-corpora.tsv` pins each corpus by the SHA-256 of its sorted `name TAB sha256` file
+list. `lexicon-receipts.tsv` holds one source receipt per word source and count source
+(provider, URI, full revision, licence, SHA-256 over the downloaded files, attribution, rights
+evidence). Licences are recorded, never gating. A pin of `-` makes the step report the actual
+value instead of checking it.
+
+Run on every row, the step also runs `WriteCorpusManifest.java`. It writes one
+`M3LanguageCorpusManifest` (`corpus-<root>.m3corpus`) with a DICTIONARY artifact (the export)
+and a WORD_FACTS artifact (the count file) per registry row. Both bind to the export's SHA-256,
+its first 64 bits as coordinate fingerprint, and generation = `lexicon_num`. The tool reads the
+file back and requires both planes for every row.
+
+Each source id has one `m3-source-manifest.tsv` row (`record_id_field = frequency_rank`,
+`precompute_fields = -`); a source with several versions (`grammar.java`) has one row and
+several registry rows. Where the exports and count files live is open (owner question Q3):
+in-tree data or a configure option.
+
 ## Five-family file sidecars
 
 [SharedLexiconFamilySidecarCatalog][FAM] reads these fixed files as a complete bundle:

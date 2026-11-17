@@ -16,6 +16,7 @@ import java.nio.file.StandardOpenOption;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -46,6 +47,11 @@ import java.util.stream.Stream;
  * keeps {@code corpus_count} and {@code frequency_rank}, and {@code source.commit} pins
  * the input bytes by SHA-256. Every byte is built before the first write, and
  * {@code m3.shards.tsv}, the file the catalog opens first, is written last.</p>
+ *
+ * <p>{@link LexiconCoordinate} is the persisted word identity across exports: the lexicon
+ * number of {@code m3/lexicon/m3-lexicon-registry.tsv} plus the frequency rank. Its wire form
+ * is unsigned LEB128 and its image lane is one {@code int}; {@link #registryGeneration} pins
+ * the registry those numbers come from.</p>
  */
 final class SharedLexiconExport {
     private static final String SCHEMA = "m3-m3jdk-lexicon-export-2";
@@ -76,6 +82,10 @@ final class SharedLexiconExport {
     private static final Pattern COUNT = Pattern.compile("0|[1-9][0-9]{0,18}");
     private static final Comparator<Word> RANK = Comparator.<Word>comparingLong(Word::count)
             .reversed().thenComparing(Word::text);
+    /** Largest lexicon number of the image lane, which holds it in bits 31..24. */
+    static final int MAX_LANE_LEXICON = 0xff;
+    /** Largest rank of the image lane, which holds rank + 1 in bits 23..0. */
+    static final int MAX_LANE_RANK = (1 << 24) - 2;
 
     private SharedLexiconExport() { }
 
@@ -479,5 +489,100 @@ final class SharedLexiconExport {
                 out.force(true);
             }
         }
+    }
+
+    /**
+     * A persisted word identity: the registry lexicon number (positive) and the frequency rank
+     * in that lexicon version (0 = most frequent). Image rows and CWIDs are never persisted.
+     */
+    record LexiconCoordinate(int lexicon, int rank) {
+        LexiconCoordinate {
+            if (lexicon <= 0) throw new IllegalArgumentException("lexicon number must be positive");
+            if (rank < 0) throw new IllegalArgumentException("rank must not be negative");
+        }
+
+        /** Bytes of the wire form: 2 while lexicon and rank are below 128, at most 10. */
+        int wireLength() { return varintLength(lexicon) + varintLength(rank); }
+
+        /** Writes the wire form uLEB128(lexicon) uLEB128(rank) at {@code at}; returns the end. */
+        int writeWire(byte[] out, int at) {
+            return writeVarint(out, writeVarint(out, at, lexicon), rank);
+        }
+
+        /** Reads one canonical wire form at {@code at}; refuses lexicon 0. */
+        static LexiconCoordinate readWire(byte[] in, int at) {
+            long lexicon = readVarint(in, at);
+            long rank = readVarint(in, (int) (lexicon >>> 32));
+            return new LexiconCoordinate((int) lexicon, (int) rank);
+        }
+
+        /**
+         * The image lane: lexicon in bits 31..24 and rank + 1 in bits 23..0, so 0 is never a
+         * lane. Refuses a lexicon above {@link SharedLexiconExport#MAX_LANE_LEXICON} or a rank
+         * above {@link SharedLexiconExport#MAX_LANE_RANK}.
+         */
+        int lane() {
+            if (lexicon > MAX_LANE_LEXICON || rank > MAX_LANE_RANK)
+                throw new IllegalArgumentException("coordinate exceeds the image lane");
+            return lexicon << 24 | (rank + 1);
+        }
+
+        /** The coordinate of an image lane; refuses lexicon 0 and entry 0 (rank -1). */
+        static LexiconCoordinate ofLane(int lane) {
+            return new LexiconCoordinate(lane >>> 24, (lane & 0xff_ffff) - 1);
+        }
+    }
+
+    /** Bytes of the canonical unsigned LEB128 form of a nonnegative int: 1 to 5. */
+    static int varintLength(int value) {
+        if (value < 0) throw new IllegalArgumentException("varint must not be negative");
+        return value < 1 << 7 ? 1 : value < 1 << 14 ? 2 : value < 1 << 21 ? 3
+                : value < 1 << 28 ? 4 : 5;
+    }
+
+    /** Writes the unsigned LEB128 form of {@code value} at {@code at}; returns the end. */
+    static int writeVarint(byte[] out, int at, int value) {
+        int next = at, rest = value;
+        for (int left = varintLength(value); left > 1; left--) {
+            out[next++] = (byte) (rest | 0x80);
+            rest >>>= 7;
+        }
+        out[next++] = (byte) rest;
+        return next;
+    }
+
+    /**
+     * Reads one unsigned LEB128 int at {@code at}: the value in bits 31..0, the end in bits
+     * 63..32. Refuses a truncated, overlong or above-int form, so each value has one wire form.
+     */
+    static long readVarint(byte[] in, int at) {
+        int value = 0;
+        for (int index = at, shift = 0; ; index++, shift += 7) {
+            if (index >= in.length) throw new IllegalArgumentException("truncated varint");
+            int unit = Byte.toUnsignedInt(in[index]);
+            if (shift == 28 && unit > 0x07)
+                throw new IllegalArgumentException("varint exceeds int");
+            value |= (unit & 0x7f) << shift;
+            if (unit < 0x80) {
+                if (unit == 0 && shift > 0) throw new IllegalArgumentException("overlong varint");
+                return (long) (index + 1) << 32 | value;
+            }
+        }
+    }
+
+    /**
+     * The registry generation that every image and sidecar carrying coordinates records:
+     * SHA-256 of {@code m3-lexicon-registry.tsv} with LF line ends. A CR LF pair hashes as LF,
+     * so a CR LF checkout pins the same generation; any other CR is refused.
+     */
+    static byte[] registryGeneration(byte[] registry) {
+        byte[] lf = new byte[registry.length];
+        int size = 0;
+        for (int at = 0; at < registry.length; at++) {
+            if (registry[at] != '\r') lf[size++] = registry[at];
+            else if (at + 1 == registry.length || registry[at + 1] != '\n')
+                throw new IllegalArgumentException("registry holds a CR outside CR LF");
+        }
+        return sha256(Arrays.copyOf(lf, size));
     }
 }

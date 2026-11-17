@@ -1,6 +1,8 @@
 /*
  * Copyright (c) 2026, Hitesh Soliwal. All rights reserved.
  * Modified 2026-11-15: share canonical immediate owners for eligible single-unit admission.
+ * Modified 2026-11-17: in-memory lexicon coordinate (Lexicon.pack, lexiconId, entryId),
+ * ported from Synexia dictshared LexiconCoordinate (Apache-2.0, same owner).
  * GPLv2 with the Classpath exception.
  */
 package java.lang;
@@ -1582,6 +1584,38 @@ final class M3StringPool {
                     atoms[row] = result;
                 }
                 return result;
+            }
+        }
+
+        /**
+         * In-memory lexicon coordinate: the registry lexicon number in bits 63..32 and the
+         * entry, frequency rank + 1, in bits 31..0. Both ids are positive, so 0 is never a
+         * coordinate. Ported from the pure functions of the Synexia dictshared
+         * LexiconCoordinate (Apache-2.0, same owner); the wire and image-lane codecs are in
+         * jdk.m3.text.SharedLexiconExport.
+         */
+        static long pack(int lexiconId, int entryId) {
+            if (lexiconId <= 0 || entryId <= 0) {
+                throw new IllegalArgumentException("lexicon coordinate ids must be positive");
+            }
+            return (long) lexiconId << 32 | entryId;
+        }
+
+        /** The registry lexicon number of a coordinate; refuses any value pack cannot return. */
+        static int lexiconId(long coordinate) {
+            checkCoordinate(coordinate);
+            return (int) (coordinate >>> 32);
+        }
+
+        /** The entry (rank + 1) of a coordinate; refuses any value pack cannot return. */
+        static int entryId(long coordinate) {
+            checkCoordinate(coordinate);
+            return (int) coordinate;
+        }
+
+        private static void checkCoordinate(long coordinate) {
+            if ((int) (coordinate >>> 32) <= 0 || (int) coordinate <= 0) {
+                throw new IllegalArgumentException("not a lexicon coordinate");
             }
         }
 

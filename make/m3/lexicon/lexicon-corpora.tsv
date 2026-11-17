@@ -1,0 +1,3 @@
+corpus	files	corpus_sha256	source
+java.base/java/util@21.0.9	134	b5531a951d670c2df32c48fae49987cf3f9e9c742f1bc1629bf412f4aaf31089	JDK 21.0.9+7 lib/src.zip, top-level java.base/java/util/*.java
+cpython/Lib@3.12.6	163	913dad8120372d24cf3da8ae636a9032a7a530948689ac94059441aa48b959ee	CPython 3.12.6 Lib/*.py, top level
