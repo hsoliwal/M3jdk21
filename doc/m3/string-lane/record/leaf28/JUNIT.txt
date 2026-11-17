@@ -1,0 +1,30 @@
+== JUnit flat -XX:+CompactStrings
+[         0 containers failed     ]
+[       292 tests found           ]
+[       292 tests successful      ]
+[         0 tests failed          ]
+== JUnit flat -XX:-CompactStrings
+[         0 containers failed     ]
+[       292 tests found           ]
+[       292 tests successful      ]
+[         0 tests failed          ]
+== JUnit m3-facts -XX:+CompactStrings
+[         0 containers failed     ]
+[       292 tests found           ]
+[       292 tests successful      ]
+[         0 tests failed          ]
+== JUnit m3-facts -XX:-CompactStrings
+[         0 containers failed     ]
+[       292 tests found           ]
+[       292 tests successful      ]
+[         0 tests failed          ]
+== JUnit m3-scan -XX:+CompactStrings
+[         0 containers failed     ]
+[       292 tests found           ]
+[       292 tests successful      ]
+[         0 tests failed          ]
+== JUnit m3-scan -XX:-CompactStrings
+[         0 containers failed     ]
+[       292 tests found           ]
+[       292 tests successful      ]
+[         0 tests failed          ]

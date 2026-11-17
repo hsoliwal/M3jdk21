@@ -6425,6 +6425,609 @@ public final class String
     }
 
     /**
+     * Returns this string padded on the left with spaces to {@code size} characters, or this
+     * string when it is at least that long.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   size   the length wanted.
+     * @return  the padded string, or this string.
+     * @since   21
+     */
+    public String leftPad(int size) {
+        return leftPad(size, ' ');
+    }
+
+    /**
+     * Returns this string padded on the left with {@code padChar} to {@code size} characters, or
+     * this string when it is at least that long.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   size      the length wanted.
+     * @param   padChar   the character to pad with.
+     * @return  the padded string, or this string.
+     * @since   21
+     */
+    public String leftPad(int size, char padChar) {
+        if (size <= length()) return this;
+        return padded(String.valueOf(padChar), size - length(), 0);
+    }
+
+    /**
+     * Returns this string padded on the left to {@code size} characters with {@code padStr},
+     * repeated from its start and cut to fit; an empty {@code padStr} pads with spaces. When the
+     * cut would split a surrogate pair of {@code padStr}, the padding is one character shorter.
+     * Returns this string when it is at least {@code size} characters long or no padding is left.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   size     the length wanted.
+     * @param   padStr   the text to pad with.
+     * @return  the padded string, or this string.
+     * @throws  NullPointerException if {@code padStr} is {@code null}.
+     * @since   21
+     */
+    public String leftPad(int size, String padStr) {
+        java.util.Objects.requireNonNull(padStr, "padStr");
+        if (size <= length()) return this;
+        String pad = padStr.isEmpty() ? " " : padStr;
+        return padded(pad, padUnits(pad, size - length()), 0);
+    }
+
+    /**
+     * Returns this string padded on the right with spaces to {@code size} characters, or this
+     * string when it is at least that long.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   size   the length wanted.
+     * @return  the padded string, or this string.
+     * @since   21
+     */
+    public String rightPad(int size) {
+        return rightPad(size, ' ');
+    }
+
+    /**
+     * Returns this string padded on the right with {@code padChar} to {@code size} characters,
+     * or this string when it is at least that long.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   size      the length wanted.
+     * @param   padChar   the character to pad with.
+     * @return  the padded string, or this string.
+     * @since   21
+     */
+    public String rightPad(int size, char padChar) {
+        if (size <= length()) return this;
+        return padded(String.valueOf(padChar), 0, size - length());
+    }
+
+    /**
+     * Returns this string padded on the right to {@code size} characters with {@code padStr},
+     * repeated from its start and cut to fit; an empty {@code padStr} pads with spaces. When the
+     * cut would split a surrogate pair of {@code padStr}, the padding is one character shorter.
+     * Returns this string when it is at least {@code size} characters long or no padding is left.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   size     the length wanted.
+     * @param   padStr   the text to pad with.
+     * @return  the padded string, or this string.
+     * @throws  NullPointerException if {@code padStr} is {@code null}.
+     * @since   21
+     */
+    public String rightPad(int size, String padStr) {
+        java.util.Objects.requireNonNull(padStr, "padStr");
+        if (size <= length()) return this;
+        String pad = padStr.isEmpty() ? " " : padStr;
+        return padded(pad, 0, padUnits(pad, size - length()));
+    }
+
+    /**
+     * Returns this string centered in {@code size} characters of spaces: the left side gets half
+     * of the padding, rounded down, the right side the rest. Returns this string when it is at
+     * least {@code size} characters long.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   size   the length wanted.
+     * @return  the centered string, or this string.
+     * @since   21
+     */
+    public String center(int size) {
+        return center(size, ' ');
+    }
+
+    /**
+     * Returns this string centered in {@code size} characters of {@code padChar}: the left side
+     * gets half of the padding, rounded down, the right side the rest. Returns this string when
+     * it is at least {@code size} characters long.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   size      the length wanted.
+     * @param   padChar   the character to pad with.
+     * @return  the centered string, or this string.
+     * @since   21
+     */
+    public String center(int size, char padChar) {
+        if (size <= length()) return this;
+        int pads = size - length();
+        return padded(String.valueOf(padChar), pads / 2, pads - pads / 2);
+    }
+
+    /**
+     * Returns this string centered in {@code size} characters of {@code padStr}: first padded on
+     * the left with half of the padding, rounded down, as {@link #leftPad(int, String)} pads,
+     * then on the right up to {@code size} as {@link #rightPad(int, String)} pads. An empty
+     * {@code padStr} pads with spaces. Returns this string when it is at least {@code size}
+     * characters long.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   size     the length wanted.
+     * @param   padStr   the text to pad with.
+     * @return  the centered string, or this string.
+     * @throws  NullPointerException if {@code padStr} is {@code null}.
+     * @since   21
+     */
+    public String center(int size, String padStr) {
+        java.util.Objects.requireNonNull(padStr, "padStr");
+        int length = length();
+        if (size <= length) return this;
+        String pad = padStr.isEmpty() ? " " : padStr;
+        int left = padUnits(pad, (size - length) / 2);
+        return padded(pad, left, padUnits(pad, size - length - left));
+    }
+
+    /**
+     * Returns this string padded at the start to {@code targetLength} characters with
+     * {@code padString}, repeated from its start and cut to fit, as JavaScript's
+     * {@code String.prototype.padStart} pads; this string when it is at least
+     * {@code targetLength} characters long or {@code padString} is empty. Unlike
+     * {@link #leftPad(int, String)}, an empty pad string adds nothing and the cut may split a
+     * surrogate pair of {@code padString}.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   targetLength   the length wanted.
+     * @param   padString      the text to pad with.
+     * @return  the padded string, or this string.
+     * @throws  NullPointerException if {@code padString} is {@code null}.
+     * @since   21
+     */
+    public String padStart(int targetLength, String padString) {
+        java.util.Objects.requireNonNull(padString, "padString");
+        if (targetLength <= length() || padString.isEmpty()) return this;
+        return padded(padString, targetLength - length(), 0);
+    }
+
+    /**
+     * Returns this string padded at the end to {@code targetLength} characters with
+     * {@code padString}, repeated from its start and cut to fit, as JavaScript's
+     * {@code String.prototype.padEnd} pads; this string when it is at least
+     * {@code targetLength} characters long or {@code padString} is empty. Unlike
+     * {@link #rightPad(int, String)}, an empty pad string adds nothing and the cut may split a
+     * surrogate pair of {@code padString}.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   targetLength   the length wanted.
+     * @param   padString      the text to pad with.
+     * @return  the padded string, or this string.
+     * @throws  NullPointerException if {@code padString} is {@code null}.
+     * @since   21
+     */
+    public String padEnd(int targetLength, String padString) {
+        java.util.Objects.requireNonNull(padString, "padString");
+        if (targetLength <= length() || padString.isEmpty()) return this;
+        return padded(padString, 0, targetLength - length());
+    }
+
+    /**
+     * Returns this string filled on the left with {@code '0'} digits to {@code width} code
+     * points, as Python's {@code str.zfill} fills: a leading {@code '+'} or {@code '-'} stays in
+     * front of the digits. The width counts code points, as Python's {@code len} does: a
+     * surrogate pair counts once, as does a lone surrogate. Returns this string when it has at
+     * least {@code width} code points.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   width   the number of code points wanted.
+     * @return  the filled string, or this string.
+     * @since   21
+     */
+    public String zeroFill(int width) {
+        int length = length();
+        if (width <= length - (length >>> 1)) return this;
+        int fill = width - codePointCount(0, length);
+        if (fill <= 0) return this;
+        String zeros = "0".repeat(fill);
+        if (length > 0 && (charAt(0) == '+' || charAt(0) == '-')) {
+            return substring(0, 1).concat(zeros).concat(substring(1));
+        }
+        return zeros.concat(this);
+    }
+
+    /**
+     * Returns this string repeated {@code count} times with {@code separator} between the
+     * repetitions: the empty string for a count that is not positive, this string for a count of
+     * one.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   separator   the text between two repetitions.
+     * @param   count       the number of repetitions.
+     * @return  the repeated string.
+     * @throws  NullPointerException if {@code separator} is {@code null}.
+     * @throws  IllegalArgumentException if {@code count} is greater than one and {@code count}
+     *          times the length of this string and the separator together is greater than
+     *          {@link Integer#MAX_VALUE}.
+     * @since   21
+     */
+    public String repeat(String separator, int count) {
+        java.util.Objects.requireNonNull(separator, "separator");
+        if (count <= 0) return "";
+        if (count == 1) return this;
+        if (((long) length() + separator.length()) * count > Integer.MAX_VALUE) {
+            throw new IllegalArgumentException("The requested result is too large for a String.");
+        }
+        if (separator.isEmpty()) return repeat(count);
+        return concat(separator.concat(this).repeat(count - 1));
+    }
+
+    /**
+     * Returns this string with its characters in reverse order, as
+     * {@link StringBuilder#reverse()} reverses them: the {@code char} values are reversed, then
+     * every low surrogate that a high surrogate follows is swapped with it, from the start, so a
+     * surrogate pair keeps its order.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @return  the reversed string, or this string when it has fewer than two characters.
+     * @since   21
+     */
+    public String reverse() {
+        int length = length();
+        if (length <= 1) return this;
+        M3String storage = m3();
+        if (storage == null && isLatin1()) {
+            byte[] bytes = value;
+            byte[] reversed = new byte[length];
+            for (int index = 0; index < length; index++) {
+                reversed[index] = bytes[length - 1 - index];
+            }
+            return new String(reversed, LATIN1);
+        }
+        M3StringFacts facts = storage == null ? null : storage.factsIfPrepared();
+        char[] reversed = new char[length];
+        char[] window = new char[Math.min(length, SCAN_WINDOW)];
+        for (int from = 0; from < length; from += window.length) {
+            int count = Math.min(window.length, length - from);
+            getChars(from, from + count, window, 0);
+            for (int k = 0; k < count; k++) {
+                reversed[length - 1 - from - k] = window[k];
+            }
+        }
+        if (facts == null || !facts.latin1) keepPairOrder(reversed);
+        return new String(reversed);
+    }
+
+    /**
+     * Swaps every low surrogate of {@code units} that a high surrogate follows with it, from the
+     * start, as {@link StringBuilder#reverse()} does after reversing the units.
+     */
+    private static void keepPairOrder(char[] units) {
+        for (int k = 0; k + 1 < units.length; k++) {
+            if (Character.isLowSurrogate(units[k]) && Character.isHighSurrogate(units[k + 1])) {
+                char low = units[k];
+                units[k] = units[k + 1];
+                units[++k] = low;
+            }
+        }
+    }
+
+    /**
+     * Returns the parts of this string between occurrences of {@code separator} in reverse
+     * order, joined by single separators. Empty parts, between two adjacent separators or before
+     * or after one at either end, are dropped. Returns this string when it has no separator.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   separator   the character between the parts.
+     * @return  the parts in reverse order.
+     * @since   21
+     */
+    public String reverseDelimited(char separator) {
+        M3String storage = m3();
+        M3StringFacts facts = storage == null ? null : storage.factsIfPrepared();
+        if (facts != null && !facts.mayContainCodeUnit(separator)) return this;
+        StringBuilder out = null;
+        int lastStart = 0;
+        int lastEnd = 0;
+        for (int end = length(); end > 0; ) {
+            int at = lastIndexOf(separator, end - 1);
+            if (at + 1 < end) {
+                if (lastEnd == 0) {
+                    lastStart = at + 1;
+                    lastEnd = end;
+                } else {
+                    if (out == null) {
+                        out = new StringBuilder(length()).append(this, lastStart, lastEnd);
+                    }
+                    out.append(separator).append(this, at + 1, end);
+                }
+            }
+            end = at;
+        }
+        return out != null ? out.toString() : substring(lastStart, lastEnd);
+    }
+
+    /**
+     * Returns this string rotated right by {@code shift} characters, left for a negative shift:
+     * the last {@code shift % length()} characters move to the front. Returns this string when
+     * it is empty or {@code shift} is a multiple of its length. A rotation may split a surrogate
+     * pair.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   shift   the number of characters to rotate right by.
+     * @return  the rotated string, or this string.
+     * @since   21
+     */
+    public String rotate(int shift) {
+        int length = length();
+        if (length == 0 || shift % length == 0) return this;
+        int offset = -(shift % length);
+        int cut = offset < 0 ? length + offset : offset;
+        return substring(cut).concat(substring(0, cut));
+    }
+
+    /**
+     * Returns this string with {@code suffix} appended, unless {@code suffix} is empty or this
+     * string ends with it or with an element of {@code suffixes}; {@code null} elements are
+     * skipped and an empty element always matches.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   suffix     the suffix to append.
+     * @param   suffixes   more suffixes that count as present.
+     * @return  this string, or this string followed by {@code suffix}.
+     * @throws  NullPointerException if {@code suffix} or {@code suffixes} is {@code null}.
+     * @since   21
+     */
+    public String appendIfMissing(CharSequence suffix, CharSequence... suffixes) {
+        return hasAnyAffix(suffix, suffixes, false, false) ? this : concat(suffix.toString());
+    }
+
+    /**
+     * Returns this string with {@code suffix} appended, unless {@code suffix} is empty or this
+     * string ends with it or with an element of {@code suffixes}, ignoring case as
+     * {@link #regionMatches(boolean, int, String, int, int)} does; {@code null} elements are
+     * skipped and an empty element always matches.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   suffix     the suffix to append.
+     * @param   suffixes   more suffixes that count as present.
+     * @return  this string, or this string followed by {@code suffix}.
+     * @throws  NullPointerException if {@code suffix} or {@code suffixes} is {@code null}.
+     * @since   21
+     */
+    public String appendIfMissingIgnoreCase(CharSequence suffix, CharSequence... suffixes) {
+        return hasAnyAffix(suffix, suffixes, false, true) ? this : concat(suffix.toString());
+    }
+
+    /**
+     * Returns this string with {@code prefix} in front, unless {@code prefix} is empty or this
+     * string starts with it or with an element of {@code prefixes}; {@code null} elements are
+     * skipped and an empty element always matches.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   prefix     the prefix to put in front.
+     * @param   prefixes   more prefixes that count as present.
+     * @return  this string, or {@code prefix} followed by this string.
+     * @throws  NullPointerException if {@code prefix} or {@code prefixes} is {@code null}.
+     * @since   21
+     */
+    public String prependIfMissing(CharSequence prefix, CharSequence... prefixes) {
+        return hasAnyAffix(prefix, prefixes, true, false) ? this : prefix.toString().concat(this);
+    }
+
+    /**
+     * Returns this string with {@code prefix} in front, unless {@code prefix} is empty or this
+     * string starts with it or with an element of {@code prefixes}, ignoring case as
+     * {@link #regionMatches(boolean, int, String, int, int)} does; {@code null} elements are
+     * skipped and an empty element always matches.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   prefix     the prefix to put in front.
+     * @param   prefixes   more prefixes that count as present.
+     * @return  this string, or {@code prefix} followed by this string.
+     * @throws  NullPointerException if {@code prefix} or {@code prefixes} is {@code null}.
+     * @since   21
+     */
+    public String prependIfMissingIgnoreCase(CharSequence prefix, CharSequence... prefixes) {
+        return hasAnyAffix(prefix, prefixes, true, true) ? this : prefix.toString().concat(this);
+    }
+
+    /**
+     * Whether this string starts ({@code atStart}) or ends with {@code affix}, or {@code affix}
+     * is empty, or it starts or ends with a non-null element of {@code more}; ignoring case as
+     * {@link #regionMatches(boolean, int, String, int, int)} does when {@code ignoreCase}.
+     */
+    private boolean hasAnyAffix(CharSequence affix, CharSequence[] more, boolean atStart,
+            boolean ignoreCase) {
+        java.util.Objects.requireNonNull(affix, atStart ? "prefix" : "suffix");
+        java.util.Objects.requireNonNull(more, atStart ? "prefixes" : "suffixes");
+        if (affix.isEmpty() || hasAffix(affix, atStart, ignoreCase)) return true;
+        for (CharSequence other : more) {
+            if (other != null && hasAffix(other, atStart, ignoreCase)) return true;
+        }
+        return false;
+    }
+
+    /** Whether this string starts ({@code atStart}) or ends with {@code affix}. */
+    private boolean hasAffix(CharSequence affix, boolean atStart, boolean ignoreCase) {
+        if (ignoreCase) return atStart ? startsWithIgnoreCase(affix) : endsWithIgnoreCase(affix);
+        return atStart ? startsWith(affix.toString()) : endsWith(affix.toString());
+    }
+
+    /**
+     * Returns this string with {@code wrapWith} before and after it; this string when it is
+     * empty or {@code wrapWith} is {@code U+0000}.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   wrapWith   the character to wrap with.
+     * @return  the wrapped string, or this string.
+     * @since   21
+     */
+    public String wrap(char wrapWith) {
+        if (isEmpty() || wrapWith == 0) return this;
+        String with = String.valueOf(wrapWith);
+        return with.concat(this).concat(with);
+    }
+
+    /**
+     * Returns this string with {@code wrapWith} before and after it; this string when it or
+     * {@code wrapWith} is empty.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   wrapWith   the text to wrap with.
+     * @return  the wrapped string, or this string.
+     * @throws  NullPointerException if {@code wrapWith} is {@code null}.
+     * @since   21
+     */
+    public String wrap(String wrapWith) {
+        java.util.Objects.requireNonNull(wrapWith, "wrapWith");
+        if (isEmpty() || wrapWith.isEmpty()) return this;
+        return wrapWith.concat(this).concat(wrapWith);
+    }
+
+    /**
+     * Returns this string with {@code wrapWith} added in front unless it starts with it, and at
+     * the end unless it ends with it; this string when it is empty or {@code wrapWith} is
+     * {@code U+0000}.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   wrapWith   the character to wrap with.
+     * @return  the wrapped string, or this string.
+     * @since   21
+     */
+    public String wrapIfMissing(char wrapWith) {
+        if (isEmpty() || wrapWith == 0) return this;
+        String with = String.valueOf(wrapWith);
+        String start = charAt(0) == wrapWith ? this : with.concat(this);
+        return charAt(length() - 1) == wrapWith ? start : start.concat(with);
+    }
+
+    /**
+     * Returns this string with {@code wrapWith} added in front unless it starts with it, and at
+     * the end unless it ends with it; this string when it or {@code wrapWith} is empty.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   wrapWith   the text to wrap with.
+     * @return  the wrapped string, or this string.
+     * @throws  NullPointerException if {@code wrapWith} is {@code null}.
+     * @since   21
+     */
+    public String wrapIfMissing(String wrapWith) {
+        java.util.Objects.requireNonNull(wrapWith, "wrapWith");
+        if (isEmpty() || wrapWith.isEmpty()) return this;
+        String start = startsWith(wrapWith) ? this : wrapWith.concat(this);
+        return endsWith(wrapWith) ? start : start.concat(wrapWith);
+    }
+
+    /**
+     * Returns this string with the characters from {@code start} to {@code end} replaced by
+     * {@code overlay}. Both indexes are clamped to {@code 0..length()} and swapped when
+     * {@code start} is the greater; a cut that would split a surrogate pair moves outward, so the
+     * whole pair is replaced.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   overlay   the text put in place of the range.
+     * @param   start     one end of the range.
+     * @param   end       the other end of the range.
+     * @return  the overlaid string, or this string when nothing changes.
+     * @throws  NullPointerException if {@code overlay} is {@code null}.
+     * @since   21
+     */
+    public String overlay(String overlay, int start, int end) {
+        java.util.Objects.requireNonNull(overlay, "overlay");
+        int length = length();
+        int from = Math.min(Math.max(start, 0), length);
+        int to = Math.min(Math.max(end, 0), length);
+        if (from > to) {
+            int swap = from;
+            from = to;
+            to = swap;
+        }
+        if (splitsPair(from)) from--;
+        if (splitsPair(to)) to++;
+        if (from == to && overlay.isEmpty()) return this;
+        return substring(0, from).concat(overlay).concat(substring(to));
+    }
+
+    /**
+     * The number of units of {@code pad} that pad {@code pads} characters: one fewer when cutting
+     * the repeated pad there would split one of its surrogate pairs.
+     */
+    private static int padUnits(String pad, int pads) {
+        return pad.splitsPair(pads % pad.length()) ? pads - 1 : pads;
+    }
+
+    /**
+     * This string between {@code left} and {@code right} units of {@code pad}, each repeated
+     * from the start of {@code pad}; this string when neither is positive.
+     */
+    private String padded(String pad, int left, int right) {
+        String start = left > 0 ? tiled(pad, left).concat(this) : this;
+        return right > 0 ? start.concat(tiled(pad, right)) : start;
+    }
+
+    /** The first {@code count} units of {@code pad} repeated without end. */
+    private static String tiled(String pad, int count) {
+        int whole = count / pad.length();
+        String rest = pad.substring(0, count - whole * pad.length());
+        return whole == 0 ? rest : pad.repeat(whole).concat(rest);
+    }
+
+    /**
      * Returns true if and only if this string contains the specified
      * sequence of char values.
      *

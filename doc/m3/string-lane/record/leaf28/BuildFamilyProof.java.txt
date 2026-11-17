@@ -1,0 +1,282 @@
+// SPDX-License-Identifier: Apache-2.0 OR EPL-2.0
+// Copyright (c) 2026 Synexia, Hitesh Soliwal and others
+
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.util.function.Function;
+import java.util.function.IntFunction;
+import java.util.function.IntUnaryOperator;
+import kotlin.text.StringsKt;
+import org.apache.commons.lang3.StringUtils;
+
+/**
+ * Donor-oracle proof of the BUILD family on a stock JVM whose String carries the head method text. Texts: every string
+ * of 0..4 units over UNITS (case pairs, a separator, the signs, the halves of a surrogate pair) plus window-seam texts
+ * of 505..520 and 1018..1030 units. Oracles: commons-lang3 3.22.0 (leftPad, rightPad, center, reverse,
+ * reverseDelimited, rotate, repeat with a separator, append/prependIfMissing[IgnoreCase], wrap, wrapIfMissing,
+ * overlay), Kotlin stdlib 2.2.20 (CharSequence.reversed, a second reverse oracle), CPython 3.12 (str.zfill for
+ * zeroFill) and Node.js (String.prototype.padStart and padEnd). Exceptions compare by class.
+ * Usage: {@code BuildFamilyProof --write-corpus <dir>} writes corpus.bin and params.txt for python_oracle.py and
+ * node_oracle.js; {@code BuildFamilyProof <dir>} compares, reading their zfill.ans and pad.ans. Exit 1 on a mismatch.
+ */
+public final class BuildFamilyProof {
+    private static final char HIGH = (char) 0xD83D, LOW = (char) 0xDE00;
+    private static final String PAIR = "" + HIGH + LOW;
+    private static final char[] UNITS = {'a', 'A', ',', '-', '+', HIGH, LOW};
+    private static final String[] PADS = {"", "z", "yz", PAIR, "a" + PAIR, PAIR + "b", "" + LOW + HIGH, "xyz"};
+    private static final char[] PAD_CHARS = {'z', ' ', HIGH, LOW, (char) 0};
+    private static final String[] AFFIXES = {"", "a", "A", ",", "a,", PAIR, "" + LOW, "aA", "-"};
+    private static final CharSequence[][] MORE = {{}, {null}, {""}, {"A"}, {"x", ","}};
+    private static final String[] WRAPS = {"", "a", "aA", PAIR, ",", "" + HIGH};
+    private static final char[] WRAP_CHARS = {'a', ',', HIGH, LOW, (char) 0};
+    private static final String[] OVERLAYS = {"", "z", PAIR};
+    private static final String[] JS_PADS = {"", "z", "yz", PAIR, "a" + PAIR};
+    private static int failures;
+
+    private BuildFamilyProof() {}
+
+    private record Size(String name, IntUnaryOperator of) {}
+
+    private record Check(String name, Function<String, Object> mine, Function<String, Object> donor) {}
+
+    /** One oracle request row: op, absolute or relative size, pad, answered for the first {@code texts} texts. */
+    private record Param(String op, boolean relative, int n, String pad, int texts) {
+        int size(String s) {
+            return relative ? s.length() + n : n;
+        }
+
+        String line() {
+            StringBuilder hex = new StringBuilder();
+            for (char c : pad.toCharArray()) hex.append(hex.length() == 0 ? "" : ".").append(String.format("%04x", (int) c));
+            return op + "\t" + (relative ? "rel" : "abs") + "\t" + n + "\t" + (pad.isEmpty() ? "-" : hex) + "\t" + texts;
+        }
+
+        String name() {
+            return op + "(" + (relative ? "length" + (n < 0 ? "" : "+") + n : String.valueOf(n))
+                    + (op.equals("zfill") ? "" : "," + show(pad)) + ")";
+        }
+    }
+
+    public static void main(String[] args) throws IOException {
+        List<String> texts = strings(4);
+        int shortTexts = texts.size();
+        for (int k = 505; k <= 1030; k += (k == 520 ? 498 : 1)) {
+            for (String tail : new String[] {PAIR, ",a", "aA", ""}) {
+                texts.add("x".repeat(k) + tail);
+                texts.add(tail + "x".repeat(k));
+            }
+        }
+        List<Param> params = new ArrayList<>();
+        for (int n : new int[] {Integer.MIN_VALUE, -1, 0, 1, 2, 3, 4, 5, 7}) params.add(new Param("zfill", false, n, "", texts.size()));
+        for (int n : new int[] {-1, 0, 1, 2}) params.add(new Param("zfill", true, n, "", texts.size()));
+        for (String op : new String[] {"padStart", "padEnd"}) {
+            for (String pad : JS_PADS) {
+                for (int n : new int[] {Integer.MIN_VALUE, -1, 0, 2, 3, 5, 7}) params.add(new Param(op, false, n, pad, shortTexts));
+                for (int n : new int[] {1, 3}) params.add(new Param(op, true, n, pad, shortTexts));
+            }
+        }
+        if (args[0].equals("--write-corpus")) {
+            Path dir = Path.of(args[1]);
+            Files.createDirectories(dir);
+            ByteArrayOutputStream out = new ByteArrayOutputStream();
+            out.write(int32(texts.size()));
+            for (String text : texts) writeString(out, text);
+            Files.write(dir.resolve("corpus.bin"), out.toByteArray());
+            StringBuilder lines = new StringBuilder();
+            for (Param p : params) lines.append(p.line()).append('\n');
+            Files.writeString(dir.resolve("params.txt"), lines.toString(), StandardCharsets.US_ASCII);
+            System.out.println("corpus\t" + texts.size() + "\tparams\t" + params.size());
+            return;
+        }
+        List<Check> checks = new ArrayList<>();
+        List<Size> sizes = new ArrayList<>();
+        for (int n : new int[] {Integer.MIN_VALUE, -1, 0, 1, 2, 3, 4, 5, 7}) sizes.add(new Size(String.valueOf(n), len -> n));
+        for (int d : new int[] {1, 2, 3}) sizes.add(new Size("length+" + d, len -> len + d));
+        for (Size size : sizes) {
+            IntUnaryOperator at = size.of;
+            String q = size.name;
+            checks.add(new Check("leftPad(" + q + ")", s -> s.leftPad(at.applyAsInt(s.length())),
+                    s -> StringUtils.leftPad(s, at.applyAsInt(s.length()))));
+            checks.add(new Check("rightPad(" + q + ")", s -> s.rightPad(at.applyAsInt(s.length())),
+                    s -> StringUtils.rightPad(s, at.applyAsInt(s.length()))));
+            checks.add(new Check("center(" + q + ")", s -> s.center(at.applyAsInt(s.length())),
+                    s -> StringUtils.center(s, at.applyAsInt(s.length()))));
+            for (char c : PAD_CHARS) {
+                String r = q + ",'" + Integer.toHexString(c) + "'";
+                checks.add(new Check("leftPad(" + r + ")", s -> s.leftPad(at.applyAsInt(s.length()), c),
+                        s -> StringUtils.leftPad(s, at.applyAsInt(s.length()), c)));
+                checks.add(new Check("rightPad(" + r + ")", s -> s.rightPad(at.applyAsInt(s.length()), c),
+                        s -> StringUtils.rightPad(s, at.applyAsInt(s.length()), c)));
+                checks.add(new Check("center(" + r + ")", s -> s.center(at.applyAsInt(s.length()), c),
+                        s -> StringUtils.center(s, at.applyAsInt(s.length()), c)));
+            }
+            for (String pad : PADS) {
+                String r = q + "," + show(pad);
+                checks.add(new Check("leftPad(" + r + ")", s -> s.leftPad(at.applyAsInt(s.length()), pad),
+                        s -> StringUtils.leftPad(s, at.applyAsInt(s.length()), pad)));
+                checks.add(new Check("rightPad(" + r + ")", s -> s.rightPad(at.applyAsInt(s.length()), pad),
+                        s -> StringUtils.rightPad(s, at.applyAsInt(s.length()), pad)));
+                checks.add(new Check("center(" + r + ")", s -> s.center(at.applyAsInt(s.length()), pad),
+                        s -> StringUtils.center(s, at.applyAsInt(s.length()), pad)));
+            }
+        }
+        checks.add(new Check("reverse()", String::reverse, StringUtils::reverse));
+        checks.add(new Check("reverse() kotlin", String::reverse, s -> StringsKt.reversed(s).toString()));
+        for (char c : new char[] {',', 'a', '-', HIGH, LOW}) {
+            checks.add(new Check("reverseDelimited('" + Integer.toHexString(c) + "')", s -> s.reverseDelimited(c),
+                    s -> StringUtils.reverseDelimited(s, c)));
+        }
+        for (int shift : new int[] {Integer.MIN_VALUE, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 513, Integer.MAX_VALUE}) {
+            checks.add(new Check("rotate(" + shift + ")", s -> s.rotate(shift), s -> StringUtils.rotate(s, shift)));
+        }
+        for (String sep : new String[] {"", ",", "ab", "" + HIGH, PAIR}) {
+            for (int count : new int[] {Integer.MIN_VALUE, -1, 0, 1, 2, 3, 5}) {
+                checks.add(new Check("repeat(" + show(sep) + "," + count + ")", s -> s.repeat(sep, count),
+                        s -> StringUtils.repeat(s, sep, count)));
+            }
+        }
+        for (String affix : AFFIXES) {
+            for (CharSequence[] more : MORE) {
+                String r = show(affix) + "," + showAll(more);
+                checks.add(new Check("appendIfMissing(" + r + ")", s -> s.appendIfMissing(affix, more),
+                        s -> StringUtils.appendIfMissing(s, affix, more)));
+                checks.add(new Check("appendIfMissingIgnoreCase(" + r + ")", s -> s.appendIfMissingIgnoreCase(affix, more),
+                        s -> StringUtils.appendIfMissingIgnoreCase(s, affix, more)));
+                checks.add(new Check("prependIfMissing(" + r + ")", s -> s.prependIfMissing(affix, more),
+                        s -> StringUtils.prependIfMissing(s, affix, more)));
+                checks.add(new Check("prependIfMissingIgnoreCase(" + r + ")", s -> s.prependIfMissingIgnoreCase(affix, more),
+                        s -> StringUtils.prependIfMissingIgnoreCase(s, affix, more)));
+            }
+        }
+        for (char c : WRAP_CHARS) {
+            String r = "'" + Integer.toHexString(c) + "'";
+            checks.add(new Check("wrap(" + r + ")", s -> s.wrap(c), s -> StringUtils.wrap(s, c)));
+            checks.add(new Check("wrapIfMissing(" + r + ")", s -> s.wrapIfMissing(c), s -> StringUtils.wrapIfMissing(s, c)));
+        }
+        for (String with : WRAPS) {
+            checks.add(new Check("wrap(" + show(with) + ")", s -> s.wrap(with), s -> StringUtils.wrap(s, with)));
+            checks.add(new Check("wrapIfMissing(" + show(with) + ")", s -> s.wrapIfMissing(with),
+                    s -> StringUtils.wrapIfMissing(s, with)));
+        }
+        for (String overlay : OVERLAYS) {
+            for (int start = -1; start <= 5; start++) {
+                for (int end = -1; end <= 5; end++) {
+                    int a = start, b = end;
+                    checks.add(new Check("overlay(" + show(overlay) + "," + a + "," + b + ")", s -> s.overlay(overlay, a, b),
+                            s -> StringUtils.overlay(s, overlay, a, b)));
+                }
+            }
+        }
+        for (Check check : checks) report(check.name, texts, check.mine, i -> result(check.donor, texts.get(i)));
+        Path dir = Path.of(args[0]);
+        List<String> zfill = readStrings(dir.resolve("zfill.ans"));
+        List<String> pad = readStrings(dir.resolve("pad.ans"));
+        int zAt = 0, pAt = 0;
+        for (Param p : params) {
+            boolean z = p.op.equals("zfill");
+            List<String> answers = z ? zfill.subList(zAt, zAt + p.texts) : pad.subList(pAt, pAt + p.texts);
+            if (z) zAt += p.texts; else pAt += p.texts;
+            List<String> cut = texts.subList(0, p.texts);
+            Function<String, Object> mine = switch (p.op) {
+                case "zfill" -> s -> s.zeroFill(p.size(s));
+                case "padStart" -> s -> s.padStart(p.size(s), p.pad);
+                default -> s -> s.padEnd(p.size(s), p.pad);
+            };
+            report((z ? "zeroFill " : "") + p.name() + (z ? " python" : " node"), cut, mine, answers::get);
+        }
+        if (zAt != zfill.size() || pAt != pad.size()) {
+            failures++;
+            System.out.println("oracle answer count mismatch\t" + zAt + "/" + zfill.size() + "\t" + pAt + "/" + pad.size());
+        }
+        System.out.println("checks\t" + (checks.size() + params.size()) + "\ttexts\t" + texts.size());
+        System.out.println("RESULT\t" + (failures == 0 ? "PASS" : "FAIL") + "\tfailures=" + failures);
+        System.exit(failures == 0 ? 0 : 1);
+    }
+
+    private static void report(String name, List<String> texts, Function<String, Object> mine, IntFunction<Object> donor) {
+        long mismatches = 0;
+        String first = "-";
+        for (int i = 0; i < texts.size(); i++) {
+            String text = texts.get(i);
+            Object a = result(mine, text), b = donor.apply(i);
+            if (!Objects.equals(a, b) && mismatches++ == 0) {
+                first = show(text.length() > 40 ? text.substring(0, 20) + "..." + text.substring(text.length() - 6) : text)
+                        + " -> " + show(clip(String.valueOf(a))) + " vs " + show(clip(String.valueOf(b)));
+            }
+        }
+        failures += mismatches == 0 ? 0 : 1;
+        if (mismatches != 0 || name.equals("reverse()") || name.equals("center(length+3,\"yz\")")) {
+            System.out.println(name + "\t" + texts.size() + "\t" + mismatches + "\t" + first);
+        }
+    }
+
+    private static String clip(String s) {
+        return s.length() > 40 ? s.substring(0, 20) + "..." + s.substring(s.length() - 6) : s;
+    }
+
+    private static Object result(Function<String, Object> f, String text) {
+        try {
+            return f.apply(text);
+        } catch (RuntimeException e) {
+            return e.getClass().getSimpleName();
+        }
+    }
+
+    private static List<String> strings(int maxLength) {
+        List<String> out = new ArrayList<>();
+        for (int length = 0; length <= maxLength; length++) {
+            int total = (int) Math.pow(UNITS.length, length);
+            for (int code = 0; code < total; code++) {
+                char[] units = new char[length];
+                int rest = code;
+                for (int i = 0; i < length; i++) {
+                    units[i] = UNITS[rest % UNITS.length];
+                    rest /= UNITS.length;
+                }
+                out.add(new String(units));
+            }
+        }
+        return out;
+    }
+
+    private static byte[] int32(int value) {
+        return ByteBuffer.allocate(4).order(ByteOrder.LITTLE_ENDIAN).putInt(value).array();
+    }
+
+    private static void writeString(ByteArrayOutputStream out, String s) throws IOException {
+        ByteBuffer units = ByteBuffer.allocate(4 + 2 * s.length()).order(ByteOrder.LITTLE_ENDIAN).putInt(s.length());
+        for (char c : s.toCharArray()) units.putChar(c);
+        out.write(units.array());
+    }
+
+    private static List<String> readStrings(Path file) throws IOException {
+        ByteBuffer in = ByteBuffer.wrap(Files.readAllBytes(file)).order(ByteOrder.LITTLE_ENDIAN);
+        List<String> out = new ArrayList<>();
+        while (in.hasRemaining()) {
+            char[] units = new char[in.getInt()];
+            for (int k = 0; k < units.length; k++) units[k] = in.getChar();
+            out.add(new String(units));
+        }
+        return out;
+    }
+
+    private static String showAll(CharSequence[] more) {
+        List<String> parts = new ArrayList<>();
+        for (CharSequence s : more) parts.add(s == null ? "null" : show(s.toString()));
+        return "{" + String.join(",", parts) + "}";
+    }
+
+    private static String show(String s) {
+        StringBuilder out = new StringBuilder("\"");
+        for (char c : s.toCharArray()) out.append(c >= 32 && c < 127 ? String.valueOf(c) : String.format("<%04X>", (int) c));
+        return out.append('"').toString();
+    }
+}
