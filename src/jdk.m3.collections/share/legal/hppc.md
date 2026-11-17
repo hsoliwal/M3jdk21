@@ -3,27 +3,31 @@
 ### Origin
 
 The Java sources under `providers/classes/jdk/m3/collections/hppc` of the module `jdk.m3.collections` are derived
-from HPPC, High Performance Primitive Collections (https://github.com/carrotsearch/hppc), release 0.13.0: all 546
-Java sources of the sources jar `com.carrotsearch:hppc:0.13.0` on Maven Central (2026-11-04; its SHA-1 is the one
-Maven Central publishes for it), without its module descriptor. The fork https://github.com/hsoliwal/hppc is identical
-to the library; its head `cce6bb7f5ddfe8319bdbb7056cbea657fe91614a` is the tag `0.13.0` plus one commit that changes
-`CHANGES.txt` and `build-options.properties` only.
+from HPPC, High Performance Primitive Collections (https://github.com/carrotsearch/hppc), release 0.13.0, except one:
+546 of the 547 sources are the 546 Java sources of the sources jar `com.carrotsearch:hppc:0.13.0` on Maven Central
+(2026-11-04; its SHA-1 is the one Maven Central publishes for it), without its module descriptor, and the 547th,
+`ArraySizingStrategies.java`, is Synexia's (see "Growth policy superset by Synexia" below). The fork
+https://github.com/hsoliwal/hppc is identical to the library; its head `cce6bb7f5ddfe8319bdbb7056cbea657fe91614a` is
+the tag `0.13.0` plus one commit that changes `CHANGES.txt` and `build-options.properties` only.
 
-525 of the 546 sources are generated: the library's build writes them from 26 templates (`hppc/src/main/templates`)
-with its own template processor (ANTLR and Velocity) and does not keep them in the repository. They are taken from the
-sources jar rather than generated again here. That the jar holds the sources of the release was checked: its 21
-other sources are byte for byte the files of the repository, and compiled with javac 21 the 546 sources give the
-1,040 classes of the released jar `hppc-0.13.0.jar` with the same members and the same instructions, except the order
-in which the constructors of the anonymous classes in the 40 `SortedIteration...HashMap` classes store their synthetic
-fields (the enclosing instance and captured variables), and, in 282 classes, extra entries of the debug line-number
-tables in the release. Both are code generation of the newer javac that built the release, not the sources.
+525 of the 546 derived sources are generated: the library's build writes them from 26 templates
+(`hppc/src/main/templates`) with its own template processor (ANTLR and Velocity) and does not keep them in the
+repository. They are taken from the sources jar rather than generated again here. That the jar holds the sources of
+the release was checked: its 21 other sources are byte for byte the files of the repository, and compiled with
+javac 21 the 546 sources give the 1,040 classes of the released jar `hppc-0.13.0.jar` with the same members and the
+same instructions, except the order in which the constructors of the anonymous classes in the 40
+`SortedIteration...HashMap` classes store their synthetic fields (the enclosing instance and captured variables),
+and, in 282 classes, extra entries of the debug line-number tables in the release. Both are code generation of the
+newer javac that built the release, not the sources.
 
 HPPC is licensed under the Apache License, Version 2.0. The text below is the repository's file `LICENSE.txt`, which
 names the copyright holder ("Copyright 2010-2013, Carrot Search s.c., Boznicza 11/56, Poznan, Poland"). The 21
 hand-written sources carry the header "Copyright (C) 2010-2026 Carrot Search s.c. and contributors / All rights
 reserved. / Refer to the full license file "LICENSE.txt"", which points to the Apache License of the repository; the
-525 generated sources carry none (the templates have none). The headers are unchanged. The repository's `NOTICE.txt`
-is reproduced below.
+525 generated sources carry none (the templates have none). These headers are unchanged, except that the header of
+`ArraySizingStrategy.java` has one more line, which records Synexia's modification. `ArraySizingStrategies.java`
+carries Synexia's header (Apache License 2.0 or Eclipse Public License 2.0). The repository's `NOTICE.txt` is
+reproduced below.
 
 Origins the library states:
 
@@ -58,10 +62,25 @@ The changes were mechanical (com.synexia repository, recipe crate `inverse-packa
 - `@SuppressWarnings` was added to 141 of the 546 top-level types and extended on 28 of the 29 that had one
   (`AbstractObjectCollection` unchanged), for the lint categories the JDK build reports as errors.
 
-No top-level type was moved to another file, no documentation comment and no white space was changed.
+These mechanical changes moved no top-level type to another file and changed no documentation comment and no white
+space.
 
 Compiled before and after these changes, every one of the 1,040 classes has the same members and the same
 instructions.
+
+### Growth policy superset by Synexia (2026-11-17)
+
+`ArraySizingStrategy` is now annotated `@FunctionalInterface` and has default `ramBytesAllocated()` and
+`ramBytesUsed()` (the object header), so `grow` is its only abstract method and a lambda is a strategy. Its new
+static factories are a superset of the array-list growth policies of the module's collection libraries: `hppc()`
+(the existing `BoundedProportionalArraySizingStrategy.DEFAULT_INSTANCE`), `arrayList()`, `fastList()`,
+`immutableCollectionBuilder()` and `gapList()`; the last four return the constants of the new package-private enum
+`ArraySizingStrategies` (Synexia's file). `ArraySizingStrategies` re-expresses the growth arithmetic of
+`java.util.ArrayList` with `jdk.internal.util.ArraysSupport.newLength` (OpenJDK), Eclipse Collections
+`FastList.sizePlusFiftyPercent`/`ensureCapacity`, Guava `ImmutableCollection.Builder.expandedCapacity` and Brownies
+Collections `CapacityHelper.calculateCapacity`. `grow`, `BoundedProportionalArraySizingStrategy` and the HPPC
+containers are unchanged. `ArraySizingStrategy.java` retains its original copyright and license and records this
+modification in its header.
 
 ### Exported packages
 
