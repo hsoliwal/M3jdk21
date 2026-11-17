@@ -167,21 +167,40 @@ public final class PrimitiveSortedGapMap {
     private void moveGapTo(int logicalIndex) {
         if (logicalIndex < 0 || logicalIndex > size) throw new IndexOutOfBoundsException(logicalIndex);
         if (logicalIndex == gapStart) return;
-        if (logicalIndex < gapStart) {
-            int count = gapStart - logicalIndex;
-            System.arraycopy(keys, logicalIndex, keys, gapEnd - count, count);
-            System.arraycopy(values, logicalIndex, values, gapEnd - count, count);
-            gapStart = logicalIndex;
-            gapEnd -= count;
-        } else {
-            int count = logicalIndex - gapStart;
-            System.arraycopy(keys, gapEnd, keys, gapStart, count);
-            System.arraycopy(values, gapEnd, values, gapStart, count);
-            gapStart += count;
-            gapEnd += count;
-        }
-        keyKind.clear(keys, gapStart, gapEnd);
-        valueKind.clear(values, gapStart, gapEnd);
+        if (logicalIndex < gapStart) moveGapLeft(logicalIndex);
+        else moveGapRight(logicalIndex);
+    }
+
+    //FLLDCIM: LEETCODIFY — pattern GAP_BUFFER
+    /**
+     * The gap is all zero before a move, so only the slice the move vacated needs clearing: after a
+     * left move [gapStart, min(old gapStart, gapEnd)), after a right move
+     * [max(old gapEnd, gapStart),
+     * gapEnd).
+     */
+    private void moveGapLeft(int logicalIndex) {
+        int count = gapStart - logicalIndex;
+        int oldGapStart = gapStart;
+        System.arraycopy(keys, logicalIndex, keys, gapEnd - count, count);
+        System.arraycopy(values, logicalIndex, values, gapEnd - count, count);
+        gapStart = logicalIndex;
+        gapEnd -= count;
+        clearKeysAndValues(gapStart, Math.min(oldGapStart, gapEnd));
+    }
+
+    private void moveGapRight(int logicalIndex) {
+        int count = logicalIndex - gapStart;
+        int oldGapEnd = gapEnd;
+        System.arraycopy(keys, gapEnd, keys, gapStart, count);
+        System.arraycopy(values, gapEnd, values, gapStart, count);
+        gapStart += count;
+        gapEnd += count;
+        clearKeysAndValues(Math.max(oldGapEnd, gapStart), gapEnd);
+    }
+
+    private void clearKeysAndValues(int from, int to) {
+        keyKind.clear(keys, from, to);
+        valueKind.clear(values, from, to);
     }
 
     private void growAt(int logicalIndex) {

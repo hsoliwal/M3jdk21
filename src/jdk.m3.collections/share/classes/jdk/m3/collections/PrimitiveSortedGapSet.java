@@ -151,18 +151,33 @@ public final class PrimitiveSortedGapSet {
     private void moveGapTo(int logicalIndex) {
         if (logicalIndex < 0 || logicalIndex > size) throw new IndexOutOfBoundsException(logicalIndex);
         if (logicalIndex == gapStart) return;
-        if (logicalIndex < gapStart) {
-            int count = gapStart - logicalIndex;
-            System.arraycopy(elements, logicalIndex, elements, gapEnd - count, count);
-            gapStart = logicalIndex;
-            gapEnd -= count;
-        } else {
-            int count = logicalIndex - gapStart;
-            System.arraycopy(elements, gapEnd, elements, gapStart, count);
-            gapStart += count;
-            gapEnd += count;
-        }
-        kind.clear(elements, gapStart, gapEnd);
+        if (logicalIndex < gapStart) moveGapLeft(logicalIndex);
+        else moveGapRight(logicalIndex);
+    }
+
+    //FLLDCIM: LEETCODIFY — pattern GAP_BUFFER
+    /**
+     * The gap is all zero before a move, so only the slice the move vacated needs clearing: after a
+     * left move [gapStart, min(old gapStart, gapEnd)), after a right move
+     * [max(old gapEnd, gapStart),
+     * gapEnd).
+     */
+    private void moveGapLeft(int logicalIndex) {
+        int count = gapStart - logicalIndex;
+        int oldGapStart = gapStart;
+        System.arraycopy(elements, logicalIndex, elements, gapEnd - count, count);
+        gapStart = logicalIndex;
+        gapEnd -= count;
+        kind.clear(elements, gapStart, Math.min(oldGapStart, gapEnd));
+    }
+
+    private void moveGapRight(int logicalIndex) {
+        int count = logicalIndex - gapStart;
+        int oldGapEnd = gapEnd;
+        System.arraycopy(elements, gapEnd, elements, gapStart, count);
+        gapStart += count;
+        gapEnd += count;
+        kind.clear(elements, Math.max(oldGapEnd, gapStart), gapEnd);
     }
 
     private void growAt(int logicalIndex) {
