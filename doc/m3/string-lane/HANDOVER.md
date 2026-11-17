@@ -106,6 +106,24 @@ resource extensions its build lists, so the pinned RFC 8259 image is the generat
 stock JDK 21 with java.base patched: the same 54 JUnit tests pass before and after the move, and the six proofs
 pass against the real owners (444,893 assertions).
 
+**Then `m3/indexdb` as M3DB (same day), by the precompute method, with the owner's names.** The 20 classes of
+`jdk.m3.indexdb` are package `jdk.m3.db` in `src/java.base/share/classes/jdk/m3/db`, and the internal V1
+fingerprint is in `jdk.internal.m3.db`; neither package is exported.
+`M3IndexDB` is `M3DB`, the `M3IndexDb*` types drop that stem (`Artifact`, `SemanticIndex`, `SemanticCodec`,
+`SemanticEdge`, `SemanticNode`, `SemanticKind`, `SemanticFingerprint`, `ChunkSimHash`), `M3BuildState` and the
+hash family drop the `M3` prefix (`MinHash`, `MinHashLsh`, `LogicHash`, `HammingTopK`, `HashDistances`,
+`HashLanes`, `LaneFnv1a`, `LHashTokens`, `ChunkCdc`, `ChunkSha`), and `M3IndexDbFingerprintV1` is
+`jdk.internal.m3.db.LegacyFingerprint`; the tests follow their classes.
+The 32 JUnit sources are in `test/jdk/jdk/m3/db` and the two hash-family fixtures in `test/jdk/jdk/m3/db/resources` (the test-resource layout
+of `m3/tooling/jdk-naming/move_module_area.py`). The renames are tool output: `fold_package.py` for the two
+packages, one OpenRewrite `ChangeType` per type, `move_refs.py` for the text references. `m3/indexdb/pom.xml`
+builds the same artifact `com.m3:m3indexdb` from there; `qualification/`, `recipe/` and `tasks/` stay as
+records. The tests also run on a java.base patch in `make/m3/indexdb/test-java-base.sh` (workflow
+`m3-java-base-internals`). M3JDK is the canonical M3DB owner, so its 21 rows left the residue seal
+`m3/compatibility/m3-canonical-residue-gitblobs.tsv`. Next: `BuildState` as a facade over `jdk.m3.fs`'s
+build state, a V2 fingerprint, maven #145 on `jdk.m3.db`, the com.synexia copies; the JDBC providers (Derby,
+H2, SQLite) belong to the M3DB superset, not to java.base.
+
 ## 2. Invariants
 
 Break one of these and the leaf is wrong, whatever its tests say.

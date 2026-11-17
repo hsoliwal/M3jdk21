@@ -24,7 +24,36 @@
     </dependency>
   </dependencies>
   <build>
+    <!-- M3DB is part of java.base (src/java.base/share/classes/jdk/m3/db and
+         src/java.base/share/classes/jdk/internal/m3/db); its tests and their fixtures are in test/jdk/jdk/m3/db.
+         This pom builds the same artifact from there. -->
+    <sourceDirectory>${project.basedir}/../../src/java.base/share/classes/jdk/m3/db</sourceDirectory>
+    <testSourceDirectory>${project.basedir}/../../test/jdk/jdk/m3/db</testSourceDirectory>
+    <testResources>
+      <testResource>
+        <directory>${project.basedir}/../../test/jdk/jdk/m3/db/resources</directory>
+      </testResource>
+    </testResources>
     <plugins>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>build-helper-maven-plugin</artifactId>
+        <version>3.6.1</version>
+        <executions>
+          <execution>
+            <id>jdk-internal-m3-db</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>add-source</goal>
+            </goals>
+            <configuration>
+              <sources>
+                <source>${project.basedir}/../../src/java.base/share/classes/jdk/internal/m3/db</source>
+              </sources>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>

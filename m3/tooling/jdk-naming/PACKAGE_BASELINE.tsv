@@ -237,7 +237,6 @@ ROOT	m3/eclipse/jdt/receiving/array-nodelist-20261019/recipe-custody/m3-openrewr
 ROOT	m3/eclipse/optional-jmod	REAL
 ROOT	m3/file	REAL
 ROOT	m3/fs	REAL
-ROOT	m3/indexdb	REAL
 ROOT	m3/intern	REAL
 ROOT	m3/lazyobjects	LOOSE
 ROOT	m3/lexicon/hf-intake	REAL
@@ -755,7 +754,6 @@ PACKAGE	jdk.internal.m3.eclipse
 PACKAGE	jdk.internal.m3.indexstring
 PACKAGE	jdk.internal.m3.indexstring.type
 PACKAGE	jdk.internal.m3.mindex
-PACKAGE	jdk.internal.m3.mindex.db
 PACKAGE	jdk.internal.m3.optane
 PACKAGE	jdk.internal.m3.rewrite
 PACKAGE	jdk.internal.m3.rewrite.sealed
@@ -998,7 +996,6 @@ PACKAGE	jdk.m3.fs.vfs.provider.zip
 PACKAGE	jdk.m3.fs.vfs.util
 PACKAGE	jdk.m3.gc
 PACKAGE	jdk.m3.importer
-PACKAGE	jdk.m3.indexdb
 PACKAGE	jdk.m3.intern
 PACKAGE	jdk.m3.jackson
 PACKAGE	jdk.m3.jackson.compiler
@@ -3348,55 +3345,9 @@ PREFIXED	m3/fs/src/test/java/jdk/m3/fs/verification/M3VfsImageProbe.java
 PREFIXED	m3/fs/src/test/java/jdk/m3/fs/vfs/M3FsDepthDurationPrimitivesTest.java
 PREFIXED	m3/fs/src/test/java/jdk/m3/fs/vfs/filter/M3FsInlineCommonsCallsitesTest.java
 PREFIXED	m3/fs/src/test/java/jdk/m3/fs/vfs/util/M3FsDonorFreePrimitivesTest.java
-PREFIXED	m3/indexdb/src/main/java/jdk/internal/m3/mindex/db/M3IndexDbFingerprintV1.java
-PREFIXED	m3/indexdb/src/main/java/jdk/m3/indexdb/M3BuildState.java
-PREFIXED	m3/indexdb/src/main/java/jdk/m3/indexdb/M3ChunkCdc.java
-PREFIXED	m3/indexdb/src/main/java/jdk/m3/indexdb/M3ChunkSha.java
-PREFIXED	m3/indexdb/src/main/java/jdk/m3/indexdb/M3HammingTopK.java
-PREFIXED	m3/indexdb/src/main/java/jdk/m3/indexdb/M3HashDistances.java
-PREFIXED	m3/indexdb/src/main/java/jdk/m3/indexdb/M3HashLanes.java
-PREFIXED	m3/indexdb/src/main/java/jdk/m3/indexdb/M3IndexDB.java
-PREFIXED	m3/indexdb/src/main/java/jdk/m3/indexdb/M3IndexDbArtifact.java
-PREFIXED	m3/indexdb/src/main/java/jdk/m3/indexdb/M3IndexDbChunkSimHash.java
-PREFIXED	m3/indexdb/src/main/java/jdk/m3/indexdb/M3IndexDbSemanticCodec.java
-PREFIXED	m3/indexdb/src/main/java/jdk/m3/indexdb/M3IndexDbSemanticEdge.java
-PREFIXED	m3/indexdb/src/main/java/jdk/m3/indexdb/M3IndexDbSemanticFingerprint.java
-PREFIXED	m3/indexdb/src/main/java/jdk/m3/indexdb/M3IndexDbSemanticIndex.java
-PREFIXED	m3/indexdb/src/main/java/jdk/m3/indexdb/M3IndexDbSemanticKind.java
-PREFIXED	m3/indexdb/src/main/java/jdk/m3/indexdb/M3IndexDbSemanticNode.java
-PREFIXED	m3/indexdb/src/main/java/jdk/m3/indexdb/M3LHashTokens.java
-PREFIXED	m3/indexdb/src/main/java/jdk/m3/indexdb/M3LaneFnv1a.java
-PREFIXED	m3/indexdb/src/main/java/jdk/m3/indexdb/M3LogicHash.java
-PREFIXED	m3/indexdb/src/main/java/jdk/m3/indexdb/M3MinHash.java
-PREFIXED	m3/indexdb/src/main/java/jdk/m3/indexdb/M3MinHashLsh.java
-PREFIXED	m3/indexdb/src/test/java/jdk/m3/indexdb/M3BuildStateContract.java
-PREFIXED	m3/indexdb/src/test/java/jdk/m3/indexdb/M3BuildStateTest.java
-PREFIXED	m3/indexdb/src/test/java/jdk/m3/indexdb/M3ChunkCdcContract.java
-PREFIXED	m3/indexdb/src/test/java/jdk/m3/indexdb/M3ChunkCdcContractTest.java
-PREFIXED	m3/indexdb/src/test/java/jdk/m3/indexdb/M3HammingTopKContract.java
-PREFIXED	m3/indexdb/src/test/java/jdk/m3/indexdb/M3HammingTopKContractTest.java
-PREFIXED	m3/indexdb/src/test/java/jdk/m3/indexdb/M3HammingTopKDump.java
-PREFIXED	m3/indexdb/src/test/java/jdk/m3/indexdb/M3HammingTopKTieOrderMutant.java
-PREFIXED	m3/indexdb/src/test/java/jdk/m3/indexdb/M3HammingTopKTieOrderMutantTest.java
-PREFIXED	m3/indexdb/src/test/java/jdk/m3/indexdb/M3HashFamilyContractSupport.java
-PREFIXED	m3/indexdb/src/test/java/jdk/m3/indexdb/M3HashFamilyDump.java
-PREFIXED	m3/indexdb/src/test/java/jdk/m3/indexdb/M3HashFamilyNecProbe.java
-PREFIXED	m3/indexdb/src/test/java/jdk/m3/indexdb/M3IndexDBIntegrityTest.java
-PREFIXED	m3/indexdb/src/test/java/jdk/m3/indexdb/M3IndexDBTest.java
-PREFIXED	m3/indexdb/src/test/java/jdk/m3/indexdb/M3IndexDbArtifactTest.java
-PREFIXED	m3/indexdb/src/test/java/jdk/m3/indexdb/M3IndexDbChunkSimHashTest.java
-PREFIXED	m3/indexdb/src/test/java/jdk/m3/indexdb/M3IndexDbChunkSimHashTieRuleContractTest.java
-PREFIXED	m3/indexdb/src/test/java/jdk/m3/indexdb/M3IndexDbCodecBoundaryTest.java
-PREFIXED	m3/indexdb/src/test/java/jdk/m3/indexdb/M3IndexDbFingerprintV1BoundaryTest.java
-PREFIXED	m3/indexdb/src/test/java/jdk/m3/indexdb/M3IndexDbFingerprintV1ParityTest.java
-PREFIXED	m3/indexdb/src/test/java/jdk/m3/indexdb/M3IndexDbSemanticBoundaryTest.java
-PREFIXED	m3/indexdb/src/test/java/jdk/m3/indexdb/M3IndexDbSemanticFailClosedTest.java
-PREFIXED	m3/indexdb/src/test/java/jdk/m3/indexdb/M3IndexDbSemanticIndexTest.java
-PREFIXED	m3/indexdb/src/test/java/jdk/m3/indexdb/M3IndexDbStoreBoundaryTest.java
-PREFIXED	m3/indexdb/src/test/java/jdk/m3/indexdb/M3LogicHashContract.java
-PREFIXED	m3/indexdb/src/test/java/jdk/m3/indexdb/M3LogicHashContractTest.java
-PREFIXED	m3/indexdb/src/test/java/jdk/m3/indexdb/M3MinHashContract.java
-PREFIXED	m3/indexdb/src/test/java/jdk/m3/indexdb/M3MinHashContractTest.java
+PREFIXED	src/java.base/share/classes/jdk/m3/db/M3DB.java
+PREFIXED	test/jdk/jdk/m3/db/M3DBIntegrityTest.java
+PREFIXED	test/jdk/jdk/m3/db/M3DBTest.java
 PREFIXED	m3/lexicon/hf-intake/src/main/java/jdk/m3/lexicon/hf/M3HfLexiconIntakeRecipe.java
 PREFIXED	m3/lexicon/hf-intake/src/test/java/jdk/m3/lexicon/hf/M3HfLexiconIntakeProof.java
 PREFIXED	m3/lexicon/receiver/src/main/java/jdk/m3/lexicon/M3AtomCursor.java

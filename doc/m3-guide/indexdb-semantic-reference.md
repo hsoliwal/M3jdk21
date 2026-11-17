@@ -9,6 +9,16 @@
 
 This is complete source-body review of the six graph/fingerprint owners in the public `m3/indexdb` module, together with the three persistence owners in the [companion reference](indexdb-persistence-reference.md). Source pin: `1dce82bfb7f1058d74f7503c4cd54fa7d431c032`, inspected 14 October 2026. The nine blobs are unchanged from inventory pin `278b221e8365ebeb6095a3a5643b38a0564258b5`. It is bounded source/API documentation, not analyzer correctness, all-caller coverage, a fresh test pass or runtime promotion.
 
+**Location and names since 2026-11-17.** The sources reviewed here are M3DB in `java.base` (not exported):
+`src/java.base/share/classes/jdk/m3/db` and `src/java.base/share/classes/jdk/internal/m3/db`, with the tests and
+fixtures in `test/jdk/jdk/m3/db`; `m3/indexdb/pom.xml` builds the same artifact from there.
+`M3IndexDB` is `M3DB`, the `M3IndexDb*` types drop that stem (`Artifact`, `SemanticIndex`, `SemanticCodec`,
+`SemanticEdge`, `SemanticNode`, `SemanticKind`, `SemanticFingerprint`, `ChunkSimHash`), `M3BuildState` and the
+hash family drop the `M3` prefix (`MinHash`, `MinHashLsh`, `LogicHash`, `HammingTopK`, `HashDistances`,
+`HashLanes`, `LaneFnv1a`, `LHashTokens`, `ChunkCdc`, `ChunkSha`), and `M3IndexDbFingerprintV1` is
+`jdk.internal.m3.db.LegacyFingerprint`; the tests follow their classes.
+The links and names in this reference stay at the pinned commit.
+
 Keep four different identities separate:
 
 1. A semantic node ID hashes kind plus semantic key. It identifies a graph row independently of that row's current fingerprint
