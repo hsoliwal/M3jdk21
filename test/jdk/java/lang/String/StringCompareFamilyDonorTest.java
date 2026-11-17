@@ -22,7 +22,7 @@ public class StringCompareFamilyDonorTest {
     private static final String FOO = "foo";
     private static final String FOOBAR = "foobar";
 
-    private static String s(CharSequence text) {
+    private static String asString(CharSequence text) {
         return text.toString();
     }
 
@@ -138,56 +138,57 @@ public class StringCompareFamilyDonorTest {
 
     @Test
     void stringUtilsEqualsIndexOfTest_testEqualsAny() {
-        assertFalse(s(FOO).equalsAny());
-        assertFalse(s(FOO).equalsAny(new String[]{}));
-        assertTrue(s(FOO).equalsAny(FOO));
-        assertTrue(s(FOO).equalsAny(BAR, new String(new char[] { 'f', 'o', 'o' })));
-        assertFalse(s(FOO).equalsAny(BAR, new String(new char[] { 'f', 'O', 'O' })));
-        assertFalse(s(FOO).equalsAny(BAR));
-        assertFalse(s(FOO).equalsAny(BAR, null));
-        assertFalse(s(FOO).equalsAny(FOOBAR));
-        assertFalse(s(FOOBAR).equalsAny(FOO));
-        assertFalse(s(FOO).equalsAny(null, BAR));
-        assertTrue(s(FOO).equalsAny(BAR, null, "", FOO, BAR));
-        assertFalse(s(FOO).equalsAny(FOO.toUpperCase(Locale.ROOT)));
-        assertTrue(s(FOO).equalsAny(new CustomCharSequence("foo")));
-        assertTrue(s(FOO).equalsAny(new StringBuilder("foo")));
-        assertFalse(s(FOO).equalsAny(new CustomCharSequence("fOo")));
-        assertFalse(s(FOO).equalsAny(new StringBuilder("fOo")));
+        assertFalse(asString(FOO).equalsAny());
+        assertFalse(asString(FOO).equalsAny(new String[]{}));
+        assertTrue(asString(FOO).equalsAny(FOO));
+        assertTrue(asString(FOO).equalsAny(BAR, new String(new char[] { 'f', 'o', 'o' })));
+        assertFalse(asString(FOO).equalsAny(BAR, new String(new char[] { 'f', 'O', 'O' })));
+        assertFalse(asString(FOO).equalsAny(BAR));
+        assertFalse(asString(FOO).equalsAny(BAR, null));
+        assertFalse(asString(FOO).equalsAny(FOOBAR));
+        assertFalse(asString(FOOBAR).equalsAny(FOO));
+        assertFalse(asString(FOO).equalsAny(null, BAR));
+        assertTrue(asString(FOO).equalsAny(BAR, null, "", FOO, BAR));
+        assertFalse(asString(FOO).equalsAny(FOO.toUpperCase(Locale.ROOT)));
+        assertTrue(asString(FOO).equalsAny(new CustomCharSequence("foo")));
+        assertTrue(asString(FOO).equalsAny(new StringBuilder("foo")));
+        assertFalse(asString(FOO).equalsAny(new CustomCharSequence("fOo")));
+        assertFalse(asString(FOO).equalsAny(new StringBuilder("fOo")));
     }
 
     @Test
     void stringUtilsEqualsIndexOfTest_testEqualsAnyIgnoreCase() {
-        assertFalse(s(FOO).equalsAnyIgnoreCase());
-        assertFalse(s(FOO).equalsAnyIgnoreCase(new String[]{}));
-        assertTrue(s(FOO).equalsAnyIgnoreCase(FOO));
-        assertTrue(s(FOO).equalsAnyIgnoreCase(FOO.toUpperCase(Locale.ROOT)));
-        assertTrue(s(FOO).equalsAnyIgnoreCase(FOO, new String(new char[]{'f', 'o', 'o'})));
-        assertTrue(s(FOO).equalsAnyIgnoreCase(BAR, new String(new char[]{'f', 'O', 'O'})));
-        assertFalse(s(FOO).equalsAnyIgnoreCase(BAR));
-        assertFalse(s(FOO).equalsAnyIgnoreCase(BAR, null));
-        assertFalse(s(FOO).equalsAnyIgnoreCase(FOOBAR));
-        assertFalse(s(FOOBAR).equalsAnyIgnoreCase(FOO));
-        assertFalse(s(FOO).equalsAnyIgnoreCase(null, BAR));
-        assertTrue(s(FOO).equalsAnyIgnoreCase(BAR, null, "", FOO.toUpperCase(Locale.ROOT), BAR));
-        assertTrue(s(FOO).equalsAnyIgnoreCase(FOO.toUpperCase(Locale.ROOT)));
-        assertTrue(s(FOO).equalsAnyIgnoreCase(new CustomCharSequence("fOo")));
-        assertTrue(s(FOO).equalsAnyIgnoreCase(new StringBuilder("fOo")));
+        assertFalse(asString(FOO).equalsAnyIgnoreCase());
+        assertFalse(asString(FOO).equalsAnyIgnoreCase(new String[]{}));
+        assertTrue(asString(FOO).equalsAnyIgnoreCase(FOO));
+        assertTrue(asString(FOO).equalsAnyIgnoreCase(FOO.toUpperCase(Locale.ROOT)));
+        assertTrue(asString(FOO).equalsAnyIgnoreCase(FOO, new String(new char[]{'f', 'o', 'o'})));
+        assertTrue(asString(FOO).equalsAnyIgnoreCase(BAR, new String(new char[]{'f', 'O', 'O'})));
+        assertFalse(asString(FOO).equalsAnyIgnoreCase(BAR));
+        assertFalse(asString(FOO).equalsAnyIgnoreCase(BAR, null));
+        assertFalse(asString(FOO).equalsAnyIgnoreCase(FOOBAR));
+        assertFalse(asString(FOOBAR).equalsAnyIgnoreCase(FOO));
+        assertFalse(asString(FOO).equalsAnyIgnoreCase(null, BAR));
+        assertTrue(asString(FOO).equalsAnyIgnoreCase(BAR, null, "", FOO.toUpperCase(Locale.ROOT),
+                BAR));
+        assertTrue(asString(FOO).equalsAnyIgnoreCase(FOO.toUpperCase(Locale.ROOT)));
+        assertTrue(asString(FOO).equalsAnyIgnoreCase(new CustomCharSequence("fOo")));
+        assertTrue(asString(FOO).equalsAnyIgnoreCase(new StringBuilder("fOo")));
     }
 
     @Test
     void stringUtilsTest_testDifference_StringString() {
-        assertEquals("", s("").difference(""));
-        assertEquals("abc", s("").difference("abc"));
-        assertEquals("", s("abc").difference(""));
-        assertThrows(NullPointerException.class, () -> s("i am a machine").difference(null));
-        assertEquals("robot", s("i am a machine").difference("i am a robot"));
-        assertEquals("", s("abc").difference("abc"));
-        assertEquals("you are a robot", s("i am a robot").difference("you are a robot"));
+        assertEquals("", asString("").difference(""));
+        assertEquals("abc", asString("").difference("abc"));
+        assertEquals("", asString("abc").difference(""));
+        assertThrows(NullPointerException.class, () -> asString("i am a machine").difference(null));
+        assertEquals("robot", asString("i am a machine").difference("i am a robot"));
+        assertEquals("", asString("abc").difference("abc"));
+        assertEquals("you are a robot", asString("i am a robot").difference("you are a robot"));
         final String cp10400 = new String(Character.toChars(0x10400));
         final String cp10401 = new String(Character.toChars(0x10401));
-        assertEquals(cp10401, s(cp10400).difference(cp10401));
-        assertEquals("Y", s(cp10400 + "X").difference(cp10400 + "Y"));
+        assertEquals(cp10401, asString(cp10400).difference(cp10401));
+        assertEquals("Y", asString(cp10400 + "X").difference(cp10400 + "Y"));
     }
 
     @Test

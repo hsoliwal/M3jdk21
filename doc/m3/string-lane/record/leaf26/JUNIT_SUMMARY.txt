@@ -1,0 +1,6 @@
+JUnit 5 console 1.11.4, stock JDK 21 with the head method text in java.lang.String (--patch-module): StringSliceFamilyTest, StringSliceFamilyDonorTest
+(282 assertions of commons-lang3 3.22.0 own tests, ported by port_donor_tests.py; 62 skipped with reasons in slice.skipped.tsv), StringCompareFamilyTest and
+StringCompareFamilyDonorTest (re-ported: literals now kept verbatim, non-ASCII as UTF-16 escapes), in three modes (flat; -Dm3.stub.force=true
+-Dm3.stub.facts=true; -Dm3.stub.force=true), compact strings on and off:
+[      1117 tests successful      ]
+[         0 tests failed          ]

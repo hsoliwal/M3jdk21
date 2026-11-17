@@ -1,0 +1,631 @@
+
+    /**
+     * Returns the leftmost {@code length} characters of this string: this string when it is not
+     * longer, the empty string for a negative {@code length}. The cut never splits a surrogate
+     * pair; it moves left onto the high half.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   length   the number of characters wanted.
+     * @return  a range of this string.
+     * @since   21
+     */
+    public String left(int length) {
+        if (length < 0) return "";
+        if (length() <= length) return this;
+        int cut = length;
+        if (splitsPair(cut)) cut--;
+        return substring(0, cut);
+    }
+
+    /**
+     * Returns the rightmost {@code length} characters of this string: this string when it is not
+     * longer, the empty string for a negative {@code length}. The cut never splits a surrogate
+     * pair; it moves right past the low half.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   length   the number of characters wanted.
+     * @return  a range of this string.
+     * @since   21
+     */
+    public String right(int length) {
+        if (length < 0) return "";
+        if (length() <= length) return this;
+        int start = length() - length;
+        if (splitsPair(start)) start++;
+        return substring(start);
+    }
+
+    /**
+     * Returns {@code length} characters of this string from {@code position}: a negative position
+     * counts as 0, a position past the end or a negative length gives the empty string. Neither cut
+     * splits a surrogate pair: the start moves right past a low half, the end left onto a high one.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   position   the index of the first character.
+     * @param   length     the number of characters wanted.
+     * @return  a range of this string.
+     * @since   21
+     */
+    public String mid(int position, int length) {
+        if (length < 0 || position > length()) return "";
+        int pos = Math.max(position, 0);
+        int start = splitsPair(pos) ? pos + 1 : pos;
+        if (length() - pos <= length) return substring(start);
+        int end = pos + length;
+        if (splitsPair(end)) end--;
+        return substring(start, Math.max(start, end));
+    }
+
+    /**
+     * Returns this string truncated to at most {@code maxWidth} characters, never splitting a
+     * surrogate pair.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   maxWidth   the most characters kept.
+     * @return  a range of this string.
+     * @throws  IllegalArgumentException if {@code maxWidth} is negative.
+     * @since   21
+     */
+    public String truncate(int maxWidth) {
+        return truncate(0, maxWidth);
+    }
+
+    /**
+     * Returns at most {@code maxWidth} characters of this string from {@code offset}; an offset
+     * past the end gives the empty string. Neither cut splits a surrogate pair.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   offset     the index of the first character kept.
+     * @param   maxWidth   the most characters kept.
+     * @return  a range of this string.
+     * @throws  IllegalArgumentException if {@code offset} or {@code maxWidth} is negative.
+     * @since   21
+     */
+    public String truncate(int offset, int maxWidth) {
+        if (offset < 0) throw new IllegalArgumentException("offset cannot be negative");
+        if (maxWidth < 0) throw new IllegalArgumentException("maxWidth cannot be negative");
+        int length = length();
+        int start = Math.min(offset, length);
+        int end = Math.min(offset > length - maxWidth ? length : offset + maxWidth, length);
+        if (splitsPair(start)) start++;
+        if (splitsPair(end)) end--;
+        return substring(start, Math.max(start, end));
+    }
+
+    /**
+     * Returns this string without its first {@code count} characters: the empty string when it is
+     * not longer.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   count   the number of characters dropped.
+     * @return  a range of this string.
+     * @throws  IllegalArgumentException if {@code count} is negative.
+     * @since   21
+     */
+    public String drop(int count) {
+        if (count < 0) throw new IllegalArgumentException("Requested character count " + count
+                + " is less than zero.");
+        return substring(Math.min(count, length()));
+    }
+
+    /**
+     * Returns this string without its last {@code count} characters: the empty string when it is
+     * not longer.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   count   the number of characters dropped.
+     * @return  a range of this string.
+     * @throws  IllegalArgumentException if {@code count} is negative.
+     * @since   21
+     */
+    public String dropLast(int count) {
+        if (count < 0) throw new IllegalArgumentException("Requested character count " + count
+                + " is less than zero.");
+        return substring(0, Math.max(length() - count, 0));
+    }
+
+    /**
+     * Returns the longest prefix of this string whose characters ({@code char} values) all pass
+     * {@code test}.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   test   the test of each character.
+     * @return  a range of this string.
+     * @throws  NullPointerException if {@code test} is {@code null}.
+     * @since   21
+     */
+    public String takeWhile(java.util.function.IntPredicate test) {
+        return substring(0, passingUnits(test, true));
+    }
+
+    /**
+     * Returns this string without its longest prefix whose characters all pass {@code test}.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   test   the test of each character.
+     * @return  a range of this string.
+     * @throws  NullPointerException if {@code test} is {@code null}.
+     * @since   21
+     */
+    public String dropWhile(java.util.function.IntPredicate test) {
+        return substring(passingUnits(test, true));
+    }
+
+    /**
+     * Returns the longest suffix of this string whose characters all pass {@code test}.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   test   the test of each character.
+     * @return  a range of this string.
+     * @throws  NullPointerException if {@code test} is {@code null}.
+     * @since   21
+     */
+    public String takeLastWhile(java.util.function.IntPredicate test) {
+        return substring(length() - passingUnits(test, false));
+    }
+
+    /**
+     * Returns this string without its longest suffix whose characters all pass {@code test}.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   test   the test of each character.
+     * @return  a range of this string.
+     * @throws  NullPointerException if {@code test} is {@code null}.
+     * @since   21
+     */
+    public String dropLastWhile(java.util.function.IntPredicate test) {
+        return substring(0, length() - passingUnits(test, false));
+    }
+
+    /**
+     * The number of units from the start ({@code forward}) or from the end that pass
+     * {@code test}, read in bulk windows.
+     */
+    private int passingUnits(java.util.function.IntPredicate test, boolean forward) {
+        java.util.Objects.requireNonNull(test, "test");
+        int length = length();
+        char[] window = new char[Math.min(length, SCAN_WINDOW)];
+        for (int done = 0; done < length; ) {
+            int count = Math.min(window.length, length - done);
+            int begin = forward ? done : length - done - count;
+            getChars(begin, begin + count, window, 0);
+            for (int k = 0; k < count; k++) {
+                if (!test.test(window[forward ? k : count - 1 - k])) return done + k;
+            }
+            done += count;
+        }
+        return length;
+    }
+
+    /**
+     * Returns the part of this string before the first occurrence of {@code separator}: this
+     * string when it does not occur, the empty string for an empty separator.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   separator   the separator.
+     * @return  a range of this string.
+     * @throws  NullPointerException if {@code separator} is {@code null}.
+     * @since   21
+     */
+    public String substringBefore(String separator) {
+        java.util.Objects.requireNonNull(separator, "separator");
+        if (isEmpty()) return this;
+        int at = indexOf(separator);
+        return at < 0 ? this : substring(0, at);
+    }
+
+    /**
+     * Returns the part of this string before the first occurrence of the character
+     * {@code codePoint}, or this string when it does not occur.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   codePoint   the separator character.
+     * @return  a range of this string.
+     * @since   21
+     */
+    public String substringBefore(int codePoint) {
+        int at = indexOf(codePoint);
+        return at < 0 ? this : substring(0, at);
+    }
+
+    /**
+     * Returns the part of this string after the first occurrence of {@code separator}: the empty
+     * string when it does not occur, this string for an empty separator.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   separator   the separator.
+     * @return  a range of this string.
+     * @throws  NullPointerException if {@code separator} is {@code null}.
+     * @since   21
+     */
+    public String substringAfter(String separator) {
+        java.util.Objects.requireNonNull(separator, "separator");
+        if (isEmpty()) return this;
+        int at = indexOf(separator);
+        return at < 0 ? "" : substring(at + separator.length());
+    }
+
+    /**
+     * Returns the part of this string after the first occurrence of the character
+     * {@code codePoint}, or the empty string when it does not occur.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   codePoint   the separator character.
+     * @return  a range of this string.
+     * @since   21
+     */
+    public String substringAfter(int codePoint) {
+        if (isEmpty()) return this;
+        int at = indexOf(codePoint);
+        return at < 0 ? "" : substring(at + Character.charCount(codePoint));
+    }
+
+    /**
+     * Returns the part of this string before the last occurrence of {@code separator}: this
+     * string when it does not occur or the separator is empty.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   separator   the separator.
+     * @return  a range of this string.
+     * @throws  NullPointerException if {@code separator} is {@code null}.
+     * @since   21
+     */
+    public String substringBeforeLast(String separator) {
+        java.util.Objects.requireNonNull(separator, "separator");
+        if (isEmpty() || separator.isEmpty()) return this;
+        int at = lastIndexOf(separator);
+        return at < 0 ? this : substring(0, at);
+    }
+
+    /**
+     * Returns the part of this string after the last occurrence of {@code separator}: the empty
+     * string when it does not occur, ends this string, or is empty.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   separator   the separator.
+     * @return  a range of this string.
+     * @throws  NullPointerException if {@code separator} is {@code null}.
+     * @since   21
+     */
+    public String substringAfterLast(String separator) {
+        java.util.Objects.requireNonNull(separator, "separator");
+        if (isEmpty()) return this;
+        if (separator.isEmpty()) return "";
+        int at = lastIndexOf(separator);
+        int end = at + separator.length();
+        return at < 0 || end == length() ? "" : substring(end);
+    }
+
+    /**
+     * Returns the part of this string after the last occurrence of the character
+     * {@code codePoint}: the empty string when it does not occur or ends this string.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   codePoint   the separator character.
+     * @return  a range of this string.
+     * @since   21
+     */
+    public String substringAfterLast(int codePoint) {
+        if (isEmpty()) return this;
+        int at = lastIndexOf(codePoint);
+        int width = Character.charCount(codePoint);
+        return at < 0 || at == length() - width ? "" : substring(at + width);
+    }
+
+    /**
+     * Returns the part of this string before the first occurrence of {@code delimiter}, or
+     * {@code ifAbsent} when it does not occur.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   delimiter   the delimiter.
+     * @param   ifAbsent    the answer when the delimiter does not occur.
+     * @return  a range of this string, or {@code ifAbsent}.
+     * @throws  NullPointerException if {@code delimiter} is {@code null}.
+     * @since   21
+     */
+    public String substringBefore(String delimiter, String ifAbsent) {
+        int at = indexOf(delimiter);
+        return at < 0 ? ifAbsent : substring(0, at);
+    }
+
+    /**
+     * Returns the part of this string after the first occurrence of {@code delimiter}, or
+     * {@code ifAbsent} when it does not occur.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   delimiter   the delimiter.
+     * @param   ifAbsent    the answer when the delimiter does not occur.
+     * @return  a range of this string, or {@code ifAbsent}.
+     * @throws  NullPointerException if {@code delimiter} is {@code null}.
+     * @since   21
+     */
+    public String substringAfter(String delimiter, String ifAbsent) {
+        int at = indexOf(delimiter);
+        return at < 0 ? ifAbsent : substring(at + delimiter.length());
+    }
+
+    /**
+     * Returns the part of this string before the last occurrence of {@code delimiter} that starts
+     * before the last character, or {@code ifAbsent} when there is none (so an empty delimiter is
+     * found before the last character, and not at all in an empty string).
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   delimiter   the delimiter.
+     * @param   ifAbsent    the answer when the delimiter does not occur.
+     * @return  a range of this string, or {@code ifAbsent}.
+     * @throws  NullPointerException if {@code delimiter} is {@code null}.
+     * @since   21
+     */
+    public String substringBeforeLast(String delimiter, String ifAbsent) {
+        int at = lastIndexOf(delimiter, length() - 1);
+        return at < 0 ? ifAbsent : substring(0, at);
+    }
+
+    /**
+     * Returns the part of this string after the last occurrence of {@code delimiter} that starts
+     * before the last character, or {@code ifAbsent} when there is none (so an empty delimiter is
+     * found before the last character, and not at all in an empty string).
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   delimiter   the delimiter.
+     * @param   ifAbsent    the answer when the delimiter does not occur.
+     * @return  a range of this string, or {@code ifAbsent}.
+     * @throws  NullPointerException if {@code delimiter} is {@code null}.
+     * @since   21
+     */
+    public String substringAfterLast(String delimiter, String ifAbsent) {
+        int at = lastIndexOf(delimiter, length() - 1);
+        return at < 0 ? ifAbsent : substring(at + delimiter.length());
+    }
+
+    /**
+     * Returns the part of this string between the first two occurrences of {@code tag}, or
+     * {@code null} when there are not two.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   tag   the tag before and after the part.
+     * @return  a range of this string, or {@code null}.
+     * @throws  NullPointerException if {@code tag} is {@code null}.
+     * @since   21
+     */
+    public String substringBetween(String tag) {
+        return substringBetween(tag, tag);
+    }
+
+    /**
+     * Returns the part of this string between the first occurrence of {@code open} and the first
+     * occurrence of {@code close} after it, or {@code null} when either is missing.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   open    the text before the part.
+     * @param   close   the text after the part.
+     * @return  a range of this string, or {@code null}.
+     * @throws  NullPointerException if {@code open} or {@code close} is {@code null}.
+     * @since   21
+     */
+    public String substringBetween(String open, String close) {
+        java.util.Objects.requireNonNull(close, "close");
+        int start = indexOf(open);
+        if (start < 0) return null;
+        int end = indexOf(close, start + open.length());
+        return end < 0 ? null : substring(start + open.length(), end);
+    }
+
+    /**
+     * Returns this string without {@code prefix} when it starts with it, else this string.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API; Python's
+     * {@code str.removeprefix} has the same result.
+     *
+     * @param   prefix   the prefix to remove.
+     * @return  a range of this string.
+     * @throws  NullPointerException if {@code prefix} is {@code null}.
+     * @since   21
+     */
+    public String removeStart(String prefix) {
+        return startsWith(prefix) ? substring(prefix.length()) : this;
+    }
+
+    /**
+     * Returns this string without its first character when that is {@code c}, else this string.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   c   the character to remove.
+     * @return  a range of this string.
+     * @since   21
+     */
+    public String removeStart(char c) {
+        return !isEmpty() && charAt(0) == c ? substring(1) : this;
+    }
+
+    /**
+     * Returns this string without {@code suffix} when it ends with it and both are non-empty,
+     * else this string.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API; Python's
+     * {@code str.removesuffix} has the same result.
+     *
+     * @param   suffix   the suffix to remove.
+     * @return  a range of this string.
+     * @throws  NullPointerException if {@code suffix} is {@code null}.
+     * @since   21
+     */
+    public String removeEnd(String suffix) {
+        java.util.Objects.requireNonNull(suffix, "suffix");
+        if (isEmpty() || suffix.isEmpty()) return this;
+        return endsWith(suffix) ? substring(0, length() - suffix.length()) : this;
+    }
+
+    /**
+     * Returns this string without {@code prefix} when it starts with it ignoring case, as
+     * {@link #regionMatches(boolean, int, String, int, int)} compares, else this string.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   prefix   the prefix to remove.
+     * @return  a range of this string.
+     * @throws  NullPointerException if {@code prefix} is {@code null}.
+     * @since   21
+     */
+    public String removeStartIgnoreCase(String prefix) {
+        java.util.Objects.requireNonNull(prefix, "prefix");
+        return startsWithIgnoreCase(prefix) ? substring(prefix.length()) : this;
+    }
+
+    /**
+     * Returns this string without {@code suffix} when it ends with it ignoring case and both are
+     * non-empty, else this string.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   suffix   the suffix to remove.
+     * @return  a range of this string.
+     * @throws  NullPointerException if {@code suffix} is {@code null}.
+     * @since   21
+     */
+    public String removeEndIgnoreCase(String suffix) {
+        java.util.Objects.requireNonNull(suffix, "suffix");
+        if (isEmpty() || suffix.isEmpty()) return this;
+        return endsWithIgnoreCase(suffix) ? substring(0, length() - suffix.length()) : this;
+    }
+
+    /**
+     * Returns this string without {@code prefix} and {@code suffix} when it starts with the one,
+     * ends with the other and is at least as long as both; else this string.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   prefix   the prefix to remove.
+     * @param   suffix   the suffix to remove.
+     * @return  a range of this string.
+     * @throws  NullPointerException if {@code prefix} or {@code suffix} is {@code null}.
+     * @since   21
+     */
+    public String removeSurrounding(CharSequence prefix, CharSequence suffix) {
+        String p = prefix.toString();
+        String s = suffix.toString();
+        if (length() >= p.length() + s.length() && startsWith(p) && endsWith(s)) {
+            return substring(p.length(), length() - s.length());
+        }
+        return this;
+    }
+
+    /**
+     * Returns this string without {@code delimiter} at both ends, as
+     * {@link #removeSurrounding(CharSequence, CharSequence)} with the delimiter on both sides.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   delimiter   the text to remove at both ends.
+     * @return  a range of this string.
+     * @throws  NullPointerException if {@code delimiter} is {@code null}.
+     * @since   21
+     */
+    public String removeSurrounding(CharSequence delimiter) {
+        return removeSurrounding(delimiter, delimiter);
+    }
+
+    /**
+     * Returns this string without {@code wrapToken} at both ends when it starts and ends with it
+     * and is at least twice as long; else this string. The part kept ends at the last occurrence
+     * of the token.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   wrapToken   the token to remove at both ends.
+     * @return  a range of this string.
+     * @throws  NullPointerException if {@code wrapToken} is {@code null}.
+     * @since   21
+     */
+    public String unwrap(String wrapToken) {
+        java.util.Objects.requireNonNull(wrapToken, "wrapToken");
+        if (isEmpty() || wrapToken.isEmpty() || length() < 2 * wrapToken.length()) return this;
+        if (startsWith(wrapToken) && endsWith(wrapToken)) {
+            return substring(wrapToken.length(), lastIndexOf(wrapToken));
+        }
+        return this;
+    }
+
+    /**
+     * Returns this string without {@code wrapChar} at both ends when it starts and ends with it
+     * and is longer than one character; else this string. The character {@code U+0000} never
+     * wraps.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   wrapChar   the character to remove at both ends.
+     * @return  a range of this string.
+     * @since   21
+     */
+    public String unwrap(char wrapChar) {
+        int length = length();
+        if (length <= 1 || wrapChar == 0) return this;
+        if (charAt(0) == wrapChar && charAt(length - 1) == wrapChar) {
+            return substring(1, length - 1);
+        }
+        return this;
+    }
+
+    /** Whether {@code index} falls between the two halves of a surrogate pair of this string. */
+    private boolean splitsPair(int index) {
+        return index > 0 && index < length() && Character.isHighSurrogate(charAt(index - 1))
+                && Character.isLowSurrogate(charAt(index));
+    }
