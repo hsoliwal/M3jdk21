@@ -141,23 +141,23 @@ if(MINGW)
   # ps_compare_Double), which -Wfloat-conversion rejects; glibc and clang use a type-generic builtin.
   target_compile_options(m3_collections_packed PRIVATE -Wno-float-conversion)
 endif()
-# NATIVE_ABSORB N5 (synexia-mat-collections C): MatCsrGraph loads m3_mat_csr (or m3.matcsr.native.path),
-# MatIntFilterKernel loads m3_matfilter after the m3.matcollections.jni opt-in.
+# NATIVE_ABSORB N5 (synexia-mat-collections C): CsrGraph loads m3_mat_csr (or m3.matcsr.native.path),
+# IntFilterKernel loads m3_matfilter after the m3.matcollections.jni opt-in.
 m3_collections_jni(m3_mat_csr SOURCES collections/m3csrtranspose.c
-  CLASSES jdk.internal.m3.collections.mat.MatCsrGraph)
+  CLASSES jdk.internal.m3.collections.mat.CsrGraph)
 m3_collections_jni(m3_matfilter SOURCES collections/mat_int_filter_jni.c
-  CLASSES jdk.internal.m3.collections.mat.MatIntFilterKernel)
+  CLASSES jdk.internal.m3.collections.mat.IntFilterKernel)
 
 # NATIVE_ABSORB: existing first-party bit-matrix provider; explicit m3.matmatrix.native.path host.
 m3_collections_jni(m3_mat_bitmatrix SOURCES collections/mat_bit_matrix.c
-  CLASSES jdk.internal.m3.collections.mat.MatBitMatrix)
+  CLASSES jdk.internal.m3.collections.mat.BitMatrix)
 
-# NATIVE_ABSORB N6: MarkerTopKNative loads m3_marker_topk; MatIntRowKernel is host-loaded by absolute path with a
+# NATIVE_ABSORB N6: MarkerTopKNative loads m3_marker_topk; IntRowKernel is host-loaded by absolute path with a
 # SHA-256 pin, named after its C owner as m3_mat_row.
 m3_collections_jni(m3_marker_topk SOURCES collections/m3_marker_topk_jni.c
   CLASSES jdk.internal.m3.collections.sketch.MarkerTopKNative)
 m3_collections_jni(m3_mat_row SOURCES collections/mat_int_row_jni.c
-  CLASSES jdk.internal.m3.collections.mat.MatIntRowKernel)
+  CLASSES jdk.internal.m3.collections.mat.IntRowKernel)
 
 # U12 (second packed lineage JNI codec): PackedIntNative is host-loaded (PackedIntNativeTest: lint.native.path).
 m3_collections_jni(m3_packed_int_width SOURCES collections/packed_int_width.c

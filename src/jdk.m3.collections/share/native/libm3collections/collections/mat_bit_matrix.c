@@ -39,13 +39,13 @@ static unsigned popcount64(uint64_t value) {
 }
 
 JNIEXPORT jint JNICALL
-Java_jdk_internal_m3_collections_mat_MatBitMatrix_nativeAbi0(JNIEnv *env, jclass owner) {
+Java_jdk_internal_m3_collections_mat_BitMatrix_nativeAbi0(JNIEnv *env, jclass owner) {
     (void) env; (void) owner;
     return 1;
 }
 
 JNIEXPORT jlongArray JNICALL
-Java_jdk_internal_m3_collections_mat_MatBitMatrix_transposeNative0(
+Java_jdk_internal_m3_collections_mat_BitMatrix_transposeNative0(
         JNIEnv *env, jclass owner, jlongArray input, jint rows,
         jint columns, jint words_per_row, jint target_words_per_row) {
     (void) owner;

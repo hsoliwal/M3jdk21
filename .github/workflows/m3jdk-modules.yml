@@ -59,7 +59,7 @@ jobs:
       - name: Verify MAT primitive export contracts in the owning collection module
         run: >-
           mvn -B -ntp -f m3/collections/pom.xml
-          -Dtest=MatPrimitiveExportContractTest -DfailIfNoTests=true test
+          -Dtest=PrimitiveExportContractTest -DfailIfNoTests=true test
 
       - name: Execute range jtreg-style main on the actual compiled M3 module
         shell: bash
