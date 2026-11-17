@@ -303,13 +303,31 @@ public final class PackedLongLongBatchSortedMap implements LongLongSortedMap {
         for (int i = 1; i < sortedSize; i++) {
             if (sortedKeys[i - 1] >= sortedKeys[i]) throw new IllegalStateException("sorted order");
         }
+        long[] duplicated = duplicatedPendingKeys();
         for (int i = 0; i < pendingSize; i++) {
             if (Arrays.binarySearch(sortedKeys, 0, sortedSize, pendingKeys[i]) >= 0) {
                 throw new IllegalStateException("pending/sorted overlap");
             }
-            for (int j = i + 1; j < pendingSize; j++) {
-                if (pendingKeys[i] == pendingKeys[j]) throw new IllegalStateException("pending duplicate");
+            // the first index with a later duplicate is the first occurrence of a duplicated key
+            if (Arrays.binarySearch(duplicated, pendingKeys[i]) >= 0) {
+                throw new IllegalStateException("pending duplicate");
             }
         }
+    }
+
+    //FLLDCIM: LEETCODIFY — one sorted copy instead of every pending pair
+    /** The keys that occur more than once in the pending lane, sorted and distinct. */
+    private long[] duplicatedPendingKeys() {
+        long[] keys = Arrays.copyOf(pendingKeys, pendingSize);
+        Arrays.sort(keys);
+        long[] duplicated = new long[keys.length / 2];
+        int count = 0;
+        for (int i = 1; i < keys.length; i++) {
+            boolean repeat = keys[i] == keys[i - 1];
+            if (repeat && (count == 0 || duplicated[count - 1] != keys[i])) {
+                duplicated[count++] = keys[i];
+            }
+        }
+        return Arrays.copyOf(duplicated, count);
     }
 }
