@@ -12,6 +12,7 @@
  * the License.
  */
 
+// Modified 2026 by Synexia contributors: conversions to and from HashingStrategy.
 package jdk.m3.collections.guava.base;
 
 import static jdk.m3.collections.guava.base.Preconditions.checkNotNull;
@@ -22,6 +23,7 @@ import jdk.m3.collections.guava.annotations.J2ktIncompatible;
 import java.io.Serializable;
 import java.util.Objects;
 import java.util.function.BiPredicate;
+import jdk.m3.collections.eclipse.api.block.HashingStrategy;
 
 /**
  * A strategy for determining whether two instances are considered equivalent, and for computing
@@ -367,6 +369,37 @@ public abstract class Equivalence<T> implements BiPredicate<T, T> {
    */
   public static Equivalence<Object> identity() {
     return Identity.INSTANCE;
+  }
+
+  /**
+   * Returns this equivalence as a {@link HashingStrategy}, the equality strategy the collections of
+   * the module {@code jdk.m3.collections} share: its {@code equals} is {@link #equivalent} and its
+   * {@code computeHashCode} is {@link #hash}, so it handles nulls as this equivalence does, except
+   * for an equivalence made by {@link #fromHashingStrategy(HashingStrategy)}: that one returns the
+   * strategy it was made from, which handles nulls as it always did.
+   *
+   * <p>The strategy is serializable when this equivalence is.
+   *
+   * @return this equivalence as a hashing strategy
+   */
+  public HashingStrategy<T> asHashingStrategy() {
+    return EquivalenceStrategies.toStrategy(this);
+  }
+
+  /**
+   * Returns the {@link HashingStrategy} as an equivalence: {@link #equivalent} is its {@code
+   * equals} and {@link #hash} is its {@code computeHashCode}, called with non-null values only (an
+   * equivalence handles nulls itself, as {@link #equivalent} and {@link #hash} describe).
+   *
+   * <p>A strategy made by {@link #asHashingStrategy()} gives back the equivalence it was made from.
+   *
+   * @param <T> the type of the values the equivalence evaluates
+   * @param strategy the hashing strategy, of {@code T} or a supertype
+   * @return the strategy as an equivalence
+   * @throws NullPointerException if the strategy is null
+   */
+  public static <T> Equivalence<T> fromHashingStrategy(HashingStrategy<? super T> strategy) {
+    return EquivalenceStrategies.toEquivalence(strategy);
   }
 
   static final class Equals extends Equivalence<Object> implements Serializable {

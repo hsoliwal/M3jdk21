@@ -48,6 +48,21 @@ Compiled before and after these changes, every one of the 601 classes has the sa
   `NodeCachingLinkedList` the module has a class of that name in the root package `jdk.m3.collections.apache`: final,
   the same three constructors, none of the library's protected cache hooks.
 
+### Later changes made by Synexia (2026-11-17)
+
+The module shares one equality strategy among its collection providers, Eclipse Collections'
+`HashingStrategy` (owner's decision, 2026-11-17). Added by hand, and marked in the file by a line
+"Modified 2026 by Synexia contributors":
+
+- `Equator`: the default method `asHashingStrategy()` (this equator as a `HashingStrategy`) and the
+  static method `fromHashingStrategy(HashingStrategy)` (a strategy as an equator); converting twice
+  gives back the original object;
+- `EquatorStrategies`: a new package-private class holding the two adapters (Apache License, Version
+  2.0, Synexia).
+
+Nothing else in `Equator` changed; the classes of the provider are otherwise as compiled from the
+library.
+
 ### License
 
 ```
