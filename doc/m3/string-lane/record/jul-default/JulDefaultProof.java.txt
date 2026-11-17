@@ -1,0 +1,61 @@
+// SPDX-License-Identifier: Apache-2.0 OR EPL-2.0
+// Copyright (c) 2026 Synexia, Hitesh Soliwal and others
+package m3.jul.proof;
+
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Handler;
+import java.util.logging.Level;
+import java.util.logging.LogRecord;
+import jdk.internal.search.slf4j.Logger;
+import jdk.internal.search.slf4j.LoggerFactory;
+
+/**
+ * JUL_DEFAULT_PROOF v1: in the named module jdk.m3.search, the relocated SLF4J finds the relocated JUL provider
+ * through its uses/provides directives; a logger is the JUL adapter, a call reaches java.util.logging with the
+ * formatted message, the level and the caller, and SLF4J prints no "no providers" warning. Exit 1 on a failure.
+ */
+public final class JulDefaultProof {
+    private JulDefaultProof() {}
+
+    public static void main(String[] args) {
+        ByteArrayOutputStream err = new ByteArrayOutputStream();
+        PrintStream original = System.err;
+        System.setErr(new PrintStream(err, true, StandardCharsets.UTF_8));
+        List<LogRecord> records = new ArrayList<>();
+        java.util.logging.Logger jul = java.util.logging.Logger.getLogger("m3.jul.proof");
+        jul.setUseParentHandlers(false);
+        jul.setLevel(Level.ALL);
+        jul.addHandler(new Handler() {
+            @Override public void publish(LogRecord record) { records.add(record); }
+            @Override public void flush() {}
+            @Override public void close() {}
+        });
+        Logger logger = LoggerFactory.getLogger("m3.jul.proof");
+        logger.info("hello {}", "jul");
+        logger.debug("detail {} {}", 1, 2);
+        System.setErr(original);
+        int failures = 0;
+        failures += check("adapter", logger.getClass().getName(), "jdk.internal.search.slf4j.jul.JDK14LoggerAdapter");
+        failures += check("records", String.valueOf(records.size()), "2");
+        if (records.size() == 2) {
+            failures += check("message", records.get(0).getMessage(), "hello jul");
+            failures += check("level", records.get(0).getLevel().getName(), "INFO");
+            failures += check("caller", records.get(0).getSourceClassName(), JulDefaultProof.class.getName());
+            failures += check("debug level", records.get(1).getLevel().getName(), "FINE");
+            failures += check("debug message", records.get(1).getMessage(), "detail 1 2");
+        }
+        failures += check("stderr", err.toString(StandardCharsets.UTF_8).strip(), "");
+        System.out.println("RESULT\t" + (failures == 0 ? "PASS" : "FAIL") + "\tfailures=" + failures);
+        System.exit(failures == 0 ? 0 : 1);
+    }
+
+    private static int check(String name, String actual, String expected) {
+        boolean ok = expected.equals(actual);
+        System.out.println(name + "\t" + (ok ? "OK" : "FAIL") + "\t" + actual);
+        return ok ? 0 : 1;
+    }
+}

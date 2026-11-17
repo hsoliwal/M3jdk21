@@ -1,0 +1,6 @@
+// SPDX-License-Identifier: Apache-2.0 OR EPL-2.0
+// Copyright (c) 2026 Synexia, Hitesh Soliwal and others
+module m3.jul.proof {
+    requires java.logging;
+    requires jdk.m3.search;
+}
