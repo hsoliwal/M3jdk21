@@ -1,0 +1,9 @@
+compare(null,null)=0 compare(null,a)=-1 compare(a,b)=-1 compare(b,a,false)=1 compare(null,a,false)=1 compare(abc,ab)=1
+compareIgnoreCase(a,B)=-1 (A,b,false)=-1
+difference(abc,abd)=d (abc,abc)=| (abc,ab)=| (ab,abc)=c (x,null)=x
+difference(pair,pair2) units=[D83D DE01]
+equalsAny(abc)=false equalsAny(abc,null,abc)=true equalsAnyIgnoreCase(ABC,abc)=true
+getCommonPrefix()=[] (null)=[] (abc,null)=[] (abc)=[abc] (abc,abd)=[ab] pairs units=[] (abc,'')=[]
+guava commonPrefix(pair,pair2) units=[] commonSuffix(lo+x? ) units=[D83D DE00]
+kotlin commonPrefixWith(pair,pair2) units=[] ignoreCase(ABc,abd)=AB suffix ignoreCase(xAB,yab)=AB suffix(pairs) units=[]
+kotlin ignoreCase sharp s: 1 kelvin: 1 dotless i: 1

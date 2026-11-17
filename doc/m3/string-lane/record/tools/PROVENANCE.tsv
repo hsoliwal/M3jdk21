@@ -1,0 +1,75 @@
+# member	donor API (as proven by the family's oracle)
+countMatches	commons-lang3 3.22.0 StringUtils.countMatches(CharSequence, char)
+indexOfDifference	commons-lang3 3.22.0 StringUtils.indexOfDifference(CharSequence, CharSequence)
+containsAny	commons-lang3 3.22.0 StringUtils.containsAny
+containsAnyIgnoreCase	commons-lang3 3.22.0 StringUtils.containsAnyIgnoreCase
+containsIgnoreCase	commons-lang3 3.22.0 StringUtils.containsIgnoreCase
+containsNone	commons-lang3 3.22.0 StringUtils.containsNone
+containsOnly	commons-lang3 3.22.0 StringUtils.containsOnly
+containsWhitespace	commons-lang3 3.22.0 StringUtils.containsWhitespace
+indexOfAny	commons-lang3 3.22.0 StringUtils.indexOfAny
+indexOfAnyBut	commons-lang3 3.22.0 StringUtils.indexOfAnyBut
+lastIndexOfAny	commons-lang3 3.22.0 StringUtils.lastIndexOfAny
+indexOfIgnoreCase	commons-lang3 3.22.0 StringUtils.indexOfIgnoreCase
+lastIndexOfIgnoreCase	commons-lang3 3.22.0 StringUtils.lastIndexOfIgnoreCase
+ordinalIndexOf	commons-lang3 3.22.0 StringUtils.ordinalIndexOf
+lastOrdinalIndexOf	commons-lang3 3.22.0 StringUtils.lastOrdinalIndexOf
+startsWithAny	commons-lang3 3.22.0 StringUtils.startsWithAny
+endsWithAny	commons-lang3 3.22.0 StringUtils.endsWithAny
+startsWithIgnoreCase	commons-lang3 3.22.0 StringUtils.startsWithIgnoreCase
+endsWithIgnoreCase	commons-lang3 3.22.0 StringUtils.endsWithIgnoreCase
+containsAllWords	commons-text 1.15.0 WordUtils.containsAllWords
+chomp	commons-lang3 3.22.0 StringUtils.chomp
+chop	commons-lang3 3.22.0 StringUtils.chop
+deleteWhitespace	commons-lang3 3.22.0 StringUtils.deleteWhitespace
+normalizeSpace	commons-lang3 3.22.0 StringUtils.normalizeSpace
+stripAccents	commons-lang3 3.22.0 StringUtils.stripAccents
+strip	commons-lang3 3.22.0 StringUtils.strip(String, String)
+stripStart	commons-lang3 3.22.0 StringUtils.stripStart
+stripEnd	commons-lang3 3.22.0 StringUtils.stripEnd
+isNotBlank	commons-lang3 3.22.0 StringUtils.isNotBlank
+isNotEmpty	commons-lang3 3.22.0 StringUtils.isNotEmpty
+isNullOrEmpty	commons-lang3 3.22.0 StringUtils.isEmpty
+isAnyBlank	commons-lang3 3.22.0 StringUtils.isAnyBlank
+isAllBlank	commons-lang3 3.22.0 StringUtils.isAllBlank
+isNoneBlank	commons-lang3 3.22.0 StringUtils.isNoneBlank
+isAnyEmpty	commons-lang3 3.22.0 StringUtils.isAnyEmpty
+isAllEmpty	commons-lang3 3.22.0 StringUtils.isAllEmpty
+isNoneEmpty	commons-lang3 3.22.0 StringUtils.isNoneEmpty
+defaultIfBlank	commons-lang3 3.22.0 StringUtils.defaultIfBlank
+defaultIfEmpty	commons-lang3 3.22.0 StringUtils.defaultIfEmpty
+defaultString	commons-lang3 3.22.0 StringUtils.defaultString
+firstNonBlank	commons-lang3 3.22.0 StringUtils.firstNonBlank
+firstNonEmpty	commons-lang3 3.22.0 StringUtils.firstNonEmpty
+getIfBlank	commons-lang3 3.22.0 StringUtils.getIfBlank
+getIfEmpty	commons-lang3 3.22.0 StringUtils.getIfEmpty
+stripAll	commons-lang3 3.22.0 StringUtils.stripAll
+stripToEmpty	commons-lang3 3.22.0 StringUtils.stripToEmpty
+stripToNull	commons-lang3 3.22.0 StringUtils.stripToNull
+trimToEmpty	commons-lang3 3.22.0 StringUtils.trimToEmpty
+trimToNull	commons-lang3 3.22.0 StringUtils.trimToNull
+isAlpha	commons-lang3 3.22.0 StringUtils.isAlpha
+isAlphaSpace	commons-lang3 3.22.0 StringUtils.isAlphaSpace
+isAlphanumeric	commons-lang3 3.22.0 StringUtils.isAlphanumeric
+isAlphanumericSpace	commons-lang3 3.22.0 StringUtils.isAlphanumericSpace
+isAsciiPrintable	commons-lang3 3.22.0 StringUtils.isAsciiPrintable
+isNumeric	commons-lang3 3.22.0 StringUtils.isNumeric
+isNumericSpace	commons-lang3 3.22.0 StringUtils.isNumericSpace
+isAllLowerCase	commons-lang3 3.22.0 StringUtils.isAllLowerCase
+isAllUpperCase	commons-lang3 3.22.0 StringUtils.isAllUpperCase
+isMixedCase	commons-lang3 3.22.0 StringUtils.isMixedCase
+compare	commons-lang3 3.22.0 StringUtils.compare
+compareIgnoreCase	commons-lang3 3.22.0 StringUtils.compareIgnoreCase
+equals	commons-lang3 3.22.0 StringUtils.equals / equalsIgnoreCase (.NET String.Equals(a, b, comparison))
+getCommonPrefix	commons-lang3 3.22.0 StringUtils.getCommonPrefix
+differenceOfAll	commons-lang3 3.22.0 StringUtils.indexOfDifference(CharSequence...)
+difference	commons-lang3 3.22.0 StringUtils.difference
+equalsAny	commons-lang3 3.22.0 StringUtils.equalsAny
+equalsAnyIgnoreCase	commons-lang3 3.22.0 StringUtils.equalsAnyIgnoreCase
+contentEqualsIgnoreCase	commons-lang3 3.22.0 StringUtils.equalsIgnoreCase (CharSequence)
+compareCodePoints	CPython 3.12 str ordering (code point order); Rust str Ord
+equalsIgnoreAsciiCase	Rust str::eq_ignore_ascii_case
+compareToIgnoreAsciiCase	ASCII case folding definition (UTF-16 unit order)
+commonPrefix	Guava 33.7.2 Strings.commonPrefix; Kotlin 2.2.20 CharSequence.commonPrefixWith
+commonSuffix	Guava 33.7.2 Strings.commonSuffix; Kotlin 2.2.20 CharSequence.commonSuffixWith
+canonicalEquals	CPython 3.12 unicodedata.normalize('NFC') equality

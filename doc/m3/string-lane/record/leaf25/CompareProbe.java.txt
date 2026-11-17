@@ -1,0 +1,49 @@
+// SPDX-License-Identifier: Apache-2.0 OR EPL-2.0
+// Copyright (c) 2026 Synexia, Hitesh Soliwal and others
+
+import com.google.common.base.Strings;
+import kotlin.text.StringsKt;
+import org.apache.commons.lang3.StringUtils;
+
+/** Probe of the COMPARE donors' edge rules: commons-lang3 3.22.0, Guava 33.7.2, Kotlin stdlib 2.2.20. */
+public final class CompareProbe {
+    private CompareProbe() {}
+
+    public static void main(String[] args) {
+        String hi = "" + (char) 0xD83D, lo = "" + (char) 0xDE00, pair = hi + lo, pair2 = hi + (char) 0xDE01;
+        System.out.println("compare(null,null)=" + StringUtils.compare(null, null) + " compare(null,a)="
+                + StringUtils.compare(null, "a") + " compare(a,b)=" + StringUtils.compare("a", "b")
+                + " compare(b,a,false)=" + StringUtils.compare("b", "a", false) + " compare(null,a,false)="
+                + StringUtils.compare(null, "a", false) + " compare(abc,ab)=" + StringUtils.compare("abc", "ab"));
+        System.out.println("compareIgnoreCase(a,B)=" + StringUtils.compareIgnoreCase("a", "B") + " (A,b,false)="
+                + StringUtils.compareIgnoreCase("A", "b", false));
+        System.out.println("difference(abc,abd)=" + StringUtils.difference("abc", "abd") + " (abc,abc)="
+                + StringUtils.difference("abc", "abc") + "| (abc,ab)=" + StringUtils.difference("abc", "ab")
+                + "| (ab,abc)=" + StringUtils.difference("ab", "abc") + " (x,null)=" + StringUtils.difference("x", null));
+        System.out.println("difference(pair,pair2) units=" + units(StringUtils.difference(pair, pair2)));
+        System.out.println("equalsAny(abc)=" + StringUtils.equalsAny("abc") + " equalsAny(abc,null,abc)="
+                + StringUtils.equalsAny("abc", null, "abc") + " equalsAnyIgnoreCase(ABC,abc)="
+                + StringUtils.equalsAnyIgnoreCase("ABC", "abc"));
+        System.out.println("getCommonPrefix()=[" + StringUtils.getCommonPrefix() + "] (null)=["
+                + StringUtils.getCommonPrefix((String[]) null) + "] (abc,null)=[" + StringUtils.getCommonPrefix("abc", null)
+                + "] (abc)=[" + StringUtils.getCommonPrefix("abc") + "] (abc,abd)=["
+                + StringUtils.getCommonPrefix("abc", "abd") + "] pairs units=" + units(StringUtils.getCommonPrefix(pair, pair2))
+                + " (abc,'')=[" + StringUtils.getCommonPrefix("abc", "") + "]");
+        System.out.println("guava commonPrefix(pair,pair2) units=" + units(Strings.commonPrefix(pair, pair2))
+                + " commonSuffix(lo+x? ) units=" + units(Strings.commonSuffix("a" + pair, "b" + hi + lo)));
+        System.out.println("kotlin commonPrefixWith(pair,pair2) units=" + units(StringsKt.commonPrefixWith(pair, pair2, false))
+                + " ignoreCase(ABc,abd)=" + StringsKt.commonPrefixWith("ABc", "abd", true)
+                + " suffix ignoreCase(xAB,yab)=" + StringsKt.commonSuffixWith("xAB", "yab", true)
+                + " suffix(pairs) units=" + units(StringsKt.commonSuffixWith(hi + lo, (char) 0xD83E + lo, false)));
+        System.out.println("kotlin ignoreCase sharp s: " + StringsKt.commonPrefixWith("" + (char) 0xDF, "" + (char) 0x1E9E, true).length()
+                + " kelvin: " + StringsKt.commonPrefixWith("" + (char) 0x212A, "k", true).length()
+                + " dotless i: " + StringsKt.commonPrefixWith("" + (char) 0x0131, "I", true).length());
+    }
+
+    private static String units(String s) {
+        if (s == null) return "null";
+        StringBuilder out = new StringBuilder("[");
+        for (char c : s.toCharArray()) out.append(String.format("%04X ", (int) c));
+        return out.toString().trim() + "]";
+    }
+}

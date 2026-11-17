@@ -1,0 +1,141 @@
+method_texts_verbatim_in_head	4
+lint	javac -Xlint:all,-this-escape -Werror: no warnings
+python 3.12.6 unicode 15.0.0 texts 1885 pairs 3553225
+== CompareFamilyProof flat -XX:+CompactStrings
+compareCodePoints (CPython order)	3553225	0	-
+canonicalEquals (CPython NFC)	3553225	0	-
+compare	3553225	0	-
+compare(nullIsLess=false)	3553225	0	-
+compareIgnoreCase	3553225	0	-
+equals(a,b,true)	3553225	0	-
+equals(a,b,false)	3553225	0	-
+difference	3553225	0	-
+equalsAny	3553225	0	-
+equalsAnyIgnoreCase	3553225	0	-
+contentEqualsIgnoreCase	3553225	0	-
+equalsIgnoreAsciiCase	3553225	0	-
+compareToIgnoreAsciiCase	3553225	0	-
+commonPrefix (Guava)	3553225	0	-
+commonSuffix (Guava)	3553225	0	-
+commonPrefix ignoreCase (Kotlin)	3553225	0	-
+commonSuffix ignoreCase (Kotlin)	3553225	0	-
+commonPrefix(false) (Kotlin)	3553225	0	-
+null-safe statics with nulls	150	0	-
+getCommonPrefix arrays	1465	0	-
+window seams (Guava, Kotlin, ASCII, code points)	7308	0	-
+RESULT	PASS	failures=0
+== CompareFamilyProof flat -XX:-CompactStrings
+compareCodePoints (CPython order)	3553225	0	-
+canonicalEquals (CPython NFC)	3553225	0	-
+compare	3553225	0	-
+compare(nullIsLess=false)	3553225	0	-
+compareIgnoreCase	3553225	0	-
+equals(a,b,true)	3553225	0	-
+equals(a,b,false)	3553225	0	-
+difference	3553225	0	-
+equalsAny	3553225	0	-
+equalsAnyIgnoreCase	3553225	0	-
+contentEqualsIgnoreCase	3553225	0	-
+equalsIgnoreAsciiCase	3553225	0	-
+compareToIgnoreAsciiCase	3553225	0	-
+commonPrefix (Guava)	3553225	0	-
+commonSuffix (Guava)	3553225	0	-
+commonPrefix ignoreCase (Kotlin)	3553225	0	-
+commonSuffix ignoreCase (Kotlin)	3553225	0	-
+commonPrefix(false) (Kotlin)	3553225	0	-
+null-safe statics with nulls	150	0	-
+getCommonPrefix arrays	1465	0	-
+window seams (Guava, Kotlin, ASCII, code points)	7308	0	-
+RESULT	PASS	failures=0
+== CompareFamilyProof m3-facts -XX:+CompactStrings
+compareCodePoints (CPython order)	3553225	0	-
+canonicalEquals (CPython NFC)	3553225	0	-
+compare	3553225	0	-
+compare(nullIsLess=false)	3553225	0	-
+compareIgnoreCase	3553225	0	-
+equals(a,b,true)	3553225	0	-
+equals(a,b,false)	3553225	0	-
+difference	3553225	0	-
+equalsAny	3553225	0	-
+equalsAnyIgnoreCase	3553225	0	-
+contentEqualsIgnoreCase	3553225	0	-
+equalsIgnoreAsciiCase	3553225	0	-
+compareToIgnoreAsciiCase	3553225	0	-
+commonPrefix (Guava)	3553225	0	-
+commonSuffix (Guava)	3553225	0	-
+commonPrefix ignoreCase (Kotlin)	3553225	0	-
+commonSuffix ignoreCase (Kotlin)	3553225	0	-
+commonPrefix(false) (Kotlin)	3553225	0	-
+null-safe statics with nulls	150	0	-
+getCommonPrefix arrays	1465	0	-
+window seams (Guava, Kotlin, ASCII, code points)	7308	0	-
+RESULT	PASS	failures=0
+== CompareFamilyProof m3-facts -XX:-CompactStrings
+compareCodePoints (CPython order)	3553225	0	-
+canonicalEquals (CPython NFC)	3553225	0	-
+compare	3553225	0	-
+compare(nullIsLess=false)	3553225	0	-
+compareIgnoreCase	3553225	0	-
+equals(a,b,true)	3553225	0	-
+equals(a,b,false)	3553225	0	-
+difference	3553225	0	-
+equalsAny	3553225	0	-
+equalsAnyIgnoreCase	3553225	0	-
+contentEqualsIgnoreCase	3553225	0	-
+equalsIgnoreAsciiCase	3553225	0	-
+compareToIgnoreAsciiCase	3553225	0	-
+commonPrefix (Guava)	3553225	0	-
+commonSuffix (Guava)	3553225	0	-
+commonPrefix ignoreCase (Kotlin)	3553225	0	-
+commonSuffix ignoreCase (Kotlin)	3553225	0	-
+commonPrefix(false) (Kotlin)	3553225	0	-
+null-safe statics with nulls	150	0	-
+getCommonPrefix arrays	1465	0	-
+window seams (Guava, Kotlin, ASCII, code points)	7308	0	-
+RESULT	PASS	failures=0
+== CompareFamilyProof m3-scan -XX:+CompactStrings
+compareCodePoints (CPython order)	3553225	0	-
+canonicalEquals (CPython NFC)	3553225	0	-
+compare	3553225	0	-
+compare(nullIsLess=false)	3553225	0	-
+compareIgnoreCase	3553225	0	-
+equals(a,b,true)	3553225	0	-
+equals(a,b,false)	3553225	0	-
+difference	3553225	0	-
+equalsAny	3553225	0	-
+equalsAnyIgnoreCase	3553225	0	-
+contentEqualsIgnoreCase	3553225	0	-
+equalsIgnoreAsciiCase	3553225	0	-
+compareToIgnoreAsciiCase	3553225	0	-
+commonPrefix (Guava)	3553225	0	-
+commonSuffix (Guava)	3553225	0	-
+commonPrefix ignoreCase (Kotlin)	3553225	0	-
+commonSuffix ignoreCase (Kotlin)	3553225	0	-
+commonPrefix(false) (Kotlin)	3553225	0	-
+null-safe statics with nulls	150	0	-
+getCommonPrefix arrays	1465	0	-
+window seams (Guava, Kotlin, ASCII, code points)	7308	0	-
+RESULT	PASS	failures=0
+== CompareFamilyProof m3-scan -XX:-CompactStrings
+compareCodePoints (CPython order)	3553225	0	-
+canonicalEquals (CPython NFC)	3553225	0	-
+compare	3553225	0	-
+compare(nullIsLess=false)	3553225	0	-
+compareIgnoreCase	3553225	0	-
+equals(a,b,true)	3553225	0	-
+equals(a,b,false)	3553225	0	-
+difference	3553225	0	-
+equalsAny	3553225	0	-
+equalsAnyIgnoreCase	3553225	0	-
+contentEqualsIgnoreCase	3553225	0	-
+equalsIgnoreAsciiCase	3553225	0	-
+compareToIgnoreAsciiCase	3553225	0	-
+commonPrefix (Guava)	3553225	0	-
+commonSuffix (Guava)	3553225	0	-
+commonPrefix ignoreCase (Kotlin)	3553225	0	-
+commonSuffix ignoreCase (Kotlin)	3553225	0	-
+commonPrefix(false) (Kotlin)	3553225	0	-
+null-safe statics with nulls	150	0	-
+getCommonPrefix arrays	1465	0	-
+window seams (Guava, Kotlin, ASCII, code points)	7308	0	-
+RESULT	PASS	failures=0
