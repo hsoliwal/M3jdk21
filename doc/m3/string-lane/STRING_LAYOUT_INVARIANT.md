@@ -67,6 +67,6 @@ Every String carries its chars. That is 2 bytes per char per distinct text, plus
 
 ## Next stages
 
-1. **Readers.** `toCharArray` returns `chValue.clone()`. `getChars` and `JNI GetStringChars`/`GetStringCritical` read `chValue` without inflating; the critical path pins it.
+1. **Readers.** Done for Java (recipe `record/layout-invariant/string_readers_chvalue.py`, proof `READERS_PROOF.txt`): `getChars` is one `System.arraycopy` from `chValue` after its unchanged bounds checks, and `toCharArray` returns `chValue.clone()`. M3-backed Strings no longer walk their owners per call, and the families' bulk windows inherit this, since they read through `getChars`. A String made outside the invariant keeps the previous paths. Still owed: `JNI GetStringChars`/`GetStringCritical` read `chValue` without inflating; the critical path pins it.
 2. **Interning.** Equal texts share one interned `value` and one `chValue`. This goes through the M3 pool for M3-backed Strings and through string deduplication for flat ones. Today, sharing happens only through `String(String)` and `intern()` identity.
 3. **Gate.** A naming and census gate rejects a new `String` allocation site that does not fill `chValue`.

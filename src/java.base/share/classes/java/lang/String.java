@@ -1856,6 +1856,11 @@ public final class String
     public void getChars(int srcBegin, int srcEnd, char[] dst, int dstBegin) {
         checkBoundsBeginEnd(srcBegin, srcEnd, length());
         checkBoundsOffCount(dstBegin, srcEnd - srcBegin, dst.length);
+        char[] chars = chValue;
+        if (chars != null) {
+            System.arraycopy(chars, srcBegin, dst, dstBegin, srcEnd - srcBegin);
+            return;
+        }
         M3String storage = m3();
         if (storage != null) {
             storage.getChars(srcBegin, srcEnd, dst, dstBegin);
@@ -10470,6 +10475,8 @@ public final class String
      *          the character sequence represented by this string.
      */
     public char[] toCharArray() {
+        char[] chars = chValue;
+        if (chars != null) return chars.clone();
         M3String storage = m3();
         if (storage != null) {
             return storage.charShadow();
