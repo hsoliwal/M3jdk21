@@ -7960,6 +7960,7 @@ public final class String
         long low = asciiMask(set, 0);
         long high = asciiMask(set, 64);
         boolean wide = hasWideUnit(set);
+        UnitIndex index = set.length > UnitSet.FEW ? new UnitIndex(set) : null;
         int length = length();
         Splicer edits = new Splicer(this);
         char[] window = new char[Math.min(length, SCAN_WINDOW)];
@@ -7968,8 +7969,8 @@ public final class String
             getChars(from, from + count, window, 0);
             for (int k = 0; k < count; k++) {
                 char unit = window[k];
-                int at = (unit < 128 ? inMask(unit, low, high) : wide)
-                        ? searchChars.indexOf(unit) : -1;
+                int at = !(unit < 128 ? inMask(unit, low, high) : wide) ? -1
+                        : index == null ? searchChars.indexOf(unit) : index.indexOf(unit);
                 if (at >= replaceChars.length()) {
                     edits.edit(from + k, from + k + 1, "");
                 } else if (at >= 0 && replaceChars.charAt(at) != unit) {
@@ -7978,6 +7979,68 @@ public final class String
             }
         }
         return edits.result();
+    }
+
+    /**
+     * The index of the first occurrence of each unit of a list, built once per call for
+     * {@link #replaceChars(String, String)} with more than {@link UnitSet#FEW} search units, so
+     * that a unit of this string is looked up in constant time (by halving for a sparse list of
+     * units at or above 256) instead of by a search of the list: a table for the units below
+     * 256 and, for the others, a table over their range when it spans at most four times their
+     * number of units (or 256), else their (unit, index) keys in order.
+     */
+    private static final class UnitIndex {
+        /** The first index + 1 of each unit below 256, 0 when absent. */
+        private final int[] latin1 = new int[256];
+        /** The least unit at or above 256. */
+        private final int base;
+        /** The first index + 1 of each unit from {@link #base}, 0 when absent; or {@code null}. */
+        private final int[] dense;
+        /** unit << 32 | index of every unit at or above 256, in order; when not dense. */
+        private final long[] keys;
+        private final int count;
+
+        UnitIndex(char[] units) {
+            long[] wide = new long[units.length];
+            int n = 0;
+            int least = Character.MAX_VALUE;
+            int most = 0;
+            for (int i = 0; i < units.length; i++) {
+                char unit = units[i];
+                if (unit >= 256) {
+                    wide[n++] = (long) unit << 32 | i;
+                    least = Math.min(least, unit);
+                    most = Math.max(most, unit);
+                } else if (latin1[unit] == 0) {
+                    latin1[unit] = i + 1;
+                }
+            }
+            int[] table = null;
+            if (n > 0 && most - least < Math.max(256, 4 * n)) {
+                table = new int[most - least + 1];
+                for (int j = n - 1; j >= 0; j--) {   // backwards: the first index is written last
+                    table[(int) (wide[j] >>> 32) - least] = (int) wide[j] + 1;
+                }
+            } else {
+                java.util.Arrays.sort(wide, 0, n);
+            }
+            base = least;
+            dense = table;
+            keys = wide;
+            count = n;
+        }
+
+        /** The index of the first occurrence of {@code unit} in the list, or -1. */
+        int indexOf(char unit) {
+            if (unit < 256) return latin1[unit] - 1;
+            if (dense != null) {
+                int at = unit - base;
+                return at >= 0 && at < dense.length ? dense[at] - 1 : -1;
+            }
+            int at = java.util.Arrays.binarySearch(keys, 0, count, (long) unit << 32);
+            if (at < 0) at = -at - 1;   // the first key of unit, if there is one
+            return at < count && (int) (keys[at] >>> 32) == unit ? (int) keys[at] : -1;
+        }
     }
 
     /**
