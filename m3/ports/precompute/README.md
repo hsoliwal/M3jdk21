@@ -12,7 +12,8 @@ packages into the JDK.
 |---|---|
 | Java sources | `src/java.base/share/classes/jdk/m3/precompute`, compiled into java.base by the JDK build |
 | JUnit tests | `test/jdk/jdk/m3/precompute`, run by this folder's `pom.xml` (not by jtreg) |
-| Maven build, natives, verify scripts, records | this folder; `pom.xml` builds the same artifact `com.m3:m3-precompute` from the two folders above |
+| Native library `m3_precompute` | `src/java.base/share/native/libm3precompute` (opt-in, built by `make/m3/precompute/CMakeLists.txt`; the C checks are in `test/jdk/jdk/m3/precompute/native`) |
+| Maven build, verify scripts, records | this folder; `pom.xml` builds the same artifact `com.m3:m3-precompute` from the folders above, and its `native` profile runs that CMake build |
 
 On an M3JDK image the package is loaded from java.base and is not exported, so a program on the class path
 that uses it needs `--add-exports java.base/jdk.m3.precompute=ALL-UNNAMED`. On any other JDK the Maven

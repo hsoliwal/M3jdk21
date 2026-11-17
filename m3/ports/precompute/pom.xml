@@ -106,7 +106,7 @@
                   <executable>cmake</executable>
                   <arguments>
                     <argument>-S</argument>
-                    <argument>${project.basedir}/src/main/native</argument>
+                    <argument>${project.basedir}/../../../make/m3/precompute</argument>
                     <argument>-B</argument>
                     <argument>${project.build.directory}/native</argument>
                     <argument>-DCMAKE_BUILD_TYPE=Release</argument>
