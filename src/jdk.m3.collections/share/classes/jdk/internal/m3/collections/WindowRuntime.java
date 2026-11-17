@@ -217,6 +217,8 @@ public final class WindowRuntime {
 		private int [] starts = new int [4];
 		private int [] ends = new int [4];
 		private int rangeCount;
+        //FLLDCIM: LEETCODIFY — the sum of ends - starts over the ranges, kept by every mutation
+        private long represented;
 
 	public Selection () {
 	}
@@ -270,11 +272,13 @@ public final class WindowRuntime {
 		public void clear () {
 			allSelected = false;
 			rangeCount = 0;
+            represented = 0;
 		}
 
 		public void selectAll () {
 			allSelected = true;
 			rangeCount = 0;
+            represented = 0;
 		}
 
 		/** Inverts every row in O(1): the represented ranges flip meaning. */
@@ -283,8 +287,6 @@ public final class WindowRuntime {
 		}
 
 		public int selectedCount () {
-			long represented = 0;
-			for (int i = 0; i < rangeCount; i++) represented += ends [i] - starts [i];
 			long selected = allSelected ? (long)logicalCount - represented : represented;
 			return Math.toIntExact (selected);
 		}
@@ -336,6 +338,7 @@ public final class WindowRuntime {
 			}
 			if (allSelected) {
 				// New rows are unselected. Extend a touching exception, or insert one.
+                represented += count; // the new rows join an exception range either way
 				if (touches) {
 					ends [first] += count;
 					shiftRanges (first + 1, count);
@@ -392,6 +395,7 @@ public final class WindowRuntime {
 			starts = nextStarts;
 			ends = nextEnds;
 			rangeCount = nextCount;
+            represented = representedLength ();
 			logicalCount -= count;
 		}
 
@@ -417,6 +421,12 @@ public final class WindowRuntime {
 				}
 			}
 			return written;
+        }
+
+        private long representedLength () {
+            long sum = 0;
+            for (int i = 0; i < rangeCount; i++) sum += ends [i] - starts [i];
+            return sum;
 		}
 
 		private static int compactCapacity (int required) {
@@ -449,8 +459,10 @@ public final class WindowRuntime {
 			while (last < rangeCount && starts [last] <= mergedEnd) {
 				mergedStart = Math.min (mergedStart, starts [last]);
 				mergedEnd = Math.max (mergedEnd, ends [last]);
+                represented -= ends [last] - starts [last];
 				last++;
 			}
+            represented += mergedEnd - mergedStart;
 			int removed = last - first;
 			ensureCapacity (rangeCount - removed + 1);
 			System.arraycopy (starts, last, starts, first + 1, rangeCount - last);
@@ -465,7 +477,10 @@ public final class WindowRuntime {
 			int first = firstEndingAtOrAfter (start + 1);
 			if (first == rangeCount || starts [first] >= endExclusive) return;
 			int last = first;
-			while (last < rangeCount && starts [last] < endExclusive) last++;
+            while (last < rangeCount && starts [last] < endExclusive) {
+                represented -= ends [last] - starts [last];
+                last++;
+            }
 			int leftStart = starts [first];
 			int rightEnd = ends [last - 1];
 			boolean left = leftStart < start;
@@ -479,10 +494,12 @@ public final class WindowRuntime {
 			if (left) {
 				starts [write] = leftStart;
 				ends [write++] = start;
+                represented += start - leftStart;
 			}
 			if (right) {
 				starts [write] = endExclusive;
 				ends [write] = rightEnd;
+                represented += rightEnd - endExclusive;
 			}
 			rangeCount = newCount;
 		}
