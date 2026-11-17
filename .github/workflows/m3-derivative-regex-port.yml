@@ -3,6 +3,8 @@ on:
   pull_request:
     paths:
       - 'm3/ports/precompute/**'
+      - 'src/java.base/share/classes/jdk/m3/precompute/**'
+      - 'test/jdk/jdk/m3/precompute/**'
       - '.github/workflows/m3-derivative-regex-port.yml'
   workflow_dispatch:
 concurrency:

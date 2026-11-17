@@ -5,6 +5,8 @@ on:
   pull_request:
     paths:
       - 'm3/ports/precompute/**'
+      - 'src/java.base/share/classes/jdk/m3/precompute/**'
+      - 'test/jdk/jdk/m3/precompute/**'
       - 'm3/docs/M3JDK21_PORTING_INVARIANT.md'
       - 'm3/docs/name-mapping.json'
       - 'm3/docs/*precompute*.tsv'

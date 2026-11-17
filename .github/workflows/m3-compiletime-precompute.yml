@@ -44,7 +44,7 @@ jobs:
           set -euo pipefail
           out=target/m3-precompute-classes
           mkdir -p "$out"
-          javac --release 21 -d "$out" $(find m3/ports/precompute/src/main/java -name '*.java')
+          javac --release 21 -d "$out" $(find src/java.base/share/classes/jdk/m3/precompute -name '*.java')
           jar --create --file target/m3-precompute.jar -C "$out" .
           mvn -B -ntp install:install-file -Dfile=target/m3-precompute.jar \
             -DgroupId=com.m3 -DartifactId=m3-precompute -Dversion=0.1.0-SNAPSHOT -Dpackaging=jar

@@ -1,9 +1,24 @@
 # M3JDK full precompute — second-pass port
 
-Status: isolated Apache-2.0 target port. This module is **not** a `java.lang.String`
-replacement and is not on the bootstrap path. It is the M3JDK-owned landing zone for
+Status: part of `java.base` (package `jdk.m3.precompute`, not exported; the Apache-2.0
+headers are kept). This module is **not** a `java.lang.String` replacement. It is the
+M3JDK-owned landing zone for
 broader static precompute that must not bloat `M3String` or leak Synexia runtime
 packages into the JDK.
+
+## Location
+
+| What | Where |
+|---|---|
+| Java sources | `src/java.base/share/classes/jdk/m3/precompute`, compiled into java.base by the JDK build |
+| JUnit tests | `test/jdk/jdk/m3/precompute`, run by this folder's `pom.xml` (not by jtreg) |
+| Maven build, natives, verify scripts, records | this folder; `pom.xml` builds the same artifact `com.m3:m3-precompute` from the two folders above |
+
+On an M3JDK image the package is loaded from java.base and is not exported, so a program on the class path
+that uses it needs `--add-exports java.base/jdk.m3.precompute=ALL-UNNAMED`. On any other JDK the Maven
+artifact behaves as before. From java.base, `System.loadLibrary("m3_precompute")` searches the JDK's own
+library directory; the explicit `m3.precompute.native.path` and `m3.precompute.native.pathFile` properties
+work as before.
 
 ## Ownership split
 

@@ -23,6 +23,10 @@
     </dependency>
   </dependencies>
   <build>
+    <!-- The sources are part of java.base (src/java.base/share/classes/jdk/m3/precompute) and the
+         tests are in test/jdk/jdk/m3/precompute. This pom builds the same artifact from there. -->
+    <sourceDirectory>${project.basedir}/../../../src/java.base/share/classes/jdk/m3/precompute</sourceDirectory>
+    <testSourceDirectory>${project.basedir}/../../../test/jdk/jdk/m3/precompute</testSourceDirectory>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
