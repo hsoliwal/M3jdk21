@@ -12,6 +12,9 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ *
+ * Modified 2026 by Synexia contributors: the values are stored in array lanes, one slot per
+ * value, instead of one entry object each.
  */
 
 package jdk.m3.collections.guava.collect;
@@ -78,6 +81,17 @@ import java.util.function.Consumer;
  * in a way that affects its {@link Object#equals} behavior. Undefined behavior and bugs will
  * result.
  *
+ * <p>The values live in two arrays shared by the multimap, one slot per value, with no entry
+ * object. While an iteration of {@code entries()}, {@code values()} or {@code keys()} (also
+ * through their spliterators and streams) or a {@code forEach} is suspended, changes made other
+ * than through it are seen this way: the entry it returns next is returned even if it was removed
+ * meanwhile; if that entry was removed, the entries removed after it before the iteration moves on
+ * are skipped (upstream returned them); emptying the multimap, even briefly (as {@code removeAll}
+ * or {@code replaceValues} of its only key does), ends the iteration; and if the entry it returns
+ * next was removed and its slot taken by a new entry before the iteration moved on, it throws
+ * {@link ConcurrentModificationException}. Entries returned by {@code entries()} are {@code
+ * AbstractMap.SimpleImmutableEntry} objects rather than entries of this class.
+ *
  * <p>See the Guava User Guide article on <a href=
  * "https://github.com/google/guava/wiki/NewCollectionTypesExplained#multimap">{@code Multimap}</a>.
  *
@@ -126,38 +140,56 @@ public final class LinkedHashMultimap<K extends Object, V extends Object>
     return result;
   }
 
-  /**
-   * LinkedHashMultimap entries are in no less than three coexisting linked lists: a bucket in the
-   * hash table for a {@code Set<V>} associated with a key, the linked list of insertion-ordered
-   * entries in that {@code Set<V>}, and the linked list of entries in the LinkedHashMultimap as a
-   * whole.
+  /*
+   * LinkedHashMultimap values live in two arrays shared by the whole multimap, one slot per value:
+   * refs holds the key and the value of slot s at 2s and 2s + 1; ints holds INTS ints of slot s
+   * from INTS * s: the smeared hash of the value, the next slot in the bucket of the key's value
+   * table, the neighbours in the insertion order of the key's values and in the insertion order of
+   * the whole multimap, and a stamp. There is no entry object per value, and the ints of one slot
+   * share a cache line.
+   *
+   * A removed slot keeps its forward links (successor in its value set and in the multimap), so an
+   * iteration suspended on it can go on, as upstream's removed entries kept theirs; its key and
+   * value are cleared. The stamp is incremented when a slot is taken and when it is freed (odd =
+   * live), so an iteration notices a slot that was freed and taken again.
+   *
+   * Freed slots wait in a first-in-first-out queue threaded through the bucket field, and a fresh
+   * slot is taken while the lanes have one: a freed slot's kept successor chain then only passes
+   * through slots freed after it, never through one taken again before it, so skipping freed slots
+   * while the head slot's stamp is unchanged is sound. A last-in-first-out free list would break
+   * that. The lanes start with one slot and grow by two slots or a quarter, whichever is more (at
+   * most 45 bytes of lanes per value from 13 values on), keep their capacity until the multimap
+   * empties (as ArrayList and HashMap keep theirs; renumbering slots would end iterations in
+   * progress), and an emptied multimap keeps lanes of up to 64 slots and drops larger ones.
    */
-  private static final class ValueEntry<K extends Object, V extends Object>
-      extends SimpleImmutableEntry<K, V> {
-    final int smearedValueHash;
 
-    ValueEntry<K, V> nextInValueBucket;
+  /** Slot index meaning "none" in the order fields, the free queue and the cursors. */
+  private static final int NONE = -1;
 
-    private ValueEntry<K, V> predecessorInValueSet;
-    private ValueEntry<K, V> successorInValueSet;
+  /** The int fields of a slot, at INTS * slot + field. */
+  private static final int HASH = 0;
+  private static final int BUCKET = 1;
+  private static final int SET_PREDECESSOR = 2;
+  private static final int SET_SUCCESSOR = 3;
+  private static final int PREDECESSOR = 4;
+  private static final int SUCCESSOR = 5;
+  private static final int STAMP = 6;
+  private static final int INTS = 7;
 
-    private ValueEntry<K, V> predecessorInMultimap;
-    private ValueEntry<K, V> successorInMultimap;
+  /** Slots of the first allocation. */
+  private static final int MIN_SLOTS = 1;
 
-    ValueEntry(
-        @ParametricNullness K key,
-        @ParametricNullness V value,
-        int smearedValueHash,
-        ValueEntry<K, V> nextInValueBucket) {
-      super(key, value);
-      this.smearedValueHash = smearedValueHash;
-      this.nextInValueBucket = nextInValueBucket;
-    }
+  /** The lanes grow by at least this many slots. */
+  private static final int MIN_GROWTH = 2;
 
-    boolean matchesValue(Object v, int smearedVHash) {
-      return smearedValueHash == smearedVHash && Objects.equals(getValue(), v);
-    }
-  }
+  /** An emptied multimap keeps lanes of at most this many slots. */
+  private static final int KEPT_WHEN_EMPTY = 64;
+
+  /** Largest number of slots: INTS ints each in one int[]. */
+  private static final int MAX_SLOTS = (Integer.MAX_VALUE - 8) / INTS;
+
+  private static final Object[] NO_REFS = {};
+  private static final int[] NO_INTS = {};
 
   private static final int DEFAULT_EXPECTED_KEYS = 12;
   private static final int DEFAULT_EXPECTED_VALUES_PER_KEY = 2;
@@ -178,14 +210,156 @@ public final class LinkedHashMultimap<K extends Object, V extends Object>
   private static final int MAX_HASH_BUCKET_LENGTH = 9;
 
   private transient int expectedValuesPerKey;
-  private transient MultimapIterationChain<K, V> multimapIterationChain =
-      new MultimapIterationChain<>();
+
+  /** Key and value of each slot, at 2 * slot and 2 * slot + 1. */
+  private transient Object[] refs;
+  /** The INTS int fields of each slot, from INTS * slot. */
+  private transient int[] ints;
+  /** Slots of the lanes. */
+  private transient int capacity;
+
+  /** First and last slot in the multimap's insertion order, or NONE. */
+  private transient int firstInMultimap;
+  private transient int lastInMultimap;
+  /** Slots handed out since the lanes were allocated or emptied; slots at or above it are fresh. */
+  private transient int used;
+  /** Live slots. */
+  private transient int live;
+  /** Ends of the queue of freed slots, or NONE. */
+  private transient int freeHead;
+  private transient int freeTail;
+  /** Incremented when an emptied multimap resets or drops its lanes: suspended iterations end. */
+  private transient int epoch;
 
   private LinkedHashMultimap(int expectedKeys, int expectedValuesPerKey) {
     super(Platform.newLinkedHashMapWithExpectedSize(expectedKeys));
     checkNonnegative(expectedValuesPerKey, "expectedValuesPerKey");
 
     this.expectedValuesPerKey = expectedValuesPerKey;
+    refs = NO_REFS;
+    ints = NO_INTS;
+    emptied();
+  }
+
+  /** No slot in use, no order, no free slot; suspended iterations end. */
+  private void emptied() {
+    firstInMultimap = NONE;
+    lastInMultimap = NONE;
+    used = 0;
+    live = 0;
+    freeHead = NONE;
+    freeTail = NONE;
+    epoch++;
+  }
+
+  /** The multimap became empty: small lanes are kept for reuse, larger ones dropped. */
+  private void onEmpty() {
+    if (capacity > KEPT_WHEN_EMPTY) {
+      refs = NO_REFS;
+      ints = NO_INTS;
+      capacity = 0;
+    }
+    emptied();
+  }
+
+  /**
+   * A fresh slot while the lanes have one, else the oldest freed slot, else a slot of grown lanes.
+   */
+  private int takeSlot() {
+    if (used == capacity && freeHead == NONE) {
+      grow();
+    }
+    int slot;
+    if (used < capacity) {
+      slot = used++;
+    } else {
+      slot = freeHead;
+      freeHead = ints[INTS * slot + BUCKET] - 1;
+      if (freeHead == NONE) {
+        freeTail = NONE;
+      }
+    }
+    ints[INTS * slot + STAMP]++;
+    live++;
+    return slot;
+  }
+
+  /** Clears a removed slot's key and value and queues it; its forward links stay. */
+  private void freeSlot(int slot) {
+    refs[2 * slot] = null;
+    refs[2 * slot + 1] = null;
+    int base = INTS * slot;
+    ints[base + STAMP]++;
+    ints[base + BUCKET] = 0;
+    if (freeTail == NONE) {
+      freeHead = slot;
+    } else {
+      ints[INTS * freeTail + BUCKET] = slot + 1;
+    }
+    freeTail = slot;
+    live--;
+  }
+
+  /**
+   * Grows the lanes by two slots or a quarter, whichever is more (one slot first). Both arrays are
+   * allocated before a field changes, so an OutOfMemoryError leaves the multimap as it was.
+   */
+  private void grow() {
+    if (capacity >= MAX_SLOTS) {
+      throw new IllegalStateException("LinkedHashMultimap lanes are full");
+    }
+    long grown =
+        capacity == 0
+            ? MIN_SLOTS
+            : capacity + Math.max(MIN_GROWTH, capacity >> 2);
+    int slots = (int) Math.min(grown, MAX_SLOTS);
+    Object[] newRefs = Arrays.copyOf(refs, 2 * slots);
+    int[] newInts = Arrays.copyOf(ints, INTS * slots);
+    refs = newRefs;
+    ints = newInts;
+    capacity = slots;
+  }
+
+  @SuppressWarnings("unchecked")
+  private K keyAt(int slot) {
+    return (K) refs[2 * slot];
+  }
+
+  @SuppressWarnings("unchecked")
+  private V valueAt(int slot) {
+    return (V) refs[2 * slot + 1];
+  }
+
+  private void succeedsInMultimap(int pred, int succ) {
+    if (pred == NONE) {
+      firstInMultimap = succ;
+    } else {
+      ints[INTS * pred + SUCCESSOR] = succ;
+    }
+    if (succ == NONE) {
+      lastInMultimap = pred;
+    } else {
+      ints[INTS * succ + PREDECESSOR] = pred;
+    }
+  }
+
+  /**
+   * The slot an iteration moves to from {@code slot}, which carried {@code stamp} when the
+   * iteration reached it: its {@code field} successor (kept if it was removed since), skipping
+   * removed slots.
+   *
+   * @throws ConcurrentModificationException if the slot was freed and taken again
+   */
+  private int advance(int slot, int stamp, int field) {
+    int now = ints[INTS * slot + STAMP];
+    if (now != stamp && now != stamp + 1) {
+      throw new ConcurrentModificationException();
+    }
+    int next = ints[INTS * slot + field];
+    while (next != NONE && (ints[INTS * next + STAMP] & 1) == 0) {
+      next = ints[INTS * next + field];
+    }
+    return next;
   }
 
   /**
@@ -279,32 +453,29 @@ public final class LinkedHashMultimap<K extends Object, V extends Object>
     @ParametricNullness private final K key;
 
     /*
-     * Either a `@Nullable ValueEntry<K, V>[]` or, if hash flooding has been detected, a `Map<V,
-     * ValueEntry<K, V>>`.
+     * Either an `int[]` of bucket heads (slot plus one, 0 = empty) or, if hash flooding has been
+     * detected, a `Map<V, Integer>` from value to slot.
      */
     private Object hashTable;
 
     private int size = 0;
     private int modCount = 0;
 
-    private ValueEntry<K, V> firstEntry;
-    private ValueEntry<K, V> lastEntry;
+    private int firstEntry = NONE;
+    private int lastEntry = NONE;
 
     ValueSet(@ParametricNullness K key, int expectedValues) {
       this.key = key;
       // Round expected values up to a power of 2 to get the table size.
       int tableSize = closedTableSize(expectedValues, VALUE_SET_LOAD_FACTOR);
-
-      @SuppressWarnings({"rawtypes", "unchecked"})
-      ValueEntry<K, V>[] hashTable = new ValueEntry[tableSize];
-      this.hashTable = hashTable;
+      this.hashTable = new int[tableSize];
     }
 
     // The only place we put a Map in is convertToHashFloodingResistantImplementation.
     @SuppressWarnings("unchecked")
-    private Map<V, ValueEntry<K, V>> delegateOrNull() {
+    private Map<V, Integer> delegateOrNull() {
       if (hashTable instanceof Map) {
-        return (Map<V, ValueEntry<K, V>>) hashTable;
+        return (Map<V, Integer>) hashTable;
       }
       return null;
     }
@@ -315,9 +486,8 @@ public final class LinkedHashMultimap<K extends Object, V extends Object>
     }
 
     // The only places we put an array in are the constructor and rehashIfNecessary.
-    @SuppressWarnings("unchecked")
-    private ValueEntry<K, V>[] hashTableArray() {
-      return (ValueEntry<K, V>[]) hashTable;
+    private int[] hashTableArray() {
+      return (int[]) hashTable;
     }
 
     @VisibleForTesting(
@@ -329,54 +499,69 @@ public final class LinkedHashMultimap<K extends Object, V extends Object>
 
     @VisibleForTesting
     void convertToHashFloodingResistantImplementation() {
-      Map<V, ValueEntry<K, V>> newDelegate = new HashMap<>(hashTableArray().length, 1.0f);
-      for (ValueEntry<K, V> entry = firstEntry; entry != null; entry = entry.successorInValueSet) {
-        newDelegate.put(entry.getValue(), entry);
-        entry.nextInValueBucket = null;
+      Map<V, Integer> newDelegate = new HashMap<>(hashTableArray().length, 1.0f);
+      for (int slot = firstEntry; slot != NONE; slot = ints[INTS * slot + SET_SUCCESSOR]) {
+        newDelegate.put(valueAt(slot), slot);
+        ints[INTS * slot + BUCKET] = 0;
       }
       this.hashTable = newDelegate;
     }
 
-    private void succeedsInValueSet(
-        ValueEntry<K, V> pred, ValueEntry<K, V> succ) {
-      if (pred == null) {
+    private void succeedsInValueSet(int pred, int succ) {
+      if (pred == NONE) {
         firstEntry = succ;
       } else {
-        pred.successorInValueSet = succ;
+        ints[INTS * pred + SET_SUCCESSOR] = succ;
       }
-      if (succ == null) {
+      if (succ == NONE) {
         lastEntry = pred;
       } else {
-        succ.predecessorInValueSet = pred;
+        ints[INTS * succ + SET_PREDECESSOR] = pred;
       }
     }
 
-    private void deleteEntryExceptFromHashTable(ValueEntry<K, V> entry) {
-      succeedsInValueSet(entry.predecessorInValueSet, entry.successorInValueSet);
-      multimapIterationChain.delete(entry);
-      // TODO(cpovirk): See the TODO in clear() about clearing links from removed entries.
+    private void deleteEntryExceptFromHashTable(int slot) {
+      int base = INTS * slot;
+      succeedsInValueSet(ints[base + SET_PREDECESSOR], ints[base + SET_SUCCESSOR]);
+      succeedsInMultimap(ints[base + PREDECESSOR], ints[base + SUCCESSOR]);
+      freeSlot(slot);
       size--;
       modCount++;
+      if (live == 0) {
+        onEmpty();
+      }
     }
 
-    private ValueEntry<K, V> addEntryExceptToHashTable(
-        @ParametricNullness V value,
-        int smearedHash,
-        ValueEntry<K, V> nextInValueBucket) {
-      ValueEntry<K, V> newEntry = new ValueEntry<>(key, value, smearedHash, nextInValueBucket);
-      succeedsInValueSet(lastEntry, newEntry);
-      lastEntry = newEntry;
-      multimapIterationChain.append(newEntry);
+    /** Takes a slot for the value and appends it to both orders; returns the slot. */
+    private int addEntryExceptToHashTable(
+        @ParametricNullness V value, int smearedHash, int nextInValueBucket) {
+      int slot = takeSlot();
+      refs[2 * slot] = key;
+      refs[2 * slot + 1] = value;
+      int base = INTS * slot;
+      ints[base + HASH] = smearedHash;
+      ints[base + BUCKET] = nextInValueBucket;
+      ints[base + SET_SUCCESSOR] = NONE;
+      succeedsInValueSet(lastEntry, slot);
+      lastEntry = slot;
+      ints[base + SUCCESSOR] = NONE;
+      succeedsInMultimap(lastInMultimap, slot);
+      lastInMultimap = slot;
       size++;
       modCount++;
-      return newEntry;
+      return slot;
+    }
+
+    private boolean matchesValue(int slot, Object v, int smearedVHash) {
+      return ints[INTS * slot + HASH] == smearedVHash && Objects.equals(refs[2 * slot + 1], v);
     }
 
     @Override
     public Iterator<V> iterator() {
       return new Iterator<V>() {
-        ValueEntry<K, V> nextEntry = firstEntry;
-        ValueEntry<K, V> toRemove;
+        int nextEntry = firstEntry;
+        boolean canRemove;
+        V toRemove;
         int expectedModCount = modCount;
 
         void checkForComodification() {
@@ -388,30 +573,32 @@ public final class LinkedHashMultimap<K extends Object, V extends Object>
         @Override
         public boolean hasNext() {
           checkForComodification();
-          return nextEntry != null;
+          return nextEntry != NONE;
         }
 
         @Override
         @ParametricNullness
         public V next() {
           checkForComodification();
-          ValueEntry<K, V> entry = nextEntry;
-          if (entry == null) {
+          int entry = nextEntry;
+          if (entry == NONE) {
             throw new NoSuchElementException();
           }
-          V result = entry.getValue();
-          toRemove = entry;
-          nextEntry = entry.successorInValueSet;
+          V result = valueAt(entry);
+          toRemove = result;
+          canRemove = true;
+          nextEntry = ints[INTS * entry + SET_SUCCESSOR];
           return result;
         }
 
         @Override
         public void remove() {
           checkForComodification();
-          checkState(toRemove != null, "no calls to next() since the last call to remove()");
-          ValueSet.this.remove(toRemove.getValue());
+          checkState(canRemove, "no calls to next() since the last call to remove()");
+          ValueSet.this.remove(toRemove);
           expectedModCount = modCount;
           toRemove = null;
+          canRemove = false;
         }
       };
     }
@@ -424,8 +611,11 @@ public final class LinkedHashMultimap<K extends Object, V extends Object>
     @Override
     public void forEach(Consumer<? super V> action) {
       checkNotNull(action);
-      for (ValueEntry<K, V> entry = firstEntry; entry != null; entry = entry.successorInValueSet) {
-        action.accept(entry.getValue());
+      int lanes = epoch;
+      for (int slot = firstEntry; slot != NONE; ) {
+        int stamp = ints[INTS * slot + STAMP];
+        action.accept(valueAt(slot));
+        slot = lanes == epoch ? advance(slot, stamp, SET_SUCCESSOR) : NONE;
       }
     }
 
@@ -436,17 +626,17 @@ public final class LinkedHashMultimap<K extends Object, V extends Object>
 
     @Override
     public boolean contains(Object o) {
-      Map<V, ValueEntry<K, V>> delegate = delegateOrNull();
+      Map<V, Integer> delegate = delegateOrNull();
       if (delegate != null) {
         return delegate.containsKey(o);
       }
 
-      ValueEntry<K, V>[] hashTable = hashTableArray();
+      int[] hashTable = hashTableArray();
       int smearedHash = smearedHash(o);
-      for (ValueEntry<K, V> entry = hashTable[smearedHash & (hashTable.length - 1)];
-          entry != null;
-          entry = entry.nextInValueBucket) {
-        if (entry.matchesValue(o, smearedHash)) {
+      for (int slot = hashTable[smearedHash & (hashTable.length - 1)] - 1;
+          slot != NONE;
+          slot = ints[INTS * slot + BUCKET] - 1) {
+        if (matchesValue(slot, o, smearedHash)) {
           return true;
         }
       }
@@ -457,30 +647,30 @@ public final class LinkedHashMultimap<K extends Object, V extends Object>
     public boolean add(@ParametricNullness V value) {
       int smearedHash = smearedHash(value);
 
-      Map<V, ValueEntry<K, V>> delegate = delegateOrNull();
+      Map<V, Integer> delegate = delegateOrNull();
       if (delegate != null) {
         if (delegate.containsKey(value)) {
           return false;
         }
-        ValueEntry<K, V> newEntry =
-            addEntryExceptToHashTable(value, smearedHash, /* nextInValueBucket= */ null);
+        int newEntry =
+            addEntryExceptToHashTable(value, smearedHash, /* nextInValueBucket= */ 0);
         delegate.put(value, newEntry);
         return true;
       }
 
-      ValueEntry<K, V>[] hashTable = hashTableArray();
+      int[] hashTable = hashTableArray();
       int mask = hashTable.length - 1;
       int bucket = smearedHash & mask;
-      ValueEntry<K, V> rowHead = hashTable[bucket];
+      int rowHead = hashTable[bucket];
       int bucketLength = 0;
-      for (ValueEntry<K, V> entry = rowHead; entry != null; entry = entry.nextInValueBucket) {
-        if (entry.matchesValue(value, smearedHash)) {
+      for (int slot = rowHead - 1; slot != NONE; slot = ints[INTS * slot + BUCKET] - 1) {
+        if (matchesValue(slot, value, smearedHash)) {
           return false;
         }
         bucketLength++;
       }
 
-      hashTable[bucket] = addEntryExceptToHashTable(value, smearedHash, rowHead);
+      hashTable[bucket] = addEntryExceptToHashTable(value, smearedHash, rowHead) + 1;
       if (bucketLength >= MAX_HASH_BUCKET_LENGTH) {
         convertToHashFloodingResistantImplementation();
       } else {
@@ -489,28 +679,24 @@ public final class LinkedHashMultimap<K extends Object, V extends Object>
       return true;
     }
 
-    private void rehashIfNecessary(ValueEntry<K, V>[] oldHashTable) {
+    private void rehashIfNecessary(int[] oldHashTable) {
       if (Hashing.needsResizing(size, oldHashTable.length, VALUE_SET_LOAD_FACTOR)) {
-        @SuppressWarnings("unchecked")
-        ValueEntry<K, V>[] hashTable =
-            (ValueEntry<K, V>[]) new ValueEntry<?, ?>[oldHashTable.length * 2];
+        int[] hashTable = new int[oldHashTable.length * 2];
         this.hashTable = hashTable;
         int mask = hashTable.length - 1;
-        for (ValueEntry<K, V> entry = firstEntry;
-            entry != null;
-            entry = entry.successorInValueSet) {
-          int bucket = entry.smearedValueHash & mask;
-          entry.nextInValueBucket = hashTable[bucket];
-          hashTable[bucket] = entry;
+        for (int slot = firstEntry; slot != NONE; slot = ints[INTS * slot + SET_SUCCESSOR]) {
+          int bucket = ints[INTS * slot + HASH] & mask;
+          ints[INTS * slot + BUCKET] = hashTable[bucket];
+          hashTable[bucket] = slot + 1;
         }
       }
     }
 
     @Override
     public boolean remove(Object o) {
-      Map<V, ValueEntry<K, V>> delegate = delegateOrNull();
+      Map<V, Integer> delegate = delegateOrNull();
       if (delegate != null) {
-        ValueEntry<K, V> entry = delegate.remove(o);
+        Integer entry = delegate.remove(o);
         if (entry != null) {
           deleteEntryExceptFromHashTable(entry);
           return true;
@@ -518,21 +704,21 @@ public final class LinkedHashMultimap<K extends Object, V extends Object>
         return false;
       }
 
-      ValueEntry<K, V>[] hashTable = hashTableArray();
+      int[] hashTable = hashTableArray();
       int smearedHash = smearedHash(o);
       int bucket = smearedHash & (hashTable.length - 1);
-      ValueEntry<K, V> prev = null;
-      for (ValueEntry<K, V> entry = hashTable[bucket];
-          entry != null;
-          prev = entry, entry = entry.nextInValueBucket) {
-        if (entry.matchesValue(o, smearedHash)) {
-          if (prev == null) {
+      int prev = NONE;
+      for (int slot = hashTable[bucket] - 1;
+          slot != NONE;
+          prev = slot, slot = ints[INTS * slot + BUCKET] - 1) {
+        if (matchesValue(slot, o, smearedHash)) {
+          if (prev == NONE) {
             // first entry in the bucket
-            hashTable[bucket] = entry.nextInValueBucket;
+            hashTable[bucket] = ints[INTS * slot + BUCKET];
           } else {
-            prev.nextInValueBucket = entry.nextInValueBucket;
+            ints[INTS * prev + BUCKET] = ints[INTS * slot + BUCKET];
           }
-          deleteEntryExceptFromHashTable(entry);
+          deleteEntryExceptFromHashTable(slot);
           return true;
         }
       }
@@ -541,58 +727,100 @@ public final class LinkedHashMultimap<K extends Object, V extends Object>
 
     @Override
     public void clear() {
-      Map<V, ValueEntry<K, V>> delegate = delegateOrNull();
+      Map<V, Integer> delegate = delegateOrNull();
       if (delegate != null) {
         delegate.clear();
       } else {
-        Arrays.fill(hashTableArray(), null);
+        Arrays.fill(hashTableArray(), 0);
       }
       size = 0;
-      for (ValueEntry<K, V> entry = firstEntry; entry != null; entry = entry.successorInValueSet) {
-        multimapIterationChain.delete(entry);
-        /*
-         * TODO(cpovirk): Also clear *InValueSet (after reading next), *InMultimap, and
-         * nextInValueBucket (both here and in remove)? Because entryIterator() returns ValueEntry
-         * instances directly to callers of entries(), a caller that retains a removed Entry can
-         * otherwise keep the rest of the multimap's entries alive through those links (similar to
-         * what cl/846336997 fixed for HashBiMap). However, entryIterator() does not currently check
-         * for concurrent modification, so clearing successorInMultimap on removal could cause an
-         * in-progress entryIterator() to stop early if its nextEntry is removed externally.
-         */
+      for (int slot = firstEntry; slot != NONE; ) {
+        int base = INTS * slot;
+        int next = ints[base + SET_SUCCESSOR];
+        succeedsInMultimap(ints[base + PREDECESSOR], ints[base + SUCCESSOR]);
+        freeSlot(slot);
+        slot = next;
       }
-      firstEntry = null;
-      lastEntry = null;
+      firstEntry = NONE;
+      lastEntry = NONE;
       modCount++;
+      if (live == 0) {
+        onEmpty();
+      }
+    }
+  }
+
+  /**
+   * An iteration of the multimap's insertion order. It takes the key and value of the slot it
+   * returns next when it reaches it, so an entry removed while the iteration is suspended on it is
+   * still returned, as upstream did. When that entry was removed, the entries removed after it and
+   * before the iteration moves on are skipped (upstream returned them too); an emptied multimap
+   * ends the iteration; and if the slot of that entry was freed and taken again, it throws
+   * ConcurrentModificationException.
+   */
+  private abstract class MultimapIterator<T extends Object> implements Iterator<T> {
+    private int nextSlot;
+    private int nextStamp;
+    private K nextKey;
+    private V nextValue;
+    private final int lanes = epoch;
+    private boolean canRemove;
+    private K removeKey;
+    private V removeValue;
+
+    MultimapIterator() {
+      reach(firstInMultimap);
+    }
+
+    private void reach(int slot) {
+      nextSlot = slot;
+      if (slot == NONE) {
+        nextKey = null;
+        nextValue = null;
+      } else {
+        nextStamp = ints[INTS * slot + STAMP];
+        nextKey = keyAt(slot);
+        nextValue = valueAt(slot);
+      }
+    }
+
+    abstract T output(@ParametricNullness K key, @ParametricNullness V value);
+
+    @Override
+    public boolean hasNext() {
+      return nextSlot != NONE;
+    }
+
+    @Override
+    public T next() {
+      if (nextSlot == NONE) {
+        throw new NoSuchElementException();
+      }
+      K key = nextKey;
+      V value = nextValue;
+      reach(lanes == epoch ? advance(nextSlot, nextStamp, SUCCESSOR) : NONE);
+      removeKey = key;
+      removeValue = value;
+      canRemove = true;
+      return output(key, value);
+    }
+
+    @Override
+    public void remove() {
+      checkState(canRemove, "no calls to next() since the last call to remove()");
+      LinkedHashMultimap.this.remove(removeKey, removeValue);
+      removeKey = null;
+      removeValue = null;
+      canRemove = false;
     }
   }
 
   @Override
   Iterator<Entry<K, V>> entryIterator() {
-    return new Iterator<Entry<K, V>>() {
-      ValueEntry<K, V> nextEntry = multimapIterationChain.firstEntry;
-      ValueEntry<K, V> toRemove;
-
+    return new MultimapIterator<Entry<K, V>>() {
       @Override
-      public boolean hasNext() {
-        return nextEntry != null;
-      }
-
-      @Override
-      public Entry<K, V> next() {
-        ValueEntry<K, V> entry = nextEntry;
-        if (entry == null) {
-          throw new NoSuchElementException();
-        }
-        toRemove = entry;
-        nextEntry = entry.successorInMultimap;
-        return entry;
-      }
-
-      @Override
-      public void remove() {
-        checkState(toRemove != null, "no calls to next() since the last call to remove()");
-        LinkedHashMultimap.this.remove(toRemove.getKey(), toRemove.getValue());
-        toRemove = null;
+      Entry<K, V> output(@ParametricNullness K key, @ParametricNullness V value) {
+        return new SimpleImmutableEntry<>(key, value);
       }
     };
   }
@@ -605,21 +833,32 @@ public final class LinkedHashMultimap<K extends Object, V extends Object>
 
   @Override
   Iterator<V> valueIterator() {
-    return Maps.valueIterator(entryIterator());
+    return new MultimapIterator<V>() {
+      @Override
+      V output(@ParametricNullness K key, @ParametricNullness V value) {
+        return value;
+      }
+    };
   }
 
+  /**
+   * The values' spliterator: late-binding over {@link #values()}, whose iterator returns the values
+   * without an entry per element; its characteristics (ORDERED, SIZED, SUBSIZED) are those of
+   * upstream's entry spliterator mapped to values.
+   */
   @Override
   Spliterator<V> valueSpliterator() {
-    return CollectSpliterators.map(entrySpliterator(), Spliterator.ORDERED, Entry::getValue);
+    return Spliterators.spliterator(values(), Spliterator.ORDERED);
   }
 
   @Override
   public void forEach(BiConsumer<? super K, ? super V> action) {
     checkNotNull(action);
-    for (ValueEntry<K, V> entry = multimapIterationChain.firstEntry;
-        entry != null;
-        entry = entry.successorInMultimap) {
-      action.accept(entry.getKey(), entry.getValue());
+    int lanes = epoch;
+    for (int slot = firstInMultimap; slot != NONE; ) {
+      int stamp = ints[INTS * slot + STAMP];
+      action.accept(keyAt(slot), valueAt(slot));
+      slot = lanes == epoch ? advance(slot, stamp, SUCCESSOR) : NONE;
     }
   }
 
@@ -646,7 +885,10 @@ public final class LinkedHashMultimap<K extends Object, V extends Object>
   @J2ktIncompatible
     private void readObject(ObjectInputStream stream) throws IOException, ClassNotFoundException {
     stream.defaultReadObject();
-    multimapIterationChain = new MultimapIterationChain<>();
+    refs = NO_REFS;
+    ints = NO_INTS;
+    capacity = 0;
+    emptied();
     expectedValuesPerKey = DEFAULT_EXPECTED_VALUES_PER_KEY;
     int distinctKeys = stream.readInt();
     Map<K, Collection<V>> map = Platform.newLinkedHashMapWithExpectedSize(DEFAULT_EXPECTED_KEYS);
@@ -668,34 +910,6 @@ public final class LinkedHashMultimap<K extends Object, V extends Object>
       requireNonNull(map.get(key)).add(value);
     }
     setMap(map);
-  }
-
-  private static final class MultimapIterationChain<
-      K extends Object, V extends Object> {
-    ValueEntry<K, V> firstEntry;
-    ValueEntry<K, V> lastEntry;
-
-    void succeeds(ValueEntry<K, V> pred, ValueEntry<K, V> succ) {
-      if (pred == null) {
-        firstEntry = succ;
-      } else {
-        pred.successorInMultimap = succ;
-      }
-      if (succ == null) {
-        lastEntry = pred;
-      } else {
-        succ.predecessorInMultimap = pred;
-      }
-    }
-
-    void delete(ValueEntry<K, V> entry) {
-      succeeds(entry.predecessorInMultimap, entry.successorInMultimap);
-    }
-
-    void append(ValueEntry<K, V> newEntry) {
-      succeeds(lastEntry, newEntry);
-      lastEntry = newEntry;
-    }
   }
 
   @GwtIncompatible @J2ktIncompatible private static final long serialVersionUID = 1;
