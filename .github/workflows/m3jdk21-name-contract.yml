@@ -52,7 +52,7 @@ jobs:
             src/jdk.m3.collections/share/native/libm3arrays/**
             src/jdk.m3.collections/share/classes/jdk/m3/arrays/M3Arrays.java
             src/jdk.m3.collections/share/**
-            m3/core/src/jdk/m3/text/SharedRelatedLexemeCatalog.java
+            src/java.base/share/classes/jdk/m3/text/SharedRelatedLexemeCatalog.java
             m3/arrays/src/main/java/module-info.java
             src/java.base/share/classes/java/util/Arrays.java
             src/java.base/share/classes/java/util/concurrent/locks/AbstractQueuedLongSynchronizer.java
@@ -100,7 +100,7 @@ jobs:
             m3/collections/implementations/spring-core-6.2.0-collections/src/main/java/jdk/m3/collections/spring/MultiToSingleValueMapAdapter.java
             m3/collections/implementations/spring-core-6.2.0-collections/src/main/java/jdk/m3/collections/spring/SingleToMultiValueMapAdapter.java
             src/jdk.m3.collections/share/classes/jdk/m3/collections/M3LongLongHashMap.java
-            m3/core/src/jdk/m3/text/SharedRelatedLexemeCatalog.java
+            src/java.base/share/classes/jdk/m3/text/SharedRelatedLexemeCatalog.java
             src/jdk.m3.collections/share/classes/jdk/m3/collections/M3IndexedListSnapshot.java
             src/jdk.m3.collections/share/classes/jdk/m3/collections/M3TreeWindowPlan.java
             src/java.base/share/classes/java/util/ChangeJournal.java

@@ -5,6 +5,7 @@ on:
   pull_request:
     paths:
       - 'm3/core/**'
+      - 'src/java.base/share/classes/jdk/m3/text/**'
       - 'm3/build.sh'
       - 'm3/lexicon/*.tsv'
       - 'm3/lexicon/english-demo.txt'
@@ -32,6 +33,7 @@ jobs:
           sparse-checkout-cone-mode: false
           sparse-checkout: |
             /m3/core/
+            /src/java.base/share/classes/jdk/m3/text/
             /m3/build.sh
             /m3/lexicon/english-demo.txt
             /m3/lexicon/m3-number-target-map.tsv

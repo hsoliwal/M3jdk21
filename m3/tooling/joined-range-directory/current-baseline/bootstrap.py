@@ -34,7 +34,7 @@ def main():
         v9='m3/tooling/joined-range-directory/current-baseline/RECEIVER_TRANSITIONS_V9.json'
         v10='m3/tooling/joined-range-directory/current-baseline/RECEIVER_TRANSITIONS_V10.json'
         v11='m3/tooling/joined-range-directory/current-baseline/RECEIVER_TRANSITIONS_V11.json'
-        allowed={v1:'1a827ea287629995ee0eb62cd2ffa35d3c0b48c680b67da592cb0a37305d0853',
+        allowed={v1:'8932a28368f3ce8531692771d986f0fb24257908ca00ee50dfc6153a159c2c68',
                  v2:'0f7c12d9f170c0290db4a114dc3f32d2e08af9090b9be14d86b2e46576899afd',
                  v3:'819b65189f71f0776ca85bdf05bd1cc92494a0a661e67e10a30ea529f4839364',
                  v4:'a5f2d41a604fb3f24ec0feed86d2247fb6065355b4285bf81f87f65d5d4ca328',
@@ -54,7 +54,7 @@ def main():
         indexed={r['path']:r for r in current['files']};assert len(indexed)==59
         if name==v1:
             assert document['schema']=='M3_JOINED_CURRENT_MODULE_COMPOSITION_V1'
-            assert document['targetPath']=='m3/core/src/jdk/m3/text/JoinedM3StringPiece.java'
+            assert document['targetPath']=='src/java.base/share/classes/jdk/m3/text/JoinedM3StringPiece.java'
             assert document['before']['gitBlob']=='5022e9811ce9391671c794446c7772569cfd369f'
             assert document['after']['gitBlob']=='765d43267bb22a3650b622c01cb29b550e1deb01'
             rows=[dict(path=document['targetPath'],before=document['before'],after=document['after'])]
@@ -63,27 +63,27 @@ def main():
             assert ident(a.profile.read_bytes())['sha256']==document['frozenProfileSha256']
             rows=document['files']
             expected_paths={
-                'm3/core/src/jdk/m3/text/JoinedM3StringPiece.java',
+                'src/java.base/share/classes/jdk/m3/text/JoinedM3StringPiece.java',
                 'm3/core/test/java/lang/M3CodeTextSignalBatchTest.java'}
             if name in (v3,v4,v5,v6,v7,v8,v9,v10):expected_paths.update({
-                'm3/core/src/jdk/m3/text/SharedLexiconPrecomputeCatalog.java',
+                'src/java.base/share/classes/jdk/m3/text/SharedLexiconPrecomputeCatalog.java',
                 'm3/core/test/M3LexiconPrecomputeTest.java'})
             if name in (v4,v5,v6,v7,v8,v9,v10):expected_paths.update({
-                'm3/core/src/jdk/m3/text/SharedRelatedLexemeCatalog.java',
+                'src/java.base/share/classes/jdk/m3/text/SharedRelatedLexemeCatalog.java',
                 'm3/core/test/SharedLexiconCatalogFamilyAdmissionTest.java'})
             if name in (v5,v6,v7,v8,v9,v10):expected_paths.update({
-                'm3/core/src/jdk/m3/text/SharedLexiconCatalog.java',
+                'src/java.base/share/classes/jdk/m3/text/SharedLexiconCatalog.java',
                 'm3/core/test/FoundationTest.java'})
-            if name in (v8,v9,v10):expected_paths.add('m3/core/src/jdk/m3/text/M3PrecomputePayload.java')
+            if name in (v8,v9,v10):expected_paths.add('src/java.base/share/classes/jdk/m3/text/M3PrecomputePayload.java')
             if name==v11:expected_paths={
                 'm3/build.sh',
-                'm3/core/src/jdk/m3/text/JoinedM3StringPiece.java',
-                'm3/core/src/jdk/m3/text/M3BigString.java',
-                'm3/core/src/jdk/m3/text/M3PrecomputePayload.java',
-                'm3/core/src/jdk/m3/text/SharedLexiconCatalog.java',
-                'm3/core/src/jdk/m3/text/SharedLexiconImage.java',
-                'm3/core/src/jdk/m3/text/SharedLexiconPrecomputeCatalog.java',
-                'm3/core/src/jdk/m3/text/SharedRelatedLexemeCatalog.java',
+                'src/java.base/share/classes/jdk/m3/text/JoinedM3StringPiece.java',
+                'src/java.base/share/classes/jdk/m3/text/M3BigString.java',
+                'src/java.base/share/classes/jdk/m3/text/M3PrecomputePayload.java',
+                'src/java.base/share/classes/jdk/m3/text/SharedLexiconCatalog.java',
+                'src/java.base/share/classes/jdk/m3/text/SharedLexiconImage.java',
+                'src/java.base/share/classes/jdk/m3/text/SharedLexiconPrecomputeCatalog.java',
+                'src/java.base/share/classes/jdk/m3/text/SharedRelatedLexemeCatalog.java',
                 'm3/core/test/FoundationTest.java',
                 'm3/core/test/LangDexProjectionReceiverTest.java',
                 'm3/core/test/M3LexiconPrecomputeTest.java',

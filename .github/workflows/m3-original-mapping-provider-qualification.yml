@@ -9,11 +9,11 @@ on:
       - 'm3/algorithms/src/jdk/m3/algorithm/M3PrefixZ.java'
       - 'm3/algorithms/test/PrefixZContractTest.java'
       - 'm3/algorithms/test/ViewInteropContractTest.java'
-      - 'm3/core/src/jdk/m3/text/JoinedM3StringPiece.java'
-      - 'm3/core/src/jdk/m3/text/LocalM3Arena.java'
-      - 'm3/core/src/jdk/m3/text/LocalM3StringPiece.java'
-      - 'm3/core/src/jdk/m3/text/M3StringPiece.java'
-      - 'm3/core/src/jdk/m3/text/StorageIdentity.java'
+      - 'src/java.base/share/classes/jdk/m3/text/JoinedM3StringPiece.java'
+      - 'src/java.base/share/classes/jdk/m3/text/LocalM3Arena.java'
+      - 'src/java.base/share/classes/jdk/m3/text/LocalM3StringPiece.java'
+      - 'src/java.base/share/classes/jdk/m3/text/M3StringPiece.java'
+      - 'src/java.base/share/classes/jdk/m3/text/StorageIdentity.java'
       - 'm3/docs/name-mapping.json'
       - 'm3/docs/name-mapping.schema.json'
       - 'm3/migration/evidence/local-20261002-final/prefix-z-interpreter.log'
@@ -70,11 +70,11 @@ on:
       - 'm3/algorithms/src/jdk/m3/algorithm/M3PrefixZ.java'
       - 'm3/algorithms/test/PrefixZContractTest.java'
       - 'm3/algorithms/test/ViewInteropContractTest.java'
-      - 'm3/core/src/jdk/m3/text/JoinedM3StringPiece.java'
-      - 'm3/core/src/jdk/m3/text/LocalM3Arena.java'
-      - 'm3/core/src/jdk/m3/text/LocalM3StringPiece.java'
-      - 'm3/core/src/jdk/m3/text/M3StringPiece.java'
-      - 'm3/core/src/jdk/m3/text/StorageIdentity.java'
+      - 'src/java.base/share/classes/jdk/m3/text/JoinedM3StringPiece.java'
+      - 'src/java.base/share/classes/jdk/m3/text/LocalM3Arena.java'
+      - 'src/java.base/share/classes/jdk/m3/text/LocalM3StringPiece.java'
+      - 'src/java.base/share/classes/jdk/m3/text/M3StringPiece.java'
+      - 'src/java.base/share/classes/jdk/m3/text/StorageIdentity.java'
       - 'm3/docs/name-mapping.json'
       - 'm3/docs/name-mapping.schema.json'
       - 'm3/migration/evidence/local-20261002-final/prefix-z-interpreter.log'
@@ -204,11 +204,11 @@ jobs:
             /m3/algorithms/src/jdk/m3/algorithm/M3PrefixZ.java
             /m3/algorithms/test/PrefixZContractTest.java
             /m3/algorithms/test/ViewInteropContractTest.java
-            /m3/core/src/jdk/m3/text/JoinedM3StringPiece.java
-            /m3/core/src/jdk/m3/text/LocalM3Arena.java
-            /m3/core/src/jdk/m3/text/LocalM3StringPiece.java
-            /m3/core/src/jdk/m3/text/M3StringPiece.java
-            /m3/core/src/jdk/m3/text/StorageIdentity.java
+            /src/java.base/share/classes/jdk/m3/text/JoinedM3StringPiece.java
+            /src/java.base/share/classes/jdk/m3/text/LocalM3Arena.java
+            /src/java.base/share/classes/jdk/m3/text/LocalM3StringPiece.java
+            /src/java.base/share/classes/jdk/m3/text/M3StringPiece.java
+            /src/java.base/share/classes/jdk/m3/text/StorageIdentity.java
             /m3/docs/name-mapping.json
             /m3/docs/name-mapping.schema.json
             /m3/migration/evidence/local-20261002-final/prefix-z-interpreter.log

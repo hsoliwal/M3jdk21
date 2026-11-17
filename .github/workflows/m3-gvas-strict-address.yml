@@ -2,7 +2,7 @@ name: M3-GVAS strict same-address JNI
 on:
   pull_request:
     paths:
-      - 'm3/core/src/jdk/m3/text/M3FixedAddressMapping.java'
+      - 'src/java.base/share/classes/jdk/m3/text/M3FixedAddressMapping.java'
       - 'm3/core/test/jdk/m3/text/M3FixedAddressMappingContractTest.java'
       - 'm3/lexicon/native/m3_fixed_address_mapping_jni.c'
       - 'm3/verify-fixed-address-jni.py'

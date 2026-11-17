@@ -20,8 +20,8 @@ from typing import Iterator
 
 ROOT = Path(__file__).resolve().parent
 SOURCE = ROOT / "ports/compiletime/src/main/java/jdk/m3/compiletime/M3GvasLiteralImageWriter.java"
-OWNER = ROOT / "core/src/jdk/m3/text/M3FixedAddressMapping.java"
-INDEX = ROOT / "core/src/jdk/m3/text/M3GvasLiteralImage.java"
+OWNER = ROOT.parent / "src/java.base/share/classes/jdk/m3/text/M3FixedAddressMapping.java"
+INDEX = ROOT.parent / "src/java.base/share/classes/jdk/m3/text/M3GvasLiteralImage.java"
 TEST = ROOT / "core/test/jdk/m3/text/M3GvasLiteralImageContractTest.java"
 C_SOURCE = ROOT / "lexicon/native/m3_fixed_address_mapping_jni.c"
 BASE = 0x600000000000

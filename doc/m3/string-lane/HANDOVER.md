@@ -75,6 +75,13 @@ none; the port's `pom.xml` is kept and documented as no longer building. The smo
 (workflow `m3-java-base-internals`). `jdk.m3.text.compat.M3Text` stays in the port (a new java.base
 package was not admitted).
 
+**Then `m3/core` (module `jdk.m3.text`, same day).** Owner's choice in a question dialog: java.base with the
+package name kept (I had recommended its own module `src/jdk.m3.text`, which the licence-intake verifier
+plans). Its 26 classes are now `src/java.base/share/classes/jdk/m3/text` (not exported), `module-info.java` is removed
+(java.base owns the package), the MIT notice of tools4j shortstring is `src/java.base/share/legal/shortstring.md`.
+The tests stay in `m3/core/test` for now and the workflows compile the moved sources from java.base;
+record `synexia.lexicons.related-source-range` follows with a `REVIEW_REQUIRED` direct-copy row.
+
 ## 2. Invariants
 
 Break one of these and the leaf is wrong, whatever its tests say.
