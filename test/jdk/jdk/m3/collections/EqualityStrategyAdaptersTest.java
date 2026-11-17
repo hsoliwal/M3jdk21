@@ -205,7 +205,8 @@ public class EqualityStrategyAdaptersTest {
         HashingStrategy<Object> id = HashingStrategies.identityStrategy();
         check(Equator.fromHashingStrategy(id).equals(Equator.fromHashingStrategy(id)),
                 "two equators");
-        check(Equivalence.equals().asHashingStrategy().equals(Equivalence.equals().asHashingStrategy()),
+        Equivalence<Object> eq = Equivalence.equals();
+        check(eq.asHashingStrategy().equals(eq.asHashingStrategy()),
                 "two strategies of one equivalence");
         Equivalence<String> first = Equivalence.fromHashingStrategy(e.asHashingStrategy());
         Equivalence<String> second = Equivalence.fromHashingStrategy(e.asHashingStrategy());
