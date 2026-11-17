@@ -51,12 +51,11 @@ The source retains its original copyright and license and records this additiona
 
 ### LinkedHashMultimap on two arrays by Synexia (2026-11-17)
 
-`collect.LinkedHashMultimap` stores its values in two arrays shared by the multimap, one slot per value (the key
-and the value in an `Object[]`, the hash and the links in an `int[]`), instead of one `ValueEntry` object each. Its
+`collect.LinkedHashMultimap` stores its values in arrays shared by the multimap, one slot per value and one array
+per field (key, value, hash, bucket link, four order links and a stamp), instead of one `ValueEntry` object each. Its
 public and package-private members, its iteration orders and its serialized form are unchanged. The arrays grow
 by two slots or a quarter (`create(Multimap)` reserves the copied size at once), keep their capacity until the
-multimap empties, and hold at most 306,783,377 values (`put` then throws `IllegalStateException`; the former class
-was limited by the heap only). While an iteration of `entries()`, `values()` or `keys()` (also through their
+multimap empties, and hold at most 2,147,483,639 values (`put` then throws `IllegalStateException`). While an iteration of `entries()`, `values()` or `keys()` (also through their
 spliterators and streams) is suspended, or while a `forEach` callback runs, changes made other than through it are
 seen this way: the entry it returns next is returned even if it was removed meanwhile (as before); if that entry
 was removed, the entries removed after it are skipped (upstream returned them); emptying the multimap, even

@@ -81,9 +81,10 @@ import java.util.function.Consumer;
  * in a way that affects its {@link Object#equals} behavior. Undefined behavior and bugs will
  * result.
  *
- * <p>The values live in two arrays shared by the multimap, one slot per value, with no entry
- * object. The arrays keep their capacity until the multimap empties, and hold at most 306,783,377
- * values ({@code put} then throws {@link IllegalStateException}). While an iteration of {@code
+ * <p>The values live in arrays shared by the multimap, one slot per value, with no entry
+ * object, one array per field. The arrays keep their capacity until the multimap empties, and
+ * hold at most 2,147,483,639 values ({@code put} then throws {@link IllegalStateException}). While
+ * an iteration of {@code
  * entries()}, {@code values()} or {@code keys()} (also through their spliterators and streams) is
  * suspended, or while a {@code forEach} callback runs, changes made other than through it are seen
  * this way: the entry it returns next is returned even if it was removed meanwhile; if that entry
@@ -144,12 +145,13 @@ public final class LinkedHashMultimap<K extends Object, V extends Object>
   }
 
   /*
-   * LinkedHashMultimap values live in two arrays shared by the whole multimap, one slot per value:
-   * refs holds the key and the value of slot s at 2s and 2s + 1; ints holds INTS ints of slot s
-   * from INTS * s: the smeared hash of the value, the next slot in the bucket of the key's value
-   * table, the neighbours in the insertion order of the key's values and in the insertion order of
-   * the whole multimap, and a stamp. There is no entry object per value; the ints of one slot are
-   * contiguous (28 bytes).
+   * LinkedHashMultimap values live in lanes shared by the multimap, one slot per value and one
+   * lane per field (structure of arrays): the key, the value, the smeared hash of the value, the
+   * next slot in the bucket of the key's value table, the neighbours in the insertion order of the
+   * key's values and in the insertion order of the whole multimap, and a stamp. Every field of slot
+   * s is at index s of its lane: there is no entry object per value and no stride arithmetic, and a
+   * walk reads only the lanes it needs (a bucket probe the hash and bucket lanes, an iteration the
+   * successor and stamp lanes).
    *
    * A removed slot keeps its forward links (successor in its value set and in the multimap), so an
    * iteration suspended on it can go on, as upstream's removed entries kept theirs; its key and
@@ -170,16 +172,6 @@ public final class LinkedHashMultimap<K extends Object, V extends Object>
   /** Slot index meaning "none" in the order fields, the free queue and the cursors. */
   private static final int NONE = -1;
 
-  /** The int fields of a slot, at INTS * slot + field. */
-  private static final int HASH = 0;
-  private static final int BUCKET = 1;
-  private static final int SET_PREDECESSOR = 2;
-  private static final int SET_SUCCESSOR = 3;
-  private static final int PREDECESSOR = 4;
-  private static final int SUCCESSOR = 5;
-  private static final int STAMP = 6;
-  private static final int INTS = 7;
-
   /** Slots of the first allocation. */
   private static final int MIN_SLOTS = 1;
 
@@ -189,8 +181,8 @@ public final class LinkedHashMultimap<K extends Object, V extends Object>
   /** An emptied multimap keeps lanes of at most this many slots. */
   private static final int KEPT_WHEN_EMPTY = 64;
 
-  /** Largest number of slots: INTS ints each in one int[]. */
-  private static final int MAX_SLOTS = (Integer.MAX_VALUE - 8) / INTS;
+  /** Largest number of slots: the largest array length. */
+  private static final int MAX_SLOTS = Integer.MAX_VALUE - 8;
 
   private static final Object[] NO_REFS = {};
   private static final int[] NO_INTS = {};
@@ -215,10 +207,22 @@ public final class LinkedHashMultimap<K extends Object, V extends Object>
 
   private transient int expectedValuesPerKey;
 
-  /** Key and value of each slot, at 2 * slot and 2 * slot + 1. */
-  private transient Object[] refs;
-  /** The INTS int fields of each slot, from INTS * slot. */
-  private transient int[] ints;
+  /** Key of each slot. */
+  private transient Object[] keyLane;
+  /** Value of each slot. */
+  private transient Object[] valueLane;
+  /** Smeared hash of each slot's value. */
+  private transient int[] hashLane;
+  /** Next slot + 1 in the slot's value-table bucket, or in the free queue; 0 for none. */
+  private transient int[] bucketLane;
+  /** Previous and next slot in the insertion order of the key's values, or NONE. */
+  private transient int[] setPredecessorLane;
+  private transient int[] setSuccessorLane;
+  /** Previous and next slot in the insertion order of the multimap, or NONE. */
+  private transient int[] predecessorLane;
+  private transient int[] successorLane;
+  /** Incremented when the slot is taken and when it is freed: odd while live. */
+  private transient int[] stampLane;
   /** Slots of the lanes. */
   private transient int capacity;
 
@@ -240,8 +244,7 @@ public final class LinkedHashMultimap<K extends Object, V extends Object>
     checkNonnegative(expectedValuesPerKey, "expectedValuesPerKey");
 
     this.expectedValuesPerKey = expectedValuesPerKey;
-    refs = NO_REFS;
-    ints = NO_INTS;
+    dropLanes();
     emptied();
   }
 
@@ -259,9 +262,7 @@ public final class LinkedHashMultimap<K extends Object, V extends Object>
   /** The multimap became empty: small lanes are kept for reuse, larger ones dropped. */
   private void onEmpty() {
     if (capacity > KEPT_WHEN_EMPTY) {
-      refs = NO_REFS;
-      ints = NO_INTS;
-      capacity = 0;
+      dropLanes();
     }
     emptied();
   }
@@ -278,27 +279,26 @@ public final class LinkedHashMultimap<K extends Object, V extends Object>
       slot = used++;
     } else {
       slot = freeHead;
-      freeHead = ints[INTS * slot + BUCKET] - 1;
+      freeHead = bucketLane[slot] - 1;
       if (freeHead == NONE) {
         freeTail = NONE;
       }
     }
-    ints[INTS * slot + STAMP]++;
+    stampLane[slot]++;
     live++;
     return slot;
   }
 
   /** Clears a removed slot's key and value and queues it; its forward links stay. */
   private void freeSlot(int slot) {
-    refs[2 * slot] = null;
-    refs[2 * slot + 1] = null;
-    int base = INTS * slot;
-    ints[base + STAMP]++;
-    ints[base + BUCKET] = 0;
+    keyLane[slot] = null;
+    valueLane[slot] = null;
+    stampLane[slot]++;
+    bucketLane[slot] = 0;
     if (freeTail == NONE) {
       freeHead = slot;
     } else {
-      ints[INTS * freeTail + BUCKET] = slot + 1;
+      bucketLane[freeTail] = slot + 1;
     }
     freeTail = slot;
     live--;
@@ -316,64 +316,95 @@ public final class LinkedHashMultimap<K extends Object, V extends Object>
         capacity == 0
             ? MIN_SLOTS
             : capacity + Math.max(MIN_GROWTH, capacity >> 2);
-    int slots = (int) Math.min(grown, MAX_SLOTS);
-    Object[] newRefs = Arrays.copyOf(refs, 2 * slots);
-    int[] newInts = Arrays.copyOf(ints, INTS * slots);
-    refs = newRefs;
-    ints = newInts;
-    capacity = slots;
+    resize((int) Math.min(grown, MAX_SLOTS));
   }
 
   /** Grows the lanes at once to at least {@code slots} slots, an upper bound known in advance. */
   private void reserve(int slots) {
     int wanted = Math.min(slots, MAX_SLOTS);
     if (wanted > capacity) {
-      Object[] newRefs = Arrays.copyOf(refs, 2 * wanted);
-      int[] newInts = Arrays.copyOf(ints, INTS * wanted);
-      refs = newRefs;
-      ints = newInts;
-      capacity = wanted;
+      resize(wanted);
     }
+  }
+
+  /**
+   * Copies every lane to {@code slots} slots. All lanes are allocated before a field changes, so
+   * an OutOfMemoryError leaves the multimap as it was.
+   */
+  private void resize(int slots) {
+    Object[] keys = Arrays.copyOf(keyLane, slots);
+    Object[] values = Arrays.copyOf(valueLane, slots);
+    int[] hashes = Arrays.copyOf(hashLane, slots);
+    int[] buckets = Arrays.copyOf(bucketLane, slots);
+    int[] setPredecessors = Arrays.copyOf(setPredecessorLane, slots);
+    int[] setSuccessors = Arrays.copyOf(setSuccessorLane, slots);
+    int[] predecessors = Arrays.copyOf(predecessorLane, slots);
+    int[] successors = Arrays.copyOf(successorLane, slots);
+    int[] stamps = Arrays.copyOf(stampLane, slots);
+    keyLane = keys;
+    valueLane = values;
+    hashLane = hashes;
+    bucketLane = buckets;
+    setPredecessorLane = setPredecessors;
+    setSuccessorLane = setSuccessors;
+    predecessorLane = predecessors;
+    successorLane = successors;
+    stampLane = stamps;
+    capacity = slots;
+  }
+
+  /** No lanes: every lane is the shared empty array. */
+  private void dropLanes() {
+    keyLane = NO_REFS;
+    valueLane = NO_REFS;
+    hashLane = NO_INTS;
+    bucketLane = NO_INTS;
+    setPredecessorLane = NO_INTS;
+    setSuccessorLane = NO_INTS;
+    predecessorLane = NO_INTS;
+    successorLane = NO_INTS;
+    stampLane = NO_INTS;
+    capacity = 0;
   }
 
   @SuppressWarnings("unchecked")
   private K keyAt(int slot) {
-    return (K) refs[2 * slot];
+    return (K) keyLane[slot];
   }
 
   @SuppressWarnings("unchecked")
   private V valueAt(int slot) {
-    return (V) refs[2 * slot + 1];
+    return (V) valueLane[slot];
   }
 
   private void succeedsInMultimap(int pred, int succ) {
     if (pred == NONE) {
       firstInMultimap = succ;
     } else {
-      ints[INTS * pred + SUCCESSOR] = succ;
+      successorLane[pred] = succ;
     }
     if (succ == NONE) {
       lastInMultimap = pred;
     } else {
-      ints[INTS * succ + PREDECESSOR] = pred;
+      predecessorLane[succ] = pred;
     }
   }
 
   /**
    * The slot an iteration moves to from {@code slot}, which carried {@code stamp} when the
-   * iteration reached it: its {@code field} successor (kept if it was removed since), skipping
+   * iteration reached it: its successor in {@code links} (kept if it was removed since), skipping
    * removed slots.
    *
    * @throws ConcurrentModificationException if the slot was freed and taken again
    */
-  private int advance(int slot, int stamp, int field) {
-    int now = ints[INTS * slot + STAMP];
+  private int advance(int slot, int stamp, int[] links) {
+    int now = stampLane[slot];
     if (now != stamp && now != stamp + 1) {
       throw new ConcurrentModificationException();
     }
-    int next = ints[INTS * slot + field];
-    while (next != NONE && (ints[INTS * next + STAMP] & 1) == 0) {
-      next = ints[INTS * next + field];
+    int next = links[slot];
+    while (next != NONE && (stampLane[next] & 1) == 0) {
+      next = links[next];
     }
     return next;
   }
@@ -516,9 +547,9 @@ public final class LinkedHashMultimap<K extends Object, V extends Object>
     @VisibleForTesting
     void convertToHashFloodingResistantImplementation() {
       Map<V, Integer> newDelegate = new HashMap<>(hashTableArray().length, 1.0f);
-      for (int slot = firstEntry; slot != NONE; slot = ints[INTS * slot + SET_SUCCESSOR]) {
+      for (int slot = firstEntry; slot != NONE; slot = setSuccessorLane[slot]) {
         newDelegate.put(valueAt(slot), slot);
-        ints[INTS * slot + BUCKET] = 0;
+        bucketLane[slot] = 0;
       }
       this.hashTable = newDelegate;
     }
@@ -527,19 +558,18 @@ public final class LinkedHashMultimap<K extends Object, V extends Object>
       if (pred == NONE) {
         firstEntry = succ;
       } else {
-        ints[INTS * pred + SET_SUCCESSOR] = succ;
+        setSuccessorLane[pred] = succ;
       }
       if (succ == NONE) {
         lastEntry = pred;
       } else {
-        ints[INTS * succ + SET_PREDECESSOR] = pred;
+        setPredecessorLane[succ] = pred;
       }
     }
 
     private void deleteEntryExceptFromHashTable(int slot) {
-      int base = INTS * slot;
-      succeedsInValueSet(ints[base + SET_PREDECESSOR], ints[base + SET_SUCCESSOR]);
-      succeedsInMultimap(ints[base + PREDECESSOR], ints[base + SUCCESSOR]);
+      succeedsInValueSet(setPredecessorLane[slot], setSuccessorLane[slot]);
+      succeedsInMultimap(predecessorLane[slot], successorLane[slot]);
       freeSlot(slot);
       size--;
       modCount++;
@@ -552,15 +582,14 @@ public final class LinkedHashMultimap<K extends Object, V extends Object>
     private int addEntryExceptToHashTable(
         @ParametricNullness V value, int smearedHash, int nextInValueBucket) {
       int slot = takeSlot();
-      refs[2 * slot] = key;
-      refs[2 * slot + 1] = value;
-      int base = INTS * slot;
-      ints[base + HASH] = smearedHash;
-      ints[base + BUCKET] = nextInValueBucket;
-      ints[base + SET_SUCCESSOR] = NONE;
+      keyLane[slot] = key;
+      valueLane[slot] = value;
+      hashLane[slot] = smearedHash;
+      bucketLane[slot] = nextInValueBucket;
+      setSuccessorLane[slot] = NONE;
       succeedsInValueSet(lastEntry, slot);
       lastEntry = slot;
-      ints[base + SUCCESSOR] = NONE;
+      successorLane[slot] = NONE;
       succeedsInMultimap(lastInMultimap, slot);
       lastInMultimap = slot;
       size++;
@@ -569,7 +598,7 @@ public final class LinkedHashMultimap<K extends Object, V extends Object>
     }
 
     private boolean matchesValue(int slot, Object v, int smearedVHash) {
-      return ints[INTS * slot + HASH] == smearedVHash && Objects.equals(refs[2 * slot + 1], v);
+      return hashLane[slot] == smearedVHash && Objects.equals(valueLane[slot], v);
     }
 
     @Override
@@ -603,7 +632,7 @@ public final class LinkedHashMultimap<K extends Object, V extends Object>
           V result = valueAt(entry);
           toRemove = result;
           canRemove = true;
-          nextEntry = ints[INTS * entry + SET_SUCCESSOR];
+          nextEntry = setSuccessorLane[entry];
           return result;
         }
 
@@ -629,9 +658,9 @@ public final class LinkedHashMultimap<K extends Object, V extends Object>
       checkNotNull(action);
       int lanes = epoch;
       for (int slot = firstEntry; slot != NONE; ) {
-        int stamp = ints[INTS * slot + STAMP];
+        int stamp = stampLane[slot];
         action.accept(valueAt(slot));
-        slot = lanes == epoch ? advance(slot, stamp, SET_SUCCESSOR) : NONE;
+        slot = lanes == epoch ? advance(slot, stamp, setSuccessorLane) : NONE;
       }
     }
 
@@ -651,7 +680,7 @@ public final class LinkedHashMultimap<K extends Object, V extends Object>
       int smearedHash = smearedHash(o);
       for (int slot = hashTable[smearedHash & (hashTable.length - 1)] - 1;
           slot != NONE;
-          slot = ints[INTS * slot + BUCKET] - 1) {
+          slot = bucketLane[slot] - 1) {
         if (matchesValue(slot, o, smearedHash)) {
           return true;
         }
@@ -679,7 +708,7 @@ public final class LinkedHashMultimap<K extends Object, V extends Object>
       int bucket = smearedHash & mask;
       int rowHead = hashTable[bucket];
       int bucketLength = 0;
-      for (int slot = rowHead - 1; slot != NONE; slot = ints[INTS * slot + BUCKET] - 1) {
+      for (int slot = rowHead - 1; slot != NONE; slot = bucketLane[slot] - 1) {
         if (matchesValue(slot, value, smearedHash)) {
           return false;
         }
@@ -700,9 +729,9 @@ public final class LinkedHashMultimap<K extends Object, V extends Object>
         int[] hashTable = new int[oldHashTable.length * 2];
         this.hashTable = hashTable;
         int mask = hashTable.length - 1;
-        for (int slot = firstEntry; slot != NONE; slot = ints[INTS * slot + SET_SUCCESSOR]) {
-          int bucket = ints[INTS * slot + HASH] & mask;
-          ints[INTS * slot + BUCKET] = hashTable[bucket];
+        for (int slot = firstEntry; slot != NONE; slot = setSuccessorLane[slot]) {
+          int bucket = hashLane[slot] & mask;
+          bucketLane[slot] = hashTable[bucket];
           hashTable[bucket] = slot + 1;
         }
       }
@@ -726,13 +755,13 @@ public final class LinkedHashMultimap<K extends Object, V extends Object>
       int prev = NONE;
       for (int slot = hashTable[bucket] - 1;
           slot != NONE;
-          prev = slot, slot = ints[INTS * slot + BUCKET] - 1) {
+          prev = slot, slot = bucketLane[slot] - 1) {
         if (matchesValue(slot, o, smearedHash)) {
           if (prev == NONE) {
             // first entry in the bucket
-            hashTable[bucket] = ints[INTS * slot + BUCKET];
+            hashTable[bucket] = bucketLane[slot];
           } else {
-            ints[INTS * prev + BUCKET] = ints[INTS * slot + BUCKET];
+            bucketLane[prev] = bucketLane[slot];
           }
           deleteEntryExceptFromHashTable(slot);
           return true;
@@ -751,9 +780,8 @@ public final class LinkedHashMultimap<K extends Object, V extends Object>
       }
       size = 0;
       for (int slot = firstEntry; slot != NONE; ) {
-        int base = INTS * slot;
-        int next = ints[base + SET_SUCCESSOR];
-        succeedsInMultimap(ints[base + PREDECESSOR], ints[base + SUCCESSOR]);
+        int next = setSuccessorLane[slot];
+        succeedsInMultimap(predecessorLane[slot], successorLane[slot]);
         freeSlot(slot);
         slot = next;
       }
@@ -794,7 +822,7 @@ public final class LinkedHashMultimap<K extends Object, V extends Object>
         nextKey = null;
         nextValue = null;
       } else {
-        nextStamp = ints[INTS * slot + STAMP];
+        nextStamp = stampLane[slot];
         nextKey = keyAt(slot);
         nextValue = valueAt(slot);
       }
@@ -814,7 +842,7 @@ public final class LinkedHashMultimap<K extends Object, V extends Object>
       }
       K key = nextKey;
       V value = nextValue;
-      reach(lanes == epoch ? advance(nextSlot, nextStamp, SUCCESSOR) : NONE);
+      reach(lanes == epoch ? advance(nextSlot, nextStamp, successorLane) : NONE);
       removeKey = key;
       removeValue = value;
       canRemove = true;
@@ -872,9 +900,9 @@ public final class LinkedHashMultimap<K extends Object, V extends Object>
     checkNotNull(action);
     int lanes = epoch;
     for (int slot = firstInMultimap; slot != NONE; ) {
-      int stamp = ints[INTS * slot + STAMP];
+      int stamp = stampLane[slot];
       action.accept(keyAt(slot), valueAt(slot));
-      slot = lanes == epoch ? advance(slot, stamp, SUCCESSOR) : NONE;
+      slot = lanes == epoch ? advance(slot, stamp, successorLane) : NONE;
     }
   }
 
@@ -901,9 +929,7 @@ public final class LinkedHashMultimap<K extends Object, V extends Object>
   @J2ktIncompatible
     private void readObject(ObjectInputStream stream) throws IOException, ClassNotFoundException {
     stream.defaultReadObject();
-    refs = NO_REFS;
-    ints = NO_INTS;
-    capacity = 0;
+    dropLanes();
     emptied();
     expectedValuesPerKey = DEFAULT_EXPECTED_VALUES_PER_KEY;
     int distinctKeys = stream.readInt();
