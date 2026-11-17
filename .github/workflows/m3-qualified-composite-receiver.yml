@@ -1,0 +1,25 @@
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
+# SPDX-License-Identifier: Apache-2.0
+name: M3 qualified-composite receiver preflight (not runtime admission)
+
+on:
+  pull_request:
+    paths:
+      - 'm3/synexia-import/qualification/qualified-composites-20261117.json'
+      - 'm3/tooling/qualified-composite-receiver/**'
+      - 'm3/docs/M3_QUALIFIED_COMPOSITE_RECEIVER.md'
+      - '.github/workflows/m3-qualified-composite-receiver.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  source-seals-only:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check exact existing JDK source preimages and pending qualification
+        run: python3 m3/tooling/qualified-composite-receiver/check.py
+      - name: Exercise fail-closed drift and premature-promotion refusals
+        run: python3 -m unittest discover -s m3/tooling/qualified-composite-receiver -p 'test_*.py' -v
