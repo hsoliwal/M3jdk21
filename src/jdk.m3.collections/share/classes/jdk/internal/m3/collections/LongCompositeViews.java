@@ -315,7 +315,19 @@ public final class LongCompositeViews {
             return cursor.nextLong();
         }
 
+        //FLLDCIM: LEETCODIFY — indexed seek from the top instead of the whole merge cursor
         @Override public long last() {
+            if (!(left instanceof LongTreeSet && right instanceof LongTreeSet)) {
+                return lastByCursor();
+            }
+            if (contains(Long.MAX_VALUE)) return Long.MAX_VALUE;
+            // a strict neighbour below MAX is never MAX, so MAX here means no element
+            long last = indexedSeek(Long.MAX_VALUE, Long.MAX_VALUE, false, false);
+            if (last == Long.MAX_VALUE) throw new NoSuchElementException();
+            return last;
+        }
+
+        private long lastByCursor() {
             LongIterator cursor = iterator();
             if (!cursor.hasNext()) throw new NoSuchElementException();
             long last;
