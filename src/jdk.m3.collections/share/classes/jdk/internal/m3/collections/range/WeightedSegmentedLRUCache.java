@@ -15,9 +15,9 @@
 package jdk.internal.m3.collections.range;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Arrays;
+import java.util.ConcurrentModificationException;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Predicate;
@@ -36,8 +36,27 @@ import java.util.function.Predicate;
  * caller-defined retained weight. Weight remains an application estimate, not a JVM object-layout
  * claim.</p>
  *
+ * <p>The residents live in array lanes, one slot each (key, value, weight, hash, segment), with
+ * each segment's recency list as two {@code int} lanes of slot indices and an open-addressing
+ * {@code int} index from a key's hash to its slot; there is no node or map entry object per
+ * resident. Freed slots are reused, the lanes double up to {@code maxEntries + 1} slots (at most
+ * 2<sup>29</sup>) and are dropped when the cache empties (clear, trim, removeIf or the removal of
+ * the last resident), and a key's {@code hashCode} is not called again after it was admitted.</p>
+ *
  * <p>Expected complexity is O(1) for get/put/remove and O(evicted) for trims. Predicate removal and
  * ordered snapshots are O(n).</p>
+ *
+ * <p>2026-11-17: storage rewritten onto array lanes (arrayify, leaf 2). Every method keeps its
+ * results, segment order, counters and exceptions for keys that obey {@code equals} and
+ * {@code hashCode}; {@code compareTo} is never consulted. Lookups call {@code hashCode} as
+ * {@code HashMap} did; evictions and {@code removeIf} no longer call {@code hashCode} or
+ * {@code equals} on the keys they remove. A key whose {@code equals} changes the cache during a
+ * lookup gets a {@code ConcurrentModificationException}, and so does a {@code removeIf} predicate
+ * that frees the next resident of its walk, moves it to the other segment, or frees the resident it
+ * then matches; the node version failed there or went on over detached nodes. An
+ * {@code ArithmeticException} from a weight total near {@code Long.MAX_VALUE} is thrown by the same
+ * call as before; the lanes are left consistent (the node version could keep a resident on no
+ * list).</p>
  *
  * @param <K> key type
  * @param <V> value type
@@ -175,27 +194,63 @@ public final class WeightedSegmentedLRUCache<K, V> {
         }
     }
 
-    private enum Segment {
-        PROBATION,
-        PROTECTED
-    }
+    /** Slot index meaning "none" in the recency lanes, the free list and lookups. */
+    private static final int NONE = -1;
+    /** Segment of a resident; also the position of that segment's list ends in mru and lru. */
+    private static final byte PROBATION = 0;
+    private static final byte PROTECTED = 1;
+    /** Slots of the first allocation; the lanes double up to {@code maxEntries + 1}. */
+    private static final int MIN_SLOTS = 8;
+    /** Largest number of slots: the index (2^30 entries at most) stays at most half full. */
+    private static final int MAX_SLOTS = 1 << 29;
+    /** The lanes of an empty cache. */
+    private static final Object[] NO_OBJECTS = {};
+    private static final long[] NO_LONGS = {};
+    private static final int[] NO_INTS = {};
+    private static final byte[] NO_BYTES = {};
+    /** Golden-ratio multiplier (2^32 / phi): Fibonacci hashing of a key's hash into the index. */
+    private static final int GOLDEN_RATIO = 0x9E3779B9;
 
     private final int maxEntries;
     private final long maxWeight;
     private final int protectedEntryTarget;
     private final long protectedWeightTarget;
     private final Weigher<K, V> weigher;
-    private final Map<K, Node<K, V>> nodes;
 
-    private final Node<K, V> probationHead = sentinel();
-    private final Node<K, V> probationTail = sentinel();
-    private final Node<K, V> protectedHead = sentinel();
-    private final Node<K, V> protectedTail = sentinel();
+    /** Storage lanes of the residents, one slot per resident; a free slot holds nulls. */
+    private Object[] keyLane = NO_OBJECTS;
+    private Object[] valueLane = NO_OBJECTS;
+    private long[] weightLane = NO_LONGS;
+    /** {@code key.hashCode()} of each resident, kept so the index never calls it again. */
+    private int[] hashLane = NO_INTS;
+    /** PROBATION or PROTECTED, the list a resident is on. */
+    private byte[] segmentLane = NO_BYTES;
+    /** Recency lanes: the neighbour toward the most- and toward the least-recently-used end. */
+    private int[] newerLane = NO_INTS;
+    private int[] olderLane = NO_INTS;
+    /** Open-addressing index: a key's hash to its slot plus one (0 is empty), linear probing. */
+    private int[] index = NO_INTS;
+    /** log2 of the index length. */
+    private int indexBits;
+    /** A key was admitted once: lookups call hashCode from then on, as HashMap after a put. */
+    private boolean hashing;
+    /** The value of {@code structure} when the slot's resident was admitted; 0 for a free slot. */
+    private int[] stampLane = NO_INTS;
+    /** Incremented by every admission, release and drop of the lanes; never reset. */
+    private int structure;
 
-    private int probationEntries;
-    private int protectedEntries;
-    private long probationWeight;
-    private long protectedWeight;
+    /** Most- and least-recently-used slot of each segment's list, by segment, or NONE. */
+    private final int[] mru = {NONE, NONE};
+    private final int[] lru = {NONE, NONE};
+    /** Top of the stack of free slots, linked through {@code olderLane}, or NONE. */
+    private int freeTop = NONE;
+    /** Slots ever handed out; slots at or above it are unused. */
+    private int used;
+    private int size;
+
+    /** Residents and their weight, by segment. */
+    private final int[] segmentEntries = new int[2];
+    private final long[] segmentWeight = new long[2];
 
     private long hits;
     private long probationHits;
@@ -244,30 +299,27 @@ public final class WeightedSegmentedLRUCache<K, V> {
                 Math.max(1L, Math.min(maxWeight,
                         (long) Math.floor(maxWeight * protectedFraction)));
         this.weigher = Objects.requireNonNull(weigher, "weigher");
-        this.nodes = new HashMap<>();
-
-        linkSentinels(probationHead, probationTail);
-        linkSentinels(protectedHead, protectedTail);
     }
 
     /** Lookup, updating segment-local recency and promoting a probation hit. */
+    @SuppressWarnings("unchecked")
     public synchronized Optional<V> get(K key) {
-        Node<K, V> node = nodes.get(key);
-        if (node == null) {
+        int slot = slotOf(key);
+        if (slot == NONE) {
             misses++;
             return Optional.empty();
         }
 
         hits++;
-        if (node.segment == Segment.PROBATION) {
+        if (segmentLane[slot] == PROBATION) {
             probationHits++;
-            promote(node);
+            promote(slot);
             rebalanceProtected();
         } else {
             protectedHits++;
-            moveToFront(node, protectedHead);
+            moveToFront(slot);
         }
-        return Optional.of(node.value);
+        return Optional.of((V) valueLane[slot]);
     }
 
     /**
@@ -276,6 +328,8 @@ public final class WeightedSegmentedLRUCache<K, V> {
      * <p>New entries enter probation as MRU. Replacing an existing entry preserves its segment and
      * promotes its recency. An entry heavier than the absolute cache budget is rejected without
      * disturbing the resident working set.</p>
+     *
+     * @throws IllegalStateException if 2<sup>29</sup> residents already fill the lanes
      */
     public synchronized PutResult put(K key, V value) {
         Objects.requireNonNull(key, "key");
@@ -287,22 +341,27 @@ public final class WeightedSegmentedLRUCache<K, V> {
             return new PutResult(false, false, 0L, TrimResult.none());
         }
 
-        Node<K, V> node = nodes.get(key);
-        boolean replaced = node != null;
-        if (node == null) {
-            node = new Node<>(key, value, candidateWeight, Segment.PROBATION);
-            nodes.put(key, node);
-            addToFront(node, probationHead);
-            probationEntries++;
-            probationWeight = Math.addExact(probationWeight, candidateWeight);
+        int slot = slotOf(key);
+        boolean replaced = slot != NONE;
+        if (slot == NONE) {
+            // hashed first (a hashCode that throws or calls back finds nothing half done), then an
+            // overflowing probation weight throws before the entry is admitted
+            int hash = key.hashCode();
+            Math.addExact(segmentWeight[PROBATION], candidateWeight);
+            slot = admit(key, value, candidateWeight, hash);
+            addToFront(slot);
+            segmentEntries[PROBATION]++;
+            segmentWeight[PROBATION] =
+                    Math.addExact(segmentWeight[PROBATION], candidateWeight);
         } else {
-            subtractWeight(node);
-            node.value = value;
-            node.weight = candidateWeight;
-            addWeight(node);
-            moveToFront(
-                    node,
-                    node.segment == Segment.PROBATION ? probationHead : protectedHead);
+            byte segment = segmentLane[slot];
+            // an overflowing segment weight throws before the resident changes
+            long segmentTotal =
+                    Math.addExact(segmentWeight[segment] - weightLane[slot], candidateWeight);
+            valueLane[slot] = value;
+            weightLane[slot] = candidateWeight;
+            segmentWeight[segment] = segmentTotal;
+            moveToFront(slot);
             replacements++;
         }
         puts++;
@@ -330,6 +389,7 @@ public final class WeightedSegmentedLRUCache<K, V> {
      * same global count/weight budget. The supplied limits may tighten, but never exceed, this
      * cache's configured hard limits.</p>
      */
+    @SuppressWarnings("unchecked")
     synchronized List<AdmissionVictim<K>> admissionVictims(
             long candidateWeight,
             int entryLimit,
@@ -345,7 +405,7 @@ public final class WeightedSegmentedLRUCache<K, V> {
             return List.of();
         }
 
-        int excessEntries = Math.max(0, nodes.size() + 1 - entryLimit);
+        int excessEntries = Math.max(0, size + 1 - entryLimit);
         long freeWeight = Math.max(0L, weightLimit - weight());
         long excessWeight = checkedWeight > freeWeight ? checkedWeight - freeWeight : 0L;
         if (excessEntries == 0 && excessWeight == 0L) {
@@ -353,49 +413,60 @@ public final class WeightedSegmentedLRUCache<K, V> {
         }
 
         ArrayList<AdmissionVictim<K>> victims = new ArrayList<>();
-        Node<K, V> current = probationTail.previous;
-        while ((excessEntries > 0 || excessWeight > 0L) && current != probationHead) {
-            victims.add(new AdmissionVictim<>(current.key, current.weight, false));
-            excessEntries = Math.max(0, excessEntries - 1);
-            excessWeight = Math.max(0L, excessWeight - current.weight);
-            current = current.previous;
+        for (int segment = PROBATION; segment <= PROTECTED; segment++) {
+            int slot = lru[segment];
+            while ((excessEntries > 0 || excessWeight > 0L) && slot != NONE) {
+                long slotWeight = weightLane[slot];
+                victims.add(new AdmissionVictim<>(
+                        (K) keyLane[slot], slotWeight, segment == PROTECTED));
+                excessEntries = Math.max(0, excessEntries - 1);
+                excessWeight = Math.max(0L, excessWeight - slotWeight);
+                slot = newerLane[slot];
+            }
         }
-
-        current = protectedTail.previous;
-        while ((excessEntries > 0 || excessWeight > 0L) && current != protectedHead) {
-            victims.add(new AdmissionVictim<>(current.key, current.weight, true));
-            excessEntries = Math.max(0, excessEntries - 1);
-            excessWeight = Math.max(0L, excessWeight - current.weight);
-            current = current.previous;
-        }
-
         return List.copyOf(victims);
     }
 
     /** Explicitly remove one key without affecting hit/miss statistics. */
+    @SuppressWarnings("unchecked")
     public synchronized Optional<V> remove(K key) {
-        Node<K, V> node = nodes.remove(key);
-        if (node == null) return Optional.empty();
-        detachAndAccount(node);
-        return Optional.of(node.value);
+        // as HashMap.remove: a key is hashed first, even before the first admission
+        int slot = key == null ? NONE : find(key, key.hashCode());
+        if (slot == NONE) {
+            return Optional.empty();
+        }
+        V value = (V) valueLane[slot];
+        release(slot);
+        if (size == 0) {
+            dropLanes();
+        }
+        return Optional.of(value);
     }
 
-    /** Remove all matching keys in segment-LRU order. */
+    /**
+     * Remove all matching keys in segment-LRU order.
+     *
+     * @throws ConcurrentModificationException if the predicate frees the next resident of the walk
+     *     or moves it to the other segment, or frees the resident it then matches, itself or by
+     *     {@code clear}, {@code trimTo} or an eviction; a resident it removes and does not match is
+     *     skipped
+     */
     public synchronized RemoveResult removeIf(Predicate<? super K> predicate) {
         Objects.requireNonNull(predicate, "predicate");
         int removedEntries = 0;
         long removedWeight = 0L;
 
-        RemoveAccumulator probation =
-                removeIfFromList(probationTail.previous, probationHead, predicate);
+        RemoveAccumulator probation = removeIfFromList(PROBATION, predicate);
         removedEntries = Math.addExact(removedEntries, probation.entries());
         removedWeight = Math.addExact(removedWeight, probation.weight());
 
-        RemoveAccumulator protectedRemoved =
-                removeIfFromList(protectedTail.previous, protectedHead, predicate);
+        RemoveAccumulator protectedRemoved = removeIfFromList(PROTECTED, predicate);
         removedEntries = Math.addExact(removedEntries, protectedRemoved.entries());
         removedWeight = Math.addExact(removedWeight, protectedRemoved.weight());
 
+        if (size == 0) {
+            dropLanes();
+        }
         return new RemoveResult(removedEntries, removedWeight);
     }
 
@@ -414,34 +485,35 @@ public final class WeightedSegmentedLRUCache<K, V> {
             throw new IllegalArgumentException(
                     "weightLimit must be between 0 and configured maxWeight");
         }
-        return trimToInternal(entryLimit, weightLimit);
+        TrimResult trim = trimToInternal(entryLimit, weightLimit);
+        if (size == 0) {
+            dropLanes();
+        }
+        return trim;
     }
 
-    /** Remove every cache-owned value. */
+    /** Remove every cache-owned value; the lanes are dropped with every reference they held. */
     public synchronized RemoveResult clear() {
-        int entries = nodes.size();
+        int entries = size;
         long weight = weight();
-        nodes.clear();
-        resetList(probationHead, probationTail);
-        resetList(protectedHead, protectedTail);
-        probationEntries = 0;
-        protectedEntries = 0;
-        probationWeight = 0L;
-        protectedWeight = 0L;
+        size = 0;
+        dropLanes();
+        Arrays.fill(segmentEntries, 0);
+        Arrays.fill(segmentWeight, 0L);
         return new RemoveResult(entries, weight);
     }
 
     /** Membership check that does not alter recency or promotion state. */
     public synchronized boolean containsKey(K key) {
-        return nodes.containsKey(key);
+        return slotOf(key) != NONE;
     }
 
     public synchronized int size() {
-        return nodes.size();
+        return size;
     }
 
     public synchronized long weight() {
-        return Math.addExact(probationWeight, protectedWeight);
+        return Math.addExact(segmentWeight[PROBATION], segmentWeight[PROTECTED]);
     }
 
     public int maxEntries() {
@@ -466,21 +538,25 @@ public final class WeightedSegmentedLRUCache<K, V> {
      * <p>This is an eviction-priority order, not a claim that the two segments form one global
      * recency clock.</p>
      */
+    @SuppressWarnings("unchecked")
     public synchronized List<K> keysInLruOrder() {
-        ArrayList<K> keys = new ArrayList<>(nodes.size());
-        appendKeys(probationTail.previous, probationHead, keys);
-        appendKeys(protectedTail.previous, protectedHead, keys);
+        ArrayList<K> keys = new ArrayList<>(size);
+        for (int segment = PROBATION; segment <= PROTECTED; segment++) {
+            for (int slot = lru[segment]; slot != NONE; slot = newerLane[slot]) {
+                keys.add((K) keyLane[slot]);
+            }
+        }
         return List.copyOf(keys);
     }
 
     public synchronized Snapshot snapshot() {
         return new Snapshot(
-                nodes.size(),
-                probationEntries,
-                protectedEntries,
+                size,
+                segmentEntries[PROBATION],
+                segmentEntries[PROTECTED],
                 weight(),
-                probationWeight,
-                protectedWeight,
+                segmentWeight[PROBATION],
+                segmentWeight[PROTECTED],
                 maxEntries,
                 maxWeight,
                 protectedEntryTarget,
@@ -501,10 +577,10 @@ public final class WeightedSegmentedLRUCache<K, V> {
 
     private TrimResult rebalanceProtected() {
         int demoted = 0;
-        while (protectedEntries > protectedEntryTarget
-                || protectedWeight > protectedWeightTarget) {
-            Node<K, V> candidate = protectedTail.previous;
-            if (candidate == protectedHead) break;
+        while (segmentEntries[PROTECTED] > protectedEntryTarget
+                || segmentWeight[PROTECTED] > protectedWeightTarget) {
+            int candidate = lru[PROTECTED];
+            if (candidate == NONE) break;
             demote(candidate);
             demoted++;
         }
@@ -517,21 +593,19 @@ public final class WeightedSegmentedLRUCache<K, V> {
         int evictedEntries = 0;
         long evictedWeight = 0L;
 
-        while (!nodes.isEmpty()
-                && (nodes.size() > entryLimit || weight() > weightLimit)) {
-            Node<K, V> victim = probationTail.previous;
-            if (victim == probationHead) {
-                victim = protectedTail.previous;
-                if (victim == protectedHead) break;
+        while (size > 0 && (size > entryLimit || weight() > weightLimit)) {
+            int victim = lru[PROBATION];
+            if (victim == NONE) {
+                victim = lru[PROTECTED];
+                if (victim == NONE) break;
             }
-            long victimWeight = victim.weight;
-            Segment segment = victim.segment;
-            nodes.remove(victim.key);
-            detachAndAccount(victim);
+            long victimWeight = weightLane[victim];
+            byte segment = segmentLane[victim];
+            release(victim);
             evictedEntries++;
             evictedWeight = Math.addExact(evictedWeight, victimWeight);
             evictions++;
-            if (segment == Segment.PROBATION) probationEvictions++;
+            if (segment == PROBATION) probationEvictions++;
             else protectedEvictions++;
         }
 
@@ -540,130 +614,296 @@ public final class WeightedSegmentedLRUCache<K, V> {
                 : new TrimResult(evictedEntries, evictedWeight, 0);
     }
 
-    private RemoveAccumulator removeIfFromList(
-            Node<K, V> start,
-            Node<K, V> sentinel,
-            Predicate<? super K> predicate) {
+    /** Tests the keys of one segment from its least recently used on, removing the matches. */
+    @SuppressWarnings("unchecked")
+    private RemoveAccumulator removeIfFromList(byte segment, Predicate<? super K> predicate) {
         int count = 0;
         long removedWeight = 0L;
-        Node<K, V> current = start;
-        while (current != sentinel) {
-            Node<K, V> previous = current.previous;
-            if (predicate.test(current.key)) {
-                nodes.remove(current.key);
-                removedWeight = Math.addExact(removedWeight, current.weight);
+        int current = lru[segment];
+        while (current != NONE) {
+            int newer = newerLane[current];
+            int stamp = stampLane[current];
+            int newerStamp = newer == NONE ? 0 : stampLane[newer];
+            boolean matches = predicate.test((K) keyLane[current]);
+            requireWalkIntact(segment, current, stamp, matches, newer, newerStamp);
+            if (matches) {
+                removedWeight = Math.addExact(removedWeight, weightLane[current]);
                 count++;
-                detachAndAccount(current);
+                release(current);
             }
-            current = previous;
+            current = newer;
         }
         return new RemoveAccumulator(count, removedWeight);
     }
 
-    private void promote(Node<K, V> node) {
-        if (node.segment != Segment.PROBATION) {
+    private void promote(int slot) {
+        if (segmentLane[slot] != PROBATION) {
             throw new IllegalStateException("only probation entries can be promoted");
         }
-        unlink(node);
-        probationEntries--;
-        probationWeight -= node.weight;
-        node.segment = Segment.PROTECTED;
-        protectedEntries++;
-        protectedWeight = Math.addExact(protectedWeight, node.weight);
-        addToFront(node, protectedHead);
+        changeSegment(slot, PROBATION, PROTECTED);
         promotions++;
     }
 
-    private void demote(Node<K, V> node) {
-        if (node.segment != Segment.PROTECTED) {
+    private void demote(int slot) {
+        if (segmentLane[slot] != PROTECTED) {
             throw new IllegalStateException("only protected entries can be demoted");
         }
-        unlink(node);
-        protectedEntries--;
-        protectedWeight -= node.weight;
-        node.segment = Segment.PROBATION;
-        probationEntries++;
-        probationWeight = Math.addExact(probationWeight, node.weight);
-        addToFront(node, probationHead);
+        changeSegment(slot, PROTECTED, PROBATION);
         demotions++;
     }
 
-    private void detachAndAccount(Node<K, V> node) {
-        unlink(node);
-        if (node.segment == Segment.PROBATION) {
-            probationEntries--;
-            probationWeight -= node.weight;
+    /** Moves a resident to the front of the other segment's list, with its count and weight. */
+    private void changeSegment(int slot, byte from, byte to) {
+        // an overflowing segment weight throws before the resident moves
+        long toWeight = Math.addExact(segmentWeight[to], weightLane[slot]);
+        unlink(slot);
+        segmentEntries[from]--;
+        segmentWeight[from] -= weightLane[slot];
+        segmentLane[slot] = to;
+        segmentEntries[to]++;
+        segmentWeight[to] = toWeight;
+        addToFront(slot);
+    }
+
+    /** The slot of a resident equal to {@code key}, or NONE; hashes as {@code HashMap.get}. */
+    private int slotOf(Object key) {
+        if (key == null || !hashing) {
+            // as HashMap: no hashCode call before the first admission, one per lookup after it
+            return NONE;
+        }
+        return find(key, key.hashCode());
+    }
+
+    /**
+     * The slot of a resident with the given hash and equal to {@code key} ({@code
+     * key.equals(resident)}), or NONE.
+     *
+     * @throws ConcurrentModificationException if a key's {@code equals} changes the cache
+     */
+    private int find(Object key, int hash) {
+        if (size == 0) {
+            return NONE;
+        }
+        int seen = structure;
+        int mask = index.length - 1;
+        for (int i = home(hash); index[i] != 0; i = (i + 1) & mask) {
+            int slot = index[i] - 1;
+            if (hashLane[slot] == hash) {
+                Object resident = keyLane[slot];
+                if (resident == key) {
+                    return slot;
+                }
+                boolean equal = key.equals(resident);
+                if (structure != seen) {
+                    throw new ConcurrentModificationException("a key's equals changed the cache");
+                }
+                if (equal) {
+                    return slot;
+                }
+            }
+        }
+        return NONE;
+    }
+
+    /** Stores a new probation resident (hashed already) in a free slot and indexes it. */
+    private int admit(K key, V value, long entryWeight, int hash) {
+        int slot = takeSlot();
+        keyLane[slot] = key;
+        valueLane[slot] = value;
+        weightLane[slot] = entryWeight;
+        hashLane[slot] = hash;
+        segmentLane[slot] = PROBATION;
+        indexSlot(slot, hash);
+        if (++structure == 0) {
+            structure = 1;
+        }
+        stampLane[slot] = structure;
+        hashing = true;
+        size++;
+        return slot;
+    }
+
+    /** Unlinks, unindexes, uncounts and frees a resident's slot. */
+    private void release(int slot) {
+        byte segment = segmentLane[slot];
+        unlink(slot);
+        unindexSlot(slot);
+        segmentEntries[segment]--;
+        segmentWeight[segment] -= weightLane[slot];
+        keyLane[slot] = null;
+        valueLane[slot] = null;
+        stampLane[slot] = 0;
+        structure++;
+        olderLane[slot] = freeTop;
+        freeTop = slot;
+        size--;
+    }
+
+    private int takeSlot() {
+        if (freeTop != NONE) {
+            int slot = freeTop;
+            freeTop = olderLane[slot];
+            return slot;
+        }
+        if (used == keyLane.length) {
+            grow();
+        }
+        return used++;
+    }
+
+    /**
+     * Doubles the lanes, at most to maxEntries + 1 slots (a put adds before it trims), or one slot
+     * more when an overflow stopped a trim. Every array is allocated before a field changes: an
+     * OutOfMemoryError leaves the cache as it was.
+     */
+    private void grow() {
+        long limit = Math.min(Math.max((long) maxEntries + 1, keyLane.length + 1L), MAX_SLOTS);
+        int capacity = (int) Math.min(Math.max(MIN_SLOTS, 2L * keyLane.length), limit);
+        if (capacity <= keyLane.length) {
+            throw new IllegalStateException("WeightedSegmentedLRUCache lanes are full");
+        }
+        // the index is sized for at most maxEntries residents (load at most 1/2) and keeps one cell
+        // empty when the lanes hold the extra slot a put takes before it trims
+        long cells = Math.max(2 * Math.min(capacity, (long) maxEntries), capacity + 1L);
+        int bits = 64 - Long.numberOfLeadingZeros(cells - 1);
+        Object[] keys = Arrays.copyOf(keyLane, capacity);
+        Object[] values = Arrays.copyOf(valueLane, capacity);
+        long[] weights = Arrays.copyOf(weightLane, capacity);
+        int[] hashes = Arrays.copyOf(hashLane, capacity);
+        byte[] segments = Arrays.copyOf(segmentLane, capacity);
+        int[] newer = Arrays.copyOf(newerLane, capacity);
+        int[] older = Arrays.copyOf(olderLane, capacity);
+        int[] stamps = Arrays.copyOf(stampLane, capacity);
+        int[] fresh = bits > indexBits ? new int[1 << bits] : index;
+        keyLane = keys;
+        valueLane = values;
+        weightLane = weights;
+        hashLane = hashes;
+        segmentLane = segments;
+        newerLane = newer;
+        olderLane = older;
+        stampLane = stamps;
+        if (fresh != index) {
+            reindex(fresh, bits);
+        }
+    }
+
+    /** Takes a fresh index of 2^bits entries, filled from the kept hashes. */
+    private void reindex(int[] fresh, int bits) {
+        index = fresh;
+        indexBits = bits;
+        for (int slot = 0; slot < used; slot++) {
+            if (keyLane[slot] != null) {
+                indexSlot(slot, hashLane[slot]);
+            }
+        }
+    }
+
+    private int home(int hash) {
+        return (hash * GOLDEN_RATIO) >>> (32 - indexBits);
+    }
+
+    private void indexSlot(int slot, int hash) {
+        int mask = index.length - 1;
+        int i = home(hash);
+        while (index[i] != 0) {
+            i = (i + 1) & mask;
+        }
+        index[i] = slot + 1;
+    }
+
+    /** Removes a slot from the index and shifts later entries of its run back (no tombstones). */
+    private void unindexSlot(int slot) {
+        int mask = index.length - 1;
+        int hole = home(hashLane[slot]);
+        while (index[hole] != slot + 1) {
+            hole = (hole + 1) & mask;
+        }
+        for (int i = (hole + 1) & mask; index[i] != 0; i = (i + 1) & mask) {
+            int wanted = home(hashLane[index[i] - 1]);
+            // the entry at i may move to the hole when its home is not within (hole, i]
+            if (((i - wanted) & mask) >= ((i - hole) & mask)) {
+                index[hole] = index[i];
+                hole = i;
+            }
+        }
+        index[hole] = 0;
+    }
+
+    /** Moves a resident to the front of its own segment's list. */
+    private void moveToFront(int slot) {
+        if (slot != mru[segmentLane[slot]]) {
+            unlink(slot);
+            addToFront(slot);
+        }
+    }
+
+    private void addToFront(int slot) {
+        byte segment = segmentLane[slot];
+        int front = mru[segment];
+        newerLane[slot] = NONE;
+        olderLane[slot] = front;
+        if (front != NONE) {
+            newerLane[front] = slot;
         } else {
-            protectedEntries--;
-            protectedWeight -= node.weight;
+            lru[segment] = slot;
         }
+        mru[segment] = slot;
     }
 
-    private void subtractWeight(Node<K, V> node) {
-        if (node.segment == Segment.PROBATION) probationWeight -= node.weight;
-        else protectedWeight -= node.weight;
-    }
-
-    private void addWeight(Node<K, V> node) {
-        if (node.segment == Segment.PROBATION) {
-            probationWeight = Math.addExact(probationWeight, node.weight);
+    private void unlink(int slot) {
+        byte segment = segmentLane[slot];
+        int newer = newerLane[slot];
+        int older = olderLane[slot];
+        if (newer != NONE) {
+            olderLane[newer] = older;
         } else {
-            protectedWeight = Math.addExact(protectedWeight, node.weight);
+            mru[segment] = older;
+        }
+        if (older != NONE) {
+            newerLane[older] = newer;
+        } else {
+            lru[segment] = newer;
         }
     }
 
-    private static <K, V> void moveToFront(
-            Node<K, V> node,
-            Node<K, V> head) {
-        unlink(node);
-        addToFront(node, head);
+    /** Whether {@code slot} is a slot of the lanes still holding the resident of {@code stamp}. */
+    private boolean holds(int slot, int stamp) {
+        return slot < stampLane.length && stampLane[slot] == stamp;
     }
 
-    private static <K, V> void addToFront(
-            Node<K, V> node,
-            Node<K, V> head) {
-        node.previous = head;
-        node.next = head.next;
-        head.next.previous = node;
-        head.next = node;
-    }
-
-    private static <K, V> void unlink(Node<K, V> node) {
-        node.previous.next = node.next;
-        node.next.previous = node.previous;
-        node.previous = null;
-        node.next = null;
-    }
-
-    private static <K, V> void appendKeys(
-            Node<K, V> start,
-            Node<K, V> sentinel,
-            List<K> target) {
-        Node<K, V> current = start;
-        while (current != sentinel) {
-            target.add(current.key);
-            current = current.previous;
+    /**
+     * Throws when a callback freed the next resident of a segment walk or moved it to the other
+     * segment, or freed the resident under test that it then matched, even if a new resident took
+     * the slot. A resident removed but not matched is skipped, as the node-linked version did.
+     */
+    private void requireWalkIntact(
+            byte segment, int current, int stamp, boolean matches, int newer, int newerStamp) {
+        if ((matches && !holds(current, stamp))
+                || (newer != NONE
+                        && (!holds(newer, newerStamp) || segmentLane[newer] != segment))) {
+            throw new ConcurrentModificationException(
+                    "the removeIf predicate removed a resident under the walk");
         }
     }
 
-    private static <K, V> Node<K, V> sentinel() {
-        return new Node<>(null, null, 0L, null);
-    }
-
-    private static <K, V> void linkSentinels(
-            Node<K, V> head,
-            Node<K, V> tail) {
-        head.next = tail;
-        tail.previous = head;
-    }
-
-    private static <K, V> void resetList(
-            Node<K, V> head,
-            Node<K, V> tail) {
-        head.previous = null;
-        head.next = tail;
-        tail.previous = head;
-        tail.next = null;
+    /** Lets an empty cache drop its lanes and index; the next admission allocates them again. */
+    private void dropLanes() {
+        keyLane = NO_OBJECTS;
+        valueLane = NO_OBJECTS;
+        weightLane = NO_LONGS;
+        hashLane = NO_INTS;
+        segmentLane = NO_BYTES;
+        newerLane = NO_INTS;
+        olderLane = NO_INTS;
+        stampLane = NO_INTS;
+        structure++;
+        index = NO_INTS;
+        indexBits = 0;
+        Arrays.fill(mru, NONE);
+        Arrays.fill(lru, NONE);
+        freeTop = NONE;
+        used = 0;
     }
 
     private static long requireWeight(long weight) {
@@ -674,24 +914,4 @@ public final class WeightedSegmentedLRUCache<K, V> {
     }
 
     private record RemoveAccumulator(int entries, long weight) {}
-
-    private static final class Node<K, V> {
-        private final K key;
-        private V value;
-        private long weight;
-        private Segment segment;
-        private Node<K, V> previous;
-        private Node<K, V> next;
-
-        private Node(
-                K key,
-                V value,
-                long weight,
-                Segment segment) {
-            this.key = key;
-            this.value = value;
-            this.weight = weight;
-            this.segment = segment;
-        }
-    }
 }
