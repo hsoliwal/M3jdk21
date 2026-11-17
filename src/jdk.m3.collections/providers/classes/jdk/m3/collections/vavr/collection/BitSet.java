@@ -963,6 +963,70 @@ interface BitSetModule {
             return fromBitMaskNoCopy(copy);
         }
 
+        //FLLDCIM: HPCPOP - identity table of the built-in mappings that are pure, injective
+        // and round-trip on every reachable bit
+        private static final BitSet.Builder<?>[] EXACT_MAPPINGS = {
+                BitSet.Builder.DEFAULT, BitSet.withCharacters(), BitSet.withBytes(),
+                BitSet.withShorts(), BitSet.withLongs()
+        };
+
+        //FLLDCIM: HPCPOP - DIRECT_ACCESS: word fast paths only for a built-in mapping,
+        // so no user callback can tell
+        private boolean exact() {
+            for (BitSet.Builder<?> builder : EXACT_MAPPINGS) {
+                if (builder.fromInt == (Object) fromInt && builder.toInt == (Object) toInt) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        //FLLDCIM: HPCPOP - same built-in mapping on both sides, so equal bits mean equal elements
+        private boolean sameWords(Iterable<?> other) {
+            return other instanceof AbstractBitSet<?> that
+                    && that.fromInt == (Object) fromInt && that.toInt == (Object) toInt && exact();
+        }
+
+        //FLLDCIM: HPCPOP - COMPACT: count of words up to the last nonzero one in words[0, n)
+        private static int usedWords(long[] words, int n) {
+            int len = n;
+            while (len > 0 && words[len - 1] == 0) {
+                len--;
+            }
+            return len;
+        }
+
+        //FLLDCIM: HPCPOP - COMPACT: the shape fromBitMaskNoCopy(shrink(...)) builds,
+        // with at most one copy
+        private BitSet<T> canonical(long[] words, int n) {
+            final int len = usedWords(words, n);
+            return fromBitMaskNoCopy(
+                    len == words.length ? words : java.util.Arrays.copyOf(words, len));
+        }
+
+        //FLLDCIM: HPCPOP - MASK: keep the lowest m set bits (1 <= m <= bitCount),
+        // PDEP select of the m-th bit
+        private static long keepLow(long word, int m) {
+            final long bit = Long.expand(1L << (m - 1), word);
+            return word & ((bit << 1) - 1);
+        }
+
+        //FLLDCIM: HPCPOP - MASK: keep the highest m set bits (1 <= m <= bitCount),
+        // PDEP select of the lowest kept bit
+        private static long keepHigh(long word, int m) {
+            final long bit = Long.expand(1L << (Long.bitCount(word) - m), word);
+            return word & -bit;
+        }
+
+        //FLLDCIM: HPCPOP - word walk down to the last nonzero word (one step for a canonical set)
+        private int lastWordIndex() {
+            int i = getWordsNum() - 1;
+            while (i > 0 && getWord(i) == 0) {
+                i--;
+            }
+            return i;
+        }
+
         @Override
         public BitSet<T> distinctBy(Comparator<? super T> comparator) {
             Objects.requireNonNull(comparator, "comparator is null");
@@ -982,7 +1046,7 @@ interface BitSetModule {
             } else if (n >= length()) {
                 return createEmpty();
             } else {
-                return createFromAll(iterator().drop(n));
+                return exact() ? highest(length() - n) : createFromAll(iterator().drop(n));
             }
         }
 
@@ -993,7 +1057,7 @@ interface BitSetModule {
             } else if (n >= length()) {
                 return createEmpty();
             } else {
-                return createFromAll(iterator().dropRight(n));
+                return exact() ? lowest(length() - n) : createFromAll(iterator().dropRight(n));
             }
         }
 
@@ -1106,8 +1170,85 @@ interface BitSetModule {
         }
 
         @Override
-        @SuppressWarnings("unchecked")
         public BitSet<T> addAll(Iterable<? extends T> elements) {
+            if (sameWords(elements)) {
+                return orWords((AbstractBitSet<?>) elements);
+            } else if (laneable(elements)) {
+                return addLane(elements.iterator());
+            } else {
+                return addAllStream(elements);
+            }
+        }
+
+        //FLLDCIM: HPCPOP - MASK: OR word loop, sized like the stream path (1 + max >> 6 words)
+        private BitSet<T> orWords(AbstractBitSet<?> that) {
+            if (that.isEmpty()) {
+                return this;
+            }
+            final long[] other = that.copyExpand(that.getWordsNum());
+            final int n = usedWords(other, other.length);
+            final long[] copy = copyExpand(n);
+            for (int i = 0; i < n; i++) {
+                copy[i] |= other[i];
+            }
+            final BitSet<T> bitSet = fromBitMaskNoCopy(copy);
+            return (bitSet.length() == length()) ? this : bitSet;
+        }
+
+        //FLLDCIM: HPCPOP - the lane replays Stream.ofAll call for call;
+        // Stream and ListView sources keep the stream path
+        private boolean laneable(Iterable<?> elements) {
+            return elements != null && !(elements instanceof Stream<?>)
+                    && !(elements instanceof JavaConverters.ListView<?, ?>) && exact();
+        }
+
+        //FLLDCIM: HPCPOP - dynamic array: amortised doubling, capped below the VM array limit
+        private static int[] grow(int[] lane) {
+            return java.util.Arrays.copyOf(lane, Math.max(lane.length + 1,
+                    (int) Math.min(Integer.MAX_VALUE - 8, 2L * lane.length)));
+        }
+
+        //FLLDCIM: HPCPOP - OFFSET_ARRAY lane: [0] count (0 = lone null), [1] max,
+        // [2, 2 + count) values; compares as max() does
+        private int[] laneOf(java.util.Iterator<? extends T> it) {
+            final Comparator<Integer> natural = Comparators.naturalComparator();
+            Integer max = toInt.apply(it.next());
+            int[] lane = new int[16];
+            lane[2] = max == null ? 0 : max;
+            int n = 1;
+            while (it.hasNext()) {
+                final Integer v = toInt.apply(it.next());
+                max = natural.compare(max, v) >= 0 ? max : v;
+                lane = n + 2 < lane.length ? lane : grow(lane);
+                lane[2 + n++] = v;
+            }
+            lane[0] = max == null ? 0 : n;
+            lane[1] = max == null ? 0 : max;
+            return lane;
+        }
+
+        //FLLDCIM: HPCPOP - one growth to the max element, then bit sets;
+        // Option.getOrElse replays the lone-null NPE
+        private BitSet<T> addLane(java.util.Iterator<? extends T> it) {
+            if (!it.hasNext()) {
+                return this;
+            }
+            final int[] lane = laneOf(it);
+            final Integer max = lane[0] == 0 ? null : lane[1];
+            final long[] copy =
+                    copyExpand(1 + (Option.some(max).getOrElse(0) >> ADDRESS_BITS_PER_WORD));
+            for (int i = 2; i < lane[0] + 2; i++) {
+                if (lane[i] < 0) {
+                    throw new IllegalArgumentException("bitset element must be >= 0");
+                }
+                setElement(copy, lane[i]);
+            }
+            final BitSet<T> bitSet = fromBitMaskNoCopy(copy);
+            return (bitSet.length() == length()) ? this : bitSet;
+        }
+
+        @SuppressWarnings("unchecked")
+        private BitSet<T> addAllStream(Iterable<? extends T> elements) {
             final Stream<Integer> source = Stream.ofAll(elements).map(toInt);
             if (source.isEmpty()) {
                 return this;
@@ -1151,6 +1292,68 @@ interface BitSetModule {
             return new BitSetIterator<>(this);
         }
 
+        //FLLDCIM: HPCPOP - MASK: highest set bit (63 - numberOfLeadingZeros)
+        // instead of iterating every element
+        @Override
+        public T last() {
+            if (isEmpty() || !exact()) {
+                return BitSet.super.last();
+            }
+            final int i = lastWordIndex();
+            return fromInt.apply((i << ADDRESS_BITS_PER_WORD) + BITS_PER_WORD - 1
+                    - Long.numberOfLeadingZeros(getWord(i)));
+        }
+
+        //FLLDCIM: HPCPOP - AND word loop for a same-mapping BitSet, otherwise the interface default
+        @Override
+        public BitSet<T> retainAll(Iterable<? extends T> elements) {
+            return !isEmpty() && sameWords(elements)
+                    ? andWords((AbstractBitSet<?>) elements)
+                    : BitSet.super.retainAll(elements);
+        }
+
+        //FLLDCIM: HPCPOP - MASK: AND word loop; this when every bit survives, as filter returns it
+        private BitSet<T> andWords(AbstractBitSet<?> that) {
+            final long[] and = copyExpand(getWordsNum());
+            final long[] other = that.copyExpand(that.getWordsNum());
+            final int n = Math.min(and.length, other.length);
+            int count = 0;
+            for (int i = 0; i < n; i++) {
+                and[i] &= other[i];
+                count += Long.bitCount(and[i]);
+            }
+            return count == length() ? this : canonical(and, n);
+        }
+
+        //FLLDCIM: HPCPOP - OFFSET_ARRAY prefix popcount + MASK: keep the lowest k set bits
+        // (0 < k < length())
+        private BitSet<T> lowest(int k) {
+            final long[] words = copyExpand(getWordsNum());
+            int i = 0;
+            int left = k;
+            for (int count = Long.bitCount(words[0]); left > count;
+                    count = Long.bitCount(words[++i])) {
+                left -= count;
+            }
+            words[i] = keepLow(words[i], left);
+            return fromBitMaskNoCopy(
+                    i + 1 == words.length ? words : java.util.Arrays.copyOf(words, i + 1));
+        }
+
+        //FLLDCIM: HPCPOP - suffix popcount + MASK: keep the highest k set bits (0 < k < length())
+        private BitSet<T> highest(int k) {
+            final long[] words = copyExpand(getWordsNum());
+            int i = words.length - 1;
+            int left = k;
+            for (int count = Long.bitCount(words[i]); left > count;
+                    count = Long.bitCount(words[--i])) {
+                left -= count;
+            }
+            words[i] = keepHigh(words[i], left);
+            java.util.Arrays.fill(words, 0, i, 0L);
+            return canonical(words, words.length);
+        }
+
         @Override
         public BitSet<T> take(int n) {
             if (isEmpty() || n >= length()) {
@@ -1158,7 +1361,7 @@ interface BitSetModule {
             } else if (n <= 0) {
                 return createEmpty();
             } else {
-                return createFromAll(iterator().take(n));
+                return exact() ? lowest(n) : createFromAll(iterator().take(n));
             }
         }
 
@@ -1169,7 +1372,7 @@ interface BitSetModule {
             } else if (n <= 0) {
                 return createEmpty();
             } else {
-                return createFromAll(iterator().takeRight(n));
+                return exact() ? highest(n) : createFromAll(iterator().takeRight(n));
             }
         }
 
@@ -1189,21 +1392,42 @@ interface BitSetModule {
         public BitSet<T> removeAll(Iterable<? extends T> elements) {
             if (isEmpty()) {
                 return this;
+            } else if (sameWords(elements)) {
+                return andNotWords((AbstractBitSet<?>) elements);
             } else {
-                final Stream<Integer> source = Stream.ofAll(elements).map(toInt);
-                if (source.isEmpty()) {
-                    return this;
-                } else {
-                    final int wordsNum = getWordsNum();
-                    final long[] copy = copyExpand(wordsNum);
-                    source.forEach(element -> {
-                        // elements that cannot be present (negative or beyond the current words) are a no-op
-                        if (element >= 0 && (element >> ADDRESS_BITS_PER_WORD) < wordsNum) {
-                            unsetElement(copy, element);
-                        }
-                    });
-                    return fromBitMaskNoCopy(shrink(copy));
-                }
+                return removeAllStream(elements);
+            }
+        }
+
+        //FLLDCIM: HPCPOP - MASK: ANDNOT word loop; a new instance even when nothing is removed,
+        // as the stream path
+        private BitSet<T> andNotWords(AbstractBitSet<?> that) {
+            if (that.isEmpty()) {
+                return this;
+            }
+            final long[] copy = copyExpand(getWordsNum());
+            final long[] other = that.copyExpand(that.getWordsNum());
+            for (int i = 0, n = Math.min(copy.length, other.length); i < n; i++) {
+                copy[i] &= ~other[i];
+            }
+            return canonical(copy, copy.length);
+        }
+
+        private BitSet<T> removeAllStream(Iterable<? extends T> elements) {
+            final Stream<Integer> source = Stream.ofAll(elements).map(toInt);
+            if (source.isEmpty()) {
+                return this;
+            } else {
+                final int wordsNum = getWordsNum();
+                final long[] copy = copyExpand(wordsNum);
+                source.forEach(element -> {
+                    // elements that cannot be present (negative or beyond the current words)
+                    // are a no-op
+                    if (element >= 0 && (element >> ADDRESS_BITS_PER_WORD) < wordsNum) {
+                        unsetElement(copy, element);
+                    }
+                });
+                return fromBitMaskNoCopy(shrink(copy));
             }
         }
 
