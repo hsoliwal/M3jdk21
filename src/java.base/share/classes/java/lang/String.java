@@ -8197,6 +8197,660 @@ public final class String
     }
 
     /**
+     * Returns this string with its first character changed to title case, as
+     * {@link Character#toTitleCase(int)} maps it; the rest is unchanged. The string is read as
+     * code points: a surrogate pair is one character, a lone surrogate is a character of its own.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @return  this string with a title-case first character; this string when it is empty or
+     *          already starts with one.
+     * @since   21
+     */
+    public String capitalize() {
+        if (isEmpty()) return this;
+        int first = codePointAt(0);
+        return withFirst(first, Character.toTitleCase(first));
+    }
+
+    /**
+     * Returns this string with its first character changed to lower case, as
+     * {@link Character#toLowerCase(int)} maps it; the rest is unchanged. The string is read as
+     * code points.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @return  this string with a lower-case first character; this string when it is empty or
+     *          already starts with one.
+     * @since   21
+     */
+    public String uncapitalize() {
+        if (isEmpty()) return this;
+        int first = codePointAt(0);
+        return withFirst(first, Character.toLowerCase(first));
+    }
+
+    /** This string with its first code point {@code first} replaced by {@code point}. */
+    private String withFirst(int first, int point) {
+        if (point == first) return this;
+        return new StringBuilder(length()).appendCodePoint(point)
+                .append(this, Character.charCount(first), length()).toString();
+    }
+
+    /**
+     * Returns this string with the case of each character swapped: an upper-case or title-case
+     * character ({@link Character#isUpperCase(int)}, {@link Character#isTitleCase(int)}) becomes
+     * lower case ({@link Character#toLowerCase(int)}), a lower-case character
+     * ({@link Character#isLowerCase(int)}) becomes upper case ({@link Character#toUpperCase(int)});
+     * every other character is unchanged. The string is read as code points, each mapped to one
+     * code point, so swapping twice need not give this string back.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @return  this string with the case of its characters swapped.
+     * @since   21
+     */
+    public String swapCase() {
+        return mapCodePoints(MAP_SWAP, null, false);
+    }
+
+    /**
+     * Returns this string with the case of each character swapped as {@link #swapCase()} does,
+     * except that a lower-case character at the start of this string or right after a whitespace
+     * character ({@link Character#isWhitespace(int)}) becomes title case
+     * ({@link Character#toTitleCase(int)}).
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @return  this string with the case of its characters swapped, word starts in title case.
+     * @since   21
+     */
+    public String swapCaseWords() {
+        return mapCodePoints(MAP_SWAP_WORDS, null, false);
+    }
+
+    /**
+     * Returns this string with the first character of each word changed to title case, as
+     * {@link Character#toTitleCase(int)} maps it; words are separated by whitespace
+     * ({@link Character#isWhitespace(int)}) and the rest of each word is unchanged. The string is
+     * read as code points.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @return  this string with title-case word starts.
+     * @since   21
+     */
+    public String capitalizeWords() {
+        return mapCodePoints(MAP_CAPITALIZE, null, false);
+    }
+
+    /**
+     * Returns this string with the first character of each word changed to title case; words
+     * are separated by the given delimiters, and the rest of each word is unchanged. The string
+     * is read as code points; the delimiters are the code points
+     * {@link Character#codePointAt(char[], int)} reads at each index of {@code delimiters}, so an
+     * empty array leaves only the first character of this string to change.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   delimiters   the characters that separate words.
+     * @return  this string with title-case word starts.
+     * @throws  NullPointerException if {@code delimiters} is {@code null}.
+     * @since   21
+     */
+    public String capitalizeWords(char... delimiters) {
+        java.util.Objects.requireNonNull(delimiters, "delimiters");
+        return mapCodePoints(MAP_CAPITALIZE, delimiters, false);
+    }
+
+    /**
+     * Returns this string converted to lower case as {@link #toLowerCase()} does (the default
+     * locale), then with the first character of each word changed to title case as
+     * {@link #capitalizeWords()} does.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @return  this string in lower case with title-case word starts.
+     * @since   21
+     */
+    public String capitalizeFully() {
+        return toLowerCase().mapCodePoints(MAP_CAPITALIZE, null, false);
+    }
+
+    /**
+     * Returns this string converted to lower case as {@link #toLowerCase()} does (the default
+     * locale), then with the first character of each word changed to title case as
+     * {@link #capitalizeWords(char...)} does with the given delimiters.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   delimiters   the characters that separate words.
+     * @return  this string in lower case with title-case word starts.
+     * @throws  NullPointerException if {@code delimiters} is {@code null}.
+     * @since   21
+     */
+    public String capitalizeFully(char... delimiters) {
+        java.util.Objects.requireNonNull(delimiters, "delimiters");
+        return toLowerCase().mapCodePoints(MAP_CAPITALIZE, delimiters, false);
+    }
+
+    /**
+     * Returns this string with the first character of each word changed to lower case, as
+     * {@link Character#toLowerCase(int)} maps it; words are separated by whitespace
+     * ({@link Character#isWhitespace(int)}) and the rest of each word is unchanged. The string is
+     * read as code points.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @return  this string with lower-case word starts.
+     * @since   21
+     */
+    public String uncapitalizeWords() {
+        return mapCodePoints(MAP_UNCAPITALIZE, null, false);
+    }
+
+    /**
+     * Returns this string with the first character of each word changed to lower case; words
+     * are separated by the given delimiters, read as {@link #capitalizeWords(char...)} reads
+     * them, and the rest of each word is unchanged.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   delimiters   the characters that separate words.
+     * @return  this string with lower-case word starts.
+     * @throws  NullPointerException if {@code delimiters} is {@code null}.
+     * @since   21
+     */
+    public String uncapitalizeWords(char... delimiters) {
+        java.util.Objects.requireNonNull(delimiters, "delimiters");
+        return mapCodePoints(MAP_UNCAPITALIZE, delimiters, false);
+    }
+
+    /**
+     * Returns the first character of each word of this string, unchanged; words are separated
+     * by whitespace ({@link Character#isWhitespace(int)}). The string is read as code points.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @return  the initials of the words of this string.
+     * @since   21
+     */
+    public String initials() {
+        return mapCodePoints(MAP_INITIALS, null, false);
+    }
+
+    /**
+     * Returns the first character of each word of this string, unchanged; words are separated
+     * by the given delimiters, read as {@link #capitalizeWords(char...)} reads them. An empty
+     * array gives the empty string.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   delimiters   the characters that separate words.
+     * @return  the initials of the words of this string.
+     * @throws  NullPointerException if {@code delimiters} is {@code null}.
+     * @since   21
+     */
+    public String initials(char... delimiters) {
+        java.util.Objects.requireNonNull(delimiters, "delimiters");
+        return delimiters.length == 0 ? "" : mapCodePoints(MAP_INITIALS, delimiters, false);
+    }
+
+    /**
+     * Returns this string in camel case: converted to lower case as {@link #toLowerCase()} does
+     * (the default locale), with the space and the given delimiters removed, and the first
+     * character after each removed run changed to title case ({@link Character#toTitleCase(int)}).
+     * The first character of the result is in title case only when
+     * {@code capitalizeFirstLetter}. Delimiters are read as {@link #capitalizeWords(char...)}
+     * reads them and matched against the lower-case text.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   capitalizeFirstLetter   whether the first character is in title case.
+     * @param   delimiters              the characters that separate words besides the space.
+     * @return  this string in camel case.
+     * @throws  NullPointerException if {@code delimiters} is {@code null}.
+     * @since   21
+     */
+    public String toCamelCase(boolean capitalizeFirstLetter, char... delimiters) {
+        java.util.Objects.requireNonNull(delimiters, "delimiters");
+        return toLowerCase().mapCodePoints(MAP_CAMEL, delimiters, capitalizeFirstLetter);
+    }
+
+    /**
+     * Returns this string with full Unicode case folding: each character replaced by its fold of
+     * status C or F in {@code CaseFolding.txt} of Unicode 15.0.0, so {@code "\u00DF"} folds to
+     * {@code "ss"}. The folding is the same in every locale (the Turkic folds of status T are not
+     * applied) and the result is not normalized. The string is read as code points; a lone
+     * surrogate is unchanged.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API; Python's {@code str.casefold}
+     * has the same result.
+     *
+     * @return  this string case folded; this string when folding leaves it unchanged.
+     * @since   21
+     */
+    public String caseFold() {
+        return mapCodePoints(MAP_FOLD, null, false);
+    }
+
+    /**
+     * Returns {@code true} if this string and {@code other} are equal after full Unicode case
+     * folding, as {@code caseFold().equals(other.caseFold())} compares them, so {@code "\u00DF"}
+     * equals {@code "SS"}.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   other   the string to compare with.
+     * @return  whether they are equal after case folding.
+     * @throws  NullPointerException if {@code other} is {@code null}.
+     * @since   21
+     */
+    public boolean equalsFoldCase(String other) {
+        java.util.Objects.requireNonNull(other, "other");
+        if (equals(other)) return true;
+        if (bothAscii(other)) return equalsIgnoreAsciiCase(other);
+        return caseFold().equals(other.caseFold());
+    }
+
+    /**
+     * Returns {@code true} if this string and {@code other} have the same number of code points
+     * and each two at the same position are equal under Unicode simple case folding (status C
+     * and S in {@code CaseFolding.txt} of Unicode 15.0.0): {@code "k"}, {@code "K"} and the
+     * Kelvin sign {@code "\u212A"} are equal, {@code "\u00DF"} and {@code "ss"} are not. A lone
+     * surrogate equals only itself.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API; Go's
+     * {@code strings.EqualFold} has the same result.
+     *
+     * @param   other   the string to compare with.
+     * @return  whether they are equal under simple case folding.
+     * @throws  NullPointerException if {@code other} is {@code null}.
+     * @since   21
+     */
+    public boolean equalsSimpleFold(String other) {
+        int length = length();
+        // a simple fold never leaves the plane of its code point, so equal strings are as long
+        if (length != other.length()) return false;
+        if (bothAscii(other)) return equalsIgnoreAsciiCase(other);
+        char[] mine = new char[Math.min(length, SCAN_WINDOW)];
+        char[] theirs = new char[mine.length];
+        for (int from = 0; from < length; ) {
+            int to = Math.min(length, from + mine.length);
+            getChars(from, to, mine, 0);
+            other.getChars(from, to, theirs, 0);
+            int count = to - from;
+            if (to < length && count > 1 && (Character.isHighSurrogate(mine[count - 1])
+                    || Character.isHighSurrogate(theirs[count - 1]))) {
+                count--;
+            }
+            for (int at = 0; at < count; ) {
+                int a = Character.codePointAt(mine, at, count);
+                int b = Character.codePointAt(theirs, at, count);
+                if (a != b && CaseFolding.simpleFold(a) != CaseFolding.simpleFold(b)) return false;
+                at += Character.charCount(a);
+            }
+            from += count;
+        }
+        return true;
+    }
+
+    /** Code point maps of {@link #mapCodePoints(int, char[], boolean)}. */
+    private static final int MAP_SWAP = 0;
+    private static final int MAP_SWAP_WORDS = 1;
+    private static final int MAP_CAPITALIZE = 2;
+    private static final int MAP_UNCAPITALIZE = 3;
+    private static final int MAP_INITIALS = 4;
+    private static final int MAP_CAMEL = 5;
+    private static final int MAP_FOLD = 6;
+    /** {@link #mapCodePoints(int, char[], boolean)}: the code point is dropped. */
+    private static final int MAPPED_DROP = -1;
+    /** {@link #mapCodePoints(int, char[], boolean)}: the code point becomes its full fold. */
+    private static final int MAPPED_EXPAND = -2;
+
+    /**
+     * This string with each code point mapped by {@code mode}, the map of one case method:
+     * words are split at {@code delimiters} (whitespace when {@code null}) and {@code first}
+     * says whether camel case starts in title case. Prepared M3 facts answer when they show an
+     * ASCII string without a character the map changes; otherwise the string is read in bulk
+     * windows, a surrogate pair never split between two windows. Unchanged runs are copied as
+     * ranges, and an unchanged string is returned as it is.
+     */
+    private String mapCodePoints(int mode, char[] delimiters, boolean first) {
+        int gate = switch (mode) {
+            case MAP_SWAP, MAP_SWAP_WORDS -> M3StringFacts.REGEX_ALPHA;
+            case MAP_CAPITALIZE -> M3StringFacts.REGEX_LOWER;
+            case MAP_UNCAPITALIZE, MAP_FOLD -> M3StringFacts.REGEX_UPPER;
+            default -> 0;
+        };
+        if (gate != 0 && asciiWithout(gate)) return this;
+        int length = length();
+        StringBuilder out = null;
+        int copied = 0;
+        boolean start = mode != MAP_CAMEL;
+        boolean emitted = false;
+        char[] window = new char[Math.min(length, SCAN_WINDOW)];
+        for (int from = 0; from < length; ) {
+            int to = Math.min(length, from + window.length);
+            getChars(from, to, window, 0);
+            int count = to - from;
+            if (to < length && count > 1 && Character.isHighSurrogate(window[count - 1])) count--;
+            for (int at = 0; at < count; ) {
+                int point = Character.codePointAt(window, at, count);
+                int mapped = point;
+                switch (mode) {
+                    case MAP_SWAP -> mapped = swappedCase(point, false);
+                    case MAP_SWAP_WORDS -> {
+                        mapped = swappedCase(point, start);
+                        start = Character.isWhitespace(point);
+                    }
+                    case MAP_CAPITALIZE, MAP_UNCAPITALIZE -> {
+                        if (isDelimiter(point, delimiters)) {
+                            start = true;
+                        } else if (start) {
+                            mapped = mode == MAP_CAPITALIZE ? Character.toTitleCase(point)
+                                    : Character.toLowerCase(point);
+                            start = false;
+                        }
+                    }
+                    case MAP_INITIALS -> {
+                        boolean gap = isDelimiter(point, delimiters);
+                        if (gap || !start) mapped = MAPPED_DROP;
+                        start = gap;
+                    }
+                    case MAP_CAMEL -> {
+                        if (point == ' ' || isDelimiter(point, delimiters)) {
+                            mapped = MAPPED_DROP;
+                            start = emitted;
+                        } else {
+                            if (start || !emitted && first) mapped = Character.toTitleCase(point);
+                            start = false;
+                            emitted = true;
+                        }
+                    }
+                    default -> {
+                        int folded = CaseFolding.fullFold(point);
+                        mapped = folded < 0 ? MAPPED_EXPAND : folded;
+                    }
+                }
+                int width = Character.charCount(point);
+                if (mapped != point) {
+                    if (out == null) out = new StringBuilder(length + 16);
+                    out.append(this, copied, from + at);
+                    if (mapped == MAPPED_EXPAND) {
+                        CaseFolding.appendFullFold(out, point);
+                    } else if (mapped != MAPPED_DROP) {
+                        out.appendCodePoint(mapped);
+                    }
+                    copied = from + at + width;
+                }
+                at += width;
+            }
+            from += count;
+        }
+        return out == null ? this : out.append(this, copied, length).toString();
+    }
+
+    /**
+     * {@code point} with its case swapped as {@link #swapCase()} swaps it; a lower-case one
+     * becomes title case instead of upper case when {@code title}.
+     */
+    private static int swappedCase(int point, boolean title) {
+        if (Character.isUpperCase(point) || Character.isTitleCase(point)) {
+            return Character.toLowerCase(point);
+        }
+        if (Character.isLowerCase(point)) {
+            return title ? Character.toTitleCase(point) : Character.toUpperCase(point);
+        }
+        return point;
+    }
+
+    /**
+     * Whether {@code point} is one of the code points {@link Character#codePointAt(char[], int)}
+     * reads at each index of {@code delimiters}, or a whitespace character
+     * ({@link Character#isWhitespace(int)}) when they are {@code null}.
+     */
+    private static boolean isDelimiter(int point, char[] delimiters) {
+        if (delimiters == null) return Character.isWhitespace(point);
+        for (int index = 0; index < delimiters.length; index++) {
+            if (Character.codePointAt(delimiters, index) == point) return true;
+        }
+        return false;
+    }
+
+    /** Whether prepared M3 facts show this string is ASCII without a unit of {@code regexClass}. */
+    private boolean asciiWithout(int regexClass) {
+        M3String storage = m3();
+        M3StringFacts facts = storage == null ? null : storage.factsIfPrepared();
+        return facts != null && facts.ascii && (facts.regexAnyClasses & regexClass) == 0;
+    }
+
+    /** Whether prepared M3 facts show this string and {@code other} are both ASCII. */
+    private boolean bothAscii(String other) {
+        M3String mine = m3();
+        M3String theirs = other.m3();
+        M3StringFacts a = mine == null ? null : mine.factsIfPrepared();
+        M3StringFacts b = theirs == null ? null : theirs.factsIfPrepared();
+        return a != null && b != null && a.ascii && b.ascii;
+    }
+
+    /**
+     * Unicode 15.0.0 case folding as {@code CaseFolding.txt} gives it: the folds of status C and
+     * S (simple folding) and of status F (full folding), built once. Generated from that file;
+     * the Turkic folds (status T) are left out.
+     */
+    private static final class CaseFolding {
+        /**
+         * Runs of simple folds: first code point, count, stride, and the fold minus the code
+         * point. A difference of 0 marks a code point whose only fold is a full one.
+         */
+        private static final int[] RUNS = {
+            0x0041, 26, 1, 32, 0x00B5, 1, 1, 775, 0x00C0, 23, 1, 32, 0x00D8, 7, 1, 32,
+            0x00DF, 1, 1, 0, 0x0100, 24, 2, 1, 0x0130, 1, 1, 0, 0x0132, 3, 2, 1,
+            0x0139, 8, 2, 1, 0x0149, 1, 1, 0, 0x014A, 23, 2, 1, 0x0178, 1, 1, -121,
+            0x0179, 3, 2, 1, 0x017F, 1, 1, -268, 0x0181, 1, 1, 210, 0x0182, 2, 2, 1,
+            0x0186, 1, 1, 206, 0x0187, 1, 1, 1, 0x0189, 2, 1, 205, 0x018B, 1, 1, 1,
+            0x018E, 1, 1, 79, 0x018F, 1, 1, 202, 0x0190, 1, 1, 203, 0x0191, 1, 1, 1,
+            0x0193, 1, 1, 205, 0x0194, 1, 1, 207, 0x0196, 1, 1, 211, 0x0197, 1, 1, 209,
+            0x0198, 1, 1, 1, 0x019C, 1, 1, 211, 0x019D, 1, 1, 213, 0x019F, 1, 1, 214,
+            0x01A0, 3, 2, 1, 0x01A6, 1, 1, 218, 0x01A7, 1, 1, 1, 0x01A9, 1, 1, 218,
+            0x01AC, 1, 1, 1, 0x01AE, 1, 1, 218, 0x01AF, 1, 1, 1, 0x01B1, 2, 1, 217,
+            0x01B3, 2, 2, 1, 0x01B7, 1, 1, 219, 0x01B8, 1, 1, 1, 0x01BC, 1, 1, 1,
+            0x01C4, 1, 1, 2, 0x01C5, 1, 1, 1, 0x01C7, 1, 1, 2, 0x01C8, 1, 1, 1,
+            0x01CA, 1, 1, 2, 0x01CB, 9, 2, 1, 0x01DE, 9, 2, 1, 0x01F0, 1, 1, 0,
+            0x01F1, 1, 1, 2, 0x01F2, 2, 2, 1, 0x01F6, 1, 1, -97, 0x01F7, 1, 1, -56,
+            0x01F8, 20, 2, 1, 0x0220, 1, 1, -130, 0x0222, 9, 2, 1, 0x023A, 1, 1, 10795,
+            0x023B, 1, 1, 1, 0x023D, 1, 1, -163, 0x023E, 1, 1, 10792, 0x0241, 1, 1, 1,
+            0x0243, 1, 1, -195, 0x0244, 1, 1, 69, 0x0245, 1, 1, 71, 0x0246, 5, 2, 1,
+            0x0345, 1, 1, 116, 0x0370, 2, 2, 1, 0x0376, 1, 1, 1, 0x037F, 1, 1, 116,
+            0x0386, 1, 1, 38, 0x0388, 3, 1, 37, 0x038C, 1, 1, 64, 0x038E, 2, 1, 63,
+            0x0390, 1, 1, 0, 0x0391, 17, 1, 32, 0x03A3, 9, 1, 32, 0x03B0, 1, 1, 0,
+            0x03C2, 1, 1, 1, 0x03CF, 1, 1, 8, 0x03D0, 1, 1, -30, 0x03D1, 1, 1, -25,
+            0x03D5, 1, 1, -15, 0x03D6, 1, 1, -22, 0x03D8, 12, 2, 1, 0x03F0, 1, 1, -54,
+            0x03F1, 1, 1, -48, 0x03F4, 1, 1, -60, 0x03F5, 1, 1, -64, 0x03F7, 1, 1, 1,
+            0x03F9, 1, 1, -7, 0x03FA, 1, 1, 1, 0x03FD, 3, 1, -130, 0x0400, 16, 1, 80,
+            0x0410, 32, 1, 32, 0x0460, 17, 2, 1, 0x048A, 27, 2, 1, 0x04C0, 1, 1, 15,
+            0x04C1, 7, 2, 1, 0x04D0, 48, 2, 1, 0x0531, 38, 1, 48, 0x0587, 1, 1, 0,
+            0x10A0, 38, 1, 7264, 0x10C7, 1, 1, 7264, 0x10CD, 1, 1, 7264, 0x13F8, 6, 1, -8,
+            0x1C80, 1, 1, -6222, 0x1C81, 1, 1, -6221, 0x1C82, 1, 1, -6212, 0x1C83, 2, 1, -6210,
+            0x1C85, 1, 1, -6211, 0x1C86, 1, 1, -6204, 0x1C87, 1, 1, -6180, 0x1C88, 1, 1, 35267,
+            0x1C90, 43, 1, -3008, 0x1CBD, 3, 1, -3008, 0x1E00, 75, 2, 1, 0x1E96, 5, 1, 0,
+            0x1E9B, 1, 1, -58, 0x1E9E, 1, 1, -7615, 0x1EA0, 48, 2, 1, 0x1F08, 8, 1, -8,
+            0x1F18, 6, 1, -8, 0x1F28, 8, 1, -8, 0x1F38, 8, 1, -8, 0x1F48, 6, 1, -8,
+            0x1F50, 4, 2, 0, 0x1F59, 4, 2, -8, 0x1F68, 8, 1, -8, 0x1F80, 8, 1, 0,
+            0x1F88, 8, 1, -8, 0x1F90, 8, 1, 0, 0x1F98, 8, 1, -8, 0x1FA0, 8, 1, 0,
+            0x1FA8, 8, 1, -8, 0x1FB2, 3, 1, 0, 0x1FB6, 2, 1, 0, 0x1FB8, 2, 1, -8,
+            0x1FBA, 2, 1, -74, 0x1FBC, 1, 1, -9, 0x1FBE, 1, 1, -7173, 0x1FC2, 3, 1, 0,
+            0x1FC6, 2, 1, 0, 0x1FC8, 4, 1, -86, 0x1FCC, 1, 1, -9, 0x1FD2, 2, 1, 0,
+            0x1FD6, 2, 1, 0, 0x1FD8, 2, 1, -8, 0x1FDA, 2, 1, -100, 0x1FE2, 3, 1, 0,
+            0x1FE6, 2, 1, 0, 0x1FE8, 2, 1, -8, 0x1FEA, 2, 1, -112, 0x1FEC, 1, 1, -7,
+            0x1FF2, 3, 1, 0, 0x1FF6, 2, 1, 0, 0x1FF8, 2, 1, -128, 0x1FFA, 2, 1, -126,
+            0x1FFC, 1, 1, -9, 0x2126, 1, 1, -7517, 0x212A, 1, 1, -8383, 0x212B, 1, 1, -8262,
+            0x2132, 1, 1, 28, 0x2160, 16, 1, 16, 0x2183, 1, 1, 1, 0x24B6, 26, 1, 26,
+            0x2C00, 48, 1, 48, 0x2C60, 1, 1, 1, 0x2C62, 1, 1, -10743, 0x2C63, 1, 1, -3814,
+            0x2C64, 1, 1, -10727, 0x2C67, 3, 2, 1, 0x2C6D, 1, 1, -10780, 0x2C6E, 1, 1, -10749,
+            0x2C6F, 1, 1, -10783, 0x2C70, 1, 1, -10782, 0x2C72, 1, 1, 1, 0x2C75, 1, 1, 1,
+            0x2C7E, 2, 1, -10815, 0x2C80, 50, 2, 1, 0x2CEB, 2, 2, 1, 0x2CF2, 1, 1, 1,
+            0xA640, 23, 2, 1, 0xA680, 14, 2, 1, 0xA722, 7, 2, 1, 0xA732, 31, 2, 1,
+            0xA779, 2, 2, 1, 0xA77D, 1, 1, -35332, 0xA77E, 5, 2, 1, 0xA78B, 1, 1, 1,
+            0xA78D, 1, 1, -42280, 0xA790, 2, 2, 1, 0xA796, 10, 2, 1, 0xA7AA, 1, 1, -42308,
+            0xA7AB, 1, 1, -42319, 0xA7AC, 1, 1, -42315, 0xA7AD, 1, 1, -42305, 0xA7AE, 1, 1, -42308,
+            0xA7B0, 1, 1, -42258, 0xA7B1, 1, 1, -42282, 0xA7B2, 1, 1, -42261, 0xA7B3, 1, 1, 928,
+            0xA7B4, 8, 2, 1, 0xA7C4, 1, 1, -48, 0xA7C5, 1, 1, -42307, 0xA7C6, 1, 1, -35384,
+            0xA7C7, 2, 2, 1, 0xA7D0, 1, 1, 1, 0xA7D6, 2, 2, 1, 0xA7F5, 1, 1, 1,
+            0xAB70, 80, 1, -38864, 0xFB00, 7, 1, 0, 0xFB13, 5, 1, 0, 0xFF21, 26, 1, 32,
+            0x10400, 40, 1, 40, 0x104B0, 36, 1, 40, 0x10570, 19, 2, 39, 0x10571, 5, 2, 39,
+            0x1057D, 7, 2, 39, 0x1058D, 3, 2, 39, 0x10595, 1, 1, 39, 0x10C80, 51, 1, 64,
+            0x118A0, 32, 1, 32, 0x16E40, 32, 1, 32, 0x1E900, 34, 1, 34
+        };
+        /** Full folds: a code point and the two or three code points of its fold, 0 padded. */
+        private static final int[] FULL_FOLDS = {
+            0x00DF, 0x0073, 0x0073, 0x0000, 0x0130, 0x0069, 0x0307, 0x0000,
+            0x0149, 0x02BC, 0x006E, 0x0000, 0x01F0, 0x006A, 0x030C, 0x0000,
+            0x0390, 0x03B9, 0x0308, 0x0301, 0x03B0, 0x03C5, 0x0308, 0x0301,
+            0x0587, 0x0565, 0x0582, 0x0000, 0x1E96, 0x0068, 0x0331, 0x0000,
+            0x1E97, 0x0074, 0x0308, 0x0000, 0x1E98, 0x0077, 0x030A, 0x0000,
+            0x1E99, 0x0079, 0x030A, 0x0000, 0x1E9A, 0x0061, 0x02BE, 0x0000,
+            0x1E9E, 0x0073, 0x0073, 0x0000, 0x1F50, 0x03C5, 0x0313, 0x0000,
+            0x1F52, 0x03C5, 0x0313, 0x0300, 0x1F54, 0x03C5, 0x0313, 0x0301,
+            0x1F56, 0x03C5, 0x0313, 0x0342, 0x1F80, 0x1F00, 0x03B9, 0x0000,
+            0x1F81, 0x1F01, 0x03B9, 0x0000, 0x1F82, 0x1F02, 0x03B9, 0x0000,
+            0x1F83, 0x1F03, 0x03B9, 0x0000, 0x1F84, 0x1F04, 0x03B9, 0x0000,
+            0x1F85, 0x1F05, 0x03B9, 0x0000, 0x1F86, 0x1F06, 0x03B9, 0x0000,
+            0x1F87, 0x1F07, 0x03B9, 0x0000, 0x1F88, 0x1F00, 0x03B9, 0x0000,
+            0x1F89, 0x1F01, 0x03B9, 0x0000, 0x1F8A, 0x1F02, 0x03B9, 0x0000,
+            0x1F8B, 0x1F03, 0x03B9, 0x0000, 0x1F8C, 0x1F04, 0x03B9, 0x0000,
+            0x1F8D, 0x1F05, 0x03B9, 0x0000, 0x1F8E, 0x1F06, 0x03B9, 0x0000,
+            0x1F8F, 0x1F07, 0x03B9, 0x0000, 0x1F90, 0x1F20, 0x03B9, 0x0000,
+            0x1F91, 0x1F21, 0x03B9, 0x0000, 0x1F92, 0x1F22, 0x03B9, 0x0000,
+            0x1F93, 0x1F23, 0x03B9, 0x0000, 0x1F94, 0x1F24, 0x03B9, 0x0000,
+            0x1F95, 0x1F25, 0x03B9, 0x0000, 0x1F96, 0x1F26, 0x03B9, 0x0000,
+            0x1F97, 0x1F27, 0x03B9, 0x0000, 0x1F98, 0x1F20, 0x03B9, 0x0000,
+            0x1F99, 0x1F21, 0x03B9, 0x0000, 0x1F9A, 0x1F22, 0x03B9, 0x0000,
+            0x1F9B, 0x1F23, 0x03B9, 0x0000, 0x1F9C, 0x1F24, 0x03B9, 0x0000,
+            0x1F9D, 0x1F25, 0x03B9, 0x0000, 0x1F9E, 0x1F26, 0x03B9, 0x0000,
+            0x1F9F, 0x1F27, 0x03B9, 0x0000, 0x1FA0, 0x1F60, 0x03B9, 0x0000,
+            0x1FA1, 0x1F61, 0x03B9, 0x0000, 0x1FA2, 0x1F62, 0x03B9, 0x0000,
+            0x1FA3, 0x1F63, 0x03B9, 0x0000, 0x1FA4, 0x1F64, 0x03B9, 0x0000,
+            0x1FA5, 0x1F65, 0x03B9, 0x0000, 0x1FA6, 0x1F66, 0x03B9, 0x0000,
+            0x1FA7, 0x1F67, 0x03B9, 0x0000, 0x1FA8, 0x1F60, 0x03B9, 0x0000,
+            0x1FA9, 0x1F61, 0x03B9, 0x0000, 0x1FAA, 0x1F62, 0x03B9, 0x0000,
+            0x1FAB, 0x1F63, 0x03B9, 0x0000, 0x1FAC, 0x1F64, 0x03B9, 0x0000,
+            0x1FAD, 0x1F65, 0x03B9, 0x0000, 0x1FAE, 0x1F66, 0x03B9, 0x0000,
+            0x1FAF, 0x1F67, 0x03B9, 0x0000, 0x1FB2, 0x1F70, 0x03B9, 0x0000,
+            0x1FB3, 0x03B1, 0x03B9, 0x0000, 0x1FB4, 0x03AC, 0x03B9, 0x0000,
+            0x1FB6, 0x03B1, 0x0342, 0x0000, 0x1FB7, 0x03B1, 0x0342, 0x03B9,
+            0x1FBC, 0x03B1, 0x03B9, 0x0000, 0x1FC2, 0x1F74, 0x03B9, 0x0000,
+            0x1FC3, 0x03B7, 0x03B9, 0x0000, 0x1FC4, 0x03AE, 0x03B9, 0x0000,
+            0x1FC6, 0x03B7, 0x0342, 0x0000, 0x1FC7, 0x03B7, 0x0342, 0x03B9,
+            0x1FCC, 0x03B7, 0x03B9, 0x0000, 0x1FD2, 0x03B9, 0x0308, 0x0300,
+            0x1FD3, 0x03B9, 0x0308, 0x0301, 0x1FD6, 0x03B9, 0x0342, 0x0000,
+            0x1FD7, 0x03B9, 0x0308, 0x0342, 0x1FE2, 0x03C5, 0x0308, 0x0300,
+            0x1FE3, 0x03C5, 0x0308, 0x0301, 0x1FE4, 0x03C1, 0x0313, 0x0000,
+            0x1FE6, 0x03C5, 0x0342, 0x0000, 0x1FE7, 0x03C5, 0x0308, 0x0342,
+            0x1FF2, 0x1F7C, 0x03B9, 0x0000, 0x1FF3, 0x03C9, 0x03B9, 0x0000,
+            0x1FF4, 0x03CE, 0x03B9, 0x0000, 0x1FF6, 0x03C9, 0x0342, 0x0000,
+            0x1FF7, 0x03C9, 0x0342, 0x03B9, 0x1FFC, 0x03C9, 0x03B9, 0x0000,
+            0xFB00, 0x0066, 0x0066, 0x0000, 0xFB01, 0x0066, 0x0069, 0x0000,
+            0xFB02, 0x0066, 0x006C, 0x0000, 0xFB03, 0x0066, 0x0066, 0x0069,
+            0xFB04, 0x0066, 0x0066, 0x006C, 0xFB05, 0x0073, 0x0074, 0x0000,
+            0xFB06, 0x0073, 0x0074, 0x0000, 0xFB13, 0x0574, 0x0576, 0x0000,
+            0xFB14, 0x0574, 0x0565, 0x0000, 0xFB15, 0x0574, 0x056B, 0x0000,
+            0xFB16, 0x057E, 0x0576, 0x0000, 0xFB17, 0x0574, 0x056D, 0x0000
+        };
+        /** {@link #LATIN1}: the fold of the unit is more than one code point. */
+        static final char EXPANDS = (char) 0xFFFF;
+        /** The code points with a fold, ascending. */
+        static final int[] KEYS;
+        /** The simple fold of each key. */
+        static final int[] SIMPLE;
+        /** The full fold of each key as {@code offset << 2 | length} in EXPANSIONS, or -1. */
+        static final int[] FULL;
+        /** The units of the full folds, all in the Basic Multilingual Plane. */
+        static final char[] EXPANSIONS;
+        /** The full fold of each Latin-1 unit, or {@link #EXPANDS}. */
+        static final char[] LATIN1 = new char[256];
+
+        static {
+            int count = 0;
+            for (int r = 1; r < RUNS.length; r += 4) {
+                count += RUNS[r];
+            }
+            long[] entries = new long[count];
+            int n = 0;
+            for (int r = 0; r < RUNS.length; r += 4) {
+                for (int k = 0; k < RUNS[r + 1]; k++) {
+                    int point = RUNS[r] + k * RUNS[r + 2];
+                    entries[n++] = (long) point << 32 | (point + RUNS[r + 3]);
+                }
+            }
+            java.util.Arrays.sort(entries);
+            KEYS = new int[count];
+            SIMPLE = new int[count];
+            FULL = new int[count];
+            for (int i = 0; i < count; i++) {
+                KEYS[i] = (int) (entries[i] >>> 32);
+                SIMPLE[i] = (int) entries[i];
+                FULL[i] = -1;
+            }
+            EXPANSIONS = new char[FULL_FOLDS.length / 4 * 3];
+            int used = 0;
+            for (int f = 0; f < FULL_FOLDS.length; f += 4) {
+                int length = FULL_FOLDS[f + 3] == 0 ? 2 : 3;
+                for (int k = 0; k < length; k++) {
+                    EXPANSIONS[used + k] = (char) FULL_FOLDS[f + 1 + k];
+                }
+                FULL[find(FULL_FOLDS[f])] = used << 2 | length;
+                used += length;
+            }
+            for (int unit = 0; unit < LATIN1.length; unit++) {
+                int i = find(unit);
+                LATIN1[unit] = i < 0 ? (char) unit : FULL[i] >= 0 ? EXPANDS : (char) SIMPLE[i];
+            }
+        }
+
+        /** The index of {@code point} among the keys, or a negative value. */
+        static int find(int point) {
+            return java.util.Arrays.binarySearch(KEYS, point);
+        }
+
+        /** The simple fold of {@code point}. */
+        static int simpleFold(int point) {
+            int i = find(point);
+            return i < 0 ? point : SIMPLE[i];
+        }
+
+        /** The full fold of {@code point} when it is one code point, else -1. */
+        static int fullFold(int point) {
+            if (point < LATIN1.length && LATIN1[point] != EXPANDS) return LATIN1[point];
+            int i = find(point);
+            return i < 0 ? point : FULL[i] < 0 ? SIMPLE[i] : -1;
+        }
+
+        /** Appends the full fold of {@code point}, which is more than one code point. */
+        static void appendFullFold(StringBuilder out, int point) {
+            int code = FULL[find(point)];
+            out.append(EXPANSIONS, code >>> 2, code & 3);
+        }
+    }
+
+    /**
      * Returns true if and only if this string contains the specified
      * sequence of char values.
      *
