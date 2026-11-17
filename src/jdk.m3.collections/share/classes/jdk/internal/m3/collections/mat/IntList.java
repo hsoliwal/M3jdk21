@@ -25,7 +25,9 @@ import java.util.stream.IntStream;
  * modulo names).
  */
 public final class IntList implements Iterable<Integer> {
+    private static final byte ASCENDING=1, UNORDERED=2;
     private final int[] values; private final int offset; private final int size;
+    private byte order; // 0 unknown, ASCENDING (non-decreasing) or UNORDERED
     public IntList(int[] values){ this(Objects.requireNonNull(values,"values").clone(),0,
             values.length,true); }
     private IntList(int[] values,int offset,int size,boolean trusted){
@@ -42,8 +44,28 @@ public final class IntList implements Iterable<Integer> {
             primitivePayloadBytes(),size,size,"int[] owner/view");}
     public IntList slice(int from,int to){Objects.checkFromToIndex(from,to,size);return trustedView(
             values,offset+from,to-from);}
-    public int indexOf(int value){for(int i=0;i<size;i++)if(values[offset+i]==value)return i;return
-            -1;}
+    /** First index of value: a lower-bound binary search once the view is known to be ascending. */
+    //FLLDCIM: LEETCODIFY — sorted views search in O(log n); order learnt once, lazily
+    public int indexOf(int value){return ascending()?lowerBound(value):scan(value);}
+    private int scan(int value){
+        for(int i=0;i<size;i++)if(values[offset+i]==value)return i;
+        return -1;
+    }
+    private int lowerBound(int value){
+        int lo=0,hi=size;
+        while(lo<hi){int mid=(lo+hi)>>>1;if(values[offset+mid]<value)lo=mid+1;else hi=mid;}
+        return lo<size&&values[offset+lo]==value?lo:-1;
+    }
+    /** Benign race: the lanes never change, so every thread computes the same order. */
+    private boolean ascending(){
+        byte known=order;
+        if(known==0){known=isAscending()?ASCENDING:UNORDERED;order=known;}
+        return known==ASCENDING;
+    }
+    private boolean isAscending(){
+        for(int i=1;i<size;i++)if(values[offset+i-1]>values[offset+i])return false;
+        return true;
+    }
     public boolean contains(int value){return indexOf(value)>=0;}
     public int[] toArray(){return Arrays.copyOfRange(values,offset,offset+size);}
     public IntStream intStream(){return Arrays.stream(values,offset,offset+size);}
