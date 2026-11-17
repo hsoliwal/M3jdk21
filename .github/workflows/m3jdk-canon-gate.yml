@@ -1,15 +1,21 @@
 # SPDX-License-Identifier: Apache-2.0
 name: M3JDK canon gate
+# Former triggers (below, as of the move) now start job(s) 'm3jdk-canon-gate__*' in
+# .github/workflows/checks-superset-04.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     pull_request:
+#       branches: [master]
+#       paths:
+#         - 'make/jdk/src/classes/build/tools/canongate/**'
+#         - 'make/scripts/canon-gate.sh'
+#         - 'make/conf/canon-patterns.tsv'
+#         - 'test/make/canongate/**'
+#         - 'doc/canon-gate.md'
+#         - '.github/workflows/m3jdk-canon-gate.yml'
+#     workflow_dispatch:
 on:
-  pull_request:
-    branches: [master]
-    paths:
-      - 'make/jdk/src/classes/build/tools/canongate/**'
-      - 'make/scripts/canon-gate.sh'
-      - 'make/conf/canon-patterns.tsv'
-      - 'test/make/canongate/**'
-      - 'doc/canon-gate.md'
-      - '.github/workflows/m3jdk-canon-gate.yml'
   workflow_dispatch:
 permissions:
   contents: read

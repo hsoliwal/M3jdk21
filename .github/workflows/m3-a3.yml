@@ -1,35 +1,41 @@
 name: M3 A3 absorption proof
 
+# Former triggers (below, as of the move) now start job(s) 'm3-a3__*' in
+# .github/workflows/checks-superset-02.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     push:
+#       branches:
+#         - master
+#         - "m3/**"
+#       paths:
+#         - "m3/tooling/migration-recipes/**"
+#         - "m3/backports/JEP_CATALOGUE.tsv"
+#         - "m3/backports/UPSTREAM_CHANGE_SEEDS.tsv"
+#         - "m3/backports/COMMUNITY_CAPABILITY_CANDIDATES.tsv"
+#         - "m3/backports/ALGORITHM_CATALOGUE.tsv"
+#         - "m3/docs/a3.md"
+#         - "m3/docs/a3-lab.md"
+#         - "m3/docs/a3-alg.md"
+#         - "m3/docs/atom-pattern-admission-and-tooling-boundary.md"
+#         - "m3/pom.xml"
+#         - ".github/workflows/m3-a3.yml"
+#     pull_request:
+#       paths:
+#         - "m3/tooling/migration-recipes/**"
+#         - "m3/backports/JEP_CATALOGUE.tsv"
+#         - "m3/backports/UPSTREAM_CHANGE_SEEDS.tsv"
+#         - "m3/backports/COMMUNITY_CAPABILITY_CANDIDATES.tsv"
+#         - "m3/backports/ALGORITHM_CATALOGUE.tsv"
+#         - "m3/docs/a3.md"
+#         - "m3/docs/a3-lab.md"
+#         - "m3/docs/a3-alg.md"
+#         - "m3/docs/atom-pattern-admission-and-tooling-boundary.md"
+#         - "m3/pom.xml"
+#         - ".github/workflows/m3-a3.yml"
+#     workflow_dispatch:
 on:
-  push:
-    branches:
-      - master
-      - "m3/**"
-    paths:
-      - "m3/tooling/migration-recipes/**"
-      - "m3/backports/JEP_CATALOGUE.tsv"
-      - "m3/backports/UPSTREAM_CHANGE_SEEDS.tsv"
-      - "m3/backports/COMMUNITY_CAPABILITY_CANDIDATES.tsv"
-      - "m3/backports/ALGORITHM_CATALOGUE.tsv"
-      - "m3/docs/a3.md"
-      - "m3/docs/a3-lab.md"
-      - "m3/docs/a3-alg.md"
-      - "m3/docs/atom-pattern-admission-and-tooling-boundary.md"
-      - "m3/pom.xml"
-      - ".github/workflows/m3-a3.yml"
-  pull_request:
-    paths:
-      - "m3/tooling/migration-recipes/**"
-      - "m3/backports/JEP_CATALOGUE.tsv"
-      - "m3/backports/UPSTREAM_CHANGE_SEEDS.tsv"
-      - "m3/backports/COMMUNITY_CAPABILITY_CANDIDATES.tsv"
-      - "m3/backports/ALGORITHM_CATALOGUE.tsv"
-      - "m3/docs/a3.md"
-      - "m3/docs/a3-lab.md"
-      - "m3/docs/a3-alg.md"
-      - "m3/docs/atom-pattern-admission-and-tooling-boundary.md"
-      - "m3/pom.xml"
-      - ".github/workflows/m3-a3.yml"
   workflow_dispatch:
 
 permissions:

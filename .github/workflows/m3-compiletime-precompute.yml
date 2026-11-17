@@ -1,16 +1,22 @@
 # SPDX-License-Identifier: Apache-2.0
 name: M3 Compile-time String Precompute
 
+# Former triggers (below, as of the move) now start job(s) 'm3-compiletime-precompute__*' in
+# .github/workflows/checks-superset-06.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     pull_request:
+#       paths:
+#         - 'm3/ports/compiletime/**'
+#         - 'm3/docs/m3-compiletime-precompute.md'
+#         - 'm3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3CompileTimeRegexPrecomputeRecipe.java'
+#         - 'm3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3CompileTimeRegexPrecomputeRecipeTest.java'
+#         - 'm3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-compiletime-regex-precompute.yml'
+#         - 'm3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/m3-compiletime-regex-precompute/**'
+#         - '.github/workflows/m3-compiletime-precompute.yml'
+#     workflow_dispatch:
 on:
-  pull_request:
-    paths:
-      - 'm3/ports/compiletime/**'
-      - 'm3/docs/m3-compiletime-precompute.md'
-      - 'm3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3CompileTimeRegexPrecomputeRecipe.java'
-      - 'm3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3CompileTimeRegexPrecomputeRecipeTest.java'
-      - 'm3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-compiletime-regex-precompute.yml'
-      - 'm3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/m3-compiletime-regex-precompute/**'
-      - '.github/workflows/m3-compiletime-precompute.yml'
   workflow_dispatch:
 
 permissions:

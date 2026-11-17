@@ -1,12 +1,18 @@
 # SPDX-License-Identifier: Apache-2.0
 name: M3JDK21 exact unsigned-128 integer signal distance Java21
+# Former triggers (below, as of the move) now start job(s) 'm3-signal-exact-integer-distance-20261025__*' in
+# .github/workflows/checks-superset-05.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     pull_request:
+#       paths:
+#         - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3SignalExactIntegerDistance.java'
+#         - 'test/jdk/jdk/m3/collections/M3SignalExactIntegerDistance*.java'
+#         - 'm3/collections/qualification/signal-exact-integer-distance-20261025/**'
+#         - '.github/workflows/m3-signal-exact-integer-distance-20261025.yml'
+#     workflow_dispatch:
 on:
-  pull_request:
-    paths:
-      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3SignalExactIntegerDistance.java'
-      - 'test/jdk/jdk/m3/collections/M3SignalExactIntegerDistance*.java'
-      - 'm3/collections/qualification/signal-exact-integer-distance-20261025/**'
-      - '.github/workflows/m3-signal-exact-integer-distance-20261025.yml'
   workflow_dispatch:
 permissions:
   contents: read

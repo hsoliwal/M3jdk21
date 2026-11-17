@@ -1,11 +1,17 @@
 # SPDX-License-Identifier: Apache-2.0
 name: M3 DOOP verified projection reuse contract
+# Former triggers (below, as of the move) now start job(s) 'm3-doop-projection-reuse__*' in
+# .github/workflows/checks-superset-08.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     pull_request:
+#       paths:
+#         - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3ObjectResidency.java'
+#         - 'test/jdk/jdk/m3/collections/M3ObjectResidencyReuseTest.java'
+#         - '.github/workflows/m3-doop-projection-reuse.yml'
+#     workflow_dispatch:
 on:
-  pull_request:
-    paths:
-      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3ObjectResidency.java'
-      - 'test/jdk/jdk/m3/collections/M3ObjectResidencyReuseTest.java'
-      - '.github/workflows/m3-doop-projection-reuse.yml'
   workflow_dispatch:
 
 permissions:

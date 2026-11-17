@@ -1,12 +1,18 @@
 name: M3 Parallel Bulk Compiler V2
 
+# Former triggers (below, as of the move) now start job(s) 'm3-parallel-bulk-compiler-v2__*' in
+# .github/workflows/checks-superset-06.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     pull_request:
+#       paths:
+#         - 'm3/ports/parallel-bulk/pom.xml'
+#         - 'm3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-parallel-bulk-compiler-repair/**'
+#         - 'm3/tooling/migration-recipes/tasks/parallel-bulk-compiler-repair/source-lock-v2-20261014.json'
+#         - '.github/workflows/m3-parallel-bulk-compiler-v2.yml'
+#     workflow_dispatch:
 on:
-  pull_request:
-    paths:
-      - 'm3/ports/parallel-bulk/pom.xml'
-      - 'm3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-parallel-bulk-compiler-repair/**'
-      - 'm3/tooling/migration-recipes/tasks/parallel-bulk-compiler-repair/source-lock-v2-20261014.json'
-      - '.github/workflows/m3-parallel-bulk-compiler-v2.yml'
   workflow_dispatch:
 
 permissions:

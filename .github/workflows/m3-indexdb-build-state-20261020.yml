@@ -1,11 +1,17 @@
 name: M3JDK21 indexed build-state contract
+# Former triggers (below, as of the move) now start job(s) 'm3-indexdb-build-state-20261020__*' in
+# .github/workflows/checks-superset-01.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     pull_request:
+#       paths:
+#         - 'm3/indexdb/**'
+#         - '.github/workflows/m3-indexdb-build-state-20261020.yml'
+#     push:
+#       branches: ['m3/indexdb-build-state-20261020']
 on:
-  pull_request:
-    paths:
-      - 'm3/indexdb/**'
-      - '.github/workflows/m3-indexdb-build-state-20261020.yml'
-  push:
-    branches: ['m3/indexdb-build-state-20261020']
+  workflow_dispatch:
 permissions:
   contents: read
 concurrency:

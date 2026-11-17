@@ -1,28 +1,34 @@
 # SPDX-License-Identifier: Apache-2.0
 name: M3 object residency pressure contract
 
+# Former triggers (below, as of the move) now start job(s) 'm3-object-residency-pressure__*' in
+# .github/workflows/checks-superset-02.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     pull_request:
+#       paths:
+#         - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3ObjectResidency.java'
+#         - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3Address28.java'
+#         - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3IntLane28.java'
+#         - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3BitLane28.java'
+#         - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3SlotAllocator28.java'
+#         - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3Residency.java'
+#         - 'm3/tooling/object-residency/**'
+#         - '.github/workflows/m3-object-residency-pressure.yml'
+#     push:
+#       branches: [master]
+#       paths:
+#         - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3ObjectResidency.java'
+#         - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3Address28.java'
+#         - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3IntLane28.java'
+#         - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3BitLane28.java'
+#         - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3SlotAllocator28.java'
+#         - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3Residency.java'
+#         - 'm3/tooling/object-residency/**'
+#         - '.github/workflows/m3-object-residency-pressure.yml'
+#     workflow_dispatch:
 on:
-  pull_request:
-    paths:
-      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3ObjectResidency.java'
-      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3Address28.java'
-      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3IntLane28.java'
-      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3BitLane28.java'
-      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3SlotAllocator28.java'
-      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3Residency.java'
-      - 'm3/tooling/object-residency/**'
-      - '.github/workflows/m3-object-residency-pressure.yml'
-  push:
-    branches: [master]
-    paths:
-      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3ObjectResidency.java'
-      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3Address28.java'
-      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3IntLane28.java'
-      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3BitLane28.java'
-      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3SlotAllocator28.java'
-      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3Residency.java'
-      - 'm3/tooling/object-residency/**'
-      - '.github/workflows/m3-object-residency-pressure.yml'
   workflow_dispatch:
 
 permissions:

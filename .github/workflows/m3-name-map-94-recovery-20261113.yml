@@ -1,14 +1,20 @@
 # SPDX-License-Identifier: Apache-2.0
 name: M3JDK21 recovered naming 94 strict JSON and existing contract
 
+# Former triggers (below, as of the move) now start job(s) 'm3-name-map-94-recovery-20261113__*' in
+# .github/workflows/checks-superset-05.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     pull_request:
+#       paths:
+#         - 'm3/docs/name-mapping.json'
+#         - 'm3/tooling/name-contract/name-plan.json'
+#         - 'm3/compatibility/name-map-94-recovery-20261113.json'
+#         - 'm3/compatibility/name-map-94-dependency-pending-20261113.json'
+#         - '.github/workflows/m3-name-map-94-recovery-20261113.yml'
+#     workflow_dispatch:
 on:
-  pull_request:
-    paths:
-      - 'm3/docs/name-mapping.json'
-      - 'm3/tooling/name-contract/name-plan.json'
-      - 'm3/compatibility/name-map-94-recovery-20261113.json'
-      - 'm3/compatibility/name-map-94-dependency-pending-20261113.json'
-      - '.github/workflows/m3-name-map-94-recovery-20261113.yml'
   workflow_dispatch:
 
 permissions:

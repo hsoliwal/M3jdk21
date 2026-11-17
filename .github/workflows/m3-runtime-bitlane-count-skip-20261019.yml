@@ -1,16 +1,22 @@
 # Copyright 2026 Hitesh Soliwal and contributors. SPDX-License-Identifier: Apache-2.0
 name: M3JDK21 java.base bitmap canonical generation and receiving
+# Former triggers (below, as of the move) now start job(s) 'm3-runtime-bitlane-count-skip-20261019__*' in
+# .github/workflows/checks-superset-08.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     push:
+#       branches: ['m3/java-base-bitlane-count-skip-20261019-01']
+#     pull_request:
+#       paths:
+#         - '.github/workflows/m3-runtime-bitlane-count-skip-20261019.yml'
+#         - 'm3/runtime-integration/qualification/bitlane-count-skip-20261019/**'
+#         - 'src/java.base/share/classes/jdk/internal/mindex/M3BitLane28.java'
+#         - 'src/java.base/share/classes/jdk/internal/mindex/M3Address28.java'
+#         - 'src/java.base/share/classes/jdk/internal/mindex/M3Bits.java'
+#         - 'src/java.base/share/native/libjava/M3BitLane28.c'
 on:
-  push:
-    branches: ['m3/java-base-bitlane-count-skip-20261019-01']
-  pull_request:
-    paths:
-      - '.github/workflows/m3-runtime-bitlane-count-skip-20261019.yml'
-      - 'm3/runtime-integration/qualification/bitlane-count-skip-20261019/**'
-      - 'src/java.base/share/classes/jdk/internal/mindex/M3BitLane28.java'
-      - 'src/java.base/share/classes/jdk/internal/mindex/M3Address28.java'
-      - 'src/java.base/share/classes/jdk/internal/mindex/M3Bits.java'
-      - 'src/java.base/share/native/libjava/M3BitLane28.c'
+  workflow_dispatch:
 permissions:
   contents: read
 concurrency:

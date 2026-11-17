@@ -1,24 +1,30 @@
 name: M3 java.base internals
 # Product code moved from the m3/ side tree into java.base (jdk.internal.m3.<area>), approved layout 2026-11-08.
 # One step per moved area runs make/m3/<area>/test-java-base.sh on a host JDK 21.
+# Former triggers (below, as of the move) now start job(s) 'm3-java-base-internals__*' in
+# .github/workflows/checks-superset-02.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     pull_request:
+#       branches: [master]
+#       paths:
+#         - 'src/java.base/share/classes/jdk/internal/m3/**'
+#         - 'src/java.base/share/classes/jdk/m3/**'
+#         - 'src/java.base/share/native/libm3*/**'
+#         - 'test/jdk/jdk/internal/m3/**'
+#         - 'make/m3/**'
+#         - '.github/workflows/m3-java-base-internals.yml'
+#     push:
+#       branches: [master]
+#       paths:
+#         - 'src/java.base/share/classes/jdk/internal/m3/**'
+#         - 'src/java.base/share/classes/jdk/m3/**'
+#         - 'src/java.base/share/native/libm3*/**'
+#         - 'test/jdk/jdk/internal/m3/**'
+#         - 'make/m3/**'
+#     workflow_dispatch:
 on:
-  pull_request:
-    branches: [master]
-    paths:
-      - 'src/java.base/share/classes/jdk/internal/m3/**'
-      - 'src/java.base/share/classes/jdk/m3/**'
-      - 'src/java.base/share/native/libm3*/**'
-      - 'test/jdk/jdk/internal/m3/**'
-      - 'make/m3/**'
-      - '.github/workflows/m3-java-base-internals.yml'
-  push:
-    branches: [master]
-    paths:
-      - 'src/java.base/share/classes/jdk/internal/m3/**'
-      - 'src/java.base/share/classes/jdk/m3/**'
-      - 'src/java.base/share/native/libm3*/**'
-      - 'test/jdk/jdk/internal/m3/**'
-      - 'make/m3/**'
   workflow_dispatch:
 permissions:
   contents: read

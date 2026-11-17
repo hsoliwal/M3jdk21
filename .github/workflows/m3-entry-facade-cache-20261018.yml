@@ -1,28 +1,34 @@
 name: M3 array-backed entry facade cache
 
+# Former triggers (below, as of the move) now start job(s) 'm3-entry-facade-cache-20261018__*' in
+# .github/workflows/checks-superset-08.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     pull_request:
+#       paths:
+#         - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3LFUCache.java'
+#         - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3SlotMap.java'
+#         - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3OrderedSlotMap.java'
+#         - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3LinkedHashMap.java'
+#         - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3TreeMap.java'
+#         - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3WeakHashMap.java'
+#         - 'test/jdk/jdk/m3/collections/M3EntryFacadeCacheTest.java'
+#         - 'm3/collections/qualification/m3-entry-facade-cache-20261018/**'
+#     push:
+#       branches:
+#         - m3/lfu-entry-facades-20261018
+#       paths:
+#         - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3LFUCache.java'
+#         - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3SlotMap.java'
+#         - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3OrderedSlotMap.java'
+#         - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3LinkedHashMap.java'
+#         - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3TreeMap.java'
+#         - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3WeakHashMap.java'
+#         - 'test/jdk/jdk/m3/collections/M3EntryFacadeCacheTest.java'
+#         - 'm3/collections/qualification/m3-entry-facade-cache-20261018/**'
 on:
-  pull_request:
-    paths:
-      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3LFUCache.java'
-      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3SlotMap.java'
-      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3OrderedSlotMap.java'
-      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3LinkedHashMap.java'
-      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3TreeMap.java'
-      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3WeakHashMap.java'
-      - 'test/jdk/jdk/m3/collections/M3EntryFacadeCacheTest.java'
-      - 'm3/collections/qualification/m3-entry-facade-cache-20261018/**'
-  push:
-    branches:
-      - m3/lfu-entry-facades-20261018
-    paths:
-      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3LFUCache.java'
-      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3SlotMap.java'
-      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3OrderedSlotMap.java'
-      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3LinkedHashMap.java'
-      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3TreeMap.java'
-      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3WeakHashMap.java'
-      - 'test/jdk/jdk/m3/collections/M3EntryFacadeCacheTest.java'
-      - 'm3/collections/qualification/m3-entry-facade-cache-20261018/**'
+  workflow_dispatch:
 
 permissions:
   contents: read

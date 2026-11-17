@@ -1,13 +1,19 @@
 name: M3 proof harness repair diagnostics
 
+# Former triggers (below, as of the move) now start job(s) 'm3-proof-harness-repair-diagnostics__*' in
+# .github/workflows/checks-superset-04.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     push:
+#       branches:
+#         - "m3/proof-harness-repair-20261005"
+#       paths:
+#         - "m3/backports/**"
+#         - ".github/workflows/m3-jep467-markdown-inventory.yml"
+#         - ".github/workflows/m3-proof-harness-repair-diagnostics.yml"
+#     workflow_dispatch:
 on:
-  push:
-    branches:
-      - "m3/proof-harness-repair-20261005"
-    paths:
-      - "m3/backports/**"
-      - ".github/workflows/m3-jep467-markdown-inventory.yml"
-      - ".github/workflows/m3-proof-harness-repair-diagnostics.yml"
   workflow_dispatch:
 
 permissions:

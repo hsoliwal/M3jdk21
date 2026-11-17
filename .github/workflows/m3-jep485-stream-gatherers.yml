@@ -1,33 +1,39 @@
 name: M3 JEP 485 Stream Gatherers admission
 
+# Former triggers (below, as of the move) now start job(s) 'm3-jep485-stream-gatherers__*' in
+# .github/workflows/checks-superset-04.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     push:
+#       branches:
+#         - "m3/jep485-*"
+#         - "m3/recover-jep485-current-master-20261006"
+#       paths:
+#         - "m3/backports/recipes/jep-485-gatherers/**"
+#         - "m3/backports/recipes/j485/**"
+#         - "m3/backports/JEP_CATALOGUE.tsv"
+#         - "m3/tooling/recipe-catalogue.tsv"
+#         - "m3/tooling/migration-recipes/**"
+#         - "m3/tooling/backport-dag/**"
+#         - "src/java.base/share/classes/java/util/stream/**"
+#         - "test/jdk/java/util/stream/**"
+#         - ".github/workflows/m3-jep485-stream-gatherers.yml"
+#         - "m3/tooling/standalone/LINEAGE_SOURCES.tsv"
+#     pull_request:
+#       paths:
+#         - "m3/backports/recipes/jep-485-gatherers/**"
+#         - "m3/backports/recipes/j485/**"
+#         - "m3/backports/JEP_CATALOGUE.tsv"
+#         - "m3/tooling/recipe-catalogue.tsv"
+#         - "m3/tooling/migration-recipes/**"
+#         - "m3/tooling/backport-dag/**"
+#         - "src/java.base/share/classes/java/util/stream/**"
+#         - "test/jdk/java/util/stream/**"
+#         - ".github/workflows/m3-jep485-stream-gatherers.yml"
+#         - "m3/tooling/standalone/LINEAGE_SOURCES.tsv"
+#     workflow_dispatch:
 on:
-  push:
-    branches:
-      - "m3/jep485-*"
-      - "m3/recover-jep485-current-master-20261006"
-    paths:
-      - "m3/backports/recipes/jep-485-gatherers/**"
-      - "m3/backports/recipes/j485/**"
-      - "m3/backports/JEP_CATALOGUE.tsv"
-      - "m3/tooling/recipe-catalogue.tsv"
-      - "m3/tooling/migration-recipes/**"
-      - "m3/tooling/backport-dag/**"
-      - "src/java.base/share/classes/java/util/stream/**"
-      - "test/jdk/java/util/stream/**"
-      - ".github/workflows/m3-jep485-stream-gatherers.yml"
-      - "m3/tooling/standalone/LINEAGE_SOURCES.tsv"
-  pull_request:
-    paths:
-      - "m3/backports/recipes/jep-485-gatherers/**"
-      - "m3/backports/recipes/j485/**"
-      - "m3/backports/JEP_CATALOGUE.tsv"
-      - "m3/tooling/recipe-catalogue.tsv"
-      - "m3/tooling/migration-recipes/**"
-      - "m3/tooling/backport-dag/**"
-      - "src/java.base/share/classes/java/util/stream/**"
-      - "test/jdk/java/util/stream/**"
-      - ".github/workflows/m3-jep485-stream-gatherers.yml"
-      - "m3/tooling/standalone/LINEAGE_SOURCES.tsv"
   workflow_dispatch:
 
 permissions:

@@ -1,12 +1,18 @@
 # SPDX-License-Identifier: Apache-2.0
 name: Indexed live sorted Spliterator contract
+# Former triggers (below, as of the move) now start job(s) 'indexed-live-sorted-spliterator__*' in
+# .github/workflows/checks-superset-06.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     pull_request:
+#       paths:
+#         - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3IndexedLiveView.java'
+#         - 'test/jdk/jdk/m3/collections/IndexedLiveSortedSpliterator*.java'
+#         - 'm3/pom.xml'
+#         - '.github/workflows/indexed-live-sorted-spliterator.yml'
+#     workflow_dispatch:
 on:
-  pull_request:
-    paths:
-      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3IndexedLiveView.java'
-      - 'test/jdk/jdk/m3/collections/IndexedLiveSortedSpliterator*.java'
-      - 'm3/pom.xml'
-      - '.github/workflows/indexed-live-sorted-spliterator.yml'
   workflow_dispatch:
 permissions:
   contents: read

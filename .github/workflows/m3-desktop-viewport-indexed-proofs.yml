@@ -1,20 +1,26 @@
 # SPDX-License-Identifier: Apache-2.0
 name: M3 desktop viewport indexed Java21 proofs
+# Former triggers (below, as of the move) now start job(s) 'm3-desktop-viewport-indexed-proofs__*' in
+# .github/workflows/checks-superset-06.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     pull_request:
+#       paths:
+#         - 'm3/ports/swing-viewport/src/main/java/jdk/m3/swing/viewport/M3ViewportIndexWindow.java'
+#         - 'm3/ports/swing-viewport/src/main/java/jdk/m3/swing/viewport/M3DesktopViewportAdapters.java'
+#         - 'm3/ports/swing-viewport/src/test/java/jdk/m3/swing/viewport/M3DesktopViewportProof.java'
+#         - 'm3/ports/swing-viewport/src/**'
+#         - 'm3/ports/swing-viewport/pom.xml'
+#         - 'm3/vendor/third_party/junit-*/**'
+#         - 'm3/vendor/third_party/opentest4j/**'
+#         - 'm3/vendor/third_party/apiguardian-api/**'
+#         - 'm3/vendor/third_party/pom.xml'
+#         - 'm3/ports/swing-viewport/optional-swingx/**'
+#         - 'm3/ports/jfx-viewport/**'
+#         - '.github/workflows/m3-desktop-viewport-indexed-proofs.yml'
+#     workflow_dispatch:
 on:
-  pull_request:
-    paths:
-      - 'm3/ports/swing-viewport/src/main/java/jdk/m3/swing/viewport/M3ViewportIndexWindow.java'
-      - 'm3/ports/swing-viewport/src/main/java/jdk/m3/swing/viewport/M3DesktopViewportAdapters.java'
-      - 'm3/ports/swing-viewport/src/test/java/jdk/m3/swing/viewport/M3DesktopViewportProof.java'
-      - 'm3/ports/swing-viewport/src/**'
-      - 'm3/ports/swing-viewport/pom.xml'
-      - 'm3/vendor/third_party/junit-*/**'
-      - 'm3/vendor/third_party/opentest4j/**'
-      - 'm3/vendor/third_party/apiguardian-api/**'
-      - 'm3/vendor/third_party/pom.xml'
-      - 'm3/ports/swing-viewport/optional-swingx/**'
-      - 'm3/ports/jfx-viewport/**'
-      - '.github/workflows/m3-desktop-viewport-indexed-proofs.yml'
   workflow_dispatch:
 permissions:
   contents: read

@@ -1,13 +1,19 @@
 # SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
 # SPDX-License-Identifier: Apache-2.0
 name: M3JDK21 jdeps original-tool build facts
+# Former triggers (below, as of the move) now start job(s) 'm3-jdeps-buildtools__*' in
+# .github/workflows/checks-superset-08.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     pull_request:
+#       paths:
+#         - 'src/jdk.jdeps/share/classes/com/sun/tools/jdeps/M3BuildClassDeps.java'
+#         - 'src/jdk.jdeps/share/classes/module-info.java'
+#         - 'test/jdk/tools/jdeps/M3BuildClassDepsContract.java'
+#         - '.github/workflows/m3-jdeps-buildtools.yml'
+#     workflow_dispatch:
 on:
-  pull_request:
-    paths:
-      - 'src/jdk.jdeps/share/classes/com/sun/tools/jdeps/M3BuildClassDeps.java'
-      - 'src/jdk.jdeps/share/classes/module-info.java'
-      - 'test/jdk/tools/jdeps/M3BuildClassDepsContract.java'
-      - '.github/workflows/m3-jdeps-buildtools.yml'
   workflow_dispatch:
 permissions:
   contents: read

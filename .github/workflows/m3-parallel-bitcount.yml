@@ -1,19 +1,25 @@
 name: M3 Parallel Bitcount Provider
 
+# Former triggers (below, as of the move) now start job(s) 'm3-parallel-bitcount__*' in
+# .github/workflows/checks-superset-01.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     pull_request:
+#       paths:
+#         - 'src/m3.parallel/**'
+#         - 'src/m3.parallel.bulk.provider/**'
+#         - 'test/jdk/jdk/m3/parallel/**'
+#         - 'm3/ports/parallel-bulk/src/main/java/jdk/m3/parallel/bulk/M3ParallelBitCountProvider.java'
+#         - 'm3/ports/parallel-bulk/src/test/java/jdk/m3/parallel/bulk/M3ParallelBitCount*.java'
+#         - 'm3/ports/parallel-bulk/verification/*bitcount*'
+#         - 'm3/ports/parallel-bulk/verification/BITCOUNT.md'
+#         - 'm3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/m3-bulk-bitcount-20261014/**'
+#         - 'm3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-bulk-bitcount-20261014/**'
+#         - 'm3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-parallel-bitcount.yml'
+#         - '.github/workflows/m3-parallel-bitcount.yml'
+#     workflow_dispatch:
 on:
-  pull_request:
-    paths:
-      - 'src/m3.parallel/**'
-      - 'src/m3.parallel.bulk.provider/**'
-      - 'test/jdk/jdk/m3/parallel/**'
-      - 'm3/ports/parallel-bulk/src/main/java/jdk/m3/parallel/bulk/M3ParallelBitCountProvider.java'
-      - 'm3/ports/parallel-bulk/src/test/java/jdk/m3/parallel/bulk/M3ParallelBitCount*.java'
-      - 'm3/ports/parallel-bulk/verification/*bitcount*'
-      - 'm3/ports/parallel-bulk/verification/BITCOUNT.md'
-      - 'm3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/m3-bulk-bitcount-20261014/**'
-      - 'm3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-bulk-bitcount-20261014/**'
-      - 'm3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-parallel-bitcount.yml'
-      - '.github/workflows/m3-parallel-bitcount.yml'
   workflow_dispatch:
 
 permissions:

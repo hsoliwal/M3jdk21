@@ -1,14 +1,20 @@
 # SPDX-License-Identifier: Apache-2.0
 name: M3 strict immutable indexed snapshots Java JNI
+# Former triggers (below, as of the move) now start job(s) 'm3-strict-indexed-readonly-20261018__*' in
+# .github/workflows/checks-superset-08.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     pull_request:
+#       paths:
+#         - 'm3/collections/qualification/m3jdk21-index-readonly-20261018/**'
+#         - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3ObjectIndexSnapshot.java'
+#         - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3IndexedListSnapshot.java'
+#         - 'test/jdk/jdk/m3/collections/M3IndexedReadOnlyNoopProof.java'
+#         - 'test/jdk/jdk/m3/collections/M3IndexedReadOnlyNoopTest.java'
+#         - '.github/workflows/m3-strict-indexed-readonly-20261018.yml'
+#     workflow_dispatch:
 on:
-  pull_request:
-    paths:
-      - 'm3/collections/qualification/m3jdk21-index-readonly-20261018/**'
-      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3ObjectIndexSnapshot.java'
-      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3IndexedListSnapshot.java'
-      - 'test/jdk/jdk/m3/collections/M3IndexedReadOnlyNoopProof.java'
-      - 'test/jdk/jdk/m3/collections/M3IndexedReadOnlyNoopTest.java'
-      - '.github/workflows/m3-strict-indexed-readonly-20261018.yml'
   workflow_dispatch:
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}

@@ -2,12 +2,18 @@
 # SPDX-License-Identifier: Apache-2.0
 # Build original M3JDK 21 OpenJDK image; this is not a complete release qualification.
 name: M3JDK21 original regex source-built image
+# Former triggers (below, as of the move) now start job(s) 'm3-regex-original-image__*' in
+# .github/workflows/checks-superset-07.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     pull_request:
+#       paths:
+#         - 'src/java.base/share/classes/java/util/regex/M3PatternQuery.java'
+#         - 'test/jdk/java/util/regex/M3RegexFrontierShortCircuitTest.java'
+#         - '.github/workflows/m3-regex-original-image.yml'
+#     workflow_dispatch:
 on:
-  pull_request:
-    paths:
-      - 'src/java.base/share/classes/java/util/regex/M3PatternQuery.java'
-      - 'test/jdk/java/util/regex/M3RegexFrontierShortCircuitTest.java'
-      - '.github/workflows/m3-regex-original-image.yml'
   workflow_dispatch:
 permissions:
   contents: read

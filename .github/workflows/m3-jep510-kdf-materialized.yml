@@ -1,27 +1,33 @@
 # SPDX-License-Identifier: GPL-2.0-with-classpath-exception
 name: M3 JEP 510 KDF materialized candidate
 
+# Former triggers (below, as of the move) now start job(s) 'm3-jep510-kdf-materialized__*' in
+# .github/workflows/checks-superset-07.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     pull_request:
+#       paths:
+#         - 'src/java.base/share/classes/com/sun/crypto/provider/HKDFKeyDerivation.java'
+#         - 'src/java.base/share/classes/com/sun/crypto/provider/SunJCE.java'
+#         - 'src/java.base/share/classes/java/security/Provider.java'
+#         - 'src/java.base/share/classes/javax/crypto/KDF.java'
+#         - 'src/java.base/share/classes/javax/crypto/KDFParameters.java'
+#         - 'src/java.base/share/classes/javax/crypto/KDFSpi.java'
+#         - 'src/java.base/share/classes/javax/crypto/spec/HKDFParameterSpec.java'
+#         - 'src/java.base/share/classes/sun/security/util/Debug.java'
+#         - 'test/jdk/com/sun/crypto/provider/KDF/**'
+#         - 'test/jdk/javax/crypto/KDF/**'
+#         - 'm3/backports/recipes/j510/**'
+#         - 'm3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jep510Kdf*.java'
+#         - 'm3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3Jep510Kdf*.java'
+#         - 'm3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk25-jep510-kdf/**'
+#         - 'm3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk25-jep510-kdf-tests/**'
+#         - 'm3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-jep510-kdf.yml'
+#         - 'm3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/scope/M3RecipeScopeRegistry.java'
+#         - '.github/workflows/m3-jep510-kdf-materialized.yml'
+#     workflow_dispatch:
 on:
-  pull_request:
-    paths:
-      - 'src/java.base/share/classes/com/sun/crypto/provider/HKDFKeyDerivation.java'
-      - 'src/java.base/share/classes/com/sun/crypto/provider/SunJCE.java'
-      - 'src/java.base/share/classes/java/security/Provider.java'
-      - 'src/java.base/share/classes/javax/crypto/KDF.java'
-      - 'src/java.base/share/classes/javax/crypto/KDFParameters.java'
-      - 'src/java.base/share/classes/javax/crypto/KDFSpi.java'
-      - 'src/java.base/share/classes/javax/crypto/spec/HKDFParameterSpec.java'
-      - 'src/java.base/share/classes/sun/security/util/Debug.java'
-      - 'test/jdk/com/sun/crypto/provider/KDF/**'
-      - 'test/jdk/javax/crypto/KDF/**'
-      - 'm3/backports/recipes/j510/**'
-      - 'm3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jep510Kdf*.java'
-      - 'm3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3Jep510Kdf*.java'
-      - 'm3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk25-jep510-kdf/**'
-      - 'm3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk25-jep510-kdf-tests/**'
-      - 'm3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-jep510-kdf.yml'
-      - 'm3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/scope/M3RecipeScopeRegistry.java'
-      - '.github/workflows/m3-jep510-kdf-materialized.yml'
   workflow_dispatch:
 
 permissions:

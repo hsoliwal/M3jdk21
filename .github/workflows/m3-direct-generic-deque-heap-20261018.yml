@@ -1,16 +1,22 @@
 # SPDX-License-Identifier: Apache-2.0
 name: M3 direct generic Deque and PriorityQueue Java JNI
+# Former triggers (below, as of the move) now start job(s) 'm3-direct-generic-deque-heap-20261018__*' in
+# .github/workflows/checks-superset-08.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     pull_request:
+#       paths:
+#         - "src/jdk.m3.collections/share/classes/jdk/m3/collections/M3ArrayDeque.java"
+#         - "src/jdk.m3.collections/share/classes/jdk/m3/collections/M3PriorityQueue.java"
+#         - "test/jdk/jdk/m3/collections/M3GenericReferenceOwners*.java"
+#         - "m3/collections/qualification/direct-generic-deque-heap-20261018/**"
+#         - "m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-native-generic-deque-priority-20261018/**"
+#         - ".github/workflows/m3-direct-generic-deque-heap-20261018.yml"
+#     push:
+#       branches: [m3/direct-generic-array-deque-heap-receiver-20261018]
 on:
-  pull_request:
-    paths:
-      - "src/jdk.m3.collections/share/classes/jdk/m3/collections/M3ArrayDeque.java"
-      - "src/jdk.m3.collections/share/classes/jdk/m3/collections/M3PriorityQueue.java"
-      - "test/jdk/jdk/m3/collections/M3GenericReferenceOwners*.java"
-      - "m3/collections/qualification/direct-generic-deque-heap-20261018/**"
-      - "m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-native-generic-deque-priority-20261018/**"
-      - ".github/workflows/m3-direct-generic-deque-heap-20261018.yml"
-  push:
-    branches: [m3/direct-generic-array-deque-heap-receiver-20261018]
+  workflow_dispatch:
 permissions:
   contents: read
 concurrency:

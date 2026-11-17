@@ -1,15 +1,21 @@
 # SPDX-License-Identifier: Apache-2.0
 name: M3JDK21 indexed multivalue occurrence Java JNI recipe
+# Former triggers (below, as of the move) now start job(s) 'm3-five-library-occurrences-20261018__*' in
+# .github/workflows/checks-superset-09.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     pull_request:
+#       paths:
+#         - AGENTS.md
+#         - src/jdk.m3.collections/share/classes/jdk/m3/collections/M3IndexedMultiValueMap.java
+#         - test/jdk/jdk/m3/collections/M3IndexedMultiValueOccurrenceSelfTest.java
+#         - test/jdk/jdk/m3/collections/M3IndexedMultiValueOccurrenceTest.java
+#         - test/jdk/jdk/m3/collections/M3IndexedOccurrenceArrayNativeTest.java
+#         - m3/collections/qualification/m3-five-library-occurrences-20261018/**
+#         - .github/workflows/m3-five-library-occurrences-20261018.yml
+#     workflow_dispatch:
 on:
-  pull_request:
-    paths:
-      - AGENTS.md
-      - src/jdk.m3.collections/share/classes/jdk/m3/collections/M3IndexedMultiValueMap.java
-      - test/jdk/jdk/m3/collections/M3IndexedMultiValueOccurrenceSelfTest.java
-      - test/jdk/jdk/m3/collections/M3IndexedMultiValueOccurrenceTest.java
-      - test/jdk/jdk/m3/collections/M3IndexedOccurrenceArrayNativeTest.java
-      - m3/collections/qualification/m3-five-library-occurrences-20261018/**
-      - .github/workflows/m3-five-library-occurrences-20261018.yml
   workflow_dispatch:
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}

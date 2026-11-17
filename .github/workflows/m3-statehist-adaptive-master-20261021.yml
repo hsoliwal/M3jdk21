@@ -1,12 +1,18 @@
 # SPDX-License-Identifier: Apache-2.0
 name: M3 statehist adaptive mask Java21
+# Former triggers (below, as of the move) now start job(s) 'm3-statehist-adaptive-master-20261021__*' in
+# .github/workflows/checks-superset-08.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     push:
+#       branches: [m3/statehist-adaptive-maskcount-master-20261021]
+#     pull_request:
+#       paths:
+#         - src/jdk.m3.collections/share/classes/jdk/m3/collections/M3StateMaskHistogram.java
+#         - test/jdk/jdk/m3/collections/M3StateMaskAdaptiveCountContract.java
+#     workflow_dispatch:
 on:
-  push:
-    branches: [m3/statehist-adaptive-maskcount-master-20261021]
-  pull_request:
-    paths:
-      - src/jdk.m3.collections/share/classes/jdk/m3/collections/M3StateMaskHistogram.java
-      - test/jdk/jdk/m3/collections/M3StateMaskAdaptiveCountContract.java
   workflow_dispatch:
 permissions:
   contents: read

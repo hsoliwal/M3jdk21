@@ -1,12 +1,18 @@
 name: M3 indexed-window owner Java21 and C17 JNI
+# Former triggers (below, as of the move) now start job(s) 'm3-index-window-recovery-20261017__*' in
+# .github/workflows/checks-superset-08.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     pull_request:
+#       paths:
+#         - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3IndexMaskCompactor.java'
+#         - 'src/jdk.m3.collections/share/native/libm3collections/collections/m3_index_mask_compactor.c'
+#         - 'test/jdk/jdk/m3/collections/M3IndexMaskWindowRecovery*'
+#         - 'm3/collections/qualification/window-recovery-20261017/**'
+#         - '.github/workflows/m3-index-window-recovery-20261017.yml'
+#     workflow_dispatch:
 on:
-  pull_request:
-    paths:
-      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3IndexMaskCompactor.java'
-      - 'src/jdk.m3.collections/share/native/libm3collections/collections/m3_index_mask_compactor.c'
-      - 'test/jdk/jdk/m3/collections/M3IndexMaskWindowRecovery*'
-      - 'm3/collections/qualification/window-recovery-20261017/**'
-      - '.github/workflows/m3-index-window-recovery-20261017.yml'
   workflow_dispatch:
 permissions:
   contents: read

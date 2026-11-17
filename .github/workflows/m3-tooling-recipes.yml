@@ -1,34 +1,40 @@
 name: M3 OpenRewrite recipe proof
 
+# Former triggers (below, as of the move) now start job(s) 'm3-tooling-recipes__*' in
+# .github/workflows/checks-superset-02.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     push:
+#       branches:
+#         - master
+#         - "m3/**"
+#       paths:
+#         - "m3/tooling/migration-recipes/**"
+#         - "m3/m3-import/pure-int-recipe-custody/**"
+#         - "m3/docs/m3-apache2-borrowing-contract.md"
+#         - "m3/compatibility/m3-canonical-residue-gitblobs.tsv"
+#         - "m3/compatibility/test_m3_recipe_home_policy.py"
+#         - "m3/compatibility/check_m3_recipe_ownership.py"
+#         - "m3/compatibility/m3-recipe-home-policy.tsv"
+#         - "m3/indexdb/src/main/**"
+#         - "m3/tooling/recipe-catalogue.tsv"
+#         - "m3/tooling/emit-java21-convergence-proof.py"
+#         - "m3/docs/atom-pattern-admission-and-tooling-boundary.md"
+#         - ".github/workflows/m3-tooling-recipes.yml"
+#     pull_request:
+#       paths:
+#         - "m3/tooling/migration-recipes/**"
+#         - "m3/docs/m3-apache2-borrowing-contract.md"
+#         - "m3/compatibility/m3-canonical-residue-gitblobs.tsv"
+#         - "m3/compatibility/m3-recipe-home-policy.tsv"
+#         - "m3/indexdb/src/main/**"
+#         - "m3/tooling/recipe-catalogue.tsv"
+#         - "m3/tooling/emit-java21-convergence-proof.py"
+#         - "m3/docs/atom-pattern-admission-and-tooling-boundary.md"
+#         - ".github/workflows/m3-tooling-recipes.yml"
+#     workflow_dispatch:
 on:
-  push:
-    branches:
-      - master
-      - "m3/**"
-    paths:
-      - "m3/tooling/migration-recipes/**"
-      - "m3/m3-import/pure-int-recipe-custody/**"
-      - "m3/docs/m3-apache2-borrowing-contract.md"
-      - "m3/compatibility/m3-canonical-residue-gitblobs.tsv"
-      - "m3/compatibility/test_m3_recipe_home_policy.py"
-      - "m3/compatibility/check_m3_recipe_ownership.py"
-      - "m3/compatibility/m3-recipe-home-policy.tsv"
-      - "m3/indexdb/src/main/**"
-      - "m3/tooling/recipe-catalogue.tsv"
-      - "m3/tooling/emit-java21-convergence-proof.py"
-      - "m3/docs/atom-pattern-admission-and-tooling-boundary.md"
-      - ".github/workflows/m3-tooling-recipes.yml"
-  pull_request:
-    paths:
-      - "m3/tooling/migration-recipes/**"
-      - "m3/docs/m3-apache2-borrowing-contract.md"
-      - "m3/compatibility/m3-canonical-residue-gitblobs.tsv"
-      - "m3/compatibility/m3-recipe-home-policy.tsv"
-      - "m3/indexdb/src/main/**"
-      - "m3/tooling/recipe-catalogue.tsv"
-      - "m3/tooling/emit-java21-convergence-proof.py"
-      - "m3/docs/atom-pattern-admission-and-tooling-boundary.md"
-      - ".github/workflows/m3-tooling-recipes.yml"
   workflow_dispatch:
 
 permissions:

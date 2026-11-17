@@ -1,12 +1,18 @@
 # Copyright 2026 Hitesh Soliwal and contributors; SPDX-License-Identifier: Apache-2.0
 name: M3JDK21 M3FS composite UTF-16 indexed cursors
+# Former triggers (below, as of the move) now start job(s) 'm3fs-segmented-utf16-cursor-20261020__*' in
+# .github/workflows/checks-superset-06.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     pull_request:
+#       paths:
+#         - 'm3/fs/src/main/java/jdk/m3/fs/M3FsPrecomputeBundle.java'
+#         - 'm3/fs/src/test/java/jdk/m3/fs/M3FsSegmentedCursor*.java'
+#         - 'm3/fs/qualification/segmented-utf16-cursor-20261020/**'
+#         - '.github/workflows/m3fs-segmented-utf16-cursor-20261020.yml'
+#     workflow_dispatch:
 on:
-  pull_request:
-    paths:
-      - 'm3/fs/src/main/java/jdk/m3/fs/M3FsPrecomputeBundle.java'
-      - 'm3/fs/src/test/java/jdk/m3/fs/M3FsSegmentedCursor*.java'
-      - 'm3/fs/qualification/segmented-utf16-cursor-20261020/**'
-      - '.github/workflows/m3fs-segmented-utf16-cursor-20261020.yml'
   workflow_dispatch:
 permissions:
   contents: read

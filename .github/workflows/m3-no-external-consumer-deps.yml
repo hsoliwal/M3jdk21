@@ -1,24 +1,30 @@
 # SPDX-License-Identifier: Apache-2.0
 # SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
 name: M3 no external consumer runtime dependencies
+# Former triggers (below, as of the move) now start job(s) 'm3-no-external-consumer-deps__*' in
+# .github/workflows/checks-superset-04.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     pull_request:
+#       paths:
+#         - 'm3/arrays/pom.xml'
+#         - 'm3/collections/pom.xml'
+#         - 'm3/collections/interop/pom.xml'
+#         - 'm3/collections/verification/**'
+#         - '.github/workflows/m3-no-external-consumer-deps.yml'
+#     push:
+#       branches:
+#         - 'm3/no-external-runtime-publish-gate-20261028'
+#         - 'm3/collection-views-convergence-20261024'
+#       paths:
+#         - 'm3/arrays/pom.xml'
+#         - 'm3/collections/pom.xml'
+#         - 'm3/collections/interop/pom.xml'
+#         - 'm3/collections/verification/**'
+#         - '.github/workflows/m3-no-external-consumer-deps.yml'
+#     workflow_dispatch:
 on:
-  pull_request:
-    paths:
-      - 'm3/arrays/pom.xml'
-      - 'm3/collections/pom.xml'
-      - 'm3/collections/interop/pom.xml'
-      - 'm3/collections/verification/**'
-      - '.github/workflows/m3-no-external-consumer-deps.yml'
-  push:
-    branches:
-      - 'm3/no-external-runtime-publish-gate-20261028'
-      - 'm3/collection-views-convergence-20261024'
-    paths:
-      - 'm3/arrays/pom.xml'
-      - 'm3/collections/pom.xml'
-      - 'm3/collections/interop/pom.xml'
-      - 'm3/collections/verification/**'
-      - '.github/workflows/m3-no-external-consumer-deps.yml'
   workflow_dispatch:
 permissions:
   contents: read

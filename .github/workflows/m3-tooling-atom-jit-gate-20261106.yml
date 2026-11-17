@@ -2,17 +2,23 @@
 # Registration of m3/tooling/atom-jit-gate (written by m3/tooling/atom-jit-gate/recipe/atom-jit-gate-20261106/relocate.py,
 # the way m3/tooling/atom-census is registered: a standalone pom.xml with its own workflow).
 name: M3JDK21 per-atom JIT retest gate (tooling)
+# Former triggers (below, as of the move) now start job(s) 'm3-tooling-atom-jit-gate-20261106__*' in
+# .github/workflows/checks-superset-10.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     pull_request:
+#       paths:
+#         - 'm3/tooling/atom-jit-gate/**'
+#         - 'm3/tooling/atom-census/**'
+#         - '.github/workflows/m3-tooling-atom-jit-gate-20261106.yml'
+#     push:
+#       paths:
+#         - 'm3/tooling/atom-jit-gate/**'
+#         - 'm3/tooling/atom-census/**'
+#         - '.github/workflows/m3-tooling-atom-jit-gate-20261106.yml'
 on:
-  pull_request:
-    paths:
-      - 'm3/tooling/atom-jit-gate/**'
-      - 'm3/tooling/atom-census/**'
-      - '.github/workflows/m3-tooling-atom-jit-gate-20261106.yml'
-  push:
-    paths:
-      - 'm3/tooling/atom-jit-gate/**'
-      - 'm3/tooling/atom-census/**'
-      - '.github/workflows/m3-tooling-atom-jit-gate-20261106.yml'
+  workflow_dispatch:
 permissions:
   contents: read
 jobs:

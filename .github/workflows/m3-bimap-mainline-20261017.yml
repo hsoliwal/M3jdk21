@@ -1,13 +1,19 @@
 # SPDX-License-Identifier: Apache-2.0
 name: M3 BiMap mainline Java/JNI SDK receiver
+# Former triggers (below, as of the move) now start job(s) 'm3-bimap-mainline-20261017__*' in
+# .github/workflows/checks-superset-05.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     pull_request:
+#       paths:
+#         - 'm3/collections/interop/src/main/java/jdk/m3/collections/interop/M3BiMap*.java'
+#         - 'm3/collections/interop/src/test/java/jdk/m3/collections/interop/M3BiMapTest.java'
+#         - 'm3/collections/qualification/bimap-mainline-20261017/**'
+#         - 'test/jdk/jdk/m3/collections/native/collections/m3_bimap_consumer.c'
+#         - '.github/workflows/m3-bimap-mainline-20261017.yml'
+#     workflow_dispatch:
 on:
-  pull_request:
-    paths:
-      - 'm3/collections/interop/src/main/java/jdk/m3/collections/interop/M3BiMap*.java'
-      - 'm3/collections/interop/src/test/java/jdk/m3/collections/interop/M3BiMapTest.java'
-      - 'm3/collections/qualification/bimap-mainline-20261017/**'
-      - 'test/jdk/jdk/m3/collections/native/collections/m3_bimap_consumer.c'
-      - '.github/workflows/m3-bimap-mainline-20261017.yml'
   workflow_dispatch:
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}

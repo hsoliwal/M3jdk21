@@ -1,16 +1,22 @@
 # SPDX-License-Identifier: Apache-2.0
 name: M3 DB parse proof
+# Former triggers (below, as of the move) now start job(s) 'm3-db-parse__*' in
+# .github/workflows/checks-superset-01.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     push:
+#       branches: ['m3/db-parse-20261004']
+#     pull_request:
+#       paths:
+#         - 'm3/indexdb/**'
+#         - 'm3/compatibility/m3-m3indexdb-v1-pin.tsv'
+#         - 'm3/compatibility/check_m3_m3indexdb_v1.py'
+#         - 'm3/compatibility/m3-canonical-residue-gitblobs.tsv'
+#         - 'm3/compatibility/M3_M3INDEXDB_V1_FINGERPRINT.md'
+#         - '.github/workflows/m3-db-parse.yml'
 on:
-  push:
-    branches: ['m3/db-parse-20261004']
-  pull_request:
-    paths:
-      - 'm3/indexdb/**'
-      - 'm3/compatibility/m3-m3indexdb-v1-pin.tsv'
-      - 'm3/compatibility/check_m3_m3indexdb_v1.py'
-      - 'm3/compatibility/m3-canonical-residue-gitblobs.tsv'
-      - 'm3/compatibility/M3_M3INDEXDB_V1_FINGERPRINT.md'
-      - '.github/workflows/m3-db-parse.yml'
+  workflow_dispatch:
 permissions:
   contents: read
 concurrency:

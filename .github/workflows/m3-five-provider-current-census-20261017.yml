@@ -1,15 +1,21 @@
 # SPDX-License-Identifier: Apache-2.0
 name: M3 SDK exact 34-owner interop source census
+# Former triggers (below, as of the move) now start job(s) 'm3-five-provider-current-census-20261017__*' in
+# .github/workflows/checks-superset-05.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     pull_request:
+#       paths:
+#         - 'm3/collections/interop/qualification/current-census-20261017/**'
+#         - 'm3/collections/interop/qualification/compiler-three-test-successor-20261022/**'
+#         - 'm3/collections/interop/src/test/java/jdk/m3/collections/interop/M3ApacheCollectionsTest.java'
+#         - 'm3/collections/interop/src/test/java/jdk/m3/collections/interop/M3FiveLibraryKeyRangesTest.java'
+#         - 'm3/collections/interop/src/test/java/jdk/m3/collections/interop/M3FiveProviderFlagSelectionTest.java'
+#         - 'm3/collections/qualification/m3-five-provider-current-census-20261017/**'
+#         - '.github/workflows/m3-five-provider-current-census-20261017.yml'
+#     workflow_dispatch:
 on:
-  pull_request:
-    paths:
-      - 'm3/collections/interop/qualification/current-census-20261017/**'
-      - 'm3/collections/interop/qualification/compiler-three-test-successor-20261022/**'
-      - 'm3/collections/interop/src/test/java/jdk/m3/collections/interop/M3ApacheCollectionsTest.java'
-      - 'm3/collections/interop/src/test/java/jdk/m3/collections/interop/M3FiveLibraryKeyRangesTest.java'
-      - 'm3/collections/interop/src/test/java/jdk/m3/collections/interop/M3FiveProviderFlagSelectionTest.java'
-      - 'm3/collections/qualification/m3-five-provider-current-census-20261017/**'
-      - '.github/workflows/m3-five-provider-current-census-20261017.yml'
   workflow_dispatch:
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}

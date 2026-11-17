@@ -1,12 +1,18 @@
 name: M3JDK21 resource scopes original Java21 proof
 
+# Former triggers (below, as of the move) now start job(s) 'm3-resource-locks-20261021__*' in
+# .github/workflows/checks-superset-06.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     pull_request:
+#       paths:
+#         - 'm3/file/src/main/java/jdk/m3/file/M3ResourceLocks.java'
+#         - 'm3/file/src/test/java/jdk/m3/file/M3ResourceLocksContract.java'
+#         - 'm3/file/qualification/resource-locks-20261021/**'
+#         - '.github/workflows/m3-resource-locks-20261021.yml'
+#     workflow_dispatch:
 on:
-  pull_request:
-    paths:
-      - 'm3/file/src/main/java/jdk/m3/file/M3ResourceLocks.java'
-      - 'm3/file/src/test/java/jdk/m3/file/M3ResourceLocksContract.java'
-      - 'm3/file/qualification/resource-locks-20261021/**'
-      - '.github/workflows/m3-resource-locks-20261021.yml'
   workflow_dispatch:
 
 permissions:

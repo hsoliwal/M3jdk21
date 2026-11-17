@@ -1,33 +1,39 @@
 name: M3 released JEP authority repair
 
+# Former triggers (below, as of the move) now start job(s) 'm3-release-jep-authority-repair__*' in
+# .github/workflows/checks-superset-01.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     push:
+#       branches:
+#         - "m3/release-jep-authority-repair-*"
+#       paths:
+#         - "m3/backports/RELEASE_JEP_AUTHORITY.tsv"
+#         - "m3/backports/JEP_CATALOGUE.tsv"
+#         - "m3/backports/release_jep_authority.py"
+#         - "m3/backports/test_release_jep_authority.py"
+#         - "m3/backports/program_status.py"
+#         - "m3/backports/test_program_status.py"
+#         - "m3/backports/verify.py"
+#         - "m3/backports/README.md"
+#         - "m3/backports/PROGRAM_STATUS_2026-10-06.md"
+#         - "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3ReleaseJepAuthorityRepairRecipe.java"
+#         - "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/scope/M3RecipeScopeRegistry.java"
+#         - "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-release-jep-authority-repair.yml"
+#         - "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/release-jep-authority-repair-20261006/**"
+#         - "m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3ReleaseJepAuthorityRepairRecipeTest.java"
+#         - "m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/scope/M3RecipeScopeDeclarationTest.java"
+#         - "m3/tooling/recipe-catalogue.tsv"
+#         - ".github/workflows/m3-release-jep-authority-repair.yml"
+#     pull_request:
+#       paths:
+#         - "m3/backports/**"
+#         - "m3/tooling/migration-recipes/**"
+#         - "m3/tooling/recipe-catalogue.tsv"
+#         - ".github/workflows/m3-release-jep-authority-repair.yml"
+#     workflow_dispatch:
 on:
-  push:
-    branches:
-      - "m3/release-jep-authority-repair-*"
-    paths:
-      - "m3/backports/RELEASE_JEP_AUTHORITY.tsv"
-      - "m3/backports/JEP_CATALOGUE.tsv"
-      - "m3/backports/release_jep_authority.py"
-      - "m3/backports/test_release_jep_authority.py"
-      - "m3/backports/program_status.py"
-      - "m3/backports/test_program_status.py"
-      - "m3/backports/verify.py"
-      - "m3/backports/README.md"
-      - "m3/backports/PROGRAM_STATUS_2026-10-06.md"
-      - "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3ReleaseJepAuthorityRepairRecipe.java"
-      - "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/scope/M3RecipeScopeRegistry.java"
-      - "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-release-jep-authority-repair.yml"
-      - "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/release-jep-authority-repair-20261006/**"
-      - "m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3ReleaseJepAuthorityRepairRecipeTest.java"
-      - "m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/scope/M3RecipeScopeDeclarationTest.java"
-      - "m3/tooling/recipe-catalogue.tsv"
-      - ".github/workflows/m3-release-jep-authority-repair.yml"
-  pull_request:
-    paths:
-      - "m3/backports/**"
-      - "m3/tooling/migration-recipes/**"
-      - "m3/tooling/recipe-catalogue.tsv"
-      - ".github/workflows/m3-release-jep-authority-repair.yml"
   workflow_dispatch:
 
 permissions:

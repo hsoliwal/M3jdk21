@@ -2,18 +2,24 @@
 # SPDX-License-Identifier: Apache-2.0
 name: M3 parser JMOD source and compiler overlay qualification
 
+# Former triggers (below, as of the move) now start job(s) 'm3-parser-jmod-20261018__*' in
+# .github/workflows/checks-superset-08.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     pull_request:
+#       paths:
+#         - 'm3/tooling/module-packs/parser/**'
+#         - 'm3/tooling/jmod-recipes/tools/jmod_pack.py'
+#         - 'm3/tooling/jmod-recipes/tools/jmod_image.py'
+#         - 'm3/docs/name-mapping.d/m3-parser-jmod-20261018.json'
+#         - 'src/jdk.compiler/share/classes/com/sun/source/util/M3AST.java'
+#         - 'src/jdk.compiler/share/classes/com/sun/tools/javac/m3/**'
+#         - 'src/jdk.compiler/share/classes/com/sun/tools/javac/main/JavaCompiler.java'
+#         - 'test/langtools/tools/javac/m3/M3ASTProjectionStateTest.java'
+#         - '.github/workflows/m3-parser-jmod-20261018.yml'
+#     workflow_dispatch:
 on:
-  pull_request:
-    paths:
-      - 'm3/tooling/module-packs/parser/**'
-      - 'm3/tooling/jmod-recipes/tools/jmod_pack.py'
-      - 'm3/tooling/jmod-recipes/tools/jmod_image.py'
-      - 'm3/docs/name-mapping.d/m3-parser-jmod-20261018.json'
-      - 'src/jdk.compiler/share/classes/com/sun/source/util/M3AST.java'
-      - 'src/jdk.compiler/share/classes/com/sun/tools/javac/m3/**'
-      - 'src/jdk.compiler/share/classes/com/sun/tools/javac/main/JavaCompiler.java'
-      - 'test/langtools/tools/javac/m3/M3ASTProjectionStateTest.java'
-      - '.github/workflows/m3-parser-jmod-20261018.yml'
   workflow_dispatch:
 
 permissions:

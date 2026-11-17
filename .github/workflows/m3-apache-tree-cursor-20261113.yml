@@ -1,16 +1,22 @@
 # SPDX-License-Identifier: Apache-2.0
 name: M3 Apache TreeList primitive-index iterator proof
 
+# Former triggers (below, as of the move) now start job(s) 'm3-apache-tree-cursor-20261113__*' in
+# .github/workflows/checks-superset-09.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     pull_request:
+#       paths:
+#         - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/apache/TreeList.java'
+#         - 'test/jdk/jdk/m3/collections/TreeListCursorContract.java'
+#         - 'test/jdk/jdk/m3/collections/M3TreeListCursorJTReg.java'
+#         - 'test/jdk/jdk/m3/collections/TreeListCursorAllocationFailure.java'
+#         - 'test/jdk/jdk/m3/collections/verify_tree_cursor_fault.py'
+#         - 'test/jdk/jdk/m3/collections/TreeListCursorFaultProof.README.md'
+#         - '.github/workflows/m3-apache-tree-cursor-20261113.yml'
+#     workflow_dispatch:
 on:
-  pull_request:
-    paths:
-      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/apache/TreeList.java'
-      - 'test/jdk/jdk/m3/collections/TreeListCursorContract.java'
-      - 'test/jdk/jdk/m3/collections/M3TreeListCursorJTReg.java'
-      - 'test/jdk/jdk/m3/collections/TreeListCursorAllocationFailure.java'
-      - 'test/jdk/jdk/m3/collections/verify_tree_cursor_fault.py'
-      - 'test/jdk/jdk/m3/collections/TreeListCursorFaultProof.README.md'
-      - '.github/workflows/m3-apache-tree-cursor-20261113.yml'
   workflow_dispatch:
 
 permissions:

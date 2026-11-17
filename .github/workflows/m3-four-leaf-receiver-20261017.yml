@@ -1,14 +1,20 @@
 # SPDX-License-Identifier: Apache-2.0
 name: M3 source-pinned four-leaf and filtered-wrapper receiving
 
+# Former triggers (below, as of the move) now start job(s) 'm3-four-leaf-receiver-20261017__*' in
+# .github/workflows/checks-superset-05.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     pull_request:
+#       paths:
+#         - 'm3/compatibility/M3AtomicLeafReceiverVerifier.java'
+#         - 'm3/compatibility/m3-four-leaf-candidate-20261017.tsv'
+#         - 'm3/compatibility/m3-filtered-wrapper-candidates-20261017.tsv'
+#         - 'm3/compatibility/M3_MINDEX_FOUR_LEAF_HANDOFF_20261017.md'
+#         - '.github/workflows/m3-four-leaf-receiver-20261017.yml'
+#     workflow_dispatch:
 on:
-  pull_request:
-    paths:
-      - 'm3/compatibility/M3AtomicLeafReceiverVerifier.java'
-      - 'm3/compatibility/m3-four-leaf-candidate-20261017.tsv'
-      - 'm3/compatibility/m3-filtered-wrapper-candidates-20261017.tsv'
-      - 'm3/compatibility/M3_MINDEX_FOUR_LEAF_HANDOFF_20261017.md'
-      - '.github/workflows/m3-four-leaf-receiver-20261017.yml'
   workflow_dispatch:
 
 permissions:

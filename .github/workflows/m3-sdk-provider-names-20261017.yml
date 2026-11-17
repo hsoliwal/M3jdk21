@@ -1,15 +1,21 @@
 # SPDX-License-Identifier: Apache-2.0
 name: M3 SDK five-provider names and indexed multivalue Java JNI
+# Former triggers (below, as of the move) now start job(s) 'm3-sdk-provider-names-20261017__*' in
+# .github/workflows/checks-superset-08.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     pull_request:
+#       paths:
+#         - 'm3/collections/qualification/m3-sdk-provider-names-20261017/**'
+#         - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3CollectionSdkNames.java'
+#         - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3IndexedMultiValueMap.java'
+#         - 'test/jdk/jdk/m3/collections/M3CollectionSdkContractSelfTest.java'
+#         - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3_SDK_FAMILY_CATALOG.tsv'
+#         - 'm3/docs/name-mapping.d/m3-sdk-provider-names-20261017.json'
+#         - '.github/workflows/m3-sdk-provider-names-20261017.yml'
+#     workflow_dispatch:
 on:
-  pull_request:
-    paths:
-      - 'm3/collections/qualification/m3-sdk-provider-names-20261017/**'
-      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3CollectionSdkNames.java'
-      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3IndexedMultiValueMap.java'
-      - 'test/jdk/jdk/m3/collections/M3CollectionSdkContractSelfTest.java'
-      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3_SDK_FAMILY_CATALOG.tsv'
-      - 'm3/docs/name-mapping.d/m3-sdk-provider-names-20261017.json'
-      - '.github/workflows/m3-sdk-provider-names-20261017.yml'
   workflow_dispatch:
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}

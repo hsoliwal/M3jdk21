@@ -2,13 +2,19 @@
 # SPDX-License-Identifier: Apache-2.0
 name: M3 qualified-composite receiver preflight (not runtime admission)
 
+# Former triggers (below, as of the move) now start job(s) 'm3-qualified-composite-receiver__*' in
+# .github/workflows/checks-superset-06.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     pull_request:
+#       paths:
+#         - 'm3/synexia-import/qualification/qualified-composites-20261117.json'
+#         - 'm3/tooling/qualified-composite-receiver/**'
+#         - 'm3/docs/M3_QUALIFIED_COMPOSITE_RECEIVER.md'
+#         - '.github/workflows/m3-qualified-composite-receiver.yml'
+#     workflow_dispatch:
 on:
-  pull_request:
-    paths:
-      - 'm3/synexia-import/qualification/qualified-composites-20261117.json'
-      - 'm3/tooling/qualified-composite-receiver/**'
-      - 'm3/docs/M3_QUALIFIED_COMPOSITE_RECEIVER.md'
-      - '.github/workflows/m3-qualified-composite-receiver.yml'
   workflow_dispatch:
 
 permissions:

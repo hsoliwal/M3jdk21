@@ -1,12 +1,18 @@
 # SPDX-License-Identifier: Apache-2.0
 name: M3 progressive signal evidence Java21
+# Former triggers (below, as of the move) now start job(s) 'm3-progressive-signal-evidence-20261018__*' in
+# .github/workflows/checks-superset-05.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     pull_request:
+#       paths:
+#         - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3ProgressiveSignalEvidence.java'
+#         - 'test/jdk/jdk/m3/collections/M3ProgressiveSignalEvidenceContract.java'
+#         - 'm3/collections/qualification/progressive-signal-evidence-20261018/**'
+#         - '.github/workflows/m3-progressive-signal-evidence-20261018.yml'
+#     workflow_dispatch:
 on:
-  pull_request:
-    paths:
-      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3ProgressiveSignalEvidence.java'
-      - 'test/jdk/jdk/m3/collections/M3ProgressiveSignalEvidenceContract.java'
-      - 'm3/collections/qualification/progressive-signal-evidence-20261018/**'
-      - '.github/workflows/m3-progressive-signal-evidence-20261018.yml'
   workflow_dispatch:
 permissions:
   contents: read

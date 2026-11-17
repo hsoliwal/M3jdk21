@@ -1,16 +1,22 @@
 name: M3JDK21 code-point rank/select source proof
 
+# Former triggers (below, as of the move) now start job(s) 'm3-codepoint-rank-cursor__*' in
+# .github/workflows/checks-superset-06.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     push:
+#       branches:
+#         - m3/jdk-codepoint-rank-cursor-20261017
+#     pull_request:
+#       paths:
+#         - "src/java.base/share/classes/java/lang/M3StringCodePointPrecompute.java"
+#         - "test/jdk/java/lang/String/M3StringCodePointRankCursorTest.java"
+#         - "m3/runtime-integration/verify-codepoint-rank-cursor-receiver.py"
+#         - "m3/runtime-integration/codepoint-rank/**"
+#         - ".github/workflows/m3-codepoint-rank-cursor.yml"
 on:
-  push:
-    branches:
-      - m3/jdk-codepoint-rank-cursor-20261017
-  pull_request:
-    paths:
-      - "src/java.base/share/classes/java/lang/M3StringCodePointPrecompute.java"
-      - "test/jdk/java/lang/String/M3StringCodePointRankCursorTest.java"
-      - "m3/runtime-integration/verify-codepoint-rank-cursor-receiver.py"
-      - "m3/runtime-integration/codepoint-rank/**"
-      - ".github/workflows/m3-codepoint-rank-cursor.yml"
+  workflow_dispatch:
 
 permissions:
   contents: read

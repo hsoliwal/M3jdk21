@@ -1,16 +1,22 @@
 # SPDX-License-Identifier: Apache-2.0
 name: M3JDK21 fused rank bounds original Java21 and JNI
 
+# Former triggers (below, as of the move) now start job(s) 'm3-long-rank-bounds-jni-java21__*' in
+# .github/workflows/checks-superset-08.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     pull_request:
+#       paths:
+#         - '.github/workflows/m3-long-rank-bounds-jni-java21.yml'
+#         - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3LongRankBatchNative.java'
+#         - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3LongRankIndex.java'
+#         - 'src/jdk.m3.collections/share/native/libm3collections/collections/m3_long_rank_batch_jni.c'
+#         - 'test/jdk/jdk/m3/collections/M3LongRankBoundsContract.java'
+#         - 'test/jdk/jdk/m3/collections/M3LongRankBoundsTest.java'
+#         - 'm3/collections/qualification/rank-bounds-jni-20261029/**'
 on:
-  pull_request:
-    paths:
-      - '.github/workflows/m3-long-rank-bounds-jni-java21.yml'
-      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3LongRankBatchNative.java'
-      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3LongRankIndex.java'
-      - 'src/jdk.m3.collections/share/native/libm3collections/collections/m3_long_rank_batch_jni.c'
-      - 'test/jdk/jdk/m3/collections/M3LongRankBoundsContract.java'
-      - 'test/jdk/jdk/m3/collections/M3LongRankBoundsTest.java'
-      - 'm3/collections/qualification/rank-bounds-jni-20261029/**'
+  workflow_dispatch:
 
 permissions:
   contents: read

@@ -1,16 +1,22 @@
 name: M3JDK21 native java.base ArrayList/Vector bitmap compaction
+# Former triggers (below, as of the move) now start job(s) 'm3jdk-java-base-mask-compaction-20261018__*' in
+# .github/workflows/checks-superset-08.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     push:
+#       branches: [m3jdk/java-base-arraylist-vector-mask-receiver-20261018]
+#     pull_request:
+#       paths:
+#         - "src/java.base/share/classes/java/util/ArrayList.java"
+#         - "src/java.base/share/classes/java/util/Vector.java"
+#         - "src/java.base/share/classes/jdk/internal/mindex/M3CollectionMaskCompactor.java"
+#         - "test/jdk/java/util/ArrayList/M3MaskCompactionDifferential.java"
+#         - "test/jdk/java/util/ArrayList/M3JdkRemoveIfMaskContracts.java"
+#         - "m3/qualification/native-java-base-collection-mask-20261018/**"
+#         - ".github/workflows/m3jdk-java-base-mask-compaction-20261018.yml"
 on:
-  push:
-    branches: [m3jdk/java-base-arraylist-vector-mask-receiver-20261018]
-  pull_request:
-    paths:
-      - "src/java.base/share/classes/java/util/ArrayList.java"
-      - "src/java.base/share/classes/java/util/Vector.java"
-      - "src/java.base/share/classes/jdk/internal/mindex/M3CollectionMaskCompactor.java"
-      - "test/jdk/java/util/ArrayList/M3MaskCompactionDifferential.java"
-      - "test/jdk/java/util/ArrayList/M3JdkRemoveIfMaskContracts.java"
-      - "m3/qualification/native-java-base-collection-mask-20261018/**"
-      - ".github/workflows/m3jdk-java-base-mask-compaction-20261018.yml"
+  workflow_dispatch:
 permissions:
   contents: read
 concurrency:

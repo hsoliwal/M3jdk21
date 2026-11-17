@@ -1,12 +1,18 @@
 # SPDX-License-Identifier: Apache-2.0
 name: M3JDK proof kit
+# Former triggers (below, as of the move) now start job(s) 'm3jdk-proof__*' in
+# .github/workflows/checks-superset-06.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     push:
+#       branches: ['m3/jdk-proof-20261004']
+#     pull_request:
+#       paths:
+#         - '.github/workflows/m3jdk-proof.yml'
+#         - 'm3/tooling/migration-recipes/**'
 on:
-  push:
-    branches: ['m3/jdk-proof-20261004']
-  pull_request:
-    paths:
-      - '.github/workflows/m3jdk-proof.yml'
-      - 'm3/tooling/migration-recipes/**'
+  workflow_dispatch:
 permissions:
   contents: read
 concurrency:

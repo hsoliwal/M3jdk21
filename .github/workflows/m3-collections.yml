@@ -4,46 +4,52 @@
 # Modified 2026 by Hitesh Soliwal and contributors: restore exact collection receiving provenance and verification while retaining current owners and String phase authority.
 name: M3 collection contracts
 
+# Former triggers (below, as of the move) now start job(s) 'm3-collections__*' in
+# .github/workflows/checks-superset-02.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     pull_request:
+#       paths:
+#         - '.github/workflows/m3-collections.yml'
+#         - 'm3/collections/**'
+#         - 'src/jdk.m3.collections/**'
+#         - 'test/jdk/jdk/m3/collections/**'
+#         - 'test/jdk/jdk/internal/m3/collections/**'
+#         - 'make/m3/collections/**'
+#         - 'make/modules/jdk.m3.collections/**'
+#         - 'm3/tooling/migration-recipes/**'
+#         - 'm3/vendor/third_party/apiguardian-api/**'
+#         - 'm3/vendor/third_party/opentest4j/**'
+#         - 'm3/vendor/third_party/univocity-parsers/**'
+#         - 'm3/vendor/third_party/junit-platform-commons-1.10.2/**'
+#         - 'm3/vendor/third_party/junit-platform-engine-1.10.2/**'
+#         - 'm3/vendor/third_party/junit-jupiter-api-5.10.2/**'
+#         - 'm3/vendor/third_party/junit-jupiter-params-5.10.2/**'
+#         - 'm3/vendor/third_party/junit-jupiter-engine-5.10.2/**'
+#         - 'm3/vendor/third_party/junit-jupiter-5.10.2/**'
+#     push:
+#       branches: [master]
+#       paths:
+#         - '.github/workflows/m3-collections.yml'
+#         - 'm3/collections/**'
+#         - 'src/jdk.m3.collections/**'
+#         - 'test/jdk/jdk/m3/collections/**'
+#         - 'test/jdk/jdk/internal/m3/collections/**'
+#         - 'make/m3/collections/**'
+#         - 'make/modules/jdk.m3.collections/**'
+#         - 'm3/tooling/migration-recipes/**'
+#         - 'm3/vendor/third_party/apiguardian-api/**'
+#         - 'm3/vendor/third_party/opentest4j/**'
+#         - 'm3/vendor/third_party/univocity-parsers/**'
+#         - 'm3/vendor/third_party/junit-platform-commons-1.10.2/**'
+#         - 'm3/vendor/third_party/junit-platform-engine-1.10.2/**'
+#         - 'm3/vendor/third_party/junit-jupiter-api-5.10.2/**'
+#         - 'm3/vendor/third_party/junit-jupiter-params-5.10.2/**'
+#         - 'm3/vendor/third_party/junit-jupiter-engine-5.10.2/**'
+#         - 'm3/vendor/third_party/junit-jupiter-5.10.2/**'
+#     workflow_dispatch:
 on:
-  pull_request:
-    paths:
-      - '.github/workflows/m3-collections.yml'
-      - 'm3/collections/**'
-      - 'src/jdk.m3.collections/**'
-      - 'test/jdk/jdk/m3/collections/**'
-      - 'test/jdk/jdk/internal/m3/collections/**'
-      - 'make/m3/collections/**'
-      - 'make/modules/jdk.m3.collections/**'
-      - 'm3/tooling/migration-recipes/**'
-      - 'm3/vendor/third_party/apiguardian-api/**'
-      - 'm3/vendor/third_party/opentest4j/**'
-      - 'm3/vendor/third_party/univocity-parsers/**'
-      - 'm3/vendor/third_party/junit-platform-commons-1.10.2/**'
-      - 'm3/vendor/third_party/junit-platform-engine-1.10.2/**'
-      - 'm3/vendor/third_party/junit-jupiter-api-5.10.2/**'
-      - 'm3/vendor/third_party/junit-jupiter-params-5.10.2/**'
-      - 'm3/vendor/third_party/junit-jupiter-engine-5.10.2/**'
-      - 'm3/vendor/third_party/junit-jupiter-5.10.2/**'
-  push:
-    branches: [master]
-    paths:
-      - '.github/workflows/m3-collections.yml'
-      - 'm3/collections/**'
-      - 'src/jdk.m3.collections/**'
-      - 'test/jdk/jdk/m3/collections/**'
-      - 'test/jdk/jdk/internal/m3/collections/**'
-      - 'make/m3/collections/**'
-      - 'make/modules/jdk.m3.collections/**'
-      - 'm3/tooling/migration-recipes/**'
-      - 'm3/vendor/third_party/apiguardian-api/**'
-      - 'm3/vendor/third_party/opentest4j/**'
-      - 'm3/vendor/third_party/univocity-parsers/**'
-      - 'm3/vendor/third_party/junit-platform-commons-1.10.2/**'
-      - 'm3/vendor/third_party/junit-platform-engine-1.10.2/**'
-      - 'm3/vendor/third_party/junit-jupiter-api-5.10.2/**'
-      - 'm3/vendor/third_party/junit-jupiter-params-5.10.2/**'
-      - 'm3/vendor/third_party/junit-jupiter-engine-5.10.2/**'
-      - 'm3/vendor/third_party/junit-jupiter-5.10.2/**'
   workflow_dispatch:
 
 permissions:

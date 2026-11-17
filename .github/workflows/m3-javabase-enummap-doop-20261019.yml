@@ -1,16 +1,22 @@
 # SPDX-License-Identifier: Apache-2.0
 name: M3JDK21 java.base direct-array map contracts
+# Former triggers (below, as of the move) now start job(s) 'm3-javabase-enummap-doop-20261019__*' in
+# .github/workflows/checks-superset-07.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     pull_request:
+#       paths:
+#         - src/java.base/share/classes/java/util/EnumMap.java
+#         - src/java.base/share/classes/java/util/IdentityHashMap.java
+#         - test/jdk/java/util/EnumMap/DirectOrdinalTraversal.java
+#         - test/jdk/java/util/IdentityHashMap/DirectOffsetString.java
+#         - .github/workflows/m3-javabase-enummap-doop-20261019.yml
+#     push:
+#       branches:
+#         - m3/java-base-enummap-doop-20261019
+#     workflow_dispatch:
 on:
-  pull_request:
-    paths:
-      - src/java.base/share/classes/java/util/EnumMap.java
-      - src/java.base/share/classes/java/util/IdentityHashMap.java
-      - test/jdk/java/util/EnumMap/DirectOrdinalTraversal.java
-      - test/jdk/java/util/IdentityHashMap/DirectOffsetString.java
-      - .github/workflows/m3-javabase-enummap-doop-20261019.yml
-  push:
-    branches:
-      - m3/java-base-enummap-doop-20261019
   workflow_dispatch:
 permissions:
   contents: read

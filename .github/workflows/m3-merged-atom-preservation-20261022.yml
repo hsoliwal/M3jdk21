@@ -1,28 +1,34 @@
 # SPDX-License-Identifier: Apache-2.0
 name: M3 merged recipe atom preservation
 
+# Former triggers (below, as of the move) now start job(s) 'm3-merged-atom-preservation-20261022__*' in
+# .github/workflows/checks-superset-02.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     pull_request:
+#       paths:
+#         - 'm3/file/**'
+#         - 'm3/collections/**'
+#         - 'src/jdk.m3.collections/share/classes/jdk/internal/m3/collections/ObservableList.java'
+#         - 'test/jdk/jdk/m3/collections/ObservableIndexedViewsContract.java'
+#         - 'm3/tooling/migration-recipes/**'
+#         - 'm3/docs/m3-m3jdk21-source-successions.tsv'
+#         - '.github/workflows/**'
+#     push:
+#       branches:
+#         - master
+#         - m3/restore-merged-atoms-ci-20261022
+#       paths:
+#         - 'm3/file/**'
+#         - 'm3/collections/**'
+#         - 'src/jdk.m3.collections/share/classes/jdk/internal/m3/collections/ObservableList.java'
+#         - 'test/jdk/jdk/m3/collections/ObservableIndexedViewsContract.java'
+#         - 'm3/tooling/migration-recipes/**'
+#         - 'm3/docs/m3-m3jdk21-source-successions.tsv'
+#         - '.github/workflows/**'
+#     workflow_dispatch:
 on:
-  pull_request:
-    paths:
-      - 'm3/file/**'
-      - 'm3/collections/**'
-      - 'src/jdk.m3.collections/share/classes/jdk/internal/m3/collections/ObservableList.java'
-      - 'test/jdk/jdk/m3/collections/ObservableIndexedViewsContract.java'
-      - 'm3/tooling/migration-recipes/**'
-      - 'm3/docs/m3-m3jdk21-source-successions.tsv'
-      - '.github/workflows/**'
-  push:
-    branches:
-      - master
-      - m3/restore-merged-atoms-ci-20261022
-    paths:
-      - 'm3/file/**'
-      - 'm3/collections/**'
-      - 'src/jdk.m3.collections/share/classes/jdk/internal/m3/collections/ObservableList.java'
-      - 'test/jdk/jdk/m3/collections/ObservableIndexedViewsContract.java'
-      - 'm3/tooling/migration-recipes/**'
-      - 'm3/docs/m3-m3jdk21-source-successions.tsv'
-      - '.github/workflows/**'
   workflow_dispatch:
 
 permissions:

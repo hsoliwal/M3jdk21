@@ -1,11 +1,17 @@
 name: M3 regex JNI host boundary oracle
+# Former triggers (below, as of the move) now start job(s) 'm3-regex-jni-host-oracle__*' in
+# .github/workflows/checks-superset-09.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     pull_request:
+#       paths:
+#         - 'test/jdk/java/lang/String/M3StringRegexNativeBridgeTest.java'
+#         - 'test/jdk/java/lang/String/M3StringRegexNativeBridgeTest.c'
+#         - 'm3/runtime-integration/regex-jni-oracle/**'
+#         - '.github/workflows/m3-regex-jni-host-oracle.yml'
+#     workflow_dispatch:
 on:
-  pull_request:
-    paths:
-      - 'test/jdk/java/lang/String/M3StringRegexNativeBridgeTest.java'
-      - 'test/jdk/java/lang/String/M3StringRegexNativeBridgeTest.c'
-      - 'm3/runtime-integration/regex-jni-oracle/**'
-      - '.github/workflows/m3-regex-jni-host-oracle.yml'
   workflow_dispatch:
 permissions:
   contents: read

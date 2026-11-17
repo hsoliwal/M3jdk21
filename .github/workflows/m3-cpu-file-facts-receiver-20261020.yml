@@ -1,15 +1,21 @@
 # SPDX-License-Identifier: Apache-2.0
 name: M3File CPU source facts receiver admission
 
+# Former triggers (below, as of the move) now start job(s) 'm3-cpu-file-facts-receiver-20261020__*' in
+# .github/workflows/checks-superset-07.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     push:
+#       branches: [m3/cpu-file-facts-20261020]
+#     pull_request:
+#       paths:
+#         - m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.cpu/jdk/m3/tools/cpu/M3FileCpuFacts.java
+#         - m3/tooling/module-packs/cpu-tools/fixtures/M3FileCpuFactsTest.java
+#         - m3/tooling/module-packs/cpu-tools/build.py
+#         - .github/workflows/m3-cpu-file-facts-receiver-20261020.yml
+#     workflow_dispatch:
 on:
-  push:
-    branches: [m3/cpu-file-facts-20261020]
-  pull_request:
-    paths:
-      - m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.cpu/jdk/m3/tools/cpu/M3FileCpuFacts.java
-      - m3/tooling/module-packs/cpu-tools/fixtures/M3FileCpuFactsTest.java
-      - m3/tooling/module-packs/cpu-tools/build.py
-      - .github/workflows/m3-cpu-file-facts-receiver-20261020.yml
   workflow_dispatch:
 
 permissions:

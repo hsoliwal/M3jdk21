@@ -1,10 +1,16 @@
 name: PR1292 current JNI mask-window source oracle
+# Former triggers (below, as of the move) now start job(s) 'm3-pr1292-current-mask-window-native__*' in
+# .github/workflows/checks-superset-08.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     pull_request:
+#       paths:
+#         - 'src/jdk.m3.collections/share/native/libm3collections/collections/m3_index_mask_window.c'
+#         - 'test/jdk/jdk/m3/collections/native/m3_mask_window_current_master_contract.c'
+#         - '.github/workflows/m3-pr1292-current-mask-window-native.yml'
+#     workflow_dispatch:
 on:
-  pull_request:
-    paths:
-      - 'src/jdk.m3.collections/share/native/libm3collections/collections/m3_index_mask_window.c'
-      - 'test/jdk/jdk/m3/collections/native/m3_mask_window_current_master_contract.c'
-      - '.github/workflows/m3-pr1292-current-mask-window-native.yml'
   workflow_dispatch:
 permissions:
   contents: read

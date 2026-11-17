@@ -1,19 +1,25 @@
 # Copyright 2026 Hitesh Soliwal and contributors
 # SPDX-License-Identifier: Apache-2.0
 name: M3 AtomLogic read-only profile custody
+# Former triggers (below, as of the move) now start job(s) 'm3-atomlogic-profile-20261017__*' in
+# .github/workflows/checks-superset-06.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     push:
+#       branches:
+#         - m3/atomlogic-recipe-profile-receiver-20261017
+#       paths:
+#         - 'm3/pom.xml'
+#         - 'm3/tooling/atom-logic-receiver/**'
+#         - '.github/workflows/m3-atomlogic-profile-20261017.yml'
+#     pull_request:
+#       paths:
+#         - 'm3/pom.xml'
+#         - 'm3/tooling/atom-logic-receiver/**'
+#         - '.github/workflows/m3-atomlogic-profile-20261017.yml'
 on:
-  push:
-    branches:
-      - m3/atomlogic-recipe-profile-receiver-20261017
-    paths:
-      - 'm3/pom.xml'
-      - 'm3/tooling/atom-logic-receiver/**'
-      - '.github/workflows/m3-atomlogic-profile-20261017.yml'
-  pull_request:
-    paths:
-      - 'm3/pom.xml'
-      - 'm3/tooling/atom-logic-receiver/**'
-      - '.github/workflows/m3-atomlogic-profile-20261017.yml'
+  workflow_dispatch:
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true

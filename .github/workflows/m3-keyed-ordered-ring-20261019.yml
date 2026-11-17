@@ -1,14 +1,20 @@
 # SPDX-License-Identifier: Apache-2.0
 name: M3JDK21 keyed masked completion ring
+# Former triggers (below, as of the move) now start job(s) 'm3-keyed-ordered-ring-20261019__*' in
+# .github/workflows/checks-superset-06.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     pull_request:
+#       paths:
+#         - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3KeyedParallelismPlan.java'
+#         - 'test/jdk/jdk/m3/collections/M3KeyedOrderRing*'
+#         - 'm3/collections/recipe/keyed-ordered-ring-20261019/**'
+#         - 'm3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/keyed-ordered-ring-20261019/**'
+#         - 'm3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-keyed-ordered-ring-20261019.yml'
+#         - '.github/workflows/m3-keyed-ordered-ring-20261019.yml'
+#     workflow_dispatch:
 on:
-  pull_request:
-    paths:
-      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3KeyedParallelismPlan.java'
-      - 'test/jdk/jdk/m3/collections/M3KeyedOrderRing*'
-      - 'm3/collections/recipe/keyed-ordered-ring-20261019/**'
-      - 'm3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/keyed-ordered-ring-20261019/**'
-      - 'm3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-keyed-ordered-ring-20261019.yml'
-      - '.github/workflows/m3-keyed-ordered-ring-20261019.yml'
   workflow_dispatch:
 
 permissions:

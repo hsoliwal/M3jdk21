@@ -1,17 +1,23 @@
 name: M3 collections primitive-mask receiver Java21 and JNI
+# Former triggers (below, as of the move) now start job(s) 'm3-collections-mask-receiver__*' in
+# .github/workflows/checks-superset-08.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     pull_request:
+#       paths:
+#         - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3IndexMaskCompactor.java'
+#         - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3LongArrayList.java'
+#         - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3LongArrayDeque.java'
+#         - 'src/jdk.m3.collections/share/native/libm3collections/collections/m3_index_mask_compactor.c'
+#         - 'test/jdk/jdk/m3/collections/M3IndexMaskCompactorSelfTest.java'
+#         - 'm3/collections/qualification/mask-selection-postimages-20261016.tsv'
+#         - '.github/workflows/m3-collections-mask-receiver.yml'
+#     push:
+#       branches:
+#         - m3/mask-family-receiver-20261016
+#     workflow_dispatch:
 on:
-  pull_request:
-    paths:
-      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3IndexMaskCompactor.java'
-      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3LongArrayList.java'
-      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3LongArrayDeque.java'
-      - 'src/jdk.m3.collections/share/native/libm3collections/collections/m3_index_mask_compactor.c'
-      - 'test/jdk/jdk/m3/collections/M3IndexMaskCompactorSelfTest.java'
-      - 'm3/collections/qualification/mask-selection-postimages-20261016.tsv'
-      - '.github/workflows/m3-collections-mask-receiver.yml'
-  push:
-    branches:
-      - m3/mask-family-receiver-20261016
   workflow_dispatch:
 permissions:
   contents: read

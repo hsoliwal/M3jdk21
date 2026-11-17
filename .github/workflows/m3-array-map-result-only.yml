@@ -1,11 +1,17 @@
 # SPDX-License-Identifier: Apache-2.0
 name: M3 result-only array map receiver
+# Former triggers (below, as of the move) now start job(s) 'm3-array-map-result-only__*' in
+# .github/workflows/checks-superset-04.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     pull_request:
+#       paths:
+#         - 'm3/collections/implementations/apache-*-map/src/main/java/jdk/m3/collections/apache/M3*Map.java'
+#         - 'm3/collections/qualification/array-map-receiver-20261102/**'
+#         - '.github/workflows/m3-array-map-result-only.yml'
+#     workflow_dispatch:
 on:
-  pull_request:
-    paths:
-      - 'm3/collections/implementations/apache-*-map/src/main/java/jdk/m3/collections/apache/M3*Map.java'
-      - 'm3/collections/qualification/array-map-receiver-20261102/**'
-      - '.github/workflows/m3-array-map-result-only.yml'
   workflow_dispatch:
 jobs:
   java21-array-map-receiver:

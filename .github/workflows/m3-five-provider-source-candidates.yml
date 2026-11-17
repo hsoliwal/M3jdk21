@@ -1,12 +1,18 @@
 # SPDX-License-Identifier: Apache-2.0
 # Source-first M3Scale: candidate mutation in disposable worktrees only.
 name: M3 five-provider full source candidate execution
+# Former triggers (below, as of the move) now start job(s) 'm3-five-provider-source-candidates__*' in
+# .github/workflows/checks-superset-04.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     pull_request:
+#       paths:
+#         - 'm3-openrewrite-recipes/recipe-crates/five-provider-package-relocation-20261018/**'
+#         - 'm3/collections/relocation/five-provider-20261018/**'
+#         - '.github/workflows/m3-five-provider-source-candidates.yml'
+#     workflow_dispatch:
 on:
-  pull_request:
-    paths:
-      - 'm3-openrewrite-recipes/recipe-crates/five-provider-package-relocation-20261018/**'
-      - 'm3/collections/relocation/five-provider-20261018/**'
-      - '.github/workflows/m3-five-provider-source-candidates.yml'
   workflow_dispatch:
 permissions:
   contents: read

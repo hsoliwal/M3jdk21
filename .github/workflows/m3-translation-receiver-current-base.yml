@@ -1,49 +1,55 @@
 # SPDX-License-Identifier: GPL-2.0-only WITH Classpath-exception-2.0
 name: M3 translation receiver map
 
+# Former triggers (below, as of the move) now start job(s) 'm3-translation-receiver-current-base__*' in
+# .github/workflows/checks-superset-08.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     pull_request:
+#       paths:
+#         - "src/java.base/share/classes/jdk/m3/text/M3LexiconPrecompute.java"
+#         - "src/java.base/share/classes/jdk/m3/text/SharedLexiconPrecomputeCatalog.java"
+#         - "src/java.base/share/classes/jdk/m3/text/M3LanguageGrammarSupport.java"
+#         - "src/java.base/share/classes/jdk/m3/text/M3NumberSpace.java"
+#         - "m3/core/test/M3NumberSpaceContractTest.java"
+#         - "m3/core/test/M3NumberSpaceExportFixture.java"
+#         - "src/java.base/share/classes/jdk/m3/text/M3PrecomputePayload.java"
+#         - "m3/core/test/M3TranslationReceiverMapTest.java"
+#         - "m3/lexicon/m3-precompute-field-map.tsv"
+#         - "m3/lexicon/m3-source-manifest.tsv"
+#         - "m3/lexicon/m3-number-target-map.tsv"
+#         - "m3/runtime-integration/FOSS_REUSE_DECISION.tsv"
+#         - "m3/runtime-integration/export-m3-lexicon.py"
+#         - "m3/runtime-integration/tests/test_m3_export.py"
+#         - "m3/runtime-integration/tests/test_m3_number_space_export.py"
+#         - "m3/runtime-integration/verify-m3-lexicon.py"
+#         - "m3/lexicon/M3_EXPORT.md"
+#         - ".github/workflows/m3-translation-receiver-current-base.yml"
+#     push:
+#       branches:
+#         - codex/m3-translation-row-owner-map-20261011
+#       paths:
+#         - "src/java.base/share/classes/jdk/m3/text/M3LexiconPrecompute.java"
+#         - "src/java.base/share/classes/jdk/m3/text/SharedLexiconPrecomputeCatalog.java"
+#         - "src/java.base/share/classes/jdk/m3/text/M3LanguageGrammarSupport.java"
+#         - "src/java.base/share/classes/jdk/m3/text/M3NumberSpace.java"
+#         - "m3/core/test/M3NumberSpaceContractTest.java"
+#         - "m3/core/test/M3NumberSpaceExportFixture.java"
+#         - "src/java.base/share/classes/jdk/m3/text/M3PrecomputePayload.java"
+#         - "m3/core/test/M3TranslationReceiverMapTest.java"
+#         - "m3/lexicon/m3-precompute-field-map.tsv"
+#         - "m3/lexicon/m3-source-manifest.tsv"
+#         - "m3/lexicon/m3-number-target-map.tsv"
+#         - "m3/runtime-integration/FOSS_REUSE_DECISION.tsv"
+#         - "m3/runtime-integration/export-m3-lexicon.py"
+#         - "m3/runtime-integration/tests/test_m3_export.py"
+#         - "m3/runtime-integration/tests/test_m3_number_space_export.py"
+#         - "m3/runtime-integration/verify-m3-lexicon.py"
+#         - "m3/lexicon/M3_EXPORT.md"
+#         - ".github/workflows/m3-translation-receiver-current-base.yml"
 on:
-  pull_request:
-    paths:
-      - "src/java.base/share/classes/jdk/m3/text/M3LexiconPrecompute.java"
-      - "src/java.base/share/classes/jdk/m3/text/SharedLexiconPrecomputeCatalog.java"
-      - "src/java.base/share/classes/jdk/m3/text/M3LanguageGrammarSupport.java"
-      - "src/java.base/share/classes/jdk/m3/text/M3NumberSpace.java"
-      - "m3/core/test/M3NumberSpaceContractTest.java"
-      - "m3/core/test/M3NumberSpaceExportFixture.java"
-      - "src/java.base/share/classes/jdk/m3/text/M3PrecomputePayload.java"
-      - "m3/core/test/M3TranslationReceiverMapTest.java"
-      - "m3/lexicon/m3-precompute-field-map.tsv"
-      - "m3/lexicon/m3-source-manifest.tsv"
-      - "m3/lexicon/m3-number-target-map.tsv"
-      - "m3/runtime-integration/FOSS_REUSE_DECISION.tsv"
-      - "m3/runtime-integration/export-m3-lexicon.py"
-      - "m3/runtime-integration/tests/test_m3_export.py"
-      - "m3/runtime-integration/tests/test_m3_number_space_export.py"
-      - "m3/runtime-integration/verify-m3-lexicon.py"
-      - "m3/lexicon/M3_EXPORT.md"
-      - ".github/workflows/m3-translation-receiver-current-base.yml"
-  push:
-    branches:
-      - codex/m3-translation-row-owner-map-20261011
-    paths:
-      - "src/java.base/share/classes/jdk/m3/text/M3LexiconPrecompute.java"
-      - "src/java.base/share/classes/jdk/m3/text/SharedLexiconPrecomputeCatalog.java"
-      - "src/java.base/share/classes/jdk/m3/text/M3LanguageGrammarSupport.java"
-      - "src/java.base/share/classes/jdk/m3/text/M3NumberSpace.java"
-      - "m3/core/test/M3NumberSpaceContractTest.java"
-      - "m3/core/test/M3NumberSpaceExportFixture.java"
-      - "src/java.base/share/classes/jdk/m3/text/M3PrecomputePayload.java"
-      - "m3/core/test/M3TranslationReceiverMapTest.java"
-      - "m3/lexicon/m3-precompute-field-map.tsv"
-      - "m3/lexicon/m3-source-manifest.tsv"
-      - "m3/lexicon/m3-number-target-map.tsv"
-      - "m3/runtime-integration/FOSS_REUSE_DECISION.tsv"
-      - "m3/runtime-integration/export-m3-lexicon.py"
-      - "m3/runtime-integration/tests/test_m3_export.py"
-      - "m3/runtime-integration/tests/test_m3_number_space_export.py"
-      - "m3/runtime-integration/verify-m3-lexicon.py"
-      - "m3/lexicon/M3_EXPORT.md"
-      - ".github/workflows/m3-translation-receiver-current-base.yml"
+  workflow_dispatch:
 
 permissions:
   contents: read

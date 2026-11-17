@@ -1,18 +1,24 @@
 # SPDX-License-Identifier: Apache-2.0
 name: M3 Synexia PR9042 Precompute Handoff
 
+# Former triggers (below, as of the move) now start job(s) 'm3-pr9042-code-text-precompute__*' in
+# .github/workflows/checks-superset-06.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     pull_request:
+#       paths:
+#         - 'm3/compatibility/m3-pr9042-code-text-precompute.tsv'
+#         - 'm3/compatibility/check_m3_pr9042_code_text_precompute.py'
+#         - 'm3/docs/m3-pr9042-code-text-precompute-handoff.md'
+#         - 'm3/ports/precompute/**'
+#         - 'src/java.base/share/classes/jdk/m3/precompute/**'
+#         - 'test/jdk/jdk/m3/precompute/**'
+#         - 'm3/tooling/migration-recipes/src/main/resources/**/m3-pr9042-precompute-handoff/**'
+#         - 'm3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-pr9042-precompute-handoff.yml'
+#         - '.github/workflows/m3-pr9042-code-text-precompute.yml'
+#     workflow_dispatch:
 on:
-  pull_request:
-    paths:
-      - 'm3/compatibility/m3-pr9042-code-text-precompute.tsv'
-      - 'm3/compatibility/check_m3_pr9042_code_text_precompute.py'
-      - 'm3/docs/m3-pr9042-code-text-precompute-handoff.md'
-      - 'm3/ports/precompute/**'
-      - 'src/java.base/share/classes/jdk/m3/precompute/**'
-      - 'test/jdk/jdk/m3/precompute/**'
-      - 'm3/tooling/migration-recipes/src/main/resources/**/m3-pr9042-precompute-handoff/**'
-      - 'm3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-pr9042-precompute-handoff.yml'
-      - '.github/workflows/m3-pr9042-code-text-precompute.yml'
   workflow_dispatch:
 
 permissions:

@@ -1,26 +1,32 @@
 name: M3 current Lucene/OpenNLP JMODs
 
+# Former triggers (below, as of the move) now start job(s) 'm3-current-nlp-search-jmods-20261018__*' in
+# .github/workflows/checks-superset-06.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     workflow_dispatch:
+#     pull_request:
+#       paths:
+#         - '.github/workflows/m3-current-nlp-search-jmods-20261018.yml'
+#         - '.github/workflows/m3-joined-range-directory.yml'
+#         - 'm3/tooling/joined-range-directory/REFERENCE_REPLAY.json'
+#         - 'm3/core/src/**'
+#         - 'src/java.base/share/classes/jdk/m3/text/**'
+#         - 'm3/ports/compiletime/src/main/java/jdk/m3/compiletime/ast/**'
+#         - 'm3/vendor/m3/m3-mindex/**'
+#         - 'm3/vendor/m3/m3-native-interop/**'
+#         - 'm3/vendor/m3/m3-openrewrite-recipes/**'
+#         - 'm3/tooling/jmod-recipes/tools/**'
+#         - 'm3/tooling/module-packs/nlp-search/**'
+#         - 'm3/tooling/joined-range-directory/current-baseline/RECEIVER_TRANSITIONS_V5.json'
+#         - 'm3/tooling/joined-range-directory/current-baseline/RECEIVER_TRANSITIONS_V6.json'
+#         - 'm3/tooling/joined-range-directory/current-baseline/RECEIVER_TRANSITIONS_V7.json'
+#         - 'm3/tooling/joined-range-directory/current-baseline/RECEIVER_TRANSITIONS_V8.json'
+#         - 'm3/tooling/joined-range-directory/current-baseline/RECEIVER_TRANSITIONS_V9.json'
+#         - 'm3/tooling/joined-range-directory/current-baseline/RECEIVER_TRANSITIONS_V10.json'
 on:
   workflow_dispatch:
-  pull_request:
-    paths:
-      - '.github/workflows/m3-current-nlp-search-jmods-20261018.yml'
-      - '.github/workflows/m3-joined-range-directory.yml'
-      - 'm3/tooling/joined-range-directory/REFERENCE_REPLAY.json'
-      - 'm3/core/src/**'
-      - 'src/java.base/share/classes/jdk/m3/text/**'
-      - 'm3/ports/compiletime/src/main/java/jdk/m3/compiletime/ast/**'
-      - 'm3/vendor/m3/m3-mindex/**'
-      - 'm3/vendor/m3/m3-native-interop/**'
-      - 'm3/vendor/m3/m3-openrewrite-recipes/**'
-      - 'm3/tooling/jmod-recipes/tools/**'
-      - 'm3/tooling/module-packs/nlp-search/**'
-      - 'm3/tooling/joined-range-directory/current-baseline/RECEIVER_TRANSITIONS_V5.json'
-      - 'm3/tooling/joined-range-directory/current-baseline/RECEIVER_TRANSITIONS_V6.json'
-      - 'm3/tooling/joined-range-directory/current-baseline/RECEIVER_TRANSITIONS_V7.json'
-      - 'm3/tooling/joined-range-directory/current-baseline/RECEIVER_TRANSITIONS_V8.json'
-      - 'm3/tooling/joined-range-directory/current-baseline/RECEIVER_TRANSITIONS_V9.json'
-      - 'm3/tooling/joined-range-directory/current-baseline/RECEIVER_TRANSITIONS_V10.json'
 
 permissions:
   contents: read

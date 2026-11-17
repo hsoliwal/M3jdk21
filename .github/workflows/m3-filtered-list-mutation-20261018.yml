@@ -1,17 +1,23 @@
 # SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
 # SPDX-License-Identifier: Apache-2.0
 name: M3 filtered List mutation receiver SDK and Java21
+# Former triggers (below, as of the move) now start job(s) 'm3-filtered-list-mutation-20261018__*' in
+# .github/workflows/checks-superset-06.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     push:
+#       branches: ['m3/filtered-list-mutation-20261018-receiver']
+#     pull_request:
+#       paths:
+#         - '.github/workflows/m3-filtered-list-mutation-20261018.yml'
+#         - 'm3/collections/qualification/filtered-list-mutation-20261018/**'
+#         - 'm3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3jdk21-filtered-list-mutation-20261018/**'
+#         - 'm3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3jdk21-filtered-list-mutation-20261018.yml'
+#         - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3FilteredLists.java'
+#         - 'test/jdk/jdk/m3/collections/M3FilteredListMutation*.java'
+#     workflow_dispatch:
 on:
-  push:
-    branches: ['m3/filtered-list-mutation-20261018-receiver']
-  pull_request:
-    paths:
-      - '.github/workflows/m3-filtered-list-mutation-20261018.yml'
-      - 'm3/collections/qualification/filtered-list-mutation-20261018/**'
-      - 'm3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3jdk21-filtered-list-mutation-20261018/**'
-      - 'm3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3jdk21-filtered-list-mutation-20261018.yml'
-      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3FilteredLists.java'
-      - 'test/jdk/jdk/m3/collections/M3FilteredListMutation*.java'
   workflow_dispatch:
 permissions:
   contents: read

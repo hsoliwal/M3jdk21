@@ -1,15 +1,21 @@
 # SPDX-License-Identifier: Apache-2.0
 # Reuses the source-qualified Maven recipe and existing monitored hosted lane.
 name: M3 source-built producers and TQ sync fixtures
+# Former triggers (below, as of the move) now start job(s) 'm3-source-qualified-tq-build__*' in
+# .github/workflows/checks-superset-07.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     pull_request:
+#       paths:
+#         - '.github/workflows/m3-source-qualified-tq-build.yml'
+#         - 'm3/vendor/third_party/**'
+#         - 'm3/tooling/tq-sync/**'
+#         - 'm3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedSnapshotRecipe.java'
+#         - 'm3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java'
+#         - '.m3/task-crates/dependency-source-inline-20261010/verify_crate.py'
 on:
-  pull_request:
-    paths:
-      - '.github/workflows/m3-source-qualified-tq-build.yml'
-      - 'm3/vendor/third_party/**'
-      - 'm3/tooling/tq-sync/**'
-      - 'm3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedSnapshotRecipe.java'
-      - 'm3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java'
-      - '.m3/task-crates/dependency-source-inline-20261010/verify_crate.py'
+  workflow_dispatch:
 permissions:
   contents: read
 concurrency:

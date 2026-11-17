@@ -1,14 +1,20 @@
 # SPDX-License-Identifier: Apache-2.0
 name: M3 SDK Sorted Scope Recipe Receiver Java21
+# Former triggers (below, as of the move) now start job(s) 'm3-sdk-sorted-scope-receiver-20261018__*' in
+# .github/workflows/checks-superset-05.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     pull_request:
+#       paths:
+#         - 'm3/collections/qualification/m3-sdk-families-20261017/recipe-v3/src/main/java/jdk/internal/m3/M3SdkSortedContractRecipe.java'
+#         - 'm3/docs/m3-sdk-sorted-scope-receiving-20261018.md'
+#         - '.github/workflows/m3-sdk-sorted-scope-receiver-20261018.yml'
+#     push:
+#       branches:
+#         - 'work/m3-sdk-sorted-recipe-scope-receive-20261018'
+#     workflow_dispatch:
 on:
-  pull_request:
-    paths:
-      - 'm3/collections/qualification/m3-sdk-families-20261017/recipe-v3/src/main/java/jdk/internal/m3/M3SdkSortedContractRecipe.java'
-      - 'm3/docs/m3-sdk-sorted-scope-receiving-20261018.md'
-      - '.github/workflows/m3-sdk-sorted-scope-receiver-20261018.yml'
-  push:
-    branches:
-      - 'work/m3-sdk-sorted-recipe-scope-receive-20261018'
   workflow_dispatch:
 permissions:
   contents: read

@@ -1,16 +1,22 @@
 # SPDX-License-Identifier: Apache-2.0
 name: M3AST shared relation queries and structural classes
 
+# Former triggers (below, as of the move) now start job(s) 'm3-ast-shared-relations-20261021__*' in
+# .github/workflows/checks-superset-07.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     push:
+#       branches: [m3/ast-shared-relations-20261021]
+#     pull_request:
+#       paths:
+#         - m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3ASTIndex.java
+#         - m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3ASTRelations.java
+#         - m3/tooling/module-packs/parser/src/test/java/jdk/m3/parser/test/M3ASTRelationsContract.java
+#         - m3/tooling/module-packs/parser/build.py
+#         - .github/workflows/m3-ast-shared-relations-20261021.yml
+#     workflow_dispatch:
 on:
-  push:
-    branches: [m3/ast-shared-relations-20261021]
-  pull_request:
-    paths:
-      - m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3ASTIndex.java
-      - m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3ASTRelations.java
-      - m3/tooling/module-packs/parser/src/test/java/jdk/m3/parser/test/M3ASTRelationsContract.java
-      - m3/tooling/module-packs/parser/build.py
-      - .github/workflows/m3-ast-shared-relations-20261021.yml
   workflow_dispatch:
 
 permissions:

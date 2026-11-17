@@ -1,40 +1,46 @@
 # SPDX-License-Identifier: Apache-2.0
 name: M3SDK JMOD Receiver Proof
 
+# Former triggers (below, as of the move) now start job(s) 'm3sdk-jmod-receiver__*' in
+# .github/workflows/checks-superset-01.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     pull_request:
+#       paths:
+#         - 'm3/tooling/jmod-recipes/**'
+#         - 'm3/vendor/third_party-m3/**'
+#         - 'm3/tooling/module-packs/nlp-search/**'
+#         - 'm3/file/**'
+#         - 'm3/tooling/shared-frontend/**'
+#         - 'src/jdk.compiler/share/classes/com/sun/source/util/M3AST.java'
+#         - 'src/jdk.compiler/share/classes/com/sun/tools/javac/m3/**'
+#         - 'src/jdk.compiler/share/classes/com/sun/tools/javac/main/JavaCompiler.java'
+#         - 'src/jdk.compiler/share/classes/module-info.java'
+#         - 'test/langtools/tools/javac/m3/**'
+#         - 'm3/tooling/module-packs/text-tools/**'
+#         - 'm3/tooling/module-packs/jackson/**'
+#         - 'm3/vendor/third_party/jackson-annotations-2.19.2/**'
+#         - 'm3/vendor/third_party/jackson-core-2.19.2/**'
+#         - 'm3/vendor/third_party/jackson-databind-2.19.2/**'
+#         - 'src/java.base/share/classes/java/lang/String.java'
+#         - 'src/java.base/share/classes/java/lang/M3String.java'
+#         - 'src/jdk.compiler/share/classes/com/sun/source/util/M3AST.java'
+#         - 'src/jdk.compiler/share/classes/com/sun/tools/javac/m3/M3ASTPC.java'
+#         - 'src/jdk.compiler/share/classes/com/sun/tools/javac/m3/M3PrimitiveImageCompiler.java'
+#         - 'src/jdk.compiler/share/classes/com/sun/tools/javac/main/JavaCompiler.java'
+#         - 'm3/vendor/m3/nlp-search/**'
+#         - 'm3/vendor/third_party/opennlp-tools/**'
+#         - 'm3/vendor/third_party/lucene-core/**'
+#         - 'm3/vendor/third_party/lucene-analysis-common/**'
+#         - 'm3/vendor/third_party/lucene-queries/**'
+#         - 'm3/vendor/third_party/lucene-sandbox/**'
+#         - 'm3/vendor/third_party/lucene-queryparser/**'
+#         - 'm3/vendor/third_party/slf4j-api-2.0.12/**'
+#         - 'm3/vendor/third_party/slf4j-simple/**'
+#         - '.github/workflows/m3sdk-jmod-receiver.yml'
+#     workflow_dispatch:
 on:
-  pull_request:
-    paths:
-      - 'm3/tooling/jmod-recipes/**'
-      - 'm3/vendor/third_party-m3/**'
-      - 'm3/tooling/module-packs/nlp-search/**'
-      - 'm3/file/**'
-      - 'm3/tooling/shared-frontend/**'
-      - 'src/jdk.compiler/share/classes/com/sun/source/util/M3AST.java'
-      - 'src/jdk.compiler/share/classes/com/sun/tools/javac/m3/**'
-      - 'src/jdk.compiler/share/classes/com/sun/tools/javac/main/JavaCompiler.java'
-      - 'src/jdk.compiler/share/classes/module-info.java'
-      - 'test/langtools/tools/javac/m3/**'
-      - 'm3/tooling/module-packs/text-tools/**'
-      - 'm3/tooling/module-packs/jackson/**'
-      - 'm3/vendor/third_party/jackson-annotations-2.19.2/**'
-      - 'm3/vendor/third_party/jackson-core-2.19.2/**'
-      - 'm3/vendor/third_party/jackson-databind-2.19.2/**'
-      - 'src/java.base/share/classes/java/lang/String.java'
-      - 'src/java.base/share/classes/java/lang/M3String.java'
-      - 'src/jdk.compiler/share/classes/com/sun/source/util/M3AST.java'
-      - 'src/jdk.compiler/share/classes/com/sun/tools/javac/m3/M3ASTPC.java'
-      - 'src/jdk.compiler/share/classes/com/sun/tools/javac/m3/M3PrimitiveImageCompiler.java'
-      - 'src/jdk.compiler/share/classes/com/sun/tools/javac/main/JavaCompiler.java'
-      - 'm3/vendor/m3/nlp-search/**'
-      - 'm3/vendor/third_party/opennlp-tools/**'
-      - 'm3/vendor/third_party/lucene-core/**'
-      - 'm3/vendor/third_party/lucene-analysis-common/**'
-      - 'm3/vendor/third_party/lucene-queries/**'
-      - 'm3/vendor/third_party/lucene-sandbox/**'
-      - 'm3/vendor/third_party/lucene-queryparser/**'
-      - 'm3/vendor/third_party/slf4j-api-2.0.12/**'
-      - 'm3/vendor/third_party/slf4j-simple/**'
-      - '.github/workflows/m3sdk-jmod-receiver.yml'
   workflow_dispatch:
 
 permissions:

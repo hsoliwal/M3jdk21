@@ -1,12 +1,18 @@
 # SPDX-License-Identifier: Apache-2.0
 name: M3 Guava MinMax original compiler diagnostic capture
+# Former triggers (below, as of the move) now start job(s) 'm3-guava-minmax-compiler-diagnostics__*' in
+# .github/workflows/checks-superset-05.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     pull_request:
+#       paths:
+#         - 'm3/collections/qualification/guava-minmax-source-custody/**'
+#         - 'src/jdk.m3.collections/share/classes/jdk/m3/arrays/**'
+#         - 'm3/collections/qualification/owned-guava-minmax-priority-queue-20261018/**'
+#         - '.github/workflows/m3-guava-minmax-compiler-diagnostics.yml'
+#     workflow_dispatch:
 on:
-  pull_request:
-    paths:
-      - 'm3/collections/qualification/guava-minmax-source-custody/**'
-      - 'src/jdk.m3.collections/share/classes/jdk/m3/arrays/**'
-      - 'm3/collections/qualification/owned-guava-minmax-priority-queue-20261018/**'
-      - '.github/workflows/m3-guava-minmax-compiler-diagnostics.yml'
   workflow_dispatch:
 permissions:
   contents: read

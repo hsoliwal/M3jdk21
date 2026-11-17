@@ -1,14 +1,20 @@
 # SPDX-License-Identifier: Apache-2.0
 name: M3JDK21 ordered convergence receiver Java21
 
+# Former triggers (below, as of the move) now start job(s) 'm3-ordered-convergence-receiver-20261017__*' in
+# .github/workflows/checks-superset-05.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     pull_request:
+#       paths:
+#         - 'm3/compatibility/M3OrderedConvergenceReceiver.java'
+#         - 'm3/compatibility/M3OrderedConvergenceReceiverTest.java'
+#         - 'm3/docs/ordered-convergence-receiving-20261017.md'
+#         - 'm3/docs/M3_CONVERGENCE_MODEL.md'
+#         - '.github/workflows/m3-ordered-convergence-receiver-20261017.yml'
+#     workflow_dispatch:
 on:
-  pull_request:
-    paths:
-      - 'm3/compatibility/M3OrderedConvergenceReceiver.java'
-      - 'm3/compatibility/M3OrderedConvergenceReceiverTest.java'
-      - 'm3/docs/ordered-convergence-receiving-20261017.md'
-      - 'm3/docs/M3_CONVERGENCE_MODEL.md'
-      - '.github/workflows/m3-ordered-convergence-receiver-20261017.yml'
   workflow_dispatch:
 
 permissions:

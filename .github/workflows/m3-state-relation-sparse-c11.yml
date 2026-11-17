@@ -2,16 +2,22 @@
 # SPDX-License-Identifier: Apache-2.0
 # Reuses the source-qualified Maven recipe and existing monitored hosted lane.
 name: M3 sparse StateRelation C11 JNI and paired native kernel timing
+# Former triggers (below, as of the move) now start job(s) 'm3-state-relation-sparse-c11__*' in
+# .github/workflows/checks-superset-08.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     pull_request:
+#       paths:
+#         - '.github/workflows/m3-state-relation-sparse-c11.yml'
+#         - 'm3/tooling/state-relation-sparse-c11/**'
+#         - 'src/java.base/share/classes/jdk/internal/mindex/M3StateRelation.java'
+#         - 'src/java.base/share/classes/jdk/internal/mindex/M3DotStarRelations.java'
+#         - 'src/java.base/share/native/libjava/M3StateRelation.c'
+#         - 'src/java.base/share/native/libjava/m3_state_relation.h'
+#         - 'm3/compatibility/regex-relations-20261014/M3RelationPortProof.java'
 on:
-  pull_request:
-    paths:
-      - '.github/workflows/m3-state-relation-sparse-c11.yml'
-      - 'm3/tooling/state-relation-sparse-c11/**'
-      - 'src/java.base/share/classes/jdk/internal/mindex/M3StateRelation.java'
-      - 'src/java.base/share/classes/jdk/internal/mindex/M3DotStarRelations.java'
-      - 'src/java.base/share/native/libjava/M3StateRelation.c'
-      - 'src/java.base/share/native/libjava/m3_state_relation.h'
-      - 'm3/compatibility/regex-relations-20261014/M3RelationPortProof.java'
+  workflow_dispatch:
 permissions:
   contents: read
 concurrency:

@@ -1,15 +1,21 @@
 # SPDX-License-Identifier: Apache-2.0
 name: M3 zero-key primitive collection admission
+# Former triggers (below, as of the move) now start job(s) 'm3-zero-slot-growth-20261017__*' in
+# .github/workflows/checks-superset-08.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     pull_request:
+#       paths:
+#         - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3IntHashSet.java'
+#         - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3IntIntHashMap.java'
+#         - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3IntLongHashMap.java'
+#         - 'test/jdk/jdk/m3/collections/M3ZeroSlotCapacity*'
+#         - 'm3/collections/verification/zero-slot-growth-20261017/**'
+#         - 'm3/collections/qualification/zero-slot-growth-20261017.tsv'
+#         - '.github/workflows/m3-zero-slot-growth-20261017.yml'
+#     workflow_dispatch:
 on:
-  pull_request:
-    paths:
-      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3IntHashSet.java'
-      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3IntIntHashMap.java'
-      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3IntLongHashMap.java'
-      - 'test/jdk/jdk/m3/collections/M3ZeroSlotCapacity*'
-      - 'm3/collections/verification/zero-slot-growth-20261017/**'
-      - 'm3/collections/qualification/zero-slot-growth-20261017.tsv'
-      - '.github/workflows/m3-zero-slot-growth-20261017.yml'
   workflow_dispatch:
 permissions:
   contents: read

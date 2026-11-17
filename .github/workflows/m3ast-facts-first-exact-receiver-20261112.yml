@@ -1,16 +1,22 @@
 # SPDX-License-Identifier: Apache-2.0
 name: M3AST primitive Facts first receiver Java21 exact-source gate
 
+# Former triggers (below, as of the move) now start job(s) 'm3ast-facts-first-exact-receiver-20261112__*' in
+# .github/workflows/checks-superset-04.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     pull_request:
+#       branches: [master]
+#       paths:
+#         - 'm3/ast/src/main/java/jdk/m3/ast/SyntaxIndex.java'
+#         - 'm3/ast/src/test/java/jdk/m3/ast/SyntaxIndexFactsFirstContract.java'
+#         - 'm3/ast/src/test/java/jdk/m3/ast/ProbeGuardContract.java'
+#         - 'm3/ast/src/test/java/jdk/m3/ast/SyntaxIndexFactsFirstTest.java'
+#         - 'm3/ast/recipe/facts-first-primitive-20261112/**'
+#         - '.github/workflows/m3ast-facts-first-exact-receiver-20261112.yml'
+#     workflow_dispatch:
 on:
-  pull_request:
-    branches: [master]
-    paths:
-      - 'm3/ast/src/main/java/jdk/m3/ast/SyntaxIndex.java'
-      - 'm3/ast/src/test/java/jdk/m3/ast/SyntaxIndexFactsFirstContract.java'
-      - 'm3/ast/src/test/java/jdk/m3/ast/ProbeGuardContract.java'
-      - 'm3/ast/src/test/java/jdk/m3/ast/SyntaxIndexFactsFirstTest.java'
-      - 'm3/ast/recipe/facts-first-primitive-20261112/**'
-      - '.github/workflows/m3ast-facts-first-exact-receiver-20261112.yml'
   workflow_dispatch:
 
 permissions:

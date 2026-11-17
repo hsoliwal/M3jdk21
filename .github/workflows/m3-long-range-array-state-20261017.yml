@@ -1,15 +1,21 @@
 name: M3 long range array and JNI mask parity
+# Former triggers (below, as of the move) now start job(s) 'm3-long-range-array-state-20261017__*' in
+# .github/workflows/checks-superset-05.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     push:
+#       branches:
+#         - 'm3/long-range-array-state-receiver-20261017'
+#     pull_request:
+#       paths:
+#         - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3LongRangeSet.java'
+#         - 'test/jdk/jdk/m3/collections/M3LongRangeSet*'
+#         - 'm3/collections/qualification/range-atom/successor/**'
+#         - 'm3/collections/qualification/m3-long-range-arrays-20261017/**'
+#         - '.github/workflows/m3-long-range-array-state-20261017.yml'
 on:
-  push:
-    branches:
-      - 'm3/long-range-array-state-receiver-20261017'
-  pull_request:
-    paths:
-      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3LongRangeSet.java'
-      - 'test/jdk/jdk/m3/collections/M3LongRangeSet*'
-      - 'm3/collections/qualification/range-atom/successor/**'
-      - 'm3/collections/qualification/m3-long-range-arrays-20261017/**'
-      - '.github/workflows/m3-long-range-array-state-20261017.yml'
+  workflow_dispatch:
 permissions:
   contents: read
 concurrency:

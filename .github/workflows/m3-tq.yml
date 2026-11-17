@@ -1,23 +1,29 @@
 # SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
 # SPDX-License-Identifier: Apache-2.0
 name: M3 TQ counterpart
+# Former triggers (below, as of the move) now start job(s) 'm3-tq__*' in
+# .github/workflows/checks-superset-01.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     pull_request:
+#       paths:
+#         - '.github/workflows/m3-tq.yml'
+#         - '.m3/openrewrite-recipes/**'
+#         - 'm3/tooling/tq/**'
+#         - 'm3/tooling/tq-sync/**'
+#         - 'm3/m3-import/pure-int-recipe-custody/install.sh'
+#         - 'm3/m3-import/pure-int-recipe-custody/test_source_bootstrap.py'
+#         - 'm3/tooling/lane28/**'
+#         - 'm3/tooling/migration-recipes/**'
+#         - 'm3/migration/**'
+#         - 'm3/docs/name-mapping*'
+#         - 'm3/docs/counterpart-naming.md'
+#         - 'src/java.base/**'
+#         - 'src/hotspot/**'
+#         - 'test/jdk/java/lang/String/**'
+#     workflow_dispatch:
 on:
-  pull_request:
-    paths:
-      - '.github/workflows/m3-tq.yml'
-      - '.m3/openrewrite-recipes/**'
-      - 'm3/tooling/tq/**'
-      - 'm3/tooling/tq-sync/**'
-      - 'm3/m3-import/pure-int-recipe-custody/install.sh'
-      - 'm3/m3-import/pure-int-recipe-custody/test_source_bootstrap.py'
-      - 'm3/tooling/lane28/**'
-      - 'm3/tooling/migration-recipes/**'
-      - 'm3/migration/**'
-      - 'm3/docs/name-mapping*'
-      - 'm3/docs/counterpart-naming.md'
-      - 'src/java.base/**'
-      - 'src/hotspot/**'
-      - 'test/jdk/java/lang/String/**'
   workflow_dispatch:
 permissions:
   contents: read

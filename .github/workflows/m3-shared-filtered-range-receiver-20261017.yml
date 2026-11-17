@@ -1,13 +1,19 @@
 name: M3 filtered shared owner Java21 and family catalogue
+# Former triggers (below, as of the move) now start job(s) 'm3-shared-filtered-range-receiver-20261017__*' in
+# .github/workflows/checks-superset-04.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     push:
+#       branches: ['m3/shared-filtered-range-audit-receiver-20261017']
+#     pull_request:
+#       paths:
+#         - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3FilteredViews.java'
+#         - 'test/jdk/jdk/m3/collections/M3FilteredNavigableSetRange*'
+#         - 'm3/collections/algorithm-catalog/full-m3-family-inventory-20261017/**'
+#         - '.github/workflows/m3-shared-filtered-range-receiver-20261017.yml'
 on:
-  push:
-    branches: ['m3/shared-filtered-range-audit-receiver-20261017']
-  pull_request:
-    paths:
-      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3FilteredViews.java'
-      - 'test/jdk/jdk/m3/collections/M3FilteredNavigableSetRange*'
-      - 'm3/collections/algorithm-catalog/full-m3-family-inventory-20261017/**'
-      - '.github/workflows/m3-shared-filtered-range-receiver-20261017.yml'
+  workflow_dispatch:
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true

@@ -1,14 +1,20 @@
 # SPDX-License-Identifier: GPL-2.0-only
 name: M3 Object toAdpater source and historical binary qualification
+# Former triggers (below, as of the move) now start job(s) 'm3-object-toadpater-successor__*' in
+# .github/workflows/checks-superset-09.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     pull_request:
+#       paths:
+#         - 'src/java.base/share/classes/java/lang/Object.java'
+#         - 'src/hotspot/share/classfile/classLoader.cpp'
+#         - 'test/jdk/java/lang/Object/ObjectToAdpater*.java'
+#         - 'test/jdk/java/lang/Object/libObjectToAdpaterNativeTest.c'
+#         - 'm3/qualification/object-toadpater/**'
+#         - '.github/workflows/m3-object-toadpater-successor.yml'
+#     workflow_dispatch:
 on:
-  pull_request:
-    paths:
-      - 'src/java.base/share/classes/java/lang/Object.java'
-      - 'src/hotspot/share/classfile/classLoader.cpp'
-      - 'test/jdk/java/lang/Object/ObjectToAdpater*.java'
-      - 'test/jdk/java/lang/Object/libObjectToAdpaterNativeTest.c'
-      - 'm3/qualification/object-toadpater/**'
-      - '.github/workflows/m3-object-toadpater-successor.yml'
   workflow_dispatch:
 
 permissions:

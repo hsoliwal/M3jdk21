@@ -1,13 +1,19 @@
 # SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
 # SPDX-License-Identifier: Apache-2.0
 name: M3JDK21 canonical JDK API and M3 internality boundary
+# Former triggers (below, as of the move) now start job(s) 'm3jdk21-canonical-api-internality-20261027__*' in
+# .github/workflows/checks-superset-06.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     pull_request:
+#       paths:
+#         - 'test/jdk/java/lang/String/M3CanonicalApiBoundaryTest.java'
+#         - 'm3/docs/qualification/current-api-internality-20261027/**'
+#         - 'm3/docs/M3JDK21_NAME_AND_PACKAGE_CONTRACT.md'
+#         - '.github/workflows/m3jdk21-canonical-api-internality-20261027.yml'
+#     workflow_dispatch:
 on:
-  pull_request:
-    paths:
-      - 'test/jdk/java/lang/String/M3CanonicalApiBoundaryTest.java'
-      - 'm3/docs/qualification/current-api-internality-20261027/**'
-      - 'm3/docs/M3JDK21_NAME_AND_PACKAGE_CONTRACT.md'
-      - '.github/workflows/m3jdk21-canonical-api-internality-20261027.yml'
   workflow_dispatch:
 permissions:
   contents: read

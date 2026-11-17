@@ -1,16 +1,22 @@
 name: M3FS inline Commons Lang primitive atoms — source-built receiver
+# Former triggers (below, as of the move) now start job(s) 'm3fs-inline-primitives__*' in
+# .github/workflows/checks-superset-06.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     push:
+#       branches: ['m3/fs-inline-primitive-vendor-atoms-20261027']
+#     pull_request:
+#       paths:
+#         - 'm3/fs/src/main/java/jdk/m3/fs/vfs/util/**'
+#         - 'm3/fs/src/test/java/jdk/m3/fs/vfs/util/M3FsDonorFreePrimitivesTest.java'
+#         - 'm3/fs/src/main/java/jdk/m3/fs/vfs/FileDepthSelector.java'
+#         - 'm3/fs/src/main/java/jdk/m3/fs/vfs/FileSystemConfigBuilder.java'
+#         - 'm3/fs/src/test/java/jdk/m3/fs/vfs/M3FsDepthDurationPrimitivesTest.java'
+#         - 'm3/fs/qualification/inline-primitives/**'
+#         - '.github/workflows/m3fs-inline-primitives.yml'
 on:
-  push:
-    branches: ['m3/fs-inline-primitive-vendor-atoms-20261027']
-  pull_request:
-    paths:
-      - 'm3/fs/src/main/java/jdk/m3/fs/vfs/util/**'
-      - 'm3/fs/src/test/java/jdk/m3/fs/vfs/util/M3FsDonorFreePrimitivesTest.java'
-      - 'm3/fs/src/main/java/jdk/m3/fs/vfs/FileDepthSelector.java'
-      - 'm3/fs/src/main/java/jdk/m3/fs/vfs/FileSystemConfigBuilder.java'
-      - 'm3/fs/src/test/java/jdk/m3/fs/vfs/M3FsDepthDurationPrimitivesTest.java'
-      - 'm3/fs/qualification/inline-primitives/**'
-      - '.github/workflows/m3fs-inline-primitives.yml'
+  workflow_dispatch:
 permissions:
   contents: read
 concurrency:

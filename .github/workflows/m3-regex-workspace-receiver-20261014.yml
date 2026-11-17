@@ -1,11 +1,17 @@
 # SPDX-License-Identifier: Apache-2.0
 name: M3 regex workspace receiver
+# Former triggers (below, as of the move) now start job(s) 'm3-regex-workspace-receiver-20261014__*' in
+# .github/workflows/checks-superset-06.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     pull_request:
+#       paths:
+#         - 'test/jdk/java/util/regex/M3RegexWorkspaceContractTest.java'
+#         - 'm3/runtime-integration/REGEX_WORKSPACE_RECEIVER_20261014.md'
+#         - '.github/workflows/m3-regex-workspace-receiver-20261014.yml'
 on:
-  pull_request:
-    paths:
-      - 'test/jdk/java/util/regex/M3RegexWorkspaceContractTest.java'
-      - 'm3/runtime-integration/REGEX_WORKSPACE_RECEIVER_20261014.md'
-      - '.github/workflows/m3-regex-workspace-receiver-20261014.yml'
+  workflow_dispatch:
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true

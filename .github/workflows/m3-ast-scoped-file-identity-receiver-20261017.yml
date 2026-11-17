@@ -1,11 +1,17 @@
 name: M3 AST Scoped File Identity Receiver
+# Former triggers (below, as of the move) now start job(s) 'm3-ast-scoped-file-identity-receiver-20261017__*' in
+# .github/workflows/checks-superset-06.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     pull_request:
+#       paths:
+#         - 'm3/ports/compiletime/src/main/java/jdk/m3/compiletime/M3ASTLeafIndex.java'
+#         - 'm3/ports/compiletime/src/test/java/jdk/m3/compiletime/M3ASTLeafIndexSelfTest.java'
+#         - 'm3/ports/compiletime/qualification/ast-scoped-file-identity-20261017/**'
+#         - '.github/workflows/m3-ast-scoped-file-identity-receiver-20261017.yml'
+#     workflow_dispatch:
 on:
-  pull_request:
-    paths:
-      - 'm3/ports/compiletime/src/main/java/jdk/m3/compiletime/M3ASTLeafIndex.java'
-      - 'm3/ports/compiletime/src/test/java/jdk/m3/compiletime/M3ASTLeafIndexSelfTest.java'
-      - 'm3/ports/compiletime/qualification/ast-scoped-file-identity-20261017/**'
-      - '.github/workflows/m3-ast-scoped-file-identity-receiver-20261017.yml'
   workflow_dispatch:
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}

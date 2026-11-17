@@ -1,18 +1,24 @@
 name: M3 Object Array Pool Java 21
 
+# Former triggers (below, as of the move) now start job(s) 'm3-object-array-pool-java21__*' in
+# .github/workflows/checks-superset-07.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     pull_request:
+#       paths:
+#         - 'src/java.base/share/classes/jdk/internal/util/M3ObjectArrayPool.java'
+#         - 'test/jdk/jdk/internal/util/M3ObjectArrayPoolTest.java'
+#         - '.github/workflows/m3-object-array-pool-java21.yml'
+#     push:
+#       branches:
+#         - 'feature/m3-object-array-reuse-20261012'
+#       paths:
+#         - 'src/java.base/share/classes/jdk/internal/util/M3ObjectArrayPool.java'
+#         - 'test/jdk/jdk/internal/util/M3ObjectArrayPoolTest.java'
+#         - '.github/workflows/m3-object-array-pool-java21.yml'
+#     workflow_dispatch:
 on:
-  pull_request:
-    paths:
-      - 'src/java.base/share/classes/jdk/internal/util/M3ObjectArrayPool.java'
-      - 'test/jdk/jdk/internal/util/M3ObjectArrayPoolTest.java'
-      - '.github/workflows/m3-object-array-pool-java21.yml'
-  push:
-    branches:
-      - 'feature/m3-object-array-reuse-20261012'
-    paths:
-      - 'src/java.base/share/classes/jdk/internal/util/M3ObjectArrayPool.java'
-      - 'test/jdk/jdk/internal/util/M3ObjectArrayPoolTest.java'
-      - '.github/workflows/m3-object-array-pool-java21.yml'
   workflow_dispatch:
 
 permissions:

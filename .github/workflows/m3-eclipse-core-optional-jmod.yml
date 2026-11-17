@@ -1,17 +1,23 @@
 name: M3 optional Eclipse core JMOD - real owner Java21 JNI
+# Former triggers (below, as of the move) now start job(s) 'm3-eclipse-core-optional-jmod__*' in
+# .github/workflows/checks-superset-01.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     pull_request:
+#       branches: [master]
+#       paths:
+#         - 'm3/eclipse/optional-jmod/**'
+#         - 'm3/file/**'
+#         - 'm3/core/src/**'
+#         - 'src/java.base/share/classes/jdk/m3/text/**'
+#         - 'm3/arrays/src/**'
+#         - 'm3/ast/src/**'
+#         - 'm3/collections/src/**'
+#         - 'm3/docs/name-mapping.d/eclipse-core-optional-jmod-20261018.tsv'
+#         - '.github/workflows/m3-eclipse-core-optional-jmod.yml'
+#     workflow_dispatch:
 on:
-  pull_request:
-    branches: [master]
-    paths:
-      - 'm3/eclipse/optional-jmod/**'
-      - 'm3/file/**'
-      - 'm3/core/src/**'
-      - 'src/java.base/share/classes/jdk/m3/text/**'
-      - 'm3/arrays/src/**'
-      - 'm3/ast/src/**'
-      - 'm3/collections/src/**'
-      - 'm3/docs/name-mapping.d/eclipse-core-optional-jmod-20261018.tsv'
-      - '.github/workflows/m3-eclipse-core-optional-jmod.yml'
   workflow_dispatch:
 permissions:
   contents: read

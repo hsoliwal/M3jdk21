@@ -1,13 +1,19 @@
 # Copyright (c) 2026, Hitesh Soliwal.
 # SPDX-License-Identifier: GPL-2.0-with-classpath-exception
 name: M3JDK21 regex row bitmap receiver source proof
+# Former triggers (below, as of the move) now start job(s) 'm3-regex-row-precompute-20261016__*' in
+# .github/workflows/checks-superset-06.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     pull_request:
+#       paths:
+#         - 'src/java.base/share/classes/java/lang/M3StringRegexRowPrecompute.java'
+#         - 'test/jdk/java/lang/String/M3StringRegexRowPrecomputeTest.java'
+#         - 'm3/runtime-integration/regex-row-precompute/**'
+#         - '.github/workflows/m3-regex-row-precompute-20261016.yml'
 on:
-  pull_request:
-    paths:
-      - 'src/java.base/share/classes/java/lang/M3StringRegexRowPrecompute.java'
-      - 'test/jdk/java/lang/String/M3StringRegexRowPrecomputeTest.java'
-      - 'm3/runtime-integration/regex-row-precompute/**'
-      - '.github/workflows/m3-regex-row-precompute-20261016.yml'
+  workflow_dispatch:
 permissions:
   contents: read
 concurrency:

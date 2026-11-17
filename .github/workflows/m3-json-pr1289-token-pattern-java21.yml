@@ -1,11 +1,17 @@
 name: M3 Jackson PR1289 token pattern Java21
+# Former triggers (below, as of the move) now start job(s) 'm3-json-pr1289-token-pattern-java21__*' in
+# .github/workflows/checks-superset-07.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     pull_request:
+#       paths:
+#         - 'm3/tooling/module-packs/jackson/src/main/java/jdk/m3/jackson/M3ASTTokenPattern.java'
+#         - 'm3/tooling/module-packs/jackson/src/main/java/jdk/m3/jackson/M3TokenRegex.java'
+#         - 'm3/tooling/module-packs/jackson/src/test/java/jdk/m3/jackson/M3ASTPatternCoreReceiptContract.java'
+#         - '.github/workflows/m3-json-pr1289-token-pattern-java21.yml'
+#     workflow_dispatch:
 on:
-  pull_request:
-    paths:
-      - 'm3/tooling/module-packs/jackson/src/main/java/jdk/m3/jackson/M3ASTTokenPattern.java'
-      - 'm3/tooling/module-packs/jackson/src/main/java/jdk/m3/jackson/M3TokenRegex.java'
-      - 'm3/tooling/module-packs/jackson/src/test/java/jdk/m3/jackson/M3ASTPatternCoreReceiptContract.java'
-      - '.github/workflows/m3-json-pr1289-token-pattern-java21.yml'
   workflow_dispatch:
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}

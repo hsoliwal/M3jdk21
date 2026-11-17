@@ -1,17 +1,23 @@
 # SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
 # SPDX-License-Identifier: Apache-2.0
 name: M3 viewport combined original-owner contracts
+# Former triggers (below, as of the move) now start job(s) 'm3-viewport-family-composed__*' in
+# .github/workflows/checks-superset-09.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     pull_request:
+#       paths:
+#         - 'src/jdk.m3.collections/share/native/libm3collections/m3maskviewport.c'
+#         - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3MaskViewport*.java'
+#         - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3SparseExtents.java'
+#         - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3TreeWindowPlan.java'
+#         - 'test/jdk/jdk/m3/collections/M3FrameJavaContract.java'
+#         - 'test/jdk/jdk/m3/collections/M3TreeCommitPlanIdentityTest.java'
+#         - 'm3/collections/viewport-proof/**'
+#         - '.github/workflows/m3-viewport-family-composed.yml'
+#     workflow_dispatch:
 on:
-  pull_request:
-    paths:
-      - 'src/jdk.m3.collections/share/native/libm3collections/m3maskviewport.c'
-      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3MaskViewport*.java'
-      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3SparseExtents.java'
-      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3TreeWindowPlan.java'
-      - 'test/jdk/jdk/m3/collections/M3FrameJavaContract.java'
-      - 'test/jdk/jdk/m3/collections/M3TreeCommitPlanIdentityTest.java'
-      - 'm3/collections/viewport-proof/**'
-      - '.github/workflows/m3-viewport-family-composed.yml'
   workflow_dispatch:
 permissions:
   contents: read

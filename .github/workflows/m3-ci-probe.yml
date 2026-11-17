@@ -1,16 +1,22 @@
 name: M3 CI probe
 
+# Former triggers (below, as of the move) now start job(s) 'm3-ci-probe__*' in
+# .github/workflows/checks-superset-01.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     push:
+#       branches:
+#         - "m3/java21-convergence-ci-proof-20261002"
+#       paths:
+#         - ".github/workflows/m3-ci-probe.yml"
+#         - "m3/**"
+#     pull_request:
+#       paths:
+#         - ".github/workflows/m3-ci-probe.yml"
+#         - "m3/**"
+#     workflow_dispatch:
 on:
-  push:
-    branches:
-      - "m3/java21-convergence-ci-proof-20261002"
-    paths:
-      - ".github/workflows/m3-ci-probe.yml"
-      - "m3/**"
-  pull_request:
-    paths:
-      - ".github/workflows/m3-ci-probe.yml"
-      - "m3/**"
   workflow_dispatch:
 
 permissions:

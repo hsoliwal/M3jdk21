@@ -1,12 +1,18 @@
 name: M3 unified Guava Multiset and ListMultimap one API owner no downstream vendors
+# Former triggers (below, as of the move) now start job(s) 'm3-guava-unified-api-20261027__*' in
+# .github/workflows/checks-superset-04.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     push:
+#       branches: ['m3/guava-unified-no-vendor-runtime-20261027']
+#     pull_request:
+#       paths:
+#         - 'm3/collections/implementations/guava-unified/**'
+#         - 'm3/docs/name-mapping.d/m3-guava-unified-source-closure-20261027.json'
+#         - '.github/workflows/m3-guava-unified-api-20261027.yml'
 on:
-  push:
-    branches: ['m3/guava-unified-no-vendor-runtime-20261027']
-  pull_request:
-    paths:
-      - 'm3/collections/implementations/guava-unified/**'
-      - 'm3/docs/name-mapping.d/m3-guava-unified-source-closure-20261027.json'
-      - '.github/workflows/m3-guava-unified-api-20261027.yml'
+  workflow_dispatch:
 permissions:
   contents: read
 concurrency:

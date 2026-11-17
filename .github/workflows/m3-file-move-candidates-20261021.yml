@@ -1,21 +1,27 @@
 # SPDX-License-Identifier: Apache-2.0
 name: M3File move candidates and source recipes
 
+# Former triggers (below, as of the move) now start job(s) 'm3-file-move-candidates-20261021__*' in
+# .github/workflows/checks-superset-02.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     push:
+#       branches:
+#         - master
+#         - m3/restore-merged-atoms-ci-20261022
+#       paths:
+#         - 'm3/file/**'
+#         - 'src/jdk.m3.collections/**'
+#         - '.github/workflows/m3-file-move-candidates-20261021.yml'
+#     pull_request:
+#       paths:
+#         - 'm3/file/**'
+#         - 'src/jdk.m3.collections/**'
+#         - 'm3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-file-move-candidates-20261021/**'
+#         - '.github/workflows/m3-file-move-candidates-20261021.yml'
+#     workflow_dispatch:
 on:
-  push:
-    branches:
-      - master
-      - m3/restore-merged-atoms-ci-20261022
-    paths:
-      - 'm3/file/**'
-      - 'src/jdk.m3.collections/**'
-      - '.github/workflows/m3-file-move-candidates-20261021.yml'
-  pull_request:
-    paths:
-      - 'm3/file/**'
-      - 'src/jdk.m3.collections/**'
-      - 'm3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-file-move-candidates-20261021/**'
-      - '.github/workflows/m3-file-move-candidates-20261021.yml'
   workflow_dispatch:
 
 permissions:

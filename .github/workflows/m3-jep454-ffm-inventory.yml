@@ -1,20 +1,26 @@
 name: M3 JEP 454 FFM inventory
 
+# Former triggers (below, as of the move) now start job(s) 'm3-jep454-ffm-inventory__*' in
+# .github/workflows/checks-superset-04.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     push:
+#       branches:
+#         - "m3/jep454-ffm-*"
+#       paths:
+#         - "m3/backports/recipes/jep-454-ffm/**"
+#         - "m3/backports/JEP_RESIDUE_QUEUE.tsv"
+#         - "m3/backports/PROGRAM_STATUS_2026-10-07.md"
+#         - ".github/workflows/m3-jep454-ffm-inventory.yml"
+#     pull_request:
+#       paths:
+#         - "m3/backports/recipes/jep-454-ffm/**"
+#         - "m3/backports/JEP_RESIDUE_QUEUE.tsv"
+#         - "m3/backports/PROGRAM_STATUS_2026-10-07.md"
+#         - ".github/workflows/m3-jep454-ffm-inventory.yml"
+#     workflow_dispatch:
 on:
-  push:
-    branches:
-      - "m3/jep454-ffm-*"
-    paths:
-      - "m3/backports/recipes/jep-454-ffm/**"
-      - "m3/backports/JEP_RESIDUE_QUEUE.tsv"
-      - "m3/backports/PROGRAM_STATUS_2026-10-07.md"
-      - ".github/workflows/m3-jep454-ffm-inventory.yml"
-  pull_request:
-    paths:
-      - "m3/backports/recipes/jep-454-ffm/**"
-      - "m3/backports/JEP_RESIDUE_QUEUE.tsv"
-      - "m3/backports/PROGRAM_STATUS_2026-10-07.md"
-      - ".github/workflows/m3-jep454-ffm-inventory.yml"
   workflow_dispatch:
 
 permissions:
