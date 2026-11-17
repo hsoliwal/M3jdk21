@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Arrays;
+import jdk.m3.collections.text.IntSuffixArray;
 
 //FLLDCIM: RELOCATE - donor blob a947a2c59855 at commit 3385d79a2968 (repository, path, URL and digests: m3/algorithms/recipe/families-20261106/PROVENANCE.tsv); recipe m3/algorithms/recipe/families-20261106/relocate.py v1
 public final class StringAlgorithms {
@@ -401,40 +402,17 @@ public final class StringAlgorithms {
     }
 
     //FLLDCIM: FOLD 739221ead5fa AdvancedStringAlgorithms.suffixArray
+    //FLLDCIM: LEETCODIFY — owner reuse: IntSuffixArray counting-sort doubling
     /**
-     * Suffix array of UTF-16 code-unit indices using doubling + primitive stable merge sort.
-     * Complexity is O(n log^2 n) comparisons and O(n) auxiliary primitive storage.
+     * Suffix array of UTF-16 code-unit indices, built by {@code IntSuffixArray}: prefix
+     * doubling with two stable counting sorts per round over compressed ranks, O(n log n) time
+     * and O(n) primitive storage. Suffixes are distinct, so the array is unique.
      */
     public static int[] suffixArray(String value) {
         Objects.requireNonNull(value, "value");
-        int n = value.length();
-        if (n == 0) return new int[0];
-        int[] order = new int[n];
-        int[] buffer = new int[n];
-        int[] rank = new int[n];
-        int[] nextRank = new int[n];
-        for (int i = 0; i < n; i++) {
-            order[i] = i;
-            rank[i] = value.charAt(i);
-        }
-
-        int width = 1;
-        while (true) {
-            mergeSortSuffixes(order, buffer, rank, width, n);
-            int classes = 0;
-            nextRank[order[0]] = 0;
-            for (int i = 1; i < n; i++) {
-                if (compareSuffix(order[i - 1], order[i], rank, width, n) != 0) classes++;
-                nextRank[order[i]] = classes;
-            }
-            int[] swap = rank;
-            rank = nextRank;
-            nextRank = swap;
-            if (classes == n - 1) break;
-            if (width >= n) break;
-            width = width > n / 2 ? n : width << 1;
-        }
-        return order;
+        int[] units = new int[value.length()];
+        for (int i = 0; i < units.length; i++) units[i] = value.charAt(i);
+        return new IntSuffixArray(units).suffixes();
     }
 
     //FLLDCIM: FOLD 739221ead5fa AdvancedStringAlgorithms.lcpArray
@@ -489,49 +467,6 @@ public final class StringAlgorithms {
             }
         }
         return value.substring(bestStart, bestStart + bestLength);
-    }
-
-    //FLLDCIM: FOLD 739221ead5fa AdvancedStringAlgorithms.mergeSortSuffixes
-    private static void mergeSortSuffixes(
-            int[] order,
-            int[] buffer,
-            int[] rank,
-            int width,
-            int n) {
-        for (int run = 1; run < n; run = run > n / 2 ? n : run << 1) {
-            for (int start = 0; start < n; start += run << 1) {
-                int middle = Math.min(start + run, n);
-                int end = Math.min(start + (run << 1), n);
-                int left = start;
-                int right = middle;
-                int cursor = start;
-                while (left < middle && right < end) {
-                    if (compareSuffix(order[left], order[right], rank, width, n) <= 0) {
-                        buffer[cursor++] = order[left++];
-                    } else {
-                        buffer[cursor++] = order[right++];
-                    }
-                }
-                while (left < middle) buffer[cursor++] = order[left++];
-                while (right < end) buffer[cursor++] = order[right++];
-            }
-            System.arraycopy(buffer, 0, order, 0, n);
-            if (run == n) break;
-        }
-    }
-
-    //FLLDCIM: FOLD 739221ead5fa AdvancedStringAlgorithms.compareSuffix
-    private static int compareSuffix(
-            int left,
-            int right,
-            int[] rank,
-            int width,
-            int n) {
-        int comparison = Integer.compare(rank[left], rank[right]);
-        if (comparison != 0) return comparison;
-        int leftSecond = left + width < n ? rank[left + width] : -1;
-        int rightSecond = right + width < n ? rank[right + width] : -1;
-        return Integer.compare(leftSecond, rightSecond);
     }
 
     //FLLDCIM: FOLD 9f840d89c5a7 PrimitiveStringAlgorithms.CHAR_SPACE
