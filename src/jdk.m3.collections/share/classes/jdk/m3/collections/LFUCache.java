@@ -12,18 +12,20 @@ import java.util.function.Function;
  * Small bounded LFU cache whose storage is primitive/reference arrays, never linked cache nodes.
  *
  * <p>Keys are compared by identity because M3 entry-facade callers pass the actual key reference
- * stored in the owning map slot. A byte mask distinguishes a stored {@code null} key from an empty
- * lane. Frequency selects the eviction victim; a monotonically increasing access stamp breaks
+ * stored in the owning map slot. An unused key slot holds the private EMPTY sentinel, so a stored
+ * {@code null} key is a real key. Frequency selects the eviction victim; a monotonically
+ * increasing access stamp breaks
  * ties by evicting the least recently accessed candidate. The cache is single-threaded, matching
  * the strong-key M3 map owners that use it.</p>
  */
 final class LFUCache<K, V> {
-    private static final byte OCCUPIED = 1;
+    /** Key of an unused slot; never a caller's key, never returned. */
+    //FLLDCIM: LEETCODIFY - EMPTY sentinel replaces the byte state lane
+    private static final Object EMPTY = new Object();
     private final Object[] keys;
     private final Object[] values;
     private final int[] frequencies;
     private final long[] accessStamps;
-    private final byte[] states;
     private int size;
     private long clock;
     private int lastIdentitySlot = -1;
@@ -36,7 +38,7 @@ final class LFUCache<K, V> {
         values = jdk.m3.arrays.ArrayNative.allocateObjectsRequired(capacity);
         frequencies = jdk.m3.arrays.ArrayNative.allocateIntsRequired(capacity);
         accessStamps = jdk.m3.arrays.ArrayNative.allocateLongsRequired(capacity);
-        states = jdk.m3.arrays.ArrayNative.allocateBytesRequired(capacity);
+        Arrays.fill(keys, EMPTY);
     }
 
     @SuppressWarnings("unchecked")
@@ -57,7 +59,7 @@ final class LFUCache<K, V> {
         // Finish it before publishing any new entry or evicting a live key.
         long stamp = nextStamp();
         int target = victim();
-        if (states[target] == 0) {
+        if (keys[target] == EMPTY) {
             size++;
         }
         lastIdentitySlot = -1;
@@ -65,7 +67,6 @@ final class LFUCache<K, V> {
         values[target] = created;
         frequencies[target] = 1;
         accessStamps[target] = stamp;
-        states[target] = OCCUPIED;
         return created;
     }
 
@@ -78,11 +79,10 @@ final class LFUCache<K, V> {
     }
 
     void clear() {
-        Arrays.fill(keys, null);
+        Arrays.fill(keys, EMPTY);
         Arrays.fill(values, null);
         Arrays.fill(frequencies, 0);
         Arrays.fill(accessStamps, 0L);
-        Arrays.fill(states, (byte) 0);
         size = 0;
         clock = 0L;
         lastIdentitySlot = -1;
@@ -98,11 +98,11 @@ final class LFUCache<K, V> {
 
     private int findIdentity(Object key) {
         int hinted = lastIdentitySlot;
-        if (hinted >= 0 && keys[hinted] == key && (states[hinted] & OCCUPIED) != 0) {
+        if (hinted >= 0 && keys[hinted] == key) { // a caller's key is never EMPTY
             return hinted;
         }
-        for (int i = 0; i < states.length; i++) {
-            if ((states[i] & OCCUPIED) != 0 && keys[i] == key) {
+        for (int i = 0; i < keys.length; i++) {
+            if (keys[i] == key) {
                 lastIdentitySlot = i;
                 return i;
             }
@@ -115,8 +115,8 @@ final class LFUCache<K, V> {
         int leastFrequency = Integer.MAX_VALUE;
         long leastRecent = Long.MAX_VALUE;
         int selected = -1;
-        for (int i = 0; i < states.length; i++) {
-            if ((states[i] & OCCUPIED) == 0) {
+        for (int i = 0; i < keys.length; i++) {
+            if (keys[i] == EMPTY) {
                 empty = i;
                 break;
             }
@@ -145,7 +145,7 @@ final class LFUCache<K, V> {
         if (clock == Long.MAX_VALUE) {
             long minimum = Long.MAX_VALUE;
             for (int i = 0; i < accessStamps.length; i++) {
-                if ((states[i] & OCCUPIED) != 0 && accessStamps[i] < minimum) {
+                if (keys[i] != EMPTY && accessStamps[i] < minimum) {
                     minimum = accessStamps[i];
                 }
             }
@@ -161,8 +161,8 @@ final class LFUCache<K, V> {
                 // Allocation must finish before any live timestamp is changed.
                 long[] sorted = new long[size];
                 int count = 0;
-                for (int i = 0; i < states.length; i++) {
-                    if ((states[i] & OCCUPIED) != 0) {
+                for (int i = 0; i < keys.length; i++) {
+                    if (keys[i] != EMPTY) {
                         sorted[count++] = accessStamps[i];
                     }
                 }
@@ -173,8 +173,8 @@ final class LFUCache<K, V> {
                         sorted[distinct++] = sorted[i];
                     }
                 }
-                for (int i = 0; i < states.length; i++) {
-                    if ((states[i] & OCCUPIED) != 0) {
+                for (int i = 0; i < keys.length; i++) {
+                    if (keys[i] != EMPTY) {
                         int rank = Arrays.binarySearch(sorted, 0, distinct, accessStamps[i]);
                         // No negative rank is possible for a complete owner
                         // snapshot. Preserve equal stamps as equal ranks.
@@ -184,7 +184,7 @@ final class LFUCache<K, V> {
                 clock = distinct;
             } else {
                 for (int i = 0; i < accessStamps.length; i++) {
-                    if ((states[i] & OCCUPIED) != 0) {
+                    if (keys[i] != EMPTY) {
                         accessStamps[i] -= minimum;
                     }
                 }
@@ -196,10 +196,9 @@ final class LFUCache<K, V> {
 
     private void clearSlot(int slot) {
         lastIdentitySlot = -1;
-        keys[slot] = null;
+        keys[slot] = EMPTY;
         values[slot] = null;
         frequencies[slot] = 0;
         accessStamps[slot] = 0L;
-        states[slot] = 0;
     }
 }
