@@ -62,7 +62,8 @@ and read the manifest plus `synexia.records.tsv`, `synexia.precompute.tsv` and
 unreadable or malformed required files normally fail with checked `IOException`.
 The base manifest must have the exact header, contiguous shard IDs starting at
 zero, positive record counts, non-inverted bounds and strictly disjoint/increasing
-Java UTF-16 lexeme ranges. Shard file names must be simple children, without slash,
+Java UTF-16 lexeme ranges. Its cells use the exporter's csv quoting, as the other sidecars
+do: a shard bound that holds `"` is written as a quoted cell. Shard file names must be simple children, without slash,
 backslash, `.` or `..`. This lexical path check is not symlink containment or an
 OS security sandbox. [Source][CAT-admission].
 
@@ -87,7 +88,9 @@ That descriptor fingerprint does not hash every payload. [Source][CAT-sidecars].
 The image checks rely on [SharedLexiconImage][IMAGE], which also verifies image
 shape, internal checksum, ordering and v2 record hashes. The catalog explicitly
 requires v2 although the image class itself also reads v1 and its `create` method
-emits v1. Do not use `SharedLexiconImage.create` alone as a catalog-export writer.
+emits v1. Do not use `SharedLexiconImage.create` alone as a catalog-export writer;
+the Java export writer is `LexiconTool build --frequency`, described in
+[Java export writer](#java-export-writer-frequency-ranked-lexicons).
 The Java catalog does not recompute every exported code-point, surrogate,
 whitespace or encoding fact; those are retained data with the exporter/verifier
 boundary still outstanding. [Source][CAT-admission], [image contract](m3-packages.md#sharedlexiconimage-file-and-lifetime-contract).
@@ -159,6 +162,49 @@ check used by `SharedLexiconImage.copyRecord`. Therefore “read-only mapping”
 publication must keep admitted files stable. Opening and lazy sidecar validation
 also materialize record Strings internally; `textAt` is the explicit public text
 projection, not the only allocation of text anywhere in the implementation.
+
+## Java export writer: frequency-ranked lexicons
+
+`LexiconTool build --frequency SOURCE_ID LANGUAGE_TAG INPUT DIRECTORY` writes a complete
+catalog export from Java (package-private `SharedLexiconExport` in
+`src/java.base/share/classes/jdk/m3/text`). For the same source manifest and records,
+every file is byte-identical to the output of `m3/runtime-integration/export-m3-lexicon.py`:
+the v2 shards (`SharedLexiconImage.encodeCatalogShard`, the exporter's `image_bytes`), `m3.shards.tsv`,
+`m3.records.tsv`, `m3.precompute.tsv`, `m3.precompute-index.tsv` and `m3.export.json`.
+Java writes `m3.export.json` with LF line ends. The Python exporter writes it in text mode,
+so on Windows its copy has CRLF line ends and is otherwise identical.
+`SharedLexiconImage.create` and `LexiconTool build INPUT OUTPUT` still write a single v1
+image for their existing callers.
+
+The input is UTF-8 `WORD TAB COUNT` lines with LF line ends. The tool refuses:
+
+- an empty input or a blank line;
+- a CR anywhere in a line;
+- a missing, leading or second tab;
+- a count that is not a canonical decimal `long` of zero or more (no sign, no leading zero);
+- a duplicate word;
+- input that is not valid UTF-8.
+
+The output directory must be absent or empty. All bytes are built in memory before the
+first write, and `m3.shards.tsv`, the file the catalog opens first, is written last.
+
+| Export field | Value |
+| --- | --- |
+| `record_id`, `mapping_id` | Frequency rank: count descending, ties in UTF-16 order (the image order); the most frequent word is `0` |
+| `source_id`, `language_tag` | The arguments; each must match `[A-Za-z0-9][A-Za-z0-9._+-]*` |
+| `source_path`, manifest `m3_path`, `source.repository` | The input file name, without its directory |
+| `source.commit` | `sha256:` plus the SHA-256 of the input bytes |
+| `source_kind` / `mapping_name` / `translation_profile` | `frequency` / `frequency_rank` / `-` |
+| `precompute_profile`, manifest `precompute_target` | `M3StringFacts` |
+| `precompute_payload` | `{"corpus_count":COUNT,"frequency_rank":RANK}`; both are existing typed payload fields |
+| Manifest row | `record_id_field=frequency_rank`, `mapping_fields=lexeme,frequency_rank`, `precompute_fields=-`, fixed license and policy text |
+
+Each word's fixed facts in `m3.precompute.tsv` follow the exporter's `facts_for`.
+`contains_whitespace` is Python `str.isspace`: category Zs, or bidi class WS, B or S.
+This differs from `Character.isWhitespace` at U+0085, U+00A0, U+2007 and U+202F.
+The image row is a physical coordinate, so `findMapping(sourceId, rank)` is the lookup by
+word id. A Python run of the exporter on the same input needs the manifest and records
+files that this table describes. No relation sidecar and no payload field map are written.
 
 ## Five-family file sidecars
 

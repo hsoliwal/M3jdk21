@@ -14,7 +14,8 @@ import java.nio.file.Path;
 
 /** Command-line contract of the lexicon image tool: usage refusals, build and map modes. */
 public final class LexiconToolContractTest {
-    private static final String USAGE = "build INPUT OUTPUT | map IMAGE HOLD_MILLIS";
+    private static final String USAGE = "build INPUT OUTPUT | build --frequency SOURCE_ID"
+            + " LANGUAGE_TAG INPUT DIRECTORY | map IMAGE HOLD_MILLIS";
     private static int checks;
 
     private LexiconToolContractTest() { }
@@ -70,6 +71,10 @@ public final class LexiconToolContractTest {
                 () -> LexiconTool.main(new String[] {"verify", "in", "out"}));
         refused(IllegalArgumentException.class, USAGE,
                 () -> LexiconTool.main(new String[] {"build", "in", "out", "extra"}));
+        refused(IllegalArgumentException.class, USAGE, () -> LexiconTool.main(
+                new String[] {"build", "--frequency", "source", "und", "in", "out", "extra"}));
+        refused(IllegalArgumentException.class, USAGE, () -> LexiconTool.main(
+                new String[] {"build", "--other", "source", "und", "in", "out"}));
         Path dir = Files.createTempDirectory("m3-lexicon-tool-");
         Path image = dir.resolve("english-demo.m3lex");
         try {
@@ -77,11 +82,7 @@ public final class LexiconToolContractTest {
                     new String[] {"build", dir.resolve("absent.txt").toString(), image.toString()}));
             check(Files.notExists(image), "failed build publishes nothing");
             LexiconTool.main(new String[] {"build", "lexicon/english-demo.txt", image.toString()});
-            SharedLexiconImage opened = SharedLexiconImage.open(image);
-            String expected = "pid=" + ProcessHandle.current().pid() + " image=" + opened.imageIdentity()
-                    + " records=" + opened.size() + " bytes=" + opened.mappedBytes();
-            check(opened.size() > 0, "built image has records");
-            check(expected.equals(mapOutput(image)), "map mode reports pid, identity, records and bytes");
+            mapMode(image);
             refused(NoSuchFileException.class, null,
                     () -> LexiconTool.main(new String[] {"map", dir.resolve("absent.m3lex").toString(), "0"}));
         } finally {
@@ -89,5 +90,16 @@ public final class LexiconToolContractTest {
             delete(dir);
         }
         System.out.println("M3_LEXICON_TOOL_CONTRACT_PASS checks=" + checks);
+    }
+
+    /** Keeps the mapped image local, so delete's GC retry can unmap it on Windows. */
+    private static void mapMode(Path image) throws Exception {
+        SharedLexiconImage opened = SharedLexiconImage.open(image);
+        String expected = "pid=" + ProcessHandle.current().pid()
+                + " image=" + opened.imageIdentity()
+                + " records=" + opened.size() + " bytes=" + opened.mappedBytes();
+        check(opened.size() > 0, "built image has records");
+        check(expected.equals(mapOutput(image)),
+                "map mode reports pid, identity, records and bytes");
     }
 }
