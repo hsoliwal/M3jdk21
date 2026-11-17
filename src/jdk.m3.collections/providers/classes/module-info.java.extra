@@ -762,3 +762,18 @@ exports jdk.m3.collections.bifurcan;
 exports jdk.m3.collections.bifurcan.hash;
 exports jdk.m3.collections.bifurcan.nodes;
 exports jdk.m3.collections.bifurcan.utils;
+
+// Vavr, development state 2.0.0-SNAPSHOT (legal/vavr.md): the four packages its own descriptor exports
+exports jdk.m3.collections.vavr;
+exports jdk.m3.collections.vavr.collection;
+exports jdk.m3.collections.vavr.concurrent;
+exports jdk.m3.collections.vavr.control;
+
+// HPPC 0.13.0 (legal/hppc.md): the seven packages its own descriptor exports
+exports jdk.m3.collections.hppc;
+exports jdk.m3.collections.hppc.comparators;
+exports jdk.m3.collections.hppc.cursors;
+exports jdk.m3.collections.hppc.internals;
+exports jdk.m3.collections.hppc.predicates;
+exports jdk.m3.collections.hppc.procedures;
+exports jdk.m3.collections.hppc.sorting;

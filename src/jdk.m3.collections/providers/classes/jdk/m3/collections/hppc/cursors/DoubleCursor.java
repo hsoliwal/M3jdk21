@@ -1,0 +1,20 @@
+package jdk.m3.collections.hppc.cursors;
+
+/** A cursor over a collection of <code>doubles</code>. */
+@SuppressWarnings("missing-explicit-ctor")
+@jdk.m3.collections.hppc.Generated(date = "2026-11-04T09:22:42+0100", value = "KTypeCursor.java")
+public final class DoubleCursor {
+  /**
+   * The current value's index in the container this cursor belongs to. The meaning of this index is
+   * defined by the container (usually it will be an index in the underlying storage buffer).
+   */
+  public int index;
+
+  /** The current value. */
+  public double value;
+
+  @Override
+  public String toString() {
+    return "[cursor, index: " + index + ", value: " + value + "]";
+  }
+}
