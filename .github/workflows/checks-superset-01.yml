@@ -8,7 +8,7 @@ on:
   push:
     branches: ["aix/jdk22-27-backports-20261002", "m3/db-parse-20261004", "m3/indexdb-build-state-20261020", "m3/java21-convergence-ci-proof-20261002", "m3/jep423-materialize-current-*", "m3/m3-apache-import-*", "m3/native-five-family-no-vendor-runtime-20261027", "m3/release-jep-authority-repair-*", "m3/string-replacement-guard-20261012", "release/**"]
   pull_request:
-    paths: [".github/workflows/m3-applied-lexicon-contracts.yml", ".github/workflows/m3-array-substrate.yml", ".github/workflows/m3-ci-probe.yml", ".github/workflows/m3-core-contract-matrix.yml", ".github/workflows/m3-core-current-baseline.yml", ".github/workflows/m3-db-parse.yml", ".github/workflows/m3-eclipse-core-optional-jmod.yml", ".github/workflows/m3-eclipse-framework-forward-20261017.yml", ".github/workflows/m3-file-content-delta.yml", ".github/workflows/m3-file-shadow-stream-20261020.yml", ".github/workflows/m3-first-release-admission.yml", ".github/workflows/m3-foundation.yml", ".github/workflows/m3-full-delivery-a3.yml", ".github/workflows/m3-import.yml", ".github/workflows/m3-indexdb-build-state-20261020.yml", ".github/workflows/m3-jep423-current-materialize.yml", ".github/workflows/m3-jni-common.yml", ".github/workflows/m3-joined-range-directory.yml", ".github/workflows/m3-lane28.yml", ".github/workflows/m3-long-direct-address-kernel.yml", ".github/workflows/m3-mop-memory-20261020.yml", ".github/workflows/m3-owned-apache-multivalue.yml", ".github/workflows/m3-owned-guava-minmax-priority-queue.yml", ".github/workflows/m3-parallel-bitcount.yml", ".github/workflows/m3-parallel-bulk-provider.yml", ".github/workflows/m3-release-jep-authority-repair.yml", ".github/workflows/m3-release.yml", ".github/workflows/m3-sdk-family-names-20261017.yml", ".github/workflows/m3-secondary-recipe-caller-20261021.yml", ".github/workflows/m3-string-replacement-guard-proof.yml", ".github/workflows/m3-tq.yml", ".github/workflows/m3jdk-all-files-m3scale-20261018.yml", ".github/workflows/m3jdk-standard.yml", ".github/workflows/m3jdk21-backports.yml", ".github/workflows/m3jdk21-verbatim.yml", ".github/workflows/m3sdk-jmod-receiver.yml", ".github/workflows/mindex-string-backing.yml", ".github/workflows/native-five-family-contract.yml", ".m3/openrewrite-recipes/**", ".m3/recipe-source-custody-20261018/**", "M3-SYNEXIA-AUTHORS.md", "M3-SYNEXIA-NOTICE.md", "M3-SYNEXIA-RIGHTS.md", "doc/mindex-string-backing.md", "m3/**", "make/**", "src/**", "test/**", "tools/m3scale/**"]
+    paths: [".github/workflows/m3-applied-lexicon-contracts.yml", ".github/workflows/m3-array-substrate.yml", ".github/workflows/m3-ci-probe.yml", ".github/workflows/m3-core-contract-matrix.yml", ".github/workflows/m3-core-current-baseline.yml", ".github/workflows/m3-db-parse.yml", ".github/workflows/m3-eclipse-core-optional-jmod.yml", ".github/workflows/m3-eclipse-framework-forward-20261017.yml", ".github/workflows/m3-file-content-delta.yml", ".github/workflows/m3-file-shadow-stream-20261020.yml", ".github/workflows/m3-first-release-admission.yml", ".github/workflows/m3-foundation.yml", ".github/workflows/m3-full-delivery-a3.yml", ".github/workflows/m3-import.yml", ".github/workflows/m3-indexdb-build-state-20261020.yml", ".github/workflows/m3-jep423-current-materialize.yml", ".github/workflows/m3-jni-common.yml", ".github/workflows/m3-joined-range-directory.yml", ".github/workflows/m3-lane28.yml", ".github/workflows/m3-long-direct-address-kernel.yml", ".github/workflows/m3-mop-memory-20261020.yml", ".github/workflows/m3-owned-apache-multivalue.yml", ".github/workflows/m3-owned-guava-minmax-priority-queue.yml", ".github/workflows/m3-parallel-bitcount.yml", ".github/workflows/m3-parallel-bulk-provider.yml", ".github/workflows/m3-release-jep-authority-repair.yml", ".github/workflows/m3-release.yml", ".github/workflows/m3-sdk-family-names-20261017.yml", ".github/workflows/m3-secondary-recipe-caller-20261021.yml", ".github/workflows/m3-string-replacement-guard-proof.yml", ".github/workflows/m3-tq.yml", ".github/workflows/m3jdk-all-files-m3scale-20261018.yml", ".github/workflows/m3jdk-regex-spec.yml", ".github/workflows/m3jdk-standard.yml", ".github/workflows/m3jdk21-backports.yml", ".github/workflows/m3jdk21-verbatim.yml", ".github/workflows/m3sdk-jmod-receiver.yml", ".github/workflows/mindex-string-backing.yml", ".github/workflows/native-five-family-contract.yml", ".m3/openrewrite-recipes/**", ".m3/recipe-source-custody-20261018/**", "M3-SYNEXIA-AUTHORS.md", "M3-SYNEXIA-NOTICE.md", "M3-SYNEXIA-RIGHTS.md", "doc/mindex-string-backing.md", "m3/**", "make/**", "src/**", "test/**", "tools/m3scale/**"]
   workflow_dispatch:
     inputs:
       select:
@@ -4941,3 +4941,46 @@ jobs:
           path: |
             ${{ runner.temp }}/jdeps.txt
             m3/collections/target/surefire-reports/
+
+  m3jdk-regex-spec__regex-spec:
+    name: "M3JDK regex spec / regex-spec"
+    needs: ["gate"]
+    if: "${{ fromJSON(needs.gate.outputs.run || '{}')['m3jdk-regex-spec'] }}"
+    permissions:
+      contents: read
+    concurrency:
+      group: "M3JDK regex spec-${{ github.ref }}"
+      cancel-in-progress: true
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+          fetch-depth: 2
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /make/jdk/src/classes/build/tools/canongate/**
+            /make/scripts/canon-gate.sh
+            /make/data/m3regex/**
+            /src/**/*.java
+            /make/m3/**/*.java
+      - uses: actions/setup-java@cf277c60eb25467037889841efdb72551f06f6c3
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Every regex call site a change adds has a spec row and a listed site (owner decision 46)
+        run: |
+          set -eu
+          # A pull request is checked out as its merge commit: the first parent is the base branch.
+          base=$(git rev-parse HEAD^1)
+          out="$RUNNER_TEMP/regex-spec"
+          status=0
+          bash make/scripts/canon-gate.sh regex_spec . "$base" "$out" || status=$?
+          {
+            echo "### Regex spec gate against $base: exit $status"
+            echo '```'
+            cat "$out/REGEX_SPEC_GATE.tsv" 2>/dev/null || echo 'no evidence table'
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+          exit "$status"

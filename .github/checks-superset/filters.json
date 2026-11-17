@@ -37,7 +37,8 @@
    "mindex-string-backing",
    "m3-eclipse-framework-forward-20261017",
    "m3jdk-all-files-m3scale-20261018",
-   "native-five-family-contract"
+   "native-five-family-contract",
+   "m3jdk-regex-spec"
   ],
   "02": [
    "m3-intake-policy",
@@ -11584,6 +11585,29 @@
      "m3/tooling/atom-census/**",
      ".github/workflows/m3jdk21-jni-export-join-20261101.yml"
     ]
+   }
+  },
+  "m3jdk-regex-spec": {
+   "file": "m3jdk-regex-spec.yml",
+   "name": "M3JDK regex spec",
+   "profile": "broad",
+   "shard": "01",
+   "key": "m3jdk-regex-spec",
+   "pull_request": {
+    "branches": [
+     "master"
+    ],
+    "paths": [
+     "src/**/*.java",
+     "make/m3/**/*.java",
+     "make/data/m3regex/**",
+     "make/jdk/src/classes/build/tools/canongate/**",
+     "make/scripts/canon-gate.sh",
+     ".github/workflows/m3jdk-regex-spec.yml"
+    ]
+   },
+   "workflow_dispatch": {
+    "inputs": []
    }
   }
  }
