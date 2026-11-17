@@ -129,11 +129,11 @@ final class LegacyCompositeFastList<E>
     }
 
     @Override
-    public <IV> IV injectInto(
-            IV injectedValue, Function2<? super IV, ? super E, ? extends IV> function)
+    public <V> V injectInto(
+            V injectedValue, Function2<? super V, ? super E, ? extends V> function)
     {
         return this.lists.injectInto(injectedValue,
-                (Function2<IV, FastList<E>, IV>)
+                (Function2<V, FastList<E>, V>)
                 (inject, list) -> list.injectInto(inject, function));
     }
 
@@ -185,7 +185,7 @@ final class LegacyCompositeFastList<E>
     public void reverseForEachWithIndex(ObjectIntProcedure<? super E> procedure)
     {
         this.lists.reverseForEach(
-                new ProcedureToReverseInnerListObjectIntProcedure<>(procedure, this.size - 1));
+                new ReverseInnerListProcedure<>(procedure, this.size - 1));
     }
 
     @Override
@@ -742,7 +742,7 @@ final class LegacyCompositeFastList<E>
         }
     }
 
-    private static final class ProcedureToReverseInnerListObjectIntProcedure<E>
+    private static final class ReverseInnerListProcedure<E>
             implements Procedure<FastList<E>>
     {
         private static final long serialVersionUID = 1L;
@@ -750,7 +750,7 @@ final class LegacyCompositeFastList<E>
         private int index;
         private final ObjectIntProcedure<? super E> objectIntProcedure;
 
-        private ProcedureToReverseInnerListObjectIntProcedure(
+        private ReverseInnerListProcedure(
                 ObjectIntProcedure<? super E> objectIntProcedure, int size)
         {
             this.objectIntProcedure = objectIntProcedure;

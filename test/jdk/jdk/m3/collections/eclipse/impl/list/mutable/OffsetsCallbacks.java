@@ -147,8 +147,16 @@ final class OffsetsCallbacks {
         }
     }
 
+    /**
+     * Implicit VM exceptions lose their message once C2 compiles the throwing site (fast throw), so
+     * whether a side has a message depends on JIT timing; for them only the class is compared.
+     */
     static String fault(RuntimeException failure) {
-        return "!" + failure.getClass().getName() + ":" + normalize(failure.getMessage());
+        boolean implicit = failure instanceof ArrayIndexOutOfBoundsException
+                || failure instanceof NullPointerException || failure instanceof ClassCastException
+                || failure instanceof ArithmeticException;
+        return "!" + failure.getClass().getName() + ":"
+                + (implicit ? "" : normalize(failure.getMessage()));
     }
 
     /** The reference copy differs only in its class name; messages built from it agree. */
