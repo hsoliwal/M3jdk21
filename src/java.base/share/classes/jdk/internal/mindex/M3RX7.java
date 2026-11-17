@@ -112,6 +112,38 @@ public final class M3RX7 {
         return matchesCandidate((CharSequence) input);
     }
 
+    /** All-entry-state effect of an entire ASCII sequence; see the range overload. */
+    public Transfer transferAscii(CharSequence input) {
+        Objects.requireNonNull(input, "input");
+        return transferAscii(input, 0, input.length());
+    }
+
+    /**
+     * Prepare an immutable all-entry-state effect for an ASCII UTF-16 range under
+     * this exact DFA owner. This is the same effect algebra used by TokenIndex,
+     * applied directly to canonical String ranges without a vocabulary or copied
+     * spelling. Each selected source unit is read once; no source is retained.
+     *
+     * <p>Null refuses non-ASCII input, the existing text/work budgets, or unavailable
+     * optional allocation. Malformed ranges throw. The source must remain stable
+     * during this call; subsequent mutation cannot alter the returned effect.
+     * Its length counts UTF-16 units, so composition with a token-count transfer
+     * is refused. Recognition remains a candidate under this supplied DFA, not
+     * an independent authority for arbitrary JDK Pattern semantics.</p>
+     */
+    public Transfer transferAscii(CharSequence input, int offset, int length) {
+        Objects.requireNonNull(input, "input");
+        Objects.checkFromIndexSize(offset, length, input.length());
+        if (length > MAX_TEXT_UNITS) return null;
+        try {
+            short[] effect = M3RX7Transitions.ascii(next, accepting.length,
+                    input, offset, length);
+            return effect == null ? null : new Transfer(accepting, start, effect, length, true);
+        } catch (OutOfMemoryError unavailable) {
+            return null;
+        }
+    }
+
     /**
      * Consume a range of each disjoint chunk without joining or copying chunks.
      * Offset/length arrays describe the selected UTF-16 slices; matching never
@@ -585,21 +617,31 @@ public final class M3RX7 {
      * Immutable all-entry-state effect, tied to one exact RX7 owner's acceptance
      * snapshot. The private snapshot is unique to each fromAsciiDfa result, so it
      * supplies owner identity without retaining that owner's original DFA table.
-     * Composition and repetition operate on state rows, never on expanded tokens.
+     * Composition and repetition operate on state rows, never on expanded tokens
+     * or text. ASCII transfers count UTF-16 units; token transfers count token IDs.
+     * Transfers from different length domains cannot be composed.
      */
     public static final class Transfer {
         private final byte[] accepting;
         private final int start;
         private final short[] rows;
         private final long length;
+        private final boolean asciiUnits;
 
         private Transfer(byte[] accepting, int start, short[] rows, long length) {
+            this(accepting, start, rows, length, false);
+        }
+
+        private Transfer(byte[] accepting, int start, short[] rows, long length,
+                boolean asciiUnits) {
             this.accepting = accepting;
             this.start = start;
             this.rows = rows;
             this.length = length;
+            this.asciiUnits = asciiUnits;
         }
 
+        /** Number of UTF-16 units for ASCII effects, or token IDs for token effects. */
         public long length() { return length; }
         /** Array payload bytes for effect rows and shared immutable acceptance flags. */
         public long retainedPrimitiveBytes() {
@@ -620,16 +662,20 @@ public final class M3RX7 {
             if (right.accepting != accepting || right.start != start) {
                 throw new IllegalArgumentException("different RX7 owners");
             }
+            if (right.asciiUnits != asciiUnits) {
+                throw new IllegalArgumentException("different RX7 transfer length domains");
+            }
             long total = Math.addExact(length, right.length);
             return new Transfer(accepting, start,
-                    M3RX7Transitions.compose(rows, right.rows), total);
+                    M3RX7Transitions.compose(rows, right.rows), total, asciiUnits);
         }
 
         /** Nonnegative repetition, including the exact empty-sequence identity at zero. */
         public Transfer repeated(long count) {
             if (count < 0) throw new IllegalArgumentException("negative repeat count");
             long total = Math.multiplyExact(length, count);
-            return new Transfer(accepting, start, M3RX7Transitions.repeat(rows, count), total);
+            return new Transfer(accepting, start,
+                    M3RX7Transitions.repeat(rows, count), total, asciiUnits);
         }
     }
 
@@ -693,6 +739,17 @@ public final class M3RX7 {
 
         public int tokenSequenceLength() { return sequence.length; }
         public int vocabularySize() { return index.tokenCount(); }
+
+        /**
+         * Collapse this source-specific plan into an immutable all-entry-state
+         * token effect. The returned value retains neither the token sequence nor
+         * its transition index; it can be reused after this plan is discarded.
+         * Null reports the existing transfer work/allocation budget refusal.
+         */
+        public Transfer transfer() {
+            return index.transfer(sequence);
+        }
+
         public long retainedPrimitiveBytes() {
             return index.retainedPrimitiveBytes() + (long) sequence.length * Integer.BYTES;
         }
