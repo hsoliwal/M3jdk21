@@ -1,0 +1,890 @@
+method_texts_verbatim_in_head	3
+lint	javac -Xlint:all,-this-escape -Werror: no warnings
+== SearchFamilyProof flat -XX:+CompactStrings
+containsAny(char...)	355756	0	-
+containsAny(CharSequence)	341713	0	-
+containsAny(CharSequence...)	1516644	0	-
+containsAnyIgnoreCase(CharSequence...)	1516644	0	-
+containsIgnoreCase	341713	0	-
+containsNone(char...)	355756	0	-
+containsNone(String)	341713	0	-
+containsOnly(char...)	355756	0	-
+containsOnly(String)	341713	0	-
+containsWhitespace	4681	0	-
+indexOfAny(char...)	355756	0	-
+indexOfAny(String)	341713	0	-
+indexOfAny(CharSequence...)	1516644	0	-
+indexOfAnyBut(char...)	355756	0	-
+indexOfAnyBut(CharSequence)	341713	0	-
+lastIndexOfAny(CharSequence...)	1516644	0	-
+indexOfIgnoreCase	341713	0	-
+indexOfIgnoreCase(from)	2733704	0	-
+lastIndexOfIgnoreCase	341713	0	-
+lastIndexOfIgnoreCase(from)	2733704	0	-
+ordinalIndexOf	1366852	0	-
+lastOrdinalIndexOf	1366852	0	-
+startsWithAny	1516644	0	-
+endsWithAny	1516644	0	-
+startsWithIgnoreCase	341713	0	-
+endsWithIgnoreCase	341713	0	-
+containsAllWords	191921	0	-
+discriminator:null char array throws	1	HOLDS
+discriminator:null search throws	1	HOLDS
+discriminator:null element skipped	1	HOLDS
+discriminator:char set vs substring overloads	1	HOLDS
+RESULT	PASS	failures=0
+== EdgeFamilyProof flat -XX:+CompactStrings
+chomp	135753	0	-
+chop	135753	0	-
+deleteWhitespace	135753	0	-
+normalizeSpace	135753	0	-
+stripAccents	201289	0	-
+strip("")	4681	0	-
+stripStart("")	4681	0	-
+stripEnd("")	4681	0	-
+strip(" ")	4681	0	-
+stripStart(" ")	4681	0	-
+stripEnd(" ")	4681	0	-
+strip("a")	4681	0	-
+stripStart("a")	4681	0	-
+stripEnd("a")	4681	0	-
+strip(" a")	4681	0	-
+stripStart(" a")	4681	0	-
+stripEnd(" a")	4681	0	-
+strip("\u000D\u000A")	4681	0	-
+stripStart("\u000D\u000A")	4681	0	-
+stripEnd("\u000D\u000A")	4681	0	-
+strip("\u00A0\u0009")	4681	0	-
+stripStart("\u00A0\u0009")	4681	0	-
+stripEnd("\u00A0\u0009")	4681	0	-
+isNotBlank	135753	0	-
+isNotEmpty	4681	0	-
+stripToEmpty	135754	0	-
+stripToNull	135754	0	-
+trimToEmpty	135754	0	-
+trimToNull	135754	0	-
+defaultString	135754	0	-
+isNullOrEmpty	135754	0	-
+isAnyBlank	401	0	-
+isAllBlank	401	0	-
+isNoneBlank	401	0	-
+isAnyEmpty	401	0	-
+isAllEmpty	401	0	-
+isNoneEmpty	401	0	-
+firstNonBlank	401	0	-
+firstNonEmpty	401	0	-
+stripAll	401	0	-
+stripAll(null)	401	0	-
+stripAll("")	401	0	-
+stripAll(" a")	401	0	-
+stripAll("\u0009")	401	0	-
+stripAll empty array identity	1	0	-
+defaultIfBlank/defaultIfEmpty/defaultString/getIfBlank/getIfEmpty	294	0	-
+RESULT	PASS	failures=0
+== SpeedProof flat -XX:+CompactStrings
+ignoreCase prefilter, all BMP unit pairs	4294967296	0	-
+stripAccents Latin-1 pairs+triples	978209	0	-
+normalizeSpace wide whitespace	66430	0	-
+normalizeSpace same-instance	311	donor-unchanged	311
+RESULT	PASS	failures=0
+== M3SeamProof flat -XX:+CompactStrings
+indexOfAny[0023]	2320	0	-
+indexOfAnyBut[0023]	2320	0	-
+containsOnly[0023]	2320	0	-
+containsNone[0023]	2320	0	-
+indexOfAny[007A, 0051]	2320	0	-
+indexOfAnyBut[007A, 0051]	2320	0	-
+containsOnly[007A, 0051]	2320	0	-
+containsNone[007A, 0051]	2320	0	-
+indexOfAny[1D400]	2320	0	-
+indexOfAnyBut[1D400]	2320	0	-
+containsOnly[1D400]	2320	0	-
+containsNone[1D400]	2320	0	-
+indexOfAny[D835]	2320	0	-
+indexOfAnyBut[D835]	2320	0	-
+containsOnly[D835]	2320	0	-
+containsNone[D835]	2320	0	-
+indexOfAny[00E9, 0031]	2320	0	-
+indexOfAnyBut[00E9, 0031]	2320	0	-
+containsOnly[00E9, 0031]	2320	0	-
+containsNone[00E9, 0031]	2320	0	-
+indexOfAny[0078, 0079, 007A]	2320	0	-
+indexOfAnyBut[0078, 0079, 007A]	2320	0	-
+containsOnly[0078, 0079, 007A]	2320	0	-
+containsNone[0078, 0079, 007A]	2320	0	-
+indexOfAny[0078, 0020, 0079]	2320	0	-
+indexOfAnyBut[0078, 0020, 0079]	2320	0	-
+containsOnly[0078, 0020, 0079]	2320	0	-
+containsNone[0078, 0020, 0079]	2320	0	-
+indexOfAny[0078, 0436, 0079]	2320	0	-
+indexOfAnyBut[0078, 0436, 0079]	2320	0	-
+containsOnly[0078, 0436, 0079]	2320	0	-
+containsNone[0078, 0436, 0079]	2320	0	-
+indexOfIgnoreCase(zqx)	2320	0	-
+lastIndexOfIgnoreCase(zqx)	2320	0	-
+indexOfIgnoreCase(zqx, 600)	2320	0	-
+lastIndexOfIgnoreCase(zqx, 515)	2320	0	-
+indexOfIgnoreCase(ZQ)	2320	0	-
+lastIndexOfIgnoreCase(ZQ)	2320	0	-
+indexOfIgnoreCase(ZQ, 600)	2320	0	-
+lastIndexOfIgnoreCase(ZQ, 515)	2320	0	-
+indexOfIgnoreCase(k)	2320	0	-
+lastIndexOfIgnoreCase(k)	2320	0	-
+indexOfIgnoreCase(k, 600)	2320	0	-
+lastIndexOfIgnoreCase(k, 515)	2320	0	-
+indexOfIgnoreCase(st)	2320	0	-
+lastIndexOfIgnoreCase(st)	2320	0	-
+indexOfIgnoreCase(st, 600)	2320	0	-
+lastIndexOfIgnoreCase(st, 515)	2320	0	-
+indexOfIgnoreCase(?)	2320	0	-
+lastIndexOfIgnoreCase(?)	2320	0	-
+indexOfIgnoreCase(?, 600)	2320	0	-
+lastIndexOfIgnoreCase(?, 515)	2320	0	-
+indexOfIgnoreCase(x#)	2320	0	-
+lastIndexOfIgnoreCase(x#)	2320	0	-
+indexOfIgnoreCase(x#, 600)	2320	0	-
+lastIndexOfIgnoreCase(x#, 515)	2320	0	-
+indexOfIgnoreCase()	2320	0	-
+lastIndexOfIgnoreCase()	2320	0	-
+indexOfIgnoreCase(, 600)	2320	0	-
+lastIndexOfIgnoreCase(, 515)	2320	0	-
+containsWhitespace	2320	0	-
+normalizeSpace	2320	0	-
+stripAccents	2320	0	-
+RESULT	PASS	failures=0
+== SearchFamilyProof flat -XX:-CompactStrings
+containsAny(char...)	355756	0	-
+containsAny(CharSequence)	341713	0	-
+containsAny(CharSequence...)	1516644	0	-
+containsAnyIgnoreCase(CharSequence...)	1516644	0	-
+containsIgnoreCase	341713	0	-
+containsNone(char...)	355756	0	-
+containsNone(String)	341713	0	-
+containsOnly(char...)	355756	0	-
+containsOnly(String)	341713	0	-
+containsWhitespace	4681	0	-
+indexOfAny(char...)	355756	0	-
+indexOfAny(String)	341713	0	-
+indexOfAny(CharSequence...)	1516644	0	-
+indexOfAnyBut(char...)	355756	0	-
+indexOfAnyBut(CharSequence)	341713	0	-
+lastIndexOfAny(CharSequence...)	1516644	0	-
+indexOfIgnoreCase	341713	0	-
+indexOfIgnoreCase(from)	2733704	0	-
+lastIndexOfIgnoreCase	341713	0	-
+lastIndexOfIgnoreCase(from)	2733704	0	-
+ordinalIndexOf	1366852	0	-
+lastOrdinalIndexOf	1366852	0	-
+startsWithAny	1516644	0	-
+endsWithAny	1516644	0	-
+startsWithIgnoreCase	341713	0	-
+endsWithIgnoreCase	341713	0	-
+containsAllWords	191921	0	-
+discriminator:null char array throws	1	HOLDS
+discriminator:null search throws	1	HOLDS
+discriminator:null element skipped	1	HOLDS
+discriminator:char set vs substring overloads	1	HOLDS
+RESULT	PASS	failures=0
+== EdgeFamilyProof flat -XX:-CompactStrings
+chomp	135753	0	-
+chop	135753	0	-
+deleteWhitespace	135753	0	-
+normalizeSpace	135753	0	-
+stripAccents	201289	0	-
+strip("")	4681	0	-
+stripStart("")	4681	0	-
+stripEnd("")	4681	0	-
+strip(" ")	4681	0	-
+stripStart(" ")	4681	0	-
+stripEnd(" ")	4681	0	-
+strip("a")	4681	0	-
+stripStart("a")	4681	0	-
+stripEnd("a")	4681	0	-
+strip(" a")	4681	0	-
+stripStart(" a")	4681	0	-
+stripEnd(" a")	4681	0	-
+strip("\u000D\u000A")	4681	0	-
+stripStart("\u000D\u000A")	4681	0	-
+stripEnd("\u000D\u000A")	4681	0	-
+strip("\u00A0\u0009")	4681	0	-
+stripStart("\u00A0\u0009")	4681	0	-
+stripEnd("\u00A0\u0009")	4681	0	-
+isNotBlank	135753	0	-
+isNotEmpty	4681	0	-
+stripToEmpty	135754	0	-
+stripToNull	135754	0	-
+trimToEmpty	135754	0	-
+trimToNull	135754	0	-
+defaultString	135754	0	-
+isNullOrEmpty	135754	0	-
+isAnyBlank	401	0	-
+isAllBlank	401	0	-
+isNoneBlank	401	0	-
+isAnyEmpty	401	0	-
+isAllEmpty	401	0	-
+isNoneEmpty	401	0	-
+firstNonBlank	401	0	-
+firstNonEmpty	401	0	-
+stripAll	401	0	-
+stripAll(null)	401	0	-
+stripAll("")	401	0	-
+stripAll(" a")	401	0	-
+stripAll("\u0009")	401	0	-
+stripAll empty array identity	1	0	-
+defaultIfBlank/defaultIfEmpty/defaultString/getIfBlank/getIfEmpty	294	0	-
+RESULT	PASS	failures=0
+== SpeedProof flat -XX:-CompactStrings
+ignoreCase prefilter, all BMP unit pairs	4294967296	0	-
+stripAccents Latin-1 pairs+triples	978209	0	-
+normalizeSpace wide whitespace	66430	0	-
+normalizeSpace same-instance	311	donor-unchanged	311
+RESULT	PASS	failures=0
+== M3SeamProof flat -XX:-CompactStrings
+indexOfAny[0023]	2320	0	-
+indexOfAnyBut[0023]	2320	0	-
+containsOnly[0023]	2320	0	-
+containsNone[0023]	2320	0	-
+indexOfAny[007A, 0051]	2320	0	-
+indexOfAnyBut[007A, 0051]	2320	0	-
+containsOnly[007A, 0051]	2320	0	-
+containsNone[007A, 0051]	2320	0	-
+indexOfAny[1D400]	2320	0	-
+indexOfAnyBut[1D400]	2320	0	-
+containsOnly[1D400]	2320	0	-
+containsNone[1D400]	2320	0	-
+indexOfAny[D835]	2320	0	-
+indexOfAnyBut[D835]	2320	0	-
+containsOnly[D835]	2320	0	-
+containsNone[D835]	2320	0	-
+indexOfAny[00E9, 0031]	2320	0	-
+indexOfAnyBut[00E9, 0031]	2320	0	-
+containsOnly[00E9, 0031]	2320	0	-
+containsNone[00E9, 0031]	2320	0	-
+indexOfAny[0078, 0079, 007A]	2320	0	-
+indexOfAnyBut[0078, 0079, 007A]	2320	0	-
+containsOnly[0078, 0079, 007A]	2320	0	-
+containsNone[0078, 0079, 007A]	2320	0	-
+indexOfAny[0078, 0020, 0079]	2320	0	-
+indexOfAnyBut[0078, 0020, 0079]	2320	0	-
+containsOnly[0078, 0020, 0079]	2320	0	-
+containsNone[0078, 0020, 0079]	2320	0	-
+indexOfAny[0078, 0436, 0079]	2320	0	-
+indexOfAnyBut[0078, 0436, 0079]	2320	0	-
+containsOnly[0078, 0436, 0079]	2320	0	-
+containsNone[0078, 0436, 0079]	2320	0	-
+indexOfIgnoreCase(zqx)	2320	0	-
+lastIndexOfIgnoreCase(zqx)	2320	0	-
+indexOfIgnoreCase(zqx, 600)	2320	0	-
+lastIndexOfIgnoreCase(zqx, 515)	2320	0	-
+indexOfIgnoreCase(ZQ)	2320	0	-
+lastIndexOfIgnoreCase(ZQ)	2320	0	-
+indexOfIgnoreCase(ZQ, 600)	2320	0	-
+lastIndexOfIgnoreCase(ZQ, 515)	2320	0	-
+indexOfIgnoreCase(k)	2320	0	-
+lastIndexOfIgnoreCase(k)	2320	0	-
+indexOfIgnoreCase(k, 600)	2320	0	-
+lastIndexOfIgnoreCase(k, 515)	2320	0	-
+indexOfIgnoreCase(st)	2320	0	-
+lastIndexOfIgnoreCase(st)	2320	0	-
+indexOfIgnoreCase(st, 600)	2320	0	-
+lastIndexOfIgnoreCase(st, 515)	2320	0	-
+indexOfIgnoreCase(?)	2320	0	-
+lastIndexOfIgnoreCase(?)	2320	0	-
+indexOfIgnoreCase(?, 600)	2320	0	-
+lastIndexOfIgnoreCase(?, 515)	2320	0	-
+indexOfIgnoreCase(x#)	2320	0	-
+lastIndexOfIgnoreCase(x#)	2320	0	-
+indexOfIgnoreCase(x#, 600)	2320	0	-
+lastIndexOfIgnoreCase(x#, 515)	2320	0	-
+indexOfIgnoreCase()	2320	0	-
+lastIndexOfIgnoreCase()	2320	0	-
+indexOfIgnoreCase(, 600)	2320	0	-
+lastIndexOfIgnoreCase(, 515)	2320	0	-
+containsWhitespace	2320	0	-
+normalizeSpace	2320	0	-
+stripAccents	2320	0	-
+RESULT	PASS	failures=0
+== SearchFamilyProof m3-facts -XX:+CompactStrings
+containsAny(char...)	355756	0	-
+containsAny(CharSequence)	341713	0	-
+containsAny(CharSequence...)	1516644	0	-
+containsAnyIgnoreCase(CharSequence...)	1516644	0	-
+containsIgnoreCase	341713	0	-
+containsNone(char...)	355756	0	-
+containsNone(String)	341713	0	-
+containsOnly(char...)	355756	0	-
+containsOnly(String)	341713	0	-
+containsWhitespace	4681	0	-
+indexOfAny(char...)	355756	0	-
+indexOfAny(String)	341713	0	-
+indexOfAny(CharSequence...)	1516644	0	-
+indexOfAnyBut(char...)	355756	0	-
+indexOfAnyBut(CharSequence)	341713	0	-
+lastIndexOfAny(CharSequence...)	1516644	0	-
+indexOfIgnoreCase	341713	0	-
+indexOfIgnoreCase(from)	2733704	0	-
+lastIndexOfIgnoreCase	341713	0	-
+lastIndexOfIgnoreCase(from)	2733704	0	-
+ordinalIndexOf	1366852	0	-
+lastOrdinalIndexOf	1366852	0	-
+startsWithAny	1516644	0	-
+endsWithAny	1516644	0	-
+startsWithIgnoreCase	341713	0	-
+endsWithIgnoreCase	341713	0	-
+containsAllWords	191921	0	-
+discriminator:null char array throws	1	HOLDS
+discriminator:null search throws	1	HOLDS
+discriminator:null element skipped	1	HOLDS
+discriminator:char set vs substring overloads	1	HOLDS
+RESULT	PASS	failures=0
+== EdgeFamilyProof m3-facts -XX:+CompactStrings
+chomp	135753	0	-
+chop	135753	0	-
+deleteWhitespace	135753	0	-
+normalizeSpace	135753	0	-
+stripAccents	201289	0	-
+strip("")	4681	0	-
+stripStart("")	4681	0	-
+stripEnd("")	4681	0	-
+strip(" ")	4681	0	-
+stripStart(" ")	4681	0	-
+stripEnd(" ")	4681	0	-
+strip("a")	4681	0	-
+stripStart("a")	4681	0	-
+stripEnd("a")	4681	0	-
+strip(" a")	4681	0	-
+stripStart(" a")	4681	0	-
+stripEnd(" a")	4681	0	-
+strip("\u000D\u000A")	4681	0	-
+stripStart("\u000D\u000A")	4681	0	-
+stripEnd("\u000D\u000A")	4681	0	-
+strip("\u00A0\u0009")	4681	0	-
+stripStart("\u00A0\u0009")	4681	0	-
+stripEnd("\u00A0\u0009")	4681	0	-
+isNotBlank	135753	0	-
+isNotEmpty	4681	0	-
+stripToEmpty	135754	0	-
+stripToNull	135754	0	-
+trimToEmpty	135754	0	-
+trimToNull	135754	0	-
+defaultString	135754	0	-
+isNullOrEmpty	135754	0	-
+isAnyBlank	401	0	-
+isAllBlank	401	0	-
+isNoneBlank	401	0	-
+isAnyEmpty	401	0	-
+isAllEmpty	401	0	-
+isNoneEmpty	401	0	-
+firstNonBlank	401	0	-
+firstNonEmpty	401	0	-
+stripAll	401	0	-
+stripAll(null)	401	0	-
+stripAll("")	401	0	-
+stripAll(" a")	401	0	-
+stripAll("\u0009")	401	0	-
+stripAll empty array identity	1	0	-
+defaultIfBlank/defaultIfEmpty/defaultString/getIfBlank/getIfEmpty	294	0	-
+RESULT	PASS	failures=0
+== M3SeamProof m3-facts -XX:+CompactStrings
+indexOfAny[0023]	2320	0	-
+indexOfAnyBut[0023]	2320	0	-
+containsOnly[0023]	2320	0	-
+containsNone[0023]	2320	0	-
+indexOfAny[007A, 0051]	2320	0	-
+indexOfAnyBut[007A, 0051]	2320	0	-
+containsOnly[007A, 0051]	2320	0	-
+containsNone[007A, 0051]	2320	0	-
+indexOfAny[1D400]	2320	0	-
+indexOfAnyBut[1D400]	2320	0	-
+containsOnly[1D400]	2320	0	-
+containsNone[1D400]	2320	0	-
+indexOfAny[D835]	2320	0	-
+indexOfAnyBut[D835]	2320	0	-
+containsOnly[D835]	2320	0	-
+containsNone[D835]	2320	0	-
+indexOfAny[00E9, 0031]	2320	0	-
+indexOfAnyBut[00E9, 0031]	2320	0	-
+containsOnly[00E9, 0031]	2320	0	-
+containsNone[00E9, 0031]	2320	0	-
+indexOfAny[0078, 0079, 007A]	2320	0	-
+indexOfAnyBut[0078, 0079, 007A]	2320	0	-
+containsOnly[0078, 0079, 007A]	2320	0	-
+containsNone[0078, 0079, 007A]	2320	0	-
+indexOfAny[0078, 0020, 0079]	2320	0	-
+indexOfAnyBut[0078, 0020, 0079]	2320	0	-
+containsOnly[0078, 0020, 0079]	2320	0	-
+containsNone[0078, 0020, 0079]	2320	0	-
+indexOfAny[0078, 0436, 0079]	2320	0	-
+indexOfAnyBut[0078, 0436, 0079]	2320	0	-
+containsOnly[0078, 0436, 0079]	2320	0	-
+containsNone[0078, 0436, 0079]	2320	0	-
+indexOfIgnoreCase(zqx)	2320	0	-
+lastIndexOfIgnoreCase(zqx)	2320	0	-
+indexOfIgnoreCase(zqx, 600)	2320	0	-
+lastIndexOfIgnoreCase(zqx, 515)	2320	0	-
+indexOfIgnoreCase(ZQ)	2320	0	-
+lastIndexOfIgnoreCase(ZQ)	2320	0	-
+indexOfIgnoreCase(ZQ, 600)	2320	0	-
+lastIndexOfIgnoreCase(ZQ, 515)	2320	0	-
+indexOfIgnoreCase(k)	2320	0	-
+lastIndexOfIgnoreCase(k)	2320	0	-
+indexOfIgnoreCase(k, 600)	2320	0	-
+lastIndexOfIgnoreCase(k, 515)	2320	0	-
+indexOfIgnoreCase(st)	2320	0	-
+lastIndexOfIgnoreCase(st)	2320	0	-
+indexOfIgnoreCase(st, 600)	2320	0	-
+lastIndexOfIgnoreCase(st, 515)	2320	0	-
+indexOfIgnoreCase(?)	2320	0	-
+lastIndexOfIgnoreCase(?)	2320	0	-
+indexOfIgnoreCase(?, 600)	2320	0	-
+lastIndexOfIgnoreCase(?, 515)	2320	0	-
+indexOfIgnoreCase(x#)	2320	0	-
+lastIndexOfIgnoreCase(x#)	2320	0	-
+indexOfIgnoreCase(x#, 600)	2320	0	-
+lastIndexOfIgnoreCase(x#, 515)	2320	0	-
+indexOfIgnoreCase()	2320	0	-
+lastIndexOfIgnoreCase()	2320	0	-
+indexOfIgnoreCase(, 600)	2320	0	-
+lastIndexOfIgnoreCase(, 515)	2320	0	-
+containsWhitespace	2320	0	-
+normalizeSpace	2320	0	-
+stripAccents	2320	0	-
+RESULT	PASS	failures=0
+== SearchFamilyProof m3-facts -XX:-CompactStrings
+containsAny(char...)	355756	0	-
+containsAny(CharSequence)	341713	0	-
+containsAny(CharSequence...)	1516644	0	-
+containsAnyIgnoreCase(CharSequence...)	1516644	0	-
+containsIgnoreCase	341713	0	-
+containsNone(char...)	355756	0	-
+containsNone(String)	341713	0	-
+containsOnly(char...)	355756	0	-
+containsOnly(String)	341713	0	-
+containsWhitespace	4681	0	-
+indexOfAny(char...)	355756	0	-
+indexOfAny(String)	341713	0	-
+indexOfAny(CharSequence...)	1516644	0	-
+indexOfAnyBut(char...)	355756	0	-
+indexOfAnyBut(CharSequence)	341713	0	-
+lastIndexOfAny(CharSequence...)	1516644	0	-
+indexOfIgnoreCase	341713	0	-
+indexOfIgnoreCase(from)	2733704	0	-
+lastIndexOfIgnoreCase	341713	0	-
+lastIndexOfIgnoreCase(from)	2733704	0	-
+ordinalIndexOf	1366852	0	-
+lastOrdinalIndexOf	1366852	0	-
+startsWithAny	1516644	0	-
+endsWithAny	1516644	0	-
+startsWithIgnoreCase	341713	0	-
+endsWithIgnoreCase	341713	0	-
+containsAllWords	191921	0	-
+discriminator:null char array throws	1	HOLDS
+discriminator:null search throws	1	HOLDS
+discriminator:null element skipped	1	HOLDS
+discriminator:char set vs substring overloads	1	HOLDS
+RESULT	PASS	failures=0
+== EdgeFamilyProof m3-facts -XX:-CompactStrings
+chomp	135753	0	-
+chop	135753	0	-
+deleteWhitespace	135753	0	-
+normalizeSpace	135753	0	-
+stripAccents	201289	0	-
+strip("")	4681	0	-
+stripStart("")	4681	0	-
+stripEnd("")	4681	0	-
+strip(" ")	4681	0	-
+stripStart(" ")	4681	0	-
+stripEnd(" ")	4681	0	-
+strip("a")	4681	0	-
+stripStart("a")	4681	0	-
+stripEnd("a")	4681	0	-
+strip(" a")	4681	0	-
+stripStart(" a")	4681	0	-
+stripEnd(" a")	4681	0	-
+strip("\u000D\u000A")	4681	0	-
+stripStart("\u000D\u000A")	4681	0	-
+stripEnd("\u000D\u000A")	4681	0	-
+strip("\u00A0\u0009")	4681	0	-
+stripStart("\u00A0\u0009")	4681	0	-
+stripEnd("\u00A0\u0009")	4681	0	-
+isNotBlank	135753	0	-
+isNotEmpty	4681	0	-
+stripToEmpty	135754	0	-
+stripToNull	135754	0	-
+trimToEmpty	135754	0	-
+trimToNull	135754	0	-
+defaultString	135754	0	-
+isNullOrEmpty	135754	0	-
+isAnyBlank	401	0	-
+isAllBlank	401	0	-
+isNoneBlank	401	0	-
+isAnyEmpty	401	0	-
+isAllEmpty	401	0	-
+isNoneEmpty	401	0	-
+firstNonBlank	401	0	-
+firstNonEmpty	401	0	-
+stripAll	401	0	-
+stripAll(null)	401	0	-
+stripAll("")	401	0	-
+stripAll(" a")	401	0	-
+stripAll("\u0009")	401	0	-
+stripAll empty array identity	1	0	-
+defaultIfBlank/defaultIfEmpty/defaultString/getIfBlank/getIfEmpty	294	0	-
+RESULT	PASS	failures=0
+== M3SeamProof m3-facts -XX:-CompactStrings
+indexOfAny[0023]	2320	0	-
+indexOfAnyBut[0023]	2320	0	-
+containsOnly[0023]	2320	0	-
+containsNone[0023]	2320	0	-
+indexOfAny[007A, 0051]	2320	0	-
+indexOfAnyBut[007A, 0051]	2320	0	-
+containsOnly[007A, 0051]	2320	0	-
+containsNone[007A, 0051]	2320	0	-
+indexOfAny[1D400]	2320	0	-
+indexOfAnyBut[1D400]	2320	0	-
+containsOnly[1D400]	2320	0	-
+containsNone[1D400]	2320	0	-
+indexOfAny[D835]	2320	0	-
+indexOfAnyBut[D835]	2320	0	-
+containsOnly[D835]	2320	0	-
+containsNone[D835]	2320	0	-
+indexOfAny[00E9, 0031]	2320	0	-
+indexOfAnyBut[00E9, 0031]	2320	0	-
+containsOnly[00E9, 0031]	2320	0	-
+containsNone[00E9, 0031]	2320	0	-
+indexOfAny[0078, 0079, 007A]	2320	0	-
+indexOfAnyBut[0078, 0079, 007A]	2320	0	-
+containsOnly[0078, 0079, 007A]	2320	0	-
+containsNone[0078, 0079, 007A]	2320	0	-
+indexOfAny[0078, 0020, 0079]	2320	0	-
+indexOfAnyBut[0078, 0020, 0079]	2320	0	-
+containsOnly[0078, 0020, 0079]	2320	0	-
+containsNone[0078, 0020, 0079]	2320	0	-
+indexOfAny[0078, 0436, 0079]	2320	0	-
+indexOfAnyBut[0078, 0436, 0079]	2320	0	-
+containsOnly[0078, 0436, 0079]	2320	0	-
+containsNone[0078, 0436, 0079]	2320	0	-
+indexOfIgnoreCase(zqx)	2320	0	-
+lastIndexOfIgnoreCase(zqx)	2320	0	-
+indexOfIgnoreCase(zqx, 600)	2320	0	-
+lastIndexOfIgnoreCase(zqx, 515)	2320	0	-
+indexOfIgnoreCase(ZQ)	2320	0	-
+lastIndexOfIgnoreCase(ZQ)	2320	0	-
+indexOfIgnoreCase(ZQ, 600)	2320	0	-
+lastIndexOfIgnoreCase(ZQ, 515)	2320	0	-
+indexOfIgnoreCase(k)	2320	0	-
+lastIndexOfIgnoreCase(k)	2320	0	-
+indexOfIgnoreCase(k, 600)	2320	0	-
+lastIndexOfIgnoreCase(k, 515)	2320	0	-
+indexOfIgnoreCase(st)	2320	0	-
+lastIndexOfIgnoreCase(st)	2320	0	-
+indexOfIgnoreCase(st, 600)	2320	0	-
+lastIndexOfIgnoreCase(st, 515)	2320	0	-
+indexOfIgnoreCase(?)	2320	0	-
+lastIndexOfIgnoreCase(?)	2320	0	-
+indexOfIgnoreCase(?, 600)	2320	0	-
+lastIndexOfIgnoreCase(?, 515)	2320	0	-
+indexOfIgnoreCase(x#)	2320	0	-
+lastIndexOfIgnoreCase(x#)	2320	0	-
+indexOfIgnoreCase(x#, 600)	2320	0	-
+lastIndexOfIgnoreCase(x#, 515)	2320	0	-
+indexOfIgnoreCase()	2320	0	-
+lastIndexOfIgnoreCase()	2320	0	-
+indexOfIgnoreCase(, 600)	2320	0	-
+lastIndexOfIgnoreCase(, 515)	2320	0	-
+containsWhitespace	2320	0	-
+normalizeSpace	2320	0	-
+stripAccents	2320	0	-
+RESULT	PASS	failures=0
+== SearchFamilyProof m3-scan -XX:+CompactStrings
+containsAny(char...)	355756	0	-
+containsAny(CharSequence)	341713	0	-
+containsAny(CharSequence...)	1516644	0	-
+containsAnyIgnoreCase(CharSequence...)	1516644	0	-
+containsIgnoreCase	341713	0	-
+containsNone(char...)	355756	0	-
+containsNone(String)	341713	0	-
+containsOnly(char...)	355756	0	-
+containsOnly(String)	341713	0	-
+containsWhitespace	4681	0	-
+indexOfAny(char...)	355756	0	-
+indexOfAny(String)	341713	0	-
+indexOfAny(CharSequence...)	1516644	0	-
+indexOfAnyBut(char...)	355756	0	-
+indexOfAnyBut(CharSequence)	341713	0	-
+lastIndexOfAny(CharSequence...)	1516644	0	-
+indexOfIgnoreCase	341713	0	-
+indexOfIgnoreCase(from)	2733704	0	-
+lastIndexOfIgnoreCase	341713	0	-
+lastIndexOfIgnoreCase(from)	2733704	0	-
+ordinalIndexOf	1366852	0	-
+lastOrdinalIndexOf	1366852	0	-
+startsWithAny	1516644	0	-
+endsWithAny	1516644	0	-
+startsWithIgnoreCase	341713	0	-
+endsWithIgnoreCase	341713	0	-
+containsAllWords	191921	0	-
+discriminator:null char array throws	1	HOLDS
+discriminator:null search throws	1	HOLDS
+discriminator:null element skipped	1	HOLDS
+discriminator:char set vs substring overloads	1	HOLDS
+RESULT	PASS	failures=0
+== EdgeFamilyProof m3-scan -XX:+CompactStrings
+chomp	135753	0	-
+chop	135753	0	-
+deleteWhitespace	135753	0	-
+normalizeSpace	135753	0	-
+stripAccents	201289	0	-
+strip("")	4681	0	-
+stripStart("")	4681	0	-
+stripEnd("")	4681	0	-
+strip(" ")	4681	0	-
+stripStart(" ")	4681	0	-
+stripEnd(" ")	4681	0	-
+strip("a")	4681	0	-
+stripStart("a")	4681	0	-
+stripEnd("a")	4681	0	-
+strip(" a")	4681	0	-
+stripStart(" a")	4681	0	-
+stripEnd(" a")	4681	0	-
+strip("\u000D\u000A")	4681	0	-
+stripStart("\u000D\u000A")	4681	0	-
+stripEnd("\u000D\u000A")	4681	0	-
+strip("\u00A0\u0009")	4681	0	-
+stripStart("\u00A0\u0009")	4681	0	-
+stripEnd("\u00A0\u0009")	4681	0	-
+isNotBlank	135753	0	-
+isNotEmpty	4681	0	-
+stripToEmpty	135754	0	-
+stripToNull	135754	0	-
+trimToEmpty	135754	0	-
+trimToNull	135754	0	-
+defaultString	135754	0	-
+isNullOrEmpty	135754	0	-
+isAnyBlank	401	0	-
+isAllBlank	401	0	-
+isNoneBlank	401	0	-
+isAnyEmpty	401	0	-
+isAllEmpty	401	0	-
+isNoneEmpty	401	0	-
+firstNonBlank	401	0	-
+firstNonEmpty	401	0	-
+stripAll	401	0	-
+stripAll(null)	401	0	-
+stripAll("")	401	0	-
+stripAll(" a")	401	0	-
+stripAll("\u0009")	401	0	-
+stripAll empty array identity	1	0	-
+defaultIfBlank/defaultIfEmpty/defaultString/getIfBlank/getIfEmpty	294	0	-
+RESULT	PASS	failures=0
+== M3SeamProof m3-scan -XX:+CompactStrings
+indexOfAny[0023]	2320	0	-
+indexOfAnyBut[0023]	2320	0	-
+containsOnly[0023]	2320	0	-
+containsNone[0023]	2320	0	-
+indexOfAny[007A, 0051]	2320	0	-
+indexOfAnyBut[007A, 0051]	2320	0	-
+containsOnly[007A, 0051]	2320	0	-
+containsNone[007A, 0051]	2320	0	-
+indexOfAny[1D400]	2320	0	-
+indexOfAnyBut[1D400]	2320	0	-
+containsOnly[1D400]	2320	0	-
+containsNone[1D400]	2320	0	-
+indexOfAny[D835]	2320	0	-
+indexOfAnyBut[D835]	2320	0	-
+containsOnly[D835]	2320	0	-
+containsNone[D835]	2320	0	-
+indexOfAny[00E9, 0031]	2320	0	-
+indexOfAnyBut[00E9, 0031]	2320	0	-
+containsOnly[00E9, 0031]	2320	0	-
+containsNone[00E9, 0031]	2320	0	-
+indexOfAny[0078, 0079, 007A]	2320	0	-
+indexOfAnyBut[0078, 0079, 007A]	2320	0	-
+containsOnly[0078, 0079, 007A]	2320	0	-
+containsNone[0078, 0079, 007A]	2320	0	-
+indexOfAny[0078, 0020, 0079]	2320	0	-
+indexOfAnyBut[0078, 0020, 0079]	2320	0	-
+containsOnly[0078, 0020, 0079]	2320	0	-
+containsNone[0078, 0020, 0079]	2320	0	-
+indexOfAny[0078, 0436, 0079]	2320	0	-
+indexOfAnyBut[0078, 0436, 0079]	2320	0	-
+containsOnly[0078, 0436, 0079]	2320	0	-
+containsNone[0078, 0436, 0079]	2320	0	-
+indexOfIgnoreCase(zqx)	2320	0	-
+lastIndexOfIgnoreCase(zqx)	2320	0	-
+indexOfIgnoreCase(zqx, 600)	2320	0	-
+lastIndexOfIgnoreCase(zqx, 515)	2320	0	-
+indexOfIgnoreCase(ZQ)	2320	0	-
+lastIndexOfIgnoreCase(ZQ)	2320	0	-
+indexOfIgnoreCase(ZQ, 600)	2320	0	-
+lastIndexOfIgnoreCase(ZQ, 515)	2320	0	-
+indexOfIgnoreCase(k)	2320	0	-
+lastIndexOfIgnoreCase(k)	2320	0	-
+indexOfIgnoreCase(k, 600)	2320	0	-
+lastIndexOfIgnoreCase(k, 515)	2320	0	-
+indexOfIgnoreCase(st)	2320	0	-
+lastIndexOfIgnoreCase(st)	2320	0	-
+indexOfIgnoreCase(st, 600)	2320	0	-
+lastIndexOfIgnoreCase(st, 515)	2320	0	-
+indexOfIgnoreCase(?)	2320	0	-
+lastIndexOfIgnoreCase(?)	2320	0	-
+indexOfIgnoreCase(?, 600)	2320	0	-
+lastIndexOfIgnoreCase(?, 515)	2320	0	-
+indexOfIgnoreCase(x#)	2320	0	-
+lastIndexOfIgnoreCase(x#)	2320	0	-
+indexOfIgnoreCase(x#, 600)	2320	0	-
+lastIndexOfIgnoreCase(x#, 515)	2320	0	-
+indexOfIgnoreCase()	2320	0	-
+lastIndexOfIgnoreCase()	2320	0	-
+indexOfIgnoreCase(, 600)	2320	0	-
+lastIndexOfIgnoreCase(, 515)	2320	0	-
+containsWhitespace	2320	0	-
+normalizeSpace	2320	0	-
+stripAccents	2320	0	-
+RESULT	PASS	failures=0
+== SearchFamilyProof m3-scan -XX:-CompactStrings
+containsAny(char...)	355756	0	-
+containsAny(CharSequence)	341713	0	-
+containsAny(CharSequence...)	1516644	0	-
+containsAnyIgnoreCase(CharSequence...)	1516644	0	-
+containsIgnoreCase	341713	0	-
+containsNone(char...)	355756	0	-
+containsNone(String)	341713	0	-
+containsOnly(char...)	355756	0	-
+containsOnly(String)	341713	0	-
+containsWhitespace	4681	0	-
+indexOfAny(char...)	355756	0	-
+indexOfAny(String)	341713	0	-
+indexOfAny(CharSequence...)	1516644	0	-
+indexOfAnyBut(char...)	355756	0	-
+indexOfAnyBut(CharSequence)	341713	0	-
+lastIndexOfAny(CharSequence...)	1516644	0	-
+indexOfIgnoreCase	341713	0	-
+indexOfIgnoreCase(from)	2733704	0	-
+lastIndexOfIgnoreCase	341713	0	-
+lastIndexOfIgnoreCase(from)	2733704	0	-
+ordinalIndexOf	1366852	0	-
+lastOrdinalIndexOf	1366852	0	-
+startsWithAny	1516644	0	-
+endsWithAny	1516644	0	-
+startsWithIgnoreCase	341713	0	-
+endsWithIgnoreCase	341713	0	-
+containsAllWords	191921	0	-
+discriminator:null char array throws	1	HOLDS
+discriminator:null search throws	1	HOLDS
+discriminator:null element skipped	1	HOLDS
+discriminator:char set vs substring overloads	1	HOLDS
+RESULT	PASS	failures=0
+== EdgeFamilyProof m3-scan -XX:-CompactStrings
+chomp	135753	0	-
+chop	135753	0	-
+deleteWhitespace	135753	0	-
+normalizeSpace	135753	0	-
+stripAccents	201289	0	-
+strip("")	4681	0	-
+stripStart("")	4681	0	-
+stripEnd("")	4681	0	-
+strip(" ")	4681	0	-
+stripStart(" ")	4681	0	-
+stripEnd(" ")	4681	0	-
+strip("a")	4681	0	-
+stripStart("a")	4681	0	-
+stripEnd("a")	4681	0	-
+strip(" a")	4681	0	-
+stripStart(" a")	4681	0	-
+stripEnd(" a")	4681	0	-
+strip("\u000D\u000A")	4681	0	-
+stripStart("\u000D\u000A")	4681	0	-
+stripEnd("\u000D\u000A")	4681	0	-
+strip("\u00A0\u0009")	4681	0	-
+stripStart("\u00A0\u0009")	4681	0	-
+stripEnd("\u00A0\u0009")	4681	0	-
+isNotBlank	135753	0	-
+isNotEmpty	4681	0	-
+stripToEmpty	135754	0	-
+stripToNull	135754	0	-
+trimToEmpty	135754	0	-
+trimToNull	135754	0	-
+defaultString	135754	0	-
+isNullOrEmpty	135754	0	-
+isAnyBlank	401	0	-
+isAllBlank	401	0	-
+isNoneBlank	401	0	-
+isAnyEmpty	401	0	-
+isAllEmpty	401	0	-
+isNoneEmpty	401	0	-
+firstNonBlank	401	0	-
+firstNonEmpty	401	0	-
+stripAll	401	0	-
+stripAll(null)	401	0	-
+stripAll("")	401	0	-
+stripAll(" a")	401	0	-
+stripAll("\u0009")	401	0	-
+stripAll empty array identity	1	0	-
+defaultIfBlank/defaultIfEmpty/defaultString/getIfBlank/getIfEmpty	294	0	-
+RESULT	PASS	failures=0
+== M3SeamProof m3-scan -XX:-CompactStrings
+indexOfAny[0023]	2320	0	-
+indexOfAnyBut[0023]	2320	0	-
+containsOnly[0023]	2320	0	-
+containsNone[0023]	2320	0	-
+indexOfAny[007A, 0051]	2320	0	-
+indexOfAnyBut[007A, 0051]	2320	0	-
+containsOnly[007A, 0051]	2320	0	-
+containsNone[007A, 0051]	2320	0	-
+indexOfAny[1D400]	2320	0	-
+indexOfAnyBut[1D400]	2320	0	-
+containsOnly[1D400]	2320	0	-
+containsNone[1D400]	2320	0	-
+indexOfAny[D835]	2320	0	-
+indexOfAnyBut[D835]	2320	0	-
+containsOnly[D835]	2320	0	-
+containsNone[D835]	2320	0	-
+indexOfAny[00E9, 0031]	2320	0	-
+indexOfAnyBut[00E9, 0031]	2320	0	-
+containsOnly[00E9, 0031]	2320	0	-
+containsNone[00E9, 0031]	2320	0	-
+indexOfAny[0078, 0079, 007A]	2320	0	-
+indexOfAnyBut[0078, 0079, 007A]	2320	0	-
+containsOnly[0078, 0079, 007A]	2320	0	-
+containsNone[0078, 0079, 007A]	2320	0	-
+indexOfAny[0078, 0020, 0079]	2320	0	-
+indexOfAnyBut[0078, 0020, 0079]	2320	0	-
+containsOnly[0078, 0020, 0079]	2320	0	-
+containsNone[0078, 0020, 0079]	2320	0	-
+indexOfAny[0078, 0436, 0079]	2320	0	-
+indexOfAnyBut[0078, 0436, 0079]	2320	0	-
+containsOnly[0078, 0436, 0079]	2320	0	-
+containsNone[0078, 0436, 0079]	2320	0	-
+indexOfIgnoreCase(zqx)	2320	0	-
+lastIndexOfIgnoreCase(zqx)	2320	0	-
+indexOfIgnoreCase(zqx, 600)	2320	0	-
+lastIndexOfIgnoreCase(zqx, 515)	2320	0	-
+indexOfIgnoreCase(ZQ)	2320	0	-
+lastIndexOfIgnoreCase(ZQ)	2320	0	-
+indexOfIgnoreCase(ZQ, 600)	2320	0	-
+lastIndexOfIgnoreCase(ZQ, 515)	2320	0	-
+indexOfIgnoreCase(k)	2320	0	-
+lastIndexOfIgnoreCase(k)	2320	0	-
+indexOfIgnoreCase(k, 600)	2320	0	-
+lastIndexOfIgnoreCase(k, 515)	2320	0	-
+indexOfIgnoreCase(st)	2320	0	-
+lastIndexOfIgnoreCase(st)	2320	0	-
+indexOfIgnoreCase(st, 600)	2320	0	-
+lastIndexOfIgnoreCase(st, 515)	2320	0	-
+indexOfIgnoreCase(?)	2320	0	-
+lastIndexOfIgnoreCase(?)	2320	0	-
+indexOfIgnoreCase(?, 600)	2320	0	-
+lastIndexOfIgnoreCase(?, 515)	2320	0	-
+indexOfIgnoreCase(x#)	2320	0	-
+lastIndexOfIgnoreCase(x#)	2320	0	-
+indexOfIgnoreCase(x#, 600)	2320	0	-
+lastIndexOfIgnoreCase(x#, 515)	2320	0	-
+indexOfIgnoreCase()	2320	0	-
+lastIndexOfIgnoreCase()	2320	0	-
+indexOfIgnoreCase(, 600)	2320	0	-
+lastIndexOfIgnoreCase(, 515)	2320	0	-
+containsWhitespace	2320	0	-
+normalizeSpace	2320	0	-
+stripAccents	2320	0	-
+RESULT	PASS	failures=0
