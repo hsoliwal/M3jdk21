@@ -14,7 +14,7 @@ Every `java.lang.String` holds its text twice in Java 21 form, and fills both ar
 
 Neither array is ever written again. `chValue` never leaves `String`: a caller only ever receives a copy.
 
-An M3-backed String keeps its canonical owner and coordinate in `m3` as well. Its `value` is then the JNI byte shadow of that text. The zero-length layout sentinel of the earlier M3 design is retired.
+An M3-backed String keeps its canonical owner and coordinate in `m3` as well. Its `value` is then the byte shadow of that text, filled in Java (decision 50). The zero-length layout sentinel of the earlier M3 design is retired.
 
 
 ## Decision 51: chValue is lazily filled and const (supersedes the eager fill below)
@@ -45,6 +45,12 @@ Proof: `record/layout-invariant/LAZY_PROOF.txt`, run on master `9ed7c43441fa`.
   - `-Xcomp -XX:+OptimizeStringConcat`.
 - Every site passes, including the VM-made literals, because the lazy fill runs in Java.
 - Discriminator: the same test fails on the eager master.
+
+## Decision 50: the M3 shadows are Java; value and coder agree
+
+The owner's decision 50 (2026-11-17) keeps M3-backed Strings on the layout of every other String. Its parts, in landing order:
+
+- **Java shadows.** `M3String.materialize()` and `M3String.charShadow()` fill fresh arrays in Java from the owners' bulk reads, the same `getBytes` and `getChars` the JNI called back. The natives `nativeByteShadow` and `nativeCharShadow` are gone from `M3String.java`, and `String.c` is the upstream jdk21u file again. Gate: `M3StringJavaShadowTest`.
 
 The sections below describe the eager stage 1 (#3258) as it landed. They hold for `value`; for `chValue`, read "filled once on demand" wherever they say "filled at construction".
 

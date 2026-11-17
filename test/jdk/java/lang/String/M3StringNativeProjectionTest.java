@@ -3,14 +3,14 @@
  * SPDX-License-Identifier: GPL-2.0-only
  *
  * @test
- * @summary M3 JNI projections validate logical ranges, preserve shared owners, and bulk-copy composite String values
+ * @summary M3 JNI projections preserve shared owners and bulk-copy composite String values; the
+ *          byte and char shadows are fresh arrays filled in Java (decisions 47, 50)
  * @run main/othervm/native --add-opens=java.base/java.lang=ALL-UNNAMED -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage -Xcheck:jni M3StringNativeProjectionTest
  * @run main/othervm/native --add-opens=java.base/java.lang=ALL-UNNAMED -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage -XX:-CompactStrings -Xcheck:jni M3StringNativeProjectionTest
  * @run main/othervm/native --add-opens=java.base/java.lang=ALL-UNNAMED -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage -Xint -Xcheck:jni M3StringNativeProjectionTest
  * @run main/othervm/native --add-opens=java.base/java.lang=ALL-UNNAMED -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage -XX:TieredStopAtLevel=1 -Xbatch -Xcheck:jni M3StringNativeProjectionTest
  */
 import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.nio.charset.StandardCharsets;
@@ -33,8 +33,8 @@ public final class M3StringNativeProjectionTest {
         Class<?> m3 = Class.forName("java.lang.M3String");
         m3Owner = field(m3, "owner");
         m3Coordinate = field(m3, "value");
-        byteShadow = m3.getDeclaredMethod("nativeByteShadow", m3, int.class, int.class, byte.class);
-        charShadow = m3.getDeclaredMethod("nativeCharShadow", m3, int.class, int.class);
+        byteShadow = m3.getDeclaredMethod("materialize");
+        charShadow = m3.getDeclaredMethod("charShadow");
         byteShadow.setAccessible(true);
         charShadow.setAccessible(true);
         long fields = Arrays.stream(m3.getDeclaredFields())
@@ -65,7 +65,7 @@ public final class M3StringNativeProjectionTest {
         char[] ascii = {'a', 'b', 'c', 'd', 'e', 'f'};
         verify(new String(ascii), ascii, "compact ASCII");
         check(projectionMask("", new char[0]) == 31, "empty JNI output");
-        invalidRanges(stringM3.get(scalar), scalar.length());
+        freshShadows(stringM3.get(scalar), original);
         System.out.println("M3_STRING_NATIVE_PROJECTION_PASS checks=" + checks);
     }
 
@@ -74,8 +74,9 @@ public final class M3StringNativeProjectionTest {
         check(storage != null, label + " is M3-backed");
         Object owner = m3Owner.get(storage);
         long coordinate = m3Coordinate.getLong(storage);
-        byte[] sentinel = (byte[]) stringValue.get(value);
-        check(sentinel.length == 0, label + " has no retained flat payload");
+        byte[] layout = (byte[]) stringValue.get(value);
+        check(layout.length == expected.length || layout.length == 2 * expected.length,
+                label + " holds its real bytes (layout invariant)");
         for (int round = 0; round < 8; round++) {
             check(projectionMask(value, expected) == 31, label + " native projection mask");
             char[] chars = value.toCharArray();
@@ -87,38 +88,23 @@ public final class M3StringNativeProjectionTest {
             check(bytes != bytesAgain && Arrays.equals(bytes, bytesAgain), label + " independent byte result");
             if (bytes.length > 0) bytes[0] ^= 0x5a;
             check(Arrays.equals(value.toCharArray(), expected), label + " mutations do not change backing");
-            check(stringValue.get(value) == sentinel, label + " no retained replacement shadow");
+            check(stringValue.get(value) == layout, label + " value is never replaced");
             check(m3Owner.get(stringM3.get(value)) == owner, label + " owner unchanged");
             check(m3Coordinate.getLong(stringM3.get(value)) == coordinate, label + " coordinate unchanged");
         }
         String duplicate = new String(value);
         check(m3Owner.get(stringM3.get(duplicate)) == owner, label + " copy constructor shares owner");
-        check(stringValue.get(duplicate) == sentinel, label + " copy constructor shares empty sentinel");
+        check(stringValue.get(duplicate) == layout, label + " copy constructor shares value");
     }
 
-    private static void invalidRanges(Object storage, int length) throws Exception {
-        expect(IndexOutOfBoundsException.class, byteShadow, storage, length + 1, 0, (byte) 0);
-        expect(StringIndexOutOfBoundsException.class, charShadow, storage, length + 1, 0);
-        expect(IndexOutOfBoundsException.class, byteShadow, storage, 0, Integer.MAX_VALUE, (byte) 1);
-        expect(StringIndexOutOfBoundsException.class, charShadow, storage, Integer.MAX_VALUE, 1);
-        expect(IllegalArgumentException.class, byteShadow, storage, -1, 0, (byte) 0);
-        expect(IllegalArgumentException.class, charShadow, storage, 0, -1);
-        check(((byte[]) byteShadow.invoke(null, storage, length, 0, (byte) 1)).length == 0,
-                "valid empty end byte range");
-        check(((char[]) charShadow.invoke(null, storage, length, 0)).length == 0,
-                "valid empty end char range");
-    }
-
-    private static void expect(Class<? extends Throwable> type, Method method, Object... arguments)
-            throws Exception {
-        checks++;
-        try {
-            method.invoke(null, arguments);
-        } catch (InvocationTargetException failure) {
-            if (failure.getCause().getClass() != type) throw new AssertionError(type.getName(), failure);
-            return;
-        }
-        throw new AssertionError("missing " + type.getName());
+    /** The Java shadows (decision 50): each call fills a fresh array with the whole text. */
+    private static void freshShadows(Object storage, char[] expected) throws Exception {
+        char[] chars = (char[]) charShadow.invoke(storage);
+        check(chars != charShadow.invoke(storage) && Arrays.equals(chars, expected),
+                "fresh char shadow");
+        byte[] bytes = (byte[]) byteShadow.invoke(storage);
+        check(bytes != byteShadow.invoke(storage) && bytes.length == 2 * expected.length,
+                "fresh UTF-16 byte shadow");
     }
 
     private static Field field(Class<?> type, String name) throws Exception {

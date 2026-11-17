@@ -37,7 +37,8 @@ import sun.nio.cs.ArrayEncoder;
  *
  * <p>Text payload belongs to canonical native/mapped atom owners. Composition belongs to
  * persistent tuple owner nodes. This value retains no byte[], char[], segment[], offset[] or
- * end[] payload. Contiguous arrays exist only as explicit JNI compatibility shadows.</p>
+ * end[] payload. Contiguous arrays exist only as explicit compatibility shadows, which
+ * {@link #materialize()} and {@link #charShadow()} fill in Java.</p>
  */
 final class M3String implements CharSequence {
     private static final int SPAN_SHIFT = Integer.SIZE;
@@ -1409,15 +1410,25 @@ final class M3String implements CharSequence {
     }
 
     /**
-     * JNI-created Compact-String compatibility shadow. Never cached by M3String or its owners.
+     * Compact-String compatibility shadow in this value's coder: a fresh array filled in Java by
+     * the owners' bulk reads. Never cached by M3String or its owners.
      */
     byte[] materialize() {
-        return nativeByteShadow(this, 0, length(), coder());
+        //FLLDCIM: LAYOUT - decision 50: shadows are filled in Java; the JNI round trip is gone
+        int length = length();
+        byte coder = coder();
+        byte[] bytes = coder == String.LATIN1 ? new byte[length]
+                                              : StringUTF16.newBytesFor(length);
+        if (length != 0) getBytes(bytes, 0, 0, coder, length);
+        return bytes;
     }
 
-    /** JNI-created final Java UTF-16 array shadow. */
+    /** Fresh UTF-16 array shadow, filled in Java by the owners' bulk reads. */
     char[] charShadow() {
-        return nativeCharShadow(this, 0, length());
+        int length = length();
+        char[] chars = new char[length];
+        if (length != 0) getChars(0, length, chars, 0);
+        return chars;
     }
 
     boolean mayContain(M3String needle) {
@@ -1918,10 +1929,4 @@ final class M3String implements CharSequence {
     private static int count(long coordinate) {
         return (int) (coordinate & SPAN_MASK);
     }
-
-    private static native byte[] nativeByteShadow(
-            M3String value, int start, int length, byte coder);
-
-    private static native char[] nativeCharShadow(
-            M3String value, int start, int length);
 }
