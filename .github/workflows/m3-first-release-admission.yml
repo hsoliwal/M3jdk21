@@ -9,6 +9,8 @@ on:
       - 'M3-SYNEXIA-RIGHTS.md'
       - 'M3-SYNEXIA-AUTHORS.md'
       - 'm3/**'
+      - 'src/java.base/share/classes/jdk/m3/precompute/**'
+      - 'test/jdk/jdk/m3/precompute/**'
       - '.github/workflows/m3-first-release-admission.yml'
       - '.github/workflows/m3-release.yml'
   push:

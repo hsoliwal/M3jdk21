@@ -429,6 +429,8 @@ module java.base {
 
     uses jdk.internal.io.JdkConsoleProvider;
     uses jdk.internal.logger.DefaultLoggerFinder;
+    uses jdk.m3.precompute.IndexPrecomputeAccelerator;
+    uses jdk.m3.precompute.IndexPrecomputeProvider;
     uses sun.text.spi.JavaTimeDateTimePatternProvider;
     uses sun.util.spi.CalendarProvider;
     uses sun.util.locale.provider.LocaleDataMetaInfo;
