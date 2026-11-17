@@ -51,7 +51,13 @@ public final class IndexedListSnapshot<E> extends AbstractList<E> implements Ran
 
     public static <E> IndexedListSnapshot<E> copyOf(Collection<? extends E> source) {
         Objects.requireNonNull(source, "source");
-        return fromOwned(source.toArray());
+        Object[] copy = source.toArray();
+        // Conforming collections already return a fresh exact Object[]. Preserve
+        // that ownership transfer; normalize legacy covariant array results only.
+        if (copy != null && copy.getClass() != Object[].class) {
+            copy = Arrays.copyOf(copy, copy.length, Object[].class);
+        }
+        return fromOwned(copy);
     }
 
     public static <E> IndexedListSnapshot<E> copyOf(E[] source) {

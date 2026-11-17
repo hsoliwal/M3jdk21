@@ -17,7 +17,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * Genuine small-heap allocation failures against the production map classes.
  * With no arguments, fork each case under a separate 16 MiB Serial GC JVM.
- * A single child accepts {@code byte|int|object zero|nonzero|ensure};
+ * A single child accepts {@code byte|int|object|primitive zero|nonzero|ensure};
  * {@code ensure} applies only to the byte map. No production allocation hooks
  * or transformed source fixtures are used.
  */
@@ -25,6 +25,7 @@ public final class PrimitiveMapRealOomeTest {
     private static final int BYTE = 0;
     private static final int INT = 1;
     private static final int OBJECT = 2;
+    private static final int PRIMITIVE = 3;
     private static final int ZERO = 0;
     private static final int NONZERO = 1;
     private static final int ENSURE = 2;
@@ -52,7 +53,8 @@ public final class PrimitiveMapRealOomeTest {
             case "byte" -> BYTE;
             case "int" -> INT;
             case "object" -> OBJECT;
-            default -> throw new IllegalArgumentException("byte, int or object");
+            case "primitive" -> PRIMITIVE;
+            default -> throw new IllegalArgumentException("byte, int, object or primitive");
         };
         int operation = switch (arguments[1]) {
             case "zero" -> ZERO;
@@ -122,7 +124,8 @@ public final class PrimitiveMapRealOomeTest {
     private static void forkCases() throws Exception {
         String executable = Path.of(System.getProperty("java.home"), "bin", "java").toString();
         String[][] cases = {{"byte", "zero"}, {"byte", "nonzero"}, {"byte", "ensure"},
-                {"int", "zero"}, {"int", "nonzero"}, {"object", "zero"}, {"object", "nonzero"}};
+                {"int", "zero"}, {"int", "nonzero"}, {"object", "zero"}, {"object", "nonzero"},
+                {"primitive", "zero"}, {"primitive", "nonzero"}};
         int failures = 0;
         for (String[] mode : cases) {
             Process child = new ProcessBuilder(executable, "-XX:-UsePerfData", "-Xms16m", "-Xmx16m",
@@ -154,6 +157,11 @@ public final class PrimitiveMapRealOomeTest {
         objects.put(1, VALUES[0], ABSENT);
         objects.put(0, ZERO_VALUE, ABSENT);
         objects.put(2, VALUES[1], ABSENT);
+        PrimitivePrimitiveHashMap primitives = new PrimitivePrimitiveHashMap(
+                PrimitiveKind.DOUBLE, PrimitiveKind.DOUBLE, 0, 0.125f);
+        primitives.putBits(1, 1, -1);
+        primitives.putBits(0, 2, -1);
+        primitives.putBits(2, 3, -1);
     }
 
     private static final class Fixture {
@@ -163,6 +171,7 @@ public final class PrimitiveMapRealOomeTest {
         final LongByteHashMap bytes;
         final LongIntHashMap ints;
         final PrimitiveObjectHashMap<Object> objects;
+        final PrimitivePrimitiveHashMap primitives;
         final int threshold;
         final int nonzeroEntries;
         final boolean hadZero;
@@ -174,7 +183,9 @@ public final class PrimitiveMapRealOomeTest {
             ints = owner == INT ? new LongIntHashMap(EXPECTED) : null;
             objects = owner == OBJECT
                     ? new PrimitiveObjectHashMap<>(PrimitiveKind.DOUBLE, EXPECTED, 0.65f) : null;
-            map = owner == BYTE ? bytes : owner == INT ? ints : objects;
+            primitives = owner == PRIMITIVE
+                    ? new PrimitivePrimitiveHashMap(PrimitiveKind.DOUBLE, PrimitiveKind.DOUBLE, EXPECTED, 0.65f) : null;
+            map = owner == BYTE ? bytes : owner == INT ? ints : owner == OBJECT ? objects : primitives;
             Field field = map.getClass().getDeclaredField("threshold");
             field.setAccessible(true);
             threshold = field.getInt(map);
@@ -182,30 +193,40 @@ public final class PrimitiveMapRealOomeTest {
             if (hadZero) {
                 if (owner == BYTE) bytes.put(0, (byte) 99);
                 else if (owner == INT) ints.put(0, 99);
-                else objects.put(0, ZERO_VALUE, ABSENT);
+                else if (owner == OBJECT) objects.put(0, ZERO_VALUE, ABSENT);
+                else primitives.putBits(0, 99, -1);
             }
             nonzeroEntries = threshold - (hadZero ? 1 : 0);
             for (int i = 1; i <= nonzeroEntries; i++) {
                 long key = key(i);
                 if (owner == BYTE) bytes.put(key, (byte) (31 * i + 7));
                 else if (owner == INT) ints.put(key, 31 * i + 7);
-                else objects.put(key, VALUES[i & 3], ABSENT);
+                else if (owner == OBJECT) objects.put(key, VALUES[i & 3], ABSENT);
+                else primitives.putBits(key, primitiveValue(i), -1);
             }
         }
 
-        int capacity() { return owner == BYTE ? bytes.capacity() : owner == INT ? ints.capacity() : objects.capacity(); }
-        int size() { return owner == BYTE ? bytes.size() : owner == INT ? ints.size() : objects.size(); }
+        int capacity() {
+            return owner == BYTE ? bytes.capacity() : owner == INT ? ints.capacity()
+                    : owner == OBJECT ? objects.capacity() : primitives.capacity();
+        }
+        int size() {
+            return owner == BYTE ? bytes.size() : owner == INT ? ints.size()
+                    : owner == OBJECT ? objects.size() : primitives.size();
+        }
         long pending() { return operation == ZERO ? 0L : PENDING_KEY; }
         boolean containsPending() {
             return owner == BYTE ? bytes.containsKey(pending())
-                    : owner == INT ? ints.containsKey(pending()) : objects.containsKeyBits(pending());
+                    : owner == INT ? ints.containsKey(pending())
+                    : owner == OBJECT ? objects.containsKeyBits(pending()) : primitives.containsKeyBits(pending());
         }
 
         void attempt() {
             if (operation == ENSURE) bytes.ensureCapacity(threshold + 1);
             else if (owner == BYTE) bytes.put(pending(), (byte) 47);
             else if (owner == INT) ints.put(pending(), 47);
-            else objects.put(pending(), PENDING_VALUE, ABSENT);
+            else if (owner == OBJECT) objects.put(pending(), PENDING_VALUE, ABSENT);
+            else primitives.putBits(pending(), 47, -1);
         }
 
         void verifyExisting() {
@@ -215,14 +236,18 @@ public final class PrimitiveMapRealOomeTest {
                         && bytes.get(key) == (byte) (31 * i + 7), "retained byte entry");
                 else if (owner == INT) ok(ints.containsKey(key)
                         && ints.getOrDefault(key, -1) == 31 * i + 7, "retained int entry");
-                else ok(objects.containsKeyBits(key)
+                else if (owner == OBJECT) ok(objects.containsKeyBits(key)
                         && objects.getOrDefault(key, ABSENT) == VALUES[i & 3], "retained reference entry");
+                else ok(primitives.containsKeyBits(key)
+                        && primitives.getOrDefaultBits(key, -1) == primitiveValue(i), "retained raw primitive entry");
             }
             if (hadZero) {
                 if (owner == BYTE) ok(bytes.containsKey(0) && bytes.get(0) == 99, "retained zero byte");
                 else if (owner == INT) ok(ints.containsKey(0) && ints.getOrDefault(0, -1) == 99, "retained zero int");
-                else ok(objects.containsKeyBits(0) && objects.getOrDefault(0, ABSENT) == ZERO_VALUE,
+                else if (owner == OBJECT) ok(objects.containsKeyBits(0) && objects.getOrDefault(0, ABSENT) == ZERO_VALUE,
                         "retained zero reference");
+                else ok(primitives.containsKeyBits(0) && primitives.getOrDefaultBits(0, -1) == 99,
+                        "retained zero primitive");
             }
             if (owner == OBJECT) {
                 boolean rawNan = false;
@@ -242,11 +267,18 @@ public final class PrimitiveMapRealOomeTest {
                 ok(containsPending() && bytes.get(pending()) == 47, "retry inserts byte");
             } else if (owner == INT) {
                 ok(containsPending() && ints.getOrDefault(pending(), -1) == 47, "retry inserts int");
-            } else {
+            } else if (owner == OBJECT) {
                 ok(containsPending() && objects.getOrDefault(pending(), ABSENT) == PENDING_VALUE,
                         "retry inserts exact object reference");
+            } else {
+                ok(containsPending() && primitives.getOrDefaultBits(pending(), -1) == 47,
+                        "retry inserts raw primitive value");
             }
         }
+    }
+
+    private static long primitiveValue(int index) {
+        return index == 1 ? Long.MIN_VALUE : index == 2 ? 0x7ff8_0000_1234_5678L : 31L * index + 7;
     }
 
     private static long key(int index) {

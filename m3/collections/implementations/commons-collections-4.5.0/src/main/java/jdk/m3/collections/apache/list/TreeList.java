@@ -27,6 +27,8 @@
 // Modified 2026 by Synexia contributors: reuse a temporary owner-state membership mask.
 // Modified 2026 by Hitesh Soliwal and contributors: linear indexed bulk insertion into reusable slots.
 // Modified 2026 by Synexia contributors: direct threaded reverse search and List hashing without iterator allocation.
+// Modified 2026 by Hitesh Soliwal and Synexia contributors: direct cursor callback traversal.
+// Modified 2026 by Hitesh Soliwal and Synexia contributors: converge bounded builds, joins, bulk slot operations and exports.
 package jdk.m3.collections.apache.list;
 
 import java.util.AbstractList;
@@ -39,6 +41,7 @@ import java.util.Iterator;
 import java.util.ListIterator;
 import java.util.NoSuchElementException;
 import java.util.Objects;
+import java.util.function.Consumer;
 
 import jdk.m3.collections.apache.OrderedIterator;
 
@@ -905,7 +908,6 @@ public class TreeList<E> extends AbstractList<E> {
          * @param fromIndex  The index to start from
          */
         protected TreeListIterator(final TreeList<E> parent, final int fromIndex) {
-            checkInterval(fromIndex, 0, parent.size(), parent.size());
             this.parent = parent;
             this.expectedModCount = parent.modCount;
             this.next = parent.root == -1 ? -1 : parent.slots.get(parent.root, fromIndex);
@@ -1073,8 +1075,8 @@ public class TreeList<E> extends AbstractList<E> {
      */
     @Override
     public void add(final int index, final E obj) {
-        checkInterval(index, 0, size());
         modCount++;
+        checkInterval(index, 0, size());
         if (root == -1) {
             root = slots.newLeaf(index, obj, -1, -1);
         } else {
@@ -1147,7 +1149,10 @@ public class TreeList<E> extends AbstractList<E> {
      * @throws IndexOutOfBoundsException if the index is invalid
      */
     private void checkInterval(final int index, final int startIndex, final int endIndex) {
-        checkInterval(index, startIndex, endIndex, size());
+        // size() is read for the failure message only, as M3's incumbent receiver did.
+        if (index < startIndex || index > endIndex) {
+            checkInterval(index, startIndex, endIndex, size());
+        }
     }
 
     /**
@@ -1170,6 +1175,38 @@ public class TreeList<E> extends AbstractList<E> {
     @Override
     public boolean contains(final Object object) {
         return indexOf(object) >= 0;
+    }
+
+    /**
+     * Performs an action in list order without materializing an iterator.
+     * Subclasses retain iterator dispatch. Modification checks and cursor
+     * advancement follow the existing iterator before each callback.
+     *
+     * @param action the action to perform for each element
+     * @throws NullPointerException if the action is null
+     */
+    @Override
+    public void forEach(final Consumer<? super E> action) {
+        Objects.requireNonNull(action);
+        if (getClass() != TreeList.class) {
+            super.forEach(action);
+            return;
+        }
+        final int expectedModCount = modCount;
+        int next = root == -1 ? -1 : slots.get(root, 0);
+        int nextIndex = 0;
+        while (nextIndex < size) {
+            if (modCount != expectedModCount) {
+                throw new ConcurrentModificationException();
+            }
+            if (next == -1) {
+                next = slots.get(root, nextIndex);
+            }
+            final E value = slots.value(next);
+            nextIndex++;
+            next = slots.next(next);
+            action.accept(value);
+        }
     }
 
     /**
@@ -1307,6 +1344,7 @@ public class TreeList<E> extends AbstractList<E> {
     public ListIterator<E> listIterator(final int fromIndex) {
         // override to go 75% faster
         // cannot use EmptyIterator as iterator.add() must work
+        checkInterval(fromIndex, 0, size());
         return new TreeListIterator<>(this, fromIndex);
     }
 
@@ -1318,8 +1356,8 @@ public class TreeList<E> extends AbstractList<E> {
      */
     @Override
     public E remove(final int index) {
-        checkInterval(index, 0, size() - 1);
         modCount++;
+        checkInterval(index, 0, size() - 1);
         if (getClass() == TreeList.class) {
             root = slots.remove(root, index);
             final E result = slots.value(slots.detached);
