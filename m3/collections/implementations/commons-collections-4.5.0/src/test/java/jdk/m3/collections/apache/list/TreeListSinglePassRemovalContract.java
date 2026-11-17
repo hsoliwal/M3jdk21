@@ -164,7 +164,10 @@ public final class TreeListSinglePassRemovalContract {
                 catch (final IndexOutOfBoundsException correct) {
                     check(("Invalid index:" + bad + ", size=" + n).equals(correct.getMessage()), "bounds message");
                 }
-                if (n != 0) { same(list.get(0), cursor.next()); }
+                // This receiver invalidates iterators before checking removal bounds.
+                // Preserve M3's incumbent failure behavior while sharing the donor algorithm.
+                try { cursor.next(); throw new AssertionError("invalid removal did not invalidate iterator"); }
+                catch (final ConcurrentModificationException correct) { checks++; }
             }
         }
     }
@@ -215,7 +218,8 @@ public final class TreeListSinglePassRemovalContract {
             catch (final ConcurrentModificationException correct) { checks++; }
             list.sizes = 0;
             final ListIterator<Item> end = list.listIterator(list.size());
-            check(list.sizes == 3, "end iterator added size callbacks");
+            // One caller size() plus one incumbent listIterator bound check.
+            check(list.sizes == 2, "end iterator changed M3 size callbacks");
             if (end.hasPrevious()) { end.previous(); }
         }
     }
