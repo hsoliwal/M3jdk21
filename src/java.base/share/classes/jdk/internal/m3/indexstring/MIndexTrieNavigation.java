@@ -2,7 +2,7 @@
 // SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
 package jdk.internal.m3.indexstring;
 
-import jdk.m3.collections.ProgressMonitor;
+import java.util.concurrent.ProgressMonitor;
 import jdk.m3.precompute.EditDistancePlan;
 import java.util.Arrays;
 import java.util.Objects;
@@ -20,7 +20,7 @@ import java.util.function.IntConsumer;
  * Coordinates belong to this exact tree, not to a global dictionary or another tree generation.
  *
  * <p>Compilation is iterative O(states + edges). Runtime traversal consumes UTF-16 units, not code
- * points, graphemes or physical tokens. Callers own monitor beginTask/done; library operations only
+ * points, graphemes or physical tokens. Callers own monitor begin/done; library operations only
  * report work and check cancellation. Null selects no monitor, but interruption is always honored.
  */
 public final class MIndexTrieNavigation {
@@ -30,7 +30,9 @@ public final class MIndexTrieNavigation {
   /** Reverse means reverse UTF-16-unit traversal, including isolated surrogate units. */
   public enum Direction { FORWARD, REVERSE }
 
-  /** Added primitive storage, including compilation scratch but excluding the shared source trie. */
+  /**
+   * Added primitive storage, including compilation scratch but excluding the shared source trie.
+   */
   public record Limits(int maxStates, long maxPeakPrimitiveBytes) {
     public static final Limits DEFAULT = new Limits(8_000_000, 512L << 20);
     public Limits {
@@ -75,9 +77,10 @@ public final class MIndexTrieNavigation {
    * <p>The query is owned by the existing immutable {@link M3EditDistancePlan}; passing
    * an already compiled plan shares it without another spelling copy. Other stable CharSequences
    * enter through that plan's bounded UTF-16 snapshot operation, never through {@code toString()}.
-   * The machine adds only scalar configuration and one packed diagonal band per traversal state. For
-   * edit radii up to {@value #MAX_EDIT_DISTANCE}, every state fits in one {@code long}; no dynamic
-   * programming row, candidate String, or per-node object is allocated while walking a trie.
+   * The machine adds only scalar configuration and one packed diagonal band per traversal state.
+   * For edit radii up to {@value #MAX_EDIT_DISTANCE}, every state fits in one {@code long}; no
+   * dynamic programming row, candidate String, or per-node object is allocated while walking a
+   * trie.
    * Values outside the active band are exactly greater than the cutoff because their length
    * difference alone exceeds the cutoff.
    *
@@ -108,7 +111,7 @@ public final class MIndexTrieNavigation {
       this(query, maxEditDistance, null);
     }
 
-    /** The caller keeps the input stable during admission and owns monitor beginTask/done. */
+    /** The caller keeps the input stable during admission and owns monitor begin/done. */
     public BoundedLevenshteinMachine(CharSequence query, int maxEditDistance,
         ProgressMonitor monitor) {
       Objects.requireNonNull(query, "query");
@@ -403,9 +406,12 @@ public final class MIndexTrieNavigation {
     int states = starts.length;
     if (states < 1 || counts.length != states || terminals.length != states
         || labels.length != targets.length || targets.length != states - 1) {
-      throw new IllegalArgumentException("navigation requires one rooted trie, not a shared-state DAG");
+      throw new IllegalArgumentException(
+          "navigation requires one rooted trie, not a shared-state DAG");
     }
-    if (states > limits.maxStates()) throw new IllegalArgumentException("trie state budget exceeded");
+    if (states > limits.maxStates()) {
+      throw new IllegalArgumentException("trie state budget exceeded");
+    }
     int terminalCount = 0;
     for (int state = 0; state < states; state++) {
       if (terminals[state] < -1) throw new IllegalArgumentException("invalid terminal payload");
@@ -498,7 +504,9 @@ public final class MIndexTrieNavigation {
   public int stateCount() { return parent.length; }
   public int terminalCount() { return rankState.length; }
   /** Does not count any of the shared owner's existing primitive lanes a second time. */
-  public long primitivePayloadBytes() { return Integer.BYTES * (6L * stateCount() + terminalCount()); }
+  public long primitivePayloadBytes() {
+    return Integer.BYTES * (6L * stateCount() + terminalCount());
+  }
   public int parentState(int state) { return parent[checkedState(state)]; }
   public int depth(int state) { return depth[checkedState(state)]; }
   public int terminalPayload(int state) { return terminalPayload[checkedState(state)]; }
@@ -627,7 +635,9 @@ public final class MIndexTrieNavigation {
           continue;
         }
         if (terminalPayload[state] >= 0 && machine.isAccepting(machineState)) {
-          if (matches == limits.maxMatches()) throw new IllegalStateException("trie match budget exceeded");
+          if (matches == limits.maxMatches()) {
+            throw new IllegalStateException("trie match budget exceeded");
+          }
           onMatch.accept(state);
           matches++;
           check(monitor);
@@ -656,9 +666,13 @@ public final class MIndexTrieNavigation {
     return new WalkStats(transitions, visited, matches, pruned);
   }
 
-  public Selection select(Utf16Machine machine) { return select(machine, WorkLimits.DEFAULT, null); }
+  public Selection select(Utf16Machine machine) {
+    return select(machine, WorkLimits.DEFAULT, null);
+  }
 
-  /** Materialized result with no partial publication on failure; use walk for streaming delivery. */
+  /**
+   * Materialized result with no partial publication on failure; use walk for streaming delivery.
+   */
   public Selection select(Utf16Machine machine, WorkLimits limits, ProgressMonitor monitor) {
     Objects.requireNonNull(limits, "limits");
     check(monitor);
@@ -710,9 +724,17 @@ public final class MIndexTrieNavigation {
 
   private int checkedState(int state) { return Objects.checkIndex(state, stateCount()); }
 
+  /** Used when a caller passes no monitor: records nothing and never reports cancellation. */
+  static final ProgressMonitor NO_PROGRESS = new ProgressMonitor() {
+    @Override
+    public void checkCancelled() { }
+  };
+
   static void check(ProgressMonitor monitor) {
-    if (Thread.currentThread().isInterrupted()) throw new CancellationException("trie operation interrupted");
-    if (monitor != null) monitor.checkCanceled();
+    if (Thread.currentThread().isInterrupted()) {
+      throw new CancellationException("trie operation interrupted");
+    }
+    if (monitor != null) monitor.checkCancelled();
   }
 }
 

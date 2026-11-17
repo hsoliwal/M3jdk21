@@ -1,5 +1,16 @@
 # Isolated IndexString compatibility port
 
+## Location
+
+| What | Where |
+|---|---|
+| `jdk.internal.m3.indexstring` and `.type` (19 classes) | `src/java.base/share/classes/jdk/internal/m3/indexstring`, part of java.base |
+| Their smoke tests (8 files) | `test/jdk/jdk/internal/m3/indexstring`, run by `make/m3/indexstring/test-java-base.sh` (workflow `m3-java-base-internals`) |
+| `jdk.m3.text.compat.M3Text`, `PortMicrobench`, `native-test/`, templates, records | this folder |
+
+`pom.xml` is kept but no longer builds: four classes take `java.util.concurrent.ProgressMonitor`, which only
+M3JDK's java.base has, and on M3JDK the package belongs to java.base.
+
 Six source-owner files are retained with their original names and Apache-2.0 notices. `com.m3.text.compat.M3Text` is a partial stock-JVM facade, not java.lang.String. Do not place both original Synexia classes and these compatibility classes in one loader/module path. No Maven/OpenRewrite/application code is a java.base bootstrap dependency.
 
 `M3Text.fromJoined(existing)` and `fromFrozen(...)` retain owners. `fromString(text, admission)` invokes an existing supplied policy once and checks exact UTF-16; it does not establish a new canonical domain. `concat`/`substring` retain payloads, `asString`/encoding/array outputs materialize intentionally. Equality with String is false in both directions; use `contentEquals`. Regex delegates to java.util.regex, not RE2/J or an approximation.

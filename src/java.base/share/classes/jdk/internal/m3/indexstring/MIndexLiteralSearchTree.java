@@ -1,8 +1,7 @@
 // SPDX-License-Identifier: Apache-2.0
 package jdk.internal.m3.indexstring;
 
-import jdk.m3.collections.DefaultProgressMonitor;
-import jdk.m3.collections.ProgressMonitor;
+import java.util.concurrent.ProgressMonitor;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.List;
@@ -195,7 +194,9 @@ public final class MIndexLiteralSearchTree {
       }
       return navigation;
     }
-    if (buildingNavigation) throw new IllegalStateException("reentrant trie navigation preparation");
+    if (buildingNavigation) {
+      throw new IllegalStateException("reentrant trie navigation preparation");
+    }
     buildingNavigation = true;
     try {
       MIndexTrieNavigation prepared = MIndexTrieNavigation.compileShared(
@@ -250,7 +251,8 @@ public final class MIndexLiteralSearchTree {
         + Character.BYTES * ((long) edgeChar.length + directBase.length)
         + Byte.BYTES * (long) lookupMode.length;
     MIndexTrieNavigation prepared = navigation;
-    return prepared == null ? sourceBytes : Math.addExact(sourceBytes, prepared.primitivePayloadBytes());
+    return prepared == null ? sourceBytes
+        : Math.addExact(sourceBytes, prepared.primitivePayloadBytes());
   }
 
   public int exact(CharSequence input) {
@@ -293,10 +295,10 @@ public final class MIndexLiteralSearchTree {
       CharSequence input, MatchConsumer consumer, ProgressMonitor monitor) {
     Objects.requireNonNull(input, "input");
     Objects.requireNonNull(consumer, "consumer");
-    ProgressMonitor progress = monitor == null ? new DefaultProgressMonitor() : monitor;
-    progress.beginTask("Visit literal matches", input.length());
+    ProgressMonitor progress = monitor == null ? MIndexTrieNavigation.NO_PROGRESS : monitor;
+    progress.begin("Visit literal matches", input.length());
     try {
-      progress.checkCanceled();
+      progress.checkCancelled();
       long delivered = 0L;
       int rootPayload = terminalPayload[ROOT_STATE];
       if (rootPayload >= 0) {
@@ -306,7 +308,7 @@ public final class MIndexLiteralSearchTree {
 
       int state = ROOT_STATE;
       for (int index = 0; index < input.length(); index++) {
-        progress.checkCanceled();
+        progress.checkCancelled();
         state = searchTransition(state, input.charAt(index));
         int end = index + 1;
         for (int linked = state; linked != ROOT_STATE; linked = failure[linked]) {
@@ -321,7 +323,7 @@ public final class MIndexLiteralSearchTree {
         }
         progress.worked(1);
       }
-      progress.checkCanceled();
+      progress.checkCancelled();
       return delivered;
     } finally {
       progress.done();
@@ -475,7 +477,9 @@ public final class MIndexLiteralSearchTree {
         MutableNode node = nodes.get(state);
         Integer next = node.children.get(unit);
         if (next == null) {
-          if (nodes.size() == maxStates) throw new IllegalArgumentException("literal trie state budget exceeded");
+          if (nodes.size() == maxStates) {
+            throw new IllegalArgumentException("literal trie state budget exceeded");
+          }
           next = nodes.size();
           node.children.put(unit, next);
           nodes.add(new MutableNode(node.depth + 1));

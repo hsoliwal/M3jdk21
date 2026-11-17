@@ -1,8 +1,7 @@
 // SPDX-License-Identifier: Apache-2.0
 package jdk.internal.m3.indexstring;
 
-import jdk.m3.collections.DefaultProgressMonitor;
-import jdk.m3.collections.ProgressMonitor;
+import java.util.concurrent.ProgressMonitor;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.LinkedHashMap;
@@ -36,8 +35,9 @@ public final class MIndexVocabularySearchTree {
   }
 
   /**
-   * Compiles the vocabulary tree over spellings. Rows are distinct spellings in first-occurrence order;
-   * each row is frozen once (UTF-16 units, isolated surrogates kept) and never re-read from the caller.
+   * Compiles the vocabulary tree over spellings. Rows are distinct spellings in first-occurrence
+   * order; each row is frozen once (UTF-16 units, isolated surrogates kept) and never re-read from
+   * the caller.
    */
   public static MIndexVocabularySearchTree compile(Collection<? extends CharSequence> vocabulary) {
     Objects.requireNonNull(vocabulary, "vocabulary");
@@ -48,7 +48,9 @@ public final class MIndexVocabularySearchTree {
     }
     FrozenChars[] frozen = new FrozenChars[positions.size()];
     int row = 0;
-    for (String spelling : positions.keySet()) frozen[row++] = FrozenChars.copyOf(spelling.toCharArray());
+    for (String spelling : positions.keySet()) {
+      frozen[row++] = FrozenChars.copyOf(spelling.toCharArray());
+    }
     return new MIndexVocabularySearchTree(frozen);
   }
 
@@ -57,7 +59,9 @@ public final class MIndexVocabularySearchTree {
     return spellings[Objects.checkIndex(row, spellings.length)];
   }
 
-  /** Existing ranked-array behavior remains available until this explicit preparation is requested. */
+  /**
+   * Existing ranked-array behavior remains available until this explicit preparation is requested.
+   */
   public PreparedTries precomputeTries() {
     return precomputeTries(MIndexTrieNavigation.Limits.DEFAULT, null);
   }
@@ -138,7 +142,8 @@ public final class MIndexVocabularySearchTree {
     public MIndexTrieNavigation reverse() { return reverse; }
     /** Both source tries plus their shared-array navigation metadata, counted once. */
     public long primitivePayloadBytes() {
-      return Math.addExact(forwardTree.primitivePayloadBytes(), reverseTree.primitivePayloadBytes());
+      return Math.addExact(
+          forwardTree.primitivePayloadBytes(), reverseTree.primitivePayloadBytes());
     }
   }
 
@@ -210,7 +215,10 @@ public final class MIndexVocabularySearchTree {
     return OptionalInt.empty();
   }
 
-  /** Rows beginning with prefix, in lexical rank order; prepared queries read no vocabulary spelling. */
+  /**
+   * Rows beginning with prefix, in lexical rank order; prepared queries read no vocabulary
+   * spelling.
+   */
   public int[] prefixRows(CharSequence prefix) {
     Objects.requireNonNull(prefix, "prefix");
     PreparedTries prepared = preparedTries;
@@ -229,7 +237,10 @@ public final class MIndexVocabularySearchTree {
     return Arrays.copyOf(scratch, count);
   }
 
-  /** Rows ending with suffix, in reverse-lexical rank order; prepared queries read no vocabulary spelling. */
+  /**
+   * Rows ending with suffix, in reverse-lexical rank order; prepared queries read no vocabulary
+   * spelling.
+   */
   public int[] suffixRows(CharSequence suffix) {
     Objects.requireNonNull(suffix, "suffix");
     PreparedTries prepared = preparedTries;
@@ -317,27 +328,36 @@ public final class MIndexVocabularySearchTree {
   public MIndexTrieNavigation.RankRange prefixRange(CharSequence prefix, ProgressMonitor monitor) {
     Objects.requireNonNull(prefix, "prefix");
     MIndexTrieNavigation navigation = requirePrepared().forward;
-    int state = navigation.stateFor(prefix, 0, prefix.length(), MIndexTrieNavigation.Direction.FORWARD, monitor);
-    return state == MIndexTrieNavigation.DEAD ? new MIndexTrieNavigation.RankRange(0, 0) : navigation.range(state);
+    int state = navigation.stateFor(
+        prefix, 0, prefix.length(), MIndexTrieNavigation.Direction.FORWARD, monitor);
+    return state == MIndexTrieNavigation.DEAD
+        ? new MIndexTrieNavigation.RankRange(0, 0) : navigation.range(state);
   }
 
-  /** Range coordinates agree with the retained reverse ranks; units, not code points, are reversed. */
+  /**
+   * Range coordinates agree with the retained reverse ranks; units, not code points, are reversed.
+   */
   public MIndexTrieNavigation.RankRange suffixRange(CharSequence suffix, ProgressMonitor monitor) {
     Objects.requireNonNull(suffix, "suffix");
     MIndexTrieNavigation navigation = requirePrepared().reverse;
-    int state = navigation.stateFor(suffix, 0, suffix.length(), MIndexTrieNavigation.Direction.REVERSE, monitor);
-    return state == MIndexTrieNavigation.DEAD ? new MIndexTrieNavigation.RankRange(0, 0) : navigation.range(state);
+    int state = navigation.stateFor(
+        suffix, 0, suffix.length(), MIndexTrieNavigation.Direction.REVERSE, monitor);
+    return state == MIndexTrieNavigation.DEAD
+        ? new MIndexTrieNavigation.RankRange(0, 0) : navigation.range(state);
   }
 
   /**
    * Exact prefix/suffix/length intersection, in forward lexical order. Iterates the smaller
    * population using inverse ranks and prepared lengths; never re-tests vocabulary spellings.
-   * For the single-star expression prefix*suffix, use a minimum length of prefix.length()+suffix.length()
-   * to prohibit overlap. This method itself deliberately permits overlapping affix constraints.
+   * For the single-star expression prefix*suffix, use a minimum length of
+   * prefix.length()+suffix.length() to prohibit overlap. This method itself deliberately permits
+   * overlapping affix constraints.
    */
-  public int[] affixRows(CharSequence prefix, CharSequence suffix, int minimumLength, int maximumLength,
-      ProgressMonitor monitor) {
-    if (minimumLength < 0 || maximumLength < minimumLength) throw new IllegalArgumentException("invalid length bounds");
+  public int[] affixRows(CharSequence prefix, CharSequence suffix, int minimumLength,
+      int maximumLength, ProgressMonitor monitor) {
+    if (minimumLength < 0 || maximumLength < minimumLength) {
+      throw new IllegalArgumentException("invalid length bounds");
+    }
     MIndexTrieNavigation.RankRange left = prefixRange(prefix, monitor);
     MIndexTrieNavigation.RankRange right = suffixRange(suffix, monitor);
     MIndexTrieNavigation navigation = requirePrepared().forward;
@@ -369,7 +389,9 @@ public final class MIndexVocabularySearchTree {
 
   private PreparedTries requirePrepared() {
     PreparedTries result = preparedTries;
-    if (result == null) throw new IllegalStateException("call precomputeTries before indexed range queries");
+    if (result == null) {
+      throw new IllegalStateException("call precomputeTries before indexed range queries");
+    }
     return result;
   }
 
@@ -468,7 +490,9 @@ public final class MIndexVocabularySearchTree {
     }
     return left.length() < right.length() ? -1 : 0;
   }
-  /** UTF-16 unit equality of two ranges (the donor's packed four-unit form gives the same answer). */
+  /**
+   * UTF-16 unit equality of two ranges (the donor's packed four-unit form gives the same answer).
+   */
   private static boolean regionEquals(
       CharSequence left, int leftOffset, CharSequence right, int rightOffset, int length) {
     for (int i = 0; i < length; i++) {
