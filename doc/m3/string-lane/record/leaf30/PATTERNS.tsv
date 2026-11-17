@@ -1,0 +1,26 @@
+pattern	version	meaning	atoms
+P-NULLSAFE-STATIC	v1	static member answering null arguments before delegating	24
+P-LATIN1-BYTE-SCAN	v1	flat Latin-1 storage read on its value bytes	6
+P-WINDOW-SCAN	v1	UTF-16/M3 storage read in bulk windows of SCAN_WINDOW units via getChars	17
+P-M3-FACTS-GATE	v1	prepared M3StringFacts answer without reading the text	17
+P-SLICE-RESULT	v1	result is a range of a string (an M3 slice, no copy, on M3 storage)	46
+P-SAME-STRING-RESULT	v1	unchanged result returns this string (no allocation)	41
+P-CASE-UNIT-RULE	v1	regionMatches' one-unit case rule: equal, same upper case, or same lower case of it	2
+P-SURROGATE-GUARD	v1	never splits a surrogate pair (moves back onto or around a pair)	12
+P-TABLE-HOLDER	v1	table built once in a private static holder class from the full algorithm	2
+P-CODE-POINT-WALK	v1	text walked as code points (Character.charCount/codePointAt)	10
+P-DELEGATE	v1	one-statement member delegating to another member	85
+P-NORMALIZER	v1	Unicode normalization through java.text.Normalizer	3
+P-ASCII-FOLD	v1	ASCII-only case folding (asciiLower)	5
+P-NULL-SKIP-VARARGS	v1	loop over a varargs/array argument that skips or answers null elements	12
+P-ASCII-MASK	v1	character set as a two-word ASCII bit mask plus a list of wider units	7
+P-INDEXOF-HOP	v1	occurrences found by indexOf/lastIndexOf hops	14
+P-REGION-MATCH	v1	comparison through regionMatches (case rule included)	21
+P-CHAR-PREDICATE-SCAN	v1	units or code points tested with a Character predicate	10
+P-BUILDER-RESULT	v1	result assembled in a StringBuilder	7
+P-FLAT-MISMATCH	v1	flat arrays compared with the vectorized ArraysSupport.mismatch	1
+P-EDGE-SCAN	v1	scan from one or both ends of the text (strip/trim/chomp shape)	13
+P-UNIT-LIST-SCAN	v1	linear scan of a small unit or code point list (character sets, columns)	5
+P-UNIT-MAP	v1	fixed unit-to-unit mapping as a switch	1
+P-NULL-SAFE-PREDICATE	v1	static null-safe predicate or default over a value	25
+UNKNOWN_PATTERN	-	matched no pattern	16

@@ -1,0 +1,22 @@
+method_texts_verbatim_in_head	7
+lint	javac -Xlint:all,-this-escape -Werror: no warnings
+python 3.12.6 texts 3033 tables 6
+== ReplaceFamilyProof flat -XX:+CompactStrings
+checks	1505	texts	3033+3033
+RESULT	PASS	failures=0
+== ReplaceFamilyProof flat -XX:-CompactStrings
+checks	1505	texts	3033+3033
+RESULT	PASS	failures=0
+== ReplaceFamilyProof m3-facts -XX:+CompactStrings
+checks	1505	texts	3033+3033
+RESULT	PASS	failures=0
+== ReplaceFamilyProof m3-facts -XX:-CompactStrings
+checks	1505	texts	3033+3033
+RESULT	PASS	failures=0
+== ReplaceFamilyProof m3-scan -XX:+CompactStrings
+checks	1505	texts	3033+3033
+RESULT	PASS	failures=0
+== ReplaceFamilyProof m3-scan -XX:-CompactStrings
+checks	1505	texts	3033+3033
+RESULT	PASS	failures=0
+proof exit 0

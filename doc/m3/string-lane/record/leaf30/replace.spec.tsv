@@ -1,0 +1,12 @@
+# REPLACE family: donor op, mode, java op, null rule (donor/donor_prepass.py runs first: replace/3 gets max -1,
+# replaceChars(t, char, char) becomes replaceCharsChar = String.replace(char, char))
+replace	INSTANCE	replace	NPE_ARG
+replaceOnce	INSTANCE	replaceOnce	NPE_ARG
+replaceIgnoreCase	INSTANCE	replaceIgnoreCase	NPE_ARG
+replaceOnceIgnoreCase	INSTANCE	replaceOnceIgnoreCase	NPE_ARG
+remove	INSTANCE	remove	NPE_ARG
+removeIgnoreCase	INSTANCE	removeIgnoreCase	NPE_ARG
+replaceEach	INSTANCE	replaceEach	NPE_ARG
+replaceEachRepeatedly	INSTANCE	replaceEachRepeatedly	NPE_ARG
+replaceChars	INSTANCE	replaceChars	NPE_ARG
+replaceCharsChar	INSTANCE	replace	NPE_ARG

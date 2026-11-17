@@ -122,3 +122,18 @@ rpartition	CPython 3.12 str.rpartition
 rsplit	CPython 3.12 str.rsplit(sep, maxsplit)
 splitLines	CPython 3.12 str.splitlines(keepends)
 chunked	Kotlin 2.2.20 CharSequence.chunked(size)
+replace	commons-lang3 3.22.0 Strings.CS.replace(text, s, r, max)
+replaceOnce	commons Strings.CS.replaceOnce (= max 1)
+replaceIgnoreCase	commons Strings.CI.replace (max -1)
+replaceOnceIgnoreCase	commons Strings.CI.replaceOnce
+remove	commons Strings.CS.remove (= replace with "", max -1)
+removeIgnoreCase	commons Strings.CI.remove
+replaceEach	commons StringUtils.replaceEach (replaceEachOnce)
+replaceEachRepeatedly	commons StringUtils.replaceEachRepeatedly (DEFAULT_TTL 5 = 6 passes)
+replaceChars	commons StringUtils.replaceChars(String, String, String)
+replaceFirstChar	Kotlin 2.2.20 String.replaceFirstChar((Char) -> Char)
+replaceBefore	Kotlin replaceBefore(delimiter: String, ...)
+replaceAfter	Kotlin replaceAfter
+replaceBeforeLast	Kotlin replaceBeforeLast
+replaceAfterLast	Kotlin replaceAfterLast
+translate	CPython 3.12 str.translate
