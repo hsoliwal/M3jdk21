@@ -5321,6 +5321,462 @@ public final class String
     }
 
     /**
+     * Compares two strings lexicographically, as {@link #compareTo(String)} does, ordering
+     * {@code null} before every string.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   a   a string, or {@code null}.
+     * @param   b   a string, or {@code null}.
+     * @return  {@code 0} for two nulls, {@code -1} or {@code 1} when one is {@code null}, and
+     *          {@code a.compareTo(b)} otherwise.
+     * @since   21
+     */
+    public static int compare(String a, String b) {
+        return compare(a, b, true);
+    }
+
+    /**
+     * Compares two strings lexicographically, as {@link #compareTo(String)} does, ordering
+     * {@code null} before every string when {@code nullIsLess}, after every string otherwise.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   a            a string, or {@code null}.
+     * @param   b            a string, or {@code null}.
+     * @param   nullIsLess   whether {@code null} sorts first.
+     * @return  {@code 0} for two nulls, {@code -1} or {@code 1} when one is {@code null}, and
+     *          {@code a.compareTo(b)} otherwise.
+     * @since   21
+     */
+    public static int compare(String a, String b, boolean nullIsLess) {
+        if (a == b) return 0;
+        if (a == null) return nullIsLess ? -1 : 1;
+        if (b == null) return nullIsLess ? 1 : -1;
+        return a.compareTo(b);
+    }
+
+    /**
+     * Compares two strings ignoring case, as {@link #compareToIgnoreCase(String)} does, ordering
+     * {@code null} before every string.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   a   a string, or {@code null}.
+     * @param   b   a string, or {@code null}.
+     * @return  {@code 0} for two nulls, {@code -1} or {@code 1} when one is {@code null}, and
+     *          {@code a.compareToIgnoreCase(b)} otherwise.
+     * @since   21
+     */
+    public static int compareIgnoreCase(String a, String b) {
+        return compareIgnoreCase(a, b, true);
+    }
+
+    /**
+     * Compares two strings ignoring case, as {@link #compareToIgnoreCase(String)} does, ordering
+     * {@code null} before every string when {@code nullIsLess}, after every string otherwise.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   a            a string, or {@code null}.
+     * @param   b            a string, or {@code null}.
+     * @param   nullIsLess   whether {@code null} sorts first.
+     * @return  {@code 0} for two nulls, {@code -1} or {@code 1} when one is {@code null}, and
+     *          {@code a.compareToIgnoreCase(b)} otherwise.
+     * @since   21
+     */
+    public static int compareIgnoreCase(String a, String b, boolean nullIsLess) {
+        if (a == b) return 0;
+        if (a == null) return nullIsLess ? -1 : 1;
+        if (b == null) return nullIsLess ? 1 : -1;
+        return a.compareToIgnoreCase(b);
+    }
+
+    /**
+     * Returns {@code true} if both strings are {@code null}, or both are not and they are equal,
+     * ignoring case as {@link #equalsIgnoreCase(String)} does when {@code ignoreCase}.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   a            a string, or {@code null}.
+     * @param   b            a string, or {@code null}.
+     * @param   ignoreCase   whether case is ignored.
+     * @return  whether the strings are equal.
+     * @since   21
+     */
+    public static boolean equals(String a, String b, boolean ignoreCase) {
+        if (a == b) return true;
+        if (a == null || b == null) return false;
+        return ignoreCase ? a.equalsIgnoreCase(b) : a.equals(b);
+    }
+
+    /**
+     * Returns the longest prefix common to all the given strings. The prefix never ends between
+     * the two halves of a surrogate pair that all the strings share up to its high half. A
+     * {@code null} or empty array, or any {@code null} element, gives the empty string; a single
+     * string gives itself.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   strings   the strings, or {@code null}.
+     * @return  the common prefix, a range of the first string.
+     * @since   21
+     */
+    public static String getCommonPrefix(String... strings) {
+        if (strings == null || strings.length == 0) return "";
+        int end = differenceOfAll(strings);
+        if (end < 0) return strings[0] == null ? "" : strings[0];
+        return end == 0 ? "" : strings[0].substring(0, end);
+    }
+
+    /**
+     * The index of the first difference among {@code strings} as {@link #getCommonPrefix} needs
+     * it: {@code -1} for fewer than two strings, for all {@code null} and for all empty;
+     * {@code 0} when one is {@code null} or empty; the shortest length when all agree up to it;
+     * moved back onto a shared high surrogate.
+     */
+    private static int differenceOfAll(String[] strings) {
+        if (strings.length <= 1) return -1;
+        boolean anyNull = false;
+        boolean allNull = true;
+        int shortest = Integer.MAX_VALUE;
+        int longest = 0;
+        for (String s : strings) {
+            if (s == null) {
+                anyNull = true;
+                shortest = 0;
+            } else {
+                allNull = false;
+                shortest = Math.min(shortest, s.length());
+                longest = Math.max(longest, s.length());
+            }
+        }
+        if (allNull || longest == 0 && !anyNull) return -1;
+        if (shortest == 0) return 0;
+        int first = commonPrefixLength(strings, shortest);
+        if (first > 0 && first < shortest && Character.isLowSurrogate(strings[0].charAt(first))
+                && Character.isHighSurrogate(strings[0].charAt(first - 1))) {
+            first--;
+        }
+        return first == shortest ? (shortest != longest ? shortest : -1) : first;
+    }
+
+    /** The number of leading units all {@code strings} share, at most {@code limit}. */
+    private static int commonPrefixLength(String[] strings, int limit) {
+        String first = strings[0];
+        for (int index = 0; index < limit; index++) {
+            char unit = first.charAt(index);
+            for (int k = 1; k < strings.length; k++) {
+                if (strings[k].charAt(index) != unit) return index;
+            }
+        }
+        return limit;
+    }
+
+    /**
+     * Returns the part of {@code other} that follows the longest prefix it shares with this
+     * string, as {@link #indexOfDifference(String)} defines it; the empty string when the two are
+     * equal.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   other   the string to take the remainder of.
+     * @return  a range of {@code other}.
+     * @throws  NullPointerException if {@code other} is {@code null}.
+     * @since   21
+     */
+    public String difference(String other) {
+        int at = indexOfDifference(other);
+        return at < 0 ? "" : other.substring(at);
+    }
+
+    /**
+     * Returns {@code true} if this string is equal to any of the given sequences, compared as
+     * {@link #contentEquals(CharSequence)} does; {@code null} elements equal nothing.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   searches   the sequences to compare with.
+     * @return  whether one of them equals this string.
+     * @throws  NullPointerException if {@code searches} is {@code null}.
+     * @since   21
+     */
+    public boolean equalsAny(CharSequence... searches) {
+        for (CharSequence search : searches) {
+            if (search != null && contentEquals(search)) return true;
+        }
+        return false;
+    }
+
+    /**
+     * Returns {@code true} if this string is equal to any of the given sequences ignoring case,
+     * as {@link #equalsIgnoreCase(String)} does; {@code null} elements equal nothing.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   searches   the sequences to compare with.
+     * @return  whether one of them equals this string ignoring case.
+     * @throws  NullPointerException if {@code searches} is {@code null}.
+     * @since   21
+     */
+    public boolean equalsAnyIgnoreCase(CharSequence... searches) {
+        for (CharSequence search : searches) {
+            if (search != null && contentEqualsIgnoreCase(search)) return true;
+        }
+        return false;
+    }
+
+    /**
+     * Returns {@code true} if this string and {@code cs} have the same length and are equal
+     * ignoring case, unit by unit as {@link #equalsIgnoreCase(String)} compares.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   cs   the sequence to compare with.
+     * @return  whether they are equal ignoring case.
+     * @throws  NullPointerException if {@code cs} is {@code null}.
+     * @since   21
+     */
+    public boolean contentEqualsIgnoreCase(CharSequence cs) {
+        return equalsIgnoreCase(cs.toString());
+    }
+
+    /**
+     * Compares this string with {@code other} by code point, the order of Unicode scalar values:
+     * unlike {@link #compareTo(String)}, a supplementary character sorts after every character of
+     * the Basic Multilingual Plane. A lone surrogate counts as the code point of its unit.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   other   the string to compare with.
+     * @return  a negative, zero or positive value as this string sorts before, with or after
+     *          {@code other}: the difference of the first differing code points, or of the lengths
+     *          in code points when one is a prefix of the other.
+     * @throws  NullPointerException if {@code other} is {@code null}.
+     * @since   21
+     */
+    public int compareCodePoints(String other) {
+        int common = indexOfDifference(other);
+        if (common < 0) return 0;
+        int start = common;
+        if (start > 0 && Character.isHighSurrogate(charAt(start - 1))) start--;
+        int a = codePointOrEnd(this, start);
+        int b = codePointOrEnd(other, start);
+        if (a == b && start < common) {
+            start = common;
+            a = codePointOrEnd(this, start);
+            b = codePointOrEnd(other, start);
+        }
+        if (a >= 0 && b >= 0 && a != b) return a - b;
+        return codePointCount(start, length()) - other.codePointCount(start, other.length());
+    }
+
+    /** The code point at {@code index} of {@code s}, or {@code -1} at its end. */
+    private static int codePointOrEnd(String s, int index) {
+        return index < s.length() ? s.codePointAt(index) : -1;
+    }
+
+    /**
+     * Returns {@code true} if this string and {@code other} are equal when ASCII letters are
+     * compared without case; every other unit must be identical.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   other   the string to compare with.
+     * @return  whether they are equal ignoring ASCII case.
+     * @throws  NullPointerException if {@code other} is {@code null}.
+     * @since   21
+     */
+    public boolean equalsIgnoreAsciiCase(String other) {
+        if (length() != other.length()) return false;
+        M3StringFacts mine = m3() == null ? null : m3().factsIfPrepared();
+        M3StringFacts theirs = other.m3() == null ? null : other.m3().factsIfPrepared();
+        if (mine != null && theirs != null && mine.ascii && theirs.ascii
+                && mine.asciiLowerHash != theirs.asciiLowerHash) {
+            return false;
+        }
+        return compareToIgnoreAsciiCase(other) == 0;
+    }
+
+    /**
+     * Compares this string with {@code other} lexicographically after mapping the ASCII letters
+     * {@code A..Z} to {@code a..z}; every other unit compares by its value.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   other   the string to compare with.
+     * @return  the difference of the first differing mapped units, or of the lengths.
+     * @throws  NullPointerException if {@code other} is {@code null}.
+     * @since   21
+     */
+    public int compareToIgnoreAsciiCase(String other) {
+        int count = Math.min(length(), other.length());
+        char[] mine = new char[Math.min(count, SCAN_WINDOW)];
+        char[] theirs = new char[mine.length];
+        for (int from = 0; from < count; from += mine.length) {
+            int n = Math.min(mine.length, count - from);
+            getChars(from, from + n, mine, 0);
+            other.getChars(from, from + n, theirs, 0);
+            for (int k = 0; k < n; k++) {
+                char a = asciiLower(mine[k]);
+                char b = asciiLower(theirs[k]);
+                if (a != b) return a - b;
+            }
+        }
+        return length() - other.length();
+    }
+
+    /**
+     * Returns the longest prefix of this string that {@code other} starts with, never ending
+     * between the two halves of a surrogate pair of either sequence.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   other   the sequence to compare with.
+     * @return  a range of this string.
+     * @throws  NullPointerException if {@code other} is {@code null}.
+     * @since   21
+     */
+    public String commonPrefix(CharSequence other) {
+        return commonPrefix(other, false);
+    }
+
+    /**
+     * Returns the longest prefix of this string that {@code other} starts with, comparing units
+     * ignoring case as {@link #regionMatches(boolean, int, String, int, int)} does when
+     * {@code ignoreCase}; it never ends between the two halves of a surrogate pair of either
+     * sequence.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   other        the sequence to compare with.
+     * @param   ignoreCase   whether case is ignored.
+     * @return  a range of this string.
+     * @throws  NullPointerException if {@code other} is {@code null}.
+     * @since   21
+     */
+    public String commonPrefix(CharSequence other, boolean ignoreCase) {
+        int i = matchingUnits(other, Math.min(length(), other.length()), ignoreCase, true);
+        if (i > 0 && (pairAt(this, i - 1) || pairAt(other, i - 1))) i--;
+        return substring(0, i);
+    }
+
+    /**
+     * Returns the longest suffix of this string that {@code other} ends with, never starting
+     * between the two halves of a surrogate pair of either sequence.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   other   the sequence to compare with.
+     * @return  a range of this string.
+     * @throws  NullPointerException if {@code other} is {@code null}.
+     * @since   21
+     */
+    public String commonSuffix(CharSequence other) {
+        return commonSuffix(other, false);
+    }
+
+    /**
+     * Returns the longest suffix of this string that {@code other} ends with, comparing units
+     * ignoring case as {@link #regionMatches(boolean, int, String, int, int)} does when
+     * {@code ignoreCase}; it never starts between the two halves of a surrogate pair of either
+     * sequence.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   other        the sequence to compare with.
+     * @param   ignoreCase   whether case is ignored.
+     * @return  a range of this string.
+     * @throws  NullPointerException if {@code other} is {@code null}.
+     * @since   21
+     */
+    public String commonSuffix(CharSequence other, boolean ignoreCase) {
+        int length = length();
+        int otherLength = other.length();
+        int i = matchingUnits(other, Math.min(length, otherLength), ignoreCase, false);
+        if (i > 0 && (pairAt(this, length - i - 1) || pairAt(other, otherLength - i - 1))) i--;
+        return substring(length - i);
+    }
+
+    /**
+     * The number of units this string and {@code other} share from the start ({@code forward})
+     * or from the end, at most {@code limit}, compared by {@link #sameUnit}. This string, and
+     * {@code other} when it is a String, are read in bulk windows.
+     */
+    private int matchingUnits(CharSequence other, int limit, boolean ignoreCase, boolean forward) {
+        int length = length();
+        int otherLength = other.length();
+        char[] mine = new char[Math.min(limit, SCAN_WINDOW)];
+        String flat = other instanceof String s ? s : null;
+        char[] theirs = flat != null ? new char[mine.length] : null;
+        for (int i = 0; i < limit; ) {
+            int count = Math.min(mine.length, limit - i);
+            int begin = forward ? i : length - i - count;
+            int otherBegin = forward ? i : otherLength - i - count;
+            getChars(begin, begin + count, mine, 0);
+            if (flat != null) flat.getChars(otherBegin, otherBegin + count, theirs, 0);
+            for (int k = 0; k < count; k++) {
+                int at = forward ? k : count - 1 - k;
+                char unit = flat != null ? theirs[at] : other.charAt(otherBegin + at);
+                if (!sameUnit(mine[at], unit, ignoreCase)) return i + k;
+            }
+            i += count;
+        }
+        return limit;
+    }
+
+    /** Whether two units are equal, or equal ignoring case by regionMatches' rule. */
+    private static boolean sameUnit(char a, char b, boolean ignoreCase) {
+        if (a == b) return true;
+        if (!ignoreCase) return false;
+        char upperA = Character.toUpperCase(a);
+        char upperB = Character.toUpperCase(b);
+        return upperA == upperB || Character.toLowerCase(upperA) == Character.toLowerCase(upperB);
+    }
+
+    /** Whether a surrogate pair starts at {@code index} of {@code cs}. */
+    private static boolean pairAt(CharSequence cs, int index) {
+        return index >= 0 && index + 1 < cs.length() && Character.isHighSurrogate(cs.charAt(index))
+                && Character.isLowSurrogate(cs.charAt(index + 1));
+    }
+
+    /**
+     * Returns {@code true} if this string and {@code other} are canonically equivalent: equal
+     * after both are put into Unicode Normalization Form C.
+     *
+     * @apiNote
+     * This method is an M3JDK addition to the {@code String} API.
+     *
+     * @param   other   the string to compare with.
+     * @return  whether they are canonically equivalent.
+     * @throws  NullPointerException if {@code other} is {@code null}.
+     * @since   21
+     */
+    public boolean canonicalEquals(String other) {
+        if (equals(other)) return true;
+        java.text.Normalizer.Form nfc = java.text.Normalizer.Form.NFC;
+        return java.text.Normalizer.normalize(this, nfc)
+                .equals(java.text.Normalizer.normalize(other, nfc));
+    }
+
+    /**
      * Returns true if and only if this string contains the specified
      * sequence of char values.
      *

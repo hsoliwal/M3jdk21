@@ -1,0 +1,108 @@
+// SPDX-License-Identifier: Apache-2.0 OR EPL-2.0
+// Copyright (c) 2026 Synexia, Hitesh Soliwal and others
+
+import com.google.common.base.Strings;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.function.ToIntFunction;
+import kotlin.text.StringsKt;
+import org.apache.commons.lang3.StringUtils;
+
+/**
+ * Timing of the COMPARE family on 4096-unit texts that agree up to the end (the whole text is read). side: "string"
+ * (java.lang.String as patched into this JVM), "naive" (the obvious JDK expression), "donor" (commons-lang3 3.22.0,
+ * Guava 33.7.2 or Kotlin 2.2.20). 3 warm-up and 7 measured rounds of at least 200 ms; median ns per call. Arguments:
+ * kernel index and side; no argument lists the kernels.
+ */
+public final class CompareBench {
+    private static final int SIZE = 4096;
+    private static long sink;
+
+    private CompareBench() {}
+
+    public static void main(String[] args) {
+        String a = fill("The quick brown fox jumps over the lazy dog. ");
+        String upper = a.toUpperCase(java.util.Locale.ROOT);
+        String b = a.substring(0, SIZE - 1) + "!";
+        String c = new String(a.toCharArray());
+        String[] three = {a, c, b};
+        Map<String, Object[]> kernels = new LinkedHashMap<>();
+        put(kernels, "equalsIgnoreAsciiCase", s -> s.equalsIgnoreAsciiCase(upper) ? 1 : 0,
+                s -> s.toLowerCase(java.util.Locale.ROOT).equals(upper.toLowerCase(java.util.Locale.ROOT)) ? 1 : 0,
+                s -> s.equalsIgnoreCase(upper) ? 1 : 0);
+        put(kernels, "compareToIgnoreAsciiCase", s -> s.compareToIgnoreAsciiCase(upper),
+                s -> s.toLowerCase(java.util.Locale.ROOT).compareTo(upper.toLowerCase(java.util.Locale.ROOT)),
+                s -> s.compareToIgnoreCase(upper));
+        put(kernels, "commonPrefix", s -> s.commonPrefix(b).length(), s -> naivePrefix(s, b).length(),
+                s -> Strings.commonPrefix(s, b).length());
+        put(kernels, "commonPrefix ignoreCase", s -> s.commonPrefix(upper, true).length(),
+                s -> naivePrefixIgnoreCase(s, upper).length(), s -> StringsKt.commonPrefixWith(s, upper, true).length());
+        put(kernels, "getCommonPrefix (3 strings)", s -> String.getCommonPrefix(three).length(),
+                s -> naivePrefix(naivePrefix(three[0], three[1]), three[2]).length(),
+                s -> StringUtils.getCommonPrefix(three).length());
+        put(kernels, "difference", s -> s.difference(b).length(), s -> b.substring(naivePrefix(s, b).length()).length(),
+                s -> StringUtils.difference(s, b).length());
+        put(kernels, "compareCodePoints", s -> s.compareCodePoints(b), s -> naiveCodePoints(s, b),
+                s -> naiveCodePoints(s, b));
+        if (args.length == 0) {
+            kernels.keySet().forEach(System.out::println);
+            return;
+        }
+        String label = new ArrayList<>(kernels.keySet()).get(Integer.parseInt(args[0]));
+        int side = List.of("string", "naive", "donor").indexOf(args[1]);
+        @SuppressWarnings("unchecked")
+        ToIntFunction<String> kernel = (ToIntFunction<String>) kernels.get(label)[side];
+        System.out.printf("%s\t%s\t%.1f\t%d%n", label, args[1], time(kernel, a), sink & 1);
+    }
+
+    private static String naivePrefix(String x, String y) {
+        int i = 0;
+        while (i < Math.min(x.length(), y.length()) && x.charAt(i) == y.charAt(i)) i++;
+        return x.substring(0, i);
+    }
+
+    private static String naivePrefixIgnoreCase(String x, String y) {
+        int i = 0;
+        while (i < Math.min(x.length(), y.length()) && x.regionMatches(true, i, y, i, 1)) i++;
+        return x.substring(0, i);
+    }
+
+    private static int naiveCodePoints(String x, String y) {
+        int[] p = x.codePoints().toArray(), q = y.codePoints().toArray();
+        for (int i = 0; i < Math.min(p.length, q.length); i++) if (p[i] != q[i]) return p[i] - q[i];
+        return p.length - q.length;
+    }
+
+    private static void put(Map<String, Object[]> kernels, String label, ToIntFunction<String> mine,
+            ToIntFunction<String> naive, ToIntFunction<String> donor) {
+        kernels.put(label, new Object[] {mine, naive, donor});
+    }
+
+    private static String fill(String unit) {
+        StringBuilder out = new StringBuilder(SIZE + unit.length());
+        while (out.length() < SIZE) out.append(unit);
+        return out.substring(0, SIZE);
+    }
+
+    private static double time(ToIntFunction<String> kernel, String input) {
+        long calls = 1;
+        while (round(kernel, input, calls) < 20_000_000L) calls *= 2;
+        calls *= 10;
+        List<Double> rounds = new ArrayList<>();
+        for (int round = 0; round < 10; round++) {
+            double ns = (double) round(kernel, input, calls) / calls;
+            if (round >= 3) rounds.add(ns);
+        }
+        return rounds.stream().mapToDouble(Double::doubleValue).sorted().toArray()[rounds.size() / 2];
+    }
+
+    private static long round(ToIntFunction<String> kernel, String input, long calls) {
+        long start = System.nanoTime();
+        long sum = 0;
+        for (long call = 0; call < calls; call++) sum += kernel.applyAsInt(input);
+        sink += sum;
+        return System.nanoTime() - start;
+    }
+}

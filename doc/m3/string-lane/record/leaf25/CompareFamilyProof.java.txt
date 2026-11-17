@@ -1,0 +1,198 @@
+// SPDX-License-Identifier: Apache-2.0 OR EPL-2.0
+// Copyright (c) 2026 Synexia, Hitesh Soliwal and others
+
+import com.google.common.base.Strings;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import kotlin.text.StringsKt;
+import org.apache.commons.lang3.StringUtils;
+
+/**
+ * Donor-oracle proof of the COMPARE family on a stock JVM whose String carries the head method text. Corpus: every
+ * string of 0..3 units over UNITS (letters, case pairs with special folding, a combining accent, the halves of two
+ * surrogate pairs), every ordered pair. Oracles: commons-lang3 3.22.0 (compare, compareIgnoreCase, equals,
+ * difference, equalsAny, equalsAnyIgnoreCase, getCommonPrefix), Guava 33.7.2 and Kotlin stdlib 2.2.20 (commonPrefix,
+ * commonSuffix), CPython 3.12 (compareCodePoints: code point order; canonicalEquals: NFC), the definition of ASCII case
+ * folding (equalsIgnoreAsciiCase, compareToIgnoreAsciiCase). Window seams: texts of 505..520 and 1018..1030 units that
+ * differ at the seams. args[0] = folder of the Python oracle files. Exit 1 on a mismatch.
+ */
+public final class CompareFamilyProof {
+    private static final char[] UNITS = {
+        'a', 'A', 'e', (char) 0x0301, (char) 0xE9, (char) 0xDF, (char) 0x1E9E, (char) 0x212A, 'k',
+        (char) 0xD83D, (char) 0xDE00, (char) 0xDE01
+    };
+    private static int failures;
+
+    private CompareFamilyProof() {}
+
+    public static void main(String[] args) throws Exception {
+        List<String> texts = strings();
+        byte[] order = Files.readAllBytes(Path.of(args[0], "CODEPOINT_ORDER.bin"));
+        byte[] nfc = Files.readAllBytes(Path.of(args[0], "NFC_EQUAL.bin"));
+        long n = (long) texts.size() * texts.size();
+        if (order.length != n || nfc.length != n) throw new IllegalStateException("oracle size " + order.length);
+        long[] m = new long[20];
+        String[] first = new String[20];
+        int t = texts.size();
+        for (int i = 0; i < t; i++) {
+            String a = texts.get(i);
+            for (int j = 0; j < t; j++) {
+                String b = texts.get(j);
+                int k = 0;
+                check(m, first, k++, a, b, a.compareCodePoints(b) < 0 ? '<' : a.compareCodePoints(b) == 0 ? '=' : '>',
+                        (char) order[i * t + j]);
+                check(m, first, k++, a, b, a.canonicalEquals(b), nfc[i * t + j] == '1');
+                check(m, first, k++, a, b, String.compare(a, b), StringUtils.compare(a, b));
+                check(m, first, k++, a, b, String.compare(a, b, false), StringUtils.compare(a, b, false));
+                check(m, first, k++, a, b, String.compareIgnoreCase(a, b), StringUtils.compareIgnoreCase(a, b));
+                check(m, first, k++, a, b, String.equals(a, b, true), StringUtils.equalsIgnoreCase(a, b));
+                check(m, first, k++, a, b, String.equals(a, b, false), StringUtils.equals(a, b));
+                check(m, first, k++, a, b, a.difference(b), StringUtils.difference(a, b));
+                check(m, first, k++, a, b, a.equalsAny(b, null), StringUtils.equalsAny(a, b, null));
+                check(m, first, k++, a, b, a.equalsAnyIgnoreCase(null, b), StringUtils.equalsAnyIgnoreCase(a, null, b));
+                check(m, first, k++, a, b, a.contentEqualsIgnoreCase(new StringBuilder(b)),
+                        StringUtils.equalsIgnoreCase(a, b));
+                check(m, first, k++, a, b, a.equalsIgnoreAsciiCase(b), asciiLower(a).equals(asciiLower(b)));
+                check(m, first, k++, a, b, a.compareToIgnoreAsciiCase(b), asciiLower(a).compareTo(asciiLower(b)));
+                check(m, first, k++, a, b, a.commonPrefix(b), Strings.commonPrefix(a, b));
+                check(m, first, k++, a, b, a.commonSuffix(b), Strings.commonSuffix(a, b));
+                check(m, first, k++, a, b, a.commonPrefix(new StringBuilder(b), true),
+                        StringsKt.commonPrefixWith(a, b, true));
+                check(m, first, k++, a, b, a.commonSuffix(new StringBuilder(b), true),
+                        StringsKt.commonSuffixWith(a, b, true));
+                check(m, first, k++, a, b, a.commonPrefix(b, false), StringsKt.commonPrefixWith(a, b, false));
+            }
+        }
+        String[] names = {"compareCodePoints (CPython order)", "canonicalEquals (CPython NFC)", "compare",
+            "compare(nullIsLess=false)", "compareIgnoreCase", "equals(a,b,true)", "equals(a,b,false)", "difference",
+            "equalsAny", "equalsAnyIgnoreCase", "contentEqualsIgnoreCase", "equalsIgnoreAsciiCase",
+            "compareToIgnoreAsciiCase", "commonPrefix (Guava)", "commonSuffix (Guava)", "commonPrefix ignoreCase (Kotlin)",
+            "commonSuffix ignoreCase (Kotlin)", "commonPrefix(false) (Kotlin)"};
+        for (int k = 0; k < names.length; k++) report(names[k], n, m[k], first[k]);
+        nulls();
+        commonPrefixArrays();
+        seams();
+        System.out.println("RESULT\t" + (failures == 0 ? "PASS" : "FAIL") + "\tfailures=" + failures);
+        System.exit(failures == 0 ? 0 : 1);
+    }
+
+    private static void nulls() {
+        String[] values = {null, "", "a", "A", "b"};
+        long mismatches = 0, cases = 0;
+        for (String a : values) {
+            for (String b : values) {
+                cases += 6;
+                mismatches += String.compare(a, b) != StringUtils.compare(a, b) ? 1 : 0;
+                mismatches += String.compare(a, b, false) != StringUtils.compare(a, b, false) ? 1 : 0;
+                mismatches += String.compareIgnoreCase(a, b) != StringUtils.compareIgnoreCase(a, b) ? 1 : 0;
+                mismatches += String.compareIgnoreCase(a, b, false) != StringUtils.compareIgnoreCase(a, b, false) ? 1 : 0;
+                mismatches += String.equals(a, b, false) != StringUtils.equals(a, b) ? 1 : 0;
+                mismatches += String.equals(a, b, true) != StringUtils.equalsIgnoreCase(a, b) ? 1 : 0;
+            }
+        }
+        report("null-safe statics with nulls", cases, mismatches, "-");
+    }
+
+    private static void commonPrefixArrays() {
+        String hi = "" + (char) 0xD83D;
+        String[] values = {null, "", "a", "ab", "abc", "aB", hi + (char) 0xDE00, hi + (char) 0xDE01,
+            "a" + hi + (char) 0xDE00, "a" + hi + (char) 0xDE01, hi};
+        List<String[]> arrays = new ArrayList<>();
+        arrays.add(null);
+        arrays.add(new String[0]);
+        for (String x : values) {
+            arrays.add(new String[] {x});
+            for (String y : values) {
+                arrays.add(new String[] {x, y});
+                for (String z : values) arrays.add(new String[] {x, y, z});
+            }
+        }
+        long mismatches = 0;
+        String first = "-";
+        for (String[] array : arrays) {
+            if (!Objects.equals(String.getCommonPrefix(array), StringUtils.getCommonPrefix(array))
+                    && mismatches++ == 0) {
+                first = array == null ? "null" : List.of(array).toString();
+            }
+        }
+        report("getCommonPrefix arrays", arrays.size(), mismatches, first);
+    }
+
+    private static void seams() {
+        String pair = new String(Character.toChars(0x1F600));
+        String[] tails = {"X", "x", pair, "" + (char) 0xD83D, "A" + pair, ""};
+        long mismatches = 0, cases = 0;
+        String first = "-";
+        for (int k = 505; k <= 1030; k += (k == 520 ? 498 : 1)) {
+            for (String ta : tails) {
+                for (String tb : tails) {
+                    String a = "q".repeat(k) + ta, b = "Q".repeat(k) + tb, c = "q".repeat(k) + tb;
+                    String[] ours = {a.commonPrefix(c), a.commonPrefix(b, true), (ta + a).commonSuffix(tb + a),
+                        a.commonSuffix(b, true), String.valueOf(a.compareToIgnoreAsciiCase(b)),
+                        String.valueOf(a.equalsIgnoreAsciiCase(b)), String.valueOf(a.compareCodePoints(c))};
+                    String[] theirs = {Strings.commonPrefix(a, c), StringsKt.commonPrefixWith(a, b, true),
+                        Strings.commonSuffix(ta + a, tb + a), StringsKt.commonSuffixWith(a, b, true),
+                        String.valueOf(asciiLower(a).compareTo(asciiLower(b))),
+                        String.valueOf(asciiLower(a).equals(asciiLower(b))), String.valueOf(codePointOrder(a, c))};
+                    for (int x = 0; x < ours.length; x++) {
+                        cases++;
+                        boolean same = x == 6 ? Integer.signum(Integer.parseInt(ours[x])) == Integer.parseInt(theirs[x])
+                                : ours[x].equals(theirs[x]);
+                        if (!same && mismatches++ == 0) first = "k=" + k + " check " + x;
+                    }
+                }
+            }
+        }
+        report("window seams (Guava, Kotlin, ASCII, code points)", cases, mismatches, first);
+    }
+
+    private static int codePointOrder(String a, String b) {
+        int[] x = a.codePoints().toArray(), y = b.codePoints().toArray();
+        for (int i = 0; i < Math.min(x.length, y.length); i++) {
+            if (x[i] != y[i]) return Integer.signum(x[i] - y[i]);
+        }
+        return Integer.signum(x.length - y.length);
+    }
+
+    private static String asciiLower(String s) {
+        StringBuilder out = new StringBuilder(s.length());
+        for (char c : s.toCharArray()) out.append(c >= 'A' && c <= 'Z' ? (char) (c - 'A' + 'a') : c);
+        return out.toString();
+    }
+
+    private static void check(long[] m, String[] first, int k, String a, String b, Object mine, Object donor) {
+        if (!Objects.equals(mine, donor) && m[k]++ == 0) first[k] = show(a) + " | " + show(b) + " -> " + mine + " vs " + donor;
+    }
+
+    private static void report(String name, long cases, long mismatches, String first) {
+        failures += mismatches == 0 ? 0 : 1;
+        System.out.println(name + "\t" + cases + "\t" + mismatches + "\t" + (first == null ? "-" : first));
+    }
+
+    private static List<String> strings() {
+        List<String> out = new ArrayList<>();
+        for (int length = 0; length <= 3; length++) {
+            int total = (int) Math.pow(UNITS.length, length);
+            for (int code = 0; code < total; code++) {
+                char[] units = new char[length];
+                int rest = code;
+                for (int i = 0; i < length; i++) {
+                    units[i] = UNITS[rest % UNITS.length];
+                    rest /= UNITS.length;
+                }
+                out.add(new String(units));
+            }
+        }
+        return out;
+    }
+
+    private static String show(String s) {
+        if (s == null) return "null";
+        StringBuilder out = new StringBuilder("\"");
+        for (char c : s.toCharArray()) out.append(c >= 32 && c < 127 ? String.valueOf(c) : String.format("<%04X>", (int) c));
+        return out.append('"').toString();
+    }
+}

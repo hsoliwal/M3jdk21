@@ -1,0 +1,13 @@
+donor_file	method	reason	statement
+StringUtilsEqualsIndexOfTest.java	testEqualsAny	NULL_RECEIVER	assertFalse(StringUtils.equalsAny(null, FOO))
+StringUtilsEqualsIndexOfTest.java	testEqualsAny	NULL_RECEIVER	assertTrue(StringUtils.equalsAny(null, null, null))
+StringUtilsEqualsIndexOfTest.java	testEqualsAny	NULL_RECEIVER	assertFalse(StringUtils.equalsAny(null, FOO, BAR, FOOBAR))
+StringUtilsEqualsIndexOfTest.java	testEqualsAny	NULL_RECEIVER	assertFalse(StringUtils.equalsAny(null, (CharSequence[]) null))
+StringUtilsEqualsIndexOfTest.java	testEqualsAnyIgnoreCase	NULL_RECEIVER	assertFalse(StringUtils.equalsAnyIgnoreCase(null, FOO))
+StringUtilsEqualsIndexOfTest.java	testEqualsAnyIgnoreCase	NULL_RECEIVER	assertTrue(StringUtils.equalsAnyIgnoreCase(null, null, null))
+StringUtilsEqualsIndexOfTest.java	testEqualsAnyIgnoreCase	NULL_RECEIVER	assertFalse(StringUtils.equalsAnyIgnoreCase(null, FOO, BAR, FOOBAR))
+StringUtilsEqualsIndexOfTest.java	testEqualsAnyIgnoreCase	NULL_RECEIVER	assertFalse(StringUtils.equalsAnyIgnoreCase(null, (CharSequence[]) null))
+StringUtilsTest.java	testDifference_StringString	NULL_RECEIVER	assertNull(StringUtils.difference(null, null))
+StringUtilsTest.java	testDifference_StringString	NULL_RECEIVER	assertEquals("i am a robot", StringUtils.difference(null, "i am a robot"))
+StringUtilsTest.java	testGeorgianSample	OTHER_STRINGUTILS:startsWithIgnoreCase	for (final char i : arrayI) { for (final char j : arrayJ) { final String si = String.valueOf(i); final String sj = String.valueOf(j); final boolean res1 = si.equalsIgnoreCase(sj); final CharSequence c
+StringUtilsTest.java	testStringUtilsCharSequenceContract	OTHER_STRINGUTILS:getBytes	final String[] excludeMethods = { "public static int org.apache.commons.lang3.StringUtils.compare(java.lang.String,java.lang.String)", "public static int org.apache.commons.lang3.StringUtils.compare(j
