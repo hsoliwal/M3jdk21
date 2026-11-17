@@ -10,33 +10,33 @@ import java.io.Serializable;
 import jdk.m3.collections.eclipse.api.block.HashingStrategy;
 
 /**
- * The adapters between {@link Equivalence} and {@link HashingStrategy}, the equality strategy the
- * collections of the module share. Each adapter gives back the object it adapts when it is
- * converted again.
+ * The adapters between {@link Equivalence} and {@link HashingStrategy}, the equality strategy
+ * the collections of the module share. Each adapter gives back the object it adapts when it is
+ * converted again, is equal to another adapter of an equal object, and is serializable when what
+ * it wraps is.
  */
 final class EquivalenceStrategies {
 
   private EquivalenceStrategies() {}
 
+  @SuppressWarnings("unchecked") // a strategy only consumes its type: one of a supertype serves T
   static <T> HashingStrategy<T> toStrategy(Equivalence<T> equivalence) {
-    if (equivalence instanceof StrategyEquivalence<T> adapter) {
-      return adapter.strategy;
+    if (equivalence instanceof StrategyEquivalence<?> adapter) {
+      return (HashingStrategy<T>) adapter.strategy;
     }
     return new EquivalenceStrategy<>(equivalence);
   }
 
-  static <T> Equivalence<T> toEquivalence(HashingStrategy<T> strategy) {
+  @SuppressWarnings("unchecked") // an equivalence only consumes its type: a supertype's serves T
+  static <T> Equivalence<T> toEquivalence(HashingStrategy<? super T> strategy) {
     checkNotNull(strategy, "strategy");
-    if (strategy instanceof EquivalenceStrategy<T> adapter) {
-      return adapter.equivalence;
+    if (strategy instanceof EquivalenceStrategy<?> adapter) {
+      return (Equivalence<T>) adapter.equivalence;
     }
     return new StrategyEquivalence<>(strategy);
   }
 
-  /**
-   * An equivalence seen as a hashing strategy. A hashing strategy is serializable; this one is when
-   * its equivalence is.
-   */
+  /** An equivalence seen as a hashing strategy. */
   @SuppressWarnings("serial") // the equivalence is serializable when the caller's equivalence is
   static final class EquivalenceStrategy<T> implements HashingStrategy<T> {
 
@@ -59,6 +59,16 @@ final class EquivalenceStrategies {
     }
 
     @Override
+    public boolean equals(Object other) {
+      return other instanceof EquivalenceStrategy<?> that && equivalence.equals(that.equivalence);
+    }
+
+    @Override
+    public int hashCode() {
+      return equivalence.hashCode();
+    }
+
+    @Override
     public String toString() {
       return "HashingStrategy(" + equivalence + ")";
     }
@@ -69,9 +79,9 @@ final class EquivalenceStrategies {
 
     private static final long serialVersionUID = 1L;
 
-    final HashingStrategy<T> strategy;
+    final HashingStrategy<? super T> strategy;
 
-    StrategyEquivalence(HashingStrategy<T> strategy) {
+    StrategyEquivalence(HashingStrategy<? super T> strategy) {
       this.strategy = strategy;
     }
 

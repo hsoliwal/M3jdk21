@@ -72,6 +72,10 @@ public class StrategyHashMapTest {
         collisions(13L, 100_000);
         entryView();
         failFast();
+        updatesWhileIterating();
+        entryContract();
+        strategyInViews();
+        nullRejectingStrategy();
         System.out.println("StrategyHashMapTest: " + checks + " checks passed");
     }
 
@@ -186,6 +190,85 @@ public class StrategyHashMapTest {
         try {
             new StrategyHashMap<String, String>(null);
             check(false, "null strategy must throw");
+        } catch (NullPointerException expected) {
+            checks++;
+        }
+    }
+
+    /** Updating the values of present keys during an iteration is not a structural change. */
+    static void updatesWhileIterating() {
+        for (int n : new int[] {6, 7, 12, 13, 24, 25, 48, 49, 96, 97}) {
+            StrategyHashMap<Integer, Integer> map = new StrategyHashMap<>();
+            for (int i = 0; i < n; i++) {
+                map.put(i, i);
+            }
+            Set<Integer> seen = new HashSet<>();
+            for (Map.Entry<Integer, Integer> e : map.entrySet()) {
+                check(seen.add(e.getKey()), "each key once at size " + n);
+                check(map.put(e.getKey(), 100 + e.getKey()) == e.getKey(), "put returns old value");
+            }
+            check(seen.size() == n && map.size() == n, "all keys visited at size " + n);
+            for (int i = 0; i < n; i++) {
+                check(map.get(i) == 100 + i, "updated value at size " + n);
+            }
+        }
+    }
+
+    /** setValue returns the old value; remove twice throws; a removed entry cannot be written. */
+    static void entryContract() {
+        StrategyHashMap<String, Integer> map = new StrategyHashMap<>();
+        for (int i = 0; i < 40; i++) {
+            map.put("k" + i, i);
+        }
+        int count = 0;
+        Set<String> keys = new HashSet<>();
+        for (Map.Entry<String, Integer> e : map.entrySet()) {
+            count++;
+            check(keys.add(e.getKey()), "no key twice");
+        }
+        check(count == map.size(), "iteration count equals size");
+        Iterator<Map.Entry<String, Integer>> it = map.entrySet().iterator();
+        Map.Entry<String, Integer> first = it.next();
+        int old = first.getValue();
+        check(first.setValue(old + 1000) == old, "setValue returns the previous value");
+        it.remove();
+        try {
+            it.remove();
+            check(false, "remove twice must throw");
+        } catch (IllegalStateException expected) {
+            checks++;
+        }
+        try {
+            first.setValue(1);
+            check(false, "setValue of a removed mapping must throw");
+        } catch (IllegalStateException expected) {
+            checks++;
+        }
+        check(first.getValue() == old + 1000 && !map.containsKey(first.getKey()), "removed entry");
+    }
+
+    /** contains and remove of the entry view use the strategy, as Eclipse's map does. */
+    static void strategyInViews() {
+        HashingStrategy<String> ci = new CaseInsensitive().asHashingStrategy();
+        StrategyHashMap<String, Integer> map = new StrategyHashMap<>(ci);
+        UnifiedMapWithHashingStrategy<String, Integer> oracle =
+                new UnifiedMapWithHashingStrategy<>(ci);
+        map.put("a", 1);
+        oracle.put("a", 1);
+        Map.Entry<String, Integer> probe = Map.entry("A", 1);
+        check(map.entrySet().contains(probe) == oracle.entrySet().contains(probe), "contains");
+        check(!map.entrySet().contains(Map.entry("A", 2)), "contains compares values");
+        check(map.entrySet().remove(probe) == oracle.entrySet().remove(probe), "remove");
+        check(map.size() == oracle.size() && map.isEmpty(), "size after remove");
+    }
+
+    /** A strategy that rejects null sees null keys even on an empty map, as in Eclipse's map. */
+    static void nullRejectingStrategy() {
+        StrategyHashMap<String, Integer> map =
+                new StrategyHashMap<>(new CaseInsensitive().asHashingStrategy());
+        try {
+            map.get(null);
+            check(false, "get(null) must reach the strategy");
         } catch (NullPointerException expected) {
             checks++;
         }

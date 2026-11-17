@@ -12,6 +12,7 @@
  * the License.
  */
 
+// Modified 2026 by Synexia contributors: conversions to and from HashingStrategy.
 package jdk.m3.collections.guava.base;
 
 import static jdk.m3.collections.guava.base.Preconditions.checkNotNull;
@@ -373,10 +374,11 @@ public abstract class Equivalence<T> implements BiPredicate<T, T> {
   /**
    * Returns this equivalence as a {@link HashingStrategy}, the equality strategy the collections of
    * the module {@code jdk.m3.collections} share: its {@code equals} is {@link #equivalent} and its
-   * {@code computeHashCode} is {@link #hash}, so it handles nulls as this equivalence does.
+   * {@code computeHashCode} is {@link #hash}, so it handles nulls as this equivalence does, except
+   * for an equivalence made by {@link #fromHashingStrategy(HashingStrategy)}: that one returns the
+   * strategy it was made from, which handles nulls as it always did.
    *
-   * <p>An equivalence made by {@link #of(HashingStrategy)} returns the strategy it was made
-   * from. The strategy is serializable when this equivalence is.
+   * <p>The strategy is serializable when this equivalence is.
    *
    * @return this equivalence as a hashing strategy
    */
@@ -391,12 +393,12 @@ public abstract class Equivalence<T> implements BiPredicate<T, T> {
    *
    * <p>A strategy made by {@link #asHashingStrategy()} gives back the equivalence it was made from.
    *
-   * @param <T> the type of the values the strategy evaluates
-   * @param strategy the hashing strategy
+   * @param <T> the type of the values the equivalence evaluates
+   * @param strategy the hashing strategy, of {@code T} or a supertype
    * @return the strategy as an equivalence
    * @throws NullPointerException if the strategy is null
    */
-  public static <T> Equivalence<T> of(HashingStrategy<T> strategy) {
+  public static <T> Equivalence<T> fromHashingStrategy(HashingStrategy<? super T> strategy) {
     return EquivalenceStrategies.toEquivalence(strategy);
   }
 

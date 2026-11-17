@@ -74,6 +74,8 @@ public class EqualityStrategyAdaptersTest {
         roundTrips();
         nulls();
         serialization();
+        valueEquality();
+        variance();
         System.out.println("EqualityStrategyAdaptersTest: " + checks + " checks passed");
     }
 
@@ -90,7 +92,8 @@ public class EqualityStrategyAdaptersTest {
 
     /** An Eclipse strategy drives Commons CollectionUtils. */
     static void strategyAsEquator() {
-        Equator<Object> identity = Equator.of(HashingStrategies.identityStrategy());
+        Equator<Object> identity =
+                Equator.fromHashingStrategy(HashingStrategies.identityStrategy());
         String a = new String("x");
         String b = new String("x");
         check(!identity.equate(a, b) && identity.equate(a, a), "identity equate");
@@ -103,7 +106,7 @@ public class EqualityStrategyAdaptersTest {
         check(CollectionUtils.isEqualCollection(left, Arrays.asList(a, b)),
                 "Commons default: equal");
         Equator<String> byLength =
-                Equator.of(HashingStrategies.fromFunction(String::length));
+                Equator.fromHashingStrategy(HashingStrategies.fromFunction(String::length));
         check(byLength.equate("abc", "xyz") && !byLength.equate("ab", "abc"),
                 "strategy from function");
     }
@@ -118,7 +121,8 @@ public class EqualityStrategyAdaptersTest {
         set.add(b);
         set.add(a);
         check(set.size() == 2, "identity strategy set size " + set.size());
-        Equivalence<String> ci = Equivalence.of(new CaseInsensitive().asHashingStrategy());
+        Equivalence<String> ci =
+                Equivalence.fromHashingStrategy(new CaseInsensitive().asHashingStrategy());
         check(ci.equivalent("Kiwi", "KIWI") && !ci.equivalent("kiwi", "kiwis"), "equivalent");
         check(ci.hash("Kiwi") == "kiwi".hashCode(), "hash");
         check(ci.wrap("Lime").equals(ci.wrap("LIME")), "wrap uses the strategy");
@@ -129,23 +133,26 @@ public class EqualityStrategyAdaptersTest {
     /** Converting twice gives back the original object. */
     static void roundTrips() {
         Equator<String> e = new CaseInsensitive();
-        check(Equator.of(e.asHashingStrategy()) == e, "equator round trip");
+        check(Equator.fromHashingStrategy(e.asHashingStrategy()) == e, "equator round trip");
         HashingStrategy<Object> s = HashingStrategies.identityStrategy();
-        check(Equator.of(s).asHashingStrategy() == s, "strategy round trip through Equator");
+        check(Equator.fromHashingStrategy(s).asHashingStrategy() == s,
+                "strategy round trip through Equator");
         Equivalence<Object> q = Equivalence.equals();
-        check(Equivalence.of(q.asHashingStrategy()) == q, "equivalence round trip");
-        check(Equivalence.of(s).asHashingStrategy() == s,
+        check(Equivalence.fromHashingStrategy(q.asHashingStrategy()) == q,
+                "equivalence round trip");
+        check(Equivalence.fromHashingStrategy(s).asHashingStrategy() == s,
                 "strategy round trip through Equivalence");
-        check(Equivalence.of(s).equals(Equivalence.of(s)), "equal adapters of one strategy");
+        check(Equivalence.fromHashingStrategy(s).equals(Equivalence.fromHashingStrategy(s)),
+                "equal adapters of one strategy");
         try {
-            Equator.of(null);
-            check(false, "Equator.of(null) must throw");
+            Equator.fromHashingStrategy(null);
+            check(false, "Equator.fromHashingStrategy(null) must throw");
         } catch (NullPointerException expected) {
             checks++;
         }
         try {
-            Equivalence.of(null);
-            check(false, "Equivalence.of(null) must throw");
+            Equivalence.fromHashingStrategy(null);
+            check(false, "Equivalence.fromHashingStrategy(null) must throw");
         } catch (NullPointerException expected) {
             checks++;
         }
@@ -162,7 +169,7 @@ public class EqualityStrategyAdaptersTest {
         check(fromEquals.equals(null, null) && fromEquals.computeHashCode(null) == 0,
                 "equivalence nulls");
         Equivalence<String> overStrict =
-                Equivalence.of(new CaseInsensitiveLocal().asHashingStrategy());
+                Equivalence.fromHashingStrategy(new CaseInsensitiveLocal().asHashingStrategy());
         check(overStrict.equivalent(null, null) && !overStrict.equivalent(null, "a"),
                 "null never reaches");
         check(overStrict.hash(null) == 0, "null hash of an equivalence");
@@ -174,15 +181,48 @@ public class EqualityStrategyAdaptersTest {
         HashingStrategy<String> back = copy(s);
         check(back.equals("Q", "q") && back.computeHashCode("Q") == "q".hashCode(),
                 "strategy copy");
-        Equivalence<String> q = Equivalence.of(s);
+        Equivalence<String> q = Equivalence.fromHashingStrategy(s);
         Equivalence<String> qBack = copy(q);
         check(qBack.equivalent("Rr", "rR"), "equivalence copy");
+        Equator<String> fromStrategy = Equator.fromHashingStrategy(s);
+        check(copy(fromStrategy).equate("Zz", "zZ"), "an equator made from a strategy serializes");
+        Equator<String> byLength =
+                Equator.fromHashingStrategy(HashingStrategies.fromFunction(String::length));
+        check(copy(byLength).equate("abc", "xyz"),
+                "an equator over a strategy of Eclipse serializes");
         try {
             copy(new CaseInsensitiveLocal().asHashingStrategy());
             check(false, "a strategy over a non-serializable equator must not serialize");
         } catch (NotSerializableException expected) {
             checks++;
         }
+    }
+
+    /** Two conversions of one object are equal, so Guava wrappers made by them are equal. */
+    static void valueEquality() {
+        Equator<String> e = new CaseInsensitive();
+        check(e.asHashingStrategy().equals(e.asHashingStrategy()), "two strategies of one equator");
+        HashingStrategy<Object> id = HashingStrategies.identityStrategy();
+        check(Equator.fromHashingStrategy(id).equals(Equator.fromHashingStrategy(id)),
+                "two equators");
+        check(Equivalence.equals().asHashingStrategy().equals(Equivalence.equals().asHashingStrategy()),
+                "two strategies of one equivalence");
+        Equivalence<String> first = Equivalence.fromHashingStrategy(e.asHashingStrategy());
+        Equivalence<String> second = Equivalence.fromHashingStrategy(e.asHashingStrategy());
+        check(first.equals(second) && first.hashCode() == second.hashCode(), "two equivalences");
+        check(first.wrap("Fig").equals(second.wrap("FIG")), "wrappers across conversions");
+    }
+
+    /** A strategy of a supertype serves a typed equator or equivalence. */
+    static void variance() {
+        Equivalence<String> identity =
+                Equivalence.fromHashingStrategy(HashingStrategies.identityStrategy());
+        String a = new String("v");
+        check(identity.equivalent(a, a) && !identity.equivalent(a, new String("v")), "identity");
+        UnifiedSetWithHashingStrategy<String> set =
+                new UnifiedSetWithHashingStrategy<>(new CaseInsensitive().asHashingStrategy());
+        Equator<String> fromSet = Equator.fromHashingStrategy(set.hashingStrategy());
+        check(fromSet.equate("Rose", "ROSE"), "the strategy of an existing set");
     }
 
     @SuppressWarnings("unchecked")

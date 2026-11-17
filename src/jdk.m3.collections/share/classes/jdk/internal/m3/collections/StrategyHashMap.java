@@ -116,24 +116,17 @@ public final class StrategyHashMap<K, V> {
      */
     @SuppressWarnings("unchecked")
     public V put(K key, V value) {
-        reserveOne();
         int hash = strategy.computeHashCode(key);
-        int mask = keyLane.length - 1;
-        int reuse = -1;
-        for (int slot = spread(hash) & mask; ; slot = (slot + 1) & mask) {
-            long state = state(slot);
-            if (state == 0) {
-                occupy(reuse >= 0 ? reuse : slot, key, value, hash);
-                return null;
-            }
-            if (state == STATE_DELETED) {
-                reuse = reuse >= 0 ? reuse : slot;
-            } else if (hashLane[slot] == hash && strategy.equals((K) keyLane[slot], key)) {
-                V previous = (V) valueLane[slot];
-                valueLane[slot] = value;
-                return previous;
-            }
+        int slot = slotOf(key, hash);
+        if (slot >= 0) {
+            // an update is not a structural change: no room is reserved, nothing moves
+            V previous = (V) valueLane[slot];
+            valueLane[slot] = value;
+            return previous;
         }
+        reserveOne();
+        occupy(freeSlot(hash), key, value, hash);
+        return null;
     }
 
     /**
@@ -205,14 +198,19 @@ public final class StrategyHashMap<K, V> {
         modCount++;
     }
 
-    /** The slot of the key equal to {@code key}, or -1. */
+    /** The slot of the key equal to {@code key}, or -1; the strategy sees the key, as in a put. */
     @SuppressWarnings("unchecked")
     private int find(Object key) {
+        K probe = (K) key;
+        return slotOf(probe, strategy.computeHashCode(probe));
+    }
+
+    /** The slot of the key equal to {@code key} whose strategy hash is {@code hash}, or -1. */
+    @SuppressWarnings("unchecked")
+    private int slotOf(K key, int hash) {
         if (size == 0) {
             return -1;
         }
-        K probe = (K) key;
-        int hash = strategy.computeHashCode(probe);
         int mask = keyLane.length - 1;
         for (int slot = spread(hash) & mask; ; slot = (slot + 1) & mask) {
             long state = state(slot);
@@ -220,10 +218,20 @@ public final class StrategyHashMap<K, V> {
                 return -1;
             }
             if (state == STATE_OCCUPIED && hashLane[slot] == hash
-                    && strategy.equals((K) keyLane[slot], probe)) {
+                    && strategy.equals((K) keyLane[slot], key)) {
                 return slot;
             }
         }
+    }
+
+    /** The first deleted or empty slot on the probe sequence of {@code hash}; the key is absent. */
+    private int freeSlot(int hash) {
+        int mask = keyLane.length - 1;
+        int slot = spread(hash) & mask;
+        while (state(slot) == STATE_OCCUPIED) {
+            slot = (slot + 1) & mask;
+        }
+        return slot;
     }
 
     private static int spread(int hash) {
@@ -270,7 +278,10 @@ public final class StrategyHashMap<K, V> {
         if (capacity == 0) {
             allocate(MIN_CAPACITY);
         } else if ((long) (size + deleted + 1) * 4 > (long) capacity * 3) {
-            boolean grow = (long) (size + 1) * 2 > capacity && capacity < MAX_CAPACITY;
+            boolean grow = (long) (size + 1) * 2 > capacity;
+            if (grow && capacity == MAX_CAPACITY) {
+                throw new IllegalStateException("StrategyHashMap is full: " + size + " mappings");
+            }
             rehash(grow ? capacity * 2 : capacity);
         }
     }
@@ -305,6 +316,7 @@ public final class StrategyHashMap<K, V> {
             setState(slot, STATE_OCCUPIED);
         }
         deleted = 0;
+        modCount++;
     }
 
     /** The mappings, read and written through the lanes. */
@@ -322,6 +334,30 @@ public final class StrategyHashMap<K, V> {
         @Override
         public void clear() {
             StrategyHashMap.this.clear();
+        }
+
+        /** A mapping is in the view when its key is equal to a key of the map by the strategy. */
+        @Override
+        public boolean contains(Object o) {
+            return slotOfEntry(o) >= 0;
+        }
+
+        @Override
+        public boolean remove(Object o) {
+            int slot = slotOfEntry(o);
+            if (slot < 0) {
+                return false;
+            }
+            vacate(slot);
+            return true;
+        }
+
+        private int slotOfEntry(Object o) {
+            if (!(o instanceof Map.Entry<?, ?> entry)) {
+                return -1;
+            }
+            int slot = find(entry.getKey());
+            return slot >= 0 && Objects.equals(valueLane[slot], entry.getValue()) ? slot : -1;
         }
     }
 
@@ -371,30 +407,50 @@ public final class StrategyHashMap<K, V> {
         }
     }
 
-    /** A transient facade over one slot. */
+    /**
+     * A transient facade over one slot. While its key holds the slot, it reads and writes the
+     * lanes; once the mapping is removed or moved by a resize, it keeps the key and the last value
+     * it saw, and {@code setValue} throws {@code IllegalStateException}.
+     */
     private final class SlotEntry implements Map.Entry<K, V> {
         private final int slot;
+        private final K key;
+        private V lastValue;
 
+        @SuppressWarnings("unchecked")
         SlotEntry(int slot) {
             this.slot = slot;
+            this.key = (K) keyLane[slot];
+            this.lastValue = (V) valueLane[slot];
+        }
+
+        /** Whether this entry's key still holds its slot. */
+        private boolean live() {
+            return slot < keyLane.length && state(slot) == STATE_OCCUPIED && keyLane[slot] == key;
         }
 
         @Override
-        @SuppressWarnings("unchecked")
         public K getKey() {
-            return (K) keyLane[slot];
+            return key;
         }
 
         @Override
         @SuppressWarnings("unchecked")
         public V getValue() {
-            return (V) valueLane[slot];
+            if (live()) {
+                lastValue = (V) valueLane[slot];
+            }
+            return lastValue;
         }
 
         @Override
         public V setValue(V value) {
+            if (!live()) {
+                throw new IllegalStateException("the mapping of " + key + " left its slot");
+            }
             V previous = getValue();
             valueLane[slot] = value;
+            lastValue = value;
             return previous;
         }
 

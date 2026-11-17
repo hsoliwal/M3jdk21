@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+// Modified 2026 by Synexia contributors: conversions to and from HashingStrategy.
 package jdk.m3.collections.apache;
 
 import java.util.Comparator;
@@ -58,7 +59,8 @@ public interface Equator<T> {
      * Object)} and its {@code computeHashCode} is {@link #hash(Object)}. Nulls are passed on as
      * they come, so the strategy handles them as this equator does.
      * <p>
-     * An equator made by {@link #of(HashingStrategy)} returns the strategy it was made from. The
+     * An equator made by {@link #fromHashingStrategy(HashingStrategy)} returns the strategy it was
+     * made from. The
      * strategy is serializable when this equator is.
      * </p>
      *
@@ -72,15 +74,16 @@ public interface Equator<T> {
      * Returns the {@link HashingStrategy} as an equator: {@link #equate(Object, Object)} is its
      * {@code equals} and {@link #hash(Object)} is its {@code computeHashCode}.
      * <p>
-     * A strategy made by {@link #asHashingStrategy()} gives back the equator it was made from.
+     * A strategy made by {@link #asHashingStrategy()} gives back the equator it was made from. The
+     * equator is serializable, as hashing strategies are.
      * </p>
      *
-     * @param <T> the type of the objects the strategy evaluates
-     * @param strategy the hashing strategy, not null
+     * @param <T> the type of the objects the equator evaluates
+     * @param strategy the hashing strategy, of {@code T} or a supertype, not null
      * @return the strategy as an equator
      * @throws NullPointerException if the strategy is null
      */
-    static <T> Equator<T> of(final HashingStrategy<T> strategy) {
+    static <T> Equator<T> fromHashingStrategy(final HashingStrategy<? super T> strategy) {
         return EquatorStrategies.toEquator(strategy);
     }
 }
