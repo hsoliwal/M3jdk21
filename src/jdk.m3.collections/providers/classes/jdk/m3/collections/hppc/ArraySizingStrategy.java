@@ -17,11 +17,16 @@ package jdk.m3.collections.hppc;
  *
  * <p>The growth-policy owner of the collection libraries carried in {@code jdk.m3.collections}.
  * {@link #grow} is the only abstract method, so a lambda is a strategy, and the static factories
- * are a superset of the array-list growth policies of the module's libraries: {@link #hppc()},
+ * are a superset of the array-list growth policies of the carried third-party libraries (the
+ * module's own {@code IntArrayList}, {@code LongArrayList} and {@code M3ArrayList} keep their
+ * policies): {@link #hppc()},
  * {@link #arrayList()}, {@link #fastList()}, {@link #immutableCollectionBuilder()} and {@link
  * #gapList()}. Each factory reproduces its library's arithmetic for a buffer of length {@code
  * currentBufferLength} that must hold {@code elementsCount + expectedAdditions} elements, as a
  * container created with that explicit capacity grows, {@code currentBufferLength == 0} included.
+ * The four library factories other than {@link #hppc()} return {@code currentBufferLength} when
+ * it already holds that many elements, as their containers do not grow then; {@link #hppc()}
+ * grows anyway, as HPPC's strategy does.
  *
  * <p>Every factory throws {@link BufferAllocationException} when {@code elementsCount +
  * expectedAdditions} exceeds {@code Integer.MAX_VALUE}; {@link #hppc()} throws it already above
@@ -85,7 +90,9 @@ public interface ArraySizingStrategy extends Accountable {
    * current length plus the larger of half of it and what is missing; when that overflows or
    * exceeds {@code Integer.MAX_VALUE - 8}, the larger of {@code Integer.MAX_VALUE - 8} and what is
    * needed. From an empty buffer it is what is needed. {@code new ArrayList<>()} allocates 10 on
-   * its first add instead and grows by this policy from there.
+   * its first {@code add(E)} instead; its first {@code addAll} or {@code ensureCapacity} of
+   * {@code n > 10} elements allocates {@code n}, of {@code n <= 10} elements 10 ({@code addAll})
+   * or nothing ({@code ensureCapacity}); it grows by this policy from there.
    *
    * @return the strategy
    */
@@ -99,7 +106,8 @@ public interface ArraySizingStrategy extends Accountable {
    * sizePlusFiftyPercent}: the larger of the current length plus half of it plus one and what is
    * needed. When that sum overflows, {@code Integer.MAX_VALUE - 8} replaces it; it is not a cap,
    * a sum above it that does not overflow is used as it is. {@code new FastList<>()} allocates 10
-   * on its first add instead and grows by this policy from there.
+   * on its first {@code add(E)} or {@code add(int, E)} instead; its {@code addAll} and {@code
+   * ensureCapacity} follow this policy from 0.
    *
    * @return the strategy
    */
@@ -113,7 +121,10 @@ public interface ArraySizingStrategy extends Accountable {
    * ImmutableCollection.Builder.expandedCapacity}: the current length plus half of it plus one,
    * or, if that is not enough, the power of two at or above what is needed; {@code
    * Integer.MAX_VALUE} when that overflows. {@code ImmutableList.builder()} allocates 4 when it is
-   * created instead and grows by this policy from there.
+   * created instead and grows by this policy from there. Guava's other builders differ: {@code
+   * ImmutableSet.builder()} and {@code ImmutableSet.builderWithExpectedSize(0)} allocate 4 on
+   * their first add, and {@code ImmutableSortedSet.Builder} applies the policy to its
+   * deduplicated count.
    *
    * @return the strategy
    */

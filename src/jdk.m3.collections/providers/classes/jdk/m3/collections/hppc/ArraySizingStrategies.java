@@ -15,18 +15,23 @@ package jdk.m3.collections.hppc;
  * The array-list growth policies of the module's collection libraries, returned by the factories
  * of {@link ArraySizingStrategy}. Each constant re-expresses its library's arithmetic for a buffer
  * of length {@code currentBufferLength} that must hold {@code elementsCount + expectedAdditions}
- * elements; as enum constants they are serializable singletons.
+ * elements; as enum constants they are serializable singletons, so this class's binary name and
+ * the constant names are part of their serialized form.
  */
 enum ArraySizingStrategies implements ArraySizingStrategy {
 
   /**
    * {@code ArrayList.grow(minCapacity)} with {@code ArraysSupport.newLength}, for every current
-   * length.
+   * length. A length that already holds what is needed is kept: {@code ArrayList} does not grow
+   * then.
    */
   ARRAY_LIST {
     @Override
     public int grow(int currentBufferLength, int elementsCount, int expectedAdditions) {
       int target = target(currentBufferLength, elementsCount, expectedAdditions);
+      if (target <= currentBufferLength) {
+        return currentBufferLength;
+      }
       int half = currentBufferLength >> 1;
       int grown = currentBufferLength + Math.max(target - currentBufferLength, half);
       if (0 < grown && grown <= SOFT_MAX_ARRAY_LENGTH) {
@@ -41,11 +46,17 @@ enum ArraySizingStrategies implements ArraySizingStrategy {
     }
   },
 
-  /** {@code FastList.ensureCapacity(minCapacity)} with {@code FastList.sizePlusFiftyPercent}. */
+  /**
+   * {@code FastList.ensureCapacity(minCapacity)} with {@code FastList.sizePlusFiftyPercent}. A
+   * length that already holds what is needed is kept: {@code FastList} does not grow then.
+   */
   FAST_LIST {
     @Override
     public int grow(int currentBufferLength, int elementsCount, int expectedAdditions) {
       int target = target(currentBufferLength, elementsCount, expectedAdditions);
+      if (target <= currentBufferLength) {
+        return currentBufferLength;
+      }
       int grown = currentBufferLength + (currentBufferLength >> 1) + 1;
       if (grown < currentBufferLength) {
         grown = SOFT_MAX_ARRAY_LENGTH;

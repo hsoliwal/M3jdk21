@@ -25,7 +25,7 @@ names the copyright holder ("Copyright 2010-2013, Carrot Search s.c., Boznicza 1
 hand-written sources carry the header "Copyright (C) 2010-2026 Carrot Search s.c. and contributors / All rights
 reserved. / Refer to the full license file "LICENSE.txt"", which points to the Apache License of the repository; the
 525 generated sources carry none (the templates have none). These headers are unchanged, except that the header of
-`ArraySizingStrategy.java` has one more line, which records Synexia's modification. `ArraySizingStrategies.java`
+`ArraySizingStrategy.java` has a modification notice (two lines), which records Synexia's modification. `ArraySizingStrategies.java`
 carries Synexia's header (Apache License 2.0 or Eclipse Public License 2.0). The repository's `NOTICE.txt` is
 reproduced below.
 
@@ -79,8 +79,10 @@ static factories are a superset of the array-list growth policies of the module'
 `java.util.ArrayList` with `jdk.internal.util.ArraysSupport.newLength` (OpenJDK), Eclipse Collections
 `FastList.sizePlusFiftyPercent`/`ensureCapacity`, Guava `ImmutableCollection.Builder.expandedCapacity` and Brownies
 Collections `CapacityHelper.calculateCapacity`. `grow`, `BoundedProportionalArraySizingStrategy` and the HPPC
-containers are unchanged. `ArraySizingStrategy.java` retains its original copyright and license and records this
-modification in its header.
+containers are unchanged. The class documentation comment of `ArraySizingStrategy` is rewritten for the new role.
+`ArraySizingStrategy.java` retains its original copyright and license and records this modification in its header.
+`arrayList()` and `fastList()` keep a length that already holds what is needed (2026-11-17, second round), as their
+lists do not grow then.
 
 ### Exported packages
 
