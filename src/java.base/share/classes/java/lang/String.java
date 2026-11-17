@@ -292,7 +292,7 @@ public final class String
     public String(String original) {
         M3String storage = original.m3();
         this.value = original.value;
-        this.coder = storage == null ? original.coder : storage.coder();
+        this.coder = original.coder;
         this.m3 = storage;
         this.chValue = original.chValue;
         this.hash = original.hash;
@@ -382,7 +382,7 @@ public final class String
         M3String direct = maybeAdmitCodePoints(codePoints, offset, count);
         if (direct != null) {
             this.value = direct.materialize();
-            this.coder = direct.coder();
+            this.coder = shadowCoder(this.value, direct.length());
             this.m3 = direct;
             return;
         }
@@ -461,9 +461,11 @@ public final class String
             }
             candidateCoder = UTF16;
         }
+        // The candidate is canonical: Latin-1 for a zero high byte, else every unit is above
+        // 0xff (or Compact Strings are off), so its coder is the coder the pool chose.
         M3String storage = maybeAdmit(candidate, candidateCoder);
         this.value = candidate;
-        this.coder = storage == null ? candidateCoder : storage.coder();
+        this.coder = candidateCoder;
         this.m3 = storage;
     }
 
@@ -587,13 +589,15 @@ public final class String
     private String(M3Construction construction) {
         if (construction.storage != null) {
             this.value = construction.storage.materialize();
-            this.coder = construction.storage.coder();
+            this.coder = shadowCoder(this.value, construction.storage.length());
             this.m3 = construction.storage;
             return;
         }
         M3String storage = maybeAdmit(construction.value, construction.coder);
-        this.value = construction.value;
-        this.coder = storage == null ? construction.coder : storage.coder();
+        this.value = admittedBytes(construction.value, construction.coder, storage);
+        this.coder = this.value == construction.value
+                ? construction.coder
+                : shadowCoder(this.value, storage.length());
         this.m3 = storage;
     }
 
@@ -13834,7 +13838,7 @@ public final class String
         M3String direct = maybeAdmit(value, off, len);
         if (direct != null) {
             this.value = direct.materialize();
-            this.coder = direct.coder();
+            this.coder = shadowCoder(this.value, direct.length());
             this.m3 = direct;
             return;
         }
@@ -13871,7 +13875,7 @@ public final class String
                         asb.isLatin1() ? LATIN1 : UTF16);
         if (direct != null) {
             this.value = direct.materialize();
-            this.coder = direct.coder();
+            this.coder = shadowCoder(this.value, direct.length());
             this.m3 = direct;
             return;
         }
@@ -13902,9 +13906,29 @@ public final class String
     */
     String(byte[] value, byte coder) {
         M3String storage = maybeAdmit(value, coder);
-        this.value = value;
-        this.coder = storage == null ? coder : storage.coder();
+        this.value = admittedBytes(value, coder, storage);
+        this.coder = this.value == value ? coder : shadowCoder(this.value, storage.length());
         this.m3 = storage;
+    }
+
+    /**
+     * The coder of M3 shadow bytes of {@code length} units, which {@link M3String#materialize()}
+     * lays out in the canonical coder (decision 50): Latin-1 exactly when one byte per unit.
+     */
+    private static byte shadowCoder(byte[] shadow, int length) {
+        return COMPACT_STRINGS ? StringUTF16.coderFromArrayLen(shadow, length) : UTF16;
+    }
+
+    /**
+     * The bytes an admitted String keeps: the caller's bytes, unless they are UTF-16 and the
+     * pool found every unit Latin-1 (the pool canonicalises), in which case they are laid out
+     * again in Latin-1, so that value and coder agree with the canonical coder (decision 50).
+     */
+    private static byte[] admittedBytes(byte[] bytes, byte coder, M3String storage) {
+        return COMPACT_STRINGS && storage != null && coder == UTF16
+                        && storage.coder() == LATIN1 && storage.length() != 0
+                ? StringUTF16.compress(bytes, 0, storage.length())
+                : bytes;
     }
 
     private static M3String maybeAdmitCodePoints(
@@ -13948,7 +13972,7 @@ public final class String
     String(M3String storage) {
         M3String checked = Objects.requireNonNull(storage, "storage");
         this.value = checked.materialize();
-        this.coder = checked.coder();
+        this.coder = shadowCoder(this.value, checked.length());
         this.m3 = checked;
     }
 
@@ -13990,7 +14014,7 @@ public final class String
                 && jdk.internal.misc.VM.isBooted()
                 && M3String.admissionEnabled()
                 && value.length != 0) {
-            storage = M3String.admit(value, rawCoder());
+            storage = M3String.admit(value, coder());
             m3 = storage;
         }
         return storage;
@@ -14038,13 +14062,12 @@ public final class String
         return storage == null ? null : new String(storage);
     }
 
-    private byte rawCoder() {
-        return COMPACT_STRINGS ? coder : UTF16;
-    }
-
+    /**
+     * The coder of {@link #value}, for every String the canonical coder of its text (decision
+     * 50): an M3-backed String reports its bytes' coder, never its owner's.
+     */
     byte coder() {
-        M3String storage = m3;
-        return storage == null ? rawCoder() : storage.coder();
+        return COMPACT_STRINGS ? coder : UTF16;
     }
 
     byte[] value() {

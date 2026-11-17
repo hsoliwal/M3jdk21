@@ -51,6 +51,7 @@ Proof: `record/layout-invariant/LAZY_PROOF.txt`, run on master `9ed7c43441fa`.
 The owner's decision 50 (2026-11-17) keeps M3-backed Strings on the layout of every other String. Its parts, in landing order:
 
 - **Java shadows.** `M3String.materialize()` and `M3String.charShadow()` fill fresh arrays in Java from the owners' bulk reads, the same `getBytes` and `getChars` the JNI called back. The natives `nativeByteShadow` and `nativeCharShadow` are gone from `M3String.java`, and `String.c` is the upstream jdk21u file again. Gate: `M3StringJavaShadowTest`.
+- **Canonical coder.** `value` is laid out in the canonical coder of the text: Latin-1 exactly when Compact Strings are on and every unit fits, else UTF-16. `coder()` of every String reports the coder of its `value`, never the owner coder: a tuple ORs its children's coders, so a UTF-16 owner can hold an all-Latin-1 range, and `materialize()` lays such a range out in Latin-1. Admitted UTF-16 caller bytes that the pool found all Latin-1 are laid out again in Latin-1. Gates: `StringLayoutInvariantTest` (value and `coder()` agree, the coder is canonical) and `M3StringJavaShadowTest`.
 
 The sections below describe the eager stage 1 (#3258) as it landed. They hold for `value`; for `chValue`, read "filled once on demand" wherever they say "filled at construction".
 

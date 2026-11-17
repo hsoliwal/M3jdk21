@@ -1410,17 +1410,29 @@ final class M3String implements CharSequence {
     }
 
     /**
-     * Compact-String compatibility shadow in this value's coder: a fresh array filled in Java by
-     * the owners' bulk reads. Never cached by M3String or its owners.
+     * Compact-String compatibility shadow in the canonical coder of this text: a fresh array
+     * filled in Java by the owners' bulk reads, Latin-1 exactly when Compact Strings are on and
+     * every unit fits, else UTF-16. The owner coder only bounds it: a UTF-16 owner (a tuple ORs
+     * its children's coders) can hold an all-Latin-1 range. Never cached by M3String or its
+     * owners.
      */
     byte[] materialize() {
         //FLLDCIM: LAYOUT - decision 50: shadows are filled in Java; the JNI round trip is gone
+        //FLLDCIM: LAYOUT - decision 50: the shadow is laid out in the canonical coder
         int length = length();
-        byte coder = coder();
-        byte[] bytes = coder == String.LATIN1 ? new byte[length]
-                                              : StringUTF16.newBytesFor(length);
-        if (length != 0) getBytes(bytes, 0, 0, coder, length);
-        return bytes;
+        boolean latin1Owner = coder() == String.LATIN1;
+        M3StringFacts prepared = latin1Owner ? null : factsIfPrepared();
+        if (String.COMPACT_STRINGS && (latin1Owner || prepared != null && prepared.latin1)) {
+            byte[] latin1 = new byte[length];
+            if (length != 0) getBytes(latin1, 0, 0, String.LATIN1, length);
+            return latin1;
+        }
+        byte[] utf16 = StringUTF16.newBytesFor(length);
+        if (length == 0) return utf16;
+        getBytes(utf16, 0, 0, String.UTF16, length);
+        if (!String.COMPACT_STRINGS || prepared != null) return utf16;
+        byte[] latin1 = new byte[length];
+        return StringUTF16.compress(utf16, 0, latin1, 0, length) == length ? latin1 : utf16;
     }
 
     /** Fresh UTF-16 array shadow, filled in Java by the owners' bulk reads. */

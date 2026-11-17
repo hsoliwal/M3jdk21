@@ -8,7 +8,8 @@
  * @summary M3JDK decision 50: the M3String byte and char shadows are filled in Java. Over atoms,
  *          immediates, tuples and slices of Latin-1 and UTF-16 text, materialize() and
  *          charShadow() hold the text of the flat String of the same spelling, are fresh arrays
- *          on every call, and new String(M3String) holds exactly that text
+ *          on every call, the byte shadow is laid out in the canonical coder, and
+ *          new String(M3String) holds exactly that text with that coder
  * @modules java.base/java.lang:open
  * @run main M3StringJavaShadowTest
  * @run main/othervm -XX:-CompactStrings M3StringJavaShadowTest
@@ -42,6 +43,8 @@ public class M3StringJavaShadowTest {
     private static Constructor<String> fromM3;
     private static Field stringValue;
     private static Field stringM3;
+    private static Method stringCoder;
+    private static boolean compactStrings;
     private static long checks;
     private static long refused;
 
@@ -70,6 +73,10 @@ public class M3StringJavaShadowTest {
         stringValue.setAccessible(true);
         stringM3 = String.class.getDeclaredField("m3");
         stringM3.setAccessible(true);
+        stringCoder = method(String.class, "coder");
+        Field compact = String.class.getDeclaredField("COMPACT_STRINGS");
+        compact.setAccessible(true);
+        compactStrings = compact.getBoolean(null);
     }
 
     /** Latin-1, UTF-16 (BMP, pairs, lone surrogates) and mixed spellings at the sizes. */
@@ -162,17 +169,27 @@ public class M3StringJavaShadowTest {
         check(chars != invoke(charShadow, storage), label + ": charShadow is a fresh array");
         byte[] bytes = (byte[]) invoke(materialize, storage);
         check(text.equals(decode(bytes, text.length())), label + ": materialize holds the text");
-        check(bytes.length == text.length() << (byte) invoke(coder, storage),
-                label + ": materialize lays the bytes out in the value's coder");
+        int shift = canonicalShift(text);
+        check(bytes.length == text.length() << shift,
+                label + ": materialize lays the bytes out in the canonical coder " + shift);
+        check(shift == 0 || (byte) invoke(coder, storage) == 1,
+                label + ": a Latin-1 owner holds only Latin-1 text");
         check(bytes != invoke(materialize, storage), label + ": materialize is a fresh array");
         String string = fromM3.newInstance(storage);
         check(stringM3.get(string) == storage, label + ": new String(M3String) keeps the storage");
         check(Arrays.equals((byte[]) stringValue.get(string), bytes),
                 label + ": new String(M3String) holds the shadow bytes");
+        check((byte) invoke(stringCoder, string) == shift,
+                label + ": coder() of new String(M3String) is the canonical coder");
         check(string.length() == text.length() && string.equals(text) && text.equals(string),
                 label + ": new String(M3String) equals the flat String");
         check(Arrays.equals(string.toCharArray(), chars), label + ": toCharArray");
         check(string.hashCode() == text.hashCode(), label + ": hashCode");
+    }
+
+    /** 0 (Latin-1) when Compact Strings are on and every unit fits in a byte, else 1. */
+    private static int canonicalShift(String text) {
+        return compactStrings && text.chars().allMatch(unit -> unit <= 0xff) ? 0 : 1;
     }
 
     /** The text of String bytes: Latin-1 when one byte per unit, else StringUTF16 order. */
