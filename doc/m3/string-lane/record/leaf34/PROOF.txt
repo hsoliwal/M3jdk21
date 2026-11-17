@@ -1,0 +1,83 @@
+method_texts_verbatim_in_head	11
+lint	javac -Xlint:all,-this-escape -Werror: no warnings
+corpus	escape_texts	239292	unescape_texts	875253
+python_oracle	3.12.6	escape 239292	unescape 875253
+== EscapeMarkupFamilyProof flat -XX:+CompactStrings
+distinct	python html.escape(s, True) vs escapeHtml4Xml()	239292	differ=33730	"'" -> "&#x27;" vs "&#39;"
+distinct	python html.escape(s, True) vs escapeHtml5Xml()	239292	differ=33730	"'" -> "&#x27;" vs "&apos;"
+distinct	python html.escape(s, True) vs escapeHtml4()	239292	differ=21116	"'" -> "&#x27;" vs "'"
+distinct	python html.escape(s, False) vs escapeHtml(HTML5 dec, LEVEL_0)	239292	differ=33846	""" -> """ vs "&quot;"
+distinct	python html.escape(s, False) vs escapeHtml3()	239292	differ=17274	""" -> """ vs "&quot;"
+distinct	python html.unescape vs unescapeHtml()	875253	differ=7849	"&ltx" -> "<x" vs "&ltx"
+distinct	python html.unescape vs unescapeHtml4()	875253	differ=531898	"&amp" -> "&" vs "&amp"
+distinct	unescapeXmlStrict() vs unescapeXml()	875253	differ=18770	"&#0;" -> "IllegalArgumentException" vs "<0000>"
+distinct	escapeHtml4() vs escapeHtml(HTML4 dec, LEVEL_2)	239292	differ=232093	"'" -> "'" vs "&#39;"
+distinct	escapeXml10() vs escapeXml(1.0, hexa, LEVEL_1, false)	239292	differ=10471	"<007F>" -> "&#127;" vs "&#x7f;"
+checks	127	escape_texts	239292	supplementary	1048576	sample	672	unescape_texts	875253
+RESULT	PASS	failures=0
+== EscapeMarkupFamilyProof flat -XX:-CompactStrings
+distinct	python html.escape(s, True) vs escapeHtml4Xml()	239292	differ=33730	"'" -> "&#x27;" vs "&#39;"
+distinct	python html.escape(s, True) vs escapeHtml5Xml()	239292	differ=33730	"'" -> "&#x27;" vs "&apos;"
+distinct	python html.escape(s, True) vs escapeHtml4()	239292	differ=21116	"'" -> "&#x27;" vs "'"
+distinct	python html.escape(s, False) vs escapeHtml(HTML5 dec, LEVEL_0)	239292	differ=33846	""" -> """ vs "&quot;"
+distinct	python html.escape(s, False) vs escapeHtml3()	239292	differ=17274	""" -> """ vs "&quot;"
+distinct	python html.unescape vs unescapeHtml()	875253	differ=7849	"&ltx" -> "<x" vs "&ltx"
+distinct	python html.unescape vs unescapeHtml4()	875253	differ=531898	"&amp" -> "&" vs "&amp"
+distinct	unescapeXmlStrict() vs unescapeXml()	875253	differ=18770	"&#0;" -> "IllegalArgumentException" vs "<0000>"
+distinct	escapeHtml4() vs escapeHtml(HTML4 dec, LEVEL_2)	239292	differ=232093	"'" -> "'" vs "&#39;"
+distinct	escapeXml10() vs escapeXml(1.0, hexa, LEVEL_1, false)	239292	differ=10471	"<007F>" -> "&#127;" vs "&#x7f;"
+checks	127	escape_texts	239292	supplementary	1048576	sample	672	unescape_texts	875253
+RESULT	PASS	failures=0
+== EscapeMarkupFamilyProof m3-facts -XX:+CompactStrings
+distinct	python html.escape(s, True) vs escapeHtml4Xml()	239292	differ=33730	"'" -> "&#x27;" vs "&#39;"
+distinct	python html.escape(s, True) vs escapeHtml5Xml()	239292	differ=33730	"'" -> "&#x27;" vs "&apos;"
+distinct	python html.escape(s, True) vs escapeHtml4()	239292	differ=21116	"'" -> "&#x27;" vs "'"
+distinct	python html.escape(s, False) vs escapeHtml(HTML5 dec, LEVEL_0)	239292	differ=33846	""" -> """ vs "&quot;"
+distinct	python html.escape(s, False) vs escapeHtml3()	239292	differ=17274	""" -> """ vs "&quot;"
+distinct	python html.unescape vs unescapeHtml()	875253	differ=7849	"&ltx" -> "<x" vs "&ltx"
+distinct	python html.unescape vs unescapeHtml4()	875253	differ=531898	"&amp" -> "&" vs "&amp"
+distinct	unescapeXmlStrict() vs unescapeXml()	875253	differ=18770	"&#0;" -> "IllegalArgumentException" vs "<0000>"
+distinct	escapeHtml4() vs escapeHtml(HTML4 dec, LEVEL_2)	239292	differ=232093	"'" -> "'" vs "&#39;"
+distinct	escapeXml10() vs escapeXml(1.0, hexa, LEVEL_1, false)	239292	differ=10471	"<007F>" -> "&#127;" vs "&#x7f;"
+checks	127	escape_texts	239292	supplementary	1048576	sample	672	unescape_texts	875253
+RESULT	PASS	failures=0
+== EscapeMarkupFamilyProof m3-facts -XX:-CompactStrings
+distinct	python html.escape(s, True) vs escapeHtml4Xml()	239292	differ=33730	"'" -> "&#x27;" vs "&#39;"
+distinct	python html.escape(s, True) vs escapeHtml5Xml()	239292	differ=33730	"'" -> "&#x27;" vs "&apos;"
+distinct	python html.escape(s, True) vs escapeHtml4()	239292	differ=21116	"'" -> "&#x27;" vs "'"
+distinct	python html.escape(s, False) vs escapeHtml(HTML5 dec, LEVEL_0)	239292	differ=33846	""" -> """ vs "&quot;"
+distinct	python html.escape(s, False) vs escapeHtml3()	239292	differ=17274	""" -> """ vs "&quot;"
+distinct	python html.unescape vs unescapeHtml()	875253	differ=7849	"&ltx" -> "<x" vs "&ltx"
+distinct	python html.unescape vs unescapeHtml4()	875253	differ=531898	"&amp" -> "&" vs "&amp"
+distinct	unescapeXmlStrict() vs unescapeXml()	875253	differ=18770	"&#0;" -> "IllegalArgumentException" vs "<0000>"
+distinct	escapeHtml4() vs escapeHtml(HTML4 dec, LEVEL_2)	239292	differ=232093	"'" -> "'" vs "&#39;"
+distinct	escapeXml10() vs escapeXml(1.0, hexa, LEVEL_1, false)	239292	differ=10471	"<007F>" -> "&#127;" vs "&#x7f;"
+checks	127	escape_texts	239292	supplementary	1048576	sample	672	unescape_texts	875253
+RESULT	PASS	failures=0
+== EscapeMarkupFamilyProof m3-scan -XX:+CompactStrings
+distinct	python html.escape(s, True) vs escapeHtml4Xml()	239292	differ=33730	"'" -> "&#x27;" vs "&#39;"
+distinct	python html.escape(s, True) vs escapeHtml5Xml()	239292	differ=33730	"'" -> "&#x27;" vs "&apos;"
+distinct	python html.escape(s, True) vs escapeHtml4()	239292	differ=21116	"'" -> "&#x27;" vs "'"
+distinct	python html.escape(s, False) vs escapeHtml(HTML5 dec, LEVEL_0)	239292	differ=33846	""" -> """ vs "&quot;"
+distinct	python html.escape(s, False) vs escapeHtml3()	239292	differ=17274	""" -> """ vs "&quot;"
+distinct	python html.unescape vs unescapeHtml()	875253	differ=7849	"&ltx" -> "<x" vs "&ltx"
+distinct	python html.unescape vs unescapeHtml4()	875253	differ=531898	"&amp" -> "&" vs "&amp"
+distinct	unescapeXmlStrict() vs unescapeXml()	875253	differ=18770	"&#0;" -> "IllegalArgumentException" vs "<0000>"
+distinct	escapeHtml4() vs escapeHtml(HTML4 dec, LEVEL_2)	239292	differ=232093	"'" -> "'" vs "&#39;"
+distinct	escapeXml10() vs escapeXml(1.0, hexa, LEVEL_1, false)	239292	differ=10471	"<007F>" -> "&#127;" vs "&#x7f;"
+checks	127	escape_texts	239292	supplementary	1048576	sample	672	unescape_texts	875253
+RESULT	PASS	failures=0
+== EscapeMarkupFamilyProof m3-scan -XX:-CompactStrings
+distinct	python html.escape(s, True) vs escapeHtml4Xml()	239292	differ=33730	"'" -> "&#x27;" vs "&#39;"
+distinct	python html.escape(s, True) vs escapeHtml5Xml()	239292	differ=33730	"'" -> "&#x27;" vs "&apos;"
+distinct	python html.escape(s, True) vs escapeHtml4()	239292	differ=21116	"'" -> "&#x27;" vs "'"
+distinct	python html.escape(s, False) vs escapeHtml(HTML5 dec, LEVEL_0)	239292	differ=33846	""" -> """ vs "&quot;"
+distinct	python html.escape(s, False) vs escapeHtml3()	239292	differ=17274	""" -> """ vs "&quot;"
+distinct	python html.unescape vs unescapeHtml()	875253	differ=7849	"&ltx" -> "<x" vs "&ltx"
+distinct	python html.unescape vs unescapeHtml4()	875253	differ=531898	"&amp" -> "&" vs "&amp"
+distinct	unescapeXmlStrict() vs unescapeXml()	875253	differ=18770	"&#0;" -> "IllegalArgumentException" vs "<0000>"
+distinct	escapeHtml4() vs escapeHtml(HTML4 dec, LEVEL_2)	239292	differ=232093	"'" -> "'" vs "&#39;"
+distinct	escapeXml10() vs escapeXml(1.0, hexa, LEVEL_1, false)	239292	differ=10471	"<007F>" -> "&#127;" vs "&#x7f;"
+checks	127	escape_texts	239292	supplementary	1048576	sample	672	unescape_texts	875253
+RESULT	PASS	failures=0
+proof exit 0

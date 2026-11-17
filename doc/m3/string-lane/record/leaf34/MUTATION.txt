@@ -1,0 +1,20 @@
+ESCAPE_MARKUP mutation check (tools/mutate.py . work <jars> m3-facts), CompactStrings on, 2026-11-17
+== run 1 (10 mutants; on the family text before the name-run cap MARKUP_NAME_MAX was added; none of its mutated lines changed since)
+SURVIVED	lenient partial rank	failing_checks=0	
+KILLED	Windows-1252 index	failing_checks=2	unescapeHtml(); unescapeHtml5Python() vs python html.unescape
+SURVIVED	python 32 code points	failing_checks=0	
+KILLED	commons int overflow	failing_checks=3	unescapeHtml3(); unescapeHtml4(); unescapeXml()
+KILLED	facts gate units	failing_checks=112	escapeHtml3(); escapeHtml4(); escapeXml10()
+KILLED	window seam	failing_checks=108	escapeXml10(); escapeXml11(); escapeHtml4Xml()
+KILLED	xml level of U+0085	failing_checks=22	escapeXml10(); escapeXml11(); escapeXml(1.0,hexa,1,false) vs escapeXml10Minimal
+KILLED	strict upper-case X	failing_checks=1	unescapeXmlStrict()
+KILLED	html5 escape name	failing_checks=12	escapeHtml5(); escapeHtml5Xml(); escapeHtml(HTML5_NAMED_REFERENCES_DEFAULT_TO_DECIMAL,LEVEL_0_ONLY_MARKUP_SIGNIFICANT_EXCEPT_APOS)
+SURVIVED	commons html3 limit	failing_checks=0	
+mutants	10	killed	7
+exit=0
+== run 2 (3 stronger mutants for the equivalent survivors of run 1)
+KILLED	lenient partial dropped	failing_checks=1	unescapeHtml()
+KILLED	python 30 code points	failing_checks=1	unescapeHtml5Python() vs python html.unescape
+KILLED	commons html3 limit 0x2FF	failing_checks=1	unescapeHtml3()
+mutants	3	killed	3
+exit=0

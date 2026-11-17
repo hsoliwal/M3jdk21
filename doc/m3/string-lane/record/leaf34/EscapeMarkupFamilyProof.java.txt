@@ -1,0 +1,501 @@
+// SPDX-License-Identifier: Apache-2.0 OR EPL-2.0
+// Copyright (c) 2026 Synexia, Hitesh Soliwal and others
+
+import java.io.IOException;
+import java.io.UncheckedIOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.util.function.Function;
+import org.apache.commons.text.StringEscapeUtils;
+import org.unbescape.html.HtmlEscape;
+import org.unbescape.xml.XmlEscape;
+
+/**
+ * Donor-oracle proof of the ESCAPE_MARKUP family on a stock JVM whose String carries the head method text.
+ * <p>{@code corpus <work>} writes escape_texts.txt and unescape_texts.txt (one text per line, UTF-16 units in hex) for
+ * the CPython oracle (python_oracle.py: html.escape(s, True/False), html.unescape).
+ * <p>{@code check <work>} runs the checks. In-JVM oracles: commons-text 1.15.0 StringEscapeUtils (escapeHtml3/4,
+ * unescapeHtml3/4, escapeXml10/11, unescapeXml) and unbescape 1.1.8 (HtmlEscape.escapeHtml4Xml / escapeHtml5 /
+ * escapeHtml5Xml / escapeHtml(text, type, level) for all 30 type x level pairs / unescapeHtml; XmlEscape.escapeXml10,
+ * escapeXml11, escapeXml10Attribute, escapeXml11Attribute (text, type, level) for all 32 type x level pairs each, the
+ * eight fixed XmlEscape escapers, XmlEscape.unescapeXml). Escape texts: every string of 0..3 units over ESCAPE_UNITS,
+ * of 4 units over ESCAPE_UNITS4, every BMP unit alone and in two contexts, every supplementary code point alone (the
+ * fixed-rule methods; the parameterised ones on the mathematical alphanumerics and a sample), and window-seam texts
+ * (the deciding unit at index 505..520 and 1018..1030). Unescape texts: every string of 0..4 tokens over TOKENS, each
+ * BMP unit after '&' and '&#', each WHATWG name in six contexts, each legacy name followed by one or two letters or
+ * digits, numeric references of boundary values in five forms, overflowing and padded digit runs, runs of 26..42 and
+ * 100 units around the 32-code-point and 40-unit name-run limits, and seams. Informational distinct lines count the
+ * texts that tell each added rule from its nearest other rule. Every method must return the receiver itself when its answer equals it. Exceptions
+ * compare by class. Exit 1 on a mismatch.
+ */
+public final class EscapeMarkupFamilyProof {
+    private static final char HIGH = (char) 0xD835, LOW = (char) 0xDD1E, LOW2 = (char) 0xDD1F;
+    private static final char[] ESCAPE_UNITS = {'&', '<', '>', '"', '\'', 'a', '0', ' ', '\t', '\n', '\r', 0x00,
+        0x01, 0x0B, 0x7F, 0x85, 0x86, 0xA0, 0xE9, 0x152, 0x2329, 0x27E8, 0xFB00, 0xFFFE, HIGH, LOW, LOW2};
+    private static final char[] ESCAPE_UNITS4 = {'&', '\'', '"', 'a', '\n', 0x00, 0x86, 0xE9, 0xFFFF, HIGH, LOW,
+        LOW2};
+    private static final String[] TOKENS = {"&", "#", "x", "X", ";", "0", "9", "a", "F", "amp", "lt", "not", "in",
+        "AElig", " ", "<", String.valueOf(HIGH), String.valueOf(LOW)};
+    private static final String ALNUM = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    private static int failures;
+    private static int checks;
+
+    private EscapeMarkupFamilyProof() {}
+
+    public static void main(String[] args) throws IOException {
+        Path work = Path.of(args[1]);
+        List<String> escapeTexts = escapeTexts();
+        List<String> unescapeTexts = unescapeTexts();
+        if (args[0].equals("corpus")) {
+            write(work.resolve("escape_texts.txt"), escapeTexts);
+            write(work.resolve("unescape_texts.txt"), unescapeTexts);
+            System.out.println("corpus\tescape_texts\t" + escapeTexts.size() + "\tunescape_texts\t"
+                    + unescapeTexts.size());
+            return;
+        }
+        List<String> supplementary = new ArrayList<>();
+        List<String> sample = new ArrayList<>();
+        for (int point = 0x10000; point <= Character.MAX_CODE_POINT; point++) {
+            String p = Character.toString(point);
+            supplementary.add(p);
+            if (point >= 0x1D400 && point <= 0x1D57F || point % 4099 == 0 || (point & 0xFFFE) == 0xFFFE) {
+                sample.add(p);
+            }
+        }
+        List<String> wide = concat(escapeTexts, supplementary);
+        List<String> parameterised = concat(escapeTexts, sample);
+        fixedEscapers(wide);
+        htmlEscapers(parameterised);
+        xmlEscapers(parameterised);
+        unescapers(unescapeTexts, concat(escapeTexts, sample));
+        pythonChecks(work, escapeTexts, unescapeTexts);
+        distinctness(work, escapeTexts, unescapeTexts);
+        System.out.println("checks\t" + checks + "\tescape_texts\t" + escapeTexts.size() + "\tsupplementary\t"
+                + supplementary.size() + "\tsample\t" + sample.size() + "\tunescape_texts\t" + unescapeTexts.size());
+        System.out.println("RESULT\t" + (failures == 0 ? "PASS" : "FAIL") + "\tfailures=" + failures);
+        System.exit(failures == 0 ? 0 : 1);
+    }
+
+    private static void fixedEscapers(List<String> texts) {
+        List<Check> fixed = List.of(
+            new Check("escapeHtml3()", String::escapeHtml3, StringEscapeUtils::escapeHtml3),
+            new Check("escapeHtml4()", String::escapeHtml4, StringEscapeUtils::escapeHtml4),
+            new Check("escapeXml10()", String::escapeXml10, StringEscapeUtils::escapeXml10),
+            new Check("escapeXml11()", String::escapeXml11, StringEscapeUtils::escapeXml11),
+            new Check("escapeHtml4Xml()", String::escapeHtml4Xml, HtmlEscape::escapeHtml4Xml),
+            new Check("escapeHtml5()", String::escapeHtml5, HtmlEscape::escapeHtml5),
+            new Check("escapeHtml5Xml()", String::escapeHtml5Xml, HtmlEscape::escapeHtml5Xml),
+            new Check("escapeHtml(HTML4 named dec, LEVEL_2) vs unbescape escapeHtml4",
+                    s -> s.escapeHtml(String.HtmlEscapeType.HTML4_NAMED_REFERENCES_DEFAULT_TO_DECIMAL,
+                            String.HtmlEscapeLevel.LEVEL_2_ALL_NON_ASCII_PLUS_MARKUP_SIGNIFICANT),
+                    HtmlEscape::escapeHtml4));
+        for (Check check : fixed) run(check, texts);
+        String.XmlEscapeType hexa = String.XmlEscapeType.CHARACTER_ENTITY_REFERENCES_DEFAULT_TO_HEXA;
+        String.XmlEscapeLevel one = String.XmlEscapeLevel.LEVEL_1_ONLY_MARKUP_SIGNIFICANT;
+        String.XmlEscapeLevel two = String.XmlEscapeLevel.LEVEL_2_ALL_NON_ASCII_PLUS_MARKUP_SIGNIFICANT;
+        String.XmlVersion v10 = String.XmlVersion.XML_1_0, v11 = String.XmlVersion.XML_1_1;
+        List<Check> xml = List.of(
+            new Check("escapeXml(1.0,hexa,1,false) vs escapeXml10Minimal",
+                    s -> s.escapeXml(v10, hexa, one, false), XmlEscape::escapeXml10Minimal),
+            new Check("escapeXml(1.1,hexa,1,false) vs escapeXml11Minimal",
+                    s -> s.escapeXml(v11, hexa, one, false), XmlEscape::escapeXml11Minimal),
+            new Check("escapeXml(1.0,hexa,1,true) vs escapeXml10AttributeMinimal",
+                    s -> s.escapeXml(v10, hexa, one, true), XmlEscape::escapeXml10AttributeMinimal),
+            new Check("escapeXml(1.1,hexa,1,true) vs escapeXml11AttributeMinimal",
+                    s -> s.escapeXml(v11, hexa, one, true), XmlEscape::escapeXml11AttributeMinimal),
+            new Check("escapeXml(1.0,hexa,2,false) vs escapeXml10",
+                    s -> s.escapeXml(v10, hexa, two, false), XmlEscape::escapeXml10),
+            new Check("escapeXml(1.1,hexa,2,false) vs escapeXml11",
+                    s -> s.escapeXml(v11, hexa, two, false), XmlEscape::escapeXml11),
+            new Check("escapeXml(1.0,hexa,2,true) vs escapeXml10Attribute",
+                    s -> s.escapeXml(v10, hexa, two, true), XmlEscape::escapeXml10Attribute),
+            new Check("escapeXml(1.1,hexa,2,true) vs escapeXml11Attribute",
+                    s -> s.escapeXml(v11, hexa, two, true), XmlEscape::escapeXml11Attribute));
+        for (Check check : xml) run(check, texts);
+    }
+
+    private static void htmlEscapers(List<String> texts) {
+        for (String.HtmlEscapeType type : String.HtmlEscapeType.values()) {
+            for (String.HtmlEscapeLevel level : String.HtmlEscapeLevel.values()) {
+                org.unbescape.html.HtmlEscapeType t = org.unbescape.html.HtmlEscapeType.valueOf(type.name());
+                org.unbescape.html.HtmlEscapeLevel l = org.unbescape.html.HtmlEscapeLevel.valueOf(level.name());
+                run(new Check("escapeHtml(" + type + "," + level + ")", s -> s.escapeHtml(type, level),
+                        s -> HtmlEscape.escapeHtml(s, t, l)), texts);
+            }
+        }
+        run(new Check("escapeHtml(null, LEVEL_1)", s -> s.escapeHtml(null,
+                String.HtmlEscapeLevel.LEVEL_1_ONLY_MARKUP_SIGNIFICANT), s -> "NullPointerException"),
+                List.of("", "a&"));
+        run(new Check("escapeHtml(DECIMAL, null)", s -> s.escapeHtml(String.HtmlEscapeType.DECIMAL_REFERENCES,
+                null), s -> "NullPointerException"), List.of("", "a&"));
+    }
+
+    private static void xmlEscapers(List<String> texts) {
+        for (String.XmlVersion version : String.XmlVersion.values()) {
+            for (boolean attribute : new boolean[] {false, true}) {
+                for (String.XmlEscapeType type : String.XmlEscapeType.values()) {
+                    for (String.XmlEscapeLevel level : String.XmlEscapeLevel.values()) {
+                        org.unbescape.xml.XmlEscapeType t = org.unbescape.xml.XmlEscapeType.valueOf(type.name());
+                        org.unbescape.xml.XmlEscapeLevel l = org.unbescape.xml.XmlEscapeLevel.valueOf(level.name());
+                        boolean v11 = version == String.XmlVersion.XML_1_1;
+                        Function<String, Object> donor = v11
+                                ? (attribute ? s -> XmlEscape.escapeXml11Attribute(s, t, l)
+                                        : s -> XmlEscape.escapeXml11(s, t, l))
+                                : (attribute ? s -> XmlEscape.escapeXml10Attribute(s, t, l)
+                                        : s -> XmlEscape.escapeXml10(s, t, l));
+                        run(new Check("escapeXml(" + version + "," + type + "," + level + "," + attribute + ")",
+                                s -> s.escapeXml(version, type, level, attribute), donor), texts);
+                    }
+                }
+            }
+        }
+        run(new Check("escapeXml(null, ...)", s -> s.escapeXml(null, String.XmlEscapeType.DECIMAL_REFERENCES,
+                String.XmlEscapeLevel.LEVEL_1_ONLY_MARKUP_SIGNIFICANT, false), s -> "NullPointerException"),
+                List.of("", "a&"));
+    }
+
+    private static void unescapers(List<String> texts, List<String> plain) {
+        List<Check> all = List.of(
+            new Check("unescapeHtml3()", String::unescapeHtml3, StringEscapeUtils::unescapeHtml3),
+            new Check("unescapeHtml4()", String::unescapeHtml4, StringEscapeUtils::unescapeHtml4),
+            new Check("unescapeXml()", String::unescapeXml, StringEscapeUtils::unescapeXml),
+            new Check("unescapeHtml()", String::unescapeHtml, HtmlEscape::unescapeHtml),
+            new Check("unescapeXmlStrict()", String::unescapeXmlStrict, XmlEscape::unescapeXml));
+        for (Check check : all) {
+            run(check, texts);
+            run(new Check(check.name + " on escape texts", check.mine, check.donor), plain);
+        }
+    }
+
+    private static void pythonChecks(Path work, List<String> escapeTexts, List<String> unescapeTexts) {
+        python("escapeHtml(true) vs python html.escape(s, True)", s -> s.escapeHtml(true), escapeTexts,
+                lines(work.resolve("ESCAPE_TRUE.txt")));
+        python("escapeHtml(false) vs python html.escape(s, False)", s -> s.escapeHtml(false), escapeTexts,
+                lines(work.resolve("ESCAPE_FALSE.txt")));
+        python("unescapeHtml5Python() vs python html.unescape", String::unescapeHtml5Python, unescapeTexts,
+                lines(work.resolve("UNESCAPE.txt")));
+        python("unescapeHtml5Python() on escape texts vs python", String::unescapeHtml5Python, escapeTexts,
+                lines(work.resolve("UNESCAPE_PLAIN.txt")));
+    }
+
+    private static void python(String name, Function<String, Object> mine, List<String> texts, List<String> answers) {
+        if (answers.size() != texts.size()) throw new IllegalStateException(name + " oracle size " + answers.size());
+        long mismatches = 0;
+        String first = "-";
+        for (int i = 0; i < texts.size(); i++) {
+            String text = texts.get(i);
+            Object result = result(mine, text);
+            String python = unhex(answers.get(i));
+            boolean same = Objects.equals(result, python) && (!python.equals(text) || result == text);
+            if (!same && mismatches++ == 0) {
+                first = show(clip(text)) + " -> " + show(clip(String.valueOf(result))) + " vs " + show(clip(python));
+            }
+        }
+        report(name, texts.size(), mismatches, first);
+    }
+
+    /**
+     * Informational, not checks: how many texts tell each added rule from the nearest other rule of the family (a
+     * rule that no text tells apart would be a duplicate and would not be added). The CPython answers come from the
+     * oracle files.
+     */
+    private static void distinctness(Path work, List<String> escapeTexts, List<String> unescapeTexts) {
+        List<String> trueAnswers = lines(work.resolve("ESCAPE_TRUE.txt"));
+        List<String> falseAnswers = lines(work.resolve("ESCAPE_FALSE.txt"));
+        List<String> unescapeAnswers = lines(work.resolve("UNESCAPE.txt"));
+        Function<String, Object> pyTrue = s -> unhex(trueAnswers.get(index(escapeTexts, s)));
+        Function<String, Object> pyFalse = s -> unhex(falseAnswers.get(index(escapeTexts, s)));
+        Function<String, Object> pyUnescape = s -> unhex(unescapeAnswers.get(index(unescapeTexts, s)));
+        String.HtmlEscapeType html5 = String.HtmlEscapeType.HTML5_NAMED_REFERENCES_DEFAULT_TO_DECIMAL;
+        distinct("python html.escape(s, True) vs escapeHtml4Xml()", pyTrue, String::escapeHtml4Xml, escapeTexts);
+        distinct("python html.escape(s, True) vs escapeHtml5Xml()", pyTrue, String::escapeHtml5Xml, escapeTexts);
+        distinct("python html.escape(s, True) vs escapeHtml4()", pyTrue, String::escapeHtml4, escapeTexts);
+        distinct("python html.escape(s, False) vs escapeHtml(HTML5 dec, LEVEL_0)", pyFalse,
+                s -> s.escapeHtml(html5, String.HtmlEscapeLevel.LEVEL_0_ONLY_MARKUP_SIGNIFICANT_EXCEPT_APOS),
+                escapeTexts);
+        distinct("python html.escape(s, False) vs escapeHtml3()", pyFalse, String::escapeHtml3, escapeTexts);
+        distinct("python html.unescape vs unescapeHtml()", pyUnescape, String::unescapeHtml, unescapeTexts);
+        distinct("python html.unescape vs unescapeHtml4()", pyUnescape, String::unescapeHtml4, unescapeTexts);
+        distinct("unescapeXmlStrict() vs unescapeXml()", String::unescapeXmlStrict, String::unescapeXml,
+                unescapeTexts);
+        distinct("escapeHtml4() vs escapeHtml(HTML4 dec, LEVEL_2)", String::escapeHtml4,
+                s -> s.escapeHtml(String.HtmlEscapeType.HTML4_NAMED_REFERENCES_DEFAULT_TO_DECIMAL,
+                        String.HtmlEscapeLevel.LEVEL_2_ALL_NON_ASCII_PLUS_MARKUP_SIGNIFICANT), escapeTexts);
+        distinct("escapeXml10() vs escapeXml(1.0, hexa, LEVEL_1, false)", String::escapeXml10,
+                s -> s.escapeXml(String.XmlVersion.XML_1_0,
+                        String.XmlEscapeType.CHARACTER_ENTITY_REFERENCES_DEFAULT_TO_HEXA,
+                        String.XmlEscapeLevel.LEVEL_1_ONLY_MARKUP_SIGNIFICANT, false), escapeTexts);
+    }
+
+    private static final java.util.Map<List<String>, java.util.Map<String, Integer>> INDEX =
+            new java.util.IdentityHashMap<>();
+
+    private static int index(List<String> texts, String text) {
+        java.util.Map<String, Integer> map = INDEX.computeIfAbsent(texts, list -> {
+            java.util.Map<String, Integer> m = new java.util.HashMap<>();
+            for (int i = 0; i < list.size(); i++) m.putIfAbsent(list.get(i), i);
+            return m;
+        });
+        return map.get(text);
+    }
+
+    private static void distinct(String name, Function<String, Object> a, Function<String, Object> b,
+            List<String> texts) {
+        long differ = 0;
+        String first = "-";
+        for (String text : texts) {
+            Object x = result(a, text), y = result(b, text);
+            if (!Objects.equals(x, y) && differ++ == 0) {
+                first = show(clip(text)) + " -> " + show(clip(String.valueOf(x))) + " vs " + show(clip(String.valueOf(y)));
+            }
+        }
+        System.out.println("distinct\t" + name + "\t" + texts.size() + "\tdiffer=" + differ + "\t" + first);
+    }
+
+    private record Check(String name, Function<String, Object> mine, Function<String, Object> donor) {}
+
+    private static void run(Check check, List<String> texts) {
+        long mismatches = 0;
+        String first = "-";
+        for (String text : texts) {
+            Object mine = result(check.mine, text), donor = result(check.donor, text);
+            boolean same = Objects.equals(mine, donor) && (!text.equals(mine) || mine == text);
+            if (!same && mismatches++ == 0) {
+                first = show(clip(text)) + " -> " + show(clip(String.valueOf(mine))) + " vs "
+                        + show(clip(String.valueOf(donor)));
+            }
+        }
+        report(check.name, texts.size(), mismatches, first);
+    }
+
+    private static void report(String name, long texts, long mismatches, String first) {
+        checks++;
+        failures += mismatches == 0 ? 0 : 1;
+        System.out.println(name + "\t" + texts + "\t" + mismatches + "\t" + first);
+    }
+
+    private static Object result(Function<String, Object> f, String text) {
+        try {
+            return f.apply(text);
+        } catch (RuntimeException e) {
+            return e.getClass().getSimpleName();
+        }
+    }
+
+    private static List<String> escapeTexts() {
+        List<String> out = strings(ESCAPE_UNITS, 3);
+        for (String s : strings(ESCAPE_UNITS4, 4)) {
+            if (s.length() == 4) out.add(s);
+        }
+        for (int unit = 0; unit <= 0xFFFF; unit++) {
+            String c = String.valueOf((char) unit);
+            out.add(c);
+            out.add("a" + c + "&");
+            out.add(c + c + "<");
+        }
+        String pair = "" + HIGH + LOW, pair2 = "" + HIGH + LOW2;
+        String[] tails = {pair, pair2 + "&", "&" + pair, "" + HIGH + "'", "" + LOW, "\u00E9<", "\u0000a",
+            "\u0085\u0086", "\uFB00", "\u3000\"", "\t\n\r", "\uFFFE\uFFFF", "\u2329\u27E8"};
+        for (int k = 505; k <= 1030; k += (k == 520 ? 498 : 1)) {
+            for (String tail : tails) {
+                out.add("x".repeat(k) + tail);
+                out.add("&".repeat(k) + tail);
+                out.add(tail + "x".repeat(k));
+                out.add("x".repeat(k) + tail + "x".repeat(k));
+            }
+        }
+        return out;
+    }
+
+    private static List<String> unescapeTexts() {
+        List<String> out = new ArrayList<>();
+        for (int length = 0; length <= 4; length++) {
+            int total = (int) Math.pow(TOKENS.length, length);
+            for (int code = 0; code < total; code++) {
+                StringBuilder text = new StringBuilder();
+                int rest = code;
+                for (int i = 0; i < length; i++) {
+                    text.append(TOKENS[rest % TOKENS.length]);
+                    rest /= TOKENS.length;
+                }
+                out.add(text.toString());
+            }
+        }
+        for (int unit = 0; unit <= 0xFFFF; unit++) {
+            String c = String.valueOf((char) unit);
+            out.add("&" + c);
+            out.add("&" + c + ";");
+            out.add("&#" + c + "1;");
+            out.add("&amp" + c);
+        }
+        List<String> names = entityNames();
+        for (String name : names) {
+            out.add(name);
+            out.add(name + "x");
+            out.add(name + "1;");
+            out.add(name + ";");
+            out.add(name + " ");
+            out.add("x" + name + "&amp;");
+        }
+        for (String name : names) {
+            if (name.endsWith(";")) continue;
+            for (int i = 0; i < ALNUM.length(); i++) {
+                out.add(name + ALNUM.charAt(i));
+                for (int j = 0; j < ALNUM.length(); j++) {
+                    out.add(name + ALNUM.charAt(i) + ALNUM.charAt(j));
+                }
+            }
+        }
+        for (long value : numericValues()) {
+            out.add("&#" + value + ";");
+            out.add("&#" + value);
+            out.add("&#x" + Long.toHexString(value) + ";");
+            out.add("&#X" + Long.toHexString(value).toUpperCase() + ";x");
+            out.add("&#x" + Long.toHexString(value) + "<");
+        }
+        for (int k = 1; k <= 16; k++) {
+            out.add("&#" + "9".repeat(k) + ";");
+            out.add("&#x" + "F".repeat(k) + ";");
+            out.add("&#" + "0".repeat(k) + "65;");
+            out.add("&#x" + "0".repeat(k) + "41;");
+            out.add("&#" + "0".repeat(k * 2) + "1114112;");
+            out.add("&#" + "1".repeat(k));
+        }
+        for (String bad : new String[] {"&#1a;", "&#a1;", "&#x;", "&#;", "&#", "&#x", "&#X", "&#xg;", "&#x1g;", "&#12",
+            "&#x7FFFFFFF;", "&#x80000000;", "&#2147483647;", "&#2147483648;", "&#4294967296;", "&#x10FFFF;",
+            "&#x110000;", "&#1114111;", "&#1114112;", "&# 1;", "&#\uFF11;", "&#x\uFF11;", "&\uFF41mp;"}) {
+            out.add(bad);
+            out.add("a" + bad + "b");
+        }
+        String[] runs = {"a", "amp", "not", "\u00E9", "" + HIGH + LOW, "b-", "Counter"};
+        for (int l : new int[] {26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 38, 39, 40, 41, 42, 100}) {
+            for (String unit : runs) {
+                String run = unit.repeat(l / unit.length() + 1).substring(0, l);
+                out.add("&" + run);
+                out.add("&" + run + ";");
+                out.add("&amp" + run);
+                out.add("&not" + run + ";");
+                out.add("&" + run + "amp;");
+            }
+        }
+        for (String suffix : new String[] {"", ";", "x", "x;", "\u00E9"}) {
+            out.add("&CounterClockwiseContourIntegral" + suffix);
+            out.add("&ClockwiseContourIntegral" + suffix);
+        }
+        String[] tails = {"&amp;", "&#x41;", "&notit;", "&not", "&" + HIGH + LOW, "&#1114112", "&lt;" + HIGH};
+        for (int k = 505; k <= 1030; k += (k == 520 ? 498 : 1)) {
+            for (String tail : tails) {
+                out.add("x".repeat(k) + tail);
+                out.add(tail + "x".repeat(k));
+                out.add("&".repeat(k) + tail);
+            }
+        }
+        return out;
+    }
+
+    private static List<Long> numericValues() {
+        List<Long> out = new ArrayList<>();
+        for (long v = 0; v <= 0x3000; v++) out.add(v);
+        long[][] ranges = {{0xD7F0, 0xE010}, {0xFDC0, 0xFE00}, {0xFFF0, 0x10010}, {0x1D500, 0x1D520},
+            {0x10FFF0, 0x110010}};
+        for (long[] r : ranges) {
+            for (long v = r[0]; v <= r[1]; v++) out.add(v);
+        }
+        for (long plane = 1; plane <= 16; plane++) {
+            for (long v = plane * 0x10000 - 3; v <= plane * 0x10000 + 2; v++) out.add(v);
+        }
+        for (long v : new long[] {0x1FFFFF, 0x7FFFFFFEL, 0x7FFFFFFFL, 0x80000000L, 0xFFFFFFFFL, 0x100000000L}) {
+            out.add(v);
+        }
+        return out;
+    }
+
+    /** The 2231 names of unbescape's HTML5 table (the WHATWG names), read from the donor by reflection. */
+    private static List<String> entityNames() {
+        try {
+            Class<?> symbols = Class.forName("org.unbescape.html.HtmlEscapeSymbols");
+            java.lang.reflect.Field html5 = symbols.getDeclaredField("HTML5_SYMBOLS");
+            java.lang.reflect.Field sorted = symbols.getDeclaredField("SORTED_NCRS");
+            html5.setAccessible(true);
+            sorted.setAccessible(true);
+            List<String> out = new ArrayList<>();
+            for (char[] name : (char[][]) sorted.get(html5.get(null))) out.add(new String(name));
+            if (out.size() != 2231) throw new IllegalStateException("names " + out.size());
+            return out;
+        } catch (ReflectiveOperationException e) {
+            throw new IllegalStateException(e);
+        }
+    }
+
+    private static List<String> strings(char[] units, int maxLength) {
+        List<String> out = new ArrayList<>();
+        for (int length = 0; length <= maxLength; length++) {
+            int total = (int) Math.pow(units.length, length);
+            for (int code = 0; code < total; code++) {
+                char[] chars = new char[length];
+                int rest = code;
+                for (int i = 0; i < length; i++) {
+                    chars[i] = units[rest % units.length];
+                    rest /= units.length;
+                }
+                out.add(new String(chars));
+            }
+        }
+        return out;
+    }
+
+    private static List<String> concat(List<String> a, List<String> b) {
+        List<String> out = new ArrayList<>(a);
+        out.addAll(b);
+        return out;
+    }
+
+    private static void write(Path path, List<String> texts) throws IOException {
+        StringBuilder out = new StringBuilder();
+        for (String text : texts) out.append(hex(text)).append('\n');
+        Files.writeString(path, out, StandardCharsets.US_ASCII);
+    }
+
+    private static List<String> lines(Path path) {
+        try {
+            return new ArrayList<>(Files.readString(path, StandardCharsets.US_ASCII).lines().toList());
+        } catch (IOException e) {
+            throw new UncheckedIOException(e);
+        }
+    }
+
+    private static final char[] DIGITS = "0123456789ABCDEF".toCharArray();
+
+    private static String hex(String text) {
+        char[] out = new char[text.length() * 4];
+        for (int i = 0; i < text.length(); i++) {
+            char c = text.charAt(i);
+            for (int k = 0; k < 4; k++) out[4 * i + k] = DIGITS[c >> (12 - 4 * k) & 15];
+        }
+        return new String(out);
+    }
+
+    private static String unhex(String hex) {
+        char[] units = new char[hex.length() / 4];
+        for (int i = 0; i < units.length; i++) {
+            int v = 0;
+            for (int k = 0; k < 4; k++) v = v << 4 | Character.digit(hex.charAt(4 * i + k), 16);
+            units[i] = (char) v;
+        }
+        return new String(units);
+    }
+
+    private static String clip(String s) {
+        return s.length() > 40 ? s.substring(0, 20) + "..." + s.substring(s.length() - 6) : s;
+    }
+
+    private static String show(String s) {
+        StringBuilder out = new StringBuilder("\"");
+        for (char c : s.toCharArray()) out.append(c >= 32 && c < 127 ? String.valueOf(c) : String.format("<%04X>", (int) c));
+        return out.append('"').toString();
+    }
+}

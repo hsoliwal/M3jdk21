@@ -1,0 +1,4 @@
+| this PR (`leaf33/`) |
+---
+| M3jdk21 #3267, merged `961bfaadb6cc` (`leaf33/`) |
+| ESCAPE_MARKUP family (superset of commons-text 1.15.0, unbescape 1.1.8 and CPython 3.12 html): `escapeHtml3`/`unescapeHtml3`, `escapeHtml4`/`unescapeHtml4`, `escapeXml10`, `escapeXml11`, `unescapeXml` (commons-text); `escapeHtml4Xml`, `escapeHtml5`, `escapeHtml5Xml`, `escapeHtml(HtmlEscapeType, HtmlEscapeLevel)`, `unescapeHtml` (full WHATWG table, 2231 names), `escapeXml(XmlVersion, XmlEscapeType, XmlEscapeLevel, boolean)`, `unescapeXmlStrict` (unbescape); `escapeHtml(boolean quote)`, `unescapeHtml5Python` (CPython html); enums `HtmlEscapeType`, `HtmlEscapeLevel`, `XmlVersion`, `XmlEscapeType`, `XmlEscapeLevel` (owner decision 48) | 16 public methods, 5 nested enums | this PR (`leaf34/`) |
