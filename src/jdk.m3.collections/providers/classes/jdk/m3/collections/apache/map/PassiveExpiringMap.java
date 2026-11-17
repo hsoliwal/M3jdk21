@@ -620,6 +620,17 @@ public class PassiveExpiringMap<K, V>
     /** Map used to manage expiration times for the actual map entries. */
     private final Map<Object, Long> expirationMap = new HashMap<>();
 
+    /**
+     * Lower bound of every non-negative expiration time held in
+     * {@code expirationMap}; {@code Long.MAX_VALUE} when none is held. While the
+     * current time is below it no entry can be expired, so a sweep is skipped.
+     * Not part of the serialized form.
+     */
+    private transient long minExpiration = Long.MAX_VALUE;
+
+    /** Incremented on every expiration-time write; a sweep raced by a write keeps the lower bound. */
+    private transient long expirationStamp;
+
     /** The policy used to determine time-to-live values for map entries. */
     private final ExpirationPolicy<K, V> expiringPolicy;
 
@@ -750,6 +761,7 @@ public class PassiveExpiringMap<K, V>
     public void clear() {
         super.clear();
         expirationMap.clear();
+        minExpiration = Long.MAX_VALUE;
     }
 
     /**
@@ -855,6 +867,7 @@ public class PassiveExpiringMap<K, V>
         // record expiration time of new entry
         final long expirationTime = expiringPolicy.expirationTime(key, value);
         expirationMap.put(key, Long.valueOf(expirationTime));
+        noteExpiration(expirationTime);
 
         return super.put(key, value);
     }
@@ -878,6 +891,7 @@ public class PassiveExpiringMap<K, V>
     private void readObject(final ObjectInputStream in)
         throws IOException, ClassNotFoundException {
         in.defaultReadObject();
+        minExpiration = Long.MIN_VALUE; // lower bound unknown: the first sweep rebuilds it
         map = (Map<K, V>) in.readObject(); // (1)
     }
 
@@ -896,19 +910,71 @@ public class PassiveExpiringMap<K, V>
      * Removes all entries in the map whose expiration time is less than
      * {@code now}. The exceptions are entries with negative expiration
      * times; those entries are never removed.
+     * <p>
+     * Returns at once while {@code nowMillis} is below {@code minExpiration}:
+     * no entry can be expired then. A completed sweep that no expiration-time
+     * write raced sets {@code minExpiration} to the least non-negative time it
+     * visited.
+     * </p>
      *
      * @see #isExpired(long, Long)
      */
     private void removeAllExpired(final long nowMillis) {
+        if (nowMillis < minExpiration) {
+            return;
+        }
+        final long stamp = expirationStamp;
+        final long nextMin = sweepExpired(nowMillis);
+        if (stamp == expirationStamp) {
+            minExpiration = nextMin;
+        }
+    }
+
+    /**
+     * Walks {@code expirationMap} once in its iteration order, removing each
+     * expired entry from the decorated map and then from the expiration map.
+     *
+     * @param nowMillis The current time in milliseconds.
+     * @return the least non-negative expiration time visited, expired ones
+     *         included, or {@code Long.MAX_VALUE} when there is none.
+     */
+    private long sweepExpired(final long nowMillis) {
+        long nextMin = Long.MAX_VALUE;
         final Iterator<Map.Entry<Object, Long>> iter = expirationMap.entrySet().iterator();
         while (iter.hasNext()) {
             final Map.Entry<Object, Long> expirationEntry = iter.next();
-            if (isExpired(nowMillis, expirationEntry.getValue())) {
+            final Long expirationTimeObject = expirationEntry.getValue();
+            nextMin = Math.min(nextMin, lowerBoundOf(expirationTimeObject));
+            if (isExpired(nowMillis, expirationTimeObject)) {
                 // remove entry from collection
                 super.remove(expirationEntry.getKey());
                 // remove entry from expiration map
                 iter.remove();
             }
+        }
+        return nextMin;
+    }
+
+    /**
+     * The value an expiration time contributes to {@code minExpiration}:
+     * itself when non-negative, {@code Long.MAX_VALUE} for null or never-expire.
+     */
+    private static long lowerBoundOf(final Long expirationTimeObject) {
+        if (expirationTimeObject == null || expirationTimeObject.longValue() < 0L) {
+            return Long.MAX_VALUE;
+        }
+        return expirationTimeObject.longValue();
+    }
+
+    /**
+     * Records an expiration time just stored in {@code expirationMap}: marks the
+     * write for any running sweep and lowers {@code minExpiration} to it when it
+     * is non-negative.
+     */
+    private void noteExpiration(final long expirationTime) {
+        expirationStamp++;
+        if (expirationTime >= 0L && expirationTime < minExpiration) {
+            minExpiration = expirationTime;
         }
     }
 
