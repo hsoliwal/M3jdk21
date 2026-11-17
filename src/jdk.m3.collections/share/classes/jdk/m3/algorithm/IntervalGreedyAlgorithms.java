@@ -60,26 +60,26 @@ public final class IntervalGreedyAlgorithms {
             ProgressMonitor monitor) {
         AlgorithmSupport.begin(monitor, "insert-interval", sortedNonOverlapping.size());
         try {
-            List<Interval> result = new ArrayList<>(sortedNonOverlapping.size() + 1);
+            //FLLDCIM: LEETCODIFY — one array snapshot instead of get(index) per comparison
+            Interval[] intervals = sortedNonOverlapping.toArray(new Interval[0]);
+            List<Interval> result = new ArrayList<>(intervals.length + 1);
             int index = 0;
-            while (index < sortedNonOverlapping.size()
-                    && sortedNonOverlapping.get(index).end() < inserted.start()) {
+            while (index < intervals.length && intervals[index].end() < inserted.start()) {
                 AlgorithmSupport.tick(monitor);
-                result.add(sortedNonOverlapping.get(index++));
+                result.add(intervals[index++]);
             }
             int start = inserted.start();
             int end = inserted.end();
-            while (index < sortedNonOverlapping.size()
-                    && sortedNonOverlapping.get(index).start() <= end) {
+            while (index < intervals.length && intervals[index].start() <= end) {
                 AlgorithmSupport.tick(monitor);
-                Interval current = sortedNonOverlapping.get(index++);
+                Interval current = intervals[index++];
                 start = Math.min(start, current.start());
                 end = Math.max(end, current.end());
             }
             result.add(new Interval(start, end));
-            while (index < sortedNonOverlapping.size()) {
+            while (index < intervals.length) {
                 AlgorithmSupport.tick(monitor);
-                result.add(sortedNonOverlapping.get(index++));
+                result.add(intervals[index++]);
             }
             return List.copyOf(result);
         } finally {
