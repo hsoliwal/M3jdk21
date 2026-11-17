@@ -75,11 +75,122 @@ public final class PackedLongLongSortedMap implements LongLongSortedMap {
         if (sourceKeys.length != sourceValues.length) {
             throw new IllegalArgumentException("key/value length mismatch");
         }
-        int before = size;
-        for (int i = 0; i < sourceKeys.length; i++) {
-            put(sourceKeys[i], sourceValues[i]);
+        int count = sourceKeys.length;
+        if (count < BATCH_THRESHOLD) {
+            int before = size;
+            for (int i = 0; i < count; i++) {
+                put(sourceKeys[i], sourceValues[i]);
+            }
+            return size - before;
         }
-        return size - before;
+        long[] batchKeys = sourceKeys.clone();
+        long[] batchValues = sourceValues.clone();
+        sortPairs(batchKeys, batchValues);
+        return mergeBackward(batchKeys, batchValues, lastOfEachKey(batchKeys, batchValues));
+    }
+
+    /** Fewer pairs than this are put one by one. */
+    private static final int BATCH_THRESHOLD = 16;
+
+    /** Stable bottom-up merge sort of keys with their values: equal keys keep their order. */
+    //FLLDCIM: LEETCODIFY — stable pair sort, then last-wins dedupe and backward in-place merge
+    private static void sortPairs(long[] keys, long[] values) {
+        int n = keys.length;
+        int sorted = 1;
+        while (sorted < n && keys[sorted - 1] <= keys[sorted]) sorted++;
+        if (sorted == n) return; // already nondecreasing (the common batch)
+        long[] k = keys;
+        long[] v = values;
+        long[] bufferK = new long[n];
+        long[] bufferV = new long[n];
+        for (int width = 1; width < n; width <<= 1) {
+            for (int lo = 0; lo < n; lo += width << 1) {
+                int mid = Math.min(lo + width, n);
+                mergeRuns(k, v, bufferK, bufferV, lo, mid, Math.min(lo + (width << 1), n));
+            }
+            long[] t = k;
+            k = bufferK;
+            bufferK = t;
+            t = v;
+            v = bufferV;
+            bufferV = t;
+        }
+        if (k != keys) {
+            System.arraycopy(k, 0, keys, 0, n);
+            System.arraycopy(v, 0, values, 0, n);
+        }
+    }
+
+    /** Merges runs [lo, mid) and [mid, hi) into the buffers; the left run wins ties. */
+    private static void mergeRuns(long[] k, long[] v, long[] outK, long[] outV,
+            int lo, int mid, int hi) {
+        int i = lo;
+        int j = mid;
+        int w = lo;
+        while (i < mid && j < hi) {
+            boolean right = k[j] < k[i];
+            outK[w] = right ? k[j] : k[i];
+            outV[w++] = right ? v[j++] : v[i++];
+        }
+        while (i < mid) {
+            outK[w] = k[i];
+            outV[w++] = v[i++];
+        }
+        while (j < hi) {
+            outK[w] = k[j];
+            outV[w++] = v[j++];
+        }
+    }
+
+    /** Compacts sorted pairs to one per key, the last value winning; returns the key count. */
+    private static int lastOfEachKey(long[] keys, long[] values) {
+        int unique = 0;
+        for (int i = 0; i < keys.length; i++) {
+            if (unique > 0 && keys[unique - 1] == keys[i]) {
+                values[unique - 1] = values[i];
+            } else {
+                keys[unique] = keys[i];
+                values[unique++] = values[i];
+            }
+        }
+        return unique;
+    }
+
+    /**
+     * Merges sorted unique pairs into the map from the end, in place (each new key moves the tail
+     * once). The lanes grow once, to the capacity sequential puts reach: put grows only when the
+     * size equals the capacity, to growArrayCapacity(capacity, capacity + 1).
+     */
+    private int mergeBackward(long[] batchKeys, long[] batchValues, int unique) {
+        int added = 0;
+        for (int i = 0; i < unique; i++) {
+            if (Arrays.binarySearch(keys, 0, size, batchKeys[i]) < 0) added++;
+        }
+        int resulting = size + added;
+        int capacity = keys.length;
+        while (capacity < resulting) {
+            capacity = PackedSupport.growArrayCapacity(capacity, capacity + 1);
+        }
+        if (capacity > keys.length) {
+            long[] grownKeys = Arrays.copyOf(keys, capacity);
+            long[] grownValues = Arrays.copyOf(values, capacity);
+            keys = grownKeys;
+            values = grownValues;
+        }
+        int t = size - 1;
+        int w = resulting - 1;
+        for (int b = unique - 1; b >= 0; w--) {
+            if (t >= 0 && keys[t] > batchKeys[b]) {
+                keys[w] = keys[t];
+                values[w] = values[t--];
+            } else {
+                if (t >= 0 && keys[t] == batchKeys[b]) t--;
+                keys[w] = batchKeys[b];
+                values[w] = batchValues[b--];
+            }
+        }
+        size = resulting;
+        return added;
     }
 
     /**
