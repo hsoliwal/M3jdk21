@@ -19,8 +19,7 @@ import static java.util.Collections.unmodifiableList;
 
 import jdk.m3.collections.guava.annotations.GwtCompatible;
 import jdk.m3.collections.guava.collect.ImmutableCollection;
-import jdk.m3.collections.guava.collect.Lists;
-import java.util.Collections;
+import java.util.Arrays;
 import java.util.List;
 
 /** Aggregate future that collects (stores) results of each future. */
@@ -33,38 +32,33 @@ abstract class CollectionFuture<V extends Object, C extends Object>
    * there: cancel() never reads this field, only writes to it. That makes the race here completely
    * harmless, rather than just 99.99% harmless.
    */
-  private List<Present<V>> values;
+  private Object[] values;
 
-  @SuppressWarnings("EmptyList") // ImmutableList doesn't support nullable element types
+  /** An input that has not delivered a value; a delivered null is stored as null. Never escapes. */
+  //FLLDCIM: LEETCODIFY - EMPTY sentinel slots replace the Present wrapper per collected value
+  private static final Object EMPTY = new Object();
+
   CollectionFuture(
       ImmutableCollection<? extends ListenableFuture<? extends V>> futures,
       boolean allMustSucceed) {
     super(futures, allMustSucceed, true);
 
-    List<Present<V>> values =
-        futures.isEmpty()
-            ? Collections.<Present<V>>emptyList()
-            : Lists.<Present<V>>newArrayListWithCapacity(futures.size());
-
-    // Populate the results list with null initially.
-    for (int i = 0; i < futures.size(); ++i) {
-      values.add(null);
-    }
-
+    Object[] values = new Object[futures.size()];
+    Arrays.fill(values, EMPTY);
     this.values = values;
   }
 
   @Override
   final void collectOneValue(int index, @ParametricNullness V returnValue) {
-    List<Present<V>> localValues = values;
+    Object[] localValues = values;
     if (localValues != null) {
-      localValues.set(index, new Present<>(returnValue));
+      localValues[index] = returnValue;
     }
   }
 
   @Override
   final void handleAllCompleted() {
-    List<Present<V>> localValues = values;
+    Object[] localValues = values;
     if (localValues != null) {
       set(combine(localValues));
     }
@@ -76,7 +70,12 @@ abstract class CollectionFuture<V extends Object, C extends Object>
     this.values = null;
   }
 
-  abstract C combine(List<Present<V>> values);
+  /** Combines the slots; a slot still holding {@link #isEmptySlot EMPTY} had no value. */
+  abstract C combine(Object[] values);
+
+  static boolean isEmptySlot(Object slot) {
+    return slot == EMPTY;
+  }
 
   /** Used for {@link Futures#allAsList} and {@link Futures#successfulAsList}. */
   static final class ListFuture<V extends Object>
@@ -89,21 +88,13 @@ abstract class CollectionFuture<V extends Object, C extends Object>
     }
 
     @Override
-    List<V> combine(List<Present<V>> values) {
-      List<V> result = newArrayListWithCapacity(values.size());
-      for (Present<V> element : values) {
-        result.add(element != null ? element.value : null);
+    @SuppressWarnings("unchecked") // each non-EMPTY slot holds the V its future delivered
+    List<V> combine(Object[] values) {
+      List<V> result = newArrayListWithCapacity(values.length);
+      for (Object slot : values) {
+        result.add(isEmptySlot(slot) ? null : (V) slot);
       }
       return unmodifiableList(result);
-    }
-  }
-
-  /** The result of a successful {@code Future}. */
-  static final class Present<V extends Object> {
-    @ParametricNullness final V value;
-
-    Present(@ParametricNullness V value) {
-      this.value = value;
     }
   }
 }
