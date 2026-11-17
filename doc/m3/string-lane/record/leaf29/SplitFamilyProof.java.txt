@@ -1,0 +1,237 @@
+// SPDX-License-Identifier: Apache-2.0 OR EPL-2.0
+// Copyright (c) 2026 Synexia, Hitesh Soliwal and others
+
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
+import java.util.function.Function;
+import java.util.zip.GZIPInputStream;
+import kotlin.text.StringsKt;
+import org.apache.commons.lang3.StringUtils;
+
+/**
+ * Donor-oracle proof of the SPLIT family on a stock JVM whose String carries the head method text. Texts: every string
+ * of 0..4 units over UNITS (letters of both cases, a digit, space, comma, CR, LF, NEL and the halves of the surrogate
+ * pair of U+1D400, an upper-case letter), every string of 1..3 units over EXTRA (more whitespace and line boundaries,
+ * the halves of U+1F600), plus window-seam texts whose deciding units sit at 505..520 and 1018..1030. Oracles:
+ * commons-lang3 3.22.0 (split, splitPreserveAllTokens, splitByWholeSeparator[PreserveAllTokens], splitByCharacterType
+ * [CamelCase]), Kotlin stdlib 2.2.20 (chunked) and CPython 3.12 through python_oracle.py (partition, rpartition,
+ * rsplit, splitlines). Exceptions compare by class; Python's ValueError is IllegalArgumentException.
+ * Usage: SplitFamilyProof --write-corpus corpus.bin | SplitFamilyProof answers.bin.gz. Exit 1 on a mismatch.
+ */
+public final class SplitFamilyProof {
+    private static final char HIGH = (char) 0xD835, LOW = (char) 0xDC00;
+    private static final char[] UNITS = {'a', 'B', '1', ' ', ',', '\r', '\n', (char) 0x85, HIGH, LOW};
+    private static final char[] EXTRA = {'\t', (char) 0x1C, (char) 0x1F, (char) 0x0B, (char) 0x2028, (char) 0x3000,
+        (char) 0xA0, 'z', ':', (char) 0xD83D, (char) 0xDE00, 'Z', 'a'};
+    private static final char[] CHARS = {' ', ',', '\r', 'a', HIGH, LOW, (char) 0x85};
+    private static final String[] SEPARATOR_CHARS = {"", " ", ",", " ,", "\r\n", "" + HIGH, "a" + LOW, "1B,"};
+    private static final String[] WHOLE = {"", " ", ",", ", ", "a,", ",,", "\r\n", "" + HIGH + LOW, "" + HIGH,
+        "" + LOW, "B1", "aa"};
+    private static final int[] MAXES = {-1, 0, 1, 2, 3};
+    private static final int[] SIZES = {-1, 0, 1, 2, 3, 4, 5, 511, 512, 513};
+    private static final String[] PY_SEPARATORS = {"", " ", ",", ",,", "a,", "\r\n", "" + HIGH + LOW, "" + HIGH,
+        "" + LOW, "xx", "B1"};
+    private static final int[] PY_MAXSPLITS = {-1, 0, 1, 2};
+    private static int failures;
+
+    private SplitFamilyProof() {}
+
+    public static void main(String[] args) throws IOException {
+        List<String> texts = texts();
+        if (args[0].equals("--write-corpus")) {
+            writeCorpus(args[1], texts);
+            return;
+        }
+        Object[][] python = readPython(args[0], texts.size());
+        List<Check> checks = new ArrayList<>();
+        checks.add(new Check("split()", s -> s.split(), (i, s) -> StringUtils.split(s)));
+        checks.add(new Check("splitPreserveAllTokens()", s -> s.splitPreserveAllTokens(),
+                (i, s) -> StringUtils.splitPreserveAllTokens(s)));
+        for (char c : CHARS) {
+            String q = show("" + c);
+            checks.add(new Check("split(" + q + ")", s -> s.split(c), (i, s) -> StringUtils.split(s, c)));
+            checks.add(new Check("splitPreserveAllTokens(" + q + ")", s -> s.splitPreserveAllTokens(c),
+                    (i, s) -> StringUtils.splitPreserveAllTokens(s, c)));
+        }
+        for (String chars : SEPARATOR_CHARS) {
+            String q = show(chars);
+            checks.add(new Check("splitPreserveAllTokens(" + q + ")", s -> s.splitPreserveAllTokens(chars),
+                    (i, s) -> StringUtils.splitPreserveAllTokens(s, chars)));
+            for (int max : MAXES) {
+                checks.add(new Check("splitPreserveAllTokens(" + q + "," + max + ")",
+                        s -> s.splitPreserveAllTokens(chars, max),
+                        (i, s) -> StringUtils.splitPreserveAllTokens(s, chars, max)));
+            }
+        }
+        for (String sep : WHOLE) {
+            String q = show(sep);
+            checks.add(new Check("splitByWholeSeparator(" + q + ")", s -> s.splitByWholeSeparator(sep),
+                    (i, s) -> StringUtils.splitByWholeSeparator(s, sep)));
+            checks.add(new Check("splitByWholeSeparatorPreserveAllTokens(" + q + ")",
+                    s -> s.splitByWholeSeparatorPreserveAllTokens(sep),
+                    (i, s) -> StringUtils.splitByWholeSeparatorPreserveAllTokens(s, sep)));
+            for (int max : MAXES) {
+                checks.add(new Check("splitByWholeSeparator(" + q + "," + max + ")",
+                        s -> s.splitByWholeSeparator(sep, max), (i, s) -> StringUtils.splitByWholeSeparator(s, sep, max)));
+                checks.add(new Check("splitByWholeSeparatorPreserveAllTokens(" + q + "," + max + ")",
+                        s -> s.splitByWholeSeparatorPreserveAllTokens(sep, max),
+                        (i, s) -> StringUtils.splitByWholeSeparatorPreserveAllTokens(s, sep, max)));
+            }
+        }
+        checks.add(new Check("splitByCharacterType()", s -> s.splitByCharacterType(),
+                (i, s) -> StringUtils.splitByCharacterType(s)));
+        checks.add(new Check("splitByCharacterTypeCamelCase()", s -> s.splitByCharacterTypeCamelCase(),
+                (i, s) -> StringUtils.splitByCharacterTypeCamelCase(s)));
+        for (int size : SIZES) {
+            checks.add(new Check("chunked(" + size + ")", s -> s.chunked(size), (i, s) -> StringsKt.chunked(s, size)));
+        }
+        int op = 0;
+        for (String sep : PY_SEPARATORS) {
+            String q = show(sep);
+            Object[] partition = python[op++], rpartition = python[op++];
+            checks.add(new Check("partition(" + q + ")", s -> s.partition(sep), (i, s) -> partition[i]));
+            checks.add(new Check("rpartition(" + q + ")", s -> s.rpartition(sep), (i, s) -> rpartition[i]));
+        }
+        for (String sep : PY_SEPARATORS) {
+            String q = show(sep);
+            for (int max : PY_MAXSPLITS) {
+                Object[] rsplit = python[op++];
+                checks.add(new Check("rsplit(" + q + "," + max + ")", s -> s.rsplit(sep, max), (i, s) -> rsplit[i]));
+            }
+        }
+        Object[] lines = python[op++], linesKept = python[op++];
+        checks.add(new Check("splitLines(false)", s -> s.splitLines(false), (i, s) -> lines[i]));
+        checks.add(new Check("splitLines(true)", s -> s.splitLines(true), (i, s) -> linesKept[i]));
+        for (Check check : checks) {
+            long mismatches = 0;
+            String first = "-";
+            for (int i = 0; i < texts.size(); i++) {
+                String text = texts.get(i);
+                int index = i;
+                Object mine = result(() -> check.mine.apply(text));
+                Object donor = result(() -> check.donor.apply(index, text));
+                if (!Objects.equals(mine, donor) && mismatches++ == 0) {
+                    first = show(text.length() > 40 ? text.substring(0, 20) + "..." + text.substring(text.length() - 6)
+                            : text) + " -> " + show(String.valueOf(mine)) + " vs " + show(String.valueOf(donor));
+                }
+            }
+            failures += mismatches == 0 ? 0 : 1;
+            if (mismatches != 0 || check.name.equals("split()") || check.name.equals("partition(\",\")")) {
+                System.out.println(check.name + "\t" + texts.size() + "\t" + mismatches + "\t" + first);
+            }
+        }
+        System.out.println("checks\t" + checks.size() + "\ttexts\t" + texts.size() + "\tpython_ops\t" + op);
+        System.out.println("RESULT\t" + (failures == 0 ? "PASS" : "FAIL") + "\tfailures=" + failures);
+        System.exit(failures == 0 ? 0 : 1);
+    }
+
+    private interface Donor {
+        Object apply(int index, String text);
+    }
+
+    private interface Call {
+        Object get();
+    }
+
+    private record Check(String name, Function<String, Object> mine, Donor donor) {}
+
+    private static Object result(Call call) {
+        try {
+            Object value = call.get();
+            if (value instanceof String[] array) return Arrays.asList(array);
+            return value;
+        } catch (RuntimeException e) {
+            return e.getClass().getSimpleName();
+        }
+    }
+
+    private static List<String> texts() {
+        List<String> texts = strings(UNITS, 0, 4);
+        texts.addAll(strings(EXTRA, 1, 3));
+        String[][] seams = {{"x", "" + HIGH + LOW}, {"x", "\r\n"}, {"x", " a"}, {"x", ",,"}, {"x", "Ba"},
+            {"X", "ab"}, {"x", "\u0085"}, {"x", HIGH + "a"}, {"1", "\n"}};
+        for (int k = 505; k <= 1030; k += (k == 520 ? 498 : 1)) {
+            for (String[] seam : seams) {
+                texts.add(seam[0].repeat(k) + seam[1]);
+                texts.add(seam[1] + seam[0].repeat(k));
+            }
+        }
+        return texts;
+    }
+
+    private static List<String> strings(char[] units, int minLength, int maxLength) {
+        List<String> out = new ArrayList<>();
+        for (int length = minLength; length <= maxLength; length++) {
+            int total = (int) Math.pow(units.length, length);
+            for (int code = 0; code < total; code++) {
+                char[] text = new char[length];
+                int rest = code;
+                for (int i = 0; i < length; i++) {
+                    text[i] = units[rest % units.length];
+                    rest /= units.length;
+                }
+                out.add(new String(text));
+            }
+        }
+        return out;
+    }
+
+    private static void writeCorpus(String file, List<String> texts) throws IOException {
+        try (DataOutputStream out = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(file)))) {
+            out.writeInt(PY_SEPARATORS.length);
+            for (String sep : PY_SEPARATORS) writeUnits(out, sep);
+            out.writeInt(PY_MAXSPLITS.length);
+            for (int max : PY_MAXSPLITS) out.writeInt(max);
+            out.writeInt(texts.size());
+            for (String text : texts) writeUnits(out, text);
+        }
+        System.out.println("corpus\ttexts\t" + texts.size());
+    }
+
+    private static void writeUnits(DataOutputStream out, String s) throws IOException {
+        out.writeInt(s.length());
+        out.writeChars(s);
+    }
+
+    /** Python's answers as [op][text]: a List of parts, or "IllegalArgumentException" for ValueError. */
+    private static Object[][] readPython(String file, int textCount) throws IOException {
+        int ops = 2 * PY_SEPARATORS.length + PY_SEPARATORS.length * PY_MAXSPLITS.length + 2;
+        Object[][] answers = new Object[ops][textCount];
+        try (DataInputStream in = new DataInputStream(new BufferedInputStream(
+                new GZIPInputStream(new FileInputStream(file), 1 << 16), 1 << 16))) {
+            for (int t = 0; t < textCount; t++) {
+                for (int op = 0; op < ops; op++) {
+                    int count = in.readInt();
+                    if (count < 0) {
+                        answers[op][t] = "IllegalArgumentException";
+                        continue;
+                    }
+                    List<String> parts = new ArrayList<>(count);
+                    for (int p = 0; p < count; p++) {
+                        char[] units = new char[in.readInt()];
+                        for (int u = 0; u < units.length; u++) units[u] = in.readChar();
+                        parts.add(new String(units));
+                    }
+                    answers[op][t] = parts;
+                }
+            }
+            if (in.read() != -1) throw new IOException("python answers longer than the corpus");
+        }
+        return answers;
+    }
+
+    private static String show(String s) {
+        StringBuilder out = new StringBuilder("\"");
+        for (char c : s.toCharArray()) out.append(c >= 32 && c < 127 ? String.valueOf(c) : String.format("<%04X>", (int) c));
+        return out.append('"').toString();
+    }
+}

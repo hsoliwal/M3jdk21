@@ -1,0 +1,43 @@
+== JUnit flat -XX:+CompactStrings
+[         0 containers failed     ]
+[       599 tests found           ]
+[         0 tests skipped         ]
+[         0 tests aborted         ]
+[       599 tests successful      ]
+[         0 tests failed          ]
+== JUnit flat -XX:-CompactStrings
+[         0 containers failed     ]
+[       599 tests found           ]
+[         0 tests skipped         ]
+[         0 tests aborted         ]
+[       599 tests successful      ]
+[         0 tests failed          ]
+== JUnit m3-facts -XX:+CompactStrings
+[         0 containers failed     ]
+[       599 tests found           ]
+[         0 tests skipped         ]
+[         0 tests aborted         ]
+[       599 tests successful      ]
+[         0 tests failed          ]
+== JUnit m3-facts -XX:-CompactStrings
+[         0 containers failed     ]
+[       599 tests found           ]
+[         0 tests skipped         ]
+[         0 tests aborted         ]
+[       599 tests successful      ]
+[         0 tests failed          ]
+== JUnit m3-scan -XX:+CompactStrings
+[         0 containers failed     ]
+[       599 tests found           ]
+[         0 tests skipped         ]
+[         0 tests aborted         ]
+[       599 tests successful      ]
+[         0 tests failed          ]
+== JUnit m3-scan -XX:-CompactStrings
+[         0 containers failed     ]
+[       599 tests found           ]
+[         0 tests skipped         ]
+[         0 tests aborted         ]
+[       599 tests successful      ]
+[         0 tests failed          ]
+junit exit 0

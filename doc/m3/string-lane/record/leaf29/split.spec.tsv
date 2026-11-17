@@ -1,0 +1,7 @@
+# SPLIT family: donor op, mode, java op, null rule, argument shapes (port_donor_tests.py v1.1; '-' none, 'c' char literal)
+split	INSTANCE	split	NPE_ARG	-|c
+splitPreserveAllTokens	INSTANCE	splitPreserveAllTokens	NPE_ARG
+splitByWholeSeparator	INSTANCE	splitByWholeSeparator	NPE_ARG
+splitByWholeSeparatorPreserveAllTokens	INSTANCE	splitByWholeSeparatorPreserveAllTokens	NPE_ARG
+splitByCharacterType	INSTANCE	splitByCharacterType	NPE_ARG
+splitByCharacterTypeCamelCase	INSTANCE	splitByCharacterTypeCamelCase	NPE_ARG
