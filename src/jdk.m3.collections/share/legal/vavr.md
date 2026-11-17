@@ -6,8 +6,9 @@ The Java sources under `providers/classes/jdk/m3/collections/vavr` of the module
 Vavr (https://github.com/vavr-io/vavr) at commit `9fb5dab2dd5b8bc0c475ce43feebbd8803729416` (2026-11-15) of its
 branch `main`. It is a development state, not a release: the build file says 2.0.0-SNAPSHOT. The newest release on
 Maven Central is 1.1.0 (2026-10-24), made from another line of development: this commit is 184 commits ahead of the
-tag `v1.1.0` and 69 behind it, and against the sources jar of 1.1.0, 96 main sources differ, one was added (the
-module descriptor) and five were removed (the four `GwtIncompatible` annotations and `Patterns`, see below). The fork
+tag `v1.1.0` and 69 behind it, and against the sources jar of 1.1.0, 95 main sources differ, one (`Memoized`) is
+identical, one was added (the module descriptor) and five were removed (the four `GwtIncompatible` annotations and
+`Patterns`, see below). The fork
 https://github.com/hsoliwal/vavr (`3663be4a8c00bfb9eed7db19b14addf10a36b6c7`) is two commits ahead of that commit;
 they change the root `pom.xml` only, so the sources are the library's.
 
@@ -31,8 +32,15 @@ unchanged.
 
 The documentation names the work some structures follow: Okasaki's "Purely Functional Data Structures" (`List`,
 `Queue`, `Stream`), Kazu Yamamoto's Haskell red-black tree and the papers of Okasaki and Kahrs (`RedBlackTree`),
-Blelloch, Ferizovic and Sun, Scala's `ConcatIterator` and `RedBlackTree`, Scalaz's `Validation`, and a Stack Overflow
-answer (`FutureImpl`, `Promise`). No source says that it was copied from other code.
+Blelloch, Ferizovic and Sun, Brodal and Okasaki's purely functional priority queues (`PriorityQueue`, "Based on"),
+Scala's `ConcatIterator` and `RedBlackTree`, Scalaz's `Validation`, and a Stack Overflow question (`FutureImpl`,
+`Promise`). No source says that it was copied from other code.
+
+Found by comparison, not stated in the sources: the documentation of the methods of `collection.CharSeq` that
+correspond to methods of `java.lang.String` is the documentation of `java.lang.String` of OpenJDK (about 300 of the
+1,018 normalized lines of `CharSeq` occur in `String.java`, a few more in `AbstractStringBuilder` and `Character`;
+Copyright Oracle and/or its affiliates, GNU General Public License, version 2, with the Classpath exception, the
+license of this repository). No other source shares more than stock phrases with the JDK.
 
 ### Changes made by Synexia (2026-11-17)
 
@@ -40,17 +48,20 @@ The changes were mechanical (com.synexia repository, recipe crate `inverse-packa
 `provider_pipeline.sh`; the run is in `PROVIDER_RUNS.md` there):
 
 - the package `io.vavr` is named `jdk.m3.collections.vavr`;
-- the package-private class `$` is named `PatternExtractors`: a file named `$.java` cannot be a source of the JDK
-  build, whose make files read `$` as a variable. Only its declaration and its uses qualified with its package (the
-  generated `Patterns` calls `io.vavr.$::Tuple2` and so on) were renamed; the public methods named `$` of `API` are
-  unchanged;
+- the package-private class `$` is named `PatternExtractors`, so that no source file name of the JDK contains `$`
+  (the make files escape `$` in file names, but no source of the JDK has one and that path was not tested). Only its
+  declaration and its uses qualified with its package (the generated `Patterns` calls `io.vavr.$::Tuple2` and so on,
+  17 uses) were renamed, and with them the comment of `Patterns` that names the class it was generated from; the
+  public methods named `$` of `API` are unchanged;
 - the annotations `@Patterns` (1) and `@Unapply` (20) of `io.vavr.match.annotation` were removed from that class with
   their two imports: they are the input of the processor above and have no effect at run time (retention `CLASS`);
 - the annotations of JSpecify were removed with their imports, as for the Guava provider: 4,833 annotations
-  (`@Nullable` 4,821, `@NonNull` 8, `@NullMarked` 4) and 97 imports in 93 files;
+  (`@Nullable` 4,821, `@NonNull` 8, `@NullMarked` 4) and 97 imports in 93 files; 5 blank lines that separated import
+  groups which became empty went with them (`CheckedRunnable` and the four `package-info.java`);
 - `@SuppressWarnings` was added to two top-level types for the lint categories the JDK build reports as errors:
-  `collection.HashArrayMappedTrie` (`unchecked`) and `concurrent.Future` (`deprecation`: it uses the deprecated
-  `concurrent.Task` in a signature, and javac reports that without a source position). Two types had one already;
+  `collection.HashArrayMappedTrieModule`, the second top-level type of `HashArrayMappedTrie.java` (`unchecked`), and
+  `concurrent.Future` (`deprecation`: it uses the deprecated `concurrent.Task` in a signature, and javac reports that
+  without a source position). Two types had one already;
 - trailing blanks were removed from 56 lines in 26 files (the repository's rule for Java sources, `.jcheck/conf`).
 
 No top-level type was moved to another file.
@@ -68,6 +79,10 @@ The four packages the library's own module descriptor exports: `vavr`, `vavr.col
 
 `concurrent.Future` uses virtual threads by default (`Executors.newVirtualThreadPerTaskExecutor()`). The interface
 `concurrent.Task` is deprecated in the library.
+
+Compared with release 1.1.0: `control.HashCodes` (public and deprecated there, "Will be removed from public API") is
+not public here; `concurrent.Task` and `Future.run(Task)` are public here and not in 1.1.0; `Map.asPartialFunction`
+throws `IndexOutOfBoundsException` where 1.1.0 throws `NoSuchElementException`.
 
 ### License
 

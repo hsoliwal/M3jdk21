@@ -15,20 +15,39 @@ sources jar rather than generated again here. That the jar holds the sources of 
 other sources are byte for byte the files of the repository, and compiled with javac 21 the 546 sources give the
 1,040 classes of the released jar `hppc-0.13.0.jar` with the same members and the same instructions, except the order
 in which the constructors of the anonymous classes in the 40 `SortedIteration...HashMap` classes store their synthetic
-fields (the enclosing instance and captured variables), which is javac's code generation, not the sources.
+fields (the enclosing instance and captured variables), and, in 282 classes, extra entries of the debug line-number
+tables in the release. Both are code generation of the newer javac that built the release, not the sources.
 
 HPPC is licensed under the Apache License, Version 2.0. The text below is the repository's file `LICENSE.txt`, which
 names the copyright holder ("Copyright 2010-2013, Carrot Search s.c., Boznicza 11/56, Poznan, Poland"). The 21
-hand-written sources carry the header "Copyright (C) 2010-2026 Carrot Search s.c. and contributors" with the Apache
-License; the 525 generated sources carry none (the templates have none). The headers are unchanged. The repository's
-`NOTICE.txt` is reproduced below.
+hand-written sources carry the header "Copyright (C) 2010-2026 Carrot Search s.c. and contributors / All rights
+reserved. / Refer to the full license file "LICENSE.txt"", which points to the Apache License of the repository; the
+525 generated sources carry none (the templates have none). The headers are unchanged. The repository's `NOTICE.txt`
+is reproduced below.
 
 Origins the library states:
 
 - `NOTICE.txt`: "HPPC borrowed code, ideas or both from" Apache Lucene, fastutil and Koloboke, all under the Apache
   License;
 - `RamUsageEstimator` is "Mostly forked from Lucene tag releases/lucene-solr/8.5.1" and `Accountable` "Partly forked
-  from" the same tag. The attribution of the NOTICE file of Apache Lucene is reproduced below.
+  from" the same tag.
+
+Origins found by comparison, which no header states (they are among the 21 hand-written sources, whose headers name
+Carrot Search only):
+
+- `BitUtil` is Apache Lucene's `org.apache.lucene.util.BitUtil` (8.5.1: 98% of its tokens, with Lucene's comment
+  "see LUCENE-2221");
+- `BitSet` and `BitSetIterator` follow Lucene's `OpenBitSet` and `OpenBitSetIterator` of the 3.x line (3.0.3: 63% and
+  about 95% of their tokens, with Lucene's documentation);
+- `PlaModel`, on which the PGM indexes (`...PgmIndex`) are built, is a translation of `add_point` of
+  `OptimalPiecewiseLinearModel` in the C++ PGM-index (https://github.com/gvinciguerra/PGM-index,
+  `include/pgm/piecewise_linear_model.hpp`; Apache License 2.0; "Copyright (c) 2018 Giorgio Vinciguerra"): the same
+  branches, local names and comments. The PGM index classes cite the paper and https://pgm.di.unipi.it/;
+- `XorShift128P` follows `xorshift128plus.c` (cited; public domain), and its `nextInt(int)` is the algorithm of
+  OpenJDK's `java.util.Random.nextInt(int)`.
+
+The Lucene classes carry the header of the Apache Software Foundation in Lucene; HPPC's copies do not. The
+attributions of the NOTICE files of the Lucene versions they come from are reproduced below.
 
 ### Changes made by Synexia (2026-11-17)
 
@@ -36,8 +55,8 @@ The changes were mechanical (com.synexia repository, recipe crate `inverse-packa
 `provider_pipeline.sh`; the run is in `PROVIDER_RUNS.md` there):
 
 - the package `com.carrotsearch.hppc` is named `jdk.m3.collections.hppc`;
-- `@SuppressWarnings` was added to 77 of the 546 top-level types and extended on the 4 that had one, for the lint
-  categories the JDK build reports as errors.
+- `@SuppressWarnings` was added to 141 of the 546 top-level types and extended on 28 of the 29 that had one
+  (`AbstractObjectCollection` unchanged), for the lint categories the JDK build reports as errors.
 
 No top-level type was moved to another file, no documentation comment and no white space was changed.
 
@@ -49,8 +68,9 @@ instructions.
 The seven packages the library's own module descriptor exports, which are all of its packages: `hppc`,
 `hppc.comparators`, `hppc.cursors`, `hppc.internals`, `hppc.predicates`, `hppc.procedures`, `hppc.sorting`. The
 descriptor's `requires java.logging` is required by this module already. Its `requires static jdk.management` is not
-carried: `RamUsageEstimator` reaches `com.sun.management.HotSpotDiagnosticMXBean` by reflection only and falls back
-to defaults when it is not there, as in the library.
+carried: `RamUsageEstimator` reaches `com.sun.management.HotSpotDiagnosticMXBean` by reflection only. In a default
+run the module `jdk.management` is there and the estimates equal the library's; without it, both assume uncompressed
+references and class pointers and overestimate sizes on a default 64-bit JVM.
 
 ### Notice of the library
 
@@ -68,14 +88,36 @@ HPPC borrowed code, ideas or both from:
    (Apache license)
 ```
 
-### Notice of Apache Lucene (for `RamUsageEstimator` and `Accountable`)
+### Notices of Apache Lucene
+
+For `RamUsageEstimator`, `Accountable` and `BitUtil` (Lucene 8.5.1, `META-INF/NOTICE.txt` of
+`lucene-core-8.5.1-sources.jar`):
 
 ```
 Apache Lucene
-Copyright 2001-2025 The Apache Software Foundation
+Copyright 2001-2020 The Apache Software Foundation
 
 This product includes software developed at
 The Apache Software Foundation (http://www.apache.org/).
+```
+
+For `BitSet` and `BitSetIterator` (Lucene 3.0.3, `META-INF/NOTICE.txt` of `lucene-core-3.0.3-sources.jar`; the rest
+of that file names parts of Lucene that are not here):
+
+```
+Apache Lucene
+Copyright 2006 The Apache Software Foundation
+
+This product includes software developed by
+The Apache Software Foundation (http://www.apache.org/).
+```
+
+### Notice of PGM-index (for `PlaModel`)
+
+```
+Copyright (c) 2018 Giorgio Vinciguerra.
+
+Licensed under the Apache License, Version 2.0
 ```
 
 ### License
