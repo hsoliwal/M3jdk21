@@ -733,7 +733,8 @@ exports jdk.m3.collections.brownies.helper.primitive;
 exports jdk.m3.collections.brownies.primitive;
 
 // JCTools, development state 5.0.0-SNAPSHOT (legal/jctools.md): the projects jctools-core and jctools-core-jdk11.
-// The library has no module descriptor; these are the nine packages its OSGi annotations export
+// The nine packages the library's module descriptors (org.jctools.core, org.jctools.core.jdk11, which its build
+// generates from @Export annotations) export
 exports jdk.m3.collections.jctools.counters;
 exports jdk.m3.collections.jctools.maps;
 exports jdk.m3.collections.jctools.queues;

@@ -4,8 +4,11 @@
 
 The Java sources under `providers/classes/jdk/m3/collections/capsule` of the module `jdk.m3.collections` are derived
 from Capsule (https://github.com/usethesource/capsule) at commit `3e0da2d0cf7f0b6a9b9e54a7a18c6c36f4df6d2b`
-(2026-09-10) of its branch `main`: all 42 main sources. That commit is seven commits after the release tag `v0.7.2`;
-none of the seven changes a main source, so the sources are those of release 0.7.2. The fork
+(2026-09-10) of its branch `main`: all 42 main sources. That commit is seven commits after the release tag `v0.7.2`.
+Three of the seven touch `core/PersistentTrieMap.java` (a change, its merge as pull request #40, and the revert of
+that merge); in the end every main source is the same file as at the tag (the same blob ids), so the sources are
+those of release 0.7.2. They are also byte for byte the 42 files of `capsule-0.7.2-sources.jar` in the maintainers'
+repository https://releases.usethesource.io/maven/ (its SHA-1 as published there). The fork
 https://github.com/hsoliwal/capsule (`1827df9d408b96ac012d86d72d9a582f8d7157d6`) is two commits ahead of that commit;
 they change `pom.xml` only. The tests and the benchmarks are not taken.
 
@@ -21,14 +24,17 @@ and is available under https://opensource.org/licenses/BSD-2-Clause.
 ```
 
 No source says that it was copied from other code. The library is not on Maven Central; its releases are published
-by its maintainers, and the state here is identified by the commit and the tag in the library's repository.
+in the maintainers' repository named above.
 
 ### Changes made by Synexia (2026-11-17)
 
 The changes were mechanical (com.synexia repository, recipe crate `inverse-package-relocation-20261116`,
 `provider_pipeline.sh`):
 
-- the package `io.usethesource.capsule` is named `jdk.m3.collections.capsule`;
+- the package `io.usethesource.capsule` is named `jdk.m3.collections.capsule`. With it the system property that
+  `factory.DefaultSetFactory` reads, `<package>.Set.targetClass` (built from the class name), is
+  `jdk.m3.collections.capsule.Set.targetClass`, and its default value names
+  `jdk.m3.collections.capsule.core.PersistentTrieSet`;
 - the header comment of each of the 42 files opened with `/**`, the opening of a documentation comment, where no
   documentation belongs; doclint, which the JDK build runs as errors, reads its `<` and `&` as HTML. Its first line
   is `/* *` now, which makes it a plain comment. The text of the header is unchanged;
@@ -45,7 +51,23 @@ instructions.
 
 ### Exported packages
 
-The library has no module descriptor; all ten packages are exported.
+The library has no module descriptor; all ten packages are exported. The library marks no package as internal, but
+`core.trie`, `util` and its subpackages are its implementation, exported here only because nothing says otherwise.
+It marks the interfaces `SetMultimap` and `BinaryRelation` (with their `Immutable` and `Transient`) `@Experimental`,
+"an experimental API that change at any time, without any stability or backwards compatibility guarantees" (source
+retention: the compiled classes carry no trace of it), and `util.collection.AbstractImmutableMap` and
+`AbstractImmutableSet` `@Deprecated`. In `core.trie`, the public method `MultimapResult.unchanged()` returns the
+package-private `MultimapResultImpl`, as in the library.
+
+### Known properties of the library, unchanged here
+
+An independent test with random operations found these in the library and in this provider alike:
+
+- `entrySet().contains(entry)` of the maps and multimaps calls `containsKey(entry)`, so it is `false` for an entry
+  that is there, and `entrySet().equals(...)` with a `java.util` entry set is `false`;
+- `Map.Transient.__put` with an equal value returns `null` instead of the old value for a key in a hash-collision node;
+- `BinaryRelation.__put(key, value)` replaces the values of `key` forward but leaves `key` under the old values in the
+  inverse.
 
 ### License
 
