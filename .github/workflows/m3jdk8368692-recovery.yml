@@ -1,20 +1,26 @@
 name: M3 JDK-8368692 recovery proof
 
+# Former triggers (below, as of the move) now start job(s) 'm3jdk8368692-recovery__*' in
+# .github/workflows/checks-superset-06.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     pull_request:
+#       paths:
+#         - "m3/backports/recipes/jdk-8368692/**"
+#         - "m3/backports/UPSTREAM_CHANGE_SEEDS.tsv"
+#         - "m3/tooling/recipe-catalogue.tsv"
+#         - "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk8368692PasswordSystemInBackportRecipe.java"
+#         - "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk27-password-systemin-8368692-java/**"
+#         - "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jdk27-password-systemin-8368692-text/**"
+#         - "m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3Jdk8368692PasswordSystemInBackportRecipeTest.java"
+#         - "m3/tooling/migration-recipes/src/test/resources/jdk/m3/rewrite/backport/jdk27-password-systemin-8368692/**"
+#         - "src/java.base/share/classes/sun/security/util/Password.java"
+#         - "src/java.base/share/conf/security/java.security"
+#         - "test/jdk/sun/security/tools/keytool/AllowSystemIn.java"
+#         - ".github/workflows/m3jdk8368692-recovery.yml"
+#     workflow_dispatch:
 on:
-  pull_request:
-    paths:
-      - "m3/backports/recipes/jdk-8368692/**"
-      - "m3/backports/UPSTREAM_CHANGE_SEEDS.tsv"
-      - "m3/tooling/recipe-catalogue.tsv"
-      - "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk8368692PasswordSystemInBackportRecipe.java"
-      - "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk27-password-systemin-8368692-java/**"
-      - "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jdk27-password-systemin-8368692-text/**"
-      - "m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3Jdk8368692PasswordSystemInBackportRecipeTest.java"
-      - "m3/tooling/migration-recipes/src/test/resources/jdk/m3/rewrite/backport/jdk27-password-systemin-8368692/**"
-      - "src/java.base/share/classes/sun/security/util/Password.java"
-      - "src/java.base/share/conf/security/java.security"
-      - "test/jdk/sun/security/tools/keytool/AllowSystemIn.java"
-      - ".github/workflows/m3jdk8368692-recovery.yml"
   workflow_dispatch:
 
 permissions:

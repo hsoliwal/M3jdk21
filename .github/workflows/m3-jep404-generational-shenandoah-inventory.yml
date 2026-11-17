@@ -1,28 +1,34 @@
 name: M3 JEP 404 Generational Shenandoah inventory
 
+# Former triggers (below, as of the move) now start job(s) 'm3-jep404-generational-shenandoah-inventory__*' in
+# .github/workflows/checks-superset-04.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     push:
+#       branches:
+#         - "m3/jep404-*"
+#       paths:
+#         - "m3/backports/file_delta_inventory.py"
+#         - "m3/backports/generate_recipe_crates.py"
+#         - "m3/backports/materialize_generated_crates.py"
+#         - "m3/backports/selected_path_inventory.py"
+#         - "m3/backports/test_selected_path_inventory.py"
+#         - "m3/backports/test_jep404_inventory_policy.py"
+#         - "m3/backports/recipes/jep-404-generational-shenandoah/**"
+#         - ".github/workflows/m3-jep404-generational-shenandoah-inventory.yml"
+#     pull_request:
+#       paths:
+#         - "m3/backports/file_delta_inventory.py"
+#         - "m3/backports/generate_recipe_crates.py"
+#         - "m3/backports/materialize_generated_crates.py"
+#         - "m3/backports/selected_path_inventory.py"
+#         - "m3/backports/test_selected_path_inventory.py"
+#         - "m3/backports/test_jep404_inventory_policy.py"
+#         - "m3/backports/recipes/jep-404-generational-shenandoah/**"
+#         - ".github/workflows/m3-jep404-generational-shenandoah-inventory.yml"
+#     workflow_dispatch:
 on:
-  push:
-    branches:
-      - "m3/jep404-*"
-    paths:
-      - "m3/backports/file_delta_inventory.py"
-      - "m3/backports/generate_recipe_crates.py"
-      - "m3/backports/materialize_generated_crates.py"
-      - "m3/backports/selected_path_inventory.py"
-      - "m3/backports/test_selected_path_inventory.py"
-      - "m3/backports/test_jep404_inventory_policy.py"
-      - "m3/backports/recipes/jep-404-generational-shenandoah/**"
-      - ".github/workflows/m3-jep404-generational-shenandoah-inventory.yml"
-  pull_request:
-    paths:
-      - "m3/backports/file_delta_inventory.py"
-      - "m3/backports/generate_recipe_crates.py"
-      - "m3/backports/materialize_generated_crates.py"
-      - "m3/backports/selected_path_inventory.py"
-      - "m3/backports/test_selected_path_inventory.py"
-      - "m3/backports/test_jep404_inventory_policy.py"
-      - "m3/backports/recipes/jep-404-generational-shenandoah/**"
-      - ".github/workflows/m3-jep404-generational-shenandoah-inventory.yml"
   workflow_dispatch:
 
 permissions:

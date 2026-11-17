@@ -1,12 +1,18 @@
 # SPDX-License-Identifier: Apache-2.0
 # Direct product verification: M3JDK 21 is the JDK, not a library atop the JDK.
 name: Collection views contracts
+# Former triggers (below, as of the move) now start job(s) 'collection-views-convergence__*' in
+# .github/workflows/checks-superset-07.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     pull_request:
+#       paths:
+#         - 'src/java.base/share/classes/java/util/CollectionViews.java'
+#         - 'test/jdk/java/util/CollectionViews/**'
+#         - '.github/workflows/collection-views-convergence.yml'
+#     workflow_dispatch:
 on:
-  pull_request:
-    paths:
-      - 'src/java.base/share/classes/java/util/CollectionViews.java'
-      - 'test/jdk/java/util/CollectionViews/**'
-      - '.github/workflows/collection-views-convergence.yml'
   workflow_dispatch:
 permissions:
   contents: read

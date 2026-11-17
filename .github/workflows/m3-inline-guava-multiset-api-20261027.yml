@@ -1,11 +1,17 @@
 name: M3 Guava Multiset zero downstream runtime dependency gate
+# Former triggers (below, as of the move) now start job(s) 'm3-inline-guava-multiset-api-20261027__*' in
+# .github/workflows/checks-superset-05.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     push:
+#       branches: ['m3/inline-guava-multiset-api-receiver-20261027']
+#     pull_request:
+#       paths:
+#         - 'm3/collections/implementations/guava-hash-multiset/**'
+#         - '.github/workflows/m3-inline-guava-multiset-api-20261027.yml'
 on:
-  push:
-    branches: ['m3/inline-guava-multiset-api-receiver-20261027']
-  pull_request:
-    paths:
-      - 'm3/collections/implementations/guava-hash-multiset/**'
-      - '.github/workflows/m3-inline-guava-multiset-api-20261027.yml'
+  workflow_dispatch:
 permissions:
   contents: read
 concurrency:

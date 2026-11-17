@@ -1,16 +1,22 @@
 # SPDX-License-Identifier: Apache-2.0
 name: M3 direct Spring multivalue provider Java21
+# Former triggers (below, as of the move) now start job(s) 'm3-direct-spring-multivalue-20261017__*' in
+# .github/workflows/checks-superset-05.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     push:
+#       branches: ['m3/direct-spring-multivaluemap-20261017']
+#     pull_request:
+#       paths:
+#         - 'm3/collections/interop/src/main/java/jdk/m3/collections/interop/M3SpringArrayMultiValueMap.java'
+#         - 'm3/collections/interop/src/main/java/jdk/m3/collections/interop/M3LibraryCollections.java'
+#         - 'm3/collections/interop/sdk-family-bindings.tsv'
+#         - 'm3/collections/interop/src/test/java/jdk/m3/collections/interop/M3SpringArrayContractTest.java'
+#         - 'm3/collections/interop/qualification/m3-direct-spring-multivaluemap-20261017/**'
+#         - '.github/workflows/m3-direct-spring-multivalue-20261017.yml'
+#     workflow_dispatch:
 on:
-  push:
-    branches: ['m3/direct-spring-multivaluemap-20261017']
-  pull_request:
-    paths:
-      - 'm3/collections/interop/src/main/java/jdk/m3/collections/interop/M3SpringArrayMultiValueMap.java'
-      - 'm3/collections/interop/src/main/java/jdk/m3/collections/interop/M3LibraryCollections.java'
-      - 'm3/collections/interop/sdk-family-bindings.tsv'
-      - 'm3/collections/interop/src/test/java/jdk/m3/collections/interop/M3SpringArrayContractTest.java'
-      - 'm3/collections/interop/qualification/m3-direct-spring-multivaluemap-20261017/**'
-      - '.github/workflows/m3-direct-spring-multivalue-20261017.yml'
   workflow_dispatch:
 permissions:
   contents: read

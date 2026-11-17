@@ -1,20 +1,26 @@
 name: M3 post-21 JEP compatibility policy
 
+# Former triggers (below, as of the move) now start job(s) 'm3-post21-jep-compatibility-policy__*' in
+# .github/workflows/checks-superset-04.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     push:
+#       branches:
+#         - "m3/post21-jep-compat-reconcile-20261005"
+#       paths:
+#         - "m3/backports/POST21_PRIORITY_COMPATIBILITY.tsv"
+#         - "m3/backports/compatibility_policy.py"
+#         - "m3/backports/test_compatibility_policy.py"
+#         - ".github/workflows/m3-post21-jep-compatibility-policy.yml"
+#     pull_request:
+#       paths:
+#         - "m3/backports/POST21_PRIORITY_COMPATIBILITY.tsv"
+#         - "m3/backports/compatibility_policy.py"
+#         - "m3/backports/test_compatibility_policy.py"
+#         - ".github/workflows/m3-post21-jep-compatibility-policy.yml"
+#     workflow_dispatch:
 on:
-  push:
-    branches:
-      - "m3/post21-jep-compat-reconcile-20261005"
-    paths:
-      - "m3/backports/POST21_PRIORITY_COMPATIBILITY.tsv"
-      - "m3/backports/compatibility_policy.py"
-      - "m3/backports/test_compatibility_policy.py"
-      - ".github/workflows/m3-post21-jep-compatibility-policy.yml"
-  pull_request:
-    paths:
-      - "m3/backports/POST21_PRIORITY_COMPATIBILITY.tsv"
-      - "m3/backports/compatibility_policy.py"
-      - "m3/backports/test_compatibility_policy.py"
-      - ".github/workflows/m3-post21-jep-compatibility-policy.yml"
   workflow_dispatch:
 
 permissions:

@@ -1,12 +1,18 @@
 # SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
 # SPDX-License-Identifier: Apache-2.0
 name: M3 indexed long projection direct offset-mask filtering
+# Former triggers (below, as of the move) now start job(s) 'm3-long-index-projection-mask-direct-20261017__*' in
+# .github/workflows/checks-superset-08.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     pull_request:
+#       paths:
+#         - '.github/workflows/m3-long-index-projection-mask-direct-20261017.yml'
+#         - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3LongIndexProjection.java'
+#         - 'test/jdk/jdk/m3/collections/M3LongIndexProjectionMaskOffset*.java'
+#     workflow_dispatch:
 on:
-  pull_request:
-    paths:
-      - '.github/workflows/m3-long-index-projection-mask-direct-20261017.yml'
-      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3LongIndexProjection.java'
-      - 'test/jdk/jdk/m3/collections/M3LongIndexProjectionMaskOffset*.java'
   workflow_dispatch:
 permissions:
   contents: read

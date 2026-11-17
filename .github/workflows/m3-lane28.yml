@@ -1,21 +1,27 @@
 # SPDX-License-Identifier: Apache-2.0
 name: M3 Lane28 counterparts
+# Former triggers (below, as of the move) now start job(s) 'm3-lane28__*' in
+# .github/workflows/checks-superset-01.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     pull_request:
+#       paths:
+#         - '.github/workflows/m3-lane28.yml'
+#         - '.m3/openrewrite-recipes/**'
+#         - 'm3/tooling/lane28/**'
+#         - 'm3/tooling/tq-sync/**'
+#         - 'm3/tooling/migration-recipes/**'
+#         - 'm3/tooling/image-gates/**'
+#         - 'm3/migration/**'
+#         - 'm3/docs/name-mapping*'
+#         - 'm3/docs/counterpart-naming.md'
+#         - 'src/java.base/**'
+#         - 'src/hotspot/**'
+#         - 'test/jdk/jdk/internal/mindex/**'
+#         - 'm3/tooling/tq/**'
+#     workflow_dispatch:
 on:
-  pull_request:
-    paths:
-      - '.github/workflows/m3-lane28.yml'
-      - '.m3/openrewrite-recipes/**'
-      - 'm3/tooling/lane28/**'
-      - 'm3/tooling/tq-sync/**'
-      - 'm3/tooling/migration-recipes/**'
-      - 'm3/tooling/image-gates/**'
-      - 'm3/migration/**'
-      - 'm3/docs/name-mapping*'
-      - 'm3/docs/counterpart-naming.md'
-      - 'src/java.base/**'
-      - 'src/hotspot/**'
-      - 'test/jdk/jdk/internal/mindex/**'
-      - 'm3/tooling/tq/**'
   workflow_dispatch:
 permissions:
   contents: read

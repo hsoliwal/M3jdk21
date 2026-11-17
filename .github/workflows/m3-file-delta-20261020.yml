@@ -1,15 +1,21 @@
 name: M3File native delta and build-impact Java21
+# Former triggers (below, as of the move) now start job(s) 'm3-file-delta-20261020__*' in
+# .github/workflows/checks-superset-10.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     pull_request:
+#       paths:
+#         - 'm3/file/**'
+#         - 'src/jdk.m3.collections/**'
+#         - '.github/workflows/m3-file-delta-20261020.yml'
+#     push:
+#       paths:
+#         - 'm3/file/**'
+#         - 'src/jdk.m3.collections/**'
+#         - '.github/workflows/m3-file-delta-20261020.yml'
 on:
-  pull_request:
-    paths:
-      - 'm3/file/**'
-      - 'src/jdk.m3.collections/**'
-      - '.github/workflows/m3-file-delta-20261020.yml'
-  push:
-    paths:
-      - 'm3/file/**'
-      - 'src/jdk.m3.collections/**'
-      - '.github/workflows/m3-file-delta-20261020.yml'
+  workflow_dispatch:
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true

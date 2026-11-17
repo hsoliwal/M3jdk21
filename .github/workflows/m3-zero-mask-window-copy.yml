@@ -1,16 +1,22 @@
 # SPDX-License-Identifier: Apache-2.0
 name: M3 zero-mask JNI window copy
+# Former triggers (below, as of the move) now start job(s) 'm3-zero-mask-window-copy__*' in
+# .github/workflows/checks-superset-09.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     pull_request:
+#       paths:
+#         - 'src/jdk.m3.collections/share/native/libm3collections/collections/m3_index_mask_compactor.c'
+#         - 'test/jdk/jdk/m3/collections/M3IndexMaskCompactorSelfTest.java'
+#         - 'm3/collections/recipe/zero-mask-window-copy-20261017/**'
+#         - 'm3/collections/qualification/zero-mask-window-copy-20261017/**'
+#         - 'm3/collections/qualification/zero-mask-window-successor-20261031/**'
+#         - 'test/jdk/jdk/m3/collections/M3ZeroMaskSuccessorTest.java'
+#         - 'test/jdk/jdk/m3/collections/M3ZeroMaskSuccessorIT.java'
+#         - '.github/workflows/m3-zero-mask-window-copy.yml'
 on:
-  pull_request:
-    paths:
-      - 'src/jdk.m3.collections/share/native/libm3collections/collections/m3_index_mask_compactor.c'
-      - 'test/jdk/jdk/m3/collections/M3IndexMaskCompactorSelfTest.java'
-      - 'm3/collections/recipe/zero-mask-window-copy-20261017/**'
-      - 'm3/collections/qualification/zero-mask-window-copy-20261017/**'
-      - 'm3/collections/qualification/zero-mask-window-successor-20261031/**'
-      - 'test/jdk/jdk/m3/collections/M3ZeroMaskSuccessorTest.java'
-      - 'test/jdk/jdk/m3/collections/M3ZeroMaskSuccessorIT.java'
-      - '.github/workflows/m3-zero-mask-window-copy.yml'
+  workflow_dispatch:
 permissions:
   contents: read
 concurrency:

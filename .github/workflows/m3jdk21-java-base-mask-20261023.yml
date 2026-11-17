@@ -1,16 +1,22 @@
 # SPDX-License-Identifier: Apache-2.0
 name: M3JDK21 java.base deletion-mask contracts
+# Former triggers (below, as of the move) now start job(s) 'm3jdk21-java-base-mask-20261023__*' in
+# .github/workflows/checks-superset-09.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     pull_request:
+#       paths:
+#         - 'src/java.base/share/classes/jdk/internal/mindex/M3CollectionMaskCompactor.java'
+#         - 'test/jdk/java/util/ArrayList/M3CollectionMaskCompactorContract.java'
+#         - 'test/jdk/java/util/ArrayList/M3ArrayListVectorRemoveIfContract.java'
+#         - 'test/jdk/java/util/ArrayList/M3ArrayListVectorGcMutationContract.java'
+#         - 'test/jdk/java/util/ArrayList/M3CollectionMaskGcBarrierContract.java'
+#         - 'm3/collections/qualification/java-base-mask-20261023/**'
+#         - 'm3/collections/qualification/java-base-mask-current-master-20261027/**'
+#         - '.github/workflows/m3jdk21-java-base-mask-20261023.yml'
+#     workflow_dispatch:
 on:
-  pull_request:
-    paths:
-      - 'src/java.base/share/classes/jdk/internal/mindex/M3CollectionMaskCompactor.java'
-      - 'test/jdk/java/util/ArrayList/M3CollectionMaskCompactorContract.java'
-      - 'test/jdk/java/util/ArrayList/M3ArrayListVectorRemoveIfContract.java'
-      - 'test/jdk/java/util/ArrayList/M3ArrayListVectorGcMutationContract.java'
-      - 'test/jdk/java/util/ArrayList/M3CollectionMaskGcBarrierContract.java'
-      - 'm3/collections/qualification/java-base-mask-20261023/**'
-      - 'm3/collections/qualification/java-base-mask-current-master-20261027/**'
-      - '.github/workflows/m3jdk21-java-base-mask-20261023.yml'
   workflow_dispatch:
 permissions:
   contents: read

@@ -3,32 +3,38 @@ name: M3JDK modules
 # One step per moved area runs make/m3/<area>/test-module.sh on a host JDK 21: the module compiles as a module,
 # its same-package tests run exactly as the former Maven module ran them, and the opt-in native lane builds the
 # library through make/m3/<area>/CMakeLists.txt.
+# Former triggers (below, as of the move) now start job(s) 'm3jdk-modules__*' in
+# .github/workflows/checks-superset-02.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     pull_request:
+#       branches: [master]
+#       paths:
+#         - 'src/jdk.m3.collections/**'
+#         - 'test/jdk/jdk/m3/arrays/**'
+#         - 'test/jdk/jdk/m3/collections/**'
+#         - 'test/jdk/jdk/internal/m3/collections/**'
+#         - 'make/m3/collections/**'
+#         - 'm3/arrays/pom.xml'
+#         - 'm3/collections/pom.xml'
+#         - 'make/m3/arrays/**'
+#         - 'make/modules/jdk.m3.collections/**'
+#         - '.github/workflows/m3jdk-modules.yml'
+#     push:
+#       branches: [master]
+#       paths:
+#         - 'src/jdk.m3.collections/**'
+#         - 'test/jdk/jdk/m3/arrays/**'
+#         - 'test/jdk/jdk/m3/collections/**'
+#         - 'test/jdk/jdk/internal/m3/collections/**'
+#         - 'make/m3/collections/**'
+#         - 'm3/arrays/pom.xml'
+#         - 'm3/collections/pom.xml'
+#         - 'make/m3/arrays/**'
+#         - 'make/modules/jdk.m3.collections/**'
+#     workflow_dispatch:
 on:
-  pull_request:
-    branches: [master]
-    paths:
-      - 'src/jdk.m3.collections/**'
-      - 'test/jdk/jdk/m3/arrays/**'
-      - 'test/jdk/jdk/m3/collections/**'
-      - 'test/jdk/jdk/internal/m3/collections/**'
-      - 'make/m3/collections/**'
-      - 'm3/arrays/pom.xml'
-      - 'm3/collections/pom.xml'
-      - 'make/m3/arrays/**'
-      - 'make/modules/jdk.m3.collections/**'
-      - '.github/workflows/m3jdk-modules.yml'
-  push:
-    branches: [master]
-    paths:
-      - 'src/jdk.m3.collections/**'
-      - 'test/jdk/jdk/m3/arrays/**'
-      - 'test/jdk/jdk/m3/collections/**'
-      - 'test/jdk/jdk/internal/m3/collections/**'
-      - 'make/m3/collections/**'
-      - 'm3/arrays/pom.xml'
-      - 'm3/collections/pom.xml'
-      - 'make/m3/arrays/**'
-      - 'make/modules/jdk.m3.collections/**'
   workflow_dispatch:
 permissions:
   contents: read

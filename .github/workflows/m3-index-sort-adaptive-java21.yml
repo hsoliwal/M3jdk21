@@ -2,16 +2,22 @@
 # Canonical CI candidate: Synexia PR #13224; target: original M3JDK21 PR #1882.
 name: M3JDK21 original adaptive index-sort Java21 proof
 
+# Former triggers (below, as of the move) now start job(s) 'm3-index-sort-adaptive-java21__*' in
+# .github/workflows/checks-superset-09.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     pull_request:
+#       paths:
+#         - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3IndexSort.java'
+#         - 'test/jdk/jdk/m3/collections/M3IndexSortAdaptiveContract.java'
+#         - 'test/jdk/jdk/m3/collections/M3IndexSortAdaptiveTest.java'
+#         - 'test/jdk/jdk/m3/collections/M3IndexSortStrictContract.java'
+#         - 'test/jdk/jdk/m3/collections/M3IndexSortStrictTest.java'
+#         - 'm3/collections/qualification/index-sort-adaptive/**'
+#         - '.github/workflows/m3-index-sort-adaptive-java21.yml'
 on:
-  pull_request:
-    paths:
-      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3IndexSort.java'
-      - 'test/jdk/jdk/m3/collections/M3IndexSortAdaptiveContract.java'
-      - 'test/jdk/jdk/m3/collections/M3IndexSortAdaptiveTest.java'
-      - 'test/jdk/jdk/m3/collections/M3IndexSortStrictContract.java'
-      - 'test/jdk/jdk/m3/collections/M3IndexSortStrictTest.java'
-      - 'm3/collections/qualification/index-sort-adaptive/**'
-      - '.github/workflows/m3-index-sort-adaptive-java21.yml'
+  workflow_dispatch:
 
 permissions:
   contents: read

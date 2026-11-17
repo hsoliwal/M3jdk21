@@ -1,11 +1,17 @@
 # SPDX-License-Identifier: Apache-2.0
 name: M3JDK21 original collection Maven JUnit dependency qualification
+# Former triggers (below, as of the move) now start job(s) 'm3-collections-junit-resolution-20261022__*' in
+# .github/workflows/checks-superset-05.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     pull_request:
+#       paths:
+#         - 'm3/collections/pom.xml'
+#         - 'm3/collections/qualification/junit-resolution-20261022/**'
+#         - '.github/workflows/m3-collections-junit-resolution-20261022.yml'
+#     workflow_dispatch:
 on:
-  pull_request:
-    paths:
-      - 'm3/collections/pom.xml'
-      - 'm3/collections/qualification/junit-resolution-20261022/**'
-      - '.github/workflows/m3-collections-junit-resolution-20261022.yml'
   workflow_dispatch:
 permissions:
   contents: read

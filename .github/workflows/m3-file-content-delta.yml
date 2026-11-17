@@ -1,13 +1,19 @@
 # Copyright 2026 Hitesh Soliwal and contributors
 # SPDX-License-Identifier: Apache-2.0
 name: M3File source and class content deltas
+# Former triggers (below, as of the move) now start job(s) 'm3-file-content-delta__*' in
+# .github/workflows/checks-superset-01.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     pull_request:
+#       paths:
+#         - 'm3/file/**'
+#         - 'm3/docs/build-delta-invariant.md'
+#         - 'm3/docs/name-mapping.d/m3file-build-delta-20261020.json'
+#         - '.github/workflows/m3-file-content-delta.yml'
+#     workflow_dispatch:
 on:
-  pull_request:
-    paths:
-      - 'm3/file/**'
-      - 'm3/docs/build-delta-invariant.md'
-      - 'm3/docs/name-mapping.d/m3file-build-delta-20261020.json'
-      - '.github/workflows/m3-file-content-delta.yml'
   workflow_dispatch:
 permissions:
   contents: read

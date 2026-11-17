@@ -1,42 +1,48 @@
 # SPDX-License-Identifier: GPL-2.0-with-classpath-exception
 name: M3 JEP 496 ML-KEM candidate
 
+# Former triggers (below, as of the move) now start job(s) 'm3-jep496-mlkem__*' in
+# .github/workflows/checks-superset-07.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     push:
+#       branches:
+#         - 'm3/materialize-jep496-mlkem-*'
+#         - 'm3/jep496-*'
+#       paths:
+#         - 'src/java.base/share/classes/com/sun/crypto/provider/ML_KEM.java'
+#         - 'src/java.base/share/classes/com/sun/crypto/provider/ML_KEM_Impls.java'
+#         - 'src/java.base/share/classes/com/sun/crypto/provider/SunJCE.java'
+#         - 'src/java.base/share/classes/java/security/spec/NamedParameterSpec.java'
+#         - 'src/java.base/share/classes/sun/security/provider/SHA3Parallel.java'
+#         - 'src/java.base/share/classes/sun/security/util/KnownOIDs.java'
+#         - 'test/jdk/com/sun/crypto/provider/MLKEMProviderSmoke.java'
+#         - 'test/jdk/sun/security/provider/acvp/MLKEMKnownAnswer.java'
+#         - 'test/jdk/sun/security/provider/acvp/data/ML-KEM-*/internalProjection.json'
+#         - 'm3/backports/recipes/j496/**'
+#         - 'm3/backports/JEP_RESIDUE_QUEUE.tsv'
+#         - 'm3/backports/test_jep_residue.py'
+#         - 'm3/tooling/migration-recipes/**'
+#         - '.github/workflows/m3-jep496-mlkem.yml'
+#     pull_request:
+#       paths:
+#         - 'src/java.base/share/classes/com/sun/crypto/provider/ML_KEM.java'
+#         - 'src/java.base/share/classes/com/sun/crypto/provider/ML_KEM_Impls.java'
+#         - 'src/java.base/share/classes/com/sun/crypto/provider/SunJCE.java'
+#         - 'src/java.base/share/classes/java/security/spec/NamedParameterSpec.java'
+#         - 'src/java.base/share/classes/sun/security/provider/SHA3Parallel.java'
+#         - 'src/java.base/share/classes/sun/security/util/KnownOIDs.java'
+#         - 'test/jdk/com/sun/crypto/provider/MLKEMProviderSmoke.java'
+#         - 'test/jdk/sun/security/provider/acvp/MLKEMKnownAnswer.java'
+#         - 'test/jdk/sun/security/provider/acvp/data/ML-KEM-*/internalProjection.json'
+#         - 'm3/backports/recipes/j496/**'
+#         - 'm3/backports/JEP_RESIDUE_QUEUE.tsv'
+#         - 'm3/backports/test_jep_residue.py'
+#         - 'm3/tooling/migration-recipes/**'
+#         - '.github/workflows/m3-jep496-mlkem.yml'
+#     workflow_dispatch:
 on:
-  push:
-    branches:
-      - 'm3/materialize-jep496-mlkem-*'
-      - 'm3/jep496-*'
-    paths:
-      - 'src/java.base/share/classes/com/sun/crypto/provider/ML_KEM.java'
-      - 'src/java.base/share/classes/com/sun/crypto/provider/ML_KEM_Impls.java'
-      - 'src/java.base/share/classes/com/sun/crypto/provider/SunJCE.java'
-      - 'src/java.base/share/classes/java/security/spec/NamedParameterSpec.java'
-      - 'src/java.base/share/classes/sun/security/provider/SHA3Parallel.java'
-      - 'src/java.base/share/classes/sun/security/util/KnownOIDs.java'
-      - 'test/jdk/com/sun/crypto/provider/MLKEMProviderSmoke.java'
-      - 'test/jdk/sun/security/provider/acvp/MLKEMKnownAnswer.java'
-      - 'test/jdk/sun/security/provider/acvp/data/ML-KEM-*/internalProjection.json'
-      - 'm3/backports/recipes/j496/**'
-      - 'm3/backports/JEP_RESIDUE_QUEUE.tsv'
-      - 'm3/backports/test_jep_residue.py'
-      - 'm3/tooling/migration-recipes/**'
-      - '.github/workflows/m3-jep496-mlkem.yml'
-  pull_request:
-    paths:
-      - 'src/java.base/share/classes/com/sun/crypto/provider/ML_KEM.java'
-      - 'src/java.base/share/classes/com/sun/crypto/provider/ML_KEM_Impls.java'
-      - 'src/java.base/share/classes/com/sun/crypto/provider/SunJCE.java'
-      - 'src/java.base/share/classes/java/security/spec/NamedParameterSpec.java'
-      - 'src/java.base/share/classes/sun/security/provider/SHA3Parallel.java'
-      - 'src/java.base/share/classes/sun/security/util/KnownOIDs.java'
-      - 'test/jdk/com/sun/crypto/provider/MLKEMProviderSmoke.java'
-      - 'test/jdk/sun/security/provider/acvp/MLKEMKnownAnswer.java'
-      - 'test/jdk/sun/security/provider/acvp/data/ML-KEM-*/internalProjection.json'
-      - 'm3/backports/recipes/j496/**'
-      - 'm3/backports/JEP_RESIDUE_QUEUE.tsv'
-      - 'm3/backports/test_jep_residue.py'
-      - 'm3/tooling/migration-recipes/**'
-      - '.github/workflows/m3-jep496-mlkem.yml'
   workflow_dispatch:
 
 permissions:

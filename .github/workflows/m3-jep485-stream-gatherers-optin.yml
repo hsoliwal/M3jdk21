@@ -1,34 +1,40 @@
 name: M3 JEP 485 opt-in Stream Gatherers proof
 
+# Former triggers (below, as of the move) now start job(s) 'm3-jep485-stream-gatherers-optin__*' in
+# .github/workflows/checks-superset-06.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     push:
+#       branches:
+#         - "m3/jep485-opt-in-control-20261005"
+#       paths:
+#         - "m3/backports/recipes/jep-485-gatherers/**"
+#         - "m3/backports/JEP_CATALOGUE.tsv"
+#         - "m3/backports/POST21_PRIORITY_COMPATIBILITY.tsv"
+#         - "m3/tooling/recipe-catalogue.tsv"
+#         - "m3/tooling/migration-recipes/**"
+#         - "m3/tooling/backport-dag/**"
+#         - "m3/migration/prepare_immutable_inputs.py"
+#         - "m3/migration/recipe.py"
+#         - "m3/tooling/migration-recipes/verification/ci8891-20261006/prepared-inputs/**"
+#         - "m3/tooling/migration-recipes/verification/ci8891-20261006/bridge-875/**"
+#         - ".github/workflows/m3-jep485-stream-gatherers-optin.yml"
+#     pull_request:
+#       paths:
+#         - "m3/backports/recipes/jep-485-gatherers/**"
+#         - "m3/backports/JEP_CATALOGUE.tsv"
+#         - "m3/backports/POST21_PRIORITY_COMPATIBILITY.tsv"
+#         - "m3/tooling/recipe-catalogue.tsv"
+#         - "m3/tooling/migration-recipes/**"
+#         - "m3/tooling/backport-dag/**"
+#         - "m3/migration/prepare_immutable_inputs.py"
+#         - "m3/migration/recipe.py"
+#         - "m3/tooling/migration-recipes/verification/ci8891-20261006/prepared-inputs/**"
+#         - "m3/tooling/migration-recipes/verification/ci8891-20261006/bridge-875/**"
+#         - ".github/workflows/m3-jep485-stream-gatherers-optin.yml"
+#     workflow_dispatch:
 on:
-  push:
-    branches:
-      - "m3/jep485-opt-in-control-20261005"
-    paths:
-      - "m3/backports/recipes/jep-485-gatherers/**"
-      - "m3/backports/JEP_CATALOGUE.tsv"
-      - "m3/backports/POST21_PRIORITY_COMPATIBILITY.tsv"
-      - "m3/tooling/recipe-catalogue.tsv"
-      - "m3/tooling/migration-recipes/**"
-      - "m3/tooling/backport-dag/**"
-      - "m3/migration/prepare_immutable_inputs.py"
-      - "m3/migration/recipe.py"
-      - "m3/tooling/migration-recipes/verification/ci8891-20261006/prepared-inputs/**"
-      - "m3/tooling/migration-recipes/verification/ci8891-20261006/bridge-875/**"
-      - ".github/workflows/m3-jep485-stream-gatherers-optin.yml"
-  pull_request:
-    paths:
-      - "m3/backports/recipes/jep-485-gatherers/**"
-      - "m3/backports/JEP_CATALOGUE.tsv"
-      - "m3/backports/POST21_PRIORITY_COMPATIBILITY.tsv"
-      - "m3/tooling/recipe-catalogue.tsv"
-      - "m3/tooling/migration-recipes/**"
-      - "m3/tooling/backport-dag/**"
-      - "m3/migration/prepare_immutable_inputs.py"
-      - "m3/migration/recipe.py"
-      - "m3/tooling/migration-recipes/verification/ci8891-20261006/prepared-inputs/**"
-      - "m3/tooling/migration-recipes/verification/ci8891-20261006/bridge-875/**"
-      - ".github/workflows/m3-jep485-stream-gatherers-optin.yml"
   workflow_dispatch:
 
 permissions:

@@ -1,17 +1,23 @@
 # SPDX-License-Identifier: Apache-2.0
 name: M3 collection file review batch 80
+# Former triggers (below, as of the move) now start job(s) 'm3-collection-file-review-batch80__*' in
+# .github/workflows/checks-superset-04.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     pull_request:
+#       paths:
+#         - 'm3/collections/algorithm-catalog/collection-candidate-comparison-20261017.tsv'
+#         - 'm3/collections/algorithm-catalog/collection-catalogue-input-provenance-20261017.tsv'
+#         - 'm3/collections/algorithm-catalog/collection-file-review-20261017.tsv'
+#         - 'm3/collections/algorithm-catalog/README-collection-file-review-20261017.md'
+#         - 'm3/collections/algorithm-catalog/SOURCE_INVARIANT_CONTRACT-20261017.md'
+#         - 'm3/collections/algorithm-catalog/TASKS-collection-batch80-20261017.md'
+#         - 'm3/collections/recipe/collection-file-review-batch80-20261017/**'
+#         - 'm3/collections/qualification/collection-file-review-batch80-20261017/**'
+#         - '.github/workflows/m3-collection-file-review-batch80.yml'
 on:
-  pull_request:
-    paths:
-      - 'm3/collections/algorithm-catalog/collection-candidate-comparison-20261017.tsv'
-      - 'm3/collections/algorithm-catalog/collection-catalogue-input-provenance-20261017.tsv'
-      - 'm3/collections/algorithm-catalog/collection-file-review-20261017.tsv'
-      - 'm3/collections/algorithm-catalog/README-collection-file-review-20261017.md'
-      - 'm3/collections/algorithm-catalog/SOURCE_INVARIANT_CONTRACT-20261017.md'
-      - 'm3/collections/algorithm-catalog/TASKS-collection-batch80-20261017.md'
-      - 'm3/collections/recipe/collection-file-review-batch80-20261017/**'
-      - 'm3/collections/qualification/collection-file-review-batch80-20261017/**'
-      - '.github/workflows/m3-collection-file-review-batch80.yml'
+  workflow_dispatch:
 permissions:
   contents: read
 concurrency:

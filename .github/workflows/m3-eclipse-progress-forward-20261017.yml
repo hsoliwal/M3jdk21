@@ -1,12 +1,18 @@
 name: M3 Eclipse progress forward receiver (Java 21)
+# Former triggers (below, as of the move) now start job(s) 'm3-eclipse-progress-forward-20261017__*' in
+# .github/workflows/checks-superset-06.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     pull_request:
+#       branches: [master]
+#       paths:
+#         - 'm3/eclipse/core-runtime/**'
+#         - 'src/jdk.m3.collections/share/classes/**'
+#         - 'm3/tooling/migration-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java'
+#         - '.github/workflows/m3-eclipse-progress-forward-20261017.yml'
+#     workflow_dispatch:
 on:
-  pull_request:
-    branches: [master]
-    paths:
-      - 'm3/eclipse/core-runtime/**'
-      - 'src/jdk.m3.collections/share/classes/**'
-      - 'm3/tooling/migration-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java'
-      - '.github/workflows/m3-eclipse-progress-forward-20261017.yml'
   workflow_dispatch:
 permissions:
   contents: read

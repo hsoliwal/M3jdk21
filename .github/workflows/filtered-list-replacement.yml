@@ -1,12 +1,18 @@
 # SPDX-License-Identifier: Apache-2.0
 name: Filtered List replacement contracts
+# Former triggers (below, as of the move) now start job(s) 'filtered-list-replacement__*' in
+# .github/workflows/checks-superset-09.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     pull_request:
+#       paths:
+#         - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3FilteredLists.java'
+#         - 'test/jdk/jdk/m3/collections/M3FilteredListsOwnerSetContract.java'
+#         - 'test/jdk/jdk/m3/collections/M3FilteredListsOwnerSetTest.java'
+#         - '.github/workflows/filtered-list-replacement.yml'
+#     workflow_dispatch:
 on:
-  pull_request:
-    paths:
-      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3FilteredLists.java'
-      - 'test/jdk/jdk/m3/collections/M3FilteredListsOwnerSetContract.java'
-      - 'test/jdk/jdk/m3/collections/M3FilteredListsOwnerSetTest.java'
-      - '.github/workflows/filtered-list-replacement.yml'
   workflow_dispatch:
 permissions:
   contents: read

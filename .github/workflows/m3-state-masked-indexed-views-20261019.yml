@@ -1,13 +1,19 @@
 # SPDX-License-Identifier: Apache-2.0
 name: M3JDK21 Intrinsic Masked Views — OpenRewrite and jtreg contracts
+# Former triggers (below, as of the move) now start job(s) 'm3-state-masked-indexed-views-20261019__*' in
+# .github/workflows/checks-superset-08.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     pull_request:
+#       paths:
+#         - 'src/java.base/share/classes/jdk/internal/m3/IndexedArray.java'
+#         - 'src/java.base/share/classes/jdk/internal/m3/IndexedView.java'
+#         - 'test/jdk/jdk/internal/m3/StateMaskedIndexedViewTest.java'
+#         - 'm3/tooling/shared-frontend/recipe-custody/datasets/m3-state-masked-views-20261019/**'
+#         - '.github/workflows/m3-state-masked-indexed-views-20261019.yml'
+#     workflow_dispatch:
 on:
-  pull_request:
-    paths:
-      - 'src/java.base/share/classes/jdk/internal/m3/IndexedArray.java'
-      - 'src/java.base/share/classes/jdk/internal/m3/IndexedView.java'
-      - 'test/jdk/jdk/internal/m3/StateMaskedIndexedViewTest.java'
-      - 'm3/tooling/shared-frontend/recipe-custody/datasets/m3-state-masked-views-20261019/**'
-      - '.github/workflows/m3-state-masked-indexed-views-20261019.yml'
   workflow_dispatch:
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}

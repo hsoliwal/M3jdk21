@@ -1,14 +1,20 @@
 name: M3JDK21 indexed viewport delta CPU proof
 
+# Former triggers (below, as of the move) now start job(s) 'm3-window-change-projection-20261021__*' in
+# .github/workflows/checks-superset-09.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     pull_request:
+#       paths:
+#         - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3WindowPlan.java'
+#         - 'test/jdk/jdk/m3/collections/M3WindowPlanChangeContract.java'
+#         - 'test/jdk/jdk/m3/collections/M3WindowPlanChangeTest.java'
+#         - 'm3/collections/qualification/window-delta-20261021/**'
+#         - 'm3/docs/eclipse-jdk-gap-20261021/**'
+#         - '.github/workflows/m3-window-change-projection-20261021.yml'
+#     workflow_dispatch:
 on:
-  pull_request:
-    paths:
-      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3WindowPlan.java'
-      - 'test/jdk/jdk/m3/collections/M3WindowPlanChangeContract.java'
-      - 'test/jdk/jdk/m3/collections/M3WindowPlanChangeTest.java'
-      - 'm3/collections/qualification/window-delta-20261021/**'
-      - 'm3/docs/eclipse-jdk-gap-20261021/**'
-      - '.github/workflows/m3-window-change-projection-20261021.yml'
   workflow_dispatch:
 
 permissions:

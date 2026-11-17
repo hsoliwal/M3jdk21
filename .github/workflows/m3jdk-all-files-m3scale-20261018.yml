@@ -1,10 +1,16 @@
 # SPDX-License-Identifier: Apache-2.0
 name: M3JDK21 all tracked files M3Scale Java21
+# Former triggers (below, as of the move) now start job(s) 'm3jdk-all-files-m3scale-20261018__*' in
+# .github/workflows/checks-superset-01.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     pull_request:
+#       paths:
+#         - 'tools/m3scale/**'
+#         - '.github/workflows/m3jdk-all-files-m3scale-20261018.yml'
+#     workflow_dispatch:
 on:
-  pull_request:
-    paths:
-      - 'tools/m3scale/**'
-      - '.github/workflows/m3jdk-all-files-m3scale-20261018.yml'
   workflow_dispatch:
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}

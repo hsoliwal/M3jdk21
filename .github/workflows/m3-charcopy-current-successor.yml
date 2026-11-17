@@ -2,21 +2,27 @@
 # SPDX-License-Identifier: Apache-2.0
 # Reuses the source-qualified Maven recipe and existing monitored hosted lane.
 name: M3 charcopy current-successor source proof
+# Former triggers (below, as of the move) now start job(s) 'm3-charcopy-current-successor__*' in
+# .github/workflows/checks-superset-06.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     pull_request:
+#       paths:
+#         - '.github/workflows/m3-charcopy-current-successor.yml'
+#         - 'm3/tooling/charcopy-current-successor/**'
+#         - 'src/java.base/share/classes/java/lang/MIndexString.java'
+#         - 'm3/runtime-integration/tests/MIndexStringInvariant.java'
+#         - 'src/java.base/share/classes/java/lang/M3String.java'
+#         - 'src/java.base/share/classes/java/lang/M3StringFacts.java'
+#         - 'test/jdk/java/lang/String/M3StringConcatLengthOverflowTest.java'
+#         - 'm3/runtime-integration/tests/M3StringInvariant.java'
+#         - 'm3/runtime-integration/char-array-copy/recipe/apply.py'
+#         - 'm3/runtime-integration/char-array-copy/recipe/manifest.json'
+#         - 'm3/runtime-integration/char-array-copy/recipe/test_recipe.py'
+#         - 'LICENSE'
 on:
-  pull_request:
-    paths:
-      - '.github/workflows/m3-charcopy-current-successor.yml'
-      - 'm3/tooling/charcopy-current-successor/**'
-      - 'src/java.base/share/classes/java/lang/MIndexString.java'
-      - 'm3/runtime-integration/tests/MIndexStringInvariant.java'
-      - 'src/java.base/share/classes/java/lang/M3String.java'
-      - 'src/java.base/share/classes/java/lang/M3StringFacts.java'
-      - 'test/jdk/java/lang/String/M3StringConcatLengthOverflowTest.java'
-      - 'm3/runtime-integration/tests/M3StringInvariant.java'
-      - 'm3/runtime-integration/char-array-copy/recipe/apply.py'
-      - 'm3/runtime-integration/char-array-copy/recipe/manifest.json'
-      - 'm3/runtime-integration/char-array-copy/recipe/test_recipe.py'
-      - 'LICENSE'
+  workflow_dispatch:
 permissions:
   contents: read
 concurrency:

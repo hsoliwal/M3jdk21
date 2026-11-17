@@ -1,16 +1,22 @@
 # Copyright 2026 Hitesh Soliwal and contributors. SPDX-License-Identifier: Apache-2.0
 name: M3JDK21 Signal Mask Order Java JNI
+# Former triggers (below, as of the move) now start job(s) 'm3-signal-mask-order-20261017__*' in
+# .github/workflows/checks-superset-08.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     push:
+#       branches:
+#         - m3/signal-mask-order-receiver-20261017
+#     pull_request:
+#       paths:
+#         - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3SignalOrder*.java'
+#         - 'test/jdk/jdk/m3/collections/M3SignalOrder*.java'
+#         - 'src/jdk.m3.collections/share/native/libm3collections/collections/m3_signal_order_jni.c'
+#         - 'm3/collections/qualification/signal-mask-order-20261017/**'
+#         - '.github/workflows/m3-signal-mask-order-20261017.yml'
+#     workflow_dispatch:
 on:
-  push:
-    branches:
-      - m3/signal-mask-order-receiver-20261017
-  pull_request:
-    paths:
-      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3SignalOrder*.java'
-      - 'test/jdk/jdk/m3/collections/M3SignalOrder*.java'
-      - 'src/jdk.m3.collections/share/native/libm3collections/collections/m3_signal_order_jni.c'
-      - 'm3/collections/qualification/signal-mask-order-20261017/**'
-      - '.github/workflows/m3-signal-mask-order-20261017.yml'
   workflow_dispatch:
 permissions:
   contents: read

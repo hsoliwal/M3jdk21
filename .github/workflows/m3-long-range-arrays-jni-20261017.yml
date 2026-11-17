@@ -1,17 +1,23 @@
 # SPDX-License-Identifier: Apache-2.0
 name: M3 long-range arrays with real JNI masks
+# Former triggers (below, as of the move) now start job(s) 'm3-long-range-arrays-jni-20261017__*' in
+# .github/workflows/checks-superset-05.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     pull_request:
+#       paths:
+#         - "src/jdk.m3.collections/share/classes/jdk/m3/collections/M3LongRangeSet.java"
+#         - "test/jdk/jdk/m3/collections/M3LongRangeSet*.java"
+#         - "m3/collections/qualification/range-atom/successor/**"
+#         - "m3/collections/qualification/long-range-set-20261017/**"
+#         - "m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3jdk21-long-range-array-flags-20261017/**"
+#         - "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3jdk21-long-range-array-flags-20261017.yml"
+#         - ".github/workflows/m3-long-range-arrays-jni-20261017.yml"
+#     push:
+#       branches: [m3/range-array-mask-receiver-20261017]
 on:
-  pull_request:
-    paths:
-      - "src/jdk.m3.collections/share/classes/jdk/m3/collections/M3LongRangeSet.java"
-      - "test/jdk/jdk/m3/collections/M3LongRangeSet*.java"
-      - "m3/collections/qualification/range-atom/successor/**"
-      - "m3/collections/qualification/long-range-set-20261017/**"
-      - "m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3jdk21-long-range-array-flags-20261017/**"
-      - "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3jdk21-long-range-array-flags-20261017.yml"
-      - ".github/workflows/m3-long-range-arrays-jni-20261017.yml"
-  push:
-    branches: [m3/range-array-mask-receiver-20261017]
+  workflow_dispatch:
 permissions:
   contents: read
 concurrency:

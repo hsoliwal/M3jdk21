@@ -1,20 +1,26 @@
 # SPDX-License-Identifier: Apache-2.0
 name: M3 Regex String Precompute V2
 
+# Former triggers (below, as of the move) now start job(s) 'm3-regex-string-precompute-v2__*' in
+# .github/workflows/checks-superset-06.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     pull_request:
+#       paths:
+#         - 'm3/ports/precompute/**'
+#         - 'src/java.base/share/classes/jdk/m3/precompute/**'
+#         - 'test/jdk/jdk/m3/precompute/**'
+#         - 'm3/docs/M3JDK21_PORTING_INVARIANT.md'
+#         - 'm3/docs/M3JDK_M3_PORTING_INVARIANT.md'
+#         - 'm3/docs/m3jdk-m3-porting-policy.tsv'
+#         - 'm3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3RegexStringPrecomputeSupersetRecipe.java'
+#         - 'm3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3RegexStringPrecomputeSupersetRecipeTest.java'
+#         - 'm3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-regex-string-precompute-v2.yml'
+#         - 'm3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/m3-regex-string-precompute-v2/**'
+#         - '.github/workflows/m3-regex-string-precompute-v2.yml'
+#     workflow_dispatch:
 on:
-  pull_request:
-    paths:
-      - 'm3/ports/precompute/**'
-      - 'src/java.base/share/classes/jdk/m3/precompute/**'
-      - 'test/jdk/jdk/m3/precompute/**'
-      - 'm3/docs/M3JDK21_PORTING_INVARIANT.md'
-      - 'm3/docs/M3JDK_M3_PORTING_INVARIANT.md'
-      - 'm3/docs/m3jdk-m3-porting-policy.tsv'
-      - 'm3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3RegexStringPrecomputeSupersetRecipe.java'
-      - 'm3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3RegexStringPrecomputeSupersetRecipeTest.java'
-      - 'm3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-regex-string-precompute-v2.yml'
-      - 'm3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/m3-regex-string-precompute-v2/**'
-      - '.github/workflows/m3-regex-string-precompute-v2.yml'
   workflow_dispatch:
 
 permissions:

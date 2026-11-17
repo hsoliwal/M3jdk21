@@ -2,11 +2,17 @@
 # SPDX-License-Identifier: Apache-2.0
 # Reuses the source-qualified Maven recipe and existing monitored hosted lane.
 name: M3 regex ASCII lexical recipe and authentic differential
+# Former triggers (below, as of the move) now start job(s) 'm3-regex-ascii-lexical-receiver__*' in
+# .github/workflows/checks-superset-07.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     pull_request:
+#       paths:
+#         - '.github/workflows/m3-regex-ascii-lexical-receiver.yml'
+#         - 'm3/tooling/regex-ascii-lexical-receiver/**'
 on:
-  pull_request:
-    paths:
-      - '.github/workflows/m3-regex-ascii-lexical-receiver.yml'
-      - 'm3/tooling/regex-ascii-lexical-receiver/**'
+  workflow_dispatch:
 permissions:
   contents: read
 concurrency:

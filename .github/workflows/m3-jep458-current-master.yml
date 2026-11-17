@@ -1,34 +1,40 @@
 name: M3 JEP 458 current-master admission
 
+# Former triggers (below, as of the move) now start job(s) 'm3-jep458-current-master__*' in
+# .github/workflows/checks-superset-07.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     push:
+#       branches:
+#         - "m3/jep458-proof-refresh-*"
+#       paths:
+#         - "m3/backports/recipes/jep-458-current/**"
+#         - "m3/tooling/migration-recipes/**"
+#         - "m3/tooling/backport-dag/**"
+#         - "make/CompileInterimLangtools.gmk"
+#         - "src/java.base/share/classes/module-info.java"
+#         - "src/java.base/share/classes/sun/launcher/resources/launcher.properties"
+#         - "src/java.base/share/native/libjli/java.c"
+#         - "src/jdk.compiler/share/classes/com/sun/tools/javac/**"
+#         - "test/langtools/tools/javac/launcher/**"
+#         - "test/langtools/tools/jdeps/listdeps/ListModuleDeps.java"
+#         - ".github/workflows/m3-jep458-current-master.yml"
+#     pull_request:
+#       paths:
+#         - "m3/backports/recipes/jep-458-current/**"
+#         - "m3/tooling/migration-recipes/**"
+#         - "m3/tooling/backport-dag/**"
+#         - "make/CompileInterimLangtools.gmk"
+#         - "src/java.base/share/classes/module-info.java"
+#         - "src/java.base/share/classes/sun/launcher/resources/launcher.properties"
+#         - "src/java.base/share/native/libjli/java.c"
+#         - "src/jdk.compiler/share/classes/com/sun/tools/javac/**"
+#         - "test/langtools/tools/javac/launcher/**"
+#         - "test/langtools/tools/jdeps/listdeps/ListModuleDeps.java"
+#         - ".github/workflows/m3-jep458-current-master.yml"
+#     workflow_dispatch:
 on:
-  push:
-    branches:
-      - "m3/jep458-proof-refresh-*"
-    paths:
-      - "m3/backports/recipes/jep-458-current/**"
-      - "m3/tooling/migration-recipes/**"
-      - "m3/tooling/backport-dag/**"
-      - "make/CompileInterimLangtools.gmk"
-      - "src/java.base/share/classes/module-info.java"
-      - "src/java.base/share/classes/sun/launcher/resources/launcher.properties"
-      - "src/java.base/share/native/libjli/java.c"
-      - "src/jdk.compiler/share/classes/com/sun/tools/javac/**"
-      - "test/langtools/tools/javac/launcher/**"
-      - "test/langtools/tools/jdeps/listdeps/ListModuleDeps.java"
-      - ".github/workflows/m3-jep458-current-master.yml"
-  pull_request:
-    paths:
-      - "m3/backports/recipes/jep-458-current/**"
-      - "m3/tooling/migration-recipes/**"
-      - "m3/tooling/backport-dag/**"
-      - "make/CompileInterimLangtools.gmk"
-      - "src/java.base/share/classes/module-info.java"
-      - "src/java.base/share/classes/sun/launcher/resources/launcher.properties"
-      - "src/java.base/share/native/libjli/java.c"
-      - "src/jdk.compiler/share/classes/com/sun/tools/javac/**"
-      - "test/langtools/tools/javac/launcher/**"
-      - "test/langtools/tools/jdeps/listdeps/ListModuleDeps.java"
-      - ".github/workflows/m3-jep458-current-master.yml"
   workflow_dispatch:
 
 permissions:

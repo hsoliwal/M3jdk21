@@ -1,20 +1,26 @@
 # SPDX-License-Identifier: Apache-2.0
 # Synexia source-sealed recipe: jdk.internal.m3.Jdk21IndexPathMasks20261017
 name: M3 indexed 32-bit mask paths Java21 and JNI
+# Former triggers (below, as of the move) now start job(s) 'm3-index-path-masks-receiver__*' in
+# .github/workflows/checks-superset-08.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     pull_request:
+#       paths:
+#         - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3IndexPathMasks.java'
+#         - 'test/jdk/jdk/m3/collections/M3IndexPathMasks*'
+#         - 'src/jdk.m3.collections/share/native/libm3collections/collections/m3_index_path_masks.c'
+#         - 'm3/collections/recipe/index-path-masks-20261017/**'
+#         - 'm3/collections/verify_donation.py'
+#         - 'm3/collections/test_verify_index_path_masks.py'
+#         - 'm3/collections/qualification/INDEX_PATH_MASKS_RECEIVER_20261017.md'
+#         - '.github/workflows/m3-index-path-masks-receiver.yml'
+#     push:
+#       branches:
+#         - m3/index-path-masks-receiver-20261017
+#     workflow_dispatch:
 on:
-  pull_request:
-    paths:
-      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3IndexPathMasks.java'
-      - 'test/jdk/jdk/m3/collections/M3IndexPathMasks*'
-      - 'src/jdk.m3.collections/share/native/libm3collections/collections/m3_index_path_masks.c'
-      - 'm3/collections/recipe/index-path-masks-20261017/**'
-      - 'm3/collections/verify_donation.py'
-      - 'm3/collections/test_verify_index_path_masks.py'
-      - 'm3/collections/qualification/INDEX_PATH_MASKS_RECEIVER_20261017.md'
-      - '.github/workflows/m3-index-path-masks-receiver.yml'
-  push:
-    branches:
-      - m3/index-path-masks-receiver-20261017
   workflow_dispatch:
 permissions:
   contents: read

@@ -1,16 +1,22 @@
 name: M3JDK21 filtered stored representative receiver Java21
 
+# Former triggers (below, as of the move) now start job(s) 'm3-stored-representative-receiver-20261017__*' in
+# .github/workflows/checks-superset-08.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     push:
+#       branches:
+#         - m3/filtered-stored-representative-20261017
+#     pull_request:
+#       paths:
+#         - "src/jdk.m3.collections/share/classes/jdk/m3/collections/M3FilteredViews.java"
+#         - "src/jdk.m3.collections/share/classes/jdk/m3/collections/M3MutableFilteredViews.java"
+#         - "test/jdk/jdk/m3/collections/M3StoredRepresentative*"
+#         - "m3/collections/qualification/stored-representative-20261017/**"
+#         - ".github/workflows/m3-stored-representative-receiver-20261017.yml"
 on:
-  push:
-    branches:
-      - m3/filtered-stored-representative-20261017
-  pull_request:
-    paths:
-      - "src/jdk.m3.collections/share/classes/jdk/m3/collections/M3FilteredViews.java"
-      - "src/jdk.m3.collections/share/classes/jdk/m3/collections/M3MutableFilteredViews.java"
-      - "test/jdk/jdk/m3/collections/M3StoredRepresentative*"
-      - "m3/collections/qualification/stored-representative-20261017/**"
-      - ".github/workflows/m3-stored-representative-receiver-20261017.yml"
+  workflow_dispatch:
 
 permissions:
   contents: read

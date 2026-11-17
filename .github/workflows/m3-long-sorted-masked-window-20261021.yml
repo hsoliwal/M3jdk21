@@ -1,15 +1,21 @@
 # SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
 # SPDX-License-Identifier: Apache-2.0
 name: M3JDK21 long sorted masked window Java21 JNI
+# Former triggers (below, as of the move) now start job(s) 'm3-long-sorted-masked-window-20261021__*' in
+# .github/workflows/checks-superset-06.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     pull_request:
+#       paths:
+#         - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3LongSortedSnapshot.java'
+#         - 'test/jdk/jdk/m3/collections/M3LongSortedMaskedWindow*'
+#         - 'm3/collections/qualification/long-sorted-masked-window-20261021/**'
+#         - 'm3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-long-sorted-masked-window-20261021.yml'
+#         - 'm3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-long-sorted-masked-window-20261021/**'
+#         - '.github/workflows/m3-long-sorted-masked-window-20261021.yml'
+#     workflow_dispatch:
 on:
-  pull_request:
-    paths:
-      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3LongSortedSnapshot.java'
-      - 'test/jdk/jdk/m3/collections/M3LongSortedMaskedWindow*'
-      - 'm3/collections/qualification/long-sorted-masked-window-20261021/**'
-      - 'm3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-long-sorted-masked-window-20261021.yml'
-      - 'm3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-long-sorted-masked-window-20261021/**'
-      - '.github/workflows/m3-long-sorted-masked-window-20261021.yml'
   workflow_dispatch:
 permissions:
   contents: read

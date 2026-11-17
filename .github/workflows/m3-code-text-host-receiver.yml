@@ -1,19 +1,25 @@
 # SPDX-License-Identifier: GPL-2.0-only WITH Classpath-exception-2.0
 name: M3 code-text host receiver
 
+# Former triggers (below, as of the move) now start job(s) 'm3-code-text-host-receiver__*' in
+# .github/workflows/checks-superset-06.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     push:
+#       branches:
+#         - codex/m3-code-text-receiver-current-base-20261011
+#     pull_request:
+#       paths:
+#         - 'src/java.base/share/classes/java/lang/M3CodeTextFacts.java'
+#         - 'src/java.base/share/classes/java/lang/M3CodeTextSignalBatch.java'
+#         - 'm3/core/test/java/lang/M3CodeTextFactsReceiverTest.java'
+#         - 'm3/core/test/java/lang/M3CodeTextSignalBatchTest.java'
+#         - 'm3/lexicon/m3-code-text-precompute-field-map.tsv'
+#         - 'm3/lexicon/m3-code-text-target-receiver-receipt-10124.tsv'
+#         - '.github/workflows/m3-code-text-host-receiver.yml'
+#     workflow_dispatch:
 on:
-  push:
-    branches:
-      - codex/m3-code-text-receiver-current-base-20261011
-  pull_request:
-    paths:
-      - 'src/java.base/share/classes/java/lang/M3CodeTextFacts.java'
-      - 'src/java.base/share/classes/java/lang/M3CodeTextSignalBatch.java'
-      - 'm3/core/test/java/lang/M3CodeTextFactsReceiverTest.java'
-      - 'm3/core/test/java/lang/M3CodeTextSignalBatchTest.java'
-      - 'm3/lexicon/m3-code-text-precompute-field-map.tsv'
-      - 'm3/lexicon/m3-code-text-target-receiver-receipt-10124.tsv'
-      - '.github/workflows/m3-code-text-host-receiver.yml'
   workflow_dispatch:
 
 permissions:

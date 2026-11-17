@@ -1,17 +1,23 @@
 name: M3 JEP 484 Class-File API custody plan
 
+# Former triggers (below, as of the move) now start job(s) 'm3-jep484-custody-plan__*' in
+# .github/workflows/checks-superset-04.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     push:
+#       branches:
+#         - "m3/jep484-*"
+#         - "m3/j484-custody-plan-20261006"
+#       paths:
+#         - "m3/backports/recipes/jep-484-classfile-api/**"
+#         - ".github/workflows/m3-jep484-custody-plan.yml"
+#     pull_request:
+#       paths:
+#         - "m3/backports/recipes/jep-484-classfile-api/**"
+#         - ".github/workflows/m3-jep484-custody-plan.yml"
+#     workflow_dispatch:
 on:
-  push:
-    branches:
-      - "m3/jep484-*"
-      - "m3/j484-custody-plan-20261006"
-    paths:
-      - "m3/backports/recipes/jep-484-classfile-api/**"
-      - ".github/workflows/m3-jep484-custody-plan.yml"
-  pull_request:
-    paths:
-      - "m3/backports/recipes/jep-484-classfile-api/**"
-      - ".github/workflows/m3-jep484-custody-plan.yml"
   workflow_dispatch:
 
 permissions:

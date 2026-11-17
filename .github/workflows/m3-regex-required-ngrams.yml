@@ -1,14 +1,20 @@
 name: M3 String required UTF16 ngram plan candidate proof
+# Former triggers (below, as of the move) now start job(s) 'm3-regex-required-ngrams__*' in
+# .github/workflows/checks-superset-08.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     push:
+#       branches: [m3/regex-required-ngrams-20261017]
+#     pull_request:
+#       paths:
+#         - "src/java.base/share/classes/java/lang/M3StringFacts.java"
+#         - "src/java.base/share/classes/java/lang/M3StringRegexDp.java"
+#         - "test/jdk/java/lang/String/M3StringRegexDpTest.java"
+#         - "m3/runtime-integration/regex-required-ngrams/**"
+#         - ".github/workflows/m3-regex-required-ngrams.yml"
 on:
-  push:
-    branches: [m3/regex-required-ngrams-20261017]
-  pull_request:
-    paths:
-      - "src/java.base/share/classes/java/lang/M3StringFacts.java"
-      - "src/java.base/share/classes/java/lang/M3StringRegexDp.java"
-      - "test/jdk/java/lang/String/M3StringRegexDpTest.java"
-      - "m3/runtime-integration/regex-required-ngrams/**"
-      - ".github/workflows/m3-regex-required-ngrams.yml"
+  workflow_dispatch:
 permissions:
   contents: read
 jobs:

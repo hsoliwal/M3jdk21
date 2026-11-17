@@ -1,19 +1,25 @@
 # SPDX-License-Identifier: Apache-2.0
 # SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
 name: M3 bounded filtered current-master receiver
+# Former triggers (below, as of the move) now start job(s) 'm3-filtered-bounded-current-20261018__*' in
+# .github/workflows/checks-superset-08.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     pull_request:
+#       paths:
+#         - 'm3/collections/qualification/m3-filtered-bounded-current-20261018/**'
+#         - 'm3/collections/qualification/m3-filtered-navigation-20261018/**'
+#         - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3FilteredViews.java'
+#         - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3MutableFilteredViews.java'
+#         - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3IndexPathMasks.java'
+#         - 'src/jdk.m3.collections/share/native/libm3collections/collections/m3_index_path_masks.c'
+#         - 'src/jdk.m3.collections/share/native/libm3collections/collections/m3_index_mask_compactor.c'
+#         - 'src/jdk.m3.collections/share/native/libm3collections/collections/m3_index_mask_window.c'
+#         - 'test/jdk/jdk/m3/collections/**'
+#         - '.github/workflows/m3-filtered-bounded-current-20261018.yml'
+#     workflow_dispatch:
 on:
-  pull_request:
-    paths:
-      - 'm3/collections/qualification/m3-filtered-bounded-current-20261018/**'
-      - 'm3/collections/qualification/m3-filtered-navigation-20261018/**'
-      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3FilteredViews.java'
-      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3MutableFilteredViews.java'
-      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3IndexPathMasks.java'
-      - 'src/jdk.m3.collections/share/native/libm3collections/collections/m3_index_path_masks.c'
-      - 'src/jdk.m3.collections/share/native/libm3collections/collections/m3_index_mask_compactor.c'
-      - 'src/jdk.m3.collections/share/native/libm3collections/collections/m3_index_mask_window.c'
-      - 'test/jdk/jdk/m3/collections/**'
-      - '.github/workflows/m3-filtered-bounded-current-20261018.yml'
   workflow_dispatch:
 permissions:
   contents: read

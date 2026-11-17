@@ -2,18 +2,24 @@
 # SPDX-License-Identifier: Apache-2.0
 name: M3JDK21 tokenizer source-built image and jtreg
 
+# Former triggers (below, as of the move) now start job(s) 'm3jdk21-tokenizer-full-image__*' in
+# .github/workflows/checks-superset-02.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     pull_request:
+#       paths:
+#         - '.github/workflows/m3jdk21-tokenizer-full-image.yml'
+#         - 'src/java.base/share/classes/java/util/StringTokenizer.java'
+#         - 'test/jdk/java/util/StringTokenizer/**'
+#     push:
+#       branches: [master]
+#       paths:
+#         - '.github/workflows/m3jdk21-tokenizer-full-image.yml'
+#         - 'src/java.base/share/classes/java/util/StringTokenizer.java'
+#         - 'test/jdk/java/util/StringTokenizer/**'
+#     workflow_dispatch:
 on:
-  pull_request:
-    paths:
-      - '.github/workflows/m3jdk21-tokenizer-full-image.yml'
-      - 'src/java.base/share/classes/java/util/StringTokenizer.java'
-      - 'test/jdk/java/util/StringTokenizer/**'
-  push:
-    branches: [master]
-    paths:
-      - '.github/workflows/m3jdk21-tokenizer-full-image.yml'
-      - 'src/java.base/share/classes/java/util/StringTokenizer.java'
-      - 'test/jdk/java/util/StringTokenizer/**'
   workflow_dispatch:
 
 permissions:

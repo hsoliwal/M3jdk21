@@ -1,35 +1,41 @@
 name: M3 Synexia intake policy
 
+# Former triggers (below, as of the move) now start job(s) 'm3-intake-policy__*' in
+# .github/workflows/checks-superset-02.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     push:
+#       branches:
+#         - master
+#         - "m3/**"
+#       paths:
+#         - "ADDITIONAL_LICENSE_INFO"
+#         - "m3/docs/m3jdk21-porting-invariant.md"
+#         - "m3/docs/name-mapping.json"
+#         - "m3/docs/m3-intake-policy.tsv"
+#         - "m3/docs/m3-direct-copy-review.tsv"
+#         - "m3/runtime-integration/FOSS_REUSE_DECISION.tsv"
+#         - "m3/runtime-integration/verify-m3-intake.py"
+#         - "m3/m3-import/pure-int-recipe-custody/**"
+#         - "m3/vendor/third_party/rewrite-*/pom.xml"
+#         - "m3/tooling/migration-recipes/**"
+#         - ".github/workflows/m3-intake-policy.yml"
+#     pull_request:
+#       paths:
+#         - "ADDITIONAL_LICENSE_INFO"
+#         - "m3/docs/m3jdk21-porting-invariant.md"
+#         - "m3/docs/name-mapping.json"
+#         - "m3/docs/m3-intake-policy.tsv"
+#         - "m3/docs/m3-direct-copy-review.tsv"
+#         - "m3/runtime-integration/FOSS_REUSE_DECISION.tsv"
+#         - "m3/runtime-integration/verify-m3-intake.py"
+#         - "m3/m3-import/pure-int-recipe-custody/**"
+#         - "m3/vendor/third_party/rewrite-*/pom.xml"
+#         - "m3/tooling/migration-recipes/**"
+#         - ".github/workflows/m3-intake-policy.yml"
+#     workflow_dispatch:
 on:
-  push:
-    branches:
-      - master
-      - "m3/**"
-    paths:
-      - "ADDITIONAL_LICENSE_INFO"
-      - "m3/docs/m3jdk21-porting-invariant.md"
-      - "m3/docs/name-mapping.json"
-      - "m3/docs/m3-intake-policy.tsv"
-      - "m3/docs/m3-direct-copy-review.tsv"
-      - "m3/runtime-integration/FOSS_REUSE_DECISION.tsv"
-      - "m3/runtime-integration/verify-m3-intake.py"
-      - "m3/m3-import/pure-int-recipe-custody/**"
-      - "m3/vendor/third_party/rewrite-*/pom.xml"
-      - "m3/tooling/migration-recipes/**"
-      - ".github/workflows/m3-intake-policy.yml"
-  pull_request:
-    paths:
-      - "ADDITIONAL_LICENSE_INFO"
-      - "m3/docs/m3jdk21-porting-invariant.md"
-      - "m3/docs/name-mapping.json"
-      - "m3/docs/m3-intake-policy.tsv"
-      - "m3/docs/m3-direct-copy-review.tsv"
-      - "m3/runtime-integration/FOSS_REUSE_DECISION.tsv"
-      - "m3/runtime-integration/verify-m3-intake.py"
-      - "m3/m3-import/pure-int-recipe-custody/**"
-      - "m3/vendor/third_party/rewrite-*/pom.xml"
-      - "m3/tooling/migration-recipes/**"
-      - ".github/workflows/m3-intake-policy.yml"
   workflow_dispatch:
 
 permissions:

@@ -1,16 +1,22 @@
 name: M3 JEP 474 ZGC capability equivalence
 
+# Former triggers (below, as of the move) now start job(s) 'm3-jep474-zgc-equivalence__*' in
+# .github/workflows/checks-superset-04.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     push:
+#       branches:
+#         - "m3/jep474-proof-refresh-20261013"
+#       paths:
+#         - "m3/backports/recipes/jep-474-generational-zgc/**"
+#         - ".github/workflows/m3-jep474-zgc-equivalence.yml"
+#     pull_request:
+#       paths:
+#         - "m3/backports/recipes/jep-474-generational-zgc/**"
+#         - ".github/workflows/m3-jep474-zgc-equivalence.yml"
+#     workflow_dispatch:
 on:
-  push:
-    branches:
-      - "m3/jep474-proof-refresh-20261013"
-    paths:
-      - "m3/backports/recipes/jep-474-generational-zgc/**"
-      - ".github/workflows/m3-jep474-zgc-equivalence.yml"
-  pull_request:
-    paths:
-      - "m3/backports/recipes/jep-474-generational-zgc/**"
-      - ".github/workflows/m3-jep474-zgc-equivalence.yml"
   workflow_dispatch:
 
 permissions:

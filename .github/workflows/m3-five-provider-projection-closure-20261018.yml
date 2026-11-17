@@ -1,13 +1,19 @@
 name: M3 real five-library counted filtered indexed Java JNI
+# Former triggers (below, as of the move) now start job(s) 'm3-five-provider-projection-closure-20261018__*' in
+# .github/workflows/checks-superset-05.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     push:
+#       branches: [m3/five-provider-projection-closure-receiver-20261018]
+#     pull_request:
+#       paths:
+#         - 'm3/collections/interop/src/main/java/jdk/m3/collections/interop/M3FiveLibraryIndexViews.java'
+#         - 'm3/collections/interop/src/test/java/jdk/m3/collections/interop/M3FiveLibraryExpandedContractsTest.java'
+#         - 'm3/collections/interop/qualification/five-provider-projection-closure-20261018/**'
+#         - '.github/workflows/m3-five-provider-projection-closure-20261018.yml'
 on:
-  push:
-    branches: [m3/five-provider-projection-closure-receiver-20261018]
-  pull_request:
-    paths:
-      - 'm3/collections/interop/src/main/java/jdk/m3/collections/interop/M3FiveLibraryIndexViews.java'
-      - 'm3/collections/interop/src/test/java/jdk/m3/collections/interop/M3FiveLibraryExpandedContractsTest.java'
-      - 'm3/collections/interop/qualification/five-provider-projection-closure-20261018/**'
-      - '.github/workflows/m3-five-provider-projection-closure-20261018.yml'
+  workflow_dispatch:
 permissions:
   contents: read
 concurrency:

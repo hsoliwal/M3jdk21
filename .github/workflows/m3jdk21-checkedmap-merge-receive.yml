@@ -1,12 +1,18 @@
 # SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
 # SPDX-License-Identifier: Apache-2.0
 name: Java21 JDK-8292955 CheckedMap result-only receiver
+# Former triggers (below, as of the move) now start job(s) 'm3jdk21-checkedmap-merge-receive__*' in
+# .github/workflows/checks-superset-08.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     pull_request:
+#       paths:
+#         - 'src/java.base/share/classes/java/util/Collections.java'
+#         - 'test/jdk/java/util/Collections/CheckedMapMerge8292955Test.java'
+#         - '.github/workflows/m3jdk21-checkedmap-merge-receive.yml'
+#     workflow_dispatch:
 on:
-  pull_request:
-    paths:
-      - 'src/java.base/share/classes/java/util/Collections.java'
-      - 'test/jdk/java/util/Collections/CheckedMapMerge8292955Test.java'
-      - '.github/workflows/m3jdk21-checkedmap-merge-receive.yml'
   workflow_dispatch:
 permissions:
   contents: read

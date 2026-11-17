@@ -1,14 +1,20 @@
 # SPDX-License-Identifier: Apache-2.0
 name: M3 Apache Commons Bag 4.5.0 donor differential
+# Former triggers (below, as of the move) now start job(s) 'm3-apache-bag-retain450__*' in
+# .github/workflows/checks-superset-05.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     pull_request:
+#       branches: [master]
+#       paths:
+#         - 'm3/collections/interop/src/main/java/jdk/m3/collections/interop/M3ApacheBag.java'
+#         - 'm3/collections/interop/src/test/java/jdk/m3/collections/interop/M3ApacheBagContractTest.java'
+#         - '.github/workflows/m3-apache-bag-retain450.yml'
+#         - 'm3/collections/interop/qualification/current-census-superset-20261022/**'
+#         - 'm3/collections/interop/qualification/current-census-superset-20261024/**'
+#     workflow_dispatch:
 on:
-  pull_request:
-    branches: [master]
-    paths:
-      - 'm3/collections/interop/src/main/java/jdk/m3/collections/interop/M3ApacheBag.java'
-      - 'm3/collections/interop/src/test/java/jdk/m3/collections/interop/M3ApacheBagContractTest.java'
-      - '.github/workflows/m3-apache-bag-retain450.yml'
-      - 'm3/collections/interop/qualification/current-census-superset-20261022/**'
-      - 'm3/collections/interop/qualification/current-census-superset-20261024/**'
   workflow_dispatch:
 permissions:
   contents: read

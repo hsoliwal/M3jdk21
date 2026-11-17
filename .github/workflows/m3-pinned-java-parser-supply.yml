@@ -2,10 +2,16 @@
 # SPDX-License-Identifier: Apache-2.0
 # Draft-branch toolchain transport only. This workflow contains no source-changing recipe.
 name: M3 Pinned Java Parser Supply
+# Former triggers (below, as of the move) now start job(s) 'm3-pinned-java-parser-supply__*' in
+# .github/workflows/checks-superset-04.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     pull_request:
+#       paths:
+#         - '.github/workflows/m3-pinned-java-parser-supply.yml'
+#     workflow_dispatch:
 on:
-  pull_request:
-    paths:
-      - '.github/workflows/m3-pinned-java-parser-supply.yml'
   workflow_dispatch:
 permissions:
   contents: read

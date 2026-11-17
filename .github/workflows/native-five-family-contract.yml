@@ -1,13 +1,19 @@
 name: M3 native five-family source-built zero vendor runtime gate
+# Former triggers (below, as of the move) now start job(s) 'native-five-family-contract__*' in
+# .github/workflows/checks-superset-01.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     push:
+#       branches: ['m3/native-five-family-no-vendor-runtime-20261027']
+#     pull_request:
+#       paths:
+#         - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3NativeFiveLibrarySdk.java'
+#         - 'test/jdk/jdk/m3/collections/M3NativeFiveLibrarySdkNoVendorTest.java'
+#         - 'm3/collections/qualification/no-vendor-runtime-20261027/**'
+#         - '.github/workflows/native-five-family-contract.yml'
 on:
-  push:
-    branches: ['m3/native-five-family-no-vendor-runtime-20261027']
-  pull_request:
-    paths:
-      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3NativeFiveLibrarySdk.java'
-      - 'test/jdk/jdk/m3/collections/M3NativeFiveLibrarySdkNoVendorTest.java'
-      - 'm3/collections/qualification/no-vendor-runtime-20261027/**'
-      - '.github/workflows/native-five-family-contract.yml'
+  workflow_dispatch:
 permissions:
   contents: read
 concurrency:

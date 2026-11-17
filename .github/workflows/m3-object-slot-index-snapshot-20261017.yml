@@ -2,20 +2,26 @@
 # SPDX-License-Identifier: Apache-2.0
 name: M3 Object Slot Index Snapshot Java21 JNI
 
+# Former triggers (below, as of the move) now start job(s) 'm3-object-slot-index-snapshot-20261017__*' in
+# .github/workflows/checks-superset-06.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     push:
+#       branches:
+#         - 'm3/object-slot-index-snapshot-20261017'
+#     pull_request:
+#       paths:
+#         - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3ObjectIndexSnapshot.java'
+#         - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3ObjectSlotStore28.java'
+#         - 'test/jdk/jdk/m3/collections/M3ObjectSlotIndex*.java'
+#         - 'm3/collections/qualification/m3-object-slot-index-snapshot-20261017/**'
+#         - 'm3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-object-slot-index-snapshot-20261017/**'
+#         - 'm3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-object-slot-index-snapshot-20261017.yml'
+#         - 'm3/tooling/migration-recipes/src/test/java/jdk/internal/m3/rewrite/M3ObjectSlotIndexSnapshot20261017RecipeTest.java'
+#         - '.github/workflows/m3-object-slot-index-snapshot-20261017.yml'
+#     workflow_dispatch:
 on:
-  push:
-    branches:
-      - 'm3/object-slot-index-snapshot-20261017'
-  pull_request:
-    paths:
-      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3ObjectIndexSnapshot.java'
-      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3ObjectSlotStore28.java'
-      - 'test/jdk/jdk/m3/collections/M3ObjectSlotIndex*.java'
-      - 'm3/collections/qualification/m3-object-slot-index-snapshot-20261017/**'
-      - 'm3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-object-slot-index-snapshot-20261017/**'
-      - 'm3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-object-slot-index-snapshot-20261017.yml'
-      - 'm3/tooling/migration-recipes/src/test/java/jdk/internal/m3/rewrite/M3ObjectSlotIndexSnapshot20261017RecipeTest.java'
-      - '.github/workflows/m3-object-slot-index-snapshot-20261017.yml'
   workflow_dispatch:
 
 permissions:

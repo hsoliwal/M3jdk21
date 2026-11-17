@@ -1,13 +1,19 @@
 # SPDX-License-Identifier: Apache-2.0
 name: M3 object-state slot explicit ctor Java21 contract
+# Former triggers (below, as of the move) now start job(s) 'm3-state-slots-constructor-20261017__*' in
+# .github/workflows/checks-superset-05.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     push:
+#       branches: ["m3/state-slots-explicit-constructor-20261017"]
+#     pull_request:
+#       paths:
+#         - "src/jdk.m3.collections/share/classes/jdk/m3/collections/M3ObjectStateSlots28.java"
+#         - "m3/collections/qualification/state-slots-constructor-20261017/**"
+#         - ".github/workflows/m3-state-slots-constructor-20261017.yml"
 on:
-  push:
-    branches: ["m3/state-slots-explicit-constructor-20261017"]
-  pull_request:
-    paths:
-      - "src/jdk.m3.collections/share/classes/jdk/m3/collections/M3ObjectStateSlots28.java"
-      - "m3/collections/qualification/state-slots-constructor-20261017/**"
-      - ".github/workflows/m3-state-slots-constructor-20261017.yml"
+  workflow_dispatch:
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true

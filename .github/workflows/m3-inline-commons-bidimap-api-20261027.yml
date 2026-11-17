@@ -1,11 +1,17 @@
 name: M3 Commons BidiMap zero vendor runtime source gates
+# Former triggers (below, as of the move) now start job(s) 'm3-inline-commons-bidimap-api-20261027__*' in
+# .github/workflows/checks-superset-04.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     push:
+#       branches: ['m3/inline-commons-bidimap-api-receiver-20261027']
+#     pull_request:
+#       paths:
+#         - 'm3/collections/implementations/apache-dual-linked-hash-bidi-map/**'
+#         - '.github/workflows/m3-inline-commons-bidimap-api-20261027.yml'
 on:
-  push:
-    branches: ['m3/inline-commons-bidimap-api-receiver-20261027']
-  pull_request:
-    paths:
-      - 'm3/collections/implementations/apache-dual-linked-hash-bidi-map/**'
-      - '.github/workflows/m3-inline-commons-bidimap-api-20261027.yml'
+  workflow_dispatch:
 permissions:
   contents: read
 concurrency:

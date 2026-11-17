@@ -1,15 +1,21 @@
 # SPDX-License-Identifier: Apache-2.0
 name: M3JDK21 Apache array-owned list and stack sources
+# Former triggers (below, as of the move) now start job(s) 'm3-arrayified-apache-list-owners-20261113__*' in
+# .github/workflows/checks-superset-08.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     pull_request:
+#       paths:
+#         - '.github/workflows/m3-arrayified-apache-list-owners-20261113.yml'
+#         - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/apache/NodeCachingLinkedList.java'
+#         - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/apache/TreeList.java'
+#         - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/apache/ArrayStack.java'
+#         - 'test/jdk/jdk/m3/collections/ArrayLinkedListContract.java'
+#         - 'test/jdk/jdk/m3/collections/ArrayTreeListContract.java'
+#         - 'test/jdk/jdk/m3/collections/ArrayStackContract.java'
+#     workflow_dispatch:
 on:
-  pull_request:
-    paths:
-      - '.github/workflows/m3-arrayified-apache-list-owners-20261113.yml'
-      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/apache/NodeCachingLinkedList.java'
-      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/apache/TreeList.java'
-      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/apache/ArrayStack.java'
-      - 'test/jdk/jdk/m3/collections/ArrayLinkedListContract.java'
-      - 'test/jdk/jdk/m3/collections/ArrayTreeListContract.java'
-      - 'test/jdk/jdk/m3/collections/ArrayStackContract.java'
   workflow_dispatch:
 permissions:
   contents: read

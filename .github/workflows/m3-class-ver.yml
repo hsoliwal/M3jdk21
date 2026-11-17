@@ -1,15 +1,21 @@
 # SPDX-License-Identifier: Apache-2.0
 name: M3 ClassVer actual framework proof
+# Former triggers (below, as of the move) now start job(s) 'm3-class-ver__*' in
+# .github/workflows/checks-superset-06.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     pull_request:
+#       paths:
+#         - 'm3/tooling/migration-recipes/**'
+#         - 'm3/tooling/module-packs/**'
+#         - '.github/workflows/m3-class-ver.yml'
+#         - 'm3/migration/classver.py'
+#         - 'm3/migration/classver-evidence.json'
+#         - 'm3/migration/test/test_classver.py'
+#         - 'm3/migration/recipe.py'
+#     workflow_dispatch:
 on:
-  pull_request:
-    paths:
-      - 'm3/tooling/migration-recipes/**'
-      - 'm3/tooling/module-packs/**'
-      - '.github/workflows/m3-class-ver.yml'
-      - 'm3/migration/classver.py'
-      - 'm3/migration/classver-evidence.json'
-      - 'm3/migration/test/test_classver.py'
-      - 'm3/migration/recipe.py'
   workflow_dispatch:
 permissions:
   contents: read

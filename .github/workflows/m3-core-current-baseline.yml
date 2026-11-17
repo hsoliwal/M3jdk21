@@ -1,17 +1,23 @@
 # Copyright 2026 Hitesh Soliwal and contributors.
 # SPDX-License-Identifier: Apache-2.0
 name: M3 current core historical and current runtime proof
+# Former triggers (below, as of the move) now start job(s) 'm3-core-current-baseline__*' in
+# .github/workflows/checks-superset-01.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     pull_request:
+#       paths:
+#         - 'm3/core/**'
+#         - 'src/java.base/share/classes/jdk/m3/text/**'
+#         - 'm3/build.sh'
+#         - 'm3/lexicon/*.tsv'
+#         - 'm3/lexicon/english-demo.txt'
+#         - 'm3/tooling/joined-range-directory/current-baseline/**'
+#         - 'm3/tooling/joined-range-directory/current-module/**'
+#         - '.github/workflows/m3-core-current-baseline.yml'
+#     workflow_dispatch:
 on:
-  pull_request:
-    paths:
-      - 'm3/core/**'
-      - 'src/java.base/share/classes/jdk/m3/text/**'
-      - 'm3/build.sh'
-      - 'm3/lexicon/*.tsv'
-      - 'm3/lexicon/english-demo.txt'
-      - 'm3/tooling/joined-range-directory/current-baseline/**'
-      - 'm3/tooling/joined-range-directory/current-module/**'
-      - '.github/workflows/m3-core-current-baseline.yml'
   workflow_dispatch:
 permissions:
   contents: read

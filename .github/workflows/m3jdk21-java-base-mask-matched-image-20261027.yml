@@ -2,15 +2,21 @@
 name: M3JDK21 java.base mask source-built image and jtreg
 # Build the actual M3JDK 21 image for changes to this java.base owner.
 # No successful host-JDK --patch-module run substitutes for this acceptance gate.
+# Former triggers (below, as of the move) now start job(s) 'm3jdk21-java-base-mask-matched-image-20261027__*' in
+# .github/workflows/checks-superset-09.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     pull_request:
+#       paths:
+#         - 'src/java.base/share/classes/jdk/internal/mindex/M3CollectionMaskCompactor.java'
+#         - 'test/jdk/java/util/ArrayList/M3CollectionMaskCompactorContract.java'
+#         - 'test/jdk/java/util/ArrayList/M3ArrayListVectorRemoveIfContract.java'
+#         - 'test/jdk/java/util/ArrayList/M3ArrayListVectorGcMutationContract.java'
+#         - 'test/jdk/java/util/ArrayList/M3CollectionMaskGcBarrierContract.java'
+#         - '.github/workflows/m3jdk21-java-base-mask-matched-image-20261027.yml'
+#     workflow_dispatch:
 on:
-  pull_request:
-    paths:
-      - 'src/java.base/share/classes/jdk/internal/mindex/M3CollectionMaskCompactor.java'
-      - 'test/jdk/java/util/ArrayList/M3CollectionMaskCompactorContract.java'
-      - 'test/jdk/java/util/ArrayList/M3ArrayListVectorRemoveIfContract.java'
-      - 'test/jdk/java/util/ArrayList/M3ArrayListVectorGcMutationContract.java'
-      - 'test/jdk/java/util/ArrayList/M3CollectionMaskGcBarrierContract.java'
-      - '.github/workflows/m3jdk21-java-base-mask-matched-image-20261027.yml'
   workflow_dispatch:
 concurrency:
   group: m3jdk21-mask-full-image-${{ github.event.pull_request.number || github.ref }}

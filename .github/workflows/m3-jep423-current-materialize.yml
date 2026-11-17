@@ -1,20 +1,26 @@
 name: M3 JEP 423 current materialization
 
+# Former triggers (below, as of the move) now start job(s) 'm3-jep423-current-materialize__*' in
+# .github/workflows/checks-superset-01.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     push:
+#       branches:
+#         - "m3/jep423-materialize-current-*"
+#       paths:
+#         - "m3/backports/**"
+#         - "m3/tooling/backport-dag/**"
+#         - "m3/backports/recipes/jep-423-region-pinning/CURRENT_TREE_PROOF_REQUEST.tsv"
+#         - ".github/workflows/m3-jep423-current-materialize.yml"
+#     pull_request:
+#       paths:
+#         - "m3/backports/**"
+#         - "m3/tooling/backport-dag/**"
+#         - "m3/backports/recipes/jep-423-region-pinning/CURRENT_TREE_PROOF_REQUEST.tsv"
+#         - ".github/workflows/m3-jep423-current-materialize.yml"
+#     workflow_dispatch:
 on:
-  push:
-    branches:
-      - "m3/jep423-materialize-current-*"
-    paths:
-      - "m3/backports/**"
-      - "m3/tooling/backport-dag/**"
-      - "m3/backports/recipes/jep-423-region-pinning/CURRENT_TREE_PROOF_REQUEST.tsv"
-      - ".github/workflows/m3-jep423-current-materialize.yml"
-  pull_request:
-    paths:
-      - "m3/backports/**"
-      - "m3/tooling/backport-dag/**"
-      - "m3/backports/recipes/jep-423-region-pinning/CURRENT_TREE_PROOF_REQUEST.tsv"
-      - ".github/workflows/m3-jep423-current-materialize.yml"
   workflow_dispatch:
 
 permissions:

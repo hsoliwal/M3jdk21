@@ -2,12 +2,24 @@
 # Copyright 2026 Hitesh Soliwal and contributors
 name: M3JDK21 Secondary Recipe Bootstrap (candidate-only)
 
+# Former triggers (below, as of the move) now start job(s) 'm3-secondary-recipe-caller-20261021__*' in
+# .github/workflows/checks-superset-01.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     pull_request:
+#       paths:
+#         - '.m3/openrewrite-recipes/**'
+#         - '.m3/recipe-source-custody-20261018/**'
+#         - '.github/workflows/m3-secondary-recipe-caller-20261021.yml'
+#     workflow_dispatch:
+#       inputs:
+#         chrome_ai:
+#           description: Require installed optional M3JDK21 Chrome AI capability
+#           type: boolean
+#           required: false
+#           default: false
 on:
-  pull_request:
-    paths:
-      - '.m3/openrewrite-recipes/**'
-      - '.m3/recipe-source-custody-20261018/**'
-      - '.github/workflows/m3-secondary-recipe-caller-20261021.yml'
   workflow_dispatch:
     inputs:
       chrome_ai:

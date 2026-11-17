@@ -1,12 +1,18 @@
 # SPDX-License-Identifier: Apache-2.0
 name: M3 GC compiler/runtime Java21 proof
+# Former triggers (below, as of the move) now start job(s) 'm3-gc-compiler-runtime-20261017__*' in
+# .github/workflows/checks-superset-04.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     push:
+#       branches: ["m3/gc-compiler-runtime-20261017"]
+#     pull_request:
+#       paths:
+#         - "m3/collections/gc-interop/**"
+#         - "m3/docs/M3_GC_COMPILER_RUNTIME_20261017.md"
 on:
-  push:
-    branches: ["m3/gc-compiler-runtime-20261017"]
-  pull_request:
-    paths:
-      - "m3/collections/gc-interop/**"
-      - "m3/docs/M3_GC_COMPILER_RUNTIME_20261017.md"
+  workflow_dispatch:
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true

@@ -1,12 +1,18 @@
 name: M3-GVAS compile-time literal image (strict-address)
+# Former triggers (below, as of the move) now start job(s) 'm3-gvas-literal-precompute__*' in
+# .github/workflows/checks-superset-05.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     pull_request:
+#       paths:
+#         - 'm3/ports/compiletime/src/main/java/jdk/m3/compiletime/M3GvasLiteral*.java'
+#         - 'src/java.base/share/classes/jdk/m3/text/M3GvasLiteralImage.java'
+#         - 'm3/core/test/jdk/m3/text/M3GvasLiteralImageContractTest.java'
+#         - 'm3/verify-gvas-literal-precompute.py'
+#         - '.github/workflows/m3-gvas-literal-precompute.yml'
+#     workflow_dispatch:
 on:
-  pull_request:
-    paths:
-      - 'm3/ports/compiletime/src/main/java/jdk/m3/compiletime/M3GvasLiteral*.java'
-      - 'src/java.base/share/classes/jdk/m3/text/M3GvasLiteralImage.java'
-      - 'm3/core/test/jdk/m3/text/M3GvasLiteralImageContractTest.java'
-      - 'm3/verify-gvas-literal-precompute.py'
-      - '.github/workflows/m3-gvas-literal-precompute.yml'
   workflow_dispatch:
 permissions:
   contents: read

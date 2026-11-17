@@ -1,17 +1,23 @@
 # SPDX-License-Identifier: Apache-2.0
 name: M3 filtered navigable consolidation
+# Former triggers (below, as of the move) now start job(s) 'm3-filtered-navigable-consolidation__*' in
+# .github/workflows/checks-superset-09.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     pull_request:
+#       paths:
+#         - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3FilteredViews.java'
+#         - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3FilteredNavigableSet.java'
+#         - 'test/jdk/jdk/m3/collections/M3FilteredNavigableFacadeSelfTest.java'
+#         - 'm3/collections/docs/FILTERED_SORTED_VIEWS_RECEIVING_20261017.md'
+#         - 'm3/collections/qualification/filtered-navigable-consolidation-20261017/**'
+#         - 'test/jdk/jdk/m3/collections/M3FilteredSortedIteratorPlanTest.java'
+#         - 'test/jdk/jdk/m3/collections/M3FilteredSortedIteratorPlanSelfTest.java'
+#         - 'm3/collections/qualification/filtered-plan-current-master-20261027/**'
+#         - '.github/workflows/m3-filtered-navigable-consolidation.yml'
+#     workflow_dispatch:
 on:
-  pull_request:
-    paths:
-      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3FilteredViews.java'
-      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3FilteredNavigableSet.java'
-      - 'test/jdk/jdk/m3/collections/M3FilteredNavigableFacadeSelfTest.java'
-      - 'm3/collections/docs/FILTERED_SORTED_VIEWS_RECEIVING_20261017.md'
-      - 'm3/collections/qualification/filtered-navigable-consolidation-20261017/**'
-      - 'test/jdk/jdk/m3/collections/M3FilteredSortedIteratorPlanTest.java'
-      - 'test/jdk/jdk/m3/collections/M3FilteredSortedIteratorPlanSelfTest.java'
-      - 'm3/collections/qualification/filtered-plan-current-master-20261027/**'
-      - '.github/workflows/m3-filtered-navigable-consolidation.yml'
   workflow_dispatch:
 permissions:
   contents: read

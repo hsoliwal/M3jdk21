@@ -1,15 +1,21 @@
 # SPDX-License-Identifier: Apache-2.0
 name: M3JDK21 Linux OS capability Java21/JNI admission
+# Former triggers (below, as of the move) now start job(s) 'm3-os-native-capability-20261116__*' in
+# .github/workflows/checks-superset-09.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     pull_request:
+#       paths:
+#         - 'src/jdk.m3.io/share/classes/jdk/m3/os/**'
+#         - 'src/jdk.m3.io/share/classes/module-info.java'
+#         - 'src/jdk.m3.io/share/native/libm3osprobe/**'
+#         - 'make/modules/jdk.m3.io/Lib.gmk'
+#         - 'test/jdk/jdk/m3/os/**'
+#         - 'docs/M3_OS_CAPABILITIES.md'
+#         - '.github/workflows/m3-os-native-capability-20261116.yml'
+#     workflow_dispatch:
 on:
-  pull_request:
-    paths:
-      - 'src/jdk.m3.io/share/classes/jdk/m3/os/**'
-      - 'src/jdk.m3.io/share/classes/module-info.java'
-      - 'src/jdk.m3.io/share/native/libm3osprobe/**'
-      - 'make/modules/jdk.m3.io/Lib.gmk'
-      - 'test/jdk/jdk/m3/os/**'
-      - 'docs/M3_OS_CAPABILITIES.md'
-      - '.github/workflows/m3-os-native-capability-20261116.yml'
   workflow_dispatch:
 permissions:
   contents: read

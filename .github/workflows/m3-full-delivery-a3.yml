@@ -1,18 +1,24 @@
 name: M3 Synexia full delivery A3
 
+# Former triggers (below, as of the move) now start job(s) 'm3-full-delivery-a3__*' in
+# .github/workflows/checks-superset-01.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     pull_request:
+#       paths:
+#         - 'm3/m3-import/**'
+#         - 'm3/docs/m3-full-delivery-a3.md'
+#         - 'm3/docs/a3-vendored-build-prerequisite-20261015.md'
+#         - 'm3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-full-delivery-a3/**'
+#         - 'm3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-full-delivery-a3-doc/**'
+#         - 'm3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-full-delivery-a3.yml'
+#         - 'm3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/M3FullDeliveryA3RecipeTest.java'
+#         - 'm3/tooling/migration-recipes/src/test/resources/jdk/m3/rewrite/m3-full-delivery-a3/**'
+#         - 'm3/tooling/migration-recipes/tasks/m3-full-delivery-a3/**'
+#         - '.github/workflows/m3-full-delivery-a3.yml'
+#     workflow_dispatch:
 on:
-  pull_request:
-    paths:
-      - 'm3/m3-import/**'
-      - 'm3/docs/m3-full-delivery-a3.md'
-      - 'm3/docs/a3-vendored-build-prerequisite-20261015.md'
-      - 'm3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-full-delivery-a3/**'
-      - 'm3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-full-delivery-a3-doc/**'
-      - 'm3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-full-delivery-a3.yml'
-      - 'm3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/M3FullDeliveryA3RecipeTest.java'
-      - 'm3/tooling/migration-recipes/src/test/resources/jdk/m3/rewrite/m3-full-delivery-a3/**'
-      - 'm3/tooling/migration-recipes/tasks/m3-full-delivery-a3/**'
-      - '.github/workflows/m3-full-delivery-a3.yml'
   workflow_dispatch:
 
 permissions:

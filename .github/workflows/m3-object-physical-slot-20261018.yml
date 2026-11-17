@@ -2,14 +2,20 @@
 # SPDX-License-Identifier: Apache-2.0
 # Synexia recipe: jdk.internal.m3.rewrite.M3Jdk21ObjectPhysicalSlotProjection
 name: M3 object physical-slot 32-bit mask Java JNI
+# Former triggers (below, as of the move) now start job(s) 'm3-object-physical-slot-20261018__*' in
+# .github/workflows/checks-superset-04.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     pull_request:
+#       paths:
+#         - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3ObjectIndexSnapshot.java'
+#         - 'test/jdk/jdk/m3/collections/M3ObjectPhysicalMask*'
+#         - 'm3/collections/algorithm-catalog/object-physical-state-32bit-20261018.tsv'
+#         - 'm3/collections/qualification/m3-object-physical-state-20261018/**'
+#         - '.github/workflows/m3-object-physical-slot-20261018.yml'
+#     workflow_dispatch:
 on:
-  pull_request:
-    paths:
-      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3ObjectIndexSnapshot.java'
-      - 'test/jdk/jdk/m3/collections/M3ObjectPhysicalMask*'
-      - 'm3/collections/algorithm-catalog/object-physical-state-32bit-20261018.tsv'
-      - 'm3/collections/qualification/m3-object-physical-state-20261018/**'
-      - '.github/workflows/m3-object-physical-slot-20261018.yml'
   workflow_dispatch:
 permissions:
   contents: read

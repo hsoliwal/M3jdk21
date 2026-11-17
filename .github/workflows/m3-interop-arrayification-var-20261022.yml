@@ -1,15 +1,21 @@
 # SPDX-License-Identifier: Apache-2.0
 name: M3JDK21 arrayified five-library Java21 var grammar and receipt
 
+# Former triggers (below, as of the move) now start job(s) 'm3-interop-arrayification-var-20261022__*' in
+# .github/workflows/checks-superset-05.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     pull_request:
+#       paths:
+#         - 'm3/collections/interop/src/test/java/jdk/m3/collections/interop/M3FiveLibraryArrayificationTest.java'
+#         - 'm3/collections/interop/qualification/arrayification-var-20261022/**'
+#         - '.github/workflows/m3-interop-arrayification-var-20261022.yml'
+#     push:
+#       branches:
+#         - m3/interop-arrayification-var-receiver-20261022
+#     workflow_dispatch:
 on:
-  pull_request:
-    paths:
-      - 'm3/collections/interop/src/test/java/jdk/m3/collections/interop/M3FiveLibraryArrayificationTest.java'
-      - 'm3/collections/interop/qualification/arrayification-var-20261022/**'
-      - '.github/workflows/m3-interop-arrayification-var-20261022.yml'
-  push:
-    branches:
-      - m3/interop-arrayification-var-receiver-20261022
   workflow_dispatch:
 
 permissions:

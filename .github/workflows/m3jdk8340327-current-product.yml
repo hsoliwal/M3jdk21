@@ -1,28 +1,34 @@
 name: M3 JDK-8340327 current product proof
 
+# Former triggers (below, as of the move) now start job(s) 'm3jdk8340327-current-product__*' in
+# .github/workflows/checks-superset-08.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     push:
+#       branches:
+#         - "m3/jdk8340327-proof-receipt-*"
+#       paths:
+#         - 'm3/backports/recipes/jdk-8340327-java21-internal/**'
+#         - 'm3/tooling/migration-recipes/**'
+#         - '.github/workflows/m3jdk8340327-current-product.yml'
+#     pull_request:
+#       paths:
+#         - 'src/java.base/share/classes/sun/security/pkcs/NamedPKCS8Key.java'
+#         - 'src/java.base/share/classes/sun/security/provider/NamedKEM.java'
+#         - 'src/java.base/share/classes/sun/security/provider/NamedKeyFactory.java'
+#         - 'src/java.base/share/classes/sun/security/provider/NamedKeyPairGenerator.java'
+#         - 'src/java.base/share/classes/sun/security/provider/NamedSignature.java'
+#         - 'src/java.base/share/classes/sun/security/util/KeyUtil.java'
+#         - 'src/java.base/share/classes/sun/security/util/SignatureUtil.java'
+#         - 'src/java.base/share/classes/sun/security/x509/NamedX509Key.java'
+#         - 'test/jdk/sun/security/provider/NamedEdDSA.java'
+#         - 'test/jdk/sun/security/provider/NamedKeyFactoryTest.java'
+#         - 'm3/backports/recipes/jdk-8340327-java21-internal/**'
+#         - 'm3/tooling/migration-recipes/**'
+#         - '.github/workflows/m3jdk8340327-current-product.yml'
+#     workflow_dispatch:
 on:
-  push:
-    branches:
-      - "m3/jdk8340327-proof-receipt-*"
-    paths:
-      - 'm3/backports/recipes/jdk-8340327-java21-internal/**'
-      - 'm3/tooling/migration-recipes/**'
-      - '.github/workflows/m3jdk8340327-current-product.yml'
-  pull_request:
-    paths:
-      - 'src/java.base/share/classes/sun/security/pkcs/NamedPKCS8Key.java'
-      - 'src/java.base/share/classes/sun/security/provider/NamedKEM.java'
-      - 'src/java.base/share/classes/sun/security/provider/NamedKeyFactory.java'
-      - 'src/java.base/share/classes/sun/security/provider/NamedKeyPairGenerator.java'
-      - 'src/java.base/share/classes/sun/security/provider/NamedSignature.java'
-      - 'src/java.base/share/classes/sun/security/util/KeyUtil.java'
-      - 'src/java.base/share/classes/sun/security/util/SignatureUtil.java'
-      - 'src/java.base/share/classes/sun/security/x509/NamedX509Key.java'
-      - 'test/jdk/sun/security/provider/NamedEdDSA.java'
-      - 'test/jdk/sun/security/provider/NamedKeyFactoryTest.java'
-      - 'm3/backports/recipes/jdk-8340327-java21-internal/**'
-      - 'm3/tooling/migration-recipes/**'
-      - '.github/workflows/m3jdk8340327-current-product.yml'
   workflow_dispatch:
 
 permissions:

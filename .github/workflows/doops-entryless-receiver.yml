@@ -1,17 +1,23 @@
 # SPDX-License-Identifier: Apache-2.0
 name: DOOPS entryless Java21 JNI receiver
+# Former triggers (below, as of the move) now start job(s) 'doops-entryless-receiver__*' in
+# .github/workflows/checks-superset-08.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     pull_request:
+#       branches: [master]
+#       paths:
+#         - '.github/workflows/doops-entryless-receiver.yml'
+#         - 'm3/collections/qualification/doops-entryless-verify.sh'
+#         - 'm3/collections/qualification/doops-entryless-receiver.tsv'
+#         - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3FilteredViews.java'
+#         - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3TreeMap.java'
+#         - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3IndexMaskCompactor.java'
+#         - 'src/jdk.m3.collections/share/native/libm3collections/collections/m3_index_mask_compactor.c'
+#         - 'test/jdk/jdk/m3/collections/M3*Proof.java'
+#     workflow_dispatch:
 on:
-  pull_request:
-    branches: [master]
-    paths:
-      - '.github/workflows/doops-entryless-receiver.yml'
-      - 'm3/collections/qualification/doops-entryless-verify.sh'
-      - 'm3/collections/qualification/doops-entryless-receiver.tsv'
-      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3FilteredViews.java'
-      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3TreeMap.java'
-      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3IndexMaskCompactor.java'
-      - 'src/jdk.m3.collections/share/native/libm3collections/collections/m3_index_mask_compactor.c'
-      - 'test/jdk/jdk/m3/collections/M3*Proof.java'
   workflow_dispatch:
 permissions:
   contents: read

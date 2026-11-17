@@ -1,24 +1,30 @@
 # SPDX-License-Identifier: Apache-2.0
 name: M3 five-family SDK contracts
+# Former triggers (below, as of the move) now start job(s) 'm3-sdk-family-names-20261017__*' in
+# .github/workflows/checks-superset-01.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     pull_request:
+#       branches: [master]
+#       paths:
+#         - 'm3/arrays/LICENSE'
+#         - 'm3/arrays/pom.xml'
+#         - 'm3/arrays/src/main/java/module-info.java'
+#         - 'm3/collections/LICENSE'
+#         - 'm3/collections/provenance.json'
+#         - 'm3/collections/name-mapping.json'
+#         - 'm3/collections/pom.xml'
+#         - 'm3/collections/src/main/java/module-info.java'
+#         - 'm3/evidence/arrays/provenance.json'
+#         - 'm3/collections/interop/**'
+#         - 'src/jdk.m3.collections/share/classes/**'
+#         - 'src/jdk.m3.collections/share/**'
+#         - 'm3/native/**'
+#         - 'm3/qualification/sdk-native-owner/**'
+#         - '.github/workflows/m3-sdk-family-names-20261017.yml'
+#     workflow_dispatch:
 on:
-  pull_request:
-    branches: [master]
-    paths:
-      - 'm3/arrays/LICENSE'
-      - 'm3/arrays/pom.xml'
-      - 'm3/arrays/src/main/java/module-info.java'
-      - 'm3/collections/LICENSE'
-      - 'm3/collections/provenance.json'
-      - 'm3/collections/name-mapping.json'
-      - 'm3/collections/pom.xml'
-      - 'm3/collections/src/main/java/module-info.java'
-      - 'm3/evidence/arrays/provenance.json'
-      - 'm3/collections/interop/**'
-      - 'src/jdk.m3.collections/share/classes/**'
-      - 'src/jdk.m3.collections/share/**'
-      - 'm3/native/**'
-      - 'm3/qualification/sdk-native-owner/**'
-      - '.github/workflows/m3-sdk-family-names-20261017.yml'
   workflow_dispatch:
 permissions:
   contents: read

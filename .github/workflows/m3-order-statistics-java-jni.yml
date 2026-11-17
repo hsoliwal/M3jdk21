@@ -1,18 +1,24 @@
 # SPDX-License-Identifier: Apache-2.0
 name: M3 order-statistics Java21 JNI recipe
 
+# Former triggers (below, as of the move) now start job(s) 'm3-order-statistics-java-jni__*' in
+# .github/workflows/checks-superset-08.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     pull_request:
+#       paths:
+#         - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3LongRank*.java'
+#         - 'src/jdk.m3.collections/share/native/libm3collections/collections/m3_long_rank_batch_jni.c'
+#         - 'test/jdk/jdk/m3/collections/M3LongRankIndex*.java'
+#         - 'm3/collections/recipe/order-statistics/**'
+#         - 'm3/collections/algorithm-catalog/order-statistics.tsv'
+#         - '.github/workflows/m3-order-statistics-java-jni.yml'
+#     push:
+#       branches:
+#         - 'feat/m3-long-rank-snapshot-jni-recipe-20261017'
+#     workflow_dispatch:
 on:
-  pull_request:
-    paths:
-      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3LongRank*.java'
-      - 'src/jdk.m3.collections/share/native/libm3collections/collections/m3_long_rank_batch_jni.c'
-      - 'test/jdk/jdk/m3/collections/M3LongRankIndex*.java'
-      - 'm3/collections/recipe/order-statistics/**'
-      - 'm3/collections/algorithm-catalog/order-statistics.tsv'
-      - '.github/workflows/m3-order-statistics-java-jni.yml'
-  push:
-    branches:
-      - 'feat/m3-long-rank-snapshot-jni-recipe-20261017'
   workflow_dispatch:
 
 permissions:

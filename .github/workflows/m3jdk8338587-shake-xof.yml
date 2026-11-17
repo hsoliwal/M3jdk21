@@ -1,35 +1,41 @@
 # SPDX-License-Identifier: GPL-2.0-with-classpath-exception
 name: M3 JDK-8338587 SHAKE XOF candidate
 
+# Former triggers (below, as of the move) now start job(s) 'm3jdk8338587-shake-xof__*' in
+# .github/workflows/checks-superset-04.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     push:
+#       branches:
+#         - 'm3/materialize-jdk8338587-shake-xof-20261007'
+#       paths:
+#         - 'src/java.base/share/classes/sun/security/provider/SHA3.java'
+#         - 'test/jdk/sun/security/provider/MessageDigest/SHAKEXofCompatibility.java'
+#         - 'm3/backports/recipes/jdk-8338587-shake-xof/**'
+#         - 'm3/backports/recipes/j496/**'
+#         - 'm3/backports/recipes/j497/**'
+#         - 'm3/backports/JEP_RESIDUE_QUEUE.tsv'
+#         - 'm3/backports/test_jep_residue.py'
+#         - 'm3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk8338587ShakeXofBackportRecipe.java'
+#         - 'm3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3Jdk8338587ShakeXofBackportRecipeTest.java'
+#         - 'm3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk24-jdk8338587-shake-xof/**'
+#         - '.github/workflows/m3jdk8338587-shake-xof.yml'
+#     pull_request:
+#       paths:
+#         - 'src/java.base/share/classes/sun/security/provider/SHA3.java'
+#         - 'test/jdk/sun/security/provider/MessageDigest/SHAKEXofCompatibility.java'
+#         - 'm3/backports/recipes/jdk-8338587-shake-xof/**'
+#         - 'm3/backports/recipes/j496/**'
+#         - 'm3/backports/recipes/j497/**'
+#         - 'm3/backports/JEP_RESIDUE_QUEUE.tsv'
+#         - 'm3/backports/test_jep_residue.py'
+#         - 'm3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk8338587ShakeXofBackportRecipe.java'
+#         - 'm3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3Jdk8338587ShakeXofBackportRecipeTest.java'
+#         - 'm3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk24-jdk8338587-shake-xof/**'
+#         - '.github/workflows/m3jdk8338587-shake-xof.yml'
+#     workflow_dispatch:
 on:
-  push:
-    branches:
-      - 'm3/materialize-jdk8338587-shake-xof-20261007'
-    paths:
-      - 'src/java.base/share/classes/sun/security/provider/SHA3.java'
-      - 'test/jdk/sun/security/provider/MessageDigest/SHAKEXofCompatibility.java'
-      - 'm3/backports/recipes/jdk-8338587-shake-xof/**'
-      - 'm3/backports/recipes/j496/**'
-      - 'm3/backports/recipes/j497/**'
-      - 'm3/backports/JEP_RESIDUE_QUEUE.tsv'
-      - 'm3/backports/test_jep_residue.py'
-      - 'm3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk8338587ShakeXofBackportRecipe.java'
-      - 'm3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3Jdk8338587ShakeXofBackportRecipeTest.java'
-      - 'm3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk24-jdk8338587-shake-xof/**'
-      - '.github/workflows/m3jdk8338587-shake-xof.yml'
-  pull_request:
-    paths:
-      - 'src/java.base/share/classes/sun/security/provider/SHA3.java'
-      - 'test/jdk/sun/security/provider/MessageDigest/SHAKEXofCompatibility.java'
-      - 'm3/backports/recipes/jdk-8338587-shake-xof/**'
-      - 'm3/backports/recipes/j496/**'
-      - 'm3/backports/recipes/j497/**'
-      - 'm3/backports/JEP_RESIDUE_QUEUE.tsv'
-      - 'm3/backports/test_jep_residue.py'
-      - 'm3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk8338587ShakeXofBackportRecipe.java'
-      - 'm3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3Jdk8338587ShakeXofBackportRecipeTest.java'
-      - 'm3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk24-jdk8338587-shake-xof/**'
-      - '.github/workflows/m3jdk8338587-shake-xof.yml'
   workflow_dispatch:
 
 permissions:

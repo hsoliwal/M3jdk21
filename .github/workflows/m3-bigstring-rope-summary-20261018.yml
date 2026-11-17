@@ -1,16 +1,22 @@
 # SPDX-License-Identifier: Apache-2.0
 name: M3 BigString rope and summary proof
 
+# Former triggers (below, as of the move) now start job(s) 'm3-bigstring-rope-summary-20261018__*' in
+# .github/workflows/checks-superset-07.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     pull_request:
+#       paths:
+#         - 'src/java.base/share/classes/jdk/m3/text/M3BigString.java'
+#         - 'src/java.base/share/classes/jdk/m3/text/M3StringPiece.java'
+#         - 'src/java.base/share/classes/jdk/m3/text/LocalM3StringPiece.java'
+#         - 'src/java.base/share/classes/jdk/m3/text/JoinedM3StringPiece.java'
+#         - 'src/java.base/share/classes/jdk/m3/text/StorageIdentity.java'
+#         - 'm3/core/test/jdk/m3/text/M3BigStringSelfTest.java'
+#         - '.github/workflows/m3-bigstring-rope-summary-20261018.yml'
+#     workflow_dispatch:
 on:
-  pull_request:
-    paths:
-      - 'src/java.base/share/classes/jdk/m3/text/M3BigString.java'
-      - 'src/java.base/share/classes/jdk/m3/text/M3StringPiece.java'
-      - 'src/java.base/share/classes/jdk/m3/text/LocalM3StringPiece.java'
-      - 'src/java.base/share/classes/jdk/m3/text/JoinedM3StringPiece.java'
-      - 'src/java.base/share/classes/jdk/m3/text/StorageIdentity.java'
-      - 'm3/core/test/jdk/m3/text/M3BigStringSelfTest.java'
-      - '.github/workflows/m3-bigstring-rope-summary-20261018.yml'
   workflow_dispatch:
 
 permissions:

@@ -1,13 +1,19 @@
 # SPDX-License-Identifier: Apache-2.0
 name: M3 Jackson source facts Java 21
 
+# Former triggers (below, as of the move) now start job(s) 'm3-jackson-source-facts-java21__*' in
+# .github/workflows/checks-superset-07.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     pull_request:
+#       paths:
+#         - 'm3/tooling/module-packs/jackson/src/main/java/jdk/m3/jackson/M3JsonLimits.java'
+#         - 'm3/tooling/module-packs/jackson/src/main/java/jdk/m3/jackson/M3SourceHash.java'
+#         - 'm3/tooling/module-packs/jackson/src/test/java/jdk/m3/jackson/M3SourceFactsContract.java'
+#         - '.github/workflows/m3-jackson-source-facts-java21.yml'
+#     workflow_dispatch:
 on:
-  pull_request:
-    paths:
-      - 'm3/tooling/module-packs/jackson/src/main/java/jdk/m3/jackson/M3JsonLimits.java'
-      - 'm3/tooling/module-packs/jackson/src/main/java/jdk/m3/jackson/M3SourceHash.java'
-      - 'm3/tooling/module-packs/jackson/src/test/java/jdk/m3/jackson/M3SourceFactsContract.java'
-      - '.github/workflows/m3-jackson-source-facts-java21.yml'
   workflow_dispatch:
 
 permissions:

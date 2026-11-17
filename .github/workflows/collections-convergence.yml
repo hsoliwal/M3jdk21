@@ -1,24 +1,30 @@
 # SPDX-License-Identifier: Apache-2.0
 name: M3JDK21 current array-mask wrapper convergence
 
+# Former triggers (below, as of the move) now start job(s) 'collections-convergence__*' in
+# .github/workflows/checks-superset-08.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     pull_request:
+#       paths:
+#         - 'src/java.base/share/classes/jdk/internal/m3/IndexedArray.java'
+#         - 'src/java.base/share/classes/jdk/internal/m3/IndexedView.java'
+#         - 'test/jdk/jdk/internal/m3/IndexedViewSortedSpliteratorTest.java'
+#         - 'src/java.base/share/classes/java/util/CollectionViews.java'
+#         - 'test/jdk/jdk/internal/m3/FusedMaskedFilteredSortedViewTest.java'
+#         - 'test/jdk/java/util/CollectionViews/**'
+#         - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3FilteredViews.java'
+#         - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3FilteredLists.java'
+#         - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3FilteredDeques.java'
+#         - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3IndexedLiveView.java'
+#         - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3NativeFiveLibrarySdk.java'
+#         - 'test/jdk/jdk/m3/collections/**'
+#         - 'm3/collections/qualification/current-wrapper-arraymask-convergence/**'
+#         - 'm3/collections/qualification/current-wrapper-arraymask-convergence/SOURCE_MANIFEST.tsv'
+#         - '.github/workflows/collections-convergence.yml'
+#     workflow_dispatch:
 on:
-  pull_request:
-    paths:
-      - 'src/java.base/share/classes/jdk/internal/m3/IndexedArray.java'
-      - 'src/java.base/share/classes/jdk/internal/m3/IndexedView.java'
-      - 'test/jdk/jdk/internal/m3/IndexedViewSortedSpliteratorTest.java'
-      - 'src/java.base/share/classes/java/util/CollectionViews.java'
-      - 'test/jdk/jdk/internal/m3/FusedMaskedFilteredSortedViewTest.java'
-      - 'test/jdk/java/util/CollectionViews/**'
-      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3FilteredViews.java'
-      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3FilteredLists.java'
-      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3FilteredDeques.java'
-      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3IndexedLiveView.java'
-      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3NativeFiveLibrarySdk.java'
-      - 'test/jdk/jdk/m3/collections/**'
-      - 'm3/collections/qualification/current-wrapper-arraymask-convergence/**'
-      - 'm3/collections/qualification/current-wrapper-arraymask-convergence/SOURCE_MANIFEST.tsv'
-      - '.github/workflows/collections-convergence.yml'
   workflow_dispatch:
 
 permissions:

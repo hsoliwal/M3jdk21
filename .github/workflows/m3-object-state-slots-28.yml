@@ -1,12 +1,18 @@
 # SPDX-License-Identifier: Apache-2.0
 name: M3 object state array masks Java JNI
+# Former triggers (below, as of the move) now start job(s) 'm3-object-state-slots-28__*' in
+# .github/workflows/checks-superset-05.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     pull_request:
+#       paths:
+#         - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3ObjectStateSlots28.java'
+#         - 'test/jdk/jdk/m3/collections/M3ObjectStateSlots28SelfTest.java'
+#         - 'm3/collections/qualification/object-state-slots-28/**'
+#         - '.github/workflows/m3-object-state-slots-28.yml'
 on:
-  pull_request:
-    paths:
-      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3ObjectStateSlots28.java'
-      - 'test/jdk/jdk/m3/collections/M3ObjectStateSlots28SelfTest.java'
-      - 'm3/collections/qualification/object-state-slots-28/**'
-      - '.github/workflows/m3-object-state-slots-28.yml'
+  workflow_dispatch:
 permissions:
   contents: read
 concurrency:

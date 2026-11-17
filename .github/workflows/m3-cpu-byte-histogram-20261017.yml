@@ -1,15 +1,21 @@
 # SPDX-License-Identifier: Apache-2.0
 name: M3 CPU byte histogram Java21 JNI 20261017
 
+# Former triggers (below, as of the move) now start job(s) 'm3-cpu-byte-histogram-20261017__*' in
+# .github/workflows/checks-superset-06.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     workflow_dispatch:
+#     pull_request:
+#       paths:
+#         - 'm3/ports/capability-runtime/**'
+#         - 'm3/tooling/jmod-recipes/CPU_TOOL_CATEGORY_MATRIX_20261017.tsv'
+#         - 'm3/tooling/jmod-recipes/CPU_TOOL_HISTOGRAM_ADMISSION_20261017.md'
+#         - 'm3/docs/name-mapping.d/m3-cpu-byte-histogram-20261017.json'
+#         - '.github/workflows/m3-cpu-byte-histogram-20261017.yml'
 on:
   workflow_dispatch:
-  pull_request:
-    paths:
-      - 'm3/ports/capability-runtime/**'
-      - 'm3/tooling/jmod-recipes/CPU_TOOL_CATEGORY_MATRIX_20261017.tsv'
-      - 'm3/tooling/jmod-recipes/CPU_TOOL_HISTOGRAM_ADMISSION_20261017.md'
-      - 'm3/docs/name-mapping.d/m3-cpu-byte-histogram-20261017.json'
-      - '.github/workflows/m3-cpu-byte-histogram-20261017.yml'
 
 permissions:
   contents: read

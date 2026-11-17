@@ -2,20 +2,26 @@
 # SPDX-License-Identifier: Apache-2.0
 name: M3 first release admission
 
+# Former triggers (below, as of the move) now start job(s) 'm3-first-release-admission__*' in
+# .github/workflows/checks-superset-01.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     pull_request:
+#       paths:
+#         - 'M3-SYNEXIA-NOTICE.md'
+#         - 'M3-SYNEXIA-RIGHTS.md'
+#         - 'M3-SYNEXIA-AUTHORS.md'
+#         - 'm3/**'
+#         - 'src/java.base/share/classes/jdk/m3/precompute/**'
+#         - 'test/jdk/jdk/m3/precompute/**'
+#         - '.github/workflows/m3-first-release-admission.yml'
+#         - '.github/workflows/m3-release.yml'
+#     push:
+#       branches:
+#         - 'release/**'
+#     workflow_dispatch:
 on:
-  pull_request:
-    paths:
-      - 'M3-SYNEXIA-NOTICE.md'
-      - 'M3-SYNEXIA-RIGHTS.md'
-      - 'M3-SYNEXIA-AUTHORS.md'
-      - 'm3/**'
-      - 'src/java.base/share/classes/jdk/m3/precompute/**'
-      - 'test/jdk/jdk/m3/precompute/**'
-      - '.github/workflows/m3-first-release-admission.yml'
-      - '.github/workflows/m3-release.yml'
-  push:
-    branches:
-      - 'release/**'
   workflow_dispatch:
 
 permissions:

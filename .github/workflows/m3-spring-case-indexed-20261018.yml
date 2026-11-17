@@ -1,16 +1,22 @@
 # SPDX-License-Identifier: Apache-2.0
 name: M3 Spring case-indexed SDK and retained JNI proof
+# Former triggers (below, as of the move) now start job(s) 'm3-spring-case-indexed-20261018__*' in
+# .github/workflows/checks-superset-05.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     pull_request:
+#       paths:
+#         - "m3/collections/interop/src/main/java/jdk/m3/collections/interop/M3SpringCaseInsensitiveMap.java"
+#         - "m3/collections/interop/src/test/java/jdk/m3/collections/interop/M3SpringCaseInsensitive*.java"
+#         - "m3/collections/interop/qualification/spring-case-indexed-20261018/**"
+#         - "m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-spring-case-indexed-20261018/**"
+#         - "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-spring-case-indexed-20261018.yml"
+#         - ".github/workflows/m3-spring-case-indexed-20261018.yml"
+#     push:
+#       branches: [m3/spring-case-indexed-receiver-20261018]
 on:
-  pull_request:
-    paths:
-      - "m3/collections/interop/src/main/java/jdk/m3/collections/interop/M3SpringCaseInsensitiveMap.java"
-      - "m3/collections/interop/src/test/java/jdk/m3/collections/interop/M3SpringCaseInsensitive*.java"
-      - "m3/collections/interop/qualification/spring-case-indexed-20261018/**"
-      - "m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-spring-case-indexed-20261018/**"
-      - "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-spring-case-indexed-20261018.yml"
-      - ".github/workflows/m3-spring-case-indexed-20261018.yml"
-  push:
-    branches: [m3/spring-case-indexed-receiver-20261018]
+  workflow_dispatch:
 permissions:
   contents: read
 concurrency:

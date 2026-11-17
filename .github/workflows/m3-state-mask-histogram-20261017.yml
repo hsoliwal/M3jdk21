@@ -1,20 +1,26 @@
 # Copyright 2026 Hitesh Soliwal and contributors. SPDX-License-Identifier: Apache-2.0
 name: M3 state mask histogram Java21 JNI source proof
+# Former triggers (below, as of the move) now start job(s) 'm3-state-mask-histogram-20261017__*' in
+# .github/workflows/checks-superset-02.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     pull_request:
+#       paths:
+#         - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3StateMaskHistogram.java'
+#         - 'src/jdk.m3.collections/share/native/libm3collections/collections/m3_state_mask_histogram.c'
+#         - 'test/jdk/jdk/m3/collections/M3StateMaskHistogram*'
+#         - 'm3/collections/recipe/state-mask-histogram-20261017/**'
+#         - 'm3/collections/algorithm-catalog/state-mask-histogram-20261017.tsv'
+#         - '.github/workflows/m3-state-mask-histogram-20261017.yml'
+#     push:
+#       branches: [master]
+#       paths:
+#         - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3StateMaskHistogram.java'
+#         - 'src/jdk.m3.collections/share/native/libm3collections/collections/m3_state_mask_histogram.c'
+#         - 'test/jdk/jdk/m3/collections/M3StateMaskHistogram*'
+#     workflow_dispatch:
 on:
-  pull_request:
-    paths:
-      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3StateMaskHistogram.java'
-      - 'src/jdk.m3.collections/share/native/libm3collections/collections/m3_state_mask_histogram.c'
-      - 'test/jdk/jdk/m3/collections/M3StateMaskHistogram*'
-      - 'm3/collections/recipe/state-mask-histogram-20261017/**'
-      - 'm3/collections/algorithm-catalog/state-mask-histogram-20261017.tsv'
-      - '.github/workflows/m3-state-mask-histogram-20261017.yml'
-  push:
-    branches: [master]
-    paths:
-      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3StateMaskHistogram.java'
-      - 'src/jdk.m3.collections/share/native/libm3collections/collections/m3_state_mask_histogram.c'
-      - 'test/jdk/jdk/m3/collections/M3StateMaskHistogram*'
   workflow_dispatch:
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}

@@ -1,18 +1,24 @@
 # SPDX-License-Identifier: Apache-2.0
 name: M3 owned Apache BidiMap
+# Former triggers (below, as of the move) now start job(s) 'm3-owned-apache-bidimap__*' in
+# .github/workflows/checks-superset-08.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     pull_request:
+#       paths:
+#         - 'src/jdk.m3.collections/share/classes/**'
+#         - 'src/jdk.m3.collections/share/classes/jdk/m3/arrays/**'
+#         - 'src/jdk.m3.collections/share/native/libm3arrays/**'
+#         - 'test/jdk/jdk/m3/arrays/**'
+#         - 'test/jdk/jdk/**/collections/**'
+#         - 'm3/native/include/**'
+#         - 'm3/collections/implementations/apache/**'
+#         - 'm3/collections/recipe/owned-apache-bidimap-20261017/**'
+#         - 'm3/collections/qualification/owned-apache-bidimap-20261017/**'
+#         - '.github/workflows/m3-owned-apache-bidimap.yml'
 on:
-  pull_request:
-    paths:
-      - 'src/jdk.m3.collections/share/classes/**'
-      - 'src/jdk.m3.collections/share/classes/jdk/m3/arrays/**'
-      - 'src/jdk.m3.collections/share/native/libm3arrays/**'
-      - 'test/jdk/jdk/m3/arrays/**'
-      - 'test/jdk/jdk/**/collections/**'
-      - 'm3/native/include/**'
-      - 'm3/collections/implementations/apache/**'
-      - 'm3/collections/recipe/owned-apache-bidimap-20261017/**'
-      - 'm3/collections/qualification/owned-apache-bidimap-20261017/**'
-      - '.github/workflows/m3-owned-apache-bidimap.yml'
+  workflow_dispatch:
 permissions:
   contents: read
 concurrency:

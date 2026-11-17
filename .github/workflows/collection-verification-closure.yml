@@ -1,11 +1,17 @@
 # SPDX-License-Identifier: Apache-2.0
 name: Collection verification module closure
+# Former triggers (below, as of the move) now start job(s) 'collection-verification-closure__*' in
+# .github/workflows/checks-superset-05.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     pull_request:
+#       paths:
+#         - 'm3/collections/verification/filtered-object-deques-20261017/verify.sh'
+#         - 'm3/collections/verification/primitive-filtered-sequences-20261017/verify.sh'
+#         - '.github/workflows/collection-verification-closure.yml'
+#     workflow_dispatch:
 on:
-  pull_request:
-    paths:
-      - 'm3/collections/verification/filtered-object-deques-20261017/verify.sh'
-      - 'm3/collections/verification/primitive-filtered-sequences-20261017/verify.sh'
-      - '.github/workflows/collection-verification-closure.yml'
   workflow_dispatch:
 permissions:
   contents: read

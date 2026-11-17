@@ -1,13 +1,19 @@
 # SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
 # SPDX-License-Identifier: Apache-2.0
 name: SyntaxTree ten-plane atomic growth Java21
+# Former triggers (below, as of the move) now start job(s) 'm3-syntax-tree-atomic-growth-java21__*' in
+# .github/workflows/checks-superset-04.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     pull_request:
+#       paths:
+#         - 'm3/ast/src/main/java/jdk/m3/ast/SyntaxTree.java'
+#         - 'm3/ast/src/test/java/jdk/m3/ast/M3Syntax*Growth*.java'
+#         - 'm3/ast/src/test/java/jdk/m3/ast/M3SyntaxTreeAtomic*Contract.java'
+#         - '.github/workflows/m3-syntax-tree-atomic-growth-java21.yml'
+#     workflow_dispatch:
 on:
-  pull_request:
-    paths:
-      - 'm3/ast/src/main/java/jdk/m3/ast/SyntaxTree.java'
-      - 'm3/ast/src/test/java/jdk/m3/ast/M3Syntax*Growth*.java'
-      - 'm3/ast/src/test/java/jdk/m3/ast/M3SyntaxTreeAtomic*Contract.java'
-      - '.github/workflows/m3-syntax-tree-atomic-growth-java21.yml'
   workflow_dispatch:
 permissions:
   contents: read

@@ -1,12 +1,18 @@
 # SPDX-License-Identifier: Apache-2.0
 name: M3 CPU text donor Java 21 oracle
 
+# Former triggers (below, as of the move) now start job(s) 'm3-cpu-text-java21__*' in
+# .github/workflows/checks-superset-07.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     pull_request:
+#       paths:
+#         - '.github/workflows/m3-cpu-text-java21.yml'
+#         - 'm3/tooling/module-packs/cpu-tools/src/**'
+#         - 'm3/tooling/module-packs/cpu-tools/fixtures/M3DonorToolsTest.java'
+#     workflow_dispatch:
 on:
-  pull_request:
-    paths:
-      - '.github/workflows/m3-cpu-text-java21.yml'
-      - 'm3/tooling/module-packs/cpu-tools/src/**'
-      - 'm3/tooling/module-packs/cpu-tools/fixtures/M3DonorToolsTest.java'
   workflow_dispatch:
 
 permissions:

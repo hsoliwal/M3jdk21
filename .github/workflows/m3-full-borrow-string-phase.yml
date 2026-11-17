@@ -1,32 +1,38 @@
 # SPDX-License-Identifier: Apache-2.0
 name: M3 full-borrow String phase custody
 
+# Former triggers (below, as of the move) now start job(s) 'm3-full-borrow-string-phase__*' in
+# .github/workflows/checks-superset-06.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     pull_request:
+#       paths:
+#         - "m3/m3-import/current-full-borrow/STRING_PHASE.md"
+#         - "m3/m3-import/current-full-borrow/string-source-target-map.tsv"
+#         - "m3/m3-import/current-full-borrow/string-phase-gates.tsv"
+#         - "m3/m3-import/current-full-borrow/string-phase-work-orders.tsv"
+#         - "m3/m3-import/current-full-borrow/check_string_phase.py"
+#         - "m3/m3-import/current-full-borrow/check_string_phase_closure.py"
+#         - "m3/m3-import/current-full-borrow/receiver-status.tsv"
+#         - "m3/compatibility/m3-string-focused-recipe-receipt-20261008.tsv"
+#         - "m3/compatibility/m3-regex-oracle-harness-receipt.json"
+#         - "m3/compatibility/m3-regex-required-literal-receipt.json"
+#         - "m3/compatibility/m3-string-utf16-differential-receipt.json"
+#         - "m3/compatibility/m3-string-owner-range-lifetime-receipt.json"
+#         - "m3/compatibility/m3-string-jni-shadow-lifetime-receipt.json"
+#         - "m3/compatibility/m3-string-representation-consumers-receipt.json"
+#         - "m3/compatibility/m3-string-phase1-resources-receipt.json"
+#         - "m3/compatibility/m3-string-phase-checker-successor-20261013.json"
+#         - "m3/compatibility/test_m3_string_phase_checker_successor.py"
+#         - "m3/compatibility/m3-string-concat-dag-successor-20261013.json"
+#         - "m3/compatibility/test_m3_string_concat_dag_successor.py"
+#         - "m3/runtime-integration/check-m3string-concat-reference-dag.py"
+#         - "test/jdk/java/lang/String/M3StringConcatReferenceDagTest.java"
+#         - "m3/docs/name-mapping.json"
+#         - ".github/workflows/m3-full-borrow-string-phase.yml"
+#     workflow_dispatch:
 on:
-  pull_request:
-    paths:
-      - "m3/m3-import/current-full-borrow/STRING_PHASE.md"
-      - "m3/m3-import/current-full-borrow/string-source-target-map.tsv"
-      - "m3/m3-import/current-full-borrow/string-phase-gates.tsv"
-      - "m3/m3-import/current-full-borrow/string-phase-work-orders.tsv"
-      - "m3/m3-import/current-full-borrow/check_string_phase.py"
-      - "m3/m3-import/current-full-borrow/check_string_phase_closure.py"
-      - "m3/m3-import/current-full-borrow/receiver-status.tsv"
-      - "m3/compatibility/m3-string-focused-recipe-receipt-20261008.tsv"
-      - "m3/compatibility/m3-regex-oracle-harness-receipt.json"
-      - "m3/compatibility/m3-regex-required-literal-receipt.json"
-      - "m3/compatibility/m3-string-utf16-differential-receipt.json"
-      - "m3/compatibility/m3-string-owner-range-lifetime-receipt.json"
-      - "m3/compatibility/m3-string-jni-shadow-lifetime-receipt.json"
-      - "m3/compatibility/m3-string-representation-consumers-receipt.json"
-      - "m3/compatibility/m3-string-phase1-resources-receipt.json"
-      - "m3/compatibility/m3-string-phase-checker-successor-20261013.json"
-      - "m3/compatibility/test_m3_string_phase_checker_successor.py"
-      - "m3/compatibility/m3-string-concat-dag-successor-20261013.json"
-      - "m3/compatibility/test_m3_string_concat_dag_successor.py"
-      - "m3/runtime-integration/check-m3string-concat-reference-dag.py"
-      - "test/jdk/java/lang/String/M3StringConcatReferenceDagTest.java"
-      - "m3/docs/name-mapping.json"
-      - ".github/workflows/m3-full-borrow-string-phase.yml"
   workflow_dispatch:
 
 permissions:

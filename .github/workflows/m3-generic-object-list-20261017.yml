@@ -1,14 +1,20 @@
 # SPDX-License-Identifier: Apache-2.0
 name: M3 generic object collections Java/JNI receiver
+# Former triggers (below, as of the move) now start job(s) 'm3-generic-object-list-20261017__*' in
+# .github/workflows/checks-superset-08.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     pull_request:
+#       paths:
+#         - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3ArrayList.java'
+#         - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3IndexedListSnapshot.java'
+#         - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3GenericCollections.java'
+#         - 'test/jdk/jdk/m3/collections/M3GenericArrayList*.java'
+#         - 'm3/collections/qualification/m3-generic-object-list-20261017/**'
+#         - '.github/workflows/m3-generic-object-list-20261017.yml'
+#     workflow_dispatch:
 on:
-  pull_request:
-    paths:
-      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3ArrayList.java'
-      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3IndexedListSnapshot.java'
-      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3GenericCollections.java'
-      - 'test/jdk/jdk/m3/collections/M3GenericArrayList*.java'
-      - 'm3/collections/qualification/m3-generic-object-list-20261017/**'
-      - '.github/workflows/m3-generic-object-list-20261017.yml'
   workflow_dispatch:
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}

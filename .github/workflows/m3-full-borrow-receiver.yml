@@ -1,16 +1,22 @@
 name: M3 Synexia full-borrow receiver
 
+# Former triggers (below, as of the move) now start job(s) 'm3-full-borrow-receiver__*' in
+# .github/workflows/checks-superset-04.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     pull_request:
+#       paths:
+#         - "AGENTS.md"
+#         - "m3/compatibility/check_m3_full_family.py"
+#         - "m3/compatibility/check_m3_full_borrow_receiver.py"
+#         - "m3/compatibility/check_m3_full_borrow_intake_20261011.py"
+#         - "m3/m3-import/M3_CANONICAL_FAMILY_RECEIVER.md"
+#         - "m3/m3-import/current-full-borrow/**"
+#         - "m3/m3-import/intakes/full-borrow-20261011/**"
+#         - ".github/workflows/m3-full-borrow-receiver.yml"
+#     workflow_dispatch:
 on:
-  pull_request:
-    paths:
-      - "AGENTS.md"
-      - "m3/compatibility/check_m3_full_family.py"
-      - "m3/compatibility/check_m3_full_borrow_receiver.py"
-      - "m3/compatibility/check_m3_full_borrow_intake_20261011.py"
-      - "m3/m3-import/M3_CANONICAL_FAMILY_RECEIVER.md"
-      - "m3/m3-import/current-full-borrow/**"
-      - "m3/m3-import/intakes/full-borrow-20261011/**"
-      - ".github/workflows/m3-full-borrow-receiver.yml"
   workflow_dispatch:
 
 permissions:

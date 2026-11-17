@@ -1,16 +1,22 @@
 # SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
 # SPDX-License-Identifier: Apache-2.0
 name: M3JDK21 required/excluded offset-window Java and JNI
+# Former triggers (below, as of the move) now start job(s) 'm3-required-excluded-offset-windows-20261021__*' in
+# .github/workflows/checks-superset-06.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     pull_request:
+#       paths:
+#         - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3IndexMaskCompactor.java'
+#         - 'src/jdk.m3.collections/share/native/libm3collections/collections/m3_index_mask_compactor.c'
+#         - 'test/jdk/jdk/m3/collections/M3RequiredExcludedWindow*'
+#         - 'm3/collections/qualification/required-excluded-windows-20261021/**'
+#         - 'm3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-required-excluded-offset-window*.yml'
+#         - 'm3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-required-excluded-offset-window*/**'
+#         - '.github/workflows/m3-required-excluded-offset-windows-20261021.yml'
+#     workflow_dispatch:
 on:
-  pull_request:
-    paths:
-      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3IndexMaskCompactor.java'
-      - 'src/jdk.m3.collections/share/native/libm3collections/collections/m3_index_mask_compactor.c'
-      - 'test/jdk/jdk/m3/collections/M3RequiredExcludedWindow*'
-      - 'm3/collections/qualification/required-excluded-windows-20261021/**'
-      - 'm3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-required-excluded-offset-window*.yml'
-      - 'm3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-required-excluded-offset-window*/**'
-      - '.github/workflows/m3-required-excluded-offset-windows-20261021.yml'
   workflow_dispatch:
 permissions:
   contents: read

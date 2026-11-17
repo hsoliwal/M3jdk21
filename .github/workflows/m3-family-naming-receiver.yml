@@ -1,15 +1,21 @@
 # SPDX-License-Identifier: Apache-2.0
 name: M3 Synexia family naming receiver
 
+# Former triggers (below, as of the move) now start job(s) 'm3-family-naming-receiver__*' in
+# .github/workflows/checks-superset-05.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     pull_request:
+#       paths:
+#         - 'm3/compatibility/M3_FAMILY_NAMING_RECEIVER.md'
+#         - 'm3/compatibility/m3-family-naming-pin.tsv'
+#         - 'm3/compatibility/m3-family-naming-target-disposition.tsv'
+#         - 'm3/compatibility/check_m3_family_naming.py'
+#         - 'm3/docs/M3JDK_M3_PORTING_INVARIANT.md'
+#         - '.github/workflows/m3-family-naming-receiver.yml'
+#     workflow_dispatch:
 on:
-  pull_request:
-    paths:
-      - 'm3/compatibility/M3_FAMILY_NAMING_RECEIVER.md'
-      - 'm3/compatibility/m3-family-naming-pin.tsv'
-      - 'm3/compatibility/m3-family-naming-target-disposition.tsv'
-      - 'm3/compatibility/check_m3_family_naming.py'
-      - 'm3/docs/M3JDK_M3_PORTING_INVARIANT.md'
-      - '.github/workflows/m3-family-naming-receiver.yml'
   workflow_dispatch:
 
 permissions:

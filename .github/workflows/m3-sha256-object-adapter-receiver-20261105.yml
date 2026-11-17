@@ -1,25 +1,31 @@
 # SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
 # SPDX-License-Identifier: Apache-2.0
 name: M3 SHA256 Object adapter receiver source and JNI ABI gate
+# Former triggers (below, as of the move) now start job(s) 'm3-sha256-object-adapter-receiver-20261105__*' in
+# .github/workflows/checks-superset-08.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     push:
+#       branches:
+#         - codex/m3-sha256-object-adapter-20261105
+#       paths:
+#         - 'src/java.base/share/classes/java/lang/Object.java'
+#         - 'src/java.base/share/classes/java/security/SHA256Adapter.java'
+#         - 'test/jdk/java/lang/Object/SHA256ObjectAdapterTest.java'
+#         - 'test/jdk/java/lang/Object/libSHA256ObjectAdapterTest.c'
+#         - 'm3/qualification/sha256-object-adapter-20261105/**'
+#         - '.github/workflows/m3-sha256-object-adapter-receiver-20261105.yml'
+#     pull_request:
+#       paths:
+#         - 'src/java.base/share/classes/java/lang/Object.java'
+#         - 'src/java.base/share/classes/java/security/SHA256Adapter.java'
+#         - 'test/jdk/java/lang/Object/SHA256ObjectAdapterTest.java'
+#         - 'test/jdk/java/lang/Object/libSHA256ObjectAdapterTest.c'
+#         - 'm3/qualification/sha256-object-adapter-20261105/**'
+#         - '.github/workflows/m3-sha256-object-adapter-receiver-20261105.yml'
+#     workflow_dispatch:
 on:
-  push:
-    branches:
-      - codex/m3-sha256-object-adapter-20261105
-    paths:
-      - 'src/java.base/share/classes/java/lang/Object.java'
-      - 'src/java.base/share/classes/java/security/SHA256Adapter.java'
-      - 'test/jdk/java/lang/Object/SHA256ObjectAdapterTest.java'
-      - 'test/jdk/java/lang/Object/libSHA256ObjectAdapterTest.c'
-      - 'm3/qualification/sha256-object-adapter-20261105/**'
-      - '.github/workflows/m3-sha256-object-adapter-receiver-20261105.yml'
-  pull_request:
-    paths:
-      - 'src/java.base/share/classes/java/lang/Object.java'
-      - 'src/java.base/share/classes/java/security/SHA256Adapter.java'
-      - 'test/jdk/java/lang/Object/SHA256ObjectAdapterTest.java'
-      - 'test/jdk/java/lang/Object/libSHA256ObjectAdapterTest.c'
-      - 'm3/qualification/sha256-object-adapter-20261105/**'
-      - '.github/workflows/m3-sha256-object-adapter-receiver-20261105.yml'
   workflow_dispatch:
 permissions:
   contents: read

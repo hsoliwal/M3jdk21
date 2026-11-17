@@ -1,11 +1,17 @@
 name: M3 Filtered List Restored History Java JNI
+# Former triggers (below, as of the move) now start job(s) 'm3-filtered-list-history-restore__*' in
+# .github/workflows/checks-superset-05.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     pull_request:
+#       paths:
+#         - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3FilteredLists.java'
+#         - 'test/jdk/jdk/m3/collections/M3FilteredLists*'
+#         - 'm3/collections/qualification/filtered-list-history-restore-20261017/**'
+#         - '.github/workflows/m3-filtered-list-history-restore.yml'
+#     workflow_dispatch:
 on:
-  pull_request:
-    paths:
-      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/M3FilteredLists.java'
-      - 'test/jdk/jdk/m3/collections/M3FilteredLists*'
-      - 'm3/collections/qualification/filtered-list-history-restore-20261017/**'
-      - '.github/workflows/m3-filtered-list-history-restore.yml'
   workflow_dispatch:
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}

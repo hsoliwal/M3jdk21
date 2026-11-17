@@ -2,16 +2,22 @@
 # SPDX-License-Identifier: Apache-2.0
 name: M3 CPU byte statistics Java21 source and recipe custody
 
+# Former triggers (below, as of the move) now start job(s) 'm3-cpu-byte-statistics-20261017__*' in
+# .github/workflows/checks-superset-06.yml, gated by the same filters (.github/checks-superset/filters.json).
+# This file keeps the jobs as the source of truth and runs by hand; after editing them run
+#   python3 .github/checks-superset/generate.py build
+#   on:
+#     pull_request:
+#       paths:
+#         - 'm3/ports/capability-runtime/src/main/java/jdk/m3/runtime/capability/ByteStatistics.java'
+#         - 'm3/ports/capability-runtime/src/test/java/jdk/m3/runtime/capability/ByteStatisticsChecks.java'
+#         - 'm3/ports/capability-runtime/BYTE_STATISTICS_RECEIVER.md'
+#         - 'm3/ports/capability-runtime/CPU_TOOLS_FAMILY_CATALOGUE_20261017.tsv'
+#         - 'm3/ports/capability-runtime/RECEIVING_SHA256.tsv'
+#         - 'm3/ports/capability-runtime/verify_byte_statistics.py'
+#         - '.github/workflows/m3-cpu-byte-statistics-20261017.yml'
+#     workflow_dispatch:
 on:
-  pull_request:
-    paths:
-      - 'm3/ports/capability-runtime/src/main/java/jdk/m3/runtime/capability/ByteStatistics.java'
-      - 'm3/ports/capability-runtime/src/test/java/jdk/m3/runtime/capability/ByteStatisticsChecks.java'
-      - 'm3/ports/capability-runtime/BYTE_STATISTICS_RECEIVER.md'
-      - 'm3/ports/capability-runtime/CPU_TOOLS_FAMILY_CATALOGUE_20261017.tsv'
-      - 'm3/ports/capability-runtime/RECEIVING_SHA256.tsv'
-      - 'm3/ports/capability-runtime/verify_byte_statistics.py'
-      - '.github/workflows/m3-cpu-byte-statistics-20261017.yml'
   workflow_dispatch:
 
 permissions:
