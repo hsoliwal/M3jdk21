@@ -4,7 +4,7 @@
 
 /* Java: stable signed-int selection; no heap object handles or unsafe GC pointers cross JNI. */
 JNIEXPORT jint JNICALL
-Java_jdk_internal_m3_collections_mat_MatIntFilterKernel_selectGreaterOrEqualNative(
+Java_jdk_internal_m3_collections_mat_IntFilterKernel_selectGreaterOrEqualNative(
         JNIEnv *env, jclass owner, jintArray values, jint threshold, jintArray result) {
     (void) owner;
     if (values == NULL || result == NULL) {

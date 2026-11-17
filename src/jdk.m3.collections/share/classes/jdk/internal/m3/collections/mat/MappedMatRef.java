@@ -37,7 +37,7 @@ public final class MappedMatRef<T> {
     public T value() { return pool.value(id); }
     public byte[] canonicalBytes() { return pool.bytes(id); }
     public long contentHash64() { return pool.contentHash64(id); }
-    public MatPortableRef portableRef() { return pool.portableRef(id); }
+    public PortableRef portableRef() { return pool.portableRef(id); }
 
     @Override
     public boolean equals(Object other) {

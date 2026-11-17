@@ -31,23 +31,23 @@ import java.util.Objects;
  * RELOCATE_M3_OWNER v4 (mat batch: identifiers and package only; bytecode equal to the source modulo names).
  */
 public final class MappedMatPool<T> {
-    private final MatCodec<T> codec;
-    private final MatLimits limits;
+    private final Codec<T> codec;
+    private final Limits limits;
     private final MappedByteBuffer image;
-    private final MatPoolImage.Layout layout;
+    private final PoolImage.Layout layout;
 
     private MappedMatPool(
-            MatCodec<T> codec,
-            MatLimits limits,
+            Codec<T> codec,
+            Limits limits,
             MappedByteBuffer image,
-            MatPoolImage.Layout layout) {
+            PoolImage.Layout layout) {
         this.codec = codec;
         this.limits = limits;
         this.image = image;
         this.layout = layout;
     }
 
-    public static <T> MappedMatPool<T> open(Path path, MatCodec<T> codec, MatLimits limits)
+    public static <T> MappedMatPool<T> open(Path path, Codec<T> codec, Limits limits)
             throws IOException {
         Objects.requireNonNull(path, "path");
         Objects.requireNonNull(codec, "codec");
@@ -60,13 +60,13 @@ public final class MappedMatPool<T> {
             }
             MappedByteBuffer mapped = channel.map(FileChannel.MapMode.READ_ONLY, 0, size);
             mapped.order(ByteOrder.BIG_ENDIAN);
-            MatPoolImage.Layout layout = MatPoolImage.validate(mapped, codec, limits);
+            PoolImage.Layout layout = PoolImage.validate(mapped, codec, limits);
             return new MappedMatPool<>(codec, limits, mapped, layout);
         }
     }
 
-    public MatCodec<T> codec() { return codec; }
-    public MatLimits limits() { return limits; }
+    public Codec<T> codec() { return codec; }
+    public Limits limits() { return limits; }
     public int size() { return layout.count(); }
     public String imageSha256() { return layout.sha256(); }
     public long payloadBytes() { return image.capacity(); }
@@ -76,9 +76,9 @@ public final class MappedMatPool<T> {
         return new MappedMatRef<>(this, id);
     }
 
-    public MatPortableRef portableRef(int id) {
+    public PortableRef portableRef(int id) {
         checkId(id);
-        return new MatPortableRef(codec.typeId(), layout.sha256(), id);
+        return new PortableRef(codec.typeId(), layout.sha256(), id);
     }
 
     public T value(int id) { return codec.decode(bytes(id)); }
@@ -110,9 +110,9 @@ public final class MappedMatPool<T> {
     public int idOfBytes(byte[] canonical) {
         Objects.requireNonNull(canonical, "canonical");
         limits.valueBytes(canonical.length);
-        long hash = MatHash.fnv64(canonical);
+        long hash = Hash.fnv64(canonical);
         int mask = layout.slotsCount() - 1;
-        int slot = MatHash.mix(MatHash.fold32(hash)) & mask;
+        int slot = Hash.mix(Hash.fold32(hash)) & mask;
         for (int probe = 0; probe < layout.slotsCount(); probe++) {
             int stored = image.getInt(layout.slotsStart() + slot * Integer.BYTES);
             if (stored == 0) return -1;
@@ -126,7 +126,7 @@ public final class MappedMatPool<T> {
     public boolean contains(T value) { return idOf(value) >= 0; }
 
     /** Materialize one heap pool with identical IDs from the already-verified image. */
-    public MatPool<T> toHeap() {
+    public Pool<T> toHeap() {
         byte[] arena = new byte[layout.arenaBytes()];
         ByteBuffer view = image.duplicate();
         view.position(layout.arenaStart()).limit(layout.trailerStart());
@@ -139,7 +139,7 @@ public final class MappedMatPool<T> {
         for (int i = 0; i < hashes.length; i++) {
             hashes[i] = image.getLong(layout.hashesStart() + i * Long.BYTES);
         }
-        return MatPool.fromCanonical(codec, limits, arena, offsets, hashes);
+        return Pool.fromCanonical(codec, limits, arena, offsets, hashes);
     }
 
     private int offset(int index) {

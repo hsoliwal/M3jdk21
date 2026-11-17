@@ -22,8 +22,8 @@ import java.util.OptionalInt;
 import java.util.stream.IntStream;
 
 /**
- * MatRoaringIntSet as on master at 199c6bc971ca (before the decode and atomization leaf), renamed:
- * the reference of MatRoaringIntSetDecodeTest. Not used outside the test.
+ * RoaringIntSet as on master at 199c6bc971ca (before the decode and atomization leaf), renamed:
+ * the reference of RoaringIntSetDecodeTest. Not used outside the test.
  */
 final class RoaringReference {
     public enum ContainerKind { ARRAY, RUNS, BITMAP }

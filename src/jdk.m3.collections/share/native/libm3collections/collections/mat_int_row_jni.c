@@ -1,6 +1,6 @@
 /* SPDX-License-Identifier: Apache-2.0 */
 /* Lineage: com.synexia 00bd2142b0ce synexia-mat-value/src/main/native/mat_int_row_jni.c blob 1fd42eeb33de (com.synexia.matvalue.MatIntRowKernel -> jdk.internal.m3.collections.mat.MatIntRowKernel, 2 symbols). JNI names relocated by NATIVE_SYMBOL_RELOCATE v1. */
-#include "jdk_internal_m3_collections_mat_MatIntRowKernel.h"
+#include "jdk_internal_m3_collections_mat_IntRowKernel.h"
 #include <stdint.h>
 #include <string.h>
 
@@ -10,7 +10,7 @@ _Static_assert(INT64_MIN == -INT64_MAX - INT64_C(1), "signed 64-bit two's comple
 
 enum { MAT_ROW_CHUNK = 512 };
 
-JNIEXPORT jlong JNICALL Java_jdk_internal_m3_collections_mat_MatIntRowKernel_hashNative0(
+JNIEXPORT jlong JNICALL Java_jdk_internal_m3_collections_mat_IntRowKernel_hashNative0(
         JNIEnv *env, jclass owner, jintArray values) {
     (void) owner;
     if (values == NULL) return (jlong) 0; /* Java wrapper validates non-null */
@@ -40,7 +40,7 @@ JNIEXPORT jlong JNICALL Java_jdk_internal_m3_collections_mat_MatIntRowKernel_has
     return (jlong) signed_result;
 }
 
-JNIEXPORT jboolean JNICALL Java_jdk_internal_m3_collections_mat_MatIntRowKernel_equalNative0(
+JNIEXPORT jboolean JNICALL Java_jdk_internal_m3_collections_mat_IntRowKernel_equalNative0(
         JNIEnv *env, jclass owner, jintArray left, jint left_offset,
         jintArray right, jint right_offset, jint length) {
     (void) owner;

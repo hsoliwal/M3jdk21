@@ -7,7 +7,7 @@
 #include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
-#include "jdk_internal_m3_collections_mat_MatCsrGraph.h"
+#include "jdk_internal_m3_collections_mat_CsrGraph.h"
 
 static void fail(JNIEnv *env, const char *name, const char *message) {
     jclass type = (*env)->FindClass(env, name);
@@ -18,7 +18,7 @@ static void fail(JNIEnv *env, const char *name, const char *message) {
 }
 
 JNIEXPORT jintArray JNICALL
-Java_jdk_internal_m3_collections_mat_MatCsrGraph_transposeTargetsNative(
+Java_jdk_internal_m3_collections_mat_CsrGraph_transposeTargetsNative(
         JNIEnv *env, jclass ignored, jintArray offsets, jintArray targets,
         jintArray transposed) {
     (void) ignored;
