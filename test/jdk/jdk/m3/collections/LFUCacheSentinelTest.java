@@ -104,7 +104,8 @@ class LFUCacheSentinelTest {
         };
     }
 
-    /** LFUCache allocates through ArrayNative; without the M3 array JNI library it cannot be built. */
+    /** LFUCache allocates through ArrayNative; without the M3 array JNI library it cannot be built.
+     * */
     private static boolean arraysNativeLoaded() {
         try {
             new LFUCache<Object, Object>(1);
