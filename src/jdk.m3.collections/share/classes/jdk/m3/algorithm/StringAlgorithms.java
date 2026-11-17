@@ -404,9 +404,9 @@ public final class StringAlgorithms {
     //FLLDCIM: FOLD 739221ead5fa AdvancedStringAlgorithms.suffixArray
     //FLLDCIM: LEETCODIFY — owner reuse: IntSuffixArray counting-sort doubling
     /**
-     * Suffix array of UTF-16 code-unit indices, built by {@code IntSuffixArray}: prefix doubling with
-     * two stable counting sorts per round over compressed ranks, O(n log n) time and O(n) primitive
-     * storage. Suffixes are distinct, so the array is unique.
+     * Suffix array of UTF-16 code-unit indices, built by {@code IntSuffixArray}: prefix
+     * doubling with two stable counting sorts per round over compressed ranks, O(n log n) time
+     * and O(n) primitive storage. Suffixes are distinct, so the array is unique.
      */
     public static int[] suffixArray(String value) {
         Objects.requireNonNull(value, "value");
