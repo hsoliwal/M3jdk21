@@ -1,0 +1,34 @@
+PROVE_LAYOUT_INVARIANT v1 on origin/master dc87ac9178a595e4b45a08a0f61003dd7533ce9f
+STRING_LAYOUT_INVARIANT v1 applied: chValue at 17 sites + String(String)
+VM_STRING_LAYOUT_INVARIANT v1 applied
+== javac closure (master String.java + M3 closure vs stock java.base, -Xlint:all,-this-escape -Werror)
+round 1 javac_exit=0 errors=0
+-- before the recipe: exit above; after the recipe:
+round 1 javac_exit=0 errors=0
+== stock VM + edited java.base: -Dlayout.vmSites=false
+checked 40039 Strings, failures 0 (Java-made only: -Dlayout.vmSites=false)
+RESULT PASS
+== stock VM + edited java.base: -XX:-CompactStrings -Dlayout.vmSites=false
+checked 40039 Strings, failures 0 (Java-made only: -Dlayout.vmSites=false)
+RESULT PASS
+== stock VM + edited java.base: -Xcomp -XX:-TieredCompilation -Dlayout.vmSites=false
+checked 40039 Strings, failures 1 (Java-made only: -Dlayout.vmSites=false)
+StringBuilder.toString: chValue is null
+Exception in thread "main" java.lang.AssertionError: 1 Strings break the layout invariant
+	at StringLayoutInvariantTest.main(StringLayoutInvariantTest.java:104)
+== stock VM + edited java.base: -Xcomp -XX:-TieredCompilation -XX:-OptimizeStringConcat -Dlayout.vmSites=false
+checked 40039 Strings, failures 0 (Java-made only: -Dlayout.vmSites=false)
+RESULT PASS
+== stock VM + edited java.base: 
+checked 40039 Strings, failures 8
+literal: chValue is null
+empty literal: chValue is null
+Class.getName: chValue is null
+System property: chValue is null
+Thread.getName: chValue is null
+StackTraceElement: chValue is null
+intern: chValue is null
+new String(String literal): chValue is null
+Exception in thread "main" java.lang.AssertionError: 8 Strings break the layout invariant
+	at StringLayoutInvariantTest.main(StringLayoutInvariantTest.java:104)
+PROVE_LAYOUT_INVARIANT done

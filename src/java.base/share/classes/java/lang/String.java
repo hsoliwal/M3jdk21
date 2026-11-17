@@ -146,28 +146,31 @@ public final class String
                Constable, ConstantDesc {
 
     /**
-     * Compact-String compatibility shadow.
+     * The bytes of this string: Java 21 compatibility is the interned bytes.
      *
-     * <p>For M3-backed Strings this array is not canonical identity or canonical payload; it is a
-     * compatibility projection retained while remaining JDK/HotSpot consumers are migrated.
-     * Shadows produced from M3String are allocated by the JNI shadow boundary. Bootstrap Strings
-     * created before M3 activation retain the stock representation.</p>
+     * <p>M3JDK layout invariant (doc/m3/string-lane/STRING_LAYOUT_INVARIANT.md): every String of
+     * the JDK holds its text twice in Java 21 form, as these bytes (Latin-1 or UTF-16 by
+     * {@code coder}, exactly as Java 21 lays them out) and as the chars of {@link #chValue}. Both
+     * arrays are filled when the String is made, by every constructor and by every VM site that
+     * makes a String, and neither is ever written again. An M3-backed String keeps its canonical
+     * M3 owner and coordinate in {@code m3} as well; these bytes are then the JNI byte shadow of
+     * that text, never a sentinel.</p>
      *
-     * <p>M3JDK 21 retains the ordinary Java 21 String layout <em>as well as</em> its
-     * canonical M3 owner/coordinate. For a nonempty M3-backed String, this field refers
-     * to the VM-wide shared zero-length byte[] sentinel, not a duplicate spelling.
-     * The coder and m3 fields describe the real immutable text; native region readers
-     * traverse the interned arrays and OS-mapped owner ranges.</p>
-     *
-     * <p>A returned byte[] or char[] must remain a genuine mutable Java array with
-     * the ordinary identity and copy semantics. It is an explicit JNI-produced snapshot,
-     * never an alias to read-only or discontiguous OS-mapped storage. Java 21 String
-     * has no additional char[] instance field.</p>
-     *
-     * @implNote The field remains VM-trusted during the migration and is never mutated.
+     * @implNote This field is trusted by the VM and is a subject to constant folding if the
+     * String instance is constant. Overwriting it after construction will cause problems.
      */
     @Stable
     private final byte[] value;
+
+    /**
+     * The chars of this string: Java 21 compatibility is the interned chars.
+     *
+     * <p>A JNI-ready {@code char[]} of {@link #length()} UTF-16 units, filled when the String is
+     * made (layout invariant, see {@link #value}) and protected internally: it is never handed to
+     * a caller, which only ever receives a copy, and never written after construction.</p>
+     */
+    @Stable
+    private final char[] chValue;
 
     /**
      * Canonical M3JDK text value. Synexia MIndexString is the donor/reference structure; M3JDK
@@ -271,6 +274,7 @@ public final class String
         this.value = "".value;
         this.coder = "".coder;
         this.m3 = null;
+        this.chValue = layoutChars(this.value, this.coder, this.m3);
     }
 
     /**
@@ -286,9 +290,10 @@ public final class String
     @IntrinsicCandidate
     public String(String original) {
         M3String storage = original.m3();
-        this.value = storage == null ? original.value : storage.compatibilityValue();
+        this.value = original.value;
         this.coder = storage == null ? original.coder : storage.coder();
         this.m3 = storage;
+        this.chValue = original.chValue;
         this.hash = original.hash;
         this.hashIsZero = original.hashIsZero;
     }
@@ -370,14 +375,16 @@ public final class String
             this.value = "".value;
             this.coder = "".coder;
             this.m3 = null;
+            this.chValue = layoutChars(this.value, this.coder, this.m3);
             return;
         }
 
         M3String direct = maybeAdmitCodePoints(codePoints, offset, count);
         if (direct != null) {
-            this.value = direct.compatibilityValue();
+            this.value = direct.materialize();
             this.coder = direct.coder();
             this.m3 = direct;
+            this.chValue = layoutChars(this.value, this.coder, this.m3);
             return;
         }
 
@@ -387,11 +394,13 @@ public final class String
             this.value = val;
             this.coder = StringUTF16.coderFromArrayLen(val, count);
             this.m3 = null;
+            this.chValue = layoutChars(this.value, this.coder, this.m3);
             return;
         }
         this.value = StringUTF16.toBytes(codePoints, offset, count);
         this.coder = UTF16;
         this.m3 = null;
+        this.chValue = layoutChars(this.value, this.coder, this.m3);
     }
 
     /**
@@ -440,6 +449,7 @@ public final class String
             this.value = "".value;
             this.coder = "".coder;
             this.m3 = null;
+            this.chValue = layoutChars(this.value, this.coder, this.m3);
             return;
         }
         byte[] candidate;
@@ -456,9 +466,10 @@ public final class String
             candidateCoder = UTF16;
         }
         M3String storage = maybeAdmit(candidate, candidateCoder);
-        this.value = storage == null ? candidate : storage.compatibilityValue();
+        this.value = candidate;
         this.coder = storage == null ? candidateCoder : storage.coder();
         this.m3 = storage;
+        this.chValue = layoutChars(this.value, this.coder, this.m3);
     }
 
     /**
@@ -580,15 +591,17 @@ public final class String
 
     private String(M3Construction construction) {
         if (construction.storage != null) {
-            this.value = construction.storage.compatibilityValue();
+            this.value = construction.storage.materialize();
             this.coder = construction.storage.coder();
             this.m3 = construction.storage;
+            this.chValue = layoutChars(this.value, this.coder, this.m3);
             return;
         }
         M3String storage = maybeAdmit(construction.value, construction.coder);
-        this.value = storage == null ? construction.value : storage.compatibilityValue();
+        this.value = construction.value;
         this.coder = storage == null ? construction.coder : storage.coder();
         this.m3 = storage;
+        this.chValue = layoutChars(this.value, this.coder, this.m3);
     }
 
     private static final class M3Construction {
@@ -10897,14 +10910,16 @@ public final class String
             this.value = "".value;
             this.coder = "".coder;
             this.m3 = null;
+            this.chValue = layoutChars(this.value, this.coder, this.m3);
             return;
         }
 
         M3String direct = maybeAdmit(value, off, len);
         if (direct != null) {
-            this.value = direct.compatibilityValue();
+            this.value = direct.materialize();
             this.coder = direct.coder();
             this.m3 = direct;
+            this.chValue = layoutChars(this.value, this.coder, this.m3);
             return;
         }
 
@@ -10914,11 +10929,13 @@ public final class String
             this.value = val;
             this.coder = StringUTF16.coderFromArrayLen(val, len);
             this.m3 = null;
+            this.chValue = layoutChars(this.value, this.coder, this.m3);
             return;
         }
         this.value = StringUTF16.toBytes(value, off, len);
         this.coder = UTF16;
         this.m3 = null;
+        this.chValue = layoutChars(this.value, this.coder, this.m3);
     }
 
     /*
@@ -10939,9 +10956,10 @@ public final class String
                         length,
                         asb.isLatin1() ? LATIN1 : UTF16);
         if (direct != null) {
-            this.value = direct.compatibilityValue();
+            this.value = direct.materialize();
             this.coder = direct.coder();
             this.m3 = direct;
+            this.chValue = layoutChars(this.value, this.coder, this.m3);
             return;
         }
 
@@ -10964,6 +10982,7 @@ public final class String
         this.value = candidate;
         this.coder = candidateCoder;
         this.m3 = null;
+        this.chValue = layoutChars(this.value, this.coder, this.m3);
     }
 
    /*
@@ -10971,9 +10990,10 @@ public final class String
     */
     String(byte[] value, byte coder) {
         M3String storage = maybeAdmit(value, coder);
-        this.value = storage == null ? value : storage.compatibilityValue();
+        this.value = value;
         this.coder = storage == null ? coder : storage.coder();
         this.m3 = storage;
+        this.chValue = layoutChars(this.value, this.coder, this.m3);
     }
 
     private static M3String maybeAdmitCodePoints(
@@ -11016,13 +11036,24 @@ public final class String
     /** Trusted constructor for one canonical M3String storage body. */
     String(M3String storage) {
         M3String checked = Objects.requireNonNull(storage, "storage");
-        this.value = checked.compatibilityValue();
+        this.value = checked.materialize();
         this.coder = checked.coder();
         this.m3 = checked;
+        this.chValue = layoutChars(this.value, this.coder, this.m3);
     }
 
     M3String m3() {
         return m3;
+    }
+
+    /**
+     * The chars of the layout invariant for a String under construction: the JNI char shadow
+     * of its M3 text when it is M3-backed, otherwise its bytes inflated to UTF-16 units.
+     */
+    private static char[] layoutChars(byte[] bytes, byte coder, M3String storage) {
+        if (storage != null) return storage.charShadow();
+        return COMPACT_STRINGS && coder == LATIN1 ? StringLatin1.toChars(bytes)
+                                                 : StringUTF16.toChars(bytes);
     }
 
     private M3String ensureM3() {
@@ -11045,11 +11076,9 @@ public final class String
      */
     static byte[] m3AdmitNative(String value) {
         String checked = Objects.requireNonNull(value, "value");
-        M3String storage = checked.ensureM3();
-        // JNI NewString/NewStringUTF used a temporary Compact-String construction shadow.
-        // Once canonical M3 admission succeeds, discard that payload and retain only the VM
-        // layout sentinel. Future byte/char arrays are explicit JNI compatibility shadows.
-        return storage == null ? checked.value : storage.compatibilityValue();
+        checked.ensureM3();
+        // Layout invariant: the bytes the VM made stay this String's bytes after M3 admission.
+        return checked.value;
     }
 
     static boolean m3StorageRequested() {
@@ -11092,8 +11121,7 @@ public final class String
     }
 
     byte[] value() {
-        M3String storage = m3();
-        return storage == null ? value : storage.materialize();
+        return value;
     }
 
     boolean isLatin1() {

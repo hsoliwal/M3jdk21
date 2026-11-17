@@ -2412,9 +2412,9 @@ This flag is used only if \f[V]-XX:SegmentedCodeCache\f[R] is enabled.
 .TP
 \f[V]-XX:+OptimizeStringConcat\f[R]
 Enables the optimization of \f[V]String\f[R] concatenation operations.
-This option is enabled by default.
-To disable the optimization of \f[V]String\f[R] concatenation
-operations, specify \f[V]-XX:-OptimizeStringConcat\f[R].
+This option is disabled by default in M3JDK: the optimized code builds a
+\f[V]String\f[R] without its \f[V]char\f[R] array, which the M3JDK
+\f[V]String\f[R] layout invariant requires.
 .TP
 \f[V]-XX:+PrintAssembly\f[R]
 Enables printing of assembly code for bytecoded and native methods by

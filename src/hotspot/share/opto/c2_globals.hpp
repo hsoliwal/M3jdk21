@@ -509,7 +509,9 @@
   notproduct(bool, VerifyConnectionGraph , true,                            \
           "Verify Connection Graph construction in Escape Analysis")        \
                                                                             \
-  product(bool, OptimizeStringConcat, true,                                 \
+  /* M3JDK String layout invariant: off by default, because the        */ \
+  /* optimized Strings would be built without their chValue chars.      */ \
+  product(bool, OptimizeStringConcat, false,                                \
           "Optimize the construction of Strings by StringBuilder")          \
                                                                             \
   notproduct(bool, PrintOptimizeStringConcat, false,                        \
