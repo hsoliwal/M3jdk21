@@ -1,0 +1,390 @@
+// SPDX-License-Identifier: Apache-2.0 OR EPL-2.0
+// Copyright (c) 2026 Synexia, Hitesh Soliwal and others
+
+import java.io.IOException;
+import java.io.UncheckedIOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.function.Function;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.text.CaseUtils;
+import org.apache.commons.text.WordUtils;
+
+/**
+ * Donor-oracle proof of the CASE family on a stock JVM whose String carries the head method text.
+ * <p>{@code corpus <work> <CaseFolding.txt>} writes the oracle corpus: fold_texts.txt (texts for caseFold), pair_texts.txt
+ * (every string of 0..3 units over FOLD_UNITS, compared as all ordered pairs) and pair_extra.txt (explicit pairs: each
+ * code point with its Character case maps and its CaseFolding.txt folds, and window-seam pairs).
+ * <p>{@code check <work> <CaseFolding.txt>} runs the checks. In-JVM oracles: commons-lang3 3.22.0 StringUtils (capitalize,
+ * uncapitalize, swapCase), commons-text 1.15.0 WordUtils (capitalize, capitalizeFully, uncapitalize, initials with and
+ * without delimiters; swapCase) and CaseUtils (toCamelCase), on every BMP code point alone and in four contexts, every
+ * supplementary letter or cased code point alone and in two contexts, every string of 0..4 units over UNITS, and
+ * window-seam texts (the deciding unit at index 505..520 and 1018..1030). Out-of-JVM oracles: CPython 3.12 str.casefold
+ * (every code point 0..10FFFF, the fold texts, the pairs) and Go strings.EqualFold / unicode.SimpleFold (every rune's
+ * fold orbit, the pairs). Properties the method text relies on: no Character case map changes a code point's width (the
+ * donors advance by the mapped code point's width), no whitespace character is cased (swapCaseWords), no simple fold
+ * leaves its plane (equalsSimpleFold's length gate). Exceptions compare by class. Exit 1 on a mismatch.
+ */
+public final class CaseFamilyProof {
+    private static final char HIGH = (char) 0xD801, LOW = (char) 0xDC00, LOW_SMALL = (char) 0xDC28;
+    private static final char[] UNITS = {'a', 'A', ' ', '-', ',', (char) 0x01C5, (char) 0x01C6, (char) 0x00DF,
+        (char) 0x0130, HIGH, LOW, LOW_SMALL};
+    private static final char[] FOLD_UNITS = {'s', 'S', (char) 0x017F, (char) 0x00DF, (char) 0x1E9E, 'k',
+        (char) 0x212A, (char) 0x03C2, (char) 0x03A3, (char) 0x0130, HIGH, LOW};
+    private static final char[][] DELIMITERS = {{}, {'-'}, {' ', ','}, {HIGH, LOW}, {LOW}, {HIGH}, {'a', 'A'},
+        {(char) 0x01C5}};
+    private static int failures;
+    private static int checks;
+
+    private CaseFamilyProof() {}
+
+    public static void main(String[] args) throws IOException {
+        Path work = Path.of(args[1]);
+        Map<Integer, Integer> simple = new HashMap<>();
+        Map<Integer, String> full = new HashMap<>();
+        readCaseFolding(Path.of(args[2]), simple, full);
+        List<String> small = strings(UNITS, 4);
+        List<String> seams = seams();
+        List<String> points = new ArrayList<>();
+        List<String> contexts = new ArrayList<>();
+        for (int unit = 0; unit <= 0xFFFF; unit++) {
+            String c = String.valueOf((char) unit);
+            points.add(c);
+            contexts.add(c + "a");
+            contexts.add("x " + c + "A" + c);
+            contexts.add("-" + c + " " + c);
+            contexts.add(c + c);
+        }
+        for (int point = 0x10000; point <= Character.MAX_CODE_POINT; point++) {
+            if (!Character.isLetter(point) && !cased(point)) continue;
+            String p = Character.toString(point);
+            points.add(p);
+            contexts.add(p + "a");
+            contexts.add("x " + p + "A" + p);
+        }
+        List<String> foldTexts = new ArrayList<>(small);
+        foldTexts.addAll(seams);
+        foldTexts.addAll(contexts);
+        List<String> pairTexts = strings(FOLD_UNITS, 3);
+        List<String[]> extra = extraPairs(simple, full);
+        if (args[0].equals("corpus")) {
+            write(work.resolve("fold_texts.txt"), foldTexts);
+            write(work.resolve("pair_texts.txt"), pairTexts);
+            List<String> lines = new ArrayList<>();
+            for (String[] pair : extra) lines.add(hex(pair[0]) + "\t" + hex(pair[1]));
+            Files.write(work.resolve("pair_extra.txt"), (String.join("\n", lines) + "\n").getBytes(StandardCharsets.US_ASCII));
+            System.out.println("corpus\tfold_texts\t" + foldTexts.size() + "\tpair_texts\t" + pairTexts.size()
+                    + "\tpair_extra\t" + extra.size());
+            return;
+        }
+        properties();
+        List<String> everywhere = new ArrayList<>(small);
+        everywhere.addAll(seams);
+        everywhere.addAll(points);
+        everywhere.addAll(contexts);
+        List<String> shortTexts = new ArrayList<>(small);
+        shortTexts.addAll(seams);
+        donorChecks(everywhere, shortTexts, contexts);
+        caseFoldChecks(work, foldTexts);
+        equalityChecks(work, pairTexts, extra);
+        System.out.println("checks\t" + checks + "\ttexts\t" + everywhere.size() + "\tfold_texts\t" + foldTexts.size()
+                + "\tpairs\t" + (long) pairTexts.size() * pairTexts.size() + "\textra_pairs\t" + extra.size());
+        System.out.println("RESULT\t" + (failures == 0 ? "PASS" : "FAIL") + "\tfailures=" + failures);
+        System.exit(failures == 0 ? 0 : 1);
+    }
+
+    private static void donorChecks(List<String> everywhere, List<String> shortTexts, List<String> contexts) {
+        List<Check> plain = List.of(
+            new Check("capitalize()", String::capitalize, StringUtils::capitalize),
+            new Check("uncapitalize()", String::uncapitalize, StringUtils::uncapitalize),
+            new Check("swapCase()", String::swapCase, StringUtils::swapCase),
+            new Check("swapCaseWords()", String::swapCaseWords, WordUtils::swapCase),
+            new Check("capitalizeWords()", String::capitalizeWords, WordUtils::capitalize),
+            new Check("capitalizeFully()", String::capitalizeFully, WordUtils::capitalizeFully),
+            new Check("uncapitalizeWords()", String::uncapitalizeWords, WordUtils::uncapitalize),
+            new Check("initials()", String::initials, WordUtils::initials),
+            new Check("toCamelCase(true)", s -> s.toCamelCase(true), s -> CaseUtils.toCamelCase(s, true)),
+            new Check("toCamelCase(false)", s -> s.toCamelCase(false), s -> CaseUtils.toCamelCase(s, false)));
+        for (Check check : plain) run(check, everywhere);
+        for (char[] d : DELIMITERS) {
+            String q = show(new String(d));
+            List<Check> delimited = List.of(
+                new Check("capitalizeWords(" + q + ")", s -> s.capitalizeWords(d), s -> WordUtils.capitalize(s, d)),
+                new Check("capitalizeFully(" + q + ")", s -> s.capitalizeFully(d), s -> WordUtils.capitalizeFully(s, d)),
+                new Check("uncapitalizeWords(" + q + ")", s -> s.uncapitalizeWords(d), s -> WordUtils.uncapitalize(s, d)),
+                new Check("initials(" + q + ")", s -> s.initials(d), s -> WordUtils.initials(s, d)),
+                new Check("toCamelCase(true," + q + ")", s -> s.toCamelCase(true, d), s -> CaseUtils.toCamelCase(s, true, d)),
+                new Check("toCamelCase(false," + q + ")", s -> s.toCamelCase(false, d),
+                        s -> CaseUtils.toCamelCase(s, false, d)));
+            boolean wide = d.length == 1 && d[0] == '-' || d.length == 2 && d[0] == ' ';
+            for (Check check : delimited) run(check, wide ? concat(shortTexts, contexts) : shortTexts);
+        }
+    }
+
+    private static void caseFoldChecks(Path work, List<String> foldTexts) throws IOException {
+        Map<Integer, String> folds = new HashMap<>();
+        for (String line : lines(work.resolve("CASEFOLD_POINTS.txt"))) {
+            String[] f = line.split("\t");
+            folds.put(Integer.parseInt(f[0], 16), unhex(f[1]));
+        }
+        long mismatches = 0;
+        String first = "-";
+        for (int point = 0; point <= Character.MAX_CODE_POINT; point++) {
+            String text = Character.isSurrogate((char) point) && point <= 0xFFFF
+                    ? String.valueOf((char) point) : Character.toString(point);
+            Object mine = result(String::caseFold, text);
+            String python = folds.getOrDefault(point, text);
+            if (!Objects.equals(mine, python) && mismatches++ == 0) {
+                first = Integer.toHexString(point) + " -> " + show(String.valueOf(mine)) + " vs " + show(python);
+            }
+        }
+        report("caseFold() every code point vs python", 0x110000, mismatches, first);
+        List<String> answers = lines(work.resolve("CASEFOLD_TEXTS.txt"));
+        if (answers.size() != foldTexts.size()) throw new IllegalStateException("oracle size " + answers.size());
+        mismatches = 0;
+        first = "-";
+        for (int i = 0; i < foldTexts.size(); i++) {
+            String text = foldTexts.get(i);
+            Object mine = result(String::caseFold, text);
+            String python = unhex(answers.get(i));
+            if (!Objects.equals(mine, python) && mismatches++ == 0) {
+                first = show(clip(text)) + " -> " + show(clip(String.valueOf(mine))) + " vs " + show(clip(python));
+            }
+        }
+        report("caseFold() texts vs python", foldTexts.size(), mismatches, first);
+    }
+
+    private static void equalityChecks(Path work, List<String> pairTexts, List<String[]> extra) throws IOException {
+        byte[] fold = Files.readAllBytes(work.resolve("FOLD_EQUAL.bin"));
+        byte[] simple = Files.readAllBytes(work.resolve("SIMPLE_EQUAL.bin"));
+        int n = pairTexts.size();
+        if (fold.length != n * n || simple.length != n * n) throw new IllegalStateException("oracle size");
+        long foldMismatches = 0, simpleMismatches = 0;
+        String foldFirst = "-", simpleFirst = "-";
+        for (int i = 0; i < n; i++) {
+            String a = pairTexts.get(i);
+            for (int j = 0; j < n; j++) {
+                String b = pairTexts.get(j);
+                boolean f = a.equalsFoldCase(b), s = a.equalsSimpleFold(b);
+                if (f != (fold[i * n + j] == '1') && foldMismatches++ == 0) foldFirst = show(a) + " " + show(b) + " -> " + f;
+                if (s != (simple[i * n + j] == '1') && simpleMismatches++ == 0) simpleFirst = show(a) + " " + show(b) + " -> " + s;
+            }
+        }
+        report("equalsFoldCase pairs vs python", (long) n * n, foldMismatches, foldFirst);
+        report("equalsSimpleFold pairs vs go", (long) n * n, simpleMismatches, simpleFirst);
+        byte[] foldExtra = Files.readAllBytes(work.resolve("FOLD_EQUAL_EXTRA.bin"));
+        byte[] simpleExtra = Files.readAllBytes(work.resolve("SIMPLE_EQUAL_EXTRA.bin"));
+        if (foldExtra.length != extra.size() || simpleExtra.length != extra.size()) throw new IllegalStateException("extra");
+        foldMismatches = simpleMismatches = 0;
+        foldFirst = simpleFirst = "-";
+        for (int i = 0; i < extra.size(); i++) {
+            String a = extra.get(i)[0], b = extra.get(i)[1];
+            boolean f = a.equalsFoldCase(b), s = a.equalsSimpleFold(b);
+            if (f != (foldExtra[i] == '1') && foldMismatches++ == 0) foldFirst = show(clip(a)) + " " + show(clip(b)) + " -> " + f;
+            if (s != (simpleExtra[i] == '1') && simpleMismatches++ == 0) simpleFirst = show(clip(a)) + " " + show(clip(b)) + " -> " + s;
+        }
+        report("equalsFoldCase extra pairs vs python", extra.size(), foldMismatches, foldFirst);
+        report("equalsSimpleFold extra pairs vs go", extra.size(), simpleMismatches, simpleFirst);
+        long orbitMismatches = 0, crossPlane = 0, links = 0;
+        String orbitFirst = "-";
+        for (String line : lines(work.resolve("SIMPLE_FOLD.txt"))) {
+            String[] f = line.split("\t");
+            int r = Integer.parseInt(f[0], 16), next = Integer.parseInt(f[1], 16);
+            links++;
+            if ((r > 0xFFFF) != (next > 0xFFFF)) crossPlane++;
+            String a = Character.toString(r), b = Character.toString(next);
+            if (!a.equalsSimpleFold(b) || !b.equalsSimpleFold(a)) {
+                if (orbitMismatches++ == 0) orbitFirst = Integer.toHexString(r) + " ~ " + Integer.toHexString(next);
+            }
+        }
+        report("equalsSimpleFold every SimpleFold orbit link vs go", links, orbitMismatches, orbitFirst);
+        report("SimpleFold orbit links leaving their plane", links, crossPlane, crossPlane == 0 ? "-" : "found");
+    }
+
+    /** Facts about JDK 21's Character data that the method text relies on. */
+    private static void properties() {
+        long width = 0, whitespaceCased = 0;
+        for (int point = 0; point <= Character.MAX_CODE_POINT; point++) {
+            int c = Character.charCount(point);
+            if (Character.charCount(Character.toTitleCase(point)) != c || Character.charCount(Character.toLowerCase(point)) != c
+                    || Character.charCount(Character.toUpperCase(point)) != c) {
+                width++;
+            }
+            if (Character.isWhitespace(point) && (Character.isUpperCase(point) || Character.isLowerCase(point)
+                    || Character.isTitleCase(point))) {
+                whitespaceCased++;
+            }
+        }
+        report("Character case maps changing a code point's width", 0x110000, width, width == 0 ? "-" : "found");
+        report("whitespace code points that are cased", 0x110000, whitespaceCased, whitespaceCased == 0 ? "-" : "found");
+    }
+
+    private record Check(String name, Function<String, Object> mine, Function<String, Object> donor) {}
+
+    private static void run(Check check, List<String> texts) {
+        long mismatches = 0;
+        String first = "-";
+        for (String text : texts) {
+            Object mine = result(check.mine, text), donor = result(check.donor, text);
+            if (!Objects.equals(mine, donor) && mismatches++ == 0) {
+                first = show(clip(text)) + " -> " + show(clip(String.valueOf(mine))) + " vs " + show(clip(String.valueOf(donor)));
+            }
+        }
+        report(check.name, texts.size(), mismatches, first);
+    }
+
+    private static void report(String name, long texts, long mismatches, String first) {
+        checks++;
+        failures += mismatches == 0 ? 0 : 1;
+        System.out.println(name + "\t" + texts + "\t" + mismatches + "\t" + first);
+    }
+
+    private static Object result(Function<String, Object> f, String text) {
+        try {
+            return f.apply(text);
+        } catch (RuntimeException e) {
+            return e.getClass().getSimpleName();
+        }
+    }
+
+    private static boolean cased(int point) {
+        return Character.isUpperCase(point) || Character.isLowerCase(point) || Character.isTitleCase(point)
+                || Character.toLowerCase(point) != point || Character.toUpperCase(point) != point
+                || Character.toTitleCase(point) != point;
+    }
+
+    private static List<String> seams() {
+        List<String> out = new ArrayList<>();
+        String[] tails = {"" + HIGH + LOW, "" + HIGH + LOW_SMALL + "a", " a", " " + (char) 0x01C6, "-b", "\u00DF", "A b",
+            "" + (char) 0x0130};
+        for (int k = 505; k <= 1030; k += (k == 520 ? 498 : 1)) {
+            for (String tail : tails) {
+                out.add("x".repeat(k) + tail);
+                out.add("X".repeat(k) + tail);
+                out.add(" ".repeat(k) + tail);
+                out.add(tail + "x".repeat(k));
+            }
+        }
+        return out;
+    }
+
+    private static List<String[]> extraPairs(Map<Integer, Integer> simple, Map<Integer, String> full) {
+        List<String[]> out = new ArrayList<>();
+        for (int point = 0; point <= Character.MAX_CODE_POINT; point++) {
+            if (point <= 0xFFFF && Character.isSurrogate((char) point)) continue;
+            String p = Character.toString(point);
+            int[] candidates = {Character.toLowerCase(point), Character.toUpperCase(point), Character.toTitleCase(point),
+                simple.getOrDefault(point, point)};
+            for (int x : candidates) {
+                if (x != point) out.add(new String[] {p, Character.toString(x)});
+            }
+            if (full.containsKey(point)) {
+                out.add(new String[] {p, full.get(point)});
+                out.add(new String[] {full.get(point).toUpperCase(java.util.Locale.ROOT), p});
+            }
+        }
+        for (int k = 505; k <= 1030; k += (k == 520 ? 498 : 1)) {
+            String x = "x".repeat(k), upper = "X".repeat(k);
+            out.add(new String[] {x + HIGH + LOW + "k", upper + HIGH + LOW_SMALL + (char) 0x212A});
+            out.add(new String[] {x + HIGH + LOW, x + HIGH + "a"});
+            out.add(new String[] {x + HIGH + LOW, x + "ab"});
+            out.add(new String[] {x + "\u00DF", upper + "SS"});
+            out.add(new String[] {x + "\u00DFa", upper + (char) 0x1E9E + "A"});
+            out.add(new String[] {x + HIGH, upper + HIGH});
+            out.add(new String[] {x + LOW + "s", upper + LOW + (char) 0x017F});
+        }
+        return out;
+    }
+
+    private static void readCaseFolding(Path path, Map<Integer, Integer> simple, Map<Integer, String> full) throws IOException {
+        for (String line : Files.readAllLines(path, StandardCharsets.UTF_8)) {
+            int hash = line.indexOf('#');
+            String body = (hash < 0 ? line : line.substring(0, hash)).trim();
+            if (body.isEmpty()) continue;
+            String[] f = body.split(";");
+            int point = Integer.parseInt(f[0].trim(), 16);
+            String status = f[1].trim();
+            StringBuilder target = new StringBuilder();
+            for (String t : f[2].trim().split(" ")) target.appendCodePoint(Integer.parseInt(t, 16));
+            if (status.equals("C") || status.equals("S")) simple.put(point, target.codePointAt(0));
+            if (status.equals("F")) full.put(point, target.toString());
+        }
+    }
+
+    private static List<String> strings(char[] units, int maxLength) {
+        List<String> out = new ArrayList<>();
+        for (int length = 0; length <= maxLength; length++) {
+            int total = (int) Math.pow(units.length, length);
+            for (int code = 0; code < total; code++) {
+                char[] chars = new char[length];
+                int rest = code;
+                for (int i = 0; i < length; i++) {
+                    chars[i] = units[rest % units.length];
+                    rest /= units.length;
+                }
+                out.add(new String(chars));
+            }
+        }
+        return out;
+    }
+
+    private static List<String> concat(List<String> a, List<String> b) {
+        List<String> out = new ArrayList<>(a);
+        out.addAll(b);
+        return out;
+    }
+
+    private static void write(Path path, List<String> texts) throws IOException {
+        StringBuilder out = new StringBuilder();
+        for (String text : texts) out.append(hex(text)).append('\n');
+        Files.writeString(path, out, StandardCharsets.US_ASCII);
+    }
+
+    private static List<String> lines(Path path) {
+        try {
+            String all = Files.readString(path, StandardCharsets.US_ASCII);
+            List<String> out = new ArrayList<>(List.of(all.split("\n", -1)));
+            out.remove(out.size() - 1);
+            return out;
+        } catch (IOException e) {
+            throw new UncheckedIOException(e);
+        }
+    }
+
+    private static final char[] DIGITS = "0123456789ABCDEF".toCharArray();
+
+    private static String hex(String text) {
+        char[] out = new char[text.length() * 4];
+        for (int i = 0; i < text.length(); i++) {
+            char c = text.charAt(i);
+            for (int k = 0; k < 4; k++) out[4 * i + k] = DIGITS[c >> (12 - 4 * k) & 15];
+        }
+        return new String(out);
+    }
+
+    private static String unhex(String hex) {
+        char[] units = new char[hex.length() / 4];
+        for (int i = 0; i < units.length; i++) {
+            int v = 0;
+            for (int k = 0; k < 4; k++) v = v << 4 | Character.digit(hex.charAt(4 * i + k), 16);
+            units[i] = (char) v;
+        }
+        return new String(units);
+    }
+
+    private static String clip(String s) {
+        return s.length() > 40 ? s.substring(0, 20) + "..." + s.substring(s.length() - 6) : s;
+    }
+
+    private static String show(String s) {
+        StringBuilder out = new StringBuilder("\"");
+        for (char c : s.toCharArray()) out.append(c >= 32 && c < 127 ? String.valueOf(c) : String.format("<%04X>", (int) c));
+        return out.append('"').toString();
+    }
+}

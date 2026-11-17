@@ -137,3 +137,15 @@ replaceAfter	Kotlin replaceAfter
 replaceBeforeLast	Kotlin replaceBeforeLast
 replaceAfterLast	Kotlin replaceAfterLast
 translate	CPython 3.12 str.translate
+capitalize	commons-lang3 3.22.0 StringUtils.capitalize
+uncapitalize	commons-lang3 StringUtils.uncapitalize
+swapCase	commons-lang3 StringUtils.swapCase
+swapCaseWords	commons-text 1.15.0 WordUtils.swapCase (differs from StringUtils, see below)
+capitalizeWords	WordUtils.capitalize(str) / capitalize(str, char...)
+capitalizeFully	WordUtils.capitalizeFully
+uncapitalizeWords	WordUtils.uncapitalize
+initials	WordUtils.initials
+toCamelCase	commons-text CaseUtils.toCamelCase
+caseFold	CPython 3.12 str.casefold (Unicode 15.0.0 CaseFolding.txt status C + F)
+equalsFoldCase	a.casefold() == b.casefold() (CPython 3.12)
+equalsSimpleFold	Go 1.26.2 strings.EqualFold (Unicode 15.0.0, status C + S)

@@ -1,0 +1,7 @@
+# CASE family, commons-text 1.15.0 WordUtils/CaseUtils (tests rewritten to StringUtils. by prefix): donor op, mode, java op, null rule
+capitalize	INSTANCE	capitalizeWords	NPE_ARG
+capitalizeFully	INSTANCE	capitalizeFully	NPE_ARG
+uncapitalize	INSTANCE	uncapitalizeWords	NPE_ARG
+initials	INSTANCE	initials	NPE_ARG
+swapCase	INSTANCE	swapCaseWords	NPE_ARG
+toCamelCase	INSTANCE	toCamelCase	NPE_ARG

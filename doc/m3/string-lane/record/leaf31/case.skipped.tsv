@@ -1,0 +1,5 @@
+donor_file	method	reason	statement
+StringUtilsTest.java	testCapitalize	NULL_RECEIVER	assertNull(StringUtils.capitalize(null))
+StringUtilsTest.java	testCapitalize	NULL_RECEIVER	assertNull(StringUtils.capitalize(null))
+StringUtilsTest.java	testSwapCase_String	NULL_RECEIVER	assertNull(StringUtils.swapCase(null))
+StringUtilsTest.java	testUnCapitalize	NULL_RECEIVER	assertNull(StringUtils.uncapitalize(null))

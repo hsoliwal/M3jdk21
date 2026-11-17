@@ -1,0 +1,4 @@
+# CASE family: donor op, mode, java op, null rule
+capitalize	INSTANCE	capitalize	NPE_ARG
+uncapitalize	INSTANCE	uncapitalize	NPE_ARG
+swapCase	INSTANCE	swapCase	NPE_ARG

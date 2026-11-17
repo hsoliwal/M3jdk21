@@ -1,0 +1,24 @@
+method_texts_verbatim_in_head	7
+lint	javac -Xlint:all,-this-escape -Werror: no warnings
+corpus	fold_texts	460127	pair_texts	1885	pair_extra	6152
+python 3.12.6 unicode 15.0.0 folding_points 1530 texts 460127 pairs 3553225 extra_pairs 6152
+go go1.26.2 unicode 15.0.0 folding_runes 2878 pairs 3553225 extra_pairs 6152
+== CaseFamilyProof flat -XX:+CompactStrings
+checks	68	texts	612880	fold_texts	460127	pairs	3553225	extra_pairs	6152
+RESULT	PASS	failures=0
+== CaseFamilyProof flat -XX:-CompactStrings
+checks	68	texts	612880	fold_texts	460127	pairs	3553225	extra_pairs	6152
+RESULT	PASS	failures=0
+== CaseFamilyProof m3-facts -XX:+CompactStrings
+checks	68	texts	612880	fold_texts	460127	pairs	3553225	extra_pairs	6152
+RESULT	PASS	failures=0
+== CaseFamilyProof m3-facts -XX:-CompactStrings
+checks	68	texts	612880	fold_texts	460127	pairs	3553225	extra_pairs	6152
+RESULT	PASS	failures=0
+== CaseFamilyProof m3-scan -XX:+CompactStrings
+checks	68	texts	612880	fold_texts	460127	pairs	3553225	extra_pairs	6152
+RESULT	PASS	failures=0
+== CaseFamilyProof m3-scan -XX:-CompactStrings
+checks	68	texts	612880	fold_texts	460127	pairs	3553225	extra_pairs	6152
+RESULT	PASS	failures=0
+proof exit 0

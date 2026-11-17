@@ -1,0 +1,4 @@
+| this PR (`leaf30/`) |
+---
+| M3jdk21 #3253, merged `35952b5205bf` (`leaf30/`) |
+| CASE family (superset of commons-lang3, commons-text, CPython and Go): `capitalize`, `uncapitalize`, `swapCase`; `swapCaseWords` (WordUtils rule: title case at a word start); `capitalizeWords` (2), `capitalizeFully` (2), `uncapitalizeWords` (2), `initials` (2), `toCamelCase(boolean, char...)`; `caseFold` (Python `casefold`, Unicode 15.0 full folding from a table built once), `equalsFoldCase`, `equalsSimpleFold` (Go `strings.EqualFold`, simple folding) | 16 public methods | this PR (`leaf31/`) |

@@ -1,0 +1,24 @@
+String: absorb the CASE family
+
+16 public methods, a superset of commons-lang3 3.22.0, commons-text
+1.15.0, CPython 3.12 and Go:
+- capitalize(), uncapitalize(), swapCase(): commons-lang3 rules;
+- swapCaseWords(): commons-text WordUtils.swapCase (it differs from
+  StringUtils.swapCase: a lower-case letter at a word start becomes
+  title case), capitalizeWords(), capitalizeFully(),
+  uncapitalizeWords(), initials() (each with and without delimiter
+  characters), toCamelCase(boolean, char...): commons-text rules;
+- caseFold(): Python str.casefold, full Unicode 15.0.0 case folding
+  (CaseFolding.txt status C and F) from a private table built once;
+  equalsFoldCase(String): caseFold equality;
+- equalsSimpleFold(String): Go strings.EqualFold (simple folding).
+
+Proof (record doc/m3/string-lane/record/leaf31): 68 checks over 612,880
+texts, 460,127 folding texts (every code point alone and in context)
+and 3.55 million pairs against commons-lang3, commons-text, CPython 3.12
+and Go: 0 mismatches in three modes (flat; stub M3 storage with facts;
+without facts), compact strings on and off. JUnit 615/615 in all six
+modes, including the commons-lang3 and commons-text tests of these
+methods (ported). Drafted by a workflow agent from the donor sources
+and CaseFolding.txt (generator in the record); integrated and
+re-proven on master.
