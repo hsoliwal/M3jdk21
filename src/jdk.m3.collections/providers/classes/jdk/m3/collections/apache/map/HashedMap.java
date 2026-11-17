@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+// Modified 2026 by Synexia contributors: key equality as a strategy (an Equator).
 package jdk.m3.collections.apache.map;
 
 import java.io.IOException;
@@ -22,6 +23,7 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.Map;
 
+import jdk.m3.collections.apache.Equator;
 import jdk.m3.collections.apache.MapIterator;
 
 /**
@@ -91,6 +93,24 @@ public class HashedMap<K, V>
     }
 
     /**
+     * Constructs a new, empty map with the default capacity and load factor whose keys are equal by
+     * the equator, as the keys of a {@link java.util.TreeMap} are ordered by its comparator. The
+     * null key is allowed and handled by the map; the equator never sees it. A map with an equator
+     * serializes it after its entries, so the equator must be serializable for the map to be, and
+     * its class must be there when the map is read. As with a {@link java.util.TreeMap} whose
+     * comparator is inconsistent with {@code equals}, a map whose equator is inconsistent with
+     * {@code equals} does not obey the general contract of {@link Map}. A copy made by
+     * {@link #HashedMap(Map)} has no equator; {@link #clone()} keeps it.
+     * ({@code new HashedMap<>(null)} is ambiguous now.)
+     *
+     * @param keyEquator  the equality of keys, not null
+     * @throws NullPointerException if the equator is null
+     */
+    public HashedMap(final Equator<? super K> keyEquator) {
+        super(DEFAULT_CAPACITY, DEFAULT_LOAD_FACTOR, keyEquator);
+    }
+
+    /**
      * Clones the map without cloning the keys or values.
      *
      * @return A shallow clone
@@ -109,7 +129,9 @@ public class HashedMap<K, V>
      */
     private void readObject(final ObjectInputStream in) throws IOException, ClassNotFoundException {
         in.defaultReadObject();
+        deferEntries = true;
         doReadObject(in);
+        readKeyEquator(in);
     }
 
     /**
@@ -121,6 +143,7 @@ public class HashedMap<K, V>
     private void writeObject(final ObjectOutputStream out) throws IOException {
         out.defaultWriteObject();
         doWriteObject(out);
+        writeKeyEquator(out);
     }
 
 }
