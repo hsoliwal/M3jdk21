@@ -31,14 +31,17 @@ import jdk.m3.collections.guava.base.Function;
 import jdk.m3.collections.guava.collect.AbstractIterator;
 import jdk.m3.collections.guava.collect.ImmutableList;
 import jdk.m3.collections.guava.collect.UnmodifiableIterator;
+import java.util.AbstractCollection;
 import java.util.AbstractSet;
-import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.ConcurrentModificationException;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.NoSuchElementException;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -72,6 +75,9 @@ final class DirectedGraphConnections<N, V> implements GraphConnections<N, V> {
    */
   private abstract static class NodeConnection<N> {
     final N node;
+
+    /** Slot in the owning {@code ConnectionLane}; unused by ImmutableList-backed connections. */
+    int slot;
 
     NodeConnection(N node) {
       this.node = checkNotNull(node);
@@ -120,6 +126,113 @@ final class DirectedGraphConnections<N, V> implements GraphConnections<N, V> {
     }
   }
 
+  /**
+   * The {@code orderedNodeConnections} of a mutable graph with a stable incident edge order: an
+   * insertion-ordered slot array with {@code EMPTY} tombstones, plus a self-keyed index that finds
+   * a stored connection, and so its slot, in O(1) expected time. A removal writes a tombstone; one
+   * in-place compaction pass runs once tombstones outnumber live connections, so removal is O(1)
+   * amortised and iteration stays O(size). The iterator keeps the {@code ArrayList} iterator
+   * contract the list had: {@code hasNext()} is {@code cursor != size()}, and {@code next()} throws
+   * {@link ConcurrentModificationException} once the lane was added to or removed from after the
+   * iterator was created. A slot never holds null: a removed or unused slot holds {@code EMPTY},
+   * which never leaves the lane.
+   */
+  private static final class ConnectionLane<N> extends AbstractCollection<NodeConnection<N>> {
+    private static final Object[] NO_SLOTS = {};
+
+    /** Marks a removed or unused slot; compared with {@code ==}, never returned. */
+    private static final Object EMPTY = new Object();
+
+    private final Map<NodeConnection<N>, NodeConnection<N>> index =
+        new HashMap<>(INNER_CAPACITY * 2, INNER_LOAD_FACTOR);
+    private Object[] slots = NO_SLOTS; // [0, end): connections in insertion order, EMPTY = removed
+    private int end;
+    private int live;
+    private int modCount; // +1 per add and per successful remove, as ArrayList.modCount
+
+    @Override
+    public int size() {
+      return live;
+    }
+
+    @Override
+    public boolean add(NodeConnection<N> connection) {
+      modCount++;
+      if (end == slots.length) {
+        slots = Arrays.copyOf(slots, Math.max(INNER_CAPACITY * 2, end + (end >> 1)));
+        Arrays.fill(slots, end, slots.length, EMPTY);
+      }
+      index.put(connection, connection);
+      connection.slot = end;
+      slots[end++] = connection;
+      live++;
+      return true;
+    }
+
+    @Override
+    public boolean remove(Object connection) {
+      NodeConnection<N> removed = index.remove(connection);
+      if (removed == null) {
+        return false;
+      }
+      modCount++;
+      slots[removed.slot] = EMPTY;
+      live--;
+      if (end - live > live) {
+        compact();
+      }
+      return true;
+    }
+
+    /** One pass: slide live connections left in order, renumber their slots, clear the tail. */
+    private void compact() {
+      int write = 0;
+      for (int read = 0; read < end; read++) {
+        Object connection = slots[read];
+        if (connection != EMPTY) {
+          ((NodeConnection<?>) connection).slot = write;
+          slots[write++] = connection;
+        }
+      }
+      Arrays.fill(slots, write, end, EMPTY);
+      end = write;
+    }
+
+    @Override
+    public Iterator<NodeConnection<N>> iterator() {
+      return new LaneIterator();
+    }
+
+    /** Fail-fast cursor over the live slots with the {@code ArrayList} iterator semantics. */
+    private final class LaneIterator implements Iterator<NodeConnection<N>> {
+      private final int expectedModCount = modCount;
+      private int cursor; // logical index of the next connection, as in ArrayList's iterator
+      private int position; // first slot not yet scanned
+
+      @Override
+      public boolean hasNext() {
+        return cursor != live;
+      }
+
+      @SuppressWarnings("unchecked")
+      @Override
+      public NodeConnection<N> next() {
+        if (modCount != expectedModCount) {
+          throw new ConcurrentModificationException();
+        }
+        if (cursor >= live) {
+          throw new NoSuchElementException();
+        }
+        Object connection;
+        do {
+          connection = slots[position++];
+        } while (connection == EMPTY);
+        cursor++;
+        return (NodeConnection<N>) connection;
+      }
+    }
+  }
+
   private static final Object PRED = new Object();
 
   // Every value in this map must either be an instance of PredAndSucc with a successorValue of
@@ -134,14 +247,14 @@ final class DirectedGraphConnections<N, V> implements GraphConnections<N, V> {
    * LinkedHashMap combines two such edges into a single node-value pair, even though the edges may
    * not have been inserted consecutively.
    */
-  private final List<NodeConnection<N>> orderedNodeConnections;
+  private final Collection<NodeConnection<N>> orderedNodeConnections;
 
   private int predecessorCount;
   private int successorCount;
 
   private DirectedGraphConnections(
       Map<N, Object> adjacentNodeValues,
-      List<NodeConnection<N>> orderedNodeConnections,
+      Collection<NodeConnection<N>> orderedNodeConnections,
       int predecessorCount,
       int successorCount) {
     this.adjacentNodeValues = checkNotNull(adjacentNodeValues);
@@ -157,17 +270,12 @@ final class DirectedGraphConnections<N, V> implements GraphConnections<N, V> {
     // We store predecessors and successors in the same map, so double the initial capacity.
     int initialCapacity = INNER_CAPACITY * 2;
 
-    List<NodeConnection<N>> orderedNodeConnections;
-    switch (incidentEdgeOrder.type()) {
-      case UNORDERED:
-        orderedNodeConnections = null;
-        break;
-      case STABLE:
-        orderedNodeConnections = new ArrayList<>();
-        break;
-      default:
-        throw new AssertionError(incidentEdgeOrder.type());
-    }
+    Collection<NodeConnection<N>> orderedNodeConnections =
+        switch (incidentEdgeOrder.type()) {
+          case UNORDERED -> null;
+          case STABLE -> new ConnectionLane<>();
+          default -> throw new AssertionError(incidentEdgeOrder.type());
+        };
 
     return new DirectedGraphConnections<>(
         /* adjacentNodeValues= */ new HashMap<N, Object>(initialCapacity, INNER_LOAD_FACTOR),
