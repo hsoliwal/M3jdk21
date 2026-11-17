@@ -7,6 +7,7 @@
  * and the Eclipse Distribution License is available at
  * http://www.eclipse.org/org/documents/edl-v10.php.
  */
+// Modified 2026 by Hitesh Soliwal and contributors: O(1) getLast from the trailing pair.
 
 package jdk.m3.collections.eclipse.impl.map.ordered.mutable;
 
@@ -605,6 +606,23 @@ public class OrderedHashMap<K, V>
     public boolean isEmpty()
     {
         return this.size == 0;
+    }
+
+    @Override
+    public V getLast()
+    {
+        //FLLDCIM: HPCPOP - O(1) DIRECT_ACCESS; removeKey keeps the trailing pair live
+        int occupied = this.orderedKeyValuesOccupied;
+        if (this.size == 0)
+        {
+            return null;
+        }
+        int last = (occupied - 1) << 1;
+        if (this.size > occupied || !isNonSentinel(this.orderedKeyValues[last]))
+        {
+            return super.getLast();
+        }
+        return (V) this.orderedKeyValues[last + 1];
     }
 
     @Override

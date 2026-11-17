@@ -13,6 +13,7 @@
  *     Hitesh Soliwal (Synexia) - initial API and implementation
  *******************************************************************************/
 // Modified 2026 by Hitesh Soliwal and contributors: preserve entry validation during direct Map.forEach traversal.
+// Modified 2026 by Hitesh Soliwal and contributors: lastValue reads the highest slot's value.
 package jdk.m3.collections.eclipse.impl.map.sorted.mutable;
 
 import java.util.AbstractCollection;
@@ -249,6 +250,15 @@ final class IndexedRedBlackMap<K, V> extends AbstractMap<K, V> implements Sorted
             throw new NoSuchElementException();
         }
         return (K) selected.keys[slot];
+    }
+
+    /** Value at the highest in-bounds slot or null; unbounded maps make no comparator call. */
+    @SuppressWarnings("unchecked")
+    V lastValue() {
+        //FLLDCIM: HPCPOP - DIRECT_ACCESS on the values lane at the right-spine slot, O(log n)
+        IndexedTreeArena<K, V> selected = tree.arena;
+        int slot = highest(selected, tree.root);
+        return slot < 0 ? null : (V) selected.values[slot];
     }
 
     @Override

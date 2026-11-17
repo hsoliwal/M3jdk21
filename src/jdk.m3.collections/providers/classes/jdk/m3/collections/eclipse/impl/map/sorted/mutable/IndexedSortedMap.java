@@ -13,6 +13,7 @@
  *     Hitesh Soliwal (Synexia) - initial API and implementation
  *******************************************************************************/
 // Modified 2026 by Hitesh Soliwal and contributors: use validated array-slot traversal for Map.forEach.
+// Modified 2026 by Hitesh Soliwal and contributors: lastValue without a view or iterator.
 package jdk.m3.collections.eclipse.impl.map.sorted.mutable;
 
 import java.io.IOException;
@@ -206,6 +207,14 @@ final class IndexedSortedMap<K, V> extends AbstractMap<K, V>
     {
         if ((this.storage.backend.tree.root < 0)) { throw new NoSuchElementException(); }
         return this.delegate().lastKey();
+    }
+
+    /** Value of the last key, or null when empty; the root map makes no comparator call. */
+    V lastValue()
+    {
+        //FLLDCIM: HPCPOP - DIRECT_ACCESS via the delegate's highest slot, O(log n)
+        if (this.storage.backend.tree.root < 0) { return null; }
+        return ((IndexedRedBlackMap<K, V>) this.delegate()).lastValue();
     }
 
     @Override public SortedMap<K, V> headMap(K high)
