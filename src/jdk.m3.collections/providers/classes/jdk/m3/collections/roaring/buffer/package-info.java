@@ -1,0 +1,41 @@
+/*
+ * (c) the authors Licensed under the Apache License, Version 2.0.
+ */
+
+/**
+ * The jdk.m3.collections.roaring.buffer package  provides
+ * two classes ({@link jdk.m3.collections.roaring.buffer.MutableRoaringBitmap} and
+ * ({@link jdk.m3.collections.roaring.buffer.ImmutableRoaringBitmap}) that   users
+ * can rely upon for fast set of integers.
+ * It differs from the jdk.m3.collections.roaring in that
+ * the backing stores are ByteBuffers.
+ *
+ * Initially, one wants to construct a bitmap using
+ * the MutableRoaringBitmap class. After serialization,
+ * one can memory-map an ImmutableRoaringBitmap to the
+ * serialized bytes, enabling off-heap processing.
+ *
+ * <pre>
+ * {@code
+ *      import jdk.m3.collections.roaring.buffer.*;
+ *
+ *      //...
+ *
+ *      MutableRoaringBitmap r1 = new MutableRoaringBitmap();
+ *      for(int k = 4000; k<4255;++k) r1.add(k);
+ *
+ *      MutableRoaringBitmap r2 = new MutableRoaringBitmap();
+ *      for(int k = 1000; k<4255; k+=2) r2.add(k);
+ *
+ *      MutableRoaringBitmap union = ImmutableRoaringBitmap.or(r1, r2);
+ *      MutableRoaringBitmap intersection = ImmutableRoaringBitmap.and(r1, r2);
+ *
+ *      //...
+ *      DataOutputStream wheretoserialize = ...
+ *      r1.runOptimize(); // can help compression
+ *      r1.serialize(wheretoserialize);
+ * }
+ * </pre>
+ *
+ */
+package jdk.m3.collections.roaring.buffer;
