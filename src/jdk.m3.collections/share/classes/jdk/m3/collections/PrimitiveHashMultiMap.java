@@ -102,7 +102,8 @@ public final class PrimitiveHashMultiMap {
         }
 
         public int size() { return countKeyBits(keyBits); }
-        public boolean isEmpty() { return size() == 0; }
+        //FLLDCIM: LEETCODIFY — heads holds a key exactly while its chain is non-empty
+        public boolean isEmpty() { return head(keyBits) < 0; }
         public boolean containsBits(long valueBits) {
             return containsEntryBits(keyBits, valueBits);
         }
@@ -116,9 +117,9 @@ public final class PrimitiveHashMultiMap {
             PrimitiveHashMultiMap.this.removeAllKeyBits(keyBits);
         }
         public long getBits(int index) {
-            Objects.checkIndex(index, size());
-            int row = head(keyBits);
-            for (int current = 0; current < index; current++) row = next(row);
+            int row = index < 0 ? -1 : head(keyBits);
+            for (int current = 0; current < index && row >= 0; current++) row = next(row);
+            if (row < 0) Objects.checkIndex(index, size()); // throws, with the chain's length
             return valueKind.readBits(values, row);
         }
         public Object toArrayBits() {
