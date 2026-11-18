@@ -238,6 +238,86 @@ public final class ObjectStream<T> {
         return new ObjectStream<>(() -> stream().<R>mapMulti(mapper), replayable);
     }
 
+    /**
+     * A primitive long index avoids per-element tuple or Long boxing.
+     * Index state is recreated for every traversal of a replayable plan.
+     */
+    @FunctionalInterface
+    public interface IndexedMapper<I, O> {
+        O apply(long index, I value);
+    }
+
+    /** Lazy zero-based indexed mapping; index overflow is rejected. */
+    public <R> ObjectStream<R> mapIndexed(IndexedMapper<? super T, ? extends R> mapper) {
+        Objects.requireNonNull(mapper, "mapper");
+        return new ObjectStream<>(() -> ObjectStreamLanguageKernels.mapIndexed(stream(), mapper),
+                replayable);
+    }
+
+    /** Kotlin zipWithNext / Python pairwise shape; no intermediate pair objects. */
+    public <R> ObjectStream<R> zipWithNext(
+            BiFunction<? super T, ? super T, ? extends R> mapper) {
+        Objects.requireNonNull(mapper, "mapper");
+        return new ObjectStream<>(() -> ObjectStreamLanguageKernels.zipWithNext(stream(), mapper),
+                replayable);
+    }
+
+    /** Prefix reduction seeded by the first element, unlike scan(initializer,folder). */
+    public ObjectStream<T> runningReduce(BinaryOperator<T> reducer) {
+        Objects.requireNonNull(reducer, "reducer");
+        return new ObjectStream<>(() -> ObjectStreamLanguageKernels.runningReduce(stream(), reducer),
+                replayable);
+    }
+
+    /** Contiguous, immutable key runs with explicit per-run retention cap. */
+    public <K> ObjectStream<List<T>> chunkBy(
+            Function<? super T, ? extends K> keyExtractor, int maxRunLength) {
+        Objects.requireNonNull(keyExtractor, "keyExtractor");
+        requireWidth(maxRunLength);
+        return new ObjectStream<>(
+                () -> ObjectStreamLanguageKernels.chunkBy(stream(), keyExtractor, maxRunLength),
+                replayable);
+    }
+
+    /** Suppress only adjacent duplicate keys using constant additional state. */
+    public <K> ObjectStream<T> distinctUntilChanged(
+            Function<? super T, ? extends K> keyExtractor) {
+        Objects.requireNonNull(keyExtractor, "keyExtractor");
+        return new ObjectStream<>(
+                () -> ObjectStreamLanguageKernels.distinctUntilChanged(stream(), keyExtractor),
+                replayable);
+    }
+
+    /** Insert a separator between values, never before the first or after the last. */
+    public ObjectStream<T> intersperse(T separator) {
+        return new ObjectStream<>(
+                () -> ObjectStreamLanguageKernels.intersperse(stream(), separator), replayable);
+    }
+
+    /** Lazy two-input zip; truncates at the shorter side and closes both on evaluation. */
+    public <U, R> ObjectStream<R> zip(
+            ObjectStream<? extends U> other,
+            BiFunction<? super T, ? super U, ? extends R> mapper) {
+        Objects.requireNonNull(other, "other");
+        Objects.requireNonNull(mapper, "mapper");
+        return new ObjectStream<>(() -> {
+            Stream<T> first = stream();
+            Stream<? extends U> second = null;
+            try {
+                second = other.stream();
+                return ObjectStreamLanguageKernels.zip(first, second, mapper);
+            } catch (RuntimeException | Error failure) {
+                try { first.close(); }
+                catch (RuntimeException | Error closing) { failure.addSuppressed(closing); }
+                if (second != null) {
+                    try { second.close(); }
+                    catch (RuntimeException | Error closing) { failure.addSuppressed(closing); }
+                }
+                throw failure;
+            }
+        }, replayable && other.replayable());
+    }
+
     public ObjectStream<T> peek(Consumer<? super T> observer) {
         Objects.requireNonNull(observer, "observer");
         return stage(s -> s.peek(observer));
