@@ -5,7 +5,7 @@
 | Field | Value |
 | --- | --- |
 | Proposal | `M3JEP-LANG-001` (Synexia internal, **not** an OpenJDK JEP number) |
-| State | **Draft / arithmetic named defaults available; primitive-long collection named-default candidate; symbolic lowering HOLD** |
+| State | **Draft / arithmetic and collection named-default candidates; Java-equality generic set candidate; symbolic lowering HOLD** |
 | Author | Hitesh Soliwal and contributors to the Synexia Project |
 | Kind | M3JDK21 opt-in feature candidate |
 | Inspiration | Kotlin, Scala, C++ (ideas only; no third-party source copied) |
@@ -65,7 +65,7 @@ Collections make overloading inherently non-uniform. The compiler must distingui
 | Type family | Potential M3 operator | Required explicit contract | Initial status |
 | --- | --- | --- | --- |
 | `List<E>`, ordered sequences | `a + b` | Ordered concatenation into a new logical composition, maintaining source order and duplicates | Java 21 named-default candidate; syntax HOLD |
-| `Set<E>` | Union, intersection, difference, symmetric difference | Typed set algebra; preserve equality, iteration/comparator contracts | Design HOLD |
+| `Set<E>` | Union, intersection, difference, symmetric difference | Explicit equality policy; no implicit identity/comparator coercion | Java 21 equals-policy named-default candidate; other policies and syntax HOLD |
 | `Map<K,V>` | `a + b` | Explicit key collision policy and retention of map ordering/comparator semantics | No implicit default |
 | Primitive/offset arrays | `a + b` | Explicit concatenation view or materialization policy, bounds, aliasing, copy/JNI ownership | Design HOLD |
 | Numeric vectors/matrices | `a + b` | Element-wise typed arithmetic, shape/broadcast contract and overflow/rounding policy | Design HOLD |
@@ -134,6 +134,50 @@ syntax requires a separately qualified attributed M3 compiler gate. This is
 a source-compiled and executable candidate, **not** full M3JDK receiving
 or JDK compatibility admission. The same ordered String/array/collection
 gate remains effective.
+
+### Generic set named-default candidate with explicit equality (2026-11-18)
+
+`jdk.m3.collections.SetOperatorViews` adds a distinct opt-in Java 21 interface,
+not an overload of `List<E>` or a change to `java.util.Set`:
+
+```java
+Set<String> union = SetOperatorViews.asEqualsOperator(left).or(right);
+Set<String> intersection = SetOperatorViews.asEqualsOperator(left).and(right);
+Set<String> difference = SetOperatorViews.asEqualsOperator(left).minus(right);
+Set<String> xor = SetOperatorViews.asEqualsOperator(left).xor(right);
+```
+
+`SetOperator<E>` has a `source()` hook and four overridable default methods.
+The explicit `asEqualsOperator` selection means equality is **always**
+`Objects.equals` plus consistent `hashCode`, regardless of operand source
+type. In particular, an `IdentityHashMap`-backed key set's distinct but
+equal references intentionally collapse, while differently cased strings
+from a case-insensitive `TreeSet` and an equals-based set remain distinct.
+The results do **not** implement `SortedSet` or claim to preserve a source
+comparator, identity membership, sorted order or comparator-defined equality.
+Such alternative policies require distinct typed capabilities and proofs.
+
+Each result retains only the source-set references and operation mode. The
+current source elements are projected on each read into a **temporary**
+dynamic `Object[]` slot column and two packed `long[]` membership masks;
+a local hash-to-slot lookup deduplicates under Java equality, and bitwise
+selection computes union/intersection/left difference/symmetric difference.
+No secondary per-element nodes are retained by the view. Projection requires
+expected O(n+m) time and O(n+m) temporary memory; `contains` scans source
+elements, and no universal zero-copy/performance superiority is claimed.
+Iteration visits the snapshot taken when the iterator is created; a
+spliterator binds on first traversal and reports `ORDERED | DISTINCT` but
+not `SIZED`. Later operations reflect subsequent source changes without
+mutating either operand; concurrent source mutation during projection has
+no stronger guarantee than the backing source provides.
+
+The focused Java 21 self-test passes 59,315 checks, including 350 seeded
+randomized `LinkedHashSet` algebra differentials, mask transitions at
+63/64/65 and 127/128/129, nulls, explicit identity/comparator projections,
+live mutations, read-only rejection and overridable defaults. Its Synexia
+hash-pinned Java LST and JEP recipes are independent of target-side recipe
+execution. This is a candidate, **not** an installed JDK/runtime qualification;
+symbolic `|`, `&`, `-`, `^` remain unavailable in ordinary Java 21.
 
 Future symbols are enabled only by explicit M3 language mode and an attributed, unambiguous capability or adapter match. A `List`/matrix ambiguity, `Map` collision without a policy, absent capability, or uncertain effect contract is a compile-time diagnostic—not a guessed overload. Ordinary Java 21 collection code remains byte-for-byte and behaviorally compatible.
 
