@@ -48,7 +48,7 @@ public final class M3DateTime extends JPanel {
         super(new BorderLayout());
         this.zone = Objects.requireNonNull(zone, "zone");
         Objects.requireNonNull(pattern, "pattern");
-        model = new SpinnerDateModel(new Date(0), null, null, Calendar.MINUTE);
+        model = new StrictSpinnerDateModel();
         spinner = new JSpinner(model);
         editor = new JSpinner.DateEditor(spinner, pattern);
         editor.getFormat().setTimeZone(TimeZone.getTimeZone(zone));
@@ -155,6 +155,28 @@ public final class M3DateTime extends JPanel {
         }
         setInstant(value);
         editor.getTextField().setValue(model.getValue());
+    }
+
+    /** Enforces the published inclusive bounds even through the exposed JSpinner. */
+    private final class StrictSpinnerDateModel extends SpinnerDateModel {
+        private static final long serialVersionUID = 1L;
+
+        StrictSpinnerDateModel() {
+            super(new Date(0), null, null, Calendar.MINUTE);
+        }
+
+        @Override public void setValue(Object value) {
+            if (!(value instanceof Date date)) throw new IllegalArgumentException("date required");
+            Instant instant = date.toInstant();
+            if ((lower != null && instant.isBefore(lower)) || (upper != null && instant.isAfter(upper))) {
+                throw new IllegalArgumentException("date outside bounds");
+            }
+            super.setValue(new Date(date.getTime()));
+        }
+
+        @Override public Object getValue() {
+            return new Date(((Date) super.getValue()).getTime());
+        }
     }
 
     @Override public void setEnabled(boolean enabled) {
