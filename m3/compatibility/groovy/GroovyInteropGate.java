@@ -43,12 +43,17 @@ public final class GroovyInteropGate {
             probe(Path.of(args[1]), Path.of(args[2]));
         } else if (args.length == 7 && args[0].equals("compare")) {
             compare(Path.of(args[1]), Path.of(args[2]), args[3],
-                    Path.of(args[4]), Path.of(args[5]), Path.of(args[6]));
+                    Path.of(args[4]), Path.of(args[5]), Path.of(args[6]), null);
+        } else if (args.length == 8 && args[0].equals("compare-locked")) {
+            compare(Path.of(args[1]), Path.of(args[2]), args[3],
+                    Path.of(args[4]), Path.of(args[5]), Path.of(args[7]), Path.of(args[6]));
         } else {
             System.err.println("Usage: GroovyInteropGate selftest");
             System.err.println("   or: GroovyInteropGate probe <fixtures-dir> <collisions.tsv>");
             System.err.println("   or: GroovyInteropGate compare <baseline-java> <candidate-java>"
                     + " <groovy-classpath> <fixtures-dir> <collisions.tsv> <output-dir>");
+            System.err.println("   or: GroovyInteropGate compare-locked <baseline-java> <candidate-java>"
+                    + " <groovy-classpath> <fixtures-dir> <collisions.tsv> <jar-lock.tsv> <output-dir>");
             System.exit(2);
         }
     }
@@ -92,12 +97,14 @@ public final class GroovyInteropGate {
                         + " failed: " + cause, cause);
             }
         }
-        System.out.println("M3G_META\tgroovy=" + Class.forName("groovy.lang.GroovySystem")
-                .getMethod("getVersion").invoke(null) + "\tjava=" + System.getProperty("java.runtime.version"));
+        Object groovyVersion = Class.forName("groovy.lang.GroovySystem")
+                .getMethod("getVersion").invoke(null);
+        emit("R:groovy-version", String.valueOf(groovyVersion));
+        System.out.println("M3G_META\tjava=" + System.getProperty("java.runtime.version"));
     }
 
     private static void compare(Path baselineJava, Path candidateJava, String groovyClasspath,
-            Path fixtures, Path collisions, Path outputDir) throws Exception {
+            Path fixtures, Path collisions, Path outputDir, Path jarLock) throws Exception {
         if (!Files.isRegularFile(baselineJava) || !Files.isRegularFile(candidateJava)) {
             throw new IllegalArgumentException("Both Java launchers must exist: "
                     + baselineJava + " and " + candidateJava);
@@ -105,14 +112,15 @@ public final class GroovyInteropGate {
         if (groovyClasspath.isBlank()) {
             throw new IllegalArgumentException("Supply a pinned Groovy jar classpath");
         }
+        if (jarLock != null) verifyJarLock(groovyClasspath, jarLock);
         Files.createDirectories(outputDir);
-        Map<String, String> inputSeals = seals(fixtures, collisions, groovyClasspath);
+        Map<String, String> inputSeals = allSeals(fixtures, collisions, groovyClasspath, jarLock);
         String baseline = launch(baselineJava, groovyClasspath, fixtures, collisions);
-        check(inputSeals.equals(seals(fixtures, collisions, groovyClasspath)),
-                "fixture or jar drift after baseline");
+        check(inputSeals.equals(allSeals(fixtures, collisions, groovyClasspath, jarLock)),
+                "fixture, jar or lock drift after baseline");
         String candidate = launch(candidateJava, groovyClasspath, fixtures, collisions);
-        check(inputSeals.equals(seals(fixtures, collisions, groovyClasspath)),
-                "fixture or jar drift after candidate");
+        check(inputSeals.equals(allSeals(fixtures, collisions, groovyClasspath, jarLock)),
+                "fixture, jar or lock drift after candidate");
         var pins = new StringBuilder();
         inputSeals.forEach((name, sha) -> pins.append(sha).append("  ").append(name).append("\n"));
         Files.writeString(outputDir.resolve("input-sha256.txt"), pins, StandardCharsets.UTF_8);
@@ -126,6 +134,63 @@ public final class GroovyInteropGate {
         Files.writeString(outputDir.resolve("differences.txt"), report, StandardCharsets.UTF_8);
         System.out.print(report);
         if (!findings.isEmpty()) System.exit(1);
+    }
+
+    /** A lock is meaningful only after the caller has independently verified the
+     * release signatures; this function then ensures that exact approved bytes run. */
+    private static void verifyJarLock(String classpath, Path jarLock) throws IOException {
+        Map<String, String> expected = lockEntries(jarLock);
+        Map<String, String> observed = new TreeMap<>();
+        for (String raw : classpath.split(java.util.regex.Pattern.quote(File.pathSeparator), -1)) {
+            if (raw.isBlank()) throw new IllegalArgumentException("Empty Groovy classpath entry");
+            Path jar = Path.of(raw);
+            String name = jar.getFileName().toString();
+            if (!name.endsWith(".jar")) throw new IllegalArgumentException("Not a jar: " + name);
+            Map<String, String> single = new TreeMap<>();
+            putSeal(single, name, jar);
+            if (observed.putIfAbsent(name, single.get(name)) != null) {
+                throw new IllegalArgumentException("Duplicate jar basename: " + name);
+            }
+        }
+        if (!expected.equals(observed)) {
+            throw new IllegalArgumentException("Unapproved or changed Groovy jar classpath");
+        }
+    }
+
+    private static Map<String, String> lockEntries(Path jarLock) throws IOException {
+        if (!Files.isRegularFile(jarLock) || Files.isSymbolicLink(jarLock)) {
+            throw new IllegalArgumentException("Missing or symlinked jar lock: " + jarLock);
+        }
+        Map<String, String> result = new TreeMap<>();
+        String previous = null;
+        for (String row : Files.readAllLines(jarLock, StandardCharsets.UTF_8)) {
+            if (row.isBlank() || row.startsWith("#")) continue;
+            String[] columns = row.split("\t", -1);
+            if (columns.length != 2 || !columns[0].matches("[A-Za-z0-9][A-Za-z0-9_.-]*\\.jar")
+                    || !columns[1].matches("[a-f0-9]{64}")) {
+                throw new IllegalArgumentException("Invalid Groovy jar-lock row: " + row);
+            }
+            String name = columns[0];
+            if (previous != null && name.compareTo(previous) <= 0) {
+                throw new IllegalArgumentException("Jar lock must be unique and sorted: " + name);
+            }
+            if (result.putIfAbsent(name, columns[1]) != null) {
+                throw new IllegalArgumentException("Duplicate jar in lock: " + name);
+            }
+            previous = name;
+        }
+        if (result.isEmpty()) throw new IllegalArgumentException("Empty jar lock");
+        return result;
+    }
+
+    private static Map<String, String> allSeals(Path fixtures, Path collisions,
+            String classpath, Path jarLock) throws IOException {
+        Map<String, String> result = seals(fixtures, collisions, classpath);
+        if (jarLock != null) {
+            verifyJarLock(classpath, jarLock);
+            putSeal(result, "groovy-jars.lock.tsv", jarLock);
+        }
+        return result;
     }
 
     private static Map<String, String> seals(Path fixtures, Path collisions,
@@ -175,10 +240,18 @@ public final class GroovyInteropGate {
     }
 
     private static String launch(Path executable, String groovyClasspath,
-            Path fixtures, Path collisions) throws IOException, InterruptedException {
-        String classpath = System.getProperty("java.class.path")
+            Path fixtures, Path collisions) throws Exception {
+        // Do not inherit arbitrary launcher dependencies; they could shadow the
+        // version-pinned Groovy jars and invalidate a differential comparison.
+        var ownCodeSource = GroovyInteropGate.class.getProtectionDomain().getCodeSource();
+        if (ownCodeSource == null || ownCodeSource.getLocation() == null) {
+            throw new IllegalStateException("Groovy oracle code source is unavailable");
+        }
+        String classpath = Path.of(ownCodeSource.getLocation().toURI())
                 + System.getProperty("path.separator") + groovyClasspath;
-        List<String> command = List.of(executable.toAbsolutePath().toString(), "-cp", classpath,
+        List<String> command = List.of(executable.toAbsolutePath().toString(),
+                "-Duser.language=en", "-Duser.country=US", "-Duser.timezone=UTC",
+                "-Dfile.encoding=UTF-8", "-cp", classpath,
                 GroovyInteropGate.class.getName(), "probe",
                 fixtures.toAbsolutePath().toString(), collisions.toAbsolutePath().toString());
         Path captured = Files.createTempFile("m3-groovy-oracle-", ".log");
@@ -287,7 +360,30 @@ public final class GroovyInteropGate {
         } finally {
             Files.deleteIfExists(fixture);
         }
-        System.out.println("M3_GROOVY_GATE_SELFTEST_PASS checks=9");
+        Path verifiedJar = Files.createTempFile("groovy-oracle-lock", ".jar");
+        Path lock = Files.createTempFile("groovy-oracle-approved", ".tsv");
+        try {
+            Files.writeString(verifiedJar, "trusted-test-bytes", StandardCharsets.UTF_8);
+            Map<String, String> jarSeals = new TreeMap<>();
+            putSeal(jarSeals, verifiedJar.getFileName().toString(), verifiedJar);
+            String name = verifiedJar.getFileName().toString();
+            Files.writeString(lock, name + "\t" + jarSeals.get(name) + "\n", StandardCharsets.UTF_8);
+            verifyJarLock(verifiedJar.toString(), lock);
+            check(lockEntries(lock).size() == 1, "valid jar lock");
+            Files.writeString(lock, name + "\t" + "0".repeat(64) + "\n", StandardCharsets.UTF_8);
+            expectInvalid(() -> verifyJarLock(verifiedJar.toString(), lock));
+            Files.writeString(lock, name + "\t" + jarSeals.get(name) + "\n"
+                    + name + "\t" + jarSeals.get(name) + "\n", StandardCharsets.UTF_8);
+            expectInvalid(() -> lockEntries(lock));
+            Files.writeString(lock, "bad-name\tbroken\n", StandardCharsets.UTF_8);
+            expectInvalid(() -> lockEntries(lock));
+            Files.writeString(lock, "# no packages approved\n", StandardCharsets.UTF_8);
+            expectInvalid(() -> lockEntries(lock));
+        } finally {
+            Files.deleteIfExists(verifiedJar);
+            Files.deleteIfExists(lock);
+        }
+        System.out.println("M3_GROOVY_GATE_SELFTEST_PASS checks=14");
     }
 
     private static void check(boolean success, String label) {

@@ -1193,6 +1193,72 @@ public final class ObjectStream<T> {
                 (state, ignored) -> state[0] = Math.addExact(state[0], 1L), state -> state[0]);
     }
 
+    /**
+     * Groovy 6 groupByMany shape, with M3's explicit source, key and membership
+     * budgets. A value can occur under multiple keys; a repeated key in the
+     * iterable contributes a repeated membership, preserving its side effects.
+     * Null key iterables skip that input, as in Groovy's GDK implementation.
+     *
+     * <p>Group directories use M3's array-backed ordered map, and members use
+     * M3's Object[]-backed list. There is no per-membership Entry/Pair graph.
+     * First occurrence determines key order; each group's members preserve
+     * source and key-iteration order. The result owns mutable groups and is
+     * independent of the source. This is not a Groovy MetaClass/GDK patch.
+     *
+     * <p>The value mapper runs once per admitted <em>membership</em>, not once
+     * per source element, following the GDK two-function form. Both callbacks
+     * execute sequentially on the caller's thread. Limits are checked before
+     * mutating the output. Any failure closes an opened source stream.
+     */
+    public <K, V> Map<K, List<V>> groupByMany(
+            Function<? super T, ? extends V> valueMapper,
+            Function<? super T, ? extends Iterable<? extends K>> keyMapper,
+            int maxElements, int maxKeys, long maxMemberships) {
+        Objects.requireNonNull(valueMapper, "valueMapper");
+        Objects.requireNonNull(keyMapper, "keyMapper");
+        requireNonNegative(maxElements, "maxElements");
+        requireNonNegative(maxKeys, "maxKeys");
+        if (maxMemberships < 0L) throw new IllegalArgumentException("negative maxMemberships");
+        Map<K, List<V>> groups = new M3LinkedHashMap<>();
+        int consumed = 0;
+        long memberships = 0L;
+        try (Stream<T> source = stream()) {
+            Iterator<T> iterator = source.iterator();
+            while (iterator.hasNext()) {
+                if (consumed >= maxElements) {
+                    throw new IllegalStateException("groupByMany source budget exceeded");
+                }
+                T element = iterator.next();
+                consumed++;
+                Iterable<? extends K> keys = keyMapper.apply(element);
+                if (keys == null) continue;
+                for (K key : keys) {
+                    if (memberships >= maxMemberships) {
+                        throw new IllegalStateException("groupByMany membership budget exceeded");
+                    }
+                    List<V> members = groups.get(key);
+                    if (members == null) {
+                        if (groups.size() >= maxKeys) {
+                            throw new IllegalStateException("groupByMany key budget exceeded");
+                        }
+                        members = new M3ArrayList<>();
+                        groups.put(key, members);
+                    }
+                    members.add(valueMapper.apply(element));
+                    memberships++;
+                }
+            }
+        }
+        return groups;
+    }
+
+    /** Identity-preserving one-to-many grouping with no per-element tuple. */
+    public <K> Map<K, List<T>> groupByMany(
+            Function<? super T, ? extends Iterable<? extends K>> keyMapper,
+            int maxElements, int maxKeys, long maxMemberships) {
+        return groupByMany(Function.identity(), keyMapper, maxElements, maxKeys, maxMemberships);
+    }
+
     /** Compute two collectors in one ordered traversal; output is merged only after successful input closure. */
     public <A, B, R1, R2, R> R tee(
             Collector<? super T, A, R1> first,
