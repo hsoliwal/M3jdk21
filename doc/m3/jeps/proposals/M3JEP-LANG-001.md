@@ -5,7 +5,7 @@
 | Field | Value |
 | --- | --- |
 | Proposal | `M3JEP-LANG-001` (Synexia internal, **not** an OpenJDK JEP number) |
-| State | **Draft / arithmetic and collection named-default candidates; Java-equality generic set candidate; symbolic lowering HOLD** |
+| State | **Draft / arithmetic, sequence, set and explicit-policy map named-default candidates; symbolic lowering HOLD** |
 | Author | Hitesh Soliwal and contributors to the Synexia Project |
 | Kind | M3JDK21 opt-in feature candidate |
 | Inspiration | Kotlin, Scala, C++ (ideas only; no third-party source copied) |
@@ -66,7 +66,7 @@ Collections make overloading inherently non-uniform. The compiler must distingui
 | --- | --- | --- | --- |
 | `List<E>`, ordered sequences | `a + b` | Ordered concatenation into a new logical composition, maintaining source order and duplicates | Java 21 named-default candidate; syntax HOLD |
 | `Set<E>` | Union, intersection, difference, symmetric difference | Explicit equality policy; no implicit identity/comparator coercion | Java 21 equals-policy named-default candidate; other policies and syntax HOLD |
-| `Map<K,V>` | `a + b` | Explicit key collision policy and retention of map ordering/comparator semantics | No implicit default |
+| `Map<K,V>` | `a + b` | Explicit key collision and key-identity policy; no inferred source comparator | Java 21 policy-required named-default candidate; implicit default and syntax HOLD |
 | Primitive/offset arrays | `a + b` | Explicit concatenation view or materialization policy, bounds, aliasing, copy/JNI ownership | Design HOLD |
 | Numeric vectors/matrices | `a + b` | Element-wise typed arithmetic, shape/broadcast contract and overflow/rounding policy | Design HOLD |
 | Indexed containers | `a[i]` | Explicit read/write capability, index type, bounds and side-effect rules | Design HOLD |
@@ -178,6 +178,49 @@ live mutations, read-only rejection and overridable defaults. Its Synexia
 hash-pinned Java LST and JEP recipes are independent of target-side recipe
 execution. This is a candidate, **not** an installed JDK/runtime qualification;
 symbolic `|`, `&`, `-`, `^` remain unavailable in ordinary Java 21.
+
+### Generic map named-default candidate with mandatory collision policy (2026-11-18)
+
+An independent additive `jdk.m3.collections.MapOperatorViews` owner defines:
+
+```java
+Map<K, V> result = MapOperatorViews.asEqualsOperator(left)
+    .plus(right, MapOperatorViews.CollisionPolicy.KEEP_RIGHT);
+```
+
+The `MapOperator<K,V>` interface has an overridable default `plus`, **but no
+policy-free `plus` method**. One of `REJECT`, `KEEP_LEFT` or `KEEP_RIGHT` must
+be supplied. Cross-source equal key collisions are rejected on touch, retain
+the left value, or take the right value respectively; the *left key object*
+is retained for either keep policy. New right keys follow unique left keys
+in the projected iteration order. The result is Java-`equals`/`hashCode` keyed,
+not identity- or comparator-keyed; it does not claim `SortedMap` or source
+comparator ordering. Input maps containing distinct keys that are `equals`
+under the selected Java policy are **refused**, even with KEEP policies, to
+avoid silently collapsing internal source entries. Null keys and values
+remain valid in the resulting logical map.
+
+The backing maps are kept by reference without copying entries at result
+construction. Each read uses a temporary, dynamically grown `Object[]`
+key/value column pair, a hash-to-slot lookup, and two `long[]` packed
+source-origin bitmaps. Only the current on-demand iterator projection exposes
+fresh immutable `Map.Entry` objects to the Java API. Map and entry-set
+mutators, including `compute`, `merge`, `replace` and default conditional
+operations, always reject writes. The view reflects later source edits on
+subsequent reads; a previously created entry iterator is a snapshot, and
+entry-set spliterators bind at first traversal. No atomic cross-map state,
+serialization compatibility, enhanced concurrency or speedup is claimed.
+Projection has expected O(n+m) time and O(n+m) temporary space, subject to
+hash-collision worst cases and source-entry iteration costs.
+
+The focused Java 21 oracle passes 182,118 checks, including 350 seeded
+randomized map pairs for KEEP_LEFT/KEEP_RIGHT and explicit REJECT collisions,
+source duplicate-equality rejection, nullable keys/values, key-object
+identity, 63/64/65 packed-bit boundaries, read-only default mutators,
+live views, snapshot traversal and overridable named default dispatch.
+This is an additive named Java 21 library **candidate**; ordinary Java 21
+still has no map `+` operator and the M3 compiler's symbolic lowering remains
+HOLD under the ordered receiving gates.
 
 Future symbols are enabled only by explicit M3 language mode and an attributed, unambiguous capability or adapter match. A `List`/matrix ambiguity, `Map` collision without a policy, absent capability, or uncertain effect contract is a compile-time diagnostic—not a guessed overload. Ordinary Java 21 collection code remains byte-for-byte and behaviorally compatible.
 
