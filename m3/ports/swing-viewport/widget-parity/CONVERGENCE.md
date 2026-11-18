@@ -210,3 +210,52 @@ see [GRID_SPANS.md](GRID_SPANS.md).
 For flat collapsible row group implementation, previous sorter preservation,
 serialization, and large-model projection, see
 [GRID_ROW_GROUPS.md](GRID_ROW_GROUPS.md).
+
+## Native Swing wave: graphical MonthView and CDateTime CalendarCombo
+
+The canonical java.desktop and swing-viewport M3DateTime source owner is
+extended additively. **Existing construction defaults to spinner-only**;
+the new graphical picker is opt-in via setCalendarPopupEnabled(true).
+Neither javax.swing nor SwingX public behavior is replaced.
+
+- M3MonthView: actual JTable-based 6x7 month grid, one AbstractTableModel,
+  dates derived from a single primitive epoch-day origin rather than 42
+  separate widgets or a collection of editable day objects.
+- Locale-dependent first weekday and month heading, range-limited and
+  disabled selection, prior/next navigation, JTable Enter and mouse commit.
+  Programmatic selected date publishes a property change, not a user action.
+- M3DateTime keeps its existing JSpinner/SpinnerDateModel authority.
+  Opt-in calendar button and lazy JPopupMenu host exactly one M3MonthView.
+  Date-only selection retains original wall-clock time and canonical instant
+  is updated only when a selected wall time is uniquely valid in its ZoneId.
+  DST gap/overlap or range failure rejects atomically; the popup selection
+  is restored from the canonical spinner value.
+- The same production changes are in both the swing-viewport port and
+  src/java.desktop/share/classes (byte-identical Git blobs).
+- Existing DateTimeSmoke remains unchanged. New CalendarSmoke tests
+  navigation, locale, boundaries, event order, click/keyboard commitment,
+  one-table model identity, timestamp preservation and DST rejection.
+  Xvfb headful test opens popup in a real JFrame, sends a mouse event to
+  the JTable day cell, commits the new value, closes and detaches the popup.
+
+Qualification on stock OpenJDK 21.0.12.1:
+
+- javac --release 21 -Xlint:all,-serial,-this-escape -Werror: PASS.
+- M3DateTimeSmoke: PASS (prior CDateTime spinner contract regression).
+- M3MonthViewCalendarSmoke: PASS (headless EDT, -Xmx128m).
+- M3MonthViewHeadfulSmoke: PASS (xvfb-run, native X11 popup/event lifecycle).
+- Committed production and test Git blob SHAs match tested local files.
+
+Still OPEN: direct native SWT/Nebula and SwingX screenshot/behavior
+differentials across Win32/GTK/Cocoa, locale RTL and first-week settings,
+multi-select and other advanced CDateTime style bitmasks, platform screen
+readers, date-only JXDatePicker deep linkage, entire JDK/Maven reactor,
+OpenRewrite source-sealed fixed-point recipe and full Printer/SWT peers.
+
+Donor provenance (behavior only; no licensed source copied):
+- Nebula CDateTime.java Git blob
+  6182d7e1926f3568f7cee2ded8480eb84b4a459c (EPL-2.0).
+- Nebula DiscreteTimePicker.java Git blob
+  f794230deb509304f3cc85302e0e18faab605c09 (EPL-2.0).
+- SwingX JXDatePicker.java Git blob
+  40394a5730e87df65ad53a931f1ada1a7379a5ef (LGPL-2.1).
