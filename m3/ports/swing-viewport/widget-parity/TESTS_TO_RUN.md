@@ -187,3 +187,25 @@ xvfb-run -a java -Djava.awt.headless=false -Xmx128m -cp /tmp/m3-monthview jdk.m3
 
 See [GRID_COLUMN_GROUPS.md](GRID_COLUMN_GROUPS.md) for source locks,
 reproduction, exact feature scope and outstanding acceptance gates.
+
+## Native Grid summary/detail column collapse
+
+| Gate | Status |
+|---|---|
+| Exact SHA-locked canonical M3Grid.java d921b33aa9f169f87bf9f0e155b35d354ddd5a8b | VERIFIED |
+| Java 21 strict -Xlint:all,-serial,-this-escape -Werror compile | LOCAL_PASS |
+| --patch-module java.desktop compile and named-module smokes | LOCAL_PASS |
+| 8 inherited Grid headless regressions (frozen, pinned, spans, sparse row grouping and two-tier headers) | LOCAL_PASS |
+| M3GridColumnSummarySmoke: model identity, selection, event order, editor veto, frozen boundary, reorder, schema replacement | LOCAL_PASS |
+| M3GridColumnSummarySerializationSmoke: collapse state and real TableColumn identity after round-trip | LOCAL_PASS |
+| M3GridColumnSummaryScale: 1M model rows, 5000 model columns, far viewport and <160 model reads under 128 MiB | LOCAL_PASS |
+| Five inherited Linux Xvfb Robot mouse tests | LOCAL_PASS |
+| M3GridColumnSummaryHeadfulSmoke: native disclosure click and unchanged lower-tier sorting | XVFB_PASS |
+| Legacy serialized pre-group Grid fixture remains readable | LOCAL_PASS |
+| javap previous 41 vs new 48 public signature lines, zero removed | LOCAL_PASS |
+| Full source-built M3JDK image/jtreg, complete Maven/JUnit reactor | NOT_RUN |
+| Native Windows/macOS/GTK4, HiDPI, accessibility, RTL, alternate LookAndFeel | NOT_RUN |
+| Multiple summary roles, nested groups, canonical Synexia OpenRewrite fixed-point and benchmarks | OPEN |
+
+See [GRID_COLUMN_SUMMARY.md](GRID_COLUMN_SUMMARY.md) for source seals,
+precise contracts and unqualified behavior.

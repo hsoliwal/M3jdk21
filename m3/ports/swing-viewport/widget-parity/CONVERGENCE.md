@@ -71,6 +71,9 @@ Neither javax.swing nor SwingX nor SWT/Nebula was changed by this PR.
   basic body row/column spans are source-locked and tested;
   a first opt-in model-column grouped-title tier now shares the native
   JTableHeader owner (see [GRID_COLUMN_GROUPS.md](GRID_COLUMN_GROUPS.md));
+  native summary/detail columns retain the original TableColumn objects,
+  with collapse/expand under the existing TableColumnModel (see
+  [GRID_COLUMN_SUMMARY.md](GRID_COLUMN_SUMMARY.md));
   pinned-row behavior is detailed in [GRID_PINNED_ROWS.md](GRID_PINNED_ROWS.md).
 - Gallery, Gantt, charts, tiles, Carousel: enrich the existing M3 generated
   component templates and models, never add parallel widget families.
