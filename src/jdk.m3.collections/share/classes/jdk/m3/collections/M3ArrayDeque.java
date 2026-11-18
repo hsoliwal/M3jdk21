@@ -99,15 +99,15 @@ public final class M3ArrayDeque<E> extends AbstractCollection<E>
         selectionBits(required, forbidden);
         Objects.requireNonNull(backend, "backend");
         if (backend == IndexMaskCompactor.Backend.NATIVE_REQUIRED) {
-            int[] order = new int[size];
+            // The JNI engine already owns logical-position selection. Avoid
+            // constructing an entire int[size] array of physical row IDs.
             byte[] admitted = new byte[size];
             for (int i = 0; i < size; i++) {
-                int slot = position(i), bits = states[slot] & 255;
-                order[i] = slot;
+                int bits = states[position(i)] & 255;
                 admitted[i] = (byte) (((bits & required) == required
                         && (bits & forbidden) == 0) ? 1 : 0);
             }
-            return IndexMaskCompactor.select(order, admitted, 1, backend);
+            return selectedPhysicalIndicesFromAdmitted(admitted, backend);
         }
         int count = 0;
         for (int i = 0; i < size; i++) {
@@ -121,6 +121,32 @@ public final class M3ArrayDeque<E> extends AbstractCollection<E>
         }
         return result;
     }
+    /**
+     * Turn selected logical occurrences into physical ring offsets. JNI only
+     * sees primitive byte state and emits logical ordinals; the GC-traced
+     * Object[] never crosses the native boundary. Existing legacy JNI selector
+     * fallback stays owned by IndexMaskCompactor, not by this deque.
+     *
+     * Package-local to permit a real Java selector oracle without JNI.
+     */
+    int[] selectedPhysicalIndicesFromAdmitted(byte[] admitted,
+            IndexMaskCompactor.Backend backend) {
+        Objects.requireNonNull(admitted, "admitted");
+        Objects.requireNonNull(backend, "backend");
+        if (admitted.length != size) {
+            throw new IllegalArgumentException("aligned admission length mismatch");
+        }
+        int[] ordinals = IndexMaskCompactor.selectPositions(admitted, LIVE, backend);
+        for (int i = 0; i < ordinals.length; i++) {
+            int logical = ordinals[i];
+            if (logical < 0 || logical >= size) {
+                throw new IllegalStateException("native position outside deque window");
+            }
+            ordinals[i] = position(logical);
+        }
+        return ordinals;
+    }
+
     private void grow() {
         if (size < values.length) return;
         if (size >= MAX_CAPACITY) throw new OutOfMemoryError("M3 Deque capacity exhausted");
