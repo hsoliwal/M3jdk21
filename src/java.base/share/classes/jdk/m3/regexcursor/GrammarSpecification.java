@@ -251,7 +251,7 @@ public final class GrammarSpecification {
             Table table = syntaxImage == null
                     ? buildTable(startSymbol, grammarRows, rhs, nonterminals, terminals)
                     : readSyntaxImage(syntaxImage, fingerprint, startSymbol,
-                            nonterminals, terminals, rhs.length);
+                            nonterminals, terminals, productionLhs);
             keys = table.keys;
             values = table.values;
         }
@@ -918,8 +918,10 @@ public final class GrammarSpecification {
     }
 
     private static Table readSyntaxImage(byte[] image, String fingerprint, int start,
-            int[] nonterminals, int[] terminals, int productionCount) {
+            int[] nonterminals, int[] terminals, int[] productionLhs) {
         Objects.requireNonNull(image, "syntaxImage");
+        // Authenticate and decode one snapshot, never two caller-owned generations.
+        image = image.clone();
         if (image.length < 8 + 64 + 4 + 4 + 4 + 4 + 32
                 || image.length > MAX_SYNTAX_IMAGE) {
             throw new IllegalArgumentException("syntax image length invalid");
@@ -962,7 +964,8 @@ public final class GrammarSpecification {
                 if (key <= lastKey || nonterminalIndex < 0
                         || nonterminalIndex >= nonterminals.length || tokenId < 0
                         || (tokenId != 0 && Arrays.binarySearch(terminals, tokenId) < 0)
-                        || value < 0 || value >= productionCount) {
+                        || value < 0 || value >= productionLhs.length
+                        || productionLhs[value] != nonterminals[nonterminalIndex]) {
                     throw new IllegalArgumentException("syntax image invalid predictive entry");
                 }
                 keys[i] = key;
