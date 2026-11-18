@@ -175,6 +175,40 @@ public final class M3LongLane28 {
         else System.arraycopy(source, sourceFrom, destination, offset, count);
     }
 
+    /**
+     * Releases all-zero 4,096-value pages and then empty region directories.
+     * Does not change any logical long value or retain a second occupancy index.
+     * This explicit, linear-time maintenance operation is never run by a hot write.
+     * Freed arrays become eligible for collection; this is not an immediate GC request.
+     *
+     * @return the number of physical payload pages released
+     */
+    public int compact() {
+        if (allocatedBlocks == 0) return 0;
+        int released = 0;
+        for (int r = 0; r < regions.length; r++) {
+            long[][] region = regions[r];
+            if (region == null) continue;
+            int live = 0;
+            for (int b = 0; b < region.length; b++) {
+                long[] page = region[b];
+                if (page == null) continue;
+                boolean occupied = false;
+                for (long value : page) {
+                    if (value != 0L) { occupied = true; break; }
+                }
+                if (occupied) live++;
+                else { region[b] = null; released++; }
+            }
+            if (live == 0) {
+                regions[r] = null;
+                allocatedRegions--;
+            }
+        }
+        allocatedBlocks -= released;
+        return released;
+    }
+
     private long[] blockOrNull(int slot) {
         long[][] region = regions[M3Address28.region(slot)];
         return region == null ? null : region[M3Address28.block(slot)];
