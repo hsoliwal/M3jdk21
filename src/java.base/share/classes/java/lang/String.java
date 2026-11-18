@@ -7368,7 +7368,8 @@ public final class String
 
     /**
      * Removes the leading U+0000 through U+0020 prefix and {@code marginChar}
-     * from each line whose first non-control-or-space unit is {@code marginChar}.
+     * from each line whose first character after any eligible prefix is the
+     * marker. When the marker itself is U+0000 through U+0020 it is not skipped.
      * Line endings are retained exactly. A line with no margin marker is unchanged.
      *
      * @apiNote
@@ -7397,7 +7398,8 @@ public final class String
             int end = start;
             while (end < sourceLength && charAt(end) != '\r' && charAt(end) != '\n') end++;
             int marker = start;
-            while (marker < end && charAt(marker) <= ' ') marker++;
+            while (marker < end && charAt(marker) <= ' '
+                    && charAt(marker) != marginChar) marker++;
             int next = end == sourceLength ? end
                     : charAt(end) == '\r' && end + 1 < sourceLength
                             && charAt(end + 1) == '\n' ? end + 2 : end + 1;

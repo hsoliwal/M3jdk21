@@ -568,7 +568,8 @@ final class M3String implements CharSequence {
     /**
      * Scala-style margin removal by retaining exact canonical source ranges. No
      * whole-string copy is made; line breaks remain part of the original owner.
-     * The marker is the first unit after any U+0000 through U+0020 prefix.
+     * Prefix units U+0000 through U+0020 are skipped only while they differ
+     * from the requested marker (which itself may be whitespace).
      */
     M3String stripMargin(char marginChar) {
         int sourceLength = length();
@@ -578,7 +579,8 @@ final class M3String implements CharSequence {
             int end = start;
             while (end < sourceLength && charAt(end) != '\r' && charAt(end) != '\n') end++;
             int marker = start;
-            while (marker < end && charAt(marker) <= ' ') marker++;
+            while (marker < end && charAt(marker) <= ' '
+                    && charAt(marker) != marginChar) marker++;
             if (marker < end && charAt(marker) == marginChar) {
                 if (pieces == null) pieces = new ArrayList<>();
                 if (retainedStart < start) pieces.add(slice(retainedStart, start));

@@ -65,6 +65,9 @@ public class StringCrossLanguageTest {
         expect("x\n", "\u001F|x\n".stripMargin());
         expect("\u2003|not-a-control", "\u2003|not-a-control".stripMargin());
         expect("\u2028|after-separator", "\u2028|after-separator".stripMargin());
+        expect(" abc", "  abc".stripMargin(' '));
+        expect("b", " \tb".stripMargin('\t'));
+        expect("a", "\u0000a".stripMargin('\u0000'));
         expect("", "|".stripMargin());
         expect("|\n", "  ||\n".stripMargin());
         String noMargin = new String(new char[] {'n', 'o', '|', 'x'});
@@ -101,7 +104,8 @@ public class StringCrossLanguageTest {
             while (end < text.length() && text.charAt(end) != '\n'
                     && text.charAt(end) != '\r') end++;
             int first = start;
-            while (first < end && text.charAt(first) <= 0x20) first++;
+            while (first < end && text.charAt(first) <= 0x20
+                    && text.charAt(first) != margin) first++;
             out.append(text, first < end && text.charAt(first) == margin ? first + 1 : start,
                     end);
             int next = end;
@@ -118,7 +122,7 @@ public class StringCrossLanguageTest {
     private static void randomized() {
         char[] alphabet = {'a', 'Z', '#', '|', '=', ' ', '\t', '\r', '\n',
                 '\u001F', '\uD83D', '\uDE00', '\uD800', '\uDC00', '\u2003'};
-        char[] margins = {'|', '#', ' ', '\u2003'};
+        char[] margins = {'|', '#', ' ', '\t', '\u0000', '\u2003'};
         Random random = new Random(0x9a4217bcL);
         for (int trial = 0; trial < 5_000; trial++) {
             int size = random.nextInt(80);
