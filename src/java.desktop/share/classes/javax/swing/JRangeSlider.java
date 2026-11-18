@@ -144,12 +144,20 @@ public class JRangeSlider extends JSlider {
         }
     }
 
-    /** Returns the lower selected value. @return the model value */
+    /**
+     * Returns the lower selected value.
+     *
+     * @return the model value
+     */
     public int getLowerValue() {
         return getValue();
     }
 
-    /** Returns the upper selected value. @return the model value plus extent */
+    /**
+     * Returns the upper selected value.
+     *
+     * @return the model value plus extent
+     */
     public int getUpperValue() {
         return (int) ((long) getValue() + getExtent());
     }

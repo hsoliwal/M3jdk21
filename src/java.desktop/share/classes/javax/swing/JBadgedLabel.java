@@ -65,22 +65,40 @@ public class JBadgedLabel extends JLabel {
         super();
     }
 
-    /** Creates a label with ordinary JLabel text and no badge. */
+    /**
+     * Creates a label with ordinary JLabel text and no badge.
+     *
+     * @param text the label text
+     */
     public JBadgedLabel(String text) {
         super(text);
     }
 
-    /** Creates a label with an ordinary JLabel icon and no badge. */
+    /**
+     * Creates a label with an ordinary JLabel icon and no badge.
+     *
+     * @param icon the label icon
+     */
     public JBadgedLabel(Icon icon) {
         super(icon);
     }
 
-    /** Creates a label with text and an icon, using the ordinary JLabel layout. */
+    /**
+     * Creates a label with text and an icon, using the ordinary JLabel layout.
+     *
+     * @param text the label text
+     * @param icon the label icon
+     * @param horizontalAlignment the horizontal alignment of the label contents
+     */
     public JBadgedLabel(String text, Icon icon, int horizontalAlignment) {
         super(text, icon, horizontalAlignment);
     }
 
-    /** Returns the badge value, or {@code null} if it is absent. */
+    /**
+     * Returns the badge value, or {@code null} if it is absent.
+     *
+     * @return the badge value, or {@code null} if no value is set
+     */
     public String getBadgeValue() {
         return badgeValue;
     }
@@ -88,6 +106,8 @@ public class JBadgedLabel extends JLabel {
     /**
      * Sets the badge's text; {@code null} or empty hides the badge.
      * Does not modify {@link #getText()} or the label's icon.
+     *
+     * @param value the badge text; {@code null} or empty hides the badge
      */
     public void setBadgeValue(String value) {
         String old = badgeValue;
@@ -107,12 +127,20 @@ public class JBadgedLabel extends JLabel {
         repaint();
     }
 
-    /** Returns the badge's foreground color. */
+    /**
+     * Returns the badge's foreground color.
+     *
+     * @return the badge foreground color
+     */
     public Color getBadgeForeground() {
         return badgeForeground;
     }
 
-    /** Sets its foreground color, independently of the label foreground. */
+    /**
+     * Sets its foreground color, independently of the label foreground.
+     *
+     * @param color the non-null badge foreground color
+     */
     public void setBadgeForeground(Color color) {
         Color next = Objects.requireNonNull(color, "color");
         Color old = badgeForeground;
@@ -121,12 +149,20 @@ public class JBadgedLabel extends JLabel {
         repaint();
     }
 
-    /** Returns the badge's background color. */
+    /**
+     * Returns the badge's background color.
+     *
+     * @return the badge background color
+     */
     public Color getBadgeBackground() {
         return badgeBackground;
     }
 
-    /** Sets its background color, independently of the label background. */
+    /**
+     * Sets its background color, independently of the label background.
+     *
+     * @param color the non-null badge background color
+     */
     public void setBadgeBackground(Color color) {
         Color next = Objects.requireNonNull(color, "color");
         Color old = badgeBackground;
@@ -135,12 +171,20 @@ public class JBadgedLabel extends JLabel {
         repaint();
     }
 
-    /** Returns LEADING, TRAILING, LEFT or RIGHT for badge placement. */
+    /**
+     * Returns LEADING, TRAILING, LEFT or RIGHT for badge placement.
+     *
+     * @return the horizontal badge alignment
+     */
     public int getBadgeHorizontalAlignment() {
         return badgeHorizontalAlignment;
     }
 
-    /** Sets the badge side; LEADING/TRAILING follow component orientation. */
+    /**
+     * Sets the badge side; LEADING/TRAILING follow component orientation.
+     *
+     * @param alignment {@code LEADING}, {@code TRAILING}, {@code LEFT}, or {@code RIGHT}
+     */
     public void setBadgeHorizontalAlignment(int alignment) {
         if (alignment != LEADING && alignment != TRAILING
                 && alignment != LEFT && alignment != RIGHT) {
@@ -152,12 +196,20 @@ public class JBadgedLabel extends JLabel {
         repaint();
     }
 
-    /** Returns TOP or BOTTOM for badge placement. */
+    /**
+     * Returns TOP or BOTTOM for badge placement.
+     *
+     * @return the vertical badge alignment
+     */
     public int getBadgeVerticalAlignment() {
         return badgeVerticalAlignment;
     }
 
-    /** Sets TOP or BOTTOM for badge placement. */
+    /**
+     * Sets TOP or BOTTOM for badge placement.
+     *
+     * @param alignment {@code TOP} or {@code BOTTOM}
+     */
     public void setBadgeVerticalAlignment(int alignment) {
         if (alignment != TOP && alignment != BOTTOM) {
             throw new IllegalArgumentException("badge vertical alignment: " + alignment);
@@ -237,6 +289,7 @@ public class JBadgedLabel extends JLabel {
         return accessibleContext;
     }
 
+    /** Accessible context that appends the badge value to the label description. */
     protected class AccessibleJBadgedLabel extends AccessibleJLabel {
         @Serial
         private static final long serialVersionUID = 1L;

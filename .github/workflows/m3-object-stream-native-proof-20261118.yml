@@ -11,6 +11,15 @@ on:
       - 'm3/collections/qualification/stream-current-compatible-20261118/**'
       - 'm3/collections/test_verify_stream_current.py'
       - 'm3/collections/pom.xml'
+      - 'src/java.base/share/classes/java/lang/String.java'
+      - 'src/java.base/share/classes/java/util/stream/Streams.java'
+      - 'test/jdk/java/lang/String/StringCaseFamily*.java'
+      - 'test/jdk/java/util/stream/Streams/StreamMapNotNullTest.java'
+      - '.github/actions/build-jtreg/**'
+      - '.github/actions/config/**'
+      - 'make/conf/github-actions.conf'
+      - 'make/autoconf/lib-skia.m4'
+      - 'make/autoconf/lib-tests.m4'
   pull_request:
     paths:
       - '.github/workflows/m3-object-stream-native-proof-20261118.yml'
@@ -19,6 +28,15 @@ on:
       - 'm3/collections/qualification/stream-current-compatible-20261118/**'
       - 'm3/collections/test_verify_stream_current.py'
       - 'm3/collections/pom.xml'
+      - 'src/java.base/share/classes/java/lang/String.java'
+      - 'src/java.base/share/classes/java/util/stream/Streams.java'
+      - 'test/jdk/java/lang/String/StringCaseFamily*.java'
+      - 'test/jdk/java/util/stream/Streams/StreamMapNotNullTest.java'
+      - '.github/actions/build-jtreg/**'
+      - '.github/actions/config/**'
+      - 'make/conf/github-actions.conf'
+      - 'make/autoconf/lib-skia.m4'
+      - 'make/autoconf/lib-tests.m4'
   workflow_dispatch:
 
 permissions:
@@ -60,6 +78,7 @@ jobs:
           sudo apt-get install -y --no-install-recommends \
             autoconf make gcc g++ zip unzip \
             libasound2-dev libcups2-dev libfontconfig1-dev libfreetype6-dev \
+            libegl-dev libgles-dev \
             libx11-dev libxext-dev libxrender-dev libxrandr-dev libxtst-dev libxt-dev
       - name: Acquire hash-pinned Java 21 boot JDK
         run: |
@@ -72,18 +91,81 @@ jobs:
             "$RUNNER_TEMP/m3jdk21.tar.gz" | sha256sum --check -
           tar -xzf "$RUNNER_TEMP/m3jdk21.tar.gz" -C "$RUNNER_TEMP"
           printf 'BOOT_JDK=%s\n' "$RUNNER_TEMP/jdk-21.0.12.1+1" >> "$GITHUB_ENV"
+      - name: Acquire hash-pinned bundled Skia build tools
+        run: |
+          set -euo pipefail
+          tools_dir="$RUNNER_TEMP/m3-native-build-tools"
+          mkdir -p "$tools_dir/gn" "$tools_dir/ninja"
+          curl --fail --location --retry 3 \
+            'https://chrome-infra-packages.appspot.com/dl/gn/gn/linux-amd64/+/git_revision:b2afae122eeb6ce09c52d63f67dc53fc517dbdc8' \
+            -o "$tools_dir/gn.zip"
+          printf '%s  %s\n' \
+            '6a3bfc53d825bccac5e5b4b7bdcc10ce9396a04a689ac684ec3308ca5c7f3d9c' \
+            "$tools_dir/gn.zip" | sha256sum --check -
+          unzip -q "$tools_dir/gn.zip" -d "$tools_dir/gn"
+          curl --fail --location --retry 3 \
+            'https://github.com/ninja-build/ninja/releases/download/v1.12.1/ninja-linux.zip' \
+            -o "$tools_dir/ninja.zip"
+          printf '%s  %s\n' \
+            '6f98805688d19672bd699fbbfa2c2cf0fc054ac3df1f0e6a47664d963d530255' \
+            "$tools_dir/ninja.zip" | sha256sum --check -
+          unzip -q "$tools_dir/ninja.zip" -d "$tools_dir/ninja"
+          "$tools_dir/gn/gn" --version | tee "$RUNNER_TEMP/m3-gn-version.log"
+          "$tools_dir/ninja/ninja" --version | tee "$RUNNER_TEMP/m3-ninja-version.log"
+          grep -Fx '2175 (b2afae122eeb)' "$RUNNER_TEMP/m3-gn-version.log"
+          grep -Fx '1.12.1' "$RUNNER_TEMP/m3-ninja-version.log"
+          printf 'M3_GN=%s\n' "$tools_dir/gn/gn" >> "$GITHUB_ENV"
+          printf 'M3_NINJA=%s\n' "$tools_dir/ninja/ninja" >> "$GITHUB_ENV"
+      - name: Verify repository jtreg source version
+        run: |
+          set -euo pipefail
+          printf '%s  %s\n' \
+            '0f5beeddee72c440d7e17b610abb6a68073ad30b6cce25a25b5269b189732b5c' \
+            '.github/actions/build-jtreg/action.yml' \
+            'b46d8aba28fdf12cf48eb65de762012c28642c23ba52b1d031b526ce77ba5cdb' \
+            '.github/actions/config/action.yml' | sha256sum --check -
+          grep -Fx 'JTREG_VERSION=8.2.1+1' make/conf/github-actions.conf
+      - name: Build repository-owned jtreg harness
+        uses: ./.github/actions/build-jtreg
+      - name: Verify installed repository jtreg harness
+        run: |
+          set -euo pipefail
+          "$BOOT_JDK/bin/java" -jar "$GITHUB_WORKSPACE/jtreg/installed/lib/jtreg.jar" -version \
+            | tee "$RUNNER_TEMP/m3-jtreg-version.log"
+          grep -E '^jtreg 8[.]2[.]1([+ -]|$)' "$RUNNER_TEMP/m3-jtreg-version.log"
       - name: Configure and build modified M3JDK21 image
         run: |
           set -euo pipefail
           bash configure \
+            --with-conf-name=m3-groovy-native-proof \
             --with-boot-jdk="$BOOT_JDK" \
+            --with-gn="$M3_GN" \
+            --with-ninja="$M3_NINJA" \
+            --with-jtreg="$GITHUB_WORKSPACE/jtreg/installed" \
             --with-debug-level=release \
             --with-jvm-variants=server \
             --disable-warnings-as-errors
-          make JOBS=2 images
-          m3_java="$(find build -type f -path '*/jdk/bin/java' -print -quit)"
-          test -n "$m3_java"
-          m3_home="$(dirname "$(dirname "$m3_java")")"
+          make CONF=m3-groovy-native-proof JOBS=2 images
+      - name: Verify packaged M3 image identity
+        run: |
+          set -euo pipefail
+          m3_home="$GITHUB_WORKSPACE/build/m3-groovy-native-proof/images/jdk"
+          test -d "$m3_home"
+          test "$(realpath "$m3_home")" = "$m3_home"
+          for tool in java javac javap jlink; do
+            test -x "$m3_home/bin/$tool"
+            case "$(realpath "$m3_home/bin/$tool")" in
+              "$m3_home"/*) ;;
+              *) printf 'Image launcher escapes packaged JDK: %s\n' "$tool" >&2; exit 1 ;;
+            esac
+          done
+          for required in lib/modules release jmods/java.base.jmod jmods/jdk.m3.collections.jmod; do
+            test -s "$m3_home/$required"
+          done
+          "$m3_home/bin/java" -XshowSettings:properties -version \
+            2>&1 | tee "$RUNNER_TEMP/m3-packaged-image-identity.log"
+          runtime_home="$(sed -n 's/^ *java[.]home = //p' "$RUNNER_TEMP/m3-packaged-image-identity.log")"
+          test "$runtime_home" = "$m3_home"
           printf 'M3_JAVA_HOME=%s\n' "$m3_home" >> "$GITHUB_ENV"
           "$m3_home/bin/java" -version
           "$m3_home/bin/javap" --module java.base java.util.stream.Streams > "$RUNNER_TEMP/m3-streams-api.txt"
@@ -110,7 +192,8 @@ jobs:
           export JAVA_HOME="$M3_JAVA_HOME"
           export PATH="$JAVA_HOME/bin:$PATH"
           java --list-modules | grep '^jdk.m3.collections@'
-          jlink --add-modules jdk.m3.collections --output "$RUNNER_TEMP/m3-object-stream-jlink"
+          "$M3_JAVA_HOME/bin/jlink" --module-path "$M3_JAVA_HOME/jmods" \
+            --add-modules jdk.m3.collections --output "$RUNNER_TEMP/m3-object-stream-jlink"
           "$RUNNER_TEMP/m3-object-stream-jlink/bin/java" --list-modules | grep '^jdk.m3.collections@'
       - name: Compile and run collate on built and linked M3 images
         run: |
@@ -139,6 +222,12 @@ jobs:
             | tee "$RUNNER_TEMP/m3-collate-jlink-image.log"
           grep -Fx 'OBJECT_STREAM_COLLATE_PASS checks=29894' \
             "$RUNNER_TEMP/m3-collate-jlink-image.log"
+      - name: Run real jtreg contracts on the built M3 image
+        run: |
+          set -euo pipefail
+          make CONF=m3-groovy-native-proof JOBS=2 test \
+            TEST="jtreg:test/jdk/jdk/m3/collections/ObjectStreamCollateTest.java jtreg:test/jdk/java/lang/String/StringCaseFamilyTest.java jtreg:test/jdk/java/lang/String/StringCaseFamilyDonorTest.java jtreg:test/jdk/java/util/stream/Streams/StreamMapNotNullTest.java" \
+            | tee "$RUNNER_TEMP/m3-groovy-jtreg.log"
       - name: Retain Maven/JDK evidence
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
@@ -149,4 +238,14 @@ jobs:
             m3/arrays/target/surefire-reports/
             ${{ runner.temp }}/m3-collate-full-image.log
             ${{ runner.temp }}/m3-collate-jlink-image.log
+            ${{ runner.temp }}/m3-gn-version.log
+            ${{ runner.temp }}/m3-ninja-version.log
+            ${{ runner.temp }}/m3-jtreg-version.log
+            ${{ runner.temp }}/m3-groovy-jtreg.log
+            ${{ runner.temp }}/m3-packaged-image-identity.log
+            build/*/configure.log
+            build/*/spec.gmk
+            build/*/support/failure-summary
+            build/*/test-results/
+            build/*/test-support/
           if-no-files-found: warn
