@@ -181,6 +181,22 @@ Use typed `TaskPacket`, `InventoryRecord`,
 owned by the canonical system. New patterns are
 typed, unverified candidate residue until admitted.
 
+Known algorithms and architectural patterns MUST be looked up in
+the versioned canonical Synexia catalogue before proposing novelty.
+If no **proven applicable** entry exists, record a source-bound,
+machine-readable `UNKNOWN_ALGORITHM_OR_PATTERN` typed residue with
+the source revision/hash, checked catalogue versions, observed
+contract/effects, why available matches do not qualify, and an
+explicit proof obligation. Its lookup state is
+`UNKNOWN_ALGORITHM_OR_PATTERN_TAGGED`, never automatic pattern
+admission or a claim that the incumbent is defective. A source
+annotation (including an anti-pattern label) is optional and
+requires separate Java reflection/API/annotation-processor and
+runtime behavior proof; prefer a sidecar in the canonical
+Synexia-owned machine documentation. See the proposal in
+[Synexia MOP PR #18789](https://github.com/hsoliwal/com.synexia/pull/18789).
+Until admitted, keep the JDK source and contracts unchanged.
+
 An LLM need not memorize implementation details:
 it consults source-bound patterns and their docs,
 then produces only mechanically checkable proposals.
