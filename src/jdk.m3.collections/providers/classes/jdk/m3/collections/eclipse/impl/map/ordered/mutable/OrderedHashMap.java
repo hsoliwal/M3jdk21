@@ -213,6 +213,9 @@ public class OrderedHashMap<K, V>
     private Object[] orderedKeyValues;
     // Counts live and interior REMOVED key-value pairs in orderedKeyValues.
     private int orderedKeyValuesOccupied;
+    // Every pair before this index is REMOVED_KEY; forward scans start here.
+    //FLLDCIM: LEETCODIFY - OFFSET_ARRAY head skips the leading tombstone run
+    private int head;
     // Number of live mappings.
     private int size;
 
@@ -289,6 +292,7 @@ public class OrderedHashMap<K, V>
         this.size = 0;
         this.orderedKeyValuesOccupied = 0;
         this.indicesHashTableOccupied = 0;
+        this.head = 0;
     }
 
     private int spread(Object key)
@@ -468,7 +472,7 @@ public class OrderedHashMap<K, V>
         this.indicesHashTableOccupied = 0;
 
         int newIndex = 0;
-        for (int i = 0; i < (oldOrderedKeyValuesOccupied << 1); i += 2)
+        for (int i = this.head << 1; i < (oldOrderedKeyValuesOccupied << 1); i += 2)
         {
             if (isNonSentinel(oldOrderedKeyValues[i]))
             {
@@ -484,6 +488,7 @@ public class OrderedHashMap<K, V>
         }
         this.orderedKeyValuesOccupied = newIndex;
         this.indicesHashTableOccupied = newIndex;
+        this.head = 0;
     }
 
     private int probeForRehash(Object key)
@@ -548,6 +553,7 @@ public class OrderedHashMap<K, V>
             this.orderedKeyValues[(idx << 1) + 1] = null;
             this.size--;
             this.reclaimTrailingTombstones();
+            this.advanceHead();
             return oldValue;
         }
 
@@ -562,6 +568,17 @@ public class OrderedHashMap<K, V>
             this.orderedKeyValues[this.orderedKeyValuesOccupied << 1] = null;
             this.orderedKeyValues[(this.orderedKeyValuesOccupied << 1) + 1] = null;
         }
+    }
+
+    private void advanceHead()
+    {
+        int occupied = this.orderedKeyValuesOccupied;
+        int first = Math.min(this.head, occupied);
+        while (first < occupied && isRemovedKey(this.orderedKeyValues[first << 1]))
+        {
+            first++;
+        }
+        this.head = first;
     }
 
     @Override
@@ -581,7 +598,7 @@ public class OrderedHashMap<K, V>
     public boolean containsValue(Object value)
     {
         int count = 0;
-        for (int i = 0; count < this.size; i += 2)
+        for (int i = this.head << 1; count < this.size; i += 2)
         {
             if (isNonSentinel(this.orderedKeyValues[i]))
             {
@@ -637,6 +654,7 @@ public class OrderedHashMap<K, V>
         this.size = 0;
         this.orderedKeyValuesOccupied = 0;
         this.indicesHashTableOccupied = 0;
+        this.head = 0;
     }
 
     @Override
@@ -653,7 +671,7 @@ public class OrderedHashMap<K, V>
     {
         boolean changed = false;
         int count = 0;
-        for (int i = 0; count < this.size; i += 2)
+        for (int i = this.head << 1; count < this.size; i += 2)
         {
             if (isNonSentinel(this.orderedKeyValues[i]))
             {
@@ -703,7 +721,7 @@ public class OrderedHashMap<K, V>
     public void forEachKeyValue(Procedure2<? super K, ? super V> procedure)
     {
         int count = 0;
-        for (int i = 0; count < this.size; i += 2)
+        for (int i = this.head << 1; count < this.size; i += 2)
         {
             if (isNonSentinel(this.orderedKeyValues[i]))
             {
@@ -717,7 +735,7 @@ public class OrderedHashMap<K, V>
     public void forEachKey(Procedure<? super K> procedure)
     {
         int count = 0;
-        for (int i = 0; count < this.size; i += 2)
+        for (int i = this.head << 1; count < this.size; i += 2)
         {
             if (isNonSentinel(this.orderedKeyValues[i]))
             {
@@ -731,7 +749,7 @@ public class OrderedHashMap<K, V>
     public void forEachValue(Procedure<? super V> procedure)
     {
         int count = 0;
-        for (int i = 0; count < this.size; i += 2)
+        for (int i = this.head << 1; count < this.size; i += 2)
         {
             if (isNonSentinel(this.orderedKeyValues[i]))
             {
@@ -745,7 +763,7 @@ public class OrderedHashMap<K, V>
     public void forEachWithIndex(ObjectIntProcedure<? super V> objectIntProcedure)
     {
         int count = 0;
-        for (int i = 0; count < this.size; i += 2)
+        for (int i = this.head << 1; count < this.size; i += 2)
         {
             if (isNonSentinel(this.orderedKeyValues[i]))
             {
@@ -759,7 +777,7 @@ public class OrderedHashMap<K, V>
     public <P> void forEachWith(Procedure2<? super V, ? super P> procedure, P parameter)
     {
         int count = 0;
-        for (int i = 0; count < this.size; i += 2)
+        for (int i = this.head << 1; count < this.size; i += 2)
         {
             if (isNonSentinel(this.orderedKeyValues[i]))
             {
@@ -777,7 +795,7 @@ public class OrderedHashMap<K, V>
 
     private class ValuesIterator implements Iterator<V>
     {
-        private int position;
+        private int position = -1;
         private int count;
         private boolean lastReturned;
 
@@ -796,6 +814,10 @@ public class OrderedHashMap<K, V>
                 throw new NoSuchElementException();
             }
 
+            if (this.position < 0)
+            {
+                this.position = OrderedHashMap.this.head << 1;
+            }
             Object[] localEntries = OrderedHashMap.this.orderedKeyValues;
             while (!isNonSentinel(localEntries[this.position]))
             {
@@ -879,7 +901,7 @@ public class OrderedHashMap<K, V>
 
     protected class KeySetIterator implements Iterator<K>
     {
-        private int position;
+        private int position = -1;
         private int count;
         private boolean lastReturned;
 
@@ -895,6 +917,10 @@ public class OrderedHashMap<K, V>
             if (!this.hasNext())
             {
                 throw new NoSuchElementException();
+            }
+            if (this.position < 0)
+            {
+                this.position = OrderedHashMap.this.head << 1;
             }
             Object[] localEntries = OrderedHashMap.this.orderedKeyValues;
             while (!isNonSentinel(localEntries[this.position]))
@@ -976,7 +1002,7 @@ public class OrderedHashMap<K, V>
 
     protected class EntrySetIterator implements Iterator<Map.Entry<K, V>>
     {
-        private int position;
+        private int position = -1;
         private int count;
         private boolean lastReturned;
 
@@ -992,6 +1018,10 @@ public class OrderedHashMap<K, V>
             if (!this.hasNext())
             {
                 throw new NoSuchElementException();
+            }
+            if (this.position < 0)
+            {
+                this.position = OrderedHashMap.this.head << 1;
             }
             Object[] localEntries = OrderedHashMap.this.orderedKeyValues;
             while (!isNonSentinel(localEntries[this.position]))
@@ -1095,7 +1125,7 @@ public class OrderedHashMap<K, V>
 
         MutableOrderedMap<K, V> output = this.newEmpty();
         int taken = 0;
-        int i = 0;
+        int i = this.head << 1;
         while (taken < count && taken < this.size)
         {
             if (isNonSentinel(this.orderedKeyValues[i]))
@@ -1119,7 +1149,7 @@ public class OrderedHashMap<K, V>
         MutableOrderedMap<K, V> output = this.newEmpty();
         int start = Math.min(count, this.size);
         int skipped = 0;
-        for (int i = 0; skipped < this.size; i += 2)
+        for (int i = this.head << 1; skipped < this.size; i += 2)
         {
             if (isNonSentinel(this.orderedKeyValues[i]))
             {
@@ -1138,7 +1168,7 @@ public class OrderedHashMap<K, V>
     {
         MutableOrderedMap<K, V> output = this.newEmpty();
         int count = 0;
-        for (int i = 0; count < this.size; i += 2)
+        for (int i = this.head << 1; count < this.size; i += 2)
         {
             if (isNonSentinel(this.orderedKeyValues[i]))
             {
@@ -1160,7 +1190,7 @@ public class OrderedHashMap<K, V>
         MutableOrderedMap<K, V> output = this.newEmpty();
         boolean dropping = true;
         int count = 0;
-        for (int i = 0; count < this.size; i += 2)
+        for (int i = this.head << 1; count < this.size; i += 2)
         {
             if (isNonSentinel(this.orderedKeyValues[i]))
             {
@@ -1189,7 +1219,7 @@ public class OrderedHashMap<K, V>
         PartitionMutableList<V> result = new PartitionFastList<>();
         boolean selecting = true;
         int count = 0;
-        for (int i = 0; count < this.size; i += 2)
+        for (int i = this.head << 1; count < this.size; i += 2)
         {
             if (isNonSentinel(this.orderedKeyValues[i]))
             {
@@ -1238,7 +1268,7 @@ public class OrderedHashMap<K, V>
         MutableList<V> result = Lists.mutable.empty();
         MutableSet<V> seen = Sets.mutable.empty();
         int count = 0;
-        for (int i = 0; count < this.size; i += 2)
+        for (int i = this.head << 1; count < this.size; i += 2)
         {
             if (isNonSentinel(this.orderedKeyValues[i]))
             {
@@ -1257,7 +1287,7 @@ public class OrderedHashMap<K, V>
     public int detectIndex(Predicate<? super V> predicate)
     {
         int count = 0;
-        for (int i = 0; count < this.size; i += 2)
+        for (int i = this.head << 1; count < this.size; i += 2)
         {
             if (isNonSentinel(this.orderedKeyValues[i]))
             {
@@ -1276,7 +1306,7 @@ public class OrderedHashMap<K, V>
     {
         int lastIndex = -1;
         int count = 0;
-        for (int i = 0; count < this.size; i += 2)
+        for (int i = this.head << 1; count < this.size; i += 2)
         {
             if (isNonSentinel(this.orderedKeyValues[i]))
             {
@@ -1299,7 +1329,7 @@ public class OrderedHashMap<K, V>
         }
         Iterator<S> otherIterator = other.iterator();
         int count = 0;
-        for (int i = 0; count < this.size; i += 2)
+        for (int i = this.head << 1; count < this.size; i += 2)
         {
             if (isNonSentinel(this.orderedKeyValues[i]))
             {
@@ -1327,7 +1357,7 @@ public class OrderedHashMap<K, V>
         if (startIndex <= endIndex)
         {
             int count = 0;
-            for (int i = 0; count <= toIndex; i += 2)
+            for (int i = this.head << 1; count <= toIndex; i += 2)
             {
                 if (isNonSentinel(this.orderedKeyValues[i]))
                 {
@@ -1349,7 +1379,7 @@ public class OrderedHashMap<K, V>
     {
         MutableList<V> collected = Lists.mutable.withInitialCapacity(fromIndex - toIndex + 1);
         int count = 0;
-        for (int i = 0; count <= fromIndex; i += 2)
+        for (int i = this.head << 1; count <= fromIndex; i += 2)
         {
             if (isNonSentinel(this.orderedKeyValues[i]))
             {
@@ -1380,7 +1410,7 @@ public class OrderedHashMap<K, V>
         if (fromIndex <= toIndex)
         {
             int count = 0;
-            for (int i = 0; count <= toIndex; i += 2)
+            for (int i = this.head << 1; count <= toIndex; i += 2)
             {
                 if (isNonSentinel(this.orderedKeyValues[i]))
                 {
@@ -1396,7 +1426,7 @@ public class OrderedHashMap<K, V>
         {
             MutableList<V> collected = Lists.mutable.withInitialCapacity(fromIndex - toIndex + 1);
             int count = 0;
-            for (int i = 0; count <= fromIndex; i += 2)
+            for (int i = this.head << 1; count <= fromIndex; i += 2)
             {
                 if (isNonSentinel(this.orderedKeyValues[i]))
                 {
@@ -1638,7 +1668,7 @@ public class OrderedHashMap<K, V>
     public Pair<K, V> detect(Predicate2<? super K, ? super V> predicate)
     {
         int count = 0;
-        for (int i = 0; count < this.size; i += 2)
+        for (int i = this.head << 1; count < this.size; i += 2)
         {
             if (isNonSentinel(this.orderedKeyValues[i]))
             {
@@ -1658,7 +1688,7 @@ public class OrderedHashMap<K, V>
     public Optional<Pair<K, V>> detectOptional(Predicate2<? super K, ? super V> predicate)
     {
         int count = 0;
-        for (int i = 0; count < this.size; i += 2)
+        for (int i = this.head << 1; count < this.size; i += 2)
         {
             if (isNonSentinel(this.orderedKeyValues[i]))
             {
@@ -1786,7 +1816,7 @@ public class OrderedHashMap<K, V>
         }
 
         int count = 0;
-        for (int i = 0; count < this.size; i += 2)
+        for (int i = this.head << 1; count < this.size; i += 2)
         {
             if (isNonSentinel(this.orderedKeyValues[i]))
             {
@@ -1807,7 +1837,7 @@ public class OrderedHashMap<K, V>
     {
         int hash = 0;
         int count = 0;
-        for (int i = 0; count < this.size; i += 2)
+        for (int i = this.head << 1; count < this.size; i += 2)
         {
             if (isNonSentinel(this.orderedKeyValues[i]))
             {
@@ -1832,7 +1862,7 @@ public class OrderedHashMap<K, V>
         sb.append('{');
         boolean first = true;
         int count = 0;
-        for (int i = 0; count < this.size; i += 2)
+        for (int i = this.head << 1; count < this.size; i += 2)
         {
             if (isNonSentinel(this.orderedKeyValues[i]))
             {
