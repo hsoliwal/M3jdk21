@@ -7312,6 +7312,110 @@ public final class String
     }
 
     /**
+     * Splits at the first complete occurrence of {@code delimiter}, excluding the delimiter.
+     * A match must not start or end inside a UTF-16 surrogate pair. The empty delimiter
+     * matches at the beginning, including on an empty receiver.
+     *
+     * @apiNote
+     * This is an M3JDK addition modeled on Rust's {@code str::split_once}. Java returns two
+     * {@code String} ranges, or {@code null} for Rust's absent {@code Option}.
+     *
+     * @param   delimiter   the delimiter, which may be empty.
+     * @return  two source-backed ranges, or {@code null} if no delimiter occurs.
+     * @throws  NullPointerException if {@code delimiter} is {@code null}.
+     * @since   21
+     */
+    public String[] splitOnce(String delimiter) {
+        java.util.Objects.requireNonNull(delimiter, "delimiter");
+        int at = indexOfWhole(delimiter, 0);
+        return at < 0 ? null
+                : new String[] {substring(0, at), substring(at + delimiter.length())};
+    }
+
+    /**
+     * Splits at the last complete occurrence of {@code delimiter}, excluding the delimiter.
+     * A match must not start or end inside a UTF-16 surrogate pair. The empty delimiter
+     * matches at the end, including on an empty receiver.
+     *
+     * @apiNote
+     * This is an M3JDK addition modeled on Rust's {@code str::rsplit_once}.
+     *
+     * @param   delimiter   the delimiter, which may be empty.
+     * @return  two source-backed ranges, or {@code null} if no delimiter occurs.
+     * @throws  NullPointerException if {@code delimiter} is {@code null}.
+     * @since   21
+     */
+    public String[] rsplitOnce(String delimiter) {
+        java.util.Objects.requireNonNull(delimiter, "delimiter");
+        int at = lastIndexOfWhole(delimiter, length());
+        return at < 0 ? null
+                : new String[] {substring(0, at), substring(at + delimiter.length())};
+    }
+
+    /**
+     * Removes the leading control-or-space prefix through {@code '|'} from every
+     * marked line, retaining unmarked lines and all original CR, LF and CRLF endings.
+     *
+     * @apiNote
+     * This is an M3JDK addition modeled on Scala's {@code StringOps.stripMargin}.
+     *
+     * @return the margin-stripped text, or this string when no line is marked.
+     * @since 21
+     */
+    public String stripMargin() {
+        return stripMargin('|');
+    }
+
+    /**
+     * Removes the leading U+0000 through U+0020 prefix and {@code marginChar}
+     * from each line whose first non-control-or-space unit is {@code marginChar}.
+     * Line endings are retained exactly. A line with no margin marker is unchanged.
+     *
+     * @apiNote
+     * This is an M3JDK addition modeled on Scala's {@code StringOps.stripMargin(char)}.
+     *
+     * @param marginChar the margin marker.
+     * @return the margin-stripped text, or this string when no line is marked.
+     * @since 21
+     */
+    public String stripMargin(char marginChar) {
+        if (isEmpty()) return this;
+        M3String storage = m3();
+        if (storage != null) {
+            M3String result = storage.stripMargin(marginChar);
+            if (result == storage) return this;
+            if (result != null) return new String(result);
+        }
+        return stripMarginFlat(marginChar);
+    }
+
+    /** Fallback only when the canonical owner or composition is unavailable. */
+    private String stripMarginFlat(char marginChar) {
+        int sourceLength = length();
+        StringBuilder result = null;
+        for (int start = 0; start < sourceLength;) {
+            int end = start;
+            while (end < sourceLength && charAt(end) != '\r' && charAt(end) != '\n') end++;
+            int marker = start;
+            while (marker < end && charAt(marker) <= ' ') marker++;
+            int next = end == sourceLength ? end
+                    : charAt(end) == '\r' && end + 1 < sourceLength
+                            && charAt(end + 1) == '\n' ? end + 2 : end + 1;
+            if (marker < end && charAt(marker) == marginChar) {
+                if (result == null) {
+                    result = new StringBuilder(sourceLength);
+                    result.append(this, 0, start);
+                }
+                result.append(this, marker + 1, next);
+            } else if (result != null) {
+                result.append(this, start, next);
+            }
+            start = next;
+        }
+        return result == null ? this : result.toString();
+    }
+
+    /**
      * Splits this string at the first occurrence of {@code separator} into three parts: the part
      * before it, the separator and the part after it; when it does not occur, this string and two
      * empty strings. As Python reads strings as code points, an occurrence that starts or ends
