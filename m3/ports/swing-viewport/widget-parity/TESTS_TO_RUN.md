@@ -13,3 +13,8 @@
 
 Local_pass is from stock JDK 21.0.12.1 on a Linux headless JVM. It is not
 a claim of native GUI parity or a successful hosted CI build.
+
+Additional local gate: M3PasswordRevealerSmoke on the EDT passed
+(M3_PASSWORD_REVEAL_PARITY_PASS) for HOLD/TOGGLE, disarm/disable hiding,
+mask restoration and stable JPasswordField password contents. Native input
+and accessibility comparisons remain NOT_RUN.

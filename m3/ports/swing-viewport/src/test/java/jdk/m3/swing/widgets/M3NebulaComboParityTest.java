@@ -9,4 +9,8 @@ class M3NebulaComboParityTest {
     void tableAndTreeSelectionAndLazyMillionRow() throws Exception {
         M3NebulaComboParitySmoke.main(new String[0]);
     }
+    @Test
+    void passwordRevealHoldAndToggle() throws Exception {
+        M3PasswordRevealerSmoke.main(new String[0]);
+    }
 }

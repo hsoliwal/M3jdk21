@@ -67,7 +67,7 @@ Neither javax.swing nor SwingX nor SWT/Nebula was changed by this PR.
   component templates and models, never add parallel widget families.
 - CDateTime/CalendarCombo: check JXDatePicker/JXMonthView first, then port
   only missing time/date/selection functionality.
-- PasswordRevealer and Paperclips: specific control gaps for future ports.
+- Paperclips: specific attachment-control gap for a future port.
 - NetBeans Outline and SwingX tree-table: preserve their independently
   optimized listener, row-height and viewport lifecycle PRs.
 
@@ -83,3 +83,18 @@ The code in this PR is original Apache-2.0 Java, implementing observed feature
 requirements rather than copying EPL/LGPL implementation. The canonical
 recipe-first, source-sealed OpenRewrite implementation/qualification should
 be recorded in Synexia before promotion; no such qualification is asserted.
+
+## Additional native widget: PasswordRevealer
+
+- M3PasswordRevealer reuses one native JPasswordField and JButton rather than
+  a custom renderer or copied password buffer.
+- HOLD mode reveals only while the button's Swing ButtonModel is armed and
+  pressed; TOGGLE mode retains visibility until the next activation.
+- Disabling/removing the widget masks the password. Echo-char restoration
+  does not read or copy the secret. The public password text owner remains
+  JPasswordField; consumers should clear any arrays they obtain.
+- Nebula behavioral source lock: PasswordRevealer.java
+  1cc3b5f11806dbef1899a21011d7639dec9fb624; EyeButton.java
+  79c5e8c7872f4496bffa57bcaf1e402466f41992 (EPL-2.0; no source copied).
+- Local Java 21 headless EDT smoke PASS; native mouse/keyboard/contrast and
+  screen-reader gate remains OPEN.
