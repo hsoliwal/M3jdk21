@@ -258,6 +258,12 @@ marked. See [M3-SYNEXIA-NOTICE.md](M3-SYNEXIA-NOTICE.md),
 
 ## Project goals and plan
 
+**Long-term Apache-2.0-only objective:** the
+[Apache-only JDK convergence roadmap](doc/apache-only-jdk-convergence.md)
+defines the Harmony/JDK donor intake, aligned JDK naming, and a
+separate license-clean release programme. This OpenJDK-derived fork
+is **not** currently an Apache-only distribution.
+
 M3, M³, MCube — the name leaves room for interpretation. The goal is to reduce
 repeated CPU work and unnecessary allocation through shared immutable payloads,
 composition/range identity, indexed metadata, and reusable precompute while
