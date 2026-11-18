@@ -19,6 +19,34 @@ Additional local gate: M3PasswordRevealerSmoke on the EDT passed
 mask restoration and stable JPasswordField password contents. Native input
 and accessibility comparisons remain NOT_RUN.
 
+## Native widget wave 2: Oscilloscope and PrintPreview
+
+| Gate | Result |
+|---|---|
+| JDK 21.0.12.1, headless, javac --release 21 -Xlint:all,-serial,-this-escape -Werror | LOCAL_PASS |
+| M3OscilloscopeSmoke: ring, two-channel painted pixels, 4:1 decimation, pause/reset/input bounds | LOCAL_PASS |
+| M3PrintPreviewSmoke: actual Pageable Book, red/blue page pixels, caching, page switch, zoom, invalidation | LOCAL_PASS |
+| M3OscilloscopeScale: 10M sample stream (8 channels, 1M retained each), -Xmx128m | LOCAL_PASS |
+| Committed Java Git blob SHAs match the locally compiled/tested source | VERIFIED |
+| Full Maven/JUnit reactor at exact branch head | NOT_RUN |
+| Headful SWT/Nebula vs Swing screenshots and behavior on GTK/Win32/Cocoa | NOT_RUN |
+| Screen-reader, bidirectional input, alternative LookAndFeel, print device WYSIWYG | NOT_RUN |
+| Synexia source-sealed OpenRewrite recipe fixed-point qualification | NOT_RUN |
+
+Standalone scripts, run from the m3/ports/swing-viewport module root:
+
+```shell
+javac --release 21 -Xlint:all,-serial,-this-escape -Werror -d /tmp/m3-native \
+  src/main/java/jdk/m3/swing/widgets/M3Oscilloscope.java \
+  src/main/java/jdk/m3/swing/widgets/M3PrintPreview.java \
+  src/test/java/jdk/m3/swing/widgets/M3OscilloscopeSmoke.java \
+  src/test/java/jdk/m3/swing/widgets/M3PrintPreviewSmoke.java \
+  src/test/java/jdk/m3/swing/widgets/M3OscilloscopeScale.java
+java -Djava.awt.headless=true -Xmx128m -cp /tmp/m3-native jdk.m3.swing.widgets.M3OscilloscopeSmoke
+java -Djava.awt.headless=true -Xmx128m -cp /tmp/m3-native jdk.m3.swing.widgets.M3PrintPreviewSmoke
+java -Djava.awt.headless=true -Xmx128m -cp /tmp/m3-native jdk.m3.swing.widgets.M3OscilloscopeScale
+```
+
 ## Native CDateTime text/spinner wave
 
 | Gate | Result |

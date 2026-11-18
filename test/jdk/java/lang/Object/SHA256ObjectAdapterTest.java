@@ -1,4 +1,5 @@
 /*
+ * SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
  * Copyright (c) 2026 Hitesh Soliwal and Contributors to the Synexia Project.
  * SPDX-License-Identifier: GPL-2.0-only
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
@@ -11,11 +12,12 @@
 /*
  * @test
  * @summary Opt-in Object.toAdapter(SHA256Adapter.class) digest and compatibility contract
- * @run main/othervm/native -Xcheck:jni SHA256ObjectAdapterTest
- * @run main/othervm/native -Xcheck:jni -Xint SHA256ObjectAdapterTest
+ * @run main/othervm/native -Xcheck:jni --add-opens=java.base/java.lang=ALL-UNNAMED SHA256ObjectAdapterTest
+ * @run main/othervm/native -Xcheck:jni --add-opens=java.base/java.lang=ALL-UNNAMED -Xint SHA256ObjectAdapterTest
  */
 
-import java.lang.M3Object;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
@@ -25,6 +27,28 @@ import java.util.HexFormat;
 import java.util.Objects;
 
 public class SHA256ObjectAdapterTest {
+    // Resolve the existing bootstrap owner without widening production visibility.
+    private static final Class<?> M3_OBJECT_CLASS;
+    private static final Method OWNER_SOURCE;
+
+    static {
+        try {
+            M3_OBJECT_CLASS = Class.forName("java.lang.M3Object", false, null);
+            OWNER_SOURCE = M3_OBJECT_CLASS.getDeclaredMethod("source");
+            OWNER_SOURCE.setAccessible(true);
+        } catch (ReflectiveOperationException failure) {
+            throw new ExceptionInInitializerError(failure);
+        }
+    }
+
+    private static Object ownerSource(Object owner) throws Throwable {
+        try {
+            return OWNER_SOURCE.invoke(owner);
+        } catch (InvocationTargetException failure) {
+            throw failure.getCause();
+        }
+    }
+
     private static native byte[] digestFromNative(Object source);
     private static int checks;
 
@@ -52,14 +76,14 @@ public class SHA256ObjectAdapterTest {
         check(Arrays.equals(adapter.digest(), expected), "detached digest bytes");
     }
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) throws Throwable {
         System.loadLibrary("SHA256ObjectAdapterTest");
         Object bare = new Object();
         check(bare.toAdapter(Object.class) == bare, "assignable receiver");
         check(bare.toAdapter(SHA256Adapter.class) == null, "no arbitrary encoding");
         check(digestFromNative(bare) == null, "JNI no arbitrary encoding");
         check(bare.toAdapter(String.class) == null, "mismatch remains null");
-        check(bare.toAdapter(M3Object.class).source() == bare, "existing M3Object path");
+        check(ownerSource(bare.toAdapter(M3_OBJECT_CLASS)) == bare, "existing M3Object path");
         try {
             bare.toAdapter(null);
             throw new AssertionError("null class should be rejected");

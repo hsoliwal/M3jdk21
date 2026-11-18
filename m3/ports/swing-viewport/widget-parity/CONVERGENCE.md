@@ -3,7 +3,9 @@
 
 Goal: offer the *same widget types and features* in Swing, not merely share
 viewport algorithms. Inventory and classify all 53 top-level Nebula widgets
-modules seen on 2026-11-18: see NEBULA_WIDGET_PARITY.tsv. Presence of an
+modules seen on 2026-11-18: see NEBULA_WIDGET_PARITY.tsv. These are module
+folders, NOT 53 distinct widget classes: some contain printing libraries,
+styles, support utilities, and viewport infrastructure. Presence of an
 M3 generated web component is not proof of Nebula behavioral parity.
 
 ## Rules
@@ -67,7 +69,9 @@ Neither javax.swing nor SwingX nor SWT/Nebula was changed by this PR.
   component templates and models, never add parallel widget families.
 - CDateTime/CalendarCombo: check JXDatePicker/JXMonthView first, then port
   only missing time/date/selection functionality.
-- Paperclips: specific attachment-control gap for a future port.
+- PaperClips is a printing/composition library, not an attachment widget.
+  M3PrintPreview reuses Java Pageable/Printable/PrinterJob; full PaperClips
+  pagination, layers, text, grid and printer-device parity remain open.
 - NetBeans Outline and SwingX tree-table: preserve their independently
   optimized listener, row-height and viewport lifecycle PRs.
 
@@ -98,6 +102,62 @@ be recorded in Synexia before promotion; no such qualification is asserted.
   79c5e8c7872f4496bffa57bcaf1e402466f41992 (EPL-2.0; no source copied).
 - Local Java 21 headless EDT smoke PASS; native mouse/keyboard/contrast and
   screen-reader gate remains OPEN.
+
+## Native Swing wave 2: Oscilloscope and PaperClips PrintPreview
+
+The requested convergence means real Swing controls. Two new first-party
+Apache-2.0 classes are in src/main/java/jdk/m3/swing/widgets/, next to
+the merged TableCombo and TreeCombo. No SWT GC, shell, native peer, or
+parallel viewport engine is introduced.
+
+### M3Oscilloscope
+
+- A native JComponent with N channels in a fixed-capacity int[] ring, next[]
+  and used[] state lanes; no per-sample objects or per-channel widget peers.
+- Appending a single value is O(1); appending a frame is O(channels), with
+  one repaint if showing. Acquisition pause leaves the ring unchanged.
+- Caller-owned per-pixel minima/maxima preserve narrow spikes during
+  downsampling; painting uses reusable arrays and ordinary Java2D.
+- Configurable samples/column, value range, channel colors, grid and
+  accessible name. No internal animation or always-on timer.
+- Still OPEN: native Nebula dispatcher, pulse, fade/tail/steady/trigger
+  controls, platform input/accessibility and exact screenshot parity.
+- EPL-2.0 behavioral donor, not copied: Nebula multichannel Oscilloscope.java
+  Git blob 91ea525fdd47804a1984491cf6087e813b653402.
+- Related Nebula EnvelopeRing.java idea: EPL-2.0 Git blob
+  871d33793d04a01e009e445f0649844599f62299; Java implementation is original.
+
+### M3PrintPreview
+
+- Native JComponent built from existing Java Pageable, Printable, PageFormat
+  and PrinterJob contracts, not a copied SWT PrintJob or foreign print engine.
+- Only the selected page is rendered. A single cached BufferedImage is
+  retained only when its size stays within four million pixels.
+- Page index, count, zoom, fit-to-width, explicit cache invalidation,
+  accessible name, and retained preview failure are supported.
+- Still OPEN: PaperClips PrintPiece/PageEnumeration layouts, printer
+  color/margin fidelity, multipage layout, async render and native screenshots.
+- EPL-2.0 behavioral donor, not copied: Nebula PaperClips PrintPreview.java
+  Git blob 8105dda1685d150bfa280fa992c64ec85c55cbf2.
+
+### Executed qualification
+
+- JDK 21.0.12.1, Linux headless: javac --release 21
+  -Xlint:all,-serial,-this-escape -Werror: PASS for product and standalone tests.
+- M3OscilloscopeSmoke PASS: rings, decimation, two-channel painted pixels,
+  pausing, invalid inputs, clearing and no full-history repaint.
+- M3PrintPreviewSmoke PASS: actual two-page Book, distinct printed colors,
+  cache reuse, page switch, zoom and invalidations.
+- M3OscilloscopeScale PASS with -Xmx128m: eight channels, one million
+  samples per channel retained, 10 million incoming readings, 1,920 viewport
+  envelope bins and exact oldest/newest reading checks.
+- All source blob SHA-1 values match the locally tested files.
+
+Full Maven/JUnit reactor, headful GTK/Win32/Cocoa, accessibility and LAF
+pixel differentials, and paired canonical Synexia OpenRewrite source
+sealed fixed-point qualification remain NOT_RUN. This is a draft code leaf,
+not complete Nebula parity or a release. java.desktop, SWT, Nebula and SwingX
+production sources are unchanged.
 
 ## Native CDateTime text/spinner implementation (third native wave)
 

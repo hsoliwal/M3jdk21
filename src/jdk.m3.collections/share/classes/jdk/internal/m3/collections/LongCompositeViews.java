@@ -29,6 +29,59 @@ import jdk.m3.collections.LongTreeSet;
 public final class LongCompositeViews {
     private LongCompositeViews() { }
 
+    /**
+     * Explicit sequence-algebra capability.  Its default method is the named
+     * lowering target for sequence addition: it retains the two sources rather
+     * than copying their primitive elements.  A sorted set may deliberately be
+     * viewed as a sequence, but does not acquire this meaning implicitly.
+     */
+    @FunctionalInterface
+    public interface SequenceOperator {
+        LongCollection source();
+
+        default LongCollection plus(LongCollection right) {
+            return LongCompositeViews.concat(source(), right);
+        }
+    }
+
+    /**
+     * Explicit sorted-set capability.  Union/intersection/difference/xor are
+     * set operations, not elementwise arithmetic or bag concatenation.  The
+     * results are live, read-only views on the original primitive stores.
+     */
+    @FunctionalInterface
+    public interface SetOperator {
+        LongSortedSet source();
+
+        default LongSortedSet or(LongSortedSet right) {
+            return LongCompositeViews.sortedUnion(source(), right);
+        }
+
+        default LongSortedSet and(LongSortedSet right) {
+            return LongCompositeViews.sortedIntersection(source(), right);
+        }
+
+        default LongSortedSet minus(LongSortedSet right) {
+            return LongCompositeViews.sortedDifference(source(), right);
+        }
+
+        default LongSortedSet xor(LongSortedSet right) {
+            return LongCompositeViews.sortedSymmetricDifference(source(), right);
+        }
+    }
+
+    /** Opt-in adapter, preserving the existing LongCollection interface. */
+    public static SequenceOperator asSequenceOperator(LongCollection source) {
+        Objects.requireNonNull(source, "source");
+        return () -> source;
+    }
+
+    /** Opt-in adapter, preserving the existing LongSortedSet interface. */
+    public static SetOperator asSetOperator(LongSortedSet source) {
+        Objects.requireNonNull(source, "source");
+        return () -> source;
+    }
+
     public static LongCollection concat(LongCollection... backings) {
         return new Concatenation(validate(backings));
     }
