@@ -74,8 +74,8 @@ public final class GrammarPinnedSyntaxImageTest {
         reject(() -> load(altered, "0".repeat(64)));
         reject(() -> load(authentic, "short"));
         reject(() -> load(authentic, "z".repeat(64)));
-        reject(() -> load(authentic, null));
-        reject(() -> load(null, pinned));
+        rejectNull(() -> load(authentic, null));
+        rejectNull(() -> load(null, pinned));
         reject(() -> load(new byte[17], pinned));
 
         // Even a structurally valid rechecksummed image with an unchanged
@@ -115,10 +115,19 @@ public final class GrammarPinnedSyntaxImageTest {
 
     private static void reject(Runnable runnable) {
         try { runnable.run(); }
-        catch (IllegalArgumentException | NullPointerException correctRefusal) {
+        catch (IllegalArgumentException correctRefusal) {
             assertions++;
             return;
         }
         throw new AssertionError("accepted unpinned grammar image at assertion " + assertions);
+    }
+
+    private static void rejectNull(Runnable runnable) {
+        try { runnable.run(); }
+        catch (NullPointerException correctRefusal) {
+            assertions++;
+            return;
+        }
+        throw new AssertionError("accepted null grammar input at assertion " + assertions);
     }
 }
