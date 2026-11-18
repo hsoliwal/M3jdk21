@@ -9,6 +9,7 @@ import java.time.LocalDateTime;
 import java.time.YearMonth;
 import java.time.ZoneId;
 import java.util.Locale;
+import java.util.Date;
 import java.util.concurrent.atomic.AtomicInteger;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
@@ -86,6 +87,10 @@ public final class M3MonthViewCalendarSmoke {
         check(timestamp.getLocalDateTime().equals(LocalDateTime.of(2026, 11, 20, 9, 56, 12)),
                 "calendar commit preserves wall-clock time");
         check(timestamp.getInstant().equals(current.plusSeconds(2 * 86400L)), "instant updated atomically");
+        timestamp.getSpinner().setValue(Date.from(current.plusSeconds(3 * 86400L)));
+        check(timestamp.getMonthView().getSelectedDate().equals(LocalDate.of(2026, 11, 21)),
+                "direct native spinner edits synchronize existing month view");
+        timestamp.setInstant(current.plusSeconds(2 * 86400L));
         timestamp.setRange(current.minusSeconds(10), current.plusSeconds(5 * 86400L));
         check(timestamp.getMonthView().getMinimum().equals(LocalDate.of(2026, 11, 18)),
                 "date range projects to local calendar");
