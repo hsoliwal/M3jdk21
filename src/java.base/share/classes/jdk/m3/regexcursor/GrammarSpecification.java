@@ -7,6 +7,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
 import java.util.function.IntSupplier;
 import java.util.function.LongToIntFunction;
@@ -24,6 +25,7 @@ import java.util.Objects;
 import java.util.TreeMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import jdk.internal.mindex.M3TokenIndex;
 
 /**
  * A versioned, immutable, prepared lexical-and-predictive grammar specification.
@@ -346,17 +348,39 @@ public final class GrammarSpecification {
      * The expected SHA-256 must be pinned by the build manifest, not obtained
      * from the untrusted image itself. Never silently load an unsealed grammar.
      */
+    /**
+     * Load an authenticated build-prepared grammar directly from an existing heap,
+     * direct, read-only, or mapped byte view. The caller's position, mark and limit
+     * are unchanged. Only the remaining range is authenticated; no writable alias
+     * or mutable buffer is retained after this method returns.
+     */
+    public static GrammarSpecification fromImageBuffer(ByteBuffer sealed, String expectedSha256) {
+        Objects.requireNonNull(sealed, "sealed");
+        Objects.requireNonNull(expectedSha256, "expectedSha256");
+        int size = sealed.remaining();
+        if (size < 40 || size > MAX_IMAGE_BYTES) {
+            throw new IllegalArgumentException("invalid grammar image length");
+        }
+        ByteBuffer borrowed = sealed.asReadOnlyBuffer();
+        byte[] snapshot = new byte[size];
+        borrowed.get(snapshot);
+        return fromImage(snapshot, expectedSha256);
+    }
+
     public static GrammarSpecification fromImage(byte[] sealed, String expectedSha256) {
         Objects.requireNonNull(sealed, "sealed");
         Objects.requireNonNull(expectedSha256, "expectedSha256");
         if (sealed.length < 40 || sealed.length > MAX_IMAGE_BYTES) {
             throw new IllegalArgumentException("invalid grammar image length");
         }
-        byte[] payload = Arrays.copyOf(sealed, sealed.length - 32);
+        // Pin one coherent byte snapshot; never hash caller-owned mutable data
+        // and later decode a different generation of that same buffer.
+        byte[] image = sealed.clone();
+        byte[] payload = Arrays.copyOf(image, image.length - 32);
         byte[] digest = digestBytes(payload);
         if (!MessageDigest.isEqual(digest,
-                Arrays.copyOfRange(sealed, sealed.length - 32, sealed.length))
-                || !HexFormat.of().formatHex(digestBytes(sealed)).equals(expectedSha256)) {
+                Arrays.copyOfRange(image, image.length - 32, image.length))
+                || !HexFormat.of().formatHex(digestBytes(image)).equals(expectedSha256)) {
             throw new IllegalArgumentException("grammar image seal mismatch");
         }
         try {
@@ -441,6 +465,7 @@ public final class GrammarSpecification {
                     throw new IllegalArgumentException("undefined nonterminal");
                 }
             }
+            validateImageLeftRecursion(nonterminals, lhs, rhs);
             if (start == 0 ? !productions.isEmpty() || keys.length != 0
                     : Arrays.binarySearch(nonterminals, start) < 0) {
                 throw new IllegalArgumentException("invalid grammar start");
@@ -467,6 +492,95 @@ public final class GrammarSpecification {
             if (invalidImage instanceof IllegalArgumentException argument) throw argument;
             throw new IllegalArgumentException("invalid grammar image", invalidImage);
         }
+    }
+
+    /**
+     * In an externally signed grammar image, even a sorted prediction table can
+     * encode a non-consuming recursion cycle. Admit only acyclic nullable-prefix
+     * left-corner graphs. The worklist consumes O(nonterminals + RHS units) primitive
+     * storage, with no recursive Java stack and no per-production object graph.
+     */
+    private static void validateImageLeftRecursion(int[] symbols, int[] lhs, int[][] rhs) {
+        int n = symbols.length;
+        if (n == 0) return;
+        int[] remaining = new int[lhs.length];
+        int[] nullableUsers = new int[n];
+        for (int p = 0; p < lhs.length; p++) {
+            int pending = 0;
+            boolean hasTerminal = false;
+            for (int symbol : rhs[p]) {
+                if (symbol > 0) hasTerminal = true;
+                else pending++;
+            }
+            remaining[p] = hasTerminal ? -1 : pending;
+            if (!hasTerminal) for (int symbol : rhs[p]) {
+                nullableUsers[Arrays.binarySearch(symbols, symbol)]++;
+            }
+        }
+        int[] usersStart = new int[n + 1];
+        for (int i = 0; i < n; i++) usersStart[i + 1] = usersStart[i] + nullableUsers[i];
+        int[] userWrite = usersStart.clone();
+        int[] userProductions = new int[usersStart[n]];
+        for (int p = 0; p < lhs.length; p++) {
+            if (remaining[p] < 0) continue;
+            for (int symbol : rhs[p]) {
+                int at = Arrays.binarySearch(symbols, symbol);
+                userProductions[userWrite[at]++] = p;
+            }
+        }
+        boolean[] nullable = new boolean[n];
+        int[] queue = new int[n];
+        int tail = 0;
+        for (int p = 0; p < lhs.length; p++) if (remaining[p] == 0) {
+            int at = Arrays.binarySearch(symbols, lhs[p]);
+            if (!nullable[at]) { nullable[at] = true; queue[tail++] = at; }
+        }
+        for (int head = 0; head < tail; head++) {
+            int nt = queue[head];
+            for (int k = usersStart[nt]; k < usersStart[nt + 1]; k++) {
+                int p = userProductions[k];
+                if (--remaining[p] == 0) {
+                    int left = Arrays.binarySearch(symbols, lhs[p]);
+                    if (!nullable[left]) { nullable[left] = true; queue[tail++] = left; }
+                }
+            }
+        }
+        int[] degrees = new int[n];
+        for (int p = 0; p < lhs.length; p++) {
+            int left = Arrays.binarySearch(symbols, lhs[p]);
+            for (int unit : rhs[p]) {
+                if (unit > 0) break;
+                int nt = Arrays.binarySearch(symbols, unit);
+                degrees[left]++;
+                if (!nullable[nt]) break;
+            }
+        }
+        int[] edgeStart = new int[n + 1];
+        for (int i = 0; i < n; i++) edgeStart[i + 1] = edgeStart[i] + degrees[i];
+        int[] write = edgeStart.clone();
+        int[] edges = new int[edgeStart[n]];
+        int[] incoming = new int[n];
+        for (int p = 0; p < lhs.length; p++) {
+            int left = Arrays.binarySearch(symbols, lhs[p]);
+            for (int unit : rhs[p]) {
+                if (unit > 0) break;
+                int nt = Arrays.binarySearch(symbols, unit);
+                edges[write[left]++] = nt;
+                incoming[nt]++;
+                if (!nullable[nt]) break;
+            }
+        }
+        tail = 0;
+        for (int i = 0; i < n; i++) if (incoming[i] == 0) queue[tail++] = i;
+        int consumed = 0;
+        for (int head = 0; head < tail; head++) {
+            int at = queue[head];
+            consumed++;
+            for (int k = edgeStart[at]; k < edgeStart[at + 1]; k++) {
+                if (--incoming[edges[k]] == 0) queue[tail++] = edges[k];
+            }
+        }
+        if (consumed != n) throw new IllegalArgumentException("left-recursive grammar image");
     }
 
     /** Exact UTF-16 image encoding: preserves isolated surrogate code units. */
@@ -603,6 +717,49 @@ public final class GrammarSpecification {
         int offset = tokenIds.position();
         long count = tokenIds.remaining();
         return predict(count, index -> tokenIds.get(offset + (int) index), null);
+    }
+
+    /**
+     * Recognize a canonical immutable M3TokenIndex directly. The grammar's terminal
+     * alphabet is the token kind, never the separate canonical spelling/lexeme ID.
+     * Significant-only mode skips TRIVIA without building the index's cached
+     * significant-position int[] or any additional token-sized lane.
+     */
+    public boolean accepts(M3TokenIndex index, boolean significantOnly) {
+        Objects.requireNonNull(index, "index");
+        if (!significantOnly) {
+            return accepts((long) index.count(), at -> index.kindAt((int) at));
+        }
+        int significant = 0;
+        for (int physical = 0; physical < index.count(); physical++) {
+            if ((index.flagsAt(physical) & M3TokenIndex.TRIVIA) == 0) significant++;
+        }
+        return accepts((long) significant, new LongToIntFunction() {
+            private int physical;
+            private long logical;
+            @Override public int applyAsInt(long requested) {
+                if (logical != requested) {
+                    throw new IllegalStateException("nonsequential significant-token access");
+                }
+                while (physical < index.count()) {
+                    int raw = physical++;
+                    if ((index.flagsAt(raw) & M3TokenIndex.TRIVIA) == 0) {
+                        logical++;
+                        return index.kindAt(raw);
+                    }
+                }
+                throw new IllegalStateException("inconsistent immutable token index");
+            }
+        });
+    }
+
+    /** Reject a stale token index from another canonical source generation. */
+    public boolean accepts(M3TokenIndex index, long generation, boolean significantOnly) {
+        Objects.requireNonNull(index, "index");
+        if (index.generation() != generation) {
+            throw new IllegalArgumentException("stale M3 token source generation");
+        }
+        return accepts(index, significantOnly);
     }
 
     /**
