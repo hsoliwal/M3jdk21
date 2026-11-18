@@ -11,16 +11,19 @@ import java.util.Objects;
 
 /**
  * Weak-key open-addressed map. Each non-null key needs one WeakReference for GC;
- * values, hashes and occupancy remain separate arrays, with no key/value entries.
+ * values and hashes remain separate arrays, with no key/value entries; the reference
+ * lane marks never-used slots with EMPTY and erased slots with REMOVED.
  * Values are strong and must not retain their keys if reclamation is desired.
  * Backing arrays are allocated on first insertion; reference-queue ownership is unchanged.
  */
 public final class M3WeakHashMap<K, V> extends SlotMap<K, V> {
     @Override protected boolean cacheEntryFacades() { return false; }
     private static final Object NULL_KEY = new Object();
+    /** Reference-lane sentinels for a never-used and an erased slot; never keys, never returned. */
+    //FLLDCIM: LEETCODIFY - EMPTY/REMOVED sentinels replace the byte state lane
+    private static final Object EMPTY = new Object(), REMOVED = new Object();
     private Object[] references = SlotArrays.EMPTY_OBJECTS, values = SlotArrays.EMPTY_OBJECTS;
     private int[] hashes = SlotArrays.EMPTY_INTS;
-    private byte[] states = SlotArrays.EMPTY_BYTES;
     private final ReferenceQueue<Object> queue = new ReferenceQueue<>();
     private int size, occupied, modifications;
     /** Empty weak-key map supporting null keys and values. */
@@ -30,7 +33,8 @@ public final class M3WeakHashMap<K, V> extends SlotMap<K, V> {
         KeyReference(Object key, ReferenceQueue<Object> queue, int slot) { super(key, queue); this.slot = slot; }
     }
     private Object referent(int slot) {
-        Object r = references[slot]; return r == NULL_KEY ? NULL_KEY : r == null ? null : ((KeyReference) r).get();
+        Object r = references[slot];
+        return r == NULL_KEY ? NULL_KEY : r instanceof KeyReference ref ? ref.get() : null;
     }
     private void drain() {
         KeyReference ref;
@@ -38,10 +42,10 @@ public final class M3WeakHashMap<K, V> extends SlotMap<K, V> {
             int s = ref.slot; if (s >= 0 && references[s] == ref) { erase(s, false); }
         }
     }
-    @Override boolean live(int s) { return states[s] == 1 && referent(s) != null; }
+    @Override boolean live(int s) { return referent(s) != null; } // EMPTY and REMOVED read null
     @Override int firstSlot() { drain(); return nextSlot(-1); }
     @Override int nextSlot(int s) {
-        while (++s < states.length) { if (live(s)) { return s; } } return -1;
+        while (++s < references.length) { if (live(s)) { return s; } } return -1;
     }
     @Override int revision() { return modifications; }
     @Override int findSlot(Object key) {
@@ -51,10 +55,10 @@ public final class M3WeakHashMap<K, V> extends SlotMap<K, V> {
     //FLLDCIM: MRL - recipe HASH_REENTRANT_GUARD v1 (qualification/hash-reentrant-guard-20261107): re-entrant key/value callbacks
     private int find(Object key, int hash) { return find(key == null ? NULL_KEY : key, hash, 0); }
     private int find(Object target, int hash, int walks) {
-        if (states.length == 0) { return -1; }
-        int mask = states.length - 1, expected = modifications;
-        for (int s = hash & mask; states[s] != 0; s = (s + 1) & mask) {
-            if (states[s] == 1 && hashes[s] == hash) {
+        if (references.length == 0) { return -1; }
+        int mask = references.length - 1, expected = modifications;
+        for (int s = hash & mask; references[s] != EMPTY; s = (s + 1) & mask) {
+            if (references[s] != REMOVED && hashes[s] == hash) {
                 boolean same = Objects.equals(target, referent(s));
                 if (modifications != expected) { return rewalk(target, hash, walks); } // equals changed it
                 if (same) { return s; }
@@ -74,10 +78,10 @@ public final class M3WeakHashMap<K, V> extends SlotMap<K, V> {
     @Override V writeAt(int s, V value) { V old = valueAt(s); values[s] = value; return old; }
     @Override V eraseAt(int s) { forgetEntryFacade(keyAt(s)); return erase(s, true); }
     private V erase(int s, boolean structural) {
-        if (states[s] != 1) { return null; }
+        if (references[s] == EMPTY || references[s] == REMOVED) { return null; }
         V old = valueAt(s);
         if (references[s] instanceof KeyReference ref) { ref.slot = -1; ref.clear(); }
-        references[s] = null; values[s] = null; states[s] = 2; size--;
+        references[s] = REMOVED; values[s] = null; size--;
         if (structural) { modifications++; } return old;
     }
     @Override public int size() { drain(); return size; }
@@ -101,33 +105,35 @@ public final class M3WeakHashMap<K, V> extends SlotMap<K, V> {
     }
     /** Inserts a key the walk just found absent, with its hash computed once; calls no user code. */
     private void insertNew(K key, V value, int hash) {
-        if (states.length == 0) { rehash(16); }
-        else if (occupied + 1 >= states.length - states.length / 3) {
-            rehash(size + 1 >= states.length - states.length / 3 ? SlotArrays.doubled(states.length) : states.length);
+        int capacity = references.length;
+        if (capacity == 0) { rehash(16); }
+        else if (occupied + 1 >= capacity - capacity / 3) {
+            rehash(size + 1 >= capacity - capacity / 3 ? SlotArrays.doubled(capacity) : capacity);
         }
-        int s = hash & (states.length - 1);
-        while (states[s] == 1) { s = (s + 1) & (states.length - 1); }
+        int mask = references.length - 1, s = hash & mask;
+        while (references[s] != EMPTY && references[s] != REMOVED) { s = (s + 1) & mask; }
         Object reference = key == null ? NULL_KEY : new KeyReference(key, queue, s);
-        if (states[s] == 0) { occupied++; }
-        references[s] = reference; values[s] = value; hashes[s] = hash; states[s] = 1;
+        if (references[s] == EMPTY) { occupied++; }
+        references[s] = reference; values[s] = value; hashes[s] = hash;
         size++; modifications++;
     }
     private void rehash(int capacity) {
         Object[] r = new Object[capacity], v = new Object[capacity];
-        int[] h = new int[capacity]; byte[] state = new byte[capacity]; int count = 0;
-        for (int s = 0; s < states.length; s++) {
+        int[] h = new int[capacity]; int count = 0;
+        Arrays.fill(r, EMPTY);
+        for (int s = 0; s < references.length; s++) {
             if (!live(s)) { if (references[s] instanceof KeyReference ref) { ref.slot = -1; } continue; }
             int p = hashes[s] & (capacity - 1);
-            while (state[p] != 0) { p = (p + 1) & (capacity - 1); }
-            r[p] = references[s]; v[p] = values[s]; h[p] = hashes[s]; state[p] = 1; count++;
+            while (r[p] != EMPTY) { p = (p + 1) & (capacity - 1); }
+            r[p] = references[s]; v[p] = values[s]; h[p] = hashes[s]; count++;
             if (r[p] instanceof KeyReference ref) { ref.slot = p; }
         }
-        references = r; values = v; hashes = h; states = state; size = count; occupied = count;
+        references = r; values = v; hashes = h; size = count; occupied = count;
     }
     @Override public void clear() {
         if (occupied == 0) { return; }
         for (Object r : references) { if (r instanceof KeyReference ref) { ref.slot = -1; ref.clear(); } }
-        Arrays.fill(references, null); Arrays.fill(values, null); Arrays.fill(states, (byte) 0);
+        Arrays.fill(references, EMPTY); Arrays.fill(values, null);
         size = 0; occupied = 0; modifications++; drain();
     }
     /** Drain references already enqueued by the JVM; does not request a GC. */
