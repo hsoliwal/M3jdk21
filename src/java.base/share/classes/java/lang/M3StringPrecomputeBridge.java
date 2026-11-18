@@ -28,42 +28,6 @@ final class M3StringPrecomputeBridge {
         return prepared != null && prepared.utf16Length == source.length() ? prepared : null;
     }
 
-    static boolean contentEquals(
-            String left, String right, M3String leftStorage, M3String rightStorage) {
-        if (leftStorage != null) {
-            if (rightStorage == null && right.cachedHashDiffers(leftStorage)) return false;
-            return leftStorage.contentEquals(right);
-        }
-        if (rightStorage != null) {
-            if (left.cachedHashDiffers(rightStorage)) return false;
-            return rightStorage.contentEquals(left);
-        }
-        throw new IllegalArgumentException("M3 bridge requires canonical backing");
-    }
-
-    static int compareTo(
-            String left, String right, M3String leftStorage, M3String rightStorage) {
-        if (leftStorage != null && leftStorage.sameCoordinate(rightStorage)) return 0;
-        int length1 = left.length();
-        int length2 = right.length();
-        int limit = Math.min(length1, length2);
-        int difference;
-        if (leftStorage != null) {
-            difference = rightStorage != null
-                    ? leftStorage.comparePrefix(rightStorage, limit)
-                    : leftStorage.compareFlatPrefix(right, limit);
-        } else if (rightStorage != null) {
-            difference = -rightStorage.compareFlatPrefix(left, limit);
-        } else {
-            difference = 0;
-            for (int index = 0; index < limit; index++) {
-                difference = left.charAt(index) - right.charAt(index);
-                if (difference != 0) break;
-            }
-        }
-        return difference != 0 ? difference : length1 - length2;
-    }
-
     static boolean startsWith(M3String source, String prefix, int offset) {
         M3String prefixStorage = prefix.m3();
         if (prefixStorage != null) {

@@ -46,7 +46,6 @@ public class M3StringKeyComparisonTest {
     private static Method compareRange;
     private static Method comparePrefix;
     private static Method compareFlatPrefix;
-    private static Method bridgeCompareTo;
     private static Method factsIfPrepared;
     private static Method packChars;
     private static Method immediateOf;
@@ -62,7 +61,7 @@ public class M3StringKeyComparisonTest {
         nativeRanges();
         tupleRanges();
         immediateRanges();
-        bridgeRanges();
+        ownerCompareRanges();
         // This explicit mode also permits native-memory smoke tests using the actual M3 classes
         // patched into a bootstrap JDK. Public String/collection integration still requires M3JDK.
         if (args.length == 0) collectionKeys();
@@ -82,8 +81,6 @@ public class M3StringKeyComparisonTest {
         whole = method(m3, "whole", owner);
         comparePrefix = method(m3, "comparePrefix", m3, int.class);
         compareFlatPrefix = method(m3, "compareFlatPrefix", String.class, int.class);
-        bridgeCompareTo = method(Class.forName("java.lang.M3StringPrecomputeBridge"),
-                "compareTo", String.class, String.class, m3, m3);
         factsIfPrepared = method(m3, "factsIfPrepared");
         packChars = method(immediate, "packChars", char[].class, int.class, int.class);
         immediateOf = method(immediate, "of", long.class);
@@ -198,7 +195,7 @@ public class M3StringKeyComparisonTest {
                             "first mismatch at either side of a tuple seam");
                     check(prefix(changedTuple, left, units.length) == -expected,
                             "reversed tuple seam difference");
-                    checkBridge(units, changedUnits, left, changedTuple, expected);
+                    checkOwnerCompare(units, changedUnits, left, changedTuple, expected);
                 }
             }
         }
@@ -221,13 +218,14 @@ public class M3StringKeyComparisonTest {
         }
     }
 
-    private static void bridgeRanges() throws Exception {
+    private static void ownerCompareRanges() throws Exception {
         char[] units = pattern(129, true);
         try (NativeRun left = new NativeRun(units, WIDE_LAYOUTS[0], 1);
              NativeRun right = new NativeRun(units, WIDE_LAYOUTS[1], 3)) {
             for (int leftLength : LENGTHS) {
                 for (int rightLength : LENGTHS) {
-                    checkBridge(Arrays.copyOf(units, leftLength), Arrays.copyOf(units, rightLength),
+                    checkOwnerCompare(Arrays.copyOf(units, leftLength),
+                            Arrays.copyOf(units, rightLength),
                             left.range(0, leftLength), right.range(0, rightLength),
                             leftLength - rightLength);
                 }
@@ -235,17 +233,27 @@ public class M3StringKeyComparisonTest {
         }
     }
 
-    /** Exercise the actual bridge's both-M3, either mixed direction, and flat fallback branches. */
-    private static void checkBridge(char[] leftUnits, char[] rightUnits, Object leftStorage,
-            Object rightStorage, int expected) throws Exception {
+    /**
+     * Exercise the owners String comparison composes since decision 50: the flat compare, both
+     * M3 by comparePrefix, and either mixed direction by compareFlatPrefix, each followed by the
+     * length tie-break.
+     */
+    private static void checkOwnerCompare(char[] leftUnits, char[] rightUnits,
+            Object leftStorage, Object rightStorage, int expected) throws Exception {
         String left = new String(leftUnits);
         String right = new String(rightUnits);
-        for (Object leftBacking : new Object[] {null, leftStorage}) {
-            for (Object rightBacking : new Object[] {null, rightStorage}) {
-                check((int) bridgeCompareTo.invoke(null, left, right, leftBacking, rightBacking)
-                        == expected, "bridge preserves exact difference and length tie-break");
-            }
-        }
+        int limit = Math.min(left.length(), right.length());
+        int tieBreak = left.length() - right.length();
+        check(left.compareTo(right) == expected,
+                "flat compare keeps exact difference and tie-break");
+        int both = (int) comparePrefix.invoke(leftStorage, rightStorage, limit);
+        check((both != 0 ? both : tieBreak) == expected, "M3/M3 prefix keeps exact difference");
+        int leftOnly = (int) compareFlatPrefix.invoke(leftStorage, right, limit);
+        check((leftOnly != 0 ? leftOnly : tieBreak) == expected,
+                "M3/flat prefix keeps exact difference");
+        int rightOnly = -(int) compareFlatPrefix.invoke(rightStorage, left, limit);
+        check((rightOnly != 0 ? rightOnly : tieBreak) == expected,
+                "flat/M3 prefix keeps exact difference");
     }
 
     private static void collectionKeys() throws Exception {
