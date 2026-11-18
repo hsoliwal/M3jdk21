@@ -5977,6 +5977,92 @@ public final class String
     }
 
     /**
+     * Returns the first {@code count} UTF-16 characters of this string, or this
+     * string if the count exceeds its length. Kotlin's {@code String.take} uses
+     * characters rather than Unicode scalar values, so an unpaired surrogate
+     * may be retained at the boundary.
+     *
+     * @apiNote M3JDK addition modeled on Kotlin's {@code String.take(Int)}.
+     * @param count number of UTF-16 characters to retain.
+     * @return a source-backed prefix.
+     * @throws IllegalArgumentException if {@code count} is negative.
+     * @since 21
+     */
+    public String take(int count) {
+        if (count < 0) throw new IllegalArgumentException(
+                "Requested character count " + count + " is less than zero.");
+        if (count >= length()) return this;
+        return substring(0, count);
+    }
+
+    /**
+     * Returns the last {@code count} UTF-16 characters, or this string if the
+     * count exceeds its length. Boundaries follow Kotlin {@code String.takeLast}
+     * and can contain unpaired surrogate units.
+     *
+     * @apiNote M3JDK addition modeled on Kotlin's {@code String.takeLast(Int)}.
+     * @param count number of UTF-16 characters to retain.
+     * @return a source-backed suffix.
+     * @throws IllegalArgumentException if {@code count} is negative.
+     * @since 21
+     */
+    public String takeLast(int count) {
+        if (count < 0) throw new IllegalArgumentException(
+                "Requested character count " + count + " is less than zero.");
+        if (count >= length()) return this;
+        return substring(length() - count);
+    }
+
+    /**
+     * Returns this string unchanged if nonempty; otherwise evaluates
+     * {@code defaultValue} exactly once. A supplier may return {@code null}.
+     * No callback evaluation or validation occurs for a nonempty receiver.
+     *
+     * @apiNote M3JDK addition modeled on Kotlin's {@code CharSequence.ifEmpty}.
+     * @param defaultValue supplier used only for an empty receiver.
+     * @return this string or the supplier's result, possibly {@code null}.
+     * @throws NullPointerException if this string is empty and the supplier is null.
+     * @since 21
+     */
+    public String ifEmpty(java.util.function.Supplier<? extends String> defaultValue) {
+        return isEmpty() ? defaultValue.get() : this;
+    }
+
+    /**
+     * Returns this string unchanged unless all UTF-16 units are whitespace
+     * under Kotlin's {@code Char.isWhitespace} categories, in which case it evaluates
+     * {@code defaultValue} exactly once. Unlike Java {@code String.isBlank}, Kotlin
+     * also recognizes nonbreaking space and the other Unicode space separators.
+     * The supplier may return {@code null}.
+     *
+     * @apiNote M3JDK addition modeled on Kotlin's {@code CharSequence.ifBlank}.
+     * @param defaultValue supplier used only for a Kotlin-blank receiver.
+     * @return this string or the supplier's result, possibly {@code null}.
+     * @throws NullPointerException if this string is blank and the supplier is null.
+     * @since 21
+     */
+    public String ifBlank(java.util.function.Supplier<? extends String> defaultValue) {
+        return isKotlinBlank() ? defaultValue.get() : this;
+    }
+
+    /**
+     * Kotlin Char.isWhitespace: Unicode categories Zs/Zl/Zp, and Cc ranges
+     * U+0009..U+000D and U+001C..U+001F. {@code charAt} retains the M3String
+     * operation bridge and never flattens a canonical composition.
+     */
+    private boolean isKotlinBlank() {
+        for (int i = 0, n = length(); i < n; i++) {
+            char unit = charAt(i);
+            if (!Character.isSpaceChar(unit)
+                    && (unit < '\t' || unit > '\r')
+                    && (unit < '\u001C' || unit > '\u001F')) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
      * Returns this string without its first {@code count} characters: the empty string when it is
      * not longer.
      *
