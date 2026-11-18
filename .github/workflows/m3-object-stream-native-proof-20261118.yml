@@ -112,6 +112,33 @@ jobs:
           java --list-modules | grep '^jdk.m3.collections@'
           jlink --add-modules jdk.m3.collections --output "$RUNNER_TEMP/m3-object-stream-jlink"
           "$RUNNER_TEMP/m3-object-stream-jlink/bin/java" --list-modules | grep '^jdk.m3.collections@'
+      - name: Compile and run collate on built and linked M3 images
+        run: |
+          set -euo pipefail
+          collate_classes="$RUNNER_TEMP/m3-collate-contract-classes"
+          empty_sourcepath="$RUNNER_TEMP/m3-collate-empty-sourcepath"
+          mkdir -p "$collate_classes" "$empty_sourcepath"
+          "$M3_JAVA_HOME/bin/javac" \
+            -source 21 -target 21 -proc:none -implicit:none -Xlint:all -Werror \
+            --add-modules jdk.m3.collections \
+            --add-exports java.base/java.util.function.ext=ALL-UNNAMED \
+            -sourcepath "$empty_sourcepath" -classpath "$collate_classes" \
+            -d "$collate_classes" \
+            test/jdk/jdk/m3/collections/ObjectStreamCollateTest.java
+          "$M3_JAVA_HOME/bin/java" -Xmx64m -ea \
+            --add-modules jdk.m3.collections \
+            --add-exports java.base/java.util.function.ext=ALL-UNNAMED \
+            -cp "$collate_classes" ObjectStreamCollateTest \
+            | tee "$RUNNER_TEMP/m3-collate-full-image.log"
+          grep -Fx 'OBJECT_STREAM_COLLATE_PASS checks=29894' \
+            "$RUNNER_TEMP/m3-collate-full-image.log"
+          "$RUNNER_TEMP/m3-object-stream-jlink/bin/java" -Xmx64m -ea \
+            --add-modules jdk.m3.collections \
+            --add-exports java.base/java.util.function.ext=ALL-UNNAMED \
+            -cp "$collate_classes" ObjectStreamCollateTest \
+            | tee "$RUNNER_TEMP/m3-collate-jlink-image.log"
+          grep -Fx 'OBJECT_STREAM_COLLATE_PASS checks=29894' \
+            "$RUNNER_TEMP/m3-collate-jlink-image.log"
       - name: Retain Maven/JDK evidence
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
@@ -120,4 +147,6 @@ jobs:
           path: |
             m3/collections/target/surefire-reports/
             m3/arrays/target/surefire-reports/
+            ${{ runner.temp }}/m3-collate-full-image.log
+            ${{ runner.temp }}/m3-collate-jlink-image.log
           if-no-files-found: warn
