@@ -147,10 +147,7 @@ final class M3StringTuple extends M3StringOwner {
             byte destinationCoder) {
         Objects.checkFromToIndex(start, end, length);
         int count = end - start;
-        Objects.checkFromIndexSize(
-                destinationStart << destinationCoder,
-                count << destinationCoder,
-                destination.length);
+        checkByteDestination(destination, destinationStart, count, destinationCoder);
         M3StringPool.copyBytesFromPath(
                 this, start, end, destination, destinationStart, destinationCoder);
     }

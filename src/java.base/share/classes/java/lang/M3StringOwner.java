@@ -37,6 +37,23 @@ abstract sealed class M3StringOwner permits M3StringAtom, M3StringTuple, M3Strin
         this.structuralHash64 = structuralHash64;
     }
 
+    /**
+     * Validates the actual byte range before writing a JNI compatibility shadow.
+     * A widened shift is required: UTF16's two-byte destination offsets can
+     * otherwise wrap 32-bit int (including Integer.MIN_VALUE becoming zero).
+     */
+    static void checkByteDestination(
+            byte[] destination, int destinationStart, int count, byte destinationCoder) {
+        Objects.requireNonNull(destination, "destination");
+        if (destinationCoder != String.LATIN1 && destinationCoder != String.UTF16) {
+            throw new IllegalArgumentException("invalid destination String coder");
+        }
+        Objects.checkFromIndexSize(
+                (long) destinationStart << destinationCoder,
+                (long) count << destinationCoder,
+                destination.length);
+    }
+
     abstract char charAt(int index);
 
     void getChars(int start, int end, char[] destination, int destinationStart) {
@@ -55,10 +72,7 @@ abstract sealed class M3StringOwner permits M3StringAtom, M3StringTuple, M3Strin
             byte destinationCoder) {
         Objects.checkFromToIndex(start, end, length);
         int count = end - start;
-        Objects.checkFromIndexSize(
-                destinationStart << destinationCoder,
-                count << destinationCoder,
-                destination.length);
+        checkByteDestination(destination, destinationStart, count, destinationCoder);
         for (int source = start, target = destinationStart; source < end; source++, target++) {
             char unit = charAt(source);
             if (destinationCoder == String.LATIN1) {
