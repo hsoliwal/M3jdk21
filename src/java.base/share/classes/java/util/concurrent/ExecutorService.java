@@ -491,4 +491,106 @@ public interface ExecutorService extends Executor, AutoCloseable {
         return submit((Runnable) () -> ProgressMonitors.run(task, monitor), result);
     }
 
+    /**
+     * Executes all tasks using this executor's existing scheduling policy, with
+     * the supplied progress monitor bound independently to each task.
+     * The monitor belongs to the caller: neither this method nor its task
+     * wrappers begin or complete it. Ordinary Futures own cancellation.
+     *
+     * @param <T> the callable result type
+     * @param tasks the tasks to execute in collection encounter order
+     * @param monitor the borrowed monitor to bind during each task
+     * @return the Futures in task encounter order
+     * @throws InterruptedException if interrupted while waiting
+     * @throws NullPointerException if tasks, a task, or monitor is null
+     * @throws RejectedExecutionException if the executor rejects a task
+     */
+    default <T> List<Future<T>> invokeAllMonitored(
+            Collection<? extends Callable<T>> tasks, ProgressMonitor monitor)
+            throws InterruptedException {
+        return invokeAll(monitoredTasks(tasks, monitor));
+    }
+
+    /**
+     * Timed bulk execution with the same Future ordering and cancellation
+     * contract as {@link #invokeAll(Collection, long, TimeUnit)}.
+     * The timeout is passed unchanged to the owning executor after task
+     * wrappers have been prepared. No second queue or scheduler is created.
+     *
+     * @param <T> the callable result type
+     * @param tasks the tasks to execute
+     * @param timeout the existing executor's timeout
+     * @param unit the unit of the timeout
+     * @param monitor the borrowed monitor for each task
+     * @return the Futures in encounter order, possibly cancelled on timeout
+     * @throws InterruptedException if interrupted while waiting
+     * @throws NullPointerException if tasks, a task, unit, or monitor is null
+     * @throws RejectedExecutionException if a task cannot be scheduled
+     */
+    default <T> List<Future<T>> invokeAllMonitored(
+            Collection<? extends Callable<T>> tasks, long timeout, TimeUnit unit,
+            ProgressMonitor monitor) throws InterruptedException {
+        java.util.Objects.requireNonNull(unit, "unit");
+        return invokeAll(monitoredTasks(tasks, monitor), timeout, unit);
+    }
+
+    /**
+     * Returns the first successful result using this executor's existing
+     * invokeAny arbitration and cancellation policy. Each task borrows the
+     * same supplied monitor in its execution scope only.
+     *
+     * @param <T> the callable result type
+     * @param tasks the tasks to execute
+     * @param monitor the borrowed monitor
+     * @return a successfully completed task's result
+     * @throws InterruptedException if interrupted while waiting
+     * @throws ExecutionException if no task completes successfully
+     * @throws IllegalArgumentException if tasks is empty
+     * @throws NullPointerException if tasks, a task, or monitor is null
+     * @throws RejectedExecutionException if tasks cannot be scheduled
+     */
+    default <T> T invokeAnyMonitored(
+            Collection<? extends Callable<T>> tasks, ProgressMonitor monitor)
+            throws InterruptedException, ExecutionException {
+        return invokeAny(monitoredTasks(tasks, monitor));
+    }
+
+    /**
+     * Timed first-success execution using the existing executor's timeout,
+     * arbitration, exception and outstanding-task cancellation behavior.
+     * The borrowed monitor is not completed by this operation.
+     *
+     * @param <T> the callable result type
+     * @param tasks the tasks to execute
+     * @param timeout the existing executor's timeout
+     * @param unit the timeout unit
+     * @param monitor the borrowed monitor
+     * @return a successfully completed task's result
+     * @throws InterruptedException if interrupted while waiting
+     * @throws ExecutionException if no task succeeds
+     * @throws TimeoutException if the executor's timeout expires
+     * @throws IllegalArgumentException if tasks is empty
+     * @throws NullPointerException if tasks, a task, unit, or monitor is null
+     * @throws RejectedExecutionException if tasks cannot be scheduled
+     */
+    default <T> T invokeAnyMonitored(
+            Collection<? extends Callable<T>> tasks, long timeout, TimeUnit unit,
+            ProgressMonitor monitor)
+            throws InterruptedException, ExecutionException, TimeoutException {
+        java.util.Objects.requireNonNull(unit, "unit");
+        return invokeAny(monitoredTasks(tasks, monitor), timeout, unit);
+    }
+
+    /** Prepare one scoped callable per task, with no retained task-entry graph. */
+    private static <T> List<Callable<T>> monitoredTasks(
+            Collection<? extends Callable<T>> tasks, ProgressMonitor monitor) {
+        java.util.Objects.requireNonNull(tasks, "tasks");
+        java.util.Objects.requireNonNull(monitor, "monitor");
+        List<Callable<T>> prepared = new java.util.ArrayList<>(tasks.size());
+        for (Callable<T> task : tasks) {
+            prepared.add(ProgressMonitors.wrap(task, monitor));
+        }
+        return prepared;
+    }
+
 }
