@@ -17,4 +17,16 @@ class M3GridParityTest {
     void mergedBodyCellSpans() throws Exception {
         M3GridSpansSmoke.main(new String[0]);
     }
+    @Test
+    void sparseCollapsibleRowGroups() throws Exception {
+        M3GridGroupsSmoke.main(new String[0]);
+    }
+    @Test
+    void sparseGroupMappingMatchesDenseOracle() throws Exception {
+        M3GridGroupsMappingSmoke.main(new String[0]);
+    }
+    @Test
+    void serializedSparseGroupProjectionRoundTrip() throws Exception {
+        M3GridGroupsSerializationSmoke.main(new String[0]);
+    }
 }

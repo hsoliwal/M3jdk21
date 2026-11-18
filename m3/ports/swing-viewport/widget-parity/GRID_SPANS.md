@@ -96,8 +96,8 @@ PASS for the original product and all four predecessor/new tests.
 Full M3JDK native image build/jtreg, whole Maven/JUnit reactor, downstream
 SwingX/NetBeans compatibility, Win32/Cocoa/GTK4 HiDPI, accessible merged-cell
 navigation, keyboard editing, RTL, printing, mixed selection behavior,
-cross-plane spans, sparse logarithmic index, overlapping group headers,
-canonical Synexia source-sealed OpenRewrite fixed-point recipe and
+cross-plane spans, sparse logarithmic span index, nested group headers
+(flat model-order grouping is implemented separately), canonical Synexia source-sealed OpenRewrite fixed-point recipe and
 performance benchmarks remain **NOT_RUN**.
 
 This is a first native Swing merged-cell feature, **not** complete

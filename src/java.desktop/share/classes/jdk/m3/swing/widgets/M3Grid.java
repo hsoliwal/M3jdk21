@@ -3,6 +3,21 @@ package jdk.m3.swing.widgets;
 
 import java.awt.Component;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.FontMetrics;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.KeyEvent;
+import java.awt.event.InputEvent;
+import java.io.IOException;
+import java.io.InvalidObjectException;
+import java.io.ObjectInputStream;
+import java.io.Serial;
+import java.util.List;
+import javax.swing.AbstractAction;
+import javax.swing.KeyStroke;
+import javax.swing.RowSorter;
+import javax.swing.table.TableModel;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.util.Arrays;
@@ -17,7 +32,6 @@ import javax.swing.table.JTableHeader;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
-import javax.swing.table.TableModel;
 
 /**
  * A native Swing Grid with opt-in frozen leading view columns. This is a
@@ -47,6 +61,14 @@ public final class M3Grid extends JTable {
     private int[] spanLanes = new int[32];
     private int spanCount;
     private transient long spanPaintedCells;
+    // Sparse header/end/collapsed lanes in model-row coordinates; labels only
+    // for the group headers. Child rows are never materialized as objects.
+    private int[] groupLanes = new int[24];
+    private String[] groupLabels = new String[8];
+    private int groupCount;
+    private transient GroupRowSorter groupSorter;
+    private transient MouseAdapter groupMouse;
+    private transient long groupHeaderPainted;
     private JTableHeader originalHeader;
     private PinnedHeader pinnedHeader;
 
@@ -76,6 +98,320 @@ public final class M3Grid extends JTable {
 
     /** Number of rendered frozen body cells, for performance and damage regression gates. */
     public long getFrozenPaintedCells() { return frozenPaintedCells; }
+
+    /** Number of sparse, non-overlapping model-order groups. */
+    public int getRowGroupCount() { return groupCount; }
+
+    /** Number of group headers stamped in the visible viewport. */
+    public long getGroupHeaderPainted() { return groupHeaderPainted; }
+
+    /**
+     * Adds a model-order group with its first row serving as the real Swing
+     * header. Children occupy [firstModelRow+1, endModelRowExclusive).
+     * Groups are sorted and non-overlapping; there are no synthetic rows.
+     *
+     * <p>Collapse uses a sparse RowSorter with O(log groups) index mapping,
+     * not TableRowSorter's O(model rows) entry objects. It only activates when
+     * no external RowSorter is installed. A caller-owned sorter cannot be
+     * silently replaced. To sort/filter the table externally, clear groups
+     * first, then install the caller sorter; replacing the sorter explicitly
+     * also clears grouping. This first leaf does not support group sorting.</p>
+     */
+    public void addRowGroup(int firstModelRow, int endModelRowExclusive, String title) {
+        requireEdt();
+        if (firstModelRow < 0 || endModelRowExclusive <= firstModelRow + 1
+                || endModelRowExclusive > getModel().getRowCount()) {
+            throw new IllegalArgumentException("group bounds require header plus children");
+        }
+        if (title == null) throw new NullPointerException("title");
+        if (groupSorter == null && getRowSorter() != null) {
+            throw new IllegalStateException("external RowSorter is already installed; cannot replace it");
+        }
+        int index = findGroupInsertion(firstModelRow);
+        if (index < groupCount && groupLanes[index * 3] == firstModelRow) {
+            throw new IllegalArgumentException("duplicate group header");
+        }
+        if (index > 0 && groupLanes[(index - 1) * 3 + 1] > firstModelRow) {
+            throw new IllegalArgumentException("overlapping row group");
+        }
+        if (index < groupCount && endModelRowExclusive > groupLanes[index * 3]) {
+            throw new IllegalArgumentException("overlapping row group");
+        }
+        if (groupCount == 4_096) throw new IllegalArgumentException("group capacity exceeded");
+        if (groupCount == groupLanes.length / 3) {
+            groupLanes = Arrays.copyOf(groupLanes, groupLanes.length * 2);
+            groupLabels = Arrays.copyOf(groupLabels, groupLabels.length * 2);
+        }
+        System.arraycopy(groupLanes, index * 3, groupLanes, (index + 1) * 3, (groupCount - index) * 3);
+        System.arraycopy(groupLabels, index, groupLabels, index + 1, groupCount - index);
+        groupLanes[index * 3] = firstModelRow;
+        groupLanes[index * 3 + 1] = endModelRowExclusive;
+        groupLanes[index * 3 + 2] = 0;
+        groupLabels[index] = title;
+        groupCount++;
+        if (groupSorter == null) {
+            groupSorter = new GroupRowSorter();
+            super.setRowSorter(groupSorter);
+            installGroupMouse();
+        }
+        groupSorter.rebuild();
+        repaint();
+    }
+
+    public String getRowGroupTitle(int firstModelRow) {
+        int index = groupAtStart(firstModelRow);
+        return index < 0 ? null : groupLabels[index];
+    }
+
+    public boolean isRowGroupCollapsed(int firstModelRow) {
+        int index = groupAtStart(firstModelRow);
+        if (index < 0) throw new IllegalArgumentException("unknown group header");
+        return groupLanes[index * 3 + 2] != 0;
+    }
+
+    public void setRowGroupCollapsed(int firstModelRow, boolean collapsed) {
+        requireEdt();
+        int index = groupAtStart(firstModelRow);
+        if (index < 0) throw new IllegalArgumentException("unknown group header");
+        if ((groupLanes[index * 3 + 2] != 0) == collapsed) return;
+        groupLanes[index * 3 + 2] = collapsed ? 1 : 0;
+        if (groupSorter != null) groupSorter.rebuild();
+        revalidate();
+        repaint();
+    }
+
+    public void removeRowGroup(int firstModelRow) {
+        requireEdt();
+        int index = groupAtStart(firstModelRow);
+        if (index < 0) return;
+        System.arraycopy(groupLanes, (index + 1) * 3, groupLanes, index * 3, (groupCount - index - 1) * 3);
+        System.arraycopy(groupLabels, index + 1, groupLabels, index, groupCount - index - 1);
+        groupCount--;
+        Arrays.fill(groupLanes, groupCount * 3, groupCount * 3 + 3, 0);
+        groupLabels[groupCount] = null;
+        if (groupCount == 0) detachGroupSorter();
+        else groupSorter.rebuild();
+        repaint();
+    }
+
+    public void clearRowGroups() {
+        requireEdt();
+        if (groupCount == 0) return;
+        Arrays.fill(groupLanes, 0);
+        Arrays.fill(groupLabels, null);
+        groupCount = 0;
+        detachGroupSorter();
+        repaint();
+    }
+
+    /** Returns the model header row for a displayed group-header view row, else -1. */
+    public int groupHeaderAtViewRow(int viewRow) {
+        if (groupSorter == null || viewRow < 0 || viewRow >= getRowCount()) return -1;
+        int modelRow = convertRowIndexToModel(viewRow);
+        return groupAtStart(modelRow) >= 0 ? modelRow : -1;
+    }
+
+    /** Binary search over sparse sorted model-header ordinals. */
+    private int findGroupInsertion(int header) {
+        int lo = 0, hi = groupCount;
+        while (lo < hi) {
+            int mid = (lo + hi) >>> 1;
+            if (groupLanes[mid * 3] < header) lo = mid + 1;
+            else hi = mid;
+        }
+        return lo;
+    }
+
+    private int groupAtStart(int header) {
+        int index = findGroupInsertion(header);
+        return index < groupCount && groupLanes[index * 3] == header ? index : -1;
+    }
+
+    /** An explicit external sorter overrides opt-in grouping, never vice versa. */
+    @Override public void setRowSorter(RowSorter<? extends TableModel> sorter) {
+        if (groupSorter != null && sorter != groupSorter) {
+            groupSorter = null;
+            groupCount = 0;
+            Arrays.fill(groupLanes, 0);
+            Arrays.fill(groupLabels, null);
+            removeGroupMouse();
+        }
+        super.setRowSorter(sorter);
+    }
+
+    /** Structural model changes invalidate bare model-row group ordinals. */
+    private void clearGroupsOnStructure() {
+        if (groupSorter != null) {
+            groupSorter = null;
+            groupCount = 0;
+            Arrays.fill(groupLanes, 0);
+            Arrays.fill(groupLabels, null);
+            removeGroupMouse();
+            super.setRowSorter(null);
+        }
+    }
+
+    private void detachGroupSorter() {
+        if (groupSorter != null) {
+            groupSorter = null;
+            removeGroupMouse();
+            super.setRowSorter(null);
+        }
+    }
+
+    private void installGroupMouse() {
+        if (groupMouse != null) return;
+        groupMouse = new MouseAdapter() {
+            @Override public void mouseReleased(MouseEvent event) {
+                if (event.getButton() != MouseEvent.BUTTON1) return;
+                Rectangle visible = getVisibleRect();
+                if (event.getX() < visible.x || event.getX() >= visible.x + 20) return;
+                int viewRow = rowAtPoint(event.getPoint());
+                int modelHeader = groupHeaderAtViewRow(viewRow);
+                if (modelHeader >= 0) setRowGroupCollapsed(modelHeader, !isRowGroupCollapsed(modelHeader));
+            }
+        };
+        addMouseListener(groupMouse);
+        getInputMap(WHEN_ANCESTOR_OF_FOCUSED_COMPONENT).put(
+                KeyStroke.getKeyStroke(KeyEvent.VK_SPACE, InputEvent.ALT_DOWN_MASK), "m3.toggleRowGroup");
+        getActionMap().put("m3.toggleRowGroup", new AbstractAction() {
+            private static final long serialVersionUID = 1L;
+            @Override public void actionPerformed(java.awt.event.ActionEvent event) {
+                int header = groupHeaderAtViewRow(getSelectedRow());
+                if (header >= 0) setRowGroupCollapsed(header, !isRowGroupCollapsed(header));
+            }
+        });
+    }
+
+    private void removeGroupMouse() {
+        if (groupMouse == null) return;
+        removeMouseListener(groupMouse);
+        groupMouse = null;
+        getInputMap(WHEN_ANCESTOR_OF_FOCUSED_COMPONENT).remove(
+                KeyStroke.getKeyStroke(KeyEvent.VK_SPACE, InputEvent.ALT_DOWN_MASK));
+        getActionMap().remove("m3.toggleRowGroup");
+    }
+
+    /** Sparse identity RowSorter with O(log G) ordinal projection; no row entries. */
+    private final class GroupRowSorter extends RowSorter<TableModel> {
+        private int[] hiddenStart = new int[8];
+        private int[] hiddenEnd = new int[8];
+        private int[] viewThreshold = new int[8];
+        private int[] prefixHidden = new int[8];
+        private int hiddenGroups;
+        private int totalHidden;
+
+        @Override public TableModel getModel() { return M3Grid.this.getModel(); }
+        @Override public int getModelRowCount() { return getModel().getRowCount(); }
+        @Override public int getViewRowCount() { return getModelRowCount() - totalHidden; }
+        @Override public List<? extends SortKey> getSortKeys() { return List.of(); }
+        @Override public void toggleSortOrder(int column) {
+            // JTableHeader calls this on an ordinary user click. Grouping
+            // has no ordering comparator: preserve model order without
+            // propagating an exception through Swing's event dispatch thread.
+            if (column < 0 || column >= getModel().getColumnCount()) {
+                throw new IndexOutOfBoundsException("sort column");
+            }
+        }
+        @Override public void setSortKeys(List<? extends SortKey> keys) {
+            if (keys != null && !keys.isEmpty()) {
+                throw new UnsupportedOperationException("row-group sorter does not reorder model rows");
+            }
+        }
+
+        private int countAtOrBefore(int[] sorted, int length, int value) {
+            int low = 0, high = length;
+            while (low < high) {
+                int middle = (low + high) >>> 1;
+                if (sorted[middle] <= value) low = middle + 1;
+                else high = middle;
+            }
+            return low;
+        }
+
+        @Override public int convertRowIndexToModel(int viewRow) {
+            if (viewRow < 0 || viewRow >= getViewRowCount()) throw new IndexOutOfBoundsException("view row");
+            int completed = countAtOrBefore(viewThreshold, hiddenGroups, viewRow);
+            int removed = completed == 0 ? 0 : prefixHidden[completed - 1];
+            return viewRow + removed;
+        }
+        @Override public int convertRowIndexToView(int modelRow) {
+            if (modelRow < 0 || modelRow >= getModelRowCount()) throw new IndexOutOfBoundsException("model row");
+            int preceding = countAtOrBefore(hiddenStart, hiddenGroups, modelRow);
+            if (preceding == 0) return modelRow;
+            int slot = preceding - 1;
+            if (modelRow < hiddenEnd[slot]) return -1;
+            return modelRow - prefixHidden[slot];
+        }
+        void rebuild() {
+            int needed = Math.max(8, groupCount);
+            if (needed > hiddenStart.length) {
+                hiddenStart = Arrays.copyOf(hiddenStart, needed);
+                hiddenEnd = Arrays.copyOf(hiddenEnd, needed);
+                viewThreshold = Arrays.copyOf(viewThreshold, needed);
+                prefixHidden = Arrays.copyOf(prefixHidden, needed);
+            }
+            hiddenGroups = 0;
+            totalHidden = 0;
+            for (int group = 0; group < groupCount; group++) {
+                int b = group * 3;
+                if (groupLanes[b + 2] == 0) continue;
+                int header = groupLanes[b], exclusive = groupLanes[b + 1];
+                int slot = hiddenGroups++;
+                hiddenStart[slot] = header + 1;
+                hiddenEnd[slot] = exclusive;
+                viewThreshold[slot] = header + 1 - totalHidden;
+                totalHidden += exclusive - header - 1;
+                prefixHidden[slot] = totalHidden;
+            }
+            fireRowSorterChanged((int[]) null);
+        }
+        @Override public void modelStructureChanged() { rebuild(); }
+        @Override public void allRowsChanged() { rebuild(); }
+        @Override public void rowsInserted(int first, int end) { rebuild(); }
+        @Override public void rowsDeleted(int first, int end) { rebuild(); }
+        @Override public void rowsUpdated(int first, int end) { }
+        @Override public void rowsUpdated(int first, int end, int column) { }
+    }
+
+    /**
+     * JTable serializes the TableModel but its RowSorter is not a durable
+     * projection. Reconnect only the sparse group behavior after validating
+     * the saved lane structure; never leave visible group flags inconsistent
+     * with the restored logical row count.
+     */
+    @Serial
+    private void readObject(ObjectInputStream input) throws IOException, ClassNotFoundException {
+        input.defaultReadObject();
+        // Serialized pre-group M3Grid instances do not contain these fields.
+        // Restore an empty sparse lane rather than rejecting older streams.
+        if (groupCount == 0) {
+            if (groupLanes == null) groupLanes = new int[24];
+            if (groupLabels == null) groupLabels = new String[8];
+            return;
+        }
+        if (groupCount < 0 || groupCount > 4_096 || groupLanes == null || groupLabels == null
+                || (long) groupCount * 3 > groupLanes.length || groupCount > groupLabels.length) {
+            throw new InvalidObjectException("invalid group lane count");
+        }
+        int previousEnd = 0, modelRows = getModel().getRowCount();
+        for (int i = 0; i < groupCount; i++) {
+            int at = i * 3;
+            int start = groupLanes[at], end = groupLanes[at + 1], collapsed = groupLanes[at + 2];
+            if (start < previousEnd || end <= start + 1 || end > modelRows
+                    || (collapsed != 0 && collapsed != 1) || groupLabels[i] == null) {
+                throw new InvalidObjectException("invalid serialized group bounds/state");
+            }
+            previousEnd = end;
+        }
+        // The JTable's transient sorter was not serialized. The sparse
+        // projection is deterministically rebuilt from the original model
+        // ordinals and collapsed flags without materializing model rows.
+        groupSorter = new GroupRowSorter();
+        super.setRowSorter(groupSorter);
+        installGroupMouse();
+        groupSorter.rebuild();
+    }
 
     /** Configured model-coordinate spans; stock JTable behavior when empty. */
     public int getCellSpanCount() { return spanCount; }
@@ -153,6 +489,10 @@ public final class M3Grid extends JTable {
 
     /** Rebuild spans only on request; structural row events invalidate model-row ordinals. */
     @Override public void tableChanged(TableModelEvent event) {
+        if (groupLanes != null && (event == null || event.getFirstRow() == TableModelEvent.HEADER_ROW
+                || event.getType() == TableModelEvent.INSERT || event.getType() == TableModelEvent.DELETE)) {
+            clearGroupsOnStructure();
+        }
         super.tableChanged(event);
         if (spanLanes != null && spanCount > 0
                 && (event == null || event.getFirstRow() == TableModelEvent.HEADER_ROW
@@ -416,6 +756,106 @@ public final class M3Grid extends JTable {
         if (pinned()) paintFrozenColumns(g);
         if (rowPinsActive()) paintPinnedRows(g);
         if (spanCount != 0) paintCellSpans(g);
+        if (groupCount > 0 && groupSorter != null && !isPaintingForPrint()) paintGroupHeaders(g);
+    }
+
+    /**
+     * Finds the first group header in the physical viewport in O(log groups)
+     * and draws only resident headings. Pinned top/bottom headings are queried
+     * separately; no per-model-row objects, temporary arrays or paint scans of
+     * all groups are required.
+     */
+    private void paintGroupHeaders(Graphics graphics) {
+        Rectangle visible = getVisibleRect();
+        if (visible.isEmpty() || getColumnCount() == 0 || getRowCount() == 0) return;
+        int topHeight = rowPinsActive() ? pinnedTopHeight(visible) : 0;
+        int bottomHeight = rowPinsActive() ? pinnedBottomHeight(visible, topHeight) : 0;
+        int firstY = visible.y + topHeight;
+        int lastY = visible.y + visible.height - bottomHeight - 1;
+        Graphics2D g = (Graphics2D) graphics.create();
+        try {
+            g.setFont(getFont());
+            if (lastY >= firstY) {
+                int firstView = super.rowAtPoint(new Point(visible.x, firstY));
+                int lastView = super.rowAtPoint(new Point(visible.x, lastY));
+                if (firstView >= 0 && lastView >= firstView) {
+                    int startModel = convertRowIndexToModel(firstView);
+                    int endModel = convertRowIndexToModel(lastView);
+                    int firstGroup = findGroupInsertion(startModel);
+                    for (int group = firstGroup; group < groupCount && groupLanes[group * 3] <= endModel; group++) {
+                        paintOneGroupHeader(g, visible, group);
+                    }
+                }
+            }
+            if (rowPinsActive() && topHeight > 0) {
+                int y = 0;
+                for (int row = 0; row < getPinnedTopRowCount() && y < topHeight; row++) {
+                    int model = convertRowIndexToModel(row);
+                    int group = groupAtStart(model);
+                    if (group >= 0) paintOneGroupHeader(g, visible, group);
+                    y += getRowHeight(row);
+                }
+            }
+            if (rowPinsActive() && bottomHeight > 0) {
+                int height = 0;
+                int floor = getRowCount() - getPinnedBottomRowCount();
+                for (int row = getRowCount() - 1; row >= floor && height < bottomHeight; row--) {
+                    int model = convertRowIndexToModel(row);
+                    int group = groupAtStart(model);
+                    if (group >= 0) paintOneGroupHeader(g, visible, group);
+                    height += getRowHeight(row);
+                }
+            }
+        } finally { g.dispose(); }
+    }
+
+    private void paintOneGroupHeader(Graphics2D graphics, Rectangle visible, int group) {
+        int modelHeader = groupLanes[group * 3];
+        if (modelHeader >= getModel().getRowCount()) return;
+        int row = convertRowIndexToView(modelHeader);
+        if (row < 0 || row >= getRowCount()) return;
+        Rectangle cell = super.getCellRect(row, 0, true);
+        int y = cell.y;
+        if (rowPinsActive()) {
+            if (row < getPinnedTopRowCount()) {
+                y = visible.y;
+                for (int i = 0; i < row; i++) y += getRowHeight(i);
+            } else if (row >= getRowCount() - getPinnedBottomRowCount()) {
+                y = visible.y + visible.height;
+                for (int i = getRowCount() - 1; i >= row; i--) y -= getRowHeight(i);
+            }
+        }
+        int height = cell.height;
+        int titleWidth = Math.min(200, visible.width);
+        if (titleWidth <= 0 || y >= visible.y + visible.height || y + height <= visible.y) return;
+        Rectangle dirty = graphics.getClipBounds();
+        if (dirty != null && !dirty.intersects(visible.x, y, titleWidth, height)) return;
+        int x = visible.x;
+        graphics.setColor(getBackground());
+        graphics.fillRect(x, y, titleWidth, height);
+        graphics.setColor(getForeground());
+        int middleY = y + height / 2;
+        // Draw one disclosure triangle without per-group int[] allocations.
+        if (groupLanes[group * 3 + 2] == 0) {
+            graphics.drawLine(x + 5, middleY - 4, x + 13, middleY - 4);
+            graphics.drawLine(x + 5, middleY - 3, x + 9, middleY + 3);
+            graphics.drawLine(x + 13, middleY - 3, x + 9, middleY + 3);
+        } else {
+            graphics.drawLine(x + 6, middleY - 5, x + 13, middleY);
+            graphics.drawLine(x + 13, middleY, x + 6, middleY + 5);
+            graphics.drawLine(x + 6, middleY - 4, x + 6, middleY + 4);
+        }
+        String label = groupLabels[group];
+        if (label != null && !label.isEmpty()) {
+            java.awt.Shape clip = graphics.getClip();
+            try {
+                graphics.clipRect(x + 20, y, Math.max(0, titleWidth - 20), height);
+                FontMetrics metrics = graphics.getFontMetrics();
+                graphics.drawString(label, x + 21,
+                        middleY + (metrics.getAscent() - metrics.getDescent()) / 2);
+            } finally { graphics.setClip(clip); }
+        }
+        groupHeaderPainted++;
     }
 
     private void paintFrozenColumns(Graphics g) {

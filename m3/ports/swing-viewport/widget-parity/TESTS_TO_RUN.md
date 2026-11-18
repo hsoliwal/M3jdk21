@@ -70,7 +70,7 @@ java -Djava.awt.headless=true -Xmx128m -cp /tmp/m3-native jdk.m3.swing.widgets.M
 | Git blobs of M3Grid/ContractSmoke/HeadfulSmoke equal exact local tested source | VERIFIED |
 | Existing m3-swing-viewport Maven/JUnit full reactor on exact PR head | NOT_RUN |
 | Native Xvfb other LAF/drag/resizing/RTL/HiDPI/accessible GTK/Win32/Cocoa suite | NOT_RUN |
-| Full Nebula Grid behavior (grouping, spans, pinned top/bottom, long indices) | OPEN |
+| Full Nebula Grid behavior (nested groups/summary rows, cross-plane spans, long indices) | OPEN |
 | Canonical M3DateTime moved from pre-#3313 port with identical source blob | VERIFIED |
 | Combined Grid/DateTime Java 21 headless tests | LOCAL_PASS |
 | #3313 merged; source blob received in canonical java.desktop | VERIFIED |
@@ -112,3 +112,24 @@ exact source seals, reproduction and limits.
 
 See [GRID_SPANS.md](GRID_SPANS.md) for model-coordinate policy,
 primitive storage, proof bounds, donor hashes and remaining gates.
+
+## Sparse native Grid row grouping
+
+| Gate | Status |
+|---|---|
+| Java 21 -Xlint:all,-serial,-this-escape -Werror from canonical Grid source | LOCAL_PASS |
+| Patched java.desktop compile and named-module runtime smoke suite | LOCAL_PASS |
+| M3GridGroupsSmoke with 1M rows, 2 large collapsed ranges, then 3000 groups at -Xmx128m | LOCAL_PASS |
+| M3GridGroupsMappingSmoke: 24K rows, 600 groups, 45 seeded collapse toggles against independent dense oracle | LOCAL_PASS |
+| M3GridGroupsSerializationSmoke: collapsed sparse state round-trip | LOCAL_PASS |
+| Serialized pre-group M3Grid source read into new M3Grid, then newly collapsed | LOCAL_PASS |
+| Existing frozen columns, pinned rows and merged spans headless smoke tests | LOCAL_PASS |
+| Four native Swing Robot tests with Linux/Xvfb (frozen, pinned, spans, group disclosure) | LOCAL_PASS |
+| Original stock JTable header toggle while sparse sorter installed | LOCAL_PASS |
+| Public javap comparison: old methods preserved, group methods additive | LOCAL_PASS |
+| Exact Git blob identity for source and four new standalone tests | VERIFIED |
+| Full M3JDK jtreg and Maven reactor, GTK/Win32/Cocoa/HiDPI/assistive technology | NOT_RUN |
+| Synexia source-sealed OpenRewrite fixed point; nested group/summary feature parity | NOT_RUN |
+
+See [GRID_ROW_GROUPS.md](GRID_ROW_GROUPS.md) for the sparse rank/select
+design, source SHA pins, commands, known restrictions and test evidence.
