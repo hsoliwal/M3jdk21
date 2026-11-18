@@ -232,6 +232,13 @@ Neither javax.swing nor SwingX public behavior is replaced.
   is restored from the canonical spinner value.
 - The same production changes are in both the swing-viewport port and
   src/java.desktop/share/classes (byte-identical Git blobs).
+- The exposed JSpinner's original SpinnerDateModel drives a bounded, EDT
+  change listener: direct spinner changes refresh the existing calendar.
+  Range adjustments defer intermediate notifications and synchronize once
+  after the new bounds and selected instant are consistent. Unchanged
+  bounds/selections do not rebuild the JTable model.
+- Original javap public API: 19 signatures; new: 26; removed: zero.
+  Legacy spinner-only presentation remains the default.
 - Existing DateTimeSmoke remains unchanged. New CalendarSmoke tests
   navigation, locale, boundaries, event order, click/keyboard commitment,
   one-table model identity, timestamp preservation and DST rejection.
@@ -243,7 +250,9 @@ Qualification on stock OpenJDK 21.0.12.1:
 - javac --release 21 -Xlint:all,-serial,-this-escape -Werror: PASS.
 - M3DateTimeSmoke: PASS (prior CDateTime spinner contract regression).
 - M3MonthViewCalendarSmoke: PASS (headless EDT, -Xmx128m).
-- M3MonthViewHeadfulSmoke: PASS (xvfb-run, native X11 popup/event lifecycle).
+- M3MonthViewHeadfulSmoke: PASS three consecutive xvfb-run invocations,
+  X11 popup/event lifecycle; MouseEvent is preinitialized on main thread
+  to prevent an observed Java 21 AWT/XToolkit class-initialization lock cycle.
 - Committed production and test Git blob SHAs match tested local files.
 
 Still OPEN: direct native SWT/Nebula and SwingX screenshot/behavior
