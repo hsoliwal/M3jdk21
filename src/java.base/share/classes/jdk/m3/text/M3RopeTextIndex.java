@@ -164,6 +164,91 @@ public final class M3RopeTextIndex {
     }
 
     /**
+     * Explicit immutable UTF-16 pattern plan for repeated literal searches.
+     * Freezes only the query's code units, never the rope's canonical payload.
+     * The original findLiteral(CharSequence,long) remains unchanged so callers
+     * relying on its direct CharSequence read semantics keep their contract.
+     */
+    public static final class LiteralPlan {
+        private final char[] units;
+        private final int[] failure;
+
+        private LiteralPlan(char[] units, int[] failure) {
+            this.units = units;
+            this.failure = failure;
+        }
+
+        public int length() { return units.length; }
+
+        /** Primitive payload only: UTF-16 chars plus int KMP prefix lengths. */
+        public long primitivePayloadBytes() {
+            return (Character.BYTES + (long) Integer.BYTES) * units.length;
+        }
+    }
+
+    /**
+     * Compile once, search many rope segments. The CharSequence is read once
+     * by charAt; toString(), subSequence() and Unicode normalization are not
+     * invoked. NUL and isolated surrogate code units remain exact.
+     */
+    public static LiteralPlan compileLiteral(CharSequence literal) {
+        Objects.requireNonNull(literal, "literal");
+        int count = literal.length();
+        if (count > MAX_LITERAL_UNITS) {
+            throw new IllegalArgumentException("literal exceeds bounded KMP plan");
+        }
+        char[] units = new char[count];
+        for (int i = 0; i < count; i++) units[i] = literal.charAt(i);
+        int[] failure = new int[count];
+        for (int i = 1, j = 0; i < count; i++) {
+            char current = units[i];
+            while (j > 0 && current != units[j]) j = failure[j - 1];
+            if (current == units[j]) j++;
+            failure[i] = j;
+        }
+        return new LiteralPlan(units, failure);
+    }
+
+    /**
+     * Literal search over the existing immutable leaf directory using a
+     * caller-reusable compiled KMP prefix table. O(n) scan per query after
+     * O(m) compilation; no per-call prefix table, flattened text or JNI hop.
+     * Positions and return values are long UTF-16 code-unit offsets.
+     */
+    public long findPreparedLiteral(LiteralPlan plan, long from) {
+        Objects.requireNonNull(plan, "plan");
+        if (from < 0 || from > utf16Count) {
+            throw new IndexOutOfBoundsException("starting UTF-16 offset: " + from);
+        }
+        int length = plan.units.length;
+        if (length == 0) return from;
+        if (utf16Count - from < length) return -1;
+
+        char[] units = plan.units;
+        int[] failure = plan.failure;
+        long base = 0;
+        int matched = 0;
+        for (M3StringPiece leaf : leaves) {
+            long next = base + leaf.length();
+            if (next <= from) {
+                base = next;
+                continue;
+            }
+            int start = (int) Math.max(0, from - base);
+            for (int i = start; i < leaf.length(); i++) {
+                char current = leaf.charAt(i);
+                while (matched > 0 && current != units[matched]) {
+                    matched = failure[matched - 1];
+                }
+                if (current == units[matched]) matched++;
+                if (matched == length) return base + i + 1 - length;
+            }
+            base = next;
+        }
+        return -1;
+    }
+
+    /**
      * KMP literal search across all segment boundaries in O(n + m) reads for
      * leaf-backed text (joined-piece leaves retain their own lookup costs).
      * Uses one bounded int[] prefix table, no materialized corpus String.
