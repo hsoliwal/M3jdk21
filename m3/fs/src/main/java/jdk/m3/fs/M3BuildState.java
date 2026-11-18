@@ -3,6 +3,7 @@
 package jdk.m3.fs;
 
 // Modified 2026-10-21: completed native inventories, exact timestamp lanes and v1-compatible persistence.
+// Modified 2026-11-18: invalidate changed build inputs globally and check row-local dependency ordinals.
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -161,7 +162,8 @@ public final class M3BuildState {
     public int dependencyCount() { return dependencies.length; }
     public int dependency(int row, int ordinal) {
         Objects.checkIndex(row, size());
-        return dependencies[Objects.checkIndex(offsets[row] + ordinal, offsets[row + 1])];
+        Objects.checkIndex(ordinal, offsets[row + 1] - offsets[row]);
+        return dependencies[offsets[row] + ordinal];
     }
     public int dependencyCount(int row) { Objects.checkIndex(row, size()); return offsets[row + 1] - offsets[row]; }
     public int find(String path, byte role) {
@@ -358,8 +360,10 @@ public final class M3BuildState {
     /**
      * Conservative reverse-dependency closure. Equal, *compiler-proven* ABI may
      * suppress downstream invalidation, but never skips the edited node itself.
-     * A removed input or changed build context invalidates the entire inventory:
-     * a removal can alter resolution even if a current graph edge has disappeared.
+     * A removed input, changed build context, or added/changed BUILD_INPUT invalidates
+     * the entire inventory. Build inputs may change compiler options or resolution
+     * without a source dependency edge; source/class ABI equality cannot scope them.
+     * A removal can alter resolution even if a current graph edge has disappeared.
      * Results are candidates only; Maven/Gradle still own task execution decisions.
      */
     public Plan changedFrom(M3BuildState previous) {
@@ -399,6 +403,11 @@ public final class M3BuildState {
                     (abiAt(row) && !sameHash(abiHashes, row, previous.abiHashes, old));
             boolean edgesChanged = old < 0 || !sameDependencies(row, previous, old);
             if (bytesChanged || abiChanged || edgesChanged) {
+                if (roles[row] == BUILD_INPUT) {
+                    Arrays.fill(changed, -1L);
+                    if (words != 0 && (n & 63) != 0) changed[words - 1] = (1L << (n & 63)) - 1L;
+                    return new Plan(changed, changed.clone(), true, n);
+                }
                 set(changed, row); set(affected, row);
                 // ABI evidence only applies to source/class changes with the same
                 // proven ABI, and an unchanged dependency graph.
