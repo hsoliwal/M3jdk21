@@ -193,7 +193,7 @@ public final class IntIndexedSnapshot implements IntCollection {
         if (order == Order.ENCOUNTER) throw new IllegalStateException("not sorted");
         int low = from, high = to;
         while (low < high) {
-            int mid = (low + high) >>> 1;
+            int mid = low + ((high - low) >>> 1);
             int cmp = Integer.compare(values[rows[mid]], value);
             if (order == Order.DESCENDING) cmp = -cmp;
             if (cmp < 0) low = mid + 1; else high = mid;
