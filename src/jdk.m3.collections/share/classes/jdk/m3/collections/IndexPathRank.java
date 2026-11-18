@@ -253,6 +253,27 @@ public final class IndexPathRank {
          */
         public void copySelectedRowIds(
                 int selectedFrom, int[] output, int outputOffset, int count) {
+            copySelected(selectedFrom, output, outputOffset, count, false);
+        }
+
+        /**
+         * Copy selected source ordinals RELATIVE to this immutable window.
+         * This is the coordinate form of copySelectedRowIds for viewports,
+         * sparse projection directories and array-backed collection indexes.
+         * Repeated row IDs remain independent source occurrences.
+         *
+         * <p>The method writes only to caller-owned int[] output and retains
+         * no Java Entry, predicate, iterator, or native reference.</p>
+         */
+        public void copySelectedSourceOrdinals(
+                int selectedFrom, int[] output, int outputOffset, int count) {
+            copySelected(selectedFrom, output, outputOffset, count, true);
+        }
+
+        /** One primitive word walker serves row-ID and relative-ordinal pages. */
+        private void copySelected(
+                int selectedFrom, int[] output, int outputOffset, int count,
+                boolean relativeOrdinal) {
             Objects.requireNonNull(output, "output");
             Objects.checkFromIndexSize(selectedFrom, count, size());
             Objects.checkFromIndexSize(outputOffset, count, output.length);
@@ -261,10 +282,21 @@ public final class IndexPathRank {
             }
             if (count == 0) return;
 
-            // A first-page request is already positioned by the immutable source
-            // coordinate. Subsequent pages need only one prefix-rank seek.
-            int ordinal = selectedFrom == 0
-                    ? from : owner.selectedSourceOrdinal(firstRank + selectedFrom);
+            int ordinal;
+            if (selectedFrom != 0) {
+                ordinal = owner.selectedSourceOrdinal(firstRank + selectedFrom);
+            } else {
+                ordinal = from;
+                int firstWord = from >>> 6;
+                long nearby = owner.selected[firstWord] & (-1L << (from & 63));
+                // Dense first pages keep their O(1) start. If the first two
+                // bitmap words are empty, seek directly by prefix rank rather
+                // than scan an arbitrarily long sparse leading hole.
+                if (nearby == 0L && (firstWord + 1 >= owner.selected.length
+                        || owner.selected[firstWord + 1] == 0L)) {
+                    ordinal = owner.selectedSourceOrdinal(firstRank);
+                }
+            }
             int firstWord = ordinal >>> 6;
             int lastWord = (to - 1) >>> 6;
             int copied = 0;
@@ -278,7 +310,8 @@ public final class IndexPathRank {
                 while (bits != 0 && copied < count) {
                     int sourceOrdinal =
                             (wordIndex << 6) + Long.numberOfTrailingZeros(bits);
-                    output[outputOffset + copied++] = owner.rowIdAt(sourceOrdinal);
+                    output[outputOffset + copied++] = relativeOrdinal
+                            ? sourceOrdinal - from : owner.rowIdAt(sourceOrdinal);
                     bits &= bits - 1;
                 }
             }

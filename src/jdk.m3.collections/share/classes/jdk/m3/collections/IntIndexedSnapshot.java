@@ -15,6 +15,7 @@ import java.util.function.IntConsumer;
  */
 public final class IntIndexedSnapshot implements IntCollection {
     public enum Order { ENCOUNTER, ASCENDING, DESCENDING }
+    private static final int INSERTION_SORT_LIMIT = 32;
     private final int[] values;
     private final int[] rows;
     private final int from;
@@ -100,15 +101,51 @@ public final class IntIndexedSnapshot implements IntCollection {
     private IntIndexedSnapshot sorted(Order requested) {
         if (order == requested) return this;
         int n = size();
+        // Primitive value reads are side-effect-free. An already-ordered view
+        // needs new metadata only; its immutable row directory can be shared.
+        if (isMonotone(requested)) {
+            return new IntIndexedSnapshot(values, rows, from, to, requested, distinct);
+        }
         return sortActual(requested, n);
     }
+
+    private boolean isMonotone(Order requested) {
+        for (int i = from + 1; i < to; i++) {
+            int previous = values[rows[i - 1]];
+            int current = values[rows[i]];
+            if (requested == Order.ASCENDING ? previous > current : previous < current) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     private IntIndexedSnapshot sortActual(Order requested, int n) {
         int[] orderRows = Arrays.copyOfRange(rows, from, to);
+        // Stable insertion avoids allocating a second int[n] scratch lane for
+        // small unsorted windows. Only integer slot indexes are moved.
+        if (n <= INSERTION_SORT_LIMIT) {
+            for (int i = 1; i < n; i++) {
+                int selected = orderRows[i];
+                int cursor = i;
+                while (cursor > 0) {
+                    int comparison = Integer.compare(
+                            values[orderRows[cursor - 1]], values[selected]);
+                    if (requested == Order.DESCENDING) comparison = -comparison;
+                    if (comparison <= 0) break; // preserve encounter order on ties
+                    orderRows[cursor] = orderRows[cursor - 1];
+                    cursor--;
+                }
+                orderRows[cursor] = selected;
+            }
+            return new IntIndexedSnapshot(values, orderRows, 0, n, requested, distinct);
+        }
         int[] scratch = new int[n];
         for (int width = 1; width < n; width = width >= n - width ? n : width << 1) {
             for (int start = 0; start < n;) {
-                int mid = Math.min(n, start + width);
-                int end = Math.min(n, mid + width);
+                // Long arithmetic excludes int overflow near JVM array limits.
+                int mid = (int) Math.min((long) n, (long) start + width);
+                int end = (int) Math.min((long) n, (long) mid + width);
                 int left = start, right = mid, write = start;
                 while (left < mid && right < end) {
                     int comparison = Integer.compare(values[orderRows[left]], values[orderRows[right]]);
@@ -128,26 +165,54 @@ public final class IntIndexedSnapshot implements IntCollection {
         if (order == Order.ENCOUNTER) throw new IllegalStateException("sort before distinct");
         if (distinct) return this;
         int n = size();
-        if (n == 0) return new IntIndexedSnapshot(values, new int[0], 0, 0, order, true);
-        int[] out = new int[n]; int keep = 0;
+        if (n < 2) return new IntIndexedSnapshot(values, rows, from, to, order, true);
+        // Two primitive passes trade an extra linear scan for exact sizing:
+        // strictly monotone inputs need no row allocation whatsoever.
+        int unique = 1;
+        int previous = values[rows[from]];
+        for (int i = from + 1; i < to; i++) {
+            int next = values[rows[i]];
+            if (next != previous) unique++;
+            previous = next;
+        }
+        if (unique == n) {
+            return new IntIndexedSnapshot(values, rows, from, to, order, true);
+        }
+        int[] admitted = new int[unique];
+        int used = 0;
         for (int i = from; i < to; i++) {
             int row = rows[i];
-            if (keep == 0 || values[out[keep - 1]] != values[row]) out[keep++] = row;
+            if (used == 0 || values[admitted[used - 1]] != values[row]) {
+                admitted[used++] = row;
+            }
         }
-        return new IntIndexedSnapshot(values, Arrays.copyOf(out, keep), 0, keep, order, true);
+        return new IntIndexedSnapshot(values, admitted, 0, unique, order, true);
     }
     /** Binary rank with duplicates. Sorted ascending or descending is required. */
     public int lowerBound(int value) {
         if (order == Order.ENCOUNTER) throw new IllegalStateException("not sorted");
         int low = from, high = to;
         while (low < high) {
-            int mid = (low + high) >>> 1;
+            int mid = low + ((high - low) >>> 1);
             int cmp = Integer.compare(values[rows[mid]], value);
             if (order == Order.DESCENDING) cmp = -cmp;
             if (cmp < 0) low = mid + 1; else high = mid;
         }
         return low - from;
     }
+    /** Binary upper rank, excluding values comparator-equal to the requested value. */
+    public int upperBound(int value) {
+        if (order == Order.ENCOUNTER) throw new IllegalStateException("not sorted");
+        int low = from, high = to;
+        while (low < high) {
+            int mid = low + ((high - low) >>> 1);
+            int comparison = Integer.compare(values[rows[mid]], value);
+            if (order == Order.DESCENDING) comparison = -comparison;
+            if (comparison <= 0) low = mid + 1; else high = mid;
+        }
+        return low - from;
+    }
+
     @Override public boolean contains(int value) {
         if (order == Order.ENCOUNTER) {
             for (int i = from; i < to; i++) if (values[rows[i]] == value) return true;
