@@ -5,7 +5,7 @@
 | Field | Value |
 | --- | --- |
 | Proposal | `M3JEP-CORE-003` (Synexia internal; not assigned by OpenJDK) |
-| State | **Draft / implementation HOLD** |
+| State | **Draft / exact-quantum decimal128 const-fact candidate; IEEE interchange/runtime HOLD** |
 | Author | Hitesh Soliwal and contributors to the Synexia Project |
 | Owning component | `javac_m3/HotSpot` |
 | First receiving stage | `AST_COMPILER` |
@@ -34,6 +34,30 @@ This shared building block supports the 70 opt-in cross-language M3 features. It
 ## Description and proposed semantics
 
 Distinguish exact source coefficient/exponent from IEEE 754 packed decimal interchange; specify rounding, quantum, traps, context, overflow and serialization. The held decimal128 fact is not a packed decimal ABI.
+
+### Received bounded evaluator candidate (2026-11-18)
+
+The unexported `jdk.internal.m3.paradigm.numeric.M3Const128` evaluator
+accepts `const decimal128 amount = 125.50;` as an *isolated source string*
+and emits `D128:+12550E-2`, retaining the exact source coefficient,
+quantum, and sign, including explicit negative zero. It rejects exact
+coefficients wider than 34 significant decimal digits, quantum outside
+[-6176, 6111], and adjusted exponent above 6144. It does **not** round
+an inadmissible literal into a different value or quietly interpret its
+spelling through Java `double`. It does not conflate exact decimal
+coefficient/exponent facts with IEEE 754 decimal128 densely packed decimal
+(DPD) or binary integer decimal (BID) interchange bits.
+
+A Java 21 target self-test passes 949 checks across both 128-bit literal
+types, including **500 seeded quantum/coefficient comparisons** against
+independent `BigDecimal` construction, signed zero, source spelling,
+invalid exponents, and 34-digit precision boundaries. The related
+Synexia recipe carries exact SHA-256 source seals and replay tests.
+
+Full decimal rounding/traps, overflow policies, IEEE decimal128 packed
+encoding and conversion, arithmetic/JNI layout, a language primitive and
+`const` compiler lowering remain **HOLD**. The named fact evaluator is
+not a public Java API and is not an installed Java 21 syntax extension.
 
 The first-stage architecture is: The implementation begins as opt-in, typed, source-attributed compiler facts; syntax is accepted only after explicit grammar, overload and lowering oracles, not lexical substitutions. If exact compatibility cannot be proved, leave the capability explicit and uninstalled.
 
