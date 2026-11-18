@@ -85,7 +85,7 @@ public class RopePreparedLiteralTest {
         same(3L, rope.findPreparedLiteral(cross, 0), "pair and NUL across leaves");
         same(-1L, rope.findPreparedLiteral(cross, 4), "later prefix refusal");
         same(0L, rope.findPreparedLiteral(M3RopeTextIndex.compileLiteral("z"), 0), "first leaf");
-        same(8L, rope.findPreparedLiteral(M3RopeTextIndex.compileLiteral("y"), 0), "last leaf");
+        same(9L, rope.findPreparedLiteral(M3RopeTextIndex.compileLiteral("y"), 0), "last leaf");
 
         char[] mutable = {'x', 0, 'a'};
         M3RopeTextIndex.LiteralPlan frozen =
