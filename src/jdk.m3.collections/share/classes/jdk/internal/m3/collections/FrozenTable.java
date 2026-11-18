@@ -7,7 +7,6 @@ package jdk.internal.m3.collections;
 import java.util.AbstractMap;
 import java.util.AbstractSet;
 import java.util.AbstractCollection;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Collection;
@@ -122,11 +121,23 @@ public final class FrozenTable<R, C, V> {
     public static <R, C, V> FrozenTable<R, C, V> copyOf(
             Map<? extends R, ? extends Map<? extends C, ? extends V>> source) {
         Objects.requireNonNull(source, "source");
-        ArrayList<Object> rows = new ArrayList<>();
-        ArrayList<Object> columns = new ArrayList<>();
-        ArrayList<Object> cellRows = new ArrayList<>();
-        ArrayList<Object> cellColumns = new ArrayList<>();
-        ArrayList<Object> values = new ArrayList<>();
+        // Only exact built-in JDK maps have a size operation that cannot
+        // dispatch to a user override. Custom maps are never sized or probed.
+        Class<?> sourceType = source.getClass();
+        boolean exactJdkMap = sourceType == java.util.HashMap.class
+                || sourceType == java.util.LinkedHashMap.class;
+        int sourceRowCount = exactJdkMap ? source.size() : 0;
+        Object[] rows = new Object[sourceRowCount];
+        Object[] columns = new Object[0];
+        // Exact JDK maps cannot present a second equal row-key object, so
+        // each cell can reuse its row ordinal without a per-cell row scratch
+        // reference. Custom maps may do so and retain their source identity.
+        Object[] cellRows = exactJdkMap ? null : new Object[10];
+        Object[] cellColumns = new Object[10];
+        Object[] values = new Object[10];
+        int rowCount = 0;
+        int columnCount = 0;
+        int cellCount = 0;
         ObjectIntHashMap<Object> rowIndex = new ObjectIntHashMap<>(0);
         ObjectIntHashMap<Object> columnIndex = new ObjectIntHashMap<>(0);
         PackedLongRowIndex coordinates = new PackedLongRowIndex(0);
@@ -141,44 +152,61 @@ public final class FrozenTable<R, C, V> {
                 V value = Objects.requireNonNull(cell.getValue(), "value");
                 int rowId = rowIndex.getOrDefault(rowKey, -1);
                 if (rowId < 0) {
-                    rowId = rows.size();
+                    rowId = rowCount;
                     rowIndex.put(rowKey, rowId);
-                    rows.add(rowKey);
+                    if (rowCount == rows.length) {
+                        rows = growLane(rows);
+                    }
+                    rows[rowCount++] = rowKey;
                 }
                 int columnId = columnIndex.getOrDefault(columnKey, -1);
                 if (columnId < 0) {
-                    columnId = columns.size();
+                    columnId = columnCount;
                     columnIndex.put(columnKey, columnId);
-                    columns.add(columnKey);
+                    if (columnCount == columns.length) {
+                        columns = growLane(columns);
+                    }
+                    columns[columnCount++] = columnKey;
                 }
                 if (coordinates.find(rowId, columnId, rowIds, columnIds) >= 0) {
                     throw new IllegalArgumentException("duplicate table coordinate");
                 }
-                int count = values.size();
+                int count = cellCount;
                 if (count == rowIds.length) {
                     int length = PackedLongRowIndex.grownLength(count, count + 1);
                     rowIds = Arrays.copyOf(rowIds, length);
                     columnIds = Arrays.copyOf(columnIds, length);
                 }
+                if (count == values.length) {
+                    int length = growLength(count);
+                    if (!exactJdkMap) {
+                        cellRows = Arrays.copyOf(cellRows, length);
+                    }
+                    cellColumns = Arrays.copyOf(cellColumns, length);
+                    values = Arrays.copyOf(values, length);
+                }
                 coordinates.ensure(count + 1, rowIds, columnIds);
                 rowIds[count] = rowId;
                 columnIds[count] = columnId;
                 coordinates.insert(count, rowIds, columnIds);
-                cellRows.add(rowKey);
-                cellColumns.add(columnKey);
-                values.add(value);
+                if (!exactJdkMap) {
+                    cellRows[count] = rowKey;
+                }
+                cellColumns[count] = columnKey;
+                values[count] = value;
+                cellCount++;
             }
         }
-        if (rows.size() == Integer.MAX_VALUE) {
+        if (rowCount == Integer.MAX_VALUE) {
             throw new OutOfMemoryError("FrozenTable offset capacity exhausted");
         }
-        int count = values.size();
+        int count = cellCount;
         rowIds = Arrays.copyOf(rowIds, count);
         columnIds = Arrays.copyOf(columnIds, count);
-        boolean dense = count > ((long) rows.size() * columns.size()) / 2;
+        boolean dense = count > ((long) rowCount * columnCount) / 2;
         int[] order = dense ? LongKeyOrder.lexicographic(rowIds, columnIds)
                 : LongKeyOrder.ascending(rowIds, false);
-        int[] offsets = new int[rows.size() + 1];
+        int[] offsets = new int[rowCount + 1];
         int[] packedColumns = new int[count];
         int[] sourceOrder = new int[count];
         Object[] columnLane = new Object[count];
@@ -193,16 +221,38 @@ public final class FrozenTable<R, C, V> {
                 offsets[rowId] = packed;
                 previousRow = rowId;
             }
-            columnLane[packed] = dense ? columns.get(columnId) : cellColumns.get(at);
-            rowLane[packed] = dense ? rows.get(rowId) : cellRows.get(at);
-            valueLane[packed] = values.get(at);
+            columnLane[packed] = dense ? columns[columnId] : cellColumns[at];
+            rowLane[packed] = dense || exactJdkMap ? rows[rowId] : cellRows[at];
+            valueLane[packed] = values[at];
             packedColumns[packed] = columnId;
             sourceOrder[at] = packed;
         }
-        offsets[rows.size()] = count;
-        return new FrozenTable<>(rows.toArray(), offsets, columnLane, valueLane,
-                columns.toArray(), rowLane, packedColumns, sourceOrder, rowIndex,
+        offsets[rowCount] = count;
+        Object[] exactRows = rowCount == rows.length ? rows : Arrays.copyOf(rows, rowCount);
+        Object[] exactColumns = columnCount == columns.length
+                ? columns : Arrays.copyOf(columns, columnCount);
+        return new FrozenTable<>(exactRows, offsets, columnLane, valueLane,
+                exactColumns, rowLane, packedColumns, sourceOrder, rowIndex,
                 columnIndex, dense);
+    }
+
+    /** Expands a private, unpublished row/column-identity lane. */
+    private static Object[] growLane(Object[] lane) {
+        int length = lane.length;
+        if (length >= Integer.MAX_VALUE - 8) {
+            throw new OutOfMemoryError("FrozenTable dimension capacity exhausted");
+        }
+        int capacity = growLength(length);
+        return Arrays.copyOf(lane, capacity);
+    }
+
+    /** Geometric scratch capacity, independent of the primitive radix index. */
+    private static int growLength(int length) {
+        if (length >= Integer.MAX_VALUE - 8) {
+            throw new OutOfMemoryError("FrozenTable scratch capacity exhausted");
+        }
+        return (int) Math.min(Integer.MAX_VALUE - 8L,
+                Math.max(10L, (long) length + (length >>> 1) + 1L));
     }
 
     public int size() { return size; }

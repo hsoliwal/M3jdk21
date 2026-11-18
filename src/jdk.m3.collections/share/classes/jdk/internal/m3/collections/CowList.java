@@ -4,106 +4,220 @@
  */
 package jdk.internal.m3.collections;
 
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+import java.util.Objects;
+
 /**
- * M3 five-library superset scaffold {@code CowList}: API group {@code COW_LIST} over arrays and state masks.
+ * Copy-on-write object list with immutable epoch arrays and snapshot cursors.
  *
- * <p>Provider lineage (LIBRARY_API_MATRIX.tsv, run 20261017-m3-to-public/LIB-SUPERSET):
- * <ul>
- *   <li>JDK CopyOnWriteArrayList/Set: snapshot array per write; iterators never fail [license GPLv2+CPE; NEW_OWNER (adjacent only: m3/filtered-cow-bulk-receiver-20261017 = filtered COW bulk ops, not the list owner); priority P2; matrix owner PROPOSED:M3CowLongArrayList]</li>
- * </ul>
+ * <p>Each successful structural write publishes one freshly sized parent-owned
+ * Object[] lane. Readers capture its volatile reference once; concurrent
+ * mutations cannot modify the captured epoch. The only retained objects are
+ * user elements and the array itself, not one wrapper per list slot. An
+ * auxiliary packed bitset records frozen live positions, 64 per word.</p>
  *
- * <p>DOOP mapping: lane kind OBJECT; lanes {@code Object[] valueLane}; offset scheme immutable lane swapped per write; epoch counter; state-mask bits FROZEN_EPOCH; stored nodes NONE; API entry objects NONE (transient facades over slots, never the stored representation); matrix note: immutable value lane swapped per write; epoch offset / FROZEN per epoch; epoch counter.
- *
- * <p>Status: SCAFFOLD. Every public atom throws {@link NotYetReceived} until this owner is received through a hash-pinned Synexia recipe with its own
- * provider oracle (never inferred from another provider). Not a {@code java.util} replacement.
+ * <p>Reads and snapshot-iterator creation are O(1); equality search is O(n);
+ * writes copy O(n) references by design. A public snapshot returns a detached
+ * array, never the immutable internal lane. The class is an M3-specific
+ * subset of JDK CopyOnWriteArrayList operations, not its full interface.</p>
  */
 public final class CowList<E> {
-    /** State-mask bit {@code FROZEN_EPOCH} (per-slot state word, bit 0). */
     static final long STATE_FROZEN_EPOCH = 1L << 0;
+    private static final Object[] EMPTY = new Object[0];
 
-    /** Storage lane {@code valueLane}: dynamic primitive/reference array lane. */
-    private Object[] valueLane = new Object[0];
-    /** Per-slot state words (FROZEN_EPOCH); one bit set per slot and state. */
-    private long[] stateMaskWords = new long[0];
-    /** Live slot count. */
-    private int size;
+    /** Current immutable, exact-length epoch. Published with volatile release. */
+    private volatile Object[] valueLane = EMPTY;
+    /** Frozen positions in the current epoch; one bit per element. */
+    private volatile long[] stateMaskWords = new long[0];
+    private volatile long epoch;
+    /** Private monitor; public method reflection flags remain unchanged. */
+    private final Object writeLock = new Object();
 
-    /** Creates an empty scaffold owner; lanes grow by copy once received. */
-    public CowList() {
-    }
+    public CowList() { }
 
-    /** Reports the declared state-mask bits and lanes for ledgers; never allocates per element. */
+    /** Historic inventory descriptor is retained byte-for-byte. */
     public static String scaffoldDescriptor() {
         return "M3CowList|COW_LIST|OBJECT|FROZEN_EPOCH|Object[] valueLane";
     }
 
-    /** CopyOnWriteArrayList.get (scaffold: not yet received). */
+    /** A lock-free snapshot read, including Java's array bounds exceptions. */
+    @SuppressWarnings("unchecked")
     public E get(int index) {
-        throw new NotYetReceived("M3CowList.get");
+        return (E) valueLane[index];
     }
 
-    /** CopyOnWriteArrayList.add (copies lane) (scaffold: not yet received). */
+    /** Copy once and publish the appended element atomically. */
     public boolean add(E element) {
-        throw new NotYetReceived("M3CowList.add");
+        synchronized (writeLock) {
+            Object[] previous = valueLane;
+            Object[] next = Arrays.copyOf(previous, previous.length + 1);
+            next[previous.length] = element;
+            publish(next);
+            return true;
+        }
     }
 
-    /** CopyOnWriteArrayList.add(index) (scaffold: not yet received). */
+    /** Copy once and insert at the requested logical position, including size. */
     public void add(int index, E element) {
-        throw new NotYetReceived("M3CowList.add");
+        synchronized (writeLock) {
+            Object[] previous = valueLane;
+            int size = previous.length;
+            checkPosition(index, size);
+            Object[] next = new Object[size + 1];
+            System.arraycopy(previous, 0, next, 0, index);
+            next[index] = element;
+            System.arraycopy(previous, index, next, index + 1, size - index);
+            publish(next);
+        }
     }
 
-    /** CopyOnWriteArrayList.set (scaffold: not yet received). */
+    /** Replace one element; same-reference replacement needs no array copy. */
+    @SuppressWarnings("unchecked")
     public E set(int index, E element) {
-        throw new NotYetReceived("M3CowList.set");
+        synchronized (writeLock) {
+            Object[] previous = valueLane;
+            E old = (E) previous[index];
+            if (old != element) {
+                Object[] next = previous.clone();
+                next[index] = element;
+                publish(next);
+            } else {
+                // Preserve release publication even for an equal-reference write.
+                valueLane = previous;
+            }
+            return old;
+        }
     }
 
-    /** CopyOnWriteArrayList.remove(index) (scaffold: not yet received). */
+    /** Remove a ranked occurrence and immediately drop its reference. */
+    @SuppressWarnings("unchecked")
     public E remove(int index) {
-        throw new NotYetReceived("M3CowList.remove");
+        synchronized (writeLock) {
+            Object[] previous = valueLane;
+            E old = (E) previous[index];
+            Object[] next = new Object[previous.length - 1];
+            System.arraycopy(previous, 0, next, 0, index);
+            System.arraycopy(previous, index + 1, next, index,
+                    previous.length - index - 1);
+            publish(next);
+            return old;
+        }
     }
 
-    /** CopyOnWriteArrayList.remove(Object) (scaffold: not yet received). */
+    /**
+     * Search outside the mutation lock. If user-defined equals reenters the
+     * owner or another thread writes, replay the search on the new epoch
+     * before publishing; never overwrite a concurrent structural update.
+     */
     public boolean remove(Object element) {
-        throw new NotYetReceived("M3CowList.remove");
+        while (true) {
+            Object[] observed = valueLane;
+            int rank = firstIndexOf(element, observed);
+            synchronized (writeLock) {
+                if (observed != valueLane) continue;
+                if (rank < 0) return false;
+                Object[] next = new Object[observed.length - 1];
+                System.arraycopy(observed, 0, next, 0, rank);
+                System.arraycopy(observed, rank + 1, next, rank,
+                        observed.length - rank - 1);
+                publish(next);
+                return true;
+            }
+        }
     }
 
-    /** CopyOnWriteArrayList.addIfAbsent (scaffold: not yet received). */
+    /** Append only if no equal element exists in the current stable epoch. */
     public boolean addIfAbsent(E element) {
-        throw new NotYetReceived("M3CowList.addIfAbsent");
+        while (true) {
+            Object[] observed = valueLane;
+            boolean exists = firstIndexOf(element, observed) >= 0;
+            synchronized (writeLock) {
+                if (observed != valueLane) continue;
+                if (exists) return false;
+                Object[] next = Arrays.copyOf(observed, observed.length + 1);
+                next[observed.length] = element;
+                publish(next);
+                return true;
+            }
+        }
     }
 
-    /** CopyOnWriteArrayList.indexOf (scaffold: not yet received). */
+    /** A stable, equality-based search of exactly one observed epoch. */
     public int indexOf(Object element) {
-        throw new NotYetReceived("M3CowList.indexOf");
+        return firstIndexOf(element, valueLane);
     }
 
-    /** CopyOnWriteArrayList.contains (scaffold: not yet received). */
     public boolean contains(Object element) {
-        throw new NotYetReceived("M3CowList.contains");
+        return indexOf(element) >= 0;
     }
 
-    /** CopyOnWriteArrayList.getArray (current epoch lane) (scaffold: not yet received). */
+    /** Detached, mutable-to-caller compatibility copy of the current lane. */
     public Object[] snapshot() {
-        throw new NotYetReceived("M3CowList.snapshot");
+        return valueLane.clone();
     }
 
-    /** snapshot iterator (never throws CME) (scaffold: not yet received). */
-    public java.util.Iterator<E> iterator() {
-        throw new NotYetReceived("M3CowList.iterator");
+    /** Snapshot iterator; later writes cannot change its observed elements. */
+    public Iterator<E> iterator() {
+        final Object[] observed = valueLane;
+        return new Iterator<>() {
+            private int cursor;
+
+            @Override
+            public boolean hasNext() {
+                return cursor < observed.length;
+            }
+
+            @SuppressWarnings("unchecked")
+            @Override
+            public E next() {
+                if (!hasNext()) throw new NoSuchElementException();
+                return (E) observed[cursor++];
+            }
+
+            @Override
+            public void remove() {
+                throw new UnsupportedOperationException();
+            }
+        };
     }
 
-    /** List.size (scaffold: not yet received). */
     public int size() {
-        throw new NotYetReceived("M3CowList.size");
+        return valueLane.length;
     }
 
-    /** List.isEmpty (scaffold: not yet received). */
     public boolean isEmpty() {
-        throw new NotYetReceived("M3CowList.isEmpty");
+        return valueLane.length == 0;
     }
 
-    /** List.clear (scaffold: not yet received). */
+    /** Release references by publishing the canonical empty epoch. */
     public void clear() {
-        throw new NotYetReceived("M3CowList.clear");
+        synchronized (writeLock) {
+            if (valueLane.length == 0) return;
+            publish(EMPTY);
+        }
+    }
+
+    private void publish(Object[] next) {
+        int count = next.length;
+        int words = (int) (((long) count + 63L) >>> 6);
+        long[] frozen = new long[words];
+        Arrays.fill(frozen, -1L);
+        if (words != 0 && (count & 63) != 0)
+            frozen[words - 1] = (1L << (count & 63)) - 1L;
+        stateMaskWords = frozen;
+        epoch++;
+        valueLane = next;
+    }
+
+    private static int firstIndexOf(Object target, Object[] elements) {
+        for (int i = 0; i < elements.length; i++)
+            if (Objects.equals(target, elements[i])) return i;
+        return -1;
+    }
+
+    private static void checkPosition(int index, int size) {
+        if (index < 0 || index > size) throw new IndexOutOfBoundsException(index);
     }
 }

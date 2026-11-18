@@ -6,11 +6,12 @@ package jdk.internal.m3.collections;
 
 import java.util.AbstractMap;
 import java.util.AbstractSet;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Objects;
@@ -84,8 +85,16 @@ public final class FrozenBiMap<K, V> {
 
     public static <K, V> FrozenBiMap<K, V> copyOf(Map<? extends K, ? extends V> source) {
         Objects.requireNonNull(source, "source");
-        ArrayList<Object> keys = new ArrayList<>();
-        ArrayList<Object> values = new ArrayList<>();
+        // Exact JDK map classes have a trusted cardinality: reserve the two
+        // primitive-indexed payload lanes once. Subclasses and custom maps
+        // may execute user callbacks in size(), so they must use the
+        // callback-neutral grow-on-demand path without that extra call.
+        Class<?> type = source.getClass();
+        int expected = type == HashMap.class || type == LinkedHashMap.class
+                ? source.size() : 0;
+        Object[] keys = expected == 0 ? EMPTY : new Object[expected];
+        Object[] values = expected == 0 ? EMPTY : new Object[expected];
+        int count = 0;
         ObjectIntHashMap<Object> forward = new ObjectIntHashMap<>(0);
         ObjectIntHashMap<Object> reverse = new ObjectIntHashMap<>(0);
         for (Map.Entry<? extends K, ? extends V> entry : source.entrySet()) {
@@ -98,13 +107,26 @@ public final class FrozenBiMap<K, V> {
             if (reverse.getOrDefault(value, -1) >= 0) {
                 throw new IllegalArgumentException("duplicate equal value");
             }
-            int ordinal = keys.size();
-            forward.put(key, ordinal);
-            reverse.put(value, ordinal);
-            keys.add(key);
-            values.add(value);
+            forward.put(key, count);
+            reverse.put(value, count);
+            if (count == keys.length) {
+                long next = count == 0 ? 8L : (long) count + (count >>> 1) + 1L;
+                if (next > Integer.MAX_VALUE - 8L) {
+                    throw new OutOfMemoryError("FrozenBiMap lane capacity exhausted");
+                }
+                // Stage both aligned lanes before publishing either one.
+                Object[] nextKeys = Arrays.copyOf(keys, (int) next);
+                Object[] nextValues = Arrays.copyOf(values, (int) next);
+                keys = nextKeys;
+                values = nextValues;
+            }
+            keys[count] = key;
+            values[count] = value;
+            count++;
         }
-        return new FrozenBiMap<>(keys.toArray(), values.toArray(), forward, reverse, null);
+        return new FrozenBiMap<>(count == keys.length ? keys : Arrays.copyOf(keys, count),
+                count == values.length ? values : Arrays.copyOf(values, count),
+                forward, reverse, null);
     }
 
     public int size() { return size; }

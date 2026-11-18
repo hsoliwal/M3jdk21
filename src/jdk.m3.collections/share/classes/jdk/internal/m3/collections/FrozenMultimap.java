@@ -8,7 +8,6 @@ import java.util.AbstractCollection;
 import java.util.AbstractList;
 import java.util.AbstractMap;
 import java.util.AbstractSet;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
@@ -77,40 +76,69 @@ public final class FrozenMultimap<K, V> {
     public static <K, V> FrozenMultimap<K, V> copyOf(
             Map<? extends K, ? extends Collection<? extends V>> source) {
         Objects.requireNonNull(source, "source");
-        ArrayList<K> keys = new ArrayList<>();
-        ArrayList<V> values = new ArrayList<>();
+        // Only the exact JDK map implementations have a size operation that
+        // cannot dispatch to user code. All other maps are traversed once,
+        // without probing their size or those of their value collections.
+        Class<?> sourceType = source.getClass();
+        int keyCapacity = sourceType == java.util.HashMap.class
+                || sourceType == java.util.LinkedHashMap.class ? source.size() : 0;
+        Object[] keys = new Object[keyCapacity];
+        Object[] values = new Object[0];
         ObjectIntHashMap<Object> ordinals = new ObjectIntHashMap<>(0);
-        int[] offsets = new int[8];
+        int[] offsets = new int[keyCapacity == 0 ? 8 : Math.addExact(keyCapacity, 1)];
+        int keyCount = 0;
+        int valueCount = 0;
         for (Map.Entry<? extends K, ? extends Collection<? extends V>> entry
                 : source.entrySet()) {
             K key = Objects.requireNonNull(entry.getKey(), "key");
             Collection<? extends V> run = Objects.requireNonNull(entry.getValue(), "values");
-            int start = values.size();
+            int start = valueCount;
             for (V value : run) {
-                values.add(Objects.requireNonNull(value, "value"));
+                V checked = Objects.requireNonNull(value, "value");
+                if (valueCount == values.length) {
+                    values = growLane(values);
+                }
+                values[valueCount++] = checked;
             }
-            if (values.size() == start) {
+            if (valueCount == start) {
                 continue;
             }
-            int ordinal = keys.size();
+            int ordinal = keyCount;
             if (ordinals.containsKey(key)) {
                 throw new IllegalArgumentException("duplicate equal key");
             }
             ordinals.put(key, ordinal);
-            keys.add(key);
-            if (keys.size() == offsets.length) {
+            if (keyCount == keys.length) {
+                keys = growLane(keys);
+            }
+            keys[keyCount++] = key;
+            if (keyCount == offsets.length) {
                 int capacity = Math.toIntExact(Math.min(Integer.MAX_VALUE - 8L,
-                        Math.max((long) keys.size() + 1,
+                        Math.max((long) keyCount + 1,
                                 (long) offsets.length + (offsets.length >>> 1) + 1)));
-                if (capacity <= keys.size()) {
+                if (capacity <= keyCount) {
                     throw new OutOfMemoryError("FrozenMultimap offset capacity exhausted");
                 }
                 offsets = Arrays.copyOf(offsets, capacity);
             }
-            offsets[keys.size()] = values.size();
+            offsets[keyCount] = valueCount;
         }
-        return new FrozenMultimap<>(keys.toArray(),
-                Arrays.copyOf(offsets, keys.size() + 1), values.toArray(), ordinals);
+        return new FrozenMultimap<>(
+                keyCount == keys.length ? keys : Arrays.copyOf(keys, keyCount),
+                offsets.length == keyCount + 1 ? offsets : Arrays.copyOf(offsets, keyCount + 1),
+                valueCount == values.length ? values : Arrays.copyOf(values, valueCount),
+                ordinals);
+    }
+
+    /** Geometrically expands a private, unpublished payload lane. */
+    private static Object[] growLane(Object[] lane) {
+        int length = lane.length;
+        if (length >= Integer.MAX_VALUE - 8) {
+            throw new OutOfMemoryError("FrozenMultimap payload capacity exhausted");
+        }
+        int capacity = (int) Math.min(Integer.MAX_VALUE - 8L,
+                Math.max(8L, (long) length + (length >>> 1) + 1L));
+        return Arrays.copyOf(lane, capacity);
     }
 
     public int size() { return size; }

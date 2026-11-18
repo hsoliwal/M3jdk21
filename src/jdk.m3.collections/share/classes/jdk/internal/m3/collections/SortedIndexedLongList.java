@@ -47,7 +47,8 @@ public final class SortedIndexedLongList {
 
     private long[] values;
     private long[] sortKeys;
-    private byte[] live;
+    /** One bit per permanent stable ID, addressed through its primitive-array offset. */
+    private long[] liveWords;
     // Flat indexes contain *only* stable logical IDs; switched off at tree promotion.
     private int[] flat;
     // Tree node n represents immutable stable logical ID n-1. Slot 0 is null.
@@ -69,7 +70,7 @@ public final class SortedIndexedLongList {
         int capacity = Math.max(1, initialCapacity);
         values = new long[capacity];
         sortKeys = new long[capacity];
-        live = new byte[capacity];
+        liveWords = new long[liveWordCount(capacity)];
         flat = new int[capacity];
     }
 
@@ -83,7 +84,8 @@ public final class SortedIndexedLongList {
 
     /** Payload lanes and index lanes, excluding JVM headers, unused old arrays and swap storage. */
     public long reservedPrimitiveBytes() {
-        long bytes = (long) values.length * (2 * Long.BYTES + 1);
+        long bytes = (long) values.length * (2 * Long.BYTES)
+                + (long) liveWords.length * Long.BYTES;
         if (flat != null) bytes += (long) flat.length * Integer.BYTES;
         if (left != null) bytes += (long) left.length * (3 * Integer.BYTES + 1);
         return bytes;
@@ -115,7 +117,7 @@ public final class SortedIndexedLongList {
                     nextLeft, nextRight, nextSubtree, nextHeights);
             values[id] = value;
             sortKeys[id] = sortKey;
-            live[id] = 1;
+            setLive(id, true);
             left = nextLeft;
             right = nextRight;
             subtree = nextSubtree;
@@ -128,11 +130,11 @@ public final class SortedIndexedLongList {
             flat[insertion] = id;
             values[id] = value;
             sortKeys[id] = sortKey;
-            live[id] = 1;
+            setLive(id, true);
         } else {
             values[id] = value;
             sortKeys[id] = sortKey;
-            live[id] = 1;
+            setLive(id, true);
             initializeLeaf(id + 1);
             root = insert(root, id + 1);
         }
@@ -143,7 +145,7 @@ public final class SortedIndexedLongList {
     }
 
     public boolean containsId(int id) {
-        return id >= 0 && id < issued && live[id] != 0;
+        return id >= 0 && id < issued && isLive(id);
     }
 
     /** Returns the original payload by stable logical ID, regardless of sorted position. */
@@ -194,7 +196,7 @@ public final class SortedIndexedLongList {
             subtree[id + 1] = 0;
             heights[id + 1] = 0;
         }
-        live[id] = 0;
+        setLive(id, false);
         values[id] = 0L;
         sortKeys[id] = 0L;
         liveSize--;
@@ -207,7 +209,7 @@ public final class SortedIndexedLongList {
         if (liveSize == 0) return;
         Arrays.fill(values, 0, issued, 0L);
         Arrays.fill(sortKeys, 0, issued, 0L);
-        Arrays.fill(live, 0, issued, (byte) 0);
+        Arrays.fill(liveWords, 0, liveWordCount(issued), 0L);
         if (flat != null) Arrays.fill(flat, 0, liveSize, 0);
         if (left != null) {
             Arrays.fill(left, 0);
@@ -349,6 +351,23 @@ public final class SortedIndexedLongList {
         return id;
     }
 
+    /** Words needed for physical stable-ID offsets 0..capacity-1. */
+    private static int liveWordCount(int capacity) {
+        return capacity == 0 ? 0 : ((capacity - 1) >>> 6) + 1;
+    }
+
+    private boolean isLive(int id) {
+        return (liveWords[id >>> 6] & (1L << (id & 63))) != 0L;
+    }
+
+    /** Toggle one stable ID without modifying any adjacent state or tree offset. */
+    private void setLive(int id, boolean occupied) {
+        int word = id >>> 6;
+        long bit = 1L << (id & 63);
+        if (occupied) liveWords[word] |= bit;
+        else liveWords[word] &= ~bit;
+    }
+
     private int flatInsertion(long key, int id) { return flatInsertion(key, id, liveSize); }
     private int flatInsertion(long key, int id, int limit) {
         int low = 0, high = limit;
@@ -378,7 +397,7 @@ public final class SortedIndexedLongList {
                 PEAK_BYTES_PER_SLOT));
         long[] nextValues = Arrays.copyOf(values, capacity);
         long[] nextKeys = Arrays.copyOf(sortKeys, capacity);
-        byte[] nextLive = Arrays.copyOf(live, capacity);
+        long[] nextLive = Arrays.copyOf(liveWords, liveWordCount(capacity));
         int[] nextFlat = flat == null ? null : Arrays.copyOf(flat, capacity);
         int[] nextLeft = left == null ? null : Arrays.copyOf(left, capacity + 1);
         int[] nextRight = right == null ? null : Arrays.copyOf(right, capacity + 1);
@@ -386,7 +405,7 @@ public final class SortedIndexedLongList {
         byte[] nextHeights = heights == null ? null : Arrays.copyOf(heights, capacity + 1);
         values = nextValues;
         sortKeys = nextKeys;
-        live = nextLive;
+        liveWords = nextLive;
         flat = nextFlat;
         left = nextLeft;
         right = nextRight;

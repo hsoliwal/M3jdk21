@@ -5,7 +5,7 @@
 | Field | Value |
 | --- | --- |
 | Proposal | `M3JEP-CORE-004` (Synexia internal; not assigned by OpenJDK) |
-| State | **Draft / implementation HOLD** |
+| State | **Draft / isolated source-bound const128 fact candidate; compiler admission HOLD** |
 | Author | Hitesh Soliwal and contributors to the Synexia Project |
 | Owning component | `M3CompilationEvidence` |
 | First receiving stage | `AST_COMPILER` |
@@ -34,6 +34,30 @@ This shared building block supports the 70 opt-in cross-language M3 features. It
 ## Description and proposed semantics
 
 A const expression is typed, bounded, deterministic and free of observable effects. Capture source/provenance hashes; reuse values and precomputation without running arbitrary Java code during compilation.
+
+### Received isolated fact candidate (2026-11-18)
+
+An unexported `jdk.m3.paradigm` implementation,
+`jdk.internal.m3.paradigm.numeric.M3Const128`, evaluates exactly one
+bounded source declaration of the forms
+`const decimal128 id = decimal-literal;` or
+`const float128 id = decimal-literal;` into an immutable
+`Fact(Type, name, sourceLiteral, encodedValue, sourceSha256)`. The source
+SHA-256 includes exact spelling and whitespace; the fact also has a
+versioned tab-separated representation. Literal-to-fact evaluation is
+deterministic, does not run user code, and refuses general expressions,
+multiple declarations, unsupported types, comments and fake literals
+in strings. The parser is deliberately a small fail-closed diagnostic
+cursor, **not** an alternative Java lexer, AST or compiler.
+
+The Java 21 product proof passes 949 bounded source/encoding checks.
+The independent GCC `libquadmath` binary128 reference proof covers
+367 decimal values. The Synexia-owned recipes pin both the exact source
+postimages and the three existing CORE-002/003/004 proposal preimages.
+Full compiler AST attribution, constant propagation, side-effect proofs,
+cycles, public primitives, JNI/GC/JIT and installed-image compatibility
+remain **HOLD**. In particular, Java 21 `final` is not reinterpreted as
+`const`, and the M3 source spelling does not compile on ordinary javac.
 
 The first-stage architecture is: The implementation begins as opt-in, typed, source-attributed compiler facts; syntax is accepted only after explicit grammar, overload and lowering oracles, not lexical substitutions. If exact compatibility cannot be proved, leave the capability explicit and uninstalled.
 

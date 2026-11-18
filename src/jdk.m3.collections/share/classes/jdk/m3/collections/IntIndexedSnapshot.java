@@ -72,14 +72,28 @@ public final class IntIndexedSnapshot implements IntCollection {
     public IntIndexedSnapshot filtered(IntPredicate predicate) {
         Objects.requireNonNull(predicate, "predicate");
         int n = size(), count = 0;
-        int[] selected = new int[n];
+        // One transient bit per logical occurrence; callbacks retain encounter order.
+        long[] selected = new long[(int) (((long) n + 63) >>> 6)];
         for (int i = from; i < to; i++) {
             int row = rows[i];
-            if (predicate.test(values[row])) selected[count++] = row;
+            if (predicate.test(values[row])) {
+                int logical = i - from;
+                selected[logical >>> 6] |= 1L << (logical & 63);
+                count++;
+            }
         }
         if (count == n) return this;
-        return new IntIndexedSnapshot(values, Arrays.copyOf(selected, count),
-                0, count, order, distinct);
+        int[] admitted = new int[count];
+        int written = 0;
+        for (int word = 0; word < selected.length; word++) {
+            long bits = selected[word];
+            while (bits != 0) {
+                int logical = (word << 6) + Long.numberOfTrailingZeros(bits);
+                admitted[written++] = rows[from + logical];
+                bits &= bits - 1;
+            }
+        }
+        return new IntIndexedSnapshot(values, admitted, 0, count, order, distinct);
     }
     public IntIndexedSnapshot sortedAscending() { return sorted(Order.ASCENDING); }
     public IntIndexedSnapshot sortedDescending() { return sorted(Order.DESCENDING); }
