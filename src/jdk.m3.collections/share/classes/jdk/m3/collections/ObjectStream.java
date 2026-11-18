@@ -239,18 +239,20 @@ public final class ObjectStream<T> {
     }
 
     /**
-     * A primitive long index avoids per-element tuple or Long boxing.
-     * Index state is recreated for every traversal of a replayable plan.
+     * Explicit ordinal-first mapping without tuple or Long boxing.
+     * The earlier mapIndexed(value, ordinal) API retains its published order.
      */
     @FunctionalInterface
-    public interface IndexedMapper<I, O> {
+    public interface OrdinalFirstMapper<I, O> {
         O apply(long index, I value);
     }
 
-    /** Lazy zero-based indexed mapping; index overflow is rejected. */
-    public <R> ObjectStream<R> mapIndexed(IndexedMapper<? super T, ? extends R> mapper) {
+    /** Lazy zero-based ordinal-first mapping; index overflow is rejected. */
+    public <R> ObjectStream<R> mapIndexedOrdinalFirst(
+            OrdinalFirstMapper<? super T, ? extends R> mapper) {
         Objects.requireNonNull(mapper, "mapper");
-        return new ObjectStream<>(() -> ObjectStreamLanguageKernels.mapIndexed(stream(), mapper),
+        return new ObjectStream<>(
+                () -> ObjectStreamLanguageKernels.mapIndexedOrdinalFirst(stream(), mapper),
                 replayable);
     }
 
