@@ -133,6 +133,18 @@ their behavior can actually be proved equivalent.
    fixtures as **behavioral oracles**, not a promise of full compatibility or
    permission to execute untrusted build scripts.
 
+## Companion design annex
+
+The [Groovy capability convergence annex](../../../m3-guide/m3jep-groovy.md)
+expands the library, process, extension, builder, transformation and language
+semantics covered by this profile. It is a detailed annex under CORE-010 and
+retains the existing capability IDs. The profile remains the authority for the
+proposed opt-in dynamic-dispatch contract.
+
+Document materialization evidence is tracked in canonical Synexia separately
+from compiler/runtime feature admission. Publishing either document does not
+clear implementation HOLD or establish Groovy source/runtime compatibility.
+
 ## Dependencies and delivery
 
 - Receiving sequence: **String -> arrays -> collections -> AST/compiler -> remaining**.
