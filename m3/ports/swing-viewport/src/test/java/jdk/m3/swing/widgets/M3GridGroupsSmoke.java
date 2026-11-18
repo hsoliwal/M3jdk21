@@ -62,6 +62,11 @@ public final class M3GridGroupsSmoke {
         RowSorter<?> sparse = grid.getRowSorter();
         check(sparse != null && grid.getModel()==model,"single original model, sparse sorter only");
         check(grid.getRowGroupCount()==2,"two sparse group headers");
+        // The stock JTableHeader invokes toggleSortOrder on clicks. It must
+        // not crash EDT or reorder a model-order group table.
+        sparse.toggleSortOrder(0);
+        check(sparse.getSortKeys().isEmpty() && grid.getRowCount()==12,
+                "ordinary sort-header click is harmless in grouped model order");
         check("North".equals(grid.getRowGroupTitle(1)) && "South".equals(grid.getRowGroupTitle(6)),
                 "caller-owned group labels");
         check(grid.groupHeaderAtViewRow(1)==1 && grid.groupHeaderAtViewRow(6)==6,
