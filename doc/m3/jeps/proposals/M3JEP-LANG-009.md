@@ -17,6 +17,23 @@
 
 Introduce an opt-in M3JDK21 **extensions** capability: `lexical_extension_method_imports`. This is a design proposal, not installed Java syntax, a completed compiler feature, or acceptance of an upstream runtime.
 
+## Detailed technical annex and related proposal ownership
+
+[Extension Members — detailed design annex](../../../m3-guide/m3jep-extension-members.md) elaborates the LANG-009 lookup, compiler integration and verification contracts. It has **no separate proposal ID**, does not change the existing `LANG-009` catalogue row, and is not proof that any native M3JDK language feature has shipped.
+
+Related independent proposal authorities:
+
+| JEP identity | Ownership boundary |
+| --- | --- |
+| [LANG-001](M3JEP-LANG-001.md) | Operators and any symbolic lowering |
+| [LANG-008](M3JEP-LANG-008.md) | Computed property access and lvalue semantics |
+| [LANG-010](M3JEP-LANG-010.md), [LANG-019](M3JEP-LANG-019.md) | Nullability and generic applicability |
+| [LANG-025](M3JEP-LANG-025.md), [LANG-026](M3JEP-LANG-026.md) | Delegated state and DSL provider scopes |
+| [LANG-047](M3JEP-LANG-047.md) | Protocol/default/interface extension interactions |
+| [CORE-008](M3JEP-CORE-008.md), [CORE-009](M3JEP-CORE-009.md), [CORE-010](M3JEP-CORE-010.md) | Compiler AST, canonical metadata, and frontend integration |
+
+The indexed-provider and opt-in `javac` plugin work in Synexia PRs #18291, #18301, #18309 and #18336 is **candidate executable work only**. The annotated provider syntax demo is not native `javac` symbol-resolution integration. All product JDK compilation, jtreg, Maven/OpenRewrite execution, ABI, installed-image and receiving-phase gates remain `HOLD` or `NOT_RUN`, as applicable.
+
 ## Goals
 
 - Specify the typed contract for lexical extension method imports and its precise Java 21 boundary.
