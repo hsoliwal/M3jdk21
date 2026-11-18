@@ -743,6 +743,69 @@ public final class ObjectStream<T> {
 
     public ObjectStream<List<T>> batch(int size) { return batch(size, TailPolicy.INCLUDE); }
 
+    /**
+     * Non-overlapping immutable batches, including a final incomplete batch.
+     * No source elements are consumed until the resulting stream is traversed.
+     *
+     * @param width maximum number of elements in each batch, from 1 to 65,536
+     * @return a lazy plan retaining this plan's replayability
+     * @throws IllegalArgumentException if width is outside the supported range
+     */
+    public ObjectStream<List<T>> collate(int width) {
+        return collate(width, width, TailPolicy.INCLUDE);
+    }
+
+    /**
+     * Immutable windows starting every {@code step} elements, including all
+     * nonempty incomplete windows at the tail.
+     *
+     * @param width maximum number of elements in each window, from 1 to 65,536
+     * @param step positive distance between successive window starts
+     * @return a lazy plan retaining this plan's replayability
+     * @throws IllegalArgumentException if width is outside the supported range
+     *         or step is not positive
+     */
+    public ObjectStream<List<T>> collate(int width, int step) {
+        return collate(width, step, TailPolicy.INCLUDE);
+    }
+
+    /**
+     * Immutable windows starting every {@code step} elements in encounter order.
+     * A step smaller than width produces overlapping windows; a larger step
+     * leaves gaps. With {@link TailPolicy#INCLUDE}, every nonempty partial window
+     * is emitted, including multiple overlapping tails. With
+     * {@link TailPolicy#DROP}, only full windows are emitted. Empty input
+     * produces no windows.
+     *
+     * <p>For example, collating {@code [a, b, c, d, e]} with width 3, step 1 and
+     * INCLUDE produces {@code [[a, b, c], [b, c, d], [c, d, e], [d, e], [e]]}.
+     * Each result is an independent immutable list that preserves null elements.
+     * The elements themselves are not copied.
+     *
+     * <p>Creating this plan or opening its stream consumes no source elements.
+     * Traversal retains a grow-on-demand ring of at most {@code width}
+     * references. Gaps are skipped only when another window is requested;
+     * no later window is prefetched. Closing the opened stream releases its
+     * scratch storage and closes the upstream stream. Traversal remains
+     * sequential even if the opened stream is switched to parallel mode.
+     *
+     * @param width maximum number of elements in each window, from 1 to 65,536
+     * @param step positive distance between successive window starts
+     * @param tailPolicy whether incomplete windows are included or dropped
+     * @return a lazy plan retaining this plan's replayability
+     * @throws IllegalArgumentException if width is outside the supported range
+     *         or step is not positive
+     * @throws NullPointerException if tailPolicy is null
+     */
+    public ObjectStream<List<T>> collate(int width, int step, TailPolicy tailPolicy) {
+        requireWidth(width);
+        if (step <= 0) throw new IllegalArgumentException("step must be positive");
+        Objects.requireNonNull(tailPolicy, "tailPolicy");
+        return new ObjectStream<>(
+                () -> ObjectStreamLanguageKernels.collate(stream(), width, step, tailPolicy),
+                replayable);
+    }
+
     /** Full sliding windows only; ring scratch is O(width) and each emitted window is an immutable copy. */
     public ObjectStream<List<T>> window(int width) {
         requireWidth(width);
