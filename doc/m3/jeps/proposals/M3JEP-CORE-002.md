@@ -5,7 +5,7 @@
 | Field | Value |
 | --- | --- |
 | Proposal | `M3JEP-CORE-002` (Synexia internal; not assigned by OpenJDK) |
-| State | **Draft / implementation HOLD** |
+| State | **Draft / finite binary128 const-fact candidate; primitive/compiler/JNI admission HOLD** |
 | Author | Hitesh Soliwal and contributors to the Synexia Project |
 | Owning component | `javac_m3/HotSpot` |
 | First receiving stage | `AST_COMPILER` |
@@ -34,6 +34,31 @@ This shared building block supports the 70 opt-in cross-language M3 features. It
 ## Description and proposed semantics
 
 Define exact decimal-to-binary conversion and ties-to-even, NaN payloads, infinities, signed zero, subnormals, rounding and ABI. Reuse the held float128 fact candidate; runtime layout is not yet admitted.
+
+### Received bounded evaluator candidate (2026-11-18)
+
+`jdk.internal.m3.paradigm.numeric.M3Const128` in module `jdk.m3.paradigm`
+accepts an isolated, opt-in source string such as
+`const float128 amount = 125.50;` and returns a source-sealed typed fact.
+For finite decimal literals, it calculates the exact positive decimal
+rational using `BigInteger`, locates its binary exponent, rounds to nearest
+with ties to even, and emits a 128-bit hexadecimal IEEE binary128 bit
+pattern in an `F128:` fact. Signed zero, normal/subnormal boundaries and
+underflow-to-zero are explicit. Decimal literals that overflow finite
+binary128 are **refused**, not silently converted into infinity; NaN and
+infinity literals and payloads are outside this bounded syntax.
+
+The self-contained Java 21 product oracle passes 949 checks shared with
+decimal128/const; a separate Synexia proof compared **367** finite decimal
+literals against GCC `libquadmath` `strtoflt128` bit patterns on a
+little-endian x86_64 Linux host, with no mismatches. The GCC reference API
+is documented at https://gcc.gnu.org/onlinedocs/libquadmath/strtoflt128.html.
+No GCC source or runtime is copied into M3JDK.
+
+This establishes only a literal-to-fact algorithm. No public `float128`
+Java primitive, VM value layout, arithmetic, NaN payload API, JNI ABI,
+compiler grammar or installed-image integration has been admitted.
+The Java 21 syntax `const float128` remains unavailable.
 
 The first-stage architecture is: The implementation begins as opt-in, typed, source-attributed compiler facts; syntax is accepted only after explicit grammar, overload and lowering oracles, not lexical substitutions. If exact compatibility cannot be proved, leave the capability explicit and uninstalled.
 
