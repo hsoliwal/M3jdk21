@@ -36,6 +36,8 @@
     </dependency>
   </dependencies>
   <build>
+    <!-- Compile the canonical java.desktop owners; retain the existing test harness. -->
+    <sourceDirectory>${project.basedir}/../../../src/java.desktop/share/classes/jdk/m3/swing</sourceDirectory>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -44,6 +46,7 @@
         <configuration>
           <release>21</release>
           <proc>none</proc>
+          <includes><include>**/*.java</include></includes>
           <compilerArgs>
             <arg>-Xlint:all,-module,-serial,-this-escape</arg>
             <arg>-Werror</arg>

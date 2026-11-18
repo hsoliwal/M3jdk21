@@ -57,6 +57,7 @@
  */
 module java.desktop {
     requires java.prefs;
+    requires transitive java.management;
 
     requires transitive java.datatransfer;
     requires transitive java.xml;
@@ -111,6 +112,16 @@ module java.desktop {
     exports javax.swing.text.rtf;
     exports javax.swing.tree;
     exports javax.swing.undo;
+
+    // Existing native Swing widget and viewport owners, integrated into the runtime.
+    exports jdk.m3.swing.viewport;
+    exports jdk.m3.swing.viewport.engine;
+    exports jdk.m3.swing.viewport.engine.residency;
+    exports jdk.m3.swing.viewport.engine.swap;
+    exports jdk.m3.swing.web;
+    exports jdk.m3.swing.web.adapter;
+    exports jdk.m3.swing.web.model;
+    exports jdk.m3.swing.widgets;
 
     // qualified exports may be inserted at build time
     // see make/GensrcModuleInfo.gmk
