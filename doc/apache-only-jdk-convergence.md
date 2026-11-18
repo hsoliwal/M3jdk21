@@ -1,7 +1,7 @@
 <!-- SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors -->
 <!-- SPDX-License-Identifier: Apache-2.0 -->
 
-# M3JDK21 — enduring Apache-2.0-only convergence roadmap
+# M3JDK21 — Apache SDK superset convergence roadmap
 
 **State:** proposed long-term direction, recorded 2026-11-18. Not an Apache-only
 release, source substitution approval, or completed runtime qualification.
@@ -13,6 +13,14 @@ independent JDKs, the current M3JDK21 and Synexia. The plan is permanent:
 every subsequent work session should continue the backlog instead of
 restarting discovery or treating one candidate as full JDK convergence.
 This name does not suggest Apache Software Foundation endorsement.
+
+**SDK >> JDK is the enduring product invariant.** The M3JDK21
+repository is the integrated runtime/SDK product; `M3SDK` is shorthand
+for its intended **compatible SDK superset**, not a proposed rename of
+`java.*`, the repository, existing CLI tools or public modules. The
+eventual Apache-2.0-only distribution must provide the complete
+supported JDK plus independently admitted SDK capabilities. This
+is a goal, not a current runtime or licensing qualification.
 
 ## 1. Two distinct delivery tracks
 
@@ -59,6 +67,114 @@ The existing authorities remain controlling:
 [current invariants](m3jdk-invariants.md) and
 [Apache source borrowing boundary](../M3_APACHE_BORROWING_POLICY.md).
 
+### 2.1 Formal SDK superset and compatibility contract
+
+`M3SDK ⊃ JDK` means all supported Java 21 source, binary, installed-image,
+runtime, reflection, serialization, module, security, JNI/JVMTI and
+developer-tool behavior remains compatible, together with already
+accepted M3JDK21 extensions. A new language/runtime/compiler feature
+must have a separately specified version and opt-in behavior. Existing
+programs continue to work; stock JDK 21 is not required to implement
+M3-only additions. Retain the existing public JDK names, signatures
+and original implementation owners. No parallel `M3String` payload
+owner, source relabeling, JAR-only overlay, changed JDK API name,
+or unapproved `jdk.m3.*` namespace constitutes a superset.
+
+The SDK includes the full JDK (`java`, `javac`, module packaging and
+tools), not just a VM or optimized classes. M3SDK is a product-scope
+notation; the repository remains `M3jdk21` and the established JDK
+module and package names remain authoritative. The strict
+Apache-2.0-only *distribution* is a separate release gate: the current
+OpenJDK-derived product remains under its actual mixed source licenses.
+
+### 2.2 Entire JDK/SDK is the atomization domain
+
+Inventory and analyze **every relevant source, module, native component,
+build input, test and tool**. Atomize into the smallest contract-bearing
+semantic leaves, patternize only demonstrated reusable algorithms,
+retain interfaces/signatures and inline semantic documentation, and
+recompress into existing canonical JDK owners. Do not impose an
+arbitrary total number of atoms, but maintain bounded execution and
+deterministic per-file serial mutation. Java, C/C++, JNI, scripts,
+build definitions and non-source resources require distinct,
+appropriate parsers and interpretation; no single syntactic extractor
+proves all languages or binary behavior.
+
+| Coverage family | Representative owners and required invariants |
+| --- | --- |
+| Standard class libraries | `java.base`, String/arrays/collections/streams/regex/math/Unicode, I/O, network, concurrency, serialization, reflection, crypto and security |
+| Runtime and VM | HotSpot interpreter, JIT/IR tiers, GC and barriers, class metadata, safepoints, threads, JNI/JVMTI, JFR, diagnostics and portable/native services |
+| Compiler and languages | `javac` lexer, parser, symbols, type checking, inference, annotation processing, code generation, compiler API and isolated additive language features |
+| JDK and developer tools | `java`, `javap`, `jar`, `jmod`, `jlink`, `jdeps`, `jpackage`, `javadoc`, `jshell`, `jdb`, launchers, debugging and module images |
+| Desktop and native platforms | `java.desktop` AWT/Swing, graphics/print/accessibility; OS process pipes, file handles, sockets, memory mapping, native ABI and each platform implementation |
+| SDK extensions | Established optional M3 APIs, additional algorithms, languages, tooling and compatible native/build capabilities; no duplicate JDK surface |
+| Infrastructure and proof | `make`/configure, bootstrap, JMOD/JAR distribution, source generation, CI, jtreg, regression fixtures, native sanitizers, LICENSE/NOTICE, SBOM and platform release |
+
+The *coverage denominator* is the inspected project tree and its
+declared product dependencies, not a favorable subset. Maintain
+machine-readable states in existing Synexia registries:
+`DISCOVERED` -> `INVENTORIED` -> `ATOMIZED` ->
+`PATTERNIZED` -> `RECIPE_VERIFIED` -> `TARGET_TESTED` ->
+`RUNTIME_ADMITTED` -> `RELEASE_QUALIFIED`, together
+with explicit `HOLD`, `REFUSE`, `RETAIN_INCUMBENT`,
+`REFERENCE_ONLY` and `NOT_APPLICABLE`. Every omitted file,
+module, unsupported platform and missing proof is disclosed;
+a hash match or inventory count never establishes equivalence.
+Previously verified units resume from the last verified stage.
+Full coverage is a target, **not an achieved claim**.
+
+### 2.3 Best algorithms from every qualified donor family
+
+The donor search space includes **all relevant JDKs**, the complete
+`hsoliwal/com.synexia` convergence workspace, its existing recipes
+and first-party implementations, and **rights-qualified private
+repositories and Synexia labs**. Private repository code is not
+automatically Apache-2.0, publicly disclosable or eligible to
+copy; keep private source, paths and artifacts inside their
+authorized boundary. Pin exact owner, repository, commit, Git
+blob, SHA-256, license/NOTICE, interfaces, callers and history.
+Use source rights and transitive dependencies to decide whether
+a donor is `REFERENCE_ONLY`, `CANDIDATE`, `HOLD` or `REFUSE`.
+
+Select the **best per contract-bearing atom** against the existing
+implementation and competing donors. Require behavioral and
+adversarial correctness, negative/mutation tests, source/binary
+compatibility, asymptotic worst case, p50/p95/p99 latency,
+cold/warm CPU, allocation, retained heap/native bytes, GC, startup,
+security, concurrency and supported-platform behavior. A winning
+microbenchmark does not grant Java equivalence. Prefer the original
+implementation when it is superior or replacement cannot be proven.
+
+Use the established Synexia LogicHash, StructuralHash, SimHash,
+semantic leaves, category taxonomies, source-sealed CAS and
+Maven/OpenRewrite recipe crates. Algorithms and similarity hashes
+are candidate signals, not execution receipts or equivalence.
+Only the canonical Synexia recipe can qualify reusable transformations;
+M3JDK21 receives exact results and its own jtreg/native/build tests.
+No extra algorithm engine, duplicate implementation store or
+target-local recipe registry may be created.
+
+### 2.4 Cross-session custody and admission sequence
+
+Existing Synexia source and historical inventories remain
+authoritative, including `20261112-federated-jdk-donors` and
+`20261116-apache-adoption`. Do not repeat prior inventory or
+declare those historic counts to be current. Retain named
+JMO/Flex/Flexi atoms as `HOLD_OWNER_UNRESOLVED` until
+their actual paths, APIs, rights and source identities are found.
+
+For each file: inventory and seal old content -> freeze API and
+semantic contract -> atomize -> patternize -> compare JDK/private/
+Apache donors -> propose a serial diff -> lint -> compile ->
+differential/jtreg -> JNI/native/GC -> matched runtime/image ->
+benchmark -> OS/rights closure. Save SHA-256 and actual command,
+build, lint, failure and test logs. Preserve earlier accepted
+behavior, history and owner identity; do not silently move,
+delete, merge, relicense or rename. Neither an unexecuted job
+nor a draft PR is product admission.
+
+**No whole-tree atomization, SDK superset compatibility or
+Apache-2.0-only release is certified by this roadmap.**
 ## 3. JDK names are the public source of truth
 
 Keep `java.lang.String`, `java.lang.Class`, `java.util.Arrays`,
