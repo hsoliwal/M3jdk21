@@ -350,6 +350,10 @@ public final class M3Grid extends JTable {
                 throw new IllegalArgumentException("overlapping column groups");
             }
         }
+        if (ancestorGroupCount > 0 && (existing < 0
+                || columnGroupLanes[existing * 2 + 1] != columns)) {
+            throw new IllegalStateException("clear column ancestors before changing child groups");
+        }
         if (existing >= 0 && columnGroupSummary[existing] >= 0
                 && columnGroupLanes[existing * 2 + 1] != columns) {
             throw new IllegalStateException("restore the configured group's columns before changing its extent");
@@ -612,6 +616,7 @@ public final class M3Grid extends JTable {
             // Removing group metadata must never abandon its caller's
             // original TableColumn objects inside an invisible array.
             if (columnGroupSummary[i] >= 0) restoreColumnGroupOwners(i);
+            clearAncestorsInternal();
             System.arraycopy(columnGroupSummary, i + 1, columnGroupSummary, i, columnGroupCount - i - 1);
             System.arraycopy(columnGroupCollapsed, i + 1, columnGroupCollapsed, i, columnGroupCount - i - 1);
             System.arraycopy(columnGroupOwners, i + 1, columnGroupOwners, i, columnGroupCount - i - 1);
@@ -638,6 +643,7 @@ public final class M3Grid extends JTable {
         for (int i = columnGroupCount - 1; i >= 0; i--) {
             if (columnGroupSummary[i] >= 0) restoreColumnGroupOwners(i);
         }
+        clearAncestorsInternal();
         columnGroupCount = 0;
         Arrays.fill(columnGroupLanes, 0);
         Arrays.fill(columnGroupLabels, null);
@@ -844,6 +850,7 @@ public final class M3Grid extends JTable {
 
     /** Explicit replacement of column owners invalidates configured groups. */
     @Override public void setColumnModel(TableColumnModel model) {
+        if (ancestorGroupLanes != null) clearAncestorsInternal();
         if (columnGroupLanes != null && columnGroupCount > 0) {
             columnGroupCount = 0;
             Arrays.fill(columnGroupLanes, 0);
@@ -1057,6 +1064,41 @@ public final class M3Grid extends JTable {
             }
             if (pinnedHeader == null) installHeader();
         }
+        // Older wire forms have no ancestor fields. Validate newly persisted
+        // ancestor intervals after the original summary/detail groups so an
+        // invalid hierarchy cannot revive stale column identities.
+        if (ancestorGroupCount < 0 || ancestorGroupCount > MAX_ANCESTOR_GROUPS) {
+            throw new InvalidObjectException("ancestor count");
+        }
+        if (ancestorGroupCount == 0) {
+            if (ancestorGroupLanes == null) ancestorGroupLanes = new int[24];
+            if (ancestorGroupTitles == null) ancestorGroupTitles = new String[8];
+        } else {
+            if (ancestorGroupLanes == null || ancestorGroupTitles == null
+                    || (long) ancestorGroupCount * 3 > ancestorGroupLanes.length
+                    || ancestorGroupCount > ancestorGroupTitles.length || columnGroupCount == 0) {
+                throw new InvalidObjectException("invalid ancestor lanes");
+            }
+            for (int i = 0; i < ancestorGroupCount; i++) {
+                int b = i * 3;
+                int start = ancestorGroupLanes[b], width = ancestorGroupLanes[b + 1];
+                int level = ancestorGroupLanes[b + 2];
+                if (start < 0 || level < 1 || level > MAX_ANCESTOR_LEVEL || width < 2
+                        || width > getModel().getColumnCount() - start
+                        || ancestorGroupTitles[i] == null
+                        || !ancestorTiledByChildren(level, start, start + width)) {
+                    throw new InvalidObjectException("invalid serialized ancestor topology");
+                }
+                for (int other = 0; other < i; other++) {
+                    int ob = other * 3;
+                    if (ancestorGroupLanes[ob + 2] != level) continue;
+                    int otherStart = ancestorGroupLanes[ob], otherEnd = otherStart + ancestorGroupLanes[ob + 1];
+                    if (start < otherEnd && otherStart < start + width) {
+                        throw new InvalidObjectException("overlapping ancestors");
+                    }
+                }
+            }
+        }
         // Serialized pre-group M3Grid instances do not contain these fields.
         // Restore an empty sparse lane rather than rejecting older streams.
         if (groupCount == 0) {
@@ -1166,6 +1208,7 @@ public final class M3Grid extends JTable {
         boolean changedColumns = columnGroupLanes != null && columnGroupCount > 0
                 && (event == null || event.getFirstRow() == TableModelEvent.HEADER_ROW);
         if (changedColumns) {
+            clearAncestorsInternal();
             columnGroupCount = 0;
             Arrays.fill(columnGroupLanes, 0);
             Arrays.fill(columnGroupLabels, null);
@@ -1843,7 +1886,9 @@ public final class M3Grid extends JTable {
             super(columns);
             addMouseListener(new MouseAdapter() {
                 @Override public void mouseReleased(MouseEvent event) {
-                    if (event.getButton() != MouseEvent.BUTTON1 || event.getY() >= COLUMN_GROUP_BAND_HEIGHT) return;
+                    int baseY = getColumnAncestorDepth() * COLUMN_GROUP_BAND_HEIGHT;
+                    if (event.getButton() != MouseEvent.BUTTON1 || event.getY() < baseY
+                            || event.getY() >= baseY + COLUMN_GROUP_BAND_HEIGHT) return;
                     int group = disclosureGroupAt(event.getPoint());
                     if (group >= 0) setColumnGroupCollapsed(columnGroupLanes[group * 2], !columnGroupCollapsed[group]);
                 }
@@ -1874,14 +1919,14 @@ public final class M3Grid extends JTable {
             Dimension size = super.getPreferredSize();
             if (columnGroupCount > 0) {
                 size = new Dimension(size);
-                size.height = (int) Math.min(Integer.MAX_VALUE, (long) size.height + COLUMN_GROUP_BAND_HEIGHT);
+                size.height = (int) Math.min(Integer.MAX_VALUE, (long) size.height + getColumnGroupBandsHeight());
             }
             return size;
         }
 
         @Override public int columnAtPoint(Point point) {
             // The title band is a group label, not a leaf sortable column.
-            if (columnGroupCount > 0 && point.y < COLUMN_GROUP_BAND_HEIGHT) return -1;
+            if (columnGroupCount > 0 && point.y < getColumnGroupBandsHeight()) return -1;
             if (!stockPainting && pinned() && getFrozenColumnCount() > 0) {
                 int x = point.x - getVisibleRect().x;
                 if (x >= 0 && x < getFrozenWidth()) {
