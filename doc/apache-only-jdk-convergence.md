@@ -175,6 +175,8 @@ nor a draft PR is product admission.
 
 **No whole-tree atomization, SDK superset compatibility or
 Apache-2.0-only release is certified by this roadmap.**
+The proposed [MOP and Apache/Eclipse SDK architecture](m3sdk-mop-apache-eclipse-architecture.md) defines atom composition, compatibility-safe defaults/abstract hooks/overloads, the possible future Apache namespace and the distinct Eclipse EPL rights path. It is not an executed product implementation or a license conversion.
+
 ## 3. JDK names are the public source of truth
 
 Keep `java.lang.String`, `java.lang.Class`, `java.util.Arrays`,
