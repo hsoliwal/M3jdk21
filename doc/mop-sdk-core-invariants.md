@@ -22,4 +22,27 @@ MOP guides agents toward **the best qualified implementation under declared cons
 
 Preserve upstream licenses, notices, donor lineage, full-history best-of-best additive superset rules and the never-rebase-develop directive. Eligible newly authored first-party code may use Apache-2.0; original OpenJDK license obligations remain intact.
 
-**Canonical detailed policy and execution owner:** [SYNEXIA-MOP-SDK-BIDIRECTIONAL-LATTICE-1](https://github.com/hsoliwal/com.synexia/blob/develop/docs/M3-SCALE/invariants/SYNEXIA-MOP-SDK-BIDIRECTIONAL-LATTICE-1.md) (link resolves after accepted Synexia merge). Existing M3JDK21 AGENTS.md and Synexia source-sealed admission rules remain authoritative if a particular receiving gate is stricter. No new product-side recipe execution or correction-memory store is authorized by this documentation.
+**Canonical detailed policy and execution owner:** [SYNEXIA-MOP-SDK-BIDIRECTIONAL-LATTICE-1](https://github.com/hsoliwal/com.synexia/blob/develop/docs/M3-SCALE/invariants/SYNEXIA-MOP-SDK-BIDIRECTIONAL-LATTICE-1.md) (merged into Synexia). Existing M3JDK21 AGENTS.md and Synexia source-sealed admission rules remain authoritative if a particular receiving gate is stricter. No new product-side recipe execution or correction-memory store is authorized by this documentation.
+
+## Receiving boundary for executable closure preflight
+
+The first Java 21 `MopDependencyClosureGate` source and its test fixtures
+are owned by `hsoliwal/com.synexia` in the canonical `synexia-m3-recipe`
+module. See
+[SYNEXIA-MOP-SDK-CLOSURE-PREFLIGHT-1](https://github.com/hsoliwal/com.synexia/blob/develop/docs/M3-SCALE/invariants/SYNEXIA-MOP-SDK-CLOSURE-PREFLIGHT-1.md).
+Do not copy this gate, its runner, semantic manifests, or recipe correction
+memory into the product.
+
+The preflight computes a deterministic, *known* reverse-consumer closure
+from independently inventoried Java files; it refuses unsealed dependency
+graphs, contract fingerprint drift, missing or stale proof references,
+and incomplete API/ABI or JNI gates. It cannot mutate product source,
+execute compiler/jtreg/JNI tests, independently attest receipt authenticity,
+or authorize a product promotion. Its review-ready status must never be
+reported as M3JDK21 receiving qualification.
+
+Every target change still requires a Synexia-executed source-pinned recipe,
+the exact qualified postimage, and independent M3JDK21 product-native
+compile, API/ABI, jtreg, JNI/GC/platform and resource/performance tests
+where relevant. Maintain upstream license notices, full-history additive
+superset custody and precise NOT_RUN/HOLD dispositions.
