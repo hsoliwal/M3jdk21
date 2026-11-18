@@ -264,6 +264,17 @@ defines the Harmony/JDK donor intake, aligned JDK naming, and a
 separate license-clean release programme. This OpenJDK-derived fork
 is **not** currently an Apache-only distribution.
 
+**SDK >> JDK product goal:** the eventual M3SDK is a
+complete Java-compatible JDK **plus verified additional SDK
+capabilities**. The entire JDK/SDK—VM/JIT/GC, Java libraries,
+`javac`, JMOD/jlink/tools, JNI/OS, desktop and build/release—is
+subject to deterministic atomization, patternization and
+best-fit algorithm selection. `com.synexia` and eligible private
+repositories are donor/convergence homes, not target-runtime
+dependencies. Existing public JDK names and contracts remain
+locked. This goal does not establish current implementation or
+Apache-only release status.
+
 M3, M³, MCube — the name leaves room for interpretation. The goal is to reduce
 repeated CPU work and unnecessary allocation through shared immutable payloads,
 composition/range identity, indexed metadata, and reusable precompute while
