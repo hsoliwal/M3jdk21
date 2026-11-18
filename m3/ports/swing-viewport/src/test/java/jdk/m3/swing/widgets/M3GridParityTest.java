@@ -29,4 +29,13 @@ class M3GridParityTest {
     void serializedSparseGroupProjectionRoundTrip() throws Exception {
         M3GridGroupsSerializationSmoke.main(new String[0]);
     }
+    @Test
+    void groupedColumnHeaderPixelsAndWideViewport() throws Exception {
+        M3GridColumnGroupsSmoke.main(new String[0]);
+    }
+    @Test
+    void groupedColumnHeaderSerialization() throws Exception {
+        M3GridColumnGroupsSerializationSmoke.main(new String[0]);
+    }
+
 }

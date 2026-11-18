@@ -165,3 +165,25 @@ java -Djava.awt.headless=true -Xmx128m -cp /tmp/m3-monthview jdk.m3.swing.widget
 java -Djava.awt.headless=true -Xmx128m -cp /tmp/m3-monthview jdk.m3.swing.widgets.M3MonthViewCalendarSmoke
 xvfb-run -a java -Djava.awt.headless=false -Xmx128m -cp /tmp/m3-monthview jdk.m3.swing.widgets.M3MonthViewHeadfulSmoke
 ```
+
+## Native Grid two-tier column group headers
+
+| Gate | Result |
+|---|---|
+| Exact locally tested canonical M3Grid.java blob 0127f576d29bf7b563ee6f82906c962bf2b732fc | VERIFIED |
+| Java 21 --release 21 -Xlint:all,-serial,-this-escape -Werror (Grid and standalone test sources) | LOCAL_PASS |
+| Strict --patch-module java.desktop compile and named-module runtime | LOCAL_PASS |
+| New M3GridColumnGroupsSmoke: two-tier color pixels, model-column groups, reorder, frozen boundary, structure change, restoration | LOCAL_PASS |
+| New M3GridColumnGroupsSerializationSmoke: with and without frozen columns, post-roundtrip mutation | LOCAL_PASS |
+| 5,000-column JTable far horizontal window: fewer than 12 leaf header renderer invocations | LOCAL_PASS |
+| Existing six Grid headless contract/group/serial/spans programs | LOCAL_PASS |
+| Existing four Linux Xvfb Robot mouse programs | LOCAL_PASS |
+| New M3GridColumnGroupsHeadfulSmoke: group title not sortable, original lower-tier header sorts | XVFB_PASS |
+| Old serialized Grid with collapsed row group read into new Grid and column group added | LOCAL_PASS |
+| Public javap method signatures: 37 old, 44 new, zero removed | LOCAL_PASS |
+| Full M3JDK built image / jtreg, whole Swing JUnit/Maven reactor | NOT_RUN |
+| GTK4/Cocoa/Win32/HiDPI, accessibility, native LAF/RTL/print differences | NOT_RUN |
+| Nested groups, Nebula expand/collapse summary/detail parity and Synexia OpenRewrite fixed-point recipe | OPEN |
+
+See [GRID_COLUMN_GROUPS.md](GRID_COLUMN_GROUPS.md) for source locks,
+reproduction, exact feature scope and outstanding acceptance gates.

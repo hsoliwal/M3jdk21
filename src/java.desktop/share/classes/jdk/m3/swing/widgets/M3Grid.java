@@ -2,6 +2,7 @@
 package jdk.m3.swing.widgets;
 
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.FontMetrics;
@@ -69,6 +70,12 @@ public final class M3Grid extends JTable {
     private transient GroupRowSorter groupSorter;
     private transient MouseAdapter groupMouse;
     private transient long groupHeaderPainted;
+    // Original model-column header ranges. No extra ColumnModel or table.
+    private int[] columnGroupLanes = new int[16];
+    private String[] columnGroupLabels = new String[8];
+    private int columnGroupCount;
+    private transient long columnGroupPainted;
+    private static final int COLUMN_GROUP_BAND_HEIGHT = 24;
     private JTableHeader originalHeader;
     private PinnedHeader pinnedHeader;
 
@@ -82,7 +89,7 @@ public final class M3Grid extends JTable {
         if (count < 0 || count > getColumnCount()) throw new IllegalArgumentException("frozen columns out of range");
         if (frozenColumns == count) return;
         frozenColumns = count;
-        if (count == 0) uninstallHeader();
+        if (count == 0 && columnGroupCount == 0) uninstallHeader();
         else installHeader();
         repaint();
         if (getTableHeader() != null) getTableHeader().repaint();
@@ -98,6 +105,115 @@ public final class M3Grid extends JTable {
 
     /** Number of rendered frozen body cells, for performance and damage regression gates. */
     public long getFrozenPaintedCells() { return frozenPaintedCells; }
+
+    /** Number of disjoint top-level column-header groups (not table columns). */
+    public int getColumnGroupCount() { return columnGroupCount; }
+
+    /** Number of column-group bands painted since construction. */
+    public long getColumnGroupPainted() { return columnGroupPainted; }
+
+    /**
+     * Adds or replaces one first-level grouped header over a contiguous model
+     * column interval. The original TableColumnModel, column reorder controls,
+     * sorters and renderers remain authoritative. After a view-column reorder
+     * the band is shown only while its original columns form a contiguous
+     * ascending visible interval. Group bands crossing the frozen-column
+     * border are suppressed until moved wholly into one plane.
+     */
+    public void setColumnGroup(int firstModelColumn, int columns, String title) {
+        requireEdt();
+        int modelColumns = getModel().getColumnCount();
+        if (firstModelColumn < 0 || columns < 1 || columns > modelColumns - firstModelColumn) {
+            throw new IllegalArgumentException("group outside model columns");
+        }
+        if (title == null) throw new NullPointerException("title");
+        int position = 0;
+        while (position < columnGroupCount && columnGroupLanes[position * 2] < firstModelColumn) position++;
+        int existing = position < columnGroupCount && columnGroupLanes[position * 2] == firstModelColumn ? position : -1;
+        for (int i = 0; i < columnGroupCount; i++) {
+            if (i == existing) continue;
+            int other = columnGroupLanes[i * 2], length = columnGroupLanes[i * 2 + 1];
+            if ((long) firstModelColumn < (long) other + length
+                    && (long) other < (long) firstModelColumn + columns) {
+                throw new IllegalArgumentException("overlapping column groups");
+            }
+        }
+        if (existing < 0) {
+            if (columnGroupCount >= 512) throw new IllegalArgumentException("too many column groups");
+            if (columnGroupCount == columnGroupLanes.length / 2) {
+                columnGroupLanes = Arrays.copyOf(columnGroupLanes, columnGroupLanes.length * 2);
+                columnGroupLabels = Arrays.copyOf(columnGroupLabels, columnGroupLabels.length * 2);
+            }
+            System.arraycopy(columnGroupLanes, position * 2, columnGroupLanes, (position + 1) * 2,
+                    (columnGroupCount - position) * 2);
+            System.arraycopy(columnGroupLabels, position, columnGroupLabels, position + 1,
+                    columnGroupCount - position);
+            columnGroupCount++;
+            existing = position;
+        }
+        columnGroupLanes[existing * 2] = firstModelColumn;
+        columnGroupLanes[existing * 2 + 1] = columns;
+        columnGroupLabels[existing] = title;
+        installHeader();
+        refreshGroupedHeader();
+    }
+
+    public String getColumnGroupTitle(int firstModelColumn) {
+        for (int i = 0; i < columnGroupCount; i++) {
+            if (columnGroupLanes[i * 2] == firstModelColumn) return columnGroupLabels[i];
+        }
+        return null;
+    }
+
+    public void removeColumnGroup(int firstModelColumn) {
+        requireEdt();
+        for (int i = 0; i < columnGroupCount; i++) {
+            if (columnGroupLanes[i * 2] != firstModelColumn) continue;
+            System.arraycopy(columnGroupLanes, (i + 1) * 2, columnGroupLanes, i * 2,
+                    (columnGroupCount - i - 1) * 2);
+            System.arraycopy(columnGroupLabels, i + 1, columnGroupLabels, i,
+                    columnGroupCount - i - 1);
+            columnGroupCount--;
+            Arrays.fill(columnGroupLanes, columnGroupCount * 2, columnGroupCount * 2 + 2, 0);
+            columnGroupLabels[columnGroupCount] = null;
+            if (columnGroupCount == 0 && getFrozenColumnCount() == 0) uninstallHeader();
+            refreshGroupedHeader();
+            return;
+        }
+    }
+
+    public void clearColumnGroups() {
+        requireEdt();
+        if (columnGroupCount == 0) return;
+        columnGroupCount = 0;
+        Arrays.fill(columnGroupLanes, 0);
+        Arrays.fill(columnGroupLabels, null);
+        if (getFrozenColumnCount() == 0) uninstallHeader();
+        refreshGroupedHeader();
+    }
+
+    private void refreshGroupedHeader() {
+        JTableHeader header = getTableHeader();
+        if (header != null) {
+            header.revalidate();
+            header.repaint();
+            if (header.getParent() != null) header.getParent().revalidate();
+        }
+    }
+
+    /** A valid model-column group projected into current ascending view columns. */
+    private int columnGroupViewStart(int index) {
+        int b = index * 2, first = columnGroupLanes[b], length = columnGroupLanes[b + 1];
+        if (first < 0 || length < 1 || length > getModel().getColumnCount() - first) return -1;
+        int viewStart = convertColumnIndexToView(first);
+        if (viewStart < 0 || viewStart > getColumnCount() - length) return -1;
+        for (int i = 1; i < length; i++) {
+            if (convertColumnIndexToView(first + i) != viewStart + i) return -1;
+        }
+        int frozen = getFrozenColumnCount();
+        if (viewStart < frozen && viewStart + length > frozen) return -1;
+        return viewStart;
+    }
 
     /** Number of sparse, non-overlapping model-order groups. */
     public int getRowGroupCount() { return groupCount; }
@@ -237,6 +353,21 @@ public final class M3Grid extends JTable {
             removeGroupMouse();
         }
         super.setRowSorter(sorter);
+    }
+
+    /** Column-group model ordinals cannot silently move to a replaced TableModel. */
+    @Override public void setModel(TableModel model) {
+        boolean hadGroups = columnGroupLanes != null && columnGroupCount > 0;
+        if (hadGroups) {
+            columnGroupCount = 0;
+            Arrays.fill(columnGroupLanes, 0);
+            Arrays.fill(columnGroupLabels, null);
+        }
+        super.setModel(model);
+        if (hadGroups) {
+            if (getFrozenColumnCount() == 0) uninstallHeader();
+            refreshGroupedHeader();
+        }
     }
 
     /** Structural model changes invalidate bare model-row group ordinals. */
@@ -383,6 +514,31 @@ public final class M3Grid extends JTable {
     @Serial
     private void readObject(ObjectInputStream input) throws IOException, ClassNotFoundException {
         input.defaultReadObject();
+        // Serialized pre-column-group versions have no header-group lanes.
+        // Reinitialize those optional arrays without disturbing old Grid state.
+        if (columnGroupCount < 0 || columnGroupCount > 512) {
+            throw new InvalidObjectException("invalid column group count");
+        }
+        if (columnGroupCount == 0) {
+            if (columnGroupLanes == null) columnGroupLanes = new int[16];
+            if (columnGroupLabels == null) columnGroupLabels = new String[8];
+        } else {
+            if (columnGroupLanes == null || columnGroupLabels == null
+                    || (long) columnGroupCount * 2 > columnGroupLanes.length
+                    || columnGroupCount > columnGroupLabels.length) {
+                throw new InvalidObjectException("invalid column group lanes");
+            }
+            int previousEnd = 0, columns = getModel().getColumnCount();
+            for (int i = 0; i < columnGroupCount; i++) {
+                int first = columnGroupLanes[i * 2], width = columnGroupLanes[i * 2 + 1];
+                if (first < previousEnd || width < 1 || width > columns - first
+                        || columnGroupLabels[i] == null) {
+                    throw new InvalidObjectException("invalid column group interval/title");
+                }
+                previousEnd = first + width;
+            }
+            if (pinnedHeader == null) installHeader();
+        }
         // Serialized pre-group M3Grid instances do not contain these fields.
         // Restore an empty sparse lane rather than rejecting older streams.
         if (groupCount == 0) {
@@ -489,11 +645,22 @@ public final class M3Grid extends JTable {
 
     /** Rebuild spans only on request; structural row events invalidate model-row ordinals. */
     @Override public void tableChanged(TableModelEvent event) {
+        boolean changedColumns = columnGroupLanes != null && columnGroupCount > 0
+                && (event == null || event.getFirstRow() == TableModelEvent.HEADER_ROW);
+        if (changedColumns) {
+            columnGroupCount = 0;
+            Arrays.fill(columnGroupLanes, 0);
+            Arrays.fill(columnGroupLabels, null);
+        }
         if (groupLanes != null && (event == null || event.getFirstRow() == TableModelEvent.HEADER_ROW
                 || event.getType() == TableModelEvent.INSERT || event.getType() == TableModelEvent.DELETE)) {
             clearGroupsOnStructure();
         }
         super.tableChanged(event);
+        if (changedColumns) {
+            if (getFrozenColumnCount() == 0) uninstallHeader();
+            refreshGroupedHeader();
+        }
         if (spanLanes != null && spanCount > 0
                 && (event == null || event.getFirstRow() == TableModelEvent.HEADER_ROW
                     || event.getType() == TableModelEvent.INSERT
@@ -1153,7 +1320,18 @@ public final class M3Grid extends JTable {
 
         PinnedHeader(TableColumnModel columns) { super(columns); }
 
+        @Override public Dimension getPreferredSize() {
+            Dimension size = super.getPreferredSize();
+            if (columnGroupCount > 0) {
+                size = new Dimension(size);
+                size.height = (int) Math.min(Integer.MAX_VALUE, (long) size.height + COLUMN_GROUP_BAND_HEIGHT);
+            }
+            return size;
+        }
+
         @Override public int columnAtPoint(Point point) {
+            // The title band is a group label, not a leaf sortable column.
+            if (columnGroupCount > 0 && point.y < COLUMN_GROUP_BAND_HEIGHT) return -1;
             if (!stockPainting && pinned() && getFrozenColumnCount() > 0) {
                 int x = point.x - getVisibleRect().x;
                 if (x >= 0 && x < getFrozenWidth()) {
@@ -1167,6 +1345,10 @@ public final class M3Grid extends JTable {
         }
 
         @Override protected void paintComponent(Graphics g) {
+            if (columnGroupCount > 0) {
+                paintGroupedHeader(g);
+                return;
+            }
             boolean old = stockPainting;
             stockPainting = true;
             try { super.paintComponent(g); } finally { stockPainting = old; }
@@ -1193,6 +1375,109 @@ public final class M3Grid extends JTable {
                     x += width;
                 }
             } finally { layer.dispose(); }
+        }
+        /**
+         * Two painted header tiers, one native JTableHeader and original
+         * renderer instances: group titles above regular view column labels.
+         * Frozen and scrolling bands are clipped as independent planes.
+         */
+        private void paintGroupedHeader(Graphics graphics) {
+            Rectangle visible = getVisibleRect();
+            if (visible.isEmpty() || getColumnCount() == 0) return;
+            if (painter == null) painter = new CellRendererPane();
+            int band = Math.min(COLUMN_GROUP_BAND_HEIGHT, getHeight());
+            int leafHeight = Math.max(0, getHeight() - band);
+            Graphics layer = graphics.create();
+            try {
+                layer.clipRect(visible.x, visible.y, visible.width, visible.height);
+                layer.setColor(getBackground());
+                layer.fillRect(visible.x, visible.y, visible.width, visible.height);
+                if (leafHeight > 0) {
+                    // Header leaf renderers: only paint the horizontal viewport.
+                    // Frozen columns are then restamped over the scrolling band.
+                    int from = getColumnModel().getColumnIndexAtX(visible.x);
+                    int to = getColumnModel().getColumnIndexAtX(visible.x + visible.width - 1);
+                    if (from >= 0) {
+                        if (to < from) to = getColumnCount() - 1;
+                        for (int column = from; column <= to; column++) {
+                            Rectangle rect = getHeaderRect(column);
+                            if (rect.width <= 0 || rect.x + rect.width <= visible.x
+                                    || rect.x >= visible.x + visible.width) continue;
+                            drawHeaderCell(layer, column, rect.x, band, rect.width, leafHeight);
+                        }
+                    }
+                    if (pinned()) {
+                        Graphics frozen = layer.create();
+                        try {
+                            frozen.clipRect(visible.x, band, Math.min(visible.width, getFrozenWidth()), leafHeight);
+                            int x = visible.x;
+                            for (int column = 0; column < getFrozenColumnCount(); column++) {
+                                int width = getColumnModel().getColumn(column).getWidth();
+                                drawHeaderCell(frozen, column, x, band, width, leafHeight);
+                                x += width;
+                            }
+                        } finally { frozen.dispose(); }
+                    }
+                }
+                Graphics body = layer.create();
+                try {
+                    int frozenWidth = pinned() ? Math.min(visible.width, getFrozenWidth()) : 0;
+                    body.clipRect(visible.x + frozenWidth, 0, visible.width - frozenWidth, band);
+                    for (int i = 0; i < columnGroupCount; i++) {
+                        int view = columnGroupViewStart(i);
+                        if (view < 0 || view < getFrozenColumnCount()) continue;
+                        paintGroupBand(body, i, view, false, visible);
+                    }
+                } finally { body.dispose(); }
+                if (pinned()) {
+                    Graphics frozen = layer.create();
+                    try {
+                        frozen.clipRect(visible.x, 0, Math.min(visible.width, getFrozenWidth()), band);
+                        for (int i = 0; i < columnGroupCount; i++) {
+                            int view = columnGroupViewStart(i);
+                            if (view < 0 || view >= getFrozenColumnCount()) continue;
+                            paintGroupBand(frozen, i, view, true, visible);
+                        }
+                    } finally { frozen.dispose(); }
+                }
+            } finally { layer.dispose(); }
+        }
+
+        private void drawHeaderCell(Graphics g, int column, int x, int y, int width, int height) {
+            if (width <= 0 || height <= 0) return;
+            TableColumn actual = getColumnModel().getColumn(column);
+            TableCellRenderer renderer = actual.getHeaderRenderer() == null ? getDefaultRenderer() : actual.getHeaderRenderer();
+            Component component = renderer.getTableCellRendererComponent(M3Grid.this,
+                    actual.getHeaderValue(), false, false, -1, column);
+            painter.paintComponent(g, component, this, x, y, width, height, true);
+        }
+
+        private void paintGroupBand(Graphics g, int index, int viewStart, boolean frozen, Rectangle visible) {
+            int modelColumns = columnGroupLanes[index * 2 + 1];
+            int x = frozen ? visible.x : getHeaderRect(viewStart).x;
+            if (frozen) {
+                for (int c = 0; c < viewStart; c++) x += getColumnModel().getColumn(c).getWidth();
+            }
+            long sum = 0;
+            for (int i = 0; i < modelColumns; i++) sum += getColumnModel().getColumn(viewStart + i).getWidth();
+            int width = (int) Math.min(Integer.MAX_VALUE, sum);
+            if (width <= 0 || x >= visible.x + visible.width || (long) x + width <= visible.x) return;
+            int band = Math.min(COLUMN_GROUP_BAND_HEIGHT, getHeight());
+            g.setColor(getBackground());
+            g.fillRect(x, 0, width, band);
+            g.setColor(getForeground());
+            g.drawRect(x, 0, Math.max(0, width - 1), Math.max(0, band - 1));
+            String title = columnGroupLabels[index];
+            if (title != null && !title.isEmpty()) {
+                java.awt.Shape clip = g.getClip();
+                try {
+                    g.clipRect(x + 4, 0, Math.max(0, width - 8), band);
+                    java.awt.FontMetrics fm = g.getFontMetrics();
+                    g.drawString(title, x + 5,
+                            (band - fm.getHeight()) / 2 + fm.getAscent());
+                } finally { g.setClip(clip); }
+            }
+            columnGroupPainted++;
         }
     }
 
