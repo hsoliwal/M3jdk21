@@ -121,6 +121,55 @@ final class SuffixArrayUtf16WindowTest {
     }
 
     @Test
+    void repeatedSubstringReusesOwnerLcpWithIdenticalFirstMaxTieRule() {
+        String[] edgeCases = {
+                "", "a", "aaaaaa", "abababab", "banana", "mississippi",
+                "abababa", "abcabcxyzxyz", new String(new char[] {'a', 0, 'a', 0, 'a'}),
+                new String(new char[] {(char) 0xD800, 'b', (char) 0xD800, 'b'}),
+                new String(new char[] {(char) 0xDFFF, (char) 0xFFFF, (char) 0xDFFF})
+        };
+        for (String input : edgeCases) {
+            assertEquals(legacyRepeatedSubstringOracle(input),
+                    StringAlgorithms.longestRepeatedSubstring(input), "edge case");
+        }
+        Random random = new Random(0x4C43504CL);
+        for (int sample = 0; sample < 500; sample++) {
+            int count = sample % 25 == 0 ? 350 : random.nextInt(120);
+            char[] value = new char[count];
+            for (int i = 0; i < count; i++) {
+                value[i] = ALPHABET[random.nextInt(1 + sample % ALPHABET.length)];
+            }
+            String input = new String(value);
+            assertEquals(legacyRepeatedSubstringOracle(input),
+                    StringAlgorithms.longestRepeatedSubstring(input),
+                    "repeated substring sample=" + sample);
+        }
+        assertThrows(NullPointerException.class,
+                () -> StringAlgorithms.longestRepeatedSubstring(null));
+    }
+
+    private static String legacyRepeatedSubstringOracle(String input) {
+        int[] order = SuffixArrayReference.suffixArray(input);
+        int longest = 0;
+        int start = 0;
+        for (int rank = 0; rank + 1 < order.length; rank++) {
+            int left = order[rank];
+            int right = order[rank + 1];
+            int common = 0;
+            while (left + common < input.length()
+                    && right + common < input.length()
+                    && input.charAt(left + common) == input.charAt(right + common)) {
+                common++;
+            }
+            if (common > longest) {
+                longest = common;
+                start = left;
+            }
+        }
+        return input.substring(start, start + longest);
+    }
+
+    @Test
     void preservesEmptyAndInvalidInputContracts() {
         IntSuffixArray empty = IntSuffixArray.utf16("");
         assertEquals(new IntSuffixArray.Range(0, 0), empty.utf16PrefixRange(""));
