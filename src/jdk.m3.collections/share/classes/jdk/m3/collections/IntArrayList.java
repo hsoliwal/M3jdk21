@@ -131,10 +131,24 @@ public final class IntArrayList implements IntList {
         Objects.requireNonNull(alignedStates, "alignedStates");
         if (alignedStates.length != size) throw new IllegalArgumentException("unaligned state length");
         if ((requiredBits & ~0xff) != 0) throw new IllegalArgumentException("invalid state mask");
+        return retainByStateMaskChecked(alignedStates, 0, requiredBits);
+    }
+    /**
+     * Retains values matching a position-aligned state window inside a larger byte[].
+     * No state slice, boxed entry or scratch index array is allocated. The source
+     * window must remain unchanged while compaction runs.
+     */
+    public int retainByStateMask(byte[] alignedStates, int stateOffset, int requiredBits) {
+        Objects.requireNonNull(alignedStates, "alignedStates");
+        Objects.checkFromIndexSize(stateOffset, size, alignedStates.length);
+        if ((requiredBits & ~0xff) != 0) throw new IllegalArgumentException("invalid state mask");
+        return retainByStateMaskChecked(alignedStates, stateOffset, requiredBits);
+    }
+    private int retainByStateMaskChecked(byte[] alignedStates, int stateOffset, int requiredBits) {
         if (requiredBits == 0) return 0;
         int original = size, write = 0;
         for (int read = 0; read < original; read++) {
-            if (((alignedStates[read] & 0xff) & requiredBits) == requiredBits) {
+            if (((alignedStates[stateOffset + read] & 0xff) & requiredBits) == requiredBits) {
                 data[write++] = data[read];
             }
         }
