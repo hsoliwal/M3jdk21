@@ -7,6 +7,7 @@
  * @run main/othervm --add-opens=java.base/java.lang=ALL-UNNAMED StringScalaLinesTest
  */
 
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
@@ -101,9 +102,36 @@ public class StringScalaLinesTest {
         }
     }
 
+    /** Exercises the M3 path even when a stock test JVM cannot inject the M3 flag. */
+    private static void forcedCanonicalComposition() throws ReflectiveOperationException {
+        Class<?> storageClass = Class.forName("java.lang.M3String");
+        Method admitArrays = storageClass.getDeclaredMethod("admitArrays", char[][].class);
+        admitArrays.setAccessible(true);
+        // CRLF intentionally straddles two distinct interned source atoms.
+        char[][] atoms = {{'a', '\r'}, {'\n', 'b', '\n'}, {'x', '\r'}};
+        Object storage = admitArrays.invoke(null, (Object) atoms);
+        if (storage == null) throw new AssertionError("canonical atom composition refused");
+
+        Constructor<String> constructor = String.class.getDeclaredConstructor(storageClass);
+        constructor.setAccessible(true);
+        String composed = constructor.newInstance(storage);
+        Method m3 = String.class.getDeclaredMethod("m3");
+        m3.setAccessible(true);
+        if (m3.invoke(composed) == null) throw new AssertionError("composition not M3-backed");
+        List<String> pieces = composed.linesWithSeparators().toList();
+        eq(List.of("a\r\n", "b\n", "x\r"), pieces);
+        eq(List.of("a", "b", "x"), composed.lines().toList());
+        for (String piece : pieces) {
+            if (m3.invoke(piece) == null) {
+                throw new AssertionError("separator-preserving line lost canonical M3 owner");
+            }
+        }
+    }
+
     public static void main(String[] args) throws Exception {
         direct();
         differential();
         lazyAndCanonical();
+        forcedCanonicalComposition();
     }
 }
