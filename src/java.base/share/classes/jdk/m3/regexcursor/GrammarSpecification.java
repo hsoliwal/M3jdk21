@@ -354,7 +354,7 @@ public final class GrammarSpecification {
      * are unchanged. Only the remaining range is authenticated; no writable alias
      * or mutable buffer is retained after this method returns.
      */
-    public static GrammarSpecification fromImage(ByteBuffer sealed, String expectedSha256) {
+    public static GrammarSpecification fromImageBuffer(ByteBuffer sealed, String expectedSha256) {
         Objects.requireNonNull(sealed, "sealed");
         Objects.requireNonNull(expectedSha256, "expectedSha256");
         int size = sealed.remaining();

@@ -40,6 +40,20 @@ public final class GrammarSpecificationOwnerIntegrationTest {
         yes(original.accepts(new int[] {1, 1, 1}));
         yes(!original.accepts(new int[] {2}));
         var loaded = GrammarSpecification.fromImage(bytes, sha);
+        // The old untyped-null call must remain source-compatible: no
+        // same-arity ByteBuffer overload may make Java's selection ambiguous.
+        try {
+            GrammarSpecification.fromImage(null, sha);
+            throw new AssertionError("null image should be rejected");
+        } catch (NullPointerException expected) {
+            checks++;
+        }
+        try {
+            GrammarSpecification.fromImageBuffer(null, sha);
+            throw new AssertionError("null byte buffer should be rejected");
+        } catch (NullPointerException expected) {
+            checks++;
+        }
         yes(loaded.accepts(new int[0]));
 
         // Slice over a *direct* nonzero-offset image with a retained mark.
@@ -49,12 +63,12 @@ public final class GrammarSpecificationOwnerIntegrationTest {
         direct.position(3);
         direct.mark();
         direct.limit(3 + bytes.length);
-        var fromMappedView = GrammarSpecification.fromImage(direct, sha);
+        var fromMappedView = GrammarSpecification.fromImageBuffer(direct, sha);
         eq(direct.position(), 3);
         direct.reset();
         eq(direct.position(), 3);
         yes(fromMappedView.accepts(new int[] {1, 1, 1}));
-        yes(GrammarSpecification.fromImage(direct.asReadOnlyBuffer(), sha)
+        yes(GrammarSpecification.fromImageBuffer(direct.asReadOnlyBuffer(), sha)
                 .accepts(IntBuffer.wrap(new int[] {1, 1}).asReadOnlyBuffer()));
 
         byte[] copy = bytes.clone();
@@ -62,7 +76,7 @@ public final class GrammarSpecificationOwnerIntegrationTest {
         copy[5] ^= 1;
         yes(first.accepts(new int[] {1, 1}));
         refuse(() -> GrammarSpecification.fromImage(copy, sha));
-        refuse(() -> GrammarSpecification.fromImage(ByteBuffer.wrap(bytes), "0".repeat(64)));
+        refuse(() -> GrammarSpecification.fromImageBuffer(ByteBuffer.wrap(bytes), "0".repeat(64)));
 
         // A correctly re-signed image must still reject a nullable left-corner cycle.
         // The grammar fingerprint and both SHA-256 layers are valid; only the
