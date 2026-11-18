@@ -46,7 +46,10 @@ public final class LongLazyPriorityFrontier {
     private long[] ids;
     private long[] priorities;
     private long[] serials;
-    private byte[] resolved;
+    /** One dynamically grown bit per 0-based heap offset, not a byte per entry. */
+    private long[] resolvedWords;
+    /** Fast-path witness: when zero, every live heap offset has a clear bit. */
+    private int resolvedCount;
     private final LongUnaryOperator exactScorer;
     private int size;
     private long nextSerial;
@@ -64,7 +67,7 @@ public final class LongLazyPriorityFrontier {
         ids = new long[capacity];
         priorities = new long[capacity];
         serials = new long[capacity];
-        resolved = new byte[capacity];
+        resolvedWords = new long[resolvedWordCount(capacity)];
     }
 
     public int size() { return size; }
@@ -73,7 +76,8 @@ public final class LongLazyPriorityFrontier {
 
     /** Primitive payload only; excludes Java array headers and scorer footprint. */
     public long payloadBytes() {
-        return (long) ids.length * (3L * Long.BYTES + Byte.BYTES);
+        return (long) ids.length * 3L * Long.BYTES
+                + (long) resolvedWords.length * Long.BYTES;
     }
 
     public void offer(long id, long upperBound) {
@@ -84,7 +88,7 @@ public final class LongLazyPriorityFrontier {
         ids[index] = id;
         priorities[index] = upperBound;
         serials[index] = nextSerial++;
-        resolved[index] = 0;
+        if (resolvedCount != 0) setResolved(index, false);
         siftUp(index);
     }
 
@@ -106,8 +110,16 @@ public final class LongLazyPriorityFrontier {
         ensureCapacity(nextSize);
         System.arraycopy(values, 0, ids, size, values.length);
         System.arraycopy(upperBounds, 0, priorities, size, values.length);
-        Arrays.fill(resolved, size, nextSize, (byte) 0);
-        for (int i = size; i < nextSize; i++) serials[i] = nextSerial++;
+        if (resolvedCount == 0) {
+            // Every inactive bit was cleared at poll/clear; new backing words
+            // are zero. Heapifying an unresolved batch only needs serial writes.
+            for (int i = size; i < nextSize; i++) serials[i] = nextSerial++;
+        } else {
+            for (int i = size; i < nextSize; i++) {
+                serials[i] = nextSerial++;
+                setResolved(i, false);
+            }
+        }
         size = nextSize;
         for (int parent = (size >>> 1) - 1; parent >= 0; parent--) siftDown(parent);
     }
@@ -129,6 +141,11 @@ public final class LongLazyPriorityFrontier {
         certifyTop();
         long id = ids[0];
         int last = --size;
+        // The certified root leaves first. Clear its former bit before an
+        // unresolved tail moves into offset zero; all-unresolved sifts can
+        // then elide mask writes without inheriting a stale certified bit.
+        resolvedCount--;
+        setResolved(0, false);
         if (last > 0) {
             copy(last, 0);
             siftDown(0);
@@ -136,7 +153,7 @@ public final class LongLazyPriorityFrontier {
         ids[last] = 0;
         priorities[last] = 0;
         serials[last] = 0;
-        resolved[last] = 0;
+        setResolved(last, false);
         return id;
     }
 
@@ -145,8 +162,9 @@ public final class LongLazyPriorityFrontier {
         Arrays.fill(ids, 0, size, 0L);
         Arrays.fill(priorities, 0, size, 0L);
         Arrays.fill(serials, 0, size, 0L);
-        Arrays.fill(resolved, 0, size, (byte) 0);
+        Arrays.fill(resolvedWords, 0, resolvedWordCount(size), 0L);
         size = 0;
+        resolvedCount = 0;
         nextSerial = 0L;
         evaluations = 0L;
     }
@@ -154,7 +172,7 @@ public final class LongLazyPriorityFrontier {
     private void certifyTop() {
         requireNotEvaluating();
         if (size == 0) throw new NoSuchElementException("empty priority frontier");
-        while (resolved[0] == 0) {
+        while (!isResolved(0)) {
             long exact;
             evaluating = true;
             try {
@@ -166,7 +184,8 @@ public final class LongLazyPriorityFrontier {
                 throw new IllegalArgumentException("exact score exceeds optimistic upper bound");
             }
             priorities[0] = exact;
-            resolved[0] = 1;
+            setResolved(0, true);
+            resolvedCount++;
             evaluations++;
             siftDown(0);
         }
@@ -176,7 +195,7 @@ public final class LongLazyPriorityFrontier {
         if (evaluating) throw new IllegalStateException("priority scorer reentered queue");
     }
 
-    /** Exact 25-byte primitive payload per logical score, ignoring Java array headers. */
+    /** Conservative existing 25-byte-per-entry peak budget for heap pressure. */
     private static final int SLOT_BYTES = 3 * Long.BYTES + Byte.BYTES;
 
     /**
@@ -203,11 +222,28 @@ public final class LongLazyPriorityFrontier {
         long[] newIds = Arrays.copyOf(ids, capacity);
         long[] newPriorities = Arrays.copyOf(priorities, capacity);
         long[] newSerials = Arrays.copyOf(serials, capacity);
-        byte[] newResolved = Arrays.copyOf(resolved, capacity);
+        long[] newResolved = Arrays.copyOf(resolvedWords, resolvedWordCount(capacity));
         ids = newIds;
         priorities = newPriorities;
         serials = newSerials;
-        resolved = newResolved;
+        resolvedWords = newResolved;
+    }
+
+    /** Number of 64-bit words covering heap offsets 0..capacity-1. */
+    private static int resolvedWordCount(int capacity) {
+        return capacity == 0 ? 0 : ((capacity - 1) >>> 6) + 1;
+    }
+
+    private boolean isResolved(int offset) {
+        return (resolvedWords[offset >>> 6] & (1L << (offset & 63))) != 0L;
+    }
+
+    /** Change precisely one heap offset's certification bit, even during sifts. */
+    private void setResolved(int offset, boolean value) {
+        int word = offset >>> 6;
+        long bit = 1L << (offset & 63);
+        if (value) resolvedWords[word] |= bit;
+        else resolvedWords[word] &= ~bit;
     }
 
     private boolean before(int a, int b) {
@@ -227,7 +263,7 @@ public final class LongLazyPriorityFrontier {
         long id = ids[start];
         long priority = priorities[start];
         long serial = serials[start];
-        byte flag = resolved[start];
+        boolean flag = isResolved(start);
         int index = start;
         while (index > 0) {
             int parent = (index - 1) >>> 1;
@@ -243,7 +279,7 @@ public final class LongLazyPriorityFrontier {
         long id = ids[start];
         long priority = priorities[start];
         long serial = serials[start];
-        byte flag = resolved[start];
+        boolean flag = isResolved(start);
         int index = start;
         while (index < (size >>> 1)) {
             int child = (index << 1) + 1;
@@ -260,13 +296,16 @@ public final class LongLazyPriorityFrontier {
         ids[to] = ids[from];
         priorities[to] = priorities[from];
         serials[to] = serials[from];
-        resolved[to] = resolved[from];
+        // A common heapify/build-and-drain phase contains only unresolved
+        // candidates. Zero is a proof that both source and target bits are
+        // clear, so the hot sift need move only the three long payload lanes.
+        if (resolvedCount != 0) setResolved(to, isResolved(from));
     }
 
-    private void place(int index, long id, long priority, long serial, byte flag) {
+    private void place(int index, long id, long priority, long serial, boolean flag) {
         ids[index] = id;
         priorities[index] = priority;
         serials[index] = serial;
-        resolved[index] = flag;
+        if (resolvedCount != 0) setResolved(index, flag);
     }
 }

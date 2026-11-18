@@ -55,6 +55,10 @@ public final class FrozenLongBag {
         if (source.length == 0) {
             return new FrozenLongBag();
         }
+        if (source.length >= 512) {
+            FrozenLongBag dense = copyDenseIfNarrow(source);
+            if (dense != null) return dense;
+        }
         long[] elements = source.clone();
         Arrays.sort(elements);
         int distinct = 1;
@@ -84,6 +88,48 @@ public final class FrozenLongBag {
             }
         }
         return counts;
+    }
+
+    /**
+     * Counting-sort/frequency shape over a bounded signed-long domain. A wide
+     * domain keeps the original clone/sort atom; range overflow is a refusal,
+     * not an accidental small histogram. The returned owner retains no input.
+     */
+    private static FrozenLongBag copyDenseIfNarrow(long[] source) {
+        int widthLimit = Math.min(65_535, source.length / 2 - 1);
+        long minimum = Long.MAX_VALUE;
+        long maximum = Long.MIN_VALUE;
+        for (int index = 0; index < source.length; index++) {
+            long element = source[index];
+            if (element < minimum) minimum = element;
+            if (element > maximum) maximum = element;
+            // A span only grows; reject a wide domain every 64 observations.
+            if ((index & 63) == 63) {
+                long observedWidth = maximum - minimum;
+                if (observedWidth < 0 || observedWidth > widthLimit) return null;
+            }
+        }
+        long width = maximum - minimum;
+        if (width < 0 || width > widthLimit) return null;
+        int[] histogram = new int[(int) width + 1];
+        for (long element : source) {
+            histogram[(int) (element - minimum)]++;
+        }
+        int distinct = 0;
+        for (int count : histogram) {
+            if (count != 0) distinct++;
+        }
+        long[] elements = new long[distinct];
+        int[] counts = new int[distinct];
+        int ordinal = 0;
+        for (int index = 0; index < histogram.length; index++) {
+            int count = histogram[index];
+            if (count != 0) {
+                elements[ordinal] = minimum + index;
+                counts[ordinal++] = count;
+            }
+        }
+        return new FrozenLongBag(elements, counts, source.length);
     }
 
     public int size() {

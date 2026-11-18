@@ -16,6 +16,7 @@ package jdk.internal.m3.collections;
 
 import java.util.Arrays;
 import java.util.NoSuchElementException;
+import java.util.Objects;
 
 /**
  * Dense primitive binary min-heap / priority queue.
@@ -46,6 +47,60 @@ public final class LongMinHeap {
             i = p;
         }
         heap[i] = value;
+    }
+
+    /**
+     * Adds a primitive batch using either O(k log(n + k)) sift-up or
+     * O(n + k) bottom-up Floyd heapification, whichever has the smaller cost bound.
+     * The input is copied; no per-value node or boxing is retained.
+     */
+    public void addAll(long[] values) {
+        Objects.requireNonNull(values, "values");
+        if (values.length == 0) return;
+        int newSize = Math.addExact(size, values.length);
+        if (newSize > heap.length) {
+            int grown = heap.length + (heap.length >>> 1) + 1;
+            if (grown < 0) grown = Integer.MAX_VALUE - 8;
+            heap = Arrays.copyOf(heap, Math.max(newSize, grown));
+        }
+        int oldSize = size;
+        System.arraycopy(values, 0, heap, oldSize, values.length);
+        size = newSize;
+        // Small batches avoid a full-heap scan; larger batches use linear heapify.
+        long insertionBound = (long) values.length * (Integer.SIZE - Integer.numberOfLeadingZeros(size));
+        if (insertionBound < size) {
+            for (int slot = oldSize; slot < size; slot++) {
+                long value = heap[slot];
+                int i = slot;
+                while (i > 0) {
+                    int parent = (i - 1) >>> 1;
+                    long parentValue = heap[parent];
+                    if (parentValue <= value) break;
+                    heap[i] = parentValue;
+                    i = parent;
+                }
+                heap[i] = value;
+            }
+            return;
+        }
+        for (int root = (size >>> 1) - 1; root >= 0; root--) {
+            long value = heap[root];
+            int i = root;
+            int half = size >>> 1;
+            while (i < half) {
+                int child = (i << 1) + 1;
+                long childValue = heap[child];
+                int right = child + 1;
+                if (right < size && heap[right] < childValue) {
+                    child = right;
+                    childValue = heap[right];
+                }
+                if (value <= childValue) break;
+                heap[i] = childValue;
+                i = child;
+            }
+            heap[i] = value;
+        }
     }
     public long peek() {
         if (size == 0) throw new NoSuchElementException();

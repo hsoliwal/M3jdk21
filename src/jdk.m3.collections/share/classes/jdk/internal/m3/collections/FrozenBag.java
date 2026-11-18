@@ -5,11 +5,12 @@
 package jdk.internal.m3.collections;
 
 import java.util.AbstractSet;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedHashSet;
 import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.Set;
@@ -71,9 +72,16 @@ public final class FrozenBag<E> {
      */
     public static <E> FrozenBag<E> copyOf(Collection<? extends E> source) {
         Objects.requireNonNull(source, "source");
-        ArrayList<E> elements = new ArrayList<>();
+        // Exact built-in sets have one occurrence per distinct key, and their
+        // own size() cannot invoke an overriding provider callback. Everything
+        // else stays on an encounter-driven geometric scratch path.
+        Class<?> type = source.getClass();
+        int expected = type == HashSet.class || type == LinkedHashSet.class
+                ? source.size() : 0;
+        Object[] elements = new Object[expected];
         ObjectIntHashMap<Object> ordinals = new ObjectIntHashMap<>(0);
-        int[] counts = new int[8];
+        int[] counts = new int[Math.max(8, expected)];
+        int distinct = 0;
         int total = 0;
         for (E element : source) {
             Objects.requireNonNull(element, "element");
@@ -84,7 +92,7 @@ public final class FrozenBag<E> {
                 }
                 counts[ordinal]++;
             } else {
-                ordinal = elements.size();
+                ordinal = distinct;
                 if (ordinal == counts.length) {
                     int capacity = Math.toIntExact(Math.min(Integer.MAX_VALUE - 8L,
                             Math.max((long) ordinal + 1,
@@ -95,14 +103,25 @@ public final class FrozenBag<E> {
                     counts = Arrays.copyOf(counts, capacity);
                 }
                 ordinals.put(element, ordinal);
-                elements.add(element);
+                if (ordinal == elements.length) {
+                    long capacity = elements.length == 0 ? 10L
+                            : (long) elements.length + (elements.length >>> 1);
+                    if (capacity <= ordinal) capacity = (long) ordinal + 1;
+                    if (capacity > Integer.MAX_VALUE - 8L) {
+                        throw new OutOfMemoryError("FrozenBag element capacity exhausted");
+                    }
+                    elements = Arrays.copyOf(elements, (int) capacity);
+                }
+                elements[distinct++] = element;
                 counts[ordinal] = 1;
             }
             if (total != Integer.MAX_VALUE) {
                 total++;
             }
         }
-        return new FrozenBag<>(elements.toArray(), Arrays.copyOf(counts, elements.size()),
+        return new FrozenBag<>(distinct == elements.length
+                ? elements : Arrays.copyOf(elements, distinct),
+                distinct == counts.length ? counts : Arrays.copyOf(counts, distinct),
                 ordinals, total);
     }
 

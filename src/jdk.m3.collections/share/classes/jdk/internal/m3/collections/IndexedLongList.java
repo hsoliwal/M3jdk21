@@ -24,11 +24,11 @@ import java.util.Objects;
  * separate primitive lanes and state bits instead of tree-node objects.</p>
  */
 public final class IndexedLongList {
-    /** State-mask bit {@code OCCUPIED} (per-slot state word, bit 0). */
+    /** State-mask bit {@code OCCUPIED} (per-slot nibble, bit 0). */
     static final long STATE_OCCUPIED = 1L << 0;
-    /** State-mask bit {@code DELETED} (per-slot state word, bit 1). */
+    /** State-mask bit {@code DELETED} (per-slot nibble, bit 1). */
     static final long STATE_DELETED = 1L << 1;
-    /** State-mask bit {@code BALANCE} (per-slot state word, bit 2). */
+    /** State-mask bit {@code BALANCE} (per-slot nibble, bit 2). */
     static final long STATE_BALANCE = 1L << 2;
     private static final int MAX_CAPACITY = Integer.MAX_VALUE - 8;
 
@@ -40,7 +40,11 @@ public final class IndexedLongList {
     private int[] sizeLane = new int[0];
     /** Tree height per slot; used for deterministic AVL rebalancing. */
     private byte[] heightLane = new byte[0];
-    /** Per-slot occupancy and imbalance bits, no node facades. */
+    /**
+     * Four-bit packed state per physical slot (16 slots per long). The first
+     * nibble is the reserved zero offset; left/right/size arrays remain the
+     * authoritative tree links and rank offsets, with no node objects.
+     */
     private long[] stateMaskWords = new long[0];
     private int root;
     private int size;
@@ -107,7 +111,7 @@ public final class IndexedLongList {
         Arrays.fill(rightLane, 1, allocated + 1, 0);
         Arrays.fill(sizeLane, 1, allocated + 1, 0);
         Arrays.fill(heightLane, 1, allocated + 1, (byte) 0);
-        Arrays.fill(stateMaskWords, 1, allocated + 1, 0L);
+        Arrays.fill(stateMaskWords, 0, maskWordCount(allocated), 0L);
         size = 0;
         root = 0;
         allocated = 0;
@@ -180,12 +184,25 @@ public final class IndexedLongList {
     private int subtreeSize(int slot) { return slot == 0 ? 0 : sizeLane[slot]; }
     private int height(int slot) { return slot == 0 ? 0 : heightLane[slot] & 255; }
 
+    /** Capacity of the four-bit-per-slot mask for physical offsets 0..maxSlot. */
+    private static int maskWordCount(int maxSlot) {
+        return (maxSlot >>> 4) + 1;
+    }
+
+    /** Replace exactly one slot's four-bit mask, never touching an adjacent slot. */
+    private void setState(int slot, long bits) {
+        int word = slot >>> 4;
+        int shift = (slot & 15) << 2;
+        long field = 0xFL << shift;
+        stateMaskWords[word] = (stateMaskWords[word] & ~field) | (bits << shift);
+    }
+
     private void refresh(int slot) {
         int left = leftLane[slot], right = rightLane[slot];
         sizeLane[slot] = 1 + subtreeSize(left) + subtreeSize(right);
         heightLane[slot] = (byte) (1 + Math.max(height(left), height(right)));
-        stateMaskWords[slot] = STATE_OCCUPIED
-                | (height(left) == height(right) ? 0 : STATE_BALANCE);
+        setState(slot, STATE_OCCUPIED
+                | (height(left) == height(right) ? 0 : STATE_BALANCE));
     }
 
     private int rotateLeft(int slot) {
@@ -239,7 +256,7 @@ public final class IndexedLongList {
         leftLane[slot] = rightLane[slot] = 0;
         sizeLane[slot] = 1;
         heightLane[slot] = 1;
-        stateMaskWords[slot] = STATE_OCCUPIED;
+        setState(slot, STATE_OCCUPIED);
         return slot;
     }
 
@@ -247,7 +264,7 @@ public final class IndexedLongList {
         valueLane[slot] = 0;
         rightLane[slot] = sizeLane[slot] = 0;
         heightLane[slot] = 0;
-        stateMaskWords[slot] = STATE_DELETED;
+        setState(slot, STATE_DELETED);
         leftLane[slot] = freeHead;
         freeHead = slot;
     }
@@ -267,7 +284,7 @@ public final class IndexedLongList {
         int[] newRight = Arrays.copyOf(rightLane, next + 1);
         int[] newSize = Arrays.copyOf(sizeLane, next + 1);
         byte[] newHeight = Arrays.copyOf(heightLane, next + 1);
-        long[] newMask = Arrays.copyOf(stateMaskWords, next + 1);
+        long[] newMask = Arrays.copyOf(stateMaskWords, maskWordCount(next));
         valueLane = newValues;
         leftLane = newLeft;
         rightLane = newRight;

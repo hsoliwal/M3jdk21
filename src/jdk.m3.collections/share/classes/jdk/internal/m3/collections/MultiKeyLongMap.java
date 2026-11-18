@@ -5,81 +5,76 @@
 package jdk.internal.m3.collections;
 
 /**
- * M3 five-library superset scaffold {@code MultiKeyLongMap}: API group {@code MULTIKEY_LONG_MAP} over arrays and state masks.
+ * Two-key primitive map composed over the canonical packed table owner.
  *
- * <p>Provider lineage (LIBRARY_API_MATRIX.tsv, run 20261017-m3-to-public/LIB-SUPERSET):
- * <ul>
- *   <li>COMMONS MultiKeyMap: N-key composite -&gt; value; MultiKey holder [license Apache-2.0; NEW_OWNER (LS4); priority P2; matrix owner PROPOSED:MultiKeyLongMap]</li>
- * </ul>
+ * <p>This receiver adds the Commons MultiKeyMap-shaped primitive API without
+ * creating a competing hash directory. Its authoritative representation is
+ * {@link PackedLongLongTable}: parallel long row, column and value lanes plus
+ * one primitive open-addressed pair index. The table owns slot growth,
+ * deletion repair and group filtering. There are no boxed key pairs, chained
+ * entries or per-key map objects.</p>
  *
- * <p>DOOP mapping: lane kind LONG; lanes {@code long[] key1Lane;long[] key2Lane;long[] valueLane}; offset scheme slot + combined-hash probe; state-mask bits OCCUPIED,DELETED; stored nodes NONE; API entry objects TRANSIENT_FACADE(MultiKey on iter) (transient facades over slots, never the stored representation); matrix note: k1..kN parallel key lanes + value lane; slot offsets; combined-hash probe / occupancy+deleted masks.
- *
- * <p>Status: SCAFFOLD. Every public atom throws {@link NotYetReceived} until this owner is received through a hash-pinned Synexia recipe with its own
- * provider oracle (never inferred from another provider). Not a {@code java.util} replacement.
+ * <p>Single-pair operations are expected O(1); removing all values with a
+ * matching first key is O(n), using the existing staged bit-mask filter.
+ * Zero is the return for an absent mapping in primitive put/remove, so
+ * callers use containsKey to distinguish missing from a stored zero.
+ * This M3-specific two-long subset is not a complete Commons MultiKeyMap
+ * replacement and is not synchronized.</p>
  */
 public final class MultiKeyLongMap {
-    /** State-mask bit {@code OCCUPIED} (per-slot state word, bit 0). */
+    /** Historic public inventory constants preserved unchanged. */
     static final long STATE_OCCUPIED = 1L << 0;
-    /** State-mask bit {@code DELETED} (per-slot state word, bit 1). */
     static final long STATE_DELETED = 1L << 1;
 
-    /** Storage lane {@code key1Lane}: dynamic primitive/reference array lane. */
-    private long[] key1Lane = new long[0];
-    /** Storage lane {@code key2Lane}: dynamic primitive/reference array lane. */
-    private long[] key2Lane = new long[0];
-    /** Storage lane {@code valueLane}: dynamic primitive/reference array lane. */
-    private long[] valueLane = new long[0];
-    /** Per-slot state words (OCCUPIED,DELETED); one bit set per slot and state. */
-    private long[] stateMaskWords = new long[0];
-    /** Live slot count. */
-    private int size;
+    /** Parent-owned primitive lanes live exclusively inside this shared owner. */
+    private final PackedLongLongTable entries = new PackedLongLongTable();
 
-    /** Creates an empty scaffold owner; lanes grow by copy once received. */
-    public MultiKeyLongMap() {
-    }
+    public MultiKeyLongMap() { }
 
-    /** Reports the declared state-mask bits and lanes for ledgers; never allocates per element. */
+    /** Historical inventory token; the actual lanes are now composed. */
     public static String scaffoldDescriptor() {
         return "M3MultiKeyLongMap|MULTIKEY_LONG_MAP|LONG|OCCUPIED,DELETED|long[] key1Lane;long[] key2Lane;long[] valueLane";
     }
 
-    /** MultiKeyMap.get(k1,k2) (long lanes) (scaffold: not yet received). */
     public long getOrDefault(long key1, long key2, long defaultValue) {
-        throw new NotYetReceived("M3MultiKeyLongMap.getOrDefault");
+        return entries.getOrDefault(key1, key2, defaultValue);
     }
 
-    /** MultiKeyMap.containsKey (scaffold: not yet received). */
     public boolean containsKey(long key1, long key2) {
-        throw new NotYetReceived("M3MultiKeyLongMap.containsKey");
+        return entries.contains(key1, key2);
     }
 
-    /** MultiKeyMap.put (scaffold: not yet received). */
+    /** Replace or insert a pair, returning its old value or zero if absent. */
     public long put(long key1, long key2, long value) {
-        throw new NotYetReceived("M3MultiKeyLongMap.put");
+        long previous = entries.getOrDefault(key1, key2, 0L);
+        entries.put(key1, key2, value);
+        return previous;
     }
 
-    /** MultiKeyMap.removeMultiKey (scaffold: not yet received). */
+    /** Delete a pair and return its old value or zero if absent. */
     public long remove(long key1, long key2) {
-        throw new NotYetReceived("M3MultiKeyLongMap.remove");
+        long previous = entries.getOrDefault(key1, key2, 0L);
+        entries.remove(key1, key2);
+        return previous;
     }
 
-    /** MultiKeyMap.removeAll(k1) (scaffold: not yet received). */
+    /**
+     * Delete the whole first-key group. The canonical table probes and
+     * captures the complete rejection bitset before applying any removal.
+     */
     public boolean removeAll(long key1) {
-        throw new NotYetReceived("M3MultiKeyLongMap.removeAll");
+        return entries.filterInPlace((row, column, value) -> row != key1) != 0;
     }
 
-    /** Map.size (scaffold: not yet received). */
     public int size() {
-        throw new NotYetReceived("M3MultiKeyLongMap.size");
+        return entries.size();
     }
 
-    /** Map.isEmpty (scaffold: not yet received). */
     public boolean isEmpty() {
-        throw new NotYetReceived("M3MultiKeyLongMap.isEmpty");
+        return entries.isEmpty();
     }
 
-    /** Map.clear (scaffold: not yet received). */
     public void clear() {
-        throw new NotYetReceived("M3MultiKeyLongMap.clear");
+        entries.clear();
     }
 }

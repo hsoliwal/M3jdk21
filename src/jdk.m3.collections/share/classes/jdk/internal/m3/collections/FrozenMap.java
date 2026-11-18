@@ -7,11 +7,12 @@ package jdk.internal.m3.collections;
 import java.util.AbstractCollection;
 import java.util.AbstractMap;
 import java.util.AbstractSet;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Objects;
@@ -64,8 +65,17 @@ public final class FrozenMap<K, V> {
 
     public static <K, V> FrozenMap<K, V> copyOf(Map<? extends K, ? extends V> source) {
         Objects.requireNonNull(source, "source");
-        ArrayList<Object> keys = new ArrayList<>();
-        ArrayList<Object> values = new ArrayList<>();
+        // Exact JDK map classes have a trusted cardinality without arbitrary
+        // user callbacks. Subclasses and other Map implementations instead
+        // take the callback-neutral, grow-on-demand path.
+        Class<?> type = source.getClass();
+        int expected = type == HashMap.class || type == LinkedHashMap.class
+                ? source.size() : 0;
+        Object[] keys = expected == 0 ? EMPTY : new Object[expected];
+        Object[] values = expected == 0 ? EMPTY : new Object[expected];
+        int count = 0;
+        // Keep the original hash-index growth schedule and all key callbacks;
+        // capacity optimization applies to the two payload lanes only.
         ObjectIntHashMap<Object> index = new ObjectIntHashMap<>(0);
         for (Map.Entry<? extends K, ? extends V> entry : source.entrySet()) {
             Objects.requireNonNull(entry, "entry");
@@ -74,11 +84,25 @@ public final class FrozenMap<K, V> {
             if (index.getOrDefault(key, -1) >= 0) {
                 throw new IllegalArgumentException("duplicate equal key");
             }
-            index.put(key, keys.size());
-            keys.add(key);
-            values.add(value);
+            index.put(key, count);
+            if (count == keys.length) {
+                long capacity = count == 0 ? 8L
+                        : (long) count + (count >>> 1) + 1;
+                if (capacity > Integer.MAX_VALUE - 8L) {
+                    throw new OutOfMemoryError("FrozenMap lane capacity exhausted");
+                }
+                // Stage both private lanes before publishing either one.
+                Object[] grownKeys = Arrays.copyOf(keys, (int) capacity);
+                Object[] grownValues = Arrays.copyOf(values, (int) capacity);
+                keys = grownKeys;
+                values = grownValues;
+            }
+            keys[count] = key;
+            values[count] = value;
+            count++;
         }
-        return new FrozenMap<>(keys.toArray(), values.toArray(), index);
+        return new FrozenMap<>(count == keys.length ? keys : Arrays.copyOf(keys, count),
+                count == values.length ? values : Arrays.copyOf(values, count), index);
     }
 
     public int size() { return size; }

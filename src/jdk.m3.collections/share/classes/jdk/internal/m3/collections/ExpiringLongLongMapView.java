@@ -4,18 +4,25 @@
  */
 package jdk.internal.m3.collections;
 
+import java.util.Arrays;
+import java.util.Objects;
+import java.util.function.LongSupplier;
+
 /**
- * M3 five-library superset scaffold {@code ExpiringLongLongMapView}: API group {@code EXPIRING_LONG_MAP} over arrays and state masks.
+ * Primitive long-to-long map with passive time-to-live expiry.
  *
- * <p>Provider lineage (LIBRARY_API_MATRIX.tsv, run 20261017-m3-to-public/LIB-SUPERSET):
- * <ul>
- *   <li>COMMONS PassiveExpiringMap: TTL map; expiry on access [license Apache-2.0; SUPERSET_VIEW VIEW_OF:hash map owner + deadline lane; priority P2; matrix owner deadline lane over base map]</li>
- * </ul>
+ * <p>Each mapping owns one ordinal in parallel dynamic long key, value and
+ * deadline lanes. The existing {@link PackedLongRowIndex} references those
+ * ordinals without retaining boxed keys, buckets or Entry objects. Three
+ * state bits per slot are packed in {@code long[]} mask words, 21 slots per
+ * word. Deletion swaps the last row and repairs the single canonical index.
  *
- * <p>DOOP mapping: lane kind LONG; lanes {@code long[] keyLane;long[] valueLane;long[] deadlineLane}; offset scheme slot + deadline lane; state-mask bits OCCUPIED,DELETED,EXPIRED; stored nodes NONE; API entry objects TRANSIENT_FACADE (transient facades over slots, never the stored representation); matrix note: base lanes + deadline lane / expired mask.
- *
- * <p>Status: SCAFFOLD. Every public atom throws {@link NotYetReceived} until this owner is received through a hash-pinned Synexia recipe with its own
- * provider oracle (never inferred from another provider). Not a {@code java.util} replacement.
+ * <p>Negative TTL (including the original no-argument constructor) means
+ * never expire, matching the Apache Commons PassiveExpiringMap default.
+ * Zero TTL expires on the next access, and positive TTL is measured in
+ * milliseconds from the last put. Expiration is passive: key reads purge only
+ * their key; {@link #size()} sweeps the full table. No background threads.
+ * Not thread-safe. Hash lookup is expected O(1), worst-case O(n) on collision.
  */
 public final class ExpiringLongLongMapView {
     /** State-mask bit {@code OCCUPIED} (per-slot state word, bit 0). */
@@ -25,53 +32,172 @@ public final class ExpiringLongLongMapView {
     /** State-mask bit {@code EXPIRED} (per-slot state word, bit 2). */
     static final long STATE_EXPIRED = 1L << 2;
 
-    /** Storage lane {@code keyLane}: dynamic primitive/reference array lane. */
+    private static final int SLOTS_PER_MASK_WORD = 21;
+    private static final long STATE_BITS = 7L;
+
     private long[] keyLane = new long[0];
-    /** Storage lane {@code valueLane}: dynamic primitive/reference array lane. */
     private long[] valueLane = new long[0];
-    /** Storage lane {@code deadlineLane}: dynamic primitive/reference array lane. */
     private long[] deadlineLane = new long[0];
-    /** Per-slot state words (OCCUPIED,DELETED,EXPIRED); one bit set per slot and state. */
     private long[] stateMaskWords = new long[0];
-    /** Live slot count. */
     private int size;
 
-    /** Creates an empty scaffold owner; lanes grow by copy once received. */
+    private final PackedLongRowIndex index = new PackedLongRowIndex(0);
+    private final long ttlMillis;
+    private final LongSupplier clock;
+
+    /** No expiration, as in the Apache Commons default constructor. */
     public ExpiringLongLongMapView() {
+        this(-1L, System::currentTimeMillis);
     }
 
-    /** Reports the declared state-mask bits and lanes for ledgers; never allocates per element. */
+    /** Constant time-to-live in milliseconds; negative means no expiration. */
+    public ExpiringLongLongMapView(long ttlMillis) {
+        this(ttlMillis, System::currentTimeMillis);
+    }
+
+    /**
+     * Clock-injected TTL constructor. The supplier returns milliseconds, is
+     * called once per expiry-sensitive operation and must be monotonic for
+     * deterministic expiration semantics. No per-entry supplier is retained.
+     */
+    public ExpiringLongLongMapView(long ttlMillis, LongSupplier clock) {
+        this.ttlMillis = ttlMillis;
+        this.clock = Objects.requireNonNull(clock, "clock");
+    }
+
+    /** Preserves the historical state and lane descriptor literally. */
     public static String scaffoldDescriptor() {
         return "M3ExpiringLongLongMapView|EXPIRING_LONG_MAP|LONG|OCCUPIED,DELETED,EXPIRED|long[] keyLane;long[] valueLane;long[] deadlineLane";
     }
 
-    /** PassiveExpiringMap.get (long lanes) (scaffold: not yet received). */
+    /** Returns the unexpired mapping, or the fallback for a missing/expired key. */
     public long getOrDefault(long key, long defaultValue) {
-        throw new NotYetReceived("M3ExpiringLongLongMapView.getOrDefault");
+        int at = liveIndex(key, now());
+        return at < 0 ? defaultValue : valueLane[at];
     }
 
-    /** PassiveExpiringMap.put (stamps deadline) (scaffold: not yet received). */
+    /** Replaces a mapping and its deadline; returns old unexpired value or 0. */
     public long put(long key, long value) {
-        throw new NotYetReceived("M3ExpiringLongLongMapView.put");
+        long now = now();
+        int at = liveIndex(key, now);
+        long deadline = deadline(now);
+        if (at >= 0) {
+            long previous = valueLane[at];
+            valueLane[at] = value;
+            deadlineLane[at] = deadline;
+            return previous;
+        }
+        reserve(Math.addExact(size, 1));
+        keyLane[size] = key;
+        valueLane[size] = value;
+        deadlineLane[size] = deadline;
+        markState(size, (int) STATE_OCCUPIED);
+        index.insert(size, keyLane);
+        size++;
+        return 0;
     }
 
-    /** PassiveExpiringMap.remove (scaffold: not yet received). */
+    /** Removes the key only if it has not already expired; otherwise returns 0. */
     public long remove(long key) {
-        throw new NotYetReceived("M3ExpiringLongLongMapView.remove");
+        int at = liveIndex(key, now());
+        if (at < 0) return 0;
+        long old = valueLane[at];
+        removeAt(at, false);
+        return old;
     }
 
-    /** PassiveExpiringMap.containsKey (scaffold: not yet received). */
+    /** True only for an unexpired mapping, including values equal to zero. */
     public boolean containsKey(long key) {
-        throw new NotYetReceived("M3ExpiringLongLongMapView.containsKey");
+        return liveIndex(key, now()) >= 0;
     }
 
-    /** PassiveExpiringMap.size (after expiry sweep) (scaffold: not yet received). */
+    /** Sweeps all expired rows before returning the live cardinality. */
     public int size() {
-        throw new NotYetReceived("M3ExpiringLongLongMapView.size");
+        if (ttlMillis >= 0) {
+            long now = now();
+            for (int row = size - 1; row >= 0; row--) {
+                if (expired(row, now)) removeAt(row, true);
+            }
+        }
+        return size;
     }
 
-    /** Map.clear (scaffold: not yet received). */
+    /** Clears indexed mappings while retaining reusable array capacity. */
     public void clear() {
-        throw new NotYetReceived("M3ExpiringLongLongMapView.clear");
+        index.clear();
+        Arrays.fill(stateMaskWords, 0);
+        size = 0;
+    }
+
+    private long now() {
+        return ttlMillis < 0 ? 0 : clock.getAsLong();
+    }
+
+    private long deadline(long now) {
+        if (ttlMillis < 0) return Long.MAX_VALUE;
+        if (ttlMillis > 0 && now > Long.MAX_VALUE - ttlMillis)
+            return Long.MAX_VALUE;
+        return now + ttlMillis;
+    }
+
+    private boolean expired(int row, long now) {
+        return ttlMillis >= 0 && now >= deadlineLane[row];
+    }
+
+    /** A targeted read never performs an unrelated full-map expiry sweep. */
+    private int liveIndex(long key, long now) {
+        int at = index.find(key, keyLane);
+        if (at >= 0 && expired(at, now)) {
+            removeAt(at, true);
+            return -1;
+        }
+        return at;
+    }
+
+    private void reserve(int required) {
+        index.ensure(required, keyLane);
+        if (required <= keyLane.length) return;
+        int grown = PackedLongRowIndex.grownLength(keyLane.length, required);
+        long[] keys = Arrays.copyOf(keyLane, grown);
+        long[] values = Arrays.copyOf(valueLane, grown);
+        long[] deadlines = Arrays.copyOf(deadlineLane, grown);
+        long[] masks = Arrays.copyOf(stateMaskWords,
+                (int) ((grown + (long) SLOTS_PER_MASK_WORD - 1) / SLOTS_PER_MASK_WORD));
+        keyLane = keys;
+        valueLane = values;
+        deadlineLane = deadlines;
+        stateMaskWords = masks;
+    }
+
+    private int state(int slot) {
+        int bit = (slot % SLOTS_PER_MASK_WORD) * 3;
+        return (int) ((stateMaskWords[slot / SLOTS_PER_MASK_WORD] >>> bit) & STATE_BITS);
+    }
+
+    private void markState(int slot, int flags) {
+        int word = slot / SLOTS_PER_MASK_WORD;
+        int bit = (slot % SLOTS_PER_MASK_WORD) * 3;
+        long mask = STATE_BITS << bit;
+        stateMaskWords[word] = (stateMaskWords[word] & ~mask)
+                | (((long) flags & STATE_BITS) << bit);
+    }
+
+    /** Tombstone-free last-row relocation, including deadline and state lanes. */
+    private void removeAt(int slot, boolean byExpiry) {
+        markState(slot, (int) (STATE_OCCUPIED |
+                (byExpiry ? STATE_EXPIRED : STATE_DELETED)));
+        index.remove(keyLane[slot], keyLane);
+        int last = --size;
+        if (slot != last) {
+            index.relocate(last, slot, keyLane);
+            keyLane[slot] = keyLane[last];
+            valueLane[slot] = valueLane[last];
+            deadlineLane[slot] = deadlineLane[last];
+            markState(slot, state(last));
+        }
+        keyLane[last] = 0;
+        valueLane[last] = 0;
+        deadlineLane[last] = 0;
+        markState(last, 0);
     }
 }

@@ -4,80 +4,225 @@
  */
 package jdk.internal.m3.collections;
 
+import java.util.Arrays;
+import java.util.Objects;
+
 /**
- * M3 five-library superset scaffold {@code LongArrayTable}: API group {@code LONG_ARRAY_TABLE} over arrays and state masks.
+ * Dense primitive-long table with an insertion-ordered row and column universe.
  *
- * <p>Provider lineage (LIBRARY_API_MATRIX.tsv, run 20261017-m3-to-public/LIB-SUPERSET):
- * <ul>
- *   <li>GUAVA ArrayTable: dense fixed universe row x col grid [license Apache-2.0; SUPERSET_VIEW VIEW_OF:native indexed table; priority P2; matrix owner dense value lane grid]</li>
- * </ul>
+ * <p>Two {@link PackedLongRowIndex} instances index the canonical row/column
+ * key lanes. Values and presence bits live in the table's row-major primitive
+ * arrays, never in per-cell objects. Indexed access is O(1); key access is
+ * expected O(1), subject to the primitive indexes' collision behavior.
  *
- * <p>DOOP mapping: lane kind LONG; lanes {@code long[] rowKeyLane;long[] columnKeyLane;long[] valueLane}; offset scheme dense grid: row*columnCount+column; state-mask bits PRESENT; stored nodes NONE; API entry objects TRANSIENT_FACADE(Cell) (transient facades over slots, never the stored representation); matrix note: value lane row*cols+col offsets / presence bitmask per cell.
- *
- * <p>Status: SCAFFOLD. Every public atom throws {@link NotYetReceived} until this owner is received through a hash-pinned Synexia recipe with its own
- * provider oracle (never inferred from another provider). Not a {@code java.util} replacement.
+ * <p>The fixed-universe overload models the Guava ArrayTable key contract:
+ * every in-universe pair exists, including cells that have never been set.
+ * An unset long cell reads as zero. The original no-arg M3 constructor is an
+ * additive growing-universe variant: the first put of an unseen row or column
+ * registers that key. The logical size is always rows times columns.
+ * This class is not thread-safe and does not retain an Entry/Cell per slot.
  */
 public final class LongArrayTable {
     /** State-mask bit {@code PRESENT} (per-slot state word, bit 0). */
     static final long STATE_PRESENT = 1L << 0;
 
-    /** Storage lane {@code rowKeyLane}: dynamic primitive/reference array lane. */
     private long[] rowKeyLane = new long[0];
-    /** Storage lane {@code columnKeyLane}: dynamic primitive/reference array lane. */
     private long[] columnKeyLane = new long[0];
-    /** Storage lane {@code valueLane}: dynamic primitive/reference array lane. */
     private long[] valueLane = new long[0];
-    /** Per-slot state words (PRESENT); one bit set per slot and state. */
     private long[] stateMaskWords = new long[0];
-    /** Live slot count. */
     private int size;
 
-    /** Creates an empty scaffold owner; lanes grow by copy once received. */
+    private final PackedLongRowIndex rowIndex = new PackedLongRowIndex(0);
+    private final PackedLongRowIndex columnIndex = new PackedLongRowIndex(0);
+    private final boolean fixedUniverse;
+    private int rowCount;
+    private int columnCount;
+    private int rowCapacity;
+    private int columnCapacity;
+
+    /** Constructs the original M3 growing-universe table. */
     public LongArrayTable() {
+        fixedUniverse = false;
     }
 
-    /** Reports the declared state-mask bits and lanes for ledgers; never allocates per element. */
+    /**
+     * Constructs a fixed-universe table with independent snapshots of the
+     * supplied row and column key arrays. Duplicate keys are rejected.
+     * No boxed keys, cells, or entries are retained.
+     */
+    public LongArrayTable(long[] rowKeys, long[] columnKeys) {
+        Objects.requireNonNull(rowKeys, "rowKeys");
+        Objects.requireNonNull(columnKeys, "columnKeys");
+        int cells = Math.multiplyExact(rowKeys.length, columnKeys.length);
+        rowKeyLane = rowKeys.clone();
+        columnKeyLane = columnKeys.clone();
+        rowIndex.ensure(rowKeys.length, rowKeyLane);
+        columnIndex.ensure(columnKeys.length, columnKeyLane);
+        for (int i = 0; i < rowKeys.length; i++) {
+            if (rowIndex.find(rowKeyLane[i], rowKeyLane) >= 0)
+                throw new IllegalArgumentException("duplicate row key: " + rowKeyLane[i]);
+            rowIndex.insert(i, rowKeyLane);
+        }
+        for (int i = 0; i < columnKeys.length; i++) {
+            if (columnIndex.find(columnKeyLane[i], columnKeyLane) >= 0)
+                throw new IllegalArgumentException("duplicate column key: " + columnKeyLane[i]);
+            columnIndex.insert(i, columnKeyLane);
+        }
+        valueLane = new long[cells];
+        stateMaskWords = new long[maskLength(cells)];
+        rowCount = rowCapacity = rowKeys.length;
+        columnCount = columnCapacity = columnKeys.length;
+        size = cells;
+        fixedUniverse = true;
+    }
+
+    /** Preserves the historical scaffold descriptor as an API contract. */
     public static String scaffoldDescriptor() {
         return "M3LongArrayTable|LONG_ARRAY_TABLE|LONG|PRESENT|long[] rowKeyLane;long[] columnKeyLane;long[] valueLane";
     }
 
-    /** ArrayTable.at (long lane) (scaffold: not yet received). */
+    /** Returns a cell by registered zero-based row and column index. */
     public long at(int rowIndex, int columnIndex) {
-        throw new NotYetReceived("M3LongArrayTable.at");
+        return valueLane[slot(Objects.checkIndex(rowIndex, rowCount),
+                Objects.checkIndex(columnIndex, columnCount))];
     }
 
-    /** ArrayTable.set (scaffold: not yet received). */
+    /** Sets a registered cell, returning its previous long value. */
     public long set(int rowIndex, int columnIndex, long value) {
-        throw new NotYetReceived("M3LongArrayTable.set");
+        int slot = slot(Objects.checkIndex(rowIndex, rowCount),
+                Objects.checkIndex(columnIndex, columnCount));
+        long old = valueLane[slot];
+        valueLane[slot] = value;
+        stateMaskWords[slot >>> 6] |= 1L << (slot & 63);
+        return old;
     }
 
-    /** ArrayTable.get (scaffold: not yet received). */
+    /**
+     * Returns the cell's value, or the fallback only for an unknown row or
+     * column key. A valid but never-written cell is present and reads zero.
+     */
     public long getOrDefault(long rowKey, long columnKey, long defaultValue) {
-        throw new NotYetReceived("M3LongArrayTable.getOrDefault");
+        int row = rowIndex.find(rowKey, rowKeyLane);
+        int column = columnIndex.find(columnKey, columnKeyLane);
+        return row < 0 || column < 0 ? defaultValue : valueLane[slot(row, column)];
     }
 
-    /** ArrayTable.put (scaffold: not yet received). */
+    /**
+     * Sets the value at a key pair and returns the previous long value.
+     * Fixed tables reject unknown keys. Growing M3 tables register them.
+     */
     public long put(long rowKey, long columnKey, long value) {
-        throw new NotYetReceived("M3LongArrayTable.put");
+        int row = rowIndex.find(rowKey, rowKeyLane);
+        int column = columnIndex.find(columnKey, columnKeyLane);
+        if (row < 0 || column < 0) {
+            if (fixedUniverse)
+                throw new IllegalArgumentException("key outside the fixed row/column universe");
+            expandAndRegister(rowKey, columnKey, row < 0, column < 0);
+            row = rowIndex.find(rowKey, rowKeyLane);
+            column = columnIndex.find(columnKey, columnKeyLane);
+        }
+        return set(row, column, value);
     }
 
-    /** ArrayTable.contains (scaffold: not yet received). */
+    /** True for every registered row/column pair, including zero-valued cells. */
     public boolean contains(long rowKey, long columnKey) {
-        throw new NotYetReceived("M3LongArrayTable.contains");
+        return rowIndex.find(rowKey, rowKeyLane) >= 0
+                && columnIndex.find(columnKey, columnKeyLane) >= 0;
     }
 
-    /** ArrayTable.rowKeyList (scaffold: not yet received). */
+    /** Independent snapshot of row keys in registration order. */
     public long[] rowKeysToArray() {
-        throw new NotYetReceived("M3LongArrayTable.rowKeysToArray");
+        return Arrays.copyOf(rowKeyLane, rowCount);
     }
 
-    /** ArrayTable.columnKeyList (scaffold: not yet received). */
+    /** Independent snapshot of column keys in registration order. */
     public long[] columnKeysToArray() {
-        throw new NotYetReceived("M3LongArrayTable.columnKeysToArray");
+        return Arrays.copyOf(columnKeyLane, columnCount);
     }
 
-    /** ArrayTable.size (scaffold: not yet received). */
+    /** Number of logical cells, including cells whose value has never been set. */
     public int size() {
-        throw new NotYetReceived("M3LongArrayTable.size");
+        return size;
+    }
+
+    private int slot(int row, int column) {
+        return row * columnCapacity + column;
+    }
+
+    private static int maskLength(long cells) {
+        return Math.toIntExact((cells + 63L) >>> 6);
+    }
+
+    private static boolean present(long[] words, int index) {
+        return (words[index >>> 6] & (1L << (index & 63))) != 0;
+    }
+
+    /**
+     * Expands the physical matrix geometrically so adding many adjacent columns
+     * does not copy the entire matrix on every insertion. Existing keys and
+     * PRESENT bits are copied to the new row-major stride before publication.
+     */
+    private void expandAndRegister(long rowKey, long columnKey,
+            boolean addRow, boolean addColumn) {
+        int neededRows = Math.addExact(rowCount, addRow ? 1 : 0);
+        int neededColumns = Math.addExact(columnCount, addColumn ? 1 : 0);
+        int logicalCells = Math.multiplyExact(neededRows, neededColumns);
+
+        int nextRowCapacity = neededRows > rowCapacity
+                ? PackedLongRowIndex.grownLength(rowCapacity, neededRows) : rowCapacity;
+        int nextColumnCapacity = neededColumns > columnCapacity
+                ? PackedLongRowIndex.grownLength(columnCapacity, neededColumns) : columnCapacity;
+        long physicalCells = (long) nextRowCapacity * nextColumnCapacity;
+        if (physicalCells > Integer.MAX_VALUE - 8L) {
+            nextRowCapacity = neededRows;
+            nextColumnCapacity = neededColumns;
+            physicalCells = (long) neededRows * neededColumns;
+        }
+        if (physicalCells > Integer.MAX_VALUE - 8L)
+            throw new IllegalArgumentException("table capacity overflow");
+
+        long[] newRows = nextRowCapacity == rowCapacity ? rowKeyLane
+                : Arrays.copyOf(rowKeyLane, nextRowCapacity);
+        long[] newColumns = nextColumnCapacity == columnCapacity ? columnKeyLane
+                : Arrays.copyOf(columnKeyLane, nextColumnCapacity);
+        long[] newValues = valueLane;
+        long[] newMaskWords = stateMaskWords;
+        if (nextRowCapacity != rowCapacity || nextColumnCapacity != columnCapacity) {
+            newValues = new long[(int) physicalCells];
+            newMaskWords = new long[maskLength(physicalCells)];
+            for (int row = 0; row < rowCount; row++) {
+                int oldBase = row * columnCapacity;
+                int newBase = row * nextColumnCapacity;
+                System.arraycopy(valueLane, oldBase, newValues, newBase, columnCount);
+                for (int column = 0; column < columnCount; column++) {
+                    if (present(stateMaskWords, oldBase + column)) {
+                        int cell = newBase + column;
+                        newMaskWords[cell >>> 6] |= 1L << (cell & 63);
+                    }
+                }
+            }
+        }
+
+        // Reserve both indexes before publishing new matrix state. These two
+        // operations can rehash existing ordinals but do not change key sets.
+        if (addRow) rowIndex.ensure(neededRows, rowKeyLane);
+        if (addColumn) columnIndex.ensure(neededColumns, columnKeyLane);
+        rowKeyLane = newRows;
+        columnKeyLane = newColumns;
+        valueLane = newValues;
+        stateMaskWords = newMaskWords;
+        rowCapacity = nextRowCapacity;
+        columnCapacity = nextColumnCapacity;
+        if (addRow) {
+            rowKeyLane[rowCount] = rowKey;
+            rowIndex.insert(rowCount, rowKeyLane);
+            rowCount++;
+        }
+        if (addColumn) {
+            columnKeyLane[columnCount] = columnKey;
+            columnIndex.insert(columnCount, columnKeyLane);
+            columnCount++;
+        }
+        size = logicalCells;
     }
 }

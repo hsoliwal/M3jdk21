@@ -52,7 +52,7 @@ public final class LruMap<K, V> {
     private int[] nextLane = new int[0];
     /** Storage lane {@code hashIndexLane}: open-addressed table of slot + 1; 0 is empty; at most half full. */
     private int[] hashIndexLane = new int[0];
-    /** Per-slot state words (OCCUPIED,DELETED); one bit set per slot and state. */
+    /** Two state bits per slot, packed 32 slots into each long word. */
     private long[] stateMaskWords = new long[0];
     private final int maxSize;
     /** Live slot count. */
@@ -197,7 +197,7 @@ public final class LruMap<K, V> {
     public void clear() {
         Arrays.fill(keyLane, 0, used, null);
         Arrays.fill(valueLane, 0, used, null);
-        Arrays.fill(stateMaskWords, 0, used, 0L);
+        Arrays.fill(stateMaskWords, 0L);
         Arrays.fill(hashIndexLane, 0);
         head = tail = free = NONE;
         size = used = 0;
@@ -298,7 +298,7 @@ public final class LruMap<K, V> {
             }
             slot = used++;
         }
-        stateMaskWords[slot] = STATE_OCCUPIED;
+        setState(slot, STATE_OCCUPIED);
         size++;
         return slot;
     }
@@ -311,7 +311,7 @@ public final class LruMap<K, V> {
         int[] hashes = Arrays.copyOf(hashLane, slots);
         int[] previous = Arrays.copyOf(prevLane, slots);
         int[] next = Arrays.copyOf(nextLane, slots);
-        long[] states = Arrays.copyOf(stateMaskWords, slots);
+        long[] states = Arrays.copyOf(stateMaskWords, (slots + 31) >>> 5);
         int[] index = indexOf(slots);
         keyLane = keys;
         valueLane = values;
@@ -339,6 +339,14 @@ public final class LruMap<K, V> {
         return index;
     }
 
+    /** Overwrite precisely one two-bit state without disturbing adjacent slots. */
+    private void setState(int slot, long state) {
+        int word = slot >>> 5;
+        int shift = (slot & 31) << 1;
+        long mask = 3L << shift;
+        stateMaskWords[word] = (stateMaskWords[word] & ~mask) | (state << shift);
+    }
+
     private V erase(int at) {
         int slot = hashIndexLane[at] - 1;
         V old = value(slot);
@@ -348,7 +356,7 @@ public final class LruMap<K, V> {
         valueLane[slot] = null;
         nextLane[slot] = free;
         free = slot;
-        stateMaskWords[slot] = STATE_DELETED;
+        setState(slot, STATE_DELETED);
         size--;
         modCount++;
         return old;
