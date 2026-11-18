@@ -3,13 +3,20 @@
 package jdk.m3.fs;
 
 // Modified 2026-10-21: preserve explicit legacy timestamp knowledge and v1 byte round trips.
+// Modified 2026-11-18: cover clean/incremental javac parity and row-local dependency bounds.
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.Random;
+import javax.tools.JavaCompiler;
+import javax.tools.ToolProvider;
 
 /** Runnable without JUnit or JNI; the M3FS Maven suite invokes the same oracle. */
 public final class M3BuildStateContract {
@@ -129,8 +136,144 @@ public final class M3BuildStateContract {
         invalid(() -> sampleInvalid(new String[]{"a", "b"}, new int[]{0, 0, 1}, new int[]{2}));
         invalid(() -> sampleInvalid(new String[]{"a", "b"}, new int[]{0, 0, 2}, new int[]{0, 0}));
         invalid(() -> sampleInvalid(new String[]{"a", "b"}, new int[]{0, 0, 0}, new int[0], new long[]{4L}));
+        buildInputMatchesCleanCompilation();
+        buildInputInvalidation();
+        dependencyOrdinals();
         fuzzReverseClosure();
         return checks;
+    }
+
+    /** A real compiler option change must not reuse a stale class with identical source/ABI. */
+    private static void buildInputMatchesCleanCompilation() throws IOException {
+        JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
+        check(compiler != null, "Java 21 compiler is required for the clean/incremental oracle");
+        Path directory = Files.createTempDirectory("m3-build-state-clean-");
+        try {
+            Path source = directory.resolve("Example.java");
+            String code = "public class Example { public int value(int n) { int x = n + 1; return x; } }\n";
+            Files.writeString(source, code, StandardCharsets.UTF_8);
+            Path incremental = directory.resolve("incremental"), clean = directory.resolve("clean");
+            compile(compiler, source, incremental, "-g:none");
+            byte[] originalClass = Files.readAllBytes(incremental.resolve("Example.class"));
+            M3BuildState previous = compilerState("-g:none", code, 0, null, false);
+            M3BuildState next = compilerState("-g:lines,vars,source", code, 0, null, false);
+            // Exercise the persisted production facts, not a test-only planning model.
+            previous = M3BuildState.decode(previous.encode(MAX_BYTES), MAX_BYTES, 2, 0);
+            next = M3BuildState.decode(next.encode(MAX_BYTES), MAX_BYTES, 2, 0);
+            M3BuildState.Plan plan = next.changedFrom(previous);
+            if (plan.affected(1)) compile(compiler, source, incremental, "-g:lines,vars,source");
+            compile(compiler, source, clean, "-g:lines,vars,source");
+            byte[] cleanClass = Files.readAllBytes(clean.resolve("Example.class"));
+            check(!Arrays.equals(originalClass, cleanClass), "oracle must observe changed javac output");
+            check(Arrays.equals(Files.readAllBytes(incremental.resolve("Example.class")), cleanClass),
+                    "build-input-only edit must match clean javac class bytes");
+            check(plan.fullRebuild() && plan.affectedCount() == 2,
+                    "build options without semantic edges invalidate the complete inventory");
+        } finally {
+            try (var paths = Files.walk(directory)) {
+                for (Path path : paths.sorted(Comparator.reverseOrder()).toList()) Files.delete(path);
+            }
+        }
+    }
+
+    private static void compile(JavaCompiler compiler, Path source, Path output, String debug) throws IOException {
+        Files.createDirectories(output);
+        ByteArrayOutputStream diagnostics = new ByteArrayOutputStream();
+        int status = compiler.run(null, diagnostics, diagnostics, "-proc:none", "--release", "21",
+                debug, "-d", output.toString(), source.toString());
+        check(status == 0, "javac failed: " + diagnostics.toString(StandardCharsets.UTF_8));
+    }
+
+    private static M3BuildState compilerState(String options, String source, long extraLength,
+            String buildAbi, boolean buildEdge) {
+        byte[] hashes = new byte[64], abis = new byte[64];
+        put(hashes, 0, sha(options)); put(hashes, 1, sha(source));
+        put(abis, 1, sha("public class Example { public int value(int); }"));
+        if (buildAbi != null) put(abis, 0, sha(buildAbi));
+        return new M3BuildState(new String[]{"build/options.args", "src/Example.java"},
+                new byte[]{M3BuildState.BUILD_INPUT, M3BuildState.SOURCE},
+                new long[]{options.length() + extraLength, source.length()}, hashes, abis,
+                new long[]{buildAbi == null ? 2L : 3L},
+                buildEdge ? new int[]{0, 1, 1} : new int[]{0, 0, 0},
+                buildEdge ? new int[]{1} : new int[0], sha("stable Java21 compilation context"));
+    }
+
+    private static void buildInputInvalidation() throws IOException {
+        M3BuildState old = compilerState("option-A", "body-A", 0, null, false);
+        M3BuildState same = compilerState("option-A", "body-A", 0, null, false);
+        check(!same.changedFrom(old).fullRebuild() && same.changedFrom(old).affectedCount() == 0,
+                "unchanged build inputs preserve the empty plan");
+        M3BuildState body = compilerState("option-A", "body-B", 0, null, false);
+        M3BuildState.Plan local = body.changedFrom(old);
+        check(!local.fullRebuild() && local.affectedCount() == 1 && local.affected(1) && !local.affected(0),
+                "unchanged build inputs preserve the source ABI fast path");
+        M3BuildState[] changed = {
+            compilerState("option-B", "body-A", 0, null, false),
+            compilerState("option-A", "body-A", 1, null, false),
+            compilerState("option-A", "body-A", 0, "known build ABI", false),
+            compilerState("option-A", "body-A", 0, null, true)
+        };
+        for (M3BuildState next : changed) {
+            M3BuildState.Plan plan = next.changedFrom(old);
+            check(plan.fullRebuild() && Arrays.equals(plan.changedMask(), new long[]{3L})
+                    && Arrays.equals(plan.affectedMask(), new long[]{3L}),
+                    "changed build-input facts must invalidate every current row");
+            M3BuildState restored = M3BuildState.decode(next.encode(MAX_BYTES), MAX_BYTES, 2, 1);
+            check(restored.changedFrom(old).fullRebuild(), "persisted build-input change stays conservative");
+        }
+        M3BuildState known = compilerState("option-A", "body-A", 0, "known build ABI", false);
+        check(old.changedFrom(known).fullRebuild(), "lost build-input ABI evidence is conservative");
+        check(compilerState("option-A", "body-A", 0, "changed build ABI", false)
+                .changedFrom(known).fullRebuild(), "changed build-input ABI is conservative");
+        check(compilerState("option-B", "body-A", 0, "known build ABI", false)
+                .changedFrom(known).fullRebuild(), "equal ABI cannot scope a changed build input");
+        M3BuildState sourceOnly = new M3BuildState(new String[]{"src/Example.java"},
+                new byte[]{M3BuildState.SOURCE}, new long[]{6}, sha("body-A"),
+                sha("public class Example { public int value(int); }"), new long[]{1},
+                new int[]{0, 0}, new int[0], sha("stable Java21 compilation context"));
+        check(old.changedFrom(sourceOnly).fullRebuild(), "new build input invalidates existing source");
+
+        // Full masks must retain their canonical tail across the 64-bit word boundary.
+        int n = 65;
+        String[] keys = new String[n];
+        byte[] roles = new byte[n], before = new byte[n * 32], after = new byte[n * 32];
+        for (int i = 0; i < n; i++) {
+            keys[i] = "row/" + (100 + i); roles[i] = M3BuildState.SOURCE;
+            put(before, i, sha("unchanged")); put(after, i, sha("unchanged"));
+        }
+        roles[64] = M3BuildState.BUILD_INPUT; put(after, 64, sha("changed options"));
+        M3BuildState previous = new M3BuildState(keys, roles, new long[n], before,
+                new byte[n * 32], new long[2], new int[n + 1], new int[0], sha("ctx"));
+        M3BuildState next = new M3BuildState(keys, roles, new long[n], after,
+                new byte[n * 32], new long[2], new int[n + 1], new int[0], sha("ctx"));
+        M3BuildState.Plan plan = next.changedFrom(previous);
+        check(plan.fullRebuild() && plan.affectedCount() == n
+                && Arrays.equals(plan.changedMask(), new long[]{-1L, 1L})
+                && Arrays.equals(plan.affectedMask(), new long[]{-1L, 1L}),
+                "build-input invalidation masks must clear unused tail bits");
+    }
+
+    private static void dependencyOrdinals() {
+        M3BuildState state = sample("old", "sameABI", "ctx");
+        for (int row = 0; row < state.size(); row++) {
+            for (int ordinal : new int[]{-1, Integer.MIN_VALUE, Integer.MAX_VALUE, state.dependencyCount(row)}) {
+                checks++;
+                try {
+                    state.dependency(row, ordinal);
+                    throw new AssertionError("accepted invalid row-local dependency ordinal: " + row + "/" + ordinal);
+                } catch (IndexOutOfBoundsException expected) { /* expected */ }
+            }
+        }
+        check(state.dependency(1, 0) == 0 && state.dependency(2, 0) == 1,
+                "valid row-local dependency ordinals preserve edge identities");
+        M3BuildState emptyLast = new M3BuildState(new String[]{"a", "b", "c"},
+                fill(3, M3BuildState.SOURCE), new long[3], new byte[96], new byte[96], new long[1],
+                new int[]{0, 0, 1, 1}, new int[]{0}, sha("ctx"));
+        checks++;
+        try {
+            emptyLast.dependency(2, -1);
+            throw new AssertionError("empty row read a preceding row's dependency");
+        } catch (IndexOutOfBoundsException expected) { /* expected */ }
     }
 
     private static void putSeal(byte[] encoded) {
