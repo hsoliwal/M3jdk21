@@ -1980,7 +1980,8 @@ public final class M3Grid extends JTable {
             Rectangle visible = getVisibleRect();
             if (visible.isEmpty() || getColumnCount() == 0) return;
             if (painter == null) painter = new CellRendererPane();
-            int band = Math.min(COLUMN_GROUP_BAND_HEIGHT, getHeight());
+            int band = Math.min(getColumnGroupBandsHeight(), getHeight());
+            int baseY = Math.max(0, band - COLUMN_GROUP_BAND_HEIGHT);
             int leafHeight = Math.max(0, getHeight() - band);
             Graphics layer = graphics.create();
             try {
@@ -2021,7 +2022,7 @@ public final class M3Grid extends JTable {
                     for (int i = 0; i < columnGroupCount; i++) {
                         int view = columnGroupViewStart(i);
                         if (view < 0 || view < getFrozenColumnCount()) continue;
-                        paintGroupBand(body, i, view, false, visible);
+                        paintGroupBand(body, i, view, false, visible, baseY);
                     }
                 } finally { body.dispose(); }
                 if (pinned()) {
@@ -2031,11 +2032,51 @@ public final class M3Grid extends JTable {
                         for (int i = 0; i < columnGroupCount; i++) {
                             int view = columnGroupViewStart(i);
                             if (view < 0 || view >= getFrozenColumnCount()) continue;
-                            paintGroupBand(frozen, i, view, true, visible);
+                            paintGroupBand(frozen, i, view, true, visible, baseY);
                         }
                     } finally { frozen.dispose(); }
                 }
+                if (ancestorGroupCount > 0) paintAncestorBands(layer, visible);
             } finally { layer.dispose(); }
+        }
+
+        private void paintAncestorBands(Graphics graphics, Rectangle visible) {
+            int frozenWidth = pinned() ? Math.min(visible.width, getFrozenWidth()) : 0;
+            int depth = getColumnAncestorDepth();
+            for (int i = 0; i < ancestorGroupCount; i++) {
+                long projected = ancestorProjection(i);
+                if (projected < 0) continue;
+                int first = (int) (projected >>> 32), count = (int) projected;
+                boolean fixed = pinned() && first < getFrozenColumnCount();
+                int y = (depth - ancestorGroupLanes[i * 3 + 2]) * COLUMN_GROUP_BAND_HEIGHT;
+                Graphics clipped = graphics.create();
+                try {
+                    int clipX = visible.x + (fixed ? 0 : frozenWidth);
+                    int clipWidth = fixed ? frozenWidth : visible.width - frozenWidth;
+                    clipped.clipRect(clipX, y, clipWidth, COLUMN_GROUP_BAND_HEIGHT);
+                    int x = fixed ? visible.x : getHeaderRect(first).x;
+                    if (fixed) {
+                        for (int c = 0; c < first; c++) x += getColumnModel().getColumn(c).getWidth();
+                    }
+                    long sum = 0;
+                    for (int c = 0; c < count; c++) sum += getColumnModel().getColumn(first + c).getWidth();
+                    int width = (int) Math.min(Integer.MAX_VALUE, sum);
+                    if (width <= 0 || x >= visible.x + visible.width || (long) x + width <= visible.x) continue;
+                    clipped.setColor(getBackground());
+                    clipped.fillRect(x, y, width, COLUMN_GROUP_BAND_HEIGHT);
+                    clipped.setColor(getForeground());
+                    clipped.drawRect(x, y, Math.max(0, width - 1), COLUMN_GROUP_BAND_HEIGHT - 1);
+                    java.awt.Shape oldClip = clipped.getClip();
+                    try {
+                        clipped.clipRect(x + 4, y, Math.max(0, width - 8), COLUMN_GROUP_BAND_HEIGHT);
+                        String title = ancestorGroupTitles[i];
+                        java.awt.FontMetrics fm = clipped.getFontMetrics();
+                        clipped.drawString(title, x + 5,
+                                y + (COLUMN_GROUP_BAND_HEIGHT - fm.getHeight()) / 2 + fm.getAscent());
+                    } finally { clipped.setClip(oldClip); }
+                    ancestorGroupPainted++;
+                } finally { clipped.dispose(); }
+            }
         }
 
         private void drawHeaderCell(Graphics g, int column, int x, int y, int width, int height) {
@@ -2047,7 +2088,7 @@ public final class M3Grid extends JTable {
             painter.paintComponent(g, component, this, x, y, width, height, true);
         }
 
-        private void paintGroupBand(Graphics g, int index, int viewStart, boolean frozen, Rectangle visible) {
+        private void paintGroupBand(Graphics g, int index, int viewStart, boolean frozen, Rectangle visible, int y) {
             int modelColumns = columnGroupVisibleCount(index);
             int x = frozen ? visible.x : getHeaderRect(viewStart).x;
             if (frozen) {
@@ -2059,16 +2100,16 @@ public final class M3Grid extends JTable {
             if (width <= 0 || x >= visible.x + visible.width || (long) x + width <= visible.x) return;
             int band = Math.min(COLUMN_GROUP_BAND_HEIGHT, getHeight());
             g.setColor(getBackground());
-            g.fillRect(x, 0, width, band);
+            g.fillRect(x, y, width, band);
             g.setColor(getForeground());
-            g.drawRect(x, 0, Math.max(0, width - 1), Math.max(0, band - 1));
+            g.drawRect(x, y, Math.max(0, width - 1), Math.max(0, band - 1));
             String title = columnGroupLabels[index];
             if (title != null && !title.isEmpty()) {
                 java.awt.Shape clip = g.getClip();
                 try {
                     int inset = columnGroupSummary[index] >= 0 ? 21 : 5;
                     if (columnGroupSummary[index] >= 0) {
-                        int mid = band / 2;
+                        int mid = y + band / 2;
                         if (columnGroupCollapsed[index]) {
                             g.drawLine(x + 6, mid - 5, x + 13, mid);
                             g.drawLine(x + 13, mid, x + 6, mid + 5);
@@ -2078,10 +2119,10 @@ public final class M3Grid extends JTable {
                             g.drawLine(x + 13, mid - 3, x + 9, mid + 3);
                         }
                     }
-                    g.clipRect(x + inset, 0, Math.max(0, width - inset - 4), band);
+                    g.clipRect(x + inset, y, Math.max(0, width - inset - 4), band);
                     java.awt.FontMetrics fm = g.getFontMetrics();
                     g.drawString(title, x + inset,
-                            (band - fm.getHeight()) / 2 + fm.getAscent());
+                            y + (band - fm.getHeight()) / 2 + fm.getAscent());
                 } finally { g.setClip(clip); }
             }
             columnGroupPainted++;
