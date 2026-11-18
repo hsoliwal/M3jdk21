@@ -31,6 +31,7 @@ import java.util.function.Supplier;
  *   <li>Thread-safe bindings via ConcurrentHashMap</li>
  *   <li>Hierarchical scope support (parent-child containers)</li>
  *   <li>Compile-time preferred over runtime binding</li>
+ *   <li>Provider failures remain failures during optional resolution</li>
  * </ul>
  *
  * <h2>Template Method Pattern</h2>
@@ -86,65 +87,88 @@ public abstract class AbstractContainer implements IContainer {
 
     @Override
     public <T> T get(Class<T> type) {
-        // Allow subclass to handle resolution
-        Optional<T> custom = doGet(type);
-        if (custom.isPresent()) {
-            onResolved(type, custom.get());
-            return custom.get();
-        }
+        try {
+            // Custom resolution and providers retain their existing dispatch order.
+            Optional<T> custom = doGet(type);
+            if (custom.isPresent()) {
+                onResolved(type, custom.get());
+                return custom.get();
+            }
 
-        // Check local bindings
-        @SuppressWarnings("unchecked")
-        Supplier<T> supplier = (Supplier<T>) bindings.get(type);
-        if (supplier != null) {
-            T instance = supplier.get();
-            onResolved(type, instance);
-            return instance;
-        }
-
-        // Delegate to parent
-        if (parent != null) {
-            return parent.get(type);
-        }
-
-        throw new IllegalArgumentException(ERR_NO_BINDING + type.getName());
-    }
-
-    @Override
-    public <T> T get(Class<T> type, String qualifier) {
-        // Allow subclass to handle resolution
-        Optional<T> custom = doGet(type, qualifier);
-        if (custom.isPresent()) {
-            onResolved(type, custom.get());
-            return custom.get();
-        }
-
-        // Check qualified bindings
-        Map<Class<?>, Supplier<?>> qualified = qualifiedBindings.get(qualifier);
-        if (qualified != null) {
             @SuppressWarnings("unchecked")
-            Supplier<T> supplier = (Supplier<T>) qualified.get(type);
+            Supplier<T> supplier = (Supplier<T>) bindings.get(type);
             if (supplier != null) {
                 T instance = supplier.get();
                 onResolved(type, instance);
                 return instance;
             }
+        } catch (MissingBindingException missing) {
+            // A missing dependency inside a provider or hook is a provisioning failure.
+            missing.provisioningFailure = true;
+            throw missing;
         }
 
-        // Delegate to parent
+        // An ordinary absence may pass through any number of parent containers.
+        if (parent != null) {
+            return parent.get(type);
+        }
+
+        throw new MissingBindingException(ERR_NO_BINDING + type.getName());
+    }
+
+    @Override
+    public <T> T get(Class<T> type, String qualifier) {
+        try {
+            Optional<T> custom = doGet(type, qualifier);
+            if (custom.isPresent()) {
+                onResolved(type, custom.get());
+                return custom.get();
+            }
+
+            Map<Class<?>, Supplier<?>> qualified = qualifiedBindings.get(qualifier);
+            if (qualified != null) {
+                @SuppressWarnings("unchecked")
+                Supplier<T> supplier = (Supplier<T>) qualified.get(type);
+                if (supplier != null) {
+                    T instance = supplier.get();
+                    onResolved(type, instance);
+                    return instance;
+                }
+            }
+        } catch (MissingBindingException missing) {
+            missing.provisioningFailure = true;
+            throw missing;
+        }
+
         if (parent != null) {
             return parent.get(type, qualifier);
         }
 
-        throw new IllegalArgumentException(
+        throw new MissingBindingException(
                 ERR_NO_BINDING + type.getName() + WITH_QUALIFIER + qualifier);
     }
 
+    /**
+     * Resolve optionally, retaining public {@link #get(Class)} override dispatch.
+     * Only an absence reported by this implementation or an unbound built-in parent
+     * becomes empty. Exceptions raised while creating a service or running a
+     * resolution hook propagate unchanged, including a missing nested dependency.
+     * An arbitrary parent's plain {@link IllegalArgumentException} is not enough
+     * evidence of absence and propagates. A provider returning null retains the
+     * existing {@link NullPointerException} behavior of {@link Optional#of(Object)}.
+     *
+     * @param <T> the service type
+     * @param type the service class
+     * @return the resolved service, or empty for a built-in missing binding
+     */
     @Override
     public <T> Optional<T> tryGet(Class<T> type) {
         try {
             return Optional.of(get(type));
-        } catch (IllegalArgumentException e) {
+        } catch (MissingBindingException missing) {
+            if (missing.provisioningFailure) {
+                throw missing;
+            }
             return Optional.empty();
         }
     }
@@ -283,6 +307,21 @@ public abstract class AbstractContainer implements IContainer {
         return PREFIX_CONTAINER + bindings.size() +
                 QUALIFIED_EQ + qualifiedBindings.size() +
                 HAS_PARENT_EQ + (parent != null) + BRACKET_CLOSE;
+    }
+
+    /**
+     * Internal absence signal. Public callers retain IllegalArgumentException
+     * compatibility; no exception type becomes part of the public container API.
+     */
+    private static final class MissingBindingException extends IllegalArgumentException {
+        private static final long serialVersionUID = 1L;
+
+        // Exceptions can be retained and rethrown by providers on another thread.
+        private volatile boolean provisioningFailure;
+
+        MissingBindingException(String message) {
+            super(message);
+        }
     }
 
     /** Child container implementation. */

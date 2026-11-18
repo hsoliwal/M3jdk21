@@ -129,6 +129,10 @@ public interface IContainer {
     /**
      * Get a service by type with qualifier.
      *
+     * <p>The legacy default delegates to unqualified lookup. Implementations that
+     * support qualifiers override this method; default child containers preserve
+     * that parent override, including its null and empty qualifier policy.</p>
+     *
      * @param <T>       the service type
      * @param type      the service class
      * @param qualifier the qualifier name
@@ -141,6 +145,12 @@ public interface IContainer {
 
     /**
      * Try to get a service (optional resolution).
+     *
+     * <p>This legacy default treats IllegalArgumentException as absence because
+     * arbitrary implementations historically used that exception for missing
+     * bindings. Implementations that can distinguish absence from provisioning
+     * failure should override this method. AbstractContainer supplies that
+     * distinction without swallowing provider or resolution-hook exceptions.</p>
      *
      * @param <T>  the service type
      * @param type the service class
@@ -187,6 +197,11 @@ public interface IContainer {
     /**
      * Create a child container (hierarchical scope).
      *
+     * <p>Unqualified bindings are evaluated once when bound and stored locally.
+     * Qualified lookup delegates to the parent without trimming, normalizing, or
+     * interpreting the qualifier. Unbound optional lookup delegates to the
+     * parent's optional-resolution policy.</p>
+     *
      * @return child container that delegates to parent for unbound types
      */
     default IContainer createChild() {
@@ -200,6 +215,19 @@ public interface IContainer {
                 @SuppressWarnings("unchecked")
                 T local = (T) bindings.get(type);
                 return local != null ? local : parent.get(type);
+            }
+
+            @Override
+            public <T> T get(Class<T> type, String qualifier) {
+                // Local bindings are unqualified; preserve the parent's qualifier policy.
+                return parent.get(type, qualifier);
+            }
+
+            @Override
+            public <T> Optional<T> tryGet(Class<T> type) {
+                @SuppressWarnings("unchecked")
+                T local = (T) bindings.get(type);
+                return local != null ? Optional.of(local) : parent.tryGet(type);
             }
 
             @Override
