@@ -11,4 +11,7 @@ class M3NativeWidgetParityTest {
     @Test void printPreviewPageableAndCaching() throws Exception {
         M3PrintPreviewSmoke.main(new String[0]);
     }
+    @Test void maxValueEnvelopeDoesNotDisappear() throws Exception {
+        M3OscilloscopeMaxEnvelopeSmoke.main(new String[0]);
+    }
 }

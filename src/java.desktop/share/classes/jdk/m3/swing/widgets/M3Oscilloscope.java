@@ -240,7 +240,7 @@ public final class M3Oscilloscope extends JComponent {
                 g.setColor(chosen == null ? getForeground() : chosen);
                 int previousX = -1, previousY = 0;
                 for (int x = width - plotted; x < width; x++) {
-                    if (pixelMin[x] == Integer.MAX_VALUE) continue;
+                    if (pixelMin[x] == Integer.MAX_VALUE && pixelMax[x] == Integer.MIN_VALUE) continue;
                     int yTop = project(pixelMax[x], height);
                     int yBottom = project(pixelMin[x], height);
                     if (previousX >= 0) {
