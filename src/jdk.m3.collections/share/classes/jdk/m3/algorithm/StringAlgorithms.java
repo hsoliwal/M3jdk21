@@ -410,9 +410,16 @@ public final class StringAlgorithms {
      */
     public static int[] suffixArray(String value) {
         Objects.requireNonNull(value, "value");
-        int[] units = new int[value.length()];
-        for (int i = 0; i < units.length; i++) units[i] = value.charAt(i);
-        return new IntSuffixArray(units).suffixes();
+        return IntSuffixArray.utf16(value).suffixes();
+    }
+
+    /**
+     * Reusable UTF-16 suffix index over existing immutable M3StringPiece,
+     * composite CharSequence or String data. Does not invoke toString/flatten.
+     * The suffix owner snapshots the exact code units at index-build time.
+     */
+    public static IntSuffixArray indexUtf16(CharSequence value) {
+        return IntSuffixArray.utf16(Objects.requireNonNull(value, "value"));
     }
 
     //FLLDCIM: FOLD 739221ead5fa AdvancedStringAlgorithms.lcpArray
