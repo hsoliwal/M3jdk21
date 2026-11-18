@@ -64,7 +64,7 @@ Collections make overloading inherently non-uniform. The compiler must distingui
 
 | Type family | Potential M3 operator | Required explicit contract | Initial status |
 | --- | --- | --- | --- |
-| `List<E>`, ordered sequences | `a + b` | Ordered concatenation into a new logical composition, maintaining source order and duplicates | Design HOLD |
+| `List<E>`, ordered sequences | `a + b` | Ordered concatenation into a new logical composition, maintaining source order and duplicates | Java 21 named-default candidate; syntax HOLD |
 | `Set<E>` | Union, intersection, difference, symmetric difference | Typed set algebra; preserve equality, iteration/comparator contracts | Design HOLD |
 | `Map<K,V>` | `a + b` | Explicit key collision policy and retention of map ordering/comparator semantics | No implicit default |
 | Primitive/offset arrays | `a + b` | Explicit concatenation view or materialization policy, bounds, aliasing, copy/JNI ownership | Design HOLD |
@@ -104,6 +104,36 @@ inputs fail closed. These are candidate-level checks only, not full JDK
 source-build, installed-image or cross-platform admission. The ordered gate is
 still `String → arrays → collections → AST/compiler → remaining`; symbolic
 lowering and promotion remain on HOLD.
+
+### Generic list named-default candidate (2026-11-18)
+
+The additive `jdk.m3.collections.SequenceOperatorViews` class makes the
+generic case explicit without modifying `java.util.List`, existing M3JDK
+collections, or their binary method descriptors:
+
+```java
+List<String> view = SequenceOperatorViews
+    .asSequenceOperator(left)
+    .plus(right);
+```
+
+`SequenceOperator<E>` is a functional capability interface with an overridable
+default `plus(List<? extends E>)`. The result retains an immutable array of
+**source-list references**, not copied elements, and is a live, read-only
+ordered composition. Nested concatenations flatten descriptors, with `get`
+using the current lengths as offsets. Duplicate and null elements retain their
+positions. The view implements `RandomAccess` only when all source segments do;
+its iterator delegates each backing iterator, and its spliterator acquires
+them lazily. Backing concurrency and mutation retain their source-dependent
+fail-fast guarantees; no stronger global atomic snapshot is promised.
+
+This generic-list default is not an implicit overload for all `List` classes,
+does not silently mutate either operand and does not compete with primitive
+set algebra. The Java 21 source compiler accepts only named calls; symbolic
+syntax requires a separately qualified attributed M3 compiler gate. This is
+a source-compiled and executable candidate, **not** full M3JDK receiving
+or JDK compatibility admission. The same ordered String/array/collection
+gate remains effective.
 
 Future symbols are enabled only by explicit M3 language mode and an attributed, unambiguous capability or adapter match. A `List`/matrix ambiguity, `Map` collision without a policy, absent capability, or uncertain effect contract is a compile-time diagnostic—not a guessed overload. Ordinary Java 21 collection code remains byte-for-byte and behaviorally compatible.
 
