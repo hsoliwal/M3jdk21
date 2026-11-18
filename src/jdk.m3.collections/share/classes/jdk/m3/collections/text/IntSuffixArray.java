@@ -55,9 +55,38 @@ public final class IntSuffixArray {
     private final int[] lcpToLeftBoundary;
     private final int[] lcpToRightBoundary;
 
+    /** Snapshot the whole integer-token source. The caller retains ownership of its array. */
     public IntSuffixArray(int[] source) {
+        this(Objects.requireNonNull(source, "source"), false);
+    }
+
+    /** Snapshot exactly one caller-selected integer-token window. */
+    public IntSuffixArray(int[] source, int offset, int length) {
+        this(copyWindow(source, offset, length), true);
+    }
+
+    private static int[] copyWindow(int[] source, int offset, int length) {
         Objects.requireNonNull(source, "source");
-        tokens = source.clone();
+        Objects.checkFromIndexSize(offset, length, source.length);
+        return Arrays.copyOfRange(source, offset, offset + length);
+    }
+
+    /**
+     * Build the existing signed-integer suffix index over UTF-16 code units
+     * read directly from a String, frozen M3StringPiece or other CharSequence.
+     * No intermediate String or char[] is created; one owned int[] is populated.
+     * Exact code units are preserved, including NUL and unpaired surrogates.
+     */
+    public static IntSuffixArray utf16(CharSequence source) {
+        Objects.requireNonNull(source, "source");
+        int[] units = new int[source.length()];
+        for (int i = 0; i < units.length; i++) units[i] = source.charAt(i);
+        return new IntSuffixArray(units, true);
+    }
+
+    /** Only internally materialized arrays may bypass the defensive copy. */
+    private IntSuffixArray(int[] source, boolean owned) {
+        tokens = owned ? source : source.clone();
         int length = tokens.length;
         suffixAtRank = new int[length];
         rankOfSuffix = new int[length];
@@ -189,13 +218,48 @@ public final class IntSuffixArray {
 
     public Range prefixRange(int[] pattern) {
         Objects.requireNonNull(pattern, "pattern");
-        int low = lowerBound(pattern, false);
-        int high = lowerBound(pattern, true);
+        return prefixRange(pattern, 0, pattern.length);
+    }
+
+    /** LCP-accelerated lookup over a caller-owned integer-token pattern window. */
+    public Range prefixRange(int[] pattern, int offset, int length) {
+        Objects.requireNonNull(pattern, "pattern");
+        Objects.checkFromIndexSize(offset, length, pattern.length);
+        return rangeOf(pattern, null, offset, length);
+    }
+
+    /**
+     * LCP-accelerated UTF-16 lookup without flattening or copying the query.
+     * Named distinctly so existing prefixRange(null) call sites remain source-compatible.
+     */
+    public Range utf16PrefixRange(CharSequence pattern) {
+        Objects.requireNonNull(pattern, "pattern");
+        return utf16PrefixRange(pattern, 0, pattern.length());
+    }
+
+    /** Half-open UTF-16 code-unit query window, without String/subSequence allocation. */
+    public Range utf16PrefixRange(CharSequence pattern, int offset, int length) {
+        Objects.requireNonNull(pattern, "pattern");
+        Objects.checkFromIndexSize(offset, length, pattern.length());
+        return rangeOf(null, pattern, offset, length);
+    }
+
+    private Range rangeOf(int[] numbers, CharSequence characters, int offset, int length) {
+        int low = lowerBound(numbers, characters, offset, length, false);
+        int high = lowerBound(numbers, characters, offset, length, true);
         return new Range(low, high);
     }
 
     public boolean contains(int[] pattern) {
         return !prefixRange(pattern).isEmpty();
+    }
+
+    public boolean contains(int[] pattern, int offset, int length) {
+        return !prefixRange(pattern, offset, length).isEmpty();
+    }
+
+    public boolean utf16Contains(CharSequence pattern) {
+        return !utf16PrefixRange(pattern).isEmpty();
     }
 
     public long payloadBytes() {
@@ -221,7 +285,8 @@ public final class IntSuffixArray {
         return Math.min(left, right);
     }
 
-    private int lowerBound(int[] pattern, boolean afterEqualPrefix) {
+    private int lowerBound(int[] numbers, CharSequence characters,
+            int offset, int length, boolean afterEqualPrefix) {
         int low = -1;
         int high = suffixAtRank.length;
         int leftMatched = 0;
@@ -243,7 +308,8 @@ public final class IntSuffixArray {
                 else high = middle;
                 continue;
             } else {
-                long comparison = compareSuffixFrom(suffixAtRank[middle], pattern, known);
+                long comparison = compareSuffixFrom(
+                        suffixAtRank[middle], numbers, characters, offset, length, known);
                 compared = (int) comparison;
                 matched = (int) (comparison >>> Integer.SIZE);
             }
@@ -260,15 +326,18 @@ public final class IntSuffixArray {
     }
 
     /** Pack exact matched length and signed comparison into a primitive result, with no object. */
-    private long compareSuffixFrom(int suffix, int[] pattern, int matched) {
+    private long compareSuffixFrom(int suffix, int[] numbers, CharSequence characters,
+            int offset, int length, int matched) {
         int available = tokens.length - suffix;
-        int limit = Math.min(available, pattern.length);
+        int limit = Math.min(available, length);
         while (matched < limit) {
-            int compared = Integer.compare(tokens[suffix + matched], pattern[matched]);
+            int queryUnit = numbers != null
+                    ? numbers[offset + matched] : characters.charAt(offset + matched);
+            int compared = Integer.compare(tokens[suffix + matched], queryUnit);
             if (compared != 0) return packComparison(matched, compared);
             matched++;
         }
-        return packComparison(matched, pattern.length <= available ? 0 : -1);
+        return packComparison(matched, length <= available ? 0 : -1);
     }
 
     private static long packComparison(int matched, int compared) {
