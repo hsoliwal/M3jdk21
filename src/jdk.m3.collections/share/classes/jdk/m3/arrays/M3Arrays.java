@@ -12,6 +12,77 @@ import java.util.Objects;
 public final class M3Arrays {
     private M3Arrays() {}
 
+    /**
+     * Opt-in named concatenation for byte views. The default delegates to the
+     * canonical segmented join; it neither mutates nor materializes operands.
+     */
+    @FunctionalInterface
+    public interface ByteSequenceOperator {
+        ByteArrayView source();
+
+        default ByteArrayView plus(ByteArrayView right) {
+            return M3Arrays.join(
+                    Objects.requireNonNull(source(), "source"),
+                    Objects.requireNonNull(right, "right"));
+        }
+    }
+
+    /** Opt-in named UTF-16 composition; source code-unit coordinates are preserved. */
+    @FunctionalInterface
+    public interface Utf16SequenceOperator {
+        Utf16ArrayView source();
+
+        default Utf16ArrayView plus(Utf16ArrayView right) {
+            return M3Arrays.join(
+                    Objects.requireNonNull(source(), "source"),
+                    Objects.requireNonNull(right, "right"));
+        }
+    }
+
+    /** Opt-in named primitive-int composition through the existing offset-array owner. */
+    @FunctionalInterface
+    public interface IntSequenceOperator {
+        IntArrayView source();
+
+        default IntArrayView plus(IntArrayView right) {
+            return M3Arrays.join(
+                    Objects.requireNonNull(source(), "source"),
+                    Objects.requireNonNull(right, "right"));
+        }
+    }
+
+    /** Opt-in named primitive-long composition through the existing offset-array owner. */
+    @FunctionalInterface
+    public interface LongSequenceOperator {
+        LongArrayView source();
+
+        default LongArrayView plus(LongArrayView right) {
+            return M3Arrays.join(
+                    Objects.requireNonNull(source(), "source"),
+                    Objects.requireNonNull(right, "right"));
+        }
+    }
+
+    public static ByteSequenceOperator asByteSequenceOperator(ByteArrayView source) {
+        ByteArrayView checked = Objects.requireNonNull(source, "source");
+        return () -> checked;
+    }
+
+    public static Utf16SequenceOperator asUtf16SequenceOperator(Utf16ArrayView source) {
+        Utf16ArrayView checked = Objects.requireNonNull(source, "source");
+        return () -> checked;
+    }
+
+    public static IntSequenceOperator asIntSequenceOperator(IntArrayView source) {
+        IntArrayView checked = Objects.requireNonNull(source, "source");
+        return () -> checked;
+    }
+
+    public static LongSequenceOperator asLongSequenceOperator(LongArrayView source) {
+        LongArrayView checked = Objects.requireNonNull(source, "source");
+        return () -> checked;
+    }
+
     public static ByteArrayView bytes(byte[] source) {
         return new ByteSnapshot(Objects.requireNonNull(source, "source").clone());
     }

@@ -5,7 +5,7 @@
 | Field | Value |
 | --- | --- |
 | Proposal | `M3JEP-LANG-001` (Synexia internal, **not** an OpenJDK JEP number) |
-| State | **Draft / arithmetic, sequence, set and explicit-policy map named-default candidates; symbolic lowering HOLD** |
+| State | **Draft / arithmetic, primitive-array, sequence, set and explicit-policy map named-default candidates; symbolic lowering HOLD** |
 | Author | Hitesh Soliwal and contributors to the Synexia Project |
 | Kind | M3JDK21 opt-in feature candidate |
 | Inspiration | Kotlin, Scala, C++ (ideas only; no third-party source copied) |
@@ -67,7 +67,7 @@ Collections make overloading inherently non-uniform. The compiler must distingui
 | `List<E>`, ordered sequences | `a + b` | Ordered concatenation into a new logical composition, maintaining source order and duplicates | Java 21 named-default candidate; syntax HOLD |
 | `Set<E>` | Union, intersection, difference, symmetric difference | Explicit equality policy; no implicit identity/comparator coercion | Java 21 equals-policy named-default candidate; other policies and syntax HOLD |
 | `Map<K,V>` | `a + b` | Explicit key collision and key-identity policy; no inferred source comparator | Java 21 policy-required named-default candidate; implicit default and syntax HOLD |
-| Primitive/offset arrays | `a + b` | Explicit concatenation view or materialization policy, bounds, aliasing, copy/JNI ownership | Design HOLD |
+| Primitive/offset arrays | `a + b` | Explicit non-materializing concatenation views, bounds, snapshot ownership and copy boundary | Java 21 named-default candidate; syntax HOLD |
 | Numeric vectors/matrices | `a + b` | Element-wise typed arithmetic, shape/broadcast contract and overflow/rounding policy | Design HOLD |
 | Indexed containers | `a[i]` | Explicit read/write capability, index type, bounds and side-effect rules | Design HOLD |
 
@@ -221,6 +221,53 @@ live views, snapshot traversal and overridable named default dispatch.
 This is an additive named Java 21 library **candidate**; ordinary Java 21
 still has no map `+` operator and the M3 compiler's symbolic lowering remains
 HOLD under the ordered receiving gates.
+
+### Immutable primitive-array named-default candidate (2026-11-18)
+
+The existing `jdk.m3.arrays.M3Arrays` source owner now offers four opt-in
+functional capabilities with exactly one `source()` method and an overridable
+Java 21 `default plus(view)` method:
+
+```java
+IntArrayView numbers = M3Arrays.asIntSequenceOperator(
+    M3Arrays.ints(new int[] {1, 2}))
+    .plus(M3Arrays.ints(new int[] {3}));
+Utf16ArrayView text = M3Arrays.asUtf16SequenceOperator(
+    M3Arrays.stringView("Hello"))
+    .plus(M3Arrays.stringView(" world"));
+ByteArrayView bytes = M3Arrays.asByteSequenceOperator(leftBytes).plus(rightBytes);
+LongArrayView longs = M3Arrays.asLongSequenceOperator(leftLongs).plus(rightLongs);
+```
+
+`ByteSequenceOperator`, `Utf16SequenceOperator`, `IntSequenceOperator`
+and `LongSequenceOperator` are nested public interfaces of `M3Arrays`.
+Factories reject null sources; defaults reject null sources/operands and
+dispatch to the existing typed `M3Arrays.join` owners. The resulting
+composition retains immutable *view references* with cumulative `int[]`
+end offsets; indexed access uses the existing upper-bound binary search,
+including repeated offsets from empty segments. Arithmetic length overflow
+remains `Math.addExact` failure. The new defaults introduce no second backing
+array store, mutation, JNI pointer exposure or implicit materialization.
+
+`M3Arrays.bytes/ints/longs/chars` **snapshot** caller-owned primitive
+arrays on entry; `stringView(String)` explicitly shares an immutable String
+owner. View `copy()` and `copyTo` are export boundaries producing mutable
+arrays only on request. Byte and char buffer descriptors remain read-only.
+UTF-16 composition keeps Java code-unit coordinates and exact compositional
+hash and code-point facts even when a surrogate pair crosses a segment seam.
+Segment-layout identity is not guaranteed by content equality.
+
+The Java 21 source differential self-test passes **5,611 assertions** on
+byte, UTF-16, int and long views: 400 seeded randomized concatenations
+against ordinary primitive arrays, boundary and seam slices, source snapshot
+isolation, null/overflow/bounds, overridable defaults, read-only buffers,
+Unicode and 63/64/65–127/128/129-segment coverage. The paired Synexia
+hash-pinned Java LST and text recipes require the exact previous
+`M3Arrays.java` and JEP SHA-256 preimages, and must refuse stale sources or
+duplicate target paths. This establishes a bounded named-default *candidate*,
+not a source-built JDK/JTReg/JNI/GC/native/ABI performance qualification.
+No `byte[] + byte[]`, `int[] + int[]`, or other symbolic array `+` is
+available in ordinary Java 21; any future opt-in lowering remains HOLD.
 
 Future symbols are enabled only by explicit M3 language mode and an attributed, unambiguous capability or adapter match. A `List`/matrix ambiguity, `Map` collision without a policy, absent capability, or uncertain effect contract is a compile-time diagnostic—not a guessed overload. Ordinary Java 21 collection code remains byte-for-byte and behaviorally compatible.
 
