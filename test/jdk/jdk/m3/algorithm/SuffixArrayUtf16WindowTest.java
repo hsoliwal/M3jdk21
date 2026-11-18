@@ -8,11 +8,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.util.Arrays;
 import java.util.Random;
 import jdk.m3.collections.text.IntSuffixArray;
-import jdk.m3.text.LocalM3Arena;
-import jdk.m3.text.M3StringPiece;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -45,11 +42,23 @@ final class SuffixArrayUtf16WindowTest {
     }
 
     @Test
-    void indexedCompositeM3StringNeverFlattens() {
-        LocalM3Arena arena = new LocalM3Arena();
-        M3StringPiece joined = M3StringPiece.join(
-                arena.copyUtf16(new char[] {'b', 0, 'a'}),
-                arena.copyUtf16(new char[] {(char) 0xD800, 'b', (char) 0xDFFF}));
+    void indexedCompositeUtf16ViewNeverFlattens() {
+        CharSequence first = noFlatten(new char[] {'b', 0, 'a'});
+        CharSequence second = noFlatten(new char[] {(char) 0xD800, 'b', (char) 0xDFFF});
+        CharSequence joined = new CharSequence() {
+            @Override public int length() { return first.length() + second.length(); }
+            @Override public char charAt(int index) {
+                if (index < 0 || index >= length()) throw new IndexOutOfBoundsException(index);
+                return index < first.length() ? first.charAt(index)
+                        : second.charAt(index - first.length());
+            }
+            @Override public CharSequence subSequence(int begin, int end) {
+                throw new AssertionError("composite view must not be flattened");
+            }
+            @Override public String toString() {
+                throw new AssertionError("composite view must not be flattened");
+            }
+        };
         int[] units = {'b', 0, 'a', 0xD800, 'b', 0xDFFF};
         IntSuffixArray index = StringAlgorithms.indexUtf16(joined);
         assertArrayEquals(new IntSuffixArray(units).suffixes(), index.suffixes());
