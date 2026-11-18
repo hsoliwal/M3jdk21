@@ -4,7 +4,6 @@
 package jdk.m3.collections.text;
 
 import java.util.Arrays;
-import java.util.Comparator;
 import java.util.Random;
 
 /**
@@ -154,7 +153,7 @@ public final class IntSuffixArrayDenseRankSelfTest {
         for (int i = 0; i < codeUnits.length; i++) {
             same(i, chars.suffixAtRank(i), "full UTF-16 domain suffix");
             same(i, chars.rankOfSuffix(i), "full UTF-16 inverse rank");
-            same(i == 0 ? 0 : 0, chars.lcpAtRank(i), "unique code-unit LCP");
+            same(0, chars.lcpAtRank(i), "unique code-unit LCP");
         }
         same(new IntSuffixArray.Range(0xD800, 0xD801),
                 chars.prefixRange(new int[] {0xd800}), "surrogate code-unit lookup");
