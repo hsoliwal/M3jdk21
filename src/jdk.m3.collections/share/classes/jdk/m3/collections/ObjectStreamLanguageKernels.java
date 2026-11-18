@@ -28,8 +28,8 @@ final class ObjectStreamLanguageKernels {
         return StreamSupport.stream(output, false).onClose(input::close);
     }
 
-    static <T, R> Stream<R> mapIndexed(Stream<T> input,
-            ObjectStream.IndexedMapper<? super T, ? extends R> mapper) {
+    static <T, R> Stream<R> mapIndexedOrdinalFirst(Stream<T> input,
+            ObjectStream.OrdinalFirstMapper<? super T, ? extends R> mapper) {
         Iterator<T> source = input.iterator();
         Spliterator<R> output = new Spliterators.AbstractSpliterator<>(
                 Long.MAX_VALUE, Spliterator.ORDERED) {

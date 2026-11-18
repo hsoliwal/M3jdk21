@@ -20,9 +20,13 @@ final class ObjectStreamLanguageContractTest {
     @Test void indexedAndAdjacentPreserveOrderAndResetOnReplay() {
         ObjectStream<String> source = ObjectStream.snapshot(Arrays.asList(null, "a", "bbb"));
         List<String> expected = List.of("0:null", "1:a", "2:bbb");
-        ObjectStream<String> indexed = source.mapIndexed((i, x) -> i + ":" + x);
+        ObjectStream<String> indexed =
+                source.mapIndexedOrdinalFirst((i, x) -> i + ":" + x);
         assertEquals(expected, indexed.toBoundedList(3));
         assertEquals(expected, indexed.toBoundedList(3));
+        assertEquals(List.of("null:0", "a:1", "bbb:2"),
+                source.mapIndexed((value, ordinal) -> value + ":" + ordinal)
+                        .toBoundedList(3));
         assertEquals(List.of(1, 2), source.zipWithNext((a, b) ->
                 b.length() - (a == null ? 0 : a.length())).toBoundedList(2));
         assertEquals(List.of(), ObjectStream.snapshot(List.of(1)).zipWithNext((a, b) -> b - a)
