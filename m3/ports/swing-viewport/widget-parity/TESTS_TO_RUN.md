@@ -133,3 +133,32 @@ primitive storage, proof bounds, donor hashes and remaining gates.
 
 See [GRID_ROW_GROUPS.md](GRID_ROW_GROUPS.md) for the sparse rank/select
 design, source SHA pins, commands, known restrictions and test evidence.
+
+## Native graphical month calendar / CDateTime popup (2026-11-18)
+
+| Gate | Status |
+|---|---|
+| New M3MonthView and additive M3DateTime code in both java.desktop and swing-viewport | SOURCE_BLOBS_IDENTICAL |
+| javac --release 21 -Xlint:all,-serial,-this-escape -Werror | LOCAL_PASS |
+| Existing M3DateTimeSmoke: bounds, immutable instant, zone and DST parse | LOCAL_PASS |
+| M3MonthViewCalendarSmoke: 42 cells, locale, bounds, 2000 month moves, action and date-time DST atomicity | LOCAL_PASS |
+| M3MonthViewHeadfulSmoke: JFrame/JPopupMenu mouse event, date commit, popup close/detach on Xvfb | XVFB_PASS |
+| Full Maven/JUnit & OpenJDK java.desktop reactor at exact branch head | NOT_RUN |
+| GUI pixel/event differentials on Win32, GTK, Cocoa and SwingX | NOT_RUN |
+| Accessibility screen-reader, RTL, and advanced Nebula CDateTime styles | NOT_RUN |
+| Canonical Synexia OpenRewrite sealed source recipe fixed-point | NOT_RUN |
+
+From m3/ports/swing-viewport root with JDK 21:
+
+```sh
+mkdir -p /tmp/m3-monthview
+javac --release 21 -Xlint:all,-serial,-this-escape -Werror -d /tmp/m3-monthview \
+  src/main/java/jdk/m3/swing/widgets/M3DateTime.java \
+  src/main/java/jdk/m3/swing/widgets/M3MonthView.java \
+  src/test/java/jdk/m3/swing/widgets/M3DateTimeSmoke.java \
+  src/test/java/jdk/m3/swing/widgets/M3MonthViewCalendarSmoke.java \
+  src/test/java/jdk/m3/swing/widgets/M3MonthViewHeadfulSmoke.java
+java -Djava.awt.headless=true -Xmx128m -cp /tmp/m3-monthview jdk.m3.swing.widgets.M3DateTimeSmoke
+java -Djava.awt.headless=true -Xmx128m -cp /tmp/m3-monthview jdk.m3.swing.widgets.M3MonthViewCalendarSmoke
+xvfb-run -a java -Djava.awt.headless=false -Xmx128m -cp /tmp/m3-monthview jdk.m3.swing.widgets.M3MonthViewHeadfulSmoke
+```
