@@ -1,0 +1,60 @@
+{
+  "schema": "M3JDK21_RECIPE_FIRST_RECEIVER_HOLD_V1",
+  "spdx_file_copyright_text": "2026 Hitesh Soliwal and Contributors to the Synexia Project",
+  "spdx_license_identifier": "Apache-2.0",
+  "status": "HOLD_CANONICAL_OPENREWRITE_EXECUTION_PENDING",
+  "observed_date": "2026-11-18",
+  "product_repository": "hsoliwal/M3jdk21",
+  "product_base_commit": "919058ad9c412e4ef799e167e58ef81e479fca33",
+  "canonical_workspace": "hsoliwal/com.synexia",
+  "canonical_recipe_pr": "https://github.com/hsoliwal/com.synexia/pull/18814",
+  "canonical_recipe_head": "9a22e8f30ac5bbefe7311769539797b5a4979125",
+  "canonical_recipe_id": "com.synexia.m3.M3JdkLongSortedReversePage20261118",
+  "canonical_recipe_crate": "synexia-openrewrite-recipes/crates/m3jdk21-long-sorted-reverse-page-20261118",
+  "scope": "ADDITIVE_BOUNDED_PRIMITIVE_SORTED_REVERSE_PAGE",
+  "source_owner": "src/jdk.m3.collections/share/classes/jdk/m3/collections/LongSortedViews.java",
+  "source_preimage_git_blob_sha1": "267dcca662a938a98017fbf359fd200e634dfd93",
+  "source_preimage_sha256": "f58242823175dfaa3d49ed3de127d7c7cb2af5309f9cec34f593060e74377ff3",
+  "unreceived_source_postimage_sha256": "8fd7ce2675a3923b1b5f005be03cc887d90727ab0e73568079247fc72e54897a",
+  "unreceived_jtreg_path": "test/jdk/jdk/m3/collections/LongSortedViewsReversePageTest.java",
+  "unreceived_jtreg_sha256": "443afce2d43e8cfd7069a5de23292f544450a1d5452aedece5d6caea2e62e617",
+  "algorithm_category": "SORTED_LONG_REVERSE_VIEWPORT",
+  "selected_existing_owners": [
+    "jdk.m3.collections.LongSortedViews",
+    "jdk.m3.collections.LongSortedSet",
+    "jdk.m3.collections.LongFilteredView",
+    "jdk.m3.collections.LongTreeSet"
+  ],
+  "jni_disposition": "HOLD_JAVA_PREDICATE_CALLBACKS",
+  "qualification": {
+    "standalone_java21_independent_reference": {
+      "status": "PASS",
+      "checked_comparisons": 1044000,
+      "reference": "TreeSet.descendingSet backed adapter",
+      "limitation": "does not exercise real JDK module or OpenRewrite"
+    },
+    "canonical_maven_openrewrite": {
+      "status": "QUEUED_NOT_EXECUTED_AT_RECEIPT",
+      "github_actions_run_id": 44318309177,
+      "workflow": "M3JDK21 descending primitive page OpenRewrite qualification"
+    },
+    "canonical_recipe_fixed_point_and_refusal": "NOT_VERIFIED",
+    "product_module_compilation": "NOT_RUN",
+    "product_jtreg": "NOT_RUN",
+    "old_client_api_binary_compatibility": "NOT_RUN",
+    "installed_image_runtime": "NOT_RUN",
+    "native_jni_abi": "NO_NEW_NATIVE_SYMBOL",
+    "setup_inclusive_benchmark": "NOT_RUN",
+    "ordered_sdk_admission": "HOLD"
+  },
+  "received_product_java_postimages": 0,
+  "received_product_jtreg_sources": 0,
+  "canonical_mutation_authority": false,
+  "product_promotion_authority": false,
+  "notes": [
+    "This data-only receiving record does not install source or claim SDK integration.",
+    "The existing OpenJDK and M3 source license and API owners remain unchanged.",
+    "No executable recipe, fixture, template or improvement memory is copied into the public product.",
+    "Canonical source postimages may only be received after actual recipe execution and independent target gates."
+  ]
+}
