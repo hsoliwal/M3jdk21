@@ -1,0 +1,4 @@
+# path	before	after	template
+m3/tooling/atom-census/src/main/java/jdk/m3/tooling/atoms/contract/M3ImpactFrontier.java	ABSENT	c1148ff65efd2b1ec5ca4dbe13ea695e27f3a44a09f20f6dbdb1475124a9800c	M3ImpactFrontier.java.txt
+m3/tooling/atom-census/src/test/java/jdk/m3/tooling/atoms/contract/M3ImpactFrontierContractTest.java	ABSENT	c4d6f7a034e8a4b7809f4bcc133062e07c259a2452e1c2dca02b60ecdcd977c6	M3ImpactFrontierContractTest.java.txt
+m3/tooling/atom-census/src/test/java/jdk/m3/tooling/atoms/contract/M3ImpactFrontierSelfTest.java	ABSENT	fcda4875d095c61fd491c73e9ea73d324270a9cfa1830912f15fdfd24b3ac8f9	M3ImpactFrontierSelfTest.java.txt
