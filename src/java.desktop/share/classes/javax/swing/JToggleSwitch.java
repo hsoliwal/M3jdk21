@@ -146,7 +146,11 @@ public class JToggleSwitch extends JToggleButton {
         refreshSwitchIcon();
     }
 
-    /** @return the text displayed inside the selected switch */
+    /**
+     * Returns the text displayed inside the selected switch.
+     *
+     * @return the text displayed inside the selected switch
+     */
     public String getOnText() {
         return onText;
     }
@@ -166,7 +170,11 @@ public class JToggleSwitch extends JToggleButton {
         }
     }
 
-    /** @return the text displayed inside the unselected switch */
+    /**
+     * Returns the text displayed inside the unselected switch.
+     *
+     * @return the text displayed inside the unselected switch
+     */
     public String getOffText() {
         return offText;
     }
@@ -186,7 +194,11 @@ public class JToggleSwitch extends JToggleButton {
         }
     }
 
-    /** @return whether the state text is displayed inside the switch */
+    /**
+     * Returns whether the state text is displayed inside the switch.
+     *
+     * @return whether the state text is displayed inside the switch
+     */
     public boolean isStateTextVisible() {
         return stateTextVisible;
     }
@@ -204,7 +216,11 @@ public class JToggleSwitch extends JToggleButton {
         }
     }
 
-    /** @return the selected track color, or {@code null} for a UI default */
+    /**
+     * Returns the selected track color, or {@code null} for a UI default.
+     *
+     * @return the selected track color, or {@code null} for a UI default
+     */
     public Color getOnColor() {
         return onColor;
     }
@@ -223,7 +239,11 @@ public class JToggleSwitch extends JToggleButton {
         }
     }
 
-    /** @return the unselected track color, or {@code null} for a UI default */
+    /**
+     * Returns the unselected track color, or {@code null} for a UI default.
+     *
+     * @return the unselected track color, or {@code null} for a UI default
+     */
     public Color getOffColor() {
         return offColor;
     }
@@ -241,7 +261,11 @@ public class JToggleSwitch extends JToggleButton {
         }
     }
 
-    /** @return the thumb color, or {@code null} for a UI default */
+    /**
+     * Returns the thumb color, or {@code null} for a UI default.
+     *
+     * @return the thumb color, or {@code null} for a UI default
+     */
     public Color getThumbColor() {
         return thumbColor;
     }

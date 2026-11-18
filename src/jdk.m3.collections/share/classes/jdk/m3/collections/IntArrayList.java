@@ -206,25 +206,59 @@ public final class IntArrayList implements IntList {
             }
         };
     }
-    /** Lazy over this owner; no boxing and one primitive chunk per logical interval. */
+    /**
+     * Late-binding, fail-fast, primitive index-range traversal. Parallel streams
+     * can now partition the original int[] without boxing or copying values.
+     * Every child owns only two integer offsets and a captured structural epoch.
+     */
     @Override public Spliterator.OfInt intSpliterator() {
-        return new Spliterator.OfInt() {
-            private int index, fence = -1, expected;
-            private void bind() {
-                if (fence < 0) { expected = epoch; fence = size; }
-                if (epoch != expected) throw new ConcurrentModificationException();
+        return new ArrayIntSpliterator(0, -1, 0);
+    }
+
+    private final class ArrayIntSpliterator implements Spliterator.OfInt {
+        private int cursor;
+        private int fence;
+        private int expectedEpoch;
+
+        private ArrayIntSpliterator(int start, int fence, int expectedEpoch) {
+            this.cursor = start;
+            this.fence = fence;
+            this.expectedEpoch = expectedEpoch;
+        }
+
+        private void bind() {
+            if (fence < 0) {
+                expectedEpoch = epoch;
+                fence = size;
             }
-            @Override public boolean tryAdvance(IntConsumer action) {
-                Objects.requireNonNull(action, "action");
-                bind();
-                if (index >= fence) return false;
-                action.accept(data[index++]);
-                bind();
-                return true;
-            }
-            @Override public Spliterator.OfInt trySplit() { return null; }
-            @Override public long estimateSize() { bind(); return fence - index; }
-            @Override public int characteristics() { return ORDERED | SIZED | NONNULL; }
-        };
+            if (epoch != expectedEpoch) throw new ConcurrentModificationException();
+        }
+
+        @Override public Spliterator.OfInt trySplit() {
+            bind();
+            int middle = cursor + ((fence - cursor) >>> 1);
+            if (middle <= cursor) return null;
+            Spliterator.OfInt prefix = new ArrayIntSpliterator(cursor, middle, expectedEpoch);
+            cursor = middle;
+            return prefix;
+        }
+
+        @Override public boolean tryAdvance(IntConsumer action) {
+            Objects.requireNonNull(action, "action");
+            bind();
+            if (cursor >= fence) return false;
+            action.accept(data[cursor++]);
+            bind(); // callback mutation is observable before returning
+            return true;
+        }
+
+        @Override public long estimateSize() {
+            bind();
+            return fence - cursor;
+        }
+
+        @Override public int characteristics() {
+            return ORDERED | SIZED | SUBSIZED | NONNULL;
+        }
     }
 }

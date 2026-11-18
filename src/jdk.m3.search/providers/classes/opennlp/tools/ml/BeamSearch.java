@@ -86,7 +86,7 @@ public class BeamSearch implements SequenceClassificationModel {
    *
    * @param numSequences The number of sequences.
    * @param sequence The input {@link T} sequence.
-   * @param additionalContext An {@link Object[]} of additional context.
+   * @param additionalContext An {@link Object Object[]} of additional context.
    *     This is passed to the context generator blindly with the
    *     assumption that the context are appropriate.
    * @param minSequenceScore The minimum sequence score to use.
@@ -179,7 +179,7 @@ public class BeamSearch implements SequenceClassificationModel {
    *
    * @param numSequences The number of sequences.
    * @param sequence The input {@link T} sequence.
-   * @param additionalContext An {@link Object[]} of additional context.
+   * @param additionalContext An {@link Object Object[]} of additional context.
    *     This is passed to the context generator blindly with the
    *     assumption that the context are appropriate.
    * @param cg The {@link BeamSearchContextGenerator context generator} to use.
@@ -198,7 +198,7 @@ public class BeamSearch implements SequenceClassificationModel {
    * Computes the best sequence of outcomes based on the {@link MaxentModel}.
    *
    * @param sequence The input {@link T} sequence.
-   * @param additionalContext An {@link Object[]} of additional context.
+   * @param additionalContext An {@link Object Object[]} of additional context.
    *     This is passed to the context generator blindly with the
    *     assumption that the context are appropriate.
    * @param cg The {@link BeamSearchContextGenerator context generator} to use.

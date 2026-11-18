@@ -1,0 +1,27 @@
+id: m3jdk-mop-impact-frontier-20261118
+canonical_workspace: hsoliwal/com.synexia
+target_repository: hsoliwal/M3jdk21
+target_branch: master
+recipe: com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
+crate: m3jdk-impact-frontier-20261118
+target_namespace: m3/tooling/atom-census
+mode: exact-absent-source-postimage
+scope: FILE
+contract: preserve-all-openjdk-and-jni-public-contracts
+proof:
+  - source_sha256
+  - template_byte_identity
+  - deterministic_graph_and_seed_permutation
+  - same_file_and_downstream_closure
+  - java_jni_boundary_blockers
+  - javac_release21_lint_all_werror
+  - junit_contract
+  - recipe_second_pass_fixed_point
+  - source_drift_refusal
+pending:
+  - hosted_maven_openrewrite
+  - whole_jdk_image
+  - runtime_jni_abi
+  - measured_performance
+mutation_authority: false
+promotion_authority: false

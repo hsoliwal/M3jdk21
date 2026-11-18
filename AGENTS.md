@@ -1,5 +1,10 @@
 <!-- SPDX-License-Identifier: Apache-2.0 -->
 
+## Priority 0 — MOP SDK core source invariant (2026-11-18)
+
+Before generating or changing code, follow [MOP SDK core invariants](doc/mop-sdk-core-invariants.md): top-down repository -> project -> module -> package -> file -> declarations/atoms inventory and contract freeze; bottom-up atom -> file -> package/interface -> module -> project -> system patternization with dependency-closed, proof-gated promotion. Model each file as documented meaningful private/static/instance atoms composed by higher methods where semantically safe; explicitly record NO_SAFE_EXTRACTION when necessary. Independent sealed files may be prepared concurrently, but each file has one writer and serial verified refinement. Preserve JDK/HotSpot/JNI public interfaces, effects, behavior, native lifecycle, existing owners, original rights and qualified additive history. The M3JDK21 product receives only source-sealed, executed Synexia recipe postimages and target-native tests; no recipe or memory store is copied here. No source, API, optimality or runtime claim may be promoted from documentation or unrun tests alone.
+
+
 ## Owner merge directive — history-complete additive superset (2026-11-18)
 
 For every candidate change, treat earlier verified M3/JDK capabilities and upstream-compatible behavior as a protected subset. Inspect applicable historical commits, branches, tags, PRs, renamed paths, source blobs and tests back to available roots before proposing a merge; a merged PR or ancestry alone is not proof of delivered source. Recover losses via the canonical Synexia source-sealed recipe. Choose the best compatible atoms and add API only with source, binary, reflective and behavioral gates. Keep JDK product code and target tests here; keep history-loss review and its dated last-checked ledger in `hsoliwal/com.synexia`, not this clean-output repository. Preserve OpenJDK and every third-party license/NOTICE; Apache-2.0 for separately original, eligible work does not relicense GPLv2/OpenJDK material. Independently developed algorithms must not copy protected donor code or bypass patents.
@@ -33,6 +38,16 @@ receipts or qualification evidence in this repository.
 
 
 
+
+## Priority 0 — MOP SDK documented-atom and pattern invariant (2026-11-18)
+
+For every source-changing JDK/SDK coding task, follow the [canonical Synexia MOP SDK invariant](https://github.com/hsoliwal/com.synexia/blob/develop/docs/M3-SCALE/invariants/SYNEXIA-MOP-SDK-CORE-INVARIANTS-1.md), together with the existing file-atom, recipe-first and M3Scale locked rules. MOP means **contract-sealed top-down inventory and atomization** (repository -> project -> module -> package/interface -> file -> fields/methods/native symbols -> behavioral atoms), followed by **bottom-up multipass patternization** (verified atoms -> file -> package/interface and callers -> module -> project -> repository/installed SDK). Every newly affected dependency requires a fresh downward discovery pass before upward promotion.
+
+Independent files may have bounded parallel **candidate preparation** only when their writes/effects are conflict-free; mutation review inside each file and canonical owner promotion remain serial and externally proof-gated. Prefer documented private/private-static implementation atoms and higher-level composition only when language, API, ABI, reflection, stack/effect, JNI/GC, performance and behavior contracts allow them. Never extract helpers solely to satisfy a form. Require actual catalogue patterns, documented contracts, algorithm/data-structure identities, owning Synexia recipes and reproducible qualification; do not let an LLM, pattern label, similarity hash or finite test claim code is inherently optimal. **Only Synexia** owns recipes and their evidence/memory; M3JDK21 receives qualified JDK product postimages and target-native tests. The clean-output, licensing and receiving-order rules above remain controlling.
+
+### Machine-tagged semantic-pattern residue
+
+Every source owner must attempt exact, versioned lookup of **known algorithms and patterns** before any transformation. Classify recognized candidates as `KNOWN_ALGORITHM` or `KNOWN_PATTERN` only when the canonical Synexia catalogue supplies stable identity, typed roles, applicability/contract/effect constraints and relevant proof. Otherwise record `UNKNOWN_ALGORITHM`, `UNKNOWN_PATTERN` or `UNPROVEN_MATCH` in the **private Synexia semantic inventory** with exact revision, symbol/atom, dependencies, effects, provenance, refusal reason and review state; link those facts from valid Javadoc/docstrings or an already supported annotation where safe. Never invent a Java annotation, alter JDK source just to mark an unknown, or treat a hash/LLM label as correctness. Unresolved novelty remains candidate-only until a versioned recognizer, validator, template, independent tests and owner approval establish admissibility. Keep M3JDK21's clean-output rule intact; this AGENTS policy change supplies no runtime implementation or proof. See [canonical pending MOP-13](https://github.com/hsoliwal/com.synexia/pull/18784).
 
 ## Priority 0 — additive best-of-best API superset, full-history merge custody (2026-11-18)
 
@@ -286,6 +301,25 @@ evidence. Retain negative fixtures for unsafe additions. Existing ProgressMonito
 and monitored-I/O owners are the implementation examples; no parallel API family
 is required. Recipes and proof records remain exclusively in Synexia; product
 sources, documentation and target regression tests are received here.
+
+## MOP SDK cross-repository agent read gate (2026-11-18)
+<!-- MOP-AGENT-2026-11-18-1 -->
+Before any source analysis, refactor, PR, merge, licensing decision, or history checkpoint, also read [AGENT.md](AGENT.md). It governs bidirectional atomization/patternization, documented contract-sealed atoms, additive best-of-best API supersets, complete available-history loss checks, dated last-verified proof, Apache-2.0 eligibility and upstream rights. Existing stronger project-specific and locked-canon constraints remain in force. Installation of this pointer does not establish that a source or historical audit has run.
+
+## M3 source as a documented semantic algebra (2026-11-18)
+
+Before any LLM-assisted change, read
+[`M3-MOP-SEMANTIC-ALGEBRA/1`](m3/docs/M3_SEMANTIC_ATOM_ALGEBRA_20261118.md).
+Descend repository -> file -> meaningful contract-bound atoms, recognize
+catalogued patterns, then recompose and verify affected parent boundaries.
+Use the canonical **Synexia-owned Maven/OpenRewrite recipe** and its recorded
+correction-memory/algorithm decisions; M3JDK21 receives only source,
+tests, accepted contracts and passive provenance/qualification receipts.
+File-local mutation is serial even when independent analyses fan out.
+Unknown patterns, missing evidence, native/JNI proof and unverified API
+changes remain HOLD, never silently PASS. Use the existing
+[`M3ImpactFrontier`](m3/tooling/atom-census/contract/M3_IMPACT_FRONTIER_V1.md)
+for read-only dependency impact planning; it grants no change authority.
 
 
 ## Superset merge and history-audit rule (2026-11-18)
