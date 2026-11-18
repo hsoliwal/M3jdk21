@@ -565,6 +565,37 @@ final class M3String implements CharSequence {
         return joinValues(pieces);
     }
 
+    /**
+     * Scala-style margin removal by retaining exact canonical source ranges. No
+     * whole-string copy is made; line breaks remain part of the original owner.
+     * Prefix units U+0000 through U+0020 are skipped only while they differ
+     * from the requested marker (which itself may be whitespace).
+     */
+    M3String stripMargin(char marginChar) {
+        int sourceLength = length();
+        ArrayList<M3String> pieces = null;
+        int retainedStart = 0;
+        for (int start = 0; start < sourceLength;) {
+            int end = start;
+            while (end < sourceLength && charAt(end) != '\r' && charAt(end) != '\n') end++;
+            int marker = start;
+            while (marker < end && charAt(marker) <= ' '
+                    && charAt(marker) != marginChar) marker++;
+            if (marker < end && charAt(marker) == marginChar) {
+                if (pieces == null) pieces = new ArrayList<>();
+                if (retainedStart < start) pieces.add(slice(retainedStart, start));
+                if (marker + 1 < end) pieces.add(slice(marker + 1, end));
+                retainedStart = end;
+            }
+            start = end == sourceLength ? end
+                    : charAt(end) == '\r' && end + 1 < sourceLength
+                            && charAt(end + 1) == '\n' ? end + 2 : end + 1;
+        }
+        if (pieces == null) return this;
+        if (retainedStart < sourceLength) pieces.add(slice(retainedStart, sourceLength));
+        return joinValues(pieces);
+    }
+
     M3String stripIndent() {
         int sourceLength = length();
         if (sourceLength == 0) return EMPTY;
