@@ -410,9 +410,16 @@ public final class StringAlgorithms {
      */
     public static int[] suffixArray(String value) {
         Objects.requireNonNull(value, "value");
-        int[] units = new int[value.length()];
-        for (int i = 0; i < units.length; i++) units[i] = value.charAt(i);
-        return new IntSuffixArray(units).suffixes();
+        return IntSuffixArray.utf16(value).suffixes();
+    }
+
+    /**
+     * Reusable UTF-16 suffix index over existing immutable M3StringPiece,
+     * composite CharSequence or String data. Does not invoke toString/flatten.
+     * The suffix owner snapshots the exact code units at index-build time.
+     */
+    public static IntSuffixArray indexUtf16(CharSequence value) {
+        return IntSuffixArray.utf16(Objects.requireNonNull(value, "value"));
     }
 
     //FLLDCIM: FOLD 739221ead5fa AdvancedStringAlgorithms.lcpArray
@@ -454,16 +461,21 @@ public final class StringAlgorithms {
     }
 
     //FLLDCIM: FOLD 739221ead5fa AdvancedStringAlgorithms.longestRepeatedSubstring
+    /**
+     * Reuse the suffix owner's already-built Kasai LCP instead of running a
+     * second LCP pass with new inverse/order arrays. Preserve the historical
+     * first-maximum tie rule and UTF-16 code-unit substring boundaries.
+     */
     public static String longestRepeatedSubstring(String value) {
         Objects.requireNonNull(value, "value");
-        int[] suffixes = suffixArray(value);
-        int[] lcp = lcpArray(value, suffixes);
+        IntSuffixArray index = IntSuffixArray.utf16(value);
         int bestLength = 0;
         int bestStart = 0;
-        for (int i = 0; i < lcp.length; i++) {
-            if (lcp[i] > bestLength) {
-                bestLength = lcp[i];
-                bestStart = suffixes[i];
+        for (int rank = 1; rank < index.length(); rank++) {
+            int common = index.lcpAtRank(rank);
+            if (common > bestLength) {
+                bestLength = common;
+                bestStart = index.suffixAtRank(rank - 1);
             }
         }
         return value.substring(bestStart, bestStart + bestLength);
