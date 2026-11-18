@@ -30,9 +30,9 @@ import java.util.concurrent.locks.ReentrantLock;
  * for the operations declared here. Not a {@code java.util} replacement.</p>
  */
 public final class ConcurrentMultiset<E> {
-    /** State-mask bit {@code OCCUPIED} (per-slot state word, bit 0). */
+    /** Scaffold state {@code OCCUPIED}: a handed-out slot holding its element. */
     static final long STATE_OCCUPIED = 1L << 0;
-    /** State-mask bit {@code DELETED} (per-slot state word, bit 1). */
+    /** Scaffold state {@code DELETED}: a handed-out slot holding {@code REMOVED}. */
     static final long STATE_DELETED = 1L << 1;
     private static final int STRIPES = 32;
     private static final int STRIPE_SHIFT = 27;
@@ -56,8 +56,9 @@ public final class ConcurrentMultiset<E> {
     private int[] countLane = new int[STRIPES * MIN_REGION];
     /** Storage lane {@code hashIndexLane}: per stripe, an open-addressed table of slot + 1; 0 is empty; half full at most. */
     private int[] hashIndexLane = new int[STRIPES * MIN_REGION * 2];
-    /** Per-slot state words (OCCUPIED,DELETED); zero for a slot that was never used. */
-    private long[] stateMaskWords = new long[STRIPES * MIN_REGION];
+    /** Element of an emptied slot: a handed-out slot holds its element or REMOVED, never null. */
+    //FLLDCIM: LEETCODIFY - REMOVED sentinel replaces the per-slot state words
+    private static final Object REMOVED = new Object();
     /** Slots per stripe region. */
     private int region = MIN_REGION;
     /** Per stripe: slots handed out so far, occupied or deleted. */
@@ -219,14 +220,12 @@ public final class ConcurrentMultiset<E> {
         }
         if (slot < 0) {
             elementLane[target] = element;
-            stateMaskWords[target] = STATE_OCCUPIED;
             live[stripe << INT_PAD]++;
         }
         countLane[target] = next;
         total[stripe << LONG_PAD] += next - old;
         if (next == 0) {
-            elementLane[target] = null;
-            stateMaskWords[target] = STATE_DELETED;
+            elementLane[target] = REMOVED;
             live[stripe << INT_PAD]--;
         }
         return true;
@@ -248,7 +247,7 @@ public final class ConcurrentMultiset<E> {
         int base = (hash >>> STRIPE_SHIFT) * (mask + 1);
         int position = hash & mask;
         for (int entry = hashIndexLane[base + position]; entry != 0; entry = hashIndexLane[base + position]) {
-            if (stateMaskWords[entry - 1] == STATE_OCCUPIED && element.equals(elementLane[entry - 1])) {
+            if (elementLane[entry - 1] != REMOVED && element.equals(elementLane[entry - 1])) {
                 return entry - 1;
             }
             position = (position + 1) & mask;
@@ -263,7 +262,7 @@ public final class ConcurrentMultiset<E> {
         int base = stripe * (mask + 1);
         int position = hash & mask;
         int entry = hashIndexLane[base + position];
-        while (entry != 0 && stateMaskWords[entry - 1] != STATE_DELETED) {
+        while (entry != 0 && elementLane[entry - 1] != REMOVED) {
             position = (position + 1) & mask;
             entry = hashIndexLane[base + position];
         }
@@ -281,10 +280,9 @@ public final class ConcurrentMultiset<E> {
         int[] counts = Arrays.copyOfRange(fromCounts, from, from + count);
         wipe(stripe);
         for (int i = 0; i < count; i++) {
-            if (kept[i] != null) {
+            if (kept[i] != REMOVED) {
                 int slot = claim(spread(kept[i]));
                 elementLane[slot] = kept[i];
-                stateMaskWords[slot] = STATE_OCCUPIED;
                 countLane[slot] = counts[i];
             }
         }
@@ -294,7 +292,6 @@ public final class ConcurrentMultiset<E> {
         int from = stripe * region;
         Arrays.fill(elementLane, from, from + region, null);
         Arrays.fill(countLane, from, from + region, 0);
-        Arrays.fill(stateMaskWords, from, from + region, 0L);
         Arrays.fill(hashIndexLane, from << 1, (from + region) << 1, 0);
         used[stripe << INT_PAD] = 0;
     }
@@ -325,7 +322,6 @@ public final class ConcurrentMultiset<E> {
         region = oldRegion << 1;
         elementLane = new Object[STRIPES * region];
         countLane = new int[STRIPES * region];
-        stateMaskWords = new long[STRIPES * region];
         hashIndexLane = new int[STRIPES * region * 2];
         for (int stripe = 0; stripe < STRIPES; stripe++) {
             reseat(stripe, oldElements, oldCounts, stripe * oldRegion, used[stripe << INT_PAD]);
@@ -354,7 +350,7 @@ public final class ConcurrentMultiset<E> {
         try {
             int from = stripe * region;
             for (int slot = from; slot < from + used[stripe << INT_PAD]; slot++) {
-                if (elementLane[slot] != null) {
+                if (elementLane[slot] != REMOVED) {
                     into.add(elementLane[slot]);
                 }
             }
