@@ -1305,11 +1305,12 @@ public final class ProcessBuilder
         // Accumulate and check the builders
         final int numBuilders = builders.size();
         List<Process> processes = new ArrayList<>(numBuilders);
+        Redirect prevOutput = null;
         try {
-            Redirect prevOutput = null;
             for (int index = 0; index < builders.size(); index++) {
                 ProcessBuilder builder = builders.get(index);
-                Redirect[] redirects = builder.redirects();
+                // Internal pipeline redirects must not change the caller's builder.
+                Redirect[] redirects = builder.redirects().clone();
                 if (index > 0) {
                     // check the current Builder to see if it can take input from the previous
                     if (builder.redirectInput() != Redirect.PIPE) {
@@ -1329,13 +1330,23 @@ public final class ProcessBuilder
                     redirects[1] = new RedirectPipeImpl();  // placeholder for new output
                 }
                 processes.add(builder.start(redirects));
-                if (prevOutput instanceof RedirectPipeImpl redir) {
-                    // Wrap the fd so it can be closed
-                    new Process.PipeInputStream(redir.getFd()).close();
-                }
+                Redirect consumedOutput = prevOutput;
+                // Retain ownership of the next pipe even if closing the old one fails.
                 prevOutput = redirects[1];
+                if (consumedOutput instanceof RedirectPipeImpl redir) {
+                    // Close our descriptor directly; no stream read permission is needed.
+                    jdk.internal.access.SharedSecrets.getJavaIOFileDescriptorAccess().close(redir.getFd());
+                }
             }
         } catch (Exception ex) {
+            if (prevOutput instanceof RedirectPipeImpl redir) {
+                // No later process will consume this intermediate pipe.
+                try {
+                    jdk.internal.access.SharedSecrets.getJavaIOFileDescriptorAccess().close(redir.getFd());
+                } catch (Exception closeException) {
+                    ex.addSuppressed(closeException);
+                }
+            }
             // Cleanup processes already started
             processes.forEach(Process::destroyForcibly);
             processes.forEach(p -> {
