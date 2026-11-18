@@ -205,13 +205,30 @@ public final class LongArrayList implements LongList, LongStack {
      */
     public int retainByStateMask(byte[] alignedStates, int requiredMask) {
         IndexMaskCompactor.validate(alignedStates, size, requiredMask);
-        // A zero required mask admits every logical element, regardless of state bits.
-        // Validation precedes this early return; no values or iterator epochs change.
+        return retainByStateMaskChecked(alignedStates, 0, requiredMask);
+    }
+
+    /**
+     * Compact a logical state window inside a larger byte lane without copying
+     * the source slice. Stable survivor order and the owner's epoch are retained.
+     * The caller must keep the mask window stable during this operation.
+     */
+    public int retainByStateMask(byte[] alignedStates, int stateOffset, int requiredMask) {
+        Objects.requireNonNull(alignedStates, "alignedStates");
+        Objects.checkFromIndexSize(stateOffset, size, alignedStates.length);
+        if ((requiredMask & ~0xff) != 0) {
+            throw new IllegalArgumentException("required mask must fit an unsigned byte");
+        }
+        return retainByStateMaskChecked(alignedStates, stateOffset, requiredMask);
+    }
+
+    private int retainByStateMaskChecked(byte[] alignedStates, int stateOffset, int requiredMask) {
+        // Zero required bits admit every row. Both public entries validate first.
         if (requiredMask == 0) return 0;
         int previous = size;
         int kept = 0;
         for (int read = 0; read < previous; read++) {
-            if (IndexMaskCompactor.matches(alignedStates[read], requiredMask)) {
+            if (IndexMaskCompactor.matches(alignedStates[stateOffset + read], requiredMask)) {
                 elements[kept++] = elements[read];
             }
         }
