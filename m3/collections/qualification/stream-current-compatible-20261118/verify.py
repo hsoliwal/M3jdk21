@@ -14,7 +14,7 @@ ROOT = Path(__file__).resolve().parents[4]
 # Groovy collate successor: retain the six prior receipts and bind both new owners.
 FILES = {
     "src/jdk.m3.collections/share/classes/jdk/m3/collections/ObjectStream.java":
-        "f5cbe2d867a1507dbac42071345ed219feb172a3c805c72d2a221fb543602575",
+        "45eea74cd492eb97341a1c9e94d860506a7af88cb39889b36247cf2e778428db",
     "src/jdk.m3.collections/share/classes/jdk/m3/collections/ObjectStreamAdvancedKernels.java":
         "29810419f0125147d7bdbc0d33794b113dcd07e85f0ba9937e5aabd806e6103d",
     "src/jdk.m3.collections/share/classes/jdk/m3/collections/ObjectStreamLoopKernels.java":
