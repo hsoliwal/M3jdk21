@@ -262,3 +262,7 @@ evidence. Retain negative fixtures for unsafe additions. Existing ProgressMonito
 and monitored-I/O owners are the implementation examples; no parallel API family
 is required. Recipes and proof records remain exclusively in Synexia; product
 sources, documentation and target regression tests are received here.
+
+## MOP SDK cross-repository agent read gate (2026-11-18)
+<!-- MOP-AGENT-2026-11-18-1 -->
+Before any source analysis, refactor, PR, merge, licensing decision, or history checkpoint, also read [AGENT.md](AGENT.md). It governs bidirectional atomization/patternization, documented contract-sealed atoms, additive best-of-best API supersets, complete available-history loss checks, dated last-verified proof, Apache-2.0 eligibility and upstream rights. Existing stronger project-specific and locked-canon constraints remain in force. Installation of this pointer does not establish that a source or historical audit has run.
