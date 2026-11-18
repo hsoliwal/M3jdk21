@@ -72,6 +72,87 @@ public final class M3BitLane28 {
         }
     }
 
+    private static final int RANGE_CLEAR = 0;
+    private static final int RANGE_SET = 1;
+    private static final int RANGE_FLIP = 2;
+
+    /** Sets all bits in [from, to); no work or allocation for an empty range. */
+    public void set(int from, int to) {
+        changeRange(from, to, RANGE_SET);
+    }
+
+    /** Sets or clears all bits in [from, to), preserving sparse zero writes. */
+    public void set(int from, int to, boolean value) {
+        changeRange(from, to, value ? RANGE_SET : RANGE_CLEAR);
+    }
+
+    /** Clears all bits in [from, to), without allocating missing regions/pages. */
+    public void clear(int from, int to) {
+        changeRange(from, to, RANGE_CLEAR);
+    }
+
+    /** Flips all bits in [from, to), across word, page and region boundaries. */
+    public void flip(int from, int to) {
+        changeRange(from, to, RANGE_FLIP);
+    }
+
+    /**
+     * Word-at-a-time mutation; one exact cardinality delta per affected page.
+     * Existing prepared rank/select rows are updated, never independently owned.
+     * The lane remains single-threaded. Cleared pages retain their allocation
+     * until an explicit maintenance action or owner retirement.
+     */
+    private void changeRange(int from, int to, int operation) {
+        M3Address28.checkRange(from, to);
+        while (from < to) {
+            int end = Math.min(to, (from | M3Address28.OFFSET_MASK) + 1);
+            long[] page;
+            if (operation == RANGE_CLEAR) {
+                long[][] region = regions[from >>> 20];
+                if (region == null) {
+                    from = end;
+                    continue;
+                }
+                page = region[(from >>> 12) & M3Address28.BLOCK_MASK];
+                if (page == null) {
+                    from = end;
+                    continue;
+                }
+            } else {
+                page = ensureBlock(from);
+            }
+            int firstWord = (from & M3Address28.OFFSET_MASK) >>> 6;
+            int lastWord = ((end - 1) & M3Address28.OFFSET_MASK) >>> 6;
+            int delta = 0;
+            for (int word = firstWord; word <= lastWord; word++) {
+                long mask = -1L;
+                if (word == firstWord) mask &= -1L << (from & 63);
+                if (word == lastWord) mask &= -1L >>> (63 - ((end - 1) & 63));
+                long previous = page[word];
+                long updated = switch (operation) {
+                    case RANGE_SET -> previous | mask;
+                    case RANGE_CLEAR -> previous & ~mask;
+                    default -> previous ^ mask;
+                };
+                if (previous != updated) {
+                    page[word] = updated;
+                    delta += Long.bitCount(updated) - Long.bitCount(previous);
+                }
+            }
+            if (delta != 0) {
+                cardinality += delta;
+                if (regionCounts != null) {
+                    int regionIndex = from >>> 20;
+                    int pageIndex = (from >>> 12) & M3Address28.BLOCK_MASK;
+                    regionCounts[regionIndex] += delta;
+                    pageCounts[regionIndex][pageIndex] =
+                            (short) (pageCounts[regionIndex][pageIndex] + delta);
+                }
+            }
+            from = end;
+        }
+    }
+
     public int cardinality() {
         return cardinality;
     }
