@@ -5,7 +5,7 @@
 | Field | Value |
 | --- | --- |
 | Proposal | `M3JEP-LANG-001` (Synexia internal, **not** an OpenJDK JEP number) |
-| State | **Draft / library named-default candidate; symbolic lowering HOLD** |
+| State | **Draft / arithmetic named defaults available; primitive-long collection named-default candidate; symbolic lowering HOLD** |
 | Author | Hitesh Soliwal and contributors to the Synexia Project |
 | Kind | M3JDK21 opt-in feature candidate |
 | Inspiration | Kotlin, Scala, C++ (ideas only; no third-party source copied) |
@@ -72,6 +72,38 @@ Collections make overloading inherently non-uniform. The compiler must distingui
 | Indexed containers | `a[i]` | Explicit read/write capability, index type, bounds and side-effect rules | Design HOLD |
 
 Candidate M3 set symbols are `|` for union, `&` for intersection, `-` for difference, and `^` for symmetric difference; these are not implemented or assigned to ordinary Java 21 sets. For an M3 list, concatenation should use the existing offset/range/segment composition substrate when possible; parent-owned dynamic arrays, bit masks, lazy materialization and memory-pressure residency must not change what callers observe. A mutable `add` operation cannot silently implement a pure `+` expression. A `Set` must not inherit `List` concatenation semantics by accident. An array `+` must not change Java's built-in numeric or string-concatenation behavior. Generic erasure, covariant arrays, nullable elements, comparator identity, iterator invalidation, concurrent modifications, and serialization are mandatory differential test cases.
+
+### Primitive-long collection library candidate (2026-11-18)
+
+The concrete opt-in Java 21 named-method candidate extends the existing
+`jdk.internal.m3.collections.LongCompositeViews` product owner, leaving the
+implemented `LongCollection` and `LongSortedSet` interfaces unchanged:
+
+| Java 21 named call | Explicit capability | Defined result | Future M3 symbol (HOLD) |
+| --- | --- | --- | --- |
+| `asSequenceOperator(a).plus(b)` | `SequenceOperator` | Live, read-only ordered concatenation **with duplicates** | `a + b` |
+| `asSetOperator(a).or(b)` | `SetOperator` | Live, read-only sorted union | `a \| b` |
+| `asSetOperator(a).and(b)` | `SetOperator` | Live, read-only sorted intersection | `a & b` |
+| `asSetOperator(a).minus(b)` | `SetOperator` | Live, read-only sorted left difference | `a - b` |
+| `asSetOperator(a).xor(b)` | `SetOperator` | Live, read-only sorted symmetric difference | `a ^ b` |
+
+The two separate functional interfaces supply default methods; explicit adapters
+retain the original primitive backing. Each default delegates to existing
+composition operations without copying primitive elements or allocating
+per-element entry/node objects. A `LongSortedSet` can deliberately be adapted as
+a sequence, in which case `plus` preserves duplicates rather than performing
+union. No collection type inherits a conflicting operator meaning.
+
+The M3JDK21 candidate compiles on Java 21 and passes 827 executable checks:
+live changes, signed-long extremes, read-only behavior, null rejection, default
+method overrides and 200 randomized differential set trials against
+`java.util.TreeSet`. The Synexia recipe
+`com.synexia.m3.CollectionOperatorDefaults20261118` pins the existing product
+preimage and exact Java output hashes; replay is fixed-point and drift/duplicate
+inputs fail closed. These are candidate-level checks only, not full JDK
+source-build, installed-image or cross-platform admission. The ordered gate is
+still `String → arrays → collections → AST/compiler → remaining`; symbolic
+lowering and promotion remain on HOLD.
 
 Future symbols are enabled only by explicit M3 language mode and an attributed, unambiguous capability or adapter match. A `List`/matrix ambiguity, `Map` collision without a policy, absent capability, or uncertain effect contract is a compile-time diagnostic—not a guessed overload. Ordinary Java 21 collection code remains byte-for-byte and behaviorally compatible.
 
