@@ -4,6 +4,7 @@ package jdk.m3.fs;
 
 // Modified 2026-10-21: completed native inventories, exact timestamp lanes and v1-compatible persistence.
 // Modified 2026-11-18: invalidate changed build inputs globally and check row-local dependency ordinals.
+// Modified 2026-11-18: reconcile sorted identities linearly and defer reverse-graph allocation until needed.
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -383,20 +384,13 @@ public final class M3BuildState {
             if (words != 0 && (n & 63) != 0) changed[words - 1] = (1L << (n & 63)) - 1L;
             return new Plan(changed, changed.clone(), true, n);
         }
-        int[] reverseCounts = new int[n];
-        for (int d : dependencies) reverseCounts[d]++;
-        int[] reverseOffsets = new int[n + 1];
-        for (int i = 0; i < n; i++) reverseOffsets[i + 1] = Math.addExact(reverseOffsets[i], reverseCounts[i]);
-        int[] reverse = new int[dependencies.length], cursor = reverseOffsets.clone();
-        for (int owner = 0; owner < n; owner++) {
-            for (int p = offsets[owner]; p < offsets[owner + 1]; p++) {
-                reverse[cursor[dependencies[p]]++] = owner;
-            }
-        }
-        int[] queue = new int[n]; long[] enqueued = new long[words];
-        int head = 0, tail = 0;
+        long[] enqueued = null;
+        int priorRow = 0;
         for (int row = 0; row < n; row++) {
-            int old = previous.find(paths[row], roles[row]);
+            // removedFrom proved that every previous identity survives. Both
+            // inventories are sorted, so additions leave the previous cursor in place.
+            int old = priorRow < previous.size() && compare(paths[row], roles[row],
+                    previous.paths[priorRow], previous.roles[priorRow]) == 0 ? priorRow++ : -1;
             boolean bytesChanged = old < 0 || lengths[row] != previous.lengths[old] ||
                     !sameHash(contentHashes, row, previous.contentHashes, old);
             boolean abiChanged = old < 0 || abiAt(row) != previous.abiAt(old) ||
@@ -413,8 +407,27 @@ public final class M3BuildState {
                 // proven ABI, and an unchanged dependency graph.
                 boolean canStop = old >= 0 && !edgesChanged && !abiChanged &&
                         (roles[row] == SOURCE || roles[row] == CLASS) && abiAt(row);
-                if (!canStop) { set(enqueued, row); queue[tail++] = row; }
+                if (!canStop) {
+                    if (enqueued == null) enqueued = new long[words];
+                    set(enqueued, row);
+                }
             }
+        }
+        // No propagation seeds means that no reverse graph or queue is needed.
+        // A global build-input change has already returned the full masks above.
+        if (enqueued == null) return new Plan(changed, affected, false, n);
+        int[] reverseCounts = new int[n];
+        for (int d : dependencies) reverseCounts[d]++;
+        int[] reverseOffsets = new int[n + 1];
+        for (int i = 0; i < n; i++) reverseOffsets[i + 1] = Math.addExact(reverseOffsets[i], reverseCounts[i]);
+        int[] reverse = new int[dependencies.length], cursor = reverseOffsets.clone();
+        int[] queue = new int[n];
+        int head = 0, tail = 0;
+        for (int owner = 0; owner < n; owner++) {
+            for (int p = offsets[owner]; p < offsets[owner + 1]; p++) {
+                reverse[cursor[dependencies[p]]++] = owner;
+            }
+            if (bit(enqueued, owner)) queue[tail++] = owner;
         }
         while (head < tail) {
             int current = queue[head++];
