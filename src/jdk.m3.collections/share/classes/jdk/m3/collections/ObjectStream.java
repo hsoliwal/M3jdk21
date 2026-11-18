@@ -252,7 +252,10 @@ public final class ObjectStream<T> {
     public <R> ObjectStream<R> mapNotNull(Function<? super T, ? extends R> mapper) {
         Objects.requireNonNull(mapper, "mapper");
         return new ObjectStream<>(
-                () -> stream().<R>map(mapper).filter(Objects::nonNull), replayable);
+                () -> stream().<R>mapMulti((value, emit) -> {
+                    R mapped = mapper.apply(value);
+                    if (mapped != null) emit.accept(mapped);
+                }), replayable);
     }
 
     /** Map into an Optional and emit present results without building a temporary List. */
