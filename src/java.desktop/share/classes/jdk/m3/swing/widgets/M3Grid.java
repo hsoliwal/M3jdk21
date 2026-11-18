@@ -80,6 +80,15 @@ public final class M3Grid extends JTable {
     private boolean[] columnGroupCollapsed = new boolean[8];
     private TableColumn[][] columnGroupOwners = new TableColumn[8][];
     private int columnGroupCount;
+    // Additive ancestor-title bands: [modelFirst, modelCount, level] in compact
+    // primitive lanes. Level 1 contains first-tier groups, level 2 contains
+    // level-1 groups, etc. No second TableColumnModel or cell objects.
+    private int[] ancestorGroupLanes = new int[24];
+    private String[] ancestorGroupTitles = new String[8];
+    private int ancestorGroupCount;
+    private transient long ancestorGroupPainted;
+    private static final int MAX_ANCESTOR_LEVEL = 3;
+    private static final int MAX_ANCESTOR_GROUPS = 256;
     private transient long columnGroupPainted;
     private static final int COLUMN_GROUP_BAND_HEIGHT = 24;
     private JTableHeader originalHeader;
@@ -122,6 +131,192 @@ public final class M3Grid extends JTable {
 
     /** Number of rendered frozen body cells, for performance and damage regression gates. */
     public long getFrozenPaintedCells() { return frozenPaintedCells; }
+
+    /** Number of retained ancestor header bands above the existing first tier. */
+    public int getColumnAncestorGroupCount() { return ancestorGroupCount; }
+
+    /** Maximum configured ancestor level, 0 when there are none. */
+    public int getColumnAncestorDepth() {
+        int depth = 0;
+        for (int i = 0; i < ancestorGroupCount; i++) {
+            depth = Math.max(depth, ancestorGroupLanes[i * 3 + 2]);
+        }
+        return depth;
+    }
+
+    /** Number of visible ancestor header labels drawn through the real Swing header. */
+    public long getColumnAncestorPainted() { return ancestorGroupPainted; }
+
+    /** Height of all group-header bands, excluding the native leaf-column tier. */
+    public int getColumnGroupBandsHeight() {
+        return columnGroupCount == 0 ? 0 : (getColumnAncestorDepth() + 1) * COLUMN_GROUP_BAND_HEIGHT;
+    }
+
+    /**
+     * Defines one immutable model-order ancestor title band. Level 1 wraps
+     * existing first-tier groups, and higher levels wrap complete groups at
+     * the next lower level. Every interval must be an exact tiling of at
+     * least two direct child groups; gaps and partial overlaps fail before
+     * any state is changed. Configure bottom-up; only title replacement is
+     * allowed under a level that already has higher ancestors.
+     *
+     * <p>Its painted viewport projection is fail-closed when a child group is
+     * reordered, hidden by an external column model, or crosses a frozen
+     * plane. Existing summary/detail groups continue using their original
+     * TableColumn owners and visibility logic.</p>
+     */
+    public void setColumnGroupAncestor(int level, int firstModelColumn, int modelColumnCount, String title) {
+        requireEdt();
+        if (level < 1 || level > MAX_ANCESTOR_LEVEL) throw new IllegalArgumentException("ancestor level");
+        java.util.Objects.requireNonNull(title, "title");
+        if (firstModelColumn < 0 || modelColumnCount < 2
+                || modelColumnCount > getModel().getColumnCount() - firstModelColumn) {
+            throw new IllegalArgumentException("ancestor interval outside model");
+        }
+        int at = ancestorSlot(level, firstModelColumn);
+        if (at >= 0) {
+            int b = at * 3;
+            if (ancestorGroupLanes[b + 1] != modelColumnCount) {
+                throw new IllegalStateException("remove higher levels before changing an ancestor interval");
+            }
+            ancestorGroupTitles[at] = title;
+            refreshGroupedHeader();
+            return;
+        }
+        if (getColumnAncestorDepth() > level) {
+            throw new IllegalStateException("configure ancestors from lower to higher levels");
+        }
+        if (ancestorGroupCount >= MAX_ANCESTOR_GROUPS) {
+            throw new IllegalArgumentException("ancestor group capacity");
+        }
+        int exclusive = firstModelColumn + modelColumnCount;
+        if (!ancestorTiledByChildren(level, firstModelColumn, exclusive)) {
+            throw new IllegalArgumentException("ancestor must contain complete adjacent child groups");
+        }
+        for (int i = 0; i < ancestorGroupCount; i++) {
+            int b = i * 3;
+            if (ancestorGroupLanes[b + 2] != level) continue;
+            int otherStart = ancestorGroupLanes[b], otherEnd = otherStart + ancestorGroupLanes[b + 1];
+            if (firstModelColumn < otherEnd && otherStart < exclusive) {
+                throw new IllegalArgumentException("overlapping ancestors at one level");
+            }
+        }
+        if (ancestorGroupCount == ancestorGroupLanes.length / 3) {
+            ancestorGroupLanes = Arrays.copyOf(ancestorGroupLanes, ancestorGroupLanes.length * 2);
+            ancestorGroupTitles = Arrays.copyOf(ancestorGroupTitles, ancestorGroupTitles.length * 2);
+        }
+        int b = ancestorGroupCount * 3;
+        ancestorGroupLanes[b] = firstModelColumn;
+        ancestorGroupLanes[b + 1] = modelColumnCount;
+        ancestorGroupLanes[b + 2] = level;
+        ancestorGroupTitles[ancestorGroupCount++] = title;
+        refreshGroupedHeader();
+    }
+
+    /** Title lookup by exact level and starting model column. */
+    public String getColumnGroupAncestorTitle(int level, int firstModelColumn) {
+        int index = ancestorSlot(level, firstModelColumn);
+        return index < 0 ? null : ancestorGroupTitles[index];
+    }
+
+    /** Removal also clears higher-level ancestors whose child topology changed. */
+    public void removeColumnGroupAncestor(int level, int firstModelColumn) {
+        requireEdt();
+        int index = ancestorSlot(level, firstModelColumn);
+        if (index < 0) return;
+        int oldCount = ancestorGroupCount;
+        for (int i = oldCount - 1; i >= 0; i--) {
+            if (i == index || ancestorGroupLanes[i * 3 + 2] > level) removeAncestorSlot(i);
+        }
+        refreshGroupedHeader();
+    }
+
+    /** Restore the original single-tier header without changing any leaf columns. */
+    public void clearColumnGroupAncestors() {
+        requireEdt();
+        if (ancestorGroupCount == 0) return;
+        clearAncestorsInternal();
+        refreshGroupedHeader();
+    }
+
+    private void clearAncestorsInternal() {
+        ancestorGroupCount = 0;
+        if (ancestorGroupLanes != null) Arrays.fill(ancestorGroupLanes, 0);
+        if (ancestorGroupTitles != null) Arrays.fill(ancestorGroupTitles, null);
+    }
+
+    private void removeAncestorSlot(int index) {
+        int b = index * 3;
+        System.arraycopy(ancestorGroupLanes, b + 3, ancestorGroupLanes, b,
+                (ancestorGroupCount - index - 1) * 3);
+        System.arraycopy(ancestorGroupTitles, index + 1, ancestorGroupTitles, index,
+                ancestorGroupCount - index - 1);
+        ancestorGroupCount--;
+        Arrays.fill(ancestorGroupLanes, ancestorGroupCount * 3, ancestorGroupCount * 3 + 3, 0);
+        ancestorGroupTitles[ancestorGroupCount] = null;
+    }
+
+    private int ancestorSlot(int level, int modelFirst) {
+        for (int i = 0; i < ancestorGroupCount; i++) {
+            int b = i * 3;
+            if (ancestorGroupLanes[b + 2] == level && ancestorGroupLanes[b] == modelFirst) return i;
+        }
+        return -1;
+    }
+
+    /** Require exact model-order coverage by at least two direct children. */
+    private boolean ancestorTiledByChildren(int level, int first, int exclusive) {
+        int at = first, count = 0;
+        while (at < exclusive) {
+            int childLength = -1;
+            if (level == 1) {
+                int group = columnGroupIndex(at);
+                if (group >= 0) childLength = columnGroupLanes[group * 2 + 1];
+            } else {
+                int child = ancestorSlot(level - 1, at);
+                if (child >= 0) childLength = ancestorGroupLanes[child * 3 + 1];
+            }
+            if (childLength < 1 || childLength > exclusive - at) return false;
+            at += childLength;
+            count++;
+        }
+        return at == exclusive && count >= 2;
+    }
+
+    /** Packed [viewFirst,visibleViewColumns]; negative means invalid projection. */
+    private long ancestorProjection(int index) {
+        int b = index * 3, first = ancestorGroupLanes[b], end = first + ancestorGroupLanes[b + 1];
+        int level = ancestorGroupLanes[b + 2], at = first, count = 0;
+        int viewFirst = -1, viewEnd = -1;
+        while (at < end) {
+            int childLength, childView, childVisible;
+            if (level == 1) {
+                int child = columnGroupIndex(at);
+                if (child < 0) return -1;
+                childLength = columnGroupLanes[child * 2 + 1];
+                childView = columnGroupViewStart(child);
+                childVisible = columnGroupVisibleCount(child);
+            } else {
+                int child = ancestorSlot(level - 1, at);
+                if (child < 0) return -1;
+                childLength = ancestorGroupLanes[child * 3 + 1];
+                long projected = ancestorProjection(child);
+                if (projected < 0) return -1;
+                childView = (int) (projected >>> 32);
+                childVisible = (int) projected;
+            }
+            if (childLength < 1 || childLength > end - at || childView < 0 || childVisible < 1
+                    || (viewEnd >= 0 && viewEnd != childView)) return -1;
+            if (viewFirst < 0) viewFirst = childView;
+            viewEnd = childView + childVisible;
+            at += childLength;
+            count++;
+        }
+        if (at != end || count < 2 || viewFirst < 0 || viewEnd > getColumnCount()) return -1;
+        int frozen = getFrozenColumnCount();
+        if (viewFirst < frozen && viewEnd > frozen) return -1;
+        return ((long) viewFirst << 32) | (viewEnd - viewFirst);
+    }
 
     /** Number of disjoint top-level column-header groups (not table columns). */
     public int getColumnGroupCount() { return columnGroupCount; }
