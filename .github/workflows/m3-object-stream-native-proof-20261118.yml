@@ -2,6 +2,15 @@
 name: M3 object-stream native JDK proof
 
 on:
+  push:
+    branches: [master]
+    paths:
+      - '.github/workflows/m3-object-stream-native-proof-20261118.yml'
+      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/ObjectStream*.java'
+      - 'test/jdk/jdk/m3/collections/ObjectStream*.java'
+      - 'm3/collections/qualification/stream-current-compatible-20261118/**'
+      - 'm3/collections/test_verify_stream_current.py'
+      - 'm3/collections/pom.xml'
   pull_request:
     paths:
       - '.github/workflows/m3-object-stream-native-proof-20261118.yml'
