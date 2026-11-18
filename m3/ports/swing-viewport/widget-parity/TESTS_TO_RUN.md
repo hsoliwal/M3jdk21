@@ -58,3 +58,23 @@ java -Djava.awt.headless=true -Xmx128m -cp /tmp/m3-native jdk.m3.swing.widgets.M
 | GUI focus/keyboard/accessibility/locale/LookAndFeel tests | NOT_RUN |
 | Nebula/SwingX graphical dropdown and date picker differential | NOT_RUN |
 | Synexia sealed OpenRewrite recipe fixed-point and release qualification | NOT_RUN |
+
+## Native Grid frozen-column first leaf
+
+| Gate | Result |
+|---|---|
+| Original Java 21 source compiled with -Xlint:all,-serial,-this-escape -Werror | LOCAL_PASS |
+| M3GridContractSmoke: stock/off parity, scrolled body/header pixels, view hit mapping, editing, reordering, sorter/filter, clip/damage isolation | LOCAL_PASS |
+| 1M logical rows, far viewport paint, fewer than 140 getValueAt calls under -Xmx128m | LOCAL_PASS |
+| Real Swing AWT Robot mouse click under Linux/Xvfb -Xmx128m | LOCAL_PASS |
+| Git blobs of M3Grid/ContractSmoke/HeadfulSmoke equal exact local tested source | VERIFIED |
+| Existing m3-swing-viewport Maven/JUnit full reactor on exact PR head | NOT_RUN |
+| Native Xvfb other LAF/drag/resizing/RTL/HiDPI/accessible GTK/Win32/Cocoa suite | NOT_RUN |
+| Full Nebula Grid behavior (grouping, spans, pinned top/bottom, long indices) | OPEN |
+| Canonical M3DateTime moved from pre-#3313 port with identical source blob | VERIFIED |
+| Combined Grid/DateTime Java 21 headless tests | LOCAL_PASS |
+| #3313 merged; source blob received in canonical java.desktop | VERIFIED |
+
+To reproduce the executed standalone gates, use the exact commands
+in [GRID_PARITY.md](GRID_PARITY.md). The full Maven, jtreg,
+source-built M3JDK and cross-toolkit gates remain separate.
