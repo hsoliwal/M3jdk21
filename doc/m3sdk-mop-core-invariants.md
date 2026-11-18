@@ -29,12 +29,21 @@ and `docs/M3-SCALE/invariants/SYNEXIA-M3-RECIPE-CORRECTION-1.md`;
 no second parser, private source mirror, pattern engine or
 evidence registry in public M3JDK21.
 
-`M3ScaleCodingAgent` is derived agent architecture and
-`M3ScaleCopy` an expanded witness, not automatically equal
-to the Locked Canon. This user turn contained no uploaded
-files; later attachments must be source-hashed, read,
-classified and reconciled separately before admission.
-Do not invent missing axioms or allow an LLM to canonize them.
+Three M3Scale reference files were supplied and independently
+SHA-256 verified. `M3Scale(3).txt` is the historical v3.0
+Locked Canon witness; `M3ScaleCodingAgent(3).txt` is
+derived coding-agent architecture; `M3ScaleCopy(3).txt`
+is an expanded serialized witness. They are not equivalent
+files and none silently replaces the live v3.3 canon.
+The user's later Foundational Principle expands the MOP SDK
+design intent but is not compiler/runtime proof.
+
+The source-authority ledger, exact input hashes, and full
+machine-readable pattern/contract proposal are retained
+in [Synexia MOP SDK PR #18789](https://github.com/hsoliwal/com.synexia/pull/18789).
+Synexia remains the canonical private recipe and evidence
+owner; no private implementation, source mirror, or
+recipe is copied into this public SDK target.
 
 ## MOP-1. Every eligible file consists of documented atoms
 
@@ -215,6 +224,94 @@ Report `PASS`, `FAIL`, `NOT_RUN`, `HOLD` or
 justified `NOT_APPLICABLE` for each required gate.
 Do not relabel a static candidate survey, historical
 merge or policy PR as a completed transformation.
+
+## MOP-9. Code as a documented and verifiable semantic algebra
+
+Every eligible source file is a bounded composition of
+**identified, contract-bearing semantic atoms**. Each atom
+and composition has retrievable intent, interfaces,
+dependencies, effects, exceptions, preconditions, state,
+resource ownership, tests and proof status. Methods
+may compose private/static atoms where appropriate, but
+`private`, `static`, `pure`, `stateless` and `deterministic`
+are distinct properties. Preserve cohesive source operations,
+necessary identity, polymorphism, locks, volatile/JMM
+semantics, callbacks and native/JNI/GC lifetime. An unsound
+extraction is **HOLD/NO_SAFE_EXTRACTION**, not a refactor.
+
+The MOP structure is bidirectional:
+
+```text
+TOP-DOWN PHYSICAL DECOMPOSITION
+Repository -> Project -> Module -> Package -> File
+           -> Types / Interfaces / Fields / Methods -> Semantic atoms
+
+BOTTOM-UP SEMANTIC RECOMPOSITION
+Verified atoms -> File composition -> Package/Interface contracts
+               -> Module -> Project -> Repository -> System / SDK
+```
+
+An interface/API contract is a semantic boundary, not a
+fabricated file-system level. The file is the principal
+independent transformation scheduling boundary, not
+a guarantee that effects stop at that file. Atomic
+verification does not automatically prove file, package,
+module or system correctness.
+
+## MOP-10. Incremental multipass and persistent agent memory
+
+A bounded multipass identifies the affected atoms,
+traverses their call/effect/dependency closure, and
+proposes transformations only within authorized scope.
+Verified unaffected boundaries remain sealed.
+When a contract or shared effect changes, the proof
+frontier expands to the affected parent, interface,
+module or runtime boundary; write scope remains
+locked until separately admitted. Independent source
+candidates may be prepared in parallel, but source
+promotion, canonical history and state ratification
+are serialized and recheck exact source identities.
+
+Documentation is machine memory, not an afterthought.
+Interfaces, annotations and signatures are the
+formal skeleton. Javadocs plus atom, pattern, caller,
+dependency, effect, source-history and verification
+records are the semantic memory. Coding agents first
+query those canonical facts, then instantiate admitted
+patterns or templates; unsupported novelty becomes
+typed semantic residue for separate analysis.
+Mechanical retrieval reduces repeated context and
+embedding dependencies without forbidding them.
+
+MOP selects the **best demonstrated implementation**
+against explicit contract-compatible alternatives and
+measured worst-case behavior, CPU, allocation, memory,
+GC, concurrency, security and platform evidence.
+Structural constraints do not mathematically
+guarantee globally optimal code, nor can an LLM
+certify its own output. Documentation and source
+must converge to an independently verified fixed
+point, with accurate source and test receipts.
+
+## MOP-11. Canonical ownership and evidence boundary
+
+The detailed full MOP contract, current-v3.3 versus
+uploaded-source reconciliation and proposed machine
+records are in
+[Synexia PR #18789](https://github.com/hsoliwal/com.synexia/pull/18789).
+M3JDK21 contains only the product-facing invariant;
+it never takes custody of canonical Maven/OpenRewrite
+recipes, private donor images or correction-memory
+stores. Existing Java 21 APIs, prior M3 capabilities
+and legitimate third-party licensing stay protected.
+
+This product documentation update has no JDK
+implementation proof. The Synexia canonical
+text-recipe execution, full JDK atomization,
+source-built JDK compile/jtreg/JNI/GC/CDS,
+cross-platform verification and Apache-only
+distribution closure remain **NOT_EXECUTED**.
+
 
 **This core rule is a proposal until the canonical
 Synexia recipe, target JDK compile/jtreg/native
