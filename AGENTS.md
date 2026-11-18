@@ -262,3 +262,13 @@ evidence. Retain negative fixtures for unsafe additions. Existing ProgressMonito
 and monitored-I/O owners are the implementation examples; no parallel API family
 is required. Recipes and proof records remain exclusively in Synexia; product
 sources, documentation and target regression tests are received here.
+
+## Priority 0 — MOP SDK source semantics and dual-direction proof (2026-11-18)
+
+For any M3JDK21 source/SDK/JNI/HotSpot task, follow the canonical Synexia [MOP SDK bidirectional atom/pattern invariant](https://github.com/hsoliwal/com.synexia/blob/codex/mop-sdk-two-direction-invariants-20261118/docs/M3-SCALE/invariants/SYNEXIA-MOP-SDK-BIDIRECTIONAL-ATOM-PATTERN-1.md), together with the existing M3-SCALE, file atom, universal API and repository-receiver rules. The private document may require authorized GitHub access; this instruction summarizes the binding principle without copying its recipe machinery or improvement memory into this public product.
+
+**Descend:** repository -> project -> module -> package -> file -> type/interface/field/method/native entrypoint -> semantic atom. Inventory source identities, signatures, contracts, effects, dependencies and unsafe-extraction refusals. Independently pinned file proposals may prepare in parallel; private/static atoms are preferred only when Java/JNI semantics, visibility, dispatch, initialization, aliasing and observable behavior remain unchanged.
+
+**Ascend:** proven atoms -> file compositions -> package/interface/type contracts -> modules -> project/system along the impacted dependency graph. Recognize typed, documented patterns instead of inventing ad hoc code. Verify the entire existing public API/ABI/behavioral envelope at each changed boundary; hashes and LLM assertions are not behavioral proof. No file, parent or whole SDK is qualified merely by successful extraction or read-only indexing.
+
+The MOP coding agent MUST retrieve source-bound pattern/contract documentation rather than rely on chat recollection; use the canonical Synexia Maven/OpenRewrite recipe and serial admission; preserve the clean receiving product and source-built Java 21/JNI gates. Verification order stays diff -> lint -> compile -> tests -> runtime. "Best possible code" means only the best **demonstrated** candidate under documented constraints and benchmark evidence. This addition is an agent rule and conceptual reference, not an installed recipe engine, code rewrite, or claim of complete repository coverage.
