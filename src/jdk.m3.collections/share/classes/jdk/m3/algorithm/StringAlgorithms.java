@@ -461,16 +461,21 @@ public final class StringAlgorithms {
     }
 
     //FLLDCIM: FOLD 739221ead5fa AdvancedStringAlgorithms.longestRepeatedSubstring
+    /**
+     * Reuse the suffix owner's already-built Kasai LCP instead of running a
+     * second LCP pass with new inverse/order arrays. Preserve the historical
+     * first-maximum tie rule and UTF-16 code-unit substring boundaries.
+     */
     public static String longestRepeatedSubstring(String value) {
         Objects.requireNonNull(value, "value");
-        int[] suffixes = suffixArray(value);
-        int[] lcp = lcpArray(value, suffixes);
+        IntSuffixArray index = IntSuffixArray.utf16(value);
         int bestLength = 0;
         int bestStart = 0;
-        for (int i = 0; i < lcp.length; i++) {
-            if (lcp[i] > bestLength) {
-                bestLength = lcp[i];
-                bestStart = suffixes[i];
+        for (int rank = 1; rank < index.length(); rank++) {
+            int common = index.lcpAtRank(rank);
+            if (common > bestLength) {
+                bestLength = common;
+                bestStart = index.suffixAtRank(rank - 1);
             }
         }
         return value.substring(bestStart, bestStart + bestLength);
