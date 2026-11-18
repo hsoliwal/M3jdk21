@@ -4,6 +4,7 @@ package jdk.m3.fs;
 
 // Modified 2026-10-21: preserve explicit legacy timestamp knowledge and v1 byte round trips.
 // Modified 2026-11-18: cover clean/incremental javac parity and row-local dependency bounds.
+// Modified 2026-11-18: preserve sorted reconciliation, remapped edge identities and deferred propagation.
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -140,7 +141,48 @@ public final class M3BuildStateContract {
         buildInputInvalidation();
         dependencyOrdinals();
         fuzzReverseClosure();
+        sortedReconciliation();
         return checks;
+    }
+
+    private static M3BuildState reconciliationFixture(boolean expanded, boolean changed) {
+        String[] paths = expanded ? new String[]{"a", "b", "b", "c", "d", "f", "z"}
+                : new String[]{"b", "b", "d", "f"};
+        byte[] roles = fill(paths.length, M3BuildState.SOURCE);
+        roles[expanded ? 2 : 1] = M3BuildState.CLASS;
+        long[] lengths = new long[paths.length];
+        byte[] contents = new byte[paths.length * 32], abi = new byte[paths.length * 32];
+        for (int row = 0; row < paths.length; row++) {
+            boolean root = paths[row].equals("b") && roles[row] == M3BuildState.SOURCE;
+            boolean middle = paths[row].equals("d");
+            put(contents, row, sha(paths[row] + roles[row] + (changed && (root || middle) ? "new" : "old")));
+            put(abi, row, sha(paths[row] + roles[row] + (changed && root ? "new ABI" : "same ABI")));
+        }
+        return new M3BuildState(paths, roles, lengths, contents, abi, new long[]{(1L << paths.length) - 1},
+                expanded ? new int[]{0, 0, 0, 1, 1, 2, 3, 3} : new int[]{0, 0, 1, 2, 3},
+                expanded ? new int[]{1, 2, 4} : new int[]{0, 1, 2}, sha("reconciliation context"));
+    }
+
+    /** Insertions change physical row ordinals, while dependency identity and role stay authoritative. */
+    private static void sortedReconciliation() throws IOException {
+        M3BuildState previous = reconciliationFixture(false, false);
+        M3BuildState inserted = reconciliationFixture(true, false);
+        previous = M3BuildState.decode(previous.encode(MAX_BYTES), MAX_BYTES, 4, 3);
+        inserted = M3BuildState.decode(inserted.encode(MAX_BYTES), MAX_BYTES, 7, 3);
+        M3BuildState.Plan plan = inserted.changedFrom(previous);
+        check(!plan.fullRebuild(), "insertions preserve comparable inventory");
+        check(Arrays.equals(plan.changedMask(), new long[]{0x49L}), "first/middle/last insertions only");
+        check(Arrays.equals(plan.affectedMask(), new long[]{0x49L}), "remapped edge ordinals retain identities");
+        check(inserted.find("b", M3BuildState.SOURCE) == 1 && inserted.find("b", M3BuildState.CLASS) == 2,
+                "same path with distinct roles retains sorted identity");
+        check(inserted.changedFrom(M3BuildState.decode(inserted.encode(MAX_BYTES), MAX_BYTES, 7, 3))
+                .affectedCount() == 0, "separately decoded no-op inventories");
+        M3BuildState edited = reconciliationFixture(true, true);
+        plan = edited.changedFrom(inserted);
+        check(Arrays.equals(plan.changedMask(), new long[]{0x12L}), "ABI and independent same-ABI body edits");
+        check(Arrays.equals(plan.affectedMask(), new long[]{0x36L}), "same-ABI dirty node later traverses upstream invalidation");
+        check(!plan.fullRebuild(), "deferred worklist preserves partial rebuild");
+        check(previous.changedFrom(inserted).fullRebuild(), "removal prepass remains conservative");
     }
 
     /** A real compiler option change must not reuse a stale class with identical source/ABI. */

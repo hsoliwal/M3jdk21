@@ -21,8 +21,9 @@
 /*
  * @test
  * @summary Preserve public adapter identity, failure, loader and virtual invocation contracts
- * @run main/othervm ObjectAdapterInteropTest
- * @run main/othervm -Xint ObjectAdapterInteropTest
+ * @run main/othervm/native -Xcheck:jni ObjectAdapterInteropTest
+ * @run main/othervm/native -Xcheck:jni -Xint ObjectAdapterInteropTest
+ * @run main/othervm/native -Xcheck:jni -Xcomp -Xbatch -XX:-TieredCompilation ObjectAdapterInteropTest
  */
 
 import java.io.IOException;
@@ -42,8 +43,200 @@ public final class ObjectAdapterInteropTest {
         assignabilityAndPrimitives();
         independentLoaders();
         virtualInvocation();
+        nativeInvocation();
         System.out.println("OBJECT_ADAPTER_INTEROP_PASS checks=" + checks);
     }
+
+    private static native Object invokeAdapter0(Object receiver, Class<?> type,
+                                                 int selector, int mode,
+                                                 boolean expectException);
+
+    private static native Object copyReferences0(Object value, int count, Throwable pending);
+
+    private static void nativeInvocation() throws Throwable {
+        System.loadLibrary("ObjectAdapterInteropTest");
+        for (int selector = 0; selector < 2; selector++) {
+            for (int mode = 0; mode < 6; mode++) {
+                nativeDispatch(selector, mode);
+                nativeArrays(selector, mode);
+            }
+        }
+        nativeReferences();
+        nativeLoaders();
+        expect(IllegalArgumentException.class,
+                () -> invokeAdapter0(new Object(), Object.class, 2, 0, false));
+        expect(IllegalArgumentException.class,
+                () -> invokeAdapter0(new Object(), Object.class, 0, 6, false));
+        expect(IllegalArgumentException.class, () -> copyReferences0(new Object(), 0, null));
+        expect(IllegalArgumentException.class, () -> copyReferences0(new Object(), 8_193, null));
+    }
+
+    private static void nativeDispatch(int selector, int mode) {
+        String label = "JNI selector=" + selector + " mode=" + mode;
+        Hostile hostile = new Hostile();
+        check(invokeAdapter0(hostile, Object.class, selector, mode, false) == hostile,
+                label + " base identity without Object hooks");
+        check(invokeAdapter0(hostile, Marker.class, selector, mode, false) == hostile,
+                label + " interface identity");
+        check(invokeAdapter0(hostile, String.class, selector, mode, false) == null,
+                label + " unsupported is successful null");
+        for (Class<?> primitive : List.of(boolean.class, byte.class, short.class, char.class,
+                int.class, long.class, float.class, double.class, void.class)) {
+            check(invokeAdapter0(hostile, primitive, selector, mode, false) == null,
+                    label + " primitive token remains unsupported");
+        }
+        expect(NullPointerException.class,
+                () -> invokeAdapter0(hostile, null, selector, mode, true));
+        expect(NullPointerException.class,
+                () -> invokeAdapter0(null, Object.class, selector, mode, true));
+
+        // A base nonvirtual alias body still makes a virtual toAdapter call.
+        boolean reachesOverride = mode < 3 || selector == 1;
+        OverrideReceiver receiver = new OverrideReceiver();
+        check(invokeAdapter0(receiver, String.class, selector, mode, false) == null,
+                label + " null override result is not a pending exception");
+        check(receiver.calls == (reachesOverride ? 1 : 0), label + " exact override count");
+        String value = new String("native-value");
+        receiver.value = value;
+        check(invokeAdapter0(receiver, String.class, selector, mode, false)
+                == (reachesOverride ? value : null), label + " nonvirtual entry semantics");
+        check(receiver.calls == (reachesOverride ? 2 : 0), label + " exact repeated count");
+        if (reachesOverride) {
+            check(invokeAdapter0(receiver, null, selector, mode, false) == null
+                    && receiver.lastType == null, label + " override controls null token");
+        } else {
+            expect(NullPointerException.class,
+                    () -> invokeAdapter0(receiver, null, selector, mode, true));
+        }
+        int beforeFailure = receiver.calls;
+        for (Throwable failure : new Throwable[] {
+                new IllegalStateException("native-runtime"), new AssertionError("native-error")}) {
+            receiver.failure = failure;
+            if (reachesOverride) {
+                exactFailure(failure,
+                        () -> invokeAdapter0(receiver, String.class, selector, mode, true));
+                beforeFailure++;
+            } else {
+                check(invokeAdapter0(receiver, String.class, selector, mode, false) == null,
+                        label + " direct base invocation bypasses throwing override");
+            }
+            check(receiver.calls == beforeFailure, label + " failure call count");
+        }
+
+        NativeAliasReceiver alias = new NativeAliasReceiver();
+        boolean reachesAlias = selector == 1 && mode < 3;
+        check(invokeAdapter0(alias, String.class, selector, mode, false)
+                == (reachesAlias ? alias.value : null), label + " alias override dispatch");
+        check(alias.calls == (reachesAlias ? 1 : 0), label + " exact alias count");
+        alias.failure = new IllegalArgumentException("alias-sentinel");
+        if (reachesAlias) {
+            exactFailure(alias.failure,
+                    () -> invokeAdapter0(alias, String.class, selector, mode, true));
+        } else {
+            check(invokeAdapter0(alias, String.class, selector, mode, false) == null,
+                    label + " nonvirtual alias bypasses alias override");
+        }
+        check(alias.calls == (reachesAlias ? 2 : 0), label + " alias failure count");
+
+        NativeWrongResult wrong = new NativeWrongResult();
+        check(invokeAdapter0(wrong, String.class, selector, mode, false)
+                == (reachesOverride ? wrong.value : null), label + " erased result is preserved");
+        if (reachesOverride) {
+            expect(ClassCastException.class,
+                    () -> String.class.cast(invokeAdapter0(wrong, String.class, selector, mode, false)));
+        }
+        expect(AssertionError.class,
+                () -> invokeAdapter0(hostile, String.class, selector, mode, true));
+        java.lang.ref.Reference.reachabilityFence(hostile);
+        java.lang.ref.Reference.reachabilityFence(receiver);
+    }
+
+    private static void nativeArrays(int selector, int mode) {
+        Object[] arrays = {new boolean[1], new byte[1], new short[1], new char[1],
+                new int[1], new long[1], new float[1], new double[1],
+                new Object[1], new String[1], new int[1][1], new Object[1][1]};
+        for (Object array : arrays) {
+            check(invokeAdapter0(array, array.getClass(), selector, mode, false) == array,
+                    "JNI exact array identity");
+            check(invokeAdapter0(array, Cloneable.class, selector, mode, false) == array,
+                    "JNI array Cloneable identity");
+            check(invokeAdapter0(array, java.io.Serializable.class, selector, mode, false) == array,
+                    "JNI array Serializable identity");
+            check(invokeAdapter0(array, Object[].class, selector, mode, false)
+                    == (array instanceof Object[] ? array : null), "JNI array covariance");
+            check(copyReferences0(array, 64, null) == array, "JNI array reference lifetime");
+            java.lang.ref.Reference.reachabilityFence(array);
+        }
+    }
+
+    private static void nativeReferences() {
+        check(copyReferences0(null, 64, null) == null, "JNI successful null reference roundtrip");
+        Object value = new Hostile();
+        check(copyReferences0(value, 4_096, null) == value,
+                "JNI bounded local frames retain exact live object");
+        for (Throwable failure : new Throwable[] {
+                new IllegalStateException("reference-runtime"), new AssertionError("reference-error")}) {
+            exactFailure(failure, () -> copyReferences0(value, 256, failure));
+            java.lang.ref.Reference.reachabilityFence(failure);
+        }
+        java.lang.ref.Reference.reachabilityFence(value);
+    }
+
+    private static void nativeLoaders() throws Exception {
+        String resource = "/" + LoaderValue.class.getName().replace('.', '/') + ".class";
+        byte[] bytes;
+        try (var input = ObjectAdapterInteropTest.class.getResourceAsStream(resource)) {
+            if (input == null) throw new IOException("missing native loader fixture");
+            bytes = input.readAllBytes();
+        }
+        Class<?> first = new IsolatedLoader().define(bytes);
+        Class<?> second = new IsolatedLoader().define(bytes);
+        Object value = first.getConstructor().newInstance();
+        Object array = Array.newInstance(first, 1);
+        Class<?> foreignArray = Array.newInstance(second, 1).getClass();
+        check(first != second && first.getName().equals(second.getName()),
+                "JNI loader fixture distinguishes name from identity");
+        for (int selector = 0; selector < 2; selector++) {
+            for (int mode = 0; mode < 6; mode++) {
+                check(invokeAdapter0(value, first, selector, mode, false) == value,
+                        "JNI defining-loader identity");
+                check(invokeAdapter0(value, second, selector, mode, false) == null,
+                        "JNI same-name foreign class refuses");
+                check(invokeAdapter0(array, array.getClass(), selector, mode, false) == array,
+                        "JNI defining-loader array identity");
+                check(invokeAdapter0(array, foreignArray, selector, mode, false) == null,
+                        "JNI foreign array class refuses");
+            }
+        }
+        check(copyReferences0(first, 64, null) == first, "JNI Class reference identity");
+        check(copyReferences0(value, 64, null) == value, "JNI isolated instance reference identity");
+        check(copyReferences0(array, 64, null) == array, "JNI isolated array reference identity");
+        java.lang.ref.Reference.reachabilityFence(first);
+        java.lang.ref.Reference.reachabilityFence(second);
+        java.lang.ref.Reference.reachabilityFence(value);
+        java.lang.ref.Reference.reachabilityFence(array);
+    }
+
+    private static final class NativeAliasReceiver {
+        private final String value = new String("native-alias");
+        private int calls;
+        private RuntimeException failure;
+
+        @Override public <T> T toAdpater(Class<T> type) {
+            calls++;
+            if (failure != null) throw failure;
+            return type.cast(value);
+        }
+    }
+
+    private static final class NativeWrongResult {
+        private final Object value = new Object();
+
+        @Override @SuppressWarnings("unchecked") public <T> T toAdapter(Class<T> type) {
+            return (T) value;
+        }
+    }
+
 
     private static void assignabilityAndPrimitives() {
         Hostile hostile = new Hostile();

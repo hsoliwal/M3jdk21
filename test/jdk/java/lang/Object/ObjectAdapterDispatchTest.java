@@ -22,13 +22,58 @@
 /*
  * @test
  * @summary Object adapter identity, capability, override and array dispatch
- * @run main ObjectAdapterDispatchTest
+ * @run main/othervm --add-opens=java.base/java.lang=ALL-UNNAMED ObjectAdapterDispatchTest
  */
 
 import java.io.Serializable;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.Arrays;
 
 public final class ObjectAdapterDispatchTest {
+    // These are the actual bootstrap classes, never replacement fixtures. The
+    // test opens java.lang explicitly because this owner is package-private.
+    private static final Class<?> M3_OBJECT_CLASS = hiddenClass("java.lang.M3Object");
+    private static final Class<?> M3_FIELD_CLASS = hiddenClass("java.lang.M3Object$Field");
+    private static final Class<?> OBJECT_EVENT_CLASS = hiddenClass("java.lang.ObjectEvent");
+    private static final Method OWNER_OF = ownerMethod("of", Object.class);
+    private static final Method OWNER_SOURCE = ownerMethod("source");
+
+    private static Class<?> hiddenClass(String name) {
+        try {
+            return Class.forName(name, false, null);
+        } catch (ClassNotFoundException failure) {
+            throw new ExceptionInInitializerError(failure);
+        }
+    }
+
+    private static Method ownerMethod(String name, Class<?>... parameters) {
+        try {
+            Method method = M3_OBJECT_CLASS.getDeclaredMethod(name, parameters);
+            method.setAccessible(true);
+            return method;
+        } catch (ReflectiveOperationException failure) {
+            throw new ExceptionInInitializerError(failure);
+        }
+    }
+
+    private static Object invokeOwner(Method method, Object receiver, Object... arguments)
+            throws Throwable {
+        try {
+            return method.invoke(receiver, arguments);
+        } catch (InvocationTargetException failure) {
+            throw failure.getCause();
+        }
+    }
+
+    private static Object ownerOf(Object source) throws Throwable {
+        return invokeOwner(OWNER_OF, null, source);
+    }
+
+    private static Object ownerSource(Object owner) throws Throwable {
+        return invokeOwner(OWNER_SOURCE, owner);
+    }
+
     private interface Marker {}
 
     private static class Base implements Marker, Cloneable {
@@ -69,11 +114,11 @@ public final class ObjectAdapterDispatchTest {
         }
     }
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) throws Throwable {
         ordinaryReceivers();
         subclassDispatch();
         arrayDispatch();
-        expectNullPointer(() -> adapt(null, M3Object.class));
+        expectNullPointer(() -> adapt(null, M3_OBJECT_CLASS));
     }
 
     /*
@@ -84,15 +129,15 @@ public final class ObjectAdapterDispatchTest {
         return receiver.toAdapter(type);
     }
 
-    private static void ordinaryReceivers() {
+    private static void ordinaryReceivers() throws Throwable {
         Object plain = new Object();
         same(plain, adapt(plain, Object.class), "Object identity");
         same(plain, adapt(plain, plain.getClass()), "exact class identity");
         check(adapt(plain, String.class) == null, "unsupported reference type");
         check(adapt(plain, int.class) == null, "primitive request");
         check(adapt(plain, void.class) == null, "void request");
-        check(adapt(plain, ObjectEvent.class) == null, "unrelated capability");
-        check(adapt(plain, M3Object.Field.class) == null, "field is not an adapter");
+        check(adapt(plain, OBJECT_EVENT_CLASS) == null, "unrelated capability");
+        check(adapt(plain, M3_FIELD_CLASS) == null, "field is not an adapter");
         expectNullPointer(() -> adapt(plain, null));
         capability(plain);
 
@@ -105,13 +150,13 @@ public final class ObjectAdapterDispatchTest {
         Class<?> type = String.class;
         same(type, adapt(type, Class.class), "Class receiver identity");
 
-        M3Object owner = adapt(plain, M3Object.class);
-        same(owner, adapt(owner, M3Object.class), "assignability before capability");
+        Object owner = adapt(plain, M3_OBJECT_CLASS);
+        same(owner, adapt(owner, M3_OBJECT_CLASS), "assignability before capability");
         same(owner, adapt(owner, Object.class), "capability Object identity");
         check(adapt(owner, Runnable.class) == null, "capability unsupported type");
     }
 
-    private static void subclassDispatch() throws CloneNotSupportedException {
+    private static void subclassDispatch() throws Throwable {
         Base inherited = new Base();
         Object receiver = inherited;
         same(inherited, adapt(receiver, Base.class), "inherited class identity");
@@ -130,9 +175,9 @@ public final class ObjectAdapterDispatchTest {
                 "override through Object receiver");
         check(overrides.calls == 1, "Object call bypassed override");
         same(overrides, adapt(receiver, Marker.class), "override delegates identity");
-        M3Object owner = adapt(receiver, M3Object.class);
-        same(overrides, owner.source(), "override delegates capability");
-        same(owner, M3Object.of(overrides), "override capability canonical identity");
+        Object owner = adapt(receiver, M3_OBJECT_CLASS);
+        same(overrides, ownerSource(owner), "override delegates capability");
+        same(owner, ownerOf(overrides), "override capability canonical identity");
         check(adapt(receiver, Runnable.class) == null, "override delegates unsupported");
         Object selected = receiver;
         expectNullPointer(() -> adapt(selected, null));
@@ -149,7 +194,7 @@ public final class ObjectAdapterDispatchTest {
                 "cloned subclass adapter dispatch");
     }
 
-    private static void arrayDispatch() {
+    private static void arrayDispatch() throws Throwable {
         Object[] arrays = {
                 new boolean[0], new byte[1], new short[1], new char[1],
                 new int[1], new long[1], new float[1], new double[1],
@@ -189,12 +234,12 @@ public final class ObjectAdapterDispatchTest {
         capability(referencesClone);
     }
 
-    private static void capability(Object source) {
-        M3Object owner = adapt(source, M3Object.class);
+    private static void capability(Object source) throws Throwable {
+        Object owner = adapt(source, M3_OBJECT_CLASS);
         check(owner != null, "missing M3Object capability");
-        same(source, owner.source(), "capability source");
-        same(owner, adapt(source, M3Object.class), "retained adapter identity");
-        same(owner, M3Object.of(source), "direct and inherited adaptation identity");
+        same(source, ownerSource(owner), "capability source");
+        same(owner, adapt(source, M3_OBJECT_CLASS), "retained adapter identity");
+        same(owner, ownerOf(source), "direct and inherited adaptation identity");
     }
 
     private static void expectNullPointer(Runnable action) {

@@ -22,12 +22,12 @@
 /*
  * @test
  * @summary Object.toAdapter preserves its contract across JNI, reflection and method handles
- * @run main/othervm/native -Xcheck:jni ObjectAdapterNativeTest disabled
- * @run main/othervm/native -Xcheck:jni -Djdk.m3.objectEvents.enabled=true ObjectAdapterNativeTest enabled
- * @run main/othervm/native -Xcheck:jni -Xint -Djdk.m3.objectEvents.enabled=false ObjectAdapterNativeTest disabled
- * @run main/othervm/native -Xcheck:jni -Xint -Djdk.m3.objectEvents.enabled=true ObjectAdapterNativeTest enabled
- * @run main/othervm/native -Xcheck:jni -Xcomp -Xbatch -XX:-TieredCompilation -Djdk.m3.objectEvents.enabled=false ObjectAdapterNativeTest disabled
- * @run main/othervm/native -Xcheck:jni -Xcomp -Xbatch -XX:-TieredCompilation -Djdk.m3.objectEvents.enabled=true ObjectAdapterNativeTest enabled
+ * @run main/othervm/native -Xcheck:jni --add-opens=java.base/java.lang=ALL-UNNAMED ObjectAdapterNativeTest disabled
+ * @run main/othervm/native -Xcheck:jni --add-opens=java.base/java.lang=ALL-UNNAMED -Djdk.m3.objectEvents.enabled=true ObjectAdapterNativeTest enabled
+ * @run main/othervm/native -Xcheck:jni --add-opens=java.base/java.lang=ALL-UNNAMED -Xint -Djdk.m3.objectEvents.enabled=false ObjectAdapterNativeTest disabled
+ * @run main/othervm/native -Xcheck:jni --add-opens=java.base/java.lang=ALL-UNNAMED -Xint -Djdk.m3.objectEvents.enabled=true ObjectAdapterNativeTest enabled
+ * @run main/othervm/native -Xcheck:jni --add-opens=java.base/java.lang=ALL-UNNAMED -Xcomp -Xbatch -XX:-TieredCompilation -Djdk.m3.objectEvents.enabled=false ObjectAdapterNativeTest disabled
+ * @run main/othervm/native -Xcheck:jni --add-opens=java.base/java.lang=ALL-UNNAMED -Xcomp -Xbatch -XX:-TieredCompilation -Djdk.m3.objectEvents.enabled=true ObjectAdapterNativeTest enabled
  */
 
 import java.io.InputStream;
@@ -45,6 +45,54 @@ import java.lang.reflect.TypeVariable;
 import java.util.Objects;
 
 public final class ObjectAdapterNativeTest {
+    // These are the actual bootstrap classes, never replacement fixtures. The
+    // test opens java.lang explicitly because this owner is package-private.
+    private static final Class<?> M3_OBJECT_CLASS = hiddenClass("java.lang.M3Object");
+    private static final Class<?> M3_FIELD_CLASS = hiddenClass("java.lang.M3Object$Field");
+    private static final Class<?> OBJECT_EVENT_CLASS = hiddenClass("java.lang.ObjectEvent");
+    private static final Method OWNER_OF = ownerMethod("of", Object.class);
+    private static final Method OWNER_SOURCE = ownerMethod("source");
+    private static final Method OWNER_OBSERVATION = ownerMethod("observationEnabled");
+
+    private static Class<?> hiddenClass(String name) {
+        try {
+            return Class.forName(name, false, null);
+        } catch (ClassNotFoundException failure) {
+            throw new ExceptionInInitializerError(failure);
+        }
+    }
+
+    private static Method ownerMethod(String name, Class<?>... parameters) {
+        try {
+            Method method = M3_OBJECT_CLASS.getDeclaredMethod(name, parameters);
+            method.setAccessible(true);
+            return method;
+        } catch (ReflectiveOperationException failure) {
+            throw new ExceptionInInitializerError(failure);
+        }
+    }
+
+    private static Object invokeOwner(Method method, Object receiver, Object... arguments)
+            throws Throwable {
+        try {
+            return method.invoke(receiver, arguments);
+        } catch (InvocationTargetException failure) {
+            throw failure.getCause();
+        }
+    }
+
+    private static Object ownerOf(Object source) throws Throwable {
+        return invokeOwner(OWNER_OF, null, source);
+    }
+
+    private static Object ownerSource(Object owner) throws Throwable {
+        return invokeOwner(OWNER_SOURCE, owner);
+    }
+
+    private static boolean observationEnabled() throws Throwable {
+        return (boolean) invokeOwner(OWNER_OBSERVATION, null);
+    }
+
     private static final int REPEATED_CALLS = 4_096;
     private static int assertions;
     private static long repeatedCalls;
@@ -128,7 +176,7 @@ public final class ObjectAdapterNativeTest {
         }
         System.loadLibrary("ObjectAdapterNativeTest");
         boolean enabled = args[0].equals("enabled");
-        check(M3Object.observationEnabled() == enabled, "startup observation setting");
+        check(observationEnabled() == enabled, "startup observation setting");
 
         for (NativeMode mode : NativeMode.values()) {
             ordinaryReceivers(mode);
@@ -169,7 +217,7 @@ public final class ObjectAdapterNativeTest {
         same(number, adapt(number, Number.class, mode), mode + " superclass identity");
         same(String.class, adapt(String.class, Class.class, mode), mode + " Class identity");
         for (Class<?> type : new Class<?>[] {String.class, Runnable.class, int.class,
-                void.class, ObjectEvent.class, M3Object.Field.class}) {
+                void.class, OBJECT_EVENT_CLASS, M3_FIELD_CLASS}) {
             same(null, rawAdapt(source, type, mode), mode + " unsupported " + type);
         }
         expect(NullPointerException.class, () -> rawAdapt(source, null, mode),
@@ -200,13 +248,13 @@ public final class ObjectAdapterNativeTest {
         }
     }
 
-    private static void capability(Object source, NativeMode mode) {
-        M3Object owner = adapt(source, M3Object.class, mode);
+    private static void capability(Object source, NativeMode mode) throws Throwable {
+        Object owner = adapt(source, M3_OBJECT_CLASS, mode);
         check(owner != null, mode + " exact M3Object capability");
-        same(source, owner.source(), mode + " capability source");
-        same(owner, adapt(source, M3Object.class, mode), mode + " retained capability identity");
-        same(owner, M3Object.of(source), mode + " existing owner identity");
-        same(owner, adapt(owner, M3Object.class, mode), mode + " assignability before capability");
+        same(source, ownerSource(owner), mode + " capability source");
+        same(owner, adapt(source, M3_OBJECT_CLASS, mode), mode + " retained capability identity");
+        same(owner, ownerOf(source), mode + " existing owner identity");
+        same(owner, adapt(owner, M3_OBJECT_CLASS, mode), mode + " assignability before capability");
         same(owner, adapt(owner, Object.class, mode), mode + " capability Object identity");
     }
 
@@ -214,9 +262,9 @@ public final class ObjectAdapterNativeTest {
         Overrides source = new Overrides();
         same(source.token, adapt(source, AdapterToken.class, mode), mode + " virtual override");
         same(source, adapt(source, Object.class, mode), mode + " delegated identity");
-        M3Object owner = adapt(source, M3Object.class, mode);
-        same(source, owner.source(), mode + " delegated capability source");
-        same(owner, M3Object.of(source), mode + " delegated existing owner");
+        Object owner = adapt(source, M3_OBJECT_CLASS, mode);
+        same(source, ownerSource(owner), mode + " delegated capability source");
+        same(owner, ownerOf(source), mode + " delegated existing owner");
         same(null, adapt(source, Runnable.class, mode), mode + " delegated unsupported type");
         expect(NullPointerException.class, () -> rawAdapt(source, null, mode),
                 mode + " delegated null type token");
@@ -239,16 +287,16 @@ public final class ObjectAdapterNativeTest {
 
     private static void boundedNativeFrame(NativeMode mode) throws Throwable {
         Object source = new Object();
-        M3Object owner = M3Object.of(source);
+        Object owner = ownerOf(source);
         repeat(source, Object.class, source, mode, "identity");
-        repeat(source, M3Object.class, owner, mode, "retained capability");
+        repeat(source, M3_OBJECT_CLASS, owner, mode, "retained capability");
         repeat(source, String.class, null, mode, "unsupported type");
         int[] array = {3, 5, 7};
         repeat(array, int[].class, array, mode, "primitive array");
         Overrides overridden = new Overrides();
         repeat(overridden, AdapterToken.class, overridden.token, mode, "virtual override");
         check(overridden.calls == REPEATED_CALLS, mode + " repeated override call count");
-        same(source, owner.source(), mode + " capability remains retained throughout native loop");
+        same(source, ownerSource(owner), mode + " capability remains retained throughout native loop");
 
         Throws throwing = new Throws();
         same(throwing.failure,
@@ -296,10 +344,10 @@ public final class ObjectAdapterNativeTest {
 
     private static void reflectionDispatch(Method method) throws Throwable {
         Object source = new Object();
-        M3Object owner = M3Object.of(source);
+        Object owner = ownerOf(source);
         same(source, method.invoke(source, Object.class), "reflection identity");
         same(null, method.invoke(source, String.class), "reflection unsupported type");
-        same(owner, method.invoke(source, M3Object.class), "reflection retained capability");
+        same(owner, method.invoke(source, M3_OBJECT_CLASS), "reflection retained capability");
         InvocationTargetException nullToken = expect(InvocationTargetException.class,
                 () -> method.invoke(source, new Object[] {null}), "reflection null token");
         check(nullToken.getCause() instanceof NullPointerException, "reflection wraps null-token NPE");
@@ -317,10 +365,10 @@ public final class ObjectAdapterNativeTest {
 
     private static void methodHandleDispatch(MethodHandle handle) throws Throwable {
         Object source = new Object();
-        M3Object owner = M3Object.of(source);
+        Object owner = ownerOf(source);
         same(source, handleAdapt(handle, source, Object.class), "method handle identity");
         same(null, handleAdapt(handle, source, String.class), "method handle unsupported type");
-        same(owner, handleAdapt(handle, source, M3Object.class), "method handle retained capability");
+        same(owner, handleAdapt(handle, source, M3_OBJECT_CLASS), "method handle retained capability");
         expect(NullPointerException.class, () -> handleAdapt(handle, source, null),
                 "method handle null token");
         Overrides overridden = new Overrides();
@@ -362,8 +410,8 @@ public final class ObjectAdapterNativeTest {
         Object second = secondType.getConstructor().newInstance();
         Object firstArray = Array.newInstance(firstType, 1);
         Object secondArray = Array.newInstance(secondType, 1);
-        M3Object firstOwner = M3Object.of(first);
-        M3Object secondOwner = M3Object.of(second);
+        Object firstOwner = ownerOf(first);
+        Object secondOwner = ownerOf(second);
         check(firstOwner != secondOwner, "separately loaded instances retain distinct owners");
         for (NativeMode mode : NativeMode.values()) {
             same(first, rawAdapt(first, firstType, mode), mode + " first loader identity");
@@ -376,11 +424,11 @@ public final class ObjectAdapterNativeTest {
                     mode + " rejects same-name foreign array class");
             same(firstArray, adapt(firstArray, Object[].class, mode),
                     mode + " loader array reference covariance");
-            same(firstOwner, adapt(first, M3Object.class, mode), mode + " first retained owner");
-            same(secondOwner, adapt(second, M3Object.class, mode), mode + " second retained owner");
+            same(firstOwner, adapt(first, M3_OBJECT_CLASS, mode), mode + " first retained owner");
+            same(secondOwner, adapt(second, M3_OBJECT_CLASS, mode), mode + " second retained owner");
         }
-        same(first, firstOwner.source(), "first loader capability source");
-        same(second, secondOwner.source(), "second loader capability source");
+        same(first, ownerSource(firstOwner), "first loader capability source");
+        same(second, ownerSource(secondOwner), "second loader capability source");
         same(first, method.invoke(first, firstType), "reflection loader identity");
         same(null, method.invoke(first, secondType), "reflection rejects foreign class identity");
         same(first, handleAdapt(handle, first, firstType), "method handle loader identity");
