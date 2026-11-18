@@ -1,0 +1,102 @@
+id	family	capability	receiving_owner	disposition	proof_contract	primary_source	maturity	product_status
+GDN-001	String / lexical	StringGroovyMethods.capitalize	M3String	COMPARE	UTF16_null_locale_extension_precedence	GDK_STR	stable	CANDIDATE_ONLY
+GDN-002	String / lexical	StringGroovyMethods.uncapitalize	M3String	COMPARE	UTF16_null_locale_extension_precedence	GDK_STR	stable	CANDIDATE_ONLY
+GDN-003	String / lexical	StringGroovyMethods.center	M3String	COMPARE	UTF16_null_locale_extension_precedence	GDK_STR	stable	CANDIDATE_ONLY
+GDN-004	String / lexical	StringGroovyMethods.padLeft	M3String	COMPARE	UTF16_null_locale_extension_precedence	GDK_STR	stable	CANDIDATE_ONLY
+GDN-005	String / lexical	StringGroovyMethods.padRight	M3String	COMPARE	UTF16_null_locale_extension_precedence	GDK_STR	stable	CANDIDATE_ONLY
+GDN-006	String / lexical	StringGroovyMethods.normalize	M3String	COMPARE	UTF16_null_locale_extension_precedence	GDK_STR	stable	CANDIDATE_ONLY
+GDN-007	String / lexical	StringGroovyMethods.toInteger	M3String	COMPARE	UTF16_null_locale_extension_precedence	GDK_STR	stable	CANDIDATE_ONLY
+GDN-008	String / lexical	StringGroovyMethods.eachMatch	M3String	COMPARE	UTF16_null_locale_extension_precedence	GDK_STR	stable	CANDIDATE_ONLY
+GDN-009	String / lexical	StringGroovyMethods.findAll	M3String	COMPARE	UTF16_null_locale_extension_precedence	GDK_STR	stable	CANDIDATE_ONLY
+GDN-010	String / lexical	StringGroovyMethods.tokenize	M3String	COMPARE	UTF16_null_locale_extension_precedence	GDK_STR	stable	CANDIDATE_ONLY
+GDN-011	String / lexical	StringGroovyMethods.take	M3String	COMPARE	UTF16_null_locale_extension_precedence	GDK_STR	stable	CANDIDATE_ONLY
+GDN-012	String / lexical	StringGroovyMethods.drop	M3String	COMPARE	UTF16_null_locale_extension_precedence	GDK_STR	stable	CANDIDATE_ONLY
+GDN-013	String / lexical	GString deferred interpolation	M3String	EVALUATE	UTF16_null_locale_extension_precedence	SEMANTICS	stable	CANDIDATE_ONLY
+GDN-014	String / lexical	GString lazy closure interpolation	M3String	EVALUATE	UTF16_null_locale_extension_precedence	SEMANTICS	stable	CANDIDATE_ONLY
+GDN-015	String / lexical	Regex timeout protection	M3String	EVALUATE	UTF16_null_locale_extension_precedence	GROOVY6	stable	CANDIDATE_ONLY
+GDN-016	String / lexical	Groovy slashy/dollar-slashy literals	M3String	COMPILER_ONLY	UTF16_null_locale_extension_precedence	SEMANTICS	stable	CANDIDATE_ONLY
+GDN-017	Collections / arrays	DefaultGroovyMethods.collect	M3Collections	COMPARE	order_null_mutability_callback_generics	GDK_DEF	stable	CANDIDATE_ONLY
+GDN-018	Collections / arrays	DefaultGroovyMethods.collectMany	M3Collections	COMPARE	order_null_mutability_callback_generics	GDK_DEF	stable	CANDIDATE_ONLY
+GDN-019	Collections / arrays	DefaultGroovyMethods.findAll	M3Collections	COMPARE	order_null_mutability_callback_generics	GDK_DEF	stable	CANDIDATE_ONLY
+GDN-020	Collections / arrays	DefaultGroovyMethods.findResult	M3Collections	COMPARE	order_null_mutability_callback_generics	GDK_DEF	stable	CANDIDATE_ONLY
+GDN-021	Collections / arrays	DefaultGroovyMethods.findResults	M3Collections	COMPARE	order_null_mutability_callback_generics	GDK_DEF	stable	CANDIDATE_ONLY
+GDN-022	Collections / arrays	DefaultGroovyMethods.groupBy	M3Collections	COMPARE	order_null_mutability_callback_generics	GDK_DEF	stable	CANDIDATE_ONLY
+GDN-023	Collections / arrays	DefaultGroovyMethods.countBy	M3Collections	COMPARE	order_null_mutability_callback_generics	GDK_DEF	stable	CANDIDATE_ONLY
+GDN-024	Collections / arrays	DefaultGroovyMethods.inject	M3Collections	COMPARE	order_null_mutability_callback_generics	GDK_DEF	stable	CANDIDATE_ONLY
+GDN-025	Collections / arrays	DefaultGroovyMethods.collate	M3Collections	COMPARE	order_null_mutability_callback_generics	GDK_DEF	stable	CANDIDATE_ONLY
+GDN-026	Collections / arrays	DefaultGroovyMethods.flatten	M3Collections	COMPARE	order_null_mutability_callback_generics	GDK_DEF	stable	CANDIDATE_ONLY
+GDN-027	Collections / arrays	DefaultGroovyMethods.transpose	M3Collections	COMPARE	order_null_mutability_callback_generics	GDK_DEF	stable	CANDIDATE_ONLY
+GDN-028	Collections / arrays	DefaultGroovyMethods.combinations	M3Collections	COMPARE	order_null_mutability_callback_generics	GDK_DEF	stable	CANDIDATE_ONLY
+GDN-029	Collections / arrays	DefaultGroovyMethods.permutations	M3Collections	COMPARE	order_null_mutability_callback_generics	GDK_DEF	stable	CANDIDATE_ONLY
+GDN-030	Collections / arrays	DefaultGroovyMethods.takeWhile	M3Collections	COMPARE	order_null_mutability_callback_generics	GDK_DEF	stable	CANDIDATE_ONLY
+GDN-031	Collections / arrays	DefaultGroovyMethods.dropWhile	M3Collections	COMPARE	order_null_mutability_callback_generics	GDK_DEF	stable	CANDIDATE_ONLY
+GDN-032	Collections / arrays	DefaultGroovyMethods.unique	M3Collections	COMPARE	order_null_mutability_callback_generics	GDK_DEF	stable	CANDIDATE_ONLY
+GDN-033	Collections / arrays	DefaultGroovyMethods.sort	M3Collections	COMPARE	order_null_mutability_callback_generics	GDK_DEF	stable	CANDIDATE_ONLY
+GDN-034	Collections / arrays	DefaultGroovyMethods.grep	M3Collections	COMPARE	order_null_mutability_callback_generics	GDK_DEF	stable	CANDIDATE_ONLY
+GDN-035	Collections / arrays	DefaultGroovyMethods.collectEntries	M3Collections	COMPARE	order_null_mutability_callback_generics	GDK_DEF	stable	CANDIDATE_ONLY
+GDN-036	Collections / arrays	DefaultGroovyMethods.withDefault	M3Collections	COMPARE	order_null_mutability_callback_generics	GDK_DEF	stable	CANDIDATE_ONLY
+GDN-037	Collections / arrays	Groovy list/range slicing	M3Collections	EVALUATE	order_null_mutability_callback_generics	SEMANTICS	stable	CANDIDATE_ONLY
+GDN-038	Collections / arrays	Groovy spread operator	M3Collections	COMPILER_ONLY	order_null_mutability_callback_generics	SEMANTICS	stable	CANDIDATE_ONLY
+GDN-039	Collections / arrays	Groovy map literals	M3Collections	COMPILER_ONLY	order_null_mutability_callback_generics	SEMANTICS	stable	CANDIDATE_ONLY
+GDN-040	Collections / arrays	GDK Java functional overloads	M3Collections	COMPARE	order_null_mutability_callback_generics	GDK_DEF	stable	CANDIDATE_ONLY
+GDN-041	Dynamic MOP	GroovyObject.invokeMethod	M3Object/M3Context	EVALUATE	loader_scopes_dispatch_invalidation	META	stable	CANDIDATE_ONLY
+GDN-042	Dynamic MOP	GroovyObject.getProperty	M3Object/M3Context	EVALUATE	loader_scopes_dispatch_invalidation	META	stable	CANDIDATE_ONLY
+GDN-043	Dynamic MOP	GroovyObject.setProperty	M3Object/M3Context	EVALUATE	loader_scopes_dispatch_invalidation	META	stable	CANDIDATE_ONLY
+GDN-044	Dynamic MOP	GroovyObject.getMetaClass	M3Object/M3Context	EVALUATE	loader_scopes_dispatch_invalidation	META	stable	CANDIDATE_ONLY
+GDN-045	Dynamic MOP	methodMissing	M3Object/M3Context	EVALUATE	loader_scopes_dispatch_invalidation	META	stable	CANDIDATE_ONLY
+GDN-046	Dynamic MOP	propertyMissing	M3Object/M3Context	EVALUATE	loader_scopes_dispatch_invalidation	META	stable	CANDIDATE_ONLY
+GDN-047	Dynamic MOP	ExpandoMetaClass	M3Object/M3Context	EVALUATE	loader_scopes_dispatch_invalidation	META	stable	CANDIDATE_ONLY
+GDN-048	Dynamic MOP	GroovyInterceptable	M3Object/M3Context	EVALUATE	loader_scopes_dispatch_invalidation	META	stable	CANDIDATE_ONLY
+GDN-049	Dynamic MOP	MetaClassRegistry	M3Object/M3Context	EVALUATE	loader_scopes_dispatch_invalidation	META	stable	CANDIDATE_ONLY
+GDN-050	Dynamic MOP	Categories/use lexical scope	M3Object/M3Context	EVALUATE	loader_scopes_dispatch_invalidation	META	stable	CANDIDATE_ONLY
+GDN-051	Dynamic MOP	Extension module descriptors	M3Object/M3Context	EVALUATE	loader_scopes_dispatch_invalidation	META	stable	CANDIDATE_ONLY
+GDN-052	Dynamic MOP	invokedynamic bootstrap and call sites	M3Object/M3Context	EVALUATE	loader_scopes_dispatch_invalidation	META	stable	CANDIDATE_ONLY
+GDN-053	Dynamic MOP	Closure owner/delegate/this	M3Object/M3Context	EVALUATE	loader_scopes_dispatch_invalidation	META	stable	CANDIDATE_ONLY
+GDN-054	Dynamic MOP	Closure resolve strategies	M3Object/M3Context	EVALUATE	loader_scopes_dispatch_invalidation	META	stable	CANDIDATE_ONLY
+GDN-055	Dynamic MOP	Closure currying/memoize	M3Object/M3Context	EVALUATE	loader_scopes_dispatch_invalidation	META	stable	CANDIDATE_ONLY
+GDN-056	Dynamic MOP	Operator method overloading	M3Object/M3Context	COMPILER_ONLY	loader_scopes_dispatch_invalidation	SEMANTICS	stable	CANDIDATE_ONLY
+GDN-057	Dynamic MOP	Groovy truth	M3Object/M3Context	COMPILER_ONLY	loader_scopes_dispatch_invalidation	SEMANTICS	stable	CANDIDATE_ONLY
+GDN-058	Dynamic MOP	asType/coercion	M3Object/M3Context	COMPILER_ONLY	loader_scopes_dispatch_invalidation	SEMANTICS	stable	CANDIDATE_ONLY
+GDN-059	Compiler / AST	Groovy ModuleNode ingress	M3AST/M3Compiler	REUSE	parse_generation_source_span_ABI	PRODUCT_PR1518	stable	EXISTING_ADAPTER
+GDN-060	Compiler / AST	Groovy ASTTransformation	M3AST/M3Compiler	EVALUATE	parse_generation_source_span_ABI	META	stable	CANDIDATE_ONLY
+GDN-061	Compiler / AST	@CompileStatic	M3AST/M3Compiler	EVALUATE	parse_generation_source_span_ABI	SEMANTICS	stable	CANDIDATE_ONLY
+GDN-062	Compiler / AST	@TypeChecked	M3AST/M3Compiler	EVALUATE	parse_generation_source_span_ABI	SEMANTICS	stable	CANDIDATE_ONLY
+GDN-063	Compiler / AST	Type checking extensions	M3AST/M3Compiler	EVALUATE	parse_generation_source_span_ABI	SEMANTICS	stable	CANDIDATE_ONLY
+GDN-064	Compiler / AST	Macros and macro methods	M3AST/M3Compiler	EVALUATE	parse_generation_source_span_ABI	META	stable	CANDIDATE_ONLY
+GDN-065	Compiler / AST	@Immutable/@Canonical	M3AST/M3Compiler	EVALUATE	parse_generation_source_span_ABI	META	stable	CANDIDATE_ONLY
+GDN-066	Compiler / AST	@Builder and @TupleConstructor	M3AST/M3Compiler	EVALUATE	parse_generation_source_span_ABI	META	stable	CANDIDATE_ONLY
+GDN-067	Compiler / AST	@Memoized	M3AST/M3Compiler	EVALUATE	parse_generation_source_span_ABI	META	stable	CANDIDATE_ONLY
+GDN-068	Compiler / AST	@DelegatesTo	M3AST/M3Compiler	EVALUATE	parse_generation_source_span_ABI	META	stable	CANDIDATE_ONLY
+GDN-069	Compiler / AST	Groovy trait composition	M3AST/M3Compiler	EVALUATE	parse_generation_source_span_ABI	SEMANTICS	stable	CANDIDATE_ONLY
+GDN-070	Compiler / AST	Extension method name indexing	M3AST/M3Compiler	EVALUATE	parse_generation_source_span_ABI	GROOVY6	stable	CANDIDATE_ONLY
+GDN-071	Compiler / AST	Source parser lexer DFA optimizations	M3AST/M3Compiler	EVALUATE	parse_generation_source_span_ABI	GROOVY6	stable	CANDIDATE_ONLY
+GDN-072	Compiler / AST	@GroovyABI classfile surface	M3AST/M3Compiler	EVALUATE	parse_generation_source_span_ABI	GROOVY6	stable	CANDIDATE_ONLY
+GDN-073	Compiler / AST	AST query API	M3AST/M3Compiler	EVALUATE	parse_generation_source_span_ABI	GROOVY6	incubating	CANDIDATE_ONLY
+GDN-074	Compiler / AST	@Pure/@Modifies contract checker	M3AST/M3Compiler	EVALUATE	parse_generation_source_span_ABI	GROOVY6	stable	CANDIDATE_ONLY
+GDN-075	Compiler / AST	@Associative/@Reducer checker	M3AST/M3Compiler	EVALUATE	parse_generation_source_span_ABI	GROOVY6	stable	CANDIDATE_ONLY
+GDN-076	Query / data	GINQ query translation	M3DB/M3AST	EVALUATE	ordered_results_source_vs_generated	GROOVY6	stable	CANDIDATE_ONLY
+GDN-077	Query / data	GINQ joins/grouping	M3DB/M3AST	EVALUATE	ordered_results_source_vs_generated	GROOVY6	stable	CANDIDATE_ONLY
+GDN-078	Query / data	GPath object navigation	M3DB/M3AST	EVALUATE	ordered_results_source_vs_generated	SEMANTICS	stable	CANDIDATE_ONLY
+GDN-079	Query / data	GPath XML navigation	M3DB/M3AST	EVALUATE	ordered_results_source_vs_generated	SEMANTICS	stable	CANDIDATE_ONLY
+GDN-080	Query / data	Groovy JsonSlurper/JsonOutput	M3DB/M3AST	KEEP_EXTERNAL	ordered_results_source_vs_generated	META	stable	CANDIDATE_ONLY
+GDN-081	Query / data	Groovy XmlSlurper/MarkupBuilder	M3DB/M3AST	EVALUATE	ordered_results_source_vs_generated	META	stable	CANDIDATE_ONLY
+GDN-082	Query / data	GDK SQL utilities	M3DB/M3AST	EVALUATE	ordered_results_source_vs_generated	GROOVY6	stable	CANDIDATE_ONLY
+GDN-083	Scripting / IDE	GroovyShell	Maven/m2e/M3Scripting	KEEP_EXTERNAL	isolated_classloaders_untrusted_code	META	stable	CANDIDATE_ONLY
+GDN-084	Scripting / IDE	GroovyClassLoader	Maven/m2e/M3Scripting	KEEP_EXTERNAL	isolated_classloaders_untrusted_code	META	stable	CANDIDATE_ONLY
+GDN-085	Scripting / IDE	JSR-223 GroovyScriptEngineImpl	Maven/m2e/M3Scripting	KEEP_EXTERNAL	isolated_classloaders_untrusted_code	META	stable	CANDIDATE_ONLY
+GDN-086	Scripting / IDE	Gradle Groovy DSL	Maven/m2e/M3Scripting	REUSE	isolated_classloaders_untrusted_code	PRODUCT_PR1518	stable	EXISTING_ADAPTER
+GDN-087	Scripting / IDE	GMavenPlus Maven lifecycle	Maven/m2e/M3Scripting	REUSE	isolated_classloaders_untrusted_code	M2E_PR11	stable	EXISTING_TOOLING
+GDN-088	Scripting / IDE	Groovy-Eclipse precedence	Maven/m2e/M3Scripting	REUSE	isolated_classloaders_untrusted_code	M2E_PR11	stable	EXISTING_TOOLING
+GDN-089	Scripting / IDE	Groovy language server	Maven/m2e/M3Scripting	REUSE	isolated_classloaders_untrusted_code	MAVEN_PR156	stable	EXISTING_TOOLING
+GDN-090	Scripting / IDE	Jenkins Scripted Pipeline	Maven/m2e/M3Scripting	KEEP_EXTERNAL	isolated_classloaders_untrusted_code	META	stable	CANDIDATE_ONLY
+GDN-091	Scripting / IDE	Grape dependency resolution	Maven/m2e/M3Scripting	KEEP_EXTERNAL	isolated_classloaders_untrusted_code	GROOVY6	stable	CANDIDATE_ONLY
+GDN-092	Scripting / IDE	Groovy SwingBuilder/MarkupBuilder	Maven/m2e/M3Scripting	EVALUATE	isolated_classloaders_untrusted_code	META	stable	CANDIDATE_ONLY
+GDN-093	Concurrency / runtime	Native async/await	M3Scheduler/M3Stream	EVALUATE	cancellation_order_thread_safety	GROOVY6	incubating	CANDIDATE_ONLY
+GDN-094	Concurrency / runtime	AsyncScope	M3Scheduler/M3Stream	EVALUATE	cancellation_order_thread_safety	GROOVY6	incubating	CANDIDATE_ONLY
+GDN-095	Concurrency / runtime	Go-style channels	M3Scheduler/M3Stream	EVALUATE	cancellation_order_thread_safety	GROOVY6	incubating	CANDIDATE_ONLY
+GDN-096	Concurrency / runtime	Agents/actors/dataflow variables	M3Scheduler/M3Stream	EVALUATE	cancellation_order_thread_safety	GROOVY6	incubating	CANDIDATE_ONLY
+GDN-097	Concurrency / runtime	ChannelSelect	M3Scheduler/M3Stream	EVALUATE	cancellation_order_thread_safety	GROOVY6	incubating	CANDIDATE_ONLY
+GDN-098	Concurrency / runtime	Collection.collectParallel	M3Scheduler/M3Stream	EVALUATE	cancellation_order_thread_safety	GROOVY6	incubating	CANDIDATE_ONLY
+GDN-099	Concurrency / runtime	Collection.findAllParallel	M3Scheduler/M3Stream	EVALUATE	cancellation_order_thread_safety	GROOVY6	incubating	CANDIDATE_ONLY
+GDN-100	Concurrency / runtime	Virtual-thread async bridge	M3Scheduler/M3Stream	EVALUATE	cancellation_order_thread_safety	GROOVY6	incubating	CANDIDATE_ONLY
+GDN-101	Concurrency / runtime	groovy-concurrent-java	M3Scheduler/M3Stream	KEEP_EXTERNAL	cancellation_order_thread_safety	GROOVY6	incubating	CANDIDATE_ONLY

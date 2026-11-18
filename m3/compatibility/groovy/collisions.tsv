@@ -1,0 +1,17 @@
+# Java owner<TAB>method<TAB>arity<TAB>upstream extension family; conservative name/arity gates only
+java.lang.String	capitalize	0	Groovy GDK String
+java.lang.String	uncapitalize	0	Groovy GDK String
+java.lang.String	center	1	Groovy GDK String
+java.lang.String	center	2	Groovy GDK String
+java.lang.String	padLeft	1	Groovy GDK String
+java.lang.String	padRight	1	Groovy GDK String
+java.lang.String	reverse	0	Groovy GDK String
+java.lang.String	normalize	0	Groovy GDK String
+java.lang.String	toInteger	0	Groovy GDK String
+java.lang.String	eachMatch	1	Groovy GDK String
+java.lang.String	collect	1	Groovy GDK String
+java.util.List	collect	1	Groovy GDK List
+java.util.List	findAll	1	Groovy GDK List
+java.util.List	groupBy	1	Groovy GDK List
+java.util.Collection	countBy	1	Groovy GDK Collection
+java.util.Map	collectEntries	1	Groovy GDK Map
