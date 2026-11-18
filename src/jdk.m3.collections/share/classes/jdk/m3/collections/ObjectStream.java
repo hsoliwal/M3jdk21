@@ -15,6 +15,7 @@
 package jdk.m3.collections;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
@@ -98,6 +99,19 @@ public final class ObjectStream<T> {
                 first.replayable && second.replayable);
     }
 
+    /**
+     * A replayable, live window over one caller-owned Object[] array. Logical
+     * offsets are checked once; no slice copy or per-element wrapper is created.
+     * Array edits remain visible on future traversals. The caller owns mutation.
+     */
+    public static <T> ObjectStream<T> arrayWindow(T[] values, int offset, int length) {
+        Objects.requireNonNull(values, "values");
+        Objects.checkFromIndexSize(offset, length, values.length);
+        int end = offset + length;
+        return new ObjectStream<>(
+                () -> StreamSupport.stream(Arrays.spliterator(values, offset, end), false), true);
+    }
+
     /** Traverse a live collection on every evaluation; the source owns concurrent-modification semantics. */
     public static <T> ObjectStream<T> live(Collection<T> source) {
         Objects.requireNonNull(source, "source");
@@ -115,6 +129,55 @@ public final class ObjectStream<T> {
     }
 
     public boolean replayable() { return replayable; }
+
+    /** Indexed mapping without a boxed Long or retained per-entry index object. */
+    @FunctionalInterface
+    public interface IndexedMapper<E, R> {
+        R apply(E element, long index);
+    }
+
+    /**
+     * Lazy one-pass zip, stopping at the shorter input. No Tuple/Entry object
+     * is allocated by the operator. The result closes both sources, including
+     * on terminal short-circuit; a failed second open closes the first.
+     */
+    public static <A, B, R> ObjectStream<R> zip(
+            ObjectStream<? extends A> left, ObjectStream<? extends B> right,
+            BiFunction<? super A, ? super B, ? extends R> zipper) {
+        Objects.requireNonNull(left, "left");
+        Objects.requireNonNull(right, "right");
+        Objects.requireNonNull(zipper, "zipper");
+        return new ObjectStream<>(() -> {
+            Stream<? extends A> sourceA = left.stream();
+            try {
+                Stream<? extends B> sourceB = right.stream();
+                try {
+                    Iterator<? extends A> a = sourceA.iterator();
+                    Iterator<? extends B> b = sourceB.iterator();
+                    Spliterator<R> pairs = new Spliterators.AbstractSpliterator<>(
+                            Long.MAX_VALUE, Spliterator.ORDERED) {
+                        @Override public boolean tryAdvance(Consumer<? super R> action) {
+                            Objects.requireNonNull(action, "action");
+                            if (!a.hasNext() || !b.hasNext()) return false;
+                            action.accept(zipper.apply(a.next(), b.next()));
+                            return true;
+                        }
+                    };
+                    return StreamSupport.stream(pairs, false).onClose(() -> {
+                        try (sourceA; sourceB) { /* release both sources */ }
+                    });
+                } catch (RuntimeException | Error failure) {
+                    try { sourceB.close(); }
+                    catch (RuntimeException | Error closing) { failure.addSuppressed(closing); }
+                    throw failure;
+                }
+            } catch (RuntimeException | Error failure) {
+                try { sourceA.close(); }
+                catch (RuntimeException | Error closing) { failure.addSuppressed(closing); }
+                throw failure;
+            }
+        }, left.replayable && right.replayable);
+    }
 
     /** A fresh sequential traversal. The caller must close this stream, including after short-circuiting. */
     public Stream<T> stream() {
@@ -134,6 +197,22 @@ public final class ObjectStream<T> {
     public <R> ObjectStream<R> map(Function<? super T, ? extends R> mapper) {
         Objects.requireNonNull(mapper, "mapper");
         return new ObjectStream<>(() -> stream().map(mapper), replayable);
+    }
+
+    /**
+     * Per-traversal primitive encounter index, resetting at each replay.
+     * Unlike tuple-based zipWithIndex, the index is delivered as primitive long.
+     */
+    public <R> ObjectStream<R> mapIndexed(IndexedMapper<? super T, ? extends R> mapper) {
+        Objects.requireNonNull(mapper, "mapper");
+        return new ObjectStream<>(() -> {
+            long[] index = new long[1];
+            return stream().map(value -> {
+                long ordinal = index[0];
+                index[0] = Math.addExact(ordinal, 1L);
+                return mapper.apply(value, ordinal);
+            });
+        }, replayable);
     }
 
     /** Map one input to a finite Iterable without first allocating an intermediate result collection. */
@@ -182,6 +261,56 @@ public final class ObjectStream<T> {
     public ObjectStream<T> dropWhile(Predicate<? super T> predicate) {
         Objects.requireNonNull(predicate, "predicate");
         return stage(s -> s.dropWhile(predicate));
+    }
+
+    /**
+     * Equivalent to a streaming zipWithNext mapper, but reads the source once.
+     * Stores one previous element and never allocates an intermediate window.
+     */
+    public <R> ObjectStream<R> mapAdjacent(
+            BiFunction<? super T, ? super T, ? extends R> mapper) {
+        Objects.requireNonNull(mapper, "mapper");
+        return new ObjectStream<>(() -> {
+            Stream<T> upstream = stream();
+            Iterator<T> input = upstream.iterator();
+            Spliterator<R> pairs = new Spliterators.AbstractSpliterator<>(
+                    Long.MAX_VALUE, Spliterator.ORDERED) {
+                private boolean initialized;
+                private T previous;
+                @Override public boolean tryAdvance(Consumer<? super R> action) {
+                    Objects.requireNonNull(action, "action");
+                    if (!initialized) {
+                        if (!input.hasNext()) return false;
+                        previous = input.next();
+                        initialized = true;
+                    }
+                    if (!input.hasNext()) return false;
+                    T next = input.next();
+                    R mapped = mapper.apply(previous, next);
+                    previous = next;
+                    action.accept(mapped);
+                    return true;
+                }
+            };
+            return StreamSupport.stream(pairs, false).onClose(upstream::close);
+        }, replayable);
+    }
+
+    /**
+     * Drop only adjacent equal occurrences; unlike distinct(maxDistinct),
+     * this needs O(1) key state rather than a growing hash table.
+     */
+    public ObjectStream<T> distinctAdjacent() {
+        return new ObjectStream<>(() -> {
+            Object[] last = new Object[1];
+            boolean[] seen = new boolean[1];
+            return stream().filter(value -> {
+                if (seen[0] && Objects.equals(last[0], value)) return false;
+                last[0] = value;
+                seen[0] = true;
+                return true;
+            });
+        }, replayable);
     }
 
     /** Stable first-occurrence distinctness with a hard key-state cap. */
