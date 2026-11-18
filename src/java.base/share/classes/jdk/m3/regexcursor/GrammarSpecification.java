@@ -146,6 +146,47 @@ public final class GrammarSpecification {
     }
 
     /**
+     * Load a build-precomputed syntax table only if the complete image matches a
+     * SHA-256 supplied from an independent, trusted manifest. The embedded image
+     * checksum alone is not a trust boundary: a changed prediction table can
+     * be rechecksummed without changing the grammar fingerprint.
+     *
+     * <p>This distinctly named method preserves the existing source overloads.
+     * The input is copied once before authenticating it, so concurrent mutation
+     * of a borrowed byte array cannot cause a check/use mismatch. The decoder
+     * may make an additional bounded copy when preparing immutable tables.</p>
+     *
+     * @throws IllegalArgumentException on a malformed digest, unpinned image,
+     *         or a mismatch between the trusted manifest and the supplied bytes
+     */
+    public static GrammarSpecification compileWithPinnedSyntaxImage(
+            String language, String revision,
+            List<StaticGrammarLexicon.Literal> fixed, List<RegexRule> regex,
+            int startSymbol, List<Production> grammar,
+            byte[] syntaxImage, String expectedSha256) {
+        Objects.requireNonNull(syntaxImage, "syntaxImage");
+        Objects.requireNonNull(expectedSha256, "expectedSha256");
+        if (syntaxImage.length > MAX_SYNTAX_IMAGE || syntaxImage.length < 32) {
+            throw new IllegalArgumentException("pinned syntax image length invalid");
+        }
+        if (expectedSha256.length() != 64) {
+            throw new IllegalArgumentException("pinned syntax image SHA-256 format invalid");
+        }
+        byte[] expected;
+        try {
+            expected = HexFormat.of().parseHex(expectedSha256);
+        } catch (IllegalArgumentException invalidHex) {
+            throw new IllegalArgumentException("pinned syntax image SHA-256 format invalid", invalidHex);
+        }
+        byte[] image = syntaxImage.clone();
+        if (!MessageDigest.isEqual(sha256(image, 0, image.length), expected)) {
+            throw new IllegalArgumentException("pinned syntax image SHA-256 mismatch");
+        }
+        return compileWithSyntaxImage(language, revision, fixed, regex,
+                startSymbol, grammar, image);
+    }
+
+    /**
      * Reuse a trusted, hash-checked syntax-table build artifact, avoiding runtime
      * FIRST/FOLLOW and prediction-table construction. The input grammar, token
      * semantics and version must exactly match the image or loading fails closed.
