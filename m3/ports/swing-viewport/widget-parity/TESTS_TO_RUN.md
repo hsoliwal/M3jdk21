@@ -78,3 +78,20 @@ java -Djava.awt.headless=true -Xmx128m -cp /tmp/m3-native jdk.m3.swing.widgets.M
 To reproduce the executed standalone gates, use the exact commands
 in [GRID_PARITY.md](GRID_PARITY.md). The full Maven, jtreg,
 source-built M3JDK and cross-toolkit gates remain separate.
+
+## M3Grid pinned top/bottom view rows
+
+| Gate | Result |
+|---|---|
+| Strict Java 21 Werror compile, source/standalone tests | LOCAL_PASS |
+| Existing M3GridContractSmoke frozen-column/headless/1M | LOCAL_PASS |
+| New M3GridPinnedRowsSmoke pixels, hit geometry, 2+2 rows, sorter, filter, scroll-mode restore, 1M virtual model | LOCAL_PASS |
+| Existing M3GridHeadfulSmoke native frozen-column Robot click on Linux/Xvfb | LOCAL_PASS |
+| New M3GridPinnedRowsHeadfulSmoke native top and bottom row Robot click, no body scroll jump | LOCAL_PASS |
+| java.desktop --patch-module Werror compile and named-module headless/headful execution | LOCAL_PASS |
+| Git blob seals of new production and both standalone pinned tests | VERIFIED |
+| Full reactor, source-built JDK/jtreg, GTK4/Cocoa/Win32 and accessibility | NOT_RUN |
+| Canonical Synexia recipe fixed point, full Nebula Grid parity | NOT_RUN |
+
+See [GRID_PINNED_ROWS.md](GRID_PINNED_ROWS.md) for design,
+exact source seals, reproduction and limits.

@@ -9,4 +9,8 @@ class M3GridParityTest {
     void frozenColumnsHeaderSelectionAndMillionRows() throws Exception {
         M3GridContractSmoke.main(new String[0]);
     }
+    @Test
+    void frozenTopBottomRowsAndMillionRowWindow() throws Exception {
+        M3GridPinnedRowsSmoke.main(new String[0]);
+    }
 }

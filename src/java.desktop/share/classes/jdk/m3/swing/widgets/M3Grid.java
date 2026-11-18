@@ -33,6 +33,13 @@ public final class M3Grid extends JTable {
     private transient CellRendererPane frozenPainter;
     private transient boolean stockPainting;
     private transient long frozenPaintedCells;
+    // Opt-in pinned rows retain view-row coordinates, not extra model rows.
+    // Their renderers and editors remain owned by this single JTable.
+    private int pinnedTopRows;
+    private int pinnedBottomRows;
+    private transient long pinnedPaintedCells;
+    private transient JViewport scrollModeViewport;
+    private transient int previousScrollMode = -1;
     private JTableHeader originalHeader;
     private PinnedHeader pinnedHeader;
 
@@ -63,6 +70,131 @@ public final class M3Grid extends JTable {
     /** Number of rendered frozen body cells, for performance and damage regression gates. */
     public long getFrozenPaintedCells() { return frozenPaintedCells; }
 
+    /** Currently pinned first view rows, automatically bounded after a filter/model change. */
+    public int getPinnedTopRowCount() { return Math.min(pinnedTopRows, getRowCount()); }
+
+    /** Currently pinned last view rows, excluding the first pinned rows. */
+    public int getPinnedBottomRowCount() {
+        return Math.min(pinnedBottomRows, Math.max(0, getRowCount() - getPinnedTopRowCount()));
+    }
+
+    /** Number of pinned-row cells actually rendered since construction. */
+    public long getPinnedPaintedCells() { return pinnedPaintedCells; }
+
+    /**
+     * Pins the first and last rows of the current *view* (including its sorter
+     * and filter). Uses only the original JTable renderers and TableModel;
+     * no per-row objects or copied data. The default (0, 0) is stock Swing.
+     *
+     * <p>The enclosing viewport's original scrolling mode is restored when
+     * pinning is disabled. While rows are pinned, SIMPLE_SCROLL_MODE prevents
+     * a native blit from moving the top/bottom painted planes along with the body.</p>
+     */
+    public void setPinnedRowCounts(int top, int bottom) {
+        requireEdt();
+        if (top < 0 || bottom < 0 || (long) top + bottom > getRowCount()) {
+            throw new IllegalArgumentException("pinned view rows out of range");
+        }
+        if (pinnedTopRows == top && pinnedBottomRows == bottom) return;
+        pinnedTopRows = top;
+        pinnedBottomRows = bottom;
+        synchronizeScrollMode();
+        positionPinnedEditor();
+        repaint();
+    }
+
+    private boolean rowPinsActive() {
+        return (getPinnedTopRowCount() > 0 || getPinnedBottomRowCount() > 0)
+                && getParent() instanceof JViewport && getComponentOrientation().isLeftToRight()
+                && !isPaintingForPrint();
+    }
+
+    /** Row heights are derived from JTable's own rowModel and capped by the viewport. */
+    private int pinnedTopHeight(Rectangle visible) {
+        int height = 0;
+        for (int row = 0, end = getPinnedTopRowCount(); row < end && height < visible.height; row++) {
+            height += Math.min(getRowHeight(row), visible.height - height);
+        }
+        return height;
+    }
+
+    private int pinnedBottomHeight(Rectangle visible, int topHeight) {
+        int height = 0, available = visible.height - topHeight;
+        int end = getRowCount() - getPinnedBottomRowCount();
+        for (int row = getRowCount() - 1; row >= end && height < available; row--) {
+            height += Math.min(getRowHeight(row), available - height);
+        }
+        return height;
+    }
+
+    /** Convert pinned pixels to JTable's existing view-row indices. */
+    @Override public int rowAtPoint(Point point) {
+        if (!stockPainting && rowPinsActive()) {
+            Rectangle visible = getVisibleRect();
+            int relative = point.y - visible.y;
+            if (relative >= 0 && relative < visible.height) {
+                int topHeight = pinnedTopHeight(visible);
+                if (relative < topHeight) {
+                    int y = 0;
+                    for (int row = 0; row < getPinnedTopRowCount(); row++) {
+                        y += getRowHeight(row);
+                        if (relative < y) return row;
+                        if (y >= topHeight) break;
+                    }
+                }
+                int bottomHeight = pinnedBottomHeight(visible, topHeight);
+                int floor = visible.height - bottomHeight;
+                if (bottomHeight > 0 && relative >= floor) {
+                    int y = visible.height;
+                    int end = getRowCount() - getPinnedBottomRowCount();
+                    for (int row = getRowCount() - 1; row >= end; row--) {
+                        int start = y - getRowHeight(row);
+                        if (relative >= Math.max(floor, start) && relative < y) return row;
+                        y = start;
+                        if (y <= floor) break;
+                    }
+                }
+            }
+        }
+        return super.rowAtPoint(point);
+    }
+
+    /**
+     * JTable's keyboard/mouse selection calls scrollRectToVisible with the
+     * *unprojected* row/cell bounds. A pinned selection is already on screen;
+     * project that rectangle into the overlay to avoid jumping the viewport
+     * to row zero or the model's final row. Keep stock behavior otherwise.
+     */
+    @Override public void scrollRectToVisible(Rectangle rect) {
+        if (rect != null && rowPinsActive()) {
+            int row = super.rowAtPoint(new Point(rect.x, rect.y));
+            int top = getPinnedTopRowCount();
+            int bottom = getPinnedBottomRowCount();
+            if (row >= 0 && (row < top || row >= getRowCount() - bottom)) {
+                Rectangle visible = getVisibleRect();
+                Rectangle projected = new Rectangle(rect);
+                if (row < top) {
+                    int y = visible.y;
+                    for (int i = 0; i < row; i++) y += getRowHeight(i);
+                    projected.y = y;
+                } else {
+                    int y = visible.y + visible.height;
+                    for (int i = getRowCount() - 1; i >= row; i--) y -= getRowHeight(i);
+                    projected.y = y;
+                }
+                int column = super.columnAtPoint(new Point(rect.x, rect.y));
+                if (pinned() && column >= 0 && column < getFrozenColumnCount()) {
+                    int x = visible.x;
+                    for (int i = 0; i < column; i++) x += getColumnModel().getColumn(i).getWidth();
+                    projected.x = x;
+                }
+                super.scrollRectToVisible(projected);
+                return;
+            }
+        }
+        super.scrollRectToVisible(rect);
+    }
+
     /** Hit testing in the actual viewport, with view columns as the result. */
     @Override public int columnAtPoint(Point point) {
         if (!stockPainting && pinned() && getFrozenColumnCount() > 0) {
@@ -88,7 +220,11 @@ public final class M3Grid extends JTable {
         boolean old = stockPainting;
         stockPainting = true;
         try { super.paintComponent(g); } finally { stockPainting = old; }
-        if (!pinned()) return;
+        if (pinned()) paintFrozenColumns(g);
+        if (rowPinsActive()) paintPinnedRows(g);
+    }
+
+    private void paintFrozenColumns(Graphics g) {
         Rectangle visible = getVisibleRect();
         if (visible.isEmpty()) return;
         int frozenWidth = Math.min(getFrozenWidth(), visible.width);
@@ -130,6 +266,85 @@ public final class M3Grid extends JTable {
         } finally { layer.dispose(); }
     }
 
+    /** Composes top and bottom planes over the stock scrolled body and frozen columns. */
+    private void paintPinnedRows(Graphics graphics) {
+        Rectangle visible = getVisibleRect();
+        if (visible.isEmpty() || getColumnCount() == 0) return;
+        int topHeight = pinnedTopHeight(visible);
+        int bottomHeight = pinnedBottomHeight(visible, topHeight);
+        if (topHeight + bottomHeight == 0) return;
+        Rectangle clip = graphics.getClipBounds();
+        boolean paintTop = topHeight > 0 && (clip == null ||
+                clip.intersects(visible.x, visible.y, visible.width, topHeight));
+        boolean paintBottom = bottomHeight > 0 && (clip == null ||
+                clip.intersects(visible.x, visible.y + visible.height - bottomHeight,
+                        visible.width, bottomHeight));
+        if (!paintTop && !paintBottom) return;
+        if (frozenPainter == null) frozenPainter = new CellRendererPane();
+        // The raw JTable column lookup excludes the pinned-column hit mapping.
+        int first = super.columnAtPoint(new Point(visible.x, visible.y));
+        int last = super.columnAtPoint(new Point(visible.x + visible.width - 1, visible.y));
+        if (first < 0) return;
+        if (last < first) last = getColumnCount() - 1;
+        Graphics layer = graphics.create();
+        try {
+            if (paintTop) {
+                layer.clipRect(visible.x, visible.y, visible.width, topHeight);
+                int y = visible.y;
+                for (int row = 0; row < getPinnedTopRowCount() && y < visible.y + topHeight; row++) {
+                    int h = getRowHeight(row);
+                    paintPinnedRow(layer, visible, row, y, h, first, last);
+                    y += h;
+                }
+            }
+        } finally { layer.dispose(); }
+        if (paintBottom) {
+            layer = graphics.create();
+            try {
+                int floor = visible.y + visible.height - bottomHeight;
+                layer.clipRect(visible.x, floor, visible.width, bottomHeight);
+                int y = visible.y + visible.height;
+                int limit = getRowCount() - getPinnedBottomRowCount();
+                for (int row = getRowCount() - 1; row >= limit && y > floor; row--) {
+                    int h = getRowHeight(row);
+                    y -= h;
+                    paintPinnedRow(layer, visible, row, y, h, first, last);
+                }
+            } finally { layer.dispose(); }
+        }
+    }
+
+    /** Reuses CellRendererPane; no parallel row storage or model reads outside viewport bands. */
+    private void paintPinnedRow(Graphics layer, Rectangle visible,
+                                int row, int y, int height, int first, int last) {
+        Rectangle clip = layer.getClipBounds();
+        if (clip != null && !clip.intersects(visible.x, y, visible.width, height)) return;
+        layer.setColor(getBackground());
+        layer.fillRect(visible.x, y, visible.width, height);
+        for (int column = first; column <= last; column++) {
+            Rectangle cell = super.getCellRect(row, column, false);
+            paintPinnedCell(layer, row, column, cell.x, y, cell.width, height);
+        }
+        if (pinned()) {
+            int x = visible.x;
+            for (int column = 0; column < getFrozenColumnCount() && x < visible.x + visible.width; column++) {
+                int width = getColumnModel().getColumn(column).getWidth();
+                paintPinnedCell(layer, row, column, x, y, width, height);
+                x += width;
+            }
+        }
+    }
+
+    private void paintPinnedCell(Graphics layer, int row, int column,
+                                 int x, int y, int width, int height) {
+        Rectangle clip = layer.getClipBounds();
+        if (width <= 0 || (clip != null && !clip.intersects(x, y, width, height))) return;
+        TableCellRenderer renderer = getCellRenderer(row, column);
+        Component component = prepareRenderer(renderer, row, column);
+        frozenPainter.paintComponent(layer, component, this, x, y, width, height, true);
+        pinnedPaintedCells++;
+    }
+
     /** Pin the native cell editor without modifying JTable's stock geometry queries. */
     @Override public boolean editCellAt(int row, int column, EventObject event) {
         boolean editing = super.editCellAt(row, column, event);
@@ -143,13 +358,68 @@ public final class M3Grid extends JTable {
     }
 
     private void positionPinnedEditor() {
-        if (!pinned() || !isEditing() || getEditingColumn() >= getFrozenColumnCount()) return;
+        if (!isEditing()) return;
+        boolean pinColumn = pinned() && getEditingColumn() < getFrozenColumnCount();
+        boolean pinRow = rowPinsActive() &&
+                (getEditingRow() < getPinnedTopRowCount()
+                        || getEditingRow() >= getRowCount() - getPinnedBottomRowCount());
+        if (!pinColumn && !pinRow) return;
         Component editor = getEditorComponent();
         if (editor == null) return;
         Rectangle cell = super.getCellRect(getEditingRow(), getEditingColumn(), false);
-        int x = getVisibleRect().x;
-        for (int i = 0; i < getEditingColumn(); i++) x += getColumnModel().getColumn(i).getWidth();
-        editor.setBounds(x, cell.y, cell.width, cell.height);
+        if (pinColumn) {
+            int x = getVisibleRect().x;
+            for (int i = 0; i < getEditingColumn(); i++) x += getColumnModel().getColumn(i).getWidth();
+            cell.x = x;
+        }
+        if (pinRow) {
+            Rectangle visible = getVisibleRect();
+            if (getEditingRow() < getPinnedTopRowCount()) {
+                int y = visible.y;
+                for (int row = 0; row < getEditingRow(); row++) y += getRowHeight(row);
+                cell.y = y;
+            } else {
+                int y = visible.y + visible.height;
+                for (int row = getRowCount() - 1; row >= getEditingRow(); row--) y -= getRowHeight(row);
+                cell.y = y;
+            }
+        }
+        editor.setBounds(cell);
+    }
+
+    /** Keep pinned top/bottom planes from being blitted along with a scrolling body. */
+    private void synchronizeScrollMode() {
+        JViewport viewport = getParent() instanceof JViewport current ? current : null;
+        boolean needed = viewport != null && (pinnedTopRows > 0 || pinnedBottomRows > 0);
+        if (scrollModeViewport != null && (scrollModeViewport != viewport || !needed)) {
+            if (scrollModeViewport.getScrollMode() == JViewport.SIMPLE_SCROLL_MODE && previousScrollMode >= 0) {
+                scrollModeViewport.setScrollMode(previousScrollMode);
+            }
+            scrollModeViewport = null;
+            previousScrollMode = -1;
+        }
+        if (needed && scrollModeViewport == null) {
+            scrollModeViewport = viewport;
+            previousScrollMode = viewport.getScrollMode();
+            viewport.setScrollMode(JViewport.SIMPLE_SCROLL_MODE);
+        }
+    }
+
+    @Override public void addNotify() {
+        super.addNotify();
+        synchronizeScrollMode();
+    }
+
+    @Override public void removeNotify() {
+        if (scrollModeViewport != null) {
+            JViewport viewport = scrollModeViewport;
+            scrollModeViewport = null;
+            if (previousScrollMode >= 0 && viewport.getScrollMode() == JViewport.SIMPLE_SCROLL_MODE) {
+                viewport.setScrollMode(previousScrollMode);
+            }
+            previousScrollMode = -1;
+        }
+        super.removeNotify();
     }
 
     private void installHeader() {
