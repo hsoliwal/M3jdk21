@@ -5,11 +5,12 @@
 package jdk.internal.m3.collections;
 
 import java.util.AbstractSet;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedHashSet;
 import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.Set;
@@ -59,16 +60,31 @@ public final class FrozenSet<E> {
 
     public static <E> FrozenSet<E> copyOf(Collection<? extends E> source) {
         Objects.requireNonNull(source, "source");
-        ArrayList<Object> values = new ArrayList<>();
+        // Exact built-in sets have a stable cardinality without user size()
+        // callbacks. Any subclass or arbitrary Collection grows on demand.
+        Class<?> type = source.getClass();
+        int expected = type == HashSet.class || type == LinkedHashSet.class
+                ? source.size() : 0;
+        Object[] values = expected == 0 ? EMPTY : new Object[expected];
+        int count = 0;
         ObjectIntHashMap<Object> index = new ObjectIntHashMap<>(0);
         for (E element : source) {
             Objects.requireNonNull(element, "element");
             if (index.getOrDefault(element, -1) < 0) {
-                index.put(element, values.size());
-                values.add(element);
+                index.put(element, count);
+                if (count == values.length) {
+                    long capacity = count == 0 ? 8L
+                            : (long) count + (count >>> 1) + 1;
+                    if (capacity > Integer.MAX_VALUE - 8L) {
+                        throw new OutOfMemoryError("FrozenSet lane capacity exhausted");
+                    }
+                    values = Arrays.copyOf(values, (int) capacity);
+                }
+                values[count++] = element;
             }
         }
-        return new FrozenSet<>(values.toArray(), index);
+        return new FrozenSet<>(count == values.length
+                ? values : Arrays.copyOf(values, count), index);
     }
 
     public int size() { return size; }

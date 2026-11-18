@@ -9,7 +9,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedHashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.NoSuchElementException;
@@ -62,9 +65,29 @@ public final class FrozenList<E> {
     /** Copies the actual traversal once; no owner is published on admission failure. */
     public static <E> FrozenList<E> copyOf(Collection<? extends E> source) {
         Objects.requireNonNull(source, "source");
-        ArrayList<Object> values = new ArrayList<>();
-        for (E element : source) values.add(Objects.requireNonNull(element, "element"));
-        return new FrozenList<>(values.toArray());
+        // Only exact built-in collections can disclose size without invoking
+        // overridden user callbacks. Every other provider remains one-pass.
+        Class<?> type = source.getClass();
+        int expected = type == ArrayList.class || type == LinkedList.class
+                || type == HashSet.class || type == LinkedHashSet.class
+                ? source.size() : 0;
+        Object[] values = expected == 0 ? EMPTY : new Object[expected];
+        int count = 0;
+        for (E element : source) {
+            Objects.requireNonNull(element, "element");
+            if (count == values.length) {
+                long capacity = count == 0 ? 10L
+                        : (long) count + (count >>> 1);
+                if (capacity <= count) capacity = (long) count + 1;
+                if (capacity > Integer.MAX_VALUE - 8L) {
+                    throw new OutOfMemoryError("FrozenList lane capacity exhausted");
+                }
+                values = Arrays.copyOf(values, (int) capacity);
+            }
+            values[count++] = element;
+        }
+        return new FrozenList<>(count == values.length
+                ? values : Arrays.copyOf(values, count));
     }
 
     public int size() { return size; }

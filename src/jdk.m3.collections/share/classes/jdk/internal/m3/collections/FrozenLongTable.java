@@ -65,10 +65,31 @@ public final class FrozenLongTable {
         long[] sourceRows = rows.clone();
         long[] sourceColumns = columns.clone();
         long[] sourceValues = values.clone();
-        long[] encountered = new long[rows.length];
+        // Large, low-row-cardinality tables reserve compact primitive scratch.
+        // Grow through 32/64/128/256 keys before the original full capacity.
+        int scratchLength = rows.length >= 4_096 ? 32 : rows.length;
+        long[] encountered = new long[scratchLength];
         long[] cellRows = new long[rows.length];
         PackedLongRowIndex ordinals = new PackedLongRowIndex(0);
-        int distinct = distinctOf(sourceRows, encountered, cellRows, ordinals);
+        int distinct = 0;
+        for (int cell = 0; cell < sourceRows.length; cell++) {
+            long key = sourceRows[cell];
+            int ordinal = ordinals.find(key, encountered);
+            if (ordinal < 0) {
+                if (distinct == encountered.length) {
+                    int next = grownScratchLength(encountered.length, rows.length);
+                    encountered = Arrays.copyOf(encountered, next);
+                }
+                ordinals.ensure(distinct + 1, encountered);
+                ordinal = distinct++;
+                encountered[ordinal] = key;
+                ordinals.insert(ordinal, encountered);
+            }
+            cellRows[cell] = ordinal;
+        }
+        if (distinct == Integer.MAX_VALUE) {
+            throw new OutOfMemoryError("FrozenLongTable offset capacity exhausted");
+        }
         int[] order = LongKeyOrder.lexicographic(cellRows, sourceColumns);
         int[] offsets = new int[distinct + 1];
         long[] packedColumns = new long[order.length];
@@ -88,27 +109,15 @@ public final class FrozenLongTable {
             packedValues[cell] = sourceValues[source];
         }
         offsets[distinct] = order.length;
-        return new FrozenLongTable(Arrays.copyOf(encountered, distinct), offsets,
+        // The indexed row lane is private and immutable after construction.
+        return new FrozenLongTable(distinct == encountered.length
+                ? encountered : Arrays.copyOf(encountered, distinct), offsets,
                 packedColumns, packedValues, ordinals);
     }
 
-    private static int distinctOf(long[] sourceRows, long[] encountered, long[] cellRows, PackedLongRowIndex ordinals) {
-        int distinct = 0;
-        for (int cell = 0; cell < sourceRows.length; cell++) {
-            long key = sourceRows[cell];
-            int ordinal = ordinals.find(key, encountered);
-            if (ordinal < 0) {
-                ordinals.ensure(distinct + 1, encountered);
-                ordinal = distinct++;
-                encountered[ordinal] = key;
-                ordinals.insert(ordinal, encountered);
-            }
-            cellRows[cell] = ordinal;
-        }
-        if (distinct == Integer.MAX_VALUE) {
-            throw new OutOfMemoryError("FrozenLongTable offset capacity exhausted");
-        }
-        return distinct;
+    /** Grow a private encounter lane up to the already bounded input length. */
+    private static int grownScratchLength(int length, int inputLength) {
+        return length < 256 ? Math.min(inputLength, length << 1) : inputLength;
     }
 
     public int size() { return size; }

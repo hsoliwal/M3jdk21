@@ -7,103 +7,64 @@ package jdk.internal.m3.collections;
 import jdk.m3.collections.LongLongConsumer;
 
 /**
- * M3 five-library superset scaffold {@code LruLongLongMap}: API group {@code LRU_LONG_MAP} over arrays and state masks.
+ * Bounded primitive LRU map over the existing parent-owned ordered long-key
+ * and long-value lanes, integer slot offsets, recycled slots and compact
+ * open-addressed index. No boxed key/value or retained per-entry node.
  *
- * <p>Provider lineage (LIBRARY_API_MATRIX.tsv, run 20261017-m3-to-public/LIB-SUPERSET):
- * <ul>
- *   <li>COMMONS LRUMap: bounded map; access-order eviction; get mutates order [license Apache-2.0; NEW_OWNER (LS2); priority P2; matrix owner PROPOSED:LruLongLongMap (donor PackedLongLongLruCache@3f4b2be6)]</li>
- * </ul>
- *
- * <p>DOOP mapping: lane kind LONG; lanes {@code long[] keyLane;long[] valueLane;int[] prevLane;int[] nextLane}; offset scheme slot + recency link lanes with head/tail; state-mask bits OCCUPIED,DELETED; stored nodes NONE; API entry objects TRANSIENT_FACADE (transient facades over slots, never the stored representation); matrix note: key+value lanes + prev/next recency link lanes; slot offsets / occupancy mask; recency head/tail.
- *
- * <p>Status: SCAFFOLD. Every public atom throws {@link NotYetReceived} until this owner is received through a hash-pinned Synexia recipe with its own
- * provider oracle (never inferred from another provider). Not a {@code java.util} replacement.
+ * <p>Reads via {@link #getOrDefault} promote a key to most recently used;
+ * {@link #peekOrDefault} and {@link #containsKey} preserve order. A new key at
+ * full capacity evicts the least recently used key. This is not thread-safe.
  */
 public final class LruLongLongMap {
-    /** State-mask bit {@code OCCUPIED} (per-slot state word, bit 0). */
-    static final long STATE_OCCUPIED = 1L << 0;
-    /** State-mask bit {@code DELETED} (per-slot state word, bit 1). */
-    static final long STATE_DELETED = 1L << 1;
+    static final long STATE_OCCUPIED = 1L;
+    static final long STATE_DELETED = 2L;
+    private static final int DEFAULT_MAX_SIZE = 100;
 
-    /** Storage lane {@code keyLane}: dynamic primitive/reference array lane. */
-    private long[] keyLane = new long[0];
-    /** Storage lane {@code valueLane}: dynamic primitive/reference array lane. */
-    private long[] valueLane = new long[0];
-    /** Storage lane {@code prevLane}: dynamic primitive/reference array lane. */
-    private int[] prevLane = new int[0];
-    /** Storage lane {@code nextLane}: dynamic primitive/reference array lane. */
-    private int[] nextLane = new int[0];
-    /** Per-slot state words (OCCUPIED,DELETED); one bit set per slot and state. */
-    private long[] stateMaskWords = new long[0];
-    /** Live slot count. */
-    private int size;
+    private final int maxSize;
+    private final PackedLongLongOrderedMap entries;
 
-    /** Creates an empty scaffold owner; lanes grow by copy once received. */
-    public LruLongLongMap() {
+    public LruLongLongMap() { this(DEFAULT_MAX_SIZE); }
+
+    /** An additive explicit bound; the original no-arg constructor remains. */
+    public LruLongLongMap(int maxSize) {
+        if (maxSize < 1) throw new IllegalArgumentException("maxSize must be positive");
+        this.maxSize = maxSize;
+        this.entries = new PackedLongLongOrderedMap(Math.min(maxSize, 8), true);
     }
 
-    /** Reports the declared state-mask bits and lanes for ledgers; never allocates per element. */
     public static String scaffoldDescriptor() {
         return "M3LruLongLongMap|LRU_LONG_MAP|LONG|OCCUPIED,DELETED|long[] keyLane;long[] valueLane;int[] prevLane;int[] nextLane";
     }
 
-    /** LRUMap.maxSize (long lanes) (scaffold: not yet received). */
-    public int maxSize() {
-        throw new NotYetReceived("M3LruLongLongMap.maxSize");
-    }
-
-    /** LRUMap.isFull (scaffold: not yet received). */
-    public boolean isFull() {
-        throw new NotYetReceived("M3LruLongLongMap.isFull");
-    }
-
-    /** LRUMap.get (moves to MRU) (scaffold: not yet received). */
+    public int maxSize() { return maxSize; }
+    public boolean isFull() { return entries.size() == maxSize; }
     public long getOrDefault(long key, long defaultValue) {
-        throw new NotYetReceived("M3LruLongLongMap.getOrDefault");
+        return entries.getOrDefault(key, defaultValue);
     }
-
-    /** LRUMap.get(key, false) (scaffold: not yet received). */
     public long peekOrDefault(long key, long defaultValue) {
-        throw new NotYetReceived("M3LruLongLongMap.peekOrDefault");
+        return entries.peekOrDefault(key, defaultValue);
     }
 
-    /** LRUMap.put (evicts LRU when full) (scaffold: not yet received). */
+    /** Return the previous value, or zero if the key was not present. */
     public long put(long key, long value) {
-        throw new NotYetReceived("M3LruLongLongMap.put");
+        boolean present = entries.containsKey(key);
+        long old = present ? entries.peekOrDefault(key, 0L) : 0L;
+        if (!present && entries.size() == maxSize) entries.removeFirstKey();
+        entries.put(key, value);
+        return old;
     }
 
-    /** LRUMap.remove (scaffold: not yet received). */
+    /** Return the removed value, or zero if absent. */
     public long remove(long key) {
-        throw new NotYetReceived("M3LruLongLongMap.remove");
+        long old = entries.peekOrDefault(key, 0L);
+        entries.remove(key);
+        return old;
     }
 
-    /** Map.containsKey (scaffold: not yet received). */
-    public boolean containsKey(long key) {
-        throw new NotYetReceived("M3LruLongLongMap.containsKey");
-    }
-
-    /** OrderedMap.firstKey (LRU end) (scaffold: not yet received). */
-    public long firstKey() {
-        throw new NotYetReceived("M3LruLongLongMap.firstKey");
-    }
-
-    /** OrderedMap.lastKey (MRU end) (scaffold: not yet received). */
-    public long lastKey() {
-        throw new NotYetReceived("M3LruLongLongMap.lastKey");
-    }
-
-    /** LRU to MRU traversal (scaffold: not yet received). */
-    public void forEach(LongLongConsumer action) {
-        throw new NotYetReceived("M3LruLongLongMap.forEach");
-    }
-
-    /** Map.size (scaffold: not yet received). */
-    public int size() {
-        throw new NotYetReceived("M3LruLongLongMap.size");
-    }
-
-    /** Map.clear (scaffold: not yet received). */
-    public void clear() {
-        throw new NotYetReceived("M3LruLongLongMap.clear");
-    }
+    public boolean containsKey(long key) { return entries.containsKey(key); }
+    public long firstKey() { return entries.firstKey(); }
+    public long lastKey() { return entries.lastKey(); }
+    public void forEach(LongLongConsumer action) { entries.forEach(action); }
+    public int size() { return entries.size(); }
+    public void clear() { entries.clear(); }
 }

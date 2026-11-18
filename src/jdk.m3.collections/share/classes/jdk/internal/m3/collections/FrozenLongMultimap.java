@@ -69,28 +69,21 @@ public final class FrozenLongMultimap {
             return new FrozenLongMultimap();
         }
         LongIntHashMap ordinals = new LongIntHashMap(0);
-        long[] encountered = new long[keys.length];
-        int[] counts = new int[keys.length];
-        int distinct = distinctOf(keys, ordinals, encountered, counts);
-        int[] offsets = new int[distinct + 1];
-        for (int i = 0; i < distinct; i++) {
-            offsets[i + 1] = offsets[i] + counts[i];
-        }
-        int[] next = Arrays.copyOf(offsets, distinct);
-        long[] packedValues = new long[values.length];
-        for (int i = 0; i < keys.length; i++) {
-            int ordinal = ordinals.get(keys[i]);
-            packedValues[next[ordinal]++] = values[i];
-        }
-        return new FrozenLongMultimap(Arrays.copyOf(encountered, distinct),
-                offsets, packedValues, ordinals);
-    }
-
-    private static int distinctOf(long[] keys, LongIntHashMap ordinals, long[] encountered, int[] counts) {
+        // Large, low-cardinality payloads need only small primitive scratch
+        // lanes. Double up to 256 keys, then use the original full-capacity
+        // lanes for high diversity. No per-key wrapper is retained.
+        int scratchLength = keys.length >= 4_096 ? 32 : keys.length;
+        long[] encountered = new long[scratchLength];
+        int[] counts = new int[scratchLength];
         int distinct = 0;
         for (long key : keys) {
             int ordinal = ordinals.getOrDefault(key, -1);
             if (ordinal < 0) {
+                if (distinct == encountered.length) {
+                    int next = grownScratchLength(encountered.length, keys.length);
+                    encountered = Arrays.copyOf(encountered, next);
+                    counts = Arrays.copyOf(counts, next);
+                }
                 ordinal = distinct++;
                 encountered[ordinal] = key;
                 ordinals.put(key, ordinal);
@@ -101,7 +94,26 @@ public final class FrozenLongMultimap {
         if (distinct == Integer.MAX_VALUE) {
             throw new OutOfMemoryError("FrozenLongMultimap offset capacity exhausted");
         }
-        return distinct;
+        int[] offsets = new int[distinct + 1];
+        for (int i = 0; i < distinct; i++) {
+            offsets[i + 1] = offsets[i] + counts[i];
+        }
+        int[] next = Arrays.copyOf(offsets, distinct);
+        long[] packedValues = new long[values.length];
+        for (int i = 0; i < keys.length; i++) {
+            int ordinal = ordinals.get(keys[i]);
+            packedValues[next[ordinal]++] = values[i];
+        }
+        // The encounter lane is already private and exact-sized when distinct
+        // keys fill it; take ownership directly instead of copying it again.
+        return new FrozenLongMultimap(distinct == encountered.length
+                ? encountered : Arrays.copyOf(encountered, distinct),
+                offsets, packedValues, ordinals);
+    }
+
+    /** Grow a private encounter lane up to the already bounded input length. */
+    private static int grownScratchLength(int length, int inputLength) {
+        return length < 256 ? Math.min(inputLength, length << 1) : inputLength;
     }
 
     public int size() { return size; }
