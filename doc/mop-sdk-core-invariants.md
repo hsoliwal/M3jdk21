@@ -23,3 +23,20 @@ MOP guides agents toward **the best qualified implementation under declared cons
 Preserve upstream licenses, notices, donor lineage, full-history best-of-best additive superset rules and the never-rebase-develop directive. Eligible newly authored first-party code may use Apache-2.0; original OpenJDK license obligations remain intact.
 
 **Canonical detailed policy and execution owner:** [SYNEXIA-MOP-SDK-BIDIRECTIONAL-LATTICE-1](https://github.com/hsoliwal/com.synexia/blob/develop/docs/M3-SCALE/invariants/SYNEXIA-MOP-SDK-BIDIRECTIONAL-LATTICE-1.md) (link resolves after accepted Synexia merge). Existing M3JDK21 AGENTS.md and Synexia source-sealed admission rules remain authoritative if a particular receiving gate is stricter. No new product-side recipe execution or correction-memory store is authorized by this documentation.
+
+## Receiving boundary for the dependency-closure preflight
+
+The initial Java 21 `MopDependencyClosureGate` implementation and its tests
+are owned exclusively by the canonical Synexia recipe module, documented by
+`docs/M3-SCALE/invariants/SYNEXIA-MOP-SDK-CLOSURE-PREFLIGHT-1.md`.
+They are **not** copied or executed inside this integrated JDK product.
+The preflight can assemble a deterministic, read-only set of affected Java
+files and identify missing reverse dependency inventory, stale source proofs,
+contract drift and absent ABI/JNI gates, but it does not independently run
+the compiler, prove semantics or authorize receiving.
+
+For a product PR, require the corresponding pinned Synexia recipe execution,
+qualified target postimage, independent M3JDK21 build/jtreg/native ABI and
+platform validation as applicable, and an explicit review of license, API,
+behavior and historical additive-superset custody. A structural preflight
+marked ready is **not** a passed M3JDK21 receiving qualification.
