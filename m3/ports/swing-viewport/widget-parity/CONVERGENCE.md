@@ -66,7 +66,8 @@ Neither javax.swing nor SwingX nor SWT/Nebula was changed by this PR.
   opt-in frozen leading columns and **top/bottom view rows** with pinned
   headers, hit mapping, editing and damage-limited painted planes. See [GRID_PARITY.md](GRID_PARITY.md).
   The existing Swing/SwingX and M3PackedTable owners remain unchanged;
-  groups, spans, RTL and long-index widget APIs remain open;
+  groups, RTL and long-index widget APIs remain open;
+  basic body row/column spans are now source-locked and tested;
   pinned-row behavior is detailed in [GRID_PINNED_ROWS.md](GRID_PINNED_ROWS.md).
 - Gallery, Gantt, charts, tiles, Carousel: enrich the existing M3 generated
   component templates and models, never add parallel widget families.
@@ -201,3 +202,6 @@ date formats, month/day spinner navigation, alternate LAF, headful
 focus/keyboard/accessibility native tests, Maven reactor and Synexia
 recipe source-sealed fixed-point qualification. No Java desktop, SWT,
 Nebula or SwingX production source was changed.
+
+For merged-cell bounds, model/view-index rules and cross-plane exclusions,
+see [GRID_SPANS.md](GRID_SPANS.md).

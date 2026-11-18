@@ -5,7 +5,9 @@ import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Rectangle;
+import java.util.Arrays;
 import java.util.EventObject;
+import javax.swing.event.TableModelEvent;
 import javax.swing.CellRendererPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -40,6 +42,11 @@ public final class M3Grid extends JTable {
     private transient long pinnedPaintedCells;
     private transient JViewport scrollModeViewport;
     private transient int previousScrollMode = -1;
+    // Model-coordinate rectangular spans. Four primitive lanes per span:
+    // modelRow, modelColumn, rows, columns. No cell entries or copied values.
+    private int[] spanLanes = new int[32];
+    private int spanCount;
+    private transient long spanPaintedCells;
     private JTableHeader originalHeader;
     private PinnedHeader pinnedHeader;
 
@@ -69,6 +76,173 @@ public final class M3Grid extends JTable {
 
     /** Number of rendered frozen body cells, for performance and damage regression gates. */
     public long getFrozenPaintedCells() { return frozenPaintedCells; }
+
+    /** Configured model-coordinate spans; stock JTable behavior when empty. */
+    public int getCellSpanCount() { return spanCount; }
+
+    /** Number of merged-cell renderer stamps actually painted. */
+    public long getSpanPaintedCells() { return spanPaintedCells; }
+
+    /**
+     * Creates/replaces a rectangle in *model* coordinates. A configured span
+     * follows its original model cells across sorting/filtering and column
+     * reordering only when they still form an ascending contiguous view
+     * rectangle. Otherwise it is inactive, never attached to the wrong data.
+     * INSERT/DELETE/structure events clear spans because ordinary Swing
+     * TableModel rows have no stable identity contract across such edits.
+     */
+    public void setCellSpan(int modelRow, int modelColumn, int rows, int columns) {
+        requireEdt();
+        TableModel model = getModel();
+        if (modelRow < 0 || modelColumn < 0 || rows < 1 || columns < 1
+                || rows > model.getRowCount() - modelRow
+                || columns > model.getColumnCount() - modelColumn) {
+            throw new IllegalArgumentException("span outside model bounds");
+        }
+        if (rows == 1 && columns == 1) {
+            removeCellSpan(modelRow, modelColumn);
+            return;
+        }
+        int existing = -1;
+        for (int i = 0; i < spanCount; i++) {
+            int b = i * 4;
+            if (spanLanes[b] == modelRow && spanLanes[b + 1] == modelColumn) {
+                existing = i;
+                continue;
+            }
+            if ((long) modelRow < (long) spanLanes[b] + spanLanes[b + 2]
+                    && (long) spanLanes[b] < (long) modelRow + rows
+                    && (long) modelColumn < (long) spanLanes[b + 1] + spanLanes[b + 3]
+                    && (long) spanLanes[b + 1] < (long) modelColumn + columns) {
+                throw new IllegalArgumentException("overlapping model cell spans");
+            }
+        }
+        if (existing < 0) {
+            if (spanCount == 8_192) throw new IllegalArgumentException("too many spans");
+            if (spanCount == spanLanes.length / 4) spanLanes = Arrays.copyOf(spanLanes, spanLanes.length * 2);
+            existing = spanCount++;
+        }
+        int b = existing * 4;
+        spanLanes[b] = modelRow;
+        spanLanes[b + 1] = modelColumn;
+        spanLanes[b + 2] = rows;
+        spanLanes[b + 3] = columns;
+        repaint();
+    }
+
+    public void removeCellSpan(int modelRow, int modelColumn) {
+        requireEdt();
+        for (int i = 0; i < spanCount; i++) {
+            int b = i * 4;
+            if (spanLanes[b] != modelRow || spanLanes[b + 1] != modelColumn) continue;
+            System.arraycopy(spanLanes, b + 4, spanLanes, b, (spanCount - i - 1) * 4);
+            spanCount--;
+            Arrays.fill(spanLanes, spanCount * 4, spanCount * 4 + 4, 0);
+            repaint();
+            return;
+        }
+    }
+
+    public void clearCellSpans() {
+        requireEdt();
+        if (spanCount == 0) return;
+        spanCount = 0;
+        Arrays.fill(spanLanes, 0);
+        repaint();
+    }
+
+    /** Rebuild spans only on request; structural row events invalidate model-row ordinals. */
+    @Override public void tableChanged(TableModelEvent event) {
+        super.tableChanged(event);
+        if (spanLanes != null && spanCount > 0
+                && (event == null || event.getFirstRow() == TableModelEvent.HEADER_ROW
+                    || event.getType() == TableModelEvent.INSERT
+                    || event.getType() == TableModelEvent.DELETE)) {
+            spanCount = 0;
+            Arrays.fill(spanLanes, 0);
+            repaint();
+        }
+    }
+
+    /**
+     * A packed model-to-view projection; -1 when filtered, reordered into
+     * a nonrectangle, intersecting frozen planes, or outside the current
+     * view. Sorting always belongs to the original JTable/RowSorter.
+     */
+    private long spanViewOrigin(int span) {
+        if (!getComponentOrientation().isLeftToRight()) return -1;
+        int b = span * 4;
+        int mr = spanLanes[b], mc = spanLanes[b + 1];
+        int nr = spanLanes[b + 2], nc = spanLanes[b + 3];
+        if (mr < 0 || mc < 0 || nr < 1 || nc < 1
+                || nr > getModel().getRowCount() - mr || nc > getModel().getColumnCount() - mc) return -1;
+        int vr = convertRowIndexToView(mr), vc = convertColumnIndexToView(mc);
+        if (vr < 0 || vc < 0 || nr > getRowCount() - vr || nc > getColumnCount() - vc) return -1;
+        // Span coordinates are never allowed to straddle frozen body planes.
+        int top = getPinnedTopRowCount();
+        int bodyEnd = getRowCount() - getPinnedBottomRowCount();
+        if (vr < top || nr > bodyEnd - vr || vc < getFrozenColumnCount()) return -1;
+        // No sorter means model order == view row order, so even a million-row
+        // span is an O(1) identity projection rather than a million-row walk.
+        // A sorter can arbitrarily permute rows: verify up to a bounded range
+        // and fail closed for larger spans, rather than doing O(n) paint work.
+        if (getRowSorter() != null) {
+            if (nr > 4_096) return -1;
+            for (int i = 1; i < nr; i++) if (convertRowIndexToView(mr + i) != vr + i) return -1;
+        }
+        // Column model movement/hiding is independently validated. A huge
+        // nontrivial column span needs a future indexed proof, not a paint walk.
+        if (nc > 4_096) return -1;
+        for (int i = 1; i < nc; i++) if (convertColumnIndexToView(mc + i) != vc + i) return -1;
+        return ((long) vr << 32) | (vc & 0xffffffffL);
+    }
+
+    /** Find an active span for the supplied JTable view cell, without objects. */
+    private int spanForViewCell(int viewRow, int viewColumn) {
+        if (spanCount == 0 || viewRow < 0 || viewColumn < 0) return -1;
+        for (int i = 0; i < spanCount; i++) {
+            long packed = spanViewOrigin(i);
+            if (packed < 0) continue;
+            int r = (int) (packed >>> 32), c = (int) packed;
+            if (viewRow >= r && viewRow < r + spanLanes[i * 4 + 2]
+                    && viewColumn >= c && viewColumn < c + spanLanes[i * 4 + 3]) return i;
+        }
+        return -1;
+    }
+
+    /**
+     * Writes [anchorViewRow,anchorViewColumn,rowSpan,columnSpan] into caller
+     * storage when the cell belongs to an active span. No allocation.
+     */
+    public boolean cellSpanAt(int viewRow, int viewColumn, int[] output, int offset) {
+        if (output == null) throw new NullPointerException("output");
+        if (offset < 0 || offset > output.length - 4) throw new IndexOutOfBoundsException("output lanes");
+        int found = spanForViewCell(viewRow, viewColumn);
+        if (found < 0) return false;
+        long origin = spanViewOrigin(found);
+        output[offset] = (int) (origin >>> 32);
+        output[offset + 1] = (int) origin;
+        output[offset + 2] = spanLanes[found * 4 + 2];
+        output[offset + 3] = spanLanes[found * 4 + 3];
+        return true;
+    }
+
+    /** Original stock cell bounds outside an active span; merged bounds only on caller query. */
+    public Rectangle spannedCellRect(int viewRow, int viewColumn) {
+        int found = spanForViewCell(viewRow, viewColumn);
+        if (found < 0) return super.getCellRect(viewRow, viewColumn, false);
+        long origin = spanViewOrigin(found);
+        return spanRect((int) (origin >>> 32), (int) origin,
+                spanLanes[found * 4 + 2], spanLanes[found * 4 + 3]);
+    }
+
+    private Rectangle spanRect(int row, int column, int rows, int columns) {
+        Rectangle start = super.getCellRect(row, column, false);
+        Rectangle end = super.getCellRect(row + rows - 1, column + columns - 1, false);
+        return new Rectangle(start.x, start.y,
+                (int) Math.min(Integer.MAX_VALUE, Math.max(0L, (long) end.x + end.width - start.x)),
+                (int) Math.min(Integer.MAX_VALUE, Math.max(0L, (long) end.y + end.height - start.y)));
+    }
 
     /** Currently pinned first view rows, automatically bounded after a filter/model change. */
     public int getPinnedTopRowCount() { return Math.min(pinnedTopRows, getRowCount()); }
@@ -127,8 +301,27 @@ public final class M3Grid extends JTable {
         return height;
     }
 
-    /** Convert pinned pixels to JTable's existing view-row indices. */
+    /** Selection of a covered merged cell resolves to its original JTable anchor. */
     @Override public int rowAtPoint(Point point) {
+        int row = rawRowAtPoint(point);
+        if (stockPainting || spanCount == 0 || row < 0) return row;
+        int column = rawColumnAtPoint(point);
+        int found = spanForViewCell(row, column);
+        if (found < 0) return row;
+        return (int) (spanViewOrigin(found) >>> 32);
+    }
+
+    @Override public int columnAtPoint(Point point) {
+        int column = rawColumnAtPoint(point);
+        if (stockPainting || spanCount == 0 || column < 0) return column;
+        int row = rawRowAtPoint(point);
+        int found = spanForViewCell(row, column);
+        if (found < 0) return column;
+        return (int) spanViewOrigin(found);
+    }
+
+    /** Convert pinned pixels to JTable's existing view-row indices. */
+    private int rawRowAtPoint(Point point) {
         if (!stockPainting && rowPinsActive()) {
             Rectangle visible = getVisibleRect();
             int relative = point.y - visible.y;
@@ -196,7 +389,7 @@ public final class M3Grid extends JTable {
     }
 
     /** Hit testing in the actual viewport, with view columns as the result. */
-    @Override public int columnAtPoint(Point point) {
+    private int rawColumnAtPoint(Point point) {
         if (!stockPainting && pinned() && getFrozenColumnCount() > 0) {
             int x = point.x - getVisibleRect().x;
             if (x >= 0 && x < getFrozenWidth()) {
@@ -222,6 +415,7 @@ public final class M3Grid extends JTable {
         try { super.paintComponent(g); } finally { stockPainting = old; }
         if (pinned()) paintFrozenColumns(g);
         if (rowPinsActive()) paintPinnedRows(g);
+        if (spanCount != 0) paintCellSpans(g);
     }
 
     private void paintFrozenColumns(Graphics g) {
@@ -345,16 +539,68 @@ public final class M3Grid extends JTable {
         pinnedPaintedCells++;
     }
 
+    /** Merged-cell paint never materializes a row outside the visible rectangle. */
+    private void paintCellSpans(Graphics graphics) {
+        Rectangle visible = getVisibleRect();
+        if (visible.isEmpty()) return;
+        int top = rowPinsActive() ? pinnedTopHeight(visible) : 0;
+        int bottom = rowPinsActive() ? pinnedBottomHeight(visible, top) : 0;
+        int left = visible.x + (pinned() ? Math.min(getFrozenWidth(), visible.width) : 0);
+        int width = visible.x + visible.width - left;
+        int height = visible.height - top - bottom;
+        if (width <= 0 || height <= 0) return;
+        if (frozenPainter == null) frozenPainter = new CellRendererPane();
+        Graphics layer = graphics.create();
+        try {
+            layer.clipRect(left, visible.y + top, width, height);
+            for (int span = 0; span < spanCount; span++) {
+                long origin = spanViewOrigin(span);
+                if (origin < 0) continue;
+                int row = (int) (origin >>> 32), col = (int) origin;
+                int b = span * 4;
+                Rectangle box = spanRect(row, col, spanLanes[b + 2], spanLanes[b + 3]);
+                Rectangle clip = layer.getClipBounds();
+                if (box.isEmpty() || (clip != null && !clip.intersects(box))) continue;
+                layer.setColor(getBackground());
+                layer.fillRect(box.x, box.y, box.width, box.height);
+                TableCellRenderer renderer = getCellRenderer(row, col);
+                Component component = prepareRenderer(renderer, row, col);
+                frozenPainter.paintComponent(layer, component, this,
+                        box.x, box.y, box.width, box.height, true);
+                spanPaintedCells++;
+            }
+        } finally { layer.dispose(); }
+    }
+
     /** Pin the native cell editor without modifying JTable's stock geometry queries. */
     @Override public boolean editCellAt(int row, int column, EventObject event) {
         boolean editing = super.editCellAt(row, column, event);
-        if (editing) positionPinnedEditor();
+        if (editing) {
+            positionPinnedEditor();
+            positionSpanEditor();
+        }
         return editing;
     }
 
     @Override public void doLayout() {
         super.doLayout();
         positionPinnedEditor();
+        positionSpanEditor();
+    }
+
+    private void positionSpanEditor() {
+        if (!isEditing() || spanCount == 0) return;
+        int row = getEditingRow(), col = getEditingColumn();
+        int found = spanForViewCell(row, col);
+        if (found < 0) return;
+        long origin = spanViewOrigin(found);
+        int anchorRow = (int) (origin >>> 32), anchorCol = (int) origin;
+        if (row != anchorRow || col != anchorCol) return;
+        Component editor = getEditorComponent();
+        if (editor != null) {
+            int b = found * 4;
+            editor.setBounds(spanRect(row, col, spanLanes[b + 2], spanLanes[b + 3]));
+        }
     }
 
     private void positionPinnedEditor() {
