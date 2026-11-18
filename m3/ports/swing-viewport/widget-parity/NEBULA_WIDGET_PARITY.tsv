@@ -2,9 +2,9 @@ nebula_module	swing_destination	status	priority	qualification
 badgedlabel	JLabel + M3Badge	M3_COMPONENT	P2	BEHAVIOR_DIFFERENTIAL_OPEN
 bidilayout	ComponentOrientation / LayoutManager	INFRA_EXISTING	P3	BEHAVIOR_DIFFERENTIAL_OPEN
 browserfallback	JEditorPane fallback	BEHAVIOR_GAP	P3	BEHAVIOR_DIFFERENTIAL_OPEN
-calendarcombo	JXDatePicker / M3Calendar	SWINGX_REUSE	P1	BEHAVIOR_DIFFERENTIAL_OPEN
+calendarcombo	M3MonthView standalone + M3DateTime popup; JXDatePicker optional SwingX	HEADFUL_PARTIAL	P1	MONTH_VIEW_HEADLESS_PASS;Xvfb_POPUP_PASS;EXACT_NATIVE_PARITY_OPEN
 carousel	M3Carousel	M3_COMPONENT	P2	BEHAVIOR_DIFFERENTIAL_OPEN
-cdatetime	M3DateTime native text/spinner; JXDatePicker calendar stays in SwingX	HEADLESS_PARTIAL	P1	DATE_TIME_SMOKE_PASS;GRAPHICAL_POPUP_OPEN
+cdatetime	M3DateTime native spinner + opt-in M3MonthView popup; retains SwingX reuse	HEADFUL_PARTIAL	P1	DATE_TIME_SMOKE_PASS;MONTH_VIEW_HEADLESS_PASS;Xvfb_POPUP_PASS;GRAPHICAL_FEATURE_PARITY_OPEN
 chips	M3Chip	M3_COMPONENT	P2	BEHAVIOR_DIFFERENTIAL_OPEN
 collapsiblebuttons	JXCollapsiblePane	SWINGX_REUSE	P2	BEHAVIOR_DIFFERENTIAL_OPEN
 compositetable	JTable / JXTable	SWINGX_REUSE	P1	BEHAVIOR_DIFFERENTIAL_OPEN
