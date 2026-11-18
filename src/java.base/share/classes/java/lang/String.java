@@ -7583,6 +7583,73 @@ public final class String
     }
 
     /**
+     * Lazily splits this string at each non-overlapping occurrence of the
+     * nonempty {@code delimiter}, retaining the delimiter at the end of the
+     * preceding element. A trailing delimiter is included in the last element
+     * rather than producing an additional empty element. The empty receiver
+     * yields an empty stream.
+     *
+     * <p>This M3JDK extension projects Rust's {@code str.split_inclusive}
+     * delimiter-retention behavior as a Java {@link Stream}. It searches
+     * through the existing String index and M3 precompute bridge, returning
+     * receiver substring coordinates without a second text backing.
+     * Unlike Rust's general Pattern API, this overload takes a nonempty
+     * literal UTF-16 String delimiter rather than an arbitrary predicate.
+     *
+     * @param delimiter a nonempty literal delimiter
+     * @return an ordered lazy stream of delimiter-inclusive ranges
+     * @throws NullPointerException if {@code delimiter} is null
+     * @throws IllegalArgumentException if {@code delimiter} is empty
+     * @since 21
+     */
+    public Stream<String> splitInclusive(String delimiter) {
+        Objects.requireNonNull(delimiter, "delimiter");
+        if (delimiter.isEmpty()) {
+            throw new IllegalArgumentException("delimiter must not be empty");
+        }
+        return StreamSupport.stream(new M3SplitInclusiveSpliterator(this, delimiter), false);
+    }
+
+    /**
+     * Character-delimiter overload of {@link #splitInclusive(String)}.
+     * A Java {@code char} is one UTF-16 code unit, including an unpaired
+     * surrogate; it is not Rust's Unicode scalar {@code char}.
+     *
+     * @param delimiter the UTF-16 character unit delimiting the chunks
+     * @return an ordered lazy stream with delimiter units preserved
+     * @since 21
+     */
+    public Stream<String> splitInclusive(char delimiter) {
+        return splitInclusive(String.valueOf(delimiter));
+    }
+
+    /** One-file-owned, source-coordinate cursor; never materializes the input. */
+    private static final class M3SplitInclusiveSpliterator
+            extends Spliterators.AbstractSpliterator<String> {
+        private final String source;
+        private final String delimiter;
+        private int index;
+
+        M3SplitInclusiveSpliterator(String source, String delimiter) {
+            super(source.length(), Spliterator.ORDERED | Spliterator.IMMUTABLE | Spliterator.NONNULL);
+            this.source = source;
+            this.delimiter = delimiter;
+        }
+
+        @Override
+        public boolean tryAdvance(Consumer<? super String> action) {
+            Objects.requireNonNull(action, "action");
+            int start = index;
+            if (start >= source.length()) return false;
+            int matched = source.indexOf(delimiter, start);
+            int end = matched < 0 ? source.length() : matched + delimiter.length();
+            action.accept(source.substring(start, end));
+            index = end;
+            return true;
+        }
+    }
+
+    /**
      * Splits this string into lines at the line boundaries of Python's {@code str.splitlines}:
      * {@code \n}, {@code \r}, {@code \r\n}, {@code U+000B}, {@code U+000C}, {@code U+001C},
      * {@code U+001D}, {@code U+001E}, {@code U+0085}, {@code U+2028} and {@code U+2029}. A
