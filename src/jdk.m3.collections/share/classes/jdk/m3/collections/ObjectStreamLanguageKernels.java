@@ -28,8 +28,8 @@ final class ObjectStreamLanguageKernels {
         return StreamSupport.stream(output, false).onClose(input::close);
     }
 
-    static <T, R> Stream<R> mapIndexed(Stream<T> input,
-            ObjectStream.IndexedMapper<? super T, ? extends R> mapper) {
+    static <T, R> Stream<R> mapIndexedOrdinalFirst(Stream<T> input,
+            ObjectStream.OrdinalFirstMapper<? super T, ? extends R> mapper) {
         Iterator<T> source = input.iterator();
         Spliterator<R> output = new Spliterators.AbstractSpliterator<>(
                 Long.MAX_VALUE, Spliterator.ORDERED) {
@@ -202,5 +202,127 @@ final class ObjectStreamLanguageKernels {
         };
         return StreamSupport.stream(output, false)
                 .onClose(left::close).onClose(right::close);
+    }
+
+    /** Stepped windows with bounded ring storage and demand-driven gap traversal. */
+    static <T> Stream<List<T>> collate(Stream<T> input, int width, int step,
+            ObjectStream.TailPolicy tailPolicy) {
+        CollatingSpliterator<T> windows =
+                new CollatingSpliterator<>(input.iterator(), width, step, tailPolicy);
+        return StreamSupport.stream(windows, false)
+                .onClose(windows::clear).onClose(input::close);
+    }
+
+    /**
+     * Each traversal owns its cursor and ring. A window start advances by a
+     * bounded removal followed by a gap countdown, never by multiplying or
+     * adding unbounded source ordinals.
+     */
+    private static final class CollatingSpliterator<T>
+            extends Spliterators.AbstractSpliterator<List<T>> {
+        private Iterator<T> source;
+        private final int width;
+        private final int step;
+        private final ObjectStream.TailPolicy tailPolicy;
+        private Object[] ring;
+        private int head;
+        private int size;
+        private boolean started;
+        private boolean sourceExhausted;
+        private boolean finished;
+
+        CollatingSpliterator(Iterator<T> source, int width, int step,
+                ObjectStream.TailPolicy tailPolicy) {
+            super(Long.MAX_VALUE, Spliterator.ORDERED | Spliterator.NONNULL);
+            this.source = source;
+            this.width = width;
+            this.step = step;
+            this.tailPolicy = tailPolicy;
+        }
+
+        @Override public boolean tryAdvance(Consumer<? super List<T>> action) {
+            Objects.requireNonNull(action, "action");
+            if (finished) return false;
+            if (started) {
+                advanceStart();
+            } else {
+                started = true;
+            }
+            while (size < width && sourceHasNext()) append(source.next());
+            if (size == 0 || size < width && tailPolicy == ObjectStream.TailPolicy.DROP) {
+                clear();
+                return false;
+            }
+            action.accept(snapshot());
+            return true;
+        }
+
+        @Override public Spliterator<List<T>> trySplit() {
+            // Splitting would otherwise consume and buffer future windows.
+            return null;
+        }
+
+        private boolean sourceHasNext() {
+            if (sourceExhausted) return false;
+            if (source.hasNext()) return true;
+            sourceExhausted = true;
+            return false;
+        }
+
+        private void advanceStart() {
+            int removed = Math.min(step, size);
+            for (int i = 0; i < removed; i++) {
+                ring[head] = null;
+                if (++head == ring.length) head = 0;
+            }
+            size -= removed;
+            if (size == 0) head = 0;
+            int gap = step - removed;
+            while (gap > 0 && sourceHasNext()) {
+                source.next();
+                gap--;
+            }
+        }
+
+        private void append(T value) {
+            if (ring == null) {
+                ring = new Object[Math.min(width, 16)];
+            } else if (size == ring.length) {
+                int capacity = Math.min(width, ring.length * 2);
+                Object[] grown = new Object[capacity];
+                int first = Math.min(size, ring.length - head);
+                System.arraycopy(ring, head, grown, 0, first);
+                System.arraycopy(ring, 0, grown, first, size - first);
+                ring = grown;
+                head = 0;
+            }
+            int tail = head + size;
+            if (tail >= ring.length) tail -= ring.length;
+            ring[tail] = value;
+            size++;
+        }
+
+        private List<T> snapshot() {
+            ArrayList<T> values = new ArrayList<>(size);
+            int cursor = head;
+            for (int i = 0; i < size; i++) {
+                @SuppressWarnings("unchecked") T value = (T) ring[cursor];
+                values.add(value);
+                if (++cursor == ring.length) cursor = 0;
+            }
+            return Collections.unmodifiableList(values);
+        }
+
+        private void clear() {
+            if (ring != null) {
+                for (int i = 0; i < ring.length; i++) ring[i] = null;
+                ring = null;
+            }
+            source = null;
+            head = 0;
+            size = 0;
+            sourceExhausted = true;
+            finished = true;
+        }
     }
 }

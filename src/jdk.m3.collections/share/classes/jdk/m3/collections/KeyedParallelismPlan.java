@@ -31,14 +31,16 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Function;
+import java.util.function.ToIntFunction;
 import java.util.stream.Stream;
 
 /**
  * Explicit key-affinity execution plan for ObjectStream.
  *
  * <p>Every input key is computed once by the coordinator and routed to one logical
- * lane using its hash. A lane has one worker, so equal keys are processed in source
- * order (assuming the Java equals/hashCode contract). Work admission is globally
+ * lane using its hash or an explicitly configured stable integer signal. A lane
+ * has one worker, so equal keys are processed in source order when equal keys
+ * have equal hash codes or configured signals. Work admission is globally
  * bounded by maxInFlight, even when a partition is slow. Results are merged by
  * source ordinal through a bounded primitive-mask ring, not by worker completion order.
  * The admission window also bounds retained out-of-order results. No unbounded task queue, hidden
@@ -54,11 +56,44 @@ public final class KeyedParallelismPlan<T, K> {
 
     private final ObjectStream<T> source;
     private final Function<? super T, ? extends K> keyExtractor;
+    // Null retains the original smeared-hash policy without invoking client code.
+    private final ToIntFunction<? super K> partitionSignal;
 
     KeyedParallelismPlan(ObjectStream<T> source,
                            Function<? super T, ? extends K> keyExtractor) {
+        this(source, keyExtractor, null);
+    }
+
+    private KeyedParallelismPlan(ObjectStream<T> source,
+            Function<? super T, ? extends K> keyExtractor,
+            ToIntFunction<? super K> partitionSignal) {
         this.source = Objects.requireNonNull(source, "source");
         this.keyExtractor = Objects.requireNonNull(keyExtractor, "keyExtractor");
+        this.partitionSignal = partitionSignal;
+    }
+
+    /**
+     * Return an independent plan using a stable integer signal from each extracted
+     * key. The signal is normalized with {@link Math#floorMod(int, int)} for the
+     * requested partition count; it is not mixed or treated as an absolute index.
+     *
+     * <p>The signal is called by the coordinator once per input key during a
+     * successful traversal, including null keys. Equal keys must produce the same
+     * signal throughout each traversal. A thrown exception or error stops that
+     * traversal and is propagated under the existing source-close and worker
+     * cancellation rules. Explicit {@link #laneForKey(Object, int)} calls evaluate
+     * the signal independently.</p>
+     *
+     * <p>This method does not traverse the source or change this plan. Source,
+     * callback and replay ownership remain unchanged.</p>
+     *
+     * @param signal the non-null partition signal for extracted keys
+     * @return a new plan with the requested routing policy
+     * @throws NullPointerException if signal is null
+     */
+    public KeyedParallelismPlan<T, K> partitionSignal(ToIntFunction<? super K> signal) {
+        return new KeyedParallelismPlan<>(source, keyExtractor,
+                Objects.requireNonNull(signal, "signal"));
     }
 
     /**
@@ -139,7 +174,10 @@ public final class KeyedParallelismPlan<T, K> {
         return laneFor(key, partitionCount);
     }
 
-    private static int laneFor(Object key, int partitionCount) {
+    private int laneFor(K key, int partitionCount) {
+        if (partitionSignal != null) {
+            return Math.floorMod(partitionSignal.applyAsInt(key), partitionCount);
+        }
         int hash = key == null ? 0 : key.hashCode();
         hash ^= hash >>> 16;
         return Math.floorMod(hash, partitionCount);

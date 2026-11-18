@@ -205,6 +205,34 @@ demonstrated defects in the existing owner/recipe first, retain regressions and
 previously proven capabilities, and never infer M3-extension rejection solely
 from stock-JDK inexpressibility or a Java 21 backport rejection.
 
+## Enduring Apache-2.0-only JDK destination
+
+**SDK >> JDK whole-product invariant.** M3JDK21 is the
+integrated product; its long-term Apache-2.0-only SDK is intended
+to be a **verified backward-compatible superset of the complete
+JDK**, not only a faster JDK or a library overlay. Deterministically
+inventory, atomize and patternize every JDK/SDK owner (Java,
+HotSpot/VM/JIT/GC, compiler, JMOD/tools, native OS/JNI, desktop,
+build, tests and packaging), with explicit unqualified coverage.
+Compare best algorithms from all JDK donors, `com.synexia` and
+qualified private repositories while preserving private rights
+and existing JDK names, interfaces and behavior. Reuse Synexia's
+canonical hashes, CAS and Maven/OpenRewrite recipes; never add
+parallel owners or skip compiler, runtime and licensing proof.
+The strict Apache-2.0 distribution remains a separate unfinished
+release track.
+
+The standing destination is a genuinely **Apache-2.0-only M3JDK SDK**,
+with Apache Harmony and other lawful JDK implementations evaluated
+per file and atom. The current OpenJDK-derived JDK is not Apache-only.
+Read the [Apache-only convergence roadmap](doc/apache-only-jdk-convergence.md)
+before donor and naming changes. Preserve source rights, existing JDK
+public names, Java 21 behavior and the String -> arrays -> collections ->
+compiler admission sequence. Do not infer the owners or meaning of
+JMO/Flex/Flexi atoms without an exact source/contract inventory. This
+roadmap authorizes neither source copying nor a skipped Synexia recipe,
+JDK build, runtime or licensing gate.
+
 ## Compatible defaults, overloads and abstract classes
 
 Follow [compatible API evolution](doc/api-evolution.md) for API additions. Use

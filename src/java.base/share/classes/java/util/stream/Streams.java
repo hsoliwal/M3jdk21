@@ -27,15 +27,20 @@ package java.util.stream;
 
 import java.util.Comparator;
 import java.util.Enumeration;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Objects;
+import java.util.Optional;
+import java.util.Set;
 import java.util.Spliterator;
 import java.util.Spliterators;
 import java.util.function.BiFunction;
 import java.util.function.Consumer;
 import java.util.function.DoubleConsumer;
+import java.util.function.Function;
 import java.util.function.IntConsumer;
 import java.util.function.LongConsumer;
+import java.util.function.ext.ObjLongFunction;
 import jdk.internal.vm.annotation.IntrinsicCandidate;
 
 /**
@@ -187,6 +192,489 @@ public final class Streams {
         Spliterator<R> paired = new ZipSpliterator<>(
                 first.spliterator(), second.spliterator(), zipper);
         return StreamSupport.stream(paired, false).onClose(composedClose(first, second));
+    }
+
+    /**
+     * Maps overlapping adjacent pairs in source encounter order. A source with
+     * fewer than two elements produces no result. The mapper receives the
+     * earlier element first; elements and mapped results may be null.
+     *
+     * <p>The source is switched to sequential mode and its spliterator is
+     * acquired immediately without traversing it.
+     * Traversal retains only the previous element and does not allocate pair
+     * containers. The result is initially sequential and its source does not
+     * split, even after {@code parallel()}. It is ordered if the input is
+     * ordered and does not advertise an exact size. Closing the result closes
+     * the input; exhaustion alone does not close it. The input must not be used
+     * separately after construction. Callback failures propagate unchanged.
+     *
+     * @param source the input stream
+     * @param mapper the adjacent-element mapping function
+     * @param <T> the input element type
+     * @param <R> the result element type
+     * @return a lazy stream of mapped adjacent pairs
+     * @throws NullPointerException if an argument is null
+     * @since 21
+     */
+    public static <T, R> Stream<R> pairwise(Stream<? extends T> source,
+            BiFunction<? super T, ? super T, ? extends R> mapper) {
+        Objects.requireNonNull(source, "source");
+        Objects.requireNonNull(mapper, "mapper");
+        Spliterator<? extends T> input = source.sequential().spliterator();
+        return combinatorStream(source, new PairwiseSpliterator<>(input, mapper));
+    }
+
+    /**
+     * Maps each element with its zero-based encounter index at this pipeline
+     * stage. The index is a primitive {@code long}; no boxed index or indexed
+     * tuple is required. Elements and mapped results may be null.
+     *
+     * <p>Construction switches the source to sequential mode and acquires its
+     * spliterator without traversing it.
+     * Traversal uses one counter and is unsplittable, including after
+     * {@code parallel()}. The result is initially sequential, is ordered if the
+     * input is ordered, and does not advertise an exact size. For an unordered
+     * input, indices follow the order in which this traversal receives values.
+     * Requesting an element beyond index {@link Long#MAX_VALUE} throws
+     * {@code ArithmeticException} instead of wrapping. An existence check may
+     * read ahead to that element, but its mapper is not invoked.
+     *
+     * <p>Closing the result closes the input; exhaustion alone does not. The
+     * input must not be used separately afterward. Callback failures propagate
+     * unchanged.
+     *
+     * @param source the input stream
+     * @param mapper the function receiving an element and its primitive index
+     * @param <T> the input element type
+     * @param <R> the result element type
+     * @return a lazy stream of indexed mapping results
+     * @throws NullPointerException if an argument is null
+     * @since 21
+     */
+    public static <T, R> Stream<R> mapIndexed(Stream<? extends T> source,
+            ObjLongFunction<? super T, ? extends R> mapper) {
+        Objects.requireNonNull(source, "source");
+        Objects.requireNonNull(mapper, "mapper");
+        Spliterator<? extends T> input = source.sequential().spliterator();
+        return combinatorStream(source, new IndexedSpliterator<>(input, mapper));
+    }
+
+    /**
+     * Inserts the supplied separator strictly between consecutive input
+     * elements. Empty and singleton inputs are unchanged. Input elements and
+     * the separator may be null, and the separator reference is reused.
+     *
+     * <p>Construction switches the source to sequential mode and acquires its
+     * spliterator without traversing it.
+     * Emitting a separator reads and retains at most one following element so
+     * that no trailing separator is produced. Traversal is unsplittable, even
+     * after {@code parallel()}. The result is initially sequential, is ordered
+     * if the input is ordered, and does not advertise an exact size. Closing
+     * the result closes the input; exhaustion alone does not. The input must
+     * not be used separately afterward.
+     *
+     * @param source the input stream
+     * @param separator the value to insert between elements
+     * @param <T> the element type
+     * @return a lazy interspersed stream
+     * @throws NullPointerException if {@code source} is null
+     * @since 21
+     */
+    public static <T> Stream<T> intersperse(Stream<? extends T> source, T separator) {
+        Objects.requireNonNull(source, "source");
+        Spliterator<? extends T> input = source.sequential().spliterator();
+        return combinatorStream(source, new InterspersedSpliterator<>(input, separator));
+    }
+
+    /**
+     * Maps each examined input element and emits only non-null mapping results.
+     * A null input element is passed to the mapper normally; null is tested
+     * only on the result. Non-null results such as false, zero, and empty
+     * strings are retained. This is a lazy intermediate operation with the
+     * same encounter-order and parallel-mode rules as the source stream.
+     *
+     * <p>This operation uses {@link Stream#mapMulti(java.util.function.BiConsumer)}
+     * with zero or one output per input. Construction does not traverse the
+     * source. The mapper is invoked once for each examined input, including
+     * inputs whose result is discarded. Short-circuiting may leave inputs
+     * unexamined; parallel traversal may examine additional inputs. Mapper
+     * invocation order follows the normal stream execution rules.
+     *
+     * <p>The supplied source must be open and unused and must not be used
+     * separately afterward. Closing the returned stream closes the source;
+     * exhaustion alone does not close it. If argument validation fails,
+     * ownership remains with the caller. Mapper and traversal exceptions follow
+     * the source stream's normal exception propagation rules; this operation
+     * does not catch or translate them. The mapper must be non-interfering
+     * and stateless.
+     *
+     * @param source the input stream
+     * @param mapper the function mapping each examined element
+     * @param <T> the input element type
+     * @param <R> the result element type
+     * @return a stream of the non-null mapping results
+     * @throws NullPointerException if an argument is null
+     * @throws IllegalStateException if the source has been operated on or closed
+     * @since 21
+     */
+    public static <T, R> Stream<R> mapNotNull(Stream<? extends T> source,
+            Function<? super T, ? extends R> mapper) {
+        Objects.requireNonNull(source, "source");
+        Objects.requireNonNull(mapper, "mapper");
+        return source.<R>mapMulti((value, downstream) -> {
+            R result = mapper.apply(value);
+            if (result != null) downstream.accept(result);
+        });
+    }
+
+    /**
+     * Maps input elements until the mapper first returns an empty optional.
+     * The element producing that empty optional is consumed. Later elements
+     * and mapper calls are not requested, including after repeated exhaustion
+     * checks. A null optional is rejected; successful outputs are non-null.
+     *
+     * <p>Construction switches the source to sequential mode and acquires its
+     * spliterator without traversing it.
+     * Traversal retains constant state and is unsplittable, even after
+     * {@code parallel()}. The result is initially sequential, is ordered if
+     * the input is ordered, and does not advertise an exact size. Closing the
+     * result closes the input; termination alone does not. The input must not
+     * be used separately afterward. Callback failures propagate unchanged.
+     *
+     * @param source the input stream
+     * @param mapper the mapping and termination function
+     * @param <T> the input element type
+     * @param <R> the result element type
+     * @return a lazy stream of mapped values before the first empty optional
+     * @throws NullPointerException if an argument or a mapped optional is null
+     * @since 21
+     */
+    public static <T, R> Stream<R> mapWhile(Stream<? extends T> source,
+            Function<? super T, ? extends Optional<? extends R>> mapper) {
+        Objects.requireNonNull(source, "source");
+        Objects.requireNonNull(mapper, "mapper");
+        Spliterator<? extends T> input = source.sequential().spliterator();
+        return combinatorStream(source, new MappingWhileSpliterator<>(input, mapper));
+    }
+
+    /**
+     * Retains the first encountered element for each extracted key, keeping at
+     * most {@code maxDistinct} distinct keys. Keys use the usual
+     * {@link Object#equals(Object)} and {@link Object#hashCode()} contracts;
+     * elements and keys may be null. A new key beyond the budget is rejected
+     * before its element is emitted. Duplicate keys at the budget still pass
+     * through selection without increasing retained state.
+     *
+     * <p>Construction validates arguments, switches the source to sequential
+     * mode and acquires its spliterator without traversing it. The key
+     * extractor is invoked once for every
+     * examined element. Keys must remain stable while retained. State is
+     * proportional to the number of distinct keys, not the input length.
+     * An infinite repeated-key suffix may never produce another result.
+     *
+     * <p>The result is initially sequential and its source is unsplittable,
+     * even after {@code parallel()}. It preserves input encounter order when
+     * present, and does not claim exact size or element distinctness from key
+     * distinctness. Closing the result closes the input; exhaustion alone
+     * does not. The input must not be used separately afterward. Callback
+     * failures propagate unchanged.
+     *
+     * @param source the input stream
+     * @param keyExtractor the stable key function
+     * @param maxDistinct the maximum retained key count, possibly zero
+     * @param <T> the element type
+     * @param <K> the key type
+     * @return a lazy bounded distinct-by-key stream
+     * @throws NullPointerException if {@code source} or {@code keyExtractor} is null
+     * @throws IllegalArgumentException if {@code maxDistinct} is negative
+     * @throws IllegalStateException if traversal exceeds the distinct-key budget
+     * @since 21
+     */
+    public static <T, K> Stream<T> distinctBy(Stream<? extends T> source,
+            Function<? super T, ? extends K> keyExtractor, int maxDistinct) {
+        Objects.requireNonNull(source, "source");
+        Objects.requireNonNull(keyExtractor, "keyExtractor");
+        if (maxDistinct < 0) {
+            throw new IllegalArgumentException("maxDistinct must be nonnegative");
+        }
+        Spliterator<? extends T> input = source.sequential().spliterator();
+        return combinatorStream(source,
+                new DistinctKeySpliterator<>(input, keyExtractor, maxDistinct));
+    }
+
+    /**
+     * Lazily merges two streams already sorted in their traversal order under
+     * the supplied comparator. Duplicate elements are retained. Equal values
+     * from the first input precede equal values from the second; order within
+     * each input is preserved. Null elements are permitted if the comparator
+     * supports them. Sortedness is a caller precondition and is not checked.
+     *
+     * <p>Both inputs are switched to sequential mode and their spliterators
+     * are acquired immediately without traversing them. Traversal holds at
+     * most one element from each input and performs
+     * linear comparison work in the number of emitted elements. The result is
+     * initially sequential and its source does not split, even after
+     * {@code parallel()}. Its spliterator reports ordered and sorted, returns
+     * the supplied comparator, and does not advertise an exact size.
+     *
+     * <p>The inputs must be distinct, open and unused, and must not be used
+     * separately afterward. Closing the result closes the first input and
+     * then the second, even if the first close fails; a second failure is
+     * suppressed on the first. Exhaustion alone does not close either input.
+     * If construction fails, ownership remains with the caller. Comparator
+     * and traversal failures propagate unchanged.
+     *
+     * @param first the first sorted input stream
+     * @param second the second sorted input stream
+     * @param comparator the ordering shared by both inputs
+     * @param <T> the element type
+     * @return a stable lazy merge
+     * @throws NullPointerException if an argument is null
+     * @throws IllegalArgumentException if both input references are identical
+     * @since 21
+     */
+    public static <T> Stream<T> mergeSorted(Stream<? extends T> first,
+            Stream<? extends T> second, Comparator<? super T> comparator) {
+        Objects.requireNonNull(first, "first");
+        Objects.requireNonNull(second, "second");
+        Objects.requireNonNull(comparator, "comparator");
+        if (first == second) throw new IllegalArgumentException("distinct streams required");
+        Spliterator<T> merged = new SortedMergeSpliterator<>(
+                first.sequential().spliterator(), second.sequential().spliterator(), comparator);
+        return StreamSupport.stream(merged, false).onClose(composedClose(first, second));
+    }
+
+    private static <T> Stream<T> combinatorStream(BaseStream<?, ?> source,
+            Spliterator<T> traversal) {
+        return StreamSupport.stream(traversal, false).onClose(source::close);
+    }
+
+    /** One serial state owner; AbstractSpliterator's batching split is deliberately absent. */
+    private abstract static class CombinatorSpliterator<T> implements Spliterator<T> {
+        private final int characteristics;
+        boolean finished;
+
+        CombinatorSpliterator(int characteristics) {
+            this.characteristics = characteristics;
+        }
+
+        @Override
+        public final Spliterator<T> trySplit() { return null; }
+
+        @Override
+        public final long estimateSize() { return finished ? 0 : Long.MAX_VALUE; }
+
+        @Override
+        public final int characteristics() { return characteristics; }
+    }
+
+    private static final class PairwiseSpliterator<T, R> extends CombinatorSpliterator<R> {
+        private final Iterator<? extends T> input;
+        private final BiFunction<? super T, ? super T, ? extends R> mapper;
+        private boolean hasPrevious;
+        private T previous;
+
+        PairwiseSpliterator(Spliterator<? extends T> input,
+                BiFunction<? super T, ? super T, ? extends R> mapper) {
+            super(input.characteristics() & Spliterator.ORDERED);
+            this.input = Spliterators.iterator(input);
+            this.mapper = mapper;
+        }
+
+        @Override
+        public boolean tryAdvance(Consumer<? super R> action) {
+            Objects.requireNonNull(action, "action");
+            if (finished) return false;
+            if (!hasPrevious) {
+                if (!input.hasNext()) { finished = true; return false; }
+                previous = input.next();
+                hasPrevious = true;
+            }
+            if (!input.hasNext()) {
+                previous = null;
+                finished = true;
+                return false;
+            }
+            T first = previous;
+            T second = input.next();
+            previous = second;
+            action.accept(mapper.apply(first, second));
+            return true;
+        }
+    }
+
+    private static final class IndexedSpliterator<T, R> extends CombinatorSpliterator<R> {
+        private final Iterator<? extends T> input;
+        private final ObjLongFunction<? super T, ? extends R> mapper;
+        private long index;
+        private boolean overflow;
+
+        IndexedSpliterator(Spliterator<? extends T> input,
+                ObjLongFunction<? super T, ? extends R> mapper) {
+            super(input.characteristics() & Spliterator.ORDERED);
+            this.input = Spliterators.iterator(input);
+            this.mapper = mapper;
+        }
+
+        @Override
+        public boolean tryAdvance(Consumer<? super R> action) {
+            Objects.requireNonNull(action, "action");
+            if (finished) return false;
+            if (!input.hasNext()) { finished = true; return false; }
+            if (overflow) throw new ArithmeticException("stream index overflow");
+            T value = input.next();
+            long current = index;
+            if (index == Long.MAX_VALUE) overflow = true;
+            else index++;
+            action.accept(mapper.apply(value, current));
+            return true;
+        }
+    }
+
+    private static final class InterspersedSpliterator<T> extends CombinatorSpliterator<T> {
+        private final Iterator<? extends T> input;
+        private final T separator;
+        private boolean first = true;
+        private boolean hasPending;
+        private T pending;
+
+        InterspersedSpliterator(Spliterator<? extends T> input, T separator) {
+            super(input.characteristics() & Spliterator.ORDERED);
+            this.input = Spliterators.iterator(input);
+            this.separator = separator;
+        }
+
+        @Override
+        public boolean tryAdvance(Consumer<? super T> action) {
+            Objects.requireNonNull(action, "action");
+            if (finished) return false;
+            if (hasPending) {
+                T value = pending;
+                pending = null;
+                hasPending = false;
+                action.accept(value);
+                return true;
+            }
+            if (!input.hasNext()) { finished = true; return false; }
+            T value = input.next();
+            if (first) {
+                first = false;
+                action.accept(value);
+            } else {
+                pending = value;
+                hasPending = true;
+                action.accept(separator);
+            }
+            return true;
+        }
+    }
+
+    private static final class MappingWhileSpliterator<T, R> extends CombinatorSpliterator<R> {
+        private final Iterator<? extends T> input;
+        private final Function<? super T, ? extends Optional<? extends R>> mapper;
+
+        MappingWhileSpliterator(Spliterator<? extends T> input,
+                Function<? super T, ? extends Optional<? extends R>> mapper) {
+            super((input.characteristics() & Spliterator.ORDERED) | Spliterator.NONNULL);
+            this.input = Spliterators.iterator(input);
+            this.mapper = mapper;
+        }
+
+        @Override
+        public boolean tryAdvance(Consumer<? super R> action) {
+            Objects.requireNonNull(action, "action");
+            if (finished) return false;
+            if (!input.hasNext()) { finished = true; return false; }
+            Optional<? extends R> result = Objects.requireNonNull(
+                    mapper.apply(input.next()), "mapped optional");
+            if (result.isEmpty()) { finished = true; return false; }
+            action.accept(result.get());
+            return true;
+        }
+    }
+
+    private static final class DistinctKeySpliterator<T, K> extends CombinatorSpliterator<T> {
+        private final Iterator<? extends T> input;
+        private final Function<? super T, ? extends K> keyExtractor;
+        private final int maxDistinct;
+        private final Set<K> seen = new HashSet<>();
+
+        DistinctKeySpliterator(Spliterator<? extends T> input,
+                Function<? super T, ? extends K> keyExtractor, int maxDistinct) {
+            super(input.characteristics() & Spliterator.ORDERED);
+            this.input = Spliterators.iterator(input);
+            this.keyExtractor = keyExtractor;
+            this.maxDistinct = maxDistinct;
+        }
+
+        @Override
+        public boolean tryAdvance(Consumer<? super T> action) {
+            Objects.requireNonNull(action, "action");
+            if (finished) return false;
+            while (input.hasNext()) {
+                T value = input.next();
+                K key = keyExtractor.apply(value);
+                if (seen.contains(key)) continue;
+                if (seen.size() >= maxDistinct) {
+                    throw new IllegalStateException("distinct key budget exceeded");
+                }
+                seen.add(key);
+                action.accept(value);
+                return true;
+            }
+            finished = true;
+            return false;
+        }
+    }
+
+    private static final class SortedMergeSpliterator<T> extends CombinatorSpliterator<T> {
+        private final Iterator<? extends T> first;
+        private final Iterator<? extends T> second;
+        private final Comparator<? super T> comparator;
+        private boolean firstDone;
+        private boolean secondDone;
+        private boolean hasFirst;
+        private boolean hasSecond;
+        private T firstValue;
+        private T secondValue;
+
+        SortedMergeSpliterator(Spliterator<? extends T> first,
+                Spliterator<? extends T> second, Comparator<? super T> comparator) {
+            super(Spliterator.ORDERED | Spliterator.SORTED);
+            this.first = Spliterators.iterator(first);
+            this.second = Spliterators.iterator(second);
+            this.comparator = comparator;
+        }
+
+        @Override
+        public Comparator<? super T> getComparator() { return comparator; }
+
+        @Override
+        public boolean tryAdvance(Consumer<? super T> action) {
+            Objects.requireNonNull(action, "action");
+            if (finished) return false;
+            if (!hasFirst && !firstDone) {
+                if (first.hasNext()) { firstValue = first.next(); hasFirst = true; }
+                else firstDone = true;
+            }
+            if (!hasSecond && !secondDone) {
+                if (second.hasNext()) { secondValue = second.next(); hasSecond = true; }
+                else secondDone = true;
+            }
+            if (!hasFirst && !hasSecond) { finished = true; return false; }
+            T value;
+            if (!hasSecond || (hasFirst && comparator.compare(firstValue, secondValue) <= 0)) {
+                value = firstValue;
+                firstValue = null;
+                hasFirst = false;
+            } else {
+                value = secondValue;
+                secondValue = null;
+                hasSecond = false;
+            }
+            action.accept(value);
+            return true;
+        }
     }
 
     // A pair is one replaceable behavioral atom. Unsplittable traversal keeps

@@ -2,8 +2,11 @@
 package jdk.m3.swing.widgets;
 
 import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
 import java.time.DateTimeException;
 import java.time.Instant;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZoneOffset;
@@ -15,6 +18,10 @@ import java.util.List;
 import java.util.Objects;
 import java.util.TimeZone;
 import javax.swing.JPanel;
+import javax.swing.JButton;
+import javax.swing.JPopupMenu;
+import javax.swing.AbstractAction;
+import javax.swing.KeyStroke;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerDateModel;
 import javax.swing.SwingUtilities;
@@ -28,8 +35,9 @@ import javax.swing.event.ChangeListener;
  *
  * <p>Local timestamps at daylight-saving gaps or overlaps are rejected, not
  * silently shifted or assigned an arbitrary offset. Callers may setInstant
- * for an explicitly resolved instant. Graphical calendar popup parity with
- * Nebula/SwingX is outside this initial native control.</p>
+ * for an explicitly resolved instant. The opt-in graphical calendar popup
+ * reuses one native JTable-backed M3MonthView, preserving this spinner and
+ * its public APIs as the sole instant authority.</p>
  */
 public final class M3DateTime extends JPanel {
     private static final long serialVersionUID = 1L;
@@ -39,6 +47,11 @@ public final class M3DateTime extends JPanel {
     private ZoneId zone;
     private Instant lower;
     private Instant upper;
+    private JButton calendarButton;
+    private JPopupMenu calendarPopup;
+    private M3MonthView monthView;
+    private boolean calendarPopupEnabled;
+    private boolean calendarSyncDeferred;
 
     public M3DateTime() {
         this(ZoneId.systemDefault(), "yyyy-MM-dd HH:mm:ss");
@@ -54,9 +67,108 @@ public final class M3DateTime extends JPanel {
         editor.getFormat().setTimeZone(TimeZone.getTimeZone(zone));
         editor.getFormat().setLenient(false);
         spinner.setEditor(editor);
+        // The exposed native spinner remains an editable model owner.
+        model.addChangeListener(event -> {
+            if (!calendarSyncDeferred && monthView != null && SwingUtilities.isEventDispatchThread()) syncCalendar();
+        });
         editor.getTextField().getAccessibleContext().setAccessibleName("Date and time");
         editor.getTextField().getAccessibleContext().setAccessibleDescription("Calendar date and wall-clock time");
         add(spinner, BorderLayout.CENTER);
+    }
+
+    /** Keep stock spinner layout unless graphical picker is explicitly enabled. */
+    public void setCalendarPopupEnabled(boolean enabled) {
+        requireEdt();
+        if (calendarPopupEnabled == enabled) return;
+        calendarPopupEnabled = enabled;
+        if (enabled) {
+            ensureCalendar();
+            add(calendarButton, BorderLayout.EAST);
+            calendarButton.setEnabled(isEnabled());
+        } else {
+            if (calendarPopup != null) calendarPopup.setVisible(false);
+            remove(calendarButton);
+        }
+        revalidate();
+        repaint();
+    }
+
+    public boolean isCalendarPopupEnabled() { return calendarPopupEnabled; }
+
+    /** Lazily constructs the month widget, without changing this selector's value. */
+    public M3MonthView getMonthView() {
+        requireEdt();
+        ensureCalendar();
+        syncCalendar();
+        return monthView;
+    }
+
+    /** Null until the graphical picker has been requested. */
+    public JButton getCalendarButton() { return calendarButton; }
+
+    /** Shows the existing lazy native popup; never creates an SWT shell. */
+    public void showCalendarPopup() {
+        requireEdt();
+        if (!calendarPopupEnabled || !isEnabled()) return;
+        ensureCalendar();
+        syncCalendar();
+        if (!calendarButton.isShowing()) {
+            throw new IllegalStateException("calendar button is not showing");
+        }
+        calendarPopup.show(calendarButton, 0, calendarButton.getHeight());
+    }
+
+    public void hideCalendarPopup() {
+        requireEdt();
+        if (calendarPopup != null) calendarPopup.setVisible(false);
+    }
+
+    public boolean isCalendarPopupVisible() { return calendarPopup != null && calendarPopup.isVisible(); }
+
+    private void ensureCalendar() {
+        if (monthView != null) return;
+        monthView = new M3MonthView(getLocale());
+        monthView.getAccessibleContext().setAccessibleDescription("Choose calendar date, preserving the current time");
+        monthView.addActionListener(event -> {
+            LocalDate date = monthView.getSelectedDate();
+            if (date == null) return;
+            LocalDateTime local = LocalDateTime.of(date, getLocalDateTime().toLocalTime());
+            try {
+                setLocalDateTime(local);
+                hideCalendarPopup();
+            } catch (DateTimeException | IllegalArgumentException rejected) {
+                // A wall-time DST gap/overlap or range violation must not mutate
+                // the canonical instant or make the UI EDT throw asynchronously.
+                syncCalendar();
+            }
+        });
+        calendarButton = new JButton("▾");
+        calendarButton.getAccessibleContext().setAccessibleName("Choose calendar date");
+        calendarButton.addActionListener(event -> {
+            if (isCalendarPopupVisible()) hideCalendarPopup();
+            else showCalendarPopup();
+        });
+        calendarPopup = new JPopupMenu();
+        calendarPopup.add(monthView);
+        calendarPopup.setFocusable(false);
+        getInputMap(WHEN_ANCESTOR_OF_FOCUSED_COMPONENT)
+                .put(KeyStroke.getKeyStroke(KeyEvent.VK_DOWN, java.awt.event.InputEvent.ALT_DOWN_MASK), "m3.openCalendar");
+        getInputMap(WHEN_ANCESTOR_OF_FOCUSED_COMPONENT)
+                .put(KeyStroke.getKeyStroke(KeyEvent.VK_F4, 0), "m3.openCalendar");
+        getActionMap().put("m3.openCalendar", new AbstractAction() {
+            private static final long serialVersionUID = 1L;
+            @Override public void actionPerformed(ActionEvent event) { showCalendarPopup(); }
+        });
+        syncCalendar();
+    }
+
+    private void syncCalendar() {
+        if (monthView == null) return;
+        LocalDate selected = getLocalDateTime().toLocalDate();
+        LocalDate minDate = lower == null ? null : LocalDate.ofInstant(lower, zone);
+        LocalDate maxDate = upper == null ? null : LocalDate.ofInstant(upper, zone);
+        monthView.setDateRange(minDate, maxDate);
+        monthView.setSelectedDate(selected);
     }
 
     public JSpinner getSpinner() { return spinner; }
@@ -76,6 +188,7 @@ public final class M3DateTime extends JPanel {
             editor.getFormat().setTimeZone(TimeZone.getTimeZone(value));
             editor.getTextField().setValue(model.getValue());
             firePropertyChange("zone", previous, value);
+            syncCalendar();
         }
     }
 
@@ -89,6 +202,7 @@ public final class M3DateTime extends JPanel {
             throw new IllegalArgumentException("instant outside allowed bounds");
         }
         model.setValue(Date.from(value));
+        syncCalendar();
     }
 
     /** Rejects ambiguous and nonexistent local times; use setInstant to resolve them explicitly. */
@@ -112,13 +226,19 @@ public final class M3DateTime extends JPanel {
                 || (upper != null && upper.getNano() % 1_000_000 != 0)) {
             throw new IllegalArgumentException("range must have millisecond precision");
         }
-        this.lower = lower;
-        this.upper = upper;
-        // Date is the single value authority for Swing's native SpinnerDateModel.
-        model.setStart(lower == null ? null : Date.from(lower));
-        model.setEnd(upper == null ? null : Date.from(upper));
-        if (lower != null && getInstant().isBefore(lower)) model.setValue(Date.from(lower));
-        else if (upper != null && getInstant().isAfter(upper)) model.setValue(Date.from(upper));
+        calendarSyncDeferred = true;
+        try {
+            this.lower = lower;
+            this.upper = upper;
+            // Date is the single value authority for Swing's native SpinnerDateModel.
+            model.setStart(lower == null ? null : Date.from(lower));
+            model.setEnd(upper == null ? null : Date.from(upper));
+            if (lower != null && getInstant().isBefore(lower)) model.setValue(Date.from(lower));
+            else if (upper != null && getInstant().isAfter(upper)) model.setValue(Date.from(upper));
+        } finally {
+            calendarSyncDeferred = false;
+        }
+        syncCalendar();
     }
 
     public void addChangeListener(ChangeListener listener) {
@@ -182,6 +302,9 @@ public final class M3DateTime extends JPanel {
     @Override public void setEnabled(boolean enabled) {
         super.setEnabled(enabled);
         if (spinner != null) spinner.setEnabled(enabled);
+        if (calendarButton != null) calendarButton.setEnabled(enabled);
+        if (monthView != null) monthView.setEnabled(enabled);
+        if (!enabled && calendarPopup != null) calendarPopup.setVisible(false);
     }
 
     private static void requireEdt() {

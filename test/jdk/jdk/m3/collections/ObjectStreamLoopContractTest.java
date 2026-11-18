@@ -25,7 +25,7 @@ final class ObjectStreamLoopContractTest {
         AtomicInteger closed = new AtomicInteger();
         ObjectStream<Integer> source = ObjectStream.once(Stream.of(2, 3, -1, 9)
                 .onClose(closed::incrementAndGet));
-        ObjectStream<Integer> mappedStream = source.mapWhile(v -> {
+        ObjectStream<Integer> mappedStream = source.mapWhileNullable(v -> {
             mapped.incrementAndGet();
             return v < 0 ? null : 2 * v;
         });
@@ -34,7 +34,7 @@ final class ObjectStreamLoopContractTest {
         assertEquals(3, mapped.get());
         assertEquals(1, closed.get());
         assertEquals(List.of(), ObjectStream.snapshot(List.<Integer>of())
-                .mapWhile(v -> 2 * v).toBoundedList(0));
+                .mapWhileNullable(v -> 2 * v).toBoundedList(0));
         assertThrows(IllegalStateException.class, () -> mappedStream.toBoundedList(3));
     }
 

@@ -41,6 +41,7 @@ import java.util.function.Predicate;
 import java.util.function.Supplier;
 import java.util.stream.Collector;
 import java.util.stream.Stream;
+import java.util.stream.Streams;
 import java.util.stream.StreamSupport;
 
 /**
@@ -240,18 +241,20 @@ public final class ObjectStream<T> {
     }
 
     /**
-     * A primitive long index avoids per-element tuple or Long boxing.
-     * Index state is recreated for every traversal of a replayable plan.
+     * Explicit ordinal-first mapping without tuple or Long boxing.
+     * The earlier mapIndexed(value, ordinal) API retains its published order.
      */
     @FunctionalInterface
-    public interface IndexedMapper<I, O> {
+    public interface OrdinalFirstMapper<I, O> {
         O apply(long index, I value);
     }
 
-    /** Lazy zero-based indexed mapping; index overflow is rejected. */
-    public <R> ObjectStream<R> mapIndexed(IndexedMapper<? super T, ? extends R> mapper) {
+    /** Lazy zero-based ordinal-first mapping; index overflow is rejected. */
+    public <R> ObjectStream<R> mapIndexedOrdinalFirst(
+            OrdinalFirstMapper<? super T, ? extends R> mapper) {
         Objects.requireNonNull(mapper, "mapper");
-        return new ObjectStream<>(() -> ObjectStreamLanguageKernels.mapIndexed(stream(), mapper),
+        return new ObjectStream<>(
+                () -> ObjectStreamLanguageKernels.mapIndexedOrdinalFirst(stream(), mapper),
                 replayable);
     }
 
@@ -317,6 +320,46 @@ public final class ObjectStream<T> {
                 throw failure;
             }
         }, replayable && other.replayable());
+    }
+
+    /**
+     * Lazily map overlapping adjacent pairs using the java.base stream owner.
+     * Empty and singleton inputs produce no results. Each replay opens the
+     * original source afresh; the mapped traversal owns source closure.
+     */
+    public <R> ObjectStream<R> pairwise(
+            BiFunction<? super T, ? super T, ? extends R> mapper) {
+        Objects.requireNonNull(mapper, "mapper");
+        return delegateStream(input -> Streams.pairwise(input, mapper));
+    }
+
+    /**
+     * Lazily map until the first empty optional, consuming that terminating
+     * input but requesting no later elements. A null mapped optional is
+     * rejected. Each evaluation has independent termination state.
+     */
+    public <R> ObjectStream<R> mapWhile(
+            Function<? super T, ? extends Optional<? extends R>> mapper) {
+        Objects.requireNonNull(mapper, "mapper");
+        return delegateStream(input -> Streams.mapWhile(input, mapper));
+    }
+
+    /** Transfer this plan's opened traversal to a java.base stream factory. */
+    private <R> ObjectStream<R> delegateStream(Function<Stream<T>, Stream<R>> factory) {
+        return new ObjectStream<>(() -> {
+            Stream<T> input = stream();
+            try {
+                return factory.apply(input);
+            } catch (RuntimeException | Error failure) {
+                // A failed factory leaves ownership with its caller, which is this plan.
+                try {
+                    input.close();
+                } catch (RuntimeException | Error closeFailure) {
+                    if (closeFailure != failure) failure.addSuppressed(closeFailure);
+                }
+                throw failure;
+            }
+        }, replayable);
     }
 
     /**
@@ -438,8 +481,8 @@ public final class ObjectStream<T> {
      */
     public record Partition<L, R>(List<L> left, List<R> right) { }
 
-    /** Rust map_while idiom: mapping stops on the first null result. */
-    public <R> ObjectStream<R> mapWhile(Function<? super T, ? extends R> mapper) {
+    /** Null-sentinel alternative to the existing Optional-based mapWhile API. */
+    public <R> ObjectStream<R> mapWhileNullable(Function<? super T, ? extends R> mapper) {
         Objects.requireNonNull(mapper, "mapper");
         return new ObjectStream<>(
                 () -> ObjectStreamLoopKernels.mapWhile(stream(), mapper), replayable);
@@ -699,6 +742,69 @@ public final class ObjectStream<T> {
     }
 
     public ObjectStream<List<T>> batch(int size) { return batch(size, TailPolicy.INCLUDE); }
+
+    /**
+     * Non-overlapping immutable batches, including a final incomplete batch.
+     * No source elements are consumed until the resulting stream is traversed.
+     *
+     * @param width maximum number of elements in each batch, from 1 to 65,536
+     * @return a lazy plan retaining this plan's replayability
+     * @throws IllegalArgumentException if width is outside the supported range
+     */
+    public ObjectStream<List<T>> collate(int width) {
+        return collate(width, width, TailPolicy.INCLUDE);
+    }
+
+    /**
+     * Immutable windows starting every {@code step} elements, including all
+     * nonempty incomplete windows at the tail.
+     *
+     * @param width maximum number of elements in each window, from 1 to 65,536
+     * @param step positive distance between successive window starts
+     * @return a lazy plan retaining this plan's replayability
+     * @throws IllegalArgumentException if width is outside the supported range
+     *         or step is not positive
+     */
+    public ObjectStream<List<T>> collate(int width, int step) {
+        return collate(width, step, TailPolicy.INCLUDE);
+    }
+
+    /**
+     * Immutable windows starting every {@code step} elements in encounter order.
+     * A step smaller than width produces overlapping windows; a larger step
+     * leaves gaps. With {@link TailPolicy#INCLUDE}, every nonempty partial window
+     * is emitted, including multiple overlapping tails. With
+     * {@link TailPolicy#DROP}, only full windows are emitted. Empty input
+     * produces no windows.
+     *
+     * <p>For example, collating {@code [a, b, c, d, e]} with width 3, step 1 and
+     * INCLUDE produces {@code [[a, b, c], [b, c, d], [c, d, e], [d, e], [e]]}.
+     * Each result is an independent immutable list that preserves null elements.
+     * The elements themselves are not copied.
+     *
+     * <p>Creating this plan or opening its stream consumes no source elements.
+     * Traversal retains a grow-on-demand ring of at most {@code width}
+     * references. Gaps are skipped only when another window is requested;
+     * no later window is prefetched. Closing the opened stream releases its
+     * scratch storage and closes the upstream stream. Traversal remains
+     * sequential even if the opened stream is switched to parallel mode.
+     *
+     * @param width maximum number of elements in each window, from 1 to 65,536
+     * @param step positive distance between successive window starts
+     * @param tailPolicy whether incomplete windows are included or dropped
+     * @return a lazy plan retaining this plan's replayability
+     * @throws IllegalArgumentException if width is outside the supported range
+     *         or step is not positive
+     * @throws NullPointerException if tailPolicy is null
+     */
+    public ObjectStream<List<T>> collate(int width, int step, TailPolicy tailPolicy) {
+        requireWidth(width);
+        if (step <= 0) throw new IllegalArgumentException("step must be positive");
+        Objects.requireNonNull(tailPolicy, "tailPolicy");
+        return new ObjectStream<>(
+                () -> ObjectStreamLanguageKernels.collate(stream(), width, step, tailPolicy),
+                replayable);
+    }
 
     /** Full sliding windows only; ring scratch is O(width) and each emitted window is an immutable copy. */
     public ObjectStream<List<T>> window(int width) {
@@ -1014,6 +1120,44 @@ public final class ObjectStream<T> {
     }
 
     /**
+     * Sequentially replace one accumulator state per key in first-key encounter
+     * order. The initializer runs once for each admitted key, including a null
+     * key. Null initial and replacement states are valid and never reseeded.
+     * The key extractor and folder run once per successfully processed element;
+     * no parallel associativity or mutable-state holder is required.
+     *
+     * <p>A new key beyond maxKeys is refused before its initializer or folder
+     * runs. The returned map is unmodifiable and is published only after the
+     * input closes successfully. Keys and state objects retain their original
+     * references; the result does not deep-copy client accumulator states.</p>
+     */
+    public <K, A> Map<K, A> foldByKey(
+            Function<? super T, ? extends K> keyExtractor, int maxKeys,
+            Supplier<? extends A> initializer,
+            BiFunction<? super A, ? super T, ? extends A> folder) {
+        Objects.requireNonNull(keyExtractor, "keyExtractor");
+        Objects.requireNonNull(initializer, "initializer");
+        Objects.requireNonNull(folder, "folder");
+        requireNonNegative(maxKeys, "maxKeys");
+        LinkedHashMap<K, A> states = new LinkedHashMap<>();
+        try (Stream<T> input = stream()) {
+            Iterator<T> iterator = input.iterator();
+            while (iterator.hasNext()) {
+                T value = iterator.next();
+                K key = keyExtractor.apply(value);
+                if (!states.containsKey(key)) {
+                    if (states.size() >= maxKeys) {
+                        throw new IllegalStateException("keyed state budget exceeded");
+                    }
+                    states.put(key, initializer.get());
+                }
+                states.put(key, folder.apply(states.get(key), value));
+            }
+        }
+        return Collections.unmodifiableMap(states);
+    }
+
+    /**
      * Scala-style groupMapReduce, with first-key iteration order and a hard
      * distinct-key cap. Unlike groupBy-to-list, retains only one value per key.
      * Null keys and nullable accumulator values remain distinguishable.
@@ -1047,6 +1191,72 @@ public final class ObjectStream<T> {
     public <K> Map<K, Long> countByKey(Function<? super T, ? extends K> keyExtractor, int maxKeys) {
         return groupBy(keyExtractor, maxKeys, () -> new long[1],
                 (state, ignored) -> state[0] = Math.addExact(state[0], 1L), state -> state[0]);
+    }
+
+    /**
+     * Groovy 6 groupByMany shape, with M3's explicit source, key and membership
+     * budgets. A value can occur under multiple keys; a repeated key in the
+     * iterable contributes a repeated membership, preserving its side effects.
+     * Null key iterables skip that input, as in Groovy's GDK implementation.
+     *
+     * <p>Group directories use M3's array-backed ordered map, and members use
+     * M3's Object[]-backed list. There is no per-membership Entry/Pair graph.
+     * First occurrence determines key order; each group's members preserve
+     * source and key-iteration order. The result owns mutable groups and is
+     * independent of the source. This is not a Groovy MetaClass/GDK patch.
+     *
+     * <p>The value mapper runs once per admitted <em>membership</em>, not once
+     * per source element, following the GDK two-function form. Both callbacks
+     * execute sequentially on the caller's thread. Limits are checked before
+     * mutating the output. Any failure closes an opened source stream.
+     */
+    public <K, V> Map<K, List<V>> groupByMany(
+            Function<? super T, ? extends V> valueMapper,
+            Function<? super T, ? extends Iterable<? extends K>> keyMapper,
+            int maxElements, int maxKeys, long maxMemberships) {
+        Objects.requireNonNull(valueMapper, "valueMapper");
+        Objects.requireNonNull(keyMapper, "keyMapper");
+        requireNonNegative(maxElements, "maxElements");
+        requireNonNegative(maxKeys, "maxKeys");
+        if (maxMemberships < 0L) throw new IllegalArgumentException("negative maxMemberships");
+        Map<K, List<V>> groups = new M3LinkedHashMap<>();
+        int consumed = 0;
+        long memberships = 0L;
+        try (Stream<T> source = stream()) {
+            Iterator<T> iterator = source.iterator();
+            while (iterator.hasNext()) {
+                if (consumed >= maxElements) {
+                    throw new IllegalStateException("groupByMany source budget exceeded");
+                }
+                T element = iterator.next();
+                consumed++;
+                Iterable<? extends K> keys = keyMapper.apply(element);
+                if (keys == null) continue;
+                for (K key : keys) {
+                    if (memberships >= maxMemberships) {
+                        throw new IllegalStateException("groupByMany membership budget exceeded");
+                    }
+                    List<V> members = groups.get(key);
+                    if (members == null) {
+                        if (groups.size() >= maxKeys) {
+                            throw new IllegalStateException("groupByMany key budget exceeded");
+                        }
+                        members = new M3ArrayList<>();
+                        groups.put(key, members);
+                    }
+                    members.add(valueMapper.apply(element));
+                    memberships++;
+                }
+            }
+        }
+        return groups;
+    }
+
+    /** Identity-preserving one-to-many grouping with no per-element tuple. */
+    public <K> Map<K, List<T>> groupByMany(
+            Function<? super T, ? extends Iterable<? extends K>> keyMapper,
+            int maxElements, int maxKeys, long maxMemberships) {
+        return groupByMany(Function.identity(), keyMapper, maxElements, maxKeys, maxMemberships);
     }
 
     /** Compute two collectors in one ordered traversal; output is merged only after successful input closure. */

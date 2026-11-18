@@ -464,10 +464,7 @@ final class M3StringAtom extends M3StringOwner {
             byte destinationCoder) {
         Objects.checkFromToIndex(start, end, length);
         int count = end - start;
-        Objects.checkFromIndexSize(
-                destinationStart << destinationCoder,
-                count << destinationCoder,
-                destination.length);
+        checkByteDestination(destination, destinationStart, count, destinationCoder);
 
         try {
             if (storageWidth == 1 && destinationCoder == String.LATIN1) {

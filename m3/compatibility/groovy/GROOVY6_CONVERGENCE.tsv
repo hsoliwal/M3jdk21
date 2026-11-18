@@ -1,0 +1,11 @@
+id	groovy6_donor	m3_owner	status	compatibility_contract	qualification
+G6-001	DefaultGroovyMethods.groupByMany(Iterable,Function)	ObjectStream.groupByMany	CODE_CANDIDATE	one key Iterable per source element; duplicates and null keys; mutable output; bounded keys/memberships/source	standalone Java21 25 + fuzz 2500; real module and Groovy NOT_RUN
+G6-002	DefaultGroovyMethods.groupByMany(Iterable,Function,Function)	ObjectStream.groupByMany	CODE_CANDIDATE	value function per membership; source iterator closed on error	standalone Java21 25 + fuzz 2500; real module and Groovy NOT_RUN
+G6-003	DefaultGroovyMethods.groupConsecutive	ObjectStream.chunkBy	EXISTING_OWNER	adjacent equal keys; M3 explicit maxRunLength; Groovy numeric equality requires oracle	Groovy6 fixture; real oracle NOT_RUN
+G6-004	DefaultGroovyMethods.collecting/collectingMany	ObjectStream.map/flatMapIterable	REVIEW_EQUIVALENCE	lazy iterator and source closure, exception order	NOT_RUN
+G6-005	DefaultGroovyMethods.findingAll	ObjectStream.filter	REVIEW_EQUIVALENCE	lazy iterator and callback timing	NOT_RUN
+G6-006	DefaultGroovyMethods.SAM Predicate/Function overloads	ObjectStream collection operators	REVIEW_OVERLOADS	Closure-vs-SAM overload selection, static/dynamic semantics	NOT_RUN
+G6-007	Groovy extension disable system property	M3Context optional Groovy profile	KEEP_GROOVY	precise extension signature exclusions; no global Java dispatch	NOT_RUN
+G6-008	GINQ	M3DB/M3AST candidate	CANDIDATE_ONLY	join/group/order semantics and optimizer legality	NOT_RUN
+G6-009	@CompileStatic and MetaClass MOP	M3AST/M3Context	CANDIDATE_ONLY	classloader/metaclass epoch invalidation, Kotlin/Groovy method resolution	NOT_RUN
+G6-010	Groovy 6 actors/channels/async	M3Scheduler candidate	INCUBATING_HOLD	cancellation/structured-scope boundaries, no implicit parallel callbacks	NOT_RUN

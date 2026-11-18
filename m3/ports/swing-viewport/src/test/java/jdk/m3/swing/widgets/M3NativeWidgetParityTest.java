@@ -14,4 +14,8 @@ class M3NativeWidgetParityTest {
     @Test void maxValueEnvelopeDoesNotDisappear() throws Exception {
         M3OscilloscopeMaxEnvelopeSmoke.main(new String[0]);
     }
+    @Test void nativeDateTimeWithGraphicalCalendarPopup() throws Exception {
+        M3DateTimeSmoke.main(new String[0]);
+        M3MonthViewCalendarSmoke.main(new String[0]);
+    }
 }

@@ -70,7 +70,7 @@ java -Djava.awt.headless=true -Xmx128m -cp /tmp/m3-native jdk.m3.swing.widgets.M
 | Git blobs of M3Grid/ContractSmoke/HeadfulSmoke equal exact local tested source | VERIFIED |
 | Existing m3-swing-viewport Maven/JUnit full reactor on exact PR head | NOT_RUN |
 | Native Xvfb other LAF/drag/resizing/RTL/HiDPI/accessible GTK/Win32/Cocoa suite | NOT_RUN |
-| Full Nebula Grid behavior (grouping, spans, pinned top/bottom, long indices) | OPEN |
+| Full Nebula Grid behavior (nested groups/summary rows, cross-plane spans, long indices) | OPEN |
 | Canonical M3DateTime moved from pre-#3313 port with identical source blob | VERIFIED |
 | Combined Grid/DateTime Java 21 headless tests | LOCAL_PASS |
 | #3313 merged; source blob received in canonical java.desktop | VERIFIED |
@@ -112,3 +112,100 @@ exact source seals, reproduction and limits.
 
 See [GRID_SPANS.md](GRID_SPANS.md) for model-coordinate policy,
 primitive storage, proof bounds, donor hashes and remaining gates.
+
+## Sparse native Grid row grouping
+
+| Gate | Status |
+|---|---|
+| Java 21 -Xlint:all,-serial,-this-escape -Werror from canonical Grid source | LOCAL_PASS |
+| Patched java.desktop compile and named-module runtime smoke suite | LOCAL_PASS |
+| M3GridGroupsSmoke with 1M rows, 2 large collapsed ranges, then 3000 groups at -Xmx128m | LOCAL_PASS |
+| M3GridGroupsMappingSmoke: 24K rows, 600 groups, 45 seeded collapse toggles against independent dense oracle | LOCAL_PASS |
+| M3GridGroupsSerializationSmoke: collapsed sparse state round-trip | LOCAL_PASS |
+| Serialized pre-group M3Grid source read into new M3Grid, then newly collapsed | LOCAL_PASS |
+| Existing frozen columns, pinned rows and merged spans headless smoke tests | LOCAL_PASS |
+| Four native Swing Robot tests with Linux/Xvfb (frozen, pinned, spans, group disclosure) | LOCAL_PASS |
+| Original stock JTable header toggle while sparse sorter installed | LOCAL_PASS |
+| Public javap comparison: old methods preserved, group methods additive | LOCAL_PASS |
+| Exact Git blob identity for source and four new standalone tests | VERIFIED |
+| Full M3JDK jtreg and Maven reactor, GTK/Win32/Cocoa/HiDPI/assistive technology | NOT_RUN |
+| Synexia source-sealed OpenRewrite fixed point; nested group/summary feature parity | NOT_RUN |
+
+See [GRID_ROW_GROUPS.md](GRID_ROW_GROUPS.md) for the sparse rank/select
+design, source SHA pins, commands, known restrictions and test evidence.
+
+## Native graphical month calendar / CDateTime popup (2026-11-18)
+
+| Gate | Status |
+|---|---|
+| New M3MonthView and additive M3DateTime code in both java.desktop and swing-viewport | SOURCE_BLOBS_IDENTICAL |
+| javac --release 21 -Xlint:all,-serial,-this-escape -Werror | LOCAL_PASS |
+| Existing M3DateTimeSmoke: bounds, immutable instant, zone and DST parse | LOCAL_PASS |
+| M3MonthViewCalendarSmoke: 42 cells, locale, bounds, 2000 month moves, action and date-time DST atomicity | LOCAL_PASS |
+| M3MonthViewHeadfulSmoke: JFrame/JPopupMenu mouse event, date commit, popup close/detach on Xvfb | XVFB_PASS |
+| Xvfb repeatability: 3 consecutive X11 headful runs after pre-initializing MouseEvent before EDT | 3_OF_3_PASS |
+| Public API javap: 19 baseline signatures retained; seven additive calendar methods | SOURCE_BINARY_SIGNATURE_PASS |
+| Direct JSpinner model value changes update popup without reentrant range clamping | HEADLESS_PASS |
+| Full Maven/JUnit & OpenJDK java.desktop reactor at exact branch head | NOT_RUN |
+| GUI pixel/event differentials on Win32, GTK, Cocoa and SwingX | NOT_RUN |
+| Accessibility screen-reader, RTL, and advanced Nebula CDateTime styles | NOT_RUN |
+| Canonical Synexia OpenRewrite sealed source recipe fixed-point | NOT_RUN |
+
+From m3/ports/swing-viewport root with JDK 21:
+
+```sh
+mkdir -p /tmp/m3-monthview
+javac --release 21 -Xlint:all,-serial,-this-escape -Werror -d /tmp/m3-monthview \
+  src/main/java/jdk/m3/swing/widgets/M3DateTime.java \
+  src/main/java/jdk/m3/swing/widgets/M3MonthView.java \
+  src/test/java/jdk/m3/swing/widgets/M3DateTimeSmoke.java \
+  src/test/java/jdk/m3/swing/widgets/M3MonthViewCalendarSmoke.java \
+  src/test/java/jdk/m3/swing/widgets/M3MonthViewHeadfulSmoke.java
+java -Djava.awt.headless=true -Xmx128m -cp /tmp/m3-monthview jdk.m3.swing.widgets.M3DateTimeSmoke
+java -Djava.awt.headless=true -Xmx128m -cp /tmp/m3-monthview jdk.m3.swing.widgets.M3MonthViewCalendarSmoke
+xvfb-run -a java -Djava.awt.headless=false -Xmx128m -cp /tmp/m3-monthview jdk.m3.swing.widgets.M3MonthViewHeadfulSmoke
+```
+
+## Native Grid two-tier column group headers
+
+| Gate | Result |
+|---|---|
+| Exact locally tested canonical M3Grid.java blob 0127f576d29bf7b563ee6f82906c962bf2b732fc | VERIFIED |
+| Java 21 --release 21 -Xlint:all,-serial,-this-escape -Werror (Grid and standalone test sources) | LOCAL_PASS |
+| Strict --patch-module java.desktop compile and named-module runtime | LOCAL_PASS |
+| New M3GridColumnGroupsSmoke: two-tier color pixels, model-column groups, reorder, frozen boundary, structure change, restoration | LOCAL_PASS |
+| New M3GridColumnGroupsSerializationSmoke: with and without frozen columns, post-roundtrip mutation | LOCAL_PASS |
+| 5,000-column JTable far horizontal window: fewer than 12 leaf header renderer invocations | LOCAL_PASS |
+| Existing six Grid headless contract/group/serial/spans programs | LOCAL_PASS |
+| Existing four Linux Xvfb Robot mouse programs | LOCAL_PASS |
+| New M3GridColumnGroupsHeadfulSmoke: group title not sortable, original lower-tier header sorts | XVFB_PASS |
+| Old serialized Grid with collapsed row group read into new Grid and column group added | LOCAL_PASS |
+| Public javap method signatures: 37 old, 44 new, zero removed | LOCAL_PASS |
+| Full M3JDK built image / jtreg, whole Swing JUnit/Maven reactor | NOT_RUN |
+| GTK4/Cocoa/Win32/HiDPI, accessibility, native LAF/RTL/print differences | NOT_RUN |
+| Nested groups, Nebula expand/collapse summary/detail parity and Synexia OpenRewrite fixed-point recipe | OPEN |
+
+See [GRID_COLUMN_GROUPS.md](GRID_COLUMN_GROUPS.md) for source locks,
+reproduction, exact feature scope and outstanding acceptance gates.
+
+## Native Grid summary/detail column collapse
+
+| Gate | Status |
+|---|---|
+| Exact SHA-locked canonical M3Grid.java d921b33aa9f169f87bf9f0e155b35d354ddd5a8b | VERIFIED |
+| Java 21 strict -Xlint:all,-serial,-this-escape -Werror compile | LOCAL_PASS |
+| --patch-module java.desktop compile and named-module smokes | LOCAL_PASS |
+| 8 inherited Grid headless regressions (frozen, pinned, spans, sparse row grouping and two-tier headers) | LOCAL_PASS |
+| M3GridColumnSummarySmoke: model identity, selection, event order, editor veto, frozen boundary, reorder, schema replacement | LOCAL_PASS |
+| M3GridColumnSummarySerializationSmoke: collapse state and real TableColumn identity after round-trip | LOCAL_PASS |
+| M3GridColumnSummaryScale: 1M model rows, 5000 model columns, far viewport and <160 model reads under 128 MiB | LOCAL_PASS |
+| Five inherited Linux Xvfb Robot mouse tests | LOCAL_PASS |
+| M3GridColumnSummaryHeadfulSmoke: native disclosure click and unchanged lower-tier sorting | XVFB_PASS |
+| Legacy serialized pre-group Grid fixture remains readable | LOCAL_PASS |
+| javap previous 41 vs new 48 public signature lines, zero removed | LOCAL_PASS |
+| Full source-built M3JDK image/jtreg, complete Maven/JUnit reactor | NOT_RUN |
+| Native Windows/macOS/GTK4, HiDPI, accessibility, RTL, alternate LookAndFeel | NOT_RUN |
+| Multiple summary roles, nested groups, canonical Synexia OpenRewrite fixed-point and benchmarks | OPEN |
+
+See [GRID_COLUMN_SUMMARY.md](GRID_COLUMN_SUMMARY.md) for source seals,
+precise contracts and unqualified behavior.

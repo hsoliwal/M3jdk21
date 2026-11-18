@@ -66,8 +66,14 @@ Neither javax.swing nor SwingX nor SWT/Nebula was changed by this PR.
   opt-in frozen leading columns and **top/bottom view rows** with pinned
   headers, hit mapping, editing and damage-limited painted planes. See [GRID_PARITY.md](GRID_PARITY.md).
   The existing Swing/SwingX and M3PackedTable owners remain unchanged;
-  groups, RTL and long-index widget APIs remain open;
-  basic body row/column spans are now source-locked and tested;
+  **nested groups and summary rows**, RTL and long-index widget APIs remain open;
+  flat sparse collapsible row groups are source-locked and locally tested;
+  basic body row/column spans are source-locked and tested;
+  a first opt-in model-column grouped-title tier now shares the native
+  JTableHeader owner (see [GRID_COLUMN_GROUPS.md](GRID_COLUMN_GROUPS.md));
+  native summary/detail columns retain the original TableColumn objects,
+  with collapse/expand under the existing TableColumnModel (see
+  [GRID_COLUMN_SUMMARY.md](GRID_COLUMN_SUMMARY.md));
   pinned-row behavior is detailed in [GRID_PINNED_ROWS.md](GRID_PINNED_ROWS.md).
 - Gallery, Gantt, charts, tiles, Carousel: enrich the existing M3 generated
   component templates and models, never add parallel widget families.
@@ -205,3 +211,65 @@ Nebula or SwingX production source was changed.
 
 For merged-cell bounds, model/view-index rules and cross-plane exclusions,
 see [GRID_SPANS.md](GRID_SPANS.md).
+
+For flat collapsible row group implementation, previous sorter preservation,
+serialization, and large-model projection, see
+[GRID_ROW_GROUPS.md](GRID_ROW_GROUPS.md).
+
+## Native Swing wave: graphical MonthView and CDateTime CalendarCombo
+
+The canonical java.desktop and swing-viewport M3DateTime source owner is
+extended additively. **Existing construction defaults to spinner-only**;
+the new graphical picker is opt-in via setCalendarPopupEnabled(true).
+Neither javax.swing nor SwingX public behavior is replaced.
+
+- M3MonthView: actual JTable-based 6x7 month grid, one AbstractTableModel,
+  dates derived from a single primitive epoch-day origin rather than 42
+  separate widgets or a collection of editable day objects.
+- Locale-dependent first weekday and month heading, range-limited and
+  disabled selection, prior/next navigation, JTable Enter and mouse commit.
+  Programmatic selected date publishes a property change, not a user action.
+- M3DateTime keeps its existing JSpinner/SpinnerDateModel authority.
+  Opt-in calendar button and lazy JPopupMenu host exactly one M3MonthView.
+  Date-only selection retains original wall-clock time and canonical instant
+  is updated only when a selected wall time is uniquely valid in its ZoneId.
+  DST gap/overlap or range failure rejects atomically; the popup selection
+  is restored from the canonical spinner value.
+- The same production changes are in both the swing-viewport port and
+  src/java.desktop/share/classes (byte-identical Git blobs).
+- The exposed JSpinner's original SpinnerDateModel drives a bounded, EDT
+  change listener: direct spinner changes refresh the existing calendar.
+  Range adjustments defer intermediate notifications and synchronize once
+  after the new bounds and selected instant are consistent. Unchanged
+  bounds/selections do not rebuild the JTable model.
+- Original javap public API: 19 signatures; new: 26; removed: zero.
+  Legacy spinner-only presentation remains the default.
+- Existing DateTimeSmoke remains unchanged. New CalendarSmoke tests
+  navigation, locale, boundaries, event order, click/keyboard commitment,
+  one-table model identity, timestamp preservation and DST rejection.
+  Xvfb headful test opens popup in a real JFrame, sends a mouse event to
+  the JTable day cell, commits the new value, closes and detaches the popup.
+
+Qualification on stock OpenJDK 21.0.12.1:
+
+- javac --release 21 -Xlint:all,-serial,-this-escape -Werror: PASS.
+- M3DateTimeSmoke: PASS (prior CDateTime spinner contract regression).
+- M3MonthViewCalendarSmoke: PASS (headless EDT, -Xmx128m).
+- M3MonthViewHeadfulSmoke: PASS three consecutive xvfb-run invocations,
+  X11 popup/event lifecycle; MouseEvent is preinitialized on main thread
+  to prevent an observed Java 21 AWT/XToolkit class-initialization lock cycle.
+- Committed production and test Git blob SHAs match tested local files.
+
+Still OPEN: direct native SWT/Nebula and SwingX screenshot/behavior
+differentials across Win32/GTK/Cocoa, locale RTL and first-week settings,
+multi-select and other advanced CDateTime style bitmasks, platform screen
+readers, date-only JXDatePicker deep linkage, entire JDK/Maven reactor,
+OpenRewrite source-sealed fixed-point recipe and full Printer/SWT peers.
+
+Donor provenance (behavior only; no licensed source copied):
+- Nebula CDateTime.java Git blob
+  6182d7e1926f3568f7cee2ded8480eb84b4a459c (EPL-2.0).
+- Nebula DiscreteTimePicker.java Git blob
+  f794230deb509304f3cc85302e0e18faab605c09 (EPL-2.0).
+- SwingX JXDatePicker.java Git blob
+  40394a5730e87df65ad53a931f1ada1a7379a5ef (LGPL-2.1).
