@@ -1120,34 +1120,6 @@ final class M3String implements CharSequence {
                 ? GATE_UNEQUAL : GATE_UNKNOWN;
     }
 
-    boolean contentEquals(String other) {
-        Objects.requireNonNull(other, "other");
-        M3String that = other.m3();
-        if (that != null) {
-            if (sameCoordinate(that)) return true;
-            if (isWholeOwner() && that.isWholeOwner()
-                    && owner instanceof M3StringImmediate && that.owner instanceof M3StringImmediate) {
-                return M3StringImmediate.sameText(owner, that.owner);
-            }
-            if (that.length() != length()) return false;
-            if (isWholeOwner() && that.isWholeOwner()) {
-                if (owner.javaHash != that.owner.javaHash) return false;
-            } else {
-                M3StringFacts leftFacts = factsIfPrepared();
-                M3StringFacts rightFacts = that.factsIfPrepared();
-                if (leftFacts != null && rightFacts != null
-                        && leftFacts.javaHash != rightFacts.javaHash) {
-                    return false;
-                }
-            }
-        } else if (other.length() != length()) {
-            return false;
-        }
-        return that != null
-                ? comparePrefix(that, length()) == 0
-                : compareFlatPrefix(other, length()) == 0;
-    }
-
     /**
      * Compare a logical prefix using existing scalar runs. Owner identity proves equality only for
      * the same offset and run length; different owners or tuple segmentation still compare text.
