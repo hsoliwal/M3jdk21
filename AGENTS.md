@@ -207,6 +207,21 @@ from stock-JDK inexpressibility or a Java 21 backport rejection.
 
 ## Enduring Apache-2.0-only JDK destination
 
+**SDK >> JDK whole-product invariant.** M3JDK21 is the
+integrated product; its long-term Apache-2.0-only SDK is intended
+to be a **verified backward-compatible superset of the complete
+JDK**, not only a faster JDK or a library overlay. Deterministically
+inventory, atomize and patternize every JDK/SDK owner (Java,
+HotSpot/VM/JIT/GC, compiler, JMOD/tools, native OS/JNI, desktop,
+build, tests and packaging), with explicit unqualified coverage.
+Compare best algorithms from all JDK donors, `com.synexia` and
+qualified private repositories while preserving private rights
+and existing JDK names, interfaces and behavior. Reuse Synexia's
+canonical hashes, CAS and Maven/OpenRewrite recipes; never add
+parallel owners or skip compiler, runtime and licensing proof.
+The strict Apache-2.0 distribution remains a separate unfinished
+release track.
+
 The standing destination is a genuinely **Apache-2.0-only M3JDK SDK**,
 with Apache Harmony and other lawful JDK implementations evaluated
 per file and atom. The current OpenJDK-derived JDK is not Apache-only.
