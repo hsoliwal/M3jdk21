@@ -62,9 +62,12 @@ Neither javax.swing nor SwingX nor SWT/Nebula was changed by this PR.
 
 ## Next concrete owners
 
-- Grid: implement Nebula's grouped/fixed/pinned columns, frozen planes, row
-  spans, editor and selection behavior *within existing JTable/JXTable/
-  JXTreeTable owners*, using present M3 viewport index/plane APIs.
+- Grid: the first native Swing owner (`M3Grid extends JTable`) now provides
+  opt-in frozen leading view columns, pinned headers, hit mapping and native
+  editors; see [GRID_PARITY.md](GRID_PARITY.md). Remaining Nebula Grid
+  grouped/row-span/pinned-row, long-index and full accessibility behavior
+  needs owner-specific recipes in existing JTable/JXTable/JXTreeTable.
+  The separate M3PackedTable remains unchanged and retains packed-cell rendering.
 - Gallery, Gantt, charts, tiles, Carousel: enrich the existing M3 generated
   component templates and models, never add parallel widget families.
 - CDateTime/CalendarCombo: check JXDatePicker/JXMonthView first, then port
