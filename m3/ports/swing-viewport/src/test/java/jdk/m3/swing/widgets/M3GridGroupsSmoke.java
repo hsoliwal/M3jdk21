@@ -7,6 +7,7 @@ import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.image.BufferedImage;
+import java.awt.event.MouseEvent;
 import java.util.Arrays;
 import java.util.concurrent.atomic.AtomicInteger;
 import javax.swing.JScrollPane;
