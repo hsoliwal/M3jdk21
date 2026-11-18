@@ -141,6 +141,7 @@ public final class M3MonthView extends JPanel {
         requireEdt();
         Objects.requireNonNull(date, "date");
         if (!isSelectable(date)) throw new IllegalArgumentException("date outside bounds");
+        if (date.equals(selected) && month.equals(YearMonth.from(date))) return;
         LocalDate old = selected;
         selected = date;
         if (!month.equals(YearMonth.from(date))) {
@@ -156,6 +157,7 @@ public final class M3MonthView extends JPanel {
     public void setDateRange(LocalDate min, LocalDate max) {
         requireEdt();
         if (min != null && max != null && min.isAfter(max)) throw new IllegalArgumentException("reversed date range");
+        if (Objects.equals(minimum, min) && Objects.equals(maximum, max)) return;
         minimum = min;
         maximum = max;
         if (selected != null && !isSelectable(selected)) {
