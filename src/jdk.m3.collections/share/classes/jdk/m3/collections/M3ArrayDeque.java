@@ -187,25 +187,63 @@ public final class M3ArrayDeque<E> extends AbstractCollection<E>
     @Override public void push(E e) { addFirst(e); }
     @Override public E pop() { return removeFirst(); }
 
-    /** Shift the shorter physical window, keeping each element's flags aligned. */
+    /**
+     * Remove by shifting the shorter circular span, keeping aligned Object[]
+     * values and byte[] state masks in identical physical positions.
+     * Existing links, reference identities and the owner's revision survive.
+     * Reuses the first-party primitive LongArrayDeque copy-span pattern.
+     */
     private E erase(int logical) {
         E old = at(logical);
+        int capacity = values.length;
         if (logical < size / 2) {
-            for (int i = logical; i > 0; i--) {
-                int dest = position(i), source = position(i - 1);
-                values[dest] = values[source]; states[dest] = states[source];
+            // Shift the shorter front prefix one position right. A wrapped
+            // copy moves the low span first, then its high-to-zero bridge.
+            int high = capacity - head;
+            if (logical < high) {
+                System.arraycopy(values, head, values, head + 1, logical);
+                System.arraycopy(states, head, states, head + 1, logical);
+            } else {
+                int low = logical - high;
+                if (low != 0) {
+                    System.arraycopy(values, 0, values, 1, low);
+                    System.arraycopy(states, 0, states, 1, low);
+                }
+                values[0] = values[capacity - 1];
+                states[0] = states[capacity - 1];
+                if (high > 1) {
+                    System.arraycopy(values, head, values, head + 1, high - 1);
+                    System.arraycopy(states, head, states, head + 1, high - 1);
+                }
             }
-            values[head] = null; states[head] = 0;
+            values[head] = null;
+            states[head] = 0;
             head = position(1);
         } else {
-            for (int i = logical; i < size - 1; i++) {
-                int dest = position(i), source = position(i + 1);
-                values[dest] = values[source]; states[dest] = states[source];
+            // Shift the shorter tail suffix left. The initial high span,
+            // wrap bridge and remaining low span use overlapping-safe copies.
+            int start = position(logical);
+            int moved = size - logical - 1;
+            int high = Math.min(moved, capacity - start - 1);
+            if (high != 0) {
+                System.arraycopy(values, start + 1, values, start, high);
+                System.arraycopy(states, start + 1, states, start, high);
             }
-            int end = position(size - 1);
-            values[end] = null; states[end] = 0;
+            if (moved > high) {
+                values[capacity - 1] = values[0];
+                states[capacity - 1] = states[0];
+                int low = moved - high - 1;
+                if (low != 0) {
+                    System.arraycopy(values, 1, values, 0, low);
+                    System.arraycopy(states, 1, states, 0, low);
+                }
+            }
+            int tail = position(size - 1);
+            values[tail] = null;
+            states[tail] = 0;
         }
-        size--; if (size == 0) head = 0;
+        size--;
+        if (size == 0) head = 0;
         revision++;
         return old;
     }
@@ -225,12 +263,19 @@ public final class M3ArrayDeque<E> extends AbstractCollection<E>
         for (int i = 0; i < size; i++) if (target.equals(at(i))) return true;
         return false;
     }
+    /** Clear both aligned lanes using at most two physical array spans. */
     @Override public void clear() {
         if (size == 0) return;
-        for (int i = 0; i < size; i++) {
-            int slot = position(i); values[slot] = null; states[slot] = 0;
+        int first = Math.min(size, values.length - head);
+        Arrays.fill(values, head, head + first, null);
+        Arrays.fill(states, head, head + first, (byte) 0);
+        if (first < size) {
+            Arrays.fill(values, 0, size - first, null);
+            Arrays.fill(states, 0, size - first, (byte) 0);
         }
-        size = 0; head = 0; revision++;
+        size = 0;
+        head = 0;
+        revision++;
     }
     /**
      * Evaluate callbacks first; if they fail, retain the original circular layout.
