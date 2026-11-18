@@ -287,6 +287,47 @@ public final class Streams {
     }
 
     /**
+     * Maps each examined input element and emits only non-null mapping results.
+     * A null input element is passed to the mapper normally; null is tested
+     * only on the result. Non-null results such as false, zero, and empty
+     * strings are retained. This is a lazy intermediate operation with the
+     * same encounter-order and parallel-mode rules as the source stream.
+     *
+     * <p>This operation uses {@link Stream#mapMulti(java.util.function.BiConsumer)}
+     * with zero or one output per input. Construction does not traverse the
+     * source. The mapper is invoked once for each examined input, including
+     * inputs whose result is discarded. Short-circuiting may leave inputs
+     * unexamined; parallel traversal may examine additional inputs. Mapper
+     * invocation order follows the normal stream execution rules.
+     *
+     * <p>The supplied source must be open and unused and must not be used
+     * separately afterward. Closing the returned stream closes the source;
+     * exhaustion alone does not close it. If argument validation fails,
+     * ownership remains with the caller. Mapper and traversal exceptions follow
+     * the source stream's normal exception propagation rules; this operation
+     * does not catch or translate them. The mapper must be non-interfering
+     * and stateless.
+     *
+     * @param source the input stream
+     * @param mapper the function mapping each examined element
+     * @param <T> the input element type
+     * @param <R> the result element type
+     * @return a stream of the non-null mapping results
+     * @throws NullPointerException if an argument is null
+     * @throws IllegalStateException if the source has been operated on or closed
+     * @since 21
+     */
+    public static <T, R> Stream<R> mapNotNull(Stream<? extends T> source,
+            Function<? super T, ? extends R> mapper) {
+        Objects.requireNonNull(source, "source");
+        Objects.requireNonNull(mapper, "mapper");
+        return source.<R>mapMulti((value, downstream) -> {
+            R result = mapper.apply(value);
+            if (result != null) downstream.accept(result);
+        });
+    }
+
+    /**
      * Maps input elements until the mapper first returns an empty optional.
      * The element producing that empty optional is consumed. Later elements
      * and mapper calls are not requested, including after repeated exhaustion
