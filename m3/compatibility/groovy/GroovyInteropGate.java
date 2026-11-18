@@ -92,8 +92,10 @@ public final class GroovyInteropGate {
                         + " failed: " + cause, cause);
             }
         }
-        System.out.println("M3G_META\tgroovy=" + Class.forName("groovy.lang.GroovySystem")
-                .getMethod("getVersion").invoke(null) + "\tjava=" + System.getProperty("java.runtime.version"));
+        Object groovyVersion = Class.forName("groovy.lang.GroovySystem")
+                .getMethod("getVersion").invoke(null);
+        emit("R:groovy-version", String.valueOf(groovyVersion));
+        System.out.println("M3G_META\tjava=" + System.getProperty("java.runtime.version"));
     }
 
     private static void compare(Path baselineJava, Path candidateJava, String groovyClasspath,
@@ -175,8 +177,14 @@ public final class GroovyInteropGate {
     }
 
     private static String launch(Path executable, String groovyClasspath,
-            Path fixtures, Path collisions) throws IOException, InterruptedException {
-        String classpath = System.getProperty("java.class.path")
+            Path fixtures, Path collisions) throws Exception {
+        // Do not inherit arbitrary launcher dependencies; they could shadow the
+        // version-pinned Groovy jars and invalidate a differential comparison.
+        var ownCodeSource = GroovyInteropGate.class.getProtectionDomain().getCodeSource();
+        if (ownCodeSource == null || ownCodeSource.getLocation() == null) {
+            throw new IllegalStateException("Groovy oracle code source is unavailable");
+        }
+        String classpath = Path.of(ownCodeSource.getLocation().toURI())
                 + System.getProperty("path.separator") + groovyClasspath;
         List<String> command = List.of(executable.toAbsolutePath().toString(), "-cp", classpath,
                 GroovyInteropGate.class.getName(), "probe",
