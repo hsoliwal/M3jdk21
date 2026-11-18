@@ -58,3 +58,22 @@ java -Djava.awt.headless=true -Xmx128m -cp /tmp/m3-native jdk.m3.swing.widgets.M
 | GUI focus/keyboard/accessibility/locale/LookAndFeel tests | NOT_RUN |
 | Nebula/SwingX graphical dropdown and date picker differential | NOT_RUN |
 | Synexia sealed OpenRewrite recipe fixed-point and release qualification | NOT_RUN |
+
+## Oscilloscope all-MAX_VALUE bin correctness fix
+
+| Gate | Status |
+|---|---|
+| Exact baseline canonical source ac244200338d5ffde09dcd1004f7ebdf81bba743 vs new M3OscilloscopeMaxEnvelopeSmoke | RED: AssertionError, all MAX_VALUE envelope skipped |
+| One-atom condition: both min=MAX and max=MIN are necessary for an empty bin | FIXED |
+| Java 21 Werror compile and headless MAX_VALUE pixel test | GREEN: PASS |
+| Original M3OscilloscopeSmoke | GREEN: PASS |
+| 10M samples, 8 channels x 1M retained, -Xmx128m | GREEN: PASS |
+| Patched java.desktop compile and invocation of all three checks with -m java.desktop/... | GREEN: PASS |
+| Product/test Git blobs equal locally compiled source | VERIFIED |
+| Full Maven/JUnit, source-built jtreg, cross-LAF/Win32/Cocoa/GTK and dedicated Synexia recipe | NOT_RUN |
+
+Source seals: M3Oscilloscope.java 56cfeafbd5e585ed3d5d993b82357acca78981c3;
+M3OscilloscopeMaxEnvelopeSmoke.java c93d457559be8a1e1179a904dd946f519ff8462c.
+Public methods and persistent data lanes are unchanged. The old branch
+was not mutated: the fix is in canonical java.desktop, with the new test
+registered in M3NativeWidgetParityTest.
