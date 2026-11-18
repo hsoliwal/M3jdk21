@@ -32,6 +32,7 @@ import java.util.Spliterators;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
+import java.util.function.BiPredicate;
 import java.util.function.BinaryOperator;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -423,6 +424,128 @@ public final class ObjectStream<T> {
         Objects.requireNonNull(comparator, "comparator");
         return new ObjectStream<>(
                 () -> ObjectStreamAdvancedKernels.topK(stream(), k, comparator), replayable);
+    }
+
+    /** Indexed running fold with seed emitted first, including for an empty source. */
+    @FunctionalInterface
+    public interface IndexedFolder<A, I> {
+        A apply(long index, A state, I value);
+    }
+
+    /**
+     * Complete partition result with one read-only output list for each branch.
+     * Each element is transformed once for only its selected branch.
+     */
+    public record Partition<L, R>(List<L> left, List<R> right) { }
+
+    /** Rust map_while idiom: mapping stops on the first null result. */
+    public <R> ObjectStream<R> mapWhile(Function<? super T, ? extends R> mapper) {
+        Objects.requireNonNull(mapper, "mapper");
+        return new ObjectStream<>(
+                () -> ObjectStreamLoopKernels.mapWhile(stream(), mapper), replayable);
+    }
+
+    /** Rust step_by / Python islice step: select indices 0, stride, 2*stride, ... */
+    public ObjectStream<T> stepBy(int stride) {
+        if (stride < 1) throw new IllegalArgumentException("stride must be positive");
+        return new ObjectStream<>(() -> ObjectStreamLoopKernels.stepBy(stream(), stride), replayable);
+    }
+
+    /**
+     * Python heapq.merge style: merge two already-sorted inputs lazily.
+     * On comparator ties, occurrences from this source precede the other source.
+     */
+    public ObjectStream<T> mergeSorted(ObjectStream<? extends T> other,
+            Comparator<? super T> comparator) {
+        Objects.requireNonNull(other, "other");
+        Objects.requireNonNull(comparator, "comparator");
+        return new ObjectStream<>(() -> {
+            Stream<T> first = stream();
+            Stream<? extends T> second = null;
+            try {
+                second = other.stream();
+                return ObjectStreamLoopKernels.mergeSorted(first, second, comparator);
+            } catch (RuntimeException | Error failure) {
+                try { first.close(); }
+                catch (RuntimeException | Error closing) { failure.addSuppressed(closing); }
+                if (second != null) {
+                    try { second.close(); }
+                    catch (RuntimeException | Error closing) { failure.addSuppressed(closing); }
+                }
+                throw failure;
+            }
+        }, replayable && other.replayable());
+    }
+
+    /** Drop the final count values using a bounded lookahead ring, including nulls. */
+    public ObjectStream<T> dropLast(int count) {
+        requireNonNegative(count, "count");
+        if (count > MAX_STATEFUL_WIDTH) {
+            throw new IllegalArgumentException("dropLast count exceeds " + MAX_STATEFUL_WIDTH);
+        }
+        return new ObjectStream<>(() -> ObjectStreamLoopKernels.dropLast(stream(), count),
+                replayable);
+    }
+
+    /** Drain finite input and emit only its bounded trailing count values. */
+    public ObjectStream<T> takeLast(int count) {
+        requireNonNegative(count, "count");
+        if (count > MAX_STATEFUL_WIDTH) {
+            throw new IllegalArgumentException("takeLast count exceeds " + MAX_STATEFUL_WIDTH);
+        }
+        return new ObjectStream<>(() -> ObjectStreamLoopKernels.takeLast(stream(), count),
+                replayable);
+    }
+
+    /** Kotlin runningFoldIndexed: seed is the first emitted value, even on empty input. */
+    public <A> ObjectStream<A> runningFoldIndexed(Supplier<? extends A> initializer,
+            IndexedFolder<A, T> folder) {
+        Objects.requireNonNull(initializer, "initializer");
+        Objects.requireNonNull(folder, "folder");
+        return new ObjectStream<>(() -> ObjectStreamLoopKernels.runningFoldIndexed(
+                stream(), initializer, folder), replayable);
+    }
+
+    /**
+     * Rust itertools coalesce shape: merge compatible neighboring values in place.
+     * Compatibility checks the current accumulator against the next source value.
+     */
+    public ObjectStream<T> coalesceAdjacent(BiPredicate<? super T, ? super T> compatible,
+            BinaryOperator<T> merger) {
+        Objects.requireNonNull(compatible, "compatible");
+        Objects.requireNonNull(merger, "merger");
+        return new ObjectStream<>(() -> ObjectStreamLoopKernels.coalesceAdjacent(
+                stream(), compatible, merger), replayable);
+    }
+
+    /**
+     * Rust partition_map idiom without one Either object per occurrence.
+     * The predicate chooses the left result on true and right on false.
+     */
+    public <L, R> Partition<L, R> partitionMap(
+            Predicate<? super T> toLeft, Function<? super T, ? extends L> leftMapper,
+            Function<? super T, ? extends R> rightMapper, int maxElements) {
+        Objects.requireNonNull(toLeft, "toLeft");
+        Objects.requireNonNull(leftMapper, "leftMapper");
+        Objects.requireNonNull(rightMapper, "rightMapper");
+        requireNonNegative(maxElements, "maxElements");
+        ArrayList<L> left = new ArrayList<>();
+        ArrayList<R> right = new ArrayList<>();
+        try (Stream<T> input = stream()) {
+            Iterator<T> source = input.iterator();
+            int admitted = 0;
+            while (source.hasNext()) {
+                if (admitted >= maxElements) {
+                    throw new IllegalStateException("partitionMap element budget exceeded");
+                }
+                T item = source.next();
+                admitted++;
+                if (toLeft.test(item)) left.add(leftMapper.apply(item));
+                else right.add(rightMapper.apply(item));
+            }
+        }
+        return new Partition<>(Collections.unmodifiableList(left),
+                Collections.unmodifiableList(right));
     }
 
     public ObjectStream<T> peek(Consumer<? super T> observer) {
