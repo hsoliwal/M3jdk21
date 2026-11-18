@@ -92,9 +92,11 @@ xvfb-run -a java -Djava.awt.headless=false -Xmx128m -cp "$OUT" jdk.m3.swing.widg
 
 - Renderer/editor combinations including advanced Grid editors, the
   default Grid selection/row-group behavior and native checkbox controls.
-- Noncontiguous frozen columns, pinned top/bottom rows, row grouping,
-  column groups, row spans, hierarchical Grid, long-index surfaces,
-  RTL and print fidelity.
+- Noncontiguous frozen columns, row grouping, column groups, row spans,
+  hierarchical Grid, long-index surfaces, RTL and print fidelity.
+- Pinned top/bottom rows are now opt-in in the same M3Grid class;
+  see [GRID_PINNED_ROWS.md](GRID_PINNED_ROWS.md) for test receipts,
+  viewport-scrolling tradeoffs and still-open native qualification.
 - Reordering and resizing during a mouse drag, focus traversal and
   keyboard/accessibility; headful GTK/Win32/Cocoa/HiDPI and alternate
   LookAndFeel pixel/event differentials.
