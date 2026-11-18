@@ -22,6 +22,8 @@ import java.util.Objects;
  *
  * <p>Construction uses rank-doubling with stable counting passes: O(n log n) time and O(n)
  * primitive workspace, with no suffix objects or boxed comparators retained.
+ * Bounded, sufficiently dense signed-token alphabets use O(n + alphabet span)
+ * initial rank compression; sparse/wide domains retain the original sort-based path.
  * Two flat LCP boundary lanes precompute the implicit binary-search tree in O(n) time.
  * Prefix-range lookup then uses O(pattern length + log n) token comparisons, rather than
  * restarting the same prefix at each midpoint. No spelling, alternate interner or query cache
@@ -32,6 +34,12 @@ import java.util.Objects;
  * RELOCATE_M3_OWNER v4 (algorithms collections batch: identifiers and package only; bytecode equal to the source modulo names).
  */
 public final class IntSuffixArray {
+    // Direct-address initial ranks are chosen only for a bounded, sufficiently
+    // dense signed-integer domain. UTF-16 (0..65535) is always eligible once
+    // the input is large enough to amortize the direct lookup lane.
+    private static final int DIRECT_RANK_MAX_DOMAIN = 1 << 16;
+    private static final int DIRECT_RANK_MIN_DOMAIN_BUDGET = 256;
+    private static final int DIRECT_RANK_DOMAIN_FACTOR = 4;
     public record Range(int fromRankInclusive, int toRankExclusive) {
         public Range {
             if (fromRankInclusive < 0 || toRankExclusive < fromRankInclusive) {
@@ -97,21 +105,12 @@ public final class IntSuffixArray {
             return;
         }
 
-        int[] sortedTokens = tokens.clone();
-        Arrays.sort(sortedTokens);
-        int unique = 0;
-        for (int value : sortedTokens) {
-            if (unique == 0 || value != sortedTokens[unique - 1]) {
-                sortedTokens[unique++] = value;
-            }
-        }
-
+        // The initialized rank coordinates are the same sorted equivalence
+        // classes regardless of whether the alphabet is direct or sparse.
+        // A dense-domain path avoids O(n log n) token sorting and O(log n)
+        // binary searches per token; it adds at most 256 KiB scratch.
         int[] ranks = rankOfSuffix;
-        for (int suffix = 0; suffix < length; suffix++) {
-            ranks[suffix] = Arrays.binarySearch(
-                    sortedTokens, 0, unique, tokens[suffix]);
-            suffixAtRank[suffix] = suffix;
-        }
+        int unique = initialRanks(tokens, ranks, suffixAtRank);
 
         // Reuse construction workspace for the final search metadata; no additional peak lanes.
         int[] scratch = lcpToLeftBoundary;
@@ -181,6 +180,55 @@ public final class IntSuffixArray {
             }
         }
         precomputeLcpBoundaries(-1, length);
+    }
+
+    /**
+     * Compress signed tokens to consecutive lexical ranks. For bounded domains,
+     * use one ephemeral primitive direct-address array. For sparse/wide signed
+     * domains retain the original sort + binary-search algorithm exactly.
+     *
+     * <p>Neither path changes token order, the owned token snapshot, suffix
+     * occurrence identity, or the retained six-array index representation.
+     */
+    private static int initialRanks(int[] values, int[] ranks, int[] order) {
+        int minimum = values[0];
+        int maximum = values[0];
+        for (int value : values) {
+            minimum = Math.min(minimum, value);
+            maximum = Math.max(maximum, value);
+        }
+        long span = (long) maximum - minimum + 1L;
+        long budget = Math.max((long) DIRECT_RANK_MIN_DOMAIN_BUDGET,
+                DIRECT_RANK_DOMAIN_FACTOR * (long) values.length);
+        if (span <= DIRECT_RANK_MAX_DOMAIN && span <= budget) {
+            // Use nonzero markers, then assign stable ascending lexical ranks.
+            // Integer subtraction cannot overflow: the admitted span <= 65536.
+            int[] directRank = new int[(int) span];
+            for (int value : values) directRank[value - minimum] = 1;
+            int distinct = 0;
+            for (int i = 0; i < directRank.length; i++) {
+                if (directRank[i] != 0) directRank[i] = ++distinct;
+            }
+            for (int suffix = 0; suffix < values.length; suffix++) {
+                ranks[suffix] = directRank[values[suffix] - minimum] - 1;
+                order[suffix] = suffix;
+            }
+            return distinct;
+        }
+
+        int[] sortedTokens = values.clone();
+        Arrays.sort(sortedTokens);
+        int unique = 0;
+        for (int value : sortedTokens) {
+            if (unique == 0 || value != sortedTokens[unique - 1]) {
+                sortedTokens[unique++] = value;
+            }
+        }
+        for (int suffix = 0; suffix < values.length; suffix++) {
+            ranks[suffix] = Arrays.binarySearch(sortedTokens, 0, unique, values[suffix]);
+            order[suffix] = suffix;
+        }
+        return unique;
     }
 
     public int length() {
