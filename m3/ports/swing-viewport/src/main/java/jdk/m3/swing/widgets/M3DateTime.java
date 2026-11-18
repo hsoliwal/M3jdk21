@@ -51,6 +51,7 @@ public final class M3DateTime extends JPanel {
     private JPopupMenu calendarPopup;
     private M3MonthView monthView;
     private boolean calendarPopupEnabled;
+    private boolean calendarSyncDeferred;
 
     public M3DateTime() {
         this(ZoneId.systemDefault(), "yyyy-MM-dd HH:mm:ss");
@@ -66,6 +67,10 @@ public final class M3DateTime extends JPanel {
         editor.getFormat().setTimeZone(TimeZone.getTimeZone(zone));
         editor.getFormat().setLenient(false);
         spinner.setEditor(editor);
+        // The exposed native spinner remains an editable model owner.
+        model.addChangeListener(event -> {
+            if (!calendarSyncDeferred && monthView != null && SwingUtilities.isEventDispatchThread()) syncCalendar();
+        });
         editor.getTextField().getAccessibleContext().setAccessibleName("Date and time");
         editor.getTextField().getAccessibleContext().setAccessibleDescription("Calendar date and wall-clock time");
         add(spinner, BorderLayout.CENTER);
@@ -94,6 +99,7 @@ public final class M3DateTime extends JPanel {
     public M3MonthView getMonthView() {
         requireEdt();
         ensureCalendar();
+        syncCalendar();
         return monthView;
     }
 
@@ -220,13 +226,18 @@ public final class M3DateTime extends JPanel {
                 || (upper != null && upper.getNano() % 1_000_000 != 0)) {
             throw new IllegalArgumentException("range must have millisecond precision");
         }
-        this.lower = lower;
-        this.upper = upper;
-        // Date is the single value authority for Swing's native SpinnerDateModel.
-        model.setStart(lower == null ? null : Date.from(lower));
-        model.setEnd(upper == null ? null : Date.from(upper));
-        if (lower != null && getInstant().isBefore(lower)) model.setValue(Date.from(lower));
-        else if (upper != null && getInstant().isAfter(upper)) model.setValue(Date.from(upper));
+        calendarSyncDeferred = true;
+        try {
+            this.lower = lower;
+            this.upper = upper;
+            // Date is the single value authority for Swing's native SpinnerDateModel.
+            model.setStart(lower == null ? null : Date.from(lower));
+            model.setEnd(upper == null ? null : Date.from(upper));
+            if (lower != null && getInstant().isBefore(lower)) model.setValue(Date.from(lower));
+            else if (upper != null && getInstant().isAfter(upper)) model.setValue(Date.from(upper));
+        } finally {
+            calendarSyncDeferred = false;
+        }
         syncCalendar();
     }
 
