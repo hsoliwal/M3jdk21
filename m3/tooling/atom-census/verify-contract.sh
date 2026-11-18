@@ -10,6 +10,8 @@ mapfile -t sources < <({
   find "$here/src/main/java/jdk/m3/tooling/atoms/contract" -name '*.java' -print
   find "$here/src/test/java/jdk/m3/tooling/atoms/contract" -name '*SelfTest.java' -print
 } | sort)
-javac --release 21 -Xlint:all -Werror -d "$classes" "${sources[@]}"
+javac --release 21 -proc:none -Xlint:all -Werror -d "$classes" "${sources[@]}"
 java -Dm3.contract.dir="$here/contract" -cp "$classes" \
   jdk.m3.tooling.atoms.contract.AtomCoverageVerifierSelfTest
+java -cp "$classes" jdk.m3.tooling.atoms.contract.M3ImpactFrontierSelfTest
+java -Xint -cp "$classes" jdk.m3.tooling.atoms.contract.M3ImpactFrontierSelfTest

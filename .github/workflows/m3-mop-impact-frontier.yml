@@ -1,0 +1,72 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3 MOP semantic impact frontier
+
+on:
+  pull_request:
+    paths:
+      - 'm3/tooling/atom-census/**'
+      - 'm3/docs/M3_SEMANTIC_ATOM_ALGEBRA_20261118.md'
+      - 'AGENTS.md'
+      - '.github/workflows/m3-mop-impact-frontier.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  contract:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+      - name: Diff hygiene
+        if: github.event_name == 'pull_request'
+        run: git diff --check "${{ github.event.pull_request.base.sha }}...HEAD"
+      - name: Strict Java 21 contract and interpreted execution
+        run: bash m3/tooling/atom-census/verify-contract.sh
+      - name: Maven JUnit source-bound regression
+        run: >-
+          mvn -B -ntp
+          -f m3/tooling/atom-census/pom.xml
+          -Dtest=M3ImpactFrontierContractTest
+          test
+      - name: Verify sealed postimages independently
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          from hashlib import sha256
+
+          root = Path.cwd()
+          crate = root / "m3/tooling/atom-census/recipe/m3-impact-frontier-20261118"
+          lines = (crate / "manifest.tsv").read_text(encoding="utf-8").splitlines()
+          assert lines[0] == "# path\tbefore\tafter\ttemplate"
+          previous = ""
+          assert len(lines) == 4
+          for raw in lines[1:]:
+              path, before, after, template = raw.split("\t")
+              assert previous < path
+              previous = path
+              assert before == "ABSENT"
+              source = (root / path).read_bytes()
+              sealed = (crate / template).read_bytes()
+              assert source == sealed, path
+              assert sha256(source).hexdigest() == after, path
+          print("M3_MOP_IMPACT_RECIPE_CUSTODY_PASS", len(lines) - 1)
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: m3-mop-impact-frontier-contract
+          if-no-files-found: warn
+          retention-days: 14
+          path: |
+            m3/tooling/atom-census/target/surefire-reports/
