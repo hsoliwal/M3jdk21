@@ -3643,30 +3643,34 @@ public final class String
         if (chars.length == 0 || length == 0) return -1;
         long low = asciiMask(chars, 0);
         long high = asciiMask(chars, 64);
-        boolean wide = hasWideUnit(chars);
         M3String storage = m3();
-        if (storage != null) {
-            M3StringFacts facts = storage.factsIfPrepared();
-            if (facts != null && noUnitMayOccur(facts, chars)) return -1;
-            return windowIndexOfAny(chars, low, high, wide);
-        }
-        if (isLatin1()) {
-            byte[] bytes = value;
+        M3StringFacts facts = storage == null ? null : storage.factsIfPrepared();
+        if (facts != null && noUnitMayOccur(facts, chars)) return -1;
+        byte[] bytes = value;
+        if (storage == null && isLatin1()) {
+            long upper = asciiMask(chars, 128);
+            long top = asciiMask(chars, 192);
             for (int index = 0; index < length; index++) {
-                char unit = (char) (bytes[index] & 0xFF);
-                if (unit < 128 ? inMask(unit, low, high)
-                        : wide && anyMatches(chars, unit, index, length)) {
+                int unit = bytes[index] & 0xFF;
+                if (unit < 128 ? inMask((char) unit, low, high)
+                        : inMask((char) (unit - 128), upper, top)) {
                     return index;
                 }
             }
             return -1;
         }
+        boolean wide = hasWideUnit(chars);
+        UnitSet set = wide && chars.length > UnitSet.FEW ? new UnitSet(chars, UnitSet.ALONE) : null;
+        if (storage != null) return windowIndexOfAny(chars, low, high, wide, set);
         for (int index = 0; index < length; index++) {
-            char unit = charAt(index);
+            char unit = StringUTF16.getChar(bytes, index);
             if (unit < 128) {
                 if (inMask(unit, low, high)) return index;
-            } else if (wide && anyMatches(chars, unit, index, length)) {
-                return index;
+            } else if (wide) {
+                int next = index + 1 < length ? StringUTF16.getChar(bytes, index + 1) : -1;
+                if (set == null ? anyMatches(chars, unit, next) : set.matches(unit, next)) {
+                    return index;
+                }
             }
         }
         return -1;
@@ -3729,21 +3733,28 @@ public final class String
         if (chars.length == 0 || length == 0) return -1;
         long low = asciiMask(chars, 0);
         long high = asciiMask(chars, 64);
-        int[] wide = new String(chars).codePoints().filter(point -> point >= 128).toArray();
-        if (m3() != null) return windowIndexOfAnyBut(low, high, wide);
-        if (isLatin1()) {
-            byte[] bytes = value;
+        boolean flat = m3() == null;
+        byte[] bytes = value;
+        if (flat && isLatin1()) {
+            long upper = asciiMask(chars, 128);
+            long top = asciiMask(chars, 192);
             for (int index = 0; index < length; index++) {
                 int point = bytes[index] & 0xFF;
-                if (point < 128 ? !inMask((char) point, low, high) : !contains(wide, point)) {
+                if (point < 128 ? !inMask((char) point, low, high)
+                        : !inMask((char) (point - 128), upper, top)) {
                     return index;
                 }
             }
             return -1;
         }
+        boolean wide = hasWideUnit(chars);
+        UnitSet set = wide && chars.length > UnitSet.FEW
+                ? new UnitSet(chars, UnitSet.POINTS) : null;
+        if (!flat) return windowIndexOfAnyBut(chars, low, high, wide, set);
         for (int index = 0; index < length; ) {
-            int point = Character.codePointAt(this, index);
-            boolean skipped = point < 128 ? inMask((char) point, low, high) : contains(wide, point);
+            int point = StringUTF16.codePointAt(bytes, index, length);
+            boolean skipped = point < 128 ? inMask((char) point, low, high)
+                    : wide && (set == null ? pointIn(chars, point) : set.has(point));
             if (!skipped) return index;
             index += Character.charCount(point);
         }
@@ -3971,7 +3982,7 @@ public final class String
     }
 
     /** {@link #indexOfAny(char...)} over M3 storage, read in bulk windows. */
-    private int windowIndexOfAny(char[] chars, long low, long high, boolean wide) {
+    private int windowIndexOfAny(char[] chars, long low, long high, boolean wide, UnitSet set) {
         int length = length();
         char[] window = new char[Math.min(length, SCAN_WINDOW)];
         for (int from = 0; from < length; from += window.length) {
@@ -3979,9 +3990,14 @@ public final class String
             getChars(from, to, window, 0);
             for (int at = 0; at < to - from; at++) {
                 char unit = window[at];
-                if (unit < 128 ? inMask(unit, low, high)
-                        : wide && anyMatches(chars, unit, from + at, length)) {
-                    return from + at;
+                if (unit < 128) {
+                    if (inMask(unit, low, high)) return from + at;
+                } else if (wide) {
+                    int after = from + at + 1;
+                    int next = after == length ? -1 : after < to ? window[at + 1] : charAt(after);
+                    if (set == null ? anyMatches(chars, unit, next) : set.matches(unit, next)) {
+                        return from + at;
+                    }
                 }
             }
         }
@@ -3992,7 +4008,7 @@ public final class String
      * {@link #indexOfAnyBut(char...)} over M3 storage: code points read in bulk windows, a
      * surrogate pair never split between two windows.
      */
-    private int windowIndexOfAnyBut(long low, long high, int[] wide) {
+    private int windowIndexOfAnyBut(char[] chars, long low, long high, boolean wide, UnitSet set) {
         int length = length();
         char[] window = new char[Math.min(length, SCAN_WINDOW)];
         for (int from = 0; from < length; ) {
@@ -4002,9 +4018,9 @@ public final class String
             if (to < length && count > 1 && Character.isHighSurrogate(window[count - 1])) count--;
             for (int at = 0; at < count; ) {
                 int point = Character.codePointAt(window, at, count);
-                if (point < 128 ? !inMask((char) point, low, high) : !contains(wide, point)) {
-                    return from + at;
-                }
+                boolean skipped = point < 128 ? inMask((char) point, low, high)
+                        : wide && (set == null ? pointIn(chars, point) : set.has(point));
+                if (!skipped) return from + at;
                 at += Character.charCount(point);
             }
             from += count;
@@ -4185,7 +4201,7 @@ public final class String
         return units;
     }
 
-    /** Bits {@code base .. base + 63} of the set of ASCII units in {@code chars}. */
+    /** Bits {@code base .. base + 63} of the set of units below 256 in {@code chars}. */
     private static long asciiMask(char[] chars, int base) {
         long mask = 0L;
         for (char unit : chars) {
@@ -4208,20 +4224,19 @@ public final class String
     }
 
     /**
-     * Whether the non-ASCII unit at {@code index} matches {@code chars} for indexOfAny: a unit that
-     * is not a high surrogate matches when it is in {@code chars}, except a low surrogate that
-     * follows a high surrogate there; a high surrogate matches at a position of {@code chars} that
-     * ends the array or is followed there by the next unit of this string.
+     * Whether the non-ASCII unit {@code unit}, followed in the string by the unit {@code next}
+     * ({@code -1} at its end), matches {@code chars} for indexOfAny: a unit that is not a high
+     * surrogate matches when it is in {@code chars}, except a low surrogate that follows a high
+     * surrogate there; a high surrogate matches at a position of {@code chars} that ends the
+     * array or is followed there by {@code next}. A linear scan, for a set of at most
+     * {@link UnitSet#FEW} units.
      */
-    private boolean anyMatches(char[] chars, char unit, int index, int length) {
+    private static boolean anyMatches(char[] chars, char unit, int next) {
         boolean pair = Character.isHighSurrogate(unit);
         int last = chars.length - 1;
         for (int j = 0; j <= last; j++) {
             char candidate = chars[j];
-            if (candidate == unit && (!pair || j == last
-                    || index < length - 1 && chars[j + 1] == charAt(index + 1))) {
-                return true;
-            }
+            if (candidate == unit && (!pair || j == last || chars[j + 1] == next)) return true;
             if (j < last && Character.isHighSurrogate(candidate)
                     && Character.isLowSurrogate(chars[j + 1])) {
                 j++;   // the low surrogate of a pair in chars does not match alone
@@ -4230,12 +4245,135 @@ public final class String
         return false;
     }
 
-    /** Whether {@code point} is in {@code points}. */
-    private static boolean contains(int[] points, int point) {
-        for (int candidate : points) {
+    /**
+     * Whether {@code point} is one of the code points of {@code chars}, a surrogate pair read as
+     * one. A linear scan, for a set of at most {@link UnitSet#FEW} units.
+     */
+    private static boolean pointIn(char[] chars, int point) {
+        for (int i = 0; i < chars.length; ) {
+            int candidate = Character.codePointAt(chars, i);
             if (candidate == point) return true;
+            i += Character.charCount(candidate);
         }
         return false;
+    }
+
+    /**
+     * A character set of the search methods, built once per call so that a unit or code point
+     * is looked up in constant time below 256 and above it in constant time or by halving: a bit
+     * mask of the values below 256, and of the others a bit mask over their range when that range
+     * spans at most 64 times their number of values (or 512), else their sorted array.
+     * {@link #UNITS} holds every unit of the array and each surrogate pair in it also as its code
+     * point, the characters {@link String#indexOf(int)} finds there; {@link #POINTS} holds its
+     * code points, a surrogate pair as one; {@link #ALONE} reads it as
+     * {@link String#indexOfAny(char...)} does: a low surrogate that follows a high surrogate
+     * belongs to that pair, and a high surrogate is kept apart, matching where the array ends
+     * with it or where the string holds it followed by the unit that follows it in the array.
+     */
+    private static final class UnitSet {
+        /** Every unit, and every surrogate pair also as its code point. */
+        static final int UNITS = 0;
+        /** The code points, a surrogate pair as one. */
+        static final int POINTS = 1;
+        /** The units as indexOfAny matches them. */
+        static final int ALONE = 2;
+        /** The largest set the search methods match by a linear scan, without building one. */
+        static final int FEW = 16;
+
+        private static final int[] NONE = {};
+
+        private final long below64;
+        private final long below128;
+        private final long below192;
+        private final long below256;
+        private final int[] values;
+        private final int count;
+        private final int base;
+        private final long[] dense;
+        private final int[] pairs;
+        private final int pairCount;
+        private final int lastHigh;
+
+        UnitSet(char[] chars, int read) {
+            below64 = asciiMask(chars, 0);
+            below128 = asciiMask(chars, 64);
+            below192 = asciiMask(chars, 128);
+            below256 = asciiMask(chars, 192);
+            int last = chars.length - 1;
+            int[] found = NONE;
+            int[] starts = NONE;
+            int n = 0;
+            int p = 0;
+            int high = -1;
+            int least = Integer.MAX_VALUE;
+            int most = 0;
+            for (int i = 0; i <= last; i++) {
+                char unit = chars[i];
+                if (unit < 256) continue;
+                if (found == NONE) found = new int[2 * (last + 1 - i)];
+                boolean pair = i < last && Character.isHighSurrogate(unit)
+                        && Character.isLowSurrogate(chars[i + 1]);
+                if (read == ALONE && Character.isHighSurrogate(unit)) {
+                    if (i == last) {
+                        high = unit;
+                    } else {
+                        if (starts == NONE) starts = new int[last - i];
+                        starts[p++] = unit << 16 | chars[i + 1];
+                    }
+                } else if (read != POINTS || !pair) {
+                    found[n++] = unit;
+                }
+                if (pair && read != ALONE) found[n++] = Character.toCodePoint(unit, chars[i + 1]);
+                if (pair && read != UNITS) i++;   // the low surrogate belongs to the pair
+            }
+            for (int i = 0; i < n; i++) {
+                least = Math.min(least, found[i]);
+                most = Math.max(most, found[i]);
+            }
+            long[] bits = null;
+            if (n > 0 && (most - least) >>> 6 < Math.max(8, n)) {
+                bits = new long[((most - least) >>> 6) + 1];
+                for (int i = 0; i < n; i++) {
+                    int offset = found[i] - least;
+                    bits[offset >>> 6] |= 1L << offset;
+                }
+            } else if (n > 1) {
+                java.util.Arrays.sort(found, 0, n);
+            }
+            if (p > 1) java.util.Arrays.sort(starts, 0, p);
+            values = found;
+            count = n;
+            base = least;
+            dense = bits;
+            pairs = starts;
+            pairCount = p;
+            lastHigh = high;
+        }
+
+        /** Whether {@code value}, a unit or a code point as the set reads them, is in the set. */
+        boolean has(int value) {
+            if (value < 256) {
+                long word = value < 128 ? (value < 64 ? below64 : below128)
+                        : value < 192 ? below192 : below256;
+                return (word & 1L << value) != 0;
+            }
+            if (dense != null) {
+                int offset = value - base;
+                return offset >= 0 && offset >>> 6 < dense.length
+                        && (dense[offset >>> 6] & 1L << offset) != 0;
+            }
+            return count > 0 && java.util.Arrays.binarySearch(values, 0, count, value) >= 0;
+        }
+
+        /**
+         * Whether the unit {@code unit}, followed in the string by the unit {@code next}
+         * ({@code -1} at its end), matches an {@link #ALONE} set.
+         */
+        boolean matches(char unit, int next) {
+            if (!Character.isHighSurrogate(unit)) return has(unit);
+            return unit == lastHigh || next >= 0 && pairCount > 0
+                    && java.util.Arrays.binarySearch(pairs, 0, pairCount, unit << 16 | next) >= 0;
+        }
     }
 
     /**
@@ -4508,7 +4646,7 @@ public final class String
      * @since   21
      */
     public String strip(String chars) {
-        return stripStart(chars).stripEnd(chars);
+        return stripped(chars, unitSetOver(chars));
     }
 
     /**
@@ -4527,16 +4665,7 @@ public final class String
      * @since   21
      */
     public String stripStart(String chars) {
-        int length = length();
-        int start = 0;
-        if (!chars.isEmpty()) {
-            while (start < length) {
-                int point = codePointAt(start);
-                if (chars.indexOf(point) < 0) break;
-                start += Character.charCount(point);
-            }
-        }
-        return substring(start);
+        return substring(strippedStart(chars, unitSetOver(chars)));
     }
 
     /**
@@ -4555,15 +4684,56 @@ public final class String
      * @since   21
      */
     public String stripEnd(String chars) {
-        int end = length();
-        if (!chars.isEmpty()) {
-            while (end > 0) {
-                int point = codePointBefore(end);
-                if (chars.indexOf(point) < 0) break;
-                end -= Character.charCount(point);
-            }
+        return substring(0, strippedEnd(chars, unitSetOver(chars), 0));
+    }
+
+    /**
+     * This string without the code points of {@code chars} at its start and its end, as
+     * {@link #strip(String)}: one range, found from both ends with {@code set} (when not
+     * {@code null}, the set of {@code chars} for a set of more than {@link UnitSet#FEW} units).
+     */
+    private String stripped(String chars, UnitSet set) {
+        int start = strippedStart(chars, set);
+        return substring(start, strippedEnd(chars, set, start));
+    }
+
+    /**
+     * The index of the first code point of this string that {@code chars} does not contain as
+     * {@link #indexOf(int)} finds it, looked up in {@code set} when it is not {@code null}.
+     */
+    private int strippedStart(String chars, UnitSet set) {
+        int length = length();
+        int start = 0;
+        while (start < length) {
+            int point = codePointAt(start);
+            if (set == null ? chars.indexOf(point) < 0 : !set.has(point)) break;
+            start += Character.charCount(point);
         }
-        return substring(0, end);
+        return start;
+    }
+
+    /**
+     * The end of this string without the code points of {@code chars} before it, as
+     * {@link #strippedStart(String, UnitSet)} finds them, never below {@code start}, the end of
+     * a stripped start (which never splits a surrogate pair).
+     */
+    private int strippedEnd(String chars, UnitSet set, int start) {
+        int end = length();
+        while (end > start) {
+            int point = codePointBefore(end);
+            if (set == null ? chars.indexOf(point) < 0 : !set.has(point)) break;
+            end -= Character.charCount(point);
+        }
+        return end;
+    }
+
+    /**
+     * The set of {@code chars} as {@link #indexOf(int)} finds code points in it, or {@code null}
+     * for at most {@link UnitSet#FEW} units, which the strip methods search directly.
+     */
+    private static UnitSet unitSetOver(String chars) {
+        return chars.length() <= UnitSet.FEW ? null
+                : new UnitSet(chars.toCharArray(), UnitSet.UNITS);
     }
 
     /**
@@ -4885,11 +5055,12 @@ public final class String
      */
     public static String[] stripAll(String[] strings, String chars) {
         if (strings == null || strings.length == 0) return strings;
+        UnitSet set = chars == null ? null : unitSetOver(chars);
         String[] out = new String[strings.length];
         for (int index = 0; index < strings.length; index++) {
             String value = strings[index];
             out[index] = value == null ? null : chars == null ? stripWhitespace(value)
-                    : value.strip(chars);
+                    : value.stripped(chars, set);
         }
         return out;
     }
@@ -5394,13 +5565,15 @@ public final class String
     /** The number of leading units all {@code strings} share, at most {@code limit}. */
     private static int commonPrefixLength(String[] strings, int limit) {
         String first = strings[0];
-        for (int index = 0; index < limit; index++) {
-            char unit = first.charAt(index);
-            for (int k = 1; k < strings.length; k++) {
-                if (strings[k].charAt(index) != unit) return index;
-            }
+        boolean flat = first.m3() == null;
+        int common = limit;
+        for (int k = 1; k < strings.length && common > 0; k++) {
+            String other = strings[k];
+            common = flat && other.m3() == null && first.coder == other.coder
+                    ? commonFlatUnits(first.value, other.value, common, first.coder)
+                    : first.commonUnits(other, common);
         }
-        return limit;
+        return common;
     }
 
     /**
@@ -7304,6 +7477,13 @@ public final class String
         M3String storage = m3();
         M3StringFacts facts = storage == null ? null : storage.factsIfPrepared();
         if (facts != null && noSeparatorUnit(facts, chars)) return new String[] {this};
+        char[] units = chars == null ? new char[0] : chars.toCharArray();
+        long low = asciiMask(units, 0);
+        long high = asciiMask(units, 64);
+        long upper = asciiMask(units, 128);
+        long top = asciiMask(units, 192);
+        UnitSet set = units.length > UnitSet.FEW && hasWideUnit(units)
+                ? new UnitSet(units, UnitSet.UNITS) : null;
         ArrayList<String> parts = new ArrayList<>();
         int begin = 0;
         char[] window = new char[Math.min(length, SCAN_WINDOW)];
@@ -7313,7 +7493,9 @@ public final class String
             for (int k = 0; k < count; k++) {
                 char unit = window[k];
                 boolean separates = chars == null ? Character.isWhitespace(unit)
-                        : chars.indexOf(unit) >= 0;
+                        : unit < 128 ? inMask(unit, low, high)
+                        : unit < 256 ? inMask((char) (unit - 128), upper, top)
+                        : set == null ? chars.indexOf(unit) >= 0 : set.has(unit);
                 if (!separates) continue;
                 if (addPart(parts, begin, from + k, max, all)) return parts.toArray(new String[0]);
                 begin = from + k + 1;
@@ -7789,6 +7971,7 @@ public final class String
         long low = asciiMask(set, 0);
         long high = asciiMask(set, 64);
         boolean wide = hasWideUnit(set);
+        UnitIndex index = set.length > UnitSet.FEW ? new UnitIndex(set) : null;
         int length = length();
         Splicer edits = new Splicer(this);
         char[] window = new char[Math.min(length, SCAN_WINDOW)];
@@ -7797,8 +7980,8 @@ public final class String
             getChars(from, from + count, window, 0);
             for (int k = 0; k < count; k++) {
                 char unit = window[k];
-                int at = (unit < 128 ? inMask(unit, low, high) : wide)
-                        ? searchChars.indexOf(unit) : -1;
+                int at = !(unit < 128 ? inMask(unit, low, high) : wide) ? -1
+                        : index == null ? searchChars.indexOf(unit) : index.indexOf(unit);
                 if (at >= replaceChars.length()) {
                     edits.edit(from + k, from + k + 1, "");
                 } else if (at >= 0 && replaceChars.charAt(at) != unit) {
@@ -7807,6 +7990,68 @@ public final class String
             }
         }
         return edits.result();
+    }
+
+    /**
+     * The index of the first occurrence of each unit of a list, built once per call for
+     * {@link #replaceChars(String, String)} with more than {@link UnitSet#FEW} search units, so
+     * that a unit of this string is looked up in constant time (by halving for a sparse list of
+     * units at or above 256) instead of by a search of the list: a table for the units below
+     * 256 and, for the others, a table over their range when it spans at most four times their
+     * number of units (or 256), else their (unit, index) keys in order.
+     */
+    private static final class UnitIndex {
+        /** The first index + 1 of each unit below 256, 0 when absent. */
+        private final int[] latin1 = new int[256];
+        /** The least unit at or above 256. */
+        private final int base;
+        /** The first index + 1 of each unit from {@link #base}, 0 when absent; or {@code null}. */
+        private final int[] dense;
+        /** unit << 32 | index of every unit at or above 256, in order; when not dense. */
+        private final long[] keys;
+        private final int count;
+
+        UnitIndex(char[] units) {
+            long[] wide = new long[units.length];
+            int n = 0;
+            int least = Character.MAX_VALUE;
+            int most = 0;
+            for (int i = 0; i < units.length; i++) {
+                char unit = units[i];
+                if (unit >= 256) {
+                    wide[n++] = (long) unit << 32 | i;
+                    least = Math.min(least, unit);
+                    most = Math.max(most, unit);
+                } else if (latin1[unit] == 0) {
+                    latin1[unit] = i + 1;
+                }
+            }
+            int[] table = null;
+            if (n > 0 && most - least < Math.max(256, 4 * n)) {
+                table = new int[most - least + 1];
+                for (int j = n - 1; j >= 0; j--) {   // backwards: the first index is written last
+                    table[(int) (wide[j] >>> 32) - least] = (int) wide[j] + 1;
+                }
+            } else {
+                java.util.Arrays.sort(wide, 0, n);
+            }
+            base = least;
+            dense = table;
+            keys = wide;
+            count = n;
+        }
+
+        /** The index of the first occurrence of {@code unit} in the list, or -1. */
+        int indexOf(char unit) {
+            if (unit < 256) return latin1[unit] - 1;
+            if (dense != null) {
+                int at = unit - base;
+                return at >= 0 && at < dense.length ? dense[at] - 1 : -1;
+            }
+            int at = java.util.Arrays.binarySearch(keys, 0, count, (long) unit << 32);
+            if (at < 0) at = -at - 1;   // the first key of unit, if there is one
+            return at < count && (int) (keys[at] >>> 32) == unit ? (int) keys[at] : -1;
+        }
     }
 
     /**
