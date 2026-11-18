@@ -2,6 +2,18 @@
 package jdk.m3.swing.widgets;
 
 import java.awt.Component;
+import java.awt.Color;
+import java.awt.Cursor;
+import java.awt.Font;
+import java.awt.IllegalComponentStateException;
+import java.awt.event.FocusListener;
+import javax.accessibility.Accessible;
+import javax.accessibility.AccessibleAction;
+import javax.accessibility.AccessibleComponent;
+import javax.accessibility.AccessibleContext;
+import javax.accessibility.AccessibleRole;
+import javax.accessibility.AccessibleState;
+import javax.accessibility.AccessibleStateSet;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -504,6 +516,7 @@ public final class M3Grid extends JTable {
     }
 
     private void fireColumnGroupState(int firstModelColumn, boolean collapsed) {
+        if (pinnedHeader != null) pinnedHeader.columnGroupStateChanged(firstModelColumn, collapsed);
         for (ColumnGroupStateListener listener : listenerList.getListeners(ColumnGroupStateListener.class)) {
             listener.groupStateChanged(this, firstModelColumn, collapsed);
         }
@@ -655,6 +668,7 @@ public final class M3Grid extends JTable {
     }
 
     private void refreshGroupedHeader() {
+        if (pinnedHeader != null) pinnedHeader.refreshGroupNavigation();
         JTableHeader header = getTableHeader();
         if (header != null) {
             header.revalidate();
@@ -1099,6 +1113,10 @@ public final class M3Grid extends JTable {
                 }
             }
         }
+        // Restoring grouped input is safe only after serialized groups and
+        // ancestor topology have been validated. Never invoke a group lookup
+        // against an untrusted, still-unvalidated object graph.
+        if (pinnedHeader != null) pinnedHeader.installInteractionBindings();
         // Serialized pre-group M3Grid instances do not contain these fields.
         // Restore an empty sparse lane rather than rejecting older streams.
         if (groupCount == 0) {
@@ -1881,19 +1899,364 @@ public final class M3Grid extends JTable {
         private static final long serialVersionUID = 1L;
         private transient CellRendererPane painter;
         private transient boolean stockPainting;
+        private transient MouseAdapter disclosureMouse;
+        // Focus is a view/interaction state, never part of the serialized
+        // model-column group identities. -1 means no selected title.
+        private transient int focusedGroupModel = -1;
+        private transient int focusedGroupLevel = -1;
+        private transient boolean keyboardInstalled;
 
         PinnedHeader(TableColumnModel columns) {
             super(columns);
-            addMouseListener(new MouseAdapter() {
-                @Override public void mouseReleased(MouseEvent event) {
-                    int baseY = getColumnAncestorDepth() * COLUMN_GROUP_BAND_HEIGHT;
-                    if (event.getButton() != MouseEvent.BUTTON1 || event.getY() < baseY
-                            || event.getY() >= baseY + COLUMN_GROUP_BAND_HEIGHT) return;
-                    int group = disclosureGroupAt(event.getPoint());
-                    if (group >= 0) setColumnGroupCollapsed(columnGroupLanes[group * 2], !columnGroupCollapsed[group]);
-                }
-            });
+            installInteractionBindings();
         }
+
+        private void installInteractionBindings() {
+            if (disclosureMouse == null) {
+                disclosureMouse = new MouseAdapter() {
+                    @Override public void mouseReleased(MouseEvent event) {
+                        int baseY = getColumnAncestorDepth() * COLUMN_GROUP_BAND_HEIGHT;
+                        if (event.getButton() != MouseEvent.BUTTON1 || event.getY() < baseY
+                                || event.getY() >= baseY + COLUMN_GROUP_BAND_HEIGHT) return;
+                        int group = disclosureGroupAt(event.getPoint());
+                        if (group < 0) return;
+                        int first = columnGroupLanes[group * 2];
+                        setGroupFocus(0, first);
+                        requestFocusInWindow();
+                        setColumnGroupCollapsed(first, !columnGroupCollapsed[group]);
+                    }
+                };
+                addMouseListener(disclosureMouse);
+            }
+            if (keyboardInstalled) return;
+            keyboardInstalled = true;
+            var input = getInputMap(WHEN_FOCUSED);
+            input.put(KeyStroke.getKeyStroke(KeyEvent.VK_RIGHT, InputEvent.ALT_DOWN_MASK), "m3.header.next");
+            input.put(KeyStroke.getKeyStroke(KeyEvent.VK_LEFT, InputEvent.ALT_DOWN_MASK), "m3.header.previous");
+            input.put(KeyStroke.getKeyStroke(KeyEvent.VK_HOME, InputEvent.ALT_DOWN_MASK), "m3.header.first");
+            input.put(KeyStroke.getKeyStroke(KeyEvent.VK_END, InputEvent.ALT_DOWN_MASK), "m3.header.last");
+            input.put(KeyStroke.getKeyStroke(KeyEvent.VK_SPACE, 0), "m3.header.toggle");
+            input.put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), "m3.header.toggle");
+            getActionMap().put("m3.header.next", new AbstractAction() {
+                @Override public void actionPerformed(java.awt.event.ActionEvent e) { moveGroupFocus(1); }
+            });
+            getActionMap().put("m3.header.previous", new AbstractAction() {
+                @Override public void actionPerformed(java.awt.event.ActionEvent e) { moveGroupFocus(-1); }
+            });
+            getActionMap().put("m3.header.first", new AbstractAction() {
+                @Override public void actionPerformed(java.awt.event.ActionEvent e) { moveGroupFocus(Integer.MIN_VALUE); }
+            });
+            getActionMap().put("m3.header.last", new AbstractAction() {
+                @Override public void actionPerformed(java.awt.event.ActionEvent e) { moveGroupFocus(Integer.MAX_VALUE); }
+            });
+            getActionMap().put("m3.header.toggle", new AbstractAction() {
+                @Override public void actionPerformed(java.awt.event.ActionEvent e) { toggleGroupAtFocus(); }
+            });
+            refreshGroupNavigation();
+        }
+
+        private void refreshGroupNavigation() {
+            // A pure frozen-header optimization must not silently add a new
+            // keyboard stop. Only actual grouped columns are focusable.
+            setFocusable(columnGroupCount > 0);
+            if (focusedGroupLevel >= 0 && groupBounds(focusedGroupLevel, focusedGroupModel) == null) {
+                focusedGroupLevel = -1;
+                focusedGroupModel = -1;
+            }
+            if (accessibleContext != null) {
+                accessibleContext.firePropertyChange(AccessibleContext.ACCESSIBLE_VISIBLE_DATA_PROPERTY, null, null);
+            }
+        }
+
+        private void columnGroupStateChanged(int first, boolean collapsed) {
+            if (accessibleContext != null) {
+                accessibleContext.firePropertyChange(AccessibleContext.ACCESSIBLE_STATE_PROPERTY,
+                        collapsed ? AccessibleState.EXPANDED : AccessibleState.COLLAPSED,
+                        collapsed ? AccessibleState.COLLAPSED : AccessibleState.EXPANDED);
+                accessibleContext.firePropertyChange(AccessibleContext.ACCESSIBLE_VISIBLE_DATA_PROPERTY, null, null);
+            }
+        }
+
+        private void setGroupFocus(int level, int modelFirst) {
+            if (groupBounds(level, modelFirst) == null) return;
+            Accessible old = focusedGroupLevel < 0 ? null : new GroupAccessible(focusedGroupLevel, focusedGroupModel);
+            focusedGroupLevel = level;
+            focusedGroupModel = modelFirst;
+            Accessible next = new GroupAccessible(level, modelFirst);
+            if (accessibleContext != null) {
+                accessibleContext.firePropertyChange(AccessibleContext.ACCESSIBLE_ACTIVE_DESCENDANT_PROPERTY, old, next);
+            }
+            repaint();
+        }
+
+        /** Traversal from highest ancestor tier to lowest first-tier band. */
+        private int projectedGroupCount() {
+            int total = 0;
+            for (int level = getColumnAncestorDepth(); level >= 0; level--) {
+                if (level == 0) {
+                    for (int i = 0; i < columnGroupCount; i++)
+                        if (groupBounds(0, columnGroupLanes[i * 2]) != null) total++;
+                } else {
+                    for (int i = 0; i < ancestorGroupCount; i++) {
+                        int p = i * 3;
+                        if (ancestorGroupLanes[p + 2] == level && groupBounds(level, ancestorGroupLanes[p]) != null) total++;
+                    }
+                }
+            }
+            return total;
+        }
+
+        private GroupAccessible projectedGroupAt(int position) {
+            if (position < 0) return null;
+            for (int level = getColumnAncestorDepth(); level >= 0; level--) {
+                if (level == 0) {
+                    for (int i = 0; i < columnGroupCount; i++) {
+                        int first = columnGroupLanes[i * 2];
+                        if (groupBounds(0, first) == null) continue;
+                        if (position-- == 0) return new GroupAccessible(0, first);
+                    }
+                } else {
+                    for (int i = 0; i < ancestorGroupCount; i++) {
+                        int p = i * 3, first = ancestorGroupLanes[p];
+                        if (ancestorGroupLanes[p + 2] != level || groupBounds(level, first) == null) continue;
+                        if (position-- == 0) return new GroupAccessible(level, first);
+                    }
+                }
+            }
+            return null;
+        }
+
+        private int ordinalOf(int level, int first) {
+            int count = projectedGroupCount();
+            for (int i = 0; i < count; i++) {
+                GroupAccessible node = projectedGroupAt(i);
+                if (node.level == level && node.first == first) return i;
+            }
+            return -1;
+        }
+
+        private void moveGroupFocus(int direction) {
+            if (!isEnabled()) return;
+            int count = projectedGroupCount();
+            if (count == 0) return;
+            int position = ordinalOf(focusedGroupLevel, focusedGroupModel);
+            int next = direction == Integer.MIN_VALUE ? 0
+                    : direction == Integer.MAX_VALUE ? count - 1
+                    : position < 0 ? direction > 0 ? 0 : count - 1
+                    : Math.floorMod(position + direction, count);
+            GroupAccessible node = projectedGroupAt(next);
+            if (node == null) return;
+            setGroupFocus(node.level, node.first);
+            Rectangle bounds = groupBounds(node.level, node.first);
+            if (bounds != null) scrollRectToVisible(bounds);
+        }
+
+        private void toggleGroupAtFocus() {
+            if (!isEnabled() || focusedGroupLevel != 0) return;
+            int group = columnGroupIndex(focusedGroupModel);
+            if (group >= 0 && columnGroupSummary[group] >= 0 && columnGroupViewStart(group) >= 0) {
+                try { setColumnGroupCollapsed(focusedGroupModel, !columnGroupCollapsed[group]); }
+                catch (IllegalStateException veto) { /* Editor veto: preserve original Swing cell state. */ }
+            }
+        }
+
+        /** Geometry of one original group band, in native header coordinates. */
+        private Rectangle groupBounds(int level, int first) {
+            if (columnGroupCount == 0) return null;
+            int view, columns;
+            if (level == 0) {
+                int group = columnGroupIndex(first);
+                if (group < 0) return null;
+                view = columnGroupViewStart(group);
+                columns = columnGroupVisibleCount(group);
+            } else {
+                int ancestor = ancestorSlot(level, first);
+                if (ancestor < 0) return null;
+                long projected = ancestorProjection(ancestor);
+                if (projected < 0) return null;
+                view = (int)(projected >>> 32);
+                columns = (int)projected;
+            }
+            if (view < 0 || columns <= 0 || columns > getColumnCount() - view) return null;
+            Rectangle visible = getVisibleRect();
+            long left = getHeaderRect(view).x;
+            if (pinned() && view < getFrozenColumnCount()) {
+                left = visible.x;
+                for (int c = 0; c < view; c++) left += getColumnModel().getColumn(c).getWidth();
+            }
+            long width = 0;
+            for (int c = 0; c < columns; c++) width += getColumnModel().getColumn(view + c).getWidth();
+            if (width <= 0) return null;
+            int y = (getColumnAncestorDepth() - level) * COLUMN_GROUP_BAND_HEIGHT;
+            return new Rectangle((int)Math.max(Integer.MIN_VALUE, Math.min(Integer.MAX_VALUE, left)), y,
+                    (int)Math.min(Integer.MAX_VALUE, width), COLUMN_GROUP_BAND_HEIGHT);
+        }
+
+        @Override public AccessibleContext getAccessibleContext() {
+            if (accessibleContext == null) accessibleContext = new AccessibleGroupedHeader();
+            return accessibleContext;
+        }
+
+        /** Adds dynamically projected header groups after JTableHeader's real leaf children. */
+        protected final class AccessibleGroupedHeader extends AccessibleJTableHeader {
+            private static final long serialVersionUID = 1L;
+            @Override public int getAccessibleChildrenCount() {
+                return super.getAccessibleChildrenCount() + projectedGroupCount();
+            }
+            @Override public Accessible getAccessibleChild(int index) {
+                int leaves = super.getAccessibleChildrenCount();
+                return index < leaves ? super.getAccessibleChild(index) : projectedGroupAt(index - leaves);
+            }
+            @Override public Accessible getAccessibleAt(Point point) {
+                if (point != null && columnGroupCount > 0 && point.y >= 0
+                        && point.y < getColumnGroupBandsHeight()) {
+                    Rectangle visible = getVisibleRect();
+                    if (visible.contains(point)) {
+                        int count = projectedGroupCount();
+                        for (int i = 0; i < count; i++) {
+                            GroupAccessible child = projectedGroupAt(i);
+                            Rectangle bounds = groupBounds(child.level, child.first);
+                            if (bounds != null && bounds.contains(point)) return child;
+                        }
+                    }
+                    return null;
+                }
+                return super.getAccessibleAt(point);
+            }
+        }
+
+        /** An API-boundary accessible proxy; no retained control per group/cell. */
+        private final class GroupAccessible implements Accessible {
+            final int level, first;
+            private final GroupContext context;
+            GroupAccessible(int level, int first) {
+                this.level = level;
+                this.first = first;
+                context = new GroupContext();
+                context.setAccessibleParent(PinnedHeader.this);
+            }
+            @Override public AccessibleContext getAccessibleContext() { return context; }
+
+            private final class GroupContext extends AccessibleContext implements AccessibleAction, AccessibleComponent {
+                @Override public String getAccessibleName() {
+                    if (level == 0) {
+                        int i = columnGroupIndex(first);
+                        return i < 0 ? null : columnGroupLabels[i];
+                    }
+                    return getColumnGroupAncestorTitle(level, first);
+                }
+                @Override public String getAccessibleDescription() {
+                    return level == 0 ? "Column group" : "Column group ancestor level " + level;
+                }
+                @Override public AccessibleRole getAccessibleRole() { return AccessibleRole.COLUMN_HEADER; }
+                @Override public AccessibleStateSet getAccessibleStateSet() {
+                    var states = new AccessibleStateSet();
+                    Rectangle bounds = groupBounds(level, first);
+                    if (bounds == null) return states;
+                    states.add(AccessibleState.VISIBLE);
+                    if (isEnabled()) states.add(AccessibleState.ENABLED);
+                    if (isShowing() && getVisibleRect().intersects(bounds)) states.add(AccessibleState.SHOWING);
+                    if (isFocusOwner() && focusedGroupLevel == level && focusedGroupModel == first)
+                        states.add(AccessibleState.FOCUSED);
+                    if (level == 0) {
+                        int group = columnGroupIndex(first);
+                        if (group >= 0 && columnGroupSummary[group] >= 0) {
+                            states.add(columnGroupCollapsed[group] ? AccessibleState.COLLAPSED : AccessibleState.EXPANDED);
+                        }
+                    }
+                    return states;
+                }
+                @Override public int getAccessibleIndexInParent() {
+                    int slot = ordinalOf(level, first);
+                    return slot < 0 ? -1 : getColumnCount() + slot;
+                }
+                @Override public int getAccessibleChildrenCount() { return 0; }
+                @Override public Accessible getAccessibleChild(int i) { return null; }
+                @Override public java.util.Locale getLocale() { return PinnedHeader.this.getLocale(); }
+                private boolean actionable() {
+                    int group = level == 0 ? columnGroupIndex(first) : -1;
+                    return group >= 0 && columnGroupSummary[group] >= 0 && groupBounds(level, first) != null;
+                }
+                @Override public AccessibleAction getAccessibleAction() { return actionable() ? this : null; }
+                @Override public int getAccessibleActionCount() { return actionable() ? 1 : 0; }
+                @Override public String getAccessibleActionDescription(int i) {
+                    if (i != 0 || !actionable()) return null;
+                    int group = columnGroupIndex(first);
+                    return columnGroupCollapsed[group] ? "Expand" : "Collapse";
+                }
+                @Override public boolean doAccessibleAction(int i) {
+                    if (i != 0 || !actionable() || !PinnedHeader.this.isEnabled()) return false;
+                    if (!SwingUtilities.isEventDispatchThread()) {
+                        SwingUtilities.invokeLater(() -> doAccessibleAction(0));
+                        return true;
+                    }
+                    int group = columnGroupIndex(first);
+                    if (group < 0 || columnGroupSummary[group] < 0) return false;
+                    try {
+                        setGroupFocus(0, first);
+                        setColumnGroupCollapsed(first, !columnGroupCollapsed[group]);
+                        return true;
+                    } catch (IllegalArgumentException | IllegalStateException veto) { return false; }
+                }
+                @Override public AccessibleComponent getAccessibleComponent() { return this; }
+                @Override public Color getBackground() { return PinnedHeader.this.getBackground(); }
+                @Override public void setBackground(Color color) { /* virtual element; parent owns style */ }
+                @Override public Color getForeground() { return PinnedHeader.this.getForeground(); }
+                @Override public void setForeground(Color color) { /* virtual element */ }
+                @Override public Cursor getCursor() { return PinnedHeader.this.getCursor(); }
+                @Override public void setCursor(Cursor cursor) { /* virtual element */ }
+                @Override public Font getFont() { return PinnedHeader.this.getFont(); }
+                @Override public void setFont(Font font) { /* virtual element */ }
+                @Override public FontMetrics getFontMetrics(Font font) { return PinnedHeader.this.getFontMetrics(font); }
+                @Override public boolean isEnabled() { return PinnedHeader.this.isEnabled(); }
+                @Override public void setEnabled(boolean enabled) { /* native header owns enabled state */ }
+                @Override public boolean isVisible() { return groupBounds(level, first) != null; }
+                @Override public void setVisible(boolean visible) { /* projections depend on column model */ }
+                @Override public boolean isShowing() {
+                    Rectangle bounds = groupBounds(level, first);
+                    return bounds != null && PinnedHeader.this.isShowing() && getVisibleRect().intersects(bounds);
+                }
+                @Override public boolean contains(Point point) {
+                    Rectangle bounds = groupBounds(level, first);
+                    return point != null && bounds != null
+                            && point.x >= 0 && point.y >= 0 && point.x < bounds.width && point.y < bounds.height;
+                }
+                @Override public Point getLocationOnScreen() {
+                    Rectangle bounds = groupBounds(level, first);
+                    if (bounds == null || !PinnedHeader.this.isShowing())
+                        throw new IllegalComponentStateException("group is not showing");
+                    Point root = PinnedHeader.this.getLocationOnScreen();
+                    return new Point(root.x + bounds.x, root.y + bounds.y);
+                }
+                @Override public Point getLocation() {
+                    Rectangle bounds = groupBounds(level, first);
+                    return bounds == null ? null : bounds.getLocation();
+                }
+                @Override public void setLocation(Point location) { /* virtual group */ }
+                @Override public Rectangle getBounds() {
+                    Rectangle bounds = groupBounds(level, first);
+                    return bounds == null ? null : new Rectangle(bounds);
+                }
+                @Override public void setBounds(Rectangle bounds) { /* virtual group */ }
+                @Override public Dimension getSize() {
+                    Rectangle bounds = groupBounds(level, first);
+                    return bounds == null ? null : bounds.getSize();
+                }
+                @Override public void setSize(Dimension size) { /* virtual group */ }
+                @Override public Accessible getAccessibleAt(Point p) { return null; }
+                @Override public boolean isFocusTraversable() { return isVisible(); }
+                @Override public void requestFocus() {
+                    Runnable r = () -> {
+                        setGroupFocus(level, first);
+                        PinnedHeader.this.requestFocusInWindow();
+                    };
+                    if (SwingUtilities.isEventDispatchThread()) r.run(); else SwingUtilities.invokeLater(r);
+                }
+                @Override public void addFocusListener(FocusListener listener) { PinnedHeader.this.addFocusListener(listener); }
+                @Override public void removeFocusListener(FocusListener listener) { PinnedHeader.this.removeFocusListener(listener); }
+            }
+        }
+
 
         private int disclosureGroupAt(Point point) {
             Rectangle visible = getVisibleRect();
@@ -2037,6 +2400,22 @@ public final class M3Grid extends JTable {
                     } finally { frozen.dispose(); }
                 }
                 if (ancestorGroupCount > 0) paintAncestorBands(layer, visible);
+                // Native focus ownership stays on the existing JTableHeader.
+                // A focus rectangle identifies the active accessible title,
+                // not a second widget, editor or retained group component.
+                if (isFocusOwner() && focusedGroupLevel >= 0) {
+                    Rectangle focus = groupBounds(focusedGroupLevel, focusedGroupModel);
+                    if (focus != null && focus.width > 1) {
+                        Graphics mark = layer.create();
+                        try {
+                            mark.clipRect(visible.x, 0, visible.width, band);
+                            Color color = javax.swing.UIManager.getColor("Focus.color");
+                            mark.setColor(color != null ? color : getForeground());
+                            mark.drawRect(focus.x + 1, focus.y + 1,
+                                    Math.max(0, focus.width - 3), Math.max(0, focus.height - 3));
+                        } finally { mark.dispose(); }
+                    }
+                }
             } finally { layer.dispose(); }
         }
 
