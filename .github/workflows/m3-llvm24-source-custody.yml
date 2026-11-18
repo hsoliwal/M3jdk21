@@ -1,0 +1,81 @@
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
+# SPDX-License-Identifier: Apache-2.0
+name: M3 LLVM24 original-source receiving custody (no product admission)
+on:
+  push:
+    branches: ["m3/llvm24-orc-source-receiver-gate-20261118"]
+    paths:
+      - ".github/workflows/m3-llvm24-source-custody.yml"
+      - "m3/native/qualification/llvm24-orc-20261118/**"
+permissions:
+  contents: read
+jobs:
+  original-source-and-java21:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 24
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+          path: m3
+          sparse-checkout: |
+            m3/compiler
+            m3/native
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          repository: hsoliwal/llvm-project
+          ref: a75b9f54608bf0ccc5a2f2bbf0af4814df4419c7
+          persist-credentials: false
+          fetch-depth: 1
+          path: llvm
+          sparse-checkout: |
+            m3/llvm-orc-jni
+            llvm/include/llvm-c
+            llvm/lib/ExecutionEngine/Orc
+            cmake/Modules
+      - uses: actions/setup-java@77dd5b2ce225ea11469928ac317850245a74ae78 # v6.2.0
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Prove exact source guards on synthetic Git repos, not production
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m unittest discover \
+            -s m3/m3/native/qualification/llvm24-orc-20261118 \
+            -p 'test_*.py' -v
+          python3 -O -m unittest discover \
+            -s m3/m3/native/qualification/llvm24-orc-20261118 \
+            -p 'test_*.py' -q
+      - name: Verify actual pinned LLVM24 and unchanged M3 native/compiler Git owners
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 m3/m3/native/qualification/llvm24-orc-20261118/verify_source.py \
+            --m3-root m3 --llvm-root llvm | tee "$RUNNER_TEMP/m3-llvm24-source-only.txt"
+          grep -Fq 'M3_LLVM_SOURCE_CUSTODY_PASS_NO_PRODUCT_ADMISSION' \
+            "$RUNNER_TEMP/m3-llvm24-source-only.txt"
+          grep -Fq '"m3jdk21_product_receiving": "HOLD"' \
+            "$RUNNER_TEMP/m3-llvm24-source-only.txt"
+      - name: Java21 strict source-only JNI API and no-native refusal
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/m3-llvm24-java"
+          "$JAVA_HOME/bin/javac" --release 21 -Xlint:all -Werror \
+            -d "$RUNNER_TEMP/m3-llvm24-java" \
+            llvm/m3/llvm-orc-jni/src/main/java/org/m3jdk/compiler/llvm/LlvmOrcJit.java \
+            llvm/m3/llvm-orc-jni/src/main/java/org/m3jdk/compiler/llvm/LlvmOrcBatch.java \
+            llvm/m3/llvm-orc-jni/src/test/java/org/m3jdk/compiler/llvm/LlvmOrcJitNoLoadTestMain.java
+          "$JAVA_HOME/bin/java" -cp "$RUNNER_TEMP/m3-llvm24-java" \
+            org.m3jdk.compiler.llvm.LlvmOrcJitNoLoadTestMain
+          echo "M3_LLVM24_JAVA21_SOURCE_ONLY_PASS_PRODUCT_HOLD"
+      - name: Retain bounded source-only evidence, never a native library
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: m3-llvm24-source-only-not-runtime
+          if-no-files-found: ignore
+          retention-days: 7
+          path: ${{ runner.temp }}/m3-llvm24-source-only.txt

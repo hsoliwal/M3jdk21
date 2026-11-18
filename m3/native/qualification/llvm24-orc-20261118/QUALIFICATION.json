@@ -1,0 +1,18 @@
+{
+  "status": "SOURCE-ONLY HOLD",
+  "m3_jdk_source_base": "0aa6625cfdd9c5196e90c652b6ea423aa81017a2",
+  "llvm_source_pin": "a75b9f54608bf0ccc5a2f2bbf0af4814df4419c7",
+  "llvm_key_file_blobs": 14,
+  "m3_owner_file_blobs": 3,
+  "llvm_full_sha256_inventory": 30,
+  "hermetic_python_tests": "PASS 7/7 normal and optimized",
+  "synthetic_test_only": true,
+  "real_git_source_ci": "NOT_RUN",
+  "java21_native_loader_refusal_ci": "NOT_RUN",
+  "real_llvm24_native": "NOT_RUN",
+  "actual_synexia_openrewrite_java_c": "NOT_RUN",
+  "m3jdk21_native_receiving": "NOT_RUN",
+  "source_default_backend": "JAVA_HOTSPOT",
+  "performance_basis": "diagnostic local LLVM19, 41-48x slower than Java at 65536 cheap arithmetic elements",
+  "authorizes_product_merge": false
+}
