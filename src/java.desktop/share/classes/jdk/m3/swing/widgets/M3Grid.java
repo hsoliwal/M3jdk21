@@ -306,7 +306,12 @@ public final class M3Grid extends JTable {
         @Override public int getViewRowCount() { return getModelRowCount() - totalHidden; }
         @Override public List<? extends SortKey> getSortKeys() { return List.of(); }
         @Override public void toggleSortOrder(int column) {
-            throw new UnsupportedOperationException("row-group sorter is model-order only; clear groups to install a full sorter");
+            // JTableHeader calls this on an ordinary user click. Grouping
+            // has no ordering comparator: preserve model order without
+            // propagating an exception through Swing's event dispatch thread.
+            if (column < 0 || column >= getModel().getColumnCount()) {
+                throw new IndexOutOfBoundsException("sort column");
+            }
         }
         @Override public void setSortKeys(List<? extends SortKey> keys) {
             if (keys != null && !keys.isEmpty()) {
