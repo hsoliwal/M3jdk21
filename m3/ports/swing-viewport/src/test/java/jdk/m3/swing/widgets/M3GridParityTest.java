@@ -38,4 +38,16 @@ class M3GridParityTest {
         M3GridColumnGroupsSerializationSmoke.main(new String[0]);
     }
 
+    @Test
+    void summaryAndDetailColumnVisibility() throws Exception {
+        M3GridColumnSummarySmoke.main(new String[0]);
+    }
+    @Test
+    void summaryAndDetailSerialization() throws Exception {
+        M3GridColumnSummarySerializationSmoke.main(new String[0]);
+    }
+    @Test
+    void summaryAndDetailLargeVirtualGrid() throws Exception {
+        M3GridColumnSummaryScale.main(new String[0]);
+    }
 }

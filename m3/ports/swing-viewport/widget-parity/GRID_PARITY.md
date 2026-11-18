@@ -93,10 +93,13 @@ xvfb-run -a java -Djava.awt.headless=false -Xmx128m -cp "$OUT" jdk.m3.swing.widg
 - Renderer/editor combinations including advanced Grid editors, the
   default Grid selection/row-group behavior and native checkbox controls.
 - Noncontiguous frozen columns, **nested/tree/summary row grouping**,
-  nested/expandable column groups, hierarchical Grid, long-index surfaces, RTL and print fidelity.
+  nested column groups, hierarchical Grid, long-index surfaces, RTL and print fidelity.
 - The original M3Grid header now supports a first, opt-in grouped-title tier;
-  see [GRID_COLUMN_GROUPS.md](GRID_COLUMN_GROUPS.md). Nebula summary/detail
-  collapse and expand remain open.
+  see [GRID_COLUMN_GROUPS.md](GRID_COLUMN_GROUPS.md).
+- Native summary/detail column expansion and collapse are now opt-in,
+  preserving the actual TableColumn instances (see
+  [GRID_COLUMN_SUMMARY.md](GRID_COLUMN_SUMMARY.md)). Nested role masks
+  and full accessibility are still unqualified.
 - Flat, model-order collapsible grouping is now supported by a sparse
   row-range index in the original M3Grid; see
   [GRID_ROW_GROUPS.md](GRID_ROW_GROUPS.md) for acceptance and limitations.

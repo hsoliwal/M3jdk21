@@ -73,6 +73,12 @@ public final class M3Grid extends JTable {
     // Original model-column header ranges. No extra ColumnModel or table.
     private int[] columnGroupLanes = new int[16];
     private String[] columnGroupLabels = new String[8];
+    // Optional Nebula summary/detail semantics. -1 means a title-only
+    // group; each configured group retains its original TableColumn objects
+    // in one small array, not duplicate models, columns, or per-cell peers.
+    private int[] columnGroupSummary = new int[8];
+    private boolean[] columnGroupCollapsed = new boolean[8];
+    private TableColumn[][] columnGroupOwners = new TableColumn[8][];
     private int columnGroupCount;
     private transient long columnGroupPainted;
     private static final int COLUMN_GROUP_BAND_HEIGHT = 24;
@@ -87,6 +93,17 @@ public final class M3Grid extends JTable {
     public void setFrozenColumnCount(int count) {
         requireEdt();
         if (count < 0 || count > getColumnCount()) throw new IllegalArgumentException("frozen columns out of range");
+        // A group must remain entirely in the frozen or scrolling plane.
+        if (columnGroupCount > 0 && columnGroupSummary != null) {
+            for (int i = 0; i < columnGroupCount; i++) {
+                if (columnGroupSummary[i] < 0) continue;
+                int start = columnGroupViewStart(i);
+                int width = columnGroupVisibleCount(i);
+                if (start >= 0 && start < count && start + width > count) {
+                    throw new IllegalArgumentException("frozen boundary splits a summary/detail group");
+                }
+            }
+        }
         if (frozenColumns == count) return;
         frozenColumns = count;
         if (count == 0 && columnGroupCount == 0) uninstallHeader();
@@ -138,12 +155,28 @@ public final class M3Grid extends JTable {
                 throw new IllegalArgumentException("overlapping column groups");
             }
         }
+        if (existing >= 0 && columnGroupSummary[existing] >= 0
+                && columnGroupLanes[existing * 2 + 1] != columns) {
+            throw new IllegalStateException("restore the configured group's columns before changing its extent");
+        }
         if (existing < 0) {
             if (columnGroupCount >= 512) throw new IllegalArgumentException("too many column groups");
             if (columnGroupCount == columnGroupLanes.length / 2) {
                 columnGroupLanes = Arrays.copyOf(columnGroupLanes, columnGroupLanes.length * 2);
                 columnGroupLabels = Arrays.copyOf(columnGroupLabels, columnGroupLabels.length * 2);
+                columnGroupSummary = Arrays.copyOf(columnGroupSummary, columnGroupSummary.length * 2);
+                columnGroupCollapsed = Arrays.copyOf(columnGroupCollapsed, columnGroupCollapsed.length * 2);
+                columnGroupOwners = Arrays.copyOf(columnGroupOwners, columnGroupOwners.length * 2);
             }
+            System.arraycopy(columnGroupSummary, position, columnGroupSummary, position + 1,
+                    columnGroupCount - position);
+            System.arraycopy(columnGroupCollapsed, position, columnGroupCollapsed, position + 1,
+                    columnGroupCount - position);
+            System.arraycopy(columnGroupOwners, position, columnGroupOwners, position + 1,
+                    columnGroupCount - position);
+            columnGroupSummary[position] = -1;
+            columnGroupCollapsed[position] = false;
+            columnGroupOwners[position] = null;
             System.arraycopy(columnGroupLanes, position * 2, columnGroupLanes, (position + 1) * 2,
                     (columnGroupCount - position) * 2);
             System.arraycopy(columnGroupLabels, position, columnGroupLabels, position + 1,
@@ -165,10 +198,228 @@ public final class M3Grid extends JTable {
         return null;
     }
 
+    /**
+     * Enables Nebula-style summary/detail for one existing header group.
+     * The specified original TableColumn is visible when collapsed; all other
+     * members are visible when expanded. No replacement table model or column
+     * objects are created: the original column instances are retained and
+     * reinserted in their model order on each user operation.
+     *
+     * <p>This first leaf supports one summary column, a contiguous group in
+     * either the frozen or scrolling plane, and LTR mode. It fails closed on
+     * externally hidden/reordered columns or an active cross-pane group.</p>
+     */
+    public void setColumnGroupSummaryColumn(int firstModelColumn, int summaryModelColumn) {
+        requireEdt();
+        int index = columnGroupIndex(firstModelColumn);
+        if (index < 0) throw new IllegalArgumentException("unknown column group");
+        if (columnGroupSummary[index] >= 0) {
+            if (columnGroupSummary[index] == summaryModelColumn) return;
+            throw new IllegalStateException("remove the current summary/detail mode before reconfiguring");
+        }
+        int base = index * 2, length = columnGroupLanes[base + 1];
+        if (length < 2 || length > 512 || summaryModelColumn < firstModelColumn
+                || summaryModelColumn >= firstModelColumn + length) {
+            throw new IllegalArgumentException("summary column must belong to a nontrivial group");
+        }
+        if (!getComponentOrientation().isLeftToRight()) {
+            throw new IllegalStateException("summary/detail projection for RTL is not qualified");
+        }
+        int start = columnGroupViewStart(index);
+        if (start < 0) throw new IllegalStateException("group is not a contiguous single-plane view");
+        // Editor veto must occur before we retain any hidden-column owners.
+        if (isEditing() && getCellEditor() != null && !getCellEditor().stopCellEditing()) {
+            throw new IllegalStateException("active editor vetoed column visibility change");
+        }
+        TableColumn[] existing = new TableColumn[length];
+        for (int i = 0; i < length; i++) {
+            int view = convertColumnIndexToView(firstModelColumn + i);
+            if (view < 0 || view != start + i) {
+                throw new IllegalStateException("all original group columns must currently be visible");
+            }
+            existing[i] = getColumnModel().getColumn(view);
+            if (existing[i].getModelIndex() != firstModelColumn + i) {
+                throw new IllegalStateException("caller modified the model-column identities");
+            }
+        }
+        columnGroupOwners[index] = existing;
+        // Original group is fully visible. Hide its summary column, showing
+        // original detail columns in the expanded state.
+        applyGroupColumns(index, start, length, false, summaryModelColumn);
+        columnGroupSummary[index] = summaryModelColumn;
+        columnGroupCollapsed[index] = false;
+        refreshGroupedHeader();
+    }
+
+    /** Returns true when the configured group shows only its summary column. */
+    public boolean isColumnGroupCollapsed(int firstModelColumn) {
+        int index = columnGroupIndex(firstModelColumn);
+        if (index < 0 || columnGroupSummary[index] < 0) {
+            throw new IllegalArgumentException("column group has no summary/detail mode");
+        }
+        return columnGroupCollapsed[index];
+    }
+
+    /** Changes the native TableColumnModel view, keeping the same column objects. */
+    public void setColumnGroupCollapsed(int firstModelColumn, boolean collapsed) {
+        requireEdt();
+        int index = columnGroupIndex(firstModelColumn);
+        if (index < 0 || columnGroupSummary[index] < 0) {
+            throw new IllegalArgumentException("column group has no summary/detail mode");
+        }
+        if (columnGroupCollapsed[index] == collapsed) return;
+        int start = columnGroupViewStart(index);
+        if (start < 0) throw new IllegalStateException("group columns are not contiguous or cross a frozen plane");
+        int before = columnGroupVisibleCount(index);
+        applyGroupColumns(index, start, before, collapsed, columnGroupSummary[index]);
+        columnGroupCollapsed[index] = collapsed;
+        refreshGroupedHeader();
+        fireColumnGroupState(firstModelColumn, collapsed);
+    }
+
+    /** Disables detail/summary mode without discarding the grouped title. */
+    public void clearColumnGroupSummary(int firstModelColumn) {
+        requireEdt();
+        int index = columnGroupIndex(firstModelColumn);
+        if (index < 0) throw new IllegalArgumentException("unknown column group");
+        if (columnGroupSummary[index] < 0) return;
+        restoreColumnGroupOwners(index);
+        columnGroupOwners[index] = null;
+        columnGroupSummary[index] = -1;
+        columnGroupCollapsed[index] = false;
+        refreshGroupedHeader();
+    }
+
+    /** Native Swing typed event, emitted after the full column mutation. */
+    @FunctionalInterface public interface ColumnGroupStateListener extends java.util.EventListener {
+        void groupStateChanged(M3Grid grid, int firstModelColumn, boolean collapsed);
+    }
+
+    public void addColumnGroupStateListener(ColumnGroupStateListener listener) {
+        listenerList.add(ColumnGroupStateListener.class,
+                java.util.Objects.requireNonNull(listener, "listener"));
+    }
+
+    public void removeColumnGroupStateListener(ColumnGroupStateListener listener) {
+        listenerList.remove(ColumnGroupStateListener.class, listener);
+    }
+
+    private void fireColumnGroupState(int firstModelColumn, boolean collapsed) {
+        for (ColumnGroupStateListener listener : listenerList.getListeners(ColumnGroupStateListener.class)) {
+            listener.groupStateChanged(this, firstModelColumn, collapsed);
+        }
+    }
+
+    private int columnGroupIndex(int firstModelColumn) {
+        for (int i = 0; i < columnGroupCount; i++) {
+            if (columnGroupLanes[i * 2] == firstModelColumn) return i;
+        }
+        return -1;
+    }
+
+    /**
+     * Restores all original TableColumn instances in their model order.
+     * Called before removing group metadata or changing group configuration.
+     */
+    private void restoreColumnGroupOwners(int index) {
+        TableColumn[] owners = columnGroupOwners[index];
+        if (owners == null) throw new IllegalStateException("missing group native columns");
+        // Restore remains possible even if the caller has interleaved/reordered
+        // visible group members. Collapse/expand remains fail-closed until the
+        // group is contiguous, but disabling it must not strand columns.
+        int start = getColumnCount(), before = 0;
+        for (TableColumn owner : owners) {
+            int view = convertColumnIndexToView(owner.getModelIndex());
+            if (view >= 0) { start = Math.min(start, view); before++; }
+        }
+        if (before == 0) start = getColumnCount();
+        rewriteColumnGroup(index, start, before, owners, -1, true);
+        columnGroupSummary[index] = -1;
+        columnGroupCollapsed[index] = false;
+    }
+
+    private void applyGroupColumns(int index, int firstView, int before,
+                                   boolean collapsed, int summary) {
+        TableColumn[] owners = columnGroupOwners[index];
+        if (owners == null) throw new IllegalStateException("missing captured columns");
+        rewriteColumnGroup(index, firstView, before, owners, collapsed ? summary : -summary - 2, false);
+    }
+
+    /**
+     * target = -1: show all, nonnegative: summary only,
+     * target <= -2: all details except encoded summary model column.
+     * Validates complete native ownership before the first model mutation.
+     */
+    private void rewriteColumnGroup(int index, int firstView, int before,
+                                    TableColumn[] owners, int target, boolean restoring) {
+        TableColumnModel columns = getColumnModel();
+        int firstModel = columnGroupLanes[index * 2], size = owners.length;
+        int maxView = -1;
+        for (TableColumn column : owners) maxView = Math.max(maxView, convertColumnIndexToView(column.getModelIndex()));
+        boolean withinFrozen = firstView < getFrozenColumnCount() && maxView < getFrozenColumnCount();
+        int frozenBefore = frozenColumns;
+        int selectedModel = getSelectedColumn() < 0 ? -1
+                : convertColumnIndexToModel(getSelectedColumn());
+        // Any active cell editor may be repositioned when native columns
+        // shift. Commit or respect its veto before mutating any column owner;
+        // never silently discard caller-edited data outside this group.
+        if (isEditing() && getCellEditor() != null && !getCellEditor().stopCellEditing()) {
+            throw new IllegalStateException("active editor vetoed column visibility change");
+        }
+        int observed = 0;
+        for (int i = 0; i < size; i++) {
+            TableColumn owner = owners[i];
+            if (owner == null || owner.getModelIndex() != firstModel + i) {
+                throw new IllegalStateException("native group column changed identity");
+            }
+            int view = convertColumnIndexToView(firstModel + i);
+            if (view >= 0) {
+                if ((!restoring && view != firstView + observed) || columns.getColumn(view) != owner) {
+                    throw new IllegalStateException("group has externally replaced native columns");
+                }
+                observed++;
+            }
+        }
+        if (observed != before) throw new IllegalStateException("group model changed externally");
+        // Remove right-to-left, so all other native columns retain their order.
+        for (int i = size - 1; i >= 0; i--) {
+            int view = convertColumnIndexToView(firstModel + i);
+            if (view >= 0) columns.removeColumn(owners[i]);
+        }
+        int inserted = 0;
+        for (int i = 0; i < size; i++) {
+            int model = firstModel + i;
+            boolean desired = target == -1 || (target >= 0 ? model == target : model != -target - 2);
+            if (!desired) continue;
+            columns.addColumn(owners[i]);
+            int from = columns.getColumnCount() - 1;
+            columns.moveColumn(from, firstView + inserted);
+            inserted++;
+        }
+        if (withinFrozen) frozenColumns = frozenBefore + inserted - before;
+        // JTable selection is view-indexed; when the selected model column is
+        // temporarily hidden, move to the visible summary/detail representative.
+        if (selectedModel >= 0) {
+            int nextColumn = selectedModel < 0 ? -1 : convertColumnIndexToView(selectedModel);
+            if (nextColumn < 0) nextColumn = inserted > 0 ? firstView : -1;
+            if (nextColumn >= 0 && nextColumn < getColumnCount()) {
+                getColumnModel().getSelectionModel().setSelectionInterval(nextColumn, nextColumn);
+            }
+        }
+        revalidate();
+        repaint();
+    }
+
     public void removeColumnGroup(int firstModelColumn) {
         requireEdt();
         for (int i = 0; i < columnGroupCount; i++) {
             if (columnGroupLanes[i * 2] != firstModelColumn) continue;
+            // Removing group metadata must never abandon its caller's
+            // original TableColumn objects inside an invisible array.
+            if (columnGroupSummary[i] >= 0) restoreColumnGroupOwners(i);
+            System.arraycopy(columnGroupSummary, i + 1, columnGroupSummary, i, columnGroupCount - i - 1);
+            System.arraycopy(columnGroupCollapsed, i + 1, columnGroupCollapsed, i, columnGroupCount - i - 1);
+            System.arraycopy(columnGroupOwners, i + 1, columnGroupOwners, i, columnGroupCount - i - 1);
             System.arraycopy(columnGroupLanes, (i + 1) * 2, columnGroupLanes, i * 2,
                     (columnGroupCount - i - 1) * 2);
             System.arraycopy(columnGroupLabels, i + 1, columnGroupLabels, i,
@@ -176,6 +427,9 @@ public final class M3Grid extends JTable {
             columnGroupCount--;
             Arrays.fill(columnGroupLanes, columnGroupCount * 2, columnGroupCount * 2 + 2, 0);
             columnGroupLabels[columnGroupCount] = null;
+            columnGroupSummary[columnGroupCount] = -1;
+            columnGroupCollapsed[columnGroupCount] = false;
+            columnGroupOwners[columnGroupCount] = null;
             if (columnGroupCount == 0 && getFrozenColumnCount() == 0) uninstallHeader();
             refreshGroupedHeader();
             return;
@@ -185,9 +439,16 @@ public final class M3Grid extends JTable {
     public void clearColumnGroups() {
         requireEdt();
         if (columnGroupCount == 0) return;
+        // Reconstitute every original column before discarding metadata.
+        for (int i = columnGroupCount - 1; i >= 0; i--) {
+            if (columnGroupSummary[i] >= 0) restoreColumnGroupOwners(i);
+        }
         columnGroupCount = 0;
         Arrays.fill(columnGroupLanes, 0);
         Arrays.fill(columnGroupLabels, null);
+        Arrays.fill(columnGroupSummary, -1);
+        Arrays.fill(columnGroupCollapsed, false);
+        Arrays.fill(columnGroupOwners, null);
         if (getFrozenColumnCount() == 0) uninstallHeader();
         refreshGroupedHeader();
     }
@@ -201,17 +462,32 @@ public final class M3Grid extends JTable {
         }
     }
 
+    /** Number of original group columns currently projected as real Swing view columns. */
+    private int columnGroupVisibleCount(int index) {
+        int length = columnGroupLanes[index * 2 + 1];
+        return columnGroupSummary[index] < 0 ? length : columnGroupCollapsed[index] ? 1 : length - 1;
+    }
+
     /** A valid model-column group projected into current ascending view columns. */
     private int columnGroupViewStart(int index) {
         int b = index * 2, first = columnGroupLanes[b], length = columnGroupLanes[b + 1];
         if (first < 0 || length < 1 || length > getModel().getColumnCount() - first) return -1;
-        int viewStart = convertColumnIndexToView(first);
-        if (viewStart < 0 || viewStart > getColumnCount() - length) return -1;
-        for (int i = 1; i < length; i++) {
-            if (convertColumnIndexToView(first + i) != viewStart + i) return -1;
+        int viewStart = -1, count = 0, summary = columnGroupSummary[index];
+        for (int i = 0; i < length; i++) {
+            int model = first + i;
+            boolean wanted = summary < 0 || (columnGroupCollapsed[index] ? model == summary : model != summary);
+            int view = convertColumnIndexToView(model);
+            if (wanted) {
+                if (view < 0 || (viewStart >= 0 && view != viewStart + count)) return -1;
+                if (viewStart < 0) viewStart = view;
+                count++;
+            } else if (view >= 0) {
+                return -1;
+            }
         }
+        if (count != columnGroupVisibleCount(index) || viewStart < 0) return -1;
         int frozen = getFrozenColumnCount();
-        if (viewStart < frozen && viewStart + length > frozen) return -1;
+        if (viewStart < frozen && viewStart + count > frozen) return -1;
         return viewStart;
     }
 
@@ -359,15 +635,29 @@ public final class M3Grid extends JTable {
     @Override public void setModel(TableModel model) {
         boolean hadGroups = columnGroupLanes != null && columnGroupCount > 0;
         if (hadGroups) {
-            columnGroupCount = 0;
-            Arrays.fill(columnGroupLanes, 0);
-            Arrays.fill(columnGroupLabels, null);
+            // Before switching the source model, return every caller column
+            // object (including hidden summary/detail columns) to the native
+            // model. A fresh model then takes over its normal schema contract.
+            clearColumnGroups();
         }
         super.setModel(model);
         if (hadGroups) {
             if (getFrozenColumnCount() == 0) uninstallHeader();
             refreshGroupedHeader();
         }
+    }
+
+    /** Explicit replacement of column owners invalidates configured groups. */
+    @Override public void setColumnModel(TableColumnModel model) {
+        if (columnGroupLanes != null && columnGroupCount > 0) {
+            columnGroupCount = 0;
+            Arrays.fill(columnGroupLanes, 0);
+            Arrays.fill(columnGroupLabels, null);
+            Arrays.fill(columnGroupSummary, -1);
+            Arrays.fill(columnGroupCollapsed, false);
+            Arrays.fill(columnGroupOwners, null);
+        }
+        super.setColumnModel(model);
     }
 
     /** Structural model changes invalidate bare model-row group ordinals. */
@@ -519,6 +809,17 @@ public final class M3Grid extends JTable {
         if (columnGroupCount < 0 || columnGroupCount > 512) {
             throw new InvalidObjectException("invalid column group count");
         }
+        if (columnGroupSummary == null) {
+            columnGroupSummary = new int[Math.max(8, columnGroupCount)];
+            Arrays.fill(columnGroupSummary, -1);
+        }
+        if (columnGroupCollapsed == null) columnGroupCollapsed = new boolean[Math.max(8, columnGroupCount)];
+        if (columnGroupOwners == null) columnGroupOwners = new TableColumn[Math.max(8, columnGroupCount)][];
+        if (columnGroupSummary.length < columnGroupCount
+                || columnGroupCollapsed.length < columnGroupCount
+                || columnGroupOwners.length < columnGroupCount) {
+            throw new InvalidObjectException("invalid group visibility lanes");
+        }
         if (columnGroupCount == 0) {
             if (columnGroupLanes == null) columnGroupLanes = new int[16];
             if (columnGroupLabels == null) columnGroupLabels = new String[8];
@@ -536,6 +837,28 @@ public final class M3Grid extends JTable {
                     throw new InvalidObjectException("invalid column group interval/title");
                 }
                 previousEnd = first + width;
+                int summary = columnGroupSummary[i];
+                if (summary == -1) continue;
+                if (width < 2 || summary < first || summary >= first + width
+                        || columnGroupOwners[i] == null || columnGroupOwners[i].length != width) {
+                    throw new InvalidObjectException("invalid serialized summary/detail owner");
+                }
+                TableColumn[] owners = columnGroupOwners[i];
+                for (int member = 0; member < width; member++) {
+                    int modelColumn = first + member;
+                    TableColumn owner = owners[member];
+                    if (owner == null || owner.getModelIndex() != modelColumn) {
+                        throw new InvalidObjectException("invalid serialized native TableColumn");
+                    }
+                    int view = convertColumnIndexToView(modelColumn);
+                    boolean visible = columnGroupCollapsed[i] ? modelColumn == summary : modelColumn != summary;
+                    if (visible != (view >= 0)) {
+                        throw new InvalidObjectException("serialized column group visibility mismatch");
+                    }
+                    if (visible && getColumnModel().getColumn(view) != owner) {
+                        throw new InvalidObjectException("serialized model/column identity mismatch");
+                    }
+                }
             }
             if (pinnedHeader == null) installHeader();
         }
@@ -651,6 +974,9 @@ public final class M3Grid extends JTable {
             columnGroupCount = 0;
             Arrays.fill(columnGroupLanes, 0);
             Arrays.fill(columnGroupLabels, null);
+            if (columnGroupSummary != null) Arrays.fill(columnGroupSummary, -1);
+            if (columnGroupCollapsed != null) Arrays.fill(columnGroupCollapsed, false);
+            if (columnGroupOwners != null) Arrays.fill(columnGroupOwners, null);
         }
         if (groupLanes != null && (event == null || event.getFirstRow() == TableModelEvent.HEADER_ROW
                 || event.getType() == TableModelEvent.INSERT || event.getType() == TableModelEvent.DELETE)) {
@@ -1318,7 +1644,36 @@ public final class M3Grid extends JTable {
         private transient CellRendererPane painter;
         private transient boolean stockPainting;
 
-        PinnedHeader(TableColumnModel columns) { super(columns); }
+        PinnedHeader(TableColumnModel columns) {
+            super(columns);
+            addMouseListener(new MouseAdapter() {
+                @Override public void mouseReleased(MouseEvent event) {
+                    if (event.getButton() != MouseEvent.BUTTON1 || event.getY() >= COLUMN_GROUP_BAND_HEIGHT) return;
+                    int group = disclosureGroupAt(event.getPoint());
+                    if (group >= 0) setColumnGroupCollapsed(columnGroupLanes[group * 2], !columnGroupCollapsed[group]);
+                }
+            });
+        }
+
+        private int disclosureGroupAt(Point point) {
+            Rectangle visible = getVisibleRect();
+            if (point.x < visible.x || point.x >= visible.x + visible.width || point.y < 0) return -1;
+            for (int i = 0; i < columnGroupCount; i++) {
+                if (columnGroupSummary[i] < 0) continue;
+                int start = columnGroupViewStart(i);
+                if (start < 0) continue;
+                int left = getHeaderRect(start).x;
+                if (pinned() && start < getFrozenColumnCount()) {
+                    left = visible.x;
+                    for (int c = 0; c < start; c++) left += getColumnModel().getColumn(c).getWidth();
+                }
+                int right = left;
+                int count = columnGroupVisibleCount(i);
+                for (int c = 0; c < count; c++) right += getColumnModel().getColumn(start + c).getWidth();
+                if (point.x >= left && point.x < Math.min(right, left + 20)) return i;
+            }
+            return -1;
+        }
 
         @Override public Dimension getPreferredSize() {
             Dimension size = super.getPreferredSize();
@@ -1453,7 +1808,7 @@ public final class M3Grid extends JTable {
         }
 
         private void paintGroupBand(Graphics g, int index, int viewStart, boolean frozen, Rectangle visible) {
-            int modelColumns = columnGroupLanes[index * 2 + 1];
+            int modelColumns = columnGroupVisibleCount(index);
             int x = frozen ? visible.x : getHeaderRect(viewStart).x;
             if (frozen) {
                 for (int c = 0; c < viewStart; c++) x += getColumnModel().getColumn(c).getWidth();
@@ -1471,9 +1826,21 @@ public final class M3Grid extends JTable {
             if (title != null && !title.isEmpty()) {
                 java.awt.Shape clip = g.getClip();
                 try {
-                    g.clipRect(x + 4, 0, Math.max(0, width - 8), band);
+                    int inset = columnGroupSummary[index] >= 0 ? 21 : 5;
+                    if (columnGroupSummary[index] >= 0) {
+                        int mid = band / 2;
+                        if (columnGroupCollapsed[index]) {
+                            g.drawLine(x + 6, mid - 5, x + 13, mid);
+                            g.drawLine(x + 13, mid, x + 6, mid + 5);
+                        } else {
+                            g.drawLine(x + 5, mid - 4, x + 13, mid - 4);
+                            g.drawLine(x + 5, mid - 3, x + 9, mid + 3);
+                            g.drawLine(x + 13, mid - 3, x + 9, mid + 3);
+                        }
+                    }
+                    g.clipRect(x + inset, 0, Math.max(0, width - inset - 4), band);
                     java.awt.FontMetrics fm = g.getFontMetrics();
-                    g.drawString(title, x + 5,
+                    g.drawString(title, x + inset,
                             (band - fm.getHeight()) / 2 + fm.getAscent());
                 } finally { g.setClip(clip); }
             }
