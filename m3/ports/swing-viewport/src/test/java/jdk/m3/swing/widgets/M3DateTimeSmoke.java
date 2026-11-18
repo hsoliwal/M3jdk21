@@ -2,6 +2,8 @@
 package jdk.m3.swing.widgets;
 
 import java.time.DateTimeException;
+import java.util.Date;
+import javax.swing.SpinnerDateModel;
 import java.text.ParseException;
 import java.time.Instant;
 import java.time.LocalDateTime;
@@ -35,6 +37,11 @@ public final class M3DateTimeSmoke {
         picker.setZone(kolkata);
         picker.setRange(canonical.minusSeconds(60), canonical.plusSeconds(60));
         reject(() -> picker.setInstant(canonical.plusSeconds(120)), IllegalArgumentException.class);
+        SpinnerDateModel nativeModel = (SpinnerDateModel) picker.getSpinner().getModel();
+        reject(() -> nativeModel.setValue(Date.from(canonical.plusSeconds(120))), IllegalArgumentException.class);
+        Date escaped = (Date) nativeModel.getValue();
+        escaped.setTime(0);
+        check(picker.getInstant().equals(canonical), "mutable Date view cannot bypass the model");
         picker.setInstant(canonical.minusSeconds(60));
         check(picker.getInstant().equals(canonical.minusSeconds(60)), "inclusive range minimum");
         picker.setRange(canonical.minusSeconds(15), canonical.plusSeconds(15));
