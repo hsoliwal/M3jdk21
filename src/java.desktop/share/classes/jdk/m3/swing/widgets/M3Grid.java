@@ -9,6 +9,10 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.InputEvent;
+import java.io.IOException;
+import java.io.InvalidObjectException;
+import java.io.ObjectInputStream;
+import java.io.Serial;
 import java.util.List;
 import javax.swing.AbstractAction;
 import javax.swing.KeyStroke;
@@ -363,6 +367,45 @@ public final class M3Grid extends JTable {
         @Override public void rowsDeleted(int first, int end) { rebuild(); }
         @Override public void rowsUpdated(int first, int end) { }
         @Override public void rowsUpdated(int first, int end, int column) { }
+    }
+
+    /**
+     * JTable serializes the TableModel but its RowSorter is not a durable
+     * projection. Reconnect only the sparse group behavior after validating
+     * the saved lane structure; never leave visible group flags inconsistent
+     * with the restored logical row count.
+     */
+    @Serial
+    private void readObject(ObjectInputStream input) throws IOException, ClassNotFoundException {
+        input.defaultReadObject();
+        // Serialized pre-group M3Grid instances do not contain these fields.
+        // Restore an empty sparse lane rather than rejecting older streams.
+        if (groupCount == 0) {
+            if (groupLanes == null) groupLanes = new int[24];
+            if (groupLabels == null) groupLabels = new String[8];
+            return;
+        }
+        if (groupCount < 0 || groupCount > 4_096 || groupLanes == null || groupLabels == null
+                || (long) groupCount * 3 > groupLanes.length || groupCount > groupLabels.length) {
+            throw new InvalidObjectException("invalid group lane count");
+        }
+        int previousEnd = 0, modelRows = getModel().getRowCount();
+        for (int i = 0; i < groupCount; i++) {
+            int at = i * 3;
+            int start = groupLanes[at], end = groupLanes[at + 1], collapsed = groupLanes[at + 2];
+            if (start < previousEnd || end <= start + 1 || end > modelRows
+                    || (collapsed != 0 && collapsed != 1) || groupLabels[i] == null) {
+                throw new InvalidObjectException("invalid serialized group bounds/state");
+            }
+            previousEnd = end;
+        }
+        // The JTable's transient sorter was not serialized. The sparse
+        // projection is deterministically rebuilt from the original model
+        // ordinals and collapsed flags without materializing model rows.
+        groupSorter = new GroupRowSorter();
+        super.setRowSorter(groupSorter);
+        installGroupMouse();
+        groupSorter.rebuild();
     }
 
     /** Configured model-coordinate spans; stock JTable behavior when empty. */
