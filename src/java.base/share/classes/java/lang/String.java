@@ -13162,19 +13162,43 @@ public final class String
     }
 
     /**
+     * Returns a lazy stream of lines with their line terminators preserved.
+     * A terminator is {@code "\n"}, {@code "\r"}, or {@code "\r\n"}; the returned
+     * line includes its terminator, if one exists. An empty input yields an
+     * empty stream, and a final terminator does not produce an extra empty line.
+     *
+     * <p>This M3JDK addition follows Scala's {@code StringOps.linesWithSeparators}
+     * line segmentation, expressed as a Java {@link Stream}. Each line is a
+     * substring range of the receiver, preserving canonical M3-backed storage.
+     *
+     * @return a stream of lines, including their original separators
+     * @since 21
+     */
+    public Stream<String> linesWithSeparators() {
+        return StreamSupport.stream(new M3LinesSpliterator(this, true), false);
+    }
+
+    /**
      * Lazy line traversal for M3-backed Strings. It preserves String.lines() CR/LF/CRLF
      * semantics and emits M3 substring coordinates rather than flattening the source.
+     * The optional separator-inclusive projection shares the same scanner.
      */
     private static final class M3LinesSpliterator
             extends Spliterators.AbstractSpliterator<String> {
         private final String source;
         /** True when prepared facts prove the source holds no LF and no CR. */
         private final boolean terminatorFree;
+        private final boolean includeTerminators;
         private int index;
 
         M3LinesSpliterator(String source) {
+            this(source, false);
+        }
+
+        M3LinesSpliterator(String source, boolean includeTerminators) {
             super(source.length(), Spliterator.ORDERED | Spliterator.IMMUTABLE | Spliterator.NONNULL);
             this.source = source;
+            this.includeTerminators = includeTerminators;
             M3String storage = source.m3();
             M3StringFacts facts = storage == null ? null : storage.factsIfPrepared();
             this.terminatorFree = facts != null && facts.lineTerminatorCount == 0;
@@ -13194,16 +13218,18 @@ public final class String
                 end++;
             }
 
-            action.accept(source.substring(start, end));
+            int next;
             if (end == length) {
-                index = length;
+                next = length;
             } else if (source.charAt(end) == '\r'
                     && end + 1 < length
                     && source.charAt(end + 1) == '\n') {
-                index = end + 2;
+                next = end + 2;
             } else {
-                index = end + 1;
+                next = end + 1;
             }
+            action.accept(source.substring(start, includeTerminators ? next : end));
+            index = next;
             return true;
         }
     }
