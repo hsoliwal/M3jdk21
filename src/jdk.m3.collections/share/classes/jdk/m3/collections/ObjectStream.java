@@ -40,6 +40,7 @@ import java.util.function.Predicate;
 import java.util.function.Supplier;
 import java.util.stream.Collector;
 import java.util.stream.Stream;
+import java.util.stream.Streams;
 import java.util.stream.StreamSupport;
 
 /**
@@ -318,6 +319,46 @@ public final class ObjectStream<T> {
                 throw failure;
             }
         }, replayable && other.replayable());
+    }
+
+    /**
+     * Lazily map overlapping adjacent pairs using the java.base stream owner.
+     * Empty and singleton inputs produce no results. Each replay opens the
+     * original source afresh; the mapped traversal owns source closure.
+     */
+    public <R> ObjectStream<R> pairwise(
+            BiFunction<? super T, ? super T, ? extends R> mapper) {
+        Objects.requireNonNull(mapper, "mapper");
+        return delegateStream(input -> Streams.pairwise(input, mapper));
+    }
+
+    /**
+     * Lazily map until the first empty optional, consuming that terminating
+     * input but requesting no later elements. A null mapped optional is
+     * rejected. Each evaluation has independent termination state.
+     */
+    public <R> ObjectStream<R> mapWhile(
+            Function<? super T, ? extends Optional<? extends R>> mapper) {
+        Objects.requireNonNull(mapper, "mapper");
+        return delegateStream(input -> Streams.mapWhile(input, mapper));
+    }
+
+    /** Transfer this plan's opened traversal to a java.base stream factory. */
+    private <R> ObjectStream<R> delegateStream(Function<Stream<T>, Stream<R>> factory) {
+        return new ObjectStream<>(() -> {
+            Stream<T> input = stream();
+            try {
+                return factory.apply(input);
+            } catch (RuntimeException | Error failure) {
+                // A failed factory leaves ownership with its caller, which is this plan.
+                try {
+                    input.close();
+                } catch (RuntimeException | Error closeFailure) {
+                    if (closeFailure != failure) failure.addSuppressed(closeFailure);
+                }
+                throw failure;
+            }
+        }, replayable);
     }
 
     public ObjectStream<T> peek(Consumer<? super T> observer) {
@@ -783,6 +824,44 @@ public final class ObjectStream<T> {
         LinkedHashMap<K, R> output = new LinkedHashMap<>();
         states.forEach((key, state) -> output.put(key, finisher.apply(state)));
         return Collections.unmodifiableMap(output);
+    }
+
+    /**
+     * Sequentially replace one accumulator state per key in first-key encounter
+     * order. The initializer runs once for each admitted key, including a null
+     * key. Null initial and replacement states are valid and never reseeded.
+     * The key extractor and folder run once per successfully processed element;
+     * no parallel associativity or mutable-state holder is required.
+     *
+     * <p>A new key beyond maxKeys is refused before its initializer or folder
+     * runs. The returned map is unmodifiable and is published only after the
+     * input closes successfully. Keys and state objects retain their original
+     * references; the result does not deep-copy client accumulator states.</p>
+     */
+    public <K, A> Map<K, A> foldByKey(
+            Function<? super T, ? extends K> keyExtractor, int maxKeys,
+            Supplier<? extends A> initializer,
+            BiFunction<? super A, ? super T, ? extends A> folder) {
+        Objects.requireNonNull(keyExtractor, "keyExtractor");
+        Objects.requireNonNull(initializer, "initializer");
+        Objects.requireNonNull(folder, "folder");
+        requireNonNegative(maxKeys, "maxKeys");
+        LinkedHashMap<K, A> states = new LinkedHashMap<>();
+        try (Stream<T> input = stream()) {
+            Iterator<T> iterator = input.iterator();
+            while (iterator.hasNext()) {
+                T value = iterator.next();
+                K key = keyExtractor.apply(value);
+                if (!states.containsKey(key)) {
+                    if (states.size() >= maxKeys) {
+                        throw new IllegalStateException("keyed state budget exceeded");
+                    }
+                    states.put(key, initializer.get());
+                }
+                states.put(key, folder.apply(states.get(key), value));
+            }
+        }
+        return Collections.unmodifiableMap(states);
     }
 
     public <K> Map<K, Long> countByKey(Function<? super T, ? extends K> keyExtractor, int maxKeys) {
