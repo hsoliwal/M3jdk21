@@ -711,6 +711,105 @@ public final class M3Grid extends JTable {
         if (groupCount > 0 && groupSorter != null && !isPaintingForPrint()) paintGroupHeaders(g);
     }
 
+    /**
+     * Finds the first group header in the physical viewport in O(log groups)
+     * and draws only resident headings. Pinned top/bottom headings are queried
+     * separately; no per-model-row objects, temporary arrays or paint scans of
+     * all groups are required.
+     */
+    private void paintGroupHeaders(Graphics graphics) {
+        Rectangle visible = getVisibleRect();
+        if (visible.isEmpty() || getColumnCount() == 0 || getRowCount() == 0) return;
+        int topHeight = rowPinsActive() ? pinnedTopHeight(visible) : 0;
+        int bottomHeight = rowPinsActive() ? pinnedBottomHeight(visible, topHeight) : 0;
+        int firstY = visible.y + topHeight;
+        int lastY = visible.y + visible.height - bottomHeight - 1;
+        Graphics2D g = (Graphics2D) graphics.create();
+        try {
+            g.setFont(getFont());
+            if (lastY >= firstY) {
+                int firstView = super.rowAtPoint(new Point(visible.x, firstY));
+                int lastView = super.rowAtPoint(new Point(visible.x, lastY));
+                if (firstView >= 0 && lastView >= firstView) {
+                    int startModel = convertRowIndexToModel(firstView);
+                    int endModel = convertRowIndexToModel(lastView);
+                    int firstGroup = findGroupInsertion(startModel);
+                    for (int group = firstGroup; group < groupCount && groupLanes[group * 3] <= endModel; group++) {
+                        paintOneGroupHeader(g, visible, group);
+                    }
+                }
+            }
+            if (rowPinsActive() && topHeight > 0) {
+                int y = 0;
+                for (int row = 0; row < getPinnedTopRowCount() && y < topHeight; row++) {
+                    int model = convertRowIndexToModel(row);
+                    int group = groupAtStart(model);
+                    if (group >= 0) paintOneGroupHeader(g, visible, group);
+                    y += getRowHeight(row);
+                }
+            }
+            if (rowPinsActive() && bottomHeight > 0) {
+                int height = 0;
+                int floor = getRowCount() - getPinnedBottomRowCount();
+                for (int row = getRowCount() - 1; row >= floor && height < bottomHeight; row--) {
+                    int model = convertRowIndexToModel(row);
+                    int group = groupAtStart(model);
+                    if (group >= 0) paintOneGroupHeader(g, visible, group);
+                    height += getRowHeight(row);
+                }
+            }
+        } finally { g.dispose(); }
+    }
+
+    private void paintOneGroupHeader(Graphics2D graphics, Rectangle visible, int group) {
+        int modelHeader = groupLanes[group * 3];
+        if (modelHeader >= getModel().getRowCount()) return;
+        int row = convertRowIndexToView(modelHeader);
+        if (row < 0 || row >= getRowCount()) return;
+        Rectangle cell = super.getCellRect(row, 0, true);
+        int y = cell.y;
+        if (rowPinsActive()) {
+            if (row < getPinnedTopRowCount()) {
+                y = visible.y;
+                for (int i = 0; i < row; i++) y += getRowHeight(i);
+            } else if (row >= getRowCount() - getPinnedBottomRowCount()) {
+                y = visible.y + visible.height;
+                for (int i = getRowCount() - 1; i >= row; i--) y -= getRowHeight(i);
+            }
+        }
+        int height = cell.height;
+        int titleWidth = Math.min(200, visible.width);
+        if (titleWidth <= 0 || y >= visible.y + visible.height || y + height <= visible.y) return;
+        Rectangle dirty = graphics.getClipBounds();
+        if (dirty != null && !dirty.intersects(visible.x, y, titleWidth, height)) return;
+        int x = visible.x;
+        graphics.setColor(getBackground());
+        graphics.fillRect(x, y, titleWidth, height);
+        graphics.setColor(getForeground());
+        int middleY = y + height / 2;
+        // Draw one disclosure triangle without per-group int[] allocations.
+        if (groupLanes[group * 3 + 2] == 0) {
+            graphics.drawLine(x + 5, middleY - 4, x + 13, middleY - 4);
+            graphics.drawLine(x + 5, middleY - 3, x + 9, middleY + 3);
+            graphics.drawLine(x + 13, middleY - 3, x + 9, middleY + 3);
+        } else {
+            graphics.drawLine(x + 6, middleY - 5, x + 13, middleY);
+            graphics.drawLine(x + 13, middleY, x + 6, middleY + 5);
+            graphics.drawLine(x + 6, middleY - 4, x + 6, middleY + 4);
+        }
+        String label = groupLabels[group];
+        if (label != null && !label.isEmpty()) {
+            java.awt.Shape clip = graphics.getClip();
+            try {
+                graphics.clipRect(x + 20, y, Math.max(0, titleWidth - 20), height);
+                FontMetrics metrics = graphics.getFontMetrics();
+                graphics.drawString(label, x + 21,
+                        middleY + (metrics.getAscent() - metrics.getDescent()) / 2);
+            } finally { graphics.setClip(clip); }
+        }
+        groupHeaderPainted++;
+    }
+
     private void paintFrozenColumns(Graphics g) {
         Rectangle visible = getVisibleRect();
         if (visible.isEmpty()) return;
