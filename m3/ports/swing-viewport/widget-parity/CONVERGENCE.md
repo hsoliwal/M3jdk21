@@ -98,3 +98,43 @@ be recorded in Synexia before promotion; no such qualification is asserted.
   79c5e8c7872f4496bffa57bcaf1e402466f41992 (EPL-2.0; no source copied).
 - Local Java 21 headless EDT smoke PASS; native mouse/keyboard/contrast and
   screen-reader gate remains OPEN.
+
+## Native CDateTime text/spinner implementation (third native wave)
+
+Native control: `jdk.m3.swing.widgets.M3DateTime`, one JPanel with
+JSpinner, SpinnerDateModel, and Swing's original DateEditor. This is
+the text/spinner portion of Nebula CDateTime, NOT the full graphical
+date/time selector, calendar popup or SwingX JXDatePicker replacement.
+
+- Exposes canonical millisecond-precision Instant and a distinct ZoneId
+  for wall-clock display. setZone changes presentation only.
+- setLocalDateTime rejects nonexistent DST gap times and ambiguous overlap
+  times: requires exactly one valid ZoneOffset, or a caller can setInstant.
+- Inclusive setRange with bounds; private final bounded SpinnerDateModel
+  validates even direct model.setValue calls. Date readout is copied so
+  callers cannot mutate the internal date by reference.
+- commitEdit parses and validates a complete formatted string and inclusive
+  bounds prior to updating the spinner model; rejected text leaves the
+  canonical Instant and listener notifications untouched.
+- Existing Swing editor/document, UI delegate, selection, enabled and
+  accessible behavior stays in the owning Swing components. No SWT peers.
+- Behavioral donors, no source copied: Nebula CDateTime.java EPL-2.0
+  Git blob 6182d7e1926f3568f7cee2ded8480eb84b4a459c;
+  Nebula DiscreteTimePicker.java EPL-2.0
+  Git blob f794230deb509304f3cc85302e0e18faab605c09;
+  SwingX JXDatePicker.java LGPL-2.1
+  Git blob 40394a5730e87df65ad53a931f1ada1a7379a5ef.
+
+Local qualification: OpenJDK 21.0.12.1, Linux headless,
+javac --release 21 -Xlint:all,-serial,-this-escape -Werror PASS;
+M3DateTimeSmoke on EDT PASS (Asia/Kolkata and UTC round trip,
+America/New_York spring gap/fall overlap refusal, inclusive range,
+SpinnerDateModel mutation defense, text commit and atomic rejects).
+Git blob SHAs match locally compiled source and smoke.
+
+OPEN: Nebula SIMPLE and DROP_DOWN graphical calendar/time control
+and typed editing equivalence, SwingX JXDatePicker integration, localized
+date formats, month/day spinner navigation, alternate LAF, headful
+focus/keyboard/accessibility native tests, Maven reactor and Synexia
+recipe source-sealed fixed-point qualification. No Java desktop, SWT,
+Nebula or SwingX production source was changed.
