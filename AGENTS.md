@@ -1,4 +1,9 @@
 <!-- SPDX-License-Identifier: Apache-2.0 -->
+
+## Owner merge directive — history-complete additive superset (2026-11-18)
+
+For every candidate change, treat earlier verified M3/JDK capabilities and upstream-compatible behavior as a protected subset. Inspect applicable historical commits, branches, tags, PRs, renamed paths, source blobs and tests back to available roots before proposing a merge; a merged PR or ancestry alone is not proof of delivered source. Recover losses via the canonical Synexia source-sealed recipe. Choose the best compatible atoms and add API only with source, binary, reflective and behavioral gates. Keep JDK product code and target tests here; keep history-loss review and its dated last-checked ledger in `hsoliwal/com.synexia`, not this clean-output repository. Preserve OpenJDK and every third-party license/NOTICE; Apache-2.0 for separately original, eligible work does not relicense GPLv2/OpenJDK material. Independently developed algorithms must not copy protected donor code or bypass patents.
+
 # M3JDK21 agent instructions
 
 ## Clean output rule (owner directive, 2026-11-14) - read first
