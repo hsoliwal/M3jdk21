@@ -149,6 +149,30 @@ native/process-memory evidence. Do not equate a finite donor pass or merge ances
 target delivery; retain pending gates and partial coverage explicitly.
 
 
+## Priority 0 — MOP SDK documented atoms and verified pattern composition
+
+MOP requires top-down `repository -> project -> module -> package
+-> file -> interface/type -> fields/methods -> semantic atom` and
+bottom-up `verified atom -> file -> package -> interface/API
+-> module -> project -> SDK/system`. Prefer documented private
+static/instance atoms and thin composed methods behind **unchanged
+public APIs**, unless original effects, exceptions, JNI/JMM,
+synchronization or resource ownership forbid the extraction.
+Independent files may prepare in parallel using deterministic
+shards; each file has exactly one serial writer and only
+verified candidates advance canonical truth.
+
+Agents must consult the actual code, inline semantic docs,
+existing Synexia source-bound pattern and earlier history.
+A shorter method or matching hash is not correctness proof,
+and no agent may assert globally optimal code without a
+defined search space and independent evidence.
+Use existing private Synexia Atomizer, Patternizer,
+Maven/OpenRewrite recipe and L0-L5 documentation owners.
+Read [M3SDK MOP core rule](doc/m3sdk-mop-core-invariants.md);
+the live Synexia `M3Scale.txt` v3.3 Locked Canon remains
+unchanged by this product policy.
+
 ## Full Synexia lineage is mandatory
 
 Read `m3/compatibility/m3-full-family-pin.tsv`, `m3/docs/m3-full-family-catalogue.json`, and the M3-SYNEXIA-RECEIVER-1 section of the canonical porting invariant before MIndex*/String/AST/precompute work. Also read the current successor snapshot under `m3/synexia-import/current-full-borrow/` and run `m3/compatibility/check_m3_full_borrow_receiver.py`; the successor snapshot adds exact current Synexia family-tree identities but does not supersede historical catalogue evidence or advance any target phase. The pinned Synexia source catalogue covers4,770namedpaths within13checkedroots and keeps every row unevaluated until exact target evidence exists. Carry the whole canonical String/data-structure/AST/static-regex lineage forward; representative tables or the literal replacement atom do not prove full receiving parity. Preserve Apache-2.0 Synexia first-party attribution, `Copyright 2026 Hitesh Soliwal and contributors`, and per-file third-party/OpenJDK licensing.
