@@ -95,3 +95,20 @@ source-built M3JDK and cross-toolkit gates remain separate.
 
 See [GRID_PINNED_ROWS.md](GRID_PINNED_ROWS.md) for design,
 exact source seals, reproduction and limits.
+
+## Native Grid merged body cells
+
+| Gate | Result |
+|---|---|
+| Strict Java 21 javac Werror with canonical Grid source and old/new smoke sources | LOCAL_PASS |
+| Old M3GridContractSmoke and M3GridPinnedRowsSmoke | LOCAL_PASS |
+| New M3GridSpansSmoke: pixels, anchor selection, model/view contiguous mapping, filtering and structural reset | LOCAL_PASS |
+| Two active spans at one-million model rows, including a 300,000-row unsorted span, -Xmx128m | LOCAL_PASS |
+| Old Xvfb native frozen-column/pinned-row Robot smokes | LOCAL_PASS |
+| New M3GridSpansHeadfulSmoke: actual covered-cell click maps to anchor without viewport scroll | LOCAL_PASS |
+| java.desktop patch module strict compile and named-module execution | LOCAL_PASS |
+| Exact source Git blob seals for Grid and both new tests | VERIFIED |
+| Full jtreg/Maven/JUnit, Win32/Cocoa/GTK4/HiDPI, accessibility, canonical OpenRewrite recipe | NOT_RUN |
+
+See [GRID_SPANS.md](GRID_SPANS.md) for model-coordinate policy,
+primitive storage, proof bounds, donor hashes and remaining gates.

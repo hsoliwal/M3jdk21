@@ -13,4 +13,8 @@ class M3GridParityTest {
     void frozenTopBottomRowsAndMillionRowWindow() throws Exception {
         M3GridPinnedRowsSmoke.main(new String[0]);
     }
+    @Test
+    void mergedBodyCellSpans() throws Exception {
+        M3GridSpansSmoke.main(new String[0]);
+    }
 }
