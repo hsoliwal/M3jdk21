@@ -46,3 +46,15 @@ java -Djava.awt.headless=true -Xmx128m -cp /tmp/m3-native jdk.m3.swing.widgets.M
 java -Djava.awt.headless=true -Xmx128m -cp /tmp/m3-native jdk.m3.swing.widgets.M3PrintPreviewSmoke
 java -Djava.awt.headless=true -Xmx128m -cp /tmp/m3-native jdk.m3.swing.widgets.M3OscilloscopeScale
 ```
+
+## Native CDateTime text/spinner wave
+
+| Gate | Result |
+|---|---|
+| javac --release 21 -Xlint:all,-serial,-this-escape -Werror | LOCAL_PASS |
+| M3DateTimeSmoke: IST/UTC, DST gaps/overlaps, inclusive bounds, defensive Date, text commit and reject | LOCAL_PASS |
+| Exact committed source Git blobs versus tested local files | VERIFIED |
+| Full Maven/JUnit reactor at exact PR head | NOT_RUN |
+| GUI focus/keyboard/accessibility/locale/LookAndFeel tests | NOT_RUN |
+| Nebula/SwingX graphical dropdown and date picker differential | NOT_RUN |
+| Synexia sealed OpenRewrite recipe fixed-point and release qualification | NOT_RUN |
