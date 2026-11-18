@@ -1,5 +1,10 @@
 <!-- SPDX-License-Identifier: Apache-2.0 -->
 
+## Priority 0 — MOP SDK core source invariant (2026-11-18)
+
+Before generating or changing code, follow [MOP SDK core invariants](doc/mop-sdk-core-invariants.md): top-down repository -> project -> module -> package -> file -> declarations/atoms inventory and contract freeze; bottom-up atom -> file -> package/interface -> module -> project -> system patternization with dependency-closed, proof-gated promotion. Model each file as documented meaningful private/static/instance atoms composed by higher methods where semantically safe; explicitly record NO_SAFE_EXTRACTION when necessary. Independent sealed files may be prepared concurrently, but each file has one writer and serial verified refinement. Preserve JDK/HotSpot/JNI public interfaces, effects, behavior, native lifecycle, existing owners, original rights and qualified additive history. The M3JDK21 product receives only source-sealed, executed Synexia recipe postimages and target-native tests; no recipe or memory store is copied here. No source, API, optimality or runtime claim may be promoted from documentation or unrun tests alone.
+
+
 ## Owner merge directive — history-complete additive superset (2026-11-18)
 
 For every candidate change, treat earlier verified M3/JDK capabilities and upstream-compatible behavior as a protected subset. Inspect applicable historical commits, branches, tags, PRs, renamed paths, source blobs and tests back to available roots before proposing a merge; a merged PR or ancestry alone is not proof of delivered source. Recover losses via the canonical Synexia source-sealed recipe. Choose the best compatible atoms and add API only with source, binary, reflective and behavioral gates. Keep JDK product code and target tests here; keep history-loss review and its dated last-checked ledger in `hsoliwal/com.synexia`, not this clean-output repository. Preserve OpenJDK and every third-party license/NOTICE; Apache-2.0 for separately original, eligible work does not relicense GPLv2/OpenJDK material. Independently developed algorithms must not copy protected donor code or bypass patents.
