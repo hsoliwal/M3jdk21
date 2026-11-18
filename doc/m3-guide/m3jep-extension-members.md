@@ -1,16 +1,20 @@
 <!-- SPDX-License-Identifier: Apache-2.0 -->
 <!-- Copyright 2026 Hitesh Soliwal and contributors -->
 
-# M3JEP (unnumbered draft): Extension Members for M3JDK21
+# M3JEP-LANG-009: Extension Members — Detailed Design Annex
+
+**Canonical proposal:** [M3JEP-LANG-009 — Extensions](../m3/jeps/proposals/M3JEP-LANG-009.md). This document is a **detailed technical annex**, not a new M3JEP, registry row, independent feature authority, or official OpenJDK JEP. The canonical [86-proposal registry](../m3/jeps/PROPOSALS.tsv) remains unchanged, with LANG-009 in `DRAFT_HOLD`.
+
+**Scope partition:** LANG-009 owns static receiver extension **lookup and binding**. Computed property expression semantics remain owned by [LANG-008 — Properties](../m3/jeps/proposals/M3JEP-LANG-008.md); extension-operator semantics by [LANG-001 — Operators](../m3/jeps/proposals/M3JEP-LANG-001.md); nullability and generic inference by [LANG-010](../m3/jeps/proposals/M3JEP-LANG-010.md) and [LANG-019](../m3/jeps/proposals/M3JEP-LANG-019.md). Delegated properties [LANG-025](../m3/jeps/proposals/M3JEP-LANG-025.md), DSL provider scopes [LANG-026](../m3/jeps/proposals/M3JEP-LANG-026.md), and protocol extensions [LANG-047](../m3/jeps/proposals/M3JEP-LANG-047.md) remain independently gated. The shared compiler/metadata owners are [CORE-008](../m3/jeps/proposals/M3JEP-CORE-008.md), [CORE-009](../m3/jeps/proposals/M3JEP-CORE-009.md), and [CORE-010](../m3/jeps/proposals/M3JEP-CORE-010.md). Cross-references **do not** grant implementation of another proposal.
 
 | Field | Value |
 | --- | --- |
-| Title | Statically resolved extension methods, properties, and operators |
+| Title | Statically resolved extension members (LANG-009 integration annex) |
 | Owner | M3JDK21, compiler/language feature |
 | Type | Feature |
-| Scope | M3JDK21 language, `jdk.compiler`, `java.base`, tooling |
-| Status | **Draft — not implemented or admitted into M3JDK21** |
-| JEP identifier | **Unassigned** (M3JDK-local draft, not an OpenJDK-approved JEP) |
+| Scope | M3JDK21 compiler bindings, shared design constraints (other JEP owners unchanged) |
+| Status | **Annex candidate — no target implementation or admission** |
+| Canonical ID | **M3JEP-LANG-009**, internal Draft / HOLD (not an OpenJDK JEP) |
 | Source compatibility | Java 21 unchanged by default |
 | Target release | Unscheduled; depends on M3JDK receiving-stage qualification |
 | Source baseline | `hsoliwal/M3jdk21@11e64e2cc0924d1e0940b3fbcf29b383097eaef7` |
@@ -131,6 +135,8 @@ Use a versioned compiler-visible declaration annotation and canonical, bounded, 
 Index identity depends on provider bytecode and metadata hashes, classpath/module path, module readability/exports, compiler version, feature flag, receiver/argument/target types, provider scope and inference context. Content equality is not proof of semantic equivalence. Preserve deterministic output across source-file ordering and worker schedules.
 
 ## Implementation architecture (existing target owners)
+
+These are **cross-proposal implementation prerequisites**, not a transfer of LANG-001/008 semantics to LANG-009. Each sibling proposal retains its own admission and tests.
 
 | Owner | Required change | Acceptance |
 | --- | --- | --- |
