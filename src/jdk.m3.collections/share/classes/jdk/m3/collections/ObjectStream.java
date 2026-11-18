@@ -32,6 +32,7 @@ import java.util.Spliterators;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
+import java.util.function.BiPredicate;
 import java.util.function.BinaryOperator;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -359,6 +360,235 @@ public final class ObjectStream<T> {
                 throw failure;
             }
         }, replayable);
+    }
+
+    /**
+     * Distinguish a genuinely missing zip-longest side from a present null value,
+     * without allocating Optional or tuple wrappers for every occurrence.
+     */
+    @FunctionalInterface
+    public interface ZipLongestMapper<L, R, O> {
+        O apply(boolean leftPresent, L left, boolean rightPresent, R right);
+    }
+
+    /** Kotlin mapNotNull / Rust filter_map: map once, retain non-null outputs. */
+    public <R> ObjectStream<R> mapNotNull(Function<? super T, ? extends R> mapper) {
+        Objects.requireNonNull(mapper, "mapper");
+        return new ObjectStream<>(
+                () -> stream().<R>mapMulti((value, emit) -> {
+                    R mapped = mapper.apply(value);
+                    if (mapped != null) emit.accept(mapped);
+                }), replayable);
+    }
+
+    /** Map into an Optional and emit present results without building a temporary List. */
+    public <R> ObjectStream<R> filterMap(
+            Function<? super T, ? extends Optional<? extends R>> mapper) {
+        Objects.requireNonNull(mapper, "mapper");
+        return new ObjectStream<>(() -> stream().<R>mapMulti((item, emit) -> {
+            Optional<? extends R> result = Objects.requireNonNull(
+                    mapper.apply(item), "mapper returned null Optional");
+            result.ifPresent(emit);
+        }), replayable);
+    }
+
+    /** Python zip_longest / Rust itertools zip_longest, with explicit presence bits. */
+    public <U, R> ObjectStream<R> zipLongest(ObjectStream<? extends U> other,
+            ZipLongestMapper<? super T, ? super U, ? extends R> mapper) {
+        Objects.requireNonNull(other, "other");
+        Objects.requireNonNull(mapper, "mapper");
+        return new ObjectStream<>(() -> {
+            Stream<T> first = stream();
+            Stream<? extends U> second = null;
+            try {
+                second = other.stream();
+                return ObjectStreamAdvancedKernels.zipLongest(first, second, mapper);
+            } catch (RuntimeException | Error failure) {
+                try { first.close(); }
+                catch (RuntimeException | Error closing) { failure.addSuppressed(closing); }
+                if (second != null) {
+                    try { second.close(); }
+                    catch (RuntimeException | Error closing) { failure.addSuppressed(closing); }
+                }
+                throw failure;
+            }
+        }, replayable && other.replayable());
+    }
+
+    /** Rust itertools interleave: alternate while possible, then drain the longer side. */
+    public ObjectStream<T> interleave(ObjectStream<? extends T> other) {
+        Objects.requireNonNull(other, "other");
+        return new ObjectStream<>(() -> {
+            Stream<T> first = stream();
+            Stream<? extends T> second = null;
+            try {
+                second = other.stream();
+                return ObjectStreamAdvancedKernels.interleave(first, second);
+            } catch (RuntimeException | Error failure) {
+                try { first.close(); }
+                catch (RuntimeException | Error closing) { failure.addSuppressed(closing); }
+                if (second != null) {
+                    try { second.close(); }
+                    catch (RuntimeException | Error closing) { failure.addSuppressed(closing); }
+                }
+                throw failure;
+            }
+        }, replayable && other.replayable());
+    }
+
+    /**
+     * Java 24 Gatherers.windowSliding-compatible short-source handling on Java 21:
+     * an input shorter than width yields one immutable partial window.
+     * Unlike window(width), normal inputs still emit full sliding windows only.
+     */
+    public ObjectStream<List<T>> windowSlidingPartial(int width) {
+        requireWidth(width);
+        return new ObjectStream<>(
+                () -> ObjectStreamAdvancedKernels.windowSlidingPartial(stream(), width), replayable);
+    }
+
+    /** Inclusive take-until: emit the first boundary match, then stop traversal. */
+    public ObjectStream<T> takeUntilInclusive(Predicate<? super T> boundary) {
+        Objects.requireNonNull(boundary, "boundary");
+        return new ObjectStream<>(
+                () -> ObjectStreamAdvancedKernels.takeUntilInclusive(stream(), boundary),
+                replayable);
+    }
+
+    /**
+     * Select the greatest k values in descending comparator order, preserving
+     * source order among equal values. Uses bounded object/ordinal heap arrays.
+     */
+    public ObjectStream<T> topKBy(int k, Comparator<? super T> comparator) {
+        requireNonNegative(k, "k");
+        if (k > MAX_STATEFUL_WIDTH) {
+            throw new IllegalArgumentException("topK state exceeds " + MAX_STATEFUL_WIDTH);
+        }
+        Objects.requireNonNull(comparator, "comparator");
+        return new ObjectStream<>(
+                () -> ObjectStreamAdvancedKernels.topK(stream(), k, comparator), replayable);
+    }
+
+    /** Indexed running fold with seed emitted first, including for an empty source. */
+    @FunctionalInterface
+    public interface IndexedFolder<A, I> {
+        A apply(long index, A state, I value);
+    }
+
+    /**
+     * Complete partition result with one read-only output list for each branch.
+     * Each element is transformed once for only its selected branch.
+     */
+    public record Partition<L, R>(List<L> left, List<R> right) { }
+
+    /** Null-sentinel alternative to the existing Optional-based mapWhile API. */
+    public <R> ObjectStream<R> mapWhileNullable(Function<? super T, ? extends R> mapper) {
+        Objects.requireNonNull(mapper, "mapper");
+        return new ObjectStream<>(
+                () -> ObjectStreamLoopKernels.mapWhile(stream(), mapper), replayable);
+    }
+
+    /** Rust step_by / Python islice step: select indices 0, stride, 2*stride, ... */
+    public ObjectStream<T> stepBy(int stride) {
+        if (stride < 1) throw new IllegalArgumentException("stride must be positive");
+        return new ObjectStream<>(() -> ObjectStreamLoopKernels.stepBy(stream(), stride), replayable);
+    }
+
+    /**
+     * Python heapq.merge style: merge two already-sorted inputs lazily.
+     * On comparator ties, occurrences from this source precede the other source.
+     */
+    public ObjectStream<T> mergeSorted(ObjectStream<? extends T> other,
+            Comparator<? super T> comparator) {
+        Objects.requireNonNull(other, "other");
+        Objects.requireNonNull(comparator, "comparator");
+        return new ObjectStream<>(() -> {
+            Stream<T> first = stream();
+            Stream<? extends T> second = null;
+            try {
+                second = other.stream();
+                return ObjectStreamLoopKernels.mergeSorted(first, second, comparator);
+            } catch (RuntimeException | Error failure) {
+                try { first.close(); }
+                catch (RuntimeException | Error closing) { failure.addSuppressed(closing); }
+                if (second != null) {
+                    try { second.close(); }
+                    catch (RuntimeException | Error closing) { failure.addSuppressed(closing); }
+                }
+                throw failure;
+            }
+        }, replayable && other.replayable());
+    }
+
+    /** Drop the final count values using a bounded lookahead ring, including nulls. */
+    public ObjectStream<T> dropLast(int count) {
+        requireNonNegative(count, "count");
+        if (count > MAX_STATEFUL_WIDTH) {
+            throw new IllegalArgumentException("dropLast count exceeds " + MAX_STATEFUL_WIDTH);
+        }
+        return new ObjectStream<>(() -> ObjectStreamLoopKernels.dropLast(stream(), count),
+                replayable);
+    }
+
+    /** Drain finite input and emit only its bounded trailing count values. */
+    public ObjectStream<T> takeLast(int count) {
+        requireNonNegative(count, "count");
+        if (count > MAX_STATEFUL_WIDTH) {
+            throw new IllegalArgumentException("takeLast count exceeds " + MAX_STATEFUL_WIDTH);
+        }
+        return new ObjectStream<>(() -> ObjectStreamLoopKernels.takeLast(stream(), count),
+                replayable);
+    }
+
+    /** Kotlin runningFoldIndexed: seed is the first emitted value, even on empty input. */
+    public <A> ObjectStream<A> runningFoldIndexed(Supplier<? extends A> initializer,
+            IndexedFolder<A, T> folder) {
+        Objects.requireNonNull(initializer, "initializer");
+        Objects.requireNonNull(folder, "folder");
+        return new ObjectStream<>(() -> ObjectStreamLoopKernels.runningFoldIndexed(
+                stream(), initializer, folder), replayable);
+    }
+
+    /**
+     * Rust itertools coalesce shape: merge compatible neighboring values in place.
+     * Compatibility checks the current accumulator against the next source value.
+     */
+    public ObjectStream<T> coalesceAdjacent(BiPredicate<? super T, ? super T> compatible,
+            BinaryOperator<T> merger) {
+        Objects.requireNonNull(compatible, "compatible");
+        Objects.requireNonNull(merger, "merger");
+        return new ObjectStream<>(() -> ObjectStreamLoopKernels.coalesceAdjacent(
+                stream(), compatible, merger), replayable);
+    }
+
+    /**
+     * Rust partition_map idiom without one Either object per occurrence.
+     * The predicate chooses the left result on true and right on false.
+     */
+    public <L, R> Partition<L, R> partitionMap(
+            Predicate<? super T> toLeft, Function<? super T, ? extends L> leftMapper,
+            Function<? super T, ? extends R> rightMapper, int maxElements) {
+        Objects.requireNonNull(toLeft, "toLeft");
+        Objects.requireNonNull(leftMapper, "leftMapper");
+        Objects.requireNonNull(rightMapper, "rightMapper");
+        requireNonNegative(maxElements, "maxElements");
+        ArrayList<L> left = new ArrayList<>();
+        ArrayList<R> right = new ArrayList<>();
+        try (Stream<T> input = stream()) {
+            Iterator<T> source = input.iterator();
+            int admitted = 0;
+            while (source.hasNext()) {
+                if (admitted >= maxElements) {
+                    throw new IllegalStateException("partitionMap element budget exceeded");
+                }
+                T item = source.next();
+                admitted++;
+                if (toLeft.test(item)) left.add(leftMapper.apply(item));
+                else right.add(rightMapper.apply(item));
+            }
+        }
+        return new Partition<>(Collections.unmodifiableList(left),
+                Collections.unmodifiableList(right));
     }
 
     public ObjectStream<T> peek(Consumer<? super T> observer) {
@@ -859,6 +1089,37 @@ public final class ObjectStream<T> {
                     states.put(key, initializer.get());
                 }
                 states.put(key, folder.apply(states.get(key), value));
+            }
+        }
+        return Collections.unmodifiableMap(states);
+    }
+
+    /**
+     * Scala-style groupMapReduce, with first-key iteration order and a hard
+     * distinct-key cap. Unlike groupBy-to-list, retains only one value per key.
+     * Null keys and nullable accumulator values remain distinguishable.
+     */
+    public <K, V> Map<K, V> groupMapReduce(
+            Function<? super T, ? extends K> keyExtractor, int maxKeys,
+            Function<? super T, ? extends V> valueMapper, BinaryOperator<V> reducer) {
+        Objects.requireNonNull(keyExtractor, "keyExtractor");
+        Objects.requireNonNull(valueMapper, "valueMapper");
+        Objects.requireNonNull(reducer, "reducer");
+        requireNonNegative(maxKeys, "maxKeys");
+        LinkedHashMap<K, V> states = new LinkedHashMap<>();
+        try (Stream<T> input = stream()) {
+            Iterator<T> source = input.iterator();
+            while (source.hasNext()) {
+                T item = source.next();
+                K key = keyExtractor.apply(item);
+                if (!states.containsKey(key)) {
+                    if (states.size() >= maxKeys) {
+                        throw new IllegalStateException("groupMapReduce key budget exceeded");
+                    }
+                    states.put(key, valueMapper.apply(item));
+                } else {
+                    states.put(key, reducer.apply(states.get(key), valueMapper.apply(item)));
+                }
             }
         }
         return Collections.unmodifiableMap(states);
