@@ -305,3 +305,18 @@ sources, documentation and target regression tests are received here.
 ## MOP SDK cross-repository agent read gate (2026-11-18)
 <!-- MOP-AGENT-2026-11-18-1 -->
 Before any source analysis, refactor, PR, merge, licensing decision, or history checkpoint, also read [AGENT.md](AGENT.md). It governs bidirectional atomization/patternization, documented contract-sealed atoms, additive best-of-best API supersets, complete available-history loss checks, dated last-verified proof, Apache-2.0 eligibility and upstream rights. Existing stronger project-specific and locked-canon constraints remain in force. Installation of this pointer does not establish that a source or historical audit has run.
+
+## M3 source as a documented semantic algebra (2026-11-18)
+
+Before any LLM-assisted change, read
+[`M3-MOP-SEMANTIC-ALGEBRA/1`](m3/docs/M3_SEMANTIC_ATOM_ALGEBRA_20261118.md).
+Descend repository -> file -> meaningful contract-bound atoms, recognize
+catalogued patterns, then recompose and verify affected parent boundaries.
+Use the canonical **Synexia-owned Maven/OpenRewrite recipe** and its recorded
+correction-memory/algorithm decisions; M3JDK21 receives only source,
+tests, accepted contracts and passive provenance/qualification receipts.
+File-local mutation is serial even when independent analyses fan out.
+Unknown patterns, missing evidence, native/JNI proof and unverified API
+changes remain HOLD, never silently PASS. Use the existing
+[`M3ImpactFrontier`](m3/tooling/atom-census/contract/M3_IMPACT_FRONTIER_V1.md)
+for read-only dependency impact planning; it grants no change authority.

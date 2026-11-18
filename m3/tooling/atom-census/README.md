@@ -66,3 +66,22 @@ Generated files:
 This leaf establishes complete file representation and exact source identity. It does not claim language-level atom
 coverage, licence closure, correctness coverage, performance proof or product admission. Language-specific atomizers
 must consume `FILES.tsv` family by family and add semantic atoms without removing the enclosing file container.
+
+## Incremental M3 semantic impact frontier (candidate receiver)
+
+`jdk.m3.tooling.atoms.contract.M3ImpactFrontier` consumes the existing
+validated `ATOMS.tsv` / `EVIDENCE.tsv` ledger plus explicit
+dependent-to-prerequisite edges. It expands changes through same-file atoms,
+then recursively through dependents, using array-backed reverse adjacency,
+file offsets and a bounded primitive queue. Cycles and edge permutations
+converge deterministically; missing references and unknown-pattern/proof
+findings remain explicit blockers.
+
+The output is a **read-only revalidation plan**, never a permission to mutate
+code or declare semantic/ABI equivalence. It can include Java-native
+declarations and JNI-export atoms but does not invoke JNI. See
+[the contract](contract/M3_IMPACT_FRONTIER_V1.md),
+[algorithm decisions](contract/IMPACT_ALGORITHM_CATALOG.tsv) and
+[the MOP algebra invariant](../../docs/M3_SEMANTIC_ATOM_ALGEBRA_20261118.md).
+Run `./verify-contract.sh` and the Maven/JUnit binding to qualify the
+exact source head.
