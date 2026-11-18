@@ -143,6 +143,9 @@ design, source SHA pins, commands, known restrictions and test evidence.
 | Existing M3DateTimeSmoke: bounds, immutable instant, zone and DST parse | LOCAL_PASS |
 | M3MonthViewCalendarSmoke: 42 cells, locale, bounds, 2000 month moves, action and date-time DST atomicity | LOCAL_PASS |
 | M3MonthViewHeadfulSmoke: JFrame/JPopupMenu mouse event, date commit, popup close/detach on Xvfb | XVFB_PASS |
+| Xvfb repeatability: 3 consecutive X11 headful runs after pre-initializing MouseEvent before EDT | 3_OF_3_PASS |
+| Public API javap: 19 baseline signatures retained; seven additive calendar methods | SOURCE_BINARY_SIGNATURE_PASS |
+| Direct JSpinner model value changes update popup without reentrant range clamping | HEADLESS_PASS |
 | Full Maven/JUnit & OpenJDK java.desktop reactor at exact branch head | NOT_RUN |
 | GUI pixel/event differentials on Win32, GTK, Cocoa and SwingX | NOT_RUN |
 | Accessibility screen-reader, RTL, and advanced Nebula CDateTime styles | NOT_RUN |
