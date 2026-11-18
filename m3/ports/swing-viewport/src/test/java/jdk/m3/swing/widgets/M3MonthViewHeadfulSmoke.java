@@ -16,6 +16,9 @@ public final class M3MonthViewHeadfulSmoke {
     private M3MonthViewHeadfulSmoke() { }
     public static void main(String[] args) throws Exception {
         if (java.awt.GraphicsEnvironment.isHeadless()) throw new AssertionError("headless environment");
+        // XToolkit may hold AWT_LOCK while awaiting MouseEvent class init.
+        // Initialize on main before dispatching the first graphical event.
+        MouseEvent.getMouseModifiersText(0);
         SwingUtilities.invokeAndWait(() -> {
             JFrame frame = new JFrame("Native CDateTime popup");
             try {
