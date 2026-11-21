@@ -1,0 +1,77 @@
+{
+  "schema": "M3JDK21_SYNEXIA_RECEIPT_ONLY_CLOSURE_V1",
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "receivedLicense": "Apache-2.0",
+  "evidenceOnly": true,
+  "claim": "Data-only review receipt linking this target candidate to its source-sealed Synexia recipe. It records execution evidence and pending gates; it does not authorize promotion, claim full-image acceptance, or add recipe/runtime code to M3JDK21.",
+  "canonicalSource": {
+    "repository": "hsoliwal/com.synexia",
+    "branch": "develop",
+    "pullRequest": 18909,
+    "pullRequestUrl": "https://github.com/hsoliwal/com.synexia/pull/18909",
+    "commit": "14810592154338f81e39fc06ec3f6e0b327dd849",
+    "base": "f61bb700b741b447b9f5e0f7ee1c0f9cc16d7c18",
+    "recipe": "com.synexia.m3.M3Jdk21RegexCodePointDp20261121",
+    "crate": "m3jdk21-regex-codepoint-dp-20261121",
+    "unitKind": "SOURCE_SEALED_RECIPE_CRATE",
+    "unitPath": "synexia-openrewrite-recipes/crates/m3jdk21-regex-codepoint-dp-20261121",
+    "unitTreeSha": "7efc3fe945ce22b9f4d5b83e0639a340163ac44a",
+    "recipeDefinition": "synexia-openrewrite-recipes/src/main/resources/META-INF/rewrite/m3jdk21-regex-codepoint-dp-20261121.yml",
+    "donorCatalog": "synexia-m3-recipe/donors/problem-catalog.json",
+    "license": "Apache-2.0 first-party",
+    "runtimeDependencyOnSynexia": false
+  },
+  "target": {
+    "repository": "hsoliwal/M3jdk21",
+    "base": "c71640c72cdab4850e205e22e717f98da53bacd8",
+    "branch": "m3/regex-codepoint-dp-20261121",
+    "owners": [
+      "M3StringRegexDp",
+      "M3StringRegexDpTest"
+    ],
+    "sourceLicense": "GPL-2.0-only WITH Classpath-exception-2.0; existing per-file headers preserved"
+  },
+  "targets": [
+    {
+      "path": "src/java.base/share/classes/java/lang/M3StringRegexDp.java",
+      "blobBefore": "36fff0e3686f803c2c19e9b22a7b006af1c83481",
+      "sha256Before": "194859c5447f2f5c467b7a894203e5d04486a6a552fa38e5778e5d7691b8dbeb",
+      "blobAfter": "56171d4f5ea7a19d35e5787e6cbb6ff3a624c2d6",
+      "sha256After": "3a27ef72d4ee9e1abedba1be37843b5ca9260b2953002b5e57f84b3399cd013a"
+    },
+    {
+      "path": "test/jdk/java/lang/String/M3StringRegexDpTest.java",
+      "blobBefore": "f8a08303ba20b57e19f11c2934c8cca55a544f91",
+      "sha256Before": "e2169a990e8befd4d469b6bc2375a43c866d0e7c6a8fb471a7b56400056907f5",
+      "blobAfter": "8f6266491eabc2162699e78509bfedb96315c010",
+      "sha256After": "05236a2f1fd79624e71737fba095626f12bcf413af0875c282c91d35c578d822"
+    }
+  ],
+  "semantics": {
+    "contract": "Restricted whole-string ASCII alphanumeric literal, dot and postfix-star matching remains unchanged; fallback handles canonical M3String UTF-16 code points including tuple-seam pairs and lone surrogate units; Pattern remains authoritative outside the grammar.",
+    "publicJdkReplacement": false,
+    "jniSourceOrSymbolChange": false,
+    "newRuntimeDependency": false,
+    "performanceClaim": false
+  },
+  "recipeExecution": {
+    "maven": "PASS",
+    "mavenTests": "4 passed; 0 failures; 0 errors; 0 skipped",
+    "mavenLogSha256": "9b5019a15bcf627bc463121822fea4d3384519cd3f5d5caa6fe2df8c1e4d22b1",
+    "recipeReplay": "exact original receiver preimages, exact postimages, input-order permutation, missing/drift/duplicate refusals, and no-change fixed point",
+    "crateEvidence": "synexia-openrewrite-recipes/crates/m3jdk21-regex-codepoint-dp-20261121/evidence"
+  },
+  "targetGates": {
+    "strictProductHelperCompile": "PASS",
+    "strictRegexTestCompile": "PASS; five source files",
+    "patchedSourceBuiltRuntime": "PASS; 726389 checks in both CompactStrings modes",
+    "adjacentRegexRuntime": "PASS; UTF16 86, effects 45, precompute required, hybrid contract 295833",
+    "fullBorrowReceiverChecker": "PASS; 32 families; 12 unit tests",
+    "fullJdkConfigureMake": "NOT_RUN",
+    "jtreg": "NOT_RUN",
+    "nativeJniIntegrationStress": "NOT_RUN",
+    "gcAndResourcePressureStress": "NOT_RUN",
+    "performanceAndRetainedMemory": "NOT_MEASURED"
+  },
+  "reviewStatus": "DRAFT_CANDIDATE; full receiver qualification remains pending"
+}
