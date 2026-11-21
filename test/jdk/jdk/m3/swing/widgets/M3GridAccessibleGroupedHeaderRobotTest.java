@@ -7,6 +7,8 @@
  */
 /* SPDX-License-Identifier: Apache-2.0 */
 import java.awt.EventQueue;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
 import java.awt.Point;
 import java.awt.Robot;
 import java.awt.event.InputEvent;
@@ -27,23 +29,35 @@ public final class M3GridAccessibleGroupedHeaderRobotTest {
     private static void check(boolean value, String label) {
         if (!value) throw new AssertionError(label);
     }
-    private static void key(Robot robot, int code) {
+    private static void key(Robot robot, int code) throws Exception {
         robot.keyPress(code);
         robot.keyRelease(code);
-        robot.waitForIdle();
+        awaitDispatch(robot);
     }
-    private static void alt(Robot robot, int code) {
+    private static void alt(Robot robot, int code) throws Exception {
         robot.keyPress(KeyEvent.VK_ALT);
         robot.keyPress(code);
         robot.keyRelease(code);
         robot.keyRelease(KeyEvent.VK_ALT);
-        robot.waitForIdle();
+        awaitDispatch(robot);
+    }
+    /** AWT native Robot.waitForIdle can stall in XToolkit.syncNativeQueue on Xvfb.
+     * Preserve real Robot key injection, then bound the Swing EDT dispatch
+     * fence without waiting indefinitely for native X11 queue quiescence.
+     */
+    private static void awaitDispatch(Robot robot) throws Exception {
+        robot.delay(120);
+        CountDownLatch fence = new CountDownLatch(1);
+        EventQueue.invokeLater(fence::countDown);
+        if (!fence.await(3, TimeUnit.SECONDS)) {
+            throw new AssertionError("Timed out waiting for the Swing EDT dispatch fence");
+        }
     }
     private static void exercise(Robot robot, M3Grid grid) throws Exception {
         var header = grid.getTableHeader();
         AtomicReference<Boolean> focus = new AtomicReference<>(false);
         SwingUtilities.invokeAndWait(() -> focus.set(header.requestFocusInWindow()));
-        robot.waitForIdle();
+        awaitDispatch(robot);
         check(header.isFocusOwner(), "header obtained native keyboard focus");
         alt(robot, KeyEvent.VK_HOME);
         alt(robot, KeyEvent.VK_RIGHT);
@@ -105,7 +119,7 @@ public final class M3GridAccessibleGroupedHeaderRobotTest {
             });
             Robot robot = new Robot();
             robot.setAutoDelay(80);
-            robot.waitForIdle();
+            awaitDispatch(robot);
             exercise(robot, gridRef.get());
             System.out.println("M3GridAccessibleGroupedHeaderRobotTest PASS");
         } finally {
