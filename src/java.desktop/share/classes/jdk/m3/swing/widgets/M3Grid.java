@@ -2185,11 +2185,25 @@ public final class M3Grid extends JTable {
                     return columnGroupCollapsed[group] ? "Expand" : "Collapse";
                 }
                 @Override public boolean doAccessibleAction(int i) {
-                    if (i != 0 || !actionable() || !PinnedHeader.this.isEnabled()) return false;
+                    if (i != 0) return false;
                     if (!SwingUtilities.isEventDispatchThread()) {
-                        SwingUtilities.invokeLater(() -> doAccessibleAction(0));
-                        return true;
+                        // Assistive technology often calls from a non-EDT thread.
+                        // Returning true merely because a task was queued lies when
+                        // a live JTable editor subsequently vetoes the mutation.
+                        // Perform both the state check and mutation on the EDT,
+                        // returning the *actual* outcome to the caller.
+                        final boolean[] success = new boolean[1];
+                        try {
+                            SwingUtilities.invokeAndWait(() -> success[0] = doAccessibleAction(0));
+                            return success[0];
+                        } catch (InterruptedException interrupted) {
+                            Thread.currentThread().interrupt();
+                            return false;
+                        } catch (java.lang.reflect.InvocationTargetException failed) {
+                            return false;
+                        }
                     }
+                    if (!actionable() || !PinnedHeader.this.isEnabled()) return false;
                     int group = columnGroupIndex(first);
                     if (group < 0 || columnGroupSummary[group] < 0) return false;
                     try {
