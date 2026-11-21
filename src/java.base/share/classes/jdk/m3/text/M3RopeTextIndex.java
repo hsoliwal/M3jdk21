@@ -226,15 +226,16 @@ public final class M3RopeTextIndex {
 
         char[] units = plan.units;
         int[] failure = plan.failure;
-        long base = 0;
+        // Seek through the authoritative 16-way prefix tree in O(log16(s))
+        // instead of walking all earlier leaves for every late-start query.
+        long coordinate = leafCoordinate(from);
+        int firstLeaf = (int) (coordinate >>> Integer.SIZE);
+        int firstOffset = (int) coordinate;
+        long base = from - firstOffset;
         int matched = 0;
-        for (M3StringPiece leaf : leaves) {
-            long next = base + leaf.length();
-            if (next <= from) {
-                base = next;
-                continue;
-            }
-            int start = (int) Math.max(0, from - base);
+        for (int leafIndex = firstLeaf; leafIndex < leaves.length; leafIndex++) {
+            M3StringPiece leaf = leaves[leafIndex];
+            int start = leafIndex == firstLeaf ? firstOffset : 0;
             for (int i = start; i < leaf.length(); i++) {
                 char current = leaf.charAt(i);
                 while (matched > 0 && current != units[matched]) {
@@ -243,7 +244,7 @@ public final class M3RopeTextIndex {
                 if (current == units[matched]) matched++;
                 if (matched == length) return base + i + 1 - length;
             }
-            base = next;
+            base += leaf.length();
         }
         return -1;
     }
@@ -271,15 +272,14 @@ public final class M3RopeTextIndex {
             if (current == literal.charAt(j)) j++;
             failure[i] = j;
         }
-        long base = 0;
+        long coordinate = leafCoordinate(from);
+        int firstLeaf = (int) (coordinate >>> Integer.SIZE);
+        int firstOffset = (int) coordinate;
+        long base = from - firstOffset;
         int matched = 0;
-        for (M3StringPiece leaf : leaves) {
-            long next = base + leaf.length(); // bounded by validated utf16Count
-            if (next <= from) {
-                base = next;
-                continue;
-            }
-            int start = (int) Math.max(0, from - base);
+        for (int leafIndex = firstLeaf; leafIndex < leaves.length; leafIndex++) {
+            M3StringPiece leaf = leaves[leafIndex];
+            int start = leafIndex == firstLeaf ? firstOffset : 0;
             for (int i = start; i < leaf.length(); i++) {
                 char current = leaf.charAt(i);
                 while (matched > 0 && current != literal.charAt(matched)) {
@@ -288,9 +288,36 @@ public final class M3RopeTextIndex {
                 if (current == literal.charAt(matched)) matched++;
                 if (matched == m) return base + i + 1 - m;
             }
-            base = next;
+            base += leaf.length();
         }
         return -1;
+    }
+
+    /**
+     * Locate an existing immutable leaf from a validated long UTF-16 offset.
+     * The high 32 bits identify the source leaf and the low 32 bits its local
+     * code-unit offset. No object, prefix directory or character buffer is
+     * allocated. Call only when 0 <= position < utf16Count.
+     */
+    private long leafCoordinate(long position) {
+        int node = root;
+        long local = position;
+        while ((stateMask[node] & BRANCH_MASK) != 0) {
+            int child = firstChild[node];
+            int end = child + childCount[node];
+            for (; child < end; child++) {
+                long width = subtreeUtf16[child];
+                if (local < width) break;
+                local -= width;
+            }
+            if (child == end) throw new AssertionError("corrupt rope subtree spans");
+            node = child;
+        }
+        if ((stateMask[node] & LEAF_MASK) == 0 || node >= leaves.length
+                || local < 0 || local >= subtreeUtf16[node]) {
+            throw new AssertionError("corrupt rope leaf coordinate");
+        }
+        return ((long) node << Integer.SIZE) | (local & 0xffff_ffffL);
     }
 
     private void checkRange(long from, long to) {
