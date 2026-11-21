@@ -25,10 +25,13 @@
  */
 package java.util.stream;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.Enumeration;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
@@ -442,6 +445,166 @@ public final class Streams {
         Spliterator<T> merged = new SortedMergeSpliterator<>(
                 first.sequential().spliterator(), second.sequential().spliterator(), comparator);
         return StreamSupport.stream(merged, false).onClose(composedClose(first, second));
+    }
+
+
+    /**
+     * Lazily zip two equally long streams. Unlike {@link #zip(Stream, Stream, BiFunction)},
+     * a full traversal throws {@code IllegalArgumentException} if either input has
+     * unmatched elements. A short-circuited traversal checks only the prefix it
+     * demands and need not detect a length mismatch beyond that prefix.
+     *
+     * <p>Both input spliterators are acquired at construction but no elements
+     * are traversed until requested. Each is forced to sequential mode; the
+     * result cannot split even after a later {@code parallel()} request. No
+     * element or mapper result is rejected merely for being null. Since
+     * traversal must validate input lengths, the result does not claim SIZED,
+     * even when both input sources claim an exact size.
+     *
+     * <p>Closing the returned stream closes both inputs, including when the
+     * first close fails (the second failure is then suppressed). Exhaustion
+     * alone does not close them. Inputs must be distinct, open and unused and
+     * must not be operated on separately after this call. Input/callback
+     * exceptions propagate unchanged.
+     *
+     * @param first the left input
+     * @param second the right input
+     * @param zipper the pair mapping function
+     * @param <A> the left element type
+     * @param <B> the right element type
+     * @param <R> the result element type
+     * @return a lazy strictly paired stream
+     * @throws NullPointerException if an argument is null
+     * @throws IllegalArgumentException if the streams are identical or traversal finds unequal lengths
+     * @since 21
+     */
+    public static <A, B, R> Stream<R> zipStrict(Stream<? extends A> first,
+            Stream<? extends B> second, BiFunction<? super A, ? super B, ? extends R> zipper) {
+        Objects.requireNonNull(first, "first");
+        Objects.requireNonNull(second, "second");
+        Objects.requireNonNull(zipper, "zipper");
+        if (first == second) throw new IllegalArgumentException("distinct streams required");
+        Spliterator<? extends A> left = first.sequential().spliterator();
+        Spliterator<? extends B> right = second.sequential().spliterator();
+        Spliterator<R> pairs = new Spliterator<>() {
+            private final Iterator<? extends A> a = Spliterators.iterator(left);
+            private final Iterator<? extends B> b = Spliterators.iterator(right);
+            private boolean finished;
+
+            @Override public boolean tryAdvance(Consumer<? super R> action) {
+                Objects.requireNonNull(action, "action");
+                if (finished) return false;
+                boolean hasLeft = a.hasNext();
+                boolean hasRight = b.hasNext();
+                if (hasLeft != hasRight) {
+                    finished = true;
+                    throw new IllegalArgumentException("zipStrict input lengths differ");
+                }
+                if (!hasLeft) { finished = true; return false; }
+                action.accept(zipper.apply(a.next(), b.next()));
+                return true;
+            }
+
+            @Override public Spliterator<R> trySplit() { return null; }
+            @Override public long estimateSize() { return finished ? 0 : Long.MAX_VALUE; }
+            @Override public int characteristics() {
+                return left.characteristics() & right.characteristics() & Spliterator.ORDERED;
+            }
+        };
+        return StreamSupport.stream(pairs, false).onClose(composedClose(first, second));
+    }
+
+    /**
+     * Group consecutive elements having equal extracted keys, not all
+     * elements with the same key across the entire stream. Each emitted run
+     * is an independent unmodifiable List, including null occurrences. Keys
+     * are compared by {@link Objects#equals(Object, Object)}, and null keys
+     * are permitted.
+     *
+     * <p>The operation is lazy, sequential and unsplittable, retaining at most
+     * {@code maxRunLength} values plus one element of lookahead. A new group
+     * may be discovered by reading one element beyond the emitted group;
+     * its key extractor is not called again. A run exceeding its explicit
+     * budget fails before the extra element is stored. The accepted width
+     * is 1 to 65,536 inclusive, consistent with M3 bounded grouping.
+     *
+     * <p>The result is ordered only if its source has encounter order. Closing
+     * the result closes its input; exhaustion alone does not. The source must
+     * not be used separately after this call. Neither group identities nor
+     * keys are retained in a global map.
+     *
+     * @param source the input stream
+     * @param keyExtractor maps each value to its grouping key
+     * @param maxRunLength maximum retained elements in one run
+     * @param <T> the element type
+     * @param <K> the key type
+     * @return a lazy stream of adjacent immutable groups
+     * @throws NullPointerException if an argument is null
+     * @throws IllegalArgumentException if maxRunLength is outside 1..65,536
+     * @throws IllegalStateException if an adjacent group exceeds maxRunLength
+     * @since 21
+     */
+    public static <T, K> Stream<List<T>> groupAdjacent(Stream<? extends T> source,
+            Function<? super T, ? extends K> keyExtractor, int maxRunLength) {
+        Objects.requireNonNull(source, "source");
+        Objects.requireNonNull(keyExtractor, "keyExtractor");
+        if (maxRunLength < 1 || maxRunLength > 65_536) {
+            throw new IllegalArgumentException("maxRunLength must be in [1,65536]");
+        }
+        Spliterator<? extends T> input = source.sequential().spliterator();
+        Spliterator<List<T>> runs = new Spliterator<>() {
+            private final Iterator<? extends T> values = Spliterators.iterator(input);
+            private boolean finished;
+            private boolean pending;
+            private T pendingValue;
+            private K pendingKey;
+
+            @Override public boolean tryAdvance(Consumer<? super List<T>> action) {
+                Objects.requireNonNull(action, "action");
+                if (finished) return false;
+                if (!pending && !values.hasNext()) { finished = true; return false; }
+                T first;
+                K key;
+                if (pending) {
+                    first = pendingValue;
+                    key = pendingKey;
+                    pending = false;
+                    pendingValue = null;
+                    pendingKey = null;
+                } else {
+                    first = values.next();
+                    key = keyExtractor.apply(first);
+                }
+                ArrayList<T> run = new ArrayList<>();
+                run.add(first);
+                while (values.hasNext()) {
+                    T next = values.next();
+                    K nextKey = keyExtractor.apply(next);
+                    if (!Objects.equals(key, nextKey)) {
+                        pendingValue = next;
+                        pendingKey = nextKey;
+                        pending = true;
+                        break;
+                    }
+                    if (run.size() >= maxRunLength) {
+                        finished = true;
+                        pendingValue = null;
+                        pendingKey = null;
+                        throw new IllegalStateException("adjacent run budget exceeded");
+                    }
+                    run.add(next);
+                }
+                action.accept(Collections.unmodifiableList(run));
+                return true;
+            }
+
+            @Override public Spliterator<List<T>> trySplit() { return null; }
+            @Override public long estimateSize() { return finished ? 0 : Long.MAX_VALUE; }
+            @Override public int characteristics() {
+                return (input.characteristics() & Spliterator.ORDERED) | Spliterator.NONNULL;
+            }
+        };
+        return StreamSupport.stream(runs, false).onClose(source::close);
     }
 
     private static <T> Stream<T> combinatorStream(BaseStream<?, ?> source,
