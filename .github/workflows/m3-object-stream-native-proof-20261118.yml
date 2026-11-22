@@ -189,10 +189,10 @@ jobs:
           set -euo pipefail
           export JAVA_HOME="$M3_JAVA_HOME"
           export PATH="$JAVA_HOME/bin:$PATH"
-          java --list-modules | grep '^jdk.m3.collections@'
+          java --list-modules | grep -E '^jdk[.]m3[.]collections(@|$)'
           "$M3_JAVA_HOME/bin/jlink" --module-path "$M3_JAVA_HOME/jmods" \
             --add-modules jdk.m3.collections --output "$RUNNER_TEMP/m3-object-stream-jlink"
-          "$RUNNER_TEMP/m3-object-stream-jlink/bin/java" --list-modules | grep '^jdk.m3.collections@'
+          "$RUNNER_TEMP/m3-object-stream-jlink/bin/java" --list-modules | grep -E '^jdk[.]m3[.]collections(@|$)'
       - name: Compile and run collate on built and linked M3 images
         run: |
           set -euo pipefail
