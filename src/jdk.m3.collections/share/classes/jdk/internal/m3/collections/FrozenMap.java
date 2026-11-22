@@ -25,8 +25,10 @@ import jdk.m3.collections.ObjectIntHashMap;
  * Immutable encounter-ordered object map over private key/value lanes.
  *
  * <p>The existing object-to-int owner indexes keys to immutable ordinals.
- * Construction rejects null keys/values and duplicate equal keys, even for a
- * source map with identity semantics. Null queries find no mapping. Facades
+ * {@link #copyOf(Map)} rejects null keys/values and duplicate equal keys, even
+ * for a source map with identity semantics. Its null queries find no mapping.
+ * {@link #copyOfNullableLanes(Object[], Object[], int)} instead snapshots
+ * encounter-ordered lanes that may contain null keys and values. Facades
  * preserve the source encounter order and reject every mutator; entries are
  * fresh immutable projections created only when an entry is requested.
  *
@@ -44,14 +46,21 @@ public final class FrozenMap<K, V> {
     private final ObjectIntHashMap<Object> ordinals;
     private final long[] stateMaskWords;
     private final int size;
+    private final boolean nullable;
 
     public FrozenMap() { this(EMPTY, EMPTY, new ObjectIntHashMap<>(0)); }
 
     private FrozenMap(Object[] keys, Object[] values, ObjectIntHashMap<Object> index) {
+        this(keys, values, index, false);
+    }
+
+    private FrozenMap(Object[] keys, Object[] values, ObjectIntHashMap<Object> index,
+            boolean nullable) {
         keyLane = keys;
         valueLane = values;
         ordinals = index;
         size = keys.length;
+        this.nullable = nullable;
         int tail = size & 63;
         stateMaskWords = new long[(size >>> 6) + (tail == 0 ? 0 : 1)];
         Arrays.fill(stateMaskWords, -1L);
@@ -105,12 +114,57 @@ public final class FrozenMap<K, V> {
                 count == values.length ? values : Arrays.copyOf(values, count), index);
     }
 
+    /**
+     * Snapshot the first {@code size} entries of parallel key/value lanes.
+     * Null keys and values are preserved; duplicate Java-equal keys, including
+     * a second null key, are rejected. Encounter order is the lane order.
+     * Both bounds are checked and both lanes are copied before any key hash or
+     * equality callback. Later edits to the supplied arrays cannot change the
+     * result. Key objects retain the ordinary stable equality/hash contract.
+     *
+     * <p>This additive nullable factory preserves the strict null rejection and
+     * callback schedule of {@link #copyOf(Map)}. Storage remains two private
+     * Object[] lanes and the existing primitive ordinal directory; entries are
+     * immutable projections only when requested.</p>
+     *
+     * @param keys keys in encounter order
+     * @param values aligned mapped values
+     * @param size number of entries to snapshot
+     * @param <K> key type
+     * @param <V> mapped value type
+     * @return an immutable nullable map owner
+     * @throws NullPointerException if either lane is null
+     * @throws IndexOutOfBoundsException if size is negative or exceeds either lane
+     * @throws IllegalArgumentException if two keys are Java-equal
+     */
+    public static <K, V> FrozenMap<K, V> copyOfNullableLanes(
+            Object[] keys, Object[] values, int size) {
+        Objects.requireNonNull(keys, "keys");
+        Objects.requireNonNull(values, "values");
+        Objects.checkFromIndexSize(0, size, keys.length);
+        Objects.checkFromIndexSize(0, size, values.length);
+        Object[] keySnapshot = Arrays.copyOf(keys, size);
+        Object[] valueSnapshot = Arrays.copyOf(values, size);
+        ObjectIntHashMap<Object> index = new ObjectIntHashMap<>(0);
+        for (int ordinal = 0; ordinal < size; ordinal++) {
+            Object key = keySnapshot[ordinal];
+            if (index.getOrDefault(key, -1) >= 0) {
+                throw new IllegalArgumentException("duplicate equal key");
+            }
+            index.put(key, ordinal);
+        }
+        return new FrozenMap<>(keySnapshot, valueSnapshot, index, true);
+    }
+
     public int size() { return size; }
     public boolean isEmpty() { return size == 0; }
-    private int ordinal(Object key) { return key == null ? -1 : ordinals.getOrDefault(key, -1); }
+    private int ordinal(Object key) { return key == null && !nullable ? -1 : ordinals.getOrDefault(key, -1); }
     public boolean containsKey(Object key) { return ordinal(key) >= 0; }
 
     public boolean containsValue(Object value) {
+        if (value == null && nullable) {
+            for (Object element : valueLane) if (element == null) return true;
+        }
         if (value == null) return false;
         for (Object element : valueLane) if (value.equals(element)) return true;
         return false;
@@ -179,7 +233,8 @@ public final class FrozenMap<K, V> {
                     }
                     @Override public Spliterator<K> spliterator() {
                         return Spliterators.spliterator(iterator(), size,
-                                Spliterator.ORDERED | Spliterator.DISTINCT | Spliterator.IMMUTABLE | Spliterator.NONNULL);
+                                Spliterator.ORDERED | Spliterator.DISTINCT | Spliterator.IMMUTABLE
+                                        | (nullable ? 0 : Spliterator.NONNULL));
                     }
                 });
             }
@@ -199,7 +254,8 @@ public final class FrozenMap<K, V> {
                     }
                     @Override public Spliterator<V> spliterator() {
                         return Spliterators.spliterator(iterator(), size,
-                                Spliterator.ORDERED | Spliterator.IMMUTABLE | Spliterator.NONNULL);
+                                Spliterator.ORDERED | Spliterator.IMMUTABLE
+                                        | (nullable ? 0 : Spliterator.NONNULL));
                     }
                 });
             }

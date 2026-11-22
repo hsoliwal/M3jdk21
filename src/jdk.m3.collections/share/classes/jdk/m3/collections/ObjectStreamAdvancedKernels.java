@@ -3,24 +3,38 @@
 package jdk.m3.collections;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Spliterator;
 import java.util.Spliterators;
 import java.util.function.Consumer;
+import java.util.function.BiFunction;
+import java.util.function.Function;
 import java.util.function.Predicate;
+import java.util.function.Supplier;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
+import jdk.internal.m3.collections.FrozenMap;
 
 /**
  * Reusable one-pass kernels for common cross-language collection idioms.
  * State is confined to a newly opened traversal; object references stay in
  * arrays, with primitive ordinals for stable top-K selection.
+ * Bounded keyed compositions share the existing primitive ordinal directory
+ * and stable heap; grouped occurrence order is represented by CSR int lanes.
  */
 final class ObjectStreamAdvancedKernels {
+    static final int INNER_JOIN = 0;
+    static final int LEFT_JOIN = 1;
+    static final int SEMI_JOIN = 2;
+    static final int ANTI_JOIN = 3;
+
     private ObjectStreamAdvancedKernels() { }
 
     private static <R> Stream<R> wrap(Stream<?> first, Stream<?> second,
@@ -231,5 +245,310 @@ final class ObjectStreamAdvancedKernels {
         long ordinal = ordinals[left];
         ordinals[left] = ordinals[right];
         ordinals[right] = ordinal;
+    }
+
+    /**
+     * A bounded source snapshot and its stable per-key occurrence projection.
+     * There is one instance per input, not one holder per key or occurrence.
+     */
+    private static final class KeyedRows<T, K> {
+        final Object[] values;
+        final Object[] keys;
+        final int[] keyOrdinals;
+        final int[] offsets;
+        final int[] rows;
+        final ObjectIntHashMap<K> directory;
+
+        KeyedRows(Object[] values, Object[] keys, int[] keyOrdinals,
+                int[] offsets, int[] rows, ObjectIntHashMap<K> directory) {
+            this.values = values;
+            this.keys = keys;
+            this.keyOrdinals = keyOrdinals;
+            this.offsets = offsets;
+            this.rows = rows;
+            this.directory = directory;
+        }
+
+        @SuppressWarnings("unchecked")
+        T valueAt(int row) { return (T) values[row]; }
+
+        @SuppressWarnings("unchecked")
+        K keyAt(int ordinal) { return (K) keys[ordinal]; }
+    }
+
+    /** Capture once, then stable-scatter source ordinals into contiguous key ranges. */
+    private static <T, K> KeyedRows<T, K> keyedRows(Stream<? extends T> input,
+            Function<? super T, ? extends K> keyExtractor,
+            int maxElements, int maxKeys) {
+        Object[] values = new Object[0];
+        Object[] keys = new Object[0];
+        int[] keyOrdinals = new int[0];
+        int[] counts = new int[0];
+        ObjectIntHashMap<K> directory = new ObjectIntHashMap<>(0);
+        int size = 0;
+        int keyCount = 0;
+        Iterator<? extends T> source = input.iterator();
+        while (source.hasNext()) {
+            if (size == maxElements) throw new IllegalStateException("input exceeds maxElements");
+            T value = source.next();
+            K key = keyExtractor.apply(value);
+            int ordinal = directory.getOrDefault(key, -1);
+            if (ordinal < 0) {
+                if (keyCount == maxKeys) throw new IllegalStateException("keys exceed maxKeys");
+                if (keyCount == keys.length) {
+                    int capacity = grownCapacity(keys.length, keyCount + 1, maxKeys);
+                    Object[] grownKeys = Arrays.copyOf(keys, capacity);
+                    int[] grownCounts = Arrays.copyOf(counts, capacity);
+                    keys = grownKeys;
+                    counts = grownCounts;
+                }
+                ordinal = keyCount;
+                directory.put(key, ordinal);
+                keys[keyCount++] = key;
+            }
+            if (size == values.length) {
+                int capacity = grownCapacity(values.length, size + 1, maxElements);
+                Object[] grownValues = Arrays.copyOf(values, capacity);
+                int[] grownOrdinals = Arrays.copyOf(keyOrdinals, capacity);
+                values = grownValues;
+                keyOrdinals = grownOrdinals;
+            }
+            values[size] = value;
+            keyOrdinals[size] = ordinal;
+            counts[ordinal]++;
+            size++;
+        }
+        int[] offsets = new int[Math.addExact(keyCount, 1)];
+        for (int key = 0; key < keyCount; key++) {
+            offsets[key + 1] = Math.addExact(offsets[key], counts[key]);
+        }
+        int[] rows = new int[size];
+        int[] positions = Arrays.copyOf(offsets, keyCount);
+        for (int row = 0; row < size; row++) rows[positions[keyOrdinals[row]]++] = row;
+        return new KeyedRows<>(Arrays.copyOf(values, size), Arrays.copyOf(keys, keyCount),
+                Arrays.copyOf(keyOrdinals, size), offsets, rows, directory);
+    }
+
+    private static int grownCapacity(int current, int needed, int maximum) {
+        long grown = current == 0 ? 8L : (long) current + (current >>> 1) + 1;
+        return (int) Math.min(maximum, Math.max(needed, grown));
+    }
+
+    /**
+     * Defer preparation until demand, close inputs before projection, and keep
+     * traversal unsplittable even if a caller requests a parallel stream.
+     */
+    private static <R> Stream<R> deferred(Stream<?> first, Stream<?> second,
+            Supplier<Stream<R>> prepare) {
+        final class Deferred extends Spliterators.AbstractSpliterator<R> {
+            private Stream<R> evaluated;
+            private Spliterator<R> output;
+            private boolean initialized;
+            private boolean inputsClosed;
+            private boolean closed;
+
+            Deferred() { super(Long.MAX_VALUE, Spliterator.ORDERED); }
+
+            private void initialize() {
+                initialized = true;
+                try {
+                    try (first; second) {
+                        evaluated = Objects.requireNonNull(prepare.get(), "prepared stream");
+                    } finally {
+                        inputsClosed = true;
+                    }
+                    output = evaluated.spliterator();
+                } catch (RuntimeException | Error failure) {
+                    closed = true;
+                    Stream<R> failed = evaluated;
+                    evaluated = null;
+                    output = null;
+                    if (failed != null) {
+                        try { failed.close(); }
+                        catch (RuntimeException | Error closing) {
+                            if (closing != failure) failure.addSuppressed(closing);
+                        }
+                    }
+                    throw failure;
+                }
+            }
+
+            @Override public boolean tryAdvance(Consumer<? super R> action) {
+                Objects.requireNonNull(action, "action");
+                if (closed) return false;
+                if (!initialized) initialize();
+                return output.tryAdvance(action);
+            }
+
+            @Override public Spliterator<R> trySplit() { return null; }
+
+            void close() {
+                if (closed) return;
+                closed = true;
+                Stream<R> result = evaluated;
+                evaluated = null;
+                output = null;
+                if (inputsClosed) {
+                    if (result != null) result.close();
+                } else {
+                    inputsClosed = true;
+                    try (first; second; result) { /* all owned traversals */ }
+                }
+            }
+        }
+        Deferred output = new Deferred();
+        return StreamSupport.stream(output, false).onClose(output::close);
+    }
+
+    /** Equality lookup and complete multiplicity preflight precede projection. */
+    static <L, R, K, O> Stream<O> joinByKey(
+            Stream<? extends L> left, Stream<? extends R> right,
+            Function<? super L, ? extends K> leftKey,
+            Function<? super R, ? extends K> rightKey,
+            ObjectStream.LeftJoinMapper<? super L, ? super R, ? extends O> mapper,
+            int kind, int maxLeftElements, int maxRightElements,
+            int maxLeftKeys, int maxRightKeys, int maxResults) {
+        return deferred(left, right, () -> {
+            KeyedRows<L, K> a = keyedRows(left, leftKey, maxLeftElements, maxLeftKeys);
+            KeyedRows<R, K> b = keyedRows(right, rightKey, maxRightElements, maxRightKeys);
+            int[] matching = new int[a.keys.length];
+            long cardinality = 0;
+            for (int key = 0; key < a.keys.length; key++) {
+                int match = b.directory.getOrDefault(a.keyAt(key), -1);
+                matching[key] = match;
+                int leftCount = a.offsets[key + 1] - a.offsets[key];
+                int rightCount = match < 0 ? 0 : b.offsets[match + 1] - b.offsets[match];
+                long added = switch (kind) {
+                    case INNER_JOIN -> Math.multiplyExact((long) leftCount, rightCount);
+                    case LEFT_JOIN -> Math.multiplyExact((long) leftCount, Math.max(1, rightCount));
+                    case SEMI_JOIN -> rightCount == 0 ? 0 : leftCount;
+                    case ANTI_JOIN -> rightCount == 0 ? leftCount : 0;
+                    default -> throw new AssertionError("unknown join kind");
+                };
+                cardinality = Math.addExact(cardinality, added);
+                if (cardinality > maxResults) throw new IllegalStateException("join exceeds maxResults");
+            }
+            Spliterator<O> output = new Spliterators.AbstractSpliterator<>(
+                    cardinality, Spliterator.ORDERED) {
+                private int nextLeft;
+                private int activeLeft = -1;
+                private int nextRight;
+                private int rightEnd;
+
+                @Override public boolean tryAdvance(Consumer<? super O> action) {
+                    Objects.requireNonNull(action, "action");
+                    while (true) {
+                        if (activeLeft >= 0 && nextRight < rightEnd) {
+                            L value = a.valueAt(activeLeft);
+                            R paired = b.valueAt(b.rows[nextRight++]);
+                            if (nextRight == rightEnd) activeLeft = -1;
+                            action.accept(mapper.apply(value, true, paired));
+                            return true;
+                        }
+                        if (nextLeft == a.values.length) return false;
+                        int row = nextLeft++;
+                        int match = matching[a.keyOrdinals[row]];
+                        if (kind == SEMI_JOIN) {
+                            if (match < 0) continue;
+                            action.accept(mapper.apply(a.valueAt(row), true, null));
+                            return true;
+                        }
+                        if (kind == ANTI_JOIN) {
+                            if (match >= 0) continue;
+                            action.accept(mapper.apply(a.valueAt(row), false, null));
+                            return true;
+                        }
+                        if (match < 0) {
+                            if (kind == INNER_JOIN) continue;
+                            action.accept(mapper.apply(a.valueAt(row), false, null));
+                            return true;
+                        }
+                        activeLeft = row;
+                        nextRight = b.offsets[match];
+                        rightEnd = b.offsets[match + 1];
+                    }
+                }
+
+                @Override public Spliterator<O> trySplit() { return null; }
+            };
+            return StreamSupport.stream(output, false);
+        });
+    }
+
+    private static <T> List<T> window(KeyedRows<T, ?> source, int from, int to) {
+        ArrayList<T> values = new ArrayList<>(to - from);
+        for (int at = from; at < to; at++) values.add(source.valueAt(source.rows[at]));
+        return Collections.unmodifiableList(values);
+    }
+
+    /** Count chunks are grouped results, independently of centered mapping windows. */
+    static <T, K> Map<K, List<List<T>>> countWindowsByKey(Stream<T> input,
+            Function<? super T, ? extends K> keyExtractor, int width,
+            ObjectStream.TailPolicy tailPolicy, int maxElements, int maxKeys) {
+        KeyedRows<T, K> source;
+        try (input) { source = keyedRows(input, keyExtractor, maxElements, maxKeys); }
+        Object[] results = new Object[source.keys.length];
+        for (int key = 0; key < source.keys.length; key++) {
+            int end = source.offsets[key + 1];
+            ArrayList<List<T>> chunks = new ArrayList<>();
+            for (int at = source.offsets[key]; at < end;) {
+                int length = Math.min(width, end - at);
+                if (length < width && tailPolicy == ObjectStream.TailPolicy.DROP) break;
+                chunks.add(window(source, at, at + length));
+                at += length;
+            }
+            results[key] = Collections.unmodifiableList(chunks);
+        }
+        return FrozenMap.<K, List<List<T>>>copyOfNullableLanes(
+                source.keys, results, source.keys.length).asMap();
+    }
+
+    /** Invert the stable CSR positions once so results follow original source order. */
+    static <T, K, R> Stream<R> mapWindowsByKey(Stream<T> input,
+            Function<? super T, ? extends K> keyExtractor, int before, int after,
+            BiFunction<? super T, ? super List<T>, ? extends R> mapper,
+            int maxElements, int maxKeys) {
+        return deferred(input, null, () -> {
+            KeyedRows<T, K> source = keyedRows(input, keyExtractor, maxElements, maxKeys);
+            int[] positions = new int[source.values.length];
+            for (int at = 0; at < source.rows.length; at++) positions[source.rows[at]] = at;
+            Spliterator<R> output = new Spliterators.AbstractSpliterator<>(
+                    source.values.length, Spliterator.ORDERED) {
+                private int next;
+                @Override public boolean tryAdvance(Consumer<? super R> action) {
+                    Objects.requireNonNull(action, "action");
+                    if (next == source.values.length) return false;
+                    int row = next++;
+                    int key = source.keyOrdinals[row];
+                    int center = positions[row];
+                    int from = Math.max(source.offsets[key], center - before);
+                    int to = center + Math.min(after + 1, source.offsets[key + 1] - center);
+                    List<T> values = window(source, from, to);
+                    action.accept(mapper.apply(source.valueAt(row), values));
+                    return true;
+                }
+                @Override public Spliterator<R> trySplit() { return null; }
+            };
+            return StreamSupport.stream(output, false);
+        });
+    }
+
+    /** Reuse the unchanged stable heap on each bounded CSR group; never sort all input. */
+    static <T, K> Map<K, List<T>> topKByKey(Stream<T> input,
+            Function<? super T, ? extends K> keyExtractor, int k,
+            Comparator<? super T> comparator, int maxElements, int maxKeys) {
+        KeyedRows<T, K> source;
+        try (input) { source = keyedRows(input, keyExtractor, maxElements, maxKeys); }
+        Object[] results = new Object[source.keys.length];
+        for (int key = 0; key < source.keys.length; key++) {
+            int begin = source.offsets[key];
+            int end = source.offsets[key + 1];
+            Stream<T> group = IntStream.range(begin, end).mapToObj(at -> source.valueAt(source.rows[at]));
+            try (Stream<T> selected = topK(group, Math.min(k, end - begin), comparator)) {
+                results[key] = selected.toList();
+            }
+        }
+        return FrozenMap.<K, List<T>>copyOfNullableLanes(
+                source.keys, results, source.keys.length).asMap();
     }
 }
