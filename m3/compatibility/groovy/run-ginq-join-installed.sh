@@ -24,9 +24,19 @@ fi
 repo="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../.." && pwd)"
 test="$repo/test/jdk/jdk/m3/collections/GinqHashJoinTest.java"
 if [[ ! -f "$test" ]]; then echo "missing owning jtreg source: $test" >&2; exit 68; fi
+if ! command -v sha256sum >/dev/null 2>&1; then
+  echo 'sha256sum required for immutable receipt fingerprints' >&2
+  exit 69
+fi
 mkdir -p "$out"
+printf '%s\n' "$modules" > "$out/installed-modules.txt"
+sha256sum "$test" "$jdk/bin/java" "$jdk/bin/javac" "${BASH_SOURCE[0]}" > "$out/input-sha256.txt"
 "$jdk/bin/java" -version 2> "$out/java-version.txt"
-"$jdk/bin/javac" -source 21 -target 21 -Xlint:all -Werror --add-modules jdk.m3.collections -d "$out" "$test"
+"$jdk/bin/javac" -source 21 -target 21 -Xlint:all -Werror --add-modules jdk.m3.collections -d "$out" "$test" 2>&1 | tee "$out/compile.txt"
 "$jdk/bin/java" --add-modules jdk.m3.collections -cp "$out" GinqHashJoinTest | tee "$out/mixed.txt"
 "$jdk/bin/java" -Xint --add-modules jdk.m3.collections -cp "$out" GinqHashJoinTest | tee "$out/interpreted.txt"
-echo 'M3_GINQ_INSTALLED_SOURCE_BOUND_TESTS_PASS'
+if ! cmp -s "$out/mixed.txt" "$out/interpreted.txt"; then
+  echo 'mixed and interpreted stdout differ' >&2
+  exit 70
+fi
+printf '%s\n' 'M3_GINQ_INSTALLED_SOURCE_BOUND_TESTS_PASS' | tee "$out/status.txt"
