@@ -333,7 +333,7 @@ public final class ObjectStream<T> {
     public <R> ObjectStream<R> pairwise(
             BiFunction<? super T, ? super T, ? extends R> mapper) {
         Objects.requireNonNull(mapper, "mapper");
-        return delegateStream(input -> ObjectStreamLanguageKernels.zipWithNext(input, mapper));
+        return delegateStream(input -> ObjectStreamLanguageKernels.pairwise(input, mapper));
     }
 
     /**
@@ -349,12 +349,8 @@ public final class ObjectStream<T> {
     public <R> ObjectStream<R> mapWhile(
             Function<? super T, ? extends Optional<? extends R>> mapper) {
         Objects.requireNonNull(mapper, "mapper");
-        return delegateStream(input -> ObjectStreamLoopKernels.<T, R>mapWhile(
-                input, value -> {
-                    Optional<? extends R> mapped = Objects.requireNonNull(
-                            mapper.apply(value), "mapped optional");
-                    return mapped.orElse(null);
-                }));
+        return delegateStream(input -> ObjectStreamLoopKernels.mapWhileOptional(
+                input, mapper));
     }
 
     /** Transfer this plan's opened traversal to a stream-kernel factory. */
