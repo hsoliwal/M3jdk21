@@ -191,6 +191,29 @@ jobs:
           export JAVA_HOME="$M3_JAVA_HOME"
           export PATH="$JAVA_HOME/bin:$PATH"
           mvn -B -ntp -f m3/arrays/pom.xml -DskipTests install
+      - name: Build original M3 arrays JNI and test its C11 owner
+        run: |
+          set -euo pipefail
+          export JAVA_HOME="$M3_JAVA_HOME"
+          export PATH="$JAVA_HOME/bin:$PATH"
+          native_build="$RUNNER_TEMP/m3-ginq-arrays-native"
+          cmake -S make/m3/arrays -B "$native_build" \
+            -DCMAKE_BUILD_TYPE=Debug -DBUILD_TESTING=ON \
+            | tee "$RUNNER_TEMP/m3-ginq-native-configure.log"
+          cmake --build "$native_build" --parallel 2 \
+            | tee "$RUNNER_TEMP/m3-ginq-native-build.log"
+          ctest --test-dir "$native_build" --output-on-failure \
+            | tee "$RUNNER_TEMP/m3-ginq-native-ctest.log"
+          native_lib="$native_build/libm3_arrays.so"
+          test -s "$native_lib"
+          nm -D "$native_lib" > "$RUNNER_TEMP/m3-ginq-native-symbols.txt"
+          for symbol in nativeAllocateObjects nativeAllocateInts; do
+            grep -F "Java_jdk_m3_arrays_ArrayNative_$symbol" \
+              "$RUNNER_TEMP/m3-ginq-native-symbols.txt"
+          done
+          sha256sum "$native_lib" \
+            | tee "$RUNNER_TEMP/m3-ginq-native-sha256.txt"
+          printf 'M3_ARRAYS_NATIVE_PATH=%s\n' "$native_lib" >> "$GITHUB_ENV"
       - name: Verify installed collection module image
         run: |
           set -euo pipefail
@@ -242,13 +265,15 @@ jobs:
             -sourcepath "$empty_sourcepath" -classpath "$join_classes" \
             -d "$join_classes" \
             test/jdk/jdk/m3/collections/GinqHashJoinTest.java
-          "$M3_JAVA_HOME/bin/java" -Xmx64m -ea \
+          "$M3_JAVA_HOME/bin/java" -Xmx64m -ea -Xcheck:jni \
+            "-Dm3.arrays.native.path=$M3_ARRAYS_NATIVE_PATH" \
             --add-modules jdk.m3.collections \
             -cp "$join_classes" GinqHashJoinTest \
             | tee "$RUNNER_TEMP/m3-ginq-full-image.log"
           grep -Fx 'M3_GROOVY_GINQ_JOIN_PASS checks=8041 seededTrials=2000 joinModes=4' \
             "$RUNNER_TEMP/m3-ginq-full-image.log"
-          "$RUNNER_TEMP/m3-object-stream-jlink/bin/java" -Xint -Xmx64m -ea \
+          "$RUNNER_TEMP/m3-object-stream-jlink/bin/java" -Xint -Xmx64m -ea -Xcheck:jni \
+            "-Dm3.arrays.native.path=$M3_ARRAYS_NATIVE_PATH" \
             --add-modules jdk.m3.collections \
             -cp "$join_classes" GinqHashJoinTest \
             | tee "$RUNNER_TEMP/m3-ginq-jlink-image.log"
@@ -262,6 +287,7 @@ jobs:
         run: |
           set -euo pipefail
           make CONF=m3-groovy-native-proof JOBS=2 test \
+            JTREG="JAVA_OPTIONS=-Dm3.arrays.native.path=$M3_ARRAYS_NATIVE_PATH" \
             TEST="jtreg:test/jdk/jdk/m3/collections/ObjectStreamCollateTest.java jtreg:test/jdk/jdk/m3/collections/GinqHashJoinTest.java jtreg:test/jdk/java/lang/String/StringCaseFamilyTest.java jtreg:test/jdk/java/lang/String/StringCaseFamilyDonorTest.java jtreg:test/jdk/java/util/stream/Streams/StreamMapNotNullTest.java" \
             | tee "$RUNNER_TEMP/m3-groovy-jtreg.log"
       - name: Compile current M3 collections and execute real JUnit
@@ -285,6 +311,11 @@ jobs:
             ${{ runner.temp }}/m3-ginq-full-image.log
             ${{ runner.temp }}/m3-ginq-jlink-image.log
             ${{ runner.temp }}/m3-ginq-installed-receipt/
+            ${{ runner.temp }}/m3-ginq-native-configure.log
+            ${{ runner.temp }}/m3-ginq-native-build.log
+            ${{ runner.temp }}/m3-ginq-native-ctest.log
+            ${{ runner.temp }}/m3-ginq-native-symbols.txt
+            ${{ runner.temp }}/m3-ginq-native-sha256.txt
             ${{ runner.temp }}/m3-gn-version.log
             ${{ runner.temp }}/m3-ninja-version.log
             ${{ runner.temp }}/m3-jtreg-version.log
