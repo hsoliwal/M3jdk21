@@ -14,7 +14,7 @@ ROOT = Path(__file__).resolve().parents[4]
 # Groovy collate successor: retain the six prior receipts and bind both new owners.
 FILES = {
     "src/jdk.m3.collections/share/classes/jdk/m3/collections/ObjectStream.java":
-        "45eea74cd492eb97341a1c9e94d860506a7af88cb39889b36247cf2e778428db",
+        "9202ef14279f4ce140497d658130ccad2533843351940f317aa001dd38fd3251",
     "src/jdk.m3.collections/share/classes/jdk/m3/collections/ObjectStreamAdvancedKernels.java":
         "29810419f0125147d7bdbc0d33794b113dcd07e85f0ba9937e5aabd806e6103d",
     "src/jdk.m3.collections/share/classes/jdk/m3/collections/ObjectStreamLoopKernels.java":
@@ -35,7 +35,7 @@ MUST_RETAIN = (
     "arrayWindow(", "mapAdjacent(", "distinctAdjacent(", "foldByKey(",
     "pairwise(", "mapIndexed(", "mapIndexedOrdinalFirst(", "mapWhile(",
     "mapWhileNullable(", "zipLongest(", "topKBy(", "groupMapReduce(",
-    "mergeSorted(", "partitionMap(", "collate(",
+    "mergeSorted(", "partitionMap(", "collate(", "countByMany(",
 )
 UNIQUE = (
     "public interface IndexedMapper<",
@@ -44,6 +44,7 @@ UNIQUE = (
     "public <R> ObjectStream<R> mapIndexedOrdinalFirst(",
     "public <R> ObjectStream<R> mapWhile(",
     "public <R> ObjectStream<R> mapWhileNullable(",
+    "public <K> Map<K, Long> countByMany(",
     "public ObjectStream<List<T>> collate(int width)",
     "public ObjectStream<List<T>> collate(int width, int step)",
     "public ObjectStream<List<T>> collate(int width, int step, TailPolicy tailPolicy)",
