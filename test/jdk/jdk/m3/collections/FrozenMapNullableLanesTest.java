@@ -49,14 +49,20 @@ public final class FrozenMapNullableLanesTest {
         eq(map.get(null), "null-key", "null lookup");
         eq(owner.keyAt(1), null, "ordinal null key");
         eq(owner.valueAt(0), null, "ordinal null value");
-        check(map.entrySet().contains(new AbstractMap.SimpleImmutableEntry<>("a", null)), "nullable entry");
-        check(map.entrySet().contains(new AbstractMap.SimpleImmutableEntry<>(null, "null-key")), "null-key entry");
-        check(!map.entrySet().contains(new AbstractMap.SimpleImmutableEntry<>("z", null)), "missing nullable entry");
-        check(!map.keySet().spliterator().hasCharacteristics(Spliterator.NONNULL), "nullable key flags");
-        check(!map.values().spliterator().hasCharacteristics(Spliterator.NONNULL), "nullable value flags");
+        check(map.entrySet().contains(new AbstractMap.SimpleImmutableEntry<>("a", null)),
+                "nullable entry");
+        check(map.entrySet().contains(new AbstractMap.SimpleImmutableEntry<>(null, "null-key")),
+                "null-key entry");
+        check(!map.entrySet().contains(new AbstractMap.SimpleImmutableEntry<>("z", null)),
+                "missing nullable entry");
+        check(!map.keySet().spliterator().hasCharacteristics(Spliterator.NONNULL),
+                "nullable key flags");
+        check(!map.values().spliterator().hasCharacteristics(Spliterator.NONNULL),
+                "nullable value flags");
         check(map.entrySet().spliterator().hasCharacteristics(Spliterator.NONNULL), "entry flags");
         check(map.keySet().spliterator().hasCharacteristics(Spliterator.ORDERED), "ordered flags");
-        eq(map.values().parallelStream().toList(), Arrays.asList(null, "null-key", 3), "parallel encounter order");
+        eq(map.values().parallelStream().toList(), Arrays.asList(null, "null-key", 3),
+                "parallel encounter order");
         keys[0] = "changed";
         values[1] = "changed";
         eq(map.get(null), "null-key", "detached values");
@@ -71,7 +77,8 @@ public final class FrozenMapNullableLanesTest {
         fails(UnsupportedOperationException.class, () -> map.replaceAll((k, v) -> {
             throw new AssertionError("mutator callback ran");
         }));
-        fails(UnsupportedOperationException.class, () -> map.entrySet().iterator().next().setValue(4));
+        fails(UnsupportedOperationException.class,
+                () -> map.entrySet().iterator().next().setValue(4));
         fails(UnsupportedOperationException.class, () -> map.keySet().remove("missing"));
         fails(UnsupportedOperationException.class, () -> map.values().remove(null));
         fails(UnsupportedOperationException.class, () -> map.entrySet().iterator().remove());
@@ -93,9 +100,11 @@ public final class FrozenMapNullableLanesTest {
         };
         keys[0] = first;
         keys[1] = "retained";
-        Map<Object, String> map = FrozenMap.<Object, String>copyOfNullableLanes(keys, values, 2).asMap();
+        Map<Object, String> map =
+                FrozenMap.<Object, String>copyOfNullableLanes(keys, values, 2).asMap();
         check(calls.get() > 0, "hash witness");
-        eq(new ArrayList<>(map.keySet()), Arrays.asList(first, "retained"), "copy before key callback");
+        eq(new ArrayList<>(map.keySet()), Arrays.asList(first, "retained"),
+                "copy before key callback");
         eq(map.get("retained"), "second", "both copies before callback");
         check(!map.containsKey("changed"), "callback cannot change captured keys");
     }
@@ -112,8 +121,10 @@ public final class FrozenMapNullableLanesTest {
         fails(IndexOutOfBoundsException.class, () -> FrozenMap.copyOfNullableLanes(
                 new Object[] {key}, new Object[] {1}, -1));
         eq(calls.get(), 0, "all geometry checked before callbacks");
-        fails(NullPointerException.class, () -> FrozenMap.copyOfNullableLanes(null, new Object[0], 0));
-        fails(NullPointerException.class, () -> FrozenMap.copyOfNullableLanes(new Object[0], null, 0));
+        fails(NullPointerException.class,
+                () -> FrozenMap.copyOfNullableLanes(null, new Object[0], 0));
+        fails(NullPointerException.class,
+                () -> FrozenMap.copyOfNullableLanes(new Object[0], null, 0));
         fails(IllegalArgumentException.class, () -> FrozenMap.copyOfNullableLanes(
                 new Object[] {null, null}, new Object[] {1, 2}, 2));
         fails(IllegalArgumentException.class, () -> FrozenMap.copyOfNullableLanes(
@@ -144,15 +155,18 @@ public final class FrozenMapNullableLanesTest {
         FrozenMap<String, String> old = FrozenMap.copyOf(original);
         check(!old.containsKey(null) && !old.containsValue(null), "original null queries");
         eq(old.getOrDefault(null, "default"), "default", "original null default");
-        check(old.asMap().keySet().spliterator().hasCharacteristics(Spliterator.NONNULL), "original key flags");
-        check(old.asMap().values().spliterator().hasCharacteristics(Spliterator.NONNULL), "original value flags");
+        check(old.asMap().keySet().spliterator().hasCharacteristics(Spliterator.NONNULL),
+                "original key flags");
+        check(old.asMap().values().spliterator().hasCharacteristics(Spliterator.NONNULL),
+                "original value flags");
         eq(old.asMap().keySet().stream().toList(), List.of("b", "a"), "original order");
         original.put(null, "bad");
         fails(NullPointerException.class, () -> FrozenMap.copyOf(original));
         original.remove(null);
         original.put("a", null);
         fails(NullPointerException.class, () -> FrozenMap.copyOf(original));
-        check(new FrozenMap<>().asMap().keySet().spliterator().hasCharacteristics(Spliterator.NONNULL),
+        check(new FrozenMap<>().asMap().keySet().spliterator()
+                .hasCharacteristics(Spliterator.NONNULL),
                 "original empty factory flags");
     }
 
@@ -170,16 +184,21 @@ public final class FrozenMapNullableLanesTest {
                 values[i] = random.nextBoolean() ? null : random.nextInt(8);
                 expected.put(order.get(i), (Integer) values[i]);
             }
-            Map<Integer, Integer> actual = FrozenMap.<Integer, Integer>copyOfNullableLanes(keys, values, size).asMap();
+            Map<Integer, Integer> actual =
+                    FrozenMap.<Integer, Integer>copyOfNullableLanes(keys, values, size).asMap();
             eq(actual, expected, "map oracle");
             eq(expected, actual, "symmetric map oracle");
             eq(actual.hashCode(), expected.hashCode(), "hash oracle");
-            eq(new ArrayList<>(actual.entrySet()), new ArrayList<>(expected.entrySet()), "entry order oracle");
-            eq(actual.keySet().stream().toList(), new ArrayList<>(expected.keySet()), "key order oracle");
-            eq(actual.values().parallelStream().toList(), new ArrayList<>(expected.values()), "value order oracle");
+            eq(new ArrayList<>(actual.entrySet()), new ArrayList<>(expected.entrySet()),
+                    "entry order oracle");
+            eq(actual.keySet().stream().toList(), new ArrayList<>(expected.keySet()),
+                    "key order oracle");
+            eq(actual.values().parallelStream().toList(), new ArrayList<>(expected.values()),
+                    "value order oracle");
             for (Integer query : Arrays.asList(null, -1, 1, 8, 39)) {
                 eq(actual.containsKey(query), expected.containsKey(query), "contains oracle");
-                eq(actual.getOrDefault(query, -7), expected.getOrDefault(query, -7), "lookup oracle");
+                eq(actual.getOrDefault(query, -7), expected.getOrDefault(query, -7),
+                        "lookup oracle");
                 eq(actual.containsValue(query), expected.containsValue(query), "value oracle");
             }
         }
@@ -192,7 +211,8 @@ public final class FrozenMapNullableLanesTest {
             check(!Map.class.isAssignableFrom(field.getType()), "no retained Map wrapper");
             check(!Map.Entry.class.isAssignableFrom(field.getType()), "no retained entry");
             if (field.getType().isArray()) {
-                check(!Map.Entry.class.isAssignableFrom(field.getType().getComponentType()), "no entry array");
+                check(!Map.Entry.class.isAssignableFrom(field.getType().getComponentType()),
+                        "no entry array");
             }
         }
     }

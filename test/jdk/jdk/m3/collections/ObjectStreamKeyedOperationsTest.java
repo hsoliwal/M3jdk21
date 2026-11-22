@@ -77,7 +77,8 @@ public final class ObjectStreamKeyedOperationsTest {
         eq(closes.get(), 3, "explicit close owns supplied traversal");
         ObjectStream.Mark<Number> mark = supplied.mark(3);
         eq(mark.reprocess().toBoundedList(3), List.of(1, 2, 3), "supplied source mark replay");
-        eq(mark.reprocess().toBoundedList(3), List.of(1, 2, 3), "supplied source second mark replay");
+        eq(mark.reprocess().toBoundedList(3), List.of(1, 2, 3),
+                "supplied source second mark replay");
         eq(opens.get(), 4, "captured mark replay does not reopen supplier");
         eq(closes.get(), 4, "mark capture closes supplied traversal");
         eq(supplied.parallelByKey(n -> n.intValue() & 1).mapOrdered(Number::intValue, 2, 2, 3),
@@ -95,8 +96,10 @@ public final class ObjectStreamKeyedOperationsTest {
             if (failedOpens.getAndIncrement() == 0) throw supplyFailure;
             return Stream.of(7);
         });
-        check(fails(RuntimeException.class, retry::stream) == supplyFailure, "supplier failure identity");
-        eq(retry.toBoundedList(1), List.of(7), "supplier failure leaves a future invocation available");
+        check(fails(RuntimeException.class, retry::stream) == supplyFailure,
+                "supplier failure identity");
+        eq(retry.toBoundedList(1), List.of(7),
+                "supplier failure leaves a future invocation available");
         eq(failedOpens.get(), 2, "one factory call per attempted traversal");
         AtomicInteger nullOpens = new AtomicInteger();
         ObjectStream<Integer> nullFactory = ObjectStream.fromStreamSupplier(() -> {
@@ -109,13 +112,16 @@ public final class ObjectStreamKeyedOperationsTest {
         RuntimeException mapFailure = new RuntimeException("mapped");
         RuntimeException closeFailure = new RuntimeException("supplied close");
         AtomicInteger failingCloses = new AtomicInteger();
-        ObjectStream<Integer> failing = ObjectStream.fromStreamSupplier(() -> Stream.of(1).onClose(() -> {
-            failingCloses.incrementAndGet(); throw closeFailure;
-        }));
-        Throwable failed = fails(RuntimeException.class, () -> failing.map(n -> { throw mapFailure; })
+        ObjectStream<Integer> failing = ObjectStream.fromStreamSupplier(
+                () -> Stream.of(1).onClose(() -> {
+                    failingCloses.incrementAndGet(); throw closeFailure;
+                }));
+        Throwable failed = fails(RuntimeException.class,
+                () -> failing.map(n -> { throw mapFailure; })
                 .toBoundedList(1));
         check(failed == mapFailure, "supplied callback failure identity");
-        eq(Arrays.asList(failed.getSuppressed()), List.of(closeFailure), "supplied close failure suppression");
+        eq(Arrays.asList(failed.getSuppressed()), List.of(closeFailure),
+                "supplied close failure suppression");
         eq(failingCloses.get(), 1, "supplied failing traversal closes exactly once");
     }
 
@@ -127,19 +133,23 @@ public final class ObjectStreamKeyedOperationsTest {
                 List.of("null:null", "1:1", "1:1", "1:1", "1:1"), "inner multiplicity/order");
         eq(plan(left).leftJoinByKey(plan(right), Function.identity(), Function.identity(),
                 (a, present, b) -> a + ":" + present + ":" + b, 4, 3, 3, 2, 6).toBoundedList(6),
-                List.of("null:true:null", "1:true:1", "1:true:1", "2:false:null", "1:true:1", "1:true:1"),
+                List.of("null:true:null", "1:true:1", "1:true:1", "2:false:null", "1:true:1",
+                        "1:true:1"),
                 "outer null presence/order");
         eq(plan(left).semiJoinByKey(plan(right), Function.identity(), Function.identity(),
                 4, 3, 3, 2, 3).toBoundedList(3), Arrays.asList(null, 1, 1), "semi occurrences");
         eq(plan(left).antiJoinByKey(plan(right), Function.identity(), Function.identity(),
                 4, 3, 3, 2, 1).toBoundedList(1), List.of(2), "anti occurrences");
-        eq(plan(List.of(1, 1)).innerJoinByKey(plan(List.of(1)), Function.identity(), Function.identity(),
+        eq(plan(List.of(1, 1)).innerJoinByKey(plan(List.of(1)), Function.identity(),
+                Function.identity(),
                 (a, b) -> (String) null, 2, 1, 1, 1, 2).toBoundedList(2),
                 Arrays.asList(null, null), "nullable join output");
-        eq(plan(left).leftJoinByKey(plan(List.<Integer>of()), Function.identity(), Function.identity(),
+        eq(plan(left).leftJoinByKey(plan(List.<Integer>of()), Function.identity(),
+                Function.identity(),
                 (a, present, b) -> present, 4, 0, 3, 0, 4).toBoundedList(4),
                 List.of(false, false, false, false), "empty right outer");
-        eq(plan(List.<Integer>of()).innerJoinByKey(plan(right), Function.identity(), Function.identity(),
+        eq(plan(List.<Integer>of()).innerJoinByKey(plan(right), Function.identity(),
+                Function.identity(),
                 Integer::sum, 0, 3, 0, 2, 0).toBoundedList(0), List.of(), "empty left");
         ObjectStream<Integer> same = plan(left);
         fails(IllegalArgumentException.class, () -> same.innerJoinByKey(same,
@@ -147,11 +157,13 @@ public final class ObjectStreamKeyedOperationsTest {
         eq(same.toBoundedList(4), left, "alias rejection leaves source intact");
         List<Integer> payload = List.of(1, 2);
         eq(plan(payload).innerJoinByKey(plan(payload), Function.identity(), Function.identity(),
-                Integer::sum, 2, 2, 2, 2, 2).toBoundedList(2), List.of(2, 4), "distinct plans may share data");
+                Integer::sum, 2, 2, 2, 2, 2).toBoundedList(2), List.of(2, 4),
+                "distinct plans may share data");
         Function<Integer, CollisionKey> collision = n -> n == null ? null : new CollisionKey(n);
         eq(plan(left).innerJoinByKey(plan(right), collision, collision,
                 (a, b) -> a + ":" + b, 4, 3, 3, 2, 5).toBoundedList(5),
-                List.of("null:null", "1:1", "1:1", "1:1", "1:1"), "exact equality under collisions");
+                List.of("null:null", "1:1", "1:1", "1:1", "1:1"),
+                "exact equality under collisions");
     }
 
     private static void joinLazinessAndOwnership() {
@@ -160,7 +172,8 @@ public final class ObjectStreamKeyedOperationsTest {
         AtomicInteger leftKeys = new AtomicInteger();
         AtomicInteger rightKeys = new AtomicInteger();
         AtomicInteger projections = new AtomicInteger();
-        ObjectStream<String> joined = ObjectStream.live(left).innerJoinByKey(ObjectStream.live(right),
+        ObjectStream<String> joined =
+                ObjectStream.live(left).innerJoinByKey(ObjectStream.live(right),
                 n -> { leftKeys.incrementAndGet(); return n; },
                 n -> { rightKeys.incrementAndGet(); return n; }, (a, b) -> {
                     check(left.closes == 1 && right.closes == 1, "close before projection");
@@ -185,7 +198,8 @@ public final class ObjectStreamKeyedOperationsTest {
 
         Traced<Integer> zeroLeft = new Traced<>(List.of(1));
         Traced<Integer> zeroRight = new Traced<>(List.of(1));
-        ObjectStream<Integer> zero = ObjectStream.live(zeroLeft).innerJoinByKey(ObjectStream.live(zeroRight),
+        ObjectStream<Integer> zero =
+                ObjectStream.live(zeroLeft).innerJoinByKey(ObjectStream.live(zeroRight),
                 Function.identity(), Function.identity(), Integer::sum, 1, 1, 1, 1, 1);
         eq(zero.limit(0).toBoundedList(0), List.of(), "zero demand");
         eq(zeroLeft.pulls + zeroRight.pulls, 0, "zero demand pulls none");
@@ -209,7 +223,8 @@ public final class ObjectStreamKeyedOperationsTest {
             int[] caps = {1, 1, 1, 1, 1};
             caps[bound] = -1;
             fails(IllegalArgumentException.class, () -> ObjectStream.live(left).innerJoinByKey(
-                    ObjectStream.live(right), Function.identity(), Function.identity(), Integer::sum,
+                    ObjectStream.live(right), Function.identity(), Function.identity(),
+                    Integer::sum,
                     caps[0], caps[1], caps[2], caps[3], caps[4]));
             eq(left.opens + right.opens, 0, "eager negative-bound refusal");
         }
@@ -230,7 +245,8 @@ public final class ObjectStreamKeyedOperationsTest {
         Traced<Integer> outerRight = new Traced<>(List.of(1, 1));
         AtomicInteger outerProjections = new AtomicInteger();
         fails(IllegalStateException.class, () -> ObjectStream.live(outerLeft).leftJoinByKey(
-                ObjectStream.live(outerRight), Function.identity(), Function.identity(), (a, present, b) -> {
+                ObjectStream.live(outerRight), Function.identity(), Function.identity(),
+                (a, present, b) -> {
                     outerProjections.incrementAndGet(); return a;
                 }, 2, 2, 2, 1, 2).count());
         eq(outerProjections.get(), 0, "outer matched and unmatched cardinality precedes joiner");
@@ -240,7 +256,8 @@ public final class ObjectStreamKeyedOperationsTest {
         Traced<Integer> semiRight = new Traced<>(List.of(1, 1));
         AtomicInteger semiProjections = new AtomicInteger();
         fails(IllegalStateException.class, () -> ObjectStream.live(semiLeft).semiJoinByKey(
-                ObjectStream.live(semiRight), Function.identity(), Function.identity(), 3, 2, 2, 1, 1)
+                ObjectStream.live(semiRight), Function.identity(), Function.identity(),
+                3, 2, 2, 1, 1)
                 .map(n -> { semiProjections.incrementAndGet(); return n; }).count());
         eq(semiProjections.get(), 0, "semi occurrence cardinality precedes downstream projection");
         eq(semiLeft.closes + semiRight.closes, 2, "semi result cap closes both");
@@ -249,7 +266,8 @@ public final class ObjectStreamKeyedOperationsTest {
         Traced<Integer> antiRight = new Traced<>(List.of(2));
         AtomicInteger antiProjections = new AtomicInteger();
         fails(IllegalStateException.class, () -> ObjectStream.live(antiLeft).antiJoinByKey(
-                ObjectStream.live(antiRight), Function.identity(), Function.identity(), 3, 1, 2, 1, 1)
+                ObjectStream.live(antiRight), Function.identity(), Function.identity(),
+                3, 1, 2, 1, 1)
                 .map(n -> { antiProjections.incrementAndGet(); return n; }).count());
         eq(antiProjections.get(), 0, "anti occurrence cardinality precedes downstream projection");
         eq(antiLeft.closes + antiRight.closes, 2, "anti result cap closes both");
@@ -270,11 +288,13 @@ public final class ObjectStreamKeyedOperationsTest {
         Traced<Integer> failedRight = new Traced<>(List.of(1));
         failedLeft.closeFailure = leftClose;
         failedRight.closeFailure = rightClose;
-        Throwable got = fails(RuntimeException.class, () -> ObjectStream.live(failedLeft).innerJoinByKey(
+        Throwable got = fails(RuntimeException.class,
+                () -> ObjectStream.live(failedLeft).innerJoinByKey(
                 ObjectStream.live(failedRight), n -> { throw keyFailure; }, Function.identity(),
                 Integer::sum, 1, 1, 1, 1, 1).count());
         check(got == keyFailure, "key failure identity");
-        eq(Arrays.asList(got.getSuppressed()), List.of(rightClose, leftClose), "close suppression order");
+        eq(Arrays.asList(got.getSuppressed()), List.of(rightClose, leftClose),
+                "close suppression order");
         eq(failedRight.pulls, 0, "left failure does not traverse right");
         eq(failedLeft.closes + failedRight.closes, 2, "key failure closes both");
 
@@ -285,12 +305,15 @@ public final class ObjectStreamKeyedOperationsTest {
         closingRight.closeFailure = primaryClose;
         closingLeft.closeFailure = secondaryClose;
         AtomicInteger closedProjection = new AtomicInteger();
-        Throwable closed = fails(RuntimeException.class, () -> ObjectStream.live(closingLeft).innerJoinByKey(
-                ObjectStream.live(closingRight), Function.identity(), Function.identity(), (a, b) -> {
+        Throwable closed = fails(RuntimeException.class,
+                () -> ObjectStream.live(closingLeft).innerJoinByKey(
+                ObjectStream.live(closingRight), Function.identity(), Function.identity(),
+                (a, b) -> {
                     closedProjection.incrementAndGet(); return a;
                 }, 1, 1, 1, 1, 1).count());
         check(closed == primaryClose, "close failure identity");
-        eq(Arrays.asList(closed.getSuppressed()), List.of(secondaryClose), "second close suppressed");
+        eq(Arrays.asList(closed.getSuppressed()), List.of(secondaryClose),
+                "second close suppressed");
         eq(closedProjection.get(), 0, "closure must succeed before joiner");
 
         Traced<Integer> openLeft = new Traced<>(List.of(1));
@@ -299,11 +322,14 @@ public final class ObjectStreamKeyedOperationsTest {
         RuntimeException openLeftClose = new RuntimeException("opened left close");
         openRight.openFailure = openFailure;
         openLeft.closeFailure = openLeftClose;
-        Throwable opening = fails(RuntimeException.class, () -> ObjectStream.live(openLeft).innerJoinByKey(
-                ObjectStream.live(openRight), Function.identity(), Function.identity(), Integer::sum,
+        Throwable opening = fails(RuntimeException.class,
+                () -> ObjectStream.live(openLeft).innerJoinByKey(
+                ObjectStream.live(openRight), Function.identity(), Function.identity(),
+                Integer::sum,
                 1, 1, 1, 1, 1).stream());
         check(opening == openFailure, "second open identity");
-        eq(Arrays.asList(opening.getSuppressed()), List.of(openLeftClose), "second open suppression");
+        eq(Arrays.asList(opening.getSuppressed()), List.of(openLeftClose),
+                "second open suppression");
         eq(openLeft.closes, 1, "failed second open closes first");
 
         Traced<Integer> mapLeft = new Traced<>(List.of(1));
@@ -311,7 +337,8 @@ public final class ObjectStreamKeyedOperationsTest {
         Error projectionFailure = new AssertionError("projection");
         check(fails(AssertionError.class, () -> ObjectStream.live(mapLeft).innerJoinByKey(
                 ObjectStream.live(mapRight), Function.identity(), Function.identity(),
-                (a, b) -> { throw projectionFailure; }, 1, 1, 1, 1, 1).count()) == projectionFailure,
+                (a, b) -> { throw projectionFailure; },
+                1, 1, 1, 1, 1).count()) == projectionFailure,
                 "projection Error identity");
         eq(mapLeft.closes + mapRight.closes, 2, "projection failure sees closed inputs");
     }
@@ -324,7 +351,8 @@ public final class ObjectStreamKeyedOperationsTest {
         eq(live.toBoundedList(4), List.of(2), "first live traversal");
         values.add(3);
         eq(live.toBoundedList(4), List.of(2, 6), "fresh live traversal");
-        ObjectStream<Integer> once = ObjectStream.once(Stream.of(1, 2)).innerJoinByKey(plan(List.of(2)),
+        ObjectStream<Integer> once = ObjectStream.once(Stream.of(1, 2))
+                .innerJoinByKey(plan(List.of(2)),
                 Function.identity(), Function.identity(), Integer::sum, 2, 1, 2, 1, 1);
         check(!once.replayable(), "one-shot property");
         eq(once.toBoundedList(1), List.of(4), "one-shot result");
@@ -332,9 +360,11 @@ public final class ObjectStreamKeyedOperationsTest {
         ObjectStream<List<Integer>> mapped = ObjectStream.live(values).mapWindowsByKey(
                 n -> n & 1, 1, 1, (center, window) -> window, 4, 2);
         check(mapped.replayable(), "window replay property");
-        eq(mapped.toBoundedList(4), List.of(List.of(1, 3), List.of(2), List.of(1, 3)), "live window first");
+        eq(mapped.toBoundedList(4), List.of(List.of(1, 3), List.of(2), List.of(1, 3)),
+                "live window first");
         values.set(0, 5);
-        eq(mapped.toBoundedList(4), List.of(List.of(5, 3), List.of(2), List.of(5, 3)), "live window refresh");
+        eq(mapped.toBoundedList(4), List.of(List.of(5, 3), List.of(2), List.of(5, 3)),
+                "live window refresh");
         ObjectStream<Integer> onceWindow = ObjectStream.once(Stream.of(1)).mapWindowsByKey(
                 Function.identity(), 0, 0, (center, window) -> center, 1, 1);
         eq(onceWindow.toBoundedList(1), List.of(1), "one-shot window");
@@ -347,10 +377,12 @@ public final class ObjectStreamKeyedOperationsTest {
         AtomicInteger keys = new AtomicInteger();
         Traced<Integer> input = new Traced<>(values);
         Map<Integer, List<List<Integer>>> chunks = ObjectStream.live(input).countWindowsByKey(
-                n -> { keys.incrementAndGet(); return key.apply(n); }, 2, ObjectStream.TailPolicy.INCLUDE, 7, 3);
+                n -> { keys.incrementAndGet(); return key.apply(n); },
+                2, ObjectStream.TailPolicy.INCLUDE, 7, 3);
         eq(keys.get(), 7, "count-window key once");
         eq(input.closes, 1, "count-window source closed");
-        eq(new ArrayList<>(chunks.keySet()), Arrays.asList(1, 0, null), "chunk key encounter order");
+        eq(new ArrayList<>(chunks.keySet()), Arrays.asList(1, 0, null),
+                "chunk key encounter order");
         eq(chunks.get(1), List.of(List.of(1, 3), List.of(5)), "count chunks");
         eq(chunks.get(0), List.of(List.of(2, 4)), "interleaved even chunks");
         eq(chunks.get(null), Collections.singletonList(Arrays.asList(null, null)), "null chunk");
@@ -364,7 +396,8 @@ public final class ObjectStreamKeyedOperationsTest {
         AtomicInteger calls = new AtomicInteger();
         Traced<Integer> centered = new Traced<>(values);
         ObjectStream<List<Integer>> windows = ObjectStream.live(centered).mapWindowsByKey(
-                n -> { windowKeys.incrementAndGet(); return key.apply(n); }, 1, 1, (center, window) -> {
+                n -> { windowKeys.incrementAndGet(); return key.apply(n); }, 1, 1,
+                (center, window) -> {
                     check(centered.closes == 1, "centered close before mapper");
                     calls.incrementAndGet();
                     return window;
@@ -384,9 +417,11 @@ public final class ObjectStreamKeyedOperationsTest {
         }
         List<List<Integer>> expected = Arrays.asList(List.of(1, 3), List.of(2, 4), List.of(1, 3, 5),
                 Arrays.asList(null, null), List.of(2, 4), List.of(3, 5), Arrays.asList(null, null));
-        eq(plan(values).mapWindowsByKey(key, 1, 1, (center, window) -> window, 7, 3).toBoundedList(7),
+        eq(plan(values).mapWindowsByKey(key, 1, 1, (center, window) -> window, 7, 3)
+                .toBoundedList(7),
                 expected, "source-aligned centered windows");
-        eq(plan(values).mapWindowsByKey(key, 0, 0, (center, window) -> center, 7, 3).toBoundedList(7),
+        eq(plan(values).mapWindowsByKey(key, 0, 0, (center, window) -> center, 7, 3)
+                .toBoundedList(7),
                 values, "zero radius includes center only");
         eq(plan(values).mapWindowsByKey(key, 0, 1, (center, window) -> (String) null, 7, 3).count(),
                 7L, "nullable mapped results still invoke mapper");
@@ -411,13 +446,15 @@ public final class ObjectStreamKeyedOperationsTest {
         Traced<Integer> bound = new Traced<>(values);
         AtomicInteger mapperCalls = new AtomicInteger();
         fails(IllegalStateException.class, () -> ObjectStream.live(bound).mapWindowsByKey(key, 1, 1,
-                (center, window) -> { mapperCalls.incrementAndGet(); return center; }, 7, 2).count());
+                (center, window) -> { mapperCalls.incrementAndGet(); return center; },
+                7, 2).count());
         eq(mapperCalls.get(), 0, "centered budget before mapper");
         eq(bound.closes, 1, "centered budget closes input");
         RuntimeException failure = new RuntimeException("window mapper");
         Traced<Integer> failed = new Traced<>(List.of(1));
         check(fails(RuntimeException.class, () -> ObjectStream.live(failed).mapWindowsByKey(
-                Function.identity(), 0, 0, (center, window) -> { throw failure; }, 1, 1).count()) == failure,
+                Function.identity(), 0, 0, (center, window) -> { throw failure; },
+                1, 1).count()) == failure,
                 "window mapper identity");
         eq(failed.closes, 1, "failed window mapper source closed");
     }
@@ -437,7 +474,8 @@ public final class ObjectStreamKeyedOperationsTest {
         eq(keys.get(), 6, "top-K key once");
         check(comparisons.get() > 0, "heap comparison witness");
         eq(new ArrayList<>(result.keySet()), Arrays.asList(1, null, 2), "top-K first-key order");
-        eq(result.get(1), List.of(values.get(4), values.get(0)), "greatest and stable tied survivor");
+        eq(result.get(1), List.of(values.get(4), values.get(0)),
+                "greatest and stable tied survivor");
         eq(result.get(null), List.of(values.get(1), values.get(5)), "stable equal scores");
         fails(UnsupportedOperationException.class, () -> result.clear());
         fails(UnsupportedOperationException.class, () -> result.get(1).clear());
@@ -490,7 +528,8 @@ public final class ObjectStreamKeyedOperationsTest {
                     .toBoundedList(inner.size()), inner, "generated inner oracle");
             eq(plan(left).leftJoinByKey(plan(right), Item::key, Item::key,
                     (a, present, b) -> a.id() + ":" + present + ":" + (present ? b.id() : null),
-                    left.size(), right.size(), 6, 6, outer.size()).toBoundedList(outer.size()), outer,
+                    left.size(), right.size(), 6, 6, outer.size()).toBoundedList(outer.size()),
+                    outer,
                     "generated outer oracle");
             eq(plan(left).semiJoinByKey(plan(right), Item::key, Item::key,
                     left.size(), right.size(), 6, 6, semi.size()).toBoundedList(semi.size()), semi,
@@ -500,7 +539,8 @@ public final class ObjectStreamKeyedOperationsTest {
                     "generated anti oracle");
 
             LinkedHashMap<Integer, List<Item>> groups = new LinkedHashMap<>();
-            for (Item item : left) groups.computeIfAbsent(item.key(), ignored -> new ArrayList<>()).add(item);
+            for (Item item : left)
+                groups.computeIfAbsent(item.key(), ignored -> new ArrayList<>()).add(item);
             int width = 1 + random.nextInt(5);
             for (ObjectStream.TailPolicy tail : ObjectStream.TailPolicy.values()) {
                 LinkedHashMap<Integer, List<List<Item>>> expected = new LinkedHashMap<>();
@@ -517,7 +557,8 @@ public final class ObjectStreamKeyedOperationsTest {
                 Map<Integer, List<List<Item>>> actual = plan(left).countWindowsByKey(Item::key,
                         width, tail, left.size(), 6);
                 eq(actual, expected, "generated chunk oracle");
-                eq(new ArrayList<>(actual.keySet()), new ArrayList<>(expected.keySet()), "generated chunk key order");
+                eq(new ArrayList<>(actual.keySet()), new ArrayList<>(expected.keySet()),
+                        "generated chunk key order");
             }
             int before = random.nextInt(4);
             int after = random.nextInt(4);
@@ -529,18 +570,21 @@ public final class ObjectStreamKeyedOperationsTest {
                         Math.min(group.size(), at + after + 1))));
             }
             eq(plan(left).mapWindowsByKey(Item::key, before, after, (center, window) -> window,
-                    left.size(), 6).toBoundedList(left.size()), neighborhoods, "generated centered oracle");
+                    left.size(), 6).toBoundedList(left.size()), neighborhoods,
+                    "generated centered oracle");
             int k = random.nextInt(7);
             LinkedHashMap<Integer, List<Item>> greatest = new LinkedHashMap<>();
             for (Map.Entry<Integer, List<Item>> entry : groups.entrySet()) {
                 ArrayList<Item> sorted = new ArrayList<>(entry.getValue());
                 sorted.sort(Comparator.comparingInt(Item::score).reversed());
-                greatest.put(entry.getKey(), new ArrayList<>(sorted.subList(0, Math.min(k, sorted.size()))));
+                greatest.put(entry.getKey(),
+                        new ArrayList<>(sorted.subList(0, Math.min(k, sorted.size()))));
             }
             Map<Integer, List<Item>> actual = plan(left).topKByKey(Item::key, k,
                     Comparator.comparingInt(Item::score), left.size(), 6);
             eq(actual, greatest, "generated stable top-K oracle");
-            eq(new ArrayList<>(actual.keySet()), new ArrayList<>(greatest.keySet()), "generated top-K key order");
+            eq(new ArrayList<>(actual.keySet()), new ArrayList<>(greatest.keySet()),
+                    "generated top-K key order");
         }
     }
 

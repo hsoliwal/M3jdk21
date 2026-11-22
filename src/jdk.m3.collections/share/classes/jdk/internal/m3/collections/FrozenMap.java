@@ -158,7 +158,9 @@ public final class FrozenMap<K, V> {
 
     public int size() { return size; }
     public boolean isEmpty() { return size == 0; }
-    private int ordinal(Object key) { return key == null && !nullable ? -1 : ordinals.getOrDefault(key, -1); }
+    private int ordinal(Object key) {
+        return key == null && !nullable ? -1 : ordinals.getOrDefault(key, -1);
+    }
     public boolean containsKey(Object key) { return ordinal(key) >= 0; }
 
     public boolean containsValue(Object value) {

@@ -5,7 +5,8 @@
 
 /*
  * @test
- * @summary Bound strict keyed accumulators and explicit acknowledged replay on the existing scheduler
+ * @summary Bound strict keyed accumulators and explicit acknowledged replay
+ *          on the existing scheduler
  * @modules jdk.m3.collections
  * @run main/othervm/timeout=180 KeyedGroupedReplayTest
  */
@@ -102,16 +103,19 @@ public final class KeyedGroupedReplayTest {
         equal(source.size(), signals.get(), "one partition signal per data item");
         equal(3, seeds.get(), "one seed per equal key including null");
         equal(3, finished.get(), "one finisher per key");
-        equal(Arrays.asList(first, second, null), new ArrayList<>(result.keySet()), "first-key order");
+        equal(Arrays.asList(first, second, null), new ArrayList<>(result.keySet()),
+                "first-key order");
         same(first, result.keySet().iterator().next(), "first equal key representative");
         equal(List.of(10, 11, 12), result.get(new Key(1)), "strict first key order");
         equal(List.of(20, 21), result.get(second), "strict second key order");
         equal(List.of(30, -1), result.get(null), "null keys and values");
         raises(UnsupportedOperationException.class, () -> result.put(first, List.of()));
-        raises(UnsupportedOperationException.class, () -> result.entrySet().iterator().next().setValue(List.of()));
+        raises(UnsupportedOperationException.class,
+                () -> result.entrySet().iterator().next().setValue(List.of()));
         raises(UnsupportedOperationException.class, result::clear);
         result.get(first).add(99);
-        equal(List.of(10, 11, 12, 99), result.get(first), "caller accumulator payload remains mutable");
+        equal(List.of(10, 11, 12, 99), result.get(first),
+                "caller accumulator payload remains mutable");
     }
 
     private static void nullableStrictFoldAndCollector() {
@@ -128,7 +132,8 @@ public final class KeyedGroupedReplayTest {
                 }, 3, 1, 5, 3);
         equal(3, seeds.get(), "nullable seed once per key");
         equal(5, calls.get(), "nullable folder every item");
-        equal(Arrays.asList(0, 1, null), new ArrayList<>(nullable.keySet()), "nullable result order");
+        equal(Arrays.asList(0, 1, null), new ArrayList<>(nullable.keySet()),
+                "nullable result order");
         yes(nullable.containsKey(null), "null key retained");
         yes(nullable.containsValue(null), "null value retained");
         equal(null, nullable.getOrDefault(0, "absent"), "mapped null differs from absent");
@@ -145,7 +150,9 @@ public final class KeyedGroupedReplayTest {
         Thread caller = Thread.currentThread();
         Collector<Integer, ArrayList<Integer>, String> collector = Collector.of(
                 ArrayList::new, List::add,
-                (left, right) -> { combined.incrementAndGet(); throw new AssertionError("combiner called"); },
+                (left, right) -> {
+                    combined.incrementAndGet(); throw new AssertionError("combiner called");
+                },
                 values -> {
                     same(caller, Thread.currentThread(), "collector finisher thread");
                     finishers.incrementAndGet();
@@ -195,26 +202,39 @@ public final class KeyedGroupedReplayTest {
         AtomicInteger closed = new AtomicInteger();
         var plan = tracked(List.of(1), value -> observed.incrementAndGet(),
                 closed::incrementAndGet).parallelByKey(value -> value);
-        raises(IllegalArgumentException.class, () -> plan.collectByKey(ArrayList::new, List::add, 0, 1, 1, 1));
-        raises(IllegalArgumentException.class, () -> plan.collectByKey(ArrayList::new, List::add, 257, 1, 1, 1));
-        raises(IllegalArgumentException.class, () -> plan.collectByKey(ArrayList::new, List::add, 1, 0, 1, 1));
-        raises(IllegalArgumentException.class, () -> plan.collectByKey(ArrayList::new, List::add, 1, 65_537, 1, 1));
-        raises(IllegalArgumentException.class, () -> plan.collectByKey(ArrayList::new, List::add, 1, 1, -1, 1));
-        raises(IllegalArgumentException.class, () -> plan.collectByKey(ArrayList::new, List::add, 1, 1, 1, -1));
-        raises(IllegalArgumentException.class, () -> plan.collectByKey(ArrayList::new, List::add, 1, 1, 1, 1_048_577));
-        raises(NullPointerException.class, () -> plan.collectByKey((Supplier<ArrayList<Integer>>) null, List::add, 1, 1, 1, 1));
-        raises(NullPointerException.class, () -> plan.collectByKey(ArrayList<Integer>::new, null, 1, 1, 1, 1));
-        raises(NullPointerException.class, () -> plan.reduceByKey(ArrayList<Integer>::new, List::add, null, 1, 1, 1, 1));
+        raises(IllegalArgumentException.class,
+                () -> plan.collectByKey(ArrayList::new, List::add, 0, 1, 1, 1));
+        raises(IllegalArgumentException.class,
+                () -> plan.collectByKey(ArrayList::new, List::add, 257, 1, 1, 1));
+        raises(IllegalArgumentException.class,
+                () -> plan.collectByKey(ArrayList::new, List::add, 1, 0, 1, 1));
+        raises(IllegalArgumentException.class,
+                () -> plan.collectByKey(ArrayList::new, List::add, 1, 65_537, 1, 1));
+        raises(IllegalArgumentException.class,
+                () -> plan.collectByKey(ArrayList::new, List::add, 1, 1, -1, 1));
+        raises(IllegalArgumentException.class,
+                () -> plan.collectByKey(ArrayList::new, List::add, 1, 1, 1, -1));
+        raises(IllegalArgumentException.class,
+                () -> plan.collectByKey(ArrayList::new, List::add, 1, 1, 1, 1_048_577));
+        raises(NullPointerException.class, () -> plan.collectByKey(
+                (Supplier<ArrayList<Integer>>) null, List::add, 1, 1, 1, 1));
+        raises(NullPointerException.class,
+                () -> plan.collectByKey(ArrayList<Integer>::new, null, 1, 1, 1, 1));
+        raises(NullPointerException.class,
+                () -> plan.reduceByKey(ArrayList<Integer>::new, List::add, null, 1, 1, 1, 1));
         raises(NullPointerException.class, () -> plan.foldByKey(() -> 0, null, 1, 1, 1, 1));
         raises(NullPointerException.class, () -> plan.forEachKeyOrdered(null, 1, 1, 1));
-        raises(NullPointerException.class, () -> plan.collectByKey((Collector<Integer, ?, Integer>) null, 1, 1, 1, 1));
+        raises(NullPointerException.class,
+                () -> plan.collectByKey((Collector<Integer, ?, Integer>) null, 1, 1, 1, 1));
         equal(0, observed.get(), "invalid invocation leaves source unopened");
         equal(0, closed.get(), "invalid invocation does not take source ownership");
-        equal(Map.of(1, List.of(1)), plan.collectByKey(ArrayList::new, List::add, 1, 1, 1, 1), "plan remains usable after invalid arguments");
+        equal(Map.of(1, List.of(1)), plan.collectByKey(ArrayList::new, List::add, 1, 1, 1, 1),
+                "plan remains usable after invalid arguments");
         equal(1, closed.get(), "valid invocation closes once");
 
         equal(Map.of(), ObjectStream.<Integer>snapshot(List.of()).parallelByKey(value -> value)
-                .collectByKey(ArrayList::new, List::add, 1, 1, 0, 0), "zero limits accept empty source");
+                .collectByKey(ArrayList::new, List::add, 1, 1, 0, 0),
+                "zero limits accept empty source");
         AtomicInteger overflowKeys = new AtomicInteger();
         raises(IllegalStateException.class, () -> ObjectStream.snapshot(List.of(0, 1))
                 .parallelByKey(value -> { overflowKeys.incrementAndGet(); return value; })
@@ -232,7 +252,8 @@ public final class KeyedGroupedReplayTest {
     }
 
     private static void failuresAndSourceClose() throws Exception {
-        for (Throwable marker : List.of(new IllegalStateException("worker marker"), new AssertionError("worker error"))) {
+        for (Throwable marker : List.of(new IllegalStateException("worker marker"),
+                new AssertionError("worker error"))) {
             AtomicInteger closed = new AtomicInteger();
             AtomicInteger finishes = new AtomicInteger();
             try (Invocation<Map<Integer, Integer>> call = new Invocation<>(() ->
@@ -241,20 +262,24 @@ public final class KeyedGroupedReplayTest {
                                     (state, value) -> rethrow(marker), state -> {
                                         finishes.incrementAndGet(); return state[0];
                                     }, 2, 4, 3, 1))) {
-                same(marker, raises(ExecutionException.class, call::get).getCause(), "worker failure identity");
+                same(marker, raises(ExecutionException.class, call::get).getCause(),
+                        "worker failure identity");
                 call.assertQuiescent();
             }
             equal(1, closed.get(), "worker failure closes source");
             equal(0, finishes.get(), "worker failure prevents finisher");
         }
         AtomicInteger closed = new AtomicInteger();
-        raises(NullPointerException.class, () -> tracked(List.of(1), ignored -> { }, closed::incrementAndGet)
-                .parallelByKey(value -> value).collectByKey(() -> null, (state, value) -> { }, 1, 1, 1, 1));
+        raises(NullPointerException.class,
+                () -> tracked(List.of(1), ignored -> { }, closed::incrementAndGet)
+                .parallelByKey(value -> value)
+                .collectByKey(() -> null, (state, value) -> { }, 1, 1, 1, 1));
         equal(1, closed.get(), "null seed closes source");
 
         IllegalStateException closeFailure = new IllegalStateException("close failure");
         AtomicInteger finishes = new AtomicInteger();
-        same(closeFailure, raises(IllegalStateException.class, () -> tracked(List.of(1), ignored -> { },
+        same(closeFailure, raises(IllegalStateException.class,
+                () -> tracked(List.of(1), ignored -> { },
                 () -> { throw closeFailure; }).parallelByKey(value -> value)
                 .reduceByKey(ArrayList<Integer>::new, List::add, state -> {
                     finishes.incrementAndGet(); return state;
@@ -263,9 +288,11 @@ public final class KeyedGroupedReplayTest {
 
         IllegalArgumentException primary = new IllegalArgumentException("primary");
         IllegalStateException secondary = new IllegalStateException("secondary close");
-        Throwable failure = raises(IllegalArgumentException.class, () -> tracked(List.of(1), ignored -> { },
+        Throwable failure = raises(IllegalArgumentException.class,
+                () -> tracked(List.of(1), ignored -> { },
                 () -> { throw secondary; }).parallelByKey(value -> value)
-                .collectByKey(ArrayList<Integer>::new, (state, value) -> { throw primary; }, 1, 1, 1, 1));
+                .collectByKey(ArrayList<Integer>::new,
+                        (state, value) -> { throw primary; }, 1, 1, 1, 1));
         same(primary, failure, "primary failure retained");
         equal(1, failure.getSuppressed().length, "source close suppressed once");
         same(secondary, failure.getSuppressed()[0], "exact suppressed close failure");
@@ -274,7 +301,9 @@ public final class KeyedGroupedReplayTest {
         RuntimeException finishFailure = new RuntimeException("finisher failure");
         same(finishFailure, raises(RuntimeException.class, () -> tracked(List.of(1), ignored -> { },
                 finishClose::incrementAndGet).parallelByKey(value -> value)
-                .reduceByKey(ArrayList<Integer>::new, List::add, state -> { throw finishFailure; }, 1, 1, 1, 1)), "finisher failure identity");
+                .reduceByKey(ArrayList<Integer>::new, List::add,
+                        state -> { throw finishFailure; }, 1, 1, 1, 1)),
+                "finisher failure identity");
         equal(1, finishClose.get(), "source closed before failing finisher");
     }
 
@@ -303,8 +332,10 @@ public final class KeyedGroupedReplayTest {
                     same(caller, Thread.currentThread(), "acknowledgement caller thread");
                     int epoch = Math.toIntExact(marker / 10 - 1);
                     equal(perEpoch, counts[epoch].get(), "barrier waits for prior data");
-                    equal((epoch + 1) * (perEpoch + 1), pulled.get(), "no pull past marker before acknowledgement");
-                    if (epoch + 1 < epochs) equal(0, counts[epoch + 1].get(), "no next-epoch action");
+                    equal((epoch + 1) * (perEpoch + 1), pulled.get(),
+                            "no pull past marker before acknowledgement");
+                    if (epoch + 1 < epochs)
+                        equal(0, counts[epoch + 1].get(), "no next-epoch action");
                     markers.add(marker);
                     acknowledged.incrementAndGet();
                 }, frames.size());
@@ -332,29 +363,36 @@ public final class KeyedGroupedReplayTest {
         List<Integer> tail = replay.mapOrdered(Frame::value, 3, 2, 14);
         equal(14, keys.get(), "replay skips key extraction before marker");
         equal(List.of(20L, 30L), acknowledged, "replay acknowledges only subsequent markers");
-        List<Integer> expected = frames.stream().filter(frame -> frame.marker() < 0 && frame.epoch() > 0)
+        List<Integer> expected = frames.stream()
+                .filter(frame -> frame.marker() < 0 && frame.epoch() > 0)
                 .map(Frame::value).toList();
         equal(expected, tail, "marked map preserves source order");
         keys.set(0);
         acknowledged.clear();
-        equal(21, original.mapOrdered(Frame::value, 3, 2, 21).size(), "original immutable plan still complete");
+        equal(21, original.mapOrdered(Frame::value, 3, 2, 21).size(),
+                "original immutable plan still complete");
         equal(21, keys.get(), "original key callbacks unchanged by replay configuration");
         equal(List.of(10L, 20L, 30L), acknowledged, "original acknowledgements unchanged");
 
         acknowledged.clear();
         keys.set(0);
         raises(IllegalArgumentException.class, () -> original.reprocessAfter(999)
-                .forEachKeyOrdered(frame -> { throw new AssertionError("missing replay performed action"); }, 2, 1, 0));
+                .forEachKeyOrdered(frame -> {
+                    throw new AssertionError("missing replay performed action");
+                }, 2, 1, 0));
         equal(0, keys.get(), "missing replay performs no key extraction");
         equal(List.of(), acknowledged, "missing replay performs no acknowledgements");
         KeyedParallelismPlan.Receipt end = original.reprocessAfter(30)
-                .forEachKeyOrdered(frame -> { throw new AssertionError("replay past final marker"); }, 2, 1, 0);
+                .forEachKeyOrdered(frame -> {
+                    throw new AssertionError("replay past final marker");
+                }, 2, 1, 0);
         equal(0L, end.delivered(), "final marker replay is empty");
         equal(0L, end.markersAcknowledged(), "matching marker is not acknowledged");
         equal(-1L, end.lastMarkerId(), "no new marker sentinel");
 
         Map<Integer, ArrayList<Integer>> grouped = original.reprocessAfter(20)
-                .collectByKey(ArrayList<Integer>::new, (values, frame) -> values.add(frame.value()), 3, 2, 7, 3);
+                .collectByKey(ArrayList<Integer>::new,
+                        (values, frame) -> values.add(frame.value()), 3, 2, 7, 3);
         equal(List.of(200, 203, 206), grouped.get(0), "stateful replay first group");
         equal(List.of(201, 204), grouped.get(1), "stateful replay second group");
         equal(List.of(202, 205), grouped.get(2), "stateful replay third group");
@@ -363,7 +401,8 @@ public final class KeyedGroupedReplayTest {
         var once = ObjectStream.once(frames.stream().onClose(onceClosed::incrementAndGet));
         raises(IllegalStateException.class, () -> once.parallelByKey(Frame::key));
         equal(0, onceClosed.get(), "one-shot keyed refusal leaves source ownership unchanged");
-        equal(frames, once.toBoundedList(frames.size()), "one-shot source remains usable after keyed refusal");
+        equal(frames, once.toBoundedList(frames.size()),
+                "one-shot source remains usable after keyed refusal");
         equal(1, onceClosed.get(), "one-shot source eventually closes once");
     }
 
@@ -373,8 +412,10 @@ public final class KeyedGroupedReplayTest {
         raises(IllegalArgumentException.class, () -> empty.reprocessAfter(-1));
         raises(NullPointerException.class, () -> empty.markers(null, ignored -> { }, 0));
         raises(NullPointerException.class, () -> empty.markers(Frame::marker, null, 0));
-        raises(IllegalArgumentException.class, () -> empty.markers(Frame::marker, ignored -> { }, -1));
-        equal(new KeyedParallelismPlan.Receipt(0, 0, -1), empty.markers(Frame::marker, ignored -> { }, 0)
+        raises(IllegalArgumentException.class,
+                () -> empty.markers(Frame::marker, ignored -> { }, -1));
+        equal(new KeyedParallelismPlan.Receipt(0, 0, -1),
+                empty.markers(Frame::marker, ignored -> { }, 0)
                 .forEachKeyOrdered(ignored -> { }, 1, 1, 0), "empty marked receipt");
 
         List<Frame> markers = List.of(new Frame(0, 0, 0, 0), new Frame(Long.MAX_VALUE, 0, 0, 0));
@@ -392,14 +433,17 @@ public final class KeyedGroupedReplayTest {
                 List.of(new Frame(1, 0, 0, 0), new Frame(1, 0, 0, 0)),
                 List.of(new Frame(2, 0, 0, 0), new Frame(1, 0, 0, 0)))) {
             raises(IllegalArgumentException.class, () -> ObjectStream.snapshot(malformed)
-                    .parallelByKey(Frame::key).markers(Frame::marker, ignored -> { }, malformed.size())
+                    .parallelByKey(Frame::key)
+                    .markers(Frame::marker, ignored -> { }, malformed.size())
                     .forEachKeyOrdered(ignored -> { }, 1, 1, 0));
         }
         AtomicInteger classified = new AtomicInteger();
         AtomicInteger keyed = new AtomicInteger();
-        raises(IllegalStateException.class, () -> ObjectStream.snapshot(List.of(new Frame(-1, 0, 1, 0)))
+        raises(IllegalStateException.class,
+                () -> ObjectStream.snapshot(List.of(new Frame(-1, 0, 1, 0)))
                 .parallelByKey(frame -> { keyed.incrementAndGet(); return frame.key(); })
-                .markers(frame -> { classified.incrementAndGet(); return frame.marker(); }, ignored -> { }, 0)
+                .markers(frame -> { classified.incrementAndGet(); return frame.marker(); },
+                        ignored -> { }, 0)
                 .forEachKeyOrdered(ignored -> { }, 1, 1, 1));
         equal(0, classified.get(), "frame bound before classifier");
         equal(0, keyed.get(), "frame bound before key");
@@ -422,8 +466,10 @@ public final class KeyedGroupedReplayTest {
         AtomicInteger acknowledgements = new AtomicInteger();
         RuntimeException worker = new RuntimeException("before marker");
         same(worker, raises(RuntimeException.class, () -> ObjectStream.snapshot(frames(1, 1))
-                .parallelByKey(Frame::key).markers(Frame::marker, ignored -> acknowledgements.incrementAndGet(), 2)
-                .forEachKeyOrdered(ignored -> { throw worker; }, 1, 1, 1)), "failure before marker identity");
+                .parallelByKey(Frame::key)
+                .markers(Frame::marker, ignored -> acknowledgements.incrementAndGet(), 2)
+                .forEachKeyOrdered(ignored -> { throw worker; }, 1, 1, 1)),
+                "failure before marker identity");
         equal(0, acknowledgements.get(), "worker failure prevents acknowledgement");
     }
 
@@ -435,7 +481,8 @@ public final class KeyedGroupedReplayTest {
                                 Thread.currentThread().interrupt(), 1, 1, 1))) {
             Throwable failure = raises(ExecutionException.class, call::get).getCause();
             yes(failure instanceof IllegalStateException, "self-interrupted callback refuses");
-            yes(failure.getCause() instanceof InterruptedException, "worker interruption cause retained");
+            yes(failure.getCause() instanceof InterruptedException,
+                    "worker interruption cause retained");
             call.assertQuiescent();
         }
         equal(1, closed.get(), "self-interrupted callback closes source");
@@ -450,7 +497,9 @@ public final class KeyedGroupedReplayTest {
         try (Invocation<Map<Integer, Integer>> call = new Invocation<>(() -> {
             try {
                 return tracked(List.of(0, 1, 2, 3, 4), ignored -> { }, closed::incrementAndGet)
-                        .parallelByKey(value -> { if (value == 3) fourthKey.countDown(); return 0; })
+                        .parallelByKey(value -> {
+                            if (value == 3) fourthKey.countDown(); return 0;
+                        })
                         .foldByKey(() -> 0, (state, value) -> {
                             try {
                                 holdWorker.await();
@@ -466,7 +515,8 @@ public final class KeyedGroupedReplayTest {
                 throw failure;
             }
         })) {
-            yes(fourthKey.await(WAIT_SECONDS, TimeUnit.SECONDS), "coordinator reaches saturated lane");
+            yes(fourthKey.await(WAIT_SECONDS, TimeUnit.SECONDS),
+                    "coordinator reaches saturated lane");
             call.thread.interrupt();
             Throwable failure = raises(ExecutionException.class, call::get).getCause();
             yes(failure instanceof IllegalStateException, "interruption wrapped consistently");
@@ -501,7 +551,8 @@ public final class KeyedGroupedReplayTest {
     private static List<Frame> frames(int epochs, int count) {
         List<Frame> frames = new ArrayList<>();
         for (int epoch = 0; epoch < epochs; epoch++) {
-            for (int index = 0; index < count; index++) frames.add(new Frame(-1, index % 3, epoch * 100 + index, epoch));
+            for (int index = 0; index < count; index++)
+                frames.add(new Frame(-1, index % 3, epoch * 100 + index, epoch));
             frames.add(new Frame((epoch + 1L) * 10, 0, 0, epoch));
         }
         return frames;
@@ -533,12 +584,14 @@ public final class KeyedGroupedReplayTest {
 
     private static void equal(Object expected, Object actual, String message) {
         CHECKS.incrementAndGet();
-        if (!Objects.equals(expected, actual)) throw new AssertionError(message + ": " + expected + " != " + actual);
+        if (!Objects.equals(expected, actual))
+            throw new AssertionError(message + ": " + expected + " != " + actual);
     }
 
     private static void equal(long expected, long actual, String message) {
         CHECKS.incrementAndGet();
-        if (expected != actual) throw new AssertionError(message + ": " + expected + " != " + actual);
+        if (expected != actual)
+            throw new AssertionError(message + ": " + expected + " != " + actual);
     }
 
     private static void same(Object expected, Object actual, String message) {
@@ -547,7 +600,8 @@ public final class KeyedGroupedReplayTest {
     }
 
     private static final class Invocation<V> implements AutoCloseable {
-        private final ThreadGroup group = new ThreadGroup("m3-grouped-replay-test-" + GROUP_IDS.incrementAndGet());
+        private final ThreadGroup group = new ThreadGroup(
+                "m3-grouped-replay-test-" + GROUP_IDS.incrementAndGet());
         private final FutureTask<V> task;
         private final Thread thread;
 
@@ -567,7 +621,8 @@ public final class KeyedGroupedReplayTest {
 
         private List<Thread> live() {
             return Thread.getAllStackTraces().keySet().stream()
-                    .filter(candidate -> candidate.getThreadGroup() == group && candidate.isAlive()).toList();
+                    .filter(candidate -> candidate.getThreadGroup() == group && candidate.isAlive())
+                    .toList();
         }
 
         @Override public void close() {
@@ -579,7 +634,8 @@ public final class KeyedGroupedReplayTest {
                     List<Thread> live = live();
                     if (live.isEmpty()) return;
                     for (Thread remaining : live) remaining.interrupt();
-                    if (System.nanoTime() >= deadline) throw new AssertionError("test leaked workers: " + live);
+                    if (System.nanoTime() >= deadline)
+                        throw new AssertionError("test leaked workers: " + live);
                     for (Thread remaining : live) {
                         try { remaining.join(20); }
                         catch (InterruptedException interruption) { interrupted = true; }

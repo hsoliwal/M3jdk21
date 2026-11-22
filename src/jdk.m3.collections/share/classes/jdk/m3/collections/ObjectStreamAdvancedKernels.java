@@ -426,7 +426,8 @@ final class ObjectStreamAdvancedKernels {
                     default -> throw new AssertionError("unknown join kind");
                 };
                 cardinality = Math.addExact(cardinality, added);
-                if (cardinality > maxResults) throw new IllegalStateException("join exceeds maxResults");
+                if (cardinality > maxResults)
+                    throw new IllegalStateException("join exceeds maxResults");
             }
             Spliterator<O> output = new Spliterators.AbstractSpliterator<>(
                     cardinality, Spliterator.ORDERED) {
@@ -543,7 +544,8 @@ final class ObjectStreamAdvancedKernels {
         for (int key = 0; key < source.keys.length; key++) {
             int begin = source.offsets[key];
             int end = source.offsets[key + 1];
-            Stream<T> group = IntStream.range(begin, end).mapToObj(at -> source.valueAt(source.rows[at]));
+            Stream<T> group = IntStream.range(begin, end)
+                    .mapToObj(at -> source.valueAt(source.rows[at]));
             try (Stream<T> selected = topK(group, Math.min(k, end - begin), comparator)) {
                 results[key] = selected.toList();
             }

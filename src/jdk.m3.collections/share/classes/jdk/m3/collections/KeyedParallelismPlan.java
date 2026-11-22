@@ -313,7 +313,8 @@ public final class KeyedParallelismPlan<T, K> {
         try {
             for (int lane = 0; lane < partitionCount; lane++) {
                 final BlockingQueue<Work<T>> queue = queues.get(lane);
-                workers.execute(() -> runWorkLane(queue, completed, mapper, laneFailure, joinOnFailure));
+                workers.execute(() -> runWorkLane(queue, completed, mapper,
+                        laneFailure, joinOnFailure));
             }
             try (Stream<T> input = source.stream()) {
                 var iterator = input.iterator();
@@ -337,10 +338,12 @@ public final class KeyedParallelismPlan<T, K> {
                         item = iterator.next();
                         frames++;
                         long marker = markerClassifier.applyAsLong(item);
-                        if (marker < -1) throw new IllegalArgumentException("invalid marker id: " + marker);
+                        if (marker < -1)
+                            throw new IllegalArgumentException("invalid marker id: " + marker);
                         if (marker >= 0) {
                             if (marker <= lastObservedMarker) {
-                                throw new IllegalArgumentException("marker ids must increase strictly");
+                                throw new IllegalArgumentException(
+                                        "marker ids must increase strictly");
                             }
                             lastObservedMarker = marker;
                             if (seeking) {
@@ -373,7 +376,8 @@ public final class KeyedParallelismPlan<T, K> {
                     submitted++;
                     inFlight++;
                 }
-                if (seeking) throw new IllegalArgumentException("replay marker not present: " + replayAfter);
+                if (seeking)
+                    throw new IllegalArgumentException("replay marker not present: " + replayAfter);
                 while (inFlight > 0) {
                     sink.accept(take(completed));
                     inFlight--;
@@ -509,7 +513,8 @@ public final class KeyedParallelismPlan<T, K> {
         }
     }
 
-    private static void requireExecutionBounds(int partitionCount, int maxInFlight, int maxElements) {
+    private static void requireExecutionBounds(
+            int partitionCount, int maxInFlight, int maxElements) {
         requireRange(partitionCount, 1, MAX_PARTITIONS, "partitionCount");
         requireRange(maxInFlight, 1, MAX_IN_FLIGHT, "maxInFlight");
         if (maxElements < 0) throw new IllegalArgumentException("maxElements must be nonnegative");

@@ -1575,7 +1575,8 @@ public final class ObjectStream<T> {
         requireNonNegative(before, "before");
         requireNonNegative(after, "after");
         if ((long) before + after + 1 > MAX_STATEFUL_WIDTH) {
-            throw new IllegalArgumentException("complete window width exceeds " + MAX_STATEFUL_WIDTH);
+            throw new IllegalArgumentException(
+                    "complete window width exceeds " + MAX_STATEFUL_WIDTH);
         }
         requireNonNegative(maxElements, "maxElements");
         requireNonNegative(maxKeys, "maxKeys");
@@ -1610,7 +1611,8 @@ public final class ObjectStream<T> {
         Objects.requireNonNull(keyExtractor, "keyExtractor");
         Objects.requireNonNull(comparator, "comparator");
         requireNonNegative(k, "k");
-        if (k > MAX_STATEFUL_WIDTH) throw new IllegalArgumentException("k exceeds " + MAX_STATEFUL_WIDTH);
+        if (k > MAX_STATEFUL_WIDTH)
+            throw new IllegalArgumentException("k exceeds " + MAX_STATEFUL_WIDTH);
         requireNonNegative(maxElements, "maxElements");
         requireNonNegative(maxKeys, "maxKeys");
         return ObjectStreamAdvancedKernels.topKByKey(
