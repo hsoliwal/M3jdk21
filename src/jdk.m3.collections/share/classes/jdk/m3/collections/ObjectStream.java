@@ -41,7 +41,6 @@ import java.util.function.Predicate;
 import java.util.function.Supplier;
 import java.util.stream.Collector;
 import java.util.stream.Stream;
-import java.util.stream.Streams;
 import java.util.stream.StreamSupport;
 
 /**
@@ -323,28 +322,42 @@ public final class ObjectStream<T> {
     }
 
     /**
-     * Lazily map overlapping adjacent pairs using the java.base stream owner.
-     * Empty and singleton inputs produce no results. Each replay opens the
-     * original source afresh; the mapped traversal owns source closure.
+     * Lazily map overlapping adjacent pairs using the existing M3
+     * ObjectStreamLanguageKernels. Its one-pass Java 21 implementation also
+     * works when the standalone Maven module is compiled against a stock JDK
+     * (whose java.util.stream.Streams is package-private).
+     *
+     * <p>Empty and singleton inputs produce no results. Each replay opens
+     * the original source afresh; the mapped traversal owns source closure.
      */
     public <R> ObjectStream<R> pairwise(
             BiFunction<? super T, ? super T, ? extends R> mapper) {
         Objects.requireNonNull(mapper, "mapper");
-        return delegateStream(input -> Streams.pairwise(input, mapper));
+        return delegateStream(input -> ObjectStreamLanguageKernels.zipWithNext(input, mapper));
     }
 
     /**
      * Lazily map until the first empty optional, consuming that terminating
      * input but requesting no later elements. A null mapped optional is
      * rejected. Each evaluation has independent termination state.
+     *
+     * <p>Adapt the Optional-only stop signal to the already-owned, one-pass
+     * ObjectStreamLoopKernels.mapWhile traversal. An Optional cannot contain
+     * null, so this exactly preserves the output/termination distinction
+     * while remaining compilable on a stock Java 21 toolchain.
      */
     public <R> ObjectStream<R> mapWhile(
             Function<? super T, ? extends Optional<? extends R>> mapper) {
         Objects.requireNonNull(mapper, "mapper");
-        return delegateStream(input -> Streams.mapWhile(input, mapper));
+        return delegateStream(input -> ObjectStreamLoopKernels.<T, R>mapWhile(
+                input, value -> {
+                    Optional<? extends R> mapped = Objects.requireNonNull(
+                            mapper.apply(value), "mapped optional");
+                    return mapped.orElse(null);
+                }));
     }
 
-    /** Transfer this plan's opened traversal to a java.base stream factory. */
+    /** Transfer this plan's opened traversal to a stream-kernel factory. */
     private <R> ObjectStream<R> delegateStream(Function<Stream<T>, Stream<R>> factory) {
         return new ObjectStream<>(() -> {
             Stream<T> input = stream();
