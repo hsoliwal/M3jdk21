@@ -17,10 +17,27 @@ The implementation uses existing `ObjectStream` inputs, `M3LinkedHashMap` right-
 
 Source-only: compile the two Java product/test files against the existing package APIs using JDK 21, then run `GinqHashJoinTest`. The test supplies a 2,000-seed oracle across four join modes and checks nontrivial budget/ordering/resource behavior.
 
-Installed image: run `m3/compatibility/groovy/run-ginq-join-installed.sh /absolute/path/to/jdk /new/out/dir` (or `.ps1` on Windows). It rejects a stock JDK missing the `jdk.m3.collections` module and runs both mixed and `-Xint` modes. Preserve exit status/output as a receipt; an unexecuted runner does not qualify the image.
+Installed image: first build the existing source-owned JNI library with `make/m3/arrays/CMakeLists.txt` from the original `src/jdk.m3.collections/share/native/libm3arrays` sources and run its CTest suite. Set `M3_ARRAYS_NATIVE_PATH` to an absolute, existing, non-symlinked `libm3_arrays.so` (or the platform's library filename). Then run `m3/compatibility/groovy/run-ginq-join-installed.sh /absolute/path/to/jdk /new/out/dir` (or the Windows `.ps1`). The existing `jdk.m3.arrays.ArrayNative` requires `-Dm3.arrays.native.path` for its JNI-backed collection allocations; both launchers now supply this property explicitly. Missing/empty/symlinked JNI paths fail closed before creating an output receipt. The CMake library, full image and linked image must use the same source and ABI; preserve the CTest and JNI hash receipts. Merely having a module in `--list-modules` is not enough.
 
 Both launchers require the collections module **and** nonempty packaged `lib/modules` and `jdk.m3.collections.jmod`. They inspect installed `java.base/java.lang.String` with the selected `javap`, requiring `capitalize()`, `uncapitalize()` and `center(int,String)`, and refuse a mismatched actual `java.home`. This distinguishes obvious stock-JDK impersonations, but does **not** certify source provenance. Both runners record SHA-256 for the jtreg source, selected `java`/`javac`/`javap`, module image, collections JMOD and runner, plus the module inventory, String API, runtime settings, compiler output, normal/`-Xint` transcripts and success only after mode parity. The Linux source-only regression deliberately refuses seven forged conditions (missing executable, existing receipt directory, missing/prefix-collision module, missing JMOD, missing M3 String member, wrong `java.home`); `bash -n` and all seven negative cases passed locally. The hosted existing native workflow now runs these negatives before native building, runs the installed-image receipt after full+jlink join checks and adds the GINQ test to real jtreg. **Windows PowerShell and the actual source-built image remain NOT RUN by the local checks.**
 
 Canonical exact-source Java/OpenRewrite recipe proposal belongs under `hsoliwal/com.synexia`; do not copy donor Groovy implementations. Compare against real Groovy pinned releases separately, and preserve pre-existing String.capitalize/uncapitalize/center semantic FAIL. Full M3 native/JNI/jtreg, platforms, allocation/throughput benchmarking and SDK replay remain separate acceptance gates.
 
 Official donor semantics: https://groovy-lang.org/using-ginq.html
+
+
+### Native receiving gate: unverified CI candidate
+
+The first actual full M3JDK21 CI image built, and its original `GinqHashJoin`
+class was present. The GINQ witness then failed at `M3LinkedHashMap.createTable`
+because `ArrayNative.allocateObjectsRequired` had no loaded JNI library
+(GitHub Actions run `44994783094`). The current workflow explicitly builds
+the existing `m3_arrays` CMake target, executes its native C tests, checks the
+original JNI allocation symbols and SHA-256, then passes its exact library
+path to normal and linked-image GINQ runs and the jtreg `JAVA_OPTIONS` control
+variable. No Java collection owner, JNI ABI, runtime native-load contract or
+canonical hash-join product source is altered by this receiver correction.
+
+**Status:** The workflow change is committed, but a successful rerun of the
+real source-built image and jtreg has not yet been observed. This gate remains
+HOLD until the actual C/native/JVM outputs are available.
