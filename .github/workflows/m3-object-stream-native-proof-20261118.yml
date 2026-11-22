@@ -10,6 +10,8 @@ on:
       - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/GinqHashJoin.java'
       - 'test/jdk/jdk/m3/collections/GinqHashJoinTest.java'
       - 'm3/compatibility/groovy/run-ginq-join-installed.sh'
+      - 'm3/compatibility/groovy/run-ginq-join-installed.ps1'
+      - 'm3/compatibility/groovy/test-ginq-runner-negative.sh'
       - 'test/jdk/jdk/m3/collections/ObjectStream*.java'
       - 'm3/collections/qualification/stream-current-compatible-20261118/**'
       - 'm3/collections/test_verify_stream_current.py'
@@ -30,6 +32,8 @@ on:
       - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/GinqHashJoin.java'
       - 'test/jdk/jdk/m3/collections/GinqHashJoinTest.java'
       - 'm3/compatibility/groovy/run-ginq-join-installed.sh'
+      - 'm3/compatibility/groovy/run-ginq-join-installed.ps1'
+      - 'm3/compatibility/groovy/test-ginq-runner-negative.sh'
       - 'test/jdk/jdk/m3/collections/ObjectStream*.java'
       - 'm3/collections/qualification/stream-current-compatible-20261118/**'
       - 'm3/collections/test_verify_stream_current.py'
@@ -67,6 +71,9 @@ jobs:
           git diff --check
           python3 -m unittest -v m3/collections/test_verify_stream_current.py
           python3 m3/collections/qualification/stream-current-compatible-20261118/verify.py
+          bash -n m3/compatibility/groovy/run-ginq-join-installed.sh
+          bash -n m3/compatibility/groovy/test-ginq-runner-negative.sh
+          bash m3/compatibility/groovy/test-ginq-runner-negative.sh
 
   actual-m3jdk:
     name: Build modified M3JDK21 image and execute stream JUnit
@@ -247,11 +254,15 @@ jobs:
             | tee "$RUNNER_TEMP/m3-ginq-jlink-image.log"
           grep -Fx 'M3_GROOVY_GINQ_JOIN_PASS checks=8041 seededTrials=2000 joinModes=4' \
             "$RUNNER_TEMP/m3-ginq-jlink-image.log"
+          bash m3/compatibility/groovy/run-ginq-join-installed.sh \
+            "$M3_JAVA_HOME" "$RUNNER_TEMP/m3-ginq-installed-receipt"
+          grep -Fx 'M3_GINQ_INSTALLED_SOURCE_BOUND_TESTS_PASS' \
+            "$RUNNER_TEMP/m3-ginq-installed-receipt/status.txt"
       - name: Run real jtreg contracts on the built M3 image
         run: |
           set -euo pipefail
           make CONF=m3-groovy-native-proof JOBS=2 test \
-            TEST="jtreg:test/jdk/jdk/m3/collections/ObjectStreamCollateTest.java jtreg:test/jdk/java/lang/String/StringCaseFamilyTest.java jtreg:test/jdk/java/lang/String/StringCaseFamilyDonorTest.java jtreg:test/jdk/java/util/stream/Streams/StreamMapNotNullTest.java" \
+            TEST="jtreg:test/jdk/jdk/m3/collections/ObjectStreamCollateTest.java jtreg:test/jdk/jdk/m3/collections/GinqHashJoinTest.java jtreg:test/jdk/java/lang/String/StringCaseFamilyTest.java jtreg:test/jdk/java/lang/String/StringCaseFamilyDonorTest.java jtreg:test/jdk/java/util/stream/Streams/StreamMapNotNullTest.java" \
             | tee "$RUNNER_TEMP/m3-groovy-jtreg.log"
       - name: Compile current M3 collections and execute real JUnit
         run: |
@@ -273,6 +284,7 @@ jobs:
             ${{ runner.temp }}/m3-collate-jlink-image.log
             ${{ runner.temp }}/m3-ginq-full-image.log
             ${{ runner.temp }}/m3-ginq-jlink-image.log
+            ${{ runner.temp }}/m3-ginq-installed-receipt/
             ${{ runner.temp }}/m3-gn-version.log
             ${{ runner.temp }}/m3-ninja-version.log
             ${{ runner.temp }}/m3-jtreg-version.log
