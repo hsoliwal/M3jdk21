@@ -38,7 +38,12 @@ if (!(Test-Path -LiteralPath $observedHome -PathType Container)) { throw 'Runtim
 $expectedHome = [System.IO.Path]::GetFullPath($JdkHome).TrimEnd('\', '/')
 $actualHome = [System.IO.Path]::GetFullPath($observedHome).TrimEnd('\', '/')
 if (![string]::Equals($expectedHome, $actualHome, [StringComparison]::OrdinalIgnoreCase)) { throw 'Candidate java.home differs from selected JDK' }
-$hashes = foreach ($inputPath in @($test, $java, $javac, $javap, $moduleImage, $collectionsJmod, $PSCommandPath)) {
+$native = $env:M3_ARRAYS_NATIVE_PATH
+if ([string]::IsNullOrWhiteSpace($native) -or !(Test-Path -LiteralPath $native -PathType Leaf)) { throw 'Missing explicit M3 arrays JNI library path' }
+$native = [System.IO.Path]::GetFullPath($native)
+$nativeFile = Get-Item -LiteralPath $native
+if ($nativeFile.Length -le 0 -or ($nativeFile.Attributes -band [System.IO.FileAttributes]::ReparsePoint)) { throw 'M3 arrays JNI library empty or symlinked' }
+$hashes = foreach ($inputPath in @($test, $java, $javac, $javap, $moduleImage, $collectionsJmod, $native, $PSCommandPath)) {
     $digest = Get-FileHash -Algorithm SHA256 -LiteralPath $inputPath
     '{0}  {1}' -f $digest.Hash.ToLowerInvariant(), $digest.Path
 }
@@ -46,9 +51,9 @@ $hashes | Out-File (Join-Path $OutputDirectory 'input-sha256.txt') -Encoding UTF
 Copy-Item -LiteralPath $runtimePropsPath -Destination (Join-Path $OutputDirectory 'java-version.txt')
 & $javac -source 21 -target 21 -Xlint:all -Werror --add-modules jdk.m3.collections -d $OutputDirectory $test 2>&1 | Tee-Object -FilePath (Join-Path $OutputDirectory 'compile.txt')
 if ($LASTEXITCODE -ne 0) { throw 'Strict compilation failed' }
-& $java --add-modules jdk.m3.collections -cp $OutputDirectory GinqHashJoinTest | Tee-Object (Join-Path $OutputDirectory 'mixed.txt')
+& $java "-Dm3.arrays.native.path=$native" --add-modules jdk.m3.collections -cp $OutputDirectory GinqHashJoinTest | Tee-Object (Join-Path $OutputDirectory 'mixed.txt')
 if ($LASTEXITCODE -ne 0) { throw 'Mixed-mode join contract failed' }
-& $java -Xint --add-modules jdk.m3.collections -cp $OutputDirectory GinqHashJoinTest | Tee-Object (Join-Path $OutputDirectory 'interpreted.txt')
+& $java -Xint "-Dm3.arrays.native.path=$native" --add-modules jdk.m3.collections -cp $OutputDirectory GinqHashJoinTest | Tee-Object (Join-Path $OutputDirectory 'interpreted.txt')
 if ($LASTEXITCODE -ne 0) { throw 'Interpreted join contract failed' }
 $mixed = Get-Content -Raw -LiteralPath (Join-Path $OutputDirectory 'mixed.txt')
 $interpreted = Get-Content -Raw -LiteralPath (Join-Path $OutputDirectory 'interpreted.txt')
