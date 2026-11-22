@@ -10,7 +10,7 @@ $javac = Join-Path $JdkHome 'bin/javac.exe'
 if (!(Test-Path $java -PathType Leaf) -or !(Test-Path $javac -PathType Leaf)) { throw 'Installed JDK executables missing' }
 if (Test-Path $OutputDirectory) { throw 'Output directory must not exist' }
 $modules = & $java --list-modules
-if ($LASTEXITCODE -ne 0 -or !($modules | Select-String '^jdk\.m3\.collections@')) { throw 'Candidate does not contain installed jdk.m3.collections module' }
+if ($LASTEXITCODE -ne 0 -or !($modules | Select-String '^jdk\.m3\.collections(@|$)')) { throw 'Candidate does not contain installed jdk.m3.collections module' }
 $repo = (Resolve-Path (Join-Path $PSScriptRoot '../../..')).Path
 $test = Join-Path $repo 'test/jdk/jdk/m3/collections/GinqHashJoinTest.java'
 if (!(Test-Path $test -PathType Leaf)) { throw 'Missing owning test source' }
