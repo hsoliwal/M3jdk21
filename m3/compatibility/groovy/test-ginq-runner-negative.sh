@@ -25,7 +25,7 @@ case "${1:-}" in
     fi
     ;;
   -XshowSettings:properties)
-    printf '%s\n' '    java.home = /' >&2
+    printf '    java.home = %s\n' "${M3_FAKE_JAVA_HOME:-/}" >&2
     ;;
   *) exit 99 ;;
 esac
@@ -48,7 +48,7 @@ expect_refusal() {
   local mode="$1" expected="$2" code
   local out="$scratch/$mode-output"
   set +e
-  M3_FAKE_MODE="$mode" bash "$runner" "$fake" "$out" \
+  M3_FAKE_MODE="$mode" M3_FAKE_JAVA_HOME="${M3_FAKE_JAVA_HOME:-/}" bash "$runner" "$fake" "$out" \
     > "$scratch/$mode.stdout" 2> "$scratch/$mode.stderr"
   code=$?
   set -e
@@ -77,4 +77,5 @@ expect_refusal missing_jmod 71
 mv "$scratch/temporarily-withheld-jmod" "$fake/jmods/jdk.m3.collections.jmod"
 expect_refusal missing_api 72
 expect_refusal bad_home 73
+M3_FAKE_JAVA_HOME="$fake" expect_refusal missing_native 74
 printf 'M3_GINQ_RUNNER_NEGATIVE_PASS checks=%d\n' "$checks"
