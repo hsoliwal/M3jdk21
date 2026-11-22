@@ -78,7 +78,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          javac -Xlint:all,-exports -Werror \
+          javac -Xlint:all,-exports,-module -Werror \
             --patch-module "java.base=$M3_EXACT_WORK/java.base" \
             --add-exports java.base/java.util.function.ext=ALL-UNNAMED \
             -sourcepath src/jdk.m3.collections/share/classes \
@@ -89,7 +89,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          javac -Xlint:all,-exports -Werror \
+          javac -Xlint:all,-exports,-module -Werror \
             --patch-module "java.base=$M3_EXACT_WORK/java.base" \
             --add-exports java.base/java.util.function.ext=ALL-UNNAMED \
             -cp "$M3_EXACT_WORK/jdk.m3.collections" \
