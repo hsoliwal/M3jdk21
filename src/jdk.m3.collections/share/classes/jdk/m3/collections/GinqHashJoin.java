@@ -33,15 +33,50 @@ import java.util.stream.Stream;
 public final class GinqHashJoin {
     private GinqHashJoin() { }
 
-    public enum Mode { INNER, LEFT, RIGHT, FULL }
+    /** Which unmatched sides are included in the bounded result. */
+    public enum Mode {
+        /** Only matched pairs. */ INNER,
+        /** Matched pairs and unmatched left rows. */ LEFT,
+        /** Matched pairs and unmatched right rows. */ RIGHT,
+        /** Matched pairs and unmatched rows from both sides. */ FULL
+    }
 
-    /** Presence flags distinguish an absent side from a present null row. */
+    /**
+     * Presence-aware projection; a present null value is not an absent side.
+     * @param <L> left payload type
+     * @param <R> right payload type
+     * @param <O> projection result type
+     */
     @FunctionalInterface
     public interface RowMapper<L, R, O> {
+        /**
+         * Project one result row, retaining a distinct presence bit for each side.
+         * @param leftPresent true if a left row actually exists
+         * @param left left value, possibly null even when present
+         * @param rightPresent true if a right row actually exists
+         * @param right right value, possibly null even when present
+         * @return mapped value, which may be null
+         */
         O apply(boolean leftPresent, L left, boolean rightPresent, R right);
     }
 
-    /** Convenience for an inner equijoin without allocating retained tuple rows. */
+    /**
+     * Convenience for an inner equijoin without allocating retained tuple rows.
+     * @param <L> left value type
+     * @param <R> right value type
+     * @param <K> hash/equality key type
+     * @param <O> result value type
+     * @param left replayable or one-shot left stream plan
+     * @param right replayable or one-shot right stream plan
+     * @param leftKey key extractor, invoked once per admitted left row
+     * @param rightKey key extractor, invoked once per admitted right row
+     * @param project result projection, invoked once per emitted match
+     * @param maxLeft maximum admitted left source rows
+     * @param maxRight maximum admitted right source rows
+     * @param maxKeys maximum distinct right index keys
+     * @param maxOutput maximum emitted results
+     * @return shallow-read-only materialized join result
+     */
     public static <L, R, K, O> List<O> inner(
             ObjectStream<? extends L> left, ObjectStream<? extends R> right,
             Function<? super L, ? extends K> leftKey,
@@ -58,6 +93,21 @@ public final class GinqHashJoin {
      * Bounded right-indexed equijoin with explicit outer-row presence.
      * Null keys compare equal to null keys; null payloads remain distinguishable.
      * Client key objects must obey stable equals/hashCode while indexed.
+     * @param <L> left value type
+     * @param <R> right value type
+     * @param <K> Java hash/equality key type
+     * @param <O> result value type
+     * @param left replayable or one-shot left stream plan
+     * @param right replayable or one-shot right stream plan
+     * @param leftKey key extractor, invoked once per admitted left row
+     * @param rightKey key extractor, invoked once per admitted right row
+     * @param project presence-aware projection, invoked per emitted row
+     * @param mode which unmatched sides to retain
+     * @param maxLeft maximum admitted left source rows
+     * @param maxRight maximum admitted right source rows
+     * @param maxKeys maximum distinct right index keys
+     * @param maxOutput maximum emitted results
+     * @return shallow-read-only materialized join result
      */
     public static <L, R, K, O> List<O> execute(
             ObjectStream<? extends L> left, ObjectStream<? extends R> right,
