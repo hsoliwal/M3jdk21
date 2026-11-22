@@ -15,11 +15,20 @@ $repo = (Resolve-Path (Join-Path $PSScriptRoot '../../..')).Path
 $test = Join-Path $repo 'test/jdk/jdk/m3/collections/GinqHashJoinTest.java'
 if (!(Test-Path $test -PathType Leaf)) { throw 'Missing owning test source' }
 New-Item -ItemType Directory -Path $OutputDirectory | Out-Null
+$modules | Out-File (Join-Path $OutputDirectory 'installed-modules.txt') -Encoding UTF8
+$hashes = foreach ($inputPath in @($test, $java, $javac, $PSCommandPath)) {
+    $digest = Get-FileHash -Algorithm SHA256 -LiteralPath $inputPath
+    '{0}  {1}' -f $digest.Hash.ToLowerInvariant(), $digest.Path
+}
+$hashes | Out-File (Join-Path $OutputDirectory 'input-sha256.txt') -Encoding UTF8
 & $java -version 2>&1 | Out-File (Join-Path $OutputDirectory 'java-version.txt')
-& $javac -source 21 -target 21 -Xlint:all -Werror --add-modules jdk.m3.collections -d $OutputDirectory $test
+& $javac -source 21 -target 21 -Xlint:all -Werror --add-modules jdk.m3.collections -d $OutputDirectory $test 2>&1 | Tee-Object -FilePath (Join-Path $OutputDirectory 'compile.txt')
 if ($LASTEXITCODE -ne 0) { throw 'Strict compilation failed' }
 & $java --add-modules jdk.m3.collections -cp $OutputDirectory GinqHashJoinTest | Tee-Object (Join-Path $OutputDirectory 'mixed.txt')
 if ($LASTEXITCODE -ne 0) { throw 'Mixed-mode join contract failed' }
 & $java -Xint --add-modules jdk.m3.collections -cp $OutputDirectory GinqHashJoinTest | Tee-Object (Join-Path $OutputDirectory 'interpreted.txt')
 if ($LASTEXITCODE -ne 0) { throw 'Interpreted join contract failed' }
-'M3_GINQ_INSTALLED_SOURCE_BOUND_TESTS_PASS'
+$mixed = Get-Content -Raw -LiteralPath (Join-Path $OutputDirectory 'mixed.txt')
+$interpreted = Get-Content -Raw -LiteralPath (Join-Path $OutputDirectory 'interpreted.txt')
+if ($mixed -cne $interpreted) { throw 'Mixed and interpreted stdout differ' }
+'M3_GINQ_INSTALLED_SOURCE_BOUND_TESTS_PASS' | Tee-Object -FilePath (Join-Path $OutputDirectory 'status.txt')
