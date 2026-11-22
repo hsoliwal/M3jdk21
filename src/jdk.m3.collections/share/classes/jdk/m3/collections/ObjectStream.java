@@ -1259,6 +1259,61 @@ public final class ObjectStream<T> {
         return groupByMany(Function.identity(), keyMapper, maxElements, maxKeys, maxMemberships);
     }
 
+    /**
+     * Bounded one-to-many frequency tally, companion to Groovy 6 groupByMany.
+     * Each key occurrence contributes one count, including repeated and null keys.
+     * Null key iterables contribute none. Key extraction runs exactly once per
+     * admitted source item; traversal remains ordered and sequential.
+     *
+     * <p>Only one primitive long[1] counter is retained per distinct key, with
+     * an M3 array-backed ordered key directory. No per-membership list, entry,
+     * box or tuple is allocated; the detached read-only result boxes once per
+     * distinct key. The result is published only after successful stream close.
+     * Budget refusal and callback exceptions close the opened source.
+     * No Groovy MetaClass, GDK, or Java collection contract is modified.</p>
+     */
+    public <K> Map<K, Long> countByMany(
+            Function<? super T, ? extends Iterable<? extends K>> keyMapper,
+            int maxElements, int maxKeys, long maxMemberships) {
+        Objects.requireNonNull(keyMapper, "keyMapper");
+        requireNonNegative(maxElements, "maxElements");
+        requireNonNegative(maxKeys, "maxKeys");
+        if (maxMemberships < 0L) throw new IllegalArgumentException("negative maxMemberships");
+        M3LinkedHashMap<K, long[]> counters = new M3LinkedHashMap<>();
+        int consumed = 0;
+        long memberships = 0L;
+        try (Stream<T> source = stream()) {
+            Iterator<T> iterator = source.iterator();
+            while (iterator.hasNext()) {
+                if (consumed >= maxElements) {
+                    throw new IllegalStateException("countByMany source budget exceeded");
+                }
+                T item = iterator.next();
+                consumed++;
+                Iterable<? extends K> keys = keyMapper.apply(item);
+                if (keys == null) continue;
+                for (K key : keys) {
+                    if (memberships >= maxMemberships) {
+                        throw new IllegalStateException("countByMany membership budget exceeded");
+                    }
+                    long[] count = counters.get(key);
+                    if (count == null) {
+                        if (counters.size() >= maxKeys) {
+                            throw new IllegalStateException("countByMany key budget exceeded");
+                        }
+                        count = new long[1];
+                        counters.put(key, count);
+                    }
+                    count[0] = Math.addExact(count[0], 1L);
+                    memberships++;
+                }
+            }
+        }
+        LinkedHashMap<K, Long> result = new LinkedHashMap<>();
+        counters.forEach((key, count) -> result.put(key, count[0]));
+        return Collections.unmodifiableMap(result);
+    }
+
     /** Compute two collectors in one ordered traversal; output is merged only after successful input closure. */
     public <A, B, R1, R2, R> R tee(
             Collector<? super T, A, R1> first,
