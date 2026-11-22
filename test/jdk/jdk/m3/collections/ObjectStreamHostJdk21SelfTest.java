@@ -9,6 +9,9 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Random;
+import java.util.Spliterator;
+import java.util.Spliterators;
+import java.util.stream.StreamSupport;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Stream;
 
@@ -23,6 +26,7 @@ public final class ObjectStreamHostJdk21SelfTest {
     public static void main(String[] args) {
         fixedAndReplayContracts();
         oneShotClosingAndErrors();
+        originalNoSplitCharacteristics();
         randomizedReference();
         System.out.println("PASS ObjectStreamHostJdk21SelfTest checks=" + checks);
     }
@@ -107,6 +111,54 @@ public final class ObjectStreamHostJdk21SelfTest {
                     throw new IllegalArgumentException("failure");
                 }).toBoundedList(1));
         same(1, failureClosed.get(), "failed mapWhile source closed");
+    }
+
+    private static void originalNoSplitCharacteristics() {
+        ObjectStream<Integer> plan = ObjectStream.snapshot(
+                java.util.stream.IntStream.range(0, 80).boxed().toList());
+        try (Stream<Integer> s = plan.pairwise(Integer::sum).stream()) {
+            Spliterator<Integer> split = s.spliterator();
+            check(split.hasCharacteristics(Spliterator.ORDERED), "ordered pairs");
+            check(!split.hasCharacteristics(Spliterator.NONNULL),
+                    "pairwise nullable mapped values");
+            check(split.trySplit() == null, "pairwise original no-split contract");
+        }
+        try (Stream<Integer> s = plan.mapWhile(Optional::of).stream()) {
+            Spliterator<Integer> split = s.spliterator();
+            check(split.hasCharacteristics(Spliterator.ORDERED), "ordered mapWhile");
+            check(split.hasCharacteristics(Spliterator.NONNULL),
+                    "Optional mapWhile never emits null");
+            check(split.trySplit() == null, "mapWhile original no-split contract");
+        }
+        // The older M3 zipWithNext kernel must not silently inherit the new
+        // unsplittable pairwise contract or change its published behavior.
+        try (Stream<Integer> s = plan.zipWithNext(Integer::sum).stream()) {
+            Spliterator<Integer> split = s.spliterator();
+            check(split.trySplit() != null, "zipWithNext historical split contract");
+        }
+
+        java.util.Iterator<Integer> items = List.of(1, 2, 3).iterator();
+        Spliterator<Integer> unsequenced = Spliterators.spliteratorUnknownSize(
+                items, 0);
+        try (Stream<Integer> s = ObjectStream.once(
+                StreamSupport.stream(unsequenced, false))
+                .pairwise(Integer::sum).stream()) {
+            Spliterator<Integer> split = s.spliterator();
+            check(!split.hasCharacteristics(Spliterator.ORDERED),
+                    "unordered pairwise must not claim ORDERED");
+            check(split.trySplit() == null, "unordered pairwise no-split");
+        }
+        java.util.Iterator<Integer> mappedItems = List.of(1, 2, 3).iterator();
+        try (Stream<Integer> s = ObjectStream.once(StreamSupport.stream(
+                Spliterators.spliteratorUnknownSize(mappedItems, 0), false))
+                .mapWhile(Optional::of).stream()) {
+            Spliterator<Integer> split = s.spliterator();
+            check(!split.hasCharacteristics(Spliterator.ORDERED),
+                    "unordered mapWhile must not claim ORDERED");
+            check(split.hasCharacteristics(Spliterator.NONNULL),
+                    "unordered mapWhile still NONNULL");
+            check(split.trySplit() == null, "unordered mapWhile no-split");
+        }
     }
 
     private static void randomizedReference() {
