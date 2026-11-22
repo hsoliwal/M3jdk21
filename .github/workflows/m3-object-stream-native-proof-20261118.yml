@@ -7,6 +7,9 @@ on:
     paths:
       - '.github/workflows/m3-object-stream-native-proof-20261118.yml'
       - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/ObjectStream*.java'
+      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/GinqHashJoin.java'
+      - 'test/jdk/jdk/m3/collections/GinqHashJoinTest.java'
+      - 'm3/compatibility/groovy/run-ginq-join-installed.sh'
       - 'test/jdk/jdk/m3/collections/ObjectStream*.java'
       - 'm3/collections/qualification/stream-current-compatible-20261118/**'
       - 'm3/collections/test_verify_stream_current.py'
@@ -24,6 +27,9 @@ on:
     paths:
       - '.github/workflows/m3-object-stream-native-proof-20261118.yml'
       - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/ObjectStream*.java'
+      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/GinqHashJoin.java'
+      - 'test/jdk/jdk/m3/collections/GinqHashJoinTest.java'
+      - 'm3/compatibility/groovy/run-ginq-join-installed.sh'
       - 'test/jdk/jdk/m3/collections/ObjectStream*.java'
       - 'm3/collections/qualification/stream-current-compatible-20261118/**'
       - 'm3/collections/test_verify_stream_current.py'
@@ -178,14 +184,6 @@ jobs:
           export JAVA_HOME="$M3_JAVA_HOME"
           export PATH="$JAVA_HOME/bin:$PATH"
           mvn -B -ntp -f m3/arrays/pom.xml -DskipTests install
-      - name: Compile current M3 collections and execute real JUnit
-        run: |
-          set -euo pipefail
-          export JAVA_HOME="$M3_JAVA_HOME"
-          export PATH="$JAVA_HOME/bin:$PATH"
-          mvn -B -ntp -f m3/collections/pom.xml \
-            -Dtest=ObjectStreamAdvancedContractTest,ObjectStreamLoopContractTest,ObjectStreamCompatibilityGateTest \
-            test
       - name: Verify installed collection module image
         run: |
           set -euo pipefail
@@ -222,12 +220,47 @@ jobs:
             | tee "$RUNNER_TEMP/m3-collate-jlink-image.log"
           grep -Fx 'OBJECT_STREAM_COLLATE_PASS checks=29894' \
             "$RUNNER_TEMP/m3-collate-jlink-image.log"
+      - name: Compile and run GINQ join on full and linked M3 images
+        run: |
+          set -euo pipefail
+          join_classes="$RUNNER_TEMP/m3-ginq-contract-classes"
+          empty_sourcepath="$RUNNER_TEMP/m3-ginq-empty-sourcepath"
+          mkdir -p "$join_classes" "$empty_sourcepath"
+          "$M3_JAVA_HOME/bin/javap" --module jdk.m3.collections \
+            jdk.m3.collections.GinqHashJoin \
+            | grep -F 'public final class jdk.m3.collections.GinqHashJoin'
+          "$M3_JAVA_HOME/bin/javac" \
+            -source 21 -target 21 -proc:none -implicit:none -Xlint:all -Werror \
+            --add-modules jdk.m3.collections \
+            -sourcepath "$empty_sourcepath" -classpath "$join_classes" \
+            -d "$join_classes" \
+            test/jdk/jdk/m3/collections/GinqHashJoinTest.java
+          "$M3_JAVA_HOME/bin/java" -Xmx64m -ea \
+            --add-modules jdk.m3.collections \
+            -cp "$join_classes" GinqHashJoinTest \
+            | tee "$RUNNER_TEMP/m3-ginq-full-image.log"
+          grep -Fx 'M3_GROOVY_GINQ_JOIN_PASS checks=8041 seededTrials=2000 joinModes=4' \
+            "$RUNNER_TEMP/m3-ginq-full-image.log"
+          "$RUNNER_TEMP/m3-object-stream-jlink/bin/java" -Xint -Xmx64m -ea \
+            --add-modules jdk.m3.collections \
+            -cp "$join_classes" GinqHashJoinTest \
+            | tee "$RUNNER_TEMP/m3-ginq-jlink-image.log"
+          grep -Fx 'M3_GROOVY_GINQ_JOIN_PASS checks=8041 seededTrials=2000 joinModes=4' \
+            "$RUNNER_TEMP/m3-ginq-jlink-image.log"
       - name: Run real jtreg contracts on the built M3 image
         run: |
           set -euo pipefail
           make CONF=m3-groovy-native-proof JOBS=2 test \
             TEST="jtreg:test/jdk/jdk/m3/collections/ObjectStreamCollateTest.java jtreg:test/jdk/java/lang/String/StringCaseFamilyTest.java jtreg:test/jdk/java/lang/String/StringCaseFamilyDonorTest.java jtreg:test/jdk/java/util/stream/Streams/StreamMapNotNullTest.java" \
             | tee "$RUNNER_TEMP/m3-groovy-jtreg.log"
+      - name: Compile current M3 collections and execute real JUnit
+        run: |
+          set -euo pipefail
+          export JAVA_HOME="$M3_JAVA_HOME"
+          export PATH="$JAVA_HOME/bin:$PATH"
+          mvn -B -ntp -f m3/collections/pom.xml \
+            -Dtest=ObjectStreamAdvancedContractTest,ObjectStreamLoopContractTest,ObjectStreamCompatibilityGateTest \
+            test
       - name: Retain Maven/JDK evidence
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
@@ -238,6 +271,8 @@ jobs:
             m3/arrays/target/surefire-reports/
             ${{ runner.temp }}/m3-collate-full-image.log
             ${{ runner.temp }}/m3-collate-jlink-image.log
+            ${{ runner.temp }}/m3-ginq-full-image.log
+            ${{ runner.temp }}/m3-ginq-jlink-image.log
             ${{ runner.temp }}/m3-gn-version.log
             ${{ runner.temp }}/m3-ninja-version.log
             ${{ runner.temp }}/m3-jtreg-version.log
