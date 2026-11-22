@@ -6,9 +6,9 @@
 /*
  * @test
  * @key headful
- * @summary Native TableCombo, TreeCombo and PasswordRevealer use original Swing models and real mouse event ownership
+ * @summary Native table/tree dropdowns and password reveal preserve Swing mouse and model ownership
  * @modules java.desktop/jdk.m3.swing.widgets
- * @run main/othervm M3NativeSelectorPasswordRobotTest
+ * @run main/othervm NativeSelectorPasswordRobotTest
  */
 
 import java.awt.BorderLayout;
@@ -35,7 +35,7 @@ import jdk.m3.swing.widgets.M3PasswordRevealer;
 import jdk.m3.swing.widgets.M3TableCombo;
 import jdk.m3.swing.widgets.M3TreeCombo;
 
-public class M3NativeSelectorPasswordRobotTest {
+public class NativeSelectorPasswordRobotTest {
     private static final int BUTTON1 = InputEvent.BUTTON1_DOWN_MASK;
 
     private static <T> T edt(Callable<T> task) throws Exception {
@@ -135,13 +135,18 @@ public class M3NativeSelectorPasswordRobotTest {
             check(edt(() -> {
                 Rectangle last = table.getCellRect(2, 0, true);
                 Rectangle viewport = table.getVisibleRect();
-                return viewport.y <= last.y && (long) viewport.y + viewport.height >= (long) last.y + last.height;
+                return viewport.y <= last.y
+                        && (long) viewport.y + viewport.height
+                                >= (long) last.y + last.height;
             }), "Table last displayed row is clipped by the native popup viewport");
             click(robot, rowPoint(table, 2));
-            check(edt(() -> selector.getSelectedModelRow() == 2), "Table selected row is not model row 2");
-            check(edt(() -> "Gamma".equals(selector.getText())), "Table popup selection text mismatch");
+            check(edt(() -> selector.getSelectedModelRow() == 2),
+                    "Table selected row is not model row 2");
+            check(edt(() -> "Gamma".equals(selector.getText())),
+                    "Table popup selection text mismatch");
             check(actions.get() == 1, "Table selection action must fire exactly once");
-            check(edt(() -> !selector.isPopupVisible()), "Table popup remained visible after commit");
+            check(edt(() -> !selector.isPopupVisible()),
+                    "Table popup remained visible after commit");
         } finally {
             edt(frame::dispose);
         }
@@ -173,10 +178,12 @@ public class M3NativeSelectorPasswordRobotTest {
                         && (long) viewport.y + viewport.height >= (long) last.y + last.height;
             }), "Tree last displayed row is clipped by the native popup viewport");
             click(robot, rowPoint(tree, 2));
-            check(edt(() -> "Beta".equals(selector.getText())), "Tree popup selection text mismatch");
+            check(edt(() -> "Beta".equals(selector.getText())),
+                    "Tree popup selection text mismatch");
             check(edt(() -> selector.getSelectedPath() != null), "TreePath selection lost");
             check(actions.get() == 1, "Tree selection action must fire exactly once");
-            check(edt(() -> !selector.isPopupVisible()), "Tree popup remained visible after commit");
+            check(edt(() -> !selector.isPopupVisible()),
+                    "Tree popup remained visible after commit");
         } finally {
             edt(frame::dispose);
         }
@@ -221,7 +228,8 @@ public class M3NativeSelectorPasswordRobotTest {
 
     public static void main(String[] args) throws Exception {
         if (GraphicsEnvironment.isHeadless()) {
-            throw new AssertionError("Requires an actual display; do not silently count headless skips");
+            throw new AssertionError("Requires an actual display; "
+                    + "do not silently count headless skips");
         }
         Robot robot = new Robot();
         robot.setAutoDelay(55);
@@ -231,6 +239,7 @@ public class M3NativeSelectorPasswordRobotTest {
         edt(() -> {
             for (java.awt.Window window : java.awt.Window.getWindows()) window.dispose();
         });
-        System.out.println("PASS: M3 TableCombo, TreeCombo, PasswordRevealer real-screen interactions");
+        System.out.println("PASS: M3 TableCombo, TreeCombo, "
+                + "PasswordRevealer real-screen interactions");
     }
 }
