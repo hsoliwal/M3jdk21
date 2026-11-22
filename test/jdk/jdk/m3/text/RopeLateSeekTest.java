@@ -67,7 +67,7 @@ public class RopeLateSeekTest {
             for (int i = 0; i < count; i++) {
                 char[] units = new char[] {(char) ('a' + (i % 4)),
                         (char) (i % 3 == 0 ? 0xd800 : 0),
-                        (char) (i % 7 == 0 ? 0xdc00 : 'b')};
+                        (i % 7 == 0 ? 0xdc00 : 'b')};
                 parts[i] = arena.copyUtf16(units);
                 reference.append(units);
             }
