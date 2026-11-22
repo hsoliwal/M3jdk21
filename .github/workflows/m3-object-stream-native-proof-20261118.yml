@@ -222,6 +222,33 @@ jobs:
             | tee "$RUNNER_TEMP/m3-collate-jlink-image.log"
           grep -Fx 'OBJECT_STREAM_COLLATE_PASS checks=29894' \
             "$RUNNER_TEMP/m3-collate-jlink-image.log"
+      - name: Compile and run countByMany on full and linked M3 images
+        run: |
+          set -euo pipefail
+          count_classes="$RUNNER_TEMP/m3-groovy-count-classes"
+          empty_sourcepath="$RUNNER_TEMP/m3-groovy-count-empty-sourcepath"
+          mkdir -p "$count_classes" "$empty_sourcepath"
+          "$M3_JAVA_HOME/bin/javac" \
+            -source 21 -target 21 -proc:none -implicit:none -Xlint:all -Werror \
+            --add-modules jdk.m3.collections \
+            --add-exports java.base/java.util.function.ext=ALL-UNNAMED \
+            -sourcepath "$empty_sourcepath" -classpath "$count_classes" \
+            -d "$count_classes" \
+            m3/compatibility/groovy/tests/M3GroovyCountByManyTest.java
+          "$M3_JAVA_HOME/bin/java" -Xmx64m -ea \
+            --add-modules jdk.m3.collections \
+            --add-exports java.base/java.util.function.ext=ALL-UNNAMED \
+            -cp "$count_classes" jdk.m3.collections.tests.M3GroovyCountByManyTest \
+            | tee "$RUNNER_TEMP/m3-groovy-count-full-image.log"
+          grep -Fx 'M3_GROOVY_COUNT_BY_MANY_PASS checks=5020 randomizedTrials=2500 seed=0x636f756e7442794d' \
+            "$RUNNER_TEMP/m3-groovy-count-full-image.log"
+          "$RUNNER_TEMP/m3-object-stream-jlink/bin/java" -Xmx64m -ea \
+            --add-modules jdk.m3.collections \
+            --add-exports java.base/java.util.function.ext=ALL-UNNAMED \
+            -cp "$count_classes" jdk.m3.collections.tests.M3GroovyCountByManyTest \
+            | tee "$RUNNER_TEMP/m3-groovy-count-jlink-image.log"
+          grep -Fx 'M3_GROOVY_COUNT_BY_MANY_PASS checks=5020 randomizedTrials=2500 seed=0x636f756e7442794d' \
+            "$RUNNER_TEMP/m3-groovy-count-jlink-image.log"
       - name: Run real jtreg contracts on the built M3 image
         run: |
           set -euo pipefail
@@ -237,6 +264,8 @@ jobs:
             m3/collections/target/surefire-reports/
             m3/arrays/target/surefire-reports/
             ${{ runner.temp }}/m3-collate-full-image.log
+            ${{ runner.temp }}/m3-groovy-count-full-image.log
+            ${{ runner.temp }}/m3-groovy-count-jlink-image.log
             ${{ runner.temp }}/m3-collate-jlink-image.log
             ${{ runner.temp }}/m3-gn-version.log
             ${{ runner.temp }}/m3-ninja-version.log
