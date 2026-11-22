@@ -19,6 +19,8 @@ Source-only: compile the two Java product/test files against the existing packag
 
 Installed image: run `m3/compatibility/groovy/run-ginq-join-installed.sh /absolute/path/to/jdk /new/out/dir` (or `.ps1` on Windows). It rejects a stock JDK missing the `jdk.m3.collections` module and runs both mixed and `-Xint` modes. Preserve exit status/output as a receipt; an unexecuted runner does not qualify the image.
 
+Both runners record the installed module list, SHA-256 fingerprints for the jtreg source and selected `java`/`javac` launchers and runner script, compiler output, mixed/interpreted transcripts, and a success receipt only after mode stdout agrees. The fingerprints identify these inputs, not the entire JDK image or `jmods`; image provenance remains a separate gate. On Linux, `bash -n` and stock-JDK missing-module refusal (exit 67, no output directory created) were re-exercised. PowerShell and a genuine installed M3 image remain NOT RUN here.
+
 Canonical exact-source Java/OpenRewrite recipe proposal belongs under `hsoliwal/com.synexia`; do not copy donor Groovy implementations. Compare against real Groovy pinned releases separately, and preserve pre-existing String.capitalize/uncapitalize/center semantic FAIL. Full M3 native/JNI/jtreg, platforms, allocation/throughput benchmarking and SDK replay remain separate acceptance gates.
 
 Official donor semantics: https://groovy-lang.org/using-ginq.html
