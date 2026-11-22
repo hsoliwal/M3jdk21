@@ -41,6 +41,15 @@ if [[ -z "$runtime_home" || ! -d "$runtime_home" || \
   echo 'candidate java.home differs from the supplied packaged JDK directory' >&2
   exit 73
 fi
+native="${M3_ARRAYS_NATIVE_PATH:-}"
+if [[ -z "$native" || ! -f "$native" || -L "$native" || ! -s "$native" ]]; then
+  echo 'source-built M3 arrays JNI path is missing, symlinked or empty' >&2
+  exit 74
+fi
+if [[ "$native" != /* ]]; then
+  echo 'M3 arrays JNI path must be absolute' >&2
+  exit 75
+fi
 repo="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../.." && pwd)"
 test="$repo/test/jdk/jdk/m3/collections/GinqHashJoinTest.java"
 if [[ ! -f "$test" ]]; then echo "missing owning jtreg source: $test" >&2; exit 68; fi
@@ -52,11 +61,11 @@ mkdir -p "$out"
 printf '%s\n' "$modules" > "$out/installed-modules.txt"
 printf '%s\n' "$string_api" > "$out/m3-string-api.txt"
 printf '%s\n' "$runtime_properties" > "$out/runtime-properties.txt"
-sha256sum "$test" "$jdk/bin/java" "$jdk/bin/javac" "$jdk/bin/javap" "$jdk/lib/modules" "$jdk/jmods/jdk.m3.collections.jmod" "${BASH_SOURCE[0]}" > "$out/input-sha256.txt"
+sha256sum "$test" "$jdk/bin/java" "$jdk/bin/javac" "$jdk/bin/javap" "$jdk/lib/modules" "$jdk/jmods/jdk.m3.collections.jmod" "$native" "${BASH_SOURCE[0]}" > "$out/input-sha256.txt"
 "$jdk/bin/java" -version 2> "$out/java-version.txt"
 "$jdk/bin/javac" -source 21 -target 21 -Xlint:all -Werror --add-modules jdk.m3.collections -d "$out" "$test" 2>&1 | tee "$out/compile.txt"
-"$jdk/bin/java" --add-modules jdk.m3.collections -cp "$out" GinqHashJoinTest | tee "$out/mixed.txt"
-"$jdk/bin/java" -Xint --add-modules jdk.m3.collections -cp "$out" GinqHashJoinTest | tee "$out/interpreted.txt"
+"$jdk/bin/java" "-Dm3.arrays.native.path=$native" --add-modules jdk.m3.collections -cp "$out" GinqHashJoinTest | tee "$out/mixed.txt"
+"$jdk/bin/java" -Xint "-Dm3.arrays.native.path=$native" --add-modules jdk.m3.collections -cp "$out" GinqHashJoinTest | tee "$out/interpreted.txt"
 if ! cmp -s "$out/mixed.txt" "$out/interpreted.txt"; then
   echo 'mixed and interpreted stdout differ' >&2
   exit 70
