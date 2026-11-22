@@ -16,7 +16,8 @@ if [[ -e "$out" || -L "$out" ]]; then
   echo 'output directory must not exist (no stale receipts)' >&2
   exit 66
 fi
-if ! "$jdk/bin/java" --list-modules | grep -q '^jdk\.m3\.collections@'; then
+modules="$("$jdk/bin/java" --list-modules)"
+if ! grep -Eq '^jdk\.m3\.collections(@|$)' <<< "$modules"; then
   echo 'candidate JVM does not contain installed jdk.m3.collections' >&2
   exit 67
 fi
