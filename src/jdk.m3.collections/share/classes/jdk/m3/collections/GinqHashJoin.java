@@ -165,7 +165,8 @@ public final class GinqHashJoin {
                 if (candidates != null) {
                     for (int i = 0; i < candidates.size(); i++) {
                         ensureRoom(output, maxOutput);
-                        output.add(project.apply(true, value, true, rightRows.get(candidates.get(i))));
+                        output.add(project.apply(true, value, true,
+                                rightRows.get(candidates.get(i))));
                         if (rightSeen != null) rightSeen.set(candidates.get(i));
                     }
                 } else if (mode == Mode.LEFT || mode == Mode.FULL) {
