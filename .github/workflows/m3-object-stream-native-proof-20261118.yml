@@ -178,14 +178,6 @@ jobs:
           export JAVA_HOME="$M3_JAVA_HOME"
           export PATH="$JAVA_HOME/bin:$PATH"
           mvn -B -ntp -f m3/arrays/pom.xml -DskipTests install
-      - name: Compile current M3 collections and execute real JUnit
-        run: |
-          set -euo pipefail
-          export JAVA_HOME="$M3_JAVA_HOME"
-          export PATH="$JAVA_HOME/bin:$PATH"
-          mvn -B -ntp -f m3/collections/pom.xml \
-            -Dtest=ObjectStreamAdvancedContractTest,ObjectStreamLoopContractTest,ObjectStreamCompatibilityGateTest \
-            test
       - name: Verify installed collection module image
         run: |
           set -euo pipefail
@@ -255,6 +247,14 @@ jobs:
           make CONF=m3-groovy-native-proof JOBS=2 test \
             TEST="jtreg:test/jdk/jdk/m3/collections/ObjectStreamCollateTest.java jtreg:test/jdk/java/lang/String/StringCaseFamilyTest.java jtreg:test/jdk/java/lang/String/StringCaseFamilyDonorTest.java jtreg:test/jdk/java/util/stream/Streams/StreamMapNotNullTest.java" \
             | tee "$RUNNER_TEMP/m3-groovy-jtreg.log"
+      - name: Compile current M3 collections and execute real JUnit
+        run: |
+          set -euo pipefail
+          export JAVA_HOME="$M3_JAVA_HOME"
+          export PATH="$JAVA_HOME/bin:$PATH"
+          mvn -B -ntp -f m3/collections/pom.xml \
+            -Dtest=ObjectStreamAdvancedContractTest,ObjectStreamLoopContractTest,ObjectStreamCompatibilityGateTest \
+            test
       - name: Retain Maven/JDK evidence
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
