@@ -1,6 +1,9 @@
 # SPDX-License-Identifier: Apache-2.0
 name: M3 viewport scheduler CPU/UI affinity real JUnit5
 on:
+  push:
+    branches:
+      - 'ci/m3-viewport-scheduler-affinity-junit-20261123'
   pull_request:
     paths:
       - 'm3/viewport-core/src/main/java/jdk/m3/viewport/M3ViewportScheduler.java'
