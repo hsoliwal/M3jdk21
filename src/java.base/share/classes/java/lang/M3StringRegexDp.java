@@ -114,11 +114,12 @@ final class M3StringRegexDp {
             if (rejectsByPrecompute(source, plan)) return NO_MATCH;
             if (plan.closure == null) {
                 int decision = rolling(source, plan);
-                return decision != UNKNOWN ? decision : tryRepeatedUtf16(source, regex);
+                return decision != UNKNOWN ? decision
+                        : repeatedOrCodePointDp(source, regex, plan);
             }
             long state = evaluate(source.owner(), source.start(), m,
                     plan, plan.closure[0], cache, 0);
-            return state == UNKNOWN ? tryRepeatedUtf16(source, regex)
+            return state == UNKNOWN ? repeatedOrCodePointDp(source, regex, plan)
                     : (state & (1L << plan.atoms.length)) != 0 ? MATCH : NO_MATCH;
         } catch (OutOfMemoryError unavailable) {
             preparationSuspended = true;
@@ -151,6 +152,17 @@ final class M3StringRegexDp {
         } finally {
             Reference.reachabilityFence(source);
         }
+    }
+
+    /**
+     * Preserve the bounded repeated-fragment optimization first. If it declines, one-row
+     * code-point DP consumes the complete canonical UTF-16 view so a surrogate pair split
+     * between tuple leaves remains one Java regex character. Its existing cell budget is
+     * checked before either route; this cursor retains no copied text or owner state.
+     */
+    private static int repeatedOrCodePointDp(M3String source, String regex, Plan plan) {
+        int repeated = tryRepeatedUtf16(source, regex);
+        return repeated != UNKNOWN ? repeated : rollingCodePoints(source, plan);
     }
 
     private static boolean worthPreparingRepeated(M3String source) {
@@ -629,6 +641,43 @@ final class M3StringRegexDp {
         return row[count] ? MATCH : NO_MATCH;
     }
 
+    /** Bounded one-row fallback with Java code-point consumption across tuple seams. */
+    private static int rollingCodePoints(M3String source, Plan plan) {
+        int count = plan.atoms.length;
+        boolean[] row = new boolean[count + 1];
+        row[0] = true;
+        for (int j = 1; j <= count; j++) {
+            row[j] = (plan.atoms[j - 1] & STAR) != 0 && row[j - 1];
+        }
+        M3String.CodeUnitCursor units = new M3String.CodeUnitCursor(source);
+        int length = source.length();
+        for (int offset = 0; offset < length;) {
+            char first = units.at(offset++);
+            int codePoint = first;
+            if (Character.isHighSurrogate(first) && offset < length) {
+                char second = units.at(offset);
+                if (Character.isLowSurrogate(second)) {
+                    codePoint = Character.toCodePoint(first, second);
+                    offset++;
+                }
+            }
+            boolean diagonal = row[0];
+            row[0] = false;
+            for (int j = 1; j <= count; j++) {
+                boolean previous = row[j];
+                int atom = plan.atoms[j - 1];
+                int required = atom & CODE_UNIT;
+                boolean accepts = required == '.'
+                        ? !isJdkLineTerminator(codePoint) : required == codePoint;
+                row[j] = (atom & STAR) != 0
+                        ? row[j - 1] || (accepts && previous)
+                        : accepts && diagonal;
+                diagonal = previous;
+            }
+        }
+        return row[count] ? MATCH : NO_MATCH;
+    }
+
     private static native long advance0(long address, int capacity, int start, int length,
             int width, boolean bigEndian, long incoming, int[] atoms, long[] closure);
 
@@ -685,7 +734,7 @@ final class M3StringRegexDp {
                 || (value >= '0' && value <= '9');
     }
 
-    private static boolean isJdkLineTerminator(char value) {
+    private static boolean isJdkLineTerminator(int value) {
         return value == '\n' || value == '\r' || value == '\u0085'
                 || value == '\u2028' || value == '\u2029';
     }

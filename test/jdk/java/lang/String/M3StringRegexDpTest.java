@@ -9,6 +9,7 @@
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.util.List;
 import java.util.Random;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
@@ -41,6 +42,7 @@ public final class M3StringRegexDpTest {
         deterministic();
         randomized();
         compositeDagsAndLongPlans();
+        supplementaryCodePointDp();
         amalgamatedPrecompute();
         requiredNgramPrecompute();
         mandatoryLiteralAffixes();
@@ -145,11 +147,126 @@ public final class M3StringRegexDpTest {
                     "String/Pattern composite parity " + trial);
         }
         String splitPair = String.join("", "a", "\ud83d", "\ude42", "b");
-        equal(decision(splitPair, accepting), -1,
-                "rolling surrogate pair across tuple seam delegates");
+        equal(decision(splitPair, accepting), 1,
+                "rolling DP pairs surrogate across tuple seam");
         equal(splitPair.matches(accepting),
                 Pattern.compile(accepting).matcher(new StringBuilder(splitPair)).matches(),
-                "rolling surrogate JDK fallback");
+                "rolling code-point DP parity");
+    }
+
+    /**
+     * Java Pattern consumes supplementary pairs as one regex character, even when the
+     * canonical M3String tuple boundary splits the two UTF-16 units. Exhaustive short
+     * code-unit strings include paired and unpaired surrogates; memoized code-point DP
+     * and Pattern are independent oracles for both bitset and rolling product lanes.
+     */
+    private static void supplementaryCodePointDp() throws Exception {
+        String splitPair = String.join("", "\ud83d", "\ude42");
+        Object pairStorage = STRING_M3.get(splitPair);
+        equal(pairStorage != null, true, "split pair requires canonical M3 storage");
+        Field ownerField = Class.forName("java.lang.M3String").getDeclaredField("owner");
+        ownerField.setAccessible(true);
+        equal(ownerField.get(pairStorage).getClass().getSimpleName().contains("Tuple"), true,
+                "split pair remains across a tuple seam");
+        verify(splitPair, ".*", 1);
+        String wrappedPair = String.join("", "a", splitPair, "b");
+        verify(wrappedPair, "a.*b", 1);
+        verify(String.join("", "a", "\ud83d", "b"), "a.*b", 1);
+        verify(String.join("", "a", "\ude42", "b"), "a.*b", 1);
+        verify(String.join("", "a", "\ud83d", "\ude42", "b"),
+                "a*".repeat(36) + ".*", 1);
+        verify(String.join("", "a", "\n", "b"), "a.*b", 0);
+        verify(String.join("", "a", "\u2028", "b"), "a.*b", 0);
+
+        char[] units = {'a', 'b', '\n', '\ud83d', '\ude42'};
+        List<String> texts = new java.util.ArrayList<>();
+        texts.add("");
+        collectCodeUnitTexts(new StringBuilder(), 1, units, texts);
+        collectCodeUnitTexts(new StringBuilder(), 2, units, texts);
+        collectCodeUnitTexts(new StringBuilder(), 3, units, texts);
+        String[] tokens = {"a", "b", ".", "a*", "b*", ".*"};
+        List<String> expressions = new java.util.ArrayList<>();
+        collectRegexes(new StringBuilder(), 4, tokens, expressions);
+        java.util.Map<String, Pattern> compiled = new java.util.HashMap<>();
+        for (String expression : expressions) {
+            if (expression.indexOf('*') < 0) continue;
+            Pattern pattern = compiled.computeIfAbsent(expression, Pattern::compile);
+            for (String raw : texts) {
+                String text = codeUnitComposite(raw);
+                boolean expected = pattern.matcher(new StringBuilder(text)).matches();
+                equal(memoizedCodePoints(text, expression), expected,
+                        "independent code-point DP oracle");
+                int actual = decision(text, expression);
+                equal(actual >= 0, true, "admitted pattern must use bounded DP");
+                equal(actual == 1, expected, "M3 code-point DP/Pattern parity");
+            }
+        }
+    }
+
+    private static void collectCodeUnitTexts(StringBuilder prefix, int remaining,
+            char[] units, List<String> output) {
+        if (remaining == 0) {
+            output.add(prefix.toString());
+            return;
+        }
+        for (char unit : units) {
+            prefix.append(unit);
+            collectCodeUnitTexts(prefix, remaining - 1, units, output);
+            prefix.setLength(prefix.length() - 1);
+        }
+    }
+
+    private static String codeUnitComposite(String text) {
+        if (text.isEmpty()) return text;
+        String[] pieces = new String[text.length()];
+        for (int i = 0; i < text.length(); i++) {
+            pieces[i] = new String(new char[] {text.charAt(i)});
+        }
+        return String.join("", pieces);
+    }
+
+    private static void collectRegexes(StringBuilder prefix, int remaining,
+            String[] tokens, List<String> output) {
+        if (prefix.length() != 0) output.add(prefix.toString());
+        if (remaining == 0) return;
+        for (String token : tokens) {
+            prefix.append(token);
+            collectRegexes(prefix, remaining - 1, tokens, output);
+            prefix.setLength(prefix.length() - token.length());
+        }
+    }
+
+    private static boolean memoizedCodePoints(String text, String regex) {
+        int[] codePoints = text.codePoints().toArray();
+        byte[][] memo = new byte[codePoints.length + 1][regex.length() + 1];
+        return memoCodePointsFrom(codePoints, regex, 0, 0, memo);
+    }
+
+    private static boolean memoCodePointsFrom(int[] text, String regex,
+            int i, int j, byte[][] memo) {
+        if (memo[i][j] != 0) return memo[i][j] == 2;
+        boolean result;
+        if (j == regex.length()) {
+            result = i == text.length;
+        } else {
+            boolean consumes = i < text.length
+                    && (regex.charAt(j) == '.' ? isPatternDot(text[i])
+                            : regex.charAt(j) == text[i]);
+            if (j + 1 < regex.length() && regex.charAt(j + 1) == '*') {
+                result = memoCodePointsFrom(text, regex, i, j + 2, memo)
+                        || (consumes && memoCodePointsFrom(text, regex, i + 1, j, memo));
+            } else {
+                result = consumes
+                        && memoCodePointsFrom(text, regex, i + 1, j + 1, memo);
+            }
+        }
+        memo[i][j] = (byte) (result ? 2 : 1);
+        return result;
+    }
+
+    private static boolean isPatternDot(int codePoint) {
+        return codePoint != '\n' && codePoint != '\r' && codePoint != 0x85
+                && codePoint != 0x2028 && codePoint != 0x2029;
     }
 
     /**
@@ -175,8 +292,8 @@ public final class M3StringRegexDpTest {
         verify(String.join("", "x", "y"), "a*b*c*Q", 0);
 
         String splitPair = String.join("", "a", "\ud83d", "\ude42", "b");
-        equal(decision(splitPair, "a.*b"), -1,
-                "surrogate-containing possible match still delegates to Pattern");
+        equal(decision(splitPair, "a.*b"), 1,
+                "bitset DP pairs surrogate across tuple seam");
         // Missing-unit rejection is available only after optional facts are published.
         prepareFacts.invoke(STRING_M3.get(splitPair));
         verify(splitPair, "a*Q.*", 0);
@@ -345,12 +462,12 @@ public final class M3StringRegexDpTest {
                     "abc.*xyz", index == 1 ? 0 : 1);
         }
 
-        // A definite ASCII boundary mismatch is decisive even when the middle
-        // would otherwise require the unchanged JDK surrogate fallback.
-        equal(decision(affixComposite("abc\ud83d\ude42xyz", 0), "abc.*xyz"), -1,
-                "possible pair-containing affix match still delegates");
-        equal(decision(affixComposite("abc\ud83dxyz", 1), "abc.*xyz"), -1,
-                "possible lone-surrogate affix match still delegates");
+        // A definite ASCII boundary mismatch remains decisive; possible matches
+        // across paired and unpaired surrogate content now use the code-point DP.
+        equal(decision(affixComposite("abc\ud83d\ude42xyz", 0), "abc.*xyz"), 1,
+                "code-point DP matches pair-containing affix");
+        equal(decision(affixComposite("abc\ud83dxyz", 1), "abc.*xyz"), 1,
+                "code-point DP matches lone-surrogate affix");
         verify(affixComposite("aXcabc\ud83d\ude42xyz", 2), "abc.*xyz", 0);
         verify(affixComposite("abc\ud83d\ude42xyzxYz", 2), "abc.*xyz", 0);
 
@@ -462,12 +579,12 @@ public final class M3StringRegexDpTest {
         verify(text, "[a-z]+", 1);
         equal(decision(text, "abc"), -1, "existing literal equality owner retained");
         String supplementary = String.join("", "a", "\ud83d", "\ude42", "b");
-        equal(decision(supplementary, "a.*b"), -1, "surrogate pair across leaves delegated");
+        equal(decision(supplementary, "a.*b"), 1, "surrogate pair across leaves uses DP");
         equal(supplementary.matches("a.*b"),
                 Pattern.matches("a.*b", new StringBuilder(supplementary)),
-                "surrogate fallback parity");
+                "surrogate code-point parity");
         String unpaired = String.join("", "a", "\ud83d", "b");
-        equal(decision(unpaired, "a.*b"), -1, "unpaired surrogate delegated");
+        equal(decision(unpaired, "a.*b"), 1, "unpaired surrogate uses code-point DP");
         String large = String.join("", "a".repeat(8_193), "b");
         equal(decision(large, "a*b*"), -1, "input-work budget delegated");
         String capped = String.join("", "a".repeat(7_900), "b");
