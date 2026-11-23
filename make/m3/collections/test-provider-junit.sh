@@ -51,6 +51,22 @@ if [[ $checks -ne 54 ]]; then
   echo "expected 54 exact provider test/helper source identities, found $checks" >&2
   exit 70
 fi
+# These shared originals were already under providers/; they are not relocation rows.
+shared_source_files=()
+for binding in \
+  'CollectionUtilsBulkFixtures.java:04d92bd1ba3016ec6466d887f75a52e83f7be025' \
+  'CollectionUtilsBulkOracleTest.java:1cf0795874d000df952c1d1cb4ff8aae413cc78a' \
+  'CollectionUtilsBulkReference.java:790b1d59392aeee2ac6ec40894f708ffa6241329'; do
+  shared_name="${binding%%:*}"
+  shared_expected="${binding#*:}"
+  shared_source="$sources/$shared_name"
+  if [[ ! -f "$shared_source" || -L "$shared_source" ||
+        "$(git -C "$repo" hash-object -- "$shared_source")" != "$shared_expected" ]]; then
+    echo "shared provider source identity failure: $shared_name" >&2
+    exit 77
+  fi
+  shared_source_files+=("$shared_source")
+done
 for cls in jdk.m3.collections.apache.map.LinkedMap \
            jdk.m3.collections.eclipse.api.list.MutableList \
            jdk.m3.collections.guava.collect.ImmutableRangeSet; do
@@ -62,7 +78,8 @@ done
 mkdir -p "$out/classes"
 mapfile -d '' source_files < <(find "$sources"/apache "$sources"/eclipse \
   "$sources"/guava "$sources"/vavr -type f -name '*.java' -print0 | sort -z)
-if [[ ${#source_files[@]} -ne 54 ]]; then
+source_files+=("${shared_source_files[@]}")
+if [[ ${#source_files[@]} -ne 57 ]]; then
   echo 'unexpected provider suite Java source count' >&2
   exit 72
 fi
@@ -77,8 +94,9 @@ sha256sum "$jdk/lib/modules" "$jdk/jmods/jdk.m3.collections.jmod" "$junit" \
   2>&1 | tee "$out/compile.log"
 mapfile -d '' cases < <(find "$sources"/apache "$sources"/eclipse \
   "$sources"/guava "$sources"/vavr -type f -name '*Test.java' -print0 | sort -z)
-if [[ ${#cases[@]} -ne 14 ]]; then
-  echo 'expected exactly 14 JUnit test classes' >&2
+cases+=("$sources/CollectionUtilsBulkOracleTest.java")
+if [[ ${#cases[@]} -ne 15 ]]; then
+  echo 'expected exactly 15 JUnit test classes' >&2
   exit 73
 fi
 selects=()
@@ -111,5 +129,5 @@ fi
   org.junit.platform.console.ConsoleLauncher execute \
   "${selects[@]}" --disable-banner --details=summary \
   --fail-if-no-tests 2>&1 | tee "$out/provider-junit.log"
-printf 'M3_PROVIDER_JUNIT_PASS classes=14 sourceFiles=54\n' \
+printf 'M3_PROVIDER_JUNIT_PASS classes=15 sourceFiles=57\n' \
   | tee "$out/status.txt"

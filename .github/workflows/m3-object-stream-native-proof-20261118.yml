@@ -403,7 +403,7 @@ jobs:
           bash make/m3/collections/test-provider-junit.sh \
             "$M3_JAVA_HOME" "$RUNNER_TEMP/m3-provider-console.jar" \
             "$RUNNER_TEMP/m3-provider-junit"
-          grep -Fx 'M3_PROVIDER_JUNIT_PASS classes=14 sourceFiles=54' \
+          grep -Fx 'M3_PROVIDER_JUNIT_PASS classes=15 sourceFiles=57' \
             "$RUNNER_TEMP/m3-provider-junit/status.txt"
       - name: Compile current M3 collections and execute real JUnit
         run: |
@@ -413,6 +413,109 @@ jobs:
           mvn -B -ntp -f m3/collections/pom.xml \
             -Dtest=ObjectStreamAdvancedContractTest,ObjectStreamLoopContractTest,ObjectStreamCompatibilityGateTest \
             test
+      - name: Archive source-built M3 image with custody
+        id: m3_image_custody
+        if: ${{ always() && env.M3_JAVA_HOME != '' }}
+        timeout-minutes: 10
+        run: |
+          set -euo pipefail
+          image="$GITHUB_WORKSPACE/build/m3-groovy-native-proof/images/jdk"
+          test "$M3_JAVA_HOME" = "$image"
+          test "$(realpath "$image")" = "$image"
+          find "$image" -type l -print0 | while IFS= read -r -d '' link; do
+            case "$(readlink "$link")" in
+              /*) echo "Absolute image symlink is not portable: $link" >&2; exit 1 ;;
+            esac
+            case "$(realpath -e "$link")" in
+              "$image"/*) ;;
+              *) echo "Image symlink escapes image or is dangling: $link" >&2; exit 1 ;;
+            esac
+          done
+          for tool in java javac jlink jmod; do
+            test -x "$image/bin/$tool"
+            case "$(realpath "$image/bin/$tool")" in
+              "$image"/*) ;;
+              *) echo "M3 image tool escapes image: $tool" >&2; exit 1 ;;
+            esac
+          done
+          for required in release lib/modules jmods/java.base.jmod jmods/jdk.m3.collections.jmod; do
+            if [[ ! -s "$image/$required" ]]; then
+              echo "Required M3 image file absent: $required" >&2
+              exit 1
+            fi
+            case "$(realpath "$image/$required")" in
+              "$image"/*) ;;
+              *) echo "M3 image file escapes image: $required" >&2; exit 1 ;;
+            esac
+          done
+          cd "$GITHUB_WORKSPACE"
+          source_head="$(git rev-parse HEAD)"
+          test "$source_head" = "$GITHUB_SHA"
+          git ls-files -v -z -- | python3 -c '
+          import sys
+          entries = sys.stdin.buffer.read().split(b"\0")
+          if any(entry[:1] == b"S" or entry[:1].islower() for entry in entries if entry):
+              raise SystemExit("Hidden Git index flags prevent complete source custody")
+          '
+          git diff --exit-code HEAD --
+          source_roots=(src/jdk.m3.collections/share/classes src/jdk.m3.collections/providers/classes)
+          test -z "$(git ls-files --others -- "${source_roots[@]}")"
+          git ls-files --error-unmatch \
+            "${source_roots[0]}/module-info.java" \
+            "${source_roots[1]}/module-info.java.extra" \
+            make/conf/module-loader-map.conf \
+            make/jdk/src/classes/build/tools/module/GenModuleInfoSource.java > /dev/null
+          custody="$RUNNER_TEMP/m3-source-built-image"
+          mkdir "$custody"
+          git ls-files --stage -- "${source_roots[@]}" \
+            make/conf/module-loader-map.conf \
+            make/jdk/src/classes/build/tools/module/GenModuleInfoSource.java > "$custody/source-inventory.git"
+          git ls-files -z -- "${source_roots[@]}" \
+            make/conf/module-loader-map.conf \
+            make/jdk/src/classes/build/tools/module/GenModuleInfoSource.java \
+            | xargs -0 -r sha256sum > "$custody/source-files.sha256"
+          test -s "$custody/source-files.sha256"
+          "$image/bin/java" --list-modules > "$custody/image-modules.txt"
+          grep -E '^jdk[.]m3[.]collections(@[^[:space:]]+)?$' "$custody/image-modules.txt"
+          "$image/bin/java" --describe-module jdk.m3.collections > "$custody/image-module-description.txt"
+          "$image/bin/jmod" describe "$image/jmods/jdk.m3.collections.jmod" > "$custody/jmod-description.txt"
+          printf 'repository=%s\nsource_head=%s\nsource_tree=%s\nworkflow_blob=%s\nrun_id=%s\nrun_attempt=%s\nprovider_junit=NOT_RUN_BY_THIS_STEP\n' \
+            "$GITHUB_REPOSITORY" "$source_head" "$(git rev-parse 'HEAD^{tree}')" \
+            "$(git rev-parse HEAD:.github/workflows/m3-object-stream-native-proof-20261118.yml)" \
+            "$GITHUB_RUN_ID" "$GITHUB_RUN_ATTEMPT" > "$custody/custody.txt"
+          (cd "$image"; sha256sum release lib/modules jmods/java.base.jmod \
+            jmods/jdk.m3.collections.jmod bin/java bin/javac bin/jlink bin/jmod) > "$custody/image.sha256"
+          # Tar preserves the image's executable modes and symlinks inside the artifact ZIP.
+          tar --create --gzip --file "$custody/jdk.tar.gz" -C "$(dirname "$image")" jdk
+          tar --compare --gzip --file "$custody/jdk.tar.gz" -C "$(dirname "$image")"
+          (cd "$image"; sha256sum --check "$custody/image.sha256")
+          archive_bytes="$(stat -c %s "$custody/jdk.tar.gz")"
+          if (( archive_bytes > 2147483648 )); then
+            echo "M3 image archive exceeds 2147483648 bytes: $archive_bytes" >&2
+            exit 1
+          fi
+          printf 'archive_bytes=%s\narchive_limit_bytes=2147483648\n' "$archive_bytes" >> "$custody/custody.txt"
+          (cd "$custody"; sha256sum custody.txt source-inventory.git source-files.sha256 \
+            image-modules.txt image-module-description.txt jmod-description.txt image.sha256 jdk.tar.gz \
+            > SHA256SUMS)
+      - name: Retain source-built M3 image separately
+        if: ${{ always() && steps.m3_image_custody.outcome == 'success' }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: m3-source-built-jdk-${{ github.sha }}-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            ${{ runner.temp }}/m3-source-built-image/jdk.tar.gz
+            ${{ runner.temp }}/m3-source-built-image/custody.txt
+            ${{ runner.temp }}/m3-source-built-image/source-inventory.git
+            ${{ runner.temp }}/m3-source-built-image/source-files.sha256
+            ${{ runner.temp }}/m3-source-built-image/image-modules.txt
+            ${{ runner.temp }}/m3-source-built-image/image-module-description.txt
+            ${{ runner.temp }}/m3-source-built-image/jmod-description.txt
+            ${{ runner.temp }}/m3-source-built-image/image.sha256
+            ${{ runner.temp }}/m3-source-built-image/SHA256SUMS
+          if-no-files-found: error
+          retention-days: 7
+          compression-level: 0
       - name: Retain Maven/JDK evidence
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
