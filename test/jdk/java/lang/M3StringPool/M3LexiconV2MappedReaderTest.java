@@ -42,7 +42,7 @@ public final class M3LexiconV2MappedReaderTest {
         byte[] valid = encodeV2(words);
         byte[] empty = encodeV2(List.of());
         byte[] prefix = addUnusedUnit(valid, 0);
-        byte[] middle = addUnusedUnit(valid, 1);
+        byte[] middle = addUnusedUnit(valid, 2); // strictly between two nonempty words
         byte[] trailing = addUnusedUnit(valid, words.size());
         byte[] emptyTrailing = addUnusedUnit(empty, 0);
         byte[] damagedHash = valid.clone();
@@ -52,6 +52,8 @@ public final class M3LexiconV2MappedReaderTest {
 
         // Verify the generator itself without requiring M3JDK21.
         check(words.size() == 11, "fixture word count");
+        check(!words.get(1).isEmpty() && !words.get(2).isEmpty(),
+                "middle gap separates two nonempty records");
         check("Aa".hashCode() == "BB".hashCode(), "test genuine Java hash collision");
         check(header(valid, 8) == 2 && header(legacyValid, 8) == 1, "version headers");
         check(ByteBuffer.wrap(valid).order(ByteOrder.BIG_ENDIAN).getInt(12) == words.size(),
