@@ -11,6 +11,13 @@ on:
       - 'm3/collections/qualification/stream-current-compatible-20261118/**'
       - 'm3/collections/test_verify_stream_current.py'
       - 'm3/collections/pom.xml'
+      - 'make/m3/collections/test-provider-junit.sh'
+      - 'm3/collections/qualification/provider-tests-20261123.*'
+      - 'test/jdk/jdk/m3/collections/providers/**'
+      - 'test/jdk/jdk/m3/collections/apache/**'
+      - 'test/jdk/jdk/m3/collections/eclipse/**'
+      - 'test/jdk/jdk/m3/collections/guava/**'
+      - 'test/jdk/jdk/m3/collections/vavr/**'
       - 'src/java.base/share/classes/java/lang/String.java'
       - 'src/java.base/share/classes/java/util/stream/Streams.java'
       - 'test/jdk/java/lang/String/StringCaseFamily*.java'
@@ -28,6 +35,13 @@ on:
       - 'm3/collections/qualification/stream-current-compatible-20261118/**'
       - 'm3/collections/test_verify_stream_current.py'
       - 'm3/collections/pom.xml'
+      - 'make/m3/collections/test-provider-junit.sh'
+      - 'm3/collections/qualification/provider-tests-20261123.*'
+      - 'test/jdk/jdk/m3/collections/providers/**'
+      - 'test/jdk/jdk/m3/collections/apache/**'
+      - 'test/jdk/jdk/m3/collections/eclipse/**'
+      - 'test/jdk/jdk/m3/collections/guava/**'
+      - 'test/jdk/jdk/m3/collections/vavr/**'
       - 'src/java.base/share/classes/java/lang/String.java'
       - 'src/java.base/share/classes/java/util/stream/Streams.java'
       - 'test/jdk/java/lang/String/StringCaseFamily*.java'
@@ -61,6 +75,25 @@ jobs:
           git diff --check
           python3 -m unittest -v m3/collections/test_verify_stream_current.py
           python3 m3/collections/qualification/stream-current-compatible-20261118/verify.py
+          bash -n make/m3/collections/test-provider-junit.sh
+          python3 - <<'PY'
+          import pathlib, subprocess
+          root = pathlib.Path.cwd()
+          manifest = root / 'm3/collections/qualification/provider-tests-20261123.tsv'
+          rows = [r.split('\t') for r in manifest.read_text(encoding='utf-8').splitlines()
+                  if r and not r.startswith('#')]
+          assert len(rows) == 54 and all(len(r) == 3 for r in rows), '54 exact move rows required'
+          assert len({r[0] for r in rows}) == len({r[1] for r in rows}) == 54
+          assert sum(r[1].endswith('Test.java') for r in rows) == 14
+          for old, new, digest in rows:
+              assert old.startswith('test/jdk/jdk/m3/collections/')
+              assert new == old.replace('/collections/', '/collections/providers/', 1)
+              assert not (root / old).exists() and not (root / old).is_symlink(), old
+              assert (root / new).is_file() and not (root / new).is_symlink(), new
+              actual = subprocess.check_output(['git', 'hash-object', new], text=True).strip()
+              assert actual == digest, new
+          print('M3_PROVIDER_SOURCE_RELOCATION_PASS files=54 junitClasses=14')
+          PY
 
   actual-m3jdk:
     name: Build modified M3JDK21 image and execute stream JUnit
@@ -178,6 +211,28 @@ jobs:
           export JAVA_HOME="$M3_JAVA_HOME"
           export PATH="$JAVA_HOME/bin:$PATH"
           mvn -B -ntp -f m3/arrays/pom.xml -DskipTests install
+      - name: Compile original provider JUnit tests against the complete installed module
+        run: |
+          set -euo pipefail
+          export JAVA_HOME="$M3_JAVA_HOME"
+          export PATH="$JAVA_HOME/bin:$PATH"
+          curl --fail --location --retry 3 \
+            'https://repo.maven.apache.org/maven2/org/junit/platform/junit-platform-console-standalone/1.12.2/junit-platform-console-standalone-1.12.2.jar' \
+            -o "$RUNNER_TEMP/m3-provider-console.jar"
+          printf '%s  %s\n' \
+            '329bd10288875a74d04c9ca6b7c9889c265ddf87b21a9ea42a7f7392f391472a' \
+            "$RUNNER_TEMP/m3-provider-console.jar" | sha256sum --check -
+          cmake -S make/m3/arrays -B "$RUNNER_TEMP/m3-provider-arrays-native" \
+            -DBUILD_TESTING=ON -DCMAKE_BUILD_TYPE=Debug
+          cmake --build "$RUNNER_TEMP/m3-provider-arrays-native" --parallel 2
+          ctest --test-dir "$RUNNER_TEMP/m3-provider-arrays-native" --output-on-failure
+          export M3_ARRAYS_NATIVE_PATH="$RUNNER_TEMP/m3-provider-arrays-native/libm3_arrays.so"
+          test -s "$M3_ARRAYS_NATIVE_PATH"
+          bash make/m3/collections/test-provider-junit.sh \
+            "$M3_JAVA_HOME" "$RUNNER_TEMP/m3-provider-console.jar" \
+            "$RUNNER_TEMP/m3-provider-junit"
+          grep -Fx 'M3_PROVIDER_JUNIT_PASS classes=14 sourceFiles=54' \
+            "$RUNNER_TEMP/m3-provider-junit/status.txt"
       - name: Compile current M3 collections and execute real JUnit
         run: |
           set -euo pipefail
@@ -238,6 +293,7 @@ jobs:
             m3/arrays/target/surefire-reports/
             ${{ runner.temp }}/m3-collate-full-image.log
             ${{ runner.temp }}/m3-collate-jlink-image.log
+            ${{ runner.temp }}/m3-provider-junit/
             ${{ runner.temp }}/m3-gn-version.log
             ${{ runner.temp }}/m3-ninja-version.log
             ${{ runner.temp }}/m3-jtreg-version.log
