@@ -14,11 +14,11 @@ ROOT = Path(__file__).resolve().parents[4]
 # Groovy collate successor: retain the six prior receipts and bind both new owners.
 FILES = {
     "src/jdk.m3.collections/share/classes/jdk/m3/collections/ObjectStream.java":
-        "9202ef14279f4ce140497d658130ccad2533843351940f317aa001dd38fd3251",
+        "40497e161e2e8d8c9ec7a6524b63d68bf4e2b775845b9f58bf193d1068d041d2",
     "src/jdk.m3.collections/share/classes/jdk/m3/collections/ObjectStreamAdvancedKernels.java":
         "29810419f0125147d7bdbc0d33794b113dcd07e85f0ba9937e5aabd806e6103d",
     "src/jdk.m3.collections/share/classes/jdk/m3/collections/ObjectStreamLoopKernels.java":
-        "b7f5f9ba4f9a82b6a14a349a27ab10b43cc9b2f93ce224a3916c8a30989f1813",
+        "02b56913bb682f90a3f7d2d04689c259a6e8c6ee68748ad920cfd1082937c024",
     "test/jdk/jdk/m3/collections/ObjectStreamAdvancedContractTest.java":
         "da888b9b9ff96dc106bdad4d21e5de47f181f889477846367d537047263f53eb",
     "test/jdk/jdk/m3/collections/ObjectStreamLoopContractTest.java":
@@ -26,7 +26,7 @@ FILES = {
     "test/jdk/jdk/m3/collections/ObjectStreamCompatibilityGateTest.java":
         "56b64efee5f246baea4a0c274f8ef684286bbbf9d7de79be725ff5a8cd764a90",
     "src/jdk.m3.collections/share/classes/jdk/m3/collections/ObjectStreamLanguageKernels.java":
-        "d3167b2189bf303cabfc557ce8474b1df75af0d586e0c8adbe4377b6de569609",
+        "c74cc7b797660e2a57548ca8a64931077e544ddf042c90ea015ceab4a5994e14",
     "test/jdk/jdk/m3/collections/ObjectStreamCollateTest.java":
         "8cfb6c344d69dab1957e499fdfb0cc5b8b33fa61708e1c5595a5c7dc47c08f2f",
 }
@@ -50,9 +50,8 @@ UNIQUE = (
     "public ObjectStream<List<T>> collate(int width, int step, TailPolicy tailPolicy)",
 )
 INTEGRATION = (
-    "import java.util.stream.Streams;",
-    "Streams.pairwise(input, mapper)",
-    "Streams.mapWhile(input, mapper)",
+    "delegateStream(input -> ObjectStreamLanguageKernels.pairwise(input, mapper))",
+    "delegateStream(input -> ObjectStreamLoopKernels.mapWhileOptional(",
     "ObjectStreamLanguageKernels.collate(stream(), width, step, tailPolicy)",
 )
 
